@@ -21,7 +21,8 @@ namespace Internal.Cryptography
             PaddingMode paddingMode,
             BasicSymmetricCipher cipher,
             bool encrypting
-        ) {
+        )
+        {
             if (encrypting)
                 return new UniversalCryptoEncryptor(paddingMode, cipher);
             else
@@ -31,7 +32,8 @@ namespace Internal.Cryptography
         protected UniversalCryptoTransform(
             PaddingMode paddingMode,
             BasicSymmetricCipher basicSymmetricCipher
-        ) {
+        )
+        {
             PaddingMode = paddingMode;
             BasicSymmetricCipher = basicSymmetricCipher;
         }
@@ -73,7 +75,8 @@ namespace Internal.Cryptography
             int inputCount,
             byte[] outputBuffer,
             int outputOffset
-        ) {
+        )
+        {
             if (inputBuffer == null)
                 throw new ArgumentNullException(nameof(inputBuffer));
             if (inputOffset < 0)
@@ -147,7 +150,8 @@ namespace Internal.Cryptography
             int inputCount,
             byte[] outputBuffer,
             int outputOffset
-        ) {
+        )
+        {
             return UncheckedTransformBlock(
                 inputBuffer.AsSpan(inputOffset, inputCount),
                 outputBuffer.AsSpan(outputOffset)

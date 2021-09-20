@@ -49,7 +49,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Transport.Libuv.Internal.Networkin
         public LibuvAwaitable<UvWriteReq> WriteAsync(
             UvStreamHandle handle,
             in ReadOnlySequence<byte> buffer
-        ) {
+        )
+        {
             Write(handle, buffer, LibuvAwaitable<UvWriteReq>.Callback, _awaitable);
             return _awaitable;
         }
@@ -57,7 +58,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Transport.Libuv.Internal.Networkin
         public LibuvAwaitable<UvWriteReq> WriteAsync(
             UvStreamHandle handle,
             ArraySegment<ArraySegment<byte>> bufs
-        ) {
+        )
+        {
             Write(handle, bufs, LibuvAwaitable<UvWriteReq>.Callback, _awaitable);
             return _awaitable;
         }
@@ -67,7 +69,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Transport.Libuv.Internal.Networkin
             in ReadOnlySequence<byte> buffer,
             Action<UvWriteReq, int, UvException, object> callback,
             object state
-        ) {
+        )
+        {
             try
             {
                 var nBuffers = 0;
@@ -138,7 +141,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Transport.Libuv.Internal.Networkin
             ArraySegment<ArraySegment<byte>> bufs,
             Action<UvWriteReq, int, UvException, object> callback,
             object state
-        ) {
+        )
+        {
             WriteArraySegmentInternal(
                 handle,
                 bufs,
@@ -154,7 +158,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Transport.Libuv.Internal.Networkin
             UvStreamHandle sendHandle,
             Action<UvWriteReq, int, UvException, object> callback,
             object state
-        ) {
+        )
+        {
             WriteArraySegmentInternal(handle, bufs, sendHandle, callback, state);
         }
 
@@ -164,7 +169,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Transport.Libuv.Internal.Networkin
             UvStreamHandle sendHandle,
             Action<UvWriteReq, int, UvException, object> callback,
             object state
-        ) {
+        )
+        {
             try
             {
                 var pBuffers = (LibuvFunctions.uv_buf_t*)_bufs;

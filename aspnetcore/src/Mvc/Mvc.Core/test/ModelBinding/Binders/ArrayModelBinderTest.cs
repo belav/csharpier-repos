@@ -54,7 +54,8 @@ namespace Microsoft.AspNetCore.Mvc.ModelBinding.Binders
         public async Task ArrayModelBinder_CreatesEmptyCollection_IfIsTopLevelObject(
             bool allowValidatingTopLevelNodes,
             bool isBindingRequired
-        ) {
+        )
+        {
             // Arrange
             var expectedErrorCount = isBindingRequired ? 1 : 0;
             var binder = new ArrayModelBinder<string>(
@@ -146,7 +147,8 @@ namespace Microsoft.AspNetCore.Mvc.ModelBinding.Binders
             string prefix,
             bool allowValidatingTopLevelNodes,
             bool isBindingRequired
-        ) {
+        )
+        {
             // Arrange
             var binder = new ArrayModelBinder<string>(
                 new SimpleTypeModelBinder(typeof(string), NullLoggerFactory.Instance),
@@ -188,7 +190,8 @@ namespace Microsoft.AspNetCore.Mvc.ModelBinding.Binders
         [MemberData(nameof(ArrayModelData))]
         public async Task BindModelAsync_ModelMetadataNotReadOnly_ModelNonNull_FailsSilently(
             int[] model
-        ) {
+        )
+        {
             // Arrange
             var arrayLength = model.Length;
             var valueProvider = new SimpleValueProvider

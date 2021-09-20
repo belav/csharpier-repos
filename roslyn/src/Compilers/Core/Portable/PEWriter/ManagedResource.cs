@@ -31,7 +31,8 @@ namespace Microsoft.Cci
             Func<Stream>? streamProvider,
             IFileReference? fileReference,
             uint offset
-        ) {
+        )
+        {
             RoslynDebug.Assert(streamProvider == null ^ fileReference == null);
 
             _streamProvider = streamProvider;

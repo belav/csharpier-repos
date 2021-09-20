@@ -87,7 +87,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
             Type type,
             string propertyName,
             bool expectedNullable
-        ) {
+        )
+        {
             var modelBuilder = CreateModelBuilder();
             var entityTypeBuilder = modelBuilder.Entity(type);
 

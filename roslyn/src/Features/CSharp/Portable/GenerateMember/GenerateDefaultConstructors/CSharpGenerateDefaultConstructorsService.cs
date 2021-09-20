@@ -33,7 +33,8 @@ namespace Microsoft.CodeAnalysis.CSharp.GenerateMember.GenerateDefaultConstructo
             TextSpan textSpan,
             CancellationToken cancellationToken,
             out INamedTypeSymbol classType
-        ) {
+        )
+        {
             cancellationToken.ThrowIfCancellationRequested();
 
             // Offer the feature if we're on the header / between members of the class/struct,
@@ -52,7 +53,8 @@ namespace Microsoft.CodeAnalysis.CSharp.GenerateMember.GenerateDefaultConstructo
                     textSpan.Start,
                     out typeDeclaration
                 )
-            ) {
+            )
+            {
                 classType =
                     semanticDocument.SemanticModel.GetDeclaredSymbol(
                         typeDeclaration,
@@ -68,7 +70,8 @@ namespace Microsoft.CodeAnalysis.CSharp.GenerateMember.GenerateDefaultConstructo
                 if (
                     node.Parent is BaseTypeSyntax
                     && node.Parent.IsParentKind(SyntaxKind.BaseList, out BaseListSyntax baseList)
-                ) {
+                )
+                {
                     if (
                         baseList.Types.Count > 0
                         && baseList.Types[0].Type == node
@@ -76,7 +79,8 @@ namespace Microsoft.CodeAnalysis.CSharp.GenerateMember.GenerateDefaultConstructo
                             SyntaxKind.ClassDeclaration,
                             SyntaxKind.RecordDeclaration
                         )
-                    ) {
+                    )
+                    {
                         var semanticModel = semanticDocument.SemanticModel;
                         classType =
                             semanticModel.GetDeclaredSymbol(baseList.Parent, cancellationToken)

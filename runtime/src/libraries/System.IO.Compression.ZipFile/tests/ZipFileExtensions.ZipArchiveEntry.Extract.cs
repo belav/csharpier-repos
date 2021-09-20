@@ -26,7 +26,8 @@ namespace System.IO.Compression.Tests
                 using (
                     Stream fs = File.Open(file, FileMode.Open),
                         es = e.Open()
-                ) {
+                )
+                {
                     StreamsEqual(fs, es);
                 }
 
@@ -41,7 +42,8 @@ namespace System.IO.Compression.Tests
                 using (
                     Stream fs = File.Open(file, FileMode.Open),
                         es = e.Open()
-                ) {
+                )
+                {
                     StreamsEqual(fs, es);
                 }
             }

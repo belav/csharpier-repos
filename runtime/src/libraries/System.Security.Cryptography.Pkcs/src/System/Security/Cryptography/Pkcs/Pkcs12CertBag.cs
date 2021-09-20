@@ -39,7 +39,8 @@ namespace System.Security.Cryptography.Pkcs
                 Oids.Pkcs12CertBag,
                 EncodeBagValue(certificateType, encodedCertificate),
                 skipCopy: true
-            ) {
+            )
+        {
             _certTypeOid = certificateType.CopyOid();
 
             _decoded = CertBagAsn.Decode(EncodedBagValue, AsnEncodingRules.BER);
@@ -55,7 +56,8 @@ namespace System.Security.Cryptography.Pkcs
                     PkcsHelpers.EncodeOctetString(cert.RawData)
                 ),
                 skipCopy: true
-            ) {
+            )
+        {
             _decoded = CertBagAsn.Decode(EncodedBagValue, AsnEncodingRules.BER);
 
             IsX509Certificate = true;
@@ -86,7 +88,8 @@ namespace System.Security.Cryptography.Pkcs
         private static byte[] EncodeBagValue(
             Oid certificateType,
             ReadOnlyMemory<byte> encodedCertificate
-        ) {
+        )
+        {
             if (certificateType == null)
                 throw new ArgumentNullException(nameof(certificateType));
             if (certificateType.Value == null)
@@ -98,7 +101,8 @@ namespace System.Security.Cryptography.Pkcs
         private static byte[] EncodeBagValue(
             string certificateType,
             ReadOnlyMemory<byte> encodedCertificate
-        ) {
+        )
+        {
             // Read to ensure that there is precisely one legally encoded value.
             if (
                 !AsnDecoder.TryReadEncodedValue(
@@ -110,7 +114,8 @@ namespace System.Security.Cryptography.Pkcs
                     out int consumed
                 )
                 || consumed != encodedCertificate.Length
-            ) {
+            )
+            {
                 throw new CryptographicException(SR.Cryptography_Der_Invalid_Encoding);
             }
 

@@ -123,7 +123,8 @@ namespace System.Net.Http.Formatting.Parsers
             ref int totalBytesConsumed,
             StringBuilder currentToken,
             HttpUnsortedRequest httpRequest
-        ) {
+        )
+        {
             Contract.Assert(
                 (bytesReady - bytesConsumed) >= 0,
                 "ParseRequestLine()|(bytesReady - bytesConsumed) < 0"

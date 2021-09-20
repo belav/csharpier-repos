@@ -130,7 +130,8 @@ namespace System.Web.Mvc.Test
         [InlineData("")]
         public void OnActionExecuting_Throws_IfVaryByParamIsNullOrEmptyAndDurationIsPositive(
             string varyByParam
-        ) {
+        )
+        {
             // Arrange
             OutputCacheAttribute attr = new OutputCacheAttribute();
             attr.Duration = 1;
@@ -488,7 +489,8 @@ namespace System.Web.Mvc.Test
             ActionExecutingContext context,
             string varyByParam,
             string expected
-        ) {
+        )
+        {
             // Arrange
             StringBuilder builder = new StringBuilder();
             OutputCacheAttribute attribute = new OutputCacheAttribute { VaryByParam = varyByParam };
@@ -506,7 +508,8 @@ namespace System.Web.Mvc.Test
         [InlineData("foo;bar")]
         public static void BuildUniqueIdFromActionParameters_LooksUpActionParametersInCaseInsensitiveManner(
             string varyByParam
-        ) {
+        )
+        {
             // Arrange
             MockActionExecutingContext context = new MockActionExecutingContext();
             Dictionary<string, object> dictionary = new Dictionary<string, object>(
@@ -534,7 +537,8 @@ namespace System.Web.Mvc.Test
         [InlineData("None")]
         public static void BuildUniqueIdFromActionParameters_NoOpsIfVaryByParamIsNone(
             string varyByParam
-        ) {
+        )
+        {
             // Arrange
             StringBuilder builder = new StringBuilder();
             ActionExecutingContext context = new MockActionExecutingContext().Object;
@@ -632,7 +636,8 @@ namespace System.Web.Mvc.Test
         [PropertyData("GetChildActionUniqueId_VariesByActionParametersData")]
         public void GetChildActionUniqueId_VariesByActionParameters_OnlyVariesByGivenParameters(
             string varbyParam
-        ) {
+        )
+        {
             // Arrange
             string expected = "z2Fr6HAipKCkLdVkHMdHgeDBJyYutdqqTW07BMO31fQ=";
             OutputCacheAttribute attr = new OutputCacheAttribute { VaryByParam = varbyParam };
@@ -669,7 +674,8 @@ namespace System.Web.Mvc.Test
             string varyByParam,
             string value1,
             string value2
-        ) {
+        )
+        {
             // Arrange
             OutputCacheAttribute attr = new OutputCacheAttribute { VaryByParam = varyByParam };
             MockActionExecutingContext context1 = new MockActionExecutingContext();
@@ -698,7 +704,8 @@ namespace System.Web.Mvc.Test
             string varyByParam,
             string value1,
             string value2
-        ) {
+        )
+        {
             // Arrange
             OutputCacheAttribute attr = new OutputCacheAttribute { VaryByParam = varyByParam };
             MockActionExecutingContext context1 = new MockActionExecutingContext();
@@ -726,7 +733,8 @@ namespace System.Web.Mvc.Test
             string varyByParam,
             string value1,
             string value2
-        ) {
+        )
+        {
             // Arrange
             OutputCacheAttribute attr = new OutputCacheAttribute { VaryByParam = varyByParam };
             MockActionExecutingContext context1 = new MockActionExecutingContext();
@@ -872,7 +880,8 @@ namespace System.Web.Mvc.Test
         public void GetChildActionUniqueId_ReturnsDifferentValuesIfVaryByParamValueIsModified(
             string varyByParam,
             string expected
-        ) {
+        )
+        {
             // Arrange
             MockActionExecutingContext context = new MockActionExecutingContext();
             context.ActionParameters["foo"] = "1";

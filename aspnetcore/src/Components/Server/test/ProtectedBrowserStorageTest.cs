@@ -463,7 +463,8 @@ namespace Microsoft.AspNetCore.Components.Server.ProtectedBrowserStorage
                 string identifier,
                 CancellationToken cancellationToken,
                 object[] args
-            ) {
+            )
+            {
                 Invocations.Add((identifier, args));
                 return (ValueTask<TValue>)NextInvocationResult;
             }

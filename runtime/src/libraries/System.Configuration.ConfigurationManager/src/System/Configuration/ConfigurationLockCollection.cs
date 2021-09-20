@@ -35,7 +35,8 @@ namespace System.Configuration
             ConfigurationLockCollectionType lockType,
             string ignoreName,
             ConfigurationLockCollection parentCollection
-        ) {
+        )
+        {
             _thisElement = thisElement;
             LockType = lockType;
             _internalDictionary = new HybridDictionary();
@@ -105,7 +106,8 @@ namespace System.Configuration
                 foreach (DictionaryEntry de in _internalDictionary)
                     if (
                         ((ConfigurationValueFlags)de.Value & ConfigurationValueFlags.Inherited) != 0
-                    ) {
+                    )
+                    {
                         result = true;
                         break;
                     }
@@ -156,7 +158,8 @@ namespace System.Configuration
                 if (
                     (collection == null)
                     && (_thisElement.Properties.DefaultCollectionProperty != null)
-                ) {
+                )
+                {
                     // this is not a collection but it may contain a default collection
                     collection =
                         _thisElement[_thisElement.Properties.DefaultCollectionProperty]
@@ -197,7 +200,8 @@ namespace System.Configuration
                     if (
                         (LockType == ConfigurationLockCollectionType.LockedElements)
                         || (LockType == ConfigurationLockCollectionType.LockedElementsExceptionList)
-                    ) {
+                    )
+                    {
                         // If it is an element then it must be derived from ConfigurationElement
                         if (!typeof(ConfigurationElement).IsAssignableFrom(propToLock?.Type))
                             _thisElement.ReportInvalidLock(attribToLockTrim, LockType, null, null);
@@ -313,7 +317,8 @@ namespace System.Configuration
                         & ConfigurationValueFlags.Inherited
                     ) != 0
                 )
-            ) {
+            )
+            {
                 if (
                     (
                         (ConfigurationValueFlags)_internalDictionary[name]

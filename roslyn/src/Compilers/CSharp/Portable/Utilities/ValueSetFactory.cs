@@ -44,7 +44,8 @@ namespace Microsoft.CodeAnalysis.CSharp
         public static IValueSetFactory? ForSpecialType(
             SpecialType specialType,
             bool isNative = false
-        ) {
+        )
+        {
             switch (specialType)
             {
                 case SpecialType.System_Byte:

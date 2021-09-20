@@ -137,7 +137,8 @@ namespace Microsoft.CodeAnalysis.ChangeNamespace
             Document document,
             SyntaxNode container,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             if (!IsValidContainer(container))
             {
                 throw new ArgumentException(nameof(container));
@@ -156,7 +157,8 @@ namespace Microsoft.CodeAnalysis.ChangeNamespace
             Document document,
             string targetNamespace,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var syntaxFacts = document.GetRequiredLanguageService<ISyntaxFactsService>();
             var syntaxRoot = await document.GetRequiredSyntaxRootAsync(cancellationToken)
                 .ConfigureAwait(false);
@@ -226,7 +228,8 @@ namespace Microsoft.CodeAnalysis.ChangeNamespace
             static async Task<ImmutableArray<SyntaxNode>> GetTopLevelNamespacesAsync(
                 Document document,
                 CancellationToken cancellationToken
-            ) {
+            )
+            {
                 var syntaxRoot = await document.GetRequiredSyntaxRootAsync(cancellationToken)
                     .ConfigureAwait(false);
                 var syntaxFacts = document.GetRequiredLanguageService<ISyntaxFactsService>();
@@ -242,7 +245,8 @@ namespace Microsoft.CodeAnalysis.ChangeNamespace
             SyntaxNode container,
             string targetNamespace,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             // Make sure given namespace name is valid, "" means global namespace.
             var syntaxFacts = document.GetRequiredLanguageService<ISyntaxFactsService>();
             if (
@@ -251,7 +255,8 @@ namespace Microsoft.CodeAnalysis.ChangeNamespace
                     targetNamespace.Length > 0
                     && !targetNamespace.Split(s_dotSeparator).All(syntaxFacts.IsValidIdentifier)
                 )
-            ) {
+            )
+            {
                 throw new ArgumentException(nameof(targetNamespace));
             }
 
@@ -369,7 +374,8 @@ namespace Microsoft.CodeAnalysis.ChangeNamespace
             ImmutableArray<DocumentId> ids,
             TextSpan span,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             // If the node specified by span doesn't meet the requirement to be an applicable container in any of the documents
             // (See `TryGetApplicableContainerFromSpanAsync`), or we are getting different namespace declarations among
             // those documents, then we know we can't make a proper code change. We will return null and the check
@@ -421,7 +427,8 @@ namespace Microsoft.CodeAnalysis.ChangeNamespace
             Solution solution,
             ImmutableArray<(DocumentId, SyntaxNode)> containers,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var solutionEditor = new SolutionEditor(solution);
             foreach (var (id, container) in containers)
             {
@@ -443,7 +450,8 @@ namespace Microsoft.CodeAnalysis.ChangeNamespace
             Document document,
             SyntaxNode container,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var memberDecls = GetMemberDeclarationsInContainer(container);
             var semanticModel = await document.GetRequiredSemanticModelAsync(cancellationToken)
                 .ConfigureAwait(false);
@@ -458,7 +466,8 @@ namespace Microsoft.CodeAnalysis.ChangeNamespace
                     memberSymbol is ITypeSymbol typeSymbol
                     && typeSymbol.DeclaringSyntaxReferences.Length > 1
                     && semanticFacts.IsPartial(typeSymbol, cancellationToken)
-                ) {
+                )
+                {
                     return true;
                 }
             }
@@ -469,7 +478,8 @@ namespace Microsoft.CodeAnalysis.ChangeNamespace
         protected static bool IsSupportedLinkedDocument(
             Document document,
             out ImmutableArray<DocumentId> allDocumentIds
-        ) {
+        )
+        {
             var solution = document.Project.Solution;
             var linkedDocumentIds = document.GetLinkedDocumentIds();
 
@@ -485,7 +495,8 @@ namespace Microsoft.CodeAnalysis.ChangeNamespace
                             document.Project.FilePath!
                         )
                 )
-            ) {
+            )
+            {
                 allDocumentIds = default;
                 return false;
             }
@@ -498,7 +509,8 @@ namespace Microsoft.CodeAnalysis.ChangeNamespace
             Document document,
             SyntaxNode container,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var semanticModel = await document.GetRequiredSemanticModelAsync(cancellationToken)
                 .ConfigureAwait(false);
             var declarations = GetMemberDeclarationsInContainer(container);
@@ -519,7 +531,8 @@ namespace Microsoft.CodeAnalysis.ChangeNamespace
         private static ImmutableArray<string> GetAllNamespaceImportsForDeclaringDocument(
             string oldNamespace,
             string newNamespace
-        ) {
+        )
+        {
             var parts = GetNamespaceParts(oldNamespace);
             var builder = ArrayBuilder<string>.GetInstance();
             for (var i = 1; i <= parts.Length; ++i)
@@ -536,7 +549,8 @@ namespace Microsoft.CodeAnalysis.ChangeNamespace
             Document document,
             ImmutableArray<string> names,
             bool withFormatterAnnotation
-        ) {
+        )
+        {
             var generator = SyntaxGenerator.GetGenerator(document);
             using var builderDisposer = ArrayBuilder<SyntaxNode>.GetInstance(
                 names.Length,
@@ -554,7 +568,8 @@ namespace Microsoft.CodeAnalysis.ChangeNamespace
             SyntaxGenerator syntaxGenerator,
             string name,
             bool withFormatterAnnotation
-        ) {
+        )
+        {
             var import = syntaxGenerator.NamespaceImportDeclaration(name);
             if (withFormatterAnnotation)
             {
@@ -575,7 +590,8 @@ namespace Microsoft.CodeAnalysis.ChangeNamespace
             string oldNamespace,
             string newNamespace,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var document = solution.GetRequiredDocument(id);
             var root = await document.GetRequiredSyntaxRootAsync(cancellationToken)
                 .ConfigureAwait(false);
@@ -668,7 +684,8 @@ namespace Microsoft.CodeAnalysis.ChangeNamespace
             Solution originalSolution,
             Document[] changedDocuments,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             foreach (var document in changedDocuments)
             {
                 originalSolution = originalSolution.WithDocumentSyntaxRoot(
@@ -686,7 +703,8 @@ namespace Microsoft.CodeAnalysis.ChangeNamespace
             public LocationForAffectedSymbol(
                 ReferenceLocation location,
                 bool isReferenceToExtensionMethod
-            ) {
+            )
+            {
                 ReferenceLocation = location;
                 IsReferenceToExtensionMethod = isReferenceToExtensionMethod;
             }
@@ -704,7 +722,8 @@ namespace Microsoft.CodeAnalysis.ChangeNamespace
             Document document,
             ISymbol symbol,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             using var _ = ArrayBuilder<LocationForAffectedSymbol>.GetInstance(out var builder);
 
             var referencedSymbols = await FindReferencesAsync(symbol, document, cancellationToken)
@@ -760,7 +779,8 @@ namespace Microsoft.CodeAnalysis.ChangeNamespace
             ISymbol symbol,
             Document document,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             cancellationToken.ThrowIfCancellationRequested();
             var progress = new StreamingProgressCollector();
             await SymbolFinder.FindReferencesAsync(
@@ -782,7 +802,8 @@ namespace Microsoft.CodeAnalysis.ChangeNamespace
             string oldNamespace,
             string newNamespace,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             Debug.Assert(newNamespace != null);
 
             // 1. Fix references to the affected types in this document if necessary.
@@ -890,7 +911,8 @@ namespace Microsoft.CodeAnalysis.ChangeNamespace
             IEnumerable<LocationForAffectedSymbol> refLocations,
             string newNamespace,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             // 1. Fully qualify all simple references (i.e. not via an alias) with new namespace.
             // 2. Add using of new namespace (for each reference's container).
             // 3. Try to simplify qualified names introduced from step(1).
@@ -958,7 +980,8 @@ namespace Microsoft.CodeAnalysis.ChangeNamespace
             IEnumerable<LocationForAffectedSymbol> refLocations,
             ImmutableArray<string> newNamespaceParts,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var editor = await DocumentEditor.CreateAsync(document, cancellationToken)
                 .ConfigureAwait(false);
             var root = editor.OriginalRoot;
@@ -1012,7 +1035,8 @@ namespace Microsoft.CodeAnalysis.ChangeNamespace
                             out var oldNode,
                             out var newNode
                         )
-                    ) {
+                    )
+                    {
                         editor.ReplaceNode(
                             oldNode,
                             newNode.WithAdditionalAnnotations(Simplifier.Annotation)
@@ -1052,7 +1076,8 @@ namespace Microsoft.CodeAnalysis.ChangeNamespace
             ImmutableArray<DocumentId> ids,
             ImmutableArray<string> names,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             using var _ = PooledHashSet<DocumentId>.GetInstance(out var linkedDocumentsToSkip);
             var documentsToProcessBuilder = ArrayBuilder<Document>.GetInstance();
 
@@ -1097,7 +1122,8 @@ namespace Microsoft.CodeAnalysis.ChangeNamespace
                 Document doc,
                 IEnumerable<SyntaxNode> importsToRemove,
                 CancellationToken token
-            ) {
+            )
+            {
                 var removeImportService =
                     doc.GetRequiredLanguageService<IRemoveUnnecessaryImportsService>();
                 var syntaxFacts = doc.GetRequiredLanguageService<ISyntaxFactsService>();
@@ -1125,7 +1151,8 @@ namespace Microsoft.CodeAnalysis.ChangeNamespace
             bool placeSystemNamespaceFirst,
             bool allowInHiddenRegions,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             // Sort containers based on their span start, to make the result of
             // adding imports deterministic.
             if (containers.Length > 1)
@@ -1171,7 +1198,8 @@ namespace Microsoft.CodeAnalysis.ChangeNamespace
             Solution oldSolution,
             Solution newSolution,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var diffMergingSession = new LinkedFileDiffMergingSession(
                 oldSolution,
                 newSolution,

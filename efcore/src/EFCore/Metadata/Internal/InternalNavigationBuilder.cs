@@ -25,10 +25,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
         ///     any release. You should only use it directly in your code with extreme caution and knowing that
         ///     doing so can result in application failures when updating to a new Entity Framework Core release.
         /// </summary>
-        public InternalNavigationBuilder(
-            Navigation metadata,
-            InternalModelBuilder modelBuilder
-        ) : base(metadata, modelBuilder) { }
+        public InternalNavigationBuilder(Navigation metadata, InternalModelBuilder modelBuilder)
+            : base(metadata, modelBuilder) { }
 
         /// <summary>
         ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -76,7 +74,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
         public virtual bool CanSetAutoInclude(
             bool? autoInclude,
             ConfigurationSource configurationSource
-        ) {
+        )
+        {
             IConventionNavigation conventionNavigation = Metadata;
 
             return configurationSource.Overrides(
@@ -94,7 +93,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
         public virtual InternalNavigationBuilder? AutoInclude(
             bool? autoInclude,
             ConfigurationSource configurationSource
-        ) {
+        )
+        {
             if (CanSetAutoInclude(autoInclude, configurationSource))
             {
                 if (configurationSource == ConfigurationSource.Explicit)
@@ -124,7 +124,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
         public virtual bool CanSetIsRequired(
             bool? required,
             ConfigurationSource configurationSource
-        ) {
+        )
+        {
             var foreignKey = Metadata.ForeignKey;
             return foreignKey.IsUnique
               ? foreignKey.GetPrincipalEndConfigurationSource() == null
@@ -146,11 +147,13 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
         public virtual InternalNavigationBuilder? IsRequired(
             bool? required,
             ConfigurationSource configurationSource
-        ) {
+        )
+        {
             if (
                 configurationSource == ConfigurationSource.Explicit
                 || CanSetIsRequired(required, configurationSource)
-            ) {
+            )
+            {
                 var foreignKey = Metadata.ForeignKey;
                 if (foreignKey.IsUnique)
                 {

@@ -49,7 +49,8 @@ namespace AutoMapper.UnitTests
             Type destType,
             Type destMemberType,
             string nameToSearch
-        ) {
+        )
+        {
             if (!_allSourceMembers.TryGetValue(sourceTypeDetails, out SourceMember[] sourceMembers))
             {
                 sourceMembers = sourceTypeDetails.ReadAccessors.Select(

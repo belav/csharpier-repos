@@ -22,7 +22,8 @@ namespace System
             if (
                 (int)uriKind < (int)UriKind.RelativeOrAbsolute
                 || (int)uriKind > (int)UriKind.Relative
-            ) {
+            )
+            {
                 throw new ArgumentException(SR.Format(SR.net_uri_InvalidUriKind, uriKind));
             }
 
@@ -69,7 +70,8 @@ namespace System
                                 )
                             ) || (!IsWindowsSystem && InFact(Flags.UnixPath))
                         )
-                    ) {
+                    )
+                    {
                         _syntax = null!; //make it be relative Uri
                         _flags &= Flags.UserEscaped; // the only flag that makes sense for a relative uri
                         e = null;
@@ -117,7 +119,8 @@ namespace System
                         if (
                             uriKind != UriKind.Absolute
                             && err <= ParsingError.LastRelativeUriOkErrIndex
-                        ) {
+                        )
+                        {
                             // RFC 3986 Section 5.4.2 - http:(relativeUri) may be considered a valid relative Uri.
                             _syntax = null!; // convert to relative uri
                             e = null;
@@ -168,7 +171,8 @@ namespace System
                             uriKind != UriKind.Absolute
                             && err != ParsingError.None
                             && err <= ParsingError.LastRelativeUriOkErrIndex
-                        ) {
+                        )
+                        {
                             _syntax = null!; // convert it to relative
                             e = null;
                             _flags &= Flags.UserEscaped; // the only flag that makes sense for a relative uri
@@ -212,7 +216,8 @@ namespace System
                 err != ParsingError.None
                 && uriKind != UriKind.Absolute
                 && err <= ParsingError.LastRelativeUriOkErrIndex
-            ) {
+            )
+            {
                 e = null;
                 _flags &= (Flags.UserEscaped | Flags.HasUnicode); // the only flags that makes sense for a relative uri
                 if (hasUnicode)
@@ -254,7 +259,8 @@ namespace System
                         if (
                             value >= UriHelper.UnreservedTable.Length
                             || UriHelper.UnreservedTable[value]
-                        ) {
+                        )
+                        {
                             return true;
                         }
 
@@ -277,7 +283,8 @@ namespace System
             [NotNullWhen(true)] string? uriString,
             UriKind uriKind,
             [NotNullWhen(true)] out Uri? result
-        ) {
+        )
+        {
             if (uriString is null)
             {
                 result = null;
@@ -293,7 +300,8 @@ namespace System
             Uri? baseUri,
             string? relativeUri,
             [NotNullWhen(true)] out Uri? result
-        ) {
+        )
+        {
             if (TryCreate(relativeUri, UriKind.RelativeOrAbsolute, out Uri? relativeLink))
             {
                 if (!relativeLink.IsAbsoluteUri)
@@ -310,7 +318,8 @@ namespace System
             Uri? baseUri,
             Uri? relativeUri,
             [NotNullWhen(true)] out Uri? result
-        ) {
+        )
+        {
             result = null;
 
             if (baseUri is null || relativeUri is null)
@@ -384,7 +393,8 @@ namespace System
             UriComponents partsToCompare,
             UriFormat compareFormat,
             StringComparison comparisonType
-        ) {
+        )
+        {
             if (uri1 is null)
             {
                 if (uri2 is null)
@@ -421,7 +431,8 @@ namespace System
         public static bool IsWellFormedUriString(
             [NotNullWhen(true)] string? uriString,
             UriKind uriKind
-        ) {
+        )
+        {
             Uri? result;
 
             if (!Uri.TryCreate(uriString, uriKind, out result))
@@ -491,11 +502,13 @@ namespace System
                             | Flags.FragmentIriCanonical
                         )
                     ) != 0
-                ) {
+                )
+                {
                     if (
                         (nonCanonical & (Flags.E_UserNotCanonical | Flags.UserIriCanonical))
                         == (Flags.E_UserNotCanonical | Flags.UserIriCanonical)
-                    ) {
+                    )
+                    {
                         nonCanonical =
                             nonCanonical & ~(Flags.E_UserNotCanonical | Flags.UserIriCanonical);
                     }
@@ -503,7 +516,8 @@ namespace System
                     if (
                         (nonCanonical & (Flags.E_PathNotCanonical | Flags.PathIriCanonical))
                         == (Flags.E_PathNotCanonical | Flags.PathIriCanonical)
-                    ) {
+                    )
+                    {
                         nonCanonical =
                             nonCanonical & ~(Flags.E_PathNotCanonical | Flags.PathIriCanonical);
                     }
@@ -511,7 +525,8 @@ namespace System
                     if (
                         (nonCanonical & (Flags.E_QueryNotCanonical | Flags.QueryIriCanonical))
                         == (Flags.E_QueryNotCanonical | Flags.QueryIriCanonical)
-                    ) {
+                    )
+                    {
                         nonCanonical =
                             nonCanonical & ~(Flags.E_QueryNotCanonical | Flags.QueryIriCanonical);
                     }
@@ -519,7 +534,8 @@ namespace System
                     if (
                         (nonCanonical & (Flags.E_FragmentNotCanonical | Flags.FragmentIriCanonical))
                         == (Flags.E_FragmentNotCanonical | Flags.FragmentIriCanonical)
-                    ) {
+                    )
+                    {
                         nonCanonical =
                             nonCanonical
                             & ~(Flags.E_FragmentNotCanonical | Flags.FragmentIriCanonical);
@@ -540,7 +556,8 @@ namespace System
                             )
                         ) != Flags.Zero
                     )
-                ) {
+                )
+                {
                     return false;
                 }
 
@@ -613,7 +630,8 @@ namespace System
                                 )
                             ) != (Check.DisplayCanonical | Check.FoundNonAscii)
                         )
-                    ) {
+                    )
+                    {
                         return false;
                     }
                 }
@@ -622,7 +640,8 @@ namespace System
                 if (
                     (_flags & (Flags.SchemeNotCanonical | Flags.AuthorityFound))
                     == (Flags.SchemeNotCanonical | Flags.AuthorityFound)
-                ) {
+                )
+                {
                     idx = _syntax.SchemeName.Length;
                     while (str[idx++] != ':')
                         ;
@@ -703,7 +722,8 @@ namespace System
             int start,
             int end,
             UriComponents component
-        ) {
+        )
+        {
             fixed (char* pInput = input)
             {
                 return IriHelper.EscapeUnescapeIri(pInput, start, end, component);
@@ -733,13 +753,15 @@ namespace System
             bool dontEscape,
             UriKind uriKind,
             ref UriFormatException? e
-        ) {
+        )
+        {
             // if (!Enum.IsDefined(typeof(UriKind), uriKind)) -- We currently believe that Enum.IsDefined() is too slow
             // to be used here.
             if (
                 (int)uriKind < (int)UriKind.RelativeOrAbsolute
                 || (int)uriKind > (int)UriKind.Relative
-            ) {
+            )
+            {
                 throw new ArgumentException(SR.Format(SR.net_uri_InvalidUriKind, uriKind));
             }
 
@@ -796,7 +818,8 @@ namespace System
             Uri? relativeUri,
             ref string? newUriString,
             ref bool userEscaped
-        ) {
+        )
+        {
             Debug.Assert(
                 !baseUri.IsNotAbsoluteUri && !baseUri.UserDrivenParsing,
                 "Uri::ResolveHelper()|baseUri is not Absolute or is controlled by User Parser."
@@ -842,7 +865,8 @@ namespace System
                 relativeStr[0] == '#'
                 && !baseUri.IsImplicitFile
                 && baseUri.Syntax!.InFact(UriSyntaxFlags.MayHaveFragment)
-            ) {
+            )
+            {
                 newUriString =
                     baseUri.GetParts(
                         UriComponents.AbsoluteUri & ~UriComponents.Fragment,
@@ -856,7 +880,8 @@ namespace System
                 relativeStr[0] == '?'
                 && !baseUri.IsImplicitFile
                 && baseUri.Syntax!.InFact(UriSyntaxFlags.MayHaveQuery)
-            ) {
+            )
+            {
                 newUriString =
                     baseUri.GetParts(
                         UriComponents.AbsoluteUri & ~UriComponents.Query & ~UriComponents.Fragment,
@@ -871,7 +896,8 @@ namespace System
                 && (relativeStr[1] == ':' || relativeStr[1] == '|')
                 && UriHelper.IsAsciiLetter(relativeStr[0])
                 && (relativeStr[2] == '\\' || relativeStr[2] == '/')
-            ) {
+            )
+            {
                 if (baseUri.IsImplicitFile)
                 {
                     // It could have file:/// prepended to the result but we want to keep it as *Implicit* File Uri
@@ -979,7 +1005,8 @@ namespace System
                         uriComponents == UriComponents.StrongPort
                         && _syntax.DefaultPort != UriParser.NoDefaultPort
                     )
-                ) {
+                )
+                {
                     // recreate string from the port value
                     return _info.Offset.PortValue.ToString(CultureInfo.InvariantCulture);
                 }
@@ -999,7 +1026,8 @@ namespace System
                     uriFormat == UriFormat.UriEscaped
                     || ((_flags & (Flags.HostNotCanonical | Flags.E_HostNotCanonical)) == 0)
                 )
-            ) {
+            )
+            {
                 EnsureHostString(false);
                 return _info.Host!;
             }
@@ -1108,7 +1136,8 @@ namespace System
                     // Find the start of the port.  Account for non-canonical ports like :00123
                     while (
                         otherUri._string[portIndex] != ':' && portIndex > otherUri._info.Offset.Host
-                    ) {
+                    )
+                    {
                         portIndex--;
                     }
                     if (otherUri._string[portIndex] != ':')

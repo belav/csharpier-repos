@@ -83,7 +83,8 @@ namespace System.Runtime.Serialization.Json
                                     || kind == CollectionKind.Collection
                                     || kind == CollectionKind.GenericEnumerable
                                 )
-                            ) {
+                            )
+                            {
                                 throw new InvalidDataContractException(
                                     SR.Format(
                                         SR.GetOnlyCollectionMustHaveAddMethod,
@@ -162,7 +163,8 @@ namespace System.Runtime.Serialization.Json
         public override object? ReadJsonValueCore(
             XmlReaderDelegator jsonReader,
             XmlObjectSerializerReadContextComplexJson? context
-        ) {
+        )
+        {
             Debug.Assert(context != null);
 
             jsonReader.Read();
@@ -199,7 +201,8 @@ namespace System.Runtime.Serialization.Json
             object obj,
             XmlObjectSerializerWriteContextComplexJson? context,
             RuntimeTypeHandle declaredTypeHandle
-        ) {
+        )
+        {
             Debug.Assert(context != null);
             // IsGetOnlyCollection value has already been used to create current collectiondatacontract, value can now be reset.
             context.IsGetOnlyCollection = false;

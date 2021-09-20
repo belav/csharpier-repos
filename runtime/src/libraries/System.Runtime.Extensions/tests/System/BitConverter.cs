@@ -478,7 +478,8 @@ namespace System.Tests
             Func<byte[], int, TInput> convertBack,
             TInput input,
             byte[] expectedBytes
-        ) {
+        )
+        {
             byte[] bytes = getBytes(input);
             Assert.Equal(expectedBytes.Length, bytes.Length);
 

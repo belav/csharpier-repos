@@ -411,7 +411,8 @@ namespace System.Web.Http.ExceptionHandling
 
         private static HttpActionContext CreateActionContext(
             HttpControllerContext controllerContext
-        ) {
+        )
+        {
             return new HttpActionContext { ControllerContext = controllerContext };
         }
 
@@ -432,7 +433,8 @@ namespace System.Web.Http.ExceptionHandling
         private static HttpControllerContext CreateControllerContext(
             HttpRequestContext requestContext,
             HttpRequestMessage request
-        ) {
+        )
+        {
             return new HttpControllerContext { RequestContext = requestContext, Request = request };
         }
 
@@ -450,7 +452,8 @@ namespace System.Web.Http.ExceptionHandling
             Exception exception,
             ExceptionContextCatchBlock catchBlock,
             HttpActionContext actionContext
-        ) {
+        )
+        {
             return new ExceptionContext(exception, catchBlock, actionContext);
         }
 
@@ -458,7 +461,8 @@ namespace System.Web.Http.ExceptionHandling
             Exception exception,
             ExceptionContextCatchBlock catchBlock,
             HttpRequestMessage request
-        ) {
+        )
+        {
             return new ExceptionContext(exception, catchBlock, request);
         }
 
@@ -467,7 +471,8 @@ namespace System.Web.Http.ExceptionHandling
             ExceptionContextCatchBlock catchBlock,
             HttpRequestMessage request,
             HttpResponseMessage response
-        ) {
+        )
+        {
             return new ExceptionContext(exception, catchBlock, request, response);
         }
 

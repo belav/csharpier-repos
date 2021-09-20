@@ -112,7 +112,8 @@ namespace Microsoft.AspNetCore.HttpSys.Internal
 
         void ICollection<KeyValuePair<string, StringValues>>.Add(
             KeyValuePair<string, StringValues> item
-        ) {
+        )
+        {
             ((IDictionary<string, StringValues>)this).Add(item.Key, item.Value);
         }
 
@@ -127,7 +128,8 @@ namespace Microsoft.AspNetCore.HttpSys.Internal
 
         bool ICollection<KeyValuePair<string, StringValues>>.Contains(
             KeyValuePair<string, StringValues> item
-        ) {
+        )
+        {
             return ((IDictionary<string, StringValues>)this).TryGetValue(item.Key, out var value)
                 && Equals(value, item.Value);
         }
@@ -135,7 +137,8 @@ namespace Microsoft.AspNetCore.HttpSys.Internal
         void ICollection<KeyValuePair<string, StringValues>>.CopyTo(
             KeyValuePair<string, StringValues>[] array,
             int arrayIndex
-        ) {
+        )
+        {
             PropertiesEnumerable().Concat(Extra).ToArray().CopyTo(array, arrayIndex);
         }
 
@@ -163,7 +166,8 @@ namespace Microsoft.AspNetCore.HttpSys.Internal
                         new StringSegment(rawValue[0]).Trim(),
                         out value
                     )
-                ) {
+                )
+                {
                     _contentLengthText = rawValue;
                     _contentLength = value;
                     return value;
@@ -244,7 +248,8 @@ namespace Microsoft.AspNetCore.HttpSys.Internal
 
         bool ICollection<KeyValuePair<string, StringValues>>.Remove(
             KeyValuePair<string, StringValues> item
-        ) {
+        )
+        {
             return ((IDictionary<string, StringValues>)this).Contains(item)
                 && ((IDictionary<string, StringValues>)this).Remove(item.Key);
         }

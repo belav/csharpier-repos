@@ -58,7 +58,8 @@ namespace System.Text
             int count,
             byte* bytes,
             int byteCount
-        ) {
+        )
+        {
             Debug.Assert(_charLeftOver != NULL_CHAR);
             char* pTempBuffer = stackalloc char[2];
             pTempBuffer[0] = _charLeftOver;
@@ -129,7 +130,8 @@ namespace System.Text
             byte[] bytes,
             int byteIndex,
             bool flush
-        ) {
+        )
+        {
             if (chars == null || bytes == null)
                 throw new ArgumentNullException(
                     chars == null ? nameof(chars) : nameof(bytes),
@@ -181,7 +183,8 @@ namespace System.Text
             byte* bytes,
             int byteCount,
             bool flush
-        ) {
+        )
+        {
             if (chars == null || bytes == null)
                 throw new ArgumentNullException(
                     chars == null ? nameof(chars) : nameof(bytes),
@@ -244,7 +247,8 @@ namespace System.Text
             out int charsUsed,
             out int bytesUsed,
             out bool completed
-        ) {
+        )
+        {
             if (chars == null || bytes == null)
                 throw new ArgumentNullException(
                     chars == null ? nameof(chars) : nameof(bytes),
@@ -310,7 +314,8 @@ namespace System.Text
             out int charsUsed,
             out int bytesUsed,
             out bool completed
-        ) {
+        )
+        {
             if (bytes == null || chars == null)
                 throw new ArgumentNullException(
                     bytes == null ? nameof(bytes) : nameof(chars),

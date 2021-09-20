@@ -453,13 +453,15 @@ namespace Newtonsoft.Json.Utilities
             CultureInfo culture,
             Type targetType,
             out object? value
-        ) {
+        )
+        {
             try
             {
                 if (
                     TryConvertInternal(initialValue, culture, targetType, out value)
                     == ConvertResult.Success
-                ) {
+                )
+                {
                     return true;
                 }
 
@@ -478,7 +480,8 @@ namespace Newtonsoft.Json.Utilities
             CultureInfo culture,
             Type targetType,
             out object? value
-        ) {
+        )
+        {
             if (initialValue == null)
             {
                 throw new ArgumentNullException(nameof(initialValue));
@@ -628,7 +631,8 @@ namespace Newtonsoft.Json.Utilities
                 targetType.IsInterface()
                 || targetType.IsGenericTypeDefinition()
                 || targetType.IsAbstract()
-            ) {
+            )
+            {
                 value = null;
                 return ConvertResult.NotInstantiableType;
             }
@@ -654,7 +658,8 @@ namespace Newtonsoft.Json.Utilities
             object? initialValue,
             CultureInfo culture,
             Type targetType
-        ) {
+        )
+        {
             if (targetType == typeof(object))
             {
                 return initialValue;
@@ -682,7 +687,8 @@ namespace Newtonsoft.Json.Utilities
             object? value,
             Type initialType,
             Type targetType
-        ) {
+        )
+        {
             if (value != null)
             {
                 Type valueType = value.GetType();
@@ -1294,7 +1300,8 @@ namespace Newtonsoft.Json.Utilities
             int start,
             int length,
             out double value
-        ) {
+        )
+        {
             value = 0;
 
             if (length == 0)
@@ -1459,7 +1466,8 @@ namespace Newtonsoft.Json.Utilities
             int start,
             int length,
             out decimal value
-        ) {
+        )
+        {
             value = 0M;
             const decimal decimalMaxValueHi28 = 7922816251426433759354395033M;
             const ulong decimalMaxValueHi19 = 7922816251426433759UL;
@@ -1623,7 +1631,8 @@ namespace Newtonsoft.Json.Utilities
                                     ).GetValueOrDefault()
                                 )
                             )
-                        ) {
+                        )
+                        {
                             if (mantissaDigits < 19)
                             {
                                 hi19 = (hi19 * 10UL) + (ulong)(c - '0');

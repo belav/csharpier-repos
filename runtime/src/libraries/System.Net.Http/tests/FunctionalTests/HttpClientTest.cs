@@ -40,7 +40,8 @@ namespace System.Net.Http.Functional.Tests
                 var client = new HttpClient(
                     new CustomResponseHandler((r, c) => Task.FromResult(new HttpResponseMessage()))
                 )
-            ) {
+            )
+            {
                 Assert.NotNull(client.DefaultRequestHeaders);
                 Assert.Same(client.DefaultRequestHeaders, client.DefaultRequestHeaders);
             }
@@ -53,7 +54,8 @@ namespace System.Net.Http.Functional.Tests
                 var client = new HttpClient(
                     new CustomResponseHandler((r, c) => Task.FromResult(new HttpResponseMessage()))
                 )
-            ) {
+            )
+            {
                 Assert.Null(client.BaseAddress);
 
                 Uri uri = new Uri(CreateFakeUri());
@@ -72,7 +74,8 @@ namespace System.Net.Http.Functional.Tests
                 var client = new HttpClient(
                     new CustomResponseHandler((r, c) => Task.FromResult(new HttpResponseMessage()))
                 )
-            ) {
+            )
+            {
                 AssertExtensions.Throws<ArgumentException>(
                     "value",
                     () => client.BaseAddress = new Uri("ftp://onlyhttpsupported")
@@ -91,7 +94,8 @@ namespace System.Net.Http.Functional.Tests
                 var client = new HttpClient(
                     new CustomResponseHandler((r, c) => Task.FromResult(new HttpResponseMessage()))
                 )
-            ) {
+            )
+            {
                 client.Timeout = Timeout.InfiniteTimeSpan;
                 Assert.Equal(Timeout.InfiniteTimeSpan, client.Timeout);
 
@@ -107,7 +111,8 @@ namespace System.Net.Http.Functional.Tests
                 var client = new HttpClient(
                     new CustomResponseHandler((r, c) => Task.FromResult(new HttpResponseMessage()))
                 )
-            ) {
+            )
+            {
                 AssertExtensions.Throws<ArgumentOutOfRangeException>(
                     "value",
                     () => client.Timeout = TimeSpan.FromSeconds(-2)
@@ -130,7 +135,8 @@ namespace System.Net.Http.Functional.Tests
                 var client = new HttpClient(
                     new CustomResponseHandler((r, c) => Task.FromResult(new HttpResponseMessage()))
                 )
-            ) {
+            )
+            {
                 client.MaxResponseContentBufferSize = 1;
                 Assert.Equal(1, client.MaxResponseContentBufferSize);
 
@@ -146,7 +152,8 @@ namespace System.Net.Http.Functional.Tests
                 var client = new HttpClient(
                     new CustomResponseHandler((r, c) => Task.FromResult(new HttpResponseMessage()))
                 )
-            ) {
+            )
+            {
                 AssertExtensions.Throws<ArgumentOutOfRangeException>(
                     "value",
                     () => client.MaxResponseContentBufferSize = -1
@@ -175,7 +182,8 @@ namespace System.Net.Http.Functional.Tests
             int maxSize,
             int contentLength,
             bool exceptionExpected
-        ) {
+        )
+        {
             var content = new CustomContent(
                 async s =>
                 {
@@ -211,7 +219,8 @@ namespace System.Net.Http.Functional.Tests
                 var client = new HttpClient(
                     new CustomResponseHandler((r, c) => Task.FromResult(new HttpResponseMessage()))
                 )
-            ) {
+            )
+            {
                 (await client.GetAsync(CreateFakeUri())).Dispose();
                 Assert.Throws<InvalidOperationException>(() => client.BaseAddress = null);
                 Assert.Throws<InvalidOperationException>(
@@ -232,7 +241,8 @@ namespace System.Net.Http.Functional.Tests
                 var client = new HttpClient(
                     new CustomResponseHandler((r, c) => Task.FromResult(new HttpResponseMessage()))
                 )
-            ) {
+            )
+            {
                 Assert.Throws<InvalidOperationException>(
                     () =>
                     {
@@ -253,14 +263,16 @@ namespace System.Net.Http.Functional.Tests
                 var client = new HttpClient(
                     new CustomResponseHandler((r, c) => Task.FromResult(new HttpResponseMessage()))
                 )
-            ) {
+            )
+            {
                 client.BaseAddress = new Uri(CreateFakeUri());
                 using (
                     HttpResponseMessage response = await client.GetAsync(
                         uri,
                         HttpCompletionOption.ResponseHeadersRead
                     )
-                ) {
+                )
+                {
                     Assert.Equal(HttpStatusCode.OK, response.StatusCode);
                 }
             }
@@ -271,7 +283,8 @@ namespace System.Net.Http.Functional.Tests
         [InlineData(true)]
         public async Task GetContentAsync_ErrorStatusCode_ExpectedExceptionThrown(
             bool withResponseContent
-        ) {
+        )
+        {
             using (
                 var client = new HttpClient(
                     new CustomResponseHandler(
@@ -286,7 +299,8 @@ namespace System.Net.Http.Functional.Tests
                             )
                     )
                 )
-            ) {
+            )
+            {
                 HttpRequestException ex;
 
                 ex = await Assert.ThrowsAsync<HttpRequestException>(
@@ -333,7 +347,8 @@ namespace System.Net.Http.Functional.Tests
                 var client = new HttpClient(
                     new CustomResponseHandler((r, c) => Task.FromResult<HttpResponseMessage>(null))
                 )
-            ) {
+            )
+            {
                 await Assert.ThrowsAnyAsync<InvalidOperationException>(
                     () => client.GetStringAsync(CreateFakeUri())
                 );
@@ -349,7 +364,8 @@ namespace System.Net.Http.Functional.Tests
                         (r, c) => Task.FromResult(new HttpResponseMessage() { Content = null })
                     )
                 )
-            ) {
+            )
+            {
                 Assert.Same(string.Empty, await client.GetStringAsync(CreateFakeUri()));
                 Assert.Same(Array.Empty<byte>(), await client.GetByteArrayAsync(CreateFakeUri()));
 
@@ -380,7 +396,8 @@ namespace System.Net.Http.Functional.Tests
                             )
                     )
                 )
-            ) {
+            )
+            {
                 Assert.Same(
                     e,
                     await Assert.ThrowsAsync<FormatException>(
@@ -418,7 +435,8 @@ namespace System.Net.Http.Functional.Tests
                             )
                     )
                 )
-            ) {
+            )
+            {
                 Assert.Same(
                     e,
                     await Assert.ThrowsAsync<FormatException>(
@@ -447,7 +465,8 @@ namespace System.Net.Http.Functional.Tests
                 var client = new HttpClient(
                     new CustomResponseHandler((r, c) => WhenCanceled<HttpResponseMessage>(c))
                 )
-            ) {
+            )
+            {
                 var content = new ByteArrayContent(new byte[1]);
                 var cts = new CancellationTokenSource();
 
@@ -486,7 +505,8 @@ namespace System.Net.Http.Functional.Tests
                 var client = new HttpClient(
                     new CustomResponseHandler((r, c) => Task.FromResult(new HttpResponseMessage()))
                 )
-            ) {
+            )
+            {
                 Verify(await client.GetAsync(CreateFakeUri()));
                 Verify(await client.GetAsync(CreateFakeUri(), CancellationToken.None));
                 Verify(
@@ -536,7 +556,8 @@ namespace System.Net.Http.Functional.Tests
                         }
                     )
                 )
-            ) {
+            )
+            {
                 FormatException thrown = await Assert.ThrowsAsync<FormatException>(
                     () => client.GetAsync(CreateFakeUri())
                 );
@@ -552,7 +573,8 @@ namespace System.Net.Http.Functional.Tests
                 var client = new HttpClient(
                     new CustomResponseHandler((r, c) => Task.FromException<HttpResponseMessage>(e))
                 )
-            ) {
+            )
+            {
                 FormatException thrown = await Assert.ThrowsAsync<FormatException>(
                     () => client.GetAsync(CreateFakeUri())
                 );
@@ -1002,7 +1024,8 @@ namespace System.Net.Http.Functional.Tests
                 var client = new HttpClient(
                     new CustomResponseHandler((r, c) => WhenCanceled<HttpResponseMessage>(c))
                 )
-            ) {
+            )
+            {
                 if (withInfiniteTimeout)
                 {
                     client.Timeout = Timeout.InfiniteTimeSpan;
@@ -1028,12 +1051,14 @@ namespace System.Net.Http.Functional.Tests
         )]
         public void Timeout_TooShort_AllPendingOperationsCanceled(
             HttpCompletionOption completionOption
-        ) {
+        )
+        {
             using (
                 var client = new HttpClient(
                     new CustomResponseHandler((r, c) => WhenCanceled<HttpResponseMessage>(c))
                 )
-            ) {
+            )
+            {
                 client.Timeout = TimeSpan.FromMilliseconds(10);
                 Task<HttpResponseMessage>[] tasks = Enumerable.Range(0, 3)
                     .Select(_ => client.GetAsync(CreateFakeUri(), completionOption))
@@ -1058,12 +1083,14 @@ namespace System.Net.Http.Functional.Tests
         [InlineData(HttpCompletionOption.ResponseHeadersRead)]
         public async Task Timeout_CallerCanceledTokenAfterTimeout_TimeoutIsNotDetected(
             HttpCompletionOption completionOption
-        ) {
+        )
+        {
             using (
                 var client = new HttpClient(
                     new CustomResponseHandler((r, c) => WhenCanceled<HttpResponseMessage>(c))
                 )
-            ) {
+            )
+            {
                 client.Timeout = TimeSpan.FromMilliseconds(0.01);
                 CancellationTokenSource cts = new CancellationTokenSource();
                 CancellationToken token = cts.Token;
@@ -1088,12 +1115,14 @@ namespace System.Net.Http.Functional.Tests
         )]
         public void Timeout_CallerCanceledTokenBeforeTimeout_TimeoutIsNotDetected(
             HttpCompletionOption completionOption
-        ) {
+        )
+        {
             using (
                 var client = new HttpClient(
                     new CustomResponseHandler((r, c) => WhenCanceled<HttpResponseMessage>(c))
                 )
-            ) {
+            )
+            {
                 client.Timeout = TimeSpan.FromDays(1);
                 CancellationTokenSource cts = new CancellationTokenSource();
                 Task<HttpResponseMessage> task = client.GetAsync(
@@ -1183,7 +1212,8 @@ namespace System.Net.Http.Functional.Tests
                 var client = new HttpClient(
                     new CustomResponseHandler((r, c) => WhenCanceled<HttpResponseMessage>(c))
                 )
-            ) {
+            )
+            {
                 var content = new ByteArrayContent(new byte[1]);
                 var cts = new CancellationTokenSource();
 
@@ -1210,7 +1240,8 @@ namespace System.Net.Http.Functional.Tests
                 var client = new HttpClient(
                     new CustomResponseHandler((r, c) => Task.FromResult(new HttpResponseMessage()))
                 )
-            ) {
+            )
+            {
                 Verify(await client.PatchAsync(CreateFakeUri(), new ByteArrayContent(new byte[1])));
                 Verify(
                     await client.PatchAsync(
@@ -1828,7 +1859,8 @@ namespace System.Net.Http.Functional.Tests
             Version serverVersion,
             bool useSsl,
             object expectedResult
-        ) {
+        )
+        {
             await HttpAgnosticLoopbackServer.CreateClientAndServerAsync(
                 async uri =>
                 {
@@ -1897,7 +1929,8 @@ namespace System.Net.Http.Functional.Tests
             Version serverVersion,
             bool useSsl,
             object expectedResult
-        ) {
+        )
+        {
             RemoteServer remoteServer = null;
             if (serverVersion == HttpVersion.Version11)
             {
@@ -2015,7 +2048,8 @@ namespace System.Net.Http.Functional.Tests
             protected override Task<HttpResponseMessage> SendAsync(
                 HttpRequestMessage request,
                 CancellationToken cancellationToken
-            ) {
+            )
+            {
                 Message = request;
                 return Task.FromResult(new HttpResponseMessage());
             }
@@ -2039,21 +2073,24 @@ namespace System.Net.Http.Functional.Tests
 
             public CustomResponseHandler(
                 Func<HttpRequestMessage, CancellationToken, Task<HttpResponseMessage>> func
-            ) {
+            )
+            {
                 _func = func;
             }
 
             protected override Task<HttpResponseMessage> SendAsync(
                 HttpRequestMessage request,
                 CancellationToken cancellationToken
-            ) {
+            )
+            {
                 return _func(request, cancellationToken);
             }
 
             protected override HttpResponseMessage Send(
                 HttpRequestMessage request,
                 CancellationToken cancellationToken
-            ) {
+            )
+            {
                 return _func(request, cancellationToken).GetAwaiter().GetResult();
             }
         }
@@ -2083,7 +2120,8 @@ namespace System.Net.Http.Functional.Tests
                 Stream stream,
                 TransportContext context,
                 CancellationToken cancellationToken
-            ) {
+            )
+            {
                 Debug.Assert(_serializeSync != null);
                 _serializeSync(stream);
             }
@@ -2108,7 +2146,8 @@ namespace System.Net.Http.Functional.Tests
                             (r, c) => Task.FromResult<HttpResponseMessage>(null)
                         )
                     )
-                ) {
+                )
+                {
                     await AssertExtensions.ThrowsAsync<ArgumentNullException>(
                         "request",
                         () => client.SendAsync(TestAsync, null)
@@ -2153,7 +2192,8 @@ namespace System.Net.Http.Functional.Tests
                                 Task.FromResult<HttpResponseMessage>(new HttpResponseMessage())
                         )
                     )
-                ) {
+                )
+                {
                     await client.SendAsync(TestAsync, request);
                     await content.ReadAsStringAsync(); // no exception
                 }

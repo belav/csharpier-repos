@@ -46,7 +46,8 @@ namespace Microsoft.CodeAnalysis.BuildTasks.UnitTests
 
         private IEnumerable<KeyValuePair<string, string>> AddForLoggingEnvironmentVars(
             IEnumerable<KeyValuePair<string, string>>? vars
-        ) {
+        )
+        {
             vars = vars ?? new KeyValuePair<string, string>[] {  };
             if (!vars.Where(kvp => kvp.Key == "RoslynCommandLineLogFile").Any())
             {
@@ -67,7 +68,8 @@ namespace Microsoft.CodeAnalysis.BuildTasks.UnitTests
             string arguments,
             string currentDirectory,
             IEnumerable<KeyValuePair<string, string>>? additionalEnvironmentVars = null
-        ) {
+        )
+        {
             return ProcessUtilities.Run(
                 compilerPath,
                 arguments,
@@ -82,7 +84,8 @@ namespace Microsoft.CodeAnalysis.BuildTasks.UnitTests
             TempDirectory currentDirectory,
             IEnumerable<KeyValuePair<string, string>> filesInDirectory,
             IEnumerable<KeyValuePair<string, string>>? additionalEnvironmentVars = null
-        ) {
+        )
+        {
             foreach (var pair in filesInDirectory)
             {
                 TempFile file = currentDirectory.CreateFile(pair.Key);
@@ -118,7 +121,8 @@ namespace Microsoft.CodeAnalysis.BuildTasks.UnitTests
             ProcessResult result,
             TempDirectory path,
             string expectedOutput
-        ) {
+        )
+        {
             using (var resultFile = GetResultFile(path, "hello.exe"))
             {
                 VerifyResult(result);

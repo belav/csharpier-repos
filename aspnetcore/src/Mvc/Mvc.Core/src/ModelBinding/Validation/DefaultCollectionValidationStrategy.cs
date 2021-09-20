@@ -64,7 +64,8 @@ namespace Microsoft.AspNetCore.Mvc.ModelBinding.Validation
             ModelMetadata metadata,
             string key,
             object model
-        ) {
+        )
+        {
             var enumerator = GetEnumeratorForElementType(metadata, model);
             return new Enumerator(metadata.ElementMetadata!, key, enumerator);
         }

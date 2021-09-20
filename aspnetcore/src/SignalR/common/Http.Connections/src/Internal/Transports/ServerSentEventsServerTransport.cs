@@ -29,7 +29,8 @@ namespace Microsoft.AspNetCore.Http.Connections.Internal.Transports
             string connectionId,
             HttpConnectionContext? connection,
             ILoggerFactory loggerFactory
-        ) {
+        )
+        {
             _application = application;
             _connectionId = connectionId;
             _connection = connection;

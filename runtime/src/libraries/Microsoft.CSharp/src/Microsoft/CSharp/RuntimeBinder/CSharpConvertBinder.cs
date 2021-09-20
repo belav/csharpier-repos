@@ -34,7 +34,8 @@ namespace Microsoft.CSharp.RuntimeBinder
             RuntimeBinder runtimeBinder,
             ArgumentObject[] arguments,
             LocalVariableSymbol[] locals
-        ) {
+        )
+        {
             Debug.Assert(arguments.Length == 1);
             return Explicit
               ? runtimeBinder.BindExplicitConversion(arguments, Type, locals)
@@ -112,7 +113,8 @@ namespace Microsoft.CSharp.RuntimeBinder
                 || IsChecked != otherBinder.IsChecked
                 || _callingContext != otherBinder._callingContext
                 || Type != otherBinder.Type
-            ) {
+            )
+            {
                 return false;
             }
 
@@ -133,7 +135,8 @@ namespace Microsoft.CSharp.RuntimeBinder
         public override DynamicMetaObject FallbackConvert(
             DynamicMetaObject target,
             DynamicMetaObject errorSuggestion
-        ) {
+        )
+        {
 #if ENABLECOMBINDER
             DynamicMetaObject com;
             if (ComInterop.ComBinder.TryConvert(this, target, out com))

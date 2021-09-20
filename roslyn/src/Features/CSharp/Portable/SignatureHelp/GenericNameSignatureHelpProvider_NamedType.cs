@@ -13,7 +13,8 @@ namespace Microsoft.CodeAnalysis.CSharp.SignatureHelp
             INamedTypeSymbol namedType,
             SemanticModel semanticModel,
             int position
-        ) {
+        )
+        {
             var result = new List<SymbolDisplayPart>();
 
             result.AddRange(

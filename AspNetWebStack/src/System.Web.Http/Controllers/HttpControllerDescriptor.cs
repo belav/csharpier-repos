@@ -32,7 +32,8 @@ namespace System.Web.Http.Controllers
             HttpConfiguration configuration,
             string controllerName,
             Type controllerType
-        ) {
+        )
+        {
             if (configuration == null)
             {
                 throw Error.ArgumentNull("configuration");
@@ -217,7 +218,8 @@ namespace System.Web.Http.Controllers
         private static void InvokeAttributesOnControllerType(
             HttpControllerDescriptor controllerDescriptor,
             Type type
-        ) {
+        )
+        {
             Contract.Assert(controllerDescriptor != null);
 
             if (type == null)

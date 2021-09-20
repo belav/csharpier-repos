@@ -29,7 +29,8 @@ namespace System.Buffers.Text.Tests
                 int truncatedBufferLength = 0;
                 truncatedBufferLength < testData.ExpectedOutput.Length;
                 truncatedBufferLength++
-            ) {
+            )
+            {
                 FormatterTestData<T> newTestData = new FormatterTestData<T>(
                     testData.Value,
                     testData.Format,
@@ -155,7 +156,8 @@ namespace System.Buffers.Text.Tests
             FormatterTestData<T> testData,
             ReadOnlySpan<byte> canaries,
             string pastWhat
-        ) {
+        )
+        {
             for (int i = 0; i < canaries.Length; i++)
             {
                 if (canaries[i] != 0xcc)
@@ -170,7 +172,8 @@ namespace System.Buffers.Text.Tests
             Span<byte> buffer,
             out int bytesWritten,
             StandardFormat format = default
-        ) {
+        )
+        {
             if (typeof(T) == typeof(bool))
                 return Utf8Formatter.TryFormat(
                     (bool)(object)value,
@@ -307,7 +310,8 @@ namespace System.Buffers.Text.Tests
             Span<byte> buffer,
             out int bytesWritten,
             StandardFormat format = default
-        ) {
+        )
+        {
             Type t = value.GetType();
             if (t == typeof(bool))
                 return Utf8Formatter.TryFormat((bool)value, buffer, out bytesWritten, format);

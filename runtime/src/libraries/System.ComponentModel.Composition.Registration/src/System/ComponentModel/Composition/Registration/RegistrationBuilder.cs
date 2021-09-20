@@ -104,7 +104,8 @@ namespace System.ComponentModel.Composition.Registration
 
         private IEnumerable<Tuple<object, List<Attribute>>> EvaluateThisTypeAgainstTheConvention(
             Type type
-        ) {
+        )
+        {
             List<Attribute> attributes = new List<Attribute>();
 
             var configuredMembers = new List<Tuple<object, List<Attribute>>>();
@@ -115,7 +116,8 @@ namespace System.ComponentModel.Composition.Registration
                 PartBuilder builder in _conventions.Where(
                     c => c.SelectType(type.UnderlyingSystemType)
                 )
-            ) {
+            )
+            {
                 attributes.AddRange(builder.BuildTypeAttributes(type));
 
                 specifiedConstructor |= builder.BuildConstructorAttributes(
@@ -141,7 +143,8 @@ namespace System.ComponentModel.Composition.Registration
         protected override IEnumerable<object> GetCustomAttributes(
             System.Reflection.MemberInfo member,
             IEnumerable<object> declaredAttributes
-        ) {
+        )
+        {
             IEnumerable<object> attributes = base.GetCustomAttributes(member, declaredAttributes);
 
             // Now edit the attributes returned from the base type
@@ -150,7 +153,8 @@ namespace System.ComponentModel.Composition.Registration
             if (
                 member.MemberType == MemberTypes.TypeInfo
                 || member.MemberType == MemberTypes.NestedType
-            ) {
+            )
+            {
                 MemberInfo underlyingMemberType = ((Type)member).UnderlyingSystemType;
                 using (new ReadLock(_lock))
                 {
@@ -170,7 +174,8 @@ namespace System.ComponentModel.Composition.Registration
                                     object,
                                     List<Attribute>
                                 > element in EvaluateThisTypeAgainstTheConvention((Type)member)
-                            ) {
+                            )
+                            {
                                 attributeList = element.Item2;
                                 if (attributeList != null)
                                 {
@@ -185,7 +190,8 @@ namespace System.ComponentModel.Composition.Registration
                                                         (MemberInfo)element.Item1,
                                                         out memberAttributes
                                                     )
-                                                ) {
+                                                )
+                                                {
                                                     _memberInfos.Add(
                                                         (MemberInfo)element.Item1,
                                                         element.Item2
@@ -204,7 +210,8 @@ namespace System.ComponentModel.Composition.Registration
                                                         (MemberInfo)element.Item1,
                                                         out memberAttributes
                                                     )
-                                                ) {
+                                                )
+                                                {
                                                     _memberInfos.Add(
                                                         (MemberInfo)element.Item1,
                                                         element.Item2
@@ -231,7 +238,8 @@ namespace System.ComponentModel.Composition.Registration
                                                 (ParameterInfo)element.Item1,
                                                 out List<Attribute> parameterAttributes
                                             )
-                                        ) {
+                                        )
+                                        {
                                             _parameters.Add(
                                                 (ParameterInfo)element.Item1,
                                                 element.Item2
@@ -254,7 +262,8 @@ namespace System.ComponentModel.Composition.Registration
             else if (
                 member.MemberType == System.Reflection.MemberTypes.Constructor
                 || member.MemberType == System.Reflection.MemberTypes.Property
-            ) {
+            )
+            {
                 cachedAttributes = ReadMemberCustomAttributes(member);
             }
 
@@ -265,7 +274,8 @@ namespace System.ComponentModel.Composition.Registration
         protected override IEnumerable<object> GetCustomAttributes(
             System.Reflection.ParameterInfo parameter,
             IEnumerable<object> declaredAttributes
-        ) {
+        )
+        {
             IEnumerable<object> attributes = base.GetCustomAttributes(
                 parameter,
                 declaredAttributes
@@ -291,7 +301,8 @@ namespace System.ComponentModel.Composition.Registration
                             member.DeclaringType.UnderlyingSystemType,
                             out cachedAttributes
                         )
-                    ) {
+                    )
+                    {
                         // If there is nothing for this parameter look to see if the declaring Member has been cached yet?
                         // need to do it outside of the lock, so set the flag we'll check it in a bit
                         getMemberAttributes = true;
@@ -331,7 +342,8 @@ namespace System.ComponentModel.Composition.Registration
                             parameter.Member.DeclaringType,
                             out cachedAttributes
                         )
-                    ) {
+                    )
+                    {
                         // If there is nothing for this parameter look to see if the declaring Member has been cached yet?
                         // need to do it outside of the lock, so set the flag we'll check it in a bit
                         getMemberAttributes = true;

@@ -41,7 +41,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                     ProjectId cacheKey,
                     CompilationUnitSyntax root,
                     SyntaxTreeInfo info
-                ) {
+                )
+                {
                     _recoverableRoot = new RecoverableSyntaxRoot<CompilationUnitSyntax>(
                         service,
                         root,
@@ -69,7 +70,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                     ValueSource<TextAndVersion> text,
                     Encoding encoding,
                     CompilationUnitSyntax root
-                ) {
+                )
+                {
                     return new RecoverableSyntaxTree(
                         service,
                         cacheKey,
@@ -166,7 +168,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                         ReferenceEquals(_info.Options, options)
                         && this.TryGetRoot(out var oldRoot)
                         && ReferenceEquals(root, oldRoot)
-                    ) {
+                    )
+                    {
                         return this;
                     }
 

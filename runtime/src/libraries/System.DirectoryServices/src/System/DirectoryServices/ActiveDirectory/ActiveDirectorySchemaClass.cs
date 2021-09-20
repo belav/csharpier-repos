@@ -67,7 +67,8 @@ namespace System.DirectoryServices.ActiveDirectory
                         || (context.isADAMConfigSet())
                         || (context.isServer())
                     )
-                ) {
+                )
+                {
                     throw new ArgumentException(SR.NotADOrADAM, nameof(context));
                 }
             }
@@ -105,7 +106,8 @@ namespace System.DirectoryServices.ActiveDirectory
             string ldapDisplayName,
             DirectoryEntry? classEntry,
             DirectoryEntry? schemaEntry
-        ) {
+        )
+        {
             _context = context;
             _ldapDisplayName = ldapDisplayName;
             _classEntry = classEntry;
@@ -165,7 +167,8 @@ namespace System.DirectoryServices.ActiveDirectory
             string commonName,
             Hashtable propertyValuesFromServer,
             DirectoryEntry schemaEntry
-        ) {
+        )
+        {
             _context = context;
             _schemaEntry = schemaEntry;
 
@@ -193,7 +196,8 @@ namespace System.DirectoryServices.ActiveDirectory
             string ldapDisplayName,
             DirectoryEntry classEntry,
             DirectoryEntry schemaEntry
-        ) {
+        )
+        {
             _context = context;
             _schemaEntry = schemaEntry;
             _classEntry = classEntry;
@@ -261,7 +265,8 @@ namespace System.DirectoryServices.ActiveDirectory
         public static ActiveDirectorySchemaClass FindByName(
             DirectoryContext context,
             string ldapDisplayName
-        ) {
+        )
+        {
             ActiveDirectorySchemaClass? schemaClass = null;
 
             if (context == null)
@@ -973,7 +978,8 @@ namespace System.DirectoryServices.ActiveDirectory
                             ArrayList optionalPropertyList = new ArrayList();
                             foreach (
                                 string propertyName in GetPropertyValuesRecursively(propertyNames)
-                            ) {
+                            )
+                            {
                                 if (!MandatoryProperties.Contains(propertyName))
                                 {
                                     optionalPropertyList.Add(propertyName);
@@ -1377,7 +1383,8 @@ namespace System.DirectoryServices.ActiveDirectory
             DirectoryEntry schemaEntry,
             string name,
             bool isDefunctOnServer
-        ) {
+        )
+        {
             Hashtable? propertyValuesFromServer = null;
 
             //
@@ -1762,7 +1769,8 @@ namespace System.DirectoryServices.ActiveDirectory
                 // get the properties of the auxiliary classes
                 foreach (
                     string auxSchemaClassName in GetValuesFromCache(PropertyManager.AuxiliaryClass)
-                ) {
+                )
+                {
                     ActiveDirectorySchemaClass auxSchemaClass = new ActiveDirectorySchemaClass(
                         _context,
                         auxSchemaClassName,
@@ -1774,7 +1782,8 @@ namespace System.DirectoryServices.ActiveDirectory
                         string property in auxSchemaClass.GetPropertyValuesRecursively(
                             propertyNames
                         )
-                    ) {
+                    )
+                    {
                         if (!values.Contains(property))
                         {
                             values.Add(property);
@@ -1785,7 +1794,8 @@ namespace System.DirectoryServices.ActiveDirectory
                     string auxSchemaClassName in GetValuesFromCache(
                         PropertyManager.SystemAuxiliaryClass
                     )
-                ) {
+                )
+                {
                     ActiveDirectorySchemaClass auxSchemaClass = new ActiveDirectorySchemaClass(
                         _context,
                         auxSchemaClassName,
@@ -1797,7 +1807,8 @@ namespace System.DirectoryServices.ActiveDirectory
                         string property in auxSchemaClass.GetPropertyValuesRecursively(
                             propertyNames
                         )
-                    ) {
+                    )
+                    {
                         if (!values.Contains(property))
                         {
                             values.Add(property);

@@ -100,7 +100,8 @@ namespace Microsoft.EntityFrameworkCore.Query
                         || Equals(member, _dateTimeToday)
                         || Equals(member, _dateTimeOffsetNow)
                         || Equals(member, _dateTimeOffsetUtcNow)
-                    ) {
+                    )
+                    {
                         return false;
                     }
                     break;
@@ -114,7 +115,8 @@ namespace Microsoft.EntityFrameworkCore.Query
                         || Equals(method, _randomNextOneArg)
                         || Equals(method, _randomNextTwoArgs)
                         || method.DeclaringType == typeof(DbFunctionsExtensions)
-                    ) {
+                    )
+                    {
                         return false;
                     }
                     break;

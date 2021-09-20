@@ -47,7 +47,8 @@ namespace Microsoft.AspNetCore.Http.Extensions
             bool permanent,
             bool preserveMethod,
             int expectedStatusCode
-        ) {
+        )
+        {
             var location = "http://localhost/redirect";
             var context = new DefaultHttpContext();
             context.Response.StatusCode = StatusCodes.Status200OK;

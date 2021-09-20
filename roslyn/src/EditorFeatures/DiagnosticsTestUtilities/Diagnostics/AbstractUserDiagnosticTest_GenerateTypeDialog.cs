@@ -60,7 +60,8 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Diagnostics
             IList<TypeKindOptions> assertTypeKindPresent = null,
             IList<TypeKindOptions> assertTypeKindAbsent = null,
             bool isCancelled = false
-        ) {
+        )
+        {
             var workspace = TestWorkspace.IsWorkspaceElement(initial)
                 ? TestWorkspace.Create(initial, composition: s_composition)
                 : languageName == LanguageNames.CSharp
@@ -198,7 +199,8 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Diagnostics
                 assertGenerateTypeDialogOptions != null
                 || assertTypeKindPresent != null
                 || assertTypeKindAbsent != null
-            ) {
+            )
+            {
                 var generateTypeDialogOptions =
                     testState.TestGenerateTypeOptionsService.GenerateTypeDialogOptions;
 

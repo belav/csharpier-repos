@@ -17,7 +17,8 @@ namespace System.Data.OleDb
             StringBuilder builder,
             int index,
             DBStatus status
-        ) {
+        )
+        {
             switch (status)
             {
                 case DBStatus.S_OK:
@@ -170,7 +171,8 @@ namespace System.Data.OleDb
             StringBuilder builder,
             string description,
             OleDbPropertyStatus status
-        ) {
+        )
+        {
             if (OleDbPropertyStatus.Ok == status)
             {
                 return;
@@ -274,7 +276,8 @@ namespace System.Data.OleDb
             string? provider,
             OleDbHResult hr,
             Exception? inner
-        ) {
+        )
+        {
             OleDbException e;
             if (!ADP.IsEmpty(provider))
             {
@@ -306,7 +309,8 @@ namespace System.Data.OleDb
         internal static InvalidOperationException CommandTextNotSupported(
             string provider,
             Exception? inner
-        ) {
+        )
+        {
             return ADP.DataAdapter(SR.Format(SR.OleDb_CommandTextNotSupported, provider), inner);
         }
         internal static InvalidOperationException PossiblePromptNotUserInteractive()
@@ -316,14 +320,16 @@ namespace System.Data.OleDb
         internal static InvalidOperationException ProviderUnavailable(
             string provider,
             Exception? inner
-        ) {
+        )
+        {
             //return new OleDbException(SR.Format(SR.OleDb_ProviderUnavailable, provider), (int)OleDbHResult.CO_E_CLASSSTRING, inner);
             return ADP.DataAdapter(SR.Format(SR.OleDb_ProviderUnavailable, provider), inner);
         }
         internal static InvalidOperationException TransactionsNotSupported(
             string provider,
             Exception? inner
-        ) {
+        )
+        {
             return ADP.DataAdapter(SR.Format(SR.OleDb_TransactionsNotSupported, provider), inner);
         }
         internal static ArgumentException AsynchronousNotSupported()
@@ -353,7 +359,8 @@ namespace System.Data.OleDb
         internal static ArgumentException NotSupportedSchemaTable(
             Guid schema,
             OleDbConnection connection
-        ) {
+        )
+        {
             return ADP.Argument(
                 SR.Format(
                     SR.OleDb_NotSupportedSchemaTable,
@@ -427,7 +434,8 @@ namespace System.Data.OleDb
         internal static InvalidOperationException BadStatusRowAccessor(
             int i,
             DBBindStatus rowStatus
-        ) {
+        )
+        {
             return ADP.DataAdapter(
                 SR.Format(
                     SR.OleDb_BadStatusRowAccessor,
@@ -449,7 +457,8 @@ namespace System.Data.OleDb
         internal static ArgumentException Fill_EmptyRecordSet(
             string parameter,
             Exception innerException
-        ) {
+        )
+        {
             return ADP.Argument(
                 SR.Format(SR.OleDb_Fill_EmptyRecordSet, "IRowset"),
                 parameter,
@@ -459,7 +468,8 @@ namespace System.Data.OleDb
         internal static ArgumentException Fill_EmptyRecord(
             string parameter,
             Exception innerException
-        ) {
+        )
+        {
             return ADP.Argument(SR.Format(SR.OleDb_Fill_EmptyRecord), parameter, innerException);
         }
 
@@ -485,7 +495,8 @@ namespace System.Data.OleDb
             UnsafeNativeMethods.IErrorInfo errorInfo,
             OleDbHResult hresult,
             out string message
-        ) {
+        )
+        {
             OleDbHResult hr = errorInfo.GetDescription(out message);
             if (((int)hr < 0) && ADP.IsEmpty(message))
             {

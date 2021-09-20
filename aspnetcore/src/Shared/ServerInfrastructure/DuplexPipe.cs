@@ -18,7 +18,8 @@ namespace System.IO.Pipelines
         public static DuplexPipePair CreateConnectionPair(
             PipeOptions inputOptions,
             PipeOptions outputOptions
-        ) {
+        )
+        {
             var input = new Pipe(inputOptions);
             var output = new Pipe(outputOptions);
 

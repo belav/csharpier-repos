@@ -89,7 +89,8 @@ namespace System.Reflection
                     new QCallAssembly(ref runtimeAssembly),
                     new StringHandleOnStack(ref codeBase)
                 )
-            ) {
+            )
+            {
                 return codeBase;
             }
             return null;
@@ -401,7 +402,8 @@ namespace System.Reflection
             ref StackCrawlMark stackMark,
             bool throwOnFileNotFound,
             AssemblyLoadContext? assemblyLoadContext = null
-        ) {
+        )
+        {
             RuntimeAssembly? retAssembly = null;
             InternalLoad(
                 ObjectHandleOnStack.Create(ref assemblyName),
@@ -708,7 +710,8 @@ namespace System.Reflection
             CultureInfo culture,
             Version? version,
             bool throwOnFileNotFound
-        ) {
+        )
+        {
             var an = new AssemblyName();
             an.SetPublicKey(GetPublicKey());
             an.Flags = GetFlags() | AssemblyNameFlags.PublicKey;
@@ -834,7 +837,8 @@ namespace System.Reflection
             Type type,
             List<Type> types,
             List<Exception> exceptions
-        ) {
+        )
+        {
             Type[] nestedTypes;
             try
             {

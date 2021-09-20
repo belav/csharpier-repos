@@ -2506,7 +2506,8 @@ namespace Newtonsoft.Json.Linq
             else if (
                 reader.TokenType == JsonToken.Comment
                 && settings?.CommentHandling == CommentHandling.Ignore
-            ) {
+            )
+            {
                 hasContent = reader.ReadAndMoveToContent();
             }
             else

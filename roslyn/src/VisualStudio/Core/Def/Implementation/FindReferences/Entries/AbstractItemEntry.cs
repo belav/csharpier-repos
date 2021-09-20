@@ -28,7 +28,8 @@ namespace Microsoft.VisualStudio.LanguageServices.FindUsages
             public override bool TryCreateColumnContent(
                 string columnName,
                 [NotNullWhen(true)] out FrameworkElement? content
-            ) {
+            )
+            {
                 if (columnName == StandardTableColumnDefinitions2.LineText)
                 {
                     var inlines = CreateLineTextInlines();

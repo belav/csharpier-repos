@@ -39,7 +39,8 @@ class BindHandle1
                         CreateFile("test.txt", 0x40000000, 0, 0, 2, 0x40000000, 0),
                         true
                     )
-                ) {
+                )
+                {
                     if (ThreadPool.BindHandle(sfh))
                     {
                         Console.WriteLine("BindHandle call succeeded");

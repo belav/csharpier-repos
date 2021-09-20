@@ -38,7 +38,8 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeGeneration
             ArrayBuilder<SyntaxToken> tokens,
             CodeGenerationOptions options,
             Accessibility defaultAccessibility
-        ) {
+        )
+        {
             options ??= CodeGenerationOptions.Default;
             if (!options.GenerateDefaultAccessibility && accessibility == defaultAccessibility)
             {
@@ -73,7 +74,8 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeGeneration
         public static TypeDeclarationSyntax AddMembersTo(
             TypeDeclarationSyntax destination,
             SyntaxList<MemberDeclarationSyntax> members
-        ) {
+        )
+        {
             destination = ReplaceUnterminatedConstructs(destination);
 
             return ConditionallyAddFormattingAnnotationTo(
@@ -84,7 +86,8 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeGeneration
 
         private static TypeDeclarationSyntax ReplaceUnterminatedConstructs(
             TypeDeclarationSyntax destination
-        ) {
+        )
+        {
             const string MultiLineCommentTerminator = "*/";
             var lastToken = destination.GetLastToken();
             var updatedToken = lastToken.ReplaceTrivia(
@@ -217,7 +220,8 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeGeneration
                 index != 0
                 && declarationList[index - 1].ContainsDiagnostics
                 && AreBracesMissing(declarationList[index - 1])
-            ) {
+            )
+            {
                 return declarationList.Insert(
                     index,
                     declaration.WithLeadingTrivia(SyntaxFactory.ElasticCarriageReturnLineFeed)
@@ -240,7 +244,8 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeGeneration
         public static SyntaxNode GetContextNode(
             Location location,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var contextLocation = location as Location;
 
             var contextTree =
@@ -254,7 +259,8 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeGeneration
 
         public static ExplicitInterfaceSpecifierSyntax GenerateExplicitInterfaceSpecifier(
             IEnumerable<ISymbol> implementations
-        ) {
+        )
+        {
             var implementation = implementations.FirstOrDefault();
             if (implementation == null)
             {
@@ -298,7 +304,8 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeGeneration
             if (
                 !options.GenerateDocumentationComments
                 || node.GetLeadingTrivia().Any(t => t.IsDocComment())
-            ) {
+            )
+            {
                 return node;
             }
 

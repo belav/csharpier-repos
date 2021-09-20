@@ -12,7 +12,8 @@ namespace Microsoft.CodeAnalysis.MSBuild
         public DiagnosticReportingOptions(
             DiagnosticReportingMode onPathFailure,
             DiagnosticReportingMode onLoaderFailure
-        ) {
+        )
+        {
             OnPathFailure = onPathFailure;
             OnLoaderFailure = onLoaderFailure;
         }

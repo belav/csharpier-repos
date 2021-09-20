@@ -151,7 +151,8 @@ namespace Microsoft.AspNetCore.HttpSys.Internal
                         new StringSegment(rawValue[0]).Trim(),
                         out value
                     )
-                ) {
+                )
+                {
                     _contentLengthText = rawValue;
                     _contentLength = value;
                     return value;

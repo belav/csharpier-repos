@@ -38,7 +38,8 @@ namespace System.CodeDom.Tests
         public void Ctor_Method_Parameters(
             CodeMethodReferenceExpression method,
             CodeExpression[] parameters
-        ) {
+        )
+        {
             var methodInvoke = new CodeMethodInvokeExpression(method, parameters);
             Assert.Equal(
                 (method ?? new CodeMethodReferenceExpression()).TargetObject,
@@ -69,7 +70,8 @@ namespace System.CodeDom.Tests
             CodeExpression targetObject,
             string methodName,
             CodeExpression[] parameters
-        ) {
+        )
+        {
             var methodInvoke = new CodeMethodInvokeExpression(targetObject, methodName, parameters);
             Assert.Equal(targetObject, methodInvoke.Method.TargetObject);
             Assert.Equal(methodName ?? string.Empty, methodInvoke.Method.MethodName);

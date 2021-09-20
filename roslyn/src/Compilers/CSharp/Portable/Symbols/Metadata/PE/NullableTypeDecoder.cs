@@ -23,7 +23,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols.Metadata.PE
             PEModuleSymbol containingModule,
             Symbol accessSymbol,
             Symbol nullableContext
-        ) {
+        )
+        {
             Debug.Assert(metadataType.HasType);
             Debug.Assert(accessSymbol.IsDefinition);
             Debug.Assert((object)accessSymbol.ContainingModule == containingModule);
@@ -41,7 +42,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols.Metadata.PE
                     out defaultTransformFlag,
                     out nullableTransformFlags
                 )
-            ) {
+            )
+            {
                 byte? value = nullableContext.GetNullableContextValue();
                 if (value == null)
                 {
@@ -62,7 +64,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols.Metadata.PE
             TypeWithAnnotations metadataType,
             byte defaultTransformFlag,
             ImmutableArray<byte> nullableTransformFlags
-        ) {
+        )
+        {
             if (nullableTransformFlags.IsDefault && defaultTransformFlag == 0)
             {
                 return metadataType;
@@ -77,7 +80,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols.Metadata.PE
                     ref position,
                     out result
                 ) && (nullableTransformFlags.IsDefault || position == nullableTransformFlags.Length)
-            ) {
+            )
+            {
                 return result;
             }
 

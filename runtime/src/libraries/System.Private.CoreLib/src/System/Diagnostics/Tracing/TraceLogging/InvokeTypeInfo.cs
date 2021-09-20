@@ -29,7 +29,8 @@ namespace System.Diagnostics.Tracing
                 typeAnalysis.opcode,
                 typeAnalysis.keywords,
                 typeAnalysis.tags
-            ) {
+            )
+        {
             if (typeAnalysis.properties.Length != 0)
                 this.properties = typeAnalysis.properties;
         }
@@ -38,7 +39,8 @@ namespace System.Diagnostics.Tracing
             TraceLoggingMetadataCollector collector,
             string? name,
             EventFieldFormat format
-        ) {
+        )
+        {
             TraceLoggingMetadataCollector groupCollector = collector.AddGroup(name);
             if (this.properties != null)
             {

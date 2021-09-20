@@ -1032,7 +1032,8 @@ class C {
             ExpressionSyntax expr,
             ConversionKind ept1,
             ConversionKind ept2
-        ) {
+        )
+        {
             var info = semanticModel.GetTypeInfo(expr);
             Assert.NotEqual(default, info);
             Assert.NotNull(info.ConvertedType);
@@ -1066,7 +1067,8 @@ class C {
             ExpressionSyntax expr,
             ITypeSymbol expsym,
             ConversionKind expkind
-        ) {
+        )
+        {
             var info = semanticModel.GetTypeInfo(expr);
             Assert.NotEqual(default, info);
             Assert.NotNull(info.ConvertedType);
@@ -1393,7 +1395,8 @@ class C {
             uint offset,
             EnumOverflowKind expectedOverflowKind,
             ConstantValue expectedValue
-        ) {
+        )
+        {
             ConstantValue actualValue;
             var actualOverflowKind = EnumConstantHelper.OffsetValue(
                 constantValue,
@@ -2799,7 +2802,8 @@ public class D
             string constraints,
             string memberName,
             out ITypeParameterSymbol typeParameter
-        ) {
+        )
+        {
             var template =
                 @"
 {0}

@@ -102,7 +102,8 @@ class C
         private static void VerifyMissingMember(
             WellKnownMember member,
             params DiagnosticDescription[] expected
-        ) {
+        )
+        {
             foreach (var source in new[] { _enumerable, _enumerator })
             {
                 VerifyMissingMember(source, member, expected);
@@ -113,7 +114,8 @@ class C
             string source,
             WellKnownMember member,
             params DiagnosticDescription[] expected
-        ) {
+        )
+        {
             var lib = CreateCompilationWithTasksExtensions(AsyncStreamsTypes);
             var lib_ref = lib.EmitToImageReference();
             var comp = CreateCompilationWithTasksExtensions(source, references: new[] { lib_ref });
@@ -124,7 +126,8 @@ class C
         private static void VerifyMissingType(
             WellKnownType type,
             params DiagnosticDescription[] expected
-        ) {
+        )
+        {
             foreach (var source in new[] { _enumerable, _enumerator })
             {
                 VerifyMissingType(source, type, expected);
@@ -135,7 +138,8 @@ class C
             string source,
             WellKnownType type,
             params DiagnosticDescription[] expected
-        ) {
+        )
+        {
             var lib = CreateCompilationWithTasksExtensions(new[] { AsyncStreamsTypes });
             var lib_ref = lib.EmitToImageReference();
             var comp = CreateCompilationWithTasksExtensions(source, references: new[] { lib_ref });
@@ -3959,7 +3963,8 @@ class C
         public void AsyncIteratorWithAwaitCompletedAndYield_WithEnumeratorCancellation_ExtendedPartialMethod(
             string definitionAttributes,
             string implementationAttributes
-        ) {
+        )
+        {
             string source =
                 @"
 using System.Runtime.CompilerServices;
@@ -4748,7 +4753,8 @@ class C
             CSharpCompilation comp,
             string methodName,
             string[] expectedFields
-        ) {
+        )
+        {
             var peReader = new PEReader(comp.EmitToArray());
             var metadataReader = peReader.GetMetadataReader();
             var types = metadataReader.TypeDefinitions.Select(
@@ -5018,7 +5024,8 @@ class C
         public void AsyncIteratorWithAwaitCompletedAndYieldBreak(
             int iterations,
             string expectedOutput
-        ) {
+        )
+        {
             string source =
                 @"
 using static System.Console;
@@ -6077,7 +6084,8 @@ public class C
         public void TryFinally_WithAwaitsOnly_WithSlowThrowInAwait(
             int iterations,
             string expectedOutput
-        ) {
+        )
+        {
             string source =
                 @"
 using static System.Console;
@@ -6122,7 +6130,8 @@ public class C
         public void TryFinally_WithAwaitsOnly_WithFastThrowInAwait(
             int iterations,
             string expectedOutput
-        ) {
+        )
+        {
             string source =
                 @"
 using static System.Console;
@@ -6977,7 +6986,8 @@ public class C
         public void TryFinally_AwaitsInVariousPositions_NoYieldInTry(
             int iterations,
             string expectedOutput
-        ) {
+        )
+        {
             string source =
                 @"
 using static System.Console;
@@ -7021,7 +7031,8 @@ public class C
         public void TryFinally_AwaitsInVariousPositions_WithYieldInTry(
             int iterations,
             string expectedOutput
-        ) {
+        )
+        {
             string source =
                 @"
 using static System.Console;
@@ -7064,7 +7075,8 @@ public class C
         public void TryFinally_AwaitsInVariousPositions_WithYieldInTry_NoThrow(
             int iterations,
             string expectedOutput
-        ) {
+        )
+        {
             string source =
                 @"
 using static System.Console;

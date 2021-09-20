@@ -8,9 +8,8 @@ namespace Microsoft.EntityFrameworkCore
     public class OverzealousInitializationSqliteTest
         : OverzealousInitializationTestBase<OverzealousInitializationSqliteTest.OverzealousInitializationSqliteFixture>
     {
-        public OverzealousInitializationSqliteTest(
-            OverzealousInitializationSqliteFixture fixture
-        ) : base(fixture) { }
+        public OverzealousInitializationSqliteTest(OverzealousInitializationSqliteFixture fixture)
+            : base(fixture) { }
 
         public class OverzealousInitializationSqliteFixture : OverzealousInitializationFixtureBase
         {

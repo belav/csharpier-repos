@@ -195,7 +195,8 @@ namespace System.Globalization
             CalendarId calendarId,
             CalendarDataType dataType,
             out string? calendarString
-        ) {
+        )
+        {
             Debug.Assert(!GlobalizationMode.Invariant);
 
             return Interop.CallStringMethod(
@@ -224,7 +225,8 @@ namespace System.Globalization
             CalendarId calendarId,
             CalendarDataType dataType,
             out string[]? datePatterns
-        ) {
+        )
+        {
             datePatterns = null;
 
             IcuEnumCalendarsData callbackContext = default;
@@ -429,7 +431,8 @@ namespace System.Globalization
             string input,
             StringBuilder destination,
             ref int index
-        ) {
+        )
+        {
             char dayChar = input[index];
             int occurrences = CountOccurrences(input, dayChar, ref index);
             occurrences = Math.Max(occurrences, 3);
@@ -459,7 +462,8 @@ namespace System.Globalization
             CalendarDataType dataType,
             out string[]? monthNames,
             ref string? leapHebrewMonthName
-        ) {
+        )
+        {
             monthNames = null;
 
             IcuEnumCalendarsData callbackContext = default;
@@ -498,7 +502,8 @@ namespace System.Globalization
             CalendarId calendarId,
             CalendarDataType dataType,
             out string[]? eraNames
-        ) {
+        )
+        {
             bool result = EnumCalendarInfo(localeName, calendarId, dataType, out eraNames);
 
             // .NET expects that only the Japanese calendars have more than 1 era.
@@ -507,7 +512,8 @@ namespace System.Globalization
                 calendarId != CalendarId.JAPAN
                 && calendarId != CalendarId.JAPANESELUNISOLAR
                 && eraNames?.Length > 0
-            ) {
+            )
+            {
                 string[] latestEraName = new string[] { eraNames![eraNames.Length - 1] };
                 eraNames = latestEraName;
             }
@@ -520,7 +526,8 @@ namespace System.Globalization
             CalendarId calendarId,
             CalendarDataType dataType,
             out string[]? calendarData
-        ) {
+        )
+        {
             calendarData = null;
 
             IcuEnumCalendarsData callbackContext = default;
@@ -539,7 +546,8 @@ namespace System.Globalization
             CalendarId calendarId,
             CalendarDataType dataType,
             ref IcuEnumCalendarsData callbackContext
-        ) {
+        )
+        {
             return Interop.Globalization.EnumCalendarInfo(
                 &EnumCalendarInfoCallback,
                 localeName,

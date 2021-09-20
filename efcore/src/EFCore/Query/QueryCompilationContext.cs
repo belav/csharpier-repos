@@ -220,14 +220,16 @@ namespace Microsoft.EntityFrameworkCore.Query
         public virtual ParameterExpression RegisterRuntimeParameter(
             string name,
             LambdaExpression valueExtractor
-        ) {
+        )
+        {
             Check.NotEmpty(name, nameof(name));
             Check.NotNull(valueExtractor, nameof(valueExtractor));
 
             if (
                 valueExtractor.Parameters.Count != 1
                 || valueExtractor.Parameters[0] != QueryContextParameter
-            ) {
+            )
+            {
                 throw new ArgumentException(
                     CoreStrings.RuntimeParameterMissingParameter,
                     nameof(valueExtractor)

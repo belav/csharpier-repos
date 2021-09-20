@@ -47,7 +47,8 @@ namespace System.CommandLine.DragonFruit.Tests
         public async Task Generated_boolean_parameters_will_accept_one_argument(
             string commandLine,
             bool expected
-        ) {
+        )
+        {
             var parser = new CommandLineBuilder().ConfigureRootCommandFromMethod(
                     GetMethodInfo(nameof(Method_taking_bool)),
                     this
@@ -86,7 +87,8 @@ namespace System.CommandLine.DragonFruit.Tests
             string methodName,
             int minNumberOfValues,
             int maxNumberOfValues
-        ) {
+        )
+        {
             var parser = new CommandLineBuilder().ConfigureRootCommandFromMethod(
                     GetMethodInfo(methodName)
                 )
@@ -109,7 +111,8 @@ namespace System.CommandLine.DragonFruit.Tests
         public void Parameters_named_arguments_generate_command_arguments_having_the_correct_name(
             string methodName,
             string expectedArgName
-        ) {
+        )
+        {
             var parser = new CommandLineBuilder().ConfigureRootCommandFromMethod(
                     GetMethodInfo(methodName)
                 )
@@ -156,7 +159,8 @@ namespace System.CommandLine.DragonFruit.Tests
         public void Parameters_named_arguments_generate_command_arguments_having_the_correct_type(
             string methodName,
             Type expectedType
-        ) {
+        )
+        {
             var parser = new CommandLineBuilder().ConfigureRootCommandFromMethod(
                     GetMethodInfo(methodName)
                 )
@@ -217,7 +221,8 @@ namespace System.CommandLine.DragonFruit.Tests
         [InlineData(typeof(CancellationToken))]
         public void Options_are_not_built_for_infrastructure_types_exposed_by_method_parameters(
             Type type
-        ) {
+        )
+        {
             var targetType = typeof(ClassWithMethodHavingParameter<>).MakeGenericType(type);
 
             var handlerMethod = targetType.GetMethod(

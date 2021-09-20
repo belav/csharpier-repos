@@ -38,7 +38,8 @@ namespace Castle.DynamicProxy.Generators
         protected override ArgumentReference[] GetBaseCtorArguments(
             Type targetFieldType,
             out ConstructorInfo baseConstructor
-        ) {
+        )
+        {
             baseConstructor = InvocationMethods.CompositionInvocationConstructor;
             return new[]
             {
@@ -65,7 +66,8 @@ namespace Castle.DynamicProxy.Generators
             ParameterInfo[] parameters,
             MethodEmitter invokeMethodOnTarget,
             Reference targetField
-        ) {
+        )
+        {
             invokeMethodOnTarget.CodeBuilder.AddStatement(
                 new MethodInvocationExpression(
                     SelfReference.Self,

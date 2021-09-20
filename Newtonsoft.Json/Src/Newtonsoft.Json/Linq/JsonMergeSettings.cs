@@ -94,7 +94,8 @@ namespace Newtonsoft.Json.Linq
                 if (
                     value < StringComparison.CurrentCulture
                     || value > StringComparison.OrdinalIgnoreCase
-                ) {
+                )
+                {
                     throw new ArgumentOutOfRangeException(nameof(value));
                 }
 

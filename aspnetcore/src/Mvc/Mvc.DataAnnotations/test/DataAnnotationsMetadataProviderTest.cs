@@ -131,7 +131,8 @@ namespace Microsoft.AspNetCore.Mvc.DataAnnotations
             object attribute,
             Func<DisplayMetadata, object> accessor,
             object expected
-        ) {
+        )
+        {
             // Arrange
             var provider = CreateProvider();
 
@@ -742,7 +743,8 @@ namespace Microsoft.AspNetCore.Mvc.DataAnnotations
         public void CreateDisplayMetadata_IsFlagsEnum_ReflectsModelType(
             Type type,
             bool expectedIsFlagsEnum
-        ) {
+        )
+        {
             // Arrange
             var provider = CreateProvider();
 
@@ -874,7 +876,8 @@ namespace Microsoft.AspNetCore.Mvc.DataAnnotations
         public void CreateDisplayMetadata_EnumNamesAndValues_ReflectsModelType(
             Type type,
             IReadOnlyDictionary<string, string> expectedDictionary
-        ) {
+        )
+        {
             // Arrange
             var provider = CreateProvider();
 
@@ -1247,7 +1250,8 @@ namespace Microsoft.AspNetCore.Mvc.DataAnnotations
         public void CreateDisplayMetadata_EnumGroupedDisplayNamesAndValues_ReflectsModelType(
             Type type,
             IEnumerable<KeyValuePair<EnumGroupAndName, string>> expectedKeyValuePairs
-        ) {
+        )
+        {
             // Arrange
             var provider = CreateProvider();
 
@@ -1436,7 +1440,8 @@ namespace Microsoft.AspNetCore.Mvc.DataAnnotations
         [InlineData(null)]
         public void CreateValidationMetadata_NoRequiredAttribute_IsRequiredLeftAlone(
             bool? initialValue
-        ) {
+        )
+        {
             // Arrange
             var provider = CreateProvider();
 
@@ -1568,7 +1573,8 @@ namespace Microsoft.AspNetCore.Mvc.DataAnnotations
         [InlineData(nameof(DerivedTypeWithAllNonNullProperties.Property2))]
         public void CreateValidationMetadata_InfersRequiredAttributeOnDerivedType_BaseAnDerivedTypHaveAllNonNullProperties(
             string propertyName
-        ) {
+        )
+        {
             // Arrange
             var provider = CreateProvider();
 
@@ -1661,7 +1667,8 @@ namespace Microsoft.AspNetCore.Mvc.DataAnnotations
         [InlineData(nameof(DerivedTypeWithNullableProperties.Property2))]
         public void CreateValidationMetadata_BaseAnDerivedTypHaveAllNullableProperties_DoesNotInferRequiredAttribute(
             string propertyName
-        ) {
+        )
+        {
             // Arrange
             var provider = CreateProvider();
 
@@ -1869,7 +1876,8 @@ namespace Microsoft.AspNetCore.Mvc.DataAnnotations
         [InlineData(false)]
         public void CreateBindingMetadata_RequiredAttribute_IsBindingRequiredLeftAlone(
             bool initialValue
-        ) {
+        )
+        {
             // Arrange
             var provider = CreateProvider();
 
@@ -2124,7 +2132,8 @@ namespace Microsoft.AspNetCore.Mvc.DataAnnotations
             MvcOptions options = null,
             MvcDataAnnotationsLocalizationOptions localizationOptions = null,
             IStringLocalizerFactory stringLocalizerFactory = null
-        ) {
+        )
+        {
             return new DataAnnotationsMetadataProvider(
                 options ?? new MvcOptions(),
                 Options.Create(localizationOptions ?? new MvcDataAnnotationsLocalizationOptions()),
@@ -2134,7 +2143,8 @@ namespace Microsoft.AspNetCore.Mvc.DataAnnotations
 
         private DataAnnotationsMetadataProvider CreateIStringLocalizerProvider(
             bool useStringLocalizer
-        ) {
+        )
+        {
             var stringLocalizer = new Mock<IStringLocalizer>(MockBehavior.Strict);
             stringLocalizer.Setup(loc => loc[It.IsAny<string>()])
                 .Returns<string>(
@@ -2183,7 +2193,8 @@ namespace Microsoft.AspNetCore.Mvc.DataAnnotations
             public bool Equals(
                 KeyValuePair<EnumGroupAndName, string> x,
                 KeyValuePair<EnumGroupAndName, string> y
-            ) {
+            )
+            {
                 using (new CultureReplacer(string.Empty, string.Empty))
                 {
                     return x.Key.Name.Equals(y.Key.Name, StringComparison.Ordinal)

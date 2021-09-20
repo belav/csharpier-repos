@@ -58,7 +58,8 @@ namespace System.Reflection.Emit
             MethodBuilder? mbuilder,
             string name,
             int index
-        ) {
+        )
+        {
             this.tbuilder = tbuilder;
             this.mbuilder = mbuilder;
             this.name = name;
@@ -68,7 +69,8 @@ namespace System.Reflection.Emit
         public void SetBaseTypeConstraint(
             [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)]
                 Type? baseTypeConstraint
-        ) {
+        )
+        {
             this.base_type = baseTypeConstraint ?? typeof(object);
         }
 
@@ -80,7 +82,8 @@ namespace System.Reflection.Emit
 
         public void SetGenericParameterAttributes(
             GenericParameterAttributes genericParameterAttributes
-        ) {
+        )
+        {
             this.attrs = genericParameterAttributes;
         }
 
@@ -125,7 +128,8 @@ namespace System.Reflection.Emit
             CallingConventions callConvention,
             Type[] types,
             ParameterModifier[]? modifiers
-        ) {
+        )
+        {
             throw not_supported();
         }
 
@@ -202,7 +206,8 @@ namespace System.Reflection.Emit
             string name,
             MemberTypes type,
             BindingFlags bindingAttr
-        ) {
+        )
+        {
             throw not_supported();
         }
 
@@ -226,7 +231,8 @@ namespace System.Reflection.Emit
             CallingConventions callConvention,
             Type[]? types,
             ParameterModifier[]? modifiers
-        ) {
+        )
+        {
             throw not_supported();
         }
 
@@ -268,7 +274,8 @@ namespace System.Reflection.Emit
             Type? returnType,
             Type[]? types,
             ParameterModifier[]? modifiers
-        ) {
+        )
+        {
             throw not_supported();
         }
 
@@ -340,7 +347,8 @@ namespace System.Reflection.Emit
             ParameterModifier[]? modifiers,
             CultureInfo? culture,
             string[]? namedParameters
-        ) {
+        )
+        {
             throw not_supported();
         }
 

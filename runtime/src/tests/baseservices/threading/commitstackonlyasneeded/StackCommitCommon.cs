@@ -128,7 +128,8 @@ namespace StackCommitTest
             string threadName,
             bool shouldBePreCommitted,
             Int32 expectedStackSize
-        ) {
+        )
+        {
             bool result = true;
 
             byte* stackBase;
@@ -179,7 +180,8 @@ namespace StackCommitTest
                                     info.BaseAddress != stackBase
                                     || info.RegionSize.ToInt64() > PageSize
                                 )
-                            ) {
+                            )
+                            {
                                 result = false;
                                 regionType = "<---- should be pre-committed";
                             }
@@ -232,7 +234,8 @@ namespace StackCommitTest
             bool shouldBePreCommitted,
             Int32 expectedThreadSize,
             Action<Action> runOnThread
-        ) {
+        )
+        {
             bool result = false;
             ManualResetEventSlim mre = new ManualResetEventSlim();
 
@@ -271,7 +274,8 @@ namespace StackCommitTest
                 &
                 //RunTestItem("new Thread(512kb)", true, 512 * 1024, action => new Thread(() => action(), 512 * 1024).Start()) &
                 RunTestItem("Finalizer", shouldBePreCommitted, -1, action => Finalizer.Run(action))
-            ) {
+            )
+            {
                 return true;
             }
 

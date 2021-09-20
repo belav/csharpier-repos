@@ -24,7 +24,8 @@ namespace Roslyn.Test.Utilities
         public static IEnumerable<Type> GetAllTypesImplementingGivenInterface(
             Assembly assembly,
             Type interfaceType
-        ) {
+        )
+        {
             if (assembly == null || interfaceType == null || !interfaceType.IsInterface)
             {
                 throw new ArgumentException(
@@ -69,7 +70,8 @@ namespace Roslyn.Test.Utilities
         public static TempFile CreateCSharpAnalyzerAssemblyWithTestAnalyzer(
             TempDirectory dir,
             string assemblyName
-        ) {
+        )
+        {
             var analyzerSource =
                 @"
 using System;
@@ -110,7 +112,8 @@ public class TestAnalyzer : DiagnosticAnalyzer
 
         public static ImmutableArray<byte> CreateCSharpAnalyzerNetStandard13(
             string analyzerAssemblyName
-        ) {
+        )
+        {
             var minSystemCollectionsImmutableSource =
                 @"
 [assembly: System.Reflection.AssemblyVersion(""1.2.3.0"")]
@@ -401,7 +404,8 @@ public class TestAnalyzer : DiagnosticAnalyzer
                     $@"SOFTWARE\Microsoft\MSBuild\ToolsVersions\{vsVersion}",
                     false
                 )
-            ) {
+            )
+            {
                 if (key != null)
                 {
                     var toolsPath = key.GetValue("MSBuildToolsPath");

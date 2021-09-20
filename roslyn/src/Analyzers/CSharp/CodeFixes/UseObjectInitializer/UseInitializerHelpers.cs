@@ -13,7 +13,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UseObjectInitializer
         public static ObjectCreationExpressionSyntax GetNewObjectCreation(
             ObjectCreationExpressionSyntax objectCreation,
             SeparatedSyntaxList<ExpressionSyntax> expressions
-        ) {
+        )
+        {
             var openBrace = SyntaxFactory.Token(SyntaxKind.OpenBraceToken)
                 .WithTrailingTrivia(SyntaxFactory.ElasticCarriageReturnLineFeed);
             var initializer = SyntaxFactory.InitializerExpression(
@@ -25,7 +26,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UseObjectInitializer
             if (
                 objectCreation.ArgumentList != null
                 && objectCreation.ArgumentList.Arguments.Count == 0
-            ) {
+            )
+            {
                 objectCreation = objectCreation.WithType(
                         objectCreation.Type.WithTrailingTrivia(
                             objectCreation.ArgumentList.GetTrailingTrivia()

@@ -39,7 +39,8 @@ namespace Microsoft.AspNetCore.Server.IntegrationTesting.IIS
             string name,
             string attribute,
             string attributeValue
-        ) {
+        )
+        {
             var existing = element.Elements(name)
                 .FirstOrDefault(e => e.Attribute(attribute)?.Value == attributeValue);
             if (existing == null)
@@ -56,7 +57,8 @@ namespace Microsoft.AspNetCore.Server.IntegrationTesting.IIS
             string name,
             string attribute,
             string attributeValue
-        ) {
+        )
+        {
             var innerElement = new XElement(name, new XAttribute(attribute, attributeValue));
             element.Add(innerElement);
 

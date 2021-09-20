@@ -47,7 +47,8 @@ namespace Microsoft.AspNetCore.Cors.Infrastructure
             ICorsService corsService,
             ILoggerFactory loggerFactory,
             string? policyName
-        ) {
+        )
+        {
             if (next == null)
             {
                 throw new ArgumentNullException(nameof(next));
@@ -81,7 +82,8 @@ namespace Microsoft.AspNetCore.Cors.Infrastructure
             ICorsService corsService,
             CorsPolicy policy,
             ILoggerFactory loggerFactory
-        ) {
+        )
+        {
             if (next == null)
             {
                 throw new ArgumentNullException(nameof(next));
@@ -171,7 +173,8 @@ namespace Microsoft.AspNetCore.Cors.Infrastructure
             else if (
                 corsMetadata is IEnableCorsAttribute enableCorsAttribute
                 && enableCorsAttribute.PolicyName != null
-            ) {
+            )
+            {
                 // If a policy name has been provided on the endpoint metadata then prioritizing it above the static middleware policy
                 policyName = enableCorsAttribute.PolicyName;
                 corsPolicy = null;

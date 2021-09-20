@@ -834,7 +834,8 @@ namespace ConsoleApp1
         private async Task VerifySymbolKinds(
             string markup,
             params SymbolKindOrTypeKind[] expectedSymbolKinds
-        ) {
+        )
+        {
             var result = await GetResultsAsync(markup);
             Assert.True(expectedSymbolKinds.SequenceEqual(result.PossibleSymbolKinds));
         }

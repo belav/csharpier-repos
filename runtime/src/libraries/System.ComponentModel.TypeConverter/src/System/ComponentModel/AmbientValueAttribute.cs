@@ -21,7 +21,8 @@ namespace System.ComponentModel
         public AmbientValueAttribute(
             [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)] Type type,
             string value
-        ) {
+        )
+        {
             // The try/catch here is because attributes should never throw exceptions. We would fail to
             // load an otherwise normal class.
             try

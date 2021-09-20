@@ -18,7 +18,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.InlineRename
             SnapshotSpan span,
             RenameSpanKind type,
             out TagSpan<ITextMarkerTag> tagSpan
-        ) {
+        )
+        {
             ITextMarkerTag tagKind;
             switch (type)
             {

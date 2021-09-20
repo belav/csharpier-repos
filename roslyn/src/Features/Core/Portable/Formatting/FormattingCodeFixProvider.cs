@@ -55,7 +55,8 @@ namespace Microsoft.CodeAnalysis.Formatting
             CodeFixContext context,
             Diagnostic diagnostic,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var options = await context.Document.GetOptionsAsync(cancellationToken)
                 .ConfigureAwait(false);
             var tree = await context.Document.GetSyntaxTreeAsync(cancellationToken)
@@ -78,7 +79,8 @@ namespace Microsoft.CodeAnalysis.Formatting
             ImmutableArray<Diagnostic> diagnostics,
             SyntaxEditor editor,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var options = await document.GetOptionsAsync(cancellationToken).ConfigureAwait(false);
             var updatedDocument = await Formatter.FormatAsync(document, options, cancellationToken)
                 .ConfigureAwait(false);
@@ -90,13 +92,12 @@ namespace Microsoft.CodeAnalysis.Formatting
 
         private sealed class MyCodeAction : CodeAction.DocumentChangeAction
         {
-            public MyCodeAction(
-                Func<CancellationToken, Task<Document>> createChangedDocument
-            ) : base(
-                FeaturesResources.Fix_formatting,
-                createChangedDocument,
-                FeaturesResources.Fix_formatting
-            ) { }
+            public MyCodeAction(Func<CancellationToken, Task<Document>> createChangedDocument)
+                : base(
+                    FeaturesResources.Fix_formatting,
+                    createChangedDocument,
+                    FeaturesResources.Fix_formatting
+                ) { }
         }
     }
 }

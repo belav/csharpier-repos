@@ -72,7 +72,8 @@ namespace System.PrivateUri.Tests
         public void DangerousExposed_InitializeAndValidate(
             Uri uri,
             out UriFormatException parsingError
-        ) {
+        )
+        {
             InitializeAndValidate(uri, out parsingError);
         }
     }

@@ -17,7 +17,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Certificates
         public CertificateConfigLoader(
             IHostEnvironment hostEnvironment,
             ILogger<KestrelServer> logger
-        ) {
+        )
+        {
             HostEnvironment = hostEnvironment;
             Logger = logger;
         }
@@ -106,7 +107,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Certificates
             X509Certificate2 certificate,
             string keyPath,
             string? password
-        ) {
+        )
+        {
             // OIDs for the certificate key types.
             const string RSAOid = "1.2.840.113549.1.1.1";
             const string DSAOid = "1.2.840.10040.4.1";
@@ -172,7 +174,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Certificates
         private static InvalidOperationException CreateErrorGettingPrivateKeyException(
             string keyPath,
             Exception ex
-        ) {
+        )
+        {
             return new InvalidOperationException(
                 $"Error getting private key from '{keyPath}'.",
                 ex
@@ -193,7 +196,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Certificates
             AsymmetricAlgorithm asymmetricAlgorithm,
             string keyText,
             string? password
-        ) {
+        )
+        {
             if (password == null)
             {
                 asymmetricAlgorithm.ImportFromPem(keyText);

@@ -28,7 +28,8 @@ namespace System.ComponentModel.Tests
             string displayMember,
             string valueMember,
             string lookupMember
-        ) {
+        )
+        {
             var attribute = new LookupBindingPropertiesAttribute(
                 dataSource,
                 displayMember,
@@ -193,7 +194,8 @@ namespace System.ComponentModel.Tests
             LookupBindingPropertiesAttribute attribute,
             object other,
             bool expected
-        ) {
+        )
+        {
             Assert.Equal(expected, attribute.Equals(other));
         }
 

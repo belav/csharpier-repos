@@ -168,7 +168,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.Suggestions
                 ISuggestedActionCategorySet requestedActionCategories,
                 SnapshotSpan range,
                 IUIThreadOperationContext operationContext
-            ) {
+            )
+            {
                 return GetSuggestedActions(
                     requestedActionCategories,
                     range,
@@ -182,7 +183,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.Suggestions
                 SnapshotSpan range,
                 IUIThreadOperationContext? operationContext,
                 CancellationToken cancellationToken
-            ) {
+            )
+            {
                 AssertIsForeground();
 
                 if (IsDisposed)
@@ -197,7 +199,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.Suggestions
                             allowCancellation: true,
                             description: EditorFeaturesResources.Gathering_Suggestions_Waiting_for_the_solution_to_fully_load
                         )
-                    ) {
+                    )
+                    {
                         // This needs to run under threading context otherwise, we can deadlock on VS
                         ThreadingContext.JoinableTaskFactory.Run(
                             () =>
@@ -211,7 +214,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.Suggestions
                         FunctionId.SuggestedActions_GetSuggestedActions,
                         cancellationToken
                     )
-                ) {
+                )
+                {
                     var document = range.Snapshot.GetOpenDocumentInCurrentContextWithChanges();
                     if (document == null)
                     {
@@ -274,7 +278,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.Suggestions
             [return: NotNullIfNotNull("unifiedSuggestedActionSet")]
             private SuggestedActionSet? ConvertToSuggestedActionSet(
                 UnifiedSuggestedActionSet? unifiedSuggestedActionSet
-            ) {
+            )
+            {
                 // May be null in cases involving CodeFixSuggestedActions since FixAllFlavors may be null.
                 if (unifiedSuggestedActionSet == null)
                 {
@@ -370,7 +375,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.Suggestions
                 SnapshotSpan range,
                 Func<string, IDisposable?> addOperationScope,
                 CancellationToken cancellationToken
-            ) {
+            )
+            {
                 this.AssertIsForeground();
 
                 if (
@@ -379,7 +385,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.Suggestions
                     || !requestedActionCategories.Contains(
                         PredefinedSuggestedActionCategoryNames.CodeFix
                     )
-                ) {
+                )
+                {
                     return ImmutableArray<UnifiedSuggestedActionSet>.Empty;
                 }
 
@@ -423,7 +430,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.Suggestions
                 TextSpan? selection,
                 Func<string, IDisposable?> addOperationScope,
                 CancellationToken cancellationToken
-            ) {
+            )
+            {
                 this.AssertIsForeground();
 
                 if (!selection.HasValue)
@@ -437,7 +445,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.Suggestions
                     !workspace.Options.GetOption(EditorComponentOnOffOptions.CodeRefactorings)
                     || _owner._codeRefactoringService == null
                     || !supportsFeatureService.SupportsRefactorings(_subjectBuffer)
-                ) {
+                )
+                {
                     return ImmutableArray<UnifiedSuggestedActionSet>.Empty;
                 }
 
@@ -464,7 +473,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.Suggestions
                 ISuggestedActionCategorySet requestedActionCategories,
                 SnapshotSpan range,
                 CancellationToken cancellationToken
-            ) {
+            )
+            {
                 // We implement GetSuggestedActionCategoriesAsync so this should not be called
                 throw new NotImplementedException(
                     $"We implement {nameof(GetSuggestedActionCategoriesAsync)}. This should not be called."
@@ -474,7 +484,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.Suggestions
             private async Task<TextSpan?> GetSpanAsync(
                 SnapshotSpan range,
                 CancellationToken cancellationToken
-            ) {
+            )
+            {
                 // First, ensure that the snapshot we're being asked about is for an actual
                 // roslyn document.  This can fail, for example, in projection scenarios where
                 // we are called with a range snapshot that refers to the projection buffer
@@ -547,7 +558,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.Suggestions
                 Document document,
                 SnapshotSpan range,
                 CancellationToken cancellationToken
-            ) {
+            )
+            {
                 if (provider._codeFixService != null && _subjectBuffer.SupportsCodeFixes())
                 {
                     var result = await provider._codeFixService.GetMostSevereFixableDiagnosticAsync(
@@ -579,7 +591,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.Suggestions
                 Document document,
                 TextSpan? selection,
                 CancellationToken cancellationToken
-            ) {
+            )
+            {
                 if (!selection.HasValue)
                 {
                     // this is here to fail test and see why it is failed.
@@ -593,7 +606,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.Suggestions
                     )
                     && provider._codeRefactoringService != null
                     && _subjectBuffer.SupportsRefactorings()
-                ) {
+                )
+                {
                     if (
                         await provider._codeRefactoringService.HasRefactoringsAsync(
                                 document,
@@ -601,7 +615,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.Suggestions
                                 cancellationToken
                             )
                             .ConfigureAwait(false)
-                    ) {
+                    )
+                    {
                         return PredefinedSuggestedActionCategoryNames.Refactoring;
                     }
                 }
@@ -688,7 +703,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.Suggestions
             private void OnActiveContextChanged(
                 object sender,
                 DocumentActiveContextChangedEventArgs e
-            ) {
+            )
+            {
                 // REVIEW: it would be nice for changed event to pass in both old and new document.
                 OnSuggestedActionsChanged(
                     e.Solution.Workspace,
@@ -725,7 +741,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.Suggestions
                 Workspace currentWorkspace,
                 DocumentId? currentDocumentId,
                 int solutionVersion
-            ) {
+            )
+            {
                 // Explicitly hold onto the _subjectBuffer field in a local and use this local in this function to avoid crashes
                 // if this field happens to be cleared by Dispose() below. This is required since this code path involves code
                 // that can run on background thread.
@@ -747,7 +764,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.Suggestions
                     currentDocumentId
                         != workspace.GetDocumentIdInCurrentContext(buffer.AsTextContainer())
                     || solutionVersion == Volatile.Read(ref _lastSolutionVersionReported)
-                ) {
+                )
+                {
                     return;
                 }
 
@@ -760,12 +778,14 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.Suggestions
                 ISuggestedActionCategorySet requestedActionCategories,
                 SnapshotSpan range,
                 CancellationToken cancellationToken
-            ) {
+            )
+            {
                 if (
                     _workspaceStatusService != null
                     && !await _workspaceStatusService.IsFullyLoadedAsync(cancellationToken)
                         .ConfigureAwait(false)
-                ) {
+                )
+                {
                     // never show light bulb if solution is not fully loaded yet
                     return null;
                 }

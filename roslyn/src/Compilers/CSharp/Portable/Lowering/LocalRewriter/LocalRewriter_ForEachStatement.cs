@@ -57,7 +57,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                     out var indexerGet,
                     out var lengthGetter
                 )
-            ) {
+            )
+            {
                 return RewriteForEachStatementAsFor(node, indexerGet, lengthGetter);
             }
             else
@@ -71,7 +72,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             TypeSymbol nodeExpressionType,
             [NotNullWhen(true)] out MethodSymbol? indexerGet,
             [NotNullWhen(true)] out MethodSymbol? lengthGet
-        ) {
+        )
+        {
             lengthGet = indexerGet = null;
             var origDefinition = nodeExpressionType.OriginalDefinition;
 
@@ -89,7 +91,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             else if (
                 (object)origDefinition
                 == this._compilation.GetWellKnownType(WellKnownType.System_Span_T)
-            ) {
+            )
+            {
                 var spanType = (NamedTypeSymbol)nodeExpressionType;
                 lengthGet = (MethodSymbol?)_factory.WellKnownMember(
                     WellKnownMember.System_Span_T__get_Length,
@@ -103,7 +106,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             else if (
                 (object)origDefinition
                 == this._compilation.GetWellKnownType(WellKnownType.System_ReadOnlySpan_T)
-            ) {
+            )
+            {
                 var spanType = (NamedTypeSymbol)nodeExpressionType;
                 lengthGet = (MethodSymbol?)_factory.WellKnownMember(
                     WellKnownMember.System_ReadOnlySpan_T__get_Length,
@@ -329,7 +333,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             CommonForEachStatementSyntax forEachSyntax,
             ForEachEnumeratorInfo enumeratorInfo,
             out MethodSymbol disposeMethod
-        ) {
+        )
+        {
             if (enumeratorInfo.IsAsync)
             {
                 disposeMethod = (MethodSymbol)Binder.GetWellKnownTypeMember(
@@ -362,7 +367,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             TypeSymbol enumeratorType,
             BoundLocal boundEnumeratorVar,
             BoundStatement rewrittenBody
-        ) {
+        )
+        {
             Debug.Assert(enumeratorInfo.NeedsDisposal);
 
             NamedTypeSymbol? idisposableTypeSymbol = null;
@@ -618,7 +624,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             CommonForEachStatementSyntax forEachSyntax,
             BoundExpression disposeCall,
             BoundAwaitableInfo disposeAwaitableInfoOpt
-        ) {
+        )
+        {
             TypeSymbol awaitExpressionType =
                 disposeAwaitableInfoOpt.GetResult?.ReturnType ?? _compilation.DynamicType;
             var awaitExpr = RewriteAwaitExpression(
@@ -649,7 +656,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             MethodSymbol method,
             Conversion receiverConversion,
             TypeSymbol convertedReceiverType
-        ) {
+        )
+        {
             Debug.Assert(receiver.Type is { });
             if (!receiver.Type.IsReferenceType && method.ContainingType.IsInterface)
             {
@@ -697,7 +705,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             BoundExpression? receiver,
             bool allowExtensionAndOptionalParameters,
             bool assertParametersAreOptional = true
-        ) {
+        )
+        {
             if (allowExtensionAndOptionalParameters)
             {
                 // Generate a call with zero explicit arguments, but with implicit arguments for optional and params parameters.
@@ -740,7 +749,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             BoundForEachStatement node,
             MethodSymbol indexerGet,
             MethodSymbol lengthGet
-        ) {
+        )
+        {
             var forEachSyntax = (CommonForEachStatementSyntax)node.Syntax;
 
             BoundExpression collectionExpression = GetUnconvertedCollectionExpression(node);
@@ -893,7 +903,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             BoundForEachStatement forEachBound,
             ImmutableArray<LocalSymbol> iterationVariables,
             BoundExpression iterationVarValue
-        ) {
+        )
+        {
             var forEachSyntax = (CommonForEachStatementSyntax)forEachBound.Syntax;
 
             BoundStatement iterationVarDecl;
@@ -931,7 +942,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             BoundStatement iteratorVariableInitialization,
             BoundStatement rewrittenBody,
             CommonForEachStatementSyntax forEachSyntax
-        ) {
+        )
+        {
             // The scope of the iteration variable is the embedded statement syntax.
             // However consider the following foreach statement:
             //
@@ -955,7 +967,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             BoundStatement rewrittenBody,
             LabelSymbol continueLabel,
             CommonForEachStatementSyntax forEachSyntax
-        ) {
+        )
+        {
             // The scope of the iteration variable is the embedded statement syntax.
             // However consider the following foreach statement:
             //
@@ -995,7 +1008,8 @@ namespace Microsoft.CodeAnalysis.CSharp
         /// </remarks>
         private BoundStatement RewriteSingleDimensionalArrayForEachStatement(
             BoundForEachStatement node
-        ) {
+        )
+        {
             var forEachSyntax = (CommonForEachStatementSyntax)node.Syntax;
 
             BoundExpression collectionExpression = GetUnconvertedCollectionExpression(node);
@@ -1157,7 +1171,8 @@ namespace Microsoft.CodeAnalysis.CSharp
         /// </remarks>
         private BoundStatement RewriteMultiDimensionalArrayForEachStatement(
             BoundForEachStatement node
-        ) {
+        )
+        {
             var forEachSyntax = (CommonForEachStatementSyntax)node.Syntax;
 
             BoundExpression collectionExpression = GetUnconvertedCollectionExpression(node);
@@ -1418,7 +1433,8 @@ namespace Microsoft.CodeAnalysis.CSharp
         /// </summary>
         private static BoundExpression GetUnconvertedCollectionExpression(
             BoundForEachStatement node
-        ) {
+        )
+        {
             var boundExpression = node.Expression;
             if (boundExpression.Kind == BoundKind.Conversion)
             {
@@ -1434,7 +1450,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             CSharpSyntaxNode syntax,
             LocalSymbol local,
             TypeSymbol type
-        ) {
+        )
+        {
             return new BoundLocal(syntax, localSymbol: local, constantValueOpt: null, type: type);
         }
 
@@ -1442,7 +1459,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             CSharpSyntaxNode syntax,
             LocalSymbol local,
             BoundExpression rewrittenInitialValue
-        ) {
+        )
+        {
             var result = RewriteLocalDeclaration(
                 originalOpt: null,
                 syntax: syntax,
@@ -1458,7 +1476,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             CSharpSyntaxNode syntax,
             BoundLocal boundPositionVar,
             TypeSymbol intType
-        ) {
+        )
+        {
             // A normal for-loop would have a sequence point on the increment.  We don't want that since the code is synthesized,
             // but we add a hidden sequence point to avoid disrupting the stepping experience.
             // A bound sequence point is permitted to have a null syntax to make a hidden sequence point.
@@ -1491,7 +1510,8 @@ namespace Microsoft.CodeAnalysis.CSharp
         private void InstrumentForEachStatementCollectionVarDeclaration(
             BoundForEachStatement original,
             [NotNullIfNotNull("collectionVarDecl")] ref BoundStatement? collectionVarDecl
-        ) {
+        )
+        {
             if (this.Instrument)
             {
                 collectionVarDecl =
@@ -1505,7 +1525,8 @@ namespace Microsoft.CodeAnalysis.CSharp
         private void InstrumentForEachStatementIterationVarDeclaration(
             BoundForEachStatement original,
             ref BoundStatement iterationVarDecl
-        ) {
+        )
+        {
             if (this.Instrument)
             {
                 CommonForEachStatementSyntax forEachSyntax =
@@ -1532,7 +1553,8 @@ namespace Microsoft.CodeAnalysis.CSharp
         private void InstrumentForEachStatement(
             BoundForEachStatement original,
             ref BoundStatement result
-        ) {
+        )
+        {
             if (this.Instrument)
             {
                 result = _instrumenter.InstrumentForEachStatement(original, result);

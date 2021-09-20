@@ -106,7 +106,8 @@ namespace Microsoft.AspNetCore.Routing
             string routeParameter,
             int currentIndex,
             int endIndex
-        ) {
+        )
+        {
             var inlineConstraints = new List<InlineConstraint>();
             var state = ParseState.Start;
             var startIndex = currentIndex;
@@ -280,7 +281,8 @@ namespace Microsoft.AspNetCore.Routing
             public ConstraintParseResults(
                 int currentIndex,
                 IEnumerable<InlineConstraint> constraints
-            ) {
+            )
+            {
                 CurrentIndex = currentIndex;
                 Constraints = constraints;
             }

@@ -33,7 +33,8 @@ namespace System.DirectoryServices.AccountManagement
             string name,
             NetCred credentials,
             ContextOptions contextOptions
-        ) {
+        )
+        {
             string contextName = name;
             string userName = null;
             bool explicitCreds = false;

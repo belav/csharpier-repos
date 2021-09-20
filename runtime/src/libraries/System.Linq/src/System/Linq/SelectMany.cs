@@ -11,7 +11,8 @@ namespace System.Linq
         public static IEnumerable<TResult> SelectMany<TSource, TResult>(
             this IEnumerable<TSource> source,
             Func<TSource, IEnumerable<TResult>> selector
-        ) {
+        )
+        {
             if (source == null)
             {
                 ThrowHelper.ThrowArgumentNullException(ExceptionArgument.source);
@@ -28,7 +29,8 @@ namespace System.Linq
         public static IEnumerable<TResult> SelectMany<TSource, TResult>(
             this IEnumerable<TSource> source,
             Func<TSource, int, IEnumerable<TResult>> selector
-        ) {
+        )
+        {
             if (source == null)
             {
                 ThrowHelper.ThrowArgumentNullException(ExceptionArgument.source);
@@ -45,7 +47,8 @@ namespace System.Linq
         private static IEnumerable<TResult> SelectManyIterator<TSource, TResult>(
             IEnumerable<TSource> source,
             Func<TSource, int, IEnumerable<TResult>> selector
-        ) {
+        )
+        {
             int index = -1;
             foreach (TSource element in source)
             {
@@ -65,7 +68,8 @@ namespace System.Linq
             this IEnumerable<TSource> source,
             Func<TSource, int, IEnumerable<TCollection>> collectionSelector,
             Func<TSource, TCollection, TResult> resultSelector
-        ) {
+        )
+        {
             if (source == null)
             {
                 ThrowHelper.ThrowArgumentNullException(ExceptionArgument.source);
@@ -88,7 +92,8 @@ namespace System.Linq
             IEnumerable<TSource> source,
             Func<TSource, int, IEnumerable<TCollection>> collectionSelector,
             Func<TSource, TCollection, TResult> resultSelector
-        ) {
+        )
+        {
             int index = -1;
             foreach (TSource element in source)
             {
@@ -108,7 +113,8 @@ namespace System.Linq
             this IEnumerable<TSource> source,
             Func<TSource, IEnumerable<TCollection>> collectionSelector,
             Func<TSource, TCollection, TResult> resultSelector
-        ) {
+        )
+        {
             if (source == null)
             {
                 ThrowHelper.ThrowArgumentNullException(ExceptionArgument.source);
@@ -131,7 +137,8 @@ namespace System.Linq
             IEnumerable<TSource> source,
             Func<TSource, IEnumerable<TCollection>> collectionSelector,
             Func<TSource, TCollection, TResult> resultSelector
-        ) {
+        )
+        {
             foreach (TSource element in source)
             {
                 foreach (TCollection subElement in collectionSelector(element))
@@ -152,7 +159,8 @@ namespace System.Linq
             internal SelectManySingleSelectorIterator(
                 IEnumerable<TSource> source,
                 Func<TSource, IEnumerable<TResult>> selector
-            ) {
+            )
+            {
                 Debug.Assert(source != null);
                 Debug.Assert(selector != null);
 

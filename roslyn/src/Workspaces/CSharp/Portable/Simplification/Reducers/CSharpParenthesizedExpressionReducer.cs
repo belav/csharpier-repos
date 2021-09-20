@@ -36,7 +36,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Simplification
             SemanticModel semanticModel,
             OptionSet optionSet,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             if (node.CanRemoveParentheses(semanticModel))
             {
                 // TODO(DustinCa): We should not be skipping elastic trivia below.

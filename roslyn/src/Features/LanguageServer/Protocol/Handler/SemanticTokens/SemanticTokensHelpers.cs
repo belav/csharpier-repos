@@ -106,7 +106,8 @@ namespace Microsoft.CodeAnalysis.LanguageServer.Handler.SemanticTokens
             Dictionary<string, int> tokenTypesToIndex,
             LSP.Range? range,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var root = await document.GetRequiredSyntaxRootAsync(cancellationToken)
                 .ConfigureAwait(false);
             var text = await document.GetTextAsync(cancellationToken).ConfigureAwait(false);
@@ -139,7 +140,8 @@ namespace Microsoft.CodeAnalysis.LanguageServer.Handler.SemanticTokens
         private static ClassifiedSpan[] ConvertMultiLineToSingleLineSpans(
             SourceText text,
             ClassifiedSpan[] classifiedSpans
-        ) {
+        )
+        {
             using var _ = ArrayBuilder<ClassifiedSpan>.GetInstance(out var updatedClassifiedSpans);
 
             for (var spanIndex = 0; spanIndex < classifiedSpans.Length; spanIndex++)
@@ -188,7 +190,8 @@ namespace Microsoft.CodeAnalysis.LanguageServer.Handler.SemanticTokens
                 int startOffset,
                 int endLine,
                 int endOffSet
-            ) {
+            )
+            {
                 var numLinesInSpan = endLine - startLine + 1;
                 Contract.ThrowIfTrue(numLinesInSpan < 1);
 
@@ -233,7 +236,8 @@ namespace Microsoft.CodeAnalysis.LanguageServer.Handler.SemanticTokens
                         && textSpan.Value.Contains(
                             originalClassifiedSpans[updatedSpanIndex + 1].TextSpan
                         )
-                    ) {
+                    )
+                    {
                         updatedClassifiedSpans.Add(originalClassifiedSpans[updatedSpanIndex + 1]);
                         updatedSpanIndex++;
                     }
@@ -247,7 +251,8 @@ namespace Microsoft.CodeAnalysis.LanguageServer.Handler.SemanticTokens
             TextLineCollection lines,
             ClassifiedSpan[] classifiedSpans,
             Dictionary<string, int> tokenTypesToIndex
-        ) {
+        )
+        {
             using var _ = ArrayBuilder<int>.GetInstance(classifiedSpans.Length, out var data);
 
             // We keep track of the last line number and last start character since tokens are
@@ -259,7 +264,8 @@ namespace Microsoft.CodeAnalysis.LanguageServer.Handler.SemanticTokens
                 var currentClassifiedSpanIndex = 0;
                 currentClassifiedSpanIndex < classifiedSpans.Length;
                 currentClassifiedSpanIndex++
-            ) {
+            )
+            {
                 currentClassifiedSpanIndex = ComputeNextToken(
                     lines,
                     ref lastLineNumber,
@@ -298,7 +304,8 @@ namespace Microsoft.CodeAnalysis.LanguageServer.Handler.SemanticTokens
             out int tokenLengthOut,
             out int tokenTypeOut,
             out int tokenModifiersOut
-        ) {
+        )
+        {
             // Each semantic token is represented in LSP by five numbers:
             //     1. Token line number delta, relative to the previous token
             //     2. Token start character delta, relative to the previous token
@@ -356,7 +363,8 @@ namespace Microsoft.CodeAnalysis.LanguageServer.Handler.SemanticTokens
                 if (
                     currentClassifiedSpanIndex + 1 >= classifiedSpans.Length
                     || classifiedSpans[currentClassifiedSpanIndex + 1].TextSpan != originalTextSpan
-                ) {
+                )
+                {
                     break;
                 }
 
@@ -375,13 +383,15 @@ namespace Microsoft.CodeAnalysis.LanguageServer.Handler.SemanticTokens
         private static int GetTokenTypeIndex(
             string classificationType,
             Dictionary<string, int> tokenTypesToIndex
-        ) {
+        )
+        {
             if (
                 !s_classificationTypeToSemanticTokenTypeMap.TryGetValue(
                     classificationType,
                     out var tokenTypeStr
                 )
-            ) {
+            )
+            {
                 tokenTypeStr = classificationType;
             }
 

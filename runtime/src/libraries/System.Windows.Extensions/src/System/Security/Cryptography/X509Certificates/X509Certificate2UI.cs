@@ -35,7 +35,8 @@ namespace System.Security.Cryptography.X509Certificates
             string title,
             string message,
             X509SelectionFlag selectionFlag
-        ) {
+        )
+        {
             return SelectFromCollectionHelper(
                 certificates,
                 title,
@@ -51,7 +52,8 @@ namespace System.Security.Cryptography.X509Certificates
             string message,
             X509SelectionFlag selectionFlag,
             IntPtr hwndParent
-        ) {
+        )
+        {
             return SelectFromCollectionHelper(
                 certificates,
                 title,
@@ -67,7 +69,8 @@ namespace System.Security.Cryptography.X509Certificates
                 SafeCertContextHandle safeCertContext = X509Utils.DuplicateCertificateContext(
                     certificate
                 )
-            ) {
+            )
+            {
                 if (safeCertContext.IsInvalid)
                     throw new CryptographicException(
                         SR.Format(SR.Cryptography_InvalidHandle, nameof(safeCertContext))
@@ -114,7 +117,8 @@ namespace System.Security.Cryptography.X509Certificates
             string message,
             X509SelectionFlag selectionFlag,
             IntPtr hwndParent
-        ) {
+        )
+        {
             if (certificates == null)
                 throw new ArgumentNullException(nameof(certificates));
             if (
@@ -136,7 +140,8 @@ namespace System.Security.Cryptography.X509Certificates
                     selectionFlag,
                     hwndParent
                 )
-            ) {
+            )
+            {
                 return X509Utils.GetCertificates(safeTargetStoreHandle);
             }
         }
@@ -147,7 +152,8 @@ namespace System.Security.Cryptography.X509Certificates
             string message,
             X509SelectionFlag selectionFlags,
             IntPtr hwndParent
-        ) {
+        )
+        {
             int dwErrorCode = ERROR_SUCCESS;
 
             SafeCertStoreHandle safeCertStoreHandle = Interop.Crypt32.CertOpenStore(
@@ -200,7 +206,8 @@ namespace System.Security.Cryptography.X509Certificates
                         Interop.Crypt32.CERT_STORE_ADD_ALWAYS,
                         ppStoreContext
                     )
-                ) {
+                )
+                {
                     dwErrorCode = Marshal.GetLastWin32Error();
                 }
             }

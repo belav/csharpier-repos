@@ -37,7 +37,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Formatting
             List<IndentBlockOperation> list,
             SyntaxNode node,
             in NextIndentBlockOperationAction nextOperation
-        ) {
+        )
+        {
             nextOperation.Invoke();
 
             var bracePair = node.GetBracePair();
@@ -83,7 +84,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Formatting
             private static T GetOptionOrDefault<T>(
                 AnalyzerConfigOptions? options,
                 Option2<T> option
-            ) {
+            )
+            {
                 if (options is null)
                     return option.DefaultValue;
 

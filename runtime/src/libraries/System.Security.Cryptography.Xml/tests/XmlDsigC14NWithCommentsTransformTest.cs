@@ -130,7 +130,8 @@ namespace System.Security.Cryptography.Xml.Tests
             string inputXml,
             Encoding encoding = null,
             XmlResolver resolver = null
-        ) {
+        )
+        {
             XmlDocument doc = new XmlDocument();
             doc.XmlResolver = resolver;
             doc.PreserveWhitespace = true;
@@ -149,7 +150,8 @@ namespace System.Security.Cryptography.Xml.Tests
                         XmlResolver = resolver
                     }
                 )
-            ) {
+            )
+            {
                 doc.Load(reader);
                 XmlDsigC14NWithCommentsTransform transform = new XmlDsigC14NWithCommentsTransform();
                 transform.LoadInput(doc);

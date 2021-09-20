@@ -82,7 +82,8 @@ namespace System.Web.Mvc
         protected AmbiguousMatchException CreateAmbiguousActionMatchException(
             IEnumerable<MethodInfo> ambiguousMethods,
             string actionName
-        ) {
+        )
+        {
             string ambiguityList = CreateAmbiguousMatchList(ambiguousMethods);
             string message = String.Format(
                 CultureInfo.CurrentCulture,
@@ -97,7 +98,8 @@ namespace System.Web.Mvc
         protected AmbiguousMatchException CreateAmbiguousMethodMatchException(
             IEnumerable<MethodInfo> ambiguousMethods,
             string methodName
-        ) {
+        )
+        {
             string ambiguityList = CreateAmbiguousMatchList(ambiguousMethods);
             string message = String.Format(
                 CultureInfo.CurrentCulture,
@@ -162,7 +164,8 @@ namespace System.Web.Mvc
         protected List<MethodInfo> FindActionMethods(
             ControllerContext controllerContext,
             string actionName
-        ) {
+        )
+        {
             List<MethodInfo> matches = new List<MethodInfo>();
 
             var cache = StandardRouteCache;
@@ -185,7 +188,8 @@ namespace System.Web.Mvc
             MethodInfo method,
             ControllerContext controllerContext,
             string actionName
-        ) {
+        )
+        {
             // return if aliased method is opting in to this request
             // to opt in, all attributes defined on the method must return true
             ReadOnlyCollection<ActionNameSelectorAttribute> attributes =
@@ -207,7 +211,8 @@ namespace System.Web.Mvc
             ReadOnlyCollection<ActionMethodSelectorAttribute> attributes,
             ControllerContext controllerContext,
             MethodInfo method
-        ) {
+        )
+        {
             int attributeCount = attributes.Count;
             Contract.Assert(attributeCount > 0);
             for (int i = 0; i < attributeCount; i++)
@@ -223,7 +228,8 @@ namespace System.Web.Mvc
         protected static void RunSelectionFilters(
             ControllerContext controllerContext,
             List<MethodInfo> methodInfos
-        ) {
+        )
+        {
             // Filter depending on the selection attribute.
             // Methods with valid selection attributes override all others.
             // Methods with one or more invalid selection attributes are removed.

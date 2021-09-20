@@ -44,7 +44,8 @@ namespace Microsoft.CodeAnalysis.Remote
             bool fromPrimaryBranch,
             int workspaceVersion,
             Checksum solutionChecksum
-        ) {
+        )
+        {
             ScopeId = scopeId;
             FromPrimaryBranch = fromPrimaryBranch;
             WorkspaceVersion = workspaceVersion;

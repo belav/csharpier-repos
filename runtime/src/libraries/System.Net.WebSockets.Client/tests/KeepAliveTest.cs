@@ -27,7 +27,8 @@ namespace System.Net.WebSockets.Client.Tests
                     _output,
                     TimeSpan.FromSeconds(1)
                 )
-            ) {
+            )
+            {
                 await cws.SendAsync(
                     new ArraySegment<byte>(new byte[1] { 42 }),
                     WebSocketMessageType.Binary,

@@ -14,7 +14,8 @@ namespace System.Linq
             Func<TSource, TResult> selector,
             IPartition<TSource> partition,
             ref IEnumerable<TResult>? result
-        ) {
+        )
+        {
             result =
                 partition is EmptyPartition<TSource>
                     ? EmptyPartition<TResult>.Instance
@@ -544,7 +545,8 @@ namespace System.Linq
             public SelectIPartitionIterator(
                 IPartition<TSource> source,
                 Func<TSource, TResult> selector
-            ) {
+            )
+            {
                 Debug.Assert(source != null);
                 Debug.Assert(selector != null);
                 _source = source;
@@ -746,7 +748,8 @@ namespace System.Linq
                 Func<TSource, TResult> selector,
                 int minIndexInclusive,
                 int maxIndexInclusive
-            ) {
+            )
+            {
                 Debug.Assert(source != null);
                 Debug.Assert(selector != null);
                 Debug.Assert(minIndexInclusive >= 0);
@@ -776,7 +779,8 @@ namespace System.Linq
                         (uint)index <= (uint)(_maxIndexInclusive - _minIndexInclusive)
                         && index < _source.Count - _minIndexInclusive
                     )
-                ) {
+                )
+                {
                     _current = _selector(_source[_minIndexInclusive + index]);
                     ++_state;
                     return true;
@@ -829,7 +833,8 @@ namespace System.Linq
                 if (
                     (uint)index <= (uint)(_maxIndexInclusive - _minIndexInclusive)
                     && index < _source.Count - _minIndexInclusive
-                ) {
+                )
+                {
                     found = true;
                     return _selector(_source[_minIndexInclusive + index]);
                 }

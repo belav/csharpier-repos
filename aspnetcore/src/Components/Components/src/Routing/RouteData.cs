@@ -22,7 +22,8 @@ namespace Microsoft.AspNetCore.Components
         public RouteData(
             [DynamicallyAccessedMembers(Component)] Type pageType,
             IReadOnlyDictionary<string, object> routeValues
-        ) {
+        )
+        {
             if (pageType == null)
             {
                 throw new ArgumentNullException(nameof(pageType));

@@ -16,7 +16,8 @@ namespace System.Speech.Recognition
             DateTime startTime,
             TimeSpan audioPosition,
             TimeSpan audioDuration
-        ) {
+        )
+        {
             _audioFormat = audioFormat;
             _startTime = startTime;
             _audioPosition = audioPosition;

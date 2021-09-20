@@ -83,7 +83,8 @@ namespace Wasm.Build.Tests
             string id,
             string extraProperties = "",
             bool? dotnetWasmFromRuntimePack = null
-        ) {
+        )
+        {
             string projectName = $"invariant_{invariantGlobalization?.ToString() ?? "unset"}";
             if (invariantGlobalization != null)
                 extraProperties =

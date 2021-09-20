@@ -15,7 +15,8 @@ namespace Microsoft.Web.Mvc.ModelBinding
         public ComplexModelDto(
             ModelMetadata modelMetadata,
             IEnumerable<ModelMetadata> propertyMetadata
-        ) {
+        )
+        {
             if (modelMetadata == null)
             {
                 throw new ArgumentNullException("modelMetadata");

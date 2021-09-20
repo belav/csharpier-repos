@@ -78,7 +78,8 @@ namespace Microsoft.CodeAnalysis.Emit
             ISymbol? newSymbol,
             Func<SyntaxNode, SyntaxNode?>? syntaxMap = null,
             bool preserveLocalVariables = false
-        ) {
+        )
+        {
             if (oldSymbol == null && kind != SemanticEditKind.Insert)
             {
                 throw new ArgumentNullException(nameof(oldSymbol));
@@ -107,7 +108,8 @@ namespace Microsoft.CodeAnalysis.Emit
             ISymbolInternal newSymbol,
             Func<SyntaxNode, SyntaxNode>? syntaxMap = null,
             bool preserveLocalVariables = false
-        ) {
+        )
+        {
             return new SemanticEdit(
                 kind,
                 oldSymbol?.GetISymbol(),

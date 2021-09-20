@@ -59,7 +59,8 @@ namespace Microsoft.AspNetCore.Razor.Runtime.TagHelpers
             Func<Task> executeChildContentAsync,
             Action<HtmlEncoder> startTagHelperWritingScope,
             Func<TagHelperContent> endTagHelperWritingScope
-        ) {
+        )
+        {
             if (startTagHelperWritingScope == null)
             {
                 throw new ArgumentNullException(nameof(startTagHelperWritingScope));
@@ -172,7 +173,8 @@ namespace Microsoft.AspNetCore.Razor.Runtime.TagHelpers
             string name,
             object value,
             HtmlAttributeValueStyle valueStyle
-        ) {
+        )
+        {
             if (name == null)
             {
                 throw new ArgumentNullException(nameof(name));
@@ -210,7 +212,8 @@ namespace Microsoft.AspNetCore.Razor.Runtime.TagHelpers
             IDictionary<object, object> items,
             string uniqueId,
             Func<Task> executeChildContentAsync
-        ) {
+        )
+        {
             if (tagName == null)
             {
                 throw new ArgumentNullException(nameof(tagName));
@@ -274,7 +277,8 @@ namespace Microsoft.AspNetCore.Razor.Runtime.TagHelpers
         internal async Task<TagHelperContent> GetChildContentAsync(
             bool useCachedResult,
             HtmlEncoder encoder
-        ) {
+        )
+        {
             // Get cached content for this encoder.
             TagHelperContent childContent;
             if (encoder == null)

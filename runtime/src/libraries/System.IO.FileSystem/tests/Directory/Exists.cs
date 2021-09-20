@@ -355,7 +355,8 @@ namespace System.IO.Tests
         [PlatformSpecific(TestPlatforms.Windows)] // max directory length not fixed on Unix
         public void DirectoryWithComponentLongerThanMaxComponentAsPath_ReturnsFalse(
             string component
-        ) {
+        )
+        {
             Assert.False(Exists(component));
         }
 

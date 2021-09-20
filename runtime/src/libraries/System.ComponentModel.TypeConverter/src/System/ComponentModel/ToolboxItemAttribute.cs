@@ -52,7 +52,8 @@ namespace System.ComponentModel
         public ToolboxItemAttribute(
             [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicConstructors)]
                 string toolboxItemTypeName
-        ) {
+        )
+        {
             _toolboxItemTypeName =
                 toolboxItemTypeName ?? throw new ArgumentNullException(nameof(toolboxItemTypeName));
         }
@@ -63,7 +64,8 @@ namespace System.ComponentModel
         public ToolboxItemAttribute(
             [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicConstructors)]
                 Type toolboxItemType
-        ) {
+        )
+        {
             if (toolboxItemType == null)
             {
                 throw new ArgumentNullException(nameof(toolboxItemType));

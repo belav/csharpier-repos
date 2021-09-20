@@ -40,7 +40,8 @@ namespace Microsoft.CodeAnalysis.Editor.QuickInfo
             IContentTypeRegistryService contentTypeRegistryService,
             IProjectionBufferFactoryService projectionBufferFactoryService,
             IEditorOptionsFactoryService editorOptionsFactoryService
-        ) {
+        )
+        {
             _threadingContext = threadingContext;
             _textEditorFactoryService = textEditorFactoryService;
             _contentTypeRegistryService = contentTypeRegistryService;
@@ -58,7 +59,8 @@ namespace Microsoft.CodeAnalysis.Editor.QuickInfo
             ITextBuffer textBuffer,
             Span contentSpan,
             object backgroundResourceKey
-        ) {
+        )
+        {
             var control = CreateViewHostingControl(textBuffer, contentSpan);
 
             // Create the actual tooltip around the region of that text buffer we want to show.
@@ -82,7 +84,8 @@ namespace Microsoft.CodeAnalysis.Editor.QuickInfo
         public DisposableToolTip CreateDisposableToolTip(
             ITextBuffer textBuffer,
             object backgroundResourceKey
-        ) {
+        )
+        {
             var control = CreateViewHostingControl(
                 textBuffer,
                 textBuffer.CurrentSnapshot.GetFullSpan().Span

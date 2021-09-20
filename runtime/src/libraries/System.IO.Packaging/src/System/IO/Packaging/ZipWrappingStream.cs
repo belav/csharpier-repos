@@ -26,7 +26,8 @@ namespace System.IO.Packaging
             FileAccess packageFileAccess,
             bool canRead,
             bool canWrite
-        ) {
+        )
+        {
             _zipArchiveEntry = zipArchiveEntry;
             _baseStream = stream;
             _packageFileMode = packageFileMode;

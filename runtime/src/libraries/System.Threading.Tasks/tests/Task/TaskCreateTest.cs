@@ -1805,7 +1805,8 @@ namespace System.Threading.Tasks.Tests
                 if (
                     TaskScheduler.Current == TaskScheduler.Default
                     && _task.CreationOptions == TaskCreationOptions.None
-                ) {
+                )
+                {
                     //The Workloads are defined in the common folder
                     _result = ZetaSequence((int)o);
                 }
@@ -1827,7 +1828,8 @@ namespace System.Threading.Tasks.Tests
                 if (
                     TaskScheduler.Current == TaskScheduler.Default
                     && _task.CreationOptions == TaskCreationOptions.None
-                ) {
+                )
+                {
                     return ZetaSequence((int)o);
                 }
                 else

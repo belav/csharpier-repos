@@ -26,7 +26,8 @@ namespace Microsoft.AspNetCore.Mvc.ApplicationModels
             ApplicationPartManager applicationManager,
             IOptions<RazorPagesOptions> pagesOptionsAccessor,
             ILogger<CompiledPageRouteModelProvider> logger
-        ) {
+        )
+        {
             _applicationManager =
                 applicationManager ?? throw new ArgumentNullException(nameof(applicationManager));
             _pagesOptions =
@@ -57,7 +58,8 @@ namespace Microsoft.AspNetCore.Mvc.ApplicationModels
 
         private IEnumerable<CompiledViewDescriptor> GetViewDescriptors(
             ApplicationPartManager applicationManager
-        ) {
+        )
+        {
             if (applicationManager == null)
             {
                 throw new ArgumentNullException(nameof(applicationManager));

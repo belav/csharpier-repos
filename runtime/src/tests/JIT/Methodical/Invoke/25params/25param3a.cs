@@ -32,7 +32,8 @@ internal class test
         int a23,
         int a24,
         int a25
-    ) {
+    )
+    {
         Console.WriteLine(a1);
         int sum = f2(
             a1,
@@ -90,7 +91,8 @@ internal class test
         int a23,
         int a24,
         int a25
-    ) {
+    )
+    {
         Console.WriteLine(a2);
         int sum = f3(
             a1,
@@ -148,7 +150,8 @@ internal class test
         int a23,
         int a24,
         int a25
-    ) {
+    )
+    {
         Console.WriteLine(a3);
         int sum = f4(
             a1,
@@ -206,7 +209,8 @@ internal class test
         int a23,
         int a24,
         int a25
-    ) {
+    )
+    {
         Console.WriteLine(a4);
         int sum = f5(
             a1,
@@ -264,7 +268,8 @@ internal class test
         int a23,
         int a24,
         int a25
-    ) {
+    )
+    {
         Console.WriteLine(a5);
         int sum = f6(
             a1,
@@ -322,7 +327,8 @@ internal class test
         int a23,
         int a24,
         int a25
-    ) {
+    )
+    {
         Console.WriteLine(a6);
         int sum = f7(
             a1,
@@ -380,7 +386,8 @@ internal class test
         int a23,
         int a24,
         int a25
-    ) {
+    )
+    {
         Console.WriteLine(a7);
         int sum = f8(
             a1,
@@ -438,7 +445,8 @@ internal class test
         int a23,
         int a24,
         int a25
-    ) {
+    )
+    {
         Console.WriteLine(a8);
         int sum = f9(
             a1,
@@ -496,7 +504,8 @@ internal class test
         int a23,
         int a24,
         int a25
-    ) {
+    )
+    {
         Console.WriteLine(a9);
         int sum = f10(
             a1,
@@ -554,7 +563,8 @@ internal class test
         int a23,
         int a24,
         int a25
-    ) {
+    )
+    {
         Console.WriteLine(a10);
         int sum = f11(
             a1,
@@ -612,7 +622,8 @@ internal class test
         int a23,
         int a24,
         int a25
-    ) {
+    )
+    {
         Console.WriteLine(a11);
         int sum = f12(
             a1,
@@ -670,7 +681,8 @@ internal class test
         int a23,
         int a24,
         int a25
-    ) {
+    )
+    {
         Console.WriteLine(a12);
         int sum = f13(
             a1,
@@ -728,7 +740,8 @@ internal class test
         int a23,
         int a24,
         int a25
-    ) {
+    )
+    {
         Console.WriteLine(a13);
         int sum = f14(
             a1,
@@ -786,7 +799,8 @@ internal class test
         int a23,
         int a24,
         int a25
-    ) {
+    )
+    {
         Console.WriteLine(a14);
         int sum = f15(
             a1,
@@ -844,7 +858,8 @@ internal class test
         int a23,
         int a24,
         int a25
-    ) {
+    )
+    {
         Console.WriteLine(a15);
         int sum = f16(
             a1,
@@ -902,7 +917,8 @@ internal class test
         int a23,
         int a24,
         int a25
-    ) {
+    )
+    {
         Console.WriteLine(a16);
         int sum = f17(
             a1,
@@ -960,7 +976,8 @@ internal class test
         int a23,
         int a24,
         int a25
-    ) {
+    )
+    {
         Console.WriteLine(a17);
         int sum = f18(
             a1,
@@ -1018,7 +1035,8 @@ internal class test
         int a23,
         int a24,
         int a25
-    ) {
+    )
+    {
         Console.WriteLine(a18);
         int sum = f19(
             a1,
@@ -1076,7 +1094,8 @@ internal class test
         int a23,
         int a24,
         int a25
-    ) {
+    )
+    {
         Console.WriteLine(a19);
         int sum = f20(
             a1,
@@ -1134,7 +1153,8 @@ internal class test
         int a23,
         int a24,
         int a25
-    ) {
+    )
+    {
         Console.WriteLine(a20);
         int sum = f21(
             a1,
@@ -1192,7 +1212,8 @@ internal class test
         int a23,
         int a24,
         int a25
-    ) {
+    )
+    {
         Console.WriteLine(a21);
         int sum = f22(
             a1,
@@ -1250,7 +1271,8 @@ internal class test
         int a23,
         int a24,
         int a25
-    ) {
+    )
+    {
         Console.WriteLine(a22);
         int sum = f23(
             a1,
@@ -1308,7 +1330,8 @@ internal class test
         int a23,
         int a24,
         int a25
-    ) {
+    )
+    {
         Console.WriteLine(a23);
         int sum = f24(
             a1,
@@ -1366,7 +1389,8 @@ internal class test
         int a23,
         int a24,
         int a25
-    ) {
+    )
+    {
         Console.WriteLine(a24);
         int sum = f25(
             a1,
@@ -1424,7 +1448,8 @@ internal class test
         int a23,
         int a24,
         int a25
-    ) {
+    )
+    {
         Console.WriteLine(a25);
         int sum =
             a1
@@ -1481,7 +1506,8 @@ internal class test
         int a23,
         int a24,
         int a25
-    ) {
+    )
+    {
         int sum = f1(
             a1,
             a2,

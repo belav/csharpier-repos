@@ -17,7 +17,8 @@ namespace System.Runtime.Serialization.Tests
             DataContractSerializerSettings settings = null,
             Func<DataContractSerializer> serializerFactory = null,
             bool skipStringCompare = false
-        ) {
+        )
+        {
             DataContractSerializer dcs;
             if (serializerFactory != null)
             {

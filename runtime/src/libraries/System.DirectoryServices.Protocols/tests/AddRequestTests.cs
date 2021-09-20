@@ -35,7 +35,8 @@ namespace System.DirectoryServices.Protocols.Tests
         public void Ctor_DistinguishedString_Attributes(
             string distinguishedName,
             DirectoryAttribute[] attributes
-        ) {
+        )
+        {
             var request = new AddRequest(distinguishedName, attributes);
             Assert.Equal(
                 attributes ?? Enumerable.Empty<DirectoryAttribute>(),

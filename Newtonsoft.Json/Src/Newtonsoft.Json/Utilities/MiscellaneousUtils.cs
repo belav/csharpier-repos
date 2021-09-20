@@ -69,7 +69,8 @@ namespace Newtonsoft.Json.Utilities
                 else if (
                     (objA is double || objA is float || objA is decimal)
                     && (objB is double || objB is float || objB is decimal)
-                ) {
+                )
+                {
                     return MathUtils.ApproxEquals(
                         Convert.ToDouble(objA, CultureInfo.CurrentCulture),
                         Convert.ToDouble(objB, CultureInfo.CurrentCulture)
@@ -88,7 +89,8 @@ namespace Newtonsoft.Json.Utilities
             string paramName,
             object actualValue,
             string message
-        ) {
+        )
+        {
             string newMessage =
                 message
                 + Environment.NewLine
@@ -145,13 +147,15 @@ namespace Newtonsoft.Json.Utilities
             string qualifiedName,
             out string? prefix,
             out string localName
-        ) {
+        )
+        {
             int colonPosition = qualifiedName.IndexOf(':');
 
             if (
                 (colonPosition == -1 || colonPosition == 0)
                 || (qualifiedName.Length - 1) == colonPosition
-            ) {
+            )
+            {
                 prefix = null;
                 localName = qualifiedName;
             }

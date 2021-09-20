@@ -13,7 +13,8 @@ namespace Microsoft.CodeAnalysis.Operations
             SyntaxNode syntax,
             ImmutableArray<IOperation> children,
             bool isImplicit
-        ) {
+        )
+        {
             return new InvalidOperation(
                 children,
                 semanticModel,

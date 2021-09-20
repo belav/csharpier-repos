@@ -226,7 +226,8 @@ namespace Microsoft.AspNetCore.Routing.Matching
             int index,
             IReadOnlyList<Endpoint> endpoints,
             IComparer<Endpoint> comparer
-        ) {
+        )
+        {
             // Friendliness for inlining
             if ((uint)index >= Count)
             {

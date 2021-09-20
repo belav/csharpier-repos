@@ -22,7 +22,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Completion.KeywordRecommenders
                 || context.IsPossibleTupleContext
                 || context.IsAtStartOfPattern
                 || (context.IsTypeContext && !context.IsEnumBaseListContext)
-            ) {
+            )
+            {
                 return true;
             }
 

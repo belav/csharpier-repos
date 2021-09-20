@@ -46,7 +46,8 @@ namespace System.ComponentModel.Design
                         encoding: Text.Encoding.UTF8,
                         leaveOpen: true
                     )
-                ) {
+                )
+                {
                     writer.Write(BinaryWriterMagic); // flag to identify BinaryWriter
                     writer.Write(cryptoKey);
                     writer.Write(context._savedLicenseKeys.Count);
@@ -63,7 +64,8 @@ namespace System.ComponentModel.Design
             Stream o,
             string cryptoKey,
             DesigntimeLicenseContext context
-        ) {
+        )
+        {
             IFormatter formatter = new BinaryFormatter();
 #pragma warning disable SYSLIB0011
             formatter.Serialize(o, new object[] { cryptoKey, context._savedLicenseKeys });
@@ -147,7 +149,8 @@ namespace System.ComponentModel.Design
             StreamWrapper wrappedStream,
             string cryptoKey,
             RuntimeLicenseContext context
-        ) {
+        )
+        {
             if (EnableUnsafeBinaryFormatterInDesigntimeLicenseContextSerialization)
             {
 #pragma warning disable SYSLIB0011
@@ -185,7 +188,8 @@ namespace System.ComponentModel.Design
                         encoding: Text.Encoding.UTF8,
                         leaveOpen: true
                     )
-                ) {
+                )
+                {
                     byte binaryWriterIdentifer = wrappedStream._firstByte;
                     Debug.Assert(
                         binaryWriterIdentifer == BinaryWriterMagic,

@@ -890,7 +890,8 @@ public delegate dynamic[] MyDelegate(dynamic[] x);
                 ImmutableArray<CSharpAttributeData> attributes,
                 bool expectedDynamicAttribute,
                 bool[] expectedTransformFlags = null
-            ) {
+            )
+            {
                 var synthesizedDynamicAttributes = attributes.Where(
                     (attr) =>
                         string.Equals(
@@ -1917,7 +1918,8 @@ class C
         [InlineData(SourceCodeKind.Script)]
         public void TestNoCS1980WhenNotInContextWhichNeedsDynamicAttribute(
             SourceCodeKind sourceCodeKind
-        ) {
+        )
+        {
             CompileAndVerify(
                 CreateCompilationWithMscorlib45(
                     source: GetNoCS1980String(typeName: @"Gen<dynamic>"),
@@ -1934,7 +1936,8 @@ class C
         [InlineData(SourceCodeKind.Script)]
         public void TestNoCS1980WhenNotInContextWhichNeedsDynamicAttribute_Errors(
             SourceCodeKind sourceCodeKind
-        ) {
+        )
+        {
             var comp = CreateCompilationWithMscorlib45(
                 source: GetNoCS1980String(typeName: @"dynamic"),
                 parseOptions: new CSharpParseOptions(

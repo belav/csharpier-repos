@@ -25,7 +25,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                 rewrittenReceiverOpt != null
                 && node.Event.ContainingAssembly.IsLinked
                 && node.Event.ContainingType.IsInterfaceType()
-            ) {
+            )
+            {
                 var @interface = node.Event.ContainingType;
 
                 foreach (var attrData in @interface.GetAttributes())
@@ -36,7 +37,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                             AttributeDescription.ComEventInterfaceAttribute
                         )
                         && attrData.CommonConstructorArguments.Length == 2
-                    ) {
+                    )
+                    {
                         return RewriteNoPiaEventAssignmentOperator(
                             node,
                             rewrittenReceiverOpt,
@@ -106,7 +108,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             bool isDynamic,
             BoundExpression? rewrittenReceiverOpt,
             BoundExpression rewrittenArgument
-        ) {
+        )
+        {
             BoundAssignmentOperator? tempAssignment = null;
             BoundLocal? boundTemp = null;
             Debug.Assert(eventSymbol.IsStatic || rewrittenReceiverOpt is { });
@@ -148,7 +151,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                         WellKnownMember.System_Runtime_InteropServices_WindowsRuntime_WindowsRuntimeMarshal__RemoveAllEventHandlers,
                         out clearMethod
                     )
-                ) {
+                )
+                {
                     clearCall = MakeCall(
                         syntax: syntax,
                         rewrittenReceiver: null,
@@ -261,7 +265,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             SyntaxNode syntax,
             BoundEventAccess left,
             BoundExpression rewrittenRight
-        ) {
+        )
+        {
             Debug.Assert(left.IsUsableAsField);
 
             EventSymbol eventSymbol = left.EventSymbol;
@@ -305,7 +310,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             ConstantValue? constantValueOpt,
             LookupResultKind resultKind,
             TypeSymbol type
-        ) {
+        )
+        {
             Debug.Assert(eventSymbol.HasAssociatedField);
 
             FieldSymbol? fieldSymbol = eventSymbol.AssociatedField;
@@ -345,7 +351,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                     WellKnownMember.System_Runtime_InteropServices_WindowsRuntime_EventRegistrationTokenTable_T__GetOrCreateEventRegistrationTokenTable,
                     out getOrCreateMethod
                 )
-            ) {
+            )
+            {
                 getOrCreateMethod = getOrCreateMethod.AsMember(fieldType);
 
                 // EventRegistrationTokenTable<Event>.GetOrCreateEventRegistrationTokenTable(ref _tokenTable)
@@ -374,7 +381,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                     WellKnownMember.System_Runtime_InteropServices_WindowsRuntime_EventRegistrationTokenTable_T__InvocationList,
                     out invocationListProperty
                 )
-            ) {
+            )
+            {
                 MethodSymbol invocationListAccessor = invocationListProperty.GetMethod;
 
                 if ((object)invocationListAccessor == null)
@@ -413,7 +421,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             BoundEventAssignmentOperator node,
             BoundExpression rewrittenReceiver,
             BoundExpression rewrittenArgument
-        ) {
+        )
+        {
             // In the new NoPIA scenario, myPIA.event += someevent translates into
             //
             // new System.Runtime.InteropServices.ComAwareEventInfo(typeof(myPIA), "event").AddEventHandler(myPIA, someevent)

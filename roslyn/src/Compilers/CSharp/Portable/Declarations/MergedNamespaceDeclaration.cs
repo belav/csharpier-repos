@@ -18,16 +18,16 @@ namespace Microsoft.CodeAnalysis.CSharp
         private readonly ImmutableArray<SingleNamespaceDeclaration> _declarations;
         private ImmutableArray<MergedNamespaceOrTypeDeclaration> _lazyChildren;
 
-        private MergedNamespaceDeclaration(
-            ImmutableArray<SingleNamespaceDeclaration> declarations
-        ) : base(declarations.IsEmpty ? string.Empty : declarations[0].Name)
+        private MergedNamespaceDeclaration(ImmutableArray<SingleNamespaceDeclaration> declarations)
+            : base(declarations.IsEmpty ? string.Empty : declarations[0].Name)
         {
             _declarations = declarations;
         }
 
         public static MergedNamespaceDeclaration Create(
             ImmutableArray<SingleNamespaceDeclaration> declarations
-        ) {
+        )
+        {
             return new MergedNamespaceDeclaration(declarations);
         }
 
@@ -109,7 +109,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                         }
                         else if (
                             allTypesHaveSameIdentity && !asType.Identity.Equals(types[0].Identity)
-                        ) {
+                        )
+                        {
                             allTypesHaveSameIdentity = false;
                         }
 
@@ -129,7 +130,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                         else if (
                             allNamespacesHaveSameName
                             && !asNamespace.Name.Equals(namespaces[0].Name)
-                        ) {
+                        )
+                        {
                             allNamespacesHaveSameName = false;
                         }
 

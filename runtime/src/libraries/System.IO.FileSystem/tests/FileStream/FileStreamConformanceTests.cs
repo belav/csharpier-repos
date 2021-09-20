@@ -48,7 +48,8 @@ namespace System.IO.Tests
         [MemberData(nameof(AllReadWriteModes))]
         public async Task FileOffsetIsPreservedWhenFileStreamIsCreatedFromSafeFileHandle_Reads(
             ReadWriteMode mode
-        ) {
+        )
+        {
             byte[] initialData = new byte[] { 0, 1, 2, 3, 4, 5, 6, 7, 8, 9 };
             using FileStream stream = (FileStream)await CreateReadOnlyStreamCore(initialData);
             byte[] buffer = new byte[5];
@@ -69,7 +70,8 @@ namespace System.IO.Tests
         [MemberData(nameof(AllReadWriteModes))]
         public async Task FileOffsetIsPreservedWhenFileStreamIsCreatedFromSafeFileHandle_Writes(
             ReadWriteMode mode
-        ) {
+        )
+        {
             using FileStream stream = (FileStream)await CreateWriteOnlyStreamCore(
                 Array.Empty<byte>()
             );
@@ -131,7 +133,8 @@ namespace System.IO.Tests
 
             using (
                 FileStream stream = (FileStream)await CreateWriteOnlyStreamCore(Array.Empty<byte>())
-            ) {
+            )
+            {
                 filePath = stream.Name;
 
                 // the following buffer fits into internal FileStream buffer
@@ -196,7 +199,8 @@ namespace System.IO.Tests
 
             using (
                 FileStream stream = (FileStream)await CreateWriteOnlyStreamCore(Array.Empty<byte>())
-            ) {
+            )
+            {
                 filePath = stream.Name;
 
                 stream.WriteByte(0);

@@ -31,7 +31,8 @@ namespace Microsoft.CodeAnalysis.CodeGeneration
             bool isUnsafe,
             bool isWithEvents,
             SyntaxNode initializer
-        ) {
+        )
+        {
             var info = new CodeGenerationFieldInfo(isUnsafe, isWithEvents, initializer);
             s_fieldToInfoMap.Add(field, info);
         }

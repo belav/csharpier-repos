@@ -18,7 +18,8 @@ namespace Microsoft.AspNetCore.Http2Cat
             IEnumerator<KeyValuePair<string, string>> headersEnumerator,
             Span<byte> buffer,
             out int length
-        ) {
+        )
+        {
             if (!HPackEncoder.EncodeStatusHeader(statusCode, buffer, out var statusCodeLength))
             {
                 throw new HPackEncodingException(SR.net_http_hpack_encode_failure);
@@ -50,7 +51,8 @@ namespace Microsoft.AspNetCore.Http2Cat
             IEnumerator<KeyValuePair<string, string>> headersEnumerator,
             Span<byte> buffer,
             out int length
-        ) {
+        )
+        {
             if (!headersEnumerator.MoveNext())
             {
                 length = 0;
@@ -67,7 +69,8 @@ namespace Microsoft.AspNetCore.Http2Cat
             IEnumerator<KeyValuePair<string, string>> headersEnumerator,
             Span<byte> buffer,
             out int length
-        ) {
+        )
+        {
             return EncodeHeaders(headersEnumerator, buffer, throwIfNoneEncoded: true, out length);
         }
 
@@ -76,7 +79,8 @@ namespace Microsoft.AspNetCore.Http2Cat
             Span<byte> buffer,
             bool throwIfNoneEncoded,
             out int length
-        ) {
+        )
+        {
             var currentLength = 0;
             do
             {
@@ -87,7 +91,8 @@ namespace Microsoft.AspNetCore.Http2Cat
                         buffer.Slice(currentLength),
                         out int headerLength
                     )
-                ) {
+                )
+                {
                     // The the header wasn't written and no headers have been written then the header is too large.
                     // Throw an error to avoid an infinite loop of attempting to write large header.
                     if (currentLength == 0 && throwIfNoneEncoded)
@@ -112,7 +117,8 @@ namespace Microsoft.AspNetCore.Http2Cat
             string value,
             Span<byte> buffer,
             out int length
-        ) {
+        )
+        {
             return HPackEncoder.EncodeLiteralHeaderFieldWithoutIndexingNewName(
                 name,
                 value,

@@ -178,7 +178,8 @@ namespace System.Reflection
             int charCount,
             int byteCount,
             bool allowUnpairedSurrogates
-        ) {
+        )
+        {
             Debug.Assert(byteCount >= charCount);
             const char ReplacementCharacter = '\uFFFD';
 
@@ -222,7 +223,8 @@ namespace System.Reflection
                                 IsHighSurrogateChar(c)
                                 && charPtr < strEnd
                                 && IsLowSurrogateChar(*charPtr)
-                            ) {
+                            )
+                            {
                                 int highSurrogate = c;
                                 int lowSurrogate = *charPtr++;
                                 int codepoint =
@@ -274,7 +276,8 @@ namespace System.Reflection
             int charCount,
             int byteLimit,
             out char* remainder
-        ) {
+        )
+        {
             char* end = str + charCount;
 
             char* ptr = str;
@@ -336,7 +339,8 @@ namespace System.Reflection
             int start,
             int byteCount,
             string byteCountParameterName
-        ) {
+        )
+        {
             if (start < 0 || start > bufferLength)
             {
                 Throw.ArgumentOutOfRange(nameof(start));

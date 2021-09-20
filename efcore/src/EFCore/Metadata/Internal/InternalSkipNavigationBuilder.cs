@@ -75,7 +75,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
         public virtual InternalSkipNavigationBuilder? HasForeignKey(
             ForeignKey? foreignKey,
             ConfigurationSource configurationSource
-        ) {
+        )
+        {
             if (!CanSetForeignKey(foreignKey, configurationSource))
             {
                 return null;
@@ -93,7 +94,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
                                 ? foreignKey.PrincipalEntityType
                                 : foreignKey.DeclaringEntityType
                         )
-                ) {
+                )
+                {
                     Metadata.Inverse.Builder.HasForeignKey(null, configurationSource);
                 }
             }
@@ -106,7 +108,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
                 oldForeignKey?.IsInModel == true
                 && oldForeignKey != foreignKey
                 && oldForeignKey.ReferencingSkipNavigations?.Any() != true
-            ) {
+            )
+            {
                 oldForeignKey.DeclaringEntityType.Builder.HasNoRelationship(
                     oldForeignKey,
                     ConfigurationSource.Convention
@@ -125,7 +128,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
         public virtual bool CanSetForeignKey(
             ForeignKey? foreignKey,
             ConfigurationSource? configurationSource
-        ) {
+        )
+        {
             if (!configurationSource.Overrides(Metadata.GetForeignKeyConfigurationSource()))
             {
                 return Equals(Metadata.ForeignKey, foreignKey);
@@ -143,7 +147,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
                         ? foreignKey.DeclaringEntityType
                         : foreignKey.PrincipalEntityType
                 )
-            ) {
+            )
+            {
                 return false;
             }
 
@@ -170,7 +175,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
         public virtual InternalSkipNavigationBuilder? HasInverse(
             SkipNavigation? inverse,
             ConfigurationSource configurationSource
-        ) {
+        )
+        {
             if (!CanSetInverse(inverse, configurationSource))
             {
                 return null;
@@ -208,14 +214,16 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
         public virtual bool CanSetInverse(
             SkipNavigation? inverse,
             ConfigurationSource? configurationSource
-        ) {
+        )
+        {
             if (
                 !configurationSource.Overrides(Metadata.GetInverseConfigurationSource())
                 || (
                     inverse != null
                     && !configurationSource.Overrides(inverse.GetInverseConfigurationSource())
                 )
-            ) {
+            )
+            {
                 return Equals(Metadata.Inverse, inverse);
             }
 
@@ -243,7 +251,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
             InternalEntityTypeBuilder? entityTypeBuilder = null,
             EntityType? targetEntityType = null,
             InternalSkipNavigationBuilder? inverseBuilder = null
-        ) {
+        )
+        {
             if (entityTypeBuilder is null)
             {
                 if (Metadata.DeclaringEntityType.IsInModel)
@@ -255,7 +264,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
                         Metadata.DeclaringEntityType.Name
                     )
                     is EntityType entityType
-                ) {
+                )
+                {
                     entityTypeBuilder = entityType.Builder;
                 }
                 else
@@ -356,7 +366,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
                     Metadata.FieldInfo,
                     oldFieldInfoConfigurationSource
                 )
-            ) {
+            )
+            {
                 newSkipNavigationBuilder.HasField(
                     Metadata.FieldInfo,
                     oldFieldInfoConfigurationSource.Value
@@ -375,7 +386,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
         public virtual bool CanSetAutoInclude(
             bool? autoInclude,
             ConfigurationSource configurationSource
-        ) {
+        )
+        {
             IConventionSkipNavigation conventionNavigation = Metadata;
 
             return configurationSource.Overrides(
@@ -393,7 +405,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
         public virtual InternalSkipNavigationBuilder? AutoInclude(
             bool? autoInclude,
             ConfigurationSource configurationSource
-        ) {
+        )
+        {
             if (CanSetAutoInclude(autoInclude, configurationSource))
             {
                 if (configurationSource == ConfigurationSource.Explicit)

@@ -77,7 +77,8 @@ namespace System.Collections.Immutable
         public static ImmutableSortedSet<T> CreateRange<T>(
             IComparer<T>? comparer,
             IEnumerable<T> items
-        ) {
+        )
+        {
             return ImmutableSortedSet<T>.Empty.WithComparer(comparer).Union(items);
         }
 
@@ -137,7 +138,8 @@ namespace System.Collections.Immutable
         public static ImmutableSortedSet<TSource> ToImmutableSortedSet<TSource>(
             this IEnumerable<TSource> source,
             IComparer<TSource>? comparer
-        ) {
+        )
+        {
             if (source is ImmutableSortedSet<TSource> existingSet)
             {
                 return existingSet.WithComparer(comparer);
@@ -154,7 +156,8 @@ namespace System.Collections.Immutable
         /// <returns>An immutable set.</returns>
         public static ImmutableSortedSet<TSource> ToImmutableSortedSet<TSource>(
             this IEnumerable<TSource> source
-        ) {
+        )
+        {
             return ToImmutableSortedSet(source, null);
         }
 
@@ -165,7 +168,8 @@ namespace System.Collections.Immutable
         /// <returns>An immutable set.</returns>
         public static ImmutableSortedSet<TSource> ToImmutableSortedSet<TSource>(
             this ImmutableSortedSet<TSource>.Builder builder
-        ) {
+        )
+        {
             Requires.NotNull(builder, nameof(builder));
 
             return builder.ToImmutable();

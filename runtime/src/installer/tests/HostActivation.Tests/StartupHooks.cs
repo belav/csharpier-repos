@@ -716,7 +716,8 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation
 
             using (
                 FileStream fileStream = File.Open(depsJsonPath, FileMode.Truncate, FileAccess.Write)
-            ) {
+            )
+            {
                 DependencyContextWriter writer = new DependencyContextWriter();
                 writer.Write(context, fileStream);
             }

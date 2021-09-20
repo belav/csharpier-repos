@@ -270,13 +270,14 @@ namespace System.Web.Mvc.Html.Test
                 string attributeEncodedText,
                 string htmlEncodedText,
                 string idEncodedText
-            ) : this(
-                text,
-                attributeEncodedText,
-                htmlEncodedText,
-                idEncodedText,
-                Uri.EscapeUriString(text)
-            ) { }
+            )
+                : this(
+                    text,
+                    attributeEncodedText,
+                    htmlEncodedText,
+                    idEncodedText,
+                    Uri.EscapeUriString(text)
+                ) { }
 
             public StringSet(
                 string text,
@@ -284,7 +285,8 @@ namespace System.Web.Mvc.Html.Test
                 string htmlEncodedText,
                 string idEncodedText,
                 string urlEncodedText
-            ) {
+            )
+            {
                 Contract.Assert(!String.IsNullOrEmpty(text));
                 Contract.Assert(!String.IsNullOrEmpty(attributeEncodedText));
                 Contract.Assert(!String.IsNullOrEmpty(htmlEncodedText));

@@ -78,7 +78,8 @@ namespace Microsoft.CodeAnalysis.ExtractMethod
 
         public async Task<ExtractMethodResult> ExtractMethodAsync(
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var operationStatus = OriginalSelectionResult.Status;
 
             var analyzeResult = await AnalyzeAsync(
@@ -178,7 +179,8 @@ namespace Microsoft.CodeAnalysis.ExtractMethod
             SyntaxAnnotation invocationAnnotation,
             SyntaxAnnotation methodAnnotation,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var newRoot = semanticDocument.Root;
             var methodName = GetMethodNameAtInvocation(
                 newRoot.GetAnnotatedNodesAndTokens(invocationAnnotation)
@@ -216,7 +218,8 @@ namespace Microsoft.CodeAnalysis.ExtractMethod
             OperationStatus status,
             AnalyzerResult analyzeResult,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var document = analyzeResult.SemanticDocument;
 
             // sync selection result to same semantic data as analyzeResult
@@ -303,7 +306,8 @@ namespace Microsoft.CodeAnalysis.ExtractMethod
             IEnumerable<VariableInfo> variables,
             OperationStatus status,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             if (status.FailedWithNoBestEffortSuggestion())
             {
                 return Tuple.Create(false, status);

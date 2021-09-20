@@ -57,7 +57,8 @@ namespace Microsoft.AspNetCore.SignalR
             ILoggerFactory loggerFactory,
             IUserIdProvider userIdProvider,
             IServiceScopeFactory serviceScopeFactory
-        ) {
+        )
+        {
             _protocolResolver = protocolResolver;
             _lifetimeManager = lifetimeManager;
             _loggerFactory = loggerFactory;
@@ -157,7 +158,8 @@ namespace Microsoft.AspNetCore.SignalR
                     _userIdProvider,
                     _enableDetailedErrors
                 )
-            ) {
+            )
+            {
                 return;
             }
 
@@ -220,7 +222,8 @@ namespace Microsoft.AspNetCore.SignalR
         private async Task HubOnDisconnectedAsync(
             HubConnectionContext connection,
             Exception? exception
-        ) {
+        )
+        {
             // send close message before aborting the connection
             await SendCloseAsync(connection, exception, connection.AllowReconnect);
 
@@ -245,7 +248,8 @@ namespace Microsoft.AspNetCore.SignalR
             HubConnectionContext connection,
             Exception? exception,
             bool allowReconnect
-        ) {
+        )
+        {
             var closeMessage = CloseMessage.Empty;
 
             if (exception != null)

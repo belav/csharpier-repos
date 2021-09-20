@@ -29,7 +29,8 @@ namespace Microsoft.Extensions.DependencyInjection
         public static IMvcCoreBuilder AddMvcOptions(
             this IMvcCoreBuilder builder,
             Action<MvcOptions> setupAction
-        ) {
+        )
+        {
             if (builder == null)
             {
                 throw new ArgumentNullException(nameof(builder));
@@ -53,7 +54,8 @@ namespace Microsoft.Extensions.DependencyInjection
         public static IMvcCoreBuilder AddJsonOptions(
             this IMvcCoreBuilder builder,
             Action<JsonOptions> configure
-        ) {
+        )
+        {
             if (builder == null)
             {
                 throw new ArgumentNullException(nameof(builder));
@@ -88,7 +90,8 @@ namespace Microsoft.Extensions.DependencyInjection
         public static IMvcCoreBuilder AddFormatterMappings(
             this IMvcCoreBuilder builder,
             Action<FormatterMappings> setupAction
-        ) {
+        )
+        {
             AddFormatterMappingsServices(builder.Services);
 
             if (setupAction != null)
@@ -127,7 +130,8 @@ namespace Microsoft.Extensions.DependencyInjection
         public static IMvcCoreBuilder AddAuthorization(
             this IMvcCoreBuilder builder,
             Action<AuthorizationOptions> setupAction
-        ) {
+        )
+        {
             AddAuthorizationServices(builder.Services);
 
             if (setupAction != null)
@@ -184,7 +188,8 @@ namespace Microsoft.Extensions.DependencyInjection
         public static IMvcCoreBuilder AddApplicationPart(
             this IMvcCoreBuilder builder,
             Assembly assembly
-        ) {
+        )
+        {
             if (builder == null)
             {
                 throw new ArgumentNullException(nameof(builder));
@@ -219,7 +224,8 @@ namespace Microsoft.Extensions.DependencyInjection
         public static IMvcCoreBuilder ConfigureApplicationPartManager(
             this IMvcCoreBuilder builder,
             Action<ApplicationPartManager> setupAction
-        ) {
+        )
+        {
             if (builder == null)
             {
                 throw new ArgumentNullException(nameof(builder));
@@ -244,7 +250,8 @@ namespace Microsoft.Extensions.DependencyInjection
         public static IMvcCoreBuilder ConfigureApiBehaviorOptions(
             this IMvcCoreBuilder builder,
             Action<ApiBehaviorOptions> setupAction
-        ) {
+        )
+        {
             if (builder == null)
             {
                 throw new ArgumentNullException(nameof(builder));
@@ -274,7 +281,8 @@ namespace Microsoft.Extensions.DependencyInjection
         public static IMvcCoreBuilder SetCompatibilityVersion(
             this IMvcCoreBuilder builder,
             CompatibilityVersion version
-        ) {
+        )
+        {
             if (builder == null)
             {
                 throw new ArgumentNullException(nameof(builder));

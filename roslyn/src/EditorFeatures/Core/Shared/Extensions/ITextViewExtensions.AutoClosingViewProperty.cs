@@ -22,7 +22,8 @@ namespace Microsoft.CodeAnalysis.Editor.Shared.Extensions
                 object key,
                 Func<TTextView, TProperty> valueCreator,
                 out TProperty value
-            ) {
+            )
+            {
                 Contract.ThrowIfTrue(textView.IsClosed);
 
                 var properties = textView.Properties.GetOrCreateSingletonProperty(
@@ -45,7 +46,8 @@ namespace Microsoft.CodeAnalysis.Editor.Shared.Extensions
                 TTextView textView,
                 object key,
                 [MaybeNullWhen(false)] out TProperty value
-            ) {
+            )
+            {
                 Contract.ThrowIfTrue(textView.IsClosed);
 
                 var properties = textView.Properties.GetOrCreateSingletonProperty(
@@ -71,7 +73,8 @@ namespace Microsoft.CodeAnalysis.Editor.Shared.Extensions
                         typeof(AutoClosingViewProperty<TProperty, TTextView>),
                         out AutoClosingViewProperty<TProperty, TTextView> properties
                     )
-                ) {
+                )
+                {
                     properties.Remove(key);
                 }
             }

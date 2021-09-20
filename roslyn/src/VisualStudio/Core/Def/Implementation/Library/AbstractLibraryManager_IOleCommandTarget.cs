@@ -26,7 +26,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Library
             uint nCmdexecopt,
             IntPtr pvaIn,
             IntPtr pvaOut
-        ) {
+        )
+        {
             if (TryExec(pguidCmdGroup, nCmdID))
             {
                 return VSConstants.S_OK;
@@ -40,7 +41,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Library
             uint cCmds,
             OLECMD[] prgCmds,
             IntPtr pCmdText
-        ) {
+        )
+        {
             if (cCmds != 1)
             {
                 return VSConstants.E_UNEXPECTED;

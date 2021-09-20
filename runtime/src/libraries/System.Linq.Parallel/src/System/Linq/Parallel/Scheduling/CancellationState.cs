@@ -70,7 +70,8 @@ namespace System.Linq.Parallel
         // Test if external cancellation was requested and occurred, and if so throw a standardize OCE with standardized message
         internal static void ThrowWithStandardMessageIfCanceled(
             CancellationToken externalCancellationToken
-        ) {
+        )
+        {
             if (externalCancellationToken.IsCancellationRequested)
             {
                 string oceMessage = SR.PLINQ_ExternalCancellationRequested;

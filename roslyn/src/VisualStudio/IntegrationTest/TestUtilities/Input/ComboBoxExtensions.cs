@@ -21,7 +21,8 @@ namespace Microsoft.VisualStudio.IntegrationTest.Utilities.Input
             JoinableTaskFactory joinableTaskFactory,
             string itemText,
             bool mustExist = true
-        ) {
+        )
+        {
             await joinableTaskFactory.SwitchToMainThreadAsync();
 
             if (comboBox.Text == itemText)
@@ -51,7 +52,8 @@ namespace Microsoft.VisualStudio.IntegrationTest.Utilities.Input
                 if (
                     !await comboBox.SimulateCollapseAsync(joinableTaskFactory)
                     || !await comboBox.SimulateSetTextAsync(joinableTaskFactory, itemText)
-                ) {
+                )
+                {
                     return false;
                 }
 
@@ -77,7 +79,8 @@ namespace Microsoft.VisualStudio.IntegrationTest.Utilities.Input
         public static async Task<bool> SimulateExpandAsync(
             this ComboBox comboBox,
             JoinableTaskFactory joinableTaskFactory
-        ) {
+        )
+        {
             await joinableTaskFactory.SwitchToMainThreadAsync();
 
             if (comboBox.IsDropDownOpen)
@@ -102,7 +105,8 @@ namespace Microsoft.VisualStudio.IntegrationTest.Utilities.Input
         public static async Task<bool> SimulateCollapseAsync(
             this ComboBox comboBox,
             JoinableTaskFactory joinableTaskFactory
-        ) {
+        )
+        {
             await joinableTaskFactory.SwitchToMainThreadAsync();
 
             if (!comboBox.IsDropDownOpen)
@@ -128,7 +132,8 @@ namespace Microsoft.VisualStudio.IntegrationTest.Utilities.Input
             this ComboBox comboBox,
             JoinableTaskFactory joinableTaskFactory,
             string value
-        ) {
+        )
+        {
             if (value == null)
             {
                 throw new ArgumentNullException(nameof(value));

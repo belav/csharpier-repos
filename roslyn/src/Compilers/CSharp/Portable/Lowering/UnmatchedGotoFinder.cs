@@ -38,7 +38,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             BoundNode node,
             Dictionary<BoundNode, HashSet<LabelSymbol>> unmatchedLabelsCache,
             int recursionDepth
-        ) {
+        )
+        {
             UnmatchedGotoFinder finder = new UnmatchedGotoFinder(
                 unmatchedLabelsCache,
                 recursionDepth

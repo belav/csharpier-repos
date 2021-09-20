@@ -34,7 +34,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Simplification
             SemanticModel semanticModel,
             OptionSet optionSet,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             if (!CastSimplifier.IsUnnecessaryCast(node, semanticModel, cancellationToken))
             {
                 return node;

@@ -240,7 +240,8 @@ namespace Microsoft.AspNetCore.Mvc.Routing
         public void ServiceInjected_RouteKey_Exists_MatchSucceeds(
             string keyName,
             RouteDirection direction
-        ) {
+        )
+        {
             // Arrange
             var actionDescriptor = CreateActionDescriptor(
                 "testArea",
@@ -320,7 +321,8 @@ namespace Microsoft.AspNetCore.Mvc.Routing
 
         private static IActionDescriptorCollectionProvider CreateActionDescriptorCollectionProvider(
             ActionDescriptor actionDescriptor
-        ) {
+        )
+        {
             var actionProvider = new Mock<IActionDescriptorProvider>(MockBehavior.Strict);
 
             actionProvider.SetupGet(p => p.Order).Returns(-1000);
@@ -346,7 +348,8 @@ namespace Microsoft.AspNetCore.Mvc.Routing
             string area,
             string controller,
             string action
-        ) {
+        )
+        {
             var actionDescriptor = new ControllerActionDescriptor()
             {
                 ActionName = string.Format(

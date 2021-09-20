@@ -82,7 +82,8 @@ namespace System.Web.Http.Routing
         private static IHttpRoute BuildWithoutResolver(
             string template,
             IReadOnlyCollection<HttpActionDescriptor> actions
-        ) {
+        )
+        {
             DirectRouteFactoryContext context = new DirectRouteFactoryContext(
                 null,
                 actions,
@@ -96,7 +97,8 @@ namespace System.Web.Http.Routing
         private static IHttpRoute BuildWithResolver(
             string template,
             IInlineConstraintResolver constraintResolver
-        ) {
+        )
+        {
             HttpActionDescriptor[] actions = new HttpActionDescriptor[]
             {
                 new ReflectedHttpActionDescriptor()

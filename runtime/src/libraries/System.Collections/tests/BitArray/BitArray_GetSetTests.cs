@@ -24,7 +24,8 @@ namespace System.Collections.Tests
                     BitsPerInt32,
                     BitsPerInt32 * 2
                 }
-            ) {
+            )
+            {
                 foreach (bool def in new[] { true, false })
                 {
                     yield return new object[] { def, Enumerable.Repeat(true, size).ToArray() };
@@ -146,7 +147,8 @@ namespace System.Collections.Tests
                     BitsPerInt32,
                     BitsPerInt32 + 1
                 }
-            ) {
+            )
+            {
                 foreach (bool lead in new[] { true, false })
                 {
                     yield return new object[]
@@ -300,7 +302,8 @@ namespace System.Collections.Tests
                     BitsPerInt32 * 8,
                     BitsPerInt32 * 16
                 }
-            ) {
+            )
+            {
                 BitArray allTrue = new BitArray(bitArraySize, true);
                 BitArray allFalse = new BitArray(bitArraySize, false);
                 BitArray alternating = new BitArray(
@@ -317,7 +320,8 @@ namespace System.Collections.Tests
                         (bitArraySize * 2 + 1, bitArraySize + 1),
                         (bitArraySize * 2 + 1, bitArraySize / 2 + 1)
                     }
-                ) {
+                )
+                {
                     yield return new object[]
                     {
                         allTrue,
@@ -440,7 +444,8 @@ namespace System.Collections.Tests
                         (bitArraySize * 2 + 1, bitArraySize + 1),
                         (bitArraySize * 2 + 1, bitArraySize / 2 + 1)
                     }
-                ) {
+                )
+                {
                     if (bitArraySize >= BitsPerInt32)
                     {
                         yield return new object[]
@@ -491,7 +496,8 @@ namespace System.Collections.Tests
             int startIndex,
             T[] expected,
             T def
-        ) {
+        )
+        {
             T[] array = new T[destinationLength];
             ICollection collection = bitArray;
             collection.CopyTo(array, startIndex);

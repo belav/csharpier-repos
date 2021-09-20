@@ -21,25 +21,25 @@ namespace Microsoft.CodeAnalysis.CodeStyle
         {
             public readonly TCodeStyleProvider _codeStyleProvider;
 
-            protected DiagnosticAnalyzer(
-                bool isUnnecessary = true,
-                bool configurable = true
-            ) : this(new TCodeStyleProvider(), isUnnecessary, configurable) { }
+            protected DiagnosticAnalyzer(bool isUnnecessary = true, bool configurable = true)
+                : this(new TCodeStyleProvider(), isUnnecessary, configurable) { }
 
             private DiagnosticAnalyzer(
                 TCodeStyleProvider codeStyleProvider,
                 bool isUnnecessary,
                 bool configurable
-            ) : base(
-                codeStyleProvider._descriptorId,
-                codeStyleProvider._enforceOnBuild,
-                codeStyleProvider._option,
-                codeStyleProvider._language,
-                codeStyleProvider._title,
-                codeStyleProvider._message,
-                isUnnecessary,
-                configurable
-            ) {
+            )
+                : base(
+                    codeStyleProvider._descriptorId,
+                    codeStyleProvider._enforceOnBuild,
+                    codeStyleProvider._option,
+                    codeStyleProvider._language,
+                    codeStyleProvider._title,
+                    codeStyleProvider._message,
+                    isUnnecessary,
+                    configurable
+                )
+            {
                 _codeStyleProvider = codeStyleProvider;
             }
 
@@ -72,7 +72,8 @@ namespace Microsoft.CodeAnalysis.CodeStyle
             public AnalysisContext(
                 TCodeStyleProvider codeStyleProvider,
                 Diagnostics.AnalysisContext context
-            ) {
+            )
+            {
                 _codeStyleProvider = codeStyleProvider;
                 _context = context;
             }
@@ -85,7 +86,8 @@ namespace Microsoft.CodeAnalysis.CodeStyle
 
             public void RegisterCodeBlockAction(
                 Action<CodeBlockAnalysisContext, CodeStyleOption2<TOptionKind>> analyze
-            ) {
+            )
+            {
                 var provider = _codeStyleProvider;
                 _context.RegisterCodeBlockAction(
                     c =>
@@ -102,7 +104,8 @@ namespace Microsoft.CodeAnalysis.CodeStyle
 
             public void RegisterSemanticModelAction(
                 Action<SemanticModelAnalysisContext, CodeStyleOption2<TOptionKind>> analyze
-            ) {
+            )
+            {
                 var provider = _codeStyleProvider;
                 _context.RegisterSemanticModelAction(
                     c =>
@@ -119,7 +122,8 @@ namespace Microsoft.CodeAnalysis.CodeStyle
 
             public void RegisterSyntaxTreeAction(
                 Action<SyntaxTreeAnalysisContext, CodeStyleOption2<TOptionKind>> analyze
-            ) {
+            )
+            {
                 var provider = _codeStyleProvider;
                 _context.RegisterSyntaxTreeAction(
                     c =>
@@ -137,7 +141,8 @@ namespace Microsoft.CodeAnalysis.CodeStyle
             public void RegisterOperationAction(
                 Action<OperationAnalysisContext, CodeStyleOption2<TOptionKind>> analyze,
                 params OperationKind[] operationKinds
-            ) {
+            )
+            {
                 var provider = _codeStyleProvider;
                 _context.RegisterOperationAction(
                     c =>
@@ -180,7 +185,8 @@ namespace Microsoft.CodeAnalysis.CodeStyle
                 AnalyzerOptions options,
                 SyntaxTree syntaxTree,
                 CancellationToken cancellationToken
-            ) {
+            )
+            {
                 var optionValue = options.GetOption(
                     provider._option,
                     syntaxTree,

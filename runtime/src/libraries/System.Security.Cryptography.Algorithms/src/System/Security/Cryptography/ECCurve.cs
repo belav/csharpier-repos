@@ -187,7 +187,8 @@ namespace System.Security.Cryptography
                 if (
                     Oid == null
                     || (string.IsNullOrEmpty(Oid.FriendlyName) && string.IsNullOrEmpty(Oid.Value))
-                ) {
+                )
+                {
                     throw new CryptographicException(SR.Cryptography_InvalidCurveOid);
                 }
             }
@@ -207,7 +208,8 @@ namespace System.Security.Cryptography
                     || Order.Length == 0
                     || Cofactor == null
                     || Cofactor.Length == 0
-                ) {
+                )
+                {
                     hasErrors = true;
                 }
 

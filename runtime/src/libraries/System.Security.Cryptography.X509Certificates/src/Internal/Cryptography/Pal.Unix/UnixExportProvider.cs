@@ -193,7 +193,8 @@ namespace Internal.Cryptography.Pal
             SafeBagAsn[] keyBags,
             ref int certIdx,
             ref int keyIdx
-        ) {
+        )
+        {
             tmpWriter.WriteOctetString(certPal.RawData);
 
             certBags[certIdx] = new CertBagAsn
@@ -239,7 +240,8 @@ namespace Internal.Cryptography.Pal
             AttributeAsn[] certAttrs,
             int certIdx,
             ReadOnlySpan<char> passwordSpan
-        ) {
+        )
+        {
             string? encryptionAlgorithmOid = null;
             bool certsIsPkcs12Encryption = false;
             string? certsHmacOid = null;
@@ -304,7 +306,8 @@ namespace Internal.Cryptography.Pal
             AsnWriter tmpWriter,
             SafeBagAsn[] keyBags,
             int keyCount
-        ) {
+        )
+        {
             Debug.Assert(tmpWriter.GetEncodedLength() == 0);
 
             using (tmpWriter.PushSequence())
@@ -341,7 +344,8 @@ namespace Internal.Cryptography.Pal
             out string hmacOid,
             out string encryptionAlgorithmOid,
             out bool isPkcs12
-        ) {
+        )
+        {
             Debug.Assert(tmpWriter.GetEncodedLength() == 0);
             tmpWriter.PushSequence();
 
@@ -421,7 +425,8 @@ namespace Internal.Cryptography.Pal
             string encryptionAlgorithmOid,
             Span<byte> salt,
             Span<byte> certContentsIv
-        ) {
+        )
+        {
             Debug.Assert(tmpWriter.GetEncodedLength() == 0);
 
             tmpWriter.PushSequence();
@@ -503,7 +508,8 @@ namespace Internal.Cryptography.Pal
             AsnWriter tmpWriter,
             ReadOnlyMemory<byte> encodedAuthSafe,
             ReadOnlySpan<char> passwordSpan
-        ) {
+        )
+        {
             // Windows/macOS compatibility: Use HMAC-SHA-1,
             // other algorithms may not be understood
             byte[] macKey = new byte[20];
@@ -531,7 +537,8 @@ namespace Internal.Cryptography.Pal
                     if (
                         !mac.TryGetHashAndReset(macSpan, out int bytesWritten)
                         || bytesWritten != macSpan.Length
-                    ) {
+                    )
+                    {
                         Debug.Fail(
                             $"TryGetHashAndReset wrote {bytesWritten} of {macSpan.Length} bytes"
                         );

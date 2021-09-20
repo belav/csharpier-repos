@@ -41,7 +41,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.SemanticClassif
             TextSpan textSpan,
             Checksum checksum,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var client = await RemoteHostClient.TryGetClientAsync(_workspace, cancellationToken)
                 .ConfigureAwait(false);
             if (client == null)

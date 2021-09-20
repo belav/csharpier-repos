@@ -94,7 +94,8 @@ namespace System.Reflection.TypeLoading.Ecma
         public sealed override void GetPEKind(
             out PortableExecutableKinds peKind,
             out ImageFileMachine machine
-        ) {
+        )
+        {
             PEHeaders peHeaders = PEReader.PEHeaders;
             PEMagic peMagic = peHeaders.PEHeader!.Magic;
             Machine coffMachine = peHeaders.CoffHeader.Machine;

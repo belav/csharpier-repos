@@ -41,13 +41,15 @@ namespace System.Collections.Specialized
         }
         public static System.Collections.Specialized.BitVector32.Section CreateSection(
             short maxValue
-        ) {
+        )
+        {
             throw null;
         }
         public static System.Collections.Specialized.BitVector32.Section CreateSection(
             short maxValue,
             System.Collections.Specialized.BitVector32.Section previous
-        ) {
+        )
+        {
             throw null;
         }
         public override bool Equals(object? o)
@@ -92,13 +94,15 @@ namespace System.Collections.Specialized
             public static bool operator ==(
                 System.Collections.Specialized.BitVector32.Section a,
                 System.Collections.Specialized.BitVector32.Section b
-            ) {
+            )
+            {
                 throw null;
             }
             public static bool operator !=(
                 System.Collections.Specialized.BitVector32.Section a,
                 System.Collections.Specialized.BitVector32.Section b
-            ) {
+            )
+            {
                 throw null;
             }
             public override string ToString()

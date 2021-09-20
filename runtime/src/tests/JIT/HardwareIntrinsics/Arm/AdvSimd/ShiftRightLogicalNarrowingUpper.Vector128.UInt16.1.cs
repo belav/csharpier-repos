@@ -133,7 +133,8 @@ namespace JIT.HardwareIntrinsics.Arm
                     || (alignment * 2) < sizeOfinArray1
                     || (alignment * 2) < sizeOfinArray2
                     || (alignment * 2) < sizeOfoutArray
-                ) {
+                )
+                {
                     throw new ArgumentException("Invalid value of alignment");
                 }
 
@@ -212,7 +213,8 @@ namespace JIT.HardwareIntrinsics.Arm
 
             public void RunStructFldScenario(
                 ImmBinaryOpTest__ShiftRightLogicalNarrowingUpper_Vector128_UInt16_1 testClass
-            ) {
+            )
+            {
                 var result = AdvSimd.ShiftRightLogicalNarrowingUpper(_fld1, _fld2, 1);
 
                 Unsafe.Write(testClass._dataTable.outArrayPtr, result);
@@ -221,7 +223,8 @@ namespace JIT.HardwareIntrinsics.Arm
 
             public void RunStructFldScenario_Load(
                 ImmBinaryOpTest__ShiftRightLogicalNarrowingUpper_Vector128_UInt16_1 testClass
-            ) {
+            )
+            {
                 fixed (Vector64<UInt16>* pFld1 = &_fld1)fixed (Vector128<UInt32>* pFld2 = &_fld2)
                 {
                     var result = AdvSimd.ShiftRightLogicalNarrowingUpper(
@@ -410,7 +413,8 @@ namespace JIT.HardwareIntrinsics.Arm
 
             fixed (Vector64<UInt16>* pClsVar1 = &_clsVar1)fixed (
                 Vector128<UInt32>* pClsVar2 = &_clsVar2
-            ) {
+            )
+            {
                 var result = AdvSimd.ShiftRightLogicalNarrowingUpper(
                     AdvSimd.LoadVector64((UInt16*)(pClsVar1)),
                     AdvSimd.LoadVector128((UInt32*)(pClsVar2)),
@@ -464,7 +468,8 @@ namespace JIT.HardwareIntrinsics.Arm
 
             fixed (Vector64<UInt16>* pFld1 = &test._fld1)fixed (
                 Vector128<UInt32>* pFld2 = &test._fld2
-            ) {
+            )
+            {
                 var result = AdvSimd.ShiftRightLogicalNarrowingUpper(
                     AdvSimd.LoadVector64((UInt16*)(pFld1)),
                     AdvSimd.LoadVector128((UInt32*)(pFld2)),
@@ -571,7 +576,8 @@ namespace JIT.HardwareIntrinsics.Arm
             Vector128<UInt32> secondOp,
             void* result,
             [CallerMemberName] string method = ""
-        ) {
+        )
+        {
             UInt16[] inArray1 = new UInt16[Op1ElementCount];
             UInt32[] inArray2 = new UInt32[Op2ElementCount];
             UInt16[] outArray = new UInt16[RetElementCount];
@@ -592,7 +598,8 @@ namespace JIT.HardwareIntrinsics.Arm
             void* secondOp,
             void* result,
             [CallerMemberName] string method = ""
-        ) {
+        )
+        {
             UInt16[] inArray1 = new UInt16[Op1ElementCount];
             UInt32[] inArray2 = new UInt32[Op2ElementCount];
             UInt16[] outArray = new UInt16[RetElementCount];
@@ -621,7 +628,8 @@ namespace JIT.HardwareIntrinsics.Arm
             UInt32[] secondOp,
             UInt16[] result,
             [CallerMemberName] string method = ""
-        ) {
+        )
+        {
             bool succeeded = true;
 
             for (var i = 0; i < RetElementCount; i++)

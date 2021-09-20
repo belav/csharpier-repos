@@ -151,7 +151,8 @@ namespace System.Threading.Tasks
             ReplicatableUserAction<TState> action,
             ParallelOptions options,
             bool stopOnFirstFailure
-        ) {
+        )
+        {
             int maxConcurrencyLevel =
                 (options.EffectiveMaxConcurrencyLevel > 0)
                     ? options.EffectiveMaxConcurrencyLevel

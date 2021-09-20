@@ -82,7 +82,8 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
         [InlineData(true)]
         public virtual void Changing_state_to_Unknown_causes_entity_to_stop_tracking(
             bool useTempValue
-        ) {
+        )
+        {
             using var context = new TKContext();
             var entry1 = context.Entry(new TSomeEntity()).GetInfrastructure();
             var keyProperty = entry1.EntityType.FindProperty("Id");

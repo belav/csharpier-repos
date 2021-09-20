@@ -61,7 +61,8 @@ namespace Microsoft.EntityFrameworkCore.Update
             StringBuilder commandStringBuilder,
             ModificationCommand command,
             int commandPosition
-        ) {
+        )
+        {
             Check.NotNull(commandStringBuilder, nameof(commandStringBuilder));
             Check.NotNull(command, nameof(command));
 
@@ -102,7 +103,8 @@ namespace Microsoft.EntityFrameworkCore.Update
             StringBuilder commandStringBuilder,
             ModificationCommand command,
             int commandPosition
-        ) {
+        )
+        {
             Check.NotNull(commandStringBuilder, nameof(commandStringBuilder));
             Check.NotNull(command, nameof(command));
 
@@ -155,7 +157,8 @@ namespace Microsoft.EntityFrameworkCore.Update
             StringBuilder commandStringBuilder,
             ModificationCommand command,
             int commandPosition
-        ) {
+        )
+        {
             Check.NotNull(commandStringBuilder, nameof(commandStringBuilder));
             Check.NotNull(command, nameof(command));
 
@@ -186,7 +189,8 @@ namespace Microsoft.EntityFrameworkCore.Update
             string name,
             string? schema,
             IReadOnlyList<ColumnModification> writeOperations
-        ) {
+        )
+        {
             Check.NotNull(commandStringBuilder, nameof(commandStringBuilder));
             Check.NotEmpty(name, nameof(name));
             Check.NotNull(writeOperations, nameof(writeOperations));
@@ -211,7 +215,8 @@ namespace Microsoft.EntityFrameworkCore.Update
             string? schema,
             IReadOnlyList<ColumnModification> writeOperations,
             IReadOnlyList<ColumnModification> conditionOperations
-        ) {
+        )
+        {
             Check.NotNull(commandStringBuilder, nameof(commandStringBuilder));
             Check.NotEmpty(name, nameof(name));
             Check.NotEmpty(writeOperations, nameof(writeOperations));
@@ -234,7 +239,8 @@ namespace Microsoft.EntityFrameworkCore.Update
             string name,
             string? schema,
             IReadOnlyList<ColumnModification> conditionOperations
-        ) {
+        )
+        {
             Check.NotNull(commandStringBuilder, nameof(commandStringBuilder));
             Check.NotEmpty(name, nameof(name));
             Check.NotNull(conditionOperations, nameof(conditionOperations));
@@ -276,7 +282,8 @@ namespace Microsoft.EntityFrameworkCore.Update
             IReadOnlyList<ColumnModification> readOperations,
             IReadOnlyList<ColumnModification> conditionOperations,
             int commandPosition
-        ) {
+        )
+        {
             Check.NotNull(commandStringBuilder, nameof(commandStringBuilder));
             Check.NotEmpty(name, nameof(name));
             Check.NotNull(readOperations, nameof(readOperations));
@@ -303,7 +310,8 @@ namespace Microsoft.EntityFrameworkCore.Update
             string name,
             string? schema,
             IReadOnlyList<ColumnModification> operations
-        ) {
+        )
+        {
             Check.NotNull(commandStringBuilder, nameof(commandStringBuilder));
             Check.NotEmpty(name, nameof(name));
             Check.NotNull(operations, nameof(operations));
@@ -333,7 +341,8 @@ namespace Microsoft.EntityFrameworkCore.Update
             StringBuilder commandStringBuilder,
             string name,
             string? schema
-        ) {
+        )
+        {
             Check.NotNull(commandStringBuilder, nameof(commandStringBuilder));
             Check.NotEmpty(name, nameof(name));
 
@@ -353,7 +362,8 @@ namespace Microsoft.EntityFrameworkCore.Update
             string name,
             string? schema,
             IReadOnlyList<ColumnModification> operations
-        ) {
+        )
+        {
             Check.NotNull(commandStringBuilder, nameof(commandStringBuilder));
             Check.NotEmpty(name, nameof(name));
             Check.NotNull(operations, nameof(operations));
@@ -392,7 +402,8 @@ namespace Microsoft.EntityFrameworkCore.Update
         protected virtual void AppendSelectCommandHeader(
             StringBuilder commandStringBuilder,
             IReadOnlyList<ColumnModification> operations
-        ) {
+        )
+        {
             Check.NotNull(commandStringBuilder, nameof(commandStringBuilder));
             Check.NotNull(operations, nameof(operations));
 
@@ -414,7 +425,8 @@ namespace Microsoft.EntityFrameworkCore.Update
             StringBuilder commandStringBuilder,
             string name,
             string? schema
-        ) {
+        )
+        {
             Check.NotNull(commandStringBuilder, nameof(commandStringBuilder));
             Check.NotEmpty(name, nameof(name));
 
@@ -430,7 +442,8 @@ namespace Microsoft.EntityFrameworkCore.Update
         protected virtual void AppendValuesHeader(
             StringBuilder commandStringBuilder,
             IReadOnlyList<ColumnModification> operations
-        ) {
+        )
+        {
             Check.NotNull(commandStringBuilder, nameof(commandStringBuilder));
             Check.NotNull(operations, nameof(operations));
 
@@ -450,7 +463,8 @@ namespace Microsoft.EntityFrameworkCore.Update
             string name,
             string? schema,
             IReadOnlyList<ColumnModification> operations
-        ) {
+        )
+        {
             Check.NotNull(commandStringBuilder, nameof(commandStringBuilder));
             Check.NotNull(operations, nameof(operations));
 
@@ -495,7 +509,8 @@ namespace Microsoft.EntityFrameworkCore.Update
         protected virtual void AppendWhereClause(
             StringBuilder commandStringBuilder,
             IReadOnlyList<ColumnModification> operations
-        ) {
+        )
+        {
             Check.NotNull(commandStringBuilder, nameof(commandStringBuilder));
             Check.NotNull(operations, nameof(operations));
 
@@ -519,7 +534,8 @@ namespace Microsoft.EntityFrameworkCore.Update
         protected virtual void AppendWhereAffectedClause(
             StringBuilder commandStringBuilder,
             IReadOnlyList<ColumnModification> operations
-        ) {
+        )
+        {
             Check.NotNull(commandStringBuilder, nameof(commandStringBuilder));
             Check.NotNull(operations, nameof(operations));
 
@@ -573,7 +589,8 @@ namespace Microsoft.EntityFrameworkCore.Update
             StringBuilder commandStringBuilder,
             ColumnModification columnModification,
             bool useOriginalValue
-        ) {
+        )
+        {
             Check.NotNull(commandStringBuilder, nameof(commandStringBuilder));
             Check.NotNull(columnModification, nameof(columnModification));
 
@@ -596,7 +613,8 @@ namespace Microsoft.EntityFrameworkCore.Update
                 if (
                     !columnModification.UseCurrentValueParameter
                     && !columnModification.UseOriginalValueParameter
-                ) {
+                )
+                {
                     AppendSqlLiteral(commandStringBuilder, columnModification, null, null);
                 }
                 else
@@ -651,7 +669,8 @@ namespace Microsoft.EntityFrameworkCore.Update
             StringBuilder commandStringBuilder,
             string name,
             string? schema
-        ) {
+        )
+        {
             commandStringBuilder.Append("SELECT NEXT VALUE FOR ");
             SqlGenerationHelper.DelimitIdentifier(
                 commandStringBuilder,
@@ -665,7 +684,8 @@ namespace Microsoft.EntityFrameworkCore.Update
             ColumnModification modification,
             string? tableName,
             string? schema
-        ) {
+        )
+        {
             if (modification.TypeMapping == null)
             {
                 var columnName = modification.ColumnName;

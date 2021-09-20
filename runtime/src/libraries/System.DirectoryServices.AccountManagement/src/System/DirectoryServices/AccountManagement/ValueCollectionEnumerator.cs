@@ -83,7 +83,8 @@ namespace System.DirectoryServices.AccountManagement
         internal ValueCollectionEnumerator(
             TrackedCollection<T> trackingList,
             List<TrackedCollection<T>.ValueEl> combinedValues
-        ) {
+        )
+        {
             GlobalDebug.WriteLineIf(GlobalDebug.Info, "ValueCollectionEnumerator", "Ctor");
             _inner = new TrackedCollectionEnumerator<T>(
                 "ValueCollectionEnumerator",

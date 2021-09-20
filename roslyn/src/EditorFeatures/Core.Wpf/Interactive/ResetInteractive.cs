@@ -40,7 +40,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Interactive
             IEditorOptionsFactoryService editorOptionsFactoryService,
             Func<string, string> createReference,
             Func<string, string> createImport
-        ) {
+        )
+        {
             _editorOptionsFactoryService = editorOptionsFactoryService;
             _createReference = createReference;
             _createImport = createImport;
@@ -57,7 +58,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Interactive
                     out var projectDirectory,
                     out var platform
                 )
-            ) {
+            )
+            {
                 // Now, we're going to do a bunch of async operations.  So create a wait
                 // indicator so the user knows something is happening, and also so they cancel.
                 var waitIndicator = GetWaitIndicator();
@@ -102,7 +104,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Interactive
             string projectDirectory,
             InteractiveHostPlatform? platform,
             IWaitContext waitContext
-        ) {
+        )
+        {
             // First, open the repl window.
             var evaluator = (IResettableInteractiveEvaluator)interactiveWindow.Evaluator;
 
@@ -113,7 +116,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Interactive
                     () => CancelBuildProject(),
                     useSynchronizationContext: true
                 )
-            ) {
+            )
+            {
                 // First, start a build.
                 // If the build fails do not reset the REPL.
                 var builtSuccessfully = await BuildProjectAsync().ConfigureAwait(true);

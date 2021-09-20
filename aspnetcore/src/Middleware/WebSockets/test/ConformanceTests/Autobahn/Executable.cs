@@ -24,7 +24,8 @@ namespace Microsoft.AspNetCore.WebSockets.ConformanceTest.Autobahn
         {
             foreach (
                 var dir in Environment.GetEnvironmentVariable("PATH").Split(Path.PathSeparator)
-            ) {
+            )
+            {
                 var candidate = Path.Combine(dir, name + _exeSuffix);
                 if (File.Exists(candidate))
                 {
@@ -38,7 +39,8 @@ namespace Microsoft.AspNetCore.WebSockets.ConformanceTest.Autobahn
             string args,
             CancellationToken cancellationToken,
             ILogger logger
-        ) {
+        )
+        {
             var process = new Process()
             {
                 StartInfo = new ProcessStartInfo()

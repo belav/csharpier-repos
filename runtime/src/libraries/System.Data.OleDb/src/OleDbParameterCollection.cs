@@ -73,7 +73,8 @@ namespace System.Data.OleDb
             OleDbType oleDbType,
             int size,
             string? sourceColumn
-        ) {
+        )
+        {
             return Add(new OleDbParameter(parameterName, oleDbType, size, sourceColumn));
         }
 

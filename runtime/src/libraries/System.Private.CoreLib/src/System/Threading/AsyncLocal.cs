@@ -69,7 +69,8 @@ namespace System.Threading
             object? previousValueObj,
             object? currentValueObj,
             bool contextChanged
-        ) {
+        )
+        {
             Debug.Assert(m_valueChangedHandler != null);
             T previousValue = previousValueObj == null ? default! : (T)previousValueObj;
             T currentValue = currentValueObj == null ? default! : (T)currentValueObj;
@@ -139,7 +140,8 @@ namespace System.Threading
             IAsyncLocal key,
             object? value,
             bool treatNullValueAsNonexistent
-        ) {
+        )
+        {
             // If the value isn't null or a null value may not be treated as nonexistent, then create a new one-element map
             // to store the key/value pair.  Otherwise, use the empty map.
             return value != null || !treatNullValueAsNonexistent
@@ -154,7 +156,8 @@ namespace System.Threading
                 IAsyncLocal key,
                 object? value,
                 bool treatNullValueAsNonexistent
-            ) {
+            )
+            {
                 // If the value isn't null or a null value may not be treated as nonexistent, then create a new one-element map
                 // to store the key/value pair.  Otherwise, use the empty map.
                 return value != null || !treatNullValueAsNonexistent
@@ -185,7 +188,8 @@ namespace System.Threading
                 IAsyncLocal key,
                 object? value,
                 bool treatNullValueAsNonexistent
-            ) {
+            )
+            {
                 if (value != null || !treatNullValueAsNonexistent)
                 {
                     // If the key matches one already contained in this map, then create a new one-element map with the updated
@@ -235,7 +239,8 @@ namespace System.Threading
                 object? value1,
                 IAsyncLocal key2,
                 object? value2
-            ) {
+            )
+            {
                 _key1 = key1;
                 _value1 = value1;
                 _key2 = key2;
@@ -246,7 +251,8 @@ namespace System.Threading
                 IAsyncLocal key,
                 object? value,
                 bool treatNullValueAsNonexistent
-            ) {
+            )
+            {
                 if (value != null || !treatNullValueAsNonexistent)
                 {
                     // If the key matches one already contained in this map, then create a new two-element map with the updated
@@ -313,7 +319,8 @@ namespace System.Threading
                 object? value2,
                 IAsyncLocal key3,
                 object? value3
-            ) {
+            )
+            {
                 _key1 = key1;
                 _value1 = value1;
                 _key2 = key2;
@@ -326,7 +333,8 @@ namespace System.Threading
                 IAsyncLocal key,
                 object? value,
                 bool treatNullValueAsNonexistent
-            ) {
+            )
+            {
                 if (value != null || !treatNullValueAsNonexistent)
                 {
                     // If the key matches one already contained in this map, then create a new three-element map with the
@@ -429,7 +437,8 @@ namespace System.Threading
                 IAsyncLocal key,
                 object? value,
                 bool treatNullValueAsNonexistent
-            ) {
+            )
+            {
                 // Find the key in this map.
                 for (int i = 0; i < _keyValues.Length; i++)
                 {
@@ -565,7 +574,8 @@ namespace System.Threading
                 IAsyncLocal key,
                 object? value,
                 bool treatNullValueAsNonexistent
-            ) {
+            )
+            {
                 int count = Count;
                 bool containsKey = ContainsKey(key);
 

@@ -29,12 +29,14 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
         internal static void CheckInterfaceVarianceSafety(
             this NamedTypeSymbol interfaceType,
             BindingDiagnosticBag diagnostics
-        ) {
+        )
+        {
             Debug.Assert((object)interfaceType != null && interfaceType.IsInterface);
 
             foreach (
                 NamedTypeSymbol baseInterface in interfaceType.InterfacesNoUseSiteDiagnostics()
-            ) {
+            )
+            {
                 IsVarianceUnsafe(
                     baseInterface,
                     requireOutputSafety: true,
@@ -75,7 +77,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
         private static void CheckNestedTypeVarianceSafety(
             NamedTypeSymbol member,
             BindingDiagnosticBag diagnostics
-        ) {
+        )
+        {
             switch (member.TypeKind)
             {
                 case TypeKind.Class:
@@ -105,7 +108,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                 var container = member.ContainingType;
                 container is object;
                 container = container.ContainingType
-            ) {
+            )
+            {
                 if (!container.IsInterfaceType())
                 {
                     Debug.Assert(!container.IsDelegateType());
@@ -131,7 +135,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
         internal static void CheckDelegateVarianceSafety(
             this SourceDelegateMethodSymbol method,
             BindingDiagnosticBag diagnostics
-        ) {
+        )
+        {
             method.CheckMethodVarianceSafety(
                 returnTypeLocationProvider: m =>
                 {
@@ -148,7 +153,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
         private static void CheckMethodVarianceSafety(
             this MethodSymbol method,
             BindingDiagnosticBag diagnostics
-        ) {
+        )
+        {
             method.CheckMethodVarianceSafety(
                 returnTypeLocationProvider: m =>
                 {
@@ -163,7 +169,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             this MethodSymbol method,
             LocationProvider<MethodSymbol> returnTypeLocationProvider,
             BindingDiagnosticBag diagnostics
-        ) {
+        )
+        {
             if (SkipVarianceSafetyChecks(method))
             {
                 return;
@@ -204,7 +211,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
         private static void CheckPropertyVarianceSafety(
             PropertySymbol property,
             BindingDiagnosticBag diagnostics
-        ) {
+        )
+        {
             if (SkipVarianceSafetyChecks(property))
             {
                 return;
@@ -238,7 +246,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
         private static void CheckEventVarianceSafety(
             EventSymbol @event,
             BindingDiagnosticBag diagnostics
-        ) {
+        )
+        {
             if (SkipVarianceSafetyChecks(@event))
             {
                 return;
@@ -262,7 +271,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             ImmutableArray<ParameterSymbol> parameters,
             Symbol context,
             BindingDiagnosticBag diagnostics
-        ) {
+        )
+        {
             foreach (ParameterSymbol param in parameters)
             {
                 IsVarianceUnsafe(
@@ -288,12 +298,14 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             ImmutableArray<TypeParameterSymbol> typeParameters,
             MethodSymbol context,
             BindingDiagnosticBag diagnostics
-        ) {
+        )
+        {
             foreach (TypeParameterSymbol typeParameter in typeParameters)
             {
                 foreach (
                     TypeWithAnnotations constraintType in typeParameter.ConstraintTypesNoUseSiteDiagnostics
-                ) {
+                )
+                {
                     IsVarianceUnsafe(
                         constraintType.Type,
                         requireOutputSafety: false,
@@ -342,7 +354,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                         requireInputSafety
                         && requireOutputSafety
                         && typeParam.Variance != VarianceKind.None
-                    ) {
+                    )
+                    {
                         // This sub-case isn't mentioned in the spec, because it's not required for
                         // the definition.  It just allows us to give a better error message for
                         // type parameters that are both output-unsafe and input-unsafe.
@@ -492,7 +505,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                             locationArg,
                             diagnostics
                         )
-                    ) {
+                    )
+                    {
                         return true;
                     }
                 }

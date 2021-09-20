@@ -77,7 +77,8 @@ namespace AutoMapper.Internal
         {
             foreach (
                 var memberName in PossibleNames(member.Name, Config.Prefixes, Config.Postfixes)
-            ) {
+            )
+            {
                 if (!nameToMember.ContainsKey(memberName))
                 {
                     nameToMember.Add(memberName, member);
@@ -88,7 +89,8 @@ namespace AutoMapper.Internal
             string memberName,
             List<string> prefixes,
             List<string> postfixes
-        ) {
+        )
+        {
             foreach (var prefix in prefixes)
             {
                 if (!memberName.StartsWith(prefix, StringComparison.OrdinalIgnoreCase))
@@ -125,7 +127,8 @@ namespace AutoMapper.Internal
         public ConstructorParameters[] Constructors => _constructors ??= GetConstructors();
         private IEnumerable<MethodInfo> GetPublicNoArgExtensionMethods(
             IEnumerable<MethodInfo> sourceExtensionMethodSearch
-        ) {
+        )
+        {
             var explicitExtensionMethods = sourceExtensionMethodSearch.Where(
                 method => method.GetParameters()[0].ParameterType.IsAssignableFrom(Type)
             );

@@ -93,7 +93,8 @@ namespace System.Web.Razor.Parser
             TSymbolType left,
             TSymbolType right,
             SourceLocation start
-        ) {
+        )
+        {
             int startPosition = CurrentLocation.AbsoluteIndex;
             int nesting = 1;
             if (!EndOfFile)
@@ -106,7 +107,8 @@ namespace System.Web.Razor.Parser
                             mode.HasFlag(BalancingModes.AllowCommentsAndTemplates),
                             mode.HasFlag(BalancingModes.AllowEmbeddedTransitions)
                         )
-                    ) {
+                    )
+                    {
                         Accept(syms);
                         syms.Clear();
                         HandleEmbeddedTransition();
@@ -372,7 +374,8 @@ namespace System.Web.Razor.Parser
             TSymbolType expected,
             bool errorIfNotFound,
             string errorBase
-        ) {
+        )
+        {
             bool found = At(expected);
             if (!found && errorIfNotFound)
             {
@@ -547,7 +550,8 @@ namespace System.Web.Razor.Parser
                 !Language.KnowsSymbolType(KnownSymbolType.CommentStart)
                 || !Language.KnowsSymbolType(KnownSymbolType.CommentStar)
                 || !Language.KnowsSymbolType(KnownSymbolType.CommentBody)
-            ) {
+            )
+            {
                 throw new InvalidOperationException(
                     RazorResources.Language_Does_Not_Support_RazorComment
                 );

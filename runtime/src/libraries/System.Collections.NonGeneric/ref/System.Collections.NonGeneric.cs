@@ -450,7 +450,8 @@ namespace System.Collections.Specialized
         }
         public static System.Collections.Hashtable CreateCaseInsensitiveHashtable(
             System.Collections.IDictionary d
-        ) {
+        )
+        {
             throw null;
         }
         public static System.Collections.Hashtable CreateCaseInsensitiveHashtable(int capacity)

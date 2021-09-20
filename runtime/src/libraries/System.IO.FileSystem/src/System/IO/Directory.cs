@@ -227,7 +227,8 @@ namespace System.IO
             string searchPattern,
             SearchTarget searchTarget,
             EnumerationOptions options
-        ) {
+        )
+        {
             if (path == null)
                 throw new ArgumentNullException(nameof(path));
             if (searchPattern == null)

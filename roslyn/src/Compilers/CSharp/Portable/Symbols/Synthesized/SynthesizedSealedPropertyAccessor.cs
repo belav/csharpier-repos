@@ -30,7 +30,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
         public SynthesizedSealedPropertyAccessor(
             PropertySymbol property,
             MethodSymbol overriddenAccessor
-        ) {
+        )
+        {
             Debug.Assert((object)property != null);
             Debug.Assert(property.IsSealed);
             Debug.Assert((object)overriddenAccessor != null);
@@ -67,7 +68,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                             !this.ContainingAssembly.HasInternalAccessTo(
                                 _overriddenAccessor.ContainingAssembly
                             )
-                        ) {
+                        )
+                        {
                             // NOTE: Dev10 actually reports ERR_CantChangeAccessOnOverride (CS0507) in this case,
                             // but it's not clear why.  It seems like it would make more sense to just correct
                             // the accessibility of the synthesized override, the same way a programmer would if
@@ -82,7 +84,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                             !this.ContainingAssembly.HasInternalAccessTo(
                                 _overriddenAccessor.ContainingAssembly
                             )
-                        ) {
+                        )
+                        {
                             // Of course this must trigger an error later, as you cannot override a private
                             // protected member from another assembly.
                             return Accessibility.Private;
@@ -248,7 +251,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
 
         internal sealed override bool IsMetadataVirtual(
             bool ignoreInterfaceImplementationChanges = false
-        ) {
+        )
+        {
             return true;
         }
 
@@ -259,7 +263,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
 
         internal sealed override bool IsMetadataNewSlot(
             bool ignoreInterfaceImplementationChanges = false
-        ) {
+        )
+        {
             return false;
         }
 

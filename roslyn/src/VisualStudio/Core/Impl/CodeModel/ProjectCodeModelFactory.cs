@@ -48,7 +48,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.CodeModel
             IThreadingContext threadingContext,
             IForegroundNotificationService notificationService,
             IAsynchronousOperationListenerProvider listenerProvider
-        ) {
+        )
+        {
             _visualStudioWorkspace = visualStudioWorkspace;
             _serviceProvider = serviceProvider;
             _threadingContext = threadingContext;
@@ -79,7 +80,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.CodeModel
         private System.Threading.Tasks.Task ProcessNextDocumentBatchAsync(
             ImmutableArray<DocumentId> documentIds,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             foreach (var documentId in documentIds)
             {
                 // Now, enqueue foreground work to actually process these documents in a serialized and incremental
@@ -164,7 +166,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.CodeModel
         public IProjectCodeModel CreateProjectCodeModel(
             ProjectId id,
             ICodeModelInstanceFactory codeModelInstanceFactory
-        ) {
+        )
+        {
             var projectCodeModel = new ProjectCodeModel(
                 _threadingContext,
                 id,

@@ -422,7 +422,8 @@ namespace System.Security.Cryptography.EcDsa.Tests
             ECDsa ec,
             int keySize,
             bool includePrivate
-        ) {
+        )
+        {
             parameters.Validate();
             Assert.True(parameters.Curve.IsNamed, "parameters.Curve.IsNamed");
             Assert.Equal(keySize, ec.KeySize);
@@ -445,7 +446,8 @@ namespace System.Security.Cryptography.EcDsa.Tests
             ECParameters parameters,
             ECDsa ec,
             CurveDef curveDef
-        ) {
+        )
+        {
             Assert.True(parameters.Curve.IsExplicit);
             ECCurve curve = parameters.Curve;
 

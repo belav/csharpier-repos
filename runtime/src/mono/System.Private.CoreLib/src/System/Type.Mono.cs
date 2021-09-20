@@ -66,7 +66,8 @@ namespace System
             string typeName,
             Func<AssemblyName, Assembly?>? assemblyResolver,
             Func<Assembly?, string, bool, Type?>? typeResolver
-        ) {
+        )
+        {
             StackCrawlMark stackMark = StackCrawlMark.LookForMyCaller;
             return GetType(typeName, assemblyResolver, typeResolver, false, false, ref stackMark);
         }
@@ -78,7 +79,8 @@ namespace System
             Func<AssemblyName, Assembly?>? assemblyResolver,
             Func<Assembly?, string, bool, Type?>? typeResolver,
             bool throwOnError
-        ) {
+        )
+        {
             StackCrawlMark stackMark = StackCrawlMark.LookForMyCaller;
             return GetType(
                 typeName,
@@ -98,7 +100,8 @@ namespace System
             Func<Assembly?, string, bool, Type?>? typeResolver,
             bool throwOnError,
             bool ignoreCase
-        ) {
+        )
+        {
             StackCrawlMark stackMark = StackCrawlMark.LookForMyCaller;
             return GetType(
                 typeName,
@@ -118,7 +121,8 @@ namespace System
             bool throwOnError,
             bool ignoreCase,
             ref StackCrawlMark stackMark
-        ) {
+        )
+        {
             return TypeNameParser.GetType(
                 typeName,
                 assemblyResolver,

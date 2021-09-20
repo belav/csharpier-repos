@@ -34,7 +34,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                 MethodSymbol method,
                 BoundStatement body,
                 ImportChain? importChain
-            ) {
+            )
+            {
                 RoslynDebug.Assert(method != null);
                 RoslynDebug.Assert(body != null);
 
@@ -84,7 +85,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             NamedTypeSymbol? typeOpt,
             CSharpCompilation compilation,
             PEModuleBuilder? moduleBuilderOpt
-        ) {
+        )
+        {
             this.Compilation = compilation;
             _typeOpt = typeOpt;
             this.ModuleBuilderOpt = moduleBuilderOpt;
@@ -205,7 +207,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             MethodSymbol method2,
             SyntaxNode syntax,
             BindingDiagnosticBag diagnostics
-        ) {
+        )
+        {
             // precondition and postcondition: the graph _constructorInitializers is acyclic.
             // If adding the edge (method1, method2) would induce a cycle, we report an error
             // and do not add it to the set of edges. If it would not induce a cycle we add

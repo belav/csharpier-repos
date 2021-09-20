@@ -68,7 +68,8 @@ namespace Microsoft.EntityFrameworkCore
         public static string? GetDefaultTableName(
             this IReadOnlyEntityType entityType,
             bool truncate = true
-        ) {
+        )
+        {
             var ownership = entityType.FindOwnership();
             if (ownership != null && ownership.IsUnique)
             {
@@ -122,7 +123,8 @@ namespace Microsoft.EntityFrameworkCore
             this IConventionEntityType entityType,
             string? name,
             bool fromDataAnnotation = false
-        ) {
+        )
+        {
             entityType.SetAnnotation(
                 RelationalAnnotationNames.TableName,
                 Check.NullButNotEmpty(name, nameof(name)),
@@ -184,7 +186,8 @@ namespace Microsoft.EntityFrameworkCore
                     .SelectMany(fk => fk.GetReferencingSkipNavigations())
                     .Where(n => !n.IsOnDependent)
                     .All(n => n.DeclaringEntityType.GetSchema() == skipNavigationSchema)
-            ) {
+            )
+            {
                 return skipNavigationSchema;
             }
 
@@ -213,7 +216,8 @@ namespace Microsoft.EntityFrameworkCore
             this IConventionEntityType entityType,
             string? value,
             bool fromDataAnnotation = false
-        ) {
+        )
+        {
             entityType.SetAnnotation(
                 RelationalAnnotationNames.Schema,
                 Check.NullButNotEmpty(value, nameof(value)),
@@ -357,7 +361,8 @@ namespace Microsoft.EntityFrameworkCore
             this IConventionEntityType entityType,
             string? name,
             bool fromDataAnnotation = false
-        ) {
+        )
+        {
             entityType.SetAnnotation(
                 RelationalAnnotationNames.ViewName,
                 Check.NullButNotEmpty(name, nameof(name)),
@@ -433,7 +438,8 @@ namespace Microsoft.EntityFrameworkCore
             this IConventionEntityType entityType,
             string? value,
             bool fromDataAnnotation = false
-        ) {
+        )
+        {
             entityType.SetAnnotation(
                 RelationalAnnotationNames.ViewSchema,
                 Check.NullButNotEmpty(value, nameof(value)),
@@ -632,7 +638,8 @@ namespace Microsoft.EntityFrameworkCore
         public static IReadOnlyCheckConstraint? FindCheckConstraint(
             this IReadOnlyEntityType entityType,
             string name
-        ) {
+        )
+        {
             Check.NotEmpty(name, nameof(name));
 
             return CheckConstraint.FindCheckConstraint(entityType, name);
@@ -692,7 +699,8 @@ namespace Microsoft.EntityFrameworkCore
             this IMutableEntityType entityType,
             string name,
             string sql
-        ) {
+        )
+        {
             Check.NotEmpty(name, nameof(name));
             Check.NotEmpty(sql, nameof(sql));
 
@@ -713,7 +721,8 @@ namespace Microsoft.EntityFrameworkCore
             string name,
             string sql,
             bool fromDataAnnotation = false
-        ) {
+        )
+        {
             Check.NotEmpty(name, nameof(name));
             Check.NotEmpty(sql, nameof(sql));
 
@@ -812,7 +821,8 @@ namespace Microsoft.EntityFrameworkCore
             this IConventionEntityType entityType,
             string? comment,
             bool fromDataAnnotation = false
-        ) {
+        )
+        {
             entityType.SetOrRemoveAnnotation(
                 RelationalAnnotationNames.Comment,
                 comment,
@@ -840,7 +850,8 @@ namespace Microsoft.EntityFrameworkCore
         public static IEnumerable<IReadOnlyForeignKey> FindRowInternalForeignKeys(
             this IReadOnlyEntityType entityType,
             StoreObjectIdentifier storeObject
-        ) {
+        )
+        {
             var primaryKey = entityType.FindPrimaryKey();
             if (primaryKey == null)
             {
@@ -871,7 +882,8 @@ namespace Microsoft.EntityFrameworkCore
                         if (
                             storeObject.Name == principalEntityType.GetTableName()
                             && storeObject.Schema == principalEntityType.GetSchema()
-                        ) {
+                        )
+                        {
                             yield return foreignKey;
                         }
                         break;
@@ -879,7 +891,8 @@ namespace Microsoft.EntityFrameworkCore
                         if (
                             storeObject.Name == principalEntityType.GetViewName()
                             && storeObject.Schema == principalEntityType.GetViewSchema()
-                        ) {
+                        )
+                        {
                             yield return foreignKey;
                         }
                         break;

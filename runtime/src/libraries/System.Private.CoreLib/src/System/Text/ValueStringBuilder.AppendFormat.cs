@@ -306,7 +306,8 @@ namespace System.Text
                             itemFormatSpan,
                             provider
                         )
-                    ) {
+                    )
+                    {
                         _pos += charsWritten;
 
                         // Pad the end, if needed.

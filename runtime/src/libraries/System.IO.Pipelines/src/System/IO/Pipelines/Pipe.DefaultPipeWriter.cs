@@ -55,7 +55,8 @@ namespace System.IO.Pipelines
             public override ValueTask<FlushResult> WriteAsync(
                 ReadOnlyMemory<byte> source,
                 CancellationToken cancellationToken = default
-            ) {
+            )
+            {
                 return _pipe.WriteAsync(source, cancellationToken);
             }
         }

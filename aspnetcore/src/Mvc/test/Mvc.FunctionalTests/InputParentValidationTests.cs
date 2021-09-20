@@ -101,7 +101,8 @@ namespace Microsoft.AspNetCore.Mvc.FunctionalTests
             private IDictionary<string, string[]> GetExpectedErrors(
                 bool parentInvalid,
                 bool childInvalid
-            ) {
+            )
+            {
                 var result = new Dictionary<string, string[]>();
 
                 if (parentInvalid)
@@ -138,9 +139,8 @@ namespace Microsoft.AspNetCore.Mvc.FunctionalTests
         /// </summary>
         public class ParentNonValidationScenarios : BaseTests<FormatterWebSite.Startup>
         {
-            public ParentNonValidationScenarios(
-                MvcTestFixture<FormatterWebSite.Startup> fixture
-            ) : base(fixture) { }
+            public ParentNonValidationScenarios(MvcTestFixture<FormatterWebSite.Startup> fixture)
+                : base(fixture) { }
 
             protected override bool ShouldParentBeValidatedWhenChildIsInvalid => false;
         }

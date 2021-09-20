@@ -55,7 +55,8 @@ namespace EventPipeTests
                     EventPipeSession session = ProfilerControlHelpers.AttachEventPipeSessionToSelf(
                         providers
                     )
-                ) {
+                )
+                {
                     TriggerMethod();
 
                     ManualResetEvent allEventsReceivedEvent = new ManualResetEvent(false);
@@ -96,7 +97,8 @@ namespace EventPipeTests
                                 emptyEventCount,
                                 simpleEventCount
                             )
-                        ) {
+                        )
+                        {
                             allEventsReceivedEvent.Set();
                         }
                     };
@@ -133,7 +135,8 @@ namespace EventPipeTests
                     emptyEventCount,
                     simpleEventCount
                 )
-            ) {
+            )
+            {
                 return 100;
             }
             else
@@ -153,7 +156,8 @@ namespace EventPipeTests
             int arrayTypeEvent,
             int emptyEventCount,
             int simpleEventCount
-        ) {
+        )
+        {
             return allTypesEventCount == 1
                 && arrayTypeEvent == 1
                 && emptyEventCount == 10
@@ -299,7 +303,8 @@ namespace EventPipeTests
             if (
                 payloadNames[12] != "Guid"
                 || guid != new Guid("176FBED1-A55C-4796-98CA-A9DA0EF883E7")
-            ) {
+            )
+            {
                 Console.WriteLine($"Argument 12 failed to parse, got {guid}");
                 return false;
             }
@@ -319,7 +324,8 @@ namespace EventPipeTests
             if (
                 payloadNames[14] != "DateTime"
                 || dt != DateTime.Parse("1/24/2020 8:18:36 PM", CultureInfo.InvariantCulture)
-            ) {
+            )
+            {
                 Console.WriteLine($"Argument 14 failed to parse, got {dt}");
                 return false;
             }
@@ -363,7 +369,8 @@ namespace EventPipeTests
                     intArray,
                     Enumerable.Range(1, 100).OrderByDescending(x => x)
                 )
-            ) {
+            )
+            {
                 Console.WriteLine($"IntArray failed to parse, got {intArray}");
                 return false;
             }

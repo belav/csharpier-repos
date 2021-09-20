@@ -12,7 +12,8 @@ namespace Microsoft.AspNetCore.Razor.Language
             RazorDiagnosticDescriptor descriptor,
             SourceSpan span,
             object[] args
-        ) {
+        )
+        {
             Descriptor = descriptor;
             Span = span;
             Args = args;

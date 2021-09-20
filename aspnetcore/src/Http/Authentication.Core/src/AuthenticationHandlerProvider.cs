@@ -43,7 +43,8 @@ namespace Microsoft.AspNetCore.Authentication
         public async Task<IAuthenticationHandler?> GetHandlerAsync(
             HttpContext context,
             string authenticationScheme
-        ) {
+        )
+        {
             if (_handlerMap.TryGetValue(authenticationScheme, out var value))
             {
                 return value;

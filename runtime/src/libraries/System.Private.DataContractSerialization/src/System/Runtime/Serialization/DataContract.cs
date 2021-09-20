@@ -59,7 +59,8 @@ namespace System.Runtime.Serialization
         internal static bool TryGetDataContractFromGeneratedAssembly(
             Type type,
             out DataContract? dataContract
-        ) {
+        )
+        {
             dataContract = GetGeneratedDataContract(type);
             return dataContract != null;
         }
@@ -88,7 +89,8 @@ namespace System.Runtime.Serialization
             RuntimeTypeHandle typeHandle,
             Type? type,
             SerializationMode mode
-        ) {
+        )
+        {
             int id = GetId(typeHandle);
             DataContract dataContract = GetDataContractSkipValidation(id, typeHandle, null);
             return dataContract.GetValidContract(mode);
@@ -98,7 +100,8 @@ namespace System.Runtime.Serialization
             int id,
             RuntimeTypeHandle typeHandle,
             SerializationMode mode
-        ) {
+        )
+        {
             DataContract dataContract = GetDataContractSkipValidation(id, typeHandle, null);
             return dataContract.GetValidContract(mode);
         }
@@ -107,7 +110,8 @@ namespace System.Runtime.Serialization
             int id,
             RuntimeTypeHandle typeHandle,
             Type? type
-        ) {
+        )
+        {
             return DataContractCriticalHelper.GetDataContractSkipValidation(id, typeHandle, type);
         }
 
@@ -116,7 +120,8 @@ namespace System.Runtime.Serialization
             RuntimeTypeHandle typeHandle,
             Type? type,
             SerializationMode mode
-        ) {
+        )
+        {
             DataContract dataContract = GetGetOnlyCollectionDataContractSkipValidation(
                 id,
                 typeHandle,
@@ -145,7 +150,8 @@ namespace System.Runtime.Serialization
             int id,
             RuntimeTypeHandle typeHandle,
             Type? type
-        ) {
+        )
+        {
             return DataContractCriticalHelper.GetGetOnlyCollectionDataContractSkipValidation(
                 id,
                 typeHandle,
@@ -231,7 +237,8 @@ namespace System.Runtime.Serialization
             XmlWriterDelegator xmlWriter,
             object obj,
             XmlObjectSerializerWriteContext? context
-        ) {
+        )
+        {
             throw System.Runtime.Serialization.DiagnosticUtility.ExceptionUtility.ThrowHelperError(
                 new InvalidDataContractException(
                     SR.Format(
@@ -246,7 +253,8 @@ namespace System.Runtime.Serialization
         public virtual object? ReadXmlValue(
             XmlReaderDelegator xmlReader,
             XmlObjectSerializerReadContext? context
-        ) {
+        )
+        {
             throw System.Runtime.Serialization.DiagnosticUtility.ExceptionUtility.ThrowHelperError(
                 new InvalidDataContractException(
                     SR.Format(
@@ -264,7 +272,8 @@ namespace System.Runtime.Serialization
             XmlObjectSerializerWriteContext context,
             XmlDictionaryString name,
             XmlDictionaryString? ns
-        ) {
+        )
+        {
             throw System.Runtime.Serialization.DiagnosticUtility.ExceptionUtility.ThrowHelperError(
                 new InvalidDataContractException(
                     SR.Format(
@@ -279,7 +288,8 @@ namespace System.Runtime.Serialization
         public virtual object ReadXmlElement(
             XmlReaderDelegator xmlReader,
             XmlObjectSerializerReadContext context
-        ) {
+        )
+        {
             throw System.Runtime.Serialization.DiagnosticUtility.ExceptionUtility.ThrowHelperError(
                 new InvalidDataContractException(
                     SR.Format(
@@ -365,7 +375,8 @@ namespace System.Runtime.Serialization
             XmlWriterDelegator writer,
             XmlDictionaryString name,
             XmlDictionaryString? ns
-        ) {
+        )
+        {
             if (
                 object.ReferenceEquals(ns, DictionaryGlobals.SerializationNamespace) && !IsPrimitive
             )
@@ -428,7 +439,8 @@ namespace System.Runtime.Serialization
                 int id,
                 RuntimeTypeHandle typeHandle,
                 Type? type
-            ) {
+            )
+            {
                 DataContract dataContract = s_dataContractCache[id];
                 if (dataContract == null)
                 {
@@ -446,7 +458,8 @@ namespace System.Runtime.Serialization
                 int id,
                 RuntimeTypeHandle typeHandle,
                 Type? type
-            ) {
+            )
+            {
                 DataContract dataContract = s_dataContractCache[id];
                 if (dataContract == null)
                 {
@@ -474,7 +487,8 @@ namespace System.Runtime.Serialization
                 if (
                     id < s_dataContractCache.Length
                     && ContractMatches(classContract, s_dataContractCache[id])
-                ) {
+                )
+                {
                     return id;
                 }
                 int currentDataContractId = DataContractCriticalHelper.s_dataContractID;
@@ -542,7 +556,8 @@ namespace System.Runtime.Serialization
                 int id,
                 RuntimeTypeHandle typeHandle,
                 Type? type
-            ) {
+            )
+            {
                 DataContract? dataContract = s_dataContractCache[id];
                 if (dataContract == null)
                 {
@@ -600,7 +615,8 @@ namespace System.Runtime.Serialization
                                 && !type.IsDefined(Globals.TypeOfDataContractAttribute, false)
                                 && !ClassDataContract.IsNonAttributedTypeValidForSerialization(type)
                                 && !ClassDataContract.IsKnownSerializableType(type)
-                            ) {
+                            )
+                            {
                                 ThrowInvalidDataContractException(
                                     SR.Format(SR.TypeNotSerializable, type),
                                     type
@@ -636,7 +652,8 @@ namespace System.Runtime.Serialization
                 int id,
                 RuntimeTypeHandle typeHandle,
                 Type? type
-            ) {
+            )
+            {
                 DataContract? dataContract = null;
                 lock (s_createDataContractLock)
                 {
@@ -652,7 +669,8 @@ namespace System.Runtime.Serialization
                                 type,
                                 out dataContract
                             )
-                        ) {
+                        )
+                        {
                             ThrowInvalidDataContractException(
                                 SR.Format(SR.TypeNotSerializable, type),
                                 type
@@ -676,7 +694,8 @@ namespace System.Runtime.Serialization
                 if (
                     type.IsGenericType
                     && type.GetGenericTypeDefinition() == Globals.TypeOfKeyValuePair
-                ) {
+                )
+                {
                     return Globals.TypeOfKeyValuePairAdapter.MakeGenericType(
                         type.GetGenericArguments()
                     );
@@ -696,7 +715,8 @@ namespace System.Runtime.Serialization
             }
             private static RuntimeTypeHandle GetDataContractAdapterTypeHandle(
                 RuntimeTypeHandle typeHandle
-            ) {
+            )
+            {
                 if (Globals.TypeOfDateTimeOffset.TypeHandle.Equals(typeHandle))
                 {
                     return Globals.TypeOfDateTimeOffsetAdapter.TypeHandle;
@@ -823,7 +843,8 @@ namespace System.Runtime.Serialization
             public static bool TryCreateBuiltInDataContract(
                 Type type,
                 [NotNullWhen(true)] out DataContract? dataContract
-            ) {
+            )
+            {
                 if (type.IsEnum) // Type.GetTypeCode will report Enums as TypeCode.IntXX
                 {
                     dataContract = null;
@@ -911,7 +932,8 @@ namespace System.Runtime.Serialization
                 string name,
                 string ns,
                 [NotNullWhen(true)] out DataContract? dataContract
-            ) {
+            )
+            {
                 dataContract = null;
                 if (ns == DictionaryGlobals.SchemaNamespace.Value)
                 {
@@ -1312,7 +1334,8 @@ namespace System.Runtime.Serialization
                 //Special casing DBNull as its considered a Primitive but is no longer Serializable
                 type == Globals.TypeOfDBNull
                 || Globals.TypeOfIXmlSerializable.IsAssignableFrom(type)
-            ) {
+            )
+            {
                 return true;
             }
             if (CollectionDataContract.IsCollection(type, out itemType))
@@ -1331,7 +1354,8 @@ namespace System.Runtime.Serialization
             Type collectionType,
             Type itemType,
             HashSet<Type> previousCollectionTypes
-        ) {
+        )
+        {
             previousCollectionTypes.Add(collectionType);
             while (itemType.IsArray)
             {
@@ -1453,7 +1477,8 @@ namespace System.Runtime.Serialization
         private static XmlQualifiedName GetDCTypeStableName(
             Type type,
             DataContractAttribute dataContractAttribute
-        ) {
+        )
+        {
             string? name = null,
                 ns = null;
             if (dataContractAttribute.IsNameSetExplicitly)
@@ -1521,7 +1546,8 @@ namespace System.Runtime.Serialization
         private static bool TryGetBuiltInXmlAndArrayTypeStableName(
             Type type,
             [NotNullWhen(true)] out XmlQualifiedName? stableName
-        ) {
+        )
+        {
             stableName = null;
 
             DataContract? builtInContract = GetBuiltInDataContract(type);
@@ -1557,7 +1583,8 @@ namespace System.Runtime.Serialization
         internal static bool TryGetDCAttribute(
             Type type,
             [NotNullWhen(true)] out DataContractAttribute? dataContractAttribute
-        ) {
+        )
+        {
             dataContractAttribute = null;
 
             object[] dataContractAttributes = type.GetCustomAttributes(
@@ -1588,7 +1615,8 @@ namespace System.Runtime.Serialization
             Type type,
             Type itemType,
             out CollectionDataContractAttribute? collectionContractAttribute
-        ) {
+        )
+        {
             string? name,
                 ns;
             object[] collectionContractAttributes = type.GetCustomAttributes(
@@ -1770,7 +1798,8 @@ namespace System.Runtime.Serialization
         internal static List<int> GetDataContractNameForGenericName(
             string typeName,
             StringBuilder? localName
-        ) {
+        )
+        {
             List<int> nestedParamCounts = new List<int>();
             for (int startIndex = 0, endIndex;;)
             {
@@ -1850,7 +1879,8 @@ namespace System.Runtime.Serialization
             string fullTypeName,
             out string localName,
             out string ns
-        ) {
+        )
+        {
             CodeTypeReference typeReference = new CodeTypeReference(fullTypeName);
             GetDefaultStableName(typeReference, out localName, out ns);
         }
@@ -1859,7 +1889,8 @@ namespace System.Runtime.Serialization
             CodeTypeReference typeReference,
             out string localName,
             out string ns
-        ) {
+        )
+        {
             string fullTypeName = typeReference.BaseType;
             DataContract? dataContract = GetBuiltInDataContract(fullTypeName);
             if (dataContract != null)
@@ -1951,7 +1982,8 @@ namespace System.Runtime.Serialization
             string fullTypeName,
             out string localName,
             out string ns
-        ) {
+        )
+        {
             int nsEnd = fullTypeName.LastIndexOf('.');
             if (nsEnd < 0)
             {
@@ -2241,7 +2273,8 @@ namespace System.Runtime.Serialization
         internal static string ExpandGenericParameters(
             string format,
             IGenericNameProvider genericNameProvider
-        ) {
+        )
+        {
             string? digest = null;
             StringBuilder typeName = new StringBuilder();
             IList<int> nestedParameterCounts = genericNameProvider.GetNestedParameterCounts();
@@ -2270,7 +2303,8 @@ namespace System.Runtime.Serialization
                         if (
                             nestedParameterCounts.Count > 1
                             || !genericNameProvider.ParametersFromBuiltInNamespaces
-                        ) {
+                        )
+                        {
                             if (digest == null)
                             {
                                 StringBuilder namespaces = new StringBuilder(
@@ -2334,7 +2368,8 @@ namespace System.Runtime.Serialization
             Type? type,
             Dictionary<Type, Type> typesChecked,
             ref DataContractDictionary? knownDataContracts
-        ) {
+        )
+        {
             while (type != null && DataContract.IsTypeSerializable(type))
             {
                 if (typesChecked.ContainsKey(type))
@@ -2470,7 +2505,8 @@ namespace System.Runtime.Serialization
                         && collectionDataContract.IsDictionary
                         && collectionDataContract.ItemType.GetGenericTypeDefinition()
                             == Globals.TypeOfKeyValue
-                    ) {
+                    )
+                    {
                         DataContract itemDataContract = DataContract.GetDataContract(
                             Globals.TypeOfKeyValuePair.MakeGenericType(
                                 collectionDataContract.ItemType.GetGenericArguments()
@@ -2501,7 +2537,8 @@ namespace System.Runtime.Serialization
             Dictionary<Type, Type> typesChecked,
             [NotNullIfNotNull("nameToDataContractTable")]
                 ref DataContractDictionary? nameToDataContractTable
-        ) {
+        )
+        {
             type = DataContract.UnwrapNullableType(type);
             DataContract dataContract = DataContract.GetDataContract(type);
             DataContract? alreadyExistingContract;
@@ -2514,7 +2551,8 @@ namespace System.Runtime.Serialization
                     dataContract.StableName,
                     out alreadyExistingContract
                 )
-            ) {
+            )
+            {
                 // Don't throw duplicate if its a KeyValuePair<K,T> as it could have been added by Dictionary<K,T>
                 if (
                     DataContractCriticalHelper.GetDataContractAdapterType(
@@ -2652,7 +2690,8 @@ namespace System.Runtime.Serialization
                 );
             foreach (
                 InternalsVisibleToAttribute internalsVisibleAttribute in internalsVisibleAttributes
-            ) {
+            )
+            {
                 string internalsVisibleAttributeAssemblyName =
                     internalsVisibleAttribute.AssemblyName;
 
@@ -2663,7 +2702,8 @@ namespace System.Runtime.Serialization
                         internalsVisibleAttributeAssemblyName,
                         Globals.FullSRSInternalsVisiblePattern
                     )
-                ) {
+                )
+                {
                     return true;
                 }
             }

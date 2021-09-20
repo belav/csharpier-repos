@@ -26,7 +26,8 @@ namespace Microsoft.AspNetCore.Components.WebAssembly.Authentication
         public void PostConfigure(
             string name,
             RemoteAuthenticationOptions<ApiAuthorizationProviderOptions> options
-        ) {
+        )
+        {
             if (string.Equals(name, Options.DefaultName))
             {
                 Configure(options);

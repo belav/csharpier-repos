@@ -26,7 +26,8 @@ namespace Microsoft.CodeAnalysis.MSBuild
                 public ResolvedReferences(
                     ImmutableHashSet<ProjectReference> projectReferences,
                     ImmutableArray<MetadataReference> metadataReferences
-                ) {
+                )
+                {
                     ProjectReferences = projectReferences;
                     MetadataReferences = metadataReferences;
                 }
@@ -67,7 +68,8 @@ namespace Microsoft.CodeAnalysis.MSBuild
 
                 private static ImmutableDictionary<string, HashSet<int>> CreatePathToIndexMap(
                     ImmutableArray<MetadataReference> metadataReferences
-                ) {
+                )
+                {
                     var builder = ImmutableDictionary.CreateBuilder<string, HashSet<int>>(
                         PathUtilities.Comparer
                     );
@@ -104,7 +106,8 @@ namespace Microsoft.CodeAnalysis.MSBuild
                 public void SwapMetadataReferenceForProjectReference(
                     ProjectReference projectReference,
                     params string?[] possibleMetadataReferencePaths
-                ) {
+                )
+                {
                     foreach (var path in possibleMetadataReferencePaths)
                     {
                         if (path != null)
@@ -129,7 +132,8 @@ namespace Microsoft.CodeAnalysis.MSBuild
                 {
                     if (
                         filePath != null && _pathToIndicesMap.TryGetValue(filePath, out var indices)
-                    ) {
+                    )
+                    {
                         _indicesToRemove.AddRange(indices);
                     }
                 }
@@ -144,7 +148,8 @@ namespace Microsoft.CodeAnalysis.MSBuild
                             outputFilePath != null
                             && outputRefFilePath != null
                             && (Contains(outputFilePath) || Contains(outputRefFilePath))
-                        ) {
+                        )
+                        {
                             return projectInfo;
                         }
                     }
@@ -161,7 +166,8 @@ namespace Microsoft.CodeAnalysis.MSBuild
                         if (
                             metadataReference
                             is UnresolvedMetadataReference unresolvedMetadataReference
-                        ) {
+                        )
+                        {
                             builder.Add(unresolvedMetadataReference);
                         }
                     }
@@ -200,7 +206,8 @@ namespace Microsoft.CodeAnalysis.MSBuild
                 ProjectFileInfo projectFileInfo,
                 CommandLineArguments commandLineArgs,
                 CancellationToken cancellationToken
-            ) {
+            )
+            {
                 // First, gather all of the metadata references from the command-line arguments.
                 var resolvedMetadataReferences = commandLineArgs.ResolveMetadataReferences(
                     new WorkspaceMetadataFileReferenceResolver(
@@ -229,7 +236,8 @@ namespace Microsoft.CodeAnalysis.MSBuild
                             _discoveredProjectOptions.OnPathFailure,
                             out var projectReferencePath
                         )
-                    ) {
+                    )
+                    {
                         // The easiest case is to add a reference to a project we already know about.
                         if (
                             TryAddReferenceToKnownProject(
@@ -238,7 +246,8 @@ namespace Microsoft.CodeAnalysis.MSBuild
                                 aliases,
                                 builder
                             )
-                        ) {
+                        )
+                        {
                             continue;
                         }
 
@@ -253,7 +262,8 @@ namespace Microsoft.CodeAnalysis.MSBuild
                                     cancellationToken
                                 )
                                 .ConfigureAwait(false)
-                        ) {
+                        )
+                        {
                             continue;
                         }
 
@@ -267,7 +277,8 @@ namespace Microsoft.CodeAnalysis.MSBuild
                                     cancellationToken
                                 )
                                 .ConfigureAwait(false)
-                        ) {
+                        )
+                        {
                             continue;
                         }
 
@@ -281,7 +292,8 @@ namespace Microsoft.CodeAnalysis.MSBuild
                                     cancellationToken
                                 )
                                 .ConfigureAwait(false)
-                        ) {
+                        )
+                        {
                             continue;
                         }
                     }
@@ -301,7 +313,8 @@ namespace Microsoft.CodeAnalysis.MSBuild
                 // Are there still any unresolved metadata references? If so, remove them and report diagnostics.
                 foreach (
                     var unresolvedMetadataReference in builder.GetUnresolvedMetadataReferences()
-                ) {
+                )
+                {
                     var filePath = unresolvedMetadataReference.Reference;
 
                     builder.Remove(filePath);
@@ -327,7 +340,8 @@ namespace Microsoft.CodeAnalysis.MSBuild
                 ImmutableArray<string> aliases,
                 ResolvedReferencesBuilder builder,
                 CancellationToken cancellationToken
-            ) {
+            )
+            {
                 var projectReferenceInfos = await LoadProjectInfosFromPathAsync(
                         projectReferencePath,
                         _discoveredProjectOptions,
@@ -350,7 +364,8 @@ namespace Microsoft.CodeAnalysis.MSBuild
                         outputFilePath != null
                         && outputRefFilePath != null
                         && (builder.Contains(outputFilePath) || builder.Contains(outputRefFilePath))
-                    ) {
+                    )
+                    {
                         projectReferenceInfo = info;
                         break;
                     }
@@ -427,7 +442,8 @@ namespace Microsoft.CodeAnalysis.MSBuild
                 string projectPath,
                 ResolvedReferencesBuilder builder,
                 CancellationToken cancellationToken
-            ) {
+            )
+            {
                 var outputFilePath = await _buildManager.TryGetOutputFilePathAsync(
                         projectPath,
                         cancellationToken
@@ -442,7 +458,8 @@ namespace Microsoft.CodeAnalysis.MSBuild
                 string projectPath,
                 ResolvedReferencesBuilder builder,
                 CancellationToken cancellationToken
-            ) {
+            )
+            {
                 // Note: Load the project, but don't report failures.
                 var projectFileInfos = await LoadProjectFileInfosAsync(
                         projectPath,
@@ -459,7 +476,8 @@ namespace Microsoft.CodeAnalysis.MSBuild
                     if (
                         (builder.Contains(outputFilePath) && File.Exists(outputFilePath))
                         || (builder.Contains(outputRefFilePath) && File.Exists(outputRefFilePath))
-                    ) {
+                    )
+                    {
                         return true;
                     }
                 }
@@ -471,7 +489,8 @@ namespace Microsoft.CodeAnalysis.MSBuild
                 ProjectId from,
                 ProjectId to,
                 ImmutableArray<string> aliases
-            ) {
+            )
+            {
                 var newReference = new ProjectReference(to, aliases);
                 _projectIdToProjectReferencesMap.MultiAdd(from, newReference);
                 return newReference;
@@ -489,13 +508,15 @@ namespace Microsoft.CodeAnalysis.MSBuild
                 string projectReferencePath,
                 ImmutableArray<string> aliases,
                 ResolvedReferencesBuilder builder
-            ) {
+            )
+            {
                 if (
                     _projectMap.TryGetIdsByProjectPath(
                         projectReferencePath,
                         out var projectReferenceIds
                     )
-                ) {
+                )
+                {
                     foreach (var projectReferenceId in projectReferenceIds)
                     {
                         // Don't add a reference if the project already has a reference on us. Otherwise, it will cause a circularity.

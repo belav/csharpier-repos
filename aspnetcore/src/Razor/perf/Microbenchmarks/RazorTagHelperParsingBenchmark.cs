@@ -20,7 +20,8 @@ namespace Microsoft.AspNetCore.Razor.Microbenchmarks
             var current = new DirectoryInfo(AppContext.BaseDirectory);
             while (
                 current != null && !File.Exists(Path.Combine(current.FullName, "taghelpers.json"))
-            ) {
+            )
+            {
                 current = current.Parent;
             }
 

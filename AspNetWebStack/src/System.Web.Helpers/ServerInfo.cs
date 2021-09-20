@@ -115,7 +115,8 @@ namespace System.Web.Helpers
                     || key.Equals("ALL_RAW", StringComparison.OrdinalIgnoreCase)
                     || key.Equals("HTTP_AUTHORIZATION", StringComparison.OrdinalIgnoreCase)
                     || key.Equals("HTTP_COOKIE", StringComparison.OrdinalIgnoreCase)
-                ) {
+                )
+                {
                     continue;
                 }
 
@@ -326,7 +327,8 @@ namespace System.Web.Helpers
             StringBuilder builder,
             string sectionTitle,
             IDictionary<string, string> entries
-        ) {
+        )
+        {
             builder.AppendLine("<div class=\"server-info\">");
             builder.AppendLine("<table class=\"server-info\" dir=\"ltr\">");
             if (!String.IsNullOrEmpty(sectionTitle))

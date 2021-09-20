@@ -136,9 +136,10 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
         [UsedImplicitly]
         private static IClrCollectionAccessor CreateGeneric<TEntity, TCollection, TElement>(
             INavigationBase navigation
-        ) where TEntity : class
-          where TCollection : class, IEnumerable<TElement>
-          where TElement : class
+        )
+            where TEntity : class
+            where TCollection : class, IEnumerable<TElement>
+            where TElement : class
         {
             var entityParameter = Expression.Parameter(typeof(TEntity), "entity");
             var valueParameter = Expression.Parameter(typeof(TCollection), "collection");
@@ -324,9 +325,10 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
         private static TCollection CreateAndSet<TEntity, TCollection, TConcreteCollection>(
             TEntity entity,
             Action<TEntity, TCollection> setterDelegate
-        ) where TEntity : class
-          where TCollection : class
-          where TConcreteCollection : TCollection, new()
+        )
+            where TEntity : class
+            where TCollection : class
+            where TConcreteCollection : TCollection, new()
         {
             var collection = new TConcreteCollection();
             setterDelegate(entity, collection);
@@ -342,9 +344,10 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
         private static TCollection CreateAndSetHashSet<TEntity, TCollection, TElement>(
             TEntity entity,
             Action<TEntity, TCollection> setterDelegate
-        ) where TEntity : class
-          where TCollection : class
-          where TElement : class
+        )
+            where TEntity : class
+            where TCollection : class
+            where TElement : class
         {
             var collection = (TCollection)(ICollection<TElement>)new HashSet<TElement>(
                 LegacyReferenceEqualityComparer.Instance
@@ -365,9 +368,10 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
         private static TCollection CreateAndSetObservableHashSet<TEntity, TCollection, TElement>(
             TEntity entity,
             Action<TEntity, TCollection> setterDelegate
-        ) where TEntity : class
-          where TCollection : class
-          where TElement : class
+        )
+            where TEntity : class
+            where TCollection : class
+            where TElement : class
         {
             var collection = (TCollection)(ICollection<TElement>)new ObservableHashSet<TElement>(
                 LegacyReferenceEqualityComparer.Instance

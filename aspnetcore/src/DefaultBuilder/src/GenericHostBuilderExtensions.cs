@@ -31,7 +31,8 @@ namespace Microsoft.Extensions.Hosting
         public static IHostBuilder ConfigureWebHostDefaults(
             this IHostBuilder builder,
             Action<IWebHostBuilder> configure
-        ) {
+        )
+        {
             if (configure is null)
             {
                 throw new ArgumentNullException(nameof(configure));

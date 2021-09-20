@@ -297,7 +297,8 @@ namespace System.Tests
             bool isNegative,
             byte scale,
             decimal expected
-        ) {
+        )
+        {
             Assert.Equal(expected, new decimal(lo, mid, hi, isNegative, scale));
         }
 
@@ -1369,7 +1370,8 @@ namespace System.Tests
             NumberStyles style,
             IFormatProvider provider,
             decimal expected
-        ) {
+        )
+        {
             bool isDefaultProvider = provider == null || provider == NumberFormatInfo.CurrentInfo;
             decimal result;
             if ((style & ~NumberStyles.Number) == 0 && style != NumberStyles.None)
@@ -1475,7 +1477,8 @@ namespace System.Tests
             NumberStyles style,
             IFormatProvider provider,
             Type exceptionType
-        ) {
+        )
+        {
             bool isDefaultProvider = provider == null || provider == NumberFormatInfo.CurrentInfo;
             decimal result;
             if (
@@ -1483,7 +1486,8 @@ namespace System.Tests
                 && style != NumberStyles.None
                 && (style & NumberStyles.AllowLeadingWhite)
                     == (style & NumberStyles.AllowTrailingWhite)
-            ) {
+            )
+            {
                 // Use Parse(string) or Parse(string, IFormatProvider)
                 if (isDefaultProvider)
                 {
@@ -1582,7 +1586,8 @@ namespace System.Tests
             NumberStyles style,
             IFormatProvider provider,
             decimal expected
-        ) {
+        )
+        {
             bool isDefaultProvider = provider == null || provider == NumberFormatInfo.CurrentInfo;
             decimal result;
             if ((style & ~NumberStyles.Number) == 0 && style != NumberStyles.None)
@@ -1615,7 +1620,8 @@ namespace System.Tests
             NumberStyles style,
             IFormatProvider provider,
             Type exceptionType
-        ) {
+        )
+        {
             if (value != null)
             {
                 Assert.Throws(exceptionType, () => decimal.Parse(value.AsSpan(), style, provider));
@@ -1769,7 +1775,8 @@ namespace System.Tests
         public static void Remainder_ZeroDenominator_ThrowsDivideByZeroException(
             decimal d1,
             decimal d2
-        ) {
+        )
+        {
             Assert.Throws<DivideByZeroException>(() => d1 % d2);
             Assert.Throws<DivideByZeroException>(() => decimal.Remainder(d1, d2));
         }
@@ -1898,7 +1905,8 @@ namespace System.Tests
             int digits,
             MidpointRounding mode,
             decimal expected
-        ) {
+        )
+        {
             Assert.Equal(expected, decimal.Round(d, digits, mode));
         }
 
@@ -1934,7 +1942,8 @@ namespace System.Tests
             decimal d,
             MidpointRounding mode,
             decimal expected
-        ) {
+        )
+        {
             Assert.Equal(expected, decimal.Round(d, mode));
         }
 
@@ -2374,7 +2383,8 @@ namespace System.Tests
             string format,
             IFormatProvider provider,
             string expected
-        ) {
+        )
+        {
             bool isDefaultProvider = provider == null;
             if (string.IsNullOrEmpty(format) || format.ToUpperInvariant() == "G")
             {

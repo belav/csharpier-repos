@@ -25,7 +25,8 @@ namespace Microsoft.CodeAnalysis.ExtractMethod
                 VariableSymbol variableSymbol,
                 VariableStyle variableStyle,
                 bool useAsReturnValue = false
-            ) {
+            )
+            {
                 _variableSymbol = variableSymbol;
                 _variableStyle = variableStyle;
                 _useAsReturnValue = useAsReturnValue;
@@ -122,7 +123,8 @@ namespace Microsoft.CodeAnalysis.ExtractMethod
             public void AddIdentifierTokenAnnotationPair(
                 List<Tuple<SyntaxToken, SyntaxAnnotation>> annotations,
                 CancellationToken cancellationToken
-            ) {
+            )
+            {
                 _variableSymbol.AddIdentifierTokenAnnotationPair(annotations, cancellationToken);
             }
 
@@ -146,7 +148,8 @@ namespace Microsoft.CodeAnalysis.ExtractMethod
             public static void SortVariables(
                 Compilation compilation,
                 ArrayBuilder<VariableInfo> variables
-            ) {
+            )
+            {
                 var cancellationTokenType = compilation.GetTypeByMetadataName(
                     typeof(CancellationToken).FullName
                 );

@@ -22,7 +22,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             SourceMemberContainerTypeSymbol containingEnum,
             EnumMemberDeclarationSyntax syntax,
             BindingDiagnosticBag diagnostics
-        ) {
+        )
+        {
             var initializer = syntax.EqualsValue;
             Debug.Assert(initializer != null);
             return new ExplicitValuedEnumConstantSymbol(
@@ -39,7 +40,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             SourceEnumConstantSymbol otherConstant,
             int otherConstantOffset,
             BindingDiagnosticBag diagnostics
-        ) {
+        )
+        {
             if ((object)otherConstant == null)
             {
                 Debug.Assert(otherConstantOffset == 0);
@@ -62,12 +64,14 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             SourceMemberContainerTypeSymbol containingEnum,
             EnumMemberDeclarationSyntax syntax,
             BindingDiagnosticBag diagnostics
-        ) : base(
-            containingEnum,
-            syntax.Identifier.ValueText,
-            syntax.GetReference(),
-            syntax.Identifier.GetLocation()
-        ) {
+        )
+            : base(
+                containingEnum,
+                syntax.Identifier.ValueText,
+                syntax.GetReference(),
+                syntax.Identifier.GetLocation()
+            )
+        {
             if (this.Name == WellKnownMemberNames.EnumBackingFieldName)
             {
                 diagnostics.Add(
@@ -119,7 +123,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
         internal sealed override void ForceComplete(
             SourceLocation locationOpt,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             while (true)
             {
                 cancellationToken.ThrowIfCancellationRequested();
@@ -171,7 +176,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                 HashSet<SourceFieldSymbolWithSyntaxReference> dependencies,
                 bool earlyDecodingWellKnownAttributes,
                 BindingDiagnosticBag diagnostics
-            ) {
+            )
+            {
                 var constantType = this.ContainingType.EnumUnderlyingType.SpecialType;
                 return Microsoft.CodeAnalysis.ConstantValue.Default(constantType);
             }
@@ -195,7 +201,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                 HashSet<SourceFieldSymbolWithSyntaxReference> dependencies,
                 bool earlyDecodingWellKnownAttributes,
                 BindingDiagnosticBag diagnostics
-            ) {
+            )
+            {
                 return ConstantValueUtils.EvaluateFieldConstant(
                     this,
                     (EqualsValueClauseSyntax)_equalsValueNodeRef.GetSyntax(),
@@ -230,7 +237,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                 HashSet<SourceFieldSymbolWithSyntaxReference> dependencies,
                 bool earlyDecodingWellKnownAttributes,
                 BindingDiagnosticBag diagnostics
-            ) {
+            )
+            {
                 var otherValue = _otherConstant.GetConstantValue(
                     new ConstantFieldsInProgress(this, dependencies),
                     earlyDecodingWellKnownAttributes

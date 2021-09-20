@@ -50,7 +50,8 @@ namespace System.Net.Http.Tests
             int startIndex,
             RangeHeaderValue expectedResult,
             int expectedIndex
-        ) {
+        )
+        {
             HttpHeaderParser parser = GenericHeaderParser.RangeParser;
             object result = null;
             Assert.True(

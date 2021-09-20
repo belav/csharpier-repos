@@ -21,7 +21,8 @@ namespace Microsoft.AspNetCore.Mvc.ModelBinding.Validation
         public void AddValidation_WithoutLocalizationAndDefaultFileExtensions(
             string extensions,
             string expectedExtensions
-        ) {
+        )
+        {
             // Arrange
             var provider = TestModelMetadataProvider.CreateDefaultProvider();
             var metadata = provider.GetMetadataForProperty(
@@ -100,7 +101,8 @@ namespace Microsoft.AspNetCore.Mvc.ModelBinding.Validation
         public void AddValidation_WithoutLocalizationAndCustomFileExtensions(
             string extensions,
             string expectedExtensions
-        ) {
+        )
+        {
             // Arrange
             var provider = TestModelMetadataProvider.CreateDefaultProvider();
             var metadata = provider.GetMetadataForProperty(

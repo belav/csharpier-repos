@@ -44,32 +44,34 @@ namespace System.IO.Pipes
             string pipeName,
             PipeDirection direction,
             int maxNumberOfServerInstances
-        ) : this(
-            pipeName,
-            direction,
-            maxNumberOfServerInstances,
-            PipeTransmissionMode.Byte,
-            PipeOptions.None,
-            0,
-            0,
-            HandleInheritability.None
-        ) { }
+        )
+            : this(
+                pipeName,
+                direction,
+                maxNumberOfServerInstances,
+                PipeTransmissionMode.Byte,
+                PipeOptions.None,
+                0,
+                0,
+                HandleInheritability.None
+            ) { }
 
         public NamedPipeServerStream(
             string pipeName,
             PipeDirection direction,
             int maxNumberOfServerInstances,
             PipeTransmissionMode transmissionMode
-        ) : this(
-            pipeName,
-            direction,
-            maxNumberOfServerInstances,
-            transmissionMode,
-            PipeOptions.None,
-            0,
-            0,
-            HandleInheritability.None
-        ) { }
+        )
+            : this(
+                pipeName,
+                direction,
+                maxNumberOfServerInstances,
+                transmissionMode,
+                PipeOptions.None,
+                0,
+                0,
+                HandleInheritability.None
+            ) { }
 
         public NamedPipeServerStream(
             string pipeName,
@@ -77,16 +79,17 @@ namespace System.IO.Pipes
             int maxNumberOfServerInstances,
             PipeTransmissionMode transmissionMode,
             PipeOptions options
-        ) : this(
-            pipeName,
-            direction,
-            maxNumberOfServerInstances,
-            transmissionMode,
-            options,
-            0,
-            0,
-            HandleInheritability.None
-        ) { }
+        )
+            : this(
+                pipeName,
+                direction,
+                maxNumberOfServerInstances,
+                transmissionMode,
+                options,
+                0,
+                0,
+                HandleInheritability.None
+            ) { }
 
         public NamedPipeServerStream(
             string pipeName,
@@ -96,16 +99,17 @@ namespace System.IO.Pipes
             PipeOptions options,
             int inBufferSize,
             int outBufferSize
-        ) : this(
-            pipeName,
-            direction,
-            maxNumberOfServerInstances,
-            transmissionMode,
-            options,
-            inBufferSize,
-            outBufferSize,
-            HandleInheritability.None
-        ) { }
+        )
+            : this(
+                pipeName,
+                direction,
+                maxNumberOfServerInstances,
+                transmissionMode,
+                options,
+                inBufferSize,
+                outBufferSize,
+                HandleInheritability.None
+            ) { }
 
         /// <summary>
         /// Full named pipe server constructor
@@ -173,7 +177,8 @@ namespace System.IO.Pipes
             int inBufferSize,
             int outBufferSize,
             HandleInheritability inheritability
-        ) {
+        )
+        {
             if (pipeName == null)
             {
                 throw new ArgumentNullException(nameof(pipeName));
@@ -192,7 +197,8 @@ namespace System.IO.Pipes
             if (
                 transmissionMode < PipeTransmissionMode.Byte
                 || transmissionMode > PipeTransmissionMode.Message
-            ) {
+            )
+            {
                 throw new ArgumentOutOfRangeException(
                     nameof(transmissionMode),
                     SR.ArgumentOutOfRange_TransmissionModeByteOrMsg
@@ -207,7 +213,8 @@ namespace System.IO.Pipes
                         | PipeOptions.CurrentUserOnly
                     )
                 ) != 0
-            ) {
+            )
+            {
                 throw new ArgumentOutOfRangeException(
                     nameof(options),
                     SR.ArgumentOutOfRange_OptionsInvalid
@@ -230,7 +237,8 @@ namespace System.IO.Pipes
             if (
                 (maxNumberOfServerInstances < 1 || maxNumberOfServerInstances > 254)
                 && (maxNumberOfServerInstances != MaxAllowedServerInstances)
-            ) {
+            )
+            {
                 // win32 allows fixed values of 1-254 or 255 to mean max allowed by system. We expose 255 as -1 (unlimited)
                 // through the MaxAllowedServerInstances constant. This is consistent e.g. with -1 as infinite timeout, etc.
                 // We do this check for consistency on Unix, even though maxNumberOfServerInstances is otherwise ignored.
@@ -246,7 +254,8 @@ namespace System.IO.Pipes
             if (
                 inheritability < HandleInheritability.None
                 || inheritability > HandleInheritability.Inheritable
-            ) {
+            )
+            {
                 throw new ArgumentOutOfRangeException(
                     nameof(inheritability),
                     SR.ArgumentOutOfRange_HandleInheritabilityNoneOrInheritable

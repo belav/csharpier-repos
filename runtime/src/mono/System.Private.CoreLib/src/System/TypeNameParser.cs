@@ -22,7 +22,8 @@ namespace System
             bool throwOnError,
             bool ignoreCase,
             ref StackCrawlMark stackMark
-        ) {
+        )
+        {
             if (typeName == null)
                 throw new ArgumentNullException(nameof(typeName));
 
@@ -52,7 +53,8 @@ namespace System
             bool throwOnError,
             bool ignoreCase,
             ref StackCrawlMark stackMark
-        ) {
+        )
+        {
             // Resolve assembly
             Assembly? assembly = null;
             if (pname.AssemblyName != null)
@@ -138,7 +140,8 @@ namespace System
             Func<AssemblyName, Assembly?>? assemblyResolver,
             bool throwOnError,
             ref StackCrawlMark stackMark
-        ) {
+        )
+        {
             var aname = new AssemblyName(name);
 
             if (assemblyResolver == null)
@@ -176,7 +179,8 @@ namespace System
             bool throwOnError,
             bool ignoreCase,
             ref StackCrawlMark stackMark
-        ) {
+        )
+        {
             Type? type = null;
 
             string name = EscapeTypeName(names[0]);

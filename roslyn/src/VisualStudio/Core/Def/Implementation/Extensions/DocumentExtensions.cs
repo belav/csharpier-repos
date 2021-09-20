@@ -20,7 +20,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Extensions
         public static IList<Tuple<TextSpan, uint>> GetVisibleCodeBlocks(
             this Document document,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var codeBlocks = new List<Tuple<TextSpan, uint>>();
 
             var syntaxFacts = document.GetLanguageService<ISyntaxFactsService>();

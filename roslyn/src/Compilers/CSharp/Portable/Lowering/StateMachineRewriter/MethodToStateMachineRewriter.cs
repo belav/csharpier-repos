@@ -168,7 +168,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                 && thisParameter.Type.IsReferenceType
                 && proxies.TryGetValue(thisParameter, out thisProxy)
                 && F.Compilation.Options.OptimizationLevel == OptimizationLevel.Release
-            ) {
+            )
+            {
                 BoundExpression thisProxyReplacement = thisProxy.Replacement(
                     F.Syntax,
                     frameType => F.This()
@@ -213,7 +214,8 @@ namespace Microsoft.CodeAnalysis.CSharp
         protected override BoundExpression FramePointer(
             SyntaxNode syntax,
             NamedTypeSymbol frameClass
-        ) {
+        )
+        {
             var oldSyntax = F.Syntax;
             F.Syntax = syntax;
             var result = F.This();
@@ -286,7 +288,8 @@ namespace Microsoft.CodeAnalysis.CSharp
         private BoundStatement PossibleIteratorScope(
             ImmutableArray<LocalSymbol> locals,
             Func<BoundStatement> wrapped
-        ) {
+        )
+        {
             if (locals.IsDefaultOrEmpty)
             {
                 return wrapped();
@@ -331,7 +334,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                         && local.ScopeDesignatorOpt?.Kind() != SyntaxKind.SwitchSection
                     )
                     || local.SynthesizedKind == SynthesizedLocalKind.LambdaDisplayClass
-                ) {
+                )
+                {
                     // NB: This is the case when the local backed by recycled field will not be visible in debugger.
                     //     It may be possible in the future, but for now a backing field can be mapped only to a single local.
                     if (!reused)
@@ -370,7 +374,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                 {
                     foreach (
                         var field in ((CapturedToExpressionSymbolReplacement)proxy).HoistedFields
-                    ) {
+                    )
+                    {
                         AddVariableCleanup(variableCleanup, field);
 
                         if (proxy.IsReusable)
@@ -416,7 +421,8 @@ namespace Microsoft.CodeAnalysis.CSharp
         internal BoundBlock MakeStateMachineScope(
             ImmutableArray<StateMachineFieldSymbol> hoistedLocals,
             BoundStatement statement
-        ) {
+        )
+        {
             return F.Block(new BoundStateMachineScope(F.Syntax, hoistedLocals, statement));
         }
 
@@ -426,7 +432,8 @@ namespace Microsoft.CodeAnalysis.CSharp
         internal static bool TryUnwrapBoundStateMachineScope(
             ref BoundStatement statement,
             out ImmutableArray<StateMachineFieldSymbol> hoistedLocals
-        ) {
+        )
+        {
             if (statement.Kind == BoundKind.Block)
             {
                 var rewrittenBlock = (BoundBlock)statement;
@@ -434,7 +441,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                 if (
                     rewrittenStatements.Length == 1
                     && rewrittenStatements[0].Kind == BoundKind.StateMachineScope
-                ) {
+                )
+                {
                     var stateMachineScope = (BoundStateMachineScope)rewrittenStatements[0];
                     statement = stateMachineScope.Statement;
                     hoistedLocals = stateMachineScope.Fields;
@@ -449,7 +457,8 @@ namespace Microsoft.CodeAnalysis.CSharp
         private void AddVariableCleanup(
             ArrayBuilder<BoundAssignmentOperator> cleanup,
             FieldSymbol field
-        ) {
+        )
+        {
             if (MightContainReferences(field.Type))
             {
                 cleanup.Add(
@@ -487,13 +496,15 @@ namespace Microsoft.CodeAnalysis.CSharp
             TypeSymbol type,
             out bool reused,
             LocalSymbol local = null
-        ) {
+        )
+        {
             ArrayBuilder<StateMachineFieldSymbol> fields;
             if (
                 _lazyAvailableReusableHoistedFields != null
                 && _lazyAvailableReusableHoistedFields.TryGetValue(type, out fields)
                 && fields.Count > 0
-            ) {
+            )
+            {
                 var field = fields.Last();
                 fields.RemoveLast();
                 reused = true;
@@ -530,7 +541,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             if (
                 _lazyAvailableReusableHoistedFields == null
                 || !_lazyAvailableReusableHoistedFields.TryGetValue(field.Type, out fields)
-            ) {
+            )
+            {
                 if (_lazyAvailableReusableHoistedFields == null)
                 {
                     _lazyAvailableReusableHoistedFields = new Dictionary<
@@ -551,7 +563,8 @@ namespace Microsoft.CodeAnalysis.CSharp
         private BoundExpression HoistRefInitialization(
             SynthesizedLocal local,
             BoundAssignmentOperator node
-        ) {
+        )
+        {
             Debug.Assert(local.SynthesizedKind == SynthesizedLocalKind.Spill);
             Debug.Assert(local.SyntaxOpt != null);
             Debug.Assert(this.OriginalMethod.IsAsync);
@@ -636,7 +649,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             ArrayBuilder<BoundExpression> sideEffects,
             ArrayBuilder<StateMachineFieldSymbol> hoistedFields,
             ref bool needsSacrificialEvaluation
-        ) {
+        )
+        {
             switch (expr.Kind)
             {
                 case BoundKind.ArrayAccess:
@@ -791,7 +805,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                                 Diagnostics.DiagnosticBag,
                                 out slotIndex
                             )
-                        ) {
+                        )
+                        {
                             slotIndex = _nextFreeHoistedLocalSlot++;
                         }
 

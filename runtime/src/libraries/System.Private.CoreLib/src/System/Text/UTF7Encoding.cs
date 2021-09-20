@@ -215,7 +215,8 @@ namespace System.Text
             int charCount,
             byte[] bytes,
             int byteIndex
-        ) {
+        )
+        {
             if (s == null || bytes == null)
                 throw new ArgumentNullException(
                     s == null ? nameof(s) : nameof(bytes),
@@ -264,7 +265,8 @@ namespace System.Text
             int charCount,
             byte[] bytes,
             int byteIndex
-        ) {
+        )
+        {
             // Validate parameters
             if (chars == null || bytes == null)
                 throw new ArgumentNullException(
@@ -392,7 +394,8 @@ namespace System.Text
             int byteCount,
             char[] chars,
             int charIndex
-        ) {
+        )
+        {
             // Validate Parameters
             if (bytes == null || chars == null)
                 throw new ArgumentNullException(
@@ -499,7 +502,8 @@ namespace System.Text
             char* chars,
             int count,
             EncoderNLS? baseEncoder
-        ) {
+        )
+        {
             Debug.Assert(chars != null, "[UTF7Encoding.GetByteCount]chars!=null");
             Debug.Assert(count >= 0, "[UTF7Encoding.GetByteCount]count >=0");
 
@@ -513,7 +517,8 @@ namespace System.Text
             byte* bytes,
             int byteCount,
             EncoderNLS? baseEncoder
-        ) {
+        )
+        {
             Debug.Assert(byteCount >= 0, "[UTF7Encoding.GetBytes]byteCount >=0");
             Debug.Assert(chars != null, "[UTF7Encoding.GetBytes]chars!=null");
             Debug.Assert(charCount >= 0, "[UTF7Encoding.GetBytes]charCount >=0");
@@ -661,7 +666,8 @@ namespace System.Text
             byte* bytes,
             int count,
             DecoderNLS? baseDecoder
-        ) {
+        )
+        {
             Debug.Assert(count >= 0, "[UTF7Encoding.GetCharCount]count >=0");
             Debug.Assert(bytes != null, "[UTF7Encoding.GetCharCount]bytes!=null");
 
@@ -675,7 +681,8 @@ namespace System.Text
             char* chars,
             int charCount,
             DecoderNLS? baseDecoder
-        ) {
+        )
+        {
             Debug.Assert(byteCount >= 0, "[UTF7Encoding.GetChars]byteCount >=0");
             Debug.Assert(bytes != null, "[UTF7Encoding.GetChars]bytes!=null");
             Debug.Assert(charCount >= 0, "[UTF7Encoding.GetChars]charCount >=0");

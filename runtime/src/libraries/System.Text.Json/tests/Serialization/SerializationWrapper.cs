@@ -38,7 +38,8 @@ namespace System.Text.Json.Serialization.Tests
                 object value,
                 Type inputType,
                 JsonSerializerOptions options = null
-            ) {
+            )
+            {
                 byte[] result = JsonSerializer.SerializeToUtf8Bytes(value, inputType, options);
                 return Task.FromResult(Encoding.UTF8.GetString(result));
             }
@@ -46,7 +47,8 @@ namespace System.Text.Json.Serialization.Tests
             protected internal override Task<string> SerializeWrapper<T>(
                 T value,
                 JsonSerializerOptions options = null
-            ) {
+            )
+            {
                 byte[] result = JsonSerializer.SerializeToUtf8Bytes<T>(value, options);
                 return Task.FromResult(Encoding.UTF8.GetString(result));
             }
@@ -58,14 +60,16 @@ namespace System.Text.Json.Serialization.Tests
                 object value,
                 Type inputType,
                 JsonSerializerOptions options = null
-            ) {
+            )
+            {
                 return Task.FromResult(JsonSerializer.Serialize(value, inputType, options));
             }
 
             protected internal override Task<string> SerializeWrapper<T>(
                 T value,
                 JsonSerializerOptions options = null
-            ) {
+            )
+            {
                 return Task.FromResult(JsonSerializer.Serialize(value, options));
             }
         }
@@ -76,7 +80,8 @@ namespace System.Text.Json.Serialization.Tests
                 object value,
                 Type inputType,
                 JsonSerializerOptions options = null
-            ) {
+            )
+            {
                 using var stream = new MemoryStream();
                 await JsonSerializer.SerializeAsync(stream, value, inputType, options);
                 return Encoding.UTF8.GetString(stream.ToArray());
@@ -85,7 +90,8 @@ namespace System.Text.Json.Serialization.Tests
             protected internal override async Task<string> SerializeWrapper<T>(
                 T value,
                 JsonSerializerOptions options = null
-            ) {
+            )
+            {
                 using var stream = new MemoryStream();
                 await JsonSerializer.SerializeAsync<T>(stream, value, options);
                 return Encoding.UTF8.GetString(stream.ToArray());
@@ -98,7 +104,8 @@ namespace System.Text.Json.Serialization.Tests
                 object value,
                 Type inputType,
                 JsonSerializerOptions options = null
-            ) {
+            )
+            {
                 if (options == null)
                 {
                     options = _optionsWithSmallBuffer;
@@ -110,7 +117,8 @@ namespace System.Text.Json.Serialization.Tests
             protected internal override Task<string> SerializeWrapper<T>(
                 T value,
                 JsonSerializerOptions options = null
-            ) {
+            )
+            {
                 return base.SerializeWrapper<T>(value, options);
             }
         }
@@ -121,7 +129,8 @@ namespace System.Text.Json.Serialization.Tests
                 object value,
                 Type inputType,
                 JsonSerializerOptions options = null
-            ) {
+            )
+            {
                 using MemoryStream stream = new MemoryStream();
                 using var writer = new Utf8JsonWriter(stream);
                 JsonSerializer.Serialize(writer, value, inputType, options);
@@ -131,7 +140,8 @@ namespace System.Text.Json.Serialization.Tests
             protected internal override Task<string> SerializeWrapper<T>(
                 T value,
                 JsonSerializerOptions options = null
-            ) {
+            )
+            {
                 using MemoryStream stream = new MemoryStream();
                 using var writer = new Utf8JsonWriter(stream);
                 JsonSerializer.Serialize<T>(writer, value, options);

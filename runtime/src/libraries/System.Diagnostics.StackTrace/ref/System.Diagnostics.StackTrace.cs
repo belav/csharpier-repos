@@ -48,7 +48,8 @@ namespace System.Diagnostics
     {
         public static System.IntPtr GetNativeImageBase(
             this System.Diagnostics.StackFrame stackFrame
-        ) {
+        )
+        {
             throw null;
         }
         public static System.IntPtr GetNativeIP(this System.Diagnostics.StackFrame stackFrame)
@@ -337,7 +338,8 @@ namespace System.Diagnostics.SymbolStore
         }
         public override bool Equals(
             [System.Diagnostics.CodeAnalysis.NotNullWhenAttribute(true)] object? obj
-        ) {
+        )
+        {
             throw null;
         }
         public override int GetHashCode()
@@ -351,13 +353,15 @@ namespace System.Diagnostics.SymbolStore
         public static bool operator ==(
             System.Diagnostics.SymbolStore.SymbolToken a,
             System.Diagnostics.SymbolStore.SymbolToken b
-        ) {
+        )
+        {
             throw null;
         }
         public static bool operator !=(
             System.Diagnostics.SymbolStore.SymbolToken a,
             System.Diagnostics.SymbolStore.SymbolToken b
-        ) {
+        )
+        {
             throw null;
         }
     }

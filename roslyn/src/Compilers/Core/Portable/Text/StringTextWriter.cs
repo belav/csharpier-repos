@@ -24,7 +24,8 @@ namespace Microsoft.CodeAnalysis.Text
             Encoding? encoding,
             SourceHashAlgorithm checksumAlgorithm,
             int capacity
-        ) {
+        )
+        {
             _builder = new StringBuilder(capacity);
             _encoding = encoding;
             _checksumAlgorithm = checksumAlgorithm;

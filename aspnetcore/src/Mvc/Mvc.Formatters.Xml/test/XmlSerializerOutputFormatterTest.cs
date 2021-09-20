@@ -61,7 +61,8 @@ namespace Microsoft.AspNetCore.Mvc.Formatters.Xml
         public async Task XmlSerializerOutputFormatterCanWriteBasicTypes(
             object input,
             string expectedOutput
-        ) {
+        )
+        {
             // Arrange
             var formatter = new XmlSerializerOutputFormatter();
             var outputFormatterContext = GetOutputFormatterContext(input, input.GetType());
@@ -107,7 +108,8 @@ namespace Microsoft.AspNetCore.Mvc.Formatters.Xml
             bool indent,
             object input,
             string expectedOutput
-        ) {
+        )
+        {
             // Arrange
             var formatter = new IndentingXmlSerializerOutputFormatter();
             var outputFormatterContext = GetOutputFormatterContext(input, input.GetType());
@@ -411,7 +413,8 @@ namespace Microsoft.AspNetCore.Mvc.Formatters.Xml
             object input,
             Type declaredType,
             bool expectedOutput
-        ) {
+        )
+        {
             // Arrange
             var formatter = new XmlSerializerOutputFormatter();
             var outputFormatterContext = GetOutputFormatterContext(input, declaredType);
@@ -442,7 +445,8 @@ namespace Microsoft.AspNetCore.Mvc.Formatters.Xml
             string mediaType,
             bool isServerDefined,
             string expectedResult
-        ) {
+        )
+        {
             // Arrange
             var formatter = new XmlSerializerOutputFormatter();
             var outputFormatterContext = GetOutputFormatterContext(new object(), typeof(object));
@@ -496,7 +500,8 @@ namespace Microsoft.AspNetCore.Mvc.Formatters.Xml
         public void XmlSerializer_GetSupportedContentTypes_Returns_SupportedTypes(
             Type type,
             object expectedOutput
-        ) {
+        )
+        {
             // Arrange
             var formatter = new XmlSerializerOutputFormatter();
 
@@ -545,7 +550,8 @@ namespace Microsoft.AspNetCore.Mvc.Formatters.Xml
         public void XmlSerializer_LogsWhenUnableToCreateSerializerForType(
             XmlSerializerOutputFormatter formatter,
             TestSink sink
-        ) {
+        )
+        {
             // Arrange
             var outputFormatterContext = GetOutputFormatterContext(
                 new Customer(10),
@@ -586,7 +592,8 @@ namespace Microsoft.AspNetCore.Mvc.Formatters.Xml
             object outputValue,
             Type outputType,
             string contentType = "application/xml; charset=utf-8"
-        ) {
+        )
+        {
             return new OutputFormatterWriteContext(
                 GetHttpContext(contentType),
                 new TestHttpResponseStreamWriterFactory().CreateWriter,
@@ -633,7 +640,8 @@ namespace Microsoft.AspNetCore.Mvc.Formatters.Xml
                 OutputFormatterWriteContext context,
                 TextWriter writer,
                 XmlWriterSettings xmlWriterSettings
-            ) {
+            )
+            {
                 var request = context.HttpContext.Request;
                 if (request.Query["indent"] == "True")
                 {
@@ -651,7 +659,8 @@ namespace Microsoft.AspNetCore.Mvc.Formatters.Xml
                 XmlSerializer xmlSerializer,
                 XmlWriter xmlWriter,
                 object value
-            ) {
+            )
+            {
                 var namespaces = new XmlSerializerNamespaces();
                 namespaces.Add("", "");
 

@@ -80,7 +80,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
         private static void TestDiffsInOrder(
             ImmutableArray<SyntaxNodeOrToken> diffs,
             params SyntaxKind[] kinds
-        ) {
+        )
+        {
             Assert.InRange(diffs.Length, 0, kinds.Length);
 
             int diffI = 0;
@@ -1499,7 +1500,8 @@ class Test
                 int i = 0;
                 i < parsedTree.GetCompilationUnitRoot().ChildNodesAndTokens().Count;
                 i++
-            ) {
+            )
+            {
                 Assert.Equal(
                     parsedTree.GetCompilationUnitRoot().ChildNodesAndTokens()[i].Kind(),
                     incrementalTree.GetCompilationUnitRoot().ChildNodesAndTokens()[i].Kind()
@@ -3644,7 +3646,8 @@ if (b) { }
             int widthOfChange,
             out SyntaxTree incrementalTree,
             out SyntaxTree parsedTree
-        ) {
+        )
+        {
             var newText = oldText.WithChanges(
                 new TextChange[]
                 {
@@ -3663,7 +3666,8 @@ if (b) { }
             int widthOfChange,
             out SyntaxTree incrementalTree,
             out SyntaxTree parsedTree
-        ) {
+        )
+        {
             var newText = oldText.WithChanges(
                 new TextChange(new TextSpan(locationOfChange, widthOfChange), "")
             );
@@ -3691,7 +3695,8 @@ if (b) { }
             char newChar,
             out SyntaxTree incrementalTree,
             out SyntaxTree parsedTree
-        ) {
+        )
+        {
             var startTree = SyntaxFactory.ParseSyntaxTree(oldText);
 
             // first make certain this text round trips
@@ -3708,7 +3713,8 @@ if (b) { }
             string token,
             out SyntaxTree incrementalTree,
             out SyntaxTree parsedTree
-        ) {
+        )
+        {
             var startTree = SyntaxFactory.ParseSyntaxTree(oldText);
             SourceText newText = SourceText.From(token + oldText.ToString());
             incrementalTree = startTree.WithInsertAt(0, token);
@@ -3718,7 +3724,8 @@ if (b) { }
         private static void CompareTreeEquivalence(
             SyntaxNodeOrToken parsedTreeNode,
             SyntaxNodeOrToken incrementalTreeNode
-        ) {
+        )
+        {
             Assert.Equal(parsedTreeNode.Kind(), incrementalTreeNode.Kind());
 
             Assert.Equal(

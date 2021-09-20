@@ -21,7 +21,8 @@ namespace System.Net.Security
             SslClientAuthenticationOptions sslClientAuthenticationOptions,
             RemoteCertificateValidationCallback? remoteCallback,
             LocalCertSelectionCallback? localCallback
-        ) {
+        )
+        {
             // Without setting (or using) these members you will get a build exception in the unit test project.
             // The code that normally uses these in the main solution is in the implementation of SslStream.
 
@@ -64,7 +65,8 @@ namespace System.Net.Security
             bool isAsync = false,
             bool isApm = false,
             CancellationToken cancellationToken = default
-        ) {
+        )
+        {
             return Task.Run(() => { });
         }
 
@@ -89,7 +91,8 @@ namespace System.Net.Security
             object instance,
             bool isServer,
             X509Certificate certificate
-        ) {
+        )
+        {
             return certificate as X509Certificate2;
         }
     }

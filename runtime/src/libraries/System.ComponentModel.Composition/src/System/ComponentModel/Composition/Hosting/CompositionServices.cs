@@ -53,7 +53,8 @@ namespace System.ComponentModel.Composition.Hosting
         internal static Type AdjustSpecifiedTypeIdentityType(
             this Type specifiedContractType,
             MemberInfo member
-        ) {
+        )
+        {
             if (member.MemberType == MemberTypes.Method)
             {
                 return specifiedContractType;
@@ -69,7 +70,8 @@ namespace System.ComponentModel.Composition.Hosting
         internal static Type AdjustSpecifiedTypeIdentityType(
             this Type specifiedContractType,
             Type? memberType
-        ) {
+        )
+        {
             if (specifiedContractType == null)
             {
                 throw new ArgumentNullException(nameof(specifiedContractType));
@@ -79,13 +81,15 @@ namespace System.ComponentModel.Composition.Hosting
                 (memberType != null)
                 && memberType.IsGenericType
                 && specifiedContractType.IsGenericType
-            ) {
+            )
+            {
                 // if the memeber type is closed and the specified contract type is open and they have exatly the same number of parameters
                 // we will close the specfied contract type
                 if (
                     specifiedContractType.ContainsGenericParameters
                     && !memberType.ContainsGenericParameters
-                ) {
+                )
+                {
                     var typeGenericArguments = memberType.GetGenericArguments();
                     var metadataTypeGenericArguments = specifiedContractType.GetGenericArguments();
 
@@ -98,11 +102,13 @@ namespace System.ComponentModel.Composition.Hosting
                 else if (
                     specifiedContractType.ContainsGenericParameters
                     && memberType.ContainsGenericParameters
-                ) {
+                )
+                {
                     var memberGenericParameters = memberType.GetPureGenericParameters();
                     if (
                         specifiedContractType.GetPureGenericArity() == memberGenericParameters.Count
-                    ) {
+                    )
+                    {
                         return specifiedContractType.GetGenericTypeDefinition()
                             .MakeGenericType(memberGenericParameters.ToArray());
                     }
@@ -126,7 +132,8 @@ namespace System.ComponentModel.Composition.Hosting
             ExportAttribute export,
             out Type? typeIdentityType,
             out string contractName
-        ) {
+        )
+        {
             typeIdentityType = member.GetTypeIdentityTypeFromExport(export);
             if (!string.IsNullOrEmpty(export.ContractName))
             {
@@ -141,7 +148,8 @@ namespace System.ComponentModel.Composition.Hosting
         internal static string GetTypeIdentityFromExport(
             this MemberInfo member,
             Type? typeIdentityType
-        ) {
+        )
+        {
             if (typeIdentityType != null)
             {
                 string typeIdentity = AttributedModelServices.GetTypeIdentity(typeIdentityType);
@@ -165,7 +173,8 @@ namespace System.ComponentModel.Composition.Hosting
         private static Type? GetTypeIdentityTypeFromExport(
             this MemberInfo member,
             ExportAttribute export
-        ) {
+        )
+        {
             if (export.ContractType != null)
             {
                 return export.ContractType.AdjustSpecifiedTypeIdentityType(member);
@@ -186,7 +195,8 @@ namespace System.ComponentModel.Composition.Hosting
         internal static Type GetContractTypeFromImport(
             this IAttributedImport import,
             ImportType importType
-        ) {
+        )
+        {
             if (import.ContractType != null)
             {
                 return import.ContractType.AdjustSpecifiedTypeIdentityType(importType.ContractType);
@@ -198,7 +208,8 @@ namespace System.ComponentModel.Composition.Hosting
         internal static string GetContractNameFromImport(
             this IAttributedImport import,
             ImportType importType
-        ) {
+        )
+        {
             if (!string.IsNullOrEmpty(import.ContractName))
             {
                 return import.ContractName;
@@ -212,7 +223,8 @@ namespace System.ComponentModel.Composition.Hosting
         internal static string? GetTypeIdentityFromImport(
             this IAttributedImport import,
             ImportType importType
-        ) {
+        )
+        {
             Type contractType = import.GetContractTypeFromImport(importType);
 
             // For our importers we treat object as not having a type identity
@@ -227,7 +239,8 @@ namespace System.ComponentModel.Composition.Hosting
         internal static IDictionary<string, object?> GetPartMetadataForType(
             this Type type,
             CreationPolicy creationPolicy
-        ) {
+        )
+        {
             IDictionary<string, object?> dictionary = new Dictionary<string, object?>(
                 StringComparers.MetadataKeyNames
             );
@@ -239,13 +252,15 @@ namespace System.ComponentModel.Composition.Hosting
 
             foreach (
                 PartMetadataAttribute partMetadata in type.GetAttributes<PartMetadataAttribute>()
-            ) {
+            )
+            {
                 if (
                     reservedMetadataNames.Contains(
                         partMetadata.Name,
                         StringComparers.MetadataKeyNames
                     ) || dictionary.ContainsKey(partMetadata.Name)
-                ) {
+                )
+                {
                     // Perhaps we should log an error here so that people know this value is being ignored.
                     continue;
                 }
@@ -318,7 +333,8 @@ namespace System.ComponentModel.Composition.Hosting
         internal static void TryExportMetadataForMember(
             this MemberInfo member,
             out IDictionary<string, object?> dictionary
-        ) {
+        )
+        {
             dictionary = new Dictionary<string, object?>();
 
             foreach (var attr in member.GetAttributes<Attribute>())
@@ -332,7 +348,8 @@ namespace System.ComponentModel.Composition.Hosting
                             provider.Name,
                             StringComparers.MetadataKeyNames
                         )
-                    ) {
+                    )
+                    {
                         throw ExceptionBuilder.CreateDiscoveryException(
                             SR.Discovery_ReservedMetadataNameUsed,
                             member.GetDisplayName(),
@@ -349,7 +366,8 @@ namespace System.ComponentModel.Composition.Hosting
                             null,
                             provider.IsMultiple
                         )
-                    ) {
+                    )
+                    {
                         throw ExceptionBuilder.CreateDiscoveryException(
                             SR.Discovery_DuplicateMetadataNameValues,
                             member.GetDisplayName(),
@@ -364,7 +382,8 @@ namespace System.ComponentModel.Composition.Hosting
                     if (
                         (attrType != CompositionServices.ExportAttributeType)
                         && attrType.IsAttributeDefined<MetadataAttributeAttribute>(true)
-                    ) {
+                    )
+                    {
                         bool allowsMultiple = false;
                         AttributeUsageAttribute? usage =
                             attrType.GetFirstAttribute<AttributeUsageAttribute>(true);
@@ -379,7 +398,8 @@ namespace System.ComponentModel.Composition.Hosting
                             if (
                                 pi.DeclaringType == CompositionServices.ExportAttributeType
                                 || pi.DeclaringType == CompositionServices.AttributeType
-                            ) {
+                            )
+                            {
                                 // Don't contribute metadata properies from the base attribute types.
                                 continue;
                             }
@@ -389,7 +409,8 @@ namespace System.ComponentModel.Composition.Hosting
                                     pi.Name,
                                     StringComparers.MetadataKeyNames
                                 )
-                            ) {
+                            )
+                            {
                                 throw ExceptionBuilder.CreateDiscoveryException(
                                     SR.Discovery_ReservedMetadataNameUsed,
                                     pi.GetDisplayName(),
@@ -415,7 +436,8 @@ namespace System.ComponentModel.Composition.Hosting
                                     pi.PropertyType,
                                     allowsMultiple
                                 )
-                            ) {
+                            )
+                            {
                                 throw ExceptionBuilder.CreateDiscoveryException(
                                     SR.Discovery_DuplicateMetadataNameValues,
                                     member.GetDisplayName(),
@@ -446,7 +468,8 @@ namespace System.ComponentModel.Composition.Hosting
             object? value,
             Type? valueType,
             bool allowsMultiple
-        ) {
+        )
+        {
             if (!dictionary.TryGetValue(name, out object? metadataValue))
             {
                 if (allowsMultiple)
@@ -584,13 +607,15 @@ namespace System.ComponentModel.Composition.Hosting
 
         internal static IEnumerable<KeyValuePair<string, Type>> GetRequiredMetadata(
             Type? metadataViewType
-        ) {
+        )
+        {
             if (
                 (metadataViewType == null)
                 || ExportServices.IsDefaultMetadataViewType(metadataViewType)
                 || ExportServices.IsDictionaryConstructorViewType(metadataViewType)
                 || !metadataViewType.IsInterface
-            ) {
+            )
+            {
                 return Enumerable.Empty<KeyValuePair<string, Type>>();
             }
 
@@ -610,14 +635,16 @@ namespace System.ComponentModel.Composition.Hosting
         internal static IDictionary<string, object?> GetImportMetadata(
             ImportType importType,
             IAttributedImport attributedImport
-        ) {
+        )
+        {
             return GetImportMetadata(importType.ContractType, attributedImport);
         }
 
         internal static IDictionary<string, object?> GetImportMetadata(
             Type type,
             IAttributedImport? attributedImport
-        ) {
+        )
+        {
             Dictionary<string, object?>? metadata = null;
 
             //Prior to V4.5 MEF did not support ImportMetadata
@@ -663,7 +690,8 @@ namespace System.ComponentModel.Composition.Hosting
             ImportEngine? engine,
             ComposablePart part,
             ExportDefinition definition
-        ) {
+        )
+        {
             if (engine != null)
             {
                 try
@@ -789,7 +817,8 @@ namespace System.ComponentModel.Composition.Hosting
                 && type.IsArray
                 && type.GetArrayRank() == 1
                 && IsValidAttributeType(type.GetElementType()!, false)
-            ) {
+            )
+            {
                 return true;
             }
 

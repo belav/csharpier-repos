@@ -83,7 +83,8 @@ namespace System.ComponentModel.Tests
             TypeConverterAttribute attribute,
             object other,
             bool expected
-        ) {
+        )
+        {
             Assert.Equal(expected, attribute.Equals(other));
         }
 

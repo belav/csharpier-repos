@@ -597,7 +597,8 @@ namespace Microsoft.AspNetCore.Components.E2ETest.Tests
         public virtual void PreventDefault_CanBlockNavigation(
             string navigationType,
             string whereToPreventDefault
-        ) {
+        )
+        {
             SetUrlViaPushState("/PreventDefaultCases");
             var app = Browser.MountTestComponent<TestRouter>();
             var preventDefaultToggle = app.FindElement(

@@ -64,7 +64,8 @@ namespace System.ComponentModel
             int propCount,
             string[] namedSort,
             IComparer comparer
-        ) {
+        )
+        {
             _propsOwned = false;
             if (namedSort != null)
             {
@@ -219,7 +220,8 @@ namespace System.ComponentModel
                                 name,
                                 StringComparison.OrdinalIgnoreCase
                             )
-                        ) {
+                        )
+                        {
                             _cachedFoundProperties[name] = _properties[i];
                             p = _properties[i];
                             break;

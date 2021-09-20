@@ -32,7 +32,8 @@ namespace Microsoft.CodeAnalysis.CSharp.ExtractMethod
                     SyntaxNode firstStatementOrFieldToReplace,
                     SyntaxNode lastStatementOrFieldToReplace,
                     IEnumerable<SyntaxNode> statementsOrFieldToInsert
-                ) {
+                )
+                {
                     Contract.ThrowIfNull(outmostCallSiteContainer);
                     Contract.ThrowIfNull(variableToRemoveMap);
                     Contract.ThrowIfNull(firstStatementOrFieldToReplace);
@@ -61,7 +62,8 @@ namespace Microsoft.CodeAnalysis.CSharp.ExtractMethod
 
                 public override SyntaxNode VisitLocalDeclarationStatement(
                     LocalDeclarationStatementSyntax node
-                ) {
+                )
+                {
                     node = (LocalDeclarationStatementSyntax)base.VisitLocalDeclarationStatement(
                         node
                     );
@@ -242,7 +244,8 @@ namespace Microsoft.CodeAnalysis.CSharp.ExtractMethod
 
                 public override SyntaxNode VisitForEachVariableStatement(
                     ForEachVariableStatementSyntax node
-                ) {
+                )
+                {
                     if (node != ContainerOfStatementsOrFieldToReplace)
                     {
                         return base.VisitForEachVariableStatement(node);
@@ -299,7 +302,8 @@ namespace Microsoft.CodeAnalysis.CSharp.ExtractMethod
                     if (
                         (statement != _firstStatementOrFieldToReplace)
                         || (_firstStatementOrFieldToReplace != _lastStatementOrFieldToReplace)
-                    ) {
+                    )
+                    {
                         return statement;
                     }
 
@@ -355,7 +359,8 @@ namespace Microsoft.CodeAnalysis.CSharp.ExtractMethod
                 private SyntaxList<MemberDeclarationSyntax> ReplaceMembers(
                     SyntaxList<MemberDeclarationSyntax> members,
                     bool global
-                ) {
+                )
+                {
                     // okay, this visit contains the statement
                     var newMembers = new List<MemberDeclarationSyntax>(members);
 
@@ -415,7 +420,8 @@ namespace Microsoft.CodeAnalysis.CSharp.ExtractMethod
 
                 public override SyntaxNode VisitConstructorDeclaration(
                     ConstructorDeclarationSyntax node
-                ) {
+                )
+                {
                     if (node != ContainerOfStatementsOrFieldToReplace)
                     {
                         return base.VisitConstructorDeclaration(node);

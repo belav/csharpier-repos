@@ -74,7 +74,8 @@ namespace Microsoft.AspNetCore.Razor.Language.Legacy
                 if (
                     counter < expectedSymbols.Length
                     && !ReferenceEquals(expectedSymbols[counter], IgnoreRemaining)
-                ) {
+                )
+                {
                     success = false;
                     for (; counter < expectedSymbols.Length; counter++)
                     {

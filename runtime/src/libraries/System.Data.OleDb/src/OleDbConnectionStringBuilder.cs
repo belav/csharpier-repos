@@ -439,7 +439,8 @@ namespace System.Data.OleDb
                                 constr,
                                 null
                             )
-                        ) {
+                        )
+                        {
                             // get all the init property information for the provider
                             hash = connection.GetPropertyInfo(
                                 new Guid[] { OleDbPropertySetGuid.DBInitAll }
@@ -457,7 +458,8 @@ namespace System.Data.OleDb
                                             || (ODB.DBPROP_INIT_HWND == info._propertyID)
                                             || (ODB.DBPROP_INIT_PROMPT == info._propertyID)
                                         )
-                                    ) {
+                                    )
+                                    {
                                         continue; // skip this keyword
                                     }
                                     providerInfo[info._description!] = info;
@@ -482,7 +484,8 @@ namespace System.Data.OleDb
                             {
                                 using (
                                     IDBPropertiesWrapper idbProperties = connection.IDBProperties()
-                                ) {
+                                )
+                                {
                                     OleDbHResult hr;
                                     using (
                                         DBPropSet propset = new DBPropSet(
@@ -490,7 +493,8 @@ namespace System.Data.OleDb
                                             propidset,
                                             out hr
                                         )
-                                    ) {
+                                    )
+                                    {
                                         // OleDbConnectionStringBuilder is ignoring/hiding potential errors of OLEDB provider when reading its properties information
                                         if (0 <= (int)hr)
                                         {
@@ -511,12 +515,14 @@ namespace System.Data.OleDb
                                                             string,
                                                             OleDbPropertyInfo
                                                         > entry in hash
-                                                    ) {
+                                                    )
+                                                    {
                                                         OleDbPropertyInfo info = entry.Value;
                                                         if (
                                                             (info._propertyID == prop.dwPropertyID)
                                                             && (info._propertySet == propertyset)
-                                                        ) {
+                                                        )
+                                                        {
                                                             info._defaultValue = prop.vValue;
 
                                                             if (null == info._defaultValue)
@@ -584,7 +590,8 @@ namespace System.Data.OleDb
 
             public override StandardValuesCollection? GetStandardValues(
                 ITypeDescriptorContext context
-            ) {
+            )
+            {
                 StandardValuesCollection? dataSourceNames = _standardValues;
                 if (null == _standardValues)
                 {
@@ -603,7 +610,8 @@ namespace System.Data.OleDb
                         if (
                             DBSOURCETYPE_DATASOURCE_TDP == sourceType
                             || DBSOURCETYPE_DATASOURCE_MDP == sourceType
-                        ) {
+                        )
+                        {
                             string progid = (string)row[column2];
                             if (!OleDbConnectionString.IsMSDASQL(progid.ToLowerInvariant()))
                             {
@@ -652,7 +660,8 @@ namespace System.Data.OleDb
                 ITypeDescriptorContext context,
                 System.Globalization.CultureInfo culture,
                 object value
-            ) {
+            )
+            {
                 string? svalue = (value as string);
                 if (null != svalue)
                 {
@@ -704,12 +713,14 @@ namespace System.Data.OleDb
                 System.Globalization.CultureInfo culture,
                 object value,
                 Type destinationType
-            ) {
+            )
+            {
                 if (
                     (typeof(string) == destinationType)
                     && (null != value)
                     && (typeof(int) == value.GetType())
-                ) {
+                )
+                {
                     return Enum.Format(
                         typeof(OleDbServiceValues),
                         ((OleDbServiceValues)(int)value),
@@ -731,7 +742,8 @@ namespace System.Data.OleDb
 
             public override StandardValuesCollection GetStandardValues(
                 ITypeDescriptorContext context
-            ) {
+            )
+            {
                 StandardValuesCollection? standardValues = _standardValues;
                 if (null == standardValues)
                 {
@@ -760,7 +772,8 @@ namespace System.Data.OleDb
                 if (
                     typeof(System.ComponentModel.Design.Serialization.InstanceDescriptor)
                     == destinationType
-                ) {
+                )
+                {
                     return true;
                 }
                 return base.CanConvertTo(context, destinationType);
@@ -771,7 +784,8 @@ namespace System.Data.OleDb
                 CultureInfo culture,
                 object value,
                 Type destinationType
-            ) {
+            )
+            {
                 if (destinationType == null)
                 {
                     throw ADP.ArgumentNull("destinationType");
@@ -779,7 +793,8 @@ namespace System.Data.OleDb
                 if (
                     typeof(System.ComponentModel.Design.Serialization.InstanceDescriptor)
                     == destinationType
-                ) {
+                )
+                {
                     OleDbConnectionStringBuilder? obj = (value as OleDbConnectionStringBuilder);
                     if (null != obj)
                     {
@@ -791,7 +806,8 @@ namespace System.Data.OleDb
 
             private System.ComponentModel.Design.Serialization.InstanceDescriptor ConvertToInstanceDescriptor(
                 OleDbConnectionStringBuilder options
-            ) {
+            )
+            {
                 Type[] ctorParams = new Type[] { typeof(string) };
                 object[] ctorValues = new object[] { options.ConnectionString };
                 System.Reflection.ConstructorInfo ctor =

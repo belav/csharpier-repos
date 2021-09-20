@@ -11,7 +11,8 @@ namespace Microsoft.AspNetCore.Mvc.Razor.Extensions.Version2_X
         protected override void ExecuteCore(
             RazorCodeDocument codeDocument,
             DocumentIntermediateNode documentNode
-        ) {
+        )
+        {
             if (documentNode.DocumentKind != RazorPageDocumentClassifierPass.RazorPageDocumentKind)
             {
                 return;

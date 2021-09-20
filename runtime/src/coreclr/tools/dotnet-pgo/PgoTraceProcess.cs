@@ -28,7 +28,8 @@ namespace Microsoft.Diagnostics.Tools.Pgo
             TraceProcess = traceProcess;
             foreach (
                 var assemblyLoadTrace in traceProcess.EventsInProcess.ByEventType<AssemblyLoadUnloadTraceData>()
-            ) {
+            )
+            {
                 _assemblyToCLRInstanceIDMap[assemblyLoadTrace.AssemblyID] =
                     assemblyLoadTrace.ClrInstanceID;
             }
@@ -78,7 +79,8 @@ namespace Microsoft.Diagnostics.Tools.Pgo
         public static bool CompareModuleAgainstSimpleName(
             string simpleName,
             TraceManagedModule managedModule
-        ) {
+        )
+        {
             if (managedModule.ModuleFile != null)
             {
                 if (
@@ -96,7 +98,8 @@ namespace Microsoft.Diagnostics.Tools.Pgo
                             StringComparison.OrdinalIgnoreCase
                         ) == 0
                     )
-                ) {
+                )
+                {
                     return true;
                 }
             }

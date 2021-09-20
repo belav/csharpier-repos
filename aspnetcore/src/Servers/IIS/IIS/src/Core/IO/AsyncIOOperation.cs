@@ -42,7 +42,8 @@ namespace Microsoft.AspNetCore.Server.IIS.Core.IO
             object? state,
             short token,
             ValueTaskSourceOnCompletedFlags flags
-        ) {
+        )
+        {
             if (_state != null)
             {
                 ThrowMultipleContinuations();

@@ -20,7 +20,8 @@ namespace System.Linq.Expressions
             Expression expression,
             Type type,
             MethodInfo? method
-        ) {
+        )
+        {
             Operand = expression;
             Method = method;
             NodeType = nodeType;
@@ -63,7 +64,8 @@ namespace System.Linq.Expressions
                     NodeType == ExpressionType.TypeAs
                     || NodeType == ExpressionType.Quote
                     || NodeType == ExpressionType.Throw
-                ) {
+                )
+                {
                     return false;
                 }
                 bool operandIsNullable = Operand.Type.IsNullableType();
@@ -159,7 +161,8 @@ namespace System.Linq.Expressions
             if (
                 NodeType == ExpressionType.PreIncrementAssign
                 || NodeType == ExpressionType.PostIncrementAssign
-            ) {
+            )
+            {
                 functional = ExpressionType.Increment;
             }
             else
@@ -342,7 +345,8 @@ namespace System.Linq.Expressions
             ExpressionType unaryType,
             Expression operand,
             Type type
-        ) {
+        )
+        {
             return MakeUnary(unaryType, operand, type, method: null);
         }
 
@@ -392,7 +396,8 @@ namespace System.Linq.Expressions
             ExpressionType unaryType,
             string name,
             Expression operand
-        ) {
+        )
+        {
             UnaryExpression? u = GetUserDefinedUnaryOperator(unaryType, name, operand);
             if (u != null)
             {
@@ -411,7 +416,8 @@ namespace System.Linq.Expressions
             ExpressionType unaryType,
             string name,
             Expression operand
-        ) {
+        )
+        {
             Type operandType = operand.Type;
             Type[] types = new Type[] { operandType };
             Type nnOperandType = operandType.GetNonNullableType();
@@ -429,7 +435,8 @@ namespace System.Linq.Expressions
                     method != null
                     && method.ReturnType.IsValueType
                     && !method.ReturnType.IsNullableType()
-                ) {
+                )
+                {
                     return new UnaryExpression(
                         unaryType,
                         operand,
@@ -445,7 +452,8 @@ namespace System.Linq.Expressions
             ExpressionType unaryType,
             Expression operand,
             MethodInfo method
-        ) {
+        )
+        {
             Debug.Assert(method != null);
             ValidateOperator(method);
             ParameterInfo[] pms = method.GetParametersCached();
@@ -467,7 +475,8 @@ namespace System.Linq.Expressions
                 && ParameterIsAssignable(pms[0], operand.Type.GetNonNullableType())
                 && method.ReturnType.IsValueType
                 && !method.ReturnType.IsNullableType()
-            ) {
+            )
+            {
                 return new UnaryExpression(
                     unaryType,
                     operand,
@@ -484,7 +493,8 @@ namespace System.Linq.Expressions
             ExpressionType coercionType,
             Expression expression,
             Type convertToType
-        ) {
+        )
+        {
             UnaryExpression? u = GetUserDefinedCoercion(coercionType, expression, convertToType);
             if (u != null)
             {
@@ -498,7 +508,8 @@ namespace System.Linq.Expressions
             ExpressionType coercionType,
             Expression expression,
             Type convertToType
-        ) {
+        )
+        {
             MethodInfo? method = TypeUtils.GetUserDefinedCoercionMethod(
                 expression.Type,
                 convertToType
@@ -518,7 +529,8 @@ namespace System.Linq.Expressions
             Expression operand,
             Type convertToType,
             MethodInfo method
-        ) {
+        )
+        {
             Debug.Assert(method != null);
             ValidateOperator(method);
             ParameterInfo[] pms = method.GetParametersCached();
@@ -529,7 +541,8 @@ namespace System.Linq.Expressions
             if (
                 ParameterIsAssignable(pms[0], operand.Type)
                 && TypeUtils.AreEquivalent(method.ReturnType, convertToType)
-            ) {
+            )
+            {
                 return new UnaryExpression(unaryType, operand, method.ReturnType, method);
             }
             // check for lifted call
@@ -540,7 +553,8 @@ namespace System.Linq.Expressions
                     TypeUtils.AreEquivalent(method.ReturnType, convertToType.GetNonNullableType())
                     || TypeUtils.AreEquivalent(method.ReturnType, convertToType)
                 )
-            ) {
+            )
+            {
                 return new UnaryExpression(unaryType, operand, convertToType, method);
             }
             throw Error.OperandTypesDoNotMatchParameters(unaryType, method.Name);
@@ -920,7 +934,8 @@ namespace System.Linq.Expressions
                 if (
                     expression.Type.HasIdentityPrimitiveOrNullableConversionTo(type)
                     || expression.Type.HasReferenceConversionTo(type)
-                ) {
+                )
+                {
                     return new UnaryExpression(ExpressionType.Convert, expression, type, null);
                 }
                 return GetUserDefinedCoercionOrThrow(ExpressionType.Convert, expression, type);
@@ -957,7 +972,8 @@ namespace System.Linq.Expressions
             Expression expression,
             Type type,
             MethodInfo? method
-        ) {
+        )
+        {
             ExpressionUtils.RequiresCanRead(expression, nameof(expression));
             ContractUtils.RequiresNotNull(type, nameof(type));
             TypeUtils.ValidateType(type, nameof(type));
@@ -1252,7 +1268,8 @@ namespace System.Linq.Expressions
             ExpressionType kind,
             Expression expression,
             MethodInfo? method
-        ) {
+        )
+        {
             ExpressionUtils.RequiresCanRead(expression, nameof(expression));
             RequiresCanWrite(expression, nameof(expression));
 
@@ -1267,7 +1284,8 @@ namespace System.Linq.Expressions
                 if (
                     kind == ExpressionType.PreIncrementAssign
                     || kind == ExpressionType.PostIncrementAssign
-                ) {
+                )
+                {
                     name = "op_Increment";
                 }
                 else

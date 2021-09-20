@@ -142,7 +142,8 @@ namespace Microsoft.AspNet.Facebook.Authorization
                 signedRequest == null
                 || String.IsNullOrEmpty(userId)
                 || String.IsNullOrEmpty(accessToken)
-            ) {
+            )
+            {
                 PromptDefaultPermissions(permissionContext, redirectUrl);
             }
             else if (requiredPermissions.Any())
@@ -303,7 +304,8 @@ namespace Microsoft.AspNet.Facebook.Authorization
         private string GetRedirectUrl(
             HttpRequestBase request,
             NameValueCollection queryNameValuePair
-        ) {
+        )
+        {
             // Don't propagate query strings added by Facebook OAuth Dialog
             queryNameValuePair.Remove("code");
             queryNameValuePair.Remove("error");
@@ -329,7 +331,8 @@ namespace Microsoft.AspNet.Facebook.Authorization
         private void PromptDefaultPermissions(
             PermissionContext permissionContext,
             string redirectUrl
-        ) {
+        )
+        {
             FacebookClient client = permissionContext.FacebookContext.Client;
             // Cannot obtain user information from signed_request, redirect to Facebook OAuth dialog.
             Uri navigationUrl = client.GetLoginUrl(redirectUrl, _config.AppId, permissions: null);
@@ -340,7 +343,8 @@ namespace Microsoft.AspNet.Facebook.Authorization
         private void PromptMissingPermissions(
             PermissionContext permissionContext,
             string redirectUrl
-        ) {
+        )
+        {
             AuthorizationContext filterContext = permissionContext.FilterContext;
             HashSet<string> requiredPermissions = permissionContext.RequiredPermissions;
 
@@ -371,7 +375,8 @@ namespace Microsoft.AspNet.Facebook.Authorization
                 )
                 && filterContext.HttpContext.Request.QueryString.Get(MissingPermissionsQueryName)
                     != null
-            ) {
+            )
+            {
                 OnCannotCreateCookies(permissionContext);
             }
             else

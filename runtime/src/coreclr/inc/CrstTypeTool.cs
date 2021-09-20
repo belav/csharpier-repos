@@ -71,7 +71,8 @@ class CrstTypeTool
             if (
                 File.Exists(outputFile)
                 && (File.GetAttributes(outputFile) & FileAttributes.ReadOnly) != 0
-            ) {
+            )
+            {
                 Console.WriteLine(
                     outputFile + " is read-only, you must check it out of TFS/SD first"
                 );
@@ -261,7 +262,8 @@ class CrstTypeTool
             if (
                 crst.Level == CrstType.CrstUnordered
                 && (crst.AcquiredBeforeList.Count > 0 || crst.Group != null)
-            ) {
+            )
+            {
                 Console.WriteLine(
                     String.Format(
                         "Error: CrstType 'Crst{0}' is declared as both unordered and acquired before 'Crst{1}'",

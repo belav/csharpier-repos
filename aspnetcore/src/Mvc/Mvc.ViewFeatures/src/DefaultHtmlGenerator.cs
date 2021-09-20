@@ -76,7 +76,8 @@ namespace Microsoft.AspNetCore.Mvc.ViewFeatures
             IUrlHelperFactory urlHelperFactory,
             HtmlEncoder htmlEncoder,
             ValidationHtmlAttributeProvider validationAttributeProvider
-        ) {
+        )
+        {
             if (antiforgery == null)
             {
                 throw new ArgumentNullException(nameof(antiforgery));
@@ -167,7 +168,8 @@ namespace Microsoft.AspNetCore.Mvc.ViewFeatures
             string fragment,
             object routeValues,
             object htmlAttributes
-        ) {
+        )
+        {
             if (viewContext == null)
             {
                 throw new ArgumentNullException(nameof(viewContext));
@@ -201,7 +203,8 @@ namespace Microsoft.AspNetCore.Mvc.ViewFeatures
             string fragment,
             object routeValues,
             object htmlAttributes
-        ) {
+        )
+        {
             if (viewContext == null)
             {
                 throw new ArgumentNullException(nameof(viewContext));
@@ -256,7 +259,8 @@ namespace Microsoft.AspNetCore.Mvc.ViewFeatures
             string expression,
             bool? isChecked,
             object htmlAttributes
-        ) {
+        )
+        {
             if (viewContext == null)
             {
                 throw new ArgumentNullException(nameof(viewContext));
@@ -304,7 +308,8 @@ namespace Microsoft.AspNetCore.Mvc.ViewFeatures
             ViewContext viewContext,
             ModelExplorer modelExplorer,
             string expression
-        ) {
+        )
+        {
             if (viewContext == null)
             {
                 throw new ArgumentNullException(nameof(viewContext));
@@ -332,7 +337,8 @@ namespace Microsoft.AspNetCore.Mvc.ViewFeatures
             object routeValues,
             string method,
             object htmlAttributes
-        ) {
+        )
+        {
             if (viewContext == null)
             {
                 throw new ArgumentNullException(nameof(viewContext));
@@ -351,7 +357,8 @@ namespace Microsoft.AspNetCore.Mvc.ViewFeatures
             string action;
             if (
                 actionName == null && controllerName == null && routeValues == null && defaultMethod
-            ) {
+            )
+            {
                 // Submit to the original URL in the special case that user called the BeginForm() overload without
                 // parameters (except for the htmlAttributes parameter). Also reachable in the even-more-unusual case
                 // that user called another BeginForm() overload with default argument values.
@@ -380,7 +387,8 @@ namespace Microsoft.AspNetCore.Mvc.ViewFeatures
             string fragment,
             string method,
             object htmlAttributes
-        ) {
+        )
+        {
             if (viewContext == null)
             {
                 throw new ArgumentNullException(nameof(viewContext));
@@ -406,7 +414,8 @@ namespace Microsoft.AspNetCore.Mvc.ViewFeatures
             object routeValues,
             string method,
             object htmlAttributes
-        ) {
+        )
+        {
             if (viewContext == null)
             {
                 throw new ArgumentNullException(nameof(viewContext));
@@ -426,7 +435,8 @@ namespace Microsoft.AspNetCore.Mvc.ViewFeatures
             object value,
             bool useViewData,
             object htmlAttributes
-        ) {
+        )
+        {
             if (viewContext == null)
             {
                 throw new ArgumentNullException(nameof(viewContext));
@@ -461,7 +471,8 @@ namespace Microsoft.AspNetCore.Mvc.ViewFeatures
             string expression,
             string labelText,
             object htmlAttributes
-        ) {
+        )
+        {
             if (viewContext == null)
             {
                 throw new ArgumentNullException(nameof(viewContext));
@@ -514,7 +525,8 @@ namespace Microsoft.AspNetCore.Mvc.ViewFeatures
             string expression,
             object value,
             object htmlAttributes
-        ) {
+        )
+        {
             if (viewContext == null)
             {
                 throw new ArgumentNullException(nameof(viewContext));
@@ -544,7 +556,8 @@ namespace Microsoft.AspNetCore.Mvc.ViewFeatures
             object value,
             bool? isChecked,
             object htmlAttributes
-        ) {
+        )
+        {
             if (viewContext == null)
             {
                 throw new ArgumentNullException(nameof(viewContext));
@@ -560,7 +573,8 @@ namespace Microsoft.AspNetCore.Mvc.ViewFeatures
                         htmlAttributeDictionary == null
                         || !htmlAttributeDictionary.ContainsKey("checked")
                     )
-                ) {
+                )
+                {
                     // Note value may be null if isChecked is non-null.
                     if (value == null)
                     {
@@ -626,7 +640,8 @@ namespace Microsoft.AspNetCore.Mvc.ViewFeatures
             string fragment,
             object routeValues,
             object htmlAttributes
-        ) {
+        )
+        {
             if (viewContext == null)
             {
                 throw new ArgumentNullException(nameof(viewContext));
@@ -651,7 +666,8 @@ namespace Microsoft.AspNetCore.Mvc.ViewFeatures
             IEnumerable<SelectListItem> selectList,
             bool allowMultiple,
             object htmlAttributes
-        ) {
+        )
+        {
             if (viewContext == null)
             {
                 throw new ArgumentNullException(nameof(viewContext));
@@ -685,7 +701,8 @@ namespace Microsoft.AspNetCore.Mvc.ViewFeatures
             ICollection<string> currentValues,
             bool allowMultiple,
             object htmlAttributes
-        ) {
+        )
+        {
             if (viewContext == null)
             {
                 throw new ArgumentNullException(nameof(viewContext));
@@ -765,7 +782,8 @@ namespace Microsoft.AspNetCore.Mvc.ViewFeatures
             int rows,
             int columns,
             object htmlAttributes
-        ) {
+        )
+        {
             if (viewContext == null)
             {
                 throw new ArgumentNullException(nameof(viewContext));
@@ -872,7 +890,8 @@ namespace Microsoft.AspNetCore.Mvc.ViewFeatures
             object value,
             string format,
             object htmlAttributes
-        ) {
+        )
+        {
             if (viewContext == null)
             {
                 throw new ArgumentNullException(nameof(viewContext));
@@ -902,7 +921,8 @@ namespace Microsoft.AspNetCore.Mvc.ViewFeatures
             string message,
             string tag,
             object htmlAttributes
-        ) {
+        )
+        {
             if (viewContext == null)
             {
                 throw new ArgumentNullException(nameof(viewContext));
@@ -916,7 +936,8 @@ namespace Microsoft.AspNetCore.Mvc.ViewFeatures
                     htmlAttributeDictionary,
                     fallbackAttributeName: "data-valmsg-for"
                 )
-            ) {
+            )
+            {
                 throw new ArgumentException(
                     Resources.FormatHtmlGenerator_FieldNameCannotBeNullOrEmpty(
                         typeof(IHtmlHelper).FullName,
@@ -1018,7 +1039,8 @@ namespace Microsoft.AspNetCore.Mvc.ViewFeatures
             string message,
             string headerTag,
             object htmlAttributes
-        ) {
+        )
+        {
             if (viewContext == null)
             {
                 throw new ArgumentNullException(nameof(viewContext));
@@ -1040,7 +1062,8 @@ namespace Microsoft.AspNetCore.Mvc.ViewFeatures
                     )
                     || entryForModel.Errors.Count == 0
                 )
-            ) {
+            )
+            {
                 // Client-side validation (if enabled) will not affect the generated element and element will be empty.
                 return null;
             }
@@ -1125,7 +1148,8 @@ namespace Microsoft.AspNetCore.Mvc.ViewFeatures
             ModelExplorer modelExplorer,
             string expression,
             bool allowMultiple
-        ) {
+        )
+        {
             if (viewContext == null)
             {
                 throw new ArgumentNullException(nameof(viewContext));
@@ -1223,7 +1247,8 @@ namespace Microsoft.AspNetCore.Mvc.ViewFeatures
                     if (
                         typeof(long).IsAssignableFrom(valueType)
                         || typeof(ulong).IsAssignableFrom(valueType)
-                    ) {
+                    )
+                    {
                         // E.g. user added an int to a ViewData entry and called a string-based HTML helper.
                         enumValue = ConvertEnumFromInteger(value, innerType);
                     }
@@ -1312,11 +1337,13 @@ namespace Microsoft.AspNetCore.Mvc.ViewFeatures
             ViewContext viewContext,
             string key,
             Type destinationType
-        ) {
+        )
+        {
             if (
                 viewContext.ViewData.ModelState.TryGetValue(key, out var entry)
                 && entry.RawValue != null
-            ) {
+            )
+            {
                 return ModelBindingHelper.ConvertTo(entry.RawValue, destinationType, culture: null);
             }
 
@@ -1341,7 +1368,8 @@ namespace Microsoft.AspNetCore.Mvc.ViewFeatures
             string action,
             string method,
             object htmlAttributes
-        ) {
+        )
+        {
             if (viewContext == null)
             {
                 throw new ArgumentNullException(nameof(viewContext));
@@ -1393,7 +1421,8 @@ namespace Microsoft.AspNetCore.Mvc.ViewFeatures
             bool isExplicitValue,
             string format,
             IDictionary<string, object> htmlAttributes
-        ) {
+        )
+        {
             if (viewContext == null)
             {
                 throw new ArgumentNullException(nameof(viewContext));
@@ -1464,7 +1493,8 @@ namespace Microsoft.AspNetCore.Mvc.ViewFeatures
                         if (
                             GetModelStateValue(viewContext, fullName, typeof(string))
                             is string modelStateValue
-                        ) {
+                        )
+                        {
                             isChecked = string.Equals(
                                 modelStateValue,
                                 valueParameter,
@@ -1513,7 +1543,8 @@ namespace Microsoft.AspNetCore.Mvc.ViewFeatures
                     if (
                         htmlAttributes != null
                         && htmlAttributes.TryGetValue("type", out typeAttributeValue)
-                    ) {
+                    )
+                    {
                         var typeAttributeString = typeAttributeValue.ToString();
                         if (
                             string.Equals(
@@ -1526,7 +1557,8 @@ namespace Microsoft.AspNetCore.Mvc.ViewFeatures
                                 "image",
                                 StringComparison.OrdinalIgnoreCase
                             )
-                        ) {
+                        )
+                        {
                             // 'value' attribute is not needed for 'file' and 'image' input types.
                             addValue = false;
                         }
@@ -1557,7 +1589,8 @@ namespace Microsoft.AspNetCore.Mvc.ViewFeatures
             if (
                 viewContext.ViewData.ModelState.TryGetValue(fullName, out var entry)
                 && entry.Errors.Count > 0
-            ) {
+            )
+            {
                 tagBuilder.AddCssClass(HtmlHelper.ValidationInputCssClassName);
             }
 
@@ -1577,7 +1610,8 @@ namespace Microsoft.AspNetCore.Mvc.ViewFeatures
             string linkText,
             string url,
             object htmlAttributes
-        ) {
+        )
+        {
             if (linkText == null)
             {
                 throw new ArgumentNullException(nameof(linkText));
@@ -1604,7 +1638,8 @@ namespace Microsoft.AspNetCore.Mvc.ViewFeatures
             TagBuilder tagBuilder,
             ModelExplorer modelExplorer,
             string expression
-        ) {
+        )
+        {
             modelExplorer =
                 modelExplorer
                 ?? ExpressionMetadataProvider.FromStringExpression(
@@ -1632,7 +1667,8 @@ namespace Microsoft.AspNetCore.Mvc.ViewFeatures
             TagBuilder tagBuilder,
             ModelExplorer modelExplorer,
             string expression
-        ) {
+        )
+        {
             modelExplorer =
                 modelExplorer
                 ?? ExpressionMetadataProvider.FromStringExpression(
@@ -1649,7 +1685,8 @@ namespace Microsoft.AspNetCore.Mvc.ViewFeatures
                     && (
                         !maxLengthValue.HasValue || maxLengthValue.Value > maxLengthAttribute.Length
                     )
-                ) {
+                )
+                {
                     maxLengthValue = maxLengthAttribute.Length;
                 }
                 else if (
@@ -1658,7 +1695,8 @@ namespace Microsoft.AspNetCore.Mvc.ViewFeatures
                         !maxLengthValue.HasValue
                         || maxLengthValue.Value > stringLengthAttribute.MaximumLength
                     )
-                ) {
+                )
+                {
                     maxLengthValue = stringLengthAttribute.MaximumLength;
                 }
             }
@@ -1685,7 +1723,8 @@ namespace Microsoft.AspNetCore.Mvc.ViewFeatures
             TagBuilder tagBuilder,
             ModelExplorer modelExplorer,
             string expression
-        ) {
+        )
+        {
             modelExplorer =
                 modelExplorer
                 ?? ExpressionMetadataProvider.FromStringExpression(
@@ -1740,7 +1779,8 @@ namespace Microsoft.AspNetCore.Mvc.ViewFeatures
         // Only need a dictionary if htmlAttributes is non-null. TagBuilder.MergeAttributes() is fine with null.
         private static IDictionary<string, object> GetHtmlAttributeDictionaryOrNull(
             object htmlAttributes
-        ) {
+        )
+        {
             IDictionary<string, object> htmlAttributeDictionary = null;
             if (htmlAttributes != null)
             {
@@ -1778,7 +1818,8 @@ namespace Microsoft.AspNetCore.Mvc.ViewFeatures
         private static IEnumerable<SelectListItem> GetSelectListItems(
             ViewContext viewContext,
             string expression
-        ) {
+        )
+        {
             if (viewContext == null)
             {
                 throw new ArgumentNullException(nameof(viewContext));
@@ -1818,7 +1859,8 @@ namespace Microsoft.AspNetCore.Mvc.ViewFeatures
         private static bool IsFullNameValid(
             string fullName,
             IDictionary<string, object> htmlAttributeDictionary
-        ) {
+        )
+        {
             return IsFullNameValid(
                 fullName,
                 htmlAttributeDictionary,
@@ -1830,7 +1872,8 @@ namespace Microsoft.AspNetCore.Mvc.ViewFeatures
             string fullName,
             IDictionary<string, object> htmlAttributeDictionary,
             string fallbackAttributeName
-        ) {
+        )
+        {
             if (string.IsNullOrEmpty(fullName))
             {
                 // fullName==null is normally an error because name="" is not valid in HTML 5.
@@ -1859,7 +1902,8 @@ namespace Microsoft.AspNetCore.Mvc.ViewFeatures
         public IHtmlContent GenerateGroupsAndOptions(
             string optionLabel,
             IEnumerable<SelectListItem> selectList
-        ) {
+        )
+        {
             return GenerateGroupsAndOptions(optionLabel, selectList, currentValues: null);
         }
 
@@ -1867,7 +1911,8 @@ namespace Microsoft.AspNetCore.Mvc.ViewFeatures
             string optionLabel,
             IEnumerable<SelectListItem> selectList,
             ICollection<string> currentValues
-        ) {
+        )
+        {
             if (!(selectList is IList<SelectListItem> itemsList))
             {
                 itemsList = selectList.ToList();
@@ -1935,7 +1980,8 @@ namespace Microsoft.AspNetCore.Mvc.ViewFeatures
                             if (
                                 !optionGenerated[j]
                                 && object.ReferenceEquals(optGroup, groupItem.Group)
-                            ) {
+                            )
+                            {
                                 groupBuilder.InnerHtml.AppendLine(
                                     GenerateOption(groupItem, currentValues)
                                 );

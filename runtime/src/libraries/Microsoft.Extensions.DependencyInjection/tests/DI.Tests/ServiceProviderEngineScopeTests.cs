@@ -28,7 +28,8 @@ namespace Microsoft.Extensions.DependencyInjection.ServiceLookup
 
             protected override Func<ServiceProviderEngineScope, object> RealizeService(
                 ServiceCallSite callSite
-            ) {
+            )
+            {
                 return scope => null;
             }
         }

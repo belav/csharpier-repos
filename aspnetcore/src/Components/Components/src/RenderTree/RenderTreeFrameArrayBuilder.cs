@@ -79,7 +79,8 @@ namespace Microsoft.AspNetCore.Components.RenderTree
         public void AppendComponent(
             int sequence,
             [DynamicallyAccessedMembers(Component)] Type componentType
-        ) {
+        )
+        {
             if (_itemsInUse == _items.Length)
             {
                 GrowBuffer(_items.Length * 2);
@@ -96,7 +97,8 @@ namespace Microsoft.AspNetCore.Components.RenderTree
         public void AppendElementReferenceCapture(
             int sequence,
             Action<ElementReference> elementReferenceCaptureAction
-        ) {
+        )
+        {
             if (_itemsInUse == _items.Length)
             {
                 GrowBuffer(_items.Length * 2);
@@ -114,7 +116,8 @@ namespace Microsoft.AspNetCore.Components.RenderTree
             int sequence,
             Action<object> componentReferenceCaptureAction,
             int parentFrameIndexValue
-        ) {
+        )
+        {
             if (_itemsInUse == _items.Length)
             {
                 GrowBuffer(_items.Length * 2);

@@ -132,7 +132,8 @@ namespace System.ServiceModel.Syndication.Tests
             string ns,
             string value,
             string version
-        ) {
+        )
+        {
             var document = new ReferencedCategoriesDocumentSubclass();
             Assert.False(document.TryParseAttributeEntryPoint(name, ns, value, version));
         }

@@ -35,7 +35,8 @@ namespace Microsoft.AspNetCore.Http.Extensions
             PathString path = new PathString(),
             QueryString query = new QueryString(),
             FragmentString fragment = new FragmentString()
-        ) {
+        )
+        {
             string combinePath =
                 (pathBase.HasValue || path.HasValue) ? (pathBase + path).ToString() : "/";
             return combinePath + query.ToString() + fragment.ToString();
@@ -59,7 +60,8 @@ namespace Microsoft.AspNetCore.Http.Extensions
             PathString path = new PathString(),
             QueryString query = new QueryString(),
             FragmentString fragment = new FragmentString()
-        ) {
+        )
+        {
             if (scheme == null)
             {
                 throw new ArgumentNullException(nameof(scheme));
@@ -117,7 +119,8 @@ namespace Microsoft.AspNetCore.Http.Extensions
             out PathString path,
             out QueryString query,
             out FragmentString fragment
-        ) {
+        )
+        {
             if (uri == null)
             {
                 throw new ArgumentNullException(nameof(uri));
@@ -276,7 +279,8 @@ namespace Microsoft.AspNetCore.Http.Extensions
         private static void InitializeAbsoluteUriString(
             Span<char> buffer,
             (string scheme, string host, string pathBase, string path, string query, string fragment) uriParts
-        ) {
+        )
+        {
             var index = 0;
 
             var pathBaseSpan = uriParts.pathBase.AsSpan();

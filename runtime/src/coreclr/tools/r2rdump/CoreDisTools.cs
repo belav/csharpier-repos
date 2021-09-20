@@ -59,7 +59,8 @@ namespace R2RDump
             int rtfOffset,
             byte[] image,
             out string instr
-        ) {
+        )
+        {
             int instrSize;
             fixed (byte* p = image)
             {
@@ -224,7 +225,8 @@ namespace R2RDump
             StringBuilder builder,
             int lineStartIndex,
             int desiredIndentation
-        ) {
+        )
+        {
             int currentIndentation = builder.Length - lineStartIndex;
             int spacesToAppend = Math.Max(desiredIndentation - currentIndentation, 1);
             builder.Append(' ', spacesToAppend);
@@ -243,7 +245,8 @@ namespace R2RDump
             int imageOffset,
             int rtfOffset,
             out string instruction
-        ) {
+        )
+        {
             if (_disasm == IntPtr.Zero)
             {
                 instruction = "";
@@ -277,7 +280,8 @@ namespace R2RDump
                     new char[] { '\n' },
                     StringSplitOptions.RemoveEmptyEntries
                 )
-            ) {
+            )
+            {
                 int colonIndex = line.IndexOf(':');
                 int tab1Index = line.IndexOf('\t');
 
@@ -336,7 +340,8 @@ namespace R2RDump
                         if (
                             (afterTab2Index < line.Length)
                             && ((line[afterTab2Index] == ' ') || (line[afterTab2Index] == '\t'))
-                        ) {
+                        )
+                        {
                             afterTab2Index++;
                         }
 
@@ -444,7 +449,8 @@ namespace R2RDump
             int rtfOffset,
             int instrSize,
             ref string instruction
-        ) {
+        )
+        {
             int leftBracket;
             int rightBracketPlusOne;
             int displacement;
@@ -455,7 +461,8 @@ namespace R2RDump
                     out rightBracketPlusOne,
                     out displacement
                 )
-            ) {
+            )
+            {
                 int target = rtf.StartAddress + rtfOffset + instrSize + displacement;
                 StringBuilder translated = new StringBuilder();
                 translated.Append(instruction, 0, leftBracket);
@@ -514,7 +521,8 @@ namespace R2RDump
             int rtfOffset,
             int instrSize,
             ref string instruction
-        ) {
+        )
+        {
             int leftBracket;
             int rightBracketPlusOne;
             int absoluteAddress;
@@ -531,7 +539,8 @@ namespace R2RDump
                     out rightBracketPlusOne,
                     out absoluteAddress
                 )
-            ) {
+            )
+            {
                 int target = absoluteAddress - (int)_reader.ImageBase;
 
                 StringBuilder translated = new StringBuilder();
@@ -591,7 +600,8 @@ namespace R2RDump
             int rtfOffset,
             int instrSize,
             ref string instruction
-        ) {
+        )
+        {
             int instructionRVA = rtf.StartAddress + rtfOffset;
             int nextInstructionRVA = instructionRVA + instrSize;
             if (instrSize == 2 && IsIntelJumpInstructionWithByteOffset(imageOffset + rtfOffset))
@@ -601,7 +611,8 @@ namespace R2RDump
             }
             else if (
                 instrSize == 5 && IsIntel1ByteJumpInstructionWithIntOffset(imageOffset + rtfOffset)
-            ) {
+            )
+            {
                 int offset = BitConverter.ToInt32(_reader.Image, imageOffset + rtfOffset + 1);
                 ReplaceRelativeOffset(ref instruction, nextInstructionRVA + offset, rtf);
             }
@@ -619,7 +630,8 @@ namespace R2RDump
                         targetImageOffset,
                         out int instructionRelativeOffset
                     )
-                ) {
+                )
+                {
                     int thunkTargetRVA = targetRVA + instructionRelativeOffset;
                     bool haveImportCell = TryGetImportCellName(
                         thunkTargetRVA,
@@ -655,7 +667,8 @@ namespace R2RDump
                         rtf,
                         out int runtimeFunctionIndex
                     )
-                ) {
+                )
+                {
                     string runtimeFunctionName = string.Format(
                         "RUNTIME_FUNCTION[{0}]",
                         runtimeFunctionIndex
@@ -680,7 +693,8 @@ namespace R2RDump
             }
             else if (
                 instrSize == 6 && IsIntel2ByteJumpInstructionWithIntOffset(imageOffset + rtfOffset)
-            ) {
+            )
+            {
                 int offset = BitConverter.ToInt32(_reader.Image, imageOffset + rtfOffset + 2);
                 ReplaceRelativeOffset(ref instruction, nextInstructionRVA + offset, rtf);
             }
@@ -699,7 +713,8 @@ namespace R2RDump
             out int leftBracket,
             out int rightBracketPlusOne,
             out int absoluteAddress
-        ) {
+        )
+        {
             int start = instruction.IndexOf('[', StringComparison.Ordinal);
             int current = start + 1;
             absoluteAddress = 0;
@@ -735,7 +750,8 @@ namespace R2RDump
             out int leftBracket,
             out int rightBracketPlusOne,
             out int displacement
-        ) {
+        )
+        {
             int relip = instruction.IndexOf(RelIPTag, StringComparison.Ordinal);
             if (relip >= 0 && instruction.Length >= relip + RelIPTag.Length + 3)
             {
@@ -746,7 +762,8 @@ namespace R2RDump
                     (sign == '+' || sign == '-')
                     && instruction[relip + 1] == ' '
                     && IsDigit(instruction[relip + 2])
-                ) {
+                )
+                {
                     relip += 2;
                     int offset = 0;
                     do
@@ -811,7 +828,8 @@ namespace R2RDump
             ref string instruction,
             string replacementString,
             RuntimeFunction rtf
-        ) {
+        )
+        {
             int number = instruction.Length;
             while (number > 0)
             {
@@ -897,7 +915,8 @@ namespace R2RDump
         private bool IsIntel2ByteIndirectJumpPCRelativeInstruction(
             int imageOffset,
             out int instructionRelativeOffset
-        ) {
+        )
+        {
             byte opCode1 = _reader.Image[imageOffset + 0];
             byte opCode2 = _reader.Image[imageOffset + 1];
             int offsetDelta = 6;
@@ -934,7 +953,8 @@ namespace R2RDump
             int imageOffset,
             int rtfOffset,
             ref string instruction
-        ) {
+        )
+        {
             const int InstructionSize = 4;
 
             // The list of PC-relative instructions: ADR, ADRP, B.cond, B, BL, CBNZ, CBZ, TBNZ, TBZ.
@@ -955,7 +975,8 @@ namespace R2RDump
                     out uint adrpRegister,
                     out long pageOffset
                 )
-            ) {
+            )
+            {
                 int pc = rtf.StartAddress + rtfOffset;
                 long targetPage = (pc & ~0xfff) + pageOffset;
 
@@ -968,7 +989,8 @@ namespace R2RDump
                         out uint offset
                     )
                     && (addSrcRegister == adrpRegister)
-                ) {
+                )
+                {
                     int target = (int)targetPage + (int)offset;
                     _addInstructionOffset = imageOffset + rtfOffset + 4;
                     _addInstructionTarget = target;
@@ -1025,7 +1047,8 @@ namespace R2RDump
                 || IsArm64BInstruction(imageOffset + rtfOffset, out branchOffset)
                 || IsArm64CbzOrCbnzInstruction(imageOffset + rtfOffset, out branchOffset)
                 || IsArm64TbzOrTbnzInstruction(imageOffset + rtfOffset, out branchOffset)
-            ) {
+            )
+            {
                 ReplaceRelativeOffset(
                     ref instruction,
                     rtf.StartAddress + rtfOffset + branchOffset,
@@ -1060,7 +1083,8 @@ namespace R2RDump
                         out uint ldr2DestRegister,
                         out uint ldr2SrcRegister
                     )
-                ) {
+                )
+                {
                     int ldr1ImageOffset = blTargetImageOffset;
                     if (
                         IsArm64LdrLiteral64Instruction(
@@ -1073,7 +1097,8 @@ namespace R2RDump
                             out uint ldr4DestRegister,
                             out uint ldr4SrcRegister
                         )
-                    ) {
+                    )
+                    {
                         ldr1ImageOffset += InstructionSize * 2;
                         ldr1Register = ldr3Register;
                         ldr1Offset = ldr3Offset;
@@ -1088,7 +1113,8 @@ namespace R2RDump
                         )
                         && (ldr2SrcRegister == ldr1Register)
                         && (brRegister == ldr2DestRegister)
-                    ) {
+                    )
+                    {
                         int labelOffset = ldr1ImageOffset + ldr1Offset;
                         int target = checked(
                             (int)(
@@ -1128,7 +1154,8 @@ namespace R2RDump
                         rtf,
                         out int runtimeFunctionIndex
                     )
-                ) {
+                )
+                {
                     string runtimeFunctionName = string.Format(
                         "RUNTIME_FUNCTION[{0}]",
                         runtimeFunctionIndex
@@ -1208,7 +1235,8 @@ namespace R2RDump
             int imageOffset,
             out uint sourceRegister,
             out uint immediate
-        ) {
+        )
+        {
             uint instruction = BitConverter.ToUInt32(_reader.Image, imageOffset);
             if ((instruction & 0xffc0_0000) != 0x9100_0000)
             {
@@ -1332,7 +1360,8 @@ namespace R2RDump
             int imageOffset,
             out uint register,
             out int offset
-        ) {
+        )
+        {
             byte highByte = _reader.Image[imageOffset + 3];
             if (highByte != 0x58)
             {
@@ -1356,7 +1385,8 @@ namespace R2RDump
             int imageOffset,
             out uint destRegister,
             out uint sourceRegister
-        ) {
+        )
+        {
             uint instruction = BitConverter.ToUInt32(_reader.Image, imageOffset);
             if ((instruction & 0xffff_fc00) != 0xf940_0000)
             {
@@ -1398,7 +1428,8 @@ namespace R2RDump
             int rva,
             RuntimeFunction rtf,
             out int runtimeFunctionIndex
-        ) {
+        )
+        {
             for (int rtfIndex = 0; rtfIndex < rtf.Method.RuntimeFunctions.Count; rtfIndex++)
             {
                 if (rva == rtf.Method.RuntimeFunctions[rtfIndex].StartAddress)

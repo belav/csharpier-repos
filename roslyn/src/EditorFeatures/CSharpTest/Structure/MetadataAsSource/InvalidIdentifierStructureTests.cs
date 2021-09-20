@@ -29,7 +29,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Structure.MetadataAsSou
         internal override async Task<ImmutableArray<BlockSpan>> GetBlockSpansWorkerAsync(
             Document document,
             int position
-        ) {
+        )
+        {
             var outliningService = document.GetLanguageService<BlockStructureService>();
 
             return (

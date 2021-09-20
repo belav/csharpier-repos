@@ -44,7 +44,8 @@ namespace Microsoft.CodeAnalysis.CSharp
         private RegionAnalysisContext RegionAnalysisContext(
             StatementSyntax firstStatement,
             StatementSyntax lastStatement
-        ) {
+        )
+        {
             var memberModel = GetMemberModel(firstStatement);
             if (memberModel == null)
             {

@@ -28,7 +28,8 @@ namespace System.Collections.Specialized.Tests
         [InlineData(NotifyCollectionChangedAction.Reset + 1)]
         public void Ctor_InvalidActionForReset_ThrowsArgumentException(
             NotifyCollectionChangedAction action
-        ) {
+        )
+        {
             AssertExtensions.Throws<ArgumentException>(
                 "action",
                 () => new NotifyCollectionChangedEventArgs(action)
@@ -49,7 +50,8 @@ namespace System.Collections.Specialized.Tests
         public void Ctor_NotifyCollectionChangedAction_Object(
             NotifyCollectionChangedAction action,
             object changedItem
-        ) {
+        )
+        {
             var e = new NotifyCollectionChangedEventArgs(action, changedItem);
             Assert.Equal(action, e.Action);
             Assert.Equal(
@@ -85,7 +87,8 @@ namespace System.Collections.Specialized.Tests
             NotifyCollectionChangedAction action,
             object changedItem,
             int index
-        ) {
+        )
+        {
             var e = new NotifyCollectionChangedEventArgs(action, changedItem, index);
             Assert.Equal(action, e.Action);
             Assert.Equal(
@@ -130,7 +133,8 @@ namespace System.Collections.Specialized.Tests
         public void Ctor_NotifyCollectionChangedAction_IList(
             NotifyCollectionChangedAction action,
             IList changedItems
-        ) {
+        )
+        {
             var e = new NotifyCollectionChangedEventArgs(action, changedItems);
             Assert.Equal(action, e.Action);
             Assert.Equal(
@@ -194,7 +198,8 @@ namespace System.Collections.Specialized.Tests
             NotifyCollectionChangedAction action,
             IList changedItems,
             int startingIndex
-        ) {
+        )
+        {
             var e = new NotifyCollectionChangedEventArgs(action, changedItems, startingIndex);
             Assert.Equal(action, e.Action);
             Assert.Equal(
@@ -222,7 +227,8 @@ namespace System.Collections.Specialized.Tests
         [InlineData(NotifyCollectionChangedAction.Reset + 1)]
         public void Ctor_InvalidActionForAddRemove_ThrowsArgumentException(
             NotifyCollectionChangedAction action
-        ) {
+        )
+        {
             AssertExtensions.Throws<ArgumentException>(
                 "action",
                 () => new NotifyCollectionChangedEventArgs(action, "value")
@@ -246,7 +252,8 @@ namespace System.Collections.Specialized.Tests
         [InlineData(NotifyCollectionChangedAction.Remove)]
         public void Ctor_ChangedNullForAddOrRemove_ThrowsArgumentNullException(
             NotifyCollectionChangedAction action
-        ) {
+        )
+        {
             AssertExtensions.Throws<ArgumentNullException>(
                 "changedItems",
                 () => new NotifyCollectionChangedEventArgs(action, (IList)null)
@@ -302,7 +309,8 @@ namespace System.Collections.Specialized.Tests
         public void Ctor_ChangedIndexLessThanMinusOneForAddOrRemove_ThrowsArgumentException(
             NotifyCollectionChangedAction action,
             int startingIndex
-        ) {
+        )
+        {
             AssertExtensions.Throws<ArgumentException>(
                 "startingIndex",
                 () => new NotifyCollectionChangedEventArgs(action, new object[0], startingIndex)
@@ -341,7 +349,8 @@ namespace System.Collections.Specialized.Tests
         [InlineData(NotifyCollectionChangedAction.Reset + 1)]
         public void Ctor_InvalidActionForChanged_ThrowsArgumentException(
             NotifyCollectionChangedAction action
-        ) {
+        )
+        {
             AssertExtensions.Throws<ArgumentException>(
                 "action",
                 () => new NotifyCollectionChangedEventArgs(action, "item")
@@ -369,7 +378,8 @@ namespace System.Collections.Specialized.Tests
             NotifyCollectionChangedAction action,
             object newItem,
             object oldItem
-        ) {
+        )
+        {
             var e = new NotifyCollectionChangedEventArgs(action, newItem, oldItem);
             Assert.Equal(action, e.Action);
             Assert.Equal(new object[] { newItem }, e.NewItems);
@@ -388,7 +398,8 @@ namespace System.Collections.Specialized.Tests
             object newItem,
             object oldItem,
             int index
-        ) {
+        )
+        {
             var e = new NotifyCollectionChangedEventArgs(action, newItem, oldItem, index);
             Assert.Equal(action, e.Action);
             Assert.Equal(new object[] { newItem }, e.NewItems);
@@ -431,7 +442,8 @@ namespace System.Collections.Specialized.Tests
             NotifyCollectionChangedAction action,
             IList newItems,
             IList oldItems
-        ) {
+        )
+        {
             var e = new NotifyCollectionChangedEventArgs(action, newItems, oldItems);
             Assert.Equal(action, e.Action);
             Assert.Equal(newItems, e.NewItems);
@@ -500,7 +512,8 @@ namespace System.Collections.Specialized.Tests
             IList newItems,
             IList oldItems,
             int index
-        ) {
+        )
+        {
             var e = new NotifyCollectionChangedEventArgs(action, newItems, oldItems, index);
             Assert.Equal(action, e.Action);
             Assert.Equal(newItems, e.NewItems);
@@ -518,7 +531,8 @@ namespace System.Collections.Specialized.Tests
         [InlineData(NotifyCollectionChangedAction.Reset + 1)]
         public void Ctor_InvalidActionForReplace_ThrowsArgumentException(
             NotifyCollectionChangedAction action
-        ) {
+        )
+        {
             AssertExtensions.Throws<ArgumentException>(
                 "action",
                 () => new NotifyCollectionChangedEventArgs(action, "newItem", "oldItem")
@@ -606,7 +620,8 @@ namespace System.Collections.Specialized.Tests
             object changedItem,
             int index,
             int oldIndex
-        ) {
+        )
+        {
             var e = new NotifyCollectionChangedEventArgs(action, changedItem, index, oldIndex);
             Assert.Equal(action, e.Action);
             Assert.Equal(new object[] { changedItem }, e.NewItems);
@@ -625,7 +640,8 @@ namespace System.Collections.Specialized.Tests
             IList changedItems,
             int index,
             int oldIndex
-        ) {
+        )
+        {
             var e = new NotifyCollectionChangedEventArgs(action, changedItems, index, oldIndex);
             Assert.Equal(action, e.Action);
             Assert.Equal(changedItems, e.NewItems);
@@ -643,7 +659,8 @@ namespace System.Collections.Specialized.Tests
         [InlineData(NotifyCollectionChangedAction.Reset + 1)]
         public void Ctor_InvalidActionForMove_ThrowsArgumentException(
             NotifyCollectionChangedAction action
-        ) {
+        )
+        {
             AssertExtensions.Throws<ArgumentException>(
                 "action",
                 () => new NotifyCollectionChangedEventArgs(action, "item", 1, 1)

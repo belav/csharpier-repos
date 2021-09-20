@@ -42,7 +42,8 @@ namespace Microsoft.AspNetCore.SignalR.Internal
         public HubMethodDescriptor(
             ObjectMethodExecutor methodExecutor,
             IEnumerable<IAuthorizeData> policies
-        ) {
+        )
+        {
             MethodExecutor = methodExecutor;
 
             NonAsyncReturnType =
@@ -53,7 +54,8 @@ namespace Microsoft.AspNetCore.SignalR.Internal
             foreach (
                 var returnType in NonAsyncReturnType.GetInterfaces()
                     .Concat(NonAsyncReturnType.AllBaseTypes())
-            ) {
+            )
+            {
                 if (!returnType.IsGenericType)
                 {
                     continue;
@@ -91,7 +93,8 @@ namespace Microsoft.AspNetCore.SignalR.Internal
                                 p.ParameterType,
                                 mustBeDirectType: true
                             )
-                        ) {
+                        )
+                        {
                             if (StreamingParameters == null)
                             {
                                 StreamingParameters = new List<Type>();
@@ -139,7 +142,8 @@ namespace Microsoft.AspNetCore.SignalR.Internal
         public IAsyncEnumerable<object> FromReturnedStream(
             object stream,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             // there is the potential for compile to be called times but this has no harmful effect other than perf
             if (_makeCancelableEnumerable == null)
             {

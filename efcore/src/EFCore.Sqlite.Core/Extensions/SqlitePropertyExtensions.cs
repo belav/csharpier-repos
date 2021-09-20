@@ -29,7 +29,8 @@ namespace Microsoft.EntityFrameworkCore
         public static int? GetSrid(
             this IReadOnlyProperty property,
             in StoreObjectIdentifier storeObject
-        ) {
+        )
+        {
             var annotation = property.FindAnnotation(SqliteAnnotationNames.Srid);
             if (annotation != null)
             {

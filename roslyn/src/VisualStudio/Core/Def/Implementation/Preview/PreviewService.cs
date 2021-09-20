@@ -52,7 +52,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Preview
             Solution newSolution,
             Solution oldSolution,
             bool showCheckBoxes = true
-        ) {
+        )
+        {
             var engine = new PreviewEngine(
                 ThreadingContext,
                 title,

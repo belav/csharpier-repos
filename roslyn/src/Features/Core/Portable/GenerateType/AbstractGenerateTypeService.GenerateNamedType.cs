@@ -48,7 +48,8 @@ namespace Microsoft.CodeAnalysis.GenerateType
 
             private async Task<INamedTypeSymbol> GenerateNamedTypeAsync(
                 GenerateTypeOptionsResult options
-            ) {
+            )
+            {
                 if (options.TypeKind == TypeKind.Delegate)
                 {
                     return CodeGenerationSymbolFactory.CreateDelegateTypeSymbol(
@@ -82,7 +83,8 @@ namespace Microsoft.CodeAnalysis.GenerateType
                     _state.DelegateMethodSymbol == null
                     || _state.DelegateMethodSymbol.ReturnType == null
                     || _state.DelegateMethodSymbol.ReturnType is IErrorTypeSymbol
-                ) {
+                )
+                {
                     // Since we cannot determine the return type, we are returning void
                     return _state.Compilation.GetSpecialType(SpecialType.System_Void);
                 }
@@ -115,7 +117,8 @@ namespace Microsoft.CodeAnalysis.GenerateType
 
             private async Task<ImmutableArray<ISymbol>> DetermineMembersAsync(
                 GenerateTypeOptionsResult options = null
-            ) {
+            )
+            {
                 using var _ = ArrayBuilder<ISymbol>.GetInstance(out var members);
                 await AddMembersAsync(members, options).ConfigureAwait(false);
 
@@ -128,14 +131,16 @@ namespace Microsoft.CodeAnalysis.GenerateType
             private async Task AddMembersAsync(
                 ArrayBuilder<ISymbol> members,
                 GenerateTypeOptionsResult options = null
-            ) {
+            )
+            {
                 AddProperties(members);
                 if (
                     !_service.TryGetArgumentList(
                         _state.ObjectCreationExpressionOpt,
                         out var argumentList
                     )
-                ) {
+                )
+                {
                     return;
                 }
 
@@ -151,7 +156,8 @@ namespace Microsoft.CodeAnalysis.GenerateType
                             c.Parameters.Select(p => p.Type)
                                 .SequenceEqual(parameterTypes, SymbolEqualityComparer.Default)
                     )
-                ) {
+                )
+                {
                     return;
                 }
 
@@ -162,7 +168,8 @@ namespace Microsoft.CodeAnalysis.GenerateType
                     if (
                         _state.BaseTypeOrInterfaceOpt.TypeKind == TypeKind.Interface
                         || argumentList.Count == 0
-                    ) {
+                    )
+                    {
                         // No need to add the default constructor if our base type is going to be 'object' or if we
                         // would be calling the empty constructor.  We get that base constructor implicitly.
                         return;
@@ -231,7 +238,8 @@ namespace Microsoft.CodeAnalysis.GenerateType
                             _cancellationToken,
                             out var generatedProperty
                         )
-                    ) {
+                    )
+                    {
                         members.Add(generatedProperty);
                     }
                 }
@@ -241,7 +249,8 @@ namespace Microsoft.CodeAnalysis.GenerateType
                 IList<TArgumentSyntax> argumentList,
                 ArrayBuilder<ISymbol> members,
                 GenerateTypeOptionsResult options = null
-            ) {
+            )
+            {
                 var factory = _semanticDocument.Document.GetLanguageService<SyntaxGenerator>();
 
                 var availableTypeParameters = _service.GetAvailableTypeParameters(
@@ -306,7 +315,8 @@ namespace Microsoft.CodeAnalysis.GenerateType
                             || options.TypeKind == TypeKind.Structure
                         )
                     )
-                ) {
+                )
+                {
                     members.AddRange(
                         factory.CreateMemberDelegatingConstructor(
                             _semanticDocument.SemanticModel,
@@ -383,7 +393,8 @@ namespace Microsoft.CodeAnalysis.GenerateType
                 if (
                     _state.BaseTypeOrInterfaceOpt == null
                     || _state.BaseTypeOrInterfaceOpt.TypeKind == TypeKind.Interface
-                ) {
+                )
+                {
                     return null;
                 }
 
@@ -395,7 +406,8 @@ namespace Microsoft.CodeAnalysis.GenerateType
                 if (
                     _state.BaseTypeOrInterfaceOpt != null
                     && _state.BaseTypeOrInterfaceOpt.TypeKind == TypeKind.Interface
-                ) {
+                )
+                {
                     var type = RemoveUnavailableTypeParameters(_state.BaseTypeOrInterfaceOpt);
                     if (type != null)
                     {

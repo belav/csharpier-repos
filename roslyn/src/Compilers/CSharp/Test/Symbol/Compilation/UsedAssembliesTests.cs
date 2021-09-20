@@ -84,7 +84,8 @@ public class C2
             DiagnosticDescription[] before,
             DiagnosticDescription[] after,
             MetadataReference[] specificReferencesToAssert
-        ) {
+        )
+        {
             comp.VerifyDiagnostics(before);
 
             bool hasCoreLibraryRef = !comp.ObjectType.IsErrorType();
@@ -116,7 +117,8 @@ public class C2
                 !after.Any(
                     d => ErrorFacts.GetSeverity((ErrorCode)d.Code) == DiagnosticSeverity.Error
                 )
-            ) {
+            )
+            {
                 CompileAndVerify(comp2, verify: Verification.Skipped)
                     .Diagnostics.Where(d => d.Code != (int)ErrorCode.WRN_NoRuntimeMetadataVersion)
                     .Verify(after);
@@ -151,7 +153,8 @@ public class C2
         private void AssertUsedAssemblyReferences(
             Compilation comp,
             params MetadataReference[] expected
-        ) {
+        )
+        {
             AssertUsedAssemblyReferences(
                 comp,
                 expected,
@@ -165,7 +168,8 @@ public class C2
             Compilation comp,
             MetadataReference[] expected,
             MetadataReference[] specificReferencesToAssert
-        ) {
+        )
+        {
             AssertUsedAssemblyReferences(
                 comp,
                 expected,
@@ -179,7 +183,8 @@ public class C2
             string source,
             MetadataReference[] references,
             params MetadataReference[] expected
-        ) {
+        )
+        {
             Compilation comp = CreateCompilation(source, references: references);
             AssertUsedAssemblyReferences(comp, expected, references);
             return comp;
@@ -188,7 +193,8 @@ public class C2
         private Compilation AssertUsedAssemblyReferences(
             string source,
             params MetadataReference[] references
-        ) {
+        )
+        {
             return AssertUsedAssemblyReferences(source, references, references);
         }
 
@@ -196,7 +202,8 @@ public class C2
             string source,
             MetadataReference[] references,
             params DiagnosticDescription[] expected
-        ) {
+        )
+        {
             Compilation comp = CreateCompilation(source, references: references);
             var diagnostics = comp.GetDiagnostics();
             diagnostics.Verify(expected);
@@ -212,7 +219,8 @@ public class C2
             string source,
             TargetFramework targetFramework,
             params MetadataReference[] references
-        ) {
+        )
+        {
             return CompileWithUsedAssemblyReferences(
                 source,
                 targetFramework,
@@ -226,7 +234,8 @@ public class C2
             TargetFramework targetFramework,
             CSharpCompilationOptions options,
             params MetadataReference[] references
-        ) {
+        )
+        {
             options ??= TestOptions.ReleaseDll;
             options = options.WithSpecificDiagnosticOptions(
                 options.SpecificDiagnosticOptions.Add("CS1591", ReportDiagnostic.Suppress)
@@ -245,7 +254,8 @@ public class C2
             Compilation comp,
             string expectedOutput = null,
             MetadataReference[] specificReferencesToAssert = null
-        ) {
+        )
+        {
             var used = comp.GetUsedAssemblyReferences();
             CompileAndVerify(comp, verify: Verification.Skipped, expectedOutput: expectedOutput)
                 .VerifyDiagnostics();
@@ -289,7 +299,8 @@ public class C2
         private ImmutableArray<MetadataReference> CompileWithUsedAssemblyReferences(
             string source,
             params MetadataReference[] references
-        ) {
+        )
+        {
             return CompileWithUsedAssemblyReferences(source, TargetFramework.Standard, references);
         }
 
@@ -297,7 +308,8 @@ public class C2
             string source,
             CSharpCompilationOptions options,
             params MetadataReference[] references
-        ) {
+        )
+        {
             CompileWithUsedAssemblyReferences(
                 source,
                 TargetFramework.Standard,
@@ -1160,7 +1172,8 @@ class C2
                 MetadataReference reference1,
                 string source,
                 bool hasTypeReferencesInUsing = true
-            ) {
+            )
+            {
                 var references = new[] { reference0, reference1 };
                 Compilation comp2 = CreateCompilation(
                     source,
@@ -2624,7 +2637,8 @@ public class C2
                 MetadataReference reference,
                 string source,
                 params DiagnosticDescription[] expected
-            ) {
+            )
+            {
                 Compilation comp = CreateCompilation(source, references: new[] { reference });
                 comp.VerifyDiagnostics(expected);
 
@@ -4243,7 +4257,8 @@ class C2
                 MetadataReference reference1,
                 string source,
                 bool hasTypeReferencesInUsing = true
-            ) {
+            )
+            {
                 var references = new[] { reference0, reference1 };
                 Compilation comp2 = CreateCompilation(
                     source,
@@ -4380,7 +4395,8 @@ class C2
                 MetadataReference reference1,
                 string source,
                 bool hasTypeReferencesInUsing = true
-            ) {
+            )
+            {
                 var references = new[] { reference0, reference1 };
                 Compilation comp2 = CreateCompilation(
                     source,
@@ -4631,7 +4647,8 @@ public class C2
                 MetadataReference reference1,
                 MetadataReference reference2,
                 string source
-            ) {
+            )
+            {
                 AssertUsedAssemblyReferences(
                     source,
                     new[] { reference0, reference1, reference2 },
@@ -4783,7 +4800,8 @@ public class C2
                 MetadataReference reference1,
                 MetadataReference reference2,
                 string source
-            ) {
+            )
+            {
                 AssertUsedAssemblyReferences(
                     source,
                     new[] { reference0, reference1, reference2 },
@@ -5039,7 +5057,8 @@ class C2
                 MetadataReference reference2,
                 string source,
                 int namespaceOrdinalReferencedInUsings = 0
-            ) {
+            )
+            {
                 var references = new[] { reference0, reference1, reference2 };
                 var expected = new[] { reference0, reference1 };
                 Compilation comp2 = CreateCompilation(
@@ -5298,7 +5317,8 @@ class C2
                 MetadataReference reference2,
                 string source,
                 int namespaceOrdinalReferencedInUsings = 0
-            ) {
+            )
+            {
                 var references = new[] { reference0, reference1, reference2 };
                 Compilation comp2 = CreateCompilation(
                     source,

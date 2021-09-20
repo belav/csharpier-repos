@@ -30,7 +30,8 @@ namespace Microsoft.CodeAnalysis
         public RecoverableTextAndVersion(
             ValueSource<TextAndVersion> initialTextAndVersion,
             ITemporaryStorageService storageService
-        ) {
+        )
+        {
             _initialSource = initialTextAndVersion;
             _storageService = storageService;
         }
@@ -98,7 +99,8 @@ namespace Microsoft.CodeAnalysis
 
         public override async Task<TextAndVersion> GetValueAsync(
             CancellationToken cancellationToken = default
-        ) {
+        )
+        {
             if (_text == null)
             {
                 using (await Gate.DisposableWaitAsync(cancellationToken).ConfigureAwait(false))
@@ -143,7 +145,8 @@ namespace Microsoft.CodeAnalysis
 
             protected override async Task<SourceText> RecoverAsync(
                 CancellationToken cancellationToken
-            ) {
+            )
+            {
                 Contract.ThrowIfNull(_storage);
 
                 using (
@@ -152,7 +155,8 @@ namespace Microsoft.CodeAnalysis
                         _parent._filePath,
                         cancellationToken
                     )
-                ) {
+                )
+                {
                     return await _storage.ReadTextAsync(cancellationToken).ConfigureAwait(false);
                 }
             }
@@ -167,7 +171,8 @@ namespace Microsoft.CodeAnalysis
                         _parent._filePath,
                         cancellationToken
                     )
-                ) {
+                )
+                {
                     return _storage.ReadText(cancellationToken);
                 }
             }
@@ -175,7 +180,8 @@ namespace Microsoft.CodeAnalysis
             protected override async Task SaveAsync(
                 SourceText text,
                 CancellationToken cancellationToken
-            ) {
+            )
+            {
                 Contract.ThrowIfFalse(_storage == null); // Cannot save more than once
 
                 var storage = _parent._storageService.CreateTemporaryTextStorage(cancellationToken);

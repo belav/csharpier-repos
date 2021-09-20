@@ -68,7 +68,8 @@ namespace System.CommandLine.Tests.Invocation
                     childProgram,
                     psi: new ProcessStartInfo { RedirectStandardOutput = true }
                 )
-            ) {
+            )
+            {
                 System.Diagnostics.Process process = program.Process;
 
                 // Wait for the child to be in the command handler.

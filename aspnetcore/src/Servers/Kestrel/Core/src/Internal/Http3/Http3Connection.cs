@@ -161,7 +161,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Http3
                         initiator,
                         GracefulCloseInitiator.None
                     ) == GracefulCloseInitiator.None
-                ) {
+                )
+                {
                     // Abort accept async loop to initiate graceful shutdown
                     // TODO aborting connection isn't graceful due to runtime issue, will drop data on streams
                     // Either we need to swap to using a cts here or fix runtime to gracefully close connection.
@@ -446,7 +447,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Http3
                 if (
                     _gracefulCloseInitiator == GracefulCloseInitiator.Server
                     && activeRequestCount > 0
-                ) {
+                )
+                {
                     // Go away with largest streamid to initiate graceful shutdown.
                     SendGoAway(VariableLengthIntegerHelper.EightByteLimit).Preserve();
                 }

@@ -95,7 +95,8 @@ namespace System.Collections.Generic
             if (
                 collection is HashSet<T> otherAsHashSet
                 && EqualityComparersAreEqual(this, otherAsHashSet)
-            ) {
+            )
+            {
                 ConstructFrom(otherAsHashSet);
             }
             else
@@ -238,7 +239,8 @@ namespace System.Collections.Generic
                             if (
                                 entry.HashCode == hashCode
                                 && EqualityComparer<T>.Default.Equals(entry.Value, item)
-                            ) {
+                            )
+                            {
                                 return i;
                             }
                             i = entry.Next;
@@ -263,7 +265,8 @@ namespace System.Collections.Generic
                             if (
                                 entry.HashCode == hashCode
                                 && defaultComparer.Equals(entry.Value, item)
-                            ) {
+                            )
+                            {
                                 return i;
                             }
                             i = entry.Next;
@@ -342,7 +345,8 @@ namespace System.Collections.Generic
                             _comparer?.Equals(entry.Value, item)
                             ?? EqualityComparer<T>.Default.Equals(entry.Value, item)
                         )
-                    ) {
+                    )
+                    {
                         if (last < 0)
                         {
                             bucket = entry.Next + 1; // Value in buckets is 1-based
@@ -748,7 +752,8 @@ namespace System.Collections.Generic
                     other is HashSet<T> otherAsSet
                     && EqualityComparersAreEqual(this, otherAsSet)
                     && otherAsSet.Count > Count
-                ) {
+                )
+                {
                     return false;
                 }
             }
@@ -871,7 +876,8 @@ namespace System.Collections.Generic
                     Count == 0
                     && other is ICollection<T> otherAsCollection
                     && otherAsCollection.Count > 0
-                ) {
+                )
+                {
                     return false;
                 }
 
@@ -1170,7 +1176,8 @@ namespace System.Collections.Generic
                         if (
                             entry.HashCode == hashCode
                             && EqualityComparer<T>.Default.Equals(entry.Value, value)
-                        ) {
+                        )
+                        {
                             location = i;
                             return false;
                         }
@@ -1194,7 +1201,8 @@ namespace System.Collections.Generic
                         ref Entry entry = ref entries[i];
                         if (
                             entry.HashCode == hashCode && defaultComparer.Equals(entry.Value, value)
-                        ) {
+                        )
+                        {
                             location = i;
                             return false;
                         }
@@ -1272,7 +1280,8 @@ namespace System.Collections.Generic
                 !typeof(T).IsValueType
                 && collisionCount > HashHelpers.HashCollisionThreshold
                 && comparer is NonRandomizedStringEqualityComparer
-            ) {
+            )
+            {
                 // If we hit the collision threshold we'll need to switch to the comparer which is using randomized string hashing
                 // i.e. EqualityComparer<string>.Default.
                 Resize(entries.Length, forceNewHashCodes: true);
@@ -1505,7 +1514,8 @@ namespace System.Collections.Generic
         private unsafe (int UniqueCount, int UnfoundCount) CheckUniqueAndUnfoundElements(
             IEnumerable<T> other,
             bool returnIfUnfound
-        ) {
+        )
+        {
             // Need special case in case this has no elements.
             if (_count == 0)
             {

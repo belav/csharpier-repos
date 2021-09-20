@@ -62,7 +62,8 @@ namespace System.IO.Strategies
             if (
                 Interop.Sys.FLock(_fileHandle, lockOperation | Interop.Sys.LockOperations.LOCK_NB)
                 < 0
-            ) {
+            )
+            {
                 // The only error we care about is EWOULDBLOCK, which indicates that the file is currently locked by someone
                 // else and we would block trying to access it.  Other errors, such as ENOTSUP (locking isn't supported) or
                 // EACCES (the file system doesn't allow us to lock), will only hamper FileStream's usage without providing value,
@@ -106,7 +107,8 @@ namespace System.IO.Strategies
                     if (
                         errorInfo.Error != Interop.Error.EBADF
                         && errorInfo.Error != Interop.Error.EINVAL
-                    ) {
+                    )
+                    {
                         // We know the file descriptor is valid and we know the size argument to FTruncate is correct,
                         // so if EBADF or EINVAL is returned, it means we're dealing with a special file that can't be
                         // truncated.  Ignore the error in such cases; in all others, throw.
@@ -426,7 +428,8 @@ namespace System.IO.Strategies
             Memory<byte> destination,
             CancellationToken cancellationToken,
             out int synchronousResult
-        ) {
+        )
+        {
             Debug.Assert(_useAsyncIO);
             Debug.Assert(_asyncState != null);
 
@@ -611,7 +614,8 @@ namespace System.IO.Strategies
         private ValueTask WriteAsyncInternal(
             ReadOnlyMemory<byte> source,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             Debug.Assert(_useAsyncIO);
             Debug.Assert(_asyncState != null);
 
@@ -766,7 +770,8 @@ namespace System.IO.Strategies
             long offset,
             SeekOrigin origin,
             bool closeInvalidHandle = false
-        ) {
+        )
+        {
             Debug.Assert(!fileHandle.IsClosed && CanSeekCore(fileHandle));
             Debug.Assert(origin >= SeekOrigin.Begin && origin <= SeekOrigin.End);
 

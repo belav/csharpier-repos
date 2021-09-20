@@ -569,7 +569,8 @@ namespace Microsoft.AspNetCore.Mvc.ApplicationModels
         private CompiledPageRouteModelProvider CreateProvider(
             IList<RazorCompiledItem> items,
             RazorPagesOptions options = null
-        ) {
+        )
+        {
             options = options ?? new RazorPagesOptions();
 
             var provider = new TestCompiledPageRouteModelProvider(
@@ -599,7 +600,8 @@ namespace Microsoft.AspNetCore.Mvc.ApplicationModels
 
             protected override ViewsFeature GetViewFeature(
                 ApplicationPartManager applicationManager
-            ) {
+            )
+            {
                 var feature = new ViewsFeature();
                 foreach (var descriptor in Descriptors)
                 {

@@ -27,7 +27,8 @@ namespace Microsoft.CodeAnalysis.Test.Utilities
         public static (ControlFlowGraph graph, ISymbol associatedSymbol) GetControlFlowGraph(
             SyntaxNode syntaxNode,
             SemanticModel model
-        ) {
+        )
+        {
             IOperation operationRoot = model.GetOperation(syntaxNode);
 
             // Workaround for unit tests designed to work on IBlockOperation with ConstructorBodyOperation/MethodBodyOperation parent.
@@ -84,7 +85,8 @@ namespace Microsoft.CodeAnalysis.Test.Utilities
             string expectedFlowGraph,
             ControlFlowGraph graph,
             ISymbol associatedSymbol
-        ) {
+        )
+        {
             var actualFlowGraph = GetFlowGraph(compilation, graph, associatedSymbol);
             OperationTreeVerifier.Verify(expectedFlowGraph, actualFlowGraph);
 
@@ -103,7 +105,8 @@ namespace Microsoft.CodeAnalysis.Test.Utilities
             Compilation compilation,
             ControlFlowGraph graph,
             ISymbol associatedSymbol
-        ) {
+        )
+        {
             var pooledBuilder = PooledObjects.PooledStringBuilder.GetInstance();
             var stringBuilder = pooledBuilder.Builder;
 
@@ -128,7 +131,8 @@ namespace Microsoft.CodeAnalysis.Test.Utilities
             string idSuffix,
             int indent,
             ISymbol associatedSymbol
-        ) {
+        )
+        {
             ImmutableArray<BasicBlock> blocks = graph.Blocks;
 
             var visitor = TestOperationVisitor.Singleton;
@@ -217,7 +221,8 @@ namespace Microsoft.CodeAnalysis.Test.Utilities
                         var predecessorIndex = 0;
                         predecessorIndex < predecessors.Length;
                         predecessorIndex++
-                    ) {
+                    )
+                    {
                         var predecessorBranch = predecessors[predecessorIndex];
                         Assert.Same(block, predecessorBranch.Destination);
                         var predecessor = predecessorBranch.Source;
@@ -243,7 +248,8 @@ namespace Microsoft.CodeAnalysis.Test.Utilities
                         if (
                             predecessorIndex < predecessors.Length - 1
                             && predecessors[predecessorIndex + 1].Source == predecessor
-                        ) {
+                        )
+                        {
                             // Multiple branches from same predecessor - one must be conditional and other fall through.
                             Assert.True(predecessorBranch.IsConditionalSuccessor);
                             predecessorIndex++;
@@ -339,7 +345,8 @@ namespace Microsoft.CodeAnalysis.Test.Utilities
                     if (
                         nextBranch.Semantics
                         == ControlFlowBranchSemantics.StructuredExceptionHandling
-                    ) {
+                    )
+                    {
                         Assert.Null(nextBranch.Destination);
                         Assert.Equal(block.EnclosingRegion.LastBlockOrdinal, block.Ordinal);
                         Assert.True(
@@ -399,7 +406,8 @@ namespace Microsoft.CodeAnalysis.Test.Utilities
                     IFlowAnonymousFunctionOperation,
                     ControlFlowGraph
                 > pair in anonymousFunctionsMap
-            ) {
+            )
+            {
                 Assert.Same(pair.Value, graph.GetAnonymousFunctionControlFlowGraph(pair.Key));
                 Assert.Same(
                     pair.Value,
@@ -422,7 +430,8 @@ namespace Microsoft.CodeAnalysis.Test.Utilities
                                 || d.Code == (int)VisualBasic.ERRID.ERR_GotoIntoSyncLock
                                 || d.Code == (int)VisualBasic.ERRID.ERR_GotoIntoUsing
                         )
-                ) {
+                )
+                {
                     // Invalid branches like that are often causing reports about
                     // using captures before they are initialized.
                     doCaptureVerification = false;
@@ -574,7 +583,8 @@ namespace Microsoft.CodeAnalysis.Test.Utilities
                 PooledHashSet<CaptureId> referencedIds,
                 ArrayBuilder<ControlFlowRegion> regions,
                 Func<string> finalGraph
-            ) {
+            )
+            {
                 regions.Clear();
 
                 {
@@ -590,7 +600,8 @@ namespace Microsoft.CodeAnalysis.Test.Utilities
                 if (
                     block.ConditionalSuccessor != null
                     && block.ConditionalSuccessor.LeavingRegions.Length > regions.Count
-                ) {
+                )
+                {
                     regions.Clear();
                     regions.AddRange(block.ConditionalSuccessor.LeavingRegions);
                 }
@@ -617,7 +628,8 @@ namespace Microsoft.CodeAnalysis.Test.Utilities
                         foreach (
                             IFlowCaptureReferenceOperation reference in lastOperation.DescendantsAndSelf()
                                 .OfType<IFlowCaptureReferenceOperation>()
-                        ) {
+                        )
+                        {
                             referencedInLastOperation.Add(reference.Id);
                         }
                     }
@@ -644,14 +656,16 @@ namespace Microsoft.CodeAnalysis.Test.Utilities
                                     referencedIds.Contains(id)
                                     && isAggregateGroupCapture(lastOperation, region, block, id)
                                 )
-                            ) {
+                            )
+                            {
                                 continue;
                             }
 
                             if (
                                 region.LastBlockOrdinal != block.Ordinal
                                 && referencedIds.Contains(id)
-                            ) {
+                            )
+                            {
                                 continue;
                             }
 
@@ -679,7 +693,8 @@ namespace Microsoft.CodeAnalysis.Test.Utilities
                 ControlFlowRegion region,
                 BasicBlock block,
                 CaptureId id
-            ) {
+            )
+            {
                 if (graph.OriginalOperation.Language != LanguageNames.CSharp)
                 {
                     return false;
@@ -690,7 +705,8 @@ namespace Microsoft.CodeAnalysis.Test.Utilities
                         region,
                         block.Ordinal
                     )
-                ) {
+                )
+                {
                     if (candidate.Id.Equals(id))
                     {
                         CSharpSyntaxNode syntax = applyParenthesizedOrNullSuppressionIfAnyCS(
@@ -714,7 +730,8 @@ namespace Microsoft.CodeAnalysis.Test.Utilities
                             && assignment.Right is InitializerExpressionSyntax initializer
                             && initializer.Kind() == CSharp.SyntaxKind.ObjectInitializerExpression
                             && !initializer.Expressions.Any()
-                        ) {
+                        )
+                        {
                             return true;
                         }
                         break;
@@ -728,7 +745,8 @@ namespace Microsoft.CodeAnalysis.Test.Utilities
                 ControlFlowRegion region,
                 BasicBlock block,
                 CaptureId id
-            ) {
+            )
+            {
                 if (graph.OriginalOperation.Language != LanguageNames.VisualBasic)
                 {
                     return false;
@@ -739,7 +757,8 @@ namespace Microsoft.CodeAnalysis.Test.Utilities
                         region,
                         block.Ordinal
                     )
-                ) {
+                )
+                {
                     if (candidate.Id.Equals(id))
                     {
                         VisualBasicSyntaxNode syntax = applyParenthesizedIfAnyVB(
@@ -762,7 +781,8 @@ namespace Microsoft.CodeAnalysis.Test.Utilities
                 ControlFlowRegion region,
                 BasicBlock block,
                 CaptureId id
-            ) {
+            )
+            {
                 if (graph.OriginalOperation.Language != LanguageNames.VisualBasic)
                 {
                     return false;
@@ -773,7 +793,8 @@ namespace Microsoft.CodeAnalysis.Test.Utilities
                         region,
                         block.Ordinal
                     )
-                ) {
+                )
+                {
                     if (candidate.Id.Equals(id))
                     {
                         VisualBasicSyntaxNode syntax = applyParenthesizedIfAnyVB(
@@ -796,7 +817,8 @@ namespace Microsoft.CodeAnalysis.Test.Utilities
                                             VisualBasic.SyntaxKind.XmlAttributeAccessExpression
                                         )
                                 )
-                        ) {
+                        )
+                        {
                             // https://github.com/dotnet/roslyn/issues/27564: It looks like there is a bug in IOperation tree around XmlMemberAccessExpressionSyntax,
                             // a None operation is created and all children are dropped.
                             return true;
@@ -821,7 +843,8 @@ namespace Microsoft.CodeAnalysis.Test.Utilities
                         region,
                         block.Ordinal
                     )
-                ) {
+                )
+                {
                     if (candidate.Id.Equals(id))
                     {
                         switch (candidate.Language)
@@ -837,7 +860,8 @@ namespace Microsoft.CodeAnalysis.Test.Utilities
                                         syntax.Parent
                                             is CSharp.Syntax.SwitchStatementSyntax switchStmt
                                         && switchStmt.Expression == syntax
-                                    ) {
+                                    )
+                                    {
                                         return true;
                                     }
 
@@ -845,7 +869,8 @@ namespace Microsoft.CodeAnalysis.Test.Utilities
                                         syntax.Parent
                                             is CSharp.Syntax.SwitchExpressionSyntax switchExpr
                                         && switchExpr.GoverningExpression == syntax
-                                    ) {
+                                    )
+                                    {
                                         return true;
                                     }
                                 }
@@ -861,7 +886,8 @@ namespace Microsoft.CodeAnalysis.Test.Utilities
                                         syntax.Parent
                                             is VisualBasic.Syntax.SelectStatementSyntax switchStmt
                                         && switchStmt.Expression == syntax
-                                    ) {
+                                    )
+                                    {
                                         return true;
                                     }
                                 }
@@ -878,13 +904,15 @@ namespace Microsoft.CodeAnalysis.Test.Utilities
                 ControlFlowRegion region,
                 BasicBlock block,
                 CaptureId id
-            ) {
+            )
+            {
                 foreach (
                     IFlowCaptureOperation candidate in getFlowCaptureOperationsFromBlocksInRegion(
                         region,
                         block.Ordinal
                     )
-                ) {
+                )
+                {
                     if (candidate.Id.Equals(id))
                     {
                         switch (candidate.Language)
@@ -900,7 +928,8 @@ namespace Microsoft.CodeAnalysis.Test.Utilities
                                         syntax.Parent
                                             is CSharp.Syntax.CommonForEachStatementSyntax forEach
                                         && forEach.Expression == syntax
-                                    ) {
+                                    )
+                                    {
                                         return true;
                                     }
                                 }
@@ -916,7 +945,8 @@ namespace Microsoft.CodeAnalysis.Test.Utilities
                                         syntax.Parent
                                             is VisualBasic.Syntax.ForEachStatementSyntax forEach
                                         && forEach.Expression == syntax
-                                    ) {
+                                    )
+                                    {
                                         return true;
                                     }
                                 }
@@ -934,7 +964,8 @@ namespace Microsoft.CodeAnalysis.Test.Utilities
                 ControlFlowRegion region,
                 BasicBlock block,
                 CaptureId id
-            ) {
+            )
+            {
                 if (graph.OriginalOperation.Language != LanguageNames.VisualBasic)
                 {
                     return false;
@@ -945,7 +976,8 @@ namespace Microsoft.CodeAnalysis.Test.Utilities
                         region,
                         block.Ordinal
                     )
-                ) {
+                )
+                {
                     if (candidate.Id.Equals(id))
                     {
                         VisualBasicSyntaxNode syntax = applyParenthesizedIfAnyVB(
@@ -955,7 +987,8 @@ namespace Microsoft.CodeAnalysis.Test.Utilities
                         foreach (
                             ITranslatedQueryOperation query in operation.DescendantsAndSelf()
                                 .OfType<ITranslatedQueryOperation>()
-                        ) {
+                        )
+                        {
                             if (
                                 query.Syntax is VisualBasic.Syntax.QueryExpressionSyntax querySyntax
                                 && querySyntax.Clauses.AsSingleton()
@@ -963,7 +996,8 @@ namespace Microsoft.CodeAnalysis.Test.Utilities
                                 && aggregate.AggregateKeyword.SpanStart < candidate.Syntax.SpanStart
                                 && aggregate.IntoKeyword.SpanStart > candidate.Syntax.SpanStart
                                 && query.Operation.Kind == OperationKind.AnonymousObjectCreation
-                            ) {
+                            )
+                            {
                                 return true;
                             }
                         }
@@ -978,7 +1012,8 @@ namespace Microsoft.CodeAnalysis.Test.Utilities
                 ArrayBuilder<PooledHashSet<CaptureId>> entryStates,
                 ControlFlowBranch branch,
                 PooledHashSet<CaptureId> state
-            ) {
+            )
+            {
                 if (branch.Destination != null)
                 {
                     if (branch.Destination.Ordinal > branch.Source.Ordinal)
@@ -1000,7 +1035,8 @@ namespace Microsoft.CodeAnalysis.Test.Utilities
                     || branch.Semantics == ControlFlowBranchSemantics.Rethrow
                     || branch.Semantics == ControlFlowBranchSemantics.Error
                     || branch.Semantics == ControlFlowBranchSemantics.StructuredExceptionHandling
-                ) {
+                )
+                {
                     ControlFlowRegion region = branch.Source.EnclosingRegion;
 
                     while (region.Kind != ControlFlowRegionKind.Root)
@@ -1008,7 +1044,8 @@ namespace Microsoft.CodeAnalysis.Test.Utilities
                         if (
                             region.Kind == ControlFlowRegionKind.Try
                             && region.EnclosingRegion.Kind == ControlFlowRegionKind.TryAndFinally
-                        ) {
+                        )
+                        {
                             Debug.Assert(
                                 region.EnclosingRegion.NestedRegions[1].Kind
                                     == ControlFlowRegionKind.Finally
@@ -1034,7 +1071,8 @@ namespace Microsoft.CodeAnalysis.Test.Utilities
                 ArrayBuilder<PooledHashSet<CaptureId>> entryStates,
                 BasicBlock block,
                 PooledHashSet<CaptureId> state
-            ) {
+            )
+            {
                 PooledHashSet<CaptureId> entryState = entryStates[block.Ordinal];
                 if (entryState == null)
                 {
@@ -1058,11 +1096,13 @@ namespace Microsoft.CodeAnalysis.Test.Utilities
                 PooledHashSet<CaptureId> longLivedIds,
                 PooledHashSet<CaptureId> referencedIds,
                 Func<string> finalGraph
-            ) {
+            )
+            {
                 foreach (
                     IFlowCaptureReferenceOperation reference in operation.DescendantsAndSelf()
                         .OfType<IFlowCaptureReferenceOperation>()
-                ) {
+                )
+                {
                     CaptureId id = reference.Id;
                     referencedIds.Add(id);
 
@@ -1115,7 +1155,8 @@ namespace Microsoft.CodeAnalysis.Test.Utilities
                                 syntax.Parent
                                     is CSharp.Syntax.ConditionalAccessExpressionSyntax access
                                 && access.Expression == syntax
-                            ) {
+                            )
+                            {
                                 return true;
                             }
                         }
@@ -1131,7 +1172,8 @@ namespace Microsoft.CodeAnalysis.Test.Utilities
                                 syntax.Parent
                                     is VisualBasic.Syntax.ConditionalAccessExpressionSyntax access
                                 && access.Expression == syntax
-                            ) {
+                            )
+                            {
                                 return true;
                             }
                         }
@@ -1158,7 +1200,8 @@ namespace Microsoft.CodeAnalysis.Test.Utilities
 
             bool isObjectInitializerInitializedObjectTarget(
                 IFlowCaptureReferenceOperation reference
-            ) {
+            )
+            {
                 if (reference.Language != LanguageNames.CSharp)
                 {
                     return false;
@@ -1182,7 +1225,8 @@ namespace Microsoft.CodeAnalysis.Test.Utilities
 
             bool isFirstOperandOfDynamicOrUserDefinedLogicalOperator(
                 IFlowCaptureReferenceOperation reference
-            ) {
+            )
+            {
                 if (reference.Parent is IBinaryOperation binOp)
                 {
                     if (
@@ -1201,7 +1245,8 @@ namespace Microsoft.CodeAnalysis.Test.Utilities
                                 )
                             )
                         )
-                    ) {
+                    )
+                    {
                         if (reference.Language == LanguageNames.CSharp)
                         {
                             if (
@@ -1218,7 +1263,8 @@ namespace Microsoft.CodeAnalysis.Test.Utilities
                                     == applyParenthesizedOrNullSuppressionIfAnyCS(
                                         (CSharpSyntaxNode)binOp.RightOperand.Syntax
                                     )
-                            ) {
+                            )
+                            {
                                 return true;
                             }
                         }
@@ -1239,7 +1285,8 @@ namespace Microsoft.CodeAnalysis.Test.Utilities
                                     == applyParenthesizedIfAnyVB(
                                         (VisualBasicSyntaxNode)binOp.RightOperand.Syntax
                                     )
-                            ) {
+                            )
+                            {
                                 return true;
                             }
                             else if (
@@ -1250,7 +1297,8 @@ namespace Microsoft.CodeAnalysis.Test.Utilities
                                     == applyParenthesizedIfAnyVB(
                                         (VisualBasicSyntaxNode)binOp.RightOperand.Syntax
                                     )
-                            ) {
+                            )
+                            {
                                 return true;
                             }
                             else if (
@@ -1266,7 +1314,8 @@ namespace Microsoft.CodeAnalysis.Test.Utilities
                                         (VisualBasicSyntaxNode)binOp.RightOperand.Syntax
                                     ) as CaseClauseSyntax
                                 )
-                            ) {
+                            )
+                            {
                                 return true;
                             }
                         }
@@ -1278,7 +1327,8 @@ namespace Microsoft.CodeAnalysis.Test.Utilities
 
             bool isIncrementedNullableForToLoopControlVariable(
                 IFlowCaptureReferenceOperation reference
-            ) {
+            )
+            {
                 if (
                     reference.Parent is ISimpleAssignmentOperation assignment
                     && assignment.IsImplicit
@@ -1288,7 +1338,8 @@ namespace Microsoft.CodeAnalysis.Test.Utilities
                     && assignment.Syntax == forStmt.ControlVariable
                     && reference.Syntax == assignment.Syntax
                     && assignment.Value.Syntax == forStmt.StepClause.StepValue
-                ) {
+                )
+                {
                     return true;
                 }
 
@@ -1298,7 +1349,8 @@ namespace Microsoft.CodeAnalysis.Test.Utilities
             bool isLongLivedCaptureReference(
                 IFlowCaptureReferenceOperation reference,
                 ControlFlowRegion region
-            ) {
+            )
+            {
                 if (isLongLivedCaptureReferenceSyntax(reference.Syntax))
                 {
                     return true;
@@ -1329,14 +1381,16 @@ namespace Microsoft.CodeAnalysis.Test.Utilities
                 ControlFlowRegion region,
                 BasicBlock block,
                 CaptureId id
-            ) {
+            )
+            {
                 SyntaxNode whenNotNull = null;
 
                 if (
                     operation.Parent == null
                     && operation is IsNullOperation isNull
                     && isNull.Operand.Kind == OperationKind.FlowCaptureReference
-                ) {
+                )
+                {
                     switch (isNull.Operand.Language)
                     {
                         case LanguageNames.CSharp:
@@ -1350,7 +1404,8 @@ namespace Microsoft.CodeAnalysis.Test.Utilities
                                     syntax.Parent
                                         is CSharp.Syntax.ConditionalAccessExpressionSyntax access
                                     && access.Expression == syntax
-                                ) {
+                                )
+                                {
                                     whenNotNull = access.WhenNotNull;
                                 }
                             }
@@ -1366,7 +1421,8 @@ namespace Microsoft.CodeAnalysis.Test.Utilities
                                     syntax.Parent
                                         is VisualBasic.Syntax.ConditionalAccessExpressionSyntax access
                                     && access.Expression == syntax
-                                ) {
+                                )
+                                {
                                     whenNotNull = access.WhenNotNull;
                                 }
                             }
@@ -1384,7 +1440,8 @@ namespace Microsoft.CodeAnalysis.Test.Utilities
                         region,
                         region.LastBlockOrdinal
                     )
-                ) {
+                )
+                {
                     if (candidate.Id.Equals(id))
                     {
                         if (whenNotNull.Contains(candidate.Syntax))
@@ -1414,7 +1471,8 @@ namespace Microsoft.CodeAnalysis.Test.Utilities
                                         (
                                             (CSharp.Syntax.BaseObjectCreationExpressionSyntax)syntax
                                         ).Initializer?.Expressions.Any() == true
-                                    ) {
+                                    )
+                                    {
                                         return true;
                                     }
                                     break;
@@ -1426,7 +1484,8 @@ namespace Microsoft.CodeAnalysis.Test.Utilities
                                 syntax.Parent?.Parent
                                     is CSharp.Syntax.UsingStatementSyntax usingStmt
                                 && usingStmt.Declaration == syntax.Parent
-                            ) {
+                            )
+                            {
                                 return true;
                             }
 
@@ -1460,7 +1519,8 @@ namespace Microsoft.CodeAnalysis.Test.Utilities
                                             || assignment.Right.Kind()
                                                 == CSharp.SyntaxKind.ObjectInitializerExpression
                                         )
-                                    ) {
+                                    )
+                                    {
                                         return true;
                                     }
                                     break;
@@ -1477,7 +1537,8 @@ namespace Microsoft.CodeAnalysis.Test.Utilities
                                         (
                                             (CSharp.Syntax.UsingStatementSyntax)syntax.Parent
                                         ).Expression == syntax
-                                    ) {
+                                    )
+                                    {
                                         return true;
                                     }
                                     break;
@@ -1487,7 +1548,8 @@ namespace Microsoft.CodeAnalysis.Test.Utilities
                                         (
                                             (CSharp.Syntax.SwitchStatementSyntax)syntax.Parent
                                         ).Expression == syntax
-                                    ) {
+                                    )
+                                    {
                                         return true;
                                     }
                                     break;
@@ -1497,7 +1559,8 @@ namespace Microsoft.CodeAnalysis.Test.Utilities
                                         (
                                             (CSharp.Syntax.SwitchExpressionSyntax)syntax.Parent
                                         ).GoverningExpression == syntax
-                                    ) {
+                                    )
+                                    {
                                         return true;
                                     }
                                     break;
@@ -1539,7 +1602,8 @@ namespace Microsoft.CodeAnalysis.Test.Utilities
                                                 is VisualBasic.Syntax.ObjectCollectionInitializerSyntax collectionInit
                                             && collectionInit.Initializer.Initializers.Any()
                                         )
-                                    ) {
+                                    )
+                                    {
                                         return true;
                                     }
                                     break;
@@ -1553,7 +1617,8 @@ namespace Microsoft.CodeAnalysis.Test.Utilities
                                         (
                                             (VisualBasic.Syntax.ForEachStatementSyntax)parent
                                         ).Expression == syntax
-                                    ) {
+                                    )
+                                    {
                                         return true;
                                     }
                                     break;
@@ -1562,7 +1627,8 @@ namespace Microsoft.CodeAnalysis.Test.Utilities
                                     if (
                                         ((VisualBasic.Syntax.ForStatementSyntax)parent).ToValue
                                         == syntax
-                                    ) {
+                                    )
+                                    {
                                         return true;
                                     }
                                     break;
@@ -1579,7 +1645,8 @@ namespace Microsoft.CodeAnalysis.Test.Utilities
                                         (
                                             (VisualBasic.Syntax.SyncLockStatementSyntax)parent
                                         ).Expression == syntax
-                                    ) {
+                                    )
+                                    {
                                         return true;
                                     }
                                     break;
@@ -1588,7 +1655,8 @@ namespace Microsoft.CodeAnalysis.Test.Utilities
                                     if (
                                         ((VisualBasic.Syntax.UsingStatementSyntax)parent).Expression
                                         == syntax
-                                    ) {
+                                    )
+                                    {
                                         return true;
                                     }
                                     break;
@@ -1597,7 +1665,8 @@ namespace Microsoft.CodeAnalysis.Test.Utilities
                                     if (
                                         ((VisualBasic.Syntax.WithStatementSyntax)parent).Expression
                                         == syntax
-                                    ) {
+                                    )
+                                    {
                                         return true;
                                     }
                                     break;
@@ -1607,7 +1676,8 @@ namespace Microsoft.CodeAnalysis.Test.Utilities
                                         (
                                             (VisualBasic.Syntax.SelectStatementSyntax)parent
                                         ).Expression == syntax
-                                    ) {
+                                    )
+                                    {
                                         return true;
                                     }
                                     break;
@@ -1628,7 +1698,8 @@ namespace Microsoft.CodeAnalysis.Test.Utilities
                             {
                                 OperatorToken: { RawKind: (int)CSharp.SyntaxKind.ExclamationToken }
                             }
-                ) {
+                )
+                {
                     syntax = syntax.Parent;
                 }
 
@@ -1648,7 +1719,8 @@ namespace Microsoft.CodeAnalysis.Test.Utilities
             IEnumerable<IFlowCaptureOperation> getFlowCaptureOperationsFromBlocksInRegion(
                 ControlFlowRegion region,
                 int lastBlockOrdinal
-            ) {
+            )
+            {
                 Debug.Assert(lastBlockOrdinal <= region.LastBlockOrdinal);
                 for (int i = lastBlockOrdinal; i >= region.FirstBlockOrdinal; i--)
                 {
@@ -1665,7 +1737,8 @@ namespace Microsoft.CodeAnalysis.Test.Utilities
             IEnumerable<IFlowCaptureReferenceOperation> getFlowCaptureReferenceOperationsInRegion(
                 ControlFlowRegion region,
                 int firstBlockOrdinal
-            ) {
+            )
+            {
                 Debug.Assert(firstBlockOrdinal >= region.FirstBlockOrdinal);
                 for (int i = firstBlockOrdinal; i <= region.LastBlockOrdinal; i++)
                 {
@@ -1675,7 +1748,8 @@ namespace Microsoft.CodeAnalysis.Test.Utilities
                         foreach (
                             IFlowCaptureReferenceOperation reference in operation.DescendantsAndSelf()
                                 .OfType<IFlowCaptureReferenceOperation>()
-                        ) {
+                        )
+                        {
                             yield return reference;
                         }
                     }
@@ -1685,7 +1759,8 @@ namespace Microsoft.CodeAnalysis.Test.Utilities
                         foreach (
                             IFlowCaptureReferenceOperation reference in block.BranchValue.DescendantsAndSelf()
                                 .OfType<IFlowCaptureReferenceOperation>()
-                        ) {
+                        )
+                        {
                             yield return reference;
                         }
                     }
@@ -2057,7 +2132,8 @@ namespace Microsoft.CodeAnalysis.Test.Utilities
                 while (
                     (referencedCaptureIds.Count != 0 || referencedLocalsAndMethods.Count != 0)
                     && region != null
-                ) {
+                )
+                {
                     foreach (ILocalSymbol l in region.Locals)
                     {
                         referencedLocalsAndMethods.Remove(l);
@@ -2109,7 +2185,8 @@ namespace Microsoft.CodeAnalysis.Test.Utilities
                                     localReference.Local.ContainingSymbol,
                                     associatedSymbol
                                 )
-                            ) {
+                            )
+                            {
                                 // Top-level locals can be referenced from locations in the same file that are not actually the top
                                 // level main. For these cases, we want to treat them like fields for the purposes of references,
                                 // as they are not declared in this method and have no owning region
@@ -2128,7 +2205,8 @@ namespace Microsoft.CodeAnalysis.Test.Utilities
                                         method.ContainingSymbol,
                                         associatedSymbol
                                     )
-                                ) {
+                                )
+                                {
                                     // Top-level local functions can be referenced from locations in the same file that are not actually the top
                                     // level main. For these cases, we want to treat them like class methods for the purposes of references,
                                     // as they are not declared in this method and have no owning region
@@ -2145,7 +2223,8 @@ namespace Microsoft.CodeAnalysis.Test.Utilities
                                 if (
                                     method.ContainingSymbol.IsTopLevelMainMethod()
                                     && !associatedSymbol.IsTopLevelMainMethod()
-                                ) {
+                                )
+                                {
                                     // Top-level local functions can be referenced from locations in the same file that are not actually the top
                                     // level main. For these cases, we want to treat them like class methods for the purposes of references,
                                     // as they are not declared in this method and have no owning region
@@ -2211,7 +2290,8 @@ namespace Microsoft.CodeAnalysis.Test.Utilities
             [DoesNotReturnIf(false)] bool value,
             string message,
             Func<string> finalGraph
-        ) {
+        )
+        {
             if (!value)
             {
                 Assert.True(value, $"{message}\n{finalGraph()}");
@@ -2251,7 +2331,8 @@ namespace Microsoft.CodeAnalysis.Test.Utilities
 
             public override void VisitFlowAnonymousFunction(
                 IFlowAnonymousFunctionOperation operation
-            ) {
+            )
+            {
                 base.VisitFlowAnonymousFunction(operation);
 
                 LogString("{");

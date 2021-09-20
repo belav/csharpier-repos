@@ -27,7 +27,8 @@ namespace Microsoft.CSharp.RuntimeBinder
             DynamicMetaObject[] args,
             IEnumerable<CSharpArgumentInfo> arginfos,
             DynamicMetaObject onBindingError
-        ) {
+        )
+        {
             Expression[] parameters = new Expression[args.Length];
             BindingRestrictions restrictions = BindingRestrictions.Empty;
             ICSharpInvokeOrInvokeMemberBinder callPayload =
@@ -202,7 +203,8 @@ namespace Microsoft.CSharp.RuntimeBinder
         private static bool IsTypeOfStaticCall(
             int parameterIndex,
             ICSharpInvokeOrInvokeMemberBinder callPayload
-        ) {
+        )
+        {
             return parameterIndex == 0 && callPayload != null && callPayload.StaticCall;
         }
 
@@ -218,7 +220,8 @@ namespace Microsoft.CSharp.RuntimeBinder
         private static bool IsDynamicallyTypedRuntimeProxy(
             DynamicMetaObject argument,
             CSharpArgumentInfo info
-        ) {
+        )
+        {
             // This detects situations where, although the argument has a value with
             // a given type, that type is insufficient to determine, statically, the
             // set of reference conversions that are going to exist at bind time for
@@ -238,7 +241,8 @@ namespace Microsoft.CSharp.RuntimeBinder
             ICSharpInvokeOrInvokeMemberBinder callPayload,
             DynamicMetaObject argument,
             CSharpArgumentInfo info
-        ) {
+        )
+        {
             // Here we deduce what predicates the DLR can apply to future calls in order to
             // determine whether to use the previously-computed-and-cached delegate, or
             // whether we need to bind the site again. Ideally we would like the
@@ -315,7 +319,8 @@ namespace Microsoft.CSharp.RuntimeBinder
         private static Type GetTypeForErrorMetaObject(
             ICSharpBinder action,
             DynamicMetaObject[] args
-        ) {
+        )
+        {
             // This is similar to ConvertResult but has fewer things to worry about.
 
             if (action is CSharpInvokeConstructorBinder)
@@ -377,7 +382,8 @@ namespace Microsoft.CSharp.RuntimeBinder
         internal static CallInfo CreateCallInfo(
             ref IEnumerable<CSharpArgumentInfo> argInfos,
             int discard
-        ) {
+        )
+        {
             // This function converts the C# Binder's notion of argument information to the
             // DLR's notion. The DLR counts arguments differently than C#. Here are some
             // examples:
@@ -462,7 +468,8 @@ namespace Microsoft.CSharp.RuntimeBinder
             int hash,
             Type[] typeArguments,
             CSharpArgumentInfo[] argInfos
-        ) {
+        )
+        {
             foreach (var typeArg in typeArguments)
             {
                 hash = HashHelpers.Combine(hash, typeArg.GetHashCode());
@@ -491,7 +498,8 @@ namespace Microsoft.CSharp.RuntimeBinder
             Type[] otherTypeArgs,
             CSharpArgumentInfo[] argInfos,
             CSharpArgumentInfo[] otherArgInfos
-        ) {
+        )
+        {
             for (int i = 0; i < typeArgs.Length; i++)
             {
                 if (typeArgs[i] != otherTypeArgs[i])
@@ -506,7 +514,8 @@ namespace Microsoft.CSharp.RuntimeBinder
         internal static bool CompareArgInfos(
             CSharpArgumentInfo[] argInfos,
             CSharpArgumentInfo[] otherArgInfos
-        ) {
+        )
+        {
             for (int i = 0; i < argInfos.Length; i++)
             {
                 var argInfo = argInfos[i];

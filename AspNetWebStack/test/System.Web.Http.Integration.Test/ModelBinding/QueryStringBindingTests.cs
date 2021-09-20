@@ -30,7 +30,8 @@ namespace System.Web.Http.ModelBinding
             string action,
             string queryString,
             string expectedResponse
-        ) {
+        )
+        {
             // Arrange
             HttpRequestMessage request = new HttpRequestMessage()
             {
@@ -60,7 +61,8 @@ namespace System.Web.Http.ModelBinding
             string action,
             string queryString,
             string expectedResponse
-        ) {
+        )
+        {
             // Arrange
             HttpRequestMessage request = new HttpRequestMessage()
             {
@@ -92,7 +94,8 @@ namespace System.Web.Http.ModelBinding
             string itemName,
             int quantity,
             string customerName
-        ) {
+        )
+        {
             // Arrange
             HttpRequestMessage request = new HttpRequestMessage()
             {
@@ -131,7 +134,8 @@ namespace System.Web.Http.ModelBinding
             string itemName,
             int quantity,
             string customerName
-        ) {
+        )
+        {
             // Arrange
             HttpRequestMessage request = new HttpRequestMessage()
             {
@@ -165,7 +169,8 @@ namespace System.Web.Http.ModelBinding
             string action,
             string queryString,
             int[] expectedValues
-        ) {
+        )
+        {
             // Arrange
             HttpRequestMessage request = new HttpRequestMessage()
             {

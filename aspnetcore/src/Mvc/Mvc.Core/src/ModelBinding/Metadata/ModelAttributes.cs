@@ -45,7 +45,8 @@ namespace Microsoft.AspNetCore.Mvc.ModelBinding
             IEnumerable<object> typeAttributes,
             IEnumerable<object>? propertyAttributes,
             IEnumerable<object>? parameterAttributes
-        ) {
+        )
+        {
             if (propertyAttributes != null)
             {
                 // Represents a property
@@ -138,7 +139,8 @@ namespace Microsoft.AspNetCore.Mvc.ModelBinding
             Type containerType,
             PropertyInfo property,
             Type modelType
-        ) {
+        )
+        {
             if (containerType == null)
             {
                 throw new ArgumentNullException(nameof(containerType));
@@ -236,7 +238,8 @@ namespace Microsoft.AspNetCore.Mvc.ModelBinding
         public static ModelAttributes GetAttributesForParameter(
             ParameterInfo parameterInfo,
             Type modelType
-        ) {
+        )
+        {
             if (parameterInfo == null)
             {
                 throw new ArgumentNullException(nameof(parameterInfo));

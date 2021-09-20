@@ -16,7 +16,8 @@ namespace Microsoft.AspNetCore.Razor.Language.Legacy
             RazorSyntaxTree syntaxTree,
             string tagHelperPrefix,
             IEnumerable<TagHelperDescriptor> descriptors
-        ) {
+        )
+        {
             var errorSink = new ErrorSink();
 
             var rewriter = new Rewriter(
@@ -48,7 +49,8 @@ namespace Microsoft.AspNetCore.Razor.Language.Legacy
         private static IReadOnlyList<RazorDiagnostic> CombineErrors(
             IReadOnlyList<RazorDiagnostic> errors1,
             IReadOnlyList<RazorDiagnostic> errors2
-        ) {
+        )
+        {
             var combinedErrors = new List<RazorDiagnostic>(errors1.Count + errors2.Count);
             combinedErrors.AddRange(errors1);
             combinedErrors.AddRange(errors2);
@@ -78,7 +80,8 @@ namespace Microsoft.AspNetCore.Razor.Language.Legacy
                 IEnumerable<TagHelperDescriptor> descriptors,
                 RazorParserFeatureFlags featureFlags,
                 ErrorSink errorSink
-            ) {
+            )
+            {
                 _source = source;
                 _tagHelperPrefix = tagHelperPrefix;
                 _tagHelperBinder = new TagHelperBinder(tagHelperPrefix, descriptors);
@@ -125,12 +128,14 @@ namespace Microsoft.AspNetCore.Razor.Language.Legacy
                             out tagHelperStart,
                             out tagHelperInfo
                         )
-                    ) {
+                    )
+                    {
                         // This is a tag helper.
                         if (
                             tagHelperInfo.TagMode == TagMode.SelfClosing
                             || tagHelperInfo.TagMode == TagMode.StartTagOnly
-                        ) {
+                        )
+                        {
                             var tagHelperElement = SyntaxFactory.MarkupTagHelperElement(
                                 tagHelperStart,
                                 body: new SyntaxList<RazorSyntaxNode>(),
@@ -187,7 +192,8 @@ namespace Microsoft.AspNetCore.Razor.Language.Legacy
                         if (
                             node.EndTag != null
                             || (!startTag.IsSelfClosing() && !startTag.IsVoidElement())
-                        ) {
+                        )
+                        {
                             // Ideally we don't want to keep track of self-closing or void tags.
                             // But if a matching end tag exists, keep track of the start tag no matter what.
                             // We will just assume the parser had a good reason to do this.
@@ -277,7 +283,8 @@ namespace Microsoft.AspNetCore.Razor.Language.Legacy
                 MarkupEndTagSyntax endTag,
                 out MarkupTagHelperStartTagSyntax rewritten,
                 out TagHelperInfo tagHelperInfo
-            ) {
+            )
+            {
                 rewritten = null;
                 tagHelperInfo = null;
 
@@ -288,7 +295,8 @@ namespace Microsoft.AspNetCore.Razor.Language.Legacy
                 if (
                     string.IsNullOrEmpty(tagName)
                     || tagName.StartsWith("!", StringComparison.Ordinal)
-                ) {
+                )
+                {
                     return false;
                 }
 
@@ -354,14 +362,16 @@ namespace Microsoft.AspNetCore.Razor.Language.Legacy
                 MarkupStartTagSyntax startTag,
                 MarkupEndTagSyntax endTag,
                 out MarkupTagHelperEndTagSyntax rewritten
-            ) {
+            )
+            {
                 rewritten = null;
                 var tagName = endTag.GetTagNameWithOptionalBang();
                 // Could not determine tag name, it can't be a TagHelper, continue on and track the element.
                 if (
                     string.IsNullOrEmpty(tagName)
                     || tagName.StartsWith("!", StringComparison.Ordinal)
-                ) {
+                )
+                {
                     return false;
                 }
 
@@ -376,7 +386,8 @@ namespace Microsoft.AspNetCore.Razor.Language.Legacy
                 if (
                     startTag != null
                     && tagNameScope.Equals(tagName, StringComparison.OrdinalIgnoreCase)
-                ) {
+                )
+                {
                     // If there are additional end tags required before we can build our block it means we're in a
                     // situation like this: <myth req="..."><myth></myth></myth> where we're at the inside </myth>.
                     if (tracker.OpenMatchingTags > 0)
@@ -451,7 +462,8 @@ namespace Microsoft.AspNetCore.Razor.Language.Legacy
             // Internal for testing
             internal IReadOnlyList<KeyValuePair<string, string>> GetAttributeNameValuePairs(
                 MarkupStartTagSyntax tagBlock
-            ) {
+            )
+            {
                 if (tagBlock.Attributes.Count == 0)
                 {
                     return Array.Empty<KeyValuePair<string, string>>();
@@ -473,7 +485,8 @@ namespace Microsoft.AspNetCore.Razor.Language.Legacy
                     if (
                         tagBlock.Attributes[i]
                         is MarkupMinimizedAttributeBlockSyntax minimizedAttributeBlock
-                    ) {
+                    )
+                    {
                         if (minimizedAttributeBlock.Name == null)
                         {
                             _attributeValueBuilder.Append(InvalidAttributeValueMarker);
@@ -530,14 +543,16 @@ namespace Microsoft.AspNetCore.Razor.Language.Legacy
             private void ValidateParentAllowsTagHelper(
                 string tagName,
                 MarkupStartTagSyntax tagBlock
-            ) {
+            )
+            {
                 if (
                     HasAllowedChildren()
                     && !CurrentTagHelperTracker.PrefixedAllowedChildren.Contains(
                         tagName,
                         StringComparer.OrdinalIgnoreCase
                     )
-                ) {
+                )
+                {
                     OnAllowedChildrenStartTagError(
                         CurrentTagHelperTracker,
                         tagName,
@@ -552,7 +567,8 @@ namespace Microsoft.AspNetCore.Razor.Language.Legacy
                 TagHelperBinding bindingResult,
                 string tagName,
                 MarkupStartTagSyntax tagBlock
-            ) {
+            )
+            {
                 // Ensure that all descriptors associated with this tag have appropriate TagStructures. Cannot have
                 // multiple descriptors that expect different TagStructures (other than TagStructure.Unspecified).
                 TagHelperDescriptor baseDescriptor = null;
@@ -826,7 +842,8 @@ namespace Microsoft.AspNetCore.Razor.Language.Legacy
                 MarkupStartTagSyntax tagBlock,
                 ErrorSink errorSink,
                 RazorSourceDocument source
-            ) {
+            )
+            {
                 var allowedChildrenString = string.Join(", ", tracker.AllowedChildren);
                 var errorStart = GetStartTagDeclarationErrorStart(tagBlock, source);
 
@@ -846,7 +863,8 @@ namespace Microsoft.AspNetCore.Razor.Language.Legacy
                 MarkupEndTagSyntax tagBlock,
                 ErrorSink errorSink,
                 RazorSourceDocument source
-            ) {
+            )
+            {
                 var allowedChildrenString = string.Join(", ", tracker.AllowedChildren);
                 var errorStart = GetEndTagDeclarationErrorStart(tagBlock, source);
 
@@ -863,14 +881,16 @@ namespace Microsoft.AspNetCore.Razor.Language.Legacy
             private static SourceLocation GetStartTagDeclarationErrorStart(
                 MarkupStartTagSyntax tagBlock,
                 RazorSourceDocument source
-            ) {
+            )
+            {
                 return SourceLocationTracker.Advance(tagBlock.GetSourceLocation(source), "<");
             }
 
             private static SourceLocation GetEndTagDeclarationErrorStart(
                 MarkupEndTagSyntax tagBlock,
                 RazorSourceDocument source
-            ) {
+            )
+            {
                 return SourceLocationTracker.Advance(tagBlock.GetSourceLocation(source), "</");
             }
 
@@ -902,7 +922,8 @@ namespace Microsoft.AspNetCore.Razor.Language.Legacy
                         Info.BindingResult.Descriptors.Any(
                             descriptor => descriptor.AllowedChildTags != null
                         )
-                    ) {
+                    )
+                    {
                         AllowedChildren = Info.BindingResult.Descriptors.Where(
                                 descriptor => descriptor.AllowedChildTags != null
                             )

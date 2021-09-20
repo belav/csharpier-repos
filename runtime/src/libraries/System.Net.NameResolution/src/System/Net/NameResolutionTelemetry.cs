@@ -141,7 +141,8 @@ namespace System.Net
         private static Span<char> FormatIPAddressNullTerminated(
             IPAddress address,
             Span<char> destination
-        ) {
+        )
+        {
             Debug.Assert(address != null);
 
             bool success = address.TryFormat(destination, out int charsWritten);

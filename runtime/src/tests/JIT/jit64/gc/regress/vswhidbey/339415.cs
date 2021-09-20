@@ -7151,7 +7151,8 @@ class TEST
         int i7,
         int i8,
         object o
-    ) {
+    )
+    {
         try
         {
             System.Console.WriteLine(o);
@@ -7177,7 +7178,8 @@ class TEST
         int i8,
         int i9,
         object o
-    ) {
+    )
+    {
         try
         {
             System.Console.WriteLine(o);
@@ -7207,7 +7209,8 @@ class TEST
         int i13,
         int i14,
         object o
-    ) {
+    )
+    {
         try
         {
             System.Console.WriteLine(o);
@@ -7242,7 +7245,8 @@ class TEST
         int i18,
         int i19,
         object o
-    ) {
+    )
+    {
         try
         {
             System.Console.WriteLine(o);
@@ -7282,7 +7286,8 @@ class TEST
         int i23,
         int i24,
         object o
-    ) {
+    )
+    {
         try
         {
             System.Console.WriteLine(o);
@@ -7327,7 +7332,8 @@ class TEST
         int i28,
         int i29,
         object o
-    ) {
+    )
+    {
         try
         {
             System.Console.WriteLine(o);
@@ -7377,7 +7383,8 @@ class TEST
         int i33,
         int i34,
         object o
-    ) {
+    )
+    {
         try
         {
             System.Console.WriteLine(o);
@@ -7432,7 +7439,8 @@ class TEST
         int i38,
         int i39,
         object o
-    ) {
+    )
+    {
         try
         {
             System.Console.WriteLine(o);
@@ -7492,7 +7500,8 @@ class TEST
         int i43,
         int i44,
         object o
-    ) {
+    )
+    {
         try
         {
             System.Console.WriteLine(o);
@@ -7557,7 +7566,8 @@ class TEST
         int i48,
         int i49,
         object o
-    ) {
+    )
+    {
         try
         {
             System.Console.WriteLine(o);
@@ -7627,7 +7637,8 @@ class TEST
         int i53,
         int i54,
         object o
-    ) {
+    )
+    {
         try
         {
             System.Console.WriteLine(o);
@@ -7702,7 +7713,8 @@ class TEST
         int i58,
         int i59,
         object o
-    ) {
+    )
+    {
         try
         {
             System.Console.WriteLine(o);
@@ -7782,7 +7794,8 @@ class TEST
         int i63,
         int i64,
         object o
-    ) {
+    )
+    {
         try
         {
             System.Console.WriteLine(o);
@@ -7867,7 +7880,8 @@ class TEST
         int i68,
         int i69,
         object o
-    ) {
+    )
+    {
         try
         {
             System.Console.WriteLine(o);
@@ -7957,7 +7971,8 @@ class TEST
         int i73,
         int i74,
         object o
-    ) {
+    )
+    {
         try
         {
             System.Console.WriteLine(o);
@@ -8052,7 +8067,8 @@ class TEST
         int i78,
         int i79,
         object o
-    ) {
+    )
+    {
         try
         {
             System.Console.WriteLine(o);
@@ -8152,7 +8168,8 @@ class TEST
         int i83,
         int i84,
         object o
-    ) {
+    )
+    {
         try
         {
             System.Console.WriteLine(o);
@@ -8257,7 +8274,8 @@ class TEST
         int i88,
         int i89,
         object o
-    ) {
+    )
+    {
         try
         {
             System.Console.WriteLine(o);
@@ -8367,7 +8385,8 @@ class TEST
         int i93,
         int i94,
         object o
-    ) {
+    )
+    {
         try
         {
             System.Console.WriteLine(o);
@@ -8482,7 +8501,8 @@ class TEST
         int i98,
         int i99,
         object o
-    ) {
+    )
+    {
         try
         {
             System.Console.WriteLine(o);
@@ -8602,7 +8622,8 @@ class TEST
         int i103,
         int i104,
         object o
-    ) {
+    )
+    {
         try
         {
             System.Console.WriteLine(o);
@@ -8727,7 +8748,8 @@ class TEST
         int i108,
         int i109,
         object o
-    ) {
+    )
+    {
         try
         {
             System.Console.WriteLine(o);
@@ -8857,7 +8879,8 @@ class TEST
         int i113,
         int i114,
         object o
-    ) {
+    )
+    {
         try
         {
             System.Console.WriteLine(o);
@@ -8992,7 +9015,8 @@ class TEST
         int i118,
         int i119,
         object o
-    ) {
+    )
+    {
         try
         {
             System.Console.WriteLine(o);
@@ -9132,7 +9156,8 @@ class TEST
         int i123,
         int i124,
         object o
-    ) {
+    )
+    {
         try
         {
             System.Console.WriteLine(o);
@@ -9277,7 +9302,8 @@ class TEST
         int i128,
         int i129,
         object o
-    ) {
+    )
+    {
         try
         {
             System.Console.WriteLine(o);
@@ -9427,7 +9453,8 @@ class TEST
         int i133,
         int i134,
         object o
-    ) {
+    )
+    {
         try
         {
             System.Console.WriteLine(o);
@@ -9582,7 +9609,8 @@ class TEST
         int i138,
         int i139,
         object o
-    ) {
+    )
+    {
         try
         {
             System.Console.WriteLine(o);
@@ -9742,7 +9770,8 @@ class TEST
         int i143,
         int i144,
         object o
-    ) {
+    )
+    {
         try
         {
             System.Console.WriteLine(o);
@@ -9907,7 +9936,8 @@ class TEST
         int i148,
         int i149,
         object o
-    ) {
+    )
+    {
         try
         {
             System.Console.WriteLine(o);
@@ -10077,7 +10107,8 @@ class TEST
         int i153,
         int i154,
         object o
-    ) {
+    )
+    {
         try
         {
             System.Console.WriteLine(o);
@@ -10252,7 +10283,8 @@ class TEST
         int i158,
         int i159,
         object o
-    ) {
+    )
+    {
         try
         {
             System.Console.WriteLine(o);
@@ -10432,7 +10464,8 @@ class TEST
         int i163,
         int i164,
         object o
-    ) {
+    )
+    {
         try
         {
             System.Console.WriteLine(o);
@@ -10617,7 +10650,8 @@ class TEST
         int i168,
         int i169,
         object o
-    ) {
+    )
+    {
         try
         {
             System.Console.WriteLine(o);
@@ -10807,7 +10841,8 @@ class TEST
         int i173,
         int i174,
         object o
-    ) {
+    )
+    {
         try
         {
             System.Console.WriteLine(o);
@@ -11002,7 +11037,8 @@ class TEST
         int i178,
         int i179,
         object o
-    ) {
+    )
+    {
         try
         {
             System.Console.WriteLine(o);
@@ -11202,7 +11238,8 @@ class TEST
         int i183,
         int i184,
         object o
-    ) {
+    )
+    {
         try
         {
             System.Console.WriteLine(o);
@@ -11407,7 +11444,8 @@ class TEST
         int i188,
         int i189,
         object o
-    ) {
+    )
+    {
         try
         {
             System.Console.WriteLine(o);
@@ -11617,7 +11655,8 @@ class TEST
         int i193,
         int i194,
         object o
-    ) {
+    )
+    {
         try
         {
             System.Console.WriteLine(o);
@@ -11832,7 +11871,8 @@ class TEST
         int i198,
         int i199,
         object o
-    ) {
+    )
+    {
         try
         {
             System.Console.WriteLine(o);
@@ -12052,7 +12092,8 @@ class TEST
         int i203,
         int i204,
         object o
-    ) {
+    )
+    {
         try
         {
             System.Console.WriteLine(o);
@@ -12277,7 +12318,8 @@ class TEST
         int i208,
         int i209,
         object o
-    ) {
+    )
+    {
         try
         {
             System.Console.WriteLine(o);
@@ -12507,7 +12549,8 @@ class TEST
         int i213,
         int i214,
         object o
-    ) {
+    )
+    {
         try
         {
             System.Console.WriteLine(o);
@@ -12742,7 +12785,8 @@ class TEST
         int i218,
         int i219,
         object o
-    ) {
+    )
+    {
         try
         {
             System.Console.WriteLine(o);
@@ -12982,7 +13026,8 @@ class TEST
         int i223,
         int i224,
         object o
-    ) {
+    )
+    {
         try
         {
             System.Console.WriteLine(o);
@@ -13227,7 +13272,8 @@ class TEST
         int i228,
         int i229,
         object o
-    ) {
+    )
+    {
         try
         {
             System.Console.WriteLine(o);
@@ -13477,7 +13523,8 @@ class TEST
         int i233,
         int i234,
         object o
-    ) {
+    )
+    {
         try
         {
             System.Console.WriteLine(o);
@@ -13732,7 +13779,8 @@ class TEST
         int i238,
         int i239,
         object o
-    ) {
+    )
+    {
         try
         {
             System.Console.WriteLine(o);
@@ -13992,7 +14040,8 @@ class TEST
         int i243,
         int i244,
         object o
-    ) {
+    )
+    {
         try
         {
             System.Console.WriteLine(o);
@@ -14257,7 +14306,8 @@ class TEST
         int i248,
         int i249,
         object o
-    ) {
+    )
+    {
         try
         {
             System.Console.WriteLine(o);
@@ -14527,7 +14577,8 @@ class TEST
         int i253,
         int i254,
         object o
-    ) {
+    )
+    {
         try
         {
             System.Console.WriteLine(o);
@@ -14802,7 +14853,8 @@ class TEST
         int i258,
         int i259,
         object o
-    ) {
+    )
+    {
         try
         {
             System.Console.WriteLine(o);

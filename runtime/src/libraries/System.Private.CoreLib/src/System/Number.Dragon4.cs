@@ -15,7 +15,8 @@ namespace System
             int cutoffNumber,
             bool isSignificantDigits,
             ref NumberBuffer number
-        ) {
+        )
+        {
             double v = double.IsNegative(value) ? -value : value;
 
             Debug.Assert(v > 0);
@@ -60,7 +61,8 @@ namespace System
             int cutoffNumber,
             bool isSignificantDigits,
             ref NumberBuffer number
-        ) {
+        )
+        {
             Half v = Half.IsNegative(value) ? Half.Negate(value) : value;
 
             Debug.Assert((double)v > 0.0);
@@ -105,7 +107,8 @@ namespace System
             int cutoffNumber,
             bool isSignificantDigits,
             ref NumberBuffer number
-        ) {
+        )
+        {
             float v = float.IsNegative(value) ? -value : value;
 
             Debug.Assert(v > 0);
@@ -166,7 +169,8 @@ namespace System
             bool isSignificantDigits,
             Span<byte> buffer,
             out int decimalExponent
-        ) {
+        )
+        {
             int curDigit = 0;
 
             Debug.Assert(buffer.Length > 0);

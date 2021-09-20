@@ -23,7 +23,8 @@ namespace System.Xml.Tests
             int iIndex,
             int iCount,
             Type exceptionType
-        ) {
+        )
+        {
             bool bPassed = false;
             char[] buffer = new char[iBufferSize];
 

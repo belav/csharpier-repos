@@ -474,7 +474,8 @@ namespace N
             }
             if (
                 !CrossTry(trueHead, 8, 4) || CrossTry(falseHead, 8, 4) || !CrossTry(faultHead, 8, 4)
-            ) {
+            )
+            {
                 ++result;
             }
 
@@ -504,7 +505,8 @@ namespace N
                 || InnerInfiniteLoop(16, -5, 2, 4)
                 || InnerInfiniteLoop(23, 7, 6, 5)
                 || !InnerInfiniteLoop(1, 0, 11, 22)
-            ) {
+            )
+            {
                 ++result;
             }
 

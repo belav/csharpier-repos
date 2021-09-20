@@ -11,7 +11,8 @@ namespace System.Web.Mvc
         public override IEnumerable<ModelValidator> GetValidators(
             ModelMetadata metadata,
             ControllerContext context
-        ) {
+        )
+        {
             return Enumerable.Empty<ModelValidator>();
         }
     }

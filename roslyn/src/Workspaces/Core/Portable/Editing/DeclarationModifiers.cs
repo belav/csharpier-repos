@@ -37,24 +37,25 @@ namespace Microsoft.CodeAnalysis.Editing
             bool isRef = false,
             bool isVolatile = false,
             bool isExtern = false
-        ) : this(
-            (isStatic ? Modifiers.Static : Modifiers.None)
-                | (isAbstract ? Modifiers.Abstract : Modifiers.None)
-                | (isNew ? Modifiers.New : Modifiers.None)
-                | (isUnsafe ? Modifiers.Unsafe : Modifiers.None)
-                | (isReadOnly ? Modifiers.ReadOnly : Modifiers.None)
-                | (isVirtual ? Modifiers.Virtual : Modifiers.None)
-                | (isOverride ? Modifiers.Override : Modifiers.None)
-                | (isSealed ? Modifiers.Sealed : Modifiers.None)
-                | (isConst ? Modifiers.Const : Modifiers.None)
-                | (isWithEvents ? Modifiers.WithEvents : Modifiers.None)
-                | (isPartial ? Modifiers.Partial : Modifiers.None)
-                | (isAsync ? Modifiers.Async : Modifiers.None)
-                | (isWriteOnly ? Modifiers.WriteOnly : Modifiers.None)
-                | (isRef ? Modifiers.Ref : Modifiers.None)
-                | (isVolatile ? Modifiers.Volatile : Modifiers.None)
-                | (isExtern ? Modifiers.Extern : Modifiers.None)
-        ) { }
+        )
+            : this(
+                (isStatic ? Modifiers.Static : Modifiers.None)
+                    | (isAbstract ? Modifiers.Abstract : Modifiers.None)
+                    | (isNew ? Modifiers.New : Modifiers.None)
+                    | (isUnsafe ? Modifiers.Unsafe : Modifiers.None)
+                    | (isReadOnly ? Modifiers.ReadOnly : Modifiers.None)
+                    | (isVirtual ? Modifiers.Virtual : Modifiers.None)
+                    | (isOverride ? Modifiers.Override : Modifiers.None)
+                    | (isSealed ? Modifiers.Sealed : Modifiers.None)
+                    | (isConst ? Modifiers.Const : Modifiers.None)
+                    | (isWithEvents ? Modifiers.WithEvents : Modifiers.None)
+                    | (isPartial ? Modifiers.Partial : Modifiers.None)
+                    | (isAsync ? Modifiers.Async : Modifiers.None)
+                    | (isWriteOnly ? Modifiers.WriteOnly : Modifiers.None)
+                    | (isRef ? Modifiers.Ref : Modifiers.None)
+                    | (isVolatile ? Modifiers.Volatile : Modifiers.None)
+                    | (isExtern ? Modifiers.Extern : Modifiers.None)
+            ) { }
 
         public static DeclarationModifiers From(ISymbol symbol)
         {
@@ -64,7 +65,8 @@ namespace Microsoft.CodeAnalysis.Editing
                 || symbol is IPropertySymbol
                 || symbol is IMethodSymbol
                 || symbol is IEventSymbol
-            ) {
+            )
+            {
                 var field = symbol as IFieldSymbol;
                 var property = symbol as IPropertySymbol;
                 var method = symbol as IMethodSymbol;

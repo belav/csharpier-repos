@@ -8,13 +8,13 @@ namespace Microsoft.Extensions.DependencyInjection.ServiceLookup
 {
     internal sealed class RuntimeServiceProviderEngine : ServiceProviderEngine
     {
-        public RuntimeServiceProviderEngine(
-            IEnumerable<ServiceDescriptor> serviceDescriptors
-        ) : base(serviceDescriptors) { }
+        public RuntimeServiceProviderEngine(IEnumerable<ServiceDescriptor> serviceDescriptors)
+            : base(serviceDescriptors) { }
 
         protected override Func<ServiceProviderEngineScope, object> RealizeService(
             ServiceCallSite callSite
-        ) {
+        )
+        {
             return scope =>
             {
                 Func<ServiceProviderEngineScope, object> realizedService = p =>

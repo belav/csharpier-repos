@@ -51,7 +51,8 @@ namespace Microsoft.CodeAnalysis.Remote
             public SolutionId? Deserialize(
                 ref MessagePackReader reader,
                 MessagePackSerializerOptions options
-            ) {
+            )
+            {
                 try
                 {
                     if (reader.TryReadNil())
@@ -75,7 +76,8 @@ namespace Microsoft.CodeAnalysis.Remote
                 ref MessagePackWriter writer,
                 SolutionId? value,
                 MessagePackSerializerOptions options
-            ) {
+            )
+            {
                 try
                 {
                     if (value is null)
@@ -103,7 +105,8 @@ namespace Microsoft.CodeAnalysis.Remote
             public ProjectId? Deserialize(
                 ref MessagePackReader reader,
                 MessagePackSerializerOptions options
-            ) {
+            )
+            {
                 try
                 {
                     if (reader.TryReadNil())
@@ -127,7 +130,8 @@ namespace Microsoft.CodeAnalysis.Remote
                 ref MessagePackWriter writer,
                 ProjectId? value,
                 MessagePackSerializerOptions options
-            ) {
+            )
+            {
                 try
                 {
                     if (value is null)
@@ -155,7 +159,8 @@ namespace Microsoft.CodeAnalysis.Remote
             public DocumentId? Deserialize(
                 ref MessagePackReader reader,
                 MessagePackSerializerOptions options
-            ) {
+            )
+            {
                 try
                 {
                     if (reader.TryReadNil())
@@ -183,7 +188,8 @@ namespace Microsoft.CodeAnalysis.Remote
                 ref MessagePackWriter writer,
                 DocumentId? value,
                 MessagePackSerializerOptions options
-            ) {
+            )
+            {
                 try
                 {
                     if (value is null)

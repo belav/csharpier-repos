@@ -37,7 +37,8 @@ namespace Microsoft.Extensions.Localization
         public ResourceManagerStringLocalizerFactory(
             IOptions<LocalizationOptions> localizationOptions,
             ILoggerFactory loggerFactory
-        ) {
+        )
+        {
             if (localizationOptions == null)
             {
                 throw new ArgumentNullException(nameof(localizationOptions));
@@ -93,7 +94,8 @@ namespace Microsoft.Extensions.Localization
             TypeInfo typeInfo,
             string? baseNamespace,
             string? resourcesRelativePath
-        ) {
+        )
+        {
             if (typeInfo == null)
             {
                 throw new ArgumentNullException(nameof(typeInfo));
@@ -219,7 +221,8 @@ namespace Microsoft.Extensions.Localization
         protected virtual ResourceManagerStringLocalizer CreateResourceManagerStringLocalizer(
             Assembly assembly,
             string baseName
-        ) {
+        )
+        {
             return new ResourceManagerStringLocalizer(
                 new ResourceManager(baseName, assembly),
                 assembly,
@@ -240,7 +243,8 @@ namespace Microsoft.Extensions.Localization
             string location,
             string baseName,
             string resourceLocation
-        ) {
+        )
+        {
             // Re-root the base name if a resources path is set
             return location + "." + resourceLocation + TrimPrefix(baseName, location + ".");
         }

@@ -41,7 +41,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.GenerateType
                 INotificationService notificationService,
                 IProjectManagementService projectManagementService,
                 ISyntaxFactsService syntaxFactsService
-            ) {
+            )
+            {
                 var viewModel = new GenerateTypeDialogViewModel(
                     document,
                     notificationService,

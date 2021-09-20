@@ -39,7 +39,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.CommandHandlers
         public bool ExecuteCommand(
             GotoBraceCommandArgs args,
             VSCommanding.CommandExecutionContext executionContext
-        ) {
+        )
+        {
             var snapshot = args.SubjectBuffer.CurrentSnapshot;
             var document = snapshot.GetOpenDocumentInCurrentContextWithChanges();
 

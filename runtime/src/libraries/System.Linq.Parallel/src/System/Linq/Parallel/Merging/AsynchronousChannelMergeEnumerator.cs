@@ -211,7 +211,8 @@ namespace System.Linq.Parallel
                                         ref _currentElement,
                                         ref channelIsDone
                                     )
-                                ) {
+                                )
+                                {
                                     // The channel has received an item since the last time we checked.
                                     // Just return and let the consumer process the element returned.
                                     return true;

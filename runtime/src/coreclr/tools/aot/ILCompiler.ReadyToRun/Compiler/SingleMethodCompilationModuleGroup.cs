@@ -24,14 +24,16 @@ namespace ILCompiler
             IEnumerable<ModuleDesc> versionBubbleModuleSet,
             bool compileGenericDependenciesFromVersionBubbleModuleSet,
             MethodDesc method
-        ) : base(
-            context,
-            isCompositeBuildMode,
-            isInputBubble,
-            compilationModuleSet,
-            versionBubbleModuleSet,
-            compileGenericDependenciesFromVersionBubbleModuleSet
-        ) {
+        )
+            : base(
+                context,
+                isCompositeBuildMode,
+                isInputBubble,
+                compilationModuleSet,
+                versionBubbleModuleSet,
+                compileGenericDependenciesFromVersionBubbleModuleSet
+            )
+        {
             _method = method;
         }
 
@@ -42,7 +44,8 @@ namespace ILCompiler
 
         public override void ApplyProfilerGuidedCompilationRestriction(
             ProfileDataManager profileGuidedCompileRestriction
-        ) {
+        )
+        {
             // Profiler guided restrictions are ignored for single method compilation
             return;
         }

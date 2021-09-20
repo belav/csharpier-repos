@@ -202,7 +202,8 @@ namespace Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore.Tests
                     var server = await SetupServer<BloggingContext, NoMigrationsMiddleware>(
                         database
                     )
-                ) {
+                )
+                {
                     using (var db = server.Services.GetService<BloggingContext>())
                     {
                         db.Blogs.Add(new Blog());

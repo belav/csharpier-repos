@@ -286,7 +286,8 @@ namespace System.Web.WebPages.Test
 
         private static HttpContextBase GetContextForSetCulture(
             IEnumerable<string> userLanguages = null
-        ) {
+        )
+        {
             Mock<HttpContextBase> contextMock = new Mock<HttpContextBase>();
             contextMock.Setup(context => context.Request.UserLanguages)
                 .Returns(userLanguages == null ? null : userLanguages.ToArray());

@@ -39,7 +39,8 @@ namespace Microsoft.AspNetCore.Razor.Language
 
         public static RazorCodeGenerationOptions Create(
             Action<RazorCodeGenerationOptionsBuilder> configure
-        ) {
+        )
+        {
             if (configure == null)
             {
                 throw new ArgumentNullException(nameof(configure));
@@ -54,7 +55,8 @@ namespace Microsoft.AspNetCore.Razor.Language
 
         public static RazorCodeGenerationOptions CreateDesignTime(
             Action<RazorCodeGenerationOptionsBuilder> configure
-        ) {
+        )
+        {
             if (configure == null)
             {
                 throw new ArgumentNullException(nameof(configure));

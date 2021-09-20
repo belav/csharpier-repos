@@ -13,7 +13,8 @@ namespace ILCompiler.Win32Resources
             BlobReader resourceReader,
             PEReader peFile,
             Func<object, object, ushort, bool> resourceFilter
-        ) {
+        )
+        {
             DoResourceDirectoryRead(resourceReader, 0, ProcessOuterResource);
             return;
 
@@ -29,7 +30,8 @@ namespace ILCompiler.Win32Resources
                     object name,
                     uint offsetOfLanguageList,
                     bool isNameListDictionaryEntry
-                ) {
+                )
+                {
                     if (!isNameListDictionaryEntry)
                         throw new ArgumentException();
 
@@ -44,7 +46,8 @@ namespace ILCompiler.Win32Resources
                         object languageName,
                         uint offsetOfLanguageListEntry,
                         bool isLanguageListEntryIsDictionaryEntry
-                    ) {
+                    )
+                    {
                         if (languageName is string)
                             throw new ArgumentException();
 
@@ -79,7 +82,8 @@ namespace ILCompiler.Win32Resources
             BlobReader resourceReaderExternal,
             uint startOffset,
             Action<object, uint, bool> entry
-        ) {
+        )
+        {
             // Create a copy of the Mu, so that we don't allow the delegate to affect its state
             BlobReader resourceReader = resourceReaderExternal;
             resourceReader.Offset = checked((int)startOffset);

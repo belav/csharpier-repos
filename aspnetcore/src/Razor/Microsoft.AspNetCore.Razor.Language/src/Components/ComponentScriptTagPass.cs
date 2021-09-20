@@ -16,7 +16,8 @@ namespace Microsoft.AspNetCore.Razor.Language.Components
         protected override void ExecuteCore(
             RazorCodeDocument codeDocument,
             DocumentIntermediateNode documentNode
-        ) {
+        )
+        {
             if (!IsComponentDocument(documentNode))
             {
                 return;
@@ -47,7 +48,8 @@ namespace Microsoft.AspNetCore.Razor.Language.Components
                             && value.Children[0] is IntermediateToken token
                             && token.IsHtml
                             && string.Equals(token.Content, "BL9992", StringComparison.Ordinal)
-                        ) {
+                        )
+                        {
                             node.Children.RemoveAt(i);
                             return;
                         }

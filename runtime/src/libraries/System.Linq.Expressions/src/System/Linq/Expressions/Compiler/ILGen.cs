@@ -401,7 +401,8 @@ namespace System.Linq.Expressions.Compiler
             object? value,
             Type type,
             ILocalCache locals
-        ) {
+        )
+        {
             if (value == null)
             {
                 // Smarter than the Linq implementation which uses the initobj
@@ -557,7 +558,8 @@ namespace System.Linq.Expressions.Compiler
             Type typeTo,
             bool isChecked,
             ILocalCache locals
-        ) {
+        )
+        {
             if (TypeUtils.AreEquivalent(typeFrom, typeTo))
             {
                 return;
@@ -581,7 +583,8 @@ namespace System.Linq.Expressions.Compiler
                 || typeFrom == typeof(System.Enum)
                 || typeFrom == typeof(System.ValueType)
                 || TypeUtils.IsLegalExplicitVariantDelegateConversion(typeFrom, typeTo)
-            ) {
+            )
+            {
                 il.EmitCastToType(typeFrom, typeTo);
             }
             else if (isTypeFromNullable || isTypeToNullable)
@@ -631,7 +634,8 @@ namespace System.Linq.Expressions.Compiler
             Type typeFrom,
             Type typeTo,
             bool isChecked
-        ) {
+        )
+        {
             TypeCode tc = typeTo.GetTypeCode();
             TypeCode tf = typeFrom.GetTypeCode();
 
@@ -834,7 +838,8 @@ namespace System.Linq.Expressions.Compiler
             Type typeTo,
             bool isChecked,
             ILocalCache locals
-        ) {
+        )
+        {
             Debug.Assert(typeFrom.IsNullableType());
             Debug.Assert(typeTo.IsNullableType());
             Label labIfNull;
@@ -873,7 +878,8 @@ namespace System.Linq.Expressions.Compiler
             Type typeTo,
             bool isChecked,
             ILocalCache locals
-        ) {
+        )
+        {
             Debug.Assert(!typeFrom.IsNullableType());
             Debug.Assert(typeTo.IsNullableType());
             Type nnTypeTo = typeTo.GetNonNullableType();
@@ -888,7 +894,8 @@ namespace System.Linq.Expressions.Compiler
             Type typeTo,
             bool isChecked,
             ILocalCache locals
-        ) {
+        )
+        {
             Debug.Assert(typeFrom.IsNullableType());
             Debug.Assert(!typeTo.IsNullableType());
             if (typeTo.IsValueType)
@@ -903,7 +910,8 @@ namespace System.Linq.Expressions.Compiler
             Type typeTo,
             bool isChecked,
             ILocalCache locals
-        ) {
+        )
+        {
             Debug.Assert(typeFrom.IsNullableType());
             Debug.Assert(!typeTo.IsNullableType());
             Debug.Assert(typeTo.IsValueType);
@@ -930,7 +938,8 @@ namespace System.Linq.Expressions.Compiler
             Type typeTo,
             bool isChecked,
             ILocalCache locals
-        ) {
+        )
+        {
             bool isTypeFromNullable = typeFrom.IsNullableType();
             bool isTypeToNullable = typeTo.IsNullableType();
             Debug.Assert(isTypeFromNullable || isTypeToNullable);

@@ -419,7 +419,8 @@ namespace Microsoft.AspNetCore.Mvc.ViewFeatures
 
         private PartialViewResultExecutor GetViewExecutor(
             DiagnosticListener diagnosticListener = null
-        ) {
+        )
+        {
             if (diagnosticListener == null)
             {
                 diagnosticListener = new DiagnosticListener("Test");

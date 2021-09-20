@@ -39,7 +39,8 @@ namespace System.Windows.Markup
         public ValueSerializerAttribute(
             [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicConstructors)]
                 Type valueSerializerType
-        ) {
+        )
+        {
             _valueSerializerType = valueSerializerType;
         }
 
@@ -50,7 +51,8 @@ namespace System.Windows.Markup
         public ValueSerializerAttribute(
             [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicConstructors)]
                 string valueSerializerTypeName
-        ) {
+        )
+        {
             _valueSerializerTypeName = valueSerializerTypeName;
         }
 

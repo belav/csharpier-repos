@@ -308,7 +308,8 @@ namespace System.Net
             int count,
             AsyncCallback? callback,
             object? state
-        ) {
+        )
+        {
             ValidateBufferArguments(buffer, offset, count);
 
             var result = new ReadAsyncResult(this, buffer, offset, count, callback, state);
@@ -322,7 +323,8 @@ namespace System.Net
             int count,
             AsyncCallback? callback,
             object? state
-        ) {
+        )
+        {
             ValidateBufferArguments(buffer, offset, count);
 
             var result = new WriteAsyncResult(this, buffer, offset, count, callback, state);
@@ -359,7 +361,8 @@ namespace System.Net
                         || *source == '='
                         || *source == ' '
                         || *source == '\t'
-                    ) {
+                    )
+                    {
                         source++;
                         continue;
                     }
@@ -408,7 +411,8 @@ namespace System.Net
             int count,
             bool dontDeferFinalBytes,
             bool shouldAppendSpaceToCRLF
-        ) {
+        )
+        {
             return _encoder.EncodeBytes(
                 buffer,
                 offset,

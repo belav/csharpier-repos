@@ -47,7 +47,8 @@ namespace Microsoft.Extensions.Hosting.IntegrationTesting
             string applicationPath,
             RuntimeFlavor runtimeFlavor,
             RuntimeArchitecture runtimeArchitecture
-        ) {
+        )
+        {
             if (string.IsNullOrEmpty(applicationPath))
             {
                 throw new ArgumentException("Value cannot be null.", nameof(applicationPath));

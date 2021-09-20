@@ -127,7 +127,8 @@ namespace System.Speech.Internal.SrgsParser
             string display,
             float reqConfidence,
             CreateTokenCallback createTokens
-        ) {
+        )
+        {
             sChars = sChars.Trim(Helpers._achTrimChars);
 
             char[] achToken = sChars.ToCharArray();
@@ -209,7 +210,8 @@ namespace System.Speech.Internal.SrgsParser
             XmlReader xmlReader,
             string sError,
             Exception innerException
-        ) {
+        )
+        {
             // Add the line and column number if the XmlReader is a XmlTextReader
             XmlTextReader xmlTextReader = xmlReader as XmlTextReader;
             if (xmlTextReader != null)
@@ -1094,7 +1096,8 @@ namespace System.Speech.Internal.SrgsParser
             string pronunciation,
             string display,
             float reqConfidence
-        ) {
+        )
+        {
             System.Diagnostics.Debug.Assert((parent != null) && (!string.IsNullOrEmpty(sChars)));
 
             ParseText(
@@ -1366,7 +1369,8 @@ namespace System.Speech.Internal.SrgsParser
             IElement parent,
             IRule rule,
             string parentName
-        ) {
+        )
+        {
             bool fFirstElement = true;
 
             // Create a list of name value tags for this scope
@@ -1473,7 +1477,8 @@ namespace System.Speech.Internal.SrgsParser
                     }
                     else if (
                         reader.NodeType == XmlNodeType.Text || reader.NodeType == XmlNodeType.CDATA
-                    ) {
+                    )
+                    {
                         // Null if no children are allowed
                         if (parent == null)
                         {
@@ -1651,7 +1656,8 @@ namespace System.Speech.Internal.SrgsParser
                                             fProcessedRules
                                             || _hasTagFormat
                                                 && grammar.TagFormat != SrgsTagFormat.W3cV1
-                                        ) {
+                                        )
+                                        {
                                             ThrowSrgsException(SRID.InvalidGrammarOrdering);
                                         }
                                         grammar.GlobalTags.Add(GetTagContent(grammar, reader));
@@ -1897,7 +1903,8 @@ namespace System.Speech.Internal.SrgsParser
                         minRepeat < 0
                         || minRepeat > 255
                         || (maxRepeat != int.MaxValue && (maxRepeat < 0 || maxRepeat > 255))
-                    ) {
+                    )
+                    {
                         XmlParser.ThrowSrgsException(SRID.MinMaxOutOfRange, minRepeat, maxRepeat);
                     }
 
@@ -1948,7 +1955,8 @@ namespace System.Speech.Internal.SrgsParser
                 || (id == "VOID")
                 || (id == "GARBAGE")
                 || (id.IndexOfAny(s_invalidRuleIdChars) != -1)
-            ) {
+            )
+            {
                 XmlParser.ThrowSrgsException(SRID.InvalidRuleId, id);
             }
         }
@@ -1966,7 +1974,8 @@ namespace System.Speech.Internal.SrgsParser
                         uri.Length > _shortFilename.Length && uri[_shortFilename.Length] == '#'
                         || uri.Length == _shortFilename.Length
                     )
-                ) {
+                )
+                {
                     ThrowSrgsException(SRID.InvalidRuleRefSelf);
                 }
             }

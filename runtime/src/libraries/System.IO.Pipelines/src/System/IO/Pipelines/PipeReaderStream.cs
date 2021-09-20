@@ -74,7 +74,8 @@ namespace System.IO.Pipelines
             int offset,
             int count,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             if (buffer is null)
             {
                 throw new ArgumentNullException(nameof(buffer));
@@ -88,7 +89,8 @@ namespace System.IO.Pipelines
         public override ValueTask<int> ReadAsync(
             Memory<byte> buffer,
             CancellationToken cancellationToken = default
-        ) {
+        )
+        {
             return ReadAsyncInternal(buffer, cancellationToken);
         }
 #endif
@@ -96,7 +98,8 @@ namespace System.IO.Pipelines
         private async ValueTask<int> ReadAsyncInternal(
             Memory<byte> buffer,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             ReadResult result = await _pipeReader.ReadAsync(cancellationToken)
                 .ConfigureAwait(false);
 
@@ -144,7 +147,8 @@ namespace System.IO.Pipelines
             Stream destination,
             int bufferSize,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             StreamHelpers.ValidateCopyToArgs(this, destination, bufferSize);
 
             // Delegate to CopyToAsync on the PipeReader

@@ -25,7 +25,8 @@ namespace Microsoft.CodeAnalysis.Rename
             string newName,
             OptionSet optionSet,
             CancellationToken cancellationToken = default
-        ) {
+        )
+        {
             if (solution == null)
                 throw new ArgumentNullException(nameof(solution));
 
@@ -79,7 +80,8 @@ namespace Microsoft.CodeAnalysis.Rename
             IReadOnlyList<string>? newDocumentFolders = null,
             OptionSet? optionSet = null,
             CancellationToken cancellationToken = default
-        ) {
+        )
+        {
             if (document is null)
             {
                 throw new ArgumentNullException(nameof(document));
@@ -147,7 +149,8 @@ namespace Microsoft.CodeAnalysis.Rename
             RenameOptionSet optionSet,
             ImmutableHashSet<ISymbol>? nonConflictSymbols,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             Contract.ThrowIfNull(solution);
             Contract.ThrowIfNull(symbol);
             Contract.ThrowIfTrue(string.IsNullOrEmpty(newName));
@@ -163,7 +166,8 @@ namespace Microsoft.CodeAnalysis.Rename
                         cancellationToken,
                         out var serializedSymbol
                     )
-                ) {
+                )
+                {
                     var client = await RemoteHostClient.TryGetClientAsync(
                             solution.Workspace,
                             cancellationToken
@@ -226,7 +230,8 @@ namespace Microsoft.CodeAnalysis.Rename
             RenameOptionSet optionSet,
             ImmutableHashSet<ISymbol>? nonConflictSymbols,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             Contract.ThrowIfNull(solution);
             Contract.ThrowIfNull(symbol);
             Contract.ThrowIfTrue(string.IsNullOrEmpty(newName));

@@ -18,7 +18,8 @@ namespace System.Runtime.InteropServices.Tests
             object primitive,
             VarEnum expectedVarType,
             IntPtr expectedValue
-        ) {
+        )
+        {
             GetNativeVariantForObject_ValidObject_Success(
                 primitive,
                 expectedVarType,
@@ -287,7 +288,8 @@ namespace System.Runtime.InteropServices.Tests
             VarEnum expectedVarType,
             IntPtr expectedValue,
             object expectedRoundtripValue
-        ) {
+        )
+        {
             var v = new Variant();
             IntPtr pNative = Marshal.AllocHGlobal(Marshal.SizeOf(v));
             try

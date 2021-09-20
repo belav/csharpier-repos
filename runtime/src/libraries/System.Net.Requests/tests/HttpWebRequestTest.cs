@@ -358,7 +358,8 @@ namespace System.Net.Tests
                                 d.ToOffset(TimeSpan.FromHours(-5))
                             }
                     )
-                ) {
+                )
+                {
                     var formatted = date.ToString(format, CultureInfo.InvariantCulture);
                     var expected = date.LocalDateTime;
                     yield return new object[] { formatted, expected };
@@ -634,7 +635,8 @@ namespace System.Net.Tests
         [Theory, MemberData(nameof(EchoServers))]
         public void MaximumResponseHeadersLength_SetNegativeTwo_ThrowsArgumentOutOfRangeException(
             Uri remoteServer
-        ) {
+        )
+        {
             HttpWebRequest request = WebRequest.CreateHttp(remoteServer);
             AssertExtensions.Throws<ArgumentOutOfRangeException>(
                 "value",
@@ -654,7 +656,8 @@ namespace System.Net.Tests
         [Theory, MemberData(nameof(EchoServers))]
         public void MaximumAutomaticRedirections_SetZeroOrNegative_ThrowsArgumentException(
             Uri remoteServer
-        ) {
+        )
+        {
             HttpWebRequest request = WebRequest.CreateHttp(remoteServer);
             AssertExtensions.Throws<ArgumentException>(
                 "value",
@@ -693,7 +696,8 @@ namespace System.Net.Tests
         [Theory, MemberData(nameof(EchoServers))]
         public void ContinueTimeout_SetNegativeTwo_ThrowsArgumentOutOfRangeException(
             Uri remoteServer
-        ) {
+        )
+        {
             HttpWebRequest request = WebRequest.CreateHttp(remoteServer);
             AssertExtensions.Throws<ArgumentOutOfRangeException>(
                 "value",
@@ -895,7 +899,8 @@ namespace System.Net.Tests
         [Theory, MemberData(nameof(EchoServers))]
         public void TransferEncoding_SetWithSendChunkedFalse_ThrowsInvalidOperationException(
             Uri remoteServer
-        ) {
+        )
+        {
             HttpWebRequest request = WebRequest.CreateHttp(remoteServer);
             Assert.Throws<InvalidOperationException>(() => request.TransferEncoding = "xml");
         }
@@ -1263,7 +1268,8 @@ namespace System.Net.Tests
         [Theory, MemberData(nameof(EchoServers))]
         public void ServerCertificateValidationCallback_SetCallbackThenGet_ValuesSame(
             Uri remoteServer
-        ) {
+        )
+        {
             HttpWebRequest request = WebRequest.CreateHttp(remoteServer);
             var serverCertificateVallidationCallback =
                 new Security.RemoteCertificateValidationCallback((a, b, c, d) => true);
@@ -1322,7 +1328,8 @@ namespace System.Net.Tests
         [InlineData(true)]
         public async Task ProtocolVersion_SetThenSendRequest_CorrectHttpRequestVersionSent(
             bool isVersion10
-        ) {
+        )
+        {
             Version requestVersion = isVersion10 ? HttpVersion.Version10 : HttpVersion.Version11;
             Version receivedRequestVersion = null;
 
@@ -1520,7 +1527,8 @@ namespace System.Net.Tests
         [Theory, MemberData(nameof(EchoServers))]
         public void UseDefaultCredentials_SetTrue_CredentialsEqualsDefaultCredentials(
             Uri remoteServer
-        ) {
+        )
+        {
             HttpWebRequest request = WebRequest.CreateHttp(remoteServer);
             request.Credentials = _explicitCredential;
             request.UseDefaultCredentials = true;
@@ -1550,7 +1558,8 @@ namespace System.Net.Tests
         [Theory, MemberData(nameof(EchoServers))]
         public void BeginGetRequestStream_UseGETVerb_ThrowsProtocolViolationException(
             Uri remoteServer
-        ) {
+        )
+        {
             HttpWebRequest request = WebRequest.CreateHttp(remoteServer);
             Assert.Throws<ProtocolViolationException>(
                 () =>
@@ -1563,7 +1572,8 @@ namespace System.Net.Tests
         [Theory, MemberData(nameof(EchoServers))]
         public void BeginGetRequestStream_UseHEADVerb_ThrowsProtocolViolationException(
             Uri remoteServer
-        ) {
+        )
+        {
             HttpWebRequest request = WebRequest.CreateHttp(remoteServer);
             request.Method = HttpMethod.Head.Method;
             Assert.Throws<ProtocolViolationException>(
@@ -1577,7 +1587,8 @@ namespace System.Net.Tests
         [Theory, MemberData(nameof(EchoServers))]
         public void BeginGetRequestStream_UseCONNECTVerb_ThrowsProtocolViolationException(
             Uri remoteServer
-        ) {
+        )
+        {
             HttpWebRequest request = WebRequest.CreateHttp(remoteServer);
             request.Method = "CONNECT";
             Assert.Throws<ProtocolViolationException>(
@@ -1591,7 +1602,8 @@ namespace System.Net.Tests
         [Theory, MemberData(nameof(EchoServers))]
         public void BeginGetRequestStream_CreatePostRequestThenAbort_ThrowsWebException(
             Uri remoteServer
-        ) {
+        )
+        {
             HttpWebRequest request = WebRequest.CreateHttp(remoteServer);
             request.Method = HttpMethod.Post.Method;
             request.Abort();
@@ -1604,7 +1616,8 @@ namespace System.Net.Tests
         [Theory, MemberData(nameof(EchoServers))]
         public void BeginGetRequestStream_CreatePostRequestThenCallTwice_ThrowsInvalidOperationException(
             Uri remoteServer
-        ) {
+        )
+        {
             HttpWebRequest request = HttpWebRequest.CreateHttp(remoteServer);
             request.Method = "POST";
 
@@ -2081,7 +2094,8 @@ namespace System.Net.Tests
                                             ? await request.GetResponseAsync()
                                             : request.GetResponse()
                                     )
-                                ) {
+                                )
+                                {
                                     Assert.Equal(HttpStatusCode.OK, response.StatusCode);
                                 }
                             },
@@ -2244,7 +2258,8 @@ namespace System.Net.Tests
         public void GetResponseAsync_ParametersAreNotCachable_CreateNewClient(
             HttpWebRequestParameters requestParameters,
             bool connectionReusedParameter
-        ) {
+        )
+        {
             RemoteExecutor.Invoke(
                     async (async, serializedParameters, connectionReusedString) =>
                     {
@@ -2258,7 +2273,8 @@ namespace System.Net.Tests
                                 SocketType.Stream,
                                 ProtocolType.Tcp
                             )
-                        ) {
+                        )
+                        {
                             listener.Bind(new IPEndPoint(IPAddress.Loopback, 0));
                             listener.Listen(1);
                             var ep = (IPEndPoint)listener.LocalEndPoint;
@@ -2324,7 +2340,8 @@ namespace System.Net.Tests
                                 SocketType.Stream,
                                 ProtocolType.Tcp
                             )
-                        ) {
+                        )
+                        {
                             listener.Bind(new IPEndPoint(IPAddress.Loopback, 0));
                             listener.Listen(1);
                             var ep = (IPEndPoint)listener.LocalEndPoint;
@@ -2404,7 +2421,8 @@ namespace System.Net.Tests
                             request.BeginGetRequestStream(null, null),
                             out context
                         )
-                    ) {
+                    )
+                    {
                         Assert.Null(context);
                     }
 
@@ -2533,7 +2551,8 @@ namespace System.Net.Tests
                     HttpWebResponse response = (HttpWebResponse)state.Request.EndGetResponse(
                         asynchronousResult
                     )
-                ) {
+                )
+                {
                     state.SavedResponseHeaders = response.Headers;
                 }
             }
@@ -2547,7 +2566,8 @@ namespace System.Net.Tests
             string responseContent,
             Task<Socket> secondAccept,
             Task<WebResponse> currentResponseTask
-        ) {
+        )
+        {
             Socket secondServer = await secondAccept;
             Assert.True(secondAccept.IsCompleted);
             using (var secondStream = new NetworkStream(secondServer, ownsSocket: false))
@@ -2562,7 +2582,8 @@ namespace System.Net.Tests
             string responseContent,
             Socket server,
             StreamReader serverReader
-        ) {
+        )
+        {
             string responseBody =
                 "HTTP/1.1 200 OK\r\n"
                 + $"Date: {DateTimeOffset.UtcNow:R}\r\n"
@@ -2580,7 +2601,8 @@ namespace System.Net.Tests
         private static async Task VerifyResponse(
             string expectedResponse,
             Task<WebResponse> responseTask
-        ) {
+        )
+        {
             WebResponse firstRequest = await responseTask;
             using (Stream firstResponseStream = firstRequest.GetResponseStream())
             using (var reader = new StreamReader(firstResponseStream))

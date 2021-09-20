@@ -2124,7 +2124,8 @@ namespace System
             T6 item6,
             T7 item7,
             TRest rest
-        ) {
+        )
+        {
             if (rest is not IValueTupleInternal)
             {
                 throw new ArgumentException(

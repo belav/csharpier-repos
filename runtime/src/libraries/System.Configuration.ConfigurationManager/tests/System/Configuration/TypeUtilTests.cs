@@ -173,7 +173,8 @@ namespace System.ConfigurationTests
             object IInternalConfigHost.CreateConfigurationContext(
                 string configPath,
                 string locationSubPath
-            ) {
+            )
+            {
                 throw new NotImplementedException();
             }
 
@@ -186,7 +187,8 @@ namespace System.ConfigurationTests
                 string encryptedXml,
                 ProtectedConfigurationProvider protectionProvider,
                 ProtectedConfigurationSection protectedConfigSection
-            ) {
+            )
+            {
                 throw new NotImplementedException();
             }
 
@@ -199,14 +201,16 @@ namespace System.ConfigurationTests
                 string clearTextXml,
                 ProtectedConfigurationProvider protectionProvider,
                 ProtectedConfigurationSection protectedConfigSection
-            ) {
+            )
+            {
                 throw new NotImplementedException();
             }
 
             string IInternalConfigHost.GetConfigPathFromLocationSubPath(
                 string configPath,
                 string locationSubPath
-            ) {
+            )
+            {
                 throw new NotImplementedException();
             }
 
@@ -223,7 +227,8 @@ namespace System.ConfigurationTests
             string IInternalConfigHost.GetStreamNameForConfigSource(
                 string streamName,
                 string configSource
-            ) {
+            )
+            {
                 throw new NotImplementedException();
             }
 
@@ -235,7 +240,8 @@ namespace System.ConfigurationTests
             void IInternalConfigHost.Init(
                 IInternalConfigRoot configRoot,
                 params object[] hostInitParams
-            ) {
+            )
+            {
                 throw new NotImplementedException();
             }
 
@@ -245,7 +251,8 @@ namespace System.ConfigurationTests
                 out string locationConfigPath,
                 IInternalConfigRoot configRoot,
                 params object[] hostInitConfigurationParams
-            ) {
+            )
+            {
                 throw new NotImplementedException();
             }
 
@@ -263,7 +270,8 @@ namespace System.ConfigurationTests
                 string configPath,
                 ConfigurationAllowDefinition allowDefinition,
                 ConfigurationAllowExeDefinition allowExeDefinition
-            ) {
+            )
+            {
                 throw new NotImplementedException();
             }
 
@@ -301,7 +309,8 @@ namespace System.ConfigurationTests
                 string streamName,
                 string templateStreamName,
                 ref object writeContext
-            ) {
+            )
+            {
                 throw new NotImplementedException();
             }
 
@@ -310,7 +319,8 @@ namespace System.ConfigurationTests
                 string templateStreamName,
                 ref object writeContext,
                 bool assertPermissions
-            ) {
+            )
+            {
                 throw new NotImplementedException();
             }
 
@@ -332,14 +342,16 @@ namespace System.ConfigurationTests
             object IInternalConfigHost.StartMonitoringStreamForChanges(
                 string streamName,
                 StreamChangeCallback callback
-            ) {
+            )
+            {
                 throw new NotImplementedException();
             }
 
             void IInternalConfigHost.StopMonitoringStreamForChanges(
                 string streamName,
                 StreamChangeCallback callback
-            ) {
+            )
+            {
                 throw new NotImplementedException();
             }
 
@@ -348,7 +360,8 @@ namespace System.ConfigurationTests
                 ConfigurationAllowDefinition allowDefinition,
                 ConfigurationAllowExeDefinition allowExeDefinition,
                 IConfigErrorInfo errorInfo
-            ) {
+            )
+            {
                 throw new NotImplementedException();
             }
 
@@ -356,7 +369,8 @@ namespace System.ConfigurationTests
                 string streamName,
                 bool success,
                 object writeContext
-            ) {
+            )
+            {
                 throw new NotImplementedException();
             }
 
@@ -365,7 +379,8 @@ namespace System.ConfigurationTests
                 bool success,
                 object writeContext,
                 bool assertPermissions
-            ) {
+            )
+            {
                 throw new NotImplementedException();
             }
 
@@ -376,7 +391,8 @@ namespace System.ConfigurationTests
 
             bool IInternalConfigHost.IsFullTrustSectionWithoutAptcaAllowed(
                 IInternalConfigRecord configRecord
-            ) {
+            )
+            {
                 throw new NotImplementedException();
             }
 
@@ -390,7 +406,8 @@ namespace System.ConfigurationTests
                 IInternalConfigRecord configRecord,
                 out PermissionSet permissionSet,
                 out bool isHostReady
-            ) {
+            )
+            {
                 throw new NotImplementedException();
             }
 #pragma warning restore SYSLIB0003 // Obsolete: CAS

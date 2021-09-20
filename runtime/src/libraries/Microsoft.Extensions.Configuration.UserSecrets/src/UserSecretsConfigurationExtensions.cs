@@ -136,7 +136,8 @@ namespace Microsoft.Extensions.Configuration
             Assembly assembly,
             bool optional,
             bool reloadOnChange
-        ) {
+        )
+        {
             if (configuration == null)
             {
                 throw new ArgumentNullException(nameof(configuration));
@@ -208,7 +209,8 @@ namespace Microsoft.Extensions.Configuration
             string userSecretsId,
             bool optional,
             bool reloadOnChange
-        ) {
+        )
+        {
             if (configuration == null)
             {
                 throw new ArgumentNullException(nameof(configuration));
@@ -232,7 +234,8 @@ namespace Microsoft.Extensions.Configuration
             string secretPath,
             bool optional,
             bool reloadOnChange
-        ) {
+        )
+        {
             string directoryPath = Path.GetDirectoryName(secretPath);
             PhysicalFileProvider fileProvider = Directory.Exists(directoryPath)
                 ? new PhysicalFileProvider(directoryPath)

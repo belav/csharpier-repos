@@ -68,7 +68,8 @@ namespace Microsoft.CodeAnalysis.CompilerServer.UnitTests
             string pipeName,
             ICompilerServerLogger logger,
             Task<TestableDiagnosticListener> serverTask
-        ) {
+        )
+        {
             CancellationTokenSource = cancellationTokenSource;
             PipeName = pipeName;
             Logger = logger;
@@ -78,7 +79,8 @@ namespace Microsoft.CodeAnalysis.CompilerServer.UnitTests
         internal async Task<BuildResponse> SendAsync(
             BuildRequest request,
             CancellationToken cancellationToken = default
-        ) {
+        )
+        {
             using var client = await BuildServerConnection.TryConnectToServerAsync(
                     PipeName,
                     Timeout.Infinite,
@@ -139,7 +141,8 @@ namespace Microsoft.CodeAnalysis.CompilerServer.UnitTests
             ICompilerServerHost compilerServerHost = null,
             IClientConnectionHost clientConnectionHost = null,
             TimeSpan? keepAlive = null
-        ) {
+        )
+        {
             // The total pipe path must be < 92 characters on Unix, so trim this down to 10 chars
             pipeName ??= GetPipeName();
             compilerServerHost ??= BuildServerController.CreateCompilerServerHost(logger);
@@ -184,7 +187,8 @@ namespace Microsoft.CodeAnalysis.CompilerServer.UnitTests
             CompileFunc compileFunc = null,
             TextWriter textWriter = null,
             int? timeoutOverride = null
-        ) {
+        )
+        {
             compileFunc ??= GetCompileFunc(language);
             textWriter ??= new StringWriter();
             return new BuildClient(language, compileFunc, logger, timeoutOverride: timeoutOverride);

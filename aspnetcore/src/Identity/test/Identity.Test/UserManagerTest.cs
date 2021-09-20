@@ -1001,7 +1001,8 @@ namespace Microsoft.AspNetCore.Identity.Test
             public Task<bool> CanGenerateTwoFactorTokenAsync(
                 UserManager<PocoUser> manager,
                 PocoUser user
-            ) {
+            )
+            {
                 throw new NotImplementedException();
             }
 
@@ -1009,7 +1010,8 @@ namespace Microsoft.AspNetCore.Identity.Test
                 string purpose,
                 UserManager<PocoUser> manager,
                 PocoUser user
-            ) {
+            )
+            {
                 throw new NotImplementedException();
             }
 
@@ -1018,7 +1020,8 @@ namespace Microsoft.AspNetCore.Identity.Test
                 string token,
                 UserManager<PocoUser> manager,
                 PocoUser user
-            ) {
+            )
+            {
                 throw new NotImplementedException();
             }
         }
@@ -1077,14 +1080,16 @@ namespace Microsoft.AspNetCore.Identity.Test
             public Task<IdentityResult> CreateAsync(
                 PocoUser user,
                 CancellationToken cancellationToken
-            ) {
+            )
+            {
                 throw new NotImplementedException();
             }
 
             public Task<IdentityResult> DeleteAsync(
                 PocoUser user,
                 CancellationToken cancellationToken
-            ) {
+            )
+            {
                 throw new NotImplementedException();
             }
 
@@ -1101,14 +1106,16 @@ namespace Microsoft.AspNetCore.Identity.Test
             public Task<PocoUser> FindByNameAsync(
                 string normalizedUserName,
                 CancellationToken cancellationToken
-            ) {
+            )
+            {
                 throw new NotImplementedException();
             }
 
             public Task<string> GetNormalizedUserNameAsync(
                 PocoUser user,
                 CancellationToken cancellationToken
-            ) {
+            )
+            {
                 throw new NotImplementedException();
             }
 
@@ -1126,7 +1133,8 @@ namespace Microsoft.AspNetCore.Identity.Test
                 PocoUser user,
                 string normalizedName,
                 CancellationToken cancellationToken
-            ) {
+            )
+            {
                 throw new NotImplementedException();
             }
 
@@ -1134,14 +1142,16 @@ namespace Microsoft.AspNetCore.Identity.Test
                 PocoUser user,
                 string userName,
                 CancellationToken cancellationToken
-            ) {
+            )
+            {
                 throw new NotImplementedException();
             }
 
             public Task<IdentityResult> UpdateAsync(
                 PocoUser user,
                 CancellationToken cancellationToken
-            ) {
+            )
+            {
                 throw new NotImplementedException();
             }
         }
@@ -1747,7 +1757,8 @@ namespace Microsoft.AspNetCore.Identity.Test
             public Task<IList<Claim>> GetClaimsAsync(
                 PocoUser user,
                 CancellationToken cancellationToken = default(CancellationToken)
-            ) {
+            )
+            {
                 return Task.FromResult<IList<Claim>>(new List<Claim>());
             }
 
@@ -1755,7 +1766,8 @@ namespace Microsoft.AspNetCore.Identity.Test
                 PocoUser user,
                 IEnumerable<Claim> claim,
                 CancellationToken cancellationToken = default(CancellationToken)
-            ) {
+            )
+            {
                 return Task.FromResult(0);
             }
 
@@ -1764,7 +1776,8 @@ namespace Microsoft.AspNetCore.Identity.Test
                 Claim claim,
                 Claim newClaim,
                 CancellationToken cancellationToken = default(CancellationToken)
-            ) {
+            )
+            {
                 return Task.FromResult(0);
             }
 
@@ -1772,7 +1785,8 @@ namespace Microsoft.AspNetCore.Identity.Test
                 PocoUser user,
                 IEnumerable<Claim> claim,
                 CancellationToken cancellationToken = default(CancellationToken)
-            ) {
+            )
+            {
                 return Task.FromResult(0);
             }
 
@@ -1780,21 +1794,24 @@ namespace Microsoft.AspNetCore.Identity.Test
                 PocoUser user,
                 string email,
                 CancellationToken cancellationToken = default(CancellationToken)
-            ) {
+            )
+            {
                 return Task.FromResult(0);
             }
 
             public Task<string> GetEmailAsync(
                 PocoUser user,
                 CancellationToken cancellationToken = default(CancellationToken)
-            ) {
+            )
+            {
                 return Task.FromResult("");
             }
 
             public Task<bool> GetEmailConfirmedAsync(
                 PocoUser user,
                 CancellationToken cancellationToken = default(CancellationToken)
-            ) {
+            )
+            {
                 return Task.FromResult(false);
             }
 
@@ -1802,21 +1819,24 @@ namespace Microsoft.AspNetCore.Identity.Test
                 PocoUser user,
                 bool confirmed,
                 CancellationToken cancellationToken = default(CancellationToken)
-            ) {
+            )
+            {
                 return Task.FromResult(0);
             }
 
             public Task<PocoUser> FindByEmailAsync(
                 string email,
                 CancellationToken cancellationToken = default(CancellationToken)
-            ) {
+            )
+            {
                 return Task.FromResult<PocoUser>(null);
             }
 
             public Task<DateTimeOffset?> GetLockoutEndDateAsync(
                 PocoUser user,
                 CancellationToken cancellationToken = default(CancellationToken)
-            ) {
+            )
+            {
                 return Task.FromResult<DateTimeOffset?>(DateTimeOffset.MinValue);
             }
 
@@ -1824,35 +1844,40 @@ namespace Microsoft.AspNetCore.Identity.Test
                 PocoUser user,
                 DateTimeOffset? lockoutEnd,
                 CancellationToken cancellationToken = default(CancellationToken)
-            ) {
+            )
+            {
                 return Task.FromResult(0);
             }
 
             public Task<int> IncrementAccessFailedCountAsync(
                 PocoUser user,
                 CancellationToken cancellationToken = default(CancellationToken)
-            ) {
+            )
+            {
                 return Task.FromResult(0);
             }
 
             public Task ResetAccessFailedCountAsync(
                 PocoUser user,
                 CancellationToken cancellationToken = default(CancellationToken)
-            ) {
+            )
+            {
                 return Task.FromResult(0);
             }
 
             public Task<int> GetAccessFailedCountAsync(
                 PocoUser user,
                 CancellationToken cancellationToken = default(CancellationToken)
-            ) {
+            )
+            {
                 return Task.FromResult(0);
             }
 
             public Task<bool> GetLockoutEnabledAsync(
                 PocoUser user,
                 CancellationToken cancellationToken = default(CancellationToken)
-            ) {
+            )
+            {
                 return Task.FromResult(false);
             }
 
@@ -1860,7 +1885,8 @@ namespace Microsoft.AspNetCore.Identity.Test
                 PocoUser user,
                 bool enabled,
                 CancellationToken cancellationToken = default(CancellationToken)
-            ) {
+            )
+            {
                 return Task.FromResult(0);
             }
 
@@ -1868,7 +1894,8 @@ namespace Microsoft.AspNetCore.Identity.Test
                 PocoUser user,
                 UserLoginInfo login,
                 CancellationToken cancellationToken = default(CancellationToken)
-            ) {
+            )
+            {
                 return Task.FromResult(0);
             }
 
@@ -1877,14 +1904,16 @@ namespace Microsoft.AspNetCore.Identity.Test
                 string loginProvider,
                 string providerKey,
                 CancellationToken cancellationToken = default(CancellationToken)
-            ) {
+            )
+            {
                 return Task.FromResult(0);
             }
 
             public Task<IList<UserLoginInfo>> GetLoginsAsync(
                 PocoUser user,
                 CancellationToken cancellationToken = default(CancellationToken)
-            ) {
+            )
+            {
                 return Task.FromResult<IList<UserLoginInfo>>(new List<UserLoginInfo>());
             }
 
@@ -1892,7 +1921,8 @@ namespace Microsoft.AspNetCore.Identity.Test
                 string loginProvider,
                 string providerKey,
                 CancellationToken cancellationToken = default(CancellationToken)
-            ) {
+            )
+            {
                 return Task.FromResult<PocoUser>(null);
             }
 
@@ -1902,42 +1932,48 @@ namespace Microsoft.AspNetCore.Identity.Test
                 PocoUser user,
                 string userName,
                 CancellationToken cancellationToken = default(CancellationToken)
-            ) {
+            )
+            {
                 return Task.FromResult(0);
             }
 
             public Task<IdentityResult> CreateAsync(
                 PocoUser user,
                 CancellationToken cancellationToken = default(CancellationToken)
-            ) {
+            )
+            {
                 return Task.FromResult(IdentityResult.Success);
             }
 
             public Task<IdentityResult> UpdateAsync(
                 PocoUser user,
                 CancellationToken cancellationToken = default(CancellationToken)
-            ) {
+            )
+            {
                 return Task.FromResult(IdentityResult.Success);
             }
 
             public Task<IdentityResult> DeleteAsync(
                 PocoUser user,
                 CancellationToken cancellationToken = default(CancellationToken)
-            ) {
+            )
+            {
                 return Task.FromResult(IdentityResult.Success);
             }
 
             public Task<PocoUser> FindByIdAsync(
                 string userId,
                 CancellationToken cancellationToken = default(CancellationToken)
-            ) {
+            )
+            {
                 return Task.FromResult<PocoUser>(null);
             }
 
             public Task<PocoUser> FindByNameAsync(
                 string userName,
                 CancellationToken cancellationToken = default(CancellationToken)
-            ) {
+            )
+            {
                 return Task.FromResult<PocoUser>(null);
             }
 
@@ -1945,21 +1981,24 @@ namespace Microsoft.AspNetCore.Identity.Test
                 PocoUser user,
                 string passwordHash,
                 CancellationToken cancellationToken = default(CancellationToken)
-            ) {
+            )
+            {
                 return Task.FromResult(0);
             }
 
             public Task<string> GetPasswordHashAsync(
                 PocoUser user,
                 CancellationToken cancellationToken = default(CancellationToken)
-            ) {
+            )
+            {
                 return Task.FromResult<string>(null);
             }
 
             public Task<bool> HasPasswordAsync(
                 PocoUser user,
                 CancellationToken cancellationToken = default(CancellationToken)
-            ) {
+            )
+            {
                 return Task.FromResult(false);
             }
 
@@ -1967,21 +2006,24 @@ namespace Microsoft.AspNetCore.Identity.Test
                 PocoUser user,
                 string phoneNumber,
                 CancellationToken cancellationToken = default(CancellationToken)
-            ) {
+            )
+            {
                 return Task.FromResult(0);
             }
 
             public Task<string> GetPhoneNumberAsync(
                 PocoUser user,
                 CancellationToken cancellationToken = default(CancellationToken)
-            ) {
+            )
+            {
                 return Task.FromResult("");
             }
 
             public Task<bool> GetPhoneNumberConfirmedAsync(
                 PocoUser user,
                 CancellationToken cancellationToken = default(CancellationToken)
-            ) {
+            )
+            {
                 return Task.FromResult(false);
             }
 
@@ -1989,7 +2031,8 @@ namespace Microsoft.AspNetCore.Identity.Test
                 PocoUser user,
                 bool confirmed,
                 CancellationToken cancellationToken = default(CancellationToken)
-            ) {
+            )
+            {
                 return Task.FromResult(0);
             }
 
@@ -1997,7 +2040,8 @@ namespace Microsoft.AspNetCore.Identity.Test
                 PocoUser user,
                 string roleName,
                 CancellationToken cancellationToken = default(CancellationToken)
-            ) {
+            )
+            {
                 return Task.FromResult(0);
             }
 
@@ -2005,14 +2049,16 @@ namespace Microsoft.AspNetCore.Identity.Test
                 PocoUser user,
                 string roleName,
                 CancellationToken cancellationToken = default(CancellationToken)
-            ) {
+            )
+            {
                 return Task.FromResult(0);
             }
 
             public Task<IList<string>> GetRolesAsync(
                 PocoUser user,
                 CancellationToken cancellationToken = default(CancellationToken)
-            ) {
+            )
+            {
                 return Task.FromResult<IList<string>>(new List<string>());
             }
 
@@ -2020,7 +2066,8 @@ namespace Microsoft.AspNetCore.Identity.Test
                 PocoUser user,
                 string roleName,
                 CancellationToken cancellationToken = default(CancellationToken)
-            ) {
+            )
+            {
                 return Task.FromResult(false);
             }
 
@@ -2028,14 +2075,16 @@ namespace Microsoft.AspNetCore.Identity.Test
                 PocoUser user,
                 string stamp,
                 CancellationToken cancellationToken = default(CancellationToken)
-            ) {
+            )
+            {
                 return Task.FromResult(0);
             }
 
             public Task<string> GetSecurityStampAsync(
                 PocoUser user,
                 CancellationToken cancellationToken = default(CancellationToken)
-            ) {
+            )
+            {
                 return Task.FromResult("");
             }
 
@@ -2043,35 +2092,40 @@ namespace Microsoft.AspNetCore.Identity.Test
                 PocoUser user,
                 bool enabled,
                 CancellationToken cancellationToken = default(CancellationToken)
-            ) {
+            )
+            {
                 return Task.FromResult(0);
             }
 
             public Task<bool> GetTwoFactorEnabledAsync(
                 PocoUser user,
                 CancellationToken cancellationToken = default(CancellationToken)
-            ) {
+            )
+            {
                 return Task.FromResult(false);
             }
 
             public Task<string> GetUserIdAsync(
                 PocoUser user,
                 CancellationToken cancellationToken = default(CancellationToken)
-            ) {
+            )
+            {
                 return Task.FromResult<string>(null);
             }
 
             public Task<string> GetUserNameAsync(
                 PocoUser user,
                 CancellationToken cancellationToken = default(CancellationToken)
-            ) {
+            )
+            {
                 return Task.FromResult<string>(null);
             }
 
             public Task<string> GetNormalizedUserNameAsync(
                 PocoUser user,
                 CancellationToken cancellationToken = default(CancellationToken)
-            ) {
+            )
+            {
                 return Task.FromResult<string>(null);
             }
 
@@ -2079,28 +2133,32 @@ namespace Microsoft.AspNetCore.Identity.Test
                 PocoUser user,
                 string userName,
                 CancellationToken cancellationToken = default(CancellationToken)
-            ) {
+            )
+            {
                 return Task.FromResult(0);
             }
 
             public Task<IList<PocoUser>> GetUsersForClaimAsync(
                 Claim claim,
                 CancellationToken cancellationToken = default(CancellationToken)
-            ) {
+            )
+            {
                 return Task.FromResult<IList<PocoUser>>(new List<PocoUser>());
             }
 
             public Task<IList<PocoUser>> GetUsersInRoleAsync(
                 string roleName,
                 CancellationToken cancellationToken = default(CancellationToken)
-            ) {
+            )
+            {
                 return Task.FromResult<IList<PocoUser>>(new List<PocoUser>());
             }
 
             public Task<string> GetNormalizedEmailAsync(
                 PocoUser user,
                 CancellationToken cancellationToken = default(CancellationToken)
-            ) {
+            )
+            {
                 return Task.FromResult("");
             }
 
@@ -2108,7 +2166,8 @@ namespace Microsoft.AspNetCore.Identity.Test
                 PocoUser user,
                 string normalizedEmail,
                 CancellationToken cancellationToken = default(CancellationToken)
-            ) {
+            )
+            {
                 return Task.FromResult(0);
             }
         }
@@ -2121,7 +2180,8 @@ namespace Microsoft.AspNetCore.Identity.Test
                 string purpose,
                 UserManager<PocoUser> manager,
                 PocoUser user
-            ) {
+            )
+            {
                 return Task.FromResult("Test");
             }
 
@@ -2130,14 +2190,16 @@ namespace Microsoft.AspNetCore.Identity.Test
                 string token,
                 UserManager<PocoUser> manager,
                 PocoUser user
-            ) {
+            )
+            {
                 return Task.FromResult(true);
             }
 
             public Task<bool> CanGenerateTwoFactorTokenAsync(
                 UserManager<PocoUser> manager,
                 PocoUser user
-            ) {
+            )
+            {
                 return Task.FromResult(true);
             }
         }
@@ -2155,7 +2217,8 @@ namespace Microsoft.AspNetCore.Identity.Test
             public Task<IList<Claim>> GetClaimsAsync(
                 PocoUser user,
                 CancellationToken cancellationToken = default(CancellationToken)
-            ) {
+            )
+            {
                 throw new NotImplementedException();
             }
 
@@ -2163,7 +2226,8 @@ namespace Microsoft.AspNetCore.Identity.Test
                 PocoUser user,
                 IEnumerable<Claim> claims,
                 CancellationToken cancellationToken = default(CancellationToken)
-            ) {
+            )
+            {
                 throw new NotImplementedException();
             }
 
@@ -2172,7 +2236,8 @@ namespace Microsoft.AspNetCore.Identity.Test
                 Claim claim,
                 Claim newClaim,
                 CancellationToken cancellationToken = default(CancellationToken)
-            ) {
+            )
+            {
                 throw new NotImplementedException();
             }
 
@@ -2180,7 +2245,8 @@ namespace Microsoft.AspNetCore.Identity.Test
                 PocoUser user,
                 IEnumerable<Claim> claims,
                 CancellationToken cancellationToken = default(CancellationToken)
-            ) {
+            )
+            {
                 throw new NotImplementedException();
             }
 
@@ -2188,21 +2254,24 @@ namespace Microsoft.AspNetCore.Identity.Test
                 PocoUser user,
                 string email,
                 CancellationToken cancellationToken = default(CancellationToken)
-            ) {
+            )
+            {
                 throw new NotImplementedException();
             }
 
             public Task<string> GetEmailAsync(
                 PocoUser user,
                 CancellationToken cancellationToken = default(CancellationToken)
-            ) {
+            )
+            {
                 throw new NotImplementedException();
             }
 
             public Task<bool> GetEmailConfirmedAsync(
                 PocoUser user,
                 CancellationToken cancellationToken = default(CancellationToken)
-            ) {
+            )
+            {
                 throw new NotImplementedException();
             }
 
@@ -2210,21 +2279,24 @@ namespace Microsoft.AspNetCore.Identity.Test
                 PocoUser user,
                 bool confirmed,
                 CancellationToken cancellationToken = default(CancellationToken)
-            ) {
+            )
+            {
                 throw new NotImplementedException();
             }
 
             public Task<PocoUser> FindByEmailAsync(
                 string email,
                 CancellationToken cancellationToken = default(CancellationToken)
-            ) {
+            )
+            {
                 throw new NotImplementedException();
             }
 
             public Task<DateTimeOffset?> GetLockoutEndDateAsync(
                 PocoUser user,
                 CancellationToken cancellationToken = default(CancellationToken)
-            ) {
+            )
+            {
                 throw new NotImplementedException();
             }
 
@@ -2232,35 +2304,40 @@ namespace Microsoft.AspNetCore.Identity.Test
                 PocoUser user,
                 DateTimeOffset? lockoutEnd,
                 CancellationToken cancellationToken = default(CancellationToken)
-            ) {
+            )
+            {
                 throw new NotImplementedException();
             }
 
             public Task<int> IncrementAccessFailedCountAsync(
                 PocoUser user,
                 CancellationToken cancellationToken = default(CancellationToken)
-            ) {
+            )
+            {
                 throw new NotImplementedException();
             }
 
             public Task ResetAccessFailedCountAsync(
                 PocoUser user,
                 CancellationToken cancellationToken = default(CancellationToken)
-            ) {
+            )
+            {
                 throw new NotImplementedException();
             }
 
             public Task<int> GetAccessFailedCountAsync(
                 PocoUser user,
                 CancellationToken cancellationToken = default(CancellationToken)
-            ) {
+            )
+            {
                 throw new NotImplementedException();
             }
 
             public Task<bool> GetLockoutEnabledAsync(
                 PocoUser user,
                 CancellationToken cancellationToken = default(CancellationToken)
-            ) {
+            )
+            {
                 throw new NotImplementedException();
             }
 
@@ -2268,7 +2345,8 @@ namespace Microsoft.AspNetCore.Identity.Test
                 PocoUser user,
                 bool enabled,
                 CancellationToken cancellationToken = default(CancellationToken)
-            ) {
+            )
+            {
                 throw new NotImplementedException();
             }
 
@@ -2276,7 +2354,8 @@ namespace Microsoft.AspNetCore.Identity.Test
                 PocoUser user,
                 UserLoginInfo login,
                 CancellationToken cancellationToken = default(CancellationToken)
-            ) {
+            )
+            {
                 throw new NotImplementedException();
             }
 
@@ -2285,14 +2364,16 @@ namespace Microsoft.AspNetCore.Identity.Test
                 string loginProvider,
                 string providerKey,
                 CancellationToken cancellationToken = default(CancellationToken)
-            ) {
+            )
+            {
                 throw new NotImplementedException();
             }
 
             public Task<IList<UserLoginInfo>> GetLoginsAsync(
                 PocoUser user,
                 CancellationToken cancellationToken = default(CancellationToken)
-            ) {
+            )
+            {
                 throw new NotImplementedException();
             }
 
@@ -2300,7 +2381,8 @@ namespace Microsoft.AspNetCore.Identity.Test
                 string loginProvider,
                 string providerKey,
                 CancellationToken cancellationToken = default(CancellationToken)
-            ) {
+            )
+            {
                 throw new NotImplementedException();
             }
 
@@ -2312,14 +2394,16 @@ namespace Microsoft.AspNetCore.Identity.Test
             public Task<string> GetUserIdAsync(
                 PocoUser user,
                 CancellationToken cancellationToken = default(CancellationToken)
-            ) {
+            )
+            {
                 throw new NotImplementedException();
             }
 
             public Task<string> GetUserNameAsync(
                 PocoUser user,
                 CancellationToken cancellationToken = default(CancellationToken)
-            ) {
+            )
+            {
                 throw new NotImplementedException();
             }
 
@@ -2327,21 +2411,24 @@ namespace Microsoft.AspNetCore.Identity.Test
                 PocoUser user,
                 string userName,
                 CancellationToken cancellationToken = default(CancellationToken)
-            ) {
+            )
+            {
                 throw new NotImplementedException();
             }
 
             public Task<PocoUser> FindByIdAsync(
                 string userId,
                 CancellationToken cancellationToken = default(CancellationToken)
-            ) {
+            )
+            {
                 throw new NotImplementedException();
             }
 
             public Task<PocoUser> FindByNameAsync(
                 string userName,
                 CancellationToken cancellationToken = default(CancellationToken)
-            ) {
+            )
+            {
                 throw new NotImplementedException();
             }
 
@@ -2349,21 +2436,24 @@ namespace Microsoft.AspNetCore.Identity.Test
                 PocoUser user,
                 string passwordHash,
                 CancellationToken cancellationToken = default(CancellationToken)
-            ) {
+            )
+            {
                 throw new NotImplementedException();
             }
 
             public Task<string> GetPasswordHashAsync(
                 PocoUser user,
                 CancellationToken cancellationToken = default(CancellationToken)
-            ) {
+            )
+            {
                 throw new NotImplementedException();
             }
 
             public Task<bool> HasPasswordAsync(
                 PocoUser user,
                 CancellationToken cancellationToken = default(CancellationToken)
-            ) {
+            )
+            {
                 throw new NotImplementedException();
             }
 
@@ -2371,21 +2461,24 @@ namespace Microsoft.AspNetCore.Identity.Test
                 PocoUser user,
                 string phoneNumber,
                 CancellationToken cancellationToken = default(CancellationToken)
-            ) {
+            )
+            {
                 throw new NotImplementedException();
             }
 
             public Task<string> GetPhoneNumberAsync(
                 PocoUser user,
                 CancellationToken cancellationToken = default(CancellationToken)
-            ) {
+            )
+            {
                 throw new NotImplementedException();
             }
 
             public Task<bool> GetPhoneNumberConfirmedAsync(
                 PocoUser user,
                 CancellationToken cancellationToken = default(CancellationToken)
-            ) {
+            )
+            {
                 throw new NotImplementedException();
             }
 
@@ -2393,7 +2486,8 @@ namespace Microsoft.AspNetCore.Identity.Test
                 PocoUser user,
                 bool confirmed,
                 CancellationToken cancellationToken = default(CancellationToken)
-            ) {
+            )
+            {
                 throw new NotImplementedException();
             }
 
@@ -2401,14 +2495,16 @@ namespace Microsoft.AspNetCore.Identity.Test
                 PocoUser user,
                 bool enabled,
                 CancellationToken cancellationToken = default(CancellationToken)
-            ) {
+            )
+            {
                 throw new NotImplementedException();
             }
 
             public Task<bool> GetTwoFactorEnabledAsync(
                 PocoUser user,
                 CancellationToken cancellationToken = default(CancellationToken)
-            ) {
+            )
+            {
                 throw new NotImplementedException();
             }
 
@@ -2416,7 +2512,8 @@ namespace Microsoft.AspNetCore.Identity.Test
                 PocoUser user,
                 string roleName,
                 CancellationToken cancellationToken = default(CancellationToken)
-            ) {
+            )
+            {
                 throw new NotImplementedException();
             }
 
@@ -2424,14 +2521,16 @@ namespace Microsoft.AspNetCore.Identity.Test
                 PocoUser user,
                 string roleName,
                 CancellationToken cancellationToken = default(CancellationToken)
-            ) {
+            )
+            {
                 throw new NotImplementedException();
             }
 
             public Task<IList<string>> GetRolesAsync(
                 PocoUser user,
                 CancellationToken cancellationToken = default(CancellationToken)
-            ) {
+            )
+            {
                 throw new NotImplementedException();
             }
 
@@ -2439,14 +2538,16 @@ namespace Microsoft.AspNetCore.Identity.Test
                 PocoUser user,
                 string roleName,
                 CancellationToken cancellationToken = default(CancellationToken)
-            ) {
+            )
+            {
                 throw new NotImplementedException();
             }
 
             public Task<string> GetNormalizedUserNameAsync(
                 PocoUser user,
                 CancellationToken cancellationToken = default(CancellationToken)
-            ) {
+            )
+            {
                 throw new NotImplementedException();
             }
 
@@ -2454,49 +2555,56 @@ namespace Microsoft.AspNetCore.Identity.Test
                 PocoUser user,
                 string userName,
                 CancellationToken cancellationToken = default(CancellationToken)
-            ) {
+            )
+            {
                 throw new NotImplementedException();
             }
 
             public Task<IList<PocoUser>> GetUsersForClaimAsync(
                 Claim claim,
                 CancellationToken cancellationToken = default(CancellationToken)
-            ) {
+            )
+            {
                 throw new NotImplementedException();
             }
 
             public Task<IList<PocoUser>> GetUsersInRoleAsync(
                 string roleName,
                 CancellationToken cancellationToken = default(CancellationToken)
-            ) {
+            )
+            {
                 throw new NotImplementedException();
             }
 
             Task<IdentityResult> IUserStore<PocoUser>.CreateAsync(
                 PocoUser user,
                 CancellationToken cancellationToken
-            ) {
+            )
+            {
                 throw new NotImplementedException();
             }
 
             Task<IdentityResult> IUserStore<PocoUser>.UpdateAsync(
                 PocoUser user,
                 CancellationToken cancellationToken
-            ) {
+            )
+            {
                 throw new NotImplementedException();
             }
 
             Task<IdentityResult> IUserStore<PocoUser>.DeleteAsync(
                 PocoUser user,
                 CancellationToken cancellationToken
-            ) {
+            )
+            {
                 throw new NotImplementedException();
             }
 
             public Task<string> GetNormalizedEmailAsync(
                 PocoUser user,
                 CancellationToken cancellationToken = default(CancellationToken)
-            ) {
+            )
+            {
                 throw new NotImplementedException();
             }
 
@@ -2504,7 +2612,8 @@ namespace Microsoft.AspNetCore.Identity.Test
                 PocoUser user,
                 string normalizedEmail,
                 CancellationToken cancellationToken = default(CancellationToken)
-            ) {
+            )
+            {
                 throw new NotImplementedException();
             }
         }

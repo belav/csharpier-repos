@@ -67,7 +67,8 @@ namespace Tests.System.Net.Http
         public static void TryParse_UseOfValidDateTimeStringsInDifferentFormats_ParsedCorrectly(
             string input,
             DateTimeOffset expected
-        ) {
+        )
+        {
             Assert.True(HttpDateParser.TryParse(input, out var result));
             Assert.Equal(expected, result);
         }

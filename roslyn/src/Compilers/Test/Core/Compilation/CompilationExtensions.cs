@@ -53,14 +53,16 @@ namespace Microsoft.CodeAnalysis.Test.Utilities
             IEnumerable<EmbeddedText> embeddedTexts = null,
             IEnumerable<ResourceDescription> manifestResources = null,
             Stream metadataPEStream = null
-        ) {
+        )
+        {
             var peStream = new MemoryStream();
 
             if (
                 pdbStream == null
                 && compilation.Options.OptimizationLevel == OptimizationLevel.Debug
                 && options?.DebugInformationFormat != DebugInformationFormat.Embedded
-            ) {
+            )
+            {
                 if (MonoHelpers.IsRunningOnMono() || PathUtilities.IsUnixLikePlatform)
                 {
                     options = (options ?? EmitOptions.Default).WithDebugInformationFormat(
@@ -109,7 +111,8 @@ namespace Microsoft.CodeAnalysis.Test.Utilities
             this Compilation compilation,
             EmitOptions options = null,
             DiagnosticDescription[] expectedWarnings = null
-        ) {
+        )
+        {
             var stream = new MemoryStream();
             var emitResult = compilation.Emit(stream, options: options);
             Assert.True(
@@ -148,7 +151,8 @@ namespace Microsoft.CodeAnalysis.Test.Utilities
             bool embedInteropTypes = false,
             ImmutableArray<string> aliases = default,
             DiagnosticDescription[] expectedWarnings = null
-        ) {
+        )
+        {
             var image = comp.EmitToArray(options, expectedWarnings: expectedWarnings);
             if (comp.Options.OutputKind == OutputKind.NetModule)
             {
@@ -172,7 +176,8 @@ namespace Microsoft.CodeAnalysis.Test.Utilities
             ImmutableArray<SemanticEdit> edits,
             IEnumerable<ISymbol> allAddedSymbols = null,
             CompilationTestData testData = null
-        ) {
+        )
+        {
             testData ??= new CompilationTestData();
             var isAddedSymbol = new Func<ISymbol, bool>(s => allAddedSymbols?.Contains(s) ?? false);
 
@@ -207,7 +212,8 @@ namespace Microsoft.CodeAnalysis.Test.Utilities
         internal static void VerifyAssemblyVersionsAndAliases(
             this Compilation compilation,
             params string[] expectedAssembliesAndAliases
-        ) {
+        )
+        {
             var actual = compilation.GetBoundReferenceManager()
                 .GetReferencedAssemblyAliases()
                 .Select(
@@ -221,7 +227,8 @@ namespace Microsoft.CodeAnalysis.Test.Utilities
         internal static void VerifyAssemblyAliases(
             this Compilation compilation,
             params string[] expectedAssembliesAndAliases
-        ) {
+        )
+        {
             var actual = compilation.GetBoundReferenceManager()
                 .GetReferencedAssemblyAliases()
                 .Select(
@@ -236,7 +243,8 @@ namespace Microsoft.CodeAnalysis.Test.Utilities
             this Compilation compilation,
             SyntaxNode node,
             string expectedOperationTree
-        ) {
+        )
+        {
             SemanticModel model = compilation.GetSemanticModel(node.SyntaxTree);
             model.VerifyOperationTree(node, expectedOperationTree);
         }
@@ -245,7 +253,8 @@ namespace Microsoft.CodeAnalysis.Test.Utilities
             this Compilation compilation,
             string expectedOperationTree,
             bool skipImplicitlyDeclaredSymbols = false
-        ) {
+        )
+        {
             VerifyOperationTree(
                 compilation,
                 symbolToVerify: null,
@@ -259,7 +268,8 @@ namespace Microsoft.CodeAnalysis.Test.Utilities
             string symbolToVerify,
             string expectedOperationTree,
             bool skipImplicitlyDeclaredSymbols = false
-        ) {
+        )
+        {
             SyntaxTree tree = compilation.SyntaxTrees.First();
             SyntaxNode root = tree.GetRoot();
             SemanticModel model = compilation.GetSemanticModel(tree);
@@ -277,7 +287,8 @@ namespace Microsoft.CodeAnalysis.Test.Utilities
                 DeclarationInfo declaration in declarationsBuilder.ToArrayAndFree()
                     .Where(d => d.DeclaredSymbol != null)
                     .OrderBy(d => d.DeclaredSymbol.ToTestDisplayString())
-            ) {
+            )
+            {
                 if (!CanHaveExecutableCodeBlock(declaration.DeclaredSymbol))
                 {
                     continue;
@@ -285,7 +296,8 @@ namespace Microsoft.CodeAnalysis.Test.Utilities
 
                 if (
                     skipImplicitlyDeclaredSymbols && declaration.DeclaredSymbol.IsImplicitlyDeclared
-                ) {
+                )
+                {
                     continue;
                 }
 
@@ -295,7 +307,8 @@ namespace Microsoft.CodeAnalysis.Test.Utilities
                         symbolToVerify,
                         StringComparison.Ordinal
                     )
-                ) {
+                )
+                {
                     continue;
                 }
 
@@ -313,7 +326,8 @@ namespace Microsoft.CodeAnalysis.Test.Utilities
                     if (
                         declaration.DeclaredSymbol.Kind == SymbolKind.Method
                         && compilation.Language == LanguageNames.VisualBasic
-                    ) {
+                    )
+                    {
                         executableCodeBlocks = executableCodeBlocks.RemoveAt(
                             executableCodeBlocks.Length - 1
                         );
@@ -489,7 +503,8 @@ namespace Microsoft.CodeAnalysis.Test.Utilities
                                 parameterInitializerOperation.Parameter.ContainingSymbol
                                 as IMethodSymbol
                             )?.MethodKind != MethodKind.LocalFunction
-                        ) {
+                        )
+                        {
                             ControlFlowGraphVerifier.GetFlowGraph(
                                 compilation,
                                 ControlFlowGraphBuilder.Create(root),

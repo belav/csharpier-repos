@@ -20,7 +20,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Progression
             Solution solution,
             IGraphContext context,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var graphBuilder = await GraphBuilder.CreateForInputNodesAsync(
                     solution,
                     context.InputNodes,
@@ -72,7 +73,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Progression
                         .ConfigureAwait(false);
                     foreach (
                         var derivedType in implementingClassesAndStructs.Concat(derivedInterfaces)
-                    ) {
+                    )
+                    {
                         var symbolNode = await graphBuilder.AddNodeAsync(
                                 derivedType,
                                 relatedNode: node

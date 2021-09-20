@@ -170,7 +170,8 @@ namespace Microsoft.AspNetCore.WebSockets.ConformanceTest.Autobahn
             string environment,
             CancellationToken cancellationToken,
             Action<AutobahnExpectations> expectationConfig = null
-        ) {
+        )
+        {
             var sslNamePart = ssl ? "SSL" : "NoSSL";
             var name = $"{server}|{sslNamePart}|{environment}";
             var logger = _loggerFactory.CreateLogger(

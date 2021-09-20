@@ -67,7 +67,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.SuggestionServi
                 if (
                     Workspace.TryGetWorkspace(sourceTextContainer, out var workspace)
                     && workspace is VisualStudioWorkspaceImpl vsWorkspace
-                ) {
+                )
+                {
                     return vsWorkspace.GetDocumentIdInCurrentContext(sourceTextContainer);
                 }
 

@@ -284,7 +284,8 @@ namespace Microsoft.CodeAnalysis
             DocumentId documentId,
             bool includeSourceGenerated = false,
             CancellationToken cancellationToken = default
-        ) {
+        )
+        {
             var document = GetDocument(documentId);
             if (document != null || !includeSourceGenerated)
             {
@@ -325,7 +326,8 @@ namespace Microsoft.CodeAnalysis
             IEnumerable<Document>
         > GetAllRegularAndSourceGeneratedDocumentsAsync(
             CancellationToken cancellationToken = default
-        ) {
+        )
+        {
             return Documents.Concat(
                 await GetSourceGeneratedDocumentsAsync(cancellationToken).ConfigureAwait(false)
             );
@@ -334,14 +336,16 @@ namespace Microsoft.CodeAnalysis
         public async ValueTask<SourceGeneratedDocument?> GetSourceGeneratedDocumentAsync(
             DocumentId documentId,
             CancellationToken cancellationToken = default
-        ) {
+        )
+        {
             // Quick check first: if we already have created a SourceGeneratedDocument wrapper, we're good
             if (
                 _idToSourceGeneratedDocumentMap.TryGetValue(
                     documentId,
                     out var sourceGeneratedDocument
                 )
-            ) {
+            )
+            {
                 return sourceGeneratedDocument;
             }
 
@@ -381,7 +385,8 @@ namespace Microsoft.CodeAnalysis
         /// </remarks>
         internal SourceGeneratedDocument? TryGetSourceGeneratedDocumentForAlreadyGeneratedId(
             DocumentId documentId
-        ) {
+        )
+        {
             // Easy case: do we already have the SourceGeneratedDocument created?
             if (_idToSourceGeneratedDocumentMap.TryGetValue(documentId, out var document))
             {
@@ -410,7 +415,8 @@ namespace Microsoft.CodeAnalysis
             string name,
             SymbolFilter filter,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             return this.SupportsCompilation
                 && await _solution.State.ContainsSymbolsWithNameAsync(
                         Id,
@@ -425,7 +431,8 @@ namespace Microsoft.CodeAnalysis
             Func<string, bool> predicate,
             SymbolFilter filter,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             return this.SupportsCompilation
                 && await _solution.State.ContainsSymbolsWithNameAsync(
                         Id,
@@ -680,7 +687,8 @@ namespace Microsoft.CodeAnalysis
             SyntaxNode syntaxRoot,
             IEnumerable<string>? folders = null,
             string? filePath = null
-        ) {
+        )
+        {
             var id = DocumentId.CreateNewId(this.Id);
 
             // use preserve identity for forked solution directly from syntax node.
@@ -704,7 +712,8 @@ namespace Microsoft.CodeAnalysis
             SourceText text,
             IEnumerable<string>? folders = null,
             string? filePath = null
-        ) {
+        )
+        {
             var id = DocumentId.CreateNewId(this.Id);
             return this.Solution.AddDocument(id, name, text, folders, filePath).GetDocument(id)!;
         }
@@ -717,7 +726,8 @@ namespace Microsoft.CodeAnalysis
             string text,
             IEnumerable<string>? folders = null,
             string? filePath = null
-        ) {
+        )
+        {
             var id = DocumentId.CreateNewId(this.Id, debugName: name);
             return this.Solution.AddDocument(id, name, text, folders, filePath).GetDocument(id)!;
         }
@@ -730,7 +740,8 @@ namespace Microsoft.CodeAnalysis
             SourceText text,
             IEnumerable<string>? folders = null,
             string? filePath = null
-        ) {
+        )
+        {
             var id = DocumentId.CreateNewId(this.Id);
             return this.Solution.AddAdditionalDocument(id, name, text, folders, filePath)
                 .GetAdditionalDocument(id)!;
@@ -744,7 +755,8 @@ namespace Microsoft.CodeAnalysis
             string text,
             IEnumerable<string>? folders = null,
             string? filePath = null
-        ) {
+        )
+        {
             var id = DocumentId.CreateNewId(this.Id);
             return this.Solution.AddAdditionalDocument(id, name, text, folders, filePath)
                 .GetAdditionalDocument(id)!;
@@ -758,7 +770,8 @@ namespace Microsoft.CodeAnalysis
             SourceText text,
             IEnumerable<string>? folders = null,
             string? filePath = null
-        ) {
+        )
+        {
             var id = DocumentId.CreateNewId(this.Id);
             return this.Solution.AddAnalyzerConfigDocument(id, name, text, folders, filePath)
                 .GetAnalyzerConfigDocument(id)!;

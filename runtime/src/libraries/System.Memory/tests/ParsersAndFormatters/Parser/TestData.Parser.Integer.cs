@@ -16,7 +16,8 @@ namespace System.Buffers.Text.Tests
             {
                 foreach (
                     ParserTestData<sbyte> testData in SByteFormatterTestData.ToParserTheoryDataCollection()
-                ) {
+                )
+                {
                     yield return testData;
                 }
 
@@ -44,7 +45,8 @@ namespace System.Buffers.Text.Tests
             {
                 foreach (
                     ParserTestData<byte> testData in ByteFormatterTestData.ToParserTheoryDataCollection()
-                ) {
+                )
+                {
                     yield return testData;
                 }
 
@@ -72,7 +74,8 @@ namespace System.Buffers.Text.Tests
             {
                 foreach (
                     ParserTestData<short> testData in Int16FormatterTestData.ToParserTheoryDataCollection()
-                ) {
+                )
+                {
                     yield return testData;
                 }
 
@@ -100,7 +103,8 @@ namespace System.Buffers.Text.Tests
             {
                 foreach (
                     ParserTestData<ushort> testData in UInt16FormatterTestData.ToParserTheoryDataCollection()
-                ) {
+                )
+                {
                     yield return testData;
                 }
 
@@ -128,7 +132,8 @@ namespace System.Buffers.Text.Tests
             {
                 foreach (
                     ParserTestData<int> testData in Int32FormatterTestData.ToParserTheoryDataCollection()
-                ) {
+                )
+                {
                     yield return testData;
                 }
 
@@ -156,7 +161,8 @@ namespace System.Buffers.Text.Tests
             {
                 foreach (
                     ParserTestData<uint> testData in UInt32FormatterTestData.ToParserTheoryDataCollection()
-                ) {
+                )
+                {
                     yield return testData;
                 }
 
@@ -184,7 +190,8 @@ namespace System.Buffers.Text.Tests
             {
                 foreach (
                     ParserTestData<long> testData in Int64FormatterTestData.ToParserTheoryDataCollection()
-                ) {
+                )
+                {
                     yield return testData;
                 }
 
@@ -217,7 +224,8 @@ namespace System.Buffers.Text.Tests
             {
                 foreach (
                     ParserTestData<ulong> testData in UInt64FormatterTestData.ToParserTheoryDataCollection()
-                ) {
+                )
+                {
                     yield return testData;
                 }
 
@@ -256,7 +264,8 @@ namespace System.Buffers.Text.Tests
                 SupportedFormat format in IntegerFormats.Where(
                     f => f.IsParsingImplemented<T>() && f.ParseSynonymFor == default
                 )
-            ) {
+            )
+            {
                 foreach (string integerNegativeInput in GeneralIntegerNegativeInputs)
                 {
                     yield return new ParserTestData<T>(
@@ -377,7 +386,8 @@ namespace System.Buffers.Text.Tests
                     // "N" format parsing
                     foreach (
                         ParserTestData<T> testData in TestDataForNFormat.ConvertTestDataForNFormat<T>()
-                    ) {
+                    )
+                    {
                         yield return testData;
                     }
                 }
@@ -454,7 +464,8 @@ namespace System.Buffers.Text.Tests
 
         private static ParserTestData<T> ConvertTestDataForNFormat<T>(
             this ParserTestData<sbyte> testData
-        ) {
+        )
+        {
             Type t = typeof(T);
             bool isSignedType =
                 t == typeof(sbyte) || t == typeof(short) || t == typeof(int) || t == typeof(long);

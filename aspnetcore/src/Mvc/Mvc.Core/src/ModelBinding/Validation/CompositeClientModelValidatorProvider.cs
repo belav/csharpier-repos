@@ -21,7 +21,8 @@ namespace Microsoft.AspNetCore.Mvc.ModelBinding.Validation
         /// </param>
         public CompositeClientModelValidatorProvider(
             IEnumerable<IClientModelValidatorProvider> providers
-        ) {
+        )
+        {
             if (providers == null)
             {
                 throw new ArgumentNullException(nameof(providers));

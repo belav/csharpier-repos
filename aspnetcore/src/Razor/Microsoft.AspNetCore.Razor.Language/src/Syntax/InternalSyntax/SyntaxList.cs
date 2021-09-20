@@ -145,7 +145,8 @@ namespace Microsoft.AspNetCore.Razor.Language.Syntax.InternalSyntax
                 SyntaxAnnotation[] annotations,
                 GreenNode child0,
                 GreenNode child1
-            ) {
+            )
+            {
                 SlotCount = 2;
                 AdjustFlagsAndWidth(child0);
                 _child0 = child0;

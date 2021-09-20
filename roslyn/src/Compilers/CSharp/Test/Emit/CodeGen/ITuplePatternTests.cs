@@ -16,7 +16,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.CodeGen
         protected CSharpCompilation CreatePatternCompilation(
             string source,
             CSharpCompilationOptions options = null
-        ) {
+        )
+        {
             return CreateCompilation(
                 new[] { source, _iTupleSource },
                 options: options ?? TestOptions.ReleaseExe,

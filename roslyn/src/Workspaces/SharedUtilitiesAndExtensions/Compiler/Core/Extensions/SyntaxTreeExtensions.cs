@@ -19,7 +19,8 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
             [NotNullWhen(returnValue: true)] this SyntaxTree? tree,
             TextSpan span,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             if (tree == null)
             {
                 return false;
@@ -53,7 +54,8 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
             ISyntaxFacts syntaxFacts,
             CancellationToken cancellationToken,
             bool findInsideTrivia = false
-        ) {
+        )
+        {
             return GetTouchingTokenAsync(
                 syntaxTree,
                 position,
@@ -68,7 +70,8 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
             int position,
             CancellationToken cancellationToken,
             bool findInsideTrivia = false
-        ) {
+        )
+        {
             return GetTouchingTokenAsync(
                 syntaxTree,
                 position,
@@ -84,7 +87,8 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
             Predicate<SyntaxToken> predicate,
             CancellationToken cancellationToken,
             bool findInsideTrivia = false
-        ) {
+        )
+        {
             Contract.ThrowIfNull(syntaxTree);
 
             if (position >= syntaxTree.Length)
@@ -115,7 +119,8 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
             this SyntaxTree tree,
             TextSpan span,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             if (!tree.HasHiddenRegions())
             {
                 return false;
@@ -143,7 +148,8 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
             this SyntaxTree syntaxTree,
             int position,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var root = syntaxTree.GetRoot(cancellationToken);
             var firstToken = root.GetFirstToken(includeZeroWidth: true, includeSkipped: true);
 
@@ -154,7 +160,8 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
             this SyntaxTree syntaxTree,
             int position,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             Contract.ThrowIfNull(syntaxTree);
 
             var root = syntaxTree.GetRoot(cancellationToken);
@@ -196,7 +203,8 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
             int position,
             CancellationToken cancellationToken,
             bool findInsideTrivia = false
-        ) {
+        )
+        {
             var root = syntaxTree.GetRoot(cancellationToken);
             var trivia = root.FindTrivia(position, findInsideTrivia);
 
@@ -234,7 +242,8 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
             bool includeSkipped = true,
             bool includeDirectives = false,
             bool includeDocumentationComments = false
-        ) {
+        )
+        {
             return syntaxTree.GetRoot(cancellationToken)
                 .FindTokenOnRightOfPosition(
                     position,
@@ -254,7 +263,8 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
             bool includeSkipped = true,
             bool includeDirectives = false,
             bool includeDocumentationComments = false
-        ) {
+        )
+        {
             return syntaxTree.GetRoot(cancellationToken)
                 .FindTokenOnLeftOfPosition(
                     position,
@@ -269,7 +279,8 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
             AnalyzerOptions? analyzerOptions,
             ISyntaxFacts syntaxFacts,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             // First check if user has configured "generated_code = true | false" in .editorconfig
             if (analyzerOptions != null)
             {

@@ -23,7 +23,8 @@ namespace System.Net.Http.Functional.Tests
         {
             foreach (
                 Configuration.Http.RemoteServer remoteServer in Configuration.Http.RemoteServers
-            ) {
+            )
+            {
                 for (int i = 0; i < 8; i++)
                 {
                     yield return new object[] { remoteServer, i };
@@ -35,7 +36,8 @@ namespace System.Net.Http.Functional.Tests
         public async Task GetStreamAsync_ReadToEnd_Success(
             Configuration.Http.RemoteServer remoteServer,
             int readMode
-        ) {
+        )
+        {
             using (HttpClient client = CreateHttpClientForRemoteServer(remoteServer))
             {
                 string customHeaderValue = Guid.NewGuid().ToString("N");
@@ -74,7 +76,8 @@ namespace System.Net.Http.Functional.Tests
                             // Individual calls to ReadAsync(Array)
                             while (
                                 (bytesRead = await stream.ReadAsync(buffer, 0, buffer.Length)) != 0
-                            ) {
+                            )
+                            {
                                 ms.Write(buffer, 0, bytesRead);
                             }
                             responseBody = Encoding.UTF8.GetString(ms.ToArray());
@@ -132,14 +135,16 @@ namespace System.Net.Http.Functional.Tests
         [Theory, MemberData(nameof(RemoteServersMemberData))]
         public async Task GetAsync_UseResponseHeadersReadAndCallLoadIntoBuffer_Success(
             Configuration.Http.RemoteServer remoteServer
-        ) {
+        )
+        {
             using (HttpClient client = CreateHttpClientForRemoteServer(remoteServer))
             using (
                 HttpResponseMessage response = await client.GetAsync(
                     remoteServer.EchoUri,
                     HttpCompletionOption.ResponseHeadersRead
                 )
-            ) {
+            )
+            {
                 await response.Content.LoadIntoBufferAsync();
 
                 string responseBody = await response.Content.ReadAsStringAsync();
@@ -157,14 +162,16 @@ namespace System.Net.Http.Functional.Tests
         [Theory, MemberData(nameof(RemoteServersMemberData))]
         public async Task GetAsync_UseResponseHeadersReadAndCopyToMemoryStream_Success(
             Configuration.Http.RemoteServer remoteServer
-        ) {
+        )
+        {
             using (HttpClient client = CreateHttpClientForRemoteServer(remoteServer))
             using (
                 HttpResponseMessage response = await client.GetAsync(
                     remoteServer.EchoUri,
                     HttpCompletionOption.ResponseHeadersRead
                 )
-            ) {
+            )
+            {
                 var memoryStream = new MemoryStream();
                 await response.Content.CopyToAsync(memoryStream);
                 memoryStream.Position = 0;
@@ -187,7 +194,8 @@ namespace System.Net.Http.Functional.Tests
         [Theory, MemberData(nameof(RemoteServersMemberData))]
         public async Task GetStreamAsync_ReadZeroBytes_Success(
             Configuration.Http.RemoteServer remoteServer
-        ) {
+        )
+        {
             using (HttpClient client = CreateHttpClientForRemoteServer(remoteServer))
             using (Stream stream = await client.GetStreamAsync(remoteServer.EchoUri))
             {
@@ -203,7 +211,8 @@ namespace System.Net.Http.Functional.Tests
         [Theory, MemberData(nameof(RemoteServersMemberData))]
         public async Task ReadAsStreamAsync_Cancel_TaskIsCanceled(
             Configuration.Http.RemoteServer remoteServer
-        ) {
+        )
+        {
             var cts = new CancellationTokenSource();
 
             using (HttpClient client = CreateHttpClientForRemoteServer(remoteServer))
@@ -257,7 +266,8 @@ namespace System.Net.Http.Functional.Tests
         public async Task ReadAsStreamAsync_InvalidServerResponse_ThrowsIOException(
             TransferType transferType,
             TransferError transferError
-        ) {
+        )
+        {
             await StartTransferTypeAndErrorServer(
                 transferType,
                 transferError,
@@ -275,7 +285,8 @@ namespace System.Net.Http.Functional.Tests
         public async Task ReadAsStreamAsync_ValidServerResponse_Success(
             TransferType transferType,
             TransferError transferError
-        ) {
+        )
+        {
             await StartTransferTypeAndErrorServer(
                 transferType,
                 transferError,
@@ -293,7 +304,8 @@ namespace System.Net.Http.Functional.Tests
         public async Task ReadAsStreamAsync_StreamCanReadIsFalseAfterDispose(
             TransferType transferType,
             TransferError transferError
-        ) {
+        )
+        {
             await StartTransferTypeAndErrorServer(
                 transferType,
                 transferError,
@@ -305,7 +317,8 @@ namespace System.Net.Http.Functional.Tests
                             uri,
                             HttpCompletionOption.ResponseHeadersRead
                         )
-                    ) {
+                    )
+                    {
                         Stream stream = await response.Content.ReadAsStreamAsync();
                         Assert.True(stream.CanRead);
 
@@ -337,7 +350,8 @@ namespace System.Net.Http.Functional.Tests
             TransferType transferType,
             TransferError transferError,
             Func<Uri, Task> clientFunc
-        ) {
+        )
+        {
             return LoopbackServer.CreateClientAndServerAsync(
                 clientFunc,
                 server =>

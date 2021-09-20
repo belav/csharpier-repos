@@ -19,7 +19,8 @@ namespace Microsoft.AspNetCore.Mvc.FunctionalTests
     {
         public ReadFromDisconnectedClientTest(
             MvcTestFixture<BasicWebSite.StartupWhereReadingRequestBodyThrows> fixture
-        ) {
+        )
+        {
             var factory =
                 fixture.Factories.FirstOrDefault()
                 ?? fixture.WithWebHostBuilder(ConfigureWebHostBuilder);

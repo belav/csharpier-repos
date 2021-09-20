@@ -79,13 +79,15 @@ namespace System.Globalization.Tests
             while (
                 (startIndex = longTimeFormat.IndexOf('\'', startIndex)) >= 0
                 && startIndex < longTimeFormat.Length - 1
-            ) {
+            )
+            {
                 // We have the opening single quote, find the closing one.
                 startIndex++;
                 if (
                     (startIndex = longTimeFormat.IndexOf('\'', startIndex)) > 0
                     && startIndex < longTimeFormat.Length - 1
-                ) {
+                )
+                {
                     Assert.Equal(' ', longTimeFormat[++startIndex]);
                 }
                 else

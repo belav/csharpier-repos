@@ -37,9 +37,8 @@ namespace System.Net.Http.Headers
             Quality = quality;
         }
 
-        private TransferCodingWithQualityHeaderValue(
-            TransferCodingWithQualityHeaderValue source
-        ) : base(source)
+        private TransferCodingWithQualityHeaderValue(TransferCodingWithQualityHeaderValue source)
+            : base(source)
         {
             // No additional members to initialize here. This constructor is used by Clone().
         }
@@ -62,7 +61,8 @@ namespace System.Net.Http.Headers
         public static bool TryParse(
             [NotNullWhen(true)] string? input,
             [NotNullWhen(true)] out TransferCodingWithQualityHeaderValue? parsedValue
-        ) {
+        )
+        {
             int index = 0;
             parsedValue = null;
 
@@ -73,7 +73,8 @@ namespace System.Net.Http.Headers
                     ref index,
                     out object? output
                 )
-            ) {
+            )
+            {
                 parsedValue = (TransferCodingWithQualityHeaderValue)output!;
                 return true;
             }

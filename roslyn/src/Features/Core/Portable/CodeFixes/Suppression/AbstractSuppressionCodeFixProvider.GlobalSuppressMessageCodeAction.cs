@@ -35,7 +35,8 @@ namespace Microsoft.CodeAnalysis.CodeFixes.Suppression
 
             protected override async Task<Document> GetChangedSuppressionDocumentAsync(
                 CancellationToken cancellationToken
-            ) {
+            )
+            {
                 var suppressionsDoc = await GetOrCreateSuppressionsDocumentAsync(cancellationToken)
                     .ConfigureAwait(false);
                 var workspace = suppressionsDoc.Project.Solution.Workspace;

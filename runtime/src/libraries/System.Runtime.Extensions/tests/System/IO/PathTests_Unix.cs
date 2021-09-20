@@ -135,7 +135,8 @@ namespace System.IO.Tests
             string path,
             string basePath,
             string expected
-        ) {
+        )
+        {
             string fullPath = Path.GetFullPath(path, basePath);
             Assert.Equal(expected, fullPath);
         }

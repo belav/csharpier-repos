@@ -29,7 +29,8 @@ namespace System.ComponentModel.Tests
             string category,
             bool expectedIsDefaultAttribute,
             string expectedTypeId
-        ) {
+        )
+        {
             var attribute = new DesignerCategoryAttribute(category);
             Assert.Equal(category, attribute.Category);
             Assert.Equal(expectedIsDefaultAttribute, attribute.IsDefaultAttribute());
@@ -104,7 +105,8 @@ namespace System.ComponentModel.Tests
             DesignerCategoryAttribute attribute,
             object other,
             bool expected
-        ) {
+        )
+        {
             Assert.Equal(expected, attribute.Equals(other));
             if (other is DesignerCategoryAttribute otherAttribute)
             {
@@ -141,7 +143,8 @@ namespace System.ComponentModel.Tests
         public void Properties_Get_ReturnsExpected(
             Func<DesignerCategoryAttribute> attributeThunk,
             string expectedCategory
-        ) {
+        )
+        {
             DesignerCategoryAttribute attribute = attributeThunk();
             Assert.Same(attribute, attributeThunk());
             Assert.Equal(expectedCategory, attribute.Category);

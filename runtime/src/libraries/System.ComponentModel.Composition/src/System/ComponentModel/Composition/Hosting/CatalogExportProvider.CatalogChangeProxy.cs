@@ -20,7 +20,8 @@ namespace System.ComponentModel.Composition.Hosting
                 ComposablePartCatalog originalCatalog,
                 IEnumerable<ComposablePartDefinition> addedParts,
                 IEnumerable<ComposablePartDefinition> removedParts
-            ) {
+            )
+            {
                 _originalCatalog = originalCatalog;
                 _addedParts = new List<ComposablePartDefinition>(addedParts);
                 _removedParts = new HashSet<ComposablePartDefinition>(removedParts);

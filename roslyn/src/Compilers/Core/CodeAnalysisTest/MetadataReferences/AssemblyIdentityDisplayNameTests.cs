@@ -46,7 +46,8 @@ namespace Microsoft.CodeAnalysis.UnitTests
             int build,
             int revision,
             AssemblyIdentityParts expectedParts
-        ) {
+        )
+        {
             AssemblyIdentityParts actualParts;
             ulong actual;
             Assert.True(AssemblyIdentity.TryParseVersion(value, out actual, out actualParts));
@@ -115,7 +116,8 @@ namespace Microsoft.CodeAnalysis.UnitTests
             string displayName,
             AssemblyIdentity expected,
             AssemblyIdentityParts expectedParts = 0
-        ) {
+        )
+        {
             TestParseDisplayName(displayName, expected, expectedParts, expected);
         }
 
@@ -124,7 +126,8 @@ namespace Microsoft.CodeAnalysis.UnitTests
             AssemblyIdentity expected,
             AssemblyIdentityParts expectedParts,
             AssemblyIdentity expectedFusion
-        ) {
+        )
+        {
             var fusion = FusionAssemblyIdentity.ToAssemblyIdentity(
                 FusionAssemblyIdentity.ToAssemblyNameObject(displayName)
             );

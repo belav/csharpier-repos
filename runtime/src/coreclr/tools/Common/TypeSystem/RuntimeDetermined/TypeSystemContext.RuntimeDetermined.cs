@@ -18,7 +18,8 @@ namespace Internal.TypeSystem
             public RuntimeDeterminedTypeKey(
                 DefType plainCanonType,
                 GenericParameterDesc detailsType
-            ) {
+            )
+            {
                 _plainCanonType = plainCanonType;
                 _detailsType = detailsType;
             }
@@ -40,7 +41,8 @@ namespace Internal.TypeSystem
                 protected override bool CompareKeyToValue(
                     RuntimeDeterminedTypeKey key,
                     RuntimeDeterminedType value
-                ) {
+                )
+                {
                     return key._detailsType == value.RuntimeDeterminedDetailsType
                         && key._plainCanonType == value.CanonicalType;
                 }
@@ -48,7 +50,8 @@ namespace Internal.TypeSystem
                 protected override bool CompareValueToValue(
                     RuntimeDeterminedType value1,
                     RuntimeDeterminedType value2
-                ) {
+                )
+                {
                     return value1.RuntimeDeterminedDetailsType
                             == value2.RuntimeDeterminedDetailsType
                         && value1.CanonicalType == value2.CanonicalType;
@@ -56,7 +59,8 @@ namespace Internal.TypeSystem
 
                 protected override RuntimeDeterminedType CreateValueFromKey(
                     RuntimeDeterminedTypeKey key
-                ) {
+                )
+                {
                     return new RuntimeDeterminedType(key._plainCanonType, key._detailsType);
                 }
             }
@@ -68,7 +72,8 @@ namespace Internal.TypeSystem
         public RuntimeDeterminedType GetRuntimeDeterminedType(
             DefType plainCanonType,
             GenericParameterDesc detailsType
-        ) {
+        )
+        {
             return _runtimeDeterminedTypes.GetOrCreateValue(
                 new RuntimeDeterminedTypeKey(plainCanonType, detailsType)
             );
@@ -77,7 +82,8 @@ namespace Internal.TypeSystem
         protected internal virtual TypeDesc ConvertToCanon(
             TypeDesc typeToConvert,
             ref CanonicalFormKind kind
-        ) {
+        )
+        {
             throw new NotSupportedException();
         }
 
@@ -94,7 +100,8 @@ namespace Internal.TypeSystem
             public MethodForRuntimeDeterminedTypeKey(
                 MethodDesc typicalMethodDef,
                 RuntimeDeterminedType rdType
-            ) {
+            )
+            {
                 _typicalMethodDef = typicalMethodDef;
                 _rdType = rdType;
                 _hashcode = TypeHashingAlgorithms.ComputeMethodHashCode(
@@ -132,7 +139,8 @@ namespace Internal.TypeSystem
                 protected override bool CompareKeyToValue(
                     MethodForRuntimeDeterminedTypeKey key,
                     MethodForRuntimeDeterminedType value
-                ) {
+                )
+                {
                     if (key._typicalMethodDef != value.GetTypicalMethodDefinition())
                         return false;
 
@@ -142,7 +150,8 @@ namespace Internal.TypeSystem
                 protected override bool CompareValueToValue(
                     MethodForRuntimeDeterminedType value1,
                     MethodForRuntimeDeterminedType value2
-                ) {
+                )
+                {
                     return (
                             value1.GetTypicalMethodDefinition()
                             == value2.GetTypicalMethodDefinition()
@@ -151,7 +160,8 @@ namespace Internal.TypeSystem
 
                 protected override MethodForRuntimeDeterminedType CreateValueFromKey(
                     MethodForRuntimeDeterminedTypeKey key
-                ) {
+                )
+                {
                     return new MethodForRuntimeDeterminedType(
                         key.TypicalMethodDef,
                         key.RDType,
@@ -167,7 +177,8 @@ namespace Internal.TypeSystem
         public MethodDesc GetMethodForRuntimeDeterminedType(
             MethodDesc typicalMethodDef,
             RuntimeDeterminedType rdType
-        ) {
+        )
+        {
             Debug.Assert(!(typicalMethodDef is MethodForRuntimeDeterminedType));
             Debug.Assert(typicalMethodDef.IsTypicalMethodDefinition);
 

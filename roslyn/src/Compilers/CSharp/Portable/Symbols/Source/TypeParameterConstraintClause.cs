@@ -77,7 +77,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
         internal static TypeParameterConstraintClause Create(
             TypeParameterConstraintKind constraints,
             ImmutableArray<TypeWithAnnotations> constraintTypes
-        ) {
+        )
+        {
             Debug.Assert(!constraintTypes.IsDefault);
             if (constraintTypes.IsEmpty)
             {
@@ -97,7 +98,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
         private TypeParameterConstraintClause(
             TypeParameterConstraintKind constraints,
             ImmutableArray<TypeWithAnnotations> constraintTypes
-        ) {
+        )
+        {
 #if DEBUG
             switch (constraints & TypeParameterConstraintKind.AllReferenceTypeKinds)
             {
@@ -137,7 +139,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             Symbol container,
             ImmutableArray<TypeParameterSymbol> typeParameters,
             ImmutableArray<TypeParameterConstraintClause> constraintClauses
-        ) {
+        )
+        {
             Debug.Assert(constraintClauses.Length == typeParameters.Length);
 
             var isValueTypeMap = new SmallDictionary<TypeParameterSymbol, bool>(
@@ -161,7 +164,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                 ImmutableArray<TypeParameterConstraintClause> constraintClauses,
                 SmallDictionary<TypeParameterSymbol, bool> isValueTypeMap,
                 ConsList<TypeParameterSymbol> inProgress
-            ) {
+            )
+            {
                 if (inProgress.ContainsReference(thisTypeParameter))
                 {
                     return false;
@@ -181,7 +185,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                 if (
                     (constraintClause.Constraints & TypeParameterConstraintKind.AllValueTypeKinds)
                     != 0
-                ) {
+                )
+                {
                     result = true;
                 }
                 else
@@ -198,7 +203,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                         if (
                             type is TypeParameterSymbol typeParameter
                             && (object)typeParameter.ContainingSymbol == (object)container
-                        ) {
+                        )
+                        {
                             if (
                                 isValueType(
                                     typeParameter,
@@ -206,7 +212,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                                     isValueTypeMap,
                                     inProgress
                                 )
-                            ) {
+                            )
+                            {
                                 result = true;
                                 break;
                             }
@@ -231,7 +238,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             Symbol container,
             ImmutableArray<TypeParameterSymbol> typeParameters,
             ImmutableArray<TypeParameterConstraintClause> constraintClauses
-        ) {
+        )
+        {
             Debug.Assert(constraintClauses.Length == typeParameters.Length);
 
             var isReferenceTypeFromConstraintTypesMap = new SmallDictionary<
@@ -256,7 +264,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                 ImmutableArray<TypeParameterConstraintClause> constraintClauses,
                 SmallDictionary<TypeParameterSymbol, bool> isReferenceTypeFromConstraintTypesMap,
                 ConsList<TypeParameterSymbol> inProgress
-            ) {
+            )
+            {
                 if (inProgress.ContainsReference(thisTypeParameter))
                 {
                     return false;
@@ -267,7 +276,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                         thisTypeParameter,
                         out bool knownIsReferenceTypeFromConstraintTypes
                     )
-                ) {
+                )
+                {
                     return knownIsReferenceTypeFromConstraintTypes;
                 }
 
@@ -297,7 +307,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                                     isReferenceTypeFromConstraintTypesMap,
                                     inProgress
                                 )
-                            ) {
+                            )
+                            {
                                 result = true;
                                 break;
                             }
@@ -310,7 +321,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                     }
                     else if (
                         TypeParameterSymbol.NonTypeParameterConstraintImpliesReferenceType(type)
-                    ) {
+                    )
+                    {
                         result = true;
                         break;
                     }

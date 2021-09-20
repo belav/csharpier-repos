@@ -119,7 +119,8 @@ namespace System.Net.Http
             string prefix,
             string template,
             string expectedTemplate
-        ) {
+        )
+        {
             // Arrange
             var config = new HttpConfiguration();
             var routePrefixes = new Collection<IRoutePrefix>();
@@ -348,7 +349,8 @@ namespace System.Net.Http
             HttpConfiguration config,
             Collection<IRoutePrefix> routePrefixes,
             IEnumerable<RouteAttribute> routeAttributes
-        ) {
+        )
+        {
             HttpControllerDescriptor controllerDescriptor = CreateControllerDescriptor(
                 config,
                 "Controller",
@@ -375,7 +377,8 @@ namespace System.Net.Http
             HttpConfiguration configuration,
             string controllerName,
             Collection<IRoutePrefix> routePrefixes
-        ) {
+        )
+        {
             Mock<HttpControllerDescriptor> controllerDescriptor =
                 new Mock<HttpControllerDescriptor>();
             controllerDescriptor.Object.Configuration = configuration;
@@ -393,7 +396,8 @@ namespace System.Net.Http
             HttpControllerDescriptor controllerDescriptor,
             string actionName,
             IEnumerable<RouteAttribute> routeAttributes
-        ) {
+        )
+        {
             Collection<IDirectRouteFactory> newProviders = new Collection<IDirectRouteFactory>(
                 new List<IDirectRouteFactory>(routeAttributes)
             );
@@ -419,7 +423,8 @@ namespace System.Net.Http
 
         private static IHttpControllerSelector CreateControllerSelector(
             IEnumerable<HttpControllerDescriptor> controllerDescriptors
-        ) {
+        )
+        {
             Mock<IHttpControllerSelector> controllerSelector = new Mock<IHttpControllerSelector>();
             controllerSelector.Setup(c => c.GetControllerMapping())
                 .Returns(controllerDescriptors.ToDictionary(cd => cd.ControllerName));
@@ -428,7 +433,8 @@ namespace System.Net.Http
 
         private static IHttpActionSelector CreateActionSelector(
             Dictionary<HttpControllerDescriptor, IEnumerable<HttpActionDescriptor>> actionMap
-        ) {
+        )
+        {
             Mock<IHttpActionSelector> actionSelector = new Mock<IHttpActionSelector>();
             foreach (var mapEntry in actionMap)
             {
@@ -453,7 +459,8 @@ namespace System.Net.Http
             public void Initialize(
                 HttpControllerSettings controllerSettings,
                 HttpControllerDescriptor controllerDescriptor
-            ) {
+            )
+            {
                 controllerSettings.Services.Replace(
                     typeof(IHttpActionSelector),
                     PerControllerActionSelectorMock.Object

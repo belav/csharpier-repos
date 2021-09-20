@@ -27,7 +27,8 @@ namespace Microsoft.CodeAnalysis
         public static ValueUsageInfo GetValueUsageInfo(
             this IOperation operation,
             ISymbol containingSymbol
-        ) {
+        )
+        {
             /*
             |    code                  | Read | Write | ReadableRef | WritableRef | NonReadWriteRef |
             | x.Prop = 1               |      |  ✔️   |             |             |                 |
@@ -63,7 +64,8 @@ namespace Microsoft.CodeAnalysis
                     operation.Parent is IBinaryPatternOperation
                     || operation.Parent is INegatedPatternOperation
                     || operation.Parent is IRelationalPatternOperation
-                ) {
+                )
+                {
                     operation = operation.Parent;
                 }
 
@@ -127,7 +129,8 @@ namespace Microsoft.CodeAnalysis
             if (
                 operation.Parent is IAssignmentOperation assignmentOperation
                 && assignmentOperation.Target == operation
-            ) {
+            )
+            {
                 return operation.Parent.IsAnyCompoundAssignment()
                   ? ValueUsageInfo.ReadWrite
                   : ValueUsageInfo.Write;
@@ -148,7 +151,8 @@ namespace Microsoft.CodeAnalysis
                 operation.Parent is INameOfOperation
                 || operation.Parent is ITypeOfOperation
                 || operation.Parent is ISizeOfOperation
-            ) {
+            )
+            {
                 return ValueUsageInfo.Name;
             }
             else if (operation.Parent is IArgumentOperation argumentOperation)
@@ -182,7 +186,8 @@ namespace Microsoft.CodeAnalysis
                 if (
                     operation == conditionalOperation.WhenTrue
                     || operation == conditionalOperation.WhenFalse
-                ) {
+                )
+                {
                     return GetValueUsageInfo(conditionalOperation, containingSymbol);
                 }
                 else
@@ -193,7 +198,8 @@ namespace Microsoft.CodeAnalysis
             else if (
                 operation.Parent is IReDimClauseOperation reDimClauseOperation
                 && reDimClauseOperation.Operand == operation
-            ) {
+            )
+            {
                 return (reDimClauseOperation.Parent as IReDimOperation)?.Preserve == true
                   ? ValueUsageInfo.ReadWrite
                   : ValueUsageInfo.Write;
@@ -211,7 +217,8 @@ namespace Microsoft.CodeAnalysis
                 if (
                     variableInitializerOperation.Parent
                     is IVariableDeclaratorOperation variableDeclaratorOperation
-                ) {
+                )
+                {
                     switch (variableDeclaratorOperation.Symbol.RefKind)
                     {
                         case RefKind.Ref:
@@ -236,7 +243,8 @@ namespace Microsoft.CodeAnalysis
 
         public static IMethodSymbol? TryGetContainingAnonymousFunctionOrLocalFunction(
             this IOperation? operation
-        ) {
+        )
+        {
             operation = operation?.Parent;
             while (operation != null)
             {
@@ -258,7 +266,8 @@ namespace Microsoft.CodeAnalysis
         public static bool IsInLeftOfDeconstructionAssignment(
             this IOperation operation,
             [NotNullWhen(true)] out IDeconstructionAssignmentOperation? deconstructionAssignment
-        ) {
+        )
+        {
             deconstructionAssignment = null;
 
             var previousOperation = operation;
@@ -342,7 +351,8 @@ namespace Microsoft.CodeAnalysis
         public static bool HasAnyOperationDescendant(
             this ImmutableArray<IOperation> operationBlocks,
             Func<IOperation, bool> predicate
-        ) {
+        )
+        {
             foreach (var operationBlock in operationBlocks)
             {
                 if (operationBlock.HasAnyOperationDescendant(predicate))
@@ -363,7 +373,8 @@ namespace Microsoft.CodeAnalysis
             this IOperation operationBlock,
             Func<IOperation, bool> predicate,
             [NotNullWhen(true)] out IOperation? foundOperation
-        ) {
+        )
+        {
             RoslynDebug.AssertNotNull(operationBlock);
             RoslynDebug.AssertNotNull(predicate);
             foreach (var descendant in operationBlock.DescendantsAndSelf())

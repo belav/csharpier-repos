@@ -120,7 +120,8 @@ namespace Microsoft.AspNetCore.Mvc.ViewFeatures
             MediaTypeHeaderValue contentType,
             string responseContentType,
             string expectedContentType
-        ) {
+        )
+        {
             // Arrange
             var view = CreateView(
                 async (v) =>
@@ -340,7 +341,8 @@ namespace Microsoft.AspNetCore.Mvc.ViewFeatures
         [InlineData(2 * TestHttpResponseStreamWriterFactory.DefaultBufferSize + 4)]
         public async Task ExecuteAsync_AsynchronouslyFlushesToTheResponseStream_PriorToDispose(
             int writeLength
-        ) {
+        )
+        {
             // Arrange
             var view = CreateView(
                 async (v) =>

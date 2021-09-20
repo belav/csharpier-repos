@@ -47,7 +47,8 @@ namespace Microsoft.CodeAnalysis.CSharp.ExtractMethod
             SemanticModel semanticModel,
             ExpressionSyntax expression,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             cancellationToken.ThrowIfCancellationRequested();
 
             // TODO(cyrusn): This is probably unnecessary.  What we should be doing is binding

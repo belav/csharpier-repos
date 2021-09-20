@@ -31,7 +31,8 @@ namespace System.ServiceModel.Syndication
             XmlBuffer buffer,
             XmlDictionaryWriter writer,
             CategoriesDocument categories
-        ) {
+        )
+        {
             Debug.Assert(categories != null);
 
             SyndicationFeedFormatter.CloseBuffer(buffer, writer);
@@ -42,7 +43,8 @@ namespace System.ServiceModel.Syndication
             XmlBuffer buffer,
             XmlDictionaryWriter writer,
             ResourceCollectionInfo collection
-        ) {
+        )
+        {
             Debug.Assert(collection != null);
 
             SyndicationFeedFormatter.CloseBuffer(buffer, writer);
@@ -53,7 +55,8 @@ namespace System.ServiceModel.Syndication
             XmlBuffer buffer,
             XmlDictionaryWriter writer,
             Workspace workspace
-        ) {
+        )
+        {
             Debug.Assert(workspace != null);
 
             SyndicationFeedFormatter.CloseBuffer(buffer, writer);
@@ -64,7 +67,8 @@ namespace System.ServiceModel.Syndication
             XmlBuffer buffer,
             XmlDictionaryWriter writer,
             ServiceDocument document
-        ) {
+        )
+        {
             if (document == null)
             {
                 throw new ArgumentNullException(nameof(document));
@@ -76,7 +80,8 @@ namespace System.ServiceModel.Syndication
 
         protected static SyndicationCategory CreateCategory(
             InlineCategoriesDocument inlineCategories
-        ) {
+        )
+        {
             if (inlineCategories == null)
             {
                 throw new ArgumentNullException(nameof(inlineCategories));
@@ -97,13 +102,15 @@ namespace System.ServiceModel.Syndication
 
         protected static InlineCategoriesDocument CreateInlineCategories(
             ResourceCollectionInfo collection
-        ) {
+        )
+        {
             return collection.CreateInlineCategoriesDocument();
         }
 
         protected static ReferencedCategoriesDocument CreateReferencedCategories(
             ResourceCollectionInfo collection
-        ) {
+        )
+        {
             return collection.CreateReferencedCategoriesDocument();
         }
 
@@ -121,7 +128,8 @@ namespace System.ServiceModel.Syndication
             XmlReader reader,
             CategoriesDocument categories,
             int maxExtensionSize
-        ) {
+        )
+        {
             if (categories == null)
             {
                 throw new ArgumentNullException(nameof(categories));
@@ -134,7 +142,8 @@ namespace System.ServiceModel.Syndication
             XmlReader reader,
             ResourceCollectionInfo collection,
             int maxExtensionSize
-        ) {
+        )
+        {
             if (collection == null)
             {
                 throw new ArgumentNullException(nameof(collection));
@@ -147,7 +156,8 @@ namespace System.ServiceModel.Syndication
             XmlReader reader,
             Workspace workspace,
             int maxExtensionSize
-        ) {
+        )
+        {
             if (workspace == null)
             {
                 throw new ArgumentNullException(nameof(workspace));
@@ -160,7 +170,8 @@ namespace System.ServiceModel.Syndication
             XmlReader reader,
             ServiceDocument document,
             int maxExtensionSize
-        ) {
+        )
+        {
             if (document == null)
             {
                 throw new ArgumentNullException(nameof(document));
@@ -175,7 +186,8 @@ namespace System.ServiceModel.Syndication
             string value,
             ServiceDocument document,
             string version
-        ) {
+        )
+        {
             if (document == null)
             {
                 throw new ArgumentNullException(nameof(document));
@@ -190,7 +202,8 @@ namespace System.ServiceModel.Syndication
             string value,
             ResourceCollectionInfo collection,
             string version
-        ) {
+        )
+        {
             if (collection == null)
             {
                 throw new ArgumentNullException(nameof(collection));
@@ -205,7 +218,8 @@ namespace System.ServiceModel.Syndication
             string value,
             CategoriesDocument categories,
             string version
-        ) {
+        )
+        {
             if (categories == null)
             {
                 throw new ArgumentNullException(nameof(categories));
@@ -220,7 +234,8 @@ namespace System.ServiceModel.Syndication
             string value,
             Workspace workspace,
             string version
-        ) {
+        )
+        {
             if (workspace == null)
             {
                 throw new ArgumentNullException(nameof(workspace));
@@ -233,7 +248,8 @@ namespace System.ServiceModel.Syndication
             XmlReader reader,
             ResourceCollectionInfo collection,
             string version
-        ) {
+        )
+        {
             if (collection == null)
             {
                 throw new ArgumentNullException(nameof(collection));
@@ -246,7 +262,8 @@ namespace System.ServiceModel.Syndication
             XmlReader reader,
             ServiceDocument document,
             string version
-        ) {
+        )
+        {
             if (document == null)
             {
                 throw new ArgumentNullException(nameof(document));
@@ -269,7 +286,8 @@ namespace System.ServiceModel.Syndication
             XmlReader reader,
             CategoriesDocument categories,
             string version
-        ) {
+        )
+        {
             if (categories == null)
             {
                 throw new ArgumentNullException(nameof(categories));
@@ -282,7 +300,8 @@ namespace System.ServiceModel.Syndication
             XmlWriter writer,
             ServiceDocument document,
             string version
-        ) {
+        )
+        {
             if (document == null)
             {
                 throw new ArgumentNullException(nameof(document));
@@ -295,7 +314,8 @@ namespace System.ServiceModel.Syndication
             XmlWriter writer,
             Workspace workspace,
             string version
-        ) {
+        )
+        {
             if (workspace == null)
             {
                 throw new ArgumentNullException(nameof(workspace));
@@ -308,7 +328,8 @@ namespace System.ServiceModel.Syndication
             XmlWriter writer,
             ResourceCollectionInfo collection,
             string version
-        ) {
+        )
+        {
             if (collection == null)
             {
                 throw new ArgumentNullException(nameof(collection));
@@ -321,7 +342,8 @@ namespace System.ServiceModel.Syndication
             XmlWriter writer,
             CategoriesDocument categories,
             string version
-        ) {
+        )
+        {
             if (categories == null)
             {
                 throw new ArgumentNullException(nameof(categories));
@@ -334,7 +356,8 @@ namespace System.ServiceModel.Syndication
             XmlWriter writer,
             ServiceDocument document,
             string version
-        ) {
+        )
+        {
             if (document == null)
             {
                 throw new ArgumentNullException(nameof(document));
@@ -347,7 +370,8 @@ namespace System.ServiceModel.Syndication
             XmlWriter writer,
             Workspace workspace,
             string version
-        ) {
+        )
+        {
             if (workspace == null)
             {
                 throw new ArgumentNullException(nameof(workspace));
@@ -360,7 +384,8 @@ namespace System.ServiceModel.Syndication
             XmlWriter writer,
             ResourceCollectionInfo collection,
             string version
-        ) {
+        )
+        {
             if (collection == null)
             {
                 throw new ArgumentNullException(nameof(collection));
@@ -373,7 +398,8 @@ namespace System.ServiceModel.Syndication
             XmlWriter writer,
             CategoriesDocument categories,
             string version
-        ) {
+        )
+        {
             if (categories == null)
             {
                 throw new ArgumentNullException(nameof(categories));

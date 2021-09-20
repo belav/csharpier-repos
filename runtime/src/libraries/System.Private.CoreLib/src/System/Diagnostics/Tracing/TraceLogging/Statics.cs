@@ -83,7 +83,8 @@ namespace System.Diagnostics.Tracing
             int prefixSize,
             int suffixSize,
             int additionalSize
-        ) {
+        )
+        {
             Statics.CheckName(name);
             int metadataSize = Encoding.UTF8.GetByteCount(name) + 3 + prefixSize + suffixSize;
             var metadata = new byte[metadataSize];
@@ -166,7 +167,8 @@ namespace System.Diagnostics.Tracing
         public static TraceLoggingDataType MakeDataType(
             TraceLoggingDataType baseType,
             EventFieldFormat format
-        ) {
+        )
+        {
             return (TraceLoggingDataType)(((int)baseType & 0x1f) | ((int)format << 8));
         }
 
@@ -179,7 +181,8 @@ namespace System.Diagnostics.Tracing
         public static TraceLoggingDataType Format8(
             EventFieldFormat format,
             TraceLoggingDataType native
-        ) {
+        )
+        {
             return format switch
             {
                 EventFieldFormat.Default => native,
@@ -204,7 +207,8 @@ namespace System.Diagnostics.Tracing
         public static TraceLoggingDataType Format16(
             EventFieldFormat format,
             TraceLoggingDataType native
-        ) {
+        )
+        {
             return format switch
             {
                 EventFieldFormat.Default => native,
@@ -229,7 +233,8 @@ namespace System.Diagnostics.Tracing
         public static TraceLoggingDataType Format32(
             EventFieldFormat format,
             TraceLoggingDataType native
-        ) {
+        )
+        {
             return format switch
             {
                 EventFieldFormat.Default => native,
@@ -264,7 +269,8 @@ namespace System.Diagnostics.Tracing
         public static TraceLoggingDataType Format64(
             EventFieldFormat format,
             TraceLoggingDataType native
-        ) {
+        )
+        {
             return format switch
             {
                 EventFieldFormat.Default => native,
@@ -288,7 +294,8 @@ namespace System.Diagnostics.Tracing
         public static TraceLoggingDataType FormatPtr(
             EventFieldFormat format,
             TraceLoggingDataType native
-        ) {
+        )
+        {
             return format switch
             {
                 EventFieldFormat.Default => native,
@@ -401,7 +408,8 @@ namespace System.Diagnostics.Tracing
         public static TraceLoggingTypeInfo CreateDefaultTypeInfo(
             Type dataType,
             List<Type> recursionCheck
-        ) {
+        )
+        {
             TraceLoggingTypeInfo result;
 
             if (recursionCheck.Contains(dataType))
@@ -418,7 +426,8 @@ namespace System.Diagnostics.Tracing
                 eventAttrib != null
                 || Statics.GetCustomAttribute<CompilerGeneratedAttribute>(dataType) != null
                 || IsGenericMatch(dataType, typeof(KeyValuePair<, >))
-            ) {
+            )
+            {
                 var analysis = new TypeAnalysis(dataType, eventAttrib, recursionCheck);
                 result = new InvokeTypeInfo(dataType, analysis);
             }

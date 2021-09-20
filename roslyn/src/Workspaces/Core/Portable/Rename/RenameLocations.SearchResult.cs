@@ -20,7 +20,8 @@ namespace Microsoft.CodeAnalysis.Rename
                 ImmutableHashSet<RenameLocation> locations,
                 ImmutableArray<ReferenceLocation> implicitLocations,
                 ImmutableArray<ISymbol> referencedSymbols
-            ) {
+            )
+            {
                 Contract.ThrowIfNull(locations);
                 this.Locations = locations;
                 this.ImplicitLocations = implicitLocations;

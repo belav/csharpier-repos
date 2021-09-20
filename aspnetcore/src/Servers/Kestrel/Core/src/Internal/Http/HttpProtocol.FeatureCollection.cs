@@ -322,7 +322,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Http
             long offset,
             long? count,
             CancellationToken cancellation
-        ) {
+        )
+        {
             return SendFileFallback.SendFileAsync(ResponseBody, path, offset, count, cancellation);
         }
 

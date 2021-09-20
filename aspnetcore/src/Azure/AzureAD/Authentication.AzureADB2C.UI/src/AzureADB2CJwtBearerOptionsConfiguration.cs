@@ -20,7 +20,8 @@ namespace Microsoft.AspNetCore.Authentication
         public AzureADB2CJwtBearerOptionsConfiguration(
             IOptions<AzureADB2CSchemeOptions> schemeOptions,
             IOptionsMonitor<AzureADB2COptions> azureADB2COptions
-        ) {
+        )
+        {
             _schemeOptions = schemeOptions;
             _azureADB2COptions = azureADB2COptions;
         }

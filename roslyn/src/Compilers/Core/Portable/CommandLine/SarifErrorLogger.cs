@@ -104,7 +104,8 @@ namespace Microsoft.CodeAnalysis
                             x => x.Key,
                             StringComparer.Ordinal
                         )
-                    ) {
+                    )
+                    {
                         _writer.Write(pair.Key, pair.Value);
                     }
 

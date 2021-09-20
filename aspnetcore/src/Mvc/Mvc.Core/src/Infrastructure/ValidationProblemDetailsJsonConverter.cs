@@ -19,7 +19,8 @@ namespace Microsoft.AspNetCore.Mvc.Infrastructure
             ref Utf8JsonReader reader,
             Type typeToConvert,
             JsonSerializerOptions options
-        ) {
+        )
+        {
             var problemDetails = new ValidationProblemDetails();
 
             if (reader.TokenType != JsonTokenType.StartObject)
@@ -61,7 +62,8 @@ namespace Microsoft.AspNetCore.Mvc.Infrastructure
             Utf8JsonWriter writer,
             ValidationProblemDetails value,
             JsonSerializerOptions options
-        ) {
+        )
+        {
             writer.WriteStartObject();
             WriteProblemDetails(writer, value, options);
 

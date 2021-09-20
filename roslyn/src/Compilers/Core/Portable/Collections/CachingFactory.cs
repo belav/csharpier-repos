@@ -199,7 +199,8 @@ namespace Microsoft.CodeAnalysis
         public static ObjectPool<CachingIdentityFactory<TKey, TValue>> CreatePool(
             int size,
             Func<TKey, TValue> valueFactory
-        ) {
+        )
+        {
             var pool = new ObjectPool<CachingIdentityFactory<TKey, TValue>>(
                 pool => new CachingIdentityFactory<TKey, TValue>(size, valueFactory, pool),
                 Environment.ProcessorCount * 2

@@ -22,7 +22,8 @@ namespace System.Net.Http.Functional.Tests
             Version useVersion = null,
             QuicImplementationProvider quicImplementationProvider = null,
             bool allowAllHttp2Certificates = true
-        ) {
+        )
+        {
             useVersion ??= HttpVersion.Version11;
 
             HttpClientHandler handler =
@@ -85,7 +86,8 @@ namespace System.Net.Http.Functional.Tests
         protected static LoopbackServerFactory GetFactoryForVersion(
             Version useVersion,
             QuicImplementationProvider quicImplementationProvider = null
-        ) {
+        )
+        {
             return useVersion.Major switch
             {
 #if NETCOREAPP
@@ -113,7 +115,8 @@ namespace System.Net.Http.Functional.Tests
         protected override HttpResponseMessage Send(
             HttpRequestMessage request,
             Threading.CancellationToken cancellationToken
-        ) {
+        )
+        {
             if (request.Version == _useVersion)
             {
                 request.VersionPolicy = HttpVersionPolicy.RequestVersionExact;
@@ -125,7 +128,8 @@ namespace System.Net.Http.Functional.Tests
         protected override Task<HttpResponseMessage> SendAsync(
             HttpRequestMessage request,
             Threading.CancellationToken cancellationToken
-        ) {
+        )
+        {
             if (request.Version == _useVersion)
             {
                 request.VersionPolicy = HttpVersionPolicy.RequestVersionExact;

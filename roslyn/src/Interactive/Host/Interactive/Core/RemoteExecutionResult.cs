@@ -53,7 +53,8 @@ namespace Microsoft.CodeAnalysis.Interactive
             ImmutableArray<string> referencePaths,
             string workingDirectory,
             RemoteInitializationResult? initializationResult
-        ) {
+        )
+        {
             Success = success;
             SourcePaths = sourcePaths;
             ReferencePaths = referencePaths;

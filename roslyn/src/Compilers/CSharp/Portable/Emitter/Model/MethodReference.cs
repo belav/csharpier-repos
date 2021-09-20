@@ -65,7 +65,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Emit
 
         ImmutableArray<Cci.IParameterTypeInformation> Cci.ISignature.GetParameters(
             EmitContext context
-        ) {
+        )
+        {
             PEModuleBuilder moduleBeingBuilt = (PEModuleBuilder)context.Module;
             return moduleBeingBuilt.Translate(UnderlyingMethod.Parameters);
         }

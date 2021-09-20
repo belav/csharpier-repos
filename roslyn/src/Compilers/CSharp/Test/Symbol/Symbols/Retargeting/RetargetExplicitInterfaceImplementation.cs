@@ -403,7 +403,8 @@ public  class D : C
         private static PropertySymbol FindIndexerWithParameterCount(
             NamedTypeSymbol type,
             int parameterCount
-        ) {
+        )
+        {
             return type.GetMembers()
                 .Where(s => s.Kind == SymbolKind.Property)
                 .Cast<PropertySymbol>()

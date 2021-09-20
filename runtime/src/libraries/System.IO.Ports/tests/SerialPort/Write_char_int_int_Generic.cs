@@ -75,7 +75,8 @@ namespace System.IO.Ports.Tests
                 SerialPort com = new SerialPort(
                     TCSupport.LocalMachineSerialInfo.FirstAvailablePortName
                 )
-            ) {
+            )
+            {
                 Debug.WriteLine("Verifying write method throws exception after a call to Cloes()");
                 com.Open();
                 com.Close();
@@ -97,7 +98,8 @@ namespace System.IO.Ports.Tests
                 SerialPort com2 = new SerialPort(
                     TCSupport.LocalMachineSerialInfo.SecondAvailablePortName
                 )
-            ) {
+            )
+            {
                 Random rndGen = new Random(-55);
                 byte[] XOffBuffer = new byte[1];
 
@@ -128,7 +130,8 @@ namespace System.IO.Ports.Tests
                 SerialPort com = new SerialPort(
                     TCSupport.LocalMachineSerialInfo.FirstAvailablePortName
                 )
-            ) {
+            )
+            {
                 Random rndGen = new Random(-55);
 
                 com.WriteTimeout = rndGen.Next(minRandomTimeout, maxRandomTimeout);
@@ -160,7 +163,8 @@ namespace System.IO.Ports.Tests
                 SerialPort com1 = new SerialPort(
                     TCSupport.LocalMachineSerialInfo.FirstAvailablePortName
                 )
-            ) {
+            )
+            {
                 Random rndGen = new Random(-55);
                 AsyncEnableRts asyncEnableRts = new AsyncEnableRts();
                 var t = new Task(asyncEnableRts.EnableRTS);
@@ -201,7 +205,8 @@ namespace System.IO.Ports.Tests
                 SerialPort com = new SerialPort(
                     TCSupport.LocalMachineSerialInfo.FirstAvailablePortName
                 )
-            ) {
+            )
+            {
                 AsyncWriteRndCharArray asyncWriteRndCharArray = new AsyncWriteRndCharArray(
                     com,
                     CHAR_SIZE_BYTES_TO_WRITE
@@ -229,7 +234,8 @@ namespace System.IO.Ports.Tests
                 SerialPort com = new SerialPort(
                     TCSupport.LocalMachineSerialInfo.FirstAvailablePortName
                 )
-            ) {
+            )
+            {
                 AsyncWriteRndCharArray asyncWriteRndCharArray = new AsyncWriteRndCharArray(
                     com,
                     CHAR_SIZE_BYTES_TO_WRITE
@@ -269,7 +275,8 @@ namespace System.IO.Ports.Tests
                 SerialPort com = new SerialPort(
                     TCSupport.LocalMachineSerialInfo.FirstAvailablePortName
                 )
-            ) {
+            )
+            {
                 AsyncWriteRndCharArray asyncWriteRndCharArray = new AsyncWriteRndCharArray(
                     com,
                     CHAR_SIZE_HANDSHAKE
@@ -320,7 +327,8 @@ namespace System.IO.Ports.Tests
                         SerialPort com2 = new SerialPort(
                             TCSupport.LocalMachineSerialInfo.SecondAvailablePortName
                         )
-                    ) {
+                    )
+                    {
                         Random rndGen = new Random(-55);
                         int sleepPeriod = rndGen.Next(minRandomTimeout, maxRandomTimeout / 2);
 
@@ -441,7 +449,8 @@ namespace System.IO.Ports.Tests
                 SerialPort com2 = new SerialPort(
                     TCSupport.LocalMachineSerialInfo.SecondAvailablePortName
                 )
-            ) {
+            )
+            {
                 bool rts =
                     Handshake.RequestToSend == handshake
                     || Handshake.RequestToSendXOnXOff == handshake;

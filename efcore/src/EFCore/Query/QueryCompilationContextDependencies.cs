@@ -68,7 +68,8 @@ namespace Microsoft.EntityFrameworkCore.Query
             ICurrentDbContext currentContext,
             IDbContextOptions contextOptions,
             IDiagnosticsLogger<DbLoggerCategory.Query> logger
-        ) {
+        )
+        {
             Check.NotNull(model, nameof(model));
             Check.NotNull(
                 queryTranslationPreprocessorFactory,

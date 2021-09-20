@@ -72,7 +72,8 @@ namespace Castle.DynamicProxy.Tests.Classes
             bool isSomething,
             string name,
             FileAccess access
-        ) {
+        )
+        {
             this.id = id;
             this.num = num;
             this.isSomething = isSomething;

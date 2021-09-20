@@ -18,7 +18,8 @@ namespace Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore
             bool databaseExists,
             bool pendingModelChanges,
             IEnumerable<string> pendingMigrations
-        ) {
+        )
+        {
             Type = type;
             DatabaseExists = databaseExists;
             PendingModelChanges = pendingModelChanges;

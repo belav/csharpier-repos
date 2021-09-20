@@ -27,7 +27,8 @@ namespace Microsoft.EntityFrameworkCore.Cosmos.Query.Internal
         public CosmosQueryContextFactory(
             QueryContextDependencies dependencies,
             ICosmosClientWrapper cosmosClient
-        ) {
+        )
+        {
             Check.NotNull(dependencies, nameof(dependencies));
             Check.NotNull(cosmosClient, nameof(cosmosClient));
 

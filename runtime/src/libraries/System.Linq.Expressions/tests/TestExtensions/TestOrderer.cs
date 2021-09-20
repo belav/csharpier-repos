@@ -12,7 +12,8 @@ namespace System.Linq.Expressions.Tests
     {
         IEnumerable<TTestCase> ITestCaseOrderer.OrderTestCases<TTestCase>(
             IEnumerable<TTestCase> testCases
-        ) {
+        )
+        {
             Dictionary<int, List<TTestCase>> queue = new Dictionary<int, List<TTestCase>>();
             foreach (TTestCase testCase in testCases)
             {
@@ -23,7 +24,8 @@ namespace System.Linq.Expressions.Tests
                 if (
                     orderAttribute == null
                     || (order = orderAttribute.GetConstructorArguments().Cast<int>().First()) == 0
-                ) {
+                )
+                {
                     yield return testCase;
                 }
                 else

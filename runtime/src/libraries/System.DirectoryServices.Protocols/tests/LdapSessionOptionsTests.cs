@@ -34,7 +34,8 @@ namespace System.DirectoryServices.Protocols.Tests
         [InlineData((ReferralChasingOptions)3)]
         public void ReferralChasing_SetInvalid_ThrowsInvalidEnumArgumentException(
             ReferralChasingOptions referralChasing
-        ) {
+        )
+        {
             using (var connection = new LdapConnection("server"))
             {
                 AssertExtensions.Throws<InvalidEnumArgumentException>(

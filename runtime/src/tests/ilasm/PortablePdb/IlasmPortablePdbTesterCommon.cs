@@ -27,7 +27,8 @@ namespace IlasmPortablePdbTests
             string testDir,
             out string dll,
             out string pdb
-        ) {
+        )
+        {
             var currentDirectory = Environment.CurrentDirectory;
             var ilSrcFullPath = Path.Combine(currentDirectory, testDir, ilSrc);
             Assert.True(File.Exists(ilSrcFullPath));
@@ -63,7 +64,8 @@ namespace IlasmPortablePdbTests
             string pdb,
             PEReader peReader,
             bool embedded
-        ) {
+        )
+        {
             Assert.True(
                 peReader.TryOpenAssociatedPortablePdb(
                     dll,

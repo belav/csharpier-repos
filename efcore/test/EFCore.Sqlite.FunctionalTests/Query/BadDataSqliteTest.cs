@@ -162,9 +162,8 @@ namespace Microsoft.EntityFrameworkCore.Query
         // ReSharper disable once ClassNeverInstantiated.Local
         private class BadDataCommandBuilderFactory : RelationalCommandBuilderFactory
         {
-            public BadDataCommandBuilderFactory(
-                RelationalCommandBuilderDependencies dependencies
-            ) : base(dependencies) { }
+            public BadDataCommandBuilderFactory(RelationalCommandBuilderDependencies dependencies)
+                : base(dependencies) { }
 
             public object[] Values { private get; set; }
 
@@ -202,7 +201,8 @@ namespace Microsoft.EntityFrameworkCore.Query
 
                     public override RelationalDataReader ExecuteReader(
                         RelationalCommandParameterObject parameterObject
-                    ) {
+                    )
+                    {
                         var command = parameterObject.Connection.DbConnection.CreateCommand();
                         command.CommandText = CommandText;
                         var reader = new BadDataRelationalDataReader(this);

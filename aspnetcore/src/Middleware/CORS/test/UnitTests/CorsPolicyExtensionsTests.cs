@@ -32,7 +32,8 @@ namespace Microsoft.AspNetCore.Cors.Infrastructure
         [InlineData("http://.domain/hello")]
         public void IsOriginAnAllowedSubdomain_ReturnsFalseIfOriginIsMalformedUri(
             string malformedOrigin
-        ) {
+        )
+        {
             // Arrange
             var policy = new CorsPolicy();
             policy.Origins.Add("http://*.domain");
@@ -52,7 +53,8 @@ namespace Microsoft.AspNetCore.Cors.Infrastructure
         public void IsOriginAnAllowedSubdomain_ReturnsTrue_WhenASubdomain(
             string origin,
             string allowedOrigin
-        ) {
+        )
+        {
             // Arrange
             var policy = new CorsPolicy();
             policy.Origins.Add(allowedOrigin);
@@ -75,7 +77,8 @@ namespace Microsoft.AspNetCore.Cors.Infrastructure
         public void IsOriginAnAllowedSubdomain_ReturnsFalse_WhenNotASubdomain(
             string origin,
             string allowedOrigin
-        ) {
+        )
+        {
             // Arrange
             var policy = new CorsPolicy();
             policy.Origins.Add(allowedOrigin);

@@ -302,7 +302,8 @@ public sealed class ClassVisibleTrueServer
         int[] arrayVal,
         byte inByteVal,
         int inIntVal
-    ) {
+    )
+    {
         outIntVal = 10;
         return 8;
     }
@@ -314,7 +315,8 @@ public sealed class ClassVisibleTrueServer
         ref List<short> refShortVal,
         GenericClassW2Pars<int, short> genericClass,
         params object[] paramsList
-    ) {
+    )
+    {
         return 10;
     }
     int IDerivedInterfaceVisibleTrueGuid.Foo()

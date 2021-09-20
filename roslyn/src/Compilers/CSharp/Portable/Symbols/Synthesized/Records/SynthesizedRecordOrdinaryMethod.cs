@@ -23,19 +23,21 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             bool hasBody,
             int memberOffset,
             BindingDiagnosticBag diagnostics
-        ) : base(
-            containingType,
-            name,
-            containingType.Locations[0],
-            (CSharpSyntaxNode)containingType.SyntaxReferences[0].GetSyntax(),
-            MethodKind.Ordinary,
-            isIterator: false,
-            isExtensionMethod: false,
-            isPartial: false,
-            hasBody: hasBody,
-            isNullableAnalysisEnabled: false,
-            diagnostics
-        ) {
+        )
+            : base(
+                containingType,
+                name,
+                containingType.Locations[0],
+                (CSharpSyntaxNode)containingType.SyntaxReferences[0].GetSyntax(),
+                MethodKind.Ordinary,
+                isIterator: false,
+                isExtensionMethod: false,
+                isPartial: false,
+                hasBody: hasBody,
+                isNullableAnalysisEnabled: false,
+                diagnostics
+            )
+        {
             _memberOffset = memberOffset;
         }
 

@@ -278,7 +278,8 @@ public class Test
         private void TestConditionAttributeType_DifferentSource(
             string condDefsSrcFile1,
             string condDefsSrcFile2
-        ) {
+        )
+        {
             string source1 = condDefsSrcFile1 + s_commonTestSource_ConditionalAttrDefs;
             string source2 =
                 condDefsSrcFile2
@@ -526,7 +527,8 @@ Z.PreservedCalls_MultipleConditional_Method";
         private void TestConditionMethods_DifferentSource(
             string condDefsSrcFile1,
             string condDefsSrcFile2
-        ) {
+        )
+        {
             string source1 = condDefsSrcFile1 + s_commonTestSource_ConditionalMethodDefs;
             string source2 =
                 condDefsSrcFile2

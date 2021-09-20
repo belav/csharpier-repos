@@ -21,7 +21,8 @@ namespace System.IO.Enumeration
             ReadOnlySpan<char> directory,
             ReadOnlySpan<char> rootDirectory,
             ReadOnlySpan<char> originalRootDirectory
-        ) {
+        )
+        {
             entry._info = info;
             entry.Directory = directory;
             entry.RootDirectory = rootDirectory;

@@ -27,7 +27,8 @@ namespace System.Web.Http.Routing
             string parameterName,
             IDictionary<string, object> values,
             HttpRouteDirection routeDirection
-        ) {
+        )
+        {
             if (request == null)
             {
                 throw Error.ArgumentNull("request");
@@ -89,7 +90,8 @@ namespace System.Web.Http.Routing
             string parameterName,
             IDictionary<string, object> values,
             HttpRouteDirection routeDirection
-        ) {
+        )
+        {
             return Match(request, route, parameterName, values, routeDirection);
         }
     }

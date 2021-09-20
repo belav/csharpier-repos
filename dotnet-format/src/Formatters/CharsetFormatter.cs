@@ -31,7 +31,8 @@ namespace Microsoft.CodeAnalysis.Tools.Formatters
             FormatOptions formatOptions,
             ILogger logger,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             return Task.Run(
                 () =>
                 {
@@ -39,7 +40,8 @@ namespace Microsoft.CodeAnalysis.Tools.Formatters
                         !TryGetCharset(analyzerConfigOptions, out var encoding)
                         || sourceText.Encoding?.Equals(encoding) == true
                         || IsEncodingEquivalent(sourceText, encoding)
-                    ) {
+                    )
+                    {
                         return sourceText;
                     }
 
@@ -80,11 +82,13 @@ namespace Microsoft.CodeAnalysis.Tools.Formatters
         private static bool TryGetCharset(
             AnalyzerConfigOptions analyzerConfigOptions,
             [NotNullWhen(true)] out Encoding? encoding
-        ) {
+        )
+        {
             if (
                 analyzerConfigOptions != null
                 && analyzerConfigOptions.TryGetValue("charset", out var charsetOption)
-            ) {
+            )
+            {
                 encoding = GetCharset(charsetOption);
                 return true;
             }

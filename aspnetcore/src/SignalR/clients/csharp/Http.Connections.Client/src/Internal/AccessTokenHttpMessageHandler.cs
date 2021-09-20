@@ -23,7 +23,8 @@ namespace Microsoft.AspNetCore.Http.Connections.Client.Internal
         protected override async Task<HttpResponseMessage> SendAsync(
             HttpRequestMessage request,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var accessToken = await _httpConnection.GetAccessTokenAsync();
 
             if (!string.IsNullOrEmpty(accessToken))

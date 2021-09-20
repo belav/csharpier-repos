@@ -81,7 +81,8 @@ namespace System.ServiceModel.Syndication.Tests
             string outerElementName,
             string outerElementNamespace,
             string expected
-        ) {
+        )
+        {
             var content = new SyndicationContentSubclass();
             if (attributeExtensions != null)
             {
@@ -315,7 +316,8 @@ namespace System.ServiceModel.Syndication.Tests
         [MemberData(nameof(CreateXmlContent_XmlObjectSerializer_TestData))]
         public void CreateXmlContent_XmlObjectSerializer_ReturnsExpected(
             XmlObjectSerializer dataContractSerializer
-        ) {
+        )
+        {
             XmlSyndicationContent content = SyndicationContent.CreateXmlContent(
                 new ExtensionObject { Value = 10 },
                 dataContractSerializer

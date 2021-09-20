@@ -62,7 +62,8 @@ namespace Microsoft.AspNetCore.WebUtilities
         /// <returns>A <see cref="ContentDispositionHeaderValue"/> if the header was found, null otherwise</returns>
         public static ContentDispositionHeaderValue? GetContentDispositionHeader(
             this MultipartSection section
-        ) {
+        )
+        {
             if (!ContentDispositionHeaderValue.TryParse(section.ContentDisposition, out var header))
             {
                 return null;

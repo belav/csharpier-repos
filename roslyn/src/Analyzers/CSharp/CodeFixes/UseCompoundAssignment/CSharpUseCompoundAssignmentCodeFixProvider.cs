@@ -39,7 +39,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UseCompoundAssignment
             ExpressionSyntax left,
             SyntaxToken syntaxToken,
             ExpressionSyntax right
-        ) {
+        )
+        {
             return SyntaxFactory.AssignmentExpression(assignmentOpKind, left, syntaxToken, right);
         }
 

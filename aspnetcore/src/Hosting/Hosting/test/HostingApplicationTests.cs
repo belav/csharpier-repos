@@ -91,7 +91,8 @@ namespace Microsoft.AspNetCore.Hosting.Tests
         private static HostingApplication CreateApplication(
             IHttpContextFactory httpContextFactory = null,
             bool useHttpContextAccessor = false
-        ) {
+        )
+        {
             var services = new ServiceCollection();
             services.AddOptions();
             if (useHttpContextAccessor)

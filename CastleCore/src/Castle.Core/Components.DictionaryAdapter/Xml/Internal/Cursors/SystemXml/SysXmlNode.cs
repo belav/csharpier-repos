@@ -239,7 +239,8 @@ namespace Castle.Components.DictionaryAdapter.Xml
             IXmlKnownTypeMap knownTypes,
             IXmlNamespaceSource namespaces,
             CursorFlags flags
-        ) {
+        )
+        {
             return new SysXmlCursor(this, knownTypes, namespaces, flags);
         }
 
@@ -268,7 +269,8 @@ namespace Castle.Components.DictionaryAdapter.Xml
             IXmlIncludedTypeMap includedTypes,
             IXmlNamespaceSource namespaces,
             CursorFlags flags
-        ) {
+        )
+        {
             return flags.SupportsMutation()
               ? (IXmlCursor)new XPathMutableCursor(this, path, includedTypes, namespaces, flags)
               : (IXmlCursor)new XPathReadOnlyCursor(this, path, includedTypes, namespaces, flags);

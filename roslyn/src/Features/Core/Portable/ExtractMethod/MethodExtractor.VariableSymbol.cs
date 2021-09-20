@@ -61,7 +61,8 @@ namespace Microsoft.CodeAnalysis.ExtractMethod
                 VariableSymbol left,
                 VariableSymbol right,
                 INamedTypeSymbol cancellationTokenType
-            ) {
+            )
+            {
                 // CancellationTokens always go at the end of method signature.
                 var leftIsCancellationToken = left.OriginalType.Equals(cancellationTokenType);
                 var rightIsCancellationToken = right.OriginalType.Equals(cancellationTokenType);
@@ -105,7 +106,8 @@ namespace Microsoft.CodeAnalysis.ExtractMethod
             public override void AddIdentifierTokenAnnotationPair(
                 List<Tuple<SyntaxToken, SyntaxAnnotation>> annotations,
                 CancellationToken cancellationToken
-            ) {
+            )
+            {
                 // do nothing for parameter
             }
         }
@@ -265,7 +267,8 @@ namespace Microsoft.CodeAnalysis.ExtractMethod
 
             public override SyntaxToken GetOriginalIdentifierToken(
                 CancellationToken cancellationToken
-            ) {
+            )
+            {
                 Contract.ThrowIfFalse(_localSymbol.Locations.Length == 1);
                 Contract.ThrowIfFalse(_localSymbol.Locations[0].IsInSource);
                 Contract.ThrowIfNull(_localSymbol.Locations[0].SourceTree);
@@ -284,7 +287,8 @@ namespace Microsoft.CodeAnalysis.ExtractMethod
             public override void AddIdentifierTokenAnnotationPair(
                 List<Tuple<SyntaxToken, SyntaxAnnotation>> annotations,
                 CancellationToken cancellationToken
-            ) {
+            )
+            {
                 annotations.Add(
                     Tuple.Create(GetOriginalIdentifierToken(cancellationToken), _annotation)
                 );

@@ -14,7 +14,8 @@ namespace System.Reflection.TypeLoading.Ecma
         public static RoAssemblyName ToRoAssemblyName(
             this AssemblyReferenceHandle h,
             MetadataReader reader
-        ) {
+        )
+        {
             AssemblyReference a = h.GetAssemblyReference(reader);
             string name = a.Name.GetString(reader);
             Version? version = a.Version.AdjustForUnspecifiedVersionComponents();
@@ -81,7 +82,8 @@ namespace System.Reflection.TypeLoading.Ecma
         public static PrimitiveTypeCode GetEnumUnderlyingPrimitiveTypeCode(
             this Type enumType,
             MetadataLoadContext loader
-        ) {
+        )
+        {
             Type type = enumType.GetEnumUnderlyingType();
             CoreTypes coreTypes = loader.GetAllFoundCoreTypes();
             // Be careful how you compare - one or more elements of "coreTypes" can be null!
@@ -127,7 +129,8 @@ namespace System.Reflection.TypeLoading.Ecma
         //
         public static System.Configuration.Assemblies.AssemblyHashAlgorithm ToConfigurationAssemblyHashAlgorithm(
             this System.Reflection.AssemblyHashAlgorithm srmHash
-        ) {
+        )
+        {
             return (System.Configuration.Assemblies.AssemblyHashAlgorithm)srmHash;
         }
 
@@ -160,7 +163,8 @@ namespace System.Reflection.TypeLoading.Ecma
         public static unsafe ReadOnlySpan<byte> AsReadOnlySpan(
             this StringHandle handle,
             MetadataReader reader
-        ) {
+        )
+        {
             BlobReader br = handle.GetBlobReader(reader);
             return new ReadOnlySpan<byte>(br.CurrentPointer, br.Length);
         }
@@ -169,7 +173,8 @@ namespace System.Reflection.TypeLoading.Ecma
             this MethodDefinitionHandle handle,
             RoInstantiationProviderType declaringType,
             Type reflectedType
-        ) {
+        )
+        {
             if (handle.IsNil)
                 return null;
 
@@ -180,7 +185,8 @@ namespace System.Reflection.TypeLoading.Ecma
             this MethodDefinitionHandle handle,
             RoInstantiationProviderType declaringType,
             Type reflectedType
-        ) {
+        )
+        {
             return new RoDefinitionMethod<EcmaMethodDecoder>(
                 declaringType,
                 reflectedType,

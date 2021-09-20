@@ -13,7 +13,8 @@ namespace System.Net.WebSockets.Client.Tests
     {
         public static async Task<Dictionary<string, string>> WebSocketHandshakeAsync(
             LoopbackServer.Connection connection
-        ) {
+        )
+        {
             string serverResponse = null;
             List<string> headers = await connection.ReadRequestHeaderAsync().ConfigureAwait(false);
 

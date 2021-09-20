@@ -311,7 +311,8 @@ namespace System.IO.Ports.Tests
                 if (
                     expectedBytes.Length
                     != (numBytesRead = com1.Read(byteRcvBuffer, 0, byteRcvBuffer.Length))
-                ) {
+                )
+                {
                     Fail(
                         "Err_6481sfadw Expected read to read {0} chars actually read {1}",
                         expectedBytes.Length,
@@ -441,12 +442,14 @@ namespace System.IO.Ports.Tests
             int offset,
             int count,
             Type expectedException
-        ) {
+        )
+        {
             using (
                 SerialPort com = new SerialPort(
                     TCSupport.LocalMachineSerialInfo.FirstAvailablePortName
                 )
-            ) {
+            )
+            {
                 int bufferLength = null == buffer ? 0 : buffer.Length;
 
                 Debug.WriteLine(
@@ -478,7 +481,8 @@ namespace System.IO.Ports.Tests
             int count,
             int numberOfBytesToRead,
             ReadDataFromEnum readDataFrom
-        ) {
+        )
+        {
             using (SerialPort com1 = TCSupport.InitFirstSerialPort())
             using (SerialPort com2 = TCSupport.InitSecondSerialPort(com1))
             {
@@ -554,7 +558,8 @@ namespace System.IO.Ports.Tests
             byte[] rcvBuffer,
             int offset,
             int count
-        ) {
+        )
+        {
             VerifyBytesReadOnCom1FromCom2(com1, com2, bytesToWrite, rcvBuffer, offset, count);
         }
 
@@ -565,7 +570,8 @@ namespace System.IO.Ports.Tests
             byte[] rcvBuffer,
             int offset,
             int count
-        ) {
+        )
+        {
             BufferData(com1, com2, bytesToWrite);
             PerformReadOnCom1FromCom2(com1, com2, bytesToWrite, rcvBuffer, offset, count);
         }
@@ -577,7 +583,8 @@ namespace System.IO.Ports.Tests
             byte[] rcvBuffer,
             int offset,
             int count
-        ) {
+        )
+        {
             byte[] expectedBytes = new byte[(2 * bytesToWrite.Length)];
 
             BufferData(com1, com2, bytesToWrite);
@@ -624,7 +631,8 @@ namespace System.IO.Ports.Tests
             byte[] rcvBuffer,
             int offset,
             int count
-        ) {
+        )
+        {
             VerifyBytesReadOnCom1FromCom2(
                 com1,
                 com2,
@@ -644,7 +652,8 @@ namespace System.IO.Ports.Tests
             byte[] rcvBuffer,
             int offset,
             int count
-        ) {
+        )
+        {
             com2.Write(bytesToWrite, 0, bytesToWrite.Length);
 
             com1.ReadTimeout = 500;
@@ -661,7 +670,8 @@ namespace System.IO.Ports.Tests
             byte[] rcvBuffer,
             int offset,
             int count
-        ) {
+        )
+        {
             byte[] buffer = new byte[expectedBytes.Length];
             int bytesRead,
                 totalBytesRead;
@@ -686,7 +696,8 @@ namespace System.IO.Ports.Tests
                 if (
                     (bytesToRead > bytesRead && count != bytesRead)
                     || (bytesToRead <= bytesRead && bytesRead != bytesToRead)
-                ) {
+                )
+                {
                     //If we have not read all of the characters that we should have
                     Fail(
                         "ERROR!!!: Read did not return all of the characters that were in SerialPort buffer"

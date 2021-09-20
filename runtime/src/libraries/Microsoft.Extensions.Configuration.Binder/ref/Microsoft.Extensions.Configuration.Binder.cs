@@ -34,21 +34,24 @@ namespace Microsoft.Extensions.Configuration
         public static object Get(
             this Microsoft.Extensions.Configuration.IConfiguration configuration,
             System.Type type
-        ) {
+        )
+        {
             throw null;
         }
         public static object Get(
             this Microsoft.Extensions.Configuration.IConfiguration configuration,
             System.Type type,
             System.Action<Microsoft.Extensions.Configuration.BinderOptions> configureOptions
-        ) {
+        )
+        {
             throw null;
         }
         public static object GetValue(
             this Microsoft.Extensions.Configuration.IConfiguration configuration,
             System.Type type,
             string key
-        ) {
+        )
+        {
             throw null;
         }
         public static object GetValue(
@@ -56,20 +59,23 @@ namespace Microsoft.Extensions.Configuration
             System.Type type,
             string key,
             object defaultValue
-        ) {
+        )
+        {
             throw null;
         }
         public static T GetValue<T>(
             this Microsoft.Extensions.Configuration.IConfiguration configuration,
             string key
-        ) {
+        )
+        {
             throw null;
         }
         public static T GetValue<T>(
             this Microsoft.Extensions.Configuration.IConfiguration configuration,
             string key,
             T defaultValue
-        ) {
+        )
+        {
             throw null;
         }
         public static T Get<T>(this Microsoft.Extensions.Configuration.IConfiguration configuration)
@@ -79,7 +85,8 @@ namespace Microsoft.Extensions.Configuration
         public static T Get<T>(
             this Microsoft.Extensions.Configuration.IConfiguration configuration,
             System.Action<Microsoft.Extensions.Configuration.BinderOptions> configureOptions
-        ) {
+        )
+        {
             throw null;
         }
     }

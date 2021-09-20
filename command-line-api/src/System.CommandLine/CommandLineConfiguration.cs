@@ -41,7 +41,8 @@ namespace System.CommandLine
             IReadOnlyCollection<InvocationMiddleware>? middlewarePipeline = null,
             Func<BindingContext, IHelpBuilder>? helpBuilderFactory = null,
             Action<IHelpBuilder>? configureHelp = null
-        ) {
+        )
+        {
             if (symbols is null)
             {
                 throw new ArgumentNullException(nameof(symbols));
@@ -124,7 +125,8 @@ namespace System.CommandLine
                         var globalOptionIndex = 0;
                         globalOptionIndex < globalOptions.Count;
                         globalOptionIndex++
-                    ) {
+                    )
+                    {
                         childCommand.TryAddGlobalOption(globalOptions[globalOptionIndex]);
                     }
 

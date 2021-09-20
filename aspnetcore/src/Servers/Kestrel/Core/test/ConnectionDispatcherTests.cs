@@ -174,7 +174,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Tests
 
             public ValueTask<ConnectionContext> AcceptAsync(
                 CancellationToken cancellationToken = default
-            ) {
+            )
+            {
                 throw new InvalidOperationException("Unexpected error listening");
             }
 

@@ -57,7 +57,8 @@ namespace Microsoft.CodeAnalysis.CSharp.CommandLine.UnitTests
         internal override string GetExpectedOutputForSimpleCompilerDiagnostics(
             CommonCompiler cmd,
             string sourceFile
-        ) {
+        )
+        {
             string expectedOutput =
                 @"{{
   ""$schema"": ""http://json.schemastore.org/sarif-2.1.0"",
@@ -164,7 +165,8 @@ namespace Microsoft.CodeAnalysis.CSharp.CommandLine.UnitTests
         internal override string GetExpectedOutputForSimpleCompilerDiagnosticsSuppressed(
             CommonCompiler cmd,
             string sourceFile
-        ) {
+        )
+        {
             string expectedOutput =
                 @"{{
   ""$schema"": ""http://json.schemastore.org/sarif-2.1.0"",
@@ -275,7 +277,8 @@ namespace Microsoft.CodeAnalysis.CSharp.CommandLine.UnitTests
 
         internal override string GetExpectedOutputForAnalyzerDiagnosticsWithAndWithoutLocation(
             MockCSharpCompiler cmd
-        ) {
+        )
+        {
             string expectedOutput =
                 @"{{
   ""$schema"": ""http://json.schemastore.org/sarif-2.1.0"",
@@ -308,7 +311,8 @@ namespace Microsoft.CodeAnalysis.CSharp.CommandLine.UnitTests
         internal override string GetExpectedOutputForAnalyzerDiagnosticsWithSuppression(
             MockCSharpCompiler cmd,
             string justification
-        ) {
+        )
+        {
             string expectedOutput =
                 @"{{
   ""$schema"": ""http://json.schemastore.org/sarif-2.1.0"",
@@ -378,7 +382,8 @@ namespace Microsoft.CodeAnalysis.CSharp.CommandLine.UnitTests
             string s,
             CommonCompiler compiler,
             params object[] additionalArguments
-        ) {
+        )
+        {
             var arguments = new object[]
             {
                 compiler.GetToolName(),

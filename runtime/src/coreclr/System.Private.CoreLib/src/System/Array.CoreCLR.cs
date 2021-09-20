@@ -67,7 +67,8 @@ namespace System
             int length1,
             int length2,
             int length3
-        ) {
+        )
+        {
             if (elementType is null)
                 ThrowHelper.ThrowArgumentNullException(ExceptionArgument.elementType);
             if (length1 < 0)
@@ -139,7 +140,8 @@ namespace System
             Type elementType,
             int[] lengths,
             int[] lowerBounds
-        ) {
+        )
+        {
             if (elementType == null)
                 ThrowHelper.ThrowArgumentNullException(ExceptionArgument.elementType);
             if (lengths == null)
@@ -204,7 +206,8 @@ namespace System
                 && !pMT->IsMultiDimensionalArray
                 && (uint)length <= (nuint)sourceArray.LongLength
                 && (uint)length <= (nuint)destinationArray.LongLength
-            ) {
+            )
+            {
                 nuint byteCount = (uint)length * (nuint)pMT->ComponentSize;
                 ref byte src = ref Unsafe.As<RawArrayData>(sourceArray).Data;
                 ref byte dst = ref Unsafe.As<RawArrayData>(destinationArray).Data;
@@ -238,7 +241,8 @@ namespace System
             Array destinationArray,
             int destinationIndex,
             int length
-        ) {
+        )
+        {
             if (sourceArray != null && destinationArray != null)
             {
                 MethodTable* pMT = RuntimeHelpers.GetMethodTable(sourceArray);
@@ -250,7 +254,8 @@ namespace System
                     && destinationIndex >= 0
                     && (uint)(sourceIndex + length) <= (nuint)sourceArray.LongLength
                     && (uint)(destinationIndex + length) <= (nuint)destinationArray.LongLength
-                ) {
+                )
+                {
                     nuint elementSize = (nuint)pMT->ComponentSize;
                     nuint byteCount = (uint)length * elementSize;
                     ref byte src = ref Unsafe.AddByteOffset(
@@ -290,7 +295,8 @@ namespace System
             int destinationIndex,
             int length,
             bool reliable
-        ) {
+        )
+        {
             if (sourceArray == null)
                 ThrowHelper.ThrowArgumentNullException(ExceptionArgument.sourceArray);
             if (destinationArray == null)
@@ -332,7 +338,8 @@ namespace System
             if (
                 sourceArray.GetType() == destinationArray.GetType()
                 || IsSimpleCopy(sourceArray, destinationArray)
-            ) {
+            )
+            {
                 MethodTable* pMT = RuntimeHelpers.GetMethodTable(sourceArray);
 
                 nuint elementSize = (nuint)pMT->ComponentSize;
@@ -391,7 +398,8 @@ namespace System
             Array destinationArray,
             int destinationIndex,
             int length
-        ) {
+        )
+        {
             Copy(
                 sourceArray,
                 sourceIndex,

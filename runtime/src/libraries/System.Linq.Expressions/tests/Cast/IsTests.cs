@@ -1182,14 +1182,16 @@ namespace System.Linq.Expressions.Tests
         [Theory, ClassData(typeof(CompilationTypes))]
         public static void ConvertObjectCastGenericWithStructRestrictionAsStruct(
             bool useInterpreter
-        ) {
+        )
+        {
             CheckObjectIsGenericWithStructRestrictionHelper<S>(useInterpreter);
         }
 
         [Theory, ClassData(typeof(CompilationTypes))]
         public static void ConvertObjectCastGenericWithStructRestrictionAsStructWithStringAndField(
             bool useInterpreter
-        ) {
+        )
+        {
             CheckObjectIsGenericWithStructRestrictionHelper<Scs>(useInterpreter);
         }
 
@@ -1244,56 +1246,64 @@ namespace System.Linq.Expressions.Tests
         [Theory, ClassData(typeof(CompilationTypes))]
         public static void ConvertGenericWithStructRestrictionCastObjectAsStruct(
             bool useInterpreter
-        ) {
+        )
+        {
             CheckGenericWithStructRestrictionIsObjectHelper<S>(useInterpreter);
         }
 
         [Theory, ClassData(typeof(CompilationTypes))]
         public static void ConvertGenericWithStructRestrictionCastObjectAsStructWithStringAndField(
             bool useInterpreter
-        ) {
+        )
+        {
             CheckGenericWithStructRestrictionIsObjectHelper<Scs>(useInterpreter);
         }
 
         [Theory, ClassData(typeof(CompilationTypes))]
         public static void ConvertGenericWithStructRestrictionCastValueTypeAsEnum(
             bool useInterpreter
-        ) {
+        )
+        {
             CheckGenericWithStructRestrictionIsValueTypeHelper<E>(useInterpreter);
         }
 
         [Theory, ClassData(typeof(CompilationTypes))]
         public static void ConvertGenericWithStructRestrictionCastValueTypeAsStruct(
             bool useInterpreter
-        ) {
+        )
+        {
             CheckGenericWithStructRestrictionIsValueTypeHelper<S>(useInterpreter);
         }
 
         [Theory, ClassData(typeof(CompilationTypes))]
         public static void ConvertGenericWithStructRestrictionCastValueTypeAsStructWithStringAndField(
             bool useInterpreter
-        ) {
+        )
+        {
             CheckGenericWithStructRestrictionIsValueTypeHelper<Scs>(useInterpreter);
         }
 
         [Theory, ClassData(typeof(CompilationTypes))]
         public static void ConvertValueTypeCastGenericWithStructRestrictionAsEnum(
             bool useInterpreter
-        ) {
+        )
+        {
             CheckValueTypeIsGenericWithStructRestrictionHelper<E>(useInterpreter);
         }
 
         [Theory, ClassData(typeof(CompilationTypes))]
         public static void ConvertValueTypeCastGenericWithStructRestrictionAsStruct(
             bool useInterpreter
-        ) {
+        )
+        {
             CheckValueTypeIsGenericWithStructRestrictionHelper<S>(useInterpreter);
         }
 
         [Theory, ClassData(typeof(CompilationTypes))]
         public static void ConvertValueTypeCastGenericWithStructRestrictionAsStructWithStringAndField(
             bool useInterpreter
-        ) {
+        )
+        {
             CheckValueTypeIsGenericWithStructRestrictionHelper<Scs>(useInterpreter);
         }
 
@@ -1483,7 +1493,8 @@ namespace System.Linq.Expressions.Tests
         private static void VerifyCustomArrayIsIEnumerableOfInterface(
             C[] value,
             bool useInterpreter
-        ) {
+        )
+        {
             Expression<Func<bool>> e = Expression.Lambda<Func<bool>>(
                 Expression.TypeIs(Expression.Constant(value, typeof(C[])), typeof(IEnumerable<I>)),
                 Enumerable.Empty<ParameterExpression>()
@@ -1745,7 +1756,8 @@ namespace System.Linq.Expressions.Tests
         private static void VerifyIEnumerableOfCustomIsCustomArray(
             IEnumerable<C> value,
             bool useInterpreter
-        ) {
+        )
+        {
             Expression<Func<bool>> e = Expression.Lambda<Func<bool>>(
                 Expression.TypeIs(Expression.Constant(value, typeof(IEnumerable<C>)), typeof(C[])),
                 Enumerable.Empty<ParameterExpression>()
@@ -1758,7 +1770,8 @@ namespace System.Linq.Expressions.Tests
         private static void VerifyIEnumerableOfCustomIsObjectArray(
             IEnumerable<C> value,
             bool useInterpreter
-        ) {
+        )
+        {
             Expression<Func<bool>> e = Expression.Lambda<Func<bool>>(
                 Expression.TypeIs(
                     Expression.Constant(value, typeof(IEnumerable<C>)),
@@ -1774,7 +1787,8 @@ namespace System.Linq.Expressions.Tests
         private static void VerifyIEnumerableOfCustom2IsCustomArray(
             IEnumerable<D> value,
             bool useInterpreter
-        ) {
+        )
+        {
             Expression<Func<bool>> e = Expression.Lambda<Func<bool>>(
                 Expression.TypeIs(Expression.Constant(value, typeof(IEnumerable<D>)), typeof(C[])),
                 Enumerable.Empty<ParameterExpression>()
@@ -1787,7 +1801,8 @@ namespace System.Linq.Expressions.Tests
         private static void VerifyIEnumerableOfInterfaceIsCustomArray(
             IEnumerable<I> value,
             bool useInterpreter
-        ) {
+        )
+        {
             Expression<Func<bool>> e = Expression.Lambda<Func<bool>>(
                 Expression.TypeIs(Expression.Constant(value, typeof(IEnumerable<I>)), typeof(C[])),
                 Enumerable.Empty<ParameterExpression>()
@@ -1800,7 +1815,8 @@ namespace System.Linq.Expressions.Tests
         private static void VerifyIEnumerableOfInterfaceIsObjectArray(
             IEnumerable<I> value,
             bool useInterpreter
-        ) {
+        )
+        {
             Expression<Func<bool>> e = Expression.Lambda<Func<bool>>(
                 Expression.TypeIs(
                     Expression.Constant(value, typeof(IEnumerable<I>)),
@@ -1816,7 +1832,8 @@ namespace System.Linq.Expressions.Tests
         private static void VerifyIEnumerableOfObjectIsCustomArray(
             IEnumerable<object> value,
             bool useInterpreter
-        ) {
+        )
+        {
             Expression<Func<bool>> e = Expression.Lambda<Func<bool>>(
                 Expression.TypeIs(
                     Expression.Constant(value, typeof(IEnumerable<object>)),
@@ -1832,7 +1849,8 @@ namespace System.Linq.Expressions.Tests
         private static void VerifyIEnumerableOfObjectIsObjectArray(
             IEnumerable<object> value,
             bool useInterpreter
-        ) {
+        )
+        {
             Expression<Func<bool>> e = Expression.Lambda<Func<bool>>(
                 Expression.TypeIs(
                     Expression.Constant(value, typeof(IEnumerable<object>)),
@@ -1848,7 +1866,8 @@ namespace System.Linq.Expressions.Tests
         private static void VerifyIEnumerableOfStructIsStructArray(
             IEnumerable<S> value,
             bool useInterpreter
-        ) {
+        )
+        {
             Expression<Func<bool>> e = Expression.Lambda<Func<bool>>(
                 Expression.TypeIs(Expression.Constant(value, typeof(IEnumerable<S>)), typeof(S[])),
                 Enumerable.Empty<ParameterExpression>()
@@ -1861,7 +1880,8 @@ namespace System.Linq.Expressions.Tests
         private static void VerifyIEquatableOfCustomIsCustom(
             IEquatable<C> value,
             bool useInterpreter
-        ) {
+        )
+        {
             Expression<Func<bool>> e = Expression.Lambda<Func<bool>>(
                 Expression.TypeIs(Expression.Constant(value, typeof(IEquatable<C>)), typeof(C)),
                 Enumerable.Empty<ParameterExpression>()
@@ -1874,7 +1894,8 @@ namespace System.Linq.Expressions.Tests
         private static void VerifyIEquatableOfCustomIsCustom2(
             IEquatable<C> value,
             bool useInterpreter
-        ) {
+        )
+        {
             Expression<Func<bool>> e = Expression.Lambda<Func<bool>>(
                 Expression.TypeIs(Expression.Constant(value, typeof(IEquatable<C>)), typeof(D)),
                 Enumerable.Empty<ParameterExpression>()
@@ -1887,7 +1908,8 @@ namespace System.Linq.Expressions.Tests
         private static void VerifyIEquatableOfCustomIsObject(
             IEquatable<C> value,
             bool useInterpreter
-        ) {
+        )
+        {
             Expression<Func<bool>> e = Expression.Lambda<Func<bool>>(
                 Expression.TypeIs(
                     Expression.Constant(value, typeof(IEquatable<C>)),
@@ -1903,7 +1925,8 @@ namespace System.Linq.Expressions.Tests
         private static void VerifyIEquatableOfCustom2IsCustom(
             IEquatable<D> value,
             bool useInterpreter
-        ) {
+        )
+        {
             Expression<Func<bool>> e = Expression.Lambda<Func<bool>>(
                 Expression.TypeIs(Expression.Constant(value, typeof(IEquatable<D>)), typeof(C)),
                 Enumerable.Empty<ParameterExpression>()
@@ -1916,7 +1939,8 @@ namespace System.Linq.Expressions.Tests
         private static void VerifyIEquatableOfCustom2IsCustom2(
             IEquatable<D> value,
             bool useInterpreter
-        ) {
+        )
+        {
             Expression<Func<bool>> e = Expression.Lambda<Func<bool>>(
                 Expression.TypeIs(Expression.Constant(value, typeof(IEquatable<D>)), typeof(D)),
                 Enumerable.Empty<ParameterExpression>()
@@ -1929,7 +1953,8 @@ namespace System.Linq.Expressions.Tests
         private static void VerifyIEquatableOfCustom2IsObject(
             IEquatable<D> value,
             bool useInterpreter
-        ) {
+        )
+        {
             Expression<Func<bool>> e = Expression.Lambda<Func<bool>>(
                 Expression.TypeIs(
                     Expression.Constant(value, typeof(IEquatable<D>)),
@@ -1945,7 +1970,8 @@ namespace System.Linq.Expressions.Tests
         private static void VerifyIEquatableOfStructIsStruct(
             IEquatable<S> value,
             bool useInterpreter
-        ) {
+        )
+        {
             Expression<Func<bool>> e = Expression.Lambda<Func<bool>>(
                 Expression.TypeIs(Expression.Constant(value, typeof(IEquatable<S>)), typeof(S)),
                 Enumerable.Empty<ParameterExpression>()
@@ -2013,7 +2039,8 @@ namespace System.Linq.Expressions.Tests
         private static void VerifyIListOfObjectIsCustomArray(
             IList<object> value,
             bool useInterpreter
-        ) {
+        )
+        {
             Expression<Func<bool>> e = Expression.Lambda<Func<bool>>(
                 Expression.TypeIs(Expression.Constant(value, typeof(IList<object>)), typeof(C[])),
                 Enumerable.Empty<ParameterExpression>()
@@ -2026,7 +2053,8 @@ namespace System.Linq.Expressions.Tests
         private static void VerifyIListOfObjectIsObjectArray(
             IList<object> value,
             bool useInterpreter
-        ) {
+        )
+        {
             Expression<Func<bool>> e = Expression.Lambda<Func<bool>>(
                 Expression.TypeIs(
                     Expression.Constant(value, typeof(IList<object>)),
@@ -2211,7 +2239,8 @@ namespace System.Linq.Expressions.Tests
         private static void VerifyObjectArrayIsIEnumerableOfCustom(
             object[] value,
             bool useInterpreter
-        ) {
+        )
+        {
             Expression<Func<bool>> e = Expression.Lambda<Func<bool>>(
                 Expression.TypeIs(
                     Expression.Constant(value, typeof(object[])),
@@ -2227,7 +2256,8 @@ namespace System.Linq.Expressions.Tests
         private static void VerifyObjectArrayIsIEnumerableOfInterface(
             object[] value,
             bool useInterpreter
-        ) {
+        )
+        {
             Expression<Func<bool>> e = Expression.Lambda<Func<bool>>(
                 Expression.TypeIs(
                     Expression.Constant(value, typeof(object[])),
@@ -2243,7 +2273,8 @@ namespace System.Linq.Expressions.Tests
         private static void VerifyObjectArrayIsIEnumerableOfObject(
             object[] value,
             bool useInterpreter
-        ) {
+        )
+        {
             Expression<Func<bool>> e = Expression.Lambda<Func<bool>>(
                 Expression.TypeIs(
                     Expression.Constant(value, typeof(object[])),

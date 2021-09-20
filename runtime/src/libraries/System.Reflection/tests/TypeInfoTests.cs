@@ -170,7 +170,8 @@ namespace System.Reflection.Tests
             bool exists,
             Type fieldType,
             bool isPrivate
-        ) {
+        )
+        {
             IEnumerable<string> fields = type.GetTypeInfo()
                 .DeclaredFields.Select(fieldInfo => fieldInfo.Name);
             FieldInfo declaredFieldInfo = type.GetTypeInfo().GetDeclaredField(name);
@@ -1363,7 +1364,8 @@ namespace System.Reflection.Tests
         public void GetConstructors(
             BindingFlags bindingAttributes,
             int[] constructorParameterCounts
-        ) {
+        )
+        {
             TypeInfo typeInfo = typeof(MembersClass).GetTypeInfo();
             if (bindingAttributes == BindingFlags.Default)
             {

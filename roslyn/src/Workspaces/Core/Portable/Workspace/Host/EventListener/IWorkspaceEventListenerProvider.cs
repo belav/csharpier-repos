@@ -36,7 +36,8 @@ namespace Microsoft.CodeAnalysis.Host
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
         public DefaultWorkspaceEventListenerServiceFactory(
             [ImportMany] IEnumerable<Lazy<IEventListener, EventListenerMetadata>> eventListeners
-        ) {
+        )
+        {
             // we use this indirect abstraction to deliver IEventLister to workspace.
             // otherwise, each Workspace implementation need to explicitly tell base event listeners either through
             // constructor or through virtual property.

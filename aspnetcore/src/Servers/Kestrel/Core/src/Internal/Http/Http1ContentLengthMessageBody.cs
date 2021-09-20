@@ -33,7 +33,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Http
 
         public override async ValueTask<ReadResult> ReadAsyncInternal(
             CancellationToken cancellationToken = default
-        ) {
+        )
+        {
             VerifyIsNotReading();
 
             if (_readCompleted)
@@ -106,7 +107,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Http
                     !_readResult.IsCanceled
                     || Interlocked.Exchange(ref _userCanceled, 0) == 1
                     || _cannotResetInputPipe
-                ) {
+                )
+                {
                     var returnedReadResultLength = CreateReadResultFromConnectionReadResult();
 
                     // Don't count bytes belonging to the next request, since read rate timeouts are done on a per-request basis.
@@ -160,7 +162,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Http
                     !_readResult.IsCanceled
                     || Interlocked.Exchange(ref _userCanceled, 0) == 1
                     || _cannotResetInputPipe
-                ) {
+                )
+                {
                     break;
                 }
 

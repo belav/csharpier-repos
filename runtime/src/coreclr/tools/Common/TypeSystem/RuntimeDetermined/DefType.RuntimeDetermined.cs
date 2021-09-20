@@ -55,7 +55,8 @@ namespace Internal.TypeSystem
         public override TypeDesc GetNonRuntimeDeterminedTypeFromRuntimeDeterminedSubtypeViaSubstitution(
             Instantiation typeInstantiation,
             Instantiation methodInstantiation
-        ) {
+        )
+        {
             TypeDesc typeDefinition = GetTypeDefinition();
             if (this == typeDefinition)
                 return this;

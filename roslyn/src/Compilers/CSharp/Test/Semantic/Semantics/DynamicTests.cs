@@ -2559,7 +2559,8 @@ public unsafe class C
         private static string GetDynamicCompoundAssignmentTestSource(
             string operatorSyntax,
             string operatorName
-        ) {
+        )
+        {
             Assert.NotEqual("+", operatorSyntax);
             Assert.NotEqual("-", operatorSyntax);
 

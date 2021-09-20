@@ -116,7 +116,8 @@ namespace Microsoft.Extensions.Logging.Test
 
         private static ServiceProvider BuildServiceProvider(
             params KeyValuePair<string, string>[] values
-        ) {
+        )
+        {
             return new ServiceCollection().AddLogging(
                     builder =>
                         builder.AddConfiguration(

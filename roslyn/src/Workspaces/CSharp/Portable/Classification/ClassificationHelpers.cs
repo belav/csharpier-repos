@@ -34,7 +34,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Classification
             else if (
                 SyntaxFacts.IsKeywordKind(token.Kind())
                 || token.IsKind(SyntaxKind.DiscardDesignation)
-            ) {
+            )
+            {
                 // When classifying `_`, IsKeywordKind handles UnderscoreToken, but need to additional check for DiscardDesignation
                 return ClassificationTypeNames.Keyword;
             }
@@ -195,7 +196,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Classification
             if (
                 token.Parent is BaseTypeDeclarationSyntax typeDeclaration
                 && typeDeclaration.Identifier == token
-            ) {
+            )
+            {
                 return GetClassificationForTypeDeclarationIdentifier(token);
             }
             else if (
@@ -204,7 +206,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Classification
                     out DelegateDeclarationSyntax? delegateDecl
                 )
                 && delegateDecl.Identifier == token
-            ) {
+            )
+            {
                 return ClassificationTypeNames.DelegateName;
             }
             else if (
@@ -213,13 +216,15 @@ namespace Microsoft.CodeAnalysis.CSharp.Classification
                     out TypeParameterSyntax? typeParameter
                 )
                 && typeParameter.Identifier == token
-            ) {
+            )
+            {
                 return ClassificationTypeNames.TypeParameterName;
             }
             else if (
                 token.Parent is MethodDeclarationSyntax methodDeclaration
                 && methodDeclaration.Identifier == token
-            ) {
+            )
+            {
                 return IsExtensionMethod(methodDeclaration)
                   ? ClassificationTypeNames.ExtensionMethodName
                   : ClassificationTypeNames.MethodName;
@@ -227,7 +232,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Classification
             else if (
                 token.Parent is ConstructorDeclarationSyntax constructorDeclaration
                 && constructorDeclaration.Identifier == token
-            ) {
+            )
+            {
                 return GetClassificationTypeForConstructorOrDestructorParent(
                     constructorDeclaration.Parent!
                 );
@@ -235,7 +241,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Classification
             else if (
                 token.Parent is DestructorDeclarationSyntax destructorDeclaration
                 && destructorDeclaration.Identifier == token
-            ) {
+            )
+            {
                 return GetClassificationTypeForConstructorOrDestructorParent(
                     destructorDeclaration.Parent!
                 );
@@ -243,31 +250,36 @@ namespace Microsoft.CodeAnalysis.CSharp.Classification
             else if (
                 token.Parent is LocalFunctionStatementSyntax localFunctionStatement
                 && localFunctionStatement.Identifier == token
-            ) {
+            )
+            {
                 return ClassificationTypeNames.MethodName;
             }
             else if (
                 token.Parent is PropertyDeclarationSyntax propertyDeclaration
                 && propertyDeclaration.Identifier == token
-            ) {
+            )
+            {
                 return ClassificationTypeNames.PropertyName;
             }
             else if (
                 token.Parent is EnumMemberDeclarationSyntax enumMemberDeclaration
                 && enumMemberDeclaration.Identifier == token
-            ) {
+            )
+            {
                 return ClassificationTypeNames.EnumMemberName;
             }
             else if (
                 token.Parent is CatchDeclarationSyntax catchDeclaration
                 && catchDeclaration.Identifier == token
-            ) {
+            )
+            {
                 return ClassificationTypeNames.LocalName;
             }
             else if (
                 token.Parent is VariableDeclaratorSyntax variableDeclarator
                 && variableDeclarator.Identifier == token
-            ) {
+            )
+            {
                 var varDecl = variableDeclarator.Parent as VariableDeclarationSyntax;
                 return varDecl?.Parent switch
                 {
@@ -286,7 +298,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Classification
             else if (
                 token.Parent is SingleVariableDesignationSyntax singleVariableDesignation
                 && singleVariableDesignation.Identifier == token
-            ) {
+            )
+            {
                 var parent = singleVariableDesignation.Parent;
 
                 // Handle nested Tuple deconstruction
@@ -305,7 +318,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Classification
                 if (
                     parent.IsKind(SyntaxKind.DeclarationExpression)
                     || parent.IsKind(SyntaxKind.DeclarationPattern)
-                ) {
+                )
+                {
                     return ClassificationTypeNames.LocalName;
                 }
 
@@ -314,19 +328,22 @@ namespace Microsoft.CodeAnalysis.CSharp.Classification
             else if (
                 token.Parent is ParameterSyntax parameterSyntax
                 && parameterSyntax.Identifier == token
-            ) {
+            )
+            {
                 return ClassificationTypeNames.ParameterName;
             }
             else if (
                 token.Parent is ForEachStatementSyntax forEachStatementSyntax
                 && forEachStatementSyntax.Identifier == token
-            ) {
+            )
+            {
                 return ClassificationTypeNames.LocalName;
             }
             else if (
                 token.Parent is EventDeclarationSyntax eventDeclarationSyntax
                 && eventDeclarationSyntax.Identifier == token
-            ) {
+            )
+            {
                 return ClassificationTypeNames.EventName;
             }
             else if (IsActualContextualKeyword(token))
@@ -336,19 +353,22 @@ namespace Microsoft.CodeAnalysis.CSharp.Classification
             else if (
                 token.Parent is IdentifierNameSyntax identifierNameSyntax
                 && IsNamespaceName(identifierNameSyntax)
-            ) {
+            )
+            {
                 return ClassificationTypeNames.NamespaceName;
             }
             else if (
                 token.Parent is ExternAliasDirectiveSyntax externAliasDirectiveSyntax
                 && externAliasDirectiveSyntax.Identifier == token
-            ) {
+            )
+            {
                 return ClassificationTypeNames.NamespaceName;
             }
             else if (
                 token.Parent is LabeledStatementSyntax labledStatementSyntax
                 && labledStatementSyntax.Identifier == token
-            ) {
+            )
+            {
                 return ClassificationTypeNames.LabelName;
             }
             else
@@ -442,7 +462,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Classification
                                 token.Parent.Kind() == SyntaxKind.TypeParameterList
                                 || token.Parent.Kind() == SyntaxKind.TypeArgumentList
                                 || token.Parent.Kind() == SyntaxKind.FunctionPointerParameterList
-                            ) {
+                            )
+                            {
                                 return ClassificationTypeNames.Punctuation;
                             }
                         }
@@ -528,7 +549,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Classification
                     out LabeledStatementSyntax? statement
                 )
                 && statement.Identifier == token
-            ) {
+            )
+            {
                 return false;
             }
 
@@ -557,7 +579,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Classification
                         if (
                             token.Parent is IdentifierNameSyntax
                             && token.Parent?.Parent is ExpressionStatementSyntax
-                        ) {
+                        )
+                        {
                             return true;
                         }
 
@@ -584,7 +607,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Classification
             TextSpan textSpan,
             ArrayBuilder<ClassifiedSpan> result,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var text2 = text.ToString(textSpan);
             var tokens = SyntaxFactory.ParseTokens(text2, initialTokenPosition: textSpan.Start);
 
@@ -594,7 +618,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Classification
         internal static ClassifiedSpan AdjustStaleClassification(
             SourceText rawText,
             ClassifiedSpan classifiedSpan
-        ) {
+        )
+        {
             // If we marked this as an identifier and it should now be a keyword
             // (or vice versa), then fix this up and return it.
             var classificationType = classifiedSpan.ClassificationType;

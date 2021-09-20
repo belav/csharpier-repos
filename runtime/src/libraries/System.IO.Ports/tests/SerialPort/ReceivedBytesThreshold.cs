@@ -35,7 +35,8 @@ namespace System.IO.Ports.Tests
                 SerialPort com2 = new SerialPort(
                     TCSupport.LocalMachineSerialInfo.SecondAvailablePortName
                 )
-            ) {
+            )
+            {
                 ReceivedEventHandler rcvEventHandler = new ReceivedEventHandler(com1);
                 SerialPortProperties serPortProp = new SerialPortProperties();
 
@@ -75,7 +76,8 @@ namespace System.IO.Ports.Tests
                 SerialPort com2 = new SerialPort(
                     TCSupport.LocalMachineSerialInfo.SecondAvailablePortName
                 )
-            ) {
+            )
+            {
                 const int thresh = 8;
 
                 com1.ReceivedBytesThreshold = thresh;
@@ -109,7 +111,8 @@ namespace System.IO.Ports.Tests
                 SerialPort com2 = new SerialPort(
                     TCSupport.LocalMachineSerialInfo.SecondAvailablePortName
                 )
-            ) {
+            )
+            {
                 ReceivedEventHandler rcvEventHandler = new ReceivedEventHandler(com1);
                 SerialPortProperties serPortProp = new SerialPortProperties();
 
@@ -164,7 +167,8 @@ namespace System.IO.Ports.Tests
                 SerialPort com2 = new SerialPort(
                     TCSupport.LocalMachineSerialInfo.SecondAvailablePortName
                 )
-            ) {
+            )
+            {
                 ReceivedEventHandler rcvEventHandler = new ReceivedEventHandler(com1);
                 SerialPortProperties serPortProp = new SerialPortProperties();
 
@@ -225,7 +229,8 @@ namespace System.IO.Ports.Tests
                 SerialPort com2 = new SerialPort(
                     TCSupport.LocalMachineSerialInfo.SecondAvailablePortName
                 )
-            ) {
+            )
+            {
                 ReceivedEventHandler rcvEventHandler = new ReceivedEventHandler(com1);
                 SerialPortProperties serPortProp = new SerialPortProperties();
 
@@ -286,7 +291,8 @@ namespace System.IO.Ports.Tests
                 SerialPort com2 = new SerialPort(
                     TCSupport.LocalMachineSerialInfo.SecondAvailablePortName
                 )
-            ) {
+            )
+            {
                 ReceivedEventHandler rcvEventHandler = new ReceivedEventHandler(com1);
                 SerialPortProperties serPortProp = new SerialPortProperties();
 
@@ -364,7 +370,8 @@ namespace System.IO.Ports.Tests
                 SerialPort com = new SerialPort(
                     TCSupport.LocalMachineSerialInfo.FirstAvailablePortName
                 )
-            ) {
+            )
+            {
                 VerifyExceptionAtOpen(com, receivedBytesThreshold, expectedException);
 
                 if (com.IsOpen)
@@ -378,7 +385,8 @@ namespace System.IO.Ports.Tests
             SerialPort com,
             int receivedBytesThreshold,
             Type expectedException
-        ) {
+        )
+        {
             int origReceivedBytesThreshold = com.ReceivedBytesThreshold;
 
             SerialPortProperties serPortProp = new SerialPortProperties();
@@ -429,7 +437,8 @@ namespace System.IO.Ports.Tests
             SerialPort com,
             int receivedBytesThreshold,
             Type expectedException
-        ) {
+        )
+        {
             SerialPortProperties serPortProp = new SerialPortProperties();
 
             com.Open();

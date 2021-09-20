@@ -33,7 +33,8 @@ namespace System.CommandLine.Binding
                         Path.AltDirectorySeparatorChar.ToString(),
                         StringComparison.Ordinal
                     )
-                ) {
+                )
+                {
                     return new DirectoryInfo(value);
                 }
 
@@ -45,7 +46,8 @@ namespace System.CommandLine.Binding
             IArgument argument,
             Type type,
             object? value
-        ) {
+        )
+        {
             switch (value)
             {
                 case string singleValue:
@@ -69,7 +71,8 @@ namespace System.CommandLine.Binding
             IArgument argument,
             Type? type,
             string value
-        ) {
+        )
+        {
             type ??= typeof(string);
 
             if (TypeDescriptor.GetConverter(type) is { } typeConverter)
@@ -97,7 +100,8 @@ namespace System.CommandLine.Binding
                     typeof(string),
                     out ConstructorInfo? ctor
                 )
-            ) {
+            )
+            {
                 var instance = ctor.Invoke(new object[] { value });
 
                 return Success(argument, instance);
@@ -111,7 +115,8 @@ namespace System.CommandLine.Binding
             Type type,
             IReadOnlyList<string> tokens,
             ArgumentResult? argumentResult = null
-        ) {
+        )
+        {
             var itemType =
                 type == typeof(string) ? typeof(string) : Binder.GetItemTypeIfEnumerable(type);
 
@@ -191,7 +196,8 @@ namespace System.CommandLine.Binding
             IArgument argument,
             Type expectedType,
             string value
-        ) {
+        )
+        {
             return new FailedArgumentTypeConversionResult(argument, expectedType, value);
         }
 
@@ -199,7 +205,8 @@ namespace System.CommandLine.Binding
             this ArgumentConversionResult conversionResult,
             SymbolResult symbolResult,
             Type toType
-        ) {
+        )
+        {
             if (conversionResult is null)
             {
                 throw new ArgumentNullException(nameof(conversionResult));

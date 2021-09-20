@@ -63,7 +63,8 @@ namespace Microsoft.CodeAnalysis.CSharp
         private bool IsLikeTupleExpression(
             BoundExpression expr,
             [NotNullWhen(true)] out BoundTupleExpression? tuple
-        ) {
+        )
+        {
             switch (expr)
             {
                 case BoundTupleExpression t:
@@ -148,14 +149,16 @@ namespace Microsoft.CodeAnalysis.CSharp
             BoundExpression expr,
             ArrayBuilder<BoundExpression> initEffects,
             ArrayBuilder<LocalSymbol> temps
-        ) {
+        )
+        {
             if (
                 expr is BoundConversion
                 {
                     ConversionKind: ConversionKind.ImplicitTuple,
                     Conversion: var conversion
                 } boundConversion
-            ) {
+            )
+            {
                 // We push an implicit tuple converion down to its elements
                 var syntax = boundConversion.Syntax;
                 Debug.Assert(expr.Type is { });
@@ -217,7 +220,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             TupleBinaryOperatorInfo operators,
             ArrayBuilder<BoundExpression> initEffects,
             ArrayBuilder<LocalSymbol> temps
-        ) {
+        )
+        {
             if (operators.InfoKind == TupleBinaryOperatorInfoKind.Multiple)
             {
                 expr = PushDownImplicitTupleConversion(expr, initEffects, temps);
@@ -271,7 +275,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             ArrayBuilder<BoundExpression> effects,
             ArrayBuilder<LocalSymbol> temps,
             bool enclosingConversionWasExplicit = false
-        ) {
+        )
+        {
             switch (expr)
             {
                 case { ConstantValue: { } }:
@@ -336,7 +341,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             bool conversionMustBePerformedOnOriginalExpression(
                 BoundConversion expr,
                 ConversionKind kind
-            ) {
+            )
+            {
                 // These are conversions from-expression that
                 // must be performed on the original expression, not on a copy of it.
                 switch (kind)
@@ -363,7 +369,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             TypeSymbol boolType,
             ArrayBuilder<LocalSymbol> temps,
             BinaryOperatorKind operatorKind
-        ) {
+        )
+        {
             switch (@operator.InfoKind)
             {
                 case TupleBinaryOperatorInfoKind.Multiple:
@@ -405,7 +412,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             TypeSymbol boolType,
             ArrayBuilder<LocalSymbol> temps,
             BinaryOperatorKind operatorKind
-        ) {
+        )
+        {
             // If either left or right is nullable, produce:
             //
             //      // outer sequence
@@ -550,7 +558,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             out BoundExpression hasValue,
             out BoundExpression value,
             out bool isNullable
-        ) {
+        )
+        {
             isNullable =
                 !(expr is BoundTupleExpression) && expr.Type is { } && expr.Type.IsNullableType();
             if (!isNullable)
@@ -622,7 +631,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             BoundExpression loweredExpression,
             ArrayBuilder<LocalSymbol> temps,
             ArrayBuilder<BoundExpression> effects
-        ) {
+        )
+        {
             BoundLocal temp = _factory.StoreToTemp(
                 loweredExpression,
                 out BoundAssignmentOperator assignmentToTemp
@@ -639,7 +649,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             BoundExpression expr,
             ArrayBuilder<LocalSymbol> temps,
             ArrayBuilder<BoundExpression> effects
-        ) {
+        )
+        {
             // Optimize conversions where we can use the underlying
             switch (expr)
             {
@@ -705,7 +716,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                 Conversion conversion,
                 TypeWithAnnotations type,
                 BoundConversion enclosing
-            ) {
+            )
+            {
                 return new BoundConversion(
                     expr.Syntax,
                     expr,
@@ -730,7 +742,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             ArrayBuilder<LocalSymbol> temps,
             ArrayBuilder<BoundExpression> effects,
             BinaryOperatorKind operatorKind
-        ) {
+        )
+        {
             ImmutableArray<TupleBinaryOperatorInfo> nestedOperators = operators.Operators;
 
             BoundExpression? currentResult = null;
@@ -809,7 +822,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             BoundExpression right,
             TypeSymbol boolType,
             BinaryOperatorKind operatorKind
-        ) {
+        )
+        {
             // We deferred lowering some of the conversions on the operand, even though the
             // code below the conversions were lowered.  We lower the conversion part now.
             left = LowerConversions(left);

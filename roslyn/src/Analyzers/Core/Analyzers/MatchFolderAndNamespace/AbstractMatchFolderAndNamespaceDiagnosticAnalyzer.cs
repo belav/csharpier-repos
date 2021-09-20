@@ -66,7 +66,8 @@ namespace Microsoft.CodeAnalysis.Analyzers.MatchFolderAndNamespace
                     MatchFolderAndNamespaceConstants.ProjectDirOption,
                     out var projectDir
                 ) || string.IsNullOrEmpty(projectDir)
-            ) {
+            )
+            {
                 return;
             }
 
@@ -84,7 +85,8 @@ namespace Microsoft.CodeAnalysis.Analyzers.MatchFolderAndNamespace
                     currentNamespace,
                     out var targetNamespace
                 ) && IsFixSupported(context.SemanticModel, namespaceDecl, context.CancellationToken)
-            ) {
+            )
+            {
                 var nameSyntax = GetSyntaxFacts().GetNameOfNamespaceDeclaration(namespaceDecl);
                 RoslynDebug.AssertNotNull(nameSyntax);
 
@@ -107,7 +109,8 @@ namespace Microsoft.CodeAnalysis.Analyzers.MatchFolderAndNamespace
             SemanticModel semanticModel,
             TNamespaceSyntax namespaceDeclaration,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var root = namespaceDeclaration.SyntaxTree.GetRoot(cancellationToken);
 
             // It should not be nested in other namespaces
@@ -156,7 +159,8 @@ namespace Microsoft.CodeAnalysis.Analyzers.MatchFolderAndNamespace
             string projectDir,
             string currentNamespace,
             [NotNullWhen(returnValue: true)] out string? targetNamespace
-        ) {
+        )
+        {
             if (!PathUtilities.IsChildPath(projectDir, namespaceDeclaration.SyntaxTree.FilePath))
             {
                 // The file does not exist within the project directory
@@ -182,7 +186,8 @@ namespace Microsoft.CodeAnalysis.Analyzers.MatchFolderAndNamespace
             if (
                 RoslynString.IsNullOrWhiteSpace(expectedNamespace)
                 || expectedNamespace.Equals(currentNamespace, StringComparison.OrdinalIgnoreCase)
-            ) {
+            )
+            {
                 // The namespace currently matches the folder structure or is invalid, in which case we don't want
                 // to provide a diagnostic.
                 targetNamespace = null;
@@ -199,7 +204,8 @@ namespace Microsoft.CodeAnalysis.Analyzers.MatchFolderAndNamespace
         protected bool ContainsPartialTypeWithMultipleDeclarations(
             TNamespaceSyntax namespaceDeclaration,
             SemanticModel semanticModel
-        ) {
+        )
+        {
             var syntaxFacts = GetSyntaxFacts();
 
             var typeDeclarations = syntaxFacts.GetMembersOfNamespaceDeclaration(
@@ -215,7 +221,8 @@ namespace Microsoft.CodeAnalysis.Analyzers.MatchFolderAndNamespace
                 if (
                     symbol is ITypeSymbol typeSymbol
                     && typeSymbol.DeclaringSyntaxReferences.Length > 1
-                ) {
+                )
+                {
                     return true;
                 }
             }

@@ -65,14 +65,16 @@ namespace System.Net.Sockets.Tests
                     _serverAddress,
                     out port
                 )
-            ) {
+            )
+            {
                 using (
                     Socket sock = new Socket(
                         AddressFamily.InterNetworkV6,
                         SocketType.Stream,
                         ProtocolType.Tcp
                     )
-                ) {
+                )
+                {
                     sock.Connect(new IPEndPoint(_serverAddress, port));
                     sock.Dispose();
 
@@ -96,14 +98,16 @@ namespace System.Net.Sockets.Tests
                     _serverAddress,
                     out port
                 )
-            ) {
+            )
+            {
                 using (
                     Socket sock = new Socket(
                         AddressFamily.InterNetworkV6,
                         SocketType.Stream,
                         ProtocolType.Tcp
                     )
-                ) {
+                )
+                {
                     sock.Connect(new IPEndPoint(_serverAddress, port));
 
                     AssertExtensions.Throws<ArgumentNullException>(
@@ -242,14 +246,16 @@ namespace System.Net.Sockets.Tests
                     _serverAddress,
                     out port
                 )
-            ) {
+            )
+            {
                 using (
                     Socket sock = new Socket(
                         AddressFamily.InterNetworkV6,
                         SocketType.Stream,
                         ProtocolType.Tcp
                     )
-                ) {
+                )
+                {
                     sock.Connect(new IPEndPoint(_serverAddress, port));
                     using (SocketAsyncEventArgs args = new SocketAsyncEventArgs())
                     {
@@ -462,14 +468,16 @@ namespace System.Net.Sockets.Tests
                     _serverAddress,
                     out int port
                 )
-            ) {
+            )
+            {
                 using (
                     Socket sock = new Socket(
                         AddressFamily.InterNetworkV6,
                         SocketType.Stream,
                         ProtocolType.Tcp
                     )
-                ) {
+                )
+                {
                     sock.Connect(new IPEndPoint(_serverAddress, port));
                     bool r1,
                         r2;
@@ -512,7 +520,8 @@ namespace System.Net.Sockets.Tests
                                 FileAccess.ReadWrite,
                                 FileShare.Read
                             )
-                        ) {
+                        )
+                        {
                             // If a SendPacketsAsync call did not dispose of its FileStreams, the FileStream ctor throws.
                         }
                     }
@@ -584,7 +593,8 @@ namespace System.Net.Sockets.Tests
                     4096,
                     useAsync: true
                 )
-            ) {
+            )
+            {
                 stream.Seek(s_testFileSize / 2, SeekOrigin.Begin);
                 SendPackets(new SendPacketsElement(stream), s_testFileSize); // Whole File
                 Assert.Equal(s_testFileSize / 2, stream.Position);
@@ -606,7 +616,8 @@ namespace System.Net.Sockets.Tests
                     4096,
                     useAsync: true
                 )
-            ) {
+            )
+            {
                 stream.Seek(s_testFileSize / 2, SeekOrigin.Begin);
                 SendPackets(new SendPacketsElement(stream, 0, 0), s_testFileSize); // Whole File
                 Assert.Equal(s_testFileSize / 2, stream.Position);
@@ -628,7 +639,8 @@ namespace System.Net.Sockets.Tests
                     4096,
                     useAsync: true
                 )
-            ) {
+            )
+            {
                 stream.Seek(s_testFileSize / 2, SeekOrigin.Begin);
                 SendPackets(new SendPacketsElement(stream, 0, s_testFileSize), s_testFileSize); // Whole File
                 Assert.Equal(s_testFileSize / 2, stream.Position);
@@ -650,7 +662,8 @@ namespace System.Net.Sockets.Tests
                     4096,
                     useAsync: true
                 )
-            ) {
+            )
+            {
                 stream.Seek(s_testFileSize - 10, SeekOrigin.Begin);
                 SendPackets(new SendPacketsElement(stream, 0, 20), 20);
                 Assert.Equal(s_testFileSize - 10, stream.Position);
@@ -675,7 +688,8 @@ namespace System.Net.Sockets.Tests
                     4096,
                     FileOptions.Asynchronous
                 )
-            ) {
+            )
+            {
                 var elements = new[]
                 {
                     new SendPacketsElement(stream, 0, 20),
@@ -705,7 +719,8 @@ namespace System.Net.Sockets.Tests
                     4096,
                     useAsync: true
                 )
-            ) {
+            )
+            {
                 stream.Seek(s_testFileSize / 2, SeekOrigin.Begin);
                 // Length is validated on Send
                 SendPackets(
@@ -728,7 +743,8 @@ namespace System.Net.Sockets.Tests
                     4096,
                     useAsync: true
                 )
-            ) {
+            )
+            {
                 stream.Seek(s_testFileSize / 2, SeekOrigin.Begin);
                 // Length is validated on Send
                 SendPackets(
@@ -751,7 +767,8 @@ namespace System.Net.Sockets.Tests
                     4096,
                     FileOptions.Asynchronous | FileOptions.SequentialScan
                 )
-            ) {
+            )
+            {
                 var element = new SendPacketsElement(stream, 0, s_testFileSize);
                 SendPackets(element, s_testFileSize, GetExpectedContent(element));
             }
@@ -773,7 +790,8 @@ namespace System.Net.Sockets.Tests
                     4096,
                     FileOptions.Asynchronous
                 )
-            ) {
+            )
+            {
                 var elements = new[]
                 {
                     new SendPacketsElement(new byte[] { 5, 6, 7 }, 0, 3),
@@ -814,7 +832,8 @@ namespace System.Net.Sockets.Tests
                     4096,
                     FileOptions.Asynchronous
                 )
-            ) {
+            )
+            {
                 var elements = new[]
                 {
                     new SendPacketsElement(
@@ -845,7 +864,8 @@ namespace System.Net.Sockets.Tests
                     4096,
                     FileOptions.Asynchronous
                 )
-            ) {
+            )
+            {
                 var elements = new[]
                 {
                     new SendPacketsElement(stream, 0L, 0),
@@ -866,7 +886,8 @@ namespace System.Net.Sockets.Tests
             SendPacketsElement element,
             TransmitFileOptions flags,
             int bytesExpected
-        ) {
+        )
+        {
             Assert.True(Capability.IPv6Support());
 
             EventWaitHandle completed = new ManualResetEvent(false);
@@ -878,14 +899,16 @@ namespace System.Net.Sockets.Tests
                     _serverAddress,
                     out port
                 )
-            ) {
+            )
+            {
                 using (
                     Socket sock = new Socket(
                         AddressFamily.InterNetworkV6,
                         SocketType.Stream,
                         ProtocolType.Tcp
                     )
-                ) {
+                )
+                {
                     sock.Connect(new IPEndPoint(_serverAddress, port));
                     using (SocketAsyncEventArgs args = new SocketAsyncEventArgs())
                     {
@@ -929,7 +952,8 @@ namespace System.Net.Sockets.Tests
             SendPacketsElement element,
             int bytesExpected,
             byte[] contentExpected = null
-        ) {
+        )
+        {
             SendPackets(new[] { element }, SocketError.Success, bytesExpected, contentExpected);
         }
 
@@ -937,7 +961,8 @@ namespace System.Net.Sockets.Tests
             SendPacketsElement element,
             SocketError expectedResult,
             int bytesExpected
-        ) {
+        )
+        {
             SendPackets(new[] { element }, expectedResult, bytesExpected);
         }
 
@@ -946,7 +971,8 @@ namespace System.Net.Sockets.Tests
             SocketError expectedResult,
             int bytesExpected,
             byte[] contentExpected = null
-        ) {
+        )
+        {
             Assert.True(Capability.IPv6Support());
 
             EventWaitHandle completed = new ManualResetEvent(false);
@@ -958,14 +984,16 @@ namespace System.Net.Sockets.Tests
                     _serverAddress,
                     out port
                 )
-            ) {
+            )
+            {
                 using (
                     Socket sock = new Socket(
                         AddressFamily.InterNetworkV6,
                         SocketType.Stream,
                         ProtocolType.Tcp
                     )
-                ) {
+                )
+                {
                     sock.Connect(new IPEndPoint(_serverAddress, port));
                     using (SocketAsyncEventArgs args = new SocketAsyncEventArgs())
                     {
@@ -1025,7 +1053,8 @@ namespace System.Net.Sockets.Tests
                 long count,
                 byte[] destination,
                 ref long destinationOffset
-            ) {
+            )
+            {
                 using (
                     FileStream fs = new FileStream(
                         filePath,
@@ -1033,7 +1062,8 @@ namespace System.Net.Sockets.Tests
                         FileAccess.Read,
                         FileShare.Read
                     )
-                ) {
+                )
+                {
                     // Passing a zero count to SendPacketsElement means it sends the whole file.
                     if (count == 0)
                     {
@@ -1117,7 +1147,8 @@ namespace System.Net.Sockets.Tests
             public ElementWithMemoryManager(
                 SendPacketsElement element,
                 MemoryManager<byte> memoryManager
-            ) {
+            )
+            {
                 Element = element;
                 MemoryManager = memoryManager;
             }
@@ -1132,7 +1163,8 @@ namespace System.Net.Sockets.Tests
             int size,
             int offset,
             int count
-        ) {
+        )
+        {
             MemoryManager<byte> memoryManager = new NativeMemoryManager(size);
             return new ElementWithMemoryManager(
                 new SendPacketsElement(memoryManager.Memory.Slice(offset, count)),

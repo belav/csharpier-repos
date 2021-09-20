@@ -65,7 +65,8 @@ namespace Microsoft.EntityFrameworkCore
             string name,
             string? schema,
             Action<SequenceBuilder> builderAction
-        ) {
+        )
+        {
             Check.NotNull(builderAction, nameof(builderAction));
 
             builderAction(HasSequence(modelBuilder, name, schema));
@@ -86,7 +87,8 @@ namespace Microsoft.EntityFrameworkCore
             Type type,
             string name,
             string? schema = null
-        ) {
+        )
+        {
             Check.NotNull(modelBuilder, nameof(modelBuilder));
             Check.NotNull(type, nameof(type));
 
@@ -131,7 +133,8 @@ namespace Microsoft.EntityFrameworkCore
             string name,
             string? schema,
             Action<SequenceBuilder> builderAction
-        ) {
+        )
+        {
             Check.NotNull(builderAction, nameof(builderAction));
 
             builderAction(HasSequence(modelBuilder, type, name, schema));
@@ -151,7 +154,8 @@ namespace Microsoft.EntityFrameworkCore
             this ModelBuilder modelBuilder,
             string name,
             string? schema = null
-        ) {
+        )
+        {
             Check.NotNull(modelBuilder, nameof(modelBuilder));
 
             var sequence = HasSequence(
@@ -193,7 +197,8 @@ namespace Microsoft.EntityFrameworkCore
             string name,
             string? schema,
             Action<SequenceBuilder> builderAction
-        ) {
+        )
+        {
             Check.NotNull(builderAction, nameof(builderAction));
 
             builderAction(HasSequence<T>(modelBuilder, name, schema));
@@ -229,7 +234,8 @@ namespace Microsoft.EntityFrameworkCore
             string name,
             string? schema,
             ConfigurationSource configurationSource
-        ) {
+        )
+        {
             Check.NotEmpty(name, nameof(name));
             Check.NullButNotEmpty(schema, nameof(schema));
 
@@ -252,7 +258,8 @@ namespace Microsoft.EntityFrameworkCore
         public static DbFunctionBuilder HasDbFunction(
             this ModelBuilder modelBuilder,
             MethodInfo methodInfo
-        ) {
+        )
+        {
             Check.NotNull(modelBuilder, nameof(modelBuilder));
             Check.NotNull(methodInfo, nameof(methodInfo));
 
@@ -278,7 +285,8 @@ namespace Microsoft.EntityFrameworkCore
         public static DbFunctionBuilder HasDbFunction<TResult>(
             this ModelBuilder modelBuilder,
             Expression<Func<TResult>> expression
-        ) {
+        )
+        {
             Check.NotNull(modelBuilder, nameof(modelBuilder));
             Check.NotNull(expression, nameof(expression));
 
@@ -305,7 +313,8 @@ namespace Microsoft.EntityFrameworkCore
             this ModelBuilder modelBuilder,
             MethodInfo methodInfo,
             Action<DbFunctionBuilder> builderAction
-        ) {
+        )
+        {
             Check.NotNull(builderAction, nameof(builderAction));
 
             builderAction(HasDbFunction(modelBuilder, methodInfo));
@@ -324,7 +333,8 @@ namespace Microsoft.EntityFrameworkCore
             this IConventionModelBuilder modelBuilder,
             MethodInfo methodInfo,
             bool fromDataAnnotation = false
-        ) {
+        )
+        {
             Check.NotNull(modelBuilder, nameof(modelBuilder));
             Check.NotNull(methodInfo, nameof(methodInfo));
 
@@ -358,7 +368,8 @@ namespace Microsoft.EntityFrameworkCore
             string? name,
             Type returnType,
             bool fromDataAnnotation = false
-        ) {
+        )
+        {
             Check.NotNull(modelBuilder, nameof(modelBuilder));
             Check.NotEmpty(name, nameof(name));
 
@@ -415,7 +426,8 @@ namespace Microsoft.EntityFrameworkCore
             this IConventionModelBuilder modelBuilder,
             string? schema,
             bool fromDataAnnotation = false
-        ) {
+        )
+        {
             if (modelBuilder.CanSetDefaultSchema(schema, fromDataAnnotation))
             {
                 modelBuilder.Metadata.SetDefaultSchema(schema, fromDataAnnotation);
@@ -437,7 +449,8 @@ namespace Microsoft.EntityFrameworkCore
             this IConventionModelBuilder modelBuilder,
             string? schema,
             bool fromDataAnnotation = false
-        ) {
+        )
+        {
             Check.NotNull(modelBuilder, nameof(modelBuilder));
             Check.NullButNotEmpty(schema, nameof(schema));
 
@@ -462,7 +475,8 @@ namespace Microsoft.EntityFrameworkCore
             this IConventionModelBuilder modelBuilder,
             int? length,
             bool fromDataAnnotation = false
-        ) {
+        )
+        {
             if (modelBuilder.CanSetMaxIdentifierLength(length, fromDataAnnotation))
             {
                 modelBuilder.Metadata.SetMaxIdentifierLength(length, fromDataAnnotation);
@@ -484,7 +498,8 @@ namespace Microsoft.EntityFrameworkCore
             this IConventionModelBuilder modelBuilder,
             int? length,
             bool fromDataAnnotation = false
-        ) {
+        )
+        {
             Check.NotNull(modelBuilder, nameof(modelBuilder));
 
             return modelBuilder.CanSetAnnotation(
@@ -524,7 +539,8 @@ namespace Microsoft.EntityFrameworkCore
             this IConventionModelBuilder modelBuilder,
             string? collation,
             bool fromDataAnnotation = false
-        ) {
+        )
+        {
             if (modelBuilder.CanSetCollation(collation, fromDataAnnotation))
             {
                 modelBuilder.Metadata.SetCollation(collation, fromDataAnnotation);
@@ -546,7 +562,8 @@ namespace Microsoft.EntityFrameworkCore
             this IConventionModelBuilder modelBuilder,
             string? collation,
             bool fromDataAnnotation = false
-        ) {
+        )
+        {
             Check.NotNull(modelBuilder, nameof(modelBuilder));
             Check.NullButNotEmpty(collation, nameof(collation));
 

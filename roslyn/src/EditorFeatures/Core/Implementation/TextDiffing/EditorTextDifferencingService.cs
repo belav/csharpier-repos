@@ -47,7 +47,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.TextDiffing
             Document newDocument,
             TextDifferenceTypes preferredDifferenceType,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var oldText = await oldDocument.GetTextAsync(cancellationToken).ConfigureAwait(false);
             var newText = await newDocument.GetTextAsync(cancellationToken).ConfigureAwait(false);
 
@@ -91,7 +92,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.TextDiffing
 
         private static StringDifferenceOptions GetDifferenceOptions(
             TextDifferenceTypes differenceTypes
-        ) {
+        )
+        {
             StringDifferenceTypes stringDifferenceTypes = default;
 
             if (differenceTypes.HasFlag(TextDifferenceTypes.Line))

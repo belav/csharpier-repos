@@ -135,7 +135,8 @@ namespace System.Drawing.Tests
         {
             using (
                 var icon = new Icon(Helpers.GetTestBitmapPath(fileName), size.Width, size.Height)
-            ) {
+            )
+            {
                 Assert.Equal(expectedSize.Width, icon.Width);
                 Assert.Equal(expectedSize.Height, icon.Height);
                 Assert.Equal(expectedSize, icon.Size);
@@ -176,7 +177,8 @@ namespace System.Drawing.Tests
                 var stream = File.OpenRead(
                     Helpers.GetTestBitmapPath("48x48_multiple_entries_4bit.ico")
                 )
-            ) {
+            )
+            {
                 var icon = new Icon(stream);
                 Assert.Equal(32, icon.Width);
                 Assert.Equal(32, icon.Height);
@@ -609,7 +611,8 @@ namespace System.Drawing.Tests
                     size,
                     size
                 )
-            ) {
+            )
+            {
                 Assert.Equal(size, icon.Width);
                 Assert.Equal(size, icon.Height);
                 Assert.Equal(new Size(size, size), icon.Size);
@@ -756,7 +759,8 @@ namespace System.Drawing.Tests
         {
             using (
                 var icon = new Icon(Helpers.GetTestBitmapPath("48x48_multiple_entries_4bit.ico"))
-            ) {
+            )
+            {
                 Assert.Throws<NullReferenceException>(() => icon.Save(null));
             }
         }
@@ -773,7 +777,8 @@ namespace System.Drawing.Tests
         {
             using (
                 var source = new Icon(Helpers.GetTestBitmapPath("48x48_multiple_entries_4bit.ico"))
-            ) {
+            )
+            {
                 var icon = Icon.FromHandle(source.Handle);
                 icon.Dispose();
 
@@ -791,7 +796,8 @@ namespace System.Drawing.Tests
         {
             using (
                 var icon = new Icon(Helpers.GetTestBitmapPath("48x48_multiple_entries_4bit.ico"))
-            ) {
+            )
+            {
                 var stream = new MemoryStream();
                 stream.Close();
 
@@ -944,7 +950,8 @@ namespace System.Drawing.Tests
                     !AppContext.TryGetSwitch(DontSupportPngFramesInIcons, out bool isEnabled)
                     || isEnabled
                 )
-            ) {
+            )
+            {
                 RemoteExecutor.Invoke(
                         () =>
                         {
@@ -981,7 +988,8 @@ namespace System.Drawing.Tests
                     !AppContext.TryGetSwitch(DontSupportPngFramesInIcons, out bool isEnabled)
                     || !isEnabled
                 )
-            ) {
+            )
+            {
                 RemoteExecutor.Invoke(
                         () =>
                         {

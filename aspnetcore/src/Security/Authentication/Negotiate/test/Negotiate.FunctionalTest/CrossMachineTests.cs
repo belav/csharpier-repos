@@ -69,7 +69,8 @@ namespace Microsoft.AspNetCore.Authentication.Negotiate
         public Task UrestrictedRequestAfterAuth_ReUses1WithPersistence(
             string protocol1,
             string protocol2
-        ) {
+        )
+        {
             return RunTest(
                 ServerPersistAddress,
                 protocol1,
@@ -83,7 +84,8 @@ namespace Microsoft.AspNetCore.Authentication.Negotiate
         public Task UrestrictedRequestAfterAuth_AnonymousWhenNotPersisted(
             string protocol1,
             string protocol2
-        ) {
+        )
+        {
             return RunTest(
                 ServerNonPersistAddress,
                 protocol1,
@@ -97,7 +99,8 @@ namespace Microsoft.AspNetCore.Authentication.Negotiate
         public Task AuthorizedRequestAfterAuth_ReauthenticatesWhenNotPersisted(
             string protocol1,
             string protocol2
-        ) {
+        )
+        {
             return RunTest(
                 ServerNonPersistAddress,
                 protocol1,

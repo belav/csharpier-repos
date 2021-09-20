@@ -64,7 +64,8 @@ namespace Microsoft.AspNetCore.Owin
                         new StringSegment(rawValue[0]).Trim(),
                         out value
                     )
-                ) {
+                )
+                {
                     return value;
                 }
 
@@ -113,7 +114,8 @@ namespace Microsoft.AspNetCore.Owin
         void ICollection<KeyValuePair<string, StringValues>>.CopyTo(
             KeyValuePair<string, StringValues>[] array,
             int arrayIndex
-        ) {
+        )
+        {
             foreach (var kv in Inner)
             {
                 array[arrayIndex++] = Convert(kv);

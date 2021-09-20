@@ -48,7 +48,8 @@ namespace System.IO
             bool ownsHandle,
             int bufferSize,
             bool isAsync
-        ) {
+        )
+        {
             SafeFileHandle safeHandle = new SafeFileHandle(handle, ownsHandle: ownsHandle);
             try
             {
@@ -82,7 +83,8 @@ namespace System.IO
             FileAccess access,
             int bufferSize,
             bool isAsync
-        ) {
+        )
+        {
             if (handle.IsInvalid)
             {
                 throw new ArgumentException(SR.Arg_InvalidHandle, nameof(handle));
@@ -164,14 +166,15 @@ namespace System.IO
             FileShare share,
             int bufferSize,
             bool useAsync
-        ) : this(
-            path,
-            mode,
-            access,
-            share,
-            bufferSize,
-            useAsync ? FileOptions.Asynchronous : FileOptions.None
-        ) { }
+        )
+            : this(
+                path,
+                mode,
+                access,
+                share,
+                bufferSize,
+                useAsync ? FileOptions.Asynchronous : FileOptions.None
+            ) { }
 
         public FileStream(
             string path,
@@ -180,7 +183,8 @@ namespace System.IO
             FileShare share,
             int bufferSize,
             FileOptions options
-        ) {
+        )
+        {
             if (path == null)
             {
                 throw new ArgumentNullException(nameof(path), SR.ArgumentNull_Path);
@@ -204,7 +208,8 @@ namespace System.IO
             }
             else if (
                 tempshare < FileShare.None || tempshare > (FileShare.ReadWrite | FileShare.Delete)
-            ) {
+            )
+            {
                 badArg = nameof(share);
             }
 
@@ -228,7 +233,8 @@ namespace System.IO
                         | (FileOptions)0x20000000 /* NoBuffering */
                     )
                 ) != 0
-            ) {
+            )
+            {
                 throw new ArgumentOutOfRangeException(nameof(options), SR.ArgumentOutOfRange_Enum);
             }
             else if (bufferSize <= 0)
@@ -247,7 +253,8 @@ namespace System.IO
                     || mode == FileMode.CreateNew
                     || mode == FileMode.Create
                     || mode == FileMode.Append
-                ) {
+                )
+                {
                     // No write access, mode and access disagree but flag access since mode comes first
                     throw new ArgumentException(
                         SR.Format(SR.Argument_InvalidFileModeAndAccessCombo, mode, access),
@@ -348,7 +355,8 @@ namespace System.IO
             int offset,
             int count,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             ValidateBufferArguments(buffer, offset, count);
 
             if (cancellationToken.IsCancellationRequested)
@@ -366,7 +374,8 @@ namespace System.IO
         public override ValueTask<int> ReadAsync(
             Memory<byte> buffer,
             CancellationToken cancellationToken = default
-        ) {
+        )
+        {
             if (cancellationToken.IsCancellationRequested)
             {
                 return ValueTask.FromCanceled<int>(cancellationToken);
@@ -393,7 +402,8 @@ namespace System.IO
             int offset,
             int count,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             ValidateBufferArguments(buffer, offset, count);
 
             if (cancellationToken.IsCancellationRequested)
@@ -411,7 +421,8 @@ namespace System.IO
         public override ValueTask WriteAsync(
             ReadOnlyMemory<byte> buffer,
             CancellationToken cancellationToken = default
-        ) {
+        )
+        {
             if (cancellationToken.IsCancellationRequested)
             {
                 return ValueTask.FromCanceled(cancellationToken);
@@ -583,7 +594,8 @@ namespace System.IO
             int count,
             AsyncCallback? callback,
             object? state
-        ) {
+        )
+        {
             ValidateBufferArguments(buffer, offset, count);
 
             if (_strategy.IsClosed)
@@ -614,7 +626,8 @@ namespace System.IO
             int count,
             AsyncCallback? callback,
             object? state
-        ) {
+        )
+        {
             ValidateBufferArguments(buffer, offset, count);
 
             if (_strategy.IsClosed)

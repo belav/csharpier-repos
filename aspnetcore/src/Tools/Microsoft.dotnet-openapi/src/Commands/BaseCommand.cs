@@ -40,7 +40,8 @@ namespace Microsoft.DotNet.OpenApi.Commands
             CommandLineApplication parent,
             string name,
             IHttpClientWrapper httpClient
-        ) {
+        )
+        {
             Parent = parent;
             Name = name;
             Out = parent.Out ?? Out;
@@ -170,7 +171,8 @@ namespace Microsoft.DotNet.OpenApi.Commands
             string sourceFile,
             CodeGenerator? codeGenerator,
             string sourceUrl = null
-        ) {
+        )
+        {
             // EnsurePackagesInProjectAsync MUST happen before LoadProject, because otherwise the global state set by ProjectCollection doesn't pick up the nuget edits, and we end up losing them.
             await EnsurePackagesInProjectAsync(projectFile, codeGenerator);
             var project = LoadProject(projectFile);
@@ -222,7 +224,8 @@ namespace Microsoft.DotNet.OpenApi.Commands
         private async Task EnsurePackagesInProjectAsync(
             FileInfo projectFile,
             CodeGenerator? codeGenerator
-        ) {
+        )
+        {
             var urlPackages = await LoadPackageVersionsFromURLAsync();
             var attributePackages = GetServicePackages(codeGenerator);
 
@@ -242,7 +245,8 @@ namespace Microsoft.DotNet.OpenApi.Commands
             string packageId,
             string packageVersion,
             FileInfo projectFile
-        ) {
+        )
+        {
             var args = new[]
             {
                 "add",
@@ -288,7 +292,8 @@ namespace Microsoft.DotNet.OpenApi.Commands
                     !csprojContent.Contains(
                         $"<PackageReference Include=\"{packageId}\" Version=\"{packageVersion}\""
                     )
-                ) {
+                )
+                {
                     var output = await process.StandardOutput.ReadToEndAsync();
                     var error = await process.StandardError.ReadToEndAsync();
                     await Out.WriteAsync(output);
@@ -356,7 +361,8 @@ namespace Microsoft.DotNet.OpenApi.Commands
             Func<Task<IHttpResponseMessageWrapper>> retryBlock,
             CancellationToken cancellationToken = default,
             int retryCount = 60
-        ) {
+        )
+        {
             for (var retry = 0; retry < retryCount; retry++)
             {
                 if (cancellationToken.IsCancellationRequested)
@@ -642,7 +648,8 @@ namespace Microsoft.DotNet.OpenApi.Commands
                     if (
                         !string.IsNullOrEmpty(destinationDirectory)
                         && !Directory.Exists(destinationDirectory)
-                    ) {
+                    )
+                    {
                         Directory.CreateDirectory(destinationDirectory);
                     }
                 }

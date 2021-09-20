@@ -29,7 +29,8 @@ namespace Microsoft.EntityFrameworkCore.TestUtilities
             if (
                 discriminator != null
                 && !primaryKey.Properties.Contains(entityType.FindDiscriminatorProperty())
-            ) {
+            )
+            {
                 AppendString(builder, discriminator);
                 builder.Append("-");
             }
@@ -40,7 +41,8 @@ namespace Microsoft.EntityFrameworkCore.TestUtilities
                 if (
                     property.Name == partitionKey
                     || property.GetJsonPropertyName() == StoreKeyConvention.IdPropertyJsonName
-                ) {
+                )
+                {
                     continue;
                 }
 

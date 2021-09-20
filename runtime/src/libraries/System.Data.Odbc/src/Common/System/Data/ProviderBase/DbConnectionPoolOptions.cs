@@ -18,7 +18,8 @@ namespace System.Data.ProviderBase
             int maxPoolSize,
             int creationTimeout,
             int loadBalanceTimeout
-        ) {
+        )
+        {
             _poolByIdentity = poolByIdentity;
             _minPoolSize = minPoolSize;
             _maxPoolSize = maxPoolSize;

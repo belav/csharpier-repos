@@ -33,7 +33,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
         public virtual void ProcessModelFinalizing(
             IConventionModelBuilder modelBuilder,
             IConventionContext<IConventionModelBuilder> context
-        ) {
+        )
+        {
             RemoveEntityTypesUnreachableByNavigations(modelBuilder, context);
             RemoveNavigationlessForeignKeys(modelBuilder);
             RemoveModelBuildingAnnotations(modelBuilder);
@@ -42,14 +43,16 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
         private void RemoveEntityTypesUnreachableByNavigations(
             IConventionModelBuilder modelBuilder,
             IConventionContext<IConventionModelBuilder> context
-        ) {
+        )
+        {
             var model = modelBuilder.Metadata;
             var rootEntityTypes = GetRoots(model, ConfigurationSource.DataAnnotation);
             using (context.DelayConventions())
             {
                 foreach (
                     var orphan in new GraphAdapter(model).GetUnreachableVertices(rootEntityTypes)
-                ) {
+                )
+                {
                     modelBuilder.HasNoEntityType(orphan, fromDataAnnotation: true);
                 }
             }
@@ -58,7 +61,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
         private IReadOnlyList<IConventionEntityType> GetRoots(
             IConventionModel model,
             ConfigurationSource configurationSource
-        ) {
+        )
+        {
             var roots = new List<IConventionEntityType>();
             // ReSharper disable once LoopCanBeConvertedToQuery
             foreach (var entityType in model.GetEntityTypes())
@@ -83,7 +87,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
                         foreignKey.PrincipalToDependent == null
                         && foreignKey.DependentToPrincipal == null
                         && !foreignKey.GetReferencingSkipNavigations().Any()
-                    ) {
+                    )
+                    {
                         entityType.Builder.HasNoRelationship(foreignKey, fromDataAnnotation: true);
                     }
                 }

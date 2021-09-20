@@ -30,7 +30,8 @@ namespace System.Net.Primitives.Functional.Tests
             string address,
             string expectedAddress,
             bool isIPv4
-        ) {
+        )
+        {
             // We'll parse just the address alone followed by the address with various port numbers
 
             expectedAddress = expectedAddress.ToLowerInvariant(); // This is done in the IP parse routines

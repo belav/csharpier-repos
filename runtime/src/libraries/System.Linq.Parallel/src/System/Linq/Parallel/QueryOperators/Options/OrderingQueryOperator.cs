@@ -37,7 +37,8 @@ namespace System.Linq.Parallel
         internal override IEnumerator<TSource> GetEnumerator(
             ParallelMergeOptions? mergeOptions,
             bool suppressOrderPreservation
-        ) {
+        )
+        {
             if (_child is ScanQueryOperator<TSource> childAsScan)
             {
                 return childAsScan.Data.GetEnumerator();

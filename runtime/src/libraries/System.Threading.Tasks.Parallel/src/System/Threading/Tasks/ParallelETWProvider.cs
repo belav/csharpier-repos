@@ -119,7 +119,8 @@ namespace System.Threading.Tasks
             ForkJoinOperationType OperationType, // PFX_FORKJOIN_COMMON_EVENT_HEADER
             long InclusiveFrom,
             long ExclusiveTo
-        ) {
+        )
+        {
             if (IsEnabled(EventLevel.Informational, ALL_KEYWORDS))
             {
                 // There is no explicit WriteEvent() overload matching this event's fields. Therefore calling
@@ -193,7 +194,8 @@ namespace System.Threading.Tasks
             int OriginatingTaskID, // PFX_COMMON_EVENT_HEADER
             int ForkJoinContextID,
             long TotalIterations
-        ) {
+        )
+        {
             if (IsEnabled(EventLevel.Informational, ALL_KEYWORDS))
             {
                 // There is no explicit WriteEvent() overload matching this event's fields.
@@ -256,7 +258,8 @@ namespace System.Threading.Tasks
             int ForkJoinContextID,
             ForkJoinOperationType OperationType, // PFX_FORKJOIN_COMMON_EVENT_HEADER
             int ActionCount
-        ) {
+        )
+        {
             if (IsEnabled(EventLevel.Informational, ALL_KEYWORDS))
             {
                 // There is no explicit WriteEvent() overload matching this event's fields.
@@ -315,7 +318,8 @@ namespace System.Threading.Tasks
             int OriginatingTaskSchedulerID,
             int OriginatingTaskID, // PFX_COMMON_EVENT_HEADER
             int ForkJoinContextID
-        ) {
+        )
+        {
             if (IsEnabled(EventLevel.Informational, ALL_KEYWORDS))
                 WriteEvent(
                     PARALLELINVOKEEND_ID,
@@ -345,7 +349,8 @@ namespace System.Threading.Tasks
             int OriginatingTaskSchedulerID,
             int OriginatingTaskID, // PFX_COMMON_EVENT_HEADER
             int ForkJoinContextID
-        ) {
+        )
+        {
             if (IsEnabled(EventLevel.Verbose, ALL_KEYWORDS))
                 WriteEvent(
                     PARALLELFORK_ID,
@@ -374,7 +379,8 @@ namespace System.Threading.Tasks
             int OriginatingTaskSchedulerID,
             int OriginatingTaskID, // PFX_COMMON_EVENT_HEADER
             int ForkJoinContextID
-        ) {
+        )
+        {
             if (IsEnabled(EventLevel.Verbose, ALL_KEYWORDS))
                 WriteEvent(
                     PARALLELJOIN_ID,

@@ -81,7 +81,8 @@ namespace System.Runtime.InteropServices.Tests
         public void GetTypedObjectForIUnknown_UncastableComObject_ThrowsInvalidCastException(
             object o,
             Type type
-        ) {
+        )
+        {
             GetTypedObjectForIUnknown_UncastableObject_ThrowsInvalidCastException(o, type);
         }
     }

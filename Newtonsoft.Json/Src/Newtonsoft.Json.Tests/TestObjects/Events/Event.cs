@@ -85,7 +85,8 @@ namespace Newtonsoft.Json.Tests.TestObjects.Events
             string details,
             string stackTrace,
             string tag
-        ) {
+        )
+        {
             _sublocation = sublocation;
             _userId = userId;
             _type = type;

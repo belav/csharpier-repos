@@ -17,7 +17,8 @@ namespace System.DirectoryServices.ActiveDirectory
             string? domainName,
             string? siteName,
             long flags
-        ) {
+        )
+        {
             int errorCode = 0;
             DomainControllerInfo domainControllerInfo;
 
@@ -43,7 +44,8 @@ namespace System.DirectoryServices.ActiveDirectory
             string? siteName,
             long flags,
             out DomainControllerInfo domainControllerInfo
-        ) {
+        )
+        {
             IntPtr pDomainControllerInfo = IntPtr.Zero;
             int result = 0;
 
@@ -97,7 +99,8 @@ namespace System.DirectoryServices.ActiveDirectory
             string? domainName,
             string? siteName,
             long dcFlags
-        ) {
+        )
+        {
             Hashtable? allDCs = null;
             ArrayList dcs = new ArrayList();
 
@@ -206,7 +209,8 @@ namespace System.DirectoryServices.ActiveDirectory
                         && result != NativeMethods.ERROR_FILE_MARK_DETECTED
                         && result != NativeMethods.DNS_ERROR_RCODE_NAME_ERROR
                         && result != NativeMethods.ERROR_NO_MORE_ITEMS
-                    ) {
+                    )
+                    {
                         throw ExceptionHelper.GetExceptionFromErrorCode(result);
                     }
 
@@ -215,7 +219,8 @@ namespace System.DirectoryServices.ActiveDirectory
                         if (
                             result != NativeMethods.ERROR_FILE_MARK_DETECTED
                             && result != NativeMethods.DNS_ERROR_RCODE_NAME_ERROR
-                        ) {
+                        )
+                        {
                             try
                             {
                                 dcDnsHostName = Marshal.PtrToStringUni(dcDnsHostNamePtr)!;
@@ -248,7 +253,8 @@ namespace System.DirectoryServices.ActiveDirectory
                             && result != NativeMethods.ERROR_FILE_MARK_DETECTED
                             && result != NativeMethods.DNS_ERROR_RCODE_NAME_ERROR
                             && result != NativeMethods.ERROR_NO_MORE_ITEMS
-                        ) {
+                        )
+                        {
                             throw ExceptionHelper.GetExceptionFromErrorCode(result);
                         }
                     }

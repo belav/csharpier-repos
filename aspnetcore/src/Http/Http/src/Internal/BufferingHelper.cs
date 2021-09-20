@@ -15,7 +15,8 @@ namespace Microsoft.AspNetCore.Http
             this HttpRequest request,
             int bufferThreshold = DefaultBufferThreshold,
             long? bufferLimit = null
-        ) {
+        )
+        {
             if (request == null)
             {
                 throw new ArgumentNullException(nameof(request));
@@ -41,7 +42,8 @@ namespace Microsoft.AspNetCore.Http
             Action<IDisposable> registerForDispose,
             int bufferThreshold = DefaultBufferThreshold,
             long? bufferLimit = null
-        ) {
+        )
+        {
             if (section == null)
             {
                 throw new ArgumentNullException(nameof(section));

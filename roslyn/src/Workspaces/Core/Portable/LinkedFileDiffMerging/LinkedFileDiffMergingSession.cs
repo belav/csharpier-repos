@@ -27,7 +27,8 @@ namespace Microsoft.CodeAnalysis
             Solution oldSolution,
             Solution newSolution,
             SolutionChanges solutionChanges
-        ) {
+        )
+        {
             _oldSolution = oldSolution;
             _newSolution = newSolution;
             _solutionChanges = solutionChanges;
@@ -36,7 +37,8 @@ namespace Microsoft.CodeAnalysis
         internal async Task<LinkedFileMergeSessionResult> MergeDiffsAsync(
             IMergeConflictHandler mergeConflictHandler,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var sessionInfo = new LinkedFileDiffMergingSessionInfo();
 
             var linkedDocumentGroupsWithChanges = _solutionChanges.GetProjectChanges()
@@ -99,7 +101,8 @@ namespace Microsoft.CodeAnalysis
             LinkedFileDiffMergingSessionInfo sessionInfo,
             IMergeConflictHandler mergeConflictHandler,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var groupSessionInfo = new LinkedFileGroupSessionInfo();
 
             // Automatically merge non-conflicting diffs while collecting the conflicting diffs
@@ -179,7 +182,8 @@ namespace Microsoft.CodeAnalysis
             LinkedFileGroupSessionInfo groupSessionInfo,
             IDocumentTextDifferencingService textDiffService,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var unmergedDocumentChanges = new List<TextChange>();
             var successfullyMergedChanges = ArrayBuilder<TextChange>.GetInstance();
 
@@ -196,7 +200,8 @@ namespace Microsoft.CodeAnalysis
                 while (
                     cumulativeChangeIndex < cumulativeChanges.Count
                     && cumulativeChanges[cumulativeChangeIndex].Span.End < change.Span.Start
-                ) {
+                )
+                {
                     // Existing change that does not overlap with the current change in consideration
                     successfullyMergedChanges.Add(cumulativeChanges[cumulativeChangeIndex]);
                     cumulativeChangeIndex++;
@@ -219,7 +224,8 @@ namespace Microsoft.CodeAnalysis
                         if (
                             change.Span != cumulativeChange.Span
                             || change.NewText != cumulativeChange.NewText
-                        ) {
+                        )
+                        {
                             // The current change in consideration overlaps an existing change but
                             // the changes are not identical.
                             unmergedDocumentChanges.Add(change);
@@ -231,7 +237,8 @@ namespace Microsoft.CodeAnalysis
                                 if (
                                     change.NewText.Contains(cumulativeChange.NewText)
                                     || cumulativeChange.NewText.Contains(change.NewText)
-                                ) {
+                                )
+                                {
                                     groupSessionInfo.OverlappingDistinctDiffsWithSameSpanAndSubstringRelation++;
                                 }
                             }
@@ -282,7 +289,8 @@ namespace Microsoft.CodeAnalysis
             IEnumerable<TextChange> commentChanges,
             IList<TextSpan> mergeConflictResolutionSpans,
             LinkedFileGroupSessionInfo groupSessionInfo
-        ) {
+        )
+        {
             var mergedChangesList = NormalizeChanges(mergedChanges).ToList();
             var commentChangesList = NormalizeChanges(commentChanges).ToList();
 
@@ -297,7 +305,8 @@ namespace Microsoft.CodeAnalysis
                 while (
                     commentChangeIndex < commentChangesList.Count
                     && commentChangesList[commentChangeIndex].Span.End <= mergedChange.Span.Start
-                ) {
+                )
+                {
                     // Add a comment change that does not conflict with any merge change
                     combinedChanges.Add(commentChangesList[commentChangeIndex]);
                     mergeConflictResolutionSpans.Add(
@@ -317,7 +326,8 @@ namespace Microsoft.CodeAnalysis
                 if (
                     commentChangeIndex >= commentChangesList.Count
                     || mergedChange.Span.End <= commentChangesList[commentChangeIndex].Span.Start
-                ) {
+                )
+                {
                     // Add a merge change that does not conflict with any comment change
                     combinedChanges.Add(mergedChange);
                     currentPositionDelta += (
@@ -331,7 +341,8 @@ namespace Microsoft.CodeAnalysis
                 while (
                     commentChangeIndex < commentChangesList.Count
                     && commentChangesList[commentChangeIndex].Span.Start < mergedChange.Span.End
-                ) {
+                )
+                {
                     combinedChanges.Add(
                         new TextChange(
                             conflictingCommentInsertionLocation,

@@ -84,7 +84,8 @@ namespace BasicTestApp
             if (
                 uri != null
                 && HttpUtility.ParseQueryString(uri.Query)["culture"] is string cultureName
-            ) {
+            )
+            {
                 culture = new CultureInfo(cultureName);
             }
 

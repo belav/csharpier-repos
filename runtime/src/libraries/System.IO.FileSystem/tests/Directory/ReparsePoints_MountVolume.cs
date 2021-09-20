@@ -590,7 +590,8 @@ public class Directory_ReparsePoints_MountVolume
                     System.Globalization.CultureInfo.CurrentUICulture.Name == "en-US"
                     && msgExpected != null
                     && e.Message != msgExpected
-                ) {
+                )
+                {
                     exception = false;
                     error = string.Format("{0} Message Different: <{1}>", error, e.Message);
                 }

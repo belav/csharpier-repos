@@ -121,7 +121,8 @@ namespace Microsoft.CodeAnalysis.MSBuild.UnitTests
 
         public static bool TryFindMSBuildToolsPath(
             out (Version version, string path) versionAndPath
-        ) {
+        )
+        {
             versionAndPath = s_versionAndPath.Value;
             return versionAndPath.path != null;
         }
@@ -165,7 +166,8 @@ namespace Microsoft.CodeAnalysis.MSBuild.UnitTests
                                     package.GetId()
                                     == "Microsoft.VisualStudio.Component.Roslyn.Compiler"
                             )
-                    ) {
+                    )
+                    {
                         var instanceVersionString = instance2.GetInstallationVersion();
 
                         if (!Version.TryParse(instanceVersionString, out var instanceVersion))
@@ -204,7 +206,8 @@ namespace Microsoft.CodeAnalysis.MSBuild.UnitTests
                         if (
                             instanceMsBuildPath != null
                             && (found.version == null || instanceVersion > found.version)
-                        ) {
+                        )
+                        {
                             found.version = instanceVersion;
                             found.path = instanceMsBuildPath;
                         }

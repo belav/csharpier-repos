@@ -76,7 +76,8 @@ namespace System.Linq.Tests
             IEnumerable<int> source,
             int defaultValue,
             int[] expected
-        ) {
+        )
+        {
             if (defaultValue == 0)
             {
                 Assert.Equal(expected, source.RunOnce().DefaultIfEmpty());

@@ -125,7 +125,8 @@ public class C
         [WorkItem(40033, "https://github.com/dotnet/roslyn/issues/40033")]
         public void SynthesizeNullableAttributeBasedOnInterfacesToEmit_NotOnAllInterfaces(
             bool useImageReferences
-        ) {
+        )
+        {
             Func<CSharpCompilation, MetadataReference> getReference = c =>
                 useImageReferences ? c.EmitToImageReference() : c.ToMetadataReference();
 
@@ -269,7 +270,8 @@ public class C1 : C0
         [WorkItem(40033, "https://github.com/dotnet/roslyn/issues/40033")]
         public void SynthesizeTupleElementNamesAttributeBasedOnInterfacesToEmit_IndirectInterfaces(
             bool useImageReferences
-        ) {
+        )
+        {
             Func<CSharpCompilation, MetadataReference> getReference = c =>
                 useImageReferences ? c.EmitToImageReference() : c.ToMetadataReference();
 
@@ -2270,7 +2272,8 @@ public class Program
                     void verifyTypeParameterConstraint(
                         string typeName,
                         bool? expectedConstraintIsNullable
-                    ) {
+                    )
+                    {
                         var typeParameter = module.GlobalNamespace.GetMember<NamedTypeSymbol>(
                                 typeName
                             )
@@ -2352,7 +2355,8 @@ public class Program
                     void verifyTypeParameterConstraint(
                         string typeName,
                         bool? expectedConstraintIsNullable
-                    ) {
+                    )
+                    {
                         var typeParameter = module.GlobalNamespace.GetMember<NamedTypeSymbol>(
                                 typeName
                             )
@@ -3914,7 +3918,8 @@ Program
             string expectedPublicOnly,
             string expectedPublicAndInternal,
             string expectedAll
-        ) {
+        )
+        {
             var sourceIVTs =
                 @"using System.Runtime.CompilerServices;
 [assembly: InternalsVisibleTo(""Other"")]";
@@ -5423,7 +5428,8 @@ public class Program
             byte[] expectedPreviously,
             byte[] expectedNow,
             string expectedDisplay
-        ) {
+        )
+        {
             var builder = ArrayBuilder<byte>.GetInstance();
             type.AddNullableTransforms(builder);
             var actualBytes = builder.ToImmutableAndFree();
@@ -6308,7 +6314,8 @@ public class B<T> :
                     void checkAttributes(
                         CustomAttributeHandleCollection customAttributes,
                         byte? addOne = null
-                    ) {
+                    )
+                    {
                         AssertAttributes(
                             reader,
                             customAttributes,
@@ -6322,7 +6329,8 @@ public class B<T> :
                     void checkAttributesNoDynamic(
                         CustomAttributeHandleCollection customAttributes,
                         byte? addOne = null
-                    ) {
+                    )
+                    {
                         AssertAttributes(
                             reader,
                             customAttributes,
@@ -6335,7 +6343,8 @@ public class B<T> :
                     void checkNullableAttribute(
                         CustomAttributeHandleCollection customAttributes,
                         byte? addOne
-                    ) {
+                    )
+                    {
                         var customAttribute = GetAttributeByConstructorName(
                             reader,
                             customAttributes,
@@ -6711,7 +6720,8 @@ public class A
 
         private static void AssertNoNullableAttribute(
             ImmutableArray<CSharpAttributeData> attributes
-        ) {
+        )
+        {
             AssertAttributes(attributes);
         }
 
@@ -6723,7 +6733,8 @@ public class A
         private static void AssertAttributes(
             ImmutableArray<CSharpAttributeData> attributes,
             params string[] expectedNames
-        ) {
+        )
+        {
             var actualNames = attributes.Select(a => a.AttributeClass.ToTestDisplayString())
                 .ToArray();
             AssertEx.SetEqual(actualNames, expectedNames);
@@ -6745,7 +6756,8 @@ public class A
 
         private static CSharpAttributeData GetNullableAttribute(
             ImmutableArray<CSharpAttributeData> attributes
-        ) {
+        )
+        {
             return attributes.Single(
                 a =>
                     a.AttributeClass.ToTestDisplayString()
@@ -6765,7 +6777,8 @@ public class A
         private static string GetAttributeConstructorName(
             MetadataReader reader,
             CustomAttributeHandle handle
-        ) {
+        )
+        {
             return reader.Dump(reader.GetCustomAttribute(handle).Constructor);
         }
 
@@ -6773,7 +6786,8 @@ public class A
             MetadataReader reader,
             CustomAttributeHandleCollection handles,
             string name
-        ) {
+        )
+        {
             return reader.GetCustomAttribute(
                 handles.FirstOrDefault(h => GetAttributeConstructorName(reader, h) == name)
             );
@@ -6783,7 +6797,8 @@ public class A
             MetadataReader reader,
             CustomAttributeHandleCollection handles,
             params string[] expectedNames
-        ) {
+        )
+        {
             var actualNames = handles.Select(h => GetAttributeConstructorName(reader, h)).ToArray();
             AssertEx.SetEqual(actualNames, expectedNames);
         }

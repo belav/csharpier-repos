@@ -41,7 +41,8 @@ namespace Microsoft.EntityFrameworkCore.Internal
             IDbSetSource setSource,
             IDbSetCache setCache,
             IEntityType entityType
-        ) {
+        )
+        {
             _stateManager = stateManager;
             _setSource = setSource;
             _setCache = setCache;
@@ -82,7 +83,8 @@ namespace Microsoft.EntityFrameworkCore.Internal
         public virtual ValueTask<TEntity?> FindAsync(
             object?[]? keyValues,
             CancellationToken cancellationToken = default
-        ) {
+        )
+        {
             if (keyValues == null || keyValues.Any(v => v == null))
             {
                 return default;
@@ -108,7 +110,8 @@ namespace Microsoft.EntityFrameworkCore.Internal
         ValueTask<object?> IEntityFinder.FindAsync(
             object?[]? keyValues,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             if (keyValues == null || keyValues.Any(v => v == null))
             {
                 return default;
@@ -160,7 +163,8 @@ namespace Microsoft.EntityFrameworkCore.Internal
             INavigation navigation,
             InternalEntityEntry entry,
             CancellationToken cancellationToken = default
-        ) {
+        )
+        {
             if (entry.EntityState == EntityState.Detached)
             {
                 throw new InvalidOperationException(
@@ -341,7 +345,8 @@ namespace Microsoft.EntityFrameworkCore.Internal
         private static Expression<Func<TEntity, bool>> BuildLambda(
             IReadOnlyList<IProperty> keyProperties,
             ValueBuffer keyValues
-        ) {
+        )
+        {
             var entityParameter = Expression.Parameter(typeof(TEntity), "e");
 
             return Expression.Lambda<Func<TEntity, bool>>(
@@ -353,7 +358,8 @@ namespace Microsoft.EntityFrameworkCore.Internal
         private static Expression<Func<object, bool>> BuildObjectLambda(
             IReadOnlyList<IProperty> keyProperties,
             ValueBuffer keyValues
-        ) {
+        )
+        {
             var entityParameter = Expression.Parameter(typeof(object), "e");
 
             return Expression.Lambda<Func<object, bool>>(
@@ -381,7 +387,8 @@ namespace Microsoft.EntityFrameworkCore.Internal
             IEntityType ownerEntityType,
             IEntityType entityType,
             string navigationName
-        ) {
+        )
+        {
             var queryRoot = BuildQueryRoot(ownerEntityType);
             var collectionNavigation = ownerEntityType.FindNavigation(navigationName)!.IsCollection;
 
@@ -399,8 +406,9 @@ namespace Microsoft.EntityFrameworkCore.Internal
         private static IQueryable<TResult> Select<TSource, TResult>(
             IQueryable<TSource> source,
             string propertyName
-        ) where TResult : class
-          where TSource : class
+        )
+            where TResult : class
+            where TSource : class
         {
             var parameter = Expression.Parameter(typeof(TSource), "e");
             return source.Select(
@@ -422,8 +430,9 @@ namespace Microsoft.EntityFrameworkCore.Internal
         private static IQueryable<TResult> SelectMany<TSource, TResult>(
             IQueryable<TSource> source,
             string propertyName
-        ) where TResult : class
-          where TSource : class
+        )
+            where TResult : class
+            where TSource : class
         {
             var parameter = Expression.Parameter(typeof(TSource), "e");
             return source.SelectMany(

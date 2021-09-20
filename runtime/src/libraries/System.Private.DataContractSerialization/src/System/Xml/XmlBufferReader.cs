@@ -64,7 +64,8 @@ namespace System.Xml
             Stream stream,
             IXmlDictionary? dictionary,
             XmlBinaryReaderSession? session
-        ) {
+        )
+        {
             if (_streamBuffer == null)
             {
                 _streamBuffer = new byte[128];
@@ -80,7 +81,8 @@ namespace System.Xml
             int count,
             IXmlDictionary? dictionary,
             XmlBinaryReaderSession? session
-        ) {
+        )
+        {
             SetBuffer(null, buffer, offset, count, dictionary, session);
         }
 
@@ -91,7 +93,8 @@ namespace System.Xml
             int count,
             IXmlDictionary? dictionary,
             XmlBinaryReaderSession? session
-        ) {
+        )
+        {
             _stream = stream;
             _buffer = buffer;
             _offsetMin = offset;
@@ -766,7 +769,8 @@ namespace System.Xml
                 || buffer[offset + 2] != (byte)'u'
                 || buffer[offset + 3] != (byte)'o'
                 || buffer[offset + 4] != (byte)'t'
-            ) {
+            )
+            {
                 XmlExceptionHelper.ThrowInvalidCharRef(_reader);
             }
             return (int)'"';
@@ -780,7 +784,8 @@ namespace System.Xml
                 || buffer[offset + 1] != (byte)'a'
                 || buffer[offset + 2] != (byte)'m'
                 || buffer[offset + 3] != (byte)'p'
-            ) {
+            )
+            {
                 XmlExceptionHelper.ThrowInvalidCharRef(_reader);
             }
             return (int)'&';
@@ -795,7 +800,8 @@ namespace System.Xml
                 || buffer[offset + 2] != (byte)'p'
                 || buffer[offset + 3] != (byte)'o'
                 || buffer[offset + 4] != (byte)'s'
-            ) {
+            )
+            {
                 XmlExceptionHelper.ThrowInvalidCharRef(_reader);
             }
             return (int)'\'';
@@ -944,7 +950,8 @@ namespace System.Xml
             XmlBufferReader bufferReader2,
             int offset2,
             int length2
-        ) {
+        )
+        {
             if (length1 != length2)
                 return false;
             byte[] buffer1 = _buffer;

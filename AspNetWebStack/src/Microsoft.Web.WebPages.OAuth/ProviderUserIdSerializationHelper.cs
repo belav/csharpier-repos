@@ -55,7 +55,8 @@ namespace Microsoft.Web.WebPages.OAuth
             string protectedData,
             out string providerName,
             out string providerUserId
-        ) {
+        )
+        {
             providerName = null;
             providerUserId = null;
             if (String.IsNullOrEmpty(protectedData))

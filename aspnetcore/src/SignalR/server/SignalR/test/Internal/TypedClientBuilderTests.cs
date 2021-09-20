@@ -303,7 +303,8 @@ namespace Microsoft.AspNetCore.SignalR.Tests.Internal
                 string method,
                 object[] args,
                 CancellationToken cancellationToken
-            ) {
+            )
+            {
                 var tcs = new TaskCompletionSource();
 
                 Sends.Add(new SendContext(method, args, cancellationToken, tcs));

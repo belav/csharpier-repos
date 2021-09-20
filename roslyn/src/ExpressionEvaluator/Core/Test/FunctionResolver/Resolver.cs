@@ -107,7 +107,8 @@ namespace Microsoft.CodeAnalysis.ExpressionEvaluator.UnitTests
             int token,
             int version,
             int ilOffset
-        ) {
+        )
+        {
             request.OnFunctionResolved(module, token, version, ilOffset);
         }
     }

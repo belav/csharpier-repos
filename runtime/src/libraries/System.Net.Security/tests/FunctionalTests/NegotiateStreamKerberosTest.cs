@@ -148,7 +148,8 @@ namespace System.Net.Security.Tests
         [MemberData(nameof(GoodCredentialsData))]
         public async Task NegotiateStream_ClientAuthenticationRemote_Success(
             object credentialObject
-        ) {
+        )
+        {
             var credential = (NetworkCredential)credentialObject;
             await VerifyClientAuthentication(credential);
         }
@@ -184,7 +185,8 @@ namespace System.Net.Security.Tests
                     string.IsNullOrEmpty(credential.UserName)
                     || string.IsNullOrEmpty(credential.Password)
                 )
-            ) {
+            )
+            {
                 // Anonymous authentication.
                 expectedAuthenticationType = "NTLM";
                 mutuallyAuthenticated = false;
@@ -241,7 +243,8 @@ namespace System.Net.Security.Tests
 
                 using (
                     var serverAuth = new NegotiateStream(serverStream, leaveInnerStreamOpen: false)
-                ) {
+                )
+                {
                     await serverAuth.AuthenticateAsServerAsync(
                             CredentialCache.DefaultNetworkCredentials,
                             ProtectionLevel.EncryptAndSign,

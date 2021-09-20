@@ -25,7 +25,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.EditorConfigSettings.Da
             public MockAnalyzerReference(
                 CodeFixProvider? fixer,
                 ImmutableArray<DiagnosticAnalyzer> analyzers
-            ) {
+            )
+            {
                 Fixer = fixer;
                 Analyzers = analyzers;
             }
@@ -88,7 +89,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.EditorConfigSettings.Da
 
                 private static ImmutableArray<DiagnosticDescriptor> CreateSupportedDiagnostics(
                     ImmutableArray<(string id, string category)> reportedDiagnosticIdsWithCategories
-                ) {
+                )
+                {
                     var builder = ArrayBuilder<DiagnosticDescriptor>.GetInstance();
                     foreach (var (diagnosticId, category) in reportedDiagnosticIdsWithCategories)
                     {

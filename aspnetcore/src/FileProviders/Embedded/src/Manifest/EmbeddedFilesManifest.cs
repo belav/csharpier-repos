@@ -89,7 +89,8 @@ namespace Microsoft.Extensions.FileProviders.Embedded.Manifest
             if (
                 ResolveEntry(path) is ManifestDirectory directory
                 && directory != ManifestEntry.UnknownPath
-            ) {
+            )
+            {
                 return new EmbeddedFilesManifest(directory.ToRootDirectory());
             }
 

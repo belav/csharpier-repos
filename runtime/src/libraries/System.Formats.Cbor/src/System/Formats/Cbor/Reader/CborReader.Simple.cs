@@ -225,7 +225,8 @@ namespace System.Formats.Cbor
                         && CborConformanceModeHelpers.RequireCanonicalSimpleValueEncodings(
                             ConformanceMode
                         )
-                    ) {
+                    )
+                    {
                         throw new CborContentException(
                             SR.Format(
                                 SR.Cbor_ConformanceMode_InvalidSimpleValueEncoding,

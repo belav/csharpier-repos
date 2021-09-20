@@ -18,7 +18,8 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
             this IEnumerable<T> sequence,
             Func<T, CancellationToken, Task<IEnumerable<S>>> selector,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var whenAllTask = Task.WhenAll(sequence.Select(e => selector(e, cancellationToken)));
 
             return whenAllTask.SafeContinueWith(

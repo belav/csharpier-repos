@@ -199,7 +199,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core
         internal static BadHttpRequestException GetException(
             RequestRejectionReason reason,
             string detail
-        ) {
+        )
+        {
             BadHttpRequestException ex;
             switch (reason)
             {

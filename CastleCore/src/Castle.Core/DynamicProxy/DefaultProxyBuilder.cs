@@ -60,7 +60,8 @@ namespace Castle.DynamicProxy
             Type classToProxy,
             Type[] additionalInterfacesToProxy,
             ProxyGenerationOptions options
-        ) {
+        )
+        {
             AssertValidType(classToProxy, nameof(classToProxy));
             AssertValidTypes(additionalInterfacesToProxy, nameof(additionalInterfacesToProxy));
             AssertValidMixins(options, nameof(options));
@@ -80,7 +81,8 @@ namespace Castle.DynamicProxy
             Type classToProxy,
             Type[] additionalInterfacesToProxy,
             ProxyGenerationOptions options
-        ) {
+        )
+        {
             AssertValidType(classToProxy, nameof(classToProxy));
             AssertValidTypes(additionalInterfacesToProxy, nameof(additionalInterfacesToProxy));
             AssertValidMixins(options, nameof(options));
@@ -101,7 +103,8 @@ namespace Castle.DynamicProxy
             Type[] additionalInterfacesToProxy,
             Type targetType,
             ProxyGenerationOptions options
-        ) {
+        )
+        {
             AssertValidType(interfaceToProxy, nameof(interfaceToProxy));
             AssertValidTypes(additionalInterfacesToProxy, nameof(additionalInterfacesToProxy));
             AssertValidMixins(options, nameof(options));
@@ -122,7 +125,8 @@ namespace Castle.DynamicProxy
             Type interfaceToProxy,
             Type[] additionalInterfacesToProxy,
             ProxyGenerationOptions options
-        ) {
+        )
+        {
             AssertValidType(interfaceToProxy, nameof(interfaceToProxy));
             AssertValidTypes(additionalInterfacesToProxy, nameof(additionalInterfacesToProxy));
             AssertValidMixins(options, nameof(options));
@@ -143,7 +147,8 @@ namespace Castle.DynamicProxy
             Type interfaceToProxy,
             Type[] additionalInterfacesToProxy,
             ProxyGenerationOptions options
-        ) {
+        )
+        {
             AssertValidType(interfaceToProxy, nameof(interfaceToProxy));
             AssertValidTypes(additionalInterfacesToProxy, nameof(additionalInterfacesToProxy));
             AssertValidMixins(options, nameof(options));

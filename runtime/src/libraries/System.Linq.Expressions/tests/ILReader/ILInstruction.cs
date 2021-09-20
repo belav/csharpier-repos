@@ -234,12 +234,8 @@ namespace System.Linq.Expressions.Tests
         private readonly ITokenResolver _resolver;
         private byte[] _signature;
 
-        internal InlineSigInstruction(
-            int offset,
-            OpCode opCode,
-            int token,
-            ITokenResolver resolver
-        ) : base(offset, opCode)
+        internal InlineSigInstruction(int offset, OpCode opCode, int token, ITokenResolver resolver)
+            : base(offset, opCode)
         {
             _resolver = resolver;
             Token = token;
@@ -257,12 +253,8 @@ namespace System.Linq.Expressions.Tests
         private readonly ITokenResolver _resolver;
         private MemberInfo _member;
 
-        internal InlineTokInstruction(
-            int offset,
-            OpCode opCode,
-            int token,
-            ITokenResolver resolver
-        ) : base(offset, opCode)
+        internal InlineTokInstruction(int offset, OpCode opCode, int token, ITokenResolver resolver)
+            : base(offset, opCode)
         {
             _resolver = resolver;
             Token = token;

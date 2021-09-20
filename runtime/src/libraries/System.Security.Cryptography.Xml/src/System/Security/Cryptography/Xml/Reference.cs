@@ -277,7 +277,8 @@ namespace System.Security.Cryptography.Xml
                         if (
                             algorithm == null
                             || !Utils.VerifyAttributes(transformElement, "Algorithm")
-                        ) {
+                        )
+                        {
                             throw new CryptographicException(SR.Cryptography_Xml_UnknownTransform);
                         }
                         Transform transform = CryptoHelpers.CreateFromName<Transform>(algorithm);
@@ -533,7 +534,8 @@ namespace System.Security.Cryptography.Xml
                                                     )
                                                     .Equals(idref)
                                             )
-                                        ) {
+                                        )
+                                        {
                                             elem = tempElem;
                                             if (_signedXml._context != null)
                                                 _namespaces = Utils.GetPropagatedAttributes(

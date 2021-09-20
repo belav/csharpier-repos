@@ -19,7 +19,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Internal
             ServiceContext serviceContext,
             IHttpApplication<TContext> application,
             HttpProtocols protocols
-        ) {
+        )
+        {
             _serviceContext = serviceContext;
             _application = application;
             _endpointDefaultProtocols = protocols;

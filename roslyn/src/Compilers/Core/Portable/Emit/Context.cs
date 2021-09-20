@@ -26,7 +26,8 @@ namespace Microsoft.CodeAnalysis.Emit
             DiagnosticBag diagnostics,
             bool metadataOnly,
             bool includePrivateMembers
-        ) {
+        )
+        {
             Debug.Assert(module != null);
             Debug.Assert(diagnostics != null);
             Debug.Assert(includePrivateMembers || metadataOnly);

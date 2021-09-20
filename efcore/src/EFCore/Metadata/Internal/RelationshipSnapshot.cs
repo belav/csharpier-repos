@@ -24,7 +24,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
             InternalForeignKeyBuilder relationship,
             EntityType.Snapshot? ownedEntityTypeSnapshot,
             List<(SkipNavigation, ConfigurationSource)>? referencingSkipNavigations
-        ) {
+        )
+        {
             Relationship = relationship;
             OwnedEntityTypeSnapshot = ownedEntityTypeSnapshot;
             ReferencingSkipNavigations = referencingSkipNavigations;
@@ -74,7 +75,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
         /// </summary>
         public virtual InternalForeignKeyBuilder? Attach(
             InternalEntityTypeBuilder? entityTypeBuilder = null
-        ) {
+        )
+        {
             entityTypeBuilder ??= Relationship.Metadata.DeclaringEntityType.Builder;
 
             var newRelationship = Relationship.Attach(entityTypeBuilder);

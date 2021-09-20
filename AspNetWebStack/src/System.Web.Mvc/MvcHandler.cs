@@ -66,7 +66,8 @@ namespace System.Web.Mvc
             HttpContext httpContext,
             AsyncCallback callback,
             object state
-        ) {
+        )
+        {
             HttpContextBase httpContextBase = new HttpContextWrapper(httpContext);
             return BeginProcessRequest(httpContextBase, callback, state);
         }
@@ -75,7 +76,8 @@ namespace System.Web.Mvc
             HttpContextBase httpContext,
             AsyncCallback callback,
             object state
-        ) {
+        )
+        {
             IController controller;
             IControllerFactory factory;
             ProcessRequestInit(httpContext, out controller, out factory);
@@ -90,7 +92,8 @@ namespace System.Web.Mvc
                     AsyncCallback asyncCallback,
                     object asyncState,
                     ProcessRequestState innerState
-                ) {
+                )
+                {
                     try
                     {
                         return innerState.AsyncController.BeginExecute(
@@ -109,7 +112,8 @@ namespace System.Web.Mvc
                 EndInvokeVoidDelegate<ProcessRequestState> endDelegate = delegate(
                     IAsyncResult asyncResult,
                     ProcessRequestState innerState
-                ) {
+                )
+                {
                     try
                     {
                         innerState.AsyncController.EndExecute(asyncResult);
@@ -204,7 +208,8 @@ namespace System.Web.Mvc
             HttpContextBase httpContext,
             out IController controller,
             out IControllerFactory factory
-        ) {
+        )
+        {
             // If request validation has already been enabled, make it lazy. This allows attributes like [HttpPost] (which looks
             // at Request.Form) to work correctly without triggering full validation.
             // Tolerate null HttpContext for testing.
@@ -270,7 +275,8 @@ namespace System.Web.Mvc
             HttpContext context,
             AsyncCallback cb,
             object extraData
-        ) {
+        )
+        {
             return BeginProcessRequest(context, cb, extraData);
         }
 

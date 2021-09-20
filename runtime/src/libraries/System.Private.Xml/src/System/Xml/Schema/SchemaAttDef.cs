@@ -167,7 +167,8 @@ namespace System.Xml.Schema
                 datatype.TokenizedType == XmlTokenizedType.ENUMERATION
                 && (values != null)
                 && (values.Count <= 2)
-            ) {
+            )
+            {
                 string s1 = values[0].ToString();
 
                 if (values.Count == 2)
@@ -177,7 +178,8 @@ namespace System.Xml.Schema
                     if (
                         (s1 == "default" || s2 == "default")
                         && (s1 == "preserve" || s2 == "preserve")
-                    ) {
+                    )
+                    {
                         return;
                     }
                 }

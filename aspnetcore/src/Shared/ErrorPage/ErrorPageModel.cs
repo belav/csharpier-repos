@@ -19,7 +19,8 @@ namespace Microsoft.AspNetCore.Hosting.Views
             string clrVersion,
             string currentAssemblyVesion,
             string operatingSystemDescription
-        ) {
+        )
+        {
             ErrorDetails = errorDetails;
             ShowRuntimeDetails = showRuntimeDetails;
             RuntimeDisplayName = runtimeDisplayName;

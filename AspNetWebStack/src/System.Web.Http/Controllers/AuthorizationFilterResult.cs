@@ -19,7 +19,8 @@ namespace System.Web.Http.Controllers
             HttpActionContext context,
             IAuthorizationFilter[] filters,
             IHttpActionResult innerResult
-        ) {
+        )
+        {
             Contract.Assert(context != null);
             Contract.Assert(filters != null);
             Contract.Assert(innerResult != null);

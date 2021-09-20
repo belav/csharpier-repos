@@ -135,7 +135,8 @@ namespace Microsoft.AspNetCore.Mvc.ViewFeatures
         public void SetModel_Throws_IfModelIncompatibleWithDeclaredType(
             object model,
             Type expectedType
-        ) {
+        )
+        {
             // Arrange
             var viewData = new TestViewDataDictionary(
                 new EmptyModelMetadataProvider(),
@@ -274,7 +275,8 @@ namespace Microsoft.AspNetCore.Mvc.ViewFeatures
             Type sourceType,
             object model,
             Type expectedType
-        ) {
+        )
+        {
             // Arrange
             var metadataProvider = new EmptyModelMetadataProvider();
             var source = new ViewDataDictionary(metadataProvider)
@@ -300,7 +302,8 @@ namespace Microsoft.AspNetCore.Mvc.ViewFeatures
         public void ModelSetter_PreservesSourceMetadata_IfModelCompatible(
             Type sourceType,
             object model
-        ) {
+        )
+        {
             // Arrange
             var metadataProvider = new EmptyModelMetadataProvider();
             var source = new ViewDataDictionary(metadataProvider)

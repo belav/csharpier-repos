@@ -144,7 +144,8 @@ namespace Microsoft.EntityFrameworkCore.Scaffolding.Internal
             ICollection<string>? existingIdentifiers,
             Func<string, string>? singularizePluralizer,
             Func<string, ICollection<string>?, string> uniquifier
-        ) {
+        )
+        {
             Check.NotNull(identifier, nameof(identifier));
             Check.NotNull(uniquifier, nameof(uniquifier));
 
@@ -184,7 +185,8 @@ namespace Microsoft.EntityFrameworkCore.Scaffolding.Internal
         public virtual string Uniquifier(
             string proposedIdentifier,
             ICollection<string>? existingIdentifiers
-        ) {
+        )
+        {
             Check.NotEmpty(proposedIdentifier, nameof(proposedIdentifier));
 
             if (existingIdentifiers == null)

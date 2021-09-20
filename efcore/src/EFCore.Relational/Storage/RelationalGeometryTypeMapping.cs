@@ -54,7 +54,8 @@ namespace Microsoft.EntityFrameworkCore.Storage
 
         private static RelationalTypeMappingParameters CreateRelationalTypeMappingParameters(
             string storeType
-        ) {
+        )
+        {
             var comparer = new GeometryValueComparer<TGeometry>();
 
             return new RelationalTypeMappingParameters(
@@ -76,7 +77,8 @@ namespace Microsoft.EntityFrameworkCore.Storage
             string name,
             object? value,
             bool? nullable = null
-        ) {
+        )
+        {
             var parameter = command.CreateParameter();
             parameter.Direction = ParameterDirection.Input;
             parameter.ParameterName = name;

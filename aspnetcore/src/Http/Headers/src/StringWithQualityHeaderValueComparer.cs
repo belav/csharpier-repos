@@ -38,7 +38,8 @@ namespace Microsoft.Net.Http.Headers
         public int Compare(
             StringWithQualityHeaderValue? stringWithQuality1,
             StringWithQualityHeaderValue? stringWithQuality2
-        ) {
+        )
+        {
             if (stringWithQuality1 == null)
             {
                 throw new ArgumentNullException(nameof(stringWithQuality1));
@@ -67,14 +68,16 @@ namespace Microsoft.Net.Http.Headers
                     stringWithQuality2.Value,
                     StringComparison.OrdinalIgnoreCase
                 )
-            ) {
+            )
+            {
                 if (StringSegment.Equals(stringWithQuality1.Value, "*", StringComparison.Ordinal))
                 {
                     return -1;
                 }
                 else if (
                     StringSegment.Equals(stringWithQuality2.Value, "*", StringComparison.Ordinal)
-                ) {
+                )
+                {
                     return 1;
                 }
             }

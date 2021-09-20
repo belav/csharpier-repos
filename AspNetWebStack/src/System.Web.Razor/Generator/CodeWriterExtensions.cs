@@ -11,7 +11,8 @@ namespace System.Web.Razor.Generator
         public static void WriteLocationTaggedString(
             this CodeWriter writer,
             LocationTagged<string> value
-        ) {
+        )
+        {
             writer.WriteStartMethodInvoke("Tuple.Create");
             writer.WriteStringLiteral(value.Value);
             writer.WriteParameterSeparator();

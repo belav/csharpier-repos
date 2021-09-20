@@ -22,13 +22,14 @@ namespace Microsoft.EntityFrameworkCore.TestUtilities.Xunit
             TestMethodDisplayOptions defaultMethodDisplayOptions,
             ITestMethod testMethod,
             object[] testMethodArguments = null
-        ) : base(
-            diagnosticMessageSink,
-            defaultMethodDisplay,
-            defaultMethodDisplayOptions,
-            testMethod,
-            testMethodArguments
-        ) { }
+        )
+            : base(
+                diagnosticMessageSink,
+                defaultMethodDisplay,
+                defaultMethodDisplayOptions,
+                testMethod,
+                testMethodArguments
+            ) { }
 
         public override async Task<RunSummary> RunAsync(
             IMessageSink diagnosticMessageSink,

@@ -399,7 +399,8 @@ namespace System.Xml
         public virtual object ReadContentAs(
             Type returnType,
             IXmlNamespaceResolver? namespaceResolver
-        ) {
+        )
+        {
             if (!CanReadContentAs())
             {
                 throw CreateReadContentAsException(nameof(ReadContentAs));
@@ -633,7 +634,8 @@ namespace System.Xml
         public virtual object ReadElementContentAs(
             Type returnType,
             IXmlNamespaceResolver namespaceResolver
-        ) {
+        )
+        {
             if (SetupReadElementContentAsXxx("ReadElementContentAs"))
             {
                 object value = ReadContentAs(returnType, namespaceResolver);
@@ -657,7 +659,8 @@ namespace System.Xml
             IXmlNamespaceResolver namespaceResolver,
             string localName,
             string namespaceURI
-        ) {
+        )
+        {
             CheckElement(localName, namespaceURI);
             return ReadElementContentAs(returnType, namespaceResolver);
         }
@@ -1143,7 +1146,8 @@ namespace System.Xml
                     NodeType == XmlNodeType.Element
                     && Ref.Equal(localName, LocalName)
                     && Ref.Equal(namespaceURI, NamespaceURI)
-                ) {
+                )
+                {
                     return true;
                 }
             }
@@ -1238,7 +1242,8 @@ namespace System.Xml
                     NodeType == XmlNodeType.Element
                     && Ref.Equal(localName, LocalName)
                     && Ref.Equal(namespaceURI, NamespaceURI)
-                ) {
+                )
+                {
                     return true;
                 }
             }
@@ -1303,7 +1308,8 @@ namespace System.Xml
                     nt == XmlNodeType.Element
                     && Ref.Equal(localName, LocalName)
                     && Ref.Equal(namespaceURI, NamespaceURI)
-                ) {
+                )
+                {
                     return true;
                 }
             } while (nt != XmlNodeType.EndElement && !EOF);
@@ -1710,7 +1716,8 @@ namespace System.Xml
             string methodName,
             XmlNodeType nodeType,
             IXmlLineInfo? lineInfo
-        ) {
+        )
+        {
             return new InvalidOperationException(
                 AddLineInfo(SR.Format(SR.Xml_InvalidReadContentAs, methodName, nodeType), lineInfo)
             );
@@ -1720,7 +1727,8 @@ namespace System.Xml
             string methodName,
             XmlNodeType nodeType,
             IXmlLineInfo? lineInfo
-        ) {
+        )
+        {
             return new InvalidOperationException(
                 AddLineInfo(
                     SR.Format(SR.Xml_InvalidReadElementContentAs, methodName, nodeType),
@@ -1931,7 +1939,8 @@ namespace System.Xml
             string inputUri,
             XmlReaderSettings? settings,
             XmlParserContext? inputContext
-        ) {
+        )
+        {
             settings ??= XmlReaderSettings.s_defaultReaderSettings;
             return settings.CreateReader(inputUri, inputContext);
         }
@@ -1976,7 +1985,8 @@ namespace System.Xml
             Stream input,
             XmlReaderSettings? settings,
             XmlParserContext? inputContext
-        ) {
+        )
+        {
             settings ??= XmlReaderSettings.s_defaultReaderSettings;
             return settings.CreateReader(input, null, (string)string.Empty, inputContext);
         }
@@ -2010,7 +2020,8 @@ namespace System.Xml
             TextReader input,
             XmlReaderSettings? settings,
             string? baseUri
-        ) {
+        )
+        {
             settings ??= XmlReaderSettings.s_defaultReaderSettings;
             return settings.CreateReader(input, baseUri, null);
         }
@@ -2020,7 +2031,8 @@ namespace System.Xml
             TextReader input,
             XmlReaderSettings? settings,
             XmlParserContext? inputContext
-        ) {
+        )
+        {
             settings ??= XmlReaderSettings.s_defaultReaderSettings;
             return settings.CreateReader(input, string.Empty, inputContext);
         }
@@ -2039,7 +2051,8 @@ namespace System.Xml
             Stream input,
             XmlReaderSettings? settings,
             XmlParserContext inputContext
-        ) {
+        )
+        {
             if (input == null)
             {
                 throw new ArgumentNullException(nameof(input));

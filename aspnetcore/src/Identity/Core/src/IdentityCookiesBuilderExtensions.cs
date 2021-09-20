@@ -34,7 +34,8 @@ namespace Microsoft.AspNetCore.Identity
         public static IdentityCookiesBuilder AddIdentityCookies(
             this AuthenticationBuilder builder,
             Action<IdentityCookiesBuilder> configureCookies
-        ) {
+        )
+        {
             var cookieBuilder = new IdentityCookiesBuilder();
             cookieBuilder.ApplicationCookie = builder.AddApplicationCookie();
             cookieBuilder.ExternalCookie = builder.AddExternalCookie();
@@ -51,7 +52,8 @@ namespace Microsoft.AspNetCore.Identity
         /// <returns>The <see cref="OptionsBuilder{TOptions}"/> which can be used to configure the cookie authentication.</returns>
         public static OptionsBuilder<CookieAuthenticationOptions> AddApplicationCookie(
             this AuthenticationBuilder builder
-        ) {
+        )
+        {
             builder.AddCookie(
                 IdentityConstants.ApplicationScheme,
                 o =>
@@ -76,7 +78,8 @@ namespace Microsoft.AspNetCore.Identity
         /// <returns>The <see cref="OptionsBuilder{TOptions}"/> which can be used to configure the cookie authentication.</returns>
         public static OptionsBuilder<CookieAuthenticationOptions> AddExternalCookie(
             this AuthenticationBuilder builder
-        ) {
+        )
+        {
             builder.AddCookie(
                 IdentityConstants.ExternalScheme,
                 o =>
@@ -98,7 +101,8 @@ namespace Microsoft.AspNetCore.Identity
         /// <returns>The <see cref="OptionsBuilder{TOptions}"/> which can be used to configure the cookie authentication.</returns>
         public static OptionsBuilder<CookieAuthenticationOptions> AddTwoFactorRememberMeCookie(
             this AuthenticationBuilder builder
-        ) {
+        )
+        {
             builder.AddCookie(
                 IdentityConstants.TwoFactorRememberMeScheme,
                 o => o.Cookie.Name = IdentityConstants.TwoFactorRememberMeScheme
@@ -116,7 +120,8 @@ namespace Microsoft.AspNetCore.Identity
         /// <returns>The <see cref="OptionsBuilder{TOptions}"/> which can be used to configure the cookie authentication.</returns>
         public static OptionsBuilder<CookieAuthenticationOptions> AddTwoFactorUserIdCookie(
             this AuthenticationBuilder builder
-        ) {
+        )
+        {
             builder.AddCookie(
                 IdentityConstants.TwoFactorUserIdScheme,
                 o =>

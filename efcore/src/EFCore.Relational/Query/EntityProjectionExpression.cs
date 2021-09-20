@@ -39,7 +39,8 @@ namespace Microsoft.EntityFrameworkCore.Query
             IEntityType entityType,
             TableExpressionBase innerTable,
             bool nullable
-        ) {
+        )
+        {
             throw new NotSupportedException(
                 "Obsolete: Use the constructor which takes populated column expressions map."
             );
@@ -55,7 +56,8 @@ namespace Microsoft.EntityFrameworkCore.Query
             IEntityType entityType,
             IReadOnlyDictionary<IProperty, ColumnExpression> propertyExpressionMap,
             SqlExpression? discriminatorExpression = null
-        ) {
+        )
+        {
             Check.NotNull(entityType, nameof(entityType));
             Check.NotNull(propertyExpressionMap, nameof(propertyExpressionMap));
 
@@ -153,7 +155,8 @@ namespace Microsoft.EntityFrameworkCore.Query
                 if (
                     derivedType.IsAssignableFrom(property.DeclaringEntityType)
                     || property.DeclaringEntityType.IsAssignableFrom(derivedType)
-                ) {
+                )
+                {
                     propertyExpressionMap[property] = kvp.Value;
                 }
             }
@@ -196,7 +199,8 @@ namespace Microsoft.EntityFrameworkCore.Query
             if (
                 !EntityType.IsAssignableFrom(property.DeclaringEntityType)
                 && !property.DeclaringEntityType.IsAssignableFrom(EntityType)
-            ) {
+            )
+            {
                 throw new InvalidOperationException(
                     RelationalStrings.UnableToBindMemberToEntityProjection(
                         "property",
@@ -217,14 +221,16 @@ namespace Microsoft.EntityFrameworkCore.Query
         public virtual void AddNavigationBinding(
             INavigation navigation,
             EntityShaperExpression entityShaper
-        ) {
+        )
+        {
             Check.NotNull(navigation, nameof(navigation));
             Check.NotNull(entityShaper, nameof(entityShaper));
 
             if (
                 !EntityType.IsAssignableFrom(navigation.DeclaringEntityType)
                 && !navigation.DeclaringEntityType.IsAssignableFrom(EntityType)
-            ) {
+            )
+            {
                 throw new InvalidOperationException(
                     RelationalStrings.UnableToBindMemberToEntityProjection(
                         "navigation",
@@ -250,7 +256,8 @@ namespace Microsoft.EntityFrameworkCore.Query
             if (
                 !EntityType.IsAssignableFrom(navigation.DeclaringEntityType)
                 && !navigation.DeclaringEntityType.IsAssignableFrom(EntityType)
-            ) {
+            )
+            {
                 throw new InvalidOperationException(
                     RelationalStrings.UnableToBindMemberToEntityProjection(
                         "navigation",

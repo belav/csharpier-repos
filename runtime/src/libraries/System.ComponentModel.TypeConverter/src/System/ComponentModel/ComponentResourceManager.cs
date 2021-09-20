@@ -100,7 +100,8 @@ namespace System.ComponentModel
                 if (
                     resources == null
                     || (resources.Comparer.Equals(StringComparer.OrdinalIgnoreCase) != IgnoreCase)
-                ) {
+                )
+                {
                     resources = FillResources(culture, out ResourceSet dummy);
                     _resourceSets[culture] = resources;
                 }
@@ -139,7 +140,8 @@ namespace System.ComponentModel
                             objectName.Length,
                             StringComparison.OrdinalIgnoreCase
                         ) != 0
-                    ) {
+                    )
+                    {
                         continue;
                     }
                 }
@@ -171,7 +173,8 @@ namespace System.ComponentModel
                         prop != null
                         && !prop.IsReadOnly
                         && (kvp.Value == null || prop.PropertyType.IsInstanceOfType(kvp.Value))
-                    ) {
+                    )
+                    {
                         prop.SetValue(value, kvp.Value);
                     }
                 }
@@ -199,7 +202,8 @@ namespace System.ComponentModel
                         prop != null
                         && prop.CanWrite
                         && (kvp.Value == null || prop.PropertyType.IsInstanceOfType(kvp.Value))
-                    ) {
+                    )
+                    {
                         prop.SetValue(value, kvp.Value, null);
                     }
                 }
@@ -213,7 +217,8 @@ namespace System.ComponentModel
         private SortedList<string, object> FillResources(
             CultureInfo culture,
             out ResourceSet resourceSet
-        ) {
+        )
+        {
             SortedList<string, object> sd;
             ResourceSet parentResourceSet = null;
 
@@ -222,7 +227,8 @@ namespace System.ComponentModel
             if (
                 !culture.Equals(CultureInfo.InvariantCulture)
                 && !culture.Equals(NeutralResourcesCulture)
-            ) {
+            )
+            {
                 sd = FillResources(culture.Parent, out parentResourceSet);
             }
             else

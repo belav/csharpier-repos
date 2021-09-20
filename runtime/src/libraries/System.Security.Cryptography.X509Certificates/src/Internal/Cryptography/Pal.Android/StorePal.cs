@@ -22,7 +22,8 @@ namespace Internal.Cryptography.Pal
             ReadOnlySpan<byte> rawData,
             SafePasswordHandle password,
             X509KeyStorageFlags keyStorageFlags
-        ) {
+        )
+        {
             Debug.Assert(password != null);
 
             X509ContentType contentType = X509Certificate2.GetCertContentType(rawData);
@@ -42,7 +43,8 @@ namespace Internal.Cryptography.Pal
             string fileName,
             SafePasswordHandle password,
             X509KeyStorageFlags keyStorageFlags
-        ) {
+        )
+        {
             byte[] fileBytes = File.ReadAllBytes(fileName);
             return FromBlob(fileBytes, password, keyStorageFlags);
         }
@@ -54,7 +56,8 @@ namespace Internal.Cryptography.Pal
 
         public static IExportPal LinkFromCertificateCollection(
             X509Certificate2Collection certificates
-        ) {
+        )
+        {
             return new AndroidExportProvider(certificates);
         }
 
@@ -62,7 +65,8 @@ namespace Internal.Cryptography.Pal
             string storeName,
             StoreLocation storeLocation,
             OpenFlags openFlags
-        ) {
+        )
+        {
             bool isReadWrite = (openFlags & OpenFlags.ReadWrite) == OpenFlags.ReadWrite;
             if (isReadWrite && storeLocation == StoreLocation.LocalMachine)
             {
@@ -127,7 +131,8 @@ namespace Internal.Cryptography.Pal
         private static ICertificatePal[] ReadPkcs12Collection(
             ReadOnlySpan<byte> rawData,
             SafePasswordHandle password
-        ) {
+        )
+        {
             using (var reader = new AndroidPkcs12Reader(rawData))
             {
                 reader.Decrypt(password);

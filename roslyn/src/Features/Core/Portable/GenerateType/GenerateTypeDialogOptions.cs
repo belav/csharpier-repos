@@ -16,7 +16,8 @@ namespace Microsoft.CodeAnalysis.GenerateType
             bool isPublicOnlyAccessibility = false,
             TypeKindOptions typeKindOptions = TypeKindOptions.AllOptions,
             bool isAttribute = false
-        ) {
+        )
+        {
             IsPublicOnlyAccessibility = isPublicOnlyAccessibility;
             TypeKindOptions = typeKindOptions;
             IsAttribute = isAttribute;

@@ -28,7 +28,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Infrastructure
         public static unsafe string GetAsciiOrUTF8StringNonNullCharacters(
             this ReadOnlySpan<byte> span,
             Encoding defaultEncoding
-        ) {
+        )
+        {
             if (span.IsEmpty)
             {
                 return string.Empty;
@@ -402,7 +403,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Infrastructure
         public static bool BytesOrdinalEqualsStringAndAscii(
             string previousValue,
             ReadOnlySpan<byte> newValue
-        ) {
+        )
+        {
             // previousValue is a previously materialized string which *must* have already passed validation.
             Debug.Assert(IsValidHeaderString(previousValue));
 
@@ -452,7 +454,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Infrastructure
                                         ref Unsafe.Add(ref bytes, offset + 4)
                                     )
                                 )
-                            ) {
+                            )
+                            {
                                 goto NotEqual;
                             }
 
@@ -465,7 +468,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Infrastructure
                                     ref Unsafe.Add(ref str, offset),
                                     Unsafe.ReadUnaligned<uint>(ref Unsafe.Add(ref bytes, offset))
                                 )
-                            ) {
+                            )
+                            {
                                 goto NotEqual;
                             }
 
@@ -482,7 +486,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Infrastructure
                                     ref Unsafe.Add(ref str, offset),
                                     Unsafe.ReadUnaligned<uint>(ref Unsafe.Add(ref bytes, offset))
                                 )
-                            ) {
+                            )
+                            {
                                 goto NotEqual;
                             }
 
@@ -496,7 +501,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Infrastructure
                                 ref Unsafe.Add(ref str, offset),
                                 Unsafe.ReadUnaligned<ushort>(ref Unsafe.Add(ref bytes, offset))
                             )
-                        ) {
+                        )
+                        {
                             goto NotEqual;
                         }
 
@@ -556,7 +562,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Infrastructure
                                 Vector.Equals(compare1, vector1)
                             )
                         )
-                    ) {
+                    )
+                    {
                         goto NotEqual;
                     }
 
@@ -579,7 +586,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Infrastructure
             byte* input,
             int value,
             Vector128<sbyte> zero
-        ) {
+        )
+        {
             // BMI2 could be used, but this variant is faster on both Intel and AMD.
             if (Sse2.X64.IsSupported)
             {
@@ -606,7 +614,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Infrastructure
         private static bool WidenFourAsciiBytesToUtf16AndCompareToChars(
             ref char charStart,
             uint value
-        ) {
+        )
+        {
             if (!AllBytesInUInt32AreAscii(value))
             {
                 return false;
@@ -650,7 +659,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Infrastructure
         private static bool WidenTwoAsciiBytesToUtf16AndCompareToChars(
             ref char charStart,
             ushort value
-        ) {
+        )
+        {
             if (!AllBytesInUInt16AreAscii(value))
             {
                 return false;
@@ -743,7 +753,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Infrastructure
         private static void PopulateSpanWithHexSuffix(
             Span<char> buffer,
             (string? str, char separator, uint number) tuple
-        ) {
+        )
+        {
             var (tupleStr, tupleSeparator, tupleNumber) = tuple;
 
             var i = 0;

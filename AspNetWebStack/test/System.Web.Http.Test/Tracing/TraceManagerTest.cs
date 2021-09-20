@@ -156,7 +156,8 @@ namespace System.Web.Http.Tracing
         [InlineData(typeof(IHttpControllerTypeResolver))]
         public void Initialize_Does_Not_Alter_Configuration_When_No_TraceWriter_Present(
             Type serviceType
-        ) {
+        )
+        {
             // Arrange
             HttpConfiguration config = new HttpConfiguration();
             object defaultService = config.Services.GetService(serviceType);
@@ -292,7 +293,8 @@ namespace System.Web.Http.Tracing
         [PropertyData("MultipleMessageHandlers")]
         public void Multiple_Initialize_DoesNotAlter_MessageHandlerCollection(
             List<DelegatingHandler> handlerList
-        ) {
+        )
+        {
             // Arrange
             HttpConfiguration config = new HttpConfiguration();
             config.Services.Replace(typeof(ITraceWriter), new TestTraceWriter());
@@ -426,7 +428,8 @@ namespace System.Web.Http.Tracing
             protected override Task<HttpResponseMessage> SendAsync(
                 HttpRequestMessage request,
                 CancellationToken cancellationToken
-            ) {
+            )
+            {
                 _order.MoveNext();
                 Assert.True(_order.Current == _expectedOrder);
                 return base.SendAsync(request, cancellationToken);
@@ -670,7 +673,8 @@ namespace System.Web.Http.Tracing
 
         private static bool IsMessageHandlerCollectionValid(
             Collection<DelegatingHandler> messageHandlers
-        ) {
+        )
+        {
             int handlerCount = messageHandlers.Count;
 
             // if the handler count is zero, exit early.

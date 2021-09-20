@@ -62,7 +62,8 @@ namespace CrossBoundaryLayout
                     != (
                         (ByteStruct)typeof(AGeneric<ByteStruct>).GetField("_aVal").GetValue(a3)
                     )._dVal
-                ) {
+                )
+                {
                     ATest.ReportTestFailure("A a3_aVal", a3, ref failure);
                 }
             }

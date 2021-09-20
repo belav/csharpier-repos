@@ -56,7 +56,8 @@ namespace System.Drawing
             Stream stream,
             bool useEmbeddedColorManagement,
             bool validateImageData
-        ) {
+        )
+        {
             return LoadFromStream(stream, false);
         }
 
@@ -113,7 +114,8 @@ namespace System.Drawing
             int thumbHeight,
             Image.GetThumbnailImageAbort? callback,
             IntPtr callbackData
-        ) {
+        )
+        {
             if ((thumbWidth <= 0) || (thumbHeight <= 0))
                 throw new OutOfMemoryException(SR.InvalidThumbnailSize);
 

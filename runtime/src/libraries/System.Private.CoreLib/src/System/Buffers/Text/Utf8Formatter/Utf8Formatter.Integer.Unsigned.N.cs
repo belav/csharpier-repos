@@ -14,7 +14,8 @@ namespace System.Buffers.Text
             Span<byte> destination,
             bool insertNegationSign,
             out int bytesWritten
-        ) {
+        )
+        {
             // Calculate the actual digit count, number of group separators required, and the
             // number of trailing zeros requested. From all of this we can get the required
             // buffer length.

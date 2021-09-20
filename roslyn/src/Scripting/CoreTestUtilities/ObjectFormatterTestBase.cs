@@ -28,7 +28,8 @@ namespace Microsoft.CodeAnalysis.Scripting.Hosting.UnitTests
             int i = 0;
             foreach (
                 var line in str.Split(new[] { Environment.NewLine + "  " }, StringSplitOptions.None)
-            ) {
+            )
+            {
                 if (i == 0)
                 {
                     Assert.Equal(expected[i] + " {", line);

@@ -39,7 +39,8 @@ namespace Microsoft.AspNetCore.Authentication.MicrosoftAccount
             ClaimsIdentity identity,
             AuthenticationProperties properties,
             OAuthTokenResponse tokens
-        ) {
+        )
+        {
             var request = new HttpRequestMessage(HttpMethod.Get, Options.UserInformationEndpoint);
             request.Headers.Authorization = new AuthenticationHeaderValue(
                 "Bearer",
@@ -58,7 +59,8 @@ namespace Microsoft.AspNetCore.Authentication.MicrosoftAccount
                 var payload = JsonDocument.Parse(
                     await response.Content.ReadAsStringAsync(Context.RequestAborted)
                 )
-            ) {
+            )
+            {
                 var context = new OAuthCreatingTicketContext(
                     new ClaimsPrincipal(identity),
                     properties,
@@ -83,7 +85,8 @@ namespace Microsoft.AspNetCore.Authentication.MicrosoftAccount
         protected override string BuildChallengeUrl(
             AuthenticationProperties properties,
             string redirectUri
-        ) {
+        )
+        {
             var queryStrings = new Dictionary<string, string>
             {
                 { "client_id", Options.ClientId },
@@ -134,7 +137,8 @@ namespace Microsoft.AspNetCore.Authentication.MicrosoftAccount
             string name,
             Func<T, string> formatter,
             T defaultValue
-        ) {
+        )
+        {
             string? value;
             var parameterValue = properties.GetParameter<T>(name);
             if (parameterValue != null)

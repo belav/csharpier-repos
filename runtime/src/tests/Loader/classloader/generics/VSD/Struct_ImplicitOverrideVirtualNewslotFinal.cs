@@ -128,7 +128,8 @@ public class Test
             || ic1.method2<object>() != 2
             || ic1.method2<A<int>>() != 2
             || ic1.method2<S<object>>() != 2
-        ) {
+        )
+        {
             Console.WriteLine("Failed at TestNonGenInterface_NonGenType: generic method");
             pass = false;
         }
@@ -164,7 +165,8 @@ public class Test
             || ic2Object.method2<string>() != 4
             || ic2Object.method2<A<int>>() != 4
             || ic2Object.method2<S<string>>() != 4
-        ) {
+        )
+        {
             Console.WriteLine("Failed at TestNonGenInterface_GenType: generic method");
             pass = false;
         }
@@ -200,7 +202,8 @@ public class Test
             || iStringc3.method2<string>() != 6
             || iStringc3.method2<A<int>>() != 6
             || iStringc3.method2<S<string>>() != 6
-        ) {
+        )
+        {
             Console.WriteLine("Failed at TestGenInterface_NonGenType: generic method");
             pass = false;
         }
@@ -236,7 +239,8 @@ public class Test
             || iGenC4String.method2<string>() != 8
             || iGenC4String.method2<A<int>>() != 8
             || iGenC4String.method2<S<string>>() != 8
-        ) {
+        )
+        {
             Console.WriteLine("Failed at TestGenInterface_GenType: generic method");
             pass = false;
         }

@@ -14,7 +14,8 @@ namespace System.Text.Json
         public static byte[] GetEscapedPropertyNameSection(
             ReadOnlySpan<byte> utf8Value,
             JavaScriptEncoder? encoder
-        ) {
+        )
+        {
             int idx = JsonWriterHelper.NeedsEscaping(utf8Value, encoder);
 
             if (idx != -1)
@@ -31,7 +32,8 @@ namespace System.Text.Json
             ReadOnlySpan<byte> utf8Value,
             int firstEscapeIndexVal,
             JavaScriptEncoder? encoder
-        ) {
+        )
+        {
             Debug.Assert(
                 int.MaxValue / JsonConstants.MaxExpansionFactorWhileEscaping >= utf8Value.Length
             );
@@ -71,7 +73,8 @@ namespace System.Text.Json
             ReadOnlySpan<byte> utf8Value,
             int firstEscapeIndexVal,
             JavaScriptEncoder? encoder
-        ) {
+        )
+        {
             Debug.Assert(
                 int.MaxValue / JsonConstants.MaxExpansionFactorWhileEscaping >= utf8Value.Length
             );

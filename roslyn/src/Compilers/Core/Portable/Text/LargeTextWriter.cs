@@ -23,7 +23,8 @@ namespace Microsoft.CodeAnalysis.Text
             Encoding? encoding,
             SourceHashAlgorithm checksumAlgorithm,
             int length
-        ) {
+        )
+        {
             _encoding = encoding;
             _checksumAlgorithm = checksumAlgorithm;
             _chunks = ArrayBuilder<char[]>.GetInstance(1 + length / LargeText.ChunkSize);

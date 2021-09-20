@@ -185,7 +185,8 @@ namespace System.Linq.Expressions.Tests
             byte? a,
             byte? b,
             bool useInterpreter
-        ) {
+        )
+        {
             Expression<Func<byte?>> e = Expression.Lambda<Func<byte?>>(
                 Expression.ExclusiveOr(
                     Expression.Constant(a, typeof(byte?)),
@@ -218,7 +219,8 @@ namespace System.Linq.Expressions.Tests
             long? a,
             long? b,
             bool useInterpreter
-        ) {
+        )
+        {
             Expression<Func<long?>> e = Expression.Lambda<Func<long?>>(
                 Expression.ExclusiveOr(
                     Expression.Constant(a, typeof(long?)),
@@ -236,7 +238,8 @@ namespace System.Linq.Expressions.Tests
             sbyte? a,
             sbyte? b,
             bool useInterpreter
-        ) {
+        )
+        {
             Expression<Func<sbyte?>> e = Expression.Lambda<Func<sbyte?>>(
                 Expression.ExclusiveOr(
                     Expression.Constant(a, typeof(sbyte?)),
@@ -254,7 +257,8 @@ namespace System.Linq.Expressions.Tests
             short? a,
             short? b,
             bool useInterpreter
-        ) {
+        )
+        {
             Expression<Func<short?>> e = Expression.Lambda<Func<short?>>(
                 Expression.ExclusiveOr(
                     Expression.Constant(a, typeof(short?)),
@@ -272,7 +276,8 @@ namespace System.Linq.Expressions.Tests
             uint? a,
             uint? b,
             bool useInterpreter
-        ) {
+        )
+        {
             Expression<Func<uint?>> e = Expression.Lambda<Func<uint?>>(
                 Expression.ExclusiveOr(
                     Expression.Constant(a, typeof(uint?)),
@@ -290,7 +295,8 @@ namespace System.Linq.Expressions.Tests
             ulong? a,
             ulong? b,
             bool useInterpreter
-        ) {
+        )
+        {
             Expression<Func<ulong?>> e = Expression.Lambda<Func<ulong?>>(
                 Expression.ExclusiveOr(
                     Expression.Constant(a, typeof(ulong?)),
@@ -308,7 +314,8 @@ namespace System.Linq.Expressions.Tests
             ushort? a,
             ushort? b,
             bool useInterpreter
-        ) {
+        )
+        {
             Expression<Func<ushort?>> e = Expression.Lambda<Func<ushort?>>(
                 Expression.ExclusiveOr(
                     Expression.Constant(a, typeof(ushort?)),
@@ -326,7 +333,8 @@ namespace System.Linq.Expressions.Tests
             Number? a,
             Number? b,
             bool useInterpreter
-        ) {
+        )
+        {
             Expression<Func<Number?>> e = Expression.Lambda<Func<Number?>>(
                 Expression.ExclusiveOr(
                     Expression.Constant(a, typeof(Number?)),

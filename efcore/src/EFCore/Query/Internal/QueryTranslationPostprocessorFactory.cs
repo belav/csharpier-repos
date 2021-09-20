@@ -31,7 +31,8 @@ namespace Microsoft.EntityFrameworkCore.Query.Internal
         /// </summary>
         public QueryTranslationPostprocessorFactory(
             QueryTranslationPostprocessorDependencies dependencies
-        ) {
+        )
+        {
             _dependencies = dependencies;
         }
 
@@ -43,7 +44,8 @@ namespace Microsoft.EntityFrameworkCore.Query.Internal
         /// </summary>
         public virtual QueryTranslationPostprocessor Create(
             QueryCompilationContext queryCompilationContext
-        ) {
+        )
+        {
             Check.NotNull(queryCompilationContext, nameof(queryCompilationContext));
 
             return new QueryTranslationPostprocessor(_dependencies, queryCompilationContext);

@@ -27,7 +27,8 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeGeneration
             CodeGenerationOptions options,
             IList<bool> availableIndices,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var declaration = GenerateNamespaceDeclaration(
                 service,
                 @namespace,
@@ -57,7 +58,8 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeGeneration
             CodeGenerationOptions options,
             IList<bool> availableIndices,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var declaration = GenerateNamespaceDeclaration(
                 service,
                 @namespace,
@@ -85,7 +87,8 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeGeneration
             INamespaceSymbol @namespace,
             CodeGenerationOptions options,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             options ??= CodeGenerationOptions.Default;
             GetNameAndInnermostNamespace(
                 @namespace,
@@ -119,7 +122,8 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeGeneration
             IList<ISymbol> newMembers,
             CodeGenerationOptions options,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             declaration = RemoveAllMembers(declaration);
             declaration = service.AddMembers(declaration, newMembers, options, cancellationToken);
             return AddFormatterAndCodeGeneratorAnnotationsTo(declaration);
@@ -128,7 +132,8 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeGeneration
         private static SyntaxNode GenerateNamespaceDeclarationWorker(
             string name,
             INamespaceSymbol innermostNamespace
-        ) {
+        )
+        {
             var usings = GenerateUsingDirectives(innermostNamespace);
 
             // If they're just generating the empty namespace then make that into compilation unit.
@@ -146,7 +151,8 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeGeneration
             INamespaceSymbol innermostNamespace,
             string name,
             CodeGenerationOptions options
-        ) {
+        )
+        {
             var reusableSyntax = GetReuseableSyntaxNodeForSymbol<SyntaxNode>(@namespace, options);
             if (reusableSyntax == null)
             {
@@ -168,7 +174,8 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeGeneration
 
         private static SyntaxList<UsingDirectiveSyntax> GenerateUsingDirectives(
             INamespaceSymbol innermostNamespace
-        ) {
+        )
+        {
             var usingDirectives = CodeGenerationNamespaceInfo.GetImports(innermostNamespace)
                 .Select(GenerateUsingDirective)
                 .WhereNotNull()

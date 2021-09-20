@@ -28,7 +28,8 @@ namespace Microsoft.AspNetCore.Mvc.RazorPages.Infrastructure
             DiagnosticListener diagnosticListener,
             HtmlEncoder htmlEncoder,
             IModelExpressionProvider modelExpressionProvider
-        ) {
+        )
+        {
             _pageActivator = pageActivator;
             _modelMetadataProvider = metadataProvider;
             _propertyAccessors = new RazorPagePropertyActivator.PropertyValueAccessors
@@ -43,7 +44,8 @@ namespace Microsoft.AspNetCore.Mvc.RazorPages.Infrastructure
 
         public Func<PageContext, ViewContext, object> CreatePageFactory(
             CompiledPageActionDescriptor actionDescriptor
-        ) {
+        )
+        {
             if (!typeof(PageBase).GetTypeInfo().IsAssignableFrom(actionDescriptor.PageTypeInfo))
             {
                 throw new InvalidOperationException(
@@ -78,7 +80,8 @@ namespace Microsoft.AspNetCore.Mvc.RazorPages.Infrastructure
 
         public Action<PageContext, ViewContext, object> CreatePageDisposer(
             CompiledPageActionDescriptor descriptor
-        ) {
+        )
+        {
             if (descriptor == null)
             {
                 throw new ArgumentNullException(nameof(descriptor));
@@ -89,7 +92,8 @@ namespace Microsoft.AspNetCore.Mvc.RazorPages.Infrastructure
 
         public Func<PageContext, ViewContext, object, ValueTask> CreateAsyncPageDisposer(
             CompiledPageActionDescriptor descriptor
-        ) {
+        )
+        {
             if (descriptor == null)
             {
                 throw new ArgumentNullException(nameof(descriptor));

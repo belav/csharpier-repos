@@ -16,7 +16,8 @@ namespace Microsoft.AspNetCore.Mvc.Infrastructure
     {
         protected override IActionResultExecutor<JsonResult> CreateExecutor(
             ILoggerFactory loggerFactory
-        ) {
+        )
+        {
             return new SystemTextJsonResultExecutor(
                 Options.Create(new JsonOptions()),
                 loggerFactory.CreateLogger<SystemTextJsonResultExecutor>(),
@@ -58,7 +59,8 @@ namespace Microsoft.AspNetCore.Mvc.Infrastructure
                 ref Utf8JsonReader reader,
                 Type typeToConvert,
                 JsonSerializerOptions options
-            ) {
+            )
+            {
                 throw new NotImplementedException();
             }
 
@@ -66,7 +68,8 @@ namespace Microsoft.AspNetCore.Mvc.Infrastructure
                 Utf8JsonWriter writer,
                 ThrowingFormatterModel value,
                 JsonSerializerOptions options
-            ) {
+            )
+            {
                 throw new TimeZoneNotFoundException();
             }
         }

@@ -33,7 +33,8 @@ namespace Microsoft.CodeAnalysis
                 DocumentId documentId,
                 SourceTextContainer textContainer,
                 Action<Workspace, DocumentId, SourceText, PreservationMode> onChangedHandler
-            ) {
+            )
+            {
                 _workspace = workspace;
                 _documentId = documentId;
                 this.TextContainer = textContainer;

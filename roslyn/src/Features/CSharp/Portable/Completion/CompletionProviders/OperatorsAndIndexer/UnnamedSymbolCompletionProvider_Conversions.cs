@@ -34,7 +34,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Completion.Providers
             SemanticModel semanticModel,
             int position,
             IMethodSymbol conversion
-        ) {
+        )
+        {
             var (symbols, properties) = GetConversionSymbolsAndProperties(context, conversion);
 
             var targetTypeName = conversion.ReturnType.ToMinimalDisplayString(
@@ -63,7 +64,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Completion.Providers
         > properties) GetConversionSymbolsAndProperties(
             CompletionContext context,
             IMethodSymbol conversion
-        ) {
+        )
+        {
             // If it's a non-synthesized method, then we can just encode it as is.
             if (conversion is not CodeGenerationSymbol)
                 return (ImmutableArray.Create<ISymbol>(conversion), ConversionProperties);
@@ -88,7 +90,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Completion.Providers
             Document document,
             CompletionItem item,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var position = SymbolCompletionItem.GetContextPosition(item);
             var text = await document.GetTextAsync(cancellationToken).ConfigureAwait(false);
             var root = await document.GetRequiredSyntaxRootAsync(cancellationToken)
@@ -128,7 +131,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Completion.Providers
             Document document,
             CompletionItem item,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var conversion = await TryRehydrateAsync(document, item, cancellationToken)
                 .ConfigureAwait(false);
             if (conversion == null)
@@ -147,7 +151,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Completion.Providers
             Document document,
             CompletionItem item,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             // If we're need to rehydrate the conversion, pull out the necessary parts.
             if (item.Properties.ContainsKey(RehydrateName))
             {
@@ -162,7 +167,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Completion.Providers
                     && symbols[0] is INamedTypeSymbol containingType
                     && symbols[1] is ITypeSymbol fromType
                     && symbols[2] is ITypeSymbol toType
-                ) {
+                )
+                {
                     return CodeGenerationSymbolFactory.CreateConversionSymbol(
                         toType: toType,
                         fromType: CodeGenerationSymbolFactory.CreateParameterSymbol(

@@ -485,7 +485,8 @@ class Program
 
         private static async Task<ImmutableArray<ITagSpan<IErrorTag>>> GetTagSpansAsync(
             string content
-        ) {
+        )
+        {
             using var workspace = TestWorkspace.CreateCSharp(
                 content,
                 composition: SquiggleUtilities.CompositionWithSolutionCrawler
@@ -524,7 +525,8 @@ class Program
                         if (
                             !context.Symbol.IsImplicitlyDeclared
                             && context.Symbol.Locations.First().IsInSource
-                        ) {
+                        )
+                        {
                             context.ReportDiagnostic(
                                 Diagnostic.Create(Rule, context.Symbol.Locations.First())
                             );

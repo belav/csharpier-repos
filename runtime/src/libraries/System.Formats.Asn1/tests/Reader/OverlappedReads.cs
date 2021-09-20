@@ -24,7 +24,8 @@ namespace System.Formats.Asn1.Tests.Reader
                 AsnEncodingRules ruleSet,
                 out int consumed,
                 out int written
-            ) {
+            )
+            {
                 bool ret = AsnDecoder.TryReadBitString(
                     source,
                     destination,
@@ -62,7 +63,8 @@ namespace System.Formats.Asn1.Tests.Reader
                 AsnEncodingRules ruleSet,
                 out int consumed,
                 out int written
-            ) {
+            )
+            {
                 return AsnDecoder.TryReadOctetString(
                     source,
                     destination,
@@ -92,7 +94,8 @@ namespace System.Formats.Asn1.Tests.Reader
                 AsnEncodingRules ruleSet,
                 out int consumed,
                 out int written
-            ) {
+            )
+            {
                 return AsnDecoder.TryReadCharacterStringBytes(
                     source,
                     destination,
@@ -120,7 +123,8 @@ namespace System.Formats.Asn1.Tests.Reader
             int encodedValueLength,
             int copyLength,
             TryWriteMethod tryWriteMethod
-        ) {
+        )
+        {
             // The write starts beyond the portion of source that will be read,
             // but that hasn't yet been determined.
             AssertExtensions.Throws<ArgumentException>(

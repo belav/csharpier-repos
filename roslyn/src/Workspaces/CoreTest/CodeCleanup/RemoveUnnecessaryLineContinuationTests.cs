@@ -1607,7 +1607,8 @@ End Class";
             string codeWithMarker,
             string expectedResult,
             LanguageVersion langVersion = LanguageVersion.VisualBasic14
-        ) {
+        )
+        {
             MarkupTestFile.GetSpans(
                 codeWithMarker,
                 out var codeWithoutMarker,
@@ -1641,7 +1642,8 @@ End Class";
             string code,
             string language,
             LanguageVersion langVersion
-        ) {
+        )
+        {
             var solution = new AdhocWorkspace().CurrentSolution;
             var projectId = ProjectId.CreateNewId();
             var project = solution.AddProject(projectId, "Project", "Project.dll", language)

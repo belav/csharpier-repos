@@ -58,7 +58,8 @@ namespace Microsoft.CodeAnalysis.InitializeParameter
             ImmutableArray<SyntaxNode> listOfParameterNodes,
             TextSpan parameterSpan,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             return SpecializedTasks.EmptyImmutableArray<CodeAction>();
         }
 
@@ -71,7 +72,8 @@ namespace Microsoft.CodeAnalysis.InitializeParameter
             IMethodSymbol method,
             IBlockOperation? blockStatementOpt,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             // Only supported for constructor parameters.
             if (method.MethodKind != MethodKind.Constructor)
                 return ImmutableArray<CodeAction>.Empty;
@@ -142,7 +144,8 @@ namespace Microsoft.CodeAnalysis.InitializeParameter
             IBlockOperation? blockStatementOpt,
             ImmutableArray<NamingRule> rules,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             // Didn't find a field/prop that this parameter could be assigned to.
             // Offer to create new one and assign to that.
             using var _ = ArrayBuilder<CodeAction>.GetInstance(out var allActions);
@@ -208,7 +211,8 @@ namespace Microsoft.CodeAnalysis.InitializeParameter
             IBlockOperation? blockStatementOpt,
             ImmutableArray<NamingRule> rules,
             DocumentOptionSet options
-        ) {
+        )
+        {
             if (blockStatementOpt == null)
                 return default;
 
@@ -261,7 +265,8 @@ namespace Microsoft.CodeAnalysis.InitializeParameter
             IBlockOperation? blockStatementOpt,
             ImmutableArray<NamingRule> rules,
             DocumentOptionSet options
-        ) {
+        )
+        {
             var field = CreateField(parameter, options, rules);
             var property = CreateProperty(parameter, options, rules);
             var fieldAction = new MyCodeAction(
@@ -296,7 +301,8 @@ namespace Microsoft.CodeAnalysis.InitializeParameter
             IBlockOperation? blockStatementOpt,
             ImmutableArray<NamingRule> rules,
             IMethodSymbol method
-        ) {
+        )
+        {
             using var _ = ArrayBuilder<IParameterSymbol>.GetInstance(out var result);
 
             foreach (var parameter in method.Parameters)
@@ -327,7 +333,8 @@ namespace Microsoft.CodeAnalysis.InitializeParameter
             SyntaxNode functionDeclaration,
             IBlockOperation? blockStatementOpt,
             ISymbol fieldOrProperty
-        ) {
+        )
+        {
             // Found a field/property that this parameter should be assigned to.
             // Just offer the simple assignment to it.
 
@@ -357,7 +364,8 @@ namespace Microsoft.CodeAnalysis.InitializeParameter
         private static ISymbol? TryFindSiblingFieldOrProperty(
             IParameterSymbol parameter,
             IBlockOperation? blockStatementOpt
-        ) {
+        )
+        {
             foreach (var (siblingParam, _) in GetSiblingParameters(parameter))
             {
                 TryFindFieldOrPropertyAssignmentStatement(
@@ -376,7 +384,8 @@ namespace Microsoft.CodeAnalysis.InitializeParameter
             IParameterSymbol parameter,
             DocumentOptionSet options,
             ImmutableArray<NamingRule> rules
-        ) {
+        )
+        {
             var requireAccessibilityModifiers = options.GetOption(
                 CodeStyleOptions2.RequireAccessibilityModifiers
             );
@@ -394,7 +403,8 @@ namespace Microsoft.CodeAnalysis.InitializeParameter
                         requireAccessibilityModifiers.Value == AccessibilityModifiersRequired.Never
                         || requireAccessibilityModifiers.Value
                             == AccessibilityModifiersRequired.OmitIfDefault
-                    ) {
+                    )
+                    {
                         var defaultAccessibility = DetermineDefaultFieldAccessibility(
                             parameter.ContainingType
                         );
@@ -423,7 +433,8 @@ namespace Microsoft.CodeAnalysis.InitializeParameter
             IParameterSymbol parameter,
             ImmutableArray<string> parameterNameParts,
             NamingRule rule
-        ) {
+        )
+        {
             // Determine an appropriate name to call the new field.
             var containingType = parameter.ContainingType;
             var baseName = rule.NamingStyle.CreateName(parameterNameParts);
@@ -441,7 +452,8 @@ namespace Microsoft.CodeAnalysis.InitializeParameter
             IParameterSymbol parameter,
             DocumentOptionSet options,
             ImmutableArray<NamingRule> rules
-        ) {
+        )
+        {
             var requireAccessibilityModifiers = options.GetOption(
                 CodeStyleOptions2.RequireAccessibilityModifiers
             );
@@ -459,7 +471,8 @@ namespace Microsoft.CodeAnalysis.InitializeParameter
                         requireAccessibilityModifiers.Value == AccessibilityModifiersRequired.Never
                         || requireAccessibilityModifiers.Value
                             == AccessibilityModifiersRequired.OmitIfDefault
-                    ) {
+                    )
+                    {
                         var defaultAccessibility = DetermineDefaultPropertyAccessibility();
                         if (defaultAccessibility == Accessibility.Public)
                         {
@@ -500,7 +513,8 @@ namespace Microsoft.CodeAnalysis.InitializeParameter
             ImmutableArray<IParameterSymbol> parameters,
             ImmutableArray<ISymbol> fieldsOrProperties,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             Debug.Assert(parameters.Length >= 2);
             Debug.Assert(fieldsOrProperties.Length > 0);
             Debug.Assert(parameters.Length == fieldsOrProperties.Length);
@@ -578,7 +592,8 @@ namespace Microsoft.CodeAnalysis.InitializeParameter
             IParameterSymbol parameter,
             ISymbol fieldOrProperty,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var workspace = document.Project.Solution.Workspace;
             var root = await document.GetRequiredSyntaxRootAsync(cancellationToken)
                 .ConfigureAwait(false);
@@ -725,7 +740,8 @@ namespace Microsoft.CodeAnalysis.InitializeParameter
 
         private static ImmutableArray<(IParameterSymbol parameter, bool before)> GetSiblingParameters(
             IParameterSymbol parameter
-        ) {
+        )
+        {
             using var _ = ArrayBuilder<(IParameterSymbol, bool before)>.GetInstance(
                 out var siblings
             );
@@ -751,7 +767,8 @@ namespace Microsoft.CodeAnalysis.InitializeParameter
         private SyntaxNode? TryGetStatementToAddInitializationAfter(
             IParameterSymbol parameter,
             IBlockOperation? blockStatementOpt
-        ) {
+        )
+        {
             // look for an existing assignment for a parameter that comes before/after us.
             // If we find one, we'll add ourselves before/after that parameter check.
             foreach (var (sibling, before) in GetSiblingParameters(parameter))
@@ -790,7 +807,8 @@ namespace Microsoft.CodeAnalysis.InitializeParameter
             IParameterSymbol parameter,
             IBlockOperation? blockStatementOpt,
             out ISymbol? fieldOrProperty
-        ) {
+        )
+        {
             if (blockStatementOpt != null)
             {
                 var containingType = parameter.ContainingType;
@@ -808,7 +826,8 @@ namespace Microsoft.CodeAnalysis.InitializeParameter
                             assignmentExpression,
                             parameter
                         )
-                    ) {
+                    )
+                    {
                         return statement;
                     }
                 }
@@ -821,7 +840,8 @@ namespace Microsoft.CodeAnalysis.InitializeParameter
         private static bool IsParameterReferenceOrCoalesceOfParameterReference(
             IAssignmentOperation assignmentExpression,
             IParameterSymbol parameter
-        ) {
+        )
+        {
             if (IsParameterReference(assignmentExpression.Value, parameter))
             {
                 // We already have a member initialized with this parameter like:
@@ -833,7 +853,8 @@ namespace Microsoft.CodeAnalysis.InitializeParameter
                 UnwrapImplicitConversion(assignmentExpression.Value)
                     is ICoalesceOperation coalesceExpression
                 && IsParameterReference(coalesceExpression.Value, parameter)
-            ) {
+            )
+            {
                 // We already have a member initialized with this parameter like:
                 //      this.field = parameter ?? ...
                 return true;
@@ -849,7 +870,8 @@ namespace Microsoft.CodeAnalysis.InitializeParameter
             ImmutableArray<NamingRule> rules,
             ImmutableArray<string> parameterWords,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             // Look for a field/property that really looks like it corresponds to this parameter.
             // Use a variety of heuristics around the name/type to see if this is a match.
 
@@ -881,7 +903,8 @@ namespace Microsoft.CodeAnalysis.InitializeParameter
                             destination: field.Type
                         )
                         && !ContainsMemberAssignment(blockStatementOpt, field)
-                    ) {
+                    )
+                    {
                         return field;
                     }
 
@@ -897,7 +920,8 @@ namespace Microsoft.CodeAnalysis.InitializeParameter
                             destination: property.Type
                         )
                         && !ContainsMemberAssignment(blockStatementOpt, property)
-                    ) {
+                    )
+                    {
                         return property;
                     }
                 }
@@ -911,7 +935,8 @@ namespace Microsoft.CodeAnalysis.InitializeParameter
         private static bool ContainsMemberAssignment(
             IBlockOperation? blockStatementOpt,
             ISymbol member
-        ) {
+        )
+        {
             if (blockStatementOpt != null)
             {
                 foreach (var statement in blockStatementOpt.Operations)
@@ -925,7 +950,8 @@ namespace Microsoft.CodeAnalysis.InitializeParameter
                         && UnwrapImplicitConversion(assignmentExpression.Target)
                             is IMemberReferenceOperation memberReference
                         && member.Equals(memberReference.Member)
-                    ) {
+                    )
+                    {
                         return true;
                     }
                 }

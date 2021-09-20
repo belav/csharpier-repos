@@ -346,7 +346,8 @@ namespace System.Threading.Tasks.Tests.CancelWait
                     if (
                         (ti.Option & TaskCreationOptions.AttachedToParent) != 0
                         && !ti.Task.IsCompleted
-                    ) {
+                    )
+                    {
                         Assert.True(false, string.Format("Inner attached task must complete"));
                     }
                 }
@@ -502,7 +503,8 @@ namespace System.Threading.Tasks.Tests.CancelWait
             API api_CancelWait,
             WaitBy waitBy_CancelWait,
             int waitTime
-        ) {
+        )
+        {
             WaitBy_CancelWait = waitBy_CancelWait;
             WaitTime = waitTime;
             RootNode = rootNode;
@@ -526,7 +528,8 @@ namespace System.Threading.Tasks.Tests.CancelWait
             string TaskInfo_CancelWaitName,
             WorkloadType workType,
             string optionsString
-        ) {
+        )
+        {
             Children = new LinkedList<TaskInfo>();
             Result = s_UNINITIALED_RESULT;
             Option = s_DEFAULT_OPTION;

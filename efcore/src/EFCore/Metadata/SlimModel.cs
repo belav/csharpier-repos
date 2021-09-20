@@ -71,7 +71,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata
             ChangeTrackingStrategy changeTrackingStrategy = ChangeTrackingStrategy.Snapshot,
             PropertyInfo? indexerPropertyInfo = null,
             bool propertyBag = false
-        ) {
+        )
+        {
             var entityType = new SlimEntityType(
                 name,
                 type,

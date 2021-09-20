@@ -32,7 +32,8 @@ namespace System.Buffers.Tests
             int length,
             int minCodePoint,
             int maxCodePoint
-        ) {
+        )
+        {
             StringBuilder sb = new StringBuilder(length);
             while (length-- != 0)
             {

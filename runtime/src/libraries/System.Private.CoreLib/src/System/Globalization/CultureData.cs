@@ -420,7 +420,8 @@ namespace System.Globalization
         internal static CultureData? GetCultureDataForRegion(
             string? cultureName,
             bool useUserOverride
-        ) {
+        )
+        {
             // First do a shortcut for Invariant
             if (string.IsNullOrEmpty(cultureName))
             {
@@ -530,7 +531,8 @@ namespace System.Globalization
                         | CultureTypes.FrameworkCultures
                     )
                 ) != 0
-            ) {
+            )
+            {
                 throw new ArgumentOutOfRangeException(
                     nameof(types),
                     SR.Format(
@@ -812,7 +814,8 @@ namespace System.Globalization
                 if (
                     cultureName.Length > LocaleNameMaxLength
                     || !CultureInfo.VerifyCultureName(cultureName, false)
-                ) {
+                )
+                {
                     return null;
                 }
                 CultureData cd = CreateCultureWithInvariantData();
@@ -1028,7 +1031,8 @@ namespace System.Globalization
                                 CultureInfo.DefaultThreadCurrentUICulture != null
                                 && ((ci = CultureInfo.GetUserDefaultCulture()) != null)
                                 && !CultureInfo.DefaultThreadCurrentUICulture.Name.Equals(ci.Name)
-                            ) {
+                            )
+                            {
                                 localizedDisplayName = NativeName;
                             }
                             else
@@ -1209,7 +1213,8 @@ namespace System.Globalization
                         CultureInfo.DefaultThreadCurrentUICulture != null
                         && ((ci = CultureInfo.GetUserDefaultCulture()) != null)
                         && !CultureInfo.DefaultThreadCurrentUICulture!.Name.Equals(ci.Name)
-                    ) {
+                    )
+                    {
                         _sLocalizedLanguage = NativeLanguageName;
                     }
                     else
@@ -1591,7 +1596,8 @@ namespace System.Globalization
                             && (j - iLastToken) > 1
                             && (time[iLastToken + 1] != '\'')
                             && (time[j - 1] != '\'')
-                        ) {
+                        )
+                        {
                             // There was something there we want to remember
                             if (iLastToken >= 0)
                             {
@@ -1629,7 +1635,8 @@ namespace System.Globalization
             string time,
             int index,
             out bool containsSpace
-        ) {
+        )
+        {
             bool shouldEscape = false;
             containsSpace = false;
             for (; index < time.Length; index++)
@@ -2135,7 +2142,8 @@ namespace System.Globalization
             if (
                 calendarId == CalendarId.JAPAN
                 && !LocalAppContextSwitches.EnforceLegacyJapaneseDateParsing
-            ) {
+            )
+            {
                 // The date separator is derived from the default short date pattern. So far this pattern is using
                 // '/' as date separator when using the Japanese calendar which make the formatting and parsing work fine.
                 // changing the default pattern is likely will happen in the near future which can easily break formatting

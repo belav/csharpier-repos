@@ -56,7 +56,8 @@ namespace System
                 int maxBinaryExponent,
                 int exponentBias,
                 ulong infinityBits
-            ) {
+            )
+            {
                 ExponentBits = exponentBits;
 
                 DenormalMantissaBits = denormalMantissaBits;
@@ -123,7 +124,8 @@ namespace System
             uint firstIndex,
             uint lastIndex,
             out BigInteger result
-        ) {
+        )
+        {
             BigInteger.SetZero(out result);
 
             byte* src = number.GetDigitsPointer() + firstIndex;
@@ -147,7 +149,8 @@ namespace System
             ulong initialMantissa,
             int initialExponent,
             bool hasZeroTail
-        ) {
+        )
+        {
             // number of bits by which we must adjust the mantissa to shift it into the
             // correct position, and compute the resulting base two exponent for the
             // normalized mantissa:
@@ -279,7 +282,8 @@ namespace System
             in FloatingPointInfo info,
             uint integerBitsOfPrecision,
             bool hasNonZeroFractionalPart
-        ) {
+        )
+        {
             int baseExponent = info.DenormalMantissaBits;
 
             // When we have 64-bits or less of precision, we can just get the mantissa directly
@@ -373,7 +377,8 @@ namespace System
         private static ulong NumberToDoubleFloatingPointBits(
             ref NumberBuffer number,
             in FloatingPointInfo info
-        ) {
+        )
+        {
             Debug.Assert(info.DenormalMantissaBits == 52);
 
             Debug.Assert(number.GetDigitsPointer()[0] != '0');
@@ -441,7 +446,8 @@ namespace System
         private static ushort NumberToHalfFloatingPointBits(
             ref NumberBuffer number,
             in FloatingPointInfo info
-        ) {
+        )
+        {
             Debug.Assert(info.DenormalMantissaBits == 10);
 
             Debug.Assert(number.GetDigitsPointer()[0] != '0');
@@ -530,7 +536,8 @@ namespace System
         private static uint NumberToSingleFloatingPointBits(
             ref NumberBuffer number,
             in FloatingPointInfo info
-        ) {
+        )
+        {
             Debug.Assert(info.DenormalMantissaBits == 23);
 
             Debug.Assert(number.GetDigitsPointer()[0] != '0');
@@ -622,7 +629,8 @@ namespace System
             uint positiveExponent,
             uint integerDigitsPresent,
             uint fractionalDigitsPresent
-        ) {
+        )
+        {
             // To generate an N bit mantissa we require N + 1 bits of precision.  The
             // extra bit is used to correctly round the mantissa (if there are fewer bits
             // than this available, then that's totally okay; in that case we use what we
@@ -665,7 +673,8 @@ namespace System
             if (
                 (integerBitsOfPrecision >= requiredBitsOfPrecision)
                 || (fractionalDigitsPresent == 0)
-            ) {
+            )
+            {
                 return ConvertBigIntegerToFloatingPointBits(
                     ref integerValue,
                     in info,
@@ -693,7 +702,8 @@ namespace System
                 (integerBitsOfPrecision == 0)
                 && (fractionalDenominatorExponent - (int)(totalDigits))
                     > info.OverflowDecimalExponent
-            ) {
+            )
+            {
                 // If there were any digits in the integer part, it is impossible to
                 // underflow (because the exponent cannot possibly be small enough),
                 // so if we underflow here it is a true underflow and we return zero.

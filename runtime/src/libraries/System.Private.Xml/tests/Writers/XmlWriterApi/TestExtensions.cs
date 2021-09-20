@@ -16,7 +16,8 @@ namespace System.Xml.Tests
         public static IEnumerable<object[]> GenerateTestCases(
             WriterType writerTypeFlags,
             object[] args
-        ) {
+        )
+        {
             bool noAsyncFlag = writerTypeFlags.HasFlag(WriterType.NoAsync);
             bool asyncFlag = writerTypeFlags.HasFlag(WriterType.Async);
 
@@ -75,7 +76,8 @@ namespace System.Xml.Tests
         public virtual IEnumerable<object[]> GetData(
             IAttributeInfo dataAttribute,
             IMethodInfo testMethod
-        ) {
+        )
+        {
             object[] constructorArgs = dataAttribute.GetConstructorArguments().ToArray();
 
             if (constructorArgs.Length == 1)
@@ -101,7 +103,8 @@ namespace System.Xml.Tests
         public virtual bool SupportsDiscoveryEnumeration(
             IAttributeInfo dataAttribute,
             IMethodInfo testMethod
-        ) {
+        )
+        {
             return true;
         }
     }

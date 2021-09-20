@@ -121,7 +121,8 @@ namespace Microsoft.EntityFrameworkCore
         [InlineData(true)]
         public virtual void Avoid_nulling_shared_FK_property_when_nulling_navigation(
             bool nullPrincipal
-        ) {
+        )
+        {
             ExecuteWithStrategyInTransaction(
                 context =>
                 {
@@ -269,7 +270,8 @@ namespace Microsoft.EntityFrameworkCore
         [InlineData((int)(ChangeMechanism.Dependent | ChangeMechanism.Fk))]
         public virtual void Changes_to_Added_relationships_are_picked_up(
             ChangeMechanism changeMechanism
-        ) {
+        )
+        {
             var id = 0;
 
             ExecuteWithStrategyInTransaction(
@@ -336,7 +338,8 @@ namespace Microsoft.EntityFrameworkCore
         public virtual void New_FK_is_not_cleared_on_old_dependent_delete(
             bool loadNewParent,
             CascadeTiming? deleteOrphansTiming
-        ) {
+        )
+        {
             var removedId = 0;
             var childId = 0;
             int? newFk = 0;
@@ -750,7 +753,8 @@ namespace Microsoft.EntityFrameworkCore
 
                     foreach (
                         var overlappingEntry in context.ChangeTracker.Entries<OptionalOverlapping2>()
-                    ) {
+                    )
+                    {
                         overlappingEntry.State = EntityState.Detached;
                     }
 
@@ -817,7 +821,8 @@ namespace Microsoft.EntityFrameworkCore
         public virtual void Re_childing_parent_to_new_child_with_delete(
             CascadeTiming? cascadeDeleteTiming,
             CascadeTiming? deleteOrphansTiming
-        ) {
+        )
+        {
             var oldId = 0;
             var newId = 0;
 

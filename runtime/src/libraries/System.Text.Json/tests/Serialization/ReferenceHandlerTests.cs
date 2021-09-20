@@ -231,7 +231,8 @@ namespace System.Text.Json.Serialization.Tests
             ClassWithZeroLengthProperty<TValue> obj,
             TValue value,
             JsonSerializerOptions opts = null
-        ) {
+        )
+        {
             obj.ZeroLengthProperty = value;
             string json = JsonSerializer.Serialize(obj, opts);
             Assert.Contains("\"\":", json);
@@ -513,7 +514,8 @@ namespace System.Text.Json.Serialization.Tests
             Dictionary<string, TValue> dictionary,
             TValue value,
             JsonSerializerOptions opts = null
-        ) {
+        )
+        {
             dictionary[string.Empty] = value;
             string json = JsonSerializer.Serialize(dictionary, opts);
             Assert.Contains("\"\":", json);

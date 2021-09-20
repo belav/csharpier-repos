@@ -319,7 +319,8 @@ namespace System.Linq.Expressions.Tests
             Expression instance,
             MethodInfo method,
             IReadOnlyList<Expression> args
-        ) {
+        )
+        {
             int n = method.GetParameters().Length;
 
             MethodCallExpression updatedArgs = UpdateArgs(expr);

@@ -38,7 +38,8 @@ namespace Internal.Cryptography.Pal.AnyOS
                 X509Certificate2? cert,
                 RSA? privateKey,
                 out Exception? exception
-            ) {
+            )
+            {
                 ReadOnlyMemory<byte>? parameters = _asn.KeyEncryptionAlgorithm.Parameters;
                 string? keyEncryptionAlgorithm = _asn.KeyEncryptionAlgorithm.Algorithm;
 
@@ -48,7 +49,8 @@ namespace Internal.Cryptography.Pal.AnyOS
                         if (
                             parameters != null
                             && !parameters.Value.Span.SequenceEqual(s_rsaPkcsParameters)
-                        ) {
+                        )
+                        {
                             exception = new CryptographicException(
                                 SR.Cryptography_Der_Invalid_Encoding
                             );
@@ -83,7 +85,8 @@ namespace Internal.Cryptography.Pal.AnyOS
                 string? keyEncryptionAlgorithm,
                 ReadOnlyMemory<byte>? algorithmParameters,
                 out Exception? exception
-            ) {
+            )
+            {
                 RSAEncryptionPadding? encryptionPadding;
 
                 switch (keyEncryptionAlgorithm)
@@ -98,7 +101,8 @@ namespace Internal.Cryptography.Pal.AnyOS
                                 out encryptionPadding,
                                 out exception
                             )
-                        ) {
+                        )
+                        {
                             return null;
                         }
                         break;
@@ -130,7 +134,8 @@ namespace Internal.Cryptography.Pal.AnyOS
             byte[] cek,
             CmsRecipient recipient,
             out bool v0Recipient
-        ) {
+        )
+        {
             KeyTransRecipientInfoAsn ktri = default;
 
             if (recipient.RecipientIdentifierType == SubjectIdentifierType.SubjectKeyIdentifier)
@@ -140,7 +145,8 @@ namespace Internal.Cryptography.Pal.AnyOS
             }
             else if (
                 recipient.RecipientIdentifierType == SubjectIdentifierType.IssuerAndSerialNumber
-            ) {
+            )
+            {
                 byte[] serial = recipient.Certificate.GetSerialNumber();
                 Array.Reverse(serial);
 
@@ -207,7 +213,8 @@ namespace Internal.Cryptography.Pal.AnyOS
             RSAEncryptionPadding encryptionPadding,
             ReadOnlySpan<byte> encryptedKey,
             out Exception? exception
-        ) {
+        )
+        {
             if (privateKey == null)
             {
                 exception = new CryptographicException(

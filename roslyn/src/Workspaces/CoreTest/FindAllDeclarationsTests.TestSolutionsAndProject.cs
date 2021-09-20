@@ -33,7 +33,8 @@ namespace Microsoft.CodeAnalysis.UnitTests
             SolutionKind workspaceKind,
             IEnumerable<ISymbol> declarations,
             params string[] expectedResults
-        ) {
+        )
+        {
             var actualResultCount = declarations.Count();
             var expectedResultCount = expectedResults.Length;
             Assert.True(
@@ -57,7 +58,8 @@ namespace Microsoft.CodeAnalysis.UnitTests
             SolutionKind workspaceKind,
             IEnumerable<ISymbol> declarations,
             params string[] expectedResults
-        ) {
+        )
+        {
             var actualResultCount = declarations.Count();
             var expectedResultCount = expectedResults.Length;
             Assert.True(
@@ -78,7 +80,8 @@ namespace Microsoft.CodeAnalysis.UnitTests
         private static void VerifyResults(
             IEnumerable<ISymbol> declarations,
             string[] expectedResults
-        ) {
+        )
+        {
             declarations = declarations.OrderBy(d => d.ToString());
             expectedResults = expectedResults.OrderBy(r => r).ToArray();
 
@@ -112,7 +115,8 @@ namespace Microsoft.CodeAnalysis.UnitTests
             TestHost testHost,
             string[] sourceTexts,
             out Solution solution
-        ) {
+        )
+        {
             var pid = ProjectId.CreateNewId();
             var workspace = CreateWorkspace(testHost);
 
@@ -140,7 +144,8 @@ namespace Microsoft.CodeAnalysis.UnitTests
             TestHost testHost,
             string[] sourceTexts,
             out Solution solution
-        ) {
+        )
+        {
             var workspace = CreateWorkspace(testHost);
             solution = workspace.CurrentSolution;
             for (var i = 0; i < sourceTexts.Length; i++)
@@ -232,7 +237,8 @@ namespace Microsoft.CodeAnalysis.UnitTests
             SolutionKind solutionKind,
             out Project project,
             TestHost testHost = TestHost.InProcess
-        ) {
+        )
+        {
             var workspace = CreateWorkspaceWithSolution(solutionKind, out var solution, testHost);
             project = solution.Projects.First();
             return workspace;

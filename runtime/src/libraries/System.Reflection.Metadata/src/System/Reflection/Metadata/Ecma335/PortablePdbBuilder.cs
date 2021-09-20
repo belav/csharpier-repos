@@ -49,7 +49,8 @@ namespace System.Reflection.Metadata.Ecma335
             ImmutableArray<int> typeSystemRowCounts,
             MethodDefinitionHandle entryPoint,
             Func<IEnumerable<Blob>, BlobContentId>? idProvider = null
-        ) {
+        )
+        {
             if (tablesAndHeaps == null)
             {
                 Throw.ArgumentNull(nameof(tablesAndHeaps));

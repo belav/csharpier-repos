@@ -32,7 +32,8 @@ namespace Microsoft.AspNetCore.MiddlewareAnalysis
             RequestDelegate next,
             DiagnosticSource diagnosticSource,
             string middlewareName
-        ) {
+        )
+        {
             _next = next;
             _diagnostics = diagnosticSource;
             if (string.IsNullOrEmpty(middlewareName))
@@ -51,7 +52,8 @@ namespace Microsoft.AspNetCore.MiddlewareAnalysis
             var startTimestamp = Stopwatch.GetTimestamp();
             if (
                 _diagnostics.IsEnabled("Microsoft.AspNetCore.MiddlewareAnalysis.MiddlewareStarting")
-            ) {
+            )
+            {
                 _diagnostics.Write(
                     "Microsoft.AspNetCore.MiddlewareAnalysis.MiddlewareStarting",
                     new
@@ -72,7 +74,8 @@ namespace Microsoft.AspNetCore.MiddlewareAnalysis
                     _diagnostics.IsEnabled(
                         "Microsoft.AspNetCore.MiddlewareAnalysis.MiddlewareFinished"
                     )
-                ) {
+                )
+                {
                     var currentTimestamp = Stopwatch.GetTimestamp();
                     _diagnostics.Write(
                         "Microsoft.AspNetCore.MiddlewareAnalysis.MiddlewareFinished",
@@ -93,7 +96,8 @@ namespace Microsoft.AspNetCore.MiddlewareAnalysis
                     _diagnostics.IsEnabled(
                         "Microsoft.AspNetCore.MiddlewareAnalysis.MiddlewareException"
                     )
-                ) {
+                )
+                {
                     var currentTimestamp = Stopwatch.GetTimestamp();
                     _diagnostics.Write(
                         "Microsoft.AspNetCore.MiddlewareAnalysis.MiddlewareException",

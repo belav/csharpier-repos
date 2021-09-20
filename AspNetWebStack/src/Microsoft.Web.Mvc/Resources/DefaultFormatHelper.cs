@@ -208,7 +208,8 @@ namespace Microsoft.Web.Mvc.Resources
                         contentTypeString,
                         out contentType
                     )
-                ) {
+                )
+                {
                     return null;
                 }
             }
@@ -283,7 +284,8 @@ namespace Microsoft.Web.Mvc.Resources
                     FormatManager.UrlEncoded,
                     StringComparison.OrdinalIgnoreCase
                 ) != 0
-            ) {
+            )
+            {
                 if (FormatManager.Current.CanDeserialize(requestFormat))
                 {
                     return false;
@@ -294,7 +296,8 @@ namespace Microsoft.Web.Mvc.Resources
                 browserCapabilities != null
                 && !String.IsNullOrEmpty(request.Browser.Browser)
                 && request.Browser.Browser != "Unknown"
-            ) {
+            )
+            {
                 return true;
             }
             return false;
@@ -319,14 +322,16 @@ namespace Microsoft.Web.Mvc.Resources
                         yTypeSubType[0],
                         StringComparison.OrdinalIgnoreCase
                     )
-                ) {
+                )
+                {
                     if (
                         String.Equals(
                             xTypeSubType[1],
                             yTypeSubType[1],
                             StringComparison.OrdinalIgnoreCase
                         )
-                    ) {
+                    )
+                    {
                         // need to check the number of parameters to determine which is more specific
                         bool xHasParam = HasParameters(x);
                         bool yHasParam = HasParameters(y);
@@ -386,7 +391,8 @@ namespace Microsoft.Web.Mvc.Resources
                                 CultureInfo.InvariantCulture,
                                 out result
                             ) && (result <= (decimal)1.0)
-                        ) {
+                        )
+                        {
                             return result;
                         }
                     }

@@ -55,13 +55,15 @@ namespace System.Web.Mvc
         protected CachedModelMetadata(
             CachedModelMetadata<TPrototypeCache> prototype,
             Func<object> modelAccessor
-        ) : base(
-            prototype.Provider,
-            prototype.ContainerType,
-            modelAccessor,
-            prototype.ModelType,
-            prototype.PropertyName
-        ) {
+        )
+            : base(
+                prototype.Provider,
+                prototype.ContainerType,
+                modelAccessor,
+                prototype.ModelType,
+                prototype.PropertyName
+            )
+        {
             PrototypeCache = prototype.PrototypeCache;
         }
 
@@ -72,14 +74,16 @@ namespace System.Web.Mvc
             Type modelType,
             string propertyName,
             TPrototypeCache prototypeCache
-        ) : base(
-            provider,
-            containerType,
-            null /* modelAccessor */
-            ,
-            modelType,
-            propertyName
-        ) {
+        )
+            : base(
+                provider,
+                containerType,
+                null /* modelAccessor */
+                ,
+                modelType,
+                propertyName
+            )
+        {
             PrototypeCache = prototypeCache;
         }
 

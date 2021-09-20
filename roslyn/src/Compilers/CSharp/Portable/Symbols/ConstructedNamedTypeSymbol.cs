@@ -20,13 +20,14 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
         internal SubstitutedNestedTypeSymbol(
             SubstitutedNamedTypeSymbol newContainer,
             NamedTypeSymbol originalDefinition
-        ) : base(
-            newContainer: newContainer,
-            map: newContainer.TypeSubstitution,
-            originalDefinition: originalDefinition,
-            // An Arity-0 member of an unbound type, e.g. A<>.B, is unbound.
-            unbound: newContainer.IsUnboundGenericType && originalDefinition.Arity == 0
-        ) { }
+        )
+            : base(
+                newContainer: newContainer,
+                map: newContainer.TypeSubstitution,
+                originalDefinition: originalDefinition,
+                // An Arity-0 member of an unbound type, e.g. A<>.B, is unbound.
+                unbound: newContainer.IsUnboundGenericType && originalDefinition.Arity == 0
+            ) { }
 
         internal override ImmutableArray<TypeWithAnnotations> TypeArgumentsWithAnnotationsNoUseSiteDiagnostics
         {
@@ -62,18 +63,20 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             ImmutableArray<TypeWithAnnotations> typeArgumentsWithAnnotations,
             bool unbound = false,
             TupleExtraData tupleData = null
-        ) : base(
-            newContainer: constructedFrom.ContainingSymbol,
-            map: new TypeMap(
-                constructedFrom.ContainingType,
-                constructedFrom.OriginalDefinition.TypeParameters,
-                typeArgumentsWithAnnotations
-            ),
-            originalDefinition: constructedFrom.OriginalDefinition,
-            constructedFrom: constructedFrom,
-            unbound: unbound,
-            tupleData: tupleData
-        ) {
+        )
+            : base(
+                newContainer: constructedFrom.ContainingSymbol,
+                map: new TypeMap(
+                    constructedFrom.ContainingType,
+                    constructedFrom.OriginalDefinition.TypeParameters,
+                    typeArgumentsWithAnnotations
+                ),
+                originalDefinition: constructedFrom.OriginalDefinition,
+                constructedFrom: constructedFrom,
+                unbound: unbound,
+                tupleData: tupleData
+            )
+        {
             _typeArgumentsWithAnnotations = typeArgumentsWithAnnotations;
             _constructedFrom = constructedFrom;
 
@@ -104,7 +107,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
         internal static bool TypeParametersMatchTypeArguments(
             ImmutableArray<TypeParameterSymbol> typeParameters,
             ImmutableArray<TypeWithAnnotations> typeArguments
-        ) {
+        )
+        {
             int n = typeParameters.Length;
             Debug.Assert(typeArguments.Length == n);
             Debug.Assert(typeArguments.Length > 0);
@@ -124,7 +128,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             ref DiagnosticInfo result,
             Symbol owner,
             ref HashSet<TypeSymbol> checkedTypes
-        ) {
+        )
+        {
             if (
                 ConstructedFrom.GetUnificationUseSiteDiagnosticRecursive(
                     ref result,
@@ -137,7 +142,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                     owner,
                     ref checkedTypes
                 )
-            ) {
+            )
+            {
                 return true;
             }
 
@@ -151,7 +157,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                         owner,
                         ref checkedTypes
                     )
-                ) {
+                )
+                {
                     return true;
                 }
             }

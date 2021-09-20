@@ -25,7 +25,8 @@ namespace System.Globalization.Tests
         public void ReadOnly_Invoke_ReturnsExpected(
             DateTimeFormatInfo format,
             bool originalFormatIsReadOnly
-        ) {
+        )
+        {
             Assert.Equal(originalFormatIsReadOnly, format.IsReadOnly);
 
             DateTimeFormatInfo readOnlyFormat = DateTimeFormatInfo.ReadOnly(format);

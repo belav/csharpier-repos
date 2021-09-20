@@ -12,14 +12,15 @@ namespace Microsoft.CodeAnalysis.ExternalAccess.VSTypeScript.Api
         protected VSTypeScriptDefinitionItemBase(
             ImmutableArray<string> tags,
             ImmutableArray<TaggedText> displayParts
-        ) : base(
-            tags,
-            displayParts,
-            ImmutableArray<TaggedText>.Empty,
-            originationParts: default,
-            sourceSpans: default,
-            properties: null,
-            displayIfNoReferences: true
-        ) { }
+        )
+            : base(
+                tags,
+                displayParts,
+                ImmutableArray<TaggedText>.Empty,
+                originationParts: default,
+                sourceSpans: default,
+                properties: null,
+                displayIfNoReferences: true
+            ) { }
     }
 }

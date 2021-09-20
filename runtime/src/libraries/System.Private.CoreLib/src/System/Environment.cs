@@ -31,7 +31,8 @@ namespace System
         public static string? GetEnvironmentVariable(
             string variable,
             EnvironmentVariableTarget target
-        ) {
+        )
+        {
             if (target == EnvironmentVariableTarget.Process)
                 return GetEnvironmentVariable(variable);
 
@@ -61,7 +62,8 @@ namespace System
             string variable,
             string? value,
             EnvironmentVariableTarget target
-        ) {
+        )
+        {
             if (target == EnvironmentVariableTarget.Process)
             {
                 SetEnvironmentVariable(variable, value);

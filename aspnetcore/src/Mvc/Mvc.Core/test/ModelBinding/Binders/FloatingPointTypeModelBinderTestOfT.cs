@@ -32,7 +32,8 @@ namespace Microsoft.AspNetCore.Mvc.ModelBinding.Binders
         [MemberData(nameof(ConvertibleTypeData))]
         public async Task BindModel_ReturnsFailure_IfAttemptedValueCannotBeParsed(
             Type destinationType
-        ) {
+        )
+        {
             // Arrange
             var bindingContext = GetBindingContext(destinationType);
             bindingContext.ValueProvider = new SimpleValueProvider
@@ -52,7 +53,8 @@ namespace Microsoft.AspNetCore.Mvc.ModelBinding.Binders
         [MemberData(nameof(ConvertibleTypeData))]
         public async Task BindModel_CreatesError_IfAttemptedValueCannotBeParsed(
             Type destinationType
-        ) {
+        )
+        {
             // Arrange
             var message = "The value 'not a number' is not valid.";
             var bindingContext = GetBindingContext(destinationType);
@@ -78,7 +80,8 @@ namespace Microsoft.AspNetCore.Mvc.ModelBinding.Binders
         [MemberData(nameof(ConvertibleTypeData))]
         public async Task BindModel_CreatesError_IfAttemptedValueCannotBeCompletelyParsed(
             Type destinationType
-        ) {
+        )
+        {
             // Arrange
             var bindingContext = GetBindingContext(destinationType);
             bindingContext.ValueProvider = new SimpleValueProvider(new CultureInfo("en-GB"))
@@ -107,7 +110,8 @@ namespace Microsoft.AspNetCore.Mvc.ModelBinding.Binders
         [MemberData(nameof(ConvertibleTypeData))]
         public async Task BindModel_CreatesError_IfAttemptedValueContainsDisallowedWhitespace(
             Type destinationType
-        ) {
+        )
+        {
             // Arrange
             var bindingContext = GetBindingContext(destinationType);
             bindingContext.ValueProvider = new SimpleValueProvider(new CultureInfo("en-GB"))
@@ -136,7 +140,8 @@ namespace Microsoft.AspNetCore.Mvc.ModelBinding.Binders
         [MemberData(nameof(ConvertibleTypeData))]
         public async Task BindModel_CreatesError_IfAttemptedValueContainsDisallowedDecimal(
             Type destinationType
-        ) {
+        )
+        {
             // Arrange
             var bindingContext = GetBindingContext(destinationType);
             bindingContext.ValueProvider = new SimpleValueProvider(new CultureInfo("en-GB"))
@@ -165,7 +170,8 @@ namespace Microsoft.AspNetCore.Mvc.ModelBinding.Binders
         [MemberData(nameof(ConvertibleTypeData))]
         public async Task BindModel_CreatesError_IfAttemptedValueContainsDisallowedThousandsSeparator(
             Type destinationType
-        ) {
+        )
+        {
             // Arrange
             var bindingContext = GetBindingContext(destinationType);
             bindingContext.ValueProvider = new SimpleValueProvider(new CultureInfo("en-GB"))
@@ -211,7 +217,8 @@ namespace Microsoft.AspNetCore.Mvc.ModelBinding.Binders
         [InlineData(" \t \r\n ")]
         public async Task BindModel_CreatesError_IfTrimmedAttemptedValueIsEmpty_NonNullableDestination(
             string value
-        ) {
+        )
+        {
             // Arrange
             var message = $"The value '{value}' is invalid.";
             var bindingContext = GetBindingContext(typeof(TFloatingPoint));
@@ -235,7 +242,8 @@ namespace Microsoft.AspNetCore.Mvc.ModelBinding.Binders
         [InlineData(" \t \r\n ")]
         public async Task BindModel_ReturnsNull_IfTrimmedAttemptedValueIsEmpty_NullableDestination(
             string value
-        ) {
+        )
+        {
             // Arrange
             var bindingContext = GetBindingContext(typeof(TFloatingPoint?));
             bindingContext.ValueProvider = new SimpleValueProvider { { "theModelName", value } };
@@ -254,7 +262,8 @@ namespace Microsoft.AspNetCore.Mvc.ModelBinding.Binders
         [MemberData(nameof(ConvertibleTypeData))]
         public async Task BindModel_ReturnsModel_IfAttemptedValueIsValid_Twelve(
             Type destinationType
-        ) {
+        )
+        {
             // Arrange
             var bindingContext = GetBindingContext(destinationType);
             bindingContext.ValueProvider = new SimpleValueProvider { { "theModelName", "12" } };
@@ -274,7 +283,8 @@ namespace Microsoft.AspNetCore.Mvc.ModelBinding.Binders
         [ReplaceCulture("en-GB", "en-GB")]
         public async Task BindModel_ReturnsModel_IfAttemptedValueIsValid_TwelvePointFive(
             Type destinationType
-        ) {
+        )
+        {
             // Arrange
             var bindingContext = GetBindingContext(destinationType);
             bindingContext.ValueProvider = new SimpleValueProvider { { "theModelName", "12.5" } };
@@ -293,7 +303,8 @@ namespace Microsoft.AspNetCore.Mvc.ModelBinding.Binders
         [MemberData(nameof(ConvertibleTypeData))]
         public async Task BindModel_ReturnsModel_IfAttemptedValueIsValid_FrenchTwelvePointFive(
             Type destinationType
-        ) {
+        )
+        {
             // Arrange
             var bindingContext = GetBindingContext(destinationType);
             bindingContext.ValueProvider = new SimpleValueProvider(new CultureInfo("fr-FR"))
@@ -315,7 +326,8 @@ namespace Microsoft.AspNetCore.Mvc.ModelBinding.Binders
         [MemberData(nameof(ConvertibleTypeData))]
         public async Task BindModel_ReturnsModel_IfAttemptedValueIsValid_ThirtyTwoThousand(
             Type destinationType
-        ) {
+        )
+        {
             // Arrange
             var bindingContext = GetBindingContext(destinationType);
             bindingContext.ValueProvider = new SimpleValueProvider(new CultureInfo("en-GB"))
@@ -337,7 +349,8 @@ namespace Microsoft.AspNetCore.Mvc.ModelBinding.Binders
         [MemberData(nameof(ConvertibleTypeData))]
         public async Task BindModel_ReturnsModel_IfAttemptedValueIsValid_ThirtyTwoThousandPointOne(
             Type destinationType
-        ) {
+        )
+        {
             // Arrange
             var bindingContext = GetBindingContext(destinationType);
             bindingContext.ValueProvider = new SimpleValueProvider(new CultureInfo("en-GB"))
@@ -359,7 +372,8 @@ namespace Microsoft.AspNetCore.Mvc.ModelBinding.Binders
         [MemberData(nameof(ConvertibleTypeData))]
         public async Task BindModel_ReturnsModel_IfAttemptedValueIsValid_FrenchThirtyTwoThousandPointOne(
             Type destinationType
-        ) {
+        )
+        {
             // Arrange
             var bindingContext = GetBindingContext(destinationType);
             bindingContext.ValueProvider = new SimpleValueProvider(new CultureInfo("fr-FR"))

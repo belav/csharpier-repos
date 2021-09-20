@@ -70,7 +70,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             CultureInfo preferredCulture = null,
             bool expandIncludes = false,
             CancellationToken cancellationToken = default(CancellationToken)
-        ) {
+        )
+        {
             return _underlyingField.GetDocumentationCommentXml(
                 preferredCulture,
                 expandIncludes,
@@ -138,7 +139,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
         internal override ConstantValue GetConstantValue(
             ConstantFieldsInProgress inProgress,
             bool earlyDecodingWellKnownAttributes
-        ) {
+        )
+        {
             return _underlyingField.GetConstantValue(inProgress, earlyDecodingWellKnownAttributes);
         }
 

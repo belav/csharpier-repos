@@ -83,7 +83,8 @@ namespace System.Collections.Immutable
             SortedInt32KeyNode<TValue> left,
             SortedInt32KeyNode<TValue> right,
             bool frozen = false
-        ) {
+        )
+        {
             Requires.NotNull(left, nameof(left));
             Requires.NotNull(right, nameof(right));
             Debug.Assert(!frozen || (left._frozen && right._frozen));
@@ -203,7 +204,8 @@ namespace System.Collections.Immutable
             IEqualityComparer<TValue> valueComparer,
             out bool replacedExistingValue,
             out bool mutated
-        ) {
+        )
+        {
             Requires.NotNull(valueComparer, nameof(valueComparer));
 
             return this.SetOrAdd(
@@ -463,7 +465,8 @@ namespace System.Collections.Immutable
             bool overwriteExistingValue,
             out bool replacedExistingValue,
             out bool mutated
-        ) {
+        )
+        {
             // Arg validation skipped in this private method because it's recursive and the tax
             // of revalidating arguments on each recursive call is significant.
             // All our callers are therefore required to have done input validation.
@@ -612,7 +615,8 @@ namespace System.Collections.Immutable
         private SortedInt32KeyNode<TValue> Mutate(
             SortedInt32KeyNode<TValue>? left = null,
             SortedInt32KeyNode<TValue>? right = null
-        ) {
+        )
+        {
             Debug.Assert(_right != null && _left != null);
             if (_frozen)
             {

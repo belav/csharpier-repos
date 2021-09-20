@@ -29,7 +29,8 @@ namespace ILCompiler.Reflection.ReadyToRun
                 if (
                     (c <= 0x7e) && (c >= 0x20)
                     || !NeedsEscaping(category = CharUnicodeInfo.GetUnicodeCategory(c))
-                ) {
+                )
+                {
                     if ((c == '"') || (c == '\\'))
                     {
                         builder.Append(@"\");

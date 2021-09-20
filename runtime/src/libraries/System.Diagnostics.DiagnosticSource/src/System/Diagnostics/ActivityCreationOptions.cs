@@ -32,7 +32,8 @@ namespace System.Diagnostics
             IEnumerable<KeyValuePair<string, object?>>? tags,
             IEnumerable<ActivityLink>? links,
             ActivityIdFormat idFormat
-        ) {
+        )
+        {
             Source = source;
             Name = name;
             Kind = kind;
@@ -146,7 +147,8 @@ namespace System.Diagnostics
                     Parent is ActivityContext
                     && IdFormat == ActivityIdFormat.W3C
                     && _context == default
-                ) {
+                )
+                {
                     Func<ActivityTraceId>? traceIdGenerator = Activity.TraceIdGenerator;
                     ActivityTraceId id =
                         traceIdGenerator == null

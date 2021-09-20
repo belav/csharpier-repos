@@ -78,7 +78,8 @@ namespace Microsoft.EntityFrameworkCore
                     || !type.IsGenericType
                     || type.BaseType == typeof(object)
                     || type.BaseType.IsGenericType
-                ) {
+                )
+                {
                     continue;
                 }
 
@@ -87,7 +88,8 @@ namespace Microsoft.EntityFrameworkCore
                     if (
                         method.ReturnType == type.BaseType
                         && !Fixture.UnmatchedMetadataMethods.Contains(method)
-                    ) {
+                    )
+                    {
                         var hidingMethod = type.GetMethod(
                             method.Name,
                             method.GetGenericArguments().Length,
@@ -100,7 +102,8 @@ namespace Microsoft.EntityFrameworkCore
                             hidingMethod == null
                             || hidingMethod == method
                             || hidingMethod.ReturnType != type
-                        ) {
+                        )
+                        {
                             nonGenericMethods.Add((type, method));
                         }
                     }
@@ -119,7 +122,8 @@ namespace Microsoft.EntityFrameworkCore
                     var method in type.GetMethods(
                         BindingFlags.Public | BindingFlags.Static | BindingFlags.DeclaredOnly
                     )
-                ) {
+                )
+                {
                     if (
                         method.ReturnType
                             != (method.GetParameters().FirstOrDefault()?.ParameterType)
@@ -128,7 +132,8 @@ namespace Microsoft.EntityFrameworkCore
                             out var genericType
                         )
                         || Fixture.UnmatchedMetadataMethods.Contains(method)
-                    ) {
+                    )
+                    {
                         continue;
                     }
 
@@ -137,7 +142,8 @@ namespace Microsoft.EntityFrameworkCore
                         var hidingMethod in type.GetMethods(
                             BindingFlags.Public | BindingFlags.Static | BindingFlags.DeclaredOnly
                         )
-                    ) {
+                    )
+                    {
                         if (
                             method.Name != hidingMethod.Name
                             || hidingMethod.GetGenericArguments().Length
@@ -149,7 +155,8 @@ namespace Microsoft.EntityFrameworkCore
                                 .SequenceEqual(
                                     method.GetParameters().Skip(1).Select(p => p.ParameterType)
                                 )
-                        ) {
+                        )
+                        {
                             continue;
                         }
 
@@ -231,7 +238,8 @@ namespace Microsoft.EntityFrameworkCore
                     && !typeof(IConventionAnnotatableBuilder).IsAssignableFrom(
                         conventionBuilderType
                     )
-                ) {
+                )
+                {
                     return $"{conventionBuilderType.Name} should derive from IConventionAnnotatableBuilder";
                 }
 
@@ -253,7 +261,8 @@ namespace Microsoft.EntityFrameworkCore
                 if (
                     conventionBuilderType != null
                     && conventionBuilderType.Namespace != MetadataBuilderNamespace
-                ) {
+                )
+                {
                     return $"{conventionBuilderType.Name} is expected to be in the {MetadataBuilderNamespace} namespace";
                 }
             }
@@ -263,7 +272,8 @@ namespace Microsoft.EntityFrameworkCore
                 var builderProperty = conventionType.GetProperty("Builder");
                 if (
                     builderProperty == null || builderProperty.PropertyType != conventionBuilderType
-                ) {
+                )
+                {
                     return $"{conventionType.Name} expected to have a '{conventionBuilderType.Name} Builder' property";
                 }
 
@@ -309,7 +319,8 @@ namespace Microsoft.EntityFrameworkCore
                     readonlyMethod.ReturnType,
                     out var expectedReturnTypes
                 )
-            ) {
+            )
+            {
                 if (mutableMethod == null)
                 {
                     return "No IMutable equivalent of "
@@ -328,7 +339,8 @@ namespace Microsoft.EntityFrameworkCore
                 if (
                     sequenceType != null
                     && Fixture.MetadataTypes.TryGetValue(sequenceType, out expectedReturnTypes)
-                ) {
+                )
+                {
                     if (mutableMethod == null)
                     {
                         return "No IMutable equivalent of "
@@ -337,7 +349,8 @@ namespace Microsoft.EntityFrameworkCore
 
                     if (
                         mutableMethod.ReturnType.TryGetSequenceType() != expectedReturnTypes.Mutable
-                    ) {
+                    )
+                    {
                         return $"{mutableMethod.DeclaringType.Name}.{mutableMethod.Name}({Format(mutableMethod.GetParameters())})"
                             + $" expected to have a return type that derives from IEnumerable<{expectedReturnTypes.Mutable}>.";
                     }
@@ -399,7 +412,8 @@ namespace Microsoft.EntityFrameworkCore
                     mutableMethod.ReturnType,
                     out expectedReturnType
                 )
-            ) {
+            )
+            {
                 if (conventionMethod == null)
                 {
                     return "No IConvention equivalent of "
@@ -421,7 +435,8 @@ namespace Microsoft.EntityFrameworkCore
                         sequenceType,
                         out expectedReturnType
                     )
-                ) {
+                )
+                {
                     if (conventionMethod == null)
                     {
                         return "No IConvention equivalent of "
@@ -473,14 +488,16 @@ namespace Microsoft.EntityFrameworkCore
                 if (
                     !Fixture.UnmatchedMetadataMethods.Contains(methodTuple.Value)
                     && methodTuple.Key.StartsWith("Set", StringComparison.Ordinal)
-                ) {
+                )
+                {
                     var expectedName = "Get" + methodTuple.Key[3..] + "ConfigurationSource";
                     if (
                         !methodLookup.TryGetValue(
                             expectedName,
                             out var getAspectConfigurationSource
                         )
-                    ) {
+                    )
+                    {
                         return $"{type.Name} expected to have a {expectedName}() method";
                     }
 
@@ -532,7 +549,8 @@ namespace Microsoft.EntityFrameworkCore
                 if (
                     Fixture.UnmatchedMetadataMethods.Contains(method)
                     || method.ReturnType != builderType
-                ) {
+                )
+                {
                     continue;
                 }
 
@@ -558,7 +576,8 @@ namespace Microsoft.EntityFrameworkCore
                     parameters.Length > parameterIndex
                     && parameters[parameterIndex].ParameterType
                         != canSetMethod.GetParameters()[parameterIndex].ParameterType
-                ) {
+                )
+                {
                     return $"{declaringType.Name}.{canSetMethod.Name}({Format(canSetMethod.GetParameters())})"
                         + $" expected to have the first parameter of type {parameters[parameterIndex].ParameterType.ShortDisplayName()}";
                 }
@@ -608,7 +627,8 @@ namespace Microsoft.EntityFrameworkCore
                     readOnlyMethod.ReturnType,
                     out expectedReturnType
                 )
-            ) {
+            )
+            {
                 if (runtimeMethod == null)
                 {
                     return "No IRuntime equivalent of "
@@ -630,7 +650,8 @@ namespace Microsoft.EntityFrameworkCore
                         sequenceType,
                         out expectedReturnType
                     )
-                ) {
+                )
+                {
                     if (runtimeMethod == null)
                     {
                         return "No IRuntime equivalent of "
@@ -672,7 +693,8 @@ namespace Microsoft.EntityFrameworkCore
                 if (
                     name.StartsWith("Get", StringComparison.Ordinal)
                     && !Fixture.MetadataMethodExceptions.Contains(method)
-                ) {
+                )
+                {
                     return $"{method.DeclaringType.ShortDisplayName()}.{name}({Format(method.GetParameters())}) expected to not have "
                         + "Get prefix";
                 }
@@ -727,7 +749,8 @@ namespace Microsoft.EntityFrameworkCore
                     || mutableMethod.ReturnType != typeof(FieldInfo)
                 )
                 && !Fixture.MutableMetadataTypes.ContainsKey(mutableMethod.ReturnType)
-            ) {
+            )
+            {
                 if (name.StartsWith("Set", StringComparison.Ordinal))
                 {
                     if (mutableMethod.ReturnType != typeof(void))
@@ -798,7 +821,8 @@ namespace Microsoft.EntityFrameworkCore
                     )
                 )
                 && !Fixture.ConventionMetadataTypes.ContainsKey(conventionMethod.ReturnType)
-            ) {
+            )
+            {
                 return $"{conventionMethod.DeclaringType.ShortDisplayName()}.{name}({Format(parameters)}) expected to have an IConvention or "
                     + $"{firstParameter.ParameterType.ShortDisplayName()} return type";
             }
@@ -811,12 +835,14 @@ namespace Microsoft.EntityFrameworkCore
                 && !name.StartsWith("Get", StringComparison.Ordinal)
                 && name != "IsOwned"
                 && name != "IsIgnored"
-            ) {
+            )
+            {
                 var lastParameter = conventionMethod.GetParameters()[^1];
                 if (
                     lastParameter.Name != "fromDataAnnotation"
                     || !Equals(lastParameter.DefaultValue, false)
-                ) {
+                )
+                {
                     return $"{conventionMethod.DeclaringType.ShortDisplayName()}.{name}({Format(parameters)}) expected to have a 'bool fromDataAnnotation = false' parameter";
                 }
             }
@@ -1032,7 +1058,8 @@ namespace Microsoft.EntityFrameworkCore
                     var nestedType in GetAllTypes(
                         type.GetTypeInfo().DeclaredNestedTypes.Select(i => i.AsType())
                     )
-                ) {
+                )
+                {
                     yield return nestedType;
                 }
             }
@@ -1324,7 +1351,8 @@ namespace Microsoft.EntityFrameworkCore
                     Type,
                     (Type Mutable, Type Convention, Type ConventionBuilder, Type Runtime)
                 > types
-            ) {
+            )
+            {
                 foreach (var typeTuple in types)
                 {
                     var readOnlyMethods =

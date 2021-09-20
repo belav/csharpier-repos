@@ -14,7 +14,8 @@ namespace Microsoft.CodeAnalysis.Razor.Serialization
             this JsonReader reader,
             JsonToken expectedTokenType,
             out object value
-        ) {
+        )
+        {
             value = reader.Value;
             return reader.TokenType == expectedTokenType && reader.Read();
         }

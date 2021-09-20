@@ -14,7 +14,8 @@ namespace Microsoft.EntityFrameworkCore.TestUtilities
     {
         public TestRelationalTransactionFactory(
             RelationalTransactionFactoryDependencies dependencies
-        ) {
+        )
+        {
             Dependencies = dependencies;
         }
 

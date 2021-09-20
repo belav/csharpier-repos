@@ -30,7 +30,8 @@ namespace Microsoft.AspNetCore.Server.IIS.FunctionalTests
         public static async Task AssertStarts(
             this IISDeploymentResult deploymentResult,
             string path = "/HelloWorld"
-        ) {
+        )
+        {
             var response = await deploymentResult.HttpClient.GetAsync(path);
 
             var responseText = await response.Content.ReadAsStringAsync();
@@ -42,7 +43,8 @@ namespace Microsoft.AspNetCore.Server.IIS.FunctionalTests
             HttpClient httpClient,
             string path,
             Action<HttpResponseMessage> action
-        ) {
+        )
+        {
             async Task RunRequests()
             {
                 var connection = new HttpClient() { BaseAddress = httpClient.BaseAddress };
@@ -96,7 +98,8 @@ namespace Microsoft.AspNetCore.Server.IIS.FunctionalTests
         public static void ModifyWebConfig(
             this DeploymentResult deploymentResult,
             Action<XElement> action
-        ) {
+        )
+        {
             var webConfigPath = Path.Combine(deploymentResult.ContentRoot, "web.config");
             var document = XDocument.Load(webConfigPath);
             action(document.Root);
@@ -107,7 +110,8 @@ namespace Microsoft.AspNetCore.Server.IIS.FunctionalTests
             this HttpClient client,
             string uri,
             Func<HttpResponseMessage, bool> predicate
-        ) {
+        )
+        {
             return RetryRequestAsync(client, uri, message => Task.FromResult(predicate(message)));
         }
 
@@ -115,7 +119,8 @@ namespace Microsoft.AspNetCore.Server.IIS.FunctionalTests
             this HttpClient client,
             string uri,
             Func<HttpResponseMessage, Task<bool>> predicate
-        ) {
+        )
+        {
             HttpResponseMessage response = await client.GetAsync(uri);
             var delay = RetryRequestDelay;
             for (var i = 0; i < RetryRequestCount && !await predicate(response); i++)
@@ -166,7 +171,8 @@ namespace Microsoft.AspNetCore.Server.IIS.FunctionalTests
         public static void AssertWorkerProcessStop(
             this IISDeploymentResult deploymentResult,
             int? timeout = null
-        ) {
+        )
+        {
             var hostProcess = deploymentResult.HostProcess;
             Assert.True(
                 hostProcess.WaitForExit(
@@ -183,7 +189,8 @@ namespace Microsoft.AspNetCore.Server.IIS.FunctionalTests
         public static async Task AssertRecycledAsync(
             this IISDeploymentResult deploymentResult,
             Func<Task> verificationAction = null
-        ) {
+        )
+        {
             if (deploymentResult.DeploymentParameters.HostingModel != HostingModel.InProcess)
             {
                 throw new NotSupportedException();
@@ -205,7 +212,8 @@ namespace Microsoft.AspNetCore.Server.IIS.FunctionalTests
         public static string GetExpectedLogName(
             IISDeploymentResult deploymentResult,
             string logFolderPath
-        ) {
+        )
+        {
             var startTime = deploymentResult.HostProcess.StartTime.ToUniversalTime();
 
             if (deploymentResult.DeploymentParameters.HostingModel == HostingModel.InProcess)
@@ -226,7 +234,8 @@ namespace Microsoft.AspNetCore.Server.IIS.FunctionalTests
 
         public static void ModifyFrameworkVersionInRuntimeConfig(
             IISDeploymentResult deploymentResult
-        ) {
+        )
+        {
             var path = Path.Combine(
                 deploymentResult.ContentRoot,
                 "InProcessWebSite.runtimeconfig.json"

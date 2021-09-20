@@ -20,7 +20,8 @@ namespace System.Text.Json.Serialization.Converters
             in TValue value,
             JsonSerializerOptions options,
             ref ReadStack state
-        ) {
+        )
+        {
             TCollection collection = (TCollection)state.Current.ReturnValue!;
             collection[key] = value;
             if (IsValueType)
@@ -78,7 +79,8 @@ namespace System.Text.Json.Serialization.Converters
             TCollection value,
             JsonSerializerOptions options,
             ref WriteStack state
-        ) {
+        )
+        {
             IEnumerator<KeyValuePair<TKey, TValue>> enumerator;
             if (state.Current.CollectionEnumerator == null)
             {

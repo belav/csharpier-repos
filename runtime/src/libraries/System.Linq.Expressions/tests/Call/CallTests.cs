@@ -315,7 +315,8 @@ namespace System.Linq.Expressions.Tests
         [ClassData(typeof(CompilationTypes))]
         public static void Call_InstanceNullInside_ThrowsNullReferenceExceptionOnInvocation(
             bool useInterpreter
-        ) {
+        )
+        {
             Expression call = Expression.Call(
                 Expression.Constant(null, typeof(NonGenericClass)),
                 typeof(NonGenericClass).GetMethod(nameof(NonGenericClass.InstanceMethod))
@@ -427,7 +428,8 @@ namespace System.Linq.Expressions.Tests
             MethodInfo method,
             object expected,
             bool useInterpreter
-        ) {
+        )
+        {
             Expression call = Expression.Call(instance, method);
             Delegate compiledDelegate = Expression.Lambda(call).Compile(useInterpreter);
             Assert.Equal(expected, compiledDelegate.DynamicInvoke());
@@ -480,7 +482,8 @@ namespace System.Linq.Expressions.Tests
         public static void Method_Invalid_ThrowsArgumentException(
             MethodInfo method,
             Type exceptionType
-        ) {
+        )
+        {
             AssertArgumentException(() => Expression.Call(null, method), exceptionType, "method");
             AssertArgumentException(
                 () => Expression.Call(null, method, s_valid, s_valid),
@@ -607,7 +610,8 @@ namespace System.Linq.Expressions.Tests
         public static void Method_DoesntBelongToInstance_ThrowsArgumentException(
             Expression instance,
             MethodInfo method
-        ) {
+        )
+        {
             AssertExtensions.Throws<ArgumentException>(
                 null,
                 () => Expression.Call(instance, method)
@@ -853,7 +857,8 @@ namespace System.Linq.Expressions.Tests
             Action action,
             Type exceptionType,
             string paramName
-        ) {
+        )
+        {
             ArgumentException ex = (ArgumentException)Assert.Throws(exceptionType, action);
             Assert.Equal(paramName, ex.ParamName);
         }
@@ -869,7 +874,8 @@ namespace System.Linq.Expressions.Tests
             Type type,
             string name,
             int count
-        ) {
+        )
+        {
             MethodInfo method = type.GetMethod(name);
             Expression arg = Expression.Constant("abc");
             if (count != 0)
@@ -1011,7 +1017,8 @@ namespace System.Linq.Expressions.Tests
         [MemberData(nameof(InvalidTypeArgs_TestData))]
         public static void MethodName_NoSuchGenericMethodWithTypeArgs_ThrowsInvalidOperationException(
             Type[] typeArgs
-        ) {
+        )
+        {
             Assert.Throws<InvalidOperationException>(
                 () =>
                     Expression.Call(

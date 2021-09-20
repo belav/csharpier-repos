@@ -493,7 +493,8 @@ namespace Microsoft.AspNetCore.Components
             string expectedName,
             object expectedValue,
             bool expectedIsCascading
-        ) {
+        )
+        {
             return parameter =>
             {
                 Assert.Equal(expectedName, parameter.Name);

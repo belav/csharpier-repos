@@ -33,7 +33,8 @@ namespace Microsoft.CodeAnalysis.UnitTests.Workspaces
             string workspaceKind = null,
             bool disablePartialSolutions = true,
             bool shareGlobalOptions = false
-        ) {
+        )
+        {
             var composition = EditorTestCompositions.EditorFeatures;
             if (shareGlobalOptions)
             {
@@ -258,7 +259,8 @@ class D { }
         private static async Task VerifyRootTypeNameAsync(
             TestWorkspace workspaceSnapshotBuilder,
             string typeName
-        ) {
+        )
+        {
             var currentSnapshot = workspaceSnapshotBuilder.CurrentSolution;
             var type = await GetRootTypeDeclarationAsync(currentSnapshot);
 
@@ -267,7 +269,8 @@ class D { }
 
         private static async Task<TypeDeclarationSyntax> GetRootTypeDeclarationAsync(
             Solution currentSnapshot
-        ) {
+        )
+        {
             var tree = await currentSnapshot.Projects.First()
                 .Documents.First()
                 .GetSyntaxTreeAsync();
@@ -1558,7 +1561,8 @@ class D { }
         [Theory, WorkItem(19284, "https://github.com/dotnet/roslyn/issues/19284")]
         public void TestOptionChangedHandlerInvokedAfterCurrentSolutionChanged(
             bool testDeprecatedOptionsSetter
-        ) {
+        )
+        {
             // Create workspaces with shared global options to replicate the true global options service shared between workspaces.
             using var primaryWorkspace = CreateWorkspace(shareGlobalOptions: true);
             using var secondaryWorkspace = CreateWorkspace(shareGlobalOptions: true);
@@ -1639,7 +1643,8 @@ class D { }
             static void VerifyCurrentSolutionAndOptionChange(
                 Workspace workspace,
                 Solution beforeOptionChangedSolution
-            ) {
+            )
+            {
                 // Verify that workspace.CurrentSolution has been updated with a new solution instance with changed option.
                 var currentSolution = workspace.CurrentSolution;
                 Assert.NotEqual(beforeOptionChangedSolution, currentSolution);

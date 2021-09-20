@@ -41,7 +41,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Formatting
             List<SuppressOperation> list,
             SyntaxNode node,
             in NextSuppressOperationAction nextOperation
-        ) {
+        )
+        {
             nextOperation.Invoke();
 
             AddBraceSuppressOperations(list, node);
@@ -63,7 +64,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Formatting
 
         private static (SyntaxToken firstToken, SyntaxToken lastToken) GetSpecificNodeSuppressionTokenRange(
             SyntaxNode node
-        ) {
+        )
+        {
             var embeddedStatement = node.GetEmbeddedStatement();
             if (embeddedStatement != null)
             {
@@ -102,7 +104,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Formatting
         private static void AddSpecificNodesSuppressOperations(
             List<SuppressOperation> list,
             SyntaxNode node
-        ) {
+        )
+        {
             var (firstToken, lastToken) = GetSpecificNodeSuppressionTokenRange(node);
             if (!firstToken.IsKind(SyntaxKind.None) || !lastToken.IsKind(SyntaxKind.None))
             {
@@ -113,10 +116,12 @@ namespace Microsoft.CodeAnalysis.CSharp.Formatting
         private static void AddStatementExceptBlockSuppressOperations(
             List<SuppressOperation> list,
             SyntaxNode node
-        ) {
+        )
+        {
             if (
                 !(node is StatementSyntax statementNode) || statementNode.Kind() == SyntaxKind.Block
-            ) {
+            )
+            {
                 return;
             }
 
@@ -129,13 +134,15 @@ namespace Microsoft.CodeAnalysis.CSharp.Formatting
         private static void RemoveSuppressOperationForStatementMethodDeclaration(
             List<SuppressOperation> list,
             SyntaxNode node
-        ) {
+        )
+        {
             if (
                 !(
                     !(node is StatementSyntax statementNode)
                     || statementNode.Kind() == SyntaxKind.Block
                 )
-            ) {
+            )
+            {
                 var firstToken = statementNode.GetFirstToken(includeZeroWidth: true);
                 var lastToken = statementNode.GetLastToken(includeZeroWidth: true);
 
@@ -146,7 +153,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Formatting
             if (
                 !tokens.firstToken.IsKind(SyntaxKind.None)
                 || !tokens.lastToken.IsKind(SyntaxKind.None)
-            ) {
+            )
+            {
                 RemoveSuppressOperation(list, tokens.firstToken, tokens.lastToken);
             }
 
@@ -164,7 +172,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Formatting
         private static void RemoveSuppressOperationForBlock(
             List<SuppressOperation> list,
             SyntaxNode node
-        ) {
+        )
+        {
             var bracePair = GetBracePair(node);
             if (!bracePair.IsValidBracePair())
             {
@@ -189,7 +198,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Formatting
             if (
                 node is BaseMethodDeclarationSyntax methodDeclaration
                 && methodDeclaration.Body != null
-            ) {
+            )
+            {
                 return (
                     methodDeclaration.Body.OpenBraceToken,
                     methodDeclaration.Body.CloseBraceToken
@@ -199,7 +209,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Formatting
             if (
                 node is PropertyDeclarationSyntax propertyDeclaration
                 && propertyDeclaration.AccessorList != null
-            ) {
+            )
+            {
                 return (
                     propertyDeclaration.AccessorList.OpenBraceToken,
                     propertyDeclaration.AccessorList.CloseBraceToken
@@ -209,7 +220,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Formatting
             if (
                 node is AccessorDeclarationSyntax accessorDeclaration
                 && accessorDeclaration.Body != null
-            ) {
+            )
+            {
                 return (
                     accessorDeclaration.Body.OpenBraceToken,
                     accessorDeclaration.Body.CloseBraceToken
@@ -223,7 +235,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Formatting
             List<SuppressOperation> list,
             SyntaxToken startToken,
             SyntaxToken endToken
-        ) {
+        )
+        {
             if (startToken.Kind() == SyntaxKind.None || endToken.Kind() == SyntaxKind.None)
             {
                 return;
@@ -272,7 +285,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Formatting
             private static T GetOptionOrDefault<T>(
                 AnalyzerConfigOptions? options,
                 Option2<T> option
-            ) {
+            )
+            {
                 if (options is null)
                     return option.DefaultValue;
 

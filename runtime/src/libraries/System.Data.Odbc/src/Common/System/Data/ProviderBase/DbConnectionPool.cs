@@ -26,7 +26,8 @@ namespace System.Data.ProviderBase
                 DbConnection owner,
                 TaskCompletionSource<DbConnectionInternal> completion,
                 DbConnectionOptions? userOptions
-            ) {
+            )
+            {
                 DueTime = dueTime;
                 Owner = owner;
                 Completion = completion;
@@ -142,7 +143,8 @@ namespace System.Data.ProviderBase
             DbConnectionPoolGroup connectionPoolGroup,
             DbConnectionPoolIdentity identity,
             DbConnectionPoolProviderInfo? connectionPoolProviderInfo
-        ) {
+        )
+        {
             Debug.Assert(null != connectionPoolGroup, "null connectionPoolGroup");
 
             if ((null != identity) && identity.IsRestricted)
@@ -396,7 +398,8 @@ namespace System.Data.ProviderBase
             DbConnection? owningObject,
             DbConnectionOptions? userOptions,
             DbConnectionInternal? oldConnection
-        ) {
+        )
+        {
             DbConnectionInternal? newObj = null;
 
             try
@@ -713,7 +716,8 @@ namespace System.Data.ProviderBase
             TaskCompletionSource<DbConnectionInternal>? retry,
             DbConnectionOptions? userOptions,
             out DbConnectionInternal? connection
-        ) {
+        )
+        {
             uint waitForMultipleObjectsTimeout = 0;
             bool allowCreate = false;
 
@@ -744,7 +748,8 @@ namespace System.Data.ProviderBase
                     userOptions,
                     out connection
                 )
-            ) {
+            )
+            {
                 return true;
             }
             else if (retry == null)
@@ -782,7 +787,8 @@ namespace System.Data.ProviderBase
             bool onlyOneCheckConnection,
             DbConnectionOptions? userOptions,
             out DbConnectionInternal? connection
-        ) {
+        )
+        {
             DbConnectionInternal? obj = null;
             if (null == obj)
             {
@@ -884,7 +890,8 @@ namespace System.Data.ProviderBase
                                             _waitHandles.CreationSemaphore.WaitOne(
                                                 unchecked((int)waitForMultipleObjectsTimeout)
                                             )
-                                        ) {
+                                        )
+                                        {
                                             try
                                             {
                                                 obj = UserCreateRequest(owningObject, userOptions);
@@ -961,7 +968,8 @@ namespace System.Data.ProviderBase
             DbConnection owningObject,
             DbConnectionOptions userOptions,
             DbConnectionInternal oldConnection
-        ) {
+        )
+        {
             DbConnectionInternal? newConnection = UserCreateRequest(
                 owningObject,
                 userOptions,
@@ -1041,7 +1049,8 @@ namespace System.Data.ProviderBase
                         if (
                             UsingIntegrateSecurity
                             && !_identity!.Equals(DbConnectionPoolIdentity.GetCurrent())
-                        ) {
+                        )
+                        {
                             return;
                         }
                         int waitResult = BOGUS_HANDLE;
@@ -1239,7 +1248,8 @@ namespace System.Data.ProviderBase
             DbConnection owningObject,
             DbConnectionOptions? userOptions,
             DbConnectionInternal? oldConnection = null
-        ) {
+        )
+        {
             // called by user when they were not able to obtain a free object but
             // instead obtained creation mutex
 

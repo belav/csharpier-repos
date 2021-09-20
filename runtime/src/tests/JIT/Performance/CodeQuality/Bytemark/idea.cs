@@ -161,7 +161,8 @@ public class IDEAEncryption : IDEAStruct
         int nloops,
         char[] Z,
         char[] DK
-    ) {
+    )
+    {
         int i;
         int j;
         long elapsed;

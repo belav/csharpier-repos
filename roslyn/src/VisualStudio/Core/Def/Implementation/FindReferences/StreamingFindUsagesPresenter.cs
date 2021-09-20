@@ -58,15 +58,16 @@ namespace Microsoft.VisualStudio.LanguageServices.FindUsages
             IEditorFormatMapService formatMapService,
             IClassificationFormatMapService classificationFormatMapService,
             [ImportMany] IEnumerable<Lazy<ITableColumnDefinition, NameMetadata>> columns
-        ) : this(
-            workspace,
-            threadingContext,
-            serviceProvider,
-            typeMap,
-            formatMapService,
-            classificationFormatMapService,
-            GetCustomColumns(columns)
-        ) { }
+        )
+            : this(
+                workspace,
+                threadingContext,
+                serviceProvider,
+                typeMap,
+                formatMapService,
+                classificationFormatMapService,
+                GetCustomColumns(columns)
+            ) { }
 
         // Test only
         [SuppressMessage(
@@ -74,18 +75,16 @@ namespace Microsoft.VisualStudio.LanguageServices.FindUsages
             "RS0034:Exported parts should have [ImportingConstructor]",
             Justification = "Used incorrectly by tests"
         )]
-        public StreamingFindUsagesPresenter(
-            Workspace workspace,
-            ExportProvider exportProvider
-        ) : this(
-            workspace,
-            exportProvider.GetExportedValue<IThreadingContext>(),
-            exportProvider.GetExportedValue<Shell.SVsServiceProvider>(),
-            exportProvider.GetExportedValue<ClassificationTypeMap>(),
-            exportProvider.GetExportedValue<IEditorFormatMapService>(),
-            exportProvider.GetExportedValue<IClassificationFormatMapService>(),
-            exportProvider.GetExportedValues<ITableColumnDefinition>()
-        ) { }
+        public StreamingFindUsagesPresenter(Workspace workspace, ExportProvider exportProvider)
+            : this(
+                workspace,
+                exportProvider.GetExportedValue<IThreadingContext>(),
+                exportProvider.GetExportedValue<Shell.SVsServiceProvider>(),
+                exportProvider.GetExportedValue<ClassificationTypeMap>(),
+                exportProvider.GetExportedValue<IEditorFormatMapService>(),
+                exportProvider.GetExportedValue<IClassificationFormatMapService>(),
+                exportProvider.GetExportedValues<ITableColumnDefinition>()
+            ) { }
 
         [SuppressMessage(
             "RoslynDiagnosticsReliability",
@@ -115,7 +114,8 @@ namespace Microsoft.VisualStudio.LanguageServices.FindUsages
 
         private static IEnumerable<ITableColumnDefinition> GetCustomColumns(
             IEnumerable<Lazy<ITableColumnDefinition, NameMetadata>> columns
-        ) {
+        )
+        {
             foreach (var column in columns)
             {
                 // PERF: Filter the columns by metadata name before selecting our custom columns.
@@ -154,7 +154,8 @@ namespace Microsoft.VisualStudio.LanguageServices.FindUsages
             string title,
             bool supportsReferences,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             this.AssertIsForeground();
             var context = StartSearchWorker(
                 title,
@@ -181,7 +182,8 @@ namespace Microsoft.VisualStudio.LanguageServices.FindUsages
             bool includeContainingTypeAndMemberColumns,
             bool includeKindColumn,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             this.AssertIsForeground();
             var context = StartSearchWorker(
                 title,
@@ -205,7 +207,8 @@ namespace Microsoft.VisualStudio.LanguageServices.FindUsages
             bool includeContainingTypeAndMemberColumns,
             bool includeKindColumn,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             this.AssertIsForeground();
 
             var vsFindAllReferencesService = (IFindAllReferencesService)_serviceProvider.GetService(
@@ -248,7 +251,8 @@ namespace Microsoft.VisualStudio.LanguageServices.FindUsages
             bool includeContainingTypeAndMemberColumns,
             bool includeKindColumn,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             // Ensure that the window's definition-grouping reflects what the user wants.
             // i.e. we may have disabled this column for a previous GoToImplementation call.
             // We want to still show the column as long as the user has not disabled it themselves.
@@ -277,7 +281,8 @@ namespace Microsoft.VisualStudio.LanguageServices.FindUsages
             bool includeContainingTypeAndMemberColumns,
             bool includeKindColumn,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             // If we're not showing references, then disable grouping by definition, as that will
             // just lead to a poor experience.  i.e. we'll have the definition entry buckets,
             // with the same items showing underneath them.
@@ -339,7 +344,8 @@ namespace Microsoft.VisualStudio.LanguageServices.FindUsages
 
         protected static (Guid, string projectName, string? projectFlavor) GetGuidAndProjectInfo(
             Document document
-        ) {
+        )
+        {
             // The FAR system needs to know the guid for the project that a def/reference is
             // from (to support features like filtering).  Normally that would mean we could
             // only support this from a VisualStudioWorkspace.  However, we want till work

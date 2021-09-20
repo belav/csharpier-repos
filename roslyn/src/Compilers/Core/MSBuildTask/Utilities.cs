@@ -148,7 +148,8 @@ namespace Microsoft.CodeAnalysis.BuildTasks
             Exception e,
             string errorString,
             params object[] args
-        ) {
+        )
+        {
             return new ArgumentException(
                 string.Format(CultureInfo.CurrentCulture, errorString, args),
                 e
@@ -158,7 +159,8 @@ namespace Microsoft.CodeAnalysis.BuildTasks
         internal static Exception GetLocalizedArgumentException(
             string errorString,
             params object[] args
-        ) {
+        )
+        {
             return new ArgumentException(
                 string.Format(CultureInfo.CurrentCulture, errorString, args)
             );

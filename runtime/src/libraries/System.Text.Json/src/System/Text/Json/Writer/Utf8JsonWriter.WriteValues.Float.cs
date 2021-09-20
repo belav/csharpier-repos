@@ -103,7 +103,8 @@ namespace System.Text.Json
             float value,
             Span<byte> destination,
             out int bytesWritten
-        ) {
+        )
+        {
             // Frameworks that are not .NET Core 3.0 or higher do not produce roundtrippable strings by
             // default. Further, the Utf8Formatter on older frameworks does not support taking a precision
             // specifier for 'G' nor does it represent other formats such as 'R'. As such, we duplicate

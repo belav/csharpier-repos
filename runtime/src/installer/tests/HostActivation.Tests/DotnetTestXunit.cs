@@ -26,7 +26,8 @@ namespace Microsoft.DotNet.Tools.Publish.Tests
                     "PortableTestApp",
                     RepoDirectories
                 )
-            ) {
+            )
+            {
                 portableTestAppFixture.EnsureRestored().BuildProject();
 
                 ActivateDotnetTestXunitOnTestProject(RepoDirectories, portableTestAppFixture);
@@ -41,7 +42,8 @@ namespace Microsoft.DotNet.Tools.Publish.Tests
                     "StandaloneTestApp",
                     RepoDirectories
                 )
-            ) {
+            )
+            {
                 standaloneTestAppFixture.EnsureRestoredForRid(standaloneTestAppFixture.CurrentRid)
                     .BuildProject(runtime: standaloneTestAppFixture.CurrentRid);
 
@@ -52,7 +54,8 @@ namespace Microsoft.DotNet.Tools.Publish.Tests
         private void ActivateDotnetTestXunitOnTestProject(
             RepoDirectoriesProvider repoDirectories,
             TestProjectFixture testProjectFixture
-        ) {
+        )
+        {
             var dotnet = testProjectFixture.BuiltDotnet;
 
             var dotnetTestXunitDll = FindDotnetTestXunitDll(
@@ -87,7 +90,8 @@ namespace Microsoft.DotNet.Tools.Publish.Tests
         private string FindDotnetTestXunitDll(
             RepoDirectoriesProvider repoDirectories,
             string dotnetTestXunitVersion
-        ) {
+        )
+        {
             var dotnetTestXunitDll = Path.Combine(
                 repoDirectories.NugetPackages,
                 "dotnet-test-xunit",

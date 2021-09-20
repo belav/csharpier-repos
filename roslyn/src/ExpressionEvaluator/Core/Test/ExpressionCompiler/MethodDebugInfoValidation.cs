@@ -17,14 +17,16 @@ namespace Microsoft.CodeAnalysis.ExpressionEvaluator.UnitTests
         internal static void Verify(
             this ImmutableArray<ExternAliasRecord> actual,
             params string[] expected
-        ) {
+        )
+        {
             AssertEx.Equal(expected, actual.Select(r => $"{r.Alias} = '{r.TargetAssembly}'"));
         }
 
         internal static void Verify(
             this ImmutableArray<ImmutableArray<ImportRecord>> actual,
             string expected
-        ) {
+        )
+        {
             AssertEx.AssertEqualToleratingWhitespaceDifferences(
                 expected,
                 string.Join(

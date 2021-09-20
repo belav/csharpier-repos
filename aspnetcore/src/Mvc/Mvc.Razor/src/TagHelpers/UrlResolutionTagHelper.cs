@@ -224,7 +224,8 @@ namespace Microsoft.AspNetCore.Mvc.Razor.TagHelpers
                         attributeName,
                         StringComparison.OrdinalIgnoreCase
                     )
-                ) {
+                )
+                {
                     continue;
                 }
 
@@ -417,7 +418,8 @@ namespace Microsoft.AspNetCore.Mvc.Razor.TagHelpers
                 string firstSegment,
                 int firstSegmentLength,
                 string secondSegment
-            ) {
+            )
+            {
                 _firstSegment = firstSegment;
                 _firstSegmentLength = firstSegmentLength;
                 _secondSegment = secondSegment;

@@ -30,7 +30,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Classification.Classifiers
             SemanticModel semanticModel,
             ArrayBuilder<ClassifiedSpan> result,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var syntaxTree = semanticModel.SyntaxTree;
             if (
                 syntaxTree.IsInPartiallyWrittenGeneric(
@@ -38,7 +39,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Classification.Classifiers
                     cancellationToken,
                     out var identifier
                 )
-            ) {
+            )
+            {
                 // IsInPartiallyWrittenGeneric will return true for things that could be
                 // partially generic method calls (as opposed to partially written types).
                 //
@@ -88,7 +90,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Classification.Classifiers
             if (
                 identifierName.IsSimpleMemberAccessExpressionName()
                 || identifierName.IsMemberBindingExpressionName()
-            ) {
+            )
+            {
                 if (identifier.Parent.IsParentKind(SyntaxKind.ConditionalAccessExpression))
                     return false;
             }

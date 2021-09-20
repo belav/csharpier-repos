@@ -81,7 +81,8 @@ public class Helper
         ref T arrSize,
         int actualArrSize,
         int expectedArrSize
-    ) {
+    )
+    {
         T[] actualArr = InitArray<T>(actualArrSize);
         if (!EqualArray<T>(arrArg, actualArrSize, actualArr, actualArrSize))
         {

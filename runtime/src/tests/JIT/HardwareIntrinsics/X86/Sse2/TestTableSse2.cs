@@ -248,7 +248,8 @@ namespace IntelHardwareIntrinsicTest
 
         public ValueTuple<Memory<T>, Memory<T>, Memory<T>, Memory<T>> GetAssignmentDataPoint(
             int index
-        ) {
+        )
+        {
             return (
                 new Memory<T>(inArray1, index, ElementCount),
                 new Memory<T>(inArray2, index, ElementCount),
@@ -594,7 +595,8 @@ namespace IntelHardwareIntrinsicTest
 
         public ((T, T, T, T, T, T, T, T), (T, T, T, T, T, T, T, T), U, U) GetEightOneDataPoint(
             int index
-        ) {
+        )
+        {
             return (
                 (
                     inArray1[index],
@@ -623,7 +625,8 @@ namespace IntelHardwareIntrinsicTest
 
         public ((T, T, T, T, T, T, T, T), (T, T, T, T, T, T, T, T), (U, U, U, U, U, U, U, U), (U, U, U, U, U, U, U, U)) GetOcta88DataPoint(
             int index
-        ) {
+        )
+        {
             return (
                 (
                     inArray1[index],
@@ -670,7 +673,8 @@ namespace IntelHardwareIntrinsicTest
 
         public ((T, T, T, T, T, T, T, T), (T, T, T, T, T, T, T, T), (T, T, T, T, T, T, T, T), (T, T, T, T, T, T, T, T), (U, U, U, U, U, U, U, U), (U, U, U, U, U, U, U, U), (U, U, U, U, U, U, U, U), (U, U, U, U, U, U, U, U)) GetHexadecaDataPoint(
             int index
-        ) {
+        )
+        {
             return (
                 (
                     inArray1[index],
@@ -765,7 +769,8 @@ namespace IntelHardwareIntrinsicTest
             double tSizeMultiplier = 1.0,
             double uSizeMultiplier = 1.0,
             bool initialize = true
-        ) {
+        )
+        {
             _tSize = Marshal.SizeOf<T>();
             int length = _stepSize / _tSize * lengthInVectors;
             inArray1 = new T[(int)(length * (1 / uSizeMultiplier))];
@@ -957,7 +962,8 @@ namespace IntelHardwareIntrinsicTest
                         outArray[i],
                         ref checkArray[i]
                     )
-                ) {
+                )
+                {
                     result = false;
                 }
             }
@@ -978,7 +984,8 @@ namespace IntelHardwareIntrinsicTest
                         ref checkArray[j],
                         ref checkArray[j + 1]
                     )
-                ) {
+                )
+                {
                     result = false;
                 }
             }
@@ -992,7 +999,8 @@ namespace IntelHardwareIntrinsicTest
                 int i = 0, j = 0;
                 j < outArray.Length - 3 && i < inArray1.Length - 1;
                 i += 2, j += 4
-            ) {
+            )
+            {
                 if (
                     !check(
                         inArray1[i],
@@ -1002,7 +1010,8 @@ namespace IntelHardwareIntrinsicTest
                         ref checkArray[j],
                         ref checkArray[j + 1]
                     )
-                ) {
+                )
+                {
                     result = false;
                 }
             }
@@ -1023,7 +1032,8 @@ namespace IntelHardwareIntrinsicTest
                         ref checkArray[j],
                         ref checkArray[j + 1]
                     )
-                ) {
+                )
+                {
                     result = false;
                 }
             }
@@ -1037,7 +1047,8 @@ namespace IntelHardwareIntrinsicTest
                 int i = 0, j = 0;
                 i < inArray1.Length - 1 && j < outArray.Length - 3;
                 i += 2, j += 4
-            ) {
+            )
+            {
                 if (
                     !check(
                         inArray1[i],
@@ -1047,7 +1058,8 @@ namespace IntelHardwareIntrinsicTest
                         ref checkArray[j],
                         ref checkArray[j + 1]
                     )
-                ) {
+                )
+                {
                     result = false;
                 }
             }
@@ -1068,7 +1080,8 @@ namespace IntelHardwareIntrinsicTest
                         ref checkArray[j],
                         ref checkArray[j + 1]
                     )
-                ) {
+                )
+                {
                     result = false;
                 }
             }
@@ -1082,7 +1095,8 @@ namespace IntelHardwareIntrinsicTest
                 int i = 0, j = 0;
                 j < outArray.Length - 3 && i < inArray1.Length - 3;
                 i += 4, j += 4
-            ) {
+            )
+            {
                 if (
                     !check(
                         (inArray1[i], inArray1[i + 1], inArray1[i + 2], inArray1[i + 3]),
@@ -1093,7 +1107,8 @@ namespace IntelHardwareIntrinsicTest
                         ref checkArray[j + 2],
                         ref checkArray[j + 3]
                     )
-                ) {
+                )
+                {
                     result = false;
                 }
             }
@@ -1118,7 +1133,8 @@ namespace IntelHardwareIntrinsicTest
                         ref checkArray[j],
                         ref checkArray[j + 1]
                     )
-                ) {
+                )
+                {
                     result = false;
                 }
             }
@@ -1143,7 +1159,8 @@ namespace IntelHardwareIntrinsicTest
                         ref checkArray[j],
                         ref checkArray[j + 1]
                     )
-                ) {
+                )
+                {
                     result = false;
                 }
             }
@@ -1164,7 +1181,8 @@ namespace IntelHardwareIntrinsicTest
                         outArray[j],
                         ref checkArray[j]
                     )
-                ) {
+                )
+                {
                     result = false;
                 }
             }
@@ -1178,7 +1196,8 @@ namespace IntelHardwareIntrinsicTest
                 int i = 0, j = 0;
                 i < inArray1.Length - 3 & j < outArray.Length - 7;
                 i += 4, j += 8
-            ) {
+            )
+            {
                 bool test = check(
                     (inArray1[i], inArray1[i + 1], inArray1[i + 2], inArray1[i + 3]),
                     (inArray2[i], inArray2[i + 1], inArray2[i + 2], inArray2[i + 3]),
@@ -1233,7 +1252,8 @@ namespace IntelHardwareIntrinsicTest
                 int i = 0, j = 0;
                 i < inArray1.Length - 7 & j < outArray.Length - 7;
                 i += 8, j += 8
-            ) {
+            )
+            {
                 bool test = check(
                     (
                         inArray1[i],
@@ -1290,7 +1310,8 @@ namespace IntelHardwareIntrinsicTest
                 int i = 0, j = 0;
                 i < inArray1.Length - 7 & j < outArray.Length - 15;
                 i += 8, j += 16
-            ) {
+            )
+            {
                 bool test = check(
                     (
                         inArray1[i],
@@ -1365,7 +1386,8 @@ namespace IntelHardwareIntrinsicTest
                 int i = 0, j = 0;
                 i < inArray1.Length - 15 & j < outArray.Length - 15;
                 i += 16, j += 16
-            ) {
+            )
+            {
                 bool test = check(
                     (
                         inArray1[i],
@@ -1701,7 +1723,8 @@ namespace IntelHardwareIntrinsicTest
 
         public ((T, T, T, T, T, T, T, T), (V, V, V, V, V, V, V, V), (U, U, U, U, U, U, U, U), (U, U, U, U, U, U, U, U)) GetOcta88DataPoint(
             int index
-        ) {
+        )
+        {
             return (
                 (
                     inArray1[index],
@@ -1748,7 +1771,8 @@ namespace IntelHardwareIntrinsicTest
 
         public ((T, T, T, T, T, T, T, T), (T, T, T, T, T, T, T, T), (V, V, V, V, V, V, V, V), (V, V, V, V, V, V, V, V), (U, U, U, U, U, U, U, U), (U, U, U, U, U, U, U, U), (U, U, U, U, U, U, U, U), (U, U, U, U, U, U, U, U)) GetHexadecaDataPoint(
             int index
-        ) {
+        )
+        {
             return (
                 (
                     inArray1[index],
@@ -1836,7 +1860,8 @@ namespace IntelHardwareIntrinsicTest
         public static TestTableTuvSse2<T, U, V> Create(
             int lengthInVectors,
             double tSizeMultiplier = 1.0
-        ) {
+        )
+        {
             return new TestTableTuvSse2<T, U, V>(lengthInVectors, tSizeMultiplier);
         }
 
@@ -1845,7 +1870,8 @@ namespace IntelHardwareIntrinsicTest
             double tSizeMultiplier = 1.0,
             double uSizeMultiplier = 1.0,
             bool initialize = true
-        ) {
+        )
+        {
             _tSize = Marshal.SizeOf<T>();
             int length = _stepSize / _tSize * lengthInVectors;
             inArray1 = new T[(int)(length * (1 / uSizeMultiplier))];
@@ -2089,7 +2115,8 @@ namespace IntelHardwareIntrinsicTest
 
         public ((T, T, T, T, T, T, T, T), T, V, (U, U, U, U, U, U, U, U), (U, U, U, U, U, U, U, U)) GetOctaImmDataPoint(
             int index
-        ) {
+        )
+        {
             return (
                 (
                     inArray1[index],
@@ -2140,7 +2167,8 @@ namespace IntelHardwareIntrinsicTest
         public static TestTableImmSse2<T, U, V> Create(
             int lengthInVectors,
             double tSizeMultiplier = 1.0
-        ) {
+        )
+        {
             return new TestTableImmSse2<T, U, V>(lengthInVectors, tSizeMultiplier);
         }
 
@@ -2148,7 +2176,8 @@ namespace IntelHardwareIntrinsicTest
             int lengthInVectors,
             double tSizeMultiplier = 1.0,
             bool initialize = true
-        ) {
+        )
+        {
             s_tSize = Marshal.SizeOf<T>();
             ElementCount = _stepSize / s_tSize;
             _lengthInVectors = lengthInVectors;
@@ -2336,7 +2365,8 @@ namespace IntelHardwareIntrinsicTest
                         new Span<U>(outArray, Index * elNo, elNo),
                         new Span<U>(checkArray, Index * elNo, elNo)
                     )
-                ) {
+                )
+                {
                     result = false;
                 }
             }
@@ -2438,7 +2468,8 @@ namespace IntelHardwareIntrinsicTest
         public static TestTableScalarSse2<T, U> Create(
             int lengthInVectors,
             double tSizeMultiplier = 1.0
-        ) {
+        )
+        {
             return new TestTableScalarSse2<T, U>(lengthInVectors, tSizeMultiplier);
         }
 
@@ -2446,7 +2477,8 @@ namespace IntelHardwareIntrinsicTest
             int lengthInVectors,
             double tSizeMultiplier = 1.0,
             bool initialize = true
-        ) {
+        )
+        {
             s_tSize = Marshal.SizeOf<T>();
             s_ElementCount = _stepSize / s_tSize;
             int length = s_ElementCount * lengthInVectors;
@@ -2604,7 +2636,8 @@ namespace IntelHardwareIntrinsicTest
                         new Span<U>(outArray, i, s_ElementCount),
                         new Span<U>(checkArray, i, s_ElementCount)
                     )
-                ) {
+                )
+                {
                     result = false;
                 }
             }
@@ -2623,7 +2656,8 @@ namespace IntelHardwareIntrinsicTest
                         outArray[j],
                         ref checkArray[j]
                     )
-                ) {
+                )
+                {
                     result = false;
                 }
             }
@@ -2766,7 +2800,8 @@ namespace IntelHardwareIntrinsicTest
 
         public ((T, T, T, T, T, T, T, T), T, V, (U, U, U, U, U, U, U, U), (U, U, U, U, U, U, U, U)) GetOctaImmDataPoint(
             int index
-        ) {
+        )
+        {
             return (
                 (
                     inArray1[index],
@@ -2806,7 +2841,8 @@ namespace IntelHardwareIntrinsicTest
         public static TestTableTuvImmSse2<T, U, V> Create(
             int lengthInVectors,
             double tSizeMultiplier = 1.0
-        ) {
+        )
+        {
             return new TestTableTuvImmSse2<T, U, V>(lengthInVectors, tSizeMultiplier);
         }
 
@@ -2814,7 +2850,8 @@ namespace IntelHardwareIntrinsicTest
             int lengthInVectors,
             double tSizeMultiplier = 1.0,
             bool initialize = true
-        ) {
+        )
+        {
             _lengthInVectors = lengthInVectors;
             _tSize = Marshal.SizeOf<T>();
             ElementsNo = _vectorSize / _tSize;
@@ -2868,7 +2905,8 @@ namespace IntelHardwareIntrinsicTest
                         new Span<U>(outArray, Index * ElementsNo, ElementsNo),
                         new Span<U>(checkArray, Index * ElementsNo, ElementsNo)
                     )
-                ) {
+                )
+                {
                     result = false;
                 }
             }
@@ -2887,7 +2925,8 @@ namespace IntelHardwareIntrinsicTest
                         new Span<U>(outArray, i, ElementsNo),
                         new Span<U>(checkArray, i, ElementsNo)
                     )
-                ) {
+                )
+                {
                     result = false;
                 }
             }
@@ -2907,7 +2946,8 @@ namespace IntelHardwareIntrinsicTest
                         new Span<U>(outArray, i, ElementsNo),
                         new Span<U>(checkArray, i, ElementsNo)
                     )
-                ) {
+                )
+                {
                     result = false;
                 }
             }
@@ -2933,7 +2973,8 @@ namespace IntelHardwareIntrinsicTest
             void* InArray1Ptr = null,
             void* InArray2Ptr = null,
             T value = default(T)
-        ) {
+        )
+        {
             if (mode == InitMode.Undefined)
             {
                 InitializeWithRandomData(inArray1, inArray2, InArray1Ptr, InArray2Ptr);
@@ -2954,7 +2995,8 @@ namespace IntelHardwareIntrinsicTest
             T[] inArray2,
             void* InArray1Ptr = null,
             void* InArray2Ptr = null
-        ) {
+        )
+        {
             InitializeWithRandomData<T>(inArray1, InArray1Ptr);
             InitializeWithRandomData<T>(inArray2, InArray2Ptr);
         }
@@ -3099,7 +3141,8 @@ namespace IntelHardwareIntrinsicTest
             T[] array,
             int vectorSize,
             Func<int, int, T> function
-        ) {
+        )
+        {
             int elNo = vectorSize / Marshal.SizeOf<T>();
             for (int i = 0; i < array.Length; i++)
             {
@@ -3197,8 +3240,9 @@ namespace IntelHardwareIntrinsicTest
             string functionName = "",
             string testFuncString = "",
             CheckMethodTwo<T, U> check = null
-        ) where T : struct
-          where U : struct
+        )
+            where T : struct
+            where U : struct
         {
             PrintErrorHeaderTu<T>(functionName, testFuncString);
             for (int i = 0; i < testTable.outArray.Length; i++)
@@ -3221,9 +3265,10 @@ namespace IntelHardwareIntrinsicTest
             string functionName = "",
             string testFuncString = "",
             CheckMethodTwo<T, U, V> check = null
-        ) where T : struct
-          where U : struct
-          where V : struct
+        )
+            where T : struct
+            where U : struct
+            where V : struct
         {
             PrintErrorHeaderTuv<T, V>(functionName, testFuncString);
             for (int i = 0; i < testTable.outArray.Length; i++)
@@ -3246,16 +3291,18 @@ namespace IntelHardwareIntrinsicTest
             string functionName = "",
             string testFuncString = "",
             CheckMethodTwoSpan<T, U, V> check = null
-        ) where T : struct
-          where U : struct
-          where V : struct
+        )
+            where T : struct
+            where U : struct
+            where V : struct
         {
             PrintErrorHeaderTuv<T, V>(functionName, testFuncString);
             for (
                 int i = 0;
                 i < testTable.inArray1.Length;
                 i += TestTableImmSse2<T, U, V>.ElementCount
-            ) {
+            )
+            {
                 (Memory<T>, V, U, U) item = testTable.GetExtractDataPoint(i);
                 Console.Write(
                     $"({item})"
@@ -3274,8 +3321,9 @@ namespace IntelHardwareIntrinsicTest
             string functionName = "",
             string testFuncString = "",
             CheckMethodThree<T, U> check = null
-        ) where T : struct
-          where U : struct
+        )
+            where T : struct
+            where U : struct
         {
             PrintErrorHeaderTu<T>(functionName, testFuncString);
             for (int i = 0; i < testTable.inArray1.Length - 1; i += 2)
@@ -3298,8 +3346,9 @@ namespace IntelHardwareIntrinsicTest
             string functionName = "",
             string testFuncString = "",
             CheckMethodFour<T, U> check = null
-        ) where T : struct
-          where U : struct
+        )
+            where T : struct
+            where U : struct
         {
             PrintErrorHeaderTu<T>(functionName, testFuncString);
             for (int i = 0; i < testTable.inArray1.Length - 1; i += 2)
@@ -3322,16 +3371,18 @@ namespace IntelHardwareIntrinsicTest
             string functionName = "",
             string testFuncString = "",
             CheckMethodFour<T, U, V> check = null
-        ) where T : struct
-          where U : struct
-          where V : struct
+        )
+            where T : struct
+            where U : struct
+            where V : struct
         {
             PrintErrorHeaderTu<T>(functionName, testFuncString);
             for (
                 int i = 0;
                 i < testTable.inArray1.Length - 1;
                 i += TestTableTuvImmSse2<T, U, V>.ElementsNo
-            ) {
+            )
+            {
                 var item = testTable.GetDataPoint(i);
                 Console.Write(
                     $"(x{PrintMemory(item.Item1)}, y{PrintMemory(item.Item2)}, z{PrintMemory(item.Item4)}, a{PrintMemory(item.Item5)})"
@@ -3350,8 +3401,9 @@ namespace IntelHardwareIntrinsicTest
             string functionName = "",
             string testFuncString = "",
             CheckMethodFourTFourU<T, U> check = null
-        ) where T : struct
-          where U : struct
+        )
+            where T : struct
+            where U : struct
         {
             PrintErrorHeaderTu<T>(functionName, testFuncString);
             for (int i = 0; i < testTable.inArray1.Length - 1; i += 2)
@@ -3375,15 +3427,17 @@ namespace IntelHardwareIntrinsicTest
             string functionName = "",
             string testFuncString = "",
             CheckMethodFive<T, U> check = null
-        ) where T : struct
-          where U : struct
+        )
+            where T : struct
+            where U : struct
         {
             PrintErrorHeaderTu<T>(functionName, testFuncString);
             for (
                 int i = 0, j = 0;
                 i < testTable.inArray1.Length - 4 && j < testTable.outArray.Length - 2;
                 i += 4, j += 2
-            ) {
+            )
+            {
                 // (T, T, T, T, U, U, U, U)
                 var item = testTable.GetOcta44DataPoint(i);
                 Console.Write(
@@ -3403,9 +3457,10 @@ namespace IntelHardwareIntrinsicTest
             string functionName = "",
             string testFuncString = "",
             CheckMethodFive<T, U, V> check = null
-        ) where T : struct
-          where U : struct
-          where V : struct
+        )
+            where T : struct
+            where U : struct
+            where V : struct
         {
             PrintErrorHeaderTu<T>(functionName, testFuncString);
             for (int i = 0; i < testTable.inArray1.Length - 3; i += 4)
@@ -3422,9 +3477,10 @@ namespace IntelHardwareIntrinsicTest
             string functionName = "",
             string testFuncString = "",
             CheckMethodFive<T, U, V> check = null
-        ) where T : struct
-          where U : struct
-          where V : struct
+        )
+            where T : struct
+            where U : struct
+            where V : struct
         {
             byte ConvertToByte(V value)
             {
@@ -3451,9 +3507,10 @@ namespace IntelHardwareIntrinsicTest
             string functionName = "",
             string testFuncString = "",
             CheckMethodFiveDouble<T, U, V> check = null
-        ) where T : struct
-          where U : struct
-          where V : struct
+        )
+            where T : struct
+            where U : struct
+            where V : struct
         {
             byte ConvertToByte(V value)
             {
@@ -3480,15 +3537,17 @@ namespace IntelHardwareIntrinsicTest
             string functionName = "",
             string testFuncString = "",
             CheckMethodSix<T, U> check = null
-        ) where T : struct
-          where U : struct
+        )
+            where T : struct
+            where U : struct
         {
             PrintErrorHeaderTu<T>(functionName, testFuncString);
             for (
                 int i = 0, j = 0;
                 i < testTable.inArray1.Length - 4 && j < testTable.outArray.Length - 2;
                 i += 4, j += 2
-            ) {
+            )
+            {
                 // ((T, T, T, T), (T, T, T, T), (U, U, U, U, U, U, U, U), (U, U, U, U, U, U, U, U))
                 var item = testTable.GetCheckMethodSix4DataPoint(i);
                 Console.Write(
@@ -3503,15 +3562,17 @@ namespace IntelHardwareIntrinsicTest
             string functionName = "",
             string testFuncString = "",
             CheckMethodEight<T, U> check = null
-        ) where T : struct
-          where U : struct
+        )
+            where T : struct
+            where U : struct
         {
             PrintErrorHeaderTu<T>(functionName, testFuncString);
             for (
                 int i = 0;
                 i < testTable.inArray1.Length - 1;
                 i += TestTableScalarSse2<T, U>.s_ElementCount
-            ) {
+            )
+            {
                 var item = testTable.GetMemoryDataPoint(i);
                 Console.Write(
                     $"( x{PrintMemory(item.Item1)}, y{PrintMemory(item.Item2)}, z{PrintMemory(item.Item3)}, a{PrintMemory(item.Item4)})"
@@ -3525,15 +3586,17 @@ namespace IntelHardwareIntrinsicTest
             string functionName = "",
             string testFuncString = "",
             CheckMethodEightOne<T, U> check = null
-        ) where T : struct
-          where U : struct
+        )
+            where T : struct
+            where U : struct
         {
             PrintErrorHeaderTu<T>(functionName, testFuncString);
             for (
                 int i = 0;
                 i < testTable.inArray1.Length - 1;
                 i += TestTableScalarSse2<T, U>.s_ElementCount
-            ) {
+            )
+            {
                 var item = testTable.GetMemoryValueDataPoint(i);
                 Console.Write(
                     $"( x{PrintMemory(item.Item1)}, y{PrintMemory(item.Item2)}, z({item.Item3}), a({item.Item4}))"
@@ -3547,15 +3610,17 @@ namespace IntelHardwareIntrinsicTest
             string functionName = "",
             string testFuncString = "",
             CheckMethodEightOne<T, U> check = null
-        ) where T : struct
-          where U : struct
+        )
+            where T : struct
+            where U : struct
         {
             PrintErrorHeaderTu<T>(functionName, testFuncString);
             for (
                 int i = 0, j = 0;
                 i < testTable.inArray1.Length - 4 && j < testTable.outArray.Length - 2;
                 i += 4, j += 2
-            ) {
+            )
+            {
                 // ((T, T, T, T, T, T, T, T), (T, T, T, T, T, T, T, T), U, U)
                 var item = testTable.GetCheckMethodSix4DataPoint(i);
                 Console.Write(
@@ -3570,16 +3635,18 @@ namespace IntelHardwareIntrinsicTest
             string functionName = "",
             string testFuncString = "",
             CheckMethodEightImm<T, U, V> check = null
-        ) where T : struct
-          where U : struct
-          where V : struct
+        )
+            where T : struct
+            where U : struct
+            where V : struct
         {
             PrintErrorHeaderTu<T>(functionName, testFuncString);
             for (
                 int i = 0, j = 0;
                 i < testTable.inArray1.Length - 7 && j < testTable.inArray2.Length;
                 i += 8, j += 1
-            ) {
+            )
+            {
                 // ((T, T, T, T, T, T, T, T), T, V, (U, U, U, U, U, U, U, U), (U, U, U, U, U, U, U, U))
                 var item = testTable.GetOctaImmDataPoint(i);
                 Console.Write($"({item})");
@@ -3592,16 +3659,18 @@ namespace IntelHardwareIntrinsicTest
             string functionName = "",
             string testFuncString = "",
             CheckMethodEightInsert<T, U, V> check = null
-        ) where T : struct
-          where U : struct
-          where V : struct
+        )
+            where T : struct
+            where U : struct
+            where V : struct
         {
             PrintErrorHeaderTu<T>(functionName, testFuncString);
             for (
                 int i = 0, j = 0;
                 i < testTable.inArray1.Length - 7 && j < testTable.inArray2.Length;
                 i += 8, j += 1
-            ) {
+            )
+            {
                 // ((T, T, T, T, T, T, T, T), T, V, (U, U, U, U, U, U, U, U), (U, U, U, U, U, U, U, U))
                 var item = testTable.GetOctaImmDataPoint(i);
                 Console.Write($"({item})");
@@ -3614,15 +3683,17 @@ namespace IntelHardwareIntrinsicTest
             string functionName = "",
             string testFuncString = "",
             CheckMethodEightOfTEightOfU<T, U> check = null
-        ) where T : struct
-          where U : struct
+        )
+            where T : struct
+            where U : struct
         {
             PrintErrorHeaderTu<T>(functionName, testFuncString);
             for (
                 int i = 0, j = 0;
                 i < testTable.inArray1.Length - 4 && j < testTable.outArray.Length - 2;
                 i += 4, j += 2
-            ) {
+            )
+            {
                 // ((T, T, T, T, T, T, T, T), (T, T, T, T, T, T, T, T), (U, U, U, U, U, U, U, U), (U, U, U, U, U, U, U, U))
                 var item = testTable.GetOcta88DataPoint(i);
                 Console.Write(
@@ -3637,15 +3708,17 @@ namespace IntelHardwareIntrinsicTest
             string functionName = "",
             string testFuncString = "",
             CheckMethodSixteen<T, U> check = null
-        ) where T : struct
-          where U : struct
+        )
+            where T : struct
+            where U : struct
         {
             PrintErrorHeaderTu<T>(functionName, testFuncString);
             for (
                 int i = 0, j = 0;
                 i < testTable.inArray1.Length - 4 && j < testTable.outArray.Length - 2;
                 i += 4, j += 2
-            ) {
+            )
+            {
                 // ((T, T, T, T), (T, T, T, T), (U, U, U, U, U, U, U, U), (U, U, U, U, U, U, U, U))
                 var item = testTable.GetCheckMethodSixteen4DataPoint(i);
                 Console.Write(
@@ -3660,15 +3733,17 @@ namespace IntelHardwareIntrinsicTest
             string functionName = "",
             string testFuncString = "",
             CheckMethodSixteenOfAll<T, U> check = null
-        ) where T : struct
-          where U : struct
+        )
+            where T : struct
+            where U : struct
         {
             PrintErrorHeaderTu<T>(functionName, testFuncString);
             for (
                 int i = 0, j = 0;
                 i < testTable.inArray1.Length - 4 && j < testTable.outArray.Length - 2;
                 i += 4, j += 2
-            ) {
+            )
+            {
                 // ((T, T, T, T, T, T, T, T), (T, T, T, T, T, T, T, T), (T, T, T, T, T, T, T, T), (T, T, T, T, T, T, T, T),
                 // (U, U, U, U, U, U, U, U), (U, U, U, U, U, U, U, U), (U, U, U, U, U, U, U, U), (U, U, U, U, U, U, U, U))
                 var item = testTable.GetHexadecaDataPoint(i);

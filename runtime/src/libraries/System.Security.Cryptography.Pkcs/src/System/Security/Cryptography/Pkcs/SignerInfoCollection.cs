@@ -27,7 +27,8 @@ namespace System.Security.Cryptography.Pkcs
         internal SignerInfoCollection(
             SignerInfoAsn[] signedDataSignerInfos,
             SignedCms ownerDocument
-        ) {
+        )
+        {
             Debug.Assert(signedDataSignerInfos != null);
 
             _signerInfos = new SignerInfo[signedDataSignerInfos.Length];

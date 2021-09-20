@@ -48,7 +48,8 @@ namespace ILCompiler.DependencyAnalysisFramework
             int dependentIndex2,
             int dependencyIndex,
             string reason
-        ) {
+        )
+        {
             WriteEvent(4, id, dependentIndex1, dependentIndex2, dependencyIndex, reason);
         }
 
@@ -84,7 +85,8 @@ namespace ILCompiler.DependencyAnalysisFramework
             DependencyNodeCore<DependencyContextType> reasonNode,
             DependencyNodeCore<DependencyContextType> reasonNode2,
             string reason
-        ) {
+        )
+        {
             bool retVal = false;
 
             int nodeIndex;
@@ -149,7 +151,8 @@ namespace ILCompiler.DependencyAnalysisFramework
         void IDependencyAnalysisMarkStrategy<DependencyContextType>.VisitLogEdges(
             IEnumerable<DependencyNodeCore<DependencyContextType>> nodeList,
             IDependencyAnalyzerLogEdgeVisitor<DependencyContextType> logEdgeVisitor
-        ) {
+        )
+        {
             // This marker does not permit logging.
             return;
         }
@@ -157,14 +160,16 @@ namespace ILCompiler.DependencyAnalysisFramework
         void IDependencyAnalysisMarkStrategy<DependencyContextType>.VisitLogNodes(
             IEnumerable<DependencyNodeCore<DependencyContextType>> nodeList,
             IDependencyAnalyzerLogNodeVisitor<DependencyContextType> logNodeVisitor
-        ) {
+        )
+        {
             // This marker does not permit logging.
             return;
         }
 
         void IDependencyAnalysisMarkStrategy<DependencyContextType>.AttachContext(
             DependencyContextType context
-        ) {
+        )
+        {
             _context = context;
         }
     }

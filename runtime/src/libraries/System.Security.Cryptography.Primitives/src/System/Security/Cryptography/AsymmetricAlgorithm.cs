@@ -86,7 +86,8 @@ namespace System.Security.Cryptography
             ReadOnlySpan<byte> passwordBytes,
             ReadOnlySpan<byte> source,
             out int bytesRead
-        ) {
+        )
+        {
             throw new NotImplementedException(SR.NotSupported_SubclassOverride);
         }
 
@@ -94,7 +95,8 @@ namespace System.Security.Cryptography
             ReadOnlySpan<char> password,
             ReadOnlySpan<byte> source,
             out int bytesRead
-        ) {
+        )
+        {
             throw new NotImplementedException(SR.NotSupported_SubclassOverride);
         }
 
@@ -109,7 +111,8 @@ namespace System.Security.Cryptography
         public virtual byte[] ExportEncryptedPkcs8PrivateKey(
             ReadOnlySpan<byte> passwordBytes,
             PbeParameters pbeParameters
-        ) {
+        )
+        {
             return ExportArray(
                 passwordBytes,
                 pbeParameters,
@@ -125,7 +128,8 @@ namespace System.Security.Cryptography
         public virtual byte[] ExportEncryptedPkcs8PrivateKey(
             ReadOnlySpan<char> password,
             PbeParameters pbeParameters
-        ) {
+        )
+        {
             return ExportArray(
                 password,
                 pbeParameters,
@@ -154,7 +158,8 @@ namespace System.Security.Cryptography
             PbeParameters pbeParameters,
             Span<byte> destination,
             out int bytesWritten
-        ) {
+        )
+        {
             throw new NotImplementedException(SR.NotSupported_SubclassOverride);
         }
 
@@ -163,7 +168,8 @@ namespace System.Security.Cryptography
             PbeParameters pbeParameters,
             Span<byte> destination,
             out int bytesWritten
-        ) {
+        )
+        {
             throw new NotImplementedException(SR.NotSupported_SubclassOverride);
         }
 
@@ -245,7 +251,8 @@ namespace System.Security.Cryptography
             ReadOnlySpan<T> password,
             PbeParameters pbeParameters,
             TryExportPbe<T> exporter
-        ) {
+        )
+        {
             int bufSize = 4096;
 
             while (true)

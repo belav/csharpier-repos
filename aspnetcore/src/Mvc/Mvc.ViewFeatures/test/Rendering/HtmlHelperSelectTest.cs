@@ -454,7 +454,8 @@ namespace Microsoft.AspNetCore.Mvc.Rendering
             IEnumerable<SelectListItem> selectList,
             string expectedHtml,
             string ignoredHtml
-        ) {
+        )
+        {
             // Arrange
             var helper = DefaultTemplatesUtilities.GetHtmlHelper();
             var savedDisabled = selectList.Select(item => item.Disabled).ToList();
@@ -486,7 +487,8 @@ namespace Microsoft.AspNetCore.Mvc.Rendering
             IEnumerable<SelectListItem> selectList,
             string expectedHtml,
             string ignoredHtml
-        ) {
+        )
+        {
             // Arrange
             var helper = DefaultTemplatesUtilities.GetHtmlHelper();
             helper.ViewData["Property1"] = selectList;
@@ -511,7 +513,8 @@ namespace Microsoft.AspNetCore.Mvc.Rendering
             IEnumerable<SelectListItem> selectList,
             string expectedHtml,
             string ignoredHtml
-        ) {
+        )
+        {
             // Arrange
             var expected =
                 "The name of an HTML field cannot be null or empty. Instead use methods "
@@ -539,7 +542,8 @@ namespace Microsoft.AspNetCore.Mvc.Rendering
             IEnumerable<SelectListItem> selectList,
             string ignoredHtml,
             string expectedHtml
-        ) {
+        )
+        {
             // Arrange
             var model = new DefaultTemplatesUtilities.ObjectTemplateModel { Property1 = "2" };
             var helper = DefaultTemplatesUtilities.GetHtmlHelper(model);
@@ -834,7 +838,8 @@ namespace Microsoft.AspNetCore.Mvc.Rendering
             IEnumerable<SelectListItem> selectList,
             string expectedHtml,
             string ignoredHtml
-        ) {
+        )
+        {
             // Arrange
             var helper = DefaultTemplatesUtilities.GetHtmlHelper();
             var savedSelected = selectList.Select(item => item.Selected).ToList();
@@ -858,7 +863,8 @@ namespace Microsoft.AspNetCore.Mvc.Rendering
             IEnumerable<SelectListItem> selectList,
             string expectedHtml,
             string ignoredHtml
-        ) {
+        )
+        {
             // Arrange
             var helper = DefaultTemplatesUtilities.GetHtmlHelper();
             helper.ViewData["Property1"] = selectList;
@@ -883,7 +889,8 @@ namespace Microsoft.AspNetCore.Mvc.Rendering
             IEnumerable<SelectListItem> selectList,
             string ignoredHtml,
             string expectedHtml
-        ) {
+        )
+        {
             // Arrange
             var model = new DefaultTemplatesUtilities.ObjectTemplateModel { Property1 = "2" };
             var helper = DefaultTemplatesUtilities.GetHtmlHelper(model);
@@ -908,7 +915,8 @@ namespace Microsoft.AspNetCore.Mvc.Rendering
             IEnumerable<SelectListItem> selectList,
             string ignoredHtml,
             string expectedHtml
-        ) {
+        )
+        {
             // Arrange
             var model = new DefaultTemplatesUtilities.ObjectTemplateModel { Property1 = "2" };
             var helper = DefaultTemplatesUtilities.GetHtmlHelper(model);
@@ -999,7 +1007,8 @@ namespace Microsoft.AspNetCore.Mvc.Rendering
             string expectedHtml,
             string ignoredHtml1,
             string ignoredHtml2
-        ) {
+        )
+        {
             // Arrange
             var helper = DefaultTemplatesUtilities.GetHtmlHelper<ModelContainingList>(model: null);
             var savedDisabled = selectList.Select(item => item.Disabled).ToList();
@@ -1027,7 +1036,8 @@ namespace Microsoft.AspNetCore.Mvc.Rendering
             string ignoredHtml1,
             string expectedHtml,
             string ignoredHtml2
-        ) {
+        )
+        {
             // Arrange
             var model = new ModelContainingList { Property1 = { "2" } };
             var helper = DefaultTemplatesUtilities.GetHtmlHelper(model);
@@ -1048,7 +1058,8 @@ namespace Microsoft.AspNetCore.Mvc.Rendering
             string ignoredHtml1,
             string ignoredHtml2,
             string expectedHtml
-        ) {
+        )
+        {
             // Arrange
             var model = new ModelContainingList { Property1 = { "1", "3" } };
             var helper = DefaultTemplatesUtilities.GetHtmlHelper(model);
@@ -1314,7 +1325,8 @@ namespace Microsoft.AspNetCore.Mvc.Rendering
             string expectedHtml,
             string ignoredHtml1,
             string ignoredHtml2
-        ) {
+        )
+        {
             // Arrange
             var helper = DefaultTemplatesUtilities.GetHtmlHelper<ModelContainingList>(model: null);
             var savedSelected = selectList.Select(item => item.Selected).ToList();
@@ -1338,7 +1350,8 @@ namespace Microsoft.AspNetCore.Mvc.Rendering
             string ignoredHtml1,
             string expectedHtml,
             string ignoredHtml2
-        ) {
+        )
+        {
             // Arrange
             var model = new ModelContainingList { Property1 = { "2" } };
             var helper = DefaultTemplatesUtilities.GetHtmlHelper(model);
@@ -1390,7 +1403,8 @@ namespace Microsoft.AspNetCore.Mvc.Rendering
             string ignoredHtml1,
             string ignoredHtml2,
             string expectedHtml
-        ) {
+        )
+        {
             // Arrange
             var model = new ModelContainingList { Property1 = { "1", "3" } };
             var helper = DefaultTemplatesUtilities.GetHtmlHelper(model);
@@ -1414,7 +1428,8 @@ namespace Microsoft.AspNetCore.Mvc.Rendering
             IEnumerable<SelectListItem> selectList,
             string expectedHtml,
             string ignoredHtml
-        ) {
+        )
+        {
             // Arrange
             var helper = DefaultTemplatesUtilities.GetHtmlHelper<string>(model: null);
             helper.ViewData.TemplateInfo.HtmlFieldPrefix = "Property1";
@@ -1447,7 +1462,8 @@ namespace Microsoft.AspNetCore.Mvc.Rendering
             IEnumerable<SelectListItem> selectList,
             string ignoredHtml,
             string expectedHtml
-        ) {
+        )
+        {
             // Arrange
             var helper = DefaultTemplatesUtilities.GetHtmlHelper("2");
             helper.ViewData.TemplateInfo.HtmlFieldPrefix = "Property1";
@@ -1472,7 +1488,8 @@ namespace Microsoft.AspNetCore.Mvc.Rendering
             IEnumerable<SelectListItem> selectList,
             string expectedHtml,
             string ignoredHtml
-        ) {
+        )
+        {
             // Arrange
             var helper = DefaultTemplatesUtilities.GetHtmlHelper<string>(model: null);
             helper.ViewData.TemplateInfo.HtmlFieldPrefix = "Property1";
@@ -1497,7 +1514,8 @@ namespace Microsoft.AspNetCore.Mvc.Rendering
             IEnumerable<SelectListItem> selectList,
             string ignoredHtml,
             string expectedHtml
-        ) {
+        )
+        {
             // Arrange
             var helper = DefaultTemplatesUtilities.GetHtmlHelper("2");
             helper.ViewData.TemplateInfo.HtmlFieldPrefix = "Property1";
@@ -1523,7 +1541,8 @@ namespace Microsoft.AspNetCore.Mvc.Rendering
             string expectedHtml,
             string ignoredHtml1,
             string ignoredHtml2
-        ) {
+        )
+        {
             // Arrange
             var helper = DefaultTemplatesUtilities.GetHtmlHelper<List<string>>(model: null);
             helper.ViewData.TemplateInfo.HtmlFieldPrefix = "Property1";
@@ -1556,7 +1575,8 @@ namespace Microsoft.AspNetCore.Mvc.Rendering
             string ignoredHtml1,
             string expectedHtml,
             string ignoredHtml2
-        ) {
+        )
+        {
             // Arrange
             var model = new List<string> { "2" };
             var helper = DefaultTemplatesUtilities.GetHtmlHelper(model);
@@ -1582,7 +1602,8 @@ namespace Microsoft.AspNetCore.Mvc.Rendering
             string expectedHtml,
             string ignoredHtml1,
             string ignoredHtml2
-        ) {
+        )
+        {
             // Arrange
             var helper = DefaultTemplatesUtilities.GetHtmlHelper<List<string>>(model: null);
             helper.ViewData.TemplateInfo.HtmlFieldPrefix = "Property1";
@@ -1603,7 +1624,8 @@ namespace Microsoft.AspNetCore.Mvc.Rendering
             string ignoredHtml1,
             string expectedHtml,
             string ignoredHtml2
-        ) {
+        )
+        {
             // Arrange
             var model = new List<string> { "2" };
             var helper = DefaultTemplatesUtilities.GetHtmlHelper(model);
@@ -1934,7 +1956,8 @@ namespace Microsoft.AspNetCore.Mvc.Rendering
         public void GetEnumSelectList_ReturnsExpectedItems(
             Type type,
             IEnumerable<SelectListItem> expected
-        ) {
+        )
+        {
             // Arrange
             var metadataProvider = TestModelMetadataProvider.CreateDefaultProvider();
             var metadata = metadataProvider.GetMetadataForType(type);
@@ -1969,7 +1992,8 @@ namespace Microsoft.AspNetCore.Mvc.Rendering
         private static string GetExpectedSelectElementWithPrefix(
             SelectSources source,
             bool allowMultiple
-        ) {
+        )
+        {
             return $"<select id=\"HtmlEncode[[Prefix_Property1]]\"{GetMultiple(allowMultiple)} "
                 + "name=\"HtmlEncode[[Prefix.Property1]]\">"
                 + $"{GetOption(SelectSources.ModelStateEntry, source)}{Environment.NewLine}"
@@ -2002,7 +2026,8 @@ namespace Microsoft.AspNetCore.Mvc.Rendering
         private void VerifySelectList(
             IEnumerable<SelectListItem> expected,
             IEnumerable<SelectListItem> actual
-        ) {
+        )
+        {
             Assert.NotNull(actual);
             Assert.Equal(expected.Count(), actual.Count());
             for (var i = 0; i < actual.Count(); i++)

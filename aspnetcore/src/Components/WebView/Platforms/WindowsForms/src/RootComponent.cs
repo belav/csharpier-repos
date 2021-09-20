@@ -23,7 +23,8 @@ namespace Microsoft.AspNetCore.Components.WebView.WindowsForms
             string selector,
             Type componentType,
             IDictionary<string, object> parameters
-        ) {
+        )
+        {
             if (string.IsNullOrWhiteSpace(selector))
             {
                 throw new ArgumentException(

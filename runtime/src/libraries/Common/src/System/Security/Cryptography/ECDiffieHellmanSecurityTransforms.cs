@@ -27,7 +27,8 @@ namespace System.Security.Cryptography
             internal ECDiffieHellmanSecurityTransforms(
                 SafeSecKeyRefHandle publicKey,
                 SafeSecKeyRefHandle privateKey
-            ) {
+            )
+            {
                 KeySizeValue = _ecc.SetKeyAndGetSize(
                     SecKeyPair.PublicPrivatePair(publicKey, privateKey)
                 );
@@ -93,7 +94,8 @@ namespace System.Security.Cryptography
             public override void ImportSubjectPublicKeyInfo(
                 ReadOnlySpan<byte> source,
                 out int bytesRead
-            ) {
+            )
+            {
                 KeySizeValue = _ecc.ImportSubjectPublicKeyInfo(source, out bytesRead);
             }
 
@@ -101,7 +103,8 @@ namespace System.Security.Cryptography
                 ReadOnlySpan<byte> passwordBytes,
                 ReadOnlySpan<byte> source,
                 out int bytesRead
-            ) {
+            )
+            {
                 ThrowIfDisposed();
                 base.ImportEncryptedPkcs8PrivateKey(passwordBytes, source, out bytesRead);
             }
@@ -110,7 +113,8 @@ namespace System.Security.Cryptography
                 ReadOnlySpan<char> password,
                 ReadOnlySpan<byte> source,
                 out int bytesRead
-            ) {
+            )
+            {
                 ThrowIfDisposed();
                 base.ImportEncryptedPkcs8PrivateKey(password, source, out bytesRead);
             }
@@ -134,7 +138,8 @@ namespace System.Security.Cryptography
                 HashAlgorithmName hashAlgorithm,
                 byte[]? secretPrepend,
                 byte[]? secretAppend
-            ) {
+            )
+            {
                 if (otherPartyPublicKey == null)
                     throw new ArgumentNullException(nameof(otherPartyPublicKey));
                 if (string.IsNullOrEmpty(hashAlgorithm.Name))
@@ -160,7 +165,8 @@ namespace System.Security.Cryptography
                 byte[]? hmacKey,
                 byte[]? secretPrepend,
                 byte[]? secretAppend
-            ) {
+            )
+            {
                 if (otherPartyPublicKey == null)
                     throw new ArgumentNullException(nameof(otherPartyPublicKey));
                 if (string.IsNullOrEmpty(hashAlgorithm.Name))
@@ -185,7 +191,8 @@ namespace System.Security.Cryptography
                 ECDiffieHellmanPublicKey otherPartyPublicKey,
                 byte[] prfLabel,
                 byte[] prfSeed
-            ) {
+            )
+            {
                 if (otherPartyPublicKey == null)
                     throw new ArgumentNullException(nameof(otherPartyPublicKey));
                 if (prfLabel == null)
@@ -206,13 +213,15 @@ namespace System.Security.Cryptography
             private byte[]? DeriveSecretAgreement(
                 ECDiffieHellmanPublicKey otherPartyPublicKey,
                 IncrementalHash? hasher
-            ) {
+            )
+            {
                 if (
                     !(
                         otherPartyPublicKey
                         is ECDiffieHellmanSecurityTransformsPublicKey secTransPubKey
                     )
-                ) {
+                )
+                {
                     secTransPubKey = new ECDiffieHellmanSecurityTransformsPublicKey(
                         otherPartyPublicKey.ExportParameters()
                     );

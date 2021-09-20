@@ -47,14 +47,15 @@ namespace System.Diagnostics.Tracing
             TraceLoggingDataType type,
             EventFieldTags tags,
             bool variableCount
-        ) : this(
-            name,
-            type,
-            tags,
-            variableCount ? Statics.InTypeVariableCountFlag : (byte)0,
-            0,
-            null
-        ) { }
+        )
+            : this(
+                name,
+                type,
+                tags,
+                variableCount ? Statics.InTypeVariableCountFlag : (byte)0,
+                0,
+                null
+            ) { }
 
         /// <summary>
         /// Fixed-length array.
@@ -74,14 +75,15 @@ namespace System.Diagnostics.Tracing
             TraceLoggingDataType type,
             EventFieldTags tags,
             byte[]? custom
-        ) : this(
-            name,
-            type,
-            tags,
-            Statics.InTypeCustomCountFlag,
-            checked((ushort)(custom == null ? 0 : custom.Length)),
-            custom
-        ) { }
+        )
+            : this(
+                name,
+                type,
+                tags,
+                Statics.InTypeCustomCountFlag,
+                checked((ushort)(custom == null ? 0 : custom.Length)),
+                custom
+            ) { }
 
         private FieldMetadata(
             string name,
@@ -90,7 +92,8 @@ namespace System.Diagnostics.Tracing
             byte countFlags,
             ushort fixedCount = 0,
             byte[]? custom = null
-        ) {
+        )
+        {
             if (name == null)
             {
                 throw new ArgumentNullException(
@@ -124,7 +127,8 @@ namespace System.Diagnostics.Tracing
                 if (
                     coreType == (int)TraceLoggingDataType.Utf16String
                     || coreType == (int)TraceLoggingDataType.MbcsString
-                ) {
+                )
+                {
                     throw new NotSupportedException(
                         SR.EventSource_NotSupportedArrayOfNullTerminatedString
                     );
@@ -207,7 +211,8 @@ namespace System.Diagnostics.Tracing
                 if (
                     Statics.InTypeCustomCountFlag == (this.inType & Statics.InTypeCountMask)
                     && this.fixedCount != 0
-                ) {
+                )
+                {
                     if (metadata != null)
                     {
                         Debug.Assert(custom != null);

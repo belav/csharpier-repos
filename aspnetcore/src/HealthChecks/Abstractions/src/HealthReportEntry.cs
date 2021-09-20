@@ -49,7 +49,8 @@ namespace Microsoft.Extensions.Diagnostics.HealthChecks
             Exception? exception,
             IReadOnlyDictionary<string, object>? data,
             IEnumerable<string>? tags = null
-        ) {
+        )
+        {
             Status = status;
             Description = description;
             Duration = duration;

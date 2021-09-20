@@ -128,7 +128,8 @@ namespace System.DirectoryServices.ActiveDirectory.Tests
         [InlineData(ActiveDirectoryTransportType.Smtp + 1)]
         public void FindByTransportType_InvalidTransport_ThrowsInvalidEnumArgumentException(
             ActiveDirectoryTransportType transport
-        ) {
+        )
+        {
             var context = new DirectoryContext(DirectoryContextType.ConfigurationSet, "Name");
             AssertExtensions.Throws<InvalidEnumArgumentException>(
                 "value",

@@ -20,7 +20,8 @@ namespace Microsoft.CodeAnalysis.CSharp.ExtractMethod
                 in SyntaxToken previousToken,
                 in SyntaxToken currentToken,
                 in NextGetAdjustNewLinesOperation nextOperation
-            ) {
+            )
+            {
                 // for extract method case, for a hybrid case, don't force rule, but preserve user style
                 var operation = base.GetAdjustNewLinesOperation(
                     in previousToken,
@@ -74,12 +75,14 @@ namespace Microsoft.CodeAnalysis.CSharp.ExtractMethod
                 List<AnchorIndentationOperation> list,
                 SyntaxNode node,
                 in NextAnchorIndentationOperationAction nextOperation
-            ) {
+            )
+            {
                 if (
                     node.IsKind(SyntaxKind.SimpleLambdaExpression)
                     || node.IsKind(SyntaxKind.ParenthesizedLambdaExpression)
                     || node.IsKind(SyntaxKind.AnonymousMethodExpression)
-                ) {
+                )
+                {
                     return;
                 }
 

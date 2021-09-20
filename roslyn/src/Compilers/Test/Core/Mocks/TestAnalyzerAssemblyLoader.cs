@@ -22,7 +22,8 @@ namespace Roslyn.Test.Utilities
         public TestAnalyzerAssemblyLoader(
             Action<string>? addDependencyLocation = null,
             Func<string, Assembly>? loadFromPath = null
-        ) {
+        )
+        {
             _addDependencyLocation = addDependencyLocation;
             _loadFromPath = loadFromPath;
         }

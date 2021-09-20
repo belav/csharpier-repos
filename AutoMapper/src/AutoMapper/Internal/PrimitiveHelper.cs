@@ -13,7 +13,8 @@ namespace AutoMapper.Internal
         public static IEnumerable<T> Concat<T>(
             this IReadOnlyCollection<T> collection,
             IReadOnlyCollection<T> otherCollection
-        ) {
+        )
+        {
             otherCollection ??= Array.Empty<T>();
             if (collection.Count == 0)
             {
@@ -26,7 +27,8 @@ namespace AutoMapper.Internal
         public static TValue GetOrDefault<TKey, TValue>(
             this IDictionary<TKey, TValue> dictionary,
             TKey key
-        ) {
+        )
+        {
             dictionary.TryGetValue(key, out TValue value);
             return value;
         }

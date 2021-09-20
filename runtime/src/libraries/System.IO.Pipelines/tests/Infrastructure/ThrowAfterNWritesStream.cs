@@ -25,7 +25,8 @@ namespace System.IO.Pipelines.Tests
             int offset,
             int count,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             if (_writes >= _maxWrites)
             {
                 throw new InvalidOperationException();
@@ -38,7 +39,8 @@ namespace System.IO.Pipelines.Tests
         public override ValueTask WriteAsync(
             ReadOnlyMemory<byte> buffer,
             CancellationToken cancellationToken = default
-        ) {
+        )
+        {
             if (_writes >= _maxWrites)
             {
                 throw new InvalidOperationException();

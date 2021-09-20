@@ -220,7 +220,8 @@ namespace Microsoft.AspNetCore.Mvc.Infrastructure
         {
             public IAsyncEnumerator<string> GetAsyncEnumerator(
                 CancellationToken cancellationToken = default
-            ) {
+            )
+            {
                 return TestEnumerable().GetAsyncEnumerator(cancellationToken);
             }
 

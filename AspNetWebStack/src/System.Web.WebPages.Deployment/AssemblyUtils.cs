@@ -75,13 +75,15 @@ namespace System.Web.WebPages.Deployment
         internal static bool IsVersionAvailable(
             IEnumerable<AssemblyName> loadedAssemblies,
             Version version
-        ) {
+        )
+        {
             return GetWebPagesAssemblies(loadedAssemblies).Any(c => c.Version == version);
         }
 
         private static IEnumerable<AssemblyName> GetWebPagesAssemblies(
             IEnumerable<AssemblyName> loadedAssemblies
-        ) {
+        )
+        {
             return (
                 from otherName in loadedAssemblies
                 where NamesMatch(ThisAssemblyName, otherName, matchVersion: false)
@@ -98,7 +100,8 @@ namespace System.Web.WebPages.Deployment
             string binDirectory,
             IFileSystem fileSystem,
             Func<string, AssemblyName> getAssemblyNameThunk = null
-        ) {
+        )
+        {
             // If a version of the assembly is present both in the bin and the GAC, the GAC would win.
             // To work around this, we'll look for a physical file on disk with the same name as the current assembly and load it to determine the version.
             // Determine if the Deployment assembly is present in the bin
@@ -177,7 +180,8 @@ namespace System.Web.WebPages.Deployment
 
         public static IDictionary<string, Version> GetAssembliesMatchingOtherVersions(
             IDictionary<string, IEnumerable<string>> references
-        ) {
+        )
+        {
             var webPagesAssemblies = AssemblyUtils.GetAssembliesForVersion(
                 AssemblyUtils.ThisAssemblyName.Version
             );
@@ -197,7 +201,8 @@ namespace System.Web.WebPages.Deployment
         private static Version GetMatchingVersion(
             IEnumerable<AssemblyName> webPagesAssemblies,
             IEnumerable<string> references
-        ) {
+        )
+        {
             // Return assemblies that match in name but not in version.
             var matchingVersions =
                 from webPagesAssembly in webPagesAssemblies

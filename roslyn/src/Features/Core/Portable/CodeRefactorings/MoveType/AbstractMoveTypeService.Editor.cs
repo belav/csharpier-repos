@@ -30,7 +30,8 @@ namespace Microsoft.CodeAnalysis.CodeRefactorings.MoveType
                 State state,
                 string fileName,
                 CancellationToken cancellationToken
-            ) {
+            )
+            {
                 State = state;
                 Service = service;
                 FileName = fileName;

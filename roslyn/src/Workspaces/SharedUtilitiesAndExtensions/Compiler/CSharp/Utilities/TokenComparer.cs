@@ -29,7 +29,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Utilities
                     .IsKind(SyntaxKind.UsingKeyword, SyntaxKind.StaticKeyword)
                 && y.GetPreviousToken(includeSkipped: true)
                     .IsKind(SyntaxKind.UsingKeyword, SyntaxKind.StaticKeyword)
-            ) {
+            )
+            {
                 var token1IsSystem = x.ValueText == nameof(System);
                 var token2IsSystem = y.ValueText == nameof(System);
 

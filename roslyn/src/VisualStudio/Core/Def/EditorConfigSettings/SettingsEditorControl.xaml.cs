@@ -41,7 +41,8 @@ namespace Microsoft.VisualStudio.LanguageServices.EditorConfigSettings
             IThreadingContext threadingContext,
             IVsEditorAdaptersFactoryService editorAdaptersFactoryService,
             IVsTextLines textLines
-        ) {
+        )
+        {
             InitializeComponent();
             DataContext = this;
             _workspace = workspace;

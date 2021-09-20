@@ -219,7 +219,8 @@ namespace Microsoft.AspNetCore.Mvc.TagHelpers
                 string.IsNullOrEmpty(For.Name)
                 && string.IsNullOrEmpty(ViewContext.ViewData.TemplateInfo.HtmlFieldPrefix)
                 && !string.IsNullOrEmpty(Name)
-            ) {
+            )
+            {
                 htmlAttributes = new Dictionary<string, object>(StringComparer.OrdinalIgnoreCase)
                 {
                     { "name", Name },
@@ -301,7 +302,8 @@ namespace Microsoft.AspNetCore.Mvc.TagHelpers
             ModelExplorer modelExplorer,
             TagHelperOutput output,
             IDictionary<string, object> htmlAttributes
-        ) {
+        )
+        {
             if (modelExplorer.ModelType == typeof(string))
             {
                 if (modelExplorer.Model != null)
@@ -351,7 +353,8 @@ namespace Microsoft.AspNetCore.Mvc.TagHelpers
                     if (
                         !hiddenForCheckboxTag.Attributes.ContainsKey("name")
                         && !string.IsNullOrEmpty(Name)
-                    ) {
+                    )
+                    {
                         // The checkbox and hidden elements should have the same name attribute value. Attributes will
                         // match if both are present because both have a generated value. Reach here in the special case
                         // where user provided a non-empty fallback name.
@@ -362,7 +365,8 @@ namespace Microsoft.AspNetCore.Mvc.TagHelpers
                         ViewContext.CheckBoxHiddenInputRenderMode
                             == CheckBoxHiddenInputRenderMode.EndOfForm
                         && ViewContext.FormContext.CanRenderAtEndOfForm
-                    ) {
+                    )
+                    {
                         ViewContext.FormContext.EndOfFormContent.Add(hiddenForCheckboxTag);
                     }
                     else
@@ -384,7 +388,8 @@ namespace Microsoft.AspNetCore.Mvc.TagHelpers
         private TagBuilder GenerateRadio(
             ModelExplorer modelExplorer,
             IDictionary<string, object> htmlAttributes
-        ) {
+        )
+        {
             // Note empty string is allowed.
             if (Value == null)
             {
@@ -413,7 +418,8 @@ namespace Microsoft.AspNetCore.Mvc.TagHelpers
             string inputTypeHint,
             string inputType,
             IDictionary<string, object> htmlAttributes
-        ) {
+        )
+        {
             var format = Format;
             if (string.IsNullOrEmpty(format))
             {
@@ -421,7 +427,8 @@ namespace Microsoft.AspNetCore.Mvc.TagHelpers
                     !modelExplorer.Metadata.HasNonDefaultEditFormat
                     && string.Equals("week", inputType, StringComparison.OrdinalIgnoreCase)
                     && (modelExplorer.Model is DateTime || modelExplorer.Model is DateTimeOffset)
-                ) {
+                )
+                {
                     modelExplorer = modelExplorer.GetExplorerForModel(
                         FormatWeekHelper.GetFormattedWeek(modelExplorer)
                     );
@@ -445,7 +452,8 @@ namespace Microsoft.AspNetCore.Mvc.TagHelpers
                     TemplateRenderer.IEnumerableOfIFormFileName,
                     StringComparison.OrdinalIgnoreCase
                 )
-            ) {
+            )
+            {
                 htmlAttributes["multiple"] = "multiple";
             }
 
@@ -464,7 +472,8 @@ namespace Microsoft.AspNetCore.Mvc.TagHelpers
         private TagBuilder GenerateHidden(
             ModelExplorer modelExplorer,
             IDictionary<string, object> htmlAttributes
-        ) {
+        )
+        {
             var value = For.Model;
             if (value is byte[] byteArrayValue)
             {
@@ -496,7 +505,8 @@ namespace Microsoft.AspNetCore.Mvc.TagHelpers
             ModelExplorer modelExplorer,
             string inputTypeHint,
             string inputType
-        ) {
+        )
+        {
             string format;
             if (string.Equals("month", inputType, StringComparison.OrdinalIgnoreCase))
             {
@@ -507,7 +517,8 @@ namespace Microsoft.AspNetCore.Mvc.TagHelpers
                 string.Equals("decimal", inputTypeHint, StringComparison.OrdinalIgnoreCase)
                 && string.Equals("text", inputType, StringComparison.Ordinal)
                 && string.IsNullOrEmpty(modelExplorer.Metadata.EditFormatString)
-            ) {
+            )
+            {
                 // Decimal data is edited using an <input type="text"/> element, with a reasonable format.
                 // EditFormatString has precedence over this fall-back format.
                 format = "{0:0.00}";
@@ -519,7 +530,8 @@ namespace Microsoft.AspNetCore.Mvc.TagHelpers
                     typeof(DateTime) == modelExplorer.Metadata.UnderlyingOrModelType
                     || typeof(DateTimeOffset) == modelExplorer.Metadata.UnderlyingOrModelType
                 )
-            ) {
+            )
+            {
                 // Rfc3339 mode _may_ override EditFormatString in a limited number of cases. Happens only when
                 // EditFormatString has a default format i.e. came from a [DataType] attribute.
                 if (
@@ -529,7 +541,8 @@ namespace Microsoft.AspNetCore.Mvc.TagHelpers
                         inputTypeHint,
                         StringComparison.OrdinalIgnoreCase
                     )
-                ) {
+                )
+                {
                     // Auto-select a format that round-trips Offset and sub-Second values in a DateTimeOffset. Not
                     // done if user chose the "text" type in .cshtml file or with data annotations i.e. when
                     // inputTypeHint==null or "text".
@@ -577,7 +590,8 @@ namespace Microsoft.AspNetCore.Mvc.TagHelpers
 
             foreach (
                 var typeName in TemplateRenderer.GetTypeNames(modelExplorer.Metadata, fieldType)
-            ) {
+            )
+            {
                 yield return typeName;
             }
         }

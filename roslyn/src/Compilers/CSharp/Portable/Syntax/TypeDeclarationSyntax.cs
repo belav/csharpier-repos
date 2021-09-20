@@ -105,7 +105,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             SyntaxList<MemberDeclarationSyntax> members,
             SyntaxToken closeBraceToken,
             SyntaxToken semicolonToken
-        ) {
+        )
+        {
             switch (kind)
             {
                 case SyntaxKind.ClassDeclaration:

@@ -187,7 +187,8 @@ namespace Microsoft.Extensions.DependencyInjection.ServiceLookup
         protected override object VisitDisposeCache(
             ServiceCallSite transientCallSite,
             ILEmitResolverBuilderContext argument
-        ) {
+        )
+        {
             if (transientCallSite.CaptureDisposable)
             {
                 BeginCaptureDisposable(argument);
@@ -204,7 +205,8 @@ namespace Microsoft.Extensions.DependencyInjection.ServiceLookup
         protected override object VisitConstructor(
             ConstructorCallSite constructorCallSite,
             ILEmitResolverBuilderContext argument
-        ) {
+        )
+        {
             // new T([create arguments])
             foreach (ServiceCallSite parameterCallSite in constructorCallSite.ParameterCallSites)
             {
@@ -222,7 +224,8 @@ namespace Microsoft.Extensions.DependencyInjection.ServiceLookup
         protected override object VisitRootCache(
             ServiceCallSite callSite,
             ILEmitResolverBuilderContext argument
-        ) {
+        )
+        {
             AddConstant(argument, _runtimeResolver.Resolve(callSite, _rootScope));
             return null;
         }
@@ -230,7 +233,8 @@ namespace Microsoft.Extensions.DependencyInjection.ServiceLookup
         protected override object VisitScopeCache(
             ServiceCallSite scopedCallSite,
             ILEmitResolverBuilderContext argument
-        ) {
+        )
+        {
             GeneratedMethod generatedMethod = BuildType(scopedCallSite);
 
             // Type builder doesn't support invoking dynamic methods, replace them with delegate.Invoke calls
@@ -255,7 +259,8 @@ namespace Microsoft.Extensions.DependencyInjection.ServiceLookup
         protected override object VisitConstant(
             ConstantCallSite constantCallSite,
             ILEmitResolverBuilderContext argument
-        ) {
+        )
+        {
             AddConstant(argument, constantCallSite.DefaultValue);
             return null;
         }
@@ -263,7 +268,8 @@ namespace Microsoft.Extensions.DependencyInjection.ServiceLookup
         protected override object VisitServiceProvider(
             ServiceProviderCallSite serviceProviderCallSite,
             ILEmitResolverBuilderContext argument
-        ) {
+        )
+        {
             // [return] ProviderScope
             argument.Generator.Emit(OpCodes.Ldarg_1);
             return null;
@@ -272,7 +278,8 @@ namespace Microsoft.Extensions.DependencyInjection.ServiceLookup
         protected override object VisitServiceScopeFactory(
             ServiceScopeFactoryCallSite serviceScopeFactoryCallSite,
             ILEmitResolverBuilderContext argument
-        ) {
+        )
+        {
             // this.ScopeFactory
             argument.Generator.Emit(OpCodes.Ldarg_0);
             argument.Generator.Emit(
@@ -287,7 +294,8 @@ namespace Microsoft.Extensions.DependencyInjection.ServiceLookup
         protected override object VisitIEnumerable(
             IEnumerableCallSite enumerableCallSite,
             ILEmitResolverBuilderContext argument
-        ) {
+        )
+        {
             if (enumerableCallSite.ServiceCallSites.Length == 0)
             {
                 argument.Generator.Emit(
@@ -328,7 +336,8 @@ namespace Microsoft.Extensions.DependencyInjection.ServiceLookup
         protected override object VisitFactory(
             FactoryCallSite factoryCallSite,
             ILEmitResolverBuilderContext argument
-        ) {
+        )
+        {
             if (argument.Factories == null)
             {
                 argument.Factories = new List<Func<IServiceProvider, object>>();
@@ -379,7 +388,8 @@ namespace Microsoft.Extensions.DependencyInjection.ServiceLookup
         private ILEmitResolverBuilderRuntimeContext GenerateMethodBody(
             ServiceCallSite callSite,
             ILGenerator generator
-        ) {
+        )
+        {
             var context = new ILEmitResolverBuilderContext()
             {
                 Generator = generator,

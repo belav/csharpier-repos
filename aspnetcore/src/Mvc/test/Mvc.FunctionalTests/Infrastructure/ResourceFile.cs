@@ -33,7 +33,8 @@ namespace Microsoft.AspNetCore.Mvc
             string expectedContent,
             string responseContent,
             string token = null
-        ) {
+        )
+        {
             if (GenerateBaselines)
             {
                 // Reverse usual substitution and insert a format item into the new file content.
@@ -84,7 +85,8 @@ namespace Microsoft.AspNetCore.Mvc
             Assembly assembly,
             string resourceName,
             bool sourceFile
-        ) {
+        )
+        {
             var fullName = $"{assembly.GetName().Name}.{resourceName.Replace('/', '.')}";
             if (!Exists(assembly, fullName))
             {
@@ -153,7 +155,8 @@ namespace Microsoft.AspNetCore.Mvc
             Assembly assembly,
             string resourceName,
             bool sourceFile
-        ) {
+        )
+        {
             using (var stream = GetResourceStream(assembly, resourceName, sourceFile))
             {
                 if (stream == null)
@@ -230,7 +233,8 @@ namespace Microsoft.AspNetCore.Mvc
             string resourceName,
             string previousContent,
             string content
-        ) {
+        )
+        {
             // Normalize line endings to '\r\n' for comparison. This removes Environment.NewLine from the equation. Not
             // worth updating files just because we generate baselines on a different system.
             var normalizedPreviousContent = previousContent?.Replace("\r", "")
@@ -243,7 +247,8 @@ namespace Microsoft.AspNetCore.Mvc
                     normalizedContent,
                     StringComparison.Ordinal
                 )
-            ) {
+            )
+            {
                 // The build system compiles every file under the resources folder as a resource available at runtime
                 // with the same name as the file name. Need to update this file on disc.
 

@@ -16,7 +16,8 @@ namespace Microsoft.CodeAnalysis.Editor
         public NavigationBarSelectedTypeAndMember(
             NavigationBarItem typeItem,
             NavigationBarItem memberItem
-        ) {
+        )
+        {
             TypeItem = typeItem;
             MemberItem = memberItem;
         }

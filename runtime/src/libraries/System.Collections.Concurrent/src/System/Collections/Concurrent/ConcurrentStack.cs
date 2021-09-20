@@ -665,7 +665,8 @@ namespace System.Collections.Concurrent
             T[] collection,
             int startIndex,
             int nodesCount
-        ) {
+        )
+        {
             Node? current = head;
             for (int i = startIndex; i < startIndex + nodesCount; i++)
             {

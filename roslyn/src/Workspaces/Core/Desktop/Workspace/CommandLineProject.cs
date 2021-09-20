@@ -28,7 +28,8 @@ namespace Microsoft.CodeAnalysis
             IEnumerable<string> commandLineArgs,
             string projectDirectory,
             Workspace workspace = null
-        ) {
+        )
+        {
             // TODO (tomat): the method may throw all sorts of exceptions.
             var tmpWorkspace = workspace ?? new AdhocWorkspace();
             var languageServices = tmpWorkspace.Services.GetLanguageServices(language);
@@ -246,7 +247,8 @@ namespace Microsoft.CodeAnalysis
             string commandLine,
             string baseDirectory,
             Workspace workspace = null
-        ) {
+        )
+        {
             var args = CommandLineParser.SplitCommandLineIntoArguments(
                 commandLine,
                 removeHashComments: true

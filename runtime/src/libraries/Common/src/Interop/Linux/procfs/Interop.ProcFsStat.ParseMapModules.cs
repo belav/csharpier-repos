@@ -45,7 +45,8 @@ internal static partial class Interop
                         line,
                         out (long StartAddress, int Size, bool HasReadAndExecFlags, string Path) parsedLine
                     )
-                ) {
+                )
+                {
                     // Invalid entry for the purposes of ProcessModule parsing,
                     // discard flushing the current module if it exists.
                     CommitCurrentModule();
@@ -57,7 +58,8 @@ internal static partial class Interop
                     module is not null
                     && module.FileName == parsedLine.Path
                     && (long)module.BaseAddress + module.ModuleMemorySize == parsedLine.StartAddress
-                ) {
+                )
+                {
                     // Is continuation, update the current module.
                     module.ModuleMemorySize += parsedLine.Size;
                     moduleHasReadAndExecFlags |= parsedLine.HasReadAndExecFlags;
@@ -103,7 +105,8 @@ internal static partial class Interop
         private static bool TryParseMapsEntry(
             string line,
             out (long StartAddress, int Size, bool HasReadAndExecFlags, string Path) parsedLine
-        ) {
+        )
+        {
             // Use a StringParser to avoid string.Split costs
             var parser = new StringParser(line, separator: ' ', skipEmpty: true);
 
@@ -154,7 +157,8 @@ internal static partial class Interop
                             CultureInfo.InvariantCulture,
                             out long endingAddress
                         )
-                    ) {
+                    )
+                    {
                         return (startingAddress, (int)(endingAddress - startingAddress));
                     }
                 }

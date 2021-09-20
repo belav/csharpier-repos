@@ -107,7 +107,8 @@ namespace System.Linq.Parallel
         internal virtual IEnumerator<TOutput> GetEnumerator(
             ParallelMergeOptions? mergeOptions,
             bool suppressOrderPreservation
-        ) {
+        )
+        {
             // Return a dummy enumerator that will call back GetOpenedEnumerator() on 'this' QueryOperator
             // the first time the user calls MoveNext(). We do this to prevent executing the query if user
             // never calls MoveNext().
@@ -128,13 +129,15 @@ namespace System.Linq.Parallel
             bool suppressOrder,
             bool forEffect,
             QuerySettings querySettings
-        ) {
+        )
+        {
             Debug.Assert(querySettings.ExecutionMode != null);
             // If the top-level enumerator forces a premature merge, run the query sequentially.
             if (
                 querySettings.ExecutionMode.Value == ParallelExecutionMode.Default
                 && LimitsParallelism
-            ) {
+            )
+            {
                 IEnumerable<TOutput> opSequential = AsSequentialQuery(
                     querySettings.CancellationState.ExternalCancellationToken
                 );
@@ -221,7 +224,8 @@ namespace System.Linq.Parallel
                 if (
                     querySettings.ExecutionMode.Value == ParallelExecutionMode.Default
                     && LimitsParallelism
-                ) {
+                )
+                {
                     IEnumerable<TOutput> opSequential = AsSequentialQuery(
                         querySettings.CancellationState.ExternalCancellationToken
                     );
@@ -321,7 +325,8 @@ namespace System.Linq.Parallel
             bool outputOrdered,
             bool useStriping,
             QuerySettings settings
-        ) {
+        )
+        {
             TaskScheduler? taskScheduler = settings.TaskScheduler;
             Debug.Assert(taskScheduler != null);
 

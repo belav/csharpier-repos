@@ -40,7 +40,8 @@ namespace System.IO.IsolatedStorage
         [Theory, MemberData(nameof(ValidStores))]
         public async Task DisposeAsync_DerivedIsolatedStorageFileStream_DisposeInvoked(
             PresetScopes scope
-        ) {
+        )
+        {
             TestHelper.WipeStores();
             using (IsolatedStorageFile isf = GetPresetScope(scope))
             using (
@@ -48,7 +49,8 @@ namespace System.IO.IsolatedStorage
                     "DisposeAsyncFile",
                     FileMode.Create
                 )
-            ) {
+            )
+            {
                 Assert.False(isfs.DisposeInvoked);
                 await isfs.DisposeAsync();
                 Assert.True(isfs.DisposeInvoked);

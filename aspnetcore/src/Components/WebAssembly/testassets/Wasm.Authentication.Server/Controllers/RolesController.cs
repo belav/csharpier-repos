@@ -20,7 +20,8 @@ namespace Wasm.Authentication.Server.Controllers
             UserManager<ApplicationUser> userManager,
             RoleManager<IdentityRole> roleManager,
             IOptions<IdentityOptions> options
-        ) {
+        )
+        {
             _userManager = userManager;
             _roleManager = roleManager;
             _options = options;

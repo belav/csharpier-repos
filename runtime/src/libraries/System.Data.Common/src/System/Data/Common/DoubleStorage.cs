@@ -268,7 +268,8 @@ namespace System.Data.Common
             object store,
             BitArray nullbits,
             int storeIndex
-        ) {
+        )
+        {
             double[] typedStore = (double[])store;
             typedStore[storeIndex] = _values[record];
             nullbits.Set(storeIndex, IsNull(record));

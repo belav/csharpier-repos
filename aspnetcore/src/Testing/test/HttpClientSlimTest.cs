@@ -43,7 +43,8 @@ namespace Microsoft.AspNetCore.Testing
                     handler: context =>
                         context.Request.InputStream.CopyToAsync(context.Response.OutputStream)
                 )
-            ) {
+            )
+            {
                 Assert.Equal(
                     "test post",
                     await HttpClientSlim.PostAsync(address, new StringContent("test post"))
@@ -80,7 +81,8 @@ namespace Microsoft.AspNetCore.Testing
             out string address,
             int statusCode = 200,
             Func<HttpListenerContext, Task> handler = null
-        ) {
+        )
+        {
             var listener = new HttpListener();
             var random = new Random();
             address = null;

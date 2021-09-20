@@ -198,7 +198,8 @@ namespace System.Net.Http
             Stream stream,
             TransportContext? context,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             Debug.Assert(stream != null);
             try
             {
@@ -251,7 +252,8 @@ namespace System.Net.Http
             Stream stream,
             TransportContext? context,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             Debug.Assert(stream != null);
             try
             {
@@ -316,7 +318,8 @@ namespace System.Net.Http
         private async ValueTask<Stream> CreateContentReadStreamAsyncCore(
             bool async,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             try
             {
                 var streams = new Stream[2 + (_nestedContent.Count * 2)];
@@ -420,7 +423,8 @@ namespace System.Net.Http
             Stream stream,
             string input,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             byte[] buffer = HttpRuleParser.DefaultHttpEncoding.GetBytes(input);
             return stream.WriteAsync(new ReadOnlyMemory<byte>(buffer), cancellationToken);
         }
@@ -609,7 +613,8 @@ namespace System.Net.Http
                 int offset,
                 int count,
                 CancellationToken cancellationToken
-            ) {
+            )
+            {
                 ValidateBufferArguments(buffer, offset, count);
                 return ReadAsyncPrivate(new Memory<byte>(buffer, offset, count), cancellationToken)
                     .AsTask();
@@ -639,7 +644,8 @@ namespace System.Net.Http
             public async ValueTask<int> ReadAsyncPrivate(
                 Memory<byte> buffer,
                 CancellationToken cancellationToken
-            ) {
+            )
+            {
                 if (buffer.Length == 0)
                 {
                     return 0;
@@ -753,13 +759,15 @@ namespace System.Net.Http
                 int offset,
                 int count,
                 CancellationToken cancellationToken
-            ) {
+            )
+            {
                 throw new NotSupportedException();
             }
             public override ValueTask WriteAsync(
                 ReadOnlyMemory<byte> buffer,
                 CancellationToken cancellationToken = default
-            ) {
+            )
+            {
                 throw new NotSupportedException();
             }
         }

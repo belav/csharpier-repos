@@ -39,7 +39,8 @@ namespace Microsoft.Extensions.DependencyInjection
         public static IServiceCollection AddHeaderPropagation(
             this IServiceCollection services,
             Action<HeaderPropagationOptions> configureOptions
-        ) {
+        )
+        {
             if (services == null)
             {
                 throw new ArgumentNullException(nameof(services));

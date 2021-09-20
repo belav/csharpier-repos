@@ -193,14 +193,16 @@ namespace System.Net
         void ISerializable.GetObjectData(
             SerializationInfo serializationInfo,
             StreamingContext streamingContext
-        ) {
+        )
+        {
             throw new PlatformNotSupportedException();
         }
 
         protected override void GetObjectData(
             SerializationInfo serializationInfo,
             StreamingContext streamingContext
-        ) {
+        )
+        {
             throw new PlatformNotSupportedException();
         }
 
@@ -942,7 +944,8 @@ namespace System.Net
                     StringComparison.OrdinalIgnoreCase
                 )
                 || string.Equals("CONNECT", _originVerb, StringComparison.OrdinalIgnoreCase)
-            ) {
+            )
+            {
                 throw new ProtocolViolationException(SR.net_nouploadonget);
             }
 
@@ -1109,7 +1112,8 @@ namespace System.Net
                 if (
                     (int)response.StatusCode > maxSuccessStatusCode
                     || (int)response.StatusCode < 200
-                ) {
+                )
+                {
                     throw new WebException(
                         SR.Format(
                             SR.net_servererror,
@@ -1263,7 +1267,8 @@ namespace System.Net
                     from.ToString(NumberFormatInfo.InvariantInfo),
                     to.ToString(NumberFormatInfo.InvariantInfo)
                 )
-            ) {
+            )
+            {
                 throw new InvalidOperationException(SR.net_rangetype);
             }
         }
@@ -1289,7 +1294,8 @@ namespace System.Net
                     range.ToString(NumberFormatInfo.InvariantInfo),
                     (range >= 0) ? "" : null
                 )
-            ) {
+            )
+            {
                 throw new InvalidOperationException(SR.net_rangetype);
             }
         }
@@ -1310,7 +1316,8 @@ namespace System.Net
                         rangeSpecifier,
                         StringComparison.OrdinalIgnoreCase
                     )
-                ) {
+                )
+                {
                     return false;
                 }
                 curRange = string.Empty;
@@ -1431,7 +1438,8 @@ namespace System.Net
         private static HttpClient CreateHttpClient(
             HttpClientParameters parameters,
             HttpWebRequest? request
-        ) {
+        )
+        {
             HttpClient? client = null;
             try
             {
@@ -1535,7 +1543,8 @@ namespace System.Net
                                     s => ((Socket)s!).Dispose(),
                                     socket
                                 )
-                            ) {
+                            )
+                            {
                                 socket.Connect(context.DnsEndPoint);
                             }
 

@@ -8,10 +8,8 @@ namespace System.Security.Policy
     )]
     public sealed partial class UnionCodeGroup : CodeGroup
     {
-        public UnionCodeGroup(
-            IMembershipCondition membershipCondition,
-            PolicyStatement policy
-        ) : base(default(IMembershipCondition), default(PolicyStatement)) { }
+        public UnionCodeGroup(IMembershipCondition membershipCondition, PolicyStatement policy)
+            : base(default(IMembershipCondition), default(PolicyStatement)) { }
         public override string MergeLogic
         {
             get { return null; }

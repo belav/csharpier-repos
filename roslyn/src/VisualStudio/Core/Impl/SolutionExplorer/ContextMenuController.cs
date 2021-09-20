@@ -25,7 +25,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.SolutionExplore
             int menuId,
             Func<IEnumerable<object>, bool> shouldShowMenu,
             Action updateMenu
-        ) {
+        )
+        {
             _menuId = menuId;
             _shouldShowMenu = shouldShowMenu;
             _updateMenu = updateMenu;

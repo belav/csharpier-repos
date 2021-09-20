@@ -42,7 +42,8 @@ namespace AutoMapper.UnitTests.ForAllMembers
                 DateTime source,
                 DateTime destination,
                 ResolutionContext context
-            ) {
+            )
+            {
                 return source.AddDays(1);
             }
         }

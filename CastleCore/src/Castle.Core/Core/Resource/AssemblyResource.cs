@@ -71,7 +71,8 @@ namespace Castle.Core.Resource
                     "assembly" + CustomUri.SchemeDelimiter,
                     StringComparison.CurrentCulture
                 )
-            ) {
+            )
+            {
                 resource = "assembly" + CustomUri.SchemeDelimiter + resource;
             }
 

@@ -34,7 +34,8 @@ namespace Microsoft.EntityFrameworkCore.Query.SqlExpressions
 
             public SelectExpressionCorrelationFindingExpressionVisitor(
                 SelectExpression outerSelectExpression
-            ) {
+            )
+            {
                 _outerSelectExpression = outerSelectExpression;
             }
 
@@ -58,7 +59,8 @@ namespace Microsoft.EntityFrameworkCore.Query.SqlExpressions
                 if (
                     expression is ColumnExpression columnExpression
                     && _outerSelectExpression.ContainsTableReference(columnExpression)
-                ) {
+                )
+                {
                     _containsOuterReference = true;
 
                     return expression;
@@ -91,7 +93,8 @@ namespace Microsoft.EntityFrameworkCore.Query.SqlExpressions
                 Expression expression,
                 IDictionary<ProjectionMember, object> projectionMemberMappings,
                 int pendingCollectionOffset = 0
-            ) {
+            )
+            {
                 _projectionMemberMappings = projectionMemberMappings;
                 _indexMap = null;
                 _pendingCollectionOffset = pendingCollectionOffset;
@@ -103,7 +106,8 @@ namespace Microsoft.EntityFrameworkCore.Query.SqlExpressions
                 Expression expression,
                 int[] indexMap,
                 int pendingCollectionOffset = 0
-            ) {
+            )
+            {
                 _projectionMemberMappings = null;
                 _indexMap = indexMap;
                 _pendingCollectionOffset = pendingCollectionOffset;
@@ -141,7 +145,8 @@ namespace Microsoft.EntityFrameworkCore.Query.SqlExpressions
 
             private ProjectionBindingExpression Remap(
                 ProjectionBindingExpression projectionBindingExpression
-            ) {
+            )
+            {
                 if (_indexMap != null)
                 {
                     if (projectionBindingExpression.Index is int index)
@@ -186,7 +191,8 @@ namespace Microsoft.EntityFrameworkCore.Query.SqlExpressions
                 Dictionary<SqlExpression, ColumnExpression> mappings,
                 SelectExpression subquery,
                 TableReferenceExpression tableReferenceExpression
-            ) {
+            )
+            {
                 _subquery = subquery;
                 _tableReferenceExpression = tableReferenceExpression;
                 _mappings = mappings;
@@ -231,7 +237,8 @@ namespace Microsoft.EntityFrameworkCore.Query.SqlExpressions
 
             public Dictionary<string, HashSet<string>?> FindColumns(
                 SelectExpression selectExpression
-            ) {
+            )
+            {
                 _columnReferenced = new Dictionary<string, HashSet<string>?>();
                 _columnsUsedInJoinCondition = new Dictionary<string, HashSet<string>?>();
 
@@ -251,7 +258,8 @@ namespace Microsoft.EntityFrameworkCore.Query.SqlExpressions
                     if (
                         _columnReferenced[tableAlias] != null
                         && _columnsUsedInJoinCondition[tableAlias] != null
-                    ) {
+                    )
+                    {
                         _columnReferenced[tableAlias]!.UnionWith(
                             _columnsUsedInJoinCondition[tableAlias]!
                         );
@@ -319,7 +327,8 @@ namespace Microsoft.EntityFrameworkCore.Query.SqlExpressions
             public TableReferenceUpdatingExpressionVisitor(
                 SelectExpression oldSelect,
                 SelectExpression newSelect
-            ) {
+            )
+            {
                 _oldSelect = oldSelect;
                 _newSelect = newSelect;
             }
@@ -443,24 +452,26 @@ namespace Microsoft.EntityFrameworkCore.Query.SqlExpressions
                 IColumnBase column,
                 TableReferenceExpression table,
                 bool nullable
-            ) : this(
-                column.Name,
-                table,
-                property.ClrType.UnwrapNullableType(),
-                column.PropertyMappings.First(m => m.Property == property).TypeMapping,
-                nullable || column.IsNullable
-            ) { }
+            )
+                : this(
+                    column.Name,
+                    table,
+                    property.ClrType.UnwrapNullableType(),
+                    column.PropertyMappings.First(m => m.Property == property).TypeMapping,
+                    nullable || column.IsNullable
+                ) { }
 
             public ConcreteColumnExpression(
                 ProjectionExpression subqueryProjection,
                 TableReferenceExpression table
-            ) : this(
-                subqueryProjection.Alias,
-                table,
-                subqueryProjection.Type,
-                subqueryProjection.Expression.TypeMapping!,
-                IsNullableProjection(subqueryProjection)
-            ) { }
+            )
+                : this(
+                    subqueryProjection.Alias,
+                    table,
+                    subqueryProjection.Type,
+                    subqueryProjection.Expression.TypeMapping!,
+                    IsNullableProjection(subqueryProjection)
+                ) { }
 
             private static bool IsNullableProjection(ProjectionExpression projectionExpression) =>
                 projectionExpression.Expression switch

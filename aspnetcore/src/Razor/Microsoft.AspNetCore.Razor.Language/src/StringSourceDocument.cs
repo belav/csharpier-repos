@@ -17,7 +17,8 @@ namespace Microsoft.AspNetCore.Razor.Language
             string content,
             Encoding encoding,
             RazorSourceDocumentProperties properties
-        ) {
+        )
+        {
             if (content == null)
             {
                 throw new ArgumentNullException(nameof(content));
@@ -58,7 +59,8 @@ namespace Microsoft.AspNetCore.Razor.Language
             char[] destination,
             int destinationIndex,
             int count
-        ) {
+        )
+        {
             if (destination == null)
             {
                 throw new ArgumentNullException(nameof(destination));
@@ -78,7 +80,8 @@ namespace Microsoft.AspNetCore.Razor.Language
                 count < 0
                 || count > Length - sourceIndex
                 || count > destination.Length - destinationIndex
-            ) {
+            )
+            {
                 throw new ArgumentOutOfRangeException(nameof(count));
             }
 

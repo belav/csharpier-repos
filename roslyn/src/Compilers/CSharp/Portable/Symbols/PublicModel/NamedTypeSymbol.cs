@@ -115,7 +115,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols.PublicModel
         INamedTypeSymbol INamedTypeSymbol.Construct(
             ImmutableArray<ITypeSymbol> typeArguments,
             ImmutableArray<CodeAnalysis.NullableAnnotation> typeArgumentNullableAnnotations
-        ) {
+        )
+        {
             return UnderlyingNamedTypeSymbol.Construct(
                     ConstructTypeArguments(typeArguments, typeArgumentNullableAnnotations),
                     unbound: false

@@ -25,7 +25,8 @@ namespace Microsoft.AspNetCore.Localization
         /// <inheritdoc />
         public override Task<ProviderCultureResult?> DetermineProviderCultureResult(
             HttpContext httpContext
-        ) {
+        )
+        {
             if (httpContext == null)
             {
                 throw new ArgumentNullException(nameof(httpContext));

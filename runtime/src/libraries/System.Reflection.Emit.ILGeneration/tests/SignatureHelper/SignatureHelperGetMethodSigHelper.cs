@@ -17,7 +17,8 @@ namespace System.Reflection.Emit.Tests
         public void GetMethodSigHelper_CallingConventions_Type_Length_ReturnsThree(
             CallingConventions callingConventions,
             Type type
-        ) {
+        )
+        {
             SignatureHelper helper = SignatureHelper.GetMethodSigHelper(callingConventions, type);
             Assert.Equal(3, helper.GetSignature().Length);
         }
@@ -32,7 +33,8 @@ namespace System.Reflection.Emit.Tests
         public void GetMethodSigHelper_Module_CallingConventions_Type_Length_ReturnsThree(
             CallingConventions callingConventions,
             Type type
-        ) {
+        )
+        {
             ModuleBuilder module = Helpers.DynamicModule();
             SignatureHelper helper1 = SignatureHelper.GetMethodSigHelper(
                 module,

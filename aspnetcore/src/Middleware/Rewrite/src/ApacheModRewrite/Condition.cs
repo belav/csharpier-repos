@@ -20,7 +20,8 @@ namespace Microsoft.AspNetCore.Rewrite.ApacheModRewrite
             RewriteContext context,
             BackReferenceCollection? ruleBackReferences,
             BackReferenceCollection? conditionBackReferences
-        ) {
+        )
+        {
             var pattern = Input.Evaluate(context, ruleBackReferences, conditionBackReferences);
             return Match.Evaluate(pattern, context);
         }

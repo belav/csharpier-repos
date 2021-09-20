@@ -361,7 +361,8 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Preview
         private static void ExecuteAnalyzers(
             PreviewWorkspace previewWorkspace,
             ImmutableArray<DiagnosticAnalyzer> analyzers
-        ) {
+        )
+        {
             var analyzerOptions = new AnalyzerOptions(
                 additionalFiles: ImmutableArray<AdditionalText>.Empty
             );

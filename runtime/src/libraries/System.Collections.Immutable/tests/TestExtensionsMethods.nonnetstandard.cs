@@ -10,7 +10,8 @@ namespace System.Collections.Immutable.Tests
     {
         internal static IDictionary<TKey, TValue> ToReadOnlyDictionary<TKey, TValue>(
             this IImmutableDictionary<TKey, TValue> dictionary
-        ) {
+        )
+        {
             Requires.NotNull(dictionary, nameof(dictionary));
 
             return (IDictionary<TKey, TValue>)dictionary;
@@ -18,7 +19,8 @@ namespace System.Collections.Immutable.Tests
 
         internal static IDictionary<TKey, TValue> ToBuilder<TKey, TValue>(
             this IImmutableDictionary<TKey, TValue> dictionary
-        ) {
+        )
+        {
             Requires.NotNull(dictionary, nameof(dictionary));
 
             var hashDictionary = dictionary as ImmutableDictionary<TKey, TValue>;

@@ -135,7 +135,8 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeFixes.DeclareAsNullable
             ImmutableArray<Diagnostic> diagnostics,
             SyntaxEditor editor,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             // a method can have multiple `return null;` statements, but we should only fix its return type once
             using var _ = PooledHashSet<TypeSyntax>.GetInstance(out var alreadyHandled);
 
@@ -160,7 +161,8 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeFixes.DeclareAsNullable
             SemanticModel model,
             string? equivalenceKey,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var node = diagnostic.Location.FindNode(
                 getInnermostNodeForTie: true,
                 cancellationToken
@@ -173,7 +175,8 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeFixes.DeclareAsNullable
             SemanticModel model,
             SyntaxNode node,
             HashSet<TypeSyntax> alreadyHandled
-        ) {
+        )
+        {
             var declarationTypeToFix = TryGetDeclarationTypeToFix(model, node);
             if (declarationTypeToFix != null && alreadyHandled.Add(declarationTypeToFix))
             {
@@ -269,7 +272,8 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeFixes.DeclareAsNullable
                         syntax is VariableDeclaratorSyntax declarator
                         && declarator.Parent is VariableDeclarationSyntax declaration
                         && declaration.Variables.Count == 1
-                    ) {
+                    )
+                    {
                         return declaration.Type;
                     }
                 }
@@ -285,7 +289,8 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeFixes.DeclareAsNullable
                         syntax is VariableDeclaratorSyntax declarator
                         && declarator.Parent is VariableDeclarationSyntax declaration
                         && declaration.Variables.Count == 1
-                    ) {
+                    )
+                    {
                         return declaration.Type;
                     }
                     else if (syntax is TupleElementSyntax tupleElement)
@@ -295,14 +300,16 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeFixes.DeclareAsNullable
                 }
                 else if (
                     symbol is IFieldSymbol { CorrespondingTupleField: IFieldSymbol tupleField }
-                ) {
+                )
+                {
                     // Assigning a tuple field, eg. foo.Item1 = null
                     // The tupleField won't have DeclaringSyntaxReferences because it's implicitly declared, otherwise it
                     // would have fallen into the branch above. We can use the Locations instead, if there is one and it's in source
                     if (
                         tupleField.Locations is { Length: 1 }
                         && tupleField.Locations[0] is { IsInSource: true } location
-                    ) {
+                    )
+                    {
                         if (location.FindNode(default) is TupleElementSyntax tupleElement)
                         {
                             return tupleElement.Type;
@@ -325,7 +332,8 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeFixes.DeclareAsNullable
             if (
                 node.Parent is ArgumentSyntax argument
                 && argument.Parent?.Parent is InvocationExpressionSyntax invocation
-            ) {
+            )
+            {
                 var symbol = model.GetSymbolInfo(invocation.Expression).Symbol;
                 if (!(symbol is IMethodSymbol method) || method.PartialImplementationPart is object)
                 {
@@ -356,7 +364,8 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeFixes.DeclareAsNullable
                     SyntaxKind.PropertyDeclaration,
                     out PropertyDeclarationSyntax? propertyDeclaration
                 )
-            ) {
+            )
+            {
                 return propertyDeclaration.Type;
             }
 
@@ -379,7 +388,8 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeFixes.DeclareAsNullable
                         } declarationSyntax
                     }
                 && declarationSyntax.Variables.Count == 1
-            ) {
+            )
+            {
                 return declarationSyntax.Type;
             }
 
@@ -389,7 +399,8 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeFixes.DeclareAsNullable
                     SyntaxKind.Parameter,
                     out ParameterSyntax? optionalParameter
                 )
-            ) {
+            )
+            {
                 var parameterSymbol = model.GetDeclaredSymbol(optionalParameter);
                 return TryGetParameterTypeSyntax(parameterSymbol);
             }
@@ -401,7 +412,8 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeFixes.DeclareAsNullable
                     SyntaxKind.MethodDeclaration,
                     out MethodDeclarationSyntax? arrowMethod
                 )
-            ) {
+            )
+            {
                 return arrowMethod.ReturnType;
             }
 
@@ -412,7 +424,8 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeFixes.DeclareAsNullable
                 TypeSyntax returnType,
                 SyntaxTokenList modifiers,
                 bool onYield
-            ) {
+            )
+            {
                 if (modifiers.Any(SyntaxKind.AsyncKeyword) || onYield)
                 {
                     // async Task<string> M() { return null; }
@@ -451,7 +464,8 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeFixes.DeclareAsNullable
                         is ParameterSyntax parameterSyntax
                     && parameterSymbol.ContainingSymbol is IMethodSymbol method
                     && method.GetAllMethodSymbolsOfPartialParts().Length == 1
-                ) {
+                )
+                {
                     return parameterSyntax.Type;
                 }
                 return null;
@@ -477,11 +491,12 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeFixes.DeclareAsNullable
             public MyCodeAction(
                 Func<CancellationToken, Task<Document>> createChangedDocument,
                 string equivalenceKey
-            ) : base(
-                CSharpFeaturesResources.Declare_as_nullable,
-                createChangedDocument,
-                equivalenceKey
-            ) { }
+            )
+                : base(
+                    CSharpFeaturesResources.Declare_as_nullable,
+                    createChangedDocument,
+                    equivalenceKey
+                ) { }
         }
     }
 }

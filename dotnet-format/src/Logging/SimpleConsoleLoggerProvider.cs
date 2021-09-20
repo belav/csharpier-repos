@@ -15,7 +15,8 @@ namespace Microsoft.CodeAnalysis.Tools.Logging
             IConsole console,
             LogLevel minimalLogLevel,
             LogLevel minimalErrorLevel
-        ) {
+        )
+        {
             _console = console;
             _minimalLogLevel = minimalLogLevel;
             _minimalErrorLevel = minimalErrorLevel;

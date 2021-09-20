@@ -47,7 +47,8 @@ namespace System.Net.Security.Enterprise.Tests
         public async Task StreamToStream_ValidAuthentication_Success(
             NetworkCredential creds,
             string target
-        ) {
+        )
+        {
             (Stream stream1, Stream stream2) = ConnectedStreams.CreateBidirectional();
             using (var client = new NegotiateStream(stream1))
             using (var server = new NegotiateStream(stream2))
@@ -92,7 +93,8 @@ namespace System.Net.Security.Enterprise.Tests
         public async Task StreamToStream_InvalidAuthentication_Failure(
             NetworkCredential creds,
             string target
-        ) {
+        )
+        {
             (Stream stream1, Stream stream2) = ConnectedStreams.CreateBidirectional();
             using (var client = new NegotiateStream(stream1))
             using (var server = new NegotiateStream(stream2))
@@ -268,7 +270,8 @@ namespace System.Net.Security.Enterprise.Tests
             NegotiateStream stream,
             bool isServer,
             string remoteName
-        ) {
+        )
+        {
             Assert.True(stream.IsAuthenticated);
             Assert.Equal(TokenImpersonationLevel.Identification, stream.ImpersonationLevel);
             Assert.True(stream.IsEncrypted);

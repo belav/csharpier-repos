@@ -70,7 +70,8 @@ namespace Microsoft.AspNetCore.ResponseCaching
                             HttpContext.Response.Headers[HeaderNames.Date].ToString(),
                             out date
                         )
-                    ) {
+                    )
+                    {
                         _responseDate = date;
                     }
                     else
@@ -101,7 +102,8 @@ namespace Microsoft.AspNetCore.ResponseCaching
                             HttpContext.Response.Headers[HeaderNames.Expires].ToString(),
                             out expires
                         )
-                    ) {
+                    )
+                    {
                         _responseExpires = expires;
                     }
                     else

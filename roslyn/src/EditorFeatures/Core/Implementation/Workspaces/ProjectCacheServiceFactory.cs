@@ -39,7 +39,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.Workspaces
                 if (
                     e.Kind == WorkspaceChangeKind.SolutionCleared
                     || e.Kind == WorkspaceChangeKind.SolutionRemoved
-                ) {
+                )
+                {
                     service.ClearImplicitCache();
                 }
             };

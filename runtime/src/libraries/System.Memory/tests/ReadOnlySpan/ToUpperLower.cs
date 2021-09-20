@@ -165,7 +165,8 @@ namespace System.SpanTests
         [MemberData(nameof(MemoryExtensionsToUpperLowerOverlapping))]
         public static void MemoryExtensionsToUpperLowerOverlappingThrows(
             TestHelpers.AssertThrowsAction<char> action
-        ) {
+        )
+        {
             Span<char> buffer = new char[] { 'a', 'b', 'c', 'd' };
             TestHelpers.AssertThrows<InvalidOperationException, char>(buffer, action);
         }

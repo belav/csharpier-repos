@@ -27,7 +27,8 @@ namespace Microsoft.AspNetCore.SignalR.Crankier
             int numberOfConnections,
             int sendDurationInSeconds,
             HttpTransportType transportType
-        ) {
+        )
+        {
             _agent = agent;
             _targetUrl = targetUrl;
             _numberOfWorkers = numberOfWorkers;
@@ -56,7 +57,8 @@ namespace Microsoft.AspNetCore.SignalR.Crankier
                 _agent.GetWorkerStatus()
                     .Aggregate(0, (state, status) => state + status.Value.ConnectedCount)
                 < _agent.TotalConnectionsRequested
-            ) {
+            )
+            {
                 await Task.Delay(1000);
             }
 

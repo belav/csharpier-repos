@@ -35,15 +35,16 @@ namespace Microsoft.CodeAnalysis.Editor
             int indent = 0,
             bool bolded = false,
             bool grayed = false
-        ) : this(
-            text,
-            glyph,
-            spans.ToImmutableArrayOrEmpty(),
-            childItems.ToImmutableArrayOrEmpty(),
-            indent,
-            bolded,
-            grayed
-        ) { }
+        )
+            : this(
+                text,
+                glyph,
+                spans.ToImmutableArrayOrEmpty(),
+                childItems.ToImmutableArrayOrEmpty(),
+                indent,
+                bolded,
+                grayed
+            ) { }
 
         public NavigationBarItem(
             string text,
@@ -53,7 +54,8 @@ namespace Microsoft.CodeAnalysis.Editor
             int indent = 0,
             bool bolded = false,
             bool grayed = false
-        ) {
+        )
+        {
             this.Text = text;
             this.Glyph = glyph;
             this.Spans = spans;

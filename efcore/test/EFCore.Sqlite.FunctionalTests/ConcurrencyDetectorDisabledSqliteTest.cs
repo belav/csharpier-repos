@@ -9,9 +9,8 @@ namespace Microsoft.EntityFrameworkCore
     public class ConcurrencyDetectorDisabledSqliteTest
         : ConcurrencyDetectorDisabledRelationalTestBase<ConcurrencyDetectorDisabledSqliteTest.ConcurrencyDetectorSqlServerFixture>
     {
-        public ConcurrencyDetectorDisabledSqliteTest(
-            ConcurrencyDetectorSqlServerFixture fixture
-        ) : base(fixture) { }
+        public ConcurrencyDetectorDisabledSqliteTest(ConcurrencyDetectorSqlServerFixture fixture)
+            : base(fixture) { }
 
         public class ConcurrencyDetectorSqlServerFixture : ConcurrencyDetectorFixtureBase
         {

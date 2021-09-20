@@ -273,7 +273,8 @@ namespace System.Formats.Asn1.Tests.Reader
             bool critical,
             int index,
             byte[] bytes
-        ) {
+        )
+        {
             AsnReader extension = extensions.ReadSequence();
             Assert.Equal(oid, extension.ReadObjectIdentifier());
 
@@ -300,7 +301,8 @@ namespace System.Formats.Asn1.Tests.Reader
             byte[] bytes,
             string label,
             string stringValue = null
-        ) {
+        )
+        {
             AsnReader rdn = reader.ReadSetOf();
             AsnReader attributeTypeAndValue = rdn.ReadSequence();
             Assert.Equal(atvOid, attributeTypeAndValue.ReadObjectIdentifier());

@@ -48,7 +48,8 @@ namespace IntelHardwareIntrinsicTest
                         new ulong[4] { 2, 1, 500, 0 },
                         new ulong[4]
                     )
-                ) {
+                )
+                {
                     var vi1 = Unsafe.Read<Vector256<int>>(intTable.inArray1Ptr);
                     var vi2 = Unsafe.Read<Vector256<uint>>(intTable.inArray2Ptr);
                     var vi3 = Avx2.ShiftRightLogicalVariable(vi1, vi2);
@@ -77,7 +78,8 @@ namespace IntelHardwareIntrinsicTest
                                     ? 0
                                     : intTable.inArray1[i] >> (int)intTable.inArray2[i]
                             ) != intTable.outArray[i]
-                        ) {
+                        )
+                        {
                             Console.WriteLine("AVX2 ShiftRightLogicalVariable failed on int:");
                             Console.WriteLine(
                                 $"    left: ({string.Join(", ", intTable.inArray1)})"
@@ -102,7 +104,8 @@ namespace IntelHardwareIntrinsicTest
                                     ? 0
                                     : (int)uintTable.inArray1[i] >> (int)uintTable.inArray2[i]
                             ) != uintTable.outArray[i]
-                        ) {
+                        )
+                        {
                             Console.WriteLine("AVX2 ShiftRightLogicalVariable failed on uint:");
                             Console.WriteLine(
                                 $"    left: ({string.Join(", ", uintTable.inArray1)})"
@@ -127,7 +130,8 @@ namespace IntelHardwareIntrinsicTest
                                     ? 0
                                     : (int)longTable.inArray1[i] >> (int)longTable.inArray2[i]
                             ) != (int)longTable.outArray[i]
-                        ) {
+                        )
+                        {
                             Console.WriteLine("AVX2 ShiftRightLogicalVariable failed on long:");
                             Console.WriteLine(
                                 $"    left: ({string.Join(", ", longTable.inArray1)})"
@@ -152,7 +156,8 @@ namespace IntelHardwareIntrinsicTest
                                     ? 0
                                     : (int)ulongTable.inArray1[i] >> (int)ulongTable.inArray2[i]
                             ) != (int)ulongTable.outArray[i]
-                        ) {
+                        )
+                        {
                             Console.WriteLine("AVX2 ShiftRightLogicalVariable failed on ulong:");
                             Console.WriteLine(
                                 $"    left: ({string.Join(", ", ulongTable.inArray1)})"
@@ -197,7 +202,8 @@ namespace IntelHardwareIntrinsicTest
                         new ulong[4] { 2, 1, 500, 0 },
                         new ulong[4]
                     )
-                ) {
+                )
+                {
                     var vi3 = Avx2.ShiftRightLogicalVariable(
                         Avx.LoadVector256((int*)intTable.inArray1Ptr),
                         Avx.LoadVector256((uint*)intTable.inArray2Ptr)
@@ -230,7 +236,8 @@ namespace IntelHardwareIntrinsicTest
                                     ? 0
                                     : intTable.inArray1[i] >> (int)intTable.inArray2[i]
                             ) != intTable.outArray[i]
-                        ) {
+                        )
+                        {
                             Console.WriteLine("AVX2 ShiftRightLogicalVariable failed on int:");
                             Console.WriteLine(
                                 $"    left: ({string.Join(", ", intTable.inArray1)})"
@@ -255,7 +262,8 @@ namespace IntelHardwareIntrinsicTest
                                     ? 0
                                     : (int)uintTable.inArray1[i] >> (int)uintTable.inArray2[i]
                             ) != uintTable.outArray[i]
-                        ) {
+                        )
+                        {
                             Console.WriteLine("AVX2 ShiftRightLogicalVariable failed on uint:");
                             Console.WriteLine(
                                 $"    left: ({string.Join(", ", uintTable.inArray1)})"
@@ -280,7 +288,8 @@ namespace IntelHardwareIntrinsicTest
                                     ? 0
                                     : (int)longTable.inArray1[i] >> (int)longTable.inArray2[i]
                             ) != (int)longTable.outArray[i]
-                        ) {
+                        )
+                        {
                             Console.WriteLine("AVX2 ShiftRightLogicalVariable failed on long:");
                             Console.WriteLine(
                                 $"    left: ({string.Join(", ", longTable.inArray1)})"
@@ -305,7 +314,8 @@ namespace IntelHardwareIntrinsicTest
                                     ? 0
                                     : (int)ulongTable.inArray1[i] >> (int)ulongTable.inArray2[i]
                             ) != (int)ulongTable.outArray[i]
-                        ) {
+                        )
+                        {
                             Console.WriteLine("AVX2 ShiftRightLogicalVariable failed on ulong:");
                             Console.WriteLine(
                                 $"    left: ({string.Join(", ", ulongTable.inArray1)})"
@@ -350,7 +360,8 @@ namespace IntelHardwareIntrinsicTest
                         new ulong[2] { 2, 500 },
                         new ulong[2]
                     )
-                ) {
+                )
+                {
                     var vi1 = Unsafe.Read<Vector128<int>>(intTable.inArray1Ptr);
                     var vi2 = Unsafe.Read<Vector128<uint>>(intTable.inArray2Ptr);
                     var vi3 = Avx2.ShiftRightLogicalVariable(vi1, vi2);
@@ -379,7 +390,8 @@ namespace IntelHardwareIntrinsicTest
                                     ? 0
                                     : intTable.inArray1[i] >> (int)intTable.inArray2[i]
                             ) != intTable.outArray[i]
-                        ) {
+                        )
+                        {
                             Console.WriteLine(
                                 "AVX2 ShiftRightLogicalVariable Vector128 failed on int:"
                             );
@@ -406,7 +418,8 @@ namespace IntelHardwareIntrinsicTest
                                     ? 0
                                     : (int)uintTable.inArray1[i] >> (int)uintTable.inArray2[i]
                             ) != uintTable.outArray[i]
-                        ) {
+                        )
+                        {
                             Console.WriteLine(
                                 "AVX2 ShiftRightLogicalVariable Vector128 failed on uint:"
                             );
@@ -433,7 +446,8 @@ namespace IntelHardwareIntrinsicTest
                                     ? 0
                                     : (int)longTable.inArray1[i] >> (int)longTable.inArray2[i]
                             ) != (int)longTable.outArray[i]
-                        ) {
+                        )
+                        {
                             Console.WriteLine(
                                 "AVX2 ShiftRightLogicalVariable Vector128 failed on long:"
                             );
@@ -460,7 +474,8 @@ namespace IntelHardwareIntrinsicTest
                                     ? 0
                                     : (int)ulongTable.inArray1[i] >> (int)ulongTable.inArray2[i]
                             ) != (int)ulongTable.outArray[i]
-                        ) {
+                        )
+                        {
                             Console.WriteLine(
                                 "AVX2 ShiftRightLogicalVariable Vector128 failed on ulong:"
                             );
@@ -507,7 +522,8 @@ namespace IntelHardwareIntrinsicTest
                         new ulong[2] { 2, 500 },
                         new ulong[2]
                     )
-                ) {
+                )
+                {
                     var vi3 = Avx2.ShiftRightLogicalVariable(
                         Sse2.LoadVector128((int*)intTable.inArray1Ptr),
                         Sse2.LoadVector128((uint*)intTable.inArray2Ptr)
@@ -540,7 +556,8 @@ namespace IntelHardwareIntrinsicTest
                                     ? 0
                                     : intTable.inArray1[i] >> (int)intTable.inArray2[i]
                             ) != intTable.outArray[i]
-                        ) {
+                        )
+                        {
                             Console.WriteLine(
                                 "AVX2 ShiftRightLogicalVariable Vector128 failed on int:"
                             );
@@ -567,7 +584,8 @@ namespace IntelHardwareIntrinsicTest
                                     ? 0
                                     : (int)uintTable.inArray1[i] >> (int)uintTable.inArray2[i]
                             ) != uintTable.outArray[i]
-                        ) {
+                        )
+                        {
                             Console.WriteLine(
                                 "AVX2 ShiftRightLogicalVariable Vector128 failed on uint:"
                             );
@@ -594,7 +612,8 @@ namespace IntelHardwareIntrinsicTest
                                     ? 0
                                     : (int)longTable.inArray1[i] >> (int)longTable.inArray2[i]
                             ) != (int)longTable.outArray[i]
-                        ) {
+                        )
+                        {
                             Console.WriteLine(
                                 "AVX2 ShiftRightLogicalVariable Vector128 failed on long:"
                             );
@@ -621,7 +640,8 @@ namespace IntelHardwareIntrinsicTest
                                     ? 0
                                     : (int)ulongTable.inArray1[i] >> (int)ulongTable.inArray2[i]
                             ) != (int)ulongTable.outArray[i]
-                        ) {
+                        )
+                        {
                             Console.WriteLine(
                                 "AVX2 ShiftRightLogicalVariable Vector128 failed on ulong:"
                             );

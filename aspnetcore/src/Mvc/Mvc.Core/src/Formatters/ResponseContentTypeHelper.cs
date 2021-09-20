@@ -34,7 +34,8 @@ namespace Microsoft.AspNetCore.Mvc.Formatters
             string defaultContentType,
             out string resolvedContentType,
             out Encoding resolvedContentTypeEncoding
-        ) {
+        )
+        {
             Debug.Assert(defaultContentType != null);
 
             var defaultContentTypeEncoding = MediaType.GetEncoding(defaultContentType);

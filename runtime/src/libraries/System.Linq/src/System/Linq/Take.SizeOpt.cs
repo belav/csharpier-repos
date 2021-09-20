@@ -11,7 +11,8 @@ namespace System.Linq
         private static IEnumerable<TSource> TakeIterator<TSource>(
             IEnumerable<TSource> source,
             int count
-        ) {
+        )
+        {
             Debug.Assert(count > 0);
 
             foreach (TSource element in source)
@@ -26,7 +27,8 @@ namespace System.Linq
             IEnumerable<TSource> source,
             int startIndex,
             int endIndex
-        ) {
+        )
+        {
             Debug.Assert(source != null);
             Debug.Assert(startIndex >= 0 && startIndex < endIndex);
 

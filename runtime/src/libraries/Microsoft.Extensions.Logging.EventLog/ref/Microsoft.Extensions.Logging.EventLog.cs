@@ -10,19 +10,22 @@ namespace Microsoft.Extensions.Logging
     {
         public static Microsoft.Extensions.Logging.ILoggingBuilder AddEventLog(
             this Microsoft.Extensions.Logging.ILoggingBuilder builder
-        ) {
+        )
+        {
             throw null;
         }
         public static Microsoft.Extensions.Logging.ILoggingBuilder AddEventLog(
             this Microsoft.Extensions.Logging.ILoggingBuilder builder,
             Microsoft.Extensions.Logging.EventLog.EventLogSettings settings
-        ) {
+        )
+        {
             throw null;
         }
         public static Microsoft.Extensions.Logging.ILoggingBuilder AddEventLog(
             this Microsoft.Extensions.Logging.ILoggingBuilder builder,
             System.Action<Microsoft.Extensions.Logging.EventLog.EventLogSettings> configure
-        ) {
+        )
+        {
             throw null;
         }
     }

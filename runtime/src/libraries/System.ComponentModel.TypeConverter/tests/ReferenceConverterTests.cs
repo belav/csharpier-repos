@@ -295,7 +295,8 @@ namespace System.ComponentModel.Tests
         [MemberData(nameof(GetStandardValues_IReferenceServiceInvalid_TestData))]
         public void GetStandardValues_IReferenceServiceInvalid_ReturnsExpected(
             object referenceService
-        ) {
+        )
+        {
             var converter = new ReferenceConverter(typeof(TestComponent));
             int callCount = 0;
             var context = new MockTypeDescriptorContext

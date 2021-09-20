@@ -240,7 +240,8 @@ class Test2
             (i < teststr2.Length)
                 && (object)GenC<object>.teststr2[i] == (object)"GenC array element 1\uCB53";
             i++
-        ) {
+        )
+        {
             Console.WriteLine(
                 "for, (object)GenC<object>.teststr2[i]==(object)C.teststr2[i] is not expected, FAILED"
             );

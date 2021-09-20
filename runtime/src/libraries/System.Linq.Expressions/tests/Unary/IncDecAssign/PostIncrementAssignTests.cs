@@ -32,7 +32,8 @@ namespace System.Linq.Expressions.Tests
             object value,
             object ignored,
             bool useInterpreter
-        ) {
+        )
+        {
             _ = ignored;
             ParameterExpression variable = Expression.Variable(type);
             BlockExpression block = Expression.Block(
@@ -72,7 +73,8 @@ namespace System.Linq.Expressions.Tests
             object value,
             object result,
             bool useInterpreter
-        ) {
+        )
+        {
             ParameterExpression variable = Expression.Variable(type);
             LabelTarget target = Expression.Label(type);
             BlockExpression block = Expression.Block(

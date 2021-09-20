@@ -123,7 +123,8 @@ namespace System.Linq.Parallel
             IPartitionedStreamRecipient<TResult> recipient,
             bool preferStriping,
             QuerySettings settings
-        ) {
+        )
+        {
             if (_prematureMerge)
             {
                 ListQueryResults<TResult> results = ExecuteAndCollectResults(
@@ -146,7 +147,8 @@ namespace System.Linq.Parallel
             PartitionedStream<TResult, TKey> inputStream,
             IPartitionedStreamRecipient<TResult> recipient,
             QuerySettings settings
-        ) {
+        )
+        {
             int partitionCount = inputStream.PartitionCount;
 
             // Create shared data.
@@ -272,7 +274,8 @@ namespace System.Linq.Parallel
                 CountdownEvent sharedBarrier,
                 CancellationToken cancelToken,
                 IComparer<TKey> keyComparer
-            ) {
+            )
+            {
                 Debug.Assert(source != null);
                 Debug.Assert(predicate != null || indexedPredicate != null);
                 Debug.Assert(operatorState != null);
@@ -296,7 +299,8 @@ namespace System.Linq.Parallel
             internal override bool MoveNext(
                 [MaybeNullWhen(false), AllowNull] ref TResult currentElement,
                 [AllowNull] ref TKey currentKey
-            ) {
+            )
+            {
                 // If the buffer has not been created, we will generate it lazily on demand.
                 if (_buffer == null)
                 {
@@ -360,7 +364,8 @@ namespace System.Linq.Parallel
                                         _operatorState._updatesDone == 0
                                         || _keyComparer.Compare(_operatorState._currentLowKey, key)
                                             > 0
-                                    ) {
+                                    )
+                                    {
                                         _currentLowKey = _operatorState._currentLowKey = key;
                                         _updatesSeen = ++_operatorState._updatesDone;
                                     }
@@ -422,7 +427,8 @@ namespace System.Linq.Parallel
                             _bufferIndex.Value++;
                             _bufferIndex.Value < _buffer.Count;
                             _bufferIndex.Value++
-                        ) {
+                        )
+                        {
                             // If the current buffered element's index is greater than or equal to the smallest
                             // false index found, we will yield it as a result.
                             if (
@@ -430,7 +436,8 @@ namespace System.Linq.Parallel
                                     _buffer[_bufferIndex.Value].Second,
                                     _operatorState._currentLowKey
                                 ) >= 0
-                            ) {
+                            )
+                            {
                                 currentElement = _buffer[_bufferIndex.Value].First;
                                 currentKey = _buffer[_bufferIndex.Value].Second;
                                 return true;

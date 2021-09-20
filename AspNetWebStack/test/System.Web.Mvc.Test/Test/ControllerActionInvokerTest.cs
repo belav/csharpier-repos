@@ -1873,7 +1873,8 @@ namespace System.Web.Mvc.Test
                         ControllerContext cc,
                         IList<IAuthorizationFilter> f,
                         ActionDescriptor a
-                    ) {
+                    )
+                    {
                         Thread.CurrentThread.Abort();
                         return null;
                     }
@@ -3316,7 +3317,8 @@ namespace System.Web.Mvc.Test
             ControllerBase controller,
             IDictionary<string, object> values,
             Action validateInputCallback = null
-        ) {
+        )
+        {
             SimpleValueProvider valueProvider = new SimpleValueProvider();
             controller.ValueProvider = valueProvider;
             if (values != null)
@@ -3423,7 +3425,8 @@ namespace System.Web.Mvc.Test
                 ControllerContext controllerContext,
                 ActionDescriptor actionDescriptor,
                 object actionReturnValue
-            ) {
+            )
+            {
                 return new CustomResult { ReturnValue = actionReturnValue };
             }
         }
@@ -3621,7 +3624,8 @@ namespace System.Web.Mvc.Test
                 ControllerContext controllerContext,
                 ActionDescriptor actionDescriptor,
                 object actionReturnValue
-            ) {
+            )
+            {
                 return base.CreateActionResult(
                     controllerContext,
                     actionDescriptor,
@@ -3633,7 +3637,8 @@ namespace System.Web.Mvc.Test
                 ControllerContext controllerContext,
                 ActionDescriptor actionDescriptor,
                 object actionReturnValue
-            ) {
+            )
+            {
                 return PublicCreateActionResult(
                     controllerContext,
                     actionDescriptor,
@@ -3645,7 +3650,8 @@ namespace System.Web.Mvc.Test
                 ControllerContext controllerContext,
                 ControllerDescriptor controllerDescriptor,
                 string actionName
-            ) {
+            )
+            {
                 return base.FindAction(controllerContext, controllerDescriptor, actionName);
             }
 
@@ -3653,61 +3659,70 @@ namespace System.Web.Mvc.Test
                 ControllerContext controllerContext,
                 ControllerDescriptor controllerDescriptor,
                 string actionName
-            ) {
+            )
+            {
                 return PublicFindAction(controllerContext, controllerDescriptor, actionName);
             }
 
             public virtual ControllerDescriptor PublicGetControllerDescriptor(
                 ControllerContext controllerContext
-            ) {
+            )
+            {
                 return base.GetControllerDescriptor(controllerContext);
             }
 
             protected override ControllerDescriptor GetControllerDescriptor(
                 ControllerContext controllerContext
-            ) {
+            )
+            {
                 return PublicGetControllerDescriptor(controllerContext);
             }
 
             public virtual FilterInfo PublicGetFilters(
                 ControllerContext controllerContext,
                 ActionDescriptor actionDescriptor
-            ) {
+            )
+            {
                 return base.GetFilters(controllerContext, actionDescriptor);
             }
 
             protected override FilterInfo GetFilters(
                 ControllerContext controllerContext,
                 ActionDescriptor actionDescriptor
-            ) {
+            )
+            {
                 return PublicGetFilters(controllerContext, actionDescriptor);
             }
 
             public virtual object PublicGetParameterValue(
                 ControllerContext controllerContext,
                 ParameterDescriptor parameterDescriptor
-            ) {
+            )
+            {
                 return base.GetParameterValue(controllerContext, parameterDescriptor);
             }
 
             protected override object GetParameterValue(
                 ControllerContext controllerContext,
                 ParameterDescriptor parameterDescriptor
-            ) {
+            )
+            {
                 return PublicGetParameterValue(controllerContext, parameterDescriptor);
             }
 
             public virtual IDictionary<string, object> PublicGetParameterValues(
                 ControllerContext controllerContext,
                 ActionDescriptor actionDescriptor
-            ) {
+            )
+            {
                 return base.GetParameterValues(controllerContext, actionDescriptor);
             }
 
             protected override IDictionary<string, object> GetParameterValues(
                 ControllerContext controllerContext,
                 ActionDescriptor actionDescriptor
-            ) {
+            )
+            {
                 return PublicGetParameterValues(controllerContext, actionDescriptor);
             }
 
@@ -3715,7 +3730,8 @@ namespace System.Web.Mvc.Test
                 ControllerContext controllerContext,
                 ActionDescriptor actionDescriptor,
                 IDictionary<string, object> parameters
-            ) {
+            )
+            {
                 return base.InvokeActionMethod(controllerContext, actionDescriptor, parameters);
             }
 
@@ -3723,7 +3739,8 @@ namespace System.Web.Mvc.Test
                 ControllerContext controllerContext,
                 ActionDescriptor actionDescriptor,
                 IDictionary<string, object> parameters
-            ) {
+            )
+            {
                 return PublicInvokeActionMethod(controllerContext, actionDescriptor, parameters);
             }
 
@@ -3732,7 +3749,8 @@ namespace System.Web.Mvc.Test
                 IList<IActionFilter> filters,
                 ActionDescriptor actionDescriptor,
                 IDictionary<string, object> parameters
-            ) {
+            )
+            {
                 return base.InvokeActionMethodWithFilters(
                     controllerContext,
                     filters,
@@ -3746,7 +3764,8 @@ namespace System.Web.Mvc.Test
                 IList<IActionFilter> filters,
                 ActionDescriptor actionDescriptor,
                 IDictionary<string, object> parameters
-            ) {
+            )
+            {
                 return PublicInvokeActionMethodWithFilters(
                     controllerContext,
                     filters,
@@ -3758,14 +3777,16 @@ namespace System.Web.Mvc.Test
             public virtual void PublicInvokeActionResult(
                 ControllerContext controllerContext,
                 ActionResult actionResult
-            ) {
+            )
+            {
                 base.InvokeActionResult(controllerContext, actionResult);
             }
 
             protected override void InvokeActionResult(
                 ControllerContext controllerContext,
                 ActionResult actionResult
-            ) {
+            )
+            {
                 PublicInvokeActionResult(controllerContext, actionResult);
             }
 
@@ -3773,7 +3794,8 @@ namespace System.Web.Mvc.Test
                 ControllerContext controllerContext,
                 IList<IResultFilter> filters,
                 ActionResult actionResult
-            ) {
+            )
+            {
                 return base.InvokeActionResultWithFilters(controllerContext, filters, actionResult);
             }
 
@@ -3781,7 +3803,8 @@ namespace System.Web.Mvc.Test
                 ControllerContext controllerContext,
                 IList<IResultFilter> filters,
                 ActionResult actionResult
-            ) {
+            )
+            {
                 return PublicInvokeActionResultWithFilters(
                     controllerContext,
                     filters,
@@ -3793,7 +3816,8 @@ namespace System.Web.Mvc.Test
                 ControllerContext controllerContext,
                 IList<IAuthorizationFilter> filters,
                 ActionDescriptor actionDescriptor
-            ) {
+            )
+            {
                 return base.InvokeAuthorizationFilters(
                     controllerContext,
                     filters,
@@ -3805,7 +3829,8 @@ namespace System.Web.Mvc.Test
                 ControllerContext controllerContext,
                 IList<IAuthorizationFilter> filters,
                 ActionDescriptor actionDescriptor
-            ) {
+            )
+            {
                 return PublicInvokeAuthorizationFilters(
                     controllerContext,
                     filters,
@@ -3817,7 +3842,8 @@ namespace System.Web.Mvc.Test
                 ControllerContext controllerContext,
                 IList<IAuthenticationFilter> filters,
                 ActionDescriptor actionDescriptor
-            ) {
+            )
+            {
                 return base.InvokeAuthenticationFilters(
                     controllerContext,
                     filters,
@@ -3829,7 +3855,8 @@ namespace System.Web.Mvc.Test
                 ControllerContext controllerContext,
                 IList<IAuthenticationFilter> filters,
                 ActionDescriptor actionDescriptor
-            ) {
+            )
+            {
                 return PublicInvokeAuthenticationFilters(
                     controllerContext,
                     filters,
@@ -3842,7 +3869,8 @@ namespace System.Web.Mvc.Test
                 IList<IAuthenticationFilter> filters,
                 ActionDescriptor actionDescriptor,
                 ActionResult result
-            ) {
+            )
+            {
                 return base.InvokeAuthenticationFiltersChallenge(
                     controllerContext,
                     filters,
@@ -3856,7 +3884,8 @@ namespace System.Web.Mvc.Test
                 IList<IAuthenticationFilter> filters,
                 ActionDescriptor actionDescriptor,
                 ActionResult result
-            ) {
+            )
+            {
                 return PublicInvokeAuthenticationFiltersChallenge(
                     controllerContext,
                     filters,
@@ -3869,7 +3898,8 @@ namespace System.Web.Mvc.Test
                 ControllerContext controllerContext,
                 IList<IExceptionFilter> filters,
                 Exception exception
-            ) {
+            )
+            {
                 return base.InvokeExceptionFilters(controllerContext, filters, exception);
             }
 
@@ -3877,7 +3907,8 @@ namespace System.Web.Mvc.Test
                 ControllerContext controllerContext,
                 IList<IExceptionFilter> filters,
                 Exception exception
-            ) {
+            )
+            {
                 return PublicInvokeExceptionFilters(controllerContext, filters, exception);
             }
         }
@@ -4004,7 +4035,8 @@ namespace System.Web.Mvc.Test
                 public object BindModel(
                     ControllerContext controllerContext,
                     ModelBindingContext bindingContext
-                ) {
+                )
+                {
                     string s = String.Format(
                         "foo={0}&bar={1}",
                         bindingContext.PropertyFilter("foo"),
@@ -4028,7 +4060,8 @@ namespace System.Web.Mvc.Test
                 public object BindModel(
                     ControllerContext controllerContext,
                     ModelBindingContext bindingContext
-                ) {
+                )
+                {
                     string s = bindingContext.ModelName + "_" + bindingContext.ModelType.Name;
                     return s;
                 }
@@ -4098,7 +4131,8 @@ namespace System.Web.Mvc.Test
             public override bool IsValidForRequest(
                 ControllerContext controllerContext,
                 MethodInfo methodInfo
-            ) {
+            )
+            {
                 return _match;
             }
         }

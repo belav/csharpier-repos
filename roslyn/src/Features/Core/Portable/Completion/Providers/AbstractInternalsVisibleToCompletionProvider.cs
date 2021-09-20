@@ -33,7 +33,8 @@ namespace Microsoft.CodeAnalysis.Completion.Providers
             SourceText text,
             int insertedCharacterPosition,
             OptionSet options
-        ) {
+        )
+        {
             // Should trigger in these cases ($$ is the cursor position)
             // [InternalsVisibleTo($$         -> user enters "
             // [InternalsVisibleTo("$$")]     -> user enters any character
@@ -79,7 +80,8 @@ namespace Microsoft.CodeAnalysis.Completion.Providers
                         context.Position,
                         cancellationToken
                     )
-                ) {
+                )
+                {
                     var token = syntaxTree.FindTokenOnLeftOfPosition(
                         context.Position,
                         cancellationToken
@@ -100,7 +102,8 @@ namespace Microsoft.CodeAnalysis.Completion.Providers
                                 context.CancellationToken
                             )
                             .ConfigureAwait(false)
-                    ) {
+                    )
+                    {
                         await AddAssemblyCompletionItemsAsync(context, cancellationToken)
                             .ConfigureAwait(false);
                     }
@@ -115,7 +118,8 @@ namespace Microsoft.CodeAnalysis.Completion.Providers
         private static SyntaxNode GetAttributeSyntaxNodeOfToken(
             ISyntaxFactsService syntaxFactsService,
             SyntaxToken token
-        ) {
+        )
+        {
             //Supported cases:
             //[Attribute("|
             //[Attribute(parameterName:"Text|")
@@ -137,7 +141,8 @@ namespace Microsoft.CodeAnalysis.Completion.Providers
                 while (
                     syntaxFactsService.IsElementAccessExpression(node.Parent)
                     || syntaxFactsService.IsBinaryExpression(node.Parent)
-                ) {
+                )
+                {
                     node = node.Parent;
                 }
 
@@ -156,7 +161,8 @@ namespace Microsoft.CodeAnalysis.Completion.Providers
             Document document,
             SyntaxNode attributeNode,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var semanticModel = await document.ReuseExistingSpeculativeModelAsync(
                     attributeNode,
                     cancellationToken
@@ -178,7 +184,8 @@ namespace Microsoft.CodeAnalysis.Completion.Providers
         private async Task AddAssemblyCompletionItemsAsync(
             CompletionContext context,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var currentProject = context.Document.Project;
             var allInternalsVisibleToAttributesOfProject =
                 await GetAllInternalsVisibleToAssemblyNamesOfProjectAsync(
@@ -234,7 +241,8 @@ namespace Microsoft.CodeAnalysis.Completion.Providers
         > GetAllInternalsVisibleToAssemblyNamesOfProjectAsync(
             CompletionContext completionContext,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             // Looking up other InternalsVisibleTo attributes of this project. This is faster than compiling all projects of the solution and checking access via
             // sourceAssembly.GivesAccessTo(compilation.Assembly)
             // at the cost of being not so precise (can't check the validity of the PublicKey).
@@ -271,7 +279,8 @@ namespace Microsoft.CodeAnalysis.Completion.Providers
                                 completionContext.CancellationToken
                             )
                             .ConfigureAwait(false)
-                    ) {
+                    )
+                    {
                         // See Microsoft.CodeAnalysis.PEAssembly.BuildInternalsVisibleToMap for reference on how
                         // the 'real' InternalsVisibleTo logic extracts and compares the assemblyName:
                         // * Extract the assemblyName by AssemblyIdentity.TryParseDisplayName
@@ -307,7 +316,8 @@ namespace Microsoft.CodeAnalysis.Completion.Providers
             Document document,
             SyntaxNode node,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var constructorArgument = GetConstructorArgumentOfInternalsVisibleToAttribute(node);
             if (constructorArgument == null)
             {
@@ -338,7 +348,8 @@ namespace Microsoft.CodeAnalysis.Completion.Providers
             Document document,
             TextSpan startSpan,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var result = startSpan;
             var syntaxFacts = document.GetLanguageService<ISyntaxFactsService>();
             var root = await document.GetSyntaxRootAsync(cancellationToken).ConfigureAwait(false);
@@ -368,7 +379,8 @@ namespace Microsoft.CodeAnalysis.Completion.Providers
             CompletionItem item,
             char? commitKey = null,
             CancellationToken cancellationToken = default
-        ) {
+        )
+        {
             var projectIdGuid = item.Properties[ProjectGuidKey];
             var projectId = ProjectId.CreateFromSerialized(new Guid(projectIdGuid));
             var project = document.Project.Solution.GetProject(projectId);
@@ -387,7 +399,8 @@ namespace Microsoft.CodeAnalysis.Completion.Providers
         private static async Task<string> GetPublicKeyOfProjectAsync(
             Project project,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var compilation = await project.GetCompilationAsync(cancellationToken)
                 .ConfigureAwait(false);
             if (compilation.Assembly?.Identity?.IsStrongName == true)

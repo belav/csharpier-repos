@@ -79,13 +79,15 @@ namespace Microsoft.CodeAnalysis.CSharp.Completion.Providers
             Document document,
             int position,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var syntaxTree = await document.GetSyntaxTreeAsync(cancellationToken)
                 .ConfigureAwait(false);
             if (
                 syntaxTree.IsInNonUserCode(position, cancellationToken)
                 || syntaxTree.IsPreProcessorDirectiveContext(position, cancellationToken)
-            ) {
+            )
+            {
                 return false;
             }
 
@@ -126,7 +128,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Completion.Providers
             SyntaxTree syntaxTree,
             int position,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var token = syntaxTree.FindTokenOnLeftOfPosition(position, cancellationToken);
 
             return syntaxTree.IsMemberDeclarationContext(
@@ -152,7 +155,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Completion.Providers
             int position,
             SemanticModel semanticModel,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var spanStart = position;
             var token = syntaxTree.FindTokenOnLeftOfPosition(position, cancellationToken);
 
@@ -163,14 +167,16 @@ namespace Microsoft.CodeAnalysis.CSharp.Completion.Providers
                     cancellationToken,
                     semanticModel
                 )
-            ) {
+            )
+            {
                 if (
                     syntaxTree.IsInPartiallyWrittenGeneric(
                         spanStart,
                         cancellationToken,
                         out var nameToken
                     )
-                ) {
+                )
+                {
                     spanStart = nameToken.SpanStart;
                 }
 
@@ -188,7 +194,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Completion.Providers
                 if (
                     tokenLeftOfGenericName.IsKind(SyntaxKind.DotToken)
                     && tokenLeftOfGenericName.Parent.IsKind(SyntaxKind.QualifiedName)
-                ) {
+                )
+                {
                     spanStart = tokenLeftOfGenericName.Parent.SpanStart;
                 }
             }
@@ -200,14 +207,16 @@ namespace Microsoft.CodeAnalysis.CSharp.Completion.Providers
             SyntaxTree syntaxTree,
             int position,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var prevToken = syntaxTree.FindTokenOnLeftOfPosition(position, cancellationToken)
                 .GetPreviousTokenIfTouchingWord(position);
 
             if (
                 prevToken.IsKind(SyntaxKind.RefKeyword, SyntaxKind.ReadOnlyKeyword)
                 && prevToken.Parent.IsKind(SyntaxKind.RefType)
-            ) {
+            )
+            {
                 return prevToken.SpanStart;
             }
 
@@ -218,7 +227,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Completion.Providers
             SyntaxTree syntaxTree,
             int position,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var prevToken = syntaxTree.FindTokenOnLeftOfPosition(position, cancellationToken)
                 .GetPreviousTokenIfTouchingWord(position);
 

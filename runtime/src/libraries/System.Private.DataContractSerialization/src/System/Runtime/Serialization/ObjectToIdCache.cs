@@ -104,7 +104,8 @@ namespace System.Runtime.Serialization
                 int next = (position == cacheSize - 1) ? 0 : position + 1;
                 next != position;
                 next++
-            ) {
+            )
+            {
                 if (m_objs[next] == null)
                 {
                     m_objs[lastVacantPosition] = null;
@@ -124,7 +125,8 @@ namespace System.Runtime.Serialization
                         nextStartPosition <= lastVacantPosition
                         && !(isNextStartPositionWrapped && !isLastVacantPositionWrapped)
                     ) || (isLastVacantPositionWrapped && !isNextStartPositionWrapped)
-                ) {
+                )
+                {
                     m_objs[lastVacantPosition] = m_objs[next];
                     m_ids[lastVacantPosition] = m_ids[next];
                     // A wrapped object might become unwrapped if it moves from the front of the array to the end of the array

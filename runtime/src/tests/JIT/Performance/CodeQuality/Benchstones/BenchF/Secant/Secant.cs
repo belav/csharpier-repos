@@ -80,7 +80,8 @@ namespace Benchstone.BenchF
             double ftol,
             int ntol,
             out int iflag
-        ) {
+        )
+        {
             double deltax,
                 deltaf,
                 f0,

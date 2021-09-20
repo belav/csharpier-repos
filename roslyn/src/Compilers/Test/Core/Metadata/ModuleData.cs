@@ -66,7 +66,8 @@ namespace Roslyn.Test.Utilities
             ImmutableArray<byte> image,
             ImmutableArray<byte> pdb,
             bool inMemoryModule
-        ) {
+        )
+        {
             this.Id = new ModuleDataId(netModuleName, netModuleName, GetMvid(image));
             this.Kind = OutputKind.NetModule;
             this.Image = image;
@@ -80,7 +81,8 @@ namespace Roslyn.Test.Utilities
             ImmutableArray<byte> image,
             ImmutableArray<byte> pdb,
             bool inMemoryModule
-        ) {
+        )
+        {
             this.Id = new ModuleDataId(identity.Name, identity.GetDisplayName(), GetMvid(image));
             this.Kind = kind;
             this.Image = image;
@@ -94,7 +96,8 @@ namespace Roslyn.Test.Utilities
             ImmutableArray<byte> image,
             ImmutableArray<byte> pdb,
             bool inMemoryModule
-        ) {
+        )
+        {
             this.Id = id;
             this.Kind = kind;
             this.Image = image;

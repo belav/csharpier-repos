@@ -32,7 +32,8 @@ namespace Microsoft.EntityFrameworkCore.Query
         /// </summary>
         public RelationalSqlTranslatingExpressionVisitorFactory(
             RelationalSqlTranslatingExpressionVisitorDependencies dependencies
-        ) {
+        )
+        {
             _dependencies = dependencies;
         }
 
@@ -45,7 +46,8 @@ namespace Microsoft.EntityFrameworkCore.Query
         public virtual RelationalSqlTranslatingExpressionVisitor Create(
             QueryCompilationContext queryCompilationContext,
             QueryableMethodTranslatingExpressionVisitor queryableMethodTranslatingExpressionVisitor
-        ) {
+        )
+        {
             Check.NotNull(queryCompilationContext, nameof(queryCompilationContext));
             Check.NotNull(
                 queryableMethodTranslatingExpressionVisitor,

@@ -66,7 +66,8 @@ namespace Microsoft.CodeAnalysis.LanguageServer.Handler
                 RequestTelemetryLogger telemetryLogger,
                 Func<RequestContext, CancellationToken, Task> callbackAsync,
                 CancellationToken cancellationToken
-            ) {
+            )
+            {
                 Metrics = new RequestMetrics(methodName, telemetryLogger);
 
                 _callbackAsync = callbackAsync;
@@ -88,7 +89,8 @@ namespace Microsoft.CodeAnalysis.LanguageServer.Handler
             public async Task CallbackAsync(
                 RequestContext context,
                 CancellationToken cancellationToken
-            ) {
+            )
+            {
                 // Restore our activity id so that logging/tracking works.
                 Trace.CorrelationManager.ActivityId = ActivityId;
                 _logger.TraceStart($"{MethodName} - Roslyn");

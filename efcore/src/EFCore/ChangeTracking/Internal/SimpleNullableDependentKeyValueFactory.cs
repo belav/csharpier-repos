@@ -30,7 +30,8 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
         public SimpleNullableDependentKeyValueFactory(
             IProperty property,
             PropertyAccessors propertyAccessors
-        ) {
+        )
+        {
             _propertyAccessors = propertyAccessors;
             EqualityComparer = property.CreateKeyEqualityComparer<TKey>();
         }

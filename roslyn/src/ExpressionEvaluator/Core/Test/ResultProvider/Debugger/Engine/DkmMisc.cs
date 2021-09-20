@@ -19,7 +19,8 @@ namespace Microsoft.VisualStudio.Debugger
         public static bool ReportCurrentNonFatalException(
             Exception currentException,
             string implementationName
-        ) {
+        )
+        {
             return true;
         }
     }

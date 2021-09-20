@@ -36,7 +36,8 @@ namespace Microsoft.CodeAnalysis.LanguageServer.Handler
         public SignatureHelpHandler(
             [ImportMany]
                 IEnumerable<Lazy<ISignatureHelpProvider, OrderableLanguageMetadata>> allProviders
-        ) {
+        )
+        {
             _allProviders = allProviders;
         }
 
@@ -48,7 +49,8 @@ namespace Microsoft.CodeAnalysis.LanguageServer.Handler
             LSP.TextDocumentPositionParams request,
             RequestContext context,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var document = context.Document;
             if (document == null)
             {

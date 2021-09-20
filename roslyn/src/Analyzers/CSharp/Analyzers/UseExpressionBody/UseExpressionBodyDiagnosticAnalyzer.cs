@@ -82,7 +82,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UseExpressionBody
                         grandparent,
                         UseExpressionBodyForPropertiesHelper.Instance
                     ) != null
-                ) {
+                )
+                {
                     return;
                 }
 
@@ -93,7 +94,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UseExpressionBody
                         grandparent,
                         UseExpressionBodyForIndexersHelper.Instance
                     ) != null
-                ) {
+                )
+                {
                     return;
                 }
             }
@@ -116,7 +118,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UseExpressionBody
             OptionSet optionSet,
             SyntaxNode declaration,
             UseExpressionBodyHelper helper
-        ) {
+        )
+        {
             var preferExpressionBodiedOption = optionSet.GetOption(helper.Option);
             var severity = preferExpressionBodiedOption.Notification.Severity;
 

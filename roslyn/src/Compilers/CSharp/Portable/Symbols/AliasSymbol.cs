@@ -64,7 +64,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             NamespaceOrTypeSymbol target,
             SyntaxToken aliasName,
             ImmutableArray<Location> locations
-        ) {
+        )
+        {
             _aliasName = aliasName;
             _locations = locations;
             _aliasTarget = target;
@@ -99,7 +100,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
         internal static AliasSymbol CreateGlobalNamespaceAlias(
             NamespaceSymbol globalNamespace,
             Binder globalNamespaceBinder
-        ) {
+        )
+        {
             SyntaxToken aliasName = SyntaxFactory.Identifier(
                 SyntaxFactory.TriviaList(),
                 SyntaxKind.GlobalKeyword,
@@ -119,7 +121,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             NamespaceOrTypeSymbol targetSymbol,
             SyntaxToken aliasToken,
             Binder binder
-        ) {
+        )
+        {
             return new AliasSymbol(
                 binder,
                 targetSymbol,
@@ -238,7 +241,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
         internal override TResult Accept<TArg, TResult>(
             CSharpSymbolVisitor<TArg, TResult> visitor,
             TArg a
-        ) {
+        )
+        {
             return visitor.VisitAlias(this, a);
         }
 
@@ -336,7 +340,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             NameSyntax? syntax,
             BindingDiagnosticBag diagnostics,
             ConsList<TypeSymbol>? basesBeingResolved
-        ) {
+        )
+        {
             var declarationBinder = _binder.WithAdditionalFlags(
                 BinderFlags.SuppressConstraintChecks | BinderFlags.SuppressObsoleteChecks
             );

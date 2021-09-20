@@ -34,7 +34,8 @@ namespace System.Composition.Hosting
         /// <returns>The container as an <see cref="CompositionHost"/>.</returns>
         public static CompositionHost CreateCompositionHost(
             params ExportDescriptorProvider[] providers
-        ) {
+        )
+        {
             return CreateCompositionHost((IEnumerable<ExportDescriptorProvider>)providers);
         }
 
@@ -44,7 +45,8 @@ namespace System.Composition.Hosting
         /// <returns>The container as an <see cref="CompositionHost"/>.</returns>
         public static CompositionHost CreateCompositionHost(
             IEnumerable<ExportDescriptorProvider> providers
-        ) {
+        )
+        {
             if (providers == null)
             {
                 throw new ArgumentNullException(nameof(providers));

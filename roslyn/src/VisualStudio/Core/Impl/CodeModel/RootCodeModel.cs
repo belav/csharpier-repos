@@ -28,7 +28,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.CodeModel
             CodeModelState state,
             EnvDTE.Project parent,
             ProjectId projectId
-        ) {
+        )
+        {
             var rootCodeModel = new RootCodeModel(state, parent, projectId);
             return (EnvDTE.CodeModel)ComAggregate.CreateAggregatedObject(rootCodeModel);
         }
@@ -36,11 +37,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.CodeModel
         private readonly ParentHandle<EnvDTE.Project> _parentHandle;
         private readonly ProjectId _projectId;
 
-        private RootCodeModel(
-            CodeModelState state,
-            EnvDTE.Project parent,
-            ProjectId projectId
-        ) : base(state)
+        private RootCodeModel(CodeModelState state, EnvDTE.Project parent, ProjectId projectId)
+            : base(state)
         {
             _parentHandle = new ParentHandle<EnvDTE.Project>(parent);
             _projectId = projectId;
@@ -79,7 +77,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.CodeModel
                             document.FilePath,
                             StringComparison.OrdinalIgnoreCase
                         )
-                    ) {
+                    )
+                    {
                         foundFile = true;
                         break;
                     }
@@ -211,7 +210,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.CodeModel
                 typeSymbol == null
                 || typeSymbol.TypeKind == TypeKind.Error
                 || typeSymbol.TypeKind == TypeKind.Unknown
-            ) {
+            )
+            {
                 return null;
             }
 

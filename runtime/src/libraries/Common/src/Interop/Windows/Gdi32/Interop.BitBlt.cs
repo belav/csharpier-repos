@@ -31,7 +31,8 @@ internal static partial class Interop
             int x1,
             int y1,
             RasterOp rop
-        ) {
+        )
+        {
             int result = BitBlt(hdc.Handle, x, y, cx, cy, hdcSrc.Handle, x1, y1, rop);
             GC.KeepAlive(hdc.Wrapper);
             GC.KeepAlive(hdcSrc.Wrapper);

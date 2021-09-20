@@ -112,7 +112,8 @@ namespace System.Drawing.Tests
             Func<Font> getFont,
             string systemFontName,
             string windowsFontName
-        ) {
+        )
+        {
             using (Font font = getFont())
             using (Font otherFont = getFont())
             using (Font fontFromName = SystemFonts.GetFontByName(systemFontName))

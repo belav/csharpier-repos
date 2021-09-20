@@ -24,7 +24,8 @@ namespace System.Xml.Xsl.Runtime
                 DynamicallyAccessedMemberTypes.PublicParameterlessConstructor
             )]
                 Type ebType
-        ) {
+        )
+        {
             Debug.Assert(namespaceUri != null && ebType != null);
 
             // Get the default constructor

@@ -55,7 +55,8 @@ namespace Newtonsoft.Json.Tests.Converters
                 JsonWriter writer,
                 object value,
                 JsonSerializer serializer
-            ) {
+            )
+            {
                 double d = (double)value;
 
                 writer.WriteValue(d * 2);
@@ -66,7 +67,8 @@ namespace Newtonsoft.Json.Tests.Converters
                 Type objectType,
                 object existingValue,
                 JsonSerializer serializer
-            ) {
+            )
+            {
                 double d = (double)reader.Value;
 
                 return d / 2;

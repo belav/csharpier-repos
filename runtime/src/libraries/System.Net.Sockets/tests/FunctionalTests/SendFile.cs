@@ -161,7 +161,8 @@ namespace System.Net.Sockets.Tests
             IPAddress listenAt,
             bool sendPreAndPostBuffers,
             int bytesToSend
-        ) {
+        )
+        {
             const int ListenBacklog = 1;
             const int TestTimeout = 30000;
 
@@ -224,7 +225,8 @@ namespace System.Net.Sockets.Tests
                     SocketType.Stream,
                     ProtocolType.Tcp
                 )
-            ) {
+            )
+            {
                 await ConnectAsync(client, serverEndpoint); // Configures NonBlocking behavior
                 await SendFileAsync(
                     client,
@@ -323,7 +325,8 @@ namespace System.Net.Sockets.Tests
                 while (
                     totalReceived < expected.Length
                     && (receivedBytes = server.Receive(receiveBuffer)) != 0
-                ) {
+                )
+                {
                     totalReceived += receivedBytes;
                     receivedChecksum.Add(receiveBuffer, 0, receivedBytes);
                 }
@@ -406,7 +409,8 @@ namespace System.Net.Sockets.Tests
                                         FileMode.CreateNew,
                                         FileAccess.Write
                                     )
-                                ) {
+                                )
+                                {
                                     fs.SetLength(
                                         20 * 1024 * 1024 /* 20MB */
                                     );
@@ -486,7 +490,8 @@ namespace System.Net.Sockets.Tests
             out byte[] preBuffer,
             out byte[] postBuffer,
             out Fletcher32 checksum
-        ) {
+        )
+        {
             // Create file to send
             var random = new Random();
             int fileSize = sendPreAndPostBuffers ? size - 512 : size;

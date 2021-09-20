@@ -24,7 +24,8 @@ namespace Microsoft.AspNetCore.Mvc.ViewFeatures
             int month,
             int day,
             string expectedOutput
-        ) {
+        )
+        {
             // Arrange
             var detailsProvider = new DefaultCompositeMetadataDetailsProvider(
                 Enumerable.Empty<IMetadataDetailsProvider>()

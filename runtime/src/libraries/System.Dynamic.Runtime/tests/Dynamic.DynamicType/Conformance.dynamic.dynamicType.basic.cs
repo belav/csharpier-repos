@@ -9713,7 +9713,8 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.basic.opera
         public static int operator &(
             MyOpClassWithErrorReturnType p1,
             MyOpClassWithErrorReturnType p2
-        ) {
+        )
+        {
             Test.isCallOpAnd = true;
             return 1;
         }
@@ -9721,7 +9722,8 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.basic.opera
         public static int operator |(
             MyOpClassWithErrorReturnType p1,
             MyOpClassWithErrorReturnType p2
-        ) {
+        )
+        {
             Test.isCallOpOr = true;
             return 2;
         }
@@ -9750,7 +9752,8 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.basic.opera
         public static int operator &(
             MyOpClassWithErrorReturnType2 p1,
             MyOpClassWithErrorReturnType2 p2
-        ) {
+        )
+        {
             Test.isCallOpAnd = true;
             return 1;
         }
@@ -9758,7 +9761,8 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.basic.opera
         public static int operator |(
             MyOpClassWithErrorReturnType2 p1,
             MyOpClassWithErrorReturnType2 p2
-        ) {
+        )
+        {
             Test.isCallOpOr = true;
             return 2;
         }

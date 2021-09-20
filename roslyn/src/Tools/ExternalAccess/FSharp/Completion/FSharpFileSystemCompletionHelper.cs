@@ -23,7 +23,8 @@ namespace Microsoft.CodeAnalysis.ExternalAccess.FSharp.Completion
             string baseDirectoryOpt,
             ImmutableArray<string> allowableExtensions,
             CompletionItemRules itemRules
-        ) {
+        )
+        {
             _fileSystemCompletionHelper = new FileSystemCompletionHelper(
                 FSharpGlyphHelpers.ConvertTo(folderGlyph),
                 FSharpGlyphHelpers.ConvertTo(fileGlyph),
@@ -37,7 +38,8 @@ namespace Microsoft.CodeAnalysis.ExternalAccess.FSharp.Completion
         public Task<ImmutableArray<CompletionItem>> GetItemsAsync(
             string directoryPath,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             return _fileSystemCompletionHelper.GetItemsAsync(directoryPath, cancellationToken);
         }
     }

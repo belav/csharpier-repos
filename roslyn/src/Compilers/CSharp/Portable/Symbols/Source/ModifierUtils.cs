@@ -18,7 +18,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             Location errorLocation,
             BindingDiagnosticBag diagnostics,
             out bool modifierErrors
-        ) {
+        )
+        {
             var result = modifiers.ToDeclarationModifiers(
                 diagnostics.DiagnosticBag ?? new DiagnosticBag()
             );
@@ -46,7 +47,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             BindingDiagnosticBag diagnostics,
             SyntaxTokenList? modifierTokens,
             out bool modifierErrors
-        ) {
+        )
+        {
             modifierErrors = false;
             DeclarationModifiers errorModifiers = modifiers & ~allowedModifiers;
             DeclarationModifiers result = modifiers & allowedModifiers;
@@ -93,7 +95,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             Location errorLocation,
             BindingDiagnosticBag diagnostics,
             SyntaxTokenList? modifierTokens
-        ) {
+        )
+        {
             // If we can find the 'partial' token, report it on that.
             if (modifierTokens != null)
             {
@@ -114,7 +117,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             DeclarationModifiers defaultInterfaceImplementationModifiers,
             Location errorLocation,
             BindingDiagnosticBag diagnostics
-        ) {
+        )
+        {
             if (!hasBody && (modifiers & defaultInterfaceImplementationModifiers) != 0)
             {
                 LanguageVersion availableVersion =
@@ -150,7 +154,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             DeclarationModifiers mods,
             bool hasBody,
             bool isExplicitInterfaceImplementation
-        ) {
+        )
+        {
             if (isExplicitInterfaceImplementation)
             {
                 if ((mods & DeclarationModifiers.Abstract) != 0)
@@ -169,13 +174,15 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                         | DeclarationModifiers.Abstract
                     )
                 ) == 0
-            ) {
+            )
+            {
                 Debug.Assert(!isExplicitInterfaceImplementation);
 
                 if (
                     hasBody
                     || (mods & (DeclarationModifiers.Extern | DeclarationModifiers.Sealed)) != 0
-                ) {
+                )
+                {
                     if ((mods & DeclarationModifiers.Sealed) == 0)
                     {
                         mods |= DeclarationModifiers.Virtual;
@@ -195,7 +202,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             {
                 if (
                     (mods & DeclarationModifiers.Partial) == 0 && !isExplicitInterfaceImplementation
-                ) {
+                )
+                {
                     mods |= DeclarationModifiers.Public;
                 }
                 else
@@ -316,7 +324,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
         public static DeclarationModifiers ToDeclarationModifiers(
             this SyntaxTokenList modifiers,
             DiagnosticBag diagnostics
-        ) {
+        )
+        {
             var result = DeclarationModifiers.None;
             bool seenNoDuplicates = true;
             bool seenNoAccessibilityDuplicates = true;
@@ -362,7 +371,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             ref bool seenNoDuplicates,
             ref bool seenNoAccessibilityDuplicates,
             DiagnosticBag diagnostics
-        ) {
+        )
+        {
             if ((allModifiers & modifierKind) != 0)
             {
                 if (seenNoDuplicates)
@@ -381,7 +391,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             DeclarationModifiers modifiers,
             Symbol symbol,
             bool isExplicitInterfaceImplementation
-        ) {
+        )
+        {
             if (!IsValidAccessibility(modifiers))
             {
                 // error CS0107: More than one protection modifier
@@ -395,7 +406,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                     || (modifiers & DeclarationModifiers.Partial) == 0
                 )
                 && (modifiers & DeclarationModifiers.Static) == 0
-            ) {
+            )
+            {
                 switch (modifiers & DeclarationModifiers.AccessibilityMask)
                 {
                     case DeclarationModifiers.Protected:
@@ -405,7 +417,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                         if (
                             symbol.ContainingType?.IsInterface == true
                             && !symbol.ContainingAssembly.RuntimeSupportsDefaultInterfaceImplementation
-                        ) {
+                        )
+                        {
                             return new CSDiagnosticInfo(
                                 ErrorCode.ERR_RuntimeDoesNotSupportProtectedAccessForInterfaceMember
                             );

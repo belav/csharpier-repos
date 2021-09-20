@@ -50,7 +50,8 @@ namespace System.Formats.Asn1
             AsnEncodingRules ruleSet,
             out int bytesConsumed,
             Asn1Tag? expectedTag = null
-        ) {
+        )
+        {
             return GetIntegerContents(
                 source,
                 ruleSet,
@@ -189,7 +190,8 @@ namespace System.Formats.Asn1
             Type enumType,
             out int bytesConsumed,
             Asn1Tag? expectedTag = null
-        ) {
+        )
+        {
             if (enumType == null)
                 throw new ArgumentNullException(nameof(enumType));
 
@@ -216,7 +218,8 @@ namespace System.Formats.Asn1
                 || backingType == typeof(long)
                 || backingType == typeof(short)
                 || backingType == typeof(sbyte)
-            ) {
+            )
+            {
                 if (
                     !TryReadSignedInteger(
                         source,
@@ -227,7 +230,8 @@ namespace System.Formats.Asn1
                         out long value,
                         out int consumed
                     )
-                ) {
+                )
+                {
                     throw new AsnContentException(SR.ContentException_EnumeratedValueTooBig);
                 }
 
@@ -240,7 +244,8 @@ namespace System.Formats.Asn1
                 || backingType == typeof(ulong)
                 || backingType == typeof(ushort)
                 || backingType == typeof(byte)
-            ) {
+            )
+            {
                 if (
                     !TryReadUnsignedInteger(
                         source,
@@ -251,7 +256,8 @@ namespace System.Formats.Asn1
                         out ulong value,
                         out int consumed
                     )
-                ) {
+                )
+                {
                     throw new AsnContentException(SR.ContentException_EnumeratedValueTooBig);
                 }
 

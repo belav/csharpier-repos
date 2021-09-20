@@ -192,7 +192,8 @@ namespace Microsoft.CodeAnalysis
             int hashCode,
             K key,
             [MaybeNullWhen(returnValue: false)] out V value
-        ) {
+        )
+        {
             RoslynDebug.Assert(_root is object);
             AvlNode? b = _root;
 

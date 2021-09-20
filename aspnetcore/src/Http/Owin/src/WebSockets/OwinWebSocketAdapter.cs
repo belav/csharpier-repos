@@ -73,7 +73,8 @@ namespace Microsoft.AspNetCore.Owin
         public OwinWebSocketAdapter(
             IDictionary<string, object> websocketContext,
             string subProtocol
-        ) {
+        )
+        {
             _websocketContext = websocketContext;
             _sendAsync = (WebSocketSendAsync)websocketContext[OwinConstants.WebSocket.SendAsync];
             _receiveAsync = (WebSocketReceiveAsync)websocketContext[
@@ -95,7 +96,8 @@ namespace Microsoft.AspNetCore.Owin
                         OwinConstants.WebSocket.ClientCloseStatus,
                         out obj
                     )
-                ) {
+                )
+                {
                     return (WebSocketCloseStatus)obj;
                 }
                 return null;
@@ -113,7 +115,8 @@ namespace Microsoft.AspNetCore.Owin
                         OwinConstants.WebSocket.ClientCloseDescription,
                         out obj
                     )
-                ) {
+                )
+                {
                     return (string)obj;
                 }
                 return null;
@@ -136,7 +139,8 @@ namespace Microsoft.AspNetCore.Owin
         public override async Task<WebSocketReceiveResult> ReceiveAsync(
             ArraySegment<byte> buffer,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var rawResult = await _receiveAsync(buffer, cancellationToken);
             var messageType = OpCodeToEnum(rawResult.Item1);
             if (messageType == WebSocketMessageType.Close)
@@ -169,7 +173,8 @@ namespace Microsoft.AspNetCore.Owin
             WebSocketMessageType messageType,
             bool endOfMessage,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             return _sendAsync(buffer, EnumToOpCode(messageType), endOfMessage, cancellationToken);
         }
 
@@ -178,7 +183,8 @@ namespace Microsoft.AspNetCore.Owin
             WebSocketCloseStatus closeStatus,
             string statusDescription,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             if (State == WebSocketState.Open || State == WebSocketState.CloseReceived)
             {
                 await CloseOutputAsync(closeStatus, statusDescription, cancellationToken);
@@ -205,7 +211,8 @@ namespace Microsoft.AspNetCore.Owin
             WebSocketCloseStatus closeStatus,
             string statusDescription,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             // TODO: Validate state
             if (State == WebSocketState.Open)
             {

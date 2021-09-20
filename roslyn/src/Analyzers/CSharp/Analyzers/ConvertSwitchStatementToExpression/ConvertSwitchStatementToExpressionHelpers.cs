@@ -24,7 +24,8 @@ namespace Microsoft.CodeAnalysis.CSharp.ConvertSwitchStatementToExpression
                     SyntaxKind.CasePatternSwitchLabel,
                     out CasePatternSwitchLabelSyntax @case
                 )
-            ) {
+            )
+            {
                 // case _:
                 if (@case.Pattern.IsKind(SyntaxKind.DiscardPattern))
                 {
@@ -39,7 +40,8 @@ namespace Microsoft.CodeAnalysis.CSharp.ConvertSwitchStatementToExpression
                         SyntaxKind.DiscardDesignation,
                         SyntaxKind.SingleVariableDesignation
                     )
-                ) {
+                )
+                {
                     return @case.WhenClause == null;
                 }
             }

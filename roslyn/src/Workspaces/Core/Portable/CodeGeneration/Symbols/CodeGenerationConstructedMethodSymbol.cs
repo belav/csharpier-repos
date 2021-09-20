@@ -16,14 +16,16 @@ namespace Microsoft.CodeAnalysis.CodeGeneration
         public CodeGenerationConstructedMethodSymbol(
             CodeGenerationAbstractMethodSymbol constructedFrom,
             ImmutableArray<ITypeSymbol> typeArguments
-        ) : base(
-            constructedFrom.ContainingType,
-            constructedFrom.GetAttributes(),
-            constructedFrom.DeclaredAccessibility,
-            constructedFrom.Modifiers,
-            constructedFrom.Name,
-            constructedFrom.GetReturnTypeAttributes()
-        ) {
+        )
+            : base(
+                constructedFrom.ContainingType,
+                constructedFrom.GetAttributes(),
+                constructedFrom.DeclaredAccessibility,
+                constructedFrom.Modifiers,
+                constructedFrom.Name,
+                constructedFrom.GetReturnTypeAttributes()
+            )
+        {
             _constructedFrom = constructedFrom;
             this.OriginalDefinition = _constructedFrom.OriginalDefinition;
             _typeArguments = typeArguments;

@@ -18,7 +18,8 @@ namespace System.Threading
             _ThreadPoolWaitOrTimerCallback callbackHelper,
             int millisecondsTimeout,
             bool repeating
-        ) {
+        )
+        {
             Handle = waitHandle.SafeWaitHandle;
             Callback = callbackHelper;
             TimeoutDurationMs = millisecondsTimeout;

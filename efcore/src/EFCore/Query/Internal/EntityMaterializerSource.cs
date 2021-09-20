@@ -56,7 +56,8 @@ namespace Microsoft.EntityFrameworkCore.Query.Internal
             IEntityType entityType,
             string entityInstanceName,
             Expression materializationContextExpression
-        ) {
+        )
+        {
             if (entityType.IsAbstract())
             {
                 throw new InvalidOperationException(
@@ -81,7 +82,8 @@ namespace Microsoft.EntityFrameworkCore.Query.Internal
                 var consumedProperty in constructorBinding.ParameterBindings.SelectMany(
                     p => p.ConsumedProperties
                 )
-            ) {
+            )
+            {
                 properties.Remove(consumedProperty);
             }
 
@@ -138,7 +140,8 @@ namespace Microsoft.EntityFrameworkCore.Query.Internal
                 MemberInfo memberInfo,
                 IPropertyBase property,
                 Expression value
-            ) {
+            )
+            {
                 return property.IsIndexerProperty()
                   ? Expression.Assign(
                         Expression.MakeIndex(

@@ -27,7 +27,8 @@ namespace System.Xml.Xsl.XsltOld
             string name,
             string? nsUri,
             InputScopeManager? manager
-        ) {
+        )
+        {
             if (nsUri == XmlReservedNs.NsXmlNs)
             {
                 throw XsltException.Create(SR.Xslt_ReservedNS, nsUri);
@@ -133,7 +134,8 @@ namespace System.Xml.Xsl.XsltOld
                             qname.Namespace,
                             _empty
                         ) == false
-                    ) {
+                    )
+                    {
                         // Come back later
                         frame.State = NameDone;
                         break;

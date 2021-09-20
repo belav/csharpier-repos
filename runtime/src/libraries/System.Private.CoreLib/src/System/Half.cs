@@ -275,7 +275,8 @@ namespace System
             string s,
             NumberStyles style = DefaultParseStyle,
             IFormatProvider? provider = null
-        ) {
+        )
+        {
             NumberFormatInfo.ValidateParseStyleFloatingPoint(style);
             if (s == null)
                 ThrowHelper.ThrowArgumentNullException(ExceptionArgument.s);
@@ -293,7 +294,8 @@ namespace System
             ReadOnlySpan<char> s,
             NumberStyles style = DefaultParseStyle,
             IFormatProvider? provider = null
-        ) {
+        )
+        {
             NumberFormatInfo.ValidateParseStyleFloatingPoint(style);
             return Number.ParseHalf(s, style, NumberFormatInfo.GetInstance(provider));
         }
@@ -338,7 +340,8 @@ namespace System
             NumberStyles style,
             IFormatProvider? provider,
             out Half result
-        ) {
+        )
+        {
             NumberFormatInfo.ValidateParseStyleFloatingPoint(style);
 
             if (s == null)
@@ -363,7 +366,8 @@ namespace System
             NumberStyles style,
             IFormatProvider? provider,
             out Half result
-        ) {
+        )
+        {
             NumberFormatInfo.ValidateParseStyleFloatingPoint(style);
             return Number.TryParseHalf(
                 s,
@@ -509,7 +513,8 @@ namespace System
             out int charsWritten,
             ReadOnlySpan<char> format = default,
             IFormatProvider? provider = null
-        ) {
+        )
+        {
             return Number.TryFormatHalf(
                 this,
                 format,

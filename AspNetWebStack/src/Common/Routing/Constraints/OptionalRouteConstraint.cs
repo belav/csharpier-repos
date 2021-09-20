@@ -94,7 +94,8 @@ namespace System.Web.Mvc.Routing.Constraints
             if (
                 route.Defaults.TryGetValue(parameterName, out defaultValue)
                 && defaultValue == optionalParameter
-            ) {
+            )
+            {
                 object value;
                 if (values.TryGetValue(parameterName, out value) && value == optionalParameter)
                 {

@@ -21,9 +21,7 @@ namespace System.Reflection
             HResult = HResults.COR_E_INVALIDFILTERCRITERIA;
         }
 
-        protected InvalidFilterCriteriaException(
-            SerializationInfo info,
-            StreamingContext context
-        ) : base(info, context) { }
+        protected InvalidFilterCriteriaException(SerializationInfo info, StreamingContext context)
+            : base(info, context) { }
     }
 }

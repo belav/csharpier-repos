@@ -36,7 +36,8 @@ namespace Microsoft.VisualStudio.LanguageServices.CSharp.UnitTests.Debugging
             bool isMissing,
             bool isLine,
             ParseOptions options = null
-        ) {
+        )
+        {
             MarkupTestFile.GetPositionAndSpan(
                 markup,
                 out var source,
@@ -99,7 +100,8 @@ namespace Microsoft.VisualStudio.LanguageServices.CSharp.UnitTests.Debugging
                 if (
                     BreakpointSpans.TryGetClosestBreakpointSpan(root, p, out var span)
                     && span.Start > lastSpan.Start
-                ) {
+                )
+                {
                     lastSpan = span;
                     yield return span;
                 }

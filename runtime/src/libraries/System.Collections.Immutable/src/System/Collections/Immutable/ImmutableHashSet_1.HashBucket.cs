@@ -129,7 +129,8 @@ namespace System.Collections.Immutable
                 T value,
                 IEqualityComparer<T> valueComparer,
                 out OperationResult result
-            ) {
+            )
+            {
                 if (this.IsEmpty)
                 {
                     result = OperationResult.SizeChanged;
@@ -139,7 +140,8 @@ namespace System.Collections.Immutable
                 if (
                     valueComparer.Equals(value, _firstValue)
                     || _additionalElements.IndexOf(value, valueComparer) >= 0
-                ) {
+                )
+                {
                     result = OperationResult.NoChangeRequired;
                     return this;
                 }
@@ -177,7 +179,8 @@ namespace System.Collections.Immutable
                 T value,
                 IEqualityComparer<T> valueComparer,
                 out T existingValue
-            ) {
+            )
+            {
                 if (!this.IsEmpty)
                 {
                     if (valueComparer.Equals(value, _firstValue))
@@ -213,7 +216,8 @@ namespace System.Collections.Immutable
                 T value,
                 IEqualityComparer<T> equalityComparer,
                 out OperationResult result
-            ) {
+            )
+            {
                 if (this.IsEmpty)
                 {
                     result = OperationResult.NoChangeRequired;

@@ -41,7 +41,8 @@ namespace Microsoft.AspNetCore.Razor.Language
         public DefaultBoundAttributeDescriptorBuilder(
             DefaultTagHelperDescriptorBuilder parent,
             string kind
-        ) {
+        )
+        {
             _parent = parent;
             _kind = kind;
 
@@ -83,7 +84,8 @@ namespace Microsoft.AspNetCore.Razor.Language
 
         public override void BindAttributeParameter(
             Action<BoundAttributeParameterDescriptorBuilder> configure
-        ) {
+        )
+        {
             if (configure == null)
             {
                 throw new ArgumentNullException(nameof(configure));
@@ -219,7 +221,8 @@ namespace Microsoft.AspNetCore.Razor.Language
                     if (
                         char.IsWhiteSpace(character)
                         || HtmlConventions.InvalidNonWhitespaceHtmlCharacters.Contains(character)
-                    ) {
+                    )
+                    {
                         var diagnostic =
                             RazorDiagnosticFactory.CreateTagHelper_InvalidBoundAttributeName(
                                 _parent.GetDisplayName(),
@@ -240,7 +243,8 @@ namespace Microsoft.AspNetCore.Razor.Language
                         DataDashPrefix,
                         StringComparison.OrdinalIgnoreCase
                     )
-                ) {
+                )
+                {
                     var diagnostic =
                         RazorDiagnosticFactory.CreateTagHelper_InvalidBoundAttributePrefixStartsWith(
                             _parent.GetDisplayName(),
@@ -253,7 +257,8 @@ namespace Microsoft.AspNetCore.Razor.Language
                 else if (
                     IndexerAttributeNamePrefix.Length > 0
                     && string.IsNullOrWhiteSpace(IndexerAttributeNamePrefix)
-                ) {
+                )
+                {
                     var diagnostic =
                         RazorDiagnosticFactory.CreateTagHelper_InvalidBoundAttributeNullOrWhitespace(
                             _parent.GetDisplayName(),
@@ -268,7 +273,8 @@ namespace Microsoft.AspNetCore.Razor.Language
                     if (
                         isDirectiveAttribute
                         && indexerPrefix.StartsWith("@", StringComparison.Ordinal)
-                    ) {
+                    )
+                    {
                         indexerPrefix = indexerPrefix.Substring(1);
                     }
                     else if (isDirectiveAttribute)
@@ -290,7 +296,8 @@ namespace Microsoft.AspNetCore.Razor.Language
                             || HtmlConventions.InvalidNonWhitespaceHtmlCharacters.Contains(
                                 character
                             )
-                        ) {
+                        )
+                        {
                             var diagnostic =
                                 RazorDiagnosticFactory.CreateTagHelper_InvalidBoundAttributePrefix(
                                     _parent.GetDisplayName(),

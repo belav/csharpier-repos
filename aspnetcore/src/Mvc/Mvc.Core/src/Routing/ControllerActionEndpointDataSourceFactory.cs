@@ -16,7 +16,8 @@ namespace Microsoft.AspNetCore.Mvc.Infrastructure
             ControllerActionEndpointDataSourceIdProvider dataSourceIdProvider,
             IActionDescriptorCollectionProvider actions,
             ActionEndpointFactory factory
-        ) {
+        )
+        {
             _dataSourceIdProvider = dataSourceIdProvider;
             _actions = actions;
             _factory = factory;
@@ -24,7 +25,8 @@ namespace Microsoft.AspNetCore.Mvc.Infrastructure
 
         public ControllerActionEndpointDataSource Create(
             OrderedEndpointsSequenceProvider orderProvider
-        ) {
+        )
+        {
             return new ControllerActionEndpointDataSource(
                 _dataSourceIdProvider,
                 _actions,

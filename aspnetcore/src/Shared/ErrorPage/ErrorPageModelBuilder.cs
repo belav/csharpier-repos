@@ -20,7 +20,8 @@ namespace Microsoft.AspNetCore.Hosting.Views
             ILogger? logger,
             bool showDetailedErrors,
             Exception exception
-        ) {
+        )
+        {
             var systemRuntimeAssembly =
                 typeof(System.ComponentModel.DefaultValueAttribute).Assembly;
             var assemblyVersion =

@@ -79,7 +79,8 @@ namespace System.Net.WebSockets.Client.Tests
                     TimeOutMilliseconds,
                     _output
                 )
-            ) {
+            )
+            {
                 try
                 {
                     await action(cws);
@@ -107,7 +108,8 @@ namespace System.Net.WebSockets.Client.Tests
             WebSocket ws,
             ArraySegment<byte> segment,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             int bytesReceived = 0;
             while (true)
             {

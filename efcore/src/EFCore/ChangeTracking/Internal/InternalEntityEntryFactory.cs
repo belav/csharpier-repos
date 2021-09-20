@@ -53,7 +53,8 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
             IStateManager stateManager,
             IEntityType entityType,
             object entity
-        ) {
+        )
+        {
             Check.DebugAssert(entity != null, "entity is null");
 
             return entityType.ShadowPropertyCount() > 0

@@ -70,7 +70,8 @@ namespace System.Net.Http
         private static HttpContent FindRootContent(
             HttpContent parent,
             IEnumerable<HttpContent> children
-        ) {
+        )
+        {
             Contract.Assert(children != null);
 
             // Find 'start' parameter from parent content type. The value is used
@@ -113,7 +114,8 @@ namespace System.Net.Http
         private static NameValueHeaderValue FindMultipartRelatedParameter(
             HttpContent content,
             string parameterName
-        ) {
+        )
+        {
             // If no parent then we are done
             if (content == null)
             {

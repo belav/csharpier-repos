@@ -24,7 +24,8 @@ namespace Microsoft.EntityFrameworkCore.Benchmarks.Models.Orders
             int ordersPerCustomer,
             int linesPerOrder,
             Action<DbContext> seedAction = null
-        ) {
+        )
+        {
             _productCount = productCount;
             _customerCount = customerCount;
             _ordersPerCustomer = ordersPerCustomer;

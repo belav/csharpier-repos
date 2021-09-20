@@ -425,7 +425,8 @@ namespace System.Text.Json
             if (
                 Utf8Parser.TryParse(span, out value, out int bytesConsumed)
                 && span.Length == bytesConsumed
-            ) {
+            )
+            {
                 // NETCOREAPP implementation of the TryParse method above permits case-insenstive variants of the
                 // float constants "NaN", "Infinity", "-Infinity". This differs from the NETFRAMEWORK implementation.
                 // The following logic reconciles the two implementations to enforce consistent behavior.
@@ -485,7 +486,8 @@ namespace System.Text.Json
             if (
                 Utf8Parser.TryParse(span, out value, out int bytesConsumed)
                 && span.Length == bytesConsumed
-            ) {
+            )
+            {
                 // NETCOREAPP implementation of the TryParse method above permits case-insenstive variants of the
                 // float constants "NaN", "Infinity", "-Infinity". This differs from the NETFRAMEWORK implementation.
                 // The following logic reconciles the two implementations to enforce consistent behavior.
@@ -699,7 +701,8 @@ namespace System.Text.Json
             if (
                 Utf8Parser.TryParse(span, out byte tmp, out int bytesConsumed)
                 && span.Length == bytesConsumed
-            ) {
+            )
+            {
                 value = tmp;
                 return true;
             }
@@ -736,7 +739,8 @@ namespace System.Text.Json
             if (
                 Utf8Parser.TryParse(span, out sbyte tmp, out int bytesConsumed)
                 && span.Length == bytesConsumed
-            ) {
+            )
+            {
                 value = tmp;
                 return true;
             }
@@ -772,7 +776,8 @@ namespace System.Text.Json
             if (
                 Utf8Parser.TryParse(span, out short tmp, out int bytesConsumed)
                 && span.Length == bytesConsumed
-            ) {
+            )
+            {
                 value = tmp;
                 return true;
             }
@@ -808,7 +813,8 @@ namespace System.Text.Json
             if (
                 Utf8Parser.TryParse(span, out int tmp, out int bytesConsumed)
                 && span.Length == bytesConsumed
-            ) {
+            )
+            {
                 value = tmp;
                 return true;
             }
@@ -844,7 +850,8 @@ namespace System.Text.Json
             if (
                 Utf8Parser.TryParse(span, out long tmp, out int bytesConsumed)
                 && span.Length == bytesConsumed
-            ) {
+            )
+            {
                 value = tmp;
                 return true;
             }
@@ -881,7 +888,8 @@ namespace System.Text.Json
             if (
                 Utf8Parser.TryParse(span, out ushort tmp, out int bytesConsumed)
                 && span.Length == bytesConsumed
-            ) {
+            )
+            {
                 value = tmp;
                 return true;
             }
@@ -918,7 +926,8 @@ namespace System.Text.Json
             if (
                 Utf8Parser.TryParse(span, out uint tmp, out int bytesConsumed)
                 && span.Length == bytesConsumed
-            ) {
+            )
+            {
                 value = tmp;
                 return true;
             }
@@ -955,7 +964,8 @@ namespace System.Text.Json
             if (
                 Utf8Parser.TryParse(span, out ulong tmp, out int bytesConsumed)
                 && span.Length == bytesConsumed
-            ) {
+            )
+            {
                 value = tmp;
                 return true;
             }
@@ -986,7 +996,8 @@ namespace System.Text.Json
             if (
                 Utf8Parser.TryParse(span, out float tmp, out int bytesConsumed)
                 && span.Length == bytesConsumed
-            ) {
+            )
+            {
                 value = tmp;
                 return true;
             }
@@ -1017,7 +1028,8 @@ namespace System.Text.Json
             if (
                 Utf8Parser.TryParse(span, out double tmp, out int bytesConsumed)
                 && span.Length == bytesConsumed
-            ) {
+            )
+            {
                 value = tmp;
                 return true;
             }
@@ -1053,7 +1065,8 @@ namespace System.Text.Json
             if (
                 Utf8Parser.TryParse(span, out decimal tmp, out int bytesConsumed)
                 && span.Length == bytesConsumed
-            ) {
+            )
+            {
                 value = tmp;
                 return true;
             }
@@ -1263,7 +1276,8 @@ namespace System.Text.Json
             if (
                 span.Length == JsonConstants.MaximumFormatGuidLength
                 && Utf8Parser.TryParse(span, out Guid tmp, out _, 'D')
-            ) {
+            )
+            {
                 value = tmp;
                 return true;
             }

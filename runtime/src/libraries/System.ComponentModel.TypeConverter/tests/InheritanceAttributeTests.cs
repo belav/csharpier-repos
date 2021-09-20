@@ -101,7 +101,8 @@ namespace System.ComponentModel.Tests
             InheritanceAttribute attribute,
             object other,
             bool expected
-        ) {
+        )
+        {
             Assert.Equal(expected, attribute.Equals(other));
             if (other is InheritanceAttribute)
             {
@@ -115,7 +116,8 @@ namespace System.ComponentModel.Tests
         [InlineData(InheritanceLevel.InheritedReadOnly)]
         public void ToString_ValidInheritanceLevel_ReturnsExpected(
             InheritanceLevel inheritanceLevel
-        ) {
+        )
+        {
             var attribute = new InheritanceAttribute(inheritanceLevel);
             Assert.Equal(inheritanceLevel.ToString(), attribute.ToString());
         }
@@ -125,7 +127,8 @@ namespace System.ComponentModel.Tests
         [InlineData(InheritanceLevel.NotInherited + 1)]
         public void ToString_InvalidInheritanceLevel_ThrowsArgumentException(
             InheritanceLevel inheritanceLevel
-        ) {
+        )
+        {
             var attribute = new InheritanceAttribute(inheritanceLevel);
             AssertExtensions.Throws<ArgumentException>(null, () => attribute.ToString());
         }

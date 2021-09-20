@@ -204,7 +204,8 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Meth
             float fff,
             string sss,
             decimal ddd
-        ) {
+        )
+        {
             Target.Status = 2;
         }
     }

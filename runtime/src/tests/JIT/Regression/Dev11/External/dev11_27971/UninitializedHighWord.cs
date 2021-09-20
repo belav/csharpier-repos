@@ -85,7 +85,8 @@ namespace UninitializedHighWord
             Int32 minute,
             Int32 second,
             Int32 milliseconds
-        ) {
+        )
+        {
             if (App.s_fPreparingMethods)
             {
                 return;
@@ -121,7 +122,8 @@ namespace UninitializedHighWord
         [MethodImpl(MethodImplOptions.NoInlining)]
         private static void GenerateHalfInitializedArgSlots(
             RegistryTimeZoneInformation timeZoneInformation
-        ) {
+        )
+        {
             if (timeZoneInformation.DaylightDate.Year == 0)
             {
                 App.CheckArguments(
@@ -149,7 +151,8 @@ namespace UninitializedHighWord
             StackFiller fill2,
             StackFiller fill3,
             StackFiller fill4
-        ) {
+        )
+        {
             return;
         }
 

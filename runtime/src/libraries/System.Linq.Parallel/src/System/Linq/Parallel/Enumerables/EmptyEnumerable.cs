@@ -58,7 +58,8 @@ namespace System.Linq.Parallel
         internal override bool MoveNext(
             [MaybeNullWhen(false), AllowNull] ref T currentElement,
             ref int currentKey
-        ) {
+        )
+        {
             return false;
         }
 

@@ -133,7 +133,8 @@ namespace System.Data.OleDb
             OleDbConnection connection,
             OleDbTransaction? transaction,
             IsolationLevel isolevel
-        ) {
+        )
+        {
             _parentConnection = connection;
             _parentTransaction = transaction;
 

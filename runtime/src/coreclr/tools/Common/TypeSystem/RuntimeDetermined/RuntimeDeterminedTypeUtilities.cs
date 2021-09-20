@@ -11,7 +11,8 @@ namespace Internal.TypeSystem
             Instantiation instantiation,
             Instantiation openInstantiation,
             out bool changed
-        ) {
+        )
+        {
             Debug.Assert(instantiation.Length == openInstantiation.Length);
 
             TypeDesc[] sharedInstantiation = null;
@@ -27,7 +28,8 @@ namespace Internal.TypeSystem
                     int instantiationIndex = 0;
                     instantiationIndex < instantiation.Length;
                     instantiationIndex++
-                ) {
+                )
+                {
                     TypeDesc typeToConvert = instantiation[instantiationIndex];
                     TypeSystemContext context = typeToConvert.Context;
                     TypeDesc canonForm = context.ConvertToCanon(typeToConvert, ref currentPolicy);

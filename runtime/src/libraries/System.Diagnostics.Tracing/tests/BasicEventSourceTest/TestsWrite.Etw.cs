@@ -56,7 +56,8 @@ namespace BasicEventSourceTests
             Listener listener,
             List<SubTest> tests,
             EventSource logger
-        ) {
+        )
+        {
             if (listener is EtwListener)
             {
                 tests.Add(

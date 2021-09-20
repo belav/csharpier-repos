@@ -22,7 +22,8 @@ unsafe class ArrayWithOffsetTest
 
                 fixed (int* expectedSubArray = expected.Slice(i))fixed (
                     int* newValueSubArray = newValue.Slice(i)
-                ) {
+                )
+                {
                     Assert.IsTrue(
                         ArrayWithOffsetNative.Marshal_InOut(
                             expectedSubArray,

@@ -12,7 +12,8 @@ internal class Camera
         VectorPacket256 forward,
         VectorPacket256 up,
         VectorPacket256 right
-    ) {
+    )
+    {
         Pos = pos;
         Forward = forward;
         Up = up;

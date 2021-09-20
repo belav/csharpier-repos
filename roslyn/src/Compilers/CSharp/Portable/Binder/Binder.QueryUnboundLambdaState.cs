@@ -87,7 +87,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             public override void GenerateAnonymousFunctionConversionError(
                 BindingDiagnosticBag diagnostics,
                 TypeSymbol targetType
-            ) {
+            )
+            {
                 // TODO: improved diagnostics for query expressions
                 base.GenerateAnonymousFunctionConversionError(diagnostics, targetType);
             }
@@ -117,7 +118,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                 Binder lambdaBodyBinder,
                 BoundExpression expression,
                 BindingDiagnosticBag diagnostics
-            ) {
+            )
+            {
                 throw ExceptionUtilities.Unreachable;
             }
 
@@ -125,7 +127,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                 LambdaSymbol lambdaSymbol,
                 Binder lambdaBodyBinder,
                 BindingDiagnosticBag diagnostics
-            ) {
+            )
+            {
                 return _bodyFactory(lambdaSymbol, lambdaBodyBinder, diagnostics);
             }
         }

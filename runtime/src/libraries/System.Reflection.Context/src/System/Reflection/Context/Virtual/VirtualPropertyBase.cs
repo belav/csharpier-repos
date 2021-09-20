@@ -19,7 +19,8 @@ namespace System.Reflection.Context.Virtual
             Type propertyType,
             string name,
             CustomReflectionContext context
-        ) {
+        )
+        {
             if (name == null)
                 throw new ArgumentNullException(nameof(name));
 
@@ -109,7 +110,8 @@ namespace System.Reflection.Context.Virtual
             Binder binder,
             object[] index,
             CultureInfo culture
-        ) {
+        )
+        {
             MethodInfo getMethod = GetGetMethod(true);
             if (getMethod == null)
                 throw new ArgumentException(SR.Argument_GetMethNotFnd);
@@ -124,7 +126,8 @@ namespace System.Reflection.Context.Virtual
             Binder binder,
             object[] index,
             CultureInfo culture
-        ) {
+        )
+        {
             MethodInfo setMethod = GetSetMethod(true);
             if (setMethod == null)
                 throw new ArgumentException(SR.Argument_GetMethNotFnd);

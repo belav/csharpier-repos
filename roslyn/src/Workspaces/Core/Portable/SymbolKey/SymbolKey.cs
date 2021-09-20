@@ -171,7 +171,8 @@ namespace Microsoft.CodeAnalysis
             Compilation compilation,
             bool ignoreAssemblyKey = false,
             CancellationToken cancellationToken = default
-        ) {
+        )
+        {
             return ResolveString(
                 symbolKey,
                 compilation,
@@ -186,7 +187,8 @@ namespace Microsoft.CodeAnalysis
             Compilation compilation,
             out string? failureReason,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             return ResolveString(
                 symbolKey,
                 compilation,
@@ -202,7 +204,8 @@ namespace Microsoft.CodeAnalysis
             bool ignoreAssemblyKey,
             out string? failureReason,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             using var reader = SymbolKeyReader.GetReader(
                 symbolKey,
                 compilation,
@@ -231,7 +234,8 @@ namespace Microsoft.CodeAnalysis
             int version,
             ISymbol? symbol,
             CancellationToken cancellationToken = default
-        ) {
+        )
+        {
             using var writer = SymbolKeyWriter.GetWriter(cancellationToken);
             writer.WriteFormatVersion(version);
             writer.WriteSymbolKey(symbol);
@@ -246,7 +250,8 @@ namespace Microsoft.CodeAnalysis
             Compilation compilation,
             bool ignoreAssemblyKey = false,
             CancellationToken cancellationToken = default
-        ) {
+        )
+        {
             return ResolveString(_symbolKeyData, compilation, ignoreAssemblyKey, cancellationToken);
         }
 
@@ -306,7 +311,8 @@ namespace Microsoft.CodeAnalysis
         private static bool ParameterRefKindsMatch(
             ImmutableArray<IParameterSymbol> parameters,
             PooledArrayBuilder<RefKind> refKinds
-        ) {
+        )
+        {
             if (parameters.Length != refKinds.Count)
             {
                 return false;
@@ -322,7 +328,8 @@ namespace Microsoft.CodeAnalysis
                         parameters[i].RefKind,
                         distinguishRefFromOut: false
                     )
-                ) {
+                )
+                {
                     return false;
                 }
             }

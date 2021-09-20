@@ -274,7 +274,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             UnaryOperatorKind kind,
             BoundExpression operand,
             UnaryOperatorOverloadResolutionResult result
-        ) {
+        )
+        {
             var operandType = operand.Type;
             if (operandType is null)
             {

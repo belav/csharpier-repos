@@ -28,7 +28,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.CodeModel
             SyntaxNode containerNode,
             SyntaxNode attributeNode,
             int insertionIndex
-        ) {
+        )
+        {
             return PerformEdit(
                 document =>
                 {
@@ -51,7 +52,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.CodeModel
             SyntaxNode containerNode,
             SyntaxNode attributeArgumentNode,
             int insertionIndex
-        ) {
+        )
+        {
             return PerformEdit(
                 document =>
                 {
@@ -74,7 +76,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.CodeModel
             SyntaxNode containerNode,
             SyntaxNode importNode,
             int insertionIndex
-        ) {
+        )
+        {
             return PerformEdit(
                 document =>
                 {
@@ -97,7 +100,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.CodeModel
             SyntaxNode containerNode,
             SyntaxNode memberNode,
             int insertionIndex
-        ) {
+        )
+        {
             return PerformEdit(
                 document =>
                 {
@@ -120,7 +124,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.CodeModel
             SyntaxNode containerNode,
             SyntaxNode parameterNode,
             int insertionIndex
-        ) {
+        )
+        {
             return PerformEdit(
                 document =>
                 {
@@ -143,7 +148,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.CodeModel
             CodeModelState state,
             FileCodeModel fileCodeModel,
             SyntaxNode node
-        ) {
+        )
+        {
             var element = CodeModelService.CreateInternalCodeElement(state, fileCodeModel, node);
             if (IsBatchOpen)
             {
@@ -221,7 +227,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.CodeModel
             string name,
             string value,
             object position
-        ) {
+        )
+        {
             var attributeArgumentNode = CodeModelService.CreateAttributeArgumentNode(
                 CodeModelService.GetUnescapedName(name),
                 value
@@ -251,7 +258,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.CodeModel
             string value,
             object position,
             string target = null
-        ) {
+        )
+        {
             containerNode = CodeModelService.GetNodeWithAttributes(containerNode);
             var attributeNode = CodeModelService.CreateAttributeNode(
                 CodeModelService.GetUnescapedName(name),
@@ -279,7 +287,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.CodeModel
             string name,
             object type,
             object position
-        ) {
+        )
+        {
             var typeSymbol = CodeModelService.GetTypeSymbol(
                 type,
                 this.GetSemanticModel(),
@@ -325,7 +334,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.CodeModel
             object bases,
             object implementedInterfaces,
             EnvDTE.vsCMAccess access
-        ) {
+        )
+        {
             var containerNodePosition = containerNode.SpanStart;
             var semanticModel = GetSemanticModel();
 
@@ -386,7 +396,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.CodeModel
             object type,
             object position,
             EnvDTE.vsCMAccess access
-        ) {
+        )
+        {
             var containerNodePosition = containerNode.SpanStart;
             var semanticModel = GetSemanticModel();
 
@@ -448,7 +459,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.CodeModel
             string name,
             object value,
             object position
-        ) {
+        )
+        {
             if (value != null && !(value is string))
             {
                 throw Exceptions.ThrowEInvalidArg();
@@ -490,7 +502,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.CodeModel
             bool createPropertyStyleEvent,
             object position,
             EnvDTE.vsCMAccess access
-        ) {
+        )
+        {
             var containerNodePosition = containerNode.SpanStart;
             var semanticModel = GetSemanticModel();
 
@@ -529,7 +542,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.CodeModel
             object type,
             object position,
             EnvDTE.vsCMAccess access
-        ) {
+        )
+        {
             kind = CodeModelService.ValidateFunctionKind(containerNode, kind, name);
 
             SyntaxNode newMember;
@@ -537,7 +551,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.CodeModel
             if (
                 kind == EnvDTE.vsCMFunction.vsCMFunctionSub
                 || kind == EnvDTE.vsCMFunction.vsCMFunctionFunction
-            ) {
+            )
+            {
                 var containerNodePosition = containerNode.SpanStart;
                 var semanticModel = GetSemanticModel();
                 var returnType =
@@ -588,7 +603,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.CodeModel
             string name,
             object position,
             string alias
-        ) {
+        )
+        {
             var importNode = CodeModelService.CreateImportNode(
                 CodeModelService.GetUnescapedName(name),
                 alias
@@ -614,7 +630,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.CodeModel
             object position,
             object bases,
             EnvDTE.vsCMAccess access
-        ) {
+        )
+        {
             var containerNodePosition = containerNode.SpanStart;
             var semanticModel = GetSemanticModel();
 
@@ -657,7 +674,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.CodeModel
             SyntaxNode containerNode,
             string name,
             object position
-        ) {
+        )
+        {
             var newNamespace = CreateNamespaceDeclaration(containerNode, name);
             var insertionIndex = CodeModelService.PositionVariantToMemberInsertionIndex(
                 position,
@@ -681,14 +699,16 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.CodeModel
             object type,
             object position,
             EnvDTE.vsCMAccess access
-        ) {
+        )
+        {
             var isGetterPresent = !string.IsNullOrEmpty(getterName);
             var isPutterPresent = !string.IsNullOrEmpty(putterName);
 
             if (
                 (!isGetterPresent && !isPutterPresent)
                 || (isGetterPresent && isPutterPresent && getterName != putterName)
-            ) {
+            )
+            {
                 throw Exceptions.ThrowEInvalidArg();
             }
 
@@ -782,7 +802,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.CodeModel
             object type,
             object position,
             EnvDTE.vsCMAccess access
-        ) {
+        )
+        {
             var containerNodePosition = containerNode.SpanStart;
             var semanticModel = GetSemanticModel();
 
@@ -1067,7 +1088,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.CodeModel
             if (
                 CodeModelInterop.CanChangedVariantType(@base, VarEnum.VT_UNKNOWN)
                 && !CodeModelService.IsValidBaseType(node, typeSymbol)
-            ) {
+            )
+            {
                 throw Exceptions.ThrowEInvalidArg();
             }
 
@@ -1103,7 +1125,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.CodeModel
             SyntaxNode node,
             object @base,
             object position = null
-        ) {
+        )
+        {
             var semanticModel = GetSemanticModel();
             var typeSymbol = CodeModelService.GetTypeSymbol(@base, semanticModel, node.SpanStart);
 
@@ -1112,7 +1135,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.CodeModel
             if (
                 CodeModelInterop.CanChangedVariantType(@base, VarEnum.VT_UNKNOWN)
                 && !CodeModelService.IsValidInterfaceType(node, typeSymbol)
-            ) {
+            )
+            {
                 throw Exceptions.ThrowEInvalidArg();
             }
 

@@ -96,7 +96,8 @@ namespace Activator
                     string.Empty,
                     string.Empty
                 )
-            ) {
+            )
+            {
                 var cxt = new ComActivationContext()
                 {
                     ClassId = CLSID_NotUsed,
@@ -122,7 +123,8 @@ namespace Activator
                     string.Empty,
                     string.Empty
                 )
-            ) {
+            )
+            {
                 var cxt = new ComActivationContext()
                 {
                     ClassId = CLSID_NotUsed,
@@ -171,7 +173,8 @@ namespace Activator
                     string.Empty,
                     string.Empty
                 )
-            ) {
+            )
+            {
                 string[] typeNamesToValidate =
                 {
                     "ValidRegistrationTypeCallbacks",
@@ -226,7 +229,8 @@ namespace Activator
                     string.Empty,
                     string.Empty
                 )
-            ) {
+            )
+            {
                 foreach (
                     string typename in new[]
                     {
@@ -235,7 +239,8 @@ namespace Activator
                         "InvalidInstanceRegistrationCallbacks",
                         "MultipleRegistrationCallbacks"
                     }
-                ) {
+                )
+                {
                     Console.WriteLine($"Validating {typename}...");
 
                     var cxt = new ComActivationContext()

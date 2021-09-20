@@ -30,7 +30,8 @@ namespace Microsoft.CodeAnalysis.Diagnostics.EngineV2
             StateSet stateSet,
             AnalysisKind kind,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             try
             {
                 var version = await GetDiagnosticVersionAsync(document.Project, cancellationToken)
@@ -49,7 +50,8 @@ namespace Microsoft.CodeAnalysis.Diagnostics.EngineV2
                         stateSet.Analyzer,
                         document.Project
                     )
-                ) {
+                )
+                {
                     return new DocumentAnalysisData(
                         version,
                         existingData.Items,
@@ -73,7 +75,8 @@ namespace Microsoft.CodeAnalysis.Diagnostics.EngineV2
             DocumentAnalysisExecutor executor,
             StateSet stateSet,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var kind = executor.AnalysisScope.Kind;
             var document = executor.AnalysisScope.TextDocument;
 
@@ -89,7 +92,8 @@ namespace Microsoft.CodeAnalysis.Diagnostics.EngineV2
                     stateSet.Analyzer,
                     cancellationToken
                 )
-            ) {
+            )
+            {
                 try
                 {
                     var diagnostics = await executor.ComputeDiagnosticsAsync(
@@ -141,7 +145,8 @@ namespace Microsoft.CodeAnalysis.Diagnostics.EngineV2
             IEnumerable<StateSet> stateSets,
             bool forceAnalyzerRun,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             using (
                 Logger.LogBlock(
                     FunctionId.Diagnostics_ProjectDiagnostic,
@@ -150,7 +155,8 @@ namespace Microsoft.CodeAnalysis.Diagnostics.EngineV2
                     stateSets,
                     cancellationToken
                 )
-            ) {
+            )
+            {
                 try
                 {
                     // PERF: We need to flip this to false when we do actual diffing.
@@ -174,7 +180,8 @@ namespace Microsoft.CodeAnalysis.Diagnostics.EngineV2
                             compilationWithAnalyzers,
                             project.Solution.Options
                         )
-                    ) {
+                    )
+                    {
                         return existingData;
                     }
 
@@ -233,7 +240,8 @@ namespace Microsoft.CodeAnalysis.Diagnostics.EngineV2
         private static bool CompilationHasOpenFileOnlyAnalyzers(
             CompilationWithAnalyzers? compilationWithAnalyzers,
             OptionSet options
-        ) {
+        )
+        {
             if (compilationWithAnalyzers == null)
             {
                 return false;
@@ -256,7 +264,8 @@ namespace Microsoft.CodeAnalysis.Diagnostics.EngineV2
             ImmutableDictionary<DiagnosticAnalyzer, DiagnosticAnalysisResult> result,
             Project project,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             // see whether solution is loaded successfully
             var projectLoadedSuccessfully = await project.HasSuccessfullyLoadedAsync(
                     cancellationToken
@@ -306,7 +315,8 @@ namespace Microsoft.CodeAnalysis.Diagnostics.EngineV2
             ImmutableArray<DiagnosticAnalyzer> ideAnalyzers,
             bool forcedAnalysis,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             try
             {
                 var result =
@@ -358,7 +368,8 @@ namespace Microsoft.CodeAnalysis.Diagnostics.EngineV2
             bool forcedAnalysis,
             ImmutableDictionary<DiagnosticAnalyzer, DiagnosticAnalysisResult> existing,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             try
             {
                 // PERF: check whether we can reduce number of analyzers we need to run.
@@ -380,7 +391,8 @@ namespace Microsoft.CodeAnalysis.Diagnostics.EngineV2
                         existing,
                         out var analyzersToRun
                     )
-                ) {
+                )
+                {
                     // it looks like we can reduce the set. create new CompilationWithAnalyzer.
                     // if we reduced to 0, we just pass in null for analyzer drvier. it could be reduced to 0
                     // since we might have up to date results for analyzers from compiler but not for
@@ -431,7 +443,8 @@ namespace Microsoft.CodeAnalysis.Diagnostics.EngineV2
             VersionStamp version,
             ImmutableDictionary<DiagnosticAnalyzer, DiagnosticAnalysisResult> existing,
             ImmutableDictionary<DiagnosticAnalyzer, DiagnosticAnalysisResult> result
-        ) {
+        )
+        {
             // quick bail out.
             if (existing.IsEmpty)
             {
@@ -457,7 +470,8 @@ namespace Microsoft.CodeAnalysis.Diagnostics.EngineV2
             VersionStamp version,
             ImmutableDictionary<DiagnosticAnalyzer, DiagnosticAnalysisResult> existing,
             out ImmutableArray<DiagnosticAnalyzer> analyzers
-        ) {
+        )
+        {
             analyzers = default;
 
             var options = project.Solution.Options;
@@ -470,7 +484,8 @@ namespace Microsoft.CodeAnalysis.Diagnostics.EngineV2
                     existing.TryGetValue(analyzer, out var analysisResult)
                     && analysisResult.Version == version
                     && !analyzer.IsOpenFileOnly(options)
-                ) {
+                )
+                {
                     // we already have up to date result.
                     continue;
                 }
@@ -498,7 +513,8 @@ namespace Microsoft.CodeAnalysis.Diagnostics.EngineV2
             Compilation? compilation,
             ImmutableDictionary<DiagnosticAnalyzer, DiagnosticAnalysisResult> result,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             try
             {
                 var version = await GetDiagnosticVersionAsync(project, cancellationToken)
@@ -615,7 +631,8 @@ namespace Microsoft.CodeAnalysis.Diagnostics.EngineV2
             Project project,
             VersionStamp version,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             ImmutableHashSet<Document>.Builder? failedDocuments = null;
             ImmutableDictionary<
                 DocumentId,
@@ -661,7 +678,8 @@ namespace Microsoft.CodeAnalysis.Diagnostics.EngineV2
 
         private void UpdateAnalyzerTelemetryData(
             ImmutableDictionary<DiagnosticAnalyzer, AnalyzerTelemetryInfo> telemetry
-        ) {
+        )
+        {
             foreach (var (analyzer, telemetryInfo) in telemetry)
             {
                 var isTelemetryCollectionAllowed =
@@ -690,7 +708,8 @@ namespace Microsoft.CodeAnalysis.Diagnostics.EngineV2
             AnalysisKind kind,
             out FunctionId functionId,
             out string title
-        ) {
+        )
+        {
             switch (kind)
             {
                 case AnalysisKind.Syntax:

@@ -22,7 +22,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.CallHierarchy
             string sortText,
             ImageSource displayGlyph,
             IEnumerable<CallHierarchyDetail> details
-        ) {
+        )
+        {
             _name = name;
             _sortText = sortText;
             _displayGlyph = displayGlyph;

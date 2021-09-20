@@ -32,7 +32,8 @@ namespace Microsoft.CodeAnalysis.ExternalAccess.FSharp.Navigation
             DocumentId documentId,
             TextSpan textSpan,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var service = workspace.Services.GetService<IDocumentNavigationService>();
             return service.CanNavigateToSpan(workspace, documentId, textSpan, cancellationToken);
         }
@@ -57,7 +58,8 @@ namespace Microsoft.CodeAnalysis.ExternalAccess.FSharp.Navigation
             int lineNumber,
             int offset,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var service = workspace.Services.GetService<IDocumentNavigationService>();
             return service.CanNavigateToLineAndOffset(
                 workspace,
@@ -88,7 +90,8 @@ namespace Microsoft.CodeAnalysis.ExternalAccess.FSharp.Navigation
             int position,
             int virtualSpace,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var service = workspace.Services.GetService<IDocumentNavigationService>();
             return service.CanNavigateToPosition(
                 workspace,
@@ -112,7 +115,8 @@ namespace Microsoft.CodeAnalysis.ExternalAccess.FSharp.Navigation
             TextSpan textSpan,
             OptionSet options,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var service = workspace.Services.GetService<IDocumentNavigationService>();
             return service.TryNavigateToSpan(
                 workspace,
@@ -146,7 +150,8 @@ namespace Microsoft.CodeAnalysis.ExternalAccess.FSharp.Navigation
             int offset,
             OptionSet options,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var service = workspace.Services.GetService<IDocumentNavigationService>();
             return service.TryNavigateToLineAndOffset(
                 workspace,
@@ -181,7 +186,8 @@ namespace Microsoft.CodeAnalysis.ExternalAccess.FSharp.Navigation
             int virtualSpace,
             OptionSet options,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var service = workspace.Services.GetService<IDocumentNavigationService>();
             return service.TryNavigateToPosition(
                 workspace,

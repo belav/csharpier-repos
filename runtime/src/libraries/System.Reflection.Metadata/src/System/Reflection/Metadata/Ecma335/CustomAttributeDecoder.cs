@@ -16,7 +16,8 @@ namespace System.Reflection.Metadata.Ecma335
         public CustomAttributeDecoder(
             ICustomAttributeTypeProvider<TType> provider,
             MetadataReader reader
-        ) {
+        )
+        {
             _reader = reader;
             _provider = provider;
         }
@@ -77,7 +78,8 @@ namespace System.Reflection.Metadata.Ecma335
             ref BlobReader signatureReader,
             ref BlobReader valueReader,
             int count
-        ) {
+        )
+        {
             if (count == 0)
             {
                 return ImmutableArray<CustomAttributeTypedArgument<TType>>.Empty;
@@ -98,7 +100,8 @@ namespace System.Reflection.Metadata.Ecma335
 
         private ImmutableArray<CustomAttributeNamedArgument<TType>> DecodeNamedArguments(
             ref BlobReader valueReader
-        ) {
+        )
+        {
             int count = valueReader.ReadUInt16();
             if (count == 0)
             {
@@ -115,7 +118,8 @@ namespace System.Reflection.Metadata.Ecma335
                 if (
                     kind != CustomAttributeNamedArgumentKind.Field
                     && kind != CustomAttributeNamedArgumentKind.Property
-                ) {
+                )
+                {
                     throw new BadImageFormatException();
                 }
 
@@ -156,7 +160,8 @@ namespace System.Reflection.Metadata.Ecma335
         private ArgumentTypeInfo DecodeFixedArgumentType(
             ref BlobReader signatureReader,
             bool isElementType = false
-        ) {
+        )
+        {
             SignatureTypeCode signatureTypeCode = signatureReader.ReadSignatureTypeCode();
 
             var info = new ArgumentTypeInfo
@@ -222,7 +227,8 @@ namespace System.Reflection.Metadata.Ecma335
         private ArgumentTypeInfo DecodeNamedArgumentType(
             ref BlobReader valueReader,
             bool isElementType = false
-        ) {
+        )
+        {
             var info = new ArgumentTypeInfo { TypeCode = valueReader.ReadSerializationTypeCode(), };
 
             switch (info.TypeCode)
@@ -282,7 +288,8 @@ namespace System.Reflection.Metadata.Ecma335
         private CustomAttributeTypedArgument<TType> DecodeArgument(
             ref BlobReader valueReader,
             ArgumentTypeInfo info
-        ) {
+        )
+        {
             if (info.TypeCode == SerializationTypeCode.TaggedObject)
             {
                 info = DecodeNamedArgumentType(ref valueReader);
@@ -364,7 +371,8 @@ namespace System.Reflection.Metadata.Ecma335
         private ImmutableArray<CustomAttributeTypedArgument<TType>>? DecodeArrayArgument(
             ref BlobReader blobReader,
             ArgumentTypeInfo info
-        ) {
+        )
+        {
             int count = blobReader.ReadInt32();
             if (count == -1)
             {

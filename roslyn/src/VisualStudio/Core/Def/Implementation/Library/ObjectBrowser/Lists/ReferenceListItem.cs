@@ -14,11 +14,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Library.ObjectB
         private readonly string _name;
         private readonly MetadataReference _reference;
 
-        public ReferenceListItem(
-            ProjectId projectId,
-            string name,
-            MetadataReference reference
-        ) : base(projectId, StandardGlyphGroup.GlyphAssembly)
+        public ReferenceListItem(ProjectId projectId, string name, MetadataReference reference)
+            : base(projectId, StandardGlyphGroup.GlyphAssembly)
         {
             _name = name;
             _reference = reference;

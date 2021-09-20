@@ -15,7 +15,8 @@ namespace System.Runtime.Serialization
             Type type,
             StreamingContext context,
             ISerializationSurrogate surrogate
-        ) {
+        )
+        {
             if (type == null)
             {
                 throw new ArgumentNullException(nameof(type));
@@ -160,7 +161,8 @@ namespace System.Runtime.Serialization
             Type type,
             StreamingContext context,
             out ISurrogateSelector selector
-        ) {
+        )
+        {
             if (type == null)
             {
                 throw new ArgumentNullException(nameof(type));

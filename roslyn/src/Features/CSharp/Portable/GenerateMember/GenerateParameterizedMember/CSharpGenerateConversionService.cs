@@ -59,7 +59,8 @@ namespace Microsoft.CodeAnalysis.CSharp.GenerateMember.GenerateParameterizedMemb
                 ExpressionSyntax,
                 InvocationExpressionSyntax
             >.State state
-        ) {
+        )
+        {
             return new CSharpGenerateParameterizedMemberService<CSharpGenerateConversionService>.InvocationExpressionInfo(
                 document,
                 state
@@ -80,7 +81,8 @@ namespace Microsoft.CodeAnalysis.CSharp.GenerateMember.GenerateParameterizedMemb
             out SyntaxToken identifierToken,
             out IMethodSymbol methodSymbol,
             out INamedTypeSymbol typeToGenerateIn
-        ) {
+        )
+        {
             if (
                 TryGetConversionMethodAndTypeToGenerateIn(
                     document,
@@ -90,7 +92,8 @@ namespace Microsoft.CodeAnalysis.CSharp.GenerateMember.GenerateParameterizedMemb
                     out methodSymbol,
                     out typeToGenerateIn
                 )
-            ) {
+            )
+            {
                 identifierToken = SyntaxFactory.Token(
                     default,
                     SyntaxKind.ImplicitKeyword,
@@ -115,7 +118,8 @@ namespace Microsoft.CodeAnalysis.CSharp.GenerateMember.GenerateParameterizedMemb
             out SyntaxToken identifierToken,
             out IMethodSymbol methodSymbol,
             out INamedTypeSymbol typeToGenerateIn
-        ) {
+        )
+        {
             if (
                 TryGetConversionMethodAndTypeToGenerateIn(
                     document,
@@ -125,7 +129,8 @@ namespace Microsoft.CodeAnalysis.CSharp.GenerateMember.GenerateParameterizedMemb
                     out methodSymbol,
                     out typeToGenerateIn
                 )
-            ) {
+            )
+            {
                 identifierToken = SyntaxFactory.Token(
                     default,
                     SyntaxKind.ImplicitKeyword,
@@ -149,7 +154,8 @@ namespace Microsoft.CodeAnalysis.CSharp.GenerateMember.GenerateParameterizedMemb
             CancellationToken cancellationToken,
             out IMethodSymbol methodSymbol,
             out INamedTypeSymbol typeToGenerateIn
-        ) {
+        )
+        {
             if (expression is CastExpressionSyntax castExpression)
             {
                 return TryGetExplicitConversionMethodAndTypeToGenerateIn(
@@ -179,7 +185,8 @@ namespace Microsoft.CodeAnalysis.CSharp.GenerateMember.GenerateParameterizedMemb
             CancellationToken cancellationToken,
             out IMethodSymbol methodSymbol,
             out INamedTypeSymbol typeToGenerateIn
-        ) {
+        )
+        {
             methodSymbol = null;
             typeToGenerateIn =
                 document.SemanticModel.GetTypeInfo(castExpression.Type, cancellationToken).Type
@@ -195,7 +202,8 @@ namespace Microsoft.CodeAnalysis.CSharp.GenerateMember.GenerateParameterizedMemb
                 )
                 || typeToGenerateIn.IsErrorType()
                 || parameterSymbol.IsErrorType()
-            ) {
+            )
+            {
                 return false;
             }
 
@@ -216,7 +224,8 @@ namespace Microsoft.CodeAnalysis.CSharp.GenerateMember.GenerateParameterizedMemb
             CancellationToken cancellationToken,
             out IMethodSymbol methodSymbol,
             out INamedTypeSymbol typeToGenerateIn
-        ) {
+        )
+        {
             methodSymbol = null;
             typeToGenerateIn =
                 document.SemanticModel.GetTypeInfo(expression, cancellationToken).ConvertedType
@@ -229,7 +238,8 @@ namespace Microsoft.CodeAnalysis.CSharp.GenerateMember.GenerateParameterizedMemb
                 )
                 || typeToGenerateIn.IsErrorType()
                 || parameterSymbol.IsErrorType()
-            ) {
+            )
+            {
                 return false;
             }
 
@@ -246,7 +256,8 @@ namespace Microsoft.CodeAnalysis.CSharp.GenerateMember.GenerateParameterizedMemb
         private static IMethodSymbol GenerateMethodSymbol(
             INamedTypeSymbol typeToGenerateIn,
             INamedTypeSymbol parameterSymbol
-        ) {
+        )
+        {
             // Remove any generic parameters
             if (typeToGenerateIn.IsGenericType)
             {

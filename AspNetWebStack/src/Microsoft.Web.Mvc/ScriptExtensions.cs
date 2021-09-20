@@ -18,7 +18,8 @@ namespace Microsoft.Web.Mvc
             this HtmlHelper helper,
             string releaseFile,
             string debugFile
-        ) {
+        )
+        {
             if (String.IsNullOrEmpty(releaseFile))
             {
                 throw new ArgumentException(MvcResources.Common_NullOrEmpty, "releaseFile");

@@ -42,7 +42,8 @@ namespace System.Collections.Generic
                 dictionary is SortedDictionary<TKey, TValue> sortedDictionary
                 && sortedDictionary._set.Comparer is KeyValuePairComparer kv
                 && kv.keyComparer.Equals(keyValuePairComparer.keyComparer)
-            ) {
+            )
+            {
                 _set = new TreeSet<KeyValuePair<TKey, TValue>>(
                     sortedDictionary._set,
                     keyValuePairComparer
@@ -71,7 +72,8 @@ namespace System.Collections.Generic
 
         bool ICollection<KeyValuePair<TKey, TValue>>.Contains(
             KeyValuePair<TKey, TValue> keyValuePair
-        ) {
+        )
+        {
             TreeSet<KeyValuePair<TKey, TValue>>.Node? node = _set.FindNode(keyValuePair);
             if (node == null)
             {

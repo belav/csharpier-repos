@@ -68,7 +68,8 @@ namespace Microsoft.CodeAnalysis.InitializeParameter
             ImmutableArray<SyntaxNode> listOfParameterNodes,
             TextSpan parameterSpan,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             // List to keep track of the valid parameters
             var listOfParametersOrdinals = new List<int>();
             var semanticModel = await document.GetSemanticModelAsync(cancellationToken)
@@ -88,7 +89,8 @@ namespace Microsoft.CodeAnalysis.InitializeParameter
                         blockStatementOpt,
                         cancellationToken
                     )
-                ) {
+                )
+                {
                     listOfParametersOrdinals.Add(parameter.Ordinal);
                 }
             }
@@ -125,7 +127,8 @@ namespace Microsoft.CodeAnalysis.InitializeParameter
             IMethodSymbol methodSymbol,
             IBlockOperation blockStatementOpt,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var semanticModel = await document.GetSemanticModelAsync(cancellationToken)
                 .ConfigureAwait(false);
 
@@ -138,7 +141,8 @@ namespace Microsoft.CodeAnalysis.InitializeParameter
                     blockStatementOpt,
                     cancellationToken
                 )
-            ) {
+            )
+            {
                 return ImmutableArray<CodeAction>.Empty;
             }
 
@@ -208,7 +212,8 @@ namespace Microsoft.CodeAnalysis.InitializeParameter
             List<int> listOfParametersOrdinals,
             TextSpan parameterSpan,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             foreach (var index in listOfParametersOrdinals)
             {
                 // Updates functionDeclaration and uses it to get the first valid ParameterNode using the ordinals (index).
@@ -240,7 +245,8 @@ namespace Microsoft.CodeAnalysis.InitializeParameter
                         cancellationToken,
                         out blockStatementOpt
                     )
-                ) {
+                )
+                {
                     continue;
                 }
 
@@ -280,7 +286,8 @@ namespace Microsoft.CodeAnalysis.InitializeParameter
             IReadOnlyList<SyntaxNode> parameterNodes,
             SemanticModel semanticModel,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             foreach (var parameterNode in parameterNodes)
             {
                 var parameter = (IParameterSymbol)semanticModel.GetDeclaredSymbol(
@@ -302,7 +309,8 @@ namespace Microsoft.CodeAnalysis.InitializeParameter
             IOperation statement,
             IParameterSymbol parameter,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             // Look for anything in this statement of the form "p ?? throw ...".
             // If so, we'll consider this parameter checked for null and we can stop immediately.
 
@@ -315,7 +323,8 @@ namespace Microsoft.CodeAnalysis.InitializeParameter
                     if (
                         IsParameterReference(coalesceExpression.Value, parameter)
                         && syntaxFacts.IsThrowExpression(coalesceExpression.WhenNull.Syntax)
-                    ) {
+                    )
+                    {
                         return true;
                     }
                 }
@@ -345,14 +354,16 @@ namespace Microsoft.CodeAnalysis.InitializeParameter
                             binaryOperator.LeftOperand,
                             parameter
                         )
-                    ) {
+                    )
+                    {
                         return true;
                     }
                 }
                 else if (
                     condition is IIsPatternOperation isPatternOperation
                     && isPatternOperation.Pattern is IConstantPatternOperation constantPattern
-                ) {
+                )
+                {
                     // Look for code of the form "if (p is null)"
                     if (IsNullCheck(constantPattern.Value, isPatternOperation.Value, parameter))
                     {
@@ -362,7 +373,8 @@ namespace Microsoft.CodeAnalysis.InitializeParameter
                 else if (
                     parameter.Type.SpecialType == SpecialType.System_String
                     && IsStringCheck(condition, parameter)
-                ) {
+                )
+                {
                     return true;
                 }
             }
@@ -376,7 +388,8 @@ namespace Microsoft.CodeAnalysis.InitializeParameter
             SemanticModel semanticModel,
             IBlockOperation blockStatementOpt,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             if (!parameter.Type.IsReferenceType && !parameter.Type.IsNullable())
             {
                 return false;
@@ -417,7 +430,8 @@ namespace Microsoft.CodeAnalysis.InitializeParameter
                             parameter,
                             cancellationToken
                         )
-                    ) {
+                    )
+                    {
                         return false;
                     }
                 }
@@ -432,12 +446,14 @@ namespace Microsoft.CodeAnalysis.InitializeParameter
                 condition is IInvocationOperation invocation
                 && invocation.Arguments.Length == 1
                 && IsParameterReference(invocation.Arguments[0].Value, parameter)
-            ) {
+            )
+            {
                 var targetMethod = invocation.TargetMethod;
                 if (
                     targetMethod?.Name == nameof(string.IsNullOrEmpty)
                     || targetMethod?.Name == nameof(string.IsNullOrWhiteSpace)
-                ) {
+                )
+                {
                     return targetMethod.ContainingType.SpecialType == SpecialType.System_String;
                 }
             }
@@ -460,7 +476,8 @@ namespace Microsoft.CodeAnalysis.InitializeParameter
             IMethodSymbol method,
             IBlockOperation blockStatementOpt,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             // First see if we can convert a statement of the form "this.s = s" into "this.s = s ?? throw ...".
             var documentOpt = await TryAddNullCheckToAssignmentAsync(
                     document,
@@ -497,7 +514,8 @@ namespace Microsoft.CodeAnalysis.InitializeParameter
             IBlockOperation blockStatementOpt,
             string methodName,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var optionSet = await document.GetOptionsAsync(cancellationToken).ConfigureAwait(false);
             return await AddNullCheckStatementAsync(
                     document,
@@ -526,7 +544,8 @@ namespace Microsoft.CodeAnalysis.InitializeParameter
             IBlockOperation blockStatementOpt,
             Func<SemanticModel, SyntaxGenerator, TStatementSyntax> generateNullCheck,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var semanticModel = await document.GetSemanticModelAsync(cancellationToken)
                 .ConfigureAwait(false);
             var root = await document.GetSyntaxRootAsync(cancellationToken).ConfigureAwait(false);
@@ -587,7 +606,8 @@ namespace Microsoft.CodeAnalysis.InitializeParameter
             SyntaxGenerator generator,
             IParameterSymbol parameter,
             string methodName
-        ) {
+        )
+        {
             var stringType = compilation.GetSpecialType(SpecialType.System_String);
 
             // generates: if (string.IsXXX(s)) throw new ArgumentException("message", nameof(s))
@@ -610,7 +630,8 @@ namespace Microsoft.CodeAnalysis.InitializeParameter
             IParameterSymbol parameter,
             IBlockOperation blockStatementOpt,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             if (blockStatementOpt == null)
             {
                 return null;
@@ -668,7 +689,8 @@ namespace Microsoft.CodeAnalysis.InitializeParameter
             IParameterSymbol parameterSymbol,
             IBlockOperation blockStatementOpt,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             if (blockStatementOpt != null)
             {
                 foreach (var statement in blockStatementOpt.Operations)
@@ -682,7 +704,8 @@ namespace Microsoft.CodeAnalysis.InitializeParameter
                                 parameterSymbol,
                                 cancellationToken
                             )
-                        ) {
+                        )
+                        {
                             return statement;
                         }
                         continue;
@@ -700,7 +723,8 @@ namespace Microsoft.CodeAnalysis.InitializeParameter
             IParameterSymbol parameter,
             IBlockOperation blockStatementOpt,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             // tries to convert "this.s = s" into "this.s = s ?? throw ...".  Only supported
             // in languages that have a throw-expression, and only if the user has set the
             // preference that they like throw-expressions.
@@ -735,7 +759,8 @@ namespace Microsoft.CodeAnalysis.InitializeParameter
                         containingType,
                         out var assignmentExpression
                     ) && IsParameterReference(assignmentExpression.Value, parameter)
-                ) {
+                )
+                {
                     // Found one.  Convert it to a coalesce expression with an appropriate
                     // throw expression.
                     var compilation = await document.Project.GetCompilationAsync(cancellationToken)
@@ -767,7 +792,8 @@ namespace Microsoft.CodeAnalysis.InitializeParameter
             Compilation compilation,
             SyntaxGenerator generator,
             Type type
-        ) {
+        )
+        {
             var typeSymbol = compilation.GetTypeByMetadataName(type.FullName);
             if (typeSymbol == null)
             {
@@ -784,7 +810,8 @@ namespace Microsoft.CodeAnalysis.InitializeParameter
             Compilation compilation,
             SyntaxGenerator generator,
             IParameterSymbol parameter
-        ) {
+        )
+        {
             return generator.ObjectCreationExpression(
                 GetTypeNode(compilation, generator, typeof(ArgumentNullException)),
                 generator.NameOfExpression(generator.IdentifierName(parameter.Name))
@@ -796,7 +823,8 @@ namespace Microsoft.CodeAnalysis.InitializeParameter
             SyntaxGenerator generator,
             IParameterSymbol parameter,
             string methodName
-        ) {
+        )
+        {
             var text = methodName switch
             {
                 nameof(string.IsNullOrEmpty)
@@ -868,7 +896,8 @@ namespace Microsoft.CodeAnalysis.InitializeParameter
             SyntaxGenerator generator,
             string content,
             string value
-        ) {
+        )
+        {
             return generator.InterpolatedStringText(
                 generator.InterpolatedStringTextToken(content, value)
             );

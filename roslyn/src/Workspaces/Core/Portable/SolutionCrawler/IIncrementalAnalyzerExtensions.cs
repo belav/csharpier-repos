@@ -15,7 +15,8 @@ namespace Microsoft.CodeAnalysis.SolutionCrawler
             this IIncrementalAnalyzer incrementalAnalyzer,
             OptionSet options,
             BackgroundAnalysisScope defaultBackgroundAnalysisScope
-        ) {
+        )
+        {
             // Unit testing analyzer has special semantics for analysis scope.
             if (incrementalAnalyzer is UnitTestingIncrementalAnalyzer)
             {

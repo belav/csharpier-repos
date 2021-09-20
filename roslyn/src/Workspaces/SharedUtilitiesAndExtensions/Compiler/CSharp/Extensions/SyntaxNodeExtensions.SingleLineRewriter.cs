@@ -60,7 +60,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Extensions
                 if (
                     token.Kind() == SyntaxKind.StringLiteralToken
                     || token.Kind() == SyntaxKind.InterpolatedStringTextToken
-                ) {
+                )
+                {
                     if (s_newlinePattern.IsMatch(token.Text))
                     {
                         var newText = s_newlinePattern.Replace(token.Text, " ");

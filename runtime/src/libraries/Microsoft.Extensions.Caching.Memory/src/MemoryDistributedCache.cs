@@ -15,14 +15,14 @@ namespace Microsoft.Extensions.Caching.Distributed
     {
         private readonly IMemoryCache _memCache;
 
-        public MemoryDistributedCache(
-            IOptions<MemoryDistributedCacheOptions> optionsAccessor
-        ) : this(optionsAccessor, NullLoggerFactory.Instance) { }
+        public MemoryDistributedCache(IOptions<MemoryDistributedCacheOptions> optionsAccessor)
+            : this(optionsAccessor, NullLoggerFactory.Instance) { }
 
         public MemoryDistributedCache(
             IOptions<MemoryDistributedCacheOptions> optionsAccessor,
             ILoggerFactory loggerFactory
-        ) {
+        )
+        {
             if (optionsAccessor == null)
             {
                 throw new ArgumentNullException(nameof(optionsAccessor));
@@ -49,7 +49,8 @@ namespace Microsoft.Extensions.Caching.Distributed
         public Task<byte[]> GetAsync(
             string key,
             CancellationToken token = default(CancellationToken)
-        ) {
+        )
+        {
             if (key == null)
             {
                 throw new ArgumentNullException(nameof(key));
@@ -90,7 +91,8 @@ namespace Microsoft.Extensions.Caching.Distributed
             byte[] value,
             DistributedCacheEntryOptions options,
             CancellationToken token = default(CancellationToken)
-        ) {
+        )
+        {
             if (key == null)
             {
                 throw new ArgumentNullException(nameof(key));

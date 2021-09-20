@@ -14,19 +14,22 @@ namespace Microsoft.CodeAnalysis.CSharp
     {
         public override BoundNode VisitConvertedStackAllocExpression(
             BoundConvertedStackAllocExpression stackAllocNode
-        ) {
+        )
+        {
             return VisitStackAllocArrayCreationBase(stackAllocNode);
         }
 
         public override BoundNode VisitStackAllocArrayCreation(
             BoundStackAllocArrayCreation stackAllocNode
-        ) {
+        )
+        {
             return VisitStackAllocArrayCreationBase(stackAllocNode);
         }
 
         private BoundNode VisitStackAllocArrayCreationBase(
             BoundStackAllocArrayCreationBase stackAllocNode
-        ) {
+        )
+        {
             var rewrittenCount = VisitExpression(stackAllocNode.Count);
             var type = stackAllocNode.Type;
             Debug.Assert(type is { });
@@ -62,7 +65,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                     _compilation.GetWellKnownType(WellKnownType.System_Span_T),
                     TypeCompareKind.ConsiderEverything2
                 )
-            ) {
+            )
+            {
                 var spanType = (NamedTypeSymbol)type;
                 var sideEffects = ArrayBuilder<BoundExpression>.GetInstance();
                 var locals = ArrayBuilder<LocalSymbol>.GetInstance();
@@ -88,7 +92,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                         WellKnownMember.System_Span_T__ctor,
                         out MethodSymbol spanConstructor
                     )
-                ) {
+                )
+                {
                     constructorCall = _factory.New(
                         (MethodSymbol)spanConstructor.SymbolAsMember(spanType),
                         stackAllocNode,
@@ -136,7 +141,8 @@ namespace Microsoft.CodeAnalysis.CSharp
         private BoundExpression RewriteStackAllocCountToSize(
             BoundExpression countExpression,
             TypeSymbol elementType
-        ) {
+        )
+        {
             // From ILGENREC::genExpr:
             // EDMAURER always perform a checked multiply regardless of the context.
             // localloc takes an unsigned native int. When a user specifies a negative

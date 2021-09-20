@@ -39,7 +39,8 @@ namespace Microsoft.CodeAnalysis.CSharp.IntroduceVariable
 
             public override SyntaxNode VisitParenthesizedExpression(
                 ParenthesizedExpressionSyntax node
-            ) {
+            )
+            {
                 var newNode = base.VisitParenthesizedExpression(node);
                 if (
                     node != newNode
@@ -47,7 +48,8 @@ namespace Microsoft.CodeAnalysis.CSharp.IntroduceVariable
                         SyntaxKind.ParenthesizedExpression,
                         out ParenthesizedExpressionSyntax parenthesizedExpression
                     )
-                ) {
+                )
+                {
                     var innerExpression =
                         parenthesizedExpression.OpenParenToken.GetNextToken().Parent;
                     if (innerExpression.HasAnnotation(_replacementAnnotation))

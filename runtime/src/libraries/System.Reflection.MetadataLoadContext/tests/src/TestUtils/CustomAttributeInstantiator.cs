@@ -35,7 +35,8 @@ namespace System.Reflection.Tests
                         | BindingFlags.Instance
                         | BindingFlags.DeclaredOnly
                 )
-            ) {
+            )
+            {
                 ParameterInfo[] parameters = ctor.GetParameters();
                 if (parameters.Length != constructorArguments.Count)
                     continue;

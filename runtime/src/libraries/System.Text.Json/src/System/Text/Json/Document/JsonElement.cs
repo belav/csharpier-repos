@@ -1262,7 +1262,8 @@ namespace System.Text.Json
             ReadOnlySpan<byte> utf8Text,
             bool isPropertyName,
             bool shouldUnescape
-        ) {
+        )
+        {
             CheckValidInstance();
 
             return _parent.TextEquals(_idx, utf8Text, isPropertyName, shouldUnescape);

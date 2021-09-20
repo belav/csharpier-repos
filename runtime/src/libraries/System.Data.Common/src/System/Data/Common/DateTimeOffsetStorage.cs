@@ -200,7 +200,8 @@ namespace System.Data.Common
             object store,
             BitArray nullbits,
             int storeIndex
-        ) {
+        )
+        {
             DateTimeOffset[] typedStore = (DateTimeOffset[])store;
             typedStore[storeIndex] = _values[record];
             nullbits.Set(storeIndex, !HasValue(record));

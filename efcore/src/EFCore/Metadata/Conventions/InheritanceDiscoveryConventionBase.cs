@@ -18,7 +18,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
         /// <param name="dependencies"> Parameter object containing dependencies for this convention. </param>
         protected InheritanceDiscoveryConventionBase(
             ProviderConventionSetBuilderDependencies dependencies
-        ) {
+        )
+        {
             Dependencies = dependencies;
         }
 
@@ -34,7 +35,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
         /// <param name="entityType"> The entity type. </param>
         protected virtual IConventionEntityType? FindClosestBaseType(
             IConventionEntityType entityType
-        ) {
+        )
+        {
             var baseType = entityType.ClrType.BaseType;
             var model = entityType.Model;
             IConventionEntityType? baseEntityType = null;

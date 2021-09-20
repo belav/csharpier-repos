@@ -17,7 +17,8 @@ namespace Microsoft.CodeAnalysis.Formatting.Rules
             SyntaxToken baseToken,
             IEnumerable<SyntaxToken> tokens,
             AlignTokensOption option
-        ) {
+        )
+        {
             Contract.ThrowIfNull(tokens);
             Debug.Assert(!tokens.IsEmpty());
 

@@ -62,7 +62,8 @@ namespace Microsoft.EntityFrameworkCore.TestUtilities
             ServiceCollection serviceCollection,
             Type serviceType,
             IList<(Type Type, object Implementation)> specialCases
-        ) {
+        )
+        {
             var implementation = specialCases.Where(s => s.Type == serviceType)
                 .Select(s => s.Implementation)
                 .FirstOrDefault();
@@ -75,7 +76,8 @@ namespace Microsoft.EntityFrameworkCore.TestUtilities
             {
                 foreach (
                     var (ServiceType, ImplementationType) in GetImplementationType(serviceType)
-                ) {
+                )
+                {
                     implementation = specialCases.Where(s => s.Type == ImplementationType)
                         .Select(s => s.Implementation)
                         .FirstOrDefault();
@@ -115,7 +117,8 @@ namespace Microsoft.EntityFrameworkCore.TestUtilities
 
         private static IList<(Type ServiceType, Type ImplementationType)> GetImplementationType(
             Type serviceType
-        ) {
+        )
+        {
             if (!serviceType.IsInterface)
             {
                 return new[] { (serviceType, serviceType) };

@@ -31,7 +31,8 @@ namespace Microsoft.CodeAnalysis.Editing
         public static async Task<DocumentEditor> CreateAsync(
             Document document,
             CancellationToken cancellationToken = default
-        ) {
+        )
+        {
             if (document == null)
             {
                 throw new ArgumentNullException(nameof(document));

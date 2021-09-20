@@ -40,7 +40,8 @@ namespace Microsoft.Extensions.WebEncoders.Testing
             char[] value,
             int startIndex,
             int characterCount
-        ) {
+        )
+        {
             if (output == null)
             {
                 throw new ArgumentNullException(nameof(output));
@@ -67,7 +68,8 @@ namespace Microsoft.Extensions.WebEncoders.Testing
             string value,
             int startIndex,
             int characterCount
-        ) {
+        )
+        {
             if (output == null)
             {
                 throw new ArgumentNullException(nameof(output));
@@ -106,7 +108,8 @@ namespace Microsoft.Extensions.WebEncoders.Testing
             char* buffer,
             int bufferLength,
             out int numberOfCharactersWritten
-        ) {
+        )
+        {
             if (buffer == null)
             {
                 throw new ArgumentNullException(nameof(buffer));

@@ -234,7 +234,8 @@ namespace Microsoft.AspNetCore.Authentication.AzureAD.UI.AzureAD.Controllers.Int
                 ActionDescriptor descriptor,
                 string contentPath,
                 string url
-            ) {
+            )
+            {
                 HttpContext = context;
                 RouteData = routeData;
                 ActionDescriptor = descriptor;
@@ -282,7 +283,8 @@ namespace Microsoft.AspNetCore.Authentication.AzureAD.UI.AzureAD.Controllers.Int
                     && dicionary.TryGetValue("page", out var page)
                     && page is string pagePath
                     && ContentPath == pagePath
-                ) {
+                )
+                {
                     return Url;
                 }
 

@@ -58,7 +58,8 @@ namespace Microsoft.CodeAnalysis.EditAndContinue
                 string resourceName,
                 LocalizableResourceString title,
                 DiagnosticSeverity severity
-            ) {
+            )
+            {
                 if (index >= builder.Count)
                 {
                     builder.Count = index + 1;
@@ -672,7 +673,8 @@ namespace Microsoft.CodeAnalysis.EditAndContinue
 
         internal static DiagnosticDescriptor GetModuleDiagnosticDescriptor(
             ManagedEditAndContinueAvailabilityStatus status
-        ) {
+        )
+        {
             lock (s_moduleDiagnosticDescriptorsGuard)
             {
                 s_lazyModuleDiagnosticDescriptors ??= new Dictionary<

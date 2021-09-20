@@ -49,7 +49,8 @@ namespace System.Net.Http.Formatting.Parsers
             HttpHeaders headers,
             int maxHeaderSize,
             bool ignoreHeaderValidation
-        ) {
+        )
+        {
             // The minimum length which would be an empty header terminated by CRLF
             if (maxHeaderSize < InternetMessageFormatHeaderParser.MinHeaderSize)
             {
@@ -145,7 +146,8 @@ namespace System.Net.Http.Formatting.Parsers
             CurrentHeaderFieldStore currentField,
             HttpHeaders headers,
             bool ignoreHeaderValidation
-        ) {
+        )
+        {
             Contract.Assert(
                 (bytesReady - bytesConsumed) >= 0,
                 "ParseHeaderFields()|(inputBufferLength - bytesParsed) < 0"

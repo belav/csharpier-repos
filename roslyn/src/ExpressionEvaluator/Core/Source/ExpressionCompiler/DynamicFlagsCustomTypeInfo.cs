@@ -14,7 +14,8 @@ namespace Microsoft.CodeAnalysis.ExpressionEvaluator
         internal static ReadOnlyCollection<byte>? ToBytes(
             ArrayBuilder<bool> dynamicFlags,
             int startIndex = 0
-        ) {
+        )
+        {
             RoslynDebug.AssertNotNull(dynamicFlags);
             Debug.Assert(startIndex >= 0);
 

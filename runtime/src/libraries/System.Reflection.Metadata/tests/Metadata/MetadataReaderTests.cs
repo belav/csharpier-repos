@@ -74,7 +74,8 @@ namespace System.Reflection.Metadata.Tests
             bool isModule = false,
             MetadataReaderOptions options = MetadataReaderOptions.Default,
             MetadataStringDecoder decoder = null
-        ) {
+        )
+        {
             int _;
             return GetMetadataReader(peImage, out _, isModule, options, decoder);
         }
@@ -85,7 +86,8 @@ namespace System.Reflection.Metadata.Tests
             bool isModule = false,
             MetadataReaderOptions options = MetadataReaderOptions.Default,
             MetadataStringDecoder decoder = null
-        ) {
+        )
+        {
             GCHandle pinned = GetPinnedPEImage(peImage);
             var headers = new PEHeaders(new MemoryStream(peImage));
             metadataStartOffset = headers.MetadataStartOffset;
@@ -1735,7 +1737,8 @@ namespace System.Reflection.Metadata.Tests
             string[] allNamespaces,
             IReadOnlyDictionary<string, IList<string>> definitionExceptions = null,
             IReadOnlyDictionary<string, IList<string>> forwarderExceptions = null
-        ) {
+        )
+        {
             // Don't want to have to deal with null.
             if (definitionExceptions == null)
             {
@@ -2056,7 +2059,8 @@ namespace System.Reflection.Metadata.Tests
             uint startIndex,
             uint count,
             bool isMod = false
-        ) {
+        )
+        {
             if (count == 0)
             {
                 return;
@@ -2212,7 +2216,8 @@ namespace System.Reflection.Metadata.Tests
             uint startIndex,
             uint count,
             bool isMod = false
-        ) {
+        )
+        {
             if (0 == count)
             {
                 return;
@@ -2490,7 +2495,8 @@ namespace System.Reflection.Metadata.Tests
             uint startIndex,
             uint count,
             bool isMod = false
-        ) {
+        )
+        {
             if (count == 0)
             {
                 return;
@@ -2627,7 +2633,8 @@ namespace System.Reflection.Metadata.Tests
             uint startIndex,
             uint count,
             bool isVBMod = false
-        ) {
+        )
+        {
             if (0 == count)
             {
                 return;
@@ -2735,7 +2742,8 @@ namespace System.Reflection.Metadata.Tests
             uint startIdx,
             uint count,
             bool isVBMod = false
-        ) {
+        )
+        {
             if (0 == count)
             {
                 return;
@@ -2805,7 +2813,8 @@ namespace System.Reflection.Metadata.Tests
             MetadataReader reader,
             TypeDefinitionHandle typeDef,
             bool isMod = false
-        ) {
+        )
+        {
             // var expNC = new uint[] { 4, 5, 6 };
             var expClasses = new int[][] { new int[] { 4, 5, 6 }, new int[] { 3, 3, 5 } };
             var modClasses = new int[][] { new int[] { 4, 5, 6, 7 }, new int[] { 2, 3, 3, 5 } };
@@ -3890,7 +3899,8 @@ namespace System.Reflection.Metadata.Tests
                 var provider = MetadataReaderProvider.FromPortablePdbStream(
                     new MemoryStream(pdbBlob)
                 )
-            ) {
+            )
+            {
                 var reader = provider.GetMetadataReader();
 
                 Assert.Equal(default, reader.DebugMetadataHeader.EntryPoint);
@@ -3937,7 +3947,8 @@ namespace System.Reflection.Metadata.Tests
                 var provider = MetadataReaderProvider.FromPortablePdbStream(
                     new MemoryStream(PortablePdbs.DocumentsPdb)
                 )
-            ) {
+            )
+            {
                 var reader = provider.GetMetadataReader();
                 var mdi = reader.GetMethodDebugInformation(default(MethodDebugInformationHandle));
 
@@ -3955,7 +3966,8 @@ namespace System.Reflection.Metadata.Tests
                 var provider = MetadataReaderProvider.FromPortablePdbStream(
                     new MemoryStream(PortablePdbs.DocumentsPdb)
                 )
-            ) {
+            )
+            {
                 var reader = provider.GetMetadataReader();
                 var cdi1 = reader.GetCustomAttributes(MetadataTokens.EntityHandle(0x30000001));
                 AssertEx.Equal(new int[0], cdi1.Select(a => a.RowId));
@@ -4280,7 +4292,8 @@ namespace System.Reflection.Metadata.Tests
         private static unsafe byte[] ObfuscateWithExtraData(
             byte[] unobfuscated,
             bool setFlag = true
-        ) {
+        )
+        {
             int offsetToMetadata;
             int offsetToModuleTable;
             int offsetToMetadataSize;

@@ -28,7 +28,8 @@ namespace StartRequestDelegateUrlApp
                         messageSent.Set();
                     }
                 )
-            ) {
+            )
+            {
                 // Need these for test deployer to consider host deployment successful
                 // The address written here is used by the client to send requests
                 var addresses = host.ServerFeatures.Get<IServerAddressesFeature>().Addresses;

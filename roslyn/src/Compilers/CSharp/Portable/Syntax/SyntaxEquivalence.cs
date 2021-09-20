@@ -17,7 +17,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Syntax
             SyntaxTree? after,
             Func<SyntaxKind, bool>? ignoreChildNode,
             bool topLevel
-        ) {
+        )
+        {
             if (before == after)
             {
                 return true;
@@ -36,7 +37,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Syntax
             SyntaxNode? after,
             Func<SyntaxKind, bool>? ignoreChildNode,
             bool topLevel
-        ) {
+        )
+        {
             Debug.Assert(!topLevel || ignoreChildNode == null);
 
             if (before == null || after == null)
@@ -75,7 +77,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Syntax
             GreenNode? before,
             GreenNode? after,
             Func<SyntaxKind, bool>? ignoreChildNode
-        ) {
+        )
+        {
             if (before is null || after is null)
             {
                 return (before is null && after is null);
@@ -101,7 +104,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Syntax
                     if (
                         ((Green.SyntaxToken)before).ValueText
                         != ((Green.SyntaxToken)after).ValueText
-                    ) {
+                    )
+                    {
                         return false;
                     }
                     break;
@@ -125,7 +129,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Syntax
             GreenNode? after,
             Func<SyntaxKind, bool>? ignoreChildNode,
             bool topLevel
-        ) {
+        )
+        {
             if (before == after)
             {
                 return true;
@@ -257,7 +262,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Syntax
             GreenNode before,
             GreenNode after,
             Func<SyntaxKind, bool>? ignoreChildNode
-        ) {
+        )
+        {
             // Fast path for when the caller does not care about nullable directives. This can happen in some IDE refactorings.
             if (ignoreChildNode is object && ignoreChildNode(SyntaxKind.NullableDirectiveTrivia))
             {
@@ -291,14 +297,16 @@ namespace Microsoft.CodeAnalysis.CSharp.Syntax
                         ignoreChildNode,
                         topLevel: false
                     )
-                ) {
+                )
+                {
                     return false;
                 }
 
                 static Green.DirectiveTriviaSyntax? getNextNullableDirective(
                     IEnumerator<Green.DirectiveTriviaSyntax> enumerator,
                     Func<SyntaxKind, bool>? ignoreChildNode
-                ) {
+                )
+                {
                     while (enumerator.MoveNext())
                     {
                         var current = enumerator.Current;

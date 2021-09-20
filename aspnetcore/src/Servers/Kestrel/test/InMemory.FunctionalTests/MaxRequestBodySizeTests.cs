@@ -47,7 +47,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel.InMemory.FunctionalTests
                         }
                     }
                 )
-            ) {
+            )
+            {
                 using (var connection = server.CreateConnection())
                 {
                     await connection.Send(
@@ -109,7 +110,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel.InMemory.FunctionalTests
                         }
                     }
                 )
-            ) {
+            )
+            {
                 using (var connection = server.CreateConnection())
                 {
                     await connection.Send(
@@ -161,7 +163,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel.InMemory.FunctionalTests
                         ServerOptions = { Limits = { MaxRequestBodySize = 0 } }
                     }
                 )
-            ) {
+            )
+            {
                 using (var connection = server.CreateConnection())
                 {
                     await connection.Send("POST / HTTP/1.1", "Host:", "Content-Length: 1", "", "A");
@@ -187,7 +190,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel.InMemory.FunctionalTests
                         ServerOptions = { Limits = { MaxRequestBodySize = 0 } }
                     }
                 )
-            ) {
+            )
+            {
                 using (var connection = server.CreateConnection())
                 {
                     await connection.Send(
@@ -245,7 +249,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel.InMemory.FunctionalTests
                     },
                     new TestServiceContext(LoggerFactory)
                 )
-            ) {
+            )
+            {
                 using (var connection = server.CreateConnection())
                 {
                     await connection.Send(
@@ -298,7 +303,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel.InMemory.FunctionalTests
                     },
                     new TestServiceContext(LoggerFactory)
                 )
-            ) {
+            )
+            {
                 using (var connection = server.CreateConnection())
                 {
                     await connection.Send("GET / HTTP/1.1", "Host:", "Connection: Upgrade", "", "");
@@ -348,7 +354,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel.InMemory.FunctionalTests
                         ServerOptions = { Limits = { MaxRequestBodySize = 0 } }
                     }
                 )
-            ) {
+            )
+            {
                 using (var connection = server.CreateConnection())
                 {
                     await connection.Send(
@@ -412,7 +419,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel.InMemory.FunctionalTests
                         }
                     }
                 )
-            ) {
+            )
+            {
                 using (var connection = server.CreateConnection())
                 {
                     await connection.Send(
@@ -476,7 +484,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel.InMemory.FunctionalTests
                         }
                     }
                 )
-            ) {
+            )
+            {
                 using (var connection = server.CreateConnection())
                 {
                     await connection.Send(
@@ -552,7 +561,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel.InMemory.FunctionalTests
                         }
                     }
                 )
-            ) {
+            )
+            {
                 using (var connection = server.CreateConnection())
                 {
                     await connection.Send(
@@ -613,7 +623,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel.InMemory.FunctionalTests
                         ServerOptions = { Limits = { MaxRequestBodySize = 0 } }
                     }
                 )
-            ) {
+            )
+            {
                 using (var connection = server.CreateConnection())
                 {
                     await connection.Send(

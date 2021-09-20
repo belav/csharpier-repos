@@ -15,7 +15,8 @@ namespace Microsoft.AspNetCore.DataProtection.KeyManagement
         public KeyRingBasedDataProtectionProvider(
             IKeyRingProvider keyRingProvider,
             ILoggerFactory loggerFactory
-        ) {
+        )
+        {
             _keyRingProvider = keyRingProvider;
             _logger = loggerFactory.CreateLogger<KeyRingBasedDataProtector>(); // note: for protector (not provider!) type
         }

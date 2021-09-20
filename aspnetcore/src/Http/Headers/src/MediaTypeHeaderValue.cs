@@ -510,7 +510,8 @@ namespace Microsoft.Net.Http.Headers
         public static bool TryParse(
             StringSegment input,
             [NotNullWhen(true)] out MediaTypeHeaderValue? parsedValue
-        ) {
+        )
+        {
             var index = 0;
             return SingleValueParser.TryParseValue(input, ref index, out parsedValue!);
         }
@@ -545,7 +546,8 @@ namespace Microsoft.Net.Http.Headers
         public static bool TryParseList(
             IList<string>? inputs,
             [NotNullWhen(true)] out IList<MediaTypeHeaderValue>? parsedValues
-        ) {
+        )
+        {
             return MultipleValueParser.TryParseValues(inputs, out parsedValues);
         }
 
@@ -558,7 +560,8 @@ namespace Microsoft.Net.Http.Headers
         public static bool TryParseStrictList(
             IList<string>? inputs,
             [NotNullWhen(true)] out IList<MediaTypeHeaderValue>? parsedValues
-        ) {
+        )
+        {
             return MultipleValueParser.TryParseStrictValues(inputs, out parsedValues);
         }
 
@@ -566,7 +569,8 @@ namespace Microsoft.Net.Http.Headers
             StringSegment input,
             int startIndex,
             out MediaTypeHeaderValue? parsedValue
-        ) {
+        )
+        {
             Contract.Requires(startIndex >= 0);
 
             parsedValue = null;
@@ -621,7 +625,8 @@ namespace Microsoft.Net.Http.Headers
             StringSegment input,
             int startIndex,
             out StringSegment mediaType
-        ) {
+        )
+        {
             Contract.Requires((input.Length > 0) && (startIndex < input.Length));
 
             // This method just parses the "type/subtype" string, it does not parse parameters.
@@ -849,7 +854,8 @@ namespace Microsoft.Net.Http.Headers
                             localParameter.Value,
                             StringComparison.OrdinalIgnoreCase
                         )
-                    ) {
+                    )
+                    {
                         return false;
                     }
                 }

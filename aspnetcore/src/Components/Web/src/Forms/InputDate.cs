@@ -80,7 +80,8 @@ namespace Microsoft.AspNetCore.Components.Forms
             string? value,
             [MaybeNullWhen(false)] out TValue result,
             [NotNullWhen(false)] out string? validationErrorMessage
-        ) {
+        )
+        {
             // Unwrap nullable types. We don't have to deal with receiving empty values for nullable
             // types here, because the underlying InputBase already covers that.
             var targetType = Nullable.GetUnderlyingType(typeof(TValue)) ?? typeof(TValue);
@@ -121,7 +122,8 @@ namespace Microsoft.AspNetCore.Components.Forms
         private static bool TryParseDateTime(
             string? value,
             [MaybeNullWhen(false)] out TValue result
-        ) {
+        )
+        {
             var success = BindConverter.TryConvertToDateTime(
                 value,
                 CultureInfo.InvariantCulture,
@@ -143,7 +145,8 @@ namespace Microsoft.AspNetCore.Components.Forms
         private static bool TryParseDateTimeOffset(
             string? value,
             [MaybeNullWhen(false)] out TValue result
-        ) {
+        )
+        {
             var success = BindConverter.TryConvertToDateTimeOffset(
                 value,
                 CultureInfo.InvariantCulture,

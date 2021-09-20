@@ -137,7 +137,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core
 
         IMultiplexedConnectionBuilder IMultiplexedConnectionBuilder.Use(
             Func<MultiplexedConnectionDelegate, MultiplexedConnectionDelegate> middleware
-        ) {
+        )
+        {
             _multiplexedMiddleware.Add(middleware);
             return this;
         }
@@ -181,7 +182,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core
         internal virtual async Task BindAsync(
             AddressBindContext context,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             await AddressBinder.BindEndpointAsync(this, context, cancellationToken)
                 .ConfigureAwait(false);
             context.Addresses.Add(GetDisplayName());

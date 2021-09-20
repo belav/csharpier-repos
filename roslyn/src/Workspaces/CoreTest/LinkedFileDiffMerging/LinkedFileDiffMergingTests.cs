@@ -19,7 +19,8 @@ namespace Microsoft.CodeAnalysis.UnitTests.LinkedFileDiffMerging
             List<string> updatedTexts,
             string expectedMergedText,
             string languageName
-        ) {
+        )
+        {
             using var workspace = new AdhocWorkspace();
             var solution = workspace.CurrentSolution;
             var startSourceText = SourceText.From(startText);

@@ -33,7 +33,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                 int position,
                 CSharpSyntaxNode memberDeclarationOpt,
                 Symbol memberOpt
-            ) {
+            )
+            {
                 Debug.Assert((memberDeclarationOpt == null) == (memberOpt == null));
 
                 _position = position;
@@ -374,7 +375,8 @@ namespace Microsoft.CodeAnalysis.CSharp
 
             public override Binder VisitConversionOperatorDeclaration(
                 ConversionOperatorDeclarationSyntax parent
-            ) {
+            )
+            {
                 return VisitOperatorOrConversionDeclaration(parent);
             }
 
@@ -415,7 +417,8 @@ namespace Microsoft.CodeAnalysis.CSharp
 
             private Binder VisitPropertyOrIndexerExpressionBody(
                 BasePropertyDeclarationSyntax parent
-            ) {
+            )
+            {
                 var key = CreateBinderCacheKey(parent, NodeUsage.AccessorBody);
 
                 Binder resultBinder;
@@ -447,7 +450,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                     if (
                         node.Parent.Kind() == SyntaxKind.CompilationUnit
                         && syntaxTree.Options.Kind != SourceCodeKind.Regular
-                    ) {
+                    )
+                    {
                         container = compilation.ScriptClass;
                     }
                     else
@@ -467,7 +471,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             private static string GetMethodName(
                 BaseMethodDeclarationSyntax baseMethodDeclarationSyntax,
                 Binder outerBinder
-            ) {
+            )
+            {
                 switch (baseMethodDeclarationSyntax.Kind())
                 {
                     case SyntaxKind.ConstructorDeclaration:
@@ -512,7 +517,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             private static string GetPropertyOrEventName(
                 BasePropertyDeclarationSyntax basePropertyDeclarationSyntax,
                 Binder outerBinder
-            ) {
+            )
+            {
                 ExplicitInterfaceSpecifierSyntax explicitInterfaceSpecifierSyntax =
                     basePropertyDeclarationSyntax.ExplicitInterfaceSpecifier;
 
@@ -550,7 +556,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             private SourceMemberMethodSymbol GetMethodSymbol(
                 BaseMethodDeclarationSyntax baseMethodDeclarationSyntax,
                 Binder outerBinder
-            ) {
+            )
+            {
                 if (baseMethodDeclarationSyntax == _memberDeclarationOpt)
                 {
                     return (SourceMemberMethodSymbol)_memberOpt;
@@ -577,7 +584,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             private SourcePropertySymbol GetPropertySymbol(
                 BasePropertyDeclarationSyntax basePropertyDeclarationSyntax,
                 Binder outerBinder
-            ) {
+            )
+            {
                 Debug.Assert(
                     basePropertyDeclarationSyntax.Kind() == SyntaxKind.PropertyDeclaration
                         || basePropertyDeclarationSyntax.Kind() == SyntaxKind.IndexerDeclaration
@@ -612,7 +620,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             private SourceEventSymbol GetEventSymbol(
                 EventDeclarationSyntax eventDeclarationSyntax,
                 Binder outerBinder
-            ) {
+            )
+            {
                 if (eventDeclarationSyntax == _memberDeclarationOpt)
                 {
                     return (SourceEventSymbol)_memberOpt;
@@ -638,7 +647,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                 TextSpan memberSpan,
                 NamedTypeSymbol container,
                 SymbolKind kind
-            ) {
+            )
+            {
                 // return container.GetMembers(methodSyntax.Identifier.ValueText).OfType<SourceMethodSymbol>().Single(m => m.Locations.Any(l => l.SourceTree == tree && methodSyntax.Span.Contains(l.SourceSpan)));
                 foreach (Symbol sym in container.GetMembers(memberName))
                 {
@@ -691,7 +701,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                 ImmutableArray<Location> locations,
                 SyntaxTree syntaxTree,
                 TextSpan span
-            ) {
+            )
+            {
                 Debug.Assert(syntaxTree != null);
                 foreach (var loc in locations)
                 {
@@ -805,7 +816,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                             parent.AttributeLists
                         )
                     )
-                ) {
+                )
+                {
                     extraInfo = NodeUsage.NamedTypeBodyOrTypeParameters;
                 }
                 else if (LookupPosition.IsInTypeParameterList(_position, parent))
@@ -814,7 +826,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                 }
                 else if (
                     LookupPosition.IsBetweenTokens(_position, parent.Keyword, parent.OpenBraceToken)
-                ) {
+                )
+                {
                     extraInfo = NodeUsage.NamedTypeBaseListOrParameterList;
                 }
 
@@ -824,7 +837,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             internal Binder VisitTypeDeclarationCore(
                 TypeDeclarationSyntax parent,
                 NodeUsage extraInfo
-            ) {
+            )
+            {
                 var key = CreateBinderCacheKey(parent, extraInfo);
 
                 Binder resultBinder;
@@ -918,7 +932,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                 int position,
                 bool inBody,
                 bool inUsing
-            ) {
+            )
+            {
                 Debug.Assert(!inUsing || inBody, "inUsing => inBody");
 
                 var extraInfo = inUsing
@@ -970,7 +985,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                 NameSyntax name,
                 Binder outer,
                 bool inUsing
-            ) {
+            )
+            {
                 QualifiedNameSyntax dotted;
                 while ((dotted = name as QualifiedNameSyntax) != null)
                 {
@@ -1005,7 +1021,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                 CompilationUnitSyntax compilationUnit,
                 bool inUsing,
                 bool inScript
-            ) {
+            )
+            {
                 if (compilationUnit != syntaxTree.GetRoot())
                 {
                     throw new ArgumentOutOfRangeException(
@@ -1125,7 +1142,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                                 fallbackToMainEntryPoint: true
                             )
                                 is SynthesizedSimpleProgramEntryPointSymbol simpleProgram
-                        ) {
+                        )
+                        {
                             ExecutableCodeBinder bodyBinder = simpleProgram.GetBodyBinder(
                                 _factory._ignoreAccessibility
                             );
@@ -1145,7 +1163,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             internal static BinderCacheKey CreateBinderCacheKey(
                 CSharpSyntaxNode node,
                 NodeUsage usage
-            ) {
+            )
+            {
                 Debug.Assert(
                     BitArithmeticUtilities.CountBits((uint)usage) <= 1,
                     "Not a flags enum."
@@ -1169,7 +1188,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                 if (
                     containingNode.Kind() != SyntaxKind.CompilationUnit
                     && _position == containingSpan.End
-                ) {
+                )
+                {
                     // This occurs at EOF
                     token = containingNode.GetLastToken();
                     Debug.Assert(token == this.syntaxTree.GetRoot().GetLastToken());
@@ -1202,7 +1222,8 @@ namespace Microsoft.CodeAnalysis.CSharp
 
             public override Binder VisitDocumentationCommentTrivia(
                 DocumentationCommentTriviaSyntax parent
-            ) {
+            )
+            {
                 // Need to step across the structured trivia boundary explicitly - can't just follow Parent references.
                 return VisitCore(parent.ParentTrivia.Token.Parent);
             }
@@ -1225,7 +1246,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             /// </remarks>
             public override Binder VisitConversionOperatorMemberCref(
                 ConversionOperatorMemberCrefSyntax parent
-            ) {
+            )
+            {
                 if (parent.Type.Span.Contains(_position))
                 {
                     XmlCrefAttributeSyntax containingAttribute =
@@ -1255,7 +1277,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             private Binder VisitXmlCrefAttributeInternal(
                 XmlCrefAttributeSyntax parent,
                 NodeUsage extraInfo
-            ) {
+            )
+            {
                 Debug.Assert(
                     extraInfo == NodeUsage.Normal
                         || extraInfo == NodeUsage.CrefParameterOrReturnType,
@@ -1377,13 +1400,15 @@ namespace Microsoft.CodeAnalysis.CSharp
             private Binder GetParameterNameAttributeValueBinder(
                 MemberDeclarationSyntax memberSyntax,
                 Binder nextBinder
-            ) {
+            )
+            {
                 if (
                     memberSyntax is BaseMethodDeclarationSyntax
                     {
                         ParameterList: { ParameterCount: > 0 }
                     } baseMethodDeclSyntax
-                ) {
+                )
+                {
                     Binder outerBinder = VisitCore(memberSyntax.Parent);
                     MethodSymbol method = GetMethodSymbol(baseMethodDeclSyntax, outerBinder);
                     return new WithParametersBinder(method.Parameters, nextBinder);
@@ -1394,7 +1419,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                     {
                         ParameterList: { ParameterCount: > 0 }
                     } recordDeclSyntax
-                ) {
+                )
+                {
                     Binder outerBinder = VisitCore(memberSyntax);
                     SourceNamedTypeSymbol recordType = (
                         (NamespaceOrTypeSymbol)outerBinder.ContainingMemberOrLambda
@@ -1406,7 +1432,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                     if (
                         primaryConstructor.SyntaxRef.SyntaxTree == recordDeclSyntax.SyntaxTree
                         && primaryConstructor.GetSyntax() == recordDeclSyntax
-                    ) {
+                    )
+                    {
                         return new WithParametersBinder(primaryConstructor.Parameters, nextBinder);
                     }
                 }
@@ -1416,7 +1443,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                 if (
                     memberKind == SyntaxKind.PropertyDeclaration
                     || memberKind == SyntaxKind.IndexerDeclaration
-                ) {
+                )
+                {
                     Binder outerBinder = VisitCore(memberSyntax.Parent);
 
                     BasePropertyDeclarationSyntax propertyDeclSyntax =
@@ -1465,7 +1493,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                 MemberDeclarationSyntax memberSyntax,
                 bool includeContainingSymbols,
                 Binder nextBinder
-            ) {
+            )
+            {
                 if (includeContainingSymbols)
                 {
                     Binder outerBinder = VisitCore(memberSyntax.Parent);
@@ -1473,7 +1502,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                         NamedTypeSymbol curr = outerBinder.ContainingType;
                         (object)curr != null;
                         curr = curr.ContainingType
-                    ) {
+                    )
+                    {
                         if (curr.Arity > 0)
                         {
                             nextBinder = new WithClassTypeParametersBinder(curr, nextBinder);
@@ -1543,7 +1573,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             MemberDeclarationSyntax memberSyntax,
             BinderFactory factory,
             bool inParameterOrReturnType = false
-        ) {
+        )
+        {
             Debug.Assert(crefSyntax != null);
             Debug.Assert(memberSyntax != null);
 
@@ -1564,7 +1595,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             CrefSyntax crefSyntax,
             Binder binder,
             bool inParameterOrReturnType
-        ) {
+        )
+        {
             // After much deliberation, we eventually decided to suppress lookup of inherited members within
             // crefs, in order to match dev11's behavior (Changeset #829014).  Unfortunately, it turns out
             // that dev11 does not suppress these members when performing lookup within parameter and return
@@ -1584,7 +1616,8 @@ namespace Microsoft.CodeAnalysis.CSharp
 
         internal static MemberDeclarationSyntax GetAssociatedMemberForXmlSyntax(
             CSharpSyntaxNode xmlSyntax
-        ) {
+        )
+        {
             Debug.Assert(
                 xmlSyntax is XmlAttributeSyntax
                     || xmlSyntax.Kind() == SyntaxKind.XmlEmptyElement
@@ -1615,7 +1648,8 @@ namespace Microsoft.CodeAnalysis.CSharp
         /// </summary>
         private static DocumentationCommentTriviaSyntax GetEnclosingDocumentationComment(
             CSharpSyntaxNode xmlSyntax
-        ) {
+        )
+        {
             CSharpSyntaxNode curr = xmlSyntax;
             for (; !SyntaxFacts.IsDocumentationCommentTrivia(curr.Kind()); curr = curr.Parent) { }
             Debug.Assert(curr != null);

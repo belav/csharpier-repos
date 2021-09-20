@@ -12,7 +12,8 @@ namespace System.Reflection.Metadata
             BlobHandle publicKeyOrTokenHandle,
             AssemblyHashAlgorithm assemblyHashAlgorithm,
             AssemblyFlags flags
-        ) {
+        )
+        {
             string name = GetString(nameHandle);
             string? cultureName = (!cultureHandle.IsNil) ? GetString(cultureHandle) : null;
             var hashAlgorithm =

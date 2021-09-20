@@ -36,7 +36,8 @@ namespace Microsoft.CodeAnalysis.Diagnostics
             DiagnosticDescriptor descriptor,
             CancellationToken cancellationToken,
             out ReportDiagnostic severity
-        ) {
+        )
+        {
             // Analyzer bulk configuration does not apply to:
             //  1. Disabled by default diagnostics
             //  2. Compiler diagnostics
@@ -49,7 +50,8 @@ namespace Microsoft.CodeAnalysis.Diagnostics
                         tag == WellKnownDiagnosticTags.Compiler
                         || tag == WellKnownDiagnosticTags.NotConfigurable
                 )
-            ) {
+            )
+            {
                 severity = default;
                 return false;
             }
@@ -65,7 +67,8 @@ namespace Microsoft.CodeAnalysis.Diagnostics
                     cancellationToken,
                     out _
                 ) == true
-            ) {
+            )
+            {
                 severity = default;
                 return false;
             }
@@ -82,7 +85,8 @@ namespace Microsoft.CodeAnalysis.Diagnostics
             if (
                 analyzerConfigOptions.TryGetValue(categoryBasedKey, out var value)
                 && AnalyzerConfigSet.TryParseSeverity(value, out severity)
-            ) {
+            )
+            {
                 return true;
             }
 
@@ -91,7 +95,8 @@ namespace Microsoft.CodeAnalysis.Diagnostics
             if (
                 analyzerConfigOptions.TryGetValue(DotnetAnalyzerDiagnosticSeverityKey, out value)
                 && AnalyzerConfigSet.TryParseSeverity(value, out severity)
-            ) {
+            )
+            {
                 return true;
             }
 

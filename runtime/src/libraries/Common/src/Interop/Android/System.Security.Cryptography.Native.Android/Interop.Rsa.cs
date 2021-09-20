@@ -130,7 +130,8 @@ internal static partial class Interop
         internal static RSAParameters ExportRsaParameters(
             SafeRsaHandle key,
             bool includePrivateParameters
-        ) {
+        )
+        {
             Debug.Assert(
                 key != null && !key.IsInvalid,
                 "Callers should check the key is invalid and throw an exception with a message"
@@ -161,7 +162,8 @@ internal static partial class Interop
                     out dmq1,
                     out iqmp
                 )
-            ) {
+            )
+            {
                 n.Dispose();
                 e.Dispose();
                 d.Dispose();

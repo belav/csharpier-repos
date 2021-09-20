@@ -96,7 +96,8 @@ namespace System.Reflection.Tests
             this CustomAttributeTypedArgument cat,
             Type parameterType,
             object value
-        ) {
+        )
+        {
             if (value == null)
             {
                 Assert.Null(cat.Value);
@@ -144,7 +145,8 @@ namespace System.Reflection.Tests
 
         internal static void ValidateCustomAttributesAllocatesFreshObjectsEachTime(
             Func<IEnumerable<CustomAttributeData>> action
-        ) {
+        )
+        {
             IEnumerable<CustomAttributeData> cads1 = action();
             IEnumerable<CustomAttributeData> cads2 = action();
             cads1.ValidateEqualButFreshlyAllocated(cads2);
@@ -153,7 +155,8 @@ namespace System.Reflection.Tests
         internal static void ValidateEqualButFreshlyAllocated(
             this IEnumerable<CustomAttributeData> cads1,
             IEnumerable<CustomAttributeData> cads2
-        ) {
+        )
+        {
             CustomAttributeData[] acads1 = cads1.ToArray();
             CustomAttributeData[] acads2 = cads2.ToArray();
             Assert.Equal(acads1.Length, acads2.Length);
@@ -209,7 +212,8 @@ namespace System.Reflection.Tests
         private static void ValidateEqualButFreshlyAllocated(
             this CustomAttributeTypedArgument cat1,
             CustomAttributeTypedArgument cat2
-        ) {
+        )
+        {
             Assert.Equal(cat1.ArgumentType, cat2.ArgumentType);
             if (cat1.Value == null && cat2.Value == null)
                 return;

@@ -435,7 +435,8 @@ namespace JIT.HardwareIntrinsics.X86
             Vector256<SByte> right,
             void* result,
             [CallerMemberName] string method = ""
-        ) {
+        )
+        {
             SByte[] inArray1 = new SByte[Op1ElementCount];
             SByte[] inArray2 = new SByte[Op2ElementCount];
             SByte[] outArray = new SByte[RetElementCount];
@@ -456,7 +457,8 @@ namespace JIT.HardwareIntrinsics.X86
             void* right,
             void* result,
             [CallerMemberName] string method = ""
-        ) {
+        )
+        {
             SByte[] inArray1 = new SByte[Op1ElementCount];
             SByte[] inArray2 = new SByte[Op2ElementCount];
             SByte[] outArray = new SByte[RetElementCount];
@@ -485,7 +487,8 @@ namespace JIT.HardwareIntrinsics.X86
             SByte[] right,
             SByte[] result,
             [CallerMemberName] string method = ""
-        ) {
+        )
+        {
             bool succeeded = true;
 
             if (result[0] != left[11])
@@ -505,7 +508,8 @@ namespace JIT.HardwareIntrinsics.X86
                                     : ((i < 21) ? left[i + 11] : 0)
                             )
                         )
-                    ) {
+                    )
+                    {
                         succeeded = false;
                         break;
                     }

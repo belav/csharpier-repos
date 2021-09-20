@@ -31,7 +31,8 @@ namespace Microsoft.Extensions.Primitives
         internal static void ThrowInvalidOperationException(
             ExceptionResource resource,
             params object[] args
-        ) {
+        )
+        {
             string message = string.Format(GetResourceText(resource), args);
 
             throw new InvalidOperationException(message);
@@ -44,7 +45,8 @@ namespace Microsoft.Extensions.Primitives
 
         internal static ArgumentOutOfRangeException GetArgumentOutOfRangeException(
             ExceptionArgument argument
-        ) {
+        )
+        {
             return new ArgumentOutOfRangeException(GetArgumentName(argument));
         }
 

@@ -28,12 +28,14 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             SimpleProgramNamedTypeSymbol containingType,
             SingleTypeDeclaration declaration,
             BindingDiagnosticBag diagnostics
-        ) : base(
-            containingType,
-            syntaxReferenceOpt: declaration.SyntaxReference,
-            ImmutableArray.Create(declaration.SyntaxReference.GetLocation()),
-            isIterator: declaration.IsIterator
-        ) {
+        )
+            : base(
+                containingType,
+                syntaxReferenceOpt: declaration.SyntaxReference,
+                ImmutableArray.Create(declaration.SyntaxReference.GetLocation()),
+                isIterator: declaration.IsIterator
+            )
+        {
             _declaration = declaration;
 
             bool hasAwait = declaration.HasAwaitExpressions;
@@ -215,7 +217,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
         internal override ExecutableCodeBinder TryGetBodyBinder(
             BinderFactory? binderFactoryOpt = null,
             bool ignoreAccessibility = false
-        ) {
+        )
+        {
             return GetBodyBinder(ignoreAccessibility);
         }
 
@@ -251,7 +254,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                 if (
                     previousWeakReference != null
                     && previousWeakReference.TryGetTarget(out ExecutableCodeBinder? previousBinder)
-                ) {
+                )
+                {
                     return previousBinder;
                 }
 
@@ -262,7 +266,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                         new WeakReference<ExecutableCodeBinder>(newBinder),
                         previousWeakReference
                     ) == previousWeakReference
-                ) {
+                )
+                {
                     return newBinder;
                 }
             }
@@ -272,7 +277,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             SyntaxTree tree,
             TextSpan? definedWithinSpan,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             if (_declaration.SyntaxReference.SyntaxTree == tree)
             {
                 if (!definedWithinSpan.HasValue)
@@ -287,7 +293,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                         var global in (
                             (CompilationUnitSyntax)tree.GetRoot(cancellationToken)
                         ).Members.OfType<GlobalStatementSyntax>()
-                    ) {
+                    )
+                    {
                         cancellationToken.ThrowIfCancellationRequested();
 
                         if (global.Span.IntersectsWith(span))
@@ -307,13 +314,15 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
         private static bool IsNullableAnalysisEnabled(
             CSharpCompilation compilation,
             CompilationUnitSyntax syntax
-        ) {
+        )
+        {
             foreach (var member in syntax.Members)
             {
                 if (
                     member.Kind() == SyntaxKind.GlobalStatement
                     && compilation.IsNullableAnalysisEnabledIn(member)
-                ) {
+                )
+                {
                     return true;
                 }
             }

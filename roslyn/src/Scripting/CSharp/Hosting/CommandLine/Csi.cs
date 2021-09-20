@@ -22,21 +22,22 @@ namespace Microsoft.CodeAnalysis.CSharp.Scripting.Hosting
             string[] args,
             IAnalyzerAssemblyLoader analyzerLoader
         )
-          // Unlike C# compiler we do not use LIB environment variable. It's only supported for historical reasons.
-          : base(
-            CSharpCommandLineParser.Script,
-            responseFile,
-            args,
-            buildPaths,
-            null,
-            analyzerLoader
-        ) { }
+            // Unlike C# compiler we do not use LIB environment variable. It's only supported for historical reasons.
+            : base(
+                CSharpCommandLineParser.Script,
+                responseFile,
+                args,
+                buildPaths,
+                null,
+                analyzerLoader
+            ) { }
 
         internal override Type Type => typeof(CSharpInteractiveCompiler);
 
         internal override MetadataReferenceResolver GetCommandLineMetadataReferenceResolver(
             TouchedFileLogger loggerOpt
-        ) {
+        )
+        {
             return CommandLineRunner.GetMetadataReferenceResolver(Arguments, loggerOpt);
         }
 

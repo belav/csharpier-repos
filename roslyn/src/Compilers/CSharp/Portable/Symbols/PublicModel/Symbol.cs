@@ -18,7 +18,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols.PublicModel
 
         protected static ImmutableArray<TypeWithAnnotations> ConstructTypeArguments(
             ITypeSymbol[] typeArguments
-        ) {
+        )
+        {
             var builder = ArrayBuilder<TypeWithAnnotations>.GetInstance(typeArguments.Length);
             foreach (var typeArg in typeArguments)
             {
@@ -40,7 +41,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols.PublicModel
         protected static ImmutableArray<TypeWithAnnotations> ConstructTypeArguments(
             ImmutableArray<ITypeSymbol> typeArguments,
             ImmutableArray<CodeAnalysis.NullableAnnotation> typeArgumentNullableAnnotations
-        ) {
+        )
+        {
             if (typeArguments.IsDefault)
             {
                 throw new ArgumentException(nameof(typeArguments));
@@ -50,7 +52,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols.PublicModel
             if (
                 !typeArgumentNullableAnnotations.IsDefault
                 && typeArgumentNullableAnnotations.Length != n
-            ) {
+            )
+            {
                 throw new ArgumentException(nameof(typeArgumentNullableAnnotations));
             }
 
@@ -151,7 +154,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols.PublicModel
             CultureInfo preferredCulture,
             bool expandIncludes,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             return UnderlyingSymbol.GetDocumentationCommentXml(
                 preferredCulture,
                 expandIncludes,
@@ -173,7 +177,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols.PublicModel
             SemanticModel semanticModel,
             int position,
             SymbolDisplayFormat format
-        ) {
+        )
+        {
             return SymbolDisplay.ToMinimalDisplayString(
                 this,
                 GetCSharpSemanticModel(semanticModel),
@@ -186,7 +191,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols.PublicModel
             SemanticModel semanticModel,
             int position,
             SymbolDisplayFormat format
-        ) {
+        )
+        {
             return SymbolDisplay.ToMinimalDisplayParts(
                 this,
                 GetCSharpSemanticModel(semanticModel),

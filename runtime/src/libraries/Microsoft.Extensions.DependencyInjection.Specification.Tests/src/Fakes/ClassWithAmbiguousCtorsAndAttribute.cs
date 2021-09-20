@@ -20,7 +20,8 @@ namespace Microsoft.Extensions.DependencyInjection.Specification.Fakes
             IFakeService service,
             IFakeOuterService service2,
             string data
-        ) {
+        )
+        {
             CtorUsed = "IFakeService, IFakeService, string";
         }
 

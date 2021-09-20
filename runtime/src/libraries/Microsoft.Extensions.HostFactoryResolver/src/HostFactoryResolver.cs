@@ -36,7 +36,8 @@ namespace Microsoft.Extensions.Hosting
 
         public static Func<string[], THostBuilder>? ResolveHostBuilderFactory<THostBuilder>(
             Assembly assembly
-        ) {
+        )
+        {
             return ResolveFactory<THostBuilder>(assembly, CreateHostBuilder);
         }
 
@@ -69,7 +70,8 @@ namespace Microsoft.Extensions.Hosting
         // Used by EF tooling without any Hosting references. Looses some return type safety checks.
         public static Func<string[], IServiceProvider?>? ResolveServiceProviderFactory(
             Assembly assembly
-        ) {
+        )
+        {
             // Prefer the older patterns by default for back compat.
             var webHostFactory = ResolveWebHostFactory<object>(assembly);
             if (webHostFactory != null)

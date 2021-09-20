@@ -81,7 +81,8 @@ namespace JIT.HardwareIntrinsics.General
             Vector64<Int32> result,
             Int32[] expectedValues,
             [CallerMemberName] string method = ""
-        ) {
+        )
+        {
             Int32[] resultElements = new Int32[ElementCount];
             Unsafe.WriteUnaligned(ref Unsafe.As<Int32, byte>(ref resultElements[0]), result);
             ValidateResult(resultElements, expectedValues, method);
@@ -91,7 +92,8 @@ namespace JIT.HardwareIntrinsics.General
             Int32[] resultElements,
             Int32[] expectedValues,
             [CallerMemberName] string method = ""
-        ) {
+        )
+        {
             bool succeeded = true;
 
             for (var i = 0; i < ElementCount; i++)

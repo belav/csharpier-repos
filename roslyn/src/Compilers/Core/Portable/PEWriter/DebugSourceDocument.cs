@@ -42,11 +42,8 @@ namespace Microsoft.Cci
         /// <summary>
         /// Use to create a document when checksum is computed based on actual source stream.
         /// </summary>
-        public DebugSourceDocument(
-            string location,
-            Guid language,
-            Func<DebugSourceInfo> sourceInfo
-        ) : this(location, language)
+        public DebugSourceDocument(string location, Guid language, Func<DebugSourceInfo> sourceInfo)
+            : this(location, language)
         {
             _sourceInfo = Task.Run(sourceInfo);
             _isComputedChecksum = true;

@@ -106,7 +106,8 @@ namespace XLinqTests
                     new XText("text2"),
                     new XDocument()
                 }
-            ) {
+            )
+            {
                 try
                 {
                     var doc = new XDocument(new XElement("A"));

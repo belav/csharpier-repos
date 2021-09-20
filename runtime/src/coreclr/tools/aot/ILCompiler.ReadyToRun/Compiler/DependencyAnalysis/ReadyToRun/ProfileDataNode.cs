@@ -85,7 +85,8 @@ namespace ILCompiler.DependencyAnalysis.ReadyToRun
             ref ObjectDataBuilder dataBuilder,
             NodeFactory factory,
             bool relocsOnly
-        ) {
+        )
+        {
             ProfileDataNode nextElementInList =
                 ((ProfileDataSectionNode)ContainingNode).NextElementToEncode;
             if (nextElementInList != null)

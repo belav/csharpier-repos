@@ -157,7 +157,8 @@ namespace Microsoft.AspNetCore.Server.HttpSys.Listener
             string requestPath,
             string expectedPathBase,
             string expectedPath
-        ) {
+        )
+        {
             using var baseServer = Utilities.CreateDynamicHttpServer(
                 pathBase,
                 out var root,

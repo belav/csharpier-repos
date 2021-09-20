@@ -95,7 +95,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UsePatternMatching
                     out _,
                     out _
                 )
-            ) {
+            )
+            {
                 return;
             }
 
@@ -120,7 +121,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UsePatternMatching
             SemanticModel semanticModel,
             BinaryExpressionSyntax isExpression,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var container = GetContainer(isExpression);
             if (container == null)
             {
@@ -189,7 +191,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UsePatternMatching
         private static bool ReplacementCausesError(
             SemanticModel updatedSemanticModel,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var root = updatedSemanticModel.SyntaxTree.GetRoot(cancellationToken);
 
             var currentNode = root.GetAnnotatedNodes(s_referenceAnnotation).Single();
@@ -207,7 +210,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UsePatternMatching
             string localName,
             HashSet<CastExpressionSyntax> matches,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var root = semanticModel.SyntaxTree.GetRoot(cancellationToken);
             var editor = new SyntaxEditor(root, CSharpSyntaxGenerator.Instance);
 
@@ -280,7 +284,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UsePatternMatching
             ExpressionSyntax expr,
             TypeSyntax type,
             HashSet<CastExpressionSyntax> matches
-        ) {
+        )
+        {
             // Don't bother recursing down nodes that are before the type in the is-expression.
             if (node.Span.End >= type.Span.End)
             {
@@ -292,7 +297,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UsePatternMatching
                             castExpression.Expression.WalkDownParentheses(),
                             expr
                         )
-                    ) {
+                    )
+                    {
                         matches.Add(castExpression);
                     }
                 }

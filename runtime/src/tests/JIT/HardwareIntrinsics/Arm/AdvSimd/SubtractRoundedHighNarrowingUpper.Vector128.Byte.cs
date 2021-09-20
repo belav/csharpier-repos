@@ -131,7 +131,8 @@ namespace JIT.HardwareIntrinsics.Arm
                 UInt16[] inArray3,
                 Byte[] outArray,
                 int alignment
-            ) {
+            )
+            {
                 int sizeOfinArray1 = inArray1.Length * Unsafe.SizeOf<Byte>();
                 int sizeOfinArray2 = inArray2.Length * Unsafe.SizeOf<UInt16>();
                 int sizeOfinArray3 = inArray3.Length * Unsafe.SizeOf<UInt16>();
@@ -142,7 +143,8 @@ namespace JIT.HardwareIntrinsics.Arm
                     || (alignment * 2) < sizeOfinArray2
                     || (alignment * 2) < sizeOfinArray3
                     || (alignment * 2) < sizeOfoutArray
-                ) {
+                )
+                {
                     throw new ArgumentException("Invalid value of alignment");
                 }
 
@@ -241,7 +243,8 @@ namespace JIT.HardwareIntrinsics.Arm
 
             public void RunStructFldScenario(
                 SimpleTernaryOpTest__SubtractRoundedHighNarrowingUpper_Vector128_Byte testClass
-            ) {
+            )
+            {
                 var result = AdvSimd.SubtractRoundedHighNarrowingUpper(_fld1, _fld2, _fld3);
 
                 Unsafe.Write(testClass._dataTable.outArrayPtr, result);
@@ -250,7 +253,8 @@ namespace JIT.HardwareIntrinsics.Arm
 
             public void RunStructFldScenario_Load(
                 SimpleTernaryOpTest__SubtractRoundedHighNarrowingUpper_Vector128_Byte testClass
-            ) {
+            )
+            {
                 fixed (Vector64<Byte>* pFld1 = &_fld1)fixed (
                     Vector128<UInt16>* pFld2 = &_fld2
                 )fixed (Vector128<UInt16>* pFld3 = &_fld3)
@@ -589,7 +593,8 @@ namespace JIT.HardwareIntrinsics.Arm
 
             fixed (Vector64<Byte>* pFld1 = &_fld1)fixed (Vector128<UInt16>* pFld2 = &_fld2)fixed (
                 Vector128<UInt16>* pFld3 = &_fld3
-            ) {
+            )
+            {
                 var result = AdvSimd.SubtractRoundedHighNarrowingUpper(
                     AdvSimd.LoadVector64((Byte*)(pFld1)),
                     AdvSimd.LoadVector128((UInt16*)(pFld2)),
@@ -674,7 +679,8 @@ namespace JIT.HardwareIntrinsics.Arm
             Vector128<UInt16> op3,
             void* result,
             [CallerMemberName] string method = ""
-        ) {
+        )
+        {
             Byte[] inArray1 = new Byte[Op1ElementCount];
             UInt16[] inArray2 = new UInt16[Op2ElementCount];
             UInt16[] inArray3 = new UInt16[Op3ElementCount];
@@ -698,7 +704,8 @@ namespace JIT.HardwareIntrinsics.Arm
             void* op3,
             void* result,
             [CallerMemberName] string method = ""
-        ) {
+        )
+        {
             Byte[] inArray1 = new Byte[Op1ElementCount];
             UInt16[] inArray2 = new UInt16[Op2ElementCount];
             UInt16[] inArray3 = new UInt16[Op3ElementCount];
@@ -734,7 +741,8 @@ namespace JIT.HardwareIntrinsics.Arm
             UInt16[] thirdOp,
             Byte[] result,
             [CallerMemberName] string method = ""
-        ) {
+        )
+        {
             bool succeeded = true;
 
             for (var i = 0; i < RetElementCount; i++)
@@ -742,7 +750,8 @@ namespace JIT.HardwareIntrinsics.Arm
                 if (
                     Helpers.SubtractRoundedHighNarrowingUpper(firstOp, secondOp, thirdOp, i)
                     != result[i]
-                ) {
+                )
+                {
                     succeeded = false;
                     break;
                 }

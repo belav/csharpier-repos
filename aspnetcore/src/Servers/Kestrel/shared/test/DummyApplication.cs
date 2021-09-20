@@ -21,7 +21,8 @@ namespace Microsoft.AspNetCore.Testing
         public DummyApplication(
             RequestDelegate requestDelegate,
             IHttpContextFactory httpContextFactory
-        ) {
+        )
+        {
             _requestDelegate = requestDelegate;
             _httpContextFactory = httpContextFactory;
         }

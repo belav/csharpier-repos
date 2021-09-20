@@ -49,7 +49,8 @@ namespace Newtonsoft.Json.Utilities
             this ILGenerator generator,
             int argsIndex,
             int arrayIndex
-        ) {
+        )
+        {
             generator.Emit(OpCodes.Ldarg, argsIndex);
             generator.Emit(OpCodes.Ldc_I4, arrayIndex);
             generator.Emit(OpCodes.Ldelem_Ref);

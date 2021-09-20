@@ -92,7 +92,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.Formatting
                     BraceCompletionOptions.AutoFormattingOnCloseBrace,
                     LanguageNames.CSharp
                 )
-            ) {
+            )
+            {
                 return false;
             }
 
@@ -102,7 +103,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.Formatting
                     FeatureOnOffOptions.AutoFormattingOnSemicolon,
                     LanguageNames.CSharp
                 )
-            ) {
+            )
+            {
                 return false;
             }
 
@@ -120,7 +122,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.Formatting
             TextSpan? textSpan,
             DocumentOptionSet? documentOptions,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var root = await document.GetRequiredSyntaxRootAsync(cancellationToken)
                 .ConfigureAwait(false);
             var span = textSpan ?? new TextSpan(0, root.FullSpan.Length);
@@ -148,7 +151,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.Formatting
             TextSpan textSpan,
             DocumentOptionSet? documentOptions,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var root = await document.GetRequiredSyntaxRootAsync(cancellationToken)
                 .ConfigureAwait(false);
 
@@ -185,7 +189,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.Formatting
             Document document,
             int position,
             SyntaxToken tokenBeforeCaret
-        ) {
+        )
+        {
             var workspace = document.Project.Solution.Workspace;
             var formattingRuleFactory =
                 workspace.Services.GetRequiredService<IHostDependentFormattingRuleFactoryService>();
@@ -204,14 +209,16 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.Formatting
         private static async Task<bool> TokenShouldNotFormatOnTypeCharAsync(
             SyntaxToken token,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             // If the token is a )  we only want to format if it's the close paren
             // of a using statement.  That way if we have nested usings, the inner
             // using will align with the outer one when the user types the close paren.
             if (
                 token.IsKind(SyntaxKind.CloseParenToken)
                 && !token.Parent.IsKind(SyntaxKind.UsingStatement)
-            ) {
+            )
+            {
                 return true;
             }
 
@@ -224,7 +231,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.Formatting
                     token.Parent.IsKind(SyntaxKind.LabeledStatement)
                     || token.Parent is SwitchLabelSyntax
                 )
-            ) {
+            )
+            {
                 return true;
             }
 
@@ -249,7 +257,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.Formatting
             int caretPosition,
             DocumentOptionSet? documentOptions,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             // first, find the token user just typed.
             var token = await GetTokenBeforeTheCaretAsync(
                     document,
@@ -261,7 +270,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.Formatting
                 token.IsMissing
                 || !ValidSingleOrMultiCharactersTokenKind(typedChar, token.Kind())
                 || token.IsKind(SyntaxKind.EndOfFileToken, SyntaxKind.None)
-            ) {
+            )
+            {
                 return null;
             }
 
@@ -272,7 +282,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.Formatting
             if (
                 service != null
                 && service.IsInNonUserCode(token.SyntaxTree, caretPosition, cancellationToken)
-            ) {
+            )
+            {
                 return null;
             }
 
@@ -387,7 +398,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.Formatting
             Document document,
             int caretPosition,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var tree = await document.GetRequiredSyntaxTreeAsync(cancellationToken)
                 .ConfigureAwait(false);
 
@@ -403,7 +415,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.Formatting
             SyntaxToken token,
             IEnumerable<AbstractFormattingRule> formattingRules,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var root = await document.GetRequiredSyntaxRootAsync(cancellationToken)
                 .ConfigureAwait(false);
             var formatter = CreateSmartTokenFormatter(options, formattingRules, root);
@@ -428,7 +441,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.Formatting
             SyntaxToken endToken,
             IEnumerable<AbstractFormattingRule> formattingRules,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             if (!IsEndToken(endToken))
             {
                 return SpecializedCollections.EmptyList<TextChange>();
@@ -443,7 +457,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.Formatting
             if (
                 IsInvalidTokenKind(tokenRange.Value.Item1)
                 || IsInvalidTokenKind(tokenRange.Value.Item2)
-            ) {
+            )
+            {
                 return SpecializedCollections.EmptyList<TextChange>();
             }
 
@@ -467,7 +482,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.Formatting
 
         private static IEnumerable<AbstractFormattingRule> GetTypingRules(
             SyntaxToken tokenBeforeCaret
-        ) {
+        )
+        {
             // Typing introduces several challenges around formatting.
             // Historically we've shipped several triggers that cause formatting to happen directly while typing.
             // These include formatting of blocks when '}' is typed, formatting of statements when a ';' is typed, formatting of ```case```s when ':' typed, and many other cases.
@@ -543,7 +559,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.Formatting
             if (
                 tokenBeforeCaret.Kind() == SyntaxKind.CloseBraceToken
                 || tokenBeforeCaret.Kind() == SyntaxKind.EndOfFileToken
-            ) {
+            )
+            {
                 return SpecializedCollections.EmptyEnumerable<AbstractFormattingRule>();
             }
 

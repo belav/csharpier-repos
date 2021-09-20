@@ -136,7 +136,8 @@ public struct winx64_vector3Struct
         ref winx64_vector3Struct a,
         ref winx64_vector3Struct b,
         out winx64_vector3Struct result
-    ) {
+    )
+    {
         result.x = a.x + b.x;
         result.y = a.y + b.y;
         result.z = a.z + b.z;
@@ -599,7 +600,8 @@ class winx64structs
         winx64_struct5 var4,
         winx64_struct1 var5,
         winx64_struct5 var6
-    ) {
+    )
+    {
         if (var1.a != 1 || var3.a != 5)
             return 1;
         if (var2.a != 2 || var2.b != 3 || var2.c != 4 || var4.a != 6 || var4.b != 7 || var4.c != 8)

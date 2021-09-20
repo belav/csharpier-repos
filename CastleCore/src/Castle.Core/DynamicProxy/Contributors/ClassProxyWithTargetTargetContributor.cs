@@ -29,10 +29,8 @@ namespace Castle.DynamicProxy.Contributors
     {
         private readonly Type targetType;
 
-        public ClassProxyWithTargetTargetContributor(
-            Type targetType,
-            INamingScope namingScope
-        ) : base(namingScope)
+        public ClassProxyWithTargetTargetContributor(Type targetType, INamingScope namingScope)
+            : base(namingScope)
         {
             this.targetType = targetType;
         }
@@ -59,7 +57,8 @@ namespace Castle.DynamicProxy.Contributors
             MetaMethod method,
             ClassEmitter @class,
             OverrideMethodDelegate overrideMethod
-        ) {
+        )
+        {
             if (method.Ignore)
             {
                 return null;
@@ -189,7 +188,8 @@ namespace Castle.DynamicProxy.Contributors
             ClassEmitter proxy,
             OverrideMethodDelegate overrideMethod,
             bool skipInterceptors = false
-        ) {
+        )
+        {
             var @delegate = GetDelegateType(method, proxy);
             var contributor = GetContributor(@delegate, method);
             var invocation = new CompositionInvocationTypeGenerator(

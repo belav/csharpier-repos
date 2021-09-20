@@ -335,7 +335,8 @@ namespace XLinqTests
             XContainer orig,
             IEnumerable<object> newNodes,
             string stringOnlyContent
-        ) {
+        )
+        {
             foreach (object n in newNodes.Flatten())
             {
                 yield return new ExpectedValue(

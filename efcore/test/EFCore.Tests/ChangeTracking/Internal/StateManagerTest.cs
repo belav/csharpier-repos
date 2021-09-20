@@ -705,7 +705,8 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
                 InternalEntityEntry entry,
                 EntityState oldState,
                 bool fromQuery
-            ) {
+            )
+            {
                 ChangedCount++;
                 ChangedState = oldState;
 

@@ -26,7 +26,8 @@ namespace Microsoft.CodeAnalysis.ExternalAccess.Razor
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
         public RazorDynamicFileInfoProviderWrapper(
             Lazy<IRazorDynamicFileInfoProvider> innerDynamicFileInfoProvider
-        ) {
+        )
+        {
             _innerDynamicFileInfoProvider =
                 innerDynamicFileInfoProvider
                 ?? throw new ArgumentNullException(nameof(innerDynamicFileInfoProvider));
@@ -37,7 +38,8 @@ namespace Microsoft.CodeAnalysis.ExternalAccess.Razor
             string projectFilePath,
             string filePath,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             // We lazily attach to the dynamic file info provider in order to ensure that Razor assemblies are not loaded in non-Razor contexts.
             if (!EnsureAttached())
             {
@@ -74,7 +76,8 @@ namespace Microsoft.CodeAnalysis.ExternalAccess.Razor
             string projectFilePath,
             string filePath,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             if (_innerDynamicFileInfoProvider == null)
             {
                 // Razor workload is not installed. Can't remove any dynamic file infos.

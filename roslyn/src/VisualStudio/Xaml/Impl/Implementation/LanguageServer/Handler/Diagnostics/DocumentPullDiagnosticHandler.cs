@@ -21,9 +21,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Xaml.Implementation.LanguageSe
     {
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-        public DocumentPullDiagnosticHandler(
-            IXamlPullDiagnosticService xamlPullDiagnosticService
-        ) : base(xamlPullDiagnosticService) { }
+        public DocumentPullDiagnosticHandler(IXamlPullDiagnosticService xamlPullDiagnosticService)
+            : base(xamlPullDiagnosticService) { }
 
         public override string Method => MSLSPMethods.DocumentPullDiagnosticName;
 

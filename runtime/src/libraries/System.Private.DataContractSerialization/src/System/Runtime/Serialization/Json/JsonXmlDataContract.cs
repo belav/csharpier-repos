@@ -19,7 +19,8 @@ namespace System.Runtime.Serialization.Json
         public override object? ReadJsonValueCore(
             XmlReaderDelegator jsonReader,
             XmlObjectSerializerReadContextComplexJson? context
-        ) {
+        )
+        {
             string xmlContent = jsonReader.ReadElementContentAsString();
 
             DataContractSerializer dataContractSerializer = new DataContractSerializer(
@@ -59,7 +60,8 @@ namespace System.Runtime.Serialization.Json
             object obj,
             XmlObjectSerializerWriteContextComplexJson? context,
             RuntimeTypeHandle declaredTypeHandle
-        ) {
+        )
+        {
             DataContractSerializer dataContractSerializer = new DataContractSerializer(
                 Type.GetTypeFromHandle(declaredTypeHandle),
                 GetKnownTypesFromContext(
@@ -81,7 +83,8 @@ namespace System.Runtime.Serialization.Json
         private List<Type> GetKnownTypesFromContext(
             XmlObjectSerializerContext? context,
             IList<Type>? serializerKnownTypeList
-        ) {
+        )
+        {
             List<Type> knownTypesList = new List<Type>();
             if (context != null)
             {

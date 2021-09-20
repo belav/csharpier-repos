@@ -17,7 +17,8 @@ namespace Internal.CommandLine
             Dictionary<string, string> dictionary,
             string pattern,
             bool strict
-        ) {
+        )
+        {
             bool empty = true;
 
             string directoryName = Path.GetDirectoryName(pattern);

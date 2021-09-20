@@ -55,7 +55,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel.InMemory.FunctionalTests
                     },
                     testContext
                 )
-            ) {
+            )
+            {
                 using (var connection = server.CreateConnection())
                 {
                     await connection.SendEmptyGet();
@@ -70,7 +71,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel.InMemory.FunctionalTests
                     ;
                     !await logWh.WaitAsync(TimeSpan.FromSeconds(1)) && logWaitAttempts < 30;
                     logWaitAttempts++
-                ) {
+                )
+                {
                     GC.Collect();
                     GC.WaitForPendingFinalizers();
                 }

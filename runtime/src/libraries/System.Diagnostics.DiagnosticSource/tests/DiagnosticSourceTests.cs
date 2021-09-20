@@ -143,7 +143,8 @@ namespace System.Diagnostics.Tests
         {
             using (
                 DiagnosticListener listener = new DiagnosticListener("TestingIsEnabledMultipleArgs")
-            ) {
+            )
+            {
                 DiagnosticSource source = listener;
                 var result = new List<KeyValuePair<string, object>>();
                 Func<string, object, object, bool> isEnabled = (name, arg1, arg2) =>
@@ -191,13 +192,15 @@ namespace System.Diagnostics.Tests
                         subscriber1Observer,
                         subscriber1Predicate
                     )
-                ) {
+                )
+                {
                     using (
                         var subscription2 = listener.Subscribe(
                             subscriber2Observer,
                             subscriber2Predicate
                         )
-                    ) {
+                    )
+                    {
                         // Things that neither subscribe to get filtered out.
                         if (listener.IsEnabled("DataToFilterOut"))
                             listener.Write("DataToFilterOut", -1);
@@ -353,7 +356,8 @@ namespace System.Diagnostics.Tests
         {
             using (
                 DiagnosticListener listener = new DiagnosticListener("MultiSubscriberStressTest")
-            ) {
+            )
+            {
                 DiagnosticSource source = listener;
 
                 var random = new Random();
@@ -441,7 +445,8 @@ namespace System.Diagnostics.Tests
                     var allListenerSubscription = DiagnosticListener.AllListeners.Subscribe(
                         MakeObserver(onNewListener)
                     )
-                ) {
+                )
+                {
                     Assert.Equal(listener, returnedListener);
                     returnedListener = null;
                 } // Now we unsubscribe
@@ -456,7 +461,8 @@ namespace System.Diagnostics.Tests
                     var allListenerSubscription = DiagnosticListener.AllListeners.Subscribe(
                         MakeObserver(onNewListener)
                     )
-                ) {
+                )
+                {
                     Assert.Equal(listener, returnedListener);
                     returnedListener = null;
 
@@ -481,7 +487,8 @@ namespace System.Diagnostics.Tests
                     var allListenerSubscription = DiagnosticListener.AllListeners.Subscribe(
                         MakeObserver(onNewListener)
                     )
-                ) {
+                )
+                {
                     Assert.Equal(listener, returnedListener);
                     returnedListener = null;
                 } // cleanup
@@ -670,14 +677,16 @@ namespace System.Diagnostics.Tests
                 DiagnosticListener listener = new DiagnosticListener(
                     "TestingSubscribeWithNullPredicate"
                 )
-            ) {
+            )
+            {
                 Predicate<string> predicate = null;
                 using (
                     listener.Subscribe(
                         new ObserverToList<TelemData>(new List<KeyValuePair<string, object>>()),
                         predicate
                     )
-                ) {
+                )
+                {
                     Assert.True(listener.IsEnabled("event"));
                     Assert.True(listener.IsEnabled("event", null));
                     Assert.True(listener.IsEnabled("event", "arg1"));
@@ -689,7 +698,8 @@ namespace System.Diagnostics.Tests
                 DiagnosticListener listener = new DiagnosticListener(
                     "TestingSubscribeWithNullPredicate"
                 )
-            ) {
+            )
+            {
                 DiagnosticSource source = listener;
                 Func<string, object, object, bool> predicate = null;
                 using (
@@ -697,7 +707,8 @@ namespace System.Diagnostics.Tests
                         new ObserverToList<TelemData>(new List<KeyValuePair<string, object>>()),
                         predicate
                     )
-                ) {
+                )
+                {
                     Assert.True(source.IsEnabled("event"));
                     Assert.True(source.IsEnabled("event", null));
                     Assert.True(source.IsEnabled("event", "arg1"));
@@ -719,7 +730,8 @@ namespace System.Diagnostics.Tests
                     string name,
                     object obj1,
                     object obj2
-                ) {
+                )
+                {
                     seenPredicate = true;
                     return true;
                 };
@@ -730,7 +742,8 @@ namespace System.Diagnostics.Tests
                 Action<Activity, object> activityImport = delegate(
                     Activity activity,
                     object payload
-                ) {
+                )
+                {
                     Assert.Equal(activity.GetHashCode(), importerActivity.GetHashCode());
                     Assert.Equal(importer, payload);
                     seenActivityImport = true;
@@ -742,7 +755,8 @@ namespace System.Diagnostics.Tests
                 Action<Activity, object> activityExport = delegate(
                     Activity activity,
                     object payload
-                ) {
+                )
+                {
                     Assert.Equal(activity.GetHashCode(), exporterActivity.GetHashCode());
                     Assert.Equal(exporter, payload);
                     seenActivityExport = true;
@@ -756,7 +770,8 @@ namespace System.Diagnostics.Tests
                         activityImport,
                         activityExport
                     )
-                ) {
+                )
+                {
                     if (listener.IsEnabled("IntPayload"))
                         listener.Write("IntPayload", 5);
 
@@ -803,7 +818,8 @@ namespace System.Diagnostics.Tests
         public static IObserver<T> MakeObserver<T>(
             Action<T> onNext = null,
             Action onCompleted = null
-        ) {
+        )
+        {
             return new Observer<T>(onNext, onCompleted);
         }
 

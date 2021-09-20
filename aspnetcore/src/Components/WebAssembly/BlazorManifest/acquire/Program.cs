@@ -162,7 +162,8 @@ namespace acquire
             string tempDirectory,
             string restoreDirectory,
             List<(string Id, string Version)> packs
-        ) {
+        )
+        {
             var restoreProject = Path.Combine(tempDirectory, "restore", "Restore.csproj");
             var restoreProjectDirectory = Directory.CreateDirectory(
                 Path.GetDirectoryName(restoreProject)

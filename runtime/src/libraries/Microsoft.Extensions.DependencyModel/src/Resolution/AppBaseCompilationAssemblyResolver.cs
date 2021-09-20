@@ -30,7 +30,8 @@ namespace Microsoft.Extensions.DependencyModel.Resolution
             IFileSystem fileSystem,
             string basePath,
             DependencyContextPaths dependencyContextPaths
-        ) {
+        )
+        {
             _fileSystem = fileSystem;
             _basePath = basePath;
             _dependencyContextPaths = dependencyContextPaths;
@@ -61,7 +62,8 @@ namespace Microsoft.Extensions.DependencyModel.Resolution
                 && !isPackage
                 && !isReferenceAssembly
                 && !string.Equals(library.Type, "reference", StringComparison.OrdinalIgnoreCase)
-            ) {
+            )
+            {
                 return false;
             }
 
@@ -110,7 +112,8 @@ namespace Microsoft.Extensions.DependencyModel.Resolution
                             assemblyFile,
                             out fullName
                         )
-                    ) {
+                    )
+                    {
                         paths.Add(fullName);
                         resolved = true;
                         break;

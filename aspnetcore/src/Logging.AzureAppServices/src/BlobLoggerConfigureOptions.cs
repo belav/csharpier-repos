@@ -14,10 +14,8 @@ namespace Microsoft.Extensions.Logging.AzureAppServices
         private readonly IConfiguration _configuration;
         private readonly IWebAppContext _context;
 
-        public BlobLoggerConfigureOptions(
-            IConfiguration configuration,
-            IWebAppContext context
-        ) : base(configuration, "AzureBlobEnabled")
+        public BlobLoggerConfigureOptions(IConfiguration configuration, IWebAppContext context)
+            : base(configuration, "AzureBlobEnabled")
         {
             _configuration = configuration;
             _context = context;

@@ -74,7 +74,8 @@ namespace Microsoft.AspNetCore.JsonPatch.IntegrationTests
             Type objectType,
             object existingValue,
             JsonSerializer serializer
-        ) {
+        )
+        {
             var jObject = JObject.Load(reader);
 
             var target = CreateShape(jObject);

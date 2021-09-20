@@ -91,7 +91,8 @@ namespace Microsoft.Diagnostics.Tools.Pgo
                     if (
                         (processedMethodData.CallWeights != null)
                         && processedMethodData.CallWeights.Count > 0
-                    ) {
+                    )
+                    {
                         _il.LoadString(_emitter.GetUserStringHandle("WeightedCallData"));
                         _il.LoadConstantI4(processedMethodData.CallWeights.Count);
                         foreach (var entry in processedMethodData.CallWeights)
@@ -142,7 +143,8 @@ namespace Microsoft.Diagnostics.Tools.Pgo
             void IPgoEncodedValueEmitter<TypeSystemEntityOrUnknown>.EmitLong(
                 long value,
                 long previousValue
-            ) {
+            )
+            {
                 if ((value <= int.MaxValue) && (value >= int.MinValue))
                 {
                     _il.LoadConstantI4(checked((int)value));
@@ -156,7 +158,8 @@ namespace Microsoft.Diagnostics.Tools.Pgo
             void IPgoEncodedValueEmitter<TypeSystemEntityOrUnknown>.EmitType(
                 TypeSystemEntityOrUnknown type,
                 TypeSystemEntityOrUnknown previousValue
-            ) {
+            )
+            {
                 if (type.AsType != null)
                 {
                     _il.OpCode(ILOpCode.Ldtoken);
@@ -178,7 +181,8 @@ namespace Microsoft.Diagnostics.Tools.Pgo
             TypeDesc type,
             HashSet<string> assemblies,
             out string definingAssembly
-        ) {
+        )
+        {
             definingAssembly = GetTypeDefiningAssembly(type);
             assemblies.Add(definingAssembly);
             AddAssembliesAssociatedWithType(type, assemblies);
@@ -187,7 +191,8 @@ namespace Microsoft.Diagnostics.Tools.Pgo
         private static void AddAssembliesAssociatedWithType(
             TypeDesc type,
             HashSet<string> assemblies
-        ) {
+        )
+        {
             if (type.IsPrimitive)
                 return;
 
@@ -212,7 +217,8 @@ namespace Microsoft.Diagnostics.Tools.Pgo
             MethodDesc method,
             HashSet<string> assemblies,
             out string definingAssembly
-        ) {
+        )
+        {
             AddAssembliesAssociatedWithType(method.OwningType, assemblies, out definingAssembly);
             foreach (var instantiationType in method.Instantiation)
             {
@@ -226,7 +232,8 @@ namespace Microsoft.Diagnostics.Tools.Pgo
             IEnumerable<MethodProfileData> methodsToAttemptToPlaceIntoProfileData,
             bool validate,
             bool uncompressed
-        ) {
+        )
+        {
             TypeSystemMetadataEmitter emitter = new TypeSystemMetadataEmitter(
                 new AssemblyName(outputFileName.Name),
                 tsc
@@ -307,7 +314,8 @@ namespace Microsoft.Diagnostics.Tools.Pgo
             {
                 using (
                     ZipArchive file = ZipFile.Open(outputFileName.FullName, ZipArchiveMode.Create)
-                ) {
+                )
+                {
                     var entry = file.CreateEntry(
                         outputFileName.Name + ".dll",
                         CompressionLevel.Optimal
@@ -337,7 +345,8 @@ namespace Microsoft.Diagnostics.Tools.Pgo
             FileInfo outputFileName,
             byte[] moduleBytes,
             IEnumerable<MethodProfileData> methodsToAttemptToPrepare
-        ) {
+        )
+        {
             var peReader = new System.Reflection.PortableExecutable.PEReader(
                 System.Collections.Immutable.ImmutableArray.Create<byte>(moduleBytes)
             );

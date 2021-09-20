@@ -24,7 +24,8 @@ namespace System.Web.WebPages.Scope
         internal AspNetRequestScopeStorageProvider(
             HttpContextBase httpContext,
             Func<bool> appStartExecuted
-        ) {
+        )
+        {
             _httpContext = httpContext;
             _appStartExecuted = appStartExecuted;
             ApplicationScope = new ApplicationScopeStorageDictionary();

@@ -20,7 +20,8 @@ namespace Microsoft.AspNetCore.Mvc.ApplicationModels
         public static void ApplyConventions(
             ApplicationModel applicationModel,
             IEnumerable<IApplicationModelConvention> conventions
-        ) {
+        )
+        {
             if (applicationModel == null)
             {
                 throw new ArgumentNullException(nameof(applicationModel));
@@ -109,7 +110,8 @@ namespace Microsoft.AspNetCore.Mvc.ApplicationModels
         private static IEnumerable<TConvention> GetConventions<TConvention>(
             IEnumerable<IApplicationModelConvention> conventions,
             IReadOnlyList<object> attributes
-        ) {
+        )
+        {
             return Enumerable.Concat(
                 conventions.OfType<TConvention>(),
                 attributes.OfType<TConvention>()

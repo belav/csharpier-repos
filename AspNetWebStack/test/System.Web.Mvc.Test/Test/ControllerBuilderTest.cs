@@ -232,7 +232,8 @@ namespace System.Web.Mvc.Test
             public SessionStateBehavior GetControllerSessionBehavior(
                 RequestContext requestContext,
                 string controllerName
-            ) {
+            )
+            {
                 return SessionStateBehavior.Default;
             }
 
@@ -249,7 +250,8 @@ namespace System.Web.Mvc.Test
             public SessionStateBehavior GetControllerSessionBehavior(
                 RequestContext requestContext,
                 string controllerName
-            ) {
+            )
+            {
                 return SessionStateBehavior.Default;
             }
 
@@ -266,7 +268,8 @@ namespace System.Web.Mvc.Test
             public SessionStateBehavior GetControllerSessionBehavior(
                 RequestContext requestContext,
                 string controllerName
-            ) {
+            )
+            {
                 return SessionStateBehavior.Default;
             }
 
@@ -283,7 +286,8 @@ namespace System.Web.Mvc.Test
             public SessionStateBehavior GetControllerSessionBehavior(
                 RequestContext requestContext,
                 string controllerName
-            ) {
+            )
+            {
                 return SessionStateBehavior.Default;
             }
 

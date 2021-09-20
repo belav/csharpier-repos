@@ -74,7 +74,8 @@ namespace Microsoft.CodeAnalysis.CSharp.ExpressionEvaluator
             ImmutableArray<LocalSymbol> sourceLocalsForBinding,
             ImmutableDictionary<string, DisplayClassVariable> sourceDisplayClassVariables,
             GenerateMethodBody generateMethodBody
-        ) {
+        )
+        {
             Debug.Assert(sourceMethod.IsDefinition);
             Debug.Assert(
                 TypeSymbol.Equals(
@@ -219,7 +220,8 @@ namespace Microsoft.CodeAnalysis.CSharp.ExpressionEvaluator
             int ordinal,
             string name,
             ParameterSymbol sourceParameter
-        ) {
+        )
+        {
             return SynthesizedParameterSymbol.Create(
                 this,
                 sourceParameter.TypeWithAnnotations,
@@ -486,7 +488,8 @@ namespace Microsoft.CodeAnalysis.CSharp.ExpressionEvaluator
         internal override void GenerateMethodBody(
             TypeCompilationState compilationState,
             BindingDiagnosticBag diagnostics
-        ) {
+        )
+        {
             ImmutableArray<LocalSymbol> declaredLocalsArray;
             var body = _generateMethodBody(
                 this,
@@ -518,7 +521,8 @@ namespace Microsoft.CodeAnalysis.CSharp.ExpressionEvaluator
             if (
                 useSiteInfo.DiagnosticInfo != null
                 && useSiteInfo.DiagnosticInfo.Severity == DiagnosticSeverity.Error
-            ) {
+            )
+            {
                 diagnostics.Add(useSiteInfo.DiagnosticInfo, this.Locations[0]);
                 return;
             }
@@ -776,7 +780,8 @@ namespace Microsoft.CodeAnalysis.CSharp.ExpressionEvaluator
                 if (
                     typeNameKind != GeneratedNameKind.None
                     && typeNameKind != GeneratedNameKind.AnonymousType
-                ) {
+                )
+                {
                     Debug.Assert(
                         typeNameKind == GeneratedNameKind.LambdaDisplayClass
                             || typeNameKind == GeneratedNameKind.StateMachineType,
@@ -792,7 +797,8 @@ namespace Microsoft.CodeAnalysis.CSharp.ExpressionEvaluator
         private static TypeSymbol CalculateReturnType(
             CSharpCompilation compilation,
             BoundStatement bodyOpt
-        ) {
+        )
+        {
             if (bodyOpt == null)
             {
                 // If the method doesn't do anything, then it doesn't return anything.

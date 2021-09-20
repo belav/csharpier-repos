@@ -35,7 +35,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
         public virtual InternalKeyBuilder? Attach(
             InternalEntityTypeBuilder entityTypeBuilder,
             ConfigurationSource? primaryKeyConfigurationSource
-        ) {
+        )
+        {
             var propertyNames = Metadata.Properties.Select(p => p.Name).ToList();
             foreach (var propertyName in propertyNames)
             {
@@ -60,7 +61,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
                     currentPrimaryKeyConfigurationSource?.Overrides(
                         primaryKeyConfigurationSource.Value
                     ) != true
-                ) {
+                )
+                {
                     entityTypeBuilder.PrimaryKey(
                         newKeyBuilder.Metadata.Properties,
                         primaryKeyConfigurationSource.Value

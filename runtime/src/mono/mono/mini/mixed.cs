@@ -77,7 +77,8 @@ class InterpClass
         int i6,
         int i7,
         int i8
-    ) {
+    )
+    {
         return i1 + i2 + i3 + i4 + i5 + i6 + i7 + i8;
     }
 
@@ -92,7 +93,8 @@ class InterpClass
         int i7,
         int i8,
         int i9
-    ) {
+    )
+    {
         return i1 + i2 + i3 + i4 + i5 + i6 + i7 + i8 + i9;
     }
 

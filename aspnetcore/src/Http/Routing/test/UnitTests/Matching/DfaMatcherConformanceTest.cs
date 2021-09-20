@@ -16,7 +16,8 @@ namespace Microsoft.AspNetCore.Routing.Matching
             string path,
             string[] keys,
             string[] values
-        ) {
+        )
+        {
             // Arrange
             var (matcher, endpoint) = CreateMatcher(template);
             var httpContext = CreateContext(path);
@@ -150,7 +151,8 @@ namespace Microsoft.AspNetCore.Routing.Matching
         internal Matcher CreateMatcher(
             bool? useCorrectCatchAllBehavior,
             params RouteEndpoint[] endpoints
-        ) {
+        )
+        {
             var services = new ServiceCollection().AddLogging()
                 .AddOptions()
                 .AddRouting()

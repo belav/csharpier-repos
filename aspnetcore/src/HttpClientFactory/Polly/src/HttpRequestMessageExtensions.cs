@@ -49,7 +49,8 @@ namespace Polly
         public static void SetPolicyExecutionContext(
             this HttpRequestMessage request,
             Context context
-        ) {
+        )
+        {
             if (request == null)
             {
                 throw new ArgumentNullException(nameof(request));

@@ -14,27 +14,29 @@ namespace System.Security.AccessControl
             IdentityReference identity,
             RegistryRights registryRights,
             AccessControlType type
-        ) : this(
-            identity,
-            (int)registryRights,
-            false,
-            InheritanceFlags.None,
-            PropagationFlags.None,
-            type
-        ) { }
+        )
+            : this(
+                identity,
+                (int)registryRights,
+                false,
+                InheritanceFlags.None,
+                PropagationFlags.None,
+                type
+            ) { }
 
         public RegistryAccessRule(
             string identity,
             RegistryRights registryRights,
             AccessControlType type
-        ) : this(
-            new NTAccount(identity),
-            (int)registryRights,
-            false,
-            InheritanceFlags.None,
-            PropagationFlags.None,
-            type
-        ) { }
+        )
+            : this(
+                new NTAccount(identity),
+                (int)registryRights,
+                false,
+                InheritanceFlags.None,
+                PropagationFlags.None,
+                type
+            ) { }
 
         public RegistryAccessRule(
             IdentityReference identity,
@@ -50,14 +52,15 @@ namespace System.Security.AccessControl
             InheritanceFlags inheritanceFlags,
             PropagationFlags propagationFlags,
             AccessControlType type
-        ) : this(
-            new NTAccount(identity),
-            (int)registryRights,
-            false,
-            inheritanceFlags,
-            propagationFlags,
-            type
-        ) { }
+        )
+            : this(
+                new NTAccount(identity),
+                (int)registryRights,
+                false,
+                inheritanceFlags,
+                propagationFlags,
+                type
+            ) { }
 
         //
         // Internal constructor to be called by public constructors
@@ -95,14 +98,15 @@ namespace System.Security.AccessControl
             InheritanceFlags inheritanceFlags,
             PropagationFlags propagationFlags,
             AuditFlags flags
-        ) : this(
-            new NTAccount(identity),
-            (int)registryRights,
-            false,
-            inheritanceFlags,
-            propagationFlags,
-            flags
-        ) { }
+        )
+            : this(
+                new NTAccount(identity),
+                (int)registryRights,
+                false,
+                inheritanceFlags,
+                propagationFlags,
+                flags
+            ) { }
 
         internal RegistryAuditRule(
             IdentityReference identity,
@@ -134,7 +138,8 @@ namespace System.Security.AccessControl
             string? name,
             SafeHandle? handle,
             object? context
-        ) {
+        )
+        {
             return _HandleErrorCodeCore(errorCode, name, handle, context);
         }
 
@@ -145,7 +150,8 @@ namespace System.Security.AccessControl
             InheritanceFlags inheritanceFlags,
             PropagationFlags propagationFlags,
             AccessControlType type
-        ) {
+        )
+        {
             return new RegistryAccessRule(
                 identityReference,
                 accessMask,
@@ -163,7 +169,8 @@ namespace System.Security.AccessControl
             InheritanceFlags inheritanceFlags,
             PropagationFlags propagationFlags,
             AuditFlags flags
-        ) {
+        )
+        {
             return new RegistryAuditRule(
                 identityReference,
                 accessMask,

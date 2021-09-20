@@ -50,7 +50,8 @@ namespace Templates.Test
                     var stream = typeof(BaselineTest).Assembly.GetManifestResourceStream(
                         "ProjectTemplates.Tests.template-baselines.json"
                     )
-                ) {
+                )
+                {
                     using (var jsonReader = new JsonTextReader(new StreamReader(stream)))
                     {
                         var baseline = JObject.Load(jsonReader);
@@ -92,7 +93,8 @@ namespace Templates.Test
         public async Task Template_Produces_The_Right_Set_Of_FilesAsync(
             string arguments,
             string[] expectedFiles
-        ) {
+        )
+        {
             Project = await ProjectFactory.GetOrCreateProject(
                 "baseline" + SanitizeArgs(arguments),
                 Output
@@ -128,7 +130,8 @@ namespace Templates.Test
                     || relativePath.StartsWith("obj/", StringComparison.Ordinal)
                     || relativePath.Contains("/bin/", StringComparison.Ordinal)
                     || relativePath.Contains("/obj/", StringComparison.Ordinal)
-                ) {
+                )
+                {
                     continue;
                 }
                 Assert.Contains(relativePath, expectedFiles);

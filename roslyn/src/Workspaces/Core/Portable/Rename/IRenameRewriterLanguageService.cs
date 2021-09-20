@@ -165,7 +165,8 @@ namespace Microsoft.CodeAnalysis.Rename
             IEnumerable<ISymbol> properties,
             string newPropertyName,
             ArrayBuilder<Location> conflicts
-        ) {
+        )
+        {
             // check if the new property name conflicts with any parameter of the properties.
             // Note: referencedSymbols come from the original solution, so there is no need to reverse map the locations of the parameters
             foreach (var symbol in properties)

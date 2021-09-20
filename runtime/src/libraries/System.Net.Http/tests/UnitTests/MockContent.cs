@@ -104,7 +104,8 @@ namespace System.Net.Http.Tests
             Stream stream,
             TransportContext context,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             SerializeToStreamAsyncCount++;
 
             if (cancellationToken.IsCancellationRequested)

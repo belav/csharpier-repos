@@ -1032,7 +1032,8 @@ catch(bar) { baz(); }",
             string preComment,
             string postComment,
             AcceptedCharacters acceptedCharacters = AcceptedCharacters.Any
-        ) {
+        )
+        {
             ParseBlockTest(
                 preComment + "@* Foo *@ @* Bar *@" + postComment,
                 new StatementBlock(
@@ -1066,7 +1067,8 @@ catch(bar) { baz(); }",
             string markup,
             string suffix,
             AcceptedCharacters acceptedCharacters = AcceptedCharacters.Any
-        ) {
+        )
+        {
             ParseBlockTest(
                 prefix + markup + suffix,
                 new StatementBlock(
@@ -1083,7 +1085,8 @@ catch(bar) { baz(); }",
             AcceptedCharacters acceptedCharacters = AcceptedCharacters.None,
             string errorMessage = null,
             SourceLocation? location = null
-        ) {
+        )
+        {
             var errors = new RazorError[0];
             if (!String.IsNullOrEmpty(errorMessage) && location.HasValue)
             {

@@ -40,7 +40,8 @@ namespace Microsoft.VisualStudio.Debugger.Evaluation
             DkmEvaluationResultFlags Flags,
             string Type,
             DkmDataItem DataItem
-        ) {
+        )
+        {
             return new DkmFailedEvaluationResult(
                 InspectionContext,
                 StackFrame,

@@ -29,7 +29,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             string name,
             Location location,
             TypeWithAnnotations typeWithAnnotations
-        ) {
+        )
+        {
             this.Name = name;
             this.Location = location;
             this.TypeWithAnnotations = typeWithAnnotations;

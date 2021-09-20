@@ -330,7 +330,8 @@ namespace Microsoft.AspNetCore.Mvc.Api.Analyzers
         public void IsNameMatch_WithSuffix_ReturnFalse_IfNameIsNotProperSuffix(
             string name,
             string conventionName
-        ) {
+        )
+        {
             // Act
             var result = IsNameMatch(
                 name,
@@ -525,7 +526,8 @@ namespace Microsoft.AspNetCore.Mvc.Api.Analyzers
             string methodName,
             string conventionMethodName,
             bool expected
-        ) {
+        )
+        {
             var compilation = await GetCompilationAsync();
             Assert.True(ApiControllerSymbolCache.TryCreate(compilation, out var symbolCache));
 
@@ -668,7 +670,8 @@ namespace Microsoft.AspNetCore.Mvc.Api.Analyzers
 
         private Task<Compilation> GetCompilationAsync(
             string test = "SymbolApiConventionMatcherTestFile"
-        ) {
+        )
+        {
             var testSource = MvcTestSource.Read(GetType().Name, test);
             var project = MvcDiagnosticAnalyzerRunner.CreateProjectWithReferencesInBinDir(
                 GetType().Assembly,

@@ -311,7 +311,8 @@ namespace System.Reflection.Internal
             MetadataStringDecoder utf8Decoder,
             out int numberOfBytesRead,
             char terminator = '\0'
-        ) {
+        )
+        {
             Debug.Assert(terminator <= 0x7F);
             CheckBounds(offset, 0);
             int length = GetUtf8NullTerminatedLength(offset, out numberOfBytesRead, terminator);
@@ -331,7 +332,8 @@ namespace System.Reflection.Internal
             int offset,
             out int numberOfBytesRead,
             char terminator = '\0'
-        ) {
+        )
+        {
             CheckBounds(offset, 0);
 
             Debug.Assert(terminator <= 0x7f);
@@ -393,7 +395,8 @@ namespace System.Reflection.Internal
             MetadataStringDecoder utf8Decoder,
             char terminator,
             bool ignoreCase
-        ) {
+        )
+        {
             int firstDifference;
             FastComparisonResult result = Utf8NullTerminatedFastCompare(
                 offset,
@@ -430,7 +433,8 @@ namespace System.Reflection.Internal
             MetadataStringDecoder utf8Decoder,
             char terminator,
             bool ignoreCase
-        ) {
+        )
+        {
             int endIndex;
             FastComparisonResult result = Utf8NullTerminatedFastCompare(
                 offset,
@@ -485,7 +489,8 @@ namespace System.Reflection.Internal
             out int firstDifferenceIndex,
             char terminator,
             bool ignoreCase
-        ) {
+        )
+        {
             CheckBounds(offset, 0);
 
             Debug.Assert(terminator <= 0x7F);
@@ -510,7 +515,8 @@ namespace System.Reflection.Internal
                 if (
                     (currentByte & 0x80) == 0
                     && StringUtils.IsEqualAscii(currentChar, currentByte, ignoreCaseMask)
-                ) {
+                )
+                {
                     currentIndex++;
                     currentPointer++;
                 }
@@ -677,7 +683,8 @@ namespace System.Reflection.Internal
             int referenceListOffset,
             uint referenceValue,
             bool isReferenceSmall
-        ) {
+        )
+        {
             int startRowNumber = 0;
             int endRowNumber = rowCount - 1;
             uint startValue = PeekReferenceUnchecked(
@@ -744,7 +751,8 @@ namespace System.Reflection.Internal
             int referenceOffset,
             uint referenceValue,
             bool isReferenceSmall
-        ) {
+        )
+        {
             int startRowNumber = 0;
             int endRowNumber = rowCount - 1;
             while (startRowNumber <= endRowNumber)
@@ -778,7 +786,8 @@ namespace System.Reflection.Internal
             int referenceOffset,
             uint referenceValue,
             bool isReferenceSmall
-        ) {
+        )
+        {
             int startRowNumber = 0;
             int endRowNumber = ptrTable.Length - 1;
             while (startRowNumber <= endRowNumber)
@@ -840,7 +849,8 @@ namespace System.Reflection.Internal
                     (startRowNumber - 1) * rowSize + referenceOffset,
                     isReferenceSmall
                 ) == referenceValue
-            ) {
+            )
+            {
                 startRowNumber--;
             }
 
@@ -851,7 +861,8 @@ namespace System.Reflection.Internal
                     (endRowNumber + 1) * rowSize + referenceOffset,
                     isReferenceSmall
                 ) == referenceValue
-            ) {
+            )
+            {
                 endRowNumber++;
             }
         }
@@ -891,7 +902,8 @@ namespace System.Reflection.Internal
                     (ptrTable[startRowNumber - 1] - 1) * rowSize + referenceOffset,
                     isReferenceSmall
                 ) == referenceValue
-            ) {
+            )
+            {
                 startRowNumber--;
             }
 
@@ -902,7 +914,8 @@ namespace System.Reflection.Internal
                     (ptrTable[endRowNumber + 1] - 1) * rowSize + referenceOffset,
                     isReferenceSmall
                 ) == referenceValue
-            ) {
+            )
+            {
                 endRowNumber++;
             }
         }
@@ -913,7 +926,8 @@ namespace System.Reflection.Internal
             int referenceOffset,
             uint referenceValue,
             bool isReferenceSmall
-        ) {
+        )
+        {
             int currOffset = referenceOffset;
             int totalSize = this.Length;
             while (currOffset < totalSize)
@@ -934,7 +948,8 @@ namespace System.Reflection.Internal
             int rowSize,
             int referenceOffset,
             bool isReferenceSmall
-        ) {
+        )
+        {
             int offset = referenceOffset;
             int totalSize = this.Length;
 
@@ -959,7 +974,8 @@ namespace System.Reflection.Internal
             int rowSize,
             int referenceOffset,
             bool isReferenceSmall
-        ) {
+        )
+        {
             int[] ptrTable = new int[numberOfRows];
             uint[] unsortedReferences = new uint[numberOfRows];
 
@@ -984,7 +1000,8 @@ namespace System.Reflection.Internal
             int rowSize,
             int referenceOffset,
             bool isReferenceSmall
-        ) {
+        )
+        {
             int offset = referenceOffset;
             int totalSize = this.Length;
 

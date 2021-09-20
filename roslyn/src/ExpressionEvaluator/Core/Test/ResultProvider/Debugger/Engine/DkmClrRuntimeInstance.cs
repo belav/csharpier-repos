@@ -132,7 +132,8 @@ namespace Microsoft.VisualStudio.Debugger.Clr
 
         private static IEnumerable<DkmClrModuleInstance> WithMscorlibLast(
             DkmClrModuleInstance[] list
-        ) {
+        )
+        {
             DkmClrModuleInstance mscorlib = null;
             foreach (var module in list)
             {

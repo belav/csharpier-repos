@@ -233,7 +233,8 @@ namespace Microsoft.AspNetCore.Mvc.ApplicationModels
             string path,
             string expectedArea,
             string expectedViewEnginePath
-        ) {
+        )
+        {
             // Arrange
             var options = new RazorPagesOptions();
             var routeModelFactory = new PageRouteModelFactory(options, NullLogger.Instance);

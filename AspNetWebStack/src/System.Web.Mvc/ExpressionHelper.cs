@@ -99,7 +99,8 @@ namespace System.Web.Mvc
             if (
                 nameParts.Count > 0
                 && String.Equals(nameParts.Peek(), ".model", StringComparison.OrdinalIgnoreCase)
-            ) {
+            )
+            {
                 nameParts.Pop();
             }
 
@@ -114,7 +115,8 @@ namespace System.Web.Mvc
         private static string GetIndexerInvocation(
             Expression expression,
             ParameterExpression[] parameters
-        ) {
+        )
+        {
             Expression converted = Expression.Convert(expression, typeof(object));
             ParameterExpression fakeParameter = Expression.Parameter(typeof(object), null);
             Expression<Func<object, object>> lambda = Expression.Lambda<Func<object, object>>(

@@ -34,7 +34,8 @@ namespace StaticTestGenerator
                     out string outputPath,
                     out Xunit.ConsoleClient.CommandLine? xunitCommandLine
                 )
-            ) {
+            )
+            {
                 return;
             }
 
@@ -190,7 +191,8 @@ namespace StaticTestGenerator
                                     || (v is Type t && IsPublic(t))
                                     || IsPublic(v.GetType())
                             )
-                        ) {
+                        )
+                        {
                             Log(
                                 $"Unsupported {t.Name}.{testCase.Method.Name}. Non-public theory argument."
                             );
@@ -266,7 +268,8 @@ namespace StaticTestGenerator
             out string runtimeAssembliesPath,
             out string outputPath,
             out Xunit.ConsoleClient.CommandLine? xunitCommandLine
-        ) {
+        )
+        {
             if (args.Length >= 3)
             {
                 static string EnsureEndsWithSeparator(string path) =>
@@ -343,7 +346,8 @@ namespace StaticTestGenerator
             string testAssemblyPath,
             out Assembly testAssembly,
             out TestDiscoverySink sink
-        ) {
+        )
+        {
             // Load the test assembly.
             testAssembly = Assembly.LoadFrom(testAssemblyPath);
             Log($"Loaded {testAssembly.GetName().Name} from {testAssembly.Location}");
@@ -384,7 +388,8 @@ namespace StaticTestGenerator
         /// <returns>A dictionary of all tests and their associated test cases.</returns>
         private static Dictionary<IXunitTestCase, List<TestCase>> ComputeTestMethodTestCases(
             TestDiscoverySink sink
-        ) {
+        )
+        {
             // Create the dictionary containing all tests and associated test cases.
             Dictionary<IXunitTestCase, List<TestCase>> testCases =
                 sink.TestCases.Cast<IXunitTestCase>()
@@ -403,7 +408,8 @@ namespace StaticTestGenerator
                                     DataAttribute attr in testMethod.GetCustomAttributes<DataAttribute>(
                                         inherit: true
                                     )
-                                ) {
+                                )
+                                {
                                     try
                                     {
                                         // DataAttributes can themselves be marked to be skipped.  Ignore the attribute if it is.
@@ -518,7 +524,8 @@ namespace StaticTestGenerator
                                 // like we do a member info.  To do that, we enumerate attribute datas.
                                 foreach (
                                     CustomAttributeData cad in testMethod.GetCustomAttributesData()
-                                ) {
+                                )
+                                {
                                     try
                                     {
                                         Type attrType = cad.AttributeType;
@@ -535,7 +542,8 @@ namespace StaticTestGenerator
                                             || typeof(InlineDataAttribute).IsAssignableFrom(
                                                 attrType
                                             )
-                                        ) {
+                                        )
+                                        {
                                             // Already handled these in the previous loop.
                                             continue;
                                         }
@@ -547,7 +555,8 @@ namespace StaticTestGenerator
                                             || !cad.ConstructorArguments.All(
                                                 c => c.ArgumentType.IsPublic
                                             )
-                                        ) {
+                                        )
+                                        {
                                             Log(
                                                 $"Unsupported custom data attribute {cad.AttributeType} on test method {testMethod.Name}."
                                             );
@@ -593,7 +602,8 @@ namespace StaticTestGenerator
         private static Array UnwrapCustomAttributeTypedArguments(
             Type elementType,
             IList<CustomAttributeTypedArgument> args
-        ) {
+        )
+        {
             Array result = Array.CreateInstance(elementType, args.Count);
 
             for (int i = 0; i < args.Count; i++)
@@ -630,7 +640,8 @@ namespace StaticTestGenerator
             Type testMethodType,
             MethodInfo testMethod,
             TestCase testCase
-        ) {
+        )
+        {
             // Writes out ".MethodName(arg1, arg2, ...)" when all arguments are statically available.
             // The arguments are written as literals.
             void WriteArgumentListStatic(object?[]? arguments, ParameterInfo[] parameters)
@@ -998,7 +1009,8 @@ namespace StaticTestGenerator
                 && Nullable.GetUnderlyingType(expectedType) == null
                 && literal.GetType() != expectedType
                 && !expectedType.IsGenericParameter
-            ) {
+            )
+            {
                 result = $"({GetTypeName(expectedType)})({result})";
             }
 
@@ -1078,7 +1090,8 @@ namespace StaticTestGenerator
                     type.DeclaringType!.IsGenericType
                     && !type.DeclaringType.IsConstructedGenericType
                     && type.IsConstructedGenericType
-                ) {
+                )
+                {
                     name = GetTypeName(
                         type.DeclaringType.MakeGenericType(
                             genericArgs.Take(parentGenericArgs.Length).ToArray()
@@ -1174,7 +1187,8 @@ namespace StaticTestGenerator
                         if (
                             IsPublic(ctorArgType)
                             && ctorArgType.GetConstructor(Type.EmptyTypes) != null
-                        ) {
+                        )
+                        {
                             return true;
                         }
                         break;

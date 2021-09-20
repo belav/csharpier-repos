@@ -20,7 +20,8 @@ namespace Microsoft.AspNetCore.Mvc.TagHelpers
             IFileProvider fileProvider,
             IFileInfo fileInfo,
             FileProviderGlobbingDirectory parent
-        ) {
+        )
+        {
             if (fileProvider == null)
             {
                 throw new ArgumentNullException(nameof(fileProvider));

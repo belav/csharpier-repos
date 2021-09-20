@@ -39,7 +39,8 @@ namespace Microsoft.CodeAnalysis.Text.Implementation.TextBufferFactoryService
             public TextBufferCloneService(
                 ITextBufferFactoryService3 textBufferFactoryService,
                 IContentTypeRegistryService contentTypeRegistryService
-            ) {
+            )
+            {
                 _textBufferFactoryService = textBufferFactoryService;
 
                 _roslynContentType = contentTypeRegistryService.GetContentType(

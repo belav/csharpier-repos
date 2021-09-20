@@ -36,7 +36,8 @@ namespace ServerComparison.TestSites
                     "Microsoft.AspNetCore.Server.HttpSys",
                     StringComparison.OrdinalIgnoreCase
                 )
-            ) {
+            )
+            {
                 builder.UseHttpSys(
                     options =>
                     {
@@ -47,7 +48,8 @@ namespace ServerComparison.TestSites
                                 "NtlmAuthentication",
                                 StringComparison.OrdinalIgnoreCase
                             )
-                        ) {
+                        )
+                        {
                             // Set up NTLM authentication for HttpSys as follows.
                             // For IIS and IISExpress use inetmgr to setup NTLM authentication on the application or
                             // modify the applicationHost.config to enable NTLM.

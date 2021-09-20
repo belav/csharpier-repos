@@ -119,7 +119,8 @@ namespace System.Text
             int charCount,
             byte[] bytes,
             int byteIndex
-        ) {
+        )
+        {
             if (s == null || bytes == null)
                 throw new ArgumentNullException(
                     (s == null ? nameof(s) : nameof(bytes)),
@@ -174,7 +175,8 @@ namespace System.Text
             int charCount,
             byte[] bytes,
             int byteIndex
-        ) {
+        )
+        {
             // Validate parameters
             if (chars == null || bytes == null)
                 throw new ArgumentNullException(
@@ -294,7 +296,8 @@ namespace System.Text
             int byteCount,
             char[] chars,
             int charIndex
-        ) {
+        )
+        {
             // Validate Parameters
             if (bytes == null || chars == null)
                 throw new ArgumentNullException(
@@ -477,7 +480,8 @@ namespace System.Text
                             "Globalization_cp_",
                             StringComparison.OrdinalIgnoreCase
                         )
-                    ) {
+                    )
+                    {
                         // On ProjectN, resource strings are stripped from retail builds and replaced by
                         // their identifier names. Since this property is meant to be a localized string,
                         // but we don't localize ProjectN, we specifically need to do something reasonable

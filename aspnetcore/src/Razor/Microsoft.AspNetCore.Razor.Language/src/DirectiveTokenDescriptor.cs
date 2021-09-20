@@ -28,7 +28,8 @@ namespace Microsoft.AspNetCore.Razor.Language
             bool optional,
             string name,
             string description
-        ) {
+        )
+        {
             return new DefaultDirectiveTokenDescriptor(kind, optional, name, description);
         }
 
@@ -39,7 +40,8 @@ namespace Microsoft.AspNetCore.Razor.Language
                 bool optional,
                 string name,
                 string description
-            ) {
+            )
+            {
                 Kind = kind;
                 Optional = optional;
                 Name = name;

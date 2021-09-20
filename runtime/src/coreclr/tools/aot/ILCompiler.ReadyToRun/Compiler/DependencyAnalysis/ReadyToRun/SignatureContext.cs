@@ -45,7 +45,8 @@ namespace ILCompiler.DependencyAnalysis.ReadyToRun
             EcmaModule globalContext,
             EcmaModule localContext,
             ModuleTokenResolver resolver
-        ) {
+        )
+        {
             GlobalContext = globalContext;
             LocalContext = localContext;
             Resolver = resolver;
@@ -63,7 +64,8 @@ namespace ILCompiler.DependencyAnalysis.ReadyToRun
                 || type.IsString
                 || type.IsObject
                 || type.IsWellKnownType(WellKnownType.TypedReference)
-            ) {
+            )
+            {
                 return LocalContext;
             }
             if (type.GetTypeDefinition() is EcmaType ecmaType)

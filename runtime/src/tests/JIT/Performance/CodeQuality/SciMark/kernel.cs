@@ -299,7 +299,8 @@ namespace SciMark2
             double[][] lu,
             double[][] A,
             int[] pivot
-        ) {
+        )
+        {
             // verify that LU is correct
             double[] b = RandomVector(N, R);
             double[] x = NewVectorCopy(b);

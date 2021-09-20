@@ -394,7 +394,8 @@ namespace System.Data.Common
             string sourceTable,
             string dataSetTable,
             MissingMappingAction mappingAction
-        ) {
+        )
+        {
             if (null != tableMappings)
             {
                 int index = tableMappings.IndexOf(sourceTable);

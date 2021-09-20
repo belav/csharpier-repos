@@ -135,7 +135,8 @@ namespace System.Drawing.Internal
             string deviceName,
             string? fileName,
             IntPtr devMode
-        ) {
+        )
+        {
             // Note: All input params can be null but not at the same time.  See MSDN for information.
             IntPtr hdc = Interop.Gdi32.CreateDCW(driverName, deviceName, fileName, devMode);
             return new DeviceContext(hdc, DeviceContextType.NamedDevice);
@@ -149,7 +150,8 @@ namespace System.Drawing.Internal
             string deviceName,
             string? fileName,
             IntPtr devMode
-        ) {
+        )
+        {
             // Note: All input params can be null but not at the same time.  See MSDN for information.
 
             IntPtr hdc = Interop.Gdi32.CreateICW(driverName, deviceName, fileName, devMode);

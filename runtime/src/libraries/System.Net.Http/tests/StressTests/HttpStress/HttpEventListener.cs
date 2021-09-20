@@ -54,7 +54,8 @@ namespace HttpStress
                 int i = 0;
                 await foreach (
                     string message in _messagesChannel.Reader.ReadAllAsync(_stopProcessing.Token)
-                ) {
+                )
+                {
                     if ((++i % 10_000) == 0)
                     {
                         RotateFiles();

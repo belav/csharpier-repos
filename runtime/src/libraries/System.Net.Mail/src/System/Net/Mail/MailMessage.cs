@@ -410,7 +410,8 @@ namespace System.Net.Mail
             bool allowUnicode,
             AsyncCallback? callback,
             object? state
-        ) {
+        )
+        {
             SetContent(allowUnicode);
             return _message.BeginSend(writer, sendEnvelope, allowUnicode, callback, state);
         }
@@ -440,7 +441,8 @@ namespace System.Net.Mail
                         ((int)_deliveryStatusNotification)
                         & (int)DeliveryNotificationOptions.OnSuccess
                     ) > 0
-                ) {
+                )
+                {
                     s.Append("SUCCESS");
                     oneSet = true;
                 }
@@ -449,7 +451,8 @@ namespace System.Net.Mail
                         ((int)_deliveryStatusNotification)
                         & (int)DeliveryNotificationOptions.OnFailure
                     ) > 0
-                ) {
+                )
+                {
                     if (oneSet)
                     {
                         s.Append(',');
@@ -460,7 +463,8 @@ namespace System.Net.Mail
                 if (
                     (((int)_deliveryStatusNotification) & (int)DeliveryNotificationOptions.Delay)
                     > 0
-                ) {
+                )
+                {
                     if (oneSet)
                     {
                         s.Append(',');

@@ -20,7 +20,8 @@ namespace System.Xml.Tests
         public void TestWriteEndDocumentOnCoseForOneElementwithText(
             bool writeEndDocument,
             string expected
-        ) {
+        )
+        {
             StringWriter output = new StringWriter();
             XmlWriterSettings ws = new XmlWriterSettings();
             ws.OmitXmlDeclaration = true;
@@ -74,7 +75,8 @@ namespace System.Xml.Tests
         public void TestWriteEndDocumentOnCoseForOneElementwithAttribute(
             bool writeEndDocument,
             string expected
-        ) {
+        )
+        {
             StringWriter output = new StringWriter();
             XmlWriterSettings ws = new XmlWriterSettings();
             ws.OmitXmlDeclaration = true;
@@ -103,7 +105,8 @@ namespace System.Xml.Tests
         public void TestWriteEndDocumentOnCoseForOneElementwithAttributeValue(
             bool writeEndDocument,
             string expected
-        ) {
+        )
+        {
             StringWriter output = new StringWriter();
             XmlWriterSettings ws = new XmlWriterSettings();
             ws.OmitXmlDeclaration = true;
@@ -132,7 +135,8 @@ namespace System.Xml.Tests
         public void TestWriteEndDocumentOnCoseForOneElementwithNamespace(
             bool writeEndDocument,
             string expected
-        ) {
+        )
+        {
             StringWriter output = new StringWriter();
             XmlWriterSettings ws = new XmlWriterSettings();
             ws.OmitXmlDeclaration = true;
@@ -160,7 +164,8 @@ namespace System.Xml.Tests
         public void TestWriteEndDocumentOnCoseForMultiElements(
             bool writeEndDocument,
             string expected
-        ) {
+        )
+        {
             StringWriter output = new StringWriter();
             XmlWriterSettings ws = new XmlWriterSettings();
             ws.OmitXmlDeclaration = true;
@@ -190,7 +195,8 @@ namespace System.Xml.Tests
         public void TestWriteEndDocumentOnCoseForElementsWithOneEndElement(
             bool writeEndDocument,
             string expected
-        ) {
+        )
+        {
             StringWriter output = new StringWriter();
             XmlWriterSettings ws = new XmlWriterSettings();
             ws.OmitXmlDeclaration = true;
@@ -220,7 +226,8 @@ namespace System.Xml.Tests
         public void TestWriteEndDocumentOnCoseForOneElementWithEndElement(
             bool writeEndDocument,
             string expected
-        ) {
+        )
+        {
             StringWriter output = new StringWriter();
             XmlWriterSettings ws = new XmlWriterSettings();
             ws.OmitXmlDeclaration = true;

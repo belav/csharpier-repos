@@ -189,7 +189,8 @@ namespace System.Security.AccessControl
                                     TokenAccessLevels.Duplicate,
                                     out localProcessHandle
                                 )
-                            ) {
+                            )
+                            {
                                 cachingError = Marshal.GetLastWin32Error();
                                 success = false;
                             }
@@ -247,7 +248,8 @@ namespace System.Security.AccessControl
                                         System.Security.Principal.TokenType.TokenImpersonation,
                                         ref this.threadHandle
                                     )
-                                ) {
+                                )
+                                {
                                     error = Marshal.GetLastWin32Error();
                                     success = false;
                                 }
@@ -298,7 +300,8 @@ namespace System.Security.AccessControl
                 else if (
                     error == Interop.Errors.ERROR_ACCESS_DENIED
                     || error == Interop.Errors.ERROR_CANT_OPEN_ANONYMOUS
-                ) {
+                )
+                {
                     throw new UnauthorizedAccessException();
                 }
                 else if (error != 0)
@@ -495,7 +498,8 @@ namespace System.Security.AccessControl
                         &previousState,
                         &previousSize
                     )
-                ) {
+                )
+                {
                     error = Marshal.GetLastWin32Error();
                 }
                 else if (Interop.Errors.ERROR_NOT_ALL_ASSIGNED == Marshal.GetLastWin32Error())
@@ -548,7 +552,8 @@ namespace System.Security.AccessControl
             else if (
                 error == Interop.Errors.ERROR_ACCESS_DENIED
                 || error == Interop.Errors.ERROR_CANT_OPEN_ANONYMOUS
-            ) {
+            )
+            {
                 throw new UnauthorizedAccessException();
             }
             else if (error != 0)
@@ -589,7 +594,8 @@ namespace System.Security.AccessControl
                         this.tlsContents!.ReferenceCountValue > 1
                         || !this.tlsContents.IsImpersonating
                     )
-                ) {
+                )
+                {
                     Interop.Advapi32.TOKEN_PRIVILEGE newState;
                     newState.PrivilegeCount = 1;
                     newState.Privileges.Luid = this.luid;
@@ -608,7 +614,8 @@ namespace System.Security.AccessControl
                             null,
                             null
                         )
-                    ) {
+                    )
+                    {
                         error = Marshal.GetLastWin32Error();
                         success = false;
                     }

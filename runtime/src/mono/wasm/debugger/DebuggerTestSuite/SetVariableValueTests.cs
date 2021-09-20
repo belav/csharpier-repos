@@ -32,7 +32,8 @@ namespace DebuggerTests
             long originalValue,
             long newValue,
             long overflowValue
-        ) {
+        )
+        {
             await SetBreakpointInMethod(
                 "debugger-test.dll",
                 "DebuggerTests.SetVariableLocals",
@@ -110,7 +111,8 @@ namespace DebuggerTests
             float originalValue,
             float newValue,
             float newValue2
-        ) {
+        )
+        {
             await SetBreakpointInMethod(
                 "debugger-test.dll",
                 "DebuggerTests.SetVariableLocals",
@@ -187,7 +189,8 @@ namespace DebuggerTests
             double originalValue,
             double newValue,
             double newValue2
-        ) {
+        )
+        {
             await SetBreakpointInMethod(
                 "debugger-test.dll",
                 "DebuggerTests.SetVariableLocals",
@@ -275,7 +278,8 @@ namespace DebuggerTests
             string originalValue,
             string newValue,
             string newValue2
-        ) {
+        )
+        {
             await SetBreakpointInMethod(
                 "debugger-test.dll",
                 "DebuggerTests.SetVariableLocals",
@@ -355,7 +359,8 @@ namespace DebuggerTests
             string variableName,
             int originalValue,
             int newValue
-        ) {
+        )
+        {
             await SetBreakpointInMethod("debugger-test.dll", "Math", "IntAdd", offset);
             var pause_location = await EvaluateAndCheck(
                 "window.setTimeout(function() { invoke_add(); }, 1);",
@@ -404,7 +409,8 @@ namespace DebuggerTests
             string variableName,
             int originalValue,
             string invalidValue
-        ) {
+        )
+        {
             await SetBreakpointInMethod("debugger-test.dll", "Math", "IntAdd", offset);
             var pause_location = await EvaluateAndCheck(
                 "window.setTimeout(function() { invoke_add(); }, 1);",
@@ -452,7 +458,8 @@ namespace DebuggerTests
             string variableName,
             bool originalValue,
             bool newValue
-        ) {
+        )
+        {
             await SetBreakpointInMethod("debugger-test.dll", "Math", "IntAdd", offset);
             var pause_location = await EvaluateAndCheck(
                 "window.setTimeout(function() { invoke_add(); }, 1);",
@@ -500,7 +507,8 @@ namespace DebuggerTests
             int prop_value,
             string prop_new_value,
             bool expect_ok
-        ) {
+        )
+        {
             var bp = await SetBreakpointInMethod("debugger-test.dll", "Math", "UseComplex", 5);
             var pause_location = await EvaluateAndCheck(
                 "window.setTimeout(function() { invoke_use_complex(); }, 1);",

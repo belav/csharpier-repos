@@ -41,7 +41,8 @@
                 ParentDest dest,
                 ParentDestEnum? destMember,
                 ResolutionContext context
-            ) {
+            )
+            {
                 switch (source.fieldCode)
                 {
                     case "testa":
@@ -63,7 +64,8 @@
                 ParentDest dest,
                 DestEnum? destMember,
                 ResolutionContext context
-            ) {
+            )
+            {
                 switch (source.fieldCode)
                 {
                     case "testa":

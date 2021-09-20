@@ -9,7 +9,8 @@ namespace Wasm.Authentication.Server.Controllers
         public OidcConfigurationController(
             IClientRequestParametersProvider clientRequestParametersProvider,
             ILogger<OidcConfigurationController> logger
-        ) {
+        )
+        {
             ClientRequestParametersProvider = clientRequestParametersProvider;
         }
 

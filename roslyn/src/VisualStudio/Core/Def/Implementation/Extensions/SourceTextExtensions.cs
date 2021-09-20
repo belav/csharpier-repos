@@ -52,7 +52,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Extensions
             this SourceText text,
             int position,
             int virtualSpace
-        ) {
+        )
+        {
             text.GetLineAndOffset(position, out var lineNumber, out var offset);
 
             offset += virtualSpace;

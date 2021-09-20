@@ -31,7 +31,8 @@ namespace System.Diagnostics.Eventing.Reader
             bool isImported,
             string displayName,
             uint channelId
-        ) {
+        )
+        {
             _channelName = channelName;
             _isImported = isImported;
             _displayName = displayName;

@@ -1671,7 +1671,8 @@ namespace Newtonsoft.Json.Tests.Bson
                 Type serializedType,
                 out string assemblyName,
                 out string typeName
-            ) {
+            )
+            {
                 BindToNameCalled = true;
                 base.BindToName(serializedType, out assemblyName, out typeName);
             }

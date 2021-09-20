@@ -53,7 +53,8 @@ namespace System.ComponentModel.DataAnnotations
 
         private PropertyDescriptorCollection GetPropertiesWithMetadata(
             PropertyDescriptorCollection originalCollection
-        ) {
+        )
+        {
             if (AssociatedMetadataType == null)
             {
                 return originalCollection;
@@ -131,7 +132,8 @@ namespace System.ComponentModel.DataAnnotations
                         | DynamicallyAccessedMemberTypes.PublicProperties
                 )]
                     Type associatedType
-            ) {
+            )
+            {
                 (Type, Type) typeTuple = (type, associatedType);
                 if (!s_validatedMetadataTypeCache.ContainsKey(typeTuple))
                 {
@@ -171,7 +173,8 @@ namespace System.ComponentModel.DataAnnotations
                         | DynamicallyAccessedMemberTypes.PublicProperties
                 )]
                     Type associatedMetadataType
-            ) {
+            )
+            {
                 // Only properties from main type
                 HashSet<string> mainTypeMemberNames = new HashSet<string>(
                     mainType.GetProperties().Select(p => p.Name)
@@ -204,7 +207,8 @@ namespace System.ComponentModel.DataAnnotations
             public static Attribute[] GetAssociatedMetadata(
                 [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)] Type type,
                 string memberName
-            ) {
+            )
+            {
                 (Type, string) memberTuple = (type, memberName);
                 Attribute[] attributes;
                 if (s_typeMemberCache.TryGetValue(memberTuple, out attributes))

@@ -155,7 +155,8 @@ namespace System.Linq.Parallel.Tests
         public static void Cast_NotPipelined(
             Labeled<Operation> source,
             Labeled<Operation> operation
-        ) {
+        )
+        {
             int seen = DefaultStart;
             Assert.All(
                 operation.Item(DefaultStart, DefaultSize, source.Item).Cast<int?>().ToList(),
@@ -175,7 +176,8 @@ namespace System.Linq.Parallel.Tests
                 foreach (
                     int i in left(DefaultStart, DefaultSize / 2, source.Item)
                         .Concat(right(DefaultStart + DefaultSize / 2, DefaultSize / 2, source.Item))
-                ) {
+                )
+                {
                     Assert.Equal(seen++, i);
                 }
                 Assert.Equal(DefaultStart + DefaultSize, seen);
@@ -190,7 +192,8 @@ namespace System.Linq.Parallel.Tests
         public static void Concat_NotPipelined(
             Labeled<Operation> source,
             Labeled<Operation> operation
-        ) {
+        )
+        {
             void Concat(Operation left, Operation right)
             {
                 int seen = DefaultStart;
@@ -271,7 +274,8 @@ namespace System.Linq.Parallel.Tests
             int seen = DefaultStart;
             foreach (
                 int i in operation.Item(DefaultStart, DefaultSize, source.Item).DefaultIfEmpty()
-            ) {
+            )
+            {
                 Assert.Equal(seen++, i);
             }
             Assert.Equal(DefaultStart + DefaultSize, seen);
@@ -283,7 +287,8 @@ namespace System.Linq.Parallel.Tests
         public static void DefaultIfEmpty_NotPipelined(
             Labeled<Operation> source,
             Labeled<Operation> operation
-        ) {
+        )
+        {
             int seen = DefaultStart;
             Assert.All(
                 operation.Item(DefaultStart, DefaultSize, source.Item).DefaultIfEmpty().ToList(),
@@ -318,7 +323,8 @@ namespace System.Linq.Parallel.Tests
         public static void Distinct_NotPipelined(
             Labeled<Operation> source,
             Labeled<Operation> operation
-        ) {
+        )
+        {
             int seen = DefaultStart;
             ParallelQuery<int> query = operation.Item(
                     DefaultStart * 2,
@@ -352,7 +358,8 @@ namespace System.Linq.Parallel.Tests
         public static void ElementAtOrDefault(
             Labeled<Operation> source,
             Labeled<Operation> operation
-        ) {
+        )
+        {
             ParallelQuery<int> query = operation.Item(DefaultStart, DefaultSize, source.Item);
 
             int seen = DefaultStart;
@@ -394,7 +401,8 @@ namespace System.Linq.Parallel.Tests
         public static void Except_NotPipelined(
             Labeled<Operation> source,
             Labeled<Operation> operation
-        ) {
+        )
+        {
             void Except(Operation left, Operation right)
             {
                 int seen = DefaultStart;
@@ -451,7 +459,8 @@ namespace System.Linq.Parallel.Tests
         public static void FirstOrDefault_Predicate(
             Labeled<Operation> source,
             Labeled<Operation> operation
-        ) {
+        )
+        {
             Assert.Equal(
                 DefaultStart + DefaultSize / 2,
                 operation.Item(DefaultStart, DefaultSize, source.Item)
@@ -465,7 +474,8 @@ namespace System.Linq.Parallel.Tests
         public static void FirstOrDefault_Predicate_None(
             Labeled<Operation> source,
             Labeled<Operation> operation
-        ) {
+        )
+        {
             Assert.Equal(
                 default(int),
                 operation.Item(DefaultStart, DefaultSize, source.Item).FirstOrDefault(x => false)
@@ -511,7 +521,8 @@ namespace System.Linq.Parallel.Tests
             foreach (
                 IGrouping<int, int> group in operation.Item(DefaultStart, DefaultSize, source.Item)
                     .GroupBy(x => x / GroupFactor)
-            ) {
+            )
+            {
                 Assert.Equal(seenKey++, group.Key);
                 int seenElement = group.Key * GroupFactor;
                 Assert.All(group, x => Assert.Equal(seenElement++, x));
@@ -529,13 +540,15 @@ namespace System.Linq.Parallel.Tests
         public static void GroupBy_NotPipelined(
             Labeled<Operation> source,
             Labeled<Operation> operation
-        ) {
+        )
+        {
             int seenKey = DefaultStart / GroupFactor;
             foreach (
                 IGrouping<int, int> group in operation.Item(DefaultStart, DefaultSize, source.Item)
                     .GroupBy(x => x / GroupFactor)
                     .ToList()
-            ) {
+            )
+            {
                 Assert.Equal(seenKey++, group.Key);
                 int seenElement = group.Key * GroupFactor;
                 Assert.All(group, x => Assert.Equal(seenElement++, x));
@@ -553,12 +566,14 @@ namespace System.Linq.Parallel.Tests
         public static void GroupBy_ElementSelector(
             Labeled<Operation> source,
             Labeled<Operation> operation
-        ) {
+        )
+        {
             int seenKey = DefaultStart / GroupFactor;
             foreach (
                 IGrouping<int, int> group in operation.Item(DefaultStart, DefaultSize, source.Item)
                     .GroupBy(x => x / GroupFactor, y => -y)
-            ) {
+            )
+            {
                 Assert.Equal(seenKey++, group.Key);
                 int seenElement = -group.Key * GroupFactor;
                 Assert.All(group, x => Assert.Equal(seenElement--, x));
@@ -576,13 +591,15 @@ namespace System.Linq.Parallel.Tests
         public static void GroupBy_ElementSelector_NotPipelined(
             Labeled<Operation> source,
             Labeled<Operation> operation
-        ) {
+        )
+        {
             int seenKey = DefaultStart / GroupFactor;
             foreach (
                 IGrouping<int, int> group in operation.Item(DefaultStart, DefaultSize, source.Item)
                     .GroupBy(x => x / GroupFactor, y => -y)
                     .ToList()
-            ) {
+            )
+            {
                 Assert.Equal(seenKey++, group.Key);
                 int seenElement = -group.Key * GroupFactor;
                 Assert.All(group, x => Assert.Equal(seenElement--, x));
@@ -614,7 +631,8 @@ namespace System.Linq.Parallel.Tests
                             y => y / GroupFactor,
                             (k, g) => new KeyValuePair<int, IEnumerable<int>>(k, g)
                         )
-                ) {
+                )
+                {
                     Assert.Equal(seenKey++, group.Key);
                     int seenElement = group.Key * GroupFactor;
                     Assert.All(group.Value, x => Assert.Equal(seenElement++, x));
@@ -632,7 +650,8 @@ namespace System.Linq.Parallel.Tests
         public static void GroupJoin_NotPipelined(
             Labeled<Operation> source,
             Labeled<Operation> operation
-        ) {
+        )
+        {
             void GroupJoin(Operation left, Operation right)
             {
                 int seenKey = DefaultStart / GroupFactor;
@@ -649,7 +668,8 @@ namespace System.Linq.Parallel.Tests
                             (k, g) => new KeyValuePair<int, IEnumerable<int>>(k, g)
                         )
                         .ToList()
-                ) {
+                )
+                {
                     Assert.Equal(seenKey++, group.Key);
                     int seenElement = group.Key * GroupFactor;
                     Assert.All(group.Value, x => Assert.Equal(seenElement++, x));
@@ -691,7 +711,8 @@ namespace System.Linq.Parallel.Tests
         public static void Intersect_NotPipelined(
             Labeled<Operation> source,
             Labeled<Operation> operation
-        ) {
+        )
+        {
             void Intersect(Operation left, Operation right)
             {
                 int seen = DefaultStart;
@@ -744,7 +765,8 @@ namespace System.Linq.Parallel.Tests
         public static void Join_NotPipelined(
             Labeled<Operation> source,
             Labeled<Operation> operation
-        ) {
+        )
+        {
             void Join(Operation left, Operation right)
             {
                 int seen = DefaultStart;
@@ -810,7 +832,8 @@ namespace System.Linq.Parallel.Tests
         public static void LastOrDefault_Predicate(
             Labeled<Operation> source,
             Labeled<Operation> operation
-        ) {
+        )
+        {
             Assert.Equal(
                 DefaultStart + DefaultSize / 2 - 1,
                 operation.Item(DefaultStart, DefaultSize, source.Item)
@@ -824,7 +847,8 @@ namespace System.Linq.Parallel.Tests
         public static void LastOrDefault_Predicate_None(
             Labeled<Operation> source,
             Labeled<Operation> operation
-        ) {
+        )
+        {
             Assert.Equal(
                 default(int),
                 operation.Item(DefaultStart, DefaultSize, source.Item).LastOrDefault(x => false)
@@ -929,7 +953,8 @@ namespace System.Linq.Parallel.Tests
         public static void OfType_NotPipelined(
             Labeled<Operation> source,
             Labeled<Operation> operation
-        ) {
+        )
+        {
             int seen = DefaultStart;
             Assert.All(
                 operation.Item(DefaultStart, DefaultSize, source.Item).OfType<int>().ToList(),
@@ -952,7 +977,8 @@ namespace System.Linq.Parallel.Tests
         public static void OfType_Other_NotPipelined(
             Labeled<Operation> source,
             Labeled<Operation> operation
-        ) {
+        )
+        {
             Assert.Empty(
                 operation.Item(DefaultStart, DefaultSize, source.Item).OfType<long>().ToList()
             );
@@ -968,7 +994,8 @@ namespace System.Linq.Parallel.Tests
             int seen = DefaultStart;
             foreach (
                 int i in operation.Item(DefaultStart, DefaultSize, source.Item).OrderBy(x => x)
-            ) {
+            )
+            {
                 Assert.Equal(seen++, i);
             }
             Assert.Equal(DefaultStart + DefaultSize, seen);
@@ -982,7 +1009,8 @@ namespace System.Linq.Parallel.Tests
         public static void OrderBy_Initial_NotPipelined(
             Labeled<Operation> source,
             Labeled<Operation> operation
-        ) {
+        )
+        {
             int seen = DefaultStart;
             Assert.All(
                 operation.Item(DefaultStart, DefaultSize, source.Item).OrderBy(x => x).ToList(),
@@ -999,11 +1027,13 @@ namespace System.Linq.Parallel.Tests
         public static void OrderBy_OtherDirection(
             Labeled<Operation> source,
             Labeled<Operation> operation
-        ) {
+        )
+        {
             int seen = DefaultStart + DefaultSize;
             foreach (
                 int i in operation.Item(DefaultStart, DefaultSize, source.Item).OrderBy(x => -x)
-            ) {
+            )
+            {
                 Assert.Equal(--seen, i);
             }
             Assert.Equal(DefaultStart, seen);
@@ -1017,7 +1047,8 @@ namespace System.Linq.Parallel.Tests
         public static void OrderBy_OtherDirection_NotPipelined(
             Labeled<Operation> source,
             Labeled<Operation> operation
-        ) {
+        )
+        {
             int seen = DefaultStart + DefaultSize;
             Assert.All(
                 operation.Item(DefaultStart, DefaultSize, source.Item).OrderBy(x => -x).ToList(),
@@ -1034,12 +1065,14 @@ namespace System.Linq.Parallel.Tests
         public static void OrderByDescending_Initial(
             Labeled<Operation> source,
             Labeled<Operation> operation
-        ) {
+        )
+        {
             int seen = DefaultStart;
             foreach (
                 int i in operation.Item(DefaultStart, DefaultSize, source.Item)
                     .OrderByDescending(x => -x)
-            ) {
+            )
+            {
                 Assert.Equal(seen++, i);
             }
             Assert.Equal(DefaultStart + DefaultSize, seen);
@@ -1053,7 +1086,8 @@ namespace System.Linq.Parallel.Tests
         public static void OrderByDescending_Initial_NotPipelined(
             Labeled<Operation> source,
             Labeled<Operation> operation
-        ) {
+        )
+        {
             int seen = DefaultStart;
             Assert.All(
                 operation.Item(DefaultStart, DefaultSize, source.Item)
@@ -1072,12 +1106,14 @@ namespace System.Linq.Parallel.Tests
         public static void OrderByDescending_OtherDirection(
             Labeled<Operation> source,
             Labeled<Operation> operation
-        ) {
+        )
+        {
             int seen = DefaultStart + DefaultSize;
             foreach (
                 int i in operation.Item(DefaultStart, DefaultSize, source.Item)
                     .OrderByDescending(x => x)
-            ) {
+            )
+            {
                 Assert.Equal(--seen, i);
             }
             Assert.Equal(DefaultStart, seen);
@@ -1091,7 +1127,8 @@ namespace System.Linq.Parallel.Tests
         public static void OrderByDescending_OtherDirection_NotPipelined(
             Labeled<Operation> source,
             Labeled<Operation> operation
-        ) {
+        )
+        {
             int seen = DefaultStart + DefaultSize;
             Assert.All(
                 operation.Item(DefaultStart, DefaultSize, source.Item)
@@ -1121,11 +1158,13 @@ namespace System.Linq.Parallel.Tests
         public static void Reverse_NotPipelined(
             Labeled<Operation> source,
             Labeled<Operation> operation
-        ) {
+        )
+        {
             int seen = DefaultStart + DefaultSize;
             foreach (
                 int i in operation.Item(DefaultStart, DefaultSize, source.Item).Reverse().ToList()
-            ) {
+            )
+            {
                 Assert.Equal(--seen, i);
             }
             Assert.Equal(DefaultStart, seen);
@@ -1139,7 +1178,8 @@ namespace System.Linq.Parallel.Tests
             int seen = -DefaultStart;
             foreach (
                 int i in operation.Item(DefaultStart, DefaultSize, source.Item).Select(x => -x)
-            ) {
+            )
+            {
                 Assert.Equal(seen--, i);
             }
             Assert.Equal(-DefaultStart - DefaultSize, seen);
@@ -1151,7 +1191,8 @@ namespace System.Linq.Parallel.Tests
         public static void Select_NotPipelined(
             Labeled<Operation> source,
             Labeled<Operation> operation
-        ) {
+        )
+        {
             int seen = -DefaultStart;
             Assert.All(
                 operation.Item(DefaultStart, DefaultSize, source.Item).Select(x => -x).ToList(),
@@ -1175,7 +1216,8 @@ namespace System.Linq.Parallel.Tests
                             return -x;
                         }
                     )
-            ) {
+            )
+            {
                 Assert.Equal(seen--, i);
             }
             Assert.Equal(-DefaultStart - DefaultSize, seen);
@@ -1187,7 +1229,8 @@ namespace System.Linq.Parallel.Tests
         public static void Select_Indexed_NotPipelined(
             Labeled<Operation> source,
             Labeled<Operation> operation
-        ) {
+        )
+        {
             int seen = -DefaultStart;
             Assert.All(
                 operation.Item(DefaultStart, DefaultSize, source.Item)
@@ -1213,7 +1256,8 @@ namespace System.Linq.Parallel.Tests
             foreach (
                 int i in operation.Item(0, DefaultSize, source.Item)
                     .SelectMany(x => new[] { 0, -1 }.Select(y => y + -DefaultStart - 2 * x))
-            ) {
+            )
+            {
                 Assert.Equal(seen--, i);
             }
             Assert.Equal(-DefaultStart - DefaultSize * 2, seen);
@@ -1225,7 +1269,8 @@ namespace System.Linq.Parallel.Tests
         public static void SelectMany_NotPipelined(
             Labeled<Operation> source,
             Labeled<Operation> operation
-        ) {
+        )
+        {
             int seen = -DefaultStart;
             Assert.All(
                 operation.Item(0, DefaultSize, source.Item)
@@ -1242,7 +1287,8 @@ namespace System.Linq.Parallel.Tests
         public static void SelectMany_Indexed(
             Labeled<Operation> source,
             Labeled<Operation> operation
-        ) {
+        )
+        {
             int seen = -DefaultStart;
             foreach (
                 int i in operation.Item(0, DefaultSize, source.Item)
@@ -1253,7 +1299,8 @@ namespace System.Linq.Parallel.Tests
                             return new[] { 0, -1 }.Select(y => y + -DefaultStart - 2 * x);
                         }
                     )
-            ) {
+            )
+            {
                 Assert.Equal(seen--, i);
             }
             Assert.Equal(-DefaultStart - DefaultSize * 2, seen);
@@ -1265,7 +1312,8 @@ namespace System.Linq.Parallel.Tests
         public static void SelectMany_Indexed_NotPipelined(
             Labeled<Operation> source,
             Labeled<Operation> operation
-        ) {
+        )
+        {
             int seen = -DefaultStart;
             Assert.All(
                 operation.Item(0, DefaultSize, source.Item)
@@ -1288,12 +1336,14 @@ namespace System.Linq.Parallel.Tests
         public static void SelectMany_ResultSelector(
             Labeled<Operation> source,
             Labeled<Operation> operation
-        ) {
+        )
+        {
             int seen = -DefaultStart;
             foreach (
                 int i in operation.Item(0, DefaultSize, source.Item)
                     .SelectMany(x => new[] { 0, -1 }, (x, y) => y + -DefaultStart - 2 * x)
-            ) {
+            )
+            {
                 Assert.Equal(seen--, i);
             }
             Assert.Equal(-DefaultStart - DefaultSize * 2, seen);
@@ -1305,7 +1355,8 @@ namespace System.Linq.Parallel.Tests
         public static void SelectMany_ResultSelector_NotPipelined(
             Labeled<Operation> source,
             Labeled<Operation> operation
-        ) {
+        )
+        {
             int seen = -DefaultStart;
             Assert.All(
                 operation.Item(0, DefaultSize, source.Item)
@@ -1322,7 +1373,8 @@ namespace System.Linq.Parallel.Tests
         public static void SelectMany_Indexed_ResultSelector(
             Labeled<Operation> source,
             Labeled<Operation> operation
-        ) {
+        )
+        {
             int seen = -DefaultStart;
             foreach (
                 int i in operation.Item(0, DefaultSize, source.Item)
@@ -1334,7 +1386,8 @@ namespace System.Linq.Parallel.Tests
                         },
                         (x, y) => y + -DefaultStart - 2 * x
                     )
-            ) {
+            )
+            {
                 Assert.Equal(seen--, i);
             }
             Assert.Equal(-DefaultStart - DefaultSize * 2, seen);
@@ -1346,7 +1399,8 @@ namespace System.Linq.Parallel.Tests
         public static void SelectMany_Indexed_ResultSelector_NotPipelined(
             Labeled<Operation> source,
             Labeled<Operation> operation
-        ) {
+        )
+        {
             int seen = -DefaultStart;
             Assert.All(
                 operation.Item(0, DefaultSize, source.Item)
@@ -1431,7 +1485,8 @@ namespace System.Linq.Parallel.Tests
             foreach (
                 int i in operation.Item(DefaultStart, DefaultSize, source.Item)
                     .Skip(DefaultSize / 2)
-            ) {
+            )
+            {
                 Assert.Equal(seen++, i);
             }
             Assert.Equal(DefaultStart + DefaultSize, seen);
@@ -1443,7 +1498,8 @@ namespace System.Linq.Parallel.Tests
         public static void Skip_NotPipelined(
             Labeled<Operation> source,
             Labeled<Operation> operation
-        ) {
+        )
+        {
             int seen = DefaultStart + DefaultSize / 2;
             Assert.All(
                 operation.Item(DefaultStart, DefaultSize, source.Item)
@@ -1463,7 +1519,8 @@ namespace System.Linq.Parallel.Tests
             foreach (
                 int i in operation.Item(DefaultStart, DefaultSize, source.Item)
                     .SkipWhile(x => x < DefaultStart + DefaultSize / 2)
-            ) {
+            )
+            {
                 Assert.Equal(seen++, i);
             }
             Assert.Equal(DefaultStart + DefaultSize, seen);
@@ -1475,7 +1532,8 @@ namespace System.Linq.Parallel.Tests
         public static void SkipWhile_NotPipelined(
             Labeled<Operation> source,
             Labeled<Operation> operation
-        ) {
+        )
+        {
             int seen = DefaultStart + DefaultSize / 2;
             Assert.All(
                 operation.Item(DefaultStart, DefaultSize, source.Item)
@@ -1492,12 +1550,14 @@ namespace System.Linq.Parallel.Tests
         public static void SkipWhile_Indexed(
             Labeled<Operation> source,
             Labeled<Operation> operation
-        ) {
+        )
+        {
             int seen = DefaultStart + DefaultSize / 2;
             foreach (
                 int i in operation.Item(DefaultStart, DefaultSize, source.Item)
                     .SkipWhile((x, index) => index < DefaultSize / 2)
-            ) {
+            )
+            {
                 Assert.Equal(seen++, i);
             }
             Assert.Equal(DefaultStart + DefaultSize, seen);
@@ -1509,7 +1569,8 @@ namespace System.Linq.Parallel.Tests
         public static void SkipWhile_Indexed_NotPipelined(
             Labeled<Operation> source,
             Labeled<Operation> operation
-        ) {
+        )
+        {
             int seen = DefaultStart + DefaultSize / 2;
             Assert.All(
                 operation.Item(DefaultStart, DefaultSize, source.Item)
@@ -1551,7 +1612,8 @@ namespace System.Linq.Parallel.Tests
             foreach (
                 int i in operation.Item(DefaultStart, DefaultSize, source.Item)
                     .Take(DefaultSize / 2)
-            ) {
+            )
+            {
                 Assert.Equal(seen++, i);
             }
             Assert.Equal(DefaultStart + DefaultSize / 2, seen);
@@ -1563,7 +1625,8 @@ namespace System.Linq.Parallel.Tests
         public static void Take_NotPipelined(
             Labeled<Operation> source,
             Labeled<Operation> operation
-        ) {
+        )
+        {
             int seen = DefaultStart;
             Assert.All(
                 operation.Item(DefaultStart, DefaultSize, source.Item)
@@ -1583,7 +1646,8 @@ namespace System.Linq.Parallel.Tests
             foreach (
                 int i in operation.Item(DefaultStart, DefaultSize, source.Item)
                     .TakeWhile(x => x < DefaultStart + DefaultSize / 2)
-            ) {
+            )
+            {
                 Assert.Equal(seen++, i);
             }
             Assert.Equal(DefaultStart + DefaultSize / 2, seen);
@@ -1595,7 +1659,8 @@ namespace System.Linq.Parallel.Tests
         public static void TakeWhile_NotPipelined(
             Labeled<Operation> source,
             Labeled<Operation> operation
-        ) {
+        )
+        {
             int seen = DefaultStart;
             Assert.All(
                 operation.Item(DefaultStart, DefaultSize, source.Item)
@@ -1612,12 +1677,14 @@ namespace System.Linq.Parallel.Tests
         public static void TakeWhile_Indexed(
             Labeled<Operation> source,
             Labeled<Operation> operation
-        ) {
+        )
+        {
             int seen = DefaultStart;
             foreach (
                 int i in operation.Item(DefaultStart, DefaultSize, source.Item)
                     .TakeWhile((x, index) => index < DefaultSize / 2)
-            ) {
+            )
+            {
                 Assert.Equal(seen++, i);
             }
             Assert.Equal(DefaultStart + DefaultSize / 2, seen);
@@ -1629,7 +1696,8 @@ namespace System.Linq.Parallel.Tests
         public static void TakeWhile_Indexed_NotPipelined(
             Labeled<Operation> source,
             Labeled<Operation> operation
-        ) {
+        )
+        {
             int seen = DefaultStart;
             Assert.All(
                 operation.Item(DefaultStart, DefaultSize, source.Item)
@@ -1652,7 +1720,8 @@ namespace System.Linq.Parallel.Tests
                 int i in operation.Item(DefaultStart, DefaultSize, source.Item)
                     .OrderBy(x => 0)
                     .ThenBy(x => x)
-            ) {
+            )
+            {
                 Assert.Equal(seen++, i);
             }
             Assert.Equal(DefaultStart + DefaultSize, seen);
@@ -1666,7 +1735,8 @@ namespace System.Linq.Parallel.Tests
         public static void ThenBy_Initial_NotPipelined(
             Labeled<Operation> source,
             Labeled<Operation> operation
-        ) {
+        )
+        {
             int seen = DefaultStart;
             Assert.All(
                 operation.Item(DefaultStart, DefaultSize, source.Item)
@@ -1686,13 +1756,15 @@ namespace System.Linq.Parallel.Tests
         public static void ThenBy_OtherDirection(
             Labeled<Operation> source,
             Labeled<Operation> operation
-        ) {
+        )
+        {
             int seen = DefaultStart + DefaultSize;
             foreach (
                 int i in operation.Item(DefaultStart, DefaultSize, source.Item)
                     .OrderBy(x => 0)
                     .ThenBy(x => -x)
-            ) {
+            )
+            {
                 Assert.Equal(--seen, i);
             }
             Assert.Equal(DefaultStart, seen);
@@ -1706,7 +1778,8 @@ namespace System.Linq.Parallel.Tests
         public static void ThenBy_OtherDirection_NotPipelined(
             Labeled<Operation> source,
             Labeled<Operation> operation
-        ) {
+        )
+        {
             int seen = DefaultStart + DefaultSize;
             Assert.All(
                 operation.Item(DefaultStart, DefaultSize, source.Item)
@@ -1726,13 +1799,15 @@ namespace System.Linq.Parallel.Tests
         public static void ThenByDescending_Initial(
             Labeled<Operation> source,
             Labeled<Operation> operation
-        ) {
+        )
+        {
             int seen = DefaultStart;
             foreach (
                 int i in operation.Item(DefaultStart, DefaultSize, source.Item)
                     .OrderBy(x => 0)
                     .ThenByDescending(x => -x)
-            ) {
+            )
+            {
                 Assert.Equal(seen++, i);
             }
             Assert.Equal(DefaultStart + DefaultSize, seen);
@@ -1746,7 +1821,8 @@ namespace System.Linq.Parallel.Tests
         public static void ThenByDescending_Initial_NotPipelined(
             Labeled<Operation> source,
             Labeled<Operation> operation
-        ) {
+        )
+        {
             int seen = DefaultStart;
             Assert.All(
                 operation.Item(DefaultStart, DefaultSize, source.Item)
@@ -1766,13 +1842,15 @@ namespace System.Linq.Parallel.Tests
         public static void ThenByDescending_OtherDirection(
             Labeled<Operation> source,
             Labeled<Operation> operation
-        ) {
+        )
+        {
             int seen = DefaultStart + DefaultSize;
             foreach (
                 int i in operation.Item(DefaultStart, DefaultSize, source.Item)
                     .OrderBy(x => 0)
                     .ThenByDescending(x => x)
-            ) {
+            )
+            {
                 Assert.Equal(--seen, i);
             }
             Assert.Equal(DefaultStart, seen);
@@ -1786,7 +1864,8 @@ namespace System.Linq.Parallel.Tests
         public static void ThenByDescending_OtherDirection_NotPipelined(
             Labeled<Operation> source,
             Labeled<Operation> operation
-        ) {
+        )
+        {
             int seen = DefaultStart + DefaultSize;
             Assert.All(
                 operation.Item(DefaultStart, DefaultSize, source.Item)
@@ -1901,7 +1980,8 @@ namespace System.Linq.Parallel.Tests
         public static void ToLookup_ElementSelector(
             Labeled<Operation> source,
             Labeled<Operation> operation
-        ) {
+        )
+        {
             IntegerRangeSet seenOuter = new IntegerRangeSet(0, 2);
             ILookup<int, int> lookup = operation.Item(DefaultStart, DefaultSize, source.Item)
                 .ToLookup(x => x % 2, y => -y);
@@ -1955,7 +2035,8 @@ namespace System.Linq.Parallel.Tests
         public static void Union_NotPipelined(
             Labeled<Operation> source,
             Labeled<Operation> operation
-        ) {
+        )
+        {
             void Union(Operation left, Operation right)
             {
                 int seen = DefaultStart;
@@ -1977,7 +2058,8 @@ namespace System.Linq.Parallel.Tests
             foreach (
                 int i in operation.Item(DefaultStart, DefaultSize, source.Item)
                     .Where(x => x < DefaultStart + DefaultSize / 2)
-            ) {
+            )
+            {
                 Assert.Equal(seen++, i);
             }
             Assert.Equal(DefaultStart + DefaultSize / 2, seen);
@@ -1989,7 +2071,8 @@ namespace System.Linq.Parallel.Tests
         public static void Where_NotPipelined(
             Labeled<Operation> source,
             Labeled<Operation> operation
-        ) {
+        )
+        {
             int seen = DefaultStart;
             Assert.All(
                 operation.Item(DefaultStart, DefaultSize, source.Item)
@@ -2009,7 +2092,8 @@ namespace System.Linq.Parallel.Tests
             foreach (
                 int i in operation.Item(DefaultStart, DefaultSize, source.Item)
                     .Where((x, index) => index < DefaultSize / 2)
-            ) {
+            )
+            {
                 Assert.Equal(seen++, i);
             }
             Assert.Equal(DefaultStart + DefaultSize / 2, seen);
@@ -2021,7 +2105,8 @@ namespace System.Linq.Parallel.Tests
         public static void Where_Indexed_NotPipelined(
             Labeled<Operation> source,
             Labeled<Operation> operation
-        ) {
+        )
+        {
             int seen = DefaultStart;
             Assert.All(
                 operation.Item(DefaultStart, DefaultSize, source.Item)

@@ -33,7 +33,8 @@ namespace System.Buffers.Text
             Span<byte> destination,
             out int bytesWritten,
             StandardFormat format = default
-        ) {
+        )
+        {
             return TryFormatFloatingPoint<double>(value, destination, out bytesWritten, format);
         }
 
@@ -62,7 +63,8 @@ namespace System.Buffers.Text
             Span<byte> destination,
             out int bytesWritten,
             StandardFormat format = default
-        ) {
+        )
+        {
             return TryFormatFloatingPoint<float>(value, destination, out bytesWritten, format);
         }
 
@@ -99,7 +101,8 @@ namespace System.Buffers.Text
                     formatText,
                     CultureInfo.InvariantCulture
                 )
-            ) {
+            )
+            {
                 utf16Text = stackBuffer.Slice(0, formattedLength);
             }
             else

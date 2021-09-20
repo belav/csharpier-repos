@@ -37,7 +37,8 @@ namespace Microsoft.Extensions.Logging.Test.Console
             int length,
             ConsoleColor? background,
             ConsoleColor? foreground
-        ) {
+        )
+        {
             var consoleContext = new ConsoleContext();
             consoleContext.Message = message.AsSpan(startIndex, length).ToString();
 

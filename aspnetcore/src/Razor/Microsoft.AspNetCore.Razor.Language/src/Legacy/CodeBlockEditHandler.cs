@@ -17,7 +17,8 @@ namespace Microsoft.AspNetCore.Razor.Language.Legacy
         protected override PartialParseResultInternal CanAcceptChange(
             SyntaxNode target,
             SourceChange change
-        ) {
+        )
+        {
             if (IsAcceptableDeletion(target, change))
             {
                 return PartialParseResultInternal.Accepted;
@@ -85,7 +86,8 @@ namespace Microsoft.AspNetCore.Razor.Language.Legacy
                         relativePosition,
                         change.Span.Length
                     ) >= 0
-            ) {
+            )
+            {
                 return true;
             }
 

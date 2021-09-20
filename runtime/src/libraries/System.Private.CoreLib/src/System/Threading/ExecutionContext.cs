@@ -41,7 +41,8 @@ namespace System.Threading
             IAsyncLocalValueMap localValues,
             IAsyncLocal[]? localChangeNotifications,
             bool isFlowSuppressed
-        ) {
+        )
+        {
             m_localValues = localValues;
             m_localChangeNotifications = localChangeNotifications;
             m_isFlowSuppressed = isFlowSuppressed;
@@ -156,7 +157,8 @@ namespace System.Threading
             ExecutionContext executionContext,
             ContextCallback callback,
             object? state
-        ) {
+        )
+        {
             // Note: ExecutionContext.Run is an extremely hot function and used by every await, ThreadPool execution, etc.
             if (executionContext == null)
             {
@@ -170,7 +172,8 @@ namespace System.Threading
             ExecutionContext? executionContext,
             ContextCallback callback,
             object? state
-        ) {
+        )
+        {
             // Note: ExecutionContext.RunInternal is an extremely hot function and used by every await, ThreadPool execution, etc.
             // Note: Manual enregistering may be addressed by "Exception Handling Write Through Optimization"
             //       https://github.com/dotnet/runtime/blob/main/docs/design/features/eh-writethru.md
@@ -284,7 +287,8 @@ namespace System.Threading
             ExecutionContext executionContext,
             ContextCallback callback,
             object state
-        ) {
+        )
+        {
             Debug.Assert(threadPoolThread == Thread.CurrentThread);
             CheckThreadPoolAndContextsAreDefault();
             // ThreadPool starts on Default Context so we don't need to save the "previous" state as we know it is Default (null)
@@ -339,7 +343,8 @@ namespace System.Threading
             ExecutionContext executionContext,
             Action<TState> callback,
             in TState state
-        ) {
+        )
+        {
             // We aren't running in try/catch as if an exception is directly thrown on the ThreadPool either process
             // will crash or its a ThreadAbortException.
 
@@ -364,7 +369,8 @@ namespace System.Threading
             Thread currentThread,
             ExecutionContext? contextToRestore,
             ExecutionContext? currentContext
-        ) {
+        )
+        {
             Debug.Assert(currentThread == Thread.CurrentThread);
             Debug.Assert(contextToRestore != currentContext);
 
@@ -373,7 +379,8 @@ namespace System.Threading
             if (
                 (currentContext != null && currentContext.HasChangeNotifications)
                 || (contextToRestore != null && contextToRestore.HasChangeNotifications)
-            ) {
+            )
+            {
                 // There are change notifications; trigger any affected
                 OnValuesChanged(currentContext, contextToRestore);
             }
@@ -416,7 +423,8 @@ namespace System.Threading
         internal static void OnValuesChanged(
             ExecutionContext? previousExecutionCtx,
             ExecutionContext? nextExecutionCtx
-        ) {
+        )
+        {
             Debug.Assert(previousExecutionCtx != nextExecutionCtx);
 
             // Collect Change Notifications
@@ -462,7 +470,8 @@ namespace System.Threading
                                     local,
                                     out object? previousValue
                                 )
-                            ) {
+                            )
+                            {
                                 nextExecutionCtx.m_localValues.TryGetValue(
                                     local,
                                     out object? currentValue
@@ -545,7 +554,8 @@ namespace System.Threading
             IAsyncLocal local,
             object? newValue,
             bool needChangeNotifications
-        ) {
+        )
+        {
             ExecutionContext? current = Thread.CurrentThread._executionContext;
 
             object? previousValue = null;

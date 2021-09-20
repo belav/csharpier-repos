@@ -28,7 +28,8 @@ namespace Microsoft.CodeAnalysis.Completion
             string inlineDescription = null,
             string displayTextPrefix = null,
             bool isComplexTextEdit = false
-        ) {
+        )
+        {
             tags = tags.NullToEmpty();
 
             if (glyph != null)

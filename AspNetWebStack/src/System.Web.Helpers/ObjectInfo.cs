@@ -16,7 +16,8 @@ namespace System.Web.Helpers
             object value,
             int depth = DefaultRecursionLimit,
             int enumerationLength = DefaultEnumerationLimit
-        ) {
+        )
+        {
             if (depth < 0)
             {
                 throw new ArgumentOutOfRangeException(

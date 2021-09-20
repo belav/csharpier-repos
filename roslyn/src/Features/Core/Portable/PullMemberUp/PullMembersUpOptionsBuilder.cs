@@ -14,7 +14,8 @@ namespace Microsoft.CodeAnalysis.CodeRefactorings.PullMemberUp
         public static PullMembersUpOptions BuildPullMembersUpOptions(
             INamedTypeSymbol destination,
             ImmutableArray<(ISymbol member, bool makeAbstract)> members
-        ) {
+        )
+        {
             var membersAnalysisResult = members.SelectAsArray(
                 memberAndMakeAbstract =>
                 {

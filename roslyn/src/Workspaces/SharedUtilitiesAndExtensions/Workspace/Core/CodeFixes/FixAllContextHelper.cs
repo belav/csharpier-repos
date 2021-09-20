@@ -48,7 +48,8 @@ namespace Microsoft.CodeAnalysis.CodeFixes
                         document != null
                         && !await document.IsGeneratedCodeAsync(cancellationToken)
                             .ConfigureAwait(false)
-                    ) {
+                    )
+                    {
                         var documentDiagnostics = await fixAllContext.GetDocumentDiagnosticsAsync(
                                 document
                             )
@@ -82,7 +83,8 @@ namespace Microsoft.CodeAnalysis.CodeFixes
                     >();
                     using (
                         var _ = ArrayBuilder<Task>.GetInstance(projectsToFix.Length, out var tasks)
-                    ) {
+                    )
+                    {
                         foreach (var projectToFix in projectsToFix)
                             tasks.Add(
                                 Task.Run(
@@ -116,7 +118,8 @@ namespace Microsoft.CodeAnalysis.CodeFixes
             async Task AddDocumentDiagnosticsAsync(
                 ConcurrentDictionary<ProjectId, ImmutableArray<Diagnostic>> diagnostics,
                 Project projectToFix
-            ) {
+            )
+            {
                 try
                 {
                     var projectDiagnostics = await fixAllContext.GetAllDiagnosticsAsync(
@@ -139,13 +142,15 @@ namespace Microsoft.CodeAnalysis.CodeFixes
             Solution solution,
             ImmutableArray<Diagnostic> diagnostics,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var builder = ImmutableDictionary.CreateBuilder<Document, ImmutableArray<Diagnostic>>();
             foreach (
                 var (document, diagnosticsForDocument) in diagnostics.GroupBy(
                     d => solution.GetDocument(d.Location.SourceTree)
                 )
-            ) {
+            )
+            {
                 if (document is null)
                     continue;
 
@@ -172,7 +177,8 @@ namespace Microsoft.CodeAnalysis.CodeFixes
             ImmutableHashSet<string> diagnosticIds,
             Document? triggerDocument,
             Project triggerProject
-        ) {
+        )
+        {
             var diagnosticId = diagnosticIds.First();
 
             return fixAllScope switch

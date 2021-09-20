@@ -26,7 +26,8 @@ namespace Microsoft.CodeAnalysis
         public IEnumerable<TextChange> CreateEdits(
             SourceText originalSourceText,
             IEnumerable<UnmergedDocumentChanges> unmergedChanges
-        ) {
+        )
+        {
             var commentChanges = new List<TextChange>();
 
             foreach (var documentWithChanges in unmergedChanges)
@@ -50,7 +51,8 @@ namespace Microsoft.CodeAnalysis
         private static IEnumerable<IEnumerable<TextChange>> PartitionChangesForDocument(
             IEnumerable<TextChange> changes,
             SourceText originalSourceText
-        ) {
+        )
+        {
             var partitionedChanges = new List<IEnumerable<TextChange>>();
             var currentPartition = new List<TextChange>();
 
@@ -89,7 +91,8 @@ namespace Microsoft.CodeAnalysis
             IEnumerable<IEnumerable<TextChange>> partitionedChanges,
             string projectName,
             SourceText oldDocumentText
-        ) {
+        )
+        {
             var commentChanges = new List<TextChange>();
 
             foreach (var changePartition in partitionedChanges)

@@ -555,7 +555,8 @@ namespace Microsoft.AspNetCore.Authentication
         private static async Task<TestServer> CreateServer(
             Action<IServiceCollection> configure = null,
             string defaultScheme = null
-        ) {
+        )
+        {
             var host = new HostBuilder().ConfigureWebHost(
                     webHostBuilder =>
                     {
@@ -573,7 +574,8 @@ namespace Microsoft.AspNetCore.Authentication
                                                     new PathString("/auth"),
                                                     out var remainder
                                                 )
-                                            ) {
+                                            )
+                                            {
                                                 var name =
                                                     (remainder.Value.Length > 0)
                                                         ? remainder.Value.Substring(1)

@@ -45,7 +45,8 @@ namespace System.Formats.Cbor.Tests
             object value,
             int repetitions,
             string expectedHexEncoding
-        ) {
+        )
+        {
             byte[] expectedEncoding = expectedHexEncoding.HexToByteArray();
             var writer = new CborWriter(allowMultipleRootLevelValues: true);
 
@@ -256,7 +257,8 @@ namespace System.Formats.Cbor.Tests
             object value,
             bool useDefiniteLengthEncoding,
             string hexExpectedEncoding
-        ) {
+        )
+        {
             var writer = new CborWriter(
                 convertIndefiniteLengthEncodings: useDefiniteLengthEncoding
             );
@@ -323,7 +325,8 @@ namespace System.Formats.Cbor.Tests
         [MemberData(nameof(EncodedValueBadInputs))]
         public static void WriteEncodedValue_InvalidCbor_ShouldThrowArgumentException(
             string hexEncodedInput
-        ) {
+        )
+        {
             byte[] encodedInput = hexEncodedInput.HexToByteArray();
             var writer = new CborWriter();
             Assert.Throws<ArgumentException>(() => writer.WriteEncodedValue(encodedInput));
@@ -336,7 +339,8 @@ namespace System.Formats.Cbor.Tests
         public static void WriteEncodedValue_InvalidConformance_ShouldThrowArgumentException(
             CborConformanceMode conformanceMode,
             string hexEncodedInput
-        ) {
+        )
+        {
             byte[] encodedInput = hexEncodedInput.HexToByteArray();
             var writer = new CborWriter(conformanceMode);
             Assert.Throws<ArgumentException>(() => writer.WriteEncodedValue(encodedInput));
@@ -355,7 +359,8 @@ namespace System.Formats.Cbor.Tests
         [InlineData((CborConformanceMode)(-1))]
         public static void InvalidConformanceMode_ShouldThrowArgumentOutOfRangeException(
             CborConformanceMode mode
-        ) {
+        )
+        {
             Assert.Throws<ArgumentOutOfRangeException>(() => new CborWriter(conformanceMode: mode));
         }
 
@@ -400,7 +405,8 @@ namespace System.Formats.Cbor.Tests
             string hexQy,
             string? hashAlgorithmName,
             string curveFriendlyName
-        ) {
+        )
+        {
             byte[] expectedEncoding = expectedHexEncoding.HexToByteArray();
             var hashAlgName =
                 hashAlgorithmName != null

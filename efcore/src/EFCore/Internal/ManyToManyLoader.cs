@@ -66,7 +66,8 @@ namespace Microsoft.EntityFrameworkCore.Internal
         public virtual async Task LoadAsync(
             InternalEntityEntry entry,
             CancellationToken cancellationToken = default
-        ) {
+        )
+        {
             var keyValues = PrepareForLoad(entry);
 
             // Short-circuit for any null key values for perf and because of #6129
@@ -176,7 +177,8 @@ namespace Microsoft.EntityFrameworkCore.Internal
             ISkipNavigation skipNavigation,
             IReadOnlyList<IProperty> keyProperties,
             ValueBuffer keyValues
-        ) {
+        )
+        {
             var whereParameter = Expression.Parameter(typeof(TSourceEntity), "e");
             var entityParameter = Expression.Parameter(typeof(TEntity), "e");
 
@@ -203,7 +205,8 @@ namespace Microsoft.EntityFrameworkCore.Internal
         private static Expression<Func<TSourceEntity, bool>> BuildWhereLambda(
             IReadOnlyList<IProperty> keyProperties,
             ValueBuffer keyValues
-        ) {
+        )
+        {
             var entityParameter = Expression.Parameter(typeof(TSourceEntity), "e");
 
             return Expression.Lambda<Func<TSourceEntity, bool>>(
@@ -214,7 +217,8 @@ namespace Microsoft.EntityFrameworkCore.Internal
 
         private static Expression<Func<TSourceEntity, IEnumerable<TEntity>>> BuildSelectManyLambda(
             INavigationBase navigation
-        ) {
+        )
+        {
             var entityParameter = Expression.Parameter(typeof(TSourceEntity), "e");
 
             return Expression.Lambda<Func<TSourceEntity, IEnumerable<TEntity>>>(

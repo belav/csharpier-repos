@@ -29,7 +29,8 @@ namespace System.Diagnostics
             string name,
             DateTimeOffset timestamp = default,
             ActivityTagsCollection? tags = null
-        ) {
+        )
+        {
             Name = name ?? string.Empty;
             Tags = tags ?? s_emptyTags;
             Timestamp = timestamp != default ? timestamp : DateTimeOffset.UtcNow;

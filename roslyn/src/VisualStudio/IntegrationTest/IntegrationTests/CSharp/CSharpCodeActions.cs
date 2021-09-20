@@ -872,7 +872,8 @@ class C
             static void VerifyDiagnosticInErrorList(
                 string expectedSeverity,
                 VisualStudioInstance visualStudio
-            ) {
+            )
+            {
                 visualStudio.ErrorList.ShowErrorList();
                 var expectedContents = new[]
                 {

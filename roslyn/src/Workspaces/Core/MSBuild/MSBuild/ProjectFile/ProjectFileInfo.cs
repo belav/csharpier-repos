@@ -107,7 +107,8 @@ namespace Microsoft.CodeAnalysis.MSBuild
             ImmutableArray<DocumentFileInfo> analyzerConfigDocuments,
             ImmutableArray<ProjectFileReference> projectReferences,
             DiagnosticLog log
-        ) {
+        )
+        {
             RoslynDebug.Assert(filePath != null);
 
             this.IsEmpty = isEmpty;

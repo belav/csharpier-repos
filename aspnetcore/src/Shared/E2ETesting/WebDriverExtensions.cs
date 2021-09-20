@@ -47,7 +47,8 @@ namespace OpenQA.Selenium
                 entry.Message.Contains(
                     "WASM: wasm streaming compile failed: TypeError: Could not download wasm module"
                 )
-            ) {
+            )
+            {
                 return true;
             }
             if (entry.Message.Contains("WASM: falling back to ArrayBuffer instantiation"))

@@ -268,7 +268,8 @@ namespace DebuggerTests
             bool test_prev_frame = false,
             int frame_idx = 0,
             bool use_cfo = false
-        ) {
+        )
+        {
             var debugger_test_loc = "dotnet://debugger-test.dll/debugger-array-test.cs";
             UseCallFunctionOnBeforeGetProperties = use_cfo;
 

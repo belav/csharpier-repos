@@ -63,7 +63,8 @@ namespace Microsoft.CodeAnalysis.Editor.Interactive
                         reiteratedVersionNumber: null,
                         editTag: null
                     )
-            ) {
+            )
+            {
                 var oldText = _openTextContainer.CurrentText;
                 var changes = newText.GetTextChanges(oldText);
 

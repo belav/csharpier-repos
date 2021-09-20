@@ -71,7 +71,8 @@ namespace System.CommandLine.Tests
         [InlineData("[suggest:6] \"eat --\"")]
         public async Task It_writes_suggestions_for_option_aliases_under_subcommand(
             string commandLine
-        ) {
+        )
+        {
             var rootCommand = new RootCommand { _eatCommand };
 
             var parser = new CommandLineBuilder(rootCommand).UseSuggestDirective().Build();

@@ -19,13 +19,15 @@ namespace Internal.Cryptography
             int feedbackSize,
             int paddingSize,
             bool encrypting
-        ) {
+        )
+        {
             using (
                 SafeAlgorithmHandle algorithm = RC2BCryptModes.GetHandle(
                     cipherMode,
                     effectiveKeyLength
                 )
-            ) {
+            )
+            {
                 // The BasicSymmetricCipherBCrypt ctor will increase algorithm reference count and take ownership.
                 BasicSymmetricCipher cipher = new BasicSymmetricCipherBCrypt(
                     algorithm,

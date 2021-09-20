@@ -16,7 +16,8 @@ namespace System.Buffers
         [MethodImpl(MethodImplOptions.NoInlining)]
         private static ArgumentOutOfRangeException GetArgumentOutOfRangeException(
             ExceptionArgument argument
-        ) {
+        )
+        {
             return new ArgumentOutOfRangeException(GetArgumentName(argument));
         }
 

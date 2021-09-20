@@ -80,7 +80,8 @@ namespace Microsoft.AspNetCore.Mvc.ModelBinding.Binders
         private static DefaultModelBindingContext GetBindingContext(
             Type modelType,
             Type binderType = null
-        ) {
+        )
+        {
             var metadataProvider = new TestModelMetadataProvider();
             metadataProvider.ForType(modelType).BindingDetails(bd => bd.BinderType = binderType);
 

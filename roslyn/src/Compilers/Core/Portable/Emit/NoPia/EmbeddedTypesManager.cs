@@ -284,7 +284,8 @@ namespace Microsoft.CodeAnalysis.Emit.NoPia
         public override ImmutableArray<Cci.INamespaceTypeDefinition> GetTypes(
             DiagnosticBag diagnostics,
             HashSet<string> namesOfTopLevelTypes
-        ) {
+        )
+        {
             if (_frozen.IsDefault)
             {
                 var builder = ArrayBuilder<TEmbeddedType>.GetInstance();
@@ -296,7 +297,8 @@ namespace Microsoft.CodeAnalysis.Emit.NoPia
                         ref _frozen,
                         builder.ToImmutableAndFree()
                     )
-                ) {
+                )
+                {
                     if (_frozen.Length > 0)
                     {
                         Cci.INamespaceTypeDefinition prev = _frozen[0];
@@ -313,7 +315,8 @@ namespace Microsoft.CodeAnalysis.Emit.NoPia
                             if (
                                 prev.NamespaceName == current.NamespaceName
                                 && prev.Name == current.Name
-                            ) {
+                            )
+                            {
                                 if (!reportedDuplicate)
                                 {
                                     Debug.Assert(_frozen[i - 1] == prev);
@@ -350,14 +353,16 @@ namespace Microsoft.CodeAnalysis.Emit.NoPia
             HashSet<string> namesOfTopLevelTypes,
             TEmbeddedType type,
             DiagnosticBag diagnostics
-        ) {
+        )
+        {
             Cci.INamespaceTypeDefinition def = type;
 
             if (
                 namesOfTopLevelTypes.Contains(
                     MetadataHelpers.BuildQualifiedName(def.NamespaceName, def.Name)
                 )
-            ) {
+            )
+            {
                 // ERR_LocalTypeNameClash2/ERR_LocalTypeNameClash
                 ReportNameCollisionWithAlreadyDeclaredType(type, diagnostics);
                 return true;
@@ -376,7 +381,8 @@ namespace Microsoft.CodeAnalysis.Emit.NoPia
             TSymbol underlyingSymbol,
             TAttributeData attrData,
             AttributeDescription description
-        ) {
+        )
+        {
             return GetTargetAttributeSignatureIndex(underlyingSymbol, attrData, description) != -1;
         }
 
@@ -442,7 +448,8 @@ namespace Microsoft.CodeAnalysis.Emit.NoPia
             Cci.ITypeDefinitionMember embeddedMember,
             TSyntaxNode syntaxNodeOpt,
             DiagnosticBag diagnostics
-        ) {
+        )
+        {
             var noPiaIndexer = new Cci.TypeReferenceIndexer(
                 new EmitContext(
                     ModuleBeingBuilt,
@@ -494,7 +501,8 @@ namespace Microsoft.CodeAnalysis.Emit.NoPia
             TFieldSymbol fieldSymbol,
             TSyntaxNode syntaxNodeOpt,
             DiagnosticBag diagnostics
-        ) {
+        )
+        {
             TEmbeddedType type = GetEmbeddedTypeForMember(fieldSymbol, syntaxNodeOpt, diagnostics);
             if (type != null)
             {
@@ -507,7 +515,8 @@ namespace Microsoft.CodeAnalysis.Emit.NoPia
             TMethodSymbol methodSymbol,
             TSyntaxNode syntaxNodeOpt,
             DiagnosticBag diagnostics
-        ) {
+        )
+        {
             TEmbeddedType type = GetEmbeddedTypeForMember(methodSymbol, syntaxNodeOpt, diagnostics);
             if (type != null)
             {
@@ -521,7 +530,8 @@ namespace Microsoft.CodeAnalysis.Emit.NoPia
             TSyntaxNode syntaxNodeOpt,
             DiagnosticBag diagnostics,
             bool isUsedForComAwareEventBinding
-        ) {
+        )
+        {
             TEmbeddedType type = GetEmbeddedTypeForMember(eventSymbol, syntaxNodeOpt, diagnostics);
             if (type != null)
             {
@@ -539,7 +549,8 @@ namespace Microsoft.CodeAnalysis.Emit.NoPia
             TPropertySymbol propertySymbol,
             TSyntaxNode syntaxNodeOpt,
             DiagnosticBag diagnostics
-        ) {
+        )
+        {
             TEmbeddedType type = GetEmbeddedTypeForMember(
                 propertySymbol,
                 syntaxNodeOpt,

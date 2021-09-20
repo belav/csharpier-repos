@@ -20,7 +20,8 @@ namespace Microsoft.JSInterop
             this IJSInProcessRuntime jsRuntime,
             string identifier,
             params object?[] args
-        ) {
+        )
+        {
             if (jsRuntime == null)
             {
                 throw new ArgumentNullException(nameof(jsRuntime));

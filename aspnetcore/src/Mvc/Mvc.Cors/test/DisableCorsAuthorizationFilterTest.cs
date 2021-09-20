@@ -60,7 +60,8 @@ namespace Microsoft.AspNetCore.Mvc.Cors
         [InlineData("OPTIONS")]
         public async Task DisableCors_CaseInsensitivePreflightMethod_ShortCircuitsRequest(
             string preflightMethod
-        ) {
+        )
+        {
             // Arrange
             var filter = new DisableCorsAuthorizationFilter();
             var httpContext = new DefaultHttpContext();

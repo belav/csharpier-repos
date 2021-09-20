@@ -1136,7 +1136,8 @@ namespace Microsoft.AspNetCore.Razor.Language.IntegrationTests
         private static IReadOnlyList<RazorSourceDocument> GetImports(
             RazorProjectEngine projectEngine,
             RazorProjectItem projectItem
-        ) {
+        )
+        {
             var importFeatures = projectEngine.ProjectFeatures.OfType<IImportProjectFeature>();
             var importItems = importFeatures.SelectMany(f => f.GetImports(projectItem));
             var importSourceDocuments = importItems.Where(i => i.Exists)

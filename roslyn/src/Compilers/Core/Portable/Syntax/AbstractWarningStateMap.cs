@@ -84,7 +84,8 @@ namespace Microsoft.CodeAnalysis.Syntax
                 int position,
                 TWarningState general,
                 ImmutableDictionary<string, TWarningState> specific
-            ) {
+            )
+            {
                 this.Position = position;
                 this.GeneralWarningOption = general;
                 this.SpecificWarningOption =

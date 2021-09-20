@@ -43,7 +43,8 @@ namespace Microsoft.AspNetCore.Components
             Action<string?> setter,
             string existingValue,
             CultureInfo? culture = null
-        ) {
+        )
+        {
             return CreateBinderCore<string?>(factory, receiver, setter, culture, ConvertToString);
         }
 
@@ -67,7 +68,8 @@ namespace Microsoft.AspNetCore.Components
             Action<bool> setter,
             bool existingValue,
             CultureInfo? culture = null
-        ) {
+        )
+        {
             return CreateBinderCore<bool>(factory, receiver, setter, culture, ConvertToBool);
         }
 
@@ -91,7 +93,8 @@ namespace Microsoft.AspNetCore.Components
             Action<bool?> setter,
             bool? existingValue,
             CultureInfo? culture = null
-        ) {
+        )
+        {
             return CreateBinderCore<bool?>(
                 factory,
                 receiver,
@@ -121,7 +124,8 @@ namespace Microsoft.AspNetCore.Components
             Action<int> setter,
             int existingValue,
             CultureInfo? culture = null
-        ) {
+        )
+        {
             return CreateBinderCore<int>(factory, receiver, setter, culture, ConvertToInt);
         }
 
@@ -145,7 +149,8 @@ namespace Microsoft.AspNetCore.Components
             Action<int?> setter,
             int? existingValue,
             CultureInfo? culture = null
-        ) {
+        )
+        {
             return CreateBinderCore<int?>(factory, receiver, setter, culture, ConvertToNullableInt);
         }
 
@@ -169,7 +174,8 @@ namespace Microsoft.AspNetCore.Components
             Action<long> setter,
             long existingValue,
             CultureInfo? culture = null
-        ) {
+        )
+        {
             return CreateBinderCore<long>(factory, receiver, setter, culture, ConvertToLong);
         }
 
@@ -193,7 +199,8 @@ namespace Microsoft.AspNetCore.Components
             Action<short> setter,
             short existingValue,
             CultureInfo? culture = null
-        ) {
+        )
+        {
             return CreateBinderCore<short>(factory, receiver, setter, culture, ConvertToShort);
         }
 
@@ -217,7 +224,8 @@ namespace Microsoft.AspNetCore.Components
             Action<long?> setter,
             long? existingValue,
             CultureInfo? culture = null
-        ) {
+        )
+        {
             return CreateBinderCore<long?>(
                 factory,
                 receiver,
@@ -247,7 +255,8 @@ namespace Microsoft.AspNetCore.Components
             Action<short?> setter,
             short? existingValue,
             CultureInfo? culture = null
-        ) {
+        )
+        {
             return CreateBinderCore<short?>(
                 factory,
                 receiver,
@@ -277,7 +286,8 @@ namespace Microsoft.AspNetCore.Components
             Action<float> setter,
             float existingValue,
             CultureInfo? culture = null
-        ) {
+        )
+        {
             return CreateBinderCore<float>(factory, receiver, setter, culture, ConvertToFloat);
         }
 
@@ -301,7 +311,8 @@ namespace Microsoft.AspNetCore.Components
             Action<float?> setter,
             float? existingValue,
             CultureInfo? culture = null
-        ) {
+        )
+        {
             return CreateBinderCore<float?>(
                 factory,
                 receiver,
@@ -331,7 +342,8 @@ namespace Microsoft.AspNetCore.Components
             Action<double> setter,
             double existingValue,
             CultureInfo? culture = null
-        ) {
+        )
+        {
             return CreateBinderCore<double>(
                 factory,
                 receiver,
@@ -361,7 +373,8 @@ namespace Microsoft.AspNetCore.Components
             Action<double?> setter,
             double? existingValue,
             CultureInfo? culture = null
-        ) {
+        )
+        {
             return CreateBinderCore<double?>(
                 factory,
                 receiver,
@@ -391,7 +404,8 @@ namespace Microsoft.AspNetCore.Components
             Action<decimal> setter,
             decimal existingValue,
             CultureInfo? culture = null
-        ) {
+        )
+        {
             return CreateBinderCore<decimal>(factory, receiver, setter, culture, ConvertToDecimal);
         }
 
@@ -415,7 +429,8 @@ namespace Microsoft.AspNetCore.Components
             Action<decimal?> setter,
             decimal? existingValue,
             CultureInfo? culture = null
-        ) {
+        )
+        {
             return CreateBinderCore<decimal?>(
                 factory,
                 receiver,
@@ -445,7 +460,8 @@ namespace Microsoft.AspNetCore.Components
             Action<DateTime> setter,
             DateTime existingValue,
             CultureInfo? culture = null
-        ) {
+        )
+        {
             return CreateBinderCore<DateTime>(
                 factory,
                 receiver,
@@ -477,7 +493,8 @@ namespace Microsoft.AspNetCore.Components
             DateTime existingValue,
             string format,
             CultureInfo? culture = null
-        ) {
+        )
+        {
             return CreateBinderCore<DateTime>(
                 factory,
                 receiver,
@@ -508,7 +525,8 @@ namespace Microsoft.AspNetCore.Components
             Action<DateTime?> setter,
             DateTime? existingValue,
             CultureInfo? culture = null
-        ) {
+        )
+        {
             return CreateBinderCore<DateTime?>(
                 factory,
                 receiver,
@@ -540,7 +558,8 @@ namespace Microsoft.AspNetCore.Components
             DateTime? existingValue,
             string format,
             CultureInfo? culture = null
-        ) {
+        )
+        {
             return CreateBinderCore<DateTime?>(
                 factory,
                 receiver,
@@ -571,7 +590,8 @@ namespace Microsoft.AspNetCore.Components
             Action<DateTimeOffset> setter,
             DateTimeOffset existingValue,
             CultureInfo? culture = null
-        ) {
+        )
+        {
             return CreateBinderCore<DateTimeOffset>(
                 factory,
                 receiver,
@@ -603,7 +623,8 @@ namespace Microsoft.AspNetCore.Components
             DateTimeOffset existingValue,
             string format,
             CultureInfo? culture = null
-        ) {
+        )
+        {
             return CreateBinderCore<DateTimeOffset>(
                 factory,
                 receiver,
@@ -634,7 +655,8 @@ namespace Microsoft.AspNetCore.Components
             Action<DateTimeOffset?> setter,
             DateTimeOffset? existingValue,
             CultureInfo? culture = null
-        ) {
+        )
+        {
             return CreateBinderCore<DateTimeOffset?>(
                 factory,
                 receiver,
@@ -666,7 +688,8 @@ namespace Microsoft.AspNetCore.Components
             DateTimeOffset? existingValue,
             string format,
             CultureInfo? culture = null
-        ) {
+        )
+        {
             return CreateBinderCore<DateTimeOffset?>(
                 factory,
                 receiver,
@@ -700,7 +723,8 @@ namespace Microsoft.AspNetCore.Components
             Action<T> setter,
             T existingValue,
             CultureInfo? culture = null
-        ) {
+        )
+        {
             return CreateBinderCore<T>(
                 factory,
                 receiver,
@@ -716,7 +740,8 @@ namespace Microsoft.AspNetCore.Components
             Action<T> setter,
             CultureInfo? culture,
             BindConverter.BindParser<T> converter
-        ) {
+        )
+        {
             Action<ChangeEventArgs> callback = e =>
             {
                 T? value = default;
@@ -758,7 +783,8 @@ namespace Microsoft.AspNetCore.Components
             CultureInfo? culture,
             string format,
             BindConverter.BindParserWithFormat<T> converter
-        ) {
+        )
+        {
             Action<ChangeEventArgs> callback = e =>
             {
                 T? value = default;

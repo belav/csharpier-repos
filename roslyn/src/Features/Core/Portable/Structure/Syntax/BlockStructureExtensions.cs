@@ -16,8 +16,9 @@ namespace Microsoft.CodeAnalysis.Structure
                 Type,
                 ImmutableArray<AbstractSyntaxStructureProvider>
             >.Builder builder
-        ) where TType : SyntaxNode
-          where TOutliner : AbstractSyntaxStructureProvider, new()
+        )
+            where TType : SyntaxNode
+            where TOutliner : AbstractSyntaxStructureProvider, new()
         {
             builder.Add(
                 typeof(TType),

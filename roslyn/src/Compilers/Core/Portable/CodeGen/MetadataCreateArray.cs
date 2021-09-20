@@ -23,7 +23,8 @@ namespace Microsoft.CodeAnalysis.CodeGen
             Cci.IArrayTypeReference arrayType,
             Cci.ITypeReference elementType,
             ImmutableArray<Cci.IMetadataExpression> initializers
-        ) {
+        )
+        {
             ArrayType = arrayType;
             ElementType = elementType;
             Elements = initializers;

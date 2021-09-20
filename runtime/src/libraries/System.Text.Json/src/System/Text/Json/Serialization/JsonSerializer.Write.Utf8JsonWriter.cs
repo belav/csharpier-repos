@@ -26,7 +26,8 @@ namespace System.Text.Json
             Utf8JsonWriter writer,
             TValue value,
             JsonSerializerOptions? options = null
-        ) {
+        )
+        {
             Serialize<TValue>(writer, value, typeof(TValue), options);
         }
 
@@ -52,7 +53,8 @@ namespace System.Text.Json
             object? value,
             [DynamicallyAccessedMembers(MembersAccessedOnWrite)] Type inputType,
             JsonSerializerOptions? options = null
-        ) {
+        )
+        {
             if (inputType == null)
             {
                 throw new ArgumentNullException(nameof(inputType));
@@ -71,7 +73,8 @@ namespace System.Text.Json
             in TValue value,
             Type type,
             JsonSerializerOptions? options
-        ) {
+        )
+        {
             if (options == null)
             {
                 options = JsonSerializerOptions.s_defaultOptions;

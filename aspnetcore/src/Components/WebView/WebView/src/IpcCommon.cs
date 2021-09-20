@@ -41,7 +41,8 @@ namespace Microsoft.AspNetCore.Components.WebView
             string message,
             out T messageType,
             out ArraySegment<JsonElement> args
-        ) {
+        )
+        {
             // We don't want to get confused by unrelated messages that the developer is sending
             // over the same webview IPC channel, so ignore anything else
             if (message != null && message.StartsWith(_ipcMessagePrefix, StringComparison.Ordinal))

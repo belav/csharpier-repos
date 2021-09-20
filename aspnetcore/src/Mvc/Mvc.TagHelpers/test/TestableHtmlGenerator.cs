@@ -28,33 +28,35 @@ namespace Microsoft.AspNetCore.Mvc.TagHelpers
         public TestableHtmlGenerator(IModelMetadataProvider metadataProvider)
             : this(metadataProvider, Mock.Of<IUrlHelper>()) { }
 
-        public TestableHtmlGenerator(
-            IModelMetadataProvider metadataProvider,
-            IUrlHelper urlHelper
-        ) : this(
-            metadataProvider,
-            GetOptions(),
-            urlHelper,
-            validationAttributes: new Dictionary<string, object>(StringComparer.OrdinalIgnoreCase)
-        ) { }
+        public TestableHtmlGenerator(IModelMetadataProvider metadataProvider, IUrlHelper urlHelper)
+            : this(
+                metadataProvider,
+                GetOptions(),
+                urlHelper,
+                validationAttributes: new Dictionary<string, object>(
+                    StringComparer.OrdinalIgnoreCase
+                )
+            ) { }
 
         public TestableHtmlGenerator(
             IModelMetadataProvider metadataProvider,
             IOptions<MvcViewOptions> options,
             IUrlHelper urlHelper,
             IDictionary<string, object> validationAttributes
-        ) : base(
-            Mock.Of<IAntiforgery>(),
-            options,
-            metadataProvider,
-            CreateUrlHelperFactory(urlHelper),
-            new HtmlTestEncoder(),
-            new DefaultValidationHtmlAttributeProvider(
+        )
+            : base(
+                Mock.Of<IAntiforgery>(),
                 options,
                 metadataProvider,
-                new ClientValidatorCache()
+                CreateUrlHelperFactory(urlHelper),
+                new HtmlTestEncoder(),
+                new DefaultValidationHtmlAttributeProvider(
+                    options,
+                    metadataProvider,
+                    new ClientValidatorCache()
+                )
             )
-        ) {
+        {
             _validationAttributes = validationAttributes;
         }
 
@@ -67,7 +69,8 @@ namespace Microsoft.AspNetCore.Mvc.TagHelpers
             object model,
             IHtmlGenerator htmlGenerator,
             IModelMetadataProvider metadataProvider
-        ) {
+        )
+        {
             return GetViewContext(
                 model,
                 htmlGenerator,
@@ -81,7 +84,8 @@ namespace Microsoft.AspNetCore.Mvc.TagHelpers
             IHtmlGenerator htmlGenerator,
             IModelMetadataProvider metadataProvider,
             ModelStateDictionary modelState
-        ) {
+        )
+        {
             var actionContext = new ActionContext(
                 new DefaultHttpContext(),
                 new RouteData(),
@@ -122,7 +126,8 @@ namespace Microsoft.AspNetCore.Mvc.TagHelpers
             TagBuilder tagBuilder,
             ModelExplorer modelExplorer,
             string expression
-        ) {
+        )
+        {
             tagBuilder.MergeAttributes(ValidationAttributes);
         }
 

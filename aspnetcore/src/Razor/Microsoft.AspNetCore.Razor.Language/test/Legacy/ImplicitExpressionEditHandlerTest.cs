@@ -83,7 +83,8 @@ namespace Microsoft.AspNetCore.Razor.Language.Legacy
         [InlineData(")")]
         public void IsAcceptableInsertionInBalancedParenthesis_ReturnsFalseIfChangeIsParenthesis(
             string changeText
-        ) {
+        )
+        {
             // Arrange
             var change = new SourceChange(0, 1, changeText);
 
@@ -433,7 +434,8 @@ namespace Microsoft.AspNetCore.Razor.Language.Legacy
         [InlineData(")")]
         public void IsAcceptableInsertionInBalancedParenthesis_InsertingParenthesis_ReturnsFalse(
             string text
-        ) {
+        )
+        {
             // Arrange
             var span = GetSyntaxNode(SourceLocation.Zero, "(Hello World)");
             var change = new SourceChange(new SourceSpan(3, 0), text);
@@ -485,7 +487,8 @@ namespace Microsoft.AspNetCore.Razor.Language.Legacy
         private static Syntax.MarkupTextLiteralSyntax GetSyntaxNode(
             SourceLocation start,
             string content
-        ) {
+        )
+        {
             var builder = SyntaxListBuilder<SyntaxToken>.Create();
             var tokens = CSharpLanguageCharacteristics.Instance.TokenizeString(content).ToArray();
             foreach (var token in tokens)
@@ -501,7 +504,8 @@ namespace Microsoft.AspNetCore.Razor.Language.Legacy
         private static IReadOnlyList<Syntax.SyntaxToken> GetTokens(
             SourceLocation start,
             string content
-        ) {
+        )
+        {
             var parent = GetSyntaxNode(start, content);
             return parent.LiteralTokens;
         }

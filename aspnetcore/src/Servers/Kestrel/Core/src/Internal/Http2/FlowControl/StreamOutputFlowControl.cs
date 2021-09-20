@@ -20,7 +20,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Http2.FlowControl
         public StreamOutputFlowControl(
             OutputFlowControl connectionLevelFlowControl,
             uint initialWindowSize
-        ) {
+        )
+        {
             _connectionLevelFlowControl = connectionLevelFlowControl;
             _streamLevelFlowControl = new OutputFlowControl(
                 new SingleAwaitableProvider(),
@@ -107,7 +108,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Http2.FlowControl
                 _currentConnectionLevelAwaitable != null
                 && _currentConnectionLevelAwaitable.Version
                     == _currentConnectionLevelAwaitableVersion
-            ) {
+            )
+            {
                 _currentConnectionLevelAwaitable.TrySetResult(null);
             }
         }

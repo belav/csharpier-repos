@@ -22,7 +22,8 @@ namespace Microsoft.AspNetCore.SignalR.StackExchangeRedis.Internal
         public RedisInvocation(
             SerializedHubMessage message,
             IReadOnlyList<string>? excludedConnectionIds
-        ) {
+        )
+        {
             Message = message;
             ExcludedConnectionIds = excludedConnectionIds;
         }

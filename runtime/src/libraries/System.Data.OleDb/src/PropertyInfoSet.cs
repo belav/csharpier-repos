@@ -83,7 +83,8 @@ namespace System.Data.OleDb
                         int i = 0;
                         i < setCount;
                         ++i, setPtr = ADP.IntPtrOffset(setPtr, ODB.SizeOf_tagDBPROPINFOSET)
-                    ) {
+                    )
+                    {
                         Marshal.PtrToStructure(setPtr, propinfoset);
 
                         int infoCount = propinfoset.cPropertyInfos;
@@ -92,7 +93,8 @@ namespace System.Data.OleDb
                             int k = 0;
                             k < infoCount;
                             ++k, infoPtr = ADP.IntPtrOffset(infoPtr, ODB.SizeOf_tagDBPROPINFO)
-                        ) {
+                        )
+                        {
                             Marshal.PtrToStructure(infoPtr, propinfo);
 
                             OleDbPropertyInfo propertyInfo = new OleDbPropertyInfo();

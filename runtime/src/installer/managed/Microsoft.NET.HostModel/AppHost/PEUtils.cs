@@ -53,7 +53,8 @@ namespace Microsoft.NET.HostModel.AppHost
                 if (
                     ((ushort*)bytes)[0] != PEFileSignature
                     || accessor.Capacity < PEHeaderPointerOffset + sizeof(uint)
-                ) {
+                )
+                {
                     return false;
                 }
                 return true;
@@ -88,7 +89,8 @@ namespace Microsoft.NET.HostModel.AppHost
         /// <param name="accessor">The memory accessor which has the apphost file opened.</param>
         internal static unsafe void SetWindowsGraphicalUserInterfaceBit(
             MemoryMappedViewAccessor accessor
-        ) {
+        )
+        {
             byte* pointer = null;
 
             try
@@ -143,7 +145,8 @@ namespace Microsoft.NET.HostModel.AppHost
         /// <param name="accessor">The memory accessor which has the apphost file opened.</param>
         internal static unsafe ushort GetWindowsGraphicalUserInterfaceBit(
             MemoryMappedViewAccessor accessor
-        ) {
+        )
+        {
             byte* pointer = null;
 
             try

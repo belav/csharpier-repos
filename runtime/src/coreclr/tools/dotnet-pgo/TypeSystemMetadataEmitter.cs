@@ -34,7 +34,8 @@ namespace Microsoft.Diagnostics.Tools.Pgo
             AssemblyName assemblyName,
             TypeSystemContext context,
             AssemblyFlags flags = default(AssemblyFlags)
-        ) {
+        )
+        {
             _metadataBuilder = new MetadataBuilder();
             _ilBuilder = new BlobBuilder();
             _methodBodyStream = new MethodBodyStreamEncoder(_ilBuilder);
@@ -106,7 +107,8 @@ namespace Microsoft.Diagnostics.Tools.Pgo
             string name,
             InstructionEncoder il,
             int maxStack
-        ) {
+        )
+        {
             int methodILOffset = _methodBodyStream.AddMethodBody(il, maxStack);
             return _metadataBuilder.AddMethodDefinition(
                 MethodAttributes.Public | MethodAttributes.Static,
@@ -295,7 +297,8 @@ namespace Microsoft.Diagnostics.Tools.Pgo
             BlobBuilder blobBuilder,
             TypeDesc type,
             EmbeddedSignatureDataEmitter signatureDataEmitter
-        ) {
+        )
+        {
             signatureDataEmitter.Push();
             signatureDataEmitter.Push();
             signatureDataEmitter.EmitAtCurrentIndexStack(blobBuilder);
@@ -458,7 +461,8 @@ namespace Microsoft.Diagnostics.Tools.Pgo
             public EmbeddedSignatureDataEmitter(
                 EmbeddedSignatureData[] embeddedData,
                 TypeSystemMetadataEmitter metadataEmitter
-            ) {
+            )
+            {
                 _embeddedData = embeddedData;
                 _indexStack.Push(0);
                 _metadataEmitter = metadataEmitter;
@@ -484,7 +488,8 @@ namespace Microsoft.Diagnostics.Tools.Pgo
                         while (
                             (_embeddedDataIndex < _embeddedData.Length)
                             && _embeddedData[_embeddedDataIndex].index == indexData
-                        ) {
+                        )
+                        {
                             switch (_embeddedData[_embeddedDataIndex].kind)
                             {
                                 case EmbeddedSignatureDataKind.OptionalCustomModifier:
@@ -551,7 +556,8 @@ namespace Microsoft.Diagnostics.Tools.Pgo
             BlobBuilder signatureBuilder,
             MethodSignature sig,
             EmbeddedSignatureDataEmitter signatureDataEmitter
-        ) {
+        )
+        {
             signatureDataEmitter.Push();
             BlobEncoder signatureEncoder = new BlobEncoder(signatureBuilder);
             int genericParameterCount = sig.GenericParameterCount;

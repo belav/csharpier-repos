@@ -89,7 +89,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UseDeconstruction
             SyntaxNodeAnalysisContext context,
             VariableDeclarationSyntax variableDeclaration,
             ReportDiagnostic severity
-        ) {
+        )
+        {
             if (
                 !TryAnalyzeVariableDeclaration(
                     context.SemanticModel,
@@ -98,7 +99,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UseDeconstruction
                     out _,
                     context.CancellationToken
                 )
-            ) {
+            )
+            {
                 return;
             }
 
@@ -117,7 +119,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UseDeconstruction
             SyntaxNodeAnalysisContext context,
             ForEachStatementSyntax forEachStatement,
             ReportDiagnostic severity
-        ) {
+        )
+        {
             if (
                 !TryAnalyzeForEachStatement(
                     context.SemanticModel,
@@ -126,7 +129,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UseDeconstruction
                     out _,
                     context.CancellationToken
                 )
-            ) {
+            )
+            {
                 return;
             }
 
@@ -147,7 +151,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UseDeconstruction
             out INamedTypeSymbol tupleType,
             out ImmutableArray<MemberAccessExpressionSyntax> memberAccessExpressions,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             tupleType = null;
             memberAccessExpressions = default;
 
@@ -199,7 +204,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UseDeconstruction
             out INamedTypeSymbol tupleType,
             out ImmutableArray<MemberAccessExpressionSyntax> memberAccessExpressions,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var local = semanticModel.GetDeclaredSymbol(forEachStatement, cancellationToken);
             var elementConversion =
                 semanticModel.GetForEachStatementInfo(forEachStatement).ElementConversion;
@@ -227,7 +233,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UseDeconstruction
             out INamedTypeSymbol tupleType,
             out ImmutableArray<MemberAccessExpressionSyntax> memberAccessExpressions,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             tupleType = null;
             memberAccessExpressions = default;
 
@@ -246,7 +253,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UseDeconstruction
                 && !conversion.IsIdentity
                 && !conversion.IsTupleConversion
                 && !conversion.IsTupleLiteralConversion
-            ) {
+            )
+            {
                 // If there is any other conversion, we bail out because the source type might not be a tuple
                 // or it is a tuple but only thanks to target type inference, which won't occur in a deconstruction.
                 // Interesting case that illustrates this is initialization with a default literal:
@@ -290,7 +298,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UseDeconstruction
                     references,
                     cancellationToken
                 )
-            ) {
+            )
+            {
                 return false;
             }
 
@@ -303,7 +312,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UseDeconstruction
                     searchScope,
                     cancellationToken
                 )
-            ) {
+            )
+            {
                 return false;
             }
 
@@ -316,7 +326,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UseDeconstruction
             INamedTypeSymbol tupleType,
             SyntaxNode container,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var existingSymbols = GetExistingSymbols(semanticModel, container, cancellationToken);
 
             var reservedNames = semanticModel.LookupSymbols(container.SpanStart)
@@ -368,12 +379,14 @@ namespace Microsoft.CodeAnalysis.CSharp.UseDeconstruction
             ILocalSymbol local,
             ArrayBuilder<MemberAccessExpressionSyntax> memberAccessLocations,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var localName = local.Name;
 
             foreach (
                 var identifierName in searchScope.DescendantNodes().OfType<IdentifierNameSyntax>()
-            ) {
+            )
+            {
                 if (identifierName.Identifier.ValueText == localName)
                 {
                     var symbol = semanticModel.GetSymbolInfo(identifierName, cancellationToken)
@@ -413,7 +426,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UseDeconstruction
             SemanticModel semanticModel,
             SyntaxNode container,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             // Ignore an annonymous type property.  It's ok if they have a name that
             // matches the name of the local we're introducing.
             return semanticModel.GetAllDeclaredSymbols(container, cancellationToken)

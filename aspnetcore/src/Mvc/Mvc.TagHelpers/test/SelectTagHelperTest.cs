@@ -237,7 +237,8 @@ namespace Microsoft.AspNetCore.Mvc.TagHelpers
             Func<object> modelAccessor,
             NameAndId nameAndId,
             string ignored
-        ) {
+        )
+        {
             // Arrange
             var originalAttributes = new TagHelperAttributeList { { "class", "form-control" }, };
             var originalPostContent = "original content";
@@ -328,7 +329,8 @@ namespace Microsoft.AspNetCore.Mvc.TagHelpers
             Func<object> modelAccessor,
             NameAndId nameAndId,
             string expectedOptions
-        ) {
+        )
+        {
             // Arrange
             var originalAttributes = new TagHelperAttributeList { { "class", "form-control" }, };
             var originalPostContent = "original content";
@@ -520,7 +522,8 @@ namespace Microsoft.AspNetCore.Mvc.TagHelpers
             Func<object> modelAccessor,
             NameAndId nameAndId,
             string expectedOptions
-        ) {
+        )
+        {
             // Arrange
             var originalAttributes = new TagHelperAttributeList { { "class", "form-control" }, };
             var originalPostContent = "original content";
@@ -632,7 +635,8 @@ namespace Microsoft.AspNetCore.Mvc.TagHelpers
             string attributeName,
             string attributeValue,
             IEnumerable<SelectListItem> expectedItems
-        ) {
+        )
+        {
             // Arrange
             var contextAttributes = new TagHelperAttributeList
             {
@@ -734,7 +738,8 @@ namespace Microsoft.AspNetCore.Mvc.TagHelpers
             Type modelType,
             object model,
             bool allowMultiple
-        ) {
+        )
+        {
             // Arrange
             var contextAttributes = new TagHelperAttributeList(
                 Enumerable.Empty<TagHelperAttribute>()

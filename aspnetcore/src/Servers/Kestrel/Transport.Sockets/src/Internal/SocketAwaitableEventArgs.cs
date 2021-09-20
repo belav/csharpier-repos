@@ -37,7 +37,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Transport.Sockets.Internal
                 || (
                     c = Interlocked.CompareExchange(ref _continuation, _continuationCompleted, null)
                 ) != null
-            ) {
+            )
+            {
                 var continuationState = UserToken;
                 UserToken = null;
                 _continuation = _continuationCompleted; // in case someone's polling IsCompleted
@@ -82,7 +83,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Transport.Sockets.Internal
             object? state,
             short token,
             ValueTaskSourceOnCompletedFlags flags
-        ) {
+        )
+        {
             UserToken = state;
             var prevContinuation = Interlocked.CompareExchange(
                 ref _continuation,

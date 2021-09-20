@@ -20,7 +20,8 @@ namespace System.ServiceModel.Syndication
             string title,
             string mediaType,
             long length
-        ) {
+        )
+        {
             if (length < 0)
             {
                 throw new ArgumentOutOfRangeException(nameof(length));
@@ -96,7 +97,8 @@ namespace System.ServiceModel.Syndication
             Uri uri,
             string mediaType,
             long length
-        ) {
+        )
+        {
             return new SyndicationLink(uri, Rss20Constants.EnclosureTag, null, mediaType, length);
         }
 
@@ -140,7 +142,8 @@ namespace System.ServiceModel.Syndication
             string ns,
             string value,
             string version
-        ) {
+        )
+        {
             return false;
         }
 
@@ -162,7 +165,8 @@ namespace System.ServiceModel.Syndication
         internal void LoadElementExtensions(
             XmlReader readerOverUnparsedExtensions,
             int maxExtensionSize
-        ) {
+        )
+        {
             _extensions.LoadElementExtensions(readerOverUnparsedExtensions, maxExtensionSize);
         }
 

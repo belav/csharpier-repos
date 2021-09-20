@@ -47,7 +47,8 @@ namespace System.Data.Tests
             out DataTable dtMainInDS,
             out DataTable dtChildInDS,
             out DataTable dtMain
-        ) {
+        )
+        {
             ds = new DataSet("MyDataSet");
 
             // Create a primary table and populate it with some data.  Make a

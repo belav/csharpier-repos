@@ -341,7 +341,8 @@ namespace System.Drawing.Printing
         public Graphics CreateMeasurementGraphics(
             PageSettings pageSettings,
             bool honorOriginAtMargins
-        ) {
+        )
+        {
             throw new NotImplementedException();
         }
 

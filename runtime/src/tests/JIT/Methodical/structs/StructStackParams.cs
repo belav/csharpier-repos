@@ -77,7 +77,8 @@ public class MyProgram
         int i6,
         int i7,
         MyStruct1 s1
-    ) {
+    )
+    {
         if ((w != 1) || (s1.f1 != i1) || (s1.f2 != i2) || (s1.f3 != i3) || (s1.f4 != i4))
         {
             Console.WriteLine("Check1: FAIL");
@@ -113,7 +114,8 @@ public class MyProgram
         int i6,
         int i7,
         MyStruct2 s2
-    ) {
+    )
+    {
         if ((w != 2) || (s2.f1 != i1) || (s2.f2 != i2) || (s2.f3 != i3) || (i4 != 4))
         {
             Console.WriteLine("Check2: FAIL");
@@ -148,7 +150,8 @@ public class MyProgram
         int i6,
         int i7,
         MyStruct3 s3
-    ) {
+    )
+    {
         if ((w != 2) || (s3.f1 != i1) || (s3.f2 != i2) || (s3.f3 != i3) || (i4 != 4))
         {
             Console.WriteLine("Check3: FAIL");
@@ -183,7 +186,8 @@ public class MyProgram
         int i6,
         int i7,
         MyStruct4 s4
-    ) {
+    )
+    {
         if ((w != 2) || (s4.f1 != i1) || (s4.f2 != i2) || (s4.f3 != i3) || (i4 != 4))
         {
             Console.WriteLine("Check4: FAIL");

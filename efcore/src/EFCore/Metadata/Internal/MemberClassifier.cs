@@ -36,7 +36,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
         public MemberClassifier(
             ITypeMappingSource typeMappingSource,
             IParameterBindingFactories parameterBindingFactories
-        ) {
+        )
+        {
             Check.NotNull(typeMappingSource, nameof(typeMappingSource));
             Check.NotNull(parameterBindingFactories, nameof(parameterBindingFactories));
 
@@ -59,7 +60,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
             if (
                 !(memberInfo is PropertyInfo propertyInfo)
                 || !propertyInfo.IsCandidateProperty(targetSequenceType == null)
-            ) {
+            )
+            {
                 return null;
             }
 

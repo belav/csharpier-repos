@@ -22,7 +22,8 @@ namespace Microsoft.CodeAnalysis.Editor.FindUsages
             Document document,
             int position,
             IFindUsagesContext context
-        ) {
+        )
+        {
             var cancellationToken = context.CancellationToken;
 
             // If this is a symbol from a metadata-as-source project, then map that symbol back to a symbol in the primary workspace.
@@ -55,7 +56,8 @@ namespace Microsoft.CodeAnalysis.Editor.FindUsages
             ISymbol symbol,
             Project project,
             IFindUsagesContext context
-        ) {
+        )
+        {
             var cancellationToken = context.CancellationToken;
             var solution = project.Solution;
             var client = await RemoteHostClient.TryGetClientAsync(
@@ -101,7 +103,8 @@ namespace Microsoft.CodeAnalysis.Editor.FindUsages
             ISymbol symbol,
             Project project,
             IFindUsagesContext context
-        ) {
+        )
+        {
             var cancellationToken = context.CancellationToken;
 
             var solution = project.Solution;
@@ -145,7 +148,8 @@ namespace Microsoft.CodeAnalysis.Editor.FindUsages
             Solution solution,
             ISymbol symbol,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var builder = new HashSet<ISymbol>(SymbolEquivalenceComparer.Instance);
 
             // If we're in a linked file, try to find all the symbols this links to, and find all the implementations of
@@ -181,7 +185,8 @@ namespace Microsoft.CodeAnalysis.Editor.FindUsages
             Solution solution,
             ISymbol symbol,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var implementations = await FindSourceAndMetadataImplementationsAsync(
                     solution,
                     symbol,
@@ -197,7 +202,8 @@ namespace Microsoft.CodeAnalysis.Editor.FindUsages
             Solution solution,
             ISymbol symbol,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             if (symbol.IsInterfaceType() || symbol.IsImplementableMember())
             {
                 var implementations = await SymbolFinder.FindImplementationsAsync(

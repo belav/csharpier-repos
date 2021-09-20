@@ -34,7 +34,8 @@ namespace Microsoft.AspNetCore.Mvc.Formatters.Xml
             this ILogger logger,
             string typeName,
             Exception exception
-        ) {
+        )
+        {
             _failedToCreateXmlSerializer(logger, typeName, exception);
         }
 
@@ -42,7 +43,8 @@ namespace Microsoft.AspNetCore.Mvc.Formatters.Xml
             this ILogger logger,
             string typeName,
             Exception exception
-        ) {
+        )
+        {
             _failedToCreateDataContractSerializer(logger, typeName, exception);
         }
     }

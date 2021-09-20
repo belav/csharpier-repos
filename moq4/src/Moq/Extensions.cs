@@ -28,7 +28,8 @@ namespace Moq
             this PropertyInfo property,
             out MethodInfo getter,
             out PropertyInfo getterProperty
-        ) {
+        )
+        {
             if (property.CanRead)
             {
                 // The given `PropertyInfo` should be able to provide a getter:
@@ -75,7 +76,8 @@ namespace Moq
             this PropertyInfo property,
             out MethodInfo setter,
             out PropertyInfo setterProperty
-        ) {
+        )
+        {
             if (property.CanWrite)
             {
                 // The given `PropertyInfo` should be able to provide a setter:
@@ -162,7 +164,8 @@ namespace Moq
         public static object InvokePreserveStack(
             this Delegate del,
             IReadOnlyList<object> args = null
-        ) {
+        )
+        {
             try
             {
                 return del.DynamicInvoke((args as object[]) ?? args?.ToArray());
@@ -315,8 +318,9 @@ namespace Moq
             TOtherTypes otherTypes,
             bool exact,
             bool considerTypeMatchers
-        ) where TTypes : IReadOnlyList<Type>
-          where TOtherTypes : IReadOnlyList<Type>
+        )
+            where TTypes : IReadOnlyList<Type>
+            where TOtherTypes : IReadOnlyList<Type>
         {
             var count = otherTypes.Count;
 
@@ -376,7 +380,8 @@ namespace Moq
             if (
                 method.GetParameterTypes()
                     .CompareTo(otherTypes, exact: false, considerTypeMatchers: false)
-            ) {
+            )
+            {
                 // the backing method for the literal delegate is compatible, DynamicInvoke(...) will succeed
                 return true;
             }
@@ -390,7 +395,8 @@ namespace Moq
                 invokeMethod != null
                 && invokeMethod.GetParameterTypes()
                     .CompareTo(otherTypes, exact: false, considerTypeMatchers: false)
-            ) {
+            )
+            {
                 // the Invoke(...) method is compatible instead. DynamicInvoke(...) will succeed.
                 return true;
             }

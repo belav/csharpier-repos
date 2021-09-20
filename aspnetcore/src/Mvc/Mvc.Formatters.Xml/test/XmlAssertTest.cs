@@ -110,7 +110,8 @@ namespace Microsoft.AspNetCore.Mvc.Formatters.Xml
         public void ReturnsSuccessfully_WithMatchingContent_IgnoringAttributeOrder(
             string input1,
             string input2
-        ) {
+        )
+        {
             XmlAssert.Equal(input1, input2);
         }
 

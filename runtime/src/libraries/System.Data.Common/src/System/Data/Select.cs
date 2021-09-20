@@ -39,7 +39,8 @@ namespace System.Data
             string? filterExpression,
             string? sort,
             DataViewRowState recordStates
-        ) {
+        )
+        {
             _table = table;
             _indexFields = table.ParseSortString(sort);
             if (filterExpression != null && filterExpression.Length > 0)
@@ -92,7 +93,8 @@ namespace System.Data
                             unaryNode._op == Operators.Noop
                             && unaryNode._right is UnaryNode
                             && ((UnaryNode)unaryNode._right)._op == Operators.Noop
-                        ) {
+                        )
+                        {
                             unaryNode = (UnaryNode)unaryNode._right;
                         }
                         if (unaryNode._op == Operators.Noop && unaryNode._right is BinaryNode)
@@ -123,7 +125,8 @@ namespace System.Data
                             unaryNode._op == Operators.Noop
                             && unaryNode._right is UnaryNode
                             && ((UnaryNode)unaryNode._right)._op == Operators.Noop
-                        ) {
+                        )
+                        {
                             unaryNode = (UnaryNode)unaryNode._right;
                         }
                         if (unaryNode._op == Operators.Noop && unaryNode._right is BinaryNode)
@@ -312,7 +315,8 @@ namespace System.Data
                     int match = CompareClosestCandidateIndexDesc(ndx._indexFields);
                     if (
                         match > _matchedCandidates || (match == _matchedCandidates && !sortPriority)
-                    ) {
+                    )
+                    {
                         _matchedCandidates = match;
                         _index = ndx;
                         sortPriority = CompareSortIndexDesc(ndx._indexFields);
@@ -513,7 +517,8 @@ namespace System.Data
                     Operators.In == bnode._op
                     || IsOperatorIn(bnode._right)
                     || IsOperatorIn(bnode._left)
-                ) {
+                )
+                {
                     return true;
                 }
             }

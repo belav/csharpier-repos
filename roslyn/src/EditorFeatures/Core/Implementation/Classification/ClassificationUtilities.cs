@@ -40,7 +40,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.Classification
             ITextSnapshot snapshot,
             List<ClassifiedSpan> list,
             Action<ITagSpan<IClassificationTag>> addTag
-        ) {
+        )
+        {
             foreach (var classifiedSpan in list)
             {
                 addTag(Convert(typeMap, snapshot, classifiedSpan));
@@ -51,7 +52,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.Classification
             ClassificationTypeMap typeMap,
             ITextSnapshot snapshot,
             ClassifiedSpan classifiedSpan
-        ) {
+        )
+        {
             return new TagSpan<IClassificationTag>(
                 classifiedSpan.TextSpan.ToSnapshotSpan(snapshot),
                 new ClassificationTag(
@@ -64,7 +66,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.Classification
             ClassificationTypeMap typeMap,
             ITextSnapshot snapshot,
             List<ClassifiedSpan> classifiedSpans
-        ) {
+        )
+        {
             var result = new List<ITagSpan<IClassificationTag>>();
             Convert(typeMap, snapshot, classifiedSpans, result.Add);
             ReturnClassifiedSpanList(classifiedSpans);

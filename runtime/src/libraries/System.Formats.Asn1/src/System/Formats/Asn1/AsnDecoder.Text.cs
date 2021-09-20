@@ -63,7 +63,8 @@ namespace System.Formats.Asn1
             Asn1Tag expectedTag,
             out ReadOnlySpan<byte> value,
             out int bytesConsumed
-        ) {
+        )
+        {
             // This doesn't matter, except for universal tags. It's eventually used to check that
             // we're not expecting the wrong universal tag; but we'll remove the need for that by
             // IsCharacterStringEncodingType.
@@ -153,7 +154,8 @@ namespace System.Formats.Asn1
             Asn1Tag expectedTag,
             out int bytesConsumed,
             out int bytesWritten
-        ) {
+        )
+        {
             if (source.Overlaps(destination))
             {
                 throw new ArgumentException(
@@ -256,7 +258,8 @@ namespace System.Formats.Asn1
             out int bytesConsumed,
             out int charsWritten,
             Asn1Tag? expectedTag = null
-        ) {
+        )
+        {
             Text.Encoding encoding = AsnCharacterStringEncodings.GetEncoding(encodingType);
 
             return TryReadCharacterStringCore(
@@ -328,7 +331,8 @@ namespace System.Formats.Asn1
             UniversalTagNumber encodingType,
             out int bytesConsumed,
             Asn1Tag? expectedTag = null
-        ) {
+        )
+        {
             Text.Encoding encoding = AsnCharacterStringEncodings.GetEncoding(encodingType);
 
             return ReadCharacterStringCore(
@@ -350,7 +354,8 @@ namespace System.Formats.Asn1
             Span<byte> destination,
             out int bytesConsumed,
             out int bytesWritten
-        ) {
+        )
+        {
             // T-REC-X.690-201508 sec 8.23.3, all character strings are encoded as octet strings.
             if (
                 TryReadPrimitiveOctetStringCore(
@@ -363,7 +368,8 @@ namespace System.Formats.Asn1
                     out ReadOnlySpan<byte> contents,
                     out int consumed
                 )
-            ) {
+            )
+            {
                 if (contents.Length > destination.Length)
                 {
                     bytesWritten = 0;
@@ -403,7 +409,8 @@ namespace System.Formats.Asn1
             Span<char> destination,
             Text.Encoding encoding,
             out int charsWritten
-        ) {
+        )
+        {
             if (source.Length == 0)
             {
                 charsWritten = 0;
@@ -412,7 +419,8 @@ namespace System.Formats.Asn1
 
             fixed (byte* bytePtr = &MemoryMarshal.GetReference(source))fixed (
                 char* charPtr = &MemoryMarshal.GetReference(destination)
-            ) {
+            )
+            {
                 try
                 {
                     int charCount = encoding.GetCharCount(bytePtr, source.Length);
@@ -447,7 +455,8 @@ namespace System.Formats.Asn1
             UniversalTagNumber universalTagNumber,
             Text.Encoding encoding,
             out int bytesConsumed
-        ) {
+        )
+        {
             byte[]? rented = null;
 
             // T-REC-X.690-201508 sec 8.23.3, all character strings are encoded as octet strings.
@@ -502,7 +511,8 @@ namespace System.Formats.Asn1
             Span<char> destination,
             out int bytesConsumed,
             out int charsWritten
-        ) {
+        )
+        {
             byte[]? rented = null;
 
             // T-REC-X.690-201508 sec 8.23.3, all character strings are encoded as octet strings.
@@ -603,7 +613,8 @@ namespace System.Formats.Asn1
         public bool TryReadPrimitiveCharacterStringBytes(
             Asn1Tag expectedTag,
             out ReadOnlyMemory<byte> contents
-        ) {
+        )
+        {
             bool ret = AsnDecoder.TryReadPrimitiveCharacterStringBytes(
                 _data.Span,
                 RuleSet,
@@ -666,7 +677,8 @@ namespace System.Formats.Asn1
             Span<byte> destination,
             Asn1Tag expectedTag,
             out int bytesWritten
-        ) {
+        )
+        {
             bool ret = AsnDecoder.TryReadCharacterStringBytes(
                 _data.Span,
                 destination,
@@ -736,7 +748,8 @@ namespace System.Formats.Asn1
             UniversalTagNumber encodingType,
             out int charsWritten,
             Asn1Tag? expectedTag = null
-        ) {
+        )
+        {
             bool ret = AsnDecoder.TryReadCharacterString(
                 _data.Span,
                 destination,
@@ -795,7 +808,8 @@ namespace System.Formats.Asn1
         public string ReadCharacterString(
             UniversalTagNumber encodingType,
             Asn1Tag? expectedTag = null
-        ) {
+        )
+        {
             string ret = AsnDecoder.ReadCharacterString(
                 _data.Span,
                 RuleSet,

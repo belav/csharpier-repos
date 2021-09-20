@@ -43,7 +43,8 @@ namespace System.Net.Mail
             string content,
             Encoding? contentEncoding,
             string? mediaType
-        ) {
+        )
+        {
             LinkedResource a = new LinkedResource();
             a.SetContentFromString(content, contentEncoding, mediaType);
             return a;
@@ -52,7 +53,8 @@ namespace System.Net.Mail
         public static LinkedResource CreateLinkedResourceFromString(
             string content,
             ContentType? contentType
-        ) {
+        )
+        {
             LinkedResource a = new LinkedResource();
             a.SetContentFromString(content, contentType);
             return a;

@@ -1066,7 +1066,8 @@ namespace Span
                     // what arguments they should be run.
                     foreach (
                         InlineDataAttribute dataAttr in m.GetCustomAttributes<InlineDataAttribute>()
-                    ) {
+                    )
+                    {
                         foreach (object[] data in dataAttr.GetData(m))
                         {
                             // All the benchmark methods in this test take a single int parameter

@@ -60,7 +60,8 @@ namespace System.Xml.Tests
             string strOuterXml,
             string strNextElemName,
             bool bWhitespace
-        ) {
+        )
+        {
             ReloadSource();
             DataReader.PositionOnElement(strElem);
 
@@ -238,7 +239,8 @@ namespace System.Xml.Tests
                 || IsXmlValidatingReader()
                 || IsCoreReader()
                 || IsXPathNavigatorReader()
-            ) {
+            )
+            {
                 strExpected = s_EXP_ENT1_EXPAND_ALL;
             }
             else

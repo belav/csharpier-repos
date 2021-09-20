@@ -12,7 +12,8 @@ namespace System.Text.RegularExpressions
             Action<RegexRunner> go,
             Func<RegexRunner, bool> findFirstChar,
             int trackCount
-        ) {
+        )
+        {
             _goMethod = go;
             _findFirstCharMethod = findFirstChar;
             runtrackcount = trackCount;

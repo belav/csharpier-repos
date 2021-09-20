@@ -668,7 +668,8 @@ namespace Microsoft.Extensions.Logging.Test
         public void LogLevel_FormatMessageAndEventId_LogsCorrectValues(
             LogLevel logLevel,
             int eventId
-        ) {
+        )
+        {
             // Arrange
             var sink = new TestSink();
             var logger = SetUp(sink);
@@ -718,7 +719,8 @@ namespace Microsoft.Extensions.Logging.Test
         public void LogLevel_MessageEventIdAndError_LogsCorrectValues(
             LogLevel logLevel,
             int eventId
-        ) {
+        )
+        {
             // Arrange
             var sink = new TestSink();
             var logger = SetUp(sink);
@@ -819,7 +821,8 @@ namespace Microsoft.Extensions.Logging.Test
         public void LogLevel_LogValuesEventIdAndError_LogsCorrectValues(
             LogLevel logLevel,
             int eventId
-        ) {
+        )
+        {
             // Arrange
             var sink = new TestSink();
             var logger = SetUp(sink);

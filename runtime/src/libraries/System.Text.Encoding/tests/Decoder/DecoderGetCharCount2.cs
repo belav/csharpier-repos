@@ -151,7 +151,8 @@ namespace System.Text.Tests
             bool flush,
             int expected,
             string errorno
-        ) {
+        )
+        {
             int ret = decoder.GetCharCount(bytes, index, count, flush);
             Assert.Equal(expected, ret);
         }

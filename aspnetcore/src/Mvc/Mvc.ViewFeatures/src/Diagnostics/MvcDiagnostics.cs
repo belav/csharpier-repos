@@ -30,7 +30,8 @@ namespace Microsoft.AspNetCore.Mvc.Diagnostics
             ActionDescriptor actionDescriptor,
             ViewComponentContext viewComponentContext,
             object viewComponent
-        ) {
+        )
+        {
             ActionDescriptor = actionDescriptor;
             ViewComponentContext = viewComponentContext;
             ViewComponent = viewComponent;
@@ -91,7 +92,8 @@ namespace Microsoft.AspNetCore.Mvc.Diagnostics
             ViewComponentContext viewComponentContext,
             IViewComponentResult viewComponentResult,
             object viewComponent
-        ) {
+        )
+        {
             ActionDescriptor = actionDescriptor;
             ViewComponentContext = viewComponentContext;
             ViewComponentResult = viewComponentResult;
@@ -161,7 +163,8 @@ namespace Microsoft.AspNetCore.Mvc.Diagnostics
             ActionDescriptor actionDescriptor,
             ViewComponentContext viewComponentContext,
             IView view
-        ) {
+        )
+        {
             ActionDescriptor = actionDescriptor;
             ViewComponentContext = viewComponentContext;
             View = view;
@@ -219,7 +222,8 @@ namespace Microsoft.AspNetCore.Mvc.Diagnostics
             ActionDescriptor actionDescriptor,
             ViewComponentContext viewComponentContext,
             IView view
-        ) {
+        )
+        {
             ActionDescriptor = actionDescriptor;
             ViewComponentContext = viewComponentContext;
             View = view;
@@ -370,7 +374,8 @@ namespace Microsoft.AspNetCore.Mvc.Diagnostics
             ActionResult result,
             string viewName,
             IView view
-        ) {
+        )
+        {
             ActionContext = actionContext;
             IsMainPage = isMainPage;
             Result = result;
@@ -443,7 +448,8 @@ namespace Microsoft.AspNetCore.Mvc.Diagnostics
             ActionResult result,
             string viewName,
             IEnumerable<string> searchedLocations
-        ) {
+        )
+        {
             ActionContext = actionContext;
             IsMainPage = isMainPage;
             Result = result;

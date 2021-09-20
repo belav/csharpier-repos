@@ -25,7 +25,8 @@ namespace Microsoft.AspNetCore.Routing
             ILogger<EndpointMiddleware> logger,
             RequestDelegate next,
             IOptions<RouteOptions> routeOptions
-        ) {
+        )
+        {
             _logger = logger ?? throw new ArgumentNullException(nameof(logger));
             _next = next ?? throw new ArgumentNullException(nameof(next));
             _routeOptions =
@@ -42,14 +43,16 @@ namespace Microsoft.AspNetCore.Routing
                     if (
                         endpoint.Metadata.GetMetadata<IAuthorizeData>() != null
                         && !httpContext.Items.ContainsKey(AuthorizationMiddlewareInvokedKey)
-                    ) {
+                    )
+                    {
                         ThrowMissingAuthMiddlewareException(endpoint);
                     }
 
                     if (
                         endpoint.Metadata.GetMetadata<ICorsMetadata>() != null
                         && !httpContext.Items.ContainsKey(CorsMiddlewareInvokedKey)
-                    ) {
+                    )
+                    {
                         ThrowMissingCorsMiddlewareException(endpoint);
                     }
                 }

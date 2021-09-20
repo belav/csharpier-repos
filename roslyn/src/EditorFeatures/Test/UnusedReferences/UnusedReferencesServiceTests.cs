@@ -100,7 +100,8 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.UnusedReferences
         internal async Task ApplyReferenceUpdates_NoChangeUpdates_AreNotApplied(
             UpdateAction action,
             bool treatAsUsed
-        ) {
+        )
+        {
             var noChangeUpdate = new ReferenceUpdate(
                 action,
                 PackageReference(UnusedAssemblyPath, treatAsUsed)
@@ -119,7 +120,8 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.UnusedReferences
         internal async Task ApplyReferenceUpdates_ChangeUpdates_AreApplied(
             UpdateAction action,
             bool treatAsUsed
-        ) {
+        )
+        {
             var changeUpdate = new ReferenceUpdate(
                 action,
                 PackageReference(UnusedAssemblyPath, treatAsUsed)
@@ -160,7 +162,8 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.UnusedReferences
 
         private static async Task<ImmutableArray<ReferenceUpdate>> ApplyReferenceUpdatesAsync(
             params ReferenceUpdate[] referenceUpdates
-        ) {
+        )
+        {
             var referenceCleanupService = new TestReferenceCleanupService();
 
             await UnusedReferencesRemover.ApplyReferenceUpdatesAsync(
@@ -227,7 +230,8 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.UnusedReferences
             public Task<ImmutableArray<ReferenceInfo>> GetProjectReferencesAsync(
                 string projectPath,
                 CancellationToken cancellationToken
-            ) {
+            )
+            {
                 throw new System.NotImplementedException();
             }
 
@@ -235,7 +239,8 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.UnusedReferences
                 string projectPath,
                 ReferenceUpdate referenceUpdate,
                 CancellationToken cancellationToken
-            ) {
+            )
+            {
                 _appliedUpdates.Add(referenceUpdate);
                 return Task.FromResult(true);
             }

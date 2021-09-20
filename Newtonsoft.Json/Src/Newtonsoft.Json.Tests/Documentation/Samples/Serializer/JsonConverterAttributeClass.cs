@@ -48,7 +48,8 @@ namespace Newtonsoft.Json.Tests.Documentation.Samples.Serializer
                 JsonWriter writer,
                 object value,
                 JsonSerializer serializer
-            ) {
+            )
+            {
                 User user = (User)value;
 
                 writer.WriteValue(user.UserName);
@@ -59,7 +60,8 @@ namespace Newtonsoft.Json.Tests.Documentation.Samples.Serializer
                 Type objectType,
                 object existingValue,
                 JsonSerializer serializer
-            ) {
+            )
+            {
                 User user = new User();
                 user.UserName = (string)reader.Value;
 

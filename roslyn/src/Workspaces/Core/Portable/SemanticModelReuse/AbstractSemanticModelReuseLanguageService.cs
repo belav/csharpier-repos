@@ -47,7 +47,8 @@ namespace Microsoft.CodeAnalysis.SemanticModelReuse
             SemanticModel previousSemanticModel,
             SyntaxNode currentBodyNode,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var previousSyntaxTree = previousSemanticModel.SyntaxTree;
             var currentSyntaxTree = currentBodyNode.SyntaxTree;
 
@@ -92,7 +93,8 @@ namespace Microsoft.CodeAnalysis.SemanticModelReuse
             SyntaxNode previousRoot,
             SyntaxNode currentRoot,
             SyntaxNode currentBodyNode
-        ) {
+        )
+        {
             if (currentBodyNode is TAccessorDeclarationSyntax currentAccessor)
             {
                 // in the case of an accessor, have to find the previous accessor in the previous prop/event corresponding

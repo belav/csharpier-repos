@@ -154,7 +154,8 @@ namespace System.ComponentModel.Composition.Hosting
         protected override IEnumerable<Export> GetExportsCore(
             ImportDefinition definition,
             AtomicComposition? atomicComposition
-        ) {
+        )
+        {
             ThrowIfDisposed();
 
             if (definition.Cardinality == ImportCardinality.ZeroOrMore)

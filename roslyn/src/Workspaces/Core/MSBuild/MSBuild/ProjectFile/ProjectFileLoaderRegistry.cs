@@ -21,7 +21,8 @@ namespace Microsoft.CodeAnalysis.MSBuild
         public ProjectFileLoaderRegistry(
             HostWorkspaceServices workspaceServices,
             DiagnosticReporter diagnosticReporter
-        ) {
+        )
+        {
             _workspaceServices = workspaceServices;
             _diagnosticReporter = diagnosticReporter;
             _extensionToLanguageMap = new Dictionary<string, string>(
@@ -44,7 +45,8 @@ namespace Microsoft.CodeAnalysis.MSBuild
         public bool TryGetLoaderFromProjectPath(
             string? projectFilePath,
             [NotNullWhen(true)] out IProjectFileLoader? loader
-        ) {
+        )
+        {
             return TryGetLoaderFromProjectPath(
                 projectFilePath,
                 DiagnosticReportingMode.Ignore,
@@ -56,7 +58,8 @@ namespace Microsoft.CodeAnalysis.MSBuild
             string? projectFilePath,
             DiagnosticReportingMode mode,
             [NotNullWhen(true)] out IProjectFileLoader? loader
-        ) {
+        )
+        {
             using (_dataGuard.DisposableWait())
             {
                 var extension = Path.GetExtension(projectFilePath);

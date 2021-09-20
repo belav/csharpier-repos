@@ -450,7 +450,8 @@ namespace JIT.HardwareIntrinsics.X86
             Vector128<UInt16> right,
             void* result,
             [CallerMemberName] string method = ""
-        ) {
+        )
+        {
             UInt16[] inArray1 = new UInt16[Op1ElementCount];
             UInt16[] inArray2 = new UInt16[Op2ElementCount];
             UInt16[] outArray = new UInt16[RetElementCount];
@@ -471,7 +472,8 @@ namespace JIT.HardwareIntrinsics.X86
             void* right,
             void* result,
             [CallerMemberName] string method = ""
-        ) {
+        )
+        {
             UInt16[] inArray1 = new UInt16[Op1ElementCount];
             UInt16[] inArray2 = new UInt16[Op2ElementCount];
             UInt16[] outArray = new UInt16[RetElementCount];
@@ -500,7 +502,8 @@ namespace JIT.HardwareIntrinsics.X86
             UInt16[] right,
             UInt16[] result,
             [CallerMemberName] string method = ""
-        ) {
+        )
+        {
             bool succeeded = true;
 
             if (result[0] != right[1])

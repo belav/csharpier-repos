@@ -114,7 +114,8 @@ namespace System.Net.Sockets.Tests
                     SocketType.Stream,
                     ProtocolType.Tcp
                 )
-            ) {
+            )
+            {
                 int port = server.BindToAnonymousPort(IPAddress.Loopback);
                 server.Listen(1);
 

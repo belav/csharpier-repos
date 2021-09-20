@@ -142,7 +142,8 @@ namespace System.ComponentModel.Tests
             ITypeDescriptorContext context,
             System.Globalization.CultureInfo culture,
             object value
-        ) {
+        )
+        {
             if (value is int)
             {
                 BaseClass baseClass = new BaseClass();
@@ -156,7 +157,8 @@ namespace System.ComponentModel.Tests
             System.Globalization.CultureInfo culture,
             object value,
             Type destinationType
-        ) {
+        )
+        {
             if (destinationType == typeof(int))
             {
                 BaseClass baseClass = value as BaseClass;
@@ -224,7 +226,8 @@ namespace System.ComponentModel.Tests
             ITypeDescriptorContext context,
             System.Globalization.CultureInfo culture,
             object value
-        ) {
+        )
+        {
             if (value is int)
             {
                 DerivedClass derived = new DerivedClass();
@@ -239,7 +242,8 @@ namespace System.ComponentModel.Tests
             System.Globalization.CultureInfo culture,
             object value,
             Type destinationType
-        ) {
+        )
+        {
             if (destinationType == typeof(int))
             {
                 DerivedClass derived = value as DerivedClass;
@@ -299,7 +303,8 @@ namespace System.ComponentModel.Tests
             System.Globalization.CultureInfo culture,
             object value,
             Type destinationType
-        ) {
+        )
+        {
             if (destinationType == typeof(string))
             {
                 IBase baseInterface = (IBase)value;

@@ -13,7 +13,8 @@ namespace Roslyn.Utilities
             this IGrouping<TKey, TElement> grouping,
             out TKey key,
             out IEnumerable<TElement> values
-        ) {
+        )
+        {
             key = grouping.Key;
             values = grouping;
         }

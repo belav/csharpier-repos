@@ -44,7 +44,8 @@ namespace Microsoft.Extensions.DependencyInjection
         /// </returns>
         public static IServiceCollection AddEntityFrameworkCosmos(
             this IServiceCollection serviceCollection
-        ) {
+        )
+        {
             Check.NotNull(serviceCollection, nameof(serviceCollection));
 
             var builder = new EntityFrameworkServicesBuilder(serviceCollection).TryAdd<

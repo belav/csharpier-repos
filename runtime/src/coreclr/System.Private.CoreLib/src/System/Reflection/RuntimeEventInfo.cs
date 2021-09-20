@@ -29,7 +29,8 @@ namespace System.Reflection
             RuntimeType declaredType,
             RuntimeTypeCache reflectedTypeCache,
             out bool isPrivate
-        ) {
+        )
+        {
             Debug.Assert(declaredType != null);
             Debug.Assert(reflectedTypeCache != null);
             Debug.Assert(!reflectedTypeCache.IsGlobal);

@@ -144,7 +144,8 @@ namespace System.CommandLine.Tests.Binding
         [InlineData("the-command -x=true")]
         public void Bool_does_not_parse_as_the_default_value_when_the_option_has_been_applied(
             string commandLine
-        ) {
+        )
+        {
             var option = new Option<bool>("-x");
 
             var command = new Command("the-command") { option };
@@ -285,7 +286,8 @@ namespace System.CommandLine.Tests.Binding
         [InlineData("c c c")]
         public void When_command_argument_has_arity_greater_than_one_it_captures_arguments_before_and_after_option(
             string commandLine
-        ) {
+        )
+        {
             var command = new Command("the-command")
             {
                 new Option<string>("-a"),
@@ -511,7 +513,8 @@ namespace System.CommandLine.Tests.Binding
             int minArity,
             int maxArity,
             Type argumentType
-        ) {
+        )
+        {
             var option = new Option(
                 "--items",
                 argumentType: argumentType,

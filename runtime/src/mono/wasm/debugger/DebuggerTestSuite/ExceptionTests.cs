@@ -273,7 +273,8 @@ namespace DebuggerTests
             string fn_name,
             string exception_type,
             string exception_message
-        ) {
+        )
+        {
             await SetPauseOnException("uncaught");
 
             var eval_expr = $"window.setTimeout({eval_fn}, 1);";
@@ -317,7 +318,8 @@ namespace DebuggerTests
                         pause_location["data"]?["objectId"]?.Value<string>()?.StartsWith(
                             "dotnet:object:"
                         ) == true
-                    ) {
+                    )
+                    {
                         break;
                     }
                 }

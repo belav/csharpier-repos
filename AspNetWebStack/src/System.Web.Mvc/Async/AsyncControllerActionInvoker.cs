@@ -31,7 +31,8 @@ namespace System.Web.Mvc.Async
             string actionName,
             AsyncCallback callback,
             object state
-        ) {
+        )
+        {
             if (controllerContext == null)
             {
                 throw new ArgumentNullException("controllerContext");
@@ -41,7 +42,8 @@ namespace System.Web.Mvc.Async
             if (
                 String.IsNullOrEmpty(actionName)
                 && !controllerContext.RouteData.HasDirectRouteMatch()
-            ) {
+            )
+            {
                 throw Error.ParameterCannotBeNullOrEmpty("actionName");
             }
 
@@ -59,7 +61,8 @@ namespace System.Web.Mvc.Async
                 BeginInvokeDelegate beginDelegate = delegate(
                     AsyncCallback asyncCallback,
                     object asyncState
-                ) {
+                )
+                {
                     try
                     {
                         AuthenticationContext authenticationContext = InvokeAuthenticationFilters(
@@ -227,7 +230,8 @@ namespace System.Web.Mvc.Async
         private static IAsyncResult BeginInvokeAction_ActionNotFound(
             AsyncCallback callback,
             object state
-        ) {
+        )
+        {
             BeginInvokeDelegate beginDelegate = BeginInvokeAction_MakeSynchronousAsyncResult;
 
             EndInvokeDelegate<bool> endDelegate = delegate(IAsyncResult asyncResult)
@@ -247,7 +251,8 @@ namespace System.Web.Mvc.Async
         private static IAsyncResult BeginInvokeAction_MakeSynchronousAsyncResult(
             AsyncCallback callback,
             object state
-        ) {
+        )
+        {
             SimpleAsyncResult asyncResult = new SimpleAsyncResult(state);
             asyncResult.MarkCompleted(
                 true /* completedSynchronously */
@@ -263,7 +268,8 @@ namespace System.Web.Mvc.Async
             IDictionary<string, object> parameters,
             AsyncCallback callback,
             object state
-        ) {
+        )
+        {
             AsyncActionDescriptor asyncActionDescriptor = actionDescriptor as AsyncActionDescriptor;
             if (asyncActionDescriptor != null)
             {
@@ -294,13 +300,15 @@ namespace System.Web.Mvc.Async
             IDictionary<string, object> parameters,
             AsyncCallback callback,
             object state
-        ) {
+        )
+        {
             Func<ActionExecutedContext> endContinuation = null;
 
             BeginInvokeDelegate beginDelegate = delegate(
                 AsyncCallback asyncCallback,
                 object asyncState
-            ) {
+            )
+            {
                 AsyncInvocationWithFilters invocation = new AsyncInvocationWithFilters(
                     this,
                     controllerContext,
@@ -335,7 +343,8 @@ namespace System.Web.Mvc.Async
 
             EndInvokeDelegate<ActionExecutedContext> endDelegate = delegate(
                 IAsyncResult asyncResult
-            ) {
+            )
+            {
                 return endContinuation();
             };
 
@@ -354,11 +363,13 @@ namespace System.Web.Mvc.Async
             IDictionary<string, object> parameters,
             AsyncCallback callback,
             object state
-        ) {
+        )
+        {
             BeginInvokeDelegate beginDelegate = delegate(
                 AsyncCallback asyncCallback,
                 object asyncState
-            ) {
+            )
+            {
                 return actionDescriptor.BeginExecute(
                     controllerContext,
                     parameters,
@@ -393,7 +404,8 @@ namespace System.Web.Mvc.Async
             IDictionary<string, object> parameters,
             AsyncCallback callback,
             object state
-        ) {
+        )
+        {
             // Frequently called so ensure delegate remains static and arguments do not allocate
             EndInvokeDelegate<ActionInvocation, ActionResult> endInvokeFunc = (
                 asyncResult,
@@ -429,7 +441,8 @@ namespace System.Web.Mvc.Async
 
         protected internal virtual ActionExecutedContext EndInvokeActionMethodWithFilters(
             IAsyncResult asyncResult
-        ) {
+        )
+        {
             return AsyncResultWrapper.End<ActionExecutedContext>(
                 asyncResult,
                 _invokeActionMethodWithFiltersTag
@@ -438,7 +451,8 @@ namespace System.Web.Mvc.Async
 
         protected override ControllerDescriptor GetControllerDescriptor(
             ControllerContext controllerContext
-        ) {
+        )
+        {
             // Frequently called, so ensure delegate is static
             Type controllerType = controllerContext.Controller.GetType();
             ControllerDescriptor controllerDescriptor = DescriptorCache.GetDescriptor(
@@ -462,7 +476,8 @@ namespace System.Web.Mvc.Async
                 ControllerContext controllerContext,
                 ActionDescriptor actionDescriptor,
                 IDictionary<string, object> parameters
-            ) {
+            )
+            {
                 Contract.Assert(invoker != null);
                 Contract.Assert(controllerContext != null);
                 Contract.Assert(actionDescriptor != null);
@@ -507,7 +522,8 @@ namespace System.Web.Mvc.Async
                 IDictionary<string, object> parameters,
                 AsyncCallback asyncCallback,
                 object asyncState
-            ) {
+            )
+            {
                 Contract.Assert(invoker != null);
                 Contract.Assert(controllerContext != null);
                 Contract.Assert(actionDescriptor != null);
@@ -533,7 +549,8 @@ namespace System.Web.Mvc.Async
 
             internal Func<ActionExecutedContext> InvokeActionMethodFilterAsynchronouslyRecursive(
                 int filterIndex
-            ) {
+            )
+            {
                 // Performance-sensitive
 
                 // For compatability, the following behavior must be maintained

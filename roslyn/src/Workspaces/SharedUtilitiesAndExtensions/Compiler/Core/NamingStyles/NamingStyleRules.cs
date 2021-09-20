@@ -43,7 +43,8 @@ namespace Microsoft.CodeAnalysis.Diagnostics.Analyzers.NamingStyles
             if (
                 _symbolKindsThatCanBeOverridden.Contains(symbol.Kind)
                 && DoesSymbolImplementAnotherSymbol(symbol)
-            ) {
+            )
+            {
                 return false;
             }
 
@@ -72,7 +73,8 @@ namespace Microsoft.CodeAnalysis.Diagnostics.Analyzers.NamingStyles
             if (
                 containingType.TypeKind != TypeKind.Class
                 && containingType.TypeKind != TypeKind.Struct
-            ) {
+            )
+            {
                 return false;
             }
 
@@ -108,7 +110,8 @@ namespace Microsoft.CodeAnalysis.Diagnostics.Analyzers.NamingStyles
                                 implementedInterfaceMember
                             )
                         )
-                    ) {
+                    )
+                    {
                         return true;
                     }
                 }

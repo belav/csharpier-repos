@@ -19,7 +19,8 @@ namespace System.IO
             string value,
             int offset,
             int count
-        ) {
+        )
+        {
             Debug.Assert(writer != null);
             Debug.Assert(value != null);
 

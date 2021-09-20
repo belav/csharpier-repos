@@ -17,7 +17,8 @@ namespace System.Buffers.Text
             ReadOnlySpan<byte> source,
             out DateTimeOffset value,
             out int bytesConsumed
-        ) {
+        )
+        {
             if (source.Length < 26)
             {
                 bytesConsumed = 0;
@@ -92,7 +93,8 @@ namespace System.Buffers.Text
                     offsetMinutes: offsetMinutes,
                     out value
                 )
-            ) {
+            )
+            {
                 bytesConsumed = 0;
                 value = default;
                 return false;

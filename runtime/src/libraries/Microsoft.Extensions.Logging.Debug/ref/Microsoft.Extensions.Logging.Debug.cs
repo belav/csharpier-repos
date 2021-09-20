@@ -10,7 +10,8 @@ namespace Microsoft.Extensions.Logging
     {
         public static Microsoft.Extensions.Logging.ILoggingBuilder AddDebug(
             this Microsoft.Extensions.Logging.ILoggingBuilder builder
-        ) {
+        )
+        {
             throw null;
         }
     }

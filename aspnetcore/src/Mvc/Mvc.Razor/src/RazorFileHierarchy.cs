@@ -36,7 +36,8 @@ namespace Microsoft.AspNetCore.Mvc.Razor
             var index = path.Length;
             while (
                 maxIterations-- > 0 && index > 1 && (index = path.LastIndexOf('/', index - 1)) != -1
-            ) {
+            )
+            {
                 builder.Length = index + 1;
                 builder.Append(ViewStartFileName);
 

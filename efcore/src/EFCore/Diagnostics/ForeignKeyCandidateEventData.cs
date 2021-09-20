@@ -36,12 +36,14 @@ namespace Microsoft.EntityFrameworkCore.Diagnostics
             string principalToDependentNavigationSpecification,
             IReadOnlyList<IReadOnlyPropertyBase> firstPropertyCollection,
             IReadOnlyList<IReadOnlyPropertyBase> secondPropertyCollection
-        ) : base(
-            eventDefinition,
-            messageGenerator,
-            firstPropertyCollection,
-            secondPropertyCollection
-        ) {
+        )
+            : base(
+                eventDefinition,
+                messageGenerator,
+                firstPropertyCollection,
+                secondPropertyCollection
+            )
+        {
             DependentToPrincipalNavigationSpecification =
                 dependentToPrincipalNavigationSpecification;
             PrincipalToDependentNavigationSpecification =

@@ -64,7 +64,8 @@ namespace Microsoft.CodeAnalysis.RemoveRedundantEquality
             ImmutableArray<Diagnostic> diagnostics,
             SyntaxEditor editor,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var root = await document.GetSyntaxRootAsync(cancellationToken).ConfigureAwait(false);
             var syntaxFacts = document.GetLanguageService<ISyntaxFactsService>();
             var semanticModel = await document.GetSemanticModelAsync(cancellationToken)
@@ -91,13 +92,15 @@ namespace Microsoft.CodeAnalysis.RemoveRedundantEquality
                         if (
                             diagnostic.Properties[RedundantEqualityConstants.RedundantSide]
                             == RedundantEqualityConstants.Right
-                        ) {
+                        )
+                        {
                             return WithElasticTrailingTrivia(left);
                         }
                         else if (
                             diagnostic.Properties[RedundantEqualityConstants.RedundantSide]
                             == RedundantEqualityConstants.Left
-                        ) {
+                        )
+                        {
                             return WithElasticTrailingTrivia(right);
                         }
 

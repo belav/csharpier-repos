@@ -39,7 +39,8 @@ namespace System.Xml.Tests
         public static void PositionOnElementNonEmptyNoDoctype(
             this XmlReader reader,
             string elementName
-        ) {
+        )
+        {
             while (reader.Read())
             {
                 if (

@@ -19,7 +19,8 @@ namespace Microsoft.AspNetCore.Rewrite.PatternSegments
             RewriteContext context,
             BackReferenceCollection? ruleBackReferences,
             BackReferenceCollection? conditionBackReferences
-        ) {
+        )
+        {
             var oldBuilder = context.Builder;
             // PERF
             // Because we need to be able to evaluate multiple nested patterns,

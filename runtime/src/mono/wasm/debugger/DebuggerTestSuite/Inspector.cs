@@ -185,7 +185,8 @@ namespace DebuggerTests
         public async Task OpenSessionAsync(
             Func<InspectorClient, CancellationToken, List<(string, Task<Result>)>> getInitCmds,
             TimeSpan? span = null
-        ) {
+        )
+        {
             var start = DateTime.Now;
             try
             {
@@ -272,7 +273,8 @@ namespace DebuggerTests
             static string RemainingCommandsToString(
                 string cmd_name,
                 IList<(string, Task<Result>)> cmds
-            ) {
+            )
+            {
                 var sb = new StringBuilder();
                 for (int i = 0; i < cmds.Count; i++)
                 {

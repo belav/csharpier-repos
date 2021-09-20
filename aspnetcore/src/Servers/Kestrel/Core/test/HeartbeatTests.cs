@@ -55,7 +55,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Tests
                     debugger.Object,
                     kestrelTrace
                 )
-            ) {
+            )
+            {
                 blockedHeartbeatTask = Task.Run(() => heartbeat.OnHeartbeat());
 
                 await handlerStartedTcs.Task.DefaultTimeout();
@@ -116,7 +117,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Tests
                     debugger.Object,
                     kestrelTrace.Object
                 )
-            ) {
+            )
+            {
                 blockedHeartbeatTask = Task.Run(() => heartbeat.OnHeartbeat());
 
                 await handlerStartedTcs.Task.DefaultTimeout();
@@ -153,7 +155,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Tests
                     DebuggerWrapper.Singleton,
                     kestrelTrace
                 )
-            ) {
+            )
+            {
                 heartbeat.OnHeartbeat();
             }
 

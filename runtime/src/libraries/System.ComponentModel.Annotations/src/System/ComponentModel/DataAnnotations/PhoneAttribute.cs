@@ -59,7 +59,8 @@ namespace System.ComponentModel.DataAnnotations
                         || char.IsWhiteSpace(c)
                         || AdditionalPhoneNumberCharacters.IndexOf(c) != -1
                     )
-                ) {
+                )
+                {
                     return false;
                 }
             }

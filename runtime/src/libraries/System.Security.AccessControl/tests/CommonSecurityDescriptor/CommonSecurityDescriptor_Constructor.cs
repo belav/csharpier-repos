@@ -373,7 +373,8 @@ namespace System.Security.AccessControl.Tests
             string groupStr,
             string saclStr,
             string daclStr
-        ) {
+        )
+        {
             ControlFlags controlFlags = ControlFlags.OwnerDefaulted;
             SecurityIdentifier owner = null;
             SecurityIdentifier group = null;
@@ -417,7 +418,8 @@ namespace System.Security.AccessControl.Tests
             SecurityIdentifier group,
             SystemAcl sacl,
             DiscretionaryAcl dacl
-        ) {
+        )
+        {
             CommonSecurityDescriptor commonSecurityDescriptor = null;
             bool result = false;
             try
@@ -453,7 +455,8 @@ namespace System.Security.AccessControl.Tests
                         Utils.ComputeBinaryLength(commonSecurityDescriptor, dacl != null)
                         == commonSecurityDescriptor.BinaryLength
                     )
-                ) {
+                )
+                {
                     if (dacl == null)
                     {
                         //check the contructor created an empty Dacl with correct IsContainer and isDS info
@@ -466,7 +469,8 @@ namespace System.Security.AccessControl.Tests
                                 isDS,
                                 commonSecurityDescriptor.DiscretionaryAcl
                             )
-                        ) {
+                        )
+                        {
                             result = true;
                         }
                         else

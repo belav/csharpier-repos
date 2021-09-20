@@ -34,7 +34,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Utilities
             SemanticModel semanticModel,
             OptionSet optionSet,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             if (typeName.StripRefIfNeeded().IsVar)
             {
                 return default;
@@ -51,7 +52,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Utilities
         public override bool ShouldAnalyzeVariableDeclaration(
             VariableDeclarationSyntax variableDeclaration,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var type = variableDeclaration.Type.StripRefIfNeeded();
             if (type.IsVar)
             {
@@ -67,12 +69,14 @@ namespace Microsoft.CodeAnalysis.CSharp.Utilities
             ForEachStatementSyntax forEachStatement,
             SemanticModel semanticModel,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var type = forEachStatement.Type;
             if (
                 type.IsVar
                 || (type.Kind() == SyntaxKind.RefType && ((RefTypeSyntax)type).Type.IsVar)
-            ) {
+            )
+            {
                 // If the type is already 'var', this analyze has no work to do
                 return false;
             }
@@ -108,7 +112,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Utilities
             SemanticModel semanticModel,
             OptionSet optionSet,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             Debug.Assert(
                 !typeName.StripRefIfNeeded().IsVar,
                 "'var' special case should have prevented analysis of this variable."
@@ -138,11 +143,13 @@ namespace Microsoft.CodeAnalysis.CSharp.Utilities
                     SyntaxKind.ForStatement,
                     SyntaxKind.UsingStatement
                 )
-            ) {
+            )
+            {
                 // implicitly typed variables cannot be constants.
                 if (
                     (variableDeclaration.Parent as LocalDeclarationStatementSyntax)?.IsConst == true
-                ) {
+                )
+                {
                     return false;
                 }
 
@@ -183,14 +190,16 @@ namespace Microsoft.CodeAnalysis.CSharp.Utilities
                         optionSet,
                         cancellationToken
                     )
-                ) {
+                )
+                {
                     return true;
                 }
             }
             else if (
                 typeName.Parent is ForEachStatementSyntax foreachStatement
                 && foreachStatement.Type == typeName
-            ) {
+            )
+            {
                 var foreachStatementInfo = semanticModel.GetForEachStatementInfo(foreachStatement);
                 if (foreachStatementInfo.ElementConversion.IsIdentity)
                 {
@@ -204,7 +213,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Utilities
                     semanticModel,
                     cancellationToken
                 )
-            ) {
+            )
+            {
                 return true;
             }
 
@@ -215,7 +225,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Utilities
             DeclarationExpressionSyntax declarationExpression,
             SemanticModel semanticModel,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             // First try to do the cheap check to see if we could replace this decl-expression with
             // "var".  If not, we'll fall out below to the much more expensive case where we change
             // the actual type to "var" and see if semantics stay the same.
@@ -272,7 +283,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Utilities
             DeclarationExpressionSyntax declarationExpression,
             SemanticModel semanticModel,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             // It's not always safe to convert a decl expression like "Method(out int i)" to
             // "Method(out var i)".  Changing to 'var' may cause overload resolution errors.
             // Have to see if using 'var' means not resolving to the same type as before.
@@ -287,7 +299,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Utilities
                 !(declarationExpression.Parent is ArgumentSyntax argument)
                 || !(argument.Parent is ArgumentListSyntax argumentList)
                 || !(argumentList.Parent is InvocationExpressionSyntax invocationExpression)
-            ) {
+            )
+            {
                 return false;
             }
 
@@ -343,7 +356,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Utilities
             SemanticModel semanticModel,
             OptionSet optionSet,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var expression = GetInitializerExpression(initializer);
 
             // var cannot be assigned null
@@ -381,7 +395,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Utilities
                             if (
                                 semanticModel.GetSymbolInfo(n, cancellationToken)
                                     .Symbol.IsKind(SymbolKind.Local) == true
-                            ) {
+                            )
+                            {
                                 return true;
                             }
 
@@ -391,14 +406,16 @@ namespace Microsoft.CodeAnalysis.CSharp.Utilities
                             if (
                                 n.Parent is MemberAccessExpressionSyntax memberAccessParent
                                 && memberAccessParent.Expression == n
-                            ) {
+                            )
+                            {
                                 return true;
                             }
 
                             return false;
                         }
                     )
-            ) {
+            )
+            {
                 return false;
             }
 
@@ -428,7 +445,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Utilities
             DeclarationExpressionSyntax declaration,
             SemanticModel semanticModel,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             if (declaration.Type.IsVar)
             {
                 // If the type is already 'var', this analyze has no work to do

@@ -119,7 +119,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata
         IEnumerable<IReadOnlyEntityType> FindLeastDerivedEntityTypes(
             Type type,
             Func<IReadOnlyEntityType, bool>? condition = null
-        ) {
+        )
+        {
             var derivedLevels = new Dictionary<Type, int> { [type] = 0 };
 
             var leastDerivedTypesGroups = GetEntityTypes()
@@ -178,7 +179,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata
         string ToDebugString(
             MetadataDebugStringOptions options = MetadataDebugStringOptions.ShortDefault,
             int indent = 0
-        ) {
+        )
+        {
             var builder = new StringBuilder();
             var indentString = new string(' ', indent);
 

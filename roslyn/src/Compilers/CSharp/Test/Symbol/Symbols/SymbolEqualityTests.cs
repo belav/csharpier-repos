@@ -992,7 +992,8 @@ public class A<T>
             ISymbol symbol1,
             ISymbol symbol2,
             bool expectedIncludeNullability
-        ) {
+        )
+        {
             // Symbol.Equals
             Assert.True(symbol1.Equals(symbol1));
             Assert.True(symbol2.Equals(symbol2));

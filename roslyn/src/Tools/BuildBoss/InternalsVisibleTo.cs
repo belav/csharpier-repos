@@ -15,7 +15,8 @@ namespace BuildBoss
             string publicKey,
             string loadsWithinVisualStudio,
             string workItem
-        ) {
+        )
+        {
             TargetAssembly = targetAssembly;
             PublicKey = publicKey;
             LoadsWithinVisualStudio = loadsWithinVisualStudio;

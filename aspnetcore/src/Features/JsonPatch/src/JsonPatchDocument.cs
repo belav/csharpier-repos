@@ -224,7 +224,8 @@ namespace Microsoft.AspNetCore.JsonPatch
             object objectToApplyTo,
             IObjectAdapter adapter,
             Action<JsonPatchError> logErrorAction
-        ) {
+        )
+        {
             if (objectToApplyTo == null)
             {
                 throw new ArgumentNullException(nameof(objectToApplyTo));

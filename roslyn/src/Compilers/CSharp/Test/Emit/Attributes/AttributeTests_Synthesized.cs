@@ -62,7 +62,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
         private void VerifyCompilationRelaxationsAttribute(
             CSharpAttributeData attribute,
             bool isSynthesized
-        ) {
+        )
+        {
             Assert.Equal(
                 "System.Runtime.CompilerServices.CompilationRelaxationsAttribute",
                 attribute.AttributeClass.ToTestDisplayString()
@@ -84,7 +85,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
         private void VerifyRuntimeCompatibilityAttribute(
             CSharpAttributeData attribute,
             bool isSynthesized
-        ) {
+        )
+        {
             Assert.Equal(
                 "System.Runtime.CompilerServices.RuntimeCompatibilityAttribute",
                 attribute.AttributeClass.ToTestDisplayString()
@@ -112,7 +114,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
             CSharpAttributeData attribute,
             OptimizationLevel optimizations,
             bool isSynthesized
-        ) {
+        )
+        {
             Assert.Equal(
                 "System.Diagnostics.DebuggableAttribute",
                 attribute.AttributeClass.ToTestDisplayString()
@@ -617,7 +620,8 @@ public class C
 
                     foreach (
                         var member in iter.GetMembers().Where(member => member is MethodSymbol)
-                    ) {
+                    )
+                    {
                         switch (member.Name)
                         {
                             case ".ctor":
@@ -697,7 +701,8 @@ class C
 
                     foreach (
                         var member in iter.GetMembers().Where(s => s.Kind == SymbolKind.Method)
-                    ) {
+                    )
+                    {
                         switch (member.Name)
                         {
                             case ".ctor":
@@ -828,7 +833,8 @@ class B : A
         [WorkItem(38801, "https://github.com/dotnet/roslyn/issues/38801")]
         public void BaseMethodWrapper_DoNotInheritAttributes_TypeParameter(
             OptimizationLevel optimizationLevel
-        ) {
+        )
+        {
             string source =
                 @"
 using System.Threading.Tasks;
@@ -910,7 +916,8 @@ internal class C1<T1>
         public void SynthesizedAllAttributes(
             OutputKind outputKind,
             OptimizationLevel optimizationLevel
-        ) {
+        )
+        {
             var source =
                 @"
 public class Test
@@ -953,7 +960,8 @@ public class Test
         public void AppliedCompilationRelaxations(
             OutputKind outputKind,
             OptimizationLevel optimizationLevel
-        ) {
+        )
+        {
             var source =
                 @"
 using System.Runtime.CompilerServices;
@@ -1000,7 +1008,8 @@ public class Test
         public void AppliedRuntimeCompatibility(
             OutputKind outputKind,
             OptimizationLevel optimizationLevel
-        ) {
+        )
+        {
             var source =
                 @"
 using System.Runtime.CompilerServices;
@@ -1092,7 +1101,8 @@ public class Test
         public void AppliedDebuggableOnBothAssemblyAndModule(
             OutputKind outputKind,
             OptimizationLevel optimizationLevel
-        ) {
+        )
+        {
             var source =
                 @"
 using System.Diagnostics;
@@ -1146,7 +1156,8 @@ public class Test
         public void AppliedCompilationRelaxationsAndRuntimeCompatibility(
             OutputKind outputKind,
             OptimizationLevel optimizationLevel
-        ) {
+        )
+        {
             var source =
                 @"
 using System.Runtime.CompilerServices;
@@ -1194,7 +1205,8 @@ public class Test
         public void ModuleCompilationRelaxationsDoNotSuppressAssemblyAttributes(
             OutputKind outputKind,
             OptimizationLevel optimizationLevel
-        ) {
+        )
+        {
             var source =
                 @"
 using System.Runtime.CompilerServices;
@@ -1252,7 +1264,8 @@ public class Test
         public void ModuleDebuggableDoNotSuppressAssemblyAttributes(
             OutputKind outputKind,
             OptimizationLevel optimizationLevel
-        ) {
+        )
+        {
             var source =
                 @"
 using System.Diagnostics;
@@ -1311,7 +1324,8 @@ public class Test
         public void MissingWellKnownAttributesNoDiagnosticsAndNoSynthesizedAttributes(
             OutputKind outputKind,
             OptimizationLevel optimizationLevel
-        ) {
+        )
+        {
             var options = TestOptions.CreateTestOptions(outputKind, optimizationLevel);
             var compilation = CreateEmptyCompilation("", options: options);
 
@@ -1341,7 +1355,8 @@ public class Test
         public void MissingWellKnownAttributeEnumsNoDiagnosticsAndNoSynthesizedAttributes(
             OutputKind outputKind,
             OptimizationLevel optimizationLevel
-        ) {
+        )
+        {
             var code =
                 @"
 namespace System.Diagnostics
@@ -1388,7 +1403,8 @@ public class Test
         public void InaccessibleWellKnownAttributeEnumsNoDiagnosticsAndNoSynthesizedAttributes(
             OutputKind outputKind,
             OptimizationLevel optimizationLevel
-        ) {
+        )
+        {
             var code =
                 @"
 namespace System.Diagnostics
@@ -1444,7 +1460,8 @@ public class Test
         public void WellKnownAttributeMissingCtorNoDiagnosticsAndNoSynthesizedAttributes(
             OutputKind outputKind,
             OptimizationLevel optimizationLevel
-        ) {
+        )
+        {
             var code =
                 @"
 namespace System.Diagnostics
@@ -1498,7 +1515,8 @@ public class Test
         public void WellKnownAttributeInvalidTypeNoDiagnosticsAndNoSynthesizedAttributes(
             OutputKind outputKind,
             OptimizationLevel optimizationLevel
-        ) {
+        )
+        {
             var code =
                 @"
 namespace System.Diagnostics
@@ -1549,7 +1567,8 @@ public class Test
         public void MissingWellKnownAttributeMembersProduceDiagnostics(
             OutputKind outputKind,
             OptimizationLevel optimizationLevel
-        ) {
+        )
+        {
             var source =
                 @"
 namespace System.Runtime.CompilerServices
@@ -1614,7 +1633,8 @@ public class Test
         public void AppliedCompilationRelaxationsOnModuleSupressesAssemblyAttributes(
             OutputKind outputKind,
             OptimizationLevel optimizationLevel
-        ) {
+        )
+        {
             var referenceComp = CreateCompilation(
                 @"
 using System.Runtime.CompilerServices;
@@ -1672,7 +1692,8 @@ public class Test
         public void AppliedRuntimeCompatibilityOnModuleSupressesAssemblyAttributes(
             OutputKind outputKind,
             OptimizationLevel optimizationLevel
-        ) {
+        )
+        {
             var referenceComp = CreateCompilation(
                 @"
 using System.Runtime.CompilerServices;
@@ -1946,7 +1967,8 @@ class Test
         [MemberData(nameof(OptimizationLevelTheoryData))]
         public void AsyncStateMachineAttribute_GenericStateMachineClass(
             OptimizationLevel optimizationLevel
-        ) {
+        )
+        {
             string source =
                 @"
 using System.Threading.Tasks;
@@ -2101,7 +2123,8 @@ class Test
         [MemberData(nameof(OptimizationLevelTheoryData))]
         public void IteratorStateMachineAttribute_GenericStateMachineClass(
             OptimizationLevel optimizationLevel
-        ) {
+        )
+        {
             string source =
                 @"
 using System.Collections.Generic;

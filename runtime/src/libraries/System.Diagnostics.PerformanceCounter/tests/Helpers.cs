@@ -38,7 +38,8 @@ namespace System.Diagnostics.Tests
         public static string CreateCategory(
             string name,
             PerformanceCounterCategoryType categoryType
-        ) {
+        )
+        {
             var category = name + "_Category";
 
             // If the categry already exists, delete it, then create it.

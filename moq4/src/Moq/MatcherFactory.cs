@@ -20,7 +20,8 @@ namespace Moq
         public static Pair<IMatcher[], Expression[]> CreateMatchers(
             IReadOnlyList<Expression> arguments,
             ParameterInfo[] parameters
-        ) {
+        )
+        {
             Debug.Assert(arguments != null);
             Debug.Assert(parameters != null);
             Debug.Assert(arguments.Count == parameters.Length);
@@ -41,13 +42,15 @@ namespace Moq
         public static Pair<IMatcher, Expression> CreateMatcher(
             Expression argument,
             ParameterInfo parameter
-        ) {
+        )
+        {
             if (parameter.ParameterType.IsByRef)
             {
                 if (
                     (parameter.Attributes & (ParameterAttributes.In | ParameterAttributes.Out))
                     == ParameterAttributes.Out
-                ) {
+                )
+                {
                     // `out` parameter
                     return new Pair<IMatcher, Expression>(AnyMatcher.Instance, argument);
                 }
@@ -91,7 +94,8 @@ namespace Moq
             else if (
                 parameter.IsDefined(typeof(ParamArrayAttribute), true)
                 && argument.NodeType == ExpressionType.NewArrayInit
-            ) {
+            )
+            {
                 var newArrayExpression = (NewArrayExpression)argument;
 
                 Debug.Assert(newArrayExpression.Type.IsArray);
@@ -121,7 +125,8 @@ namespace Moq
                     if (
                         !parameter.ParameterType.IsAssignableFrom(convertExpression.Operand.Type)
                         && convertExpression.Operand.IsMatch(out _)
-                    ) {
+                    )
+                    {
                         throw new ArgumentException(
                             string.Format(
                                 Resources.ArgumentMatcherWillNeverMatch,

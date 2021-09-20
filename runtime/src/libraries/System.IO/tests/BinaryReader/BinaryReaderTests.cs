@@ -270,7 +270,8 @@ namespace System.IO.Tests
                     int byteCount,
                     char[] chars,
                     int charIndex
-                ) {
+                )
+                {
                     return -10000000;
                 }
             }
@@ -304,7 +305,8 @@ namespace System.IO.Tests
             int count,
             int destinationSize,
             int expectedReadLength
-        ) {
+        )
+        {
             using (var stream = CreateStream())
             {
                 var source = new char[sourceSize];

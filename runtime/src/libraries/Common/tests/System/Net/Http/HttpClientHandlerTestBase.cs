@@ -66,14 +66,16 @@ namespace System.Net.Http.Functional.Tests
 
         protected HttpClient CreateHttpClientForRemoteServer(
             Configuration.Http.RemoteServer remoteServer
-        ) {
+        )
+        {
             return CreateHttpClientForRemoteServer(remoteServer, CreateHttpClientHandler());
         }
 
         protected HttpClient CreateHttpClientForRemoteServer(
             Configuration.Http.RemoteServer remoteServer,
             HttpMessageHandler httpClientHandler
-        ) {
+        )
+        {
             HttpMessageHandler wrappedHandler = httpClientHandler;
 
             // WinHttpHandler will downgrade to 1.1 if you set Transfer-Encoding: chunked.
@@ -111,7 +113,8 @@ namespace System.Net.Http.Functional.Tests
             protected override HttpResponseMessage Send(
                 HttpRequestMessage request,
                 CancellationToken cancellationToken
-            ) {
+            )
+            {
                 if (request.Version != _expectedVersion)
                 {
                     throw new Exception(
@@ -135,7 +138,8 @@ namespace System.Net.Http.Functional.Tests
             protected override async Task<HttpResponseMessage> SendAsync(
                 HttpRequestMessage request,
                 CancellationToken cancellationToken
-            ) {
+            )
+            {
                 if (request.Version != _expectedVersion)
                 {
                     throw new Exception(
@@ -165,7 +169,8 @@ namespace System.Net.Http.Functional.Tests
             HttpRequestMessage request,
             HttpCompletionOption completionOption = default,
             CancellationToken cancellationToken = default
-        ) {
+        )
+        {
             if (async)
             {
                 return client.SendAsync(request, completionOption, cancellationToken);
@@ -192,7 +197,8 @@ namespace System.Net.Http.Functional.Tests
             bool async,
             HttpRequestMessage request,
             CancellationToken cancellationToken = default
-        ) {
+        )
+        {
             if (async)
             {
                 return invoker.SendAsync(request, cancellationToken);
@@ -218,7 +224,8 @@ namespace System.Net.Http.Functional.Tests
             this HttpContent content,
             bool async,
             CancellationToken cancellationToken = default
-        ) {
+        )
+        {
             if (async)
             {
 #if NETCOREAPP

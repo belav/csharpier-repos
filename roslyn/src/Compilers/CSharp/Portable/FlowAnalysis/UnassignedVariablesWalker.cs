@@ -29,7 +29,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             Symbol member,
             BoundNode node,
             bool convertInsufficientExecutionStackExceptionToCancelledByStackGuardException = false
-        ) {
+        )
+        {
             var walker = new UnassignedVariablesWalker(compilation, member, node);
 
             if (convertInsufficientExecutionStackExceptionToCancelledByStackGuardException)
@@ -64,7 +65,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             SyntaxNode node,
             int slot,
             bool skipIfUseBeforeDeclaration
-        ) {
+        )
+        {
             // TODO: how to handle fields of structs?
             if (symbol.Kind != SymbolKind.Field)
             {
@@ -81,7 +83,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             ParameterSymbol parameter,
             SyntaxNode node,
             Location location
-        ) {
+        )
+        {
             _result.Add(parameter);
             base.ReportUnassignedOutParameter(parameter, node, location);
         }

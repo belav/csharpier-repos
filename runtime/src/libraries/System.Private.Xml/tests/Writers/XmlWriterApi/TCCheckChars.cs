@@ -429,7 +429,8 @@ namespace System.Xml.Tests
                         || utils.WriterType == WriterType.WrappedWriter
                         || utils.IsIndent()
                     ) && (tokenType == "Name" || tokenType == "NmToken")
-                ) {
+                )
+                {
                     CError.Compare(
                         w.WriteState,
                         WriteState.Element,

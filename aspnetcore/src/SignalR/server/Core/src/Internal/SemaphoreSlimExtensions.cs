@@ -13,7 +13,8 @@ namespace Microsoft.AspNetCore.SignalR.Internal
             this SemaphoreSlim semaphoreSlim,
             Func<TState, Task> callback,
             TState state
-        ) {
+        )
+        {
             if (semaphoreSlim.Wait(0))
             {
                 _ = RunTask(callback, semaphoreSlim, state);
@@ -27,7 +28,8 @@ namespace Microsoft.AspNetCore.SignalR.Internal
             this SemaphoreSlim semaphoreSlim,
             Func<TState, Task> callback,
             TState state
-        ) {
+        )
+        {
             await semaphoreSlim.WaitAsync();
             return RunTask(callback, semaphoreSlim, state);
         }
@@ -36,7 +38,8 @@ namespace Microsoft.AspNetCore.SignalR.Internal
             Func<TState, Task> callback,
             SemaphoreSlim semaphoreSlim,
             TState state
-        ) {
+        )
+        {
             try
             {
                 await callback(state);

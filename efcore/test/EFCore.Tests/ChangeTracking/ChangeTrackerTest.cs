@@ -213,7 +213,8 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking
         public void Property_changes_on_Deleted_entities_are_not_continually_detected(
             bool sensitive,
             bool callDetectChangesTwice
-        ) {
+        )
+        {
             Seed(sensitive);
 
             using var context = sensitive ? new LikeAZooContextSensitive() : new LikeAZooContext();
@@ -260,7 +261,8 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking
         public void Detect_foreign_key_property_change_is_logged(
             bool sensitive,
             bool callDetectChangesTwice
-        ) {
+        )
+        {
             Seed(sensitive);
 
             using var context = sensitive ? new LikeAZooContextSensitive() : new LikeAZooContext();
@@ -402,7 +404,8 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking
         public void Detect_skip_collection_change_is_logged(
             bool sensitive,
             bool callDetectChangesTwice
-        ) {
+        )
+        {
             Seed(sensitive);
 
             using var context = sensitive ? new LikeAZooContextSensitive() : new LikeAZooContext();
@@ -705,7 +708,8 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking
             DbContext context,
             IProperty property,
             bool generateTemporaryValues
-        ) {
+        )
+        {
             var cache = context.GetService<IValueGeneratorCache>();
 
             var generator = (ResettableValueGenerator)cache.GetOrAdd(
@@ -770,7 +774,8 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking
             bool sensitive,
             CascadeTiming? cascadeDeleteTiming,
             CascadeTiming? deleteOrphansTiming
-        ) {
+        )
+        {
             Seed(sensitive);
 
             using var context = sensitive ? new LikeAZooContextSensitive() : new LikeAZooContext();
@@ -901,7 +906,8 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking
             bool sensitive,
             CascadeTiming? cascadeDeleteTiming,
             CascadeTiming? deleteOrphansTiming
-        ) {
+        )
+        {
             Seed(sensitive);
 
             using var context = sensitive ? new LikeAZooContextSensitive() : new LikeAZooContext();
@@ -1443,7 +1449,8 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking
             EntityState newState,
             EntityTrackedEventArgs tracked,
             bool fromQuery
-        ) {
+        )
+        {
             Assert.Equal(newState, tracked.Entry.State);
             Assert.Equal(fromQuery, tracked.FromQuery);
             Assert.Same(context.Cats.Find(id), tracked.Entry.Entity);
@@ -1455,7 +1462,8 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking
             EntityState oldState,
             EntityState newState,
             EntityStateChangedEventArgs changed
-        ) {
+        )
+        {
             Assert.Equal(oldState, changed.OldState);
             Assert.Equal(newState, changed.NewState);
             Assert.Equal(newState, changed.Entry.State);
@@ -1470,7 +1478,8 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking
             LikeAZooContext context,
             IList<EntityTrackedEventArgs> tracked,
             IList<EntityStateChangedEventArgs> changed
-        ) {
+        )
+        {
             context.ChangeTracker.Tracked += (s, e) =>
             {
                 Assert.Same(context.ChangeTracker, s);
@@ -1787,7 +1796,8 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking
         public void DetectChanges_reparents_even_when_immediate_cascade_enabled(
             bool delayCascade,
             bool callDetectChangesTwice
-        ) {
+        )
+        {
             using var context = new EarlyLearningCenter();
 
             // Construct initial state
@@ -1833,7 +1843,8 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking
         public void Dependent_FKs_are_not_nulled_when_principal_is_detached(
             bool delayCascade,
             bool trackNewDependents
-        ) {
+        )
+        {
             using var context = new EarlyLearningCenter();
 
             var category = new OptionalCategory
@@ -2305,7 +2316,8 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking
         [InlineData(true)]
         public void Can_add_identifying_dependents_and_principal_with_post_nav_fixup_with_key_generation(
             bool callDetectChangesTwice
-        ) {
+        )
+        {
             using var context = new EarlyLearningCenter();
             var product1 = new Product();
             var details1 = new ProductDetails();
@@ -2353,7 +2365,8 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking
         [InlineData(true)]
         public void Can_add_identifying_dependents_and_principal_with_reverse_post_nav_fixup_with_key_generation(
             bool callDetectChangesTwice
-        ) {
+        )
+        {
             using var context = new EarlyLearningCenter();
             var product1 = new Product();
             var details1 = new ProductDetails();
@@ -2400,7 +2413,8 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking
             DbContext context,
             ProductDetailsTagDetails tagDetails1,
             ProductDetailsTagDetails tagDetails2
-        ) {
+        )
+        {
             Assert.Equal(8, context.ChangeTracker.Entries().Count());
 
             Assert.Equal(EntityState.Added, context.Entry(tagDetails1).State);
@@ -2514,7 +2528,8 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking
             OrderDetails orderDetails1b,
             OrderDetails orderDetails2a,
             OrderDetails orderDetails2b
-        ) {
+        )
+        {
             Assert.Equal(8, context.ChangeTracker.Entries().Count());
 
             Assert.Equal(EntityState.Added, context.Entry(orderDetails1a).State);
@@ -2623,7 +2638,8 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking
         [InlineData(true)]
         public void Explicitly_calling_DetectChanges_works_even_if_auto_DetectChanges_is_switched_off(
             bool callDetectChangesTwice
-        ) {
+        )
+        {
             using var context = new EarlyLearningCenter();
             context.ChangeTracker.AutoDetectChangesEnabled = false;
 

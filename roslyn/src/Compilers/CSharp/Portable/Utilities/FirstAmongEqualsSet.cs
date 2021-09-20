@@ -46,7 +46,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             IEnumerable<T> items,
             IEqualityComparer<T> equalityComparer,
             Func<T, T, int> canonicalComparer
-        ) {
+        )
+        {
             _canonicalComparer = canonicalComparer;
             _dictionary = new Dictionary<T, T>(equalityComparer);
             _hashSet = new HashSet<T>(equalityComparer);

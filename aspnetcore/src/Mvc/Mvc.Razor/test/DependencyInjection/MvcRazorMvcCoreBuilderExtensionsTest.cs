@@ -34,7 +34,8 @@ namespace Microsoft.AspNetCore.Mvc.Razor.Test.DependencyInjection
         [InlineData(null)]
         public void AddMvcCore_OnServiceCollectionWithIHostingEnvironmentInstanceWithInvalidApplicationName_DoesNotDiscoverApplicationParts(
             string applicationName
-        ) {
+        )
+        {
             // Arrange
             var services = new ServiceCollection();
 
@@ -134,11 +135,13 @@ namespace Microsoft.AspNetCore.Mvc.Razor.Test.DependencyInjection
             public void PopulateFeature(
                 IEnumerable<ApplicationPart> parts,
                 TagHelperFeature feature
-            ) {
+            )
+            {
                 foreach (
                     var type in parts.OfType<IApplicationPartTypeProvider>()
                         .SelectMany(tp => tp.Types)
-                ) {
+                )
+                {
                     feature.TagHelpers.Add(type);
                 }
             }

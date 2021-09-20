@@ -43,7 +43,8 @@ namespace Microsoft.AspNetCore.Razor.Language.Components
         public sealed override void WriteCSharpCodeAttributeValue(
             CodeRenderingContext context,
             CSharpCodeAttributeValueIntermediateNode node
-        ) {
+        )
+        {
             // We used to support syntaxes like <elem onsomeevent=@{ /* some C# code */ } /> but this is no longer the
             // case.
             //
@@ -62,7 +63,8 @@ namespace Microsoft.AspNetCore.Razor.Language.Components
         public override void WriteComponentTypeInferenceMethod(
             CodeRenderingContext context,
             ComponentTypeInferenceMethodIntermediateNode node
-        ) {
+        )
+        {
             if (context == null)
             {
                 throw new ArgumentNullException(nameof(context));
@@ -314,7 +316,8 @@ namespace Microsoft.AspNetCore.Razor.Language.Components
 
         protected List<TypeInferenceMethodParameter> GetTypeInferenceMethodParameters(
             ComponentTypeInferenceMethodIntermediateNode node
-        ) {
+        )
+        {
             var p = new List<TypeInferenceMethodParameter>();
 
             // Preserve order between attributes and splats
@@ -333,7 +336,8 @@ namespace Microsoft.AspNetCore.Razor.Language.Components
                         if (
                             attribute.BoundAttribute != null
                             && !attribute.BoundAttribute.IsGenericTypedProperty()
-                        ) {
+                        )
+                        {
                             typeName = "global::" + typeName;
                         }
                     }
@@ -369,7 +373,8 @@ namespace Microsoft.AspNetCore.Razor.Language.Components
                 if (
                     childContent.BoundAttribute != null
                     && !childContent.BoundAttribute.IsGenericTypedProperty()
-                ) {
+                )
+                {
                     typeName = "global::" + typeName;
                 }
                 p.Add(
@@ -438,7 +443,8 @@ namespace Microsoft.AspNetCore.Razor.Language.Components
             ComponentIntermediateNode node,
             TypeInferenceMethodParameter parameter,
             string variableName
-        ) {
+        )
+        {
             // If this captured variable corresponds to a generic type we want to cascade to
             // descendants, supply that info to descendants
             if (node.ProvidesCascadingGenericTypes != null)
@@ -471,7 +477,8 @@ namespace Microsoft.AspNetCore.Razor.Language.Components
                 string parameterName,
                 bool usedForTypeInference,
                 object source
-            ) {
+            )
+            {
                 SeqName = seqName;
                 TypeName = typeName;
                 ParameterName = parameterName;

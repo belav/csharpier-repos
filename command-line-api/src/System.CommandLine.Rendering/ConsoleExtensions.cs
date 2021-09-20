@@ -34,7 +34,8 @@ namespace System.CommandLine.Rendering
             this IConsole console,
             View view,
             OutputMode outputMode = OutputMode.Auto
-        ) {
+        )
+        {
             var renderer = new ConsoleRenderer(console, outputMode);
 
             view.Render(renderer, Region.Scrolling);

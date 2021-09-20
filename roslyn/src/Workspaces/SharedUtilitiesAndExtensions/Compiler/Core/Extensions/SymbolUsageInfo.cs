@@ -29,7 +29,8 @@ namespace Microsoft.CodeAnalysis
         public SymbolUsageInfo(
             ValueUsageInfo? valueUsageInfoOpt,
             TypeOrNamespaceUsageInfo? typeOrNamespaceUsageInfoOpt
-        ) {
+        )
+        {
             Debug.Assert(valueUsageInfoOpt.HasValue ^ typeOrNamespaceUsageInfoOpt.HasValue);
 
             ValueUsageInfoOpt = valueUsageInfoOpt;

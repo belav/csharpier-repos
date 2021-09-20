@@ -17,7 +17,8 @@ namespace System.Diagnostics.Tests
             Action action,
             int delayInMilliseconds = 10,
             int times = 10
-        ) {
+        )
+        {
             // Guards against delay growing to an exceptionally large value. No special technical significance to
             // the value chosen--just seemed like a good balancing point between allowing the delay to increase
             // incrementally and keeping tests from taking a long time to complete.

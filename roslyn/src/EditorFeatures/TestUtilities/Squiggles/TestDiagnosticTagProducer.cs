@@ -29,7 +29,8 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Squiggles
             >)> GetDiagnosticsAndErrorSpans(
             TestWorkspace workspace,
             IReadOnlyDictionary<string, ImmutableArray<DiagnosticAnalyzer>> analyzerMap = null
-        ) {
+        )
+        {
             return SquiggleUtilities.GetDiagnosticsAndErrorSpansAsync<TProvider>(
                 workspace,
                 analyzerMap
@@ -39,14 +40,16 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Squiggles
         internal static async Task<IList<ITagSpan<IErrorTag>>> GetErrorsFromUpdateSource(
             TestWorkspace workspace,
             DiagnosticsUpdatedArgs updateArgs
-        ) {
+        )
+        {
             var source = new TestDiagnosticUpdateSource(workspace);
             using (
                 var wrapper = new DiagnosticTaggerWrapper<TProvider, IErrorTag>(
                     workspace,
                     updateSource: source
                 )
-            ) {
+            )
+            {
                 var tagger = wrapper.TaggerProvider.CreateTagger<IErrorTag>(
                     workspace.Documents.First().GetTextBuffer()
                 );
@@ -68,7 +71,8 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Squiggles
         internal static DiagnosticData CreateDiagnosticData(
             TestHostDocument document,
             TextSpan span
-        ) {
+        )
+        {
             return new DiagnosticData(
                 id: "test",
                 category: "test",

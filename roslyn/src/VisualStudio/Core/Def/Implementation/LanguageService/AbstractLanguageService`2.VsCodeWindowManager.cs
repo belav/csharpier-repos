@@ -114,7 +114,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.LanguageService
                 if (
                     e.Language != _languageService.RoslynLanguageName
                     || e.Option != NavigationBarOptions.ShowNavigationBar
-                ) {
+                )
+                {
                     return;
                 }
 
@@ -144,7 +145,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.LanguageService
                 if (
                     textBuffer?.IsInLspEditorContext() == true
                     && document!.Project!.Language != "TypeScript"
-                ) {
+                )
+                {
                     // Remove the existing dropdown bar if it is ours.
                     if (IsOurDropdownBar(dropdownManager, out var _))
                     {
@@ -193,14 +195,16 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.LanguageService
                 bool IsOurDropdownBar(
                     IVsDropdownBarManager dropdownBarManager,
                     out IVsDropdownBar? existingDropdownBar
-                ) {
+                )
+                {
                     existingDropdownBar = GetDropdownBar(dropdownBarManager);
                     if (existingDropdownBar != null)
                     {
                         if (
                             _dropdownBarClient != null
                             && _dropdownBarClient == GetDropdownBarClient(existingDropdownBar)
-                        ) {
+                        )
+                        {
                             return true;
                         }
                     }

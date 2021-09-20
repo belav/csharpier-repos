@@ -278,7 +278,8 @@ namespace Microsoft.EntityFrameworkCore.Migrations.Internal
                     .Select(
                         a => "Unicorn" + a.Substring(RelationalAnnotationNames.Prefix.Length - 1)
                     )
-            ) {
+            )
+            {
                 element[annotationName] = "Value";
             }
         }

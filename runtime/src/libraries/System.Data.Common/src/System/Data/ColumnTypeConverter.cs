@@ -71,7 +71,8 @@ namespace System.Data
             CultureInfo culture,
             object? value,
             Type destinationType
-        ) {
+        )
+        {
             if (destinationType == null)
             {
                 throw new ArgumentNullException(nameof(destinationType));
@@ -122,7 +123,8 @@ namespace System.Data
             ITypeDescriptorContext context,
             CultureInfo culture,
             object value
-        ) {
+        )
+        {
             if (value != null && value.GetType() == typeof(string))
             {
                 for (int i = 0; i < s_types.Length; i++)

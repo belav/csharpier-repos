@@ -73,7 +73,8 @@ namespace Microsoft.EntityFrameworkCore.Proxies.Internal
                                 && navigation.ForeignKey.IsOwnership
                             )
                         )
-                    ) {
+                    )
+                    {
                         _loader.Load(invocation.Proxy, navigationName);
                     }
                 }

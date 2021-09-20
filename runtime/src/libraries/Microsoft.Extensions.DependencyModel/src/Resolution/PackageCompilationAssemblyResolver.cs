@@ -26,7 +26,8 @@ namespace Microsoft.Extensions.DependencyModel.Resolution
         internal PackageCompilationAssemblyResolver(
             IFileSystem fileSystem,
             string[] nugetPackageDirectories
-        ) {
+        )
+        {
             _fileSystem = fileSystem;
             _nugetPackageDirectories = nugetPackageDirectories;
         }
@@ -76,7 +77,8 @@ namespace Microsoft.Extensions.DependencyModel.Resolution
                 _nugetPackageDirectories == null
                 || _nugetPackageDirectories.Length == 0
                 || !string.Equals(library.Type, "package", StringComparison.OrdinalIgnoreCase)
-            ) {
+            )
+            {
                 return false;
             }
 
@@ -91,7 +93,8 @@ namespace Microsoft.Extensions.DependencyModel.Resolution
                         directory,
                         out packagePath
                     )
-                ) {
+                )
+                {
                     IEnumerable<string> fullPathsFromPackage;
                     if (
                         TryResolveFromPackagePath(
@@ -100,7 +103,8 @@ namespace Microsoft.Extensions.DependencyModel.Resolution
                             packagePath,
                             out fullPathsFromPackage
                         )
-                    ) {
+                    )
+                    {
                         assemblies.AddRange(fullPathsFromPackage);
                         return true;
                     }
@@ -114,7 +118,8 @@ namespace Microsoft.Extensions.DependencyModel.Resolution
             CompilationLibrary library,
             string basePath,
             out IEnumerable<string> results
-        ) {
+        )
+        {
             var paths = new List<string>();
 
             foreach (string assembly in library.Assemblies)
@@ -127,7 +132,8 @@ namespace Microsoft.Extensions.DependencyModel.Resolution
                         assembly,
                         out fullName
                     )
-                ) {
+                )
+                {
                     // if one of the files can't be found, skip this package path completely.
                     // there are package paths that don't include all of the "ref" assemblies
                     // (ex. ones created by 'dotnet store')

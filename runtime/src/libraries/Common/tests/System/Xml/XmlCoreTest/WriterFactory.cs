@@ -499,7 +499,8 @@ namespace XmlCoreTest.Common
             string outputFileName,
             bool overrideAsync = false,
             bool async = false
-        ) {
+        )
+        {
             FilePathUtil.addStream(outputFileName, new MemoryStream());
             if (ShouldEnableAsync(overrideAsync, async))
             {
@@ -516,7 +517,8 @@ namespace XmlCoreTest.Common
             XmlWriterSettings settings,
             bool overrideAsync = false,
             bool async = false
-        ) {
+        )
+        {
             FilePathUtil.addStream(outputFileName, new MemoryStream());
             if (ShouldEnableAsync(overrideAsync, async))
             {
@@ -532,7 +534,8 @@ namespace XmlCoreTest.Common
             Stream output,
             bool overrideAsync = false,
             bool async = false
-        ) {
+        )
+        {
             if (ShouldEnableAsync(overrideAsync, async))
             {
                 return XmlWriterAsync.Create(output);
@@ -548,7 +551,8 @@ namespace XmlCoreTest.Common
             XmlWriterSettings settings,
             bool overrideAsync = false,
             bool async = false
-        ) {
+        )
+        {
             if (ShouldEnableAsync(overrideAsync, async))
             {
                 return XmlWriterAsync.Create(output, settings);
@@ -563,7 +567,8 @@ namespace XmlCoreTest.Common
             TextWriter output,
             bool overrideAsync = false,
             bool async = false
-        ) {
+        )
+        {
             if (ShouldEnableAsync(overrideAsync, async))
             {
                 return XmlWriterAsync.Create(output);
@@ -579,7 +584,8 @@ namespace XmlCoreTest.Common
             XmlWriterSettings settings,
             bool overrideAsync = false,
             bool async = false
-        ) {
+        )
+        {
             if (ShouldEnableAsync(overrideAsync, async))
             {
                 return XmlWriterAsync.Create(output, settings);
@@ -594,7 +600,8 @@ namespace XmlCoreTest.Common
             StringBuilder output,
             bool overrideAsync = false,
             bool async = false
-        ) {
+        )
+        {
             if (ShouldEnableAsync(overrideAsync, async))
             {
                 return XmlWriterAsync.Create(output);
@@ -610,7 +617,8 @@ namespace XmlCoreTest.Common
             XmlWriterSettings settings,
             bool overrideAsync = false,
             bool async = false
-        ) {
+        )
+        {
             if (ShouldEnableAsync(overrideAsync, async))
             {
                 return XmlWriterAsync.Create(output, settings);
@@ -625,7 +633,8 @@ namespace XmlCoreTest.Common
             XmlWriter output,
             bool overrideAsync = false,
             bool async = false
-        ) {
+        )
+        {
             if (ShouldEnableAsync(overrideAsync, async))
             {
                 return XmlWriterAsync.Create(output);
@@ -641,7 +650,8 @@ namespace XmlCoreTest.Common
             XmlWriterSettings settings,
             bool overrideAsync = false,
             bool async = false
-        ) {
+        )
+        {
             if (ShouldEnableAsync(overrideAsync, async))
             {
                 return XmlWriterAsync.Create(output, settings);

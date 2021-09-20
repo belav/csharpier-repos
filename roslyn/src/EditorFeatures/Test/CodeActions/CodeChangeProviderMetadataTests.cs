@@ -135,7 +135,8 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.CodeActions
                 if (
                     TryGetExportName(providerExport, out var name)
                     && !predefinedNames.Contains(name)
-                ) {
+                )
+                {
                     failureMessage.AppendLine(providerPart.Definition.Type.FullName);
                 }
             }
@@ -156,7 +157,8 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.CodeActions
         public void TestAllPredefinedNamesUsedAsNameMetadata(
             Type providerType,
             Type predefinedNamesType
-        ) {
+        )
+        {
             var predefinedNames = GetPredefinedNamesFromType(predefinedNamesType);
 
             var configuration = EditorTestCompositions.EditorFeatures.GetCompositionConfiguration();
@@ -190,11 +192,13 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.CodeActions
         private static bool TryGetExportName(
             ExportDefinition export,
             [NotNullWhen(returnValue: true)] out string? name
-        ) {
+        )
+        {
             if (
                 !export.Metadata.TryGetValue("Name", out var nameObj)
                 || nameObj is string { Length: 0 }
-            ) {
+            )
+            {
                 name = null;
                 return false;
             }
@@ -216,7 +220,8 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.CodeActions
         private static IEnumerable<(ComposedPart Part, ExportDefinition Export)> FindComposedPartsWithExport(
             CompositionConfiguration configuration,
             string exportedTypeName
-        ) {
+        )
+        {
             foreach (var part in configuration.Parts)
             {
                 var export = part.Definition.ExportedTypes.FirstOrDefault(
@@ -234,7 +239,8 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.CodeActions
             CompositionConfiguration configuration,
             string exportedTypeName,
             string language
-        ) {
+        )
+        {
             return FindComposedPartsWithExport(configuration, exportedTypeName)
                 .Where(part => ((string[])part.Export.Metadata["Languages"]).Contains(language));
         }

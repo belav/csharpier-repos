@@ -95,7 +95,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             Symbol symbol,
             BindingDiagnosticBag diagnostics,
             ref bool hasError
-        ) {
+        )
+        {
             if ((object)symbol == null)
             {
                 return;
@@ -109,7 +110,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             SpecialMember member,
             BindingDiagnosticBag diagnostics,
             ref bool hasError
-        ) {
+        )
+        {
             if ((object)symbol == null)
             {
                 MemberDescriptor memberDescriptor = SpecialMembers.GetDescriptor(member);
@@ -132,7 +134,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             WellKnownMember member,
             BindingDiagnosticBag diagnostics,
             ref bool hasError
-        ) {
+        )
+        {
             if ((object)symbol == null)
             {
                 MemberDescriptor memberDescriptor = WellKnownMembers.GetDescriptor(member);

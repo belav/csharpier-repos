@@ -21,9 +21,8 @@ namespace Microsoft.CodeAnalysis.Remote
             ) => new RemoteGlobalNotificationDeliveryService(arguments);
         }
 
-        public RemoteGlobalNotificationDeliveryService(
-            in ServiceConstructionArguments arguments
-        ) : base(arguments) { }
+        public RemoteGlobalNotificationDeliveryService(in ServiceConstructionArguments arguments)
+            : base(arguments) { }
 
         /// <summary>
         /// Remote API.
@@ -48,7 +47,8 @@ namespace Microsoft.CodeAnalysis.Remote
         public ValueTask OnGlobalOperationStoppedAsync(
             ImmutableArray<string> operations,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             return RunServiceAsync(
                 cancellationToken =>
                 {

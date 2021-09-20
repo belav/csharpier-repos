@@ -34,7 +34,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
             string text,
             CSharpParseOptions options,
             params ErrorDescription[] errors
-        ) {
+        )
+        {
             var parsedTree = ParseTree(text, options);
             var parsedText = parsedTree.GetCompilationUnitRoot();
 
@@ -734,7 +735,8 @@ new partial.partial Goo();
         private void NewModifier_PartialMethod_ReturnsPredefined(
             string typeName,
             SyntaxKind keyword
-        ) {
+        )
+        {
             var tree = UsingTree("new partial " + typeName + " Goo();");
 
             N(SyntaxKind.CompilationUnit);

@@ -67,7 +67,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation
             out string pbstrEditorCaption,
             out Guid pguidCmdUI,
             out int pgrfCDW
-        ) {
+        )
+        {
             Contract.ThrowIfNull(_oleServiceProvider);
 
             ppunkDocView = IntPtr.Zero;
@@ -125,7 +126,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation
                             | (uint)BUFFERSTATEFLAGS.BSF_USER_READONLY
                         )
                     )
-            ) {
+            )
+            {
                 readOnlyStatus = READONLYSTATUS.ROSTATUS_ReadOnly;
             }
 
@@ -201,7 +203,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation
             string pszMkDocument,
             IVsHierarchy pHier,
             uint itemid
-        ) {
+        )
+        {
             Contract.ThrowIfNull(_oleServiceProvider);
             var editorAdaptersFactoryService =
                 _componentModel.GetService<IVsEditorAdaptersFactoryService>();
@@ -236,7 +239,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation
             IVsHierarchy pHier,
             IntPtr punkDocData,
             uint itemid
-        ) {
+        )
+        {
             // There is no scenario need currently to implement this method.
             throw new NotImplementedException();
         }
@@ -247,7 +251,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation
             IVsHierarchy pHier,
             IntPtr punkDocData,
             out Guid pguidCmdUI
-        ) {
+        )
+        {
             // It is not possible to get this information without initializing the designer.
             // There is no other scenario need currently to implement this method.
             throw new NotImplementedException();
@@ -257,7 +262,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation
             uint grfCreate,
             string pszMkDocument,
             string pszPhysicalView
-        ) {
+        )
+        {
             return "Form".Equals(pszPhysicalView, StringComparison.OrdinalIgnoreCase);
         }
 
@@ -275,7 +281,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation
                     (uint)VSConstants.VSITEMID.Root,
                     out var targetFrameworkMoniker
                 ) || string.IsNullOrWhiteSpace(targetFrameworkMoniker)
-            ) {
+            )
+            {
                 return LoaderName;
             }
 
@@ -305,7 +312,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation
                 || rguidLogicalView == VSConstants.LOGVIEWID.Debugging_guid
                 || rguidLogicalView == VSConstants.LOGVIEWID.Code_guid
                 || rguidLogicalView == VSConstants.LOGVIEWID.TextView_guid
-            ) {
+            )
+            {
                 return VSConstants.S_OK;
             }
             else if (rguidLogicalView == VSConstants.LOGVIEWID.Designer_guid)
@@ -338,7 +346,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation
             IVsHierarchy pHier,
             uint itemid,
             string pszMkDocument
-        ) {
+        )
+        {
             // Is this being added from a template?
             if (((__EFNFLAGS)grfEFN & __EFNFLAGS.EFN_ClonedFromTemplate) != 0)
             {
@@ -377,7 +386,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation
             uint itemid,
             string filePath,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             // A file has been created on disk which the user added from the "Add Item" dialog. We need
             // to include this in a workspace to figure out the right options it should be formatted with.
             // This requires us to place it in the correct project.

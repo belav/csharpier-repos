@@ -25,7 +25,8 @@ namespace System.Security.Cryptography.Xml.Tests
             int numTransformsPerReference,
             int numReferencesPerSignedInfo,
             bool loadXmlThrows
-        ) {
+        )
+        {
             string xml =
                 $@"<?xml version=""1.0"" encoding=""UTF-8""?>
 <a><b xmlns:ns1=""http://www.contoso.com/"">X<Signature xmlns=""http://www.w3.org/2000/09/xmldsig#""><SignedInfo><CanonicalizationMethod Algorithm=""http://www.w3.org/TR/2001/REC-xml-c14n-20010315""/><SignatureMethod Algorithm=""http://www.w3.org/2000/09/xmldsig#dsa-sha1""/>";

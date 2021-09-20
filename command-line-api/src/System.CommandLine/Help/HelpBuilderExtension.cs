@@ -10,7 +10,8 @@ namespace System.CommandLine.Help
             IOption option,
             string? descriptor = null,
             string? defaultValue = null
-        ) {
+        )
+        {
             helpBuilder.Customize(option, () => descriptor, () => defaultValue);
         }
 
@@ -18,7 +19,8 @@ namespace System.CommandLine.Help
             this HelpBuilder helpBuilder,
             ICommand command,
             string? descriptor = null
-        ) {
+        )
+        {
             helpBuilder.Customize(command, () => descriptor);
         }
 
@@ -27,7 +29,8 @@ namespace System.CommandLine.Help
             IArgument argument,
             string? descriptor = null,
             string? defaultValue = null
-        ) {
+        )
+        {
             helpBuilder.Customize(argument, () => descriptor, () => defaultValue);
         }
     }

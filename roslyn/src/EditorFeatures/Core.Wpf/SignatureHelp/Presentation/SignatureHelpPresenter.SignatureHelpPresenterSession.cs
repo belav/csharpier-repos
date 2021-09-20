@@ -55,7 +55,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.IntelliSense.SignatureHel
                 IList<SignatureHelpItem> signatureHelpItems,
                 SignatureHelpItem selectedItem,
                 int? selectedParameter
-            ) {
+            )
+            {
                 _signatureHelpItems = signatureHelpItems;
                 _selectedItem = selectedItem;
 
@@ -76,7 +77,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.IntelliSense.SignatureHel
                     if (
                         _textView is IDebuggerTextView2 debugTextView
                         && !debugTextView.IsImmediateWindow
-                    ) {
+                    )
+                    {
                         debugTextView.HACK_StartCompletionSession(_editorSessionOpt);
                     }
 
@@ -140,7 +142,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.IntelliSense.SignatureHel
             private static int GetParameterIndexForItem(
                 SignatureHelpItem item,
                 int? selectedParameter
-            ) {
+            )
+            {
                 if (selectedParameter.HasValue)
                 {
                     if (selectedParameter.Value < item.Parameters.Length)
@@ -170,7 +173,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.IntelliSense.SignatureHel
             private void OnSelectedSignatureChanged(
                 object sender,
                 SelectedSignatureChangedEventArgs eventArgs
-            ) {
+            )
+            {
                 AssertIsForeground();
 
                 if (_ignoreSelectionStatusChangedEvent)

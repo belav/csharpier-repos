@@ -3509,7 +3509,8 @@ public class D : B<char>, I<char>
                     new[] { "3<U>", "U" },
                     new[] { "4<U>", "I<U[]>" }
                 }
-            ) {
+            )
+            {
                 // NOTE: local optimized away even with optimizations turned off (since returning a ref local doesn't peverify).
                 verifier.VerifyIL(
                     "D.I<char>.M" + pair[0],

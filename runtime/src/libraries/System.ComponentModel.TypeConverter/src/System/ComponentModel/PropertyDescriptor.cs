@@ -73,7 +73,8 @@ namespace System.ComponentModel
                         if (
                             converterType != null
                             && typeof(TypeConverter).IsAssignableFrom(converterType)
-                        ) {
+                        )
+                        {
                             _converter = (TypeConverter)CreateInstance(converterType);
                         }
                     }
@@ -180,7 +181,8 @@ namespace System.ComponentModel
                     && pd.NameHashCode == NameHashCode
                     && pd.PropertyType == PropertyType
                     && pd.Name.Equals(Name)
-                ) {
+                )
+                {
                     return true;
                 }
             }
@@ -195,7 +197,8 @@ namespace System.ComponentModel
         protected object CreateInstance(
             [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicConstructors)]
                 Type type
-        ) {
+        )
+        {
             Type[] typeArgs = new Type[] { typeof(Type) };
             ConstructorInfo ctor = type.GetConstructor(typeArgs);
             if (ctor != null)
@@ -257,7 +260,8 @@ namespace System.ComponentModel
         public virtual PropertyDescriptorCollection GetChildProperties(
             object instance,
             Attribute[] filter
-        ) {
+        )
+        {
             if (instance == null)
             {
                 return TypeDescriptor.GetProperties(PropertyType, filter);
@@ -383,7 +387,8 @@ namespace System.ComponentModel
         protected Type GetTypeFromName(
             [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicConstructors)]
                 string typeName
-        ) {
+        )
+        {
             if (typeName == null || typeName.Length == 0)
             {
                 return null;
@@ -401,7 +406,8 @@ namespace System.ComponentModel
                 if (
                     (typeFromGetType == null)
                     || (ComponentType.Assembly.FullName.Equals(typeFromGetType.Assembly.FullName))
-                ) {
+                )
+                {
                     int comma = typeName.IndexOf(',');
 
                     if (comma != -1)

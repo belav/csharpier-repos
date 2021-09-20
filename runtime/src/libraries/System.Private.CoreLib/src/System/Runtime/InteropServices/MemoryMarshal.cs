@@ -293,7 +293,8 @@ namespace System.Runtime.InteropServices
                     if (
                         Unsafe.As<MemoryManager<T>>(obj)
                             .TryGetArray(out ArraySegment<T> tempArraySegment)
-                    ) {
+                    )
+                    {
                         segment = new ArraySegment<T>(
                             tempArraySegment.Array!,
                             tempArraySegment.Offset + index,
@@ -399,7 +400,8 @@ namespace System.Runtime.InteropServices
             [NotNullWhen(true)] out string? text,
             out int start,
             out int length
-        ) {
+        )
+        {
             if (memory.GetObjectStartLength(out int offset, out int count) is string s)
             {
                 Debug.Assert(offset >= 0);

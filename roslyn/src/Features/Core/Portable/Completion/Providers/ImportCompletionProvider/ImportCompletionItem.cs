@@ -32,7 +32,8 @@ namespace Microsoft.CodeAnalysis.Completion.Providers
             CompletionItemFlags flags,
             (string methodSymbolKey, string receiverTypeSymbolKey, int overloadCount)? extensionMethodData,
             bool includedInTargetTypeCompletion = false
-        ) {
+        )
+        {
             ImmutableDictionary<string, string>? properties = null;
 
             if (extensionMethodData != null || arity > 0)
@@ -96,7 +97,8 @@ namespace Microsoft.CodeAnalysis.Completion.Providers
             CompletionItem attributeItem,
             string attributeNameWithoutSuffix,
             CompletionItemFlags flags
-        ) {
+        )
+        {
             Debug.Assert(!attributeItem.Properties.ContainsKey(AttributeFullName));
 
             // Remember the full type name so we can get the symbol when description is displayed.
@@ -139,7 +141,8 @@ namespace Microsoft.CodeAnalysis.Completion.Providers
             Document document,
             CompletionItem item,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var compilation = (
                 await document.Project.GetRequiredCompilationAsync(cancellationToken)
                     .ConfigureAwait(false)
@@ -186,7 +189,8 @@ namespace Microsoft.CodeAnalysis.Completion.Providers
         private static (ISymbol? symbol, int overloadCount) GetSymbolAndOverloadCount(
             CompletionItem item,
             Compilation compilation
-        ) {
+        )
+        {
             // If we have SymbolKey data (i.e. this is an extension method item), use it to recover symbol
             if (item.Properties.TryGetValue(MethodKey, out var methodSymbolKey))
             {
@@ -208,7 +212,8 @@ namespace Microsoft.CodeAnalysis.Completion.Providers
                         if (
                             SymbolKey.ResolveString(receiverTypeKey, compilation).GetAnySymbol()
                             is ITypeSymbol receiverTypeSymbol
-                        ) {
+                        )
+                        {
                             return (
                                 methodSymbol.ReduceExtensionMethod(receiverTypeSymbol)
                                     ?? methodSymbol,

@@ -38,7 +38,8 @@ namespace Microsoft.AspNetCore.ApiAuthorization.IdentityServer
         public override Task<bool> IsPostLogoutRedirectUriValidAsync(
             string requestedUri,
             Client client
-        ) {
+        )
+        {
             if (IsLocalSPA(client))
             {
                 return ValidateRelativeUris(requestedUri, client.PostLogoutRedirectUris);

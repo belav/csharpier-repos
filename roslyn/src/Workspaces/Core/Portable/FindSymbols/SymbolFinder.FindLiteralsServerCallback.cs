@@ -19,7 +19,8 @@ namespace Microsoft.CodeAnalysis.FindSymbols
             public FindLiteralsServerCallback(
                 Solution solution,
                 IStreamingFindLiteralReferencesProgress progress
-            ) {
+            )
+            {
                 _solution = solution;
                 _progress = progress;
             }
@@ -32,7 +33,8 @@ namespace Microsoft.CodeAnalysis.FindSymbols
             public async ValueTask OnLiteralReferenceFoundAsync(
                 DocumentId documentId,
                 TextSpan span
-            ) {
+            )
+            {
                 var document = _solution.GetDocument(documentId);
                 await _progress.OnReferenceFoundAsync(document, span).ConfigureAwait(false);
             }

@@ -121,7 +121,8 @@ namespace Templates.Test
         private static async Task AssertCompressionFormat(
             AspNetProcess aspNetProcess,
             string expectedEncoding
-        ) {
+        )
+        {
             var response = await aspNetProcess.SendRequest(
                 () =>
                 {
@@ -311,7 +312,8 @@ namespace Templates.Test
         private async Task<Project> CreateBuildPublishIndividualAuthProject(
             BrowserKind browserKind,
             bool useLocalDb
-        ) {
+        )
+        {
             // Additional arguments are needed. See: https://github.com/dotnet/aspnetcore/issues/24278
             Environment.SetEnvironmentVariable("EnableDefaultScopedCssItems", "true");
 
@@ -394,7 +396,8 @@ namespace Templates.Test
         private async Task BlazorWasmHostedTemplate_IndividualAuth_Works(
             BrowserKind browserKind,
             bool useLocalDb
-        ) {
+        )
+        {
             var project = await CreateBuildPublishIndividualAuthProject(
                 browserKind,
                 useLocalDb: useLocalDb
@@ -613,7 +616,8 @@ namespace Templates.Test
             Project project,
             BrowserKind browserKind,
             bool usesAuth = false
-        ) {
+        )
+        {
             using var aspNetProcess = project.StartBuiltProjectAsync();
 
             Assert.False(
@@ -648,7 +652,8 @@ namespace Templates.Test
             IPage page,
             bool usesAuth = false,
             bool skipFetchData = false
-        ) {
+        )
+        {
             await page.WaitForSelectorAsync("ul");
 
             // <title> element gets project ID injected into it during template execution
@@ -812,7 +817,8 @@ namespace Templates.Test
                         if (
                             line.Trim().Contains("https://", StringComparison.Ordinal)
                             || line.Trim().Contains("http://", StringComparison.Ordinal)
-                        ) {
+                        )
+                        {
                             return line.Trim();
                         }
                     }

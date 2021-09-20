@@ -48,7 +48,8 @@ namespace Microsoft.EntityFrameworkCore.Scaffolding.Internal
             ICSharpHelper cSharpHelper,
             INamedConnectionStringResolver connectionStringResolver,
             IOperationReporter reporter
-        ) {
+        )
+        {
             Check.NotNull(databaseModelFactory, nameof(databaseModelFactory));
             Check.NotNull(scaffoldingModelFactory, nameof(scaffoldingModelFactory));
             Check.NotNull(modelCodeGeneratorSelector, nameof(modelCodeGeneratorSelector));
@@ -85,7 +86,8 @@ namespace Microsoft.EntityFrameworkCore.Scaffolding.Internal
             DatabaseModelFactoryOptions databaseOptions,
             ModelReverseEngineerOptions modelOptions,
             ModelCodeGenerationOptions codeOptions
-        ) {
+        )
+        {
             Check.NotEmpty(connectionString, nameof(connectionString));
             Check.NotNull(databaseOptions, nameof(databaseOptions));
             Check.NotNull(modelOptions, nameof(modelOptions));
@@ -97,7 +99,8 @@ namespace Microsoft.EntityFrameworkCore.Scaffolding.Internal
                     !_cSharpUtilities.IsValidIdentifier(codeOptions.ContextName)
                     || _cSharpUtilities.IsCSharpKeyword(codeOptions.ContextName)
                 )
-            ) {
+            )
+            {
                 throw new ArgumentException(
                     DesignStrings.ContextClassNotValidCSharpIdentifier(codeOptions.ContextName)
                 );
@@ -164,7 +167,8 @@ namespace Microsoft.EntityFrameworkCore.Scaffolding.Internal
             ScaffoldedModel scaffoldedModel,
             string outputDir,
             bool overwriteFiles
-        ) {
+        )
+        {
             CheckOutputFiles(scaffoldedModel, outputDir, overwriteFiles);
 
             Directory.CreateDirectory(outputDir);
@@ -190,7 +194,8 @@ namespace Microsoft.EntityFrameworkCore.Scaffolding.Internal
             ScaffoldedModel scaffoldedModel,
             string outputDir,
             bool overwriteFiles
-        ) {
+        )
+        {
             var paths = scaffoldedModel.AdditionalFiles.Select(f => f.Path).ToList();
             paths.Insert(0, scaffoldedModel.ContextFile!.Path);
 

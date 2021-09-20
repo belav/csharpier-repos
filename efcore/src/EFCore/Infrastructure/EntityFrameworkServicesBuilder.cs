@@ -352,7 +352,8 @@ namespace Microsoft.EntityFrameworkCore.Infrastructure
         /// <returns> This builder, such that further calls can be chained. </returns>
         public virtual EntityFrameworkServicesBuilder TryAddProviderSpecificServices(
             Action<ServiceCollectionMap> serviceMap
-        ) {
+        )
+        {
             Check.NotNull(serviceMap, nameof(serviceMap));
 
             serviceMap(ServiceCollectionMap);
@@ -516,7 +517,8 @@ namespace Microsoft.EntityFrameworkCore.Infrastructure
         public virtual EntityFrameworkServicesBuilder TryAdd(
             Type serviceType,
             Type implementationType
-        ) {
+        )
+        {
             Check.NotNull(serviceType, nameof(serviceType));
             Check.NotNull(implementationType, nameof(implementationType));
 
@@ -563,8 +565,9 @@ namespace Microsoft.EntityFrameworkCore.Infrastructure
         /// <returns> This builder, such that further calls can be chained. </returns>
         public virtual EntityFrameworkServicesBuilder TryAdd<TService, TImplementation>(
             Func<IServiceProvider, TImplementation> factory
-        ) where TService : class
-          where TImplementation : class, TService =>
+        )
+            where TService : class
+            where TImplementation : class, TService =>
             TryAdd(typeof(TService), typeof(TImplementation), factory);
 
         /// <summary>
@@ -579,7 +582,8 @@ namespace Microsoft.EntityFrameworkCore.Infrastructure
             Type serviceType,
             Type implementationType,
             Func<IServiceProvider, object> factory
-        ) {
+        )
+        {
             Check.NotNull(serviceType, nameof(serviceType));
             Check.NotNull(implementationType, nameof(implementationType));
             Check.NotNull(factory, nameof(factory));
@@ -630,7 +634,8 @@ namespace Microsoft.EntityFrameworkCore.Infrastructure
         public virtual EntityFrameworkServicesBuilder TryAdd(
             Type serviceType,
             object implementation
-        ) {
+        )
+        {
             Check.NotNull(serviceType, nameof(serviceType));
             Check.NotNull(implementation, nameof(implementation));
 

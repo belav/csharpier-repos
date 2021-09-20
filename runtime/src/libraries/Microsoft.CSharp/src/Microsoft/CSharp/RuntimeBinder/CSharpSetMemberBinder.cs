@@ -99,7 +99,8 @@ namespace Microsoft.CSharp.RuntimeBinder
                 || IsChecked != otherBinder.IsChecked
                 || IsCompoundAssignment != otherBinder.IsCompoundAssignment
                 || _argumentInfo.Length != otherBinder._argumentInfo.Length
-            ) {
+            )
+            {
                 return false;
             }
 
@@ -122,7 +123,8 @@ namespace Microsoft.CSharp.RuntimeBinder
             DynamicMetaObject target,
             DynamicMetaObject value,
             DynamicMetaObject errorSuggestion
-        ) {
+        )
+        {
 #if ENABLECOMBINDER
             DynamicMetaObject com;
             if (ComInterop.ComBinder.TryBindSetMember(this, target, value, out com))

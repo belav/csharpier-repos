@@ -130,7 +130,8 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
             bool acceptChanges = false,
             bool modifyProperties = true,
             EntityState? forceStateWhenUnknownKey = null
-        ) {
+        )
+        {
             var oldState = _stateData.EntityState;
             var adding = PrepareForAdd(entityState);
 
@@ -161,7 +162,8 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
             bool modifyProperties = true,
             EntityState? forceStateWhenUnknownKey = null,
             CancellationToken cancellationToken = default
-        ) {
+        )
+        {
             var oldState = _stateData.EntityState;
             var adding = PrepareForAdd(entityState);
 
@@ -190,7 +192,8 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
             EntityState entityState,
             bool adding,
             EntityState? forceStateWhenUnknownKey
-        ) {
+        )
+        {
             var keyUnknown = IsKeyUnknown;
 
             if (adding || (oldState == EntityState.Detached && keyUnknown))
@@ -203,7 +206,8 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
                     && principalEntry != null
                     && principalEntry.EntityState != EntityState.Detached
                     && principalEntry.EntityState != EntityState.Deleted
-                ) {
+                )
+                {
                     entityState =
                         principalEntry.EntityState == EntityState.Added
                             ? EntityState.Added
@@ -242,7 +246,8 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
             EntityState newState,
             bool acceptChanges,
             bool modifyProperties
-        ) {
+        )
+        {
             var entityType = EntityType;
 
             // Prevent temp values from becoming permanent values
@@ -250,7 +255,8 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
                 oldState == EntityState.Added
                 && newState != EntityState.Added
                 && newState != EntityState.Detached
-            ) {
+            )
+            {
                 // ReSharper disable once LoopCanBeConvertedToQuery
                 foreach (var property in entityType.GetProperties())
                 {
@@ -340,7 +346,8 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
             if (
                 (newState == EntityState.Deleted || newState == EntityState.Detached)
                 && HasConceptualNull
-            ) {
+            )
+            {
                 _stateData.FlagAllProperties(
                     EntityType.PropertyCount(),
                     PropertyFlag.Null,
@@ -354,7 +361,8 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
                     newState == EntityState.Added
                     || newState == EntityState.Deleted
                     || newState == EntityState.Modified
-                ) {
+                )
+                {
                     StateManager.ChangedCount++;
                 }
             }
@@ -373,7 +381,8 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
             if (
                 (newState == EntityState.Deleted || newState == EntityState.Detached)
                 && StateManager.CascadeDeleteTiming == CascadeTiming.Immediate
-            ) {
+            )
+            {
                 StateManager.CascadeDelete(this, force: false);
             }
         }
@@ -472,7 +481,8 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
             bool isModified = true,
             bool isConceptualNull = false,
             bool acceptChanges = false
-        ) {
+        )
+        {
             var propertyIndex = property.GetIndex();
             _stateData.FlagProperty(propertyIndex, PropertyFlag.Unknown, false);
 
@@ -482,7 +492,8 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
                 currentState == EntityState.Added
                 || currentState == EntityState.Detached
                 || !changeState
-            ) {
+            )
+            {
                 var index = property.GetOriginalValueIndex();
                 if (index != -1 && !IsConceptualNull(property))
                 {
@@ -502,7 +513,8 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
                 && !StateManager.SavingChanges
                 && property.IsKey()
                 && property.GetAfterSaveBehavior() == PropertySaveBehavior.Throw
-            ) {
+            )
+            {
                 throw new InvalidOperationException(
                     CoreStrings.KeyReadOnly(property.Name, EntityType.DisplayName())
                 );
@@ -519,7 +531,8 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
                     !isModified
                     && currentState != EntityState.Detached
                     && property.GetOriginalValueIndex() != -1
-                ) {
+                )
+                {
                     if (acceptChanges)
                     {
                         SetOriginalValue(property, GetCurrentValue(property));
@@ -539,7 +552,8 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
             if (
                 isModified
                 && (currentState == EntityState.Unchanged || currentState == EntityState.Detached)
-            ) {
+            )
+            {
                 if (changeState)
                 {
                     StateManager.StateChanging(this, EntityState.Modified);
@@ -565,7 +579,8 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
                 && changeState
                 && !isModified
                 && !_stateData.AnyPropertiesFlagged(PropertyFlag.Modified)
-            ) {
+            )
+            {
                 StateManager.StateChanging(this, EntityState.Unchanged);
                 _stateData.EntityState = EntityState.Unchanged;
                 StateManager.ChangedCount--;
@@ -602,7 +617,8 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
         private CurrentValueType GetValueType(
             IProperty property,
             Func<object?, object?, bool>? equals = null
-        ) {
+        )
+        {
             var tempIndex = property.GetStoreGeneratedIndex();
             if (tempIndex == -1)
             {
@@ -629,7 +645,8 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
             if (
                 _storeGeneratedValues.TryGetValue(tempIndex, out value)
                 && !equals(value, defaultValue)
-            ) {
+            )
+            {
                 return CurrentValueType.StoreGenerated;
             }
 
@@ -651,7 +668,8 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
             IProperty property,
             object? value,
             bool setModified = true
-        ) {
+        )
+        {
             if (property.GetStoreGeneratedIndex() == -1)
             {
                 throw new InvalidOperationException(
@@ -852,7 +870,8 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
             IPropertyBase propertyBase,
             object? value,
             bool forMaterialization
-        ) {
+        )
+        {
             Check.DebugAssert(!propertyBase.IsShadowProperty(), "propertyBase is shadow property");
 
             var concretePropertyBase = (IRuntimePropertyBase)propertyBase;
@@ -873,7 +892,8 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
         public virtual object GetOrCreateCollection(
             INavigationBase navigationBase,
             bool forMaterialization
-        ) {
+        )
+        {
             Check.DebugAssert(!navigationBase.IsShadowProperty(), "navigation is shadow property");
 
             return navigationBase.GetCollectionAccessor()!.GetOrCreate(Entity, forMaterialization);
@@ -888,7 +908,8 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
         public virtual bool CollectionContains(
             INavigationBase navigationBase,
             InternalEntityEntry value
-        ) {
+        )
+        {
             Check.DebugAssert(!navigationBase.IsShadowProperty(), "navigation is shadow property");
 
             return navigationBase.GetCollectionAccessor()!.Contains(Entity, value.Entity);
@@ -904,7 +925,8 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
             INavigationBase navigationBase,
             InternalEntityEntry value,
             bool forMaterialization
-        ) {
+        )
+        {
             Check.DebugAssert(!navigationBase.IsShadowProperty(), "navigation is shadow property");
 
             return navigationBase.GetCollectionAccessor()!.Add(
@@ -923,7 +945,8 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
         public virtual bool RemoveFromCollection(
             INavigationBase navigationBase,
             InternalEntityEntry value
-        ) {
+        )
+        {
             Check.DebugAssert(!navigationBase.IsShadowProperty(), "navigation is shadow property");
 
             return navigationBase.GetCollectionAccessor()!.Remove(Entity, value.Entity);
@@ -979,7 +1002,8 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
             IPropertyBase propertyBase,
             object? value,
             int index = -1
-        ) {
+        )
+        {
             EnsureOriginalValues();
 
             var property = (IProperty)propertyBase;
@@ -991,13 +1015,15 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
             if (
                 EntityState == EntityState.Unchanged
                 || (EntityState == EntityState.Modified && !IsModified(property))
-            ) {
+            )
+            {
                 var currentValue = this[propertyBase];
                 var propertyIndex = property.GetIndex();
                 if (
                     !ValuesEqualFunc(property)(currentValue, value)
                     && !_stateData.IsPropertyFlagged(propertyIndex, PropertyFlag.Unknown)
-                ) {
+                )
+                {
                     SetPropertyModified(property);
                 }
             }
@@ -1100,7 +1126,8 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
         public virtual void RemoveFromCollectionSnapshot(
             IPropertyBase propertyBase,
             object removedEntity
-        ) {
+        )
+        {
             EnsureRelationshipSnapshot();
             _relationshipsSnapshot.RemoveFromCollection(propertyBase, removedEntity);
         }
@@ -1126,7 +1153,8 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
         public virtual void AddRangeToCollectionSnapshot(
             IPropertyBase propertyBase,
             IEnumerable<object> addedEntities
-        ) {
+        )
+        {
             EnsureRelationshipSnapshot();
             _relationshipsSnapshot.AddRangeToCollection(propertyBase, addedEntities);
         }
@@ -1155,7 +1183,8 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
                             storeGeneratedIndex,
                             out var generatedValue
                         ) && !equals(generatedValue, defaultValue)
-                    ) {
+                    )
+                    {
                         return generatedValue;
                     }
 
@@ -1165,7 +1194,8 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
                         if (
                             _temporaryValues.TryGetValue(storeGeneratedIndex, out generatedValue)
                             && !equals(generatedValue, defaultValue)
-                        ) {
+                        )
+                        {
                             return generatedValue;
                         }
                     }
@@ -1207,7 +1237,8 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
             bool setModified,
             bool isCascadeDelete,
             CurrentValueType valueType
-        ) {
+        )
+        {
             var currentValue = ReadPropertyValue(propertyBase);
 
             var asProperty = propertyBase as IProperty;
@@ -1240,7 +1271,8 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
                         || valueType != currentValueType
                     )
                 )
-            ) {
+            )
+            {
                 var writeValue = true;
 
                 if (
@@ -1257,13 +1289,15 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
                                     ) && fk.DeclaringEntityType.IsAssignableFrom(EntityType)
                             )
                     )
-                ) {
+                )
+                {
                     if (value == null)
                     {
                         if (
                             EntityState != EntityState.Deleted
                             && EntityState != EntityState.Detached
-                        ) {
+                        )
+                        {
                             _stateData.FlagProperty(
                                 propertyIndex,
                                 PropertyFlag.Null,
@@ -1283,7 +1317,8 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
                             if (
                                 !isCascadeDelete
                                 && StateManager.DeleteOrphansTiming == CascadeTiming.Immediate
-                            ) {
+                            )
+                            {
                                 HandleConceptualNulls(
                                     StateManager.SensitiveLoggingEnabled,
                                     force: false,
@@ -1362,7 +1397,8 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
                                     storeGeneratedIndex,
                                     out var generatedValue
                                 ) && !equals(generatedValue, defaultValue)
-                            ) {
+                            )
+                            {
                                 _storeGeneratedValues.SetValue(
                                     asProperty,
                                     defaultValue,
@@ -1426,7 +1462,8 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
                     if (
                         storeGeneratedIndex != -1
                         && _storeGeneratedValues.TryGetValue(storeGeneratedIndex, out var value)
-                    ) {
+                    )
+                    {
                         var equals = ValuesEqualFunc(property);
                         var defaultValue = property.ClrType.GetDefaultValue();
                         if (!equals(value, defaultValue))
@@ -1477,7 +1514,8 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
                         property.GetBeforeSaveBehavior() == PropertySaveBehavior.Throw
                         && !HasTemporaryValue(property)
                         && !HasDefaultValue(property)
-                    ) {
+                    )
+                    {
                         throw new InvalidOperationException(
                             CoreStrings.PropertyReadOnlyBeforeSave(
                                 property.Name,
@@ -1490,7 +1528,8 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
                         property.IsKey()
                         && property.IsForeignKey()
                         && _stateData.IsPropertyFlagged(property.GetIndex(), PropertyFlag.Unknown)
-                    ) {
+                    )
+                    {
                         throw new InvalidOperationException(
                             CoreStrings.UnknownKeyValue(entityType.DisplayName(), property.Name)
                         );
@@ -1504,7 +1543,8 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
                     if (
                         property.GetAfterSaveBehavior() == PropertySaveBehavior.Throw
                         && IsModified(property)
-                    ) {
+                    )
+                    {
                         throw new InvalidOperationException(
                             CoreStrings.PropertyReadOnlyAfterSave(
                                 property.Name,
@@ -1530,7 +1570,8 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
             bool sensitiveLoggingEnabled,
             bool force,
             bool isCascadeDelete
-        ) {
+        )
+        {
             var fks = new List<IForeignKey>();
             foreach (var foreignKey in EntityType.GetForeignKeys())
             {
@@ -1544,7 +1585,8 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
                             properties.Any(p => p.IsNullable)
                             && foreignKey.DeleteBehavior != DeleteBehavior.Cascade
                             && foreignKey.DeleteBehavior != DeleteBehavior.ClientCascade
-                        ) {
+                        )
+                        {
                             foreach (var toNull in properties)
                             {
                                 if (toNull.IsNullable)
@@ -1581,7 +1623,8 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
                     force
                     || (!isCascadeDelete && StateManager.DeleteOrphansTiming != CascadeTiming.Never)
                 )
-            ) {
+            )
+            {
                 var cascadeState =
                     EntityState == EntityState.Added ? EntityState.Detached : EntityState.Deleted;
 
@@ -1720,14 +1763,16 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
             if (
                 _storeGeneratedValues.TryGetValue(storeGeneratedIndex, out var generatedValue)
                 && !equals(defaultValue, generatedValue)
-            ) {
+            )
+            {
                 return false;
             }
 
             if (
                 _temporaryValues.TryGetValue(storeGeneratedIndex, out generatedValue)
                 && !equals(defaultValue, generatedValue)
-            ) {
+            )
+            {
                 return false;
             }
 
@@ -1757,7 +1802,8 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
                     if (
                         (HasTemporaryValue(keyProperty) || HasDefaultValue(keyProperty))
                         && (keyGenerated || keyProperty.IsForeignKey())
-                    ) {
+                    )
+                    {
                         return (true, false);
                     }
 
@@ -1814,10 +1860,12 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
         public virtual void HandleINotifyPropertyChanging(
             object? sender,
             PropertyChangingEventArgs eventArgs
-        ) {
+        )
+        {
             foreach (
                 var propertyBase in GetNotificationProperties(EntityType, eventArgs.PropertyName)
-            ) {
+            )
+            {
                 StateManager.InternalEntityEntryNotifier.PropertyChanging(this, propertyBase);
             }
         }
@@ -1831,10 +1879,12 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
         public virtual void HandleINotifyPropertyChanged(
             object? sender,
             PropertyChangedEventArgs eventArgs
-        ) {
+        )
+        {
             foreach (
                 var propertyBase in GetNotificationProperties(EntityType, eventArgs.PropertyName)
-            ) {
+            )
+            {
                 StateManager.InternalEntityEntryNotifier.PropertyChanged(
                     this,
                     propertyBase,
@@ -1846,13 +1896,15 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
         private static IEnumerable<IPropertyBase> GetNotificationProperties(
             IEntityType entityType,
             string? propertyName
-        ) {
+        )
+        {
             if (string.IsNullOrEmpty(propertyName))
             {
                 foreach (
                     var property in entityType.GetProperties()
                         .Where(p => p.GetAfterSaveBehavior() == PropertySaveBehavior.Save)
-                ) {
+                )
+                {
                     yield return property;
                 }
 
@@ -1890,7 +1942,8 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
         public virtual void HandleINotifyCollectionChanged(
             object? sender,
             NotifyCollectionChangedEventArgs eventArgs
-        ) {
+        )
+        {
             var navigation = EntityType.GetNavigations()
                 .Concat<INavigationBase>(EntityType.GetSkipNavigations())
                 .FirstOrDefault(n => n.IsCollection && this[n] == sender);
@@ -1957,7 +2010,8 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
             foreach (
                 var lazyLoaderProperty in EntityType.GetServiceProperties()
                     .Where(p => p.ClrType == typeof(ILazyLoader))
-            ) {
+            )
+            {
                 ((ILazyLoader?)this[lazyLoaderProperty])?.SetLoaded(
                     Entity,
                     navigation.Name,

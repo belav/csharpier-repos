@@ -46,7 +46,8 @@ namespace System.Formats.Asn1.Tests.Reader
             bool isConstructed,
             int tagValue,
             string inputHex
-        ) {
+        )
+        {
             byte[] inputBytes = inputHex.HexToByteArray();
 
             bool parsed = Asn1Tag.TryDecode(inputBytes, out Asn1Tag tag, out int bytesRead);
@@ -151,7 +152,8 @@ namespace System.Formats.Asn1.Tests.Reader
             bool isConstructed,
             int tagValue,
             string inputHex
-        ) {
+        )
+        {
             byte[] inputBytes = inputHex.HexToByteArray();
             Array.Resize(ref inputBytes, inputBytes.Length + 3);
 

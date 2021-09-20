@@ -550,7 +550,8 @@ namespace System.Runtime.Intrinsics
             byte e13,
             byte e14,
             byte e15
-        ) {
+        )
+        {
             if (Sse2.IsSupported || AdvSimd.IsSupported)
             {
                 return Create(e0, e1, e2, e3, e4, e5, e6, e7, e8, e9, e10, e11, e12, e13, e14, e15);
@@ -592,7 +593,8 @@ namespace System.Runtime.Intrinsics
                 byte e13,
                 byte e14,
                 byte e15
-            ) {
+            )
+            {
                 byte* pResult =
                     stackalloc byte[16] {
                         e0,
@@ -661,7 +663,8 @@ namespace System.Runtime.Intrinsics
             short e5,
             short e6,
             short e7
-        ) {
+        )
+        {
             if (Sse2.IsSupported || AdvSimd.IsSupported)
             {
                 return Create(e0, e1, e2, e3, e4, e5, e6, e7);
@@ -678,7 +681,8 @@ namespace System.Runtime.Intrinsics
                 short e5,
                 short e6,
                 short e7
-            ) {
+            )
+            {
                 short* pResult = stackalloc short[8] { e0, e1, e2, e3, e4, e5, e6, e7, };
 
                 return Unsafe.AsRef<Vector128<short>>(pResult);
@@ -771,7 +775,8 @@ namespace System.Runtime.Intrinsics
             sbyte e13,
             sbyte e14,
             sbyte e15
-        ) {
+        )
+        {
             if (Sse2.IsSupported || AdvSimd.IsSupported)
             {
                 return Create(e0, e1, e2, e3, e4, e5, e6, e7, e8, e9, e10, e11, e12, e13, e14, e15);
@@ -813,7 +818,8 @@ namespace System.Runtime.Intrinsics
                 sbyte e13,
                 sbyte e14,
                 sbyte e15
-            ) {
+            )
+            {
                 sbyte* pResult =
                     stackalloc sbyte[16] {
                         e0,
@@ -885,7 +891,8 @@ namespace System.Runtime.Intrinsics
             ushort e5,
             ushort e6,
             ushort e7
-        ) {
+        )
+        {
             if (Sse2.IsSupported || AdvSimd.IsSupported)
             {
                 return Create(e0, e1, e2, e3, e4, e5, e6, e7);
@@ -902,7 +909,8 @@ namespace System.Runtime.Intrinsics
                 ushort e5,
                 ushort e6,
                 ushort e7
-            ) {
+            )
+            {
                 ushort* pResult = stackalloc ushort[8] { e0, e1, e2, e3, e4, e5, e6, e7, };
 
                 return Unsafe.AsRef<Vector128<ushort>>(pResult);
@@ -995,7 +1003,8 @@ namespace System.Runtime.Intrinsics
         public static unsafe Vector128<double> Create(
             Vector64<double> lower,
             Vector64<double> upper
-        ) {
+        )
+        {
             if (AdvSimd.IsSupported)
             {
                 return lower.ToVector128Unsafe().WithUpper(upper);
@@ -1006,7 +1015,8 @@ namespace System.Runtime.Intrinsics
             static Vector128<double> SoftwareFallback(
                 Vector64<double> lower,
                 Vector64<double> upper
-            ) {
+            )
+            {
                 Vector128<double> result128 = Vector128<double>.Zero;
 
                 ref Vector64<double> result64 = ref Unsafe.As<Vector128<double>, Vector64<double>>(
@@ -1170,7 +1180,8 @@ namespace System.Runtime.Intrinsics
         public static unsafe Vector128<ushort> Create(
             Vector64<ushort> lower,
             Vector64<ushort> upper
-        ) {
+        )
+        {
             if (AdvSimd.IsSupported)
             {
                 return lower.ToVector128Unsafe().WithUpper(upper);
@@ -1181,7 +1192,8 @@ namespace System.Runtime.Intrinsics
             static Vector128<ushort> SoftwareFallback(
                 Vector64<ushort> lower,
                 Vector64<ushort> upper
-            ) {
+            )
+            {
                 Vector128<ushort> result128 = Vector128<ushort>.Zero;
 
                 ref Vector64<ushort> result64 = ref Unsafe.As<Vector128<ushort>, Vector64<ushort>>(

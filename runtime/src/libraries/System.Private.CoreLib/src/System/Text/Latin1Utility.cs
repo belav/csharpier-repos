@@ -21,7 +21,8 @@ namespace System.Text
         public static unsafe nuint GetIndexOfFirstNonLatin1Char(
             char* pBuffer,
             nuint bufferLength /* in chars */
-        ) {
+        )
+        {
             // If SSE2 is supported, use those specific intrinsics instead of the generic vectorized
             // code below. This has two benefits: (a) we can take advantage of specific instructions like
             // pmovmskb which we know are optimized, and (b) we can avoid downclocking the processor while
@@ -35,7 +36,8 @@ namespace System.Text
         private static unsafe nuint GetIndexOfFirstNonLatin1Char_Default(
             char* pBuffer,
             nuint bufferLength /* in chars */
-        ) {
+        )
+        {
             // Squirrel away the original buffer reference.This method works by determining the exact
             // char reference where non-Latin1 data begins, so we need this base value to perform the
             // final subtraction at the end of the method to get the index into the original buffer.
@@ -59,7 +61,8 @@ namespace System.Text
                         Unsafe.ReadUnaligned<Vector<ushort>>(pBuffer),
                         maxLatin1
                     )
-                ) {
+                )
+                {
                     // The first several elements of the input buffer were Latin-1. Bump up the pointer to the
                     // next aligned boundary, then perform aligned reads from here on out until we find non-Latin-1
                     // data or we approach the end of the buffer. It's possible we'll reread data; this is ok.
@@ -195,7 +198,8 @@ namespace System.Text
         private static unsafe nuint GetIndexOfFirstNonLatin1Char_Sse2(
             char* pBuffer,
             nuint bufferLength /* in chars */
-        ) {
+        )
+        {
             // This method contains logic optimized for both SSE2 and SSE41. Much of the logic in this method
             // will be elided by JIT once we determine which specific ISAs we support.
 
@@ -595,7 +599,8 @@ namespace System.Text
             char* pUtf16Buffer,
             byte* pLatin1Buffer,
             nuint elementCount
-        ) {
+        )
+        {
             nuint currentOffset = 0;
 
             uint utf16Data32BitsHigh = 0,
@@ -695,7 +700,8 @@ namespace System.Text
                                 Vector.BitwiseOr(utf16VectorHigh, utf16VectorLow),
                                 maxLatin1
                             )
-                        ) {
+                        )
+                        {
                             break; // found non-Latin-1 data
                         }
 
@@ -874,7 +880,8 @@ namespace System.Text
             char* pUtf16Buffer,
             byte* pLatin1Buffer,
             nuint elementCount
-        ) {
+        )
+        {
             // This method contains logic optimized for both SSE2 and SSE41. Much of the logic in this method
             // will be elided by JIT once we determine which specific ISAs we support.
 
@@ -918,7 +925,8 @@ namespace System.Text
                                 .AsByte()
                         ) & NonLatin1DataSeenMask
                     ) != 0
-                ) {
+                )
+                {
                     return 0;
                 }
             }
@@ -972,7 +980,8 @@ namespace System.Text
                                     .AsByte()
                             ) & NonLatin1DataSeenMask
                         ) != 0
-                    ) {
+                    )
+                    {
                         goto Finish;
                     }
                 }
@@ -1037,7 +1046,8 @@ namespace System.Text
                                     .AsByte()
                             ) & NonLatin1DataSeenMask
                         ) != 0
-                    ) {
+                    )
+                    {
                         goto FoundNonLatin1DataInLoop;
                     }
                 }
@@ -1080,7 +1090,8 @@ namespace System.Text
                                 .AsByte()
                         ) & NonLatin1DataSeenMask
                     ) != 0
-                ) {
+                )
+                {
                     goto Finish; // found non-Latin-1 data
                 }
             }
@@ -1111,7 +1122,8 @@ namespace System.Text
             byte* pLatin1Buffer,
             char* pUtf16Buffer,
             nuint elementCount
-        ) {
+        )
+        {
             // If SSE2 is supported, use those specific intrinsics instead of the generic vectorized
             // code below. This has two benefits: (a) we can take advantage of specific instructions like
             // punpcklbw which we know are optimized, and (b) we can avoid downclocking the processor while
@@ -1131,7 +1143,8 @@ namespace System.Text
             byte* pLatin1Buffer,
             char* pUtf16Buffer,
             nuint elementCount
-        ) {
+        )
+        {
             // JIT turns the below into constants
 
             uint SizeOfVector128 = (uint)Unsafe.SizeOf<Vector128<byte>>();
@@ -1252,7 +1265,8 @@ namespace System.Text
             byte* pLatin1Buffer,
             char* pUtf16Buffer,
             nuint elementCount
-        ) {
+        )
+        {
             Debug.Assert(!Sse2.IsSupported);
 
             nuint currentOffset = 0;

@@ -23,7 +23,8 @@ namespace System.Net.Http.Headers
             int startIndex,
             object? storeValue,
             out object? parsedValue
-        ) {
+        )
+        {
             Debug.Assert(startIndex >= 0);
             Debug.Assert(startIndex < value.Length);
 
@@ -42,7 +43,8 @@ namespace System.Net.Http.Headers
                     out string? alpnProtocolName,
                     out int alpnProtocolNameLength
                 )
-            ) {
+            )
+            {
                 parsedValue = null;
                 return 0;
             }
@@ -76,7 +78,8 @@ namespace System.Net.Http.Headers
                     out int altAuthorityPort,
                     out int altAuthorityLength
                 )
-            ) {
+            )
+            {
                 parsedValue = null;
                 return 0;
             }
@@ -145,7 +148,8 @@ namespace System.Net.Http.Headers
                             out int maxAgeTmp,
                             out int parameterLength
                         )
-                    ) {
+                    )
+                    {
                         parsedValue = null;
                         return 0;
                     }
@@ -172,7 +176,8 @@ namespace System.Net.Http.Headers
                             out int persistInt,
                             out int parameterLength
                         )
-                    ) {
+                    )
+                    {
                         persist = persistInt == 1;
                     }
                     else if (!TrySkipTokenOrQuoted(value, idx, out parameterLength))
@@ -223,7 +228,8 @@ namespace System.Net.Http.Headers
             int startIndex,
             [NotNullWhen(true)] out string? result,
             out int readLength
-        ) {
+        )
+        {
             int tokenLength = HttpRuleParser.GetTokenLength(value, startIndex);
 
             if (tokenLength == 0)
@@ -296,7 +302,8 @@ namespace System.Net.Http.Headers
         private static bool TryReadUnknownPercentEncodedAlpnProtocolName(
             ReadOnlySpan<char> value,
             [NotNullWhen(true)] out string? result
-        ) {
+        )
+        {
             int idx = value.IndexOf('%');
 
             if (idx == -1)
@@ -320,7 +327,8 @@ namespace System.Net.Http.Headers
                     (value.Length - idx) < 3
                     || !TryReadAlpnHexDigit(value[1], out int hi)
                     || !TryReadAlpnHexDigit(value[2], out int lo)
-                ) {
+                )
+                {
                     result = null;
                     return false;
                 }
@@ -362,11 +370,13 @@ namespace System.Net.Http.Headers
             out string? host,
             out int port,
             out int readLength
-        ) {
+        )
+        {
             if (
                 HttpRuleParser.GetQuotedStringLength(value, startIndex, out int quotedLength)
                 != HttpParseResult.Parsed
-            ) {
+            )
+            {
                 goto parseError;
             }
 
@@ -456,7 +466,8 @@ namespace System.Net.Http.Headers
             int startIndex,
             out int result,
             out int readLength
-        ) {
+        )
+        {
             if (startIndex >= value.Length)
             {
                 result = 0;
@@ -477,7 +488,8 @@ namespace System.Net.Http.Headers
             if (
                 HttpRuleParser.GetQuotedStringLength(value, startIndex, out int quotedLength)
                 == HttpParseResult.Parsed
-            ) {
+            )
+            {
                 readLength = quotedLength;
                 return TryReadQuotedInt32Value(value.AsSpan(1, quotedLength - 2), out result);
             }
@@ -541,7 +553,8 @@ namespace System.Net.Http.Headers
             if (
                 HttpRuleParser.GetQuotedStringLength(value, startIndex, out int quotedLength)
                 == HttpParseResult.Parsed
-            ) {
+            )
+            {
                 readLength = quotedLength;
                 return true;
             }

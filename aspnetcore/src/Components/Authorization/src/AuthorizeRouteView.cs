@@ -123,7 +123,8 @@ namespace Microsoft.AspNetCore.Components.Authorization
         private void RenderNotAuthorizedInDefaultLayout(
             RenderTreeBuilder builder,
             AuthenticationState authenticationState
-        ) {
+        )
+        {
             var content = NotAuthorized ?? _defaultNotAuthorizedContent;
             RenderContentInDefaultLayout(builder, content(authenticationState));
         }

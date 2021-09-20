@@ -18,7 +18,8 @@ namespace System.IO.Ports.Tests
                 SerialPort com1 = new SerialPort(
                     TCSupport.LocalMachineSerialInfo.FirstAvailablePortName
                 )
-            ) {
+            )
+            {
                 SerialPortProperties serPortProp = new SerialPortProperties();
 
                 Debug.WriteLine("Verifying default RtsEnable");
@@ -57,7 +58,8 @@ namespace System.IO.Ports.Tests
                 SerialPort com1 = new SerialPort(
                     TCSupport.LocalMachineSerialInfo.FirstAvailablePortName
                 )
-            ) {
+            )
+            {
                 SerialPortProperties serPortProp = new SerialPortProperties();
 
                 Debug.WriteLine("Verifying seting RtsEnable to true then false before open");
@@ -153,7 +155,8 @@ namespace System.IO.Ports.Tests
                 SerialPort com1 = new SerialPort(
                     TCSupport.LocalMachineSerialInfo.FirstAvailablePortName
                 )
-            ) {
+            )
+            {
                 SerialPortProperties serPortProp = new SerialPortProperties();
 
                 Debug.WriteLine("Verifying seting RtsEnable to true then false after open");
@@ -183,7 +186,8 @@ namespace System.IO.Ports.Tests
                 SerialPort com1 = new SerialPort(
                     TCSupport.LocalMachineSerialInfo.FirstAvailablePortName
                 )
-            ) {
+            )
+            {
                 SerialPortProperties serPortProp = new SerialPortProperties();
 
                 Debug.WriteLine("Verifying getting RtsEnable with Handshake set to None");
@@ -209,7 +213,8 @@ namespace System.IO.Ports.Tests
                 SerialPort com1 = new SerialPort(
                     TCSupport.LocalMachineSerialInfo.FirstAvailablePortName
                 )
-            ) {
+            )
+            {
                 Debug.WriteLine("Verifying getting RtsEnable with Handshake set to RequestToSend");
 
                 com1.Open();
@@ -232,7 +237,8 @@ namespace System.IO.Ports.Tests
                 SerialPort com1 = new SerialPort(
                     TCSupport.LocalMachineSerialInfo.FirstAvailablePortName
                 )
-            ) {
+            )
+            {
                 Debug.WriteLine(
                     "Verifying getting RtsEnable with Handshake set to RequestToSendXOnXOff"
                 );
@@ -257,7 +263,8 @@ namespace System.IO.Ports.Tests
                 SerialPort com1 = new SerialPort(
                     TCSupport.LocalMachineSerialInfo.FirstAvailablePortName
                 )
-            ) {
+            )
+            {
                 SerialPortProperties serPortProp = new SerialPortProperties();
 
                 Debug.WriteLine("Verifying getting RtsEnable with Handshake set to XOnXOff");
@@ -284,7 +291,8 @@ namespace System.IO.Ports.Tests
                 SerialPort com1 = new SerialPort(
                     TCSupport.LocalMachineSerialInfo.FirstAvailablePortName
                 )
-            ) {
+            )
+            {
                 SerialPortProperties serPortProp = new SerialPortProperties();
 
                 serPortProp.SetAllPropertiesToOpenDefaults();
@@ -309,7 +317,8 @@ namespace System.IO.Ports.Tests
                 SerialPort com1 = new SerialPort(
                     TCSupport.LocalMachineSerialInfo.FirstAvailablePortName
                 )
-            ) {
+            )
+            {
                 SerialPortProperties serPortProp = new SerialPortProperties();
 
                 serPortProp.SetAllPropertiesToOpenDefaults();
@@ -334,7 +343,8 @@ namespace System.IO.Ports.Tests
                 SerialPort com1 = new SerialPort(
                     TCSupport.LocalMachineSerialInfo.FirstAvailablePortName
                 )
-            ) {
+            )
+            {
                 SerialPortProperties serPortProp = new SerialPortProperties();
                 Handshake originalHandshake;
                 bool expetectedRtsEnable;
@@ -398,7 +408,8 @@ namespace System.IO.Ports.Tests
                 SerialPort com2 = new SerialPort(
                     TCSupport.LocalMachineSerialInfo.SecondAvailablePortName
                 )
-            ) {
+            )
+            {
                 com2.Open();
 
                 // Allow tiny bit of time for state of the line to change in case Rts was just set

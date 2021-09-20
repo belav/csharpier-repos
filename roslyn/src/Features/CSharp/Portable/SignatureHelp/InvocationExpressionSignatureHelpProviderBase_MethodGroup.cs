@@ -24,7 +24,8 @@ namespace Microsoft.CodeAnalysis.CSharp.SignatureHelp
             SemanticModel semanticModel,
             SymbolInfo currentSymbol,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             return Task.FromResult(
                 (
                     accessibleMethods.SelectAsArray(
@@ -47,7 +48,8 @@ namespace Microsoft.CodeAnalysis.CSharp.SignatureHelp
             ISymbol within,
             IEnumerable<IMethodSymbol> methodGroup,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             ITypeSymbol? throughType = null;
             if (invocationExpression.Expression is MemberAccessExpressionSyntax memberAccess)
             {
@@ -103,7 +105,8 @@ namespace Microsoft.CodeAnalysis.CSharp.SignatureHelp
             else if (
                 invocationExpression.Expression is SimpleNameSyntax
                 && invocationExpression.IsInStaticContext()
-            ) {
+            )
+            {
                 // We always need to include local functions regardless of whether they are static.
                 methodGroup = methodGroup.Where(
                     m => m.IsStatic || m is IMethodSymbol { MethodKind: MethodKind.LocalFunction }
@@ -127,7 +130,8 @@ namespace Microsoft.CodeAnalysis.CSharp.SignatureHelp
         private static bool IsHiddenByOtherMethod(
             IMethodSymbol method,
             ISet<IMethodSymbol> methodSet
-        ) {
+        )
+        {
             foreach (var m in methodSet)
             {
                 if (!Equals(m, method))

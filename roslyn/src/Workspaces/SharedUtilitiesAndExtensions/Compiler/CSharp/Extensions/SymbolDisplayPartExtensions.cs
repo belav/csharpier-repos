@@ -9,7 +9,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Extensions
         public static SymbolDisplayPart MassageErrorTypeNames(
             this SymbolDisplayPart part,
             string? replacement = null
-        ) {
+        )
+        {
             if (part.Kind == SymbolDisplayPartKind.ErrorTypeName)
             {
                 var text = part.ToString();

@@ -36,7 +36,8 @@ namespace System.IO.Enumeration
             string directory,
             bool isNormalized,
             EnumerationOptions? options = null
-        ) {
+        )
+        {
             _originalRootDirectory =
                 directory ?? throw new ArgumentNullException(nameof(directory));
 

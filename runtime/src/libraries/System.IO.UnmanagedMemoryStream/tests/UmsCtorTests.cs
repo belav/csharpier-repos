@@ -167,11 +167,8 @@ namespace System.IO.Tests
     {
         internal DerivedUnmanagedMemoryStream() { }
 
-        internal DerivedUnmanagedMemoryStream(
-            SafeBuffer buffer,
-            long length,
-            FileAccess access
-        ) : base(buffer, 0, length, access) { }
+        internal DerivedUnmanagedMemoryStream(SafeBuffer buffer, long length, FileAccess access)
+            : base(buffer, 0, length, access) { }
 
         internal DerivedUnmanagedMemoryStream(
             byte* pointer,

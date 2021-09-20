@@ -304,7 +304,8 @@ namespace System.Data
 
         PropertyDescriptorCollection System.ComponentModel.ITypedList.GetItemProperties(
             PropertyDescriptor[] listAccessors
-        ) {
+        )
+        {
             DataSet? dataSet = DataSet;
             if (dataSet == null)
             {

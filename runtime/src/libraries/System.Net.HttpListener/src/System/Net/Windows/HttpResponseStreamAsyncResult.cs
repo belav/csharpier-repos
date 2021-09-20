@@ -231,7 +231,8 @@ namespace System.Net
             HttpResponseStreamAsyncResult asyncResult,
             uint errorCode,
             uint numBytes
-        ) {
+        )
+        {
             if (NetEventSource.Log.IsEnabled())
                 NetEventSource.Info(
                     null,
@@ -243,7 +244,8 @@ namespace System.Net
                 if (
                     errorCode != Interop.HttpApi.ERROR_SUCCESS
                     && errorCode != Interop.HttpApi.ERROR_HANDLE_EOF
-                ) {
+                )
+                {
                     asyncResult.ErrorCode = (int)errorCode;
                     result = new HttpListenerException((int)errorCode);
                 }
@@ -291,7 +293,8 @@ namespace System.Net
             uint errorCode,
             uint numBytes,
             NativeOverlapped* nativeOverlapped
-        ) {
+        )
+        {
             object state = ThreadPoolBoundHandle.GetNativeOverlappedState(nativeOverlapped)!;
             HttpResponseStreamAsyncResult asyncResult = (state as HttpResponseStreamAsyncResult)!;
             if (NetEventSource.Log.IsEnabled())

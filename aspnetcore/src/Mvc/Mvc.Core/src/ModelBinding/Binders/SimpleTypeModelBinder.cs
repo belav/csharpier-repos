@@ -75,7 +75,8 @@ namespace Microsoft.AspNetCore.Mvc.ModelBinding.Binders
                     if (
                         bindingContext.ModelMetadata.ConvertEmptyStringToNull
                         && string.IsNullOrWhiteSpace(value)
-                    ) {
+                    )
+                    {
                         model = null;
                     }
                     else
@@ -129,7 +130,8 @@ namespace Microsoft.AspNetCore.Mvc.ModelBinding.Binders
             ModelBindingContext bindingContext,
             ValueProviderResult valueProviderResult,
             object? model
-        ) {
+        )
+        {
             // When converting newModel a null value may indicate a failed conversion for an otherwise required
             // model (can't set a ValueType to null). This detects if a null model value is acceptable given the
             // current bindingContext. If not, an error is logged.

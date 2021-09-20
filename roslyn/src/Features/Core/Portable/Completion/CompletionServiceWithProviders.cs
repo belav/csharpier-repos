@@ -113,7 +113,8 @@ namespace Microsoft.CodeAnalysis.Completion
 
         private ImmutableArray<CompletionProvider> CreateRoleProviders(
             ImmutableHashSet<string> roles
-        ) {
+        )
+        {
             var providers = GetAllProviders(roles);
 
             foreach (var provider in providers)
@@ -159,7 +160,8 @@ namespace Microsoft.CodeAnalysis.Completion
             ImmutableHashSet<string> roles,
             CompletionTrigger trigger,
             OptionSet options
-        ) {
+        )
+        {
             var allCompletionProviders = FilterProviders(
                 GetProviders(roles, trigger),
                 trigger,
@@ -176,7 +178,8 @@ namespace Microsoft.CodeAnalysis.Completion
         protected virtual ImmutableArray<CompletionProvider> GetProviders(
             ImmutableHashSet<string> roles,
             CompletionTrigger trigger
-        ) {
+        )
+        {
             return GetProviders(roles);
         }
 
@@ -198,7 +201,8 @@ namespace Microsoft.CodeAnalysis.Completion
                     project.AnalyzerReferences,
                     out var completionProviders
                 )
-            ) {
+            )
+            {
                 return completionProviders.Value;
             }
 
@@ -230,7 +234,8 @@ namespace Microsoft.CodeAnalysis.Completion
                         var completionProvider in projectCompletionProvider.GetExtensions(
                             project.Language
                         )
-                    ) {
+                    )
+                    {
                         builder.Add(completionProvider);
                     }
                 }
@@ -243,7 +248,8 @@ namespace Microsoft.CodeAnalysis.Completion
             ImmutableArray<CompletionProvider> providers,
             CompletionTrigger trigger,
             OptionSet options
-        ) {
+        )
+        {
             if (options.GetOption(CompletionServiceOptions.IsExpandedCompletion))
             {
                 providers = providers.WhereAsArray(p => p.IsExpandItemProvider);
@@ -307,7 +313,8 @@ namespace Microsoft.CodeAnalysis.Completion
             ImmutableHashSet<string> roles,
             OptionSet options,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var (completionList, _) = await GetCompletionsWithAvailabilityOfExpandedItemsAsync(
                     document,
                     caretPosition,
@@ -327,7 +334,8 @@ namespace Microsoft.CodeAnalysis.Completion
             ImmutableHashSet<string> roles,
             OptionSet options,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var text = await document.GetTextAsync(cancellationToken).ConfigureAwait(false);
             var defaultItemSpan = GetDefaultCompletionListSpan(text, caretPosition);
 
@@ -350,7 +358,8 @@ namespace Microsoft.CodeAnalysis.Completion
                             roles,
                             options
                         )
-                    ) {
+                    )
+                    {
                         triggeredProviders = providers.Where(
                                 p =>
                                     p.ShouldTriggerCompletion(
@@ -403,7 +412,8 @@ namespace Microsoft.CodeAnalysis.Completion
                                 cancellationToken
                             )
                             .ConfigureAwait(false)
-                    ) {
+                    )
+                    {
                         additionalAugmentingProviders.Add(provider);
                     }
                 }
@@ -500,7 +510,8 @@ namespace Microsoft.CodeAnalysis.Completion
             SourceText text,
             int caretPosition,
             OptionSet optionSet
-        ) {
+        )
+        {
             // Only validate on insertion triggers.
             if (completionTriggerKind != CompletionTriggerKind.Insertion)
             {
@@ -528,7 +539,8 @@ namespace Microsoft.CodeAnalysis.Completion
                     if (
                         provider is LSPCompletionProvider lspProvider
                         && lspProvider.IsInsertionTrigger(text, caretPosition - 1, optionSet)
-                    ) {
+                    )
+                    {
                         if (!lspProvider.TriggerCharacters.Contains(character))
                         {
                             Debug.Assert(
@@ -554,7 +566,8 @@ namespace Microsoft.CodeAnalysis.Completion
             TextSpan defaultItemSpan,
             ImmutableArray<CompletionProvider> providers,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var completionContextTasks = new List<Task<CompletionContext>>();
             foreach (var provider in providers)
             {
@@ -584,7 +597,8 @@ namespace Microsoft.CodeAnalysis.Completion
             IEnumerable<CompletionContext> completionContexts,
             TextSpan defaultSpan,
             bool isExclusive
-        ) {
+        )
+        {
             // See if any contexts changed the completion list span.  If so, the first context that
             // changed it 'wins' and picks the span that will be used for all items in the completion
             // list.  If no contexts changed it, then just use the default span provided by the service.
@@ -645,14 +659,16 @@ namespace Microsoft.CodeAnalysis.Completion
         protected virtual CompletionItem GetBetterItem(
             CompletionItem item,
             CompletionItem existingItem
-        ) {
+        )
+        {
             // the item later in the sort order (determined by provider order) wins?
             return item;
         }
 
         private static Dictionary<CompletionProvider, int> GetCompletionProviderToIndex(
             ConcatImmutableArray<CompletionProvider> completionProviders
-        ) {
+        )
+        {
             var result = new Dictionary<CompletionProvider, int>(completionProviders.Length);
 
             var i = 0;
@@ -673,7 +689,8 @@ namespace Microsoft.CodeAnalysis.Completion
             OptionSet options,
             TextSpan? defaultSpan,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             options ??= document.Project.Solution.Workspace.Options;
 
             if (defaultSpan == null)
@@ -699,7 +716,8 @@ namespace Microsoft.CodeAnalysis.Completion
             Document document,
             CompletionItem item,
             CancellationToken cancellationToken = default
-        ) {
+        )
+        {
             var provider = GetProvider(item);
             return provider != null
               ? provider.GetDescriptionAsync(document, item, cancellationToken)
@@ -712,7 +730,8 @@ namespace Microsoft.CodeAnalysis.Completion
             CompletionTrigger trigger,
             ImmutableHashSet<string> roles = null,
             OptionSet options = null
-        ) {
+        )
+        {
             var document = text.GetOpenDocumentInCurrentContextWithChanges();
             return ShouldTriggerCompletion(
                 document?.Project,
@@ -731,7 +750,8 @@ namespace Microsoft.CodeAnalysis.Completion
             CompletionTrigger trigger,
             ImmutableHashSet<string> roles = null,
             OptionSet options = null
-        ) {
+        )
+        {
             options ??= _workspace.Options;
             if (!options.GetOption(CompletionOptions.TriggerOnTyping, Language))
             {
@@ -740,7 +760,8 @@ namespace Microsoft.CodeAnalysis.Completion
 
             if (
                 trigger.Kind == CompletionTriggerKind.Deletion && SupportsTriggerOnDeletion(options)
-            ) {
+            )
+            {
                 return Char.IsLetterOrDigit(trigger.Character) || trigger.Character == '.';
             }
 
@@ -768,7 +789,8 @@ namespace Microsoft.CodeAnalysis.Completion
             CompletionItem item,
             char? commitKey,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var provider = GetProvider(item);
             if (provider != null)
             {
@@ -788,7 +810,8 @@ namespace Microsoft.CodeAnalysis.Completion
             char? commitKey,
             bool disallowAddingImports,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var provider = GetProvider(item);
             return provider != null
               ? await provider.GetChangeAsync(
@@ -806,7 +829,8 @@ namespace Microsoft.CodeAnalysis.Completion
         bool IEqualityComparer<ImmutableHashSet<string>>.Equals(
             ImmutableHashSet<string> x,
             ImmutableHashSet<string> y
-        ) {
+        )
+        {
             if (x == y)
             {
                 return true;
@@ -960,7 +984,8 @@ namespace Microsoft.CodeAnalysis.Completion
                 CompletionTrigger triggerInfo,
                 OptionSet options,
                 CancellationToken cancellationToken
-            ) {
+            )
+            {
                 return _completionServiceWithProviders.GetContextAsync(
                     provider,
                     document,

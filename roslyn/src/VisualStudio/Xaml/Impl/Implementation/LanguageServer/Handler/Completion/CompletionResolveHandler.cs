@@ -46,7 +46,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Xaml.LanguageServer.Handler
             LSP.CompletionItem completionItem,
             RequestContext context,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             Contract.ThrowIfNull(context.Solution);
 
             CompletionResolveData data;

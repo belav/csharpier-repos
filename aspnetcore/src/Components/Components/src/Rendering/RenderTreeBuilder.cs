@@ -316,7 +316,8 @@ namespace Microsoft.AspNetCore.Components.Rendering
             int sequence,
             string name,
             EventCallback<TArgument> value
-        ) {
+        )
+        {
             AssertCanAddAttribute();
             if (_lastNonAttributeFrameType == RenderTreeFrameType.Component)
             {
@@ -444,7 +445,8 @@ namespace Microsoft.AspNetCore.Components.Rendering
         public void AddMultipleAttributes(
             int sequence,
             IEnumerable<KeyValuePair<string, object>>? attributes
-        ) {
+        )
+        {
             // Calling this up-front just to make sure we validate before mutating anything.
             AssertCanAddAttribute();
 
@@ -510,7 +512,8 @@ namespace Microsoft.AspNetCore.Components.Rendering
         public void OpenComponent(
             int sequence,
             [DynamicallyAccessedMembers(Component)] Type componentType
-        ) {
+        )
+        {
             if (!typeof(IComponent).IsAssignableFrom(componentType))
             {
                 throw new ArgumentException(
@@ -562,7 +565,8 @@ namespace Microsoft.AspNetCore.Components.Rendering
         private void OpenComponentUnchecked(
             int sequence,
             [DynamicallyAccessedMembers(Component)] Type componentType
-        ) {
+        )
+        {
             // We are entering a new scope, since we track the "duplicate attributes" per
             // element/component we might need to clean them up now.
             if (_hasSeenAddMultipleAttributes)
@@ -603,7 +607,8 @@ namespace Microsoft.AspNetCore.Components.Rendering
         public void AddElementReferenceCapture(
             int sequence,
             Action<ElementReference> elementReferenceCaptureAction
-        ) {
+        )
+        {
             if (GetCurrentParentFrameType() != RenderTreeFrameType.Element)
             {
                 throw new InvalidOperationException(
@@ -623,7 +628,8 @@ namespace Microsoft.AspNetCore.Components.Rendering
         public void AddComponentReferenceCapture(
             int sequence,
             Action<object> componentReferenceCaptureAction
-        ) {
+        )
+        {
             var parentFrameIndex = GetCurrentParentFrameIndex();
             if (!parentFrameIndex.HasValue)
             {
@@ -634,7 +640,8 @@ namespace Microsoft.AspNetCore.Components.Rendering
             if (
                 _entries.Buffer[parentFrameIndexValue].FrameTypeField
                 != RenderTreeFrameType.Component
-            ) {
+            )
+            {
                 throw new InvalidOperationException(ComponentReferenceCaptureInvalidParentMessage);
             }
 
@@ -681,7 +688,8 @@ namespace Microsoft.AspNetCore.Components.Rendering
             if (
                 _lastNonAttributeFrameType != RenderTreeFrameType.Element
                 && _lastNonAttributeFrameType != RenderTreeFrameType.Component
-            ) {
+            )
+            {
                 throw new InvalidOperationException(
                     $"Attributes may only be added immediately after frames of type {RenderTreeFrameType.Element} or {RenderTreeFrameType.Component}"
                 );
@@ -718,7 +726,8 @@ namespace Microsoft.AspNetCore.Components.Rendering
             int sequence,
             string attributeName,
             object? attributeValue
-        ) {
+        )
+        {
             // Replicate the same attribute omission logic as used elsewhere
             if ((attributeValue == null) || (attributeValue is bool boolValue && !boolValue))
             {

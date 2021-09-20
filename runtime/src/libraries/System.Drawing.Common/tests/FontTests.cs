@@ -205,7 +205,8 @@ namespace System.Drawing.Tests
             FontFamily fontFamily,
             float emSize,
             GraphicsUnit unit
-        ) {
+        )
+        {
             try
             {
                 using (var font = new Font(fontFamily.Name, emSize, unit))
@@ -287,7 +288,8 @@ namespace System.Drawing.Tests
             float emSize,
             FontStyle style,
             GraphicsUnit unit
-        ) {
+        )
+        {
             try
             {
                 using (var font = new Font(fontFamily, emSize, style, unit))
@@ -309,7 +311,8 @@ namespace System.Drawing.Tests
             float emSize,
             FontStyle style,
             GraphicsUnit unit
-        ) {
+        )
+        {
             try
             {
                 using (var font = new Font(fontFamily.Name, emSize, style, unit))
@@ -400,7 +403,8 @@ namespace System.Drawing.Tests
             FontStyle style,
             GraphicsUnit unit,
             byte gdiCharSet
-        ) {
+        )
+        {
             try
             {
                 using (var font = new Font(fontFamily, emSize, style, unit, gdiCharSet))
@@ -423,7 +427,8 @@ namespace System.Drawing.Tests
             FontStyle style,
             GraphicsUnit unit,
             byte gdiCharSet
-        ) {
+        )
+        {
             try
             {
                 using (var font = new Font(fontFamily.Name, emSize, style, unit, gdiCharSet))
@@ -523,7 +528,8 @@ namespace System.Drawing.Tests
             GraphicsUnit unit,
             byte gdiCharSet,
             bool gdiVerticalFont
-        ) {
+        )
+        {
             try
             {
                 using (
@@ -535,7 +541,8 @@ namespace System.Drawing.Tests
                         gdiCharSet,
                         gdiVerticalFont
                     )
-                ) {
+                )
+                {
                     VerifyFont(
                         font,
                         fontFamily.Name,
@@ -563,7 +570,8 @@ namespace System.Drawing.Tests
             GraphicsUnit unit,
             byte gdiCharSet,
             bool gdiVerticalFont
-        ) {
+        )
+        {
             try
             {
                 using (
@@ -575,7 +583,8 @@ namespace System.Drawing.Tests
                         gdiCharSet,
                         gdiVerticalFont
                     )
-                ) {
+                )
+                {
                     VerifyFont(
                         font,
                         fontFamily.Name,
@@ -834,7 +843,8 @@ namespace System.Drawing.Tests
                     10,
                     gdiVerticalFont: true
                 )
-            ) {
+            )
+            {
                 Font clone = Assert.IsType<Font>(font.Clone());
                 Assert.NotSame(font, clone);
 
@@ -1096,7 +1106,8 @@ namespace System.Drawing.Tests
             FontStyle fontStyle,
             int weight,
             byte charSet
-        ) {
+        )
+        {
             // The boundary values of the weight that is considered Bold are different between Windows 7 and Windows 8.
             if (PlatformDetection.IsWindows7 || PlatformDetection.IsWindows8x)
             {
@@ -1280,7 +1291,8 @@ namespace System.Drawing.Tests
             bool gdiVerticalFont,
             string expectedNamePrefix,
             int expectedWeight
-        ) {
+        )
+        {
             using (FontFamily family = FontFamily.GenericMonospace)
             using (
                 var font = new Font(
@@ -1291,7 +1303,8 @@ namespace System.Drawing.Tests
                     gdiCharSet,
                     gdiVerticalFont
                 )
-            ) {
+            )
+            {
                 var logFont = new LOGFONT();
                 font.ToLogFont(logFont);
 
@@ -1443,7 +1456,8 @@ namespace System.Drawing.Tests
                     10,
                     gdiVerticalFont: true
                 )
-            ) {
+            )
+            {
                 IntPtr hfont = font.ToHfont();
                 Assert.NotEqual(IntPtr.Zero, hfont);
                 Assert.NotEqual(hfont, font.ToHfont());
@@ -1480,7 +1494,8 @@ namespace System.Drawing.Tests
                     10,
                     gdiVerticalFont: true
                 )
-            ) {
+            )
+            {
                 Assert.Equal(
                     $"[Font: Name={family.Name}, Size=10, Units=4, GdiCharSet=10, GdiVerticalFont=True]",
                     font.ToString()
@@ -1496,7 +1511,8 @@ namespace System.Drawing.Tests
             GraphicsUnit expectedUnit,
             byte expectedGdiCharset,
             bool expectedGdiVerticalFont
-        ) {
+        )
+        {
             Assert.Equal(expectedName, font.Name);
             Assert.Equal(expectedEmSize, font.Size);
 

@@ -33,12 +33,8 @@ namespace Microsoft.AspNetCore.SignalR.Protocol
         /// <param name="error">An optional error if the invocation failed.</param>
         /// <param name="result">An optional result if the invocation returns a result.</param>
         /// <param name="hasResult">Specifies whether the completion contains a result.</param>
-        public CompletionMessage(
-            string invocationId,
-            string? error,
-            object? result,
-            bool hasResult
-        ) : base(invocationId)
+        public CompletionMessage(string invocationId, string? error, object? result, bool hasResult)
+            : base(invocationId)
         {
             if (error != null && result != null)
             {

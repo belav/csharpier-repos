@@ -50,7 +50,8 @@ namespace System.IO.Tests
                     FileAccess.Read,
                     FileShare.ReadWrite
                 )
-            ) {
+            )
+            {
                 fs.Write(TestBuffer, 0, TestBuffer.Length);
                 Assert.Equal(TestBuffer.Length, fs.Length);
 

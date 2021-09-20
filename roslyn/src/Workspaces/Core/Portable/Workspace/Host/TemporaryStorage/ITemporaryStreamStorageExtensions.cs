@@ -15,7 +15,8 @@ namespace Microsoft.CodeAnalysis.Host
         public static void WriteAllLines(
             this ITemporaryStreamStorage storage,
             ImmutableArray<string> values
-        ) {
+        )
+        {
             using var stream = SerializableBytes.CreateWritableStream();
             using var writer = new StreamWriter(stream);
 

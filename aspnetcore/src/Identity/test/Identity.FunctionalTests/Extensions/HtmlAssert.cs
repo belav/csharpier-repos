@@ -27,7 +27,8 @@ namespace Microsoft.AspNetCore.Identity.FunctionalTests
         internal static IEnumerable<IHtmlElement> HasElements(
             string selector,
             IHtmlDocument document
-        ) {
+        )
+        {
             var elements = document.QuerySelectorAll(selector).OfType<IHtmlElement>().ToArray();
 
             Assert.NotEmpty(elements);

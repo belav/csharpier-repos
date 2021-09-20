@@ -114,7 +114,8 @@ namespace Microsoft.Web.Xdt.Extensions
                                 AttributeName,
                                 StringComparison.OrdinalIgnoreCase
                             )
-                        ) {
+                        )
+                        {
                             foundAttribute = true;
                             if (string.IsNullOrEmpty(att.Value))
                             {

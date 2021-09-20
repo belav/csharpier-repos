@@ -39,7 +39,8 @@ namespace System.Net.Http
                     SslPolicyErrors,
                     bool
                 > fromHttpClientHandler
-            ) {
+            )
+            {
                 FromHttpClientHandler = fromHttpClientHandler;
                 ForSocketsHttpHandler = (
                     object sender,
@@ -62,7 +63,8 @@ namespace System.Net.Http
             bool async,
             Stream stream,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             // If there's a cert validation callback, and if it came from HttpClientHandler,
             // wrap the original delegate in order to change the sender to be the request message (expected by HttpClientHandler's delegate).
             RemoteCertificateValidationCallback? callback =
@@ -106,7 +108,8 @@ namespace System.Net.Http
             Stream stream,
             SslClientAuthenticationOptions sslOptions,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             SslStream sslStream = new SslStream(stream);
 
             try
@@ -120,7 +123,8 @@ namespace System.Net.Http
                 {
                     using (
                         cancellationToken.UnsafeRegister(static s => ((Stream)s!).Dispose(), stream)
-                    ) {
+                    )
+                    {
                         sslStream.AuthenticateAsClient(sslOptions);
                     }
                 }
@@ -161,7 +165,8 @@ namespace System.Net.Http
             DnsEndPoint endPoint,
             SslClientAuthenticationOptions? clientAuthenticationOptions,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             QuicConnection con = new QuicConnection(
                 quicImplementationProvider,
                 endPoint,
@@ -184,7 +189,8 @@ namespace System.Net.Http
             string host,
             int port,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             return CancellationHelper.ShouldWrapInOperationCanceledException(
                 error,
                 cancellationToken

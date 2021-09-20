@@ -112,7 +112,8 @@ namespace Microsoft.AspNetCore.Server.IIS.Core
         private async Task FlushNowAsyncAwaited(
             ValueTask<FlushResult> awaitable,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             try
             {
                 await awaitable;
@@ -138,7 +139,8 @@ namespace Microsoft.AspNetCore.Server.IIS.Core
             Task lastFlushTask,
             PipeWriter pipeWriter,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             await lastFlushTask;
             await FlushNowAsync(pipeWriter, cancellationToken);
         }

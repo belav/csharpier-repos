@@ -57,7 +57,8 @@ namespace System.Composition.Convention
         /// <returns>An export builder allowing further configuration.</returns>
         public ImportConventionBuilder AsContractName(
             Func<Type, string> getContractNameFromPartType
-        ) {
+        )
+        {
             _getContractNameFromPartType =
                 getContractNameFromPartType
                 ?? throw new ArgumentNullException(nameof(getContractNameFromPartType));
@@ -131,7 +132,8 @@ namespace System.Composition.Convention
         public ImportConventionBuilder AddMetadataConstraint(
             string name,
             Func<Type, object> getConstraintValueFromPartType
-        ) {
+        )
+        {
             if (name == null)
             {
                 throw new ArgumentNullException(nameof(name));

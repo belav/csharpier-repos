@@ -19,7 +19,8 @@ namespace System.Web.Mvc
             ViewContext viewContext,
             IViewDataContainer viewDataContainer,
             RouteCollection routeCollection
-        ) {
+        )
+        {
             if (viewContext == null)
             {
                 throw new ArgumentNullException("viewContext");

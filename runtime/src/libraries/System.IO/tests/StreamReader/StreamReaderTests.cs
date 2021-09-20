@@ -342,7 +342,8 @@ namespace System.IO.Tests
                 var r = new StreamReader(
                     new MemoryStream(Enumerable.Repeat((byte)'s', length).ToArray())
                 )
-            ) {
+            )
+            {
                 Assert.Equal(0, r.Read(Span<char>.Empty));
                 Assert.Equal(0, r.ReadBlock(Span<char>.Empty));
                 Assert.Equal(0, await r.ReadAsync(Memory<char>.Empty));
@@ -374,7 +375,8 @@ namespace System.IO.Tests
                     false,
                     bufferSize
                 )
-            ) {
+            )
+            {
                 while (dst.Length > 0)
                 {
                     int toRead = Math.Min(readLength, dst.Length);
@@ -411,7 +413,8 @@ namespace System.IO.Tests
                     false,
                     bufferSize
                 )
-            ) {
+            )
+            {
                 while (dst.Length > 0)
                 {
                     int toRead = Math.Min(readLength, dst.Length);
@@ -433,7 +436,8 @@ namespace System.IO.Tests
             int readLength,
             int totalLength,
             int bufferSize
-        ) {
+        )
+        {
             var data = new char[totalLength];
             var r = new Random(42);
             for (int i = 0; i < data.Length; i++)
@@ -451,7 +455,8 @@ namespace System.IO.Tests
                     false,
                     bufferSize
                 )
-            ) {
+            )
+            {
                 while (dst.Length > 0)
                 {
                     int toRead = Math.Min(readLength, dst.Length);
@@ -473,7 +478,8 @@ namespace System.IO.Tests
             int readLength,
             int totalLength,
             int bufferSize
-        ) {
+        )
+        {
             var data = new char[totalLength];
             var r = new Random(42);
             for (int i = 0; i < data.Length; i++)
@@ -491,7 +497,8 @@ namespace System.IO.Tests
                     false,
                     bufferSize
                 )
-            ) {
+            )
+            {
                 while (dst.Length > 0)
                 {
                     int toRead = Math.Min(readLength, dst.Length);
@@ -577,7 +584,8 @@ namespace System.IO.Tests
                     PipeDirection.In,
                     PipeOptions.Asynchronous
                 )
-            ) {
+            )
+            {
                 await Task.WhenAll(
                     serverStream.WaitForConnectionAsync(),
                     clientStream.ConnectAsync()
@@ -669,7 +677,8 @@ namespace System.IO.Tests
                         new MemoryStream(ByteOrderMaskUtf7),
                         detectEncodingFromByteOrderMarks: false
                     )
-                ) {
+                )
+                {
                     sr.Read();
                     Assert.Equal(Encoding.UTF8, sr.CurrentEncoding);
                 }
@@ -682,7 +691,8 @@ namespace System.IO.Tests
                         detectEncodingFromByteOrderMarks: false,
                         leaveOpen: true
                     )
-                ) {
+                )
+                {
                     sr.Read();
                     Assert.Equal(Encoding.UTF8, sr.CurrentEncoding);
                 }
@@ -692,7 +702,8 @@ namespace System.IO.Tests
                 tempStream.Seek(0, SeekOrigin.Begin);
                 using (
                     var sr = new StreamReader(tempStream, detectEncodingFromByteOrderMarks: true)
-                ) {
+                )
+                {
                     sr.Read();
                     Assert.Equal(Encoding.BigEndianUnicode, sr.CurrentEncoding);
                 }

@@ -45,7 +45,8 @@ namespace Microsoft.CodeAnalysis.Formatting
                 int space,
                 FormattingContext context,
                 ChainedFormattingRules formattingRules
-            ) {
+            )
+            {
                 if (_original == null)
                 {
                     return base.WithSpace(space, context, formattingRules);
@@ -65,7 +66,8 @@ namespace Microsoft.CodeAnalysis.Formatting
                 FormattingContext context,
                 ChainedFormattingRules formattingRules,
                 CancellationToken cancellationToken
-            ) {
+            )
+            {
                 if (_original == null)
                 {
                     return base.WithLine(
@@ -96,7 +98,8 @@ namespace Microsoft.CodeAnalysis.Formatting
                 FormattingContext context,
                 ChainedFormattingRules formattingRules,
                 CancellationToken cancellationToken
-            ) {
+            )
+            {
                 if (_original == null)
                 {
                     return base.WithIndentation(
@@ -126,7 +129,8 @@ namespace Microsoft.CodeAnalysis.Formatting
                 Action<int, TokenStream, TriviaData> formattingResultApplier,
                 CancellationToken cancellationToken,
                 int tokenPairIndex = TokenPairIndexNotNeeded
-            ) {
+            )
+            {
                 formattingResultApplier(
                     tokenPairIndex,
                     context.TokenStream,

@@ -65,7 +65,8 @@ namespace System.Net
             string? subProtocol,
             int receiveBufferSize,
             TimeSpan keepAliveInterval
-        ) {
+        )
+        {
             HttpWebSocket.ValidateOptions(
                 subProtocol,
                 receiveBufferSize,
@@ -92,7 +93,8 @@ namespace System.Net
             int receiveBufferSize,
             TimeSpan keepAliveInterval,
             ArraySegment<byte> internalBuffer
-        ) {
+        )
+        {
             return HttpWebSocket.AcceptWebSocketAsync(
                 this,
                 subProtocol,
@@ -125,7 +127,8 @@ namespace System.Net
                         (user != null)
                         && (_user!.Identity!.AuthenticationType != NegotiationInfoClass.NTLM)
                         && (!_listener!.UnsafeConnectionNtlmAuthentication)
-                    ) {
+                    )
+                    {
                         user.Dispose();
                     }
                 }

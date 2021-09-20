@@ -103,7 +103,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.DebuggerIntelli
             uint executeInformation,
             IntPtr pvaIn,
             IntPtr pvaOut
-        ) {
+        )
+        {
             if (_context == null)
             {
                 return NextCommandTarget.Exec(
@@ -129,7 +130,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.DebuggerIntelli
             uint executeInformation,
             IntPtr pvaIn,
             IntPtr pvaOut
-        ) {
+        )
+        {
             // We have to ask the buffer to make itself writable, if it isn't already
             _context.DebuggerTextLines.GetStateFlags(out var bufferFlags);
             _context.DebuggerTextLines.SetStateFlags(

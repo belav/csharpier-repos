@@ -21,7 +21,8 @@ namespace Microsoft.AspNetCore.Builder
         public static IApplicationBuilder UseRouter(
             this IApplicationBuilder builder,
             IRouter router
-        ) {
+        )
+        {
             if (builder == null)
             {
                 throw new ArgumentNullException(nameof(builder));
@@ -56,7 +57,8 @@ namespace Microsoft.AspNetCore.Builder
         public static IApplicationBuilder UseRouter(
             this IApplicationBuilder builder,
             Action<IRouteBuilder> action
-        ) {
+        )
+        {
             if (builder == null)
             {
                 throw new ArgumentNullException(nameof(builder));

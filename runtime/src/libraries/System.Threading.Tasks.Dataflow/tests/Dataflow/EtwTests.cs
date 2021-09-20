@@ -21,7 +21,8 @@ namespace System.Threading.Tasks.Dataflow.Tests
                                 new Guid("16F53577-E41D-43D4-B47E-C17025BF4025"),
                                 EventLevel.Verbose
                             )
-                        ) {
+                        )
+                        {
                             ActionBlock<int> ab = null;
                             BufferBlock<int> bb = null;
                             int remaining = 0;

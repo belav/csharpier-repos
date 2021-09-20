@@ -101,7 +101,8 @@ public class Test
         ref float a5,
         ref double a6,
         ref string a7
-    ) {
+    )
+    {
         a1 = 254;
         a2 = 32700;
         a3 = -245378;
@@ -119,7 +120,8 @@ public class Test
         ref float a5,
         ref double a6,
         ref string a7
-    ) {
+    )
+    {
         throw new NotImplementedException();
     }
 

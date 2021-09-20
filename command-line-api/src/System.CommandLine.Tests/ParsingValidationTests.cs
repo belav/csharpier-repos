@@ -89,7 +89,8 @@ namespace System.CommandLine.Tests
         [InlineData("-x arg subcommand")]
         public void When_a_required_option_is_allowed_at_more_than_one_position_it_only_needs_to_be_satisfied_in_one(
             string commandLine
-        ) {
+        )
+        {
             var option = new Option<string>("-x") { IsRequired = true };
 
             var command = new RootCommand { option, new Command("subcommand") { option } };
@@ -137,7 +138,8 @@ namespace System.CommandLine.Tests
                     if (
                         commandResult.Children.Contains("--one")
                         && commandResult.Children.Contains("--two")
-                    ) {
+                    )
+                    {
                         return "Options '--one' and '--two' cannot be used together.";
                     }
 
@@ -205,7 +207,8 @@ namespace System.CommandLine.Tests
         [InlineData("subcommand --file \"Foo\"")]
         public void Validators_on_global_options_are_executed_when_invoking_a_subcommand(
             string commandLine
-        ) {
+        )
+        {
             var option = new Option<FileInfo>("--file");
             option.AddValidator(
                 r =>

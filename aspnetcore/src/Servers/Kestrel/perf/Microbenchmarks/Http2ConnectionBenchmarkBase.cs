@@ -155,7 +155,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Microbenchmarks
                 if (
                     (_httpFrame.HeadersFlags & Http2HeadersFrameFlags.END_STREAM)
                     == Http2HeadersFrameFlags.END_STREAM
-                ) {
+                )
+                {
                     break;
                 }
             }
@@ -167,7 +168,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Microbenchmarks
             PipeReader pipeReader,
             Http2Frame frame,
             uint maxFrameSize = Http2PeerSettings.DefaultMaxFrameSize
-        ) {
+        )
+        {
             while (true)
             {
                 var result = await pipeReader.ReadAsync();
@@ -184,7 +186,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Microbenchmarks
                             maxFrameSize,
                             out var framePayload
                         )
-                    ) {
+                    )
+                    {
                         consumed = examined = framePayload.End;
                         return;
                     }

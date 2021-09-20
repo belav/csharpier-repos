@@ -113,7 +113,8 @@ namespace JIT.HardwareIntrinsics.Arm
 
             public void RunStructFldScenario(
                 DuplicateUnaryOpTest__DuplicateToVector64_Byte testClass
-            ) {
+            )
+            {
                 var result = AdvSimd.DuplicateToVector64(_fld);
                 Unsafe.Write(testClass._dataTable.outArrayPtr, result);
                 testClass.ValidateResult(_fld, testClass._dataTable.outArrayPtr);

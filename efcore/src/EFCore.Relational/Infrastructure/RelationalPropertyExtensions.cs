@@ -35,7 +35,8 @@ namespace Microsoft.EntityFrameworkCore.Infrastructure
         public static IReadOnlyList<string>? GetColumnNames(
             this IEnumerable<IReadOnlyProperty> properties,
             in StoreObjectIdentifier storeObject
-        ) {
+        )
+        {
             var propertyNames = new List<string>();
             foreach (var property in properties)
             {

@@ -1118,7 +1118,8 @@ namespace Newtonsoft.Json.Tests.Serialization
                 Type serializedType,
                 out string assemblyName,
                 out string typeName
-            ) {
+            )
+            {
                 assemblyName = null;
                 typeName = serializedType.Name;
             }
@@ -1217,7 +1218,8 @@ namespace Newtonsoft.Json.Tests.Serialization
                 Type serializedType,
                 out string assemblyName,
                 out string typeName
-            ) {
+            )
+            {
                 assemblyName = null;
                 typeName = serializedType.Name;
             }
@@ -1715,7 +1717,8 @@ namespace Newtonsoft.Json.Tests.Serialization
                 Type serializedType,
                 out string assemblyName,
                 out string typeName
-            ) {
+            )
+            {
                 assemblyName = "AssemblyName";
 #if !(DNXCORE50)
                 typeName =
@@ -2616,7 +2619,8 @@ namespace Newtonsoft.Json.Tests.Serialization
                 Type serializedType,
                 out string assemblyName,
                 out string typeName
-            ) {
+            )
+            {
                 assemblyName = string.Format(
                     "FancyAssemblyName=>{0}",
                     Assembly.GetAssembly(serializedType)?.GetName().Name

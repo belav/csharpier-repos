@@ -117,7 +117,8 @@ namespace Microsoft.CodeAnalysis.RemoveUnnecessarySuppressions
             public CompilationAnalyzer(
                 Compilation compilation,
                 INamedTypeSymbol suppressMessageAttributeType
-            ) {
+            )
+            {
                 _state = new SuppressMessageAttributeState(
                     compilation,
                     suppressMessageAttributeType
@@ -129,7 +130,8 @@ namespace Microsoft.CodeAnalysis.RemoveUnnecessarySuppressions
                 SemanticModel model,
                 Action<Diagnostic> reportDiagnostic,
                 CancellationToken cancellationToken
-            ) {
+            )
+            {
                 if (
                     !_state.IsSuppressMessageAttributeWithNamedArguments(
                         attributeSyntax,
@@ -137,7 +139,8 @@ namespace Microsoft.CodeAnalysis.RemoveUnnecessarySuppressions
                         cancellationToken,
                         out var namedAttributeArguments
                     )
-                ) {
+                )
+                {
                     return;
                 }
 
@@ -146,7 +149,8 @@ namespace Microsoft.CodeAnalysis.RemoveUnnecessarySuppressions
                         namedAttributeArguments,
                         out var targetScope
                     )
-                ) {
+                )
+                {
                     reportDiagnostic(
                         Diagnostic.Create(s_invalidScopeDescriptor, attributeSyntax.GetLocation())
                     );
@@ -162,7 +166,8 @@ namespace Microsoft.CodeAnalysis.RemoveUnnecessarySuppressions
                         out var targetValueOperation,
                         out var resolvedSymbols
                     )
-                ) {
+                )
+                {
                     reportDiagnostic(
                         Diagnostic.Create(
                             s_invalidOrMissingTargetDescriptor,

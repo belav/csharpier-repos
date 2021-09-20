@@ -12,7 +12,8 @@ namespace Microsoft.AspNetCore.Rewrite.ApacheModRewrite
             IEnumerable<Condition> conditions,
             RewriteContext context,
             BackReferenceCollection? backReferences
-        ) {
+        )
+        {
             return Evaluate(conditions, context, backReferences, trackAllCaptures: false);
         }
 
@@ -21,7 +22,8 @@ namespace Microsoft.AspNetCore.Rewrite.ApacheModRewrite
             RewriteContext context,
             BackReferenceCollection? backReferences,
             bool trackAllCaptures
-        ) {
+        )
+        {
             BackReferenceCollection? prevBackReferences = null;
             MatchResults? condResult = null;
             var orSucceeded = false;

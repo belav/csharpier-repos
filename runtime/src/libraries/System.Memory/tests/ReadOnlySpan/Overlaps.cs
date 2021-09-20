@@ -11,7 +11,8 @@ namespace System.SpanTests
         private static void DoubleEachElementForwards(
             ReadOnlySpan<int> source,
             Span<int> destination
-        ) {
+        )
+        {
             if (source.Length != destination.Length)
                 throw new ArgumentException();
 
@@ -104,7 +105,8 @@ namespace System.SpanTests
         private static void DoubleEachElementBackwards(
             ReadOnlySpan<int> source,
             Span<int> destination
-        ) {
+        )
+        {
             if (source.Length != destination.Length)
                 throw new ArgumentException();
 

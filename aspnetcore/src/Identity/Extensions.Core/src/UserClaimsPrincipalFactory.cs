@@ -23,7 +23,8 @@ namespace Microsoft.AspNetCore.Identity
         public UserClaimsPrincipalFactory(
             UserManager<TUser> userManager,
             IOptions<IdentityOptions> optionsAccessor
-        ) {
+        )
+        {
             if (userManager == null)
             {
                 throw new ArgumentNullException(nameof(userManager));

@@ -13,7 +13,8 @@ internal struct BB
         BB[] param3,
         bool[] param4,
         char param6
-    ) {
+    )
+    {
         while (((bool)m_xStatic1))
             break;
         do

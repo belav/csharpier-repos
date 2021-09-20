@@ -31,7 +31,8 @@ namespace Microsoft.CodeAnalysis.Remote
             DocumentId documentId,
             TextSpan textSpan,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var document = solution.GetDocument(documentId);
             if (document == null)
             {
@@ -49,7 +50,8 @@ namespace Microsoft.CodeAnalysis.Remote
             TextSpan textSpan,
             int maxResultCount,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             return RunServiceAsync(
                 async cancellationToken =>
                 {
@@ -59,7 +61,8 @@ namespace Microsoft.CodeAnalysis.Remote
                             documentId.ProjectId.DebugName,
                             cancellationToken
                         )
-                    ) {
+                    )
+                    {
                         var solution = await GetSolutionAsync(solutionInfo, cancellationToken)
                             .ConfigureAwait(false);
                         var syntaxNode = await TryFindNodeAsync(
@@ -93,7 +96,8 @@ namespace Microsoft.CodeAnalysis.Remote
             DocumentId documentId,
             TextSpan textSpan,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             return RunServiceAsync(
                 async cancellationToken =>
                 {
@@ -103,7 +107,8 @@ namespace Microsoft.CodeAnalysis.Remote
                             documentId.ProjectId.DebugName,
                             cancellationToken
                         )
-                    ) {
+                    )
+                    {
                         var solution = await GetSolutionAsync(solutionInfo, cancellationToken)
                             .ConfigureAwait(false);
                         var syntaxNode = await TryFindNodeAsync(
@@ -136,7 +141,8 @@ namespace Microsoft.CodeAnalysis.Remote
             DocumentId documentId,
             TextSpan textSpan,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             return RunServiceAsync(
                 async cancellationToken =>
                 {
@@ -146,7 +152,8 @@ namespace Microsoft.CodeAnalysis.Remote
                             documentId.ProjectId.DebugName,
                             cancellationToken
                         )
-                    ) {
+                    )
+                    {
                         var solution = await GetSolutionAsync(solutionInfo, cancellationToken)
                             .ConfigureAwait(false);
                         var syntaxNode = await TryFindNodeAsync(
@@ -179,7 +186,8 @@ namespace Microsoft.CodeAnalysis.Remote
             DocumentId documentId,
             TextSpan textSpan,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             return RunServiceAsync(
                 async cancellationToken =>
                 {
@@ -189,7 +197,8 @@ namespace Microsoft.CodeAnalysis.Remote
                             documentId.ProjectId.DebugName,
                             cancellationToken
                         )
-                    ) {
+                    )
+                    {
                         var solution = await GetSolutionAsync(solutionInfo, cancellationToken)
                             .ConfigureAwait(false);
                         var syntaxNode = await TryFindNodeAsync(

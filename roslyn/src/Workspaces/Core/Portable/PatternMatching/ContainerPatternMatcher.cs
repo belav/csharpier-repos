@@ -62,7 +62,8 @@ namespace Microsoft.CodeAnalysis.PatternMatching
                 string container,
                 ArrayBuilder<PatternMatch> matches,
                 bool fuzzyMatch
-            ) {
+            )
+            {
                 if (fuzzyMatch && !_allowFuzzyMatching)
                 {
                     return false;
@@ -90,7 +91,8 @@ namespace Microsoft.CodeAnalysis.PatternMatching
                     int i = _patternSegments.Length - 1, j = containerParts.Length - 1;
                     i >= 0;
                     i--, j--
-                ) {
+                )
+                {
                     var segment = _patternSegments[i];
                     var containerName = containerParts[j];
                     if (
@@ -100,7 +102,8 @@ namespace Microsoft.CodeAnalysis.PatternMatching
                             tempContainerMatches,
                             fuzzyMatch
                         )
-                    ) {
+                    )
+                    {
                         // This container didn't match the pattern piece.  So there's no match at all.
                         return false;
                     }

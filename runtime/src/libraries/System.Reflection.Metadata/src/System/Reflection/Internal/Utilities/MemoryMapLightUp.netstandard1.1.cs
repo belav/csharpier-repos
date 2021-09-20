@@ -48,7 +48,8 @@ namespace System.Reflection.Internal
             string modernAssembly,
             string classicAssembly,
             out Type type
-        ) {
+        )
+        {
             type = LightUpHelper.GetType(typeName, modernAssembly, classicAssembly);
             return type != null;
         }
@@ -278,7 +279,8 @@ namespace System.Reflection.Internal
             object accessor,
             out SafeBuffer safeBuffer,
             out long offset
-        ) {
+        )
+        {
             Debug.Assert(s_lazyIsAvailable.GetValueOrDefault());
 
             safeBuffer = (SafeBuffer)s_lazySafeMemoryMappedViewHandle.GetValue(accessor);

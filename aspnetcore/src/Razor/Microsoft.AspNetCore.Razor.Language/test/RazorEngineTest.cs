@@ -209,7 +209,8 @@ namespace Microsoft.AspNetCore.Razor.Language
 
         private static void AssertDefaultDesignTimeFeatures(
             IEnumerable<IRazorEngineFeature> features
-        ) {
+        )
+        {
             Assert.Collection(
                 features,
                 feature => Assert.IsType<DefaultRazorDirectiveFeature>(feature),

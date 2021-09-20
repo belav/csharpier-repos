@@ -100,7 +100,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Microbenchmarks
             int i,
             ParallelLoopState state,
             PipeScheduler[] schedulers
-        ) {
+        )
+        {
             PipeScheduler pipeScheduler = schedulers[i % schedulers.Length];
             object counter = i;
             for (var t = 0; t < InnerLoopCount; t++)

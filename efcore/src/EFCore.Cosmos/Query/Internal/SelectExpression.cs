@@ -61,7 +61,8 @@ namespace Microsoft.EntityFrameworkCore.Cosmos.Query.Internal
             List<ProjectionExpression> projections,
             RootReferenceExpression fromExpression,
             List<OrderingExpression> orderings
-        ) {
+        )
+        {
             _projection = projections;
             FromExpression = fromExpression;
             _orderings = orderings;
@@ -219,7 +220,8 @@ namespace Microsoft.EntityFrameworkCore.Cosmos.Query.Internal
         /// </summary>
         public virtual void ReplaceProjectionMapping(
             IDictionary<ProjectionMember, Expression> projectionMapping
-        ) {
+        )
+        {
             _projectionMapping.Clear();
             foreach (var kvp in projectionMapping)
             {
@@ -270,7 +272,8 @@ namespace Microsoft.EntityFrameworkCore.Cosmos.Query.Internal
                 _projection.Any(
                     pe => string.Equals(pe.Alias, currentAlias, StringComparison.OrdinalIgnoreCase)
                 )
-            ) {
+            )
+            {
                 currentAlias = $"{baseAlias}{counter++}";
             }
 
@@ -313,7 +316,8 @@ namespace Microsoft.EntityFrameworkCore.Cosmos.Query.Internal
                 expression is SqlConstantExpression sqlConstant
                 && sqlConstant.Value is bool boolValue
                 && boolValue
-            ) {
+            )
+            {
                 return;
             }
 
@@ -389,7 +393,8 @@ namespace Microsoft.EntityFrameworkCore.Cosmos.Query.Internal
             if (
                 _orderings.FirstOrDefault(o => o.Expression.Equals(orderingExpression.Expression))
                 == null
-            ) {
+            )
+            {
                 _orderings.Add(orderingExpression);
             }
         }
@@ -528,7 +533,8 @@ namespace Microsoft.EntityFrameworkCore.Cosmos.Query.Internal
             List<OrderingExpression>? orderings,
             SqlExpression? limit,
             SqlExpression? offset
-        ) {
+        )
+        {
             Check.NotNull(projections, nameof(projections));
             Check.NotNull(fromExpression, nameof(fromExpression));
 

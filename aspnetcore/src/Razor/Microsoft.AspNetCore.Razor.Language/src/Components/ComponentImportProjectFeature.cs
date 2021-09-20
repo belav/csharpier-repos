@@ -54,7 +54,8 @@ namespace Microsoft.AspNetCore.Razor.Language.Components
         public IEnumerable<RazorProjectItem> GetHierarchicalImports(
             RazorProject project,
             RazorProjectItem projectItem
-        ) {
+        )
+        {
             // We want items in descending order. FindHierarchicalItems returns items in ascending order.
             return project.FindHierarchicalItems(
                     projectItem.FilePath,

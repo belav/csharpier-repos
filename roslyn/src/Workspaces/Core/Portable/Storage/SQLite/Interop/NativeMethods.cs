@@ -22,7 +22,8 @@ namespace Microsoft.CodeAnalysis.SQLite.Interop
             int flags,
             string? vfs,
             out Result result
-        ) {
+        )
+        {
             result = (Result)raw.sqlite3_open_v2(filename, out var wrapper, flags, vfs);
             if (result != Result.OK)
             {
@@ -46,7 +47,8 @@ namespace Microsoft.CodeAnalysis.SQLite.Interop
             SafeSqliteHandle db,
             string sql,
             out Result result
-        ) {
+        )
+        {
             using var _ = db.Lease();
 
             result = (Result)raw.sqlite3_prepare_v2(db.DangerousGetWrapper(), sql, out var wrapper);
@@ -76,7 +78,8 @@ namespace Microsoft.CodeAnalysis.SQLite.Interop
             long rowid,
             int flags,
             out Result result
-        ) {
+        )
+        {
             using var _ = db.Lease();
 
             result = (Result)raw.sqlite3_blob_open(
@@ -145,7 +148,8 @@ namespace Microsoft.CodeAnalysis.SQLite.Interop
             SafeSqliteBlobHandle blob,
             Span<byte> bytes,
             int offset
-        ) {
+        )
+        {
             using var _ = blob.Lease();
             return (Result)raw.sqlite3_blob_read(blob.DangerousGetWrapper(), bytes, offset);
         }
@@ -166,7 +170,8 @@ namespace Microsoft.CodeAnalysis.SQLite.Interop
             SafeSqliteStatementHandle stmt,
             int index,
             string val
-        ) {
+        )
+        {
             using var _ = stmt.Lease();
             return (Result)raw.sqlite3_bind_text(stmt.DangerousGetWrapper(), index, val);
         }
@@ -179,7 +184,8 @@ namespace Microsoft.CodeAnalysis.SQLite.Interop
             SafeSqliteStatementHandle stmt,
             int index,
             ReadOnlySpan<byte> val
-        ) {
+        )
+        {
             using var _ = stmt.Lease();
             return (Result)raw.sqlite3_bind_text(stmt.DangerousGetWrapper(), index, val);
         }
@@ -194,7 +200,8 @@ namespace Microsoft.CodeAnalysis.SQLite.Interop
             SafeSqliteStatementHandle stmt,
             int index,
             ReadOnlySpan<byte> bytes
-        ) {
+        )
+        {
             using var _ = stmt.Lease();
             return (Result)raw.sqlite3_bind_blob(stmt.DangerousGetWrapper(), index, bytes);
         }

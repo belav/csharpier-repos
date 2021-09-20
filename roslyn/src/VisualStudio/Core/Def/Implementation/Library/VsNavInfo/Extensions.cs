@@ -16,7 +16,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Library.VsNavIn
             string name,
             _LIB_LISTTYPE type,
             bool expandDottedNames
-        ) {
+        )
+        {
             if (name == null)
             {
                 return;
@@ -51,7 +52,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Library.VsNavIn
             this ImmutableArray<NavInfoNode>.Builder builder,
             string name,
             _LIB_LISTTYPE type
-        ) {
+        )
+        {
             if (string.IsNullOrEmpty(name))
             {
                 return;

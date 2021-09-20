@@ -23,14 +23,16 @@ namespace System.Text.Json.Serialization.Converters
             ref Utf8JsonReader reader,
             ref ReadStack state,
             JsonSerializerOptions options
-        ) {
+        )
+        {
             state.Current.ReturnValue = new List<TElement>();
         }
 
         protected override void ConvertCollection(
             ref ReadStack state,
             JsonSerializerOptions options
-        ) {
+        )
+        {
             List<TElement> list = (List<TElement>)state.Current.ReturnValue!;
             state.Current.ReturnValue = list.ToArray();
         }
@@ -40,7 +42,8 @@ namespace System.Text.Json.Serialization.Converters
             TCollection value,
             JsonSerializerOptions options,
             ref WriteStack state
-        ) {
+        )
+        {
             TElement[] array = (TElement[])(IEnumerable)value;
 
             int index = state.Current.EnumeratorIndex;

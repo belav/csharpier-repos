@@ -15,7 +15,8 @@ namespace Microsoft.AspNetCore.Razor.Language.Extensions
         public void WriteDesignTimeDirective(
             CodeRenderingContext context,
             DesignTimeDirectiveIntermediateNode directiveNode
-        ) {
+        )
+        {
             context.CodeWriter.WriteLine("#pragma warning disable 219")
                 .WriteLine($"private void {DirectiveTokenHelperMethodName}() {{");
 
@@ -40,7 +41,8 @@ namespace Microsoft.AspNetCore.Razor.Language.Extensions
             DesignTimeDirectiveIntermediateNode parent,
             DirectiveTokenIntermediateNode node,
             int currentIndex
-        ) {
+        )
+        {
             var tokenKind = node.DirectiveToken.Kind;
             if (
                 !node.Source.HasValue
@@ -49,7 +51,8 @@ namespace Microsoft.AspNetCore.Razor.Language.Extensions
                     node.Source.Value.FilePath,
                     StringComparison.OrdinalIgnoreCase
                 )
-            ) {
+            )
+            {
                 // We don't want to handle directives from imports.
                 return;
             }
@@ -226,7 +229,8 @@ namespace Microsoft.AspNetCore.Razor.Language.Extensions
         private void WriteMarkerToken(
             CodeRenderingContext context,
             DirectiveTokenIntermediateNode node
-        ) {
+        )
+        {
             // Marker tokens exist to be filled with other content a user might write. In an end-to-end
             // scenario markers prep the Razor documents C# projections to have an empty projection that
             // can be filled with other user content. This content can trigger a multitude of other events,

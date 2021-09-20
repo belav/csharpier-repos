@@ -28,7 +28,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
         public TableSharingConcurrencyTokenConvention(
             ProviderConventionSetBuilderDependencies dependencies,
             RelationalConventionSetBuilderDependencies relationalDependencies
-        ) {
+        )
+        {
             Dependencies = dependencies;
         }
 
@@ -41,7 +42,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
         public virtual void ProcessModelFinalizing(
             IConventionModelBuilder modelBuilder,
             IConventionContext<IConventionModelBuilder> context
-        ) {
+        )
+        {
             var tableToEntityTypes = new Dictionary<
                 (string Name, string? Schema),
                 List<IConventionEntityType>
@@ -156,7 +158,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
         public static Dictionary<string, List<IReadOnlyProperty>>? GetConcurrencyTokensMap(
             in StoreObjectIdentifier storeObject,
             IReadOnlyList<IReadOnlyEntityType> mappedTypes
-        ) {
+        )
+        {
             if (mappedTypes.Count < 2)
             {
                 return null;
@@ -176,7 +179,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
                     if (
                         !property.IsConcurrencyToken
                         || (property.ValueGenerated & ValueGenerated.OnUpdate) == 0
-                    ) {
+                    )
+                    {
                         continue;
                     }
 
@@ -215,7 +219,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
             List<IReadOnlyProperty> propertiesMappedToConcurrencyColumn,
             IReadOnlyEntityType entityType,
             IReadOnlyList<IReadOnlyEntityType> mappedTypes
-        ) {
+        )
+        {
             if (entityType.FindPrimaryKey() == null)
             {
                 return false;
@@ -230,7 +235,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
                     || entityType.IsAssignableFrom(declaringEntityType)
                     || declaringEntityType.IsInOwnershipPath(entityType)
                     || entityType.IsInOwnershipPath(declaringEntityType)
-                ) {
+                )
+                {
                     // The concurrency token is in the same hierarchy or in the same aggregate
                     continue;
                 }
@@ -252,7 +258,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
                             fk.PrincipalEntityType.IsAssignableFrom(entityType)
                             || entityType.IsAssignableFrom(fk.PrincipalEntityType)
                     )
-                ) {
+                )
+                {
                     // The concurrency token is on a type that shares the row with a base or derived type
                     continue;
                 }
@@ -266,7 +273,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
 
         private static void RemoveDerivedEntityTypes<T>(
             Dictionary<IConventionEntityType, T> entityTypeDictionary
-        ) {
+        )
+        {
             var toRemove = new HashSet<KeyValuePair<IConventionEntityType, T>>();
             var entityTypesWithDerivedTypes = entityTypeDictionary.Where(
                     e => e.Key.GetDirectlyDerivedTypes().Any()

@@ -78,31 +78,36 @@ namespace System.Web.Mvc
                     if (
                         overrideFilter.FiltersToOverride == typeof(IActionFilter)
                         && filter.Scope >= result.ActionOverrideScope
-                    ) {
+                    )
+                    {
                         result.ActionOverrideScope = filter.Scope;
                     }
                     else if (
                         overrideFilter.FiltersToOverride == typeof(IAuthenticationFilter)
                         && filter.Scope >= result.AuthenticationOverrideScope
-                    ) {
+                    )
+                    {
                         result.AuthenticationOverrideScope = filter.Scope;
                     }
                     else if (
                         overrideFilter.FiltersToOverride == typeof(IAuthorizationFilter)
                         && filter.Scope >= result.AuthorizationOverrideScope
-                    ) {
+                    )
+                    {
                         result.AuthorizationOverrideScope = filter.Scope;
                     }
                     else if (
                         overrideFilter.FiltersToOverride == typeof(IExceptionFilter)
                         && filter.Scope >= result.ExceptionOverrideScope
-                    ) {
+                    )
+                    {
                         result.ExceptionOverrideScope = filter.Scope;
                     }
                     else if (
                         overrideFilter.FiltersToOverride == typeof(IResultFilter)
                         && filter.Scope >= result.ResultOverrideScope
-                    ) {
+                    )
+                    {
                         result.ResultOverrideScope = filter.Scope;
                     }
                 }
@@ -134,7 +139,8 @@ namespace System.Web.Mvc
 
                 if (
                     authenticationFilter != null && filter.Scope >= info.AuthenticationOverrideScope
-                ) {
+                )
+                {
                     _authenticationFilters.Add(authenticationFilter);
                 }
 

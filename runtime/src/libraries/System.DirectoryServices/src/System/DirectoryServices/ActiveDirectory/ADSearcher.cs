@@ -15,7 +15,8 @@ namespace System.DirectoryServices.ActiveDirectory
             string filter,
             string[] propertiesToLoad,
             SearchScope scope
-        ) {
+        )
+        {
             _searcher = new DirectorySearcher(searchRoot, filter, propertiesToLoad, scope);
 
             // set all search preferences
@@ -37,7 +38,8 @@ namespace System.DirectoryServices.ActiveDirectory
             SearchScope scope,
             bool pagedSearch,
             bool cacheResults
-        ) {
+        )
+        {
             _searcher = new DirectorySearcher(searchRoot, filter, propertiesToLoad, scope);
             // set proper time out
             _searcher.ClientTimeout = s_defaultTimeSpan;

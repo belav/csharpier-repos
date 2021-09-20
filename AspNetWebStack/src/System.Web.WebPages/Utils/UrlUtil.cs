@@ -43,7 +43,8 @@ namespace System.Web.WebPages
             string basePath,
             string path,
             params object[] pathParts
-        ) {
+        )
+        {
             if (String.IsNullOrEmpty(path))
             {
                 return path;
@@ -83,7 +84,8 @@ namespace System.Web.WebPages
         private static string GenerateClientUrlInternal(
             HttpContextBase httpContext,
             string contentPath
-        ) {
+        )
+        {
             if (String.IsNullOrEmpty(contentPath))
             {
                 return contentPath;

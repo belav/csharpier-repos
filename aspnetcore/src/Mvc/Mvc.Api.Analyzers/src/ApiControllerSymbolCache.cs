@@ -11,7 +11,8 @@ namespace Microsoft.AspNetCore.Mvc.Api.Analyzers
         public static bool TryCreate(
             Compilation compilation,
             out ApiControllerSymbolCache symbolCache
-        ) {
+        )
+        {
             symbolCache = default;
 
             if (
@@ -19,7 +20,8 @@ namespace Microsoft.AspNetCore.Mvc.Api.Analyzers
                     ApiSymbolNames.ApiConventionMethodAttribute,
                     out var apiConventionMethodAttribute
                 )
-            ) {
+            )
+            {
                 return false;
             }
 
@@ -28,7 +30,8 @@ namespace Microsoft.AspNetCore.Mvc.Api.Analyzers
                     ApiSymbolNames.ApiConventionNameMatchAttribute,
                     out var apiConventionNameMatchAttribute
                 )
-            ) {
+            )
+            {
                 return false;
             }
 
@@ -37,7 +40,8 @@ namespace Microsoft.AspNetCore.Mvc.Api.Analyzers
                     ApiSymbolNames.ApiConventionTypeAttribute,
                     out var apiConventionTypeAttribute
                 )
-            ) {
+            )
+            {
                 return false;
             }
 
@@ -46,7 +50,8 @@ namespace Microsoft.AspNetCore.Mvc.Api.Analyzers
                     ApiSymbolNames.ApiConventionTypeMatchAttribute,
                     out var apiConventionTypeMatchAttribute
                 )
-            ) {
+            )
+            {
                 return false;
             }
 
@@ -60,7 +65,8 @@ namespace Microsoft.AspNetCore.Mvc.Api.Analyzers
                     ApiSymbolNames.DefaultStatusCodeAttribute,
                     out var defaultStatusCodeAttribute
                 )
-            ) {
+            )
+            {
                 return false;
             }
 
@@ -99,7 +105,8 @@ namespace Microsoft.AspNetCore.Mvc.Api.Analyzers
                     ApiSymbolNames.ProducesDefaultResponseTypeAttribute,
                     out var producesDefaultResponseTypeAttribute
                 )
-            ) {
+            )
+            {
                 return false;
             }
 
@@ -108,7 +115,8 @@ namespace Microsoft.AspNetCore.Mvc.Api.Analyzers
                     ApiSymbolNames.ProducesErrorResponseTypeAttribute,
                     out var producesErrorResponseTypeAttribute
                 )
-            ) {
+            )
+            {
                 return false;
             }
 
@@ -117,7 +125,8 @@ namespace Microsoft.AspNetCore.Mvc.Api.Analyzers
                     ApiSymbolNames.ProducesResponseTypeAttribute,
                     out var producesResponseTypeAttribute
                 )
-            ) {
+            )
+            {
                 return false;
             }
 
@@ -186,7 +195,8 @@ namespace Microsoft.AspNetCore.Mvc.Api.Analyzers
             INamedTypeSymbol producesDefaultResponseTypeAttribute,
             INamedTypeSymbol producesResponseTypeAttribute,
             INamedTypeSymbol producesErrorResponseTypeAttribute
-        ) {
+        )
+        {
             ApiConventionMethodAttribute = apiConventionMethodAttribute;
             ApiConventionNameMatchAttribute = apiConventionNameMatchAttribute;
             ApiConventionTypeAttribute = apiConventionTypeAttribute;

@@ -21,7 +21,8 @@ namespace Microsoft.Extensions.DependencyInjection.Extensions
         public static IServiceCollection Add(
             this IServiceCollection collection,
             ServiceDescriptor descriptor
-        ) {
+        )
+        {
             if (collection == null)
             {
                 throw new ArgumentNullException(nameof(collection));
@@ -45,7 +46,8 @@ namespace Microsoft.Extensions.DependencyInjection.Extensions
         public static IServiceCollection Add(
             this IServiceCollection collection,
             IEnumerable<ServiceDescriptor> descriptors
-        ) {
+        )
+        {
             if (collection == null)
             {
                 throw new ArgumentNullException(nameof(collection));
@@ -104,7 +106,8 @@ namespace Microsoft.Extensions.DependencyInjection.Extensions
         public static void TryAdd(
             this IServiceCollection collection,
             IEnumerable<ServiceDescriptor> descriptors
-        ) {
+        )
+        {
             if (collection == null)
             {
                 throw new ArgumentNullException(nameof(collection));
@@ -131,7 +134,8 @@ namespace Microsoft.Extensions.DependencyInjection.Extensions
             this IServiceCollection collection,
             [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicConstructors)]
                 Type service
-        ) {
+        )
+        {
             if (collection == null)
             {
                 throw new ArgumentNullException(nameof(collection));
@@ -159,7 +163,8 @@ namespace Microsoft.Extensions.DependencyInjection.Extensions
             Type service,
             [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicConstructors)]
                 Type implementationType
-        ) {
+        )
+        {
             if (collection == null)
             {
                 throw new ArgumentNullException(nameof(collection));
@@ -191,7 +196,8 @@ namespace Microsoft.Extensions.DependencyInjection.Extensions
             this IServiceCollection collection,
             Type service,
             Func<IServiceProvider, object> implementationFactory
-        ) {
+        )
+        {
             if (collection == null)
             {
                 throw new ArgumentNullException(nameof(collection));
@@ -279,7 +285,8 @@ namespace Microsoft.Extensions.DependencyInjection.Extensions
             this IServiceCollection collection,
             [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicConstructors)]
                 Type service
-        ) {
+        )
+        {
             if (collection == null)
             {
                 throw new ArgumentNullException(nameof(collection));
@@ -307,7 +314,8 @@ namespace Microsoft.Extensions.DependencyInjection.Extensions
             Type service,
             [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicConstructors)]
                 Type implementationType
-        ) {
+        )
+        {
             if (collection == null)
             {
                 throw new ArgumentNullException(nameof(collection));
@@ -339,7 +347,8 @@ namespace Microsoft.Extensions.DependencyInjection.Extensions
             this IServiceCollection collection,
             Type service,
             Func<IServiceProvider, object> implementationFactory
-        ) {
+        )
+        {
             if (collection == null)
             {
                 throw new ArgumentNullException(nameof(collection));
@@ -427,7 +436,8 @@ namespace Microsoft.Extensions.DependencyInjection.Extensions
             this IServiceCollection collection,
             [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicConstructors)]
                 Type service
-        ) {
+        )
+        {
             if (collection == null)
             {
                 throw new ArgumentNullException(nameof(collection));
@@ -455,7 +465,8 @@ namespace Microsoft.Extensions.DependencyInjection.Extensions
             Type service,
             [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicConstructors)]
                 Type implementationType
-        ) {
+        )
+        {
             if (collection == null)
             {
                 throw new ArgumentNullException(nameof(collection));
@@ -487,7 +498,8 @@ namespace Microsoft.Extensions.DependencyInjection.Extensions
             this IServiceCollection collection,
             Type service,
             Func<IServiceProvider, object> implementationFactory
-        ) {
+        )
+        {
             if (collection == null)
             {
                 throw new ArgumentNullException(nameof(collection));
@@ -612,7 +624,8 @@ namespace Microsoft.Extensions.DependencyInjection.Extensions
         public static void TryAddEnumerable(
             this IServiceCollection services,
             ServiceDescriptor descriptor
-        ) {
+        )
+        {
             if (services == null)
             {
                 throw new ArgumentNullException(nameof(services));
@@ -627,7 +640,8 @@ namespace Microsoft.Extensions.DependencyInjection.Extensions
 
             if (
                 implementationType == typeof(object) || implementationType == descriptor.ServiceType
-            ) {
+            )
+            {
                 throw new ArgumentException(
                     SR.Format(
                         SR.TryAddIndistinguishableTypeToEnumerable,
@@ -645,7 +659,8 @@ namespace Microsoft.Extensions.DependencyInjection.Extensions
                 if (
                     service.ServiceType == descriptor.ServiceType
                     && service.GetImplementationType() == implementationType
-                ) {
+                )
+                {
                     // Already added
                     return;
                 }
@@ -674,7 +689,8 @@ namespace Microsoft.Extensions.DependencyInjection.Extensions
         public static void TryAddEnumerable(
             this IServiceCollection services,
             IEnumerable<ServiceDescriptor> descriptors
-        ) {
+        )
+        {
             if (services == null)
             {
                 throw new ArgumentNullException(nameof(services));
@@ -701,7 +717,8 @@ namespace Microsoft.Extensions.DependencyInjection.Extensions
         public static IServiceCollection Replace(
             this IServiceCollection collection,
             ServiceDescriptor descriptor
-        ) {
+        )
+        {
             if (collection == null)
             {
                 throw new ArgumentNullException(nameof(collection));
@@ -746,7 +763,8 @@ namespace Microsoft.Extensions.DependencyInjection.Extensions
         public static IServiceCollection RemoveAll(
             this IServiceCollection collection,
             Type serviceType
-        ) {
+        )
+        {
             if (serviceType == null)
             {
                 throw new ArgumentNullException(nameof(serviceType));

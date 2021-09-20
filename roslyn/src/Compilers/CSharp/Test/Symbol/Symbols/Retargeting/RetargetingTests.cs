@@ -869,7 +869,8 @@ public class C<T> where T : int
         private void CheckTypes(
             ImmutableArray<TypeSymbol> source,
             ImmutableArray<TypeSymbol> retargeting
-        ) {
+        )
+        {
             Assert.Equal(source.Length, retargeting.Length);
             for (int i = 0; i < source.Length; i++)
             {
@@ -900,7 +901,8 @@ public class C<T> where T : int
         private void CheckParameters(
             ImmutableArray<ParameterSymbol> source,
             ImmutableArray<ParameterSymbol> retargeting
-        ) {
+        )
+        {
             Assert.Equal(source.Length, retargeting.Length);
             for (int i = 0; i < source.Length; i++)
             {
@@ -1182,7 +1184,8 @@ class C1<T>
             (bool typeConsistent, bool refModConsistent, bool typeModConsistent) returnConsistent,
             (bool typeConsistent, bool refModConsistent, bool typeModConsistent) param1Consistent,
             (bool typeConsistent, bool refModConsistent, bool typeModConsistent) param2Consistent
-        ) {
+        )
+        {
             var (
                 retargetedAssembly1,
                 retargetedAssembly2,
@@ -1212,7 +1215,8 @@ class C1<T>
                 (true, true, true) == returnConsistent
                 && (true, true, true) == param1Consistent
                 && (true, true, true) == param2Consistent
-            ) {
+            )
+            {
                 Assert.Same(ptrOriginal, ptrRetargeted);
             }
             else
@@ -1300,7 +1304,8 @@ class C1<T>
             static (AssemblySymbol retargetedAssembly1, AssemblySymbol retargetedAssembly2, AssemblySymbol consistentAssembly, CSharpCompilation originalComp, CSharpCompilation retargetedComp) getFunctionPointerRetargetingDefinitions(
                 string mIlSignature,
                 string mOverriddenSignature
-            ) {
+            )
+            {
                 var retargetedSource = @"public class R {{}}";
                 var retargetedIdentity = new AssemblyIdentity(
                     "Ret",
@@ -1682,7 +1687,8 @@ public class C
         public void CheckMarshallingInformation(
             MarshalPseudoCustomAttributeData a,
             MarshalPseudoCustomAttributeData b
-        ) {
+        )
+        {
             Assert.Equal(a == null, b == null);
             if (a != null)
             {

@@ -52,7 +52,8 @@ namespace System.Web.Mvc
             Func<object> modelAccessor,
             Type modelType,
             string propertyName
-        ) {
+        )
+        {
             // If metadata is being created for a property then containerType != null && propertyName != null
             // If metadata is being created for a type then containerType == null && propertyName == null, so we have to use modelType for the cache key.
             Type typeForCache = containerType ?? modelType;
@@ -96,7 +97,8 @@ namespace System.Web.Mvc
             Func<object> modelAccessor,
             Type containerType,
             string propertyName
-        ) {
+        )
+        {
             return base.GetMetadataForProperty(modelAccessor, containerType, propertyName);
         }
 
@@ -104,21 +106,24 @@ namespace System.Web.Mvc
             Func<object> modelAccessor,
             Type containerType,
             PropertyDescriptor propertyDescriptor
-        ) {
+        )
+        {
             return base.GetMetadataForProperty(modelAccessor, containerType, propertyDescriptor);
         }
 
         public sealed override IEnumerable<ModelMetadata> GetMetadataForProperties(
             object container,
             Type containerType
-        ) {
+        )
+        {
             return base.GetMetadataForProperties(container, containerType);
         }
 
         public sealed override ModelMetadata GetMetadataForType(
             Func<object> modelAccessor,
             Type modelType
-        ) {
+        )
+        {
             return base.GetMetadataForType(modelAccessor, modelType);
         }
 

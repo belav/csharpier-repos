@@ -128,7 +128,8 @@ namespace System.Threading
             IOCompletionCallback callback,
             object? state,
             object? pinData
-        ) {
+        )
+        {
             if (callback == null)
                 throw new ArgumentNullException(nameof(callback));
 
@@ -175,7 +176,8 @@ namespace System.Threading
         [CLSCompliant(false)]
         public unsafe NativeOverlapped* AllocateNativeOverlapped(
             PreAllocatedOverlapped preAllocated
-        ) {
+        )
+        {
             if (preAllocated == null)
                 throw new ArgumentNullException(nameof(preAllocated));
 
@@ -277,7 +279,8 @@ namespace System.Threading
 
         private static unsafe ThreadPoolBoundHandleOverlapped GetOverlappedWrapper(
             NativeOverlapped* overlapped
-        ) {
+        )
+        {
             ThreadPoolBoundHandleOverlapped wrapper;
             try
             {

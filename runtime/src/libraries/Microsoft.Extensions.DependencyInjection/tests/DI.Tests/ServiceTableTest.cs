@@ -15,7 +15,8 @@ namespace Microsoft.Extensions.DependencyInjection.ServiceLookup
         [InlineData(typeof(object))]
         public void Constructor_WithImplementationType_ThrowsIfServiceTypeIsOpenGenericAndImplementationTypeIsClosed(
             Type type
-        ) {
+        )
+        {
             // Arrange
             var serviceDescriptors = new[]
             {

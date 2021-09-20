@@ -17,7 +17,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata
             StoreObjectType storeObjectType,
             string name,
             string? schema = null
-        ) {
+        )
+        {
             StoreObjectType = storeObjectType;
             Name = name;
             Schema = schema;
@@ -32,7 +33,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata
         public static StoreObjectIdentifier? Create(
             IReadOnlyEntityType entityType,
             StoreObjectType type
-        ) {
+        )
+        {
             Check.NotNull(entityType, nameof(entityType));
 
             switch (type)

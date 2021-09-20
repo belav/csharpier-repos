@@ -25,12 +25,14 @@ namespace System.Linq.Parallel
             IEqualityComparer<THashKey>? keyComparer,
             IEqualityComparer<TInputOutput>? elementComparer,
             CancellationToken cancellationToken
-        ) : base(
-            inputStream.PartitionCount,
-            Util.GetDefaultComparer<int>(),
-            keyComparer,
-            elementComparer
-        ) {
+        )
+            : base(
+                inputStream.PartitionCount,
+                Util.GetDefaultComparer<int>(),
+                keyComparer,
+                elementComparer
+            )
+        {
             // Create our array of partitions.
             _partitions = new HashRepartitionEnumerator<TInputOutput, THashKey, TIgnoreKey>[
                 inputStream.PartitionCount

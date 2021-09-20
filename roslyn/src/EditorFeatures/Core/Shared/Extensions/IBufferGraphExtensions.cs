@@ -23,7 +23,8 @@ namespace Microsoft.CodeAnalysis.Editor.Shared.Extensions
             this IBufferGraph bufferGraph,
             SnapshotSpan span,
             Predicate<ITextSnapshot> match
-        ) {
+        )
+        {
             var spans = bufferGraph.MapDownToFirstMatch(
                 span,
                 SpanTrackingMode.EdgeExclusive,
@@ -41,7 +42,8 @@ namespace Microsoft.CodeAnalysis.Editor.Shared.Extensions
             this IBufferGraph bufferGraph,
             SnapshotSpan span,
             ITextBuffer targetBuffer
-        ) {
+        )
+        {
             var direction = ClassifyBufferMapDirection(span.Snapshot.TextBuffer, targetBuffer);
             switch (direction)
             {
@@ -77,7 +79,8 @@ namespace Microsoft.CodeAnalysis.Editor.Shared.Extensions
             this IBufferGraph bufferGraph,
             SnapshotPoint point,
             ITextBuffer targetBuffer
-        ) {
+        )
+        {
             var direction = ClassifyBufferMapDirection(point.Snapshot.TextBuffer, targetBuffer);
             switch (direction)
             {
@@ -123,7 +126,8 @@ namespace Microsoft.CodeAnalysis.Editor.Shared.Extensions
         public static BufferMapDirection ClassifyBufferMapDirection(
             ITextBuffer startBuffer,
             ITextBuffer destinationBuffer
-        ) {
+        )
+        {
             if (startBuffer == destinationBuffer)
             {
                 return BufferMapDirection.Identity;
@@ -133,14 +137,16 @@ namespace Microsoft.CodeAnalysis.Editor.Shared.Extensions
             if (
                 startBuffer is IProjectionBufferBase startProjBuffer
                 && IsSourceBuffer(startProjBuffer, destinationBuffer)
-            ) {
+            )
+            {
                 return BufferMapDirection.Down;
             }
 
             if (
                 destinationBuffer is IProjectionBufferBase destProjBuffer
                 && IsSourceBuffer(destProjBuffer, startBuffer)
-            ) {
+            )
+            {
                 return BufferMapDirection.Up;
             }
 

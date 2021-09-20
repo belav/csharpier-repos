@@ -130,7 +130,8 @@ namespace JIT.HardwareIntrinsics.Arm
                     (alignment != 16 && alignment != 8)
                     || (alignment * 2) < sizeOfinArray1
                     || (alignment * 2) < sizeOfoutArray
-                ) {
+                )
+                {
                     throw new ArgumentException("Invalid value of alignment");
                 }
 
@@ -192,7 +193,8 @@ namespace JIT.HardwareIntrinsics.Arm
 
             public void RunStructFldScenario(
                 LoadAndInsertTest__LoadAndInsertScalar_Vector64_UInt16_3 testClass
-            ) {
+            )
+            {
                 fixed (UInt16* pFld3 = &_fld3)
                 {
                     var result = AdvSimd.LoadAndInsertScalar(_fld1, 3, pFld3);
@@ -205,7 +207,8 @@ namespace JIT.HardwareIntrinsics.Arm
 
             public void RunStructFldScenario_Load(
                 LoadAndInsertTest__LoadAndInsertScalar_Vector64_UInt16_3 testClass
-            ) {
+            )
+            {
                 fixed (Vector64<UInt16>* pFld1 = &_fld1)fixed (UInt16* pFld3 = &_fld3)
                 {
                     var result = AdvSimd.LoadAndInsertScalar(
@@ -546,7 +549,8 @@ namespace JIT.HardwareIntrinsics.Arm
             UInt16 op3,
             void* result,
             [CallerMemberName] string method = ""
-        ) {
+        )
+        {
             UInt16[] inArray1 = new UInt16[Op1ElementCount];
             UInt16[] outArray = new UInt16[RetElementCount];
 
@@ -565,7 +569,8 @@ namespace JIT.HardwareIntrinsics.Arm
             UInt16 op3,
             void* result,
             [CallerMemberName] string method = ""
-        ) {
+        )
+        {
             UInt16[] inArray1 = new UInt16[Op1ElementCount];
             UInt16[] outArray = new UInt16[RetElementCount];
 
@@ -588,7 +593,8 @@ namespace JIT.HardwareIntrinsics.Arm
             UInt16 thirdOp,
             UInt16[] result,
             [CallerMemberName] string method = ""
-        ) {
+        )
+        {
             bool succeeded = true;
 
             for (var i = 0; i < RetElementCount; i++)

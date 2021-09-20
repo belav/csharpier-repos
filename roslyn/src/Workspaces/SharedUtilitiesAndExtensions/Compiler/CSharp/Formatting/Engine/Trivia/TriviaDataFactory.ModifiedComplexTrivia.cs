@@ -62,7 +62,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Formatting
                 FormattingContext context,
                 ChainedFormattingRules formattingRules,
                 CancellationToken cancellationToken
-            ) {
+            )
+            {
                 return _original.WithLine(
                     line,
                     indentation,
@@ -77,7 +78,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Formatting
                 FormattingContext context,
                 ChainedFormattingRules formattingRules,
                 CancellationToken cancellationToken
-            ) {
+            )
+            {
                 return _original.WithIndentation(
                     indentation,
                     context,
@@ -92,7 +94,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Formatting
                 Action<int, TokenStream, TriviaData> formattingResultApplier,
                 CancellationToken cancellationToken,
                 int tokenPairIndex = TokenPairIndexNotNeeded
-            ) {
+            )
+            {
                 Contract.ThrowIfFalse(this.SecondTokenIsFirstTokenOnLine);
 
                 var token1 = _original.Token1;

@@ -758,7 +758,8 @@ namespace System.Collections.Immutable
                 IOrderedCollection<T> items,
                 int start,
                 int length
-            ) {
+            )
+            {
                 Requires.NotNull(items, nameof(items));
                 Debug.Assert(start >= 0);
                 Debug.Assert(length >= 0);

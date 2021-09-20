@@ -126,12 +126,14 @@ namespace Newtonsoft.Json.Schema
                             else if (
                                 currentToken.Type == JTokenType.Array
                                 || currentToken.Type == JTokenType.Constructor
-                            ) {
+                            )
+                            {
                                 if (
                                     int.TryParse(part, out int index)
                                     && index >= 0
                                     && index < currentToken.Count()
-                                ) {
+                                )
+                                {
                                     currentToken = currentToken[index];
                                 }
                                 else
@@ -201,7 +203,8 @@ namespace Newtonsoft.Json.Schema
                         string,
                         JsonSchema
                     > patternProperty in schema.PatternProperties.ToList()
-                ) {
+                )
+                {
                     schema.PatternProperties[patternProperty.Key] = ResolveReferences(
                         patternProperty.Value
                     );
@@ -243,7 +246,8 @@ namespace Newtonsoft.Json.Schema
                     JsonTypeReflector.RefPropertyName,
                     out JToken referenceToken
                 )
-            ) {
+            )
+            {
                 JsonSchema deferredSchema = new JsonSchema();
                 deferredSchema.DeferredReference = (string)referenceToken;
 
@@ -550,7 +554,8 @@ namespace Newtonsoft.Json.Schema
                     type,
                     out JsonSchemaType mappedType
                 )
-            ) {
+            )
+            {
                 throw new JsonException(
                     "Invalid JSON schema type: {0}".FormatWith(CultureInfo.InvariantCulture, type)
                 );

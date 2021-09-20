@@ -285,7 +285,8 @@ namespace System.Runtime.CompilerServices
             string overridingMemberDisplay,
             string overriddenMemberDisplay,
             bool requiresMethodimpl = false
-        ) {
+        )
+        {
             var member = comp.GlobalNamespace.GetMember(methodName);
             VerifyOverride(
                 comp,
@@ -302,7 +303,8 @@ namespace System.Runtime.CompilerServices
             string overridingMemberDisplay,
             string overriddenMemberDisplay,
             bool requiresMethodimpl = false
-        ) {
+        )
+        {
             Assert.Equal(overridingMemberDisplay, member.ToTestDisplayString());
             var overriddenMember = member.GetOverriddenMember();
             Assert.Equal(overriddenMemberDisplay, overriddenMember?.ToTestDisplayString());
@@ -333,7 +335,8 @@ namespace System.Runtime.CompilerServices
                             SpecialMember.System_Runtime_CompilerServices_PreserveBaseOverridesAttribute__ctor
                         )
                             is MethodSymbol attrConstructor
-                    ) {
+                    )
+                    {
                         Assert.Equal(
                             requiresMethodimpl,
                             originalMethod.HasAttribute(attrConstructor)
@@ -373,7 +376,8 @@ namespace System.Runtime.CompilerServices
             else if (
                 member is PropertySymbol property
                 && overriddenMember is PropertySymbol overriddenProperty
-            ) {
+            )
+            {
                 var isCovariant = !property.Type.Equals(
                     overriddenProperty.Type,
                     TypeCompareKind.AllIgnoreOptions
@@ -381,7 +385,8 @@ namespace System.Runtime.CompilerServices
                 if (
                     property.GetMethod is MethodSymbol getMethod
                     && overriddenProperty.GetMethod is MethodSymbol overriddenGetMethod
-                ) {
+                )
+                {
                     Assert.True(getMethod.GetOverriddenMember().Equals(overriddenGetMethod));
                     var checkMetadata = hasReturnConversion(property.Type, overriddenProperty.Type);
                     if (checkMetadata)
@@ -398,7 +403,8 @@ namespace System.Runtime.CompilerServices
                                 SpecialMember.System_Runtime_CompilerServices_PreserveBaseOverridesAttribute__ctor
                             )
                                 is MethodSymbol attrConstructor
-                        ) {
+                        )
+                        {
                             Assert.Equal(
                                 requiresMethodimpl,
                                 originalMethod.HasAttribute(attrConstructor)
@@ -409,7 +415,8 @@ namespace System.Runtime.CompilerServices
                 if (
                     property.SetMethod is MethodSymbol setMethod
                     && overriddenProperty.SetMethod is MethodSymbol overriddenSetMethod
-                ) {
+                )
+                {
                     Assert.False(
                         setMethod.IsMetadataNewSlot(ignoreInterfaceImplementationChanges: true)
                     );
@@ -425,7 +432,8 @@ namespace System.Runtime.CompilerServices
             }
             else if (
                 member is EventSymbol eventSymbol && overriddenMember is EventSymbol overriddenEvent
-            ) {
+            )
+            {
                 var isCovariant = !eventSymbol.Type.Equals(
                     overriddenEvent.Type,
                     TypeCompareKind.AllIgnoreOptions
@@ -433,7 +441,8 @@ namespace System.Runtime.CompilerServices
                 if (
                     eventSymbol.AddMethod is MethodSymbol addMethod
                     && overriddenEvent.AddMethod is MethodSymbol overriddenAddMethod
-                ) {
+                )
+                {
                     Assert.Equal(
                         !isCovariant,
                         overriddenAddMethod.Equals(
@@ -445,7 +454,8 @@ namespace System.Runtime.CompilerServices
                 if (
                     eventSymbol.RemoveMethod is MethodSymbol removeMethod
                     && overriddenEvent.RemoveMethod is MethodSymbol overriddenRemoveMethod
-                ) {
+                )
+                {
                     Assert.Equal(
                         !isCovariant,
                         overriddenRemoveMethod.Equals(
@@ -476,7 +486,8 @@ namespace System.Runtime.CompilerServices
             string memberName,
             string containingTypeName,
             params string[] typeArguments
-        ) {
+        )
+        {
             var genericType = (NamedTypeSymbol)comp.GlobalNamespace.GetMember(containingTypeName);
             Assert.Equal(typeArguments.Length, genericType.Arity);
             var constructedType = genericType.Construct(
@@ -505,7 +516,8 @@ namespace System.Runtime.CompilerServices
                     var declaration in tree.GetRoot()
                         .DescendantNodes()
                         .OfType<LocalDeclarationStatementSyntax>()
-                ) {
+                )
+                {
                     foreach (var declarator in declaration.Declaration.Variables)
                     {
                         if (declarator.Initializer is { Value: ExpressionSyntax right })
@@ -527,7 +539,8 @@ namespace System.Runtime.CompilerServices
             string assemblyName = "",
             CSharpCompilationOptions options = null,
             CSharpParseOptions parseOptions = null
-        ) {
+        )
+        {
             parseOptions ??= TestOptions.WithCovariantReturns;
             references =
                 references?.Prepend(CorelibraryWithCovariantReturnSupport1).ToArray()
@@ -549,7 +562,8 @@ namespace System.Runtime.CompilerServices
             string assemblyName = "",
             CSharpCompilationOptions options = null,
             CSharpParseOptions parseOptions = null
-        ) {
+        )
+        {
             parseOptions ??= TestOptions.WithoutCovariantReturns;
             references =
                 references?.Prepend(CorelibraryWithoutCovariantReturnSupport1).ToArray()
@@ -572,7 +586,8 @@ namespace System.Runtime.CompilerServices
             string assemblyName = "",
             CSharpCompilationOptions options = null,
             CSharpParseOptions parseOptions = null
-        ) {
+        )
+        {
             return withCovariantReturns
               ? CreateCompilationWithCovariantReturns(
                     source,
@@ -605,7 +620,8 @@ namespace System.Runtime.CompilerServices
             string assignments,
             MetadataReference[] references = null,
             bool withoutCorlib = false
-        ) {
+        )
+        {
             CompilationReference compAsMetadata = comp.ToMetadataReference();
             references = references?.Append(compAsMetadata) ?? new[] { compAsMetadata };
             var coreLibrary = comp.GetMetadataReference(comp.Assembly.CorLibrary);
@@ -631,7 +647,8 @@ namespace System.Runtime.CompilerServices
             MetadataReference[] references = null,
             bool withoutCorlib = false,
             params DiagnosticDescription[] expectedDiagnostics
-        ) {
+        )
+        {
             var compAsImage = comp.EmitToImageReference();
             references = references?.Append(compAsImage) ?? new[] { compAsImage };
             var coreLibrary = comp.GetMetadataReference(comp.Assembly.CorLibrary);
@@ -652,7 +669,8 @@ namespace System.Runtime.CompilerServices
             MetadataReference[] references = null,
             bool withoutCorlib = false,
             params DiagnosticDescription[] expectedDiagnostics
-        ) {
+        )
+        {
             CompilationReference compAsMetadata = comp.ToMetadataReference();
             references = references?.Append(compAsMetadata) ?? new[] { compAsMetadata };
             if (!withoutCorlib)
@@ -3619,7 +3637,8 @@ End Class
                 var localDeclaration in vbTree.GetRoot()
                     .DescendantNodes()
                     .OfType<VisualBasic.Syntax.LocalDeclarationStatementSyntax>()
-            ) {
+            )
+            {
                 foreach (var declarator in localDeclaration.Declarators)
                 {
                     count++;
@@ -5151,7 +5170,8 @@ public class Program
             bool overriddenRuntimeSignatureAmbiguity,
             bool useCovariantReturns,
             bool useSeparateCompilation
-        ) {
+        )
+        {
             var overriddenMethodReturnType = useCovariantReturns ? "object" : "string";
             var baseSource =
                 $@"
@@ -5223,7 +5243,8 @@ public class Derived : Base2<string>
                 overriddenRuntimeSignatureAmbiguity
                 && !withCovariantCapableRuntime
                 && !useCovariantReturns
-            ) {
+            )
+            {
                 expectedDiagnostics = expectedDiagnostics.Append(
                         // (4,27): warning CS1957: Member 'Derived.M(ref string, out string)' overrides 'Base1<string>.M(ref string, out string)'. There are multiple override candidates at run-time. It is implementation dependent which method will be called. Please use a newer runtime.
                         //     public virtual string M(ref Ptring x, out string y) { y = null; return null; }
@@ -5315,7 +5336,8 @@ public class Derived : Base2<string>
             bool overriddenRuntimeSignatureAmbiguity,
             bool useCovariantReturns,
             bool useSeparateCompilation
-        ) {
+        )
+        {
             var overriddenMethodReturnType = useCovariantReturns ? "object" : "string";
             var baseSource =
                 $@"
@@ -5396,7 +5418,8 @@ public class Derived : Base2<string>
                 overriddenRuntimeSignatureAmbiguity
                 && !withCovariantCapableRuntime
                 && !useCovariantReturns
-            ) {
+            )
+            {
                 expectedDiagnostics = expectedDiagnostics.Append(
                         // (5,27): warning CS1957: Member 'Derived.M(ref string, out string)' overrides 'Base1<string>.M(ref string, out string)'. There are multiple override candidates at run-time. It is implementation dependent which method will be called. Please use a newer runtime.
                         //     public virtual string M(ref Ptring x, out string y) { y = null; return null; }
@@ -5491,7 +5514,8 @@ public class Derived : Base2<string>
             bool overriddenRuntimeSignatureAmbiguity,
             bool useCovariantReturns,
             bool useSeparateCompilation
-        ) {
+        )
+        {
             var overriddenMethodReturnType = useCovariantReturns ? "object" : "string";
             var baseSource =
                 $@"
@@ -5648,7 +5672,8 @@ public class Derived : Base<string>
             bool overriddenRuntimeSignatureAmbiguity,
             bool useCovariantReturns,
             bool useSeparateCompilation
-        ) {
+        )
+        {
             var overriddenMethodReturnType = useCovariantReturns ? "object" : "string";
             var baseSource =
                 $@"
@@ -5814,7 +5839,8 @@ public class Derived : Base<string>
             bool withCovariantReturnFeatureEnabled,
             bool withCovariantCapableRuntime,
             bool useSeparateCompilation
-        ) {
+        )
+        {
             var baseSource =
                 $@"
 public class Base1<Ptring>
@@ -5954,7 +5980,8 @@ public class Derived : Base2<string>
             bool overrideProperty,
             bool useCovariantReturns,
             bool useSeparateCompilation
-        ) {
+        )
+        {
             var propertyDeclaration = "public virtual Pbject Prop => default(Pbject);";
             var methodDeclaration = "public virtual object get_Prop() => default(object);";
             var baseSource =
@@ -6037,7 +6064,8 @@ public class Derived : Base<object>
                     || useCovariantReturns
                         && withCovariantReturnFeatureEnabled
                         && withCovariantCapableRuntime
-                ) {
+                )
+                {
                     expectedDiagnostics = expectedDiagnostics.Append(
                             // (4,36): error CS0462: The inherited members 'Base<Pbject>.Prop.get' and 'Base<Pbject>.get_Prop()' have the same signature in type 'Derived', so they cannot be overridden
                             //     public override object Prop => null;

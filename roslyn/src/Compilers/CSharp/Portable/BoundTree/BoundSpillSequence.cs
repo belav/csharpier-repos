@@ -23,7 +23,8 @@ namespace Microsoft.CodeAnalysis.CSharp
 
         private static ImmutableArray<BoundStatement> MakeStatements(
             ImmutableArray<BoundExpression> expressions
-        ) {
+        )
+        {
             return expressions.SelectAsArray<BoundExpression, BoundStatement>(
                 expression =>
                     new BoundExpressionStatement(

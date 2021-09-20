@@ -72,7 +72,8 @@ namespace Microsoft.CodeAnalysis.Editor.Interactive
             IAsynchronousOperationListener listener,
             InteractiveEvaluatorLanguageInfoProvider languageInfo,
             string initialWorkingDirectory
-        ) {
+        )
+        {
             _workspace = workspace;
             _threadingContext = threadingContext;
             _languageInfo = languageInfo;
@@ -112,7 +113,8 @@ namespace Microsoft.CodeAnalysis.Editor.Interactive
             InteractiveHostPlatformInfo platformInfo,
             InteractiveHostOptions options,
             RemoteExecutionResult result
-        ) {
+        )
+        {
             Contract.ThrowIfFalse(result.InitializationResult != null);
 
             _ = _taskQueue.ScheduleTask(
@@ -278,7 +280,8 @@ namespace Microsoft.CodeAnalysis.Editor.Interactive
             string languageName,
             ImmutableArray<string> imports,
             ImmutableArray<MetadataReference> references
-        ) {
+        )
+        {
             var name = newSubmissionProjectId.DebugName;
             RoslynDebug.AssertNotNull(name);
 
@@ -296,7 +299,8 @@ namespace Microsoft.CodeAnalysis.Editor.Interactive
                     || !metadataResolver.PathResolver.SearchPaths.SequenceEqual(
                         _referenceSearchPaths
                     )
-                ) {
+                )
+                {
                     compilationOptions = compilationOptions.WithMetadataReferenceResolver(
                         metadataResolver.WithRelativePathResolver(
                             new RelativePathResolver(_referenceSearchPaths, _workingDirectory)
@@ -309,7 +313,8 @@ namespace Microsoft.CodeAnalysis.Editor.Interactive
                 if (
                     sourceResolver.BaseDirectory != _workingDirectory
                     || !sourceResolver.SearchPaths.SequenceEqual(_sourceSearchPaths)
-                ) {
+                )
+                {
                     compilationOptions = compilationOptions.WithSourceReferenceResolver(
                         CreateSourceReferenceResolver(sourceResolver.SearchPaths, _workingDirectory)
                     );
@@ -421,7 +426,8 @@ namespace Microsoft.CodeAnalysis.Editor.Interactive
             InteractiveHostPlatformInfo platformInfo,
             ImmutableArray<string> searchPaths,
             string baseDirectory
-        ) {
+        )
+        {
             return new RuntimeMetadataReferenceResolver(
                 searchPaths,
                 baseDirectory,
@@ -443,7 +449,8 @@ namespace Microsoft.CodeAnalysis.Editor.Interactive
             ImmutableArray<string> referenceSearchPaths,
             ImmutableArray<string> sourceSearchPaths,
             string workingDirectory
-        ) {
+        )
+        {
             return _taskQueue.ScheduleTask(
                 nameof(ExecuteCodeAsync),
                 async () =>

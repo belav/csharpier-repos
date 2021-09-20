@@ -35,7 +35,8 @@ namespace Microsoft.EntityFrameworkCore.InMemory.Query.Internal
         public ShaperExpressionProcessingExpressionVisitor(
             InMemoryQueryExpression? queryExpression,
             ParameterExpression valueBufferParameter
-        ) {
+        )
+        {
             _queryExpression = queryExpression;
             _valueBufferParameter = valueBufferParameter;
         }
@@ -110,7 +111,8 @@ namespace Microsoft.EntityFrameworkCore.InMemory.Query.Internal
                     if (
                         includeExpression.NavigationExpression
                         is CollectionShaperExpression collectionShaper
-                    ) {
+                    )
+                    {
                         var innerLambda = (LambdaExpression)collectionShaper.InnerShaper;
                         var innerShaper = new ShaperExpressionProcessingExpressionVisitor(
                             null,

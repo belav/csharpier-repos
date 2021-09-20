@@ -78,7 +78,8 @@ namespace System.ComponentModel.Tests
             string name,
             Attribute[] attributes,
             Attribute[] expected
-        ) {
+        )
+        {
             var descriptor = new SubMemberDescriptor(name, attributes);
             Assert.Equal(expected, descriptor.Attributes.Cast<Attribute>());
             Assert.Same(descriptor.Attributes, descriptor.Attributes);
@@ -182,7 +183,8 @@ namespace System.ComponentModel.Tests
             string name,
             Attribute[] attributes,
             Attribute[] expectedAttributes
-        ) {
+        )
+        {
             var originalAttributes = new Attribute[]
             {
                 new CategoryAttribute("Category"),
@@ -393,7 +395,8 @@ namespace System.ComponentModel.Tests
         public void Category_GetWithCategoryAttribute_ReturnsExpected(
             CategoryAttribute attribute,
             string expected
-        ) {
+        )
+        {
             var descriptor = new SubMemberDescriptor("Name", new Attribute[] { attribute });
             Assert.Equal(expected, descriptor.Category);
             Assert.Same(descriptor.Category, descriptor.Category);
@@ -406,7 +409,8 @@ namespace System.ComponentModel.Tests
         public void Category_GetModifyAttributesAndGet_CachesFirstResult(
             string originalCategory,
             string expected
-        ) {
+        )
+        {
             var descriptor = new SubMemberDescriptor(
                 "Name",
                 new Attribute[] { new CategoryAttribute(originalCategory) }
@@ -423,7 +427,8 @@ namespace System.ComponentModel.Tests
         [InlineData("Category")]
         public void Category_DontGetModifyAttributesAndGet_DoesNotCacheFirstResult(
             string originalCategory
-        ) {
+        )
+        {
             var descriptor = new SubMemberDescriptor(
                 "Name",
                 new Attribute[] { new CategoryAttribute(originalCategory) }
@@ -459,7 +464,8 @@ namespace System.ComponentModel.Tests
         public void Description_GetWithDescriptionAttribute_ReturnsExpected(
             DescriptionAttribute attribute,
             string expected
-        ) {
+        )
+        {
             var descriptor = new SubMemberDescriptor("Name", new Attribute[] { attribute });
             Assert.Equal(expected, descriptor.Description);
             Assert.Same(descriptor.Description, descriptor.Description);
@@ -472,7 +478,8 @@ namespace System.ComponentModel.Tests
         public void Description_GetModifyDescriptionAttribute_CachesFirstResult(
             string originalDescription,
             string expected
-        ) {
+        )
+        {
             var attribute = new ChangingDescriptionAttribute
             {
                 DescriptionValue = originalDescription
@@ -490,7 +497,8 @@ namespace System.ComponentModel.Tests
         [InlineData("Description")]
         public void Description_DontGetModifyDescriptionAttribute_DoesNotCacheFirstResult(
             string originalDescription
-        ) {
+        )
+        {
             var attribute = new ChangingDescriptionAttribute
             {
                 DescriptionValue = originalDescription
@@ -507,7 +515,8 @@ namespace System.ComponentModel.Tests
         public void Description_GetModifyAttributesAndGet_CachesFirstResult(
             string originalDescription,
             string expected
-        ) {
+        )
+        {
             var descriptor = new SubMemberDescriptor(
                 "Name",
                 new Attribute[] { new DescriptionAttribute(originalDescription) }
@@ -527,7 +536,8 @@ namespace System.ComponentModel.Tests
         [InlineData("Description")]
         public void Description_DontGetModifyAttributesAndGet_DoesNotCacheFirstResult(
             string originalDescription
-        ) {
+        )
+        {
             var descriptor = new SubMemberDescriptor(
                 "Name",
                 new Attribute[] { new DescriptionAttribute(originalDescription) }
@@ -564,7 +574,8 @@ namespace System.ComponentModel.Tests
         public void DesignTimeOnly_GetWithDesignOnlyAttribute_ReturnsExpected(
             DesignOnlyAttribute attribute,
             bool expected
-        ) {
+        )
+        {
             var descriptor = new SubMemberDescriptor("Name", new Attribute[] { attribute });
             Assert.Equal(expected, descriptor.DesignTimeOnly);
         }
@@ -621,7 +632,8 @@ namespace System.ComponentModel.Tests
         public void DisplayName_GetWithDisplayNameAttribute_ReturnsExpected(
             DisplayNameAttribute attribute,
             string expected
-        ) {
+        )
+        {
             var descriptor = new SubMemberDescriptor("Name", new Attribute[] { attribute });
             Assert.Equal("Name", descriptor.Name);
             Assert.Equal(expected, descriptor.DisplayName);
@@ -635,7 +647,8 @@ namespace System.ComponentModel.Tests
         public void DisplayName_GetModifyDisplayNameAttribute_CachesFirstResult(
             string originalDisplayName,
             string expected
-        ) {
+        )
+        {
             var attribute = new ChangingDisplayNameAttribute
             {
                 DisplayNameValue = originalDisplayName
@@ -653,7 +666,8 @@ namespace System.ComponentModel.Tests
         [InlineData("DisplayName")]
         public void DisplayName_DontGetModifyDisplayNameAttribute_DoesNotCacheFirstResult(
             string originalDisplayName
-        ) {
+        )
+        {
             var attribute = new ChangingDisplayNameAttribute
             {
                 DisplayNameValue = originalDisplayName
@@ -670,7 +684,8 @@ namespace System.ComponentModel.Tests
         public void DisplayName_GetModifyAttributesAndGet_DoesNotCacheFirstResult(
             string originalDisplayName,
             string expected
-        ) {
+        )
+        {
             var descriptor = new SubMemberDescriptor(
                 "Name",
                 new Attribute[] { new DisplayNameAttribute(originalDisplayName) }
@@ -690,7 +705,8 @@ namespace System.ComponentModel.Tests
         [InlineData("DisplayName")]
         public void DisplayName_DontGetModifyAttributesAndGet_DoesNotCacheFirstResult(
             string originalDisplayName
-        ) {
+        )
+        {
             var descriptor = new SubMemberDescriptor(
                 "Name",
                 new Attribute[] { new DisplayNameAttribute(originalDisplayName) }
@@ -727,7 +743,8 @@ namespace System.ComponentModel.Tests
         public void IsBrowsable_GetWithBrowsableAttribute_ReturnsExpected(
             BrowsableAttribute attribute,
             bool expected
-        ) {
+        )
+        {
             var descriptor = new SubMemberDescriptor("Name", new Attribute[] { attribute });
             Assert.Equal(expected, descriptor.IsBrowsable);
         }
@@ -1237,7 +1254,8 @@ namespace System.ComponentModel.Tests
             MemberDescriptor descriptor,
             object other,
             bool expected
-        ) {
+        )
+        {
             Assert.Equal(expected, descriptor.Equals(other));
         }
 
@@ -1299,7 +1317,8 @@ namespace System.ComponentModel.Tests
             Type type,
             object instance,
             object expected
-        ) {
+        )
+        {
             var descriptor = new SubMemberDescriptor("Name");
             Assert.Same(expected, descriptor.GetInvocationTarget(type, instance));
         }
@@ -1331,7 +1350,8 @@ namespace System.ComponentModel.Tests
             Type componentClass,
             object component,
             object expected
-        ) {
+        )
+        {
             Assert.Same(expected, SubMemberDescriptor.GetInvokee(componentClass, component));
         }
 
@@ -1414,7 +1434,8 @@ namespace System.ComponentModel.Tests
                 string name,
                 Type[] args,
                 Type returnType
-            ) {
+            )
+            {
                 return MemberDescriptor.FindMethod(componentClass, name, args, returnType);
             }
 
@@ -1424,7 +1445,8 @@ namespace System.ComponentModel.Tests
                 Type[] args,
                 Type returnType,
                 bool publicOnly
-            ) {
+            )
+            {
                 return MemberDescriptor.FindMethod(
                     componentClass,
                     name,
@@ -2485,7 +2507,8 @@ namespace System.ComponentModel.Tests
             Type returnType,
             bool publicOnly,
             string expectedName
-        ) {
+        )
+        {
             MethodInfo result = SubMemberDescriptor.FindMethod(
                 componentClass,
                 name,
@@ -3315,7 +3338,8 @@ namespace System.ComponentModel.Tests
             Type[] args,
             Type returnType,
             string expectedName
-        ) {
+        )
+        {
             MethodInfo result = SubMemberDescriptor.FindMethod(
                 componentClass,
                 name,

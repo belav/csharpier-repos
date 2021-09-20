@@ -23,7 +23,8 @@ namespace System.DirectoryServices.ActiveDirectory
             long filter,
             long time,
             IntPtr dn
-        ) {
+        )
+        {
             PartitionName = partition;
             SourceInvocationId = guid;
             UpToDatenessUsn = filter;

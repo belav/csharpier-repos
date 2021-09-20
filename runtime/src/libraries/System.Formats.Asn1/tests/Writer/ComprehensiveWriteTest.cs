@@ -382,7 +382,8 @@ namespace System.Formats.Asn1.Tests.Writer
             string oid,
             string value,
             UniversalTagNumber valueType
-        ) {
+        )
+        {
             using (writer.PushSetOf())
             using (writer.PushSequence())
             {

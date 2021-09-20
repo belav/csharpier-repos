@@ -47,7 +47,8 @@ namespace System.IO.Ports.Tests
                 SerialPort com = new SerialPort(
                     TCSupport.LocalMachineSerialInfo.FirstAvailablePortName
                 )
-            ) {
+            )
+            {
                 VerifyExceptionAtOpen(com, newLine, expectedException);
 
                 if (com.IsOpen)
@@ -107,7 +108,8 @@ namespace System.IO.Ports.Tests
             SerialPort com,
             string newLine,
             Type expectedException
-        ) {
+        )
+        {
             SerialPortProperties serPortProp = new SerialPortProperties();
 
             com.Open();

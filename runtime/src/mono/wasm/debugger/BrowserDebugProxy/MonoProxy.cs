@@ -44,7 +44,8 @@ namespace Microsoft.WebAssembly.Diagnostics
             SessionId sessionId,
             ExecutionContext executionContext,
             out ExecutionContext previousExecutionContext
-        ) {
+        )
+        {
             bool previous = contexts.TryGetValue(sessionId, out previousExecutionContext);
             contexts[sessionId] = executionContext;
             return previous;
@@ -61,7 +62,8 @@ namespace Microsoft.WebAssembly.Diagnostics
             string method,
             JObject args,
             CancellationToken token
-        ) {
+        )
+        {
             switch (method)
             {
                 case "Runtime.consoleAPICalled":
@@ -73,7 +75,8 @@ namespace Microsoft.WebAssembly.Diagnostics
                         if (
                             a?[0]?["value"]?.ToString() == MonoConstants.RUNTIME_IS_READY
                             && a?[1]?["value"]?.ToString() == "fe00e07a-5519-4dfe-b35a-f867dbaf2e28"
-                        ) {
+                        )
+                        {
                             if (a.Count() > 2)
                             {
                                 try
@@ -112,7 +115,8 @@ namespace Microsoft.WebAssembly.Diagnostics
                                         a?[1]?["value"]?.Value<string>(),
                                         out JObject eventArgs
                                     )
-                                ) {
+                                )
+                                {
                                     await OnJSEventRaised(sessionId, eventArgs, token);
 
                                     if (raiseArgs?["trace"]?.Value<bool>() == true)
@@ -219,7 +223,8 @@ namespace Microsoft.WebAssembly.Diagnostics
         private async Task<bool> IsRuntimeAlreadyReadyAlready(
             SessionId sessionId,
             CancellationToken token
-        ) {
+        )
+        {
             if (
                 contexts.TryGetValue(sessionId, out ExecutionContext context)
                 && context.IsRuntimeReady
@@ -235,7 +240,8 @@ namespace Microsoft.WebAssembly.Diagnostics
             string method,
             JObject args,
             CancellationToken token
-        ) {
+        )
+        {
             // Inspector doesn't use the Target domain or sessions
             // so we try to init immediately
             if (id == SessionId.Null)
@@ -586,7 +592,8 @@ namespace Microsoft.WebAssembly.Diagnostics
             string varName,
             JToken varValue,
             CancellationToken token
-        ) {
+        )
+        {
             ExecutionContext ctx = GetContext(id);
             Frame scope = ctx.CallStack.FirstOrDefault(s => s.Id == scopeId);
             if (scope == null)
@@ -625,7 +632,8 @@ namespace Microsoft.WebAssembly.Diagnostics
             DotnetObjectId objectId,
             JToken args,
             CancellationToken token
-        ) {
+        )
+        {
             if (objectId.Scheme == "scope")
             {
                 return await GetScopeProperties(id, int.Parse(objectId.Value), token);
@@ -664,7 +672,8 @@ namespace Microsoft.WebAssembly.Diagnostics
             JObject mono_frame,
             Breakpoint bp,
             CancellationToken token
-        ) {
+        )
+        {
             if (string.IsNullOrEmpty(bp?.Condition) || mono_frame == null)
                 return true;
 
@@ -693,7 +702,8 @@ namespace Microsoft.WebAssembly.Diagnostics
                     retValue?["value"]?.Type == JTokenType.Boolean
                     || retValue?["value"]?.Type == JTokenType.Integer
                     || retValue?["value"]?.Type == JTokenType.Float
-                ) {
+                )
+                {
                     if (retValue?["value"]?.Value<bool>() == true)
                         return true;
                 }
@@ -753,7 +763,8 @@ namespace Microsoft.WebAssembly.Diagnostics
                     "mono_wasm_fire_bp" == function_name
                     || "_mono_wasm_fire_bp" == function_name
                     || "_mono_wasm_fire_exception" == function_name
-                ) {
+                )
+                {
                     if ("_mono_wasm_fire_exception" == function_name)
                     {
                         Result exception_obj_id = await SendMonoCommand(
@@ -891,7 +902,8 @@ namespace Microsoft.WebAssembly.Diagnostics
                             bp,
                             token
                         )
-                    ) {
+                    )
+                    {
                         await SendCommand(sessionId, "Debugger.resume", new JObject(), token);
                         return true;
                     }
@@ -901,7 +913,8 @@ namespace Microsoft.WebAssembly.Diagnostics
                         function_name.StartsWith("wasm-function", StringComparison.Ordinal)
                         || url.StartsWith("wasm://wasm/", StringComparison.Ordinal)
                     )
-                ) {
+                )
+                {
                     callFrames.Add(frame);
                 }
             }
@@ -921,7 +934,8 @@ namespace Microsoft.WebAssembly.Diagnostics
             int method_token,
             SessionId sessionId,
             CancellationToken token
-        ) {
+        )
+        {
             ExecutionContext context = GetContext(sessionId);
             if (urlSymbolServerList.Count == 0)
                 return null;
@@ -983,7 +997,8 @@ namespace Microsoft.WebAssembly.Diagnostics
             SessionId sessionId,
             ExecutionContext context,
             CancellationToken token
-        ) {
+        )
+        {
             Log("verbose", "Default context created, clearing state and sending events");
             if (UpdateContext(sessionId, context, out ExecutionContext previousContext))
             {
@@ -992,7 +1007,8 @@ namespace Microsoft.WebAssembly.Diagnostics
                         string,
                         BreakpointRequest
                     > kvp in previousContext.BreakpointRequests
-                ) {
+                )
+                {
                     context.BreakpointRequests[kvp.Key] = kvp.Value.Clone();
                 }
             }
@@ -1050,7 +1066,8 @@ namespace Microsoft.WebAssembly.Diagnostics
             SessionId sessionId,
             JObject eventArgs,
             CancellationToken token
-        ) {
+        )
+        {
             string eventName = eventArgs?["eventName"]?.Value<string>();
             if (string.IsNullOrEmpty(eventName))
             {
@@ -1076,7 +1093,8 @@ namespace Microsoft.WebAssembly.Diagnostics
             SessionId sessionId,
             JObject eventArgs,
             CancellationToken token
-        ) {
+        )
+        {
             try
             {
                 var store = await LoadStore(sessionId, token);
@@ -1125,7 +1143,8 @@ namespace Microsoft.WebAssembly.Diagnostics
             int scope_id,
             string expression,
             CancellationToken token
-        ) {
+        )
+        {
             try
             {
                 ExecutionContext context = GetContext(msg_id);
@@ -1172,7 +1191,8 @@ namespace Microsoft.WebAssembly.Diagnostics
             SessionId msg_id,
             int scope_id,
             CancellationToken token
-        ) {
+        )
+        {
             try
             {
                 ExecutionContext ctx = GetContext(msg_id);
@@ -1221,7 +1241,8 @@ namespace Microsoft.WebAssembly.Diagnostics
             SourceLocation location,
             string condition,
             CancellationToken token
-        ) {
+        )
+        {
             var bp = new Breakpoint(reqId, location, condition, BreakpointState.Pending);
             string asm_name = bp.Location.CliLocation.Method.Assembly.Name;
             int method_token = bp.Location.CliLocation.Method.Token;
@@ -1249,7 +1270,8 @@ namespace Microsoft.WebAssembly.Diagnostics
             SourceFile source,
             ExecutionContext context,
             CancellationToken token
-        ) {
+        )
+        {
             JObject scriptSource = JObject.FromObject(
                 source.ToScriptSource(context.Id, context.AuxData)
             );
@@ -1292,7 +1314,8 @@ namespace Microsoft.WebAssembly.Diagnostics
                 await foreach (
                     SourceFile source in context.store.Load(sessionId, loaded_files, token)
                         .WithCancellation(token)
-                ) {
+                )
+                {
                     await OnSourceFileAdded(sessionId, source, context, token);
                 }
             }
@@ -1372,7 +1395,8 @@ namespace Microsoft.WebAssembly.Diagnostics
             BreakpointRequest req,
             bool sendResolvedEvent,
             CancellationToken token
-        ) {
+        )
+        {
             ExecutionContext context = GetContext(sessionId);
             if (req.Locations.Any())
             {
@@ -1436,7 +1460,8 @@ namespace Microsoft.WebAssembly.Diagnostics
             SourceLocation start,
             SourceLocation end,
             CancellationToken token
-        ) {
+        )
+        {
             List<SourceLocation> bps = (await RuntimeReady(msg, token)).FindPossibleBreakpoints(
                 start,
                 end
@@ -1460,7 +1485,8 @@ namespace Microsoft.WebAssembly.Diagnostics
             MessageId msg_id,
             string script_id,
             CancellationToken token
-        ) {
+        )
+        {
             if (!SourceId.TryParse(script_id, out SourceId id))
                 return false;
 

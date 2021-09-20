@@ -102,7 +102,8 @@ namespace Templates.Test
                     bytes[0] != expectedBytes[0]
                     || bytes[1] != expectedBytes[1]
                     || bytes[2] != expectedBytes[2]
-                ) {
+                )
+                {
                     Output.WriteLine($"File {filePath} does not have UTF-8 BOM characters.");
                     nonBOMFilesPresent = true;
                 }

@@ -18,26 +18,28 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             ParameterSymbol backingParameter,
             bool isOverride,
             BindingDiagnosticBag diagnostics
-        ) : base(
-            containingType,
-            syntax: syntax,
-            hasGetAccessor: true,
-            hasSetAccessor: true,
-            isExplicitInterfaceImplementation: false,
-            explicitInterfaceType: null,
-            aliasQualifierOpt: null,
-            modifiers: DeclarationModifiers.Public
-                | (isOverride ? DeclarationModifiers.Override : DeclarationModifiers.None),
-            hasInitializer: true, // Synthesized record properties always have a synthesized initializer
-            isAutoProperty: true,
-            isExpressionBodied: false,
-            isInitOnly: true,
-            RefKind.None,
-            backingParameter.Name,
-            indexerNameAttributeLists: new SyntaxList<AttributeListSyntax>(),
-            backingParameter.Locations[0],
-            diagnostics
-        ) {
+        )
+            : base(
+                containingType,
+                syntax: syntax,
+                hasGetAccessor: true,
+                hasSetAccessor: true,
+                isExplicitInterfaceImplementation: false,
+                explicitInterfaceType: null,
+                aliasQualifierOpt: null,
+                modifiers: DeclarationModifiers.Public
+                    | (isOverride ? DeclarationModifiers.Override : DeclarationModifiers.None),
+                hasInitializer: true, // Synthesized record properties always have a synthesized initializer
+                isAutoProperty: true,
+                isExpressionBodied: false,
+                isInitOnly: true,
+                RefKind.None,
+                backingParameter.Name,
+                indexerNameAttributeLists: new SyntaxList<AttributeListSyntax>(),
+                backingParameter.Locations[0],
+                diagnostics
+            )
+        {
             BackingParameter = (SourceParameterSymbol)backingParameter;
         }
 
@@ -53,7 +55,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
         protected override SourcePropertyAccessorSymbol CreateGetAccessorSymbol(
             bool isAutoPropertyAccessor,
             BindingDiagnosticBag diagnostics
-        ) {
+        )
+        {
             Debug.Assert(isAutoPropertyAccessor);
             return CreateAccessorSymbol(isGet: true, CSharpSyntaxNode, diagnostics);
         }
@@ -61,7 +64,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
         protected override SourcePropertyAccessorSymbol CreateSetAccessorSymbol(
             bool isAutoPropertyAccessor,
             BindingDiagnosticBag diagnostics
-        ) {
+        )
+        {
             Debug.Assert(isAutoPropertyAccessor);
             return CreateAccessorSymbol(isGet: false, CSharpSyntaxNode, diagnostics);
         }
@@ -70,7 +74,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             bool isGet,
             CSharpSyntaxNode syntax,
             BindingDiagnosticBag diagnostics
-        ) {
+        )
+        {
             return SourcePropertyAccessorSymbol.CreateAccessorSymbol(
                 isGet,
                 usesInit: !isGet, // the setter is always init-only
@@ -85,7 +90,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
 
         protected override (TypeWithAnnotations Type, ImmutableArray<ParameterSymbol> Parameters) MakeParametersAndBindType(
             BindingDiagnosticBag diagnostics
-        ) {
+        )
+        {
             return (BackingParameter.TypeWithAnnotations, ImmutableArray<ParameterSymbol>.Empty);
         }
 
@@ -96,7 +102,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
 
         public static bool HaveCorrespondingSynthesizedRecordPropertySymbol(
             SourceParameterSymbol parameter
-        ) {
+        )
+        {
             return parameter.ContainingSymbol is SynthesizedRecordConstructor
                 && parameter.ContainingType.GetMembersUnordered()
                     .Any(

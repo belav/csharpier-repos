@@ -29,7 +29,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                 BoundNode node,
                 int indent,
                 Dictionary<SynthesizedLocal, int> tempIdentifiers
-            ) {
+            )
+            {
                 switch (node)
                 {
                     case BoundTryStatement tryStatement:

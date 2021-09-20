@@ -128,7 +128,8 @@ namespace System.Web.Mvc.Test
             public override IEnumerable<ModelValidator> GetValidators(
                 ModelMetadata metadata,
                 ControllerContext context
-            ) {
+            )
+            {
                 return new ModelValidator[] { new ObservableModelValidator(metadata, context) };
             }
 

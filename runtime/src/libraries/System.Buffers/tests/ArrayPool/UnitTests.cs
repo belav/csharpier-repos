@@ -340,10 +340,12 @@ namespace System.Buffers.ArrayPool.Tests
         public static void RentingSpecificLengthsYieldsExpectedLengths(
             int requestedMinimum,
             int expectedLength
-        ) {
+        )
+        {
             foreach (
                 ArrayPool<byte> pool in new[] { ArrayPool<byte>.Create(), ArrayPool<byte>.Shared }
-            ) {
+            )
+            {
                 byte[] buffer1 = pool.Rent(requestedMinimum);
                 byte[] buffer2 = pool.Rent(requestedMinimum);
 
@@ -361,7 +363,8 @@ namespace System.Buffers.ArrayPool.Tests
 
             foreach (
                 ArrayPool<char> pool in new[] { ArrayPool<char>.Create(), ArrayPool<char>.Shared }
-            ) {
+            )
+            {
                 char[] buffer1 = pool.Rent(requestedMinimum);
                 char[] buffer2 = pool.Rent(requestedMinimum);
 
@@ -383,7 +386,8 @@ namespace System.Buffers.ArrayPool.Tests
                     ArrayPool<string>.Create(),
                     ArrayPool<string>.Shared
                 }
-            ) {
+            )
+            {
                 string[] buffer1 = pool.Rent(requestedMinimum);
                 string[] buffer2 = pool.Rent(requestedMinimum);
 
@@ -625,7 +629,8 @@ namespace System.Buffers.ArrayPool.Tests
         [MemberData(nameof(BytePoolInstances))]
         public static void ReturningANonPooledBufferOfDifferentSizeToThePoolThrows(
             ArrayPool<byte> pool
-        ) {
+        )
+        {
             AssertExtensions.Throws<ArgumentException>("array", () => pool.Return(new byte[1]));
         }
 

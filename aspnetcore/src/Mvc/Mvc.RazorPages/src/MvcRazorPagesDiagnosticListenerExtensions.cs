@@ -17,7 +17,8 @@ namespace Microsoft.AspNetCore.Mvc.RazorPages
             HandlerMethodDescriptor handlerMethodDescriptor,
             IReadOnlyDictionary<string, object> arguments,
             object instance
-        ) {
+        )
+        {
             Debug.Assert(diagnosticListener != null);
             Debug.Assert(actionContext != null);
             Debug.Assert(handlerMethodDescriptor != null);
@@ -43,7 +44,8 @@ namespace Microsoft.AspNetCore.Mvc.RazorPages
             HandlerMethodDescriptor handlerMethodDescriptor,
             IReadOnlyDictionary<string, object> arguments,
             object instance
-        ) {
+        )
+        {
             if (diagnosticListener.IsEnabled(Diagnostics.BeforeHandlerMethodEventData.EventName))
             {
                 diagnosticListener.Write(
@@ -65,7 +67,8 @@ namespace Microsoft.AspNetCore.Mvc.RazorPages
             IReadOnlyDictionary<string, object> arguments,
             object instance,
             IActionResult result
-        ) {
+        )
+        {
             Debug.Assert(diagnosticListener != null);
             Debug.Assert(actionContext != null);
             Debug.Assert(handlerMethodDescriptor != null);
@@ -93,7 +96,8 @@ namespace Microsoft.AspNetCore.Mvc.RazorPages
             IReadOnlyDictionary<string, object> arguments,
             object instance,
             IActionResult result
-        ) {
+        )
+        {
             if (diagnosticListener.IsEnabled(Diagnostics.AfterHandlerMethodEventData.EventName))
             {
                 diagnosticListener.Write(
@@ -113,7 +117,8 @@ namespace Microsoft.AspNetCore.Mvc.RazorPages
             this DiagnosticListener diagnosticListener,
             PageHandlerExecutingContext handlerExecutionContext,
             IAsyncPageFilter filter
-        ) {
+        )
+        {
             Debug.Assert(diagnosticListener != null);
             Debug.Assert(handlerExecutionContext != null);
             Debug.Assert(filter != null);
@@ -133,12 +138,14 @@ namespace Microsoft.AspNetCore.Mvc.RazorPages
             DiagnosticListener diagnosticListener,
             PageHandlerExecutingContext handlerExecutionContext,
             IAsyncPageFilter filter
-        ) {
+        )
+        {
             if (
                 diagnosticListener.IsEnabled(
                     Diagnostics.BeforePageFilterOnPageHandlerExecutionEventData.EventName
                 )
-            ) {
+            )
+            {
                 diagnosticListener.Write(
                     Diagnostics.BeforePageFilterOnPageHandlerExecutionEventData.EventName,
                     new BeforePageFilterOnPageHandlerExecutionEventData(
@@ -154,7 +161,8 @@ namespace Microsoft.AspNetCore.Mvc.RazorPages
             this DiagnosticListener diagnosticListener,
             PageHandlerExecutedContext handlerExecutedContext,
             IAsyncPageFilter filter
-        ) {
+        )
+        {
             Debug.Assert(diagnosticListener != null);
             Debug.Assert(handlerExecutedContext != null);
             Debug.Assert(filter != null);
@@ -170,12 +178,14 @@ namespace Microsoft.AspNetCore.Mvc.RazorPages
             DiagnosticListener diagnosticListener,
             PageHandlerExecutedContext handlerExecutedContext,
             IAsyncPageFilter filter
-        ) {
+        )
+        {
             if (
                 diagnosticListener.IsEnabled(
                     Diagnostics.AfterPageFilterOnPageHandlerExecutionEventData.EventName
                 )
-            ) {
+            )
+            {
                 diagnosticListener.Write(
                     Diagnostics.AfterPageFilterOnPageHandlerExecutionEventData.EventName,
                     new AfterPageFilterOnPageHandlerExecutionEventData(
@@ -191,7 +201,8 @@ namespace Microsoft.AspNetCore.Mvc.RazorPages
             this DiagnosticListener diagnosticListener,
             PageHandlerExecutingContext handlerExecutingContext,
             IPageFilter filter
-        ) {
+        )
+        {
             Debug.Assert(diagnosticListener != null);
             Debug.Assert(handlerExecutingContext != null);
             Debug.Assert(filter != null);
@@ -211,12 +222,14 @@ namespace Microsoft.AspNetCore.Mvc.RazorPages
             DiagnosticListener diagnosticListener,
             PageHandlerExecutingContext handlerExecutingContext,
             IPageFilter filter
-        ) {
+        )
+        {
             if (
                 diagnosticListener.IsEnabled(
                     Diagnostics.BeforePageFilterOnPageHandlerExecutingEventData.EventName
                 )
-            ) {
+            )
+            {
                 diagnosticListener.Write(
                     Diagnostics.BeforePageFilterOnPageHandlerExecutingEventData.EventName,
                     new BeforePageFilterOnPageHandlerExecutingEventData(
@@ -232,7 +245,8 @@ namespace Microsoft.AspNetCore.Mvc.RazorPages
             this DiagnosticListener diagnosticListener,
             PageHandlerExecutingContext handlerExecutingContext,
             IPageFilter filter
-        ) {
+        )
+        {
             Debug.Assert(diagnosticListener != null);
             Debug.Assert(handlerExecutingContext != null);
             Debug.Assert(filter != null);
@@ -252,12 +266,14 @@ namespace Microsoft.AspNetCore.Mvc.RazorPages
             DiagnosticListener diagnosticListener,
             PageHandlerExecutingContext handlerExecutingContext,
             IPageFilter filter
-        ) {
+        )
+        {
             if (
                 diagnosticListener.IsEnabled(
                     Diagnostics.AfterPageFilterOnPageHandlerExecutingEventData.EventName
                 )
-            ) {
+            )
+            {
                 diagnosticListener.Write(
                     Diagnostics.AfterPageFilterOnPageHandlerExecutingEventData.EventName,
                     new AfterPageFilterOnPageHandlerExecutingEventData(
@@ -273,7 +289,8 @@ namespace Microsoft.AspNetCore.Mvc.RazorPages
             this DiagnosticListener diagnosticListener,
             PageHandlerExecutedContext handlerExecutedContext,
             IPageFilter filter
-        ) {
+        )
+        {
             Debug.Assert(diagnosticListener != null);
             Debug.Assert(handlerExecutedContext != null);
             Debug.Assert(filter != null);
@@ -289,12 +306,14 @@ namespace Microsoft.AspNetCore.Mvc.RazorPages
             DiagnosticListener diagnosticListener,
             PageHandlerExecutedContext handlerExecutedContext,
             IPageFilter filter
-        ) {
+        )
+        {
             if (
                 diagnosticListener.IsEnabled(
                     Diagnostics.BeforePageFilterOnPageHandlerExecutedEventData.EventName
                 )
-            ) {
+            )
+            {
                 diagnosticListener.Write(
                     Diagnostics.BeforePageFilterOnPageHandlerExecutedEventData.EventName,
                     new BeforePageFilterOnPageHandlerExecutedEventData(
@@ -310,7 +329,8 @@ namespace Microsoft.AspNetCore.Mvc.RazorPages
             this DiagnosticListener diagnosticListener,
             PageHandlerExecutedContext handlerExecutedContext,
             IPageFilter filter
-        ) {
+        )
+        {
             Debug.Assert(diagnosticListener != null);
             Debug.Assert(handlerExecutedContext != null);
             Debug.Assert(filter != null);
@@ -326,12 +346,14 @@ namespace Microsoft.AspNetCore.Mvc.RazorPages
             DiagnosticListener diagnosticListener,
             PageHandlerExecutedContext handlerExecutedContext,
             IPageFilter filter
-        ) {
+        )
+        {
             if (
                 diagnosticListener.IsEnabled(
                     Diagnostics.AfterPageFilterOnPageHandlerExecutedEventData.EventName
                 )
-            ) {
+            )
+            {
                 diagnosticListener.Write(
                     Diagnostics.AfterPageFilterOnPageHandlerExecutedEventData.EventName,
                     new AfterPageFilterOnPageHandlerExecutedEventData(
@@ -347,7 +369,8 @@ namespace Microsoft.AspNetCore.Mvc.RazorPages
             this DiagnosticListener diagnosticListener,
             PageHandlerSelectedContext handlerSelectedContext,
             IAsyncPageFilter filter
-        ) {
+        )
+        {
             Debug.Assert(diagnosticListener != null);
             Debug.Assert(handlerSelectedContext != null);
             Debug.Assert(filter != null);
@@ -367,12 +390,14 @@ namespace Microsoft.AspNetCore.Mvc.RazorPages
             DiagnosticListener diagnosticListener,
             PageHandlerSelectedContext handlerSelectedContext,
             IAsyncPageFilter filter
-        ) {
+        )
+        {
             if (
                 diagnosticListener.IsEnabled(
                     Diagnostics.BeforePageFilterOnPageHandlerSelectionEventData.EventName
                 )
-            ) {
+            )
+            {
                 diagnosticListener.Write(
                     Diagnostics.BeforePageFilterOnPageHandlerSelectionEventData.EventName,
                     new BeforePageFilterOnPageHandlerSelectionEventData(
@@ -388,7 +413,8 @@ namespace Microsoft.AspNetCore.Mvc.RazorPages
             this DiagnosticListener diagnosticListener,
             PageHandlerSelectedContext handlerSelectedContext,
             IAsyncPageFilter filter
-        ) {
+        )
+        {
             Debug.Assert(diagnosticListener != null);
             Debug.Assert(handlerSelectedContext != null);
             Debug.Assert(filter != null);
@@ -404,12 +430,14 @@ namespace Microsoft.AspNetCore.Mvc.RazorPages
             DiagnosticListener diagnosticListener,
             PageHandlerSelectedContext handlerSelectedContext,
             IAsyncPageFilter filter
-        ) {
+        )
+        {
             if (
                 diagnosticListener.IsEnabled(
                     Diagnostics.AfterPageFilterOnPageHandlerSelectionEventData.EventName
                 )
-            ) {
+            )
+            {
                 diagnosticListener.Write(
                     Diagnostics.AfterPageFilterOnPageHandlerSelectionEventData.EventName,
                     new AfterPageFilterOnPageHandlerSelectionEventData(
@@ -425,7 +453,8 @@ namespace Microsoft.AspNetCore.Mvc.RazorPages
             this DiagnosticListener diagnosticListener,
             PageHandlerSelectedContext handlerSelectedContext,
             IPageFilter filter
-        ) {
+        )
+        {
             Debug.Assert(diagnosticListener != null);
             Debug.Assert(handlerSelectedContext != null);
             Debug.Assert(filter != null);
@@ -441,12 +470,14 @@ namespace Microsoft.AspNetCore.Mvc.RazorPages
             DiagnosticListener diagnosticListener,
             PageHandlerSelectedContext handlerSelectedContext,
             IPageFilter filter
-        ) {
+        )
+        {
             if (
                 diagnosticListener.IsEnabled(
                     Diagnostics.BeforePageFilterOnPageHandlerSelectedEventData.EventName
                 )
-            ) {
+            )
+            {
                 diagnosticListener.Write(
                     Diagnostics.BeforePageFilterOnPageHandlerSelectedEventData.EventName,
                     new BeforePageFilterOnPageHandlerSelectedEventData(
@@ -462,7 +493,8 @@ namespace Microsoft.AspNetCore.Mvc.RazorPages
             this DiagnosticListener diagnosticListener,
             PageHandlerSelectedContext handlerSelectedContext,
             IPageFilter filter
-        ) {
+        )
+        {
             Debug.Assert(diagnosticListener != null);
             Debug.Assert(handlerSelectedContext != null);
             Debug.Assert(filter != null);
@@ -478,12 +510,14 @@ namespace Microsoft.AspNetCore.Mvc.RazorPages
             DiagnosticListener diagnosticListener,
             PageHandlerSelectedContext handlerSelectedContext,
             IPageFilter filter
-        ) {
+        )
+        {
             if (
                 diagnosticListener.IsEnabled(
                     Diagnostics.AfterPageFilterOnPageHandlerSelectedEventData.EventName
                 )
-            ) {
+            )
+            {
                 diagnosticListener.Write(
                     Diagnostics.AfterPageFilterOnPageHandlerSelectedEventData.EventName,
                     new AfterPageFilterOnPageHandlerSelectedEventData(

@@ -409,8 +409,9 @@ namespace Microsoft.CodeAnalysis.Operations
 
         public ImmutableArray<TOperation> CreateFromArray<TBoundNode, TOperation>(
             ImmutableArray<TBoundNode> boundNodes
-        ) where TBoundNode : BoundNode
-          where TOperation : class, IOperation
+        )
+            where TBoundNode : BoundNode
+            where TOperation : class, IOperation
         {
             if (boundNodes.IsDefault)
             {
@@ -426,7 +427,8 @@ namespace Microsoft.CodeAnalysis.Operations
 
         private IMethodBodyOperation CreateMethodBodyOperation(
             BoundNonConstructorMethodBody boundNode
-        ) {
+        )
+        {
             return new MethodBodyOperation(
                 (IBlockOperation?)Create(boundNode.BlockBody),
                 (IBlockOperation?)Create(boundNode.ExpressionBody),
@@ -438,7 +440,8 @@ namespace Microsoft.CodeAnalysis.Operations
 
         private IConstructorBodyOperation CreateConstructorBodyOperation(
             BoundConstructorMethodBody boundNode
-        ) {
+        )
+        {
             return new ConstructorBodyOperation(
                 boundNode.Locals.GetPublicSymbols(),
                 Create(boundNode.Initializer),
@@ -452,7 +455,8 @@ namespace Microsoft.CodeAnalysis.Operations
 
         internal ImmutableArray<IOperation> GetIOperationChildren(
             IBoundNodeWithIOperationChildren boundNodeWithChildren
-        ) {
+        )
+        {
             var children = boundNodeWithChildren.Children;
             if (children.IsDefaultOrEmpty)
             {
@@ -477,7 +481,8 @@ namespace Microsoft.CodeAnalysis.Operations
         internal ImmutableArray<IVariableDeclaratorOperation> CreateVariableDeclarator(
             BoundNode declaration,
             SyntaxNode declarationSyntax
-        ) {
+        )
+        {
             switch (declaration.Kind)
             {
                 case BoundKind.LocalDeclaration:
@@ -515,7 +520,8 @@ namespace Microsoft.CodeAnalysis.Operations
 
         private IPlaceholderOperation CreateBoundDeconstructValuePlaceholderOperation(
             BoundDeconstructValuePlaceholder boundDeconstructValuePlaceholder
-        ) {
+        )
+        {
             SyntaxNode syntax = boundDeconstructValuePlaceholder.Syntax;
             ITypeSymbol? type = boundDeconstructValuePlaceholder.GetPublicTypeSymbol();
             bool isImplicit = boundDeconstructValuePlaceholder.WasCompilerGenerated;
@@ -530,7 +536,8 @@ namespace Microsoft.CodeAnalysis.Operations
 
         private IDeconstructionAssignmentOperation CreateBoundDeconstructionAssignmentOperator(
             BoundDeconstructionAssignmentOperator boundDeconstructionAssignmentOperator
-        ) {
+        )
+        {
             IOperation target = Create(boundDeconstructionAssignmentOperator.Left);
             // Skip the synthetic deconstruction conversion wrapping the right operand. This is a compiler-generated conversion that we don't want to reflect
             // in the public API because it's an implementation detail.
@@ -559,7 +566,8 @@ namespace Microsoft.CodeAnalysis.Operations
             if (
                 !boundCall.OriginalMethodsOpt.IsDefault
                 || IsMethodInvalid(boundCall.ResultKind, targetMethod)
-            ) {
+            )
+            {
                 ImmutableArray<IOperation> children = CreateFromArray<BoundNode, IOperation>(
                     ((IBoundInvalidNode)boundCall).InvalidNodeChildren
                 );
@@ -590,7 +598,8 @@ namespace Microsoft.CodeAnalysis.Operations
 
         private IOperation CreateBoundFunctionPointerInvocationOperation(
             BoundFunctionPointerInvocation boundFunctionPointerInvocation
-        ) {
+        )
+        {
             ITypeSymbol? type = boundFunctionPointerInvocation.GetPublicTypeSymbol();
             SyntaxNode syntax = boundFunctionPointerInvocation.Syntax;
             bool isImplicit = boundFunctionPointerInvocation.WasCompilerGenerated;
@@ -624,7 +633,8 @@ namespace Microsoft.CodeAnalysis.Operations
 
         private IOperation CreateBoundUnconvertedAddressOfOperatorOperation(
             BoundUnconvertedAddressOfOperator boundUnconvertedAddressOf
-        ) {
+        )
+        {
             return new AddressOfOperation(
                 Create(boundUnconvertedAddressOf.Operand),
                 _semanticModel,
@@ -637,7 +647,8 @@ namespace Microsoft.CodeAnalysis.Operations
         internal ImmutableArray<IOperation> CreateIgnoredDimensions(
             BoundNode declaration,
             SyntaxNode declarationSyntax
-        ) {
+        )
+        {
             switch (declaration.Kind)
             {
                 case BoundKind.LocalDeclaration:
@@ -675,7 +686,8 @@ namespace Microsoft.CodeAnalysis.Operations
         internal IOperation CreateBoundLocalOperation(
             BoundLocal boundLocal,
             bool createDeclaration = true
-        ) {
+        )
+        {
             ILocalSymbol local = boundLocal.LocalSymbol.GetPublicSymbol();
             bool isDeclaration = boundLocal.DeclarationKind != BoundLocalDeclarationKind.None;
             SyntaxNode syntax = boundLocal.Syntax;
@@ -714,7 +726,8 @@ namespace Microsoft.CodeAnalysis.Operations
         internal IOperation CreateBoundFieldAccessOperation(
             BoundFieldAccess boundFieldAccess,
             bool createDeclaration = true
-        ) {
+        )
+        {
             IFieldSymbol field = boundFieldAccess.FieldSymbol.GetPublicSymbol();
             bool isDeclaration = boundFieldAccess.IsDeclaration;
             SyntaxNode syntax = boundFieldAccess.Syntax;
@@ -785,7 +798,8 @@ namespace Microsoft.CodeAnalysis.Operations
 
         private IPropertyReferenceOperation CreateBoundPropertyAccessOperation(
             BoundPropertyAccess boundPropertyAccess
-        ) {
+        )
+        {
             IOperation? instance = CreateReceiverOperation(
                 boundPropertyAccess.ReceiverOpt,
                 boundPropertyAccess.PropertySymbol
@@ -816,7 +830,8 @@ namespace Microsoft.CodeAnalysis.Operations
             if (
                 !boundIndexerAccess.OriginalIndexersOpt.IsDefault
                 || boundIndexerAccess.ResultKind == LookupResultKind.OverloadResolutionFailure
-            ) {
+            )
+            {
                 var children = CreateFromArray<BoundNode, IOperation>(
                     ((IBoundInvalidNode)boundIndexerAccess).InvalidNodeChildren
                 );
@@ -851,7 +866,8 @@ namespace Microsoft.CodeAnalysis.Operations
 
         private IEventReferenceOperation CreateBoundEventAccessOperation(
             BoundEventAccess boundEventAccess
-        ) {
+        )
+        {
             IEventSymbol @event = boundEventAccess.EventSymbol.GetPublicSymbol();
             IOperation? instance = CreateReceiverOperation(
                 boundEventAccess.ReceiverOpt,
@@ -872,7 +888,8 @@ namespace Microsoft.CodeAnalysis.Operations
 
         private IEventAssignmentOperation CreateBoundEventAssignmentOperatorOperation(
             BoundEventAssignmentOperator boundEventAssignmentOperator
-        ) {
+        )
+        {
             IOperation eventReference = CreateBoundEventAccessOperation(
                 boundEventAssignmentOperator
             );
@@ -894,7 +911,8 @@ namespace Microsoft.CodeAnalysis.Operations
 
         private IParameterReferenceOperation CreateBoundParameterOperation(
             BoundParameter boundParameter
-        ) {
+        )
+        {
             IParameterSymbol parameter = boundParameter.ParameterSymbol.GetPublicSymbol();
             SyntaxNode syntax = boundParameter.Syntax;
             ITypeSymbol? type = boundParameter.GetPublicTypeSymbol();
@@ -911,7 +929,8 @@ namespace Microsoft.CodeAnalysis.Operations
         internal ILiteralOperation CreateBoundLiteralOperation(
             BoundLiteral boundLiteral,
             bool @implicit = false
-        ) {
+        )
+        {
             SyntaxNode syntax = boundLiteral.Syntax;
             ITypeSymbol? type = boundLiteral.GetPublicTypeSymbol();
             ConstantValue? constantValue = boundLiteral.ConstantValue;
@@ -921,7 +940,8 @@ namespace Microsoft.CodeAnalysis.Operations
 
         private IAnonymousObjectCreationOperation CreateBoundAnonymousObjectCreationExpressionOperation(
             BoundAnonymousObjectCreationExpression boundAnonymousObjectCreationExpression
-        ) {
+        )
+        {
             SyntaxNode syntax = boundAnonymousObjectCreationExpression.Syntax;
             ITypeSymbol? type = boundAnonymousObjectCreationExpression.GetPublicTypeSymbol();
             Debug.Assert(type is not null);
@@ -944,7 +964,8 @@ namespace Microsoft.CodeAnalysis.Operations
 
         private IOperation CreateBoundObjectCreationExpressionOperation(
             BoundObjectCreationExpression boundObjectCreationExpression
-        ) {
+        )
+        {
             MethodSymbol constructor = boundObjectCreationExpression.Constructor;
             SyntaxNode syntax = boundObjectCreationExpression.Syntax;
             ITypeSymbol? type = boundObjectCreationExpression.GetPublicTypeSymbol();
@@ -956,7 +977,8 @@ namespace Microsoft.CodeAnalysis.Operations
                     == LookupResultKind.OverloadResolutionFailure
                 || constructor == null
                 || constructor.OriginalDefinition is ErrorMethodSymbol
-            ) {
+            )
+            {
                 var children = CreateFromArray<BoundNode, IOperation>(
                     ((IBoundInvalidNode)boundObjectCreationExpression).InvalidNodeChildren
                 );
@@ -1012,7 +1034,8 @@ namespace Microsoft.CodeAnalysis.Operations
 
         private IOperation CreateBoundWithExpressionOperation(
             BoundWithExpression boundWithExpression
-        ) {
+        )
+        {
             IOperation operand = Create(boundWithExpression.Receiver);
             IObjectOrCollectionInitializerOperation initializer =
                 (IObjectOrCollectionInitializerOperation)Create(
@@ -1035,7 +1058,8 @@ namespace Microsoft.CodeAnalysis.Operations
 
         private IDynamicObjectCreationOperation CreateBoundDynamicObjectCreationExpressionOperation(
             BoundDynamicObjectCreationExpression boundDynamicObjectCreationExpression
-        ) {
+        )
+        {
             IObjectOrCollectionInitializerOperation? initializer =
                 (IObjectOrCollectionInitializerOperation?)Create(
                     boundDynamicObjectCreationExpression.InitializerExpressionOpt
@@ -1093,7 +1117,8 @@ namespace Microsoft.CodeAnalysis.Operations
 
         private IDynamicInvocationOperation CreateBoundDynamicInvocationExpressionOperation(
             BoundDynamicInvocation boundDynamicInvocation
-        ) {
+        )
+        {
             IOperation operation = CreateBoundDynamicInvocationExpressionReceiver(
                 boundDynamicInvocation.Expression
             );
@@ -1121,7 +1146,8 @@ namespace Microsoft.CodeAnalysis.Operations
 
         internal IOperation CreateBoundDynamicIndexerAccessExpressionReceiver(
             BoundExpression indexer
-        ) {
+        )
+        {
             switch (indexer)
             {
                 case BoundDynamicIndexerAccess boundDynamicIndexerAccess:
@@ -1140,7 +1166,8 @@ namespace Microsoft.CodeAnalysis.Operations
 
         internal ImmutableArray<IOperation> CreateBoundDynamicIndexerAccessArguments(
             BoundExpression indexer
-        ) {
+        )
+        {
             switch (indexer)
             {
                 case BoundDynamicIndexerAccess boundDynamicAccess:
@@ -1160,7 +1187,8 @@ namespace Microsoft.CodeAnalysis.Operations
 
         private IDynamicIndexerAccessOperation CreateBoundDynamicIndexerAccessExpressionOperation(
             BoundDynamicIndexerAccess boundDynamicIndexerAccess
-        ) {
+        )
+        {
             IOperation operation = CreateBoundDynamicIndexerAccessExpressionReceiver(
                 boundDynamicIndexerAccess
             );
@@ -1188,7 +1216,8 @@ namespace Microsoft.CodeAnalysis.Operations
 
         private IObjectOrCollectionInitializerOperation CreateBoundObjectInitializerExpressionOperation(
             BoundObjectInitializerExpression boundObjectInitializerExpression
-        ) {
+        )
+        {
             ImmutableArray<IOperation> initializers = CreateFromArray<BoundExpression, IOperation>(
                 BoundObjectCreationExpression.GetChildInitializers(boundObjectInitializerExpression)
             );
@@ -1206,7 +1235,8 @@ namespace Microsoft.CodeAnalysis.Operations
 
         private IObjectOrCollectionInitializerOperation CreateBoundCollectionInitializerExpressionOperation(
             BoundCollectionInitializerExpression boundCollectionInitializerExpression
-        ) {
+        )
+        {
             ImmutableArray<IOperation> initializers = CreateFromArray<BoundExpression, IOperation>(
                 BoundObjectCreationExpression.GetChildInitializers(
                     boundCollectionInitializerExpression
@@ -1227,7 +1257,8 @@ namespace Microsoft.CodeAnalysis.Operations
         private IOperation CreateBoundObjectInitializerMemberOperation(
             BoundObjectInitializerMember boundObjectInitializerMember,
             bool isObjectOrCollectionInitializer = false
-        ) {
+        )
+        {
             Symbol? memberSymbol = boundObjectInitializerMember.MemberSymbol;
             SyntaxNode syntax = boundObjectInitializerMember.Syntax;
             ITypeSymbol? type = boundObjectInitializerMember.GetPublicTypeSymbol();
@@ -1300,7 +1331,8 @@ namespace Microsoft.CodeAnalysis.Operations
                             || boundObjectInitializerMember.ResultKind
                                 == LookupResultKind.OverloadResolutionFailure
                             || accessor.OriginalDefinition is ErrorMethodSymbol
-                        ) {
+                        )
+                        {
                             var children = CreateFromArray<BoundNode, IOperation>(
                                 (
                                     (IBoundInvalidNode)boundObjectInitializerMember
@@ -1350,7 +1382,8 @@ namespace Microsoft.CodeAnalysis.Operations
 
         private IOperation CreateBoundDynamicObjectInitializerMemberOperation(
             BoundDynamicObjectInitializerMember boundDynamicObjectInitializerMember
-        ) {
+        )
+        {
             IOperation instanceReceiver = CreateImplicitReceiver(
                 boundDynamicObjectInitializerMember.Syntax,
                 boundDynamicObjectInitializerMember.ReceiverType
@@ -1377,7 +1410,8 @@ namespace Microsoft.CodeAnalysis.Operations
 
         private IOperation CreateBoundCollectionElementInitializerOperation(
             BoundCollectionElementInitializer boundCollectionElementInitializer
-        ) {
+        )
+        {
             MethodSymbol addMethod = boundCollectionElementInitializer.AddMethod;
             IOperation? receiver = CreateReceiverOperation(
                 boundCollectionElementInitializer.ImplicitReceiverOpt,
@@ -1424,7 +1458,8 @@ namespace Microsoft.CodeAnalysis.Operations
 
         private IDynamicMemberReferenceOperation CreateBoundDynamicMemberAccessOperation(
             BoundDynamicMemberAccess boundDynamicMemberAccess
-        ) {
+        )
+        {
             return CreateBoundDynamicMemberAccessOperation(
                 boundDynamicMemberAccess.Receiver,
                 TypeMap.AsTypeSymbols(boundDynamicMemberAccess.TypeArgumentsOpt),
@@ -1442,7 +1477,8 @@ namespace Microsoft.CodeAnalysis.Operations
             SyntaxNode syntaxNode,
             ITypeSymbol? type,
             bool isImplicit
-        ) {
+        )
+        {
             ITypeSymbol? containingType = null;
             if (receiver?.Kind == BoundKind.TypeExpression)
             {
@@ -1471,7 +1507,8 @@ namespace Microsoft.CodeAnalysis.Operations
 
         private IDynamicInvocationOperation CreateBoundDynamicCollectionElementInitializerOperation(
             BoundDynamicCollectionElementInitializer boundCollectionElementInitializer
-        ) {
+        )
+        {
             IOperation operation = CreateBoundDynamicInvocationExpressionReceiver(
                 boundCollectionElementInitializer.Expression
             );
@@ -1514,7 +1551,8 @@ namespace Microsoft.CodeAnalysis.Operations
 
         private ILocalFunctionOperation CreateBoundLocalFunctionStatementOperation(
             BoundLocalFunctionStatement boundLocalFunctionStatement
-        ) {
+        )
+        {
             IBlockOperation? body = (IBlockOperation?)Create(boundLocalFunctionStatement.Body);
             IBlockOperation? ignoredBody = boundLocalFunctionStatement
                 is { BlockBody: { }, ExpressionBody: { } exprBody }
@@ -1608,7 +1646,8 @@ namespace Microsoft.CodeAnalysis.Operations
                             boundConversion.Type,
                             TypeCompareKind.ConsiderEverything2
                         )
-                    ) {
+                    )
+                    {
                         // Erase this conversion, this is an artificial conversion added on top of BoundConvertedTupleLiteral
                         // in Binder.CreateTupleLiteralConversion
                         return Create(boundOperand);
@@ -1624,7 +1663,8 @@ namespace Microsoft.CodeAnalysis.Operations
                     boundConversion.ExplicitCastInCode
                     && conversion.IsIdentity
                     && boundOperand.Kind == BoundKind.Conversion
-                ) {
+                )
+                {
                     var nestedConversion = (BoundConversion)boundOperand;
                     BoundExpression nestedOperand = nestedConversion.Operand;
 
@@ -1637,7 +1677,8 @@ namespace Microsoft.CodeAnalysis.Operations
                             nestedOperand.Type,
                             TypeCompareKind.ConsiderEverything2
                         )
-                    ) {
+                    )
+                    {
                         // Let's erase the nested conversion, this is an artificial conversion added on top of BoundConvertedTupleLiteral
                         // in Binder.CreateTupleLiteralConversion.
                         // We need to use conversion information from the nested conversion because that is where the real conversion
@@ -1657,7 +1698,8 @@ namespace Microsoft.CodeAnalysis.Operations
                         || boundOperand.Kind == BoundKind.UnboundLambda
                         || boundOperand.Kind == BoundKind.MethodGroup
                     ) && boundConversion.Type.IsDelegateType()
-                ) {
+                )
+                {
                     IOperation target = CreateDelegateTargetOperation(correctedConversionNode);
                     return new DelegateCreationOperation(
                         target,
@@ -1712,7 +1754,8 @@ namespace Microsoft.CodeAnalysis.Operations
 
         private IDelegateCreationOperation CreateBoundDelegateCreationExpressionOperation(
             BoundDelegateCreationExpression boundDelegateCreationExpression
-        ) {
+        )
+        {
             IOperation target = CreateDelegateTargetOperation(boundDelegateCreationExpression);
             SyntaxNode syntax = boundDelegateCreationExpression.Syntax;
             ITypeSymbol? type = boundDelegateCreationExpression.GetPublicTypeSymbol();
@@ -1724,7 +1767,8 @@ namespace Microsoft.CodeAnalysis.Operations
             BoundMethodGroup boundMethodGroup,
             MethodSymbol methodSymbol,
             bool suppressVirtualCalls
-        ) {
+        )
+        {
             bool isVirtual =
                 (methodSymbol.IsAbstract || methodSymbol.IsOverride || methodSymbol.IsVirtual)
                 && !suppressVirtualCalls;
@@ -1768,7 +1812,8 @@ namespace Microsoft.CodeAnalysis.Operations
 
         private ISizeOfOperation CreateBoundSizeOfOperatorOperation(
             BoundSizeOfOperator boundSizeOfOperator
-        ) {
+        )
+        {
             ITypeSymbol? typeOperand = boundSizeOfOperator.SourceType.GetPublicTypeSymbol();
             Debug.Assert(typeOperand is not null);
             SyntaxNode syntax = boundSizeOfOperator.Syntax;
@@ -1787,7 +1832,8 @@ namespace Microsoft.CodeAnalysis.Operations
 
         private ITypeOfOperation CreateBoundTypeOfOperatorOperation(
             BoundTypeOfOperator boundTypeOfOperator
-        ) {
+        )
+        {
             ITypeSymbol? typeOperand = boundTypeOfOperator.SourceType.GetPublicTypeSymbol();
             Debug.Assert(typeOperand is not null);
             SyntaxNode syntax = boundTypeOfOperator.Syntax;
@@ -1798,7 +1844,8 @@ namespace Microsoft.CodeAnalysis.Operations
 
         private IArrayCreationOperation CreateBoundArrayCreationOperation(
             BoundArrayCreation boundArrayCreation
-        ) {
+        )
+        {
             ImmutableArray<IOperation> dimensionSizes = CreateFromArray<
                 BoundExpression,
                 IOperation
@@ -1826,7 +1873,8 @@ namespace Microsoft.CodeAnalysis.Operations
 
         private IArrayInitializerOperation CreateBoundArrayInitializationOperation(
             BoundArrayInitialization boundArrayInitialization
-        ) {
+        )
+        {
             ImmutableArray<IOperation> elementValues = CreateFromArray<BoundExpression, IOperation>(
                 boundArrayInitialization.Initializers
             );
@@ -1837,7 +1885,8 @@ namespace Microsoft.CodeAnalysis.Operations
 
         private IDefaultValueOperation CreateBoundDefaultLiteralOperation(
             BoundDefaultLiteral boundDefaultLiteral
-        ) {
+        )
+        {
             SyntaxNode syntax = boundDefaultLiteral.Syntax;
             ConstantValue? constantValue = boundDefaultLiteral.ConstantValue;
             bool isImplicit = boundDefaultLiteral.WasCompilerGenerated;
@@ -1852,7 +1901,8 @@ namespace Microsoft.CodeAnalysis.Operations
 
         private IDefaultValueOperation CreateBoundDefaultExpressionOperation(
             BoundDefaultExpression boundDefaultExpression
-        ) {
+        )
+        {
             SyntaxNode syntax = boundDefaultExpression.Syntax;
             ITypeSymbol? type = boundDefaultExpression.GetPublicTypeSymbol();
             ConstantValue? constantValue = boundDefaultExpression.ConstantValue;
@@ -1868,7 +1918,8 @@ namespace Microsoft.CodeAnalysis.Operations
 
         private IInstanceReferenceOperation CreateBoundBaseReferenceOperation(
             BoundBaseReference boundBaseReference
-        ) {
+        )
+        {
             InstanceReferenceKind referenceKind = InstanceReferenceKind.ContainingTypeInstance;
             SyntaxNode syntax = boundBaseReference.Syntax;
             ITypeSymbol? type = boundBaseReference.GetPublicTypeSymbol();
@@ -1884,7 +1935,8 @@ namespace Microsoft.CodeAnalysis.Operations
 
         private IInstanceReferenceOperation CreateBoundThisReferenceOperation(
             BoundThisReference boundThisReference
-        ) {
+        )
+        {
             InstanceReferenceKind referenceKind = InstanceReferenceKind.ContainingTypeInstance;
             SyntaxNode syntax = boundThisReference.Syntax;
             ITypeSymbol? type = boundThisReference.GetPublicTypeSymbol();
@@ -1900,7 +1952,8 @@ namespace Microsoft.CodeAnalysis.Operations
 
         private IOperation CreateBoundAssignmentOperatorOrMemberInitializerOperation(
             BoundAssignmentOperator boundAssignmentOperator
-        ) {
+        )
+        {
             return IsMemberInitializer(boundAssignmentOperator)
               ? (IOperation)CreateBoundMemberInitializerOperation(boundAssignmentOperator)
               : CreateBoundAssignmentOperatorOperation(boundAssignmentOperator);
@@ -1912,7 +1965,8 @@ namespace Microsoft.CodeAnalysis.Operations
 
         private ISimpleAssignmentOperation CreateBoundAssignmentOperatorOperation(
             BoundAssignmentOperator boundAssignmentOperator
-        ) {
+        )
+        {
             Debug.Assert(!IsMemberInitializer(boundAssignmentOperator));
 
             IOperation target = Create(boundAssignmentOperator.Left);
@@ -1936,7 +1990,8 @@ namespace Microsoft.CodeAnalysis.Operations
 
         private IMemberInitializerOperation CreateBoundMemberInitializerOperation(
             BoundAssignmentOperator boundAssignmentOperator
-        ) {
+        )
+        {
             Debug.Assert(IsMemberInitializer(boundAssignmentOperator));
             IOperation initializedMember = CreateMemberInitializerInitializedMember(
                 boundAssignmentOperator.Left
@@ -1958,7 +2013,8 @@ namespace Microsoft.CodeAnalysis.Operations
 
         private ICompoundAssignmentOperation CreateBoundCompoundAssignmentOperatorOperation(
             BoundCompoundAssignmentOperator boundCompoundAssignmentOperator
-        ) {
+        )
+        {
             IOperation target = Create(boundCompoundAssignmentOperator.Left);
             IOperation value = Create(boundCompoundAssignmentOperator.Right);
             BinaryOperatorKind operatorKind = Helper.DeriveBinaryOperatorKind(
@@ -1991,7 +2047,8 @@ namespace Microsoft.CodeAnalysis.Operations
 
         private IIncrementOrDecrementOperation CreateBoundIncrementOperatorOperation(
             BoundIncrementOperator boundIncrementOperator
-        ) {
+        )
+        {
             OperationKind operationKind = Helper.IsDecrement(boundIncrementOperator.OperatorKind)
                 ? OperationKind.Decrement
                 : OperationKind.Increment;
@@ -2021,7 +2078,8 @@ namespace Microsoft.CodeAnalysis.Operations
 
         private IInvalidOperation CreateBoundBadExpressionOperation(
             BoundBadExpression boundBadExpression
-        ) {
+        )
+        {
             SyntaxNode syntax = boundBadExpression.Syntax;
             // We match semantic model here: if the expression IsMissing, we have a null type, rather than the ErrorType of the bound node.
             ITypeSymbol? type = syntax.IsMissing ? null : boundBadExpression.GetPublicTypeSymbol();
@@ -2065,7 +2123,8 @@ namespace Microsoft.CodeAnalysis.Operations
 
         private INoPiaObjectCreationOperation CreateNoPiaObjectCreationExpressionOperation(
             BoundNoPiaObjectCreationExpression creation
-        ) {
+        )
+        {
             IObjectOrCollectionInitializerOperation? initializer =
                 (IObjectOrCollectionInitializerOperation?)Create(creation.InitializerExpressionOpt);
             SyntaxNode syntax = creation.Syntax;
@@ -2082,7 +2141,8 @@ namespace Microsoft.CodeAnalysis.Operations
 
         private IUnaryOperation CreateBoundUnaryOperatorOperation(
             BoundUnaryOperator boundUnaryOperator
-        ) {
+        )
+        {
             UnaryOperatorKind unaryOperatorKind = Helper.DeriveUnaryOperatorKind(
                 boundUnaryOperator.OperatorKind
             );
@@ -2110,7 +2170,8 @@ namespace Microsoft.CodeAnalysis.Operations
 
         private IOperation CreateBoundBinaryOperatorBase(
             BoundBinaryOperatorBase boundBinaryOperatorBase
-        ) {
+        )
+        {
             // Binary operators can be nested _many_ levels deep, and cause a stack overflow if we manually recurse.
             // To solve this, we use a manual stack for the left side.
             var stack = ArrayBuilder<BoundBinaryOperatorBase>.GetInstance();
@@ -2147,7 +2208,8 @@ namespace Microsoft.CodeAnalysis.Operations
                 BoundBinaryOperator boundBinaryOperator,
                 IOperation left,
                 IOperation right
-            ) {
+            )
+            {
                 BinaryOperatorKind operatorKind = Helper.DeriveBinaryOperatorKind(
                     boundBinaryOperator.OperatorKind
                 );
@@ -2162,7 +2224,8 @@ namespace Microsoft.CodeAnalysis.Operations
                         || operatorKind == BinaryOperatorKind.ConditionalOr
                     )
                     && operatorMethod?.Parameters.Length == 1
-                ) {
+                )
+                {
                     unaryOperatorMethod = operatorMethod;
                     operatorMethod = null;
                 }
@@ -2195,7 +2258,8 @@ namespace Microsoft.CodeAnalysis.Operations
                 BoundUserDefinedConditionalLogicalOperator boundBinaryOperator,
                 IOperation left,
                 IOperation right
-            ) {
+            )
+            {
                 BinaryOperatorKind operatorKind = Helper.DeriveBinaryOperatorKind(
                     boundBinaryOperator.OperatorKind
                 );
@@ -2232,7 +2296,8 @@ namespace Microsoft.CodeAnalysis.Operations
 
         private ITupleBinaryOperation CreateBoundTupleBinaryOperatorOperation(
             BoundTupleBinaryOperator boundTupleBinaryOperator
-        ) {
+        )
+        {
             IOperation left = Create(boundTupleBinaryOperator.Left);
             IOperation right = Create(boundTupleBinaryOperator.Right);
             BinaryOperatorKind operatorKind = Helper.DeriveBinaryOperatorKind(
@@ -2254,7 +2319,8 @@ namespace Microsoft.CodeAnalysis.Operations
 
         private IConditionalOperation CreateBoundConditionalOperatorOperation(
             BoundConditionalOperator boundConditionalOperator
-        ) {
+        )
+        {
             IOperation condition = Create(boundConditionalOperator.Condition);
             IOperation whenTrue = Create(boundConditionalOperator.Consequence);
             IOperation whenFalse = Create(boundConditionalOperator.Alternative);
@@ -2278,7 +2344,8 @@ namespace Microsoft.CodeAnalysis.Operations
 
         private ICoalesceOperation CreateBoundNullCoalescingOperatorOperation(
             BoundNullCoalescingOperator boundNullCoalescingOperator
-        ) {
+        )
+        {
             IOperation value = Create(boundNullCoalescingOperator.LeftOperand);
             IOperation whenNull = Create(boundNullCoalescingOperator.RightOperand);
             SyntaxNode syntax = boundNullCoalescingOperator.Syntax;
@@ -2295,7 +2362,8 @@ namespace Microsoft.CodeAnalysis.Operations
                     TypeCompareKind.IgnoreCustomModifiersAndArraySizesAndLowerBounds
                         | TypeCompareKind.IgnoreNullableModifiersForReferenceTypes
                 )
-            ) {
+            )
+            {
                 valueConversion = Conversion.Identity;
             }
 
@@ -2313,7 +2381,8 @@ namespace Microsoft.CodeAnalysis.Operations
 
         private IOperation CreateBoundNullCoalescingAssignmentOperatorOperation(
             BoundNullCoalescingAssignmentOperator boundNode
-        ) {
+        )
+        {
             IOperation target = Create(boundNode.LeftOperand);
             IOperation value = Create(boundNode.RightOperand);
             SyntaxNode syntax = boundNode.Syntax;
@@ -2332,7 +2401,8 @@ namespace Microsoft.CodeAnalysis.Operations
 
         private IAwaitOperation CreateBoundAwaitExpressionOperation(
             BoundAwaitExpression boundAwaitExpression
-        ) {
+        )
+        {
             IOperation awaitedValue = Create(boundAwaitExpression.Expression);
             SyntaxNode syntax = boundAwaitExpression.Syntax;
             ITypeSymbol? type = boundAwaitExpression.GetPublicTypeSymbol();
@@ -2342,7 +2412,8 @@ namespace Microsoft.CodeAnalysis.Operations
 
         private IArrayElementReferenceOperation CreateBoundArrayAccessOperation(
             BoundArrayAccess boundArrayAccess
-        ) {
+        )
+        {
             IOperation arrayReference = Create(boundArrayAccess.Expression);
             ImmutableArray<IOperation> indices = CreateFromArray<BoundExpression, IOperation>(
                 boundArrayAccess.Indices
@@ -2363,7 +2434,8 @@ namespace Microsoft.CodeAnalysis.Operations
 
         private INameOfOperation CreateBoundNameOfOperatorOperation(
             BoundNameOfOperator boundNameOfOperator
-        ) {
+        )
+        {
             IOperation argument = Create(boundNameOfOperator.Argument);
             SyntaxNode syntax = boundNameOfOperator.Syntax;
             ITypeSymbol? type = boundNameOfOperator.GetPublicTypeSymbol();
@@ -2381,7 +2453,8 @@ namespace Microsoft.CodeAnalysis.Operations
 
         private IThrowOperation CreateBoundThrowExpressionOperation(
             BoundThrowExpression boundThrowExpression
-        ) {
+        )
+        {
             IOperation expression = Create(boundThrowExpression.Expression);
             SyntaxNode syntax = boundThrowExpression.Syntax;
             ITypeSymbol? type = boundThrowExpression.GetPublicTypeSymbol();
@@ -2391,7 +2464,8 @@ namespace Microsoft.CodeAnalysis.Operations
 
         private IAddressOfOperation CreateBoundAddressOfOperatorOperation(
             BoundAddressOfOperator boundAddressOfOperator
-        ) {
+        )
+        {
             IOperation reference = Create(boundAddressOfOperator.Operand);
             SyntaxNode syntax = boundAddressOfOperator.Syntax;
             ITypeSymbol? type = boundAddressOfOperator.GetPublicTypeSymbol();
@@ -2401,7 +2475,8 @@ namespace Microsoft.CodeAnalysis.Operations
 
         private IInstanceReferenceOperation CreateBoundImplicitReceiverOperation(
             BoundImplicitReceiver boundImplicitReceiver
-        ) {
+        )
+        {
             InstanceReferenceKind referenceKind = InstanceReferenceKind.ImplicitReceiver;
             SyntaxNode syntax = boundImplicitReceiver.Syntax;
             ITypeSymbol? type = boundImplicitReceiver.GetPublicTypeSymbol();
@@ -2417,7 +2492,8 @@ namespace Microsoft.CodeAnalysis.Operations
 
         private IConditionalAccessOperation CreateBoundConditionalAccessOperation(
             BoundConditionalAccess boundConditionalAccess
-        ) {
+        )
+        {
             IOperation operation = Create(boundConditionalAccess.Receiver);
             IOperation whenNotNull = Create(boundConditionalAccess.AccessExpression);
             SyntaxNode syntax = boundConditionalAccess.Syntax;
@@ -2436,7 +2512,8 @@ namespace Microsoft.CodeAnalysis.Operations
 
         private IConditionalAccessInstanceOperation CreateBoundConditionalReceiverOperation(
             BoundConditionalReceiver boundConditionalReceiver
-        ) {
+        )
+        {
             SyntaxNode syntax = boundConditionalReceiver.Syntax;
             ITypeSymbol? type = boundConditionalReceiver.GetPublicTypeSymbol();
             bool isImplicit = boundConditionalReceiver.WasCompilerGenerated;
@@ -2445,7 +2522,8 @@ namespace Microsoft.CodeAnalysis.Operations
 
         private IFieldInitializerOperation CreateBoundFieldEqualsValueOperation(
             BoundFieldEqualsValue boundFieldEqualsValue
-        ) {
+        )
+        {
             ImmutableArray<IFieldSymbol> initializedFields = ImmutableArray.Create<IFieldSymbol>(
                 boundFieldEqualsValue.Field.GetPublicSymbol()
             );
@@ -2464,7 +2542,8 @@ namespace Microsoft.CodeAnalysis.Operations
 
         private IPropertyInitializerOperation CreateBoundPropertyEqualsValueOperation(
             BoundPropertyEqualsValue boundPropertyEqualsValue
-        ) {
+        )
+        {
             ImmutableArray<IPropertySymbol> initializedProperties =
                 ImmutableArray.Create<IPropertySymbol>(
                     boundPropertyEqualsValue.Property.GetPublicSymbol()
@@ -2484,7 +2563,8 @@ namespace Microsoft.CodeAnalysis.Operations
 
         private IParameterInitializerOperation CreateBoundParameterEqualsValueOperation(
             BoundParameterEqualsValue boundParameterEqualsValue
-        ) {
+        )
+        {
             IParameterSymbol parameter = boundParameterEqualsValue.Parameter.GetPublicSymbol();
             IOperation value = Create(boundParameterEqualsValue.Value);
             SyntaxNode syntax = boundParameterEqualsValue.Syntax;
@@ -2512,7 +2592,8 @@ namespace Microsoft.CodeAnalysis.Operations
 
         private IBranchOperation CreateBoundContinueStatementOperation(
             BoundContinueStatement boundContinueStatement
-        ) {
+        )
+        {
             ILabelSymbol target = boundContinueStatement.Label.GetPublicSymbol();
             BranchKind branchKind = BranchKind.Continue;
             SyntaxNode syntax = boundContinueStatement.Syntax;
@@ -2522,7 +2603,8 @@ namespace Microsoft.CodeAnalysis.Operations
 
         private IBranchOperation CreateBoundBreakStatementOperation(
             BoundBreakStatement boundBreakStatement
-        ) {
+        )
+        {
             ILabelSymbol target = boundBreakStatement.Label.GetPublicSymbol();
             BranchKind branchKind = BranchKind.Break;
             SyntaxNode syntax = boundBreakStatement.Syntax;
@@ -2532,7 +2614,8 @@ namespace Microsoft.CodeAnalysis.Operations
 
         private IReturnOperation CreateBoundYieldBreakStatementOperation(
             BoundYieldBreakStatement boundYieldBreakStatement
-        ) {
+        )
+        {
             IOperation? returnedValue = null;
             SyntaxNode syntax = boundYieldBreakStatement.Syntax;
             bool isImplicit = boundYieldBreakStatement.WasCompilerGenerated;
@@ -2547,7 +2630,8 @@ namespace Microsoft.CodeAnalysis.Operations
 
         private IBranchOperation CreateBoundGotoStatementOperation(
             BoundGotoStatement boundGotoStatement
-        ) {
+        )
+        {
             ILabelSymbol target = boundGotoStatement.Label.GetPublicSymbol();
             BranchKind branchKind = BranchKind.GoTo;
             SyntaxNode syntax = boundGotoStatement.Syntax;
@@ -2557,7 +2641,8 @@ namespace Microsoft.CodeAnalysis.Operations
 
         private IEmptyOperation CreateBoundNoOpStatementOperation(
             BoundNoOpStatement boundNoOpStatement
-        ) {
+        )
+        {
             SyntaxNode syntax = boundNoOpStatement.Syntax;
             bool isImplicit = boundNoOpStatement.WasCompilerGenerated;
             return new EmptyOperation(_semanticModel, syntax, isImplicit);
@@ -2565,7 +2650,8 @@ namespace Microsoft.CodeAnalysis.Operations
 
         private IConditionalOperation CreateBoundIfStatementOperation(
             BoundIfStatement boundIfStatement
-        ) {
+        )
+        {
             IOperation condition = Create(boundIfStatement.Condition);
             IOperation whenTrue = Create(boundIfStatement.Consequence);
             IOperation? whenFalse = Create(boundIfStatement.AlternativeOpt);
@@ -2589,7 +2675,8 @@ namespace Microsoft.CodeAnalysis.Operations
 
         private IWhileLoopOperation CreateBoundWhileStatementOperation(
             BoundWhileStatement boundWhileStatement
-        ) {
+        )
+        {
             IOperation condition = Create(boundWhileStatement.Condition);
             IOperation body = Create(boundWhileStatement.Body);
             ImmutableArray<ILocalSymbol> locals = boundWhileStatement.Locals.GetPublicSymbols();
@@ -2616,7 +2703,8 @@ namespace Microsoft.CodeAnalysis.Operations
 
         private IWhileLoopOperation CreateBoundDoStatementOperation(
             BoundDoStatement boundDoStatement
-        ) {
+        )
+        {
             IOperation condition = Create(boundDoStatement.Condition);
             IOperation body = Create(boundDoStatement.Body);
             ILabelSymbol continueLabel = boundDoStatement.ContinueLabel.GetPublicSymbol();
@@ -2643,7 +2731,8 @@ namespace Microsoft.CodeAnalysis.Operations
 
         private IForLoopOperation CreateBoundForStatementOperation(
             BoundForStatement boundForStatement
-        ) {
+        )
+        {
             ImmutableArray<IOperation> before = CreateFromArray<BoundStatement, IOperation>(
                 ToStatements(boundForStatement.Initializer)
             );
@@ -2676,7 +2765,8 @@ namespace Microsoft.CodeAnalysis.Operations
 
         internal ForEachLoopOperationInfo? GetForEachLoopOperatorInfo(
             BoundForEachStatement boundForEachStatement
-        ) {
+        )
+        {
             ForEachEnumeratorInfo? enumeratorInfoOpt = boundForEachStatement.EnumeratorInfoOpt;
             ForEachLoopOperationInfo? info;
 
@@ -2741,7 +2831,8 @@ namespace Microsoft.CodeAnalysis.Operations
 
         internal IOperation CreateBoundForEachStatementLoopControlVariable(
             BoundForEachStatement boundForEachStatement
-        ) {
+        )
+        {
             if (boundForEachStatement.DeconstructionOpt != null)
             {
                 return Create(
@@ -2771,7 +2862,8 @@ namespace Microsoft.CodeAnalysis.Operations
 
         private IForEachLoopOperation CreateBoundForEachStatementOperation(
             BoundForEachStatement boundForEachStatement
-        ) {
+        )
+        {
             IOperation loopControlVariable = CreateBoundForEachStatementLoopControlVariable(
                 boundForEachStatement
             );
@@ -2827,7 +2919,8 @@ namespace Microsoft.CodeAnalysis.Operations
 
         private ICatchClauseOperation CreateBoundCatchBlockOperation(
             BoundCatchBlock boundCatchBlock
-        ) {
+        )
+        {
             IOperation? exceptionDeclarationOrExpression = CreateVariableDeclarator(
                 (BoundLocal?)boundCatchBlock.ExceptionSourceOpt
             );
@@ -2855,7 +2948,8 @@ namespace Microsoft.CodeAnalysis.Operations
 
         private IFixedOperation CreateBoundFixedStatementOperation(
             BoundFixedStatement boundFixedStatement
-        ) {
+        )
+        {
             IVariableDeclarationGroupOperation variables =
                 (IVariableDeclarationGroupOperation)Create(boundFixedStatement.Declarations);
             IOperation body = Create(boundFixedStatement.Body);
@@ -2867,7 +2961,8 @@ namespace Microsoft.CodeAnalysis.Operations
 
         private IUsingOperation CreateBoundUsingStatementOperation(
             BoundUsingStatement boundUsingStatement
-        ) {
+        )
+        {
             Debug.Assert(
                 (boundUsingStatement.DeclarationsOpt == null)
                     != (boundUsingStatement.ExpressionOpt == null)
@@ -2907,7 +3002,8 @@ namespace Microsoft.CodeAnalysis.Operations
 
         private IThrowOperation CreateBoundThrowStatementOperation(
             BoundThrowStatement boundThrowStatement
-        ) {
+        )
+        {
             IOperation? thrownObject = Create(boundThrowStatement.ExpressionOpt);
             SyntaxNode syntax = boundThrowStatement.Syntax;
             ITypeSymbol? statementType = null;
@@ -2923,7 +3019,8 @@ namespace Microsoft.CodeAnalysis.Operations
 
         private IReturnOperation CreateBoundReturnStatementOperation(
             BoundReturnStatement boundReturnStatement
-        ) {
+        )
+        {
             IOperation? returnedValue = Create(boundReturnStatement.ExpressionOpt);
             SyntaxNode syntax = boundReturnStatement.Syntax;
             bool isImplicit = boundReturnStatement.WasCompilerGenerated;
@@ -2938,7 +3035,8 @@ namespace Microsoft.CodeAnalysis.Operations
 
         private IReturnOperation CreateBoundYieldReturnStatementOperation(
             BoundYieldReturnStatement boundYieldReturnStatement
-        ) {
+        )
+        {
             IOperation returnedValue = Create(boundYieldReturnStatement.Expression);
             SyntaxNode syntax = boundYieldReturnStatement.Syntax;
             bool isImplicit = boundYieldReturnStatement.WasCompilerGenerated;
@@ -2953,7 +3051,8 @@ namespace Microsoft.CodeAnalysis.Operations
 
         private ILockOperation CreateBoundLockStatementOperation(
             BoundLockStatement boundLockStatement
-        ) {
+        )
+        {
             // If there is no Enter2 method, then there will be no lock taken reference
             bool legacyMode =
                 _semanticModel.Compilation.CommonGetWellKnownTypeMember(
@@ -2991,7 +3090,8 @@ namespace Microsoft.CodeAnalysis.Operations
 
         private IInvalidOperation CreateBoundBadStatementOperation(
             BoundBadStatement boundBadStatement
-        ) {
+        )
+        {
             SyntaxNode syntax = boundBadStatement.Syntax;
 
             // if child has syntax node point to same syntax node as bad statement, then this invalid statement is implicit
@@ -3015,7 +3115,8 @@ namespace Microsoft.CodeAnalysis.Operations
 
         private IOperation CreateBoundLocalDeclarationOperation(
             BoundLocalDeclaration boundLocalDeclaration
-        ) {
+        )
+        {
             var node = boundLocalDeclaration.Syntax;
             var kind = node.Kind();
 
@@ -3087,7 +3188,8 @@ namespace Microsoft.CodeAnalysis.Operations
 
         private IOperation CreateBoundMultipleLocalDeclarationsBaseOperation(
             BoundMultipleLocalDeclarationsBase boundMultipleLocalDeclarations
-        ) {
+        )
+        {
             // The syntax for the boundMultipleLocalDeclarations can either be a LocalDeclarationStatement or a VariableDeclaration, depending on the context
             // (using/fixed statements vs variable declaration)
             // We generate a DeclarationGroup for these scenarios (using/fixed) to maintain tree shape consistency across IOperation.
@@ -3156,7 +3258,8 @@ namespace Microsoft.CodeAnalysis.Operations
 
         private ILabeledOperation CreateBoundLabelStatementOperation(
             BoundLabelStatement boundLabelStatement
-        ) {
+        )
+        {
             ILabelSymbol label = boundLabelStatement.Label.GetPublicSymbol();
             SyntaxNode syntax = boundLabelStatement.Syntax;
             bool isImplicit = boundLabelStatement.WasCompilerGenerated;
@@ -3165,7 +3268,8 @@ namespace Microsoft.CodeAnalysis.Operations
 
         private ILabeledOperation CreateBoundLabeledStatementOperation(
             BoundLabeledStatement boundLabeledStatement
-        ) {
+        )
+        {
             ILabelSymbol label = boundLabeledStatement.Label.GetPublicSymbol();
             IOperation labeledStatement = Create(boundLabeledStatement.Body);
             SyntaxNode syntax = boundLabeledStatement.Syntax;
@@ -3181,7 +3285,8 @@ namespace Microsoft.CodeAnalysis.Operations
 
         private IExpressionStatementOperation CreateBoundExpressionStatementOperation(
             BoundExpressionStatement boundExpressionStatement
-        ) {
+        )
+        {
             // lambda body can point to expression directly and binder can insert expression statement there. and end up statement pointing to
             // expression syntax node since there is no statement syntax node to point to. this will mark such one as implicit since it doesn't
             // actually exist in code
@@ -3205,7 +3310,8 @@ namespace Microsoft.CodeAnalysis.Operations
         internal IOperation CreateBoundTupleOperation(
             BoundTupleExpression boundTupleExpression,
             bool createDeclaration = true
-        ) {
+        )
+        {
             SyntaxNode syntax = boundTupleExpression.Syntax;
             bool isImplicit = boundTupleExpression.WasCompilerGenerated;
             ITypeSymbol? type = boundTupleExpression.GetPublicTypeSymbol();
@@ -3252,7 +3358,8 @@ namespace Microsoft.CodeAnalysis.Operations
 
         private IInterpolatedStringOperation CreateBoundInterpolatedStringExpressionOperation(
             BoundInterpolatedString boundInterpolatedString
-        ) {
+        )
+        {
             ImmutableArray<IInterpolatedStringContentOperation> parts =
                 CreateBoundInterpolatedStringContentOperation(boundInterpolatedString.Parts);
             SyntaxNode syntax = boundInterpolatedString.Syntax;
@@ -3271,7 +3378,8 @@ namespace Microsoft.CodeAnalysis.Operations
 
         internal ImmutableArray<IInterpolatedStringContentOperation> CreateBoundInterpolatedStringContentOperation(
             ImmutableArray<BoundExpression> parts
-        ) {
+        )
+        {
             var builder = ArrayBuilder<IInterpolatedStringContentOperation>.GetInstance(
                 parts.Length
             );
@@ -3291,7 +3399,8 @@ namespace Microsoft.CodeAnalysis.Operations
 
         private IInterpolationOperation CreateBoundInterpolationOperation(
             BoundStringInsert boundStringInsert
-        ) {
+        )
+        {
             IOperation expression = Create(boundStringInsert.Value);
             IOperation? alignment = Create(boundStringInsert.Alignment);
             IOperation? formatString = Create(boundStringInsert.Format);
@@ -3309,7 +3418,8 @@ namespace Microsoft.CodeAnalysis.Operations
 
         private IInterpolatedStringTextOperation CreateBoundInterpolatedStringTextOperation(
             BoundLiteral boundNode
-        ) {
+        )
+        {
             IOperation text = CreateBoundLiteralOperation(boundNode, @implicit: true);
             SyntaxNode syntax = boundNode.Syntax;
             bool isImplicit = boundNode.WasCompilerGenerated;
@@ -3318,7 +3428,8 @@ namespace Microsoft.CodeAnalysis.Operations
 
         private IConstantPatternOperation CreateBoundConstantPatternOperation(
             BoundConstantPattern boundConstantPattern
-        ) {
+        )
+        {
             IOperation value = Create(boundConstantPattern.Value);
             SyntaxNode syntax = boundConstantPattern.Syntax;
             bool isImplicit = boundConstantPattern.WasCompilerGenerated;
@@ -3336,7 +3447,8 @@ namespace Microsoft.CodeAnalysis.Operations
 
         private IOperation CreateBoundRelationalPatternOperation(
             BoundRelationalPattern boundRelationalPattern
-        ) {
+        )
+        {
             BinaryOperatorKind operatorKind = Helper.DeriveBinaryOperatorKind(
                 boundRelationalPattern.Relation
             );
@@ -3358,12 +3470,14 @@ namespace Microsoft.CodeAnalysis.Operations
 
         private IDeclarationPatternOperation CreateBoundDeclarationPatternOperation(
             BoundDeclarationPattern boundDeclarationPattern
-        ) {
+        )
+        {
             ISymbol? variable = boundDeclarationPattern.Variable.GetPublicSymbol();
             if (
                 variable == null
                 && boundDeclarationPattern.VariableAccess?.Kind == BoundKind.DiscardExpression
-            ) {
+            )
+            {
                 variable = (
                     (BoundDiscardExpression)boundDeclarationPattern.VariableAccess
                 ).ExpressionSymbol.GetPublicSymbol();
@@ -3391,7 +3505,8 @@ namespace Microsoft.CodeAnalysis.Operations
 
         private IRecursivePatternOperation CreateBoundRecursivePatternOperation(
             BoundRecursivePattern boundRecursivePattern
-        ) {
+        )
+        {
             ITypeSymbol matchedType = (
                 boundRecursivePattern.DeclaredType?.Type
                 ?? boundRecursivePattern.InputType.StrippedType()
@@ -3426,7 +3541,8 @@ namespace Microsoft.CodeAnalysis.Operations
 
         private IRecursivePatternOperation CreateBoundRecursivePatternOperation(
             BoundITuplePattern boundITuplePattern
-        ) {
+        )
+        {
             ImmutableArray<IPatternOperation> deconstructionSubpatterns =
                 boundITuplePattern.Subpatterns is { IsDefault: false } subpatterns
                     ? subpatterns.SelectAsArray(
@@ -3463,7 +3579,8 @@ namespace Microsoft.CodeAnalysis.Operations
 
         private IOperation CreateBoundNegatedPatternOperation(
             BoundNegatedPattern boundNegatedPattern
-        ) {
+        )
+        {
             return new NegatedPatternOperation(
                 (IPatternOperation)Create(boundNegatedPattern.Negated),
                 boundNegatedPattern.InputType.GetPublicSymbol(),
@@ -3490,7 +3607,8 @@ namespace Microsoft.CodeAnalysis.Operations
 
         private ISwitchOperation CreateBoundSwitchStatementOperation(
             BoundSwitchStatement boundSwitchStatement
-        ) {
+        )
+        {
             IOperation value = Create(boundSwitchStatement.Expression);
             ImmutableArray<ISwitchCaseOperation> cases = CreateFromArray<
                 BoundSwitchSection,
@@ -3514,7 +3632,8 @@ namespace Microsoft.CodeAnalysis.Operations
 
         private ISwitchCaseOperation CreateBoundSwitchSectionOperation(
             BoundSwitchSection boundSwitchSection
-        ) {
+        )
+        {
             ImmutableArray<ICaseClauseOperation> clauses = CreateFromArray<
                 BoundSwitchLabel,
                 ICaseClauseOperation
@@ -3537,7 +3656,8 @@ namespace Microsoft.CodeAnalysis.Operations
 
         private ISwitchExpressionOperation CreateBoundSwitchExpressionOperation(
             BoundSwitchExpression boundSwitchExpression
-        ) {
+        )
+        {
             IOperation value = Create(boundSwitchExpression.Expression);
             ImmutableArray<ISwitchExpressionArmOperation> arms = CreateFromArray<
                 BoundSwitchExpressionArm,
@@ -3555,7 +3675,8 @@ namespace Microsoft.CodeAnalysis.Operations
 
         private ISwitchExpressionArmOperation CreateBoundSwitchExpressionArmOperation(
             BoundSwitchExpressionArm boundSwitchExpressionArm
-        ) {
+        )
+        {
             IPatternOperation pattern = (IPatternOperation)Create(boundSwitchExpressionArm.Pattern);
             IOperation? guard = Create(boundSwitchExpressionArm.WhenClause);
             IOperation value = Create(boundSwitchExpressionArm.Value);
@@ -3572,7 +3693,8 @@ namespace Microsoft.CodeAnalysis.Operations
 
         private ICaseClauseOperation CreateBoundSwitchLabelOperation(
             BoundSwitchLabel boundSwitchLabel
-        ) {
+        )
+        {
             SyntaxNode syntax = boundSwitchLabel.Syntax;
             bool isImplicit = boundSwitchLabel.WasCompilerGenerated;
             LabelSymbol label = boundSwitchLabel.Label;
@@ -3592,7 +3714,8 @@ namespace Microsoft.CodeAnalysis.Operations
                 && boundSwitchLabel.Pattern.Kind == BoundKind.ConstantPattern
                 && boundSwitchLabel.Pattern is BoundConstantPattern cp
                 && cp.InputType.IsValidV6SwitchGoverningType()
-            ) {
+            )
+            {
                 return new SingleValueCaseClauseOperation(
                     Create(cp.Value),
                     label.GetPublicSymbol(),
@@ -3618,7 +3741,8 @@ namespace Microsoft.CodeAnalysis.Operations
 
         private IIsPatternOperation CreateBoundIsPatternExpressionOperation(
             BoundIsPatternExpression boundIsPatternExpression
-        ) {
+        )
+        {
             IOperation value = Create(boundIsPatternExpression.Expression);
             IPatternOperation pattern = (IPatternOperation)Create(boundIsPatternExpression.Pattern);
             SyntaxNode syntax = boundIsPatternExpression.Syntax;
@@ -3667,7 +3791,8 @@ namespace Microsoft.CodeAnalysis.Operations
 
         private IOperation CreateFromEndIndexExpressionOperation(
             BoundFromEndIndexExpression boundIndex
-        ) {
+        )
+        {
             return new UnaryOperation(
                 UnaryOperatorKind.Hat,
                 Create(boundIndex.Operand),
@@ -3712,7 +3837,8 @@ namespace Microsoft.CodeAnalysis.Operations
         internal IPropertySubpatternOperation CreatePropertySubpattern(
             BoundSubpattern subpattern,
             ITypeSymbol matchedType
-        ) {
+        )
+        {
             SyntaxNode syntax = subpattern.Syntax;
             IOperation member = CreatePropertySubpatternMember(
                 subpattern.Symbol,
@@ -3733,7 +3859,8 @@ namespace Microsoft.CodeAnalysis.Operations
             Symbol? symbol,
             ITypeSymbol matchedType,
             SyntaxNode syntax
-        ) {
+        )
+        {
             var nameSyntax =
                 (syntax is SubpatternSyntax subpatSyntax ? subpatSyntax.NameColon?.Name : null)
                 ?? syntax;
@@ -3794,7 +3921,8 @@ namespace Microsoft.CodeAnalysis.Operations
 
         private IInstanceReferenceOperation CreateCollectionValuePlaceholderOperation(
             BoundObjectOrCollectionValuePlaceholder placeholder
-        ) {
+        )
+        {
             InstanceReferenceKind referenceKind = InstanceReferenceKind.ImplicitReceiver;
             SyntaxNode syntax = placeholder.Syntax;
             ITypeSymbol? type = placeholder.GetPublicTypeSymbol();
@@ -3811,7 +3939,8 @@ namespace Microsoft.CodeAnalysis.Operations
         private ImmutableArray<IArgumentOperation> CreateDisposeArguments(
             MethodArgumentInfo patternDisposeInfo,
             SyntaxNode syntax
-        ) {
+        )
+        {
             // can't be an extension method for dispose
             Debug.Assert(!patternDisposeInfo.Method.IsStatic);
 

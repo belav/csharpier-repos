@@ -54,7 +54,8 @@ namespace Microsoft.AspNetCore.Mvc.ViewFeatures
         public ModelExpression CreateModelExpression<TModel, TValue>(
             ViewDataDictionary<TModel> viewData,
             Expression<Func<TModel, TValue>> expression
-        ) {
+        )
+        {
             if (viewData == null)
             {
                 throw new ArgumentNullException(nameof(viewData));
@@ -95,7 +96,8 @@ namespace Microsoft.AspNetCore.Mvc.ViewFeatures
         public ModelExpression CreateModelExpression<TModel>(
             ViewDataDictionary<TModel> viewData,
             string expression
-        ) {
+        )
+        {
             if (viewData == null)
             {
                 throw new ArgumentNullException(nameof(viewData));

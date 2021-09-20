@@ -61,7 +61,8 @@ namespace Microsoft.CodeAnalysis.Indentation
             Document document,
             int lineNumber,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var options = document.GetOptionsAsync(cancellationToken)
                 .WaitAndGetResult_CanCallOnBackground(cancellationToken);
             var style = options.GetOption(FormattingOptions.SmartIndent, document.Project.Language);

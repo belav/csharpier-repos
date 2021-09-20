@@ -13,7 +13,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Simplification
         internal static bool CanSimplifyTupleElementName(
             ArgumentSyntax node,
             CSharpParseOptions parseOptions
-        ) {
+        )
+        {
             // Tuple elements are arguments in a tuple expression
             if (node.NameColon == null || !node.Parent.IsKind(SyntaxKind.TupleExpression))
             {
@@ -41,7 +42,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Simplification
 
         internal static bool CanSimplifyAnonymousTypeMemberName(
             AnonymousObjectMemberDeclaratorSyntax node
-        ) {
+        )
+        {
             if (node.NameEquals == null)
             {
                 return false;
@@ -52,7 +54,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Simplification
                     ((AnonymousObjectCreationExpressionSyntax)node.Parent!).Initializers,
                     node
                 )
-            ) {
+            )
+            {
                 return false;
             }
 
@@ -69,7 +72,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Simplification
         private static bool RemovalCausesAmbiguity(
             SeparatedSyntaxList<ArgumentSyntax> arguments,
             ArgumentSyntax toRemove
-        ) {
+        )
+        {
             Contract.ThrowIfNull(toRemove.NameColon);
 
             var name = toRemove.NameColon.Name.Identifier.ValueText;
@@ -83,7 +87,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Simplification
                 if (
                     argument.NameColon is null
                     && argument.Expression.TryGetInferredMemberName()?.Equals(name) == true
-                ) {
+                )
+                {
                     return true;
                 }
             }
@@ -95,7 +100,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Simplification
         private static bool RemovalCausesAmbiguity(
             SeparatedSyntaxList<AnonymousObjectMemberDeclaratorSyntax> initializers,
             AnonymousObjectMemberDeclaratorSyntax toRemove
-        ) {
+        )
+        {
             Contract.ThrowIfNull(toRemove.NameEquals);
 
             var name = toRemove.NameEquals.Name.Identifier.ValueText;
@@ -109,7 +115,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Simplification
                 if (
                     initializer.NameEquals is null
                     && initializer.Expression.TryGetInferredMemberName()?.Equals(name) == true
-                ) {
+                )
+                {
                     return true;
                 }
             }

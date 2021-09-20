@@ -38,7 +38,8 @@ namespace Microsoft.CodeAnalysis.GenerateEqualsAndGetHashCodeFromMembers
                 ImmutableArray<PickMembersOption> pickMembersOptions,
                 bool generateEquals = false,
                 bool generateGetHashCode = false
-            ) {
+            )
+            {
                 _service = service;
                 _document = document;
                 _typeDeclaration = typeDeclaration;
@@ -66,7 +67,8 @@ namespace Microsoft.CodeAnalysis.GenerateEqualsAndGetHashCodeFromMembers
             protected override async Task<IEnumerable<CodeActionOperation>> ComputeOperationsAsync(
                 object options,
                 CancellationToken cancellationToken
-            ) {
+            )
+            {
                 var result = (PickMembersResult)options;
                 if (result.IsCanceled)
                 {
@@ -115,7 +117,8 @@ namespace Microsoft.CodeAnalysis.GenerateEqualsAndGetHashCodeFromMembers
 
             protected override async Task<Solution?> GetChangedSolutionAsync(
                 CancellationToken cancellationToken
-            ) {
+            )
+            {
                 var solution = await base.GetChangedSolutionAsync(cancellationToken)
                     .ConfigureAwait(false);
 

@@ -291,7 +291,8 @@ namespace System.Diagnostics.Tracing
             )]
                 System.Type eventSourceType,
             string? assemblyPathToIncludeInManifest
-        ) {
+        )
+        {
             throw null;
         }
         public static string? GenerateManifest(
@@ -301,7 +302,8 @@ namespace System.Diagnostics.Tracing
                 System.Type eventSourceType,
             string? assemblyPathToIncludeInManifest,
             System.Diagnostics.Tracing.EventManifestOptions flags
-        ) {
+        )
+        {
             throw null;
         }
         public static System.Guid GetGuid(System.Type eventSourceType)
@@ -327,14 +329,16 @@ namespace System.Diagnostics.Tracing
         public bool IsEnabled(
             System.Diagnostics.Tracing.EventLevel level,
             System.Diagnostics.Tracing.EventKeywords keywords
-        ) {
+        )
+        {
             throw null;
         }
         public bool IsEnabled(
             System.Diagnostics.Tracing.EventLevel level,
             System.Diagnostics.Tracing.EventKeywords keywords,
             System.Diagnostics.Tracing.EventChannel channel
-        ) {
+        )
+        {
             throw null;
         }
         protected virtual void OnEventCommand(
@@ -349,7 +353,8 @@ namespace System.Diagnostics.Tracing
         public static void SetCurrentThreadActivityId(
             System.Guid activityId,
             out System.Guid oldActivityThatWillContinue
-        ) {
+        )
+        {
             throw null;
         }
         public override string ToString()

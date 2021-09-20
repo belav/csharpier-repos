@@ -22,7 +22,8 @@ namespace Microsoft.AspNetCore.HttpOverrides
             ILogger logger,
             StringValues header,
             CertificateForwardingOptions options
-        ) {
+        )
+        {
             _logger = logger;
             _options = options;
             _header = header;

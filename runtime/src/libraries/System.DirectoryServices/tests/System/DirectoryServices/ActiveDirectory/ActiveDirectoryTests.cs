@@ -20,7 +20,8 @@ namespace System.DirectoryServices.Tests
                 ActiveDirectorySchema schema = ActiveDirectorySchema.GetSchema(
                     ActiveDirectoryContext
                 )
-            ) {
+            )
+            {
                 Assert.True(
                     schema.FindAllClasses()
                         .Contains(
@@ -68,7 +69,8 @@ namespace System.DirectoryServices.Tests
                     ActiveDirectoryContext,
                     "organization"
                 )
-            ) {
+            )
+            {
                 Assert.Equal("organization", orgClass.Name);
                 Assert.Equal("Organization", orgClass.CommonName);
                 Assert.Equal("2.5.6.4", orgClass.Oid);
@@ -143,7 +145,8 @@ namespace System.DirectoryServices.Tests
                     ActiveDirectoryContext,
                     "objectClass"
                 )
-            ) {
+            )
+            {
                 Assert.Equal("Object-Class", adsp.CommonName);
                 Assert.False(adsp.IsDefunct);
                 Assert.False(adsp.IsInAnr);
@@ -453,7 +456,8 @@ namespace System.DirectoryServices.Tests
                         ActiveDirectoryContext,
                         site.Name
                     )
-                ) {
+                )
+                {
                     Assert.Equal(site.Name, s.Name);
                     Assert.True(s.Domains.Contains(forest.RootDomain));
                     Assert.NotNull(s.AdjacentSites);

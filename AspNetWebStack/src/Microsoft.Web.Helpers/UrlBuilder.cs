@@ -42,7 +42,8 @@ namespace Microsoft.Web.Helpers
             VirtualPathUtilityBase virtualPathUtility,
             string path,
             object parameters
-        ) {
+        )
+        {
             _virtualPathUtility = virtualPathUtility;
             Uri uri;
             if (Uri.TryCreate(path, UriKind.Absolute, out uri))

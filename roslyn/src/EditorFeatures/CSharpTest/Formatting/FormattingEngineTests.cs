@@ -2472,7 +2472,8 @@ namespace TestApp
             string code,
             string expected,
             Dictionary<OptionKey2, object> changedOptionSet = null
-        ) {
+        )
+        {
             using var workspace = TestWorkspace.CreateCSharp(code);
             if (changedOptionSet != null)
             {

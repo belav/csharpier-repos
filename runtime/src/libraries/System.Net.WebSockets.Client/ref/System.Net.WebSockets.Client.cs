@@ -34,33 +34,38 @@ namespace System.Net.WebSockets
             System.Net.WebSockets.WebSocketCloseStatus closeStatus,
             string? statusDescription,
             System.Threading.CancellationToken cancellationToken
-        ) {
+        )
+        {
             throw null;
         }
         public override System.Threading.Tasks.Task CloseOutputAsync(
             System.Net.WebSockets.WebSocketCloseStatus closeStatus,
             string? statusDescription,
             System.Threading.CancellationToken cancellationToken
-        ) {
+        )
+        {
             throw null;
         }
         public System.Threading.Tasks.Task ConnectAsync(
             System.Uri uri,
             System.Threading.CancellationToken cancellationToken
-        ) {
+        )
+        {
             throw null;
         }
         public override void Dispose() { }
         public override System.Threading.Tasks.Task<System.Net.WebSockets.WebSocketReceiveResult> ReceiveAsync(
             System.ArraySegment<byte> buffer,
             System.Threading.CancellationToken cancellationToken
-        ) {
+        )
+        {
             throw null;
         }
         public override System.Threading.Tasks.ValueTask<System.Net.WebSockets.ValueWebSocketReceiveResult> ReceiveAsync(
             System.Memory<byte> buffer,
             System.Threading.CancellationToken cancellationToken
-        ) {
+        )
+        {
             throw null;
         }
         public override System.Threading.Tasks.Task SendAsync(
@@ -68,7 +73,8 @@ namespace System.Net.WebSockets
             System.Net.WebSockets.WebSocketMessageType messageType,
             bool endOfMessage,
             System.Threading.CancellationToken cancellationToken
-        ) {
+        )
+        {
             throw null;
         }
         public override System.Threading.Tasks.ValueTask SendAsync(
@@ -76,7 +82,8 @@ namespace System.Net.WebSockets
             System.Net.WebSockets.WebSocketMessageType messageType,
             bool endOfMessage,
             System.Threading.CancellationToken cancellationToken
-        ) {
+        )
+        {
             throw null;
         }
     }

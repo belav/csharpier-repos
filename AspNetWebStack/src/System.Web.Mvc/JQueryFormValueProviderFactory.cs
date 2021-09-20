@@ -18,7 +18,8 @@ namespace System.Web.Mvc
         // For unit testing
         internal JQueryFormValueProviderFactory(
             UnvalidatedRequestValuesAccessor unvalidatedValuesAccessor
-        ) {
+        )
+        {
             _unvalidatedValuesAccessor =
                 unvalidatedValuesAccessor
                 ?? (cc => new UnvalidatedRequestValuesWrapper(cc.HttpContext.Request.Unvalidated));

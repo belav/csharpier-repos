@@ -44,7 +44,8 @@ namespace Microsoft.CodeAnalysis.Diagnostics.EngineV2
                     > mapPerReferences,
                     ImmutableDictionary<DiagnosticAnalyzer, StateSet> stateSetMap,
                     SkippedHostAnalyzersInfo skippedAnalyzersInfo
-                ) {
+                )
+                {
                     AnalyzerReferences = analyzerReferences;
                     MapPerReferences = mapPerReferences;
                     StateSetMap = stateSetMap;
@@ -65,7 +66,8 @@ namespace Microsoft.CodeAnalysis.Diagnostics.EngineV2
                 if (
                     _projectAnalyzerStateMap.TryGetValue(project.Id, out var entry)
                     && entry.AnalyzerReferences.Equals(project.AnalyzerReferences)
-                ) {
+                )
+                {
                     return entry;
                 }
 
@@ -140,7 +142,8 @@ namespace Microsoft.CodeAnalysis.Diagnostics.EngineV2
                 Project project,
                 ImmutableDictionary<object, ImmutableArray<DiagnosticAnalyzer>> newMapPerReference,
                 ImmutableDictionary<DiagnosticAnalyzer, StateSet> newMap
-            ) {
+            )
+            {
                 if (!_projectAnalyzerStateMap.TryGetValue(project.Id, out var entry))
                 {
                     // no previous references and we still don't have any references
@@ -193,7 +196,8 @@ namespace Microsoft.CodeAnalysis.Diagnostics.EngineV2
                 IEnumerable<AnalyzerReference> references,
                 ImmutableDictionary<object, ImmutableArray<DiagnosticAnalyzer>> mapPerReference,
                 ImmutableDictionary<DiagnosticAnalyzer, StateSet> map
-            ) {
+            )
+            {
                 if (mapPerReference.Count == 0 || map.Count == 0)
                 {
                     // nothing to diff

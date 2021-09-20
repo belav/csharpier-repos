@@ -54,7 +54,8 @@ namespace System.Linq.Expressions.Tests
             Truthiness argument,
             bool expected,
             bool useInterpreter
-        ) {
+        )
+        {
             Expression<Func<bool>> e = Expression.Lambda<Func<bool>>(
                 Expression.MakeUnary(
                     ExpressionType.IsTrue,
@@ -72,7 +73,8 @@ namespace System.Linq.Expressions.Tests
             Truthiness argument,
             bool expected,
             bool useInterpreter
-        ) {
+        )
+        {
             Expression<Func<bool>> e = Expression.Lambda<Func<bool>>(
                 Expression.MakeUnary(
                     ExpressionType.IsTrue,

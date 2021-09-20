@@ -1713,8 +1713,9 @@ namespace Microsoft.EntityFrameworkCore
             Func<TDependent, TPrincipal> getPrincipal,
             Func<TPrincipal, object> getPrincipalKey,
             Func<TDependent, object> getForeignKey
-        ) where TPrincipal : class
-          where TDependent : class
+        )
+            where TPrincipal : class
+            where TDependent : class
         {
             if (expectedPrincipal == null)
             {
@@ -1773,8 +1774,9 @@ namespace Microsoft.EntityFrameworkCore
             Func<TDependent, TPrincipal> getPrincipal,
             Func<TPrincipal, object> getPrincipalKey,
             Func<TDependent, object> getForeignKey
-        ) where TPrincipal : class
-          where TDependent : class
+        )
+            where TPrincipal : class
+            where TDependent : class
         {
             if (expectedDependent != null && getPrincipal != null)
             {

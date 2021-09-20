@@ -43,7 +43,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Snippets.Snippe
             CancellationToken cancellationToken,
             out string value,
             out int hasDefaultValue
-        ) {
+        )
+        {
             value = _fullyQualifiedName;
             hasDefaultValue = 1;
             if (!TryGetDocument(out var document))
@@ -57,7 +58,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Snippets.Snippe
                     out var updatedTextSpan,
                     out var documentWithFullyQualifiedTypeName
                 )
-            ) {
+            )
+            {
                 return VSConstants.E_FAIL;
             }
 
@@ -68,7 +70,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Snippets.Snippe
                     cancellationToken,
                     out var simplifiedName
                 )
-            ) {
+            )
+            {
                 return VSConstants.E_FAIL;
             }
 
@@ -81,7 +84,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Snippets.Snippe
             Document document,
             out TextSpan updatedTextSpan,
             out Document documentWithFullyQualifiedTypeName
-        ) {
+        )
+        {
             documentWithFullyQualifiedTypeName = null;
             updatedTextSpan = default;
 
@@ -91,7 +95,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Snippets.Snippe
                     _fieldName,
                     surfaceBufferFieldSpan
                 ) != VSConstants.S_OK
-            ) {
+            )
+            {
                 return false;
             }
 
@@ -100,7 +105,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Snippets.Snippe
                     surfaceBufferFieldSpan[0],
                     out var subjectBufferFieldSpan
                 )
-            ) {
+            )
+            {
                 return false;
             }
 

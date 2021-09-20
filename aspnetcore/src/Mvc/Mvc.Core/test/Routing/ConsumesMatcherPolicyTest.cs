@@ -633,7 +633,8 @@ namespace Microsoft.AspNetCore.Mvc.Routing
             string template,
             ConsumesMetadata consumesMetadata,
             params object[] more
-        ) {
+        )
+        {
             var metadata = new List<object>();
             if (consumesMetadata != null)
             {

@@ -67,7 +67,8 @@ namespace System.Web.Http.Controllers
                 Func<Task<HttpResponseMessage>>,
                 Task<HttpResponseMessage>
             > implementation
-        ) {
+        )
+        {
             Mock<IActionFilter> filterMock = new Mock<IActionFilter>();
             filterMock.Setup(
                     f =>

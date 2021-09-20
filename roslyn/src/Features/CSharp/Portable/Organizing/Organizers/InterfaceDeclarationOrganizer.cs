@@ -24,7 +24,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Organizing.Organizers
         protected override InterfaceDeclarationSyntax Organize(
             InterfaceDeclarationSyntax syntax,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             return syntax.Update(
                 syntax.AttributeLists,
                 ModifiersOrganizer.Organize(syntax.Modifiers),

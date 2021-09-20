@@ -33,7 +33,8 @@ namespace Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore
             RequestDelegate next,
             ILogger<MigrationsEndPointMiddleware> logger,
             IOptions<MigrationsEndPointOptions> options
-        ) {
+        )
+        {
             if (next == null)
             {
                 throw new ArgumentNullException(nameof(next));
@@ -132,7 +133,8 @@ namespace Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore
                 !registeredContexts.Any(
                     c => string.Equals(contextTypeName, c.AssemblyQualifiedName)
                 )
-            ) {
+            )
+            {
                 var message = Strings.FormatMigrationsEndPointMiddleware_ContextNotRegistered(
                     contextTypeName
                 );

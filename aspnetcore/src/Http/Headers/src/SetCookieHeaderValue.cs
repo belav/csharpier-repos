@@ -334,7 +334,8 @@ namespace Microsoft.Net.Http.Headers
             ref Span<char> span,
             StringSegment name,
             StringSegment value
-        ) {
+        )
+        {
             Append(ref span, SeparatorToken);
             Append(ref span, name.AsSpan());
             if (value != null)
@@ -428,7 +429,8 @@ namespace Microsoft.Net.Http.Headers
             StringBuilder builder,
             StringSegment name,
             StringSegment value
-        ) {
+        )
+        {
             builder.Append("; ");
             builder.Append(name.AsSpan());
             if (value != null)
@@ -458,7 +460,8 @@ namespace Microsoft.Net.Http.Headers
         public static bool TryParse(
             StringSegment input,
             [NotNullWhen(true)] out SetCookieHeaderValue? parsedValue
-        ) {
+        )
+        {
             var index = 0;
             return SingleValueParser.TryParseValue(input, ref index, out parsedValue!);
         }
@@ -492,7 +495,8 @@ namespace Microsoft.Net.Http.Headers
         public static bool TryParseList(
             IList<string>? inputs,
             [NotNullWhen(true)] out IList<SetCookieHeaderValue>? parsedValues
-        ) {
+        )
+        {
             return MultipleValueParser.TryParseValues(inputs, out parsedValues);
         }
 
@@ -505,7 +509,8 @@ namespace Microsoft.Net.Http.Headers
         public static bool TryParseStrictList(
             IList<string>? inputs,
             [NotNullWhen(true)] out IList<SetCookieHeaderValue>? parsedValues
-        ) {
+        )
+        {
             return MultipleValueParser.TryParseStrictValues(inputs, out parsedValues);
         }
 
@@ -514,7 +519,8 @@ namespace Microsoft.Net.Http.Headers
             StringSegment input,
             int startIndex,
             out SetCookieHeaderValue? parsedValue
-        ) {
+        )
+        {
             Contract.Requires(startIndex >= 0);
             var offset = startIndex;
 
@@ -598,7 +604,8 @@ namespace Microsoft.Net.Http.Headers
                 // max-age-av = "Max-Age=" non-zero-digit *DIGIT
                 else if (
                     StringSegment.Equals(token, MaxAgeToken, StringComparison.OrdinalIgnoreCase)
-                ) {
+                )
+                {
                     // = (no spaces)
                     if (!ReadEqualsSign(input, ref offset))
                     {
@@ -624,7 +631,8 @@ namespace Microsoft.Net.Http.Headers
                 // domain-value = <subdomain> ; defined in [RFC1034], Section 3.5, as enhanced by [RFC1123], Section 2.1
                 else if (
                     StringSegment.Equals(token, DomainToken, StringComparison.OrdinalIgnoreCase)
-                ) {
+                )
+                {
                     // = (no spaces)
                     if (!ReadEqualsSign(input, ref offset))
                     {
@@ -648,14 +656,16 @@ namespace Microsoft.Net.Http.Headers
                 // secure-av = "Secure"
                 else if (
                     StringSegment.Equals(token, SecureToken, StringComparison.OrdinalIgnoreCase)
-                ) {
+                )
+                {
                     result.Secure = true;
                 }
                 // samesite-av = "SameSite=" samesite-value
                 // samesite-value = "Strict" / "Lax" / "None"
                 else if (
                     StringSegment.Equals(token, SameSiteToken, StringComparison.OrdinalIgnoreCase)
-                ) {
+                )
+                {
                     if (!ReadEqualsSign(input, ref offset))
                     {
                         result.SameSite = SameSiteMode.Unspecified;
@@ -670,7 +680,8 @@ namespace Microsoft.Net.Http.Headers
                                 SameSiteStrictToken,
                                 StringComparison.OrdinalIgnoreCase
                             )
-                        ) {
+                        )
+                        {
                             result.SameSite = SameSiteMode.Strict;
                         }
                         else if (
@@ -679,7 +690,8 @@ namespace Microsoft.Net.Http.Headers
                                 SameSiteLaxToken,
                                 StringComparison.OrdinalIgnoreCase
                             )
-                        ) {
+                        )
+                        {
                             result.SameSite = SameSiteMode.Lax;
                         }
                         else if (
@@ -688,7 +700,8 @@ namespace Microsoft.Net.Http.Headers
                                 SameSiteNoneToken,
                                 StringComparison.OrdinalIgnoreCase
                             )
-                        ) {
+                        )
+                        {
                             result.SameSite = SameSiteMode.None;
                         }
                         else
@@ -700,7 +713,8 @@ namespace Microsoft.Net.Http.Headers
                 // httponly-av = "HttpOnly"
                 else if (
                     StringSegment.Equals(token, HttpOnlyToken, StringComparison.OrdinalIgnoreCase)
-                ) {
+                )
+                {
                     result.HttpOnly = true;
                 }
                 // extension-av = <any CHAR except CTLs or ";">
@@ -731,7 +745,8 @@ namespace Microsoft.Net.Http.Headers
             StringSegment input,
             ref int offset,
             bool includeComma = true
-        ) {
+        )
+        {
             var end = input.IndexOf(';', offset);
             if (end < 0)
             {

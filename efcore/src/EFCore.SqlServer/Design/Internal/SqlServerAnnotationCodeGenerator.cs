@@ -26,9 +26,8 @@ namespace Microsoft.EntityFrameworkCore.SqlServer.Design.Internal
         ///     any release. You should only use it directly in your code with extreme caution and knowing that
         ///     doing so can result in application failures when updating to a new Entity Framework Core release.
         /// </summary>
-        public SqlServerAnnotationCodeGenerator(
-            AnnotationCodeGeneratorDependencies dependencies
-        ) : base(dependencies) { }
+        public SqlServerAnnotationCodeGenerator(AnnotationCodeGeneratorDependencies dependencies)
+            : base(dependencies) { }
 
         /// <summary>
         ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -39,7 +38,8 @@ namespace Microsoft.EntityFrameworkCore.SqlServer.Design.Internal
         public override IReadOnlyList<MethodCallCodeFragment> GenerateFluentApiCalls(
             IModel model,
             IDictionary<string, IAnnotation> annotations
-        ) {
+        )
+        {
             var fragments = new List<MethodCallCodeFragment>(
                 base.GenerateFluentApiCalls(model, annotations)
             );
@@ -47,7 +47,8 @@ namespace Microsoft.EntityFrameworkCore.SqlServer.Design.Internal
             if (
                 GenerateValueGenerationStrategy(annotations, onModel: true)
                 is MethodCallCodeFragment valueGenerationStrategy
-            ) {
+            )
+            {
                 fragments.Add(valueGenerationStrategy);
             }
 
@@ -63,7 +64,8 @@ namespace Microsoft.EntityFrameworkCore.SqlServer.Design.Internal
         public override IReadOnlyList<MethodCallCodeFragment> GenerateFluentApiCalls(
             IProperty property,
             IDictionary<string, IAnnotation> annotations
-        ) {
+        )
+        {
             var fragments = new List<MethodCallCodeFragment>(
                 base.GenerateFluentApiCalls(property, annotations)
             );
@@ -71,7 +73,8 @@ namespace Microsoft.EntityFrameworkCore.SqlServer.Design.Internal
             if (
                 GenerateValueGenerationStrategy(annotations, onModel: false)
                 is MethodCallCodeFragment valueGenerationStrategy
-            ) {
+            )
+            {
                 fragments.Add(valueGenerationStrategy);
             }
 
@@ -169,7 +172,8 @@ namespace Microsoft.EntityFrameworkCore.SqlServer.Design.Internal
         private MethodCallCodeFragment? GenerateValueGenerationStrategy(
             IDictionary<string, IAnnotation> annotations,
             bool onModel
-        ) {
+        )
+        {
             SqlServerValueGenerationStrategy strategy;
             if (
                 annotations.TryGetValue(
@@ -177,7 +181,8 @@ namespace Microsoft.EntityFrameworkCore.SqlServer.Design.Internal
                     out var strategyAnnotation
                 )
                 && strategyAnnotation.Value != null
-            ) {
+            )
+            {
                 annotations.Remove(SqlServerAnnotationNames.ValueGenerationStrategy);
                 strategy = (SqlServerValueGenerationStrategy)strategyAnnotation.Value;
             }
@@ -240,11 +245,13 @@ namespace Microsoft.EntityFrameworkCore.SqlServer.Design.Internal
         private static T? GetAndRemove<T>(
             IDictionary<string, IAnnotation> annotations,
             string annotationName
-        ) {
+        )
+        {
             if (
                 annotations.TryGetValue(annotationName, out var annotation)
                 && annotation.Value != null
-            ) {
+            )
+            {
                 annotations.Remove(annotationName);
                 return (T)annotation.Value;
             }

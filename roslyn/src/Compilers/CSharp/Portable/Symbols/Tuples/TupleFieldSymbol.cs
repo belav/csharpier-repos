@@ -141,7 +141,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
         internal override void ForceComplete(
             SourceLocation locationOpt,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             _underlyingField.ForceComplete(locationOpt, cancellationToken);
         }
 
@@ -255,14 +256,16 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             bool cannotUse,
             bool isImplicitlyDeclared,
             FieldSymbol? correspondingDefaultFieldOpt
-        ) : base(
-            container,
-            underlyingField,
-            tupleElementIndex,
-            locations,
-            isImplicitlyDeclared,
-            correspondingDefaultFieldOpt
-        ) {
+        )
+            : base(
+                container,
+                underlyingField,
+                tupleElementIndex,
+                locations,
+                isImplicitlyDeclared,
+                correspondingDefaultFieldOpt
+            )
+        {
             // The underlying field for 'Hanna' (an 8-th named element) in a long tuple is Item1. The corresponding field is Item8.
 
             Debug.Assert(container.IsTupleType);

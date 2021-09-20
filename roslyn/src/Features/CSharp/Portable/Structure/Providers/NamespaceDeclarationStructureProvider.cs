@@ -18,7 +18,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Structure
             ref TemporaryArray<BlockSpan> spans,
             BlockStructureOptionProvider optionProvider,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             // add leading comments
             CSharpStructureHelpers.CollectCommentBlockSpans(
                 namespaceDeclaration,
@@ -29,7 +30,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Structure
             if (
                 !namespaceDeclaration.OpenBraceToken.IsMissing
                 && !namespaceDeclaration.CloseBraceToken.IsMissing
-            ) {
+            )
+            {
                 spans.AddIfNotNull(
                     CSharpStructureHelpers.CreateBlockSpan(
                         namespaceDeclaration,

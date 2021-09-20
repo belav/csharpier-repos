@@ -81,7 +81,8 @@ namespace Microsoft.AspNetCore.DataProtection
             byte[] protectedData,
             DateTimeOffset now,
             out DateTimeOffset expiration
-        ) {
+        )
+        {
             if (protectedData == null)
             {
                 throw new ArgumentNullException(nameof(protectedData));

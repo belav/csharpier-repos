@@ -72,7 +72,8 @@ namespace System.Net.Http.Json
             int offset,
             int count,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             if (buffer == null)
             {
                 throw new ArgumentNullException(nameof(buffer));
@@ -100,7 +101,8 @@ namespace System.Net.Http.Json
         private async Task WriteAsyncCore(
             ArraySegment<byte> bufferSegment,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             bool decoderCompleted = false;
 
             while (!decoderCompleted)

@@ -26,7 +26,8 @@ namespace Microsoft.CodeAnalysis.UnitTests
         public TestOptionsServiceFactory(
             [Import(AllowDefault = true)] IWorkspaceThreadingService? workspaceThreadingService,
             [ImportMany] IEnumerable<Lazy<IOptionProvider, LanguageMetadata>> optionProviders
-        ) {
+        )
+        {
             _workspaceThreadingService = workspaceThreadingService;
             _providers = optionProviders.ToImmutableArray();
         }

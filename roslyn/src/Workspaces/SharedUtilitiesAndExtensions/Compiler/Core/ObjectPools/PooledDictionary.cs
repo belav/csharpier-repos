@@ -8,7 +8,8 @@ namespace Microsoft.CodeAnalysis.PooledObjects
     {
         public static PooledDisposer<PooledDictionary<K, V>> GetInstance(
             out PooledDictionary<K, V> instance
-        ) {
+        )
+        {
             instance = GetInstance();
             return new PooledDisposer<PooledDictionary<K, V>>(instance);
         }

@@ -22,7 +22,8 @@ namespace System.Web.Http
             string httpMethod,
             string requestUrl,
             string expectedActionName
-        ) {
+        )
+        {
             string routeUrl = "{controller}/{action}/{id}";
             object routeDefault = new { id = RouteParameter.Optional };
 
@@ -53,7 +54,8 @@ namespace System.Web.Http
         public void SelectAction_ThrowsMethodNotSupported_OnRouteWithActionParameter(
             string httpMethod,
             string requestUrl
-        ) {
+        )
+        {
             string routeUrl = "{controller}/{action}/{id}";
             object routeDefault = new { id = RouteParameter.Optional };
             HttpControllerContext controllerContext = ApiControllerHelper.CreateControllerContext(
@@ -100,7 +102,8 @@ namespace System.Web.Http
         public void SelectAction_ThrowsNotFound_OnRouteWithActionParameter(
             string httpMethod,
             string requestUrl
-        ) {
+        )
+        {
             string routeUrl = "{controller}/{action}/{id}";
             object routeDefault = new { id = RouteParameter.Optional };
             HttpControllerContext controllerContext = ApiControllerHelper.CreateControllerContext(
@@ -159,7 +162,8 @@ namespace System.Web.Http
             string httpMethod,
             string requestUrl,
             string expectedActionName
-        ) {
+        )
+        {
             string routeUrl = "{controller}/{id}";
             object routeDefault = new { id = RouteParameter.Optional };
 
@@ -188,7 +192,8 @@ namespace System.Web.Http
         public void SelectAction_ThrowsMethodNotSupported_OnDefaultRoute(
             string httpMethod,
             string requestUrl
-        ) {
+        )
+        {
             string routeUrl = "{controller}/{id}";
             object routeDefault = new { id = RouteParameter.Optional };
             HttpControllerContext controllerContext = ApiControllerHelper.CreateControllerContext(

@@ -22,16 +22,14 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.CodeModel.Exter
             CodeModelState state,
             ProjectId projectId,
             ITypeSymbol typeSymbol
-        ) {
+        )
+        {
             var element = new ExternalCodeEnum(state, projectId, typeSymbol);
             return (EnvDTE.CodeEnum)ComAggregate.CreateAggregatedObject(element);
         }
 
-        private ExternalCodeEnum(
-            CodeModelState state,
-            ProjectId projectId,
-            ITypeSymbol typeSymbol
-        ) : base(state, projectId, typeSymbol) { }
+        private ExternalCodeEnum(CodeModelState state, ProjectId projectId, ITypeSymbol typeSymbol)
+            : base(state, projectId, typeSymbol) { }
 
         public override vsCMElement Kind
         {

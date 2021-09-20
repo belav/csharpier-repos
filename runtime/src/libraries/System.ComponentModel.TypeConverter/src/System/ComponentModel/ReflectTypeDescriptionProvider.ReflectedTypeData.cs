@@ -29,7 +29,8 @@ namespace System.ComponentModel
 
             internal ReflectedTypeData(
                 [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)] Type type
-            ) {
+            )
+            {
                 _type = type;
             }
 
@@ -110,7 +111,8 @@ namespace System.ComponentModel
                                 iface.Attributes
                                 & (TypeAttributes.Public | TypeAttributes.NestedPublic)
                             ) != 0
-                        ) {
+                        )
+                        {
                             // No need to pass an instance into GetTypeDescriptor here because, if someone provided a custom
                             // provider based on object, it already would have hit.
                             attributes.AddRange(TypeDescriptor.GetAttributes(iface).Attributes);
@@ -134,12 +136,14 @@ namespace System.ComponentModel
                                     int ifaceSkipIdx = 0;
                                     ifaceSkipIdx < s_skipInterfaceAttributeList.Length;
                                     ifaceSkipIdx++
-                                ) {
+                                )
+                                {
                                     if (
                                         s_skipInterfaceAttributeList[ifaceSkipIdx].IsInstanceOfType(
                                             attr
                                         )
-                                    ) {
+                                    )
+                                    {
                                         addAttr = false;
                                         break;
                                     }
@@ -214,7 +218,8 @@ namespace System.ComponentModel
                         if (
                             converterType != null
                             && typeof(TypeConverter).IsAssignableFrom(converterType)
-                        ) {
+                        )
+                        {
                             return (TypeConverter)ReflectTypeDescriptionProvider.CreateInstance(
                                 converterType,
                                 _type
@@ -239,7 +244,8 @@ namespace System.ComponentModel
                         if (
                             converterType != null
                             && typeof(TypeConverter).IsAssignableFrom(converterType)
-                        ) {
+                        )
+                        {
                             _converter = (TypeConverter)CreateInstance(converterType, _type);
                         }
                     }
@@ -449,7 +455,8 @@ namespace System.ComponentModel
             private static EditorAttribute GetEditorAttribute(
                 AttributeCollection attributes,
                 Type editorBaseType
-            ) {
+            )
+            {
                 foreach (Attribute attr in attributes)
                 {
                     if (attr is EditorAttribute edAttr)
@@ -560,7 +567,8 @@ namespace System.ComponentModel
                 // so use that value to ensure the Type will be preserved
                 [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicConstructors)]
                     string typeName
-            ) {
+            )
+            {
                 if (string.IsNullOrEmpty(typeName))
                 {
                     return null;

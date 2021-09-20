@@ -100,7 +100,8 @@ namespace System.Web.Http.Routing
             string httpMethod,
             string uri,
             string responseBody
-        ) {
+        )
+        {
             var request = new HttpRequestMessage(
                 new HttpMethod(httpMethod),
                 "http://localhost/" + uri
@@ -148,7 +149,8 @@ namespace System.Web.Http.Routing
             string httpMethod,
             string uri,
             HttpStatusCode failureCode
-        ) {
+        )
+        {
             var request = new HttpRequestMessage(
                 new HttpMethod(httpMethod),
                 "http://localhost/" + uri
@@ -194,7 +196,8 @@ namespace System.Web.Http.Routing
             string httpMethod,
             string uri,
             string responseBody
-        ) {
+        )
+        {
             var request = new HttpRequestMessage(
                 new HttpMethod(httpMethod),
                 "http://localhost/" + uri
@@ -278,7 +281,8 @@ namespace System.Web.Http.Routing
         private static async Task<HttpResponseMessage> SubmitRequestAsync(
             HttpRequestMessage request,
             IDirectRouteProvider routeProvider = null
-        ) {
+        )
+        {
             HttpConfiguration config = new HttpConfiguration();
             config.Routes.MapHttpRoute("DefaultApi", "api/{controller}");
             if (routeProvider == null)
@@ -321,7 +325,8 @@ namespace System.Web.Http.Routing
             public DirectRouteProvider(
                 IDictionary<Type, IEnumerable<IDirectRouteFactory>> controllerRouteFactories,
                 IDictionary<string, IEnumerable<IDirectRouteFactory>> actionRouteFactories
-            ) {
+            )
+            {
                 _controllerRouteFactories =
                     controllerRouteFactories
                     ?? new Dictionary<Type, IEnumerable<IDirectRouteFactory>>();
@@ -332,7 +337,8 @@ namespace System.Web.Http.Routing
 
             protected override IReadOnlyList<IDirectRouteFactory> GetControllerRouteFactories(
                 HttpControllerDescriptor controllerDescriptor
-            ) {
+            )
+            {
                 IEnumerable<IDirectRouteFactory> factories;
                 _controllerRouteFactories.TryGetValue(
                     controllerDescriptor.ControllerType,
@@ -343,7 +349,8 @@ namespace System.Web.Http.Routing
 
             protected override IReadOnlyList<IDirectRouteFactory> GetActionRouteFactories(
                 HttpActionDescriptor actionDescriptor
-            ) {
+            )
+            {
                 IEnumerable<IDirectRouteFactory> factories;
                 _actionRouteFactories.TryGetValue(actionDescriptor.ActionName, out factories);
                 return factories == null ? null : factories.ToList();
@@ -809,7 +816,8 @@ namespace System.Web.Http.Routing
                     string parameterName,
                     IDictionary<string, object> values,
                     HttpRouteDirection routeDirection
-                ) {
+                )
+                {
                     return _matches;
                 }
             }

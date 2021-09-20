@@ -26,7 +26,8 @@ namespace IntelHardwareIntrinsicTest
                         new double[2] { 1, -5 },
                         new double[2]
                     )
-                ) {
+                )
+                {
                     var vf = Unsafe.Read<Vector128<double>>(doubleTable.inArrayPtr);
                     Sse2.Store((double*)(doubleTable.outArrayPtr), vf);
 
@@ -36,7 +37,8 @@ namespace IntelHardwareIntrinsicTest
                                 BitConverter.DoubleToInt64Bits(x)
                                 == BitConverter.DoubleToInt64Bits(y)
                         )
-                    ) {
+                    )
+                    {
                         Console.WriteLine("Sse2 Store failed on double:");
                         foreach (var item in doubleTable.outArray)
                         {
@@ -52,7 +54,8 @@ namespace IntelHardwareIntrinsicTest
                         new long[2] { 1, -5 },
                         new long[2]
                     )
-                ) {
+                )
+                {
                     var vf = Unsafe.Read<Vector128<long>>(intTable.inArrayPtr);
                     Sse2.Store((long*)(intTable.outArrayPtr), vf);
 
@@ -73,7 +76,8 @@ namespace IntelHardwareIntrinsicTest
                         new ulong[2] { 1, 5 },
                         new ulong[2]
                     )
-                ) {
+                )
+                {
                     var vf = Unsafe.Read<Vector128<ulong>>(intTable.inArrayPtr);
                     Sse2.Store((ulong*)(intTable.outArrayPtr), vf);
 
@@ -94,7 +98,8 @@ namespace IntelHardwareIntrinsicTest
                         new int[4] { 1, -5, 100, 0 },
                         new int[4]
                     )
-                ) {
+                )
+                {
                     var vf = Unsafe.Read<Vector128<int>>(intTable.inArrayPtr);
                     Sse2.Store((int*)(intTable.outArrayPtr), vf);
 
@@ -115,7 +120,8 @@ namespace IntelHardwareIntrinsicTest
                         new uint[4] { 1, 5, 100, 0 },
                         new uint[4]
                     )
-                ) {
+                )
+                {
                     var vf = Unsafe.Read<Vector128<uint>>(intTable.inArrayPtr);
                     Sse2.Store((uint*)(intTable.outArrayPtr), vf);
 
@@ -136,7 +142,8 @@ namespace IntelHardwareIntrinsicTest
                         new short[8] { 1, -5, 100, 0, 1, 2, 3, 4 },
                         new short[8]
                     )
-                ) {
+                )
+                {
                     var vf = Unsafe.Read<Vector128<short>>(intTable.inArrayPtr);
                     Sse2.Store((short*)(intTable.outArrayPtr), vf);
 
@@ -157,7 +164,8 @@ namespace IntelHardwareIntrinsicTest
                         new ushort[8] { 1, 5, 100, 0, 1, 2, 3, 4 },
                         new ushort[8]
                     )
-                ) {
+                )
+                {
                     var vf = Unsafe.Read<Vector128<ushort>>(intTable.inArrayPtr);
                     Sse2.Store((ushort*)(intTable.outArrayPtr), vf);
 
@@ -178,7 +186,8 @@ namespace IntelHardwareIntrinsicTest
                         new sbyte[16] { 1, -5, 100, 0, 1, 2, 3, 4, 1, -5, 100, 0, 1, 2, 3, 4 },
                         new sbyte[16]
                     )
-                ) {
+                )
+                {
                     var vf = Unsafe.Read<Vector128<sbyte>>(intTable.inArrayPtr);
                     Sse2.Store((sbyte*)(intTable.outArrayPtr), vf);
 
@@ -199,7 +208,8 @@ namespace IntelHardwareIntrinsicTest
                         new byte[16] { 1, 5, 100, 0, 1, 2, 3, 4, 1, 5, 100, 0, 1, 2, 3, 4 },
                         new byte[16]
                     )
-                ) {
+                )
+                {
                     var vf = Unsafe.Read<Vector128<byte>>(intTable.inArrayPtr);
                     Sse2.Store((byte*)(intTable.outArrayPtr), vf);
 

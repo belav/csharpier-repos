@@ -20,7 +20,8 @@ namespace System.Reflection.Emit.Tests
             Type returnType,
             Type[] parameterTypes,
             Module module
-        ) {
+        )
+        {
             Assert.Equal(name, method.Name);
             Assert.Equal(attributes, method.Attributes);
             Assert.Equal(callingConvention, method.CallingConvention);

@@ -153,7 +153,8 @@ namespace Microsoft.CodeAnalysis.ConvertNumericLiteral
             long value,
             string text,
             string suffix
-        ) {
+        )
+        {
             var generator = SyntaxGenerator.GetGenerator(document);
             var updatedToken = generator.NumericLiteralToken(text + suffix, (ulong)value)
                 .WithTriviaFrom(numericToken);
@@ -163,7 +164,8 @@ namespace Microsoft.CodeAnalysis.ConvertNumericLiteral
 
         internal virtual async Task<SyntaxToken> GetNumericTokenAsync(
             CodeRefactoringContext context
-        ) {
+        )
+        {
             var syntaxFacts = context.Document.GetLanguageService<ISyntaxFactsService>();
 
             var literalNode = await context.TryGetRelevantNodeAsync<TNumericLiteralExpression>()
@@ -181,7 +183,8 @@ namespace Microsoft.CodeAnalysis.ConvertNumericLiteral
             string numericText,
             string hexPrefix,
             string binaryPrefix
-        ) {
+        )
+        {
             // Match literal text and extract out base prefix, type suffix and the number itself.
             var groups =
                 Regex.Match(

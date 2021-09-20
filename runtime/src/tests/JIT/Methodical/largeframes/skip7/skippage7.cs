@@ -50,7 +50,8 @@ namespace BigFrames
             long i8,
             long i9,
             long i10
-        ) {
+        )
+        {
             long result = i1 + i2 + i3 + i4 + i5 + i6 + i7 + i8 + i9 + i10;
             Console.Write("SmallArgSpace: ");
             Console.WriteLine(result);

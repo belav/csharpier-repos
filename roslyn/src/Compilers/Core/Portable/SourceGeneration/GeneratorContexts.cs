@@ -27,7 +27,8 @@ namespace Microsoft.CodeAnalysis
             ISyntaxContextReceiver? syntaxReceiver,
             AdditionalSourcesCollection additionalSources,
             CancellationToken cancellationToken = default
-        ) {
+        )
+        {
             Compilation = compilation;
             ParseOptions = parseOptions;
             AdditionalFiles = additionalTexts;
@@ -201,7 +202,8 @@ namespace Microsoft.CodeAnalysis
         /// <param name="callback">An <see cref="Action{T}"/> that accepts a <see cref="GeneratorPostInitializationContext"/> that will be invoked after initialization.</param>
         public void RegisterForPostInitialization(
             Action<GeneratorPostInitializationContext> callback
-        ) {
+        )
+        {
             CheckIsEmpty(InfoBuilder.PostInitCallback);
             InfoBuilder.PostInitCallback = callback;
         }
@@ -252,7 +254,8 @@ namespace Microsoft.CodeAnalysis
         internal GeneratorPostInitializationContext(
             AdditionalSourcesCollection additionalSources,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             _additionalSources = additionalSources;
             CancellationToken = cancellationToken;
         }
@@ -284,7 +287,8 @@ namespace Microsoft.CodeAnalysis
         internal GeneratorEditContext(
             AdditionalSourcesCollection sources,
             CancellationToken cancellationToken = default
-        ) {
+        )
+        {
             AdditionalSources = sources;
             CancellationToken = cancellationToken;
         }

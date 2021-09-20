@@ -90,7 +90,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             public override FileLinePositionSpan GetLineSpan(
                 TextSpan span,
                 CancellationToken cancellationToken = default(CancellationToken)
-            ) {
+            )
+            {
                 return default(FileLinePositionSpan);
             }
 

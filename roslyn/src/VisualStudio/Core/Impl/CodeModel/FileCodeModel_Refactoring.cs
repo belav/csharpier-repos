@@ -21,7 +21,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.CodeModel
             bool fPreview,
             bool fSearchComments,
             bool fOverloads
-        ) {
+        )
+        {
             // TODO: Support options
 
             var codeElement = ComAggregate.TryGetManagedObject<AbstractCodeElement>(element);
@@ -69,7 +70,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.CodeModel
             EnvDTE.CodeType implementor,
             object @interface,
             bool fExplicit
-        ) {
+        )
+        {
             // TODO: Implement!
         }
 

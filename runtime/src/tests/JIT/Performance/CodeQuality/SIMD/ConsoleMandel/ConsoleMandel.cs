@@ -29,7 +29,8 @@ namespace SIMD
         private static Algorithms.FractalRenderer.Render GetRenderer(
             Action<int, int, int> draw,
             int which
-        ) {
+        )
+        {
             return Algorithms.FractalRenderer.SelectRender(
                 draw,
                 Abort,
@@ -116,7 +117,8 @@ namespace SIMD
                         if (
                             (args.Length <= (argNum + 1))
                             || !Int32.TryParse(args[argNum + 1], out iters)
-                        ) {
+                        )
+                        {
                             iters = 5;
                         }
                         argNum++;

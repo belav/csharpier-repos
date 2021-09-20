@@ -488,7 +488,8 @@ namespace System.Runtime.CompilerServices
                 int[] buckets,
                 Entry[] entries,
                 int firstFreeEntry
-            ) {
+            )
+            {
                 Debug.Assert(parent != null);
                 Debug.Assert(buckets != null);
                 Debug.Assert(entries != null);
@@ -553,11 +554,13 @@ namespace System.Runtime.CompilerServices
                     int entriesIndex = Volatile.Read(ref _buckets[bucket]);
                     entriesIndex != -1;
                     entriesIndex = _entries[entriesIndex].Next
-                ) {
+                )
+                {
                     if (
                         _entries[entriesIndex].HashCode == hashCode
                         && _entries[entriesIndex].depHnd.GetPrimaryAndSecondary(out value) == key
-                    ) {
+                    )
+                    {
                         GC.KeepAlive(this); // ensure we don't get finalized while accessing DependentHandles.
                         return entriesIndex;
                     }
@@ -573,7 +576,8 @@ namespace System.Runtime.CompilerServices
                 int index,
                 [NotNullWhen(true)] out TKey? key,
                 [MaybeNullWhen(false)] out TValue value
-            ) {
+            )
+            {
                 if (index < _entries.Length)
                 {
                     object? oKey = _entries[index].depHnd.GetPrimaryAndSecondary(

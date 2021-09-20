@@ -32,7 +32,8 @@ namespace System.Security.Cryptography.Xml
             string nsPrefix,
             SortedList nsListToRender,
             Hashtable nsLocallyDeclared
-        ) {
+        )
+        {
             foreach (object a in nsListToRender.GetKeyList())
             {
                 if (Utils.HasNamespacePrefix((XmlAttribute)a, nsPrefix))
@@ -65,7 +66,8 @@ namespace System.Security.Cryptography.Xml
                     uAncestral != null
                     && uDepth > rDepth
                     && Utils.IsNonRedundantNamespaceDecl(uAncestral, rAncestral)
-                ) {
+                )
+                {
                     nsListToRender.Add(uAncestral, null);
                 }
             }
@@ -76,7 +78,8 @@ namespace System.Security.Cryptography.Xml
             SortedList attrListToRender,
             SortedList nsListToRender,
             Hashtable nsLocallyDeclared
-        ) {
+        )
+        {
             GatherNamespaceToRender(element.Prefix, nsListToRender, nsLocallyDeclared);
             foreach (object attr in attrListToRender.GetKeyList())
             {
@@ -90,7 +93,8 @@ namespace System.Security.Cryptography.Xml
             XmlAttribute attr,
             SortedList nsListToRender,
             Hashtable nsLocallyDeclared
-        ) {
+        )
+        {
             if (!Utils.IsXmlPrefixDefinitionNode(attr))
             {
                 if (HasNonRedundantInclusivePrefix(attr))
@@ -105,7 +109,8 @@ namespace System.Security.Cryptography.Xml
             SortedList nsListToRender,
             SortedList attrListToRender,
             Hashtable nsLocallyDeclared
-        ) {
+        )
+        {
             // exclusive canonicalization treats Xml namespaces as simple attributes. They are not propagated.
             attrListToRender.Add(attr, null);
         }

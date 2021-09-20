@@ -35,7 +35,8 @@ namespace Microsoft.CodeAnalysis.Editor.Shared.Utilities
         public static ITextSnapshotLine GetNonEmptyPreviousLine(
             ITextSnapshot snapshot,
             ITextSnapshotLine currentLine
-        ) {
+        )
+        {
             do
             {
                 var previousLine = snapshot.GetLineFromLineNumber(

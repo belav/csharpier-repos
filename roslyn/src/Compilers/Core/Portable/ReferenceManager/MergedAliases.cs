@@ -75,7 +75,8 @@ namespace Microsoft.CodeAnalysis
         internal static ImmutableArray<string> Merge(
             ImmutableArray<string> aliasesOpt,
             ImmutableArray<string> newAliases
-        ) {
+        )
+        {
             if (aliasesOpt.IsDefault)
             {
                 return newAliases;
@@ -98,7 +99,8 @@ namespace Microsoft.CodeAnalysis
         private static void AddNonIncluded(
             ArrayBuilder<string> builder,
             ImmutableArray<string> items
-        ) {
+        )
+        {
             int originalCount = builder.Count;
 
             foreach (var item in items)

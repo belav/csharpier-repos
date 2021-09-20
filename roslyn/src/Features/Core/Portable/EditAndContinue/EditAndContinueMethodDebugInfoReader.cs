@@ -61,7 +61,8 @@ namespace Microsoft.CodeAnalysis.EditAndContinue
 
             public override StandaloneSignatureHandle GetLocalSignature(
                 MethodDefinitionHandle methodHandle
-            ) {
+            )
+            {
                 var symMethod = (ISymUnmanagedMethod2)_symReader.GetMethodByVersion(
                     MetadataTokens.GetToken(methodHandle),
                     _version
@@ -75,7 +76,8 @@ namespace Microsoft.CodeAnalysis.EditAndContinue
 
             public override EditAndContinueMethodDebugInformation GetDebugInfo(
                 MethodDefinitionHandle methodHandle
-            ) {
+            )
+            {
                 var methodToken = MetadataTokens.GetToken(methodHandle);
 
                 byte[] debugInfo;
@@ -173,7 +175,8 @@ namespace Microsoft.CodeAnalysis.EditAndContinue
                 EntityHandle handle,
                 Guid kind,
                 out CustomDebugInformation customDebugInfo
-            ) {
+            )
+            {
                 var foundAny = false;
                 customDebugInfo = default;
                 foreach (var infoHandle in reader.GetCustomDebugInformation(handle))
@@ -199,7 +202,8 @@ namespace Microsoft.CodeAnalysis.EditAndContinue
                 string documentPath,
                 out ImmutableArray<byte> checksum,
                 out Guid algorithmId
-            ) {
+            )
+            {
                 foreach (var documentHandle in _pdbReader.Documents)
                 {
                     var document = _pdbReader.GetDocument(documentHandle);
@@ -234,7 +238,8 @@ namespace Microsoft.CodeAnalysis.EditAndContinue
         public static unsafe EditAndContinueMethodDebugInfoReader Create(
             ISymUnmanagedReader5 symReader,
             int version = 1
-        ) {
+        )
+        {
             if (symReader == null)
             {
                 throw new ArgumentNullException(nameof(symReader));
@@ -279,7 +284,8 @@ namespace Microsoft.CodeAnalysis.EditAndContinue
             string documentPath,
             out ImmutableArray<byte> checksum,
             out Guid algorithmId
-        ) {
+        )
+        {
             var symDocument = symReader.GetDocument(documentPath);
 
             // Make sure the full path matches.
@@ -287,7 +293,8 @@ namespace Microsoft.CodeAnalysis.EditAndContinue
             if (
                 symDocument == null
                 || !StringComparer.Ordinal.Equals(symDocument.GetName(), documentPath)
-            ) {
+            )
+            {
                 checksum = default;
                 algorithmId = default;
                 return false;

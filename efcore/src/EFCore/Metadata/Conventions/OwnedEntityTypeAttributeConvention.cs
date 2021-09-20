@@ -30,7 +30,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
             IConventionEntityTypeBuilder entityTypeBuilder,
             OwnedAttribute attribute,
             IConventionContext<IConventionEntityTypeBuilder> context
-        ) {
+        )
+        {
             entityTypeBuilder.ModelBuilder.Owned(
                 entityTypeBuilder.Metadata.ClrType,
                 fromDataAnnotation: true

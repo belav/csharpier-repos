@@ -51,26 +51,30 @@ namespace System.Diagnostics.Contracts
             int fromInclusive,
             int toExclusive,
             System.Predicate<int> predicate
-        ) {
+        )
+        {
             throw null;
         }
         public static bool Exists<T>(
             System.Collections.Generic.IEnumerable<T> collection,
             System.Predicate<T> predicate
-        ) {
+        )
+        {
             throw null;
         }
         public static bool ForAll(
             int fromInclusive,
             int toExclusive,
             System.Predicate<int> predicate
-        ) {
+        )
+        {
             throw null;
         }
         public static bool ForAll<T>(
             System.Collections.Generic.IEnumerable<T> collection,
             System.Predicate<T> predicate
-        ) {
+        )
+        {
             throw null;
         }
         [System.Diagnostics.ConditionalAttribute("CONTRACTS_FULL")]
@@ -290,7 +294,8 @@ namespace System.Runtime.CompilerServices
             string? userMessage,
             string? conditionText,
             System.Exception? innerException
-        ) {
+        )
+        {
             throw null;
         }
         public static void TriggerFailure(

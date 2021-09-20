@@ -263,7 +263,8 @@ namespace Microsoft.AspNetCore.Mvc.Rendering
                     if (
                         string.Equals(key, "id", StringComparison.OrdinalIgnoreCase)
                         && string.IsNullOrEmpty(attribute.Value)
-                    ) {
+                    )
+                    {
                         continue;
                     }
 
@@ -330,7 +331,8 @@ namespace Microsoft.AspNetCore.Mvc.Rendering
         public void MergeAttributes<TKey, TValue>(
             IDictionary<TKey, TValue?> attributes,
             bool replaceExisting
-        ) {
+        )
+        {
             // Perf: Avoid allocating enumerator for `attributes` if possible
             if (attributes != null && attributes.Count > 0)
             {
@@ -390,7 +392,8 @@ namespace Microsoft.AspNetCore.Mvc.Rendering
             TextWriter writer,
             HtmlEncoder encoder,
             TagRenderMode tagRenderMode
-        ) {
+        )
+        {
             switch (tagRenderMode)
             {
                 case TagRenderMode.StartTag:

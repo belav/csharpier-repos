@@ -55,7 +55,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Options
             OptionStore optionStore,
             IServiceProvider serviceProvider,
             string language
-        ) {
+        )
+        {
             this.OptionStore = optionStore;
             this.Items = new List<object>();
             this.CodeStyleItems = new ObservableCollection<AbstractCodeStyleOptionViewModel>();
@@ -235,7 +236,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Options
             string title,
             string[] examples,
             bool defaultAddForClarity
-        ) {
+        )
+        {
             var preferences = new List<ParenthesesPreference>();
             var codeStylePreferences = new List<CodeStylePreference>();
 
@@ -275,7 +277,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Options
             OptionStore optionStore,
             string title,
             string[] examples
-        ) {
+        )
+        {
             var unusedParameterPreferences = new List<CodeStylePreference>
             {
                 new CodeStylePreference(ServicesVSResources.Non_public_methods, isChecked: false),

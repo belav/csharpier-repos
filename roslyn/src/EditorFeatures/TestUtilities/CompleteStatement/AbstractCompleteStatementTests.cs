@@ -84,7 +84,8 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.CompleteStatement
             string expectedMarkup,
             Action<IWpfTextView, TestWorkspace> execute,
             Action<TestWorkspace> setOptionsOpt = null
-        ) {
+        )
+        {
             using (var workspace = CreateTestWorkspace(initialMarkup))
             {
                 var testDocument = workspace.Documents.Single();

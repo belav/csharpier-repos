@@ -55,7 +55,8 @@ namespace CodeGenerator.HttpUtilities
             byte bitsIndexStart,
             byte bitsLength,
             byte bitsCount
-        ) {
+        )
+        {
             if (bitsIndexStart + bitsLength > sizeof(ulong) * 8)
             {
                 throw new ArgumentOutOfRangeException(nameof(bitsIndexStart));

@@ -38,7 +38,8 @@ class Program
             || optionsB.OptionString != "99"
             || optionsC is null
             || optionsD is null
-        ) {
+        )
+        {
             return -1;
         }
 

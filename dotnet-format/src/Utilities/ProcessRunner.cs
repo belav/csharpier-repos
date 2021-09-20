@@ -22,7 +22,8 @@ namespace Microsoft.CodeAnalysis.Tools.Utilities
             int exitCode,
             ReadOnlyCollection<string> outputLines,
             ReadOnlyCollection<string> errorLines
-        ) {
+        )
+        {
             Process = process;
             ExitCode = exitCode;
             OutputLines = outputLines;
@@ -86,7 +87,8 @@ namespace Microsoft.CodeAnalysis.Tools.Utilities
             bool lowPriority = false,
             Action<Process>? onProcessStartHandler = null,
             CancellationToken cancellationToken = default
-        ) {
+        )
+        {
             var errorLines = new List<string>();
             var outputLines = new List<string>();
             var process = new Process();
@@ -180,7 +182,8 @@ namespace Microsoft.CodeAnalysis.Tools.Utilities
             bool captureOutput = false,
             bool displayWindow = true,
             Dictionary<string, string>? environmentVariables = null
-        ) {
+        )
+        {
             var processStartInfo = new ProcessStartInfo(executable, arguments);
 
             if (!string.IsNullOrEmpty(workingDirectory))

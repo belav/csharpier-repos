@@ -33,11 +33,8 @@ namespace System.Data
         private DataColumn? _column;
         private DataRelation? _relation;
 
-        internal AggregateNode(
-            DataTable? table,
-            FunctionId aggregateType,
-            string columnName
-        ) : this(table, aggregateType, columnName, true, null) { }
+        internal AggregateNode(DataTable? table, FunctionId aggregateType, string columnName)
+            : this(table, aggregateType, columnName, true, null) { }
 
         internal AggregateNode(
             DataTable? table,
@@ -214,7 +211,8 @@ namespace System.Data
                 else if (
                     (DataRowAction.Rollback == rows[i]._action)
                     && (rows[i].RowState == DataRowState.Added)
-                ) {
+                )
+                {
                     continue;
                 }
                 if (version == DataRowVersion.Original && rows[i]._oldRecord == -1)

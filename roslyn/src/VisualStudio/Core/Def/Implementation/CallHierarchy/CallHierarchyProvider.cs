@@ -35,7 +35,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.CallHierarchy
         public CallHierarchyProvider(
             IAsynchronousOperationListenerProvider listenerProvider,
             IGlyphService glyphService
-        ) {
+        )
+        {
             _asyncListener = listenerProvider.GetListener(FeatureAttribute.CallHierarchy);
             this.GlyphService = glyphService;
         }
@@ -45,13 +46,15 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.CallHierarchy
             Project project,
             IEnumerable<Location> callsites,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             if (
                 symbol.Kind == SymbolKind.Method
                 || symbol.Kind == SymbolKind.Property
                 || symbol.Kind == SymbolKind.Event
                 || symbol.Kind == SymbolKind.Field
-            ) {
+            )
+            {
                 symbol = GetTargetSymbol(symbol);
 
                 var finders = await CreateFindersAsync(symbol, project, cancellationToken)
@@ -99,12 +102,14 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.CallHierarchy
             ISymbol symbol,
             Project project,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             if (
                 symbol.Kind == SymbolKind.Property
                 || symbol.Kind == SymbolKind.Event
                 || symbol.Kind == SymbolKind.Method
-            ) {
+            )
+            {
                 var finders = new List<AbstractCallFinder>();
 
                 finders.Add(new MethodCallFinder(symbol, project.Id, _asyncListener, this));

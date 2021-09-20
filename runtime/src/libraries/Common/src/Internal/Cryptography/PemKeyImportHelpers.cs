@@ -21,7 +21,8 @@ namespace Internal.Cryptography
             ReadOnlySpan<char> input,
             ReadOnlySpan<TPass> password,
             ImportEncryptedKeyAction<TPass> importAction
-        ) {
+        )
+        {
             bool foundEncryptedPem = false;
             PemFields foundFields = default;
             ReadOnlySpan<char> foundSlice = default;

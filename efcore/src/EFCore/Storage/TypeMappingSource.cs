@@ -44,7 +44,8 @@ namespace Microsoft.EntityFrameworkCore.Storage
         private CoreTypeMapping? FindMappingWithConversion(
             in TypeMappingInfo mappingInfo,
             IReadOnlyList<IProperty>? principals
-        ) {
+        )
+        {
             Type? providerClrType = null;
             ValueConverter? customConverter = null;
             if (principals != null)
@@ -93,7 +94,8 @@ namespace Microsoft.EntityFrameworkCore.Storage
                                     sourceType,
                                     providerType
                                 )
-                            ) {
+                            )
+                            {
                                 var mappingInfoUsed = info.WithConverter(converterInfo);
                                 mapping = FindMapping(mappingInfoUsed);
 
@@ -103,7 +105,8 @@ namespace Microsoft.EntityFrameworkCore.Storage
                                         var secondConverterInfo in Dependencies.ValueConverterSelector.Select(
                                             providerType
                                         )
-                                    ) {
+                                    )
+                                    {
                                         mapping = FindMapping(
                                             mappingInfoUsed.WithConverter(secondConverterInfo)
                                         );

@@ -287,7 +287,8 @@ namespace System.Xml.Tests
             string charsToChooseFrom,
             int position,
             CharType charType
-        ) {
+        )
+        {
             char charToInject = charsToChooseFrom[position];
             switch (charType)
             {
@@ -385,7 +386,8 @@ namespace System.Xml.Tests
             bool useInvalidCharacters,
             CharType charType,
             int namesCount
-        ) {
+        )
+        {
             string chars = useInvalidCharacters
                 ? UnicodeCharHelper.GetInvalidCharacters(charType)
                 : UnicodeCharHelper.GetValidCharacters(charType);

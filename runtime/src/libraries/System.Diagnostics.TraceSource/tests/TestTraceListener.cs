@@ -78,7 +78,8 @@ namespace System.Diagnostics.TraceSourceTests
             string source,
             TraceEventType eventType,
             int id
-        ) {
+        )
+        {
             Call(Method.TraceEvent);
         }
 
@@ -89,7 +90,8 @@ namespace System.Diagnostics.TraceSourceTests
             int id,
             string format,
             params object[] args
-        ) {
+        )
+        {
             Call(Method.TraceEvent);
         }
 
@@ -99,7 +101,8 @@ namespace System.Diagnostics.TraceSourceTests
             TraceEventType eventType,
             int id,
             string message
-        ) {
+        )
+        {
             Call(Method.TraceEvent);
         }
 
@@ -109,7 +112,8 @@ namespace System.Diagnostics.TraceSourceTests
             TraceEventType eventType,
             int id,
             object data
-        ) {
+        )
+        {
             Call(Method.TraceData);
         }
 
@@ -119,7 +123,8 @@ namespace System.Diagnostics.TraceSourceTests
             TraceEventType eventType,
             int id,
             params object[] data
-        ) {
+        )
+        {
             Call(Method.TraceData);
         }
 
@@ -129,7 +134,8 @@ namespace System.Diagnostics.TraceSourceTests
             int id,
             string message,
             Guid relatedActivityId
-        ) {
+        )
+        {
             Call(Method.TraceTransfer);
         }
 

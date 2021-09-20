@@ -19,7 +19,8 @@ namespace Moq.Behaviors
             LambdaExpression expression,
             Delegate eventArgsFunc,
             object[] eventArgsParams
-        ) {
+        )
+        {
             Debug.Assert(mock != null);
             Debug.Assert(expression != null);
             Debug.Assert(eventArgsFunc != null ^ eventArgsParams != null);

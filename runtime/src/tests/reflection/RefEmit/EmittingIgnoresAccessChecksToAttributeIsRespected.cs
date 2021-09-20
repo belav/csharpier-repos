@@ -58,7 +58,8 @@ class Test
         AssemblyBuilder assemblyBuilder,
         ConstructorInfo ignoreAccessChecksToAttributeCtor,
         Assembly assembly
-    ) {
+    )
+    {
         // Add this assembly level attribute:
         // [assembly: System.Runtime.CompilerServices.IgnoresAccessChecksToAttribute(assemblyName)]
         ConstructorInfo attributeConstructor = ignoreAccessChecksToAttributeCtor;

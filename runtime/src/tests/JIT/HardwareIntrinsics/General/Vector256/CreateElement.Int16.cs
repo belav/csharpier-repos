@@ -120,7 +120,8 @@ namespace JIT.HardwareIntrinsics.General
             Vector256<Int16> result,
             Int16[] expectedValues,
             [CallerMemberName] string method = ""
-        ) {
+        )
+        {
             Int16[] resultElements = new Int16[ElementCount];
             Unsafe.WriteUnaligned(ref Unsafe.As<Int16, byte>(ref resultElements[0]), result);
             ValidateResult(resultElements, expectedValues, method);
@@ -130,7 +131,8 @@ namespace JIT.HardwareIntrinsics.General
             Int16[] resultElements,
             Int16[] expectedValues,
             [CallerMemberName] string method = ""
-        ) {
+        )
+        {
             bool succeeded = true;
 
             for (var i = 0; i < ElementCount; i++)

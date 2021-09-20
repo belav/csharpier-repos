@@ -43,7 +43,8 @@ namespace Microsoft.Extensions.FileSystemGlobbing.Tests.PatternContexts
             string patternString,
             string[] pushDirectory,
             string expectSegment
-        ) {
+        )
+        {
             var builder = new PatternBuilder();
             var pattern = builder.Build(patternString) as IRaggedPattern;
             Assert.NotNull(pattern);
@@ -76,7 +77,8 @@ namespace Microsoft.Extensions.FileSystemGlobbing.Tests.PatternContexts
         public void PredictNotCallBackWhenEnterUnmatchDirectory(
             string patternString,
             string[] pushDirectory
-        ) {
+        )
+        {
             var builder = new PatternBuilder();
             var pattern = builder.Build(patternString) as IRaggedPattern;
             var context = new PatternContextRaggedInclude(pattern);

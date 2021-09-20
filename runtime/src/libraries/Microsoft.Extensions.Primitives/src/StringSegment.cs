@@ -52,7 +52,8 @@ namespace Microsoft.Extensions.Primitives
                 buffer == null
                 || (uint)offset > (uint)buffer.Length
                 || (uint)length > (uint)(buffer.Length - offset)
-            ) {
+            )
+            {
                 ThrowInvalidArguments(buffer, offset, length);
             }
 

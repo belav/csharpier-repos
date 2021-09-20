@@ -21,7 +21,8 @@ namespace System.Speech.Internal.Synthesis
             bool pexml,
             ResourceLoader resourceLoader,
             List<LexiconEntry> lexicons
-        ) {
+        )
+        {
             _lexicons = lexicons;
             _ssmlText = ssmlText;
             _speakInfo = speakInfo;
@@ -37,7 +38,8 @@ namespace System.Speech.Internal.Synthesis
             string sBaseUri,
             CultureInfo culture,
             List<SsmlXmlAttribute> extraNamespace
-        ) {
+        )
+        {
             _speakInfo.SetVoice(null, culture, VoiceGender.NotSet, VoiceAge.NotSet, 1);
             return _speakInfo.Voice;
         }
@@ -48,7 +50,8 @@ namespace System.Speech.Internal.Synthesis
             ref FragmentState fragmentState,
             int position,
             bool fIgnore
-        ) {
+        )
+        {
             if (!fIgnore)
             {
                 TtsEngineAction action = fragmentState.Action;
@@ -115,7 +118,8 @@ namespace System.Speech.Internal.Synthesis
             EmphasisBreak eBreak,
             int time,
             bool fIgnore
-        ) {
+        )
+        {
             if (!fIgnore)
             {
                 TtsEngineAction action = fragmentState.Action;
@@ -134,7 +138,8 @@ namespace System.Speech.Internal.Synthesis
             ref FragmentState fragmentState,
             string name,
             bool fIgnore
-        ) {
+        )
+        {
             if (!fIgnore)
             {
                 TtsEngineAction action = fragmentState.Action;
@@ -152,7 +157,8 @@ namespace System.Speech.Internal.Synthesis
             bool newCulture,
             VoiceGender gender,
             VoiceAge age
-        ) {
+        )
+        {
             if (culture != null && newCulture)
             {
                 _speakInfo.SetVoice(null, culture, gender, age, 1);
@@ -185,7 +191,8 @@ namespace System.Speech.Internal.Synthesis
             AlphabetType alphabet,
             string ph,
             char[] phoneIds
-        ) {
+        )
+        {
             fragmentState.Action = TtsEngineAction.Pronounce;
             fragmentState.Phoneme = _speakInfo.Voice.TtsEngine.ConvertPhonemes(phoneIds, alphabet);
         }
@@ -207,7 +214,8 @@ namespace System.Speech.Internal.Synthesis
             ref FragmentState fragmentState,
             int position,
             bool fIgnore
-        ) {
+        )
+        {
             ProcessText(alias, voice, ref fragmentState, position, fIgnore);
         }
 
@@ -219,7 +227,8 @@ namespace System.Speech.Internal.Synthesis
             int variant,
             bool fNewCulture,
             List<SsmlXmlAttribute> extraNamespace
-        ) {
+        )
+        {
             _speakInfo.SetVoice(name, culture, gender, age, variant);
             return _speakInfo.Voice;
         }
@@ -233,7 +242,8 @@ namespace System.Speech.Internal.Synthesis
             object voice,
             ref FragmentState fragmentState,
             XmlReader reader
-        ) {
+        )
+        {
             StringWriter sw = new(CultureInfo.InvariantCulture);
             XmlTextWriter writer = new(sw);
             writer.WriteNode(reader, false);
@@ -248,7 +258,8 @@ namespace System.Speech.Internal.Synthesis
             ref FragmentState fragmentState,
             string element,
             List<SsmlXmlAttribute> extraAttributes
-        ) {
+        )
+        {
             StringBuilder sb = new();
             sb.AppendFormat(CultureInfo.InvariantCulture, "<{0}", element);
             foreach (SsmlXmlAttribute attribute in extraAttributes)
@@ -273,7 +284,8 @@ namespace System.Speech.Internal.Synthesis
             ref FragmentState fragmentState,
             string element,
             List<SsmlXmlAttribute> extraAttributes
-        ) {
+        )
+        {
             AddParseUnknownFragment(
                 voice,
                 ref fragmentState,
@@ -297,7 +309,8 @@ namespace System.Speech.Internal.Synthesis
             string fname,
             string delta,
             string idset
-        ) {
+        )
+        {
             return false;
         }
 
@@ -359,7 +372,8 @@ namespace System.Speech.Internal.Synthesis
             object voice,
             ref FragmentState fragmentState,
             string text
-        ) {
+        )
+        {
             TtsEngineAction action = fragmentState.Action;
             fragmentState.Action = TtsEngineAction.ParseUnknownTag;
             _speakInfo.AddText((TTSVoice)voice, new TextFragment(fragmentState, text));

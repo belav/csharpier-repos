@@ -10,7 +10,8 @@ namespace System.Net
         public static string GetWebStatusCodeString(
             FtpStatusCode statusCode,
             string? statusDescription
-        ) {
+        )
+        {
             string webStatusCode =
                 "(" + ((int)statusCode).ToString(NumberFormatInfo.InvariantInfo) + ")";
             string? statusMessage = null;

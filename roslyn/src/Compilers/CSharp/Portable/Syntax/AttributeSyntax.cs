@@ -31,7 +31,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Syntax
                     if (
                         argSyntax.NameEquals != null
                         && argSyntax.NameEquals.Name.Identifier.ValueText == namedArgName
-                    ) {
+                    )
+                    {
                         return argSyntax;
                     }
                 }

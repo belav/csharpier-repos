@@ -133,7 +133,8 @@ namespace AnalyzerRunner
                     if (
                         project.Language != LanguageNames.CSharp
                         && project.Language != LanguageNames.VisualBasic
-                    ) {
+                    )
+                    {
                         continue;
                     }
 
@@ -208,7 +209,8 @@ namespace AnalyzerRunner
                         diagnosticGroup => diagnosticGroup.Key,
                         StringComparer.OrdinalIgnoreCase
                     )
-            ) {
+            )
+            {
                 Console.WriteLine($"  {group.Key}: {group.Count()} instances");
 
                 // Print out analyzer diagnostics like AD0001 for analyzer exceptions
@@ -241,7 +243,8 @@ namespace AnalyzerRunner
             DocumentId documentId,
             Options analyzerOptionsInternal,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             if (!analyzers.TryGetValue(project.Language, out var languageAnalyzers))
             {
                 languageAnalyzers = ImmutableArray<DiagnosticAnalyzer>.Empty;
@@ -294,7 +297,8 @@ namespace AnalyzerRunner
         private static void WriteDiagnosticResults(
             ImmutableArray<Tuple<ProjectId, Diagnostic>> diagnostics,
             string fileName
-        ) {
+        )
+        {
             var orderedDiagnostics = diagnostics.OrderBy(tuple => tuple.Item2.Id)
                 .ThenBy(
                     tuple => tuple.Item2.Location.SourceTree?.FilePath,
@@ -335,7 +339,8 @@ namespace AnalyzerRunner
         > FilterAnalyzers(
             ImmutableDictionary<string, ImmutableArray<DiagnosticAnalyzer>> analyzers,
             Options options
-        ) {
+        )
+        {
             return analyzers.ToImmutableDictionary(
                 pair => pair.Key,
                 pair => FilterAnalyzers(pair.Value, options).ToImmutableArray()
@@ -345,7 +350,8 @@ namespace AnalyzerRunner
         private static IEnumerable<DiagnosticAnalyzer> FilterAnalyzers(
             IEnumerable<DiagnosticAnalyzer> analyzers,
             Options options
-        ) {
+        )
+        {
             if (options.IncrementalAnalyzerNames.Any())
             {
                 // AnalyzerRunner is running for IIncrementalAnalyzer testing. DiagnosticAnalyzer testing is disabled
@@ -382,7 +388,8 @@ namespace AnalyzerRunner
                         analyzer.SupportedDiagnostics.Any(
                             diagnosticDescriptor => diagnosticDescriptor.IsEnabledByDefault
                         )
-                    ) {
+                    )
+                    {
                         yield return analyzer;
                     }
                 }
@@ -441,7 +448,8 @@ namespace AnalyzerRunner
             ImmutableDictionary<string, ImmutableArray<DiagnosticAnalyzer>> analyzers,
             Options options,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var projectDiagnosticBuilder = ImmutableDictionary.CreateBuilder<
                 ProjectId,
                 AnalysisResult
@@ -459,14 +467,16 @@ namespace AnalyzerRunner
                     if (
                         project.Language != LanguageNames.CSharp
                         && project.Language != LanguageNames.VisualBasic
-                    ) {
+                    )
+                    {
                         continue;
                     }
 
                     if (
                         !analyzers.TryGetValue(project.Language, out var languageAnalyzers)
                         || languageAnalyzers.IsEmpty
-                    ) {
+                    )
+                    {
                         continue;
                     }
 
@@ -523,7 +533,8 @@ namespace AnalyzerRunner
             Project project,
             Options analyzerOptionsInternal,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             WriteLine($"Running analyzers for {project.Name}", ConsoleColor.Gray);
             if (analyzerOptionsInternal.RunConcurrent)
             {
@@ -569,7 +580,8 @@ namespace AnalyzerRunner
 
         internal static void WriteTelemetry(
             ImmutableDictionary<ProjectId, AnalysisResult> dictionary
-        ) {
+        )
+        {
             if (dictionary.IsEmpty)
             {
                 return;
@@ -599,7 +611,8 @@ namespace AnalyzerRunner
                     x => x.Key.GetType().Name,
                     StringComparer.OrdinalIgnoreCase
                 )
-            ) {
+            )
+            {
                 WriteTelemetry(pair.Key.GetType().Name, pair.Value);
             }
 
@@ -613,7 +626,8 @@ namespace AnalyzerRunner
                     x => x.Key.GetType().Name,
                     StringComparer.OrdinalIgnoreCase
                 )
-            ) {
+            )
+            {
                 WriteExecutionTimes(pair.Key.GetType().Name, longestAnalyzerName, pair.Value);
             }
         }
@@ -712,7 +726,8 @@ namespace AnalyzerRunner
             string analyzerName,
             int longestAnalyzerName,
             AnalyzerTelemetryInfo telemetry
-        ) {
+        )
+        {
             var padding = new string(' ', longestAnalyzerName - analyzerName.Length);
             WriteLine(
                 $"{analyzerName}:{padding} {telemetry.ExecutionTime.TotalMilliseconds, 7:0}",

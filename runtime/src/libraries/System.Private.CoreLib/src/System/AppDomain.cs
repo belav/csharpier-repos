@@ -132,7 +132,8 @@ namespace System
             string?[]? args,
             byte[]? hashValue,
             Configuration.Assemblies.AssemblyHashAlgorithm hashAlgorithm
-        ) {
+        )
+        {
             throw new PlatformNotSupportedException(SR.PlatformNotSupported_CAS); // This api is only meaningful for very specific partial trust/CAS scenarios
         }
 
@@ -340,7 +341,8 @@ namespace System
             object?[]? args,
             System.Globalization.CultureInfo? culture,
             object?[]? activationAttributes
-        ) {
+        )
+        {
             if (assemblyName == null)
             {
                 throw new ArgumentNullException(nameof(assemblyName));
@@ -363,7 +365,8 @@ namespace System
             string assemblyName,
             string typeName,
             object?[]? activationAttributes
-        ) {
+        )
+        {
             if (assemblyName == null)
             {
                 throw new ArgumentNullException(nameof(assemblyName));
@@ -389,7 +392,8 @@ namespace System
             object?[]? args,
             System.Globalization.CultureInfo? culture,
             object?[]? activationAttributes
-        ) {
+        )
+        {
             ObjectHandle? oh = CreateInstance(
                 assemblyName,
                 typeName,
@@ -408,7 +412,8 @@ namespace System
             string assemblyName,
             string typeName,
             object?[]? activationAttributes
-        ) {
+        )
+        {
             ObjectHandle? oh = CreateInstance(assemblyName, typeName, activationAttributes);
             return oh?.Unwrap();
         }
@@ -429,7 +434,8 @@ namespace System
             object?[]? args,
             System.Globalization.CultureInfo? culture,
             object?[]? activationAttributes
-        ) {
+        )
+        {
             return Activator.CreateInstanceFrom(
                 assemblyFile,
                 typeName,
@@ -447,7 +453,8 @@ namespace System
             string assemblyFile,
             string typeName,
             object?[]? activationAttributes
-        ) {
+        )
+        {
             return Activator.CreateInstanceFrom(assemblyFile, typeName, activationAttributes);
         }
 
@@ -468,7 +475,8 @@ namespace System
             object?[]? args,
             System.Globalization.CultureInfo? culture,
             object?[]? activationAttributes
-        ) {
+        )
+        {
             ObjectHandle? oh = CreateInstanceFrom(
                 assemblyFile,
                 typeName,
@@ -487,7 +495,8 @@ namespace System
             string assemblyFile,
             string typeName,
             object?[]? activationAttributes
-        ) {
+        )
+        {
             ObjectHandle? oh = CreateInstanceFrom(assemblyFile, typeName, activationAttributes);
             return oh?.Unwrap();
         }

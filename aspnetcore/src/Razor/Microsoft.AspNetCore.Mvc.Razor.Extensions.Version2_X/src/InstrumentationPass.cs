@@ -16,7 +16,8 @@ namespace Microsoft.AspNetCore.Mvc.Razor.Extensions.Version2_X
         protected override void ExecuteCore(
             RazorCodeDocument codeDocument,
             DocumentIntermediateNode documentNode
-        ) {
+        )
+        {
             if (documentNode.Options.DesignTime)
             {
                 return;
@@ -79,7 +80,8 @@ namespace Microsoft.AspNetCore.Mvc.Razor.Extensions.Version2_X
                 IntermediateNode parent,
                 bool isLiteral,
                 SourceSpan source
-            ) {
+            )
+            {
                 Node = node;
                 Parent = parent;
                 IsLiteral = isLiteral;
@@ -154,7 +156,8 @@ namespace Microsoft.AspNetCore.Mvc.Razor.Extensions.Version2_X
                     if (
                         child is TagHelperBodyIntermediateNode
                         || child is DefaultTagHelperBodyIntermediateNode
-                    ) {
+                    )
+                    {
                         VisitDefault(child);
                     }
                 }

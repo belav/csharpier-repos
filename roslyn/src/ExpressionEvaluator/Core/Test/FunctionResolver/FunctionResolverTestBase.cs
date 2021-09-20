@@ -23,7 +23,8 @@ namespace Microsoft.CodeAnalysis.ExpressionEvaluator.UnitTests
             Resolver resolver,
             RequestSignature signature,
             string[] expectedSignatures
-        ) {
+        )
+        {
             var request = new Request(null, signature);
             resolver.EnableResolution(process, request);
             VerifySignatures(request, expectedSignatures);
@@ -45,7 +46,8 @@ namespace Microsoft.CodeAnalysis.ExpressionEvaluator.UnitTests
         private static string GetMethodSignature(
             MetadataReader reader,
             MethodDefinitionHandle handle
-        ) {
+        )
+        {
             var methodDef = reader.GetMethodDefinition(handle);
             var builder = new StringBuilder();
             var typeDef = reader.GetTypeDefinition(methodDef.GetDeclaringType());
@@ -78,7 +80,8 @@ namespace Microsoft.CodeAnalysis.ExpressionEvaluator.UnitTests
         private static ImmutableArray<string> GetTypeParameterNames(
             MetadataReader reader,
             GenericParameterHandleCollection handles
-        ) {
+        )
+        {
             return ImmutableArray.CreateRange(
                 handles.Select(h => reader.GetString(reader.GetGenericParameter(h).Name))
             );
@@ -88,7 +91,8 @@ namespace Microsoft.CodeAnalysis.ExpressionEvaluator.UnitTests
             StringBuilder builder,
             MetadataReader reader,
             TypeDefinition typeDef
-        ) {
+        )
+        {
             var declaringTypeHandle = typeDef.GetDeclaringType();
             int declaringTypeArity;
             if (declaringTypeHandle.IsNil)
@@ -124,7 +128,8 @@ namespace Microsoft.CodeAnalysis.ExpressionEvaluator.UnitTests
         private static void AppendTypeParameters(
             StringBuilder builder,
             ImmutableArray<string> typeParameters
-        ) {
+        )
+        {
             if (typeParameters.Length > 0)
             {
                 builder.Append('<');
@@ -136,7 +141,8 @@ namespace Microsoft.CodeAnalysis.ExpressionEvaluator.UnitTests
         private static void AppendParameters(
             StringBuilder builder,
             ImmutableArray<ParameterSignature> parameters
-        ) {
+        )
+        {
             builder.Append('(');
             AppendCommaSeparatedList(builder, parameters, AppendParameter);
             builder.Append(')');
@@ -198,7 +204,8 @@ namespace Microsoft.CodeAnalysis.ExpressionEvaluator.UnitTests
         private static void AppendTypeArguments(
             StringBuilder builder,
             ImmutableArray<TypeSignature> typeArguments
-        ) {
+        )
+        {
             if (typeArguments.Length > 0)
             {
                 builder.Append('<');
@@ -211,7 +218,8 @@ namespace Microsoft.CodeAnalysis.ExpressionEvaluator.UnitTests
             StringBuilder builder,
             ImmutableArray<T> items,
             Action<StringBuilder, T> appendItem
-        ) {
+        )
+        {
             bool any = false;
             foreach (var item in items)
             {
@@ -228,7 +236,8 @@ namespace Microsoft.CodeAnalysis.ExpressionEvaluator.UnitTests
             MetadataReader reader,
             int offset,
             GenericParameterHandleCollection typeParameters
-        ) {
+        )
+        {
             int arity = typeParameters.Count - offset;
             Debug.Assert(arity >= 0);
             if (arity == 0)

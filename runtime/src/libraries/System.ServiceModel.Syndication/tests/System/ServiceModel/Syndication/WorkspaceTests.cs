@@ -80,7 +80,8 @@ namespace System.ServiceModel.Syndication.Tests
         public void Ctor_TextSyndicationContent_Collections(
             TextSyndicationContent title,
             ResourceCollectionInfo[] collections
-        ) {
+        )
+        {
             var workspace = new Workspace(title, collections);
             Assert.Empty(workspace.AttributeExtensions);
             Assert.Null(workspace.BaseUri);
@@ -165,7 +166,8 @@ namespace System.ServiceModel.Syndication.Tests
             string ns,
             string value,
             string version
-        ) {
+        )
+        {
             var workspace = new WorkspaceSubclass();
             Assert.False(workspace.TryParseAttributeEntryPoint(name, ns, value, version));
         }

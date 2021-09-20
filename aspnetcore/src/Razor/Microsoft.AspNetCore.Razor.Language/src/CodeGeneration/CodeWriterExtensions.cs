@@ -36,7 +36,8 @@ namespace Microsoft.AspNetCore.Razor.Language.CodeGeneration
             int offset,
             SourceSpan? span,
             CodeRenderingContext context
-        ) {
+        )
+        {
             if (span == null)
             {
                 return writer;
@@ -49,7 +50,8 @@ namespace Microsoft.AspNetCore.Razor.Language.CodeGeneration
                     span.Value.FilePath,
                     StringComparison.OrdinalIgnoreCase
                 )
-            ) {
+            )
+            {
                 // We don't want to generate padding for nodes from imports.
                 return writer;
             }
@@ -90,7 +92,8 @@ namespace Microsoft.AspNetCore.Razor.Language.CodeGeneration
             string type,
             string name,
             string value
-        ) {
+        )
+        {
             writer.Write(type).Write(" ").Write(name);
             if (!string.IsNullOrEmpty(value))
             {
@@ -176,7 +179,8 @@ namespace Microsoft.AspNetCore.Razor.Language.CodeGeneration
         public static CodeWriter WriteStartMethodInvocation(
             this CodeWriter writer,
             string methodName
-        ) {
+        )
+        {
             writer.Write(methodName);
 
             return writer.Write("(");
@@ -204,7 +208,8 @@ namespace Microsoft.AspNetCore.Razor.Language.CodeGeneration
             string instanceName,
             string methodName,
             params string[] parameters
-        ) {
+        )
+        {
             if (instanceName == null)
             {
                 throw new ArgumentNullException(nameof(instanceName));
@@ -231,7 +236,8 @@ namespace Microsoft.AspNetCore.Razor.Language.CodeGeneration
             string methodName,
             bool endLine,
             params string[] parameters
-        ) {
+        )
+        {
             if (instanceName == null)
             {
                 throw new ArgumentNullException(nameof(instanceName));
@@ -259,7 +265,8 @@ namespace Microsoft.AspNetCore.Razor.Language.CodeGeneration
             this CodeWriter writer,
             string instanceName,
             string methodName
-        ) {
+        )
+        {
             if (instanceName == null)
             {
                 throw new ArgumentNullException(nameof(instanceName));
@@ -287,7 +294,8 @@ namespace Microsoft.AspNetCore.Razor.Language.CodeGeneration
             IList<string> modifiers,
             string typeName,
             string fieldName
-        ) {
+        )
+        {
             if (suppressWarnings == null)
             {
                 throw new ArgumentNullException(nameof(suppressWarnings));
@@ -339,7 +347,8 @@ namespace Microsoft.AspNetCore.Razor.Language.CodeGeneration
             this CodeWriter writer,
             string methodName,
             params string[] parameters
-        ) {
+        )
+        {
             return WriteMethodInvocation(writer, methodName, endLine: true, parameters: parameters);
         }
 
@@ -348,7 +357,8 @@ namespace Microsoft.AspNetCore.Razor.Language.CodeGeneration
             string methodName,
             bool endLine,
             params string[] parameters
-        ) {
+        )
+        {
             return WriteStartMethodInvocation(writer, methodName)
                 .Write(string.Join(", ", parameters))
                 .WriteEndMethodInvocation(endLine);
@@ -359,7 +369,8 @@ namespace Microsoft.AspNetCore.Razor.Language.CodeGeneration
             IList<string> modifiers,
             string typeName,
             string propertyName
-        ) {
+        )
+        {
             if (modifiers == null)
             {
                 throw new ArgumentNullException(nameof(modifiers));
@@ -398,14 +409,16 @@ namespace Microsoft.AspNetCore.Razor.Language.CodeGeneration
         public static CSharpCodeWritingScope BuildLambda(
             this CodeWriter writer,
             params string[] parameterNames
-        ) {
+        )
+        {
             return BuildLambda(writer, async: false, parameterNames: parameterNames);
         }
 
         public static CSharpCodeWritingScope BuildAsyncLambda(
             this CodeWriter writer,
             params string[] parameterNames
-        ) {
+        )
+        {
             return BuildLambda(writer, async: true, parameterNames: parameterNames);
         }
 
@@ -413,7 +426,8 @@ namespace Microsoft.AspNetCore.Razor.Language.CodeGeneration
             CodeWriter writer,
             bool async,
             string[] parameterNames
-        ) {
+        )
+        {
             if (async)
             {
                 writer.Write("async");
@@ -440,7 +454,8 @@ namespace Microsoft.AspNetCore.Razor.Language.CodeGeneration
             string baseType,
             IList<string> interfaces,
             IList<(string name, string constraint)> typeParameters
-        ) {
+        )
+        {
             for (var i = 0; i < modifiers.Count; i++)
             {
                 writer.Write(modifiers[i]);
@@ -503,7 +518,8 @@ namespace Microsoft.AspNetCore.Razor.Language.CodeGeneration
             string returnType,
             string name,
             IEnumerable<KeyValuePair<string, string>> parameters
-        ) {
+        )
+        {
             writer.Write(accessibility)
                 .Write(" ")
                 .Write(returnType)
@@ -520,7 +536,8 @@ namespace Microsoft.AspNetCore.Razor.Language.CodeGeneration
             this CodeWriter writer,
             SourceSpan? span,
             CodeRenderingContext context
-        ) {
+        )
+        {
             if (string.IsNullOrEmpty(span?.FilePath))
             {
                 // Can't build a valid line pragma without a file path.
@@ -669,7 +686,8 @@ namespace Microsoft.AspNetCore.Razor.Language.CodeGeneration
                     _autoSpace
                     && _writer.Length > 0
                     && !char.IsWhiteSpace(_writer[_writer.Length - 1])
-                ) {
+                )
+                {
                     _writer.Write(spaceCharacter);
                 }
             }
@@ -688,7 +706,8 @@ namespace Microsoft.AspNetCore.Razor.Language.CodeGeneration
                 CodeWriter writer,
                 SourceSpan span,
                 CodeRenderingContext context
-            ) {
+            )
+            {
                 if (writer == null)
                 {
                     throw new ArgumentNullException(nameof(writer));

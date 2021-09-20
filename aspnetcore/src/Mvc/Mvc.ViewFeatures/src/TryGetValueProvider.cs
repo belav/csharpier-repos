@@ -103,7 +103,8 @@ namespace Microsoft.AspNetCore.Mvc.ViewFeatures
             object dictionary,
             string key,
             out object value
-        ) {
+        )
+        {
             var strongDict = (IDictionary<TKey, TValue>)dictionary;
 
             TValue strongValue;
@@ -116,7 +117,8 @@ namespace Microsoft.AspNetCore.Mvc.ViewFeatures
             object dictionary,
             string key,
             out object value
-        ) {
+        )
+        {
             var weakDict = (IDictionary)dictionary;
 
             var success = weakDict.Contains(key);

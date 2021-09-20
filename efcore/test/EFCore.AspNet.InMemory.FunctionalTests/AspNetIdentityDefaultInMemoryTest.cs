@@ -14,9 +14,8 @@ namespace Microsoft.EntityFrameworkCore
     public class AspNetIdentityDefaultInMemoryTest
         : AspNetIdentityDefaultTestBase<AspNetIdentityDefaultInMemoryTest.AspNetDefaultIdentityInMemoryFixture>
     {
-        public AspNetIdentityDefaultInMemoryTest(
-            AspNetDefaultIdentityInMemoryFixture fixture
-        ) : base(fixture) { }
+        public AspNetIdentityDefaultInMemoryTest(AspNetDefaultIdentityInMemoryFixture fixture)
+            : base(fixture) { }
 
         protected override void UseTransaction(
             DatabaseFacade facade,
@@ -28,7 +27,8 @@ namespace Microsoft.EntityFrameworkCore
             Func<IdentityDbContext, Task> nestedTestOperation1 = null,
             Func<IdentityDbContext, Task> nestedTestOperation2 = null,
             Func<IdentityDbContext, Task> nestedTestOperation3 = null
-        ) {
+        )
+        {
             await base.ExecuteWithStrategyInTransactionAsync(
                 testOperation,
                 nestedTestOperation1,

@@ -57,7 +57,8 @@ namespace Microsoft.CodeAnalysis.CSharp.ImplementInterface
             ISymbol implMember,
             INamedTypeSymbol interfaceType,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var solution = project.Solution;
 
             // We don't need to cascade in this search, we're only explicitly looking for direct
@@ -124,7 +125,8 @@ namespace Microsoft.CodeAnalysis.CSharp.ImplementInterface
             ISyntaxFactsService syntaxFacts,
             Location location,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var identifierName = location.FindNode(getInnermostNodeForTie: true, cancellationToken);
             if (identifierName == null || !syntaxFacts.IsIdentifierName(identifierName))
                 return;
@@ -156,7 +158,8 @@ namespace Microsoft.CodeAnalysis.CSharp.ImplementInterface
                     instance is IInstanceReferenceOperation instanceReference
                     && instanceReference.ReferenceKind
                         != InstanceReferenceKind.ContainingTypeInstance
-                ) {
+                )
+                {
                     return;
                 }
 

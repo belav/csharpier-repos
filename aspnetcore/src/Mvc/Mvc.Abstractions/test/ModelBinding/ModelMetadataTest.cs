@@ -429,11 +429,9 @@ namespace Microsoft.AspNetCore.Mvc.ModelBinding
             public TestModelMetadata(ParameterInfo parameter)
                 : base(ModelMetadataIdentity.ForParameter(parameter)) { }
 
-            public TestModelMetadata(
-                PropertyInfo propertyInfo,
-                Type modelType,
-                Type containerType
-            ) : base(ModelMetadataIdentity.ForProperty(propertyInfo, modelType, containerType)) { }
+            public TestModelMetadata(PropertyInfo propertyInfo, Type modelType, Type containerType)
+                : base(ModelMetadataIdentity.ForProperty(propertyInfo, modelType, containerType))
+            { }
 
             public override IReadOnlyDictionary<object, object> AdditionalValues
             {

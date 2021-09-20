@@ -81,7 +81,8 @@ namespace System.Diagnostics
         private static void GetAllRecursive(
             [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)] Type type,
             List<object> switchAttribs
-        ) {
+        )
+        {
             GetAllRecursive((MemberInfo)type, switchAttribs);
             MemberInfo[] members = type.GetMembers(
                 BindingFlags.Public

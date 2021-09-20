@@ -35,7 +35,8 @@ namespace Microsoft.Extensions.Configuration.UserSecrets.Test
         {
             foreach (
                 var character in Path.GetInvalidPathChars().Concat(Path.GetInvalidFileNameChars())
-            ) {
+            )
+            {
                 var id = "Test" + character;
                 Assert.Throws<InvalidOperationException>(
                     () => PathHelper.GetSecretsPathFromSecretsId(id)

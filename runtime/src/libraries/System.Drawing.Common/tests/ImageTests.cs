@@ -384,7 +384,8 @@ namespace System.Drawing.Tests
         [InlineData(-1)]
         public void GetPropertyItem_NoSuchPropertyItemEmptyMemoryBitmap_ThrowsArgumentException(
             int propid
-        ) {
+        )
+        {
             using var bitmap = new Bitmap(1, 1);
             Assert.Throws<ArgumentException>(null, () => bitmap.GetPropertyItem(propid));
         }
@@ -395,7 +396,8 @@ namespace System.Drawing.Tests
         [InlineData(-1)]
         public void GetPropertyItem_NoSuchPropertyItemEmptyImageBitmapBmp_ThrowsArgumentException(
             int propid
-        ) {
+        )
+        {
             using var bitmap = new Bitmap(Helpers.GetTestBitmapPath("almogaver1bit.bmp"));
             Assert.Throws<ArgumentException>(null, () => bitmap.GetPropertyItem(propid));
         }
@@ -497,7 +499,8 @@ namespace System.Drawing.Tests
         [InlineData(-1)]
         public void RemovePropertyItem_NoSuchPropertyItemEmptyMemoryBitmap_ThrowsExternalException(
             int propid
-        ) {
+        )
+        {
             using var bitmap = new Bitmap(1, 1);
             Assert.Throws<ExternalException>(() => bitmap.RemovePropertyItem(propid));
         }
@@ -509,7 +512,8 @@ namespace System.Drawing.Tests
         [InlineData(-1)]
         public void RemovePropertyItem_NoSuchPropertyItemEmptyImageBitmapBmp_ThrowsExternalException(
             int propid
-        ) {
+        )
+        {
             using var bitmap = new Bitmap(Helpers.GetTestBitmapPath("almogaver1bit.bmp"));
             Assert.Throws<ExternalException>(() => bitmap.RemovePropertyItem(propid));
         }
@@ -521,7 +525,8 @@ namespace System.Drawing.Tests
         [InlineData(-1)]
         public void RemovePropertyItem_NoSuchPropertyNotEmptyMemoryBitmap_ThrowsArgumentException(
             int propid
-        ) {
+        )
+        {
             using var source = new Bitmap(Helpers.GetTestBitmapPath("nature24bits.jpg"));
             PropertyItem item1 = source.GetPropertyItem(PropertyTagExifUserComment);
             PropertyItem item2 = source.GetPropertyItem(PropertyTagChrominanceTable);
@@ -541,7 +546,8 @@ namespace System.Drawing.Tests
         [InlineData(-1)]
         public void RemovePropertyItem_NoSuchPropertyNotEmptyBitmapJpg_ThrowsArgumentException(
             int propid
-        ) {
+        )
+        {
             using var bitmap = new Bitmap(Helpers.GetTestBitmapPath("nature24bits.jpg"));
             Assert.Throws<ArgumentException>(null, () => bitmap.RemovePropertyItem(propid));
         }
@@ -1798,7 +1804,8 @@ namespace System.Drawing.Tests
         public void GetEncoderParameterList_ReturnsExpected(
             ImageFormat format,
             Guid[] expectedParameters
-        ) {
+        )
+        {
             if (PlatformDetection.IsNetFramework)
             {
                 throw new SkipTestException("This is a known bug for .NET Framework");

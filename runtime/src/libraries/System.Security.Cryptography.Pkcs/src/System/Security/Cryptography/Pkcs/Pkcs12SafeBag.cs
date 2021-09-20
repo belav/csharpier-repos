@@ -39,7 +39,8 @@ namespace System.Security.Cryptography.Pkcs
             string bagIdValue,
             ReadOnlyMemory<byte> encodedBagValue,
             bool skipCopy = false
-        ) {
+        )
+        {
             if (string.IsNullOrEmpty(bagIdValue))
                 throw new ArgumentNullException(nameof(bagIdValue));
 

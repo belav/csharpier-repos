@@ -15,7 +15,8 @@ namespace System.Net
             public ContextFlagMapping(
                 Interop.NetSecurityNative.GssFlags gssFlag,
                 ContextFlagsPal contextFlag
-            ) {
+            )
+            {
                 GssFlags = gssFlag;
                 ContextFlag = contextFlag;
             }
@@ -48,7 +49,8 @@ namespace System.Net
         internal static ContextFlagsPal GetContextFlagsPalFromInterop(
             Interop.NetSecurityNative.GssFlags gssFlags,
             bool isServer
-        ) {
+        )
+        {
             ContextFlagsPal flags = ContextFlagsPal.None;
 
             // GSS_C_IDENTIFY_FLAG is handled separately as its value can either be AcceptIdentify (used by server) or InitIdentify (used by client)
@@ -85,7 +87,8 @@ namespace System.Net
         internal static Interop.NetSecurityNative.GssFlags GetInteropFromContextFlagsPal(
             ContextFlagsPal flags,
             bool isServer
-        ) {
+        )
+        {
             Interop.NetSecurityNative.GssFlags gssFlags = 0;
 
             // GSS_C_IDENTIFY_FLAG is set if either AcceptIdentify (used by server) or InitIdentify (used by client) is set

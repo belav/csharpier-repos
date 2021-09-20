@@ -70,21 +70,23 @@ namespace System.Runtime.Serialization.Json
             Type type,
             string? rootName,
             IEnumerable<Type>? knownTypes
-        ) : this(
-            type,
-            new DataContractJsonSerializerSettings()
-            {
-                RootName = rootName,
-                KnownTypes = knownTypes
-            }
-        ) { }
+        )
+            : this(
+                type,
+                new DataContractJsonSerializerSettings()
+                {
+                    RootName = rootName,
+                    KnownTypes = knownTypes
+                }
+            ) { }
 
         [RequiresUnreferencedCode(SerializerTrimmerWarning)]
         public DataContractJsonSerializer(
             Type type,
             XmlDictionaryString? rootName,
             IEnumerable<Type>? knownTypes
-        ) {
+        )
+        {
             _serializer = new DataContractJsonSerializerImpl(type, rootName, knownTypes);
         }
 
@@ -182,7 +184,8 @@ namespace System.Runtime.Serialization.Json
             DataContract declaredTypeContract,
             Type declaredType,
             Type objectType
-        ) {
+        )
+        {
             DataContract contract = DataContractSerializer.GetDataContract(
                 declaredTypeContract,
                 declaredType,
@@ -230,7 +233,8 @@ namespace System.Runtime.Serialization.Json
         private List<Type> GetKnownTypesFromContext(
             XmlObjectSerializerContext context,
             IList<Type>? serializerKnownTypeList
-        ) {
+        )
+        {
             List<Type> knownTypesList = new List<Type>();
             if (context != null)
             {
@@ -267,7 +271,8 @@ namespace System.Runtime.Serialization.Json
             object value,
             DataContract contract,
             XmlObjectSerializerWriteContextComplexJson context
-        ) {
+        )
+        {
             if (contract is ClassDataContract classContract)
             {
                 if (classContract.BaseContract != null)
@@ -309,7 +314,8 @@ namespace System.Runtime.Serialization.Json
             object value,
             DataContract contract,
             XmlObjectSerializerWriteContextComplexJson context
-        ) {
+        )
+        {
             if (contract is ClassDataContract classContract)
             {
                 if (classContract.BaseContract != null)
@@ -351,7 +357,8 @@ namespace System.Runtime.Serialization.Json
             object value,
             DataContract contract,
             XmlObjectSerializerReadContextComplexJson context
-        ) {
+        )
+        {
             if (contract is ClassDataContract classContract)
             {
                 if (classContract.BaseContract != null)
@@ -393,7 +400,8 @@ namespace System.Runtime.Serialization.Json
             object value,
             DataContract contract,
             XmlObjectSerializerReadContextComplexJson context
-        ) {
+        )
+        {
             if (contract is ClassDataContract classContract)
             {
                 if (classContract.BaseContract != null)
@@ -484,7 +492,8 @@ namespace System.Runtime.Serialization.Json
             DataContract contract,
             XmlReaderDelegator reader,
             XmlObjectSerializerReadContextComplexJson context
-        ) {
+        )
+        {
             return JsonDataContract.GetJsonDataContract(contract).ReadJsonValue(reader, context);
         }
 
@@ -495,7 +504,8 @@ namespace System.Runtime.Serialization.Json
             object graph,
             XmlObjectSerializerWriteContextComplexJson context,
             RuntimeTypeHandle declaredTypeHandle
-        ) {
+        )
+        {
             contract.WriteJsonValue(writer, graph, context, declaredTypeHandle);
         }
 
@@ -583,7 +593,8 @@ namespace System.Runtime.Serialization.Json
             int maxItemsInObjectGraph,
             bool ignoreExtensionDataObject,
             bool alwaysEmitTypeInformation
-        ) {
+        )
+        {
             EmitTypeInformation emitTypeInformation = alwaysEmitTypeInformation
                 ? EmitTypeInformation.Always
                 : EmitTypeInformation.AsNeeded;
@@ -604,7 +615,8 @@ namespace System.Runtime.Serialization.Json
         public DataContractJsonSerializerImpl(
             Type type,
             DataContractJsonSerializerSettings? settings
-        ) {
+        )
+        {
             if (settings == null)
             {
                 settings = new DataContractJsonSerializerSettings();
@@ -896,7 +908,8 @@ namespace System.Runtime.Serialization.Json
             DataContract contract,
             XmlReaderDelegator reader,
             XmlObjectSerializerReadContextComplexJson? context
-        ) {
+        )
+        {
             return JsonDataContract.GetJsonDataContract(contract).ReadJsonValue(reader, context);
         }
 
@@ -912,7 +925,8 @@ namespace System.Runtime.Serialization.Json
             object graph,
             XmlObjectSerializerWriteContextComplexJson? context,
             RuntimeTypeHandle declaredTypeHandle
-        ) {
+        )
+        {
             contract.WriteJsonValue(writer, graph, context, declaredTypeHandle);
         }
 
@@ -940,7 +954,8 @@ namespace System.Runtime.Serialization.Json
         internal override object? InternalReadObject(
             XmlReaderDelegator xmlReader,
             bool verifyObjectName
-        ) {
+        )
+        {
             if (MaxItemsInObjectGraph == 0)
             {
                 throw XmlObjectSerializer.CreateSerializationException(
@@ -1102,7 +1117,8 @@ namespace System.Runtime.Serialization.Json
                 if (
                     itemType.IsGenericType
                     && (itemType.GetGenericTypeDefinition() == Globals.TypeOfKeyValue)
-                ) {
+                )
+                {
                     itemType = Globals.TypeOfKeyValuePair.MakeGenericType(
                         itemType.GenericTypeArguments
                     );
@@ -1123,7 +1139,8 @@ namespace System.Runtime.Serialization.Json
             bool serializeReadOnlyTypes,
             DateTimeFormat? dateTimeFormat,
             bool useSimpleDictionaryFormat
-        ) {
+        )
+        {
             CheckNull(type, nameof(type));
             _rootType = type;
 
@@ -1167,7 +1184,8 @@ namespace System.Runtime.Serialization.Json
             bool serializeReadOnlyTypes,
             DateTimeFormat? dateTimeFormat,
             bool useSimpleDictionaryFormat
-        ) {
+        )
+        {
             Initialize(
                 type,
                 knownTypes,
@@ -1200,7 +1218,8 @@ namespace System.Runtime.Serialization.Json
             DataContract declaredTypeContract,
             Type declaredType,
             Type objectType
-        ) {
+        )
+        {
             DataContract contract = DataContractSerializer.GetDataContract(
                 declaredTypeContract,
                 declaredType,

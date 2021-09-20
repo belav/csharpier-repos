@@ -158,7 +158,8 @@ namespace System.Reflection.Metadata
 
         private StringHandle.VirtualIndex GetVirtualNameIndex(
             AssemblyReferenceHandle.VirtualIndex index
-        ) {
+        )
+        {
             switch (index)
             {
                 case AssemblyReferenceHandle.VirtualIndex.System_ObjectModel:

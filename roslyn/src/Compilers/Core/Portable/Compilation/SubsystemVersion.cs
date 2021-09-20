@@ -117,7 +117,8 @@ namespace Microsoft.CodeAnalysis
                     )
                     || majorValue >= 65356
                     || majorValue < 0
-                ) {
+                )
+                {
                     return false;
                 }
 
@@ -137,7 +138,8 @@ namespace Microsoft.CodeAnalysis
                         )
                         || minorValue >= 65356
                         || minorValue < 0
-                    ) {
+                    )
+                    {
                         return false;
                     }
                 }

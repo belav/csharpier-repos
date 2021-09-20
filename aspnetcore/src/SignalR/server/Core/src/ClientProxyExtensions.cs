@@ -30,7 +30,8 @@ namespace Microsoft.AspNetCore.SignalR
             this IClientProxy clientProxy,
             string method,
             CancellationToken cancellationToken = default
-        ) {
+        )
+        {
             return clientProxy.SendCoreAsync(method, Array.Empty<object>(), cancellationToken);
         }
 
@@ -53,7 +54,8 @@ namespace Microsoft.AspNetCore.SignalR
             string method,
             object? arg1,
             CancellationToken cancellationToken = default
-        ) {
+        )
+        {
             return clientProxy.SendCoreAsync(method, new[] { arg1 }, cancellationToken);
         }
 
@@ -78,7 +80,8 @@ namespace Microsoft.AspNetCore.SignalR
             object? arg1,
             object? arg2,
             CancellationToken cancellationToken = default
-        ) {
+        )
+        {
             return clientProxy.SendCoreAsync(method, new[] { arg1, arg2 }, cancellationToken);
         }
 
@@ -105,7 +108,8 @@ namespace Microsoft.AspNetCore.SignalR
             object? arg2,
             object? arg3,
             CancellationToken cancellationToken = default
-        ) {
+        )
+        {
             return clientProxy.SendCoreAsync(method, new[] { arg1, arg2, arg3 }, cancellationToken);
         }
 
@@ -134,7 +138,8 @@ namespace Microsoft.AspNetCore.SignalR
             object? arg3,
             object? arg4,
             CancellationToken cancellationToken = default
-        ) {
+        )
+        {
             return clientProxy.SendCoreAsync(
                 method,
                 new[] { arg1, arg2, arg3, arg4 },
@@ -169,7 +174,8 @@ namespace Microsoft.AspNetCore.SignalR
             object? arg4,
             object? arg5,
             CancellationToken cancellationToken = default
-        ) {
+        )
+        {
             return clientProxy.SendCoreAsync(
                 method,
                 new[] { arg1, arg2, arg3, arg4, arg5 },
@@ -206,7 +212,8 @@ namespace Microsoft.AspNetCore.SignalR
             object? arg5,
             object? arg6,
             CancellationToken cancellationToken = default
-        ) {
+        )
+        {
             return clientProxy.SendCoreAsync(
                 method,
                 new[] { arg1, arg2, arg3, arg4, arg5, arg6 },
@@ -245,7 +252,8 @@ namespace Microsoft.AspNetCore.SignalR
             object? arg6,
             object? arg7,
             CancellationToken cancellationToken = default
-        ) {
+        )
+        {
             return clientProxy.SendCoreAsync(
                 method,
                 new[] { arg1, arg2, arg3, arg4, arg5, arg6, arg7 },
@@ -286,7 +294,8 @@ namespace Microsoft.AspNetCore.SignalR
             object? arg7,
             object? arg8,
             CancellationToken cancellationToken = default
-        ) {
+        )
+        {
             return clientProxy.SendCoreAsync(
                 method,
                 new[] { arg1, arg2, arg3, arg4, arg5, arg6, arg7, arg8 },
@@ -329,7 +338,8 @@ namespace Microsoft.AspNetCore.SignalR
             object? arg8,
             object? arg9,
             CancellationToken cancellationToken = default
-        ) {
+        )
+        {
             return clientProxy.SendCoreAsync(
                 method,
                 new[] { arg1, arg2, arg3, arg4, arg5, arg6, arg7, arg8, arg9 },
@@ -374,7 +384,8 @@ namespace Microsoft.AspNetCore.SignalR
             object? arg9,
             object? arg10,
             CancellationToken cancellationToken = default
-        ) {
+        )
+        {
             return clientProxy.SendCoreAsync(
                 method,
                 new[] { arg1, arg2, arg3, arg4, arg5, arg6, arg7, arg8, arg9, arg10 },

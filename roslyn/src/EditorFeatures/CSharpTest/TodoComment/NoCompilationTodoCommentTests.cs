@@ -76,7 +76,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.TodoComment
             Document document,
             ImmutableArray<TodoCommentDescriptor> commentDescriptors,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             return Task.FromResult(
                 ImmutableArray.Create(
                     new CodeAnalysis.TodoComments.TodoComment(

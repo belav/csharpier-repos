@@ -142,7 +142,8 @@ namespace JIT.HardwareIntrinsics.X86
                     || (alignment * 2) < sizeOfinArray1
                     || (alignment * 2) < sizeOfinArray2
                     || (alignment * 2) < sizeOfoutArray
-                ) {
+                )
+                {
                     throw new ArgumentException("Invalid value of alignment");
                 }
 
@@ -221,7 +222,8 @@ namespace JIT.HardwareIntrinsics.X86
 
             public void RunStructFldScenario(
                 SimpleBinaryOpTest__ShiftRightArithmeticVariableInt32 testClass
-            ) {
+            )
+            {
                 var result = Avx2.ShiftRightArithmeticVariable(_fld1, _fld2);
 
                 Unsafe.Write(testClass._dataTable.outArrayPtr, result);
@@ -230,7 +232,8 @@ namespace JIT.HardwareIntrinsics.X86
 
             public void RunStructFldScenario_Load(
                 SimpleBinaryOpTest__ShiftRightArithmeticVariableInt32 testClass
-            ) {
+            )
+            {
                 fixed (Vector128<Int32>* pFld1 = &_fld1)fixed (Vector128<UInt32>* pFld2 = &_fld2)
                 {
                     var result = Avx2.ShiftRightArithmeticVariable(
@@ -447,7 +450,8 @@ namespace JIT.HardwareIntrinsics.X86
 
             fixed (Vector128<Int32>* pClsVar1 = &_clsVar1)fixed (
                 Vector128<UInt32>* pClsVar2 = &_clsVar2
-            ) {
+            )
+            {
                 var result = Avx2.ShiftRightArithmeticVariable(
                     Sse2.LoadVector128((Int32*)(pClsVar1)),
                     Sse2.LoadVector128((UInt32*)(pClsVar2))
@@ -513,7 +517,8 @@ namespace JIT.HardwareIntrinsics.X86
 
             fixed (Vector128<Int32>* pFld1 = &test._fld1)fixed (
                 Vector128<UInt32>* pFld2 = &test._fld2
-            ) {
+            )
+            {
                 var result = Avx2.ShiftRightArithmeticVariable(
                     Sse2.LoadVector128((Int32*)(pFld1)),
                     Sse2.LoadVector128((UInt32*)(pFld2))
@@ -617,7 +622,8 @@ namespace JIT.HardwareIntrinsics.X86
             Vector128<UInt32> op2,
             void* result,
             [CallerMemberName] string method = ""
-        ) {
+        )
+        {
             Int32[] inArray1 = new Int32[Op1ElementCount];
             UInt32[] inArray2 = new UInt32[Op2ElementCount];
             Int32[] outArray = new Int32[RetElementCount];
@@ -638,7 +644,8 @@ namespace JIT.HardwareIntrinsics.X86
             void* op2,
             void* result,
             [CallerMemberName] string method = ""
-        ) {
+        )
+        {
             Int32[] inArray1 = new Int32[Op1ElementCount];
             UInt32[] inArray2 = new UInt32[Op2ElementCount];
             Int32[] outArray = new Int32[RetElementCount];
@@ -667,7 +674,8 @@ namespace JIT.HardwareIntrinsics.X86
             UInt32[] right,
             Int32[] result,
             [CallerMemberName] string method = ""
-        ) {
+        )
+        {
             bool succeeded = true;
 
             if ((int)(left[0] >> (int)right[0]) != result[0])

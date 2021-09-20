@@ -96,7 +96,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Completion.Providers
                         SyntaxKind.TupleExpression,
                         SyntaxKind.CastExpression
                     )
-                ) {
+                )
+                {
                     return 0;
                 }
             }
@@ -104,7 +105,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Completion.Providers
             if (
                 token.IsKind(SyntaxKind.CommaToken)
                 && token.Parent.IsKind(SyntaxKind.TupleExpression)
-            ) {
+            )
+            {
                 var tupleExpr =
                     (TupleExpressionSyntax)context.TargetToken.Parent as TupleExpressionSyntax;
                 return (tupleExpr.Arguments.GetWithSeparators().IndexOf(context.TargetToken) + 1)
@@ -119,7 +121,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Completion.Providers
             int index,
             CompletionContext context,
             int spanStart
-        ) {
+        )
+        {
             foreach (var type in inferredTypes)
             {
                 if (index >= type.TupleElements.Length)
@@ -150,7 +153,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Completion.Providers
             CompletionItem selectedItem,
             char? ch,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             return Task.FromResult<TextChange?>(
                 new TextChange(selectedItem.Span, selectedItem.DisplayText)
             );

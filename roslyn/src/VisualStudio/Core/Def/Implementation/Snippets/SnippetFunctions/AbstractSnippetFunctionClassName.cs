@@ -38,7 +38,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Snippets
             CancellationToken cancellationToken,
             out string value,
             out int hasDefaultValue
-        ) {
+        )
+        {
             hasDefaultValue = 0;
             value = string.Empty;
             if (!TryGetDocument(out var document))
@@ -52,7 +53,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Snippets
                     FieldName,
                     surfaceBufferFieldSpan
                 ) != VSConstants.S_OK
-            ) {
+            )
+            {
                 return VSConstants.E_FAIL;
             }
 
@@ -61,7 +63,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Snippets
                     surfaceBufferFieldSpan[0],
                     out var subjectBufferFieldSpan
                 )
-            ) {
+            )
+            {
                 return VSConstants.E_FAIL;
             }
 

@@ -235,7 +235,8 @@ namespace System.IO.Ports.Tests
         private static void VerifyInfiniteTimeout(
             Action<SerialPort> readMethod,
             bool setInfiniteTimeout
-        ) {
+        )
+        {
             using (SerialPort com1 = TCSupport.InitFirstSerialPort())
             using (SerialPort com2 = TCSupport.InitSecondSerialPort(com1))
             {
@@ -282,7 +283,8 @@ namespace System.IO.Ports.Tests
                 SerialPort com = new SerialPort(
                     TCSupport.LocalMachineSerialInfo.FirstAvailablePortName
                 )
-            ) {
+            )
+            {
                 com.ReadTimeout = 0;
                 com.Open();
 
@@ -296,7 +298,8 @@ namespace System.IO.Ports.Tests
                 SerialPort com = new SerialPort(
                     TCSupport.LocalMachineSerialInfo.FirstAvailablePortName
                 )
-            ) {
+            )
+            {
                 com.Open();
                 com.ReadTimeout = 0;
 
@@ -373,7 +376,8 @@ namespace System.IO.Ports.Tests
                 SerialPort com = new SerialPort(
                     TCSupport.LocalMachineSerialInfo.FirstAvailablePortName
                 )
-            ) {
+            )
+            {
                 VerifyExceptionAtOpen(com, readTimeout, throwAt, expectedException);
 
                 if (com.IsOpen)
@@ -388,7 +392,8 @@ namespace System.IO.Ports.Tests
             int readTimeout,
             ThrowAt throwAt,
             Type expectedException
-        ) {
+        )
+        {
             int origReadTimeout = com.ReadTimeout;
 
             SerialPortProperties serPortProp = new SerialPortProperties();
@@ -444,7 +449,8 @@ namespace System.IO.Ports.Tests
             SerialPort com,
             int readTimeout,
             Type expectedException
-        ) {
+        )
+        {
             SerialPortProperties serPortProp = new SerialPortProperties();
 
             com.Open();

@@ -23,12 +23,8 @@ namespace MS.Internal.Xml.XPath
         private XPathNodeIterator? _workIterator;
         private readonly StackNav _ancestorStk;
 
-        public PrecedingQuery(
-            Query qyInput,
-            string name,
-            string prefix,
-            XPathNodeType typeTest
-        ) : base(qyInput, name, prefix, typeTest)
+        public PrecedingQuery(Query qyInput, string name, string prefix, XPathNodeType typeTest)
+            : base(qyInput, name, prefix, typeTest)
         {
             _ancestorStk = new StackNav();
         }
@@ -65,7 +61,8 @@ namespace MS.Internal.Xml.XPath
                     if (
                         last.NodeType == XPathNodeType.Attribute
                         || last.NodeType == XPathNodeType.Namespace
-                    ) {
+                    )
+                    {
                         last.MoveToParent();
                     }
                 }

@@ -15,7 +15,8 @@ namespace Microsoft.AspNetCore.Razor.Language.Components
         protected override void ExecuteCore(
             RazorCodeDocument codeDocument,
             DocumentIntermediateNode documentNode
-        ) {
+        )
+        {
             var visitor = new Visitor();
             visitor.Visit(documentNode);
 

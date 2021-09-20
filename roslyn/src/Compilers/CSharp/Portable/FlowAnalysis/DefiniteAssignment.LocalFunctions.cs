@@ -38,7 +38,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             LocalFunctionState localFunctionState,
             SyntaxNode syntax,
             bool isCall
-        ) {
+        )
+        {
             _usedLocalFunctions.Add(localFunc);
 
             // Check variables that were read before being definitely assigned.
@@ -70,7 +71,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             Symbol symbol,
             SyntaxNode node,
             int slot
-        ) {
+        )
+        {
             Debug.Assert(!IsConditionalState);
             if ((object)symbol != null)
             {
@@ -170,7 +172,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                 if (
                     symbol.Kind == SymbolKind.Method
                     && ((MethodSymbol)symbol).MethodKind == MethodKind.LocalFunction
-                ) {
+                )
+                {
                     return (LocalFunctionSymbol)symbol;
                 }
                 symbol = symbol.ContainingSymbol;
@@ -200,7 +203,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             LocalFunctionState savedState,
             LocalFunctionState currentState,
             ref LocalState stateAtReturn
-        ) {
+        )
+        {
             if (currentState.CapturedMask.IsNull)
             {
                 currentState.CapturedMask = GetCapturedBitmask();

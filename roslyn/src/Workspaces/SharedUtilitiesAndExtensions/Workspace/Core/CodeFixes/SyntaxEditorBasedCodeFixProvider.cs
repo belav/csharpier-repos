@@ -68,7 +68,8 @@ namespace Microsoft.CodeAnalysis.CodeFixes
             Document document,
             Diagnostic diagnostic,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             return FixAllAsync(document, ImmutableArray.Create(diagnostic), cancellationToken);
         }
 
@@ -76,7 +77,8 @@ namespace Microsoft.CodeAnalysis.CodeFixes
             Document document,
             ImmutableArray<Diagnostic> diagnostics,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             return FixAllWithEditorAsync(
                 document,
                 editor => FixAllAsync(document, diagnostics, editor, cancellationToken),
@@ -88,7 +90,8 @@ namespace Microsoft.CodeAnalysis.CodeFixes
             Document document,
             Func<SyntaxEditor, Task> editAsync,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var root = await document.GetRequiredSyntaxRootAsync(cancellationToken)
                 .ConfigureAwait(false);
             var editor = new SyntaxEditor(root, document.Project.Solution.Workspace);

@@ -11,7 +11,8 @@ namespace Microsoft.Extensions.DependencyInjection.Specification
     {
         protected override IServiceProvider CreateServiceProvider(
             IServiceCollection serviceCollection
-        ) {
+        )
+        {
             return new Container().WithDependencyInjectionAdapter(serviceCollection)
                 .BuildServiceProvider();
         }

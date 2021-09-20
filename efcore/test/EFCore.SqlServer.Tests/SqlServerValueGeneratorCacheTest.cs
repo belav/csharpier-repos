@@ -121,7 +121,8 @@ namespace Microsoft.EntityFrameworkCore
         private static FakeRelationalConnection CreateConnection(
             string databaseName = null,
             string serverName = null
-        ) {
+        )
+        {
             var connection = new FakeRelationalConnection();
             connection.UseConnection(
                 new SqlConnection(

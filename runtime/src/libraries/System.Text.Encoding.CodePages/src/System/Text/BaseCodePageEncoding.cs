@@ -108,7 +108,8 @@ namespace System.Text
         internal static unsafe void ReadCodePageDataFileHeader(
             Stream stream,
             byte[] codePageDataFileHeader
-        ) {
+        )
+        {
             stream.Read(codePageDataFileHeader, 0, codePageDataFileHeader.Length);
             if (!BitConverter.IsLittleEndian)
             {
@@ -454,7 +455,8 @@ namespace System.Text
             if (
                 safeNativeMemoryHandle != null
                 && safeNativeMemoryHandle.DangerousGetHandle() == IntPtr.Zero
-            ) {
+            )
+            {
                 LoadManagedCodePage();
             }
         }

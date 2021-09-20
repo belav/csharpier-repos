@@ -3037,7 +3037,8 @@ struct S
             bool isReadOnly,
             CSharpParseOptions parseOptions,
             Verification verify
-        ) {
+        )
+        {
             var csharp =
                 @"
 struct S

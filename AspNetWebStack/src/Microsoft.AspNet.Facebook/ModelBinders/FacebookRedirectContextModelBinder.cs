@@ -42,7 +42,8 @@ namespace Microsoft.AspNet.Facebook.ModelBinders
         public virtual object BindModel(
             ControllerContext controllerContext,
             ModelBindingContext bindingContext
-        ) {
+        )
+        {
             HttpRequestBase request = controllerContext.HttpContext.Request;
             string originUrl = request.QueryString["originUrl"];
             string permissions = request.QueryString["permissions"];

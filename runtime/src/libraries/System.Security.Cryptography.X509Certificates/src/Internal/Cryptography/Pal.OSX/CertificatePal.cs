@@ -33,7 +33,8 @@ namespace Internal.Cryptography.Pal
             ReadOnlySpan<byte> rawData,
             SafePasswordHandle password,
             X509KeyStorageFlags keyStorageFlags
-        ) {
+        )
+        {
             return AppleCertificatePal.FromBlob(rawData, password, keyStorageFlags);
         }
 
@@ -41,7 +42,8 @@ namespace Internal.Cryptography.Pal
             string fileName,
             SafePasswordHandle password,
             X509KeyStorageFlags keyStorageFlags
-        ) {
+        )
+        {
             return AppleCertificatePal.FromFile(fileName, password, keyStorageFlags);
         }
     }

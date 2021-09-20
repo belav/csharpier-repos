@@ -87,17 +87,18 @@ namespace Microsoft.CodeAnalysis
             string? description = null,
             string? helpLinkUri = null,
             params string[] customTags
-        ) : this(
-            id,
-            title,
-            messageFormat,
-            category,
-            defaultSeverity,
-            isEnabledByDefault,
-            description,
-            helpLinkUri,
-            customTags.AsImmutableOrEmpty()
-        ) { }
+        )
+            : this(
+                id,
+                title,
+                messageFormat,
+                category,
+                defaultSeverity,
+                isEnabledByDefault,
+                description,
+                helpLinkUri,
+                customTags.AsImmutableOrEmpty()
+            ) { }
 
         /// <summary>
         /// Create a DiagnosticDescriptor, which provides description about a <see cref="Diagnostic"/>.
@@ -132,17 +133,18 @@ namespace Microsoft.CodeAnalysis
             LocalizableString? description = null,
             string? helpLinkUri = null,
             params string[] customTags
-        ) : this(
-            id,
-            title,
-            messageFormat,
-            category,
-            defaultSeverity,
-            isEnabledByDefault,
-            description,
-            helpLinkUri,
-            customTags.AsImmutableOrEmpty()
-        ) { }
+        )
+            : this(
+                id,
+                title,
+                messageFormat,
+                category,
+                defaultSeverity,
+                isEnabledByDefault,
+                description,
+                helpLinkUri,
+                customTags.AsImmutableOrEmpty()
+            ) { }
 
         internal DiagnosticDescriptor(
             string id,
@@ -154,7 +156,8 @@ namespace Microsoft.CodeAnalysis
             LocalizableString? description,
             string? helpLinkUri,
             ImmutableArray<string> customTags
-        ) {
+        )
+        {
             if (string.IsNullOrWhiteSpace(id))
             {
                 throw new ArgumentException(

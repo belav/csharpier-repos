@@ -33,7 +33,8 @@ namespace Castle.Components.DictionaryAdapter.Tests
             ITypeDescriptorContext context,
             CultureInfo culture,
             object value
-        ) {
+        )
+        {
             if (value is string)
             {
                 string[] fields = ((string)value).Split(new char[] { ',' });
@@ -47,7 +48,8 @@ namespace Castle.Components.DictionaryAdapter.Tests
             CultureInfo culture,
             object value,
             Type destinationType
-        ) {
+        )
+        {
             if (destinationType == typeof(string))
             {
                 return ((Phone)value).Number + "," + ((Phone)value).Extension;

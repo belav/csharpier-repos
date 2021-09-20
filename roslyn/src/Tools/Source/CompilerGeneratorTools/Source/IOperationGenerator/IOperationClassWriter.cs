@@ -108,7 +108,8 @@ namespace IOperationGenerator
                         File.Open(outFileName, FileMode.Create),
                         Encoding.UTF8
                     )
-                ) {
+                )
+                {
                     writeHeader();
                     WriteUsing("System");
 
@@ -229,7 +230,8 @@ namespace IOperationGenerator
             Comments? comments,
             IEnumerable<string> operationKinds,
             bool writeReservedRemark
-        ) {
+        )
+        {
             if (comments is object)
             {
                 bool hasWrittenRemarks = false;
@@ -399,7 +401,8 @@ namespace IOperationGenerator
                 bool editorBrowsable,
                 string? obsoleteMessage,
                 string? obsoleteError
-            ) {
+            )
+            {
                 WriteLine(
                     $"/// <summary>Indicates an <see cref=\"{operationName}\"/>.{(extraText is object ? $" {extraText}" : "")}</summary>"
                 );
@@ -532,7 +535,8 @@ namespace IOperationGenerator
                     string @class,
                     string baseType,
                     string @interface
-                ) {
+                )
+                {
                     WriteLine(
                         $"internal {extensibility} partial class {@class} : {baseType}, {@interface}"
                     );
@@ -548,7 +552,8 @@ namespace IOperationGenerator
                     bool hasType,
                     bool hasConstantValue,
                     bool multipleValidKinds
-                ) {
+                )
+                {
                     Write($"{accessibility} {@class}(");
 
                     var newProps = new HashSet<string>(StringComparer.Ordinal);
@@ -741,7 +746,8 @@ namespace IOperationGenerator
                     AbstractNode type,
                     List<Property> publicIOperationProps,
                     Node node
-                ) {
+                )
+                {
                     if (publicIOperationProps.Count > 0)
                     {
                         var orderedProperties = new List<Property>();
@@ -1072,7 +1078,8 @@ namespace IOperationGenerator
         private List<Property> GetAllProperties(
             AbstractNode node,
             bool includeSkipGenerationProperties = false
-        ) {
+        )
+        {
             var properties = node.Properties.Where(
                     p => !p.SkipGeneration || includeSkipGenerationProperties
                 )
@@ -1118,7 +1125,8 @@ namespace IOperationGenerator
         private static bool IsImmutableArray(
             string typeName,
             [NotNullWhen(true)] out string? arrayType
-        ) {
+        )
+        {
             const string ImmutableArrayPrefix = "ImmutableArray<";
             if (typeName.StartsWith(ImmutableArrayPrefix, StringComparison.Ordinal))
             {

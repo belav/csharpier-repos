@@ -38,7 +38,8 @@ namespace Microsoft.EntityFrameworkCore.SqlServer.Update.Internal
         public SqlServerModificationCommandBatchFactory(
             ModificationCommandBatchFactoryDependencies dependencies,
             IDbContextOptions options
-        ) {
+        )
+        {
             Check.NotNull(dependencies, nameof(dependencies));
             Check.NotNull(options, nameof(options));
 

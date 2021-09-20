@@ -117,7 +117,8 @@ namespace System.Text.RegularExpressions
             (string CharClass, bool CaseInsensitive)[]? leadingCharClasses,
             int leadingAnchor,
             bool rightToLeft
-        ) {
+        )
+        {
             Debug.Assert(boyerMoorePrefix is null || leadingCharClasses is null);
 
             Tree = tree;

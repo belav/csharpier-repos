@@ -158,7 +158,8 @@ namespace System.Threading.Tasks.Tests
             WorkloadType workType,
             TaskCreationOptions taskCreationOptions,
             TaskSchedulerType taskScheduler
-        ) {
+        )
+        {
             PreTaskStatus = preTaskStatus;
             PostRunSyncAction = postRunSyncAction;
             WorkloadType = workType;
@@ -333,7 +334,8 @@ namespace System.Threading.Tasks.Tests
             if (
                 _taskSchedulerType == TaskSchedulerType.CustomWithInlineExecution
                 || _taskSchedulerType == TaskSchedulerType.CustomWithoutInlineExecution
-            ) {
+            )
+            {
                 if (((TaskRunSyncTaskScheduler)ts).RunSyncCalledCount <= 0)
                     Assert.True(
                         false,

@@ -33,7 +33,8 @@ namespace Internal.Cryptography
             int iterations,
             HashAlgorithmName hashAlgorithmName,
             Span<byte> destination
-        ) {
+        )
+        {
             Debug.Assert(!destination.IsEmpty);
             Debug.Assert(iterations >= 0);
             Debug.Assert(hashAlgorithmName.Name is not null);
@@ -60,7 +61,8 @@ namespace Internal.Cryptography
             int iterations,
             string hashAlgorithmName,
             Span<byte> destination
-        ) {
+        )
+        {
             SafeBCryptKeyHandle keyHandle;
             int hashBlockSizeBytes = GetHashBlockSize(hashAlgorithmName);
 
@@ -247,7 +249,8 @@ namespace Internal.Cryptography
             int iterations,
             string hashAlgorithmName,
             Span<byte> destination
-        ) {
+        )
+        {
             const BCryptOpenAlgorithmProviderFlags OpenAlgorithmFlags =
                 BCryptOpenAlgorithmProviderFlags.BCRYPT_ALG_HANDLE_HMAC_FLAG;
 
@@ -262,7 +265,8 @@ namespace Internal.Cryptography
 
             fixed (byte* pPassword = password)fixed (byte* pSalt = salt)fixed (
                 byte* pDestination = destination
-            ) {
+            )
+            {
                 NTSTATUS status = Interop.BCrypt.BCryptDeriveKeyPBKDF2(
                     handle,
                     pPassword,

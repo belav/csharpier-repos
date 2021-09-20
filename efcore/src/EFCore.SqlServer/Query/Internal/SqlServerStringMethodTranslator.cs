@@ -143,7 +143,8 @@ namespace Microsoft.EntityFrameworkCore.SqlServer.Query.Internal
             MethodInfo method,
             IReadOnlyList<SqlExpression> arguments,
             IDiagnosticsLogger<DbLoggerCategory.Query> logger
-        ) {
+        )
+        {
             Check.NotNull(method, nameof(method));
             Check.NotNull(arguments, nameof(arguments));
             Check.NotNull(logger, nameof(logger));
@@ -172,7 +173,8 @@ namespace Microsoft.EntityFrameworkCore.SqlServer.Query.Internal
                             "varchar(max)",
                             StringComparison.OrdinalIgnoreCase
                         )
-                    ) {
+                    )
+                    {
                         charIndexExpression = _sqlExpressionFactory.Function(
                             "CHARINDEX",
                             new[]
@@ -294,7 +296,8 @@ namespace Microsoft.EntityFrameworkCore.SqlServer.Query.Internal
                         // SqlServer LTRIM does not take arguments
                         && ((arguments[0] as SqlConstantExpression)?.Value as Array)?.Length == 0
                     )
-                ) {
+                )
+                {
                     return _sqlExpressionFactory.Function(
                         "LTRIM",
                         new[] { instance },
@@ -312,7 +315,8 @@ namespace Microsoft.EntityFrameworkCore.SqlServer.Query.Internal
                         // SqlServer RTRIM does not take arguments
                         && ((arguments[0] as SqlConstantExpression)?.Value as Array)?.Length == 0
                     )
-                ) {
+                )
+                {
                     return _sqlExpressionFactory.Function(
                         "RTRIM",
                         new[] { instance },
@@ -330,7 +334,8 @@ namespace Microsoft.EntityFrameworkCore.SqlServer.Query.Internal
                         // SqlServer LTRIM/RTRIM does not take arguments
                         && ((arguments[0] as SqlConstantExpression)?.Value as Array)?.Length == 0
                     )
-                ) {
+                )
+                {
                     return _sqlExpressionFactory.Function(
                         "LTRIM",
                         new[]
@@ -492,7 +497,8 @@ namespace Microsoft.EntityFrameworkCore.SqlServer.Query.Internal
             SqlExpression instance,
             SqlExpression pattern,
             bool startsWith
-        ) {
+        )
+        {
             var stringTypeMapping = ExpressionExtensions.InferTypeMapping(instance, pattern);
 
             instance = _sqlExpressionFactory.ApplyTypeMapping(instance, stringTypeMapping);

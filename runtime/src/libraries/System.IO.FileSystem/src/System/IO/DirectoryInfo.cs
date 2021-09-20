@@ -31,7 +31,8 @@ namespace System.IO
             string? fullPath = null,
             string? fileName = null,
             bool isNormalized = false
-        ) {
+        )
+        {
             Init(originalPath, fullPath, fileName, isNormalized);
         }
 
@@ -40,7 +41,8 @@ namespace System.IO
             string? fullPath = null,
             string? fileName = null,
             bool isNormalized = false
-        ) {
+        )
+        {
             OriginalPath = originalPath ?? throw new ArgumentNullException(nameof(originalPath));
 
             fullPath = fullPath ?? originalPath;
@@ -101,7 +103,8 @@ namespace System.IO
                     (trimmedNewPath.Length == trimmedCurrentPath.Length)
                     || PathInternal.IsDirectorySeparator(newPath[trimmedCurrentPath.Length])
                 )
-            ) {
+            )
+            {
                 FileSystem.CreateDirectory(newPath);
                 return new DirectoryInfo(newPath);
             }
@@ -260,7 +263,8 @@ namespace System.IO
             string searchPattern,
             SearchTarget searchTarget,
             EnumerationOptions options
-        ) {
+        )
+        {
             Debug.Assert(path != null);
             if (searchPattern == null)
                 throw new ArgumentNullException(nameof(searchPattern));

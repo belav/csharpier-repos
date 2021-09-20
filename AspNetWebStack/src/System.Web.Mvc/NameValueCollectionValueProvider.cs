@@ -29,21 +29,20 @@ namespace System.Web.Mvc
 
         private Dictionary<string, ValueProviderResultPlaceholder> _values = null;
 
-        public NameValueCollectionValueProvider(
-            NameValueCollection collection,
-            CultureInfo culture
-        ) : this(collection, unvalidatedCollection: null, culture: culture) { }
+        public NameValueCollectionValueProvider(NameValueCollection collection, CultureInfo culture)
+            : this(collection, unvalidatedCollection: null, culture: culture) { }
 
         public NameValueCollectionValueProvider(
             NameValueCollection collection,
             NameValueCollection unvalidatedCollection,
             CultureInfo culture
-        ) : this(
-            collection,
-            unvalidatedCollection,
-            culture,
-            jQueryToMvcRequestNormalizationRequired: false
-        ) { }
+        )
+            : this(
+                collection,
+                unvalidatedCollection,
+                culture,
+                jQueryToMvcRequestNormalizationRequired: false
+            ) { }
 
         /// <summary>
         /// Initializes Name Value collection provider.
@@ -65,7 +64,8 @@ namespace System.Web.Mvc
             NameValueCollection unvalidatedCollection,
             CultureInfo culture,
             bool jQueryToMvcRequestNormalizationRequired
-        ) {
+        )
+        {
             if (collection == null)
             {
                 throw new ArgumentNullException("collection");
@@ -260,7 +260,8 @@ namespace System.Web.Mvc
                 NameValueCollection validatedCollection,
                 NameValueCollection unvalidatedCollection,
                 CultureInfo culture
-            ) {
+            )
+            {
                 _key = key;
                 _validatedCollection = validatedCollection;
                 _unvalidatedCollection = unvalidatedCollection;
@@ -303,7 +304,8 @@ namespace System.Web.Mvc
                 string key,
                 NameValueCollection collection,
                 CultureInfo culture
-            ) {
+            )
+            {
                 string[] rawValue = collection.GetValues(key);
                 string attemptedValue = collection[key];
                 return new ValueProviderResult(rawValue, attemptedValue, culture);

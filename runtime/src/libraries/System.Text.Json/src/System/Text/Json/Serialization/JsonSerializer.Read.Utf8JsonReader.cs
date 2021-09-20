@@ -116,7 +116,8 @@ namespace System.Text.Json
             ref Utf8JsonReader reader,
             [DynamicallyAccessedMembers(JsonHelpers.MembersAccessedOnRead)] Type returnType,
             JsonSerializerOptions? options = null
-        ) {
+        )
+        {
             if (returnType == null)
             {
                 throw new ArgumentNullException(nameof(returnType));
@@ -145,7 +146,8 @@ namespace System.Text.Json
             JsonSerializerOptions options,
             ref Utf8JsonReader reader,
             ref ReadStack state
-        ) {
+        )
+        {
             JsonReaderState readerState = reader.CurrentState;
             CheckSupportedOptions(readerState.Options, nameof(reader));
 

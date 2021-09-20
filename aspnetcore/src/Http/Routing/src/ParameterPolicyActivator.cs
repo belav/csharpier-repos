@@ -40,7 +40,8 @@ namespace Microsoft.AspNetCore.Routing
             if (
                 indexOfFirstOpenParens >= 0
                 && inlineParameterPolicy.EndsWith(")", StringComparison.Ordinal)
-            ) {
+            )
+            {
                 parameterPolicyKey = inlineParameterPolicy.Substring(0, indexOfFirstOpenParens);
                 argumentString = inlineParameterPolicy.Substring(
                     indexOfFirstOpenParens + 1,
@@ -58,7 +59,8 @@ namespace Microsoft.AspNetCore.Routing
                     parameterPolicyKey,
                     out var parameterPolicyType
                 )
-            ) {
+            )
+            {
                 return default;
             }
 
@@ -112,7 +114,8 @@ namespace Microsoft.AspNetCore.Routing
             IServiceProvider serviceProvider,
             Type parameterPolicyType,
             string argumentString
-        ) {
+        )
+        {
             ConstructorInfo activationConstructor = null;
             object[] parameters = null;
             var constructors = parameterPolicyType.GetConstructors();
@@ -125,7 +128,8 @@ namespace Microsoft.AspNetCore.Routing
                     serviceProvider,
                     constructors[0].GetParameters()
                 ) == 1
-            ) {
+            )
+            {
                 activationConstructor = constructors[0];
                 parameters = ConvertArguments(
                     serviceProvider,
@@ -168,7 +172,8 @@ namespace Microsoft.AspNetCore.Routing
                         matchingConstructors.Length == 1
                         || matchingConstructors[0].GetParameters().Length
                             > matchingConstructors[1].GetParameters().Length
-                    ) {
+                    )
+                    {
                         activationConstructor = matchingConstructors[0];
                     }
                     else
@@ -195,7 +200,8 @@ namespace Microsoft.AspNetCore.Routing
         private static int GetNonConvertableParameterTypeCount(
             IServiceProvider serviceProvider,
             ParameterInfo[] parameters
-        ) {
+        )
+        {
             if (serviceProvider == null)
             {
                 return parameters.Length;
@@ -217,7 +223,8 @@ namespace Microsoft.AspNetCore.Routing
             IServiceProvider serviceProvider,
             ParameterInfo[] parameterInfos,
             string[] arguments
-        ) {
+        )
+        {
             var parameters = new object[parameterInfos.Length];
             var argumentPosition = 0;
             for (var i = 0; i < parameterInfos.Length; i++)
@@ -227,7 +234,8 @@ namespace Microsoft.AspNetCore.Routing
 
                 if (
                     serviceProvider != null && !typeof(IConvertible).IsAssignableFrom(parameterType)
-                ) {
+                )
+                {
                     parameters[i] = serviceProvider.GetRequiredService(parameterType);
                 }
                 else

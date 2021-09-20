@@ -13,7 +13,8 @@ namespace Microsoft.Web.Mvc.ModelBinding
             ControllerContext controllerContext,
             ExtensibleModelBindingContext bindingContext,
             IList<KeyValuePair<TKey, TValue>> newCollection
-        ) {
+        )
+        {
             CollectionModelBinderUtil.CreateOrReplaceDictionary(
                 bindingContext,
                 newCollection,

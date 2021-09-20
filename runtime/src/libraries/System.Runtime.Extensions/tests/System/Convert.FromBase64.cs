@@ -282,7 +282,8 @@ namespace System.Tests
             string input,
             string expected = null,
             int? expectedLengthBytes = null
-        ) {
+        )
+        {
             if (expected == null)
             {
                 expected = input;

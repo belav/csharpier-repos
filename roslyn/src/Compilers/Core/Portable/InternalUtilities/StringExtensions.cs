@@ -65,7 +65,8 @@ namespace Roslyn.Utilities
         public static string? ToPascalCase(
             this string? shortName,
             bool trimLeadingTypePrefix = true
-        ) {
+        )
+        {
             return ConvertCase(shortName, trimLeadingTypePrefix, s_toUpper);
         }
 
@@ -80,7 +81,8 @@ namespace Roslyn.Utilities
             this string? shortName,
             bool trimLeadingTypePrefix,
             Func<char, char> convert
-        ) {
+        )
+        {
             // Special case the common .NET pattern of "IGoo" as a type name.  In this case we
             // want to generate "goo" as the parameter name.
             if (!RoslynString.IsNullOrEmpty(shortName))
@@ -90,7 +92,8 @@ namespace Roslyn.Utilities
                     && (
                         shortName.LooksLikeInterfaceName() || shortName.LooksLikeTypeParameterName()
                     )
-                ) {
+                )
+                {
                     return convert(shortName[1]) + shortName.Substring(2);
                 }
 
@@ -113,7 +116,8 @@ namespace Roslyn.Utilities
         /// </summary>
         internal static bool IsValidClrNamespaceName(
             [NotNullWhen(returnValue: true)] this string? name
-        ) {
+        )
+        {
             if (RoslynString.IsNullOrEmpty(name))
             {
                 return false;
@@ -149,7 +153,8 @@ namespace Roslyn.Utilities
         internal static bool TryGetWithoutAttributeSuffix(
             this string name,
             [NotNullWhen(returnValue: true)] out string? result
-        ) {
+        )
+        {
             return TryGetWithoutAttributeSuffix(name, isCaseSensitive: true, result: out result);
         }
 
@@ -164,7 +169,8 @@ namespace Roslyn.Utilities
             this string name,
             bool isCaseSensitive,
             [NotNullWhen(returnValue: true)] out string? result
-        ) {
+        )
+        {
             if (name.HasAttributeSuffix(isCaseSensitive))
             {
                 result = name.Substring(0, name.Length - AttributeSuffix.Length);
@@ -240,7 +246,8 @@ namespace Roslyn.Utilities
             this string str,
             int openingOffset,
             char closing
-        ) {
+        )
+        {
             char opening = str[openingOffset];
 
             int depth = 1;
@@ -297,7 +304,8 @@ namespace Roslyn.Utilities
                 x < string1.Length
                 && x < string2.Length
                 && char.ToUpper(string1[x]) == char.ToUpper(string2[x])
-            ) {
+            )
+            {
                 x++;
             }
 

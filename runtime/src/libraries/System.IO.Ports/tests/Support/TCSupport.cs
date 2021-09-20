@@ -80,12 +80,14 @@ namespace Legacy.Support
                 int firstIndex = 0;
                 firstIndex < openablePortNames.Count && !nullModemPresent;
                 firstIndex++
-            ) {
+            )
+            {
                 for (
                     int secondIndex = firstIndex + 1;
                     secondIndex < openablePortNames.Count && !nullModemPresent;
                     secondIndex++
-                ) {
+                )
+                {
                     string firstPortName = openablePortNames[firstIndex];
                     string secondPortName = openablePortNames[secondIndex];
 
@@ -205,7 +207,8 @@ namespace Legacy.Support
 
         public static bool SufficientHardwareRequirements(
             SerialPortRequirements serialPortRequirements
-        ) {
+        )
+        {
             switch (serialPortRequirements)
             {
                 case SerialPortRequirements.None:
@@ -293,7 +296,8 @@ namespace Legacy.Support
             int maxWait,
             string errorMessageFormat,
             params object[] formatArgs
-        ) {
+        )
+        {
             WaitForPredicate(predicate, maxWait, string.Format(errorMessageFormat, formatArgs));
         }
         public static void WaitForPredicate(Predicate predicate, int maxWait, string errorMessage)
@@ -315,7 +319,8 @@ namespace Legacy.Support
             T expectedValue,
             int maxWait,
             string errorMessage
-        ) {
+        )
+        {
             Stopwatch stopWatch = new Stopwatch();
             bool result;
             T actualValue;
@@ -389,7 +394,8 @@ namespace Legacy.Support
             int index,
             int count,
             CharacterOptions options
-        ) {
+        )
+        {
             if (0 != (options & CharacterOptions.Surrogates))
                 GetRandomCharsWithSurrogates(chars, index, count);
             if (0 != (options & CharacterOptions.ASCII))
@@ -605,7 +611,8 @@ namespace Legacy.Support
                         int searchIndex = 1, inputIndex = i + 1;
                         searchIndex < search.Length;
                         ++searchIndex, ++inputIndex
-                    ) {
+                    )
+                    {
                         match = input[inputIndex] == search[searchIndex];
 
                         if (!match)

@@ -616,7 +616,8 @@ namespace System.Net.Http.Functional.Tests
             ConcurrentQueue<(EventWrittenEventArgs Event, Guid ActivityId)> events,
             bool shouldHaveFailures = false,
             int count = 1
-        ) {
+        )
+        {
             (EventWrittenEventArgs Event, Guid ActivityId)[] starts = events.Where(
                     e => e.Event.EventName == "RequestStart"
                 )
@@ -671,7 +672,8 @@ namespace System.Net.Http.Functional.Tests
             ConcurrentQueue<(EventWrittenEventArgs Event, Guid ActivityId)> events,
             Version version,
             int count = 1
-        ) {
+        )
+        {
             EventWrittenEventArgs[] connectionsEstablished = events.Select(e => e.Event)
                 .Where(e => e.EventName == "ConnectionEstablished")
                 .ToArray();
@@ -700,7 +702,8 @@ namespace System.Net.Http.Functional.Tests
             int? requestContentLength,
             int? responseContentLength,
             int count
-        ) {
+        )
+        {
             (EventWrittenEventArgs Event, Guid ActivityId)[] requestHeadersStarts = events.Where(
                     e => e.Event.EventName == "RequestHeadersStart"
                 )
@@ -731,7 +734,8 @@ namespace System.Net.Http.Functional.Tests
             Assert.Equal(requestContentLength.HasValue ? count : 0, requestContentStops.Length);
             foreach (
                 EventWrittenEventArgs requestContentStop in requestContentStops.Select(e => e.Event)
-            ) {
+            )
+            {
                 object payload = Assert.Single(requestContentStop.Payload);
                 Assert.True(payload is long);
                 Assert.Equal(requestContentLength.Value, (long)payload);
@@ -775,7 +779,8 @@ namespace System.Net.Http.Functional.Tests
         private static void ValidateSameActivityIds(
             (EventWrittenEventArgs Event, Guid ActivityId)[] a,
             (EventWrittenEventArgs Event, Guid ActivityId)[] b
-        ) {
+        )
+        {
             Assert.Equal(a.Length, b.Length);
 
             for (int i = 0; i < a.Length; i++)
@@ -790,7 +795,8 @@ namespace System.Net.Http.Functional.Tests
             int requestCount,
             bool shouldHaveFailures,
             int requestsLeftQueueVersion = -1
-        ) {
+        )
+        {
             Dictionary<string, double[]> eventCounters = events.Select(e => e.Event)
                 .Where(e => e.EventName == "EventCounters")
                 .Select(e => (IDictionary<string, object>)e.Payload.Single())
@@ -1041,7 +1047,8 @@ namespace System.Net.Http.Functional.Tests
 
         private static async Task WaitForEventCountersAsync(
             ConcurrentQueue<(EventWrittenEventArgs Event, Guid ActivityId)> events
-        ) {
+        )
+        {
             DateTime startTime = DateTime.UtcNow;
             int startCount = events.Count;
 

@@ -35,7 +35,8 @@ namespace System.Web.Mvc.Razor
 
         public override RazorCodeGenerator DecorateCodeGenerator(
             RazorCodeGenerator incomingCodeGenerator
-        ) {
+        )
+        {
             if (incomingCodeGenerator is CSharpRazorCodeGenerator)
             {
                 return new MvcCSharpRazorCodeGenerator(

@@ -48,7 +48,8 @@ namespace Microsoft.VisualStudio.LanguageServices.FindUsages
             public virtual bool TryCreateColumnContent(
                 string columnName,
                 [NotNullWhen(true)] out FrameworkElement? content
-            ) {
+            )
+            {
                 content = null;
                 return false;
             }

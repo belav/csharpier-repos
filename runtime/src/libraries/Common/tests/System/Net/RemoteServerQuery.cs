@@ -30,7 +30,8 @@ namespace System.Net.Test.Common
             Func<Task<TResult>> testCode,
             Func<Exception, bool> remoteExceptionWrapper,
             string serverName
-        ) {
+        )
+        {
             try
             {
                 return await testCode().ConfigureAwait(false);
@@ -50,7 +51,8 @@ namespace System.Net.Test.Common
             Func<Task> testCode,
             Func<Exception, bool> remoteExceptionWrapper,
             string serverName
-        ) {
+        )
+        {
             try
             {
                 await testCode().ConfigureAwait(false);

@@ -32,15 +32,17 @@ namespace Microsoft.CodeAnalysis.CSharp
             BoundNode lastInRegion,
             HashSet<Symbol> unassignedVariables,
             ImmutableArray<ISymbol> dataFlowsIn
-        ) : base(
-            compilation,
-            member,
-            node,
-            firstInRegion,
-            lastInRegion,
-            unassignedVariables,
-            trackUnassignments: true
-        ) {
+        )
+            : base(
+                compilation,
+                member,
+                node,
+                firstInRegion,
+                lastInRegion,
+                unassignedVariables,
+                trackUnassignments: true
+            )
+        {
             _dataFlowsIn = dataFlowsIn;
         }
 
@@ -52,7 +54,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             BoundNode lastInRegion,
             HashSet<Symbol> unassignedVariables,
             ImmutableArray<ISymbol> dataFlowsIn
-        ) {
+        )
+        {
             var walker = new DataFlowsOutWalker(
                 compilation,
                 member,
@@ -238,7 +241,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             bool isRef,
             bool written,
             bool read
-        ) {
+        )
+        {
             if (IsInside)
             {
 #if DEBUG
@@ -297,7 +301,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             SyntaxNode node,
             int slot,
             bool skipIfUseBeforeDeclaration
-        ) {
+        )
+        {
             if (!IsInside)
             {
                 // If the field access is reported as unassigned it should mean the original local
@@ -314,11 +319,13 @@ namespace Microsoft.CodeAnalysis.CSharp
             ParameterSymbol parameter,
             SyntaxNode node,
             Location location
-        ) {
+        )
+        {
             if (
                 !_dataFlowsOut.Contains(parameter)
                 && (node == null || node is ReturnStatementSyntax)
-            ) {
+            )
+            {
                 _dataFlowsOut.Add(parameter);
             }
             base.ReportUnassignedOutParameter(parameter, node, location);

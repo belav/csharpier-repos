@@ -47,7 +47,8 @@ namespace System.Text.Json
         public static JsonDocument Parse(
             ReadOnlyMemory<byte> utf8Json,
             JsonDocumentOptions options = default
-        ) {
+        )
+        {
             return Parse(utf8Json, options.GetReaderOptions(), null);
         }
 
@@ -79,7 +80,8 @@ namespace System.Text.Json
         public static JsonDocument Parse(
             ReadOnlySequence<byte> utf8Json,
             JsonDocumentOptions options = default
-        ) {
+        )
+        {
             JsonReaderOptions readerOptions = options.GetReaderOptions();
 
             if (utf8Json.IsSingleSegment)
@@ -161,7 +163,8 @@ namespace System.Text.Json
         internal static JsonDocument ParseValue(
             ReadOnlySpan<byte> utf8Json,
             JsonDocumentOptions options
-        ) {
+        )
+        {
             Debug.Assert(utf8Json != null);
 
             byte[] owned = new byte[utf8Json.Length];
@@ -196,7 +199,8 @@ namespace System.Text.Json
             Stream utf8Json,
             JsonDocumentOptions options = default,
             CancellationToken cancellationToken = default
-        ) {
+        )
+        {
             if (utf8Json == null)
             {
                 throw new ArgumentNullException(nameof(utf8Json));
@@ -209,7 +213,8 @@ namespace System.Text.Json
             Stream utf8Json,
             JsonDocumentOptions options = default,
             CancellationToken cancellationToken = default
-        ) {
+        )
+        {
             ArraySegment<byte> drained = await ReadToEndAsync(utf8Json, cancellationToken)
                 .ConfigureAwait(false);
             Debug.Assert(drained.Array != null);
@@ -248,7 +253,8 @@ namespace System.Text.Json
         public static JsonDocument Parse(
             ReadOnlyMemory<char> json,
             JsonDocumentOptions options = default
-        ) {
+        )
+        {
             ReadOnlySpan<char> jsonChars = json.Span;
             int expectedByteCount = JsonReaderHelper.GetUtf8ByteCount(jsonChars);
             byte[] utf8Bytes = ArrayPool<byte>.Shared.Rent(expectedByteCount);
@@ -276,7 +282,8 @@ namespace System.Text.Json
         internal static JsonDocument ParseValue(
             ReadOnlyMemory<char> json,
             JsonDocumentOptions options
-        ) {
+        )
+        {
             ReadOnlySpan<char> jsonChars = json.Span;
             int expectedByteCount = JsonReaderHelper.GetUtf8ByteCount(jsonChars);
             byte[] owned;
@@ -366,7 +373,8 @@ namespace System.Text.Json
         public static bool TryParseValue(
             ref Utf8JsonReader reader,
             [NotNullWhen(true)] out JsonDocument? document
-        ) {
+        )
+        {
             return TryParseValue(ref reader, out document, shouldThrow: false, useArrayPools: true);
         }
 
@@ -424,7 +432,8 @@ namespace System.Text.Json
             [NotNullWhen(true)] out JsonDocument? document,
             bool shouldThrow,
             bool useArrayPools
-        ) {
+        )
+        {
             JsonReaderState state = reader.CurrentState;
             CheckSupportedOptions(state.Options, nameof(reader));
 
@@ -700,7 +709,8 @@ namespace System.Text.Json
             ReadOnlyMemory<byte> utf8Json,
             JsonReaderOptions readerOptions,
             byte[]? extraRentedBytes
-        ) {
+        )
+        {
             ReadOnlySpan<byte> utf8JsonSpan = utf8Json.Span;
             var database = MetadataDb.CreateRented(utf8Json.Length, convertToAlloc: false);
             var stack = new StackRowStack(JsonDocumentOptions.DefaultMaxDepth * StackRow.Size);
@@ -726,7 +736,8 @@ namespace System.Text.Json
             ReadOnlyMemory<byte> utf8Json,
             JsonReaderOptions readerOptions,
             JsonTokenType tokenType = JsonTokenType.None
-        ) {
+        )
+        {
             // These tokens should already have been processed.
             Debug.Assert(
                 tokenType != JsonTokenType.Null
@@ -801,7 +812,8 @@ namespace System.Text.Json
                 if (
                     written == utf8Bom.Length
                     && utf8Bom.SequenceEqual(rented.AsSpan(0, utf8Bom.Length))
-                ) {
+                )
+                {
                     written = 0;
                 }
 
@@ -893,7 +905,8 @@ namespace System.Text.Json
                 if (
                     written == utf8BomLength
                     && JsonConstants.Utf8Bom.SequenceEqual(rented.AsSpan(0, utf8BomLength))
-                ) {
+                )
+                {
                     written = 0;
                 }
 

@@ -95,13 +95,8 @@ namespace System
             Path = pathValue;
         }
 
-        public UriBuilder(
-            string? scheme,
-            string? host,
-            int port,
-            string? path,
-            string? extraValue
-        ) : this(scheme, host, port, path)
+        public UriBuilder(string? scheme, string? host, int port, string? path, string? extraValue)
+            : this(scheme, host, port, path)
         {
             try
             {

@@ -210,7 +210,8 @@ namespace System.Net
                     && (_tokenStream[_index] != ';')
                     && (ignoreEquals || (_tokenStream[_index] != '='))
                     && (ignoreComma || (_tokenStream[_index] != ','))
-                ) {
+                )
+                {
                     // Fixing 2 things:
                     // 1) ignore day of week in cookie string
                     // 2) revert ignoreComma once meet it, so won't miss the next cookie)
@@ -591,7 +592,8 @@ namespace System.Net
                 if (
                     cookie == null
                     && (token == CookieToken.NameValuePair || token == CookieToken.Attribute)
-                ) {
+                )
+                {
                     cookie = new Cookie();
                     InternalSetNameMethod(cookie, _tokenizer.Name);
                     cookie.Value = _tokenizer.Value;
@@ -621,7 +623,8 @@ namespace System.Net
                                                 UriKind.Absolute,
                                                 out Uri? parsed
                                             )
-                                        ) {
+                                        )
+                                        {
                                             cookie!.CommentUri = parsed;
                                         }
                                     }
@@ -649,7 +652,8 @@ namespace System.Net
                                                     | DateTimeStyles.AdjustToUniversal,
                                                 out DateTime expires
                                             )
-                                        ) {
+                                        )
+                                        {
                                             cookie!.Expires = expires;
                                         }
                                         else
@@ -669,7 +673,8 @@ namespace System.Net
                                                 CheckQuoted(_tokenizer.Value),
                                                 out int parsed
                                             )
-                                        ) {
+                                        )
+                                        {
                                             cookie!.Expires = DateTime.Now.AddSeconds(parsed);
                                         }
                                         else

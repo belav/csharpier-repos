@@ -188,7 +188,8 @@ namespace Microsoft.AspNetCore.Mvc.TagHelpers
                     || Host != null
                     || Fragment != null
                     || (_routeValues != null && _routeValues.Count > 0)
-                ) {
+                )
+                {
                     // User specified an href and one of the bound attributes; can't determine the href attribute.
                     throw new InvalidOperationException(
                         Resources.FormatAnchorTagHelper_CannotOverrideHref(

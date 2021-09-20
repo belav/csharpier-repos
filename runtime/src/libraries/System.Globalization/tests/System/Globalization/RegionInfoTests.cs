@@ -314,7 +314,8 @@ namespace System.Globalization.Tests
             string currencyNativeName,
             string threeLetterISORegionName,
             string threeLetterWindowsRegionName
-        ) {
+        )
+        {
             RegionInfo ri = new RegionInfo(lcid); // create it with lcid
             Assert.Equal(geoId, ri.GeoId);
 

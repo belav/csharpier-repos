@@ -34,7 +34,8 @@ namespace System.Text.Json.Serialization.Metadata
 
         public override JsonTypeInfo.ParameterizedConstructorDelegate<T>? CreateParameterizedConstructor<T>(
             ConstructorInfo constructor
-        ) {
+        )
+        {
             Type type = typeof(T);
 
             Debug.Assert(!type.IsAbstract);
@@ -85,7 +86,8 @@ namespace System.Text.Json.Serialization.Metadata
             TArg3
         >? CreateParameterizedConstructor<T, TArg0, TArg1, TArg2, TArg3>(
             ConstructorInfo constructor
-        ) {
+        )
+        {
             Type type = typeof(T);
 
             Debug.Assert(!type.IsAbstract);
@@ -178,7 +180,8 @@ namespace System.Text.Json.Serialization.Metadata
 
         public override Func<object, TProperty> CreatePropertyGetter<TProperty>(
             PropertyInfo propertyInfo
-        ) {
+        )
+        {
             MethodInfo getMethodInfo = propertyInfo.GetMethod!;
 
             return delegate(object obj)
@@ -189,7 +192,8 @@ namespace System.Text.Json.Serialization.Metadata
 
         public override Action<object, TProperty> CreatePropertySetter<TProperty>(
             PropertyInfo propertyInfo
-        ) {
+        )
+        {
             MethodInfo setMethodInfo = propertyInfo.SetMethod!;
 
             return delegate(object obj, TProperty value)

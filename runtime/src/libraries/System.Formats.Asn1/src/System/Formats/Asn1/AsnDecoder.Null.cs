@@ -43,7 +43,8 @@ namespace System.Formats.Asn1
             AsnEncodingRules ruleSet,
             out int bytesConsumed,
             Asn1Tag? expectedTag = null
-        ) {
+        )
+        {
             // T-REC-X.690-201508 sec 8.8.1
             ReadOnlySpan<byte> contents = GetPrimitiveContentSpan(
                 source,

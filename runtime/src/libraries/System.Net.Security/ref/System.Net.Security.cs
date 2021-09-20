@@ -153,7 +153,8 @@ namespace System.Net.Security
             System.Net.NetworkCredential credential,
             System.Security.Authentication.ExtendedProtection.ChannelBinding? binding,
             string targetName
-        ) {
+        )
+        {
             throw null;
         }
         public virtual System.Threading.Tasks.Task AuthenticateAsClientAsync(
@@ -162,13 +163,15 @@ namespace System.Net.Security
             string targetName,
             System.Net.Security.ProtectionLevel requiredProtectionLevel,
             System.Security.Principal.TokenImpersonationLevel allowedImpersonationLevel
-        ) {
+        )
+        {
             throw null;
         }
         public virtual System.Threading.Tasks.Task AuthenticateAsClientAsync(
             System.Net.NetworkCredential credential,
             string targetName
-        ) {
+        )
+        {
             throw null;
         }
         public virtual System.Threading.Tasks.Task AuthenticateAsClientAsync(
@@ -176,7 +179,8 @@ namespace System.Net.Security
             string targetName,
             System.Net.Security.ProtectionLevel requiredProtectionLevel,
             System.Security.Principal.TokenImpersonationLevel allowedImpersonationLevel
-        ) {
+        )
+        {
             throw null;
         }
         public virtual void AuthenticateAsServer() { }
@@ -202,7 +206,8 @@ namespace System.Net.Security
             System.Net.NetworkCredential credential,
             System.Net.Security.ProtectionLevel requiredProtectionLevel,
             System.Security.Principal.TokenImpersonationLevel requiredImpersonationLevel
-        ) {
+        )
+        {
             throw null;
         }
         public virtual System.Threading.Tasks.Task AuthenticateAsServerAsync(
@@ -210,18 +215,21 @@ namespace System.Net.Security
             System.Security.Authentication.ExtendedProtection.ExtendedProtectionPolicy? policy,
             System.Net.Security.ProtectionLevel requiredProtectionLevel,
             System.Security.Principal.TokenImpersonationLevel requiredImpersonationLevel
-        ) {
+        )
+        {
             throw null;
         }
         public virtual System.Threading.Tasks.Task AuthenticateAsServerAsync(
             System.Security.Authentication.ExtendedProtection.ExtendedProtectionPolicy? policy
-        ) {
+        )
+        {
             throw null;
         }
         public virtual System.IAsyncResult BeginAuthenticateAsClient(
             System.AsyncCallback? asyncCallback,
             object? asyncState
-        ) {
+        )
+        {
             throw null;
         }
         public virtual System.IAsyncResult BeginAuthenticateAsClient(
@@ -230,7 +238,8 @@ namespace System.Net.Security
             string targetName,
             System.AsyncCallback? asyncCallback,
             object? asyncState
-        ) {
+        )
+        {
             throw null;
         }
         public virtual System.IAsyncResult BeginAuthenticateAsClient(
@@ -241,7 +250,8 @@ namespace System.Net.Security
             System.Security.Principal.TokenImpersonationLevel allowedImpersonationLevel,
             System.AsyncCallback? asyncCallback,
             object? asyncState
-        ) {
+        )
+        {
             throw null;
         }
         public virtual System.IAsyncResult BeginAuthenticateAsClient(
@@ -249,7 +259,8 @@ namespace System.Net.Security
             string targetName,
             System.AsyncCallback? asyncCallback,
             object? asyncState
-        ) {
+        )
+        {
             throw null;
         }
         public virtual System.IAsyncResult BeginAuthenticateAsClient(
@@ -259,13 +270,15 @@ namespace System.Net.Security
             System.Security.Principal.TokenImpersonationLevel allowedImpersonationLevel,
             System.AsyncCallback? asyncCallback,
             object? asyncState
-        ) {
+        )
+        {
             throw null;
         }
         public virtual System.IAsyncResult BeginAuthenticateAsServer(
             System.AsyncCallback? asyncCallback,
             object? asyncState
-        ) {
+        )
+        {
             throw null;
         }
         public virtual System.IAsyncResult BeginAuthenticateAsServer(
@@ -274,7 +287,8 @@ namespace System.Net.Security
             System.Security.Principal.TokenImpersonationLevel requiredImpersonationLevel,
             System.AsyncCallback? asyncCallback,
             object? asyncState
-        ) {
+        )
+        {
             throw null;
         }
         public virtual System.IAsyncResult BeginAuthenticateAsServer(
@@ -284,14 +298,16 @@ namespace System.Net.Security
             System.Security.Principal.TokenImpersonationLevel requiredImpersonationLevel,
             System.AsyncCallback? asyncCallback,
             object? asyncState
-        ) {
+        )
+        {
             throw null;
         }
         public virtual System.IAsyncResult BeginAuthenticateAsServer(
             System.Security.Authentication.ExtendedProtection.ExtendedProtectionPolicy? policy,
             System.AsyncCallback? asyncCallback,
             object? asyncState
-        ) {
+        )
+        {
             throw null;
         }
         public override System.IAsyncResult BeginRead(
@@ -300,7 +316,8 @@ namespace System.Net.Security
             int count,
             System.AsyncCallback? asyncCallback,
             object? asyncState
-        ) {
+        )
+        {
             throw null;
         }
         public override System.IAsyncResult BeginWrite(
@@ -309,7 +326,8 @@ namespace System.Net.Security
             int count,
             System.AsyncCallback? asyncCallback,
             object? asyncState
-        ) {
+        )
+        {
             throw null;
         }
         protected override void Dispose(bool disposing) { }
@@ -327,7 +345,8 @@ namespace System.Net.Security
         public override void Flush() { }
         public override System.Threading.Tasks.Task FlushAsync(
             System.Threading.CancellationToken cancellationToken
-        ) {
+        )
+        {
             throw null;
         }
         public override int Read(byte[] buffer, int offset, int count)
@@ -339,13 +358,15 @@ namespace System.Net.Security
             int offset,
             int count,
             System.Threading.CancellationToken cancellationToken
-        ) {
+        )
+        {
             throw null;
         }
         public override System.Threading.Tasks.ValueTask<int> ReadAsync(
             System.Memory<byte> buffer,
             System.Threading.CancellationToken cancellationToken = default
-        ) {
+        )
+        {
             throw null;
         }
         public override long Seek(long offset, System.IO.SeekOrigin origin)
@@ -359,13 +380,15 @@ namespace System.Net.Security
             int offset,
             int count,
             System.Threading.CancellationToken cancellationToken
-        ) {
+        )
+        {
             throw null;
         }
         public override System.Threading.Tasks.ValueTask WriteAsync(
             System.ReadOnlyMemory<byte> buffer,
             System.Threading.CancellationToken cancellationToken = default
-        ) {
+        )
+        {
             throw null;
         }
     }
@@ -382,7 +405,8 @@ namespace System.Net.Security
         internal SslClientHelloInfo(
             string serverName,
             System.Security.Authentication.SslProtocols sslProtocol
-        ) {
+        )
+        {
             throw null;
         }
     }
@@ -436,13 +460,15 @@ namespace System.Net.Security
         public static bool operator ==(
             System.Net.Security.SslApplicationProtocol left,
             System.Net.Security.SslApplicationProtocol right
-        ) {
+        )
+        {
             throw null;
         }
         public static bool operator !=(
             System.Net.Security.SslApplicationProtocol left,
             System.Net.Security.SslApplicationProtocol right
-        ) {
+        )
+        {
             throw null;
         }
         public override string ToString()
@@ -460,7 +486,8 @@ namespace System.Net.Security
             System.Security.Cryptography.X509Certificates.X509Certificate2 target,
             System.Security.Cryptography.X509Certificates.X509Certificate2Collection? additionalCertificates,
             bool offline = false
-        ) {
+        )
+        {
             throw null;
         }
     }
@@ -732,7 +759,8 @@ namespace System.Net.Security
             System.Net.Security.SslClientAuthenticationOptions sslClientAuthenticationOptions,
             System.Threading.CancellationToken cancellationToken =
                 default(System.Threading.CancellationToken)
-        ) {
+        )
+        {
             throw null;
         }
         public virtual System.Threading.Tasks.Task AuthenticateAsClientAsync(string targetHost)
@@ -743,7 +771,8 @@ namespace System.Net.Security
             string targetHost,
             System.Security.Cryptography.X509Certificates.X509CertificateCollection? clientCertificates,
             bool checkCertificateRevocation
-        ) {
+        )
+        {
             throw null;
         }
         public virtual System.Threading.Tasks.Task AuthenticateAsClientAsync(
@@ -751,7 +780,8 @@ namespace System.Net.Security
             System.Security.Cryptography.X509Certificates.X509CertificateCollection? clientCertificates,
             System.Security.Authentication.SslProtocols enabledSslProtocols,
             bool checkCertificateRevocation
-        ) {
+        )
+        {
             throw null;
         }
         public void AuthenticateAsServer(
@@ -775,19 +805,22 @@ namespace System.Net.Security
             System.Net.Security.SslServerAuthenticationOptions sslServerAuthenticationOptions,
             System.Threading.CancellationToken cancellationToken =
                 default(System.Threading.CancellationToken)
-        ) {
+        )
+        {
             throw null;
         }
         public virtual System.Threading.Tasks.Task AuthenticateAsServerAsync(
             System.Security.Cryptography.X509Certificates.X509Certificate serverCertificate
-        ) {
+        )
+        {
             throw null;
         }
         public virtual System.Threading.Tasks.Task AuthenticateAsServerAsync(
             System.Security.Cryptography.X509Certificates.X509Certificate serverCertificate,
             bool clientCertificateRequired,
             bool checkCertificateRevocation
-        ) {
+        )
+        {
             throw null;
         }
         public virtual System.Threading.Tasks.Task AuthenticateAsServerAsync(
@@ -795,14 +828,16 @@ namespace System.Net.Security
             bool clientCertificateRequired,
             System.Security.Authentication.SslProtocols enabledSslProtocols,
             bool checkCertificateRevocation
-        ) {
+        )
+        {
             throw null;
         }
         public virtual System.IAsyncResult BeginAuthenticateAsClient(
             string targetHost,
             System.AsyncCallback? asyncCallback,
             object? asyncState
-        ) {
+        )
+        {
             throw null;
         }
         public virtual System.IAsyncResult BeginAuthenticateAsClient(
@@ -811,7 +846,8 @@ namespace System.Net.Security
             bool checkCertificateRevocation,
             System.AsyncCallback? asyncCallback,
             object? asyncState
-        ) {
+        )
+        {
             throw null;
         }
         public virtual System.IAsyncResult BeginAuthenticateAsClient(
@@ -821,14 +857,16 @@ namespace System.Net.Security
             bool checkCertificateRevocation,
             System.AsyncCallback? asyncCallback,
             object? asyncState
-        ) {
+        )
+        {
             throw null;
         }
         public virtual System.IAsyncResult BeginAuthenticateAsServer(
             System.Security.Cryptography.X509Certificates.X509Certificate serverCertificate,
             System.AsyncCallback? asyncCallback,
             object? asyncState
-        ) {
+        )
+        {
             throw null;
         }
         public virtual System.IAsyncResult BeginAuthenticateAsServer(
@@ -837,7 +875,8 @@ namespace System.Net.Security
             bool checkCertificateRevocation,
             System.AsyncCallback? asyncCallback,
             object? asyncState
-        ) {
+        )
+        {
             throw null;
         }
         public virtual System.IAsyncResult BeginAuthenticateAsServer(
@@ -847,7 +886,8 @@ namespace System.Net.Security
             bool checkCertificateRevocation,
             System.AsyncCallback? asyncCallback,
             object? asyncState
-        ) {
+        )
+        {
             throw null;
         }
         public override System.IAsyncResult BeginRead(
@@ -856,7 +896,8 @@ namespace System.Net.Security
             int count,
             System.AsyncCallback? asyncCallback,
             object? asyncState
-        ) {
+        )
+        {
             throw null;
         }
         public override System.IAsyncResult BeginWrite(
@@ -865,7 +906,8 @@ namespace System.Net.Security
             int count,
             System.AsyncCallback? asyncCallback,
             object? asyncState
-        ) {
+        )
+        {
             throw null;
         }
         protected override void Dispose(bool disposing) { }
@@ -884,7 +926,8 @@ namespace System.Net.Security
         public override void Flush() { }
         public override System.Threading.Tasks.Task FlushAsync(
             System.Threading.CancellationToken cancellationToken
-        ) {
+        )
+        {
             throw null;
         }
         public override int Read(byte[] buffer, int offset, int count)
@@ -896,14 +939,16 @@ namespace System.Net.Security
             int offset,
             int count,
             System.Threading.CancellationToken cancellationToken
-        ) {
+        )
+        {
             throw null;
         }
         public override System.Threading.Tasks.ValueTask<int> ReadAsync(
             System.Memory<byte> buffer,
             System.Threading.CancellationToken cancellationToken =
                 default(System.Threading.CancellationToken)
-        ) {
+        )
+        {
             throw null;
         }
         public override int ReadByte()
@@ -926,21 +971,24 @@ namespace System.Net.Security
             int offset,
             int count,
             System.Threading.CancellationToken cancellationToken
-        ) {
+        )
+        {
             throw null;
         }
         public override System.Threading.Tasks.ValueTask WriteAsync(
             System.ReadOnlyMemory<byte> buffer,
             System.Threading.CancellationToken cancellationToken =
                 default(System.Threading.CancellationToken)
-        ) {
+        )
+        {
             throw null;
         }
         public System.Threading.Tasks.Task AuthenticateAsServerAsync(
             ServerOptionsSelectionCallback optionsCallback,
             object? state,
             System.Threading.CancellationToken cancellationToken = default
-        ) {
+        )
+        {
             throw null;
         }
     }
@@ -1384,12 +1432,14 @@ namespace System.Security.Authentication.ExtendedProtection
         }
         public System.Security.Authentication.ExtendedProtection.ServiceNameCollection Merge(
             System.Collections.IEnumerable serviceNames
-        ) {
+        )
+        {
             throw null;
         }
         public System.Security.Authentication.ExtendedProtection.ServiceNameCollection Merge(
             string serviceName
-        ) {
+        )
+        {
             throw null;
         }
     }

@@ -327,7 +327,8 @@ namespace Microsoft.Data.Sqlite
         {
             foreach (
                 var stmt in !_prepared ? PrepareAndEnumerateStatements(timer) : _preparedStatements
-            ) {
+            )
+            {
                 var boundParams = _parameters?.Bind(stmt) ?? 0;
 
                 var expectedParams = sqlite3_bind_parameter_count(stmt);
@@ -342,7 +343,8 @@ namespace Microsoft.Data.Sqlite
                             _parameters != null
                             && !_parameters.Cast<SqliteParameter>()
                                 .Any(p => p.ParameterName == name)
-                        ) {
+                        )
+                        {
                             unboundParams.Add(name);
                         }
                     }
@@ -414,7 +416,8 @@ namespace Microsoft.Data.Sqlite
         public new virtual Task<SqliteDataReader> ExecuteReaderAsync(
             CommandBehavior behavior,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             cancellationToken.ThrowIfCancellationRequested();
 
             return Task.FromResult(ExecuteReader(behavior));
@@ -503,7 +506,8 @@ namespace Microsoft.Data.Sqlite
                             out tail
                         )
                     )
-                ) {
+                )
+                {
                     if (CommandTimeout != 0 && timer.ElapsedMilliseconds >= CommandTimeout * 1000L)
                     {
                         break;

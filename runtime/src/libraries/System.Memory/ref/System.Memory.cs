@@ -15,7 +15,8 @@ namespace System
         public static System.ReadOnlyMemory<char> AsMemory(
             this string? text,
             System.Index startIndex
-        ) {
+        )
+        {
             throw null;
         }
         public static System.ReadOnlyMemory<char> AsMemory(this string? text, int start)
@@ -42,7 +43,8 @@ namespace System
             this System.ArraySegment<T> segment,
             int start,
             int length
-        ) {
+        )
+        {
             throw null;
         }
         public static System.Memory<T> AsMemory<T>(this T[]? array)
@@ -84,7 +86,8 @@ namespace System
         public static System.Span<T> AsSpan<T>(
             this System.ArraySegment<T> segment,
             System.Index startIndex
-        ) {
+        )
+        {
             throw null;
         }
         public static System.Span<T> AsSpan<T>(this System.ArraySegment<T> segment, int start)
@@ -95,13 +98,15 @@ namespace System
             this System.ArraySegment<T> segment,
             int start,
             int length
-        ) {
+        )
+        {
             throw null;
         }
         public static System.Span<T> AsSpan<T>(
             this System.ArraySegment<T> segment,
             System.Range range
-        ) {
+        )
+        {
             throw null;
         }
         public static System.Span<T> AsSpan<T>(this T[]? array)
@@ -127,13 +132,15 @@ namespace System
         public static int BinarySearch<T>(
             this System.ReadOnlySpan<T> span,
             System.IComparable<T> comparable
-        ) {
+        )
+        {
             throw null;
         }
         public static int BinarySearch<T>(
             this System.Span<T> span,
             System.IComparable<T> comparable
-        ) {
+        )
+        {
             throw null;
         }
         public static int BinarySearch<T, TComparer>(
@@ -170,14 +177,16 @@ namespace System
             this System.ReadOnlySpan<char> span,
             System.ReadOnlySpan<char> other,
             System.StringComparison comparisonType
-        ) {
+        )
+        {
             throw null;
         }
         public static bool Contains(
             this System.ReadOnlySpan<char> span,
             System.ReadOnlySpan<char> value,
             System.StringComparison comparisonType
-        ) {
+        )
+        {
             throw null;
         }
         public static bool Contains<T>(this System.ReadOnlySpan<T> span, T value)
@@ -196,7 +205,8 @@ namespace System
             this System.ReadOnlySpan<char> span,
             System.ReadOnlySpan<char> value,
             System.StringComparison comparisonType
-        ) {
+        )
+        {
             throw null;
         }
         public static bool EndsWith<T>(
@@ -213,7 +223,8 @@ namespace System
         }
         public static System.Text.SpanRuneEnumerator EnumerateRunes(
             this System.ReadOnlySpan<char> span
-        ) {
+        )
+        {
             throw null;
         }
         public static System.Text.SpanRuneEnumerator EnumerateRunes(this System.Span<char> span)
@@ -224,14 +235,16 @@ namespace System
             this System.ReadOnlySpan<char> span,
             System.ReadOnlySpan<char> other,
             System.StringComparison comparisonType
-        ) {
+        )
+        {
             throw null;
         }
         public static int IndexOf(
             this System.ReadOnlySpan<char> span,
             System.ReadOnlySpan<char> value,
             System.StringComparison comparisonType
-        ) {
+        )
+        {
             throw null;
         }
         public static int IndexOfAny<T>(
@@ -298,7 +311,8 @@ namespace System
             this System.ReadOnlySpan<char> span,
             System.ReadOnlySpan<char> value,
             System.StringComparison comparisonType
-        ) {
+        )
+        {
             throw null;
         }
         public static int LastIndexOfAny<T>(
@@ -362,14 +376,16 @@ namespace System
         public static bool Overlaps<T>(
             this System.ReadOnlySpan<T> span,
             System.ReadOnlySpan<T> other
-        ) {
+        )
+        {
             throw null;
         }
         public static bool Overlaps<T>(
             this System.ReadOnlySpan<T> span,
             System.ReadOnlySpan<T> other,
             out int elementOffset
-        ) {
+        )
+        {
             throw null;
         }
         public static bool Overlaps<T>(this System.Span<T> span, System.ReadOnlySpan<T> other)
@@ -380,7 +396,8 @@ namespace System
             this System.Span<T> span,
             System.ReadOnlySpan<T> other,
             out int elementOffset
-        ) {
+        )
+        {
             throw null;
         }
         public static void Reverse<T>(this System.Span<T> span) { }
@@ -414,14 +431,16 @@ namespace System
             this System.ReadOnlySpan<T> span,
             System.ReadOnlySpan<T> other,
             System.Collections.Generic.IEqualityComparer<T>? comparer = null
-        ) {
+        )
+        {
             throw null;
         }
         public static bool SequenceEqual<T>(
             this System.Span<T> span,
             System.ReadOnlySpan<T> other,
             System.Collections.Generic.IEqualityComparer<T>? comparer = null
-        ) {
+        )
+        {
             throw null;
         }
         public static void Sort<T>(this System.Span<T> span) { }
@@ -446,7 +465,8 @@ namespace System
             this System.ReadOnlySpan<char> span,
             System.ReadOnlySpan<char> value,
             System.StringComparison comparisonType
-        ) {
+        )
+        {
             throw null;
         }
         public static bool StartsWith<T>(
@@ -465,26 +485,30 @@ namespace System
             this System.ReadOnlySpan<char> source,
             System.Span<char> destination,
             System.Globalization.CultureInfo? culture
-        ) {
+        )
+        {
             throw null;
         }
         public static int ToLowerInvariant(
             this System.ReadOnlySpan<char> source,
             System.Span<char> destination
-        ) {
+        )
+        {
             throw null;
         }
         public static int ToUpper(
             this System.ReadOnlySpan<char> source,
             System.Span<char> destination,
             System.Globalization.CultureInfo? culture
-        ) {
+        )
+        {
             throw null;
         }
         public static int ToUpperInvariant(
             this System.ReadOnlySpan<char> source,
             System.Span<char> destination
-        ) {
+        )
+        {
             throw null;
         }
         public static System.Memory<char> Trim(this System.Memory<char> memory)
@@ -502,13 +526,15 @@ namespace System
         public static System.ReadOnlySpan<char> Trim(
             this System.ReadOnlySpan<char> span,
             char trimChar
-        ) {
+        )
+        {
             throw null;
         }
         public static System.ReadOnlySpan<char> Trim(
             this System.ReadOnlySpan<char> span,
             System.ReadOnlySpan<char> trimChars
-        ) {
+        )
+        {
             throw null;
         }
         public static System.Span<char> Trim(this System.Span<char> span)
@@ -530,13 +556,15 @@ namespace System
         public static System.ReadOnlySpan<char> TrimEnd(
             this System.ReadOnlySpan<char> span,
             char trimChar
-        ) {
+        )
+        {
             throw null;
         }
         public static System.ReadOnlySpan<char> TrimEnd(
             this System.ReadOnlySpan<char> span,
             System.ReadOnlySpan<char> trimChars
-        ) {
+        )
+        {
             throw null;
         }
         public static System.Span<char> TrimEnd(this System.Span<char> span)
@@ -610,13 +638,15 @@ namespace System
         public static System.ReadOnlySpan<char> TrimStart(
             this System.ReadOnlySpan<char> span,
             char trimChar
-        ) {
+        )
+        {
             throw null;
         }
         public static System.ReadOnlySpan<char> TrimStart(
             this System.ReadOnlySpan<char> span,
             System.ReadOnlySpan<char> trimChars
-        ) {
+        )
+        {
             throw null;
         }
         public static System.Span<char> TrimStart(this System.Span<char> span)
@@ -741,7 +771,8 @@ namespace System
         )]
         public override bool Equals(
             [System.Diagnostics.CodeAnalysis.NotNullWhenAttribute(true)] object? obj
-        ) {
+        )
+        {
             throw null;
         }
         public bool Equals(System.SequencePosition other)
@@ -877,7 +908,8 @@ namespace System.Buffers
             int startIndex,
             System.Buffers.ReadOnlySequenceSegment<T> endSegment,
             int endIndex
-        ) {
+        )
+        {
             throw null;
         }
         public ReadOnlySequence(System.ReadOnlyMemory<T> memory)
@@ -971,7 +1003,8 @@ namespace System.Buffers
         public System.Buffers.ReadOnlySequence<T> Slice(
             System.SequencePosition start,
             System.SequencePosition end
-        ) {
+        )
+        {
             throw null;
         }
         public override string ToString()
@@ -982,7 +1015,8 @@ namespace System.Buffers
             ref System.SequencePosition position,
             out System.ReadOnlyMemory<T> memory,
             bool advance = true
-        ) {
+        )
+        {
             throw null;
         }
         public partial struct Enumerator
@@ -1008,37 +1042,43 @@ namespace System.Buffers
         public static bool TryReadBigEndian(
             this ref System.Buffers.SequenceReader<byte> reader,
             out short value
-        ) {
+        )
+        {
             throw null;
         }
         public static bool TryReadBigEndian(
             this ref System.Buffers.SequenceReader<byte> reader,
             out int value
-        ) {
+        )
+        {
             throw null;
         }
         public static bool TryReadBigEndian(
             this ref System.Buffers.SequenceReader<byte> reader,
             out long value
-        ) {
+        )
+        {
             throw null;
         }
         public static bool TryReadLittleEndian(
             this ref System.Buffers.SequenceReader<byte> reader,
             out short value
-        ) {
+        )
+        {
             throw null;
         }
         public static bool TryReadLittleEndian(
             this ref System.Buffers.SequenceReader<byte> reader,
             out int value
-        ) {
+        )
+        {
             throw null;
         }
         public static bool TryReadLittleEndian(
             this ref System.Buffers.SequenceReader<byte> reader,
             out long value
-        ) {
+        )
+        {
             throw null;
         }
     }
@@ -1131,7 +1171,8 @@ namespace System.Buffers
         public bool TryAdvanceToAny(
             System.ReadOnlySpan<T> delimiters,
             bool advancePastDelimiter = true
-        ) {
+        )
+        {
             throw null;
         }
         public readonly bool TryCopyTo(System.Span<T> destination)
@@ -1154,14 +1195,16 @@ namespace System.Buffers
             out System.Buffers.ReadOnlySequence<T> sequence,
             System.ReadOnlySpan<T> delimiter,
             bool advancePastDelimiter = true
-        ) {
+        )
+        {
             throw null;
         }
         public bool TryReadTo(
             out System.Buffers.ReadOnlySequence<T> sequence,
             T delimiter,
             bool advancePastDelimiter = true
-        ) {
+        )
+        {
             throw null;
         }
         public bool TryReadTo(
@@ -1169,21 +1212,24 @@ namespace System.Buffers
             T delimiter,
             T delimiterEscape,
             bool advancePastDelimiter = true
-        ) {
+        )
+        {
             throw null;
         }
         public bool TryReadTo(
             out System.ReadOnlySpan<T> span,
             System.ReadOnlySpan<T> delimiter,
             bool advancePastDelimiter = true
-        ) {
+        )
+        {
             throw null;
         }
         public bool TryReadTo(
             out System.ReadOnlySpan<T> span,
             T delimiter,
             bool advancePastDelimiter = true
-        ) {
+        )
+        {
             throw null;
         }
         public bool TryReadTo(
@@ -1191,21 +1237,24 @@ namespace System.Buffers
             T delimiter,
             T delimiterEscape,
             bool advancePastDelimiter = true
-        ) {
+        )
+        {
             throw null;
         }
         public bool TryReadToAny(
             out System.Buffers.ReadOnlySequence<T> sequence,
             System.ReadOnlySpan<T> delimiters,
             bool advancePastDelimiter = true
-        ) {
+        )
+        {
             throw null;
         }
         public bool TryReadToAny(
             out System.ReadOnlySpan<T> span,
             System.ReadOnlySpan<T> delimiters,
             bool advancePastDelimiter = true
-        ) {
+        )
+        {
             throw null;
         }
     }
@@ -1240,7 +1289,8 @@ namespace System.Buffers
         }
         public override bool Equals(
             [System.Diagnostics.CodeAnalysis.NotNullWhenAttribute(true)] object? obj
-        ) {
+        )
+        {
             throw null;
         }
         public override int GetHashCode()
@@ -1250,7 +1300,8 @@ namespace System.Buffers
         public static bool operator ==(
             System.Buffers.StandardFormat left,
             System.Buffers.StandardFormat right
-        ) {
+        )
+        {
             throw null;
         }
         public static implicit operator System.Buffers.StandardFormat(char symbol)
@@ -1260,7 +1311,8 @@ namespace System.Buffers
         public static bool operator !=(
             System.Buffers.StandardFormat left,
             System.Buffers.StandardFormat right
-        ) {
+        )
+        {
             throw null;
         }
         public static System.Buffers.StandardFormat Parse(System.ReadOnlySpan<char> format)
@@ -1278,7 +1330,8 @@ namespace System.Buffers
         public static bool TryParse(
             System.ReadOnlySpan<char> format,
             out System.Buffers.StandardFormat result
-        ) {
+        )
+        {
             throw null;
         }
     }
@@ -1404,25 +1457,29 @@ namespace System.Buffers.Binary
         public static bool TryReadDoubleBigEndian(
             System.ReadOnlySpan<byte> source,
             out double value
-        ) {
+        )
+        {
             throw null;
         }
         public static bool TryReadDoubleLittleEndian(
             System.ReadOnlySpan<byte> source,
             out double value
-        ) {
+        )
+        {
             throw null;
         }
         public static bool TryReadHalfBigEndian(
             System.ReadOnlySpan<byte> source,
             out System.Half value
-        ) {
+        )
+        {
             throw null;
         }
         public static bool TryReadHalfLittleEndian(
             System.ReadOnlySpan<byte> source,
             out System.Half value
-        ) {
+        )
+        {
             throw null;
         }
         public static bool TryReadInt16BigEndian(System.ReadOnlySpan<byte> source, out short value)
@@ -1432,7 +1489,8 @@ namespace System.Buffers.Binary
         public static bool TryReadInt16LittleEndian(
             System.ReadOnlySpan<byte> source,
             out short value
-        ) {
+        )
+        {
             throw null;
         }
         public static bool TryReadInt32BigEndian(System.ReadOnlySpan<byte> source, out int value)
@@ -1450,7 +1508,8 @@ namespace System.Buffers.Binary
         public static bool TryReadInt64LittleEndian(
             System.ReadOnlySpan<byte> source,
             out long value
-        ) {
+        )
+        {
             throw null;
         }
         public static bool TryReadSingleBigEndian(System.ReadOnlySpan<byte> source, out float value)
@@ -1460,21 +1519,24 @@ namespace System.Buffers.Binary
         public static bool TryReadSingleLittleEndian(
             System.ReadOnlySpan<byte> source,
             out float value
-        ) {
+        )
+        {
             throw null;
         }
         [System.CLSCompliantAttribute(false)]
         public static bool TryReadUInt16BigEndian(
             System.ReadOnlySpan<byte> source,
             out ushort value
-        ) {
+        )
+        {
             throw null;
         }
         [System.CLSCompliantAttribute(false)]
         public static bool TryReadUInt16LittleEndian(
             System.ReadOnlySpan<byte> source,
             out ushort value
-        ) {
+        )
+        {
             throw null;
         }
         [System.CLSCompliantAttribute(false)]
@@ -1486,7 +1548,8 @@ namespace System.Buffers.Binary
         public static bool TryReadUInt32LittleEndian(
             System.ReadOnlySpan<byte> source,
             out uint value
-        ) {
+        )
+        {
             throw null;
         }
         [System.CLSCompliantAttribute(false)]
@@ -1498,7 +1561,8 @@ namespace System.Buffers.Binary
         public static bool TryReadUInt64LittleEndian(
             System.ReadOnlySpan<byte> source,
             out ulong value
-        ) {
+        )
+        {
             throw null;
         }
         public static bool TryWriteDoubleBigEndian(System.Span<byte> destination, double value)
@@ -1516,7 +1580,8 @@ namespace System.Buffers.Binary
         public static bool TryWriteHalfLittleEndian(
             System.Span<byte> destination,
             System.Half value
-        ) {
+        )
+        {
             throw null;
         }
         public static bool TryWriteInt16BigEndian(System.Span<byte> destination, short value)
@@ -1620,13 +1685,15 @@ namespace System.Buffers.Text
             out int bytesConsumed,
             out int bytesWritten,
             bool isFinalBlock = true
-        ) {
+        )
+        {
             throw null;
         }
         public static System.Buffers.OperationStatus DecodeFromUtf8InPlace(
             System.Span<byte> buffer,
             out int bytesWritten
-        ) {
+        )
+        {
             throw null;
         }
         public static System.Buffers.OperationStatus EncodeToUtf8(
@@ -1635,14 +1702,16 @@ namespace System.Buffers.Text
             out int bytesConsumed,
             out int bytesWritten,
             bool isFinalBlock = true
-        ) {
+        )
+        {
             throw null;
         }
         public static System.Buffers.OperationStatus EncodeToUtf8InPlace(
             System.Span<byte> buffer,
             int dataLength,
             out int bytesWritten
-        ) {
+        )
+        {
             throw null;
         }
         public static int GetMaxDecodedFromUtf8Length(int length)
@@ -1661,7 +1730,8 @@ namespace System.Buffers.Text
             System.Span<byte> destination,
             out int bytesWritten,
             System.Buffers.StandardFormat format = default(System.Buffers.StandardFormat)
-        ) {
+        )
+        {
             throw null;
         }
         public static bool TryFormat(
@@ -1669,7 +1739,8 @@ namespace System.Buffers.Text
             System.Span<byte> destination,
             out int bytesWritten,
             System.Buffers.StandardFormat format = default(System.Buffers.StandardFormat)
-        ) {
+        )
+        {
             throw null;
         }
         public static bool TryFormat(
@@ -1677,7 +1748,8 @@ namespace System.Buffers.Text
             System.Span<byte> destination,
             out int bytesWritten,
             System.Buffers.StandardFormat format = default(System.Buffers.StandardFormat)
-        ) {
+        )
+        {
             throw null;
         }
         public static bool TryFormat(
@@ -1685,7 +1757,8 @@ namespace System.Buffers.Text
             System.Span<byte> destination,
             out int bytesWritten,
             System.Buffers.StandardFormat format = default(System.Buffers.StandardFormat)
-        ) {
+        )
+        {
             throw null;
         }
         public static bool TryFormat(
@@ -1693,7 +1766,8 @@ namespace System.Buffers.Text
             System.Span<byte> destination,
             out int bytesWritten,
             System.Buffers.StandardFormat format = default(System.Buffers.StandardFormat)
-        ) {
+        )
+        {
             throw null;
         }
         public static bool TryFormat(
@@ -1701,7 +1775,8 @@ namespace System.Buffers.Text
             System.Span<byte> destination,
             out int bytesWritten,
             System.Buffers.StandardFormat format = default(System.Buffers.StandardFormat)
-        ) {
+        )
+        {
             throw null;
         }
         public static bool TryFormat(
@@ -1709,7 +1784,8 @@ namespace System.Buffers.Text
             System.Span<byte> destination,
             out int bytesWritten,
             System.Buffers.StandardFormat format = default(System.Buffers.StandardFormat)
-        ) {
+        )
+        {
             throw null;
         }
         public static bool TryFormat(
@@ -1717,7 +1793,8 @@ namespace System.Buffers.Text
             System.Span<byte> destination,
             out int bytesWritten,
             System.Buffers.StandardFormat format = default(System.Buffers.StandardFormat)
-        ) {
+        )
+        {
             throw null;
         }
         public static bool TryFormat(
@@ -1725,7 +1802,8 @@ namespace System.Buffers.Text
             System.Span<byte> destination,
             out int bytesWritten,
             System.Buffers.StandardFormat format = default(System.Buffers.StandardFormat)
-        ) {
+        )
+        {
             throw null;
         }
         public static bool TryFormat(
@@ -1733,7 +1811,8 @@ namespace System.Buffers.Text
             System.Span<byte> destination,
             out int bytesWritten,
             System.Buffers.StandardFormat format = default(System.Buffers.StandardFormat)
-        ) {
+        )
+        {
             throw null;
         }
         [System.CLSCompliantAttribute(false)]
@@ -1742,7 +1821,8 @@ namespace System.Buffers.Text
             System.Span<byte> destination,
             out int bytesWritten,
             System.Buffers.StandardFormat format = default(System.Buffers.StandardFormat)
-        ) {
+        )
+        {
             throw null;
         }
         public static bool TryFormat(
@@ -1750,7 +1830,8 @@ namespace System.Buffers.Text
             System.Span<byte> destination,
             out int bytesWritten,
             System.Buffers.StandardFormat format = default(System.Buffers.StandardFormat)
-        ) {
+        )
+        {
             throw null;
         }
         public static bool TryFormat(
@@ -1758,7 +1839,8 @@ namespace System.Buffers.Text
             System.Span<byte> destination,
             out int bytesWritten,
             System.Buffers.StandardFormat format = default(System.Buffers.StandardFormat)
-        ) {
+        )
+        {
             throw null;
         }
         [System.CLSCompliantAttribute(false)]
@@ -1767,7 +1849,8 @@ namespace System.Buffers.Text
             System.Span<byte> destination,
             out int bytesWritten,
             System.Buffers.StandardFormat format = default(System.Buffers.StandardFormat)
-        ) {
+        )
+        {
             throw null;
         }
         [System.CLSCompliantAttribute(false)]
@@ -1776,7 +1859,8 @@ namespace System.Buffers.Text
             System.Span<byte> destination,
             out int bytesWritten,
             System.Buffers.StandardFormat format = default(System.Buffers.StandardFormat)
-        ) {
+        )
+        {
             throw null;
         }
         [System.CLSCompliantAttribute(false)]
@@ -1785,7 +1869,8 @@ namespace System.Buffers.Text
             System.Span<byte> destination,
             out int bytesWritten,
             System.Buffers.StandardFormat format = default(System.Buffers.StandardFormat)
-        ) {
+        )
+        {
             throw null;
         }
     }
@@ -1796,7 +1881,8 @@ namespace System.Buffers.Text
             out bool value,
             out int bytesConsumed,
             char standardFormat = '\0'
-        ) {
+        )
+        {
             throw null;
         }
         public static bool TryParse(
@@ -1804,7 +1890,8 @@ namespace System.Buffers.Text
             out byte value,
             out int bytesConsumed,
             char standardFormat = '\0'
-        ) {
+        )
+        {
             throw null;
         }
         public static bool TryParse(
@@ -1812,7 +1899,8 @@ namespace System.Buffers.Text
             out System.DateTime value,
             out int bytesConsumed,
             char standardFormat = '\0'
-        ) {
+        )
+        {
             throw null;
         }
         public static bool TryParse(
@@ -1820,7 +1908,8 @@ namespace System.Buffers.Text
             out System.DateTimeOffset value,
             out int bytesConsumed,
             char standardFormat = '\0'
-        ) {
+        )
+        {
             throw null;
         }
         public static bool TryParse(
@@ -1828,7 +1917,8 @@ namespace System.Buffers.Text
             out decimal value,
             out int bytesConsumed,
             char standardFormat = '\0'
-        ) {
+        )
+        {
             throw null;
         }
         public static bool TryParse(
@@ -1836,7 +1926,8 @@ namespace System.Buffers.Text
             out double value,
             out int bytesConsumed,
             char standardFormat = '\0'
-        ) {
+        )
+        {
             throw null;
         }
         public static bool TryParse(
@@ -1844,7 +1935,8 @@ namespace System.Buffers.Text
             out System.Guid value,
             out int bytesConsumed,
             char standardFormat = '\0'
-        ) {
+        )
+        {
             throw null;
         }
         public static bool TryParse(
@@ -1852,7 +1944,8 @@ namespace System.Buffers.Text
             out short value,
             out int bytesConsumed,
             char standardFormat = '\0'
-        ) {
+        )
+        {
             throw null;
         }
         public static bool TryParse(
@@ -1860,7 +1953,8 @@ namespace System.Buffers.Text
             out int value,
             out int bytesConsumed,
             char standardFormat = '\0'
-        ) {
+        )
+        {
             throw null;
         }
         public static bool TryParse(
@@ -1868,7 +1962,8 @@ namespace System.Buffers.Text
             out long value,
             out int bytesConsumed,
             char standardFormat = '\0'
-        ) {
+        )
+        {
             throw null;
         }
         [System.CLSCompliantAttribute(false)]
@@ -1877,7 +1972,8 @@ namespace System.Buffers.Text
             out sbyte value,
             out int bytesConsumed,
             char standardFormat = '\0'
-        ) {
+        )
+        {
             throw null;
         }
         public static bool TryParse(
@@ -1885,7 +1981,8 @@ namespace System.Buffers.Text
             out float value,
             out int bytesConsumed,
             char standardFormat = '\0'
-        ) {
+        )
+        {
             throw null;
         }
         public static bool TryParse(
@@ -1893,7 +1990,8 @@ namespace System.Buffers.Text
             out System.TimeSpan value,
             out int bytesConsumed,
             char standardFormat = '\0'
-        ) {
+        )
+        {
             throw null;
         }
         [System.CLSCompliantAttribute(false)]
@@ -1902,7 +2000,8 @@ namespace System.Buffers.Text
             out ushort value,
             out int bytesConsumed,
             char standardFormat = '\0'
-        ) {
+        )
+        {
             throw null;
         }
         [System.CLSCompliantAttribute(false)]
@@ -1911,7 +2010,8 @@ namespace System.Buffers.Text
             out uint value,
             out int bytesConsumed,
             char standardFormat = '\0'
-        ) {
+        )
+        {
             throw null;
         }
         [System.CLSCompliantAttribute(false)]
@@ -1920,7 +2020,8 @@ namespace System.Buffers.Text
             out ulong value,
             out int bytesConsumed,
             char standardFormat = '\0'
-        ) {
+        )
+        {
             throw null;
         }
     }
@@ -2002,13 +2103,15 @@ namespace System.Runtime.InteropServices
         }
         public static System.Collections.Generic.IEnumerable<T> ToEnumerable<T>(
             System.ReadOnlyMemory<T> memory
-        ) {
+        )
+        {
             throw null;
         }
         public static bool TryGetArray<T>(
             System.ReadOnlyMemory<T> memory,
             out System.ArraySegment<T> segment
-        ) {
+        )
+        {
             throw null;
         }
         public static bool TryGetMemoryManager<T, TManager>(
@@ -2032,7 +2135,8 @@ namespace System.Runtime.InteropServices
             [System.Diagnostics.CodeAnalysis.NotNullWhenAttribute(true)] out string? text,
             out int start,
             out int length
-        ) {
+        )
+        {
             throw null;
         }
         public static bool TryRead<T>(System.ReadOnlySpan<byte> source, out T value)
@@ -2051,13 +2155,15 @@ namespace System.Runtime.InteropServices
         public static bool TryGetArray<T>(
             System.Buffers.ReadOnlySequence<T> sequence,
             out System.ArraySegment<T> segment
-        ) {
+        )
+        {
             throw null;
         }
         public static bool TryGetReadOnlyMemory<T>(
             System.Buffers.ReadOnlySequence<T> sequence,
             out System.ReadOnlyMemory<T> memory
-        ) {
+        )
+        {
             throw null;
         }
         public static bool TryGetReadOnlySequenceSegment<T>(
@@ -2068,7 +2174,8 @@ namespace System.Runtime.InteropServices
             [System.Diagnostics.CodeAnalysis.NotNullWhenAttribute(true)]
                 out System.Buffers.ReadOnlySequenceSegment<T>? endSegment,
             out int endIndex
-        ) {
+        )
+        {
             throw null;
         }
         public static bool TryRead<T>(ref System.Buffers.SequenceReader<byte> reader, out T value)
@@ -2089,7 +2196,8 @@ namespace System.Text
             bool flush,
             out long charsUsed,
             out bool completed
-        ) {
+        )
+        {
             throw null;
         }
         public static void Convert(
@@ -2099,7 +2207,8 @@ namespace System.Text
             bool flush,
             out long charsUsed,
             out bool completed
-        ) {
+        )
+        {
             throw null;
         }
         public static void Convert(
@@ -2109,7 +2218,8 @@ namespace System.Text
             bool flush,
             out long bytesUsed,
             out bool completed
-        ) {
+        )
+        {
             throw null;
         }
         public static void Convert(
@@ -2119,61 +2229,70 @@ namespace System.Text
             bool flush,
             out long bytesUsed,
             out bool completed
-        ) {
+        )
+        {
             throw null;
         }
         public static byte[] GetBytes(
             this System.Text.Encoding encoding,
             in System.Buffers.ReadOnlySequence<char> chars
-        ) {
+        )
+        {
             throw null;
         }
         public static long GetBytes(
             this System.Text.Encoding encoding,
             in System.Buffers.ReadOnlySequence<char> chars,
             System.Buffers.IBufferWriter<byte> writer
-        ) {
+        )
+        {
             throw null;
         }
         public static int GetBytes(
             this System.Text.Encoding encoding,
             in System.Buffers.ReadOnlySequence<char> chars,
             System.Span<byte> bytes
-        ) {
+        )
+        {
             throw null;
         }
         public static long GetBytes(
             this System.Text.Encoding encoding,
             System.ReadOnlySpan<char> chars,
             System.Buffers.IBufferWriter<byte> writer
-        ) {
+        )
+        {
             throw null;
         }
         public static long GetChars(
             this System.Text.Encoding encoding,
             in System.Buffers.ReadOnlySequence<byte> bytes,
             System.Buffers.IBufferWriter<char> writer
-        ) {
+        )
+        {
             throw null;
         }
         public static int GetChars(
             this System.Text.Encoding encoding,
             in System.Buffers.ReadOnlySequence<byte> bytes,
             System.Span<char> chars
-        ) {
+        )
+        {
             throw null;
         }
         public static long GetChars(
             this System.Text.Encoding encoding,
             System.ReadOnlySpan<byte> bytes,
             System.Buffers.IBufferWriter<char> writer
-        ) {
+        )
+        {
             throw null;
         }
         public static string GetString(
             this System.Text.Encoding encoding,
             in System.Buffers.ReadOnlySequence<byte> bytes
-        ) {
+        )
+        {
             throw null;
         }
     }

@@ -65,7 +65,8 @@ namespace Microsoft.CodeAnalysis.RemoveUnnecessaryParentheses
                     out var precedence,
                     out var clarifiesPrecedence
                 )
-            ) {
+            )
+            {
                 return;
             }
 
@@ -149,7 +150,8 @@ namespace Microsoft.CodeAnalysis.RemoveUnnecessaryParentheses
         private static Location GetDiagnosticSquiggleLocation(
             TParenthesizedExpressionSyntax parenthesizedExpression,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var parenthesizedExpressionLocation = parenthesizedExpression.GetLocation();
 
             var lines = parenthesizedExpression.SyntaxTree.GetText(cancellationToken).Lines;

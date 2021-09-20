@@ -50,7 +50,8 @@ namespace Microsoft.CodeAnalysis.NavigateTo
             IImmutableSet<string> kinds,
             Func<RoslynNavigateToItem, Task> onResultFound,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             return FindSearchResultsAsync(
                 project,
                 priorityDocuments,
@@ -68,7 +69,8 @@ namespace Microsoft.CodeAnalysis.NavigateTo
             IImmutableSet<string> kinds,
             Func<RoslynNavigateToItem, Task> onResultFound,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             return FindSearchResultsAsync(
                 document.Project,
                 priorityDocuments: ImmutableArray<Document>.Empty,
@@ -88,7 +90,8 @@ namespace Microsoft.CodeAnalysis.NavigateTo
             IImmutableSet<string> kinds,
             Func<RoslynNavigateToItem, Task> onResultFound,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             // If the user created a dotted pattern then we'll grab the last part of the name
             var (patternName, patternContainerOpt) = PatternMatcher.GetNameAndContainer(pattern);
 
@@ -152,7 +155,8 @@ namespace Microsoft.CodeAnalysis.NavigateTo
             Func<RoslynNavigateToItem, Task> onResultFound,
             ISet<Document> documents,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             using var _ = ArrayBuilder<Task>.GetInstance(out var tasks);
 
             foreach (var document in documents)
@@ -187,7 +191,8 @@ namespace Microsoft.CodeAnalysis.NavigateTo
             DeclaredSymbolInfoKindSet kinds,
             Func<RoslynNavigateToItem, Task> onResultFound,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var index = await SyntaxTreeIndex.GetRequiredIndexAsync(document, cancellationToken)
                 .ConfigureAwait(false);
 
@@ -212,7 +217,8 @@ namespace Microsoft.CodeAnalysis.NavigateTo
             IImmutableSet<string> kinds,
             Func<RoslynNavigateToItem, Task> onItemFound,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var stringTable = new StringTable();
 
             var highPriDocsSet = priorityDocumentKeys.ToSet();
@@ -256,7 +262,8 @@ namespace Microsoft.CodeAnalysis.NavigateTo
             Func<RoslynNavigateToItem, Task> onItemFound,
             StringTable stringTable,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             using var _ = ArrayBuilder<Task>.GetInstance(out var tasks);
 
             foreach (var documentKey in documentKeys)
@@ -305,7 +312,8 @@ namespace Microsoft.CodeAnalysis.NavigateTo
             Func<RoslynNavigateToItem, Task> onResultFound,
             SyntaxTreeIndex index,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var containerMatcher =
                 patternContainer != null
                     ? PatternMatcher.CreateDotSeparatedContainerMatcher(patternContainer)
@@ -349,7 +357,8 @@ namespace Microsoft.CodeAnalysis.NavigateTo
             ArrayBuilder<PatternMatch> containerMatches,
             Func<RoslynNavigateToItem, Task> onResultFound,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             nameMatches.Clear();
             containerMatches.Clear();
 
@@ -361,7 +370,8 @@ namespace Microsoft.CodeAnalysis.NavigateTo
                     declaredSymbolInfo.FullyQualifiedContainerName,
                     containerMatches
                 ) != false
-            ) {
+            )
+            {
                 var result = await ConvertResultAsync(
                         documentId,
                         document,
@@ -382,7 +392,8 @@ namespace Microsoft.CodeAnalysis.NavigateTo
             ArrayBuilder<PatternMatch> nameMatches,
             ArrayBuilder<PatternMatch> containerMatches,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var matchKind = GetNavigateToMatchKind(nameMatches);
 
             // A match is considered to be case sensitive if all its constituent pattern matches are
@@ -432,7 +443,8 @@ namespace Microsoft.CodeAnalysis.NavigateTo
             Document document,
             DeclaredSymbolInfo declaredSymbolInfo,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             using var _ = ArrayBuilder<ProjectId>.GetInstance(out var result);
 
             var solution = document.Project.Solution;
@@ -495,7 +507,8 @@ namespace Microsoft.CodeAnalysis.NavigateTo
 
         private static NavigateToMatchKind GetNavigateToMatchKind(
             ArrayBuilder<PatternMatch> nameMatches
-        ) {
+        )
+        {
             // work backwards through the match kinds.  That way our result is as bad as our worst match part.  For
             // example, say the user searches for `Console.Write` and we find `Console.Write` (exact, exact), and
             // `Console.WriteLine` (exact, prefix).  We don't want the latter hit to be considered an `exact` match, and

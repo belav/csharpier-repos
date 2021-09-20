@@ -107,7 +107,8 @@ namespace Microsoft.AspNetCore.Identity.FunctionalTests.Account
         public async Task<LoginWith2fa> PasswordLoginValidUserWith2FaAsync(
             string userName,
             string password
-        ) {
+        )
+        {
             var loggedIn = await SendLoginForm(userName, password);
 
             var loggedInLocation = ResponseAssert.IsRedirect(loggedIn);

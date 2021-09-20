@@ -42,7 +42,8 @@ namespace System.Xml.Linq.Tests
                     FilePathUtil.getStream(fileName),
                     new XmlReaderSettings() { DtdProcessing = DtdProcessing.Ignore }
                 )
-            ) {
+            )
+            {
                 XDocument doc = XDocument.Load(r, LoadOptions.SetBaseUri);
                 foreach (XNode node in doc.DescendantNodes())
                 {

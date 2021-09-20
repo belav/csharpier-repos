@@ -31,7 +31,8 @@ namespace Microsoft.AspNetCore.Session
             IDataProtector protector,
             string? protectedText,
             ILogger logger
-        ) {
+        )
+        {
             try
             {
                 if (string.IsNullOrEmpty(protectedText))

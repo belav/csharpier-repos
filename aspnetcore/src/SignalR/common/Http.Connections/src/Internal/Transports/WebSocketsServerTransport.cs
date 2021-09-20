@@ -25,7 +25,8 @@ namespace Microsoft.AspNetCore.Http.Connections.Internal.Transports
             IDuplexPipe application,
             HttpConnectionContext connection,
             ILoggerFactory loggerFactory
-        ) {
+        )
+        {
             if (options == null)
             {
                 throw new ArgumentNullException(nameof(options));

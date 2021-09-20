@@ -173,7 +173,8 @@ namespace TestSite
             if (
                 context.Connection.LocalIpAddress == null
                 || context.Connection.RemoteIpAddress == null
-            ) {
+            )
+            {
                 throw new Exception("Failed to set local and remote ip addresses");
             }
 
@@ -268,7 +269,8 @@ namespace TestSite
                     ctx.User.Identity.AuthenticationType,
                     StringComparison.Ordinal
                 )
-            ) {
+            )
+            {
                 await ctx.Response.WriteAsync("NTLM");
             }
             else
@@ -1068,7 +1070,8 @@ namespace TestSite
                     context.User.Identity.AuthenticationType,
                     StringComparison.Ordinal
                 )
-            ) {
+            )
+            {
                 return context.Response.WriteAsync("NTLM");
             }
             else
@@ -1195,7 +1198,8 @@ namespace TestSite
 
         public async Task ResponseTrailers_WithTrailersBeforeContentLengthBody_TrailersSent(
             HttpContext context
-        ) {
+        )
+        {
             var body = "Hello World";
             context.Response.ContentLength = body.Length * 2;
             await context.Response.WriteAsync(body);
@@ -1205,7 +1209,8 @@ namespace TestSite
 
         public async Task ResponseTrailers_WithContentLengthBodyAndDeclared_TrailersSent(
             HttpContext context
-        ) {
+        )
+        {
             var body = "Hello World";
             context.Response.ContentLength = body.Length;
             context.Response.DeclareTrailer("TrailerName");
@@ -1215,7 +1220,8 @@ namespace TestSite
 
         public async Task ResponseTrailers_WithContentLengthBodyAndDeclaredButMissingTrailers_Completes(
             HttpContext context
-        ) {
+        )
+        {
             var body = "Hello World";
             context.Response.ContentLength = body.Length;
             context.Response.DeclareTrailer("TrailerName");
@@ -1267,7 +1273,8 @@ namespace TestSite
 
         public async Task AppException_AfterHeaders_PriorOSVersions_ResetCancel(
             HttpContext httpContext
-        ) {
+        )
+        {
             await httpContext.Response.Body.FlushAsync();
             throw new Exception("Application exception");
         }
@@ -1536,7 +1543,8 @@ namespace TestSite
 
         public Task ResponseTrailers_CompleteAsyncNoBody_TrailersSent_Completed(
             HttpContext httpContext
-        ) {
+        )
+        {
             _responseTrailers_CompleteAsyncNoBody_TrailersSent.TrySetResult(null);
             return Task.CompletedTask;
         }
@@ -1545,7 +1553,8 @@ namespace TestSite
             new TaskCompletionSource<object>();
         public async Task ResponseTrailers_CompleteAsyncWithBody_TrailersSent(
             HttpContext httpContext
-        ) {
+        )
+        {
             await httpContext.Response.WriteAsync("Hello World");
             httpContext.Response.AppendTrailer("TrailerName", "Trailer Value");
             await httpContext.Response.CompleteAsync();
@@ -1554,7 +1563,8 @@ namespace TestSite
 
         public Task ResponseTrailers_CompleteAsyncWithBody_TrailersSent_Completed(
             HttpContext httpContext
-        ) {
+        )
+        {
             _responseTrailers_CompleteAsyncWithBody_TrailersSent.TrySetResult(null);
             return Task.CompletedTask;
         }

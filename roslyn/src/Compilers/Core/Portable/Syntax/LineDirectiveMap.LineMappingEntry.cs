@@ -71,7 +71,8 @@ namespace Microsoft.CodeAnalysis
                 int mappedLine,
                 string? mappedPathOpt,
                 PositionState state
-            ) {
+            )
+            {
                 this.UnmappedLine = unmappedLine;
                 this.MappedLine = mappedLine;
                 this.MappedPathOpt = mappedPathOpt;

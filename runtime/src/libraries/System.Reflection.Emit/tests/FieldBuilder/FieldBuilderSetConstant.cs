@@ -406,7 +406,8 @@ namespace System.Reflection.Emit.Tests
         public void SetConstant_InvalidType_ThrowsArgumentException(
             FieldBuilder field,
             object defaultValue
-        ) {
+        )
+        {
             AssertExtensions.Throws<ArgumentException>(null, () => field.SetConstant(defaultValue));
         }
     }

@@ -67,7 +67,8 @@ namespace Microsoft.EntityFrameworkCore.Diagnostics.Internal
             if (
                 WarningsConfiguration.GetServiceProviderHashCode()
                 != coreOptions.WarningsConfiguration?.GetServiceProviderHashCode()
-            ) {
+            )
+            {
                 Check.DebugAssert(
                     coreOptions.InternalServiceProvider != null,
                     "InternalServiceProvider is null"

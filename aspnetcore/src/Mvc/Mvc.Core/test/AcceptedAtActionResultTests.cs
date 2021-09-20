@@ -72,7 +72,8 @@ namespace Microsoft.AspNetCore.Mvc
         public void Constructor_InitializesRouteValues(
             object routeValues,
             int expectedRouteValuesCount
-        ) {
+        )
+        {
             // Act
             var result = new AcceptedAtActionResult(
                 actionName: null,

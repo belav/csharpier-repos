@@ -70,7 +70,8 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.RenameTracking
             string languageName,
             bool onBeforeGlobalSymbolRenamedReturnValue = true,
             bool onAfterGlobalSymbolRenamedReturnValue = true
-        ) {
+        )
+        {
             var workspace = CreateTestWorkspace(markup, languageName);
             return new RenameTrackingTestState(
                 workspace,
@@ -85,7 +86,8 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.RenameTracking
             string languageName,
             bool onBeforeGlobalSymbolRenamedReturnValue = true,
             bool onAfterGlobalSymbolRenamedReturnValue = true
-        ) {
+        )
+        {
             var workspace = CreateTestWorkspace(workspaceXml);
             return new RenameTrackingTestState(
                 workspace,
@@ -100,7 +102,8 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.RenameTracking
             string languageName,
             bool onBeforeGlobalSymbolRenamedReturnValue = true,
             bool onAfterGlobalSymbolRenamedReturnValue = true
-        ) {
+        )
+        {
             this.Workspace = workspace;
 
             _hostDocument = Workspace.Documents.First();
@@ -228,7 +231,8 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.RenameTracking
             string expectedFromName,
             string expectedToName,
             bool invokeAction = false
-        ) {
+        )
+        {
             await WaitForAsyncOperationsAsync();
 
             var tags = _tagger.GetTags(

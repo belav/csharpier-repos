@@ -14,9 +14,8 @@ namespace Microsoft.EntityFrameworkCore
     public class PersistedGrantDbContextInMemoryTest
         : PersistedGrantDbContextTestBase<PersistedGrantDbContextInMemoryTest.PersistedGrantDbContextInMemoryFixture>
     {
-        public PersistedGrantDbContextInMemoryTest(
-            PersistedGrantDbContextInMemoryFixture fixture
-        ) : base(fixture) { }
+        public PersistedGrantDbContextInMemoryTest(PersistedGrantDbContextInMemoryFixture fixture)
+            : base(fixture) { }
 
         protected override void UseTransaction(
             DatabaseFacade facade,
@@ -28,7 +27,8 @@ namespace Microsoft.EntityFrameworkCore
             Func<PersistedGrantDbContext, Task> nestedTestOperation1 = null,
             Func<PersistedGrantDbContext, Task> nestedTestOperation2 = null,
             Func<PersistedGrantDbContext, Task> nestedTestOperation3 = null
-        ) {
+        )
+        {
             await base.ExecuteWithStrategyInTransactionAsync(
                 testOperation,
                 nestedTestOperation1,

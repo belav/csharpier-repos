@@ -66,7 +66,8 @@ namespace Microsoft.AspNetCore.SignalR.Tests
         public static IServiceProvider CreateServiceProvider(
             Action<ServiceCollection> addServices = null,
             ILoggerFactory loggerFactory = null
-        ) {
+        )
+        {
             var services = new ServiceCollection();
             services.AddOptions().AddLogging();
 
@@ -86,7 +87,8 @@ namespace Microsoft.AspNetCore.SignalR.Tests
             Type hubType,
             ILoggerFactory loggerFactory = null,
             Action<ServiceCollection> addServices = null
-        ) {
+        )
+        {
             var serviceProvider = CreateServiceProvider(addServices, loggerFactory);
             return (Connections.ConnectionHandler)serviceProvider.GetService(
                 GetConnectionHandlerType(hubType)

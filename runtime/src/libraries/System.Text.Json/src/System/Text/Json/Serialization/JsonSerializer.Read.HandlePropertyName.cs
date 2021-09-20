@@ -21,7 +21,8 @@ namespace System.Text.Json
             ref ReadStack state,
             out bool useExtensionProperty,
             bool createExtensionProperty = true
-        ) {
+        )
+        {
             Debug.Assert(
                 state.Current.JsonTypeInfo.PropertyInfoForTypeInfo.ConverterStrategy
                     == ConverterStrategy.Object
@@ -50,7 +51,8 @@ namespace System.Text.Json
                     dataExtProperty != null
                     && dataExtProperty.HasGetter
                     && dataExtProperty.HasSetter
-                ) {
+                )
+                {
                     state.Current.JsonPropertyNameAsString = JsonHelpers.Utf8GetString(
                         unescapedPropertyName
                     );
@@ -75,7 +77,8 @@ namespace System.Text.Json
             ref ReadStack state,
             ref Utf8JsonReader reader,
             JsonSerializerOptions options
-        ) {
+        )
+        {
             ReadOnlySpan<byte> unescapedPropertyName;
             ReadOnlySpan<byte> propertyName = reader.GetSpan();
 
@@ -108,7 +111,8 @@ namespace System.Text.Json
         internal static void CreateDataExtensionProperty(
             object obj,
             JsonPropertyInfo jsonPropertyInfo
-        ) {
+        )
+        {
             Debug.Assert(jsonPropertyInfo != null);
 
             object? extensionData = jsonPropertyInfo.GetValueAsObject(obj);

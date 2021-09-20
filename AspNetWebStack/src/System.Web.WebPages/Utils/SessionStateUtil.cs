@@ -27,7 +27,8 @@ namespace System.Web.WebPages
             HttpContextBase context,
             IHttpHandler handler,
             ConcurrentDictionary<Type, SessionStateBehavior?> cache
-        ) {
+        )
+        {
             WebPageHttpHandler webPageHandler = handler as WebPageHttpHandler;
             Debug.Assert(handler != null);
             SessionStateBehavior? sessionState = GetSessionStateBehavior(
@@ -64,7 +65,8 @@ namespace System.Web.WebPages
         private static SessionStateBehavior? GetSessionStateBehavior(
             WebPageExecutingBase page,
             ConcurrentDictionary<Type, SessionStateBehavior?> cache
-        ) {
+        )
+        {
             return cache.GetOrAdd(
                 page.GetType(),
                 type =>
@@ -97,7 +99,8 @@ namespace System.Web.WebPages
                             ignoreCase: true,
                             result: out sessionStateBehavior
                         )
-                    ) {
+                    )
+                    {
                         var values = Enum.GetValues(typeof(SessionStateBehavior))
                             .Cast<SessionStateBehavior>()
                             .Select(s => s.ToString());

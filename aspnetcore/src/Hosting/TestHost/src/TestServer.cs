@@ -27,10 +27,8 @@ namespace Microsoft.AspNetCore.TestHost
         /// </summary>
         /// <param name="services"></param>
         /// <param name="optionsAccessor"></param>
-        public TestServer(
-            IServiceProvider services,
-            IOptions<TestServerOptions> optionsAccessor
-        ) : this(services, new FeatureCollection(), optionsAccessor) { }
+        public TestServer(IServiceProvider services, IOptions<TestServerOptions> optionsAccessor)
+            : this(services, new FeatureCollection(), optionsAccessor) { }
 
         /// <summary>
         /// For use with IHostBuilder.
@@ -42,7 +40,8 @@ namespace Microsoft.AspNetCore.TestHost
             IServiceProvider services,
             IFeatureCollection featureCollection,
             IOptions<TestServerOptions> optionsAccessor
-        ) {
+        )
+        {
             Services = services ?? throw new ArgumentNullException(nameof(services));
             Features =
                 featureCollection ?? throw new ArgumentNullException(nameof(featureCollection));
@@ -201,7 +200,8 @@ namespace Microsoft.AspNetCore.TestHost
         public async Task<HttpContext> SendAsync(
             Action<HttpContext> configureContext,
             CancellationToken cancellationToken = default
-        ) {
+        )
+        {
             if (configureContext == null)
             {
                 throw new ArgumentNullException(nameof(configureContext));
@@ -250,7 +250,8 @@ namespace Microsoft.AspNetCore.TestHost
         Task IServer.StartAsync<TContext>(
             IHttpApplication<TContext> application,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             _application = new ApplicationWrapper<TContext>(
                 application,
                 () =>

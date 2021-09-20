@@ -10,7 +10,8 @@ namespace Microsoft.Extensions.Hosting
     {
         public static Microsoft.Extensions.Hosting.IHostBuilder UseSystemd(
             this Microsoft.Extensions.Hosting.IHostBuilder hostBuilder
-        ) {
+        )
+        {
             throw null;
         }
     }
@@ -57,12 +58,14 @@ namespace Microsoft.Extensions.Hosting.Systemd
         public void Dispose() { }
         public System.Threading.Tasks.Task StopAsync(
             System.Threading.CancellationToken cancellationToken
-        ) {
+        )
+        {
             throw null;
         }
         public System.Threading.Tasks.Task WaitForStartAsync(
             System.Threading.CancellationToken cancellationToken
-        ) {
+        )
+        {
             throw null;
         }
     }

@@ -55,7 +55,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.RenameTracking
             IInlineRenameService inlineRenameService,
             IDiagnosticAnalyzerService diagnosticAnalyzerService,
             IAsynchronousOperationListenerProvider listenerProvider
-        ) {
+        )
+        {
             _threadingContext = threadingContext;
             _inlineRenameService = inlineRenameService;
             _diagnosticAnalyzerService = diagnosticAnalyzerService;
@@ -89,7 +90,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.RenameTracking
             Workspace workspace,
             DocumentId documentId,
             bool visible
-        ) {
+        )
+        {
             if (workspace.IsDocumentOpen(documentId))
             {
                 var document = workspace.CurrentSolution.GetDocument(documentId);
@@ -114,7 +116,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.RenameTracking
                             typeof(StateMachine),
                             out StateMachine stateMachine
                         )
-                    ) {
+                    )
+                    {
                         if (visible)
                         {
                             return stateMachine.ClearVisibleTrackingSession();
@@ -136,7 +139,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.RenameTracking
             IEnumerable<IRefactorNotifyService> refactorNotifyServices,
             ITextUndoHistoryRegistry undoHistoryRegistry,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             try
             {
                 if (document != null && document.TryGetText(out var text))
@@ -149,7 +153,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.RenameTracking
                             out StateMachine stateMachine
                         )
                         && stateMachine.CanInvokeRename(out _, cancellationToken: cancellationToken)
-                    ) {
+                    )
+                    {
                         return stateMachine.TryGetCodeAction(
                             document,
                             text,
@@ -174,11 +179,13 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.RenameTracking
             Task<TriggerIdentifierKind> isRenamableIdentifierTask,
             bool waitForResult,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             if (
                 isRenamableIdentifierTask.Status == TaskStatus.RanToCompletion
                 && isRenamableIdentifierTask.Result != TriggerIdentifierKind.NotRenamable
-            ) {
+            )
+            {
                 return true;
             }
             else if (isRenamableIdentifierTask.Status == TaskStatus.Canceled)
@@ -198,7 +205,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.RenameTracking
         internal static bool WaitForIsRenamableIdentifier(
             Task<TriggerIdentifierKind> isRenamableIdentifierTask,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             try
             {
                 return isRenamableIdentifierTask.WaitAndGetResult_CanCallOnBackground(

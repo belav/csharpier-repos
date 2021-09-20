@@ -73,7 +73,8 @@ namespace Microsoft.CodeAnalysis.LanguageServerIndexFormat.Generator
             string? output,
             LsifFormat outputFormat,
             string? log
-        ) {
+        )
+        {
             // If we have an output file, we'll write to that, else we'll use Console.Out
             using var outputFile = output != null ? new StreamWriter(output) : null;
             var outputWriter = outputFile ?? Console.Out;
@@ -151,7 +152,8 @@ namespace Microsoft.CodeAnalysis.LanguageServerIndexFormat.Generator
             FileInfo projectFile,
             ILsifJsonWriter lsifWriter,
             TextWriter logFile
-        ) {
+        )
+        {
             await LocateAndRegisterMSBuild(logFile);
             await GenerateWithMSBuildLocatedAsync(
                 projectFile,
@@ -169,7 +171,8 @@ namespace Microsoft.CodeAnalysis.LanguageServerIndexFormat.Generator
             FileInfo solutionFile,
             ILsifJsonWriter lsifWriter,
             TextWriter logFile
-        ) {
+        )
+        {
             await LocateAndRegisterMSBuild(logFile);
             await GenerateWithMSBuildLocatedAsync(
                 solutionFile,
@@ -187,7 +190,8 @@ namespace Microsoft.CodeAnalysis.LanguageServerIndexFormat.Generator
             ILsifJsonWriter lsifWriter,
             TextWriter logFile,
             Func<MSBuildWorkspace, Task<Solution>> openAsync
-        ) {
+        )
+        {
             await logFile.WriteLineAsync($"Loading {solutionOrProjectFile.FullName}...");
 
             var solutionLoadStopwatch = Stopwatch.StartNew();
@@ -246,7 +250,8 @@ namespace Microsoft.CodeAnalysis.LanguageServerIndexFormat.Generator
             FileInfo compilerInvocationFile,
             ILsifJsonWriter lsifWriter,
             TextWriter logFile
-        ) {
+        )
+        {
             await logFile.WriteLineAsync(
                 $"Processing compiler invocation from {compilerInvocationFile.FullName}..."
             );

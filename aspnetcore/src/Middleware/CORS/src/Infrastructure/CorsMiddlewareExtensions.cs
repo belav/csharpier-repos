@@ -51,7 +51,8 @@ namespace Microsoft.AspNetCore.Builder
         public static IApplicationBuilder UseCors(
             this IApplicationBuilder app,
             Action<CorsPolicyBuilder> configurePolicy
-        ) {
+        )
+        {
             if (app == null)
             {
                 throw new ArgumentNullException(nameof(app));

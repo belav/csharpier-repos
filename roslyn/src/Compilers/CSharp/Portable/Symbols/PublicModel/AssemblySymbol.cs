@@ -98,7 +98,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols.PublicModel
                     if (
                         conclusion == IVTConclusion.Match
                         || conclusion == IVTConclusion.OneSignedOneNot
-                    ) {
+                    )
+                    {
                         return true;
                     }
                 }

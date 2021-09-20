@@ -681,7 +681,8 @@ namespace Microsoft.EntityFrameworkCore.Update
             EntityState entityState,
             bool generateKeyValues = false,
             bool computeNonKeyValue = false
-        ) {
+        )
+        {
             var model = BuildModel(generateKeyValues, computeNonKeyValue);
 
             return RelationalTestHelpers.Instance.CreateInternalEntry(
@@ -694,7 +695,8 @@ namespace Microsoft.EntityFrameworkCore.Update
         private static FakeDbDataReader CreateFakeDataReader(
             string[] columnNames = null,
             IList<object[]> results = null
-        ) {
+        )
+        {
             results ??= new List<object[]> { new object[] { 1 } };
             columnNames ??= new[] { "RowsAffected" };
 
@@ -712,7 +714,8 @@ namespace Microsoft.EntityFrameworkCore.Update
 
             private static ModificationCommandBatchFactoryDependencies CreateDependencies(
                 IUpdateSqlGenerator sqlGenerator
-            ) {
+            )
+            {
                 var typeMappingSource = new TestRelationalTypeMappingSource(
                     TestServiceFactory.Instance.Create<TypeMappingSourceDependencies>(),
                     TestServiceFactory.Instance.Create<RelationalTypeMappingSourceDependencies>()
@@ -794,7 +797,8 @@ namespace Microsoft.EntityFrameworkCore.Update
 
         public static IDbContextOptions CreateOptions(
             RelationalOptionsExtension optionsExtension = null
-        ) {
+        )
+        {
             var optionsBuilder = new DbContextOptionsBuilder();
 
             ((IDbContextOptionsBuilderInfrastructure)optionsBuilder).AddOrUpdateExtension(

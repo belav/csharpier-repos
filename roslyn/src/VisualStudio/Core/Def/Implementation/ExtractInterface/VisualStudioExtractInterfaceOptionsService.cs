@@ -32,7 +32,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.ExtractInterfac
         public VisualStudioExtractInterfaceOptionsService(
             IGlyphService glyphService,
             IThreadingContext threadingContext
-        ) {
+        )
+        {
             _glyphService = glyphService;
             _threadingContext = threadingContext;
         }
@@ -46,7 +47,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.ExtractInterfac
             string defaultNamespace,
             string generatedNameTypeParameterSuffix,
             string languageName
-        ) {
+        )
+        {
             await _threadingContext.JoinableTaskFactory.SwitchToMainThreadAsync();
 
             var viewModel = new ExtractInterfaceDialogViewModel(
@@ -85,7 +87,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.ExtractInterfac
 
         private static ExtractInterfaceOptionsResult.ExtractLocation GetLocation(
             NewTypeDestination destination
-        ) {
+        )
+        {
             switch (destination)
             {
                 case NewTypeDestination.CurrentFile:

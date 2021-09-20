@@ -52,7 +52,8 @@ namespace Microsoft.CodeAnalysis.TodoComments
             int mappedColumn,
             int originalLine,
             int originalColumn
-        ) {
+        )
+        {
             Priority = priority;
             Message = message;
             DocumentId = documentId;

@@ -11,7 +11,8 @@ namespace ComponentsWebAssembly_CSharp.Server.Controllers
         public OidcConfigurationController(
             IClientRequestParametersProvider clientRequestParametersProvider,
             ILogger<OidcConfigurationController> logger
-        ) {
+        )
+        {
             ClientRequestParametersProvider = clientRequestParametersProvider;
             _logger = logger;
         }

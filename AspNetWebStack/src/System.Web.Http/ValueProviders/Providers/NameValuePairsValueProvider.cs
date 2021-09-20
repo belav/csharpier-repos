@@ -28,7 +28,8 @@ namespace System.Web.Http.ValueProviders.Providers
         public NameValuePairsValueProvider(
             IEnumerable<KeyValuePair<string, string>> values,
             CultureInfo culture
-        ) {
+        )
+        {
             if (values == null)
             {
                 throw Error.ArgumentNull("values");
@@ -51,7 +52,8 @@ namespace System.Web.Http.ValueProviders.Providers
         public NameValuePairsValueProvider(
             Func<IEnumerable<KeyValuePair<string, string>>> valuesFactory,
             CultureInfo culture
-        ) {
+        )
+        {
             if (valuesFactory == null)
             {
                 throw Error.ArgumentNull("valuesFactory");

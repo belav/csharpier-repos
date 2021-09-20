@@ -26,11 +26,13 @@ namespace Microsoft.Extensions.DependencyInjection.ServiceLookup
             Type serviceType,
             IServiceScope scope,
             IServiceScope rootScope
-        ) {
+        )
+        {
             if (
                 ReferenceEquals(scope, rootScope)
                 && _scopedServices.TryGetValue(serviceType, out Type scopedService)
-            ) {
+            )
+            {
                 if (serviceType == scopedService)
                 {
                     throw new InvalidOperationException(
@@ -56,7 +58,8 @@ namespace Microsoft.Extensions.DependencyInjection.ServiceLookup
         protected override Type VisitConstructor(
             ConstructorCallSite constructorCallSite,
             CallSiteValidatorState state
-        ) {
+        )
+        {
             Type result = null;
             foreach (ServiceCallSite parameterCallSite in constructorCallSite.ParameterCallSites)
             {
@@ -72,7 +75,8 @@ namespace Microsoft.Extensions.DependencyInjection.ServiceLookup
         protected override Type VisitIEnumerable(
             IEnumerableCallSite enumerableCallSite,
             CallSiteValidatorState state
-        ) {
+        )
+        {
             Type result = null;
             foreach (ServiceCallSite serviceCallSite in enumerableCallSite.ServiceCallSites)
             {
@@ -88,7 +92,8 @@ namespace Microsoft.Extensions.DependencyInjection.ServiceLookup
         protected override Type VisitRootCache(
             ServiceCallSite singletonCallSite,
             CallSiteValidatorState state
-        ) {
+        )
+        {
             state.Singleton = singletonCallSite;
             return VisitCallSiteMain(singletonCallSite, state);
         }
@@ -96,7 +101,8 @@ namespace Microsoft.Extensions.DependencyInjection.ServiceLookup
         protected override Type VisitScopeCache(
             ServiceCallSite scopedCallSite,
             CallSiteValidatorState state
-        ) {
+        )
+        {
             // We are fine with having ServiceScopeService requested by singletons
             if (scopedCallSite is ServiceScopeFactoryCallSite)
             {

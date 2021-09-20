@@ -44,7 +44,8 @@ namespace System.Net.Mail
             SmtpClient client,
             ICredentialsByHost? credentials,
             ISmtpAuthenticationModule[] authenticationModules
-        ) {
+        )
+        {
             _client = client;
             _credentials = credentials;
             _authenticationModules = authenticationModules;
@@ -84,7 +85,8 @@ namespace System.Net.Mail
             int port,
             AsyncCallback? callback,
             object? state
-        ) {
+        )
+        {
             return _tcpClient!.BeginConnect(host, port, callback, state);
         }
 
@@ -100,7 +102,8 @@ namespace System.Net.Mail
             object? state,
             string host,
             int port
-        ) {
+        )
+        {
             ConnectAndHandshakeAsyncResult result = new ConnectAndHandshakeAsyncResult(
                 this,
                 host,
@@ -229,7 +232,8 @@ namespace System.Net.Mail
                 if (
                     (e.StatusCode != SmtpStatusCode.CommandUnrecognized)
                     && (e.StatusCode != SmtpStatusCode.CommandNotImplemented)
-                ) {
+                )
+                {
                     throw;
                 }
 
@@ -338,7 +342,8 @@ namespace System.Net.Mail
             ISmtpAuthenticationModule module,
             NetworkCredential? credential,
             ContextAwareResult? context
-        ) {
+        )
+        {
             // We may need to restore user thread token here
             if (ReferenceEquals(credential, CredentialCache.DefaultNetworkCredentials))
             {
@@ -406,7 +411,8 @@ namespace System.Net.Mail
                 NetworkCredential credential,
                 string? spn,
                 ChannelBinding? Token
-            ) {
+            )
+            {
                 _thisPtr = thisPtr;
                 _module = module;
                 _credential = credential;
@@ -695,7 +701,8 @@ namespace System.Net.Mail
                             if (
                                 (e.StatusCode != SmtpStatusCode.CommandUnrecognized)
                                 && (e.StatusCode != SmtpStatusCode.CommandNotImplemented)
-                            ) {
+                            )
+                            {
                                 throw;
                             }
 

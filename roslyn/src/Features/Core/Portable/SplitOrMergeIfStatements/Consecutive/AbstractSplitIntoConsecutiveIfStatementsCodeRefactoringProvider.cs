@@ -57,7 +57,8 @@ namespace Microsoft.CodeAnalysis.SplitOrMergeIfStatements
             SyntaxNode leftCondition,
             SyntaxNode rightCondition,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var syntaxFacts = document.GetLanguageService<ISyntaxFactsService>();
             var ifGenerator = document.GetLanguageService<IIfLikeStatementGenerator>();
             var generator = document.GetLanguageService<SyntaxGenerator>();
@@ -81,7 +82,8 @@ namespace Microsoft.CodeAnalysis.SplitOrMergeIfStatements
                         cancellationToken
                     )
                     .ConfigureAwait(false)
-            ) {
+            )
+            {
                 // Generate:
                 // if (a)
                 //     return;
@@ -134,7 +136,8 @@ namespace Microsoft.CodeAnalysis.SplitOrMergeIfStatements
             IIfLikeStatementGenerator ifGenerator,
             SyntaxNode ifOrElseIf,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             // In order to make separate statements, ifOrElseIf must be an if statement, not an else-if clause.
             if (ifGenerator.IsElseIfClause(ifOrElseIf, out _))
             {
@@ -179,10 +182,14 @@ namespace Microsoft.CodeAnalysis.SplitOrMergeIfStatements
             public MyCodeAction(
                 Func<CancellationToken, Task<Document>> createChangedDocument,
                 string ifKeywordText
-            ) : base(
-                string.Format(FeaturesResources.Split_into_consecutive_0_statements, ifKeywordText),
-                createChangedDocument
-            ) { }
+            )
+                : base(
+                    string.Format(
+                        FeaturesResources.Split_into_consecutive_0_statements,
+                        ifKeywordText
+                    ),
+                    createChangedDocument
+                ) { }
         }
     }
 }

@@ -11,7 +11,8 @@ namespace System.Net.NetworkInformation
             IPStatus ipStatus,
             long rtt,
             byte[] buffer
-        ) {
+        )
+        {
             Address = address;
             Options = options;
             Status = ipStatus;

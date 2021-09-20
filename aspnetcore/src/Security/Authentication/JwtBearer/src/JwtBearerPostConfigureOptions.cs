@@ -24,7 +24,8 @@ namespace Microsoft.AspNetCore.Authentication.JwtBearer
             if (
                 string.IsNullOrEmpty(options.TokenValidationParameters.ValidAudience)
                 && !string.IsNullOrEmpty(options.Audience)
-            ) {
+            )
+            {
                 options.TokenValidationParameters.ValidAudience = options.Audience;
             }
 
@@ -42,11 +43,13 @@ namespace Microsoft.AspNetCore.Authentication.JwtBearer
                         string.IsNullOrEmpty(options.MetadataAddress)
                         && string.IsNullOrEmpty(options.Authority)
                     )
-                ) {
+                )
+                {
                     if (
                         string.IsNullOrEmpty(options.MetadataAddress)
                         && !string.IsNullOrEmpty(options.Authority)
-                    ) {
+                    )
+                    {
                         options.MetadataAddress = options.Authority;
                         if (!options.MetadataAddress.EndsWith("/", StringComparison.Ordinal))
                         {
@@ -62,7 +65,8 @@ namespace Microsoft.AspNetCore.Authentication.JwtBearer
                             "https://",
                             StringComparison.OrdinalIgnoreCase
                         )
-                    ) {
+                    )
+                    {
                         throw new InvalidOperationException(
                             "The MetadataAddress or Authority must use HTTPS unless disabled for development by setting RequireHttpsMetadata=false."
                         );

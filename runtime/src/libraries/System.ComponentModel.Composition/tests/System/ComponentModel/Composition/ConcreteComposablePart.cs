@@ -45,7 +45,8 @@ namespace System.ComponentModel.Composition
             ImportCardinality cardinality,
             bool isRecomposable,
             bool isPrerequisite
-        ) {
+        )
+        {
             var import = ImportDefinitionFactory.CreateDefault(
                 contractName,
                 cardinality,
@@ -95,7 +96,8 @@ namespace System.ComponentModel.Composition
         {
             foreach (
                 var disposable in _exports.Select(export => export.Value).OfType<IDisposable>()
-            ) {
+            )
+            {
                 disposable.Dispose();
             }
         }

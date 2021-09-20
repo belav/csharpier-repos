@@ -16,7 +16,8 @@ namespace System.Composition.Hosting.Core.Tests
                 CompositionHost host = CompositionHost.CreateCompositionHost(
                     new ExportDescriptorProvider[0]
                 )
-            ) {
+            )
+            {
                 Assert.True(
                     host.TryGetExport(
                         new CompositionContract(typeof(CompositionContext)),
@@ -34,7 +35,8 @@ namespace System.Composition.Hosting.Core.Tests
                 CompositionHost host = CompositionHost.CreateCompositionHost(
                     new MultipleDependency()
                 )
-            ) {
+            )
+            {
                 Assert.True(
                     host.TryGetExport(new CompositionContract(typeof(int)), out object export)
                 );
@@ -47,7 +49,8 @@ namespace System.Composition.Hosting.Core.Tests
             public override IEnumerable<ExportDescriptorPromise> GetExportDescriptors(
                 CompositionContract contract,
                 DependencyAccessor descriptorAccessor
-            ) {
+            )
+            {
                 var target = new ExportDescriptorPromise(
                     new CompositionContract(typeof(int)),
                     "Origin1",
@@ -125,7 +128,8 @@ namespace System.Composition.Hosting.Core.Tests
         public void GetExport_LazyOrExportFactoryContractType_ReturnsExpected(
             Type type,
             Type[] expectedContractTypes
-        ) {
+        )
+        {
             var tracker = new TrackingProvider();
             using (CompositionHost host = CompositionHost.CreateCompositionHost(tracker))
             {
@@ -148,7 +152,8 @@ namespace System.Composition.Hosting.Core.Tests
         public void GetExport_ImoportManyWithMetadataConstraints_ReturnsExpected(
             Type contractType,
             Type[] expectedTypes
-        ) {
+        )
+        {
             var tracker = new TrackingProvider();
             using (CompositionHost host = CompositionHost.CreateCompositionHost(tracker))
             {
@@ -189,7 +194,8 @@ namespace System.Composition.Hosting.Core.Tests
             Type contractType,
             string[] sharingBoundaryNames,
             Type[] expectedTypes
-        ) {
+        )
+        {
             var tracker = new TrackingProvider();
             using (CompositionHost host = CompositionHost.CreateCompositionHost(tracker))
             {
@@ -214,7 +220,8 @@ namespace System.Composition.Hosting.Core.Tests
             public override IEnumerable<ExportDescriptorPromise> GetExportDescriptors(
                 CompositionContract contract,
                 DependencyAccessor descriptorAccessor
-            ) {
+            )
+            {
                 Contracts.Add(contract);
                 return new ExportDescriptorPromise[0];
             }
@@ -236,7 +243,8 @@ namespace System.Composition.Hosting.Core.Tests
                 CompositionHost host = CompositionHost.CreateCompositionHost(
                     new ExportDescriptorProvider[0]
                 )
-            ) {
+            )
+            {
                 Assert.Throws<CompositionFailedException>(
                     () => host.TryGetExport(type, out object _)
                 );
@@ -250,7 +258,8 @@ namespace System.Composition.Hosting.Core.Tests
                 CompositionHost host = CompositionHost.CreateCompositionHost(
                     new ExportDescriptorProvider[0]
                 )
-            ) {
+            )
+            {
                 Assert.Throws<InvalidOperationException>(
                     () => host.TryGetExport(typeof(Lazy<int, AbstractConstructor>), out object _)
                 );
@@ -264,7 +273,8 @@ namespace System.Composition.Hosting.Core.Tests
                 CompositionHost host = CompositionHost.CreateCompositionHost(
                     new ExportDescriptorProvider[] { null }
                 )
-            ) {
+            )
+            {
                 Assert.Throws<NullReferenceException>(() => host.GetExport<int>());
             }
         }
@@ -276,7 +286,8 @@ namespace System.Composition.Hosting.Core.Tests
                 CompositionHost host = CompositionHost.CreateCompositionHost(
                     new ExportDescriptorProvider[0]
                 )
-            ) {
+            )
+            {
                 AssertExtensions.Throws<ArgumentNullException>(
                     "key",
                     () => host.TryGetExport((CompositionContract)null, out object export)
@@ -289,7 +300,8 @@ namespace System.Composition.Hosting.Core.Tests
         {
             using (
                 CompositionHost host = CompositionHost.CreateCompositionHost(new MultiplePromises())
-            ) {
+            )
+            {
                 Assert.Throws<CompositionFailedException>(
                     () => host.TryGetExport(new CompositionContract(typeof(int)), out object export)
                 );
@@ -301,7 +313,8 @@ namespace System.Composition.Hosting.Core.Tests
             public override IEnumerable<ExportDescriptorPromise> GetExportDescriptors(
                 CompositionContract contract,
                 DependencyAccessor descriptorAccessor
-            ) {
+            )
+            {
                 var target = new ExportDescriptorPromise(
                     new CompositionContract(typeof(int)),
                     "Origin",
@@ -322,7 +335,8 @@ namespace System.Composition.Hosting.Core.Tests
         {
             using (
                 CompositionHost host = CompositionHost.CreateCompositionHost(new FailedDependency())
-            ) {
+            )
+            {
                 Assert.Throws<CompositionFailedException>(
                     () => host.TryGetExport(new CompositionContract(typeof(int)), out object export)
                 );
@@ -334,7 +348,8 @@ namespace System.Composition.Hosting.Core.Tests
             public override IEnumerable<ExportDescriptorPromise> GetExportDescriptors(
                 CompositionContract contract,
                 DependencyAccessor descriptorAccessor
-            ) {
+            )
+            {
                 var target = new ExportDescriptorPromise(
                     new CompositionContract(typeof(int)),
                     "Origin",

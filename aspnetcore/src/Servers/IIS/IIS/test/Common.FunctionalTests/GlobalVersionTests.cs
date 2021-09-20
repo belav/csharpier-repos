@@ -222,7 +222,8 @@ namespace Microsoft.AspNetCore.Server.IIS.FunctionalTests
         private string GetANCMRequestHandlerPath(
             IISDeploymentResult deploymentResult,
             string version
-        ) {
+        )
+        {
             return Path.Combine(
                 deploymentResult.ContentRoot,
                 deploymentResult.DeploymentParameters.RuntimeArchitecture.ToString(),

@@ -33,7 +33,8 @@ namespace Roslyn.Utilities
         private BidirectionalMap(
             ImmutableDictionary<TKey, TValue> forwardMap,
             ImmutableDictionary<TValue, TKey> backwardMap
-        ) {
+        )
+        {
             _forwardMap = forwardMap;
             _backwardMap = backwardMap;
         }

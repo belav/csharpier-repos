@@ -28,7 +28,8 @@ namespace Microsoft.Extensions.DependencyModel.Tests
                     stream,
                     withPreamble ? Encoding.UTF8 : s_utf8NoPreamble
                 )
-            ) {
+            )
+            {
                 writer.Write(text);
                 writer.Flush();
                 stream.Seek(0, SeekOrigin.Begin);
@@ -548,7 +549,8 @@ namespace Microsoft.Extensions.DependencyModel.Tests
 
         private void ReadsRuntimeLibrariesWithSubtargetsFromMainTargetForPortableCore(
             bool useAssemblyVersions
-        ) {
+        )
+        {
             string json =
                 @"{
     ""runtimeTarget"": {

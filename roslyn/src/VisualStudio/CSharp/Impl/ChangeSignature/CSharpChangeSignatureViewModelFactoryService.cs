@@ -34,7 +34,8 @@ namespace Microsoft.VisualStudio.LanguageServices.CSharp.ChangeSignature
 
         public override SymbolDisplayPart[] GeneratePreviewDisplayParts(
             AddedParameterViewModel addedParameterViewModel
-        ) {
+        )
+        {
             var parts = new List<SymbolDisplayPart>();
 
             // TO-DO: We need to add proper colorization for added parameters:

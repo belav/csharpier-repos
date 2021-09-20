@@ -70,7 +70,8 @@ public class ThreadSafe
                 ret.ClassVal != newValueA.ClassVal
                 && ret.ClassVal != newValueB.ClassVal
                 && ret.ClassVal != 1
-            ) {
+            )
+            {
                 Console.WriteLine(
                     ret.ClassVal + "," + newValueB.ClassVal + "," + newValueA.ClassVal
                 );
@@ -92,7 +93,8 @@ public class ThreadSafe
                 ret.ClassVal != newValueA.ClassVal
                 && ret.ClassVal != newValueB.ClassVal
                 && ret.ClassVal != 1
-            ) {
+            )
+            {
                 Console.WriteLine(
                     ret.ClassVal + "," + newValueB.ClassVal + "," + newValueA.ClassVal
                 );
@@ -112,7 +114,8 @@ public class ThreadSafe
                 tmpVal.ClassVal != newValueB.ClassVal
                 && tmpVal.ClassVal != newValueA.ClassVal
                 && tmpVal.ClassVal != 1
-            ) {
+            )
+            {
                 Console.WriteLine(
                     tmpVal.ClassVal + "," + newValueB.ClassVal + "," + newValueA.ClassVal
                 );

@@ -25,7 +25,8 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeGeneration
             IMethodSymbol destructor,
             CodeGenerationOptions options,
             IList<bool> availableIndices
-        ) {
+        )
+        {
             var destructorDeclaration = GenerateDestructorDeclaration(destructor, options);
 
             // Generate after the last constructor, or after the last field, or at the start of the
@@ -45,7 +46,8 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeGeneration
         internal static DestructorDeclarationSyntax GenerateDestructorDeclaration(
             IMethodSymbol destructor,
             CodeGenerationOptions options
-        ) {
+        )
+        {
             options ??= CodeGenerationOptions.Default;
 
             var reusableSyntax = GetReuseableSyntaxNodeForSymbol<DestructorDeclarationSyntax>(

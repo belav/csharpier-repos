@@ -54,7 +54,8 @@ namespace System.Net
             out string? hostName,
             out string[] aliases,
             out IPAddress[] addresses
-        ) {
+        )
+        {
             try
             {
                 hostName =
@@ -89,7 +90,8 @@ namespace System.Net
                         if (
                             Array.IndexOf(nativeAddresses, addressHandle[i], 0, nativeAddressCount)
                             == -1
-                        ) {
+                        )
+                        {
                             nativeAddresses[nativeAddressCount++] = addressHandle[i];
                         }
                     }
@@ -140,7 +142,8 @@ namespace System.Net
             out string[] aliases,
             out IPAddress[] addresses,
             out int nativeErrorCode
-        ) {
+        )
+        {
             if (name == "")
             {
                 // To match documented behavior on Windows, if an empty string is passed in, use the local host's name.
@@ -167,7 +170,8 @@ namespace System.Net
             IPAddress addr,
             out SocketError socketError,
             out int nativeErrorCode
-        ) {
+        )
+        {
             byte* buffer =
                 stackalloc byte[
                     Interop.Sys.NI_MAXHOST + 1 /*for null*/

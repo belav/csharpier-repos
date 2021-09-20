@@ -41,7 +41,8 @@ namespace Microsoft.AspNetCore.Identity
             ILogger<SignInManager<TUser>> logger,
             IAuthenticationSchemeProvider schemes,
             IUserConfirmation<TUser> confirmation
-        ) {
+        )
+        {
             if (userManager == null)
             {
                 throw new ArgumentNullException(nameof(userManager));
@@ -147,7 +148,8 @@ namespace Microsoft.AspNetCore.Identity
             if (
                 Options.SignIn.RequireConfirmedEmail
                 && !(await UserManager.IsEmailConfirmedAsync(user))
-            ) {
+            )
+            {
                 Logger.LogWarning(
                     EventIds.UserCannotSignInWithoutConfirmedEmail,
                     "User cannot sign in without a confirmed email."
@@ -157,7 +159,8 @@ namespace Microsoft.AspNetCore.Identity
             if (
                 Options.SignIn.RequireConfirmedPhoneNumber
                 && !(await UserManager.IsPhoneNumberConfirmedAsync(user))
-            ) {
+            )
+            {
                 Logger.LogWarning(
                     EventIds.UserCannotSignInWithoutConfirmedPhoneNumber,
                     "User cannot sign in without a confirmed phone number."
@@ -167,7 +170,8 @@ namespace Microsoft.AspNetCore.Identity
             if (
                 Options.SignIn.RequireConfirmedAccount
                 && !(await _confirmation.IsConfirmedAsync(UserManager, user))
-            ) {
+            )
+            {
                 Logger.LogWarning(
                     EventIds.UserCannotSignInWithoutConfirmedAccount,
                     "User cannot sign in without a confirmed account."
@@ -246,7 +250,8 @@ namespace Microsoft.AspNetCore.Identity
             TUser user,
             AuthenticationProperties authenticationProperties,
             string authenticationMethod = null
-        ) {
+        )
+        {
             IList<Claim> additionalClaims = Array.Empty<Claim>();
             if (authenticationMethod != null)
             {
@@ -287,7 +292,8 @@ namespace Microsoft.AspNetCore.Identity
             TUser user,
             AuthenticationProperties authenticationProperties,
             IEnumerable<Claim> additionalClaims
-        ) {
+        )
+        {
             var userPrincipal = await CreateUserPrincipalAsync(user);
             foreach (var claim in additionalClaims)
             {
@@ -329,7 +335,8 @@ namespace Microsoft.AspNetCore.Identity
                     user,
                     principal.FindFirstValue(Options.ClaimsIdentity.SecurityStampClaimType)
                 )
-            ) {
+            )
+            {
                 return user;
             }
             Logger.LogDebug(
@@ -349,7 +356,8 @@ namespace Microsoft.AspNetCore.Identity
         /// if the stamp matches the persisted value, otherwise it will return false.</returns>
         public virtual async Task<TUser> ValidateTwoFactorSecurityStampAsync(
             ClaimsPrincipal principal
-        ) {
+        )
+        {
             if (principal == null || principal.Identity?.Name == null)
             {
                 return null;
@@ -360,7 +368,8 @@ namespace Microsoft.AspNetCore.Identity
                     user,
                     principal.FindFirstValue(Options.ClaimsIdentity.SecurityStampClaimType)
                 )
-            ) {
+            )
+            {
                 return user;
             }
             Logger.LogDebug(
@@ -404,7 +413,8 @@ namespace Microsoft.AspNetCore.Identity
             string password,
             bool isPersistent,
             bool lockoutOnFailure
-        ) {
+        )
+        {
             if (user == null)
             {
                 throw new ArgumentNullException(nameof(user));
@@ -429,7 +439,8 @@ namespace Microsoft.AspNetCore.Identity
             string password,
             bool isPersistent,
             bool lockoutOnFailure
-        ) {
+        )
+        {
             var user = await UserManager.FindByNameAsync(userName);
             if (user == null)
             {
@@ -452,7 +463,8 @@ namespace Microsoft.AspNetCore.Identity
             TUser user,
             string password,
             bool lockoutOnFailure
-        ) {
+        )
+        {
             if (user == null)
             {
                 throw new ArgumentNullException(nameof(user));
@@ -476,7 +488,8 @@ namespace Microsoft.AspNetCore.Identity
                     alwaysLockout
                     || !await IsTfaEnabled(user)
                     || await IsTwoFactorClientRememberedAsync(user)
-                ) {
+                )
+                {
                     await ResetLockout(user);
                 }
 
@@ -552,7 +565,8 @@ namespace Microsoft.AspNetCore.Identity
         /// <returns></returns>
         public virtual async Task<SignInResult> TwoFactorRecoveryCodeSignInAsync(
             string recoveryCode
-        ) {
+        )
+        {
             var twoFactorInfo = await RetrieveTwoFactorInfoAsync();
             if (twoFactorInfo == null || twoFactorInfo.UserId == null)
             {
@@ -585,7 +599,8 @@ namespace Microsoft.AspNetCore.Identity
             TwoFactorAuthenticationInfo twoFactorInfo,
             bool isPersistent,
             bool rememberClient
-        ) {
+        )
+        {
             // When token is verified correctly, clear the access failed count used for lockout
             await ResetLockout(user);
 
@@ -620,7 +635,8 @@ namespace Microsoft.AspNetCore.Identity
             string code,
             bool isPersistent,
             bool rememberClient
-        ) {
+        )
+        {
             var twoFactorInfo = await RetrieveTwoFactorInfoAsync();
             if (twoFactorInfo == null || twoFactorInfo.UserId == null)
             {
@@ -644,7 +660,8 @@ namespace Microsoft.AspNetCore.Identity
                     Options.Tokens.AuthenticatorTokenProvider,
                     code
                 )
-            ) {
+            )
+            {
                 await DoTwoFactorSignInAsync(user, twoFactorInfo, isPersistent, rememberClient);
                 return SignInResult.Success;
             }
@@ -668,7 +685,8 @@ namespace Microsoft.AspNetCore.Identity
             string code,
             bool isPersistent,
             bool rememberClient
-        ) {
+        )
+        {
             var twoFactorInfo = await RetrieveTwoFactorInfoAsync();
             if (twoFactorInfo == null || twoFactorInfo.UserId == null)
             {
@@ -745,7 +763,8 @@ namespace Microsoft.AspNetCore.Identity
             string providerKey,
             bool isPersistent,
             bool bypassTwoFactor
-        ) {
+        )
+        {
             var user = await UserManager.FindByLoginAsync(loginProvider, providerKey);
             if (user == null)
             {
@@ -780,7 +799,8 @@ namespace Microsoft.AspNetCore.Identity
         /// for the sign-in attempt.</returns>
         public virtual async Task<ExternalLoginInfo> GetExternalLoginInfoAsync(
             string expectedXsrf = null
-        ) {
+        )
+        {
             var auth = await Context.AuthenticateAsync(IdentityConstants.ExternalScheme);
             var items = auth?.Properties?.Items;
             if (auth?.Principal == null || items == null || !items.ContainsKey(LoginProviderKey))
@@ -826,7 +846,8 @@ namespace Microsoft.AspNetCore.Identity
         /// <returns>The <see cref="Task"/> that represents the asynchronous operation, containing the <see cref="IdentityResult"/> of the operation.</returns>
         public virtual async Task<IdentityResult> UpdateExternalAuthenticationTokensAsync(
             ExternalLoginInfo externalLogin
-        ) {
+        )
+        {
             if (externalLogin == null)
             {
                 throw new ArgumentNullException(nameof(externalLogin));
@@ -835,7 +856,8 @@ namespace Microsoft.AspNetCore.Identity
             if (
                 externalLogin.AuthenticationTokens != null
                 && externalLogin.AuthenticationTokens.Any()
-            ) {
+            )
+            {
                 var user = await UserManager.FindByLoginAsync(
                     externalLogin.LoginProvider,
                     externalLogin.ProviderKey
@@ -874,7 +896,8 @@ namespace Microsoft.AspNetCore.Identity
             string provider,
             string redirectUrl,
             string userId = null
-        ) {
+        )
+        {
             var properties = new AuthenticationProperties { RedirectUri = redirectUrl };
             properties.Items[LoginProviderKey] = provider;
             if (userId != null)
@@ -937,7 +960,8 @@ namespace Microsoft.AspNetCore.Identity
             bool isPersistent,
             string loginProvider = null,
             bool bypassTwoFactor = false
-        ) {
+        )
+        {
             if (!bypassTwoFactor && await IsTfaEnabled(user))
             {
                 if (!await IsTwoFactorClientRememberedAsync(user))

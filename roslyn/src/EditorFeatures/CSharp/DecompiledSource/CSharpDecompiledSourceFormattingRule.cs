@@ -19,7 +19,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.DecompiledSource
             in SyntaxToken previousToken,
             in SyntaxToken currentToken,
             in NextGetAdjustNewLinesOperation nextOperation
-        ) {
+        )
+        {
             var operation = GetAdjustNewLinesOperation(previousToken, currentToken);
             return operation ?? nextOperation.Invoke(in previousToken, in currentToken);
         }
@@ -27,7 +28,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.DecompiledSource
         private static AdjustNewLinesOperation? GetAdjustNewLinesOperation(
             SyntaxToken previousToken,
             SyntaxToken currentToken
-        ) {
+        )
+        {
             // To help code not look too tightly packed, we place a blank line after every statement that ends with a
             // `}` (unless it's also followed by another `}`).
             if (previousToken.Kind() != SyntaxKind.CloseBraceToken)

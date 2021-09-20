@@ -16,7 +16,8 @@ namespace System.Runtime.CompilerServices
             ICastable castable,
             RuntimeType type,
             [NotNullWhen(true)] out Exception? castError
-        ) {
+        )
+        {
             return castable.IsInstanceOfInterface(new RuntimeTypeHandle(type), out castError);
         }
 

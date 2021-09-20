@@ -671,7 +671,8 @@ partial struct C
                 var module = ModuleMetadata.CreateFromImage(
                     TestResources.MetadataTests.Invalid.ClassLayout
                 )
-            ) {
+            )
+            {
                 var reader = module.Module.GetMetadataReader();
 
                 foreach (var typeHandle in reader.TypeDefinitions)

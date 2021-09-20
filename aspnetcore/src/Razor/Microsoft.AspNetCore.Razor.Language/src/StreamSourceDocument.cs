@@ -19,7 +19,8 @@ namespace Microsoft.AspNetCore.Razor.Language
             Stream stream,
             Encoding encoding,
             RazorSourceDocumentProperties properties
-        ) {
+        )
+        {
             if (stream == null)
             {
                 throw new ArgumentNullException(nameof(stream));
@@ -77,7 +78,8 @@ namespace Microsoft.AspNetCore.Razor.Language
             Stream stream,
             Encoding encoding,
             RazorSourceDocumentProperties properties
-        ) {
+        )
+        {
             var streamLength = (int)stream.Length;
             var content = string.Empty;
             var contentEncoding = encoding ?? Encoding.UTF8;

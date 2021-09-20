@@ -18,7 +18,8 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
     {
         public static IEnumerable<INamedTypeSymbol> GetBaseTypesAndThis(
             this INamedTypeSymbol? namedType
-        ) {
+        )
+        {
             var current = namedType;
             while (current != null)
             {
@@ -29,7 +30,8 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
 
         public static ImmutableArray<ITypeParameterSymbol> GetAllTypeParameters(
             this INamedTypeSymbol? symbol
-        ) {
+        )
+        {
             var stack = GetContainmentStack(symbol);
             return stack.SelectMany(n => n.TypeParameters).ToImmutableArray();
         }
@@ -54,7 +56,8 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
         public static bool IsContainedWithin(
             [NotNullWhen(returnValue: true)] this INamedTypeSymbol? symbol,
             INamedTypeSymbol outer
-        ) {
+        )
+        {
             // TODO(cyrusn): Should we be using OriginalSymbol here?
             for (var current = symbol; current != null; current = current.ContainingType)
             {
@@ -70,7 +73,8 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
         public static ISymbol? FindImplementationForAbstractMember(
             this INamedTypeSymbol? type,
             ISymbol symbol
-        ) {
+        )
+        {
             if (symbol.IsAbstract)
             {
                 return type.GetBaseTypesAndThis()
@@ -91,7 +95,8 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
             ISymbol member,
             Func<INamedTypeSymbol, ISymbol, bool> isValidImplementation,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             if (member.ContainingType.TypeKind == TypeKind.Interface)
             {
                 if (member.Kind == SymbolKind.Property)
@@ -128,7 +133,8 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
         private static bool IsInterfacePropertyImplemented(
             INamedTypeSymbol classOrStructType,
             IPropertySymbol propertySymbol
-        ) {
+        )
+        {
             // A property is only fully implemented if both it's setter and getter is implemented.
 
             return IsAccessorImplemented(propertySymbol.GetMethod, classOrStructType)
@@ -139,7 +145,8 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
             static bool IsAccessorImplemented(
                 IMethodSymbol? accessor,
                 INamedTypeSymbol classOrStructType
-            ) {
+            )
+            {
                 return accessor == null
                     || !IsImplementable(accessor)
                     || classOrStructType.FindImplementationForInterfaceMember(accessor) != null;
@@ -149,14 +156,16 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
         private static bool IsAbstractPropertyImplemented(
             INamedTypeSymbol classOrStructType,
             IPropertySymbol propertySymbol
-        ) {
+        )
+        {
             // A property is only fully implemented if both it's setter and getter is implemented.
             if (propertySymbol.GetMethod != null)
             {
                 if (
                     classOrStructType.FindImplementationForAbstractMember(propertySymbol.GetMethod)
                     == null
-                ) {
+                )
+                {
                     return false;
                 }
             }
@@ -166,7 +175,8 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
                 if (
                     classOrStructType.FindImplementationForAbstractMember(propertySymbol.SetMethod)
                     == null
-                ) {
+                )
+                {
                     return false;
                 }
             }
@@ -179,7 +189,8 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
             ISymbol member,
             Func<INamedTypeSymbol, ISymbol, bool> isValid,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var implementation = classOrStructType.FindImplementationForInterfaceMember(member);
 
             if (implementation?.ContainingType.TypeKind == TypeKind.Interface)
@@ -205,7 +216,8 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
             IEnumerable<INamedTypeSymbol> interfaces,
             bool includeMembersRequiringExplicitImplementation,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             Func<INamedTypeSymbol, ISymbol, ImmutableArray<ISymbol>> GetMembers;
             if (includeMembersRequiringExplicitImplementation)
             {
@@ -230,7 +242,8 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
             static ImmutableArray<ISymbol> GetImplicitlyImplementableMembers(
                 INamedTypeSymbol type,
                 ISymbol within
-            ) {
+            )
+            {
                 if (type.TypeKind == TypeKind.Interface)
                 {
                     return type.GetMembers()
@@ -273,7 +286,8 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
             this INamedTypeSymbol classOrStructType,
             IEnumerable<INamedTypeSymbol> interfacesOrAbstractClasses,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             return classOrStructType.GetAllUnimplementedMembers(
                 interfacesOrAbstractClasses,
                 IsImplemented,
@@ -294,7 +308,8 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
             IEnumerable<INamedTypeSymbol> interfacesOrAbstractClasses,
             Func<INamedTypeSymbol, ISymbol, ImmutableArray<ISymbol>> interfaceMemberGetter,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             return classOrStructType.GetAllUnimplementedMembers(
                 interfacesOrAbstractClasses,
                 IsImplemented,
@@ -314,7 +329,8 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
             this INamedTypeSymbol classOrStructType,
             IEnumerable<INamedTypeSymbol> interfaces,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             return classOrStructType.GetAllUnimplementedMembers(
                 interfaces,
                 IsExplicitlyImplemented,
@@ -328,7 +344,8 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
         private static ImmutableArray<ISymbol> GetExplicitlyImplementableMembers(
             INamedTypeSymbol type,
             ISymbol within
-        ) {
+        )
+        {
             if (type.TypeKind == TypeKind.Interface)
             {
                 return type.GetMembers()
@@ -347,7 +364,8 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
         private static bool IsPropertyWithInaccessibleImplementableAccessor(
             ISymbol member,
             ISymbol within
-        ) {
+        )
+        {
             if (member.Kind != SymbolKind.Property)
             {
                 return false;
@@ -378,7 +396,8 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
             Func<INamedTypeSymbol, ISymbol, ImmutableArray<ISymbol>> interfaceMemberGetter,
             bool allowReimplementation,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             Contract.ThrowIfNull(classOrStructType);
             Contract.ThrowIfNull(interfacesOrAbstractClasses);
             Contract.ThrowIfNull(isImplemented);
@@ -386,7 +405,8 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
             if (
                 classOrStructType.TypeKind != TypeKind.Class
                 && classOrStructType.TypeKind != TypeKind.Struct
-            ) {
+            )
+            {
                 return ImmutableArray<(INamedTypeSymbol type, ImmutableArray<ISymbol> members)>.Empty;
             }
 
@@ -398,7 +418,8 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
             if (
                 !interfacesOrAbstractClasses.All(i => i.TypeKind == TypeKind.Interface)
                 && !interfacesOrAbstractClasses.All(i => i.IsAbstractClass())
-            ) {
+            )
+            {
                 return ImmutableArray<(INamedTypeSymbol type, ImmutableArray<ISymbol> members)>.Empty;
             }
 
@@ -430,7 +451,8 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
             IEnumerable<INamedTypeSymbol> interfacesOrAbstractClasses,
             bool allowReimplementation,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             return interfacesOrAbstractClasses.First().TypeKind == TypeKind.Interface
               ? GetInterfacesToImplement(
                     classOrStructType,
@@ -443,7 +465,8 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
 
         private static ImmutableArray<INamedTypeSymbol> GetAbstractClassesToImplement(
             IEnumerable<INamedTypeSymbol> abstractClasses
-        ) {
+        )
+        {
             return abstractClasses.SelectMany(a => a.GetBaseTypesAndThis())
                 .Where(t => t.IsAbstractClass())
                 .ToImmutableArray();
@@ -454,7 +477,8 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
             IEnumerable<INamedTypeSymbol> interfaces,
             bool allowReimplementation,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             // We need to not only implement the specified interface, but also everything it
             // inherits from.
             cancellationToken.ThrowIfCancellationRequested();
@@ -488,7 +512,8 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
             Func<INamedTypeSymbol, ISymbol, bool> isValidImplementation,
             Func<INamedTypeSymbol, ISymbol, ImmutableArray<ISymbol>> interfaceMemberGetter,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var q =
                 from m in interfaceMemberGetter(interfaceType, classOrStructType)
                 where m.Kind != SymbolKind.NamedType
@@ -510,7 +535,8 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
             this INamedTypeSymbol attributeSymbol,
             Compilation compilation,
             ISymbol within
-        ) {
+        )
+        {
             using var _ = PooledHashSet<string>.GetInstance(out var seenNames);
 
             var systemAttributeType = compilation.AttributeType();
@@ -563,7 +589,8 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
                         && propertySymbol.SetMethod != null
                         && propertySymbol.GetMethod.IsAccessibleWithin(within)
                         && propertySymbol.SetMethod.IsAccessibleWithin(within)
-                    ) {
+                    )
+                    {
                         return propertySymbol;
                     }
                     break;
@@ -588,7 +615,8 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
         public static ImmutableArray<ISymbol> GetOverridableMembers(
             this INamedTypeSymbol containingType,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             // Keep track of the symbols we've seen and what order we saw them in.  The
             // order allows us to produce the symbols in the end from the furthest base-type
             // to the closest base-type
@@ -600,11 +628,13 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
                 && !containingType.IsScriptClass
                 && !containingType.IsImplicitClass
                 && !containingType.IsStatic
-            ) {
+            )
+            {
                 if (
                     containingType.TypeKind == TypeKind.Class
                     || containingType.TypeKind == TypeKind.Struct
-                ) {
+                )
+                {
                     var baseTypes = containingType.GetBaseTypes().Reverse();
                     foreach (var type in baseTypes)
                     {
@@ -637,7 +667,8 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
             INamedTypeSymbol type,
             ref int index,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             foreach (var member in type.GetMembers())
             {
                 cancellationToken.ThrowIfCancellationRequested();
@@ -674,7 +705,8 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
             Dictionary<ISymbol, int> result,
             INamedTypeSymbol containingType,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             foreach (var member in containingType.GetMembers())
             {
                 cancellationToken.ThrowIfCancellationRequested();

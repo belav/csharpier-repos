@@ -15,7 +15,8 @@ public struct AA
                     (new int[126u, 109u, 120u, 12u])[48, 49, 33, 16],
                     Math.Min(68, 43)
                 ]
-        ) {
+        )
+        {
             for (
                 new byte[] {  }[64] /= (new byte[44u, 81u, 16u, 52u, 20u])[
                     (new int[58u, 45u])[125, 36],

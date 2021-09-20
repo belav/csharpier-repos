@@ -43,11 +43,8 @@ namespace System.IO.Compression
             : this(stream, compressionLevel, leaveOpen: false) { }
 
         // Implies mode = Compress
-        public DeflateStream(
-            Stream stream,
-            CompressionLevel compressionLevel,
-            bool leaveOpen
-        ) : this(stream, compressionLevel, leaveOpen, ZLibNative.Deflate_DefaultWindowBits) { }
+        public DeflateStream(Stream stream, CompressionLevel compressionLevel, bool leaveOpen)
+            : this(stream, compressionLevel, leaveOpen, ZLibNative.Deflate_DefaultWindowBits) { }
 
         /// <summary>
         /// Internal constructor to check stream validity and call the correct initialization function depending on
@@ -59,7 +56,8 @@ namespace System.IO.Compression
             bool leaveOpen,
             int windowBits,
             long uncompressedSize = -1
-        ) {
+        )
+        {
             if (stream == null)
                 throw new ArgumentNullException(nameof(stream));
 
@@ -95,7 +93,8 @@ namespace System.IO.Compression
             CompressionLevel compressionLevel,
             bool leaveOpen,
             int windowBits
-        ) {
+        )
+        {
             if (stream == null)
                 throw new ArgumentNullException(nameof(stream));
 
@@ -111,7 +110,8 @@ namespace System.IO.Compression
             bool leaveOpen,
             int windowBits,
             CompressionLevel compressionLevel
-        ) {
+        )
+        {
             Debug.Assert(stream != null);
             if (!stream.CanWrite)
                 throw new ArgumentException(SR.NotSupported_UnwritableStream, nameof(stream));
@@ -387,7 +387,8 @@ namespace System.IO.Compression
             int offset,
             int count,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             ValidateBufferArguments(buffer, offset, count);
             return ReadAsyncMemory(new Memory<byte>(buffer, offset, count), cancellationToken)
                 .AsTask();
@@ -396,7 +397,8 @@ namespace System.IO.Compression
         public override ValueTask<int> ReadAsync(
             Memory<byte> buffer,
             CancellationToken cancellationToken = default(CancellationToken)
-        ) {
+        )
+        {
             if (GetType() != typeof(DeflateStream))
             {
                 // Ensure that existing streams derived from DeflateStream and that override ReadAsync(byte[],...)
@@ -412,7 +414,8 @@ namespace System.IO.Compression
         internal ValueTask<int> ReadAsyncMemory(
             Memory<byte> buffer,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             EnsureDecompressionMode();
             EnsureNoActiveAsyncOperation();
             EnsureNotDisposed();
@@ -450,7 +453,8 @@ namespace System.IO.Compression
                         if (
                             _inflater.Finished()
                             && (!_inflater.IsGzipStream() || !_inflater.NeedsInput())
-                        ) {
+                        )
+                        {
                             break;
                         }
 
@@ -794,7 +798,8 @@ namespace System.IO.Compression
             int offset,
             int count,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             ValidateBufferArguments(buffer, offset, count);
             return WriteAsyncMemory(
                     new ReadOnlyMemory<byte>(buffer, offset, count),
@@ -806,7 +811,8 @@ namespace System.IO.Compression
         public override ValueTask WriteAsync(
             ReadOnlyMemory<byte> buffer,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             if (GetType() != typeof(DeflateStream))
             {
                 // Ensure that existing streams derived from DeflateStream and that override WriteAsync(byte[],...)
@@ -822,7 +828,8 @@ namespace System.IO.Compression
         internal ValueTask WriteAsyncMemory(
             ReadOnlyMemory<byte> buffer,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             EnsureCompressionMode();
             EnsureNoActiveAsyncOperation();
             EnsureNotDisposed();
@@ -889,7 +896,8 @@ namespace System.IO.Compression
             Stream destination,
             int bufferSize,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             ValidateCopyToArguments(destination, bufferSize);
 
             EnsureNotDisposed();
@@ -919,18 +927,16 @@ namespace System.IO.Compression
             private readonly CancellationToken _cancellationToken;
             private byte[] _arrayPoolBuffer;
 
-            public CopyToStream(
-                DeflateStream deflateStream,
-                Stream destination,
-                int bufferSize
-            ) : this(deflateStream, destination, bufferSize, CancellationToken.None) { }
+            public CopyToStream(DeflateStream deflateStream, Stream destination, int bufferSize)
+                : this(deflateStream, destination, bufferSize, CancellationToken.None) { }
 
             public CopyToStream(
                 DeflateStream deflateStream,
                 Stream destination,
                 int bufferSize,
                 CancellationToken cancellationToken
-            ) {
+            )
+            {
                 Debug.Assert(deflateStream != null);
                 Debug.Assert(destination != null);
                 Debug.Assert(bufferSize > 0);
@@ -1028,7 +1034,8 @@ namespace System.IO.Compression
                 int offset,
                 int count,
                 CancellationToken cancellationToken
-            ) {
+            )
+            {
                 // Validate inputs
                 Debug.Assert(buffer != _arrayPoolBuffer);
                 _deflateStream.EnsureNotDisposed();
@@ -1049,7 +1056,8 @@ namespace System.IO.Compression
             public override ValueTask WriteAsync(
                 ReadOnlyMemory<byte> buffer,
                 CancellationToken cancellationToken = default
-            ) {
+            )
+            {
                 _deflateStream.EnsureNotDisposed();
 
                 return WriteAsyncCore(buffer, cancellationToken);
@@ -1058,7 +1066,8 @@ namespace System.IO.Compression
             private async ValueTask WriteAsyncCore(
                 ReadOnlyMemory<byte> buffer,
                 CancellationToken cancellationToken
-            ) {
+            )
+            {
                 Debug.Assert(_deflateStream._inflater is not null);
 
                 // Feed the data from base stream into decompression engine.

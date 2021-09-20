@@ -354,7 +354,8 @@ namespace Microsoft.AspNetCore.Mvc.Infrastructure
         public async Task ExecuteAsync_MatchAllContentType_Throws(
             string[] contentTypes,
             string invalidContentType
-        ) {
+        )
+        {
             // Arrange
             var result = new ObjectResult("input");
 
@@ -403,7 +404,8 @@ namespace Microsoft.AspNetCore.Mvc.Infrastructure
         public async Task ExecuteAsync_SelectDefaultFormatter_OnAllMediaRangeAcceptHeaderMediaType(
             string acceptHeader,
             string expectedContentType
-        ) {
+        )
+        {
             // Arrange
             var options = new MvcOptions();
             options.RespectBrowserAcceptHeader = false;
@@ -446,7 +448,8 @@ namespace Microsoft.AspNetCore.Mvc.Infrastructure
         public async Task ObjectResult_PerformsContentNegotiation_OnAllMediaRangeAcceptHeaderMediaType(
             string acceptHeader,
             string expectedContentType
-        ) {
+        )
+        {
             // Arrange
             var options = new MvcOptions();
             options.RespectBrowserAcceptHeader = true;
@@ -574,7 +577,8 @@ namespace Microsoft.AspNetCore.Mvc.Infrastructure
         private static async IAsyncEnumerable<string> AsyncEnumerable(
             int count = 4,
             bool throwError = false
-        ) {
+        )
+        {
             await Task.Yield();
             for (var i = 0; i < count; i++)
             {
@@ -651,7 +655,8 @@ namespace Microsoft.AspNetCore.Mvc.Infrastructure
             public override Task WriteResponseBodyAsync(
                 OutputFormatterWriteContext context,
                 Encoding selectedEncoding
-            ) {
+            )
+            {
                 LastOutputFormatterContext = context;
                 return Task.FromResult(0);
             }
@@ -671,7 +676,8 @@ namespace Microsoft.AspNetCore.Mvc.Infrastructure
             public override Task WriteResponseBodyAsync(
                 OutputFormatterWriteContext context,
                 Encoding selectedEncoding
-            ) {
+            )
+            {
                 return Task.FromResult(0);
             }
         }
@@ -688,7 +694,8 @@ namespace Microsoft.AspNetCore.Mvc.Infrastructure
             public override Task WriteResponseBodyAsync(
                 OutputFormatterWriteContext context,
                 Encoding selectedEncoding
-            ) {
+            )
+            {
                 return Task.FromResult(0);
             }
         }

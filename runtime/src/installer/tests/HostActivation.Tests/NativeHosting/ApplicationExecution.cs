@@ -92,7 +92,8 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation.NativeHosting
             this CommandResultAssertions assertion,
             string hostPath,
             string appPath
-        ) {
+        )
+        {
             return assertion.HaveStdErrContaining($"Launch host: {hostPath}, app: {appPath}")
                 .And.HaveStdOutContaining("Hello World!");
         }
@@ -101,7 +102,8 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation.NativeHosting
             this CommandResultAssertions assertion,
             string hostPath,
             string appPath
-        ) {
+        )
+        {
             var constraint = assertion.ExecuteApplication(hostPath, appPath);
             if (RuntimeInformation.IsOSPlatform(OSPlatform.Windows))
             {

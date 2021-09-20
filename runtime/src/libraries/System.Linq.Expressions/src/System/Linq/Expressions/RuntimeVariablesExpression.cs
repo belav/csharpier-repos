@@ -78,7 +78,8 @@ namespace System.Linq.Expressions
         /// <returns>An instance of <see cref="RuntimeVariablesExpression"/> that has the <see cref="NodeType"/> property equal to <see cref="ExpressionType.RuntimeVariables"/> and the <see cref="RuntimeVariablesExpression.Variables"/> property set to the specified value.</returns>
         public static RuntimeVariablesExpression RuntimeVariables(
             params ParameterExpression[] variables
-        ) {
+        )
+        {
             return RuntimeVariables((IEnumerable<ParameterExpression>)variables);
         }
 
@@ -89,7 +90,8 @@ namespace System.Linq.Expressions
         /// <returns>An instance of <see cref="RuntimeVariablesExpression"/> that has the <see cref="NodeType"/> property equal to <see cref="ExpressionType.RuntimeVariables"/> and the <see cref="RuntimeVariablesExpression.Variables"/> property set to the specified value.</returns>
         public static RuntimeVariablesExpression RuntimeVariables(
             IEnumerable<ParameterExpression> variables
-        ) {
+        )
+        {
             ContractUtils.RequiresNotNull(variables, nameof(variables));
 
             ReadOnlyCollection<ParameterExpression> vars = variables.ToReadOnly();

@@ -29,7 +29,8 @@ namespace Microsoft.AspNetCore.Razor.Language
 
         protected RazorProjectEngine CreateProjectEngine(
             Action<RazorProjectEngineBuilder> configure
-        ) {
+        )
+        {
             var configuration = RazorConfiguration.Create(
                 Version,
                 "test",

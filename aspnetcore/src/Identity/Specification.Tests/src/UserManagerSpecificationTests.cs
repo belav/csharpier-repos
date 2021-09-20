@@ -89,7 +89,8 @@ namespace Microsoft.AspNetCore.Identity.Test
             object context = null,
             IServiceCollection services = null,
             Action<IServiceCollection> configureServices = null
-        ) {
+        )
+        {
             if (services == null)
             {
                 services = new ServiceCollection();
@@ -170,7 +171,8 @@ namespace Microsoft.AspNetCore.Identity.Test
                 UserManager<TUser> manager,
                 TUser user,
                 string password
-            ) {
+            )
+            {
                 return Task.FromResult(IdentityResult.Failed(ErrorMessage));
             }
 
@@ -186,7 +188,8 @@ namespace Microsoft.AspNetCore.Identity.Test
                 UserManager<TUser> manager,
                 TUser user,
                 string password
-            ) {
+            )
+            {
                 return Task.FromResult(IdentityResult.Failed());
             }
 
@@ -1081,7 +1084,8 @@ namespace Microsoft.AspNetCore.Identity.Test
                 string purpose,
                 UserManager<TUser> manager,
                 TUser user
-            ) {
+            )
+            {
                 return MakeToken(purpose, await manager.GetUserIdAsync(user));
             }
 
@@ -1090,7 +1094,8 @@ namespace Microsoft.AspNetCore.Identity.Test
                 string token,
                 UserManager<TUser> manager,
                 TUser user
-            ) {
+            )
+            {
                 return token == MakeToken(purpose, await manager.GetUserIdAsync(user));
             }
 

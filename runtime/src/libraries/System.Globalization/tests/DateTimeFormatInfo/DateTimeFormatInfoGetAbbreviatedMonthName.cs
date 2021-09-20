@@ -73,7 +73,8 @@ namespace System.Globalization.Tests
         public void GetAbbreviatedMonthName_Invoke_ReturnsExpected(
             DateTimeFormatInfo info,
             string[] expected
-        ) {
+        )
+        {
             for (int i = MinMonth; i <= MaxMonth; ++i)
             {
                 Assert.Equal(expected[i], info.GetAbbreviatedMonthName(i));
@@ -85,7 +86,8 @@ namespace System.Globalization.Tests
         [InlineData(MaxMonth + 1)]
         public void GetAbbreviatedMonthName_InvalidMonth_ThrowsArgumentOutOfRangeException(
             int month
-        ) {
+        )
+        {
             var format = new DateTimeFormatInfo();
             AssertExtensions.Throws<ArgumentOutOfRangeException>(
                 "month",

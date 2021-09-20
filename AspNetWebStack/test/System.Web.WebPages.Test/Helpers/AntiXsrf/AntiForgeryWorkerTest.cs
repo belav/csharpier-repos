@@ -261,7 +261,8 @@ namespace System.Web.Helpers.AntiXsrf.Test
         public void GetFormInputElement_AddsXFrameOptionsHeader(
             bool suppressXFrameOptions,
             string expectedHeaderValue
-        ) {
+        )
+        {
             // Arrange
             GenericIdentity identity = new GenericIdentity("some-user");
             Mock<HttpContextBase> mockHttpContext = new Mock<HttpContextBase>();

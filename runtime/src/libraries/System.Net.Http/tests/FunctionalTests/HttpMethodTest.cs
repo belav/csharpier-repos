@@ -123,7 +123,8 @@ namespace System.Net.Http.Functional.Tests
         [InlineData("cUsToM")]
         public void GetHashCode_CustomStringMethod_SameAsStringToUpperInvariantHashCode(
             string input
-        ) {
+        )
+        {
             HttpMethod method = new HttpMethod(input);
             Assert.Equal(input.ToUpperInvariant().GetHashCode(), method.GetHashCode());
         }
@@ -132,7 +133,8 @@ namespace System.Net.Http.Functional.Tests
         [MemberData(nameof(StaticHttpMethods))]
         public void GetHashCode_StaticMethods_SameAsStringToUpperInvariantHashCode(
             HttpMethod method
-        ) {
+        )
+        {
             Assert.Equal(method.ToString().ToUpperInvariant().GetHashCode(), method.GetHashCode());
         }
 

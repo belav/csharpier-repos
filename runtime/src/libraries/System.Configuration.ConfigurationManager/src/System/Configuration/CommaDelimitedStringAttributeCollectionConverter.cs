@@ -13,7 +13,8 @@ namespace System.Configuration
             CultureInfo ci,
             object value,
             Type type
-        ) {
+        )
+        {
             ValidateType(value, typeof(CommaDelimitedStringCollection));
             CommaDelimitedStringCollection internalValue = value as CommaDelimitedStringCollection;
             return internalValue?.ToString();

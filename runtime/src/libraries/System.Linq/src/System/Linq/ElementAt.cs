@@ -75,7 +75,8 @@ namespace System.Linq
         public static TSource? ElementAtOrDefault<TSource>(
             this IEnumerable<TSource> source,
             int index
-        ) {
+        )
+        {
             if (source == null)
             {
                 ThrowHelper.ThrowArgumentNullException(ExceptionArgument.source);
@@ -108,7 +109,8 @@ namespace System.Linq
         public static TSource? ElementAtOrDefault<TSource>(
             this IEnumerable<TSource> source,
             Index index
-        ) {
+        )
+        {
             if (source == null)
             {
                 ThrowHelper.ThrowArgumentNullException(ExceptionArgument.source);
@@ -132,7 +134,8 @@ namespace System.Linq
             IEnumerable<TSource> source,
             int index,
             [MaybeNullWhen(false)] out TSource element
-        ) {
+        )
+        {
             Debug.Assert(source != null);
 
             if (index >= 0)
@@ -158,7 +161,8 @@ namespace System.Linq
             IEnumerable<TSource> source,
             int indexFromEnd,
             [MaybeNullWhen(false)] out TSource element
-        ) {
+        )
+        {
             Debug.Assert(source != null);
 
             if (indexFromEnd > 0)

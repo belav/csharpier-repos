@@ -72,7 +72,8 @@ namespace Microsoft.CodeAnalysis.Scripting
             StrongBox<Exception> exceptionHolderOpt,
             Func<Exception, bool> catchExceptionOpt,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             Debug.Assert(_frozen == 0);
             Debug.Assert((exceptionHolderOpt != null) == (catchExceptionOpt != null));
 

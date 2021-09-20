@@ -41,7 +41,8 @@ namespace Microsoft.CodeAnalysis.UnitTests
             Action<ObjectWriter> writeAction,
             Action<ObjectReader> readAction,
             bool recursive
-        ) {
+        )
+        {
             using var stream = new MemoryStream();
 
             using (var writer = new ObjectWriter(stream, leaveOpen: true))
@@ -57,7 +58,8 @@ namespace Microsoft.CodeAnalysis.UnitTests
         private void TestRoundTrip(
             Action<ObjectWriter> writeAction,
             Action<ObjectReader> readAction
-        ) {
+        )
+        {
             RoundTrip(writeAction, readAction, recursive: true);
             RoundTrip(writeAction, readAction, recursive: false);
         }
@@ -67,7 +69,8 @@ namespace Microsoft.CodeAnalysis.UnitTests
             Action<ObjectWriter, T> writeAction,
             Func<ObjectReader, T> readAction,
             bool recursive
-        ) {
+        )
+        {
             using var stream = new MemoryStream();
 
             using (var writer = new ObjectWriter(stream, leaveOpen: true))
@@ -85,7 +88,8 @@ namespace Microsoft.CodeAnalysis.UnitTests
             Action<ObjectWriter, T> writeAction,
             Func<ObjectReader, T> readAction,
             bool recursive
-        ) {
+        )
+        {
             var newValue = RoundTrip(value, writeAction, readAction, recursive);
             Assert.True(Equalish(value, newValue));
         }
@@ -94,7 +98,8 @@ namespace Microsoft.CodeAnalysis.UnitTests
             T value,
             Action<ObjectWriter, T> writeAction,
             Func<ObjectReader, T> readAction
-        ) {
+        )
+        {
             TestRoundTrip(value, writeAction, readAction, recursive: true);
             TestRoundTrip(value, writeAction, readAction, recursive: false);
         }

@@ -211,7 +211,8 @@ namespace System.Globalization.Tests
                 int index,
                 int count,
                 Type exceptionType
-            ) {
+            )
+            {
                 if (ascii == null || index + count == ascii.Length)
                 {
                     if (ascii == null || index == 0)

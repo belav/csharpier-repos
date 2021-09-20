@@ -14,7 +14,8 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
         public static IEnumerable<DocumentId> GetChangedDocuments(
             this Solution? newSolution,
             Solution oldSolution
-        ) {
+        )
+        {
             if (newSolution != null)
             {
                 var solutionChanges = newSolution.GetChanges(oldSolution);
@@ -87,7 +88,8 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
         public static TextDocument GetRequiredAdditionalDocument(
             this Solution solution,
             DocumentId documentId
-        ) {
+        )
+        {
             var document = solution.GetAdditionalDocument(documentId);
             if (document == null)
             {
@@ -102,7 +104,8 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
         public static TextDocument GetRequiredAnalyzerConfigDocument(
             this Solution solution,
             DocumentId documentId
-        ) {
+        )
+        {
             var document = solution.GetAnalyzerConfigDocument(documentId);
             if (document == null)
             {
@@ -117,7 +120,8 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
         public static TextDocument GetRequiredTextDocument(
             this Solution solution,
             DocumentId documentId
-        ) {
+        )
+        {
             var document = solution.GetTextDocument(documentId);
             if (document == null)
             {

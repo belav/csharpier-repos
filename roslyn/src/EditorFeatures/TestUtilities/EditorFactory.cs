@@ -27,7 +27,8 @@ namespace Roslyn.Test.EditorUtilities
             ExportProvider exportProvider,
             IContentType contentType,
             params string[] lines
-        ) {
+        )
+        {
             var text = LinesToFullText(lines);
 
             // The overload of CreateTextBuffer that takes just a string doesn't initialize the whitespace tracking logic in the editor,
@@ -40,7 +41,8 @@ namespace Roslyn.Test.EditorUtilities
         public static DisposableTextView CreateView(
             ExportProvider exportProvider,
             params string[] lines
-        ) {
+        )
+        {
             var contentType =
                 exportProvider.GetExportedValue<ITextBufferFactoryService>().TextContentType;
             return CreateView(exportProvider, contentType, lines);
@@ -50,7 +52,8 @@ namespace Roslyn.Test.EditorUtilities
             ExportProvider exportProvider,
             IContentType contentType,
             params string[] lines
-        ) {
+        )
+        {
             WpfTestRunner.RequireWpfFact(
                 $"Creates an {nameof(IWpfTextView)} through {nameof(EditorFactory)}.{nameof(CreateView)}"
             );
@@ -64,7 +67,8 @@ namespace Roslyn.Test.EditorUtilities
             ExportProvider exportProvider,
             IContentType contentType,
             ImmutableArray<string> roles
-        ) {
+        )
+        {
             WpfTestRunner.RequireWpfFact(
                 $"Creates an {nameof(IWpfTextView)} through {nameof(EditorFactory)}.{nameof(CreateView)}"
             );

@@ -85,7 +85,8 @@ namespace Microsoft.CodeAnalysis.CodeGen
             Cci.ITypeReference systemInt32Type,
             Cci.ITypeReference systemInt64Type,
             Cci.ICustomAttribute compilerGeneratedAttribute
-        ) {
+        )
+        {
             RoslynDebug.Assert(systemObject != null);
             RoslynDebug.Assert(systemValueType != null);
 
@@ -108,7 +109,8 @@ namespace Microsoft.CodeAnalysis.CodeGen
             string moduleName,
             int submissionSlotIndex,
             bool isNetModule
-        ) {
+        )
+        {
             // we include the module name in the name of the PrivateImplementationDetails class so that more than
             // one of them can be included in an assembly as part of netmodules.
             var name = isNetModule
@@ -209,7 +211,8 @@ namespace Microsoft.CodeAnalysis.CodeGen
         internal Cci.IFieldReference GetOrAddInstrumentationPayloadRoot(
             int analysisKind,
             Cci.ITypeReference payloadRootType
-        ) {
+        )
+        {
             InstrumentationPayloadRootField? payloadRootField;
             if (!_instrumentationPayloadRootFields.TryGetValue(analysisKind, out payloadRootField))
             {
@@ -351,7 +354,8 @@ namespace Microsoft.CodeAnalysis.CodeGen
             uint size,
             PrivateImplementationDetails containingType,
             Cci.ITypeReference sysValueType
-        ) {
+        )
+        {
             _size = size;
             _containingType = containingType;
             _sysValueType = sysValueType;
@@ -398,7 +402,8 @@ namespace Microsoft.CodeAnalysis.CodeGen
             string name,
             Cci.INamedTypeDefinition containingType,
             Cci.ITypeReference type
-        ) {
+        )
+        {
             RoslynDebug.Assert(name != null);
             RoslynDebug.Assert(containingType != null);
             RoslynDebug.Assert(type != null);

@@ -310,7 +310,8 @@ namespace System.Management
         public bool CompareTo(
             System.Management.ManagementBaseObject otherObject,
             System.Management.ComparisonSettings settings
-        ) {
+        )
+        {
             throw null;
         }
         public new void Dispose() { }
@@ -344,7 +345,8 @@ namespace System.Management
         }
         public static explicit operator System.IntPtr(
             System.Management.ManagementBaseObject managementObject
-        ) {
+        )
+        {
             throw null;
         }
         public void SetPropertyQualifierValue(
@@ -414,7 +416,8 @@ namespace System.Management
         }
         public System.Management.ManagementObjectCollection GetInstances(
             System.Management.EnumerationOptions options
-        ) {
+        )
+        {
             throw null;
         }
         public void GetInstances(System.Management.ManagementOperationObserver watcher) { }
@@ -457,7 +460,8 @@ namespace System.Management
             string relatedRole,
             string thisRole,
             System.Management.EnumerationOptions options
-        ) {
+        )
+        {
             throw null;
         }
         public System.Management.ManagementObjectCollection GetRelationshipClasses()
@@ -480,7 +484,8 @@ namespace System.Management
         ) { }
         public System.Management.ManagementObjectCollection GetRelationshipClasses(
             string relationshipClass
-        ) {
+        )
+        {
             throw null;
         }
         public System.Management.ManagementObjectCollection GetRelationshipClasses(
@@ -488,20 +493,23 @@ namespace System.Management
             string relationshipQualifier,
             string thisRole,
             System.Management.EnumerationOptions options
-        ) {
+        )
+        {
             throw null;
         }
         public System.CodeDom.CodeTypeDeclaration GetStronglyTypedClassCode(
             bool includeSystemClassInClassDef,
             bool systemPropertyClass
-        ) {
+        )
+        {
             throw null;
         }
         public bool GetStronglyTypedClassCode(
             System.Management.CodeLanguage lang,
             string filePath,
             string classNamespace
-        ) {
+        )
+        {
             throw null;
         }
         public System.Management.ManagementObjectCollection GetSubclasses()
@@ -510,7 +518,8 @@ namespace System.Management
         }
         public System.Management.ManagementObjectCollection GetSubclasses(
             System.Management.EnumerationOptions options
-        ) {
+        )
+        {
             throw null;
         }
         public void GetSubclasses(System.Management.ManagementOperationObserver watcher) { }
@@ -660,25 +669,28 @@ namespace System.Management
         public ManagementObject(
             System.Management.ManagementPath path,
             System.Management.ObjectGetOptions options
-        ) : base(
-            default(System.Runtime.Serialization.SerializationInfo),
-            default(System.Runtime.Serialization.StreamingContext)
-        ) { }
+        )
+            : base(
+                default(System.Runtime.Serialization.SerializationInfo),
+                default(System.Runtime.Serialization.StreamingContext)
+            ) { }
         public ManagementObject(
             System.Management.ManagementScope scope,
             System.Management.ManagementPath path,
             System.Management.ObjectGetOptions options
-        ) : base(
-            default(System.Runtime.Serialization.SerializationInfo),
-            default(System.Runtime.Serialization.StreamingContext)
-        ) { }
+        )
+            : base(
+                default(System.Runtime.Serialization.SerializationInfo),
+                default(System.Runtime.Serialization.StreamingContext)
+            ) { }
         protected ManagementObject(
             System.Runtime.Serialization.SerializationInfo info,
             System.Runtime.Serialization.StreamingContext context
-        ) : base(
-            default(System.Runtime.Serialization.SerializationInfo),
-            default(System.Runtime.Serialization.StreamingContext)
-        ) { }
+        )
+            : base(
+                default(System.Runtime.Serialization.SerializationInfo),
+                default(System.Runtime.Serialization.StreamingContext)
+            ) { }
         public ManagementObject(string path)
             : base(
                 default(System.Runtime.Serialization.SerializationInfo),
@@ -693,10 +705,11 @@ namespace System.Management
             string scopeString,
             string pathString,
             System.Management.ObjectGetOptions options
-        ) : base(
-            default(System.Runtime.Serialization.SerializationInfo),
-            default(System.Runtime.Serialization.StreamingContext)
-        ) { }
+        )
+            : base(
+                default(System.Runtime.Serialization.SerializationInfo),
+                default(System.Runtime.Serialization.StreamingContext)
+            ) { }
         public override System.Management.ManagementPath ClassPath
         {
             get { throw null; }
@@ -742,7 +755,8 @@ namespace System.Management
         public System.Management.ManagementPath CopyTo(
             System.Management.ManagementPath path,
             System.Management.PutOptions options
-        ) {
+        )
+        {
             throw null;
         }
         public System.Management.ManagementPath CopyTo(string path)
@@ -752,7 +766,8 @@ namespace System.Management
         public System.Management.ManagementPath CopyTo(
             string path,
             System.Management.PutOptions options
-        ) {
+        )
+        {
             throw null;
         }
         public void Delete() { }
@@ -806,7 +821,8 @@ namespace System.Management
             string thisRole,
             bool classDefinitionsOnly,
             System.Management.EnumerationOptions options
-        ) {
+        )
+        {
             throw null;
         }
         public System.Management.ManagementObjectCollection GetRelationships()
@@ -828,7 +844,8 @@ namespace System.Management
         ) { }
         public System.Management.ManagementObjectCollection GetRelationships(
             string relationshipClass
-        ) {
+        )
+        {
             throw null;
         }
         public System.Management.ManagementObjectCollection GetRelationships(
@@ -837,7 +854,8 @@ namespace System.Management
             string thisRole,
             bool classDefinitionsOnly,
             System.Management.EnumerationOptions options
-        ) {
+        )
+        {
             throw null;
         }
         public void InvokeMethod(
@@ -855,7 +873,8 @@ namespace System.Management
             string methodName,
             System.Management.ManagementBaseObject inParameters,
             System.Management.InvokeMethodOptions options
-        ) {
+        )
+        {
             throw null;
         }
         public object InvokeMethod(string methodName, object[] args)

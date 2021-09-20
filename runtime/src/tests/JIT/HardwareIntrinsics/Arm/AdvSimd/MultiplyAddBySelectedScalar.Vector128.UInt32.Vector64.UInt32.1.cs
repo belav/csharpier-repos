@@ -132,7 +132,8 @@ namespace JIT.HardwareIntrinsics.Arm
                 UInt32[] inArray3,
                 UInt32[] outArray,
                 int alignment
-            ) {
+            )
+            {
                 int sizeOfinArray1 = inArray1.Length * Unsafe.SizeOf<UInt32>();
                 int sizeOfinArray2 = inArray2.Length * Unsafe.SizeOf<UInt32>();
                 int sizeOfinArray3 = inArray3.Length * Unsafe.SizeOf<UInt32>();
@@ -143,7 +144,8 @@ namespace JIT.HardwareIntrinsics.Arm
                     || (alignment * 2) < sizeOfinArray2
                     || (alignment * 2) < sizeOfinArray3
                     || (alignment * 2) < sizeOfoutArray
-                ) {
+                )
+                {
                     throw new ArgumentException("Invalid value of alignment");
                 }
 
@@ -242,7 +244,8 @@ namespace JIT.HardwareIntrinsics.Arm
 
             public void RunStructFldScenario(
                 SimpleTernaryOpTest__MultiplyAddBySelectedScalar_Vector128_UInt32_Vector64_UInt32_1 testClass
-            ) {
+            )
+            {
                 var result = AdvSimd.MultiplyAddBySelectedScalar(_fld1, _fld2, _fld3, 1);
 
                 Unsafe.Write(testClass._dataTable.outArrayPtr, result);
@@ -251,7 +254,8 @@ namespace JIT.HardwareIntrinsics.Arm
 
             public void RunStructFldScenario_Load(
                 SimpleTernaryOpTest__MultiplyAddBySelectedScalar_Vector128_UInt32_Vector64_UInt32_1 testClass
-            ) {
+            )
+            {
                 fixed (Vector128<UInt32>* pFld1 = &_fld1)fixed (
                     Vector128<UInt32>* pFld2 = &_fld2
                 )fixed (Vector64<UInt32>* pFld3 = &_fld3)
@@ -682,7 +686,8 @@ namespace JIT.HardwareIntrinsics.Arm
             Vector64<UInt32> op3,
             void* result,
             [CallerMemberName] string method = ""
-        ) {
+        )
+        {
             UInt32[] inArray1 = new UInt32[Op1ElementCount];
             UInt32[] inArray2 = new UInt32[Op2ElementCount];
             UInt32[] inArray3 = new UInt32[Op3ElementCount];
@@ -706,7 +711,8 @@ namespace JIT.HardwareIntrinsics.Arm
             void* op3,
             void* result,
             [CallerMemberName] string method = ""
-        ) {
+        )
+        {
             UInt32[] inArray1 = new UInt32[Op1ElementCount];
             UInt32[] inArray2 = new UInt32[Op2ElementCount];
             UInt32[] inArray3 = new UInt32[Op3ElementCount];
@@ -742,7 +748,8 @@ namespace JIT.HardwareIntrinsics.Arm
             UInt32[] thirdOp,
             UInt32[] result,
             [CallerMemberName] string method = ""
-        ) {
+        )
+        {
             bool succeeded = true;
 
             for (var i = 0; i < RetElementCount; i++)

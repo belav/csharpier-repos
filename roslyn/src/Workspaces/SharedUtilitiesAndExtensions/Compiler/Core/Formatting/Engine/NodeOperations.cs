@@ -24,7 +24,8 @@ namespace Microsoft.CodeAnalysis.Formatting
             List<SuppressOperation> suppressOperation,
             List<AnchorIndentationOperation> anchorIndentationOperations,
             List<AlignTokensOperation> alignmentOperation
-        ) {
+        )
+        {
             this.IndentBlockOperation = indentBlockOperation;
             this.SuppressOperation = suppressOperation;
             this.AlignmentOperation = alignmentOperation;

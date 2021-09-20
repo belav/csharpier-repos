@@ -17,7 +17,8 @@ namespace IdentitySample.DefaultUI
         public Task<bool> IsConfirmedAsync(
             UserManager<ApplicationUser> manager,
             ApplicationUser user
-        ) {
+        )
+        {
             return Task.FromResult(false);
         }
     }
@@ -67,7 +68,8 @@ namespace IdentitySample.DefaultUI
             IApplicationBuilder app,
             IWebHostEnvironment env,
             ILoggerFactory loggerFactory
-        ) {
+        )
+        {
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();

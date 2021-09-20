@@ -34,7 +34,8 @@ namespace Microsoft.AspNetCore.Identity.EntityFrameworkCore.Test
                         $"DataSource=D{Guid.NewGuid()}.db"
                     ).Options
                 )
-            ) {
+            )
+            {
                 db.Database.EnsureCreated();
 
                 var oldName = Guid.NewGuid().ToString();
@@ -60,7 +61,8 @@ namespace Microsoft.AspNetCore.Identity.EntityFrameworkCore.Test
                         $"DataSource=D{Guid.NewGuid()}.db"
                     ).Options
                 )
-            ) {
+            )
+            {
                 db.Database.EnsureCreated();
 
                 var oldName = Guid.NewGuid().ToString();
@@ -86,7 +88,8 @@ namespace Microsoft.AspNetCore.Identity.EntityFrameworkCore.Test
                         $"DataSource=D{Guid.NewGuid()}.db"
                     ).Options
                 )
-            ) {
+            )
+            {
                 db.Database.EnsureCreated();
 
                 var user = new User<int>();
@@ -110,7 +113,8 @@ namespace Microsoft.AspNetCore.Identity.EntityFrameworkCore.Test
                         $"DataSource=D{Guid.NewGuid()}.db"
                     ).Options
                 )
-            ) {
+            )
+            {
                 db.Database.EnsureCreated();
 
                 var user = new User<int>();
@@ -135,7 +139,8 @@ namespace Microsoft.AspNetCore.Identity.EntityFrameworkCore.Test
                         $"DataSource=D{Guid.NewGuid()}.db"
                     ).Options
                 )
-            ) {
+            )
+            {
                 db.Database.EnsureCreated();
 
                 var oldName = Guid.NewGuid().ToString();
@@ -161,7 +166,8 @@ namespace Microsoft.AspNetCore.Identity.EntityFrameworkCore.Test
                         $"DataSource=D{Guid.NewGuid()}.db"
                     ).Options
                 )
-            ) {
+            )
+            {
                 db.Database.EnsureCreated();
 
                 var oldName = Guid.NewGuid().ToString();

@@ -19,7 +19,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Internal
         public Http3ConnectionMiddleware(
             ServiceContext serviceContext,
             IHttpApplication<TContext> application
-        ) {
+        )
+        {
             _serviceContext = serviceContext;
             _application = application;
         }

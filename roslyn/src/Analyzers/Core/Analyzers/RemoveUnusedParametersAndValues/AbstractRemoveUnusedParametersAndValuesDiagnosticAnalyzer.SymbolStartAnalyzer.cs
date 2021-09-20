@@ -43,7 +43,8 @@ namespace Microsoft.CodeAnalysis.RemoveUnusedParametersAndValues
                 INamedTypeSymbol eventArgsTypeOpt,
                 ImmutableHashSet<INamedTypeSymbol> attributeSetForMethodsToIgnore,
                 DeserializationConstructorCheck deserializationConstructorCheck
-            ) {
+            )
+            {
                 _compilationAnalyzer = compilationAnalyzer;
 
                 _eventArgsTypeOpt = eventArgsTypeOpt;
@@ -56,7 +57,8 @@ namespace Microsoft.CodeAnalysis.RemoveUnusedParametersAndValues
             public static void CreateAndRegisterActions(
                 CompilationStartAnalysisContext context,
                 AbstractRemoveUnusedParametersAndValuesDiagnosticAnalyzer analyzer
-            ) {
+            )
+            {
                 var attributeSetForMethodsToIgnore = ImmutableHashSet.CreateRange(
                     GetAttributesForMethodsToIgnore(context.Compilation).WhereNotNull()
                 );
@@ -72,7 +74,8 @@ namespace Microsoft.CodeAnalysis.RemoveUnusedParametersAndValues
                                 (INamedTypeSymbol)symbolStartContext.Symbol,
                                 symbolStartContext.CancellationToken
                             )
-                        ) {
+                        )
+                        {
                             // Bail out on syntax errors.
                             return;
                         }
@@ -98,13 +101,15 @@ namespace Microsoft.CodeAnalysis.RemoveUnusedParametersAndValues
                 static bool HasSyntaxErrors(
                     INamedTypeSymbol namedTypeSymbol,
                     CancellationToken cancellationToken
-                ) {
+                )
+                {
                     foreach (var syntaxRef in namedTypeSymbol.DeclaringSyntaxReferences)
                     {
                         var syntax = syntaxRef.GetSyntax(cancellationToken);
                         if (
                             syntax.GetDiagnostics().Any(d => d.Severity == DiagnosticSeverity.Error)
-                        ) {
+                        )
+                        {
                             return true;
                         }
                     }
@@ -151,7 +156,8 @@ namespace Microsoft.CodeAnalysis.RemoveUnusedParametersAndValues
                 Action<Diagnostic> reportDiagnostic,
                 AnalyzerOptions analyzerOptions,
                 CancellationToken cancellationToken
-            ) {
+            )
+            {
                 if (!IsUnusedParameterCandidate(parameter))
                 {
                     return;
@@ -171,7 +177,8 @@ namespace Microsoft.CodeAnalysis.RemoveUnusedParametersAndValues
                         option.Value,
                         option.Notification.Severity
                     )
-                ) {
+                )
+                {
                     return;
                 }
 
@@ -198,7 +205,8 @@ namespace Microsoft.CodeAnalysis.RemoveUnusedParametersAndValues
                 bool hasReference,
                 bool isPublicApiParameter,
                 bool isLocalFunctionParameter
-            ) {
+            )
+            {
                 LocalizableString messageFormat;
                 if (isPublicApiParameter && !isLocalFunctionParameter)
                 {
@@ -224,7 +232,8 @@ namespace Microsoft.CodeAnalysis.RemoveUnusedParametersAndValues
 
             private static IEnumerable<INamedTypeSymbol> GetAttributesForMethodsToIgnore(
                 Compilation compilation
-            ) {
+            )
+            {
                 // Ignore conditional methods (One conditional will often call another conditional method as its only use of a parameter)
                 yield return compilation.ConditionalAttribute();
 
@@ -265,7 +274,8 @@ namespace Microsoft.CodeAnalysis.RemoveUnusedParametersAndValues
                     || method.IsAnonymousFunction()
                     || _compilationAnalyzer.MethodHasHandlesClause(method)
                     || _deserializationConstructorCheck.IsDeserializationConstructor(method)
-                ) {
+                )
+                {
                     return false;
                 }
 
@@ -276,7 +286,8 @@ namespace Microsoft.CodeAnalysis.RemoveUnusedParametersAndValues
                     && _compilationAnalyzer.IsRecordDeclaration(
                         method.DeclaringSyntaxReferences.FirstOrDefault()?.GetSyntax()
                     )
-                ) {
+                )
+                {
                     return false;
                 }
 
@@ -288,7 +299,8 @@ namespace Microsoft.CodeAnalysis.RemoveUnusedParametersAndValues
                     && method.Parameters.Length == 2
                     && method.Parameters[0].Type.SpecialType == SpecialType.System_Object
                     && method.Parameters[1].Type.InheritsFromOrEquals(_eventArgsTypeOpt)
-                ) {
+                )
+                {
                     return false;
                 }
 
@@ -297,7 +309,8 @@ namespace Microsoft.CodeAnalysis.RemoveUnusedParametersAndValues
                 if (
                     method.GetAttributes()
                         .Any(a => _attributeSetForMethodsToIgnore.Contains(a.AttributeClass))
-                ) {
+                )
+                {
                     return false;
                 }
 

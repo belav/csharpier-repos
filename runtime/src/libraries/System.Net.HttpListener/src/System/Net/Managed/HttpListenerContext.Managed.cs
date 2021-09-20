@@ -77,7 +77,8 @@ namespace System.Net
             out HttpStatusCode errorCode,
             [NotNullWhen(true)] out string? username,
             [NotNullWhen(true)] out string? password
-        ) {
+        )
+        {
             errorCode = HttpStatusCode.OK;
             username = password = null;
             try
@@ -111,7 +112,8 @@ namespace System.Net
             string? subProtocol,
             int receiveBufferSize,
             TimeSpan keepAliveInterval
-        ) {
+        )
+        {
             return HttpWebSocket.AcceptWebSocketAsyncCore(
                 this,
                 subProtocol,
@@ -126,7 +128,8 @@ namespace System.Net
             int receiveBufferSize,
             TimeSpan keepAliveInterval,
             ArraySegment<byte> internalBuffer
-        ) {
+        )
+        {
             WebSocketValidate.ValidateArraySegment(internalBuffer, nameof(internalBuffer));
             HttpWebSocket.ValidateOptions(
                 subProtocol,

@@ -62,7 +62,8 @@ namespace System.Web.Razor.Text
             if (
                 ParserHelpers.IsNewLine(characterRead)
                 && (characterRead != '\r' || nextCharacter != '\n')
-            ) {
+            )
+            {
                 _lineIndex++;
                 _characterIndex = 0;
             }
@@ -87,7 +88,8 @@ namespace System.Web.Razor.Text
         public static SourceLocation CalculateNewLocation(
             SourceLocation lastPosition,
             string newContent
-        ) {
+        )
+        {
             return new SourceLocationTracker(lastPosition).UpdateLocation(
                 newContent
             ).CurrentLocation;

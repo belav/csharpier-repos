@@ -92,7 +92,8 @@ namespace System.Web.WebPages
             int maxLength,
             int minLength = 0,
             string errorMessage = null
-        ) {
+        )
+        {
             if (minLength == 0)
             {
                 errorMessage = String.Format(

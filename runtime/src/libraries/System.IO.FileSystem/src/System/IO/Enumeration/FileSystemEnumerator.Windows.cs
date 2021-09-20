@@ -179,7 +179,8 @@ namespace System.IO.Enumeration
                                 || _entry->FileName[0] != '.'
                                 || (_entry->FileName.Length == 2 && _entry->FileName[1] != '.')
                             )
-                        ) {
+                        )
+                        {
                             // "." or "..", don't process unless the option is set
                             if (!_options.ReturnSpecialDirectories)
                                 continue;
@@ -188,7 +189,8 @@ namespace System.IO.Enumeration
                             _options.RecurseSubdirectories
                             && _remainingRecursionDepth > 0
                             && ShouldRecurseIntoEntry(ref entry)
-                        ) {
+                        )
+                        {
                             // Recursion is on and the directory was accepted, Queue it
                             string subDirectory = Path.Join(
                                 _currentPath.AsSpan(),

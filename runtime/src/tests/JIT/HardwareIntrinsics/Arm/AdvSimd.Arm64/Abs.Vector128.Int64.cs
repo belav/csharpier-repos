@@ -129,7 +129,8 @@ namespace JIT.HardwareIntrinsics.Arm
                     (alignment != 16 && alignment != 8)
                     || (alignment * 2) < sizeOfinArray1
                     || (alignment * 2) < sizeOfoutArray
-                ) {
+                )
+                {
                     throw new ArgumentException("Invalid value of alignment");
                 }
 
@@ -470,7 +471,8 @@ namespace JIT.HardwareIntrinsics.Arm
             Vector128<Int64> op1,
             void* result,
             [CallerMemberName] string method = ""
-        ) {
+        )
+        {
             Int64[] inArray1 = new Int64[Op1ElementCount];
             UInt64[] outArray = new UInt64[RetElementCount];
 
@@ -507,7 +509,8 @@ namespace JIT.HardwareIntrinsics.Arm
             Int64[] firstOp,
             UInt64[] result,
             [CallerMemberName] string method = ""
-        ) {
+        )
+        {
             bool succeeded = true;
 
             for (var i = 0; i < RetElementCount; i++)

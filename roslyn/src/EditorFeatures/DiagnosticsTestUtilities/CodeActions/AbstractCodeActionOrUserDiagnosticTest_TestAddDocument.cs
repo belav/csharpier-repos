@@ -26,7 +26,8 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.CodeActions
             ImmutableArray<string> expectedContainers,
             string expectedDocumentName,
             TestParameters parameters = default
-        ) {
+        )
+        {
             await TestAddDocument(
                 initialMarkup,
                 expectedMarkup,
@@ -54,7 +55,8 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.CodeActions
             string expectedMarkup,
             string expectedDocumentName,
             ImmutableArray<string> expectedContainers
-        ) {
+        )
+        {
             var (_, action) = await GetCodeActionsAsync(workspace, parameters);
             return await TestAddDocument(
                 workspace,
@@ -71,7 +73,8 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.CodeActions
             ImmutableArray<string> expectedContainers,
             string expectedDocumentName,
             TestParameters parameters = default
-        ) {
+        )
+        {
             using (var workspace = CreateWorkspaceFromOptions(initialMarkup, parameters))
             {
                 var (_, action) = await GetCodeActionsAsync(workspace, parameters);
@@ -91,7 +94,8 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.CodeActions
             ImmutableArray<string> expectedFolders,
             string expectedDocumentName,
             CodeAction action
-        ) {
+        )
+        {
             var operations = await VerifyActionAndGetOperationsAsync(workspace, action, default);
             return await TestAddDocument(
                 workspace,
@@ -112,7 +116,8 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.CodeActions
             ProjectId modifiedProjectId,
             ImmutableArray<string> expectedFolders,
             string expectedDocumentName
-        ) {
+        )
+        {
             var appliedChanges = ApplyOperationsAndGetSolution(workspace, operations);
             var oldSolution = appliedChanges.Item1;
             var newSolution = appliedChanges.Item2;

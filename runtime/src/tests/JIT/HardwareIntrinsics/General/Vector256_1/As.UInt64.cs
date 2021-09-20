@@ -224,7 +224,8 @@ namespace JIT.HardwareIntrinsics.General
             UInt64[] valueElements,
             Type targetType,
             [CallerMemberName] string method = ""
-        ) {
+        )
+        {
             bool succeeded = true;
 
             for (var i = 0; i < ElementCount; i++)

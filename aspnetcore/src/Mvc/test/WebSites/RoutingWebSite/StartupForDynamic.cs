@@ -79,7 +79,8 @@ namespace RoutingWebSite
             public override ValueTask<RouteValueDictionary> TransformAsync(
                 HttpContext httpContext,
                 RouteValueDictionary values
-            ) {
+            )
+            {
                 var kvps = ((string)values["slug"]).Split(",");
 
                 var results = new RouteValueDictionary();
@@ -98,7 +99,8 @@ namespace RoutingWebSite
                 HttpContext httpContext,
                 RouteValueDictionary values,
                 IReadOnlyList<Endpoint> endpoints
-            ) {
+            )
+            {
                 var version = ((DynamicVersion)State).Version;
                 if (version == "V2" && version == (string)values["version"])
                 {

@@ -34,7 +34,8 @@ namespace Microsoft.EntityFrameworkCore.Cosmos.Query.Internal
             INavigation navigation,
             Expression accessExpression,
             EntityProjectionExpression? innerProjection = null
-        ) {
+        )
+        {
             var targetType = navigation.TargetEntityType;
             Type = typeof(IEnumerable<>).MakeGenericType(targetType.ClrType);
 

@@ -17,7 +17,8 @@ namespace Microsoft.CodeAnalysis
         internal static bool IncludesOption(
             this ObjectDisplayOptions options,
             ObjectDisplayOptions flag
-        ) {
+        )
+        {
             return (options & flag) == flag;
         }
     }

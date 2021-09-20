@@ -111,7 +111,8 @@ namespace System.Xml.Serialization
                         (any.Name == null || any.Name.Length == 0)
                         && any.GetNamespaceSpecified()
                         && any.Namespace == null
-                    ) {
+                    )
+                    {
                         // ignore duplicate wildcards
                         wildcard = any;
                     }

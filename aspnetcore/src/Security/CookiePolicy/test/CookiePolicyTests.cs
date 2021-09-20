@@ -652,7 +652,8 @@ namespace Microsoft.AspNetCore.CookiePolicy.Test
             CookiePolicyOptions cookiePolicy,
             RequestDelegate configureSetup,
             params RequestTest[] tests
-        ) {
+        )
+        {
             using var host = new HostBuilder().ConfigureWebHost(
                     webHostBuilder =>
                     {

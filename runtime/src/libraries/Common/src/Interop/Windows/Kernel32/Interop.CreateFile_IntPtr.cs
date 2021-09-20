@@ -36,7 +36,8 @@ internal static partial class Interop
             FileShare dwShareMode,
             FileMode dwCreationDisposition,
             int dwFlagsAndAttributes
-        ) {
+        )
+        {
             lpFileName = PathInternal.EnsureExtendedPrefixIfNeeded(lpFileName);
             return CreateFilePrivate_IntPtr(
                 lpFileName,

@@ -91,7 +91,8 @@ namespace Microsoft.AspNetCore.Rewrite.Tests.CodeRules
             string baseAddress,
             string requestUrl,
             string expectedUrl
-        ) {
+        )
+        {
             var options = new RewriteOptions().AddRedirect(
                 pattern,
                 replacement,
@@ -294,7 +295,8 @@ namespace Microsoft.AspNetCore.Rewrite.Tests.CodeRules
             string baseAddress,
             string hostPathAndQuery,
             string expectedHostPathAndQuery
-        ) {
+        )
+        {
             var options = new RewriteOptions().AddRedirectToHttps();
             using var host = new HostBuilder().ConfigureWebHost(
                     webHostBuilder =>
@@ -755,7 +757,8 @@ namespace Microsoft.AspNetCore.Rewrite.Tests.CodeRules
         public async Task CheckRedirectToWwwInWhitelistedDomains(
             string requestUri,
             string redirectUri
-        ) {
+        )
+        {
             var options = new RewriteOptions().AddRedirectToWww("example.com");
             using var host = new HostBuilder().ConfigureWebHost(
                     webHostBuilder =>

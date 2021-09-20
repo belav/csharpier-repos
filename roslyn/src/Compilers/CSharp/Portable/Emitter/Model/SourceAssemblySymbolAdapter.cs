@@ -17,7 +17,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             PEModuleBuilder moduleBuilder,
             bool emittingRefAssembly,
             bool emittingAssemblyAttributesInNetModule
-        ) {
+        )
+        {
             CheckDefinitionInvariant();
 
             ImmutableArray<CSharpAttributeData> userDefined = this.GetAttributes();

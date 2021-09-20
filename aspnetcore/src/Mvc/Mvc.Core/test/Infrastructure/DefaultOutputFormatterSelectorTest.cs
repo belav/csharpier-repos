@@ -148,7 +148,8 @@ namespace Microsoft.AspNetCore.Mvc.Infrastructure
             MediaTypeCollection contentTypes,
             string acceptHeader,
             string expectedContentType
-        ) {
+        )
+        {
             // Arrange
             var formatters = new List<IOutputFormatter>
             {
@@ -368,7 +369,8 @@ namespace Microsoft.AspNetCore.Mvc.Infrastructure
 
         private static DefaultOutputFormatterSelector CreateSelector(
             IEnumerable<IOutputFormatter> formatters
-        ) {
+        )
+        {
             var options = new MvcOptions();
             foreach (var formatter in formatters)
             {
@@ -412,7 +414,8 @@ namespace Microsoft.AspNetCore.Mvc.Infrastructure
             public override Task WriteResponseBodyAsync(
                 OutputFormatterWriteContext context,
                 Encoding selectedEncoding
-            ) {
+            )
+            {
                 return Task.FromResult(0);
             }
         }
@@ -430,7 +433,8 @@ namespace Microsoft.AspNetCore.Mvc.Infrastructure
             public override Task WriteResponseBodyAsync(
                 OutputFormatterWriteContext context,
                 Encoding selectedEncoding
-            ) {
+            )
+            {
                 return Task.FromResult(0);
             }
         }
@@ -447,7 +451,8 @@ namespace Microsoft.AspNetCore.Mvc.Infrastructure
             public override Task WriteResponseBodyAsync(
                 OutputFormatterWriteContext context,
                 Encoding selectedEncoding
-            ) {
+            )
+            {
                 return Task.FromResult(0);
             }
         }

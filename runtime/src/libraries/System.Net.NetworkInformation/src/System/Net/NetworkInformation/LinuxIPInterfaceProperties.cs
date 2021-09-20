@@ -75,7 +75,8 @@ namespace System.Net.NetworkInformation
         // and separates the information about by each interface.
         public GatewayIPAddressInformationCollection GetGatewayAddresses(
             LinuxNetworkInterface.LinuxNetworkInterfaceSystemProperties systemProperties
-        ) {
+        )
+        {
             List<GatewayIPAddressInformation> collection = new List<GatewayIPAddressInformation>();
 
             if (systemProperties.IPv4Routes != null)

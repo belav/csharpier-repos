@@ -38,7 +38,8 @@ namespace Microsoft.EntityFrameworkCore.SqlServer.Query.Internal
                 expression is MethodCallExpression methodCallExpression
                 && methodCallExpression.Method.DeclaringType
                     == typeof(SqlServerDbFunctionsExtensions)
-            ) {
+            )
+            {
                 return false;
             }
 

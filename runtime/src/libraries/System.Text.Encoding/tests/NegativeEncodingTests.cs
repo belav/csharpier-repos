@@ -272,7 +272,8 @@ namespace System.Text.Tests
             byte[] smallBytes = new byte[1];
             fixed (char* pChars = chars)fixed (byte* pBytes = bytes)fixed (
                 byte* pSmallBytes = smallBytes
-            ) {
+            )
+            {
                 char* pCharsLocal = pChars;
                 byte* pBytesLocal = pBytes;
                 byte* pSmallBytesLocal = pSmallBytes;
@@ -474,7 +475,8 @@ namespace System.Text.Tests
             char[] smallChars = new char[1];
             fixed (byte* pBytes = bytes)fixed (char* pChars = chars)fixed (
                 char* pSmallChars = smallChars
-            ) {
+            )
+            {
                 byte* pBytesLocal = pBytes;
                 char* pCharsLocal = pChars;
                 char* pSmallCharsLocal = pSmallChars;
@@ -624,7 +626,8 @@ namespace System.Text.Tests
             string chars,
             int index,
             int count
-        ) {
+        )
+        {
             Assert.Equal(EncoderFallback.ExceptionFallback, encoding.EncoderFallback);
 
             char[] charsArray = chars.ToCharArray();
@@ -673,7 +676,8 @@ namespace System.Text.Tests
             byte[] bytes,
             int index,
             int count
-        ) {
+        )
+        {
             Assert.Equal(DecoderFallback.ExceptionFallback, encoding.DecoderFallback);
 
             char[] chars = new char[encoding.GetMaxCharCount(count)];
@@ -1092,7 +1096,8 @@ namespace System.Text.Tests
             Encoding encoding,
             Decoder decoder,
             bool flush
-        ) {
+        )
+        {
             _ = encoding;
 
             // Bytes is null

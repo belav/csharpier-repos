@@ -130,7 +130,8 @@ namespace JIT.HardwareIntrinsics.Arm
                     (alignment != 16 && alignment != 8)
                     || (alignment * 2) < sizeOfinArray
                     || (alignment * 2) < sizeOfoutArray
-                ) {
+                )
+                {
                     throw new ArgumentException("Invalid value of alignment");
                 }
 
@@ -189,7 +190,8 @@ namespace JIT.HardwareIntrinsics.Arm
 
             public void RunStructFldScenario(
                 ImmUnaryOpTest__ShiftRightLogicalRoundedNarrowingSaturateLower_Vector64_Byte_1 testClass
-            ) {
+            )
+            {
                 var result = AdvSimd.ShiftRightLogicalRoundedNarrowingSaturateLower(_fld, 1);
 
                 Unsafe.Write(testClass._dataTable.outArrayPtr, result);
@@ -198,7 +200,8 @@ namespace JIT.HardwareIntrinsics.Arm
 
             public void RunStructFldScenario_Load(
                 ImmUnaryOpTest__ShiftRightLogicalRoundedNarrowingSaturateLower_Vector64_Byte_1 testClass
-            ) {
+            )
+            {
                 fixed (Vector128<UInt16>* pFld = &_fld)
                 {
                     var result = AdvSimd.ShiftRightLogicalRoundedNarrowingSaturateLower(
@@ -501,7 +504,8 @@ namespace JIT.HardwareIntrinsics.Arm
             Vector128<UInt16> firstOp,
             void* result,
             [CallerMemberName] string method = ""
-        ) {
+        )
+        {
             UInt16[] inArray = new UInt16[Op1ElementCount];
             Byte[] outArray = new Byte[RetElementCount];
 
@@ -519,7 +523,8 @@ namespace JIT.HardwareIntrinsics.Arm
             void* firstOp,
             void* result,
             [CallerMemberName] string method = ""
-        ) {
+        )
+        {
             UInt16[] inArray = new UInt16[Op1ElementCount];
             Byte[] outArray = new Byte[RetElementCount];
 
@@ -541,7 +546,8 @@ namespace JIT.HardwareIntrinsics.Arm
             UInt16[] firstOp,
             Byte[] result,
             [CallerMemberName] string method = ""
-        ) {
+        )
+        {
             bool succeeded = true;
 
             for (var i = 0; i < RetElementCount; i++)

@@ -18,7 +18,8 @@ namespace System.Threading.Tasks
         public static Task ForEachAsync<TSource>(
             IEnumerable<TSource> source,
             Func<TSource, CancellationToken, ValueTask> body
-        ) {
+        )
+        {
             if (source is null)
             {
                 throw new ArgumentNullException(nameof(source));
@@ -49,7 +50,8 @@ namespace System.Threading.Tasks
             IEnumerable<TSource> source,
             CancellationToken cancellationToken,
             Func<TSource, CancellationToken, ValueTask> body
-        ) {
+        )
+        {
             if (source is null)
             {
                 throw new ArgumentNullException(nameof(source));
@@ -79,7 +81,8 @@ namespace System.Threading.Tasks
             IEnumerable<TSource> source,
             ParallelOptions parallelOptions,
             Func<TSource, CancellationToken, ValueTask> body
-        ) {
+        )
+        {
             if (source is null)
             {
                 throw new ArgumentNullException(nameof(source));
@@ -117,7 +120,8 @@ namespace System.Threading.Tasks
             TaskScheduler scheduler,
             CancellationToken cancellationToken,
             Func<TSource, CancellationToken, ValueTask> body
-        ) {
+        )
+        {
             Debug.Assert(source != null);
             Debug.Assert(scheduler != null);
             Debug.Assert(body != null);
@@ -231,7 +235,8 @@ namespace System.Threading.Tasks
         public static Task ForEachAsync<TSource>(
             IAsyncEnumerable<TSource> source,
             Func<TSource, CancellationToken, ValueTask> body
-        ) {
+        )
+        {
             if (source is null)
             {
                 throw new ArgumentNullException(nameof(source));
@@ -262,7 +267,8 @@ namespace System.Threading.Tasks
             IAsyncEnumerable<TSource> source,
             CancellationToken cancellationToken,
             Func<TSource, CancellationToken, ValueTask> body
-        ) {
+        )
+        {
             if (source is null)
             {
                 throw new ArgumentNullException(nameof(source));
@@ -292,7 +298,8 @@ namespace System.Threading.Tasks
             IAsyncEnumerable<TSource> source,
             ParallelOptions parallelOptions,
             Func<TSource, CancellationToken, ValueTask> body
-        ) {
+        )
+        {
             if (source is null)
             {
                 throw new ArgumentNullException(nameof(source));
@@ -330,7 +337,8 @@ namespace System.Threading.Tasks
             TaskScheduler scheduler,
             CancellationToken cancellationToken,
             Func<TSource, CancellationToken, ValueTask> body
-        ) {
+        )
+        {
             Debug.Assert(source != null);
             Debug.Assert(scheduler != null);
             Debug.Assert(body != null);
@@ -485,7 +493,8 @@ namespace System.Threading.Tasks
                 TaskScheduler scheduler,
                 CancellationToken cancellationToken,
                 Func<TSource, CancellationToken, ValueTask> body
-            ) {
+            )
+            {
                 _taskBody = taskBody;
                 _remainingDop = dop;
                 LoopBody = body;
@@ -588,7 +597,8 @@ namespace System.Threading.Tasks
                         if (
                             _exceptions[i] is OperationCanceledException oce
                             && oce.CancellationToken == Cancellation.Token
-                        ) {
+                        )
+                        {
                             _exceptions[i] = null!;
                         }
                     }

@@ -32,7 +32,8 @@ namespace Microsoft.AspNetCore.Mvc.Razor.Extensions
             NamespaceDeclarationIntermediateNode @namespace,
             ClassDeclarationIntermediateNode @class,
             MethodDeclarationIntermediateNode method
-        ) {
+        )
+        {
             base.OnDocumentStructureCreated(codeDocument, @namespace, @class, method);
 
             if (
@@ -40,7 +41,8 @@ namespace Microsoft.AspNetCore.Mvc.Razor.Extensions
                     fallbackToRootNamespace: false,
                     out var namespaceName
                 )
-            ) {
+            )
+            {
                 @namespace.Content = _useConsolidatedMvcViews
                     ? "AspNetCoreGeneratedDocument"
                     : "AspNetCore";

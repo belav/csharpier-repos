@@ -49,7 +49,8 @@ namespace Microsoft.EntityFrameworkCore.Cosmos.Query.Internal
                 Type contextType,
                 bool standAloneStateManager,
                 bool concurrencyDetectionEnabled
-            ) {
+            )
+            {
                 _cosmosQueryContext = cosmosQueryContext;
                 _readItemExpression = readItemExpression;
                 _shaper = shaper;
@@ -161,7 +162,8 @@ namespace Microsoft.EntityFrameworkCore.Cosmos.Query.Internal
 
                 foreach (
                     var keyProperty in _readItemExpression.EntityType.FindPrimaryKey().Properties
-                ) {
+                )
+                {
                     var property = _readItemExpression.EntityType.FindProperty(keyProperty.Name);
 
                     if (TryGetParameterValue(property, out var parameterValue))
@@ -201,7 +203,8 @@ namespace Microsoft.EntityFrameworkCore.Cosmos.Query.Internal
                 public Enumerator(
                     ReadItemQueryingEnumerable<T> readItemEnumerable,
                     CancellationToken cancellationToken = default
-                ) {
+                )
+                {
                     _cosmosQueryContext = readItemEnumerable._cosmosQueryContext;
                     _readItemExpression = readItemEnumerable._readItemExpression;
                     _shaper = readItemEnumerable._shaper;

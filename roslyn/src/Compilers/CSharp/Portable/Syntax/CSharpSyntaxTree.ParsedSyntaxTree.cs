@@ -38,7 +38,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                 Syntax.InternalSyntax.DirectiveStack directives,
                 ImmutableDictionary<string, ReportDiagnostic>? diagnosticOptions,
                 bool cloneRoot
-            ) {
+            )
+            {
                 Debug.Assert(root != null);
                 Debug.Assert(options != null);
                 Debug.Assert(
@@ -173,7 +174,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             )]
             public override SyntaxTree WithDiagnosticOptions(
                 ImmutableDictionary<string, ReportDiagnostic> options
-            ) {
+            )
+            {
                 if (options is null)
                 {
                     options = EmptyDiagnosticOptions;

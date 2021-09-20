@@ -190,7 +190,8 @@ namespace System.Xml
             string? pubid,
             string? sysid,
             string? subset
-        ) {
+        )
+        {
             CheckAsync();
             return SetLastTask(CoreWriter.WriteDocTypeAsync(name, pubid, sysid, subset));
         }
@@ -469,7 +470,8 @@ namespace System.Xml
             string? prefix,
             XmlDictionaryString localName,
             XmlDictionaryString? namespaceUri
-        ) {
+        )
+        {
             CheckAsync();
             CoreWriter.WriteStartElement(prefix, localName, namespaceUri);
         }
@@ -478,7 +480,8 @@ namespace System.Xml
             string? prefix,
             XmlDictionaryString localName,
             XmlDictionaryString? namespaceUri
-        ) {
+        )
+        {
             CheckAsync();
             CoreWriter.WriteStartAttribute(prefix, localName, namespaceUri);
         }
@@ -504,7 +507,8 @@ namespace System.Xml
         public override void WriteXmlAttribute(
             XmlDictionaryString localName,
             XmlDictionaryString? value
-        ) {
+        )
+        {
             CheckAsync();
             CoreWriter.WriteXmlAttribute(localName, value);
         }
@@ -518,7 +522,8 @@ namespace System.Xml
         public override void WriteQualifiedName(
             XmlDictionaryString localName,
             XmlDictionaryString? namespaceUri
-        ) {
+        )
+        {
             CheckAsync();
             CoreWriter.WriteQualifiedName(localName, namespaceUri);
         }
@@ -560,7 +565,8 @@ namespace System.Xml
             Stream stream,
             bool includeComments,
             string[]? inclusivePrefixes
-        ) {
+        )
+        {
             CheckAsync();
             CoreWriter.StartCanonicalization(stream, includeComments, inclusivePrefixes);
         }
@@ -584,7 +590,8 @@ namespace System.Xml
             bool[] array,
             int offset,
             int count
-        ) {
+        )
+        {
             CheckAsync();
             CoreWriter.WriteArray(prefix, localName, namespaceUri, array, offset, count);
         }
@@ -596,7 +603,8 @@ namespace System.Xml
             bool[] array,
             int offset,
             int count
-        ) {
+        )
+        {
             CheckAsync();
             CoreWriter.WriteArray(prefix, localName, namespaceUri, array, offset, count);
         }
@@ -608,7 +616,8 @@ namespace System.Xml
             short[] array,
             int offset,
             int count
-        ) {
+        )
+        {
             CheckAsync();
             CoreWriter.WriteArray(prefix, localName, namespaceUri, array, offset, count);
         }
@@ -620,7 +629,8 @@ namespace System.Xml
             short[] array,
             int offset,
             int count
-        ) {
+        )
+        {
             CheckAsync();
             CoreWriter.WriteArray(prefix, localName, namespaceUri, array, offset, count);
         }
@@ -632,7 +642,8 @@ namespace System.Xml
             int[] array,
             int offset,
             int count
-        ) {
+        )
+        {
             CheckAsync();
             CoreWriter.WriteArray(prefix, localName, namespaceUri, array, offset, count);
         }
@@ -644,7 +655,8 @@ namespace System.Xml
             int[] array,
             int offset,
             int count
-        ) {
+        )
+        {
             CheckAsync();
             CoreWriter.WriteArray(prefix, localName, namespaceUri, array, offset, count);
         }
@@ -656,7 +668,8 @@ namespace System.Xml
             long[] array,
             int offset,
             int count
-        ) {
+        )
+        {
             CheckAsync();
             CoreWriter.WriteArray(prefix, localName, namespaceUri, array, offset, count);
         }
@@ -668,7 +681,8 @@ namespace System.Xml
             long[] array,
             int offset,
             int count
-        ) {
+        )
+        {
             CheckAsync();
             CoreWriter.WriteArray(prefix, localName, namespaceUri, array, offset, count);
         }
@@ -680,7 +694,8 @@ namespace System.Xml
             float[] array,
             int offset,
             int count
-        ) {
+        )
+        {
             CheckAsync();
             CoreWriter.WriteArray(prefix, localName, namespaceUri, array, offset, count);
         }
@@ -692,7 +707,8 @@ namespace System.Xml
             float[] array,
             int offset,
             int count
-        ) {
+        )
+        {
             CheckAsync();
             CoreWriter.WriteArray(prefix, localName, namespaceUri, array, offset, count);
         }
@@ -704,7 +720,8 @@ namespace System.Xml
             double[] array,
             int offset,
             int count
-        ) {
+        )
+        {
             CheckAsync();
             CoreWriter.WriteArray(prefix, localName, namespaceUri, array, offset, count);
         }
@@ -716,7 +733,8 @@ namespace System.Xml
             double[] array,
             int offset,
             int count
-        ) {
+        )
+        {
             CheckAsync();
             CoreWriter.WriteArray(prefix, localName, namespaceUri, array, offset, count);
         }
@@ -728,7 +746,8 @@ namespace System.Xml
             decimal[] array,
             int offset,
             int count
-        ) {
+        )
+        {
             CheckAsync();
             CoreWriter.WriteArray(prefix, localName, namespaceUri, array, offset, count);
         }
@@ -740,7 +759,8 @@ namespace System.Xml
             decimal[] array,
             int offset,
             int count
-        ) {
+        )
+        {
             CheckAsync();
             CoreWriter.WriteArray(prefix, localName, namespaceUri, array, offset, count);
         }
@@ -752,7 +772,8 @@ namespace System.Xml
             DateTime[] array,
             int offset,
             int count
-        ) {
+        )
+        {
             CheckAsync();
             CoreWriter.WriteArray(prefix, localName, namespaceUri, array, offset, count);
         }
@@ -764,7 +785,8 @@ namespace System.Xml
             DateTime[] array,
             int offset,
             int count
-        ) {
+        )
+        {
             CheckAsync();
             CoreWriter.WriteArray(prefix, localName, namespaceUri, array, offset, count);
         }
@@ -776,7 +798,8 @@ namespace System.Xml
             Guid[] array,
             int offset,
             int count
-        ) {
+        )
+        {
             CheckAsync();
             CoreWriter.WriteArray(prefix, localName, namespaceUri, array, offset, count);
         }
@@ -788,7 +811,8 @@ namespace System.Xml
             Guid[] array,
             int offset,
             int count
-        ) {
+        )
+        {
             CheckAsync();
             CoreWriter.WriteArray(prefix, localName, namespaceUri, array, offset, count);
         }
@@ -800,7 +824,8 @@ namespace System.Xml
             TimeSpan[] array,
             int offset,
             int count
-        ) {
+        )
+        {
             CheckAsync();
             CoreWriter.WriteArray(prefix, localName, namespaceUri, array, offset, count);
         }
@@ -812,7 +837,8 @@ namespace System.Xml
             TimeSpan[] array,
             int offset,
             int count
-        ) {
+        )
+        {
             CheckAsync();
             CoreWriter.WriteArray(prefix, localName, namespaceUri, array, offset, count);
         }

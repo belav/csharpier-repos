@@ -31,7 +31,8 @@ namespace Roslyn.VisualStudio.CSharp.UnitTests.ProjectSystemShim
         public static CSharpProjectShim CreateCSharpProject(
             TestEnvironment environment,
             string projectName
-        ) {
+        )
+        {
             var projectBinPath = Path.GetTempPath();
             var hierarchy = environment.CreateHierarchy(
                 projectName,
@@ -47,7 +48,8 @@ namespace Roslyn.VisualStudio.CSharp.UnitTests.ProjectSystemShim
             TestEnvironment environment,
             string projectName,
             IVsHierarchy hierarchy
-        ) {
+        )
+        {
             return new CSharpProjectShim(
                 new MockCSharpProjectRoot(hierarchy),
                 projectSystemName: projectName,
@@ -61,7 +63,8 @@ namespace Roslyn.VisualStudio.CSharp.UnitTests.ProjectSystemShim
             TestEnvironment environment,
             string projectName,
             params string[] commandLineArguments
-        ) {
+        )
+        {
             return CreateCSharpCPSProjectAsync(
                 environment,
                 projectName,
@@ -75,7 +78,8 @@ namespace Roslyn.VisualStudio.CSharp.UnitTests.ProjectSystemShim
             string projectName,
             Guid projectGuid,
             params string[] commandLineArguments
-        ) {
+        )
+        {
             var projectFilePath = Path.GetTempPath();
             var binOutputPath =
                 GetOutputPathFromArguments(commandLineArguments)
@@ -96,7 +100,8 @@ namespace Roslyn.VisualStudio.CSharp.UnitTests.ProjectSystemShim
             string projectName,
             string binOutputPath,
             params string[] commandLineArguments
-        ) {
+        )
+        {
             var projectFilePath = Path.GetTempPath();
             return CreateCSharpCPSProjectAsync(
                 environment,
@@ -112,7 +117,8 @@ namespace Roslyn.VisualStudio.CSharp.UnitTests.ProjectSystemShim
             this CSharpProjectShim csharpProject,
             CompilerOptions optionID,
             object value
-        ) {
+        )
+        {
             Assert.Equal(sizeof(HACK_VariantStructure), 8 + 2 * IntPtr.Size);
             Assert.Equal(8, (int)Marshal.OffsetOf<HACK_VariantStructure>("_booleanValue"));
 
@@ -128,7 +134,8 @@ namespace Roslyn.VisualStudio.CSharp.UnitTests.ProjectSystemShim
             string binOutputPath,
             Guid projectGuid,
             params string[] commandLineArguments
-        ) {
+        )
+        {
             var hierarchy = environment.CreateHierarchy(
                 projectName,
                 binOutputPath,
@@ -156,7 +163,8 @@ namespace Roslyn.VisualStudio.CSharp.UnitTests.ProjectSystemShim
             TestEnvironment environment,
             string projectName,
             string projectFilePath
-        ) {
+        )
+        {
             var hierarchy = environment.CreateHierarchy(
                 projectName,
                 projectBinPath: null,
@@ -200,7 +208,8 @@ namespace Roslyn.VisualStudio.CSharp.UnitTests.ProjectSystemShim
                 string baseDirectory,
                 bool isInteractive,
                 string sdkDirectory
-            ) {
+            )
+            {
                 if (baseDirectory == null || !Directory.Exists(baseDirectory))
                 {
                     baseDirectory = Path.GetTempPath();
@@ -242,7 +251,8 @@ namespace Roslyn.VisualStudio.CSharp.UnitTests.ProjectSystemShim
                 ICSCompiler compiler,
                 ICSInputSet inputSet,
                 bool addSources
-            ) {
+            )
+            {
                 throw new NotImplementedException();
             }
 
@@ -265,7 +275,8 @@ namespace Roslyn.VisualStudio.CSharp.UnitTests.ProjectSystemShim
                 string pszFile,
                 out IVsHierarchy ppHier,
                 out uint pItemID
-            ) {
+            )
+            {
                 ppHier = _hierarchy;
 
                 // Each item should have it's own ItemID, but for simplicity we'll just hard-code a value of
@@ -280,7 +291,8 @@ namespace Roslyn.VisualStudio.CSharp.UnitTests.ProjectSystemShim
                 out IVsHierarchy ppHier,
                 out uint pItemID,
                 bool mustBeInProject
-            ) {
+            )
+            {
                 throw new NotImplementedException();
             }
 

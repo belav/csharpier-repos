@@ -45,7 +45,8 @@ namespace Microsoft.CodeAnalysis.Shared.Utilities
         public static IEnumerable<ValueTuple<SyntaxToken, SyntaxToken>> ConvertToTokenPairs(
             this SyntaxNode root,
             IList<TextSpan> spans
-        ) {
+        )
+        {
             Contract.ThrowIfNull(root);
             Contract.ThrowIfFalse(spans.Count > 0);
 
@@ -88,7 +89,8 @@ namespace Microsoft.CodeAnalysis.Shared.Utilities
         public static ValueTuple<SyntaxToken, SyntaxToken> ConvertToTokenPair(
             this SyntaxNode root,
             TextSpan textSpan
-        ) {
+        )
+        {
             Contract.ThrowIfNull(root);
             Contract.ThrowIfTrue(textSpan.IsEmpty);
 
@@ -143,7 +145,8 @@ namespace Microsoft.CodeAnalysis.Shared.Utilities
             this SyntaxNode root,
             SyntaxToken startToken,
             SyntaxToken endToken
-        ) {
+        )
+        {
             // given token must be token exist excluding EndOfFile token.
             if (startToken.RawKind == 0 || endToken.RawKind == 0)
             {
@@ -193,7 +196,8 @@ namespace Microsoft.CodeAnalysis.Shared.Utilities
             SyntaxToken token1,
             SyntaxToken token2,
             StringBuilder builder
-        ) {
+        )
+        {
             Contract.ThrowIfTrue(token1.RawKind == 0 && token2.RawKind == 0);
             Contract.ThrowIfTrue(token1.Equals(token2));
 
@@ -221,7 +225,8 @@ namespace Microsoft.CodeAnalysis.Shared.Utilities
                 var token = token1.GetNextToken(includeZeroWidth: true);
                 token.FullSpan.End <= token2.FullSpan.Start;
                 token = token.GetNextToken(includeZeroWidth: true)
-            ) {
+            )
+            {
                 builder.Append(token.ToFullString());
             }
 
@@ -232,7 +237,8 @@ namespace Microsoft.CodeAnalysis.Shared.Utilities
             SyntaxToken token1,
             SyntaxToken token2,
             StringBuilder builder
-        ) {
+        )
+        {
             AppendTrailingTriviaText(token1, builder);
             AppendLeadingTriviaText(token2, builder);
         }
@@ -258,7 +264,8 @@ namespace Microsoft.CodeAnalysis.Shared.Utilities
             SyntaxToken token,
             StringBuilder builder,
             int token1FullSpanEnd
-        ) {
+        )
+        {
             if (!token.HasLeadingTrivia)
             {
                 return;
@@ -296,7 +303,8 @@ namespace Microsoft.CodeAnalysis.Shared.Utilities
         public static TextSpan GetSpanIncludingTrailingAndLeadingTriviaOfAdjacentTokens(
             SyntaxToken startToken,
             SyntaxToken endToken
-        ) {
+        )
+        {
             // most of cases we can just ask previous and next token to create the span, but in some corner cases such as omitted token case,
             // those navigation function doesn't work, so we have to explore the tree ourselves to create correct span
             var startPosition = GetStartPositionOfSpan(startToken);
@@ -368,7 +376,8 @@ namespace Microsoft.CodeAnalysis.Shared.Utilities
             SyntaxNode? node,
             int position,
             bool forward
-        ) {
+        )
+        {
             while (node != null)
             {
                 var fullSpan = node.FullSpan;
@@ -396,11 +405,13 @@ namespace Microsoft.CodeAnalysis.Shared.Utilities
         public static bool HasAnyWhitespaceElasticTrivia(
             SyntaxToken previousToken,
             SyntaxToken currentToken
-        ) {
+        )
+        {
             if (
                 (!previousToken.ContainsAnnotations && !currentToken.ContainsAnnotations)
                 || (!previousToken.HasTrailingTrivia && !currentToken.HasLeadingTrivia)
-            ) {
+            )
+            {
                 return false;
             }
 

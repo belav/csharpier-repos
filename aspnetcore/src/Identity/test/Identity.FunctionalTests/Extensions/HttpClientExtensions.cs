@@ -16,7 +16,8 @@ namespace Microsoft.AspNetCore.Identity.FunctionalTests
             this HttpClient client,
             IHtmlFormElement form,
             IHtmlElement submitButton
-        ) {
+        )
+        {
             return client.SendAsync(form, submitButton, new Dictionary<string, string>());
         }
 
@@ -24,7 +25,8 @@ namespace Microsoft.AspNetCore.Identity.FunctionalTests
             this HttpClient client,
             IHtmlFormElement form,
             IEnumerable<KeyValuePair<string, string>> formValues
-        ) {
+        )
+        {
             var submitElement = Assert.Single(form.QuerySelectorAll("[type=submit]"));
             var submitButton = Assert.IsAssignableFrom<IHtmlElement>(submitElement);
 
@@ -36,7 +38,8 @@ namespace Microsoft.AspNetCore.Identity.FunctionalTests
             IHtmlFormElement form,
             IHtmlElement submitButton,
             IEnumerable<KeyValuePair<string, string>> formValues
-        ) {
+        )
+        {
             foreach (var kvp in formValues)
             {
                 var element = Assert.IsAssignableFrom<IHtmlInputElement>(form[kvp.Key]);

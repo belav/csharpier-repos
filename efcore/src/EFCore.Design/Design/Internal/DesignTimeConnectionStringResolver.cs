@@ -33,7 +33,8 @@ namespace Microsoft.EntityFrameworkCore.Design.Internal
         /// </summary>
         public DesignTimeConnectionStringResolver(
             Func<IServiceProvider>? applicationServiceProviderAccessor
-        ) {
+        )
+        {
             _applicationServiceProviderAccessor = applicationServiceProviderAccessor;
         }
 

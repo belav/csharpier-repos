@@ -13,7 +13,8 @@ namespace Microsoft.CodeAnalysis.ExpressionEvaluator
             this ImmutableArray<TItem> array,
             Func<TItem, TArg, bool> predicate,
             TArg arg
-        ) {
+        )
+        {
             for (int i = 0; i < array.Length; i++)
             {
                 if (predicate(array[i], arg))

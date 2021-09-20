@@ -118,7 +118,8 @@ namespace Newtonsoft.Json
         private async Task<bool> ParsePostValueAsync(
             bool ignoreComments,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             MiscellaneousUtils.Assert(_chars != null);
 
             while (true)
@@ -133,7 +134,8 @@ namespace Newtonsoft.Json
                             if (
                                 await ReadDataAsync(false, cancellationToken).ConfigureAwait(false)
                                 == 0
-                            ) {
+                            )
+                            {
                                 _currentState = State.Finished;
                                 return false;
                             }
@@ -251,7 +253,8 @@ namespace Newtonsoft.Json
             bool append,
             int charsRequired,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             MiscellaneousUtils.Assert(_chars != null);
 
             if (_isEndOfFile)
@@ -296,7 +299,8 @@ namespace Newtonsoft.Json
                             if (
                                 await ReadDataAsync(false, cancellationToken).ConfigureAwait(false)
                                 == 0
-                            ) {
+                            )
+                            {
                                 return false;
                             }
                         }
@@ -319,7 +323,8 @@ namespace Newtonsoft.Json
                     case 'n':
                         if (
                             await EnsureCharsAsync(1, true, cancellationToken).ConfigureAwait(false)
-                        ) {
+                        )
+                        {
                             switch (_chars[_charPos + 1])
                             {
                                 case 'u':
@@ -352,7 +357,8 @@ namespace Newtonsoft.Json
                         if (
                             await EnsureCharsAsync(1, true, cancellationToken).ConfigureAwait(false)
                             && _chars[_charPos + 1] == 'I'
-                        ) {
+                        )
+                        {
                             await ParseNumberNegativeInfinityAsync(ReadType.Read, cancellationToken)
                                 .ConfigureAwait(false);
                         }
@@ -426,7 +432,8 @@ namespace Newtonsoft.Json
         private async Task ReadStringIntoBufferAsync(
             char quote,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             MiscellaneousUtils.Assert(_chars != null);
 
             int charPos = _charPos;
@@ -446,7 +453,8 @@ namespace Newtonsoft.Json
                             if (
                                 await ReadDataAsync(true, cancellationToken).ConfigureAwait(false)
                                 == 0
-                            ) {
+                            )
+                            {
                                 _charPos = charPos;
                                 throw JsonReaderException.Create(
                                     this,
@@ -463,7 +471,8 @@ namespace Newtonsoft.Json
                         if (
                             !await EnsureCharsAsync(0, true, cancellationToken)
                                 .ConfigureAwait(false)
-                        ) {
+                        )
+                        {
                             throw JsonReaderException.Create(
                                 this,
                                 "Unterminated string. Expected delimiter: {0}.".FormatWith(
@@ -531,7 +540,8 @@ namespace Newtonsoft.Json
                                                 .ConfigureAwait(false)
                                             && _chars[_charPos] == '\\'
                                             && _chars[_charPos + 1] == 'u'
-                                        ) {
+                                        )
+                                        {
                                             char highSurrogate = writeChar;
 
                                             _charPos += 2;
@@ -647,7 +657,8 @@ namespace Newtonsoft.Json
             int relativePosition,
             bool append,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             if (_charPos + relativePosition < _charsUsed)
             {
                 return AsyncUtils.True;
@@ -665,7 +676,8 @@ namespace Newtonsoft.Json
             int relativePosition,
             bool append,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             int charsRequired = _charPos + relativePosition - _charsUsed + 1;
 
             // it is possible that the TextReader doesn't return all data at once
@@ -703,7 +715,8 @@ namespace Newtonsoft.Json
                             if (
                                 await ReadDataAsync(false, cancellationToken).ConfigureAwait(false)
                                 == 0
-                            ) {
+                            )
+                            {
                                 return false;
                             }
                         }
@@ -795,7 +808,8 @@ namespace Newtonsoft.Json
                             if (
                                 await ReadDataAsync(true, cancellationToken).ConfigureAwait(false)
                                 == 0
-                            ) {
+                            )
+                            {
                                 if (!singlelineComment)
                                 {
                                     throw JsonReaderException.Create(
@@ -821,7 +835,8 @@ namespace Newtonsoft.Json
                             if (
                                 await EnsureCharsAsync(0, true, cancellationToken)
                                     .ConfigureAwait(false)
-                            ) {
+                            )
+                            {
                                 if (_chars[_charPos] == '/')
                                 {
                                     EndComment(setToken, initialPosition, _charPos - 1);
@@ -874,7 +889,8 @@ namespace Newtonsoft.Json
                             if (
                                 await ReadDataAsync(false, cancellationToken).ConfigureAwait(false)
                                 == 0
-                            ) {
+                            )
+                            {
                                 return;
                             }
                         }
@@ -908,7 +924,8 @@ namespace Newtonsoft.Json
             char quote,
             ReadType readType,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             cancellationToken.ThrowIfCancellationRequested();
             _charPos++;
 
@@ -929,7 +946,8 @@ namespace Newtonsoft.Json
         private async Task<bool> MatchValueWithTrailingSeparatorAsync(
             string value,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             MiscellaneousUtils.Assert(_chars != null);
 
             // will match value and then move to the next character, checking that it is a separator character
@@ -951,11 +969,13 @@ namespace Newtonsoft.Json
             JsonToken newToken,
             object? tokenValue,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             if (
                 await MatchValueWithTrailingSeparatorAsync(value, cancellationToken)
                     .ConfigureAwait(false)
-            ) {
+            )
+            {
                 SetToken(newToken, tokenValue);
             }
             else
@@ -989,7 +1009,8 @@ namespace Newtonsoft.Json
             if (
                 await MatchValueWithTrailingSeparatorAsync("new", cancellationToken)
                     .ConfigureAwait(false)
-            ) {
+            )
+            {
                 await EatWhitespaceAsync(cancellationToken).ConfigureAwait(false);
 
                 int initialPosition = _charPos;
@@ -1005,7 +1026,8 @@ namespace Newtonsoft.Json
                             if (
                                 await ReadDataAsync(true, cancellationToken).ConfigureAwait(false)
                                 == 0
-                            ) {
+                            )
+                            {
                                 throw JsonReaderException.Create(
                                     this,
                                     "Unexpected end while parsing constructor."
@@ -1094,7 +1116,8 @@ namespace Newtonsoft.Json
         private async Task<object> ParseNumberNaNAsync(
             ReadType readType,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             return ParseNumberNaN(
                 readType,
                 await MatchValueWithTrailingSeparatorAsync(JsonConvert.NaN, cancellationToken)
@@ -1105,7 +1128,8 @@ namespace Newtonsoft.Json
         private async Task<object> ParseNumberPositiveInfinityAsync(
             ReadType readType,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             return ParseNumberPositiveInfinity(
                 readType,
                 await MatchValueWithTrailingSeparatorAsync(
@@ -1119,7 +1143,8 @@ namespace Newtonsoft.Json
         private async Task<object> ParseNumberNegativeInfinityAsync(
             ReadType readType,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             return ParseNumberNegativeInfinity(
                 readType,
                 await MatchValueWithTrailingSeparatorAsync(
@@ -1373,7 +1398,8 @@ namespace Newtonsoft.Json
         private async Task<object?> ReadStringValueAsync(
             ReadType readType,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             EnsureBuffer();
             MiscellaneousUtils.Assert(_chars != null);
 
@@ -1400,7 +1426,8 @@ namespace Newtonsoft.Json
                             case '\0':
                                 if (
                                     await ReadNullCharAsync(cancellationToken).ConfigureAwait(false)
-                                ) {
+                                )
+                                {
                                     SetToken(JsonToken.None, null, false);
                                     return null;
                                 }
@@ -1415,7 +1442,8 @@ namespace Newtonsoft.Json
                                     await EnsureCharsAsync(1, true, cancellationToken)
                                         .ConfigureAwait(false)
                                     && _chars[_charPos + 1] == 'I'
-                                ) {
+                                )
+                                {
                                     return ParseNumberNegativeInfinity(readType);
                                 }
                                 else
@@ -1460,7 +1488,8 @@ namespace Newtonsoft.Json
                                             cancellationToken
                                         )
                                         .ConfigureAwait(false)
-                                ) {
+                                )
+                                {
                                     throw CreateUnexpectedCharacterException(_chars[_charPos]);
                                 }
 
@@ -1491,7 +1520,8 @@ namespace Newtonsoft.Json
                                     _currentState == State.Array
                                     || _currentState == State.ArrayStart
                                     || _currentState == State.PostValue
-                                ) {
+                                )
+                                {
                                     SetToken(JsonToken.EndArray);
                                     return null;
                                 }
@@ -1538,7 +1568,8 @@ namespace Newtonsoft.Json
         private async Task<object?> ReadNumberValueAsync(
             ReadType readType,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             EnsureBuffer();
             MiscellaneousUtils.Assert(_chars != null);
 
@@ -1565,7 +1596,8 @@ namespace Newtonsoft.Json
                             case '\0':
                                 if (
                                     await ReadNullCharAsync(cancellationToken).ConfigureAwait(false)
-                                ) {
+                                )
+                                {
                                     SetToken(JsonToken.None, null, false);
                                     return null;
                                 }
@@ -1592,7 +1624,8 @@ namespace Newtonsoft.Json
                                     await EnsureCharsAsync(1, true, cancellationToken)
                                         .ConfigureAwait(false)
                                     && _chars[_charPos + 1] == 'I'
-                                ) {
+                                )
+                                {
                                     return await ParseNumberNegativeInfinityAsync(
                                             readType,
                                             cancellationToken
@@ -1632,7 +1665,8 @@ namespace Newtonsoft.Json
                                     _currentState == State.Array
                                     || _currentState == State.ArrayStart
                                     || _currentState == State.PostValue
-                                ) {
+                                )
+                                {
                                     SetToken(JsonToken.EndArray);
                                     return null;
                                 }
@@ -1686,7 +1720,8 @@ namespace Newtonsoft.Json
         /// execute synchronously, returning an already-completed task.</remarks>
         public override Task<bool?> ReadAsBooleanAsync(
             CancellationToken cancellationToken = default
-        ) {
+        )
+        {
             return _safeAsync
               ? DoReadAsBooleanAsync(cancellationToken)
               : base.ReadAsBooleanAsync(cancellationToken);
@@ -1720,7 +1755,8 @@ namespace Newtonsoft.Json
                             case '\0':
                                 if (
                                     await ReadNullCharAsync(cancellationToken).ConfigureAwait(false)
-                                ) {
+                                )
+                                {
                                     SetToken(JsonToken.None, null, false);
                                     return null;
                                 }
@@ -1774,7 +1810,8 @@ namespace Newtonsoft.Json
                                             cancellationToken
                                         )
                                         .ConfigureAwait(false)
-                                ) {
+                                )
+                                {
                                     throw CreateUnexpectedCharacterException(_chars[_charPos]);
                                 }
 
@@ -1793,7 +1830,8 @@ namespace Newtonsoft.Json
                                     _currentState == State.Array
                                     || _currentState == State.ArrayStart
                                     || _currentState == State.PostValue
-                                ) {
+                                )
+                                {
                                     SetToken(JsonToken.EndArray);
                                     return null;
                                 }
@@ -1847,7 +1885,8 @@ namespace Newtonsoft.Json
         /// execute synchronously, returning an already-completed task.</remarks>
         public override Task<byte[]?> ReadAsBytesAsync(
             CancellationToken cancellationToken = default
-        ) {
+        )
+        {
             return _safeAsync
               ? DoReadAsBytesAsync(cancellationToken)
               : base.ReadAsBytesAsync(cancellationToken);
@@ -1883,7 +1922,8 @@ namespace Newtonsoft.Json
                             case '\0':
                                 if (
                                     await ReadNullCharAsync(cancellationToken).ConfigureAwait(false)
-                                ) {
+                                )
+                                {
                                     SetToken(JsonToken.None, null, false);
                                     return null;
                                 }
@@ -1944,7 +1984,8 @@ namespace Newtonsoft.Json
                                     _currentState == State.Array
                                     || _currentState == State.ArrayStart
                                     || _currentState == State.PostValue
-                                ) {
+                                )
+                                {
                                     SetToken(JsonToken.EndArray);
                                     return null;
                                 }
@@ -1997,7 +2038,8 @@ namespace Newtonsoft.Json
                 if (
                     Value != null
                     && Value.ToString().StartsWith("System.Byte[]", StringComparison.Ordinal)
-                ) {
+                )
+                {
                     await ReaderReadAndAssertAsync(cancellationToken).ConfigureAwait(false);
                     if (Value.ToString() == JsonTypeReflector.ValuePropertyName)
                     {
@@ -2025,7 +2067,8 @@ namespace Newtonsoft.Json
         /// execute synchronously, returning an already-completed task.</remarks>
         public override Task<DateTime?> ReadAsDateTimeAsync(
             CancellationToken cancellationToken = default
-        ) {
+        )
+        {
             return _safeAsync
               ? DoReadAsDateTimeAsync(cancellationToken)
               : base.ReadAsDateTimeAsync(cancellationToken);
@@ -2047,7 +2090,8 @@ namespace Newtonsoft.Json
         /// execute synchronously, returning an already-completed task.</remarks>
         public override Task<DateTimeOffset?> ReadAsDateTimeOffsetAsync(
             CancellationToken cancellationToken = default
-        ) {
+        )
+        {
             return _safeAsync
               ? DoReadAsDateTimeOffsetAsync(cancellationToken)
               : base.ReadAsDateTimeOffsetAsync(cancellationToken);
@@ -2055,7 +2099,8 @@ namespace Newtonsoft.Json
 
         internal async Task<DateTimeOffset?> DoReadAsDateTimeOffsetAsync(
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             return (DateTimeOffset?)await ReadStringValueAsync(
                     ReadType.ReadAsDateTimeOffset,
                     cancellationToken
@@ -2073,7 +2118,8 @@ namespace Newtonsoft.Json
         /// execute synchronously, returning an already-completed task.</remarks>
         public override Task<decimal?> ReadAsDecimalAsync(
             CancellationToken cancellationToken = default
-        ) {
+        )
+        {
             return _safeAsync
               ? DoReadAsDecimalAsync(cancellationToken)
               : base.ReadAsDecimalAsync(cancellationToken);
@@ -2095,7 +2141,8 @@ namespace Newtonsoft.Json
         /// execute synchronously, returning an already-completed task.</remarks>
         public override Task<double?> ReadAsDoubleAsync(
             CancellationToken cancellationToken = default
-        ) {
+        )
+        {
             return _safeAsync
               ? DoReadAsDoubleAsync(cancellationToken)
               : base.ReadAsDoubleAsync(cancellationToken);
@@ -2138,7 +2185,8 @@ namespace Newtonsoft.Json
         /// execute synchronously, returning an already-completed task.</remarks>
         public override Task<string?> ReadAsStringAsync(
             CancellationToken cancellationToken = default
-        ) {
+        )
+        {
             return _safeAsync
               ? DoReadAsStringAsync(cancellationToken)
               : base.ReadAsStringAsync(cancellationToken);

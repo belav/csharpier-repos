@@ -11,12 +11,8 @@ namespace MS.Internal.Xml.XPath
         private XPathNavigator? _input;
         private XPathNodeIterator? _iterator;
 
-        public FollowingQuery(
-            Query qyInput,
-            string name,
-            string prefix,
-            XPathNodeType typeTest
-        ) : base(qyInput, name, prefix, typeTest) { }
+        public FollowingQuery(Query qyInput, string name, string prefix, XPathNodeType typeTest)
+            : base(qyInput, name, prefix, typeTest) { }
         private FollowingQuery(FollowingQuery other) : base(other)
         {
             _input = Clone(other._input);
@@ -56,7 +52,8 @@ namespace MS.Internal.Xml.XPath
                 if (
                     _input!.NodeType == XPathNodeType.Attribute
                     || _input.NodeType == XPathNodeType.Namespace
-                ) {
+                )
+                {
                     _input.MoveToParent();
                     matchSelf = false;
                 }

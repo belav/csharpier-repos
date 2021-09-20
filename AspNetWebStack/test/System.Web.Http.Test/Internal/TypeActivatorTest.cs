@@ -145,7 +145,8 @@ namespace System.Web.Http.Internal
                     && methodInfo.ContainsGenericParameters
                     && parameterInfo.Length == 1
                     && parameterInfo[0].ParameterType == typeof(Type)
-                ) {
+                )
+                {
                     createMethodInfo = methodInfo;
                     break;
                 }

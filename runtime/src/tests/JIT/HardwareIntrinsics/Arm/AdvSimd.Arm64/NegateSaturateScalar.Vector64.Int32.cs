@@ -129,7 +129,8 @@ namespace JIT.HardwareIntrinsics.Arm
                     (alignment != 16 && alignment != 8)
                     || (alignment * 2) < sizeOfinArray1
                     || (alignment * 2) < sizeOfoutArray
-                ) {
+                )
+                {
                     throw new ArgumentException("Invalid value of alignment");
                 }
 
@@ -188,7 +189,8 @@ namespace JIT.HardwareIntrinsics.Arm
 
             public void RunStructFldScenario(
                 SimpleUnaryOpTest__NegateSaturateScalar_Vector64_Int32 testClass
-            ) {
+            )
+            {
                 var result = AdvSimd.Arm64.NegateSaturateScalar(_fld1);
 
                 Unsafe.Write(testClass._dataTable.outArrayPtr, result);
@@ -197,7 +199,8 @@ namespace JIT.HardwareIntrinsics.Arm
 
             public void RunStructFldScenario_Load(
                 SimpleUnaryOpTest__NegateSaturateScalar_Vector64_Int32 testClass
-            ) {
+            )
+            {
                 fixed (Vector64<Int32>* pFld1 = &_fld1)
                 {
                     var result = AdvSimd.Arm64.NegateSaturateScalar(
@@ -486,7 +489,8 @@ namespace JIT.HardwareIntrinsics.Arm
             Vector64<Int32> op1,
             void* result,
             [CallerMemberName] string method = ""
-        ) {
+        )
+        {
             Int32[] inArray1 = new Int32[Op1ElementCount];
             Int32[] outArray = new Int32[RetElementCount];
 
@@ -523,7 +527,8 @@ namespace JIT.HardwareIntrinsics.Arm
             Int32[] firstOp,
             Int32[] result,
             [CallerMemberName] string method = ""
-        ) {
+        )
+        {
             bool succeeded = true;
 
             if (Helpers.NegateSaturate(firstOp[0]) != result[0])

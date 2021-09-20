@@ -388,7 +388,8 @@ namespace System.Xml.Xsl.XsltOld
                 NodeType == XmlNodeType.Element
                 || NodeType == XmlNodeType.Attribute
                 || _currentInfo == _attributeValue
-            ) {
+            )
+            {
                 if (_mainNode.IsEmptyTag)
                 {
                     return result;

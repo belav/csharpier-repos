@@ -190,7 +190,8 @@ namespace System.Linq.Parallel.Tests
                                 .ThenByDescending(x => x, new FailingComparer())
                     ),
                 }
-            ) {
+            )
+            {
                 yield return new object[] { LabeledDefaultSource, operation };
             }
 
@@ -515,7 +516,8 @@ namespace System.Linq.Parallel.Tests
                     Labeled<Operation> operation in UnaryOperations()
                         .Select(i => i[0])
                         .Where(op => !op.ToString().Contains("Reverse"))
-                ) {
+                )
+                {
                     yield return new object[] { source, operation };
                 }
             }
@@ -740,7 +742,8 @@ namespace System.Linq.Parallel.Tests
                                 )
                     ),
                 }
-            ) {
+            )
+            {
                 yield return new object[] { LabeledDefaultSource, operation };
             }
 
@@ -749,7 +752,8 @@ namespace System.Linq.Parallel.Tests
                     .Select(i => i[0])
                     .Cast<Labeled<Operation>>()
                     .Concat(SkipTakeOperationSources())
-            ) {
+            )
+            {
                 yield return new object[] { Failing, operation };
             }
         }
@@ -918,7 +922,8 @@ namespace System.Linq.Parallel.Tests
 
         public static IEnumerable<Labeled<Operation>> BinaryOperatorSources(
             Labeled<Operation> otherSource
-        ) {
+        )
+        {
             string label = otherSource.ToString();
             Operation other = otherSource.Item;
 
@@ -1067,7 +1072,8 @@ namespace System.Linq.Parallel.Tests
                 // Operations having multiple paths to check.
                 foreach (
                     Labeled<Operation> operation in BinaryOperatorSources(LabeledDefaultSource)
-                ) {
+                )
+                {
                     yield return new object[] { source, operation };
                 }
             }
@@ -1090,7 +1096,8 @@ namespace System.Linq.Parallel.Tests
                                     || op.ToString().StartsWith("Concat")
                                 ) && op.ToString().Contains("Right")
                         )
-                ) {
+                )
+                {
                     yield return new object[] { source, operation };
                 }
 
@@ -1102,7 +1109,8 @@ namespace System.Linq.Parallel.Tests
                                 op.ToString().StartsWith("Concat")
                                 || op.ToString().StartsWith("Union")
                         )
-                ) {
+                )
+                {
                     yield return new object[] { source, operation };
                 }
 
@@ -1127,7 +1135,8 @@ namespace System.Linq.Parallel.Tests
                                     .Zip(s(0, count), (x, y) => (x + y) / 2)
                         )
                     }
-                ) {
+                )
+                {
                     yield return new object[] { source, operation };
                 }
             }
@@ -1233,7 +1242,8 @@ namespace System.Linq.Parallel.Tests
                                 )
                     ),
                 }
-            ) {
+            )
+            {
                 yield return new object[] { LabeledDefaultSource, operation };
             }
         }
@@ -1370,7 +1380,8 @@ namespace System.Linq.Parallel.Tests
         public static Labeled<Operation> Append(
             this Labeled<Operation> item,
             Labeled<Operation> next
-        ) {
+        )
+        {
             Operation op = item.Item;
             Operation nxt = next.Item;
             return Label(

@@ -302,7 +302,8 @@ namespace Microsoft.CodeAnalysis
 
         private SourceTextContainer? GetOpenDocumentSourceTextContainer_NoLock(
             DocumentId documentId
-        ) {
+        )
+        {
             // TODO: remove linear search
             return _bufferToAssociatedDocumentsMap.Where(kvp => kvp.Value.Contains(documentId))
                 .Select(kvp => kvp.Key)
@@ -387,7 +388,8 @@ namespace Microsoft.CodeAnalysis
             DocumentId documentId,
             SourceTextContainer textContainer,
             bool isCurrentContext = true
-        ) {
+        )
+        {
             using (_serializationLock.DisposableWait())
             {
                 CheckDocumentIsInCurrentSolution(documentId);
@@ -404,7 +406,8 @@ namespace Microsoft.CodeAnalysis
                 if (
                     oldDocument.TryGetText(out var oldText)
                     && oldDocument.TryGetTextVersion(out var version)
-                ) {
+                )
+                {
                     // Optimize the case where we've already got the previous text and version.
                     var newTextAndVersion = GetProperTextAndVersion(
                         oldText,
@@ -478,7 +481,8 @@ namespace Microsoft.CodeAnalysis
                 Workspace workspace,
                 DocumentId documentId,
                 CancellationToken cancellationToken
-            ) {
+            )
+            {
                 var oldText = await _oldDocumentState.GetTextAsync(cancellationToken)
                     .ConfigureAwait(false);
                 var version = await _oldDocumentState.GetTextVersionAsync(cancellationToken)
@@ -496,7 +500,8 @@ namespace Microsoft.CodeAnalysis
                 Workspace workspace,
                 DocumentId documentId,
                 CancellationToken cancellationToken
-            ) {
+            )
+            {
                 var oldText = _oldDocumentState.GetTextSynchronously(cancellationToken);
                 var version = _oldDocumentState.GetTextVersionSynchronously(cancellationToken);
 
@@ -514,7 +519,8 @@ namespace Microsoft.CodeAnalysis
             SourceText newText,
             VersionStamp version,
             string? filePath
-        ) {
+        )
+        {
             // if the supplied text is the same as the previous text, then also use same version
             // otherwise use new version
             return oldText.ContentEquals(newText)
@@ -527,7 +533,8 @@ namespace Microsoft.CodeAnalysis
             SourceTextContainer textContainer,
             bool isCurrentContext,
             Action<Workspace, DocumentId, SourceText, PreservationMode> onChangedHandler
-        ) {
+        )
+        {
             var tracker = new TextTracker(this, documentId, textContainer, onChangedHandler);
             _textTrackers.Add(documentId, tracker);
             this.UpdateCurrentContextMapping_NoLock(textContainer, documentId, isCurrentContext);
@@ -546,7 +553,8 @@ namespace Microsoft.CodeAnalysis
             DocumentId documentId,
             SourceTextContainer textContainer,
             bool isCurrentContext = true
-        ) {
+        )
+        {
             OnAdditionalOrAnalyzerConfigDocumentOpened(
                 documentId,
                 textContainer,
@@ -566,7 +574,8 @@ namespace Microsoft.CodeAnalysis
             DocumentId documentId,
             SourceTextContainer textContainer,
             bool isCurrentContext = true
-        ) {
+        )
+        {
             OnAdditionalOrAnalyzerConfigDocumentOpened(
                 documentId,
                 textContainer,
@@ -600,7 +609,8 @@ namespace Microsoft.CodeAnalysis
                 Solution
             > withDocumentTextAndVersion,
             Action<Workspace, DocumentId, SourceText, PreservationMode> onDocumentTextChanged
-        ) {
+        )
+        {
             using (_serializationLock.DisposableWait())
             {
                 checkTextDocumentIsInCurrentSolution(documentId);
@@ -723,7 +733,8 @@ namespace Microsoft.CodeAnalysis
         protected internal void OnAdditionalDocumentClosed(
             DocumentId documentId,
             TextLoader reloader
-        ) {
+        )
+        {
             OnAdditionalOrAnalyzerConfigDocumentClosed(
                 documentId,
                 reloader,
@@ -737,7 +748,8 @@ namespace Microsoft.CodeAnalysis
         protected internal void OnAnalyzerConfigDocumentClosed(
             DocumentId documentId,
             TextLoader reloader
-        ) {
+        )
+        {
             OnAdditionalOrAnalyzerConfigDocumentClosed(
                 documentId,
                 reloader,
@@ -763,7 +775,8 @@ namespace Microsoft.CodeAnalysis
                 PreservationMode,
                 Solution
             > withTextDocumentTextLoader
-        ) {
+        )
+        {
             using (_serializationLock.DisposableWait())
             {
                 checkTextDocumentIsInCurrentSolution(documentId);
@@ -800,7 +813,8 @@ namespace Microsoft.CodeAnalysis
             SourceTextContainer textContainer,
             DocumentId id,
             bool isCurrentContext
-        ) {
+        )
+        {
             if (_bufferToAssociatedDocumentsMap.TryGetValue(textContainer, out var docIds))
             {
                 Contract.ThrowIfFalse(
@@ -821,7 +835,8 @@ namespace Microsoft.CodeAnalysis
 
             if (
                 isCurrentContext || !_bufferToDocumentInCurrentContextMap.ContainsKey(textContainer)
-            ) {
+            )
+            {
                 _bufferToDocumentInCurrentContextMap[textContainer] = id;
             }
 
@@ -832,7 +847,8 @@ namespace Microsoft.CodeAnalysis
         private DocumentId? UpdateCurrentContextMapping_NoLock(
             SourceTextContainer textContainer,
             DocumentId closedDocumentId
-        ) {
+        )
+        {
             // Check if we are tracking this textContainer.
             if (!_bufferToAssociatedDocumentsMap.TryGetValue(textContainer, out var docIds))
             {
@@ -877,7 +893,8 @@ namespace Microsoft.CodeAnalysis
         protected virtual Solution AdjustReloadedSolution(
             Solution oldSolution,
             Solution reloadedSolution
-        ) {
+        )
+        {
             var newSolution = reloadedSolution;
 
             // keep open documents using same text
@@ -921,10 +938,12 @@ namespace Microsoft.CodeAnalysis
             IEnumerable<
                 Lazy<IDocumentOptionsProviderFactory, OrderableMetadata>
             > documentOptionsProviderFactories
-        ) {
+        )
+        {
             foreach (
                 var providerFactory in ExtensionOrderer.Order(documentOptionsProviderFactories)
-            ) {
+            )
+            {
                 var optionsProvider = providerFactory.Value.TryCreate(this);
 
                 if (optionsProvider != null)

@@ -41,7 +41,8 @@ namespace System.Collections.Tests
             object a,
             object b,
             bool expected
-        ) {
+        )
+        {
             var cultureNames = Helpers.TestCultureNames;
 
             foreach (string cultureName in cultureNames)
@@ -78,7 +79,8 @@ namespace System.Collections.Tests
             object a,
             object b,
             bool expected
-        ) {
+        )
+        {
             var cultureNames = Helpers.TestCultureNames;
 
             foreach (string cultureName in cultureNames)

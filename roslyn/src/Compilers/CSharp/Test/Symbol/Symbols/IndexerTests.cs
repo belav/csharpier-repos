@@ -272,7 +272,8 @@ class C : IB, IC
 
         private static KeyValuePair<string, string> GetPairForSynthesizedExplicitImplementation(
             SynthesizedExplicitImplementationForwardingMethod bridge
-        ) {
+        )
+        {
             return new KeyValuePair<string, string>(
                 bridge.ExplicitInterfaceImplementations.Single().ToTestDisplayString(),
                 bridge.ImplementingMethod.ToTestDisplayString()
@@ -285,7 +286,8 @@ class C : IB, IC
             bool hasSet,
             SpecialType expectedType,
             params SpecialType[] expectedParameterTypes
-        ) {
+        )
+        {
             Assert.NotNull(property);
             Assert.True(property.IsIndexer);
 
@@ -326,7 +328,8 @@ class C : IB, IC
         private static void CheckParameters(
             ImmutableArray<ParameterSymbol> parameters,
             SpecialType[] expectedTypes
-        ) {
+        )
+        {
             Assert.Equal(parameters.Length, expectedTypes.Length);
             for (int i = 0; i < expectedTypes.Length; i++)
             {
@@ -3016,7 +3019,8 @@ class C
             SyntaxTree tree,
             SemanticModel model,
             params string[] expected
-        ) {
+        )
+        {
             var actual = GetElementAccessExpressions(tree.GetCompilationUnitRoot())
                 .Select(syntax => model.GetSymbolInfo(syntax).Symbol.ToTestDisplayString());
             AssertEx.Equal(expected, actual, itemInspector: s => string.Format("\"{0}\"", s));
@@ -3024,7 +3028,8 @@ class C
 
         private static IEnumerable<ElementAccessExpressionSyntax> GetElementAccessExpressions(
             SyntaxNode node
-        ) {
+        )
+        {
             return node == null
               ? SpecializedCollections.EmptyEnumerable<ElementAccessExpressionSyntax>()
               : node.DescendantNodesAndSelf()

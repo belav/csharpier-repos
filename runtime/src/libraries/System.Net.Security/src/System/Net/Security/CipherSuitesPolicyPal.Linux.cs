@@ -37,7 +37,8 @@ namespace System.Net.Security
 
             using (
                 SafeSslContextHandle innerContext = Ssl.SslCtxCreate(Ssl.SslMethods.SSLv23_method)
-            ) {
+            )
+            {
                 if (innerContext.IsInvalid)
                 {
                     throw OpenSsl.CreateSslException(SR.net_allocate_ssl_context_failed);
@@ -84,7 +85,8 @@ namespace System.Net.Security
         internal static bool ShouldOptOutOfTls13(
             CipherSuitesPolicy? policy,
             EncryptionPolicy encryptionPolicy
-        ) {
+        )
+        {
             // if TLS 1.3 was explicitly requested the underlying code will throw
             // if default option (SslProtocols.None) is used we will opt-out of TLS 1.3
 
@@ -114,7 +116,8 @@ namespace System.Net.Security
         internal static bool ShouldOptOutOfLowerThanTls13(
             CipherSuitesPolicy? policy,
             EncryptionPolicy encryptionPolicy
-        ) {
+        )
+        {
             if (policy == null)
             {
                 // null means default, by default OpenSSL will choose if it wants to opt-out or not
@@ -140,7 +143,8 @@ namespace System.Net.Security
             CipherSuitesPolicy? policy,
             SslProtocols protocols,
             EncryptionPolicy encryptionPolicy
-        ) {
+        )
+        {
             if (IsOnlyTls13(protocols))
             {
                 // older cipher suites will be disabled through protocols
@@ -166,7 +170,8 @@ namespace System.Net.Security
             CipherSuitesPolicy? policy,
             SslProtocols protocols,
             EncryptionPolicy encryptionPolicy
-        ) {
+        )
+        {
             if (!WantsTls13(protocols) || policy == null)
             {
                 // do not call TLS 1.3 API, let OpenSSL choose what to do

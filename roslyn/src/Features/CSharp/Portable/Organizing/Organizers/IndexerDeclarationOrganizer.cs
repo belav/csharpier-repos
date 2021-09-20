@@ -24,7 +24,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Organizing.Organizers
         protected override IndexerDeclarationSyntax Organize(
             IndexerDeclarationSyntax syntax,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             return syntax.Update(
                 attributeLists: syntax.AttributeLists,
                 modifiers: ModifiersOrganizer.Organize(syntax.Modifiers),

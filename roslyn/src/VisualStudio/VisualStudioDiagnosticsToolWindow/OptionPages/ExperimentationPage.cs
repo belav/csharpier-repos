@@ -18,7 +18,8 @@ namespace Roslyn.VisualStudio.DiagnosticsWindow.OptionsPages
         protected override AbstractOptionPageControl CreateOptionPage(
             IServiceProvider serviceProvider,
             OptionStore optionStore
-        ) {
+        )
+        {
             return new InternalOptionsControl(nameof(ExperimentationOptions), optionStore);
         }
     }

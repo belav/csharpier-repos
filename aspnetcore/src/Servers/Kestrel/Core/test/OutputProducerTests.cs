@@ -81,7 +81,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Tests
         private TestHttpOutputProducer CreateOutputProducer(
             PipeOptions pipeOptions = null,
             ConnectionContext connectionContext = null
-        ) {
+        )
+        {
             pipeOptions = pipeOptions ?? new PipeOptions();
             connectionContext = connectionContext ?? Mock.Of<ConnectionContext>();
 
@@ -112,16 +113,18 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Tests
                 ITimeoutControl timeoutControl,
                 IHttpMinResponseDataRateFeature minResponseDataRateFeature,
                 IHttpOutputAborter outputAborter
-            ) : base(
-                pipe.Writer,
-                connectionId,
-                connectionContext,
-                memoryPool,
-                log,
-                timeoutControl,
-                minResponseDataRateFeature,
-                outputAborter
-            ) {
+            )
+                : base(
+                    pipe.Writer,
+                    connectionId,
+                    connectionContext,
+                    memoryPool,
+                    log,
+                    timeoutControl,
+                    minResponseDataRateFeature,
+                    outputAborter
+                )
+            {
                 Pipe = pipe;
             }
 

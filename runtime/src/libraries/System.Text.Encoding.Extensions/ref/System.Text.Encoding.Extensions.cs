@@ -41,7 +41,8 @@ namespace System.Text
             int charCount,
             byte[] bytes,
             int byteIndex
-        ) {
+        )
+        {
             throw null;
         }
         public override int GetBytes(System.ReadOnlySpan<char> chars, System.Span<byte> bytes)
@@ -54,7 +55,8 @@ namespace System.Text
             int charCount,
             byte[] bytes,
             int byteIndex
-        ) {
+        )
+        {
             throw null;
         }
         [System.CLSCompliantAttribute(false)]
@@ -81,7 +83,8 @@ namespace System.Text
             int byteCount,
             char[] chars,
             int charIndex
-        ) {
+        )
+        {
             throw null;
         }
         public override int GetChars(System.ReadOnlySpan<byte> bytes, System.Span<char> chars)
@@ -121,7 +124,8 @@ namespace System.Text
         }
         public override bool Equals(
             [System.Diagnostics.CodeAnalysis.NotNullWhenAttribute(true)] object? value
-        ) {
+        )
+        {
             throw null;
         }
         [System.CLSCompliantAttribute(false)]
@@ -148,7 +152,8 @@ namespace System.Text
             int charCount,
             byte[] bytes,
             int byteIndex
-        ) {
+        )
+        {
             throw null;
         }
         public override int GetBytes(
@@ -157,7 +162,8 @@ namespace System.Text
             int charCount,
             byte[] bytes,
             int byteIndex
-        ) {
+        )
+        {
             throw null;
         }
         [System.CLSCompliantAttribute(false)]
@@ -180,7 +186,8 @@ namespace System.Text
             int byteCount,
             char[] chars,
             int charIndex
-        ) {
+        )
+        {
             throw null;
         }
         public override System.Text.Decoder GetDecoder()
@@ -223,7 +230,8 @@ namespace System.Text
         }
         public override bool Equals(
             [System.Diagnostics.CodeAnalysis.NotNullWhenAttribute(true)] object? value
-        ) {
+        )
+        {
             throw null;
         }
         [System.CLSCompliantAttribute(false)]
@@ -250,7 +258,8 @@ namespace System.Text
             int charCount,
             byte[] bytes,
             int byteIndex
-        ) {
+        )
+        {
             throw null;
         }
         public override int GetBytes(
@@ -259,7 +268,8 @@ namespace System.Text
             int charCount,
             byte[] bytes,
             int byteIndex
-        ) {
+        )
+        {
             throw null;
         }
         [System.CLSCompliantAttribute(false)]
@@ -282,7 +292,8 @@ namespace System.Text
             int byteCount,
             char[] chars,
             int charIndex
-        ) {
+        )
+        {
             throw null;
         }
         public override System.Text.Decoder GetDecoder()
@@ -330,7 +341,8 @@ namespace System.Text
         public UTF7Encoding(bool allowOptionals) { }
         public override bool Equals(
             [System.Diagnostics.CodeAnalysis.NotNullWhenAttribute(true)] object? value
-        ) {
+        )
+        {
             throw null;
         }
         [System.CLSCompliantAttribute(false)]
@@ -357,7 +369,8 @@ namespace System.Text
             int charCount,
             byte[] bytes,
             int byteIndex
-        ) {
+        )
+        {
             throw null;
         }
         public override int GetBytes(
@@ -366,7 +379,8 @@ namespace System.Text
             int charCount,
             byte[] bytes,
             int byteIndex
-        ) {
+        )
+        {
             throw null;
         }
         [System.CLSCompliantAttribute(false)]
@@ -389,7 +403,8 @@ namespace System.Text
             int byteCount,
             char[] chars,
             int charIndex
-        ) {
+        )
+        {
             throw null;
         }
         public override System.Text.Decoder GetDecoder()
@@ -428,7 +443,8 @@ namespace System.Text
         }
         public override bool Equals(
             [System.Diagnostics.CodeAnalysis.NotNullWhenAttribute(true)] object? value
-        ) {
+        )
+        {
             throw null;
         }
         [System.CLSCompliantAttribute(false)]
@@ -459,7 +475,8 @@ namespace System.Text
             int charCount,
             byte[] bytes,
             int byteIndex
-        ) {
+        )
+        {
             throw null;
         }
         public override int GetBytes(System.ReadOnlySpan<char> chars, System.Span<byte> bytes)
@@ -472,7 +489,8 @@ namespace System.Text
             int charCount,
             byte[] bytes,
             int byteIndex
-        ) {
+        )
+        {
             throw null;
         }
         [System.CLSCompliantAttribute(false)]
@@ -499,7 +517,8 @@ namespace System.Text
             int byteCount,
             char[] chars,
             int charIndex
-        ) {
+        )
+        {
             throw null;
         }
         public override int GetChars(System.ReadOnlySpan<byte> bytes, System.Span<char> chars)

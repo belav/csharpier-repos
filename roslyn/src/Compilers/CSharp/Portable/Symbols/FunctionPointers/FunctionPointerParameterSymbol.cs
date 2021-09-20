@@ -19,7 +19,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             int ordinal,
             FunctionPointerMethodSymbol containingSymbol,
             ImmutableArray<CustomModifier> refCustomModifiers
-        ) {
+        )
+        {
             TypeWithAnnotations = typeWithAnnotations;
             RefKind = refKind;
             Ordinal = ordinal;

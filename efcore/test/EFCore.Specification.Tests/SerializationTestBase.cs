@@ -30,7 +30,8 @@ namespace Microsoft.EntityFrameworkCore
             bool useNewtonsoft,
             bool ignoreLoops,
             bool writeIndented
-        ) {
+        )
+        {
             using var context = Fixture.CreateContext();
 
             var teams = context.Teams.Include(e => e.Drivers)
@@ -63,7 +64,8 @@ namespace Microsoft.EntityFrameworkCore
             F1Context context,
             Team team,
             IDictionary<int, Team> teamsMap
-        ) {
+        )
+        {
             var trackedTeam = context.Teams.Find(team.Id);
             Assert.Equal(trackedTeam.Constructor, team.Constructor);
             Assert.Equal(trackedTeam.Name, team.Name);
@@ -91,7 +93,8 @@ namespace Microsoft.EntityFrameworkCore
             F1Context context,
             Engine engine,
             IDictionary<int, Engine> enginesMap
-        ) {
+        )
+        {
             var trackedEngine = context.Engines.Find(engine.Id);
             Assert.Equal(trackedEngine.StorageLocation.Latitude, engine.StorageLocation.Latitude);
             Assert.Equal(trackedEngine.StorageLocation.Longitude, engine.StorageLocation.Longitude);
@@ -112,7 +115,8 @@ namespace Microsoft.EntityFrameworkCore
             F1Context context,
             EngineSupplier engineSupplier,
             IDictionary<string, EngineSupplier> engineSupplierMap
-        ) {
+        )
+        {
             var trackedEngineSupplier = context.EngineSuppliers.Find(engineSupplier.Name);
             Assert.Equal(trackedEngineSupplier.Name, engineSupplier.Name);
 
@@ -120,7 +124,8 @@ namespace Microsoft.EntityFrameworkCore
             {
                 if (
                     engineSupplierMap.TryGetValue(engineSupplier.Name, out var mappedEngineSupplier)
-                ) {
+                )
+                {
                     Assert.Same(engineSupplier, mappedEngineSupplier);
                 }
 
@@ -133,7 +138,8 @@ namespace Microsoft.EntityFrameworkCore
             bool ignoreLoops,
             bool writeIndented,
             int maxDepth = 64
-        ) {
+        )
+        {
             Assert.False(ignoreLoops, "BCL doesn't support ignoring loops.");
 
             var options = new JsonSerializerOptions
@@ -153,7 +159,8 @@ namespace Microsoft.EntityFrameworkCore
             T collection,
             bool ignoreLoops,
             bool writeIndented
-        ) {
+        )
+        {
             var options = new Newtonsoft.Json.JsonSerializerSettings
             {
                 PreserveReferencesHandling = ignoreLoops

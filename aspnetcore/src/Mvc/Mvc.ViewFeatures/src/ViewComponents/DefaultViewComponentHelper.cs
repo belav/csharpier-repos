@@ -44,7 +44,8 @@ namespace Microsoft.AspNetCore.Mvc.ViewComponents
             IViewComponentSelector selector,
             IViewComponentInvokerFactory invokerFactory,
             IViewBufferScope viewBufferScope
-        ) {
+        )
+        {
             if (descriptorProvider == null)
             {
                 throw new ArgumentNullException(nameof(descriptorProvider));
@@ -150,13 +151,15 @@ namespace Microsoft.AspNetCore.Mvc.ViewComponents
         internal IDictionary<string, object?> GetArgumentDictionary(
             ViewComponentDescriptor descriptor,
             object? arguments
-        ) {
+        )
+        {
             if (arguments != null)
             {
                 if (
                     descriptor.Parameters.Count == 1
                     && descriptor.Parameters[0].ParameterType.IsAssignableFrom(arguments.GetType())
-                ) {
+                )
+                {
                     return new Dictionary<string, object?>(
                         capacity: 1,
                         comparer: StringComparer.OrdinalIgnoreCase
@@ -172,7 +175,8 @@ namespace Microsoft.AspNetCore.Mvc.ViewComponents
         private async Task<IHtmlContent> InvokeCoreAsync(
             ViewComponentDescriptor descriptor,
             object? arguments
-        ) {
+        )
+        {
             var argumentDictionary = GetArgumentDictionary(descriptor, arguments);
 
             var viewBuffer = new ViewBuffer(

@@ -26,7 +26,8 @@ namespace System
 #else
                 SR.Arg_OutOfMemoryException
 #endif
-            ) {
+            )
+        {
             HResult = HResults.COR_E_INSUFFICIENTMEMORY;
         }
 
@@ -41,9 +42,7 @@ namespace System
             HResult = HResults.COR_E_INSUFFICIENTMEMORY;
         }
 
-        private InsufficientMemoryException(
-            SerializationInfo info,
-            StreamingContext context
-        ) : base(info, context) { }
+        private InsufficientMemoryException(SerializationInfo info, StreamingContext context)
+            : base(info, context) { }
     }
 }

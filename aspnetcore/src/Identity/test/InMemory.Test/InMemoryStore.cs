@@ -24,7 +24,8 @@ namespace Microsoft.AspNetCore.Identity.InMemory
             TUser user,
             string role,
             CancellationToken cancellationToken = default(CancellationToken)
-        ) {
+        )
+        {
             var roleEntity = _roles.Values.SingleOrDefault(r => r.NormalizedName == role);
             if (roleEntity != null)
             {
@@ -38,7 +39,8 @@ namespace Microsoft.AspNetCore.Identity.InMemory
             TUser user,
             string role,
             CancellationToken cancellationToken = default(CancellationToken)
-        ) {
+        )
+        {
             var roleObject = _roles.Values.SingleOrDefault(r => r.NormalizedName == role);
             var roleEntity = user.Roles.SingleOrDefault(ur => ur.RoleId == roleObject.Id);
             if (roleEntity != null)
@@ -51,7 +53,8 @@ namespace Microsoft.AspNetCore.Identity.InMemory
         public Task<IList<string>> GetRolesAsync(
             TUser user,
             CancellationToken cancellationToken = default(CancellationToken)
-        ) {
+        )
+        {
             IList<string> roles = new List<string>();
             foreach (var r in user.Roles.Select(ur => ur.RoleId))
             {
@@ -64,7 +67,8 @@ namespace Microsoft.AspNetCore.Identity.InMemory
             TUser user,
             string role,
             CancellationToken cancellationToken = default(CancellationToken)
-        ) {
+        )
+        {
             var roleObject = _roles.Values.SingleOrDefault(r => r.NormalizedName == role);
             bool result = roleObject != null && user.Roles.Any(ur => ur.RoleId == roleObject.Id);
             return Task.FromResult(result);
@@ -74,7 +78,8 @@ namespace Microsoft.AspNetCore.Identity.InMemory
         public Task<IList<TUser>> GetUsersInRoleAsync(
             string roleName,
             CancellationToken cancellationToken = default(CancellationToken)
-        ) {
+        )
+        {
             if (String.IsNullOrEmpty(roleName))
             {
                 throw new ArgumentNullException(nameof(roleName));
@@ -98,7 +103,8 @@ namespace Microsoft.AspNetCore.Identity.InMemory
         public Task<IdentityResult> CreateAsync(
             TRole role,
             CancellationToken cancellationToken = default(CancellationToken)
-        ) {
+        )
+        {
             _roles[role.Id] = role;
             return Task.FromResult(IdentityResult.Success);
         }
@@ -106,7 +112,8 @@ namespace Microsoft.AspNetCore.Identity.InMemory
         public Task<IdentityResult> DeleteAsync(
             TRole role,
             CancellationToken cancellationToken = default(CancellationToken)
-        ) {
+        )
+        {
             if (role == null || !_roles.ContainsKey(role.Id))
             {
                 throw new InvalidOperationException("Unknown role");
@@ -118,14 +125,16 @@ namespace Microsoft.AspNetCore.Identity.InMemory
         public Task<string> GetRoleIdAsync(
             TRole role,
             CancellationToken cancellationToken = default(CancellationToken)
-        ) {
+        )
+        {
             return Task.FromResult(role.Id);
         }
 
         public Task<string> GetRoleNameAsync(
             TRole role,
             CancellationToken cancellationToken = default(CancellationToken)
-        ) {
+        )
+        {
             return Task.FromResult(role.Name);
         }
 
@@ -133,7 +142,8 @@ namespace Microsoft.AspNetCore.Identity.InMemory
             TRole role,
             string roleName,
             CancellationToken cancellationToken = default(CancellationToken)
-        ) {
+        )
+        {
             role.Name = roleName;
             return Task.FromResult(0);
         }
@@ -141,7 +151,8 @@ namespace Microsoft.AspNetCore.Identity.InMemory
         public Task<IdentityResult> UpdateAsync(
             TRole role,
             CancellationToken cancellationToken = default(CancellationToken)
-        ) {
+        )
+        {
             _roles[role.Id] = role;
             return Task.FromResult(IdentityResult.Success);
         }
@@ -149,7 +160,8 @@ namespace Microsoft.AspNetCore.Identity.InMemory
         Task<TRole> IRoleStore<TRole>.FindByIdAsync(
             string roleId,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             if (_roles.ContainsKey(roleId))
             {
                 return Task.FromResult(_roles[roleId]);
@@ -160,7 +172,8 @@ namespace Microsoft.AspNetCore.Identity.InMemory
         Task<TRole> IRoleStore<TRole>.FindByNameAsync(
             string roleName,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             return Task.FromResult(
                 Roles.SingleOrDefault(
                     r =>
@@ -176,7 +189,8 @@ namespace Microsoft.AspNetCore.Identity.InMemory
         public Task<IList<Claim>> GetClaimsAsync(
             TRole role,
             CancellationToken cancellationToken = default(CancellationToken)
-        ) {
+        )
+        {
             var claims = role.Claims.Select(c => new Claim(c.ClaimType, c.ClaimValue)).ToList();
             return Task.FromResult<IList<Claim>>(claims);
         }
@@ -185,7 +199,8 @@ namespace Microsoft.AspNetCore.Identity.InMemory
             TRole role,
             Claim claim,
             CancellationToken cancellationToken = default(CancellationToken)
-        ) {
+        )
+        {
             role.Claims.Add(
                 new PocoRoleClaim<string>
                 {
@@ -201,7 +216,8 @@ namespace Microsoft.AspNetCore.Identity.InMemory
             TRole role,
             Claim claim,
             CancellationToken cancellationToken = default(CancellationToken)
-        ) {
+        )
+        {
             var entity = role.Claims.FirstOrDefault(
                 ur =>
                     ur.RoleId == role.Id
@@ -218,7 +234,8 @@ namespace Microsoft.AspNetCore.Identity.InMemory
         public Task<string> GetNormalizedRoleNameAsync(
             TRole role,
             CancellationToken cancellationToken = default(CancellationToken)
-        ) {
+        )
+        {
             return Task.FromResult(role.NormalizedName);
         }
 
@@ -226,7 +243,8 @@ namespace Microsoft.AspNetCore.Identity.InMemory
             TRole role,
             string normalizedName,
             CancellationToken cancellationToken = default(CancellationToken)
-        ) {
+        )
+        {
             role.NormalizedName = normalizedName;
             return Task.FromResult(0);
         }

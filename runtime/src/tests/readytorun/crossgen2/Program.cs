@@ -194,7 +194,8 @@ internal class Program
     private static bool HelperCompare(
         ExplicitFieldOffsetStruct? val,
         ExplicitFieldOffsetStruct val1
-    ) {
+    )
+    {
         return val == null ? false : HelperCompare(val.Value, val1);
     }
 
@@ -519,7 +520,8 @@ internal class Program
     private static string TransformStringUsingCharFilter(
         string inputString,
         CharFilterDelegate charFilter
-    ) {
+    )
+    {
         StringBuilder outputBuilder = new StringBuilder(inputString.Length);
         foreach (char c in inputString)
         {
@@ -1355,7 +1357,8 @@ internal class Program
         Func<string, bool> gvm,
         string expectedTypeName,
         ref bool success
-    ) {
+    )
+    {
         if (!gvm(expectedTypeName))
         {
             success = false;
@@ -1808,7 +1811,8 @@ internal class Program
         RuntimeMethodHandle rmh,
         Type exactType,
         Type methodInstantiation
-    ) {
+    )
+    {
         var method = MethodBase.GetMethodFromHandle(rmh, exactType.TypeHandle);
         if (method.DeclaringType != exactType)
         {
@@ -2062,7 +2066,8 @@ internal class Program
     [MethodImpl(MethodImplOptions.AggressiveOptimization)]
     private static bool TestWithStructureNonBlittableFieldDueToGenerics_StringCompare(
         ref StructWithGenericBlittableStruct input
-    ) {
+    )
+    {
         StructWithGenericBlittableStruct s = new StructWithGenericBlittableStruct();
         s._blittableGeneric._explict.x = 1;
         s._blittableGeneric._explict.y = 2;

@@ -71,7 +71,8 @@ public partial class CancelKeyPressTests
                         RemoteInvokeHandle handle = RemoteExecutor.Invoke(
                             () => RemoteExecutor.SuccessExitCode
                         )
-                    ) {
+                    )
+                    {
                         // Process exit is detected on SIGCHLD
                         Assert.Equal(RemoteExecutor.SuccessExitCode, handle.ExitCode);
                     }

@@ -32,7 +32,8 @@ namespace Microsoft.CodeAnalysis.ConvertLinq.ConvertForEachToLinqQuery
             ImmutableArray<TStatement> statements,
             ImmutableArray<SyntaxToken> leadingTokens,
             ImmutableArray<SyntaxToken> trailingTokens
-        ) {
+        )
+        {
             ForEachStatement = forEachStatement;
             SemanticModel = semanticModel;
             ConvertingExtendedNodes = convertingExtendedNodes;

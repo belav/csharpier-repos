@@ -29,7 +29,8 @@ namespace Roslyn.Test.Utilities.PDB
             ImmutableArray<string> externAliases,
             MetadataImageKind kind,
             bool embedInteropTypes
-        ) {
+        )
+        {
             Timestamp = timestamp;
             ImageSize = imageSize;
             Name = name;

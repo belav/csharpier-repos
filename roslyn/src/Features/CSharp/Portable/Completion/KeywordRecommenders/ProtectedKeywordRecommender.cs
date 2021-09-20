@@ -19,7 +19,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Completion.KeywordRecommenders
             int position,
             CSharpSyntaxContext context,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             return IsValidContextForAccessor(context)
                 || IsValidContextForType(context, cancellationToken)
                 || IsValidContextForMember(context, cancellationToken);
@@ -34,7 +35,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Completion.KeywordRecommenders
                 || context.TargetToken.IsAccessorDeclarationContext<IndexerDeclarationSyntax>(
                     context.Position
                 )
-            ) {
+            )
+            {
                 return CheckPreviousAccessibilityModifiers(context);
             }
 
@@ -44,7 +46,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Completion.KeywordRecommenders
         private static bool IsValidContextForMember(
             CSharpSyntaxContext context,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             if (
                 context.IsMemberDeclarationContext(
                     validModifiers: SyntaxKindSet.AllMemberModifiers,
@@ -52,7 +55,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Completion.KeywordRecommenders
                     canBePartial: false,
                     cancellationToken: cancellationToken
                 )
-            ) {
+            )
+            {
                 return CheckPreviousAccessibilityModifiers(context);
             }
 
@@ -62,7 +66,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Completion.KeywordRecommenders
         private static bool IsValidContextForType(
             CSharpSyntaxContext context,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             if (
                 context.IsTypeDeclarationContext(
                     validModifiers: SyntaxKindSet.AllTypeModifiers,
@@ -70,7 +75,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Completion.KeywordRecommenders
                     canBePartial: false,
                     cancellationToken: cancellationToken
                 )
-            ) {
+            )
+            {
                 // protected things can't be in namespaces.
                 var typeDecl = context.ContainingTypeDeclaration;
                 if (typeDecl == null)

@@ -108,7 +108,8 @@ namespace System.Xml.Serialization
             TypeDesc? baseTypeDesc,
             TypeFlags flags,
             string? formatterName
-        ) {
+        )
+        {
             _name = name.Replace('+', '.');
             _fullName = fullName.Replace('+', '.');
             _kind = kind;
@@ -141,15 +142,17 @@ namespace System.Xml.Serialization
             XmlSchemaType dataType,
             string formatterName,
             TypeFlags flags
-        ) : this(
-            type!.Name,
-            type.FullName!,
-            dataType,
-            TypeKind.Primitive,
-            (TypeDesc?)null,
-            flags,
-            formatterName
-        ) {
+        )
+            : this(
+                type!.Name,
+                type.FullName!,
+                dataType,
+                TypeKind.Primitive,
+                (TypeDesc?)null,
+                flags,
+                formatterName
+            )
+        {
             _isXsdType = isXsdType;
             _type = type;
         }
@@ -407,7 +410,8 @@ namespace System.Xml.Serialization
 
         internal TypeDesc GetNullableTypeDesc(
             [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)] Type type
-        ) {
+        )
+        {
             if (IsOptionalValue)
                 return this;
 
@@ -1239,7 +1243,8 @@ namespace System.Xml.Serialization
             string dataTypeName,
             string formatterName,
             TypeFlags flags
-        ) {
+        )
+        {
             XmlSchemaSimpleType dataType = new XmlSchemaSimpleType();
             dataType.Name = dataTypeName;
             TypeDesc typeDesc = new TypeDesc(type, true, dataType, formatterName, flags);
@@ -1257,7 +1262,8 @@ namespace System.Xml.Serialization
             XmlQualifiedName baseTypeName,
             XmlSchemaFacet[] facets,
             TypeFlags flags
-        ) {
+        )
+        {
             XmlSchemaSimpleType dataType = new XmlSchemaSimpleType();
             dataType.Name = dataTypeName;
             XmlSchemaSimpleTypeRestriction restriction = new XmlSchemaSimpleTypeRestriction();
@@ -1281,7 +1287,8 @@ namespace System.Xml.Serialization
             string formatterName,
             XmlQualifiedName baseTypeName,
             TypeFlags flags
-        ) {
+        )
+        {
             AddNonXsdPrimitive(
                 type,
                 dataTypeName,
@@ -1340,7 +1347,8 @@ namespace System.Xml.Serialization
             MemberInfo? source,
             bool directReference,
             bool throwOnError
-        ) {
+        )
+        {
             if (type.ContainsGenericParameters)
             {
                 throw new InvalidOperationException(
@@ -1748,7 +1756,8 @@ namespace System.Xml.Serialization
         internal static MemberMapping[] GetAllMembers(
             StructMapping mapping,
             System.Collections.Generic.Dictionary<string, MemberInfo> memberInfos
-        ) {
+        )
+        {
             MemberMapping[] mappings = GetAllMembers(mapping);
             PopulateMemberInfos(mapping, mappings, memberInfos);
             return mappings;
@@ -1777,7 +1786,8 @@ namespace System.Xml.Serialization
                     if (
                         propertyInfo != null
                         && !CanWriteProperty(propertyInfo, memberMapping.TypeDesc!)
-                    ) {
+                    )
+                    {
                         throw new InvalidOperationException(
                             SR.Format(
                                 SR.XmlReadOnlyPropertyError,
@@ -1808,7 +1818,8 @@ namespace System.Xml.Serialization
         internal static MemberMapping[] GetSettableMembers(
             StructMapping mapping,
             System.Collections.Generic.Dictionary<string, MemberInfo> memberInfos
-        ) {
+        )
+        {
             MemberMapping[] mappings = GetSettableMembers(mapping);
             PopulateMemberInfos(mapping, mappings, memberInfos);
             return mappings;
@@ -1818,7 +1829,8 @@ namespace System.Xml.Serialization
             StructMapping structMapping,
             MemberMapping[] mappings,
             System.Collections.Generic.Dictionary<string, MemberInfo> memberInfos
-        ) {
+        )
+        {
             memberInfos.Clear();
             for (int i = 0; i < mappings.Length; ++i)
             {
@@ -1884,7 +1896,8 @@ namespace System.Xml.Serialization
             )]
                 Type derivedType,
             out MemberInfo replacedInfo
-        ) {
+        )
+        {
             replacedInfo = memberInfoToBeReplaced;
             Type currentType = derivedType;
             Type typeToBeReplaced = memberInfoToBeReplaced.DeclaringType!;
@@ -1912,7 +1925,8 @@ namespace System.Xml.Serialization
                                     !info.GetMethod!.IsPublic
                                     && memberInfoToBeReplaced is PropertyInfo
                                     && ((PropertyInfo)memberInfoToBeReplaced).GetMethod!.IsPublic
-                                ) {
+                                )
+                                {
                                     break;
                                 }
 
@@ -1949,7 +1963,8 @@ namespace System.Xml.Serialization
             )]
                 Type type,
             ref Exception? exception
-        ) {
+        )
+        {
             ConstructorInfo? ctor = type.GetConstructor(
                 BindingFlags.Public | BindingFlags.Instance | BindingFlags.NonPublic,
                 Type.EmptyTypes
@@ -1988,7 +2003,8 @@ namespace System.Xml.Serialization
                 if (
                     enumerator == null
                     || !typeof(IEnumerator).IsAssignableFrom(enumerator.ReturnType)
-                ) {
+                )
+                {
                     // try generic implementation
                     enumerator = null;
                     foreach (
@@ -1996,12 +2012,14 @@ namespace System.Xml.Serialization
                             "System.Collections.Generic.IEnumerable<*",
                             BindingFlags.Public | BindingFlags.Instance | BindingFlags.NonPublic
                         )
-                    ) {
+                    )
+                    {
                         enumerator = member as MethodInfo;
                         if (
                             enumerator != null
                             && typeof(IEnumerator).IsAssignableFrom(enumerator.ReturnType)
-                        ) {
+                        )
+                        {
                             // use the first one we find
                             flags |= TypeFlags.GenericInterface;
                             break;
@@ -2025,7 +2043,8 @@ namespace System.Xml.Serialization
                 if (
                     enumerator == null
                     || !typeof(IEnumerator).IsAssignableFrom(enumerator.ReturnType)
-                ) {
+                )
+                {
                     return null;
                 }
                 XmlAttributes methodAttrs = new XmlAttributes(enumerator);
@@ -2059,7 +2078,8 @@ namespace System.Xml.Serialization
         internal static PropertyInfo GetDefaultIndexer(
             [DynamicallyAccessedMembers(TrimmerConstants.PublicMembers)] Type type,
             string? memberInfo
-        ) {
+        )
+        {
             if (typeof(IDictionary).IsAssignableFrom(type))
             {
                 if (memberInfo == null)
@@ -2095,7 +2115,8 @@ namespace System.Xml.Serialization
                             ParameterInfo[] parameters = getMethod.GetParameters();
                             if (
                                 parameters.Length == 1 && parameters[0].ParameterType == typeof(int)
-                            ) {
+                            )
+                            {
                                 indexer = defaultProp;
                                 break;
                             }
@@ -2123,7 +2144,8 @@ namespace System.Xml.Serialization
         private static Type GetCollectionElementType(
             [DynamicallyAccessedMembers(TrimmerConstants.PublicMembers)] Type type,
             string? memberInfo
-        ) {
+        )
+        {
             return GetDefaultIndexer(type, memberInfo).PropertyType;
         }
 
@@ -2131,7 +2153,8 @@ namespace System.Xml.Serialization
             string type,
             out string dims,
             XmlSchemaObject? parent
-        ) {
+        )
+        {
             string ns;
             string name;
 
@@ -2163,7 +2186,8 @@ namespace System.Xml.Serialization
                     if (
                         parent.Namespaces.Namespaces.TryGetValue(ns, out string? wsdlNs)
                         && wsdlNs != null
-                    ) {
+                    )
+                    {
                         ns = wsdlNs;
                         break;
                     }

@@ -41,7 +41,8 @@ namespace System.DirectoryServices.Tests
         [InlineData(SortDirection.Descending + 1)]
         public void Ctor_InvalidDirection_ThrowsInvalidEnumArgumentException(
             SortDirection direction
-        ) {
+        )
+        {
             AssertExtensions.Throws<InvalidEnumArgumentException>(
                 "value",
                 () => new SortOption("propertyName", direction)

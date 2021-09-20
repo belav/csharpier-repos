@@ -32,7 +32,8 @@ namespace System.IO.Ports.Tests
                 SerialPort com2 = new SerialPort(
                     TCSupport.LocalMachineSerialInfo.SecondAvailablePortName
                 )
-            ) {
+            )
+            {
                 com1.Open();
                 com2.Open();
                 com2.Write(DEFAULT_STRING);
@@ -55,7 +56,8 @@ namespace System.IO.Ports.Tests
                 SerialPort com2 = new SerialPort(
                     TCSupport.LocalMachineSerialInfo.SecondAvailablePortName
                 )
-            ) {
+            )
+            {
                 Debug.WriteLine(
                     "Verifying call Discard method several times after input buffer has been filled"
                 );
@@ -82,7 +84,8 @@ namespace System.IO.Ports.Tests
                 SerialPort com2 = new SerialPort(
                     TCSupport.LocalMachineSerialInfo.SecondAvailablePortName
                 )
-            ) {
+            )
+            {
                 Debug.WriteLine(
                     "Verifying call Discard method after input buffer has been filled discarded and filled again"
                 );
@@ -113,7 +116,8 @@ namespace System.IO.Ports.Tests
                 SerialPort com2 = new SerialPort(
                     TCSupport.LocalMachineSerialInfo.SecondAvailablePortName
                 )
-            ) {
+            )
+            {
                 int origBytesToWrite;
 
                 Debug.WriteLine("Verifying Discard method after input buffer has been filled");

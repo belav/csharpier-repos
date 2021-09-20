@@ -43,7 +43,8 @@ namespace Microsoft.CodeAnalysis.Remote
             PinnedSolutionInfo solutionInfo,
             DiagnosticArguments arguments,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             // Complete RPC right away so the client can start reading from the stream.
             // The fire-and forget task starts writing to the output stream and the client will read it until it reads all expected data.
 
@@ -56,7 +57,8 @@ namespace Microsoft.CodeAnalysis.Remote
                             arguments.ProjectId.DebugName,
                             cancellationToken
                         )
-                    ) {
+                    )
+                    {
                         var solution = await GetSolutionAsync(solutionInfo, cancellationToken)
                             .ConfigureAwait(false);
 
@@ -107,7 +109,8 @@ namespace Microsoft.CodeAnalysis.Remote
             ImmutableArray<AnalyzerPerformanceInfo> snapshot,
             int unitCount,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             return RunServiceAsync(
                 cancellationToken =>
                 {
@@ -116,7 +119,8 @@ namespace Microsoft.CodeAnalysis.Remote
                             FunctionId.CodeAnalysisService_ReportAnalyzerPerformance,
                             cancellationToken
                         )
-                    ) {
+                    )
+                    {
                         cancellationToken.ThrowIfCancellationRequested();
 
                         var service = GetWorkspace()

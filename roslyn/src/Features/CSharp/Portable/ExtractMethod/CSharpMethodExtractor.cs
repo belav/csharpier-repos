@@ -34,7 +34,8 @@ namespace Microsoft.CodeAnalysis.CSharp.ExtractMethod
         protected override async Task<InsertionPoint> GetInsertionPointAsync(
             SemanticDocument document,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var originalSpanStart = OriginalSelectionResult.OriginalSpan.Start;
             Contract.ThrowIfFalse(originalSpanStart >= 0);
 
@@ -105,7 +106,8 @@ namespace Microsoft.CodeAnalysis.CSharp.ExtractMethod
                 if (
                     !globalStatement.Statement.IsStatementContainerNode()
                     && !root.SyntaxTree.IsScript()
-                ) {
+                )
+                {
                     // The extracted function will be a new global statement
                     return await InsertionPoint.CreateAsync(
                             document,
@@ -137,7 +139,8 @@ namespace Microsoft.CodeAnalysis.CSharp.ExtractMethod
         protected override async Task<SemanticDocument> ExpandAsync(
             SelectionResult selection,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var lastExpression = selection.GetFirstTokenInSelection()
                 .GetCommonRoot(selection.GetLastTokenInSelection())
                 .GetAncestors<ExpressionSyntax>()
@@ -197,7 +200,8 @@ namespace Microsoft.CodeAnalysis.CSharp.ExtractMethod
             Location location,
             ITypeSymbol type,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             Contract.ThrowIfNull(type);
 
             // this happens when there is no return type
@@ -227,7 +231,8 @@ namespace Microsoft.CodeAnalysis.CSharp.ExtractMethod
                 if (
                     currentType == null
                     || !SymbolEqualityComparer.Default.Equals(currentType, typeParameter)
-                ) {
+                )
+                {
                     return new OperationStatus(
                         OperationStatusFlag.BestEffort,
                         string.Format(
@@ -251,14 +256,16 @@ namespace Microsoft.CodeAnalysis.CSharp.ExtractMethod
             SyntaxToken methodName,
             SyntaxNode methodDefinition,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             // Checking to see if there is already an empty line before the local method declaration.
             var leadingTrivia = methodDefinition.GetLeadingTrivia();
             if (
                 !leadingTrivia.Any(t => t.IsKind(SyntaxKind.EndOfLineTrivia))
                 && !methodDefinition.FindTokenOnLeftOfPosition(methodDefinition.SpanStart)
                     .IsKind(SyntaxKind.OpenBraceToken)
-            ) {
+            )
+            {
                 var originalMethodDefinition = methodDefinition;
                 methodDefinition = methodDefinition.WithPrependedLeadingTrivia(
                     SpecializedCollections.SingletonEnumerable(SyntaxFactory.CarriageReturnLineFeed)

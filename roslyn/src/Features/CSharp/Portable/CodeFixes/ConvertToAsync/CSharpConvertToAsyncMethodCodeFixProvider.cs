@@ -41,7 +41,8 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeFixes.ConvertToAsync
             SyntaxNode node,
             SemanticModel semanticModel,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var methodNode = await GetMethodDeclarationAsync(node, semanticModel, cancellationToken)
                 .ConfigureAwait(false);
 
@@ -58,7 +59,8 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeFixes.ConvertToAsync
             SemanticModel semanticModel,
             Diagnostic diagnostic,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var methodDeclaration = await GetMethodDeclarationAsync(
                     node,
                     semanticModel,
@@ -83,7 +85,8 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeFixes.ConvertToAsync
             SyntaxNode node,
             SemanticModel semanticModel,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var invocationExpression = node.ChildNodes()
                 .FirstOrDefault(n => n.IsKind(SyntaxKind.InvocationExpression));
             if (invocationExpression == null)
@@ -96,7 +99,8 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeFixes.ConvertToAsync
                     semanticModel.GetSymbolInfo(invocationExpression, cancellationToken).Symbol
                     is IMethodSymbol methodSymbol
                 )
-            ) {
+            )
+            {
                 return null;
             }
 
@@ -111,7 +115,8 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeFixes.ConvertToAsync
                     (await methodReference.GetSyntaxAsync(cancellationToken).ConfigureAwait(false))
                     is MethodDeclarationSyntax methodDeclaration
                 )
-            ) {
+            )
+            {
                 return null;
             }
 
@@ -125,7 +130,8 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeFixes.ConvertToAsync
 
         private static MethodDeclarationSyntax ConvertToAsyncFunction(
             MethodDeclarationSyntax methodDeclaration
-        ) {
+        )
+        {
             return methodDeclaration.WithReturnType(
                 SyntaxFactory.ParseTypeName("Task").WithTriviaFrom(methodDeclaration)
             );

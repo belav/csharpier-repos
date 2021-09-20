@@ -61,7 +61,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Http
 
         public override async ValueTask<ReadResult> ReadAsyncInternal(
             CancellationToken cancellationToken = default
-        ) {
+        )
+        {
             await TryStartAsync();
 
             try
@@ -215,7 +216,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Http
             PipeWriter writableBuffer,
             out SequencePosition consumed,
             out SequencePosition examined
-        ) {
+        )
+        {
             consumed = default;
             examined = default;
 
@@ -307,7 +309,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Http
             in ReadOnlySequence<byte> buffer,
             out SequencePosition consumed,
             out SequencePosition examined
-        ) {
+        )
+        {
             consumed = buffer.Start;
             var reader = new SequenceReader<byte>(buffer);
 
@@ -367,7 +370,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Http
             ReadOnlySequence<byte> buffer,
             out SequencePosition consumed,
             out SequencePosition examined
-        ) {
+        )
+        {
             // Chunk-extensions not currently parsed
             // Just drain the data
             examined = buffer.Start;
@@ -424,7 +428,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Http
             PipeWriter writableBuffer,
             out SequencePosition consumed,
             out SequencePosition examined
-        ) {
+        )
+        {
             var actual = Math.Min(buffer.Length, _inputLength);
             consumed = buffer.GetPosition(actual);
             examined = consumed;
@@ -444,7 +449,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Http
             in ReadOnlySequence<byte> buffer,
             out SequencePosition consumed,
             out SequencePosition examined
-        ) {
+        )
+        {
             consumed = buffer.Start;
 
             if (buffer.Length < 2)
@@ -475,7 +481,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Http
             in ReadOnlySequence<byte> buffer,
             out SequencePosition consumed,
             out SequencePosition examined
-        ) {
+        )
+        {
             consumed = buffer.Start;
 
             if (buffer.Length < 2)

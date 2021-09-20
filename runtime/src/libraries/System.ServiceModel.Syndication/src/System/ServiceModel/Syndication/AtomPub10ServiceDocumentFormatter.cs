@@ -132,7 +132,8 @@ namespace System.ServiceModel.Syndication
             CreateReferencedCategoriesDelegate referencedCategoriesFactory,
             string version,
             int maxExtensionSize
-        ) {
+        )
+        {
             string link = reader.GetAttribute(App10Constants.Href, string.Empty);
             if (string.IsNullOrEmpty(link))
             {
@@ -160,7 +161,8 @@ namespace System.ServiceModel.Syndication
             CategoriesDocument categories,
             Uri baseUri,
             string version
-        ) {
+        )
+        {
             Uri baseUriToWrite = FeedUtils.GetBaseUriToWrite(baseUri, categories.BaseUri);
             if (baseUriToWrite != null)
             {
@@ -202,7 +204,8 @@ namespace System.ServiceModel.Syndication
             Uri baseUri,
             string version,
             int maxExtensionSize
-        ) {
+        )
+        {
             inlineCategories.BaseUri = baseUri;
             if (reader.HasAttributes)
             {
@@ -211,7 +214,8 @@ namespace System.ServiceModel.Syndication
                     if (
                         reader.LocalName == "base"
                         && reader.NamespaceURI == Atom10FeedFormatter.XmlNs
-                    ) {
+                    )
+                    {
                         inlineCategories.BaseUri = FeedUtils.CombineXmlBase(
                             inlineCategories.BaseUri,
                             reader.Value
@@ -220,19 +224,22 @@ namespace System.ServiceModel.Syndication
                     else if (
                         reader.LocalName == "lang"
                         && reader.NamespaceURI == Atom10FeedFormatter.XmlNs
-                    ) {
+                    )
+                    {
                         inlineCategories.Language = reader.Value;
                     }
                     else if (
                         reader.LocalName == App10Constants.Fixed
                         && reader.NamespaceURI == string.Empty
-                    ) {
+                    )
+                    {
                         inlineCategories.IsFixed = (reader.Value == "yes");
                     }
                     else if (
                         reader.LocalName == Atom10Constants.SchemeTag
                         && reader.NamespaceURI == string.Empty
-                    ) {
+                    )
+                    {
                         inlineCategories.Scheme = reader.Value;
                     }
                     else
@@ -271,7 +278,8 @@ namespace System.ServiceModel.Syndication
                                 Atom10Constants.CategoryTag,
                                 Atom10Constants.Atom10Namespace
                             )
-                        ) {
+                        )
+                        {
                             SyndicationCategory category = CreateCategory(inlineCategories);
                             Atom10FeedFormatter.ReadCategory(
                                 reader,
@@ -315,7 +323,8 @@ namespace System.ServiceModel.Syndication
             Uri link,
             string version,
             int maxExtensionSize
-        ) {
+        )
+        {
             referencedCategories.BaseUri = baseUri;
             referencedCategories.Link = link;
             if (reader.HasAttributes)
@@ -325,7 +334,8 @@ namespace System.ServiceModel.Syndication
                     if (
                         reader.LocalName == "base"
                         && reader.NamespaceURI == Atom10FeedFormatter.XmlNs
-                    ) {
+                    )
+                    {
                         referencedCategories.BaseUri = FeedUtils.CombineXmlBase(
                             referencedCategories.BaseUri,
                             reader.Value
@@ -334,13 +344,15 @@ namespace System.ServiceModel.Syndication
                     else if (
                         reader.LocalName == "lang"
                         && reader.NamespaceURI == Atom10FeedFormatter.XmlNs
-                    ) {
+                    )
+                    {
                         referencedCategories.Language = reader.Value;
                     }
                     else if (
                         reader.LocalName == App10Constants.Href
                         && reader.NamespaceURI == string.Empty
-                    ) {
+                    )
+                    {
                         continue;
                     }
                     else
@@ -401,7 +413,8 @@ namespace System.ServiceModel.Syndication
             CategoriesDocument categories,
             Uri baseUri,
             string version
-        ) {
+        )
+        {
             writer.WriteStartElement(
                 App10Constants.Prefix,
                 App10Constants.Categories,
@@ -415,7 +428,8 @@ namespace System.ServiceModel.Syndication
             XmlWriter writer,
             InlineCategoriesDocument categories,
             string version
-        ) {
+        )
+        {
             if (!string.IsNullOrEmpty(categories.Scheme))
             {
                 writer.WriteAttributeString(Atom10Constants.SchemeTag, categories.Scheme);
@@ -437,7 +451,8 @@ namespace System.ServiceModel.Syndication
             XmlWriter writer,
             ReferencedCategoriesDocument categories,
             string version
-        ) {
+        )
+        {
             if (categories.Link != null)
             {
                 writer.WriteAttributeString(
@@ -475,13 +490,15 @@ namespace System.ServiceModel.Syndication
                     if (
                         reader.LocalName == "base"
                         && reader.NamespaceURI == Atom10FeedFormatter.XmlNs
-                    ) {
+                    )
+                    {
                         result.BaseUri = FeedUtils.CombineXmlBase(result.BaseUri, reader.Value);
                     }
                     else if (
                         reader.LocalName == App10Constants.Href
                         && reader.NamespaceURI == string.Empty
-                    ) {
+                    )
+                    {
                         result.Link = new Uri(reader.Value, UriKind.RelativeOrAbsolute);
                     }
                     else
@@ -518,7 +535,8 @@ namespace System.ServiceModel.Syndication
                             Atom10Constants.TitleTag,
                             Atom10Constants.Atom10Namespace
                         )
-                    ) {
+                    )
+                    {
                         result.Title = Atom10FeedFormatter.ReadTextContentFrom(
                             reader,
                             "//app:service/app:workspace/app:collection/atom:title[@type]",
@@ -527,7 +545,8 @@ namespace System.ServiceModel.Syndication
                     }
                     else if (
                         reader.IsStartElement(App10Constants.Categories, App10Constants.Namespace)
-                    ) {
+                    )
+                    {
                         result.Categories.Add(
                             ReadCategories(
                                 reader,
@@ -579,13 +598,15 @@ namespace System.ServiceModel.Syndication
                         if (
                             reader.LocalName == "lang"
                             && reader.NamespaceURI == Atom10FeedFormatter.XmlNs
-                        ) {
+                        )
+                        {
                             result.Language = reader.Value;
                         }
                         else if (
                             reader.LocalName == "base"
                             && reader.NamespaceURI == Atom10FeedFormatter.XmlNs
-                        ) {
+                        )
+                        {
                             result.BaseUri = new Uri(reader.Value, UriKind.RelativeOrAbsolute);
                         }
                         else
@@ -623,7 +644,8 @@ namespace System.ServiceModel.Syndication
                                     App10Constants.Workspace,
                                     App10Constants.Namespace
                                 )
-                            ) {
+                            )
+                            {
                                 result.Workspaces.Add(ReadWorkspace(reader, result));
                             }
                             else if (!TryParseElement(reader, result, Version))
@@ -670,7 +692,8 @@ namespace System.ServiceModel.Syndication
                     if (
                         reader.LocalName == "base"
                         && reader.NamespaceURI == Atom10FeedFormatter.XmlNs
-                    ) {
+                    )
+                    {
                         result.BaseUri = FeedUtils.CombineXmlBase(result.BaseUri, reader.Value);
                     }
                     else
@@ -707,7 +730,8 @@ namespace System.ServiceModel.Syndication
                             Atom10Constants.TitleTag,
                             Atom10Constants.Atom10Namespace
                         )
-                    ) {
+                    )
+                    {
                         result.Title = Atom10FeedFormatter.ReadTextContentFrom(
                             reader,
                             "//app:service/app:workspace/atom:title[@type]",
@@ -716,7 +740,8 @@ namespace System.ServiceModel.Syndication
                     }
                     else if (
                         reader.IsStartElement(App10Constants.Collection, App10Constants.Namespace)
-                    ) {
+                    )
+                    {
                         result.Collections.Add(ReadCollection(reader, result));
                     }
                     else if (!TryParseElement(reader, result, Version))
@@ -745,7 +770,8 @@ namespace System.ServiceModel.Syndication
             XmlWriter writer,
             ResourceCollectionInfo collection,
             Uri baseUri
-        ) {
+        )
+        {
             writer.WriteStartElement(
                 App10Constants.Prefix,
                 App10Constants.Collection,

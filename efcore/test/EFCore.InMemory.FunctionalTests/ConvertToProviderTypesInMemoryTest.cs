@@ -9,9 +9,8 @@ namespace Microsoft.EntityFrameworkCore
     public class ConvertToProviderTypesInMemoryTest
         : ConvertToProviderTypesTestBase<ConvertToProviderTypesInMemoryTest.ConvertToProviderTypesInMemoryFixture>
     {
-        public ConvertToProviderTypesInMemoryTest(
-            ConvertToProviderTypesInMemoryFixture fixture
-        ) : base(fixture) { }
+        public ConvertToProviderTypesInMemoryTest(ConvertToProviderTypesInMemoryFixture fixture)
+            : base(fixture) { }
 
         public override void Optional_datetime_reading_null_from_database() { }
 

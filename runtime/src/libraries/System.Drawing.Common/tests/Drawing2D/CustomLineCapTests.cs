@@ -97,7 +97,8 @@ namespace System.Drawing.Drawing2D.Tests
             LineCap baseCap,
             float baseInset,
             LineCap expectedCap
-        ) {
+        )
+        {
             using (fillPath)
             using (strokePath)
             using (
@@ -107,7 +108,8 @@ namespace System.Drawing.Drawing2D.Tests
                     baseCap,
                     baseInset
                 )
-            ) {
+            )
+            {
                 Assert.Equal(expectedCap, customLineCap.BaseCap);
                 Assert.Equal(baseInset, customLineCap.BaseInset);
                 Assert.Equal(LineJoin.Miter, customLineCap.StrokeJoin);
@@ -125,7 +127,8 @@ namespace System.Drawing.Drawing2D.Tests
             using (GraphicsPath strokePath = new GraphicsPath())
             using (
                 CustomLineCap customLineCap = new CustomLineCap(fillPath, strokePath, baseCap, 0f)
-            ) {
+            )
+            {
                 Assert.Equal(LineCap.Flat, customLineCap.BaseCap);
             }
         }
@@ -188,7 +191,8 @@ namespace System.Drawing.Drawing2D.Tests
         public void SetStrokeCaps_InvalidLineCap_ThrowsArgumentException(
             LineCap startCap,
             LineCap endCap
-        ) {
+        )
+        {
             using (GraphicsPath strokePath = new GraphicsPath())
             using (CustomLineCap customLineCap = new CustomLineCap(null, strokePath))
             {

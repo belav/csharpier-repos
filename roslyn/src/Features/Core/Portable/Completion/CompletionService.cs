@@ -57,7 +57,8 @@ namespace Microsoft.CodeAnalysis.Completion
             CompletionTrigger trigger,
             ImmutableHashSet<string> roles = null,
             OptionSet options = null
-        ) {
+        )
+        {
             return false;
         }
 
@@ -82,7 +83,8 @@ namespace Microsoft.CodeAnalysis.Completion
             CompletionTrigger trigger,
             ImmutableHashSet<string> roles = null,
             OptionSet options = null
-        ) {
+        )
+        {
             return ShouldTriggerCompletion(text, caretPosition, trigger, roles, options);
         }
 
@@ -141,7 +143,8 @@ namespace Microsoft.CodeAnalysis.Completion
             ImmutableHashSet<string> roles = null,
             OptionSet options = null,
             CancellationToken cancellationToken = default
-        ) {
+        )
+        {
             var completionList = await GetCompletionsAsync(
                     document,
                     caretPosition,
@@ -165,7 +168,8 @@ namespace Microsoft.CodeAnalysis.Completion
             Document document,
             CompletionItem item,
             CancellationToken cancellationToken = default
-        ) {
+        )
+        {
             return Task.FromResult(CompletionDescription.Empty);
         }
 
@@ -183,7 +187,8 @@ namespace Microsoft.CodeAnalysis.Completion
             CompletionItem item,
             char? commitCharacter = null,
             CancellationToken cancellationToken = default
-        ) {
+        )
+        {
             return Task.FromResult(
                 CompletionChange.Create(new TextChange(item.Span, item.DisplayText))
             );
@@ -204,7 +209,8 @@ namespace Microsoft.CodeAnalysis.Completion
             char? commitCharacter = null,
             bool disallowAddingImports = false,
             CancellationToken cancellationToken = default
-        ) {
+        )
+        {
             return GetChangeAsync(document, item, commitCharacter, cancellationToken);
         }
 
@@ -220,7 +226,8 @@ namespace Microsoft.CodeAnalysis.Completion
             Document document,
             ImmutableArray<CompletionItem> items,
             string filterText
-        ) {
+        )
+        {
             var helper = CompletionHelper.GetHelper(document);
             return FilterItems(helper, items, filterText);
         }
@@ -229,7 +236,8 @@ namespace Microsoft.CodeAnalysis.Completion
             Document document,
             ImmutableArray<(CompletionItem, PatternMatch?)> itemsWithPatternMatch,
             string filterText
-        ) {
+        )
+        {
             // Default implementation just drops the pattern matches and
             // calls the public overload of FilterItems for compatibility.
             return FilterItems(
@@ -243,7 +251,8 @@ namespace Microsoft.CodeAnalysis.Completion
             CompletionHelper completionHelper,
             ImmutableArray<CompletionItem> items,
             string filterText
-        ) {
+        )
+        {
             var itemsWithPatternMatch = items.SelectAsArray(
                 item =>
                     (
@@ -263,7 +272,8 @@ namespace Microsoft.CodeAnalysis.Completion
         internal static ImmutableArray<CompletionItem> FilterItems(
             CompletionHelper completionHelper,
             ImmutableArray<(CompletionItem item, PatternMatch? match)> itemsWithPatternMatch
-        ) {
+        )
+        {
             var bestItems = ArrayBuilder<(CompletionItem, PatternMatch?)>.GetInstance();
             foreach (var pair in itemsWithPatternMatch)
             {

@@ -41,7 +41,8 @@ namespace Microsoft.CodeAnalysis.Classification
                 Func<SyntaxNode, ImmutableArray<ISyntaxClassifier>> getNodeClassifiers,
                 Func<SyntaxToken, ImmutableArray<ISyntaxClassifier>> getTokenClassifiers,
                 CancellationToken cancellationToken
-            ) {
+            )
+            {
                 _workspace = workspace;
                 _getNodeClassifiers = getNodeClassifiers;
                 _getTokenClassifiers = getTokenClassifiers;
@@ -64,7 +65,8 @@ namespace Microsoft.CodeAnalysis.Classification
                 Func<SyntaxNode, ImmutableArray<ISyntaxClassifier>> getNodeClassifiers,
                 Func<SyntaxToken, ImmutableArray<ISyntaxClassifier>> getTokenClassifiers,
                 CancellationToken cancellationToken
-            ) {
+            )
+            {
                 var worker = new Worker(
                     workspace,
                     semanticModel,

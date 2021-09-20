@@ -250,7 +250,8 @@ namespace System.Management
             object context,
             string path,
             string className
-        ) {
+        )
+        {
             try
             {
                 WmiEventSink eventSink = WmiEventSink.GetWmiEventSink(
@@ -279,7 +280,8 @@ namespace System.Management
             ManagementScope scope,
             object context,
             ManagementObject managementObject
-        ) {
+        )
+        {
             try
             {
                 WmiGetEventSink eventSink = WmiGetEventSink.GetWmiGetEventSink(

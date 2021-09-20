@@ -95,7 +95,8 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.RefactoringHelpers
                 spans.Count != 1
                 || !spans.TryGetValue(string.Empty, out var selections)
                 || selections.Length != 1
-            ) {
+            )
+            {
                 throw new ArgumentException(
                     "Invalid missing test format: only `[|...|]` (selection) should be present."
                 );
@@ -109,7 +110,8 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.RefactoringHelpers
             string text,
             out TextSpan selection,
             out TextSpan result
-        ) {
+        )
+        {
             MarkupTestFile.GetSpans(
                 text.NormalizeLineEndings(),
                 out text,
@@ -122,7 +124,8 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.RefactoringHelpers
                 || selections.Length != 1
                 || !spans.TryGetValue("result", out var results)
                 || results.Length != 1
-            ) {
+            )
+            {
                 throw new ArgumentException(
                     "Invalid test format: both `[|...|]` (selection) and `{|result:...|}` (retrieved node span) selections are required for a test."
                 );

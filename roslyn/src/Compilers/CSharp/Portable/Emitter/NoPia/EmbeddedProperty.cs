@@ -25,7 +25,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Emit.NoPia
 
         protected override IEnumerable<CSharpAttributeData> GetCustomAttributesToEmit(
             PEModuleBuilder moduleBuilder
-        ) {
+        )
+        {
             return UnderlyingProperty.AdaptedPropertySymbol.GetCustomAttributesToEmit(
                 moduleBuilder
             );

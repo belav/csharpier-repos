@@ -24,7 +24,8 @@ namespace System.Linq
         public static IEnumerable<TResult> Select<T, TResult>(
             this ImmutableArray<T> immutableArray,
             Func<T, TResult> selector
-        ) {
+        )
+        {
             immutableArray.ThrowNullRefIfNotInitialized();
 
             // LINQ Select/Where have optimized treatment for arrays.
@@ -54,7 +55,8 @@ namespace System.Linq
             this ImmutableArray<TSource> immutableArray,
             Func<TSource, IEnumerable<TCollection>> collectionSelector,
             Func<TSource, TCollection, TResult> resultSelector
-        ) {
+        )
+        {
             immutableArray.ThrowNullRefIfNotInitialized();
             if (collectionSelector == null || resultSelector == null)
             {
@@ -84,7 +86,8 @@ namespace System.Linq
         public static IEnumerable<T> Where<T>(
             this ImmutableArray<T> immutableArray,
             Func<T, bool> predicate
-        ) {
+        )
+        {
             immutableArray.ThrowNullRefIfNotInitialized();
 
             // LINQ Select/Where have optimized treatment for arrays.
@@ -296,7 +299,8 @@ namespace System.Linq
             this ImmutableArray<T> immutableArray,
             TAccumulate seed,
             Func<TAccumulate, T, TAccumulate> func
-        ) {
+        )
+        {
             Requires.NotNull(func, nameof(func));
 
             var result = seed;
@@ -319,7 +323,8 @@ namespace System.Linq
             TAccumulate seed,
             Func<TAccumulate, T, TAccumulate> func,
             Func<TAccumulate, TResult> resultSelector
-        ) {
+        )
+        {
             Requires.NotNull(resultSelector, nameof(resultSelector));
 
             return resultSelector(Aggregate(immutableArray, seed, func));
@@ -399,7 +404,8 @@ namespace System.Linq
         public static T? FirstOrDefault<T>(
             this ImmutableArray<T> immutableArray,
             Func<T, bool> predicate
-        ) {
+        )
+        {
             Requires.NotNull(predicate, nameof(predicate));
 
             foreach (var v in immutableArray.array!)
@@ -465,7 +471,8 @@ namespace System.Linq
         public static T? LastOrDefault<T>(
             this ImmutableArray<T> immutableArray,
             Func<T, bool> predicate
-        ) {
+        )
+        {
             Requires.NotNull(predicate, nameof(predicate));
 
             for (int i = immutableArray.Length - 1; i >= 0; i--)
@@ -540,7 +547,8 @@ namespace System.Linq
         public static T? SingleOrDefault<T>(
             this ImmutableArray<T> immutableArray,
             Func<T, bool> predicate
-        ) {
+        )
+        {
             Requires.NotNull(predicate, nameof(predicate));
 
             bool first = true;
@@ -748,7 +756,8 @@ namespace System.Linq
             this ImmutableArray<TSource> immutableArray,
             Func<TSource, IEnumerable<TCollection>> collectionSelector,
             Func<TSource, TCollection, TResult> resultSelector
-        ) {
+        )
+        {
             foreach (TSource item in immutableArray.array!)
             {
                 foreach (TCollection result in collectionSelector(item))

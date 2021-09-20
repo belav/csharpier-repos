@@ -490,7 +490,8 @@ namespace System.Text.RegularExpressions
             if (
                 (next.Type != Concatenate && next.Type != Capture)
                 || next.Child(next.ChildCount() - 1) != this
-            ) {
+            )
+            {
                 return false;
             }
 
@@ -846,7 +847,8 @@ namespace System.Text.RegularExpressions
                                     || optionsLast != optionsAt
                                     || lastNodeCannotMerge
                                     || !RegexCharClass.IsMergeable(at.Str!)
-                                ) {
+                                )
+                                {
                                     wasLastSet = true;
                                     lastNodeCannotMerge = !RegexCharClass.IsMergeable(at.Str!);
                                     optionsLast = optionsAt;
@@ -1182,7 +1184,8 @@ namespace System.Text.RegularExpressions
                         (at.Options & RegexOptions.RightToLeft)
                         == (Options & RegexOptions.RightToLeft)
                     )
-                ) {
+                )
+                {
                     if (at.Children is List<RegexNode> atChildren)
                     {
                         for (int k = 0; k < atChildren.Count; k++)
@@ -1275,7 +1278,8 @@ namespace System.Text.RegularExpressions
                             nodeMin == int.MaxValue
                             || nextMin == int.MaxValue
                             || (uint)nodeMin + (uint)nextMin >= int.MaxValue
-                        ) {
+                        )
+                        {
                             return false;
                         }
 
@@ -1284,7 +1288,8 @@ namespace System.Text.RegularExpressions
                             nodeMax != int.MaxValue
                             && nextMax != int.MaxValue
                             && (uint)nodeMax + (uint)nextMax >= int.MaxValue
-                        ) {
+                        )
+                        {
                             return false;
                         }
 
@@ -1319,7 +1324,8 @@ namespace System.Text.RegularExpressions
                                     nextNode.M,
                                     nextNode.N
                                 )
-                            ) {
+                            )
+                            {
                                 currentNode.M += nextNode.M;
                                 if (currentNode.N != int.MaxValue)
                                 {
@@ -1499,7 +1505,8 @@ namespace System.Text.RegularExpressions
         private static RegexNode? FindLastExpressionInLoopForAutoAtomic(
             RegexNode node,
             uint maxDepth
-        ) {
+        )
+        {
             Debug.Assert(node.Type == Loop);
 
             // Start by looking at the loop's sole child.

@@ -20,13 +20,15 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
     {
         internal static ISet<PropertySymbol> GetPropertiesForExplicitlyImplementedAccessor(
             MethodSymbol accessor
-        ) {
+        )
+        {
             return GetSymbolsForExplicitlyImplementedAccessor<PropertySymbol>(accessor);
         }
 
         internal static ISet<EventSymbol> GetEventsForExplicitlyImplementedAccessor(
             MethodSymbol accessor
-        ) {
+        )
+        {
             return GetSymbolsForExplicitlyImplementedAccessor<EventSymbol>(accessor);
         }
 
@@ -64,7 +66,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
         internal static Accessibility GetDeclaredAccessibilityFromAccessors(
             MethodSymbol accessor1,
             MethodSymbol accessor2
-        ) {
+        )
+        {
             if ((object)accessor1 == null)
             {
                 return ((object)accessor2 == null)
@@ -85,7 +88,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
         internal static Accessibility GetDeclaredAccessibilityFromAccessors(
             Accessibility accessibility1,
             Accessibility accessibility2
-        ) {
+        )
+        {
             var minAccessibility =
                 (accessibility1 > accessibility2) ? accessibility2 : accessibility1;
             var maxAccessibility =

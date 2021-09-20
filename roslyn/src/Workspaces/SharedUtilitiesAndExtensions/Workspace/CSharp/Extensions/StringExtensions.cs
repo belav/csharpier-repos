@@ -36,7 +36,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Extensions
         public static SyntaxToken ToIdentifierToken(
             this string identifier,
             bool isQueryContext = false
-        ) {
+        )
+        {
             var escaped = identifier.EscapeIdentifier(isQueryContext);
 
             if (escaped.Length == 0 || escaped[0] != '@')

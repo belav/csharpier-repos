@@ -93,7 +93,8 @@ namespace System.Security.AccessControl
         private void UpdateWithNewSecurityDescriptor(
             RawSecurityDescriptor newOne,
             AccessControlSections includeSections
-        ) {
+        )
+        {
             Debug.Assert(newOne != null, "Must not supply a null parameter here");
 
             if ((includeSections & AccessControlSections.Owner) != 0)
@@ -308,7 +309,8 @@ namespace System.Security.AccessControl
             bool enableOwnershipPrivilege,
             string name,
             AccessControlSections includeSections
-        ) {
+        )
+        {
             Privilege? ownerPrivilege = null;
 
             try
@@ -635,7 +637,8 @@ namespace System.Security.AccessControl
         public void SetSecurityDescriptorSddlForm(
             string sddlForm,
             AccessControlSections includeSections
-        ) {
+        )
+        {
             if (sddlForm == null)
             {
                 throw new ArgumentNullException(nameof(sddlForm));
@@ -689,7 +692,8 @@ namespace System.Security.AccessControl
         public void SetSecurityDescriptorBinaryForm(
             byte[] binaryForm,
             AccessControlSections includeSections
-        ) {
+        )
+        {
             if (binaryForm == null)
             {
                 throw new ArgumentNullException(nameof(binaryForm));
@@ -735,7 +739,8 @@ namespace System.Security.AccessControl
             AccessControlModification modification,
             AccessRule rule,
             out bool modified
-        ) {
+        )
+        {
             if (rule == null)
             {
                 throw new ArgumentNullException(nameof(rule));
@@ -763,7 +768,8 @@ namespace System.Security.AccessControl
             AccessControlModification modification,
             AuditRule rule,
             out bool modified
-        ) {
+        )
+        {
             if (rule == null)
             {
                 throw new ArgumentNullException(nameof(rule));

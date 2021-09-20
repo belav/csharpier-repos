@@ -89,7 +89,8 @@ namespace SlowPathELTTests
             double d2,
             int x3,
             double d3
-        ) {
+        )
+        {
             this.x0 = x0;
             this.d0 = d0;
             this.x1 = x1;

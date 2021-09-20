@@ -77,7 +77,8 @@ namespace System.CodeDom.Tests
         public void Ctor_Type_CodeReferenceTypeOptions_TestData(
             Type type,
             CodeTypeReferenceOptions options
-        ) {
+        )
+        {
             var typeReference = new CodeTypeReference(type, options);
             Assert.Equal(type.FullName, typeReference.BaseType);
             Assert.Equal(options, typeReference.Options);
@@ -236,7 +237,8 @@ namespace System.CodeDom.Tests
             string expectedArrayElementType,
             int expectedArrayRank,
             string[] expectedTypeArguments
-        ) {
+        )
+        {
             var typeReference = new CodeTypeReference(type);
             VerifyCodeTypeReference(
                 typeReference,
@@ -255,7 +257,8 @@ namespace System.CodeDom.Tests
         public void Ctor_String_CodeReferenceTypeOptions(
             string type,
             CodeTypeReferenceOptions options
-        ) {
+        )
+        {
             var typeReference = new CodeTypeReference(type, options);
             Assert.Equal(type, typeReference.BaseType);
             Assert.Equal(options, typeReference.Options);
@@ -275,7 +278,8 @@ namespace System.CodeDom.Tests
             CodeTypeReference type,
             int rank,
             string expectedBaseType
-        ) {
+        )
+        {
             var typeReference = new CodeTypeReference(type, rank);
             Assert.Equal(expectedBaseType, typeReference.BaseType);
             Assert.Equal(type?.BaseType, typeReference.ArrayElementType?.BaseType);
@@ -312,7 +316,8 @@ namespace System.CodeDom.Tests
             string name,
             CodeTypeReference[] typeArguments,
             string expectedBaseType
-        ) {
+        )
+        {
             var typeReference = new CodeTypeReference(name, typeArguments);
             Assert.Equal(expectedBaseType, typeReference.BaseType);
             Assert.Equal(
@@ -408,7 +413,8 @@ namespace System.CodeDom.Tests
             string expectedArrayElementType,
             int expectedArrayRank,
             string[] expectedTypeArguments
-        ) {
+        )
+        {
             Assert.Equal(expectedBaseType, typeReference.BaseType);
 
             Assert.Equal(expectedArrayElementType, typeReference.ArrayElementType?.BaseType);

@@ -195,7 +195,8 @@ namespace System.Runtime.InteropServices.Tests
         public void GetTypedObjectForIUnknown_UncastableObject_ThrowsInvalidCastException(
             object o,
             Type type
-        ) {
+        )
+        {
             IntPtr ptr = Marshal.GetIUnknownForObject(o);
             try
             {

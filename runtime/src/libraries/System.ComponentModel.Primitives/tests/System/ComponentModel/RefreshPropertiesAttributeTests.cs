@@ -51,7 +51,8 @@ namespace System.ComponentModel.Primitives.Tests
             RefreshPropertiesAttribute attribute,
             object other,
             bool expected
-        ) {
+        )
+        {
             Assert.Equal(expected, attribute.Equals(other));
             if (other is RefreshPropertiesAttribute)
             {
@@ -87,7 +88,8 @@ namespace System.ComponentModel.Primitives.Tests
             RefreshPropertiesAttribute attribute,
             RefreshProperties expectedRefreshProperties,
             bool expectedIsDefaultAttribute
-        ) {
+        )
+        {
             Assert.Equal(expectedRefreshProperties, attribute.RefreshProperties);
             Assert.Equal(expectedIsDefaultAttribute, attribute.IsDefaultAttribute());
         }

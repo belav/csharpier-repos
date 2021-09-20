@@ -29,7 +29,8 @@ namespace System.CommandLine.Binding
                 if (
                     TypeDescriptor.GetConverter(type) is { } typeConverter
                     && typeConverter.CanConvertFrom(typeof(string))
-                ) {
+                )
+                {
                     return true;
                 }
 
@@ -139,7 +140,8 @@ namespace System.CommandLine.Binding
                 var aliasIndex = IndexAfterPrefix(alias);
                 aliasIndex < alias.Length && parameterNameIndex < parameterName.Length;
                 aliasIndex++
-            ) {
+            )
+            {
                 var aliasChar = alias[aliasIndex];
 
                 if (aliasChar == '-')
@@ -195,7 +197,8 @@ namespace System.CommandLine.Binding
             this Type type,
             Type parameterType,
             [NotNullWhen(true)] out ConstructorInfo? ctor
-        ) {
+        )
+        {
             var (x, _) = type.GetConstructors()
                 .Select(c => (ctor: c, parameters: c.GetParameters()))
                 .SingleOrDefault(

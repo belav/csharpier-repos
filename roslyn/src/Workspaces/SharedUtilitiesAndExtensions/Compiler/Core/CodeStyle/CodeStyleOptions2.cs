@@ -22,7 +22,8 @@ namespace Microsoft.CodeAnalysis.CodeStyle
             string name,
             T defaultValue,
             params OptionStorageLocation2[] storageLocations
-        ) {
+        )
+        {
             var option = new PerLanguageOption2<T>(
                 "CodeStyleOptions",
                 group,
@@ -39,7 +40,8 @@ namespace Microsoft.CodeAnalysis.CodeStyle
             string name,
             T defaultValue,
             params OptionStorageLocation2[] storageLocations
-        ) {
+        )
+        {
             var option = new Option2<T>(
                 "CodeStyleOptions",
                 group,
@@ -449,7 +451,8 @@ namespace Microsoft.CodeAnalysis.CodeStyle
         private static CodeStyleOption2<AccessibilityModifiersRequired> ParseAccessibilityModifiersRequired(
             string optionString,
             CodeStyleOption2<AccessibilityModifiersRequired> defaultValue
-        ) {
+        )
+        {
             if (
                 TryGetCodeStyleValueAndOptionalNotification(
                     optionString,
@@ -457,7 +460,8 @@ namespace Microsoft.CodeAnalysis.CodeStyle
                     out var value,
                     out var notificationOpt
                 )
-            ) {
+            )
+            {
                 Debug.Assert(s_accessibilityModifiersRequiredMap.ContainsKey(value));
                 return new CodeStyleOption2<AccessibilityModifiersRequired>(
                     s_accessibilityModifiersRequiredMap.GetValueOrDefault(value),
@@ -471,7 +475,8 @@ namespace Microsoft.CodeAnalysis.CodeStyle
         private static string GetAccessibilityModifiersRequiredEditorConfigString(
             CodeStyleOption2<AccessibilityModifiersRequired> option,
             CodeStyleOption2<AccessibilityModifiersRequired> defaultValue
-        ) {
+        )
+        {
             // If they provide 'never', they don't need a notification level.
             if (option.Notification == null)
             {
@@ -501,7 +506,8 @@ namespace Microsoft.CodeAnalysis.CodeStyle
             string fieldName,
             CodeStyleOption2<ParenthesesPreference> defaultValue,
             string styleName
-        ) {
+        )
+        {
             return CreateOption(
                 CodeStyleOptionGroups.Parentheses,
                 fieldName,
@@ -638,7 +644,8 @@ namespace Microsoft.CodeAnalysis.CodeStyle
         private static CodeStyleOption2<ParenthesesPreference> ParseParenthesesPreference(
             string optionString,
             CodeStyleOption2<ParenthesesPreference> defaultValue
-        ) {
+        )
+        {
             if (
                 TryGetCodeStyleValueAndOptionalNotification(
                     optionString,
@@ -646,7 +653,8 @@ namespace Microsoft.CodeAnalysis.CodeStyle
                     out var value,
                     out var notification
                 )
-            ) {
+            )
+            {
                 Debug.Assert(s_parenthesesPreferenceMap.ContainsKey(value));
                 return new CodeStyleOption2<ParenthesesPreference>(
                     s_parenthesesPreferenceMap.GetValueOrDefault(value),
@@ -660,7 +668,8 @@ namespace Microsoft.CodeAnalysis.CodeStyle
         private static string GetParenthesesPreferenceEditorConfigString(
             CodeStyleOption2<ParenthesesPreference> option,
             CodeStyleOption2<ParenthesesPreference> defaultValue
-        ) {
+        )
+        {
             Debug.Assert(s_parenthesesPreferenceMap.ContainsValue(option.Value));
             var value =
                 s_parenthesesPreferenceMap.GetKeyOrDefault(option.Value)
@@ -675,7 +684,8 @@ namespace Microsoft.CodeAnalysis.CodeStyle
         private static CodeStyleOption2<UnusedParametersPreference> ParseUnusedParametersPreference(
             string optionString,
             CodeStyleOption2<UnusedParametersPreference> defaultValue
-        ) {
+        )
+        {
             if (
                 TryGetCodeStyleValueAndOptionalNotification(
                     optionString,
@@ -683,7 +693,8 @@ namespace Microsoft.CodeAnalysis.CodeStyle
                     out var value,
                     out var notification
                 )
-            ) {
+            )
+            {
                 return new CodeStyleOption2<UnusedParametersPreference>(
                     s_unusedParametersPreferenceMap.GetValueOrDefault(value),
                     notification
@@ -696,7 +707,8 @@ namespace Microsoft.CodeAnalysis.CodeStyle
         private static string GetUnusedParametersPreferenceEditorConfigString(
             CodeStyleOption2<UnusedParametersPreference> option,
             CodeStyleOption2<UnusedParametersPreference> defaultValue
-        ) {
+        )
+        {
             Debug.Assert(s_unusedParametersPreferenceMap.ContainsValue(option.Value));
             var value =
                 s_unusedParametersPreferenceMap.GetKeyOrDefault(option.Value)

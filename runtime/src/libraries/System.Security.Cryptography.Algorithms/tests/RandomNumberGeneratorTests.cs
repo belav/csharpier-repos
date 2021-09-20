@@ -546,7 +546,8 @@ namespace System.Security.Cryptography.RNG.Tests
             ReadOnlySpan<int> numbers,
             int fromInclusive,
             int toExclusive
-        ) {
+        )
+        {
             for (int i = 0; i < numbers.Length; i++)
             {
                 Assert.InRange(numbers[i], fromInclusive, toExclusive - 1);

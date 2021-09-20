@@ -346,7 +346,8 @@ namespace System.Web.Http.SelfHost
         public void HttpSelfHostConfiguration_MaxBufferSize_TracksMaxReceivedMessageSizeWhenNotSet(
             long maxReceivedMessageSize,
             int expectedMaxBufferSize
-        ) {
+        )
+        {
             // Arrange
             HttpSelfHostConfiguration config = new HttpSelfHostConfiguration("http://localhost");
             config.MaxReceivedMessageSize = maxReceivedMessageSize;
@@ -362,7 +363,8 @@ namespace System.Web.Http.SelfHost
         public void HttpSelfHostConfiguration_MaxBufferSize_DoesNotTrackMaxReceivedMessageSizeWhenSet(
             long maxReceivedMessageSize,
             int maxBufferSize
-        ) {
+        )
+        {
             // Arrange
             HttpSelfHostConfiguration config = new HttpSelfHostConfiguration("http://localhost");
             config.MaxBufferSize = maxBufferSize;
@@ -379,7 +381,8 @@ namespace System.Web.Http.SelfHost
         [InlineData(Int64.MaxValue)]
         public void HttpSelfHostConfiguration_MaxBufferSize_DoesNotTrackMaxReceivedMessageIfNotBuffered(
             long maxReceivedMessageSize
-        ) {
+        )
+        {
             // Arrange
             HttpSelfHostConfiguration config = new HttpSelfHostConfiguration("http://localhost");
             config.TransferMode = TransferMode.Streamed;
@@ -551,7 +554,8 @@ namespace System.Web.Http.SelfHost
             string address,
             HttpBindingSecurityMode mode,
             HttpClientCredentialType clientCredentialType
-        ) {
+        )
+        {
             // Arrange
             HttpBinding binding = new HttpBinding();
             HttpSelfHostConfiguration config = new HttpSelfHostConfiguration(address)
@@ -572,7 +576,8 @@ namespace System.Web.Http.SelfHost
             string address,
             HttpBindingSecurityMode mode,
             HttpClientCredentialType clientCredentialType
-        ) {
+        )
+        {
             // Arrange
             GC.KeepAlive(mode); // Mark parameter as used. See xUnit1026, [Theory] method doesn't use all parameters.
             HttpBinding binding = new HttpBinding();
@@ -598,7 +603,8 @@ namespace System.Web.Http.SelfHost
             string address,
             HttpBindingSecurityMode mode,
             HttpClientCredentialType clientCredentialType
-        ) {
+        )
+        {
             // Arrange
             GC.KeepAlive(mode); // Mark parameter as used. See xUnit1026, [Theory] method doesn't use all parameters.
             HttpBinding binding = new HttpBinding();
@@ -619,7 +625,8 @@ namespace System.Web.Http.SelfHost
             string address,
             HttpBindingSecurityMode mode,
             HttpClientCredentialType clientCredentialType
-        ) {
+        )
+        {
             // Arrange
             GC.KeepAlive(mode); // Mark parameter as used. See xUnit1026, [Theory] method doesn't use all parameters.
             HttpBinding binding = new HttpBinding();
@@ -645,7 +652,8 @@ namespace System.Web.Http.SelfHost
             string address,
             HttpBindingSecurityMode mode,
             HttpClientCredentialType clientCredentialType
-        ) {
+        )
+        {
             // Arrange
             GC.KeepAlive(mode); // Mark parameter as used. See xUnit1026, [Theory] method doesn't use all parameters.
             HttpBinding binding = new HttpBinding();
@@ -666,7 +674,8 @@ namespace System.Web.Http.SelfHost
         public void HttpSelfHostConfiguration_UserNamePasswordValidator_PropagatesToBinding(
             string address,
             HttpBindingSecurityMode mode
-        ) {
+        )
+        {
             // Arrange
             HttpBinding binding = new HttpBinding();
             UserNamePasswordValidator validator = new Mock<UserNamePasswordValidator>().Object;

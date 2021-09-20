@@ -23,7 +23,8 @@ namespace Microsoft.CodeAnalysis.LanguageServer.Handler.Diagnostics
         public DocumentPullDiagonsticHandlerProvider(
             IDiagnosticService diagnosticService,
             IDiagnosticAnalyzerService analyzerService
-        ) {
+        )
+        {
             _diagnosticService = diagnosticService;
             _analyzerService = analyzerService;
         }

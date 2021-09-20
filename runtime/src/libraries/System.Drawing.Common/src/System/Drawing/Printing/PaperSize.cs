@@ -77,7 +77,8 @@ namespace System.Drawing.Printing
                         _kind == (PaperKind)SafeNativeMethods.DMPAPER_RESERVED_48
                         || _kind == (PaperKind)SafeNativeMethods.DMPAPER_RESERVED_49
                     )
-                ) {
+                )
+                {
                     return _kind;
                 }
 

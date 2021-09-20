@@ -212,7 +212,8 @@ namespace Microsoft.CodeAnalysis.CSharp
 
         public override BoundNode VisitFixedLocalCollectionInitializer(
             BoundFixedLocalCollectionInitializer node
-        ) {
+        )
+        {
             throw ExceptionUtilities.Unreachable; //Should be handled by VisitFixedStatement
         }
 
@@ -220,7 +221,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             BoundLocalDeclaration localDecl,
             SyntheticBoundNodeFactory factory,
             out LocalSymbol pinnedTemp
-        ) {
+        )
+        {
             BoundExpression? initializer = localDecl.InitializerOpt;
             Debug.Assert(!ReferenceEquals(initializer, null));
 
@@ -240,7 +242,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             else if (
                 fixedCollectionInitializer.Expression.Type is
                 { SpecialType: SpecialType.System_String }
-            ) {
+            )
+            {
                 return InitializeFixedStatementStringLocal(
                     localDecl,
                     localSymbol,
@@ -286,7 +289,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             BoundFixedLocalCollectionInitializer fixedInitializer,
             SyntheticBoundNodeFactory factory,
             out LocalSymbol pinnedTemp
-        ) {
+        )
+        {
             TypeSymbol localType = localSymbol.Type;
             BoundExpression initializerExpr = VisitExpression(fixedInitializer.Expression);
             Debug.Assert(initializerExpr.Type is { TypeKind: TypeKind.Pointer });
@@ -367,7 +371,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             BoundFixedLocalCollectionInitializer fixedInitializer,
             SyntheticBoundNodeFactory factory,
             out LocalSymbol pinnedTemp
-        ) {
+        )
+        {
             TypeSymbol localType = localSymbol.Type;
             BoundExpression initializerExpr = VisitExpression(fixedInitializer.Expression);
             Debug.Assert(initializerExpr.Type is { });
@@ -483,7 +488,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             BoundFixedLocalCollectionInitializer fixedInitializer,
             SyntheticBoundNodeFactory factory,
             out LocalSymbol pinnedTemp
-        ) {
+        )
+        {
             TypeSymbol localType = localSymbol.Type;
             BoundExpression initializerExpr = VisitExpression(fixedInitializer.Expression);
             TypeSymbol? initializerType = initializerExpr.Type;
@@ -543,7 +549,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                     WellKnownMember.System_Runtime_CompilerServices_RuntimeHelpers__get_OffsetToStringData,
                     out offsetMethod
                 )
-            ) {
+            )
+            {
                 helperCall = factory.Call(receiver: null, method: offsetMethod);
             }
             else
@@ -588,7 +595,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             BoundFixedLocalCollectionInitializer fixedInitializer,
             SyntheticBoundNodeFactory factory,
             out LocalSymbol pinnedTemp
-        ) {
+        )
+        {
             TypeSymbol localType = localSymbol.Type;
             BoundExpression initializerExpr = VisitExpression(fixedInitializer.Expression);
             TypeSymbol? initializerType = initializerExpr.Type;
@@ -630,7 +638,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                         WellKnownMember.System_Array__get_Length,
                         out lengthMethod
                     )
-                ) {
+                )
+                {
                     lengthCall = factory.Call(factory.Local(pinnedTemp), lengthMethod);
                 }
                 else

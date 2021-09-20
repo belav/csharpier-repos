@@ -24,7 +24,8 @@ namespace Microsoft.CodeAnalysis.Diagnostics
         internal static void VerifyArguments<TContext>(
             Action<TContext> action,
             ImmutableArray<SymbolKind> symbolKinds
-        ) {
+        )
+        {
             VerifyAction(action);
             VerifySymbolKinds(symbolKinds);
         }
@@ -41,7 +42,8 @@ namespace Microsoft.CodeAnalysis.Diagnostics
         internal static void VerifyArguments<TContext>(
             Action<TContext> action,
             ImmutableArray<OperationKind> operationKinds
-        ) {
+        )
+        {
             VerifyAction(action);
             VerifyOperationKinds(operationKinds);
         }
@@ -50,7 +52,8 @@ namespace Microsoft.CodeAnalysis.Diagnostics
             Diagnostic diagnostic,
             Compilation? compilation,
             Func<Diagnostic, bool> isSupportedDiagnostic
-        ) {
+        )
+        {
             if (diagnostic is DiagnosticWithInfo)
             {
                 // Compiler diagnostic, skip validations.
@@ -93,7 +96,8 @@ namespace Microsoft.CodeAnalysis.Diagnostics
         internal static void VerifyDiagnosticLocationsInCompilation(
             Diagnostic diagnostic,
             Compilation compilation
-        ) {
+        )
+        {
             VerifyDiagnosticLocationInCompilation(diagnostic.Id, diagnostic.Location, compilation);
 
             if (diagnostic.AdditionalLocations != null)
@@ -113,7 +117,8 @@ namespace Microsoft.CodeAnalysis.Diagnostics
             string id,
             Location location,
             Compilation compilation
-        ) {
+        )
+        {
             if (!location.IsInSource)
             {
                 return;
@@ -226,7 +231,8 @@ namespace Microsoft.CodeAnalysis.Diagnostics
             IOperation operation,
             Func<IOperation, ControlFlowGraph>? getControlFlowGraph,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             IOperation rootOperation = operation.GetRootOperation();
             return getControlFlowGraph != null
               ? getControlFlowGraph(rootOperation)

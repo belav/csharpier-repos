@@ -40,7 +40,8 @@ namespace Microsoft.Extensions.Localization
             string value,
             bool resourceNotFound,
             string? searchedLocation
-        ) {
+        )
+        {
             if (name == null)
             {
                 throw new ArgumentNullException(nameof(name));

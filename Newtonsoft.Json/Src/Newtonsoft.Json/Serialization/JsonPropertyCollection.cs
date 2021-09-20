@@ -103,7 +103,8 @@ namespace Newtonsoft.Json.Serialization
                                     existingProperty.DeclaringType
                                 )
                             )
-                        ) {
+                        )
+                        {
                             // current property is on a derived class and hides the existing
                             Remove(existingProperty);
                             duplicateProperty = false;
@@ -116,7 +117,8 @@ namespace Newtonsoft.Json.Serialization
                                     property.DeclaringType
                                 )
                             )
-                        ) {
+                        )
+                        {
                             // current property is hidden by the existing so don't add it
                             return;
                         }
@@ -124,7 +126,8 @@ namespace Newtonsoft.Json.Serialization
                         if (
                             _type.ImplementInterface(existingProperty.DeclaringType)
                             && _type.ImplementInterface(property.DeclaringType)
-                        ) {
+                        )
+                        {
                             // current property was already defined on another interface
                             return;
                         }

@@ -34,7 +34,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Diagnostics
             out TextSpan sourceSpan,
             out FileLinePositionSpan originalLineInfo,
             out FileLinePositionSpan mappedLineInfo
-        ) {
+        )
+        {
             sourceSpan = location.SourceSpan;
             originalLineInfo = location.GetLineSpan();
             mappedLineInfo = location.GetMappedLineSpan();
@@ -54,14 +55,16 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Diagnostics
                     out var originalSpan,
                     out var mappedSpan
                 )
-            ) {
+            )
+            {
                 return;
             }
 
             if (
                 originalSpan.Start != originalLineInfo.StartLinePosition
                 || originalSpan.End != originalLineInfo.EndLinePosition
-            ) {
+            )
+            {
                 originalLineInfo = new FileLinePositionSpan(
                     originalLineInfo.Path,
                     originalSpan.Start,
@@ -82,7 +85,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Diagnostics
             if (
                 mappedSpan.Start != mappedLineInfo.StartLinePosition
                 || mappedSpan.End != mappedLineInfo.EndLinePosition
-            ) {
+            )
+            {
                 mappedLineInfo = new FileLinePositionSpan(
                     mappedLineInfo.Path,
                     mappedSpan.Start,
@@ -127,7 +131,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Diagnostics
             FileLinePositionSpan mappedLineInfo,
             out LinePositionSpan originalSpan,
             out LinePositionSpan mappedSpan
-        ) {
+        )
+        {
             var startChanged = true;
             if (
                 !TryAdjustSpanIfNeededForVenus(
@@ -137,7 +142,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Diagnostics
                     originalLineInfo.StartLinePosition.Character,
                     out var startLineColumn
                 )
-            ) {
+            )
+            {
                 startChanged = false;
                 startLineColumn = new MappedSpan(
                     originalLineInfo.StartLinePosition.Line,
@@ -156,7 +162,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Diagnostics
                     originalLineInfo.EndLinePosition.Character,
                     out var endLineColumn
                 )
-            ) {
+            )
+            {
                 endChanged = false;
                 endLineColumn = new MappedSpan(
                     originalLineInfo.EndLinePosition.Line,
@@ -197,7 +204,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Diagnostics
             int originalColumn,
             int mappedLine,
             int mappedColumn
-        ) {
+        )
+        {
             if (!(workspace is VisualStudioWorkspaceImpl vsWorkspace))
             {
                 return new LinePosition(mappedLine, mappedColumn);
@@ -211,7 +219,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Diagnostics
                     originalColumn,
                     out var span
                 )
-            ) {
+            )
+            {
                 return span.MappedLinePosition;
             }
 
@@ -224,7 +233,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Diagnostics
             int originalLine,
             int originalColumn,
             out MappedSpan mappedSpan
-        ) {
+        )
+        {
             mappedSpan = default;
 
             if (documentId == null)
@@ -256,7 +266,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Diagnostics
                     originalSpanOnSecondaryBuffer,
                     spansOnPrimaryBuffer
                 )
-            ) {
+            )
+            {
                 // easy case, we can map span in subject buffer to surface buffer. no need to adjust any span
                 mappedSpan = new MappedSpan(
                     originalLine,
@@ -275,7 +286,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Diagnostics
                         originalSpanOnSecondaryBuffer,
                         spansOnPrimaryBuffer
                     )
-            ) {
+            )
+            {
                 // no visible span we can use.
                 return false;
             }
@@ -298,7 +310,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Diagnostics
                     nearestVisibleSpanOnPrimaryBuffer,
                     spansOnSecondaryBuffer
                 )
-            ) {
+            )
+            {
                 // we can't adjust original position but we can adjust mapped one
                 mappedSpan = new MappedSpan(
                     originalLine,
@@ -335,7 +348,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Diagnostics
                     nearestVisibleSpanOnSecondaryBuffer.iStartIndex,
                     out var adjustedPosition
                 )
-            ) {
+            )
+            {
                 // span has changed yet again, re-calculate span
                 return TryAdjustSpanIfNeededForVenus(
                     workspace,
@@ -360,7 +374,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Diagnostics
             int originalLine,
             int originalColumn,
             out LinePosition adjustedPosition
-        ) {
+        )
+        {
             // GetNearestVisibleToken gives us the position right at the end of visible span.
             // Move the position one position to the left so that squiggle can show up on last token.
             if (originalColumn > 1)
@@ -376,7 +391,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Diagnostics
                         == bufferCoordinator.GetSecondaryBuffer(out var secondaryBuffer)
                     && VSConstants.S_OK
                         == secondaryBuffer.GetLengthOfLine(originalLine - 1, out var length)
-                ) {
+                )
+                {
                     adjustedPosition = new LinePosition(originalLine - 1, length);
                     return true;
                 }
@@ -391,7 +407,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Diagnostics
             int originalColumn,
             int movedLine,
             int movedColumn
-        ) {
+        )
+        {
             if (movedLine < originalLine)
             {
                 return true;
@@ -417,7 +434,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Diagnostics
                 int originalColumn,
                 int mappedLine,
                 int mappedColumn
-            ) {
+            )
+            {
                 _originalLine = originalLine;
                 _originalColumn = originalColumn;
                 _mappedLine = mappedLine;

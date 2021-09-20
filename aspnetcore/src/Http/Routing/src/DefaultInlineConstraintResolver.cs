@@ -27,7 +27,8 @@ namespace Microsoft.AspNetCore.Routing
         public DefaultInlineConstraintResolver(
             IOptions<RouteOptions> routeOptions,
             IServiceProvider serviceProvider
-        ) {
+        )
+        {
             if (routeOptions == null)
             {
                 throw new ArgumentNullException(nameof(routeOptions));

@@ -110,7 +110,8 @@ namespace System.Collections.Tests
         [MemberData(nameof(ValidCollectionSizes))]
         public void Dictionary_Generic_ValueCollection_CopyTo_ExactlyEnoughSpaceInTypeCorrectArray(
             int count
-        ) {
+        )
+        {
             ICollection collection = NonGenericICollectionFactory(count);
             string[] array = new string[count];
             collection.CopyTo(array, 0);

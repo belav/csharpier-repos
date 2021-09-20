@@ -12,7 +12,8 @@ namespace System.CodeDom
         public CodeObjectCreateExpression(
             CodeTypeReference createType,
             params CodeExpression[] parameters
-        ) {
+        )
+        {
             CreateType = createType;
             Parameters.AddRange(parameters);
         }

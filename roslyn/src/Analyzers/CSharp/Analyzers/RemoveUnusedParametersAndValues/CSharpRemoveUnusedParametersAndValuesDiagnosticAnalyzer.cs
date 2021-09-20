@@ -36,7 +36,8 @@ namespace Microsoft.CodeAnalysis.CSharp.RemoveUnusedParametersAndValues
 
         protected override bool ShouldBailOutFromRemovableAssignmentAnalysis(
             IOperation unusedSymbolWriteOperation
-        ) {
+        )
+        {
             // We don't want to recommend removing the write operation if it is within a statement
             // that is not parented by an explicit block with curly braces.
             // For example, assignment to 'x' in 'if (...) x = 1;'
@@ -86,7 +87,8 @@ namespace Microsoft.CodeAnalysis.CSharp.RemoveUnusedParametersAndValues
                     if (
                         unusedDefinition.Syntax.Parent is ForEachStatementSyntax forEachStatement
                         && forEachStatement.Type == unusedDefinition.Syntax
-                    ) {
+                    )
+                    {
                         return forEachStatement.Identifier.GetLocation();
                     }
 

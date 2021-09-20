@@ -42,7 +42,8 @@ namespace Microsoft.AspNetCore.Identity
             HashAlgorithm hashAlgorithm,
             ulong timestepNumber,
             string modifier
-        ) {
+        )
+        {
             // # of 0's = length of pin
             const int Mod = 1000000;
 

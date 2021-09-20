@@ -57,7 +57,8 @@ namespace Microsoft.CodeAnalysis.Test.Utilities
                                 else if (
                                     operationContext.Operation
                                     is IIncrementOrDecrementOperation increment
-                                ) {
+                                )
+                                {
                                     AssignTo(
                                         increment.Target,
                                         assignedToLocals,
@@ -86,7 +87,8 @@ namespace Microsoft.CodeAnalysis.Test.Utilities
                                     if (
                                         argument.Parameter.RefKind == RefKind.Out
                                         || argument.Parameter.RefKind == RefKind.Ref
-                                    ) {
+                                    )
+                                    {
                                         AssignTo(
                                             argument.Value,
                                             assignedToLocals,
@@ -107,7 +109,8 @@ namespace Microsoft.CodeAnalysis.Test.Utilities
                                     IVariableDeclaratorOperation variable in declaration.Declarations.SelectMany(
                                         decl => decl.Declarators
                                     )
-                                ) {
+                                )
+                                {
                                     ILocalSymbol local = variable.Symbol;
                                     if (!local.IsConst && !assignedToLocals.Contains(local))
                                     {
@@ -119,13 +122,15 @@ namespace Microsoft.CodeAnalysis.Test.Utilities
                                                     == SpecialType.System_String
                                             )
                                             && localType.SpecialType != SpecialType.None
-                                        ) {
+                                        )
+                                        {
                                             IVariableInitializerOperation initializer =
                                                 variable.GetVariableInitializer();
                                             if (
                                                 initializer != null
                                                 && initializer.Value.ConstantValue.HasValue
-                                            ) {
+                                            )
+                                            {
                                                 mightBecomeConstLocals.Add(local);
                                             }
                                         }
@@ -157,7 +162,8 @@ namespace Microsoft.CodeAnalysis.Test.Utilities
             IOperation target,
             HashSet<ILocalSymbol> assignedToLocals,
             HashSet<ILocalSymbol> mightBecomeConstLocals
-        ) {
+        )
+        {
             if (target.Kind == OperationKind.LocalReference)
             {
                 ILocalSymbol targetLocal = ((ILocalReferenceOperation)target).Local;
@@ -179,7 +185,8 @@ namespace Microsoft.CodeAnalysis.Test.Utilities
             OperationBlockAnalysisContext context,
             ILocalSymbol local,
             DiagnosticDescriptor descriptor
-        ) {
+        )
+        {
             context.ReportDiagnostic(
                 Diagnostic.Create(descriptor, local.Locations.FirstOrDefault())
             );

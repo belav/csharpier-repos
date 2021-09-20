@@ -39,7 +39,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Internal
 
         public Task<X509Certificate2?> GetClientCertificateAsync(
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             return Task.FromResult(ClientCertificate);
         }
     }

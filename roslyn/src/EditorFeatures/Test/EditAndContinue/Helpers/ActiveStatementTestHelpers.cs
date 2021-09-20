@@ -25,7 +25,8 @@ namespace Microsoft.CodeAnalysis.EditAndContinue.UnitTests
             int[]? methodVersions = null,
             int[]? ilOffsets = null,
             ActiveStatementFlags[]? flags = null
-        ) {
+        )
+        {
             IEnumerable<(TextSpan Span, int Id, SourceText Text, string DocumentName, DocumentId DocumentId)> EnumerateAllSpans()
             {
                 var sourceIndex = 0;
@@ -40,7 +41,8 @@ namespace Microsoft.CodeAnalysis.EditAndContinue.UnitTests
 
                     foreach (
                         var (span, id) in ActiveStatementsDescription.GetActiveSpans(markedSource)
-                    ) {
+                    )
+                    {
                         yield return (span, id, text, documentName, documentId);
                     }
 
@@ -57,7 +59,8 @@ namespace Microsoft.CodeAnalysis.EditAndContinue.UnitTests
                 foreach (
                     var (span, id, text, documentName, documentId) in EnumerateAllSpans()
                         .OrderBy(s => s.Id)
-                ) {
+                )
+                {
                     yield return new ManagedActiveStatementDebugInfo(
                         new ManagedInstructionId(
                             new ManagedMethodId(

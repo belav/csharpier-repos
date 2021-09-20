@@ -20,7 +20,8 @@ namespace System.CodeDom.Compiler
             string[] assemblyNames,
             string outputName,
             bool includeDebugInformation
-        ) {
+        )
+        {
             if (assemblyNames != null)
             {
                 ReferencedAssemblies.AddRange(assemblyNames);

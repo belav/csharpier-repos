@@ -27,7 +27,8 @@ namespace Microsoft.AspNetCore.Mvc.ModelBinding
             this ModelStateDictionary modelState,
             Expression<Func<TModel, object>> expression,
             string errorMessage
-        ) {
+        )
+        {
             if (modelState == null)
             {
                 throw new ArgumentNullException(nameof(modelState));
@@ -65,7 +66,8 @@ namespace Microsoft.AspNetCore.Mvc.ModelBinding
             this ModelStateDictionary modelState,
             Expression<Func<TModel, object>> expression,
             Exception exception
-        ) {
+        )
+        {
             if (modelState == null)
             {
                 throw new ArgumentNullException(nameof(modelState));
@@ -95,7 +97,8 @@ namespace Microsoft.AspNetCore.Mvc.ModelBinding
             Expression<Func<TModel, object>> expression,
             Exception exception,
             ModelMetadata metadata
-        ) {
+        )
+        {
             if (modelState == null)
             {
                 throw new ArgumentNullException(nameof(modelState));
@@ -127,7 +130,8 @@ namespace Microsoft.AspNetCore.Mvc.ModelBinding
         public static bool Remove<TModel>(
             this ModelStateDictionary modelState,
             Expression<Func<TModel, object>> expression
-        ) {
+        )
+        {
             if (modelState == null)
             {
                 throw new ArgumentNullException(nameof(modelState));
@@ -151,7 +155,8 @@ namespace Microsoft.AspNetCore.Mvc.ModelBinding
         public static void RemoveAll<TModel>(
             this ModelStateDictionary modelState,
             Expression<Func<TModel, object>> expression
-        ) {
+        )
+        {
             if (modelState == null)
             {
                 throw new ArgumentNullException(nameof(modelState));

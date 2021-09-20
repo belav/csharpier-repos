@@ -249,7 +249,8 @@ namespace Microsoft.CodeAnalysis.UnitTests
         private static void VerifyOrder(
             string expected,
             IEnumerable<Lazy<Extension, OrderableMetadata>> actual
-        ) {
+        )
+        {
             var actualOrder = string.Join(string.Empty, GetNames(actual));
             Assert.Equal(expected, actualOrder);
         }

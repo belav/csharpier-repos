@@ -2026,7 +2026,8 @@ MODIFIER MyType
                 string equal,
                 string semanticType,
                 params DiagnosticDescription[] diagnostics
-            ) {
+            )
+            {
                 validateLangVer(
                     modifier,
                     type,
@@ -2055,7 +2056,8 @@ MODIFIER MyType
                 string semanticType,
                 CSharpParseOptions parseOptions,
                 params DiagnosticDescription[] diagnostics
-            ) {
+            )
+            {
                 var source = template.Replace("MODIFIER", modifier)
                     .Replace("TYPE", type)
                     .Replace("VALUE", value)
@@ -2142,7 +2144,8 @@ MODIFIER MyType
                 string equal,
                 string semanticType,
                 params DiagnosticDescription[] diagnostics
-            ) {
+            )
+            {
                 var source = template.Replace("MODIFIER", modifier)
                     .Replace("TYPE", type)
                     .Replace("VALUE", value)
@@ -2233,7 +2236,8 @@ struct MyType
                 string equal,
                 string semanticType,
                 params DiagnosticDescription[] diagnostics
-            ) {
+            )
+            {
                 var source = template.Replace("TYPE", type)
                     .Replace("VALUE", value)
                     .Replace("EQUAL", equal);

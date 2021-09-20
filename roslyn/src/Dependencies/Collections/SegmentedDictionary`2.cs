@@ -177,12 +177,14 @@ namespace Microsoft.CodeAnalysis.Collections
 
         bool ICollection<KeyValuePair<TKey, TValue>>.Contains(
             KeyValuePair<TKey, TValue> keyValuePair
-        ) {
+        )
+        {
             ref var value = ref FindValue(keyValuePair.Key);
             if (
                 !RoslynUnsafe.IsNullRef(ref value)
                 && EqualityComparer<TValue>.Default.Equals(value, keyValuePair.Value)
-            ) {
+            )
+            {
                 return true;
             }
 
@@ -195,7 +197,8 @@ namespace Microsoft.CodeAnalysis.Collections
             if (
                 !RoslynUnsafe.IsNullRef(ref value)
                 && EqualityComparer<TValue>.Default.Equals(value, keyValuePair.Value)
-            ) {
+            )
+            {
                 Remove(keyValuePair.Key);
                 return true;
             }
@@ -243,7 +246,8 @@ namespace Microsoft.CodeAnalysis.Collections
                     if (
                         entries[i]._next >= -1
                         && EqualityComparer<TValue>.Default.Equals(entries[i]._value, value)
-                    ) {
+                    )
+                    {
                         return true;
                     }
                 }
@@ -344,7 +348,8 @@ namespace Microsoft.CodeAnalysis.Collections
                             if (
                                 entry._hashCode == hashCode
                                 && EqualityComparer<TKey>.Default.Equals(entry._key, key)
-                            ) {
+                            )
+                            {
                                 goto ReturnFound;
                             }
 
@@ -378,7 +383,8 @@ namespace Microsoft.CodeAnalysis.Collections
                             if (
                                 entry._hashCode == hashCode
                                 && defaultComparer.Equals(entry._key, key)
-                            ) {
+                            )
+                            {
                                 goto ReturnFound;
                             }
 
@@ -504,7 +510,8 @@ namespace Microsoft.CodeAnalysis.Collections
                         if (
                             entries[i]._hashCode == hashCode
                             && EqualityComparer<TKey>.Default.Equals(entries[i]._key, key)
-                        ) {
+                        )
+                        {
                             if (behavior == InsertionBehavior.OverwriteExisting)
                             {
                                 entries[i]._value = value;
@@ -548,7 +555,8 @@ namespace Microsoft.CodeAnalysis.Collections
                         if (
                             entries[i]._hashCode == hashCode
                             && defaultComparer.Equals(entries[i]._key, key)
-                        ) {
+                        )
+                        {
                             if (behavior == InsertionBehavior.OverwriteExisting)
                             {
                                 entries[i]._value = value;
@@ -713,7 +721,8 @@ namespace Microsoft.CodeAnalysis.Collections
                             _comparer?.Equals(entry._key, key)
                             ?? EqualityComparer<TKey>.Default.Equals(entry._key, key)
                         )
-                    ) {
+                    )
+                    {
                         if (last < 0)
                         {
                             bucket = entry._next + 1; // Value in buckets is 1-based
@@ -800,7 +809,8 @@ namespace Microsoft.CodeAnalysis.Collections
                             _comparer?.Equals(entry._key, key)
                             ?? EqualityComparer<TKey>.Default.Equals(entry._key, key)
                         )
-                    ) {
+                    )
+                    {
                         if (last < 0)
                         {
                             bucket = entry._next + 1; // Value in buckets is 1-based
@@ -1192,7 +1202,8 @@ namespace Microsoft.CodeAnalysis.Collections
             internal Enumerator(
                 SegmentedDictionary<TKey, TValue> dictionary,
                 int getEnumeratorRetType
-            ) {
+            )
+            {
                 _dictionary = dictionary;
                 _version = dictionary._version;
                 _index = 0;

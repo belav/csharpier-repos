@@ -25,7 +25,8 @@ internal static partial class Interop
             IntPtr hHeap,
             HeapAllocFlags dwFlags,
             int dwBytes
-        ) {
+        )
+        {
             return HeapAlloc(hHeap, dwFlags, new IntPtr(dwBytes));
         }
 

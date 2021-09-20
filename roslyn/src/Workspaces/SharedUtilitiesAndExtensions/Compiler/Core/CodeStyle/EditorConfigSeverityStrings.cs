@@ -18,7 +18,8 @@ namespace Microsoft.CodeAnalysis
         public static bool TryParse(
             string editorconfigSeverityString,
             out ReportDiagnostic reportDiagnostic
-        ) {
+        )
+        {
             switch (editorconfigSeverityString)
             {
                 case None:

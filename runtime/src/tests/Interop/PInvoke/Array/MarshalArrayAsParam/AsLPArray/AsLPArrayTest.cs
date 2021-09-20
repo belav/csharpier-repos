@@ -939,7 +939,8 @@ public class ArrayMarshal
         UInt64 ui64,
         Single sgl,
         Double d
-    ) {
+    )
+    {
         S2[] arrS2 = new S2[NumArrElements];
         for (int i = 0; i < NumArrElements; i++)
         {
@@ -997,7 +998,8 @@ public class ArrayMarshal
                 || actual[i].ui64 != expected[i].ui64
                 || actual[i].sgl != expected[i].sgl
                 || actual[i].d != expected[i].d
-            ) {
+            )
+            {
                 return false;
             }
         }

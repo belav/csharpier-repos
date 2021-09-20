@@ -134,7 +134,8 @@ namespace System.ServiceModel.Syndication.Tests
             Uri link,
             IEnumerable<CategoriesDocument> categories,
             bool allowsNewEntries
-        ) {
+        )
+        {
             var collectionInfo = new ResourceCollectionInfo(
                 title,
                 link,
@@ -188,7 +189,8 @@ namespace System.ServiceModel.Syndication.Tests
             Uri link,
             IEnumerable<CategoriesDocument> categories,
             IEnumerable<string> accepts
-        ) {
+        )
+        {
             var collectionInfo = new ResourceCollectionInfo(title, link, categories, accepts);
             Assert.Equal(accepts ?? new string[0], collectionInfo.Accepts);
             Assert.Empty(collectionInfo.AttributeExtensions);
@@ -421,7 +423,8 @@ namespace System.ServiceModel.Syndication.Tests
             string ns,
             string value,
             string version
-        ) {
+        )
+        {
             var collectionInfo = new ResourceCollectionInfoSubclass();
             Assert.False(collectionInfo.TryParseAttributeEntryPoint(name, ns, value, version));
         }

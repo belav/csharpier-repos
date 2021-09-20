@@ -36,7 +36,8 @@ namespace Microsoft.AspNetCore.Components.Rendering
             int componentId,
             IComponent component,
             ComponentState parentComponentState
-        ) {
+        )
+        {
             ComponentId = componentId;
             ParentComponentState = parentComponentState;
             Component = component ?? throw new ArgumentNullException(nameof(component));
@@ -62,7 +63,8 @@ namespace Microsoft.AspNetCore.Components.Rendering
             RenderBatchBuilder batchBuilder,
             RenderFragment renderFragment,
             out Exception? renderFragmentException
-        ) {
+        )
+        {
             renderFragmentException = null;
 
             // A component might be in the render queue already before getting disposed by an
@@ -107,7 +109,8 @@ namespace Microsoft.AspNetCore.Components.Rendering
         public bool TryDisposeInBatch(
             RenderBatchBuilder batchBuilder,
             [NotNullWhen(false)] out Exception? exception
-        ) {
+        )
+        {
             _componentWasDisposed = true;
             exception = null;
 

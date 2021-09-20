@@ -11555,7 +11555,8 @@ class C
                     null,
                     out d
                 )
-            ) {
+            )
+            {
                 CreateCompilation(source).VerifyDiagnostics();
             }
             else

@@ -37,14 +37,16 @@ namespace System.Net.NetworkInformation.Tests
 
         public static IPAddress GetLocalIPAddress(
             AddressFamily addressFamily = AddressFamily.Unspecified
-        ) {
+        )
+        {
             IPAddress[] addressList = GetLocalIPAddresses();
             return GetIPAddressForHost(addressList, addressFamily);
         }
 
         public static async Task<IPAddress> GetLocalIPAddressAsync(
             AddressFamily addressFamily = AddressFamily.Unspecified
-        ) {
+        )
+        {
             IPAddress[] addressList = await GetLocalIPAddressesAsync();
             return GetIPAddressForHost(addressList, addressFamily);
         }
@@ -52,7 +54,8 @@ namespace System.Net.NetworkInformation.Tests
         private static IPAddress GetIPAddressForHost(
             IPAddress[] addressList,
             AddressFamily addressFamily = AddressFamily.Unspecified
-        ) {
+        )
+        {
             foreach (IPAddress address in addressList)
             {
                 if (
@@ -61,7 +64,8 @@ namespace System.Net.NetworkInformation.Tests
                         addressFamily == AddressFamily.Unspecified
                         && address.AddressFamily == AddressFamily.InterNetworkV6
                     )
-                ) {
+                )
+                {
                     return address;
                 }
             }

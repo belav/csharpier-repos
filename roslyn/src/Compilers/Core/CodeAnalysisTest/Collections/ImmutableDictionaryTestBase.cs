@@ -316,7 +316,8 @@ namespace Microsoft.CodeAnalysis.UnitTests.Collections
             IImmutableDictionary<TKey, TValue> map,
             TKey key,
             TValue value
-        ) {
+        )
+        {
             Assert.False(map.ContainsKey(key));
             Assert.True(map.Add(key, value).ContainsKey(key));
         }

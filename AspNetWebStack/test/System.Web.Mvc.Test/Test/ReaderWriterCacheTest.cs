@@ -106,7 +106,8 @@ namespace System.Web.Mvc.Test
                 TKey key,
                 Func<TArgument, TValue> creator,
                 TArgument state
-            ) {
+            )
+            {
                 return FetchOrCreateItem(key, creator, state);
             }
         }

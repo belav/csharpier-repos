@@ -53,7 +53,8 @@ namespace System.IO.Pipelines
             CancellationToken cancellationToken,
             Action<object?> callback,
             object? state
-        ) {
+        )
+        {
             cancellationToken.ThrowIfCancellationRequested();
 
             _awaitableState |= AwaitableState.Running;
@@ -117,7 +118,8 @@ namespace System.IO.Pipelines
             ValueTaskSourceOnCompletedFlags flags,
             out CompletionData completionData,
             out bool doubleCompletion
-        ) {
+        )
+        {
             completionData = default;
             doubleCompletion = _completion is not null;
 
@@ -139,7 +141,8 @@ namespace System.IO.Pipelines
             if (
                 (_awaitableState & AwaitableState.UseSynchronizationContext) != 0
                 && (flags & ValueTaskSourceOnCompletedFlags.UseSchedulingContext) != 0
-            ) {
+            )
+            {
                 SynchronizationContext? sc = SynchronizationContext.Current;
                 if (sc != null && sc.GetType() != typeof(SynchronizationContext))
                 {
@@ -190,7 +193,8 @@ namespace System.IO.Pipelines
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public CancellationTokenRegistration ReleaseCancellationTokenRegistration(
             out CancellationToken cancellationToken
-        ) {
+        )
+        {
             cancellationToken = CancellationToken;
             CancellationTokenRegistration cancellationTokenRegistration =
                 _cancellationTokenRegistration;

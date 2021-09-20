@@ -138,7 +138,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                     options
                     & (LookupOptions.NamespaceAliasesOnly | LookupOptions.NamespacesOrTypesOnly)
                 ) != 0
-            ) {
+            )
+            {
                 return false;
             }
 

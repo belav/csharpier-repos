@@ -148,7 +148,8 @@ namespace System.Data.Odbc
                                 if (
                                     (string)collection[collectionName]
                                     == (string)restriction[restrictionCollectionName]
-                                ) {
+                                )
+                                {
                                     restriction.Delete();
                                 }
                             }
@@ -224,7 +225,8 @@ namespace System.Data.Odbc
             DataTable dataTypesTable,
             OdbcDataReader dataReader,
             OdbcConnection connection
-        ) {
+        )
+        {
             DataTable? schemaTable = null;
             //
 
@@ -409,7 +411,8 @@ namespace System.Data.Odbc
                 if (
                     (getTypeInfoValues[indexAUTO_UNIQUE_VALUE] == DBNull.Value)
                     || (Convert.ToInt16(getTypeInfoValues[indexAUTO_UNIQUE_VALUE], null) == 0)
-                ) {
+                )
+                {
                     dataTypesRow[isAutoIncermentableColumn] = false;
                 }
                 else
@@ -511,7 +514,8 @@ namespace System.Data.Odbc
             IDataReader reader,
             string tableName,
             string? restrictionIndexName
-        ) {
+        )
+        {
             // set up the column structure of the data table from the reader
             object[] values;
             DataTable resultTable = NewDataTableFromReader(reader, out values, tableName);
@@ -528,7 +532,8 @@ namespace System.Data.Odbc
                         restrictionIndexName,
                         Convert.ToInt16(values[positionOfType], null)
                     ) == true
-                ) {
+                )
+                {
                     resultTable.Rows.Add(values);
                 }
             }
@@ -539,7 +544,8 @@ namespace System.Data.Odbc
             IDataReader reader,
             string tableName,
             bool isColumn
-        ) {
+        )
+        {
             // set up the column structure of the data table from the reader
             object[] values;
             DataTable resultTable = NewDataTableFromReader(reader, out values, tableName);
@@ -561,7 +567,8 @@ namespace System.Data.Odbc
                             ((short)values[positionOfColumnType] != ODBC32.SQL_RESULT_COL)
                             && (isColumn == false)
                         )
-                    ) {
+                    )
+                    {
                         resultTable.Rows.Add(values);
                     }
                 }
@@ -573,7 +580,8 @@ namespace System.Data.Odbc
             IDataReader reader,
             string tableName,
             short procedureType
-        ) {
+        )
+        {
             // Build a DataTable from the reader
 
             // set up the column structure of the data table from the reader
@@ -602,7 +610,8 @@ namespace System.Data.Odbc
             string?[]? restrictions,
             object?[] allRestrictions,
             string collectionName
-        ) {
+        )
+        {
             Debug.Assert(allRestrictions.Length >= restrictionsCount);
 
             int i = 0;
@@ -679,7 +688,8 @@ namespace System.Data.Odbc
         private DataTable GetDataSourceInformationCollection(
             string?[]? restrictions,
             OdbcConnection connection
-        ) {
+        )
+        {
             if (ADP.IsEmptyArray(restrictions) == false)
             {
                 throw ADP.TooManyRestrictions(DbMetaDataCollectionNames.DataSourceInformation);
@@ -759,7 +769,8 @@ namespace System.Data.Odbc
 
             if (
                 (retcode == ODBC32.RetCode.SUCCESS) || (retcode == ODBC32.RetCode.SUCCESS_WITH_INFO)
-            ) {
+            )
+            {
                 Common.SupportedJoinOperators supportedJoinOperators =
                     Common.SupportedJoinOperators.None;
                 if ((int32Value & (int)ODBC32.SQL_OJ_CAPABILITIES.LEFT) != 0)
@@ -793,7 +804,8 @@ namespace System.Data.Odbc
 
             if (
                 (retcode == ODBC32.RetCode.SUCCESS) || (retcode == ODBC32.RetCode.SUCCESS_WITH_INFO)
-            ) {
+            )
+            {
                 switch (int16Value)
                 {
                     case (short)ODBC32.SQL_GROUP_BY.NOT_SUPPORTED:
@@ -830,7 +842,8 @@ namespace System.Data.Odbc
 
             if (
                 (retcode == ODBC32.RetCode.SUCCESS) || (retcode == ODBC32.RetCode.SUCCESS_WITH_INFO)
-            ) {
+            )
+            {
                 switch (int16Value)
                 {
                     case (short)ODBC32.SQL_IDENTIFIER_CASE.SENSITIVE:
@@ -904,7 +917,8 @@ namespace System.Data.Odbc
 
             if (
                 (retcode == ODBC32.RetCode.SUCCESS) || (retcode == ODBC32.RetCode.SUCCESS_WITH_INFO)
-            ) {
+            )
+            {
                 switch (int16Value)
                 {
                     case (short)ODBC32.SQL_IDENTIFIER_CASE.SENSITIVE:
@@ -1049,7 +1063,8 @@ namespace System.Data.Odbc
             string?[]? restrictions,
             OdbcConnection connection,
             bool isColumns
-        ) {
+        )
+        {
             OdbcCommand? command = null;
             OdbcDataReader? dataReader = null;
             DataTable? resultTable = null;
@@ -1106,7 +1121,8 @@ namespace System.Data.Odbc
         private DataTable GetProceduresCollection(
             string?[]? restrictions,
             OdbcConnection connection
-        ) {
+        )
+        {
             OdbcCommand? command = null;
             OdbcDataReader? dataReader = null;
             DataTable? resultTable = null;
@@ -1144,7 +1160,8 @@ namespace System.Data.Odbc
                         || (
                             restrictions[indexOfProcedureType] == "0" /*ODBC32.SQL_PROCEDURETYPE.UNKNOWN*/
                         )
-                    ) {
+                    )
+                    {
                         procedureType = (short)ODBC32.SQL_PROCEDURETYPE.UNKNOWN;
                     }
                     else if (
@@ -1152,7 +1169,8 @@ namespace System.Data.Odbc
                         || (
                             restrictions[indexOfProcedureType] == "1" /*ODBC32.SQL_PROCEDURETYPE.PROCEDURE*/
                         )
-                    ) {
+                    )
+                    {
                         procedureType = (short)ODBC32.SQL_PROCEDURETYPE.PROCEDURE;
                     }
                     else if (
@@ -1160,7 +1178,8 @@ namespace System.Data.Odbc
                         || (
                             restrictions[indexOfProcedureType] == "2" /*ODBC32.SQL_PROCEDURETYPE.FUNCTION*/
                         )
-                    ) {
+                    )
+                    {
                         procedureType = (short)ODBC32.SQL_PROCEDURETYPE.FUNCTION;
                     }
                     else
@@ -1199,7 +1218,8 @@ namespace System.Data.Odbc
         private DataTable GetReservedWordsCollection(
             string?[]? restrictions,
             OdbcConnection connection
-        ) {
+        )
+        {
             if (ADP.IsEmptyArray(restrictions) == false)
             {
                 throw ADP.TooManyRestrictions(DbMetaDataCollectionNames.ReservedWords);
@@ -1250,7 +1270,8 @@ namespace System.Data.Odbc
             string?[]? restrictions,
             OdbcConnection connection,
             bool isTables
-        ) {
+        )
+        {
             OdbcCommand? command = null;
             OdbcDataReader? dataReader = null;
             DataTable? resultTable = null;
@@ -1312,7 +1333,8 @@ namespace System.Data.Odbc
             object rowIndexName,
             string? restrictionIndexName,
             short rowIndexType
-        ) {
+        )
+        {
             // never include table statictics rows
             if (rowIndexType == (short)ODBC32.SQL_STATISTICSTYPE.TABLE_STAT)
             {
@@ -1331,7 +1353,8 @@ namespace System.Data.Odbc
             IDataReader reader,
             out object[] values,
             string tableName
-        ) {
+        )
+        {
             DataTable resultTable = new DataTable(tableName);
             resultTable.Locale = System.Globalization.CultureInfo.InvariantCulture;
             DataTable schemaTable = reader.GetSchemaTable()!;
@@ -1348,7 +1371,8 @@ namespace System.Data.Odbc
             string collectionName,
             string?[]? restrictions,
             DbConnection connection
-        ) {
+        )
+        {
             DataTable? resultTable = null;
             OdbcConnection odbcConnection = (OdbcConnection)connection;
 

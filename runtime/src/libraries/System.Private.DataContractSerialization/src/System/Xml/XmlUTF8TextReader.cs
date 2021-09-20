@@ -1534,7 +1534,8 @@ namespace System.Xml
             Encoding? encoding,
             XmlDictionaryReaderQuotas quotas,
             OnXmlDictionaryReaderClose? onClose
-        ) {
+        )
+        {
             if (buffer == null)
                 throw System.Runtime.Serialization.DiagnosticUtility.ExceptionUtility.ThrowHelperError(
                     new ArgumentNullException(nameof(buffer))
@@ -1577,7 +1578,8 @@ namespace System.Xml
             Encoding? encoding,
             XmlDictionaryReaderQuotas quotas,
             OnXmlDictionaryReaderClose? onClose
-        ) {
+        )
+        {
             if (stream == null)
                 throw System.Runtime.Serialization.DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull(
                     nameof(stream)
@@ -1591,7 +1593,8 @@ namespace System.Xml
         private void MoveToInitial(
             XmlDictionaryReaderQuotas quotas,
             OnXmlDictionaryReaderClose? onClose
-        ) {
+        )
+        {
             MoveToInitial(quotas);
             _maxBytesPerRead = quotas.MaxBytesPerRead;
             _onClose = onClose;
@@ -1637,7 +1640,8 @@ namespace System.Xml
                 || buffer[offset + 2] != (byte)'m'
                 || buffer[offset + 3] != (byte)'l'
                 || (s_charType[buffer[offset + 4]] & CharType.Whitespace) == 0
-            ) {
+            )
+            {
                 XmlExceptionHelper.ThrowProcessingInstructionNotSupported(this);
             }
             // If anything came before the "<?xml ?>" it's an error.
@@ -1934,7 +1938,8 @@ namespace System.Xml
             if (
                 buffer[offset + 1] == 0xBF
                 && (buffer[offset + 2] == 0xBE || buffer[offset + 2] == 0xBF)
-            ) {
+            )
+            {
                 // 0xFFFE : 0xEF 0xBF 0xBE
                 // 0xFFFF : 0xEF 0xBF 0xBF
                 // we know that buffer[offset] is already 0xEF, don't bother checking it.
@@ -2116,7 +2121,8 @@ namespace System.Xml
                 || buffer[offset + 4] != (byte)'T'
                 || buffer[offset + 5] != (byte)'A'
                 || buffer[offset + 6] != (byte)'['
-            ) {
+            )
+            {
                 XmlExceptionHelper.ThrowTokenExpected(
                     this,
                     "[CDATA[",
@@ -2220,7 +2226,8 @@ namespace System.Xml
             while (
                 offset < offsetMax
                 && ((charType[buffer[offset]] & CharType.Text) != 0 || buffer[offset] == 0xEF)
-            ) {
+            )
+            {
                 if (buffer[offset] != 0xEF)
                 {
                     offset++;
@@ -2342,7 +2349,8 @@ namespace System.Xml
                 && (
                     buffer[offset + length] == (byte)'<' && buffer[offset + length + 1] != (byte)'!'
                 )
-            ) {
+            )
+            {
                 MoveToAtomicText().Value.SetValue(ValueHandleType.UTF8, offset, length);
             }
             else
@@ -2449,7 +2457,8 @@ namespace System.Xml
                     buffer[offset + 0] == (byte)']'
                     && buffer[offset + 1] == (byte)']'
                     && buffer[offset + 2] == (byte)'>'
-                ) {
+                )
+                {
                     XmlExceptionHelper.ThrowXmlException(this, new XmlException(SR.XmlCloseCData));
                 }
 

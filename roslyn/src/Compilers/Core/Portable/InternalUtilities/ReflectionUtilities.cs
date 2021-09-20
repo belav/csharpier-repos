@@ -58,7 +58,8 @@ namespace Roslyn.Utilities
             [NotNull] ref Type? lazyType,
             string contractName,
             string desktopName
-        ) {
+        )
+        {
             if (lazyType == null)
             {
                 lazyType = GetTypeFromEither(contractName, desktopName) ?? Missing;
@@ -101,14 +102,16 @@ namespace Roslyn.Utilities
             this TypeInfo typeInfo,
             string name,
             params Type[] paramTypes
-        ) {
+        )
+        {
             return FindItem(typeInfo.GetDeclaredMethods(name), paramTypes);
         }
 
         internal static ConstructorInfo? GetDeclaredConstructor(
             this TypeInfo typeInfo,
             params Type[] paramTypes
-        ) {
+        )
+        {
             return FindItem(typeInfo.DeclaredConstructors, paramTypes);
         }
 
@@ -125,7 +128,8 @@ namespace Roslyn.Utilities
         public static T? InvokeConstructor<T>(
             this ConstructorInfo? constructorInfo,
             params object?[] args
-        ) {
+        )
+        {
             if (constructorInfo == null)
             {
                 return default;
@@ -147,7 +151,8 @@ namespace Roslyn.Utilities
         public static object? InvokeConstructor(
             this ConstructorInfo constructorInfo,
             params object?[] args
-        ) {
+        )
+        {
             return constructorInfo.InvokeConstructor<object?>(args);
         }
 

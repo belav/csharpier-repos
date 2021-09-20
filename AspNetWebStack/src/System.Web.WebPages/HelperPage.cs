@@ -233,7 +233,8 @@ namespace System.Web.WebPages
             PositionTagged<string> prefix,
             PositionTagged<string> suffix,
             params AttributeValue[] values
-        ) {
+        )
+        {
             CurrentPage.WriteAttributeTo(VirtualPath, writer, name, prefix, suffix, values);
         }
 
@@ -242,7 +243,8 @@ namespace System.Web.WebPages
             int startPosition,
             int length,
             bool isLiteral
-        ) {
+        )
+        {
             BeginContext(
                 PageContext.Page.GetOutputWriter(),
                 virtualPath,
@@ -258,7 +260,8 @@ namespace System.Web.WebPages
             int startPosition,
             int length,
             bool isLiteral
-        ) {
+        )
+        {
             // Double check that the instrumentation service is active because WriteAttribute always calls this
             if (InstrumentationService.IsAvailable)
             {
@@ -278,7 +281,8 @@ namespace System.Web.WebPages
             int startPosition,
             int length,
             bool isLiteral
-        ) {
+        )
+        {
             EndContext(
                 PageContext.Page.GetOutputWriter(),
                 virtualPath,
@@ -294,7 +298,8 @@ namespace System.Web.WebPages
             int startPosition,
             int length,
             bool isLiteral
-        ) {
+        )
+        {
             // Double check that the instrumentation service is active because WriteAttribute always calls this
             if (InstrumentationService.IsAvailable)
             {

@@ -215,7 +215,8 @@ namespace JIT.HardwareIntrinsics.X86
             UInt32 data,
             UInt32 result,
             [CallerMemberName] string method = ""
-        ) {
+        )
+        {
             var isUnexpectedResult = false;
 
             isUnexpectedResult = (((data - 1) & data) != result);

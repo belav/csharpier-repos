@@ -50,7 +50,8 @@ namespace Microsoft.AspNetCore.DataProtection.AuthenticatedEncryption
         internal IAuthenticatedEncryptor? CreateAuthenticatedEncryptorInstance(
             ISecret secret,
             AuthenticatedEncryptorConfiguration? authenticatedConfiguration
-        ) {
+        )
+        {
             if (authenticatedConfiguration == null)
             {
                 return null;
@@ -166,7 +167,8 @@ namespace Microsoft.AspNetCore.DataProtection.AuthenticatedEncryption
 
         private static string GetBCryptAlgorithmNameFromEncryptionAlgorithm(
             EncryptionAlgorithm algorithm
-        ) {
+        )
+        {
             switch (algorithm)
             {
                 case EncryptionAlgorithm.AES_128_CBC:
@@ -184,7 +186,8 @@ namespace Microsoft.AspNetCore.DataProtection.AuthenticatedEncryption
 
         private static string GetBCryptAlgorithmNameFromValidationAlgorithm(
             ValidationAlgorithm algorithm
-        ) {
+        )
+        {
             switch (algorithm)
             {
                 case ValidationAlgorithm.HMACSHA256:

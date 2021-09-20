@@ -126,7 +126,8 @@ namespace Microsoft.CodeAnalysis.UnitTests
                 var specialType = SpecialType.None + 1;
                 specialType <= SpecialType.Count;
                 specialType++
-            ) {
+            )
+            {
                 var symbol = comp.GetSpecialType(specialType);
                 if (knownMissingTypes.Contains(specialType))
                 {

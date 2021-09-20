@@ -105,7 +105,8 @@ namespace Microsoft.CodeAnalysis.SQLite.v2
                 TKey key,
                 Checksum checksum,
                 CancellationToken cancellationToken
-            ) {
+            )
+            {
                 var hashData = ReadChecksumColumn(key, cancellationToken);
                 return hashData != null && checksum == hashData.Value;
             }
@@ -140,7 +141,8 @@ namespace Microsoft.CodeAnalysis.SQLite.v2
                 Func<TData, SqlConnection, Database, long, Optional<T>> readColumn,
                 TData data,
                 CancellationToken cancellationToken
-            ) {
+            )
+            {
                 cancellationToken.ThrowIfCancellationRequested();
 
                 if (!Storage._shutdownTokenSource.IsCancellationRequested)
@@ -180,7 +182,8 @@ namespace Microsoft.CodeAnalysis.SQLite.v2
                     SqlConnection connection,
                     Database database,
                     TDatabaseId dataId
-                ) {
+                )
+                {
                     // Note: it's possible that someone may write to this row between when we get the row ID
                     // above and now.  That's fine.  We'll just read the new bytes that have been written to
                     // this location.  Note that only the data for a row in our system can change, the ID will
@@ -196,7 +199,8 @@ namespace Microsoft.CodeAnalysis.SQLite.v2
                 TKey key,
                 Checksum? checksum,
                 CancellationToken cancellationToken
-            ) {
+            )
+            {
                 var optional = ReadColumn(
                     key,
                     static (t, connection, database, rowId) =>
@@ -212,7 +216,8 @@ namespace Microsoft.CodeAnalysis.SQLite.v2
             private Checksum.HashData? ReadChecksumColumn(
                 TKey key,
                 CancellationToken cancellationToken
-            ) {
+            )
+            {
                 var optional = ReadColumn(
                     key,
                     static (self, connection, database, rowId) =>
@@ -242,7 +247,8 @@ namespace Microsoft.CodeAnalysis.SQLite.v2
                 Stream stream,
                 Checksum? checksum,
                 CancellationToken cancellationToken
-            ) {
+            )
+            {
                 cancellationToken.ThrowIfCancellationRequested();
 
                 if (!Storage._shutdownTokenSource.IsCancellationRequested)
@@ -284,7 +290,8 @@ namespace Microsoft.CodeAnalysis.SQLite.v2
                 Database database,
                 long rowId,
                 Checksum? checksum
-            ) {
+            )
+            {
                 // Have to run the blob reading in a transaction.  This is necessary
                 // for two reasons.  First, blob reading outside a transaction is not
                 // safe to do with the sqlite API.  It may produce corrupt bits if
@@ -306,7 +313,8 @@ namespace Microsoft.CodeAnalysis.SQLite.v2
                                 t.rowId,
                                 t.checksum
                             )
-                        ) {
+                        )
+                        {
                             return default;
                         }
 
@@ -324,7 +332,8 @@ namespace Microsoft.CodeAnalysis.SQLite.v2
                 SqlConnection connection,
                 Database database,
                 long rowId
-            ) {
+            )
+            {
                 // Have to run the checksum reading in a transaction.  This is necessary as blob reading outside a
                 // transaction is not safe to do with the sqlite API.  It may produce corrupt bits if another thread is
                 // writing to the blob.
@@ -344,7 +353,8 @@ namespace Microsoft.CodeAnalysis.SQLite.v2
                 Database database,
                 long rowId,
                 Checksum checksum
-            ) {
+            )
+            {
                 var storedChecksum = connection.ReadChecksum_MustRunInTransaction(
                     database,
                     Table,
@@ -381,7 +391,8 @@ namespace Microsoft.CodeAnalysis.SQLite.v2
                         (TDatabaseId)(object)dataId,
                         out rowId
                     )
-                ) {
+                )
+                {
                     Debug.Assert(dataId == rowId);
                 }
 #endif
@@ -397,7 +408,8 @@ namespace Microsoft.CodeAnalysis.SQLite.v2
                 Database database,
                 TDatabaseId dataId,
                 out long rowId
-            ) {
+            )
+            {
                 // See https://sqlite.org/autoinc.html
                 // > In SQLite, table rows normally have a 64-bit signed integer ROWID which is
                 // unique among all rows in the same table. (WITHOUT ROWID tables are the exception.)
@@ -432,7 +444,8 @@ namespace Microsoft.CodeAnalysis.SQLite.v2
                 TDatabaseId dataId,
                 ReadOnlySpan<byte> checksumBytes,
                 ReadOnlySpan<byte> dataBytes
-            ) {
+            )
+            {
                 // We're writing.  This better always be under the exclusive scheduler.
                 Contract.ThrowIfFalse(
                     TaskScheduler.Current
@@ -443,7 +456,8 @@ namespace Microsoft.CodeAnalysis.SQLite.v2
                     var resettableStatement = connection.GetResettableStatement(
                         _insert_or_replace_into_writecache_table_values_0_1_2
                     )
-                ) {
+                )
+                {
                     var statement = resettableStatement.Statement;
 
                     // Binding indices are 1 based.
@@ -474,14 +488,16 @@ namespace Microsoft.CodeAnalysis.SQLite.v2
                     var statement = connection.GetResettableStatement(
                         _insert_or_replace_into_main_table_select_star_from_writecache_table
                     )
-                ) {
+                )
+                {
                     statement.Statement.Step();
                 }
 
                 // Now, just delete all the data from the write cache.
                 using (
                     var statement = connection.GetResettableStatement(_delete_from_writecache_table)
-                ) {
+                )
+                {
                     statement.Statement.Step();
                 }
             }

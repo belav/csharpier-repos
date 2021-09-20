@@ -60,7 +60,8 @@ namespace Microsoft.AspNetCore.Server.HttpSys
                         }
                     }
                 )
-            ) {
+            )
+            {
                 HttpResponseMessage response = await SendRequestAsync(address);
                 Assert.Equal(HttpStatusCode.InternalServerError, response.StatusCode);
                 Assert.True(await appThrew.Task.TimeoutAfter(TimeSpan.FromSeconds(10)));
@@ -85,7 +86,8 @@ namespace Microsoft.AspNetCore.Server.HttpSys
                         );
                     }
                 )
-            ) {
+            )
+            {
                 HttpResponseMessage response = await SendRequestAsync(address);
                 Assert.Equal(200, (int)response.StatusCode);
                 IEnumerable<string> ignored;
@@ -116,7 +118,8 @@ namespace Microsoft.AspNetCore.Server.HttpSys
                         );
                     }
                 )
-            ) {
+            )
+            {
                 HttpResponseMessage response = await SendRequestAsync(address);
                 Assert.Equal(200, (int)response.StatusCode);
                 IEnumerable<string> ignored;
@@ -147,7 +150,8 @@ namespace Microsoft.AspNetCore.Server.HttpSys
                         );
                     }
                 )
-            ) {
+            )
+            {
                 var response = await SendRequestAsync(address);
                 Assert.Equal(200, (int)response.StatusCode);
                 IEnumerable<string> contentLength;
@@ -180,7 +184,8 @@ namespace Microsoft.AspNetCore.Server.HttpSys
                         );
                     }
                 )
-            ) {
+            )
+            {
                 var response = await SendRequestAsync(address);
                 Assert.Equal(200, (int)response.StatusCode);
                 IEnumerable<string> contentLength;
@@ -214,7 +219,8 @@ namespace Microsoft.AspNetCore.Server.HttpSys
                         );
                     }
                 )
-            ) {
+            )
+            {
                 var response = await SendRequestAsync(address);
                 Assert.Equal(200, (int)response.StatusCode);
                 IEnumerable<string> contentLength;
@@ -253,7 +259,8 @@ namespace Microsoft.AspNetCore.Server.HttpSys
                         completed = true;
                     }
                 )
-            ) {
+            )
+            {
                 var response = await SendRequestAsync(address);
                 response.EnsureSuccessStatusCode();
                 Assert.True(completed);
@@ -283,7 +290,8 @@ namespace Microsoft.AspNetCore.Server.HttpSys
                         completed = true;
                     }
                 )
-            ) {
+            )
+            {
                 var response = await SendRequestAsync(address);
                 response.EnsureSuccessStatusCode();
                 Assert.True(completed);
@@ -308,7 +316,8 @@ namespace Microsoft.AspNetCore.Server.HttpSys
                         );
                     }
                 )
-            ) {
+            )
+            {
                 var response = await SendRequestAsync(address);
                 Assert.Equal(200, (int)response.StatusCode);
                 IEnumerable<string> contentLength;
@@ -342,7 +351,8 @@ namespace Microsoft.AspNetCore.Server.HttpSys
                         );
                     }
                 )
-            ) {
+            )
+            {
                 var response = await SendRequestAsync(address);
                 Assert.Equal(200, (int)response.StatusCode);
                 IEnumerable<string> contentLength;
@@ -378,7 +388,8 @@ namespace Microsoft.AspNetCore.Server.HttpSys
                         );
                     }
                 )
-            ) {
+            )
+            {
                 var response = await SendRequestAsync(address);
                 Assert.Equal(200, (int)response.StatusCode);
                 IEnumerable<string> contentLength;
@@ -411,7 +422,8 @@ namespace Microsoft.AspNetCore.Server.HttpSys
                         );
                     }
                 )
-            ) {
+            )
+            {
                 var response = await SendRequestAsync(address);
                 Assert.Equal(200, (int)response.StatusCode);
                 IEnumerable<string> contentLength;
@@ -453,7 +465,8 @@ namespace Microsoft.AspNetCore.Server.HttpSys
                         );
                     }
                 )
-            ) {
+            )
+            {
                 var response = await SendRequestAsync(address);
                 Assert.Equal(200, (int)response.StatusCode);
                 Assert.Equal(new Version(1, 1), response.Version);
@@ -499,7 +512,8 @@ namespace Microsoft.AspNetCore.Server.HttpSys
                             );
                         }
                     )
-                ) {
+                )
+                {
                     var response = await SendRequestAsync(address);
                     Assert.Equal(200, (int)response.StatusCode);
                     Assert.False(
@@ -544,7 +558,8 @@ namespace Microsoft.AspNetCore.Server.HttpSys
                         );
                     }
                 )
-            ) {
+            )
+            {
                 var response = await SendRequestAsync(address);
                 Assert.Equal(200, (int)response.StatusCode);
                 Assert.Equal(
@@ -579,7 +594,8 @@ namespace Microsoft.AspNetCore.Server.HttpSys
                         );
                     }
                 )
-            ) {
+            )
+            {
                 var response = await SendRequestAsync(address);
                 Assert.Equal(200, (int)response.StatusCode);
                 Assert.Equal(
@@ -623,7 +639,8 @@ namespace Microsoft.AspNetCore.Server.HttpSys
                     },
                     options => options.ThrowWriteExceptions = true
                 )
-            ) {
+            )
+            {
                 await Assert.ThrowsAsync<HttpRequestException>(() => SendRequestAsync(address));
                 await testComplete.Task.DefaultTimeout();
             }
@@ -662,7 +679,8 @@ namespace Microsoft.AspNetCore.Server.HttpSys
                         return Task.CompletedTask;
                     }
                 )
-            ) {
+            )
+            {
                 await Assert.ThrowsAsync<HttpRequestException>(() => SendRequestAsync(address));
                 await testComplete.Task.DefaultTimeout();
             }
@@ -706,7 +724,8 @@ namespace Microsoft.AspNetCore.Server.HttpSys
                     },
                     options => options.ThrowWriteExceptions = true
                 )
-            ) {
+            )
+            {
                 await Assert.ThrowsAsync<HttpRequestException>(() => SendRequestAsync(address));
                 await testComplete.Task.DefaultTimeout();
             }
@@ -749,7 +768,8 @@ namespace Microsoft.AspNetCore.Server.HttpSys
                         }
                     }
                 )
-            ) {
+            )
+            {
                 await Assert.ThrowsAsync<HttpRequestException>(() => SendRequestAsync(address));
                 await testComplete.Task.DefaultTimeout();
             }
@@ -822,7 +842,8 @@ namespace Microsoft.AspNetCore.Server.HttpSys
                     },
                     options => options.ThrowWriteExceptions = true
                 )
-            ) {
+            )
+            {
                 var cts = new CancellationTokenSource();
                 var responseTask = SendRequestAsync(address, cts.Token);
                 await requestReceived.Task.DefaultTimeout();
@@ -878,7 +899,8 @@ namespace Microsoft.AspNetCore.Server.HttpSys
                         }
                     }
                 )
-            ) {
+            )
+            {
                 var cts = new CancellationTokenSource();
                 var responseTask = SendRequestAsync(address, cts.Token);
                 await requestReceived.Task.DefaultTimeout();
@@ -956,7 +978,8 @@ namespace Microsoft.AspNetCore.Server.HttpSys
                     },
                     options => options.ThrowWriteExceptions = true
                 )
-            ) {
+            )
+            {
                 using (var client = new HttpClient())
                 {
                     var response = await client.GetAsync(
@@ -1027,7 +1050,8 @@ namespace Microsoft.AspNetCore.Server.HttpSys
                         }
                     }
                 )
-            ) {
+            )
+            {
                 using (var client = new HttpClient())
                 {
                     var response = await client.GetAsync(
@@ -1052,7 +1076,8 @@ namespace Microsoft.AspNetCore.Server.HttpSys
         private async Task<HttpResponseMessage> SendRequestAsync(
             string uri,
             CancellationToken cancellationToken = new CancellationToken()
-        ) {
+        )
+        {
             using (HttpClient client = new HttpClient() { Timeout = Utilities.DefaultTimeout })
             {
                 return await client.GetAsync(uri, cancellationToken);

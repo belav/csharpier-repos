@@ -55,7 +55,8 @@ namespace Microsoft.CodeAnalysis
             ImmutableArray<byte> checksum,
             SourceHashAlgorithm checksumAlgorithm,
             ImmutableArray<byte> blob
-        ) {
+        )
+        {
             Debug.Assert(filePath.Length > 0);
             Debug.Assert(SourceHashAlgorithms.IsSupportedAlgorithm(checksumAlgorithm));
             Debug.Assert(!blob.IsDefault && blob.Length >= sizeof(int));
@@ -155,7 +156,8 @@ namespace Microsoft.CodeAnalysis
             string filePath,
             Stream stream,
             SourceHashAlgorithm checksumAlgorithm = SourceHashAlgorithm.Sha1
-        ) {
+        )
+        {
             ValidateFilePath(filePath);
 
             if (stream == null)
@@ -201,7 +203,8 @@ namespace Microsoft.CodeAnalysis
             string filePath,
             ArraySegment<byte> bytes,
             SourceHashAlgorithm checksumAlgorithm = SourceHashAlgorithm.Sha1
-        ) {
+        )
+        {
             ValidateFilePath(filePath);
 
             if (bytes.Array == null)
@@ -289,7 +292,8 @@ namespace Microsoft.CodeAnalysis
                             CompressionLevel.Optimal,
                             leaveOpen: true
                         )
-                    ) {
+                    )
+                    {
                         stream.CopyTo(deflater);
 
                         if (length != deflater.BytesWritten)
@@ -328,7 +332,8 @@ namespace Microsoft.CodeAnalysis
                             CompressionLevel.Optimal,
                             leaveOpen: true
                         )
-                    ) {
+                    )
+                    {
                         deflater.Write(bytes.Array, bytes.Offset, bytes.Count);
                     }
 
@@ -370,7 +375,8 @@ namespace Microsoft.CodeAnalysis
                             bufferSize: Math.Max(1, text.Length),
                             leaveOpen: true
                         )
-                    ) {
+                    )
+                    {
                         text.Write(writer);
                     }
                 }
@@ -384,7 +390,8 @@ namespace Microsoft.CodeAnalysis
                             CompressionLevel.Optimal,
                             leaveOpen: true
                         )
-                    ) {
+                    )
+                    {
                         using (
                             var writer = new StreamWriter(
                                 deflater,
@@ -392,7 +399,8 @@ namespace Microsoft.CodeAnalysis
                                 bufferSize: 1024,
                                 leaveOpen: true
                             )
-                        ) {
+                        )
+                        {
                             text.Write(writer);
                         }
 
@@ -448,7 +456,8 @@ namespace Microsoft.CodeAnalysis
                 int offset,
                 int count,
                 CancellationToken cancellationToken
-            ) {
+            )
+            {
                 throw ExceptionUtilities.Unreachable;
             }
         }

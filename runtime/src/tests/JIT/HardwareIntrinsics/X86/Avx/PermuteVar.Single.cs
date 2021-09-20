@@ -142,7 +142,8 @@ namespace JIT.HardwareIntrinsics.X86
                     || (alignment * 2) < sizeOfinArray1
                     || (alignment * 2) < sizeOfinArray2
                     || (alignment * 2) < sizeOfoutArray
-                ) {
+                )
+                {
                     throw new ArgumentException("Invalid value of alignment");
                 }
 
@@ -445,7 +446,8 @@ namespace JIT.HardwareIntrinsics.X86
 
             fixed (Vector256<Single>* pClsVar1 = &_clsVar1)fixed (
                 Vector256<Int32>* pClsVar2 = &_clsVar2
-            ) {
+            )
+            {
                 var result = Avx.PermuteVar(
                     Avx.LoadVector256((Single*)(pClsVar1)),
                     Avx.LoadVector256((Int32*)(pClsVar2))
@@ -511,7 +513,8 @@ namespace JIT.HardwareIntrinsics.X86
 
             fixed (Vector256<Single>* pFld1 = &test._fld1)fixed (
                 Vector256<Int32>* pFld2 = &test._fld2
-            ) {
+            )
+            {
                 var result = Avx.PermuteVar(
                     Avx.LoadVector256((Single*)(pFld1)),
                     Avx.LoadVector256((Int32*)(pFld2))
@@ -615,7 +618,8 @@ namespace JIT.HardwareIntrinsics.X86
             Vector256<Int32> op2,
             void* result,
             [CallerMemberName] string method = ""
-        ) {
+        )
+        {
             Single[] inArray1 = new Single[Op1ElementCount];
             Int32[] inArray2 = new Int32[Op2ElementCount];
             Single[] outArray = new Single[RetElementCount];
@@ -636,7 +640,8 @@ namespace JIT.HardwareIntrinsics.X86
             void* op2,
             void* result,
             [CallerMemberName] string method = ""
-        ) {
+        )
+        {
             Single[] inArray1 = new Single[Op1ElementCount];
             Int32[] inArray2 = new Int32[Op2ElementCount];
             Single[] outArray = new Single[RetElementCount];
@@ -665,12 +670,14 @@ namespace JIT.HardwareIntrinsics.X86
             Int32[] right,
             Single[] result,
             [CallerMemberName] string method = ""
-        ) {
+        )
+        {
             bool succeeded = true;
 
             if (
                 BitConverter.SingleToInt32Bits(left[1]) != BitConverter.SingleToInt32Bits(result[0])
-            ) {
+            )
+            {
                 succeeded = false;
             }
             else
@@ -687,7 +694,8 @@ namespace JIT.HardwareIntrinsics.X86
                                   BitConverter.SingleToInt32Bits(left[1])
                                   != BitConverter.SingleToInt32Bits(result[i])
                               )
-                    ) {
+                    )
+                    {
                         succeeded = false;
                         break;
                     }

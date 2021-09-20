@@ -22,15 +22,15 @@ namespace Microsoft.CodeAnalysis.Remote
             ) => new RemoteAsynchronousOperationListenerService(in arguments);
         }
 
-        public RemoteAsynchronousOperationListenerService(
-            in ServiceConstructionArguments arguments
-        ) : base(in arguments) { }
+        public RemoteAsynchronousOperationListenerService(in ServiceConstructionArguments arguments)
+            : base(in arguments) { }
 
         public ValueTask EnableAsync(
             bool enable,
             bool diagnostics,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             return RunServiceAsync(
                 cancellationToken =>
                 {
@@ -44,7 +44,8 @@ namespace Microsoft.CodeAnalysis.Remote
         public ValueTask<bool> IsCompletedAsync(
             ImmutableArray<string> featureNames,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             return RunServiceAsync(
                 cancellationToken =>
                 {
@@ -65,7 +66,8 @@ namespace Microsoft.CodeAnalysis.Remote
         public ValueTask ExpeditedWaitAsync(
             ImmutableArray<string> featureNames,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             return RunServiceAsync(
                 async cancellationToken =>
                 {

@@ -1286,7 +1286,8 @@ private global::Microsoft.AspNetCore.Razor.Runtime.TagHelpers.TagHelperScopeMana
         private static DocumentIntermediateNode Lower(
             RazorCodeDocument codeDocument,
             RazorProjectEngine engine
-        ) {
+        )
+        {
             for (var i = 0; i < engine.Phases.Count; i++)
             {
                 var phase = engine.Phases[i];
@@ -1309,7 +1310,8 @@ private global::Microsoft.AspNetCore.Razor.Runtime.TagHelpers.TagHelperScopeMana
             string typeName,
             string assemblyName,
             IEnumerable<Action<BoundAttributeDescriptorBuilder>> attributes = null
-        ) {
+        )
+        {
             var builder = TagHelperDescriptorBuilder.Create(typeName, assemblyName);
             builder.TypeName(typeName);
 

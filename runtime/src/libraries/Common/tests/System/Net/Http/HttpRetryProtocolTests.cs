@@ -145,7 +145,8 @@ namespace System.Net.Http.Functional.Tests
             public SynchronizedSendContent(
                 TaskCompletionSource<bool> sendingContent,
                 Task connectionClosed
-            ) {
+            )
+            {
                 _connectionClosed = connectionClosed;
                 _sendingContent = sendingContent;
             }
@@ -161,7 +162,8 @@ namespace System.Net.Http.Functional.Tests
             protected override async Task SerializeToStreamAsync(
                 Stream stream,
                 TransportContext context
-            ) {
+            )
+            {
                 _sendingContent.SetResult(true);
                 await _connectionClosed;
                 await stream.WriteAsync(Encoding.UTF8.GetBytes(_longContent));

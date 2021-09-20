@@ -49,7 +49,8 @@ namespace System.Linq.Expressions.Interpreter
                 info.DeclaringType != null
                 && info.DeclaringType.IsArray
                 && (info.Name == "Get" || info.Name == "Set")
-            ) {
+            )
+            {
                 return GetArrayAccessor(info, argumentCount);
             }
 
@@ -182,7 +183,8 @@ namespace System.Linq.Expressions.Interpreter
             int index1,
             int index2,
             object value
-        ) {
+        )
+        {
             array.SetValue(value, index0, index1, index2);
         }
 #if FEATURE_DLG_INVOKE
@@ -200,7 +202,8 @@ namespace System.Linq.Expressions.Interpreter
             MethodInfo target,
             ParameterInfo[] pi,
             int index
-        ) {
+        )
+        {
             if (!target.IsStatic)
             {
                 index--;
@@ -282,7 +285,8 @@ namespace System.Linq.Expressions.Interpreter
         protected static bool TryGetLightLambdaTarget(
             object? instance,
             [NotNullWhen(true)] out LightLambda? lightLambda
-        ) {
+        )
+        {
             var del = instance as Delegate;
             if (del is not null)
             {

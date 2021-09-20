@@ -120,7 +120,8 @@ class GitHub_25468
             || (original.Flags != other.Flags)
             || (original.HorizontalResolution != other.HorizontalResolution)
             || (original.VerticalResolution != other.VerticalResolution)
-        ) {
+        )
+        {
             Console.WriteLine("Failed:");
             Console.WriteLine(
                 "  {"

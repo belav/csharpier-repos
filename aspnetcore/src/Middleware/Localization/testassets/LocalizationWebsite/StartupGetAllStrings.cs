@@ -25,7 +25,8 @@ namespace LocalizationWebsite
             IApplicationBuilder app,
             ILoggerFactory loggerFactory,
             IStringLocalizer<Customer> customerStringLocalizer
-        ) {
+        )
+        {
             app.UseRequestLocalization(
                 new RequestLocalizationOptions
                 {

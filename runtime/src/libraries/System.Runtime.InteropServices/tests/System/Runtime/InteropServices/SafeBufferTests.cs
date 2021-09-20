@@ -140,7 +140,8 @@ namespace System.Runtime.InteropServices.Tests
             int arrayLength,
             int index,
             int count
-        ) {
+        )
+        {
             var wrapper = new SubBuffer(true);
             AssertExtensions.Throws<ArgumentException>(
                 null,

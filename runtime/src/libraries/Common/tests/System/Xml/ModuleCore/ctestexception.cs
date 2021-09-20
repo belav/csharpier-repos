@@ -35,12 +35,8 @@ namespace OLEDB.Test.ModuleCore
         //Constructor
         public CTestFailedException(string message) : this(message, false, true, null) { }
 
-        public CTestFailedException(
-            string message,
-            object actual,
-            object expected,
-            Exception inner
-        ) : base(CTestBase.TEST_FAIL, message, actual, expected, inner) { }
+        public CTestFailedException(string message, object actual, object expected, Exception inner)
+            : base(CTestBase.TEST_FAIL, message, actual, expected, inner) { }
     }
 
     ////////////////////////////////////////////////////////////////

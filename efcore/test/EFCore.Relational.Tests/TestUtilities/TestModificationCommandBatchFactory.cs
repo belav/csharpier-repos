@@ -16,7 +16,8 @@ namespace Microsoft.EntityFrameworkCore.TestUtilities
         public TestModificationCommandBatchFactory(
             ModificationCommandBatchFactoryDependencies dependencies,
             IDbContextOptions options
-        ) {
+        )
+        {
             _dependencies = dependencies;
             _options = options;
         }

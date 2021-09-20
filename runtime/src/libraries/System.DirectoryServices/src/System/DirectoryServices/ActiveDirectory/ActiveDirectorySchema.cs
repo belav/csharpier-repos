@@ -100,7 +100,8 @@ namespace System.DirectoryServices.ActiveDirectory
                 (context.ContextType != DirectoryContextType.Forest)
                 && (context.ContextType != DirectoryContextType.ConfigurationSet)
                 && (context.ContextType != DirectoryContextType.DirectoryServer)
-            ) {
+            )
+            {
                 throw new ArgumentException(SR.NotADOrADAM, nameof(context));
             }
 
@@ -122,7 +123,8 @@ namespace System.DirectoryServices.ActiveDirectory
                         || (context.isADAMConfigSet())
                         || (context.isServer())
                     )
-                ) {
+                )
+                {
                     if (context.ContextType == DirectoryContextType.Forest)
                     {
                         throw new ActiveDirectoryObjectNotFoundException(
@@ -164,7 +166,8 @@ namespace System.DirectoryServices.ActiveDirectory
                 if (
                     (context.isServer())
                     && (!Utils.CheckCapability(rootDSE, Capability.ActiveDirectoryOrADAM))
-                ) {
+                )
+                {
                     throw new ActiveDirectoryObjectNotFoundException(
                         SR.Format(SR.ServerNotFound, context.Name),
                         typeof(ActiveDirectorySchema),
@@ -533,7 +536,8 @@ namespace System.DirectoryServices.ActiveDirectory
             DirectoryContext context,
             DirectoryEntry schemaEntry,
             string filter
-        ) {
+        )
+        {
             ArrayList propertyList = new ArrayList();
 
             string[] propertiesToLoad = new string[3];
@@ -568,7 +572,8 @@ namespace System.DirectoryServices.ActiveDirectory
                     if (
                         (res.Properties[PropertyManager.IsDefunct] != null)
                         && (res.Properties[PropertyManager.IsDefunct].Count > 0)
-                    ) {
+                    )
+                    {
                         isDefunct = (bool)res.Properties[PropertyManager.IsDefunct][0]!;
                     }
 
@@ -621,7 +626,8 @@ namespace System.DirectoryServices.ActiveDirectory
             DirectoryContext context,
             DirectoryEntry schemaEntry,
             string filter
-        ) {
+        )
+        {
             ArrayList classList = new ArrayList();
 
             string[] propertiesToLoad = new string[3];
@@ -656,7 +662,8 @@ namespace System.DirectoryServices.ActiveDirectory
                     if (
                         (res.Properties[PropertyManager.IsDefunct] != null)
                         && (res.Properties[PropertyManager.IsDefunct].Count > 0)
-                    ) {
+                    )
+                    {
                         isDefunct = (bool)res.Properties[PropertyManager.IsDefunct][0]!;
                     }
 

@@ -49,7 +49,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.IncrementalParsing
         {
             foreach (
                 var r in new[] { "(", ")", "]", "}", ":", ";", ",", ".", "?", "==", "!=", "|", "^" }
-            ) {
+            )
+            {
                 VerifyReplace(
                     @"class C { void M() { F(G<A, B>",
                     "(7)",
@@ -104,7 +105,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.IncrementalParsing
         {
             foreach (
                 var r in new[] { "(", ")", "]", "}", ":", ";", ",", ".", "?", "==", "!=", "|", "^" }
-            ) {
+            )
+            {
                 VerifyReplace(
                     @"class C { void M() { F(G<A, B>",
                     "7",
@@ -136,7 +138,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.IncrementalParsing
             string codeAfter,
             string replacement,
             int expectedArgumentCount
-        ) {
+        )
+        {
             var start = codeBefore.Length;
             var length = codeToBeReplaced.Length;
 
@@ -164,7 +167,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.IncrementalParsing
         private void AssertNodesAreEquivalent(
             SyntaxNodeOrToken expectedNode,
             SyntaxNodeOrToken actualNode
-        ) {
+        )
+        {
             Assert.Equal(expectedNode.Kind(), actualNode.Kind());
             Assert.Equal(expectedNode.FullSpan, actualNode.FullSpan);
             Assert.Equal(

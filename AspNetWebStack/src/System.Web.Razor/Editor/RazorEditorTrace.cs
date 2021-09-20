@@ -28,7 +28,8 @@ namespace System.Web.Razor.Editor
                         Environment.GetEnvironmentVariable("RAZOR_EDITOR_TRACE"),
                         out enabled
                     )
-                ) {
+                )
+                {
                     Trace.WriteLine(
                         String.Format(
                             CultureInfo.CurrentCulture,

@@ -107,7 +107,8 @@ namespace Moq
         public IEnumerable<Match> GetMatchesBetween(
             int fromTimestampInclusive,
             int toTimestampExclusive
-        ) {
+        )
+        {
             if (this.observations != null)
             {
                 return this.observations.Where(

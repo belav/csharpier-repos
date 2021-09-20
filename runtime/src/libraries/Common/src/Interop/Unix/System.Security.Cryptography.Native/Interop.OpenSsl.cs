@@ -27,7 +27,8 @@ internal static partial class Interop
         internal static SafeChannelBindingHandle? QueryChannelBinding(
             SafeSslHandle context,
             ChannelBindingKind bindingType
-        ) {
+        )
+        {
             Debug.Assert(
                 bindingType != ChannelBindingKind.Endpoint,
                 "Endpoint binding should be handled by EndpointChannelBindingToken"
@@ -56,7 +57,8 @@ internal static partial class Interop
             SafeEvpPKeyHandle? certKeyHandle,
             EncryptionPolicy policy,
             SslAuthenticationOptions sslAuthenticationOptions
-        ) {
+        )
+        {
             SafeSslHandle? context = null;
 
             // Always use SSLv23_method, regardless of protocols.  It supports negotiating to the highest
@@ -64,7 +66,8 @@ internal static partial class Interop
             // SetProtocolOptions to ensure we only allow the ones requested.
             using (
                 SafeSslContextHandle innerContext = Ssl.SslCtxCreate(Ssl.SslMethods.SSLv23_method)
-            ) {
+            )
+            {
                 if (innerContext.IsInvalid)
                 {
                     throw CreateSslException(SR.net_allocate_ssl_context_failed);
@@ -75,7 +78,8 @@ internal static partial class Interop
                     if (
                         protocols != SslProtocols.None
                         && CipherSuitesPolicyPal.WantsTls13(protocols)
-                    ) {
+                    )
+                    {
                         protocols = protocols & (~SslProtocols.Tls13);
                     }
                 }
@@ -85,7 +89,8 @@ internal static partial class Interop
                         sslAuthenticationOptions.CipherSuitesPolicy,
                         policy
                     )
-                ) {
+                )
+                {
                     if (protocols == SslProtocols.None)
                     {
                         // we are using default settings but cipher suites policy says that TLS 1.3
@@ -107,7 +112,8 @@ internal static partial class Interop
                         sslAuthenticationOptions.CipherSuitesPolicy,
                         policy
                     )
-                ) {
+                )
+                {
                     if (!CipherSuitesPolicyPal.WantsTls13(protocols))
                     {
                         // We cannot provide neither TLS 1.3 or non TLS 1.3, user disabled all cipher suites
@@ -165,7 +171,8 @@ internal static partial class Interop
                 {
                     fixed (byte* cipherListStr = cipherList)fixed (
                         byte* cipherSuitesStr = cipherSuites
-                    ) {
+                    )
+                    {
                         if (!Ssl.SetCiphers(innerContext, cipherListStr, cipherSuitesStr))
                         {
                             Crypto.ErrClearError();
@@ -189,7 +196,8 @@ internal static partial class Interop
 
                 if (
                     sslAuthenticationOptions.IsServer && sslAuthenticationOptions.RemoteCertRequired
-                ) {
+                )
+                {
                     unsafe
                     {
                         Ssl.SslCtxSetVerify(innerContext, &VerifyClientCertificate);
@@ -222,7 +230,8 @@ internal static partial class Interop
                                     innerContext,
                                     sslAuthenticationOptions.ApplicationProtocols
                                 ) != 0
-                            ) {
+                            )
+                            {
                                 throw CreateSslException(SR.net_alpn_config_failed);
                             }
                         }
@@ -257,13 +266,15 @@ internal static partial class Interop
                         sslAuthenticationOptions.CertificateContext != null
                         && sslAuthenticationOptions.CertificateContext.IntermediateCertificates.Length
                             > 0
-                    ) {
+                    )
+                    {
                         if (
                             !Ssl.AddExtraChainCertificates(
                                 context,
                                 sslAuthenticationOptions.CertificateContext!.IntermediateCertificates
                             )
-                        ) {
+                        )
+                        {
                             throw CreateSslException(SR.net_ssl_use_cert_failed);
                         }
                     }
@@ -289,7 +300,8 @@ internal static partial class Interop
             ReadOnlySpan<byte> input,
             out byte[]? sendBuf,
             out int sendCount
-        ) {
+        )
+        {
             sendBuf = null;
             sendCount = 0;
             Exception? handshakeException = null;
@@ -302,7 +314,8 @@ internal static partial class Interop
                         ref MemoryMarshal.GetReference(input),
                         input.Length
                     ) != input.Length
-                ) {
+                )
+                {
                     // Make sure we clear out the error that is stored in the queue
                     throw Crypto.CreateOpenSslCryptographicException();
                 }
@@ -369,7 +382,8 @@ internal static partial class Interop
             ReadOnlySpan<byte> input,
             ref byte[] output,
             out Ssl.SslErrorCode errorCode
-        ) {
+        )
+        {
 #if DEBUG
             ulong assertNoError = Crypto.ErrPeekError();
             Debug.Assert(
@@ -436,7 +450,8 @@ internal static partial class Interop
             int offset,
             int count,
             out Ssl.SslErrorCode errorCode
-        ) {
+        )
+        {
 #if DEBUG
             ulong assertNoError = Crypto.ErrPeekError();
             Debug.Assert(
@@ -517,7 +532,8 @@ internal static partial class Interop
         private static void QueryUniqueChannelBinding(
             SafeSslHandle context,
             SafeChannelBindingHandle bindingHandle
-        ) {
+        )
+        {
             bool sessionReused = Ssl.SslSessionReused(context);
             int certHashLength =
                 context.IsServer ^ sessionReused
@@ -555,7 +571,8 @@ internal static partial class Interop
             byte* inp,
             uint inlen,
             IntPtr arg
-        ) {
+        )
+        {
             *outp = null;
             *outlen = 0;
 
@@ -642,7 +659,8 @@ internal static partial class Interop
             SafeSslHandle context,
             int result,
             out Exception? innerError
-        ) {
+        )
+        {
             ErrorInfo lastErrno = Sys.GetLastErrorInfo(); // cache it before we make more P/Invoke calls, just in case we need it
 
             Ssl.SslErrorCode retVal = Ssl.SslGetError(context, result);
@@ -683,7 +701,8 @@ internal static partial class Interop
             SafeSslContextHandle contextPtr,
             SafeX509Handle certPtr,
             SafeEvpPKeyHandle keyPtr
-        ) {
+        )
+        {
             Debug.Assert(
                 certPtr != null && !certPtr.IsInvalid,
                 "certPtr != null && !certPtr.IsInvalid"

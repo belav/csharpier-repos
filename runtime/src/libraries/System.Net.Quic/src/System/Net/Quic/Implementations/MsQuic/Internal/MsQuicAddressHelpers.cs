@@ -76,7 +76,8 @@ namespace System.Net.Quic.Implementations.MsQuic.Internal
             AddressFamily addressFamily,
             ref SOCKADDR_INET socketAddrInet,
             int originalPort
-        ) {
+        )
+        {
             ushort convertedPort = (ushort)IPAddress.HostToNetworkOrder((short)originalPort);
             switch (addressFamily)
             {

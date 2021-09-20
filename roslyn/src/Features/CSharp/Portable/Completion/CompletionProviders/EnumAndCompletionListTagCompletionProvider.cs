@@ -56,7 +56,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Completion.Providers
             SourceText text,
             int characterPosition,
             OptionSet options
-        ) {
+        )
+        {
             // Bring up on space or at the start of a word, or after a ( or [.
             //
             // Note: we don't want to bring this up after traditional enum operators like & or |.
@@ -145,7 +146,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Completion.Providers
             SyntaxToken token,
             ITypeSymbol type,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             // If we have a Nullable<T>, unwrap it.
             if (type.OriginalDefinition.SpecialType == SpecialType.System_Nullable_T)
             {
@@ -180,7 +182,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Completion.Providers
                     if (
                         context.Trigger.Kind == CompletionTriggerKind.Insertion
                         && s_triggerCharacters.Contains(context.Trigger.Character)
-                    ) {
+                    )
+                    {
                         // This completion provider understands static members of matching types, but doesn't
                         // proactively trigger completion for them to avoid interfering with common typing patterns.
                         return;
@@ -249,7 +252,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Completion.Providers
                     .Where(f => f.HasConstantValue);
                 foreach (
                     var field in fields.OrderBy(f => IntegerUtilities.ToInt64(f.ConstantValue))
-                ) {
+                )
+                {
                     index++;
                     if (!field.IsEditorBrowsable(hideAdvancedMembers, semanticModel.Compilation))
                         continue;
@@ -282,7 +286,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Completion.Providers
                     }
                     else if (
                         member is IPropertySymbol { IsStatic: true, IsIndexer: false } property
-                    ) {
+                    )
+                    {
                         staticSymbol = property;
                         symbolType = property.Type;
                     }
@@ -299,7 +304,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Completion.Providers
                             hideAdvancedMembers,
                             semanticModel.Compilation
                         )
-                    ) {
+                    )
+                    {
                         continue;
                     }
 
@@ -324,7 +330,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Completion.Providers
             SyntaxToken token,
             ITypeSymbol type,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             // https://github.com/dotnet/roslyn/issues/5419
             //
             // 14.3: "Within an enum member initializer, values of other enum members are always
@@ -339,7 +346,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Completion.Providers
                 token.Kind() == SyntaxKind.BarToken
                 || token.Kind() == SyntaxKind.AmpersandToken
                 || token.Kind() == SyntaxKind.CaretToken
-            ) {
+            )
+            {
                 // See if the type we're looking at is the underlying type for the enum we're contained in.
                 var containingType = semanticModel.GetEnclosingNamedType(
                     token.SpanStart,
@@ -348,7 +356,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Completion.Providers
                 if (
                     containingType?.TypeKind == TypeKind.Enum
                     && type.Equals(containingType.EnumUnderlyingType)
-                ) {
+                )
+                {
                     // If so, walk back to the token before the operator token and see if it binds to a member
                     // of this enum.
                     var previousToken = token.GetPreviousToken();
@@ -363,7 +372,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Completion.Providers
                         if (
                             symbol?.Kind == SymbolKind.Field
                             && containingType.Equals(symbol.ContainingType)
-                        ) {
+                        )
+                        {
                             // If so, then offer this as a place for enum completion for the enum we're currently
                             // inside of.
                             return containingType;
@@ -385,7 +395,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Completion.Providers
             ITypeSymbol type,
             INamedTypeSymbol? within,
             Compilation compilation
-        ) {
+        )
+        {
             if (within == null)
                 return null;
 

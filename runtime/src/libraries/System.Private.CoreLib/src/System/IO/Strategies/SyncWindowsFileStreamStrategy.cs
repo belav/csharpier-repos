@@ -51,7 +51,8 @@ namespace System.IO.Strategies
             int offset,
             int count,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             // If we weren't opened for asynchronous I/O, we still call to the base implementation so that
             // Read is invoked asynchronously.  But we can do so using the base Stream's internal helper
             // that bypasses delegating to BeginRead, since we already know this is FileStream rather
@@ -70,7 +71,8 @@ namespace System.IO.Strategies
         public override ValueTask<int> ReadAsync(
             Memory<byte> buffer,
             CancellationToken cancellationToken = default
-        ) {
+        )
+        {
             // If we weren't opened for asynchronous I/O, we still call to the base implementation so that
             // Read is invoked asynchronously.  But if we have a byte[], we can do so using the base Stream's
             // internal helper that bypasses delegating to BeginRead, since we already know this is FileStream
@@ -108,7 +110,8 @@ namespace System.IO.Strategies
             int offset,
             int count,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             // If we weren't opened for asynchronous I/O, we still call to the base implementation so that
             // Write is invoked asynchronously.  But we can do so using the base Stream's internal helper
             // that bypasses delegating to BeginWrite, since we already know this is FileStream rather
@@ -127,7 +130,8 @@ namespace System.IO.Strategies
         public override ValueTask WriteAsync(
             ReadOnlyMemory<byte> buffer,
             CancellationToken cancellationToken = default
-        ) {
+        )
+        {
             // If we weren't opened for asynchronous I/O, we still call to the base implementation so that
             // Write is invoked asynchronously.  But if we have a byte[], we can do so using the base Stream's
             // internal helper that bypasses delegating to BeginWrite, since we already know this is FileStream

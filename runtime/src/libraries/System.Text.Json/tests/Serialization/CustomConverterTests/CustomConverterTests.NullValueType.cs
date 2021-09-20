@@ -18,7 +18,8 @@ namespace System.Text.Json.Serialization.Tests
                 ref Utf8JsonReader reader,
                 Type typeToConvert,
                 JsonSerializerOptions options
-            ) {
+            )
+            {
                 if (reader.TokenType == JsonTokenType.Null)
                 {
                     return 0;
@@ -31,7 +32,8 @@ namespace System.Text.Json.Serialization.Tests
                 Utf8JsonWriter writer,
                 int value,
                 JsonSerializerOptions options
-            ) {
+            )
+            {
                 writer.WriteNumberValue(value);
             }
         }
@@ -76,7 +78,8 @@ namespace System.Text.Json.Serialization.Tests
                 ref Utf8JsonReader reader,
                 Type typeToConvert,
                 JsonSerializerOptions options
-            ) {
+            )
+            {
                 if (reader.TokenType == JsonTokenType.Null)
                 {
                     return default;
@@ -99,7 +102,8 @@ namespace System.Text.Json.Serialization.Tests
                 Utf8JsonWriter writer,
                 DateTimeOffset? value,
                 JsonSerializerOptions options
-            ) {
+            )
+            {
                 if (!value.HasValue)
                 {
                     writer.WriteNullValue();
@@ -187,7 +191,8 @@ namespace System.Text.Json.Serialization.Tests
                 ref Utf8JsonReader reader,
                 Type typeToConvert,
                 JsonSerializerOptions options
-            ) {
+            )
+            {
                 if (reader.TokenType == JsonTokenType.Null)
                 {
                     return null;
@@ -216,7 +221,8 @@ namespace System.Text.Json.Serialization.Tests
                 Utf8JsonWriter writer,
                 ClassThatCanBeNullDependingOnContent value,
                 JsonSerializerOptions options
-            ) {
+            )
+            {
                 writer.WriteStartObject();
 
                 if (value.MyInt == 0)

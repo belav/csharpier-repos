@@ -14,7 +14,8 @@ namespace Microsoft.CodeAnalysis.CSharp
         internal LazyUseSiteDiagnosticsInfoForNullableType(
             LanguageVersion languageVersion,
             TypeWithAnnotations possiblyNullableTypeSymbol
-        ) {
+        )
+        {
             _languageVersion = languageVersion;
             _possiblyNullableTypeSymbol = possiblyNullableTypeSymbol;
         }

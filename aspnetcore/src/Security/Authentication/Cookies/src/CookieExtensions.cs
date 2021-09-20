@@ -92,7 +92,8 @@ namespace Microsoft.Extensions.DependencyInjection
             string authenticationScheme,
             string? displayName,
             Action<CookieAuthenticationOptions> configureOptions
-        ) {
+        )
+        {
             builder.Services.TryAddEnumerable(
                 ServiceDescriptor.Singleton<
                     IPostConfigureOptions<CookieAuthenticationOptions>,

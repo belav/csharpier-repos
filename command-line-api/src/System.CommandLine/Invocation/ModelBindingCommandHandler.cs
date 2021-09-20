@@ -23,7 +23,8 @@ namespace System.CommandLine.Invocation
         public ModelBindingCommandHandler(
             MethodInfo handlerMethodInfo,
             IMethodDescriptor methodDescriptor
-        ) {
+        )
+        {
             _handlerMethodInfo =
                 handlerMethodInfo ?? throw new ArgumentNullException(nameof(handlerMethodInfo));
             _invocationTargetBinder = _handlerMethodInfo.IsStatic
@@ -45,7 +46,8 @@ namespace System.CommandLine.Invocation
         public ModelBindingCommandHandler(
             Delegate handlerDelegate,
             IMethodDescriptor methodDescriptor
-        ) {
+        )
+        {
             _handlerDelegate =
                 handlerDelegate ?? throw new ArgumentNullException(nameof(handlerDelegate));
             _methodDescriptor =

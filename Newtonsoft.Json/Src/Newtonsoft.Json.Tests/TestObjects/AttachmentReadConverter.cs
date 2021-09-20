@@ -41,7 +41,8 @@ namespace Newtonsoft.Json.Tests.TestObjects
             Type objectType,
             object existingValue,
             JsonSerializer serializer
-        ) {
+        )
+        {
             var info = serializer.Deserialize<AttachmentInfo>(reader);
 
             var attachment =

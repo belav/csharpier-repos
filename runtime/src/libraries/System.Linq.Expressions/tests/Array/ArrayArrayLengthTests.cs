@@ -487,7 +487,8 @@ namespace System.Linq.Expressions.Tests
         [ClassData(typeof(CompilationTypes))]
         public static void CheckExceptionStructWithStringAndValueArrayArrayLengthTest(
             bool useInterpreter
-        ) {
+        )
+        {
             CheckExceptionStructWithStringAndValueArrayArrayLength(null, useInterpreter);
         }
 
@@ -537,7 +538,8 @@ namespace System.Linq.Expressions.Tests
         [ClassData(typeof(CompilationTypes))]
         public static void CheckExceptionStructWithTwoValuesArrayArrayLengthTest(
             bool useInterpreter
-        ) {
+        )
+        {
             CheckExceptionStructWithTwoValuesArrayArrayLength(null, useInterpreter);
         }
 
@@ -714,7 +716,8 @@ namespace System.Linq.Expressions.Tests
         [ClassData(typeof(CompilationTypes))]
         public static void CheckGenericStructWithStringAndValueArrayArrayLengthTest(
             bool useInterpreter
-        ) {
+        )
+        {
             CheckGenericArrayArrayLengthTestHelper<Scs>(useInterpreter);
         }
 
@@ -722,7 +725,8 @@ namespace System.Linq.Expressions.Tests
         [ClassData(typeof(CompilationTypes))]
         public static void CheckExceptionGenericStructWithStringAndValueArrayArrayLengthTest(
             bool useInterpreter
-        ) {
+        )
+        {
             CheckExceptionGenericArrayArrayLengthTestHelper<Scs>(useInterpreter);
         }
 
@@ -730,7 +734,8 @@ namespace System.Linq.Expressions.Tests
         [ClassData(typeof(CompilationTypes))]
         public static void CheckGenericCustomWithClassRestrictionArrayArrayLengthTest(
             bool useInterpreter
-        ) {
+        )
+        {
             CheckGenericWithClassRestrictionArrayArrayLengthTestHelper<C>(useInterpreter);
         }
 
@@ -738,7 +743,8 @@ namespace System.Linq.Expressions.Tests
         [ClassData(typeof(CompilationTypes))]
         public static void CheckExceptionGenericCustomWithClassRestrictionArrayArrayLengthTest(
             bool useInterpreter
-        ) {
+        )
+        {
             CheckExceptionGenericWithClassRestrictionArrayArrayLengthTestHelper<C>(useInterpreter);
         }
 
@@ -746,7 +752,8 @@ namespace System.Linq.Expressions.Tests
         [ClassData(typeof(CompilationTypes))]
         public static void CheckGenericObjectWithClassRestrictionArrayArrayLengthTest(
             bool useInterpreter
-        ) {
+        )
+        {
             CheckGenericWithClassRestrictionArrayArrayLengthTestHelper<object>(useInterpreter);
         }
 
@@ -754,7 +761,8 @@ namespace System.Linq.Expressions.Tests
         [ClassData(typeof(CompilationTypes))]
         public static void CheckExceptionGenericObjectWithClassRestrictionArrayArrayLengthTest(
             bool useInterpreter
-        ) {
+        )
+        {
             CheckExceptionGenericWithClassRestrictionArrayArrayLengthTestHelper<object>(
                 useInterpreter
             );
@@ -764,7 +772,8 @@ namespace System.Linq.Expressions.Tests
         [ClassData(typeof(CompilationTypes))]
         public static void CheckGenericCustomWithSubClassRestrictionArrayArrayLengthTest(
             bool useInterpreter
-        ) {
+        )
+        {
             CheckGenericWithSubClassRestrictionArrayArrayLengthTestHelper<C>(useInterpreter);
         }
 
@@ -772,7 +781,8 @@ namespace System.Linq.Expressions.Tests
         [ClassData(typeof(CompilationTypes))]
         public static void CheckExceptionGenericCustomWithSubClassRestrictionArrayArrayLengthTest(
             bool useInterpreter
-        ) {
+        )
+        {
             CheckExceptionGenericWithSubClassRestrictionArrayArrayLengthTestHelper<C>(
                 useInterpreter
             );
@@ -782,7 +792,8 @@ namespace System.Linq.Expressions.Tests
         [ClassData(typeof(CompilationTypes))]
         public static void CheckGenericCustomWithClassAndNewRestrictionArrayArrayLengthTest(
             bool useInterpreter
-        ) {
+        )
+        {
             CheckGenericWithClassAndNewRestrictionArrayArrayLengthTestHelper<C>(useInterpreter);
         }
 
@@ -790,7 +801,8 @@ namespace System.Linq.Expressions.Tests
         [ClassData(typeof(CompilationTypes))]
         public static void CheckExceptionGenericCustomWithClassAndNewRestrictionArrayArrayLengthTest(
             bool useInterpreter
-        ) {
+        )
+        {
             CheckExceptionGenericWithClassAndNewRestrictionArrayArrayLengthTestHelper<C>(
                 useInterpreter
             );
@@ -800,7 +812,8 @@ namespace System.Linq.Expressions.Tests
         [ClassData(typeof(CompilationTypes))]
         public static void CheckGenericObjectWithClassAndNewRestrictionArrayArrayLengthTest(
             bool useInterpreter
-        ) {
+        )
+        {
             CheckGenericWithClassAndNewRestrictionArrayArrayLengthTestHelper<object>(
                 useInterpreter
             );
@@ -810,7 +823,8 @@ namespace System.Linq.Expressions.Tests
         [ClassData(typeof(CompilationTypes))]
         public static void CheckExceptionGenericObjectWithClassAndNewRestrictionArrayArrayLengthTest(
             bool useInterpreter
-        ) {
+        )
+        {
             CheckExceptionGenericWithClassAndNewRestrictionArrayArrayLengthTestHelper<object>(
                 useInterpreter
             );
@@ -820,7 +834,8 @@ namespace System.Linq.Expressions.Tests
         [ClassData(typeof(CompilationTypes))]
         public static void CheckGenericCustomWithSubClassAndNewRestrictionArrayArrayLengthTest(
             bool useInterpreter
-        ) {
+        )
+        {
             CheckGenericWithSubClassAndNewRestrictionArrayArrayLengthTestHelper<C>(useInterpreter);
         }
 
@@ -828,7 +843,8 @@ namespace System.Linq.Expressions.Tests
         [ClassData(typeof(CompilationTypes))]
         public static void CheckExceptionGenericCustomWithSubClassAndNewRestrictionArrayArrayLengthTest(
             bool useInterpreter
-        ) {
+        )
+        {
             CheckExceptionGenericWithSubClassAndNewRestrictionArrayArrayLengthTestHelper<C>(
                 useInterpreter
             );
@@ -838,7 +854,8 @@ namespace System.Linq.Expressions.Tests
         [ClassData(typeof(CompilationTypes))]
         public static void CheckGenericEnumWithStructRestrictionArrayArrayLengthTest(
             bool useInterpreter
-        ) {
+        )
+        {
             CheckGenericWithStructRestrictionArrayArrayLengthTestHelper<E>(useInterpreter);
         }
 
@@ -846,7 +863,8 @@ namespace System.Linq.Expressions.Tests
         [ClassData(typeof(CompilationTypes))]
         public static void CheckExceptionGenericEnumWithStructRestrictionArrayArrayLengthTest(
             bool useInterpreter
-        ) {
+        )
+        {
             CheckExceptionGenericWithStructRestrictionArrayArrayLengthTestHelper<E>(useInterpreter);
         }
 
@@ -854,7 +872,8 @@ namespace System.Linq.Expressions.Tests
         [ClassData(typeof(CompilationTypes))]
         public static void CheckGenericStructWithStructRestrictionArrayArrayLengthTest(
             bool useInterpreter
-        ) {
+        )
+        {
             CheckGenericWithStructRestrictionArrayArrayLengthTestHelper<S>(useInterpreter);
         }
 
@@ -862,7 +881,8 @@ namespace System.Linq.Expressions.Tests
         [ClassData(typeof(CompilationTypes))]
         public static void CheckExceptionGenericStructWithStructRestrictionArrayArrayLengthTest(
             bool useInterpreter
-        ) {
+        )
+        {
             CheckExceptionGenericWithStructRestrictionArrayArrayLengthTestHelper<S>(useInterpreter);
         }
 
@@ -870,7 +890,8 @@ namespace System.Linq.Expressions.Tests
         [ClassData(typeof(CompilationTypes))]
         public static void CheckGenericStructWithStringAndValueWithStructRestrictionArrayArrayLengthTest(
             bool useInterpreter
-        ) {
+        )
+        {
             CheckGenericWithStructRestrictionArrayArrayLengthTestHelper<Scs>(useInterpreter);
         }
 
@@ -878,7 +899,8 @@ namespace System.Linq.Expressions.Tests
         [ClassData(typeof(CompilationTypes))]
         public static void CheckExceptionGenericStructWithStringAndValueWithStructRestrictionArrayArrayLengthTest(
             bool useInterpreter
-        ) {
+        )
+        {
             CheckExceptionGenericWithStructRestrictionArrayArrayLengthTestHelper<Scs>(
                 useInterpreter
             );
@@ -1772,7 +1794,8 @@ namespace System.Linq.Expressions.Tests
         private static void CheckDecimalArrayArrayLengthExpression(
             decimal[][] array,
             bool useInterpreter
-        ) {
+        )
+        {
             Expression<Func<int>> e = Expression.Lambda<Func<int>>(
                 Expression.ArrayLength(Expression.Constant(array, typeof(decimal[][]))),
                 Enumerable.Empty<ParameterExpression>()
@@ -1784,7 +1807,8 @@ namespace System.Linq.Expressions.Tests
         private static void CheckDelegateArrayArrayLengthExpression(
             Delegate[][] array,
             bool useInterpreter
-        ) {
+        )
+        {
             Expression<Func<int>> e = Expression.Lambda<Func<int>>(
                 Expression.ArrayLength(Expression.Constant(array, typeof(Delegate[][]))),
                 Enumerable.Empty<ParameterExpression>()
@@ -1796,7 +1820,8 @@ namespace System.Linq.Expressions.Tests
         private static void CheckDoubleArrayArrayLengthExpression(
             double[][] array,
             bool useInterpreter
-        ) {
+        )
+        {
             Expression<Func<int>> e = Expression.Lambda<Func<int>>(
                 Expression.ArrayLength(Expression.Constant(array, typeof(double[][]))),
                 Enumerable.Empty<ParameterExpression>()
@@ -1818,7 +1843,8 @@ namespace System.Linq.Expressions.Tests
         private static void CheckEnumLongArrayArrayLengthExpression(
             El[][] array,
             bool useInterpreter
-        ) {
+        )
+        {
             Expression<Func<int>> e = Expression.Lambda<Func<int>>(
                 Expression.ArrayLength(Expression.Constant(array, typeof(El[][]))),
                 Enumerable.Empty<ParameterExpression>()
@@ -1830,7 +1856,8 @@ namespace System.Linq.Expressions.Tests
         private static void CheckFloatArrayArrayLengthExpression(
             float[][] array,
             bool useInterpreter
-        ) {
+        )
+        {
             Expression<Func<int>> e = Expression.Lambda<Func<int>>(
                 Expression.ArrayLength(Expression.Constant(array, typeof(float[][]))),
                 Enumerable.Empty<ParameterExpression>()
@@ -1842,7 +1869,8 @@ namespace System.Linq.Expressions.Tests
         private static void CheckFuncArrayArrayLengthExpression(
             Func<object>[][] array,
             bool useInterpreter
-        ) {
+        )
+        {
             Expression<Func<int>> e = Expression.Lambda<Func<int>>(
                 Expression.ArrayLength(Expression.Constant(array, typeof(Func<object>[][]))),
                 Enumerable.Empty<ParameterExpression>()
@@ -1854,7 +1882,8 @@ namespace System.Linq.Expressions.Tests
         private static void CheckInterfaceArrayArrayLengthExpression(
             I[][] array,
             bool useInterpreter
-        ) {
+        )
+        {
             Expression<Func<int>> e = Expression.Lambda<Func<int>>(
                 Expression.ArrayLength(Expression.Constant(array, typeof(I[][]))),
                 Enumerable.Empty<ParameterExpression>()
@@ -1866,7 +1895,8 @@ namespace System.Linq.Expressions.Tests
         private static void CheckIEquatableCustomArrayArrayLengthExpression(
             IEquatable<C>[][] array,
             bool useInterpreter
-        ) {
+        )
+        {
             Expression<Func<int>> e = Expression.Lambda<Func<int>>(
                 Expression.ArrayLength(Expression.Constant(array, typeof(IEquatable<C>[][]))),
                 Enumerable.Empty<ParameterExpression>()
@@ -1878,7 +1908,8 @@ namespace System.Linq.Expressions.Tests
         private static void CheckIEquatableCustom2ArrayArrayLengthExpression(
             IEquatable<D>[][] array,
             bool useInterpreter
-        ) {
+        )
+        {
             Expression<Func<int>> e = Expression.Lambda<Func<int>>(
                 Expression.ArrayLength(Expression.Constant(array, typeof(IEquatable<D>[][]))),
                 Enumerable.Empty<ParameterExpression>()
@@ -1910,7 +1941,8 @@ namespace System.Linq.Expressions.Tests
         private static void CheckObjectArrayArrayLengthExpression(
             object[][] array,
             bool useInterpreter
-        ) {
+        )
+        {
             Expression<Func<int>> e = Expression.Lambda<Func<int>>(
                 Expression.ArrayLength(Expression.Constant(array, typeof(object[][]))),
                 Enumerable.Empty<ParameterExpression>()
@@ -1932,7 +1964,8 @@ namespace System.Linq.Expressions.Tests
         private static void CheckSByteArrayArrayLengthExpression(
             sbyte[][] array,
             bool useInterpreter
-        ) {
+        )
+        {
             Expression<Func<int>> e = Expression.Lambda<Func<int>>(
                 Expression.ArrayLength(Expression.Constant(array, typeof(sbyte[][]))),
                 Enumerable.Empty<ParameterExpression>()
@@ -1944,7 +1977,8 @@ namespace System.Linq.Expressions.Tests
         private static void CheckStructWithStringArrayArrayLengthExpression(
             Sc[][] array,
             bool useInterpreter
-        ) {
+        )
+        {
             Expression<Func<int>> e = Expression.Lambda<Func<int>>(
                 Expression.ArrayLength(Expression.Constant(array, typeof(Sc[][]))),
                 Enumerable.Empty<ParameterExpression>()
@@ -1956,7 +1990,8 @@ namespace System.Linq.Expressions.Tests
         private static void CheckStructWithStringAndValueArrayArrayLengthExpression(
             Scs[][] array,
             bool useInterpreter
-        ) {
+        )
+        {
             Expression<Func<int>> e = Expression.Lambda<Func<int>>(
                 Expression.ArrayLength(Expression.Constant(array, typeof(Scs[][]))),
                 Enumerable.Empty<ParameterExpression>()
@@ -1968,7 +2003,8 @@ namespace System.Linq.Expressions.Tests
         private static void CheckShortArrayArrayLengthExpression(
             short[][] array,
             bool useInterpreter
-        ) {
+        )
+        {
             Expression<Func<int>> e = Expression.Lambda<Func<int>>(
                 Expression.ArrayLength(Expression.Constant(array, typeof(short[][]))),
                 Enumerable.Empty<ParameterExpression>()
@@ -1980,7 +2016,8 @@ namespace System.Linq.Expressions.Tests
         private static void CheckStructWithTwoValuesArrayArrayLengthExpression(
             Sp[][] array,
             bool useInterpreter
-        ) {
+        )
+        {
             Expression<Func<int>> e = Expression.Lambda<Func<int>>(
                 Expression.ArrayLength(Expression.Constant(array, typeof(Sp[][]))),
                 Enumerable.Empty<ParameterExpression>()
@@ -1992,7 +2029,8 @@ namespace System.Linq.Expressions.Tests
         private static void CheckStructWithValueArrayArrayLengthExpression(
             Ss[][] array,
             bool useInterpreter
-        ) {
+        )
+        {
             Expression<Func<int>> e = Expression.Lambda<Func<int>>(
                 Expression.ArrayLength(Expression.Constant(array, typeof(Ss[][]))),
                 Enumerable.Empty<ParameterExpression>()
@@ -2004,7 +2042,8 @@ namespace System.Linq.Expressions.Tests
         private static void CheckStringArrayArrayLengthExpression(
             string[][] array,
             bool useInterpreter
-        ) {
+        )
+        {
             Expression<Func<int>> e = Expression.Lambda<Func<int>>(
                 Expression.ArrayLength(Expression.Constant(array, typeof(string[][]))),
                 Enumerable.Empty<ParameterExpression>()
@@ -2026,7 +2065,8 @@ namespace System.Linq.Expressions.Tests
         private static void CheckULongArrayArrayLengthExpression(
             ulong[][] array,
             bool useInterpreter
-        ) {
+        )
+        {
             Expression<Func<int>> e = Expression.Lambda<Func<int>>(
                 Expression.ArrayLength(Expression.Constant(array, typeof(ulong[][]))),
                 Enumerable.Empty<ParameterExpression>()
@@ -2038,7 +2078,8 @@ namespace System.Linq.Expressions.Tests
         private static void CheckUShortArrayArrayLengthExpression(
             ushort[][] array,
             bool useInterpreter
-        ) {
+        )
+        {
             Expression<Func<int>> e = Expression.Lambda<Func<int>>(
                 Expression.ArrayLength(Expression.Constant(array, typeof(ushort[][]))),
                 Enumerable.Empty<ParameterExpression>()
@@ -2050,7 +2091,8 @@ namespace System.Linq.Expressions.Tests
         private static void CheckGenericArrayArrayLengthExpression<T>(
             T[][] array,
             bool useInterpreter
-        ) {
+        )
+        {
             Expression<Func<int>> e = Expression.Lambda<Func<int>>(
                 Expression.ArrayLength(Expression.Constant(array, typeof(T[][]))),
                 Enumerable.Empty<ParameterExpression>()
@@ -2191,7 +2233,8 @@ namespace System.Linq.Expressions.Tests
         private static void CheckExceptionDecimalArrayArrayLength(
             decimal[][] array,
             bool useInterpreter
-        ) {
+        )
+        {
             if (array == null)
                 Assert.Throws<NullReferenceException>(
                     () => CheckDecimalArrayArrayLengthExpression(array, useInterpreter)
@@ -2205,7 +2248,8 @@ namespace System.Linq.Expressions.Tests
         private static void CheckExceptionDelegateArrayArrayLength(
             Delegate[][] array,
             bool useInterpreter
-        ) {
+        )
+        {
             if (array == null)
                 Assert.Throws<NullReferenceException>(
                     () => CheckDelegateArrayArrayLengthExpression(array, useInterpreter)
@@ -2219,7 +2263,8 @@ namespace System.Linq.Expressions.Tests
         private static void CheckExceptionDoubleArrayArrayLength(
             double[][] array,
             bool useInterpreter
-        ) {
+        )
+        {
             if (array == null)
                 Assert.Throws<NullReferenceException>(
                     () => CheckDoubleArrayArrayLengthExpression(array, useInterpreter)
@@ -2245,7 +2290,8 @@ namespace System.Linq.Expressions.Tests
         private static void CheckExceptionEnumLongArrayArrayLength(
             El[][] array,
             bool useInterpreter
-        ) {
+        )
+        {
             if (array == null)
                 Assert.Throws<NullReferenceException>(
                     () => CheckEnumLongArrayArrayLengthExpression(array, useInterpreter)
@@ -2259,7 +2305,8 @@ namespace System.Linq.Expressions.Tests
         private static void CheckExceptionFloatArrayArrayLength(
             float[][] array,
             bool useInterpreter
-        ) {
+        )
+        {
             if (array == null)
                 Assert.Throws<NullReferenceException>(
                     () => CheckFloatArrayArrayLengthExpression(array, useInterpreter)
@@ -2273,7 +2320,8 @@ namespace System.Linq.Expressions.Tests
         private static void CheckExceptionFuncArrayArrayLength(
             Func<object>[][] array,
             bool useInterpreter
-        ) {
+        )
+        {
             if (array == null)
                 Assert.Throws<NullReferenceException>(
                     () => CheckFuncArrayArrayLengthExpression(array, useInterpreter)
@@ -2287,7 +2335,8 @@ namespace System.Linq.Expressions.Tests
         private static void CheckExceptionInterfaceArrayArrayLength(
             I[][] array,
             bool useInterpreter
-        ) {
+        )
+        {
             if (array == null)
                 Assert.Throws<NullReferenceException>(
                     () => CheckInterfaceArrayArrayLengthExpression(array, useInterpreter)
@@ -2301,7 +2350,8 @@ namespace System.Linq.Expressions.Tests
         private static void CheckExceptionIEquatableCustomArrayArrayLength(
             IEquatable<C>[][] array,
             bool useInterpreter
-        ) {
+        )
+        {
             if (array == null)
                 Assert.Throws<NullReferenceException>(
                     () => CheckIEquatableCustomArrayArrayLengthExpression(array, useInterpreter)
@@ -2315,7 +2365,8 @@ namespace System.Linq.Expressions.Tests
         private static void CheckExceptionIEquatableCustom2ArrayArrayLength(
             IEquatable<D>[][] array,
             bool useInterpreter
-        ) {
+        )
+        {
             if (array == null)
                 Assert.Throws<NullReferenceException>(
                     () => CheckIEquatableCustom2ArrayArrayLengthExpression(array, useInterpreter)
@@ -2353,7 +2404,8 @@ namespace System.Linq.Expressions.Tests
         private static void CheckExceptionObjectArrayArrayLength(
             object[][] array,
             bool useInterpreter
-        ) {
+        )
+        {
             if (array == null)
                 Assert.Throws<NullReferenceException>(
                     () => CheckObjectArrayArrayLengthExpression(array, useInterpreter)
@@ -2379,7 +2431,8 @@ namespace System.Linq.Expressions.Tests
         private static void CheckExceptionSByteArrayArrayLength(
             sbyte[][] array,
             bool useInterpreter
-        ) {
+        )
+        {
             if (array == null)
                 Assert.Throws<NullReferenceException>(
                     () => CheckSByteArrayArrayLengthExpression(array, useInterpreter)
@@ -2393,7 +2446,8 @@ namespace System.Linq.Expressions.Tests
         private static void CheckExceptionStructWithStringArrayArrayLength(
             Sc[][] array,
             bool useInterpreter
-        ) {
+        )
+        {
             if (array == null)
                 Assert.Throws<NullReferenceException>(
                     () => CheckStructWithStringArrayArrayLengthExpression(array, useInterpreter)
@@ -2407,7 +2461,8 @@ namespace System.Linq.Expressions.Tests
         private static void CheckExceptionStructWithStringAndValueArrayArrayLength(
             Scs[][] array,
             bool useInterpreter
-        ) {
+        )
+        {
             if (array == null)
                 Assert.Throws<NullReferenceException>(
                     () =>
@@ -2429,7 +2484,8 @@ namespace System.Linq.Expressions.Tests
         private static void CheckExceptionShortArrayArrayLength(
             short[][] array,
             bool useInterpreter
-        ) {
+        )
+        {
             if (array == null)
                 Assert.Throws<NullReferenceException>(
                     () => CheckShortArrayArrayLengthExpression(array, useInterpreter)
@@ -2443,7 +2499,8 @@ namespace System.Linq.Expressions.Tests
         private static void CheckExceptionStructWithTwoValuesArrayArrayLength(
             Sp[][] array,
             bool useInterpreter
-        ) {
+        )
+        {
             if (array == null)
                 Assert.Throws<NullReferenceException>(
                     () => CheckStructWithTwoValuesArrayArrayLengthExpression(array, useInterpreter)
@@ -2457,7 +2514,8 @@ namespace System.Linq.Expressions.Tests
         private static void CheckExceptionStructWithValueArrayArrayLength(
             Ss[][] array,
             bool useInterpreter
-        ) {
+        )
+        {
             if (array == null)
                 Assert.Throws<NullReferenceException>(
                     () => CheckStructWithValueArrayArrayLengthExpression(array, useInterpreter)
@@ -2471,7 +2529,8 @@ namespace System.Linq.Expressions.Tests
         private static void CheckExceptionStringArrayArrayLength(
             string[][] array,
             bool useInterpreter
-        ) {
+        )
+        {
             if (array == null)
                 Assert.Throws<NullReferenceException>(
                     () => CheckStringArrayArrayLengthExpression(array, useInterpreter)
@@ -2497,7 +2556,8 @@ namespace System.Linq.Expressions.Tests
         private static void CheckExceptionULongArrayArrayLength(
             ulong[][] array,
             bool useInterpreter
-        ) {
+        )
+        {
             if (array == null)
                 Assert.Throws<NullReferenceException>(
                     () => CheckULongArrayArrayLengthExpression(array, useInterpreter)
@@ -2511,7 +2571,8 @@ namespace System.Linq.Expressions.Tests
         private static void CheckExceptionUShortArrayArrayLength(
             ushort[][] array,
             bool useInterpreter
-        ) {
+        )
+        {
             if (array == null)
                 Assert.Throws<NullReferenceException>(
                     () => CheckUShortArrayArrayLengthExpression(array, useInterpreter)
@@ -2525,7 +2586,8 @@ namespace System.Linq.Expressions.Tests
         private static void CheckExceptionGenericArrayArrayLength<T>(
             T[][] array,
             bool useInterpreter
-        ) {
+        )
+        {
             if (array == null)
                 Assert.Throws<NullReferenceException>(
                     () => CheckGenericArrayArrayLengthExpression(array, useInterpreter)
@@ -2664,7 +2726,8 @@ namespace System.Linq.Expressions.Tests
                     Expression.Parameter(typeof(int).MakeArrayType(1)),
                     Expression.Constant(new int[2, 2])
                 }
-            ) {
+            )
+            {
                 AssertExtensions.Throws<ArgumentException>(
                     "array",
                     () => Expression.ArrayLength(e)

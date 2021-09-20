@@ -33,7 +33,8 @@ namespace System.Net.Http.Tests
             string challenge,
             List<string> keys,
             List<string> values
-        ) {
+        )
+        {
             AuthenticationHelper.DigestResponse digestResponse =
                 new AuthenticationHelper.DigestResponse(challenge);
             Assert.Equal(keys.Count, digestResponse.Parameters.Count);
@@ -208,7 +209,8 @@ namespace System.Net.Http.Tests
             string match,
             string doesNotMatch,
             int fieldCount
-        ) {
+        )
+        {
             NetworkCredential credential = new NetworkCredential("foo", "bar");
             AuthenticationHelper.DigestResponse digestResponse =
                 new AuthenticationHelper.DigestResponse(response);

@@ -31,7 +31,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
             if (
                 propertyBuilder.Metadata.GetIdentifyingMemberInfo() is MemberInfo memberInfo
                 && IsNonNullableReferenceType(propertyBuilder.ModelBuilder, memberInfo)
-            ) {
+            )
+            {
                 propertyBuilder.IsRequired(true);
             }
         }
@@ -44,7 +45,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
         public virtual void ProcessPropertyAdded(
             IConventionPropertyBuilder propertyBuilder,
             IConventionContext<IConventionPropertyBuilder> context
-        ) {
+        )
+        {
             Process(propertyBuilder);
         }
 
@@ -60,7 +62,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
             FieldInfo? newFieldInfo,
             FieldInfo? oldFieldInfo,
             IConventionContext<FieldInfo> context
-        ) {
+        )
+        {
             Process(propertyBuilder);
         }
     }

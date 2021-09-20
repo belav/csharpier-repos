@@ -97,7 +97,8 @@ namespace Microsoft.CodeAnalysis.Completion
             CompletionItem item,
             char? commitKey,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             return Task.FromResult(
                 CompletionChange.Create(new TextChange(item.Span, item.DisplayText))
             );

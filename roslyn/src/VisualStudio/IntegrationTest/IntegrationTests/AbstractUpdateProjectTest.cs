@@ -35,7 +35,8 @@ namespace Roslyn.VisualStudio.IntegrationTests
             XElement projectElement,
             string name,
             string value
-        ) {
+        )
+        {
             Assert.Contains(
                 projectElement.Elements().Where(IsUnconditionalPropertyGroup),
                 group => GetPropertyValue(group, name) == value
@@ -50,7 +51,8 @@ namespace Roslyn.VisualStudio.IntegrationTests
             XElement projectElement,
             string name,
             string value
-        ) {
+        )
+        {
             Assert.All(
                 projectElement.Elements().Where(IsConditionalPropertyGroup),
                 group => Assert.Equal(value, GetPropertyValue(group, name))

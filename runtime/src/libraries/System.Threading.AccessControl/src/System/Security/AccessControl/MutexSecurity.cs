@@ -47,27 +47,25 @@ namespace System.Security.AccessControl
             IdentityReference identity,
             MutexRights eventRights,
             AccessControlType type
-        ) : this(
-            identity,
-            (int)eventRights,
-            false,
-            InheritanceFlags.None,
-            PropagationFlags.None,
-            type
-        ) { }
+        )
+            : this(
+                identity,
+                (int)eventRights,
+                false,
+                InheritanceFlags.None,
+                PropagationFlags.None,
+                type
+            ) { }
 
-        public MutexAccessRule(
-            string identity,
-            MutexRights eventRights,
-            AccessControlType type
-        ) : this(
-            new NTAccount(identity),
-            (int)eventRights,
-            false,
-            InheritanceFlags.None,
-            PropagationFlags.None,
-            type
-        ) { }
+        public MutexAccessRule(string identity, MutexRights eventRights, AccessControlType type)
+            : this(
+                new NTAccount(identity),
+                (int)eventRights,
+                false,
+                InheritanceFlags.None,
+                PropagationFlags.None,
+                type
+            ) { }
 
         //
         // Internal constructor to be called by public constructors
@@ -90,18 +88,15 @@ namespace System.Security.AccessControl
 
     public sealed class MutexAuditRule : AuditRule
     {
-        public MutexAuditRule(
-            IdentityReference identity,
-            MutexRights eventRights,
-            AuditFlags flags
-        ) : this(
-            identity,
-            (int)eventRights,
-            false,
-            InheritanceFlags.None,
-            PropagationFlags.None,
-            flags
-        ) { }
+        public MutexAuditRule(IdentityReference identity, MutexRights eventRights, AuditFlags flags)
+            : this(
+                identity,
+                (int)eventRights,
+                false,
+                InheritanceFlags.None,
+                PropagationFlags.None,
+                flags
+            ) { }
 
         internal MutexAuditRule(
             IdentityReference identity,
@@ -139,7 +134,8 @@ namespace System.Security.AccessControl
             string? name,
             SafeHandle? handle,
             object? context
-        ) {
+        )
+        {
             System.Exception? exception = null;
 
             switch (errorCode)
@@ -166,7 +162,8 @@ namespace System.Security.AccessControl
             InheritanceFlags inheritanceFlags,
             PropagationFlags propagationFlags,
             AccessControlType type
-        ) {
+        )
+        {
             return new MutexAccessRule(
                 identityReference,
                 accessMask,
@@ -184,7 +181,8 @@ namespace System.Security.AccessControl
             InheritanceFlags inheritanceFlags,
             PropagationFlags propagationFlags,
             AuditFlags flags
-        ) {
+        )
+        {
             return new MutexAuditRule(
                 identityReference,
                 accessMask,

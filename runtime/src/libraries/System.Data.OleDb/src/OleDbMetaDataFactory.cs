@@ -127,7 +127,8 @@ namespace System.Data.OleDb
                 if (
                     (null == restrictionCollectionName)
                     || (typeof(string) != restrictionCollectionName.DataType)
-                ) {
+                )
+                {
                     throw ADP.InvalidXmlMissingColumn(
                         DbMetaDataCollectionNames.Restrictions,
                         _collectionName
@@ -181,7 +182,8 @@ namespace System.Data.OleDb
                             if (
                                 _schemaMapping[mapping]._schemaRowset
                                 == schemaSupport[i]._schemaRowset
-                            ) {
+                            )
+                            {
                                 isSchemaRowsetSupported = true;
                                 break;
                             }
@@ -246,7 +248,8 @@ namespace System.Data.OleDb
         private DataTable GetDataSourceInformationTable(
             OleDbConnection connection,
             OleDbConnectionInternal internalConnection
-        ) {
+        )
+        {
             // verify that the data source information table is in the data set
             DataTable? dataSourceInformationTable = CollectionDataSet.Tables[
                 DbMetaDataCollectionNames.DataSourceInformation
@@ -286,7 +289,8 @@ namespace System.Data.OleDb
                 if (
                     (schemaSeparatorPattern != null)
                     && (schemaSeparatorPattern != catalogSeparatorPattern)
-                ) {
+                )
+                {
                     compositeSeparatorPattern.Append('|');
                     patternEscaped.Length = 0;
                     ADP.EscapeSpecialCharacters(schemaSeparatorPattern, patternEscaped);
@@ -528,7 +532,8 @@ namespace System.Data.OleDb
                     if (
                         (sourceColumns[i] is DataColumn sourceColumn)
                         && (targetColumns[i] is DataColumn targetColumn)
-                    ) {
+                    )
+                    {
                         newRow[targetColumn] = sourceRow[sourceColumn];
                     }
                 }
@@ -550,7 +555,8 @@ namespace System.Data.OleDb
                 // searchable has to be special cased becasue it is not an eaxct mapping
                 if (
                     (isSearchable != null) && (isSearchableWithLike != null) && (searchable != null)
-                ) {
+                )
+                {
                     newRow[isSearchable] = DBNull.Value;
                     newRow[isSearchableWithLike] = DBNull.Value;
                     if (DBNull.Value != sourceRow[searchable])
@@ -626,7 +632,8 @@ namespace System.Data.OleDb
             string collectionName,
             string?[]? restrictions,
             DbConnection connection
-        ) {
+        )
+        {
             OleDbConnection oleDbConnection = (OleDbConnection)connection;
             OleDbConnectionInternal oleDbInternalConnection = (OleDbConnectionInternal)(
                 oleDbConnection.InnerConnection
@@ -712,7 +719,8 @@ namespace System.Data.OleDb
                                 (collectionName == OleDbMetaDataCollectionNames.Indexes)
                                 && (restrictions.Length >= indexRestrictionTypeSlot + 1)
                                 && (restrictions[indexRestrictionTypeSlot] != null)
-                            ) {
+                            )
+                            {
                                 mungedRestrictions = new object[restrictions.Length];
                                 for (int j = 0; j < restrictions.Length; j++)
                                 {
@@ -724,13 +732,15 @@ namespace System.Data.OleDb
                                 if (
                                     (restrictions[indexRestrictionTypeSlot] == "DBPROPVAL_IT_BTREE")
                                     || (restrictions[indexRestrictionTypeSlot] == "1")
-                                ) {
+                                )
+                                {
                                     indexTypeValue = 1;
                                 }
                                 else if (
                                     (restrictions[indexRestrictionTypeSlot] == "DBPROPVAL_IT_HASH")
                                     || (restrictions[indexRestrictionTypeSlot] == "2")
-                                ) {
+                                )
+                                {
                                     indexTypeValue = 2;
                                 }
                                 else if (
@@ -738,13 +748,15 @@ namespace System.Data.OleDb
                                         restrictions[indexRestrictionTypeSlot]
                                         == "DBPROPVAL_IT_CONTENT"
                                     ) || (restrictions[indexRestrictionTypeSlot] == "3")
-                                ) {
+                                )
+                                {
                                     indexTypeValue = 3;
                                 }
                                 else if (
                                     (restrictions[indexRestrictionTypeSlot] == "DBPROPVAL_IT_OTHER")
                                     || (restrictions[indexRestrictionTypeSlot] == "4")
-                                ) {
+                                )
+                                {
                                     indexTypeValue = 4;
                                 }
                                 else
@@ -766,7 +778,8 @@ namespace System.Data.OleDb
                                 (collectionName == OleDbMetaDataCollectionNames.Procedures)
                                 && (restrictions.Length >= procedureRestrictionTypeSlot + 1)
                                 && (restrictions[procedureRestrictionTypeSlot] != null)
-                            ) {
+                            )
+                            {
                                 mungedRestrictions = new object[restrictions.Length];
                                 for (int j = 0; j < restrictions.Length; j++)
                                 {
@@ -778,7 +791,8 @@ namespace System.Data.OleDb
                                 if (
                                     (restrictions[procedureRestrictionTypeSlot] == "DB_PT_UNKNOWN")
                                     || (restrictions[procedureRestrictionTypeSlot] == "1")
-                                ) {
+                                )
+                                {
                                     procedureTypeValue = 1;
                                 }
                                 else if (
@@ -786,13 +800,15 @@ namespace System.Data.OleDb
                                         restrictions[procedureRestrictionTypeSlot]
                                         == "DB_PT_PROCEDURE"
                                     ) || (restrictions[procedureRestrictionTypeSlot] == "2")
-                                ) {
+                                )
+                                {
                                     procedureTypeValue = 2;
                                 }
                                 else if (
                                     (restrictions[procedureRestrictionTypeSlot] == "DB_PT_FUNCTION")
                                     || (restrictions[procedureRestrictionTypeSlot] == "3")
-                                ) {
+                                )
+                                {
                                     procedureTypeValue = 3;
                                 }
                                 else
@@ -831,7 +847,8 @@ namespace System.Data.OleDb
             int propertyID,
             DataRow row,
             OleDbConnection connection
-        ) {
+        )
+        {
             object? property = connection.GetDataSourcePropertyValue(
                 OleDbPropertySetGuid.DataSourceInfo,
                 propertyID

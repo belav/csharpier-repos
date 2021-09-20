@@ -57,7 +57,8 @@ namespace Microsoft.CodeAnalysis.RemoveUnnecessarySuppressions
                     root.FindNode(diagnostic.Location.SourceSpan) is { } node
                         && syntaxFacts.IsAttribute(node)
                     || root.FindTrivia(diagnostic.Location.SourceSpan.Start).HasStructure
-                ) {
+                )
+                {
                     context.RegisterCodeFix(
                         new MyCodeAction(c => FixAsync(context.Document, diagnostic, c)),
                         diagnostic
@@ -71,7 +72,8 @@ namespace Microsoft.CodeAnalysis.RemoveUnnecessarySuppressions
             ImmutableArray<Diagnostic> diagnostics,
             SyntaxEditor editor,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             // We need to track unique set of processed nodes when removing the nodes.
             // This is because we generate an unnecessary pragma suppression diagnostic at both the pragma disable and matching pragma restore location
             // with the corresponding restore/disable location as an additional location to be removed.
@@ -96,13 +98,15 @@ namespace Microsoft.CodeAnalysis.RemoveUnnecessarySuppressions
                 SyntaxEditor editor,
                 HashSet<SyntaxNode> processedNodes,
                 ISyntaxFacts syntaxFacts
-            ) {
+            )
+            {
                 SyntaxNode node;
                 var options = SyntaxGenerator.DefaultRemoveOptions;
                 if (
                     editor.OriginalRoot.FindNode(location.SourceSpan) is { } attribute
                     && syntaxFacts.IsAttribute(attribute)
-                ) {
+                )
+                {
                     node = attribute;
                     // Keep leading trivia for attributes as we don't want to remove doc comments, or anything else
                     options |= SyntaxRemoveOptions.KeepLeadingTrivia;
@@ -122,13 +126,12 @@ namespace Microsoft.CodeAnalysis.RemoveUnnecessarySuppressions
 
         private class MyCodeAction : CustomCodeActions.DocumentChangeAction
         {
-            public MyCodeAction(
-                Func<CancellationToken, Task<Document>> createChangedDocument
-            ) : base(
-                AnalyzersResources.Remove_unnecessary_suppression,
-                createChangedDocument,
-                nameof(RemoveUnnecessaryInlineSuppressionsCodeFixProvider)
-            ) { }
+            public MyCodeAction(Func<CancellationToken, Task<Document>> createChangedDocument)
+                : base(
+                    AnalyzersResources.Remove_unnecessary_suppression,
+                    createChangedDocument,
+                    nameof(RemoveUnnecessaryInlineSuppressionsCodeFixProvider)
+                ) { }
         }
     }
 }

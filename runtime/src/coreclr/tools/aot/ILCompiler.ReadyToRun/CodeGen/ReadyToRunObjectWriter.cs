@@ -147,7 +147,8 @@ namespace ILCompiler.DependencyAnalysis
             bool generateProfileFile,
             CallChainProfile callChainProfile,
             int customPESectionAlignment
-        ) {
+        )
+        {
             _objectFilePath = objectFilePath;
             _componentModule = componentModule;
             _nodes = nodes;
@@ -206,7 +207,8 @@ namespace ILCompiler.DependencyAnalysis
                 if (
                     _nodeFactory.CompilationModuleGroup.IsCompositeBuildMode
                     && _componentModule == null
-                ) {
+                )
+                {
                     headerBuilder = PEHeaderProvider.Create(
                         imageCharacteristics: Characteristics.ExecutableImage | Characteristics.Dll,
                         dllCharacteristics: default(DllCharacteristics),
@@ -459,7 +461,8 @@ namespace ILCompiler.DependencyAnalysis
             int nodeIndex,
             string name,
             ObjectNodeSection section
-        ) {
+        )
+        {
 #if DEBUG
             for (int symbolIndex = 0; symbolIndex < data.DefinedSymbols.Length; symbolIndex++)
             {
@@ -504,7 +507,8 @@ namespace ILCompiler.DependencyAnalysis
             bool generateProfileFile,
             CallChainProfile callChainProfile,
             int customPESectionAlignment
-        ) {
+        )
+        {
             Console.WriteLine($@"Emitting R2R PE file: {objectFilePath}");
             ReadyToRunObjectWriter objectWriter = new ReadyToRunObjectWriter(
                 objectFilePath,

@@ -78,12 +78,14 @@ namespace Microsoft.CodeAnalysis.GenerateType
                 SemanticDocument document,
                 SyntaxNode node,
                 CancellationToken cancellationToken
-            ) {
+            )
+            {
                 var state = new State(document.SemanticModel.Compilation);
                 if (
                     !await state.TryInitializeAsync(service, document, node, cancellationToken)
                         .ConfigureAwait(false)
-                ) {
+                )
+                {
                     return null;
                 }
 
@@ -95,7 +97,8 @@ namespace Microsoft.CodeAnalysis.GenerateType
                 SemanticDocument semanticDocument,
                 SyntaxNode node,
                 CancellationToken cancellationToken
-            ) {
+            )
+            {
                 if (!(node is TSimpleNameSyntax))
                 {
                     return false;
@@ -121,14 +124,16 @@ namespace Microsoft.CodeAnalysis.GenerateType
                         cancellationToken,
                         out var generateTypeServiceStateOptions
                     )
-                ) {
+                )
+                {
                     return false;
                 }
 
                 if (
                     char.IsLower(name[0])
                     && !semanticDocument.SemanticModel.Compilation.IsCaseSensitive
-                ) {
+                )
+                {
                     // It's near universal in .NET that types start with a capital letter.  As such,
                     // if this name starts with a lowercase letter, don't even bother to offer
                     // "generate type".  The user most likely wants to run 'Add Import' (which will
@@ -178,7 +183,8 @@ namespace Microsoft.CodeAnalysis.GenerateType
                         NameOrMemberAccessExpression.SpanStart,
                         cancellationToken
                     )
-                ) {
+                )
+                {
                     return false;
                 }
 
@@ -193,7 +199,8 @@ namespace Microsoft.CodeAnalysis.GenerateType
                     info.CandidateReason == CandidateReason.Inaccessible
                     || info.CandidateReason == CandidateReason.NotReferencable
                     || info.CandidateReason == CandidateReason.OverloadResolutionFailure
-                ) {
+                )
+                {
                     // We bound to something inaccessible, or overload resolution on a
                     // constructor call failed.  Don't want to offer GenerateType here.
                     return false;
@@ -254,7 +261,8 @@ namespace Microsoft.CodeAnalysis.GenerateType
                 TService service,
                 SemanticDocument document,
                 CancellationToken cancellationToken
-            ) {
+            )
+            {
                 // See if we can find a possible base type for the type being generated.
                 // NOTE(cyrusn): I currently limit this to when we have an object creation node.
                 // That's because that's when we would have an expression that could be converted to
@@ -337,7 +345,8 @@ namespace Microsoft.CodeAnalysis.GenerateType
                         BaseTypeOrInterfaceOpt == null
                         || BaseTypeOrInterfaceOpt.TypeKind == TypeKind.Interface
                     )
-                ) {
+                )
+                {
                     return true;
                 }
 
@@ -348,7 +357,8 @@ namespace Microsoft.CodeAnalysis.GenerateType
                 TService service,
                 SemanticDocument document,
                 CancellationToken cancellationToken
-            ) {
+            )
+            {
                 DetermineNamespaceOrTypeToGenerateInWorker(
                     service,
                     document.SemanticModel,
@@ -361,7 +371,8 @@ namespace Microsoft.CodeAnalysis.GenerateType
                     if (
                         TypeToGenerateInOpt.TypeKind != TypeKind.Class
                         && TypeToGenerateInOpt.TypeKind != TypeKind.Module
-                    ) {
+                    )
+                    {
                         TypeToGenerateInOpt = null;
                     }
                     else
@@ -376,7 +387,8 @@ namespace Microsoft.CodeAnalysis.GenerateType
                             symbol == null
                             || !symbol.IsKind(SymbolKind.NamedType)
                             || !symbol.Locations.Any(loc => loc.IsInSource)
-                        ) {
+                        )
+                        {
                             TypeToGenerateInOpt = null;
                             return;
                         }
@@ -399,7 +411,8 @@ namespace Microsoft.CodeAnalysis.GenerateType
                         if (
                             documentToBeGeneratedIn.Project != document.Project
                             || GeneratedTypesMustBePublic(documentToBeGeneratedIn.Project)
-                        ) {
+                        )
+                        {
                             IsPublicAccessibilityForTypeGeneration = true;
                         }
 
@@ -415,7 +428,8 @@ namespace Microsoft.CodeAnalysis.GenerateType
                             TypeToGenerateInOpt,
                             cancellationToken
                         )
-                    ) {
+                    )
+                    {
                         TypeToGenerateInOpt = null;
                     }
                 }
@@ -425,7 +439,8 @@ namespace Microsoft.CodeAnalysis.GenerateType
                 TService service,
                 SemanticModel semanticModel,
                 CancellationToken cancellationToken
-            ) {
+            )
+            {
                 // If we're on the right of a dot, see if we can figure out what's on the left.  If
                 // it doesn't bind to a type or a namespace, then we can't proceed.
                 if (SimpleName != NameOrMemberAccessExpression)
@@ -478,7 +493,8 @@ namespace Microsoft.CodeAnalysis.GenerateType
                 SemanticModel semanticModel,
                 TExpressionSyntax leftSide,
                 CancellationToken cancellationToken
-            ) {
+            )
+            {
                 var leftSideInfo = semanticModel.GetSymbolInfo(leftSide, cancellationToken);
 
                 if (leftSideInfo.Symbol != null)

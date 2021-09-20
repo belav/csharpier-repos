@@ -116,7 +116,8 @@ namespace System.Security.Cryptography.X509Certificates
             X509FindType findType,
             object findValue,
             bool validOnly
-        ) {
+        )
+        {
             if (findValue == null)
                 throw new ArgumentNullException(nameof(findValue));
 
@@ -151,7 +152,8 @@ namespace System.Security.Cryptography.X509Certificates
             byte[] rawData,
             string? password,
             X509KeyStorageFlags keyStorageFlags = 0
-        ) {
+        )
+        {
             if (rawData == null)
                 throw new ArgumentNullException(nameof(rawData));
 
@@ -174,7 +176,8 @@ namespace System.Security.Cryptography.X509Certificates
             ReadOnlySpan<byte> rawData,
             string? password,
             X509KeyStorageFlags keyStorageFlags = 0
-        ) {
+        )
+        {
             Import(rawData, password.AsSpan(), keyStorageFlags);
         }
 
@@ -194,7 +197,8 @@ namespace System.Security.Cryptography.X509Certificates
             ReadOnlySpan<byte> rawData,
             ReadOnlySpan<char> password,
             X509KeyStorageFlags keyStorageFlags = 0
-        ) {
+        )
+        {
             if (rawData == null)
                 throw new ArgumentNullException(nameof(rawData));
 
@@ -207,7 +211,8 @@ namespace System.Security.Cryptography.X509Certificates
                     safePasswordHandle,
                     keyStorageFlags
                 )
-            ) {
+            )
+            {
                 storePal.MoveTo(this);
             }
         }
@@ -221,7 +226,8 @@ namespace System.Security.Cryptography.X509Certificates
             string fileName,
             string? password,
             X509KeyStorageFlags keyStorageFlags = 0
-        ) {
+        )
+        {
             if (fileName == null)
                 throw new ArgumentNullException(nameof(fileName));
 
@@ -234,7 +240,8 @@ namespace System.Security.Cryptography.X509Certificates
                     safePasswordHandle,
                     keyStorageFlags
                 )
-            ) {
+            )
+            {
                 storePal.MoveTo(this);
             }
         }
@@ -255,7 +262,8 @@ namespace System.Security.Cryptography.X509Certificates
             string fileName,
             ReadOnlySpan<char> password,
             X509KeyStorageFlags keyStorageFlags = 0
-        ) {
+        )
+        {
             if (fileName == null)
                 throw new ArgumentNullException(nameof(fileName));
 
@@ -268,7 +276,8 @@ namespace System.Security.Cryptography.X509Certificates
                     safePasswordHandle,
                     keyStorageFlags
                 )
-            ) {
+            )
+            {
                 storePal.MoveTo(this);
             }
         }
@@ -395,7 +404,8 @@ namespace System.Security.Cryptography.X509Certificates
             {
                 foreach (
                     (ReadOnlySpan<char> contents, PemFields fields) in new PemEnumerator(certPem)
-                ) {
+                )
+                {
                     ReadOnlySpan<char> label = contents[fields.Label];
 
                     if (label.SequenceEqual(PemLabels.X509Certificate))
@@ -412,7 +422,8 @@ namespace System.Security.Cryptography.X509Certificates
                                 out int bytesWritten
                             )
                             || bytesWritten != fields.DecodedDataLength
-                        ) {
+                        )
+                        {
                             Debug.Fail(
                                 "The contents should have already been validated by the PEM reader."
                             );

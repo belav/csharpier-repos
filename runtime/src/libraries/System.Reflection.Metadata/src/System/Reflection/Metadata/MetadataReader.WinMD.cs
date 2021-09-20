@@ -47,7 +47,8 @@ namespace System.Reflection.Metadata
                 TypeDefTreatment treatment = TypeDefTreatment.RedirectedToClrType,
                 TypeRefSignatureTreatment signatureTreatment = TypeRefSignatureTreatment.None,
                 bool isIDisposable = false
-            ) {
+            )
+            {
                 this.WinRTNamespace = winRtNamespace;
                 this.ClrNamespace = clrNamespace;
                 this.ClrName = clrName;
@@ -76,7 +77,8 @@ namespace System.Reflection.Metadata
                     namespaceName,
                     StringHeap.GetVirtualString(s_projectionInfos![index].ClrNamespace)
                 )
-            ) {
+            )
+            {
                 return s_projectionInfos[index].Treatment;
             }
 
@@ -92,7 +94,8 @@ namespace System.Reflection.Metadata
         private int GetProjectionIndexForTypeReference(
             TypeReferenceHandle typeRef,
             out bool isIDisposable
-        ) {
+        )
+        {
             InitializeProjectedTypes();
 
             int index = StringHeap.BinarySearchRaw(
@@ -105,7 +108,8 @@ namespace System.Reflection.Metadata
                     TypeRefTable.GetNamespace(typeRef),
                     s_projectionInfos![index].WinRTNamespace
                 )
-            ) {
+            )
+            {
                 isIDisposable = s_projectionInfos[index].IsIDisposable;
                 return index;
             }
@@ -148,7 +152,8 @@ namespace System.Reflection.Metadata
 
         internal static TypeRefSignatureTreatment GetProjectedSignatureTreatment(
             int projectionIndex
-        ) {
+        )
+        {
             Debug.Assert(
                 s_projectionInfos != null
                     && projectionIndex >= 0
@@ -594,7 +599,8 @@ namespace System.Reflection.Metadata
                     if (
                         extends.Kind == HandleKind.TypeReference
                         && IsSystemAttribute((TypeReferenceHandle)extends)
-                    ) {
+                    )
+                    {
                         treatment = TypeDefTreatment.NormalAttribute;
                     }
                     else
@@ -605,7 +611,8 @@ namespace System.Reflection.Metadata
                 else if (
                     _metadataKind == MetadataKind.ManagedWindowsMetadata
                     && NeedsWinRTPrefix(flags, extends)
-                ) {
+                )
+                {
                     // WinMDExp emits two versions of RuntimeClasses and Enums:
                     //
                     //    public class Foo {}            // the WinRT reference class
@@ -638,7 +645,8 @@ namespace System.Reflection.Metadata
                         treatment == TypeDefTreatment.PrefixWinRTName
                         || treatment == TypeDefTreatment.NormalNonAttribute
                     )
-                ) {
+                )
+                {
                     if (
                         (flags & TypeAttributes.Interface) == 0
                         && HasAttribute(
@@ -646,7 +654,8 @@ namespace System.Reflection.Metadata
                             "Windows.UI.Xaml",
                             "TreatAsAbstractComposableClassAttribute"
                         )
-                    ) {
+                    )
+                    {
                         treatment |= TypeDefTreatment.MarkAbstractFlag;
                     }
                 }
@@ -654,7 +663,8 @@ namespace System.Reflection.Metadata
             else if (
                 _metadataKind == MetadataKind.ManagedWindowsMetadata
                 && IsClrImplementationType(handle)
-            ) {
+            )
+            {
                 // <CLR> implementation classes are not marked WindowsRuntime, but still need to be modified
                 // by the adapter.
                 treatment = TypeDefTreatment.UnmangleWinRTName;
@@ -674,7 +684,8 @@ namespace System.Reflection.Metadata
             if (
                 (attrs & (TypeAttributes.VisibilityMask | TypeAttributes.SpecialName))
                 != TypeAttributes.SpecialName
-            ) {
+            )
+            {
                 return false;
             }
 
@@ -732,7 +743,8 @@ namespace System.Reflection.Metadata
             if (
                 (flags & (TypeAttributes.VisibilityMask | TypeAttributes.Interface))
                 != TypeAttributes.Public
-            ) {
+            )
+            {
                 return false;
             }
 
@@ -750,7 +762,8 @@ namespace System.Reflection.Metadata
                     StringHeap.EqualsRaw(nameHandle, "MulticastDelegate")
                     || StringHeap.EqualsRaw(nameHandle, "ValueType")
                     || StringHeap.EqualsRaw(nameHandle, "Attribute")
-                ) {
+                )
+                {
                     return false;
                 }
             }
@@ -785,7 +798,8 @@ namespace System.Reflection.Metadata
                 else if (
                     _metadataKind == MetadataKind.ManagedWindowsMetadata
                     && (parentFlags & TypeAttributes.Public) == 0
-                ) {
+                )
+                {
                     treatment = MethodDefTreatment.Implementation;
                 }
                 else
@@ -827,7 +841,8 @@ namespace System.Reflection.Metadata
                         this,
                         parentTypeDef
                     )
-                ) {
+                )
+                {
                     MethodImplementation methodImpl = GetMethodImplementation(methodImplHandle);
                     if (methodImpl.MethodBody == methodDef)
                     {
@@ -842,7 +857,8 @@ namespace System.Reflection.Metadata
                                 (MemberReferenceHandle)declaration,
                                 out isIClosableClose
                             )
-                        ) {
+                        )
+                        {
                             seenRedirectedInterfaces = true;
                             if (isIClosableClose)
                             {
@@ -886,7 +902,8 @@ namespace System.Reflection.Metadata
 
         private MethodDefTreatment GetMethodTreatmentFromCustomAttributes(
             MethodDefinitionHandle methodDef
-        ) {
+        )
+        {
             MethodDefTreatment treatment = 0;
 
             foreach (var caHandle in GetCustomAttributes(methodDef))
@@ -934,7 +951,8 @@ namespace System.Reflection.Metadata
             if (
                 (flags & FieldAttributes.RTSpecialName) != 0
                 && StringHeap.EqualsRaw(FieldTable.GetName(handle), "value__")
-            ) {
+            )
+            {
                 TypeDefinitionHandle typeDef = GetDeclaringType(handle);
 
                 EntityHandle baseTypeHandle = TypeDefTable.GetExtends(typeDef);
@@ -945,7 +963,8 @@ namespace System.Reflection.Metadata
                     if (
                         StringHeap.EqualsRaw(TypeRefTable.GetName(typeRef), "Enum")
                         && StringHeap.EqualsRaw(TypeRefTable.GetNamespace(typeRef), "System")
-                    ) {
+                    )
+                    {
                         treatment = FieldDefTreatment.EnumValue;
                     }
                 }
@@ -996,7 +1015,8 @@ namespace System.Reflection.Metadata
         private bool ImplementsRedirectedInterface(
             MemberReferenceHandle memberRef,
             out bool isIDisposable
-        ) {
+        )
+        {
             isIDisposable = false;
 
             EntityHandle parent = MemberRefTable.GetClass(memberRef);
@@ -1015,7 +1035,8 @@ namespace System.Reflection.Metadata
                     sig.Length < 2
                     || sig.ReadByte() != (byte)CorElementType.ELEMENT_TYPE_GENERICINST
                     || sig.ReadByte() != (byte)CorElementType.ELEMENT_TYPE_CLASS
-                ) {
+                )
+                {
                     return false;
                 }
 
@@ -1058,7 +1079,8 @@ namespace System.Reflection.Metadata
 
         internal CustomAttributeValueTreatment CalculateCustomAttributeValueTreatment(
             CustomAttributeHandle handle
-        ) {
+        )
+        {
             Debug.Assert(_metadataKind != MetadataKind.Ecma335);
 
             var parent = CustomAttributeTable.GetParent(handle);
@@ -1078,7 +1100,8 @@ namespace System.Reflection.Metadata
                     TypeDefTable.GetNamespace(targetTypeDef),
                     "Windows.Foundation.Metadata"
                 )
-            ) {
+            )
+            {
                 if (StringHeap.EqualsRaw(TypeDefTable.GetName(targetTypeDef), "VersionAttribute"))
                 {
                     return CustomAttributeValueTreatment.AttributeUsageVersionAttribute;
@@ -1086,7 +1109,8 @@ namespace System.Reflection.Metadata
 
                 if (
                     StringHeap.EqualsRaw(TypeDefTable.GetName(targetTypeDef), "DeprecatedAttribute")
-                ) {
+                )
+                {
                     return CustomAttributeValueTreatment.AttributeUsageDeprecatedAttribute;
                 }
             }
@@ -1104,7 +1128,8 @@ namespace System.Reflection.Metadata
         private bool IsWindowsAttributeUsageAttribute(
             EntityHandle targetType,
             CustomAttributeHandle attributeHandle
-        ) {
+        )
+        {
             // Check for Windows.Foundation.Metadata.AttributeUsageAttribute.
             // WinMD rules:
             //   - The attribute is only applicable on TypeDefs.
@@ -1142,7 +1167,8 @@ namespace System.Reflection.Metadata
             EntityHandle token,
             string asciiNamespaceName,
             string asciiTypeName
-        ) {
+        )
+        {
             foreach (var caHandle in GetCustomAttributes(token))
             {
                 StringHandle namespaceName,
@@ -1151,7 +1177,8 @@ namespace System.Reflection.Metadata
                     GetAttributeTypeNameRaw(caHandle, out namespaceName, out typeName)
                     && StringHeap.EqualsRaw(typeName, asciiTypeName)
                     && StringHeap.EqualsRaw(namespaceName, asciiNamespaceName)
-                ) {
+                )
+                {
                     return true;
                 }
             }
@@ -1163,7 +1190,8 @@ namespace System.Reflection.Metadata
             CustomAttributeHandle caHandle,
             out StringHandle namespaceName,
             out StringHandle typeName
-        ) {
+        )
+        {
             namespaceName = typeName = default(StringHandle);
 
             EntityHandle typeDefOrRef = GetAttributeTypeRaw(caHandle);
@@ -1233,7 +1261,8 @@ namespace System.Reflection.Metadata
                 if (
                     handleType == HandleKind.TypeReference
                     || handleType == HandleKind.TypeDefinition
-                ) {
+                )
+                {
                     return typeDefOrRef;
                 }
             }

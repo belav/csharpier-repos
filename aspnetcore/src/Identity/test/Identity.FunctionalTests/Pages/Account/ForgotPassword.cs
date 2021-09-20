@@ -12,11 +12,8 @@ namespace Microsoft.AspNetCore.Identity.FunctionalTests.Account
     {
         private readonly IHtmlFormElement _forgotPasswordForm;
 
-        public ForgotPassword(
-            HttpClient client,
-            IHtmlDocument document,
-            DefaultUIContext context
-        ) : base(client, document, context)
+        public ForgotPassword(HttpClient client, IHtmlDocument document, DefaultUIContext context)
+            : base(client, document, context)
         {
             _forgotPasswordForm = HtmlAssert.HasForm(document);
         }

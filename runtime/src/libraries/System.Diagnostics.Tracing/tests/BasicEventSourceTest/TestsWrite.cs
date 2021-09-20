@@ -653,7 +653,8 @@ namespace BasicEventSourceTests
         /// </summary>
         private static void Test_Write_T_In_Manifest_Serialization_Impl(
             IEnumerable<Func<Listener>> listenerGenerators
-        ) {
+        )
+        {
             foreach (var listenerGenerator in listenerGenerators)
             {
                 var events = new List<Event>();

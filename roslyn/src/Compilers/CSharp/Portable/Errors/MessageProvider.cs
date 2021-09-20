@@ -79,7 +79,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             DiagnosticSeverity severity,
             bool isWarningAsError,
             CultureInfo culture
-        ) {
+        )
+        {
             return String.Format(
                 culture,
                 "{0} {1}",
@@ -102,7 +103,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             int code,
             Location location,
             params object[] args
-        ) {
+        )
+        {
             var info = new CSDiagnosticInfo(
                 (ErrorCode)code,
                 args,
@@ -134,7 +136,8 @@ namespace Microsoft.CodeAnalysis.CSharp
         public override ReportDiagnostic GetDiagnosticReport(
             DiagnosticInfo diagnosticInfo,
             CompilationOptions options
-        ) {
+        )
+        {
             bool hasPragmaSuppression;
             return CSharpDiagnosticFilter.GetDiagnosticReport(
                 diagnosticInfo.Severity,
@@ -222,7 +225,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             AssemblyIdentity identity,
             MetadataReference equivalentReference,
             AssemblyIdentity equivalentIdentity
-        ) {
+        )
+        {
             diagnostics.Add(
                 ErrorCode.ERR_DuplicateImport,
                 location,
@@ -238,7 +242,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             AssemblyIdentity identity,
             MetadataReference equivalentReference,
             AssemblyIdentity equivalentIdentity
-        ) {
+        )
+        {
             diagnostics.Add(
                 ErrorCode.ERR_DuplicateImportSimple,
                 location,
@@ -299,7 +304,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             SyntaxNode attributeSyntax,
             int parameterIndex,
             AttributeData attribute
-        ) {
+        )
+        {
             var node = (AttributeSyntax)attributeSyntax;
             CSharpSyntaxNode attributeArgumentSyntax = attribute.GetAttributeArgumentSyntax(
                 parameterIndex,
@@ -318,7 +324,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             int namedArgumentIndex,
             ITypeSymbol attributeClass,
             string parameterName
-        ) {
+        )
+        {
             var node = (AttributeSyntax)attributeSyntax;
             diagnostics.Add(
                 ErrorCode.ERR_InvalidNamedArgument,
@@ -331,7 +338,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             DiagnosticBag diagnostics,
             SyntaxNode attributeSyntax,
             int namedArgumentIndex
-        ) {
+        )
+        {
             var node = (AttributeSyntax)attributeSyntax;
             diagnostics.Add(
                 ErrorCode.ERR_ParameterNotValidForType,
@@ -345,7 +353,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             int parameterIndex,
             string unmanagedTypeName,
             AttributeData attribute
-        ) {
+        )
+        {
             var node = (AttributeSyntax)attributeSyntax;
             CSharpSyntaxNode attributeArgumentSyntax = attribute.GetAttributeArgumentSyntax(
                 parameterIndex,
@@ -364,7 +373,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             int parameterIndex,
             string unmanagedTypeName,
             AttributeData attribute
-        ) {
+        )
+        {
             var node = (AttributeSyntax)attributeSyntax;
             CSharpSyntaxNode attributeArgumentSyntax = attribute.GetAttributeArgumentSyntax(
                 parameterIndex,
@@ -381,7 +391,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             DiagnosticBag diagnostics,
             SyntaxNode attributeSyntax,
             string parameterName
-        ) {
+        )
+        {
             var node = (AttributeSyntax)attributeSyntax;
             diagnostics.Add(
                 ErrorCode.ERR_AttributeParameterRequired1,
@@ -395,7 +406,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             SyntaxNode attributeSyntax,
             string parameterName1,
             string parameterName2
-        ) {
+        )
+        {
             var node = (AttributeSyntax)attributeSyntax;
             diagnostics.Add(
                 ErrorCode.ERR_AttributeParameterRequired2,

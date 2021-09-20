@@ -24,7 +24,8 @@ namespace Microsoft.CodeAnalysis
             internal SectionNameMatcher(
                 Regex regex,
                 ImmutableArray<(int minValue, int maxValue)> numberRangePairs
-            ) {
+            )
+            {
                 Debug.Assert(regex.GetGroupNumbers().Length - 1 == numberRangePairs.Length);
                 Regex = regex;
                 _numberRangePairs = numberRangePairs;
@@ -51,7 +52,8 @@ namespace Microsoft.CodeAnalysis
                         !int.TryParse(match.Groups[i + 1].Value, out int matchedNum)
                         || matchedNum < minValue
                         || matchedNum > maxValue
-                    ) {
+                    )
+                    {
                         return false;
                     }
                 }
@@ -205,7 +207,8 @@ namespace Microsoft.CodeAnalysis
             StringBuilder sb,
             bool parsingChoice,
             ArrayBuilder<(int minValue, int maxValue)> numberRangePairs
-        ) {
+        )
+        {
             while (!lexer.IsDone)
             {
                 var tokenKind = lexer.Lex();
@@ -254,7 +257,8 @@ namespace Microsoft.CodeAnalysis
                             if (
                                 int.TryParse(numStart, out var intStart)
                                 && int.TryParse(numEnd, out var intEnd)
-                            ) {
+                            )
+                            {
                                 var pair =
                                     intStart < intEnd ? (intStart, intEnd) : (intEnd, intStart);
                                 numberRangePairs.Add(pair);
@@ -348,7 +352,8 @@ namespace Microsoft.CodeAnalysis
             ref SectionNameLexer lexer,
             StringBuilder sb,
             ArrayBuilder<(int, int)> numberRangePairs
-        ) {
+        )
+        {
             if (lexer.Lex() != TokenKind.OpenCurly)
             {
                 return false;
@@ -396,7 +401,8 @@ namespace Microsoft.CodeAnalysis
         /// </summary>
         private static (string numStart, string numEnd)? TryParseNumberRange(
             ref SectionNameLexer lexer
-        ) {
+        )
+        {
             var saved = lexer.Position;
             if (lexer.Lex() != TokenKind.OpenCurly)
             {
@@ -418,7 +424,8 @@ namespace Microsoft.CodeAnalysis
                 || c != '.'
                 || !lexer.TryEatCurrentCharacter(out c)
                 || c != '.'
-            ) {
+            )
+            {
                 lexer.Position = saved;
                 return null;
             }

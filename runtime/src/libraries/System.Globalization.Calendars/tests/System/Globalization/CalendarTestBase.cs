@@ -143,7 +143,8 @@ namespace System.Globalization.Tests
         public IEnumerable<(int year, int month, int day, int era, string exceptionParamName)> Year_Month_Day_Era_TestData(
             Calendar calendar,
             DataType type
-        ) {
+        )
+        {
             int month = 1;
             int day = 1;
 
@@ -736,7 +737,8 @@ namespace System.Globalization.Tests
                         || calendar is HebrewCalendar
                         || calendar is TaiwanLunisolarCalendar
                         || calendar is JapaneseLunisolarCalendar
-                    ) {
+                    )
+                    {
                         calendar.GetEra(dt);
                     }
                     else
@@ -816,7 +818,8 @@ namespace System.Globalization.Tests
                         || calendar is UmAlQuraCalendar
                         || calendar is PersianCalendar
                         || calendar is HebrewCalendar
-                    ) {
+                    )
+                    {
                         calendar.GetDayOfWeek(dt);
                     }
                     else

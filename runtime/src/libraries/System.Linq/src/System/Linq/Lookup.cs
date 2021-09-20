@@ -18,7 +18,8 @@ namespace System.Linq
             this IEnumerable<TSource> source,
             Func<TSource, TKey> keySelector,
             IEqualityComparer<TKey>? comparer
-        ) {
+        )
+        {
             if (source == null)
             {
                 ThrowHelper.ThrowArgumentNullException(ExceptionArgument.source);
@@ -43,7 +44,8 @@ namespace System.Linq
             Func<TSource, TKey> keySelector,
             Func<TSource, TElement> elementSelector,
             IEqualityComparer<TKey>? comparer
-        ) {
+        )
+        {
             if (source == null)
             {
                 ThrowHelper.ThrowArgumentNullException(ExceptionArgument.source);
@@ -86,7 +88,8 @@ namespace System.Linq
             Func<TSource, TKey> keySelector,
             Func<TSource, TElement> elementSelector,
             IEqualityComparer<TKey>? comparer
-        ) {
+        )
+        {
             Debug.Assert(source != null);
             Debug.Assert(keySelector != null);
             Debug.Assert(elementSelector != null);
@@ -104,7 +107,8 @@ namespace System.Linq
             IEnumerable<TElement> source,
             Func<TElement, TKey> keySelector,
             IEqualityComparer<TKey>? comparer
-        ) {
+        )
+        {
             Debug.Assert(source != null);
             Debug.Assert(keySelector != null);
 
@@ -121,7 +125,8 @@ namespace System.Linq
             IEnumerable<TElement> source,
             Func<TElement, TKey> keySelector,
             IEqualityComparer<TKey>? comparer
-        ) {
+        )
+        {
             Lookup<TKey, TElement> lookup = new Lookup<TKey, TElement>(comparer);
             foreach (TElement item in source)
             {
@@ -171,7 +176,8 @@ namespace System.Linq
 
         internal List<TResult> ToList<TResult>(
             Func<TKey, IEnumerable<TElement>, TResult> resultSelector
-        ) {
+        )
+        {
             List<TResult> list = new List<TResult>(_count);
             Grouping<TKey, TElement>? g = _lastGrouping;
             if (g != null)
@@ -191,7 +197,8 @@ namespace System.Linq
 
         public IEnumerable<TResult> ApplyResultSelector<TResult>(
             Func<TKey, IEnumerable<TElement>, TResult> resultSelector
-        ) {
+        )
+        {
             Grouping<TKey, TElement>? g = _lastGrouping;
             if (g != null)
             {
@@ -221,7 +228,8 @@ namespace System.Linq
                 Grouping<TKey, TElement>? g = _groupings[hashCode % _groupings.Length];
                 g != null;
                 g = g._hashNext
-            ) {
+            )
+            {
                 if (g._hashCode == hashCode && _comparer.Equals(g._key, key))
                 {
                     return g;

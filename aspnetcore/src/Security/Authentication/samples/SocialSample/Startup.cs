@@ -167,7 +167,8 @@ namespace SocialSample
                                     var user = JsonDocument.Parse(
                                         await response.Content.ReadAsStringAsync()
                                     )
-                                ) {
+                                )
+                                {
                                     context.RunClaimActions(user.RootElement);
                                 }
                             }
@@ -249,7 +250,8 @@ namespace SocialSample
                                     var user = JsonDocument.Parse(
                                         await response.Content.ReadAsStringAsync()
                                     )
-                                ) {
+                                )
+                                {
                                     context.RunClaimActions(user.RootElement);
                                 }
                             }
@@ -363,7 +365,8 @@ namespace SocialSample
                                 !userResult.Succeeded
                                 || user == null
                                 || !user.Identities.Any(identity => identity.IsAuthenticated)
-                            ) {
+                            )
+                            {
                                 // This is what [Authorize] calls
                                 // The cookie middleware will handle this and redirect to /login
                                 await context.ChallengeAsync();
@@ -382,7 +385,8 @@ namespace SocialSample
                                     currentAuthType
                                 )
                                 || string.Equals("IdentityServer", currentAuthType)
-                            ) {
+                            )
+                            {
                                 var refreshToken = authProperties.GetTokenValue("refresh_token");
 
                                 if (string.IsNullOrEmpty(refreshToken))
@@ -416,7 +420,8 @@ namespace SocialSample
                                     var payload = JsonDocument.Parse(
                                         await refreshResponse.Content.ReadAsStringAsync()
                                     )
-                                ) {
+                                )
+                                {
                                     // Persist the new acess token
                                     authProperties.UpdateTokenValue(
                                         "access_token",
@@ -435,7 +440,8 @@ namespace SocialSample
                                             "expires_in",
                                             out var property
                                         ) && property.TryGetInt32(out var seconds)
-                                    ) {
+                                    )
+                                    {
                                         var expiresAt =
                                             DateTimeOffset.UtcNow + TimeSpan.FromSeconds(seconds);
                                         authProperties.UpdateTokenValue(
@@ -459,7 +465,8 @@ namespace SocialSample
                                     FacebookDefaults.AuthenticationScheme,
                                     currentAuthType
                                 )
-                            ) {
+                            )
+                            {
                                 var options = await GetOAuthOptionsAsync(context, currentAuthType);
 
                                 var accessToken = authProperties.GetTokenValue("access_token");
@@ -486,7 +493,8 @@ namespace SocialSample
                                             "expires_in",
                                             out var property
                                         ) && property.TryGetInt32(out var seconds)
-                                    ) {
+                                    )
+                                    {
                                         var expiresAt =
                                             DateTimeOffset.UtcNow + TimeSpan.FromSeconds(seconds);
                                         authProperties.UpdateTokenValue(
@@ -663,7 +671,8 @@ namespace SocialSample
             HttpResponse response,
             JsonDocument payload,
             AuthenticationProperties authProperties
-        ) {
+        )
+        {
             response.ContentType = "text/html";
             await response.WriteAsync("<html><body>");
             await response.WriteAsync("Refreshed.<br>");

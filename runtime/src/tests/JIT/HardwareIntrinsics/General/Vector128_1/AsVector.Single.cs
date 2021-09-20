@@ -100,7 +100,8 @@ namespace JIT.HardwareIntrinsics.General
             Vector<Single> result,
             Vector128<Single> value,
             [CallerMemberName] string method = ""
-        ) {
+        )
+        {
             Single[] resultElements = new Single[NumericsElementCount];
             Unsafe.WriteUnaligned(ref Unsafe.As<Single, byte>(ref resultElements[0]), result);
 
@@ -114,7 +115,8 @@ namespace JIT.HardwareIntrinsics.General
             Vector128<Single> result,
             Vector<Single> value,
             [CallerMemberName] string method = ""
-        ) {
+        )
+        {
             Single[] resultElements = new Single[VectorElementCount];
             Unsafe.WriteUnaligned(ref Unsafe.As<Single, byte>(ref resultElements[0]), result);
 
@@ -128,7 +130,8 @@ namespace JIT.HardwareIntrinsics.General
             Single[] resultElements,
             Single[] valueElements,
             [CallerMemberName] string method = ""
-        ) {
+        )
+        {
             bool succeeded = true;
 
             if (resultElements.Length <= valueElements.Length)

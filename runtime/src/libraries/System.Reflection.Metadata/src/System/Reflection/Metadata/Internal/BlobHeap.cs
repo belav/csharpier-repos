@@ -412,7 +412,8 @@ namespace System.Reflection.Metadata.Ecma335
             DocumentNameBlobHandle handle,
             string other,
             bool ignoreCase
-        ) {
+        )
+        {
             var blobReader = GetBlobReader(handle);
 
             // Spec: separator is an ASCII encoded character in range [0x01, 0x7F], or byte 0 to represent an empty separator.
@@ -432,7 +433,8 @@ namespace System.Reflection.Metadata.Ecma335
                     if (
                         otherIndex == other.Length
                         || !StringUtils.IsEqualAscii(other[otherIndex], separator, ignoreCaseMask)
-                    ) {
+                    )
+                    {
                         return false;
                     }
 
@@ -464,7 +466,8 @@ namespace System.Reflection.Metadata.Ecma335
                 if (
                     result == MemoryBlock.FastComparisonResult.Unequal
                     || firstDifferenceIndex - otherIndex != partBlock.Length
-                ) {
+                )
+                {
                     return false;
                 }
 

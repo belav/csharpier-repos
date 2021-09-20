@@ -453,7 +453,8 @@ namespace System.Web.Http.Tracing.Tracers
                 Controllers.HttpActionContext actionContext,
                 Threading.CancellationToken cancellationToken,
                 Func<Threading.Tasks.Task<Net.Http.HttpResponseMessage>> continuation
-            ) {
+            )
+            {
                 throw new NotImplementedException();
             }
 
@@ -465,7 +466,8 @@ namespace System.Web.Http.Tracing.Tracers
             Task IExceptionFilter.ExecuteExceptionFilterAsync(
                 HttpActionExecutedContext actionExecutedContext,
                 CancellationToken cancellationToken
-            ) {
+            )
+            {
                 throw new NotImplementedException();
             }
 
@@ -473,21 +475,24 @@ namespace System.Web.Http.Tracing.Tracers
                 HttpActionContext actionContext,
                 CancellationToken cancellationToken,
                 Func<Task<Net.Http.HttpResponseMessage>> continuation
-            ) {
+            )
+            {
                 throw new NotImplementedException();
             }
 
             Task IAuthenticationFilter.AuthenticateAsync(
                 HttpAuthenticationContext context,
                 CancellationToken cancellationToken
-            ) {
+            )
+            {
                 throw new NotImplementedException();
             }
 
             Task IAuthenticationFilter.ChallengeAsync(
                 HttpAuthenticationChallengeContext context,
                 CancellationToken cancellationToken
-            ) {
+            )
+            {
                 throw new NotImplementedException();
             }
 

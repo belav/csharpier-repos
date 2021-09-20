@@ -18,7 +18,8 @@ namespace BenchmarksGame
         public TestHarnessHelpers(
             bool bigInput,
             [System.Runtime.CompilerServices.CallerFilePath] string csFileName = ""
-        ) {
+        )
+        {
             if (bigInput)
             {
                 ExpectedLength = 136381;

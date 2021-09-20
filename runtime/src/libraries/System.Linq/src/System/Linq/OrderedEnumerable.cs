@@ -152,7 +152,8 @@ namespace System.Linq
 
         internal override EnumerableSorter<TElement> GetEnumerableSorter(
             EnumerableSorter<TElement>? next
-        ) {
+        )
+        {
             // Special case the common use of string with default comparer. Comparer<string>.Default checks the
             // thread's Culture on each call which is an overhead which is not required, because we are about to
             // do a sort which remains on the current thread (and EnumerableSorter is not used afterwards).
@@ -178,7 +179,8 @@ namespace System.Linq
 
         internal override CachingComparer<TElement> GetComparer(
             CachingComparer<TElement>? childComparer
-        ) {
+        )
+        {
             CachingComparer<TElement> cmp =
                 childComparer == null
                     ? new CachingComparer<TElement, TKey>(_keySelector, _comparer, _descending)
@@ -213,7 +215,8 @@ namespace System.Linq
             Func<TElement, TKey> keySelector,
             IComparer<TKey> comparer,
             bool descending
-        ) {
+        )
+        {
             _keySelector = keySelector;
             _comparer = comparer;
             _descending = descending;
@@ -352,7 +355,8 @@ namespace System.Linq
             IComparer<TKey> comparer,
             bool descending,
             EnumerableSorter<TElement>? next
-        ) {
+        )
+        {
             _keySelector = keySelector;
             _comparer = comparer;
             _descending = descending;
@@ -405,7 +409,8 @@ namespace System.Linq
             int right,
             int minIdx,
             int maxIdx
-        ) {
+        )
+        {
             do
             {
                 int i = left;

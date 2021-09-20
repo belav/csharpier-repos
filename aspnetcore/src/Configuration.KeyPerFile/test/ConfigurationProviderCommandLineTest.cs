@@ -13,7 +13,8 @@ namespace Microsoft.Extensions.Configuration.KeyPerFile.Test
     {
         protected override (IConfigurationProvider Provider, Action Initializer) LoadThroughProvider(
             TestSection testConfig
-        ) {
+        )
+        {
             var testFiles = new List<IFileInfo>();
             SectionToTestFiles(testFiles, "", testConfig);
 
@@ -32,7 +33,8 @@ namespace Microsoft.Extensions.Configuration.KeyPerFile.Test
             List<IFileInfo> testFiles,
             string sectionName,
             TestSection section
-        ) {
+        )
+        {
             foreach (var tuple in section.Values.SelectMany(e => e.Value.Expand(e.Key)))
             {
                 testFiles.Add(new TestFile(sectionName + tuple.Key, tuple.Value));

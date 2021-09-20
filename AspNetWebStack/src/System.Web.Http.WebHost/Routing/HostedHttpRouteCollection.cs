@@ -110,7 +110,8 @@ namespace System.Web.Http.WebHost.Routing
             if (
                 routeData != null
                 && !(routeData.RouteHandler is System.Web.Routing.StopRoutingHandler)
-            ) {
+            )
+            {
                 return new HostedHttpRouteData(routeData);
             }
 
@@ -122,7 +123,8 @@ namespace System.Web.Http.WebHost.Routing
             HttpRequestMessage request,
             string name,
             IDictionary<string, object> values
-        ) {
+        )
+        {
             if (request == null)
             {
                 throw Error.ArgumentNull("request");
@@ -187,7 +189,8 @@ namespace System.Web.Http.WebHost.Routing
             IDictionary<string, object> constraints,
             IDictionary<string, object> dataTokens,
             HttpMessageHandler handler
-        ) {
+        )
+        {
             if (constraints != null)
             {
                 foreach (var constraint in constraints)
@@ -204,7 +207,8 @@ namespace System.Web.Http.WebHost.Routing
             string routeTemplate,
             string name,
             object constraint
-        ) {
+        )
+        {
             // In WebHost the constraint might be IHttpRouteConstraint or IRouteConstraint (System.Web) or a string
             HttpWebRoute.ValidateConstraint(routeTemplate, name, constraint);
         }

@@ -76,7 +76,8 @@ namespace System.Configuration
         private ProtectedConfigurationProvider CreateAndInitializeProviderWithAssert(
             Type t,
             ProviderSettings pn
-        ) {
+        )
+        {
             ProtectedConfigurationProvider provider =
                 (ProtectedConfigurationProvider)TypeUtil.CreateInstance(t);
             NameValueCollection pars = pn.Parameters;
@@ -101,7 +102,8 @@ namespace System.Configuration
         internal static string DecryptSection(
             string encryptedXml,
             ProtectedConfigurationProvider provider
-        ) {
+        )
+        {
             XmlDocument doc = new XmlDocument();
             doc.LoadXml(encryptedXml);
             XmlNode resultNode = provider.Decrypt(doc.DocumentElement);
@@ -112,7 +114,8 @@ namespace System.Configuration
             string encryptedXml,
             string sectionName,
             string providerName
-        ) {
+        )
+        {
             return string.Format(
                 CultureInfo.InvariantCulture,
                 EncryptedSectionTemplate,
@@ -126,7 +129,8 @@ namespace System.Configuration
         internal static string EncryptSection(
             string clearXml,
             ProtectedConfigurationProvider provider
-        ) {
+        )
+        {
             XmlDocument xmlDocument = new XmlDocument { PreserveWhitespace = true };
             xmlDocument.LoadXml(clearXml);
             XmlNode encNode = provider.Encrypt(xmlDocument.DocumentElement);

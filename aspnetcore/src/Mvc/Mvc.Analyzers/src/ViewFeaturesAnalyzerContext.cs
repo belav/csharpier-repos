@@ -38,7 +38,8 @@ namespace Microsoft.AspNetCore.Mvc.Analyzers
                     method.ContainingType,
                     HtmlHelperPartialExtensionsType
                 )
-            ) {
+            )
+            {
                 return false;
             }
 

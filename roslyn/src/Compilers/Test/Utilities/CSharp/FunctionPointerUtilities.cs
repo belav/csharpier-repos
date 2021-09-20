@@ -145,7 +145,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
             string? expectedSymbol = null,
             CandidateReason expectedCandidateReason = CandidateReason.None,
             string[]? expectedSymbolCandidates = null
-        ) {
+        )
+        {
             AssertEx.Equal(expectedSyntax, syntax.ToString());
             var semanticInfo = model.GetSemanticInfoSummary(syntax);
             ITypeSymbol? exprType;
@@ -257,7 +258,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
                 CandidateReason expectedReason,
                 string[]? expectedSymbolCandidates,
                 CompilationUtils.SemanticInfoSummary semanticInfo
-            ) {
+            )
+            {
                 if (expectedSymbol is object)
                 {
                     Assert.Empty(semanticInfo.CandidateSymbols);
@@ -290,7 +292,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
                 SemanticModel model,
                 IFunctionPointerTypeSymbol ptrType,
                 SeparatedSyntaxList<FunctionPointerParameterSyntax> paramSyntaxes
-            ) {
+            )
+            {
                 // https://github.com/dotnet/roslyn/issues/43321 Nullability in type syntaxes that don't have an origin bound node
                 // can differ.
                 var signature = ptrType.Signature;
@@ -309,7 +312,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
                 SemanticModel model,
                 TypeSyntax typeSyntax,
                 ITypeSymbol signatureType
-            ) {
+            )
+            {
                 var semanticInfo = model.GetSemanticInfoSummary(typeSyntax);
                 Assert.Equal<ISymbol>(
                     signatureType,
@@ -331,7 +335,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
                     {
                         ParameterList: { Parameters: var paramSyntaxes }
                     }
-                ) {
+                )
+                {
                     var paramPtrType = (IFunctionPointerTypeSymbol)semanticInfo.Type!;
                     CommonVerifyFunctionPointer(paramPtrType.GetSymbol());
                     verifyNestedFunctionPointerSyntaxSemanticInfo(
@@ -348,7 +353,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
             CallingConvention expectedConvention,
             (RefKind RefKind, Action<TypeSymbol> TypeVerifier) returnVerifier,
             params (RefKind RefKind, Action<TypeSymbol> TypeVerifier)[] argumentVerifiers
-        ) {
+        )
+        {
             FunctionPointerTypeSymbol funcPtr = (FunctionPointerTypeSymbol)type;
 
             FunctionPointerUtilities.CommonVerifyFunctionPointer(funcPtr);

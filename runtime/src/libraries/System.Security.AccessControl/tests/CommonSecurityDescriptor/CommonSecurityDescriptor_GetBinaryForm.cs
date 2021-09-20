@@ -214,7 +214,8 @@ namespace System.Security.AccessControl.Tests
             string sddl,
             string verifierSddl,
             int offset
-        ) {
+        )
+        {
             CommonSecurityDescriptor commonSecurityDescriptor = null;
             CommonSecurityDescriptor verifierCommonSecurityDescriptor = null;
             string resultSddl = null;

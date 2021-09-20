@@ -31,7 +31,8 @@ namespace System.CommandLine
             this Command command,
             string[] args,
             IConsole? console = null
-        ) {
+        )
+        {
             return await GetInvocationPipeline(command, args).InvokeAsync(console);
         }
 

@@ -347,7 +347,8 @@ namespace System.Linq.Expressions.Tests
         [Theory, ClassData(typeof(CompilationTypes))]
         public static void CheckTernaryArrayNullableStructWithStringAndFieldArrayTest(
             bool useInterpreter
-        ) {
+        )
+        {
             bool[] array1 = new bool[] { false, true };
             Scs?[][] array2 = new Scs?[][]
             {
@@ -404,7 +405,8 @@ namespace System.Linq.Expressions.Tests
         [Theory, ClassData(typeof(CompilationTypes))]
         public static void CheckTernaryArrayNullableStructWithTwoValuesArrayTest(
             bool useInterpreter
-        ) {
+        )
+        {
             bool[] array1 = new bool[] { false, true };
             Sp?[][] array2 = new Sp?[][]
             {
@@ -545,21 +547,24 @@ namespace System.Linq.Expressions.Tests
         [Theory, ClassData(typeof(CompilationTypes))]
         public static void CheckTernaryArrayNullableGenericWithStructRestrictionArrayWithEnumTest(
             bool useInterpreter
-        ) {
+        )
+        {
             CheckTernaryArrayNullableGenericWithStructRestrictionArrayHelper<E>(useInterpreter);
         }
 
         [Theory, ClassData(typeof(CompilationTypes))]
         public static void CheckTernaryArrayNullableGenericWithStructRestrictionArrayWithStructTest(
             bool useInterpreter
-        ) {
+        )
+        {
             CheckTernaryArrayNullableGenericWithStructRestrictionArrayHelper<S>(useInterpreter);
         }
 
         [Theory, ClassData(typeof(CompilationTypes))]
         public static void CheckTernaryArrayNullableGenericWithStructRestrictionArrayWithStructWithStringAndFieldTest(
             bool useInterpreter
-        ) {
+        )
+        {
             CheckTernaryArrayNullableGenericWithStructRestrictionArrayHelper<Scs>(useInterpreter);
         }
 
@@ -605,7 +610,8 @@ namespace System.Linq.Expressions.Tests
             bool?[] a,
             bool?[] b,
             bool useInterpreter
-        ) {
+        )
+        {
             Expression<Func<bool?[]>> e = Expression.Lambda<Func<bool?[]>>(
                 Expression.Condition(
                     Expression.Constant(condition, typeof(bool)),
@@ -655,7 +661,8 @@ namespace System.Linq.Expressions.Tests
             byte?[] a,
             byte?[] b,
             bool useInterpreter
-        ) {
+        )
+        {
             Expression<Func<byte?[]>> e = Expression.Lambda<Func<byte?[]>>(
                 Expression.Condition(
                     Expression.Constant(condition, typeof(bool)),
@@ -705,7 +712,8 @@ namespace System.Linq.Expressions.Tests
             char?[] a,
             char?[] b,
             bool useInterpreter
-        ) {
+        )
+        {
             Expression<Func<char?[]>> e = Expression.Lambda<Func<char?[]>>(
                 Expression.Condition(
                     Expression.Constant(condition, typeof(bool)),
@@ -755,7 +763,8 @@ namespace System.Linq.Expressions.Tests
             decimal?[] a,
             decimal?[] b,
             bool useInterpreter
-        ) {
+        )
+        {
             Expression<Func<decimal?[]>> e = Expression.Lambda<Func<decimal?[]>>(
                 Expression.Condition(
                     Expression.Constant(condition, typeof(bool)),
@@ -805,7 +814,8 @@ namespace System.Linq.Expressions.Tests
             double?[] a,
             double?[] b,
             bool useInterpreter
-        ) {
+        )
+        {
             Expression<Func<double?[]>> e = Expression.Lambda<Func<double?[]>>(
                 Expression.Condition(
                     Expression.Constant(condition, typeof(bool)),
@@ -855,7 +865,8 @@ namespace System.Linq.Expressions.Tests
             float?[] a,
             float?[] b,
             bool useInterpreter
-        ) {
+        )
+        {
             Expression<Func<float?[]>> e = Expression.Lambda<Func<float?[]>>(
                 Expression.Condition(
                     Expression.Constant(condition, typeof(bool)),
@@ -905,7 +916,8 @@ namespace System.Linq.Expressions.Tests
             int?[] a,
             int?[] b,
             bool useInterpreter
-        ) {
+        )
+        {
             Expression<Func<int?[]>> e = Expression.Lambda<Func<int?[]>>(
                 Expression.Condition(
                     Expression.Constant(condition, typeof(bool)),
@@ -955,7 +967,8 @@ namespace System.Linq.Expressions.Tests
             long?[] a,
             long?[] b,
             bool useInterpreter
-        ) {
+        )
+        {
             Expression<Func<long?[]>> e = Expression.Lambda<Func<long?[]>>(
                 Expression.Condition(
                     Expression.Constant(condition, typeof(bool)),
@@ -1005,7 +1018,8 @@ namespace System.Linq.Expressions.Tests
             S?[] a,
             S?[] b,
             bool useInterpreter
-        ) {
+        )
+        {
             Expression<Func<S?[]>> e = Expression.Lambda<Func<S?[]>>(
                 Expression.Condition(
                     Expression.Constant(condition, typeof(bool)),
@@ -1055,7 +1069,8 @@ namespace System.Linq.Expressions.Tests
             sbyte?[] a,
             sbyte?[] b,
             bool useInterpreter
-        ) {
+        )
+        {
             Expression<Func<sbyte?[]>> e = Expression.Lambda<Func<sbyte?[]>>(
                 Expression.Condition(
                     Expression.Constant(condition, typeof(bool)),
@@ -1105,7 +1120,8 @@ namespace System.Linq.Expressions.Tests
             Sc?[] a,
             Sc?[] b,
             bool useInterpreter
-        ) {
+        )
+        {
             Expression<Func<Sc?[]>> e = Expression.Lambda<Func<Sc?[]>>(
                 Expression.Condition(
                     Expression.Constant(condition, typeof(bool)),
@@ -1155,7 +1171,8 @@ namespace System.Linq.Expressions.Tests
             Scs?[] a,
             Scs?[] b,
             bool useInterpreter
-        ) {
+        )
+        {
             Expression<Func<Scs?[]>> e = Expression.Lambda<Func<Scs?[]>>(
                 Expression.Condition(
                     Expression.Constant(condition, typeof(bool)),
@@ -1205,7 +1222,8 @@ namespace System.Linq.Expressions.Tests
             short?[] a,
             short?[] b,
             bool useInterpreter
-        ) {
+        )
+        {
             Expression<Func<short?[]>> e = Expression.Lambda<Func<short?[]>>(
                 Expression.Condition(
                     Expression.Constant(condition, typeof(bool)),
@@ -1255,7 +1273,8 @@ namespace System.Linq.Expressions.Tests
             Sp?[] a,
             Sp?[] b,
             bool useInterpreter
-        ) {
+        )
+        {
             Expression<Func<Sp?[]>> e = Expression.Lambda<Func<Sp?[]>>(
                 Expression.Condition(
                     Expression.Constant(condition, typeof(bool)),
@@ -1305,7 +1324,8 @@ namespace System.Linq.Expressions.Tests
             Ss?[] a,
             Ss?[] b,
             bool useInterpreter
-        ) {
+        )
+        {
             Expression<Func<Ss?[]>> e = Expression.Lambda<Func<Ss?[]>>(
                 Expression.Condition(
                     Expression.Constant(condition, typeof(bool)),
@@ -1355,7 +1375,8 @@ namespace System.Linq.Expressions.Tests
             uint?[] a,
             uint?[] b,
             bool useInterpreter
-        ) {
+        )
+        {
             Expression<Func<uint?[]>> e = Expression.Lambda<Func<uint?[]>>(
                 Expression.Condition(
                     Expression.Constant(condition, typeof(bool)),
@@ -1405,7 +1426,8 @@ namespace System.Linq.Expressions.Tests
             ulong?[] a,
             ulong?[] b,
             bool useInterpreter
-        ) {
+        )
+        {
             Expression<Func<ulong?[]>> e = Expression.Lambda<Func<ulong?[]>>(
                 Expression.Condition(
                     Expression.Constant(condition, typeof(bool)),
@@ -1455,7 +1477,8 @@ namespace System.Linq.Expressions.Tests
             ushort?[] a,
             ushort?[] b,
             bool useInterpreter
-        ) {
+        )
+        {
             Expression<Func<ushort?[]>> e = Expression.Lambda<Func<ushort?[]>>(
                 Expression.Condition(
                     Expression.Constant(condition, typeof(bool)),

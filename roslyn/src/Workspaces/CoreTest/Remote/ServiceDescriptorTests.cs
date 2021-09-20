@@ -48,7 +48,8 @@ namespace Microsoft.CodeAnalysis.Remote.UnitTests
                     serviceType,
                     (descriptor, _, _)
                 ) in ServiceDescriptors.Instance.GetTestAccessor().Descriptors
-            ) {
+            )
+            {
                 interfaces.Add(serviceType);
                 if (descriptor.ClientInterface != null)
                 {
@@ -83,7 +84,8 @@ namespace Microsoft.CodeAnalysis.Remote.UnitTests
                             && type.Name.StartsWith("ValueTuple", StringComparison.Ordinal)
                         || type.Namespace == "System"
                             && type.Name.StartsWith("Tuple", StringComparison.Ordinal)
-                    ) {
+                    )
+                    {
                         foreach (var genericArgument in type.GetGenericArguments())
                         {
                             AddTypeRecursive(genericArgument, declaringMember);
@@ -95,7 +97,8 @@ namespace Microsoft.CodeAnalysis.Remote.UnitTests
                     var field in type.GetFields(
                         BindingFlags.NonPublic | BindingFlags.Public | BindingFlags.Instance
                     )
-                ) {
+                )
+                {
                     if (field.GetCustomAttributes<DataMemberAttribute>().Any())
                     {
                         AddTypeRecursive(field.FieldType, type);
@@ -106,7 +109,8 @@ namespace Microsoft.CodeAnalysis.Remote.UnitTests
                     var property in type.GetProperties(
                         BindingFlags.NonPublic | BindingFlags.Public | BindingFlags.Instance
                     )
-                ) {
+                )
+                {
                     if (property.GetCustomAttributes<DataMemberAttribute>().Any())
                     {
                         AddTypeRecursive(property.PropertyType, type);
@@ -121,7 +125,8 @@ namespace Microsoft.CodeAnalysis.Remote.UnitTests
                     if (
                         method.ReturnType.IsGenericType
                         && method.ReturnType.GetGenericTypeDefinition() == typeof(ValueTask<>)
-                    ) {
+                    )
+                    {
                         AddTypeRecursive(method.ReturnType.GetGenericArguments().Single(), method);
                     }
                     else
@@ -138,7 +143,8 @@ namespace Microsoft.CodeAnalysis.Remote.UnitTests
                             && type != typeof(IDuplexPipe)
                             && type != typeof(PipeReader)
                             && type != typeof(PipeWriter)
-                        ) {
+                        )
+                        {
                             AddTypeRecursive(type, method);
                         }
                     }
@@ -178,7 +184,8 @@ namespace Microsoft.CodeAnalysis.Remote.UnitTests
                             && type.GetGenericTypeDefinition() == typeof(Nullable<>)
                             && type.GetGenericArguments().Single().IsEnum
                             && type.GetGenericArguments().Single().IsNotPublic
-                    ) {
+                    )
+                    {
                         errors.Add(
                             $"{type} referenced by {declaringMember} is an internal enum and needs a custom formatter"
                         );
@@ -202,7 +209,8 @@ namespace Microsoft.CodeAnalysis.Remote.UnitTests
             ServiceDescriptor descriptor32,
             ServiceDescriptor descriptor64,
             ServiceDescriptor descriptor64ServerGC
-        ) {
+        )
+        {
             Assert.NotNull(serviceInterface);
 
             var expectedName = descriptor32.GetFeatureDisplayName();

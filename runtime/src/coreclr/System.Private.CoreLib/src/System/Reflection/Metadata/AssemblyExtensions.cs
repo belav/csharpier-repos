@@ -28,7 +28,8 @@ namespace System.Reflection.Metadata
             this Assembly assembly,
             out byte* blob,
             out int length
-        ) {
+        )
+        {
             if (assembly == null)
             {
                 throw new ArgumentNullException(nameof(assembly));
@@ -79,7 +80,8 @@ namespace System.Reflection.Metadata
             ReadOnlySpan<byte> metadataDelta,
             ReadOnlySpan<byte> ilDelta,
             ReadOnlySpan<byte> pdbDelta
-        ) {
+        )
+        {
             if (assembly == null)
             {
                 throw new ArgumentNullException(nameof(assembly));
@@ -97,7 +99,8 @@ namespace System.Reflection.Metadata
                     byte* metadataDeltaPtr = metadataDelta,
                         ilDeltaPtr = ilDelta,
                         pdbDeltaPtr = pdbDelta
-                ) {
+                )
+                {
                     ApplyUpdate(
                         new QCallAssembly(ref rtAsm),
                         metadataDeltaPtr,

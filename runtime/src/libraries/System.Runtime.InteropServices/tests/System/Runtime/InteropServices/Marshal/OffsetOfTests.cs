@@ -111,7 +111,8 @@ namespace System.Runtime.InteropServices.Tests
             if (
                 OperatingSystem.IsWindows()
                 || (RuntimeInformation.ProcessArchitecture != Architecture.X86)
-            ) {
+            )
+            {
                 Assert.Equal(80, Marshal.SizeOf(t));
             }
             else
@@ -129,7 +130,8 @@ namespace System.Runtime.InteropServices.Tests
             if (
                 OperatingSystem.IsWindows()
                 || (RuntimeInformation.ProcessArchitecture != Architecture.X86)
-            ) {
+            )
+            {
                 Assert.Equal(
                     new IntPtr(24),
                     Marshal.OffsetOf(t, nameof(FieldAlignmentTest.m_double1))
@@ -220,7 +222,8 @@ namespace System.Runtime.InteropServices.Tests
                     RuntimeInformation.ProcessArchitecture != Architecture.X86
                     && RuntimeInformation.ProcessArchitecture != Architecture.Wasm
                 )
-            ) {
+            )
+            {
                 Assert.Equal(96, Marshal.SizeOf(t));
             }
             else
@@ -237,7 +240,8 @@ namespace System.Runtime.InteropServices.Tests
                     RuntimeInformation.ProcessArchitecture != Architecture.X86
                     && RuntimeInformation.ProcessArchitecture != Architecture.Wasm
                 )
-            ) {
+            )
+            {
                 Assert.Equal(
                     new IntPtr(88),
                     Marshal.OffsetOf(t, nameof(FieldAlignmentTest_Decimal.s))

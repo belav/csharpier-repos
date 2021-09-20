@@ -87,7 +87,8 @@ namespace System.Reflection.Emit.Tests
             Type parameterType,
             object valueToWrite,
             object expectedValueWhenRead
-        ) {
+        )
+        {
             SetConstant(parameterType, valueToWrite, expectedValueWhenRead);
         }
 
@@ -100,7 +101,8 @@ namespace System.Reflection.Emit.Tests
             Type parameterType,
             object valueToWrite,
             object expectedValueWhenRead
-        ) {
+        )
+        {
             TypeBuilder type = Helpers.DynamicType(
                 TypeAttributes.Interface | TypeAttributes.Abstract
             );
@@ -127,7 +129,8 @@ namespace System.Reflection.Emit.Tests
             TypeBuilder type,
             string methodName,
             int parameterIndex
-        ) {
+        )
+        {
             Type createdType = type.CreateTypeInfo().AsType();
             MethodInfo createdMethod = createdType.GetMethod(methodName);
             if (parameterIndex > 0)

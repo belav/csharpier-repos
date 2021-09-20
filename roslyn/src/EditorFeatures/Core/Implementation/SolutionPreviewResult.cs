@@ -41,7 +41,8 @@ namespace Microsoft.CodeAnalysis.Editor
             DocumentId preferredDocumentId = null,
             ProjectId preferredProjectId = null,
             CancellationToken cancellationToken = default
-        ) {
+        )
+        {
             AssertIsForeground();
             cancellationToken.ThrowIfCancellationRequested();
 
@@ -120,7 +121,8 @@ namespace Microsoft.CodeAnalysis.Editor
         internal static SolutionPreviewResult Merge(
             SolutionPreviewResult result1,
             SolutionPreviewResult result2
-        ) {
+        )
+        {
             if (result1 == null)
             {
                 return result2;

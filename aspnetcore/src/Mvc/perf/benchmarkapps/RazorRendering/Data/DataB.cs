@@ -12,7 +12,8 @@ namespace Data
             int value,
             DateTimeOffset startDate,
             DateTimeOffset completeDate
-        ) {
+        )
+        {
             Id = id;
             Icon = icon;
             Name = name;

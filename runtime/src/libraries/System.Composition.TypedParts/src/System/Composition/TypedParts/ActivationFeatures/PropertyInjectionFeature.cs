@@ -28,7 +28,8 @@ namespace System.Composition.TypedParts.ActivationFeatures
         public override IEnumerable<CompositionDependency> GetDependencies(
             TypeInfo partType,
             DependencyAccessor definitionAccessor
-        ) {
+        )
+        {
             var partTypeAsType = partType.AsType();
             var imports = (
                 from pi in partTypeAsType.GetRuntimeProperties()
@@ -85,7 +86,8 @@ namespace System.Composition.TypedParts.ActivationFeatures
             CompositeActivator activator,
             IDictionary<string, object> partMetadata,
             IEnumerable<CompositionDependency> dependencies
-        ) {
+        )
+        {
             var propertyDependencies = dependencies.Where(dep => dep.Site is PropertyImportSite)
                 .ToDictionary(d => ((PropertyImportSite)d.Site).Property);
 

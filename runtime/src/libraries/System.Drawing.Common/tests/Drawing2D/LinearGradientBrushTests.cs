@@ -87,7 +87,8 @@ namespace System.Drawing.Drawing2D.Tests
             Color color1,
             Color color2,
             RectangleF expectedRectangle
-        ) {
+        )
+        {
             using (var brush = new LinearGradientBrush((PointF)point1, point2, color1, color2))
             {
                 Assert.Equal(new float[] { 1 }, brush.Blend.Factors);
@@ -121,7 +122,8 @@ namespace System.Drawing.Drawing2D.Tests
                     Color.Plum,
                     Color.Red
                 )
-            ) {
+            )
+            {
                 Assert.Equal(float.PositiveInfinity, brush.Rectangle.X);
                 Assert.Equal(float.NegativeInfinity, brush.Rectangle.Y);
                 Assert.Equal(float.NaN, brush.Rectangle.Width);
@@ -137,7 +139,8 @@ namespace System.Drawing.Drawing2D.Tests
             Color color1,
             Color color2,
             RectangleF expectedRectangle
-        ) {
+        )
+        {
             using (var brush = new LinearGradientBrush(point1, point2, color1, color2))
             {
                 Assert.Equal(new float[] { 1 }, brush.Blend.Factors);
@@ -224,10 +227,12 @@ namespace System.Drawing.Drawing2D.Tests
             Color color1,
             Color color2,
             LinearGradientMode linearGradientMode
-        ) {
+        )
+        {
             using (
                 var brush = new LinearGradientBrush(rectangle, color1, color2, linearGradientMode)
-            ) {
+            )
+            {
                 Assert.Equal(new float[] { 1 }, brush.Blend.Factors);
                 Assert.Equal(1, brush.Blend.Positions.Length);
 
@@ -258,7 +263,8 @@ namespace System.Drawing.Drawing2D.Tests
             Color color1,
             Color color2,
             LinearGradientMode linearGradientMode
-        ) {
+        )
+        {
             using (
                 var brush = new LinearGradientBrush(
                     (RectangleF)rectangle,
@@ -266,7 +272,8 @@ namespace System.Drawing.Drawing2D.Tests
                     color2,
                     linearGradientMode
                 )
-            ) {
+            )
+            {
                 Assert.Equal(new float[] { 1 }, brush.Blend.Factors);
                 Assert.Equal(1, brush.Blend.Positions.Length);
 
@@ -306,7 +313,8 @@ namespace System.Drawing.Drawing2D.Tests
             Color color1,
             Color color2,
             float angle
-        ) {
+        )
+        {
             using (var brush = new LinearGradientBrush(rectangle, color1, color2, angle))
             {
                 Assert.Equal(new float[] { 1 }, brush.Blend.Factors);
@@ -336,10 +344,12 @@ namespace System.Drawing.Drawing2D.Tests
             Color color1,
             Color color2,
             float angle
-        ) {
+        )
+        {
             using (
                 var brush = new LinearGradientBrush((RectangleF)rectangle, color1, color2, angle)
-            ) {
+            )
+            {
                 Assert.Equal(new float[] { 1 }, brush.Blend.Factors);
                 Assert.Equal(1, brush.Blend.Positions.Length);
 
@@ -390,7 +400,8 @@ namespace System.Drawing.Drawing2D.Tests
             Color color2,
             float angle,
             bool isAngleScalable
-        ) {
+        )
+        {
             using (
                 var brush = new LinearGradientBrush(
                     rectangle,
@@ -399,7 +410,8 @@ namespace System.Drawing.Drawing2D.Tests
                     angle,
                     isAngleScalable
                 )
-            ) {
+            )
+            {
                 Assert.Equal(new float[] { 1 }, brush.Blend.Factors);
                 Assert.Equal(1, brush.Blend.Positions.Length);
 
@@ -428,7 +440,8 @@ namespace System.Drawing.Drawing2D.Tests
             Color color2,
             float angle,
             bool isAngleScalable
-        ) {
+        )
+        {
             using (
                 var brush = new LinearGradientBrush(
                     (RectangleF)rectangle,
@@ -437,7 +450,8 @@ namespace System.Drawing.Drawing2D.Tests
                     angle,
                     isAngleScalable
                 )
-            ) {
+            )
+            {
                 Assert.Equal(new float[] { 1 }, brush.Blend.Factors);
                 Assert.Equal(1, brush.Blend.Positions.Length);
 
@@ -587,7 +601,8 @@ namespace System.Drawing.Drawing2D.Tests
         [InlineData(LinearGradientMode.BackwardDiagonal + 1)]
         public void Ctor_InvalidLinearGradientMode_ThrowsEnumArgumentException(
             LinearGradientMode linearGradientMode
-        ) {
+        )
+        {
             Assert.ThrowsAny<ArgumentException>(
                 () =>
                     new LinearGradientBrush(
@@ -619,7 +634,8 @@ namespace System.Drawing.Drawing2D.Tests
                     45,
                     true
                 )
-            ) {
+            )
+            {
                 LinearGradientBrush clone = Assert.IsType<LinearGradientBrush>(brush.Clone());
 
                 Assert.NotSame(clone, brush);
@@ -657,7 +673,8 @@ namespace System.Drawing.Drawing2D.Tests
                     45,
                     true
                 )
-            ) {
+            )
+            {
                 var blend = new ColorBlend
                 {
                     Colors = new Color[] { Color.Red, Color.PeachPuff, Color.PowderBlue },
@@ -689,7 +706,8 @@ namespace System.Drawing.Drawing2D.Tests
                     45,
                     true
                 )
-            ) {
+            )
+            {
                 var blend = new Blend { Factors = factors, Positions = positions };
                 brush.Blend = blend;
 
@@ -713,7 +731,8 @@ namespace System.Drawing.Drawing2D.Tests
                     45,
                     true
                 )
-            ) {
+            )
+            {
                 var blend = new Blend { Factors = factors, Positions = positions };
                 AssertExtensions.Throws<ArgumentException>(null, () => brush.Blend = blend);
             }
@@ -730,7 +749,8 @@ namespace System.Drawing.Drawing2D.Tests
                     45,
                     true
                 )
-            ) {
+            )
+            {
                 Assert.Throws<NullReferenceException>(() => brush.Blend = null);
             }
         }
@@ -746,7 +766,8 @@ namespace System.Drawing.Drawing2D.Tests
                     45,
                     true
                 )
-            ) {
+            )
+            {
                 Assert.Throws<NullReferenceException>(
                     () => brush.Blend = new Blend { Factors = null }
                 );
@@ -764,7 +785,8 @@ namespace System.Drawing.Drawing2D.Tests
                     45,
                     true
                 )
-            ) {
+            )
+            {
                 AssertExtensions.Throws<ArgumentException, ArgumentNullException>(
                     "value",
                     "source",
@@ -784,7 +806,8 @@ namespace System.Drawing.Drawing2D.Tests
                     45,
                     true
                 )
-            ) {
+            )
+            {
                 AssertExtensions.Throws<ArgumentOutOfRangeException>(
                     "value",
                     null,
@@ -805,7 +828,8 @@ namespace System.Drawing.Drawing2D.Tests
                     45,
                     true
                 )
-            ) {
+            )
+            {
                 AssertExtensions.Throws<ArgumentException>(
                     null,
                     () =>
@@ -845,7 +869,8 @@ namespace System.Drawing.Drawing2D.Tests
                 ) {
                     GammaCorrection = gammaCorrection
                 }
-            ) {
+            )
+            {
                 Assert.Equal(gammaCorrection, brush.GammaCorrection);
             }
         }
@@ -877,7 +902,8 @@ namespace System.Drawing.Drawing2D.Tests
                     45,
                     true
                 )
-            ) {
+            )
+            {
                 var blend = new ColorBlend
                 {
                     Colors = new Color[] { Color.Red, Color.PeachPuff, Color.PowderBlue },
@@ -910,7 +936,8 @@ namespace System.Drawing.Drawing2D.Tests
                         Positions = new float[] { 0, 1 }
                     }
                 }
-            ) {
+            )
+            {
                 var blend = new ColorBlend
                 {
                     Colors = new Color[] { Color.Red, Color.PeachPuff, Color.PowderBlue },
@@ -936,7 +963,8 @@ namespace System.Drawing.Drawing2D.Tests
                     45,
                     true
                 )
-            ) {
+            )
+            {
                 AssertExtensions.Throws<ArgumentException>(
                     null,
                     () => brush.InterpolationColors = null
@@ -955,7 +983,8 @@ namespace System.Drawing.Drawing2D.Tests
                     45,
                     true
                 )
-            ) {
+            )
+            {
                 Assert.Throws<NullReferenceException>(
                     () => brush.InterpolationColors = new ColorBlend { Colors = null }
                 );
@@ -967,7 +996,8 @@ namespace System.Drawing.Drawing2D.Tests
         [InlineData(1)]
         public void InterpolationColors_SetBlendWithTooFewColors_ThrowsArgumentException(
             int colorsLength
-        ) {
+        )
+        {
             using (
                 var brush = new LinearGradientBrush(
                     new Rectangle(1, 2, 3, 4),
@@ -976,7 +1006,8 @@ namespace System.Drawing.Drawing2D.Tests
                     45,
                     true
                 )
-            ) {
+            )
+            {
                 AssertExtensions.Throws<ArgumentException>(
                     null,
                     () =>
@@ -999,7 +1030,8 @@ namespace System.Drawing.Drawing2D.Tests
                     45,
                     true
                 )
-            ) {
+            )
+            {
                 Assert.Throws<NullReferenceException>(
                     () =>
                         brush.InterpolationColors = new ColorBlend
@@ -1017,7 +1049,8 @@ namespace System.Drawing.Drawing2D.Tests
         [InlineData(3)]
         public void InterpolationColors_SetInvalidBlendPositionsLength_ThrowsArgumentException(
             int positionsLength
-        ) {
+        )
+        {
             using (
                 var brush = new LinearGradientBrush(
                     new Rectangle(1, 2, 3, 4),
@@ -1026,7 +1059,8 @@ namespace System.Drawing.Drawing2D.Tests
                     45,
                     true
                 )
-            ) {
+            )
+            {
                 AssertExtensions.Throws<ArgumentException>(
                     null,
                     () =>
@@ -1109,7 +1143,8 @@ namespace System.Drawing.Drawing2D.Tests
                         Positions = new float[] { 0, 0.5f, 1 }
                     }
                 }
-            ) {
+            )
+            {
                 Assert.NotNull(brush.InterpolationColors);
 
                 brush.SetBlendTriangularShape(0.5f);
@@ -1134,7 +1169,8 @@ namespace System.Drawing.Drawing2D.Tests
                         Positions = new float[] { 0, 0.5f, 1 }
                     }
                 }
-            ) {
+            )
+            {
                 Assert.NotNull(brush.InterpolationColors);
 
                 brush.Blend = new Blend { Factors = new float[1], Positions = new float[1] };
@@ -1156,7 +1192,8 @@ namespace System.Drawing.Drawing2D.Tests
                 ) {
                     LinearColors = colors
                 }
-            ) {
+            )
+            {
                 Assert.Equal(
                     colors.Take(2).Select(c => Color.FromArgb(c.ToArgb())),
                     brush.LinearColors
@@ -1175,7 +1212,8 @@ namespace System.Drawing.Drawing2D.Tests
                     45,
                     true
                 )
-            ) {
+            )
+            {
                 Assert.Throws<NullReferenceException>(() => brush.LinearColors = null);
             }
         }
@@ -1193,7 +1231,8 @@ namespace System.Drawing.Drawing2D.Tests
                     45,
                     true
                 )
-            ) {
+            )
+            {
                 Assert.Throws<IndexOutOfRangeException>(
                     () => brush.LinearColors = new Color[length]
                 );
@@ -1248,7 +1287,8 @@ namespace System.Drawing.Drawing2D.Tests
                 ) {
                     Transform = transform
                 }
-            ) {
+            )
+            {
                 Assert.Equal(transform, brush.Transform);
             }
         }
@@ -1264,7 +1304,8 @@ namespace System.Drawing.Drawing2D.Tests
                     45,
                     true
                 )
-            ) {
+            )
+            {
                 AssertExtensions.Throws<ArgumentNullException>(
                     "value",
                     "matrix",
@@ -1306,7 +1347,8 @@ namespace System.Drawing.Drawing2D.Tests
                 ) {
                     WrapMode = wrapMode
                 }
-            ) {
+            )
+            {
                 Assert.Equal(wrapMode, brush.WrapMode);
             }
         }
@@ -1324,7 +1366,8 @@ namespace System.Drawing.Drawing2D.Tests
                     45,
                     true
                 )
-            ) {
+            )
+            {
                 Assert.ThrowsAny<ArgumentException>(() => brush.WrapMode = wrapMode);
             }
         }
@@ -1340,7 +1383,8 @@ namespace System.Drawing.Drawing2D.Tests
                     45,
                     true
                 )
-            ) {
+            )
+            {
                 AssertExtensions.Throws<ArgumentException>(
                     null,
                     () => brush.WrapMode = WrapMode.Clamp
@@ -1378,7 +1422,8 @@ namespace System.Drawing.Drawing2D.Tests
                     45,
                     true
                 )
-            ) {
+            )
+            {
                 Assert.False(brush.Transform.IsIdentity);
 
                 brush.ResetTransform();
@@ -1469,7 +1514,8 @@ namespace System.Drawing.Drawing2D.Tests
                     45,
                     true
                 )
-            ) {
+            )
+            {
                 AssertExtensions.Throws<ArgumentNullException>(
                     "matrix",
                     () => brush.MultiplyTransform(null)
@@ -1566,7 +1612,8 @@ namespace System.Drawing.Drawing2D.Tests
                     45,
                     true
                 )
-            ) {
+            )
+            {
                 Matrix expectedTransform = brush.Transform;
                 expectedTransform.Translate(dx, dy);
 
@@ -1592,7 +1639,8 @@ namespace System.Drawing.Drawing2D.Tests
                     45,
                     true
                 )
-            ) {
+            )
+            {
                 Matrix expectedTransform = brush.Transform;
                 expectedTransform.Translate(dx, dy, order);
 
@@ -1614,7 +1662,8 @@ namespace System.Drawing.Drawing2D.Tests
                     45,
                     true
                 )
-            ) {
+            )
+            {
                 AssertExtensions.Throws<ArgumentException>(
                     null,
                     () => brush.TranslateTransform(0, 0, order)
@@ -1655,7 +1704,8 @@ namespace System.Drawing.Drawing2D.Tests
                     45,
                     true
                 )
-            ) {
+            )
+            {
                 Matrix expectedTransform = brush.Transform;
                 expectedTransform.Scale(sx, sy);
 
@@ -1681,7 +1731,8 @@ namespace System.Drawing.Drawing2D.Tests
                     45,
                     true
                 )
-            ) {
+            )
+            {
                 Matrix expectedTransform = brush.Transform;
                 expectedTransform.Scale(sx, sy, order);
 
@@ -1703,7 +1754,8 @@ namespace System.Drawing.Drawing2D.Tests
                     45,
                     true
                 )
-            ) {
+            )
+            {
                 AssertExtensions.Throws<ArgumentException>(
                     null,
                     () => brush.ScaleTransform(0, 0, order)
@@ -1745,7 +1797,8 @@ namespace System.Drawing.Drawing2D.Tests
                     45,
                     true
                 )
-            ) {
+            )
+            {
                 Matrix expectedTransform = brush.Transform;
                 expectedTransform.Rotate(angle);
 
@@ -1771,7 +1824,8 @@ namespace System.Drawing.Drawing2D.Tests
                     45,
                     true
                 )
-            ) {
+            )
+            {
                 Matrix expectedTransform = brush.Transform;
                 expectedTransform.Rotate(angle, order);
 
@@ -1793,7 +1847,8 @@ namespace System.Drawing.Drawing2D.Tests
                     45,
                     true
                 )
-            ) {
+            )
+            {
                 AssertExtensions.Throws<ArgumentException>(
                     null,
                     () => brush.RotateTransform(0, order)
@@ -1835,7 +1890,8 @@ namespace System.Drawing.Drawing2D.Tests
                     45,
                     true
                 )
-            ) {
+            )
+            {
                 brush.SetSigmaBellShape(focus);
             }
         }
@@ -1855,7 +1911,8 @@ namespace System.Drawing.Drawing2D.Tests
                     45,
                     true
                 )
-            ) {
+            )
+            {
                 AssertExtensions.Throws<ArgumentException>(
                     "focus",
                     null,
@@ -1884,7 +1941,8 @@ namespace System.Drawing.Drawing2D.Tests
                     45,
                     true
                 )
-            ) {
+            )
+            {
                 AssertExtensions.Throws<ArgumentException>(
                     "scale",
                     null,
@@ -1917,7 +1975,8 @@ namespace System.Drawing.Drawing2D.Tests
             float focus,
             float[] expectedFactors,
             float[] expectedPositions
-        ) {
+        )
+        {
             using (
                 var brush = new LinearGradientBrush(
                     new Rectangle(1, 2, 3, 4),
@@ -1926,7 +1985,8 @@ namespace System.Drawing.Drawing2D.Tests
                     0,
                     true
                 )
-            ) {
+            )
+            {
                 brush.SetBlendTriangularShape(focus);
 
                 Assert.Equal(expectedFactors, brush.Blend.Factors);
@@ -1944,7 +2004,8 @@ namespace System.Drawing.Drawing2D.Tests
             float scale,
             float[] expectedFactors,
             float[] expectedPositions
-        ) {
+        )
+        {
             using (
                 var brush = new LinearGradientBrush(
                     new Rectangle(1, 2, 3, 4),
@@ -1953,7 +2014,8 @@ namespace System.Drawing.Drawing2D.Tests
                     0,
                     true
                 )
-            ) {
+            )
+            {
                 brush.SetBlendTriangularShape(focus, scale);
 
                 Assert.Equal(expectedFactors, brush.Blend.Factors);
@@ -1976,7 +2038,8 @@ namespace System.Drawing.Drawing2D.Tests
                     45,
                     true
                 )
-            ) {
+            )
+            {
                 AssertExtensions.Throws<ArgumentException>(
                     "focus",
                     null,
@@ -2005,7 +2068,8 @@ namespace System.Drawing.Drawing2D.Tests
                     45,
                     true
                 )
-            ) {
+            )
+            {
                 AssertExtensions.Throws<ArgumentException>(
                     "scale",
                     null,

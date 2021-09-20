@@ -61,7 +61,8 @@ namespace System.ComponentModel.Tests
             IComponent[] components,
             string name,
             IComponent expected
-        ) {
+        )
+        {
             var collection = new ComponentCollection(components);
             Assert.Equal(expected, collection[name]);
         }

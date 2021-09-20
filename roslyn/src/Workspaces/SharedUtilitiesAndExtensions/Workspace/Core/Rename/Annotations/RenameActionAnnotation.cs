@@ -73,7 +73,8 @@ namespace Microsoft.CodeAnalysis.Rename.ConflictEngine
             bool isNamespaceDeclarationReference,
             bool isInvocationExpression,
             bool isMemberGroupReference
-        ) {
+        )
+        {
             this.OriginalSpan = originalSpan;
             this.IsRenameLocation = isRenameLocation;
             this.Prefix = prefix;

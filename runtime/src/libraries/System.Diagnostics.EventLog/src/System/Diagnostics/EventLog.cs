@@ -613,7 +613,8 @@ namespace System.Diagnostics
             string source,
             string machineName,
             bool readOnly
-        ) {
+        )
+        {
             return FindSourceRegistration(source, machineName, readOnly, false);
         }
 
@@ -622,7 +623,8 @@ namespace System.Diagnostics
             string machineName,
             bool readOnly,
             bool wantToCreate
-        ) {
+        )
+        {
             if (source != null && source.Length != 0)
             {
                 RegistryKey eventkey = null;
@@ -856,7 +858,8 @@ namespace System.Diagnostics
                     true,
                     wantToCreate
                 )
-            ) {
+            )
+            {
                 return (keyFound != null);
             }
         }
@@ -907,7 +910,8 @@ namespace System.Diagnostics
         private static void SetSpecialSourceRegValues(
             RegistryKey sourceLogKey,
             EventSourceCreationData sourceData
-        ) {
+        )
+        {
             if (string.IsNullOrEmpty(sourceData.MessageResourceFile))
                 sourceLogKey.SetValue(
                     "EventMessageFile",
@@ -955,7 +959,8 @@ namespace System.Diagnostics
             SafeLibraryHandle hModule,
             uint messageNum,
             string[] insertionStrings
-        ) {
+        )
+        {
             if (insertionStrings.Length == 0)
             {
                 return UnsafeTryFormatMessage(hModule, messageNum, insertionStrings);
@@ -1009,7 +1014,8 @@ namespace System.Diagnostics
                                     CultureInfo.InvariantCulture,
                                     out num
                                 )
-                            ) {
+                            )
+                            {
                                 largestNumber = Math.Max(largestNumber, num);
                             }
                         }
@@ -1039,7 +1045,8 @@ namespace System.Diagnostics
             SafeLibraryHandle hModule,
             uint messageNum,
             string[] insertionStrings
-        ) {
+        )
+        {
             string msg = null;
 
             int msgLen = 0;
@@ -1172,7 +1179,8 @@ namespace System.Diagnostics
             string message,
             EventLogEntryType type,
             int eventID
-        ) {
+        )
+        {
             WriteEntry(source, message, type, eventID, 0, null);
         }
 
@@ -1187,7 +1195,8 @@ namespace System.Diagnostics
             EventLogEntryType type,
             int eventID,
             short category
-        ) {
+        )
+        {
             WriteEntry(source, message, type, eventID, category, null);
         }
 
@@ -1198,14 +1207,16 @@ namespace System.Diagnostics
             int eventID,
             short category,
             byte[] rawData
-        ) {
+        )
+        {
             using (
                 EventLogInternal log = new EventLogInternal(
                     string.Empty,
                     ".",
                     CheckAndNormalizeSourceName(source)
                 )
-            ) {
+            )
+            {
                 log.WriteEntry(message, type, eventID, category, rawData);
             }
         }
@@ -1216,7 +1227,8 @@ namespace System.Diagnostics
             int eventID,
             short category,
             byte[] rawData
-        ) {
+        )
+        {
             _underlyingEventLog.WriteEntry(message, type, eventID, category, rawData);
         }
 
@@ -1238,7 +1250,8 @@ namespace System.Diagnostics
                     ".",
                     CheckAndNormalizeSourceName(source)
                 )
-            ) {
+            )
+            {
                 log.WriteEvent(instance, null, values);
             }
         }
@@ -1248,14 +1261,16 @@ namespace System.Diagnostics
             EventInstance instance,
             byte[] data,
             params object[] values
-        ) {
+        )
+        {
             using (
                 EventLogInternal log = new EventLogInternal(
                     string.Empty,
                     ".",
                     CheckAndNormalizeSourceName(source)
                 )
-            ) {
+            )
+            {
                 log.WriteEvent(instance, data, values);
             }
         }

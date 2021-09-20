@@ -19,7 +19,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Completion.KeywordRecommenders
             int position,
             CSharpSyntaxContext context,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             return (context.IsAnyExpressionContext && !context.IsConstantExpressionContext)
                 || context.IsStatementContext
                 || context.IsGlobalStatementContext

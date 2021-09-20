@@ -52,7 +52,8 @@ namespace Microsoft.AspNetCore.SpaServices.Extensions.Proxy
             Task<Uri> baseUriTask,
             CancellationToken applicationStoppingToken,
             bool proxy404s
-        ) {
+        )
+        {
             // Stop proxying if either the server or client wants to disconnect
             var proxyCancellationToken =
                 CancellationTokenSource.CreateLinkedTokenSource(
@@ -87,7 +88,8 @@ namespace Microsoft.AspNetCore.SpaServices.Extensions.Proxy
                             HttpCompletionOption.ResponseHeadersRead,
                             proxyCancellationToken
                         )
-                    ) {
+                    )
+                    {
                         if (!proxy404s)
                         {
                             if (responseMessage.StatusCode == HttpStatusCode.NotFound)
@@ -143,7 +145,8 @@ namespace Microsoft.AspNetCore.SpaServices.Extensions.Proxy
                 && !HttpMethods.IsHead(requestMethod)
                 && !HttpMethods.IsDelete(requestMethod)
                 && !HttpMethods.IsTrace(requestMethod)
-            ) {
+            )
+            {
                 var streamContent = new StreamContent(request.Body);
                 requestMessage.Content = streamContent;
             }
@@ -162,7 +165,8 @@ namespace Microsoft.AspNetCore.SpaServices.Extensions.Proxy
                         header.Value.ToArray()
                     )
                     && requestMessage.Content != null
-                ) {
+                )
+                {
                     requestMessage.Content?.Headers.TryAddWithoutValidation(
                         header.Key,
                         header.Value.ToArray()
@@ -181,7 +185,8 @@ namespace Microsoft.AspNetCore.SpaServices.Extensions.Proxy
             HttpContext context,
             HttpResponseMessage responseMessage,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             context.Response.StatusCode = (int)responseMessage.StatusCode;
             foreach (var header in responseMessage.Headers)
             {
@@ -230,7 +235,8 @@ namespace Microsoft.AspNetCore.SpaServices.Extensions.Proxy
             HttpContext context,
             Uri destinationUri,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             if (context == null)
             {
                 throw new ArgumentNullException(nameof(context));
@@ -254,7 +260,8 @@ namespace Microsoft.AspNetCore.SpaServices.Extensions.Proxy
                             headerEntry.Key,
                             StringComparer.OrdinalIgnoreCase
                         )
-                    ) {
+                    )
+                    {
                         try
                         {
                             client.Options.SetRequestHeader(headerEntry.Key, headerEntry.Value);
@@ -293,7 +300,8 @@ namespace Microsoft.AspNetCore.SpaServices.Extensions.Proxy
 
                 using (
                     var server = await context.WebSockets.AcceptWebSocketAsync(client.SubProtocol)
-                ) {
+                )
+                {
                     var bufferSize = DefaultWebSocketBufferSize;
                     await Task.WhenAll(
                         PumpWebSocket(client, server, bufferSize, cancellationToken),
@@ -310,7 +318,8 @@ namespace Microsoft.AspNetCore.SpaServices.Extensions.Proxy
             WebSocket destination,
             int bufferSize,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             if (bufferSize <= 0)
             {
                 throw new ArgumentOutOfRangeException(nameof(bufferSize));
@@ -348,7 +357,8 @@ namespace Microsoft.AspNetCore.SpaServices.Extensions.Proxy
                     if (
                         destination.State == WebSocketState.Open
                         || destination.State == WebSocketState.CloseReceived
-                    ) {
+                    )
+                    {
                         await destination.CloseOutputAsync(
                             source.CloseStatus!.Value,
                             source.CloseStatusDescription,

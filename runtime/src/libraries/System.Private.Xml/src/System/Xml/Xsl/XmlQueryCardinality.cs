@@ -146,7 +146,8 @@ namespace System.Xml.Xsl
         public static XmlQueryCardinality operator |(
             XmlQueryCardinality left,
             XmlQueryCardinality right
-        ) {
+        )
+        {
             return new XmlQueryCardinality(left._value | right._value);
         }
 
@@ -156,7 +157,8 @@ namespace System.Xml.Xsl
         public static XmlQueryCardinality operator *(
             XmlQueryCardinality left,
             XmlQueryCardinality right
-        ) {
+        )
+        {
             return s_cardinalityProduct[left._value, right._value];
         }
 
@@ -166,7 +168,8 @@ namespace System.Xml.Xsl
         public static XmlQueryCardinality operator +(
             XmlQueryCardinality left,
             XmlQueryCardinality right
-        ) {
+        )
+        {
             return s_cardinalitySum[left._value, right._value];
         }
 

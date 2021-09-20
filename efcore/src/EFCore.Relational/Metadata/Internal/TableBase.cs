@@ -174,7 +174,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
             if (
                 RowInternalForeignKeys != null
                 && RowInternalForeignKeys.TryGetValue(entityType, out var foreignKeys)
-            ) {
+            )
+            {
                 return foreignKeys;
             }
 
@@ -185,11 +186,13 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
         /// <inheritdoc />
         IEnumerable<IForeignKey> ITableBase.GetReferencingRowInternalForeignKeys(
             IEntityType entityType
-        ) {
+        )
+        {
             if (
                 ReferencingRowInternalForeignKeys != null
                 && ReferencingRowInternalForeignKeys.TryGetValue(entityType, out var foreignKeys)
-            ) {
+            )
+            {
                 return foreignKeys;
             }
 

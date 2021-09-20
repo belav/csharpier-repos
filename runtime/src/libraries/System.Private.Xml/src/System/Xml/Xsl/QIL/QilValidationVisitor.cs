@@ -92,7 +92,8 @@ namespace System.Xml.Xsl.Qil
                         parent.NodeType == QilNodeType.GlobalVariableList
                         || parent.NodeType == QilNodeType.GlobalParameterList
                         || parent.NodeType == QilNodeType.FunctionList
-                    ) {
+                    )
+                    {
                         if (((QilReference)parent[i]).DebugName == null)
                             SetError(parent[i], "DebugName must not be null");
                     }

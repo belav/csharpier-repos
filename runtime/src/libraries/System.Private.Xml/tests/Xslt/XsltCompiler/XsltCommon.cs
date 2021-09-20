@@ -41,7 +41,8 @@ namespace XmlCoreTest.Common
             string baselineFile,
             string actualFile,
             string xmldiffoptionvalue
-        ) {
+        )
+        {
             return CompareXml(baselineFile, actualFile, xmldiffoptionvalue, null);
         }
 
@@ -50,7 +51,8 @@ namespace XmlCoreTest.Common
             string actualFile,
             string xmldiffoptionvalue,
             DelayedWriteLogger logger
-        ) {
+        )
+        {
             using (var fsActual = new FileStream(actualFile, FileMode.Open, FileAccess.Read))
             using (var fsExpected = new FileStream(baselineFile, FileMode.Open, FileAccess.Read))
             {
@@ -73,7 +75,8 @@ namespace XmlCoreTest.Common
             Stream actualStream,
             string xmldiffoptionvalue,
             DelayedWriteLogger logger
-        ) {
+        )
+        {
             bool bResult = false;
 
             // Default Diff options used by XSLT V2 driver.
@@ -146,7 +149,8 @@ namespace XmlCoreTest.Common
             string OutFile,
             int driverVersion,
             DelayedWriteLogger logger
-        ) {
+        )
+        {
             return CompareChecksum(
                 Baseline,
                 1, //start from the first line in the baseline file
@@ -174,7 +178,8 @@ namespace XmlCoreTest.Common
             int outFileStartLine,
             int driverVersion,
             DelayedWriteLogger logger
-        ) {
+        )
+        {
             // Keep people honest.
             if (driverVersion == 2)
             {
@@ -221,7 +226,8 @@ namespace XmlCoreTest.Common
             string fileName,
             int startFromLine,
             DelayedWriteLogger logger
-        ) {
+        )
+        {
             const int BUFFERSIZE = 4096;
             decimal dResult = 0; // Numerical value of the checksum
             int i = 0; // Generic counter
@@ -295,7 +301,8 @@ namespace XmlCoreTest.Common
             bool isValidCase,
             DelayedWriteLogger logger,
             ref string output
-        ) {
+        )
+        {
             Debug.Assert(asmName != null);
             Debug.Assert(asmName != string.Empty);
 
@@ -325,7 +332,8 @@ namespace XmlCoreTest.Common
             string asmName,
             DelayedWriteLogger logger,
             ref string output
-        ) {
+        )
+        {
             Debug.Assert(asmName != null);
             Debug.Assert(asmName != string.Empty);
 
@@ -383,7 +391,8 @@ namespace XmlCoreTest.Common
             string asmName,
             DelayedWriteLogger logger,
             ref string output
-        ) {
+        )
+        {
             string scriptAsmNameFormat = Path.ChangeExtension(asmName, null) + "_Script{0}.dll";
             int scriptCounter = 0;
             string testAsm = asmName;
@@ -720,7 +729,8 @@ namespace XmlCoreTest.Common
                     !objectToCompareTo.ResourceId.Equals(string.Empty)
                     && !objectToCompareTo.ResourceId.Equals(XMLUSEREX)
                     && objectToCompareTo.ResourceId.Equals(this.ResourceId)
-                ) {
+                )
+                {
                     //**** The highest degree of certainty we have. ****//
 
                     if (objectToCompareTo.ExceptionId.Equals(this.ExceptionId))
@@ -742,7 +752,8 @@ namespace XmlCoreTest.Common
                     if (
                         objectToCompareTo.ResourceId.Equals(this.ResourceId)
                         && objectToCompareTo.MessageFragment.Contains(this.MessageFragment)
-                    ) {
+                    )
+                    {
                         //**** Very high certainty equivalence ****//
 
                         if (objectToCompareTo.ExceptionId.Equals(this.ExceptionId))

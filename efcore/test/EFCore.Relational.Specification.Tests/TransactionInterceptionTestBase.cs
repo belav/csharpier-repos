@@ -29,7 +29,8 @@ namespace Microsoft.EntityFrameworkCore
                 var transaction = async
                     ? await context.Database.BeginTransactionAsync()
                     : context.Database.BeginTransaction()
-            ) {
+            )
+            {
                 Assert.NotNull(transaction.GetDbTransaction());
             }
 
@@ -69,7 +70,8 @@ namespace Microsoft.EntityFrameworkCore
                     var _ = async
                         ? await context.Database.BeginTransactionAsync()
                         : context.Database.BeginTransaction()
-                ) {
+                )
+                {
                     AssertBeginTransaction(context, interceptor, async);
                 }
 
@@ -92,7 +94,8 @@ namespace Microsoft.EntityFrameworkCore
                               IsolationLevel.ReadUncommitted
                           )
                         : context.Database.BeginTransaction(IsolationLevel.ReadUncommitted)
-                ) {
+                )
+                {
                     AssertBeginTransaction(context, interceptor, async);
                 }
 
@@ -127,7 +130,8 @@ namespace Microsoft.EntityFrameworkCore
                 DbConnection connection,
                 TransactionStartingEventData eventData,
                 InterceptionResult<DbTransaction> result
-            ) {
+            )
+            {
                 base.TransactionStarting(connection, eventData, result);
 
                 return InterceptionResult<DbTransaction>.SuppressWithResult(
@@ -142,7 +146,8 @@ namespace Microsoft.EntityFrameworkCore
                 TransactionStartingEventData eventData,
                 InterceptionResult<DbTransaction> result,
                 CancellationToken cancellationToken = default
-            ) {
+            )
+            {
                 await base.TransactionStartingAsync(
                     connection,
                     eventData,
@@ -182,7 +187,8 @@ namespace Microsoft.EntityFrameworkCore
                 DbConnection connection,
                 TransactionEndEventData eventData,
                 DbTransaction result
-            ) {
+            )
+            {
                 result = base.TransactionStarted(connection, eventData, result);
 
                 return new WrappedDbTransaction(result);
@@ -193,7 +199,8 @@ namespace Microsoft.EntityFrameworkCore
                 TransactionEndEventData eventData,
                 DbTransaction result,
                 CancellationToken cancellationToken = default
-            ) {
+            )
+            {
                 result = await base.TransactionStartedAsync(
                     connection,
                     eventData,
@@ -208,7 +215,8 @@ namespace Microsoft.EntityFrameworkCore
                 DbConnection connection,
                 TransactionEventData eventData,
                 DbTransaction result
-            ) {
+            )
+            {
                 result = base.TransactionUsed(connection, eventData, result);
 
                 return new WrappedDbTransaction(result);
@@ -219,7 +227,8 @@ namespace Microsoft.EntityFrameworkCore
                 TransactionEventData eventData,
                 DbTransaction result,
                 CancellationToken cancellationToken = default
-            ) {
+            )
+            {
                 result = await base.TransactionUsedAsync(
                     connection,
                     eventData,
@@ -508,7 +517,8 @@ namespace Microsoft.EntityFrameworkCore
                 DbTransaction transaction,
                 TransactionEventData eventData,
                 InterceptionResult result
-            ) {
+            )
+            {
                 base.TransactionCommitting(transaction, eventData, result);
 
                 return InterceptionResult.Suppress();
@@ -519,7 +529,8 @@ namespace Microsoft.EntityFrameworkCore
                 TransactionEventData eventData,
                 InterceptionResult result,
                 CancellationToken cancellationToken = default
-            ) {
+            )
+            {
                 await base.TransactionCommittingAsync(
                     transaction,
                     eventData,
@@ -534,7 +545,8 @@ namespace Microsoft.EntityFrameworkCore
                 DbTransaction transaction,
                 TransactionEventData eventData,
                 InterceptionResult result
-            ) {
+            )
+            {
                 base.TransactionRollingBack(transaction, eventData, result);
 
                 return InterceptionResult.Suppress();
@@ -545,7 +557,8 @@ namespace Microsoft.EntityFrameworkCore
                 TransactionEventData eventData,
                 InterceptionResult result,
                 CancellationToken cancellationToken = default
-            ) {
+            )
+            {
                 await base.TransactionRollingBackAsync(
                     transaction,
                     eventData,
@@ -685,7 +698,8 @@ namespace Microsoft.EntityFrameworkCore
             DbContext context,
             TransactionInterceptor interceptor,
             bool async
-        ) {
+        )
+        {
             Assert.Equal(async, interceptor.AsyncCalled);
             Assert.NotEqual(async, interceptor.SyncCalled);
             Assert.NotEqual(interceptor.AsyncCalled, interceptor.SyncCalled);
@@ -711,7 +725,8 @@ namespace Microsoft.EntityFrameworkCore
             IDbContextTransaction contextTransaction,
             TransactionInterceptor interceptor,
             bool async
-        ) {
+        )
+        {
             Assert.Equal(async, interceptor.AsyncCalled);
             Assert.NotEqual(async, interceptor.SyncCalled);
             Assert.NotEqual(interceptor.AsyncCalled, interceptor.SyncCalled);
@@ -738,7 +753,8 @@ namespace Microsoft.EntityFrameworkCore
             IDbContextTransaction contextTransaction,
             TransactionInterceptor interceptor,
             bool async
-        ) {
+        )
+        {
             Assert.Equal(async, interceptor.AsyncCalled);
             Assert.NotEqual(async, interceptor.SyncCalled);
             Assert.NotEqual(interceptor.AsyncCalled, interceptor.SyncCalled);
@@ -765,7 +781,8 @@ namespace Microsoft.EntityFrameworkCore
             IDbContextTransaction contextTransaction,
             TransactionInterceptor interceptor,
             bool async
-        ) {
+        )
+        {
             Assert.Equal(async, interceptor.AsyncCalled);
             Assert.NotEqual(async, interceptor.SyncCalled);
             Assert.NotEqual(interceptor.AsyncCalled, interceptor.SyncCalled);
@@ -792,7 +809,8 @@ namespace Microsoft.EntityFrameworkCore
             IDbContextTransaction contextTransaction,
             TransactionInterceptor interceptor,
             bool async
-        ) {
+        )
+        {
             Assert.Equal(async, interceptor.AsyncCalled);
             Assert.NotEqual(async, interceptor.SyncCalled);
             Assert.NotEqual(interceptor.AsyncCalled, interceptor.SyncCalled);
@@ -819,7 +837,8 @@ namespace Microsoft.EntityFrameworkCore
             IDbContextTransaction contextTransaction,
             TransactionInterceptor interceptor,
             bool async
-        ) {
+        )
+        {
             Assert.Equal(async, interceptor.AsyncCalled);
             Assert.NotEqual(async, interceptor.SyncCalled);
             Assert.NotEqual(interceptor.AsyncCalled, interceptor.SyncCalled);
@@ -846,7 +865,8 @@ namespace Microsoft.EntityFrameworkCore
             IDbContextTransaction contextTransaction,
             TransactionInterceptor interceptor,
             bool async
-        ) {
+        )
+        {
             Assert.Equal(async, interceptor.AsyncCalled);
             Assert.NotEqual(async, interceptor.SyncCalled);
             Assert.NotEqual(interceptor.AsyncCalled, interceptor.SyncCalled);
@@ -872,7 +892,8 @@ namespace Microsoft.EntityFrameworkCore
             DbContext context,
             TransactionInterceptor interceptor,
             bool async
-        ) {
+        )
+        {
             Assert.Equal(async, interceptor.AsyncCalled);
             Assert.NotEqual(async, interceptor.SyncCalled);
             Assert.NotEqual(interceptor.AsyncCalled, interceptor.SyncCalled);
@@ -969,7 +990,8 @@ namespace Microsoft.EntityFrameworkCore
             protected virtual void AssertStarting(
                 DbConnection connection,
                 TransactionStartingEventData eventData
-            ) {
+            )
+            {
                 Assert.NotNull(eventData.Context);
                 Assert.NotEqual(default, eventData.ConnectionId);
                 Assert.NotEqual(default, eventData.TransactionId);
@@ -985,7 +1007,8 @@ namespace Microsoft.EntityFrameworkCore
             protected virtual void AssertStarted(
                 DbConnection connection,
                 TransactionEndEventData eventData
-            ) {
+            )
+            {
                 Assert.Same(Context, eventData.Context);
                 Assert.Equal(TransactionId, eventData.TransactionId);
                 Assert.Equal(ConnectionId, eventData.ConnectionId);
@@ -1129,7 +1152,8 @@ namespace Microsoft.EntityFrameworkCore
             protected virtual void AssertUsed(
                 DbConnection connection,
                 TransactionEventData eventData
-            ) {
+            )
+            {
                 Assert.NotNull(eventData.Context);
                 Assert.NotEqual(default, eventData.ConnectionId);
                 Assert.NotEqual(default, eventData.TransactionId);
@@ -1144,7 +1168,8 @@ namespace Microsoft.EntityFrameworkCore
                 DbConnection connection,
                 TransactionStartingEventData eventData,
                 InterceptionResult<DbTransaction> result
-            ) {
+            )
+            {
                 Assert.False(eventData.IsAsync);
                 SyncCalled = true;
                 AssertStarting(connection, eventData);
@@ -1156,7 +1181,8 @@ namespace Microsoft.EntityFrameworkCore
                 DbConnection connection,
                 TransactionEndEventData eventData,
                 DbTransaction result
-            ) {
+            )
+            {
                 Assert.False(eventData.IsAsync);
                 SyncCalled = true;
                 AssertStarted(connection, eventData);
@@ -1169,7 +1195,8 @@ namespace Microsoft.EntityFrameworkCore
                 TransactionStartingEventData eventData,
                 InterceptionResult<DbTransaction> result,
                 CancellationToken cancellationToken = default
-            ) {
+            )
+            {
                 Assert.True(eventData.IsAsync);
                 AsyncCalled = true;
                 AssertStarting(connection, eventData);
@@ -1182,7 +1209,8 @@ namespace Microsoft.EntityFrameworkCore
                 TransactionEndEventData eventData,
                 DbTransaction result,
                 CancellationToken cancellationToken = default
-            ) {
+            )
+            {
                 Assert.True(eventData.IsAsync);
                 AsyncCalled = true;
                 AssertStarted(connection, eventData);
@@ -1194,7 +1222,8 @@ namespace Microsoft.EntityFrameworkCore
                 DbConnection connection,
                 TransactionEventData eventData,
                 DbTransaction result
-            ) {
+            )
+            {
                 Assert.False(eventData.IsAsync);
                 SyncCalled = true;
                 AssertUsed(connection, eventData);
@@ -1207,7 +1236,8 @@ namespace Microsoft.EntityFrameworkCore
                 TransactionEventData eventData,
                 DbTransaction result,
                 CancellationToken cancellationToken = default
-            ) {
+            )
+            {
                 Assert.True(eventData.IsAsync);
                 AsyncCalled = true;
                 AssertUsed(connection, eventData);
@@ -1219,7 +1249,8 @@ namespace Microsoft.EntityFrameworkCore
                 DbTransaction transaction,
                 TransactionEventData eventData,
                 InterceptionResult result
-            ) {
+            )
+            {
                 Assert.False(eventData.IsAsync);
                 SyncCalled = true;
                 AssertCommitting(eventData);
@@ -1230,7 +1261,8 @@ namespace Microsoft.EntityFrameworkCore
             public virtual void TransactionCommitted(
                 DbTransaction transaction,
                 TransactionEndEventData eventData
-            ) {
+            )
+            {
                 Assert.False(eventData.IsAsync);
                 SyncCalled = true;
                 AssertCommitted(eventData);
@@ -1241,7 +1273,8 @@ namespace Microsoft.EntityFrameworkCore
                 TransactionEventData eventData,
                 InterceptionResult result,
                 CancellationToken cancellationToken = default
-            ) {
+            )
+            {
                 Assert.True(eventData.IsAsync);
                 AsyncCalled = true;
                 AssertCommitting(eventData);
@@ -1253,7 +1286,8 @@ namespace Microsoft.EntityFrameworkCore
                 DbTransaction transaction,
                 TransactionEndEventData eventData,
                 CancellationToken cancellationToken = default
-            ) {
+            )
+            {
                 Assert.True(eventData.IsAsync);
                 AsyncCalled = true;
                 AssertCommitted(eventData);
@@ -1265,7 +1299,8 @@ namespace Microsoft.EntityFrameworkCore
                 DbTransaction transaction,
                 TransactionEventData eventData,
                 InterceptionResult result
-            ) {
+            )
+            {
                 Assert.False(eventData.IsAsync);
                 SyncCalled = true;
                 AssertRollingBack(eventData);
@@ -1276,7 +1311,8 @@ namespace Microsoft.EntityFrameworkCore
             public virtual void TransactionRolledBack(
                 DbTransaction transaction,
                 TransactionEndEventData eventData
-            ) {
+            )
+            {
                 Assert.False(eventData.IsAsync);
                 SyncCalled = true;
                 AssertRolledBack(eventData);
@@ -1287,7 +1323,8 @@ namespace Microsoft.EntityFrameworkCore
                 TransactionEventData eventData,
                 InterceptionResult result,
                 CancellationToken cancellationToken = default
-            ) {
+            )
+            {
                 Assert.True(eventData.IsAsync);
                 AsyncCalled = true;
                 AssertRollingBack(eventData);
@@ -1299,7 +1336,8 @@ namespace Microsoft.EntityFrameworkCore
                 DbTransaction transaction,
                 TransactionEndEventData eventData,
                 CancellationToken cancellationToken = default
-            ) {
+            )
+            {
                 Assert.True(eventData.IsAsync);
                 AsyncCalled = true;
                 AssertRolledBack(eventData);
@@ -1311,7 +1349,8 @@ namespace Microsoft.EntityFrameworkCore
                 DbTransaction transaction,
                 TransactionEventData eventData,
                 InterceptionResult result
-            ) {
+            )
+            {
                 Assert.False(eventData.IsAsync);
                 SyncCalled = true;
                 AssertCreatingSavepoint(eventData);
@@ -1322,7 +1361,8 @@ namespace Microsoft.EntityFrameworkCore
             public virtual void CreatedSavepoint(
                 DbTransaction transaction,
                 TransactionEventData eventData
-            ) {
+            )
+            {
                 Assert.False(eventData.IsAsync);
                 SyncCalled = true;
                 AssertCreatedSavepoint(eventData);
@@ -1333,7 +1373,8 @@ namespace Microsoft.EntityFrameworkCore
                 TransactionEventData eventData,
                 InterceptionResult result,
                 CancellationToken cancellationToken = default
-            ) {
+            )
+            {
                 Assert.True(eventData.IsAsync);
                 AsyncCalled = true;
                 AssertCreatingSavepoint(eventData);
@@ -1345,7 +1386,8 @@ namespace Microsoft.EntityFrameworkCore
                 DbTransaction transaction,
                 TransactionEventData eventData,
                 CancellationToken cancellationToken = default
-            ) {
+            )
+            {
                 Assert.True(eventData.IsAsync);
                 AsyncCalled = true;
                 AssertCreatedSavepoint(eventData);
@@ -1357,7 +1399,8 @@ namespace Microsoft.EntityFrameworkCore
                 DbTransaction transaction,
                 TransactionEventData eventData,
                 InterceptionResult result
-            ) {
+            )
+            {
                 Assert.False(eventData.IsAsync);
                 SyncCalled = true;
                 AssertRollingBackToSavepoint(eventData);
@@ -1368,7 +1411,8 @@ namespace Microsoft.EntityFrameworkCore
             public virtual void RolledBackToSavepoint(
                 DbTransaction transaction,
                 TransactionEventData eventData
-            ) {
+            )
+            {
                 Assert.False(eventData.IsAsync);
                 SyncCalled = true;
                 AssertRolledBackToSavepoint(eventData);
@@ -1379,7 +1423,8 @@ namespace Microsoft.EntityFrameworkCore
                 TransactionEventData eventData,
                 InterceptionResult result,
                 CancellationToken cancellationToken = default
-            ) {
+            )
+            {
                 Assert.True(eventData.IsAsync);
                 AsyncCalled = true;
                 AssertRollingBackToSavepoint(eventData);
@@ -1391,7 +1436,8 @@ namespace Microsoft.EntityFrameworkCore
                 DbTransaction transaction,
                 TransactionEventData eventData,
                 CancellationToken cancellationToken = default
-            ) {
+            )
+            {
                 Assert.True(eventData.IsAsync);
                 AsyncCalled = true;
                 AssertRolledBackToSavepoint(eventData);
@@ -1403,7 +1449,8 @@ namespace Microsoft.EntityFrameworkCore
                 DbTransaction transaction,
                 TransactionEventData eventData,
                 InterceptionResult result
-            ) {
+            )
+            {
                 Assert.False(eventData.IsAsync);
                 SyncCalled = true;
                 AssertReleasingSavepoint(eventData);
@@ -1414,7 +1461,8 @@ namespace Microsoft.EntityFrameworkCore
             public virtual void ReleasedSavepoint(
                 DbTransaction transaction,
                 TransactionEventData eventData
-            ) {
+            )
+            {
                 Assert.False(eventData.IsAsync);
                 SyncCalled = true;
                 AssertReleasedSavepoint(eventData);
@@ -1425,7 +1473,8 @@ namespace Microsoft.EntityFrameworkCore
                 TransactionEventData eventData,
                 InterceptionResult result,
                 CancellationToken cancellationToken = default
-            ) {
+            )
+            {
                 Assert.True(eventData.IsAsync);
                 AsyncCalled = true;
                 AssertReleasingSavepoint(eventData);
@@ -1437,7 +1486,8 @@ namespace Microsoft.EntityFrameworkCore
                 DbTransaction transaction,
                 TransactionEventData eventData,
                 CancellationToken cancellationToken = default
-            ) {
+            )
+            {
                 Assert.True(eventData.IsAsync);
                 AsyncCalled = true;
                 AssertReleasedSavepoint(eventData);
@@ -1448,7 +1498,8 @@ namespace Microsoft.EntityFrameworkCore
             public virtual void TransactionFailed(
                 DbTransaction transaction,
                 TransactionErrorEventData eventData
-            ) {
+            )
+            {
                 Assert.False(eventData.IsAsync);
                 SyncCalled = true;
                 AssertFailed(eventData);
@@ -1458,7 +1509,8 @@ namespace Microsoft.EntityFrameworkCore
                 DbTransaction transaction,
                 TransactionErrorEventData eventData,
                 CancellationToken cancellationToken = default
-            ) {
+            )
+            {
                 Assert.True(eventData.IsAsync);
                 AsyncCalled = true;
                 AssertFailed(eventData);

@@ -13,7 +13,8 @@ namespace System.Web.Mvc
         public static void GetValidationAttributes(
             IEnumerable<ModelClientValidationRule> clientRules,
             IDictionary<string, object> results
-        ) {
+        )
+        {
             if (clientRules == null)
             {
                 throw new ArgumentNullException("clientRules");
@@ -51,7 +52,8 @@ namespace System.Web.Mvc
             ModelClientValidationRule rule,
             IDictionary<string, object> resultsDictionary,
             string dictionaryKey
-        ) {
+        )
+        {
             if (String.IsNullOrWhiteSpace(rule.ValidationType))
             {
                 throw new InvalidOperationException(
@@ -101,7 +103,8 @@ namespace System.Web.Mvc
 
                 if (
                     !Char.IsLower(key.First()) || key.Any(c => !Char.IsLower(c) && !Char.IsDigit(c))
-                ) {
+                )
+                {
                     throw new InvalidOperationException(
                         String.Format(
                             CultureInfo.CurrentCulture,

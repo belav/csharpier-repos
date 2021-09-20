@@ -69,7 +69,8 @@ namespace Microsoft.AspNetCore.JsonPatch.Internal
             object targetObject,
             string path,
             object expectedTargetObject
-        ) {
+        )
+        {
             // Arrange
             var visitor = new ObjectVisitor(new ParsedPath(path), new DefaultContractResolver());
 
@@ -130,7 +131,8 @@ namespace Microsoft.AspNetCore.JsonPatch.Internal
             object targetObject,
             string path,
             object expectedTargetObject
-        ) {
+        )
+        {
             // Arrange
             var visitor = new ObjectVisitor(new ParsedPath(path), new DefaultContractResolver());
 
@@ -177,7 +179,8 @@ namespace Microsoft.AspNetCore.JsonPatch.Internal
             object targetObject,
             string path,
             object expectedTargetObject
-        ) {
+        )
+        {
             // Arrange
             var contractResolver = new DefaultContractResolver();
             var visitor = new ObjectVisitor(new ParsedPath(path), contractResolver);
@@ -228,7 +231,8 @@ namespace Microsoft.AspNetCore.JsonPatch.Internal
             object targetObject,
             string path,
             object expectedTargetObject
-        ) {
+        )
+        {
             // Arrange
             var visitor = new ObjectVisitor(new ParsedPath(path), new DefaultContractResolver());
 

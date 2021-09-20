@@ -16,7 +16,8 @@ namespace System.Linq.Expressions.Tests
             MethodInfo assign,
             Type type,
             bool useInterpreter
-        ) {
+        )
+        {
             Func<Expression, Expression, Expression> withoutAssignment =
                 (Func<Expression, Expression, Expression>)nonAssign.CreateDelegate(
                     typeof(Func<Expression, Expression, Expression>)
@@ -83,7 +84,8 @@ namespace System.Linq.Expressions.Tests
             MethodInfo assign,
             Type type,
             bool useInterpreter
-        ) {
+        )
+        {
             Func<Expression, Expression, Expression> withoutAssignment =
                 (Func<Expression, Expression, Expression>)nonAssign.CreateDelegate(
                     typeof(Func<Expression, Expression, Expression>)
@@ -133,7 +135,8 @@ namespace System.Linq.Expressions.Tests
             MethodInfo assign,
             Type type,
             bool useInterpreter
-        ) {
+        )
+        {
             Func<Expression, Expression, Expression> withoutAssignment =
                 (Func<Expression, Expression, Expression>)nonAssign.CreateDelegate(
                     typeof(Func<Expression, Expression, Expression>)
@@ -175,7 +178,8 @@ namespace System.Linq.Expressions.Tests
             MethodInfo assign,
             Type type,
             bool useInterpreter
-        ) {
+        )
+        {
             Func<Expression, Expression, Expression> withoutAssignment =
                 (Func<Expression, Expression, Expression>)nonAssign.CreateDelegate(
                     typeof(Func<Expression, Expression, Expression>)
@@ -416,7 +420,8 @@ namespace System.Linq.Expressions.Tests
 
         public static IEnumerable<Tuple<string, string>> AssignAndEquivalentMethodNames(
             bool integral
-        ) {
+        )
+        {
             yield return Tuple.Create("Add", "AddAssign");
             yield return Tuple.Create("AddChecked", "AddAssignChecked");
             yield return Tuple.Create("Divide", "DivideAssign");
@@ -647,7 +652,8 @@ namespace System.Linq.Expressions.Tests
         public void ConversionMustConvertFromRHSType(
             ExpressionType type,
             LambdaExpression conversion
-        ) {
+        )
+        {
             var lhs = Expression.Parameter(typeof(int));
             var rhs = Expression.Constant(25);
             MethodInfo meth = GetType().GetMethod(nameof(FiftyNinthBear));
@@ -747,7 +753,8 @@ namespace System.Linq.Expressions.Tests
         public void MethodNoConvertOpWriteByRefParameter(
             Func<Expression, Expression, MethodInfo, BinaryExpression> factory,
             bool useInterpreter
-        ) {
+        )
+        {
             var pX = Expression.Parameter(typeof(int).MakeByRefType());
             var pY = Expression.Parameter(typeof(int));
             var exp = Expression.Lambda<ByRefInts>(
@@ -817,7 +824,8 @@ namespace System.Linq.Expressions.Tests
                 int right,
                 T expected,
                 bool preferInterpretation
-            ) {
+            )
+            {
                 expr.Compile(preferInterpretation).Invoke(ref left, right);
                 Assert.Equal(expected, left);
             }

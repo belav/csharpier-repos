@@ -22,7 +22,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             TypeSymbol source,
             TypeSymbol target,
             ref CompoundUseSiteInfo<AssemblySymbol> useSiteInfo
-        ) {
+        )
+        {
             Debug.Assert(sourceExpression != null || (object)source != null);
             Debug.Assert((object)target != null);
 
@@ -90,7 +91,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             TypeSymbol target,
             ArrayBuilder<NamedTypeSymbol> d,
             ref CompoundUseSiteInfo<AssemblySymbol> useSiteInfo
-        ) {
+        )
+        {
             TypeSymbol s0 = GetUnderlyingEffectiveType(source, ref useSiteInfo);
             TypeSymbol t0 = GetUnderlyingEffectiveType(target, ref useSiteInfo);
 
@@ -120,7 +122,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             ArrayBuilder<NamedTypeSymbol> d,
             ArrayBuilder<UserDefinedConversionAnalysis> u,
             ref CompoundUseSiteInfo<AssemblySymbol> useSiteInfo
-        ) {
+        )
+        {
             Debug.Assert(sourceExpression != null || (object)source != null);
             Debug.Assert((object)target != null);
             Debug.Assert(d != null);
@@ -157,7 +160,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             NamedTypeSymbol declaringType,
             string operatorName,
             ref CompoundUseSiteInfo<AssemblySymbol> useSiteInfo
-        ) {
+        )
+        {
             Debug.Assert(sourceExpression != null || (object)source != null);
             Debug.Assert((object)target != null);
             Debug.Assert(u != null);
@@ -228,7 +232,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                     op.ReturnsVoid
                     || op.ParameterCount != 1
                     || op.ReturnType.TypeKind == TypeKind.Error
-                ) {
+                )
+                {
                     continue;
                 }
 
@@ -258,7 +263,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                         convertsFrom,
                         ref useSiteInfo
                     ).Exists
-                ) {
+                )
+                {
                     fromConversion = ClassifyBuiltInConversion(
                         source,
                         convertsFrom,
@@ -277,7 +283,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                         target.GetNullableUnderlyingType(),
                         ref useSiteInfo
                     ).Exists
-                ) {
+                )
+                {
                     toConversion = ClassifyBuiltInConversion(convertsTo, target, ref useSiteInfo);
                 }
 
@@ -313,7 +320,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                         && source.IsNullableType()
                         && convertsFrom.IsNonNullableValueType()
                         && target.CanBeAssignedNull()
-                    ) {
+                    )
+                    {
                         TypeSymbol nullableFrom = MakeNullableType(convertsFrom);
                         TypeSymbol nullableTo = convertsTo.IsNonNullableValueType()
                             ? MakeNullableType(convertsTo)
@@ -374,7 +382,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                             (object)source != null
                             && source.IsNullableType()
                             && convertsFrom.IsNonNullableValueType()
-                        ) {
+                        )
+                        {
                             convertsFrom = MakeNullableType(convertsFrom);
                             fromConversion = EncompassingExplicitConversion(
                                 null,
@@ -403,7 +412,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             BoundExpression sourceExpression,
             TypeSymbol source,
             ref CompoundUseSiteInfo<AssemblySymbol> useSiteInfo
-        ) {
+        )
+        {
             // SPEC: If any of the operators in U convert from S then SX is S.
 
             // SPEC: Otherwise, if any of the operators in U convert from types
@@ -445,7 +455,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                                 TypeCompareKind.ConsiderEverything2
                             )
                     )
-                ) {
+                )
+                {
                     return source;
                 }
 
@@ -479,7 +490,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             ImmutableArray<UserDefinedConversionAnalysis> u,
             TypeSymbol target,
             ref CompoundUseSiteInfo<AssemblySymbol> useSiteInfo
-        ) {
+        )
+        {
             // SPEC: If any of the operators in U convert to T then TX is T.
 
             // SPEC: Otherwise, if any of the operators in U convert to types that are
@@ -514,7 +526,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                     conv =>
                         TypeSymbol.Equals(conv.ToType, target, TypeCompareKind.ConsiderEverything2)
                 )
-            ) {
+            )
+            {
                 return target;
             }
 
@@ -542,7 +555,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             TypeSymbol a,
             TypeSymbol b,
             ref CompoundUseSiteInfo<AssemblySymbol> useSiteInfo
-        ) {
+        )
+        {
             Debug.Assert(expr != null || (object)a != null);
             Debug.Assert((object)b != null);
 

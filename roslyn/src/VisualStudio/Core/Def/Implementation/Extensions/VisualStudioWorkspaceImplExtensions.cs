@@ -35,7 +35,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Extensions
             uint itemId,
             out IntPtr imageList,
             out ushort index
-        ) {
+        )
+        {
             var itemIdToImageHandle = s_hierarchyToItemIdToImageHandle.GetValue(
                 hierarchy,
                 s_createValue
@@ -74,7 +75,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Extensions
                 if (
                     Microsoft.Internal.VisualStudio.PlatformUI.Utilities.GetObjectData(uiObject)
                     is IVsUIWin32ImageList imageListData
-                ) {
+                )
+                {
                     if (ErrorHandler.Succeeded(imageListData.GetHIMAGELIST(out var imageListInt)))
                     {
                         imageList = (IntPtr)imageListInt;
@@ -95,7 +97,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Extensions
             DocumentId id,
             out IntPtr imageList,
             out ushort index
-        ) {
+        )
+        {
             var hierarchy = workspace.GetHierarchy(id.ProjectId);
             var document = workspace.CurrentSolution.GetDocument(id);
             if (hierarchy != null && !RoslynString.IsNullOrEmpty(document?.FilePath))
@@ -131,7 +134,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Extensions
                 int firstImageIndex,
                 int imageMonikerCount,
                 ImageMoniker[] imageMonikers
-            ) {
+            )
+            {
                 if (firstImageIndex == 0 && imageMonikerCount == 1)
                 {
                     imageMonikers[0] = _imageMoniker;

@@ -40,7 +40,8 @@ namespace Microsoft.CodeAnalysis.Completion.Providers
         internal ImmutableArray<CompletionItem> GetItems(
             string directoryPath,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             using var resultDisposer = ArrayBuilder<CompletionItem>.GetInstance(out var result);
 
             var comma = directoryPath.IndexOf(',');

@@ -159,7 +159,8 @@ public unsafe class Program
         foreach (
             var method in typeof(Program).GetMethods(BindingFlags.Static | BindingFlags.NonPublic)
                 .Where(m => m.Name.StartsWith("Test"))
-        ) {
+        )
+        {
             try
             {
                 method.Invoke(null, null);

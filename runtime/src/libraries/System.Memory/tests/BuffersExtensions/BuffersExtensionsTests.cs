@@ -54,7 +54,8 @@ namespace System.Buffers.Tests
         public void WritingToTooSmallSingleSegmentBufferFailsWithException(
             int inputSize,
             int destinationSize
-        ) {
+        )
+        {
             IBufferWriter<byte> bufferWriter = new MultiSegmentArrayBufferWriter<byte>(
                 new byte[][] { new byte[destinationSize] }
             );
@@ -72,7 +73,8 @@ namespace System.Buffers.Tests
             int inputSize,
             int firstSegmentSize,
             int secondSegmentSize
-        ) {
+        )
+        {
             IBufferWriter<byte> bufferWriter = new MultiSegmentArrayBufferWriter<byte>(
                 new byte[][] { new byte[firstSegmentSize], new byte[secondSegmentSize] }
             );

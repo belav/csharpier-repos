@@ -84,7 +84,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
 
         internal static ImmutableArray<DiagnosticInfo> ErrorsAndWarnings(
             this SyntaxNodeOrToken nodeOrToken
-        ) {
+        )
+        {
             return nodeOrToken.UnderlyingNode.ErrorsAndWarnings();
         }
         #endregion
@@ -113,7 +114,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
         private static ImmutableArray<DiagnosticInfo> ErrorsOrWarnings(
             this GreenNode node,
             bool errorsOnly
-        ) {
+        )
+        {
             ArrayBuilder<DiagnosticInfo> b = ArrayBuilder<DiagnosticInfo>.GetInstance();
 
             var l = new SyntaxDiagnosticInfoList(node);

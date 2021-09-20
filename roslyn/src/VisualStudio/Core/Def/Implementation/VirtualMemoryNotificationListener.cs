@@ -154,7 +154,8 @@ namespace Microsoft.VisualStudio.LanguageServices
         {
             if (
                 _workspace.Options.GetOption(RuntimeOptions.BackgroundAnalysisSuspendedInfoBarShown)
-            ) {
+            )
+            {
                 // Info bar already shown.
                 return;
             }

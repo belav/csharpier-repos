@@ -135,7 +135,8 @@ namespace System.Transactions
             if (
                 Interlocked.Exchange(ref _disposed, Transaction._disposedTrueValue)
                 == Transaction._disposedTrueValue
-            ) {
+            )
+            {
                 return;
             }
 
@@ -143,7 +144,8 @@ namespace System.Transactions
             if (
                 _internalTransaction.State.get_Status(_internalTransaction)
                 == TransactionStatus.Active
-            ) {
+            )
+            {
                 lock (_internalTransaction)
                 {
                     // Since this is the root transaction do state based dispose.

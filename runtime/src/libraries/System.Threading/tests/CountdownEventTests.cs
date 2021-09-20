@@ -26,7 +26,8 @@ namespace System.Threading.Tests
             int initCount,
             int increms,
             bool takeAllAtOnce
-        ) {
+        )
+        {
             // Validates init, set, reset state transitions.
 
             CountdownEvent ev = new CountdownEvent(initCount);

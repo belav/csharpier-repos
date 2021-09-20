@@ -104,7 +104,8 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
             IPropertyBase propertyBase,
             object? value,
             bool forMaterialization
-        ) {
+        )
+        {
             if (!propertyBase.IsShadowProperty())
             {
                 base.WritePropertyValue(propertyBase, value, forMaterialization);
@@ -164,7 +165,8 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
             INavigationBase navigationBase,
             InternalEntityEntry value,
             bool forMaterialization
-        ) {
+        )
+        {
             if (!navigationBase.IsShadowProperty())
             {
                 return base.AddToCollection(navigationBase, value, forMaterialization);

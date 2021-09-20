@@ -34,7 +34,8 @@ namespace ILCompiler
             this DependencyTrackingLevel trackingLevel,
             NodeFactory factory,
             IComparer<DependencyNodeCore<NodeFactory>> comparer = null
-        ) {
+        )
+        {
             // Choose which dependency graph implementation to use based on the amount of logging requested.
             switch (trackingLevel)
             {

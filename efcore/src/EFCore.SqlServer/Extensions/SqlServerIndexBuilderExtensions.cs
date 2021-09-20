@@ -29,7 +29,8 @@ namespace Microsoft.EntityFrameworkCore
         public static IndexBuilder IsClustered(
             this IndexBuilder indexBuilder,
             bool clustered = true
-        ) {
+        )
+        {
             Check.NotNull(indexBuilder, nameof(indexBuilder));
 
             indexBuilder.Metadata.SetIsClustered(clustered);
@@ -62,7 +63,8 @@ namespace Microsoft.EntityFrameworkCore
             this IConventionIndexBuilder indexBuilder,
             bool? clustered,
             bool fromDataAnnotation = false
-        ) {
+        )
+        {
             if (indexBuilder.CanSetIsClustered(clustered, fromDataAnnotation))
             {
                 indexBuilder.Metadata.SetIsClustered(clustered, fromDataAnnotation);
@@ -83,7 +85,8 @@ namespace Microsoft.EntityFrameworkCore
             this IConventionIndexBuilder indexBuilder,
             bool? clustered,
             bool fromDataAnnotation = false
-        ) {
+        )
+        {
             Check.NotNull(indexBuilder, nameof(indexBuilder));
 
             return indexBuilder.CanSetAnnotation(
@@ -102,7 +105,8 @@ namespace Microsoft.EntityFrameworkCore
         public static IndexBuilder IncludeProperties(
             this IndexBuilder indexBuilder,
             params string[] propertyNames
-        ) {
+        )
+        {
             Check.NotNull(indexBuilder, nameof(indexBuilder));
             Check.NotNull(propertyNames, nameof(propertyNames));
 
@@ -120,7 +124,8 @@ namespace Microsoft.EntityFrameworkCore
         public static IndexBuilder<TEntity> IncludeProperties<TEntity>(
             this IndexBuilder<TEntity> indexBuilder,
             params string[] propertyNames
-        ) {
+        )
+        {
             Check.NotNull(indexBuilder, nameof(indexBuilder));
             Check.NotNull(propertyNames, nameof(propertyNames));
 
@@ -147,7 +152,8 @@ namespace Microsoft.EntityFrameworkCore
         public static IndexBuilder<TEntity> IncludeProperties<TEntity>(
             this IndexBuilder<TEntity> indexBuilder,
             Expression<Func<TEntity, object>> includeExpression
-        ) {
+        )
+        {
             Check.NotNull(indexBuilder, nameof(indexBuilder));
             Check.NotNull(includeExpression, nameof(includeExpression));
 
@@ -175,7 +181,8 @@ namespace Microsoft.EntityFrameworkCore
             this IConventionIndexBuilder indexBuilder,
             IReadOnlyList<string>? propertyNames,
             bool fromDataAnnotation = false
-        ) {
+        )
+        {
             if (indexBuilder.CanSetIncludeProperties(propertyNames, fromDataAnnotation))
             {
                 indexBuilder.Metadata.SetIncludeProperties(propertyNames, fromDataAnnotation);
@@ -197,7 +204,8 @@ namespace Microsoft.EntityFrameworkCore
             this IConventionIndexBuilder indexBuilder,
             IReadOnlyList<string>? propertyNames,
             bool fromDataAnnotation = false
-        ) {
+        )
+        {
             Check.NotNull(indexBuilder, nameof(indexBuilder));
 
             return (
@@ -225,7 +233,8 @@ namespace Microsoft.EntityFrameworkCore
         public static IndexBuilder IsCreatedOnline(
             this IndexBuilder indexBuilder,
             bool createdOnline = true
-        ) {
+        )
+        {
             Check.NotNull(indexBuilder, nameof(indexBuilder));
 
             indexBuilder.Metadata.SetIsCreatedOnline(createdOnline);
@@ -258,7 +267,8 @@ namespace Microsoft.EntityFrameworkCore
             this IConventionIndexBuilder indexBuilder,
             bool? createdOnline,
             bool fromDataAnnotation = false
-        ) {
+        )
+        {
             if (indexBuilder.CanSetIsCreatedOnline(createdOnline, fromDataAnnotation))
             {
                 indexBuilder.Metadata.SetIsCreatedOnline(createdOnline, fromDataAnnotation);
@@ -284,7 +294,8 @@ namespace Microsoft.EntityFrameworkCore
             this IConventionIndexBuilder indexBuilder,
             bool? createdOnline,
             bool fromDataAnnotation = false
-        ) {
+        )
+        {
             Check.NotNull(indexBuilder, nameof(indexBuilder));
 
             return indexBuilder.CanSetAnnotation(
@@ -334,7 +345,8 @@ namespace Microsoft.EntityFrameworkCore
             this IConventionIndexBuilder indexBuilder,
             int? fillFactor,
             bool fromDataAnnotation = false
-        ) {
+        )
+        {
             if (indexBuilder.CanSetFillFactor(fillFactor, fromDataAnnotation))
             {
                 indexBuilder.Metadata.SetFillFactor(fillFactor, fromDataAnnotation);
@@ -356,7 +368,8 @@ namespace Microsoft.EntityFrameworkCore
             this IConventionIndexBuilder indexBuilder,
             int? fillFactor,
             bool fromDataAnnotation = false
-        ) {
+        )
+        {
             Check.NotNull(indexBuilder, nameof(indexBuilder));
 
             return indexBuilder.CanSetAnnotation(

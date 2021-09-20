@@ -58,7 +58,8 @@ namespace LOHCompactAPI
             if (
                 GCSettings.LargeObjectHeapCompactionMode
                 != GCLargeObjectHeapCompactionMode.CompactOnce
-            ) {
+            )
+            {
                 Console.WriteLine(
                     "GCLargeObjectHeapCompactionMode should be CompactOnce; instead it is "
                         + GCSettings.LargeObjectHeapCompactionMode
@@ -124,7 +125,8 @@ namespace LOHCompactAPI
             Type GCType = Type.GetType("System.GC");
             foreach (
                 MethodInfo m in GCType.GetMethods(BindingFlags.Static | BindingFlags.NonPublic)
-            ) {
+            )
+            {
                 if (m.Name.Equals("_CollectionCount") && m.GetParameters().Length == 2)
                     collectionCountmethod = m;
             }

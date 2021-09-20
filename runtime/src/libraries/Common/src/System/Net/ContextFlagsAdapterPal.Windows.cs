@@ -15,7 +15,8 @@ namespace System.Net
             public ContextFlagMapping(
                 Interop.SspiCli.ContextFlags win32Flag,
                 ContextFlagsPal contextFlag
-            ) {
+            )
+            {
                 Win32Flag = win32Flag;
                 ContextFlag = contextFlag;
             }
@@ -109,7 +110,8 @@ namespace System.Net
 
         internal static ContextFlagsPal GetContextFlagsPalFromInterop(
             Interop.SspiCli.ContextFlags win32Flags
-        ) {
+        )
+        {
             ContextFlagsPal flags = ContextFlagsPal.None;
             foreach (ContextFlagMapping mapping in s_contextFlagMapping)
             {
@@ -124,7 +126,8 @@ namespace System.Net
 
         internal static Interop.SspiCli.ContextFlags GetInteropFromContextFlagsPal(
             ContextFlagsPal flags
-        ) {
+        )
+        {
             Interop.SspiCli.ContextFlags win32Flags = Interop.SspiCli.ContextFlags.Zero;
             foreach (ContextFlagMapping mapping in s_contextFlagMapping)
             {

@@ -193,7 +193,8 @@ namespace Microsoft.CodeAnalysis.CodeRefactorings
             SyntaxNode root,
             TextSpan selectionTrimmed,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             // get Token for current location
             var location = selectionTrimmed.Start;
             var tokenOnLocation = root.FindToken(location);
@@ -246,7 +247,8 @@ namespace Microsoft.CodeAnalysis.CodeRefactorings
                 SourceText sourceText,
                 SyntaxToken tokenOnLocation,
                 int location
-            ) {
+            )
+            {
                 // assume non-trivia token can't span multiple lines
                 var tokenLine = sourceText.Lines.GetLineFromPosition(tokenOnLocation.Span.Start);
                 var locationLine = sourceText.Lines.GetLineFromPosition(location);
@@ -303,7 +305,8 @@ namespace Microsoft.CodeAnalysis.CodeRefactorings
                             leftNode.GetLastToken().Span.End == location
                             || leftNode.Span.End == location
                         )
-                    ) {
+                    )
+                    {
                         break;
                     }
                 } while (true);
@@ -418,7 +421,8 @@ namespace Microsoft.CodeAnalysis.CodeRefactorings
         protected virtual IEnumerable<SyntaxNode> ExtractNodesSimple(
             SyntaxNode? node,
             ISyntaxFactsService syntaxFacts
-        ) {
+        )
+        {
             if (node == null)
             {
                 yield break;
@@ -436,7 +440,8 @@ namespace Microsoft.CodeAnalysis.CodeRefactorings
             if (
                 syntaxFacts.IsLocalDeclarationStatement(node)
                 || syntaxFacts.IsLocalDeclarationStatement(node.Parent)
-            ) {
+            )
+            {
                 var localDeclarationStatement = syntaxFacts.IsLocalDeclarationStatement(node)
                     ? node
                     : node.Parent!;
@@ -521,7 +526,8 @@ namespace Microsoft.CodeAnalysis.CodeRefactorings
             SyntaxNode root,
             int location,
             ISyntaxFactsService syntaxFacts
-        ) {
+        )
+        {
             // Header: [Test] `public int a` { get; set; }
             if (
                 syntaxFacts.IsOnPropertyDeclarationHeader(
@@ -529,7 +535,8 @@ namespace Microsoft.CodeAnalysis.CodeRefactorings
                     location,
                     out var propertyDeclaration
                 )
-            ) {
+            )
+            {
                 yield return propertyDeclaration;
             }
 
@@ -610,7 +617,8 @@ namespace Microsoft.CodeAnalysis.CodeRefactorings
                     if (
                         argumentStartLine == caretLine
                         && !correctTypeNode.OverlapsHiddenPosition(cancellationToken)
-                    ) {
+                    )
+                    {
                         relevantNodesBuilder.Add(correctTypeNode);
                     }
                     else if (argumentStartLine < caretLine)

@@ -56,7 +56,8 @@ namespace System.IO.Pipes
             int offset,
             int count,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             ValidateBufferArguments(buffer, offset, count);
             if (!CanRead)
             {
@@ -88,7 +89,8 @@ namespace System.IO.Pipes
         public override ValueTask<int> ReadAsync(
             Memory<byte> buffer,
             CancellationToken cancellationToken = default(CancellationToken)
-        ) {
+        )
+        {
             if (!_isAsync)
             {
                 return base.ReadAsync(buffer, cancellationToken);
@@ -121,7 +123,8 @@ namespace System.IO.Pipes
             int count,
             AsyncCallback? callback,
             object? state
-        ) {
+        )
+        {
             if (_isAsync)
                 return TaskToApm.Begin(
                     ReadAsync(buffer, offset, count, CancellationToken.None),
@@ -180,7 +183,8 @@ namespace System.IO.Pipes
             int offset,
             int count,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             ValidateBufferArguments(buffer, offset, count);
             if (!CanWrite)
             {
@@ -213,7 +217,8 @@ namespace System.IO.Pipes
         public override ValueTask WriteAsync(
             ReadOnlyMemory<byte> buffer,
             CancellationToken cancellationToken = default(CancellationToken)
-        ) {
+        )
+        {
             if (!_isAsync)
             {
                 return base.WriteAsync(buffer, cancellationToken);
@@ -245,7 +250,8 @@ namespace System.IO.Pipes
             int count,
             AsyncCallback? callback,
             object? state
-        ) {
+        )
+        {
             if (_isAsync)
                 return TaskToApm.Begin(
                     WriteAsync(buffer, offset, count, CancellationToken.None),
@@ -273,7 +279,8 @@ namespace System.IO.Pipes
                     @"\\.\pipe\" + AnonymousPipeName,
                     StringComparison.OrdinalIgnoreCase
                 )
-            ) {
+            )
+            {
                 throw new ArgumentOutOfRangeException(
                     nameof(pipeName),
                     SR.ArgumentOutOfRange_AnonymousReserved
@@ -290,7 +297,8 @@ namespace System.IO.Pipes
             if (
                 Interop.Kernel32.GetFileType(safePipeHandle)
                 != Interop.Kernel32.FileTypes.FILE_TYPE_PIPE
-            ) {
+            )
+            {
                 throw new IOException(SR.IO_InvalidPipeHandle);
             }
         }
@@ -323,7 +331,8 @@ namespace System.IO.Pipes
                 if (
                     errorCode == Interop.Errors.ERROR_BROKEN_PIPE
                     || errorCode == Interop.Errors.ERROR_PIPE_NOT_CONNECTED
-                ) {
+                )
+                {
                     State = PipeState.Broken;
                     r = 0;
                 }
@@ -342,7 +351,8 @@ namespace System.IO.Pipes
         private ValueTask<int> ReadAsyncCore(
             Memory<byte> buffer,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var completionSource = new ReadWriteCompletionSource(this, buffer, isWrite: false);
 
             // Queue an async ReadFile operation and pass in a packed overlapped
@@ -414,7 +424,8 @@ namespace System.IO.Pipes
         private Task WriteAsyncCore(
             ReadOnlyMemory<byte> buffer,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var completionSource = new ReadWriteCompletionSource(this, buffer, isWrite: true);
             int errorCode = 0;
 
@@ -543,7 +554,8 @@ namespace System.IO.Pipes
                 }
                 else if (
                     !Interop.Kernel32.GetNamedPipeInfo(_handle!, null, &outBufferSize, null, null)
-                ) {
+                )
+                {
                     throw WinIOError(Marshal.GetLastWin32Error());
                 }
 
@@ -587,7 +599,8 @@ namespace System.IO.Pipes
                             IntPtr.Zero,
                             IntPtr.Zero
                         )
-                    ) {
+                    )
+                    {
                         throw WinIOError(Marshal.GetLastWin32Error());
                     }
                     else
@@ -603,7 +616,8 @@ namespace System.IO.Pipes
             Span<byte> buffer,
             NativeOverlapped* overlapped,
             out int errorCode
-        ) {
+        )
+        {
             DebugAssertHandleValid(handle);
             Debug.Assert(
                 (_isAsync && overlapped != null) || (!_isAsync && overlapped == null),
@@ -651,7 +665,8 @@ namespace System.IO.Pipes
             ReadOnlySpan<byte> buffer,
             NativeOverlapped* overlapped,
             out int errorCode
-        ) {
+        )
+        {
             DebugAssertHandleValid(handle);
             Debug.Assert(
                 (_isAsync && overlapped != null) || (!_isAsync && overlapped == null),
@@ -695,7 +710,8 @@ namespace System.IO.Pipes
 
         internal static unsafe Interop.Kernel32.SECURITY_ATTRIBUTES GetSecAttrs(
             HandleInheritability inheritability
-        ) {
+        )
+        {
             Interop.Kernel32.SECURITY_ATTRIBUTES secAttrs = new Interop.Kernel32.SECURITY_ATTRIBUTES
             {
                 nLength = (uint)sizeof(Interop.Kernel32.SECURITY_ATTRIBUTES),
@@ -712,7 +728,8 @@ namespace System.IO.Pipes
             HandleInheritability inheritability,
             PipeSecurity? pipeSecurity,
             ref GCHandle pinningHandle
-        ) {
+        )
+        {
             Interop.Kernel32.SECURITY_ATTRIBUTES secAttrs = GetSecAttrs(inheritability);
 
             if (pipeSecurity != null)
@@ -744,7 +761,8 @@ namespace System.IO.Pipes
                     null,
                     0
                 )
-            ) {
+            )
+            {
                 throw WinIOError(Marshal.GetLastWin32Error());
             }
 

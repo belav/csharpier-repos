@@ -35,13 +35,15 @@ namespace System.Threading.Channels
         }
         public static System.Threading.Channels.Channel<T> CreateBounded<T>(
             System.Threading.Channels.BoundedChannelOptions options
-        ) {
+        )
+        {
             throw null;
         }
         public static System.Threading.Channels.Channel<T> CreateBounded<T>(
             BoundedChannelOptions options,
             Action<T>? itemDropped
-        ) {
+        )
+        {
             throw null;
         }
         public static System.Threading.Channels.Channel<T> CreateUnbounded<T>()
@@ -50,7 +52,8 @@ namespace System.Threading.Channels
         }
         public static System.Threading.Channels.Channel<T> CreateUnbounded<T>(
             System.Threading.Channels.UnboundedChannelOptions options
-        ) {
+        )
+        {
             throw null;
         }
     }
@@ -98,7 +101,8 @@ namespace System.Threading.Channels
         public virtual System.Threading.Tasks.ValueTask<T> ReadAsync(
             System.Threading.CancellationToken cancellationToken =
                 default(System.Threading.CancellationToken)
-        ) {
+        )
+        {
             throw null;
         }
         public abstract bool TryRead(
@@ -126,7 +130,8 @@ namespace System.Threading.Channels
             T item,
             System.Threading.CancellationToken cancellationToken =
                 default(System.Threading.CancellationToken)
-        ) {
+        )
+        {
             throw null;
         }
     }
@@ -149,12 +154,14 @@ namespace System.Threading.Channels
         }
         public static implicit operator System.Threading.Channels.ChannelReader<TRead>(
             System.Threading.Channels.Channel<TWrite, TRead> channel
-        ) {
+        )
+        {
             throw null;
         }
         public static implicit operator System.Threading.Channels.ChannelWriter<TWrite>(
             System.Threading.Channels.Channel<TWrite, TRead> channel
-        ) {
+        )
+        {
             throw null;
         }
     }

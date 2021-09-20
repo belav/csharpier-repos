@@ -39,7 +39,8 @@ namespace Microsoft.AspNetCore.Mvc.Routing
             string appBase,
             string virtualPath,
             string expected
-        ) {
+        )
+        {
             // Arrange
             var services = CreateServices();
             var httpContext = CreateHttpContext(services, appBase, host: null, protocol: null);
@@ -63,7 +64,8 @@ namespace Microsoft.AspNetCore.Mvc.Routing
             string appBase,
             string virtualPath,
             string expected
-        ) {
+        )
+        {
             // Arrange
             var fragmentValue = "fragment-value";
             expected += $"#{fragmentValue}";
@@ -104,7 +106,8 @@ namespace Microsoft.AspNetCore.Mvc.Routing
             string virtualPath,
             string fragment,
             string expected
-        ) {
+        )
+        {
             // Arrange
             var services = CreateServices();
             var httpContext = CreateHttpContext(services, appBase, host, protocol);
@@ -134,7 +137,8 @@ namespace Microsoft.AspNetCore.Mvc.Routing
             string appRoot,
             string host,
             string protocol
-        ) {
+        )
+        {
             appRoot = string.IsNullOrEmpty(appRoot) ? string.Empty : appRoot;
             host = string.IsNullOrEmpty(host) ? "localhost" : host;
 
@@ -170,7 +174,8 @@ namespace Microsoft.AspNetCore.Mvc.Routing
                 string host,
                 string virtualPath,
                 string fragment
-            ) {
+            )
+            {
                 return base.GenerateUrl(protocol, host, virtualPath, fragment);
             }
         }

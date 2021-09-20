@@ -39,7 +39,8 @@ namespace Microsoft.Extensions.Logging.TraceSource
         public TraceSourceLoggerProvider(
             SourceSwitch rootSourceSwitch,
             TraceListener rootTraceListener
-        ) {
+        )
+        {
             if (rootSourceSwitch == null)
             {
                 throw new ArgumentNullException(nameof(rootSourceSwitch));

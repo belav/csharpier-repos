@@ -193,7 +193,8 @@ namespace Microsoft.AspNetCore.Http.Connections.Client.Internal
             public static void ConnectionAlreadyClosedSendingDeleteRequest(
                 ILogger logger,
                 Uri pollUrl
-            ) {
+            )
+            {
                 _connectionAlreadyClosedSendingDeleteRequest(logger, pollUrl, null);
             }
         }

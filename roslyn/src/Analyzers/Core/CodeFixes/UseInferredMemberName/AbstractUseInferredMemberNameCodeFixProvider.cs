@@ -45,7 +45,8 @@ namespace Microsoft.CodeAnalysis.UseInferredMemberName
             ImmutableArray<Diagnostic> diagnostics,
             SyntaxEditor editor,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var root = editor.OriginalRoot;
 
             foreach (var diagnostic in diagnostics)
@@ -59,13 +60,12 @@ namespace Microsoft.CodeAnalysis.UseInferredMemberName
 
         private class MyCodeAction : CustomCodeActions.DocumentChangeAction
         {
-            public MyCodeAction(
-                Func<CancellationToken, Task<Document>> createChangedDocument
-            ) : base(
-                AnalyzersResources.Use_inferred_member_name,
-                createChangedDocument,
-                AnalyzersResources.Use_inferred_member_name
-            ) { }
+            public MyCodeAction(Func<CancellationToken, Task<Document>> createChangedDocument)
+                : base(
+                    AnalyzersResources.Use_inferred_member_name,
+                    createChangedDocument,
+                    AnalyzersResources.Use_inferred_member_name
+                ) { }
         }
     }
 }

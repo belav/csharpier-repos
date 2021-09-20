@@ -30,7 +30,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.Structure
         public bool ExecuteCommand(
             StartAutomaticOutliningCommandArgs args,
             CommandExecutionContext context
-        ) {
+        )
+        {
             // The editor actually handles this command, we just have to make sure it is enabled.
             return false;
         }

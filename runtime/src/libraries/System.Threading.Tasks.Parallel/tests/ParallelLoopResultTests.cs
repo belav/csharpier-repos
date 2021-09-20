@@ -225,7 +225,8 @@ namespace System.Threading.Tasks.Tests
             string ttype,
             bool shouldComplete,
             int? expectedLBI
-        ) {
+        )
+        {
             Assert.Equal(shouldComplete, plr.IsCompleted);
             Assert.Equal(expectedLBI, plr.LowestBreakIteration);
         }
@@ -238,7 +239,8 @@ namespace System.Threading.Tasks.Tests
             bool shouldComplete,
             bool shouldStop,
             bool shouldBreak
-        ) {
+        )
+        {
             ForPLRTest(
                 body,
                 new ParallelOptions(),
@@ -260,7 +262,8 @@ namespace System.Threading.Tasks.Tests
             bool shouldStop,
             bool shouldBreak,
             bool shouldCancel
-        ) {
+        )
+        {
             try
             {
                 ParallelLoopResult plr = Parallel.For(0, 1, parallelOptions, body);
@@ -290,7 +293,8 @@ namespace System.Threading.Tasks.Tests
             bool shouldComplete,
             bool shouldStop,
             bool shouldBreak
-        ) {
+        )
+        {
             For64PLRTest(
                 body,
                 new ParallelOptions(),
@@ -312,7 +316,8 @@ namespace System.Threading.Tasks.Tests
             bool shouldStop,
             bool shouldBreak,
             bool shouldCancel
-        ) {
+        )
+        {
             try
             {
                 ParallelLoopResult plr = Parallel.For(0L, 1L, parallelOptions, body);
@@ -342,7 +347,8 @@ namespace System.Threading.Tasks.Tests
             bool shouldComplete,
             bool shouldStop,
             bool shouldBreak
-        ) {
+        )
+        {
             ForEachPLRTest(
                 body,
                 new ParallelOptions(),
@@ -364,7 +370,8 @@ namespace System.Threading.Tasks.Tests
             bool shouldStop,
             bool shouldBreak,
             bool shouldCancel
-        ) {
+        )
+        {
             Dictionary<int, string> dict = new Dictionary<int, string>();
             dict.Add(1, "one");
 
@@ -397,7 +404,8 @@ namespace System.Threading.Tasks.Tests
             bool shouldComplete,
             bool shouldStop,
             bool shouldBreak
-        ) {
+        )
+        {
             List<int> list = new List<int>();
             for (int i = 0; i < 20; i++)
                 list.Add(i);
@@ -427,7 +435,8 @@ namespace System.Threading.Tasks.Tests
             bool shouldComplete,
             bool shouldStop,
             bool shouldBreak
-        ) {
+        )
+        {
             List<int> list = new List<int>();
             for (int i = 0; i < 20; i++)
                 list.Add(i);
@@ -1048,7 +1057,8 @@ namespace System.Threading.Tasks.Tests
 
             private static IEnumerable<TSource> DropIndices(
                 IEnumerable<KeyValuePair<long, TSource>> source
-            ) {
+            )
+            {
                 foreach (KeyValuePair<long, TSource> pair in source)
                 {
                     yield return pair.Value;
@@ -1057,7 +1067,8 @@ namespace System.Threading.Tasks.Tests
 
             private static IEnumerator<TSource> DropIndices(
                 IEnumerator<KeyValuePair<long, TSource>> source
-            ) {
+            )
+            {
                 while (source.MoveNext())
                 {
                     yield return source.Current.Value;

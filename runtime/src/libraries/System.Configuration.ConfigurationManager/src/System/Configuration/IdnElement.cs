@@ -57,7 +57,8 @@ namespace System.Configuration
                 ITypeDescriptorContext context,
                 CultureInfo culture,
                 object value
-            ) {
+            )
+            {
                 if (value is string s)
                 {
                     switch (s.ToLowerInvariant())

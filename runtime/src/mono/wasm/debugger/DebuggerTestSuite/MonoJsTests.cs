@@ -199,7 +199,8 @@ namespace DebuggerTests
                         && args?["args"]?[0]?["value"]?.Value<string>()?.StartsWith(
                             "mono_wasm_debug_event_raised:"
                         ) == true
-                    ) {
+                    )
+                    {
                         tcs.SetResult(true);
                     }
 
@@ -271,7 +272,8 @@ namespace DebuggerTests
             string pdb_path,
             string source_file,
             int expected_count
-        ) {
+        )
+        {
             int event_count = 0;
             var tcs = new TaskCompletionSource<bool>();
             insp.On(

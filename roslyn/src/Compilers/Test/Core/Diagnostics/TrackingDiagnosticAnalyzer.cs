@@ -37,7 +37,8 @@ namespace Microsoft.CodeAnalysis.Test.Utilities
                 string callerName,
                 SyntaxNode node,
                 ISymbol symbol
-            ) {
+            )
+            {
                 AbstractMemberName = abstractMemberName;
                 CallerName = callerName;
                 SyntaxKind =
@@ -68,7 +69,8 @@ namespace Microsoft.CodeAnalysis.Test.Utilities
             SyntaxNode node,
             ISymbol symbol,
             string callerName
-        ) {
+        )
+        {
             _callLog.Enqueue(new Entry(abstractMemberName, callerName, node, symbol));
         }
 
@@ -123,7 +125,8 @@ namespace Microsoft.CodeAnalysis.Test.Utilities
 
         public void VerifyAnalyzeNodeCalledForAllSyntaxKinds(
             HashSet<TLanguageKindEnum> expectedMissingSyntaxKinds
-        ) {
+        )
+        {
             var expectedSyntaxKinds = AllSyntaxKinds.Where(IsAnalyzeNodeSupported);
             var actualSyntaxKinds = new HashSet<TLanguageKindEnum>(
                 _callLog.Where(a => FilterByAbstractName(a, "SyntaxNode")).Select(e => e.SyntaxKind)
@@ -145,14 +148,16 @@ namespace Microsoft.CodeAnalysis.Test.Utilities
             SymbolKind symbolKind,
             MethodKind methodKind,
             bool returnsVoid
-        ) {
+        )
+        {
             return true;
         }
 
         public void VerifyOnCodeBlockCalledForAllSymbolAndMethodKinds(
             HashSet<SymbolKind> symbolKindsWithNoCodeBlocks = null,
             bool allowUnexpectedCalls = false
-        ) {
+        )
+        {
             const MethodKind InvalidMethodKind = (MethodKind)(-1);
             var expectedArguments = new[]
             {
@@ -334,7 +339,8 @@ namespace Microsoft.CodeAnalysis.Test.Utilities
             IEnumerable<T> expected,
             IEnumerable<T> actual,
             Func<IEnumerable<T>, IOrderedEnumerable<T>> sorter = null
-        ) {
+        )
+        {
             sorter =
                 sorter
                 ?? new Func<IEnumerable<T>, IOrderedEnumerable<T>>(items => items.OrderBy(i => i));
@@ -354,7 +360,8 @@ namespace Microsoft.CodeAnalysis.Test.Utilities
         private void AssertIsSuperset<T>(
             IEnumerable<T> expectedSubset,
             IEnumerable<T> actualSuperset
-        ) {
+        )
+        {
             var missingElements = expectedSubset.GroupJoin(
                     actualSuperset,
                     e => e,

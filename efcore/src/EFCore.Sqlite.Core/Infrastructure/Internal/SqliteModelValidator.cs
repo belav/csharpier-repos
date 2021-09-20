@@ -46,7 +46,8 @@ namespace Microsoft.EntityFrameworkCore.Sqlite.Infrastructure.Internal
         public override void Validate(
             IModel model,
             IDiagnosticsLogger<DbLoggerCategory.Model.Validation> logger
-        ) {
+        )
+        {
             base.Validate(model, logger);
 
             ValidateNoSchemas(model, logger);
@@ -62,7 +63,8 @@ namespace Microsoft.EntityFrameworkCore.Sqlite.Infrastructure.Internal
         protected virtual void ValidateNoSchemas(
             IModel model,
             IDiagnosticsLogger<DbLoggerCategory.Model.Validation> logger
-        ) {
+        )
+        {
             foreach (var entityType in model.GetEntityTypes().Where(e => e.GetSchema() != null))
             {
                 logger.SchemaConfiguredWarning(entityType, entityType.GetSchema()!);
@@ -78,7 +80,8 @@ namespace Microsoft.EntityFrameworkCore.Sqlite.Infrastructure.Internal
         protected virtual void ValidateNoSequences(
             IModel model,
             IDiagnosticsLogger<DbLoggerCategory.Model.Validation> logger
-        ) {
+        )
+        {
             foreach (var sequence in model.GetSequences())
             {
                 logger.SequenceConfiguredWarning(sequence);
@@ -97,7 +100,8 @@ namespace Microsoft.EntityFrameworkCore.Sqlite.Infrastructure.Internal
             string columnName,
             in StoreObjectIdentifier storeObject,
             IDiagnosticsLogger<DbLoggerCategory.Model.Validation> logger
-        ) {
+        )
+        {
             base.ValidateCompatible(property, duplicateProperty, columnName, storeObject, logger);
 
             var propertySrid = property.GetSrid(storeObject);

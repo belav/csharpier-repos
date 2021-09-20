@@ -10,13 +10,15 @@ namespace Microsoft.Extensions.Hosting
     {
         public static Microsoft.Extensions.Hosting.IHostBuilder UseWindowsService(
             this Microsoft.Extensions.Hosting.IHostBuilder hostBuilder
-        ) {
+        )
+        {
             throw null;
         }
         public static Microsoft.Extensions.Hosting.IHostBuilder UseWindowsService(
             this Microsoft.Extensions.Hosting.IHostBuilder hostBuilder,
             System.Action<Microsoft.Extensions.Hosting.WindowsServiceLifetimeOptions> configure
-        ) {
+        )
+        {
             throw null;
         }
     }
@@ -62,12 +64,14 @@ namespace Microsoft.Extensions.Hosting.WindowsServices
         protected override void OnStop() { }
         public System.Threading.Tasks.Task StopAsync(
             System.Threading.CancellationToken cancellationToken
-        ) {
+        )
+        {
             throw null;
         }
         public System.Threading.Tasks.Task WaitForStartAsync(
             System.Threading.CancellationToken cancellationToken
-        ) {
+        )
+        {
             throw null;
         }
     }

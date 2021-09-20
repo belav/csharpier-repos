@@ -214,14 +214,16 @@ namespace System.Web.Http.Owin
 
         private static IDictionary<string, object> CreateStubEnvironment(
             object disableBufferingAction
-        ) {
+        )
+        {
             return CreateStubEnvironment(disableBufferingAction, hasDisableBufferingAction: true);
         }
 
         private static IDictionary<string, object> CreateStubEnvironment(
             object disableBufferingAction,
             bool hasDisableBufferingAction
-        ) {
+        )
+        {
             Mock<IDictionary<string, object>> mock = new Mock<IDictionary<string, object>>(
                 MockBehavior.Strict
             );

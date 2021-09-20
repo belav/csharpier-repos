@@ -77,7 +77,8 @@ namespace Microsoft.Extensions.Logging.Test
             string controller,
             string action,
             Exception exception = null
-        ) {
+        )
+        {
             ActionMatchedInfo.MessageDelegate(logger, controller, action, exception);
         }
 
@@ -95,7 +96,8 @@ namespace Microsoft.Extensions.Logging.Test
             this ILogger logger,
             string param1,
             string param2
-        ) {
+        )
+        {
             return ScopeInfoWithTwoParameters.ScopeDelegate(logger, param1, param2);
         }
 
@@ -104,7 +106,8 @@ namespace Microsoft.Extensions.Logging.Test
             string param1,
             string param2,
             int param3
-        ) {
+        )
+        {
             return ScopeInfoWithThreeParameters.ScopeDelegate(logger, param1, param2, param3);
         }
     }

@@ -40,7 +40,8 @@ namespace Microsoft.CodeAnalysis.UnitTests.CodeStyle
             string args,
             bool isEnabled,
             ReportDiagnostic severity
-        ) {
+        )
+        {
             CodeStyleHelpers.TryParseBoolEditorConfigCodeStyleOption(
                 args,
                 defaultValue: CodeStyleOption2<bool>.Default,
@@ -102,7 +103,8 @@ namespace Microsoft.CodeAnalysis.UnitTests.CodeStyle
             string args,
             int value,
             ReportDiagnostic severity
-        ) {
+        )
+        {
             var storageLocation =
                 CodeStyleOptions2.RequireAccessibilityModifiers.StorageLocations.OfType<
                     EditorConfigStorageLocation<CodeStyleOption2<AccessibilityModifiersRequired>>

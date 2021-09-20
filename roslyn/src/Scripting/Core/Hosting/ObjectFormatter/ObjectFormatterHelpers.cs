@@ -46,7 +46,8 @@ namespace Microsoft.CodeAnalysis.Scripting.Hosting
 
         internal static DebuggerDisplayAttribute GetApplicableDebuggerDisplayAttribute(
             MemberInfo member
-        ) {
+        )
+        {
             // Includes inherited attributes. The debugger uses the first attribute if multiple are applied.
             var result = member.GetCustomAttributes<DebuggerDisplayAttribute>().FirstOrDefault();
             if (result != null)
@@ -59,7 +60,8 @@ namespace Microsoft.CodeAnalysis.Scripting.Hosting
             {
                 foreach (
                     DebuggerDisplayAttribute attr in type.Assembly.GetCustomAttributes<DebuggerDisplayAttribute>()
-                ) {
+                )
+                {
                     if (IsApplicableAttribute(type, attr.Target.GetTypeInfo(), attr.TargetTypeName))
                     {
                         return attr;
@@ -72,7 +74,8 @@ namespace Microsoft.CodeAnalysis.Scripting.Hosting
 
         private static DebuggerTypeProxyAttribute GetApplicableDebuggerTypeProxyAttribute(
             TypeInfo type
-        ) {
+        )
+        {
             // includes inherited attributes. The debugger uses the first attribute if multiple are applied.
             var result = type.GetCustomAttributes<DebuggerTypeProxyAttribute>().FirstOrDefault();
             if (result != null)
@@ -83,7 +86,8 @@ namespace Microsoft.CodeAnalysis.Scripting.Hosting
             // TODO (tomat): which assembly should we look at for proxy attributes?
             foreach (
                 DebuggerTypeProxyAttribute attr in type.Assembly.GetCustomAttributes<DebuggerTypeProxyAttribute>()
-            ) {
+            )
+            {
                 if (IsApplicableAttribute(type, attr.Target.GetTypeInfo(), attr.TargetTypeName))
                 {
                     return attr;
@@ -97,7 +101,8 @@ namespace Microsoft.CodeAnalysis.Scripting.Hosting
             TypeInfo type,
             TypeInfo targetType,
             string targetTypeName
-        ) {
+        )
+        {
             return type != null && AreEquivalent(targetType, type)
                 || targetTypeName != null && type.FullName == targetTypeName;
         }
@@ -253,7 +258,8 @@ namespace Microsoft.CodeAnalysis.Scripting.Hosting
             MemberInfo member,
             object obj,
             out Exception exception
-        ) {
+        )
+        {
             exception = null;
 
             try
@@ -386,7 +392,8 @@ namespace Microsoft.CodeAnalysis.Scripting.Hosting
             bool escapeNonPrintable = false,
             bool includeCodePoints = false,
             int numberRadix = NumberRadixDecimal
-        ) {
+        )
+        {
             var options = ObjectDisplayOptions.None;
 
             if (useQuotes)
@@ -432,7 +439,8 @@ namespace Microsoft.CodeAnalysis.Scripting.Hosting
             int end,
             out bool noQuotes,
             out bool isCallable
-        ) {
+        )
+        {
             Debug.Assert(str != null && start >= 0 && end >= start);
 
             isCallable = false;

@@ -364,7 +364,8 @@ namespace System.Text.RegularExpressions
                         | RegexPrefixAnalyzer.End
                     )
                 ) != 0
-            ) {
+            )
+            {
                 if (!_code.RightToLeft)
                 {
                     switch (_code.LeadingAnchor)
@@ -545,7 +546,8 @@ namespace System.Text.RegularExpressions
                                     set,
                                     ref _code.LeadingCharClassAsciiLookup
                                 )
-                            ) {
+                            )
+                            {
                                 runtextpos += i;
                                 return true;
                             }
@@ -563,7 +565,8 @@ namespace System.Text.RegularExpressions
                                     set,
                                     ref _code.LeadingCharClassAsciiLookup
                                 )
-                            ) {
+                            )
+                            {
                                 runtextpos += i;
                                 return true;
                             }
@@ -585,7 +588,8 @@ namespace System.Text.RegularExpressions
                                     set,
                                     ref _code.LeadingCharClassAsciiLookup
                                 )
-                            ) {
+                            )
+                            {
                                 runtextpos = i + 1;
                                 return true;
                             }
@@ -603,7 +607,8 @@ namespace System.Text.RegularExpressions
                                     set,
                                     ref _code.LeadingCharClassAsciiLookup
                                 )
-                            ) {
+                            )
+                            {
                                 runtextpos = i + 1;
                                 return true;
                             }
@@ -1098,7 +1103,8 @@ namespace System.Text.RegularExpressions
                                     _code.Strings[operand],
                                     ref _code.StringsAsciiLookup[operand]
                                 )
-                            ) {
+                            )
+                            {
                                 break;
                             }
                         }
@@ -1204,7 +1210,8 @@ namespace System.Text.RegularExpressions
                                         set,
                                         ref setLookup
                                     )
-                                ) {
+                                )
+                                {
                                     goto BreakBackward;
                                 }
                             }
@@ -1305,7 +1312,8 @@ namespace System.Text.RegularExpressions
                                         set,
                                         ref setLookup
                                     )
-                                ) {
+                                )
+                                {
                                     Backwardnext();
                                     break;
                                 }
@@ -1406,7 +1414,8 @@ namespace System.Text.RegularExpressions
                                     _code.Strings[operand0],
                                     ref _code.StringsAsciiLookup[operand0]
                                 )
-                            ) {
+                            )
+                            {
                                 break;
                             }
 

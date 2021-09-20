@@ -53,7 +53,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Completion.KeywordRecommenders
             int position,
             CSharpSyntaxContext context,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var syntaxTree = context.SyntaxTree;
             return IsExternAliasContext(context)
                 || (context.IsGlobalStatementContext && syntaxTree.IsScript())
@@ -103,7 +104,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Completion.KeywordRecommenders
             if (
                 token.Kind() == SyntaxKind.OpenBraceToken
                 && token.Parent.IsKind(SyntaxKind.NamespaceDeclaration)
-            ) {
+            )
+            {
                 return true;
             }
 
@@ -112,7 +114,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Completion.KeywordRecommenders
             if (
                 token.Kind() == SyntaxKind.SemicolonToken
                 && token.Parent.IsKind(SyntaxKind.ExternAliasDirective)
-            ) {
+            )
+            {
                 return true;
             }
 

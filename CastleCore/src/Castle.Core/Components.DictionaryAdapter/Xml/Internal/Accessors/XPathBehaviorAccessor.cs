@@ -114,7 +114,8 @@ namespace Castle.Components.DictionaryAdapter.Xml
             IDictionaryAdapter parentObject,
             XmlReferenceManager references,
             bool orStub
-        ) {
+        )
+        {
             return GetPropertyValueCore(parentNode, parentObject, references, orStub)
                 ?? GetDefaultPropertyValue(parentNode, parentObject, references, orStub);
         }
@@ -124,7 +125,8 @@ namespace Castle.Components.DictionaryAdapter.Xml
             IDictionaryAdapter parentObject,
             XmlReferenceManager references,
             bool orStub
-        ) {
+        )
+        {
             return SelectsNodes
               ? base.GetPropertyValue(parentNode, parentObject, references, orStub)
               : Evaluate(parentNode);
@@ -135,7 +137,8 @@ namespace Castle.Components.DictionaryAdapter.Xml
             IDictionaryAdapter parentObject,
             XmlReferenceManager references,
             bool orStub
-        ) {
+        )
+        {
             return defaultAccessor != null
               ? defaultAccessor.GetPropertyValue(parentNode, parentObject, references, orStub)
               : null;
@@ -153,7 +156,8 @@ namespace Castle.Components.DictionaryAdapter.Xml
             XmlReferenceManager references,
             object oldValue,
             ref object value
-        ) {
+        )
+        {
             if (SelectsNodes)
                 base.SetPropertyValue(parentNode, parentObject, references, oldValue, ref value);
             else

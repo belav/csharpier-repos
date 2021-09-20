@@ -1911,7 +1911,8 @@ namespace System.Text.Json.Serialization.Tests
             ref Utf8JsonReader reader,
             Type typeToConvert,
             JsonSerializerOptions options
-        ) {
+        )
+        {
             return 25;
         }
 

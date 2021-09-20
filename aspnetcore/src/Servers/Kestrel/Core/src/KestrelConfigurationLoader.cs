@@ -36,7 +36,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel
             bool reloadOnChange,
             ILogger<KestrelServer> logger,
             ILogger<HttpsConnectionMiddleware> httpsLogger
-        ) {
+        )
+        {
             Options = options ?? throw new ArgumentNullException(nameof(options));
             Configuration = configuration ?? throw new ArgumentNullException(nameof(configuration));
             HostEnvironment =
@@ -91,7 +92,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel
         public KestrelConfigurationLoader Endpoint(
             string name,
             Action<EndpointConfiguration> configureOptions
-        ) {
+        )
+        {
             if (string.IsNullOrEmpty(name))
             {
                 throw new ArgumentNullException(nameof(name));
@@ -115,7 +117,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel
             IPAddress address,
             int port,
             Action<ListenOptions> configure
-        ) {
+        )
+        {
             if (address == null)
             {
                 throw new ArgumentNullException(nameof(address));
@@ -136,7 +139,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel
         public KestrelConfigurationLoader Endpoint(
             IPEndPoint endPoint,
             Action<ListenOptions> configure
-        ) {
+        )
+        {
             if (endPoint == null)
             {
                 throw new ArgumentNullException(nameof(endPoint));
@@ -170,7 +174,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel
         public KestrelConfigurationLoader LocalhostEndpoint(
             int port,
             Action<ListenOptions> configure
-        ) {
+        )
+        {
             if (configure == null)
             {
                 throw new ArgumentNullException(nameof(configure));
@@ -224,7 +229,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel
         public KestrelConfigurationLoader UnixSocketEndpoint(
             string socketPath,
             Action<ListenOptions> configure
-        ) {
+        )
+        {
             if (socketPath == null)
             {
                 throw new ArgumentNullException(nameof(socketPath));
@@ -263,7 +269,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel
         public KestrelConfigurationLoader HandleEndpoint(
             ulong handle,
             Action<ListenOptions> configure
-        ) {
+        )
+        {
             if (configure == null)
             {
                 throw new ArgumentNullException(nameof(configure));
@@ -401,7 +408,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel
                     if (
                         httpsOptions.ServerCertificate == null
                         && httpsOptions.ServerCertificateSelector == null
-                    ) {
+                    )
+                    {
                         // Fallback
                         Options.ApplyDefaultCert(httpsOptions);
 
@@ -443,7 +451,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel
                         if (
                             httpsOptions.ServerCertificate == null
                             && httpsOptions.ServerCertificateSelector == null
-                        ) {
+                        )
+                        {
                             throw new InvalidOperationException(
                                 CoreStrings.NoCertSpecifiedNoDevelopmentCertificateFound
                             );
@@ -516,7 +525,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel
                 && certificateConfig.Password != null
                 && TryGetCertificatePath(out certificatePath)
                 && File.Exists(certificatePath)
-            ) {
+            )
+            {
                 try
                 {
                     var certificate = new X509Certificate2(
@@ -557,7 +567,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel
                         CertificateManager.AspNetHttpsOid,
                         StringComparison.Ordinal
                     )
-                ) {
+                )
+                {
                     return true;
                 }
             }

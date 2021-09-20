@@ -30,7 +30,8 @@ namespace Microsoft.TestCommon
         public async Task WriteAndReadAsync(
             Func<MemoryStream, Task> codeThatWrites,
             Func<MemoryStream, Task> codeThatReadsAsync
-        ) {
+        )
+        {
             if (codeThatWrites == null)
             {
                 throw new ArgumentNullException("codeThatWrites");
@@ -63,7 +64,8 @@ namespace Microsoft.TestCommon
         public static object WriteAndReadResult(
             Action<Stream> codeThatWrites,
             Func<Stream, object> codeThatReads
-        ) {
+        )
+        {
             if (codeThatWrites == null)
             {
                 throw new ArgumentNullException("codeThatWrites");
@@ -100,7 +102,8 @@ namespace Microsoft.TestCommon
         public T WriteAndReadResult<T>(
             Action<Stream> codeThatWrites,
             Func<Stream, object> codeThatReads
-        ) {
+        )
+        {
             return (T)WriteAndReadResult(codeThatWrites, codeThatReads);
         }
     }

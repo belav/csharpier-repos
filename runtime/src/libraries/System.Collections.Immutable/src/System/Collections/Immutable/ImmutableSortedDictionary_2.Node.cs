@@ -250,7 +250,8 @@ namespace System.Collections.Immutable
                 KeyValuePair<TKey, TValue>[] array,
                 int arrayIndex,
                 int dictionarySize
-            ) {
+            )
+            {
                 Requires.NotNull(array, nameof(array));
                 Requires.Range(arrayIndex >= 0, nameof(arrayIndex));
                 Requires.Range(array.Length >= arrayIndex + dictionarySize, nameof(arrayIndex));
@@ -283,7 +284,8 @@ namespace System.Collections.Immutable
             /// <returns>The root of the node tree.</returns>
             internal static Node NodeTreeFromSortedDictionary(
                 SortedDictionary<TKey, TValue> dictionary
-            ) {
+            )
+            {
                 Requires.NotNull(dictionary, nameof(dictionary));
 
                 var list = dictionary.AsOrderedCollection();
@@ -304,7 +306,8 @@ namespace System.Collections.Immutable
                 IComparer<TKey> keyComparer,
                 IEqualityComparer<TValue> valueComparer,
                 out bool mutated
-            ) {
+            )
+            {
                 Requires.NotNullAllowStructs(key, nameof(key));
                 Requires.NotNull(keyComparer, nameof(keyComparer));
                 Requires.NotNull(valueComparer, nameof(valueComparer));
@@ -337,7 +340,8 @@ namespace System.Collections.Immutable
                 IEqualityComparer<TValue> valueComparer,
                 out bool replacedExistingValue,
                 out bool mutated
-            ) {
+            )
+            {
                 Requires.NotNullAllowStructs(key, nameof(key));
                 Requires.NotNull(keyComparer, nameof(keyComparer));
                 Requires.NotNull(valueComparer, nameof(valueComparer));
@@ -401,7 +405,8 @@ namespace System.Collections.Immutable
                 TKey key,
                 IComparer<TKey> keyComparer,
                 [MaybeNullWhen(false)] out TValue value
-            ) {
+            )
+            {
                 Requires.NotNullAllowStructs(key, nameof(key));
                 Requires.NotNull(keyComparer, nameof(keyComparer));
 
@@ -503,7 +508,8 @@ namespace System.Collections.Immutable
                 KeyValuePair<TKey, TValue> pair,
                 IComparer<TKey> keyComparer,
                 IEqualityComparer<TValue> valueComparer
-            ) {
+            )
+            {
                 Requires.NotNullAllowStructs(pair.Key, nameof(pair.Key));
                 Requires.NotNull(keyComparer, nameof(keyComparer));
                 Requires.NotNull(valueComparer, nameof(valueComparer));
@@ -682,7 +688,8 @@ namespace System.Collections.Immutable
                 IOrderedCollection<KeyValuePair<TKey, TValue>> items,
                 int start,
                 int length
-            ) {
+            )
+            {
                 Requires.NotNull(items, nameof(items));
                 Requires.Range(start >= 0, nameof(start));
                 Requires.Range(length >= 0, nameof(length));
@@ -719,7 +726,8 @@ namespace System.Collections.Immutable
                 bool overwriteExistingValue,
                 out bool replacedExistingValue,
                 out bool mutated
-            ) {
+            )
+            {
                 // Arg validation skipped in this private method because it's recursive and the tax
                 // of revalidating arguments on each recursive call is significant.
                 // All our callers are therefore required to have done input validation.

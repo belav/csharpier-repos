@@ -20,7 +20,8 @@ namespace IntelHardwareIntrinsicTest
                     out var enableIncompleteIsa
                 )
                 && (enableIncompleteIsa != 0)
-            ) {
+            )
+            {
                 // X86 platforms
                 if (Vector<byte>.Count == 32 && !Avx2.IsSupported)
                 {
@@ -76,7 +77,8 @@ namespace IntelHardwareIntrinsicTest
                     != Bmi1.X64.IsSupported
                 || Convert.ToBoolean(typeof(Bmi2.X64).GetMethod(issupported).Invoke(null, null))
                     != Bmi2.X64.IsSupported
-            ) {
+            )
+            {
                 result = false;
             }
             return result ? 100 : 0;

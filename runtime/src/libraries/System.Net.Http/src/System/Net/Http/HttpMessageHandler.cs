@@ -23,7 +23,8 @@ namespace System.Net.Http
         protected internal virtual HttpResponseMessage Send(
             HttpRequestMessage request,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             throw new NotSupportedException(
                 SR.Format(
                     SR.net_http_missing_sync_implementation,

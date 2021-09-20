@@ -30,7 +30,8 @@ namespace System.Web.Http.Tracing.Tracers
         public ExceptionFilterAttributeTracer(
             ExceptionFilterAttribute innerFilter,
             ITraceWriter traceWriter
-        ) {
+        )
+        {
             Contract.Assert(innerFilter != null);
             Contract.Assert(traceWriter != null);
 
@@ -81,7 +82,8 @@ namespace System.Web.Http.Tracing.Tracers
         public override Task OnExceptionAsync(
             HttpActionExecutedContext actionExecutedContext,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             return OnExceptionAsyncCore(actionExecutedContext, cancellationToken);
         }
 
@@ -89,7 +91,8 @@ namespace System.Web.Http.Tracing.Tracers
             HttpActionExecutedContext actionExecutedContext,
             CancellationToken cancellationToken,
             [CallerMemberName] string methodName = null
-        ) {
+        )
+        {
             return _traceStore.TraceBeginEndAsync(
                 actionExecutedContext.Request,
                 TraceCategories.FiltersCategory,

@@ -174,7 +174,8 @@ internal class Packet256Tracer
         VectorPacket256 norms,
         VectorPacket256 rds,
         Scene scene
-    ) {
+    )
+    {
         var colors = ColorPacket256Helper.DefaultColor;
         for (int i = 0; i < scene.Lights.Length; i++)
         {
@@ -281,7 +282,8 @@ internal class Packet256Tracer
         VectorPacket256 rds,
         Scene scene,
         int depth
-    ) {
+    )
+    {
         return scene.Reflect(things, pos) * TraceRay(new RayPacket256(pos, rds), scene, depth + 1);
     }
 

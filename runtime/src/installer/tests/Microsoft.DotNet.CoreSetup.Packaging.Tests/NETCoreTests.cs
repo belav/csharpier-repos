@@ -40,7 +40,8 @@ namespace Microsoft.DotNet.CoreSetup.Packaging.Tests
                     "Microsoft.NETCore.App.Host",
                     $"Microsoft.NETCore.App.Host.{dirs.BuildRID}"
                 )
-            ) {
+            )
+            {
                 tester.IsAppHostPack();
             }
         }
@@ -54,7 +55,8 @@ namespace Microsoft.DotNet.CoreSetup.Packaging.Tests
                     "Microsoft.NETCore.App.Runtime",
                     $"Microsoft.NETCore.App.Runtime.{dirs.BuildRID}"
                 )
-            ) {
+            )
+            {
                 tester.IsRuntimePack();
             }
         }

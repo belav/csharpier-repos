@@ -145,7 +145,8 @@ namespace System.Web.Helpers
             string headerEncoding = null,
             string priority = null,
             string replyTo = null
-        ) {
+        )
+        {
             if (filesToAttach != null)
             {
                 foreach (string fileName in filesToAttach)
@@ -178,7 +179,8 @@ namespace System.Web.Helpers
             if (
                 !String.IsNullOrEmpty(priority)
                 && !ConversionUtil.TryFromStringToEnum(priority, out priorityValue)
-            ) {
+            )
+            {
                 throw new ArgumentException(HelpersResources.WebMail_InvalidPriority, "priority");
             }
 
@@ -290,7 +292,8 @@ namespace System.Web.Helpers
             IEnumerable<string> filesToAttach,
             bool isBodyHtml,
             IEnumerable<string> additionalHeaders
-        ) {
+        )
+        {
             message.Subject = subject;
             message.Body = body;
             message.IsBodyHtml = isBodyHtml;
@@ -376,7 +379,8 @@ namespace System.Web.Helpers
         internal static void AssignHeaderValues(
             MailMessage message,
             IEnumerable<string> headerValues
-        ) {
+        )
+        {
             // Parse the header value. If this
             foreach (var header in headerValues)
             {
@@ -426,7 +430,8 @@ namespace System.Web.Helpers
             if (
                 !String.IsNullOrEmpty(priority)
                 && ConversionUtil.TryFromStringToEnum(priority, out priorityValue)
-            ) {
+            )
+            {
                 // If we can parse it, set it. Do nothing otherwise
                 message.Priority = priorityValue;
             }

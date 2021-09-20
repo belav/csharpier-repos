@@ -24,18 +24,19 @@ namespace Microsoft.AspNetCore.Testing
             IReadOnlyList<BeforeAfterTestAttribute> beforeAfterAttributes,
             ExceptionAggregator aggregator,
             CancellationTokenSource cancellationTokenSource
-        ) : base(
-            test,
-            messageBus,
-            testClass,
-            constructorArguments,
-            testMethod,
-            testMethodArguments,
-            skipReason,
-            beforeAfterAttributes,
-            aggregator,
-            cancellationTokenSource
-        ) { }
+        )
+            : base(
+                test,
+                messageBus,
+                testClass,
+                constructorArguments,
+                testMethod,
+                testMethodArguments,
+                skipReason,
+                beforeAfterAttributes,
+                aggregator,
+                cancellationTokenSource
+            ) { }
 
         protected override async Task<decimal> InvokeTestMethodAsync(ExceptionAggregator aggregator)
         {
@@ -53,7 +54,8 @@ namespace Microsoft.AspNetCore.Testing
                 repeatContext.CurrentIteration = 0;
                 repeatContext.CurrentIteration < repeatContext.Limit;
                 repeatContext.CurrentIteration++
-            ) {
+            )
+            {
                 timeTaken = await InvokeTestMethodCoreAsync(aggregator);
                 if (aggregator.HasExceptions)
                 {

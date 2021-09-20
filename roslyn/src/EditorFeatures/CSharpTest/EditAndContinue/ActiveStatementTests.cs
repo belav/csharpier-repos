@@ -12184,7 +12184,8 @@ class C
                     if (
                         node.Parent is MethodDeclarationSyntax methodDecl
                         && methodDecl.Identifier.Text == "G"
-                    ) {
+                    )
+                    {
                         throw outOfMemory
                             ? new OutOfMemoryException()
                             : new NullReferenceException("NullRef!");

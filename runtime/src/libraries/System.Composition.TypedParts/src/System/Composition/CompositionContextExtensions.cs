@@ -29,7 +29,8 @@ namespace System.Composition
         public static void SatisfyImports(
             this CompositionContext compositionContext,
             object objectWithLooseImports
-        ) {
+        )
+        {
             SatisfyImportsInternal(
                 compositionContext,
                 objectWithLooseImports,
@@ -48,7 +49,8 @@ namespace System.Composition
             this CompositionContext compositionContext,
             object objectWithLooseImports,
             AttributedModelProvider conventions
-        ) {
+        )
+        {
             SatisfyImportsInternal(compositionContext, objectWithLooseImports, conventions);
         }
 
@@ -56,7 +58,8 @@ namespace System.Composition
             this CompositionContext exportProvider,
             object objectWithLooseImports,
             AttributedModelProvider conventions
-        ) {
+        )
+        {
             if (exportProvider == null)
                 throw new ArgumentNullException(nameof(exportProvider));
             if (objectWithLooseImports == null)
@@ -77,7 +80,8 @@ namespace System.Composition
                         site,
                         out importInfo
                     )
-                ) {
+                )
+                {
                     object value;
                     if (exportProvider.TryGetExport(importInfo.Contract, out value))
                     {

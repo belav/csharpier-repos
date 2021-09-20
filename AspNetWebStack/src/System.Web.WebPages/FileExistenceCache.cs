@@ -39,7 +39,8 @@ namespace System.Web.WebPages
         public FileExistenceCache(
             Func<VirtualPathProvider> virtualPathProviderFunc,
             int milliSecondsBeforeReset = 1000
-        ) {
+        )
+        {
             Contract.Assert(virtualPathProviderFunc != null);
 
             _virtualPathProviderFunc = virtualPathProviderFunc;

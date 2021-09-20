@@ -107,14 +107,16 @@ namespace System.IO
             int offset,
             int count,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             return _innerStream.ReadAsync(buffer, offset, count, cancellationToken);
         }
 
         public override ValueTask<int> ReadAsync(
             Memory<byte> buffer,
             CancellationToken cancellationToken = default
-        ) {
+        )
+        {
             return _innerStream.ReadAsync(buffer, cancellationToken);
         }
 
@@ -124,7 +126,8 @@ namespace System.IO
             int count,
             AsyncCallback? callback,
             object? state
-        ) {
+        )
+        {
             return _innerStream.BeginRead(buffer, offset, count, callback, state);
         }
 
@@ -172,14 +175,16 @@ namespace System.IO
             int offset,
             int count,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             return _innerStream.WriteAsync(buffer, offset, count, cancellationToken);
         }
 
         public override ValueTask WriteAsync(
             ReadOnlyMemory<byte> buffer,
             CancellationToken cancellationToken = default
-        ) {
+        )
+        {
             return _innerStream.WriteAsync(buffer, cancellationToken);
         }
 
@@ -189,7 +194,8 @@ namespace System.IO
             int count,
             AsyncCallback? callback,
             object? state
-        ) {
+        )
+        {
             return _innerStream.BeginWrite(buffer, offset, count, callback, state);
         }
 
@@ -202,7 +208,8 @@ namespace System.IO
             Stream destination,
             int bufferSize,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             return _innerStream.CopyToAsync(destination, bufferSize, cancellationToken);
         }
         #endregion Write

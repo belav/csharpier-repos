@@ -36,7 +36,8 @@ namespace Microsoft.AspNetCore.Rewrite.Tests.UrlMatches
             int operation,
             string input,
             bool expectedResult
-        ) {
+        )
+        {
             var context = new RewriteContext { HttpContext = new DefaultHttpContext() };
             var integerMatch = new IntegerMatch(value, (IntegerOperationType)operation);
             var matchResult = integerMatch.Evaluate(input, context);

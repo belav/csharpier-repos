@@ -92,7 +92,8 @@ public class C {
             string text,
             out CSharpCompilation compilation,
             params DiagnosticDescription[] diagnostics
-        ) {
+        )
+        {
             var tree = Parse(
                 text,
                 options: CSharpParseOptions.Default.WithLanguageVersion(LanguageVersion.CSharp5)
@@ -114,7 +115,8 @@ public class C {
         private AwaitExpressionInfo GetAwaitExpressionInfo(
             string text,
             params DiagnosticDescription[] diagnostics
-        ) {
+        )
+        {
             CSharpCompilation temp;
             return GetAwaitExpressionInfo(text, out temp, diagnostics);
         }

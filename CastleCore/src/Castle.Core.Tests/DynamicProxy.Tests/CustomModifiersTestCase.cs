@@ -308,7 +308,8 @@ namespace Castle.DynamicProxy.Tests
             ModuleScope moduleScope,
             string typeName,
             params Type[] paramTypeModopts
-        ) {
+        )
+        {
             // This method generates a type that would look as follows in IL:
             //
             // .class interface public abstract auto ansi beforefieldinit <typeName>
@@ -360,7 +361,8 @@ namespace Castle.DynamicProxy.Tests
             ModuleScope moduleScope,
             string typeName,
             params Type[] paramTypeModreqs
-        ) {
+        )
+        {
             // This method generates a type that would look as follows in IL:
             //
             // .class interface public abstract auto ansi beforefieldinit <typeName>
@@ -405,7 +407,8 @@ namespace Castle.DynamicProxy.Tests
             ModuleScope moduleScope,
             string typeName,
             params Type[] returnTypeModopts
-        ) {
+        )
+        {
             // This method generates a type that would look as follows in IL:
             //
             // .class interface public abstract auto ansi beforefieldinit <typeName>
@@ -457,7 +460,8 @@ namespace Castle.DynamicProxy.Tests
             ModuleScope moduleScope,
             string typeName,
             params Type[] returnTypeModreqs
-        ) {
+        )
+        {
             // This method generates a type that would look as follows in IL:
             //
             // .class interface public abstract auto ansi beforefieldinit <typeName>

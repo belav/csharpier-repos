@@ -130,7 +130,8 @@ namespace System.Security.Cryptography.X509Certificates.Tests
         private static void ProcessTestCase(
             SimpleEncoderTestCase testCase,
             X500DistinguishedName dn
-        ) {
+        )
+        {
             // The simple encoding test is "does it output the expected text?", then
             // we'll move on to the exact bytes.
             Assert.Equal(testCase.GetNormalizedValue(), dn.Format(false));
@@ -652,7 +653,8 @@ namespace System.Security.Cryptography.X509Certificates.Tests
                 string normalized,
                 string preferredEncodingHex,
                 string bmpEncodingHex
-            ) {
+            )
+            {
                 _normalized = normalized;
                 _preferredEncodingHex = preferredEncodingHex;
                 _bmpEncodingHex = bmpEncodingHex;
@@ -706,7 +708,8 @@ namespace System.Security.Cryptography.X509Certificates.Tests
                 string output,
                 string preferredEncoding,
                 string bmpEncoding
-            ) {
+            )
+            {
                 _variations.Add(new Variation(flags, ',', output, preferredEncoding, bmpEncoding));
             }
 
@@ -743,7 +746,8 @@ namespace System.Security.Cryptography.X509Certificates.Tests
                     string output,
                     string preferredEncoding,
                     string bmpEncoding
-                ) {
+                )
+                {
                     Flags = flags;
                     Separator = separator;
                     Output = output;

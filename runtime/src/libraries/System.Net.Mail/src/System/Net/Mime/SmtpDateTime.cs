@@ -194,7 +194,8 @@ namespace System.Net.Mime
             out bool positive,
             out int hours,
             out int minutes
-        ) {
+        )
+        {
             Debug.Assert(
                 !string.IsNullOrEmpty(offset),
                 "violation of precondition: offset must not be null or empty"
@@ -224,7 +225,8 @@ namespace System.Net.Mime
                     CultureInfo.InvariantCulture,
                     out hours
                 )
-            ) {
+            )
+            {
                 throw new FormatException(SR.MailDateInvalidFormat);
             }
 
@@ -235,7 +237,8 @@ namespace System.Net.Mime
                     CultureInfo.InvariantCulture,
                     out minutes
                 )
-            ) {
+            )
+            {
                 throw new FormatException(SR.MailDateInvalidFormat);
             }
 
@@ -321,7 +324,8 @@ namespace System.Net.Mime
                     DateTimeStyles.AllowWhiteSpaces,
                     out dateValue
                 )
-            ) {
+            )
+            {
                 throw new FormatException(SR.MailDateInvalidFormat);
             }
 

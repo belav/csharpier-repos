@@ -72,7 +72,8 @@ namespace System.DirectoryServices.Protocols.Tests
         public void Ctor_Identifier_Credential(
             LdapDirectoryIdentifier identifier,
             NetworkCredential credential
-        ) {
+        )
+        {
             var connection = new LdapConnection(identifier, credential);
             Assert.Equal(AuthType.Negotiate, connection.AuthType);
             Assert.True(connection.AutoBind);
@@ -108,7 +109,8 @@ namespace System.DirectoryServices.Protocols.Tests
             LdapDirectoryIdentifier identifier,
             NetworkCredential credential,
             AuthType authType
-        ) {
+        )
+        {
             var connection = new LdapConnection(identifier, credential, authType);
             Assert.Equal(authType, connection.AuthType);
             Assert.True(connection.AutoBind);
@@ -279,7 +281,8 @@ namespace System.DirectoryServices.Protocols.Tests
         [InlineData(PartialResultProcessing.ReturnPartialResultsAndNotifyCallback + 1)]
         public void BeginSendRequest_InvalidPartialMode_ThrowsInvalidEnumArgumentException(
             PartialResultProcessing partialMode
-        ) {
+        )
+        {
             var connection = new LdapConnection("server");
             AssertExtensions.Throws<InvalidEnumArgumentException>(
                 "partialMode",
@@ -292,7 +295,8 @@ namespace System.DirectoryServices.Protocols.Tests
         [InlineData(PartialResultProcessing.ReturnPartialResultsAndNotifyCallback)]
         public void BeginSendRequest_ReturnModeAndSearchRequest_ThrowsInvalidNotSupportedException(
             PartialResultProcessing partialMode
-        ) {
+        )
+        {
             var connection = new LdapConnection("server");
             Assert.Throws<NotSupportedException>(
                 () => connection.BeginSendRequest(new AddRequest(), partialMode, null, null)

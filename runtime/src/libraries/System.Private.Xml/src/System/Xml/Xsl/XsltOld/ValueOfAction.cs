@@ -107,7 +107,8 @@ namespace System.Xml.Xsl.XsltOld
                             value, /*disableOutputEscaping:*/
                             false
                         )
-                    ) {
+                    )
+                    {
                         frame.Finished();
                     }
                     else

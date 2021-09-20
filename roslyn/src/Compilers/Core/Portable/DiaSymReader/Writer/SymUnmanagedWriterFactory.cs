@@ -32,7 +32,8 @@ namespace Microsoft.DiaSymReader
         public static SymUnmanagedWriter CreateWriter(
             ISymWriterMetadataProvider metadataProvider,
             SymUnmanagedWriterCreationOptions options = SymUnmanagedWriterCreationOptions.Default
-        ) {
+        )
+        {
             if (metadataProvider == null)
             {
                 throw new ArgumentNullException(nameof(metadataProvider));

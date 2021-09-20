@@ -48,7 +48,8 @@ namespace Microsoft.AspNetCore.Http
             string location,
             bool permanent,
             bool preserveMethod
-        ) {
+        )
+        {
             if (preserveMethod)
             {
                 response.StatusCode = permanent

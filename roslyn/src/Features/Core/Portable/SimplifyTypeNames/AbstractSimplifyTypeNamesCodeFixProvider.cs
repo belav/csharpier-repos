@@ -26,7 +26,8 @@ namespace Microsoft.CodeAnalysis.SimplifyTypeNames
 
         protected AbstractSimplifyTypeNamesCodeFixProvider(
             SimplifyTypeNamesDiagnosticAnalyzerBase<TSyntaxKind> analyzer
-        ) {
+        )
+        {
             _analyzer = analyzer;
         }
 
@@ -48,7 +49,8 @@ namespace Microsoft.CodeAnalysis.SimplifyTypeNames
             TextSpan span,
             OptionSet optionSet,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var token = root.FindToken(span.Start, findInsideTrivia: true);
             if (!token.Span.IntersectsWith(span))
             {
@@ -69,7 +71,8 @@ namespace Microsoft.CodeAnalysis.SimplifyTypeNames
                         out var diagnosticId,
                         cancellationToken
                     )
-                ) {
+                )
+                {
                     // keep overwriting the best simplifiable node as long as we keep finding them.
                     topmostSimplifiableNode = node;
                     topmostDiagnosticId = diagnosticId;
@@ -125,7 +128,8 @@ namespace Microsoft.CodeAnalysis.SimplifyTypeNames
             ImmutableArray<Diagnostic> diagnostics,
             SyntaxEditor editor,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var root = await document.GetSyntaxRootAsync(cancellationToken).ConfigureAwait(false);
             var model = await document.GetSemanticModelAsync(cancellationToken)
                 .ConfigureAwait(false);
@@ -156,7 +160,8 @@ namespace Microsoft.CodeAnalysis.SimplifyTypeNames
             TextSpan span,
             out string diagnosticId,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             diagnosticId = null;
             if (
                 !_analyzer.IsCandidate(node)
@@ -169,7 +174,8 @@ namespace Microsoft.CodeAnalysis.SimplifyTypeNames
                     out _,
                     cancellationToken
                 )
-            ) {
+            )
+            {
                 return false;
             }
 

@@ -43,7 +43,8 @@ namespace Microsoft.EntityFrameworkCore.Storage
             RelationalCommandBuilderDependencies dependencies,
             string commandText,
             IReadOnlyList<IRelationalParameter> parameters
-        ) {
+        )
+        {
             Check.NotNull(dependencies, nameof(dependencies));
             Check.NotNull(commandText, nameof(commandText));
             Check.NotNull(parameters, nameof(parameters));
@@ -170,7 +171,8 @@ namespace Microsoft.EntityFrameworkCore.Storage
         public virtual async Task<int> ExecuteNonQueryAsync(
             RelationalCommandParameterObject parameterObject,
             CancellationToken cancellationToken = default
-        ) {
+        )
+        {
             var (connection, context, logger) = (
                 parameterObject.Connection,
                 parameterObject.Context,
@@ -370,7 +372,8 @@ namespace Microsoft.EntityFrameworkCore.Storage
         public virtual async Task<object?> ExecuteScalarAsync(
             RelationalCommandParameterObject parameterObject,
             CancellationToken cancellationToken = default
-        ) {
+        )
+        {
             var (connection, context, logger) = (
                 parameterObject.Connection,
                 parameterObject.Context,
@@ -476,7 +479,8 @@ namespace Microsoft.EntityFrameworkCore.Storage
         /// <returns> The result of the command. </returns>
         public virtual RelationalDataReader ExecuteReader(
             RelationalCommandParameterObject parameterObject
-        ) {
+        )
+        {
             var connection = parameterObject.Connection;
             var context = parameterObject.Context;
             var readerColumns = parameterObject.ReaderColumns;
@@ -600,7 +604,8 @@ namespace Microsoft.EntityFrameworkCore.Storage
         public virtual async Task<RelationalDataReader> ExecuteReaderAsync(
             RelationalCommandParameterObject parameterObject,
             CancellationToken cancellationToken = default
-        ) {
+        )
+        {
             var connection = parameterObject.Connection;
             var context = parameterObject.Context;
             var readerColumns = parameterObject.ReaderColumns;
@@ -742,7 +747,8 @@ namespace Microsoft.EntityFrameworkCore.Storage
             RelationalCommandParameterObject parameterObject,
             Guid commandId,
             DbCommandMethod commandMethod
-        ) {
+        )
+        {
             var (connection, context, logger) = (
                 parameterObject.Connection,
                 parameterObject.Context,
@@ -828,7 +834,8 @@ namespace Microsoft.EntityFrameworkCore.Storage
         private static async Task CleanupCommandAsync(
             DbCommand command,
             IRelationalConnection connection
-        ) {
+        )
+        {
             command.Parameters.Clear();
             await command.DisposeAsync().ConfigureAwait(false);
             await connection.CloseAsync().ConfigureAwait(false);

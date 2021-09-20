@@ -230,7 +230,8 @@ namespace System.Security.Cryptography.Xml.Tests
         private static string GenerateLicenseXmlWithEncryptedGrants(
             RSA key,
             out string plainTextLicense
-        ) {
+        )
+        {
             plainTextLicense = @"<r:license xmlns:r=""urn:mpeg:mpeg21:2003:01-REL-R-NS"">
     <r:title>Test License</r:title>
     <r:grant>
@@ -284,7 +285,8 @@ namespace System.Security.Cryptography.Xml.Tests
         private static XmlElement FindLicenseTransformContext(
             XmlDocument doc,
             XmlNamespaceManager nsManager
-        ) {
+        )
+        {
             XmlNodeList issuerList = doc.SelectNodes("//r:issuer", nsManager);
             return issuerList[0] as XmlElement;
         }
@@ -292,7 +294,8 @@ namespace System.Security.Cryptography.Xml.Tests
         private static XmlDocument LoadXmlWithLicenseNs(
             string xml,
             out XmlNamespaceManager nsManager
-        ) {
+        )
+        {
             XmlDocument doc = new XmlDocument();
             doc.PreserveWhitespace = true;
             nsManager = new XmlNamespaceManager(doc.NameTable);

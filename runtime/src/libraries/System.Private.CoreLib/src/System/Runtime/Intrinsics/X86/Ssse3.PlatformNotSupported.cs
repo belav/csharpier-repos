@@ -65,7 +65,8 @@ namespace System.Runtime.Intrinsics.X86
             Vector128<sbyte> left,
             Vector128<sbyte> right,
             byte mask
-        ) {
+        )
+        {
             throw new PlatformNotSupportedException();
         }
 
@@ -78,7 +79,8 @@ namespace System.Runtime.Intrinsics.X86
             Vector128<byte> left,
             Vector128<byte> right,
             byte mask
-        ) {
+        )
+        {
             throw new PlatformNotSupportedException();
         }
 
@@ -91,7 +93,8 @@ namespace System.Runtime.Intrinsics.X86
             Vector128<short> left,
             Vector128<short> right,
             byte mask
-        ) {
+        )
+        {
             throw new PlatformNotSupportedException();
         }
 
@@ -104,7 +107,8 @@ namespace System.Runtime.Intrinsics.X86
             Vector128<ushort> left,
             Vector128<ushort> right,
             byte mask
-        ) {
+        )
+        {
             throw new PlatformNotSupportedException();
         }
 
@@ -117,7 +121,8 @@ namespace System.Runtime.Intrinsics.X86
             Vector128<int> left,
             Vector128<int> right,
             byte mask
-        ) {
+        )
+        {
             throw new PlatformNotSupportedException();
         }
 
@@ -130,7 +135,8 @@ namespace System.Runtime.Intrinsics.X86
             Vector128<uint> left,
             Vector128<uint> right,
             byte mask
-        ) {
+        )
+        {
             throw new PlatformNotSupportedException();
         }
 
@@ -143,7 +149,8 @@ namespace System.Runtime.Intrinsics.X86
             Vector128<long> left,
             Vector128<long> right,
             byte mask
-        ) {
+        )
+        {
             throw new PlatformNotSupportedException();
         }
 
@@ -155,7 +162,8 @@ namespace System.Runtime.Intrinsics.X86
             Vector128<ulong> left,
             Vector128<ulong> right,
             byte mask
-        ) {
+        )
+        {
             throw new PlatformNotSupportedException();
         }
 
@@ -183,7 +191,8 @@ namespace System.Runtime.Intrinsics.X86
         public static Vector128<short> HorizontalAddSaturate(
             Vector128<short> left,
             Vector128<short> right
-        ) {
+        )
+        {
             throw new PlatformNotSupportedException();
         }
 
@@ -194,7 +203,8 @@ namespace System.Runtime.Intrinsics.X86
         public static Vector128<short> HorizontalSubtract(
             Vector128<short> left,
             Vector128<short> right
-        ) {
+        )
+        {
             throw new PlatformNotSupportedException();
         }
         /// <summary>
@@ -213,7 +223,8 @@ namespace System.Runtime.Intrinsics.X86
         public static Vector128<short> HorizontalSubtractSaturate(
             Vector128<short> left,
             Vector128<short> right
-        ) {
+        )
+        {
             throw new PlatformNotSupportedException();
         }
 
@@ -224,7 +235,8 @@ namespace System.Runtime.Intrinsics.X86
         public static Vector128<short> MultiplyAddAdjacent(
             Vector128<byte> left,
             Vector128<sbyte> right
-        ) {
+        )
+        {
             throw new PlatformNotSupportedException();
         }
 
@@ -235,7 +247,8 @@ namespace System.Runtime.Intrinsics.X86
         public static Vector128<short> MultiplyHighRoundScale(
             Vector128<short> left,
             Vector128<short> right
-        ) {
+        )
+        {
             throw new PlatformNotSupportedException();
         }
 

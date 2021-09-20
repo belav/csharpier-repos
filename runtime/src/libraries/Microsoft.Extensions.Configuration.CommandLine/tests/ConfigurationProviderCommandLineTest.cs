@@ -13,7 +13,8 @@ namespace Microsoft.Extensions.Configuration.CommandLine.Test
     {
         protected override (IConfigurationProvider Provider, Action Initializer) LoadThroughProvider(
             TestSection testConfig
-        ) {
+        )
+        {
             var args = new List<string>();
             SectionToArgs(args, "", testConfig);
 

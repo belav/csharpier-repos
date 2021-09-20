@@ -33,7 +33,8 @@ namespace Microsoft.CodeAnalysis.FindSymbols
             bool ignoreCase,
             SymbolFilter criteria,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             if (solution == null)
             {
                 throw new ArgumentNullException(nameof(solution));
@@ -100,7 +101,8 @@ namespace Microsoft.CodeAnalysis.FindSymbols
             bool ignoreCase,
             SymbolFilter criteria,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             if (project == null)
             {
                 throw new ArgumentNullException(nameof(project));
@@ -162,7 +164,8 @@ namespace Microsoft.CodeAnalysis.FindSymbols
             string pattern,
             SymbolFilter criteria,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             if (solution == null)
             {
                 throw new ArgumentNullException(nameof(solution));
@@ -219,7 +222,8 @@ namespace Microsoft.CodeAnalysis.FindSymbols
             string pattern,
             SymbolFilter criteria,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             if (project == null)
             {
                 throw new ArgumentNullException(nameof(project));
@@ -285,7 +289,8 @@ namespace Microsoft.CodeAnalysis.FindSymbols
             bool ignoreCase,
             SymbolFilter criteria,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             using var query = SearchQuery.Create(name, ignoreCase);
 
             var result = ArrayBuilder<ISymbol>.GetInstance();
@@ -313,7 +318,8 @@ namespace Microsoft.CodeAnalysis.FindSymbols
             bool ignoreCase,
             SymbolFilter filter,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var list = ArrayBuilder<ISymbol>.GetInstance();
 
             using var query = SearchQuery.Create(name, ignoreCase);
@@ -334,7 +340,8 @@ namespace Microsoft.CodeAnalysis.FindSymbols
         > FindSourceDeclarationsWithPatternInCurrentProcessAsync(
             string pattern,
             Func<SearchQuery, Task<ImmutableArray<ISymbol>>> searchAsync
-        ) {
+        )
+        {
             // The compiler API only supports a predicate which is given a symbol's name.  Because
             // we only have the name, and nothing else, we need to check it against the last segment
             // of the pattern.  i.e. if the pattern is 'Console.WL' and we are given 'WriteLine', then
@@ -382,7 +389,8 @@ namespace Microsoft.CodeAnalysis.FindSymbols
             string pattern,
             SymbolFilter criteria,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             return FindSourceDeclarationsWithPatternInCurrentProcessAsync(
                 pattern,
                 query =>
@@ -402,7 +410,8 @@ namespace Microsoft.CodeAnalysis.FindSymbols
             string pattern,
             SymbolFilter criteria,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             return FindSourceDeclarationsWithPatternInCurrentProcessAsync(
                 pattern,
                 query =>

@@ -28,7 +28,8 @@ namespace System.Text.RegularExpressions
             string fullnamespace,
             bool ispublic,
             TimeSpan matchTimeout
-        ) {
+        )
+        {
             Pattern = pattern;
             Name = name;
             Namespace = fullnamespace;

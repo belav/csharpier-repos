@@ -24,7 +24,8 @@ namespace System.Management.Tests
         public void Get_CodeTypeDeclaration_For_Win32_LogicalDisk(
             bool includeSystemClassInClassDef,
             bool systemPropertyClass
-        ) {
+        )
+        {
             using (var managementClass = new ManagementClass(null, "Win32_LogicalDisk", null))
             {
                 CodeTypeDeclaration classDom = managementClass.GetStronglyTypedClassCode(
@@ -155,7 +156,8 @@ namespace System.Management.Tests
             using (
                 ManagementObjectCollection.ManagementObjectEnumerator instancesEnumerator =
                     instances.GetEnumerator()
-            ) {
+            )
+            {
                 while (instancesEnumerator.MoveNext())
                 {
                     ManagementObject instance = (ManagementObject)instancesEnumerator.Current;

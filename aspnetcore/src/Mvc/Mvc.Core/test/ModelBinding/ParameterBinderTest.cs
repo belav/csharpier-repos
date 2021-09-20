@@ -222,7 +222,8 @@ namespace Microsoft.AspNetCore.Mvc.ModelBinding
             RequiredAttribute attribute,
             ParameterDescriptor parameterDescriptor,
             ModelMetadata metadata
-        ) {
+        )
+        {
             // Arrange
             var expectedKey = string.Empty;
             var expectedFieldName = metadata.Name ?? nameof(Person);
@@ -850,7 +851,8 @@ namespace Microsoft.AspNetCore.Mvc.ModelBinding
             IModelValidator validator = null,
             IOptions<MvcOptions> optionsAccessor = null,
             ILoggerFactory loggerFactory = null
-        ) {
+        )
+        {
             var mockModelMetadataProvider = new Mock<IModelMetadataProvider>(MockBehavior.Strict);
             mockModelMetadataProvider.Setup(o => o.GetMetadataForType(typeof(Person)))
                 .Returns(modelMetadata);
@@ -872,7 +874,8 @@ namespace Microsoft.AspNetCore.Mvc.ModelBinding
 
         private static IModelValidatorProvider GetModelValidatorProvider(
             IModelValidator validator = null
-        ) {
+        )
+        {
             if (validator == null)
             {
                 validator = Mock.Of<IModelValidator>();
@@ -898,7 +901,8 @@ namespace Microsoft.AspNetCore.Mvc.ModelBinding
         private static ParameterBinder CreateBackCompatParameterBinder(
             ModelMetadata modelMetadata,
             IObjectModelValidator validator
-        ) {
+        )
+        {
             var mockModelMetadataProvider = new Mock<IModelMetadataProvider>(MockBehavior.Strict);
             mockModelMetadataProvider.Setup(o => o.GetMetadataForType(typeof(Person)))
                 .Returns(modelMetadata);

@@ -434,7 +434,8 @@ namespace Microsoft.AspNetCore.Mvc.Core.Test.Routing
         public void Page_CalculatesPathRelativeToViewEnginePath_WhenNotRooted(
             string pageName,
             string expected
-        ) {
+        )
+        {
             // Arrange
             UrlRouteContext actual = null;
             var routeData = new RouteData();

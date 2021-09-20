@@ -22,7 +22,8 @@ namespace Microsoft.AspNetCore.Razor.Language
         public RazorParserOptions Create(
             string fileKind,
             Action<RazorParserOptionsBuilder> configure
-        ) {
+        )
+        {
             var builder = new DefaultRazorParserOptionsBuilder(
                 ProjectEngine.Configuration,
                 fileKind

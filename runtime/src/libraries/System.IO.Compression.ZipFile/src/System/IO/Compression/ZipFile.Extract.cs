@@ -216,7 +216,8 @@ namespace System.IO.Compression
             string destinationDirectoryName,
             Encoding? entryNameEncoding,
             bool overwriteFiles
-        ) {
+        )
+        {
             if (sourceArchiveFileName == null)
                 throw new ArgumentNullException(nameof(sourceArchiveFileName));
 
@@ -226,7 +227,8 @@ namespace System.IO.Compression
                     ZipArchiveMode.Read,
                     entryNameEncoding
                 )
-            ) {
+            )
+            {
                 archive.ExtractToDirectory(destinationDirectoryName, overwriteFiles);
             }
         }

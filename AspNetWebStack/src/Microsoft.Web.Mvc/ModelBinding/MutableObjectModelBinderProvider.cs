@@ -10,7 +10,8 @@ namespace Microsoft.Web.Mvc.ModelBinding
         public override IExtensibleModelBinder GetBinder(
             ControllerContext controllerContext,
             ExtensibleModelBindingContext bindingContext
-        ) {
+        )
+        {
             ModelBinderUtil.ValidateBindingContext(bindingContext);
 
             if (!bindingContext.ValueProvider.ContainsPrefix(bindingContext.ModelName))

@@ -33,7 +33,8 @@ namespace Microsoft.Extensions.Configuration
             this IConfigurationBuilder configurationBuilder,
             IConfiguration config,
             bool shouldDisposeConfiguration
-        ) {
+        )
+        {
             if (configurationBuilder == null)
             {
                 throw new ArgumentNullException(nameof(configurationBuilder));

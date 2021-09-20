@@ -34,7 +34,8 @@ namespace Microsoft.CodeAnalysis.CSharp.ExtractInterface
             int position,
             TypeDiscoveryRule typeDiscoveryRule,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var tree = await document.GetSyntaxTreeAsync(cancellationToken).ConfigureAwait(false);
             var root = await tree.GetRootAsync(cancellationToken).ConfigureAwait(false);
             var token = root.FindToken(
@@ -60,7 +61,8 @@ namespace Microsoft.CodeAnalysis.CSharp.ExtractInterface
         internal override string GetContainingNamespaceDisplay(
             INamedTypeSymbol typeSymbol,
             CompilationOptions compilationOptions
-        ) {
+        )
+        {
             return typeSymbol.ContainingNamespace.IsGlobalNamespace
               ? string.Empty
               : typeSymbol.ContainingNamespace.ToDisplayString();
@@ -85,7 +87,8 @@ namespace Microsoft.CodeAnalysis.CSharp.ExtractInterface
             IEnumerable<ISymbol> includedMembers,
             ImmutableDictionary<ISymbol, SyntaxAnnotation> symbolToDeclarationMap,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             // In C#, member implementations do not always need
             // to be explicitly added. It's safe enough to return
             // the passed in solution

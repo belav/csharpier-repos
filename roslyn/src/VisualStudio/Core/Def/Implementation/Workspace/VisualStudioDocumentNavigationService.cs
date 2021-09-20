@@ -69,7 +69,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation
             DocumentId documentId,
             TextSpan textSpan,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             // Navigation should not change the context of linked files and Shared Projects.
             documentId = workspace.GetDocumentIdInCurrentContext(documentId);
 
@@ -104,7 +105,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation
             int lineNumber,
             int offset,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             // Navigation should not change the context of linked files and Shared Projects.
             documentId = workspace.GetDocumentIdInCurrentContext(documentId);
 
@@ -126,7 +128,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation
             int position,
             int virtualSpace,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             // Navigation should not change the context of linked files and Shared Projects.
             documentId = workspace.GetDocumentIdInCurrentContext(documentId);
 
@@ -162,7 +165,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation
             OptionSet options,
             bool allowInvalidSpan,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             return TryNavigateToLocation(
                 workspace,
                 documentId,
@@ -176,7 +180,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation
                 SourceText text,
                 TextSpan textSpan,
                 bool allowInvalidSpan
-            ) {
+            )
+            {
                 var boundedTextSpan = GetSpanWithinDocumentBounds(textSpan, text.Length);
                 if (boundedTextSpan != textSpan && !allowInvalidSpan)
                 {
@@ -198,7 +203,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation
             int offset,
             OptionSet options,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             return TryNavigateToLocation(
                 workspace,
                 documentId,
@@ -214,7 +220,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation
                 int lineNumber,
                 int offset,
                 CancellationToken cancellationToken
-            ) {
+            )
+            {
                 var text = document.GetTextSynchronously(cancellationToken);
 
                 var linePosition = new LinePosition(lineNumber, offset);
@@ -234,7 +241,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation
             int virtualSpace,
             OptionSet options,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             return TryNavigateToLocation(
                 workspace,
                 documentId,
@@ -250,7 +258,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation
                 int position,
                 int virtualSpace,
                 CancellationToken cancellationToken
-            ) {
+            )
+            {
                 var text = document.GetTextSynchronously(cancellationToken);
                 text.GetLineAndOffset(position, out var lineNumber, out var offset);
 
@@ -283,7 +292,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation
             Func<SourceText, VsTextSpan> getVsTextSpan,
             OptionSet options,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             // Navigation should not change the context of linked files and Shared Projects.
             documentId = workspace.GetDocumentIdInCurrentContext(documentId);
 
@@ -373,7 +383,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation
             Workspace workspace,
             Func<SourceText, VsTextSpan> getVsTextSpan,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var document = OpenDocument(workspace, documentId);
             if (document == null)
             {
@@ -391,7 +402,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation
                     documentId,
                     out vsTextSpan
                 )
-            ) {
+            )
+            {
                 return false;
             }
 
@@ -403,7 +415,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation
             Document generatedDocument,
             MappedSpanResult mappedSpanResult,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var vsWorkspace = (VisualStudioWorkspaceImpl)workspace;
             // TODO - Move to IOpenDocumentService - https://github.com/dotnet/roslyn/issues/45954
             // Pass the original result's project context so that if the mapped file has the same context available, we navigate
@@ -418,7 +431,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation
                     mappedSpanResult.FilePath,
                     out var textBuffer
                 )
-            ) {
+            )
+            {
                 var vsTextSpan = new VsTextSpan
                 {
                     iStartIndex = mappedSpanResult.LinePositionSpan.Start.Character,
@@ -438,7 +452,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation
             Document generatedDocument,
             TextSpan textSpan,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             // Mappings for opened razor files are retrieved via the LSP client making a request to the razor server.
             // If we wait for the result on the UI thread, we will hit a bug in the LSP client that brings us to a code path
             // using ConfigureAwait(true).  This deadlocks as it then attempts to return to the UI thread which is already blocked by us.
@@ -513,13 +528,15 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation
             ITextBuffer textBuffer,
             VsTextSpan vsTextSpan,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             using (
                 Logger.LogBlock(
                     FunctionId.NavigationService_VSDocumentNavigationService_NavigateTo,
                     cancellationToken
                 )
-            ) {
+            )
+            {
                 var vsTextBuffer = _editorAdaptersFactoryService.GetBufferAdapter(textBuffer);
                 if (vsTextBuffer == null)
                 {

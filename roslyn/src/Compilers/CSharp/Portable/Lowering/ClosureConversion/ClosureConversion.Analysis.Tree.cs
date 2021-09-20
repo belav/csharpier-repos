@@ -206,7 +206,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             public static void VisitNestedFunctions(
                 Scope scope,
                 Action<Scope, NestedFunction> action
-            ) {
+            )
+            {
                 foreach (var function in scope.NestedFunctions)
                 {
                     action(scope, function);
@@ -225,7 +226,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             public static bool CheckNestedFunctions(
                 Scope scope,
                 Func<Scope, NestedFunction, bool> func
-            ) {
+            )
+            {
                 foreach (var function in scope.NestedFunctions)
                 {
                     if (func(scope, function))
@@ -353,7 +355,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                     MethodSymbol topLevelMethod,
                     HashSet<MethodSymbol> methodsConvertedToDelegates,
                     DiagnosticBag diagnostics
-                ) {
+                )
+                {
                     Debug.Assert(rootScope != null);
                     Debug.Assert(topLevelMethod != null);
                     Debug.Assert(methodsConvertedToDelegates != null);
@@ -371,7 +374,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                     MethodSymbol topLevelMethod,
                     HashSet<MethodSymbol> methodsConvertedToDelegates,
                     DiagnosticBag diagnostics
-                ) {
+                )
+                {
                     // This should be the top-level node
                     Debug.Assert(node == FindNodeToAnalyze(node));
                     Debug.Assert(topLevelMethod != null);
@@ -399,7 +403,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                     if (
                         _topLevelMethod.TryGetThisParameter(out var thisParam)
                         && (object)thisParam != null
-                    ) {
+                    )
+                    {
                         DeclareLocals(_currentScope, ImmutableArray.Create<Symbol>(thisParam));
                     }
 
@@ -477,7 +482,8 @@ namespace Microsoft.CodeAnalysis.CSharp
 
                 public override BoundNode VisitDelegateCreationExpression(
                     BoundDelegateCreationExpression node
-                ) {
+                )
+                {
                     if (node.MethodOpt?.MethodKind == MethodKind.LocalFunction)
                     {
                         // Use OriginalDefinition to strip generic type parameters
@@ -579,7 +585,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                 private BoundNode? VisitNestedFunction(
                     MethodSymbol functionSymbol,
                     BoundBlock? body
-                ) {
+                )
+                {
                     RoslynDebug.Assert(functionSymbol is object);
 
                     if (body is null)
@@ -638,7 +645,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                     if (
                         symbol is MethodSymbol method
                         && _currentFunction.OriginalMethodSymbol == method
-                    ) {
+                    )
+                    {
                         // Is this recursion? If so there's no capturing
                         return;
                     }
@@ -655,7 +663,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                         while (
                             function != null
                             && symbol.ContainingSymbol != function.OriginalMethodSymbol
-                        ) {
+                        )
+                        {
                             function.CapturedVariables.Add(symbol);
 
                             // Also mark captured in enclosing scopes
@@ -696,7 +705,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                 private void AddDiagnosticIfRestrictedType(
                     Symbol capturedVariable,
                     SyntaxNode syntax
-                ) {
+                )
+                {
                     TypeSymbol type;
                     switch (capturedVariable.Kind)
                     {

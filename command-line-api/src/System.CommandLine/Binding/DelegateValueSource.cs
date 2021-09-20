@@ -16,7 +16,8 @@ namespace System.CommandLine.Binding
             IValueDescriptor valueDescriptor,
             BindingContext? bindingContext,
             out object? boundValue
-        ) {
+        )
+        {
             boundValue = _getValue(bindingContext);
 
             return true;

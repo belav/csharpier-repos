@@ -22,7 +22,8 @@ namespace Microsoft.Extensions.DependencyInjection
         public static IMvcBuilder AddRazorOptions(
             this IMvcBuilder builder,
             Action<RazorViewEngineOptions> setupAction
-        ) {
+        )
+        {
             if (builder == null)
             {
                 throw new ArgumentNullException(nameof(builder));

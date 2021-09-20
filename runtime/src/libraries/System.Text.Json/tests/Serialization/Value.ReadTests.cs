@@ -642,7 +642,8 @@ namespace System.Text.Json.Serialization.Tests
             T netfxExpectedValue,
             T netcoreExpectedValue,
             Func<T> testCode
-        ) {
+        )
+        {
             if (PlatformDetection.IsNetFramework)
             {
                 Assert.Equal(netfxExpectedValue, testCode());

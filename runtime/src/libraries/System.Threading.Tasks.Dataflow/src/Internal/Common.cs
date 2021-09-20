@@ -85,7 +85,8 @@ namespace System.Threading.Tasks.Dataflow.Internal
             KeepAlivePredicate<TStateIn, TStateOut> predicate,
             TStateIn stateIn,
             [MaybeNullWhen(false)] out TStateOut stateOut
-        ) {
+        )
+        {
             Debug.Assert(predicate != null, "Non-null predicate to execute is required.");
             const int ITERATION_LIMIT = 16;
 
@@ -136,7 +137,8 @@ namespace System.Threading.Tasks.Dataflow.Internal
         internal static string GetNameForDebugger(
             IDataflowBlock block,
             DataflowBlockOptions? options = null
-        ) {
+        )
+        {
             Debug.Assert(
                 block != null,
                 "Should only be used with valid objects being displayed in the debugger."
@@ -208,7 +210,8 @@ namespace System.Threading.Tasks.Dataflow.Internal
             Task completionTask,
             Action<object?> completeAction,
             object completeState
-        ) {
+        )
+        {
             Debug.Assert(completionTask != null, "A task to wire up for completion is needed.");
             Debug.Assert(
                 completeAction != null,
@@ -271,7 +274,8 @@ namespace System.Threading.Tasks.Dataflow.Internal
             Exception exc,
             T messageValue,
             bool targetInnerExceptions = false
-        ) {
+        )
+        {
             Debug.Assert(
                 exc != null,
                 "The exception into which data should be stored must be provided."
@@ -336,7 +340,8 @@ namespace System.Threading.Tasks.Dataflow.Internal
             Exception exception,
             string key,
             string value
-        ) {
+        )
+        {
             Debug.Assert(exception != null, "An exception is needed to store the data into.");
             Debug.Assert(key != null, "A key into the exception's data collection is needed.");
             Debug.Assert(value != null, "The value to store must be provided.");
@@ -384,7 +389,8 @@ namespace System.Threading.Tasks.Dataflow.Internal
             [NotNull] ref List<Exception>? list,
             Exception exception,
             bool unwrapInnerExceptions = false
-        ) {
+        )
+        {
             Debug.Assert(exception != null, "An exception to add is required.");
             Debug.Assert(
                 !unwrapInnerExceptions || exception.InnerException != null,
@@ -449,7 +455,8 @@ namespace System.Threading.Tasks.Dataflow.Internal
         /// <returns>The canceled task.</returns>
         internal static Task<TResult> CreateTaskFromCancellation<TResult>(
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             Debug.Assert(
                 cancellationToken.IsCancellationRequested,
                 "The task will only be immediately canceled if the token has cancellation requested already."
@@ -496,7 +503,8 @@ namespace System.Threading.Tasks.Dataflow.Internal
             object outgoingLock,
             TargetRegistry<TOutput> targetRegistry,
             ITargetBlock<TOutput> targetBlock
-        ) {
+        )
+        {
             Debug.Assert(outgoingLock != null, "Monitor object needed to protect the operation.");
             Debug.Assert(targetRegistry != null, "Registry from which to remove is required.");
             Debug.Assert(targetBlock != null, "Target block to unlink is required.");
@@ -525,7 +533,8 @@ namespace System.Threading.Tasks.Dataflow.Internal
         /// <returns>The options to use.</returns>
         internal static TaskContinuationOptions GetContinuationOptions(
             TaskContinuationOptions toInclude = TaskContinuationOptions.None
-        ) {
+        )
+        {
             return toInclude | TaskContinuationOptions.DenyChildAttach;
         }
 
@@ -538,7 +547,8 @@ namespace System.Threading.Tasks.Dataflow.Internal
         /// <returns>The options to use.</returns>
         internal static TaskCreationOptions GetCreationOptionsForTask(
             bool isReplacementReplica = false
-        ) {
+        )
+        {
             TaskCreationOptions options = TaskCreationOptions.DenyChildAttach;
             if (isReplacementReplica)
                 options |= TaskCreationOptions.PreferFairness;
@@ -602,7 +612,8 @@ namespace System.Threading.Tasks.Dataflow.Internal
             ITargetBlock<T> target,
             QueuedMap<ISourceBlock<T>, DataflowMessageHeader> postponedMessages,
             ref List<Exception>? exceptions
-        ) {
+        )
+        {
             Debug.Assert(target != null, "There must be a subject target.");
             Debug.Assert(
                 postponedMessages != null,
@@ -660,7 +671,8 @@ namespace System.Threading.Tasks.Dataflow.Internal
             Task sourceCompletionTask,
             IDataflowBlock target,
             Action<Exception>? exceptionHandler
-        ) {
+        )
+        {
             Debug.Assert(sourceCompletionTask != null, "sourceCompletionTask may not be null.");
             Debug.Assert(
                 target != null,
@@ -697,7 +709,8 @@ namespace System.Threading.Tasks.Dataflow.Internal
         private static void PropagateCompletionAsContinuation(
             Task sourceCompletionTask,
             IDataflowBlock target
-        ) {
+        )
+        {
             Debug.Assert(sourceCompletionTask != null, "sourceCompletionTask may not be null.");
             Debug.Assert(
                 target != null,
@@ -719,7 +732,8 @@ namespace System.Threading.Tasks.Dataflow.Internal
         internal static void PropagateCompletionOnceCompleted(
             Task sourceCompletionTask,
             IDataflowBlock target
-        ) {
+        )
+        {
             Debug.Assert(sourceCompletionTask != null, "sourceCompletionTask may not be null.");
             Debug.Assert(
                 target != null,

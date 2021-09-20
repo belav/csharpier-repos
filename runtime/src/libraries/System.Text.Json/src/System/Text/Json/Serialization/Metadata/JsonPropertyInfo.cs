@@ -43,7 +43,8 @@ namespace System.Text.Json.Serialization.Metadata
         internal static JsonPropertyInfo CreateIgnoredPropertyPlaceholder(
             MemberInfo memberInfo,
             JsonSerializerOptions options
-        ) {
+        )
+        {
             JsonPropertyInfo jsonPropertyInfo = new JsonPropertyInfo<sbyte>();
             jsonPropertyInfo.Options = options;
             jsonPropertyInfo.MemberInfo = memberInfo;
@@ -61,7 +62,8 @@ namespace System.Text.Json.Serialization.Metadata
         internal virtual void GetPolicies(
             JsonIgnoreCondition? ignoreCondition,
             JsonNumberHandling? declaringTypeNumberHandling
-        ) {
+        )
+        {
             if (IsForTypeInfo)
             {
                 Debug.Assert(MemberInfo == null);
@@ -138,7 +140,8 @@ namespace System.Text.Json.Serialization.Metadata
             if (
                 (ConverterStrategy & (ConverterStrategy.Enumerable | ConverterStrategy.Dictionary))
                 == 0
-            ) {
+            )
+            {
                 Debug.Assert(ignoreCondition != JsonIgnoreCondition.Always);
 
                 // Three possible values for ignoreCondition:
@@ -254,7 +257,8 @@ namespace System.Text.Json.Serialization.Metadata
         internal void DetermineNumberHandlingForProperty(
             JsonNumberHandling? propertyNumberHandling,
             JsonNumberHandling? declaringTypeNumberHandling
-        ) {
+        )
+        {
             bool numberHandlingIsApplicable = NumberHandingIsApplicable();
 
             if (numberHandlingIsApplicable)
@@ -290,7 +294,8 @@ namespace System.Text.Json.Serialization.Metadata
                     (ConverterStrategy.Enumerable | ConverterStrategy.Dictionary)
                     & ConverterStrategy
                 ) == 0
-            ) {
+            )
+            {
                 return false;
             }
 
@@ -312,7 +317,8 @@ namespace System.Text.Json.Serialization.Metadata
                 || elementType == typeof(uint)
                 || elementType == typeof(ulong)
                 || elementType == JsonTypeInfo.ObjectType
-            ) {
+            )
+            {
                 return true;
             }
 
@@ -351,7 +357,8 @@ namespace System.Text.Json.Serialization.Metadata
             JsonIgnoreCondition? ignoreCondition,
             JsonNumberHandling? parentTypeNumberHandling,
             JsonSerializerOptions options
-        ) {
+        )
+        {
             Debug.Assert(converter != null);
 
             ClrName = memberInfo?.Name;
@@ -401,7 +408,8 @@ namespace System.Text.Json.Serialization.Metadata
             object obj,
             ref ReadStack state,
             ref Utf8JsonReader reader
-        ) {
+        )
+        {
             object propValue = GetValueAsObject(obj)!;
 
             if (propValue is IDictionary<string, object?> dictionaryObject)
@@ -425,7 +433,8 @@ namespace System.Text.Json.Serialization.Metadata
                             ref state,
                             out object? value
                         )
-                    ) {
+                    )
+                    {
                         return false;
                     }
 
@@ -450,7 +459,8 @@ namespace System.Text.Json.Serialization.Metadata
                         ref state,
                         out JsonElement value
                     )
-                ) {
+                )
+                {
                     return false;
                 }
 
@@ -476,13 +486,15 @@ namespace System.Text.Json.Serialization.Metadata
             ref ReadStack state,
             ref Utf8JsonReader reader,
             out object? value
-        ) {
+        )
+        {
             Debug.Assert(this == state.Current.JsonTypeInfo.DataExtensionProperty);
 
             if (
                 RuntimeTypeInfo.ElementType == JsonTypeInfo.ObjectType
                 && reader.TokenType == JsonTokenType.Null
-            ) {
+            )
+            {
                 value = null;
                 return true;
             }
@@ -497,7 +509,8 @@ namespace System.Text.Json.Serialization.Metadata
                     ref state,
                     out JsonElement jsonElement
                 )
-            ) {
+            )
+            {
                 // JsonElement is a struct that must be read in full.
                 value = null;
                 return false;

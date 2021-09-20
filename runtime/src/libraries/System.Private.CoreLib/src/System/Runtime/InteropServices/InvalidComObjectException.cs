@@ -31,9 +31,7 @@ namespace System.Runtime.InteropServices
             HResult = HResults.COR_E_INVALIDCOMOBJECT;
         }
 
-        protected InvalidComObjectException(
-            SerializationInfo info,
-            StreamingContext context
-        ) : base(info, context) { }
+        protected InvalidComObjectException(SerializationInfo info, StreamingContext context)
+            : base(info, context) { }
     }
 }

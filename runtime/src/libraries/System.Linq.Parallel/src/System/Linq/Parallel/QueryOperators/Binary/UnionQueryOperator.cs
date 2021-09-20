@@ -47,7 +47,8 @@ namespace System.Linq.Parallel
         internal override QueryResults<TInputOutput> Open(
             QuerySettings settings,
             bool preferStriping
-        ) {
+        )
+        {
             // We just open our child operators, left and then right.  Do not propagate the preferStriping value, but
             // instead explicitly set it to false. Regardless of whether the parent prefers striping or range
             // partitioning, the output will be hash-partitioned.
@@ -69,7 +70,8 @@ namespace System.Linq.Parallel
             IPartitionedStreamRecipient<TInputOutput> outputRecipient,
             bool preferStriping,
             QuerySettings settings
-        ) {
+        )
+        {
             Debug.Assert(leftStream.PartitionCount == rightStream.PartitionCount);
             int partitionCount = leftStream.PartitionCount;
 
@@ -140,7 +142,8 @@ namespace System.Linq.Parallel
             IPartitionedStreamRecipient<TInputOutput> outputRecipient,
             int partitionCount,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             if (RightChild.OutputOrdered)
             {
                 PartitionedStream<
@@ -197,7 +200,8 @@ namespace System.Linq.Parallel
             IPartitionedStreamRecipient<TInputOutput> outputRecipient,
             int partitionCount,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             if (LeftChild.OutputOrdered || RightChild.OutputOrdered)
             {
                 IComparer<ConcatKey<TLeftKey, TRightKey>> compoundKeyComparer = ConcatKey<
@@ -312,7 +316,8 @@ namespace System.Linq.Parallel
                 > rightSource,
                 IEqualityComparer<TInputOutput>? comparer,
                 CancellationToken cancellationToken
-            ) {
+            )
+            {
                 Debug.Assert(leftSource != null);
                 Debug.Assert(rightSource != null);
 
@@ -329,7 +334,8 @@ namespace System.Linq.Parallel
             internal override bool MoveNext(
                 [MaybeNullWhen(false), AllowNull] ref TInputOutput currentElement,
                 ref int currentKey
-            ) {
+            )
+            {
                 if (_hashLookup == null)
                 {
                     _hashLookup = new HashSet<TInputOutput>(_comparer);
@@ -457,7 +463,8 @@ namespace System.Linq.Parallel
                 IEqualityComparer<TInputOutput>? comparer,
                 IComparer<ConcatKey<TLeftKey, TRightKey>> keyComparer,
                 CancellationToken cancellationToken
-            ) {
+            )
+            {
                 Debug.Assert(leftSource != null);
                 Debug.Assert(rightSource != null);
 
@@ -484,7 +491,8 @@ namespace System.Linq.Parallel
             internal override bool MoveNext(
                 [MaybeNullWhen(false), AllowNull] ref TInputOutput currentElement,
                 ref ConcatKey<TLeftKey, TRightKey> currentKey
-            ) {
+            )
+            {
                 Debug.Assert(_leftSource != null);
                 Debug.Assert(_rightSource != null);
 
@@ -522,7 +530,8 @@ namespace System.Linq.Parallel
                         if (
                             !union.TryGetValue(wrappedElem, out oldEntry)
                             || _keyComparer.Compare(key, oldEntry.Second) < 0
-                        ) {
+                        )
+                        {
                             union[wrappedElem] = new Pair<
                                 TInputOutput,
                                 ConcatKey<TLeftKey, TRightKey>
@@ -546,7 +555,8 @@ namespace System.Linq.Parallel
                         if (
                             !union.TryGetValue(wrappedElem, out oldEntry)
                             || _keyComparer.Compare(key, oldEntry.Second) < 0
-                        ) {
+                        )
+                        {
                             union[wrappedElem] = new Pair<
                                 TInputOutput,
                                 ConcatKey<TLeftKey, TRightKey>

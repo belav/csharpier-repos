@@ -85,7 +85,8 @@ namespace Microsoft.AspNetCore.Mvc.Rendering
             this IHtmlHelper htmlHelper,
             string expression,
             object additionalViewData
-        ) {
+        )
+        {
             if (htmlHelper == null)
             {
                 throw new ArgumentNullException(nameof(htmlHelper));
@@ -129,7 +130,8 @@ namespace Microsoft.AspNetCore.Mvc.Rendering
             this IHtmlHelper htmlHelper,
             string expression,
             string templateName
-        ) {
+        )
+        {
             if (htmlHelper == null)
             {
                 throw new ArgumentNullException(nameof(htmlHelper));
@@ -179,7 +181,8 @@ namespace Microsoft.AspNetCore.Mvc.Rendering
             string expression,
             string templateName,
             object additionalViewData
-        ) {
+        )
+        {
             if (htmlHelper == null)
             {
                 throw new ArgumentNullException(nameof(htmlHelper));
@@ -228,7 +231,8 @@ namespace Microsoft.AspNetCore.Mvc.Rendering
             string expression,
             string templateName,
             string htmlFieldName
-        ) {
+        )
+        {
             if (htmlHelper == null)
             {
                 throw new ArgumentNullException(nameof(htmlHelper));
@@ -264,7 +268,8 @@ namespace Microsoft.AspNetCore.Mvc.Rendering
         public static IHtmlContent DisplayFor<TModel, TResult>(
             this IHtmlHelper<TModel> htmlHelper,
             Expression<Func<TModel, TResult>> expression
-        ) {
+        )
+        {
             if (htmlHelper == null)
             {
                 throw new ArgumentNullException(nameof(htmlHelper));
@@ -312,7 +317,8 @@ namespace Microsoft.AspNetCore.Mvc.Rendering
             this IHtmlHelper<TModel> htmlHelper,
             Expression<Func<TModel, TResult>> expression,
             object additionalViewData
-        ) {
+        )
+        {
             if (htmlHelper == null)
             {
                 throw new ArgumentNullException(nameof(htmlHelper));
@@ -356,7 +362,8 @@ namespace Microsoft.AspNetCore.Mvc.Rendering
             this IHtmlHelper<TModel> htmlHelper,
             Expression<Func<TModel, TResult>> expression,
             string templateName
-        ) {
+        )
+        {
             if (htmlHelper == null)
             {
                 throw new ArgumentNullException(nameof(htmlHelper));
@@ -406,7 +413,8 @@ namespace Microsoft.AspNetCore.Mvc.Rendering
             Expression<Func<TModel, TResult>> expression,
             string templateName,
             object additionalViewData
-        ) {
+        )
+        {
             if (htmlHelper == null)
             {
                 throw new ArgumentNullException(nameof(htmlHelper));
@@ -455,7 +463,8 @@ namespace Microsoft.AspNetCore.Mvc.Rendering
             Expression<Func<TModel, TResult>> expression,
             string templateName,
             string htmlFieldName
-        ) {
+        )
+        {
             if (htmlHelper == null)
             {
                 throw new ArgumentNullException(nameof(htmlHelper));
@@ -529,7 +538,8 @@ namespace Microsoft.AspNetCore.Mvc.Rendering
         public static IHtmlContent DisplayForModel(
             this IHtmlHelper htmlHelper,
             object additionalViewData
-        ) {
+        )
+        {
             if (htmlHelper == null)
             {
                 throw new ArgumentNullException(nameof(htmlHelper));
@@ -602,7 +612,8 @@ namespace Microsoft.AspNetCore.Mvc.Rendering
             this IHtmlHelper htmlHelper,
             string templateName,
             object additionalViewData
-        ) {
+        )
+        {
             if (htmlHelper == null)
             {
                 throw new ArgumentNullException(nameof(htmlHelper));
@@ -642,7 +653,8 @@ namespace Microsoft.AspNetCore.Mvc.Rendering
             this IHtmlHelper htmlHelper,
             string templateName,
             string htmlFieldName
-        ) {
+        )
+        {
             if (htmlHelper == null)
             {
                 throw new ArgumentNullException(nameof(htmlHelper));
@@ -688,7 +700,8 @@ namespace Microsoft.AspNetCore.Mvc.Rendering
             string templateName,
             string htmlFieldName,
             object additionalViewData
-        ) {
+        )
+        {
             if (htmlHelper == null)
             {
                 throw new ArgumentNullException(nameof(htmlHelper));

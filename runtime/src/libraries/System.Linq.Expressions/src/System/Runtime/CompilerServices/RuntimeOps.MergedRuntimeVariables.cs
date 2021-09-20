@@ -22,7 +22,8 @@ namespace System.Runtime.CompilerServices
                 IRuntimeVariables first,
                 IRuntimeVariables second,
                 int[] indexes
-            ) {
+            )
+            {
                 _first = first;
                 _second = second;
                 _indexes = indexes;

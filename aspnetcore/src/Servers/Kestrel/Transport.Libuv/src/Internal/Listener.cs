@@ -161,7 +161,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Transport.Libuv.Internal
             int status,
             UvException error,
             object state
-        ) {
+        )
+        {
             var listener = (Listener)state;
 
             if (error != null)

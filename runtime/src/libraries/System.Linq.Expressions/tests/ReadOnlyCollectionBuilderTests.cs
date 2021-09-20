@@ -753,7 +753,8 @@ namespace System.Linq.Expressions.Tests
         public void ReadOnlyCollectionBuilder_IEnumeratorOfT_Versioning_MoveNext(
             int theoryIndex,
             Action<ReadOnlyCollectionBuilder<int>> edit
-        ) {
+        )
+        {
             _ = theoryIndex;
             var rocb = new ReadOnlyCollectionBuilder<int>(new[] { 1, 2, 3 });
 
@@ -771,7 +772,8 @@ namespace System.Linq.Expressions.Tests
         public void ReadOnlyCollectionBuilder_IEnumeratorOfT_Versioning_Reset(
             int theoryIndex,
             Action<ReadOnlyCollectionBuilder<int>> edit
-        ) {
+        )
+        {
             _ = theoryIndex;
             var rocb = new ReadOnlyCollectionBuilder<int>(new[] { 1, 2, 3 });
 
@@ -789,7 +791,8 @@ namespace System.Linq.Expressions.Tests
         public void ReadOnlyCollectionBuilder_IEnumerator_Versioning_MoveNext(
             int theoryIndex,
             Action<ReadOnlyCollectionBuilder<int>> edit
-        ) {
+        )
+        {
             _ = theoryIndex;
             var rocb = new ReadOnlyCollectionBuilder<int>(new[] { 1, 2, 3 });
 
@@ -807,7 +810,8 @@ namespace System.Linq.Expressions.Tests
         public void ReadOnlyCollectionBuilder_IEnumerator_Versioning_Reset(
             int theoryIndex,
             Action<ReadOnlyCollectionBuilder<int>> edit
-        ) {
+        )
+        {
             _ = theoryIndex;
             var rocb = new ReadOnlyCollectionBuilder<int>(new[] { 1, 2, 3 });
 

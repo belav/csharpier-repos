@@ -53,7 +53,8 @@ namespace Microsoft.CodeAnalysis.Remote
             bool searchReferenceAssemblies,
             ImmutableArray<PackageSource> packageSources,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             return RunServiceAsync(
                 async cancellationToken =>
                 {
@@ -103,7 +104,8 @@ namespace Microsoft.CodeAnalysis.Remote
             public SymbolSearchService(
                 RemoteCallback<IRemoteMissingImportDiscoveryService.ICallback> callback,
                 RemoteServiceCallbackId callbackId
-            ) {
+            )
+            {
                 _callback = callback;
                 _callbackId = callbackId;
             }

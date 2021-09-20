@@ -19,7 +19,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Completion.KeywordRecommenders
             int position,
             CSharpSyntaxContext context,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             return context.IsStatementContext
                 || context.TargetToken.IsAfterYieldKeyword()
                 || IsAttributeContext(context, cancellationToken);
@@ -28,7 +29,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Completion.KeywordRecommenders
         private static bool IsAttributeContext(
             CSharpSyntaxContext context,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             return context.IsMemberAttributeContext(
                     SyntaxKindSet.ClassInterfaceStructRecordTypeDeclarations,
                     cancellationToken

@@ -23,7 +23,8 @@ namespace Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore.Tests
                 var db = new DbContext(
                     new DbContextOptionsBuilder().UseSqlite(ConnectionString).Options
                 )
-            ) {
+            )
+            {
                 db.Database.EnsureDeleted();
             }
         }

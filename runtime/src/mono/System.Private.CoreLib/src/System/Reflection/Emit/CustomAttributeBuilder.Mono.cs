@@ -112,7 +112,8 @@ namespace System.Reflection.Emit
             object?[] constructorArgs,
             FieldInfo[] namedFields,
             object[] fieldValues
-        ) {
+        )
+        {
             Initialize(
                 con,
                 constructorArgs,
@@ -127,7 +128,8 @@ namespace System.Reflection.Emit
             object?[] constructorArgs,
             PropertyInfo[] namedProperties,
             object[] propertyValues
-        ) {
+        )
+        {
             Initialize(
                 con,
                 constructorArgs,
@@ -144,7 +146,8 @@ namespace System.Reflection.Emit
             object[] propertyValues,
             FieldInfo[] namedFields,
             object[] fieldValues
-        ) {
+        )
+        {
             Initialize(
                 con,
                 constructorArgs,
@@ -231,7 +234,8 @@ namespace System.Reflection.Emit
             object[] propertyValues,
             FieldInfo[] namedFields,
             object[] fieldValues
-        ) {
+        )
+        {
             ctor = con;
             args = constructorArgs;
             this.namedProperties = namedProperties;
@@ -295,7 +299,8 @@ namespace System.Reflection.Emit
                         !(fi.FieldType is TypeBuilder)
                         && !fi.FieldType.IsEnum
                         && !fi.FieldType.IsInstanceOfType(fieldValues[i])
-                    ) {
+                    )
+                    {
                         //
                         // mcs allways uses object[] for array types and
                         // MS.NET allows this
@@ -464,7 +469,8 @@ namespace System.Reflection.Emit
         internal static UnmanagedMarshal get_umarshal(
             CustomAttributeBuilder customBuilder,
             bool is_field
-        ) {
+        )
+        {
             byte[] data = customBuilder.Data;
             UnmanagedType subtype = (UnmanagedType)0x50; /* NATIVE_MAX */
             int sizeConst = -1;

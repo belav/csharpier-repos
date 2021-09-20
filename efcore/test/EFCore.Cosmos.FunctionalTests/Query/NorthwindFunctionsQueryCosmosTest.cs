@@ -1043,7 +1043,8 @@ WHERE (c[""Discriminator""] = ""Customer"")"
         [ConditionalTheory(Skip = "Issue #17246")]
         public override async Task Order_by_length_twice_followed_by_projection_of_naked_collection_navigation(
             bool async
-        ) {
+        )
+        {
             await base.Order_by_length_twice_followed_by_projection_of_naked_collection_navigation(
                 async
             );
@@ -1069,7 +1070,8 @@ WHERE ((c[""Discriminator""] = ""Customer"") AND (c[""CustomerID""] = ""ANATR"")
         [ConditionalTheory(Skip = "Issue #17246")]
         public override async Task Static_equals_nullable_datetime_compared_to_non_nullable(
             bool async
-        ) {
+        )
+        {
             await base.Static_equals_nullable_datetime_compared_to_non_nullable(async);
 
             AssertSql(

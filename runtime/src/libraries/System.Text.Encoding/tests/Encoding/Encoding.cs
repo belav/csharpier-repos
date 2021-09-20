@@ -165,7 +165,8 @@ namespace System.Text.Encodings.Tests
             bool isMailNewsDisplay,
             bool isMailNewsSave,
             int windowsCodePage
-        ) {
+        )
+        {
             Encoding encoding = Encoding.GetEncoding(codepage);
             Assert.Equal(name, encoding.WebName);
             Assert.Equal(bodyName, encoding.BodyName);
@@ -187,7 +188,8 @@ namespace System.Text.Encodings.Tests
             bool normalizedD,
             bool normalizedKC,
             bool normalizedKD
-        ) {
+        )
+        {
             Encoding encoding = Encoding.GetEncoding(codepage);
             Assert.True(encoding.IsReadOnly);
             Assert.Equal(normalized, encoding.IsAlwaysNormalized());

@@ -27,9 +27,8 @@ namespace System.Net.Http.Functional.Tests
     public sealed class SocketsHttpHandler_HttpClientHandler_Asynchrony_Test
         : HttpClientHandler_Asynchrony_Test
     {
-        public SocketsHttpHandler_HttpClientHandler_Asynchrony_Test(
-            ITestOutputHelper output
-        ) : base(output) { }
+        public SocketsHttpHandler_HttpClientHandler_Asynchrony_Test(ITestOutputHelper output)
+            : base(output) { }
 
         [Fact]
         public async Task ExecutionContext_Suppressed_Success()
@@ -103,7 +102,8 @@ namespace System.Net.Http.Functional.Tests
         private static (Task completedOnFinalized, Task getRequest) MakeHttpRequestWithTcsSetOnFinalizationInAsyncLocal(
             HttpClient client,
             Uri uri
-        ) {
+        )
+        {
             var tcs = new TaskCompletionSource(TaskCreationOptions.RunContinuationsAsynchronously);
 
             // Put something in ExecutionContext, start the HTTP request, then undo the EC change.
@@ -200,9 +200,8 @@ namespace System.Net.Http.Functional.Tests
     public sealed class SocketsHttpHandler_HttpClientHandler_Decompression_Tests
         : HttpClientHandler_Decompression_Test
     {
-        public SocketsHttpHandler_HttpClientHandler_Decompression_Tests(
-            ITestOutputHelper output
-        ) : base(output) { }
+        public SocketsHttpHandler_HttpClientHandler_Decompression_Tests(ITestOutputHelper output)
+            : base(output) { }
     }
 
     [ConditionalClass(typeof(PlatformDetection), nameof(PlatformDetection.IsNotBrowser))]
@@ -264,7 +263,8 @@ namespace System.Net.Http.Functional.Tests
         [InlineData(1)]
         public async Task SmallConnectionLifetimeWithMaxConnections_PendingRequestUsesDifferentConnection(
             int lifetimeMilliseconds
-        ) {
+        )
+        {
             using (var handler = new SocketsHttpHandler())
             {
                 handler.PooledConnectionLifetime = TimeSpan.FromMilliseconds(lifetimeMilliseconds);
@@ -331,9 +331,8 @@ namespace System.Net.Http.Functional.Tests
             s.ResponseDrainTimeout = time;
         }
 
-        public SocketsHttpHandler_HttpClientHandler_ResponseDrain_Test(
-            ITestOutputHelper output
-        ) : base(output) { }
+        public SocketsHttpHandler_HttpClientHandler_ResponseDrain_Test(ITestOutputHelper output)
+            : base(output) { }
 
         [Fact]
         public void MaxResponseDrainSize_Roundtrips()
@@ -462,7 +461,8 @@ namespace System.Net.Http.Functional.Tests
             int readSize,
             int maxDrainSize,
             LoopbackServer.ContentMode mode
-        ) {
+        )
+        {
             await LoopbackServer.CreateClientAndServerAsync(
                 async url =>
                 {
@@ -523,7 +523,8 @@ namespace System.Net.Http.Functional.Tests
             int totalSize,
             int maxDrainSize,
             LoopbackServer.ContentMode mode
-        ) {
+        )
+        {
             await LoopbackServer.CreateClientAndServerAsync(
                 async url =>
                 {
@@ -591,7 +592,8 @@ namespace System.Net.Http.Functional.Tests
         [InlineData(LoopbackServer.ContentMode.BytePerChunk)]
         public async Task GetAsyncWithMaxConnections_DrainTakesLongerThanTimeout_KillsConnection(
             LoopbackServer.ContentMode mode
-        ) {
+        )
+        {
             const int ContentLength = 10_000;
 
             await LoopbackServer.CreateClientAndServerAsync(
@@ -706,7 +708,8 @@ namespace System.Net.Http.Functional.Tests
             protected override async Task SerializeToStreamAsync(
                 Stream stream,
                 TransportContext context
-            ) {
+            )
+            {
                 await stream.WriteAsync(new byte[42], 0, 42);
                 stream.Dispose();
             }
@@ -737,9 +740,8 @@ namespace System.Net.Http.Functional.Tests
     public sealed class SocketsHttpHandler_HttpClientHandler_SslProtocols_Test
         : HttpClientHandler_SslProtocols_Test
     {
-        public SocketsHttpHandler_HttpClientHandler_SslProtocols_Test(
-            ITestOutputHelper output
-        ) : base(output) { }
+        public SocketsHttpHandler_HttpClientHandler_SslProtocols_Test(ITestOutputHelper output)
+            : base(output) { }
     }
 
     [ConditionalClass(typeof(PlatformDetection), nameof(PlatformDetection.IsNotBrowser))]
@@ -781,7 +783,8 @@ namespace System.Net.Http.Functional.Tests
         [InlineData(true)]
         public async Task GetAsyncDefaultCompletionOption_TrailingHeaders_Available(
             bool includeTrailerHeader
-        ) {
+        )
+        {
             await LoopbackServer.CreateServerAsync(
                 async (server, url) =>
                 {
@@ -1325,9 +1328,8 @@ namespace System.Net.Http.Functional.Tests
     public sealed class SocketsHttpHandler_HttpClientHandler_Cancellation_Test
         : HttpClientHandler_Http11_Cancellation_Test
     {
-        public SocketsHttpHandler_HttpClientHandler_Cancellation_Test(
-            ITestOutputHelper output
-        ) : base(output) { }
+        public SocketsHttpHandler_HttpClientHandler_Cancellation_Test(ITestOutputHelper output)
+            : base(output) { }
 
         [Fact]
         public void ConnectTimeout_Default()
@@ -1451,9 +1453,8 @@ namespace System.Net.Http.Functional.Tests
     public sealed class SocketsHttpHandler_HttpClientHandler_Authentication_Test
         : HttpClientHandler_Authentication_Test
     {
-        public SocketsHttpHandler_HttpClientHandler_Authentication_Test(
-            ITestOutputHelper output
-        ) : base(output) { }
+        public SocketsHttpHandler_HttpClientHandler_Authentication_Test(ITestOutputHelper output)
+            : base(output) { }
     }
 
     [ConditionalClass(typeof(PlatformDetection), nameof(PlatformDetection.IsNotBrowser))]
@@ -1492,7 +1493,8 @@ namespace System.Net.Http.Functional.Tests
                                     Stream clientStream = await (
                                         await getResponseTask
                                     ).Content.ReadAsStreamAsync(TestAsync)
-                                ) {
+                                )
+                                {
                                     // Boolean properties returning correct values
                                     Assert.True(clientStream.CanWrite);
                                     Assert.True(clientStream.CanRead);
@@ -1774,9 +1776,8 @@ namespace System.Net.Http.Functional.Tests
     public sealed class SocketsHttpHandler_HttpClientHandler_ConnectionPooling_Test
         : HttpClientHandlerTestBase
     {
-        public SocketsHttpHandler_HttpClientHandler_ConnectionPooling_Test(
-            ITestOutputHelper output
-        ) : base(output) { }
+        public SocketsHttpHandler_HttpClientHandler_ConnectionPooling_Test(ITestOutputHelper output)
+            : base(output) { }
 
         [Fact]
         public async Task MultipleIterativeRequests_SameConnectionReused()
@@ -1788,7 +1789,8 @@ namespace System.Net.Http.Functional.Tests
                     SocketType.Stream,
                     ProtocolType.Tcp
                 )
-            ) {
+            )
+            {
                 listener.Bind(new IPEndPoint(IPAddress.Loopback, 0));
                 listener.Listen(1);
                 var ep = (IPEndPoint)listener.LocalEndPoint;
@@ -1943,7 +1945,8 @@ namespace System.Net.Http.Functional.Tests
         [InlineData("PooledConnectionIdleTimeout")]
         public async Task SmallConnectionTimeout_SubsequentRequestUsesDifferentConnection(
             string timeoutPropertyName
-        ) {
+        )
+        {
             using (var handler = new SocketsHttpHandler())
             {
                 switch (timeoutPropertyName)
@@ -1996,7 +1999,8 @@ namespace System.Net.Http.Functional.Tests
         [InlineData("PooledConnectionIdleTimeout")]
         public async Task Http2_SmallConnectionTimeout_SubsequentRequestUsesDifferentConnection(
             string timeoutPropertyName
-        ) {
+        )
+        {
             await Http2LoopbackServerFactory.CreateServerAsync(
                 async (server, url) =>
                 {
@@ -2062,7 +2066,8 @@ namespace System.Net.Http.Functional.Tests
                                 using (var handler = new SocketsHttpHandler())
                                 using (
                                     HttpClient client = CreateHttpClient(handler, useVersionString)
-                                ) {
+                                )
+                                {
                                     handler.SslOptions.RemoteCertificateValidationCallback =
                                         delegate
                                         {
@@ -2125,7 +2130,8 @@ namespace System.Net.Http.Functional.Tests
         [MethodImpl(MethodImplOptions.NoInlining)]
         private void HandlerDroppedWithoutDisposal_NotKeptAliveCore(
             TaskCompletionSource setOnFinalized
-        ) {
+        )
+        {
             // This relies on knowing that in order for the connection pool to operate, it needs
             // to maintain a reference to the supplied IWebProxy.  As such, we provide a proxy
             // that when finalized will set our event, so that we can determine the state associated
@@ -3251,7 +3257,8 @@ namespace System.Net.Http.Functional.Tests
             uint maxConcurrentStreams,
             int readTimeout = 3,
             int expectedWarmUpTasks = 1
-        ) {
+        )
+        {
             Task<HttpResponseMessage> warmUpTask = client.GetAsync(server.Address);
             Http2LoopbackConnection connection = await GetConnection(
                     server,
@@ -3285,7 +3292,8 @@ namespace System.Net.Http.Functional.Tests
             HttpClient client,
             List<Task<HttpResponseMessage>> sendTasks,
             uint maxConcurrentStreams
-        ) {
+        )
+        {
             for (int i = 0; i < maxConcurrentStreams; i++)
             {
                 sendTasks.Add(client.GetAsync(server.Address));
@@ -3311,7 +3319,8 @@ namespace System.Net.Http.Functional.Tests
         private async Task<(int Count, int LastStreamId)> HandleAllPendingRequests(
             Http2LoopbackConnection connection,
             int totalRequestCount
-        ) {
+        )
+        {
             int lastStreamId = -1;
             for (int i = 0; i < totalRequestCount; i++)
             {
@@ -3336,7 +3345,8 @@ namespace System.Net.Http.Functional.Tests
         private async Task<List<int>> AcceptRequests(
             Http2LoopbackConnection connection,
             int maxRequests = int.MaxValue
-        ) {
+        )
+        {
             List<int> streamIds = new List<int>();
             for (int i = 0; i < maxRequests; i++)
             {
@@ -3358,7 +3368,8 @@ namespace System.Net.Http.Functional.Tests
         private async Task<int> SendResponses(
             Http2LoopbackConnection connection,
             IEnumerable<int> streamIds
-        ) {
+        )
+        {
             int count = 0;
             foreach (int streamId in streamIds)
             {
@@ -3382,7 +3393,8 @@ namespace System.Net.Http.Functional.Tests
         public async Task ConnectCallback_ContextHasCorrectProperties_Success(
             bool syncRequest,
             bool syncCallback
-        ) {
+        )
+        {
             if (syncRequest && UseVersion > HttpVersion.Version11)
             {
                 // Sync requests are only supported on 1.x
@@ -3587,7 +3599,8 @@ namespace System.Net.Http.Functional.Tests
                             new NetworkStream(serverSocket, ownsSocket: true),
                             options
                         )
-                ) {
+                )
+                {
                     await loopbackConnection.InitializeConnectionAsync();
 
                     HttpRequestData requestData = await loopbackConnection.ReadRequestDataAsync();
@@ -3680,7 +3693,8 @@ namespace System.Net.Http.Functional.Tests
         [InlineData(false)]
         public async Task ConnectCallback_ExceptionDuringCallback_ThrowsHttpRequestExceptionWithInnerException(
             bool useSsl
-        ) {
+        )
+        {
             Exception e = new Exception("hello!");
 
             using HttpClientHandler handler = CreateHttpClientHandler();
@@ -3761,7 +3775,8 @@ namespace System.Net.Http.Functional.Tests
             bool useSsl,
             bool syncRequest,
             bool syncCallback
-        ) {
+        )
+        {
             if (syncRequest && UseVersion > HttpVersion.Version11)
             {
                 // Sync requests are only supported on 1.x
@@ -3928,7 +3943,8 @@ namespace System.Net.Http.Functional.Tests
                         using (
                             X509Certificate2 cert =
                                 System.Net.Test.Common.Configuration.Certificates.GetServerCertificate()
-                        ) {
+                        )
+                        {
                             SslServerAuthenticationOptions options =
                                 new SslServerAuthenticationOptions();
 
@@ -3979,7 +3995,8 @@ namespace System.Net.Http.Functional.Tests
         [InlineData(false)]
         public async Task PlaintextStreamFilter_ExceptionDuringCallback_ThrowsHttpRequestExceptionWithInnerException(
             bool useSsl
-        ) {
+        )
+        {
             Exception e = new Exception("hello!");
 
             GenericLoopbackOptions options = new GenericLoopbackOptions() { UseSsl = useSsl };
@@ -4165,7 +4182,8 @@ namespace System.Net.Http.Functional.Tests
                             Stream stream,
                             ReadOnlySpan<char> hex,
                             ReadOnlySpan<char> ascii
-                        ) {
+                        )
+                        {
                             if (log)
                                 Console.WriteLine(
                                     $"[{prefix} {stream.GetHashCode():X8}] {hex.ToString().PadRight(71)}  {ascii.ToString()}"
@@ -4231,18 +4249,16 @@ namespace System.Net.Http.Functional.Tests
     public sealed class SocketsHttpHandlerTest_HttpClientHandlerTest_Headers_Http11
         : HttpClientHandlerTest_Headers
     {
-        public SocketsHttpHandlerTest_HttpClientHandlerTest_Headers_Http11(
-            ITestOutputHelper output
-        ) : base(output) { }
+        public SocketsHttpHandlerTest_HttpClientHandlerTest_Headers_Http11(ITestOutputHelper output)
+            : base(output) { }
     }
 
     [ConditionalClass(typeof(PlatformDetection), nameof(PlatformDetection.SupportsAlpn))]
     public sealed class SocketsHttpHandlerTest_HttpClientHandlerTest_Headers_Http2
         : HttpClientHandlerTest_Headers
     {
-        public SocketsHttpHandlerTest_HttpClientHandlerTest_Headers_Http2(
-            ITestOutputHelper output
-        ) : base(output) { }
+        public SocketsHttpHandlerTest_HttpClientHandlerTest_Headers_Http2(ITestOutputHelper output)
+            : base(output) { }
         protected override Version UseVersion => HttpVersion.Version20;
     }
 
@@ -4275,9 +4291,8 @@ namespace System.Net.Http.Functional.Tests
     public sealed class SocketsHttpHandlerTest_HttpClientHandlerTest_Http3_MsQuic
         : HttpClientHandlerTest
     {
-        public SocketsHttpHandlerTest_HttpClientHandlerTest_Http3_MsQuic(
-            ITestOutputHelper output
-        ) : base(output) { }
+        public SocketsHttpHandlerTest_HttpClientHandlerTest_Http3_MsQuic(ITestOutputHelper output)
+            : base(output) { }
         protected override Version UseVersion => HttpVersion.Version30;
         protected override QuicImplementationProvider UseQuicImplementationProvider =>
             QuicImplementationProviders.MsQuic;
@@ -4286,9 +4301,8 @@ namespace System.Net.Http.Functional.Tests
     public sealed class SocketsHttpHandlerTest_HttpClientHandlerTest_Http3_Mock
         : HttpClientHandlerTest
     {
-        public SocketsHttpHandlerTest_HttpClientHandlerTest_Http3_Mock(
-            ITestOutputHelper output
-        ) : base(output) { }
+        public SocketsHttpHandlerTest_HttpClientHandlerTest_Http3_Mock(ITestOutputHelper output)
+            : base(output) { }
         protected override Version UseVersion => HttpVersion.Version30;
         protected override QuicImplementationProvider UseQuicImplementationProvider =>
             QuicImplementationProviders.Mock;

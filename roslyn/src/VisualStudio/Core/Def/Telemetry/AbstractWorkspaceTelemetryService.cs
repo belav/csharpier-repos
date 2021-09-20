@@ -49,7 +49,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Telemetry
             HashSet<ISymbol> symbols,
             Guid solutionSessionId,
             Guid projectGuid
-        ) {
+        )
+        {
             const string EventName = "vs/compilers/api";
             const string ApiPropertyName = "vs.compilers.api.pii";
             const string ProjectIdPropertyName = "vs.solution.project.projectid";

@@ -100,7 +100,8 @@ namespace System.Configuration
                         len - 2 * count,
                         StringComparison.Ordinal
                     ) != 0
-                ) {
+                )
+                {
                     // the stuff between the parens is not "None"
                     count = 0;
                 }

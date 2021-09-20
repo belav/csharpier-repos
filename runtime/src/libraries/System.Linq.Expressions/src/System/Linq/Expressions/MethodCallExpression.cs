@@ -120,7 +120,8 @@ namespace System.Linq.Expressions
         internal virtual MethodCallExpression Rewrite(
             Expression instance,
             IReadOnlyList<Expression>? args
-        ) {
+        )
+        {
             throw ContractUtils.Unreachable;
         }
 
@@ -189,7 +190,8 @@ namespace System.Linq.Expressions
         internal override MethodCallExpression Rewrite(
             Expression? instance,
             IReadOnlyList<Expression>? args
-        ) {
+        )
+        {
             Debug.Assert(instance == null);
             Debug.Assert(args == null || args.Count == _arguments.Count);
 
@@ -227,7 +229,8 @@ namespace System.Linq.Expressions
         internal override MethodCallExpression Rewrite(
             Expression instance,
             IReadOnlyList<Expression>? args
-        ) {
+        )
+        {
             Debug.Assert(instance != null);
             Debug.Assert(args == null || args.Count == _arguments.Count);
 
@@ -257,7 +260,8 @@ namespace System.Linq.Expressions
         internal override MethodCallExpression Rewrite(
             Expression? instance,
             IReadOnlyList<Expression>? args
-        ) {
+        )
+        {
             Debug.Assert(instance == null);
             Debug.Assert(args == null || args.Count == 0);
 
@@ -305,7 +309,8 @@ namespace System.Linq.Expressions
         internal override MethodCallExpression Rewrite(
             Expression? instance,
             IReadOnlyList<Expression>? args
-        ) {
+        )
+        {
             Debug.Assert(instance == null);
             Debug.Assert(args == null || args.Count == 1);
 
@@ -373,7 +378,8 @@ namespace System.Linq.Expressions
         internal override MethodCallExpression Rewrite(
             Expression? instance,
             IReadOnlyList<Expression>? args
-        ) {
+        )
+        {
             Debug.Assert(instance == null);
             Debug.Assert(args == null || args.Count == 2);
 
@@ -451,7 +457,8 @@ namespace System.Linq.Expressions
         internal override MethodCallExpression Rewrite(
             Expression? instance,
             IReadOnlyList<Expression>? args
-        ) {
+        )
+        {
             Debug.Assert(instance == null);
             Debug.Assert(args == null || args.Count == 3);
 
@@ -542,7 +549,8 @@ namespace System.Linq.Expressions
         internal override MethodCallExpression Rewrite(
             Expression? instance,
             IReadOnlyList<Expression>? args
-        ) {
+        )
+        {
             Debug.Assert(instance == null);
             Debug.Assert(args == null || args.Count == 4);
 
@@ -642,7 +650,8 @@ namespace System.Linq.Expressions
         internal override MethodCallExpression Rewrite(
             Expression? instance,
             IReadOnlyList<Expression>? args
-        ) {
+        )
+        {
             Debug.Assert(instance == null);
             Debug.Assert(args == null || args.Count == 5);
 
@@ -687,7 +696,8 @@ namespace System.Linq.Expressions
         internal override MethodCallExpression Rewrite(
             Expression instance,
             IReadOnlyList<Expression>? args
-        ) {
+        )
+        {
             Debug.Assert(instance != null);
             Debug.Assert(args == null || args.Count == 0);
 
@@ -743,7 +753,8 @@ namespace System.Linq.Expressions
         internal override MethodCallExpression Rewrite(
             Expression instance,
             IReadOnlyList<Expression>? args
-        ) {
+        )
+        {
             Debug.Assert(instance != null);
             Debug.Assert(args == null || args.Count == 1);
 
@@ -820,7 +831,8 @@ namespace System.Linq.Expressions
         internal override MethodCallExpression Rewrite(
             Expression instance,
             IReadOnlyList<Expression>? args
-        ) {
+        )
+        {
             Debug.Assert(instance != null);
             Debug.Assert(args == null || args.Count == 2);
 
@@ -906,7 +918,8 @@ namespace System.Linq.Expressions
         internal override MethodCallExpression Rewrite(
             Expression instance,
             IReadOnlyList<Expression>? args
-        ) {
+        )
+        {
             Debug.Assert(instance != null);
             Debug.Assert(args == null || args.Count == 3);
 
@@ -1025,7 +1038,8 @@ namespace System.Linq.Expressions
             Expression arg0,
             Expression arg1,
             Expression arg2
-        ) {
+        )
+        {
             ContractUtils.RequiresNotNull(method, nameof(method));
             ContractUtils.RequiresNotNull(arg0, nameof(arg0));
             ContractUtils.RequiresNotNull(arg1, nameof(arg1));
@@ -1078,7 +1092,8 @@ namespace System.Linq.Expressions
             Expression arg1,
             Expression arg2,
             Expression arg3
-        ) {
+        )
+        {
             ContractUtils.RequiresNotNull(method, nameof(method));
             ContractUtils.RequiresNotNull(arg0, nameof(arg0));
             ContractUtils.RequiresNotNull(arg1, nameof(arg1));
@@ -1143,7 +1158,8 @@ namespace System.Linq.Expressions
             Expression arg2,
             Expression arg3,
             Expression arg4
-        ) {
+        )
+        {
             ContractUtils.RequiresNotNull(method, nameof(method));
             ContractUtils.RequiresNotNull(arg0, nameof(arg0));
             ContractUtils.RequiresNotNull(arg1, nameof(arg1));
@@ -1219,7 +1235,8 @@ namespace System.Linq.Expressions
         public static MethodCallExpression Call(
             MethodInfo method,
             IEnumerable<Expression>? arguments
-        ) {
+        )
+        {
             return Call(null, method, arguments);
         }
 
@@ -1256,7 +1273,8 @@ namespace System.Linq.Expressions
             Expression? instance,
             MethodInfo method,
             params Expression[]? arguments
-        ) {
+        )
+        {
             return Call(instance, method, (IEnumerable<Expression>?)arguments);
         }
 
@@ -1271,7 +1289,8 @@ namespace System.Linq.Expressions
             Expression? instance,
             MethodInfo method,
             Expression arg0
-        ) {
+        )
+        {
             // COMPAT: This method is marked as non-public to ensure compile-time compatibility for Expression.Call(e, m, null).
 
             ContractUtils.RequiresNotNull(method, nameof(method));
@@ -1311,7 +1330,8 @@ namespace System.Linq.Expressions
             MethodInfo method,
             Expression arg0,
             Expression arg1
-        ) {
+        )
+        {
             ContractUtils.RequiresNotNull(method, nameof(method));
             ContractUtils.RequiresNotNull(arg0, nameof(arg0));
             ContractUtils.RequiresNotNull(arg1, nameof(arg1));
@@ -1360,7 +1380,8 @@ namespace System.Linq.Expressions
             Expression arg0,
             Expression arg1,
             Expression arg2
-        ) {
+        )
+        {
             ContractUtils.RequiresNotNull(method, nameof(method));
             ContractUtils.RequiresNotNull(arg0, nameof(arg0));
             ContractUtils.RequiresNotNull(arg1, nameof(arg1));
@@ -1420,7 +1441,8 @@ namespace System.Linq.Expressions
             string methodName,
             Type[]? typeArguments,
             params Expression[]? arguments
-        ) {
+        )
+        {
             ContractUtils.RequiresNotNull(instance, nameof(instance));
             ContractUtils.RequiresNotNull(methodName, nameof(methodName));
             if (arguments == null)
@@ -1462,7 +1484,8 @@ namespace System.Linq.Expressions
             string methodName,
             Type[]? typeArguments,
             params Expression[]? arguments
-        ) {
+        )
+        {
             ContractUtils.RequiresNotNull(type, nameof(type));
             ContractUtils.RequiresNotNull(methodName, nameof(methodName));
 
@@ -1493,7 +1516,8 @@ namespace System.Linq.Expressions
             Expression? instance,
             MethodInfo method,
             IEnumerable<Expression>? arguments
-        ) {
+        )
+        {
             IReadOnlyList<Expression> argumentList =
                 arguments as IReadOnlyList<Expression> ?? arguments.ToReadOnly();
 
@@ -1565,7 +1589,8 @@ namespace System.Linq.Expressions
         private static ParameterInfo[] ValidateMethodAndGetParameters(
             Expression? instance,
             MethodInfo method
-        ) {
+        )
+        {
             ValidateMethodInfo(method, nameof(method));
             ValidateStaticOrInstanceMethod(instance, method);
 
@@ -1605,14 +1630,16 @@ namespace System.Linq.Expressions
             ExpressionType nodeKind,
             ref ReadOnlyCollection<Expression> arguments,
             string methodParamName
-        ) {
+        )
+        {
             ExpressionUtils.ValidateArgumentTypes(method, nodeKind, ref arguments, methodParamName);
         }
 
         private static ParameterInfo[] GetParametersForValidation(
             MethodBase method,
             ExpressionType nodeKind
-        ) {
+        )
+        {
             return ExpressionUtils.GetParametersForValidation(method, nodeKind);
         }
 
@@ -1621,7 +1648,8 @@ namespace System.Linq.Expressions
             ExpressionType nodeKind,
             int count,
             ParameterInfo[] pis
-        ) {
+        )
+        {
             ExpressionUtils.ValidateArgumentCount(method, nodeKind, count, pis);
         }
 
@@ -1632,7 +1660,8 @@ namespace System.Linq.Expressions
             ParameterInfo pi,
             string methodParamName,
             string argumentParamName
-        ) {
+        )
+        {
             return ExpressionUtils.ValidateOneArgument(
                 method,
                 nodeKind,
@@ -1660,7 +1689,8 @@ namespace System.Linq.Expressions
             Type[]? typeArgs,
             Expression[] args,
             BindingFlags flags
-        ) {
+        )
+        {
             int count = 0;
             MethodInfo? method = null;
 
@@ -1725,7 +1755,8 @@ namespace System.Linq.Expressions
                         TypeUtils.IsSameOrSubclass(typeof(LambdaExpression), pType)
                         && pType.IsAssignableFrom(arg.GetType())
                     )
-                ) {
+                )
+                {
                     return false;
                 }
             }
@@ -1774,7 +1805,8 @@ namespace System.Linq.Expressions
         public static MethodCallExpression ArrayIndex(
             Expression array,
             IEnumerable<Expression> indexes
-        ) {
+        )
+        {
             ExpressionUtils.RequiresCanRead(array, nameof(array), -1);
             ContractUtils.RequiresNotNull(indexes, nameof(indexes));
 

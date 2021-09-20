@@ -15,7 +15,8 @@ namespace Microsoft.AspNetCore.Razor.Language.Extensions
         protected override void ExecuteCore(
             RazorCodeDocument codeDocument,
             DocumentIntermediateNode documentNode
-        ) {
+        )
+        {
             var @class = documentNode.FindPrimaryClass();
             if (@class == null)
             {

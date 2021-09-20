@@ -20,7 +20,8 @@ namespace System.IO
         public static unsafe void CreateDirectory(
             string fullPath,
             byte[]? securityDescriptor = null
-        ) {
+        )
+        {
             // We can save a bunch of work if the directory we want to create already exists.  This also
             // saves us in the case where sub paths are inaccessible (due to ERROR_ACCESS_DENIED) but the
             // final path is accessible and the directory already exists.  For example, consider trying
@@ -120,7 +121,8 @@ namespace System.IO
                                     !DirectoryExists(name, out currentError)
                                     && currentError == Interop.Errors.ERROR_ACCESS_DENIED
                                 )
-                            ) {
+                            )
+                            {
                                 firstError = currentError;
                                 errorString = name;
                             }

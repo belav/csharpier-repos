@@ -40,7 +40,8 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Diagnostics
         internal override async Task<IEnumerable<Diagnostic>> GetDiagnosticsAsync(
             TestWorkspace workspace,
             TestParameters parameters
-        ) {
+        )
+        {
             AddAnalyzersToWorkspace(workspace);
             var document = GetDocumentAndSelectSpan(workspace, out var span);
             return await DiagnosticProviderTestUtilities.GetAllDiagnosticsAsync(
@@ -53,7 +54,8 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Diagnostics
         internal override async Task<(ImmutableArray<Diagnostic>, ImmutableArray<CodeAction>, CodeAction actionToInvoke)> GetDiagnosticAndFixesAsync(
             TestWorkspace workspace,
             TestParameters parameters
-        ) {
+        )
+        {
             AddAnalyzersToWorkspace(workspace);
 
             string annotation = null;

@@ -22,7 +22,8 @@ namespace Microsoft.VisualStudio.LanguageServices.EditorConfigSettings.Formattin
                 FormattingSetting result,
                 string keyName,
                 out object? content
-            ) {
+            )
+            {
                 content = keyName switch
                 {
                     ColumnDefinitions.Formatting.Description => result.Description,

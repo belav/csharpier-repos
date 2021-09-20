@@ -25,14 +25,16 @@ namespace Internal.Cryptography
         protected override int UncheckedTransformBlock(
             ReadOnlySpan<byte> inputBuffer,
             Span<byte> outputBuffer
-        ) {
+        )
+        {
             return BasicSymmetricCipher.Transform(inputBuffer, outputBuffer);
         }
 
         protected override int UncheckedTransformFinalBlock(
             ReadOnlySpan<byte> inputBuffer,
             Span<byte> outputBuffer
-        ) {
+        )
+        {
             // The only caller of this method is the array-allocating overload, outputBuffer is
             // always new memory, not a user-provided buffer.
             Debug.Assert(!inputBuffer.Overlaps(outputBuffer));
@@ -54,7 +56,8 @@ namespace Internal.Cryptography
             byte[] inputBuffer,
             int inputOffset,
             int inputCount
-        ) {
+        )
+        {
             byte[] buffer;
 #if NETSTANDARD || NETFRAMEWORK || NETCOREAPP3_0
             buffer = new byte[GetCiphertextLength(inputCount)];

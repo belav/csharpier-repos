@@ -78,7 +78,8 @@ namespace System.Runtime.Serialization
                 if (
                     DataContractSerializer.Option == SerializationOption.CodeGenOnly
                     || DataContractSerializer.Option == SerializationOption.ReflectionAsBackup
-                ) {
+                )
+                {
                     if (_helper.CreateXmlSerializableDelegate == null)
                     {
                         lock (this)
@@ -420,7 +421,8 @@ namespace System.Runtime.Serialization
             XmlWriterDelegator xmlWriter,
             object obj,
             XmlObjectSerializerWriteContext? context
-        ) {
+        )
+        {
             if (context == null)
                 XmlObjectSerializerWriteContext.WriteRootIXmlSerializable(xmlWriter, obj);
             else
@@ -430,7 +432,8 @@ namespace System.Runtime.Serialization
         public override object? ReadXmlValue(
             XmlReaderDelegator xmlReader,
             XmlObjectSerializerReadContext? context
-        ) {
+        )
+        {
             object? o;
             if (context == null)
             {

@@ -26,7 +26,8 @@ namespace System.ComponentModel.Composition.Hosting
             public DependentsTraversal(
                 FilteredCatalog catalog,
                 Func<ImportDefinition, bool> importFilter
-            ) {
+            )
+            {
                 if (catalog == null)
                 {
                     throw new ArgumentNullException(nameof(catalog));
@@ -67,7 +68,8 @@ namespace System.ComponentModel.Composition.Hosting
                         contractName,
                         out List<ComposablePartDefinition>? parts
                     )
-                ) {
+                )
+                {
                     parts = new List<ComposablePartDefinition>();
                     _importersIndex.Add(contractName, parts);
                 }
@@ -77,7 +79,8 @@ namespace System.ComponentModel.Composition.Hosting
             public bool TryTraverse(
                 ComposablePartDefinition part,
                 [NotNullWhen(true)] out IEnumerable<ComposablePartDefinition>? reachableParts
-            ) {
+            )
+            {
                 reachableParts = null;
                 List<ComposablePartDefinition>? reachablePartList = null;
 
@@ -92,7 +95,8 @@ namespace System.ComponentModel.Composition.Hosting
                             export.ContractName,
                             out candidateReachableParts
                         )
-                    ) {
+                    )
+                    {
                         // find if they actually match
                         foreach (var candidateReachablePart in candidateReachableParts)
                         {
@@ -100,14 +104,16 @@ namespace System.ComponentModel.Composition.Hosting
                                 ImportDefinition import in candidateReachablePart.ImportDefinitions.Where(
                                     _importFilter
                                 )
-                            ) {
+                            )
+                            {
                                 if (
                                     import.IsImportDependentOnPart(
                                         part,
                                         export,
                                         part.IsGeneric() != candidateReachablePart.IsGeneric()
                                     )
-                                ) {
+                                )
+                                {
                                     if (reachablePartList == null)
                                     {
                                         reachablePartList = new List<ComposablePartDefinition>();

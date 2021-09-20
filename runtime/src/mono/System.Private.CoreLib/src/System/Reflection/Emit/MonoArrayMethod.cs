@@ -59,7 +59,8 @@ namespace System.Reflection
             CallingConventions callingConvention,
             Type returnType,
             Type[] parameterTypes
-        ) {
+        )
+        {
             name = methodName;
             parent = arrayClass;
             ret = returnType;
@@ -113,7 +114,8 @@ namespace System.Reflection
             Binder? binder,
             object?[]? parameters,
             CultureInfo? culture
-        ) {
+        )
+        {
             throw new NotImplementedException();
         }
 

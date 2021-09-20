@@ -14,9 +14,8 @@ namespace Microsoft.EntityFrameworkCore
 {
     public abstract class ConnectionInterceptionSqlServerTestBase : ConnectionInterceptionTestBase
     {
-        protected ConnectionInterceptionSqlServerTestBase(
-            InterceptionSqlServerFixtureBase fixture
-        ) : base(fixture) { }
+        protected ConnectionInterceptionSqlServerTestBase(InterceptionSqlServerFixtureBase fixture)
+            : base(fixture) { }
 
         public abstract class InterceptionSqlServerFixtureBase : InterceptionFixtureBase
         {

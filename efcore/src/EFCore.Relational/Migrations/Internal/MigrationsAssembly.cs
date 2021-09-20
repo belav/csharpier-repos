@@ -45,7 +45,8 @@ namespace Microsoft.EntityFrameworkCore.Migrations.Internal
             IDbContextOptions options,
             IMigrationsIdGenerator idGenerator,
             IDiagnosticsLogger<DbLoggerCategory.Migrations> logger
-        ) {
+        )
+        {
             Check.NotNull(currentContext, nameof(currentContext));
             Check.NotNull(options, nameof(options));
             Check.NotNull(idGenerator, nameof(idGenerator));

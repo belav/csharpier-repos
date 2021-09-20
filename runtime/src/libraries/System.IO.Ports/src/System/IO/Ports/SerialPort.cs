@@ -281,7 +281,8 @@ namespace System.IO.Ports
                         || value.CodePage < 50000
                         || value.CodePage == 54936
                     )
-                ) {
+                )
+                {
                     throw new ArgumentException(
                         SR.Format(SR.NotSupportedEncoding, value.WebName),
                         nameof(Encoding)
@@ -837,7 +838,8 @@ namespace System.IO.Ports
             int count,
             int timeout,
             bool countMultiByteCharsAsOne
-        ) {
+        )
+        {
             Debug.Assert(IsOpen, "port not open!");
             Debug.Assert(buffer != null, "invalid buffer!");
             Debug.Assert(offset >= 0, "invalid offset!");
@@ -917,7 +919,8 @@ namespace System.IO.Ports
             int offset,
             int count,
             bool countMultiByteCharsAsOne
-        ) {
+        )
+        {
             Debug.Assert(
                 count != 0,
                 "Count should never be zero.  We will probably see bugs further down if count is 0."
@@ -934,7 +937,8 @@ namespace System.IO.Ports
                 && _encoding.GetMaxCharCount(bytesToRead) == bytesToRead
                 && fallback != null
                 && fallback.MaxCharCount == 1
-            ) {
+            )
+            {
                 // kill ASCII/ANSI encoding easily.
                 // read at least one and at most *count* characters
                 _decoder.GetChars(_inBuffer, _readPos, bytesToRead, buffer, offset);
@@ -1191,7 +1195,8 @@ namespace System.IO.Ports
                     if (
                         lastValueChar == (char)_singleCharBuffer[numCharsRead - 1]
                         && (currentLine.Length >= value.Length)
-                    ) {
+                    )
+                    {
                         // we found the last char in the value string.  See if the rest is there.  No need to
                         // recompare the last char of the value string.
                         bool found = true;

@@ -58,7 +58,8 @@ namespace System.Net.Http.WinHttpHandlerFunctional.Tests
             CookieUsePolicy cookieUsePolicy,
             string cookieName,
             string cookieValue
-        ) {
+        )
+        {
             Uri uri =
                 System.Net.Test.Common.Configuration.Http.RemoteHttp11Server.RedirectUriForDestinationUri(
                     302,

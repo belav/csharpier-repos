@@ -40,7 +40,8 @@ namespace Microsoft.CodeAnalysis.Editor.EditorConfigSettings.DataProvider.Analyz
         protected override void UpdateOptions(
             AnalyzerConfigOptions editorConfigOptions,
             OptionSet _
-        ) {
+        )
+        {
             var solution = Workspace.CurrentSolution;
             var projects = solution.GetProjectsForPath(FileName);
             var analyzerReferences = projects.SelectMany(p => p.AnalyzerReferences)
@@ -56,7 +57,8 @@ namespace Microsoft.CodeAnalysis.Editor.EditorConfigSettings.DataProvider.Analyz
         private IEnumerable<AnalyzerSetting> GetSettings(
             AnalyzerReference analyzerReference,
             AnalyzerConfigOptions editorConfigOptions
-        ) {
+        )
+        {
             IEnumerable<DiagnosticAnalyzer> csharpAnalyzers = analyzerReference.GetAnalyzers(
                 LanguageNames.CSharp
             );
@@ -87,7 +89,8 @@ namespace Microsoft.CodeAnalysis.Editor.EditorConfigSettings.DataProvider.Analyz
             IEnumerable<AnalyzerSetting> ToAnalyzerSetting(
                 IEnumerable<DiagnosticAnalyzer> analyzers,
                 Language language
-            ) {
+            )
+            {
                 return analyzers.SelectMany(
                         a => _analyzerService.AnalyzerInfoCache.GetDiagnosticDescriptors(a)
                     )

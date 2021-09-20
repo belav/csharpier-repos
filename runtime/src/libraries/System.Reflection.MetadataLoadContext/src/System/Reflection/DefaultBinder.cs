@@ -61,7 +61,8 @@ namespace System
             MethodBase[] match,
             Type[] types,
             ParameterModifier[]? modifiers
-        ) {
+        )
+        {
             int i;
             int j;
 
@@ -177,7 +178,8 @@ namespace System
             Type? returnType,
             Type[]? indexes,
             ParameterModifier[]? modifiers
-        ) {
+        )
+        {
             // Allow a null indexes array. But if it is not null, every element must be non-null as well.
             if (indexes != null)
             {
@@ -331,7 +333,8 @@ namespace System
             MethodBase[] match,
             Type[] types,
             ParameterModifier[]? modifiers
-        ) {
+        )
+        {
             if (match == null)
                 throw new ArgumentNullException(nameof(match));
 
@@ -378,7 +381,8 @@ namespace System
             Type? returnType,
             Type[]? types,
             ParameterModifier[]? modifiers
-        ) {
+        )
+        {
             if (match == null)
                 throw new ArgumentNullException(nameof(match));
 
@@ -418,7 +422,8 @@ namespace System
             Type? paramArrayType2,
             Type[] types,
             object[]? args
-        ) {
+        )
+        {
             // A method using params is always less specific than one not using params
             if (paramArrayType1 != null && paramArrayType2 == null)
                 return 2;
@@ -583,7 +588,8 @@ namespace System
             Type? paramArrayType2,
             Type[] types,
             object[]? args
-        ) {
+        )
+        {
             // Find the most specific method based on the parameters.
             int res = FindMostSpecific(
                 m1.GetParametersNoCopy(),

@@ -60,7 +60,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UseExpressionBodyForLambda
         private static bool CanOfferUseExpressionBody(
             ExpressionBodyPreference preference,
             LambdaExpressionSyntax declaration
-        ) {
+        )
+        {
             var userPrefersExpressionBodies = preference != ExpressionBodyPreference.Never;
             if (!userPrefersExpressionBodies)
             {
@@ -87,7 +88,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UseExpressionBodyForLambda
             ExpressionBodyPreference conversionPreference,
             out ExpressionSyntax expression,
             out SyntaxToken semicolon
-        ) {
+        )
+        {
             var body = declaration.Body as BlockSyntax;
 
             return body.TryConvertToExpressionBody(
@@ -103,7 +105,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UseExpressionBodyForLambda
             ExpressionBodyPreference preference,
             LambdaExpressionSyntax declaration,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var userPrefersBlockBodies = preference == ExpressionBodyPreference.Never;
             if (!userPrefersBlockBodies)
             {
@@ -128,7 +131,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UseExpressionBodyForLambda
                     is INamedTypeSymbol lambdaType
                 )
                 || lambdaType.DelegateInvokeMethod == null
-            ) {
+            )
+            {
                 return false;
             }
 
@@ -148,7 +152,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UseExpressionBodyForLambda
             if (
                 expressionBodyOpt.IsKind(SyntaxKind.ThrowExpression)
                 && languageVersion < LanguageVersion.CSharp7
-            ) {
+            )
+            {
                 // Can't convert this prior to C# 7 because ```a => throw ...``` isn't allowed.
                 return false;
             }
@@ -168,7 +173,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UseExpressionBodyForLambda
             SemanticModel semanticModel,
             LambdaExpressionSyntax originalDeclaration,
             LambdaExpressionSyntax currentDeclaration
-        ) {
+        )
+        {
             var expressionBody = GetBodyAsExpression(currentDeclaration);
             return expressionBody == null
               ? WithExpressionBody(currentDeclaration)
@@ -185,7 +191,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UseExpressionBodyForLambda
                     out var expressionBody,
                     out _
                 )
-            ) {
+            )
+            {
                 return declaration;
             }
 
@@ -196,7 +203,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UseExpressionBodyForLambda
             if (
                 declaration.ArrowToken.TrailingTrivia.All(t => t.IsWhitespaceOrEndOfLine())
                 && expressionBody.GetLeadingTrivia().All(t => t.IsWhitespaceOrEndOfLine())
-            ) {
+            )
+            {
                 updatedDecl = updatedDecl.WithArrowToken(
                     updatedDecl.ArrowToken.WithTrailingTrivia(SyntaxFactory.ElasticSpace)
                 );
@@ -209,7 +217,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UseExpressionBodyForLambda
             SemanticModel semanticModel,
             LambdaExpressionSyntax originalDeclaration,
             LambdaExpressionSyntax currentDeclaration
-        ) {
+        )
+        {
             var expressionBody = GetBodyAsExpression(currentDeclaration);
             var createReturnStatementForExpression = CreateReturnStatementForExpression(
                 semanticModel,
@@ -222,7 +231,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UseExpressionBodyForLambda
                     createReturnStatementForExpression,
                     out var statement
                 )
-            ) {
+            )
+            {
                 return currentDeclaration;
             }
 
@@ -242,7 +252,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UseExpressionBodyForLambda
         private static bool CreateReturnStatementForExpression(
             SemanticModel semanticModel,
             LambdaExpressionSyntax declaration
-        ) {
+        )
+        {
             var lambdaType = (INamedTypeSymbol)semanticModel.GetTypeInfo(declaration).ConvertedType;
             if (lambdaType.DelegateInvokeMethod.ReturnsVoid)
             {

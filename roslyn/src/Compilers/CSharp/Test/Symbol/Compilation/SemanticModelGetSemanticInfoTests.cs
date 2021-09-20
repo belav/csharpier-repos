@@ -6962,7 +6962,8 @@ class Program
             string sourceType,
             string typeDisplayString,
             string convertedTypeDisplayString
-        ) {
+        )
+        {
             string template =
                 @"
 public class Enumerable : System.Collections.IEnumerable
@@ -12502,7 +12503,8 @@ class Program
 
         private void Verify_AttributeSemanticInfo_OverloadResolutionFailure_Common(
             CompilationUtils.SemanticInfoSummary semanticInfo
-        ) {
+        )
+        {
             Assert.Equal("System.ObsoleteAttribute", semanticInfo.Type.ToTestDisplayString());
             Assert.Equal(TypeKind.Class, semanticInfo.Type.TypeKind);
             Assert.Equal(

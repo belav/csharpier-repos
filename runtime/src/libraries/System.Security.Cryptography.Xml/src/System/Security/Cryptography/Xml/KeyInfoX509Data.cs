@@ -61,7 +61,8 @@ namespace System.Security.Cryptography.Xml
                             (chain.ChainStatus[0].Status & X509ChainStatusFlags.PartialChain)
                             == X509ChainStatusFlags.PartialChain
                         )
-                    ) {
+                    )
+                    {
                         throw new CryptographicException(SR.Cryptography_Partial_Chain);
                     }
 
@@ -70,7 +71,8 @@ namespace System.Security.Cryptography.Xml
                         int index = 0;
                         index < (Utils.IsSelfSigned(chain) ? 1 : elements.Count - 1);
                         index++
-                    ) {
+                    )
+                    {
                         AddCertificate(elements[index].Certificate);
                     }
                     break;
@@ -89,7 +91,8 @@ namespace System.Security.Cryptography.Xml
                             (chain.ChainStatus[0].Status & X509ChainStatusFlags.PartialChain)
                             == X509ChainStatusFlags.PartialChain
                         )
-                    ) {
+                    )
+                    {
                         throw new CryptographicException(SR.Cryptography_Partial_Chain);
                     }
 

@@ -170,7 +170,8 @@ namespace System.Web.Mvc.Test
             string value,
             string index,
             string expectedAttemptedValue
-        ) {
+        )
+        {
             // Arrange
             string[] expectedRawValue = new[] { expectedAttemptedValue };
             NameValueCollection unvalidatedCollection = new NameValueCollection();

@@ -54,7 +54,8 @@ namespace AnalyzerRunner
             AssemblyLoadContext context,
             AssemblyName assemblyName,
             string searchPath
-        ) {
+        )
+        {
             foreach (
                 var cultureSubfolder in string.IsNullOrEmpty(assemblyName.CultureName)
                     // If no culture is specified, attempt to load directly from
@@ -64,7 +65,8 @@ namespace AnalyzerRunner
                     // of the assembly search directories, but fall back to the
                     // bare search directory if that fails.
                     : new[] { assemblyName.CultureName, string.Empty }
-            ) {
+            )
+            {
                 foreach (var extension in s_extensions)
                 {
                     var candidatePath = Path.Combine(

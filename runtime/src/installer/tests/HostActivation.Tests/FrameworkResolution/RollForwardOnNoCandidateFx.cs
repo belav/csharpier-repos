@@ -92,7 +92,8 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation.FrameworkResolution
         public void RollForwardToLatestPatch_RollForwardOnNoCandidateFx(
             int? rollForwardOnNoCandidateFx,
             bool? applyPatches
-        ) {
+        )
+        {
             RunTestWithOneFramework(
                     runtimeConfig =>
                         runtimeConfig.WithRollForwardOnNoCandidateFx(rollForwardOnNoCandidateFx)
@@ -118,7 +119,8 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation.FrameworkResolution
             int? rollForwardOnNoCandidateFx,
             bool? applyPatches,
             bool passes
-        ) {
+        )
+        {
             CommandResult result = RunTestWithOneFramework(
                 runtimeConfig =>
                     runtimeConfig.WithRollForwardOnNoCandidateFx(rollForwardOnNoCandidateFx)
@@ -149,7 +151,8 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation.FrameworkResolution
             int? rollForwardOnNoCandidateFx,
             bool? applyPatches,
             bool passes
-        ) {
+        )
+        {
             CommandResult result = RunTestWithOneFramework(
                 runtimeConfig =>
                     runtimeConfig.WithRollForwardOnNoCandidateFx(rollForwardOnNoCandidateFx)
@@ -247,7 +250,8 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation.FrameworkResolution
 
         private CommandResult RunTestWithOneFramework(
             Func<RuntimeConfig, RuntimeConfig> runtimeConfig
-        ) {
+        )
+        {
             return RunTest(
                 SharedState.DotNetWithOneFramework,
                 SharedState.FrameworkReferenceApp,
@@ -320,7 +324,8 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation.FrameworkResolution
         public void RollForwardToPreReleaseLatestPatch_RollForwardOnNoCandidateFx(
             int? rollForwardOnNoCandidateFx,
             bool? applyPatches
-        ) {
+        )
+        {
             RunTestWithPreReleaseFramework(
                     runtimeConfig =>
                         runtimeConfig.WithRollForwardOnNoCandidateFx(rollForwardOnNoCandidateFx)
@@ -344,7 +349,8 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation.FrameworkResolution
             int? rollForwardOnNoCandidateFx,
             bool? applyPatches,
             bool passes
-        ) {
+        )
+        {
             CommandResult result = RunTestWithPreReleaseFramework(
                 runtimeConfig =>
                     runtimeConfig.WithRollForwardOnNoCandidateFx(rollForwardOnNoCandidateFx)
@@ -374,7 +380,8 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation.FrameworkResolution
             int? rollForwardOnNoCandidateFx,
             bool? applyPatches,
             bool passes
-        ) {
+        )
+        {
             CommandResult result = RunTestWithPreReleaseFramework(
                 runtimeConfig =>
                     runtimeConfig.WithRollForwardOnNoCandidateFx(rollForwardOnNoCandidateFx)
@@ -412,7 +419,8 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation.FrameworkResolution
 
         private CommandResult RunTestWithPreReleaseFramework(
             Func<RuntimeConfig, RuntimeConfig> runtimeConfig
-        ) {
+        )
+        {
             return RunTest(
                 SharedState.DotNetWithPreReleaseFramework,
                 SharedState.FrameworkReferenceApp,
@@ -456,7 +464,8 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation.FrameworkResolution
             int? rollForwardOnNoCandidateFx,
             bool? applyPatches,
             string resolvedFramework
-        ) {
+        )
+        {
             RunTestWithManyVersions(
                     runtimeConfig =>
                         runtimeConfig.WithRollForwardOnNoCandidateFx(rollForwardOnNoCandidateFx)
@@ -481,7 +490,8 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation.FrameworkResolution
             int? rollForwardOnNoCandidateFx,
             bool? applyPatches,
             string resolvedFramework
-        ) {
+        )
+        {
             RunTestWithManyVersions(
                     runtimeConfig =>
                         runtimeConfig.WithRollForwardOnNoCandidateFx(rollForwardOnNoCandidateFx)
@@ -506,7 +516,8 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation.FrameworkResolution
             int? rollForwardOnNoCandidateFx,
             bool? applyPatches,
             string resolvedFramework
-        ) {
+        )
+        {
             RunTestWithManyVersions(
                     runtimeConfig =>
                         runtimeConfig.WithRollForwardOnNoCandidateFx(rollForwardOnNoCandidateFx)
@@ -531,7 +542,8 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation.FrameworkResolution
             int? rollForwardOnNoCandidateFx,
             bool? applyPatches,
             string resolvedFramework
-        ) {
+        )
+        {
             RunTestWithManyVersions(
                     runtimeConfig =>
                         runtimeConfig.WithRollForwardOnNoCandidateFx(rollForwardOnNoCandidateFx)
@@ -558,7 +570,8 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation.FrameworkResolution
             int? rollForwardOnNoCandidateFx,
             bool? applyPatches,
             string resolvedFramework
-        ) {
+        )
+        {
             RunTestWithManyVersions(
                     runtimeConfig =>
                         runtimeConfig.WithRollForwardOnNoCandidateFx(rollForwardOnNoCandidateFx)
@@ -584,7 +597,8 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation.FrameworkResolution
             int? rollForwardOnNoCandidateFx,
             bool? applyPatches,
             string resolvedFramework
-        ) {
+        )
+        {
             RunTestWithManyVersions(
                     runtimeConfig =>
                         runtimeConfig.WithRollForwardOnNoCandidateFx(rollForwardOnNoCandidateFx)
@@ -610,7 +624,8 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation.FrameworkResolution
             int? rollForwardOnNoCandidateFx,
             bool? applyPatches,
             string resolvedFramework
-        ) {
+        )
+        {
             RunTestWithManyVersions(
                     runtimeConfig =>
                         runtimeConfig.WithRollForwardOnNoCandidateFx(rollForwardOnNoCandidateFx)
@@ -639,7 +654,8 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation.FrameworkResolution
             int? rollForwardOnNoCandidateFx,
             bool? applyPatches,
             string resolvedFramework
-        ) {
+        )
+        {
             RunTestWithManyVersions(
                     runtimeConfig =>
                         runtimeConfig.WithRollForwardOnNoCandidateFx(rollForwardOnNoCandidateFx)
@@ -665,7 +681,8 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation.FrameworkResolution
             int? rollForwardOnNoCandidateFx,
             bool? applyPatches,
             string resolvedFramework
-        ) {
+        )
+        {
             RunTestWithManyVersions(
                     runtimeConfig =>
                         runtimeConfig.WithRollForwardOnNoCandidateFx(rollForwardOnNoCandidateFx)
@@ -689,7 +706,8 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation.FrameworkResolution
             int? rollForwardOnNoCandidateFx,
             bool? applyPatches,
             string resolvedFramework
-        ) {
+        )
+        {
             RunTestWithManyVersions(
                     runtimeConfig =>
                         runtimeConfig.WithRollForwardOnNoCandidateFx(rollForwardOnNoCandidateFx)
@@ -714,7 +732,8 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation.FrameworkResolution
             int? rollForwardOnNoCandidateFx,
             bool? applyPatches,
             string resolvedFramework
-        ) {
+        )
+        {
             RunTestWithManyVersions(
                     runtimeConfig =>
                         runtimeConfig.WithRollForwardOnNoCandidateFx(rollForwardOnNoCandidateFx)
@@ -736,7 +755,8 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation.FrameworkResolution
             int? rollForwardOnNoCandidateFx,
             bool? applyPatches,
             string resolvedFramework
-        ) {
+        )
+        {
             RunTestWithManyVersions(
                     runtimeConfig =>
                         runtimeConfig.WithRollForwardOnNoCandidateFx(rollForwardOnNoCandidateFx)
@@ -757,7 +777,8 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation.FrameworkResolution
         [InlineData(2)]
         public void RollForwardToLatestPatch_WithHigherPreReleasePresent(
             int? rollForwardOnNoCandidateFx
-        ) {
+        )
+        {
             RunTestWithManyVersions(
                     runtimeConfig =>
                         runtimeConfig.WithRollForwardOnNoCandidateFx(rollForwardOnNoCandidateFx)
@@ -768,7 +789,8 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation.FrameworkResolution
 
         private CommandResult RunTestWithManyVersions(
             Func<RuntimeConfig, RuntimeConfig> runtimeConfig
-        ) {
+        )
+        {
             return RunTest(
                 SharedState.DotNetWithManyVersions,
                 SharedState.FrameworkReferenceApp,

@@ -89,7 +89,8 @@ namespace System.ComponentModel.Design
                 !(serviceInstance is ServiceCreatorCallback)
                 && !serviceInstance.GetType().IsCOMObject
                 && !serviceType.IsInstanceOfType(serviceInstance)
-            ) {
+            )
+            {
                 throw new ArgumentException(
                     SR.Format(SR.ErrorInvalidServiceInstance, serviceType.FullName)
                 );
@@ -121,7 +122,8 @@ namespace System.ComponentModel.Design
             Type serviceType,
             ServiceCreatorCallback callback,
             bool promote
-        ) {
+        )
+        {
             if (promote)
             {
                 IServiceContainer container = Container;
@@ -215,7 +217,8 @@ namespace System.ComponentModel.Design
                     service != null
                     && !service.GetType().IsCOMObject
                     && !serviceType.IsInstanceOfType(service)
-                ) {
+                )
+                {
                     // Callback passed us a bad service. NULL it, rather than throwing an exception.
                     // Callers here do not need to be prepared to handle bad callback implemetations.
                     service = null;

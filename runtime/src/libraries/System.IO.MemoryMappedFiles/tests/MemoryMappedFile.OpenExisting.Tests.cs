@@ -134,7 +134,8 @@ namespace System.IO.MemoryMappedFiles.Tests
             string mapName,
             MemoryMappedFileRights desiredAccessRights,
             HandleInheritability inheritability
-        ) {
+        )
+        {
             const int Capacity = 4096;
             using (MemoryMappedFile original = MemoryMappedFile.CreateNew(mapName, Capacity))
             {
@@ -172,7 +173,8 @@ namespace System.IO.MemoryMappedFiles.Tests
                         desiredAccessRights | MemoryMappedFileRights.ReadPermissions,
                         inheritability
                     )
-                ) {
+                )
+                {
                     ValidateMemoryMappedFile(
                         opened,
                         Capacity,
@@ -207,7 +209,8 @@ namespace System.IO.MemoryMappedFiles.Tests
             string name,
             MemoryMappedFileRights rights,
             HandleInheritability inheritability
-        ) {
+        )
+        {
             const int Capacity = 4096;
             using (TempFile file = new TempFile(GetTestFilePath()))
             using (FileStream fs = File.Open(file.Path, FileMode.Open))
@@ -220,7 +223,8 @@ namespace System.IO.MemoryMappedFiles.Tests
                     HandleInheritability.None,
                     false
                 )
-            ) {
+            )
+            {
                 using (MemoryMappedFile opened = MemoryMappedFile.OpenExisting(name))
                 {
                     Assert.Throws<IOException>(
@@ -245,7 +249,8 @@ namespace System.IO.MemoryMappedFiles.Tests
                         name,
                         rights | MemoryMappedFileRights.ReadPermissions
                     )
-                ) {
+                )
+                {
                     ValidateMemoryMappedFile(opened, Capacity, RightsToAccess(rights));
                 }
                 using (
@@ -254,7 +259,8 @@ namespace System.IO.MemoryMappedFiles.Tests
                         rights | MemoryMappedFileRights.ReadPermissions,
                         inheritability
                     )
-                ) {
+                )
+                {
                     ValidateMemoryMappedFile(
                         opened,
                         Capacity,
@@ -293,7 +299,8 @@ namespace System.IO.MemoryMappedFiles.Tests
                         MemoryMappedFileRights rights in Enum.GetValues(
                             typeof(MemoryMappedFileRights)
                         )
-                    ) {
+                    )
+                    {
                         if (rights == MemoryMappedFileRights.AccessSystemSecurity)
                         {
                             continue;
@@ -303,7 +310,8 @@ namespace System.IO.MemoryMappedFiles.Tests
                             HandleInheritability inheritability in Enum.GetValues(
                                 typeof(HandleInheritability)
                             )
-                        ) {
+                        )
+                        {
                             yield return new object[] { mapName[0], rights, inheritability };
                         }
                     }

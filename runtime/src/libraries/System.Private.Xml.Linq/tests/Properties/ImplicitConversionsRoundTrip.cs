@@ -429,7 +429,8 @@ namespace CoreXml.Test.XLinq
                     Type retType,
                     TestCase testCase,
                     string desc
-                ) {
+                )
+                {
                     _desc = desc;
                     _data = data;
                     _nodeType = nodeType;
@@ -597,7 +598,8 @@ namespace CoreXml.Test.XLinq
                     bool shouldThrow,
                     TestCase tc,
                     string desc
-                ) {
+                )
+                {
                     this.Desc = desc;
                     _nodeType = nodeType;
                     _retType = retType;

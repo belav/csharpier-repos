@@ -32,7 +32,8 @@ namespace IntelHardwareIntrinsicTest
                         new float[4] { 3, -11, 7, 49 },
                         new float[4]
                     )
-                ) {
+                )
+                {
                     var vd0 = Unsafe.Read<Vector128<double>>(doubleTable.inArrayPtr);
                     var vf1 = Unsafe.Read<Vector128<float>>(floatTable.inArrayPtr);
                     var vf2 = Sse2.ConvertScalarToVector128Double(vd0, vf1);

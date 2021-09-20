@@ -28,7 +28,8 @@ namespace Microsoft.CodeAnalysis.EditAndContinue
             TextSpan span,
             ushort syntaxKind,
             string?[] arguments
-        ) {
+        )
+        {
             Kind = kind;
             Span = span;
             SyntaxKind = syntaxKind;
@@ -40,12 +41,13 @@ namespace Microsoft.CodeAnalysis.EditAndContinue
             TextSpan span,
             SyntaxNode? node = null,
             string?[]? arguments = null
-        ) : this(
-            kind,
-            span,
-            (ushort)(node != null ? node.RawKind : 0),
-            arguments ?? Array.Empty<string>()
-        ) { }
+        )
+            : this(
+                kind,
+                span,
+                (ushort)(node != null ? node.RawKind : 0),
+                arguments ?? Array.Empty<string>()
+            ) { }
 
         internal Diagnostic ToDiagnostic(SyntaxTree tree)
         {

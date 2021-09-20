@@ -37,7 +37,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.Interactive
         protected override IEnumerable<TextSpan> GetExecutableSyntaxTreeNodeSelection(
             TextSpan selectionSpan,
             SyntaxNode root
-        ) {
+        )
+        {
             var expandedNode = GetSyntaxNodeForSubmission(selectionSpan, root);
             return expandedNode != null
               ? new TextSpan[] { expandedNode.Span }
@@ -52,7 +53,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.Interactive
         private static SyntaxNode GetSyntaxNodeForSubmission(
             TextSpan selectionSpan,
             SyntaxNode root
-        ) {
+        )
+        {
             GetSelectedTokens(selectionSpan, root, out var startToken, out var endToken);
 
             // Ensure that the first token comes before the last token.
@@ -128,7 +130,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.Interactive
             SyntaxNode root,
             out SyntaxToken startToken,
             out SyntaxToken endToken
-        ) {
+        )
+        {
             endToken = root.FindTokenOnLeftOfPosition(selectionSpan.End);
             startToken =
                 selectionSpan.Length == 0

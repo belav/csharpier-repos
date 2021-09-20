@@ -102,7 +102,8 @@ namespace System.Net
                 string spn,
                 ContextFlagsPal requestedContextFlags,
                 ChannelBinding channelBinding
-            ) {
+            )
+            {
                 ThisPtr = thisPtr;
                 IsServer = isServer;
                 Package = package;
@@ -138,7 +139,8 @@ namespace System.Net
             ReadOnlySpan<byte> buffer,
             [NotNull] ref byte[]? output,
             uint sequenceNumber
-        ) {
+        )
+        {
             return NegotiateStreamPal.Encrypt(
                 _securityContext!,
                 buffer,
@@ -155,7 +157,8 @@ namespace System.Net
             int count,
             out int newOffset,
             uint expectedSeqNumber
-        ) {
+        )
+        {
             return NegotiateStreamPal.Decrypt(
                 _securityContext!,
                 payload,

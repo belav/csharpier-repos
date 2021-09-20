@@ -183,7 +183,8 @@ namespace System.Web.Http.Dispatcher
 
         private static Exception CreateDirectRouteAmbiguousControllerException(
             CandidateAction[] candidates
-        ) {
+        )
+        {
             Contract.Assert(candidates != null);
             Contract.Assert(candidates.Length > 1);
 
@@ -214,7 +215,8 @@ namespace System.Web.Http.Dispatcher
             IHttpRoute route,
             string controllerName,
             ICollection<Type> matchingTypes
-        ) {
+        )
+        {
             Contract.Assert(route != null);
             Contract.Assert(controllerName != null);
             Contract.Assert(matchingTypes != null);
@@ -254,12 +256,14 @@ namespace System.Web.Http.Dispatcher
                     string,
                     ILookup<string, Type>
                 > controllerTypeGroup in controllerTypeGroups
-            ) {
+            )
+            {
                 string controllerName = controllerTypeGroup.Key;
 
                 foreach (
                     IGrouping<string, Type> controllerTypesGroupedByNs in controllerTypeGroup.Value
-                ) {
+                )
+                {
                     foreach (Type controllerType in controllerTypesGroupedByNs)
                     {
                         if (result.Keys.Contains(controllerName))

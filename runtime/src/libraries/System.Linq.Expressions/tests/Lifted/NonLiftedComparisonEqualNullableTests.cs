@@ -269,7 +269,8 @@ namespace System.Linq.Expressions.Tests
             decimal? a,
             decimal? b,
             bool useInterpreter
-        ) {
+        )
+        {
             Expression<Func<bool>> e = Expression.Lambda<Func<bool>>(
                 Expression.Equal(
                     Expression.Constant(a, typeof(decimal?)),
@@ -289,7 +290,8 @@ namespace System.Linq.Expressions.Tests
             double? a,
             double? b,
             bool useInterpreter
-        ) {
+        )
+        {
             Expression<Func<bool>> e = Expression.Lambda<Func<bool>>(
                 Expression.Equal(
                     Expression.Constant(a, typeof(double?)),
@@ -309,7 +311,8 @@ namespace System.Linq.Expressions.Tests
             float? a,
             float? b,
             bool useInterpreter
-        ) {
+        )
+        {
             Expression<Func<bool>> e = Expression.Lambda<Func<bool>>(
                 Expression.Equal(
                     Expression.Constant(a, typeof(float?)),
@@ -363,7 +366,8 @@ namespace System.Linq.Expressions.Tests
             sbyte? a,
             sbyte? b,
             bool useInterpreter
-        ) {
+        )
+        {
             Expression<Func<bool>> e = Expression.Lambda<Func<bool>>(
                 Expression.Equal(
                     Expression.Constant(a, typeof(sbyte?)),
@@ -383,7 +387,8 @@ namespace System.Linq.Expressions.Tests
             short? a,
             short? b,
             bool useInterpreter
-        ) {
+        )
+        {
             Expression<Func<bool>> e = Expression.Lambda<Func<bool>>(
                 Expression.Equal(
                     Expression.Constant(a, typeof(short?)),
@@ -420,7 +425,8 @@ namespace System.Linq.Expressions.Tests
             ulong? a,
             ulong? b,
             bool useInterpreter
-        ) {
+        )
+        {
             Expression<Func<bool>> e = Expression.Lambda<Func<bool>>(
                 Expression.Equal(
                     Expression.Constant(a, typeof(ulong?)),
@@ -440,7 +446,8 @@ namespace System.Linq.Expressions.Tests
             ushort? a,
             ushort? b,
             bool useInterpreter
-        ) {
+        )
+        {
             Expression<Func<bool>> e = Expression.Lambda<Func<bool>>(
                 Expression.Equal(
                     Expression.Constant(a, typeof(ushort?)),

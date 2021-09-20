@@ -35,7 +35,8 @@ namespace Microsoft.AspNetCore.Components.WebAssembly.Services
             string methodIdentifier,
             string dotNetObjectId,
             string argsJson
-        ) {
+        )
+        {
             var callInfo = new DotNetInvocationInfo(
                 assemblyName,
                 methodIdentifier,
@@ -57,7 +58,8 @@ namespace Microsoft.AspNetCore.Components.WebAssembly.Services
             string assemblyNameOrDotNetObjectId,
             string methodIdentifier,
             string argsJson
-        ) {
+        )
+        {
             // Figure out whether 'assemblyNameOrDotNetObjectId' is the assembly name or the instance ID
             // We only need one for any given call. This helps to work around the limitation that we can
             // only pass a maximum of 4 args in a call from JS to Mono WebAssembly.

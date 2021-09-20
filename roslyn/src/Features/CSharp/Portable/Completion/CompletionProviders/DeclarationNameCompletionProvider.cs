@@ -70,7 +70,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Completion.Providers
                         CompletionOptions.ShowNameSuggestions,
                         LanguageNames.CSharp
                     )
-                ) {
+                )
+                {
                     return;
                 }
 
@@ -134,7 +135,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Completion.Providers
         private ImmutableArray<ImmutableArray<string>> GetBaseNames(
             SemanticModel semanticModel,
             NameDeclarationInfo nameInfo
-        ) {
+        )
+        {
             if (nameInfo.Alias != null)
             {
                 return NameGenerator.GetBaseNames(nameInfo.Alias);
@@ -215,7 +217,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Completion.Providers
             Compilation compilation,
             bool wasPlural,
             HashSet<ITypeSymbol> seenTypes
-        ) {
+        )
+        {
             // Consider C : Task<C>
             // Visiting the C in Task<C> will stackoverflow
             if (seenTypes.Contains(type))
@@ -284,7 +287,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Completion.Providers
                     || Equals(originalDefinition, valueTaskType)
                     || Equals(originalDefinition, lazyOfTType)
                     || originalDefinition.SpecialType == SpecialType.System_Nullable_T
-                ) {
+                )
+                {
                     return UnwrapType(
                         namedType.TypeArguments[0],
                         compilation,
@@ -305,7 +309,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Completion.Providers
             CSharpSyntaxContext context,
             Document document,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var rules = await document.GetNamingRulesAsync(
                     FallbackNamingRules.CompletionOfferingRules,
                     cancellationToken
@@ -336,7 +341,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Completion.Providers
                             declarationInfo.Modifiers,
                             declarationInfo.DeclaredAccessibility
                         )
-                    ) {
+                    )
+                    {
                         foreach (var baseName in baseNames)
                         {
                             var name = rule.NamingStyle.CreateName(baseName)
@@ -347,7 +353,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Completion.Providers
                                 name.Length > 1
                                 && CSharpSyntaxFacts.Instance.IsValidIdentifier(name)
                                 && seenBaseNames.Add(name)
-                            ) {
+                            )
+                            {
                                 var uniqueName = semanticFactsService.GenerateUniqueName(
                                     context.SemanticModel,
                                     context.TargetToken.Parent,
@@ -383,7 +390,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Completion.Providers
             string name,
             Glyph glyph,
             string sortText
-        ) {
+        )
+        {
             return CommonCompletionItem.Create(
                 name,
                 displayTextSuffix: "",

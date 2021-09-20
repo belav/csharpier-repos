@@ -33,9 +33,7 @@ namespace System.IO
             HResult = HResults.COR_E_DIRECTORYNOTFOUND;
         }
 
-        protected DirectoryNotFoundException(
-            SerializationInfo info,
-            StreamingContext context
-        ) : base(info, context) { }
+        protected DirectoryNotFoundException(SerializationInfo info, StreamingContext context)
+            : base(info, context) { }
     }
 }

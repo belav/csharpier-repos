@@ -36,7 +36,8 @@ namespace Microsoft.AspNetCore.Razor.Language.Syntax
 
         public MarkupMinimizedTagHelperDirectiveAttributeSyntax WithTagHelperAttributeInfo(
             TagHelperAttributeInfo info
-        ) {
+        )
+        {
             var annotations = new List<SyntaxAnnotation>(GetAnnotations())
             {
                 new SyntaxAnnotation(TagHelperAttributeInfoKey, info)

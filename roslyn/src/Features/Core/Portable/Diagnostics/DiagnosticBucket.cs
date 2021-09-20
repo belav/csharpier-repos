@@ -33,7 +33,8 @@ namespace Microsoft.CodeAnalysis.Diagnostics
             Workspace workspace,
             ProjectId? projectId,
             DocumentId? documentId
-        ) {
+        )
+        {
             Id = id;
             Workspace = workspace;
             ProjectId = projectId;

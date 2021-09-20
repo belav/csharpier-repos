@@ -30,7 +30,8 @@ namespace Microsoft.AspNetCore.Authentication
             IAuthenticationHandlerProvider handlers,
             IClaimsTransformation transform,
             IOptions<AuthenticationOptions> options
-        ) {
+        )
+        {
             Schemes = schemes;
             Handlers = handlers;
             Transform = transform;
@@ -66,7 +67,8 @@ namespace Microsoft.AspNetCore.Authentication
         public virtual async Task<AuthenticateResult> AuthenticateAsync(
             HttpContext context,
             string? scheme
-        ) {
+        )
+        {
             if (scheme == null)
             {
                 var defaultScheme = await Schemes.GetDefaultAuthenticateSchemeAsync();
@@ -125,7 +127,8 @@ namespace Microsoft.AspNetCore.Authentication
             HttpContext context,
             string? scheme,
             AuthenticationProperties? properties
-        ) {
+        )
+        {
             if (scheme == null)
             {
                 var defaultChallengeScheme = await Schemes.GetDefaultChallengeSchemeAsync();
@@ -158,7 +161,8 @@ namespace Microsoft.AspNetCore.Authentication
             HttpContext context,
             string? scheme,
             AuthenticationProperties? properties
-        ) {
+        )
+        {
             if (scheme == null)
             {
                 var defaultForbidScheme = await Schemes.GetDefaultForbidSchemeAsync();
@@ -193,7 +197,8 @@ namespace Microsoft.AspNetCore.Authentication
             string? scheme,
             ClaimsPrincipal principal,
             AuthenticationProperties? properties
-        ) {
+        )
+        {
             if (principal == null)
             {
                 throw new ArgumentNullException(nameof(principal));
@@ -253,7 +258,8 @@ namespace Microsoft.AspNetCore.Authentication
             HttpContext context,
             string? scheme,
             AuthenticationProperties? properties
-        ) {
+        )
+        {
             if (scheme == null)
             {
                 var defaultScheme = await Schemes.GetDefaultSignOutSchemeAsync();
@@ -340,7 +346,8 @@ namespace Microsoft.AspNetCore.Authentication
         private async Task<Exception> CreateMismatchedSignInHandlerException(
             string scheme,
             IAuthenticationHandler handler
-        ) {
+        )
+        {
             var schemes = await GetAllSignInSchemeNames();
 
             var mismatchError =
@@ -396,7 +403,8 @@ namespace Microsoft.AspNetCore.Authentication
         private async Task<Exception> CreateMismatchedSignOutHandlerException(
             string scheme,
             IAuthenticationHandler handler
-        ) {
+        )
+        {
             var schemes = await GetAllSignOutSchemeNames();
 
             var mismatchError =

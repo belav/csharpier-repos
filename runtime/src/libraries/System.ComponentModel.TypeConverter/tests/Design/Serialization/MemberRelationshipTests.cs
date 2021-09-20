@@ -96,7 +96,8 @@ namespace System.ComponentModel.Design.Serialization.Tests
             MemberRelationship memberRelationship,
             object other,
             bool expected
-        ) {
+        )
+        {
             Assert.Equal(expected, memberRelationship.Equals(other));
             if (other is MemberRelationship otherMemberRelationship)
             {

@@ -211,7 +211,8 @@ namespace System.CommandLine.Parsing
                             argument.ValueType,
                             CurrentToken.Value
                         ) is FailedArgumentTypeConversionResult
-                    ) {
+                    )
+                    {
                         return;
                     }
                 }

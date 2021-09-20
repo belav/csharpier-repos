@@ -45,7 +45,8 @@ namespace Microsoft.AspNetCore.Mvc.ModelBinding.Binders
                         m.ModelType == typeof(KeyValuePair<string, int>)
                         || m.ModelType == typeof(int)
                         || m.ModelType == typeof(string)
-                    ) {
+                    )
+                    {
                         return Mock.Of<IModelBinder>();
                     }
                     else

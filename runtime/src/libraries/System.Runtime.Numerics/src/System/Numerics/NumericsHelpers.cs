@@ -25,7 +25,8 @@ namespace System.Numerics
             out int exp,
             out ulong man,
             out bool fFinite
-        ) {
+        )
+        {
             DoubleUlong du;
             du.uu = 0;
             du.dbl = dbl;

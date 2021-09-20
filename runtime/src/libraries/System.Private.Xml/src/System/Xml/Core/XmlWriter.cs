@@ -116,7 +116,8 @@ namespace System.Xml
             string localName,
             string? ns,
             string? value
-        ) {
+        )
+        {
             WriteStartAttribute(prefix, localName, ns);
             WriteString(value);
             WriteEndAttribute();
@@ -349,7 +350,8 @@ namespace System.Xml
             if (
                 reader.NodeType == XmlNodeType.Element
                 || reader.NodeType == XmlNodeType.XmlDeclaration
-            ) {
+            )
+            {
                 if (reader.MoveToFirstAttribute())
                 {
                     WriteAttributes(reader, defattr);
@@ -426,7 +428,8 @@ namespace System.Xml
                                         WriteNodeBufferSize
                                     )
                                 ) > 0
-                            ) {
+                            )
+                            {
                                 this.WriteChars(_writeNodeBuffer, 0, read);
                             }
                         }

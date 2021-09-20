@@ -71,7 +71,8 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeFixes.ConditionalExpressionInStringI
             Document document,
             int conditionalExpressionSyntaxStartPosition,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             // The usual SyntaxTree transformations are complicated if string literals are present in the false part as in
             // $"{ condition ? "Success": "Failure" }"
             // The colon starts a FormatClause and the double quote left to 'F' therefore ends the interpolated string.
@@ -95,7 +96,8 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeFixes.ConditionalExpressionInStringI
             if (
                 nodeAtInsertPosition is ParenthesizedExpressionSyntax parenthesizedExpression
                 && parenthesizedExpression.CloseParenToken.IsMissing
-            ) {
+            )
+            {
                 var newCloseParen = SyntaxFactory.Token(SyntaxKind.CloseParenToken)
                     .WithTriviaFrom(parenthesizedExpression.CloseParenToken);
                 var parenthesizedExpressionWithClosingParen =
@@ -112,13 +114,12 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeFixes.ConditionalExpressionInStringI
 
         private class MyCodeAction : CodeAction.DocumentChangeAction
         {
-            public MyCodeAction(
-                Func<CancellationToken, Task<Document>> createChangedDocument
-            ) : base(
-                CSharpFeaturesResources.Add_parentheses_around_conditional_expression_in_interpolated_string,
-                createChangedDocument,
-                CSharpFeaturesResources.Add_parentheses_around_conditional_expression_in_interpolated_string
-            ) { }
+            public MyCodeAction(Func<CancellationToken, Task<Document>> createChangedDocument)
+                : base(
+                    CSharpFeaturesResources.Add_parentheses_around_conditional_expression_in_interpolated_string,
+                    createChangedDocument,
+                    CSharpFeaturesResources.Add_parentheses_around_conditional_expression_in_interpolated_string
+                ) { }
         }
     }
 }

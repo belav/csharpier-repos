@@ -31,7 +31,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Utilities
         public static ProjectPropertyStorage Create(
             Project project,
             IServiceProvider serviceProvider
-        ) {
+        )
+        {
             var solution = (IVsSolution)serviceProvider.GetService(typeof(SVsSolution));
             solution.GetProjectOfUniqueName(project.UniqueName, out var hierarchy);
 
@@ -89,7 +90,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Utilities
                 string buildPropertyName,
                 string configurationPropertyName,
                 string value
-            ) {
+            )
+            {
                 foreach (Configuration configuration in _configurationManager)
                 {
                     configuration.Properties.Item(configurationPropertyName).Value = value;

@@ -5032,7 +5032,8 @@ IInvalidOperation (OperationKind.Invalid, Type: ?, IsInvalid) (Syntax: 'M2(1, 2)
                 IOperation operation,
                 Compilation compilation,
                 SyntaxNode syntaxNode
-            ) {
+            )
+            {
                 new IndexerAccessArgumentVerifier(compilation).Visit(operation);
             }
 

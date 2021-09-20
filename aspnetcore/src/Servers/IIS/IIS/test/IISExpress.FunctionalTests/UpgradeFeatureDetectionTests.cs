@@ -65,7 +65,8 @@ namespace Microsoft.AspNetCore.Server.IIS.FunctionalTests
             bool disableWebSocket,
             string expected,
             HostingModel hostingModel
-        ) {
+        )
+        {
             var deploymentParameters = Fixture.GetBaseDeploymentParameters(hostingModel);
 
             if (disableWebSocket)

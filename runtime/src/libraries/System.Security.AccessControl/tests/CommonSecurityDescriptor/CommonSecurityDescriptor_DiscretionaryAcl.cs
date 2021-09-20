@@ -76,7 +76,8 @@ namespace System.Security.AccessControl.Tests
             bool isContainerDacl,
             bool isDSDacl,
             string newDaclStr
-        ) {
+        )
+        {
             bool result = false;
             bool isContainer = false;
             bool isDS = false;
@@ -105,7 +106,8 @@ namespace System.Security.AccessControl.Tests
                 if (
                     (commonSecurityDescriptor.ControlFlags & ControlFlags.DiscretionaryAclPresent)
                     != 0
-                ) {
+                )
+                {
                     if (dacl == null)
                     {
                         //a dacl with Allow Everyone Everything Ace should be assigned
@@ -118,7 +120,8 @@ namespace System.Security.AccessControl.Tests
                                 commonSecurityDescriptor.IsDS,
                                 commonSecurityDescriptor.DiscretionaryAcl
                             )
-                        ) {
+                        )
+                        {
                             result = true;
                         }
                         else

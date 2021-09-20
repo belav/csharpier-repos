@@ -11,21 +11,24 @@ namespace Microsoft.AspNetCore.Identity.Test
         public Task<IdentityResult> CreateAsync(
             PocoRole user,
             CancellationToken cancellationToken = default(CancellationToken)
-        ) {
+        )
+        {
             return Task.FromResult(IdentityResult.Success);
         }
 
         public Task<IdentityResult> UpdateAsync(
             PocoRole user,
             CancellationToken cancellationToken = default(CancellationToken)
-        ) {
+        )
+        {
             return Task.FromResult(IdentityResult.Success);
         }
 
         public Task<string> GetRoleNameAsync(
             PocoRole role,
             CancellationToken cancellationToken = default(CancellationToken)
-        ) {
+        )
+        {
             return Task.FromResult<string>(null);
         }
 
@@ -33,21 +36,24 @@ namespace Microsoft.AspNetCore.Identity.Test
             PocoRole role,
             string roleName,
             CancellationToken cancellationToken = default(CancellationToken)
-        ) {
+        )
+        {
             return Task.FromResult(0);
         }
 
         public Task<PocoRole> FindByIdAsync(
             string roleId,
             CancellationToken cancellationToken = default(CancellationToken)
-        ) {
+        )
+        {
             return Task.FromResult<PocoRole>(null);
         }
 
         public Task<PocoRole> FindByNameAsync(
             string userName,
             CancellationToken cancellationToken = default(CancellationToken)
-        ) {
+        )
+        {
             return Task.FromResult<PocoRole>(null);
         }
 
@@ -56,21 +62,24 @@ namespace Microsoft.AspNetCore.Identity.Test
         public Task<IdentityResult> DeleteAsync(
             PocoRole user,
             CancellationToken cancellationToken = default(CancellationToken)
-        ) {
+        )
+        {
             return Task.FromResult(IdentityResult.Success);
         }
 
         public Task<string> GetRoleIdAsync(
             PocoRole role,
             CancellationToken cancellationToken = default(CancellationToken)
-        ) {
+        )
+        {
             return Task.FromResult<string>(null);
         }
 
         public Task<string> GetNormalizedRoleNameAsync(
             PocoRole role,
             CancellationToken cancellationToken = default(CancellationToken)
-        ) {
+        )
+        {
             return Task.FromResult<string>(null);
         }
 
@@ -78,7 +87,8 @@ namespace Microsoft.AspNetCore.Identity.Test
             PocoRole role,
             string normalizedName,
             CancellationToken cancellationToken = default(CancellationToken)
-        ) {
+        )
+        {
             return Task.FromResult(0);
         }
     }

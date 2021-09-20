@@ -43,7 +43,8 @@ namespace Microsoft.AspNetCore.WebUtilities
             this Stream stream,
             long? limit,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             return stream.DrainAsync(ArrayPool<byte>.Shared, limit, cancellationToken);
         }
 
@@ -63,7 +64,8 @@ namespace Microsoft.AspNetCore.WebUtilities
             ArrayPool<byte> bytePool,
             long? limit,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             cancellationToken.ThrowIfCancellationRequested();
             var buffer = bytePool.Rent(_maxReadBufferSize);
             long total = 0;

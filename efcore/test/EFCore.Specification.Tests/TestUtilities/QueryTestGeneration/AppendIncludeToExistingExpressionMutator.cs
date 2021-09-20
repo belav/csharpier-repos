@@ -116,7 +116,8 @@ namespace Microsoft.EntityFrameworkCore.TestUtilities.QueryTestGeneration
                         || node.Method.MethodIsClosedFormOf(ThenIncludeReferenceMethodInfo)
                         || node.Method.MethodIsClosedFormOf(ThenIncludeCollectionMethodInfo)
                     )
-                ) {
+                )
+                {
                     FoundExpressions.Add(node);
 
                     // need to short-circuit on ThenInclude, if we inject include before, it could change the IIncludeQueryable type that this ThenInclude is expecting

@@ -38,19 +38,21 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.Preview
             ITextDifferencingSelectorService differenceSelectorService,
             IDifferenceBufferFactoryService differenceBufferService,
             IWpfDifferenceViewerFactoryService differenceViewerService
-        ) : base(
-            threadingContext,
-            textBufferFactoryService,
-            contentTypeRegistryService,
-            projectionBufferFactoryService,
-            editorOptionsFactoryService,
-            differenceSelectorService,
-            differenceBufferService,
-            textEditorFactoryService.CreateTextViewRoleSet(
-                TextViewRoles.PreviewRole,
-                PredefinedTextViewRoles.Analyzable
+        )
+            : base(
+                threadingContext,
+                textBufferFactoryService,
+                contentTypeRegistryService,
+                projectionBufferFactoryService,
+                editorOptionsFactoryService,
+                differenceSelectorService,
+                differenceBufferService,
+                textEditorFactoryService.CreateTextViewRoleSet(
+                    TextViewRoles.PreviewRole,
+                    PredefinedTextViewRoles.Analyzable
+                )
             )
-        ) {
+        {
             _differenceViewerService = differenceViewerService;
         }
 
@@ -60,7 +62,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.Preview
             DifferenceViewMode mode,
             double zoomLevel,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var diffViewer = _differenceViewerService.CreateDifferenceView(
                 diffBuffer,
                 previewRoleSet

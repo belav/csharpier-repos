@@ -366,7 +366,8 @@ namespace Microsoft.AspNetCore.Mvc.ViewFeatures.Buffers
                     isLessThanHalfFull
                     && destinationPage != null
                     && destinationPage.Capacity - destinationPage.Count >= page.Count
-                ) {
+                )
+                {
                     // We have room, let's copy the items.
                     Array.Copy(
                         sourceArray: page.Buffer,

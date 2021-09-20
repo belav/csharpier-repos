@@ -126,7 +126,8 @@ namespace BasicEventSourceTests
                     "SimpleEventSource",
                     EventLevel.Verbose
                 )
-            ) {
+            )
+            {
                 SimpleEventSource eventSource = new SimpleEventSource(getMockedCount);
 
                 // Want to sleep for 5000 ms to get some counters piling up.

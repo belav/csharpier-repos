@@ -567,7 +567,8 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
         [InlineData(EntityState.Unchanged)]
         public void Query_dependent_include_principal_unidirectional_with_existing(
             EntityState existingState
-        ) {
+        )
+        {
             Seed();
 
             using var context = new QueryFixupContext();
@@ -596,7 +597,8 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
         [InlineData(EntityState.Unchanged)]
         public void Query_principal_include_dependent_unidirectional_with_existing(
             EntityState existingState
-        ) {
+        )
+        {
             Seed();
 
             using var context = new QueryFixupContext();
@@ -656,7 +658,8 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
         [InlineData(EntityState.Unchanged)]
         public void Query_dependent_include_principal_self_ref_with_existing(
             EntityState existingState
-        ) {
+        )
+        {
             Seed();
 
             using var context = new QueryFixupContext();
@@ -688,7 +691,8 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
         [InlineData(EntityState.Unchanged)]
         public void Query_principal_include_dependent_self_ref_with_existing(
             EntityState existingState
-        ) {
+        )
+        {
             Seed();
 
             using var context = new QueryFixupContext();
@@ -778,7 +782,8 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
         [InlineData(EntityState.Unchanged)]
         public void Query_dependent_include_principal_self_ref_unidirectional_with_existing(
             EntityState existingState
-        ) {
+        )
+        {
             Seed();
 
             using var context = new QueryFixupContext();
@@ -808,7 +813,8 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
         [InlineData(EntityState.Unchanged)]
         public void Query_principal_include_dependent_self_ref_unidirectional_with_existing(
             EntityState existingState
-        ) {
+        )
+        {
             Seed();
 
             using var context = new QueryFixupContext();

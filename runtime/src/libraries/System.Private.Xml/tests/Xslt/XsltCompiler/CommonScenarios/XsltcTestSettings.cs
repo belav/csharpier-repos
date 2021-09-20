@@ -202,7 +202,8 @@ namespace System.Xml.Tests
             object param5,
             object param6,
             bool englishOnly = false
-        ) {
+        )
+        {
             if (ShouldSkip(englishOnly))
             {
                 return; //TEST_SKIPPED;

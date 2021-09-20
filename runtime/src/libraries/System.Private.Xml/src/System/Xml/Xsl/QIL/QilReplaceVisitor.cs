@@ -50,7 +50,8 @@ namespace System.Xml.Xsl.Qil
                 if (
                     (object?)oldChild != (object)newChild
                     || (newChild != null && (object?)oldChildType != (object?)newChild.XmlType)
-                ) {
+                )
+                {
                     recalcType = true;
                     parent[i] = newChild;
                 }

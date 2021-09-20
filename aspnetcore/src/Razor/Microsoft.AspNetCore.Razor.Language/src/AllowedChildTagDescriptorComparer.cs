@@ -21,7 +21,8 @@ namespace Microsoft.AspNetCore.Razor.Language
         public virtual bool Equals(
             AllowedChildTagDescriptor descriptorX,
             AllowedChildTagDescriptor descriptorY
-        ) {
+        )
+        {
             if (object.ReferenceEquals(descriptorX, descriptorY))
             {
                 return true;

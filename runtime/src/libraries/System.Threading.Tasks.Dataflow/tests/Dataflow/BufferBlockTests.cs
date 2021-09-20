@@ -597,7 +597,8 @@ namespace System.Threading.Tasks.Dataflow.Tests
                     DataflowMessageHeader messageHeader,
                     ITargetBlock<int> target,
                     out bool messageConsumed
-                ) {
+                )
+                {
                     throw new FormatException();
                 }
             };

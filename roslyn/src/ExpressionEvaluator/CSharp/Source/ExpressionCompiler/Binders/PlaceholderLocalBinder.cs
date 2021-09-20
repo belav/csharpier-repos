@@ -69,7 +69,8 @@ namespace Microsoft.CodeAnalysis.CSharp.ExpressionEvaluator
             Binder originalBinder,
             bool diagnose,
             ref CompoundUseSiteInfo<AssemblySymbol> useSiteInfo
-        ) {
+        )
+        {
             if (
                 (
                     options
@@ -79,7 +80,8 @@ namespace Microsoft.CodeAnalysis.CSharp.ExpressionEvaluator
                         | LookupOptions.LabelsOnly
                     )
                 ) != 0
-            ) {
+            )
+            {
                 return;
             }
 
@@ -94,7 +96,8 @@ namespace Microsoft.CodeAnalysis.CSharp.ExpressionEvaluator
                         CultureInfo.InvariantCulture,
                         out address
                     )
-                ) {
+                )
+                {
                     // Invalid value should have been caught by Lexer.
                     throw ExceptionUtilities.UnexpectedValue(valueText);
                 }
@@ -153,7 +156,8 @@ namespace Microsoft.CodeAnalysis.CSharp.ExpressionEvaluator
             LookupSymbolsInfo info,
             LookupOptions options,
             Binder originalBinder
-        ) {
+        )
+        {
             throw new NotImplementedException();
         }
 
@@ -164,13 +168,15 @@ namespace Microsoft.CodeAnalysis.CSharp.ExpressionEvaluator
 
         internal override ImmutableArray<LocalSymbol> GetDeclaredLocalsForScope(
             SyntaxNode scopeDesignator
-        ) {
+        )
+        {
             throw ExceptionUtilities.Unreachable;
         }
 
         internal override ImmutableArray<LocalFunctionSymbol> GetDeclaredLocalFunctionsForScope(
             CSharpSyntaxNode scopeDesignator
-        ) {
+        )
+        {
             throw ExceptionUtilities.Unreachable;
         }
     }

@@ -30,7 +30,8 @@ namespace Roslyn.Test.Utilities
                         var test in doc.XPathSelectElements(
                             "/assemblies/assembly/collection/test[@result='Pass']"
                         )
-                    ) {
+                    )
+                    {
                         if (decimal.TryParse(test.Attribute("time").Value, out var time))
                         {
                             result.Add(test.Attribute("name").Value, new TestInfo(time));

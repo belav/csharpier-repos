@@ -115,7 +115,8 @@ namespace Microsoft.AspNetCore.Mvc.ModelBinding.Binders
         [InlineData(" \t \r\n ")]
         public async Task BindModel_CreatesError_IfTrimmedAttemptedValueIsEmpty_NonNullableDestination(
             string value
-        ) {
+        )
+        {
             // Arrange
             var message = $"The value '{value}' is invalid.";
             var bindingContext = GetBindingContext();
@@ -139,7 +140,8 @@ namespace Microsoft.AspNetCore.Mvc.ModelBinding.Binders
         [InlineData(" \t \r\n ")]
         public async Task BindModel_ReturnsNull_IfTrimmedAttemptedValueIsEmpty_NullableDestination(
             string value
-        ) {
+        )
+        {
             // Arrange
             var bindingContext = GetBindingContext(typeof(DateTime?));
             bindingContext.ValueProvider = new SimpleValueProvider { { "theModelName", value } };

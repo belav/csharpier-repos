@@ -72,7 +72,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeRefactorings
 
                 protected override Task<Solution> GetChangedSolutionAsync(
                     CancellationToken cancellationToken
-                ) {
+                )
+                {
                     var solution = _oldDocument.Project.Solution;
 
                     // Add a document - This will result in IWpfTextView previews.
@@ -123,7 +124,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeRefactorings
             TestWorkspace workspace,
             out Document document,
             out SolutionPreviewResult previews
-        ) {
+        )
+        {
             document = GetDocument(workspace);
             var provider = CreateCodeRefactoringProvider(workspace, parameters);
             var span = document.GetSyntaxRootAsync().Result.Span;

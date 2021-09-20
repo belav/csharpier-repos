@@ -66,7 +66,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UseIndexOrRangeOperator
             ImmutableArray<Diagnostic> diagnostics,
             SyntaxEditor editor,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var invocationNodes = diagnostics.Select(
                     d => GetInvocationExpression(d, cancellationToken)
                 )
@@ -97,11 +98,13 @@ namespace Microsoft.CodeAnalysis.CSharp.UseIndexOrRangeOperator
             InvocationExpressionSyntax currentInvocation,
             SyntaxGenerator generator,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             if (
                 semanticModel.GetOperation(currentInvocation, cancellationToken)
                 is IInvocationOperation invocation
-            ) {
+            )
+            {
                 var infoCache = new InfoCache(semanticModel.Compilation);
                 var resultOpt = AnalyzeInvocation(
                     invocation,
@@ -241,7 +244,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UseIndexOrRangeOperator
         private static RangeExpressionSyntax CreateConstantRange(
             Result result,
             SyntaxGenerator generator
-        ) {
+        )
+        {
             var constant1Syntax = (ExpressionSyntax)result.Op1.Syntax;
 
             // the form is s.Slice(constant1, s.Length - constant2).  Want to generate
@@ -264,11 +268,13 @@ namespace Microsoft.CodeAnalysis.CSharp.UseIndexOrRangeOperator
             IPropertySymbol lengthLikeProperty,
             IOperation instance,
             ref IOperation rangeOperation
-        ) {
+        )
+        {
             if (
                 IsSubtraction(rangeOperation, out var subtraction)
                 && IsInstanceLengthCheck(lengthLikeProperty, instance, subtraction.LeftOperand)
-            ) {
+            )
+            {
                 rangeOperation = subtraction.RightOperand;
                 return true;
             }
@@ -278,13 +284,12 @@ namespace Microsoft.CodeAnalysis.CSharp.UseIndexOrRangeOperator
 
         private class MyCodeAction : CustomCodeActions.DocumentChangeAction
         {
-            public MyCodeAction(
-                Func<CancellationToken, Task<Document>> createChangedDocument
-            ) : base(
-                CSharpAnalyzersResources.Use_range_operator,
-                createChangedDocument,
-                CSharpAnalyzersResources.Use_range_operator
-            ) { }
+            public MyCodeAction(Func<CancellationToken, Task<Document>> createChangedDocument)
+                : base(
+                    CSharpAnalyzersResources.Use_range_operator,
+                    createChangedDocument,
+                    CSharpAnalyzersResources.Use_range_operator
+                ) { }
         }
     }
 }

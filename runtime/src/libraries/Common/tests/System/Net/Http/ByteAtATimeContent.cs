@@ -27,7 +27,8 @@ namespace System.Net.Http.Functional.Tests
             Task waitToSend,
             TaskCompletionSource<bool> startedSend,
             int millisecondDelayBetweenBytes
-        ) {
+        )
+        {
             _length = length;
             _waitToSend = waitToSend;
             _startedSend = startedSend;
@@ -45,7 +46,8 @@ namespace System.Net.Http.Functional.Tests
         protected override async Task SerializeToStreamAsync(
             Stream stream,
             TransportContext context
-        ) {
+        )
+        {
             await _waitToSend;
             _startedSend.SetResult(true);
 

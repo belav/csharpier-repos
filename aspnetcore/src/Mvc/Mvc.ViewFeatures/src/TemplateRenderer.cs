@@ -91,7 +91,8 @@ namespace Microsoft.AspNetCore.Mvc.ViewFeatures
             ViewDataDictionary viewData,
             string templateName,
             bool readOnly
-        ) {
+        )
+        {
             if (viewEngine == null)
             {
                 throw new ArgumentNullException(nameof(viewEngine));
@@ -154,7 +155,8 @@ namespace Microsoft.AspNetCore.Mvc.ViewFeatures
                             viewBuffer,
                             _viewContext.Writer.Encoding
                         )
-                    ) {
+                    )
+                    {
                         // Forcing synchronous behavior so users don't have to await templates.
                         var view = viewEngineResult.View;
                         using (view as IDisposable)
@@ -277,7 +279,8 @@ namespace Microsoft.AspNetCore.Mvc.ViewFeatures
             }
             else if (
                 typeof(IFormFile) != fieldType && typeof(IFormFile).IsAssignableFrom(fieldType)
-            ) {
+            )
+            {
                 yield return nameof(IFormFile);
             }
 
@@ -287,7 +290,8 @@ namespace Microsoft.AspNetCore.Mvc.ViewFeatures
         private static IHtmlHelper MakeHtmlHelper(
             ViewContext viewContext,
             ViewDataDictionary viewData
-        ) {
+        )
+        {
             var newHelper =
                 viewContext.HttpContext.RequestServices.GetRequiredService<IHtmlHelper>();
 

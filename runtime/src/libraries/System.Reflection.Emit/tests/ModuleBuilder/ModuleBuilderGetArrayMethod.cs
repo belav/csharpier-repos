@@ -28,7 +28,8 @@ namespace System.Reflection.Emit.Tests
         [MemberData(nameof(CallingConventions_TestData))]
         public void GetArrayMethod_ValidArrayValues_VoidReturnType(
             CallingConventions callingConvention
-        ) {
+        )
+        {
             ModuleBuilder module = Helpers.DynamicModule();
             VerifyGetArrayMethod(
                 module,
@@ -45,7 +46,8 @@ namespace System.Reflection.Emit.Tests
         [MemberData(nameof(CallingConventions_TestData))]
         public void GetArrayMethod_ValidArrayValues_ValueReturnType(
             CallingConventions callingConvention
-        ) {
+        )
+        {
             ModuleBuilder module = Helpers.DynamicModule();
             VerifyGetArrayMethod(
                 module,
@@ -62,7 +64,8 @@ namespace System.Reflection.Emit.Tests
         [MemberData(nameof(CallingConventions_TestData))]
         public void GetArrayMethod_ValidArrayValues_ReferenceReturnType(
             CallingConventions callingConvention
-        ) {
+        )
+        {
             ModuleBuilder module = Helpers.DynamicModule();
             VerifyGetArrayMethod(
                 module,
@@ -79,7 +82,8 @@ namespace System.Reflection.Emit.Tests
         [MemberData(nameof(CallingConventions_TestData))]
         public void GetArrayMethod_ValidArrayValues_ValueParameterType(
             CallingConventions callingConvention
-        ) {
+        )
+        {
             ModuleBuilder module = Helpers.DynamicModule();
             VerifyGetArrayMethod(
                 module,
@@ -105,7 +109,8 @@ namespace System.Reflection.Emit.Tests
         [MemberData(nameof(CallingConventions_TestData))]
         public void GetArrayMethod_ValidArrayValues_ReferenceParameterType(
             CallingConventions callingConvention
-        ) {
+        )
+        {
             ModuleBuilder module = Helpers.DynamicModule();
             VerifyGetArrayMethod(
                 module,
@@ -275,7 +280,8 @@ namespace System.Reflection.Emit.Tests
             CallingConventions callingConvention,
             Type returnType,
             Type[] parameterTypes
-        ) {
+        )
+        {
             MethodInfo method = module.GetArrayMethod(
                 arrayClass,
                 methodName,

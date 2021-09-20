@@ -69,7 +69,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                     SpecialMember.System_Nullable_T__ctor,
                     out MethodSymbol nullableCtor
                 )
-            ) {
+            )
+            {
                 return BadExpression(node.Syntax, node.Type, operand);
             }
 

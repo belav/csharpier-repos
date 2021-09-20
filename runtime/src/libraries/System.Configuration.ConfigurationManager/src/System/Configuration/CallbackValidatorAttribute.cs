@@ -34,7 +34,8 @@ namespace System.Configuration
                             if (
                                 (parameters.Length == 1)
                                 && (parameters[0].ParameterType == typeof(object))
-                            ) {
+                            )
+                            {
                                 _callbackMethod = (ValidatorCallback)Delegate.CreateDelegate(
                                     typeof(ValidatorCallback),
                                     methodInfo

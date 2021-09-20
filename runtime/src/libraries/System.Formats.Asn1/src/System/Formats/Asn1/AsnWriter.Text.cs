@@ -40,7 +40,8 @@ namespace System.Formats.Asn1
             UniversalTagNumber encodingType,
             string value,
             Asn1Tag? tag = null
-        ) {
+        )
+        {
             if (value == null)
                 throw new ArgumentNullException(nameof(value));
 
@@ -77,7 +78,8 @@ namespace System.Formats.Asn1
             UniversalTagNumber encodingType,
             ReadOnlySpan<char> str,
             Asn1Tag? tag = null
-        ) {
+        )
+        {
             CheckUniversalTag(tag, encodingType);
 
             Text.Encoding encoding = AsnCharacterStringEncodings.GetEncoding(encodingType);
@@ -89,7 +91,8 @@ namespace System.Formats.Asn1
             Asn1Tag tag,
             Text.Encoding encoding,
             ReadOnlySpan<char> str
-        ) {
+        )
+        {
             int size = encoding.GetByteCount(str);
 
             // T-REC-X.690-201508 sec 9.2
@@ -126,7 +129,8 @@ namespace System.Formats.Asn1
             Text.Encoding encoding,
             ReadOnlySpan<char> str,
             int size
-        ) {
+        )
+        {
             Debug.Assert(size > AsnReader.MaxCERSegmentSize);
 
             byte[] tmp = CryptoPool.Rent(size);

@@ -28,7 +28,8 @@ namespace Microsoft.AspNetCore.Mvc.Filters
         public Task OnResourceExecutionAsync(
             ResourceExecutingContext context,
             ResourceExecutionDelegate next
-        ) {
+        )
+        {
             var httpContext = context.HttpContext;
 
             // Capture the current context into the feature. This will later be used in the end middleware to continue

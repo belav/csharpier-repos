@@ -77,7 +77,8 @@ namespace Newtonsoft.Json.Serialization
         public static bool CanTypeDescriptorConvertString(
             Type type,
             out TypeConverter typeConverter
-        ) {
+        )
+        {
             typeConverter = TypeDescriptor.GetConverter(type);
 
             // use the objectType's TypeConverter if it has one and can convert to a string
@@ -102,7 +103,8 @@ namespace Newtonsoft.Json.Serialization
                         StringComparison.Ordinal
                     )
                     && converterType != typeof(TypeConverter)
-                ) {
+                )
+                {
                     return typeConverter.CanConvertTo(typeof(string));
                 }
             }
@@ -179,7 +181,8 @@ namespace Newtonsoft.Json.Serialization
         public static MemberSerialization GetObjectMemberSerialization(
             Type objectType,
             bool ignoreSerializableAttribute
-        ) {
+        )
+        {
             JsonObjectAttribute? objectAttribute = GetCachedAttribute<JsonObjectAttribute>(
                 objectType
             );
@@ -242,14 +245,16 @@ namespace Newtonsoft.Json.Serialization
         public static NamingStrategy CreateNamingStrategyInstance(
             Type namingStrategyType,
             object[]? args
-        ) {
+        )
+        {
             Func<object[]?, object> converterCreator = CreatorCache.Get(namingStrategyType);
             return (NamingStrategy)converterCreator(args);
         }
 
         public static NamingStrategy? GetContainerNamingStrategy(
             JsonContainerAttribute containerAttribute
-        ) {
+        )
+        {
             if (containerAttribute.NamingStrategyInstance == null)
             {
                 if (containerAttribute.NamingStrategyType == null)
@@ -360,7 +365,8 @@ namespace Newtonsoft.Json.Serialization
                         "System.ComponentModel.DataAnnotations.MetadataTypeAttribute",
                         StringComparison.Ordinal
                     )
-                ) {
+                )
+                {
                     const string metadataClassTypeName = "MetadataClassType";
 
                     if (_metadataTypeAttributeReflectionObject == null)
@@ -480,7 +486,8 @@ namespace Newtonsoft.Json.Serialization
                 provider is FieldInfo fieldInfo
                 && (fieldInfo.Attributes & FieldAttributes.NotSerialized)
                     == FieldAttributes.NotSerialized
-            ) {
+            )
+            {
                 return true;
             }
 
@@ -500,7 +507,8 @@ namespace Newtonsoft.Json.Serialization
                 provider is Type type
                 && (type.GetTypeInfo().Attributes & TypeAttributes.Serializable)
                     == TypeAttributes.Serializable
-            ) {
+            )
+            {
                 return true;
             }
 

@@ -57,7 +57,8 @@ namespace Microsoft.Net.Http.Headers
         public void SortStringWithQualityHeaderValuesByQFactor_SortsCorrectly(
             IEnumerable<string> unsorted,
             IEnumerable<string> expectedSorted
-        ) {
+        )
+        {
             var unsortedValues = StringWithQualityHeaderValue.ParseList(unsorted.ToList());
             var expectedSortedValues = StringWithQualityHeaderValue.ParseList(
                 expectedSorted.ToList()

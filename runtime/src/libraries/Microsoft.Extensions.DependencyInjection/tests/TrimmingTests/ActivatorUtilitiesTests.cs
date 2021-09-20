@@ -25,7 +25,8 @@ class Program
             || serviceC is null
             || serviceD is null
             || serviceE is null
-        ) {
+        )
+        {
             return -1;
         }
 

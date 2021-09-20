@@ -31,7 +31,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UseInferredMemberName
             SyntaxTree syntaxTree,
             AnalyzerOptions options,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             switch (context.Node.Kind())
             {
                 case SyntaxKind.NameColon:
@@ -61,7 +62,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UseInferredMemberName
             AnalyzerOptions options,
             SyntaxTree syntaxTree,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             if (!nameColon.Parent.IsKind(SyntaxKind.Argument, out ArgumentSyntax? argument))
             {
                 return;
@@ -80,7 +82,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UseInferredMemberName
                     argument,
                     parseOptions
                 )
-            ) {
+            )
+            {
                 return;
             }
 
@@ -108,13 +111,15 @@ namespace Microsoft.CodeAnalysis.CSharp.UseInferredMemberName
             AnalyzerOptions options,
             SyntaxTree syntaxTree,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             if (
                 !nameEquals.Parent.IsKind(
                     SyntaxKind.AnonymousObjectMemberDeclarator,
                     out AnonymousObjectMemberDeclaratorSyntax? anonCtor
                 )
-            ) {
+            )
+            {
                 return;
             }
 
@@ -127,7 +132,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UseInferredMemberName
             if (
                 !preference.Value
                 || !CSharpInferredMemberNameSimplifier.CanSimplifyAnonymousTypeMemberName(anonCtor)
-            ) {
+            )
+            {
                 return;
             }
 

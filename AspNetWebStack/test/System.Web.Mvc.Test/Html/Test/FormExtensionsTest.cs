@@ -18,7 +18,8 @@ namespace System.Web.Mvc.Html.Test
         private static void BeginFormHelper(
             Func<HtmlHelper, MvcForm> beginForm,
             string expectedFormTag
-        ) {
+        )
+        {
             // Arrange
             StringWriter writer;
             HtmlHelper htmlHelper = GetFormHelper(out writer);
@@ -162,7 +163,8 @@ window.mvcClientValidationMetadata.push({""Fields"":[],""FormId"":""form_id"",""
         public void BeginFormWithActionController_UrlEncodesController(
             string text,
             string expectedText
-        ) {
+        )
+        {
             BeginFormHelper(
                 helper => helper.BeginForm("action", text),
                 @"<form action="""
@@ -207,7 +209,8 @@ window.mvcClientValidationMetadata.push({""Fields"":[],""FormId"":""form_id"",""
         public void BeginFormWithActionControllerFormMethodHtmlValues_AttributeEncodes_AddedHtmlAttributes(
             string text,
             string expectedText
-        ) {
+        )
+        {
             BeginFormHelper(
                 helper =>
                     helper.BeginForm(
@@ -470,7 +473,8 @@ window.mvcClientValidationMetadata.push({""Fields"":[],""FormId"":""form_id"",""
         public void BeginRouteFormWithRouteNameFormMethodHtmlValues_AttributeEncodes_AddedHtmlAttributes(
             string text,
             string expectedText
-        ) {
+        )
+        {
             BeginFormHelper(
                 helper =>
                     helper.BeginRouteForm("namedroute", FormMethod.Get, new { attribute = text }),

@@ -15,7 +15,8 @@ namespace Microsoft.AspNetCore.Razor.Language.Legacy
             string prefix,
             string directiveText,
             List<RazorDiagnostic> diagnostics
-        ) {
+        )
+        {
             Prefix = prefix;
             DirectiveText = directiveText;
             Diagnostics = diagnostics;

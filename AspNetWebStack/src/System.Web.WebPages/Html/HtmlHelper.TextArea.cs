@@ -24,7 +24,8 @@ namespace System.Web.WebPages.Html
         private static IDictionary<string, object> GetRowsAndColumnsDictionary(
             int rows,
             int columns
-        ) {
+        )
+        {
             Dictionary<string, object> result = new Dictionary<string, object>();
             if (rows > 0)
             {
@@ -70,7 +71,8 @@ namespace System.Web.WebPages.Html
             string name,
             string value,
             IDictionary<string, object> htmlAttributes
-        ) {
+        )
+        {
             if (String.IsNullOrEmpty(name))
             {
                 throw new ArgumentException(
@@ -88,7 +90,8 @@ namespace System.Web.WebPages.Html
             int rows,
             int columns,
             object htmlAttributes
-        ) {
+        )
+        {
             return TextArea(
                 name,
                 value,
@@ -104,7 +107,8 @@ namespace System.Web.WebPages.Html
             int rows,
             int columns,
             IDictionary<string, object> htmlAttributes
-        ) {
+        )
+        {
             if (String.IsNullOrEmpty(name))
             {
                 throw new ArgumentException(
@@ -125,7 +129,8 @@ namespace System.Web.WebPages.Html
             string value,
             IDictionary<string, object> rowsAndColumnsDictionary,
             IDictionary<string, object> htmlAttributes
-        ) {
+        )
+        {
             TagBuilder tagBuilder = new TagBuilder("textarea");
 
             if (UnobtrusiveJavaScriptEnabled)

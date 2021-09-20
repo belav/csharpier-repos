@@ -101,7 +101,8 @@ namespace Microsoft.AspNetCore.Server.HttpSys
         internal unsafe void UnSetDelegationProperty(
             RequestQueue destination,
             bool throwOnError = true
-        ) {
+        )
+        {
             var propertyInfo = new HttpApiTypes.HTTP_BINDING_INFO();
             propertyInfo.Flags = HttpApiTypes.HTTP_FLAGS.NONE;
             propertyInfo.RequestQueueHandle = destination.Handle.DangerousGetHandle();
@@ -119,7 +120,8 @@ namespace Microsoft.AspNetCore.Server.HttpSys
             IntPtr info,
             uint infosize,
             bool throwOnError = true
-        ) {
+        )
+        {
             Debug.Assert(info != IntPtr.Zero, "SetUrlGroupProperty called with invalid pointer");
             CheckDisposed();
 

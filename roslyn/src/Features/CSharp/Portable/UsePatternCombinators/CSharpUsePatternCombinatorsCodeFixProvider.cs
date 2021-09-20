@@ -75,7 +75,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UsePatternCombinators
             ImmutableArray<Diagnostic> diagnostics,
             SyntaxEditor editor,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var semanticModel = await document.GetRequiredSemanticModelAsync(cancellationToken)
                 .ConfigureAwait(false);
             foreach (var diagnostic in diagnostics)
@@ -152,9 +153,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UsePatternCombinators
 
         private class MyCodeAction : CustomCodeActions.DocumentChangeAction
         {
-            public MyCodeAction(
-                Func<CancellationToken, Task<Document>> createChangedDocument
-            ) : base(CSharpAnalyzersResources.Use_pattern_matching, createChangedDocument) { }
+            public MyCodeAction(Func<CancellationToken, Task<Document>> createChangedDocument)
+                : base(CSharpAnalyzersResources.Use_pattern_matching, createChangedDocument) { }
 
             internal override CodeActionPriority Priority => CodeActionPriority.Low;
         }

@@ -135,7 +135,8 @@ public class BringUpTest
         int i1,
         int i2,
         int i3
-    ) {
+    )
+    {
         Console.Write("method_4S4I");
 
         if (i0 != 2)
@@ -213,7 +214,8 @@ public class BringUpTest
         Point p1,
         Point p2,
         Point p3
-    ) {
+    )
+    {
         Console.Write("method_4I4S");
 
         if (i0 != 2)
@@ -483,7 +485,8 @@ public class BringUpTest
         Point p3,
         double d0,
         double d1
-    ) {
+    )
+    {
         Console.Write("method_2I4S2D");
 
         if (i0 != 2)
@@ -561,7 +564,8 @@ public class BringUpTest
         Point p1,
         Point p2,
         Point p3
-    ) {
+    )
+    {
         Console.Write("method_2I2D4S");
 
         if (i0 != 2)
@@ -641,7 +645,8 @@ public class BringUpTest
         Point p3,
         double d2,
         double d3
-    ) {
+    )
+    {
         Console.Write("method_2I2D4S2D");
 
         if (i0 != 2)

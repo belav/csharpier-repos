@@ -789,7 +789,8 @@ catch(bar) { baz(); }"
             string preComment,
             string postComment,
             AcceptedCharactersInternal acceptedCharacters = AcceptedCharactersInternal.Any
-        ) {
+        )
+        {
             ParseDocumentTest(preComment + "@* Foo *@ @* Bar *@" + postComment);
         }
 

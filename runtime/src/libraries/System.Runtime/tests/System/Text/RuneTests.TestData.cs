@@ -186,7 +186,8 @@ namespace System.Text.Tests
             foreach (
                 var obj in GeneralTestData_BmpCodePoints_NoSurrogates()
                     .Concat(GeneralTestData_SupplementaryCodePoints_ValidOnly())
-            ) {
+            )
+            {
                 yield return new object[]
                 {
                     (
@@ -200,7 +201,8 @@ namespace System.Text.Tests
             foreach (
                 var obj in BmpCodePoints_SurrogatesOnly()
                     .Concat(SupplementaryCodePoints_InvalidOnly())
-            ) {
+            )
+            {
                 yield return new object[]
                 {
                     Convert.ToInt32(

@@ -33,7 +33,8 @@ namespace System.Linq.Parallel.Tests
                     counts.DefaultIfEmpty(Sources.OuterLoopCount),
                     x => new[] { 1, 2, 4 }
                 )
-            ) {
+            )
+            {
                 yield return results;
             }
         }
@@ -53,7 +54,8 @@ namespace System.Linq.Parallel.Tests
                     counts.DefaultIfEmpty(Sources.OuterLoopCount),
                     x => Options
                 )
-            ) {
+            )
+            {
                 yield return results;
             }
         }
@@ -106,7 +108,8 @@ namespace System.Linq.Parallel.Tests
             Labeled<ParallelQuery<int>> labeled,
             int count,
             int partitions
-        ) {
+        )
+        {
             if (partitions > 1 && !PlatformDetection.IsThreadingSupported)
             {
                 throw new SkipTestException(nameof(PlatformDetection.IsThreadingSupported));
@@ -133,7 +136,8 @@ namespace System.Linq.Parallel.Tests
             Labeled<ParallelQuery<int>> labeled,
             int count,
             int partitions
-        ) {
+        )
+        {
             Partitioning_Default(labeled, count, partitions);
         }
 
@@ -143,7 +147,8 @@ namespace System.Linq.Parallel.Tests
             Labeled<ParallelQuery<int>> labeled,
             int count,
             int partitions
-        ) {
+        )
+        {
             if (partitions > 1 && !PlatformDetection.IsThreadingSupported)
             {
                 throw new SkipTestException(nameof(PlatformDetection.IsThreadingSupported));
@@ -152,7 +157,8 @@ namespace System.Linq.Parallel.Tests
             int seen = 0;
             foreach (
                 int i in labeled.Item.WithDegreeOfParallelism(partitions).Take(count).Select(i => i)
-            ) {
+            )
+            {
                 Assert.Equal(seen++, i);
             }
         }
@@ -170,7 +176,8 @@ namespace System.Linq.Parallel.Tests
             Labeled<ParallelQuery<int>> labeled,
             int count,
             int partitions
-        ) {
+        )
+        {
             Partitioning_Striped(labeled, count, partitions);
         }
 
@@ -180,7 +187,8 @@ namespace System.Linq.Parallel.Tests
             Labeled<ParallelQuery<int>> labeled,
             int count,
             ParallelMergeOptions options
-        ) {
+        )
+        {
             _ = count;
             int seen = 0;
             foreach (int i in labeled.Item.WithMergeOptions(options).Select(i => i))
@@ -202,7 +210,8 @@ namespace System.Linq.Parallel.Tests
             Labeled<ParallelQuery<int>> labeled,
             int count,
             ParallelMergeOptions options
-        ) {
+        )
+        {
             Merge_Ordered(labeled, count, options);
         }
 
@@ -217,7 +226,8 @@ namespace System.Linq.Parallel.Tests
             Labeled<ParallelQuery<int>> labeled,
             int count,
             ParallelMergeOptions options
-        ) {
+        )
+        {
             Assert.Equal(
                 0,
                 labeled.Item.WithDegreeOfParallelism(count - 1).WithMergeOptions(options).First()
@@ -234,7 +244,8 @@ namespace System.Linq.Parallel.Tests
             Labeled<ParallelQuery<int>> labeled,
             int count,
             ParallelMergeOptions options
-        ) {
+        )
+        {
             int countdown = count;
             Func<int, int> down = i =>
             {
@@ -273,7 +284,8 @@ namespace System.Linq.Parallel.Tests
         public static void WithMergeOptions_Multiple(
             ParallelMergeOptions first,
             ParallelMergeOptions second
-        ) {
+        )
+        {
             Assert.Throws<InvalidOperationException>(
                 () =>
                     ParallelEnumerable.Range(0, 1).WithMergeOptions(first).WithMergeOptions(second)
@@ -308,7 +320,8 @@ namespace System.Linq.Parallel.Tests
             int leftCount,
             Labeled<ParallelQuery<int>> right,
             int rightCount
-        ) {
+        )
+        {
             _ = leftCount;
             _ = rightCount;
             ParallelQuery<int> query = left.Item.WithExecutionMode(
@@ -350,7 +363,8 @@ namespace System.Linq.Parallel.Tests
             int leftCount,
             Labeled<ParallelQuery<int>> right,
             int rightCount
-        ) {
+        )
+        {
             _ = leftCount;
             _ = rightCount;
             ParallelQuery<int> query = Partitioner.Create(

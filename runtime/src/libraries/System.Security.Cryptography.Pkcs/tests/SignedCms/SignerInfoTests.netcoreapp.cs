@@ -153,7 +153,8 @@ namespace System.Security.Cryptography.Pkcs.Tests
         [MemberData(nameof(SignedDocumentsWithAttributesTestData))]
         public static void SignerInfo_RemoveUnsignedAttributes_RemoveAllAttributesFromBeginning(
             byte[] document
-        ) {
+        )
+        {
             SignedCms cms = new SignedCms();
             cms.Decode(document);
 
@@ -179,7 +180,8 @@ namespace System.Security.Cryptography.Pkcs.Tests
         [MemberData(nameof(SignedDocumentsWithAttributesTestData))]
         public static void SignerInfo_RemoveUnsignedAttributes_RemoveAllAttributesFromEnd(
             byte[] document
-        ) {
+        )
+        {
             SignedCms cms = new SignedCms();
             cms.Decode(document);
 
@@ -278,7 +280,8 @@ namespace System.Security.Cryptography.Pkcs.Tests
             using (
                 X509Certificate2 signerCert =
                     Certificates.RSA2048SignatureOnly.TryGetCertificateWithPrivateKey()
-            ) {
+            )
+            {
                 CmsSigner signer = new CmsSigner(
                     SubjectIdentifierType.IssuerAndSerialNumber,
                     signerCert
@@ -289,7 +292,8 @@ namespace System.Security.Cryptography.Pkcs.Tests
             using (
                 X509Certificate2 counterSigner1cert =
                     Certificates.Dsa1024.TryGetCertificateWithPrivateKey()
-            ) {
+            )
+            {
                 CmsSigner counterSigner = new CmsSigner(
                     SubjectIdentifierType.IssuerAndSerialNumber,
                     counterSigner1cert
@@ -302,7 +306,8 @@ namespace System.Security.Cryptography.Pkcs.Tests
             using (
                 X509Certificate2 counterSigner2cert =
                     Certificates.ECDsaP256Win.TryGetCertificateWithPrivateKey()
-            ) {
+            )
+            {
                 CmsSigner counterSigner = new CmsSigner(
                     SubjectIdentifierType.IssuerAndSerialNumber,
                     counterSigner2cert
@@ -546,7 +551,8 @@ namespace System.Security.Cryptography.Pkcs.Tests
         private static void VerifyAttributesContainsAll(
             CryptographicAttributeObjectCollection attributes,
             List<AsnEncodedData> expectedAttributes
-        ) {
+        )
+        {
             var indices = new HashSet<int>();
             foreach (CryptographicAttributeObject attribute in attributes)
             {
@@ -576,7 +582,8 @@ namespace System.Security.Cryptography.Pkcs.Tests
 
         private static List<AsnEncodedData> GetAllAsnEncodedDataFromAttributes(
             CryptographicAttributeObjectCollection attributes
-        ) {
+        )
+        {
             var ret = new List<AsnEncodedData>();
             foreach (CryptographicAttributeObject attribute in attributes)
             {

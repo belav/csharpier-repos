@@ -107,7 +107,8 @@ WHERE [o].[CustomerID] = N'ALFKI'"
 
         public override async Task KeylessEntity_with_defining_query_and_correlated_collection(
             bool async
-        ) {
+        )
+        {
             await base.KeylessEntity_with_defining_query_and_correlated_collection(async);
 
             AssertSql(
@@ -189,7 +190,8 @@ LEFT JOIN [Alphabetical list of products] AS [a] ON [o].[CustomerID] = [a].[Cate
 
         public override async Task Collection_correlated_with_keyless_entity_in_predicate_works(
             bool async
-        ) {
+        )
+        {
             await base.Collection_correlated_with_keyless_entity_in_predicate_works(async);
 
             AssertSql(

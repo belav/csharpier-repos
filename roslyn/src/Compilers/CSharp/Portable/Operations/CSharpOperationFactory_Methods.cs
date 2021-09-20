@@ -46,7 +46,8 @@ namespace Microsoft.CodeAnalysis.Operations
             ArgumentKind kind,
             IParameterSymbol? parameter,
             BoundExpression expression
-        ) {
+        )
+        {
             // put argument syntax to argument operation
             IOperation value = Create(expression);
             (SyntaxNode syntax, bool isImplicit) = expression.Syntax
@@ -68,7 +69,8 @@ namespace Microsoft.CodeAnalysis.Operations
         internal IVariableInitializerOperation? CreateVariableDeclaratorInitializer(
             BoundLocalDeclaration boundLocalDeclaration,
             SyntaxNode syntax
-        ) {
+        )
+        {
             if (boundLocalDeclaration.InitializerOpt != null)
             {
                 SyntaxNode? initializerSyntax = null;
@@ -105,7 +107,8 @@ namespace Microsoft.CodeAnalysis.Operations
         private IVariableDeclaratorOperation CreateVariableDeclaratorInternal(
             BoundLocalDeclaration boundLocalDeclaration,
             SyntaxNode syntax
-        ) {
+        )
+        {
             ILocalSymbol symbol = boundLocalDeclaration.LocalSymbol.GetPublicSymbol();
             bool isImplicit = false;
 
@@ -156,7 +159,8 @@ namespace Microsoft.CodeAnalysis.Operations
                 && symbol.IsStatic
                 && instance.WasCompilerGenerated
                 && instance.Kind == BoundKind.ThisReference
-            ) {
+            )
+            {
                 return null;
             }
 
@@ -177,7 +181,8 @@ namespace Microsoft.CodeAnalysis.Operations
 
         internal IEventReferenceOperation CreateBoundEventAccessOperation(
             BoundEventAssignmentOperator boundEventAssignmentOperator
-        ) {
+        )
+        {
             SyntaxNode syntax = boundEventAssignmentOperator.Syntax;
             // BoundEventAssignmentOperator doesn't hold on to BoundEventAccess provided during binding.
             // Based on the implementation of those two bound node types, the following data can be retrieved w/o changing BoundEventAssignmentOperator:
@@ -229,7 +234,8 @@ namespace Microsoft.CodeAnalysis.Operations
                 if (
                     boundDelegateCreationExpression.Argument.Kind == BoundKind.MethodGroup
                     && boundDelegateCreationExpression.MethodOpt != null
-                ) {
+                )
+                {
                     // If this is a method binding, and a valid candidate method was found, then we want to expose
                     // this child as an IMethodBindingReference. Otherwise, we want to just delegate to the standard
                     // CSharpOperationFactory behavior. Note we don't check HasErrors here because if we have a method group,
@@ -268,7 +274,8 @@ namespace Microsoft.CodeAnalysis.Operations
         internal ImmutableArray<IArgumentOperation> DeriveArguments(
             BoundNode containingExpression,
             bool isObjectOrCollectionInitializer
-        ) {
+        )
+        {
             switch (containingExpression.Kind)
             {
                 case BoundKind.ObjectInitializerMember:
@@ -361,7 +368,8 @@ namespace Microsoft.CodeAnalysis.Operations
             bool expanded,
             SyntaxNode invocationSyntax,
             bool invokedAsExtensionMethod = false
-        ) {
+        )
+        {
             // We can simply return empty array only if both parameters and boundArguments are empty, because:
             // - if only parameters is empty, there's error in code but we still need to return provided expression.
             // - if boundArguments is empty, then either there's error or we need to provide values for optional/param-array parameters.
@@ -387,7 +395,8 @@ namespace Microsoft.CodeAnalysis.Operations
             BoundNode? receiverOpt,
             ImmutableArray<BoundExpression> arguments,
             BoundExpression? additionalNodeOpt = null
-        ) {
+        )
+        {
             var builder = ArrayBuilder<BoundNode>.GetInstance();
 
             if (
@@ -400,7 +409,8 @@ namespace Microsoft.CodeAnalysis.Operations
                         && receiverOpt.Kind != BoundKind.ObjectOrCollectionValuePlaceholder
                     )
                 )
-            ) {
+            )
+            {
                 builder.Add(receiverOpt);
             }
 
@@ -417,7 +427,8 @@ namespace Microsoft.CodeAnalysis.Operations
             SyntaxNode syntax,
             ITypeSymbol type,
             bool isImplicit
-        ) {
+        )
+        {
             // For error cases and non-assignment initializers, the binder generates only the argument.
             Debug.Assert(arguments.Length >= declarations.Length);
 
@@ -500,7 +511,8 @@ namespace Microsoft.CodeAnalysis.Operations
                 ImmutableArray<BoundAnonymousPropertyDeclaration> declarations,
                 PropertySymbol currentProperty,
                 ref int currentDeclarationIndex
-            ) {
+            )
+            {
                 if (currentDeclarationIndex >= declarations.Length)
                 {
                     return null;
@@ -522,7 +534,8 @@ namespace Microsoft.CodeAnalysis.Operations
         {
             internal static bool IsPostfixIncrementOrDecrement(
                 CSharp.UnaryOperatorKind operatorKind
-            ) {
+            )
+            {
                 switch (operatorKind.Operator())
                 {
                     case CSharp.UnaryOperatorKind.PostfixIncrement:
@@ -549,7 +562,8 @@ namespace Microsoft.CodeAnalysis.Operations
 
             internal static UnaryOperatorKind DeriveUnaryOperatorKind(
                 CSharp.UnaryOperatorKind operatorKind
-            ) {
+            )
+            {
                 switch (operatorKind.Operator())
                 {
                     case CSharp.UnaryOperatorKind.UnaryPlus:
@@ -576,7 +590,8 @@ namespace Microsoft.CodeAnalysis.Operations
 
             internal static BinaryOperatorKind DeriveBinaryOperatorKind(
                 CSharp.BinaryOperatorKind operatorKind
-            ) {
+            )
+            {
                 switch (operatorKind.OperatorWithLogical())
                 {
                     case CSharp.BinaryOperatorKind.Addition:

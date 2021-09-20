@@ -75,7 +75,8 @@ namespace System.Runtime.Serialization
             string rootName,
             string rootNamespace,
             IEnumerable<Type>? knownTypes
-        ) {
+        )
+        {
             XmlDictionary dictionary = new XmlDictionary(2);
             Initialize(
                 type,
@@ -101,7 +102,8 @@ namespace System.Runtime.Serialization
             XmlDictionaryString rootName,
             XmlDictionaryString rootNamespace,
             IEnumerable<Type>? knownTypes
-        ) {
+        )
+        {
             Initialize(
                 type,
                 rootName,
@@ -121,7 +123,8 @@ namespace System.Runtime.Serialization
             int maxItemsInObjectGraph,
             bool ignoreExtensionDataObject,
             bool preserveObjectReferences
-        ) {
+        )
+        {
             Initialize(
                 type,
                 knownTypes,
@@ -161,7 +164,8 @@ namespace System.Runtime.Serialization
             bool preserveObjectReferences,
             DataContractResolver? dataContractResolver,
             bool serializeReadOnlyTypes
-        ) {
+        )
+        {
             CheckNull(type, nameof(type));
             _rootType = type;
 
@@ -200,7 +204,8 @@ namespace System.Runtime.Serialization
             bool preserveObjectReferences,
             DataContractResolver? dataContractResolver,
             bool serializeReadOnlyTypes
-        ) {
+        )
+        {
             Initialize(
                 type,
                 knownTypes,
@@ -315,7 +320,8 @@ namespace System.Runtime.Serialization
             XmlWriterDelegator writer,
             object? graph,
             DataContractResolver? dataContractResolver
-        ) {
+        )
+        {
             InternalWriteStartObject(writer, graph);
             InternalWriteObjectContent(writer, graph, dataContractResolver);
             InternalWriteEndObject(writer);
@@ -360,7 +366,8 @@ namespace System.Runtime.Serialization
             XmlDictionaryWriter writer,
             object? graph,
             DataContractResolver? dataContractResolver
-        ) {
+        )
+        {
             WriteObjectHandleExceptions(
                 new XmlWriterDelegator(writer),
                 graph,
@@ -400,7 +407,8 @@ namespace System.Runtime.Serialization
             XmlDictionaryReader reader,
             bool verifyObjectName,
             DataContractResolver? dataContractResolver
-        ) {
+        )
+        {
             return ReadObjectHandleExceptions(
                 new XmlReaderDelegator(reader),
                 verifyObjectName,
@@ -428,7 +436,8 @@ namespace System.Runtime.Serialization
             XmlWriterDelegator writer,
             object? graph,
             DataContractResolver? dataContractResolver
-        ) {
+        )
+        {
             if (MaxItemsInObjectGraph == 0)
                 throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
                     XmlObjectSerializer.CreateSerializationException(
@@ -528,11 +537,13 @@ namespace System.Runtime.Serialization
             DataContract declaredTypeContract,
             Type declaredType,
             Type objectType
-        ) {
+        )
+        {
             if (
                 declaredType.IsInterface
                 && CollectionDataContract.IsCollectionInterface(declaredType)
-            ) {
+            )
+            {
                 return declaredTypeContract;
             }
             else if (declaredType.IsArray) //Array covariance is not supported in XSD
@@ -560,7 +571,8 @@ namespace System.Runtime.Serialization
         internal override object? InternalReadObject(
             XmlReaderDelegator xmlReader,
             bool verifyObjectName
-        ) {
+        )
+        {
             return InternalReadObject(xmlReader, verifyObjectName, null);
         }
 
@@ -568,7 +580,8 @@ namespace System.Runtime.Serialization
             XmlReaderDelegator xmlReader,
             bool verifyObjectName,
             DataContractResolver? dataContractResolver
-        ) {
+        )
+        {
             if (MaxItemsInObjectGraph == 0)
                 throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
                     XmlObjectSerializer.CreateSerializationException(
@@ -616,7 +629,8 @@ namespace System.Runtime.Serialization
             DataContract contract = RootContract;
             if (
                 contract.IsPrimitive && object.ReferenceEquals(contract.UnderlyingType, _rootType) /*handle Nullable<T> differently*/
-            ) {
+            )
+            {
                 return contract.ReadXmlValue(xmlReader, null);
             }
 
@@ -659,7 +673,8 @@ namespace System.Runtime.Serialization
             object? oldObj,
             Type surrogatedDeclaredType,
             ref Type objType
-        ) {
+        )
+        {
             object? obj = DataContractSurrogateCaller.GetObjectToSerialize(
                 serializationSurrogateProvider,
                 oldObj,
@@ -676,7 +691,8 @@ namespace System.Runtime.Serialization
         internal static Type GetSurrogatedType(
             ISerializationSurrogateProvider serializationSurrogateProvider,
             Type type
-        ) {
+        )
+        {
             return DataContractSurrogateCaller.GetDataContractType(
                 serializationSurrogateProvider,
                 DataContract.UnwrapNullableType(type)

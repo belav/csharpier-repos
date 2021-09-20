@@ -382,7 +382,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Http3
         private bool IsPseudoHeaderField(
             ReadOnlySpan<byte> name,
             out PseudoHeaderFields headerField
-        ) {
+        )
+        {
             headerField = PseudoHeaderFields.None;
 
             if (name.IsEmpty || name[0] != (byte)':')
@@ -421,7 +422,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Http3
         private static bool IsConnectionSpecificHeaderField(
             ReadOnlySpan<byte> name,
             ReadOnlySpan<byte> value
-        ) {
+        )
+        {
             return name.SequenceEqual(ConnectionBytes)
                 || (name.SequenceEqual(TeBytes) && !value.SequenceEqual(TrailersBytes));
         }
@@ -505,7 +507,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Http3
                                     _incomingFrame,
                                     out var framePayload
                                 )
-                            ) {
+                            )
+                            {
                                 Log.Http3FrameReceived(
                                     ConnectionId,
                                     _streamIdFeature.StreamId,
@@ -769,7 +772,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Http3
                     initiator,
                     GracefulCloseInitiator.None
                 ) == GracefulCloseInitiator.None
-            ) {
+            )
+            {
                 Input.CancelPendingRead();
             }
         }
@@ -829,7 +833,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Http3
                 if (
                     !string.IsNullOrEmpty(RequestHeaders[HeaderNames.Scheme])
                     || !string.IsNullOrEmpty(RequestHeaders[HeaderNames.Path])
-                ) {
+                )
+                {
                     Abort(
                         new ConnectionAbortedException(
                             CoreStrings.Http3ErrorConnectMustNotSendSchemeOrPath
@@ -858,7 +863,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Http3
                     Scheme,
                     StringComparison.OrdinalIgnoreCase
                 )
-            ) {
+            )
+            {
                 var str = CoreStrings.FormatHttp3StreamErrorSchemeMismatch(
                     RequestHeaders[HeaderNames.Scheme],
                     Scheme

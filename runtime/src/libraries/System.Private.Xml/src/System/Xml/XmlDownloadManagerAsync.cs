@@ -38,7 +38,8 @@ namespace System.Xml
             Uri uri,
             ICredentials? credentials,
             IWebProxy? proxy
-        ) {
+        )
+        {
             var handler = new HttpClientHandler();
             using (var client = new HttpClient(handler))
             {

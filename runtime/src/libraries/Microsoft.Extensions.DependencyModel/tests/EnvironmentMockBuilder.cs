@@ -51,7 +51,8 @@ namespace Microsoft.Extensions.DependencyModel.Tests
                 Dictionary<string, string> variables,
                 Dictionary<string, object> appContextData,
                 bool isWindows
-            ) {
+            )
+            {
                 _variables = variables;
                 _appContextData = appContextData;
                 _isWindows = isWindows;

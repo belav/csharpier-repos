@@ -16,7 +16,8 @@ namespace System.Buffers
             in SequencePosition position,
             out ReadOnlyMemory<T> memory,
             out SequencePosition next
-        ) {
+        )
+        {
             object? positionObject = position.GetObject();
             next = default;
 
@@ -270,7 +271,8 @@ namespace System.Buffers
         internal SequencePosition Seek(
             long offset,
             ExceptionArgument exceptionArgument = ExceptionArgument.offset
-        ) {
+        )
+        {
             object? startObject = _startObject;
             object? endObject = _endObject;
             int startIndex = GetIndex(_startInteger);
@@ -359,7 +361,8 @@ namespace System.Buffers
             int endIndex,
             long offset,
             ExceptionArgument argument
-        ) {
+        )
+        {
             Debug.Assert(currentSegment != null); // currentSegment parameter is marked as nullable as the parameter is reused/reassigned in the body
             Debug.Assert(offset >= 0);
 
@@ -422,7 +425,8 @@ namespace System.Buffers
                         startRange,
                         (ulong)(((ReadOnlySequenceSegment<T>)endObject!).RunningIndex + endIndex)
                     )
-                ) {
+                )
+                {
                     ThrowHelper.ThrowArgumentOutOfRangeException_PositionOutOfRange();
                 }
             }
@@ -433,7 +437,8 @@ namespace System.Buffers
             object? sliceStartObject,
             uint sliceEndIndex,
             object? sliceEndObject
-        ) {
+        )
+        {
             object? startObject = _startObject;
             object? endObject = _endObject;
 
@@ -449,7 +454,8 @@ namespace System.Buffers
                     || sliceStartIndex > sliceEndIndex
                     || sliceStartIndex < startIndex
                     || sliceEndIndex > endIndex
-                ) {
+                )
+                {
                     ThrowHelper.ThrowArgumentOutOfRangeException_PositionOutOfRange();
                 }
             }
@@ -486,7 +492,8 @@ namespace System.Buffers
                         )
                     || sliceEndRange
                         > (ulong)(((ReadOnlySequenceSegment<T>)endObject!).RunningIndex + endIndex)
-                ) {
+                )
+                {
                     ThrowHelper.ThrowArgumentOutOfRangeException_PositionOutOfRange();
                 }
             }
@@ -499,7 +506,8 @@ namespace System.Buffers
             object endObject,
             int endIndex,
             long length
-        ) {
+        )
+        {
             int currentLength = startSegment.Memory.Length - startIndex;
 
             if (currentLength > length)
@@ -607,7 +615,8 @@ namespace System.Buffers
             out int startIndex,
             [NotNullWhen(true)] out ReadOnlySequenceSegment<T>? endSegment,
             out int endIndex
-        ) {
+        )
+        {
             object? startObject = _startObject;
 
             // Default or not MultiSegment
@@ -652,7 +661,8 @@ namespace System.Buffers
             [NotNullWhen(true)] out string? text,
             out int start,
             out int length
-        ) {
+        )
+        {
             if (typeof(T) != typeof(char) || GetSequenceType() != SequenceType.String)
             {
                 start = 0;
@@ -788,7 +798,8 @@ namespace System.Buffers
             int startIndex,
             int endIndex,
             bool hasMultipleSegments
-        ) {
+        )
+        {
             Debug.Assert(startIndex < 0);
             if (hasMultipleSegments)
                 ThrowHelper.ThrowInvalidOperationException_EndPositionNotReached();

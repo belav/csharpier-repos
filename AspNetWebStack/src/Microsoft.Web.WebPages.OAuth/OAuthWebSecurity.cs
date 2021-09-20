@@ -81,7 +81,8 @@ namespace Microsoft.Web.WebPages.OAuth
             string appId,
             string appSecret,
             string displayName
-        ) {
+        )
+        {
             RegisterFacebookClient(
                 appId,
                 appSecret,
@@ -102,7 +103,8 @@ namespace Microsoft.Web.WebPages.OAuth
             string appSecret,
             string displayName,
             IDictionary<string, object> extraData
-        ) {
+        )
+        {
             RegisterClient(new FacebookClient(appId, appSecret), displayName, extraData);
         }
 
@@ -126,7 +128,8 @@ namespace Microsoft.Web.WebPages.OAuth
             string clientId,
             string clientSecret,
             string displayName
-        ) {
+        )
+        {
             RegisterMicrosoftClient(
                 clientId,
                 clientSecret,
@@ -147,7 +150,8 @@ namespace Microsoft.Web.WebPages.OAuth
             string clientSecret,
             string displayName,
             IDictionary<string, object> extraData
-        ) {
+        )
+        {
             RegisterClient(new MicrosoftClient(clientId, clientSecret), displayName, extraData);
         }
 
@@ -171,7 +175,8 @@ namespace Microsoft.Web.WebPages.OAuth
             string consumerKey,
             string consumerSecret,
             string displayName
-        ) {
+        )
+        {
             RegisterTwitterClient(
                 consumerKey,
                 consumerSecret,
@@ -192,7 +197,8 @@ namespace Microsoft.Web.WebPages.OAuth
             string consumerSecret,
             string displayName,
             IDictionary<string, object> extraData
-        ) {
+        )
+        {
             var twitterClient = new TwitterClient(consumerKey, consumerSecret);
             RegisterClient(twitterClient, displayName, extraData);
         }
@@ -217,7 +223,8 @@ namespace Microsoft.Web.WebPages.OAuth
             string consumerKey,
             string consumerSecret,
             string displayName
-        ) {
+        )
+        {
             RegisterLinkedInClient(
                 consumerKey,
                 consumerSecret,
@@ -238,7 +245,8 @@ namespace Microsoft.Web.WebPages.OAuth
             string consumerSecret,
             string displayName,
             IDictionary<string, object> extraData
-        ) {
+        )
+        {
             var linkedInClient = new LinkedInClient(consumerKey, consumerSecret);
             RegisterClient(linkedInClient, displayName, extraData);
         }
@@ -268,7 +276,8 @@ namespace Microsoft.Web.WebPages.OAuth
         public static void RegisterGoogleClient(
             string displayName,
             IDictionary<string, object> extraData
-        ) {
+        )
+        {
             RegisterClient(new GoogleOpenIdClient(), displayName, extraData);
         }
 
@@ -297,7 +306,8 @@ namespace Microsoft.Web.WebPages.OAuth
         public static void RegisterYahooClient(
             string displayName,
             IDictionary<string, object> extraData
-        ) {
+        )
+        {
             RegisterClient(new YahooOpenIdClient(), displayName, extraData);
         }
 
@@ -322,7 +332,8 @@ namespace Microsoft.Web.WebPages.OAuth
             IAuthenticationClient client,
             string displayName,
             IDictionary<string, object> extraData
-        ) {
+        )
+        {
             if (client == null)
             {
                 throw new ArgumentNullException("client");
@@ -386,7 +397,8 @@ namespace Microsoft.Web.WebPages.OAuth
             HttpContextBase context,
             string provider,
             string returnUrl
-        ) {
+        )
+        {
             IAuthenticationClient client = GetOAuthClient(provider);
             var securityManager = new OpenAuthSecurityManager(context, client, OAuthDataProvider);
             securityManager.RequestAuthentication(returnUrl);
@@ -431,7 +443,8 @@ namespace Microsoft.Web.WebPages.OAuth
         internal static AuthenticationResult VerifyAuthenticationCore(
             HttpContextBase context,
             string returnUrl
-        ) {
+        )
+        {
             string providerName = OpenAuthSecurityManager.GetProviderName(context);
             if (String.IsNullOrEmpty(providerName))
             {
@@ -474,7 +487,8 @@ namespace Microsoft.Web.WebPages.OAuth
             string providerName,
             string providerUserId,
             bool createPersistentCookie
-        ) {
+        )
+        {
             if (HttpContext.Current == null)
             {
                 throw new InvalidOperationException(WebResources.HttpContextNotAvailable);
@@ -493,7 +507,8 @@ namespace Microsoft.Web.WebPages.OAuth
             string providerName,
             string providerUserId,
             bool createPersistentCookie
-        ) {
+        )
+        {
             var provider = GetOAuthClient(providerName);
             var securityManager = new OpenAuthSecurityManager(context, provider, OAuthDataProvider);
             return securityManager.Login(providerUserId, createPersistentCookie);
@@ -514,7 +529,8 @@ namespace Microsoft.Web.WebPages.OAuth
             string providerName,
             string providerUserId,
             string userName
-        ) {
+        )
+        {
             ExtendedMembershipProvider provider = VerifyProvider();
             provider.CreateOrUpdateOAuthAccount(providerName, providerUserId, userName);
         }
@@ -612,7 +628,8 @@ namespace Microsoft.Web.WebPages.OAuth
         public static bool TryGetOAuthClientData(
             string providerName,
             out AuthenticationClientData clientData
-        ) {
+        )
+        {
             if (providerName == null)
             {
                 throw new ArgumentNullException("providerName");
@@ -702,7 +719,8 @@ namespace Microsoft.Web.WebPages.OAuth
             string data,
             out string providerName,
             out string providerUserId
-        ) {
+        )
+        {
             if (data == null)
             {
                 throw new ArgumentNullException("data");

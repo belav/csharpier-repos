@@ -49,7 +49,8 @@ namespace System.Numerics
                 uint* l = left,
                     r = right,
                     b = &bits[0]
-            ) {
+            )
+            {
                 Add(l, left.Length, r, right.Length, b, bits.Length);
             }
 
@@ -63,7 +64,8 @@ namespace System.Numerics
             int rightLength,
             uint* bits,
             int bitsLength
-        ) {
+        )
+        {
             Debug.Assert(leftLength >= 0);
             Debug.Assert(rightLength >= 0);
             Debug.Assert(leftLength >= rightLength);
@@ -163,7 +165,8 @@ namespace System.Numerics
                 uint* l = left,
                     r = right,
                     b = bits
-            ) {
+            )
+            {
                 Subtract(l, left.Length, r, right.Length, b, bits.Length);
             }
 
@@ -177,7 +180,8 @@ namespace System.Numerics
             int rightLength,
             uint* bits,
             int bitsLength
-        ) {
+        )
+        {
             Debug.Assert(leftLength >= 0);
             Debug.Assert(rightLength >= 0);
             Debug.Assert(leftLength >= rightLength);
@@ -213,7 +217,8 @@ namespace System.Numerics
             int leftLength,
             uint* right,
             int rightLength
-        ) {
+        )
+        {
             Debug.Assert(leftLength >= 0);
             Debug.Assert(rightLength >= 0);
             Debug.Assert(leftLength >= rightLength);

@@ -32,7 +32,8 @@ namespace System.Linq
         public static IOrderedEnumerable<TSource> ThenBy<TSource, TKey>(
             this IOrderedEnumerable<TSource> source,
             Func<TSource, TKey> keySelector
-        ) {
+        )
+        {
             if (source == null)
             {
                 ThrowHelper.ThrowArgumentNullException(ExceptionArgument.source);
@@ -45,7 +46,8 @@ namespace System.Linq
             this IOrderedEnumerable<TSource> source,
             Func<TSource, TKey> keySelector,
             IComparer<TKey>? comparer
-        ) {
+        )
+        {
             if (source == null)
             {
                 ThrowHelper.ThrowArgumentNullException(ExceptionArgument.source);
@@ -57,7 +59,8 @@ namespace System.Linq
         public static IOrderedEnumerable<TSource> ThenByDescending<TSource, TKey>(
             this IOrderedEnumerable<TSource> source,
             Func<TSource, TKey> keySelector
-        ) {
+        )
+        {
             if (source == null)
             {
                 ThrowHelper.ThrowArgumentNullException(ExceptionArgument.source);
@@ -70,7 +73,8 @@ namespace System.Linq
             this IOrderedEnumerable<TSource> source,
             Func<TSource, TKey> keySelector,
             IComparer<TKey>? comparer
-        ) {
+        )
+        {
             if (source == null)
             {
                 ThrowHelper.ThrowArgumentNullException(ExceptionArgument.source);

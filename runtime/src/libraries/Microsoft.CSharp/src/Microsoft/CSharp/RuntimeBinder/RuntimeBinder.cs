@@ -47,7 +47,8 @@ namespace Microsoft.CSharp.RuntimeBinder
             Expression[] parameters,
             DynamicMetaObject[] args,
             out DynamicMetaObject deferredBinding
-        ) {
+        )
+        {
             // The lock is here to protect this instance of the binder from itself
             // when called on multiple threads. The cost in time of a single lock
             // on a single thread appears to be negligible and dominated by the cost
@@ -77,7 +78,8 @@ namespace Microsoft.CSharp.RuntimeBinder
             Expression[] parameters,
             DynamicMetaObject[] args,
             out DynamicMetaObject deferredBinding
-        ) {
+        )
+        {
             Debug.Assert(args.Length >= 1);
 
             ArgumentObject[] arguments = CreateArgumentArray(payload, parameters, args);
@@ -146,7 +148,8 @@ namespace Microsoft.CSharp.RuntimeBinder
             DynamicMetaObject[] args,
             LocalVariableSymbol[] locals,
             out DynamicMetaObject deferredBinding
-        ) {
+        )
+        {
             // This method deals with any deferrals we need to do. We check deferrals up front
             // and bail early if we need to do them.
 
@@ -210,7 +213,8 @@ namespace Microsoft.CSharp.RuntimeBinder
             Expression[] parameters,
             Scope pScope,
             Expr pResult
-        ) {
+        )
+        {
             // (3) - Place the result in a return statement and create the ExprBoundLambda.
             ExprBoundLambda boundLambda = GenerateBoundLambda(pScope, pResult);
 
@@ -229,7 +233,8 @@ namespace Microsoft.CSharp.RuntimeBinder
             Expression param,
             DynamicMetaObject arg,
             int index
-        ) {
+        )
+        {
             Type t = argInfo.UseCompileTimeType ? param.Type : arg.LimitType;
             Debug.Assert(t != null);
 
@@ -275,7 +280,8 @@ namespace Microsoft.CSharp.RuntimeBinder
             ICSharpBinder payload,
             Expression[] parameters,
             DynamicMetaObject[] args
-        ) {
+        )
+        {
             // Check the payloads to see whether or not we need to get the runtime types for
             // these arguments.
 
@@ -302,7 +308,8 @@ namespace Microsoft.CSharp.RuntimeBinder
             ICSharpInvokeOrInvokeMemberBinder callOrInvoke,
             Type callingType,
             ArgumentObject[] arguments
-        ) {
+        )
+        {
             Type type;
 
             if (callOrInvoke.StaticCall)
@@ -330,7 +337,8 @@ namespace Microsoft.CSharp.RuntimeBinder
             if (
                 callOrInvoke.Name.StartsWith("set_", StringComparison.Ordinal)
                 || callOrInvoke.Name.StartsWith("get_", StringComparison.Ordinal)
-            ) {
+            )
+            {
                 SymbolTable.PopulateSymbolTableWithName(
                     callOrInvoke.Name.Substring(4), //remove prefix
                     callOrInvoke.TypeArguments,
@@ -378,7 +386,8 @@ namespace Microsoft.CSharp.RuntimeBinder
             Scope pScope,
             ArgumentObject[] arguments,
             Expression[] parameterExpressions
-        ) {
+        )
+        {
             // We use the compile time types for the local variables, and then
             // cast them to the runtime types for the expression tree.
             LocalVariableSymbol[] locals = new LocalVariableSymbol[parameterExpressions.Length];
@@ -469,7 +478,8 @@ namespace Microsoft.CSharp.RuntimeBinder
             LocalVariableSymbol[] locals,
             int startIndex,
             int endIndex
-        ) {
+        )
+        {
             Expr args = null;
             Expr last = null;
 
@@ -584,7 +594,8 @@ namespace Microsoft.CSharp.RuntimeBinder
             Type[] typeArguments,
             Expr callingObject,
             SYMKIND kind
-        ) {
+        )
+        {
             Name name = NameManager.Add(Name);
             AggregateType callingType;
 
@@ -637,7 +648,8 @@ namespace Microsoft.CSharp.RuntimeBinder
                 if (
                     SymbolTable.AggregateContainsMethod(t.OwningAggregate, Name, mask)
                     && distinctCallingTypes.Add(t)
-                ) {
+                )
+                {
                     callingTypes.Add(t);
                 }
 
@@ -723,7 +735,8 @@ namespace Microsoft.CSharp.RuntimeBinder
             Expr callingObject,
             Expr arguments,
             BindingFlag bindFlags
-        ) {
+        )
+        {
             IndexerSymbol index = swt.Sym as IndexerSymbol;
             ExprMemberGroup memgroup = CreateMemberGroupExpr(
                 index.name.Text,
@@ -781,7 +794,8 @@ namespace Microsoft.CSharp.RuntimeBinder
             ICSharpInvokeOrInvokeMemberBinder payload,
             ArgumentObject[] arguments,
             LocalVariableSymbol[] locals
-        ) {
+        )
+        {
             // Here we have a regular call, so create the calling object off of the first
             // parameter and pass it through.
             Expr callingObject;
@@ -822,7 +836,8 @@ namespace Microsoft.CSharp.RuntimeBinder
             Expr callingObject,
             ArgumentObject[] arguments,
             LocalVariableSymbol[] locals
-        ) {
+        )
+        {
             if (payload is InvokeBinder && !callingObject.Type.IsDelegateType)
             {
                 throw Error.BindInvokeFailedNonDelegate();
@@ -930,7 +945,8 @@ namespace Microsoft.CSharp.RuntimeBinder
                     payload.Name.StartsWith("get_", StringComparison.Ordinal)
                     && ((MethodSymbol)swt.Sym).Params.Count > 0
                 )
-            ) {
+            )
+            {
                 memGroup.Flags &= ~EXPRFLAG.EXF_USERCALLABLE;
             }
 
@@ -1072,7 +1088,8 @@ namespace Microsoft.CSharp.RuntimeBinder
             CSharpUnaryOperationBinder payload,
             ArgumentObject[] arguments,
             LocalVariableSymbol[] locals
-        ) {
+        )
+        {
             Debug.Assert(arguments.Length == 1);
 
             OperatorKind op = GetOperatorKind(payload.Operation);
@@ -1120,7 +1137,8 @@ namespace Microsoft.CSharp.RuntimeBinder
             CSharpBinaryOperationBinder payload,
             ArgumentObject[] arguments,
             LocalVariableSymbol[] locals
-        ) {
+        )
+        {
             Debug.Assert(arguments.Length == 2);
 
             ExpressionKind ek = Operators.GetExpressionKind(
@@ -1250,7 +1268,8 @@ namespace Microsoft.CSharp.RuntimeBinder
             ArgumentObject argument,
             LocalVariableSymbol local,
             Expr optionalIndexerArguments
-        ) {
+        )
+        {
             // If our argument is a static type, then we're calling a static property.
             Expr callingObject = argument.Info.IsStaticType
                 ? ExprFactory.CreateClass(SymbolTable.GetCTypeFromType(argument.Value as Type))
@@ -1350,7 +1369,8 @@ namespace Microsoft.CSharp.RuntimeBinder
             Type returnType,
             LocalVariableSymbol[] locals,
             bool bIsArrayCreationConversion
-        ) {
+        )
+        {
             Debug.Assert(arguments.Length == 1);
 
             // Load the conversions on the target.
@@ -1389,7 +1409,8 @@ namespace Microsoft.CSharp.RuntimeBinder
             ArgumentObject[] arguments,
             Type returnType,
             LocalVariableSymbol[] locals
-        ) {
+        )
+        {
             Debug.Assert(arguments.Length == 1);
 
             // Load the conversions on the target.
@@ -1412,7 +1433,8 @@ namespace Microsoft.CSharp.RuntimeBinder
             ICSharpBinder payload,
             ArgumentObject[] arguments,
             LocalVariableSymbol[] locals
-        ) {
+        )
+        {
             Debug.Assert(arguments.Length >= 2);
             Debug.Assert(Array.TrueForAll(arguments, a => a.Type != null));
 
@@ -1457,7 +1479,8 @@ namespace Microsoft.CSharp.RuntimeBinder
             CSharpIsEventBinder binder,
             ArgumentObject[] arguments,
             LocalVariableSymbol[] locals
-        ) {
+        )
+        {
             // The IsEvent binder will never be called without an instance object. This
             // is because the compiler only gen's this code for dynamic dots.
 

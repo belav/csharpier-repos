@@ -91,7 +91,8 @@ namespace Microsoft.AspNetCore.SignalR.StackExchangeRedis.Internal
             ILogger logger,
             EndPointCollection endpoints,
             string serverName
-        ) {
+        )
+        {
             if (logger.IsEnabled(LogLevel.Information) && endpoints.Count > 0)
             {
                 _connectingToEndpoints(

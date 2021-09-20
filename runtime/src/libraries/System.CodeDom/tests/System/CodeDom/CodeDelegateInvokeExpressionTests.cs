@@ -48,7 +48,8 @@ namespace System.CodeDom.Tests
         public void Ctor_CodeExpression_ParamsCodeExpression(
             CodeExpression targetObject,
             CodeExpression[] parameters
-        ) {
+        )
+        {
             var delegateInvoke = new CodeDelegateInvokeExpression(targetObject, parameters);
             Assert.Equal(targetObject, delegateInvoke.TargetObject);
             Assert.Equal(parameters, delegateInvoke.Parameters.Cast<CodeExpression>());

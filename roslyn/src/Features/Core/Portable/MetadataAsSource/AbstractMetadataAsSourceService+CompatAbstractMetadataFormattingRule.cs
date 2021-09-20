@@ -23,7 +23,8 @@ namespace Microsoft.CodeAnalysis.MetadataAsSource
                 List<SuppressOperation> list,
                 SyntaxNode node,
                 in NextSuppressOperationAction nextOperation
-            ) {
+            )
+            {
                 var nextOperationCopy = nextOperation;
                 AddSuppressOperationsSlow(list, node, ref nextOperationCopy);
             }
@@ -34,7 +35,8 @@ namespace Microsoft.CodeAnalysis.MetadataAsSource
                 List<AnchorIndentationOperation> list,
                 SyntaxNode node,
                 in NextAnchorIndentationOperationAction nextOperation
-            ) {
+            )
+            {
                 var nextOperationCopy = nextOperation;
                 AddAnchorIndentationOperationsSlow(list, node, ref nextOperationCopy);
             }
@@ -45,7 +47,8 @@ namespace Microsoft.CodeAnalysis.MetadataAsSource
                 List<IndentBlockOperation> list,
                 SyntaxNode node,
                 in NextIndentBlockOperationAction nextOperation
-            ) {
+            )
+            {
                 var nextOperationCopy = nextOperation;
                 AddIndentBlockOperationsSlow(list, node, ref nextOperationCopy);
             }
@@ -56,7 +59,8 @@ namespace Microsoft.CodeAnalysis.MetadataAsSource
                 List<AlignTokensOperation> list,
                 SyntaxNode node,
                 in NextAlignTokensOperationAction nextOperation
-            ) {
+            )
+            {
                 var nextOperationCopy = nextOperation;
                 AddAlignTokensOperationsSlow(list, node, ref nextOperationCopy);
             }
@@ -67,7 +71,8 @@ namespace Microsoft.CodeAnalysis.MetadataAsSource
                 in SyntaxToken previousToken,
                 in SyntaxToken currentToken,
                 in NextGetAdjustNewLinesOperation nextOperation
-            ) {
+            )
+            {
                 var previousTokenCopy = previousToken;
                 var currentTokenCopy = currentToken;
                 var nextOperationCopy = nextOperation;
@@ -84,7 +89,8 @@ namespace Microsoft.CodeAnalysis.MetadataAsSource
                 in SyntaxToken previousToken,
                 in SyntaxToken currentToken,
                 in NextGetAdjustSpacesOperation nextOperation
-            ) {
+            )
+            {
                 var previousTokenCopy = previousToken;
                 var currentTokenCopy = currentToken;
                 var nextOperationCopy = nextOperation;

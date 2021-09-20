@@ -76,7 +76,8 @@ namespace System.Diagnostics.CodeAnalysis
             DiagnosticAnalyzer[] analyzers,
             DiagnosticDescription[] expectedDiagnostics,
             string rootNamespace = null
-        ) {
+        )
+        {
             using var workspace = CreateWorkspaceFromFile(source, language, rootNamespace);
 
             workspace.TryApplyChanges(
@@ -106,7 +107,8 @@ namespace System.Diagnostics.CodeAnalysis
             string source,
             string language,
             string rootNamespace
-        ) {
+        )
+        {
             if (language == LanguageNames.CSharp)
             {
                 return TestWorkspace.CreateCSharp(

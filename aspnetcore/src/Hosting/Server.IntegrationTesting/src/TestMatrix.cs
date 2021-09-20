@@ -207,7 +207,8 @@ namespace Microsoft.AspNetCore.Server.IntegrationTesting
             ServerType server,
             string tfm,
             string skip
-        ) {
+        )
+        {
             foreach (var t in ApplicationTypes)
             {
                 var type = t;
@@ -234,7 +235,8 @@ namespace Microsoft.AspNetCore.Server.IntegrationTesting
             string tfm,
             string skip,
             ApplicationType type
-        ) {
+        )
+        {
             foreach (var arch in Architectures)
             {
                 if (!IsArchitectureSupportedOnServer(arch, server))
@@ -295,7 +297,8 @@ namespace Microsoft.AspNetCore.Server.IntegrationTesting
             ApplicationType type,
             RuntimeArchitecture arch,
             string skip
-        ) {
+        )
+        {
             foreach (var hostingModel in HostingModels)
             {
                 var skipAncm = skip;

@@ -34,7 +34,8 @@ namespace MS.Internal.Xml.Cache
             int idxCurrent,
             XPathNode[]? pageParent,
             int idxParent
-        ) {
+        )
+        {
             Debug.Assert(pageCurrent != null && idxCurrent != 0);
             Debug.Assert((pageParent == null) == (idxParent == 0));
             _pageCurrent = pageCurrent;
@@ -312,7 +313,8 @@ namespace MS.Internal.Xml.Cache
                     _atomizedLocalName,
                     namespaceURI
                 )
-            ) {
+            )
+            {
                 // Save element parent in order to make node-order comparison simpler
                 _pageParent = page;
                 _idxParent = idx;
@@ -348,7 +350,8 @@ namespace MS.Internal.Xml.Cache
                 if (
                     namespaceScope != XPathNamespaceScope.ExcludeXml
                     || !page![idx].IsXmlNamespaceNode
-                ) {
+                )
+                {
                     _pageParent = _pageCurrent;
                     _idxParent = _idxCurrent;
                     _pageCurrent = page!;
@@ -640,7 +643,8 @@ namespace MS.Internal.Xml.Cache
             string? localName,
             string namespaceURI,
             XPathNavigator? end
-        ) {
+        )
+        {
             XPathNode[]? pageEnd;
             int idxEnd;
 
@@ -707,7 +711,8 @@ namespace MS.Internal.Xml.Cache
                         endTiny != null
                         && _idxCurrent == endTiny._idxParent
                         && _pageCurrent == endTiny._pageParent
-                    ) {
+                    )
+                    {
                         // "end" is positioned to a virtual attribute, namespace, or text node
                         return false;
                     }
@@ -843,7 +848,8 @@ namespace MS.Internal.Xml.Cache
             string name,
             string namespaceURI,
             bool matchSelf
-        ) {
+        )
+        {
             // If local name is wildcard, then call XPathNavigator.SelectDescendants
             if (name.Length == 0)
                 return base.SelectDescendants(name, namespaceURI, matchSelf);
@@ -1106,12 +1112,14 @@ namespace MS.Internal.Xml.Cache
             XPathDocumentNavigator? end,
             bool useParentOfVirtual,
             out XPathNode[]? pageEnd
-        ) {
+        )
+        {
             // If ending navigator is positioned to a node in another document, then return null
             if (
                 end != null
                 && _pageCurrent[_idxCurrent].Document == end._pageCurrent[end._idxCurrent].Document
-            ) {
+            )
+            {
                 // If the ending navigator is not positioned on a virtual node, then return its current node
                 if (end._idxParent == 0)
                 {

@@ -68,7 +68,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UseIsNullCheck
             ImmutableArray<Diagnostic> diagnostics,
             SyntaxEditor editor,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             foreach (var diagnostic in diagnostics)
             {
                 if (!IsSupportedDiagnostic(diagnostic))
@@ -116,7 +117,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UseIsNullCheck
             BinaryExpressionSyntax binary,
             ExpressionSyntax expr,
             ExpressionSyntax nullLiteral
-        ) {
+        )
+        {
             var castExpr = (CastExpressionSyntax)expr;
             return SyntaxFactory.IsPatternExpression(
                 castExpr.Expression.WithTriviaFrom(binary.Left),

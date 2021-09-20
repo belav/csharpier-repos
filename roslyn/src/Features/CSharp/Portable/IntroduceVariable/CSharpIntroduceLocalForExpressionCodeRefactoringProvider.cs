@@ -39,14 +39,16 @@ namespace Microsoft.CodeAnalysis.CSharp.IntroduceVariable
         protected override bool IsValid(
             ExpressionStatementSyntax expressionStatement,
             TextSpan span
-        ) {
+        )
+        {
             // Expression is likely too simple to want to offer to generate a local for.
             // This leads to too many false cases where this is offered.
             if (
                 span.IsEmpty
                 && expressionStatement.SemicolonToken.IsMissing
                 && expressionStatement.Expression.IsKind(SyntaxKind.IdentifierName)
-            ) {
+            )
+            {
                 return false;
             }
 
@@ -62,7 +64,8 @@ namespace Microsoft.CodeAnalysis.CSharp.IntroduceVariable
         protected override LocalDeclarationStatementSyntax FixupLocalDeclaration(
             ExpressionStatementSyntax expressionStatement,
             LocalDeclarationStatementSyntax localDeclaration
-        ) {
+        )
+        {
             // If there wasn't a semicolon before, ensure the trailing trivia of the expression
             // becomes the trailing trivia of a new semicolon that we add.
             var semicolonToken = expressionStatement.SemicolonToken;

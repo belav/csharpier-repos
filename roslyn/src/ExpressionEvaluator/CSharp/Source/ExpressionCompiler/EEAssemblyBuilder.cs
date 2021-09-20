@@ -29,14 +29,16 @@ namespace Microsoft.CodeAnalysis.CSharp.ExpressionEvaluator
             ImmutableArray<NamedTypeSymbol> additionalTypes,
             Func<NamedTypeSymbol, NamedTypeSymbol> getDynamicOperationContextType,
             CompilationTestData? testData
-        ) : base(
-            sourceAssembly,
-            emitOptions,
-            outputKind: OutputKind.DynamicallyLinkedLibrary,
-            serializationProperties: serializationProperties,
-            manifestResources: SpecializedCollections.EmptyEnumerable<ResourceDescription>(),
-            additionalTypes: additionalTypes
-        ) {
+        )
+            : base(
+                sourceAssembly,
+                emitOptions,
+                outputKind: OutputKind.DynamicallyLinkedLibrary,
+                serializationProperties: serializationProperties,
+                manifestResources: SpecializedCollections.EmptyEnumerable<ResourceDescription>(),
+                additionalTypes: additionalTypes
+            )
+        {
             _getDynamicOperationContextType = getDynamicOperationContextType;
 
             if (testData != null)
@@ -49,7 +51,8 @@ namespace Microsoft.CodeAnalysis.CSharp.ExpressionEvaluator
         protected override Cci.IModuleReference TranslateModule(
             ModuleSymbol symbol,
             DiagnosticBag diagnostics
-        ) {
+        )
+        {
             if (symbol is PEModuleSymbol moduleSymbol)
             {
                 var module = moduleSymbol.Module;
@@ -59,7 +62,8 @@ namespace Microsoft.CodeAnalysis.CSharp.ExpressionEvaluator
                 if (
                     MetadataUtilities.IsWindowsComponent(module.MetadataReader, module.Name)
                     && MetadataUtilities.IsWindowsAssemblyName(moduleSymbol.ContainingAssembly.Name)
-                ) {
+                )
+                {
                     var identity = module.ReadAssemblyIdentityOrThrow();
                     return new Microsoft.CodeAnalysis.ExpressionEvaluator.AssemblyReference(
                         identity
@@ -73,7 +77,8 @@ namespace Microsoft.CodeAnalysis.CSharp.ExpressionEvaluator
 
         internal override NamedTypeSymbol GetDynamicOperationContextType(
             NamedTypeSymbol contextType
-        ) {
+        )
+        {
             return _getDynamicOperationContextType(contextType);
         }
 
@@ -91,7 +96,8 @@ namespace Microsoft.CodeAnalysis.CSharp.ExpressionEvaluator
         private ImmutableArray<LocalDefinition> GetLocalDefinitions(
             ImmutableArray<LocalSymbol> locals,
             DiagnosticBag diagnostics
-        ) {
+        )
+        {
             var builder = ArrayBuilder<LocalDefinition>.GetInstance();
             foreach (var local in locals)
             {
@@ -110,7 +116,8 @@ namespace Microsoft.CodeAnalysis.CSharp.ExpressionEvaluator
             LocalSymbol local,
             int index,
             DiagnosticBag diagnostics
-        ) {
+        )
+        {
             // See EvaluationContext.GetLocals.
             TypeSymbol type;
             LocalSlotConstraints constraints;
@@ -168,7 +175,8 @@ namespace Microsoft.CodeAnalysis.CSharp.ExpressionEvaluator
                 LocalSlotConstraints constraints,
                 ImmutableArray<bool> dynamicTransformFlags,
                 ImmutableArray<string> tupleElementNames
-            ) {
+            )
+            {
                 return (symbol is EELocalSymbol local) ? _locals[local.Ordinal] : null;
             }
 
@@ -179,7 +187,8 @@ namespace Microsoft.CodeAnalysis.CSharp.ExpressionEvaluator
                 LocalDebugId currentId,
                 DiagnosticBag diagnostics,
                 out int slotIndex
-            ) {
+            )
+            {
                 slotIndex = -1;
                 return false;
             }
@@ -188,7 +197,8 @@ namespace Microsoft.CodeAnalysis.CSharp.ExpressionEvaluator
                 Cci.ITypeReference currentType,
                 DiagnosticBag diagnostics,
                 out int slotIndex
-            ) {
+            )
+            {
                 slotIndex = -1;
                 return false;
             }
@@ -196,7 +206,8 @@ namespace Microsoft.CodeAnalysis.CSharp.ExpressionEvaluator
             public override bool TryGetPreviousClosure(
                 SyntaxNode closureSyntax,
                 out DebugId closureId
-            ) {
+            )
+            {
                 closureId = default;
                 return false;
             }
@@ -205,7 +216,8 @@ namespace Microsoft.CodeAnalysis.CSharp.ExpressionEvaluator
                 SyntaxNode lambdaOrLambdaBodySyntax,
                 bool isLambdaBody,
                 out DebugId lambdaId
-            ) {
+            )
+            {
                 lambdaId = default;
                 return false;
             }

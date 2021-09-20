@@ -22,7 +22,8 @@ namespace Microsoft.CodeAnalysis.CSharp.ExpressionEvaluator
             BoundStatement node,
             ImmutableArray<LocalSymbol> declaredLocalsArray,
             DiagnosticBag diagnostics
-        ) {
+        )
+        {
             var builder = ArrayBuilder<BoundStatement>.GetInstance();
 
             foreach (var local in declaredLocalsArray)
@@ -43,7 +44,8 @@ namespace Microsoft.CodeAnalysis.CSharp.ExpressionEvaluator
                 case BoundKind.MultipleLocalDeclarations:
                     foreach (
                         var declaration in ((BoundMultipleLocalDeclarations)node).LocalDeclarations
-                    ) {
+                    )
+                    {
                         Debug.Assert(declaredLocals.Contains(declaration.LocalSymbol));
                         RewriteLocalDeclaration(builder, declaration);
                     }
@@ -66,7 +68,8 @@ namespace Microsoft.CodeAnalysis.CSharp.ExpressionEvaluator
         private static void RewriteLocalDeclaration(
             ArrayBuilder<BoundStatement> statements,
             BoundLocalDeclaration node
-        ) {
+        )
+        {
             Debug.Assert(node.ArgumentsOpt.IsDefault);
 
             var initializer = node.InitializerOpt;
@@ -96,7 +99,8 @@ namespace Microsoft.CodeAnalysis.CSharp.ExpressionEvaluator
             LocalSymbol local,
             SyntaxNode syntax,
             DiagnosticBag diagnostics
-        ) {
+        )
+        {
             // CreateVariable(Type type, string name)
             var method = PlaceholderLocalSymbol.GetIntrinsicMethod(
                 compilation,
@@ -155,7 +159,8 @@ namespace Microsoft.CodeAnalysis.CSharp.ExpressionEvaluator
             SyntaxNode syntax,
             MethodSymbol guidConstructor,
             bool hasCustomTypeInfoPayload
-        ) {
+        )
+        {
             if (!hasCustomTypeInfoPayload)
             {
                 return new BoundDefaultExpression(
@@ -179,7 +184,8 @@ namespace Microsoft.CodeAnalysis.CSharp.ExpressionEvaluator
             SyntaxNode syntax,
             CSharpCompilation compilation,
             out bool hasCustomTypeInfoPayload
-        ) {
+        )
+        {
             var byteArrayType = ArrayTypeSymbol.CreateSZArray(
                 compilation.Assembly,
                 TypeWithAnnotations.Create(compilation.GetSpecialType(SpecialType.System_Byte))

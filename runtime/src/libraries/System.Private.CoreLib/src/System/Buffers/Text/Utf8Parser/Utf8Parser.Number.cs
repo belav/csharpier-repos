@@ -19,7 +19,8 @@ namespace System.Buffers.Text
             out int bytesConsumed,
             ParseNumberOptions options,
             out bool textUsedExponentNotation
-        ) {
+        )
+        {
             Debug.Assert(number.DigitsCount == 0);
             Debug.Assert(number.Scale == 0);
             Debug.Assert(!number.IsNegative);
@@ -183,7 +184,8 @@ namespace System.Buffers.Text
                     while (
                         startIndexOfDigitsAfterDecimalToCopy < srcIndex
                         && source[startIndexOfDigitsAfterDecimalToCopy] == '0'
-                    ) {
+                    )
+                    {
                         number.Scale--;
                         startIndexOfDigitsAfterDecimalToCopy++;
                     }
@@ -283,7 +285,8 @@ namespace System.Buffers.Text
                     out uint absoluteExponent,
                     out int bytesConsumedByExponent
                 )
-            ) {
+            )
+            {
                 // Since we found at least one digit, we know that any failure to parse means we had an
                 // exponent that was larger than uint.MaxValue, and we can just eat characters until the end
                 absoluteExponent = uint.MaxValue;

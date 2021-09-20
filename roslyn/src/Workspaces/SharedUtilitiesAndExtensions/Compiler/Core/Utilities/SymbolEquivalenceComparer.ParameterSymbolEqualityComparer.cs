@@ -19,7 +19,8 @@ namespace Microsoft.CodeAnalysis.Shared.Utilities
             public ParameterSymbolEqualityComparer(
                 SymbolEquivalenceComparer symbolEqualityComparer,
                 bool distinguishRefFromOut
-            ) {
+            )
+            {
                 _symbolEqualityComparer = symbolEqualityComparer;
                 _distinguishRefFromOut = distinguishRefFromOut;
             }
@@ -33,7 +34,8 @@ namespace Microsoft.CodeAnalysis.Shared.Utilities
                 >? equivalentTypesWithDifferingAssemblies,
                 bool compareParameterName,
                 bool isCaseSensitive
-            ) {
+            )
+            {
                 if (ReferenceEquals(x, y))
                 {
                     return true;
@@ -98,7 +100,8 @@ namespace Microsoft.CodeAnalysis.Shared.Utilities
             RefKind rk1,
             RefKind rk2,
             bool distinguishRefFromOut
-        ) {
+        )
+        {
             return distinguishRefFromOut
               ? rk1 == rk2
               : (rk1 == RefKind.None) == (rk2 == RefKind.None);

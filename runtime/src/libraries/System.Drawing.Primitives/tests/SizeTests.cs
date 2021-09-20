@@ -230,7 +230,8 @@ namespace System.Drawing.PrimitivesTests
             int width,
             int height,
             int multiplier
-        ) {
+        )
+        {
             Size sz1 = new Size(width, height);
             Size mulExpected;
             unchecked
@@ -281,7 +282,8 @@ namespace System.Drawing.PrimitivesTests
             int width,
             int height,
             float multiplier
-        ) {
+        )
+        {
             Size sz1 = new Size(width, height);
             SizeF mulExpected;
 

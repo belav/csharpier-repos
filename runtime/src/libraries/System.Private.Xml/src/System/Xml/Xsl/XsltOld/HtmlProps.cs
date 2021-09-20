@@ -28,7 +28,8 @@ namespace System.Xml.Xsl.XsltOld
             bool blockWS,
             bool head,
             bool nameParent
-        ) {
+        )
+        {
             HtmlElementProps props = new HtmlElementProps();
             props._empty = empty;
             props._abrParent = abrParent;

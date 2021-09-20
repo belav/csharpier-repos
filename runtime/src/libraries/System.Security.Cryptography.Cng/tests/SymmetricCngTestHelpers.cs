@@ -19,7 +19,8 @@ namespace System.Security.Cryptography.Cng.Tests
             Func<SymmetricAlgorithm> ephemeralFunc,
             CipherMode cipherMode,
             PaddingMode paddingMode
-        ) {
+        )
+        {
             string keyName = Guid.NewGuid().ToString();
             CngKeyCreationParameters creationParameters = new CngKeyCreationParameters
             {
@@ -63,7 +64,8 @@ namespace System.Security.Cryptography.Cng.Tests
             Func<SymmetricAlgorithm> ephemeralFunc,
             CipherMode cipherMode,
             PaddingMode paddingMode
-        ) {
+        )
+        {
             byte[] plainBytes = GenerateRandom(plainBytesCount);
 
             using (SymmetricAlgorithm persisted = persistedFunc(keyName))
@@ -124,7 +126,8 @@ namespace System.Security.Cryptography.Cng.Tests
         public static void GetKey_NonExportable(
             CngAlgorithm algorithm,
             Func<string, SymmetricAlgorithm> persistedFunc
-        ) {
+        )
+        {
             string keyName = Guid.NewGuid().ToString();
             CngKey cngKey = CngKey.Create(algorithm, keyName);
 
@@ -146,7 +149,8 @@ namespace System.Security.Cryptography.Cng.Tests
         public static void SetKey_DetachesFromPersistedKey(
             CngAlgorithm algorithm,
             Func<string, SymmetricAlgorithm> persistedFunc
-        ) {
+        )
+        {
             // This test verifies that:
             // * [Algorithm]Cng.set_Key does not change the persisted key value
             // * [Algorithm]Cng.GenerateKey is "the same" as set_Key
@@ -268,7 +272,8 @@ namespace System.Security.Cryptography.Cng.Tests
             int plainBytesCount,
             Func<string, SymmetricAlgorithm> persistedFunc,
             Func<SymmetricAlgorithm> ephemeralFunc
-        ) {
+        )
+        {
             string keyName = Guid.NewGuid().ToString();
             CngKeyCreationParameters creationParameters = new CngKeyCreationParameters
             {
@@ -343,7 +348,8 @@ namespace System.Security.Cryptography.Cng.Tests
             byte[] plainTextBytes,
             ICryptoTransform decryptor,
             byte[] encryptedBytes
-        ) {
+        )
+        {
             byte[] decrypted = decryptor.TransformFinalBlock(
                 encryptedBytes,
                 0,

@@ -25,7 +25,8 @@ namespace ILCompiler.Win32Resources
         public ResourceData(
             EcmaModule ecmaModule,
             Func<object, object, ushort, bool> resourceFilter = null
-        ) {
+        )
+        {
             System.Collections.Immutable.ImmutableArray<byte> ecmaData =
                 ecmaModule.PEReader.GetEntireImage().GetContent();
             PEReader peFile = ecmaModule.PEReader;
@@ -90,7 +91,8 @@ namespace ILCompiler.Win32Resources
         public void WriteResources(
             ISymbolNode nodeAssociatedWithDataBuilder,
             ref ObjectDataBuilder dataBuilder
-        ) {
+        )
+        {
             Debug.Assert(dataBuilder.CountBytes == 0);
 
             SortedDictionary<string, List<ObjectDataBuilder.Reservation>> nameTable =

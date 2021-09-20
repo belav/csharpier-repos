@@ -493,7 +493,8 @@ namespace Microsoft.CodeAnalysis.BuildTasks.UnitTests
             string tfi,
             string tfv,
             string expectedVersion
-        ) {
+        )
+        {
             XmlReader xmlReader = XmlReader.Create(
                 new StringReader(
                     $@"
@@ -766,7 +767,8 @@ namespace Microsoft.CodeAnalysis.BuildTasks.UnitTests
         public void GeneratedFilesOutputPathCanBeSetAndSuppressed(
             bool emitGeneratedFiles,
             string? generatedFilesDir
-        ) {
+        )
+        {
             XmlReader xmlReader = XmlReader.Create(
                 new StringReader(
                     $@"
@@ -810,7 +812,8 @@ namespace Microsoft.CodeAnalysis.BuildTasks.UnitTests
         public void TestSkipAnalyzers(
             [CombinatorialValues(true, false, null)] bool? runAnalyzers,
             [CombinatorialValues(true, false, null)] bool? runAnalyzersDuringBuild
-        ) {
+        )
+        {
             var runAnalyzersPropertyGroupString = getPropertyGroup("RunAnalyzers", runAnalyzers);
             var runAnalyzersDuringBuildPropertyGroupString = getPropertyGroup(
                 "RunAnalyzersDuringBuild",
@@ -930,7 +933,8 @@ namespace Microsoft.CodeAnalysis.BuildTasks.UnitTests
                 Project proj,
                 string taskName,
                 Dictionary<string, string> parameters
-            ) {
+            )
+            {
                 var task = proj.Xml.AddUsingTask(
                     taskName,
                     string.Empty,
@@ -1000,7 +1004,8 @@ namespace Microsoft.CodeAnalysis.BuildTasks.UnitTests
             IDictionary<string, TaskPropertyInfo> parameterGroup,
             string taskBody,
             IBuildEngine taskFactoryLoggingHost
-        ) {
+        )
+        {
             _props = parameterGroup.Values.ToArray();
             return true;
         }

@@ -17,7 +17,8 @@ namespace System.CommandLine.Rendering.Views
             ConsoleRenderer renderer,
             IConsole console,
             SynchronizationContext synchronizationContext = null
-        ) {
+        )
+        {
             Renderer = renderer ?? throw new ArgumentNullException(nameof(renderer));
             _console = console ?? throw new ArgumentNullException(nameof(console));
             _context =

@@ -25,7 +25,8 @@ namespace Microsoft.CodeAnalysis.CommentSelection
             Document document,
             ImmutableArray<TextSpan> changes,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var root = document.GetSyntaxRootSynchronously(cancellationToken);
             var formattingSpans = changes.Select(
                 s => CommonFormattingHelpers.GetFormattingSpan(root, s)

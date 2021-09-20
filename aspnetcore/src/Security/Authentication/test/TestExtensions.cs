@@ -23,7 +23,8 @@ namespace Microsoft.AspNetCore.Authentication
             this TestServer server,
             string uri,
             string cookieHeader = null
-        ) {
+        )
+        {
             var request = new HttpRequestMessage(HttpMethod.Get, uri);
             if (!string.IsNullOrEmpty(cookieHeader))
             {
@@ -45,7 +46,8 @@ namespace Microsoft.AspNetCore.Authentication
                 transaction.Response.Content != null
                 && transaction.Response.Content.Headers.ContentType != null
                 && transaction.Response.Content.Headers.ContentType.MediaType == "text/xml"
-            ) {
+            )
+            {
                 transaction.ResponseElement = XElement.Parse(transaction.ResponseText);
             }
             return transaction;
@@ -80,7 +82,8 @@ namespace Microsoft.AspNetCore.Authentication
         public static Task DescribeAsync(
             this HttpResponse res,
             IEnumerable<AuthenticationToken> tokens
-        ) {
+        )
+        {
             res.StatusCode = 200;
             res.ContentType = "text/xml";
             var xml = new XElement("xml");

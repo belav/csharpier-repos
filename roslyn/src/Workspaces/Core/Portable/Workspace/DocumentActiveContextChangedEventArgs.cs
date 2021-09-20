@@ -22,7 +22,8 @@ namespace Microsoft.CodeAnalysis
             SourceTextContainer sourceTextContainer,
             DocumentId oldActiveContextDocumentId,
             DocumentId newActiveContextDocumentId
-        ) {
+        )
+        {
             Contract.ThrowIfNull(solution);
             Contract.ThrowIfNull(sourceTextContainer);
             Contract.ThrowIfNull(oldActiveContextDocumentId);

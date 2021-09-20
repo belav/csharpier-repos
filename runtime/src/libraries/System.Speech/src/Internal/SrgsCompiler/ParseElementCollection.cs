@@ -68,7 +68,8 @@ namespace System.Speech.Internal.SrgsCompiler
                     && arc.End != null
                     && arc.End.InArcs.CountIsOne
                     && Graph.MoveSemanticTagRight(arc)
-                ) {
+                )
+                {
                     return arc;
                 }
                 if (
@@ -76,7 +77,8 @@ namespace System.Speech.Internal.SrgsCompiler
                     && arc.Start != null
                     && arc.Start.OutArcs.CountIsOne
                     && Graph.MoveSemanticTagLeft(arc)
-                ) {
+                )
+                {
                     return arc;
                 }
             }
@@ -118,7 +120,8 @@ namespace System.Speech.Internal.SrgsCompiler
                         && startState.InArcs.CountIsOne
                         && startState.OutArcs.CountIsOne;
                     startState = startArc.End
-                ) {
+                )
+                {
                     // State has a single input epsilon transition
                     // Delete the input epsilon transition and delete state.
                     System.Diagnostics.Debug.Assert(startArc.End == startState);
@@ -155,7 +158,8 @@ namespace System.Speech.Internal.SrgsCompiler
                         && endState.InArcs.CountIsOne
                         && endState.OutArcs.CountIsOne;
                     endState = endArc.Start
-                ) {
+                )
+                {
                     // State has a single input epsilon transition
                     // Delete the input epsilon transition and delete state.
                     System.Diagnostics.Debug.Assert(endArc.Start == endState);
@@ -245,7 +249,8 @@ namespace System.Speech.Internal.SrgsCompiler
                                 if (
                                     _endArc.IsPropertylessTransition
                                     && start.IsPropertylessTransition
-                                ) {
+                                )
+                                {
                                     // Move the end arc
                                     start.End = null;
                                     _endArc.Start = null;

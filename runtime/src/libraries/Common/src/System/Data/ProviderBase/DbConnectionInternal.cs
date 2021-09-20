@@ -45,7 +45,8 @@ namespace System.Data.ProviderBase
             ConnectionState state,
             bool hidePassword,
             bool allowSetConnectionString
-        ) {
+        )
+        {
             _allowSetConnectionString = allowSetConnectionString;
             _hidePassword = hidePassword;
             _state = state;
@@ -243,7 +244,8 @@ namespace System.Data.ProviderBase
             DbConnection outerConnection,
             string collectionName,
             string?[]? restrictions
-        ) {
+        )
+        {
             Debug.Assert(outerConnection != null, "outerConnection may not be null.");
 
             DbMetaDataFactory metaDataFactory = factory.GetMetaDataFactory(poolGroup, this);
@@ -283,7 +285,8 @@ namespace System.Data.ProviderBase
         internal virtual void OpenConnection(
             DbConnection outerConnection,
             DbConnectionFactory connectionFactory
-        ) {
+        )
+        {
             if (!TryOpenConnection(outerConnection, connectionFactory, null, null))
             {
                 throw ADP.InternalError(ADP.InternalErrorCode.SynchronousConnectReturnedPending);
@@ -300,7 +303,8 @@ namespace System.Data.ProviderBase
             DbConnectionFactory connectionFactory,
             TaskCompletionSource<DbConnectionInternal>? retry,
             DbConnectionOptions? userOptions
-        ) {
+        )
+        {
             throw ADP.ConnectionAlreadyOpen(State);
         }
 
@@ -309,7 +313,8 @@ namespace System.Data.ProviderBase
             DbConnectionFactory connectionFactory,
             TaskCompletionSource<DbConnectionInternal>? retry,
             DbConnectionOptions? userOptions
-        ) {
+        )
+        {
             throw ADP.MethodNotImplemented();
         }
 
@@ -318,7 +323,8 @@ namespace System.Data.ProviderBase
             DbConnectionFactory connectionFactory,
             TaskCompletionSource<DbConnectionInternal>? retry,
             DbConnectionOptions? userOptions
-        ) {
+        )
+        {
             // ?->Connecting: prevent set_ConnectionString during Open
             if (
                 connectionFactory.SetInnerConnectionFrom(
@@ -326,7 +332,8 @@ namespace System.Data.ProviderBase
                     DbConnectionClosedConnecting.SingletonInstance,
                     this
                 )
-            ) {
+            )
+            {
                 DbConnectionInternal? openConnection = null;
                 try
                 {
@@ -339,7 +346,8 @@ namespace System.Data.ProviderBase
                             this,
                             out openConnection
                         )
-                    ) {
+                    )
+                    {
                         return false;
                     }
                 }

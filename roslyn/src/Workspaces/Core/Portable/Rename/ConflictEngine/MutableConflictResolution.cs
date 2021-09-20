@@ -59,7 +59,8 @@ namespace Microsoft.CodeAnalysis.Rename.ConflictEngine
             RenamedSpansTracker renamedSpansTracker,
             string replacementText,
             bool replacementTextValid
-        ) {
+        )
+        {
             OldSolution = oldSolution;
             CurrentSolution = oldSolution;
             _renamedSpansTracker = renamedSpansTracker;
@@ -81,7 +82,8 @@ namespace Microsoft.CodeAnalysis.Rename.ConflictEngine
             IEnumerable<DocumentId> documentWithRenameAnnotations,
             AnnotationTable<RenameAnnotation> annotationSet,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             foreach (var documentId in documentWithRenameAnnotations)
             {
                 if (_renamedSpansTracker.IsDocumentChanged(documentId))

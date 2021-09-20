@@ -654,7 +654,8 @@ namespace Microsoft.EntityFrameworkCore
         public virtual async Task<int> SaveChangesAsync(
             bool acceptAllChangesOnSuccess,
             CancellationToken cancellationToken = default
-        ) {
+        )
+        {
             CheckDisposed();
 
             SavingChanges?.Invoke(this, new SavingChangesEventArgs(acceptAllChangesOnSuccess));
@@ -1023,7 +1024,8 @@ namespace Microsoft.EntityFrameworkCore
             InternalEntityEntry entry,
             EntityState entityState,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             return entry.EntityState == EntityState.Detached
               ? DbContextDependencies.EntityGraphAttacher.AttachGraphAsync(
                     entry,
@@ -1293,7 +1295,8 @@ namespace Microsoft.EntityFrameworkCore
         public virtual async ValueTask<EntityEntry> AddAsync(
             object entity,
             CancellationToken cancellationToken = default
-        ) {
+        )
+        {
             CheckDisposed();
 
             var entry = EntryWithoutDetectChanges(Check.NotNull(entity, nameof(entity)));
@@ -1620,7 +1623,8 @@ namespace Microsoft.EntityFrameworkCore
         public virtual async Task AddRangeAsync(
             IEnumerable<object> entities,
             CancellationToken cancellationToken = default
-        ) {
+        )
+        {
             CheckDisposed();
 
             var stateManager = DbContextDependencies.StateManager;
@@ -1802,7 +1806,8 @@ namespace Microsoft.EntityFrameworkCore
             Type entityType,
             object?[]? keyValues,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             CheckDisposed();
 
             return Finder(entityType).FindAsync(keyValues, cancellationToken);
@@ -1887,7 +1892,8 @@ namespace Microsoft.EntityFrameworkCore
         /// <returns> An <see cref="IQueryable{T}" /> representing the query. </returns>
         public virtual IQueryable<TResult> FromExpression<TResult>(
             Expression<Func<IQueryable<TResult>>> expression
-        ) {
+        )
+        {
             Check.NotNull(expression, nameof(expression));
 
             return DbContextDependencies.QueryProvider.CreateQuery<TResult>(expression.Body);

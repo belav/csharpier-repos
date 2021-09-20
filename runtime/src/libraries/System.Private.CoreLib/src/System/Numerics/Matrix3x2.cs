@@ -243,7 +243,8 @@ namespace System.Numerics
             }
             else if (
                 radians > MathF.PI / 2 - RotationEpsilon && radians < MathF.PI / 2 + RotationEpsilon
-            ) {
+            )
+            {
                 // Exact case for 90 degree rotation.
                 c = 0;
                 s = 1;
@@ -257,7 +258,8 @@ namespace System.Numerics
             else if (
                 radians > -MathF.PI / 2 - RotationEpsilon
                 && radians < -MathF.PI / 2 + RotationEpsilon
-            ) {
+            )
+            {
                 // Exact case for 270 degree rotation.
                 c = 0;
                 s = -1;
@@ -303,7 +305,8 @@ namespace System.Numerics
             }
             else if (
                 radians > MathF.PI / 2 - RotationEpsilon && radians < MathF.PI / 2 + RotationEpsilon
-            ) {
+            )
+            {
                 // Exact case for 90 degree rotation.
                 c = 0;
                 s = 1;
@@ -317,7 +320,8 @@ namespace System.Numerics
             else if (
                 radians > -MathF.PI / 2 - RotationEpsilon
                 && radians < -MathF.PI / 2 + RotationEpsilon
-            ) {
+            )
+            {
                 // Exact case for 270 degree rotation.
                 c = 0;
                 s = -1;

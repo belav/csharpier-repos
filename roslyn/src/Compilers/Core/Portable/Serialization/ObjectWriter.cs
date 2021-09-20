@@ -80,7 +80,8 @@ namespace Roslyn.Utilities
             Stream stream,
             bool leaveOpen = false,
             CancellationToken cancellationToken = default
-        ) {
+        )
+        {
             // String serialization assumes both reader and writer to be of the same endianness.
             // It can be adjusted for BigEndian if needed.
             Debug.Assert(BitConverter.IsLittleEndian);

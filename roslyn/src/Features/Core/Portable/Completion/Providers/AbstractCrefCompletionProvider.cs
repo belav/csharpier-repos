@@ -19,7 +19,8 @@ namespace Microsoft.CodeAnalysis.Completion.Providers
             Document document,
             CompletionItem item,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var position = SymbolCompletionItem.GetContextPosition(item);
 
             // What EditorBrowsable settings were we previously passed in (if it mattered)?

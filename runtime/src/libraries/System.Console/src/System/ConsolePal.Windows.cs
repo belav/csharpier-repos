@@ -76,7 +76,8 @@ namespace System
                 handle == IntPtr.Zero
                 || handle == InvalidHandleValue
                 || (access != FileAccess.Read && !ConsoleHandleIsWritable(handle))
-            ) {
+            )
+            {
                 return Stream.Null;
             }
 
@@ -436,7 +437,8 @@ namespace System
                                 || (key == ConsoleKey.Insert)
                                 || (key >= ConsoleKey.PageUp && key <= ConsoleKey.DownArrow)
                             )
-                        ) {
+                        )
+                        {
                             continue;
                         }
 
@@ -722,7 +724,8 @@ namespace System
                     else if (
                         result >= builder.Capacity - 1
                         || (IsWindows7() && result >= builder.Capacity / sizeof(char) - 1)
-                    ) {
+                    )
+                    {
                         // Our buffer was full. As this API truncates we need to increase our size and reattempt.
                         // Note that Windows 7 copies count of bytes into the output buffer but returns count of chars
                         // and as such our buffer is only "half" its actual size.
@@ -788,7 +791,8 @@ namespace System
             char sourceChar,
             ConsoleColor sourceForeColor,
             ConsoleColor sourceBackColor
-        ) {
+        )
+        {
             if (sourceForeColor < ConsoleColor.Black || sourceForeColor > ConsoleColor.White)
                 throw new ArgumentException(SR.Arg_InvalidConsoleColor, nameof(sourceForeColor));
             if (sourceBackColor < ConsoleColor.Black || sourceBackColor > ConsoleColor.White)
@@ -1241,7 +1245,8 @@ namespace System
         private static Interop.Kernel32.Color ConsoleColorToColorAttribute(
             ConsoleColor color,
             bool isBackground
-        ) {
+        )
+        {
             if ((((int)color) & ~0xf) != 0)
                 throw new ArgumentException(SR.Arg_InvalidConsoleColor);
 
@@ -1275,7 +1280,8 @@ namespace System
         private static Interop.Kernel32.CONSOLE_SCREEN_BUFFER_INFO GetBufferInfo(
             bool throwOnNoConsole,
             out bool succeeded
-        ) {
+        )
+        {
             succeeded = false;
 
             IntPtr outputHandle = OutputHandle;
@@ -1295,7 +1301,8 @@ namespace System
                 !Interop.Kernel32.GetConsoleScreenBufferInfo(outputHandle, out csbi)
                 && !Interop.Kernel32.GetConsoleScreenBufferInfo(ErrorHandle, out csbi)
                 && !Interop.Kernel32.GetConsoleScreenBufferInfo(InputHandle, out csbi)
-            ) {
+            )
+            {
                 int errorCode = Marshal.GetLastWin32Error();
                 if (errorCode == Interop.Errors.ERROR_INVALID_HANDLE && !throwOnNoConsole)
                     return default;
@@ -1327,11 +1334,8 @@ namespace System
             private IntPtr _handle;
             private readonly bool _useFileAPIs;
 
-            internal WindowsConsoleStream(
-                IntPtr handle,
-                FileAccess access,
-                bool useFileAPIs
-            ) : base(access)
+            internal WindowsConsoleStream(IntPtr handle, FileAccess access, bool useFileAPIs)
+                : base(access)
             {
                 Debug.Assert(
                     handle != IntPtr.Zero && handle != InvalidHandleValue,
@@ -1399,7 +1403,8 @@ namespace System
                 bool isPipe,
                 out int bytesRead,
                 bool useFileAPIs
-            ) {
+            )
+            {
                 if (buffer.IsEmpty)
                 {
                     bytesRead = 0;
@@ -1455,7 +1460,8 @@ namespace System
                 IntPtr hFile,
                 ReadOnlySpan<byte> bytes,
                 bool useFileAPIs
-            ) {
+            )
+            {
                 if (bytes.IsEmpty)
                     return Interop.Errors.ERROR_SUCCESS;
 
@@ -1552,7 +1558,8 @@ namespace System
                 if (
                     controlType != Interop.Kernel32.CTRL_C_EVENT
                     && controlType != Interop.Kernel32.CTRL_BREAK_EVENT
-                ) {
+                )
+                {
                     return false;
                 }
 

@@ -207,7 +207,8 @@ namespace System.Net.Test.Common
                     Uri destinationUri,
                     int hops,
                     bool relative = false
-                ) {
+                )
+                {
                     string destination = Uri.EscapeDataString(
                         relative ? destinationUri.PathAndQuery : destinationUri.AbsoluteUri
                     );

@@ -65,7 +65,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Simplification.Simplifiers
             ISymbol symbol,
             CancellationToken cancellationToken,
             out IAliasSymbol aliasReplacement
-        ) {
+        )
+        {
             aliasReplacement = null;
 
             if (!IsAliasReplaceableExpression(node))
@@ -148,7 +149,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Simplification.Simplifiers
             if (
                 node.Kind() == SyntaxKind.IdentifierName
                 && semanticModel.GetAliasInfo((IdentifierNameSyntax)node, cancellationToken) != null
-            ) {
+            )
+            {
                 return false;
             }
 
@@ -156,7 +158,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Simplification.Simplifiers
             if (
                 symbol == null
                 || (symbol.Kind != SymbolKind.Namespace && symbol.Kind != SymbolKind.NamedType)
-            ) {
+            )
+            {
                 return false;
             }
 
@@ -215,7 +218,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Simplification.Simplifiers
                     SyntaxKind.SimpleMemberAccessExpression,
                     out MemberAccessExpressionSyntax currentMember
                 )
-            ) {
+            )
+            {
                 current = currentMember.Expression;
                 continue;
             }
@@ -237,13 +241,15 @@ namespace Microsoft.CodeAnalysis.CSharp.Simplification.Simplifiers
                     SyntaxKind.NamespaceDeclaration,
                     out NamespaceDeclarationSyntax namespaceDeclaration
                 )
-            ) {
+            )
+            {
                 usings = namespaceDeclaration.Usings;
                 members = namespaceDeclaration.Members;
             }
             else if (
                 syntax.IsKind(SyntaxKind.CompilationUnit, out CompilationUnitSyntax compilationUnit)
-            ) {
+            )
+            {
                 usings = compilationUnit.Usings;
                 members = compilationUnit.Members;
             }
@@ -279,7 +285,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Simplification.Simplifiers
             SemanticModel semanticModel,
             ExpressionSyntax node,
             ISymbol symbol
-        ) {
+        )
+        {
             var aliasName = aliasReplacement.Name;
 
             // If we're the argument of a nameof(X.Y) call, then we can't simplify to an
@@ -319,7 +326,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Simplification.Simplifiers
             SyntaxToken token,
             SemanticModel semanticModel,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var originalSemanticModel = semanticModel.GetOriginalSemanticModel();
             if (!originalSemanticModel.SyntaxTree.HasCompilationUnitRoot)
             {
@@ -339,7 +347,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Simplification.Simplifiers
                     symbol,
                     out var aliasSymbol
                 )
-            ) {
+            )
+            {
                 // add cache
                 AliasSymbolCache.AddAliasSymbols(
                     originalSemanticModel,
@@ -363,7 +372,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Simplification.Simplifiers
             SemanticModel semanticModel,
             SyntaxToken token,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var startNode = GetStartNodeForNamespaceId(semanticModel, token, cancellationToken);
             if (!startNode.SyntaxTree.HasCompilationUnitRoot)
             {
@@ -407,7 +417,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Simplification.Simplifiers
             SemanticModel semanticModel,
             SyntaxToken token,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             if (!semanticModel.IsSpeculativeSemanticModel)
             {
                 return token.Parent;
@@ -438,7 +449,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Simplification.Simplifiers
             SyntaxList<MemberDeclarationSyntax> members,
             NamespaceDeclarationSyntax target,
             ref int index
-        ) {
+        )
+        {
             foreach (var member in members)
             {
                 if (!(member is NamespaceDeclarationSyntax childNamespace))
@@ -477,7 +489,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Simplification.Simplifiers
         protected static bool InsideNameOfExpression(
             ExpressionSyntax expression,
             SemanticModel semanticModel
-        ) {
+        )
+        {
             var nameOfInvocationExpr = expression.FirstAncestorOrSelf<InvocationExpressionSyntax>(
                 invocationExpr =>
                 {
@@ -496,7 +509,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Simplification.Simplifiers
             ExpressionSyntax expression,
             OptionSet optionSet,
             SemanticModel semanticModel
-        ) {
+        )
+        {
             if (
                 !SimplificationHelpers.PreferPredefinedTypeKeywordInMemberAccess(
                     optionSet,
@@ -515,11 +529,13 @@ namespace Microsoft.CodeAnalysis.CSharp.Simplification.Simplifiers
             ExpressionSyntax expression,
             ExpressionSyntax simplifiedNode,
             SemanticModel semanticModel
-        ) {
+        )
+        {
             if (
                 simplifiedNode is IdentifierNameSyntax identifierName
                 && !SyntaxFacts.IsInNamespaceOrTypeContext(expression)
-            ) {
+            )
+            {
                 var symbols = semanticModel.LookupSymbols(
                     expression.SpanStart,
                     name: identifierName.Identifier.ValueText

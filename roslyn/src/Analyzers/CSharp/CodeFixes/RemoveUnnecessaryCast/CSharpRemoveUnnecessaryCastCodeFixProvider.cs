@@ -64,7 +64,8 @@ namespace Microsoft.CodeAnalysis.CSharp.RemoveUnnecessaryCast
             ImmutableArray<Diagnostic> diagnostics,
             SyntaxEditor editor,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var castNodes = diagnostics.SelectAsArray(
                 d =>
                     (ExpressionSyntax)d.AdditionalLocations[0].FindNode(

@@ -24,7 +24,8 @@ namespace System.Composition.Hosting.Providers.ImportMany
         public override IEnumerable<ExportDescriptorPromise> GetExportDescriptors(
             CompositionContract contract,
             DependencyAccessor definitionAccessor
-        ) {
+        )
+        {
             if (
                 !(
                     contract.ContractType.IsArray
@@ -67,7 +68,8 @@ namespace System.Composition.Hosting.Providers.ImportMany
             CompositionContract importManyContract,
             CompositionContract elementContract,
             DependencyAccessor definitionAccessor
-        ) {
+        )
+        {
             return new ExportDescriptorPromise(
                 importManyContract,
                 typeof(TElement[]).Name,

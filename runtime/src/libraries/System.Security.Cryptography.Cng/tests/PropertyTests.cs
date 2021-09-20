@@ -16,7 +16,8 @@ namespace System.Security.Cryptography.Cng.Tests
                     TestData.Key_ECDiffieHellmanP256,
                     CngKeyBlobFormat.GenericPublicBlob
                 )
-            ) {
+            )
+            {
                 Assert.ThrowsAny<CryptographicException>(
                     () => key.GetProperty("DOES NOT EXIST", CngPropertyOptions.CustomProperty)
                 );
@@ -31,7 +32,8 @@ namespace System.Security.Cryptography.Cng.Tests
                     TestData.Key_ECDiffieHellmanP256,
                     CngKeyBlobFormat.GenericPublicBlob
                 )
-            ) {
+            )
+            {
                 const string propertyName = "CustomZeroLengthProperty";
                 CngProperty p = new CngProperty(
                     propertyName,
@@ -57,7 +59,8 @@ namespace System.Security.Cryptography.Cng.Tests
                     TestData.Key_ECDiffieHellmanP256,
                     CngKeyBlobFormat.GenericPublicBlob
                 )
-            ) {
+            )
+            {
                 const string propertyName = "CustomNullProperty";
                 CngProperty p = new CngProperty(
                     propertyName,
@@ -76,7 +79,8 @@ namespace System.Security.Cryptography.Cng.Tests
                     TestData.Key_ECDiffieHellmanP256,
                     CngKeyBlobFormat.GenericPublicBlob
                 )
-            ) {
+            )
+            {
                 const string propertyName = "CustomProperty";
                 bool hasProperty;
 
@@ -99,7 +103,8 @@ namespace System.Security.Cryptography.Cng.Tests
                     TestData.Key_ECDiffieHellmanP256,
                     CngKeyBlobFormat.GenericPublicBlob
                 )
-            ) {
+            )
+            {
                 string propertyName = "Are you there";
                 bool hasProperty = key.HasProperty(propertyName, CngPropertyOptions.CustomProperty);
                 Assert.False(hasProperty);
@@ -129,7 +134,8 @@ namespace System.Security.Cryptography.Cng.Tests
                     TestData.Key_ECDiffieHellmanP256,
                     CngKeyBlobFormat.GenericPublicBlob
                 )
-            ) {
+            )
+            {
                 string propertyName = "Are you there";
                 bool hasProperty = key.HasProperty(propertyName, CngPropertyOptions.CustomProperty);
                 Assert.False(hasProperty);

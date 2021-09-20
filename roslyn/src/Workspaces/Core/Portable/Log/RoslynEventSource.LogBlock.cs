@@ -66,7 +66,8 @@ namespace Microsoft.CodeAnalysis.Internal.Log
                 EventLevel eventLevel,
                 int blockId,
                 CancellationToken cancellationToken
-            ) {
+            )
+            {
                 Debug.Assert(message != null || entityForMessage != null);
 
                 _functionId = functionId;
@@ -84,7 +85,8 @@ namespace Microsoft.CodeAnalysis.Internal.Log
                 object entityForMessage,
                 EventLevel eventLevel,
                 CancellationToken cancellationToken
-            ) {
+            )
+            {
                 var blockId = GetNextUniqueBlockId();
                 var logBlock = new LogBlock(
                     functionId,
@@ -103,7 +105,8 @@ namespace Microsoft.CodeAnalysis.Internal.Log
                 string message,
                 EventLevel eventLevel,
                 CancellationToken cancellationToken
-            ) {
+            )
+            {
                 var blockId = GetNextUniqueBlockId();
                 var logBlock = new LogBlock(
                     functionId,

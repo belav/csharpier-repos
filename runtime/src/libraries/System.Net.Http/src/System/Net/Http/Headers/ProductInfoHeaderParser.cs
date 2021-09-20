@@ -26,7 +26,8 @@ namespace System.Net.Http.Headers
             object? storeValue,
             ref int index,
             [NotNullWhen(true)] out object? parsedValue
-        ) {
+        )
+        {
             parsedValue = null;
 
             if (string.IsNullOrEmpty(value) || (index == value.Length))

@@ -41,7 +41,8 @@ namespace Microsoft.CodeAnalysis.UnitTests
         public static Project AddEmptyProject(
             Solution solution,
             string languageName = LanguageNames.CSharp
-        ) {
+        )
+        {
             var id = ProjectId.CreateNewId();
             return solution.AddProject(
                     ProjectInfo.Create(

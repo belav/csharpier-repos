@@ -62,9 +62,8 @@ namespace Microsoft.EntityFrameworkCore.Design
         ///     registration of provider services.
         /// </summary>
         /// <param name="serviceCollection"> The collection to which services will be registered. </param>
-        public EntityFrameworkRelationalDesignServicesBuilder(
-            IServiceCollection serviceCollection
-        ) : base(serviceCollection) { }
+        public EntityFrameworkRelationalDesignServicesBuilder(IServiceCollection serviceCollection)
+            : base(serviceCollection) { }
 
         /// <summary>
         ///     Gets the <see cref="ServiceCharacteristics" /> for the given service type.

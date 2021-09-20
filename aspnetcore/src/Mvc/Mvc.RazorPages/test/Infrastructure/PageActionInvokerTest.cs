@@ -1864,7 +1864,8 @@ namespace Microsoft.AspNetCore.Mvc.RazorPages.Infrastructure
             Exception exception = null,
             IActionResult result = null,
             IList<IValueProviderFactory> valueProviderFactories = null
-        ) {
+        )
+        {
             var actionDescriptor = new CompiledPageActionDescriptor
             {
                 ViewEnginePath = "/Index.cshtml",
@@ -1919,7 +1920,8 @@ namespace Microsoft.AspNetCore.Mvc.RazorPages.Infrastructure
             RouteData routeData = null,
             ILogger logger = null,
             TestDiagnosticListener listener = null
-        ) {
+        )
+        {
             var diagnosticListener = new DiagnosticListener("Microsoft.AspNetCore");
             if (listener != null)
             {
@@ -2134,7 +2136,8 @@ namespace Microsoft.AspNetCore.Mvc.RazorPages.Infrastructure
                     Mock.Of<IRazorPageActivator>(),
                     new DiagnosticListener("Microsoft.AspNetCore"),
                     HtmlEncoder.Default
-                ) {
+                )
+            {
                 _executeAction = executeAction;
             }
 

@@ -12,7 +12,8 @@ namespace System.Buffers.Text
             ReadOnlySpan<byte> source,
             out byte value,
             out int bytesConsumed
-        ) {
+        )
+        {
             if (source.Length < 1)
                 goto FalseExit;
 
@@ -95,7 +96,8 @@ namespace System.Buffers.Text
             ReadOnlySpan<byte> source,
             out ushort value,
             out int bytesConsumed
-        ) {
+        )
+        {
             if (source.Length < 1)
                 goto FalseExit;
 
@@ -178,7 +180,8 @@ namespace System.Buffers.Text
             ReadOnlySpan<byte> source,
             out uint value,
             out int bytesConsumed
-        ) {
+        )
+        {
             if (source.Length < 1)
                 goto FalseExit;
 
@@ -264,7 +267,8 @@ namespace System.Buffers.Text
             ReadOnlySpan<byte> source,
             out ulong value,
             out int bytesConsumed
-        ) {
+        )
+        {
             if (source.Length < 1)
                 goto FalseExit;
 

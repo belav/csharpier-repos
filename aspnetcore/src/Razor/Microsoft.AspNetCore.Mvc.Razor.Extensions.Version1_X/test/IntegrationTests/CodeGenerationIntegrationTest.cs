@@ -18,7 +18,8 @@ namespace Microsoft.AspNetCore.Mvc.Razor.Extensions.Version1_X.IntegrationTests
             : base(
                 generateBaselines: null,
                 projectDirectoryHint: "Microsoft.AspNetCore.Mvc.Razor.Extensions.Version1_X"
-            ) {
+            )
+        {
             Configuration = RazorConfiguration.Create(
                 RazorLanguageVersion.Version_1_1,
                 "MVC-1.1",

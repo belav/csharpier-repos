@@ -58,7 +58,8 @@ namespace System.Runtime.Caching
                     !entry.HasExpiration()
                     || entry.UtcAbsExp - DateTime.UtcNow >= CacheUsage.MIN_LIFETIME_FOR_USAGE
                 )
-            ) {
+            )
+            {
                 _usage.Add(entry);
             }
 
@@ -94,7 +95,8 @@ namespace System.Runtime.Caching
             MemoryCacheEntry entry,
             CacheEntryRemovedReason reason,
             bool delayRelease = false
-        ) {
+        )
+        {
             // release outside of lock
             if (entry != null)
             {
@@ -308,7 +310,8 @@ namespace System.Runtime.Caching
             MemoryCacheKey key,
             MemoryCacheEntry entryToRemove,
             CacheEntryRemovedReason reason
-        ) {
+        )
+        {
             MemoryCacheEntry entry = null;
             lock (_entriesLock)
             {

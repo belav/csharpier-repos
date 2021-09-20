@@ -1226,7 +1226,8 @@ namespace System.Linq.Tests
             IEnumerable<TSource> source,
             IComparer<TSource>? comparer,
             TSource? expected
-        ) {
+        )
+        {
             Assert.Equal(expected, source.Max(comparer));
         }
 
@@ -1236,7 +1237,8 @@ namespace System.Linq.Tests
             IEnumerable<TSource> source,
             IComparer<TSource>? comparer,
             TSource? expected
-        ) {
+        )
+        {
             Assert.Equal(expected, source.RunOnce().Max(comparer));
         }
 
@@ -1338,7 +1340,8 @@ namespace System.Linq.Tests
             Func<TSource, TKey> keySelector,
             IComparer<TKey>? comparer,
             TSource? expected
-        ) {
+        )
+        {
             Assert.Equal(expected, source.MaxBy(keySelector, comparer));
         }
 
@@ -1349,7 +1352,8 @@ namespace System.Linq.Tests
             Func<TSource, TKey> keySelector,
             IComparer<TKey>? comparer,
             TSource? expected
-        ) {
+        )
+        {
             Assert.Equal(expected, source.RunOnce().MaxBy(keySelector, comparer));
         }
 

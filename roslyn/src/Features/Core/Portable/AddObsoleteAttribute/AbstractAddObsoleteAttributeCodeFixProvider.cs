@@ -27,7 +27,8 @@ namespace Microsoft.CodeAnalysis.AddObsoleteAttribute
         protected AbstractAddObsoleteAttributeCodeFixProvider(
             ISyntaxFacts syntaxFacts,
             string title
-        ) {
+        )
+        {
             _syntaxFacts = syntaxFacts;
             _title = title;
         }
@@ -67,7 +68,8 @@ namespace Microsoft.CodeAnalysis.AddObsoleteAttribute
         private static async Task<INamedTypeSymbol> GetObsoleteAttributeAsync(
             Document document,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var compilation = await document.Project.GetCompilationAsync(cancellationToken)
                 .ConfigureAwait(false);
             var attribute = compilation.GetTypeByMetadataName(typeof(ObsoleteAttribute).FullName);
@@ -85,7 +87,8 @@ namespace Microsoft.CodeAnalysis.AddObsoleteAttribute
             ImmutableArray<Diagnostic> diagnostics,
             SyntaxEditor editor,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var obsoleteAttribute = await GetObsoleteAttributeAsync(document, cancellationToken)
                 .ConfigureAwait(false);
             var root = await document.GetSyntaxRootAsync(cancellationToken).ConfigureAwait(false);

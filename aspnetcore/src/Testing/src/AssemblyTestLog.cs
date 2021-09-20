@@ -59,7 +59,8 @@ namespace Microsoft.AspNetCore.Testing
             string baseDirectory,
             Assembly assembly,
             IServiceProvider serviceProvider
-        ) {
+        )
+        {
             _globalLoggerFactory = globalLoggerFactory;
             _globalLogger = globalLogger;
             _baseDirectory = baseDirectory;
@@ -109,7 +110,8 @@ namespace Microsoft.AspNetCore.Testing
             out string resolvedTestName,
             out string logOutputDirectory,
             [CallerMemberName] string testName = null
-        ) {
+        )
+        {
             var logStart = DateTimeOffset.UtcNow;
             var serviceProvider = CreateLoggerServices(
                 output,
@@ -227,7 +229,8 @@ namespace Microsoft.AspNetCore.Testing
             out string logOutputDirectory,
             [CallerMemberName] string testName = null,
             DateTimeOffset? logStart = null
-        ) {
+        )
+        {
             normalizedTestName = string.Empty;
             logOutputDirectory = string.Empty;
             var assemblyName = _assembly.GetName().Name;
@@ -247,7 +250,8 @@ namespace Microsoft.AspNetCore.Testing
                 if (
                     logOutputDirectory.Length + testName.Length + LogFileExtension.Length
                     >= MaxPathLength
-                ) {
+                )
+                {
                     _globalLogger.LogWarning(
                         $"Test name {testName} is too long. Please shorten test name."
                     );
@@ -401,7 +405,8 @@ namespace Microsoft.AspNetCore.Testing
                     if (
                         !string.IsNullOrEmpty(assemblyBaseDirectory)
                         && !TestFileOutputContext.GetPreserveExistingLogsInOutput(assembly)
-                    ) {
+                    )
+                    {
                         try
                         {
                             Directory.Delete(assemblyBaseDirectory, recursive: true);
@@ -424,7 +429,8 @@ namespace Microsoft.AspNetCore.Testing
         private static SerilogLoggerProvider ConfigureFileLogging(
             string fileName,
             DateTimeOffset? logStart
-        ) {
+        )
+        {
             var dir = Path.GetDirectoryName(fileName);
             if (!Directory.Exists(dir))
             {

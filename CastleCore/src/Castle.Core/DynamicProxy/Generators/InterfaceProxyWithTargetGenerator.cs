@@ -38,7 +38,8 @@ namespace Castle.DynamicProxy.Generators
         protected override CompositeTypeContributor GetProxyTargetContributor(
             Type proxyTargetType,
             INamingScope namingScope
-        ) {
+        )
+        {
             return new InterfaceProxyTargetContributor(
                 proxyTargetType,
                 AllowChangeTarget,
@@ -61,13 +62,15 @@ namespace Castle.DynamicProxy.Generators
             Type[] proxiedInterfaces,
             IDictionary<Type, ITypeContributor> typeImplementerMapping,
             ICollection<Type> targetInterfaces
-        ) {
+        )
+        {
             foreach (var @interface in interfaces)
             {
                 if (
                     !ImplementedByTarget(targetInterfaces, @interface)
                     || proxiedInterfaces.Contains(@interface)
-                ) {
+                )
+                {
                     continue;
                 }
 

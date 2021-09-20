@@ -37,7 +37,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.SolutionExplore
             [Import(typeof(AnalyzersCommandHandler))] IAnalyzersCommandHandler commandHandler,
             IDiagnosticAnalyzerService diagnosticAnalyzerService,
             VisualStudioWorkspace workspace
-        ) {
+        )
+        {
             _commandHandler = commandHandler;
             _diagnosticAnalyzerService = diagnosticAnalyzerService;
             _workspace = workspace;
@@ -46,13 +47,15 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.SolutionExplore
         protected override IAttachedCollectionSource? CreateCollectionSource(
             IVsHierarchyItem item,
             string relationshipName
-        ) {
+        )
+        {
             if (
                 item != null
                 && item.HierarchyIdentity != null
                 && item.HierarchyIdentity.NestedHierarchy != null
                 && relationshipName == KnownRelationships.Contains
-            ) {
+            )
+            {
                 if (NestedHierarchyHasProjectTreeCapability(item, "AnalyzerDependency"))
                 {
                     var projectRootItem = FindProjectRootItem(item, out var targetFrameworkMoniker);
@@ -66,13 +69,15 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.SolutionExplore
                                 targetFrameworkMoniker,
                                 out var projectId
                             )
-                        ) {
+                        )
+                        {
                             var hierarchy = projectRootItem.HierarchyIdentity.NestedHierarchy;
                             var itemId = projectRootItem.HierarchyIdentity.NestedItemID;
                             if (
                                 hierarchy.GetCanonicalName(itemId, out var projectCanonicalName)
                                 == VSConstants.S_OK
-                            ) {
+                            )
+                            {
                                 return new CpsDiagnosticItemSource(
                                     _workspace,
                                     projectCanonicalName,
@@ -98,7 +103,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.SolutionExplore
         private static IVsHierarchyItem? FindProjectRootItem(
             IVsHierarchyItem item,
             out string? targetFrameworkMoniker
-        ) {
+        )
+        {
             targetFrameworkMoniker = null;
 
             for (var parent = item; parent != null; parent = parent.Parent)
@@ -148,7 +154,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.SolutionExplore
         private static bool NestedHierarchyHasProjectTreeCapability(
             IVsHierarchyItem item,
             string capability
-        ) {
+        )
+        {
             var hierarchy = item.HierarchyIdentity.NestedHierarchy;
             var itemId = item.HierarchyIdentity.NestedItemID;
 
@@ -159,14 +166,16 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.SolutionExplore
         private static ImmutableArray<string> GetProjectTreeCapabilities(
             IVsHierarchy hierarchy,
             uint itemId
-        ) {
+        )
+        {
             if (
                 hierarchy.GetProperty(
                     itemId,
                     (int)__VSHPROPID7.VSHPROPID_ProjectTreeCapabilities,
                     out var capabilitiesObj
                 ) == VSConstants.S_OK
-            ) {
+            )
+            {
                 var capabilitiesString = (string)capabilitiesObj;
                 return ImmutableArray.Create(capabilitiesString.Split(' '));
             }

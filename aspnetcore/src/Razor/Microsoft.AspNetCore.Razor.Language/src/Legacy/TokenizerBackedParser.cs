@@ -338,7 +338,8 @@ namespace Microsoft.AspNetCore.Razor.Language.Legacy
                 !Language.KnowsTokenType(KnownTokenType.CommentStart)
                 || !Language.KnowsTokenType(KnownTokenType.CommentStar)
                 || !Language.KnowsTokenType(KnownTokenType.CommentBody)
-            ) {
+            )
+            {
                 throw new InvalidOperationException(
                     Resources.Language_Does_Not_Support_RazorComment
                 );
@@ -592,7 +593,8 @@ namespace Microsoft.AspNetCore.Razor.Language.Legacy
             if (
                 TokenBuilder.Count == 0
                 && Context.LastAcceptedCharacters != AcceptedCharactersInternal.Any
-            ) {
+            )
+            {
                 Accept(Language.CreateMarkerToken());
             }
         }
@@ -622,7 +624,8 @@ namespace Microsoft.AspNetCore.Razor.Language.Legacy
         protected RazorMetaCodeSyntax OutputAsMetaCode(
             SyntaxList<SyntaxToken> tokens,
             AcceptedCharactersInternal? accepted = null
-        ) {
+        )
+        {
             if (tokens.Count == 0)
             {
                 return null;
@@ -667,7 +670,8 @@ namespace Microsoft.AspNetCore.Razor.Language.Legacy
 
         protected IDisposable PushSpanContextConfig(
             Action<SpanContextBuilder, Action<SpanContextBuilder>> newConfig
-        ) {
+        )
+        {
             var old = SpanContextConfig;
             ConfigureSpanContext(newConfig);
             return new DisposableAction(() => SpanContextConfig = old);
@@ -681,7 +685,8 @@ namespace Microsoft.AspNetCore.Razor.Language.Legacy
 
         protected void ConfigureSpanContext(
             Action<SpanContextBuilder, Action<SpanContextBuilder>> config
-        ) {
+        )
+        {
             var prev = SpanContextConfig;
             if (config == null)
             {

@@ -144,7 +144,8 @@ namespace Microsoft.XmlSerializer.Generator
                         if (
                             arg.EndsWith(".dll", StringComparison.InvariantCultureIgnoreCase)
                             || arg.EndsWith(".exe", StringComparison.InvariantCultureIgnoreCase)
-                        ) {
+                        )
+                        {
                             if (assembly != null)
                             {
                                 errs.Add(SR.Format(SR.ErrInvalidArgument, arg));
@@ -225,7 +226,8 @@ namespace Microsoft.XmlSerializer.Generator
                     e is ThreadAbortException
                     || e is StackOverflowException
                     || e is OutOfMemoryException
-                ) {
+                )
+                {
                     throw;
                 }
 
@@ -245,7 +247,8 @@ namespace Microsoft.XmlSerializer.Generator
             bool force,
             string outputDirectory,
             bool parsableerrors
-        ) {
+        )
+        {
             Assembly assembly = LoadAssembly(assemblyName, true);
             Type[] types;
 
@@ -375,7 +378,8 @@ namespace Microsoft.XmlSerializer.Generator
                         || !Directory.Exists(
                             outputDirectory = outputDirectory.Remove(outputDirectory.Length - 1)
                         )
-                    ) {
+                    )
+                    {
                         throw new ArgumentException(
                             SR.Format(SR.ErrDirectoryNotExists, outputDirectory)
                         );
@@ -511,7 +515,8 @@ namespace Microsoft.XmlSerializer.Generator
             bool verbose,
             XmlReflectionImporter importer,
             bool parsableerrors
-        ) {
+        )
+        {
             XmlTypeMapping xmlTypeMapping = null;
             var localImporter = new XmlReflectionImporter();
             try
@@ -524,7 +529,8 @@ namespace Microsoft.XmlSerializer.Generator
                     e is ThreadAbortException
                     || e is StackOverflowException
                     || e is OutOfMemoryException
-                ) {
+                )
+                {
                     throw;
                 }
 
@@ -603,7 +609,8 @@ namespace Microsoft.XmlSerializer.Generator
             bool warning,
             string code,
             string message
-        ) {
+        )
+        {
             if (!parsableerrors)
             {
                 return message;
@@ -739,7 +746,8 @@ namespace Microsoft.XmlSerializer.Generator
                     exp is ThreadAbortException
                     || exp is StackOverflowException
                     || exp is OutOfMemoryException
-                ) {
+                )
+                {
                     throw;
                 }
 

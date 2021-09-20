@@ -26,7 +26,8 @@ namespace Microsoft.VisualStudio.IntegrationTest.Utilities.OutOfProcess
             using (
                 var cancellationTokenSource =
                     timeout != null ? new CancellationTokenSource(timeout.Value) : null
-            ) {
+            )
+            {
                 var cancellationToken = cancellationTokenSource?.Token ?? CancellationToken.None;
                 DialogHelpers.FindDialogByName(
                     GetMainWindowHWnd(),

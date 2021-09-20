@@ -39,7 +39,8 @@ namespace XLinqTests
         public void AddingMultipleNodesIntoElement(
             TestedFunction testedFunction,
             CalculateExpectedValues calculateExpectedValues
-        ) {
+        )
+        {
             runWithEvents = (bool)Params[0];
             var isConnected = (bool)Variation.Params[0];
             var lengthOfVariations = (int)Variation.Params[1];
@@ -123,7 +124,8 @@ namespace XLinqTests
         public void ValidAddIntoXDocument(
             TestedFunction testedFunction,
             CalculateExpectedValues calculateExpectedValues
-        ) {
+        )
+        {
             runWithEvents = (bool)Params[0];
             var isConnected = (bool)Variation.Params[0];
             var combCount = (int)Variation.Params[1];

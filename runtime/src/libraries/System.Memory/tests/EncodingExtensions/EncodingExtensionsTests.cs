@@ -844,7 +844,8 @@ namespace System.Text.Tests
         private static ReadOnlySequence<T> GetLargeRepeatingReadOnlySequence<T>(
             ReadOnlyMemory<T> dataToRepeat,
             int repetitionCount
-        ) {
+        )
+        {
             const int MAX_SEGMENT_LENGTH = 300_007; // a prime number, which ensures we'll have some multi-byte / multi-char splits if the data is long
 
             MockSequenceSegment<T> firstSegment = null;

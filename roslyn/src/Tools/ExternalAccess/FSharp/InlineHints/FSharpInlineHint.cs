@@ -31,7 +31,8 @@ namespace Microsoft.CodeAnalysis.ExternalAccess.FSharp.InlineHints
                 CancellationToken,
                 Task<ImmutableArray<TaggedText>>
             >? getDescriptionAsync = null
-        ) {
+        )
+        {
             if (displayParts.Length == 0)
                 throw new ArgumentException($"{nameof(displayParts)} must be non-empty");
 

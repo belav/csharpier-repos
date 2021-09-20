@@ -56,7 +56,8 @@ namespace Microsoft.CodeAnalysis.Remote
             SolutionAssetStorage solutionAssetStorage,
             IErrorReportingService? errorReportingService,
             IRemoteHostClientShutdownCancellationService? shutdownCancellationService
-        ) {
+        )
+        {
             Contract.ThrowIfFalse(
                 (callbackDispatcher == null) == (serviceDescriptor.ClientInterface == null)
             );
@@ -98,7 +99,8 @@ namespace Microsoft.CodeAnalysis.Remote
         public override async ValueTask<bool> TryInvokeAsync(
             Func<TService, CancellationToken, ValueTask> invocation,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             try
             {
                 using var rental = await RentServiceAsync(cancellationToken).ConfigureAwait(false);
@@ -116,7 +118,8 @@ namespace Microsoft.CodeAnalysis.Remote
         public override async ValueTask<Optional<TResult>> TryInvokeAsync<TResult>(
             Func<TService, CancellationToken, ValueTask<TResult>> invocation,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             try
             {
                 using var rental = await RentServiceAsync(cancellationToken).ConfigureAwait(false);
@@ -134,7 +137,8 @@ namespace Microsoft.CodeAnalysis.Remote
             Func<TService, PipeWriter, CancellationToken, ValueTask> invocation,
             Func<PipeReader, CancellationToken, ValueTask<TResult>> reader,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             try
             {
                 using var rental = await RentServiceAsync(cancellationToken).ConfigureAwait(false);
@@ -159,7 +163,8 @@ namespace Microsoft.CodeAnalysis.Remote
         public override async ValueTask<bool> TryInvokeAsync(
             Func<TService, RemoteServiceCallbackId, CancellationToken, ValueTask> invocation,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             Contract.ThrowIfFalse(_callbackDispatcher is not null);
 
             try
@@ -185,7 +190,8 @@ namespace Microsoft.CodeAnalysis.Remote
                 ValueTask<TResult>
             > invocation,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             Contract.ThrowIfFalse(_callbackDispatcher is not null);
 
             try
@@ -208,7 +214,8 @@ namespace Microsoft.CodeAnalysis.Remote
             Solution solution,
             Func<TService, PinnedSolutionInfo, CancellationToken, ValueTask> invocation,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             try
             {
                 using var scope = await _solutionAssetStorage.StoreAssetsAsync(
@@ -233,7 +240,8 @@ namespace Microsoft.CodeAnalysis.Remote
             Solution solution,
             Func<TService, PinnedSolutionInfo, CancellationToken, ValueTask<TResult>> invocation,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             try
             {
                 using var scope = await _solutionAssetStorage.StoreAssetsAsync(
@@ -258,7 +266,8 @@ namespace Microsoft.CodeAnalysis.Remote
             Func<TService, PinnedSolutionInfo, PipeWriter, CancellationToken, ValueTask> invocation,
             Func<PipeReader, CancellationToken, ValueTask<TResult>> reader,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             try
             {
                 using var scope = await _solutionAssetStorage.StoreAssetsAsync(
@@ -296,7 +305,8 @@ namespace Microsoft.CodeAnalysis.Remote
                 ValueTask
             > invocation,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             Contract.ThrowIfFalse(_callbackDispatcher is not null);
 
             try
@@ -335,7 +345,8 @@ namespace Microsoft.CodeAnalysis.Remote
                 ValueTask<TResult>
             > invocation,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             Contract.ThrowIfFalse(_callbackDispatcher is not null);
 
             try
@@ -373,7 +384,8 @@ namespace Microsoft.CodeAnalysis.Remote
             Func<TService, PipeWriter, CancellationToken, ValueTask> invocation,
             Func<PipeReader, CancellationToken, ValueTask<TResult>> reader,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             // We can cancel at entry, but once the pipe operations are scheduled we rely on both operations running to
             // avoid deadlocks (the exception handler in 'writerTask' ensures progress is made in 'readerTask').
             cancellationToken.ThrowIfCancellationRequested();
@@ -455,7 +467,8 @@ namespace Microsoft.CodeAnalysis.Remote
         private bool ReportUnexpectedException(
             Exception exception,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             if (exception is OperationCanceledException)
             {
                 // It's a bug for a service to throw OCE based on a different cancellation token than it has received in the call.

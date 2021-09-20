@@ -331,7 +331,8 @@ namespace System.IO.Pipelines.Tests
         [InlineData(1)]
         public async Task ThrowingFromStreamCallsAdvanceToWithStartOfLastReadResult(
             int throwAfterNWrites
-        ) {
+        )
+        {
             var pipe = new Pipe(s_testOptions);
             var wrappedPipeReader = new TestPipeReader(pipe.Reader);
 
@@ -398,7 +399,8 @@ namespace System.IO.Pipelines.Tests
 
             public override async ValueTask<ReadResult> ReadAsync(
                 CancellationToken cancellationToken = default
-            ) {
+            )
+            {
                 LastReadResult = await _inner.ReadAsync(cancellationToken);
                 return LastReadResult;
             }

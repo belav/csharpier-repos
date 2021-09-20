@@ -140,7 +140,8 @@ namespace System.Globalization.Tests
             DateTime time,
             CalendarWeekRule rule,
             DayOfWeek firstDayOfWeek
-        ) {
+        )
+        {
             int weekOfYear = calendar.GetWeekOfYear(time, rule, firstDayOfWeek);
             int dayOfYear = calendar.GetDayOfYear(time); // 1-based
             int dayOfWeek = calendar.GetDayOfWeek(time) - firstDayOfWeek + 1; // 1-based

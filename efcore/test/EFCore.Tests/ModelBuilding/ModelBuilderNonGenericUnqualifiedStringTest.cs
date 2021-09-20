@@ -38,7 +38,8 @@ namespace Microsoft.EntityFrameworkCore.ModelBuilding
 
             public override TestModelBuilder Entity<TEntity>(
                 Action<TestEntityTypeBuilder<TEntity>> buildAction
-            ) {
+            )
+            {
                 ModelBuilder.Entity(
                     typeof(TEntity),
                     entityTypeBuilder =>
@@ -52,7 +53,8 @@ namespace Microsoft.EntityFrameworkCore.ModelBuilding
             public override TestModelBuilder SharedTypeEntity<TEntity>(
                 string name,
                 Action<TestEntityTypeBuilder<TEntity>> buildAction
-            ) {
+            )
+            {
                 ModelBuilder.SharedTypeEntity(
                     name,
                     typeof(TEntity),
@@ -79,9 +81,8 @@ namespace Microsoft.EntityFrameworkCore.ModelBuilding
         private class NonGenericStringTestEntityTypeBuilder<TEntity>
             : NonGenericTestEntityTypeBuilder<TEntity> where TEntity : class
         {
-            public NonGenericStringTestEntityTypeBuilder(
-                EntityTypeBuilder entityTypeBuilder
-            ) : base(entityTypeBuilder) { }
+            public NonGenericStringTestEntityTypeBuilder(EntityTypeBuilder entityTypeBuilder)
+                : base(entityTypeBuilder) { }
 
             protected override NonGenericTestEntityTypeBuilder<TEntity> Wrap(
                 EntityTypeBuilder entityTypeBuilder

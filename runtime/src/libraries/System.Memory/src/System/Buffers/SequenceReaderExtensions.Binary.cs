@@ -65,7 +65,8 @@ namespace System.Buffers
         public static bool TryReadLittleEndian(
             ref this SequenceReader<byte> reader,
             out short value
-        ) {
+        )
+        {
             if (BitConverter.IsLittleEndian)
             {
                 return reader.TryRead(out value);
@@ -91,7 +92,8 @@ namespace System.Buffers
         private static bool TryReadReverseEndianness(
             ref SequenceReader<byte> reader,
             out short value
-        ) {
+        )
+        {
             if (reader.TryRead(out value))
             {
                 value = BinaryPrimitives.ReverseEndianness(value);
@@ -171,7 +173,8 @@ namespace System.Buffers
         private static bool TryReadReverseEndianness(
             ref SequenceReader<byte> reader,
             out long value
-        ) {
+        )
+        {
             if (reader.TryRead(out value))
             {
                 value = BinaryPrimitives.ReverseEndianness(value);

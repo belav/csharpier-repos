@@ -23,7 +23,8 @@ namespace System.Net.Http.Formatting
             MediaTypeHeaderValue mediaType,
             double? quality,
             MediaTypeFormatterMatchRanking ranking
-        ) {
+        )
+        {
             if (formatter == null)
             {
                 throw Error.ArgumentNull("formatter");

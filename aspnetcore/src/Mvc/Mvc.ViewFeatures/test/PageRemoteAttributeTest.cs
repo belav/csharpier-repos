@@ -150,7 +150,8 @@ namespace Microsoft.AspNetCore.Mvc
         private static ClientModelValidationContext GetValidationContext(
             IUrlHelper urlHelper,
             RouteData routeData = null
-        ) {
+        )
+        {
             var serviceCollection = GetServiceCollection();
             var factory = new Mock<IUrlHelperFactory>(MockBehavior.Strict);
             serviceCollection.AddSingleton<IUrlHelperFactory>(factory.Object);
@@ -196,7 +197,8 @@ namespace Microsoft.AspNetCore.Mvc
         private static ActionContext GetActionContext(
             IServiceProvider serviceProvider,
             RouteData routeData
-        ) {
+        )
+        {
             // Set IServiceProvider properties because TemplateRoute gets services (e.g. an ILoggerFactory instance)
             // through the HttpContext.
             var httpContext = new DefaultHttpContext { RequestServices = serviceProvider, };

@@ -46,7 +46,8 @@ namespace System.CommandLine.Tests.Parsing
         public void It_does_not_split_double_quote_delimited_values_when_a_non_whitespace_argument_delimiter_is_used(
             string prefix,
             char delimiter
-        ) {
+        )
+        {
             var optionAndArgument = $@"{prefix}the-option{delimiter}""c:\temp files\""";
 
             var commandLine = $"the-command {optionAndArgument}";

@@ -232,7 +232,8 @@ namespace Microsoft.AspNetCore.Mvc
             ResponseCacheAttribute responseCache,
             Dictionary<string, CacheProfile> cacheProfiles,
             CacheProfile expectedProfile
-        ) {
+        )
+        {
             // Arrange & Act
             var createdFilter = responseCache.CreateInstance(GetServiceProvider(cacheProfiles));
 
@@ -344,7 +345,8 @@ namespace Microsoft.AspNetCore.Mvc
         public void ResponseCache_SetsDifferentCacheControlHeaders(
             ResponseCacheAttribute responseCacheAttribute,
             string expected
-        ) {
+        )
+        {
             // Arrange
             var filter = (ResponseCacheFilter)responseCacheAttribute.CreateInstance(
                 GetServiceProvider(cacheProfiles: null)

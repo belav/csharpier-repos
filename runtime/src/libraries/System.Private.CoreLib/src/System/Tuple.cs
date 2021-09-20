@@ -41,7 +41,8 @@ namespace System
             T2 item2,
             T3 item3,
             T4 item4
-        ) {
+        )
+        {
             return new Tuple<T1, T2, T3, T4>(item1, item2, item3, item4);
         }
 
@@ -51,7 +52,8 @@ namespace System
             T3 item3,
             T4 item4,
             T5 item5
-        ) {
+        )
+        {
             return new Tuple<T1, T2, T3, T4, T5>(item1, item2, item3, item4, item5);
         }
 
@@ -62,7 +64,8 @@ namespace System
             T4 item4,
             T5 item5,
             T6 item6
-        ) {
+        )
+        {
             return new Tuple<T1, T2, T3, T4, T5, T6>(item1, item2, item3, item4, item5, item6);
         }
 
@@ -74,7 +77,8 @@ namespace System
             T5 item5,
             T6 item6,
             T7 item7
-        ) {
+        )
+        {
             return new Tuple<T1, T2, T3, T4, T5, T6, T7>(
                 item1,
                 item2,
@@ -151,7 +155,8 @@ namespace System
             int h6,
             int h7,
             int h8
-        ) {
+        )
+        {
             return CombineHashCodes(
                 CombineHashCodes(h1, h2, h3, h4),
                 CombineHashCodes(h5, h6, h7, h8)
@@ -187,7 +192,8 @@ namespace System
         bool IStructuralEquatable.Equals(
             [NotNullWhen(true)] object? other,
             IEqualityComparer comparer
-        ) {
+        )
+        {
             return Equals(other, comparer);
         }
 
@@ -321,7 +327,8 @@ namespace System
         bool IStructuralEquatable.Equals(
             [NotNullWhen(true)] object? other,
             IEqualityComparer comparer
-        ) {
+        )
+        {
             return Equals(other, comparer);
         }
 
@@ -465,7 +472,8 @@ namespace System
         bool IStructuralEquatable.Equals(
             [NotNullWhen(true)] object? other,
             IEqualityComparer comparer
-        ) {
+        )
+        {
             return Equals(other, comparer);
         }
 
@@ -622,7 +630,8 @@ namespace System
         bool IStructuralEquatable.Equals(
             [NotNullWhen(true)] object? other,
             IEqualityComparer comparer
-        ) {
+        )
+        {
             return Equals(other, comparer);
         }
 
@@ -792,7 +801,8 @@ namespace System
         bool IStructuralEquatable.Equals(
             [NotNullWhen(true)] object? other,
             IEqualityComparer comparer
-        ) {
+        )
+        {
             return Equals(other, comparer);
         }
 
@@ -975,7 +985,8 @@ namespace System
         bool IStructuralEquatable.Equals(
             [NotNullWhen(true)] object? other,
             IEqualityComparer comparer
-        ) {
+        )
+        {
             return Equals(other, comparer);
         }
 
@@ -1171,7 +1182,8 @@ namespace System
         bool IStructuralEquatable.Equals(
             [NotNullWhen(true)] object? other,
             IEqualityComparer comparer
-        ) {
+        )
+        {
             return Equals(other, comparer);
         }
 
@@ -1369,7 +1381,8 @@ namespace System
             T6 item6,
             T7 item7,
             TRest rest
-        ) {
+        )
+        {
             if (!(rest is ITupleInternal))
             {
                 throw new ArgumentException(SR.ArgumentException_TupleLastArgumentNotATuple);
@@ -1393,7 +1406,8 @@ namespace System
         bool IStructuralEquatable.Equals(
             [NotNullWhen(true)] object? other,
             IEqualityComparer comparer
-        ) {
+        )
+        {
             return Equals(other, comparer);
         }
 

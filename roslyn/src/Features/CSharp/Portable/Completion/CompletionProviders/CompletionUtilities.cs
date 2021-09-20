@@ -50,7 +50,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Completion.Providers
             SourceText text,
             int characterPosition,
             OptionSet options
-        ) {
+        )
+        {
             var ch = text[characterPosition];
             if (ch == '.')
             {
@@ -78,7 +79,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Completion.Providers
             if (
                 options.GetOption(CompletionOptions.TriggerOnTypingLetters2, LanguageNames.CSharp)
                 && IsStartingNewWord(text, characterPosition)
-            ) {
+            )
+            {
                 return true;
             }
 
@@ -109,7 +111,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Completion.Providers
             SourceText text,
             int characterPosition,
             OptionSet options
-        ) {
+        )
+        {
             // Bring up on space or at the start of a word.
             var ch = text[characterPosition];
             return SpaceTypedNotBeforeWord(ch, text, characterPosition)
@@ -149,7 +152,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Completion.Providers
         public static (string displayText, string suffix, string insertionText) GetDisplayAndSuffixAndInsertionText(
             ISymbol symbol,
             SyntaxContext context
-        ) {
+        )
+        {
             var insertionText = GetInsertionText(symbol, context);
             var suffix = symbol.GetArity() == 0 ? "" : "<>";
 
@@ -172,7 +176,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Completion.Providers
                 symbol.Kind == SymbolKind.Label
                 && symbol.DeclaringSyntaxReferences[0].GetSyntax().Kind()
                     == SyntaxKind.DefaultSwitchLabel
-            ) {
+            )
+            {
                 return symbol.Name;
             }
 

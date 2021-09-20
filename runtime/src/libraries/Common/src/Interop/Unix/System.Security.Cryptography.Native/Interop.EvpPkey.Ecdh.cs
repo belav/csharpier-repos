@@ -34,7 +34,8 @@ internal static partial class Interop
         internal static void EvpPKeyDeriveSecretAgreement(
             SafeEvpPKeyCtxHandle ctx,
             Span<byte> destination
-        ) {
+        )
+        {
             Debug.Assert(ctx != null);
             Debug.Assert(!ctx.IsInvalid);
 

@@ -288,7 +288,8 @@ namespace System.Threading.Tasks
         internal AggregateException CreateExceptionObject(
             bool calledFromFinalizer,
             Exception? includeThisException
-        ) {
+        )
+        {
             List<ExceptionDispatchInfo>? exceptions = m_faultExceptions;
             Debug.Assert(exceptions != null, "Expected an initialized list.");
             Debug.Assert(exceptions.Count > 0, "Expected at least one exception.");

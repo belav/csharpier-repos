@@ -64,7 +64,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Completion.Providers
                         targetToken.IsKind(SyntaxKind.IdentifierToken)
                         && targetToken.HasMatchingText(SyntaxKind.AliasKeyword)
                     )
-                ) {
+                )
+                {
                     return;
                 }
 
@@ -74,7 +75,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Completion.Providers
                         targetToken.Parent.IsKind(SyntaxKind.IdentifierName)
                         && targetToken.Parent.IsParentKind(SyntaxKind.IncompleteMember)
                     )
-                ) {
+                )
+                {
                     var compilation = await document.Project.GetCompilationAsync(cancellationToken)
                         .ConfigureAwait(false);
                     var aliases = compilation.ExternalReferences.SelectMany(

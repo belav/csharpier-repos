@@ -116,7 +116,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Syntax
                 if (
                     _residualTrivia.Count == 0
                     || !IsEndOfLine(_residualTrivia[_residualTrivia.Count - 1])
-                ) {
+                )
+                {
                     _residualTrivia.Add(eolTrivia.Value);
                 }
             }
@@ -148,7 +149,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Syntax
                     if (
                         trivia.IsDirective
                         && trivia.GetStructure() is DirectiveTriviaSyntax directive
-                    ) {
+                    )
+                    {
                         return GetEndOfLine(directive.EndOfDirectiveToken.TrailingTrivia);
                     }
                 }
@@ -203,7 +205,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Syntax
                     result.Kind() != SyntaxKind.None
                     && _residualTrivia != null
                     && _residualTrivia.Count > 0
-                ) {
+                )
+                {
                     _residualTrivia.Add(result.LeadingTrivia);
                     result = result.WithLeadingTrivia(_residualTrivia.ToList());
                     _residualTrivia.Clear();
@@ -215,7 +218,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Syntax
             // deal with separated lists and removal of associated separators
             public override SeparatedSyntaxList<TNode> VisitList<TNode>(
                 SeparatedSyntaxList<TNode> list
-            ) {
+            )
+            {
                 var withSeps = list.GetWithSeparators();
                 bool removeNextSeparator = false;
 
@@ -261,7 +265,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Syntax
                                 !nextSeparatorBelongsToNode
                                 && alternate.Count > 0
                                 && alternate[alternate.Count - 1].IsToken
-                            ) {
+                            )
+                            {
                                 var separator = alternate[alternate.Count - 1].AsToken();
                                 this.AddTrivia(separator, node);
                                 alternate.RemoveLast();
@@ -324,7 +329,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Syntax
                             | SyntaxRemoveOptions.KeepUnbalancedDirectives
                         )
                     ) != 0
-                ) {
+                )
+                {
                     this.AddDirectives(node, GetRemovedSpan(node.Span, node.FullSpan));
                 }
 
@@ -369,7 +375,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Syntax
                             | SyntaxRemoveOptions.KeepUnbalancedDirectives
                         )
                     ) != 0
-                ) {
+                )
+                {
                     var span = TextSpan.FromBounds(token.Span.Start, node.Span.End);
                     var fullSpan = TextSpan.FromBounds(token.FullSpan.Start, node.FullSpan.End);
                     this.AddDirectives(node.Parent, GetRemovedSpan(span, fullSpan));
@@ -410,7 +417,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Syntax
                             | SyntaxRemoveOptions.KeepUnbalancedDirectives
                         )
                     ) != 0
-                ) {
+                )
+                {
                     var span = TextSpan.FromBounds(node.Span.Start, token.Span.End);
                     var fullSpan = TextSpan.FromBounds(node.FullSpan.Start, token.FullSpan.End);
                     this.AddDirectives(node.Parent, GetRemovedSpan(span, fullSpan));
@@ -485,7 +493,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Syntax
                         else if (
                             directive.Kind() == SyntaxKind.DefineDirectiveTrivia
                             || directive.Kind() == SyntaxKind.UndefDirectiveTrivia
-                        ) {
+                        )
+                        {
                             // always keep #define and #undef, even if we are only keeping unbalanced directives
                             _directivesToKeep.Add(directive);
                         }
@@ -504,7 +513,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Syntax
                                     var unbalancedDirective in relatedDirectives.Where(
                                         rd => rd.FullSpan.OverlapsWith(span)
                                     )
-                                ) {
+                                )
+                                {
                                     _directivesToKeep.Add(unbalancedDirective);
                                 }
                             }

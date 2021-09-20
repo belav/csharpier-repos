@@ -43,7 +43,8 @@ namespace Microsoft.CodeAnalysis.CSharp.ConvertAnonymousTypeToClass
         protected override ObjectCreationExpressionSyntax CreateObjectCreationExpression(
             NameSyntax nameNode,
             AnonymousObjectCreationExpressionSyntax anonymousObject
-        ) {
+        )
+        {
             return SyntaxFactory.ObjectCreationExpression(
                 nameNode,
                 CreateArgumentList(anonymousObject),

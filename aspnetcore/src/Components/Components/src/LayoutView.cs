@@ -68,7 +68,8 @@ namespace Microsoft.AspNetCore.Components
         private static RenderFragment WrapInLayout(
             [DynamicallyAccessedMembers(Component)] Type layoutType,
             RenderFragment bodyParam
-        ) {
+        )
+        {
             void Render(RenderTreeBuilder builder)
             {
                 builder.OpenComponent(0, layoutType);

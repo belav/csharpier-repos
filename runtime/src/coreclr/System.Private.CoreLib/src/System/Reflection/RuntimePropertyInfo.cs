@@ -32,7 +32,8 @@ namespace System.Reflection
             RuntimeType declaredType,
             RuntimeTypeCache reflectedTypeCache,
             out bool isPrivate
-        ) {
+        )
+        {
             Debug.Assert(declaredType != null);
             Debug.Assert(reflectedTypeCache != null);
             Debug.Assert(!reflectedTypeCache.IsGlobal);
@@ -380,7 +381,8 @@ namespace System.Reflection
             Binder? binder,
             object?[]? index,
             CultureInfo? culture
-        ) {
+        )
+        {
             MethodInfo? m = GetGetMethod(true);
             if (m == null)
                 throw new ArgumentException(System.SR.Arg_GetMethNotFnd);
@@ -413,7 +415,8 @@ namespace System.Reflection
             Binder? binder,
             object?[]? index,
             CultureInfo? culture
-        ) {
+        )
+        {
             MethodInfo? m = GetSetMethod(true);
 
             if (m == null)

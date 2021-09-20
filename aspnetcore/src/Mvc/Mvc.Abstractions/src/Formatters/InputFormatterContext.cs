@@ -36,14 +36,15 @@ namespace Microsoft.AspNetCore.Mvc.Formatters
             ModelStateDictionary modelState,
             ModelMetadata metadata,
             Func<Stream, Encoding, TextReader> readerFactory
-        ) : this(
-            httpContext,
-            modelName,
-            modelState,
-            metadata,
-            readerFactory,
-            treatEmptyInputAsDefaultValue: false
-        ) { }
+        )
+            : this(
+                httpContext,
+                modelName,
+                modelState,
+                metadata,
+                readerFactory,
+                treatEmptyInputAsDefaultValue: false
+            ) { }
 
         /// <summary>
         /// Creates a new instance of <see cref="InputFormatterContext"/>.
@@ -71,7 +72,8 @@ namespace Microsoft.AspNetCore.Mvc.Formatters
             ModelMetadata metadata,
             Func<Stream, Encoding, TextReader> readerFactory,
             bool treatEmptyInputAsDefaultValue
-        ) {
+        )
+        {
             if (httpContext == null)
             {
                 throw new ArgumentNullException(nameof(httpContext));

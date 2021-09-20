@@ -15,7 +15,8 @@ namespace AutoMapper.Internal.Mappers
             MemberMap memberMap,
             Expression sourceExpression,
             Expression destExpression
-        ) {
+        )
+        {
             var sourceArguments = sourceExpression.Type.GenericTypeArguments;
             var destinationType = destExpression.Type;
             var destinationArguments = destinationType.GenericTypeArguments;

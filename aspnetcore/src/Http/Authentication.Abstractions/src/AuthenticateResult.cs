@@ -112,7 +112,8 @@ namespace Microsoft.AspNetCore.Authentication
         public static AuthenticateResult Fail(
             Exception failure,
             AuthenticationProperties? properties
-        ) {
+        )
+        {
             return new AuthenticateResult() { Failure = failure, Properties = properties };
         }
 

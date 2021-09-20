@@ -1139,7 +1139,8 @@ namespace System.Security.Cryptography.Rsa.Tests
                 if (
                     !PlatformDetection.IsNetFramework
                     || rsa.GetType().Assembly.GetName().Name != "System.Core"
-                ) {
+                )
+                {
                     Assert.ThrowsAny<CryptographicException>(
                         () => Decrypt(rsa, encrypted, RSAEncryptionPadding.Pkcs1)
                     );

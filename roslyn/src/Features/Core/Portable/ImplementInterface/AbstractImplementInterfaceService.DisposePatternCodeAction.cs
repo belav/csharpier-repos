@@ -53,7 +53,8 @@ namespace Microsoft.CodeAnalysis.ImplementInterface
                         && disposeMethod.ReturnsVoid
                         && disposeMethod.Arity == 0
                         && disposeMethod.Parameters.Length == 0
-                    ) {
+                    )
+                    {
                         return disposeMethod;
                     }
                 }
@@ -99,21 +100,23 @@ namespace Microsoft.CodeAnalysis.ImplementInterface
                 bool explicitly,
                 bool abstractly,
                 ISymbol? throughMember
-            ) : base(
-                service,
-                document,
-                state,
-                explicitly,
-                abstractly,
-                onlyRemaining: !explicitly,
-                throughMember
-            ) { }
+            )
+                : base(
+                    service,
+                    document,
+                    state,
+                    explicitly,
+                    abstractly,
+                    onlyRemaining: !explicitly,
+                    throughMember
+                ) { }
 
             public static ImplementInterfaceWithDisposePatternCodeAction CreateImplementWithDisposePatternCodeAction(
                 AbstractImplementInterfaceService service,
                 Document document,
                 State state
-            ) {
+            )
+            {
                 return new ImplementInterfaceWithDisposePatternCodeAction(
                     service,
                     document,
@@ -128,7 +131,8 @@ namespace Microsoft.CodeAnalysis.ImplementInterface
                 AbstractImplementInterfaceService service,
                 Document document,
                 State state
-            ) {
+            )
+            {
                 return new ImplementInterfaceWithDisposePatternCodeAction(
                     service,
                     document,
@@ -150,7 +154,8 @@ namespace Microsoft.CodeAnalysis.ImplementInterface
                 INamedTypeSymbol classType,
                 SyntaxNode classDecl,
                 CancellationToken cancellationToken
-            ) {
+            )
+            {
                 var compilation = await document.Project.GetRequiredCompilationAsync(
                         cancellationToken
                     )
@@ -232,7 +237,8 @@ namespace Microsoft.CodeAnalysis.ImplementInterface
                 Document document,
                 SyntaxNode finalizer,
                 CancellationToken cancellationToken
-            ) {
+            )
+            {
                 var root = await document.GetRequiredSyntaxRootAsync(cancellationToken)
                     .ConfigureAwait(false);
 
@@ -262,7 +268,8 @@ namespace Microsoft.CodeAnalysis.ImplementInterface
                 INamedTypeSymbol classType,
                 IMethodSymbol disposeMethod,
                 IFieldSymbol disposedValueField
-            ) {
+            )
+            {
                 var disposeImplMethod = CreateDisposeImplementationMethod(
                     compilation,
                     document,
@@ -300,7 +307,8 @@ namespace Microsoft.CodeAnalysis.ImplementInterface
                 INamedTypeSymbol classType,
                 IMethodSymbol disposeMethod,
                 IFieldSymbol disposedValueField
-            ) {
+            )
+            {
                 var accessibility = classType.IsSealed
                     ? Accessibility.Private
                     : Accessibility.Protected;
@@ -370,7 +378,8 @@ namespace Microsoft.CodeAnalysis.ImplementInterface
                 IMethodSymbol disposeMethod,
                 IFieldSymbol disposedValueField,
                 string disposeMethodDisplayString
-            ) {
+            )
+            {
                 using var _ = ArrayBuilder<SyntaxNode>.GetInstance(out var statements);
 
                 var g = document.GetRequiredLanguageService<SyntaxGenerator>();
@@ -432,7 +441,8 @@ namespace Microsoft.CodeAnalysis.ImplementInterface
                 Document document,
                 INamedTypeSymbol containingType,
                 CancellationToken cancellationToken
-            ) {
+            )
+            {
                 var rule = await document.GetApplicableNamingRuleAsync(
                         SymbolKind.Field,
                         Accessibility.Private,
@@ -470,7 +480,8 @@ namespace Microsoft.CodeAnalysis.ImplementInterface
             private static string GenerateUniqueNameForDisposedValueField(
                 INamedTypeSymbol containingType,
                 NamingRule rule
-            ) {
+            )
+            {
                 // Determine an appropriate name to call the new field.
                 var baseName = rule.NamingStyle.CreateName(s_disposedValueNameParts);
 

@@ -38,7 +38,8 @@ namespace ILCompiler
             CompilerTypeSystemContext context,
             ReadyToRunCompilationModuleGroupBase compilationGroup,
             bool embedPgoDataInR2RImage
-        ) {
+        )
+        {
             EmbedPgoDataInR2RImage = embedPgoDataInR2RImage;
             _ibcParser = new IBCProfileParser(logger, possibleReferenceModules);
             _compilationGroup = compilationGroup;
@@ -98,7 +99,8 @@ namespace ILCompiler
                     && !profileData.Value.Flags.HasFlag(
                         MethodProfilingDataFlags.ExcludeColdMethodCode
                     )
-                ) {
+                )
+                {
                     // Check for methods which are defined within the version bubble, and only rely on other modules within the bubble
                     if (!_compilationGroup.VersionsWithMethodBody(profileData.Key))
                         continue; // Method not contained within version bubble
@@ -106,7 +108,8 @@ namespace ILCompiler
                     if (
                         _compilationGroup.ContainsType(profileData.Key.OwningType)
                         && (profileData.Key.OwningType is MetadataType declaringType)
-                    ) {
+                    )
+                    {
                         // In this case the method is placed in its natural home (which is the defining module of the method)
                         _placedProfileMethods[declaringType.Module].Add(profileData.Key);
                         _placedProfileMethodsAll.Add(profileData.Key);
@@ -117,7 +120,8 @@ namespace ILCompiler
                         if (
                             (nonLocalGenericsHome != null)
                             && (profileData.Key.GetTypicalMethodDefinition() != profileData.Key)
-                        ) {
+                        )
+                        {
                             _placedProfileMethods[nonLocalGenericsHome].Add(profileData.Key);
                             _placedProfileMethodsAll.Add(profileData.Key);
                         }
@@ -133,11 +137,13 @@ namespace ILCompiler
         private ModuleDesc GetDefiningModuleForMethodWithinVersionBubble(
             MethodDesc method,
             HashSet<ModuleDesc> versionBubble
-        ) {
+        )
+        {
             if (
                 _compilationGroup.VersionsWithMethodBody(method)
                 && (method.OwningType is MetadataType metadataType)
-            ) {
+            )
+            {
                 return metadataType.Module;
             }
 

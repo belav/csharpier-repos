@@ -55,7 +55,8 @@ namespace Microsoft.AspNetCore.StaticFiles
             string baseDir,
             string requestUrl,
             bool appendTrailingSlash = true
-        ) {
+        )
+        {
             await NoMatch_PassesThrough(baseUrl, baseDir, requestUrl, appendTrailingSlash);
         }
 
@@ -71,7 +72,8 @@ namespace Microsoft.AspNetCore.StaticFiles
             string baseDir,
             string requestUrl,
             bool appendTrailingSlash = true
-        ) {
+        )
+        {
             await NoMatch_PassesThrough(baseUrl, baseDir, requestUrl, appendTrailingSlash);
         }
 
@@ -80,12 +82,14 @@ namespace Microsoft.AspNetCore.StaticFiles
             string baseDir,
             string requestUrl,
             bool appendTrailingSlash = true
-        ) {
+        )
+        {
             using (
                 var fileProvider = new PhysicalFileProvider(
                     Path.Combine(AppContext.BaseDirectory, baseDir)
                 )
-            ) {
+            )
+            {
                 using var host = await StaticFilesTestServer.Create(
                     app =>
                     {
@@ -115,7 +119,8 @@ namespace Microsoft.AspNetCore.StaticFiles
                 var fileProvider = new PhysicalFileProvider(
                     Path.Combine(AppContext.BaseDirectory, ".")
                 )
-            ) {
+            )
+            {
                 using var host = await StaticFilesTestServer.Create(
                     app =>
                     {
@@ -188,7 +193,8 @@ namespace Microsoft.AspNetCore.StaticFiles
             string baseDir,
             string requestUrl,
             bool appendTrailingSlash = true
-        ) {
+        )
+        {
             await FoundDirectoryWithDefaultFile_PathModified(
                 baseUrl,
                 baseDir,
@@ -217,7 +223,8 @@ namespace Microsoft.AspNetCore.StaticFiles
             string baseDir,
             string requestUrl,
             bool appendTrailingSlash = true
-        ) {
+        )
+        {
             await FoundDirectoryWithDefaultFile_PathModified(
                 baseUrl,
                 baseDir,
@@ -231,12 +238,14 @@ namespace Microsoft.AspNetCore.StaticFiles
             string baseDir,
             string requestUrl,
             bool appendTrailingSlash = true
-        ) {
+        )
+        {
             using (
                 var fileProvider = new PhysicalFileProvider(
                     Path.Combine(AppContext.BaseDirectory, baseDir)
                 )
-            ) {
+            )
+            {
                 using var host = await StaticFilesTestServer.Create(
                     app =>
                     {
@@ -275,7 +284,8 @@ namespace Microsoft.AspNetCore.StaticFiles
             string baseDir,
             string requestUrl,
             string queryString
-        ) {
+        )
+        {
             await NearMatch_RedirectAddSlash(baseUrl, baseDir, requestUrl, queryString);
         }
 
@@ -291,7 +301,8 @@ namespace Microsoft.AspNetCore.StaticFiles
             string baseDir,
             string requestUrl,
             string queryString
-        ) {
+        )
+        {
             await NearMatch_RedirectAddSlash(baseUrl, baseDir, requestUrl, queryString);
         }
 
@@ -300,12 +311,14 @@ namespace Microsoft.AspNetCore.StaticFiles
             string baseDir,
             string requestUrl,
             string queryString
-        ) {
+        )
+        {
             using (
                 var fileProvider = new PhysicalFileProvider(
                     Path.Combine(AppContext.BaseDirectory, baseDir)
                 )
-            ) {
+            )
+            {
                 using var host = await StaticFilesTestServer.Create(
                     app =>
                         app.UseDefaultFiles(
@@ -348,7 +361,8 @@ namespace Microsoft.AspNetCore.StaticFiles
             string baseDir,
             string requestUrl,
             bool appendTrailingSlash = true
-        ) {
+        )
+        {
             await PostDirectory_PassesThrough(baseUrl, baseDir, requestUrl, appendTrailingSlash);
         }
 
@@ -369,7 +383,8 @@ namespace Microsoft.AspNetCore.StaticFiles
             string baseDir,
             string requestUrl,
             bool appendTrailingSlash = true
-        ) {
+        )
+        {
             await PostDirectory_PassesThrough(baseUrl, baseDir, requestUrl, appendTrailingSlash);
         }
 
@@ -378,12 +393,14 @@ namespace Microsoft.AspNetCore.StaticFiles
             string baseDir,
             string requestUrl,
             bool appendTrailingSlash = true
-        ) {
+        )
+        {
             using (
                 var fileProvider = new PhysicalFileProvider(
                     Path.Combine(AppContext.BaseDirectory, baseDir)
                 )
-            ) {
+            )
+            {
                 using var host = await StaticFilesTestServer.Create(
                     app =>
                         app.UseDefaultFiles(

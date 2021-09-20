@@ -38,7 +38,8 @@ namespace Microsoft.AspNetCore.Server.HttpSys
                         return Task.FromResult(0);
                     }
                 )
-            ) {
+            )
+            {
                 HttpResponseMessage response = await SendRequestAsync(address);
                 Assert.Equal(200, (int)response.StatusCode);
                 Assert.False(response.Headers.TransferEncodingChunked.HasValue, "Chunked");
@@ -71,7 +72,8 @@ namespace Microsoft.AspNetCore.Server.HttpSys
                         return Task.FromResult(0);
                     }
                 )
-            ) {
+            )
+            {
                 HttpResponseMessage response = await SendRequestAsync(address);
                 Assert.Equal(200, (int)response.StatusCode);
                 Assert.False(response.Headers.TransferEncodingChunked.HasValue, "Chunked");
@@ -106,7 +108,8 @@ namespace Microsoft.AspNetCore.Server.HttpSys
                         }
                     }
                 )
-            ) {
+            )
+            {
                 HttpResponseMessage response = await SendRequestAsync(address);
                 Assert.Equal(200, (int)response.StatusCode);
                 Assert.True(response.Headers.TransferEncodingChunked.Value, "Chunked");
@@ -134,7 +137,8 @@ namespace Microsoft.AspNetCore.Server.HttpSys
                         upgraded.SetResult(true);
                     }
                 )
-            ) {
+            )
+            {
                 using (Stream stream = await SendOpaqueRequestAsync("GET", address))
                 {
                     Assert.True(await upgraded.Task.TimeoutAfter(TimeSpan.FromSeconds(1)));
@@ -174,7 +178,8 @@ namespace Microsoft.AspNetCore.Server.HttpSys
                     },
                     options => options.MaxRequestBodySize = 10
                 )
-            ) {
+            )
+            {
                 using (Stream stream = await SendOpaqueRequestAsync("GET", address))
                 {
                     stream.Write(new byte[15], 0, 15);
@@ -212,7 +217,8 @@ namespace Microsoft.AspNetCore.Server.HttpSys
                         upgraded.SetResult(true);
                     }
                 )
-            ) {
+            )
+            {
                 using (Stream stream = await SendOpaqueRequestAsync("GET", address))
                 {
                     Assert.True(await upgraded.Task.TimeoutAfter(TimeSpan.FromSeconds(1)));
@@ -248,7 +254,8 @@ namespace Microsoft.AspNetCore.Server.HttpSys
         public async Task OpaqueUpgrade_VariousMethodsUpgradeSendAndReceive_Success(
             string method,
             string extraHeader
-        ) {
+        )
+        {
             string address;
             using (
                 Utilities.CreateHttpServer(
@@ -274,7 +281,8 @@ namespace Microsoft.AspNetCore.Server.HttpSys
                         }
                     }
                 )
-            ) {
+            )
+            {
                 using (Stream stream = await SendOpaqueRequestAsync(method, address, extraHeader))
                 {
                     byte[] data = new byte[100];
@@ -297,7 +305,8 @@ namespace Microsoft.AspNetCore.Server.HttpSys
         public async Task OpaqueUpgrade_InvalidMethodUpgrade_Disconnected(
             string method,
             string extraHeader
-        ) {
+        )
+        {
             string address;
             using (
                 Utilities.CreateHttpServer(
@@ -316,7 +325,8 @@ namespace Microsoft.AspNetCore.Server.HttpSys
                         }
                     }
                 )
-            ) {
+            )
+            {
                 var ex = await Assert.ThrowsAsync<InvalidOperationException>(
                     async () => await SendOpaqueRequestAsync(method, address, extraHeader)
                 );
@@ -345,7 +355,8 @@ namespace Microsoft.AspNetCore.Server.HttpSys
                         }
                     }
                 )
-            ) {
+            )
+            {
                 using var client = new HttpClient();
 
                 var request = new HttpRequestMessage(HttpMethod.Post, address);
@@ -369,7 +380,8 @@ namespace Microsoft.AspNetCore.Server.HttpSys
             string method,
             string address,
             string extraHeader = null
-        ) {
+        )
+        {
             // Connect with a socket
             Uri uri = new Uri(address);
             TcpClient client = new TcpClient();

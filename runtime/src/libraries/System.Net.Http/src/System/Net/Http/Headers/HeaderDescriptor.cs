@@ -94,7 +94,8 @@ namespace System.Net.Http.Headers
             int index,
             out HeaderDescriptor descriptor,
             [NotNullWhen(true)] out string? knownValue
-        ) {
+        )
+        {
             Debug.Assert(index >= 0);
 
             // Micro-opt: store field to variable to prevent Length re-read and use unsigned to avoid bounds check.
@@ -144,7 +145,8 @@ namespace System.Net.Http.Headers
                                 knownValues[i],
                                 headerValue
                             )
-                        ) {
+                        )
+                        {
                             return knownValues[i];
                         }
                     }
@@ -290,7 +292,8 @@ namespace System.Net.Http.Headers
         private static bool TryDecodeUtf8(
             ReadOnlySpan<byte> input,
             [NotNullWhen(true)] out string? decoded
-        ) {
+        )
+        {
             char[] rented = ArrayPool<char>.Shared.Rent(input.Length);
 
             try
@@ -303,7 +306,8 @@ namespace System.Net.Http.Headers
                         out int charsWritten,
                         replaceInvalidSequences: false
                     ) == OperationStatus.Done
-                ) {
+                )
+                {
                     decoded = new string(rented, 0, charsWritten);
                     return true;
                 }

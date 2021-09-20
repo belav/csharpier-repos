@@ -37,7 +37,8 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
             ILocalViewListener localViewListener,
             IChangeDetector changeDetector,
             INavigationFixer navigationFixer
-        ) {
+        )
+        {
             _localViewListener = localViewListener;
             _changeDetector = changeDetector;
             _navigationFixer = navigationFixer;
@@ -65,7 +66,8 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
             InternalEntityEntry entry,
             EntityState oldState,
             bool fromQuery
-        ) {
+        )
+        {
             _navigationFixer.StateChanged(entry, oldState, fromQuery);
             _localViewListener.StateChanged(entry, oldState, fromQuery);
         }

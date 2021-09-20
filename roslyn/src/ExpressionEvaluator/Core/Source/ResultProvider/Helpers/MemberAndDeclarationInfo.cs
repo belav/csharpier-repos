@@ -79,7 +79,8 @@ namespace Microsoft.CodeAnalysis.ExpressionEvaluator
             int inheritanceLevel,
             bool canFavorite,
             bool isFavorite
-        ) {
+        )
+        {
             Debug.Assert(member != null);
 
             _member = member;
@@ -221,7 +222,8 @@ namespace Microsoft.CodeAnalysis.ExpressionEvaluator
                     {
                         foreach (
                             var interfaceAccessor in accessor.GetExplicitInterfacesImplemented()
-                        ) {
+                        )
+                        {
                             memberName = memberName.Substring(dotPos + 1);
                             return interfaceAccessor.DeclaringType;
                         }

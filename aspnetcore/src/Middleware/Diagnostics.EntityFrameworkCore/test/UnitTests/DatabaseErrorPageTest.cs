@@ -262,7 +262,8 @@ namespace Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore.Tests
         private static async Task<string> ExecutePage(
             DatabaseErrorPageOptions options,
             DatabaseErrorPageModel model
-        ) {
+        )
+        {
             var page = new DatabaseErrorPage();
             var context = new Mock<HttpContext>();
             var response = new Mock<HttpResponse>();

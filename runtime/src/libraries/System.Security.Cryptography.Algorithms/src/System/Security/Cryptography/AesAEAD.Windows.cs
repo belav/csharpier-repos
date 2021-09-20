@@ -18,7 +18,8 @@ namespace System.Security.Cryptography
             ReadOnlySpan<byte> plaintext,
             Span<byte> ciphertext,
             Span<byte> tag
-        ) {
+        )
+        {
             fixed (byte* plaintextBytes = plaintext)fixed (byte* nonceBytes = nonce)fixed (
                 byte* ciphertextBytes = ciphertext
             )fixed (byte* tagBytes = tag)fixed (byte* associatedDataBytes = associatedData)
@@ -63,7 +64,8 @@ namespace System.Security.Cryptography
             ReadOnlySpan<byte> tag,
             Span<byte> plaintext,
             bool clearPlaintextOnFailure
-        ) {
+        )
+        {
             fixed (byte* plaintextBytes = plaintext)fixed (byte* nonceBytes = nonce)fixed (
                 byte* ciphertextBytes = ciphertext
             )fixed (byte* tagBytes = tag)fixed (byte* associatedDataBytes = associatedData)

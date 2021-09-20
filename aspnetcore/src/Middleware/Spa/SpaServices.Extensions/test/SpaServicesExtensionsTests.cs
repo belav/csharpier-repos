@@ -88,7 +88,8 @@ namespace Microsoft.AspNetCore.SpaServices.Extensions.Tests
         private async Task Assert_NpmKilled_WhenAppIsStopped(
             IHostApplicationLifetime applicationLifetime,
             NpmStartedDiagnosticListener listener
-        ) {
+        )
+        {
             // Give node a moment to start up
             await Task.WhenAny(listener.NpmStarted, Task.Delay(TimeSpan.FromSeconds(45)));
 
@@ -145,7 +146,8 @@ namespace Microsoft.AspNetCore.SpaServices.Extensions.Tests
 
         private IServiceProvider GetServiceProvider(
             Action<SpaStaticFilesOptions> configuration = null
-        ) {
+        )
+        {
             var services = new ServiceCollection();
             services.AddLogging();
             services.AddSpaStaticFiles(configuration);

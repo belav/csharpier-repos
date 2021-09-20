@@ -24,7 +24,8 @@ namespace Microsoft.AspNetCore.Mvc.RazorPages.Infrastructure
             IModelMetadataProvider modelMetadataProvider,
             IModelBinderFactory modelBinderFactory,
             CompiledPageActionDescriptor actionDescriptor
-        ) {
+        )
+        {
             if (parameterBinder == null)
             {
                 throw new ArgumentNullException(nameof(parameterBinder));
@@ -115,7 +116,8 @@ namespace Microsoft.AspNetCore.Mvc.RazorPages.Infrastructure
             CompiledPageActionDescriptor actionDescriptor,
             HandlerMethodDescriptor handler,
             MvcOptions mvcOptions
-        ) {
+        )
+        {
             if (handler.Parameters == null || handler.Parameters.Count == 0)
             {
                 return NullHandlerBinder;

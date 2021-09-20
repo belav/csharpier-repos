@@ -48,7 +48,8 @@ namespace ILCompiler
             IEnumerable<ModuleDesc> modulesBeingInstrumented,
             Logger logger,
             InstructionSetSupport instructionSetSupport
-        ) {
+        )
+        {
             InstructionSetSupport = instructionSetSupport;
             _dependencyGraph = dependencyGraph;
             _nodeFactory = nodeFactory;
@@ -169,7 +170,8 @@ namespace ILCompiler
                     methodIL == null
                     && key.IsPInvoke
                     && _compilationModuleGroup.GeneratesPInvoke(key)
-                ) {
+                )
+                {
                     methodIL = PInvokeILEmitter.EmitIL(key);
                 }
 
@@ -204,7 +206,8 @@ namespace ILCompiler
                 MethodDesc method,
                 bool rootMinimalDependencies,
                 string reason
-            ) {
+            )
+            {
                 MethodDesc canonMethod = method.GetCanonMethodTarget(CanonicalFormKind.Specific);
                 if (_factory.CompilationModuleGroup.ContainsMethodBody(canonMethod, false))
                 {
@@ -302,16 +305,18 @@ namespace ILCompiler
             ReadyToRunFileLayoutAlgorithm fileLayoutAlgorithm,
             int customPESectionAlignment,
             bool verifyTypeAndFieldLayout
-        ) : base(
-            dependencyGraph,
-            nodeFactory,
-            roots,
-            ilProvider,
-            devirtualizationManager,
-            modulesBeingInstrumented: nodeFactory.CompilationModuleGroup.CompilationModuleSet,
-            logger,
-            instructionSetSupport
-        ) {
+        )
+            : base(
+                dependencyGraph,
+                nodeFactory,
+                roots,
+                ilProvider,
+                devirtualizationManager,
+                modulesBeingInstrumented: nodeFactory.CompilationModuleGroup.CompilationModuleSet,
+                logger,
+                instructionSetSupport
+            )
+        {
             _resilient = resilient;
             _parallelism = parallelism;
             _generateMapFile = generateMapFile;
@@ -408,7 +413,8 @@ namespace ILCompiler
                                 s_folderUpPrefix,
                                 StringComparison.Ordinal
                             )
-                        ) {
+                        )
+                        {
                             // Input file not under the composite root, emit to root output folder
                             relativeMsilPath = Path.GetFileName(inputFile);
                         }
@@ -430,7 +436,8 @@ namespace ILCompiler
             string inputFile,
             string outputFile,
             string ownerExecutableName
-        ) {
+        )
+        {
             EcmaModule inputModule = NodeFactory.TypeSystemContext.GetModuleFromPath(inputFile);
 
             Directory.CreateDirectory(Path.GetDirectoryName(outputFile));
@@ -616,7 +623,8 @@ namespace ILCompiler
 
         protected override void ComputeDependencyNodeDependencies(
             List<DependencyNodeCore<NodeFactory>> obj
-        ) {
+        )
+        {
             using (PerfEventSource.StartStopEvents.JitEvents())
             {
                 Action<DependencyNodeCore<NodeFactory>> compileOneMethod = (

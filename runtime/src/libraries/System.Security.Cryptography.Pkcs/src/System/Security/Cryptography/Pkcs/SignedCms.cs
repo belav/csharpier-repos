@@ -44,7 +44,8 @@ namespace System.Security.Cryptography.Pkcs
             SubjectIdentifierType signerIdentifierType,
             ContentInfo contentInfo,
             bool detached
-        ) {
+        )
+        {
             if (contentInfo == null)
                 throw new ArgumentNullException(nameof(contentInfo));
             if (contentInfo.Content == null)
@@ -215,7 +216,8 @@ namespace System.Security.Cryptography.Pkcs
                     {
                         using (
                             var manager = new PointerMemoryManager<byte>(pin, encodedMessage.Length)
-                        ) {
+                        )
+                        {
                             AsnValueReader reader = new AsnValueReader(
                                 encodedMessage,
                                 AsnEncodingRules.BER
@@ -246,7 +248,8 @@ namespace System.Security.Cryptography.Pkcs
         internal static ReadOnlyMemory<byte> GetContent(
             ReadOnlyMemory<byte> wrappedContent,
             string contentType
-        ) {
+        )
+        {
             // Read the input.
             //
             // PKCS7's id-data is written in both PKCS#7 and CMS as an OCTET STRING wrapping
@@ -333,7 +336,8 @@ namespace System.Security.Cryptography.Pkcs
             if (
                 signer.Certificate == null
                 && signer.SignerIdentifierType != SubjectIdentifierType.NoSignature
-            ) {
+            )
+            {
                 if (silent)
                 {
                     // .NET Framework compatibility, silent disallows prompting, so throws InvalidOperationException
@@ -633,7 +637,8 @@ namespace System.Security.Cryptography.Pkcs
             SignerInfoCollection signers,
             X509Certificate2Collection extraStore,
             bool verifySignatureOnly
-        ) {
+        )
+        {
             Debug.Assert(signers != null);
 
             if (signers.Count < 1)

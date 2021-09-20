@@ -98,7 +98,8 @@ namespace Microsoft.AspNetCore.Components.E2ETests.Tests
         [InlineData("fr-FR")]
         public void CanSetCultureAndParseCultureInvariantNumbersAndDatesWithInputFields(
             string culture
-        ) {
+        )
+        {
             var cultureInfo = CultureInfo.GetCultureInfo(culture);
             SetCulture(culture);
 
@@ -194,7 +195,8 @@ namespace Microsoft.AspNetCore.Components.E2ETests.Tests
         [InlineData("fr-FR")]
         public void CanSetCultureAndParseCultureInvariantNumbersAndDatesWithFormComponents(
             string culture
-        ) {
+        )
+        {
             var cultureInfo = CultureInfo.GetCultureInfo(culture);
             SetCulture(culture);
 

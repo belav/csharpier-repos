@@ -39,7 +39,8 @@ namespace Microsoft.CodeAnalysis.UnitTests.Diagnostics
                     new Version(1, 2, 3, 4),
                     new CultureInfo("fr-CA", useUserOverride: false)
                 )
-            ) {
+            )
+            {
                 var span = new TextSpan(0, 0);
                 var position = new LinePositionSpan(LinePosition.Zero, LinePosition.Zero);
                 var mainLocation = Location.Create(@"Z:\Main Location.cs", span, position);
@@ -170,7 +171,8 @@ namespace Microsoft.CodeAnalysis.UnitTests.Diagnostics
                     new Version(1, 2, 3, 4),
                     new CultureInfo("en-US", useUserOverride: false)
                 )
-            ) {
+            )
+            {
                 for (int i = 0; i < 2; i++)
                 {
                     foreach (var descriptor in descriptors)
@@ -205,7 +207,8 @@ namespace Microsoft.CodeAnalysis.UnitTests.Diagnostics
                         toolAssemblyVersion: Version.Parse("1.0.0"),
                         CultureInfo.InvariantCulture
                     )
-                ) {
+                )
+                {
                     var location = Location.Create(inputPath, textSpan: default, lineSpan: default);
 
                     logger.LogDiagnostic(

@@ -48,7 +48,8 @@ namespace System.Collections.Immutable
             internal Comparers(
                 IEqualityComparer<TKey> keyComparer,
                 IEqualityComparer<TValue> valueComparer
-            ) {
+            )
+            {
                 Requires.NotNull(keyComparer, nameof(keyComparer));
                 Requires.NotNull(valueComparer, nameof(valueComparer));
 
@@ -135,7 +136,8 @@ namespace System.Collections.Immutable
             bool IEqualityComparer<KeyValuePair<TKey, TValue>>.Equals(
                 KeyValuePair<TKey, TValue> x,
                 KeyValuePair<TKey, TValue> y
-            ) {
+            )
+            {
                 return _keyComparer.Equals(x.Key, y.Key);
             }
 
@@ -148,7 +150,8 @@ namespace System.Collections.Immutable
             /// </returns>
             int IEqualityComparer<KeyValuePair<TKey, TValue>>.GetHashCode(
                 KeyValuePair<TKey, TValue> obj
-            ) {
+            )
+            {
                 return _keyComparer.GetHashCode(obj.Key);
             }
 
@@ -161,7 +164,8 @@ namespace System.Collections.Immutable
             internal static Comparers Get(
                 IEqualityComparer<TKey> keyComparer,
                 IEqualityComparer<TValue> valueComparer
-            ) {
+            )
+            {
                 Requires.NotNull(keyComparer, nameof(keyComparer));
                 Requires.NotNull(valueComparer, nameof(valueComparer));
 

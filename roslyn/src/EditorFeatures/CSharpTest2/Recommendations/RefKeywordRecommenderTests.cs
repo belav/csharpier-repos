@@ -838,7 +838,8 @@ $$"
         public async Task TestInConditionalExpressionTrueBranch(
             SourceCodeKind sourceCodeKind,
             bool topLevelStatement
-        ) {
+        )
+        {
             await VerifyWorkerAsync(
                 AddInsideMethod(
                     @"
@@ -865,7 +866,8 @@ ref int x = ref true ? $$",
         public async Task TestInConditionalExpressionFalseBranch(
             SourceCodeKind sourceCodeKind,
             bool topLevelStatement
-        ) {
+        )
+        {
             await VerifyWorkerAsync(
                 AddInsideMethod(
                     @"

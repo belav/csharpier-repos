@@ -58,7 +58,8 @@ namespace System.Data.ProviderBase
             if (
                 0
                 == UnsafeNativeMethods.CreateWellKnownSid((int)sidType, null, resultSid, ref length)
-            ) {
+            )
+            {
                 IntegratedSecurityError(Win32_CreateWellKnownSid);
             }
             return resultSid;

@@ -40,7 +40,8 @@ namespace Microsoft.CodeAnalysis.Features.EmbeddedLanguages.DateAndTime
                 CompletionContext context,
                 VirtualCharSequence virtualChars,
                 ArrayBuilder<DateAndTimeItem> items
-            ) {
+            )
+            {
                 _items = items;
 
                 var startPosition = context.Position;
@@ -62,7 +63,8 @@ namespace Microsoft.CodeAnalysis.Features.EmbeddedLanguages.DateAndTime
                 VirtualCharSequence virtualChars,
                 int startPosition,
                 int endPosition
-            ) {
+            )
+            {
                 virtualChars = virtualChars.IsDefault ? VirtualCharSequence.Empty : virtualChars;
 
                 using var _1 = PooledStringBuilder.GetInstance(out var prefix);
@@ -82,7 +84,8 @@ namespace Microsoft.CodeAnalysis.Features.EmbeddedLanguages.DateAndTime
                 ArrayBuilder<string> examples,
                 bool standard,
                 string displayText
-            ) {
+            )
+            {
                 var userFormat = _userFormatPrefix + displayText + _userFormatSuffix;
 
                 var primaryCulture = CultureInfo.CurrentCulture;
@@ -101,7 +104,8 @@ namespace Microsoft.CodeAnalysis.Features.EmbeddedLanguages.DateAndTime
                 string displayText,
                 CultureInfo culture,
                 bool hideCulture
-            ) {
+            )
+            {
                 // Single letter custom strings need a %, or else they're interpreted as a format
                 // standard format string (and will throw a format exception).
                 var formatString =
@@ -148,7 +152,8 @@ namespace Microsoft.CodeAnalysis.Features.EmbeddedLanguages.DateAndTime
                 string description,
                 bool standard,
                 bool isDefault
-            ) {
+            )
+            {
                 using var _1 = PooledStringBuilder.GetInstance(out var descriptionBuilder);
                 using var _2 = ArrayBuilder<string>.GetInstance(out var examples);
 

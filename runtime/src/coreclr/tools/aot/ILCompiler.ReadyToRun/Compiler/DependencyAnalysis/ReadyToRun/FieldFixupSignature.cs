@@ -23,7 +23,8 @@ namespace ILCompiler.DependencyAnalysis.ReadyToRun
             ReadyToRunFixupKind fixupKind,
             FieldDesc fieldDesc,
             NodeFactory factory
-        ) {
+        )
+        {
             _fixupKind = fixupKind;
             _fieldDesc = fieldDesc;
 
@@ -59,7 +60,8 @@ namespace ILCompiler.DependencyAnalysis.ReadyToRun
                         (_fieldDesc.OwningType.BaseType != null)
                         && !_fieldDesc.IsStatic
                         && !_fieldDesc.OwningType.IsValueType
-                    ) {
+                    )
+                    {
                         MetadataType owningType = (MetadataType)_fieldDesc.OwningType;
                         baseOffset = (uint)owningType.FieldBaseOffset().AsInt;
                         if (
@@ -67,7 +69,8 @@ namespace ILCompiler.DependencyAnalysis.ReadyToRun
                                 (MetadataType)baseType,
                                 owningType
                             )
-                        ) {
+                        )
+                        {
                             fieldOffset -= baseOffset;
                             baseOffset = 0;
                         }
@@ -78,7 +81,8 @@ namespace ILCompiler.DependencyAnalysis.ReadyToRun
                 if (
                     (_fixupKind == ReadyToRunFixupKind.Check_FieldOffset)
                     || (_fixupKind == ReadyToRunFixupKind.Verify_FieldOffset)
-                ) {
+                )
+                {
                     dataBuilder.EmitUInt(fieldOffset);
                 }
 

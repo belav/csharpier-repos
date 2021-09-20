@@ -14,7 +14,8 @@ namespace System.Web.Helpers
             object value,
             int minutesToCache = 20,
             bool slidingExpiration = true
-        ) {
+        )
+        {
             if (minutesToCache <= 0)
             {
                 throw new ArgumentOutOfRangeException(

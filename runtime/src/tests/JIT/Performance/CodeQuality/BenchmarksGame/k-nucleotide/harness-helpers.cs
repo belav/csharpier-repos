@@ -21,7 +21,8 @@ namespace BenchmarksGame
         public TestHarnessHelpers(
             bool bigInput,
             [System.Runtime.CompilerServices.CallerFilePath] string csFileName = ""
-        ) {
+        )
+        {
             if (bigInput)
             {
                 expectedCountLetter = new int[] { 302923, 301375, 198136, 197566 };

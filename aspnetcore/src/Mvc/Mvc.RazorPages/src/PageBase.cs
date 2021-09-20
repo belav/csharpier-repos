@@ -243,7 +243,8 @@ namespace Microsoft.AspNetCore.Mvc.RazorPages
             string content,
             string contentType,
             Encoding contentEncoding
-        ) {
+        )
+        {
             var mediaTypeHeaderValue = MediaTypeHeaderValue.Parse(contentType);
             mediaTypeHeaderValue.Encoding = contentEncoding ?? mediaTypeHeaderValue.Encoding;
             return Content(content, mediaTypeHeaderValue);
@@ -690,7 +691,8 @@ namespace Microsoft.AspNetCore.Mvc.RazorPages
             string controllerName = null,
             object routeValues = null,
             string fragment = null
-        ) {
+        )
+        {
             return new RedirectToActionResult(
                 actionName: actionName,
                 controllerName: controllerName,
@@ -723,7 +725,8 @@ namespace Microsoft.AspNetCore.Mvc.RazorPages
         public virtual RedirectToActionResult RedirectToActionPermanent(
             string actionName,
             object routeValues
-        ) {
+        )
+        {
             return RedirectToActionPermanent(
                 actionName,
                 controllerName: null,
@@ -742,7 +745,8 @@ namespace Microsoft.AspNetCore.Mvc.RazorPages
         public virtual RedirectToActionResult RedirectToActionPermanent(
             string actionName,
             string controllerName
-        ) {
+        )
+        {
             return RedirectToActionPermanent(actionName, controllerName, routeValues: null);
         }
 
@@ -759,7 +763,8 @@ namespace Microsoft.AspNetCore.Mvc.RazorPages
             string actionName,
             string controllerName,
             string fragment
-        ) {
+        )
+        {
             return RedirectToActionPermanent(
                 actionName,
                 controllerName,
@@ -781,7 +786,8 @@ namespace Microsoft.AspNetCore.Mvc.RazorPages
             string actionName,
             string controllerName,
             object routeValues
-        ) {
+        )
+        {
             return RedirectToActionPermanent(
                 actionName,
                 controllerName,
@@ -805,7 +811,8 @@ namespace Microsoft.AspNetCore.Mvc.RazorPages
             string controllerName,
             object routeValues,
             string fragment
-        ) {
+        )
+        {
             return new RedirectToActionResult(
                 actionName,
                 controllerName,
@@ -831,7 +838,8 @@ namespace Microsoft.AspNetCore.Mvc.RazorPages
             string controllerName = null,
             object routeValues = null,
             string fragment = null
-        ) {
+        )
+        {
             return new RedirectToActionResult(
                 actionName: actionName,
                 controllerName: controllerName,
@@ -898,7 +906,8 @@ namespace Microsoft.AspNetCore.Mvc.RazorPages
             string routeName,
             object routeValues,
             string fragment
-        ) {
+        )
+        {
             return new RedirectToRouteResult(routeName, routeValues, fragment);
         }
 
@@ -915,7 +924,8 @@ namespace Microsoft.AspNetCore.Mvc.RazorPages
             string routeName = null,
             object routeValues = null,
             string fragment = null
-        ) {
+        )
+        {
             return new RedirectToRouteResult(
                 routeName: routeName,
                 routeValues: routeValues,
@@ -958,7 +968,8 @@ namespace Microsoft.AspNetCore.Mvc.RazorPages
         public virtual RedirectToRouteResult RedirectToRoutePermanent(
             string routeName,
             object routeValues
-        ) {
+        )
+        {
             return RedirectToRoutePermanent(routeName, routeValues, fragment: null);
         }
 
@@ -973,7 +984,8 @@ namespace Microsoft.AspNetCore.Mvc.RazorPages
         public virtual RedirectToRouteResult RedirectToRoutePermanent(
             string routeName,
             string fragment
-        ) {
+        )
+        {
             return RedirectToRoutePermanent(routeName, routeValues: null, fragment: fragment);
         }
 
@@ -1005,7 +1017,8 @@ namespace Microsoft.AspNetCore.Mvc.RazorPages
             string routeName = null,
             object routeValues = null,
             string fragment = null
-        ) {
+        )
+        {
             return new RedirectToRouteResult(
                 routeName: routeName,
                 routeValues: routeValues,
@@ -1191,7 +1204,8 @@ namespace Microsoft.AspNetCore.Mvc.RazorPages
             string pageHandler = null,
             object routeValues = null,
             string fragment = null
-        ) {
+        )
+        {
             return new RedirectToPageResult(
                 pageName: pageName,
                 pageHandler: pageHandler,
@@ -1217,7 +1231,8 @@ namespace Microsoft.AspNetCore.Mvc.RazorPages
             string pageHandler = null,
             object routeValues = null,
             string fragment = null
-        ) {
+        )
+        {
             return new RedirectToPageResult(
                 pageName: pageName,
                 pageHandler: pageHandler,
@@ -1688,7 +1703,8 @@ namespace Microsoft.AspNetCore.Mvc.RazorPages
             object model,
             Type modelType,
             string prefix
-        ) {
+        )
+        {
             if (model == null)
             {
                 throw new ArgumentNullException(nameof(model));
@@ -1737,7 +1753,8 @@ namespace Microsoft.AspNetCore.Mvc.RazorPages
             string prefix,
             IValueProvider valueProvider,
             Func<ModelMetadata, bool> propertyFilter
-        ) {
+        )
+        {
             if (model == null)
             {
                 throw new ArgumentNullException(nameof(model));

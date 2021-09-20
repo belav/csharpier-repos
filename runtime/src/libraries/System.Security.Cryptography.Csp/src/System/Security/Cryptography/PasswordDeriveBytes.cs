@@ -44,12 +44,8 @@ namespace System.Security.Cryptography
         ) : this(strPassword, rgbSalt, strHashName, iterations, new CspParameters()) { }
 
         [RequiresUnreferencedCode(HashAlgorithmUnreferencedCodeMessage)]
-        public PasswordDeriveBytes(
-            byte[] password,
-            byte[]? salt,
-            string hashName,
-            int iterations
-        ) : this(password, salt, hashName, iterations, new CspParameters()) { }
+        public PasswordDeriveBytes(byte[] password, byte[]? salt, string hashName, int iterations)
+            : this(password, salt, hashName, iterations, new CspParameters()) { }
 #pragma warning restore CA1416
 
         [UnconditionalSuppressMessage(
@@ -61,11 +57,8 @@ namespace System.Security.Cryptography
             DynamicallyAccessedMemberTypes.PublicParameterlessConstructor,
             typeof(SHA1CryptoServiceProvider)
         )]
-        public PasswordDeriveBytes(
-            string strPassword,
-            byte[]? rgbSalt,
-            CspParameters? cspParams
-        ) : this(strPassword, rgbSalt, "SHA1", 100, cspParams) { }
+        public PasswordDeriveBytes(string strPassword, byte[]? rgbSalt, CspParameters? cspParams)
+            : this(strPassword, rgbSalt, "SHA1", 100, cspParams) { }
 
         [UnconditionalSuppressMessage(
             "ReflectionAnalysis",
@@ -86,13 +79,14 @@ namespace System.Security.Cryptography
             string strHashName,
             int iterations,
             CspParameters? cspParams
-        ) : this(
-            (new UTF8Encoding(false)).GetBytes(strPassword),
-            rgbSalt,
-            strHashName,
-            iterations,
-            cspParams
-        ) { }
+        )
+            : this(
+                (new UTF8Encoding(false)).GetBytes(strPassword),
+                rgbSalt,
+                strHashName,
+                iterations,
+                cspParams
+            ) { }
 
         [RequiresUnreferencedCode(HashAlgorithmUnreferencedCodeMessage)]
         public PasswordDeriveBytes(
@@ -101,7 +95,8 @@ namespace System.Security.Cryptography
             string hashName,
             int iterations,
             CspParameters? cspParams
-        ) {
+        )
+        {
             IterationCount = iterations;
             Salt = salt;
             HashName = hashName;
@@ -299,7 +294,8 @@ namespace System.Security.Cryptography
                 _hash.Initialize();
                 using (
                     CryptoStream cs = new CryptoStream(Stream.Null, _hash, CryptoStreamMode.Write)
-                ) {
+                )
+                {
                     HashPrefix(cs);
                     cs.Write(_baseValue, 0, _baseValue.Length);
                     cs.Close();

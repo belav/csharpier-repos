@@ -722,7 +722,8 @@ namespace Microsoft.AspNetCore.Components.E2ETest.Tests
             IWebElement element,
             string attributeName,
             bool shouldBeRendered = true
-        ) {
+        )
+        {
             Browser.Equal(shouldBeRendered, () => element.GetAttribute(attributeName) != null);
         }
     }

@@ -31,7 +31,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.KeywordHighlighting.KeywordHighli
             SyntaxNode node,
             List<TextSpan> spans,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             switch (node)
             {
                 case DoStatementSyntax doStatement:
@@ -81,7 +82,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.KeywordHighlighting.KeywordHighli
             List<TextSpan> spans,
             bool highlightBreaks,
             bool highlightContinues
-        ) {
+        )
+        {
             Debug.Assert(highlightBreaks || highlightContinues);
 
             if (highlightBreaks && node is BreakStatementSyntax breakStatement)

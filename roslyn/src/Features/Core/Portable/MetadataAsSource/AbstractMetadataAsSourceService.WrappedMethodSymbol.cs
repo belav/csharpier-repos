@@ -86,7 +86,8 @@ namespace Microsoft.CodeAnalysis.MetadataAsSource
 
             public ITypeSymbol GetTypeInferredDuringReduction(
                 ITypeParameterSymbol reducedFromTypeParameter
-            ) {
+            )
+            {
                 // This implementation feels incorrect, but it follows the pattern that other extension method related APIs are using!
                 return _symbol.GetTypeInferredDuringReduction(reducedFromTypeParameter);
             }

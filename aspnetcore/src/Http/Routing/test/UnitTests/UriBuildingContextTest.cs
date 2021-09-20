@@ -54,7 +54,8 @@ namespace Microsoft.AspNetCore.Routing
             int startIndex,
             int characterCount,
             string expected
-        ) {
+        )
+        {
             // Arrange
             var urlTestEncoder = new UrlTestEncoder();
             var uriBuilldingContext = new UriBuildingContext(urlTestEncoder);
@@ -93,7 +94,8 @@ namespace Microsoft.AspNetCore.Routing
             bool appendTrailingSlash,
             bool encodeSlashes,
             string expected
-        ) {
+        )
+        {
             // Arrange
             var urlTestEncoder = new UrlTestEncoder();
             var uriBuilldingContext = new UriBuildingContext(urlTestEncoder);

@@ -69,7 +69,8 @@ namespace System.Formats.Cbor
             if (
                 !ConvertIndefiniteLengthEncodings
                 && CborConformanceModeHelpers.RequiresDefiniteLengthItems(ConformanceMode)
-            ) {
+            )
+            {
                 throw new InvalidOperationException(
                     SR.Format(
                         SR.Cbor_ConformanceMode_IndefiniteLengthItemsNotSupported,

@@ -84,7 +84,8 @@ namespace System.Xml.Tests
         [InlineData("FixedRequiredAttribute")]
         public void Validate_Required_Optional_Default_Fixed_FixedRequired_Attribute(
             string attrType
-        ) {
+        )
+        {
             XmlSchemaValidator val = CreateValidator(XSDFILE_VALIDATE_ATTRIBUTE);
             XmlSchemaInfo info = new XmlSchemaInfo();
 
@@ -431,7 +432,8 @@ namespace System.Xml.Tests
         [InlineData(false)]
         public void CallWithoutValidationOfDefaultAttributesGetUnspecifiedDefault_Called_NotCalled(
             bool call
-        ) {
+        )
+        {
             XmlSchemaValidator val = CreateValidator(XSDFILE_VALIDATE_ATTRIBUTE);
             ArrayList atts = new ArrayList();
 

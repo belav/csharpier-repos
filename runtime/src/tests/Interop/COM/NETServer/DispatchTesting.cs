@@ -27,7 +27,8 @@ public class DispatchTesting : Server.Contract.IDispatchTesting
         ref long l2,
         ulong ul1,
         ref ulong ul2
-    ) {
+    )
+    {
         b2 = (byte)(b1 * 2);
         s2 = (short)(s1 * 2);
         us2 = (ushort)(us1 * 2);

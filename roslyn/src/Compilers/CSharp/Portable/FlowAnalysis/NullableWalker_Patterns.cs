@@ -111,7 +111,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             int inputSlot,
             TypeSymbol inputType,
             BoundPattern pattern
-        ) {
+        )
+        {
             if (inputSlot <= 0)
                 return;
 
@@ -176,7 +177,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                                     );
                                 i < n;
                                 i++
-                            ) {
+                            )
+                            {
                                 BoundSubpattern item = rp.Deconstruction[i];
                                 FieldSymbol element = elements[i];
                                 LearnFromAnyNullPatterns(
@@ -199,7 +201,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                                         inputType,
                                         TypeCompareKind.AllIgnoreOptions
                                     ) == true
-                                ) {
+                                )
+                                {
                                     LearnFromAnyNullPatterns(
                                         GetOrCreateSlot(symbol, inputSlot),
                                         symbol.GetTypeOrReturnType().Type,
@@ -344,7 +347,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             BoundExpression expression,
             TypeWithState expressionType,
             ref PossiblyConditionalState initialState
-        ) {
+        )
+        {
             // We reuse the slot at the beginning of a switch (or is-pattern expression), pretending that we are
             // not copying the input to evaluate the patterns.  In this way we infer non-nullability of the original
             // variable's parts based on matched pattern parts.  Mutations in `when` clauses can show the inaccuracy
@@ -715,7 +719,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                                     {
                                         LocalSymbol: SourceLocalSymbol local
                                     } boundLocal
-                                ) {
+                                )
+                                {
                                     var value = TypeWithState.Create(tempType, tempState);
                                     var inferredType = value.ToTypeWithAnnotations(
                                         compilation,
@@ -759,7 +764,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                         if (
                             w.WhenExpression != null
                             && w.WhenExpression.ConstantValue != ConstantValue.True
-                        ) {
+                        )
+                        {
                             VisitCondition(w.WhenExpression);
                             Debug.Assert(this.IsConditionalState);
                             gotoNode(w.WhenTrue, this.StateWhenTrue, nodeBelievedReachable);
@@ -903,7 +909,8 @@ namespace Microsoft.CodeAnalysis.CSharp
 
         public override BoundNode VisitConvertedSwitchExpression(
             BoundConvertedSwitchExpression node
-        ) {
+        )
+        {
             bool inferType = !node.WasTargetTyped;
             VisitSwitchExpressionCore(node, inferType);
             return null;
@@ -911,7 +918,8 @@ namespace Microsoft.CodeAnalysis.CSharp
 
         public override BoundNode VisitUnconvertedSwitchExpression(
             BoundUnconvertedSwitchExpression node
-        ) {
+        )
+        {
             // This method is only involved in method inference with unbound lambdas.
             VisitSwitchExpressionCore(node, inferType: true);
             return null;
@@ -949,7 +957,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                 && node.DefaultLabel != null
                 && labelStateMap.TryGetValue(node.DefaultLabel, out var defaultLabelState)
                 && defaultLabelState.believedReachable
-            ) {
+            )
+            {
                 SetState(defaultLabelState.state);
                 var nodes = node.DecisionDag.TopologicallySortedNodes;
                 var leaf = nodes.Where(

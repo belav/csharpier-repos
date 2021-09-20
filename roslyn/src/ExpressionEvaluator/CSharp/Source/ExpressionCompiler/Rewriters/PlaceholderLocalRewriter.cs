@@ -19,7 +19,8 @@ namespace Microsoft.CodeAnalysis.CSharp.ExpressionEvaluator
             HashSet<LocalSymbol> declaredLocals,
             BoundNode node,
             DiagnosticBag diagnostics
-        ) {
+        )
+        {
             var rewriter = new PlaceholderLocalRewriter(
                 compilation,
                 container,
@@ -39,7 +40,8 @@ namespace Microsoft.CodeAnalysis.CSharp.ExpressionEvaluator
             EENamedTypeSymbol container,
             HashSet<LocalSymbol> declaredLocals,
             DiagnosticBag diagnostics
-        ) {
+        )
+        {
             _compilation = compilation;
             _container = container;
             _declaredLocals = declaredLocals;

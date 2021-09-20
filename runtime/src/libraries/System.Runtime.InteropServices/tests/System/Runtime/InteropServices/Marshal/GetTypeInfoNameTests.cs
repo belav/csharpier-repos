@@ -44,7 +44,8 @@ namespace System.Runtime.InteropServices.Tests
                 out string strDocString,
                 out int dwHelpContext,
                 out string strHelpFile
-            ) {
+            )
+            {
                 strName = "strName";
                 strDocString = "strDocString";
                 dwHelpContext = 10;
@@ -98,7 +99,8 @@ namespace System.Runtime.InteropServices.Tests
                 IntPtr pVarResult,
                 IntPtr pExcepInfo,
                 out int puArgErr
-            ) {
+            )
+            {
                 throw new NotImplementedException();
             }
 
@@ -108,7 +110,8 @@ namespace System.Runtime.InteropServices.Tests
                 IntPtr pBstrDllName,
                 IntPtr pBstrName,
                 IntPtr pwOrdinal
-            ) {
+            )
+            {
                 throw new NotImplementedException();
             }
 

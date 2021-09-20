@@ -49,7 +49,8 @@ namespace System.Text.Json.Serialization.Tests
                 ref Utf8JsonReader reader,
                 Type typeToConvert,
                 JsonSerializerOptions options
-            ) {
+            )
+            {
                 JsonSerializer.Deserialize<WrittenObject>(ref reader, options);
                 return new ReadObject { Double = Math.PI };
             }
@@ -58,7 +59,8 @@ namespace System.Text.Json.Serialization.Tests
                 Utf8JsonWriter writer,
                 object value,
                 JsonSerializerOptions options
-            ) {
+            )
+            {
                 JsonSerializer.Serialize<WrittenObject>(writer, (WrittenObject)value, options);
             }
         }
@@ -149,7 +151,8 @@ namespace System.Text.Json.Serialization.Tests
                 ref Utf8JsonReader reader,
                 Type typeToConvert,
                 JsonSerializerOptions options
-            ) {
+            )
+            {
                 reader.GetString();
                 return new Derived() { String = "Hello", Double = Math.PI };
             }
@@ -158,7 +161,8 @@ namespace System.Text.Json.Serialization.Tests
                 Utf8JsonWriter writer,
                 Base value,
                 JsonSerializerOptions options
-            ) {
+            )
+            {
                 throw new NotImplementedException();
             }
         }
@@ -174,7 +178,8 @@ namespace System.Text.Json.Serialization.Tests
                 ref Utf8JsonReader reader,
                 Type typeToConvert,
                 JsonSerializerOptions options
-            ) {
+            )
+            {
                 reader.GetString();
                 return new Derived() { String = "Hello", Double = Math.PI };
             }
@@ -183,7 +188,8 @@ namespace System.Text.Json.Serialization.Tests
                 Utf8JsonWriter writer,
                 Derived value,
                 JsonSerializerOptions options
-            ) {
+            )
+            {
                 throw new NotImplementedException();
             }
         }
@@ -199,7 +205,8 @@ namespace System.Text.Json.Serialization.Tests
                 ref Utf8JsonReader reader,
                 Type typeToConvert,
                 JsonSerializerOptions options
-            ) {
+            )
+            {
                 reader.GetString();
                 return new Base() { String = "Hello" };
             }
@@ -208,7 +215,8 @@ namespace System.Text.Json.Serialization.Tests
                 Utf8JsonWriter writer,
                 Base value,
                 JsonSerializerOptions options
-            ) {
+            )
+            {
                 throw new NotImplementedException();
             }
         }

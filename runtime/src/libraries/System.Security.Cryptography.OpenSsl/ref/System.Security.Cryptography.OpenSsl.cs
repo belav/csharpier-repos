@@ -32,7 +32,8 @@ namespace System.Security.Cryptography
         }
         public override System.Security.Cryptography.DSAParameters ExportParameters(
             bool includePrivateParameters
-        ) {
+        )
+        {
             throw null;
         }
         public override void ImportParameters(
@@ -66,12 +67,14 @@ namespace System.Security.Cryptography
         }
         public override System.Security.Cryptography.ECParameters ExportExplicitParameters(
             bool includePrivateParameters
-        ) {
+        )
+        {
             throw null;
         }
         public override System.Security.Cryptography.ECParameters ExportParameters(
             bool includePrivateParameters
-        ) {
+        )
+        {
             throw null;
         }
         public override void GenerateKey(System.Security.Cryptography.ECCurve curve) { }
@@ -80,13 +83,15 @@ namespace System.Security.Cryptography
             int offset,
             int count,
             System.Security.Cryptography.HashAlgorithmName hashAlgorithm
-        ) {
+        )
+        {
             throw null;
         }
         protected override byte[] HashData(
             System.IO.Stream data,
             System.Security.Cryptography.HashAlgorithmName hashAlgorithm
-        ) {
+        )
+        {
             throw null;
         }
         public override void ImportParameters(
@@ -119,7 +124,8 @@ namespace System.Security.Cryptography
         public override byte[] Decrypt(
             byte[] data,
             System.Security.Cryptography.RSAEncryptionPadding padding
-        ) {
+        )
+        {
             throw null;
         }
         protected override void Dispose(bool disposing) { }
@@ -130,12 +136,14 @@ namespace System.Security.Cryptography
         public override byte[] Encrypt(
             byte[] data,
             System.Security.Cryptography.RSAEncryptionPadding padding
-        ) {
+        )
+        {
             throw null;
         }
         public override System.Security.Cryptography.RSAParameters ExportParameters(
             bool includePrivateParameters
-        ) {
+        )
+        {
             throw null;
         }
         protected override byte[] HashData(
@@ -143,13 +151,15 @@ namespace System.Security.Cryptography
             int offset,
             int count,
             System.Security.Cryptography.HashAlgorithmName hashAlgorithm
-        ) {
+        )
+        {
             throw null;
         }
         protected override byte[] HashData(
             System.IO.Stream data,
             System.Security.Cryptography.HashAlgorithmName hashAlgorithm
-        ) {
+        )
+        {
             throw null;
         }
         public override void ImportParameters(
@@ -159,7 +169,8 @@ namespace System.Security.Cryptography
             byte[] hash,
             System.Security.Cryptography.HashAlgorithmName hashAlgorithm,
             System.Security.Cryptography.RSASignaturePadding padding
-        ) {
+        )
+        {
             throw null;
         }
         public override bool VerifyHash(
@@ -167,7 +178,8 @@ namespace System.Security.Cryptography
             byte[] signature,
             System.Security.Cryptography.HashAlgorithmName hashAlgorithm,
             System.Security.Cryptography.RSASignaturePadding padding
-        ) {
+        )
+        {
             throw null;
         }
     }

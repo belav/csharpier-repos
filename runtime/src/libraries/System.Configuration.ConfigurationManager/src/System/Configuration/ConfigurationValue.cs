@@ -14,7 +14,8 @@ namespace System.Configuration
             object value,
             ConfigurationValueFlags valueFlags,
             PropertySourceInfo sourceInfo
-        ) {
+        )
+        {
             Value = value;
             ValueFlags = valueFlags;
             SourceInfo = sourceInfo;

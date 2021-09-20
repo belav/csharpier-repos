@@ -84,7 +84,8 @@ namespace Internal.TypeSystem
         public override DefType GetWellKnownType(
             WellKnownType wellKnownType,
             bool throwIfNotFound = true
-        ) {
+        )
+        {
             Debug.Assert(_wellKnownTypes != null, "Forgot to call SetSystemModule?");
 
             int typeIndex = (int)wellKnownType - 1;

@@ -89,7 +89,8 @@ namespace System.Formats.Asn1.Tests.Reader
             AsnEncodingRules ruleSet,
             ByteBacked expectedValue,
             string inputHex
-        ) {
+        )
+        {
             GetExpectedValue(ruleSet, expectedValue, inputHex);
         }
 
@@ -108,7 +109,8 @@ namespace System.Formats.Asn1.Tests.Reader
             AsnEncodingRules ruleSet,
             SByteBacked expectedValue,
             string inputHex
-        ) {
+        )
+        {
             GetExpectedValue(ruleSet, expectedValue, inputHex);
         }
 
@@ -127,7 +129,8 @@ namespace System.Formats.Asn1.Tests.Reader
             AsnEncodingRules ruleSet,
             ShortBacked expectedValue,
             string inputHex
-        ) {
+        )
+        {
             GetExpectedValue(ruleSet, expectedValue, inputHex);
         }
 
@@ -147,7 +150,8 @@ namespace System.Formats.Asn1.Tests.Reader
             AsnEncodingRules ruleSet,
             UShortBacked expectedValue,
             string inputHex
-        ) {
+        )
+        {
             GetExpectedValue(ruleSet, expectedValue, inputHex);
         }
 
@@ -166,7 +170,8 @@ namespace System.Formats.Asn1.Tests.Reader
             AsnEncodingRules ruleSet,
             IntBacked expectedValue,
             string inputHex
-        ) {
+        )
+        {
             GetExpectedValue(ruleSet, expectedValue, inputHex);
         }
 
@@ -186,7 +191,8 @@ namespace System.Formats.Asn1.Tests.Reader
             AsnEncodingRules ruleSet,
             UIntBacked expectedValue,
             string inputHex
-        ) {
+        )
+        {
             GetExpectedValue(ruleSet, expectedValue, inputHex);
         }
 
@@ -205,7 +211,8 @@ namespace System.Formats.Asn1.Tests.Reader
             AsnEncodingRules ruleSet,
             LongBacked expectedValue,
             string inputHex
-        ) {
+        )
+        {
             GetExpectedValue(ruleSet, expectedValue, inputHex);
         }
 
@@ -230,7 +237,8 @@ namespace System.Formats.Asn1.Tests.Reader
             AsnEncodingRules ruleSet,
             ULongBacked expectedValue,
             string inputHex
-        ) {
+        )
+        {
             GetExpectedValue(ruleSet, expectedValue, inputHex);
         }
 
@@ -284,7 +292,8 @@ namespace System.Formats.Asn1.Tests.Reader
         public static void ReadEnumeratedValue_Invalid_Byte(
             AsnEncodingRules ruleSet,
             string inputHex
-        ) {
+        )
+        {
             byte[] inputData = inputHex.HexToByteArray();
             AsnReader reader = new AsnReader(inputData, ruleSet);
 
@@ -338,7 +347,8 @@ namespace System.Formats.Asn1.Tests.Reader
         public static void ReadEnumeratedValue_Invalid_SByte(
             AsnEncodingRules ruleSet,
             string inputHex
-        ) {
+        )
+        {
             byte[] inputData = inputHex.HexToByteArray();
             AsnReader reader = new AsnReader(inputData, ruleSet);
 
@@ -389,7 +399,8 @@ namespace System.Formats.Asn1.Tests.Reader
         public static void ReadEnumeratedValue_Invalid_Short(
             AsnEncodingRules ruleSet,
             string inputHex
-        ) {
+        )
+        {
             byte[] inputData = inputHex.HexToByteArray();
             AsnReader reader = new AsnReader(inputData, ruleSet);
 
@@ -443,7 +454,8 @@ namespace System.Formats.Asn1.Tests.Reader
         public static void ReadEnumeratedValue_Invalid_UShort(
             AsnEncodingRules ruleSet,
             string inputHex
-        ) {
+        )
+        {
             byte[] inputData = inputHex.HexToByteArray();
             AsnReader reader = new AsnReader(inputData, ruleSet);
 
@@ -488,7 +500,8 @@ namespace System.Formats.Asn1.Tests.Reader
         public static void ReadEnumeratedValue_Invalid_Int(
             AsnEncodingRules ruleSet,
             string inputHex
-        ) {
+        )
+        {
             byte[] inputData = inputHex.HexToByteArray();
             AsnReader reader = new AsnReader(inputData, ruleSet);
 
@@ -533,7 +546,8 @@ namespace System.Formats.Asn1.Tests.Reader
         public static void ReadEnumeratedValue_Invalid_UInt(
             AsnEncodingRules ruleSet,
             string inputHex
-        ) {
+        )
+        {
             byte[] inputData = inputHex.HexToByteArray();
             AsnReader reader = new AsnReader(inputData, ruleSet);
 
@@ -572,7 +586,8 @@ namespace System.Formats.Asn1.Tests.Reader
         public static void ReadEnumeratedValue_Invalid_Long(
             AsnEncodingRules ruleSet,
             string inputHex
-        ) {
+        )
+        {
             byte[] inputData = inputHex.HexToByteArray();
             AsnReader reader = new AsnReader(inputData, ruleSet);
 
@@ -611,7 +626,8 @@ namespace System.Formats.Asn1.Tests.Reader
         public static void ReadEnumeratedValue_Invalid_ULong(
             AsnEncodingRules ruleSet,
             string inputHex
-        ) {
+        )
+        {
             byte[] inputData = inputHex.HexToByteArray();
             AsnReader reader = new AsnReader(inputData, ruleSet);
 
@@ -793,7 +809,8 @@ namespace System.Formats.Asn1.Tests.Reader
             string inputHex,
             TagClass tagClass,
             int tagValue
-        ) {
+        )
+        {
             Asn1Tag primitiveTag = new Asn1Tag(tagClass, tagValue, false);
             Asn1Tag constructedTag = new Asn1Tag(tagClass, tagValue, true);
             byte[] inputData = inputHex.HexToByteArray();

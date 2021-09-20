@@ -38,7 +38,8 @@ namespace Roslyn.Utilities
             public ConfiguredYieldAwaiter(
                 YieldAwaitable.YieldAwaiter awaiter,
                 bool continueOnCapturedContext
-            ) {
+            )
+            {
                 _awaiter = awaiter;
                 _continueOnCapturedContext = continueOnCapturedContext;
             }

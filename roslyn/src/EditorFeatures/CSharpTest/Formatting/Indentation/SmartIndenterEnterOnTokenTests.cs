@@ -1508,7 +1508,8 @@ class C
             string line1,
             string line2,
             int expectedIndentation
-        ) {
+        )
+        {
             var code =
                 @$"
 class C
@@ -1549,7 +1550,8 @@ class C
             string line1,
             string line2,
             int expectedIndentation
-        ) {
+        )
+        {
             var code =
                 @$"
 class C
@@ -1584,7 +1586,8 @@ class C
             string line1,
             string line2,
             int expectedIndentation
-        ) {
+        )
+        {
             var code =
                 @$"
 class C
@@ -1612,7 +1615,8 @@ class C
             char ch,
             int indentationLine,
             int? expectedIndentation
-        ) {
+        )
+        {
             await AssertIndentUsingSmartTokenFormatterAsync(
                     code,
                     ch,
@@ -1637,7 +1641,8 @@ class C
             int indentationLine,
             int? expectedIndentation,
             bool useTabs
-        ) {
+        )
+        {
             // create tree service
             using var workspace = TestWorkspace.CreateCSharp(code);
 
@@ -1685,7 +1690,8 @@ class C
             int indentationLine,
             int? expectedIndentation,
             IndentStyle indentStyle = IndentStyle.Smart
-        ) {
+        )
+        {
             await AssertIndentNotUsingSmartTokenFormatterButUsingIndenterAsync(
                     code,
                     indentationLine,
@@ -1710,7 +1716,8 @@ class C
             int? expectedIndentation,
             bool useTabs,
             IndentStyle indentStyle
-        ) {
+        )
+        {
             // create tree service
             using var workspace = TestWorkspace.CreateCSharp(code);
             workspace.TryApplyChanges(

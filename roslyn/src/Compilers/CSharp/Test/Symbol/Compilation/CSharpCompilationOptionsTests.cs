@@ -22,7 +22,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
         public static void VerifyErrors(
             this CSharpCompilationOptions options,
             params DiagnosticDescription[] expected
-        ) {
+        )
+        {
             options.Errors.Verify(expected);
         }
     }
@@ -36,7 +37,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
             Func<CompilationOptions, T, CompilationOptions> factory,
             Func<CompilationOptions, T> getter,
             T validNonDefaultValue
-        ) {
+        )
+        {
             TestPropertyGeneric(
                 new CSharpCompilationOptions(OutputKind.ConsoleApplication),
                 factory,
@@ -187,7 +189,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
             Func<CSharpCompilationOptions, T, CSharpCompilationOptions> factory,
             Func<CSharpCompilationOptions, T> getter,
             T validNonDefaultValue
-        ) {
+        )
+        {
             TestPropertyGeneric(
                 new CSharpCompilationOptions(OutputKind.ConsoleApplication),
                 factory,
@@ -877,7 +880,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
                 string reference,
                 string baseFilePath,
                 MetadataReferenceProperties properties
-            ) {
+            )
+            {
                 throw new NotImplementedException();
             }
         }

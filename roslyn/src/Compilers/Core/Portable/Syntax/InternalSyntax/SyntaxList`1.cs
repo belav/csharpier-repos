@@ -127,7 +127,8 @@ namespace Microsoft.CodeAnalysis.Syntax.InternalSyntax
             ArrayElement<GreenNode>[] array,
             int arrayOffset,
             int count
-        ) {
+        )
+        {
             for (int i = 0; i < count; i++)
             {
                 array[arrayOffset + i].Value = GetRequiredItem(i + offset);

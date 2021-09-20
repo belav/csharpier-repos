@@ -15,7 +15,8 @@ namespace System.Reflection.Tests
                 MetadataLoadContext lc = new MetadataLoadContext(
                     new EmptyCoreMetadataAssemblyResolver()
                 )
-            ) {
+            )
+            {
                 Assembly a = lc.LoadFromByteArray(TestData.s_SimpleAssemblyImage);
                 Module m = a.ManifestModule;
                 Assert.Equal(a, m.Assembly);
@@ -29,7 +30,8 @@ namespace System.Reflection.Tests
                 MetadataLoadContext lc = new MetadataLoadContext(
                     new EmptyCoreMetadataAssemblyResolver()
                 )
-            ) {
+            )
+            {
                 Assembly a = lc.LoadFromByteArray(TestData.s_SimpleAssemblyImage);
                 Module m = a.ManifestModule;
                 Guid mvid = m.ModuleVersionId;
@@ -44,7 +46,8 @@ namespace System.Reflection.Tests
                 MetadataLoadContext lc = new MetadataLoadContext(
                     new EmptyCoreMetadataAssemblyResolver()
                 )
-            ) {
+            )
+            {
                 Assembly a = lc.LoadFromByteArray(TestData.s_SimpleAssemblyImage);
                 Module m = a.ManifestModule;
                 Assert.Equal(0x00000001, m.MetadataToken);
@@ -58,7 +61,8 @@ namespace System.Reflection.Tests
                 MetadataLoadContext lc = new MetadataLoadContext(
                     new EmptyCoreMetadataAssemblyResolver()
                 )
-            ) {
+            )
+            {
                 Assembly a = lc.LoadFromByteArray(TestData.s_SimpleAssemblyImage);
                 Module m = a.ManifestModule;
                 Assert.False(m.IsResource());
@@ -73,7 +77,8 @@ namespace System.Reflection.Tests
                 MetadataLoadContext lc = new MetadataLoadContext(
                     new EmptyCoreMetadataAssemblyResolver()
                 )
-            ) {
+            )
+            {
                 string path = tf.Path;
                 Assembly a = lc.LoadFromAssemblyPath(path);
                 Module m = a.ManifestModule;
@@ -88,7 +93,8 @@ namespace System.Reflection.Tests
                 MetadataLoadContext lc = new MetadataLoadContext(
                     new EmptyCoreMetadataAssemblyResolver()
                 )
-            ) {
+            )
+            {
                 Assembly a = lc.LoadFromByteArray(TestData.s_SimpleAssemblyImage);
                 Module m = a.ManifestModule;
                 Assert.Equal(string.Empty, m.FullyQualifiedName);
@@ -103,7 +109,8 @@ namespace System.Reflection.Tests
                 MetadataLoadContext lc = new MetadataLoadContext(
                     new EmptyCoreMetadataAssemblyResolver()
                 )
-            ) {
+            )
+            {
                 string path = tf.Path;
                 Assembly a = lc.LoadFromAssemblyPath(path);
                 Module m = a.ManifestModule;
@@ -119,7 +126,8 @@ namespace System.Reflection.Tests
                 MetadataLoadContext lc = new MetadataLoadContext(
                     new EmptyCoreMetadataAssemblyResolver()
                 )
-            ) {
+            )
+            {
                 Assembly a = lc.LoadFromByteArray(TestData.s_SimpleAssemblyImage);
                 Module m = a.ManifestModule;
                 Assert.Equal(string.Empty, m.Name);
@@ -134,7 +142,8 @@ namespace System.Reflection.Tests
                 MetadataLoadContext lc = new MetadataLoadContext(
                     new EmptyCoreMetadataAssemblyResolver()
                 )
-            ) {
+            )
+            {
                 string path = tf.Path;
                 Assembly a = lc.LoadFromAssemblyPath(path);
                 Module m = a.ManifestModule;
@@ -149,7 +158,8 @@ namespace System.Reflection.Tests
                 MetadataLoadContext lc = new MetadataLoadContext(
                     new EmptyCoreMetadataAssemblyResolver()
                 )
-            ) {
+            )
+            {
                 Assembly a = lc.LoadFromByteArray(TestData.s_SimpleAssemblyImage);
                 Module m = a.ManifestModule;
                 Assert.Equal("SimpleAssembly.dll", m.ScopeName);
@@ -163,7 +173,8 @@ namespace System.Reflection.Tests
                 MetadataLoadContext lc = new MetadataLoadContext(
                     new EmptyCoreMetadataAssemblyResolver()
                 )
-            ) {
+            )
+            {
                 Assembly a = lc.LoadFromByteArray(TestData.s_PlatformAnyCpu);
                 Module m = a.ManifestModule;
 
@@ -184,7 +195,8 @@ namespace System.Reflection.Tests
                 MetadataLoadContext lc = new MetadataLoadContext(
                     new EmptyCoreMetadataAssemblyResolver()
                 )
-            ) {
+            )
+            {
                 Assembly a = lc.LoadFromByteArray(TestData.s_PlatformAnyCpu32BitPreferred);
                 Module m = a.ManifestModule;
 
@@ -208,7 +220,8 @@ namespace System.Reflection.Tests
                 MetadataLoadContext lc = new MetadataLoadContext(
                     new EmptyCoreMetadataAssemblyResolver()
                 )
-            ) {
+            )
+            {
                 Assembly a = lc.LoadFromByteArray(TestData.s_PlatformX86);
                 Module m = a.ManifestModule;
 
@@ -232,7 +245,8 @@ namespace System.Reflection.Tests
                 MetadataLoadContext lc = new MetadataLoadContext(
                     new EmptyCoreMetadataAssemblyResolver()
                 )
-            ) {
+            )
+            {
                 Assembly a = lc.LoadFromByteArray(TestData.s_PlatformX64);
                 Module m = a.ManifestModule;
 
@@ -256,7 +270,8 @@ namespace System.Reflection.Tests
                 MetadataLoadContext lc = new MetadataLoadContext(
                     new EmptyCoreMetadataAssemblyResolver()
                 )
-            ) {
+            )
+            {
                 Assembly a = lc.LoadFromByteArray(TestData.s_PlatformItanium);
                 Module m = a.ManifestModule;
 
@@ -280,7 +295,8 @@ namespace System.Reflection.Tests
                 MetadataLoadContext lc = new MetadataLoadContext(
                     new EmptyCoreMetadataAssemblyResolver()
                 )
-            ) {
+            )
+            {
                 Assembly a = lc.LoadFromByteArray(TestData.s_PlatformArm);
                 Module m = a.ManifestModule;
 

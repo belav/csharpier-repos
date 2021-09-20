@@ -41,7 +41,8 @@ namespace System.Text.RegularExpressions
             bool caseInsensitive,
             bool rightToLeft,
             CultureInfo culture
-        ) {
+        )
+        {
             // Sorry, you just can't use Boyer-Moore to find an empty pattern.
             // We're doing this for your own protection. (Really, for speed.)
             Debug.Assert(

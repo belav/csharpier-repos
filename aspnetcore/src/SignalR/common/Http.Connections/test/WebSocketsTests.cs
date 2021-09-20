@@ -101,7 +101,8 @@ namespace Microsoft.AspNetCore.Http.Connections.Tests
         public async Task WebSocketTransportSetsMessageTypeBasedOnTransferFormatFeature(
             TransferFormat transferFormat,
             string expectedMessageType
-        ) {
+        )
+        {
             using (StartVerifiableLog())
             {
                 var pair = DuplexPipe.CreateConnectionPair(

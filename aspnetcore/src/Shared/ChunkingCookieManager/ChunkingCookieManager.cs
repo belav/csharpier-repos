@@ -77,7 +77,8 @@ namespace Microsoft.AspNetCore.Internal
                         CultureInfo.InvariantCulture,
                         out var chunksCount
                     )
-                ) {
+                )
+                {
                     return chunksCount;
                 }
             }
@@ -162,7 +163,8 @@ namespace Microsoft.AspNetCore.Internal
             string key,
             string? value,
             CookieOptions options
-        ) {
+        )
+        {
             if (context == null)
             {
                 throw new ArgumentNullException(nameof(context));

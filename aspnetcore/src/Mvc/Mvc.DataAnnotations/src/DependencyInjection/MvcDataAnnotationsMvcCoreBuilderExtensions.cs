@@ -55,7 +55,8 @@ namespace Microsoft.Extensions.DependencyInjection
         public static IMvcCoreBuilder AddDataAnnotationsLocalization(
             this IMvcCoreBuilder builder,
             Action<MvcDataAnnotationsLocalizationOptions>? setupAction
-        ) {
+        )
+        {
             if (builder == null)
             {
                 throw new ArgumentNullException(nameof(builder));
@@ -84,7 +85,8 @@ namespace Microsoft.Extensions.DependencyInjection
         internal static void AddDataAnnotationsLocalizationServices(
             IServiceCollection services,
             Action<MvcDataAnnotationsLocalizationOptions>? setupAction
-        ) {
+        )
+        {
             DataAnnotationsLocalizationServices.AddDataAnnotationsLocalizationServices(
                 services,
                 setupAction

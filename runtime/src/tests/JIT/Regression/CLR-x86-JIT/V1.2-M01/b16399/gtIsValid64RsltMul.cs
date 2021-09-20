@@ -12,7 +12,8 @@ public struct AA
         sbyte[,][][,,,][,][] param4,
         ref int param5,
         ref byte[,][,,,] param6
-    ) {
+    )
+    {
         float local1 = 10.0f;
         short local2 = ((short)(47.0f));
         for (local1--; ((param2 * 117u) == ((long)(local2))); local2++)

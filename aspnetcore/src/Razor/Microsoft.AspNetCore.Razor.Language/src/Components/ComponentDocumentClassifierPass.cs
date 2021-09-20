@@ -40,14 +40,16 @@ namespace Microsoft.AspNetCore.Razor.Language.Components
         protected override bool IsMatch(
             RazorCodeDocument codeDocument,
             DocumentIntermediateNode documentNode
-        ) {
+        )
+        {
             return FileKinds.IsComponent(codeDocument.GetFileKind());
         }
 
         protected override CodeTarget CreateTarget(
             RazorCodeDocument codeDocument,
             RazorCodeGenerationOptions options
-        ) {
+        )
+        {
             return new ComponentCodeTarget(options, TargetExtensions);
         }
 
@@ -57,13 +59,15 @@ namespace Microsoft.AspNetCore.Razor.Language.Components
             NamespaceDeclarationIntermediateNode @namespace,
             ClassDeclarationIntermediateNode @class,
             MethodDeclarationIntermediateNode method
-        ) {
+        )
+        {
             if (
                 !codeDocument.TryComputeNamespace(
                     fallbackToRootNamespace: true,
                     out var computedNamespace
                 ) || !TryComputeClassName(codeDocument, out var computedClass)
-            ) {
+            )
+            {
                 // If we can't compute a nice namespace (no relative path) then just generate something
                 // mangled.
                 computedNamespace = FallbackRootNamespace;

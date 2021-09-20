@@ -20,7 +20,8 @@ namespace Microsoft.AspNetCore.Components.Authorization
             ClaimsPrincipal user,
             object resource,
             IEnumerable<IAuthorizationRequirement> requirements
-        ) {
+        )
+        {
             AuthorizeCalls.Add((user, resource, requirements));
 
             // Make Authorization run asynchronously

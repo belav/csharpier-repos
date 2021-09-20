@@ -32,7 +32,8 @@ namespace Microsoft.CodeAnalysis.SQLite.v2
             IPersistentStorageFaultInjector? faultInjector,
             string databasePath,
             IDisposable ownershipLock
-        ) {
+        )
+        {
             _connectionPoolService = connectionPoolService;
             _faultInjector = faultInjector;
             _databasePath = databasePath;
@@ -42,7 +43,8 @@ namespace Microsoft.CodeAnalysis.SQLite.v2
         internal void Initialize(
             Action<SqlConnection, CancellationToken> initializer,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             // This is our startup path.  No other code can be running.  So it's safe for us to access a connection that
             // can talk to the db without having to be on the reader/writer scheduler queue.
             using var _ = GetPooledConnection(checkScheduler: false, out var connection);
@@ -99,7 +101,8 @@ namespace Microsoft.CodeAnalysis.SQLite.v2
         private PooledConnection GetPooledConnection(
             bool checkScheduler,
             out SqlConnection connection
-        ) {
+        )
+        {
             if (checkScheduler)
             {
                 var scheduler = TaskScheduler.Current;

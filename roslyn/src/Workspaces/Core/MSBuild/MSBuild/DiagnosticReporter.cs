@@ -24,7 +24,8 @@ namespace Microsoft.CodeAnalysis.MSBuild
             DiagnosticReportingMode mode,
             string message,
             Func<string, Exception>? createException = null
-        ) {
+        )
+        {
             switch (mode)
             {
                 case DiagnosticReportingMode.Throw:

@@ -27,11 +27,12 @@ namespace System.Web.Mvc
         internal JQueryFormValueProvider(
             ControllerContext controllerContext,
             IUnvalidatedRequestValues unvalidatedValues
-        ) : base(
-            controllerContext.HttpContext.Request.Form,
-            unvalidatedValues.Form,
-            CultureInfo.CurrentCulture,
-            jQueryToMvcRequestNormalizationRequired: true
-        ) { }
+        )
+            : base(
+                controllerContext.HttpContext.Request.Form,
+                unvalidatedValues.Form,
+                CultureInfo.CurrentCulture,
+                jQueryToMvcRequestNormalizationRequired: true
+            ) { }
     }
 }

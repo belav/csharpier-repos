@@ -12,7 +12,8 @@ namespace System.Reflection.Metadata.Decoding.Tests
         public DisassemblingGenericContext(
             ImmutableArray<string> typeParameters,
             ImmutableArray<string> methodParameters
-        ) {
+        )
+        {
             MethodParameters = methodParameters;
             TypeParameters = typeParameters;
         }
@@ -94,7 +95,8 @@ namespace System.Reflection.Metadata.Decoding.Tests
             MetadataReader reader,
             TypeDefinitionHandle handle,
             byte rawTypeKind = 0
-        ) {
+        )
+        {
             TypeDefinition definition = reader.GetTypeDefinition(handle);
 
             string name = definition.Namespace.IsNil
@@ -114,7 +116,8 @@ namespace System.Reflection.Metadata.Decoding.Tests
             MetadataReader reader,
             TypeReferenceHandle handle,
             byte rawTypeKind = 0
-        ) {
+        )
+        {
             TypeReference reference = reader.GetTypeReference(handle);
             Handle scope = reference.ResolutionScope;
 
@@ -154,7 +157,8 @@ namespace System.Reflection.Metadata.Decoding.Tests
             DisassemblingGenericContext genericContext,
             TypeSpecificationHandle handle,
             byte rawTypeKind = 0
-        ) {
+        )
+        {
             return reader.GetTypeSpecification(handle).DecodeSignature(this, genericContext);
         }
 
@@ -176,14 +180,16 @@ namespace System.Reflection.Metadata.Decoding.Tests
         public virtual string GetGenericMethodParameter(
             DisassemblingGenericContext genericContext,
             int index
-        ) {
+        )
+        {
             return "!!" + genericContext.MethodParameters[index];
         }
 
         public virtual string GetGenericTypeParameter(
             DisassemblingGenericContext genericContext,
             int index
-        ) {
+        )
+        {
             return "!" + genericContext.TypeParameters[index];
         }
 
@@ -195,7 +201,8 @@ namespace System.Reflection.Metadata.Decoding.Tests
         public virtual string GetGenericInstantiation(
             string genericType,
             ImmutableArray<string> typeArguments
-        ) {
+        )
+        {
             return genericType + "<" + string.Join(",", typeArguments) + ">";
         }
 
@@ -237,7 +244,8 @@ namespace System.Reflection.Metadata.Decoding.Tests
             MetadataReader reader,
             DisassemblingGenericContext genericContext,
             EntityHandle handle
-        ) {
+        )
+        {
             switch (handle.Kind)
             {
                 case HandleKind.TypeDefinition:
@@ -262,7 +270,8 @@ namespace System.Reflection.Metadata.Decoding.Tests
             string modifierType,
             string unmodifiedType,
             bool isRequired
-        ) {
+        )
+        {
             return unmodifiedType + (isRequired ? " modreq(" : " modopt(") + modifierType + ")";
         }
 

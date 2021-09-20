@@ -47,7 +47,8 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeFixes.GenerateMethod
             SyntaxNode node,
             SyntaxToken token,
             Diagnostic diagnostic
-        ) {
+        )
+        {
             return node.IsKind(SyntaxKind.IdentifierName)
                 || node.IsKind(SyntaxKind.MethodDeclaration)
                 || node.IsKind(SyntaxKind.InvocationExpression)
@@ -76,7 +77,8 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeFixes.GenerateMethod
             Document document,
             SyntaxNode node,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var service = document.GetRequiredLanguageService<IGenerateConversionService>();
             return service.GenerateConversionAsync(document, node, cancellationToken);
         }

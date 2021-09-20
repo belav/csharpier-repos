@@ -519,7 +519,8 @@ internal class TestApp
                 1,
                 1
             ) != 100
-        ) {
+        )
+        {
             Console.WriteLine("test_245() failed.");
             return 345;
         }
@@ -549,7 +550,8 @@ internal class TestApp
         if (
             test_273(((long)(&loc_x.m_b)) << 4, (long)(((ulong)&loc_x.m_b) & 0xff00000000000000))
             != 100
-        ) {
+        )
+        {
             Console.WriteLine("test_273() failed.");
             return 373;
         }

@@ -111,7 +111,8 @@ namespace System.Web.Http.ValueProviders
         public void ConvertTo_ReturnsFirstValue_WhenSequenceNeedsToConvertedToSingleValue(
             IList value,
             object expected
-        ) {
+        )
+        {
             // Arrange
             var valueProviderResult = new ValueProviderResult(
                 value,

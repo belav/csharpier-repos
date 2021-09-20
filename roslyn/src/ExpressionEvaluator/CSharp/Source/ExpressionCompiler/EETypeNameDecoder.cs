@@ -14,10 +14,8 @@ namespace Microsoft.CodeAnalysis.CSharp.ExpressionEvaluator
     {
         private readonly CSharpCompilation _compilation;
 
-        internal EETypeNameDecoder(
-            CSharpCompilation compilation,
-            PEModuleSymbol moduleSymbol
-        ) : base(SymbolFactory.Instance, moduleSymbol)
+        internal EETypeNameDecoder(CSharpCompilation compilation, PEModuleSymbol moduleSymbol)
+            : base(SymbolFactory.Instance, moduleSymbol)
         {
             _compilation = compilation;
         }
@@ -64,14 +62,16 @@ namespace Microsoft.CodeAnalysis.CSharp.ExpressionEvaluator
         protected override TypeSymbol LookupNestedTypeDefSymbol(
             TypeSymbol container,
             ref MetadataTypeName emittedName
-        ) {
+        )
+        {
             return container.LookupMetadataType(ref emittedName);
         }
 
         protected override TypeSymbol LookupTopLevelTypeDefSymbol(
             int referencedAssemblyIndex,
             ref MetadataTypeName emittedName
-        ) {
+        )
+        {
             var assembly = Module.GetReferencedAssemblySymbol(referencedAssemblyIndex);
             // GetReferencedAssemblySymbol should not return null since referencedAssemblyIndex
             // was obtained from GetIndexOfReferencedAssembly above.
@@ -84,7 +84,8 @@ namespace Microsoft.CodeAnalysis.CSharp.ExpressionEvaluator
         protected override TypeSymbol LookupTopLevelTypeDefSymbol(
             ref MetadataTypeName emittedName,
             out bool isNoPiaLocalType
-        ) {
+        )
+        {
             return moduleSymbol.LookupTopLevelMetadataType(ref emittedName, out isNoPiaLocalType);
         }
 

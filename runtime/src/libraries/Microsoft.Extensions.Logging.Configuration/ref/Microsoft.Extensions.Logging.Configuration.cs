@@ -11,7 +11,8 @@ namespace Microsoft.Extensions.Logging
         public static Microsoft.Extensions.Logging.ILoggingBuilder AddConfiguration(
             this Microsoft.Extensions.Logging.ILoggingBuilder builder,
             Microsoft.Extensions.Configuration.IConfiguration configuration
-        ) {
+        )
+        {
             throw null;
         }
     }

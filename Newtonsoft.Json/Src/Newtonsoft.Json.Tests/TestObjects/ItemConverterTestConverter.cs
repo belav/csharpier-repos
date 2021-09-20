@@ -39,7 +39,8 @@ namespace Newtonsoft.Json.Tests.TestObjects
             Type objectType,
             object existingValue,
             JsonSerializer serializer
-        ) {
+        )
+        {
             return "X";
         }
 

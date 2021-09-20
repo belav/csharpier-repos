@@ -507,7 +507,8 @@ namespace Microsoft.EntityFrameworkCore.Internal
                 var column in keyProps.Select(
                     k => new DatabaseColumn { Table = Table, Name = k, StoreType = "int" }
                 )
-            ) {
+            )
+            {
                 info.Tables[0].Columns.Add(column);
                 info.Tables[0].PrimaryKey.Columns.Add(column);
             }
@@ -2166,7 +2167,8 @@ namespace Microsoft.EntityFrameworkCore.Internal
             bool useDatabaseNames,
             bool noPluralize,
             bool pluralTables
-        ) {
+        )
+        {
             var userTableName = pluralTables ? "users" : "user";
             var postTableName = pluralTables ? "posts" : "post";
             var databaseModel = new DatabaseModel

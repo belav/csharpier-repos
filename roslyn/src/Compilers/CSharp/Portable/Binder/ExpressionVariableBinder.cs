@@ -37,7 +37,8 @@ namespace Microsoft.CodeAnalysis.CSharp
 
         internal override ImmutableArray<LocalSymbol> GetDeclaredLocalsForScope(
             SyntaxNode scopeDesignator
-        ) {
+        )
+        {
             if (ScopeDesignator == scopeDesignator)
             {
                 return this.Locals;
@@ -48,7 +49,8 @@ namespace Microsoft.CodeAnalysis.CSharp
 
         internal override ImmutableArray<LocalFunctionSymbol> GetDeclaredLocalFunctionsForScope(
             CSharpSyntaxNode scopeDesignator
-        ) {
+        )
+        {
             throw ExceptionUtilities.Unreachable;
         }
     }

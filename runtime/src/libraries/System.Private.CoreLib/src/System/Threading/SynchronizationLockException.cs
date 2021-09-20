@@ -37,9 +37,7 @@ namespace System.Threading
             HResult = HResults.COR_E_SYNCHRONIZATIONLOCK;
         }
 
-        protected SynchronizationLockException(
-            SerializationInfo info,
-            StreamingContext context
-        ) : base(info, context) { }
+        protected SynchronizationLockException(SerializationInfo info, StreamingContext context)
+            : base(info, context) { }
     }
 }

@@ -179,7 +179,8 @@ namespace Microsoft.CodeAnalysis.CSharp
         public static SyntaxNode DeserializeFrom(
             Stream stream,
             CancellationToken cancellationToken = default
-        ) {
+        )
+        {
             if (stream == null)
             {
                 throw new ArgumentNullException(nameof(stream));
@@ -244,7 +245,8 @@ namespace Microsoft.CodeAnalysis.CSharp
 
         internal IList<DirectiveTriviaSyntax> GetDirectives(
             Func<DirectiveTriviaSyntax, bool>? filter = null
-        ) {
+        )
+        {
             return ((SyntaxNodeOrToken)this).GetDirectives<DirectiveTriviaSyntax>(filter);
         }
 
@@ -253,7 +255,8 @@ namespace Microsoft.CodeAnalysis.CSharp
         /// </summary>
         public DirectiveTriviaSyntax? GetFirstDirective(
             Func<DirectiveTriviaSyntax, bool>? predicate = null
-        ) {
+        )
+        {
             foreach (var child in this.ChildNodesAndTokens())
             {
                 if (child.ContainsDirectives)
@@ -294,7 +297,8 @@ namespace Microsoft.CodeAnalysis.CSharp
         /// </summary>
         public DirectiveTriviaSyntax? GetLastDirective(
             Func<DirectiveTriviaSyntax, bool>? predicate = null
-        ) {
+        )
+        {
             foreach (var child in this.ChildNodesAndTokens().Reverse())
             {
                 if (child.ContainsDirectives)
@@ -349,7 +353,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             bool includeSkipped = false,
             bool includeDirectives = false,
             bool includeDocumentationComments = false
-        ) {
+        )
+        {
             return base.GetFirstToken(
                 includeZeroWidth,
                 includeSkipped,
@@ -369,7 +374,8 @@ namespace Microsoft.CodeAnalysis.CSharp
         internal SyntaxToken GetFirstToken(
             Func<SyntaxToken, bool>? predicate,
             Func<SyntaxTrivia, bool>? stepInto = null
-        ) {
+        )
+        {
             return SyntaxNavigator.Instance.GetFirstToken(this, predicate, stepInto);
         }
 
@@ -388,7 +394,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             bool includeSkipped = false,
             bool includeDirectives = false,
             bool includeDocumentationComments = false
-        ) {
+        )
+        {
             return base.GetLastToken(
                 includeZeroWidth,
                 includeSkipped,
@@ -448,7 +455,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                 if (
                     curr.Kind() == SyntaxKind.XmlCrefAttribute
                     || curr.Kind() == SyntaxKind.XmlNameAttribute
-                ) {
+                )
+                {
                     return LookupPosition.IsInXmlAttributeValue(position, (XmlAttributeSyntax)curr)
                       ? triviaToken
                       : nonTriviaToken;
@@ -515,7 +523,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             Func<SyntaxToken, SyntaxToken, SyntaxToken>? computeReplacementToken = null,
             IEnumerable<SyntaxTrivia>? trivia = null,
             Func<SyntaxTrivia, SyntaxTrivia, SyntaxTrivia>? computeReplacementTrivia = null
-        ) {
+        )
+        {
             return SyntaxReplacer.Replace(
                     this,
                     nodes,
@@ -531,7 +540,8 @@ namespace Microsoft.CodeAnalysis.CSharp
         protected internal override SyntaxNode ReplaceNodeInListCore(
             SyntaxNode originalNode,
             IEnumerable<SyntaxNode> replacementNodes
-        ) {
+        )
+        {
             return SyntaxReplacer.ReplaceNodeInList(this, originalNode, replacementNodes)
                 .AsRootOfNewTreeWithOptionsFrom(this.SyntaxTree);
         }
@@ -540,7 +550,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             SyntaxNode nodeInList,
             IEnumerable<SyntaxNode> nodesToInsert,
             bool insertBefore
-        ) {
+        )
+        {
             return SyntaxReplacer.InsertNodeInList(this, nodeInList, nodesToInsert, insertBefore)
                 .AsRootOfNewTreeWithOptionsFrom(this.SyntaxTree);
         }
@@ -548,7 +559,8 @@ namespace Microsoft.CodeAnalysis.CSharp
         protected internal override SyntaxNode ReplaceTokenInListCore(
             SyntaxToken originalToken,
             IEnumerable<SyntaxToken> newTokens
-        ) {
+        )
+        {
             return SyntaxReplacer.ReplaceTokenInList(this, originalToken, newTokens)
                 .AsRootOfNewTreeWithOptionsFrom(this.SyntaxTree);
         }
@@ -557,7 +569,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             SyntaxToken originalToken,
             IEnumerable<SyntaxToken> newTokens,
             bool insertBefore
-        ) {
+        )
+        {
             return SyntaxReplacer.InsertTokenInList(this, originalToken, newTokens, insertBefore)
                 .AsRootOfNewTreeWithOptionsFrom(this.SyntaxTree);
         }
@@ -565,7 +578,8 @@ namespace Microsoft.CodeAnalysis.CSharp
         protected internal override SyntaxNode ReplaceTriviaInListCore(
             SyntaxTrivia originalTrivia,
             IEnumerable<SyntaxTrivia> newTrivia
-        ) {
+        )
+        {
             return SyntaxReplacer.ReplaceTriviaInList(this, originalTrivia, newTrivia)
                 .AsRootOfNewTreeWithOptionsFrom(this.SyntaxTree);
         }
@@ -574,7 +588,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             SyntaxTrivia originalTrivia,
             IEnumerable<SyntaxTrivia> newTrivia,
             bool insertBefore
-        ) {
+        )
+        {
             return SyntaxReplacer.InsertTriviaInList(this, originalTrivia, newTrivia, insertBefore)
                 .AsRootOfNewTreeWithOptionsFrom(this.SyntaxTree);
         }
@@ -582,7 +597,8 @@ namespace Microsoft.CodeAnalysis.CSharp
         protected internal override SyntaxNode? RemoveNodesCore(
             IEnumerable<SyntaxNode> nodes,
             SyntaxRemoveOptions options
-        ) {
+        )
+        {
             return SyntaxNodeRemover.RemoveNodes(this, nodes.Cast<CSharpSyntaxNode>(), options)
                 .AsRootOfNewTreeWithOptionsFrom(this.SyntaxTree);
         }
@@ -591,7 +607,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             string indentation,
             string eol,
             bool elasticTrivia
-        ) {
+        )
+        {
             return SyntaxNormalizer.Normalize(this, indentation, eol, elasticTrivia)
                 .AsRootOfNewTreeWithOptionsFrom(this.SyntaxTree);
         }

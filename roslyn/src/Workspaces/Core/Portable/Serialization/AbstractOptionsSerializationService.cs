@@ -34,7 +34,8 @@ namespace Microsoft.CodeAnalysis.Serialization
             CompilationOptions options,
             ObjectWriter writer,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             cancellationToken.ThrowIfCancellationRequested();
 
             writer.WriteInt32((int)options.OutputKind);
@@ -112,7 +113,8 @@ namespace Microsoft.CodeAnalysis.Serialization
             out AssemblyIdentityComparer assemblyIdentityComparer,
             out StrongNameProvider strongNameProvider,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             cancellationToken.ThrowIfCancellationRequested();
 
             outputKind = (OutputKind)reader.ReadInt32();
@@ -199,7 +201,8 @@ namespace Microsoft.CodeAnalysis.Serialization
             out DocumentationMode documentationMode,
             out IEnumerable<KeyValuePair<string, string>> features,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             cancellationToken.ThrowIfCancellationRequested();
 
             kind = (SourceCodeKind)reader.ReadInt32();

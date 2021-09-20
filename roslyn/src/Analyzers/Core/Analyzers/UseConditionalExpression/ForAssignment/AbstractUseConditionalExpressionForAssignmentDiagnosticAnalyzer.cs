@@ -16,12 +16,13 @@ namespace Microsoft.CodeAnalysis.UseConditionalExpression
     {
         protected AbstractUseConditionalExpressionForAssignmentDiagnosticAnalyzer(
             LocalizableResourceString message
-        ) : base(
-            IDEDiagnosticIds.UseConditionalExpressionForAssignmentDiagnosticId,
-            EnforceOnBuildValues.UseConditionalExpressionForAssignment,
-            message,
-            CodeStyleOptions2.PreferConditionalExpressionOverAssignment
-        ) { }
+        )
+            : base(
+                IDEDiagnosticIds.UseConditionalExpressionForAssignmentDiagnosticId,
+                EnforceOnBuildValues.UseConditionalExpressionForAssignment,
+                message,
+                CodeStyleOptions2.PreferConditionalExpressionOverAssignment
+            ) { }
 
         protected override bool TryMatchPattern(
             IConditionalOperation ifOperation,

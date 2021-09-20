@@ -66,13 +66,15 @@ namespace Microsoft.CodeAnalysis.GenerateMember.GenerateParameterizedMember
             Document document,
             SyntaxNode node,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             using (
                 Logger.LogBlock(
                     FunctionId.Refactoring_GenerateMember_GenerateMethod,
                     cancellationToken
                 )
-            ) {
+            )
+            {
                 var semanticDocument = await SemanticDocument.CreateAsync(
                         document,
                         cancellationToken

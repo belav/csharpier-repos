@@ -29,7 +29,8 @@ namespace System.Net.Mail
             string userName,
             string domain,
             Encoding? displayNameEncoding
-        ) {
+        )
+        {
             _host = domain;
             _userName = userName;
             _displayName = displayName;
@@ -114,7 +115,8 @@ namespace System.Net.Mail
             string? displayName,
             Encoding? displayNameEncoding,
             [NotNullWhen(true)] out MailAddress? result
-        ) {
+        )
+        {
             if (
                 TryParse(
                     address,
@@ -123,7 +125,8 @@ namespace System.Net.Mail
                     out (string displayName, string user, string host, Encoding displayNameEncoding) parsed,
                     throwExceptionIfFail: false
                 )
-            ) {
+            )
+            {
                 result = new MailAddress(
                     parsed.displayName,
                     parsed.user,
@@ -145,7 +148,8 @@ namespace System.Net.Mail
             Encoding? displayNameEncoding,
             out (string displayName, string user, string host, Encoding displayNameEncoding) parsedData,
             bool throwExceptionIfFail
-        ) {
+        )
+        {
             if (string.IsNullOrEmpty(address))
             {
                 if (throwExceptionIfFail)
@@ -174,7 +178,8 @@ namespace System.Net.Mail
                         out displayName,
                         throwExceptionIfFail
                     )
-                ) {
+                )
+                {
                     parsedData = default;
                     return false;
                 }
@@ -192,7 +197,8 @@ namespace System.Net.Mail
                     out ParseAddressInfo info,
                     throwExceptionIfFail
                 )
-            ) {
+            )
+            {
                 parsedData = default;
                 return false;
             }

@@ -14,7 +14,8 @@ namespace Microsoft.AspNetCore.Mvc.ModelBinding
             BindingSource bindingSource,
             Dictionary<string, StringValues> values,
             CultureInfo culture
-        ) {
+        )
+        {
             return new JQueryFormValueProvider(bindingSource, values, culture);
         }
 

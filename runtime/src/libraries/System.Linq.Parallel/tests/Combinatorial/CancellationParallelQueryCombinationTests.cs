@@ -15,7 +15,8 @@ namespace System.Linq.Parallel.Tests
         [MemberData(nameof(BinaryCancelingOperators))]
         public static void Aggregate_OperationCanceledException(
             Labeled<Func<ParallelQuery<int>, Action, ParallelQuery<int>>> operation
-        ) {
+        )
+        {
             AssertThrows.EventuallyCanceled(
                 (source, canceler) => operation.Item(source, canceler).Aggregate((i, j) => j)
             );
@@ -42,7 +43,8 @@ namespace System.Linq.Parallel.Tests
         [MemberData(nameof(BinaryCancelingOperators))]
         public static void Aggregate_AggregateException_Wraps_OperationCanceledException(
             Labeled<Func<ParallelQuery<int>, Action, ParallelQuery<int>>> operation
-        ) {
+        )
+        {
             AssertThrows.OtherTokenCanceled(
                 (source, canceler) => operation.Item(source, canceler).Aggregate((i, j) => j)
             );
@@ -88,7 +90,8 @@ namespace System.Linq.Parallel.Tests
         [MemberData(nameof(BinaryCancelingOperators))]
         public static void Aggregate_OperationCanceledException_PreCanceled(
             Labeled<Func<ParallelQuery<int>, Action, ParallelQuery<int>>> operation
-        ) {
+        )
+        {
             AssertThrows.AlreadyCanceled(
                 source => operation.Item(source, () => { }).Aggregate((x, y) => x)
             );
@@ -115,7 +118,8 @@ namespace System.Linq.Parallel.Tests
         [MemberData(nameof(BinaryCancelingOperators))]
         public static void All_OperationCanceledException(
             Labeled<Func<ParallelQuery<int>, Action, ParallelQuery<int>>> operation
-        ) {
+        )
+        {
             AssertThrows.EventuallyCanceled(
                 (source, canceler) => operation.Item(source, canceler).All(x => true)
             );
@@ -126,7 +130,8 @@ namespace System.Linq.Parallel.Tests
         [MemberData(nameof(BinaryCancelingOperators))]
         public static void All_AggregateException_Wraps_OperationCanceledException(
             Labeled<Func<ParallelQuery<int>, Action, ParallelQuery<int>>> operation
-        ) {
+        )
+        {
             AssertThrows.OtherTokenCanceled(
                 (source, canceler) => operation.Item(source, canceler).All(x => true)
             );
@@ -140,7 +145,8 @@ namespace System.Linq.Parallel.Tests
         [MemberData(nameof(BinaryCancelingOperators))]
         public static void All_OperationCanceledException_PreCanceled(
             Labeled<Func<ParallelQuery<int>, Action, ParallelQuery<int>>> operation
-        ) {
+        )
+        {
             AssertThrows.AlreadyCanceled(
                 source => operation.Item(source, () => { }).All(x => true)
             );
@@ -151,7 +157,8 @@ namespace System.Linq.Parallel.Tests
         [MemberData(nameof(BinaryCancelingOperators))]
         public static void Any_OperationCanceledException(
             Labeled<Func<ParallelQuery<int>, Action, ParallelQuery<int>>> operation
-        ) {
+        )
+        {
             AssertThrows.EventuallyCanceled(
                 (source, canceler) => operation.Item(source, canceler).Any(x => false)
             );
@@ -162,7 +169,8 @@ namespace System.Linq.Parallel.Tests
         [MemberData(nameof(BinaryCancelingOperators))]
         public static void Any_AggregateException_Wraps_OperationCanceledException(
             Labeled<Func<ParallelQuery<int>, Action, ParallelQuery<int>>> operation
-        ) {
+        )
+        {
             AssertThrows.OtherTokenCanceled(
                 (source, canceler) => operation.Item(source, canceler).Any(x => false)
             );
@@ -176,7 +184,8 @@ namespace System.Linq.Parallel.Tests
         [MemberData(nameof(BinaryCancelingOperators))]
         public static void Any_OperationCanceledException_PreCanceled(
             Labeled<Func<ParallelQuery<int>, Action, ParallelQuery<int>>> operation
-        ) {
+        )
+        {
             AssertThrows.AlreadyCanceled(source => operation.Item(source, () => { }).Any());
             AssertThrows.AlreadyCanceled(
                 source => operation.Item(source, () => { }).Any(x => true)
@@ -188,7 +197,8 @@ namespace System.Linq.Parallel.Tests
         [MemberData(nameof(BinaryCancelingOperators))]
         public static void Average_OperationCanceledException(
             Labeled<Func<ParallelQuery<int>, Action, ParallelQuery<int>>> operation
-        ) {
+        )
+        {
             AssertThrows.EventuallyCanceled(
                 (source, canceler) => operation.Item(source, canceler).Average()
             );
@@ -230,7 +240,8 @@ namespace System.Linq.Parallel.Tests
         [MemberData(nameof(BinaryCancelingOperators))]
         public static void Average_AggregateException_Wraps_OperationCanceledException(
             Labeled<Func<ParallelQuery<int>, Action, ParallelQuery<int>>> operation
-        ) {
+        )
+        {
             AssertThrows.OtherTokenCanceled(
                 (source, canceler) => operation.Item(source, canceler).Average()
             );
@@ -307,7 +318,8 @@ namespace System.Linq.Parallel.Tests
         [MemberData(nameof(BinaryCancelingOperators))]
         public static void Average_OperationCanceledException_PreCanceled(
             Labeled<Func<ParallelQuery<int>, Action, ParallelQuery<int>>> operation
-        ) {
+        )
+        {
             AssertThrows.AlreadyCanceled(source => operation.Item(source, () => { }).Average());
         }
 
@@ -316,7 +328,8 @@ namespace System.Linq.Parallel.Tests
         [MemberData(nameof(BinaryCancelingOperators))]
         public static void Contains_OperationCanceledException(
             Labeled<Func<ParallelQuery<int>, Action, ParallelQuery<int>>> operation
-        ) {
+        )
+        {
             AssertThrows.EventuallyCanceled(
                 (source, canceler) => operation.Item(source, canceler).Contains(-1)
             );
@@ -327,7 +340,8 @@ namespace System.Linq.Parallel.Tests
         [MemberData(nameof(BinaryCancelingOperators))]
         public static void Contains_AggregateException_Wraps_OperationCanceledException(
             Labeled<Func<ParallelQuery<int>, Action, ParallelQuery<int>>> operation
-        ) {
+        )
+        {
             AssertThrows.OtherTokenCanceled(
                 (source, canceler) => operation.Item(source, canceler).Contains(-1)
             );
@@ -341,7 +355,8 @@ namespace System.Linq.Parallel.Tests
         [MemberData(nameof(BinaryCancelingOperators))]
         public static void Contains_OperationCanceledException_PreCanceled(
             Labeled<Func<ParallelQuery<int>, Action, ParallelQuery<int>>> operation
-        ) {
+        )
+        {
             AssertThrows.AlreadyCanceled(
                 source => operation.Item(source, () => { }).Contains(DefaultStart)
             );
@@ -352,7 +367,8 @@ namespace System.Linq.Parallel.Tests
         [MemberData(nameof(BinaryCancelingOperators))]
         public static void Count_OperationCanceledException(
             Labeled<Func<ParallelQuery<int>, Action, ParallelQuery<int>>> operation
-        ) {
+        )
+        {
             AssertThrows.EventuallyCanceled(
                 (source, canceler) => operation.Item(source, canceler).Count()
             );
@@ -372,7 +388,8 @@ namespace System.Linq.Parallel.Tests
         [MemberData(nameof(BinaryCancelingOperators))]
         public static void Count_AggregateException_Wraps_OperationCanceledException(
             Labeled<Func<ParallelQuery<int>, Action, ParallelQuery<int>>> operation
-        ) {
+        )
+        {
             AssertThrows.OtherTokenCanceled(
                 (source, canceler) => operation.Item(source, canceler).Count()
             );
@@ -404,7 +421,8 @@ namespace System.Linq.Parallel.Tests
         [MemberData(nameof(BinaryCancelingOperators))]
         public static void Count_OperationCanceledException_PreCanceled(
             Labeled<Func<ParallelQuery<int>, Action, ParallelQuery<int>>> operation
-        ) {
+        )
+        {
             AssertThrows.AlreadyCanceled(source => operation.Item(source, () => { }).Count());
             AssertThrows.AlreadyCanceled(source => operation.Item(source, () => { }).LongCount());
             AssertThrows.AlreadyCanceled(
@@ -421,7 +439,8 @@ namespace System.Linq.Parallel.Tests
         [MemberData(nameof(OrderCancelingOperators))]
         public static void ElementAt_OperationCanceledException(
             Labeled<Func<ParallelQuery<int>, Action, ParallelQuery<int>>> operation
-        ) {
+        )
+        {
             AssertThrows.EventuallyCanceled(
                 (source, canceler) => operation.Item(source, canceler).ElementAt(int.MaxValue)
             );
@@ -433,7 +452,8 @@ namespace System.Linq.Parallel.Tests
         [MemberData(nameof(OrderCancelingOperators))]
         public static void ElementAt_AggregateException_Wraps_OperationCanceledException(
             Labeled<Func<ParallelQuery<int>, Action, ParallelQuery<int>>> operation
-        ) {
+        )
+        {
             AssertThrows.OtherTokenCanceled(
                 (source, canceler) => operation.Item(source, canceler).ElementAt(int.MaxValue)
             );
@@ -448,7 +468,8 @@ namespace System.Linq.Parallel.Tests
         [MemberData(nameof(OrderCancelingOperators))]
         public static void ElementAt_OperationCanceledException_PreCanceled(
             Labeled<Func<ParallelQuery<int>, Action, ParallelQuery<int>>> operation
-        ) {
+        )
+        {
             AssertThrows.AlreadyCanceled(source => operation.Item(source, () => { }).ElementAt(0));
         }
 
@@ -458,7 +479,8 @@ namespace System.Linq.Parallel.Tests
         [MemberData(nameof(OrderCancelingOperators))]
         public static void ElementAtOrDefault_OperationCanceledException(
             Labeled<Func<ParallelQuery<int>, Action, ParallelQuery<int>>> operation
-        ) {
+        )
+        {
             AssertThrows.EventuallyCanceled(
                 (source, canceler) => operation.Item(source, canceler).ElementAt(int.MaxValue)
             );
@@ -470,7 +492,8 @@ namespace System.Linq.Parallel.Tests
         [MemberData(nameof(OrderCancelingOperators))]
         public static void ElementAtOrDefault_AggregateException_Wraps_OperationCanceledException(
             Labeled<Func<ParallelQuery<int>, Action, ParallelQuery<int>>> operation
-        ) {
+        )
+        {
             AssertThrows.OtherTokenCanceled(
                 (source, canceler) =>
                     operation.Item(source, canceler).ElementAtOrDefault(int.MaxValue)
@@ -487,7 +510,8 @@ namespace System.Linq.Parallel.Tests
         [MemberData(nameof(OrderCancelingOperators))]
         public static void ElementAtOrDefault_OperationCanceledException_PreCanceled(
             Labeled<Func<ParallelQuery<int>, Action, ParallelQuery<int>>> operation
-        ) {
+        )
+        {
             AssertThrows.AlreadyCanceled(
                 source => operation.Item(source, () => { }).ElementAtOrDefault(0)
             );
@@ -502,7 +526,8 @@ namespace System.Linq.Parallel.Tests
         [MemberData(nameof(OrderCancelingOperators))]
         public static void First_OperationCanceledException(
             Labeled<Func<ParallelQuery<int>, Action, ParallelQuery<int>>> operation
-        ) {
+        )
+        {
             AssertThrows.EventuallyCanceled(
                 (source, canceler) => operation.Item(source, canceler).First(x => false)
             );
@@ -514,7 +539,8 @@ namespace System.Linq.Parallel.Tests
         [MemberData(nameof(OrderCancelingOperators))]
         public static void First_AggregateException_Wraps_OperationCanceledException(
             Labeled<Func<ParallelQuery<int>, Action, ParallelQuery<int>>> operation
-        ) {
+        )
+        {
             AssertThrows.OtherTokenCanceled(
                 (source, canceler) => operation.Item(source, canceler).First(x => false)
             );
@@ -529,7 +555,8 @@ namespace System.Linq.Parallel.Tests
         [MemberData(nameof(OrderCancelingOperators))]
         public static void First_OperationCanceledException_PreCanceled(
             Labeled<Func<ParallelQuery<int>, Action, ParallelQuery<int>>> operation
-        ) {
+        )
+        {
             AssertThrows.AlreadyCanceled(source => operation.Item(source, () => { }).First());
             AssertThrows.AlreadyCanceled(
                 source => operation.Item(source, () => { }).First(x => false)
@@ -542,7 +569,8 @@ namespace System.Linq.Parallel.Tests
         [MemberData(nameof(OrderCancelingOperators))]
         public static void FirstOrDefault_OperationCanceledException(
             Labeled<Func<ParallelQuery<int>, Action, ParallelQuery<int>>> operation
-        ) {
+        )
+        {
             AssertThrows.EventuallyCanceled(
                 (source, canceler) => operation.Item(source, canceler).FirstOrDefault(x => false)
             );
@@ -554,7 +582,8 @@ namespace System.Linq.Parallel.Tests
         [MemberData(nameof(OrderCancelingOperators))]
         public static void FirstOrDefault_AggregateException_Wraps_OperationCanceledException(
             Labeled<Func<ParallelQuery<int>, Action, ParallelQuery<int>>> operation
-        ) {
+        )
+        {
             AssertThrows.OtherTokenCanceled(
                 (source, canceler) => operation.Item(source, canceler).FirstOrDefault(x => false)
             );
@@ -569,7 +598,8 @@ namespace System.Linq.Parallel.Tests
         [MemberData(nameof(OrderCancelingOperators))]
         public static void FirstOrDefault_OperationCanceledException_PreCanceled(
             Labeled<Func<ParallelQuery<int>, Action, ParallelQuery<int>>> operation
-        ) {
+        )
+        {
             AssertThrows.AlreadyCanceled(
                 source => operation.Item(source, () => { }).FirstOrDefault()
             );
@@ -583,7 +613,8 @@ namespace System.Linq.Parallel.Tests
         [MemberData(nameof(BinaryCancelingOperators))]
         public static void ForAll_OperationCanceledException(
             Labeled<Func<ParallelQuery<int>, Action, ParallelQuery<int>>> operation
-        ) {
+        )
+        {
             AssertThrows.EventuallyCanceled(
                 (source, canceler) => operation.Item(source, canceler).ForAll(x => { })
             );
@@ -594,7 +625,8 @@ namespace System.Linq.Parallel.Tests
         [MemberData(nameof(BinaryCancelingOperators))]
         public static void ForAll_AggregateException_Wraps_OperationCanceledException(
             Labeled<Func<ParallelQuery<int>, Action, ParallelQuery<int>>> operation
-        ) {
+        )
+        {
             AssertThrows.OtherTokenCanceled(
                 (source, canceler) => operation.Item(source, canceler).ForAll(x => { })
             );
@@ -608,7 +640,8 @@ namespace System.Linq.Parallel.Tests
         [MemberData(nameof(BinaryCancelingOperators))]
         public static void ForAll_OperationCanceledException_PreCanceled(
             Labeled<Func<ParallelQuery<int>, Action, ParallelQuery<int>>> operation
-        ) {
+        )
+        {
             AssertThrows.AlreadyCanceled(
                 source => operation.Item(source, () => { }).ForAll(x => { })
             );
@@ -620,7 +653,8 @@ namespace System.Linq.Parallel.Tests
         [MemberData(nameof(OrderCancelingOperators))]
         public static void ForEach_OperationCanceledException(
             Labeled<Func<ParallelQuery<int>, Action, ParallelQuery<int>>> operation
-        ) {
+        )
+        {
             AssertThrows.EventuallyCanceled(
                 (source, canceler) =>
                 {
@@ -636,7 +670,8 @@ namespace System.Linq.Parallel.Tests
         [MemberData(nameof(OrderCancelingOperators))]
         public static void ForEach_AggregateException_Wraps_OperationCanceledException(
             Labeled<Func<ParallelQuery<int>, Action, ParallelQuery<int>>> operation
-        ) {
+        )
+        {
             AssertThrows.OtherTokenCanceled(
                 (source, canceler) =>
                 {
@@ -659,7 +694,8 @@ namespace System.Linq.Parallel.Tests
         [MemberData(nameof(OrderCancelingOperators))]
         public static void ForEach_OperationCanceledException_PreCanceled(
             Labeled<Func<ParallelQuery<int>, Action, ParallelQuery<int>>> operation
-        ) {
+        )
+        {
             AssertThrows.AlreadyCanceled(
                 source =>
                 {
@@ -675,7 +711,8 @@ namespace System.Linq.Parallel.Tests
         [MemberData(nameof(OrderCancelingOperators))]
         public static void Last_OperationCanceledException(
             Labeled<Func<ParallelQuery<int>, Action, ParallelQuery<int>>> operation
-        ) {
+        )
+        {
             AssertThrows.EventuallyCanceled(
                 (source, canceler) => operation.Item(source, canceler).Last()
             );
@@ -690,7 +727,8 @@ namespace System.Linq.Parallel.Tests
         [MemberData(nameof(OrderCancelingOperators))]
         public static void Last_AggregateException_Wraps_OperationCanceledException(
             Labeled<Func<ParallelQuery<int>, Action, ParallelQuery<int>>> operation
-        ) {
+        )
+        {
             AssertThrows.OtherTokenCanceled(
                 (source, canceler) => operation.Item(source, canceler).Last()
             );
@@ -711,7 +749,8 @@ namespace System.Linq.Parallel.Tests
         [MemberData(nameof(OrderCancelingOperators))]
         public static void Last_OperationCanceledException_PreCanceled(
             Labeled<Func<ParallelQuery<int>, Action, ParallelQuery<int>>> operation
-        ) {
+        )
+        {
             AssertThrows.AlreadyCanceled(source => operation.Item(source, () => { }).Last());
             AssertThrows.AlreadyCanceled(
                 source => operation.Item(source, () => { }).Last(x => true)
@@ -724,7 +763,8 @@ namespace System.Linq.Parallel.Tests
         [MemberData(nameof(OrderCancelingOperators))]
         public static void LastOrDefault_OperationCanceledException(
             Labeled<Func<ParallelQuery<int>, Action, ParallelQuery<int>>> operation
-        ) {
+        )
+        {
             AssertThrows.EventuallyCanceled(
                 (source, canceler) => operation.Item(source, canceler).LastOrDefault()
             );
@@ -739,7 +779,8 @@ namespace System.Linq.Parallel.Tests
         [MemberData(nameof(OrderCancelingOperators))]
         public static void LastOrDefault_AggregateException_Wraps_OperationCanceledException(
             Labeled<Func<ParallelQuery<int>, Action, ParallelQuery<int>>> operation
-        ) {
+        )
+        {
             AssertThrows.OtherTokenCanceled(
                 (source, canceler) => operation.Item(source, canceler).LastOrDefault()
             );
@@ -760,7 +801,8 @@ namespace System.Linq.Parallel.Tests
         [MemberData(nameof(OrderCancelingOperators))]
         public static void LastOrDefault_OperationCanceledException_PreCanceled(
             Labeled<Func<ParallelQuery<int>, Action, ParallelQuery<int>>> operation
-        ) {
+        )
+        {
             AssertThrows.AlreadyCanceled(
                 source => operation.Item(source, () => { }).LastOrDefault()
             );
@@ -774,7 +816,8 @@ namespace System.Linq.Parallel.Tests
         [MemberData(nameof(BinaryCancelingOperators))]
         public static void Max_OperationCanceledException(
             Labeled<Func<ParallelQuery<int>, Action, ParallelQuery<int>>> operation
-        ) {
+        )
+        {
             AssertThrows.EventuallyCanceled(
                 (source, canceler) => operation.Item(source, canceler).Max()
             );
@@ -820,7 +863,8 @@ namespace System.Linq.Parallel.Tests
         [MemberData(nameof(BinaryCancelingOperators))]
         public static void Max_AggregateException_Wraps_OperationCanceledException(
             Labeled<Func<ParallelQuery<int>, Action, ParallelQuery<int>>> operation
-        ) {
+        )
+        {
             AssertThrows.OtherTokenCanceled(
                 (source, canceler) => operation.Item(source, canceler).Max()
             );
@@ -905,7 +949,8 @@ namespace System.Linq.Parallel.Tests
         [MemberData(nameof(BinaryCancelingOperators))]
         public static void Max_OperationCanceledException_PreCanceled(
             Labeled<Func<ParallelQuery<int>, Action, ParallelQuery<int>>> operation
-        ) {
+        )
+        {
             AssertThrows.AlreadyCanceled(source => operation.Item(source, () => { }).Max());
         }
 
@@ -914,7 +959,8 @@ namespace System.Linq.Parallel.Tests
         [MemberData(nameof(BinaryCancelingOperators))]
         public static void Min_OperationCanceledException(
             Labeled<Func<ParallelQuery<int>, Action, ParallelQuery<int>>> operation
-        ) {
+        )
+        {
             AssertThrows.EventuallyCanceled(
                 (source, canceler) => operation.Item(source, canceler).Min()
             );
@@ -960,7 +1006,8 @@ namespace System.Linq.Parallel.Tests
         [MemberData(nameof(BinaryCancelingOperators))]
         public static void Min_AggregateException_Wraps_OperationCanceledException(
             Labeled<Func<ParallelQuery<int>, Action, ParallelQuery<int>>> operation
-        ) {
+        )
+        {
             AssertThrows.OtherTokenCanceled(
                 (source, canceler) => operation.Item(source, canceler).Min()
             );
@@ -1045,7 +1092,8 @@ namespace System.Linq.Parallel.Tests
         [MemberData(nameof(BinaryCancelingOperators))]
         public static void Min_OperationCanceledException_PreCanceled(
             Labeled<Func<ParallelQuery<int>, Action, ParallelQuery<int>>> operation
-        ) {
+        )
+        {
             AssertThrows.AlreadyCanceled(source => operation.Item(source, () => { }).Min());
         }
 
@@ -1056,7 +1104,8 @@ namespace System.Linq.Parallel.Tests
         [MemberData(nameof(OrderCancelingOperators))]
         public static void SequenceEqual_OperationCanceledException(
             Labeled<Func<ParallelQuery<int>, Action, ParallelQuery<int>>> operation
-        ) {
+        )
+        {
             AssertThrows.EventuallyCanceled(
                 (source, canceler) =>
                     operation.Item(source, canceler)
@@ -1078,7 +1127,8 @@ namespace System.Linq.Parallel.Tests
         [MemberData(nameof(OrderCancelingOperators))]
         public static void SequenceEqual_AggregateException_Wraps_OperationCanceledException(
             Labeled<Func<ParallelQuery<int>, Action, ParallelQuery<int>>> operation
-        ) {
+        )
+        {
             SequenceEqual_AssertAggregateAlternateCanceled(
                 (token, canceler) =>
                     WithCancellation(token, canceler, operation)
@@ -1109,7 +1159,8 @@ namespace System.Linq.Parallel.Tests
         [MemberData(nameof(OrderCancelingOperators))]
         public static void SequenceEqual_OperationCanceledException_PreCanceled(
             Labeled<Func<ParallelQuery<int>, Action, ParallelQuery<int>>> operation
-        ) {
+        )
+        {
             AssertThrows.AlreadyCanceled(
                 source =>
                     operation.Item(source, () => { }).SequenceEqual(ParallelEnumerable.Range(0, 2))
@@ -1125,7 +1176,8 @@ namespace System.Linq.Parallel.Tests
         [MemberData(nameof(BinaryCancelingOperators))]
         public static void Single_OperationCanceledException(
             Labeled<Func<ParallelQuery<int>, Action, ParallelQuery<int>>> operation
-        ) {
+        )
+        {
             AssertThrows.EventuallyCanceled(
                 (source, canceler) => operation.Item(source, canceler).Single(x => false)
             );
@@ -1136,7 +1188,8 @@ namespace System.Linq.Parallel.Tests
         [MemberData(nameof(BinaryCancelingOperators))]
         public static void Single_AggregateException_Wraps_OperationCanceledException(
             Labeled<Func<ParallelQuery<int>, Action, ParallelQuery<int>>> operation
-        ) {
+        )
+        {
             AssertThrows.OtherTokenCanceled(
                 (source, canceler) => operation.Item(source, canceler).Single(x => false)
             );
@@ -1150,7 +1203,8 @@ namespace System.Linq.Parallel.Tests
         [MemberData(nameof(BinaryCancelingOperators))]
         public static void Single_OperationCanceledException_PreCanceled(
             Labeled<Func<ParallelQuery<int>, Action, ParallelQuery<int>>> operation
-        ) {
+        )
+        {
             AssertThrows.AlreadyCanceled(source => operation.Item(source, () => { }).Single());
             AssertThrows.AlreadyCanceled(
                 source => operation.Item(source, () => { }).Single(x => false)
@@ -1162,7 +1216,8 @@ namespace System.Linq.Parallel.Tests
         [MemberData(nameof(BinaryCancelingOperators))]
         public static void SingleOrDefault_OperationCanceledException(
             Labeled<Func<ParallelQuery<int>, Action, ParallelQuery<int>>> operation
-        ) {
+        )
+        {
             AssertThrows.EventuallyCanceled(
                 (source, canceler) => operation.Item(source, canceler).SingleOrDefault(x => false)
             );
@@ -1173,7 +1228,8 @@ namespace System.Linq.Parallel.Tests
         [MemberData(nameof(BinaryCancelingOperators))]
         public static void SingleOrDefault_AggregateException_Wraps_OperationCanceledException(
             Labeled<Func<ParallelQuery<int>, Action, ParallelQuery<int>>> operation
-        ) {
+        )
+        {
             AssertThrows.OtherTokenCanceled(
                 (source, canceler) => operation.Item(source, canceler).SingleOrDefault(x => false)
             );
@@ -1187,7 +1243,8 @@ namespace System.Linq.Parallel.Tests
         [MemberData(nameof(BinaryCancelingOperators))]
         public static void SingleOrDefault_OperationCanceledException_PreCanceled(
             Labeled<Func<ParallelQuery<int>, Action, ParallelQuery<int>>> operation
-        ) {
+        )
+        {
             AssertThrows.AlreadyCanceled(
                 source => operation.Item(source, () => { }).SingleOrDefault()
             );
@@ -1201,7 +1258,8 @@ namespace System.Linq.Parallel.Tests
         [MemberData(nameof(BinaryCancelingOperators))]
         public static void Sum_OperationCanceledException(
             Labeled<Func<ParallelQuery<int>, Action, ParallelQuery<int>>> operation
-        ) {
+        )
+        {
             AssertThrows.EventuallyCanceled(
                 (source, canceler) => operation.Item(source, canceler).Sum()
             );
@@ -1243,7 +1301,8 @@ namespace System.Linq.Parallel.Tests
         [MemberData(nameof(BinaryCancelingOperators))]
         public static void Sum_AggregateException_Wraps_OperationCanceledException(
             Labeled<Func<ParallelQuery<int>, Action, ParallelQuery<int>>> operation
-        ) {
+        )
+        {
             AssertThrows.OtherTokenCanceled(
                 (source, canceler) => operation.Item(source, canceler).Sum()
             );
@@ -1320,7 +1379,8 @@ namespace System.Linq.Parallel.Tests
         [MemberData(nameof(BinaryCancelingOperators))]
         public static void Sum_OperationCanceledException_PreCanceled(
             Labeled<Func<ParallelQuery<int>, Action, ParallelQuery<int>>> operation
-        ) {
+        )
+        {
             AssertThrows.AlreadyCanceled(source => operation.Item(source, () => { }).Sum());
         }
 
@@ -1330,7 +1390,8 @@ namespace System.Linq.Parallel.Tests
         [MemberData(nameof(OrderCancelingOperators))]
         public static void ToArray_OperationCanceledException(
             Labeled<Func<ParallelQuery<int>, Action, ParallelQuery<int>>> operation
-        ) {
+        )
+        {
             AssertThrows.EventuallyCanceled(
                 (source, canceler) => operation.Item(source, canceler).ToArray()
             );
@@ -1342,7 +1403,8 @@ namespace System.Linq.Parallel.Tests
         [MemberData(nameof(OrderCancelingOperators))]
         public static void ToArray_AggregateException_Wraps_OperationCanceledException(
             Labeled<Func<ParallelQuery<int>, Action, ParallelQuery<int>>> operation
-        ) {
+        )
+        {
             AssertThrows.OtherTokenCanceled(
                 (source, canceler) => operation.Item(source, canceler).ToArray()
             );
@@ -1357,7 +1419,8 @@ namespace System.Linq.Parallel.Tests
         [MemberData(nameof(OrderCancelingOperators))]
         public static void ToArray_OperationCanceledException_PreCanceled(
             Labeled<Func<ParallelQuery<int>, Action, ParallelQuery<int>>> operation
-        ) {
+        )
+        {
             AssertThrows.AlreadyCanceled(source => operation.Item(source, () => { }).ToArray());
         }
 
@@ -1366,7 +1429,8 @@ namespace System.Linq.Parallel.Tests
         [MemberData(nameof(BinaryCancelingOperators))]
         public static void ToDictionary_OperationCanceledException(
             Labeled<Func<ParallelQuery<int>, Action, ParallelQuery<int>>> operation
-        ) {
+        )
+        {
             AssertThrows.EventuallyCanceled(
                 (source, canceler) => operation.Item(source, canceler).ToDictionary(x => x)
             );
@@ -1380,7 +1444,8 @@ namespace System.Linq.Parallel.Tests
         [MemberData(nameof(BinaryCancelingOperators))]
         public static void ToDictionary_AggregateException_Wraps_OperationCanceledException(
             Labeled<Func<ParallelQuery<int>, Action, ParallelQuery<int>>> operation
-        ) {
+        )
+        {
             AssertThrows.OtherTokenCanceled(
                 (source, canceler) => operation.Item(source, canceler).ToDictionary(x => x)
             );
@@ -1400,7 +1465,8 @@ namespace System.Linq.Parallel.Tests
         [MemberData(nameof(BinaryCancelingOperators))]
         public static void ToDictionary_OperationCanceledException_PreCanceled(
             Labeled<Func<ParallelQuery<int>, Action, ParallelQuery<int>>> operation
-        ) {
+        )
+        {
             AssertThrows.AlreadyCanceled(
                 source => operation.Item(source, () => { }).ToDictionary(x => x)
             );
@@ -1415,7 +1481,8 @@ namespace System.Linq.Parallel.Tests
         [MemberData(nameof(OrderCancelingOperators))]
         public static void ToList_OperationCanceledException(
             Labeled<Func<ParallelQuery<int>, Action, ParallelQuery<int>>> operation
-        ) {
+        )
+        {
             AssertThrows.EventuallyCanceled(
                 (source, canceler) => operation.Item(source, canceler).ToList()
             );
@@ -1427,7 +1494,8 @@ namespace System.Linq.Parallel.Tests
         [MemberData(nameof(OrderCancelingOperators))]
         public static void ToList_AggregateException_Wraps_OperationCanceledException(
             Labeled<Func<ParallelQuery<int>, Action, ParallelQuery<int>>> operation
-        ) {
+        )
+        {
             AssertThrows.OtherTokenCanceled(
                 (source, canceler) => operation.Item(source, canceler).ToList()
             );
@@ -1442,7 +1510,8 @@ namespace System.Linq.Parallel.Tests
         [MemberData(nameof(OrderCancelingOperators))]
         public static void ToList_OperationCanceledException_PreCanceled(
             Labeled<Func<ParallelQuery<int>, Action, ParallelQuery<int>>> operation
-        ) {
+        )
+        {
             AssertThrows.AlreadyCanceled(source => operation.Item(source, () => { }).ToList());
         }
 
@@ -1452,7 +1521,8 @@ namespace System.Linq.Parallel.Tests
         [MemberData(nameof(OrderCancelingOperators))]
         public static void ToLookup_OperationCanceledException(
             Labeled<Func<ParallelQuery<int>, Action, ParallelQuery<int>>> operation
-        ) {
+        )
+        {
             AssertThrows.EventuallyCanceled(
                 (source, canceler) => operation.Item(source, canceler).ToLookup(x => x)
             );
@@ -1467,7 +1537,8 @@ namespace System.Linq.Parallel.Tests
         [MemberData(nameof(OrderCancelingOperators))]
         public static void ToLookup_AggregateException_Wraps_OperationCanceledException(
             Labeled<Func<ParallelQuery<int>, Action, ParallelQuery<int>>> operation
-        ) {
+        )
+        {
             AssertThrows.OtherTokenCanceled(
                 (source, canceler) => operation.Item(source, canceler).ToLookup(x => x)
             );
@@ -1488,7 +1559,8 @@ namespace System.Linq.Parallel.Tests
         [MemberData(nameof(OrderCancelingOperators))]
         public static void ToLookup_OperationCanceledException_PreCanceled(
             Labeled<Func<ParallelQuery<int>, Action, ParallelQuery<int>>> operation
-        ) {
+        )
+        {
             AssertThrows.AlreadyCanceled(
                 source => operation.Item(source, () => { }).ToLookup(x => x)
             );
@@ -1501,7 +1573,8 @@ namespace System.Linq.Parallel.Tests
             CancellationToken token,
             Action canceler,
             Labeled<Func<ParallelQuery<int>, Action, ParallelQuery<int>>> operation
-        ) {
+        )
+        {
             return operation.Item(
                 ParallelEnumerable.Range(DefaultStart, EventualCancellationSize)
                     .WithCancellation(token),
@@ -1511,7 +1584,8 @@ namespace System.Linq.Parallel.Tests
 
         private static void SequenceEqual_AssertAggregateAlternateCanceled(
             Action<CancellationToken, Action> query
-        ) {
+        )
+        {
             CancellationTokenSource cs = new CancellationTokenSource();
             cs.Cancel();
             Action canceler = () =>
@@ -1529,7 +1603,8 @@ namespace System.Linq.Parallel.Tests
 
         private static void SequenceEqual_AssertAggregateNotCanceled(
             Action<CancellationToken, Action> query
-        ) {
+        )
+        {
             CancellationToken token = new CancellationTokenSource().Token;
             Action canceler = () =>
             {

@@ -8,7 +8,8 @@ namespace Internal.TypeSystem
         public override TypeDesc GetNonRuntimeDeterminedTypeFromRuntimeDeterminedSubtypeViaSubstitution(
             Instantiation typeInstantiation,
             Instantiation methodInstantiation
-        ) {
+        )
+        {
             TypeDesc parameterTypeConverted =
                 ParameterType.GetNonRuntimeDeterminedTypeFromRuntimeDeterminedSubtypeViaSubstitution(
                     typeInstantiation,
@@ -28,7 +29,8 @@ namespace Internal.TypeSystem
         public override MethodDesc GetNonRuntimeDeterminedMethodFromRuntimeDeterminedMethodViaSubstitution(
             Instantiation typeInstantiation,
             Instantiation methodInstantiation
-        ) {
+        )
+        {
             TypeDesc owningType = this.OwningType;
             TypeDesc instantiatedOwningType =
                 owningType.GetNonRuntimeDeterminedTypeFromRuntimeDeterminedSubtypeViaSubstitution(

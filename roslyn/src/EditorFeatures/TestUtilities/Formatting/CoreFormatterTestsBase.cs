@@ -52,7 +52,8 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Formatting
             int? expectedIndentation,
             ITextView textView,
             TestHostDocument subjectDocument
-        ) {
+        )
+        {
             var textUndoHistory = new Mock<ITextUndoHistoryRegistry>();
             var editorOperationsFactory = new Mock<IEditorOperationsFactoryService>();
             var editorOperations = new Mock<IEditorOperations>();
@@ -72,7 +73,8 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Formatting
             TestWorkspace workspace,
             int indentationLine,
             int? expectedIndentation
-        ) {
+        )
+        {
             var snapshot = workspace.Documents.First().GetTextBuffer().CurrentSnapshot;
             var bufferGraph = new Mock<IBufferGraph>(MockBehavior.Strict);
             bufferGraph.Setup(
@@ -92,7 +94,8 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Formatting
                                 is TestFormattingRuleFactoryServiceFactory.Factory factory
                             && factory.BaseIndentation != 0
                             && factory.TextSpan.Contains(p.Position)
-                        ) {
+                        )
+                        {
                             var line = p.GetContainingLine();
                             var projectedOffset =
                                 line.GetFirstNonWhitespaceOffset().Value - factory.BaseIndentation;
@@ -123,7 +126,8 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Formatting
             string expectedWithMarker,
             string codeWithMarker,
             params (PerLanguageOption2<bool> option, bool enabled)[] options
-        ) {
+        )
+        {
             using var workspace = CreateWorkspace(codeWithMarker);
 
             if (options != null)
@@ -185,7 +189,8 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Formatting
             OptionSet optionSet,
             IEnumerable<AbstractFormattingRule> rules,
             SyntaxNode root
-        ) {
+        )
+        {
             var newRootNode = Formatter.Format(
                 root,
                 SpecializedCollections.SingletonEnumerable(root.FullSpan),
@@ -211,7 +216,8 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Formatting
             IEnumerable<AbstractFormattingRule> rules,
             ITextBuffer clonedBuffer,
             SyntaxNode root
-        ) {
+        )
+        {
             var changes = Formatter.GetFormattedTextChanges(
                 root,
                 SpecializedCollections.SingletonEnumerable(root.FullSpan),
@@ -228,7 +234,8 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Formatting
         private static string ApplyResultAndGetFormattedText(
             ITextBuffer buffer,
             IList<TextChange> changes
-        ) {
+        )
+        {
             using (var edit = buffer.CreateEdit())
             {
                 foreach (var change in changes)
@@ -248,7 +255,8 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Formatting
             IEnumerable<TextSpan> spans,
             Dictionary<OptionKey, object> changedOptionSet = null,
             int? baseIndentation = null
-        ) {
+        )
+        {
             using var workspace = CreateWorkspace(code);
             var hostdoc = workspace.Documents.First();
             var buffer = hostdoc.GetTextBuffer();
@@ -301,7 +309,8 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Formatting
             IEnumerable<AbstractFormattingRule> rules,
             SyntaxNode root,
             IEnumerable<TextSpan> spans
-        ) {
+        )
+        {
             var newRootNode = Formatter.Format(
                 root,
                 spans,
@@ -328,7 +337,8 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Formatting
             ITextBuffer clonedBuffer,
             SyntaxNode root,
             IEnumerable<TextSpan> spans
-        ) {
+        )
+        {
             var result = Formatter.GetFormattedTextChanges(
                 root,
                 spans,
@@ -351,7 +361,8 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Formatting
             string codeWithMarker,
             bool allowDocumentChanges,
             bool isPaste = true
-        ) {
+        )
+        {
             using var workspace = CreateWorkspace(codeWithMarker);
             workspace.CanApplyChangeDocument = allowDocumentChanges;
 
@@ -411,7 +422,8 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Formatting
             string markupCode,
             int baseIndentation,
             Dictionary<OptionKey, object> options = null
-        ) {
+        )
+        {
             MarkupTestFile.GetSpan(markupCode, out var code, out var span);
 
             await AssertFormatAsync(

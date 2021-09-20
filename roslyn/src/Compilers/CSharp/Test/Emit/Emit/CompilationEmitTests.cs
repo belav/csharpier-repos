@@ -763,7 +763,8 @@ public class C
             MemoryStream stream,
             string containingType,
             string[] expectedMethods
-        ) {
+        )
+        {
             stream.Position = 0;
             var metadataRef = AssemblyMetadata.CreateFromImage(stream.ToArray()).GetReference();
 
@@ -929,7 +930,8 @@ public class C
             string left,
             string right,
             Match expectedMatch
-        ) {
+        )
+        {
             string sourceTemplate =
                 @"
 using System;
@@ -1170,7 +1172,8 @@ public class D
             string left,
             string right,
             Match expectedMatch
-        ) {
+        )
+        {
             string sourceTemplate =
                 @"
 using System.Runtime.CompilerServices;
@@ -1214,7 +1217,8 @@ public class C
             string change2,
             Match expectedMatch,
             bool includePrivateMembers
-        ) {
+        )
+        {
             bool expectMatch = includePrivateMembers
                 ? expectedMatch == Match.BothMetadataAndRefOut
                 : (expectedMatch == Match.BothMetadataAndRefOut || expectedMatch == Match.RefOut);
@@ -1360,7 +1364,8 @@ public class C
             (ImmutableArray<byte>, ImmutableArray<byte>) emitRefOut(
                 IEnumerable<ResourceDescription> manifestResources,
                 string name
-            ) {
+            )
+            {
                 var source = Parse("");
                 var comp = CreateCompilation(
                     source,
@@ -1384,7 +1389,8 @@ public class C
             ImmutableArray<byte> emitRefOnly(
                 IEnumerable<ResourceDescription> manifestResources,
                 string name
-            ) {
+            )
+            {
                 var source = Parse("");
                 var comp = CreateCompilation(
                     source,
@@ -2066,7 +2072,8 @@ public struct S
             string client_cs,
             Action<CSharpCompilation> validator,
             int debugFlag = -1
-        ) {
+        )
+        {
             // Whether the library is compiled in full, as metadata-only, or as a ref assembly should be transparent
             // to the client and the validator should be able to verify the same expectations.
 
@@ -2106,7 +2113,8 @@ public struct S
             string source,
             Action<CSharpCompilation> validator,
             EmitOptions emitOptions
-        ) {
+        )
+        {
             string name = GetUniqueName();
             var libComp = CreateCompilation(
                 lib_cs,
@@ -2187,7 +2195,8 @@ public struct S
             ImmutableArray<byte> secondImage,
             bool expectMatch = true,
             bool expectPublicKey = false
-        ) {
+        )
+        {
             var id1 = ModuleMetadata.CreateFromImage(firstImage)
                 .GetMetadataReader()
                 .ReadAssemblyIdentityOrThrow();
@@ -2204,7 +2213,8 @@ public struct S
 
         private static (ImmutableArray<byte> image, ImmutableArray<byte> refImage) EmitRefOut(
             CSharpCompilation comp
-        ) {
+        )
+        {
             using (var output = new MemoryStream())
             using (var metadataOutput = new MemoryStream())
             {
@@ -4623,7 +4633,8 @@ using System;
                                 actualGlobalMembers.Length
                             );
                         i++
-                    ) {
+                    )
+                    {
                         Assert.Equal(expectedGlobalMembers[i], actualGlobalMembers[i].Name);
                     }
 
@@ -4677,7 +4688,8 @@ using System;
                         int i = 0;
                         i < System.Math.Max(expectedAMembers.Length, actualAMembers.Length);
                         i++
-                    ) {
+                    )
+                    {
                         Assert.Equal(expectedAMembers[i], actualAMembers[i].Name);
                     }
 
@@ -4691,7 +4703,8 @@ using System;
                         int i = 0;
                         i < System.Math.Max(expectedBMembers.Length, actualBMembers.Length);
                         i++
-                    ) {
+                    )
+                    {
                         Assert.Equal(expectedBMembers[i], actualBMembers[i].Name);
                     }
 
@@ -5093,7 +5106,8 @@ public sealed class ContentType
 
             using (
                 ModuleMetadata block = ModuleMetadata.CreateFromStream(compilation.EmitToStream())
-            ) {
+            )
+            {
                 var reader = block.MetadataReader;
                 foreach (var typeRef in reader.TypeReferences)
                 {
@@ -7019,7 +7033,8 @@ class X
 
         private void TestWarnAsErrorWithMetadataOnlyImageDoesEmitCore(
             CSharpCompilationOptions options
-        ) {
+        )
+        {
             string source =
                 @"
 public class X

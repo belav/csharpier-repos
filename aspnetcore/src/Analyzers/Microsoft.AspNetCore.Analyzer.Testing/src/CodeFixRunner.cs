@@ -24,7 +24,8 @@ namespace Microsoft.AspNetCore.Analyzer.Testing
             Document document,
             Diagnostic analyzerDiagnostic,
             int codeFixIndex = 0
-        ) {
+        )
+        {
             var actions = new List<CodeAction>();
             var context = new CodeFixContext(
                 document,

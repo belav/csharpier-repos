@@ -17,7 +17,8 @@ namespace Microsoft.CodeAnalysis.ExternalAccess.FSharp.Completion
             int characterPosition,
             Func<char, bool> isWordStartCharacter,
             Func<char, bool> isWordCharacter
-        ) {
+        )
+        {
             return CommonCompletionUtilities.IsStartingNewWord(
                 text,
                 characterPosition,

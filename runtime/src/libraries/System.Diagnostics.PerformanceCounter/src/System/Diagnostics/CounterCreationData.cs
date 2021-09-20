@@ -20,7 +20,8 @@ namespace System.Diagnostics
             string counterName,
             string counterHelp,
             PerformanceCounterType counterType
-        ) {
+        )
+        {
             CounterType = counterType;
             CounterName = counterName;
             CounterHelp = counterHelp;

@@ -141,7 +141,8 @@ namespace Microsoft.CodeAnalysis.LanguageServer.Handler.Diagnostics
             Document document,
             Option2<DiagnosticMode> diagnosticMode,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             // For closed files, go to the IDiagnosticService for results.  These won't necessarily be totally up to
             // date.  However, that's fine as these are closed files and won't be in the process of being edited.  So
             // any deviations in the spans of diagnostics shouldn't be impactful for the user.

@@ -142,7 +142,8 @@ namespace JIT.HardwareIntrinsics.X86
                     || (alignment * 2) < sizeOfinArray1
                     || (alignment * 2) < sizeOfinArray2
                     || (alignment * 2) < sizeOfoutArray
-                ) {
+                )
+                {
                     throw new ArgumentException("Invalid value of alignment");
                 }
 
@@ -221,7 +222,8 @@ namespace JIT.HardwareIntrinsics.X86
 
             public void RunStructFldScenario(
                 SimpleBinaryOpTest__SumAbsoluteDifferencesUInt16 testClass
-            ) {
+            )
+            {
                 var result = Avx2.SumAbsoluteDifferences(_fld1, _fld2);
 
                 Unsafe.Write(testClass._dataTable.outArrayPtr, result);
@@ -230,7 +232,8 @@ namespace JIT.HardwareIntrinsics.X86
 
             public void RunStructFldScenario_Load(
                 SimpleBinaryOpTest__SumAbsoluteDifferencesUInt16 testClass
-            ) {
+            )
+            {
                 fixed (Vector256<Byte>* pFld1 = &_fld1)fixed (Vector256<Byte>* pFld2 = &_fld2)
                 {
                     var result = Avx2.SumAbsoluteDifferences(
@@ -447,7 +450,8 @@ namespace JIT.HardwareIntrinsics.X86
 
             fixed (Vector256<Byte>* pClsVar1 = &_clsVar1)fixed (
                 Vector256<Byte>* pClsVar2 = &_clsVar2
-            ) {
+            )
+            {
                 var result = Avx2.SumAbsoluteDifferences(
                     Avx.LoadVector256((Byte*)(pClsVar1)),
                     Avx.LoadVector256((Byte*)(pClsVar2))
@@ -616,7 +620,8 @@ namespace JIT.HardwareIntrinsics.X86
             Vector256<Byte> op2,
             void* result,
             [CallerMemberName] string method = ""
-        ) {
+        )
+        {
             Byte[] inArray1 = new Byte[Op1ElementCount];
             Byte[] inArray2 = new Byte[Op2ElementCount];
             UInt16[] outArray = new UInt16[RetElementCount];
@@ -637,7 +642,8 @@ namespace JIT.HardwareIntrinsics.X86
             void* op2,
             void* result,
             [CallerMemberName] string method = ""
-        ) {
+        )
+        {
             Byte[] inArray1 = new Byte[Op1ElementCount];
             Byte[] inArray2 = new Byte[Op2ElementCount];
             UInt16[] outArray = new UInt16[RetElementCount];
@@ -666,7 +672,8 @@ namespace JIT.HardwareIntrinsics.X86
             Byte[] right,
             UInt16[] result,
             [CallerMemberName] string method = ""
-        ) {
+        )
+        {
             bool succeeded = true;
 
             if (
@@ -679,7 +686,8 @@ namespace JIT.HardwareIntrinsics.X86
                     + Math.Abs(left[5] - right[5])
                     + Math.Abs(left[6] - right[6])
                     + Math.Abs(left[7] - right[7])
-            ) {
+            )
+            {
                 succeeded = false;
             }
             else
@@ -700,7 +708,8 @@ namespace JIT.HardwareIntrinsics.X86
                                   + Math.Abs(left[(i / 4) * 8 + 6] - right[(i / 4) * 8 + 6])
                                   + Math.Abs(left[(i / 4) * 8 + 7] - right[(i / 4) * 8 + 7])
                         )
-                    ) {
+                    )
+                    {
                         succeeded = false;
                         break;
                     }

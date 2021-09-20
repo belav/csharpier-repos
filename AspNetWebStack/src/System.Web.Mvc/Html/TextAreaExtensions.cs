@@ -71,7 +71,8 @@ namespace System.Web.Mvc.Html
             this HtmlHelper htmlHelper,
             string name,
             object htmlAttributes
-        ) {
+        )
+        {
             return TextArea(
                 htmlHelper,
                 name,
@@ -85,7 +86,8 @@ namespace System.Web.Mvc.Html
             this HtmlHelper htmlHelper,
             string name,
             IDictionary<string, object> htmlAttributes
-        ) {
+        )
+        {
             return TextArea(
                 htmlHelper,
                 name,
@@ -110,7 +112,8 @@ namespace System.Web.Mvc.Html
             string name,
             string value,
             object htmlAttributes
-        ) {
+        )
+        {
             return TextArea(
                 htmlHelper,
                 name,
@@ -124,7 +127,8 @@ namespace System.Web.Mvc.Html
             string name,
             string value,
             IDictionary<string, object> htmlAttributes
-        ) {
+        )
+        {
             ModelMetadata metadata = ModelMetadata.FromStringExpression(
                 name,
                 htmlHelper.ViewContext.ViewData
@@ -150,7 +154,8 @@ namespace System.Web.Mvc.Html
             int rows,
             int columns,
             object htmlAttributes
-        ) {
+        )
+        {
             return TextArea(
                 htmlHelper,
                 name,
@@ -168,7 +173,8 @@ namespace System.Web.Mvc.Html
             int rows,
             int columns,
             IDictionary<string, object> htmlAttributes
-        ) {
+        )
+        {
             ModelMetadata metadata = ModelMetadata.FromStringExpression(
                 name,
                 htmlHelper.ViewContext.ViewData
@@ -195,7 +201,8 @@ namespace System.Web.Mvc.Html
         public static MvcHtmlString TextAreaFor<TModel, TProperty>(
             this HtmlHelper<TModel> htmlHelper,
             Expression<Func<TModel, TProperty>> expression
-        ) {
+        )
+        {
             return TextAreaFor(htmlHelper, expression, (IDictionary<string, object>)null);
         }
 
@@ -208,7 +215,8 @@ namespace System.Web.Mvc.Html
             this HtmlHelper<TModel> htmlHelper,
             Expression<Func<TModel, TProperty>> expression,
             object htmlAttributes
-        ) {
+        )
+        {
             return TextAreaFor(
                 htmlHelper,
                 expression,
@@ -225,7 +233,8 @@ namespace System.Web.Mvc.Html
             this HtmlHelper<TModel> htmlHelper,
             Expression<Func<TModel, TProperty>> expression,
             IDictionary<string, object> htmlAttributes
-        ) {
+        )
+        {
             if (expression == null)
             {
                 throw new ArgumentNullException("expression");
@@ -251,7 +260,8 @@ namespace System.Web.Mvc.Html
             int rows,
             int columns,
             object htmlAttributes
-        ) {
+        )
+        {
             return TextAreaFor(
                 htmlHelper,
                 expression,
@@ -272,7 +282,8 @@ namespace System.Web.Mvc.Html
             int rows,
             int columns,
             IDictionary<string, object> htmlAttributes
-        ) {
+        )
+        {
             if (expression == null)
             {
                 throw new ArgumentNullException("expression");
@@ -299,7 +310,8 @@ namespace System.Web.Mvc.Html
             IDictionary<string, object> rowsAndColumns,
             IDictionary<string, object> htmlAttributes,
             string innerHtmlPrefix = null
-        ) {
+        )
+        {
             string fullName = htmlHelper.ViewContext.ViewData.TemplateInfo.GetFullHtmlFieldName(
                 name
             );
@@ -319,7 +331,8 @@ namespace System.Web.Mvc.Html
             if (
                 htmlHelper.ViewData.ModelState.TryGetValue(fullName, out modelState)
                 && modelState.Errors.Count > 0
-            ) {
+            )
+            {
                 tagBuilder.AddCssClass(HtmlHelper.ValidationInputCssClassName);
             }
 

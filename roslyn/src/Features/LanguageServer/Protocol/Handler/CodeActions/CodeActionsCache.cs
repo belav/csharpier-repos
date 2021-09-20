@@ -39,7 +39,8 @@ namespace Microsoft.CodeAnalysis.LanguageServer.Handler.CodeActions
             LSP.Range range,
             ImmutableArray<UnifiedSuggestedActionSet> cachedSuggestedActionSets,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             using (await _semaphore.DisposableWaitAsync(cancellationToken).ConfigureAwait(false))
             {
                 // If there's a value in the cache with the same document and range we're searching for,
@@ -69,7 +70,8 @@ namespace Microsoft.CodeAnalysis.LanguageServer.Handler.CodeActions
             Document document,
             LSP.Range range,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             using (await _semaphore.DisposableWaitAsync(cancellationToken).ConfigureAwait(false))
             {
                 foreach (var cachedItem in _cachedItems)
@@ -107,7 +109,8 @@ namespace Microsoft.CodeAnalysis.LanguageServer.Handler.CodeActions
                 Document document,
                 LSP.Range range,
                 ImmutableArray<UnifiedSuggestedActionSet> cachedSuggestedActionSets
-            ) {
+            )
+            {
                 Document = document;
                 Range = range;
                 CachedSuggestedActionSets = cachedSuggestedActionSets;

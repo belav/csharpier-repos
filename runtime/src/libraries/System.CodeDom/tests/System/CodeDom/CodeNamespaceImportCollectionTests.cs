@@ -129,7 +129,8 @@ namespace System.CodeDom.Tests
         private static void VerifyCollection(
             CodeNamespaceCollection collection,
             CodeNamespace[] contents
-        ) {
+        )
+        {
             Assert.Equal(contents.Length, collection.Count);
             for (int i = 0; i < contents.Length; i++)
             {

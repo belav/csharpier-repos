@@ -153,7 +153,8 @@ namespace System.Xml.Xsl.Xslt
             QilNode letterValue,
             QilNode groupingSeparator,
             QilNode groupingSize
-        ) {
+        )
+        {
             Debug.Assert(
                 value != null
                     && (
@@ -195,7 +196,8 @@ namespace System.Xml.Xsl.Xslt
         public QilNode InvokeRegisterDecimalFormatter(
             QilNode formatPicture,
             DecimalFormatDecl format
-        ) {
+        )
+        {
             CheckString(formatPicture);
             Debug.Assert(format != null);
             return XsltInvokeEarlyBound(
@@ -229,7 +231,8 @@ namespace System.Xml.Xsl.Xslt
             QilNode formatPicture,
             QilNode decimalFormatName,
             QilNode errorMessageName
-        ) {
+        )
+        {
             CheckDouble(value);
             CheckString(formatPicture);
             CheckQName(decimalFormatName);
@@ -258,7 +261,8 @@ namespace System.Xml.Xsl.Xslt
             QilNode format,
             QilNode lang,
             QilNode isDate
-        ) {
+        )
+        {
             CheckString(datetime);
             CheckString(format);
             CheckString(lang);

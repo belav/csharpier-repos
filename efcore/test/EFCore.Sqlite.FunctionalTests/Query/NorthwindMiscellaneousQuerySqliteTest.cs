@@ -156,7 +156,8 @@ WHERE ""o"".""OrderDate"" IS NOT NULL"
 
         public override async Task Select_expression_date_add_milliseconds_above_the_range(
             bool async
-        ) {
+        )
+        {
             await base.Select_expression_date_add_milliseconds_above_the_range(async);
 
             AssertSql(
@@ -168,7 +169,8 @@ WHERE ""o"".""OrderDate"" IS NOT NULL"
 
         public override async Task Select_expression_date_add_milliseconds_below_the_range(
             bool async
-        ) {
+        )
+        {
             await base.Select_expression_date_add_milliseconds_below_the_range(async);
 
             AssertSql(
@@ -180,7 +182,8 @@ WHERE ""o"".""OrderDate"" IS NOT NULL"
 
         public override async Task Select_expression_date_add_milliseconds_large_number_divided(
             bool async
-        ) {
+        )
+        {
             await base.Select_expression_date_add_milliseconds_large_number_divided(async);
 
             AssertSql(

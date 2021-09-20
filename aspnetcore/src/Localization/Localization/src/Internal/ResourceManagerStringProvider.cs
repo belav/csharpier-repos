@@ -25,7 +25,8 @@ namespace Microsoft.Extensions.Localization
             ResourceManager resourceManager,
             Assembly assembly,
             string baseName
-        ) {
+        )
+        {
             _resourceManager = resourceManager;
             _resourceNamesCache = resourceCache;
             _assembly = assembly;

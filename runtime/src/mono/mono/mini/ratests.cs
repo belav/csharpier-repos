@@ -342,7 +342,8 @@ public class Tests
         byte* sortkey,
         bool noLv4,
         ref object ctx
-    ) {
+    )
+    {
         // Avoid inlining
         byte* b = stackalloc byte[4];
 
@@ -362,7 +363,8 @@ public class Tests
         int ti,
         bool noLv4,
         ref object ctx
-    ) {
+    )
+    {
         // ctx is initially allocated to the stack, when it is reloaded before the call,
         // %rax is spilled to free up the register, then ctx is allocated to %rax for its
         // whole lifetime, but %rax is not available for this since it is clobbered by the

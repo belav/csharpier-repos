@@ -900,7 +900,8 @@ namespace System.Reflection.PortableExecutable.Tests
                 var provider = new ByteArrayMemoryProvider(bytes);
                 using (
                     var block = provider.GetMemoryBlock(actual[0].DataPointer, actual[0].DataSize)
-                ) {
+                )
+                {
                     var decoded = PEReader.DecodeEmbeddedPortablePdbDebugDirectoryData(block);
                     AssertEx.Equal(
                         new byte[] { 0x88, 0x77, 0x66, 0x55, 0x44, 0x33, 0x22, 0x11 },

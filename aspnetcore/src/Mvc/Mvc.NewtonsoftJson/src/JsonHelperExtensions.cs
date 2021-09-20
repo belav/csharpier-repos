@@ -31,7 +31,8 @@ namespace Microsoft.AspNetCore.Mvc.Rendering
             this IJsonHelper jsonHelper,
             object value,
             JsonSerializerSettings serializerSettings
-        ) {
+        )
+        {
             if (jsonHelper == null)
             {
                 throw new ArgumentNullException(nameof(jsonHelper));

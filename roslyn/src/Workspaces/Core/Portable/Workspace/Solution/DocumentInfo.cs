@@ -68,7 +68,8 @@ namespace Microsoft.CodeAnalysis
             DocumentAttributes attributes,
             TextLoader? loader,
             IDocumentServiceProvider? documentServiceProvider
-        ) {
+        )
+        {
             Attributes = attributes;
             TextLoader = loader;
             DocumentServiceProvider = documentServiceProvider;
@@ -82,7 +83,8 @@ namespace Microsoft.CodeAnalysis
             TextLoader? loader = null,
             string? filePath = null,
             bool isGenerated = false
-        ) {
+        )
+        {
             return Create(
                 id ?? throw new ArgumentNullException(nameof(id)),
                 name ?? throw new ArgumentNullException(nameof(name)),
@@ -106,7 +108,8 @@ namespace Microsoft.CodeAnalysis
             bool isGenerated,
             bool designTimeOnly,
             IDocumentServiceProvider? documentServiceProvider
-        ) {
+        )
+        {
             return new DocumentInfo(
                 new DocumentAttributes(
                     id,
@@ -126,7 +129,8 @@ namespace Microsoft.CodeAnalysis
             DocumentAttributes? attributes = null,
             Optional<TextLoader?> loader = default,
             Optional<IDocumentServiceProvider?> documentServiceProvider = default
-        ) {
+        )
+        {
             var newAttributes = attributes ?? Attributes;
             var newLoader = loader.HasValue ? loader.Value : TextLoader;
             var newDocumentServiceProvider = documentServiceProvider.HasValue
@@ -137,7 +141,8 @@ namespace Microsoft.CodeAnalysis
                 newAttributes == Attributes
                 && newLoader == TextLoader
                 && newDocumentServiceProvider == DocumentServiceProvider
-            ) {
+            )
+            {
                 return this;
             }
 
@@ -231,7 +236,8 @@ namespace Microsoft.CodeAnalysis
                 string? filePath,
                 bool isGenerated,
                 bool designTimeOnly
-            ) {
+            )
+            {
                 Id = id;
                 Name = name;
                 Folders = folders;
@@ -249,7 +255,8 @@ namespace Microsoft.CodeAnalysis
                 Optional<string?> filePath = default,
                 Optional<bool> isGenerated = default,
                 Optional<bool> designTimeOnly = default
-            ) {
+            )
+            {
                 var newId = id ?? Id;
                 var newName = name ?? Name;
                 var newFolders = folders ?? Folders;
@@ -270,7 +277,8 @@ namespace Microsoft.CodeAnalysis
                     && newFilePath == FilePath
                     && newIsGenerated == IsGenerated
                     && newDesignTimeOnly == DesignTimeOnly
-                ) {
+                )
+                {
                     return this;
                 }
 

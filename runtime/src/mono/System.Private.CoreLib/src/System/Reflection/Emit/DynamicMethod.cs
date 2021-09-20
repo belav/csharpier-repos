@@ -71,19 +71,11 @@ namespace System.Reflection.Emit
         internal bool creating;
         private DynamicILInfo? il_info;
 
-        public DynamicMethod(
-            string name,
-            Type? returnType,
-            Type[]? parameterTypes,
-            Module m
-        ) : this(name, returnType, parameterTypes, m, false) { }
+        public DynamicMethod(string name, Type? returnType, Type[]? parameterTypes, Module m)
+            : this(name, returnType, parameterTypes, m, false) { }
 
-        public DynamicMethod(
-            string name,
-            Type? returnType,
-            Type[]? parameterTypes,
-            Type owner
-        ) : this(name, returnType, parameterTypes, owner, false) { }
+        public DynamicMethod(string name, Type? returnType, Type[]? parameterTypes, Type owner)
+            : this(name, returnType, parameterTypes, owner, false) { }
 
         public DynamicMethod(
             string name,
@@ -91,15 +83,16 @@ namespace System.Reflection.Emit
             Type[]? parameterTypes,
             Module m,
             bool skipVisibility
-        ) : this(
-            name,
-            MethodAttributes.Public | MethodAttributes.Static,
-            CallingConventions.Standard,
-            returnType,
-            parameterTypes,
-            m,
-            skipVisibility
-        ) { }
+        )
+            : this(
+                name,
+                MethodAttributes.Public | MethodAttributes.Static,
+                CallingConventions.Standard,
+                returnType,
+                parameterTypes,
+                m,
+                skipVisibility
+            ) { }
 
         public DynamicMethod(
             string name,
@@ -107,15 +100,16 @@ namespace System.Reflection.Emit
             Type[]? parameterTypes,
             Type owner,
             bool skipVisibility
-        ) : this(
-            name,
-            MethodAttributes.Public | MethodAttributes.Static,
-            CallingConventions.Standard,
-            returnType,
-            parameterTypes,
-            owner,
-            skipVisibility
-        ) { }
+        )
+            : this(
+                name,
+                MethodAttributes.Public | MethodAttributes.Static,
+                CallingConventions.Standard,
+                returnType,
+                parameterTypes,
+                owner,
+                skipVisibility
+            ) { }
 
         public DynamicMethod(
             string name,
@@ -125,18 +119,19 @@ namespace System.Reflection.Emit
             Type[]? parameterTypes,
             Type owner,
             bool skipVisibility
-        ) : this(
-            name,
-            attributes,
-            callingConvention,
-            returnType,
-            parameterTypes,
-            owner,
-            owner?.Module,
-            skipVisibility,
-            false,
-            true
-        ) { }
+        )
+            : this(
+                name,
+                attributes,
+                callingConvention,
+                returnType,
+                parameterTypes,
+                owner,
+                owner?.Module,
+                skipVisibility,
+                false,
+                true
+            ) { }
 
         public DynamicMethod(
             string name,
@@ -146,18 +141,19 @@ namespace System.Reflection.Emit
             Type[]? parameterTypes,
             Module m,
             bool skipVisibility
-        ) : this(
-            name,
-            attributes,
-            callingConvention,
-            returnType,
-            parameterTypes,
-            null,
-            m,
-            skipVisibility,
-            false,
-            false
-        ) { }
+        )
+            : this(
+                name,
+                attributes,
+                callingConvention,
+                returnType,
+                parameterTypes,
+                null,
+                m,
+                skipVisibility,
+                false,
+                false
+            ) { }
 
         public DynamicMethod(string name, Type? returnType, Type[]? parameterTypes)
             : this(name, returnType, parameterTypes, false) { }
@@ -168,18 +164,19 @@ namespace System.Reflection.Emit
             Type? returnType,
             Type[]? parameterTypes,
             bool restrictedSkipVisibility
-        ) : this(
-            name,
-            MethodAttributes.Public | MethodAttributes.Static,
-            CallingConventions.Standard,
-            returnType,
-            parameterTypes,
-            null,
-            null,
-            restrictedSkipVisibility,
-            true,
-            false
-        ) { }
+        )
+            : this(
+                name,
+                MethodAttributes.Public | MethodAttributes.Static,
+                CallingConventions.Standard,
+                returnType,
+                parameterTypes,
+                null,
+                null,
+                restrictedSkipVisibility,
+                true,
+                false
+            ) { }
 
         [DynamicDependency(nameof(owner))] // Automatically keeps all previous fields too due to StructLayout
         private DynamicMethod(
@@ -193,7 +190,8 @@ namespace System.Reflection.Emit
             bool skipVisibility,
             bool anonHosted,
             bool typeOwner
-        ) {
+        )
+        {
             if (name == null)
                 throw new ArgumentNullException(nameof(name));
             if (returnType == null)
@@ -301,7 +299,8 @@ namespace System.Reflection.Emit
             int position,
             ParameterAttributes attributes,
             string? parameterName
-        ) {
+        )
+        {
             //
             // Extension: Mono allows position == 0 for the return attribute
             //
@@ -425,7 +424,8 @@ namespace System.Reflection.Emit
             Binder? binder,
             object?[]? parameters,
             CultureInfo? culture
-        ) {
+        )
+        {
             try
             {
                 CreateDynMethod();

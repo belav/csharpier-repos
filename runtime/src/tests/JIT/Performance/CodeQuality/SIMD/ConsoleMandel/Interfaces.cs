@@ -38,7 +38,8 @@ namespace Algorithms
             bool isMultiThreaded,
             bool useAbstractDataType,
             bool dontUseIntTypes = true
-        ) {
+        )
+        {
             if (useVectorTypes && doublePrecision)
             {
                 if (dontUseIntTypes)

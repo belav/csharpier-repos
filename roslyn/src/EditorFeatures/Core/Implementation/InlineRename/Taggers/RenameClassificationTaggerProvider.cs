@@ -27,7 +27,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.InlineRename
         public RenameClassificationTaggerProvider(
             InlineRenameService renameService,
             IClassificationTypeRegistryService classificationTypeRegistryService
-        ) {
+        )
+        {
             _renameService = renameService;
             _classificationType = classificationTypeRegistryService.GetClassificationType(
                 ClassificationTypeDefinitions.InlineRenameField

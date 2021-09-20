@@ -424,7 +424,8 @@ namespace System.IO.Pipelines.Tests
         [InlineData(false)]
         public async Task ReadAsyncOnCompletedCapturesTheExecutionContext(
             bool useSynchronizationContext
-        ) {
+        )
+        {
             var pipe = new Pipe(
                 new PipeOptions(useSynchronizationContext: useSynchronizationContext)
             );
@@ -488,7 +489,8 @@ namespace System.IO.Pipelines.Tests
         [InlineData(false)]
         public async Task FlushAsyncOnCompletedCapturesTheExecutionContextAndSyncContext(
             bool useSynchronizationContext
-        ) {
+        )
+        {
             var pipe = new Pipe(
                 new PipeOptions(
                     useSynchronizationContext: useSynchronizationContext,

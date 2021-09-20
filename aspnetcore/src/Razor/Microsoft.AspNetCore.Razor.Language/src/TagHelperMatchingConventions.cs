@@ -20,7 +20,8 @@ namespace Microsoft.AspNetCore.Razor.Language
             string parentTagNameWithoutPrefix,
             IReadOnlyList<KeyValuePair<string, string>> tagAttributes,
             TagMatchingRuleDescriptor rule
-        ) {
+        )
+        {
             if (tagNameWithoutPrefix == null)
             {
                 throw new ArgumentNullException(nameof(tagNameWithoutPrefix));
@@ -60,7 +61,8 @@ namespace Microsoft.AspNetCore.Razor.Language
         public static bool SatisfiesTagName(
             string tagNameWithoutPrefix,
             TagMatchingRuleDescriptor rule
-        ) {
+        )
+        {
             if (tagNameWithoutPrefix == null)
             {
                 throw new ArgumentNullException(nameof(tagNameWithoutPrefix));
@@ -92,7 +94,8 @@ namespace Microsoft.AspNetCore.Razor.Language
                       ? StringComparison.Ordinal
                       : StringComparison.OrdinalIgnoreCase
                 )
-            ) {
+            )
+            {
                 return false;
             }
 
@@ -102,7 +105,8 @@ namespace Microsoft.AspNetCore.Razor.Language
         public static bool SatisfiesParentTag(
             string parentTagNameWithoutPrefix,
             TagMatchingRuleDescriptor rule
-        ) {
+        )
+        {
             if (rule == null)
             {
                 throw new ArgumentNullException(nameof(rule));
@@ -117,7 +121,8 @@ namespace Microsoft.AspNetCore.Razor.Language
                       ? StringComparison.Ordinal
                       : StringComparison.OrdinalIgnoreCase
                 )
-            ) {
+            )
+            {
                 return false;
             }
 
@@ -127,7 +132,8 @@ namespace Microsoft.AspNetCore.Razor.Language
         public static bool SatisfiesAttributes(
             IReadOnlyList<KeyValuePair<string, string>> tagAttributes,
             TagMatchingRuleDescriptor rule
-        ) {
+        )
+        {
             if (tagAttributes == null)
             {
                 throw new ArgumentNullException(nameof(tagAttributes));
@@ -152,7 +158,8 @@ namespace Microsoft.AspNetCore.Razor.Language
                         ),
                     tagAttributes
                 )
-            ) {
+            )
+            {
                 return false;
             }
 
@@ -162,7 +169,8 @@ namespace Microsoft.AspNetCore.Razor.Language
         public static bool CanSatisfyBoundAttribute(
             string name,
             BoundAttributeDescriptor descriptor
-        ) {
+        )
+        {
             return SatisfiesBoundAttributeName(name, descriptor)
                 || SatisfiesBoundAttributeIndexer(name, descriptor)
                 || descriptor.BoundAttributeParameters.Any(
@@ -173,7 +181,8 @@ namespace Microsoft.AspNetCore.Razor.Language
         public static bool SatisfiesBoundAttributeIndexer(
             string name,
             BoundAttributeDescriptor descriptor
-        ) {
+        )
+        {
             return descriptor.IndexerNamePrefix != null
                 && !SatisfiesBoundAttributeName(name, descriptor)
                 && name.StartsWith(
@@ -188,7 +197,8 @@ namespace Microsoft.AspNetCore.Razor.Language
             string name,
             BoundAttributeDescriptor parent,
             BoundAttributeParameterDescriptor descriptor
-        ) {
+        )
+        {
             if (TryGetBoundAttributeParameter(name, out var attributeName, out var parameterName))
             {
                 var satisfiesBoundAttributeName = SatisfiesBoundAttributeName(
@@ -217,7 +227,8 @@ namespace Microsoft.AspNetCore.Razor.Language
             string fullAttributeName,
             out string boundAttributeName,
             out string parameterName
-        ) {
+        )
+        {
             boundAttributeName = null;
             parameterName = null;
 
@@ -239,7 +250,8 @@ namespace Microsoft.AspNetCore.Razor.Language
             out bool indexerMatch,
             out bool parameterMatch,
             out BoundAttributeParameterDescriptor boundAttributeParameter
-        ) {
+        )
+        {
             indexerMatch = false;
             parameterMatch = false;
             boundAttribute = null;
@@ -285,7 +297,8 @@ namespace Microsoft.AspNetCore.Razor.Language
         private static bool SatisfiesBoundAttributeName(
             string name,
             BoundAttributeDescriptor descriptor
-        ) {
+        )
+        {
             return string.Equals(
                 descriptor.Name,
                 name,
@@ -300,12 +313,14 @@ namespace Microsoft.AspNetCore.Razor.Language
             string attributeName,
             string attributeValue,
             RequiredAttributeDescriptor descriptor
-        ) {
+        )
+        {
             var nameMatches = false;
             if (
                 descriptor.NameComparison
                 == RequiredAttributeDescriptor.NameComparisonMode.FullMatch
-            ) {
+            )
+            {
                 nameMatches = string.Equals(
                     descriptor.Name,
                     attributeName,
@@ -317,7 +332,8 @@ namespace Microsoft.AspNetCore.Razor.Language
             else if (
                 descriptor.NameComparison
                 == RequiredAttributeDescriptor.NameComparisonMode.PrefixMatch
-            ) {
+            )
+            {
                 // attributeName cannot equal the Name if comparing as a PrefixMatch.
                 nameMatches =
                     attributeName.Length != descriptor.Name.Length

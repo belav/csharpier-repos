@@ -41,7 +41,8 @@ namespace Microsoft.CodeAnalysis.Text
                 ITextBufferCloneService? textBufferCloneService,
                 ITextSnapshot editorSnapshot,
                 TextBufferContainer container
-            ) {
+            )
+            {
                 Contract.ThrowIfNull(editorSnapshot);
 
                 _textBufferCloneService = textBufferCloneService;
@@ -55,7 +56,8 @@ namespace Microsoft.CodeAnalysis.Text
                 ITextImage textImage,
                 Encoding? encoding,
                 TextBufferContainer? container
-            ) {
+            )
+            {
                 Contract.ThrowIfNull(textImage);
 
                 _textBufferCloneService = textBufferCloneService;
@@ -87,7 +89,8 @@ namespace Microsoft.CodeAnalysis.Text
             public static SourceText From(
                 ITextBufferCloneService? textBufferCloneService,
                 ITextSnapshot editorSnapshot
-            ) {
+            )
+            {
                 if (editorSnapshot == null)
                 {
                     throw new ArgumentNullException(nameof(editorSnapshot));
@@ -117,7 +120,8 @@ namespace Microsoft.CodeAnalysis.Text
                 ITextBufferCloneService? textBufferCloneService,
                 ITextSnapshot editorSnapshot,
                 TextBufferContainer container
-            ) {
+            )
+            {
                 if (editorSnapshot == null)
                 {
                     throw new ArgumentNullException(nameof(editorSnapshot));
@@ -276,7 +280,8 @@ namespace Microsoft.CodeAnalysis.Text
                 if (
                     !s_textImageToEditorSnapshotMap.TryGetValue(textImage, out var weakReference)
                     || !weakReference.TryGetTarget(out var editorSnapshot)
-                ) {
+                )
+                {
                     return null;
                 }
 
@@ -308,12 +313,14 @@ namespace Microsoft.CodeAnalysis.Text
                     SnapshotSourceText baseText,
                     ITextImage baseSnapshot,
                     ITextImage currentSnapshot
-                ) : base(
-                    textBufferCloneService,
-                    currentSnapshot,
-                    baseText.Encoding,
-                    container: null
-                ) {
+                )
+                    : base(
+                        textBufferCloneService,
+                        currentSnapshot,
+                        baseText.Encoding,
+                        container: null
+                    )
+                {
                     _baseText = baseText;
                     _baseSnapshot = baseSnapshot;
                 }
@@ -379,7 +386,8 @@ namespace Microsoft.CodeAnalysis.Text
                         lastEventArgs != null
                         && lastEventArgs.OldText == oldText
                         && lastEventArgs.NewText == this
-                    ) {
+                    )
+                    {
                         return lastEventArgs.Changes;
                     }
                 }
@@ -393,12 +401,14 @@ namespace Microsoft.CodeAnalysis.Text
                 ITextImage? oldImage,
                 int oldTextLength,
                 ITextImage? newImage
-            ) {
+            )
+            {
                 if (
                     oldImage == null
                     || newImage == null
                     || oldImage.Version.Identifier != newImage.Version.Identifier
-                ) {
+                )
+                {
                     // Claim its all changed
                     Logger.Log(
                         FunctionId.Workspace_SourceText_GetChangeRanges,
@@ -443,7 +453,8 @@ namespace Microsoft.CodeAnalysis.Text
                 ITextImage snapshot1,
                 ITextImage snapshot2,
                 bool forward
-            ) {
+            )
+            {
                 var oldSnapshot = forward ? snapshot1 : snapshot2;
                 var newSnapshot = forward ? snapshot2 : snapshot1;
 
@@ -452,7 +463,8 @@ namespace Microsoft.CodeAnalysis.Text
                     var oldVersion = oldSnapshot.Version;
                     oldVersion != newSnapshot.Version;
                     oldVersion = oldVersion.Next
-                ) {
+                )
+                {
                     if (oldVersion.Changes.Count != 0)
                     {
                         if (changes != null)
@@ -495,7 +507,8 @@ namespace Microsoft.CodeAnalysis.Text
                 ITextImageVersion oldVersion,
                 ITextImageVersion newVersion,
                 bool forward
-            ) {
+            )
+            {
                 TextChangeRange? range = null;
                 var iterator = GetMultipleVersionTextChanges(oldVersion, newVersion, forward);
                 foreach (var changes in forward ? iterator : iterator.Reverse())
@@ -511,7 +524,8 @@ namespace Microsoft.CodeAnalysis.Text
                 ITextImageVersion oldVersion,
                 ITextImageVersion newVersion,
                 bool forward
-            ) {
+            )
+            {
                 for (var version = oldVersion; version != newVersion; version = version.Next)
                 {
                     yield return version.Changes.Select(

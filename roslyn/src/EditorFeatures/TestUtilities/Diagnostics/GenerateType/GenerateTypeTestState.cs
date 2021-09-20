@@ -33,7 +33,8 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Diagnostics.GenerateType
             string projectToBeModified,
             string typeName,
             string existingFileName
-        ) {
+        )
+        {
             Workspace = workspace;
             _testDocument = Workspace.Documents.SingleOrDefault(d => d.CursorPosition.HasValue);
             Contract.ThrowIfNull(_testDocument, "markup does not contain a cursor position");

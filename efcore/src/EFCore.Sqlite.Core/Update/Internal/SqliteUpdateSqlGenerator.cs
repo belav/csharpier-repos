@@ -43,7 +43,8 @@ namespace Microsoft.EntityFrameworkCore.Sqlite.Update.Internal
         protected override void AppendIdentityWhereCondition(
             StringBuilder commandStringBuilder,
             ColumnModification columnModification
-        ) {
+        )
+        {
             Check.NotNull(commandStringBuilder, nameof(commandStringBuilder));
             Check.NotNull(columnModification, nameof(columnModification));
 
@@ -62,7 +63,8 @@ namespace Microsoft.EntityFrameworkCore.Sqlite.Update.Internal
             string name,
             string? schema,
             int commandPosition
-        ) {
+        )
+        {
             Check.NotNull(commandStringBuilder, nameof(commandStringBuilder));
             Check.NotEmpty(name, nameof(name));
 
@@ -82,7 +84,8 @@ namespace Microsoft.EntityFrameworkCore.Sqlite.Update.Internal
         protected override void AppendRowsAffectedWhereCondition(
             StringBuilder commandStringBuilder,
             int expectedRowsAffected
-        ) {
+        )
+        {
             Check.NotNull(commandStringBuilder, nameof(commandStringBuilder));
 
             commandStringBuilder.Append("changes() = ").Append(expectedRowsAffected);

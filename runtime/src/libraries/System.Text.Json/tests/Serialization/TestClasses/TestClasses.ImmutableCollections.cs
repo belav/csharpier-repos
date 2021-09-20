@@ -159,7 +159,8 @@ namespace System.Text.Json.Serialization.Tests
 
         public IImmutableDictionary<string, string> AddRange(
             IEnumerable<KeyValuePair<string, string>> pairs
-        ) {
+        )
+        {
             return ((IImmutableDictionary<string, string>)_dictionary).AddRange(pairs);
         }
 
@@ -200,7 +201,8 @@ namespace System.Text.Json.Serialization.Tests
 
         public IImmutableDictionary<string, string> SetItems(
             IEnumerable<KeyValuePair<string, string>> items
-        ) {
+        )
+        {
             return ((IImmutableDictionary<string, string>)_dictionary).SetItems(items);
         }
 
@@ -247,7 +249,8 @@ namespace System.Text.Json.Serialization.Tests
 
         public IImmutableDictionary<TKey, TValue> AddRange(
             IEnumerable<KeyValuePair<TKey, TValue>> pairs
-        ) {
+        )
+        {
             return ((IImmutableDictionary<TKey, TValue>)_dictionary).AddRange(pairs);
         }
 
@@ -288,7 +291,8 @@ namespace System.Text.Json.Serialization.Tests
 
         public IImmutableDictionary<TKey, TValue> SetItems(
             IEnumerable<KeyValuePair<TKey, TValue>> items
-        ) {
+        )
+        {
             return ((IImmutableDictionary<TKey, TValue>)_dictionary).SetItems(items);
         }
 
@@ -348,7 +352,8 @@ namespace System.Text.Json.Serialization.Tests
             int index,
             int count,
             IEqualityComparer<string> equalityComparer
-        ) {
+        )
+        {
             return _list.IndexOf(item, index, count, equalityComparer);
         }
 
@@ -367,14 +372,16 @@ namespace System.Text.Json.Serialization.Tests
             int index,
             int count,
             IEqualityComparer<string> equalityComparer
-        ) {
+        )
+        {
             return _list.LastIndexOf(item, index, count, equalityComparer);
         }
 
         public IImmutableList<string> Remove(
             string value,
             IEqualityComparer<string> equalityComparer
-        ) {
+        )
+        {
             return ((IImmutableList<string>)_list).Remove(value, equalityComparer);
         }
 
@@ -391,7 +398,8 @@ namespace System.Text.Json.Serialization.Tests
         public IImmutableList<string> RemoveRange(
             IEnumerable<string> items,
             IEqualityComparer<string> equalityComparer
-        ) {
+        )
+        {
             return ((IImmutableList<string>)_list).RemoveRange(items, equalityComparer);
         }
 
@@ -404,7 +412,8 @@ namespace System.Text.Json.Serialization.Tests
             string oldValue,
             string newValue,
             IEqualityComparer<string> equalityComparer
-        ) {
+        )
+        {
             return ((IImmutableList<string>)_list).Replace(oldValue, newValue, equalityComparer);
         }
 

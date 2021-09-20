@@ -300,14 +300,16 @@ namespace System.Web.Http.Results
         private static UnauthorizedResult CreateProductUnderTest(
             IEnumerable<AuthenticationHeaderValue> challenges,
             HttpRequestMessage request
-        ) {
+        )
+        {
             return new UnauthorizedResult(challenges, request);
         }
 
         private static UnauthorizedResult CreateProductUnderTest(
             IEnumerable<AuthenticationHeaderValue> challenges,
             ApiController controller
-        ) {
+        )
+        {
             return new UnauthorizedResult(challenges, controller);
         }
 

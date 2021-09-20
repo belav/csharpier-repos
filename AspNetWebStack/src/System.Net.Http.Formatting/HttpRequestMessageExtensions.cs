@@ -27,7 +27,8 @@ namespace System.Net.Http
         public static HttpResponseMessage CreateResponse(
             this HttpRequestMessage request,
             HttpStatusCode statusCode
-        ) {
+        )
+        {
             if (request == null)
             {
                 throw Error.ArgumentNull("request");

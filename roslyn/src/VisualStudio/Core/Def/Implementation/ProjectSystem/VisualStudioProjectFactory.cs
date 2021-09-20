@@ -48,7 +48,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.ProjectSystem
             > fileInfoProviders,
             HostDiagnosticUpdateSource hostDiagnosticUpdateSource,
             SVsServiceProvider serviceProvider
-        ) {
+        )
+        {
             _threadingContext = threadingContext;
             _visualStudioWorkspaceImpl = visualStudioWorkspaceImpl;
             _dynamicFileInfoProviders = fileInfoProviders.AsImmutableOrEmpty();
@@ -73,7 +74,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.ProjectSystem
             string language,
             VisualStudioProjectCreationInfo creationInfo,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             // HACK: Fetch this service to ensure it's still created on the UI thread; once this is
             // moved off we'll need to fix up it's constructor to be free-threaded.
 
@@ -192,7 +194,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.ProjectSystem
             string projectFilePath,
             IVsHierarchy hierarchy,
             Guid projectGuid
-        ) {
+        )
+        {
             return _threadingContext.JoinableTaskFactory.Run(
                 async () =>
                     await (
@@ -216,7 +219,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.ProjectSystem
             IVsHierarchy hierarchy,
             Guid projectGuid,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var projectInfo = new VisualStudioProjectCreationInfo
             {
                 FilePath = projectFilePath,

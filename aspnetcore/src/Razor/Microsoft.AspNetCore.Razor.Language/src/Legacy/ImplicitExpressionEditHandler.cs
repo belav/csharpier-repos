@@ -68,7 +68,8 @@ namespace Microsoft.AspNetCore.Razor.Language.Legacy
         protected override PartialParseResultInternal CanAcceptChange(
             SyntaxNode target,
             SourceChange change
-        ) {
+        )
+        {
             if (AcceptedCharacters == AcceptedCharactersInternal.Any)
             {
                 return PartialParseResultInternal.Rejected;
@@ -165,7 +166,8 @@ namespace Microsoft.AspNetCore.Razor.Language.Legacy
         private static bool IsSecondaryDotlessCommitInsertion(
             SyntaxNode target,
             SourceChange change
-        ) {
+        )
+        {
             // Do not need to worry about other punctuation, just looking for double '.' (after change)
             return change.NewText.Length == 1
                 && change.NewText == "."
@@ -209,7 +211,8 @@ namespace Microsoft.AspNetCore.Razor.Language.Legacy
                     if (
                         tokenEndIndex >= change.Span.AbsoluteIndex + change.Span.Length
                         && token.Kind == SyntaxKind.Identifier
-                    ) {
+                    )
+                    {
                         // The token we're changing happens to be an identifier. Need to check if its transformed state is also one.
                         // We do this transformation logic to capture the case that the new text change happens to not be an identifier;
                         // i.e. "5". Alone, it's numeric, within an identifier it's classified as identifier.
@@ -261,7 +264,8 @@ namespace Microsoft.AspNetCore.Razor.Language.Legacy
         internal static bool IsAcceptableDeletionInBalancedParenthesis(
             SyntaxNode target,
             SourceChange change
-        ) {
+        )
+        {
             if (!change.IsDelete)
             {
                 return false;
@@ -276,7 +280,8 @@ namespace Microsoft.AspNetCore.Razor.Language.Legacy
                 .ToArray();
             if (
                 !IsInsideParenthesis(changeStart, tokens) || !IsInsideParenthesis(changeEnd, tokens)
-            ) {
+            )
+            {
                 // Either the start or end of the delete does not fall inside of parenthesis, unacceptable inner deletion.
                 return false;
             }
@@ -297,7 +302,8 @@ namespace Microsoft.AspNetCore.Razor.Language.Legacy
         internal static bool IsAcceptableInsertionInBalancedParenthesis(
             SyntaxNode target,
             SourceChange change
-        ) {
+        )
+        {
             if (!change.IsInsert)
             {
                 return false;
@@ -518,7 +524,8 @@ namespace Microsoft.AspNetCore.Razor.Language.Legacy
             SyntaxNode target,
             char previousChar,
             SourceChange change
-        ) {
+        )
+        {
             // What's left after deleting?
             if (previousChar == '.')
             {
@@ -549,7 +556,8 @@ namespace Microsoft.AspNetCore.Razor.Language.Legacy
             SyntaxNode target,
             char previousChar,
             SourceChange change
-        ) {
+        )
+        {
             // What are we inserting after?
             if (previousChar == '.')
             {
@@ -559,7 +567,8 @@ namespace Microsoft.AspNetCore.Razor.Language.Legacy
                 ParserHelpers.IsIdentifierPart(previousChar)
                 || previousChar == ')'
                 || previousChar == ']'
-            ) {
+            )
+            {
                 return HandleInsertionAfterIdPart(target, change);
             }
             else if (previousChar == '(')
@@ -575,7 +584,8 @@ namespace Microsoft.AspNetCore.Razor.Language.Legacy
         private PartialParseResultInternal HandleInsertionAfterIdPart(
             SyntaxNode target,
             SourceChange change
-        ) {
+        )
+        {
             // If the insertion is a full identifier part, accept it
             if (ParserHelpers.IsIdentifier(change.NewText, requireIdentifierStart: false))
             {
@@ -606,7 +616,8 @@ namespace Microsoft.AspNetCore.Razor.Language.Legacy
         private PartialParseResultInternal HandleInsertionAfterOpenParenthesis(
             SyntaxNode target,
             SourceChange change
-        ) {
+        )
+        {
             if (IsCloseParenthesisInsertion(change))
             {
                 return TryAcceptChange(target, change);
@@ -618,7 +629,8 @@ namespace Microsoft.AspNetCore.Razor.Language.Legacy
         private PartialParseResultInternal HandleInsertionAfterDot(
             SyntaxNode target,
             SourceChange change
-        ) {
+        )
+        {
             // If the insertion is a full identifier or another dot, accept it
             if (ParserHelpers.IsIdentifier(change.NewText) || change.NewText == ".")
             {
@@ -631,7 +643,8 @@ namespace Microsoft.AspNetCore.Razor.Language.Legacy
             SyntaxNode target,
             SourceChange change,
             PartialParseResultInternal acceptResult = PartialParseResultInternal.Accepted
-        ) {
+        )
+        {
             var content = change.GetEditedContent(target);
             if (StartsWithKeyword(content))
             {

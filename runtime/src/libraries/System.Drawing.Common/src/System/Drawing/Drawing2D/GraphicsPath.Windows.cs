@@ -382,7 +382,8 @@ namespace System.Drawing.Drawing2D
             float height,
             float startAngle,
             float sweepAngle
-        ) {
+        )
+        {
             Gdip.CheckStatus(
                 Gdip.GdipAddPathArc(
                     new HandleRef(this, _nativePath),
@@ -430,7 +431,8 @@ namespace System.Drawing.Drawing2D
             float y3,
             float x4,
             float y4
-        ) {
+        )
+        {
             Gdip.CheckStatus(
                 Gdip.GdipAddPathBezier(
                     new HandleRef(this, _nativePath),
@@ -537,7 +539,8 @@ namespace System.Drawing.Drawing2D
             int offset,
             int numberOfSegments,
             float tension
-        ) {
+        )
+        {
             if (points == null)
                 throw new ArgumentNullException(nameof(points));
 
@@ -759,7 +762,8 @@ namespace System.Drawing.Drawing2D
             float height,
             float startAngle,
             float sweepAngle
-        ) {
+        )
+        {
             Gdip.CheckStatus(
                 Gdip.GdipAddPathPie(
                     new HandleRef(this, _nativePath),
@@ -838,7 +842,8 @@ namespace System.Drawing.Drawing2D
             float emSize,
             PointF origin,
             StringFormat? format
-        ) {
+        )
+        {
             AddString(s, family, style, emSize, new RectangleF(origin.X, origin.Y, 0, 0), format);
         }
 
@@ -849,7 +854,8 @@ namespace System.Drawing.Drawing2D
             float emSize,
             Point origin,
             StringFormat? format
-        ) {
+        )
+        {
             AddString(s, family, style, emSize, new Rectangle(origin.X, origin.Y, 0, 0), format);
         }
 
@@ -860,7 +866,8 @@ namespace System.Drawing.Drawing2D
             float emSize,
             RectangleF layoutRect,
             StringFormat? format
-        ) {
+        )
+        {
             if (family == null)
                 throw new ArgumentNullException(nameof(family));
 
@@ -885,7 +892,8 @@ namespace System.Drawing.Drawing2D
             float emSize,
             Rectangle layoutRect,
             StringFormat? format
-        ) {
+        )
+        {
             if (family == null)
                 throw new ArgumentNullException(nameof(family));
 
@@ -992,7 +1000,8 @@ namespace System.Drawing.Drawing2D
             Matrix? matrix,
             WarpMode warpMode,
             float flatness
-        ) {
+        )
+        {
             if (destPoints == null)
                 throw new ArgumentNullException(nameof(destPoints));
 

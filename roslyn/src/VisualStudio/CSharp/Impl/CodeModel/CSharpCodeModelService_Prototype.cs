@@ -115,7 +115,8 @@ namespace Microsoft.VisualStudio.LanguageServices.CSharp.CodeModel
             DelegateDeclarationSyntax node,
             INamedTypeSymbol symbol,
             PrototypeFlags flags
-        ) {
+        )
+        {
             if ((flags & PrototypeFlags.Signature) != 0)
             {
                 if (flags != PrototypeFlags.Signature)
@@ -182,7 +183,8 @@ namespace Microsoft.VisualStudio.LanguageServices.CSharp.CodeModel
             BaseMethodDeclarationSyntax node,
             IMethodSymbol symbol,
             PrototypeFlags flags
-        ) {
+        )
+        {
             if ((flags & PrototypeFlags.Signature) != 0)
             {
                 if (flags != PrototypeFlags.Signature)
@@ -227,7 +229,8 @@ namespace Microsoft.VisualStudio.LanguageServices.CSharp.CodeModel
             BasePropertyDeclarationSyntax node,
             IPropertySymbol symbol,
             PrototypeFlags flags
-        ) {
+        )
+        {
             if ((flags & PrototypeFlags.Signature) != 0)
             {
                 if (flags != PrototypeFlags.Signature)
@@ -272,7 +275,8 @@ namespace Microsoft.VisualStudio.LanguageServices.CSharp.CodeModel
             VariableDeclaratorSyntax node,
             IFieldSymbol symbol,
             PrototypeFlags flags
-        ) {
+        )
+        {
             if ((flags & PrototypeFlags.Signature) != 0)
             {
                 if (flags != PrototypeFlags.Signature)
@@ -294,7 +298,8 @@ namespace Microsoft.VisualStudio.LanguageServices.CSharp.CodeModel
                 && node.Initializer != null
                 && node.Initializer.Value != null
                 && !node.Initializer.Value.IsMissing
-            ) {
+            )
+            {
                 builder.Append(" = ");
                 builder.Append(node.Initializer.Value);
             }
@@ -306,7 +311,8 @@ namespace Microsoft.VisualStudio.LanguageServices.CSharp.CodeModel
             EnumMemberDeclarationSyntax node,
             IFieldSymbol symbol,
             PrototypeFlags flags
-        ) {
+        )
+        {
             if ((flags & PrototypeFlags.Signature) != 0)
             {
                 if (flags != PrototypeFlags.Signature)
@@ -328,7 +334,8 @@ namespace Microsoft.VisualStudio.LanguageServices.CSharp.CodeModel
                 && node.EqualsValue != null
                 && node.EqualsValue.Value != null
                 && !node.EqualsValue.Value.IsMissing
-            ) {
+            )
+            {
                 builder.Append(" = ");
                 builder.Append(node.EqualsValue.Value);
             }
@@ -341,7 +348,8 @@ namespace Microsoft.VisualStudio.LanguageServices.CSharp.CodeModel
             INamedTypeSymbol symbol,
             PrototypeFlags flags,
             string baseName
-        ) {
+        )
+        {
             builder.Append("delegate ");
 
             if ((flags & PrototypeFlags.Type) != 0)
@@ -354,7 +362,8 @@ namespace Microsoft.VisualStudio.LanguageServices.CSharp.CodeModel
                         (flags & (PrototypeFlags.ParameterNames | PrototypeFlags.ParameterTypes))
                         != 0
                     )
-                ) {
+                )
+                {
                     builder.Append(' ');
                 }
             }
@@ -412,7 +421,8 @@ namespace Microsoft.VisualStudio.LanguageServices.CSharp.CodeModel
             IEventSymbol symbol,
             PrototypeFlags flags,
             string baseName
-        ) {
+        )
+        {
             if ((flags & PrototypeFlags.Type) != 0)
             {
                 builder.Append(GetAsStringForCodeTypeRef(symbol.Type));
@@ -456,7 +466,8 @@ namespace Microsoft.VisualStudio.LanguageServices.CSharp.CodeModel
             IMethodSymbol symbol,
             PrototypeFlags flags,
             string baseName
-        ) {
+        )
+        {
             if ((flags & PrototypeFlags.Type) != 0)
             {
                 builder.Append(GetAsStringForCodeTypeRef(symbol.ReturnType));
@@ -520,7 +531,8 @@ namespace Microsoft.VisualStudio.LanguageServices.CSharp.CodeModel
             IPropertySymbol symbol,
             PrototypeFlags flags,
             string baseName
-        ) {
+        )
+        {
             if ((flags & PrototypeFlags.Type) != 0)
             {
                 builder.Append(GetAsStringForCodeTypeRef(symbol.Type));
@@ -577,7 +589,8 @@ namespace Microsoft.VisualStudio.LanguageServices.CSharp.CodeModel
             IFieldSymbol symbol,
             PrototypeFlags flags,
             string baseName
-        ) {
+        )
+        {
             if ((flags & PrototypeFlags.Type) != 0)
             {
                 builder.Append(GetAsStringForCodeTypeRef(symbol.Type));
@@ -620,7 +633,8 @@ namespace Microsoft.VisualStudio.LanguageServices.CSharp.CodeModel
             StringBuilder builder,
             ImmutableArray<IParameterSymbol> parameters,
             PrototypeFlags flags
-        ) {
+        )
+        {
             var first = true;
             foreach (var parameter in parameters)
             {
@@ -639,7 +653,8 @@ namespace Microsoft.VisualStudio.LanguageServices.CSharp.CodeModel
             StringBuilder builder,
             PrototypeFlags flags,
             IParameterSymbol parameter
-        ) {
+        )
+        {
             var addSpace = false;
             if ((flags & PrototypeFlags.ParameterTypes) != 0)
             {
@@ -676,7 +691,8 @@ namespace Microsoft.VisualStudio.LanguageServices.CSharp.CodeModel
             bool includeNamespaces,
             bool includeGenerics,
             ISymbol symbol
-        ) {
+        )
+        {
             var symbols = new Stack<ISymbol>();
 
             while (symbol != null)

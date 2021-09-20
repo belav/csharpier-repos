@@ -86,7 +86,8 @@ namespace Microsoft.AspNetCore.Razor.Language
                     && node.Children.Count == 1
                     && node.Children[0] is CSharpStatementLiteralSyntax
                 )
-            ) {
+            )
+            {
                 base.VisitCSharpCodeBlock(node);
                 return;
             }
@@ -126,7 +127,8 @@ namespace Microsoft.AspNetCore.Razor.Language
 
         public override void VisitMarkupTagHelperAttributeValue(
             MarkupTagHelperAttributeValueSyntax node
-        ) {
+        )
+        {
             // We don't generate a classified span when the attribute value is a simple literal value.
             // This is done so we maintain the classified spans generated in 2.x which
             // used ConditionalAttributeCollapser (combines markup literal attribute values into one span with no block parent).
@@ -136,7 +138,8 @@ namespace Microsoft.AspNetCore.Razor.Language
                     node.Children.Count == 1
                     && node.Children[0] is MarkupDynamicAttributeValueSyntax
                 )
-            ) {
+            )
+            {
                 WriteBlock(node, BlockKindInternal.Markup, base.VisitMarkupTagHelperAttributeValue);
                 return;
             }
@@ -189,7 +192,8 @@ namespace Microsoft.AspNetCore.Razor.Language
                     child is MarkupTagHelperAttributeSyntax
                     || child is MarkupTagHelperDirectiveAttributeSyntax
                     || child is MarkupMinimizedTagHelperDirectiveAttributeSyntax
-                ) {
+                )
+                {
                     Visit(child);
                 }
             }
@@ -231,7 +235,8 @@ namespace Microsoft.AspNetCore.Razor.Language
 
         public override void VisitMarkupTagHelperDirectiveAttribute(
             MarkupTagHelperDirectiveAttributeSyntax node
-        ) {
+        )
+        {
             Visit(node.Transition);
             Visit(node.Colon);
             Visit(node.Value);
@@ -239,14 +244,16 @@ namespace Microsoft.AspNetCore.Razor.Language
 
         public override void VisitMarkupMinimizedTagHelperDirectiveAttribute(
             MarkupMinimizedTagHelperDirectiveAttributeSyntax node
-        ) {
+        )
+        {
             Visit(node.Transition);
             Visit(node.Colon);
         }
 
         public override void VisitMarkupMinimizedAttributeBlock(
             MarkupMinimizedAttributeBlockSyntax node
-        ) {
+        )
+        {
             WriteBlock(
                 node,
                 BlockKindInternal.Markup,
@@ -268,7 +275,8 @@ namespace Microsoft.AspNetCore.Razor.Language
 
         public override void VisitMarkupDynamicAttributeValue(
             MarkupDynamicAttributeValueSyntax node
-        ) {
+        )
+        {
             WriteBlock(node, BlockKindInternal.Markup, base.VisitMarkupDynamicAttributeValue);
         }
 
@@ -316,7 +324,8 @@ namespace Microsoft.AspNetCore.Razor.Language
 
         public override void VisitMarkupLiteralAttributeValue(
             MarkupLiteralAttributeValueSyntax node
-        ) {
+        )
+        {
             WriteSpan(node, SpanKindInternal.Markup);
             base.VisitMarkupLiteralAttributeValue(node);
         }
@@ -358,7 +367,8 @@ namespace Microsoft.AspNetCore.Razor.Language
             SyntaxNode node,
             SpanKindInternal kind,
             AcceptedCharactersInternal? acceptedCharacters = null
-        ) {
+        )
+        {
             if (node.IsMissing)
             {
                 return;
@@ -388,7 +398,8 @@ namespace Microsoft.AspNetCore.Razor.Language
 
         private static SyntaxList<RazorSyntaxNode> GetRewrittenMarkupStartTagChildren(
             MarkupStartTagSyntax node
-        ) {
+        )
+        {
             // Rewrites the children of the start tag to look like the legacy syntax tree.
             if (node.IsMarkupTransition)
             {
@@ -470,7 +481,8 @@ namespace Microsoft.AspNetCore.Razor.Language
 
         private static SyntaxList<RazorSyntaxNode> GetRewrittenMarkupEndTagChildren(
             MarkupEndTagSyntax node
-        ) {
+        )
+        {
             // Rewrites the children of the end tag to look like the legacy syntax tree.
             if (node.IsMarkupTransition)
             {

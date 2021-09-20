@@ -54,7 +54,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                         || label == node.DefaultLabel
                             && node.Expression.ConstantValue == null
                             && IsTraditionalSwitch(node)
-                    ) {
+                    )
+                    {
                         SetState(initialState.Clone());
                     }
                     else
@@ -82,7 +83,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                     && node.Expression.ConstantValue == null
                     && IsTraditionalSwitch(node)
                 )
-            ) {
+            )
+            {
                 Join(ref afterSwitchState, ref initialState);
             }
 
@@ -105,7 +107,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             if (
                 compilation.LanguageVersion
                 >= MessageID.IDS_FeatureRecursivePatterns.RequiredVersion()
-            ) {
+            )
+            {
                 return false;
             }
 
@@ -155,13 +158,15 @@ namespace Microsoft.CodeAnalysis.CSharp
 
         public override BoundNode VisitConvertedSwitchExpression(
             BoundConvertedSwitchExpression node
-        ) {
+        )
+        {
             return this.VisitSwitchExpression(node);
         }
 
         public override BoundNode VisitUnconvertedSwitchExpression(
             BoundUnconvertedSwitchExpression node
-        ) {
+        )
+        {
             return this.VisitSwitchExpression(node);
         }
 

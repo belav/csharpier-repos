@@ -30,7 +30,8 @@ namespace System.Web.WebPages.Html
         public IHtmlString ValidationMessage(
             string name,
             IDictionary<string, object> htmlAttributes
-        ) {
+        )
+        {
             return ValidationMessage(name, null, htmlAttributes);
         }
 
@@ -47,7 +48,8 @@ namespace System.Web.WebPages.Html
             string name,
             string message,
             IDictionary<string, object> htmlAttributes
-        ) {
+        )
+        {
             if (String.IsNullOrEmpty(name))
             {
                 throw new ArgumentException(
@@ -67,7 +69,8 @@ namespace System.Web.WebPages.Html
             string name,
             string message,
             IDictionary<string, object> htmlAttributes
-        ) {
+        )
+        {
             var modelState = ModelState[name];
             IEnumerable<string> errors = null;
             if (modelState != null)
@@ -163,7 +166,8 @@ namespace System.Web.WebPages.Html
         public IHtmlString ValidationSummary(
             string message,
             IDictionary<string, object> htmlAttributes
-        ) {
+        )
+        {
             return ValidationSummary(
                 message,
                 excludeFieldErrors: false,
@@ -175,7 +179,8 @@ namespace System.Web.WebPages.Html
             string message,
             bool excludeFieldErrors,
             object htmlAttributes
-        ) {
+        )
+        {
             return ValidationSummary(
                 message,
                 excludeFieldErrors,
@@ -187,7 +192,8 @@ namespace System.Web.WebPages.Html
             string message,
             bool excludeFieldErrors,
             IDictionary<string, object> htmlAttributes
-        ) {
+        )
+        {
             return BuildValidationSummary(message, excludeFieldErrors, htmlAttributes);
         }
 
@@ -195,7 +201,8 @@ namespace System.Web.WebPages.Html
             string message,
             bool excludeFieldErrors,
             IDictionary<string, object> htmlAttributes
-        ) {
+        )
+        {
             IEnumerable<string> errors = null;
             if (excludeFieldErrors)
             {

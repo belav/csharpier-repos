@@ -55,7 +55,8 @@ namespace Microsoft.EntityFrameworkCore.Storage.Internal
         public virtual void AddDbParameter(
             DbCommand command,
             IReadOnlyDictionary<string, object?> parameterValues
-        ) {
+        )
+        {
             Check.NotNull(command, nameof(command));
             Check.NotNull(parameterValues, nameof(parameterValues));
 

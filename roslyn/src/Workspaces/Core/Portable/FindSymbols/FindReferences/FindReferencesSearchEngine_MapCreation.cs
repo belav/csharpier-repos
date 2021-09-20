@@ -36,10 +36,12 @@ namespace Microsoft.CodeAnalysis.FindSymbols
 
         private async Task<ProjectToDocumentMap> CreateProjectToDocumentMapAsync(
             ProjectMap projectMap
-        ) {
+        )
+        {
             using (
                 Logger.LogBlock(FunctionId.FindReference_CreateDocumentMapAsync, _cancellationToken)
-            ) {
+            )
+            {
                 using var _ = ArrayBuilder<
                     Task<(ImmutableArray<Document>, SymbolGroup, ISymbol, IReferenceFinder)>
                 >.GetInstance(out var tasks);
@@ -96,7 +98,8 @@ namespace Microsoft.CodeAnalysis.FindSymbols
             SymbolGroup group,
             ISymbol symbol,
             IReferenceFinder finder
-        ) {
+        )
+        {
             var documents = await finder.DetermineDocumentsToSearchAsync(
                     symbol,
                     project,
@@ -114,10 +117,12 @@ namespace Microsoft.CodeAnalysis.FindSymbols
 
         private async Task<ProjectMap> CreateProjectMapAsync(
             ConcurrentSet<SymbolGroup> symbolGroups
-        ) {
+        )
+        {
             using (
                 Logger.LogBlock(FunctionId.FindReference_CreateProjectMapAsync, _cancellationToken)
-            ) {
+            )
+            {
                 var projectMap = new ProjectMap();
 
                 var scope = _documents?.Select(d => d.Project).ToImmutableHashSet();
@@ -155,13 +160,15 @@ namespace Microsoft.CodeAnalysis.FindSymbols
         private async Task<ConcurrentSet<SymbolGroup>> DetermineAllSymbolsAsync(
             ISymbol symbol,
             FindReferencesCascadeDirection cascadeDirection
-        ) {
+        )
+        {
             using (
                 Logger.LogBlock(
                     FunctionId.FindReference_DetermineAllSymbolsAsync,
                     _cancellationToken
                 )
-            ) {
+            )
+            {
                 var result = new ConcurrentSet<SymbolGroup>();
                 await DetermineAllSymbolsCoreAsync(symbol, cascadeDirection, result)
                     .ConfigureAwait(false);
@@ -173,7 +180,8 @@ namespace Microsoft.CodeAnalysis.FindSymbols
             ISymbol symbol,
             FindReferencesCascadeDirection cascadeDirection,
             ConcurrentSet<SymbolGroup> result
-        ) {
+        )
+        {
             _cancellationToken.ThrowIfCancellationRequested();
 
             var searchSymbol = MapToAppropriateSymbol(symbol);
@@ -229,7 +237,8 @@ namespace Microsoft.CodeAnalysis.FindSymbols
                                     if (
                                         symbolProject?.LanguageServices.GetService<ILanguageServiceReferenceFinder>() is
                                         { } service
-                                    ) {
+                                    )
+                                    {
                                         symbols = await service.DetermineCascadedSymbolsAsync(
                                                 searchSymbol,
                                                 symbolProject,
@@ -275,7 +284,8 @@ namespace Microsoft.CodeAnalysis.FindSymbols
             ConcurrentSet<SymbolGroup> result,
             ImmutableArray<(ISymbol symbol, FindReferencesCascadeDirection cascadeDirection)> symbols,
             ArrayBuilder<Task> symbolTasks
-        ) {
+        )
+        {
             if (!symbols.IsDefault)
             {
                 foreach (var (symbol, cascadeDirection) in symbols)
@@ -348,7 +358,8 @@ namespace Microsoft.CodeAnalysis.FindSymbols
             if (
                 searchSymbol.IsConstructor()
                 && searchSymbol.ContainingType.TypeKind == TypeKind.Delegate
-            ) {
+            )
+            {
                 searchSymbol = symbol.ContainingType;
             }
 

@@ -198,7 +198,8 @@ namespace LOHCompactAPI
             Type GCType = Type.GetType("System.GC");
             foreach (
                 MethodInfo m in GCType.GetMethods(BindingFlags.Static | BindingFlags.NonPublic)
-            ) {
+            )
+            {
                 if (m.Name.Equals("_CollectionCount") && m.GetParameters().Length == 2)
                     collectionCountmethod = m;
             }

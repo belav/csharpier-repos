@@ -37,7 +37,8 @@ namespace Microsoft.AspNetCore.Routing
             this LinkParser parser,
             string endpointName,
             PathString path
-        ) {
+        )
+        {
             if (parser == null)
             {
                 throw new ArgumentNullException(nameof(parser));

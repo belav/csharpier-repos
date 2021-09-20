@@ -19,7 +19,8 @@ namespace System.Text.Tests
             byte[] bytes,
             int byteIndex,
             bool flush
-        ) {
+        )
+        {
             throw new Exception("The method or operation is not implemented.");
         }
     }

@@ -43,7 +43,8 @@ namespace Microsoft.EntityFrameworkCore.Infrastructure
             IDictionary<Type, Func<object>> fakeFactories,
             Action<ServiceCollection> serviceCollectionBuilder,
             Dictionary<string, IList<string>> eventMappings = null
-        ) {
+        )
+        {
             var testLoggerFactory = new TestLoggerFactory(loggerDefinitions);
             var testLogger = testLoggerFactory.Logger;
             var testDiagnostics = new TestDiagnosticSource();
@@ -87,7 +88,8 @@ namespace Microsoft.EntityFrameworkCore.Infrastructure
                 if (
                     eventMappings == null
                     || !eventMappings.TryGetValue(eventName, out var mappedNames)
-                ) {
+                )
+                {
                     mappedNames = new List<string> { eventName };
                 }
 
@@ -198,7 +200,8 @@ namespace Microsoft.EntityFrameworkCore.Infrastructure
                             if (
                                 enableFor == eventId.Name
                                 && categoryName != DbLoggerCategory.Scaffolding.Name
-                            ) {
+                            )
+                            {
                                 Assert.Equal(eventId.Name, testDiagnostics.LoggedEventName);
                                 if (testDiagnostics.LoggedMessage != null)
                                 {

@@ -56,7 +56,8 @@ namespace Microsoft.CodeAnalysis.Editor.QuickInfo
             ITextEditorFactoryService textEditorFactoryService,
             IContentType contentType = null,
             ITextViewRoleSet roleSet = null
-        ) {
+        )
+        {
             var content = new ProjectionBufferContent(
                 threadingContext,
                 spans,

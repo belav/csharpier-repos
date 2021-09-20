@@ -87,7 +87,8 @@ namespace Microsoft.DotNet.CoreSetup.Test
         /// <param name="appHostSourcePath">The path to the source apphost.</param>
         private static unsafe void SetWindowsGraphicalUserInterfaceBit(
             MemoryMappedViewAccessor accessor
-        ) {
+        )
+        {
             byte* pointer = null;
 
             try
@@ -100,7 +101,8 @@ namespace Microsoft.DotNet.CoreSetup.Test
                 if (
                     ((UInt16*)bytes)[0] != PEFileSignature
                     || accessor.Capacity < PEHeaderPointerOffset + sizeof(UInt32)
-                ) {
+                )
+                {
                     throw new Exception("apphost is not a Windows exe.");
                 }
 

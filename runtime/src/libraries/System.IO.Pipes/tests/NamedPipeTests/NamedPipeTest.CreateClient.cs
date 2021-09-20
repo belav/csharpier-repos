@@ -103,7 +103,8 @@ namespace System.IO.Pipes.Tests
         [InlineData(PipeDirection.Out)]
         public static void ReservedPipeName_Throws_ArgumentOutOfRangeException(
             PipeDirection direction
-        ) {
+        )
+        {
             const string serverName = ".";
             const string reservedName = "anonymous";
             AssertExtensions.Throws<ArgumentOutOfRangeException>(
@@ -171,7 +172,8 @@ namespace System.IO.Pipes.Tests
         [InlineData((PipeDirection)123)]
         public static void InvalidPipeDirection_Throws_ArgumentOutOfRangeException(
             PipeDirection direction
-        ) {
+        )
+        {
             AssertExtensions.Throws<ArgumentOutOfRangeException>(
                 "direction",
                 () => new NamedPipeClientStream(".", "client1", direction)
@@ -199,7 +201,8 @@ namespace System.IO.Pipes.Tests
         [InlineData(PipeDirection.Out)]
         public static void InvalidPipeOptions_Throws_ArgumentOutOfRangeException(
             PipeDirection direction
-        ) {
+        )
+        {
             AssertExtensions.Throws<ArgumentOutOfRangeException>(
                 "options",
                 () => new NamedPipeClientStream(".", "client1", direction, (PipeOptions)255)
@@ -223,7 +226,8 @@ namespace System.IO.Pipes.Tests
         [InlineData(PipeDirection.Out)]
         public static void InvalidImpersonationLevel_Throws_ArgumentOutOfRangeException(
             PipeDirection direction
-        ) {
+        )
+        {
             AssertExtensions.Throws<ArgumentOutOfRangeException>(
                 "impersonationLevel",
                 () =>
@@ -280,7 +284,8 @@ namespace System.IO.Pipes.Tests
                     8,
                     FileOptions.DeleteOnClose
                 )
-            ) {
+            )
+            {
                 SafeFileHandle safeHandle = fs.SafeFileHandle;
 
                 bool gotRef = false;

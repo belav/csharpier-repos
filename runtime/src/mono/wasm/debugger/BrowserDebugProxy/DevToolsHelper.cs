@@ -207,7 +207,8 @@ namespace Microsoft.WebAssembly.Diagnostics
             int index,
             string name,
             string newValue
-        ) {
+        )
+        {
             return new MonoCommands(
                 $"MONO.mono_wasm_set_variable_value({scopeId}, {index}, '{name}', '{newValue}')"
             );
@@ -217,7 +218,8 @@ namespace Microsoft.WebAssembly.Diagnostics
             int scopeId,
             string expr,
             params VarInfo[] vars
-        ) {
+        )
+        {
             var var_ids = vars.Select(v => new { index = v.Index, name = v.Name }).ToArray();
             return new MonoCommands(
                 $"MONO.mono_wasm_eval_member_access({scopeId}, {JsonConvert.SerializeObject(var_ids)}, '', '{expr}')"
@@ -300,7 +302,8 @@ namespace Microsoft.WebAssembly.Diagnostics
             SourceLocation loc,
             string condition,
             BreakpointState state
-        ) {
+        )
+        {
             this.StackId = stackId;
             this.Location = loc;
             this.State = state;

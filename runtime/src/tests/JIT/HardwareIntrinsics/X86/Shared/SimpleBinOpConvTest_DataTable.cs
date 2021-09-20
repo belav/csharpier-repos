@@ -29,14 +29,16 @@ namespace JIT.HardwareIntrinsics.X86
             TOp2 inData2,
             TResult[] outArray,
             int alignment
-        ) {
+        )
+        {
             int sizeOfinArray1 = inArray1.Length * Unsafe.SizeOf<TOp1>();
             int sizeOfoutArray = outArray.Length * Unsafe.SizeOf<TResult>();
             if (
                 (alignment != 32 && alignment != 16)
                 || (alignment * 2) < sizeOfinArray1
                 || (alignment * 2) < sizeOfoutArray
-            ) {
+            )
+            {
                 throw new ArgumentException("Invalid value of alignment");
             }
 

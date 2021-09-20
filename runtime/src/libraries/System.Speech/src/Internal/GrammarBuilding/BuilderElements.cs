@@ -152,7 +152,8 @@ namespace System.Speech.Internal.GrammarBuilding
             IElementFactory elementFactory,
             IRule parent,
             IdentifierCollection ruleIds
-        ) {
+        )
+        {
             foreach (GrammarBuilderBase buider in Items)
             {
                 IElement element = buider.CreateElement(elementFactory, parent, parent, ruleIds);
@@ -169,7 +170,8 @@ namespace System.Speech.Internal.GrammarBuilding
             IItem parent,
             IRule rule,
             IdentifierCollection ruleIds
-        ) {
+        )
+        {
             foreach (GrammarBuilderBase buider in Items)
             {
                 IElement element = buider.CreateElement(elementFactory, parent, rule, ruleIds);
@@ -248,7 +250,8 @@ namespace System.Speech.Internal.GrammarBuilding
 
         private void RemoveDictionaryElements(
             SortedDictionary<int, Collection<BuilderElements>> dict
-        ) {
+        )
+        {
             // Recursive search from a matching subtree
             foreach (GrammarBuilderBase item in Items)
             {

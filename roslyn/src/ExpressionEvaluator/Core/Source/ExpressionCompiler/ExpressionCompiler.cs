@@ -37,7 +37,8 @@ namespace Microsoft.CodeAnalysis.ExpressionEvaluator
         public ExpressionCompiler(
             IDkmLanguageFrameDecoder languageFrameDecoder,
             IDkmLanguageInstructionDecoder languageInstructionDecoder
-        ) {
+        )
+        {
             _languageFrameDecoder = languageFrameDecoder;
             _languageInstructionDecoder = languageInstructionDecoder;
             _useReferencedAssembliesOnly = GetUseReferencedAssembliesOnlySetting();
@@ -47,7 +48,8 @@ namespace Microsoft.CodeAnalysis.ExpressionEvaluator
             DkmInspectionContext inspectionContext,
             DkmClrInstructionAddress instructionAddress,
             bool argumentsOnly
-        ) {
+        )
+        {
             try
             {
                 var moduleInstance = instructionAddress.ModuleInstance;
@@ -99,7 +101,8 @@ namespace Microsoft.CodeAnalysis.ExpressionEvaluator
         private static ImmutableArray<Alias> GetAliases(
             DkmClrRuntimeInstance runtimeInstance,
             DkmInspectionContext inspectionContext
-        ) {
+        )
+        {
             var dkmAliases = runtimeInstance.GetAliases(inspectionContext);
             if (dkmAliases == null)
             {
@@ -129,7 +132,8 @@ namespace Microsoft.CodeAnalysis.ExpressionEvaluator
             DkmInspectionContext inspectionContext,
             out string? error,
             out DkmCompiledClrInspectionQuery? result
-        ) {
+        )
+        {
             try
             {
                 var moduleInstance = instructionAddress.ModuleInstance;
@@ -172,7 +176,8 @@ namespace Microsoft.CodeAnalysis.ExpressionEvaluator
             DkmEvaluationResult lValue,
             out string? error,
             out DkmCompiledClrInspectionQuery? result
-        ) {
+        )
+        {
             try
             {
                 var moduleInstance = instructionAddress.ModuleInstance;
@@ -224,7 +229,8 @@ namespace Microsoft.CodeAnalysis.ExpressionEvaluator
             int token,
             out string? error,
             out DkmCompiledClrInspectionQuery? result
-        ) {
+        )
+        {
             try
             {
                 var runtimeInstance = moduleInstance.RuntimeInstance;
@@ -272,7 +278,8 @@ namespace Microsoft.CodeAnalysis.ExpressionEvaluator
 
         internal MakeAssemblyReferencesKind GetMakeAssemblyReferencesKind(
             bool useReferencedModulesOnly
-        ) {
+        )
+        {
             if (useReferencedModulesOnly)
             {
                 return MakeAssemblyReferencesKind.DirectReferencesOnly;
@@ -289,7 +296,8 @@ namespace Microsoft.CodeAnalysis.ExpressionEvaluator
             DkmUtilities.GetMetadataBytesPtrFunction getMetaDataBytesPtrFunction,
             ImmutableArray<AssemblyIdentity> missingAssemblyIdentities,
             ref ImmutableArray<MetadataBlock> references
-        ) {
+        )
+        {
             var newReferences = DkmUtilities.GetMetadataBlocks(
                 getMetaDataBytesPtrFunction,
                 missingAssemblyIdentities
@@ -312,7 +320,8 @@ namespace Microsoft.CodeAnalysis.ExpressionEvaluator
             DkmModuleInstance moduleInstance,
             DkmWorkList workList,
             DkmEventDescriptor eventDescriptor
-        ) {
+        )
+        {
             RemoveDataItemIfNecessary(moduleInstance);
         }
 
@@ -324,7 +333,8 @@ namespace Microsoft.CodeAnalysis.ExpressionEvaluator
             DkmStackWalkFrame frame,
             DkmVariableInfoFlags argumentFlags,
             DkmCompletionRoutine<DkmGetFrameNameAsyncResult> completionRoutine
-        ) {
+        )
+        {
             _languageFrameDecoder.GetFrameName(
                 inspectionContext,
                 workList,
@@ -339,7 +349,8 @@ namespace Microsoft.CodeAnalysis.ExpressionEvaluator
             DkmWorkList workList,
             DkmStackWalkFrame frame,
             DkmCompletionRoutine<DkmGetFrameReturnTypeAsyncResult> completionRoutine
-        ) {
+        )
+        {
             _languageFrameDecoder.GetFrameReturnType(
                 inspectionContext,
                 workList,
@@ -351,7 +362,8 @@ namespace Microsoft.CodeAnalysis.ExpressionEvaluator
         string IDkmLanguageInstructionDecoder.GetMethodName(
             DkmLanguageInstructionAddress languageInstructionAddress,
             DkmVariableInfoFlags argumentFlags
-        ) {
+        )
+        {
             return _languageInstructionDecoder.GetMethodName(
                 languageInstructionAddress,
                 argumentFlags
@@ -409,7 +421,8 @@ namespace Microsoft.CodeAnalysis.ExpressionEvaluator
             DkmClrInstructionAddress instructionAddress,
             ImmutableArray<MetadataBlock> metadataBlocks,
             bool useReferencedModulesOnly
-        ) {
+        )
+        {
             var moduleInstance = instructionAddress.ModuleInstance;
             var methodToken = instructionAddress.MethodId.Token;
             int localSignatureToken;
@@ -459,7 +472,8 @@ namespace Microsoft.CodeAnalysis.ExpressionEvaluator
             CreateContextDelegate createContext,
             CompileDelegate<TResult> compile,
             out string? errorMessage
-        ) {
+        )
+        {
             var metadataBlocks = GetMetadataBlocks(appDomain, runtimeInstance);
             return CompileWithRetry(
                 metadataBlocks,
@@ -479,7 +493,8 @@ namespace Microsoft.CodeAnalysis.ExpressionEvaluator
             CompileDelegate<TResult> compile,
             DkmUtilities.GetMetadataBytesPtrFunction getMetaDataBytesPtr,
             out string? errorMessage
-        ) {
+        )
+        {
             TResult compileResult;
 
             PooledHashSet<AssemblyIdentity>? assembliesLoadedInRetryLoop = null;
@@ -578,7 +593,8 @@ namespace Microsoft.CodeAnalysis.ExpressionEvaluator
                 string typeName,
                 ReadOnlyCollection<DkmClrLocalVariableInfo> locals,
                 ReadOnlyCollection<byte> assembly
-            ) {
+            )
+            {
                 TypeName = typeName;
                 Locals = locals;
                 Assembly = assembly;
@@ -593,7 +609,8 @@ namespace Microsoft.CodeAnalysis.ExpressionEvaluator
             internal CompileExpressionResult(
                 CompileResult? compileResult,
                 ResultProperties resultProperties
-            ) {
+            )
+            {
                 CompileResult = compileResult;
                 ResultProperties = resultProperties;
             }

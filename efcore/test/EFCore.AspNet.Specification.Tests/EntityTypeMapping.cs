@@ -121,7 +121,8 @@ namespace Microsoft.EntityFrameworkCore
         public static void AssertEqual(
             IReadOnlyList<EntityTypeMapping> expected,
             IReadOnlyList<EntityTypeMapping> actual
-        ) {
+        )
+        {
             Assert.Equal(expected.Count, actual.Count);
             for (var i = 0; i < expected.Count; i++)
             {

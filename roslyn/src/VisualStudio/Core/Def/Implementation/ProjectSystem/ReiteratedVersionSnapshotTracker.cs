@@ -63,7 +63,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation
                 _trackingBuffer == buffer
                 && buffer != null
                 && _latestReiteratedVersionSnapshot != null
-            ) {
+            )
+            {
                 buffer.ChangedHighPriority -= OnTextBufferChanged;
 
                 _trackingBuffer = null;
@@ -82,7 +83,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation
                     && e.AfterVersion != null
                     && snapshot.Version.ReiteratedVersionNumber
                         < e.AfterVersion.ReiteratedVersionNumber
-                ) {
+                )
+                {
                     _latestReiteratedVersionSnapshot = e.After;
                 }
             }

@@ -28,7 +28,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
         {
             public override InternalSyntax.CSharpSyntaxNode VisitToken(
                 InternalSyntax.SyntaxToken token
-            ) {
+            )
+            {
                 return InternalSyntax.SyntaxFactory.MissingToken(token.Kind);
             }
         }
@@ -37,7 +38,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
         {
             protected override InternalSyntax.CSharpSyntaxNode DefaultVisit(
                 InternalSyntax.CSharpSyntaxNode node
-            ) {
+            )
+            {
                 return node;
             }
         }

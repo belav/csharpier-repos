@@ -177,7 +177,8 @@ namespace Castle.Components.DictionaryAdapter.Tests
             Func<TElement, IEnumerable<TElement>> childSelector,
             Visitor<TElement, TResult> childVisitor,
             Visitor<TElement, TResult> primitiveVisitor
-        ) {
+        )
+        {
             var elements = new Queue<TElement>();
             var element = startElement;
             var result = defaultResult;
@@ -246,7 +247,8 @@ namespace Castle.Components.DictionaryAdapter.Tests
             IEnumerable<TSource1> source1,
             IEnumerable<TSource2> source2,
             Func<TSource1, TSource2, TResult> selector
-        ) {
+        )
+        {
             using (var enumerator1 = source1.GetEnumerator())
             using (var enumerator2 = source2.GetEnumerator())
             {

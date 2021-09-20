@@ -38,7 +38,8 @@ namespace Microsoft.CodeAnalysis.CSharp.EncapsulateField
             Document document,
             SyntaxAnnotation declarationAnnotation,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var root = await document.GetSyntaxRootAsync(cancellationToken).ConfigureAwait(false);
 
             var declarator = root.GetAnnotatedNodes<VariableDeclaratorSyntax>(declarationAnnotation)
@@ -160,7 +161,8 @@ namespace Microsoft.CodeAnalysis.CSharp.EncapsulateField
             Document document,
             TextSpan span,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var semanticModel = await document.GetSemanticModelAsync(cancellationToken)
                 .ConfigureAwait(false);
             var root = await document.GetSyntaxRootAsync(cancellationToken).ConfigureAwait(false);
@@ -198,7 +200,8 @@ namespace Microsoft.CodeAnalysis.CSharp.EncapsulateField
 
         protected override (string fieldName, string propertyName) GenerateFieldAndPropertyNames(
             IFieldSymbol field
-        ) {
+        )
+        {
             // Special case: if the field is "new", we will preserve its original name and the new keyword.
             if (field.DeclaredAccessibility == Accessibility.Private || IsNew(field))
             {

@@ -24,7 +24,8 @@ namespace AutoMapper
             LambdaExpression destinationExpression,
             MemberPath memberPath,
             TypeMap typeMap
-        ) {
+        )
+        {
             MemberPath = memberPath;
             TypeMap = typeMap;
             DestinationExpression = destinationExpression;

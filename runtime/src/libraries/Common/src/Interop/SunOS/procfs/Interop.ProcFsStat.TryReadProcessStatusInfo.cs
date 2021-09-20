@@ -34,7 +34,8 @@ internal static partial class Interop
         internal static unsafe bool TryReadProcessStatusInfo(
             int pid,
             out ProcessStatusInfo statusInfo
-        ) {
+        )
+        {
             statusInfo = default;
             fixed (ProcessStatusInfo* pStatusInfo = &statusInfo)
             {

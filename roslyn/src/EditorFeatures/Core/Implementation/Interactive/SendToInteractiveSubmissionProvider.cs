@@ -42,7 +42,8 @@ namespace Microsoft.CodeAnalysis.Editor.Interactive
             IEditorOptions editorOptions,
             EditorCommandArgs args,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var selectedSpans = args.TextView.Selection.IsEmpty
                 ? GetExpandedLineAsync(editorOptions, args, cancellationToken)
                       .WaitAndGetResult(cancellationToken)
@@ -57,7 +58,8 @@ namespace Microsoft.CodeAnalysis.Editor.Interactive
             IEditorOptions editorOptions,
             EditorCommandArgs args,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var selectedSpans = GetSelectedLine(args.TextView);
             var candidateSubmission = GetSubmissionFromSelectedSpans(editorOptions, selectedSpans);
             return CanParseSubmission(candidateSubmission)
@@ -79,7 +81,8 @@ namespace Microsoft.CodeAnalysis.Editor.Interactive
             EditorCommandArgs args,
             ITextSnapshot snapshot,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var doc =
                 args.SubjectBuffer.CurrentSnapshot.GetOpenDocumentInCurrentContextWithChanges();
             var semanticDocument = await SemanticDocument.CreateAsync(doc, cancellationToken)
@@ -94,7 +97,8 @@ namespace Microsoft.CodeAnalysis.Editor.Interactive
             IEnumerable<SnapshotSpan> selectedSpans,
             EditorCommandArgs args,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var selectedSpansStart = selectedSpans.Min(span => span.Start);
             var selectedSpansEnd = selectedSpans.Max(span => span.End);
             var snapshot = args.TextView.TextSnapshot;

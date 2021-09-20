@@ -170,7 +170,8 @@ namespace System.Data
                 if (
                     table.SetLocaleValue(_dataSet.Locale, false, false)
                     || table.SetCaseSensitiveValue(_dataSet.CaseSensitive, false, false)
-                ) {
+                )
+                {
                     table.ResetIndexes();
                 }
                 OnCollectionChanged(
@@ -332,7 +333,8 @@ namespace System.Data
                 if (
                     NamesEqual(table.TableName, _dataSet.DataSetName, false, _dataSet.Locale) != 0
                     && !table._fNestedInDataset
-                ) {
+                )
+                {
                     throw ExceptionBuilder.DatasetConflictingName(_dataSet.DataSetName);
                 }
                 RegisterName(table.TableName, table.Namespace);
@@ -353,7 +355,8 @@ namespace System.Data
             int oldLength,
             DataTable[] newArray,
             int newLength
-        ) {
+        )
+        {
             // We're doing a smart diff of oldArray and newArray to find out what
             // should be removed.  We'll pass through oldArray and see if it exists
             // in newArray, and if not, do remove work.  newBase is an opt. in case
@@ -460,7 +463,8 @@ namespace System.Data
                         new ParentForeignKeyConstraintEnumerator(_dataSet, table);
                     constraints.GetNext();
 
-                ) {
+                )
+                {
                     ForeignKeyConstraint constraint = constraints.GetForeignKeyConstraint();
                     if (constraint.Table == table && constraint.RelatedTable == table) // we can go with (constraint.Table ==  constraint.RelatedTable)
                     {
@@ -481,7 +485,8 @@ namespace System.Data
                         new ChildForeignKeyConstraintEnumerator(_dataSet, table);
                     constraints.GetNext();
 
-                ) {
+                )
+                {
                     ForeignKeyConstraint constraint = constraints.GetForeignKeyConstraint();
                     if (constraint.Table == table && constraint.RelatedTable == table)
                     {
@@ -566,7 +571,8 @@ namespace System.Data
             string? tableNamespace,
             bool checkProperty,
             bool caseSensitive
-        ) {
+        )
+        {
             if (!caseSensitive)
             {
                 return (InternalIndexOf(name) >= 0);
@@ -582,7 +588,8 @@ namespace System.Data
                 if (
                     NamesEqual(table.TableName, name, true, _dataSet.Locale) == 1
                     && (ns == tableNamespace)
-                ) {
+                )
+                {
                     return true;
                 }
             }
@@ -826,7 +833,8 @@ namespace System.Data
                 if (
                     NamesEqual(name, table.TableName, true, locale) != 0
                     && (tbNamespace == table.Namespace)
-                ) {
+                )
+                {
                     throw ExceptionBuilder.DuplicateTableName(((DataTable)_list[i]!).TableName);
                 }
             }

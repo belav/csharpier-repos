@@ -728,7 +728,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.Symbols.Metadata.PE
             CSharpCompilation compilation,
             string className,
             string indexerDisplayString
-        ) {
+        )
+        {
             var @class = compilation.GlobalNamespace.GetMember<PENamedTypeSymbol>(className);
 
             var instanceIndexer = @class.GetIndexer<PEPropertySymbol>("Instance");
@@ -1185,7 +1186,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.Symbols.Metadata.PE
             bool expectSetter,
             string indexerDisplayString,
             bool suppressAssociatedPropertyCheck = false
-        ) {
+        )
+        {
             CheckParameterizedProperty(
                 indexer,
                 expectGetter,
@@ -1201,7 +1203,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.Symbols.Metadata.PE
             bool expectGetter,
             bool expectSetter,
             string propertyDisplayString
-        ) {
+        )
+        {
             CheckParameterizedProperty(
                 property,
                 expectGetter,
@@ -1219,7 +1222,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.Symbols.Metadata.PE
             string propertyDisplayString,
             bool expectIndexer,
             bool suppressAssociatedPropertyCheck
-        ) {
+        )
+        {
             Assert.Equal(SymbolKind.Property, property.Kind);
             Assert.Equal(expectIndexer, property.IsIndexer);
             Assert.NotEqual(expectIndexer, property.MustCallMethodsDirectly);
@@ -1262,7 +1266,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.Symbols.Metadata.PE
             PropertySymbol property,
             bool propertyIsIndexer,
             bool suppressAssociatedPropertyCheck
-        ) {
+        )
+        {
             Assert.NotNull(accessor);
             if (propertyIsIndexer)
             {

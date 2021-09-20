@@ -49,7 +49,8 @@ namespace Microsoft.CodeAnalysis.InvertLogical
                     !syntaxFacts.IsLogicalAndExpression(expression)
                     && !syntaxFacts.IsLogicalOrExpression(expression)
                 )
-            ) {
+            )
+            {
                 return;
             }
 
@@ -73,7 +74,8 @@ namespace Microsoft.CodeAnalysis.InvertLogical
                     CodeRefactoringHelpers.IsNodeUnderselected(expression, span)
                     || syntaxFacts.IsLogicalAndExpression(expression.Parent)
                     || syntaxFacts.IsLogicalOrExpression(expression.Parent)
-                ) {
+                )
+                {
                     return;
                 }
             }
@@ -91,7 +93,8 @@ namespace Microsoft.CodeAnalysis.InvertLogical
             Document document1,
             SyntaxNode binaryExpression,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             // We invert in two steps.  To invert `a op b` we are effectively generating two negations:
             // `!(!(a op b)`.  The inner `!` will distribute on the inside to make `!a op' !b` leaving
             // us with `!(!a op' !b)`.
@@ -116,7 +119,8 @@ namespace Microsoft.CodeAnalysis.InvertLogical
             Document document,
             SyntaxNode binaryExpression,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var semanticModel = await document.GetSemanticModelAsync(cancellationToken)
                 .ConfigureAwait(false);
             var root = await document.GetRequiredSyntaxRootAsync(cancellationToken)
@@ -141,7 +145,8 @@ namespace Microsoft.CodeAnalysis.InvertLogical
         private static async Task<Document> InvertOuterExpressionAsync(
             Document document,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var root = await document.GetRequiredSyntaxRootAsync(cancellationToken)
                 .ConfigureAwait(false);
             var semanticModel = await document.GetSemanticModelAsync(cancellationToken)
@@ -155,7 +160,8 @@ namespace Microsoft.CodeAnalysis.InvertLogical
             while (
                 syntaxFacts.IsParenthesizedExpression(expression.Parent)
                 || syntaxFacts.IsLogicalNotExpression(expression.Parent)
-            ) {
+            )
+            {
                 expression = expression.Parent;
             }
 

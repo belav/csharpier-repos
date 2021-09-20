@@ -212,7 +212,8 @@ public class ReliabilityFramework
                 }
                 else if (
                     String.Compare(arg.Substring(1, arg.IndexOf(':') - 1), exectime, true) == 0
-                ) {
+                )
+                {
                     timeValue = arg.Substring(exectime.Length + 2);
                 }
                 else
@@ -476,7 +477,8 @@ public class ReliabilityFramework
             if (
                 _curTestSet.AssemblyLoadContextLoaderMode
                 == AssemblyLoadContextLoaderMode.RoundRobin
-            ) {
+            )
+            {
                 // full isoloation & normal are handled by the way we setup
                 // tests in ReliabilityConfiguration.  Round robin needs extra
                 // logic when we create app domains.
@@ -627,7 +629,8 @@ public class ReliabilityFramework
                             if (
                                 _curTestSet.AssemblyLoadContextLoaderMode
                                 != AssemblyLoadContextLoaderMode.Lazy
-                            ) {
+                            )
+                            {
                                 Interlocked.Increment(ref LoadingCount);
 
                                 test.AssemblyLoadContextIndex =
@@ -740,7 +743,8 @@ public class ReliabilityFramework
                     && _failCount > 0
                     && ((_failCount * 100) / _testsRanCount) < (100 - testSet.PercentPassIsPass)
                 )
-            ) {
+            )
+            {
                 Console.WriteLine(
                     "Some tests failed, but below the fail percent ({0} ran, {1} failed, perecent={2})",
                     _testsRanCount,
@@ -851,7 +855,8 @@ public class ReliabilityFramework
         ref float pagesVal,
         ref float pageFaultsVal,
         ref float ourPageFaultsVal
-    ) {
+    )
+    {
         try
         {
             if (null == memCounter)
@@ -1078,7 +1083,8 @@ public class ReliabilityFramework
                             if (
                                 memVal < (_curTestSet.MinPercentMem - (memAdjust >> 2))
                                 && memAdjust < 25
-                            ) {
+                            )
+                            {
                                 memAdjust++;
                             }
                         }
@@ -1088,7 +1094,8 @@ public class ReliabilityFramework
                                 cpuVal
                                 < (_curTestSet.GetCurrentMinPercentCPU(timeRunning) + cpuAdjust)
                             )
-                        ) {
+                        )
+                        {
                             startTest = true;
                             // the more we adjust the adjuster the harder we make to adjust it in the future.  We have to fall out
                             // of the range of 1/4 of the adjuster value to increment it again.  (so, if cpu %==50, and cpuAdjust==8,
@@ -1100,7 +1107,8 @@ public class ReliabilityFramework
                                         - (cpuAdjust >> 2)
                                     )
                                 && cpuAdjust < 25
-                            ) {
+                            )
+                            {
                                 cpuAdjust++;
                             }
                         }
@@ -1127,7 +1135,8 @@ public class ReliabilityFramework
                             && (pagesVal > 75)
                             && (pageFaultsVal > 200)
                             && (ourPageFaultsVal > 150)
-                        ) {
+                        )
+                        {
                             _logger.WritePerfStats(
                                 pagesVal,
                                 pageFaultsVal,
@@ -1192,7 +1201,8 @@ public class ReliabilityFramework
                                     == AssemblyLoadContextLoaderMode.Lazy
                                 )
                             )
-                        ) {
+                        )
+                        {
                             bool fLogEntered = false;
 
                             // test the lock and see if we can enter.
@@ -1264,7 +1274,8 @@ public class ReliabilityFramework
                                     && !maximumCopiesRunning
                                     && !testTooLong
                                     && !otherGroupTestRunning
-                                ) {
+                                )
+                                {
                                     _logger.WriteTestStart(curTest);
                                     _logger.WriteToInstrumentationLog(
                                         _curTestSet,
@@ -1318,7 +1329,8 @@ public class ReliabilityFramework
                     if (
                         _curTestSet.DebugBreakOnMissingTest
                         && DateTime.Now.Subtract(_startTime) > minTimeToStartTest
-                    ) {
+                    )
+                    {
                         NewTestsNotStartingDebugBreak();
                     }
                 }
@@ -1367,7 +1379,8 @@ public class ReliabilityFramework
             _curTestSet.MaximumTime != 0
             && (DateTime.Now.Subtract(_startTime).Ticks / TimeSpan.TicksPerMinute)
                 >= _curTestSet.MaximumTime
-        ) {
+        )
+        {
             string msg = String.Format(
                 "Reached time limit, exiting: ran {0} tests out of {1}",
                 _testsRanCount,
@@ -1912,7 +1925,8 @@ public class ReliabilityFramework
                                         Thread.CurrentThread.ThreadState
                                         & System.Threading.ThreadState.AbortRequested
                                     ) != 0
-                                ) {
+                                )
+                                {
                                     UnexpectedThreadAbortDebugBreak();
                                     _logger.WriteToInstrumentationLog(
                                         _curTestSet,
@@ -1990,7 +2004,8 @@ public class ReliabilityFramework
                                 == AssemblyLoadContextLoaderMode.FullIsolation
                             || _curTestSet.AssemblyLoadContextLoaderMode
                                 == AssemblyLoadContextLoaderMode.Lazy
-                        ) {
+                        )
+                        {
                             // we're in full isolation & have test runs left.  we need to
                             // recreate the AssemblyLoadContext so that we don't die on statics.
                             lock (daTest)
@@ -2013,7 +2028,8 @@ public class ReliabilityFramework
                                     _curTestSet.MaximumLoops != 1
                                     && _curTestSet.AssemblyLoadContextLoaderMode
                                         != AssemblyLoadContextLoaderMode.Lazy
-                                ) {
+                                )
+                                {
                                     TestPreLoader(daTest, _curTestSet.DiscoveryPaths); // need to reload assembly & AssemblyLoadContext
                                 }
                                 _logger.WriteToInstrumentationLog(
@@ -2060,7 +2076,8 @@ public class ReliabilityFramework
                         if (
                             _curTestSet.AppDomainLoaderMode == AppDomainLoaderMode.FullIsolation
                             || _curTestSet.AppDomainLoaderMode == AppDomainLoaderMode.Lazy
-                        ) {
+                        )
+                        {
                             // we're in full isolation & have test runs left.  we need to
                             // recreate the app domain so that we don't die on statics.
                             lock (daTest)
@@ -2082,7 +2099,8 @@ public class ReliabilityFramework
                                 if (
                                     _curTestSet.MaximumLoops != 1
                                     && _curTestSet.AppDomainLoaderMode != AppDomainLoaderMode.Lazy
-                                ) {
+                                )
+                                {
                                     TestPreLoader(daTest, _curTestSet.DiscoveryPaths); // need to reload assembly & appdomain
                                 }
                                 _logger.WriteToInstrumentationLog(
@@ -2357,7 +2375,8 @@ public class ReliabilityFramework
                 _curTestSet.AssemblyLoadContextLoaderMode
                     != AssemblyLoadContextLoaderMode.RoundRobin
                 || test.CustomAction == CustomActionType.LegacySecurityPolicy
-            ) {
+            )
+            {
                 // TODO: can there be a parent ALC whose name we would like to prepend?
                 string assemblyLoadContextName =
                     "TestContext_" + test.Assembly + "_" + Guid.NewGuid().ToString();
@@ -2506,7 +2525,8 @@ public class ReliabilityFramework
             if (
                 _curTestSet.AppDomainLoaderMode != AppDomainLoaderMode.RoundRobin
                 || test.CustomAction == CustomActionType.LegacySecurityPolicy
-            ) {
+            )
+            {
                 string appDomainName =
                     AppDomain.CurrentDomain.FriendlyName
                     + "_"
@@ -2933,7 +2953,8 @@ Thanks for contributing to CLR Stress!
             if (
                 _curTestSet.ReportResults
                 && File.Exists(Environment.ExpandEnvironmentVariables("%SCRIPTSDIR%\\record.js"))
-            ) {
+            )
+            {
                 string arguments;
                 if (test == null)
                 {
@@ -3141,7 +3162,8 @@ Thanks for contributing to CLR Stress!
                     }
                     else if (
                         String.Compare(inputLine, 0, randSeedText, 0, randSeedText.Length) == 0
-                    ) {
+                    )
+                    {
                         int seed = Convert.ToInt32(
                             inputLine.Substring(
                                 randSeedText.Length,
@@ -3196,7 +3218,8 @@ Thanks for contributing to CLR Stress!
                 String.Compare(inputLine, 0, testPassText, 0, testPassText.Length) == 0
                 || String.Compare(inputLine, 0, testFailText, 0, testFailText.Length) == 0
                 || String.Compare(inputLine, 0, testRaceText, 0, testRaceText.Length) == 0
-            ) {
+            )
+            {
                 // opening <TestRun> tag.
                 continue;
             }
@@ -3316,7 +3339,8 @@ Thanks for contributing to CLR Stress!
                     if (
                         (curTestSet.Tests[i].AppDomain != null)
                         && (curTestSet.Tests[i].AppDomain.FriendlyName == ad.FriendlyName)
-                    ) {
+                    )
+                    {
                         //update testsRanCount to reflect missing tests
                         this.testsRanCount +=
                             curTestSet.Tests[i].ConcurrentCopies * curTestSet.MaximumLoops

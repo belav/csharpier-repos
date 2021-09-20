@@ -102,7 +102,8 @@ namespace MS.Internal.Xml.XPath
                         e.NodeType == XPathNodeType.Whitespace
                         || e.NodeType == XPathNodeType.SignificantWhitespace
                     )
-            ) {
+            )
+            {
                 if (NameTest)
                 {
                     if (_name.Equals(e.LocalName) || _name.Length == 0)

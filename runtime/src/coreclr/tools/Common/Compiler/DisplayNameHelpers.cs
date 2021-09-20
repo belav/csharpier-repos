@@ -109,7 +109,8 @@ namespace ILCompiler
                 StringBuilder sb,
                 PointerType type,
                 FormatOptions options
-            ) {
+            )
+            {
                 AppendName(sb, type.ParameterType, options);
                 sb.Append('*');
                 return default;
@@ -119,7 +120,8 @@ namespace ILCompiler
                 StringBuilder sb,
                 FunctionPointerType type,
                 FormatOptions options
-            ) {
+            )
+            {
                 MethodSignature signature = type.Signature;
 
                 sb.Append("delegate*<");
@@ -138,7 +140,8 @@ namespace ILCompiler
                 StringBuilder sb,
                 GenericParameterDesc type,
                 FormatOptions options
-            ) {
+            )
+            {
                 sb.Append(type.Name);
                 return default;
             }
@@ -147,7 +150,8 @@ namespace ILCompiler
                 StringBuilder sb,
                 SignatureMethodVariable type,
                 FormatOptions options
-            ) {
+            )
+            {
                 sb.Append("!!" + type.Index);
                 return default;
             }
@@ -156,7 +160,8 @@ namespace ILCompiler
                 StringBuilder sb,
                 SignatureTypeVariable type,
                 FormatOptions options
-            ) {
+            )
+            {
                 sb.Append("!" + type.Index);
                 return default;
             }
@@ -165,7 +170,8 @@ namespace ILCompiler
                 StringBuilder sb,
                 DefType type,
                 FormatOptions options
-            ) {
+            )
+            {
                 AppendName(sb, type.GetTypeDefinition(), options);
 
                 FormatOptions parameterOptions = options & ~FormatOptions.NamespaceQualify;
@@ -189,7 +195,8 @@ namespace ILCompiler
                 StringBuilder sb,
                 DefType type,
                 FormatOptions options
-            ) {
+            )
+            {
                 NamespaceQualify(sb, type, options);
                 sb.Append(type.Name);
                 return default;
@@ -200,7 +207,8 @@ namespace ILCompiler
                 DefType nestedType,
                 DefType containingType,
                 FormatOptions options
-            ) {
+            )
+            {
                 if ((options & FormatOptions.NamespaceQualify) != 0)
                 {
                     AppendName(sb, containingType, options);

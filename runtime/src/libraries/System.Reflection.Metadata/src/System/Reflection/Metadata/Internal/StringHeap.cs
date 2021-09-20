@@ -194,7 +194,8 @@ namespace System.Reflection.Metadata.Ecma335
             StringHandle handle,
             MetadataStringDecoder utf8Decoder,
             byte[]? prefixOpt
-        ) {
+        )
+        {
             Debug.Assert(handle.StringKind != StringKind.Virtual);
 
             int bytesRead;
@@ -234,7 +235,8 @@ namespace System.Reflection.Metadata.Ecma335
         private string GetVirtualHandleString(
             StringHandle handle,
             MetadataStringDecoder utf8Decoder
-        ) {
+        )
+        {
             Debug.Assert(handle.IsVirtual);
 
             return handle.StringKind switch
@@ -296,7 +298,8 @@ namespace System.Reflection.Metadata.Ecma335
             string value,
             MetadataStringDecoder utf8Decoder,
             bool ignoreCase
-        ) {
+        )
+        {
             Debug.Assert(value != null);
 
             if (handle.IsVirtual)
@@ -329,7 +332,8 @@ namespace System.Reflection.Metadata.Ecma335
             string value,
             MetadataStringDecoder utf8Decoder,
             bool ignoreCase
-        ) {
+        )
+        {
             Debug.Assert(value != null);
 
             if (handle.IsVirtual)

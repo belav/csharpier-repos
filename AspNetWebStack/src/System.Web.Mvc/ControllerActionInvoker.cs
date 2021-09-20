@@ -79,7 +79,8 @@ namespace System.Web.Mvc
             ControllerContext controllerContext,
             ActionDescriptor actionDescriptor,
             object actionReturnValue
-        ) {
+        )
+        {
             if (actionReturnValue == null)
             {
                 return new EmptyResult();
@@ -96,7 +97,8 @@ namespace System.Web.Mvc
 
         protected virtual ControllerDescriptor GetControllerDescriptor(
             ControllerContext controllerContext
-        ) {
+        )
+        {
             // Frequently called, so ensure delegate is static
             Type controllerType = controllerContext.Controller.GetType();
             ControllerDescriptor controllerDescriptor = DescriptorCache.GetDescriptor(
@@ -111,7 +113,8 @@ namespace System.Web.Mvc
             ControllerContext controllerContext,
             ControllerDescriptor controllerDescriptor,
             string actionName
-        ) {
+        )
+        {
             Contract.Assert(controllerContext != null);
             Contract.Assert(controllerContext.RouteData != null);
             Contract.Assert(controllerDescriptor != null);
@@ -155,7 +158,8 @@ namespace System.Web.Mvc
 
         private static List<DirectRouteCandidate> GetDirectRouteCandidates(
             ControllerContext controllerContext
-        ) {
+        )
+        {
             Debug.Assert(controllerContext != null);
             Debug.Assert(controllerContext.RouteData != null);
 
@@ -211,7 +215,8 @@ namespace System.Web.Mvc
         protected virtual FilterInfo GetFilters(
             ControllerContext controllerContext,
             ActionDescriptor actionDescriptor
-        ) {
+        )
+        {
             return new FilterInfo(_getFiltersThunk(controllerContext, actionDescriptor));
         }
 
@@ -225,7 +230,8 @@ namespace System.Web.Mvc
         protected virtual object GetParameterValue(
             ControllerContext controllerContext,
             ParameterDescriptor parameterDescriptor
-        ) {
+        )
+        {
             // collect all of the necessary binding properties
             Type parameterType = parameterDescriptor.ParameterType;
             IModelBinder binder = GetModelBinder(parameterDescriptor);
@@ -255,7 +261,8 @@ namespace System.Web.Mvc
         protected virtual IDictionary<string, object> GetParameterValues(
             ControllerContext controllerContext,
             ActionDescriptor actionDescriptor
-        ) {
+        )
+        {
             Dictionary<string, object> parametersDict = new Dictionary<string, object>(
                 StringComparer.OrdinalIgnoreCase
             );
@@ -293,7 +300,8 @@ namespace System.Web.Mvc
             if (
                 String.IsNullOrEmpty(actionName)
                 && !controllerContext.RouteData.HasDirectRouteMatch()
-            ) {
+            )
+            {
                 throw new ArgumentException(MvcResources.Common_NullOrEmpty, "actionName");
             }
 
@@ -425,7 +433,8 @@ namespace System.Web.Mvc
             ControllerContext controllerContext,
             ActionDescriptor actionDescriptor,
             IDictionary<string, object> parameters
-        ) {
+        )
+        {
             object returnValue = actionDescriptor.Execute(controllerContext, parameters);
             ActionResult result = CreateActionResult(
                 controllerContext,
@@ -439,7 +448,8 @@ namespace System.Web.Mvc
             IActionFilter filter,
             ActionExecutingContext preContext,
             Func<ActionExecutedContext> continuation
-        ) {
+        )
+        {
             filter.OnActionExecuting(preContext);
             if (preContext.Result != null)
             {
@@ -502,7 +512,8 @@ namespace System.Web.Mvc
             IList<IActionFilter> filters,
             ActionDescriptor actionDescriptor,
             IDictionary<string, object> parameters
-        ) {
+        )
+        {
             ActionExecutingContext preContext = new ActionExecutingContext(
                 controllerContext,
                 actionDescriptor,
@@ -531,7 +542,8 @@ namespace System.Web.Mvc
         protected virtual void InvokeActionResult(
             ControllerContext controllerContext,
             ActionResult actionResult
-        ) {
+        )
+        {
             actionResult.ExecuteResult(controllerContext);
         }
 
@@ -541,7 +553,8 @@ namespace System.Web.Mvc
             ResultExecutingContext preContext,
             ControllerContext controllerContext,
             ActionResult actionResult
-        ) {
+        )
+        {
             // Performance-sensitive
 
             // For compatbility, the following behavior must be maintained
@@ -629,7 +642,8 @@ namespace System.Web.Mvc
             ControllerContext controllerContext,
             IList<IResultFilter> filters,
             ActionResult actionResult
-        ) {
+        )
+        {
             ResultExecutingContext preContext = new ResultExecutingContext(
                 controllerContext,
                 actionResult
@@ -649,7 +663,8 @@ namespace System.Web.Mvc
             ControllerContext controllerContext,
             IList<IAuthenticationFilter> filters,
             ActionDescriptor actionDescriptor
-        ) {
+        )
+        {
             if (controllerContext == null)
             {
                 throw new ArgumentNullException("controllerContext");
@@ -689,7 +704,8 @@ namespace System.Web.Mvc
             IList<IAuthenticationFilter> filters,
             ActionDescriptor actionDescriptor,
             ActionResult result
-        ) {
+        )
+        {
             AuthenticationChallengeContext context = new AuthenticationChallengeContext(
                 controllerContext,
                 actionDescriptor,
@@ -709,7 +725,8 @@ namespace System.Web.Mvc
             ControllerContext controllerContext,
             IList<IAuthorizationFilter> filters,
             ActionDescriptor actionDescriptor
-        ) {
+        )
+        {
             AuthorizationContext context = new AuthorizationContext(
                 controllerContext,
                 actionDescriptor
@@ -731,7 +748,8 @@ namespace System.Web.Mvc
             ControllerContext controllerContext,
             IList<IExceptionFilter> filters,
             Exception exception
-        ) {
+        )
+        {
             ExceptionContext context = new ExceptionContext(controllerContext, exception);
             foreach (IExceptionFilter filter in filters.Reverse())
             {

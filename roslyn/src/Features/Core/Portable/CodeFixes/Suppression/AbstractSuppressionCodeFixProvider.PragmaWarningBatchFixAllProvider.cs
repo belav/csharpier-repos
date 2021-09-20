@@ -35,7 +35,8 @@ namespace Microsoft.CodeAnalysis.CodeFixes.Suppression
                 ConcurrentBag<(Diagnostic diagnostic, CodeAction action)> fixes,
                 FixAllState fixAllState,
                 CancellationToken cancellationToken
-            ) {
+            )
+            {
                 var pragmaActionsBuilder = ArrayBuilder<IPragmaBasedCodeAction>.GetInstance();
                 var pragmaDiagnosticsBuilder = ArrayBuilder<Diagnostic>.GetInstance();
 
@@ -43,7 +44,8 @@ namespace Microsoft.CodeAnalysis.CodeFixes.Suppression
                     var diagnostic in diagnostics.Where(
                         d => d.Location.IsInSource && !d.IsSuppressed
                     )
-                ) {
+                )
+                {
                     var span = diagnostic.Location.SourceSpan;
                     var pragmaSuppressions =
                         await _suppressionFixProvider.GetPragmaSuppressionsAsync(

@@ -9,7 +9,8 @@ namespace System.Buffers.Text
             ReadOnlySpan<byte> source,
             out sbyte value,
             out int bytesConsumed
-        ) {
+        )
+        {
             if (source.Length < 1)
                 goto FalseExit;
 
@@ -97,7 +98,8 @@ namespace System.Buffers.Text
             ReadOnlySpan<byte> source,
             out short value,
             out int bytesConsumed
-        ) {
+        )
+        {
             if (source.Length < 1)
                 goto FalseExit;
 
@@ -201,7 +203,8 @@ namespace System.Buffers.Text
             ReadOnlySpan<byte> source,
             out int value,
             out int bytesConsumed
-        ) {
+        )
+        {
             if (source.Length < 1)
                 goto FalseExit;
 
@@ -347,7 +350,8 @@ namespace System.Buffers.Text
             ReadOnlySpan<byte> source,
             out long value,
             out int bytesConsumed
-        ) {
+        )
+        {
             if (source.Length < 1)
             {
                 bytesConsumed = 0;
@@ -439,7 +443,8 @@ namespace System.Buffers.Text
                     if (
                         parsedValue > long.MaxValue / 10
                         || parsedValue == long.MaxValue / 10 && nextDigitTooLarge
-                    ) {
+                    )
+                    {
                         bytesConsumed = 0;
                         value = default;
                         return false;

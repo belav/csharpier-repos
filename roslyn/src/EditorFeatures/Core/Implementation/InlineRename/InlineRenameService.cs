@@ -43,7 +43,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.InlineRename
             IFeatureServiceFactory featureServiceFactory,
             [ImportMany] IEnumerable<IRefactorNotifyService> refactorNotifyServices,
             IAsynchronousOperationListenerProvider listenerProvider
-        ) {
+        )
+        {
             _threadingContext = threadingContext;
             _waitIndicator = waitIndicator;
             _textBufferAssociatedViewService = textBufferAssociatedViewService;
@@ -57,7 +58,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.InlineRename
             Document document,
             TextSpan textSpan,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             if (_activeRenameSession != null)
             {
                 throw new InvalidOperationException(
@@ -116,11 +118,13 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.InlineRename
                 IInlineRenameInfo renameInfo,
                 Document document,
                 CancellationToken cancellationToken
-            ) {
+            )
+            {
                 if (
                     renameInfo is IInlineRenameInfo inlineRenameInfo
                     && inlineRenameInfo.DefinitionLocations != default
-                ) {
+                )
+                {
                     var workspace = document.Project.Solution.Workspace;
                     var navigationService =
                         workspace.Services.GetRequiredService<IDocumentNavigationService>();
@@ -156,7 +160,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.InlineRename
                                 documentSpan.SourceSpan,
                                 cancellationToken
                             )
-                        ) {
+                        )
+                        {
                             return new InlineRenameSessionInfo(
                                 EditorFeaturesResources.You_cannot_rename_this_element_because_it_is_in_a_location_that_cannot_be_navigated_to
                             );

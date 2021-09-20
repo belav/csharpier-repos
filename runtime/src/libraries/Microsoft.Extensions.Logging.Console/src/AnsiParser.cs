@@ -175,7 +175,8 @@ namespace Microsoft.Extensions.Logging.Console
             int number,
             bool isBright,
             out ConsoleColor? color
-        ) {
+        )
+        {
             color = number switch
             {
                 30 => ConsoleColor.Black,

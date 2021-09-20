@@ -1063,7 +1063,8 @@ namespace Test
 
         private static TagHelperDescriptor[] GetBindTagHelpers(
             TagHelperDescriptorProviderContext context
-        ) {
+        )
+        {
             return ExcludeBuiltInComponents(context).Where(t => t.IsBindTagHelper()).ToArray();
         }
     }

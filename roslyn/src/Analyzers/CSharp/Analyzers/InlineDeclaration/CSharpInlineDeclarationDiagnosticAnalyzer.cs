@@ -76,7 +76,8 @@ namespace Microsoft.CodeAnalysis.CSharp.InlineDeclaration
         private void AnalyzeSyntaxNode(
             SyntaxNodeAnalysisContext context,
             INamedTypeSymbol expressionTypeOpt
-        ) {
+        )
+        {
             var argumentNode = (ArgumentSyntax)context.Node;
             var csOptions = (CSharpParseOptions)context.Node.SyntaxTree.Options;
             if (csOptions.LanguageVersion < LanguageVersion.CSharp7)
@@ -113,7 +114,8 @@ namespace Microsoft.CodeAnalysis.CSharp.InlineDeclaration
                     SyntaxKind.IdentifierName,
                     out IdentifierNameSyntax identifierName
                 )
-            ) {
+            )
+            {
                 // has to be exactly the form "out i".  i.e. "out this.i" or "out v[i]" are legal
                 // cases for out-arguments, but could not be converted to an out-variable-declaration.
                 return;
@@ -128,7 +130,8 @@ namespace Microsoft.CodeAnalysis.CSharp.InlineDeclaration
             if (
                 !invocationOrCreation.IsKind(SyntaxKind.InvocationExpression)
                 && !invocationOrCreation.IsKind(SyntaxKind.ObjectCreationExpression)
-            ) {
+            )
+            {
                 // Out-variables are only legal with invocations and object creations.
                 // If we don't have one of those bail.  Note: we need hte parent to be
                 // one of these forms so we can accurately verify that inlining the
@@ -155,7 +158,8 @@ namespace Microsoft.CodeAnalysis.CSharp.InlineDeclaration
                     semanticModel.GetSymbolInfo(argumentExpression, cancellationToken).Symbol
                     is ILocalSymbol outLocalSymbol
                 )
-            ) {
+            )
+            {
                 // The out-argument wasn't referencing a local.  So we don't have an local
                 // declaration that we can attempt to inline here.
                 return;
@@ -171,7 +175,8 @@ namespace Microsoft.CodeAnalysis.CSharp.InlineDeclaration
                     localReference?.GetSyntax(cancellationToken)
                     is VariableDeclaratorSyntax localDeclarator
                 )
-            ) {
+            )
+            {
                 return;
             }
 
@@ -197,7 +202,8 @@ namespace Microsoft.CodeAnalysis.CSharp.InlineDeclaration
                 if (
                     !(localDeclarator.Initializer.Value is LiteralExpressionSyntax)
                     && !(localDeclarator.Initializer.Value is DefaultExpressionSyntax)
-                ) {
+                )
+                {
                     return;
                 }
             }
@@ -217,7 +223,8 @@ namespace Microsoft.CodeAnalysis.CSharp.InlineDeclaration
                     expressionTypeOpt,
                     cancellationToken
                 )
-            ) {
+            )
+            {
                 // out-vars are not allowed inside expression-trees.  So don't offer to
                 // fix if we're inside one.
                 return;
@@ -232,7 +239,8 @@ namespace Microsoft.CodeAnalysis.CSharp.InlineDeclaration
                     enclosingBlockOfLocalStatement,
                     outArgumentScope
                 )
-            ) {
+            )
+            {
                 return;
             }
 
@@ -241,7 +249,8 @@ namespace Microsoft.CodeAnalysis.CSharp.InlineDeclaration
             if (
                 dataFlow.ReadOutside.Contains(outLocalSymbol)
                 || dataFlow.WrittenOutside.Contains(outLocalSymbol)
-            ) {
+            )
+            {
                 // The variable is read or written from outside the block that the new variable
                 // would be scoped in.  This would cause a break.
                 //
@@ -260,7 +269,8 @@ namespace Microsoft.CodeAnalysis.CSharp.InlineDeclaration
                     argumentNode,
                     cancellationToken
                 )
-            ) {
+            )
+            {
                 return;
             }
 
@@ -273,7 +283,8 @@ namespace Microsoft.CodeAnalysis.CSharp.InlineDeclaration
                     enclosingBlockOfLocalStatement,
                     outLocalSymbol
                 )
-            ) {
+            )
+            {
                 return;
             }
 
@@ -308,7 +319,8 @@ namespace Microsoft.CodeAnalysis.CSharp.InlineDeclaration
             LocalDeclarationStatementSyntax localStatement,
             BlockSyntax enclosingBlock,
             ILocalSymbol outLocalSymbol
-        ) {
+        )
+        {
             // See if we have something like:
             //
             //      int i = 0;
@@ -383,7 +395,8 @@ namespace Microsoft.CodeAnalysis.CSharp.InlineDeclaration
             LocalDeclarationStatementSyntax localStatement,
             ArgumentSyntax argumentNode,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var localStatementStart = localStatement.Span.Start;
             var argumentNodeStart = argumentNode.Span.Start;
             var variableName = outSymbol.Name;
@@ -412,7 +425,8 @@ namespace Microsoft.CodeAnalysis.CSharp.InlineDeclaration
                         SyntaxKind.IdentifierName,
                         out IdentifierNameSyntax identifierName
                     )
-                ) {
+                )
+                {
                     // See if this looks like an accessor to the local variable syntactically.
                     if (identifierName.Identifier.ValueText == variableName)
                     {

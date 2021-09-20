@@ -89,13 +89,15 @@ namespace Microsoft.Internal
             Type instanceType,
             Type targetOpenInterfaceType,
             [NotNullWhen(true)] out Type? targetClosedInterfaceType
-        ) {
+        )
+        {
             // The interface must be open
             if (
                 !targetOpenInterfaceType.IsInterface
                 || !targetOpenInterfaceType.IsGenericTypeDefinition
                 || instanceType.IsGenericTypeDefinition
-            ) {
+            )
+            {
                 throw new Exception(SR.Diagnostic_InternalExceptionMessage);
             }
 
@@ -105,7 +107,8 @@ namespace Microsoft.Internal
                 && instanceType.IsGenericType
                 && instanceType.UnderlyingSystemType.GetGenericTypeDefinition()
                     == targetOpenInterfaceType.UnderlyingSystemType
-            ) {
+            )
+            {
                 targetClosedInterfaceType = instanceType;
                 return true;
             }
@@ -124,7 +127,8 @@ namespace Microsoft.Internal
                     targetInterface != null
                     && targetInterface.UnderlyingSystemType.GetGenericTypeDefinition()
                         == targetOpenInterfaceType.UnderlyingSystemType
-                ) {
+                )
+                {
                     targetClosedInterfaceType = targetInterface;
                     return true;
                 }
@@ -171,7 +175,8 @@ namespace Microsoft.Internal
                         | BindingFlags.NonPublic
                         | BindingFlags.DeclaredOnly
                 )
-            ) {
+            )
+            {
                 yield return method;
             }
         }
@@ -202,7 +207,8 @@ namespace Microsoft.Internal
                         | BindingFlags.NonPublic
                         | BindingFlags.DeclaredOnly
                 )
-            ) {
+            )
+            {
                 yield return m;
             }
         }

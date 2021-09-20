@@ -80,7 +80,8 @@ namespace Microsoft.EntityFrameworkCore.Query.SqlExpressions
             SqlExpression match,
             SqlExpression pattern,
             SqlExpression? escapeChar
-        ) {
+        )
+        {
             Check.NotNull(match, nameof(match));
             Check.NotNull(pattern, nameof(pattern));
 

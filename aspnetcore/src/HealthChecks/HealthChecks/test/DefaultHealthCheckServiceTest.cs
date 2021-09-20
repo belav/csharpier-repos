@@ -744,7 +744,8 @@ namespace Microsoft.Extensions.Diagnostics.HealthChecks
 
         private static DefaultHealthCheckService CreateHealthChecksService(
             Action<IHealthChecksBuilder> configure
-        ) {
+        )
+        {
             var services = new ServiceCollection();
             services.AddLogging();
             services.AddOptions();
@@ -783,7 +784,8 @@ namespace Microsoft.Extensions.Diagnostics.HealthChecks
             public Task<HealthCheckResult> CheckHealthAsync(
                 HealthCheckContext context,
                 CancellationToken cancellationToken = default
-            ) {
+            )
+            {
                 return Task.FromResult(HealthCheckResult.Healthy());
             }
         }
@@ -800,7 +802,8 @@ namespace Microsoft.Extensions.Diagnostics.HealthChecks
             public Task<HealthCheckResult> CheckHealthAsync(
                 HealthCheckContext context,
                 CancellationToken cancellationToken = default
-            ) {
+            )
+            {
                 try
                 {
                     _service.Check();
@@ -818,7 +821,8 @@ namespace Microsoft.Extensions.Diagnostics.HealthChecks
             public Task<HealthCheckResult> CheckHealthAsync(
                 HealthCheckContext context,
                 CancellationToken cancellationToken = default
-            ) {
+            )
+            {
                 var data = new Dictionary<string, object>()
                 {
                     { "name", context.Registration.Name },
@@ -832,7 +836,8 @@ namespace Microsoft.Extensions.Diagnostics.HealthChecks
             public Task<HealthCheckResult> CheckHealthAsync(
                 HealthCheckContext context,
                 CancellationToken cancellationToken = default
-            ) {
+            )
+            {
                 throw new Exception("check failed");
             }
         }

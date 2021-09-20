@@ -44,7 +44,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
             string expectedOutput,
             string metadataName,
             string expectedIL
-        ) {
+        )
+        {
             verify(source);
             verify(source.Replace("static (", "("));
 

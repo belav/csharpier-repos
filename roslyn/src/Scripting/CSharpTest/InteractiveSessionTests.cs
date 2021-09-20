@@ -1943,7 +1943,8 @@ new List<ArgumentException>()
             foreach (
                 var (assembly, aliases) in scriptCompilation.GetBoundReferenceManager()
                     .GetReferencedAssemblyAliases()
-            ) {
+            )
+            {
                 string name = assembly.Identity.Name;
 
                 switch (name)
@@ -2005,7 +2006,8 @@ new List<ArgumentException>()
             foreach (
                 var (assembly, aliases) in scriptCompilation.GetBoundReferenceManager()
                     .GetReferencedAssemblyAliases()
-            ) {
+            )
+            {
                 string name = assembly.Identity.Name;
 
                 switch (name)
@@ -2079,7 +2081,8 @@ typeof(Microsoft.CodeAnalysis.Scripting.Script)
             foreach (
                 var (assembly, aliases) in scriptCompilation.GetBoundReferenceManager()
                     .GetReferencedAssemblyAliases()
-            ) {
+            )
+            {
                 string name = assembly.Identity.Name;
 
                 switch (name)

@@ -187,7 +187,8 @@ namespace System.Speech.Recognition.SrgsGrammar
                         sUri.IndexOf("#grammar:dictation", StringComparison.Ordinal) == 0
                         || sUri.IndexOf("#grammar:dictation#spelling", StringComparison.Ordinal)
                             == 0
-                    ) {
+                    )
+                    {
                         uriFound = true;
                     }
                     else

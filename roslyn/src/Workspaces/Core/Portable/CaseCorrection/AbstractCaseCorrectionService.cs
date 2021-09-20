@@ -30,7 +30,8 @@ namespace Microsoft.CodeAnalysis.CaseCorrection
             Document document,
             ImmutableArray<TextSpan> spans,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             if (!spans.Any())
             {
                 return document;
@@ -73,7 +74,8 @@ namespace Microsoft.CodeAnalysis.CaseCorrection
             ImmutableArray<TextSpan> spans,
             Workspace workspace,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             using (Logger.LogBlock(FunctionId.CaseCorrection_CaseCorrect, cancellationToken))
             {
                 var normalizedSpanCollection = new NormalizedTextSpanCollection(spans);
@@ -81,7 +83,8 @@ namespace Microsoft.CodeAnalysis.CaseCorrection
 
                 using (
                     Logger.LogBlock(FunctionId.CaseCorrection_AddReplacements, cancellationToken)
-                ) {
+                )
+                {
                     AddReplacements(
                         semanticModel,
                         root,

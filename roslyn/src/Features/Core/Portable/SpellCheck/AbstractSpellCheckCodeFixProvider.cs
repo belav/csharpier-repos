@@ -67,11 +67,13 @@ namespace Microsoft.CodeAnalysis.SpellCheck
             Document document,
             SyntaxNode node,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             SemanticModel semanticModel = null;
             foreach (
                 var name in node.DescendantNodesAndSelf(DescendIntoChildren).OfType<TSimpleName>()
-            ) {
+            )
+            {
                 if (!ShouldSpellCheck(name))
                 {
                     continue;
@@ -105,7 +107,8 @@ namespace Microsoft.CodeAnalysis.SpellCheck
             Document document,
             SyntaxToken token,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var syntaxFacts = document.GetLanguageService<ISyntaxFactsService>();
             if (!syntaxFacts.IsWord(token))
             {
@@ -133,7 +136,8 @@ namespace Microsoft.CodeAnalysis.SpellCheck
             SyntaxToken nameToken,
             bool isGeneric,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var document = context.Document;
             var service = CompletionService.GetService(document);
 
@@ -196,7 +200,8 @@ namespace Microsoft.CodeAnalysis.SpellCheck
             bool isGeneric,
             CompletionList completionList,
             WordSimilarityChecker similarityChecker
-        ) {
+        )
+        {
             var document = context.Document;
             var cancellationToken = context.CancellationToken;
 
@@ -259,7 +264,8 @@ namespace Microsoft.CodeAnalysis.SpellCheck
             CompletionItem item,
             TextSpan completionListSpan,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var service = CompletionService.GetService(document);
             var change = await service.GetChangeAsync(
                     document,
@@ -280,7 +286,8 @@ namespace Microsoft.CodeAnalysis.SpellCheck
             string oldName,
             string newName,
             Document document
-        ) {
+        )
+        {
             return new SpellCheckCodeAction(
                 string.Format(FeaturesResources.Change_0_to_1, oldName, newName),
                 c => UpdateAsync(document, nameToken, newName, c),
@@ -293,7 +300,8 @@ namespace Microsoft.CodeAnalysis.SpellCheck
             SyntaxToken nameToken,
             string newName,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var root = await document.GetSyntaxRootAsync(cancellationToken).ConfigureAwait(false);
             var newRoot = root.ReplaceToken(nameToken, CreateIdentifier(nameToken, newName));
 

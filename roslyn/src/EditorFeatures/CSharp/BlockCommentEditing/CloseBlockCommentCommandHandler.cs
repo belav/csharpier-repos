@@ -31,7 +31,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.BlockCommentEditing
         public bool ExecuteCommand(
             TypeCharCommandArgs args,
             CommandExecutionContext executionContext
-        ) {
+        )
+        {
             if (args.TypedChar == '/')
             {
                 var caret = args.TextView.GetCaretPoint(args.SubjectBuffer);
@@ -45,7 +46,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.BlockCommentEditing
                         position >= 2
                         && snapshot[position - 1] == ' '
                         && snapshot[position - 2] == '*'
-                    ) {
+                    )
+                    {
                         var line = snapshot.GetLineFromPosition(position);
                         if (line.End == position && line.IsEmptyOrWhitespace(0, line.Length - 2))
                         {
@@ -58,7 +60,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.BlockCommentEditing
                                     out _,
                                     out _
                                 )
-                            ) {
+                            )
+                            {
                                 args.SubjectBuffer.Replace(
                                     new VisualStudio.Text.Span(position - 1, 1),
                                     "/"

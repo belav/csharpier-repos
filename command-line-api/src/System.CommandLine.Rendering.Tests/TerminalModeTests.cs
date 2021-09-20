@@ -41,7 +41,8 @@ namespace System.CommandLine.Rendering.Tests
         [InlineData(OutputMode.PlainText)]
         public async Task Sets_output_mode_to_Ansi_when_specified_by_output_directive(
             OutputMode specifiedOutputMode
-        ) {
+        )
+        {
             var console = new TestConsole();
             OutputMode detectedOutputMode = OutputMode.Auto;
 

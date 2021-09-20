@@ -24,7 +24,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Xaml
             IVsHierarchy pHierNew,
             uint itemidNew,
             string pszMkDocumentNew
-        ) {
+        )
+        {
             if ((grfAttribs & (uint)__VSRDTATTRIB.RDTA_MkDocument) != 0)
             {
                 this.OnDocumentMonikerChanged(
@@ -48,7 +49,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Xaml
             uint dwRDTLockType,
             uint dwReadLocksRemaining,
             uint dwEditLocksRemaining
-        ) {
+        )
+        {
             return VSConstants.E_NOTIMPL;
         }
 
@@ -67,7 +69,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Xaml
             uint dwRDTLockType,
             uint dwReadLocksRemaining,
             uint dwEditLocksRemaining
-        ) {
+        )
+        {
             return VSConstants.E_NOTIMPL;
         }
 

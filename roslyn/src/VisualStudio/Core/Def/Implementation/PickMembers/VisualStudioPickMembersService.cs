@@ -29,7 +29,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.PickMembers
             string title,
             ImmutableArray<ISymbol> members,
             ImmutableArray<PickMembersOption> options
-        ) {
+        )
+        {
             options = options.NullToEmpty();
 
             var viewModel = new PickMembersDialogViewModel(_glyphService, members, options);

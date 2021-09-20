@@ -25,7 +25,8 @@ namespace Microsoft.CodeAnalysis.MoveToNamespace
             string originalNamespace,
             ImmutableArray<string> namespaces,
             ContainerType container
-        ) {
+        )
+        {
             CanPerform = true;
             Document = document;
             SyntaxNode = syntaxNode;

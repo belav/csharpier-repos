@@ -31,7 +31,8 @@ namespace Microsoft.AspNetCore.Components
             Type eventArgsType,
             bool enableStopPropagation,
             bool enablePreventDefault
-        ) {
+        )
+        {
             if (attributeName == null)
             {
                 throw new ArgumentNullException(nameof(attributeName));

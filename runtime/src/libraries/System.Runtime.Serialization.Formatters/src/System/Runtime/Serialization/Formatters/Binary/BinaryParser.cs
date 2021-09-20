@@ -930,7 +930,8 @@ namespace System.Runtime.Serialization.Formatters.Binary
                     if (
                         Converter.IsWriteAsByteArray(pr._arrayElementTypeCode)
                         && (record._lowerBoundA[0] == 0)
-                    ) {
+                    )
+                    {
                         isPrimitiveArray = true;
                         ReadArrayAsBytes(pr);
                     }

@@ -24,7 +24,8 @@ namespace AutoMapper.UnitTests.Bug
                 DateTimeOffset? source,
                 DateTime? destination,
                 ResolutionContext context
-            ) {
+            )
+            {
                 if (source.HasValue)
                 {
                     return source.Value.DateTime;

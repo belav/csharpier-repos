@@ -412,7 +412,8 @@ namespace System.Xml.XPath
             int idxElem,
             XPathNode[] pageNmsp,
             int idxNmsp
-        ) {
+        )
+        {
             Debug.Assert(
                 pageElem[idxElem].NodeType == XPathNodeType.Element
                     && pageNmsp[idxNmsp].NodeType == XPathNodeType.Namespace

@@ -215,7 +215,8 @@ namespace System.Web.Http.Tracing
                         HttpErrorKeys.ExceptionMessageKey,
                         out exceptionMessageObject
                     )
-                ) {
+                )
+                {
                     messages.Add(
                         Error.Format(
                             HttpErrorExceptionMessageFormat,
@@ -237,7 +238,8 @@ namespace System.Web.Http.Tracing
                         HttpErrorKeys.InnerExceptionKey,
                         out innerExceptionObject
                     )
-                ) {
+                )
+                {
                     break;
                 }
 

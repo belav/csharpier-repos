@@ -212,7 +212,8 @@ namespace System.Runtime.Serialization.Formatters.Binary
         internal static bool IsPrimitiveArray(
             Type? type,
             [NotNullWhen(true)] out object? typeInformation
-        ) {
+        )
+        {
             if (ReferenceEquals(type, s_typeofBooleanArray))
                 typeInformation = InternalPrimitiveTypeE.Boolean;
             else if (ReferenceEquals(type, s_typeofByteArray))

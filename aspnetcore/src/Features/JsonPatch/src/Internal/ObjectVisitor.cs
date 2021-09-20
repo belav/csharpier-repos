@@ -35,7 +35,8 @@ namespace Microsoft.AspNetCore.JsonPatch.Internal
             ParsedPath path,
             IContractResolver contractResolver,
             IAdapterFactory adapterFactory
-        ) {
+        )
+        {
             _path = path;
             _contractResolver =
                 contractResolver ?? throw new ArgumentNullException(nameof(contractResolver));
@@ -65,7 +66,8 @@ namespace Microsoft.AspNetCore.JsonPatch.Internal
                         out var next,
                         out errorMessage
                     )
-                ) {
+                )
+                {
                     adapter = null;
                     return false;
                 }

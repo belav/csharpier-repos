@@ -24,7 +24,8 @@ namespace Microsoft.CodeAnalysis.ChangeSignature
         public ChangeSignatureCodeActionOperation(
             Solution changedSolution,
             string? confirmationMessage
-        ) {
+        )
+        {
             ChangedSolution =
                 changedSolution ?? throw new ArgumentNullException(nameof(changedSolution));
             ConfirmationMessage = confirmationMessage;
@@ -42,7 +43,8 @@ namespace Microsoft.CodeAnalysis.ChangeSignature
             Workspace workspace,
             IProgressTracker progressTracker,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             if (ConfirmationMessage != null)
             {
                 var notificationService =
@@ -52,7 +54,8 @@ namespace Microsoft.CodeAnalysis.ChangeSignature
                         ConfirmationMessage,
                         severity: NotificationSeverity.Warning
                     )
-                ) {
+                )
+                {
                     return false;
                 }
             }

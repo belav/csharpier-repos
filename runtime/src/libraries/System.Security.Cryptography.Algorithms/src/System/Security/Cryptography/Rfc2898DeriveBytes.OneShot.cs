@@ -43,7 +43,8 @@ namespace System.Security.Cryptography
             int iterations,
             HashAlgorithmName hashAlgorithm,
             int outputLength
-        ) {
+        )
+        {
             if (password is null)
                 throw new ArgumentNullException(nameof(password));
             if (salt is null)
@@ -86,7 +87,8 @@ namespace System.Security.Cryptography
             int iterations,
             HashAlgorithmName hashAlgorithm,
             int outputLength
-        ) {
+        )
+        {
             if (iterations <= 0)
                 throw new ArgumentOutOfRangeException(
                     nameof(iterations),
@@ -131,7 +133,8 @@ namespace System.Security.Cryptography
             Span<byte> destination,
             int iterations,
             HashAlgorithmName hashAlgorithm
-        ) {
+        )
+        {
             if (iterations <= 0)
                 throw new ArgumentOutOfRangeException(
                     nameof(iterations),
@@ -182,7 +185,8 @@ namespace System.Security.Cryptography
             int iterations,
             HashAlgorithmName hashAlgorithm,
             int outputLength
-        ) {
+        )
+        {
             if (password is null)
                 throw new ArgumentNullException(nameof(password));
             if (salt is null)
@@ -233,7 +237,8 @@ namespace System.Security.Cryptography
             int iterations,
             HashAlgorithmName hashAlgorithm,
             int outputLength
-        ) {
+        )
+        {
             if (outputLength < 0)
                 throw new ArgumentOutOfRangeException(
                     nameof(outputLength),
@@ -286,7 +291,8 @@ namespace System.Security.Cryptography
             Span<byte> destination,
             int iterations,
             HashAlgorithmName hashAlgorithm
-        ) {
+        )
+        {
             if (iterations <= 0)
                 throw new ArgumentOutOfRangeException(
                     nameof(iterations),
@@ -304,7 +310,8 @@ namespace System.Security.Cryptography
             Span<byte> destination,
             int iterations,
             HashAlgorithmName hashAlgorithm
-        ) {
+        )
+        {
             Debug.Assert(hashAlgorithm.Name is not null);
             Debug.Assert(iterations > 0);
 
@@ -353,7 +360,8 @@ namespace System.Security.Cryptography
             Span<byte> destination,
             int iterations,
             HashAlgorithmName hashAlgorithm
-        ) {
+        )
+        {
             Debug.Assert(hashAlgorithm.Name is not null);
             Debug.Assert(iterations > 0);
 
@@ -381,7 +389,8 @@ namespace System.Security.Cryptography
                 && hashAlgorithmName != HashAlgorithmName.SHA256.Name
                 && hashAlgorithmName != HashAlgorithmName.SHA384.Name
                 && hashAlgorithmName != HashAlgorithmName.SHA512.Name
-            ) {
+            )
+            {
                 throw new CryptographicException(
                     SR.Format(SR.Cryptography_UnknownHashAlgorithm, hashAlgorithmName)
                 );

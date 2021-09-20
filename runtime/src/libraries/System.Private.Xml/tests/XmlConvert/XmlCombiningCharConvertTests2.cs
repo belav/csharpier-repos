@@ -40,7 +40,8 @@ namespace System.Xml.Tests
             if (
                 _Expbyte_CombiningChar[i / 2] != "_x0A6F_"
                 && _Expbyte_CombiningChar[i / 2] != "_x0E46_"
-            ) {
+            )
+            {
                 CError.Compare(
                     strEnVal,
                     _Expbyte_CombiningChar[i / 2],

@@ -13,7 +13,8 @@ namespace defaultNamespace
             if (
                 "15.0%Double.PositiveInfinity = " + 15.0 % Double.PositiveInfinity
                 == "15.0%Double.PositiveInfinity = 15"
-            ) {
+            )
+            {
                 Console.WriteLine("*** PASSED ***");
                 return 100;
             }

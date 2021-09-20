@@ -14,7 +14,8 @@ namespace Microsoft.CodeAnalysis.Editor.Shared.Extensions
         public static void SetTextProperties(
             this DependencyObject dependencyObject,
             TextFormattingRunProperties textProperties
-        ) {
+        )
+        {
             dependencyObject.SetValue(
                 TextElement.FontFamilyProperty,
                 textProperties.Typeface.FontFamily

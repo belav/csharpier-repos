@@ -64,7 +64,8 @@ namespace Microsoft.AspNetCore.Mvc
             long? end,
             string expectedString,
             long contentLength
-        ) {
+        )
+        {
             // Arrange
             var path = Path.GetFullPath("helllo.txt");
             var contentType = "text/plain; charset=us-ascii; p1=p1-value";
@@ -273,7 +274,8 @@ namespace Microsoft.AspNetCore.Mvc
         [InlineData("bytes = 1-4, 5-11")]
         public async Task WriteFileAsync_RangeHeaderMalformed_RangeRequestIgnored(
             string rangeString
-        ) {
+        )
+        {
             // Arrange
             var path = Path.GetFullPath("helllo.txt");
             var contentType = "text/plain; charset=us-ascii; p1=p1-value";
@@ -532,7 +534,8 @@ namespace Microsoft.AspNetCore.Mvc
             long? end,
             string expectedString,
             long contentLength
-        ) {
+        )
+        {
             // Arrange
             var path = Path.Combine("TestFiles", "FilePathResultTestFile.txt");
             var result = new TestVirtualFileResult(path, "text/plain")
@@ -864,7 +867,8 @@ namespace Microsoft.AspNetCore.Mvc
                 long offset,
                 long? length,
                 CancellationToken cancellation
-            ) {
+            )
+            {
                 Name = path;
                 Offset = offset;
                 Length = length;

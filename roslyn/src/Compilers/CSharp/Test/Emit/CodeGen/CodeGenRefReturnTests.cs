@@ -23,7 +23,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
             string expectedOutput = null,
             CSharpCompilationOptions options = null,
             Verification verify = Verification.Passes
-        ) {
+        )
+        {
             return CompileAndVerify(
                 source,
                 expectedOutput: expectedOutput,

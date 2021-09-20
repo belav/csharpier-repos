@@ -1824,7 +1824,8 @@ namespace Microsoft.AspNetCore.SignalR.Tests
                                 secondClient.ReadAsync()
                             )
                             .DefaultTimeout()
-                    ) {
+                    )
+                    {
                         var invocation = Assert.IsType<InvocationMessage>(result);
                         Assert.Equal("Broadcast", invocation.Target);
                         Assert.Single(invocation.Arguments);
@@ -1877,7 +1878,8 @@ namespace Microsoft.AspNetCore.SignalR.Tests
                                 secondClient.ReadAsync()
                             )
                             .DefaultTimeout()
-                    ) {
+                    )
+                    {
                         var invocation = Assert.IsType<InvocationMessage>(result);
                         Assert.Equal("Array", invocation.Target);
                         Assert.Single(invocation.Arguments);
@@ -2717,7 +2719,8 @@ namespace Microsoft.AspNetCore.SignalR.Tests
                         protocol: protocol,
                         invocationBinder: invocationBinder.Object
                     )
-                ) {
+                )
+                {
                     client.SupportedFormats = protocol.TransferFormat;
 
                     var connectionHandlerTask = await client.ConnectAsync(connectionHandler);
@@ -3233,7 +3236,8 @@ namespace Microsoft.AspNetCore.SignalR.Tests
                     var client = new TestClient(
                         protocol: new MessagePackHubProtocol(msgPackOptions)
                     )
-                ) {
+                )
+                {
                     client.SupportedFormats = TransferFormat.Binary;
                     var connectionHandlerTask = await client.ConnectAsync(connectionHandler);
 
@@ -3286,7 +3290,8 @@ namespace Microsoft.AspNetCore.SignalR.Tests
                     var client = new TestClient(
                         protocol: new MessagePackHubProtocol(msgPackOptions)
                     )
-                ) {
+                )
+                {
                     client.SupportedFormats = TransferFormat.Binary;
                     await Assert.ThrowsAsync<InvalidOperationException>(
                             async () =>
@@ -3329,7 +3334,8 @@ namespace Microsoft.AspNetCore.SignalR.Tests
                     var client = new TestClient(
                         protocol: new MessagePackHubProtocol(msgPackOptions)
                     )
-                ) {
+                )
+                {
                     client.SupportedFormats = TransferFormat.Binary;
                     await Assert.ThrowsAsync<InvalidOperationException>(
                             async () =>
@@ -3425,7 +3431,8 @@ namespace Microsoft.AspNetCore.SignalR.Tests
                 public T Deserialize(
                     ref MessagePackReader reader,
                     MessagePackSerializerOptions options
-                ) {
+                )
+                {
                     // this method isn't used in our tests
                     return default;
                 }
@@ -3434,7 +3441,8 @@ namespace Microsoft.AspNetCore.SignalR.Tests
                     ref MessagePackWriter writer,
                     T value,
                     MessagePackSerializerOptions options
-                ) {
+                )
+                {
                     writer.Write("formattedString");
                 }
             }
@@ -3816,7 +3824,8 @@ namespace Microsoft.AspNetCore.SignalR.Tests
 
             public override async ValueTask<ReadResult> ReadAsync(
                 CancellationToken cancellationToken = default
-            ) {
+            )
+            {
                 lock (_lock)
                 {
                     _waitForRead.SetResult();
@@ -4819,7 +4828,8 @@ namespace Microsoft.AspNetCore.SignalR.Tests
                 AuthorizationHandlerContext context,
                 DelayRequirement requirement,
                 HubInvocationContext resource
-            ) {
+            )
+            {
                 _tcsService.StartedMethod.SetResult(null);
                 await _tcsService.EndMethod.Task;
                 context.Succeed(requirement);
@@ -5533,7 +5543,8 @@ namespace Microsoft.AspNetCore.SignalR.Tests
         public async Task StreamHubMethodCanBeTriggeredOnCancellation(
             string methodName,
             params object[] args
-        ) {
+        )
+        {
             using (StartVerifiableLog())
             {
                 var tcsService = new TcsService();
@@ -5762,7 +5773,8 @@ namespace Microsoft.AspNetCore.SignalR.Tests
 
                 using (
                     TestClient client = new TestClient(invocationBinder: invocationBinder.Object)
-                ) {
+                )
+                {
                     Task connectionHandlerTask = await client.ConnectAsync(connectionHandler);
 
                     // Wait for a connection, or for the endpoint to fail.
@@ -5849,7 +5861,8 @@ namespace Microsoft.AspNetCore.SignalR.Tests
                         protocol: new NewtonsoftJsonHubProtocol(Options.Create(protocolOptions)),
                         invocationBinder: invocationBinder.Object
                     )
-                ) {
+                )
+                {
                     var connectionHandlerTask = await client.ConnectAsync(connectionHandler);
 
                     // Wait for a connection, or for the endpoint to fail.

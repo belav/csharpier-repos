@@ -37,7 +37,8 @@ namespace Microsoft.EntityFrameworkCore
                 IdentityDbContext<IdentityUser<int>, IdentityRole<int>, int>,
                 Task
             > nestedTestOperation3 = null
-        ) {
+        )
+        {
             await base.ExecuteWithStrategyInTransactionAsync(
                 testOperation,
                 nestedTestOperation1,

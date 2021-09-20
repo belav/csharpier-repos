@@ -11,7 +11,8 @@ namespace System.IO.Tests
         protected sealed override FileStream CreateFileStream(
             SafeFileHandle handle,
             FileAccess access
-        ) {
+        )
+        {
             return CreateFileStream(handle, access, 4096);
         }
 
@@ -19,7 +20,8 @@ namespace System.IO.Tests
             SafeFileHandle handle,
             FileAccess access,
             int bufferSize
-        ) {
+        )
+        {
             return new FileStream(handle, access, bufferSize);
         }
 

@@ -15,7 +15,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Extensions
             IList<UsingDirectiveSyntax> usingDirectives,
             bool placeSystemNamespaceFirst,
             params SyntaxAnnotation[] annotations
-        ) {
+        )
+        {
             if (usingDirectives.Count == 0)
             {
                 return namespaceDeclaration;

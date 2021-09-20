@@ -30,7 +30,8 @@ namespace Microsoft.AspNetCore.WebSockets.Test
                         var webSocket = await context.WebSockets.AcceptWebSocketAsync();
                     }
                 )
-            ) {
+            )
+            {
                 using (var client = new ClientWebSocket())
                 {
                     await client.ConnectAsync(
@@ -58,7 +59,8 @@ namespace Microsoft.AspNetCore.WebSockets.Test
                         var webSocket = await context.WebSockets.AcceptWebSocketAsync("Bravo");
                     }
                 )
-            ) {
+            )
+            {
                 using (var client = new ClientWebSocket())
                 {
                     client.Options.AddSubProtocol("alpha");
@@ -102,7 +104,8 @@ namespace Microsoft.AspNetCore.WebSockets.Test
                         Assert.Equal(WebSocketMessageType.Binary, result.MessageType);
                     }
                 )
-            ) {
+            )
+            {
                 using (var client = new ClientWebSocket())
                 {
                     await client.ConnectAsync(
@@ -144,7 +147,8 @@ namespace Microsoft.AspNetCore.WebSockets.Test
                         Assert.Equal(orriginalData, serverBuffer);
                     }
                 )
-            ) {
+            )
+            {
                 using (var client = new ClientWebSocket())
                 {
                     await client.ConnectAsync(
@@ -185,7 +189,8 @@ namespace Microsoft.AspNetCore.WebSockets.Test
                         Assert.Equal(orriginalData, serverBuffer);
                     }
                 )
-            ) {
+            )
+            {
                 using (var client = new ClientWebSocket())
                 {
                     await client.ConnectAsync(
@@ -252,7 +257,8 @@ namespace Microsoft.AspNetCore.WebSockets.Test
                         Assert.Equal(orriginalData, serverBuffer);
                     }
                 )
-            ) {
+            )
+            {
                 using (var client = new ClientWebSocket())
                 {
                     await client.ConnectAsync(
@@ -321,7 +327,8 @@ namespace Microsoft.AspNetCore.WebSockets.Test
                         Assert.Equal(orriginalData, serverBuffer);
                     }
                 )
-            ) {
+            )
+            {
                 using (var client = new ClientWebSocket())
                 {
                     await client.ConnectAsync(
@@ -371,7 +378,8 @@ namespace Microsoft.AspNetCore.WebSockets.Test
                         );
                     }
                 )
-            ) {
+            )
+            {
                 using (var client = new ClientWebSocket())
                 {
                     await client.ConnectAsync(
@@ -412,7 +420,8 @@ namespace Microsoft.AspNetCore.WebSockets.Test
                         );
                     }
                 )
-            ) {
+            )
+            {
                 using (var client = new ClientWebSocket())
                 {
                     await client.ConnectAsync(
@@ -453,7 +462,8 @@ namespace Microsoft.AspNetCore.WebSockets.Test
                         );
                     }
                 )
-            ) {
+            )
+            {
                 using (var client = new ClientWebSocket())
                 {
                     await client.ConnectAsync(
@@ -517,7 +527,8 @@ namespace Microsoft.AspNetCore.WebSockets.Test
                         );
                     }
                 )
-            ) {
+            )
+            {
                 using (var client = new ClientWebSocket())
                 {
                     await client.ConnectAsync(
@@ -590,7 +601,8 @@ namespace Microsoft.AspNetCore.WebSockets.Test
                         Assert.Equal(closeDescription, result.CloseStatusDescription);
                     }
                 )
-            ) {
+            )
+            {
                 using (var client = new ClientWebSocket())
                 {
                     await client.ConnectAsync(
@@ -628,7 +640,8 @@ namespace Microsoft.AspNetCore.WebSockets.Test
                         );
                     }
                 )
-            ) {
+            )
+            {
                 using (var client = new ClientWebSocket())
                 {
                     await client.ConnectAsync(
@@ -682,7 +695,8 @@ namespace Microsoft.AspNetCore.WebSockets.Test
                         );
                     }
                 )
-            ) {
+            )
+            {
                 using (var client = new ClientWebSocket())
                 {
                     await client.ConnectAsync(
@@ -731,7 +745,8 @@ namespace Microsoft.AspNetCore.WebSockets.Test
                         );
                     }
                 )
-            ) {
+            )
+            {
                 using (var client = new ClientWebSocket())
                 {
                     await client.ConnectAsync(
@@ -786,7 +801,8 @@ namespace Microsoft.AspNetCore.WebSockets.Test
                         Assert.Equal(closeDescription, result.CloseStatusDescription);
                     }
                 )
-            ) {
+            )
+            {
                 using (var client = new ClientWebSocket())
                 {
                     await client.ConnectAsync(
@@ -828,7 +844,8 @@ namespace Microsoft.AspNetCore.WebSockets.Test
         public async Task OriginIsValidatedForWebSocketRequests(
             HttpStatusCode expectedCode,
             params string[] origins
-        ) {
+        )
+        {
             using (
                 var server = KestrelWebSocketHelpers.CreateServer(
                     LoggerFactory,
@@ -849,7 +866,8 @@ namespace Microsoft.AspNetCore.WebSockets.Test
                         }
                     }
                 )
-            ) {
+            )
+            {
                 using (var client = new HttpClient())
                 {
                     var uri = new UriBuilder(new Uri($"ws://127.0.0.1:{port}/"));
@@ -914,7 +932,8 @@ namespace Microsoft.AspNetCore.WebSockets.Test
                     },
                     o => o.AllowedOrigins.Add("http://example.com")
                 )
-            ) {
+            )
+            {
                 using (var client = new HttpClient())
                 {
                     var uri = new UriBuilder(new Uri($"ws://127.0.0.1:{port}/"));

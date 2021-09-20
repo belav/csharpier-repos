@@ -49,7 +49,8 @@ internal static partial class Interop
             SafeCFDataHandle cfData,
             Span<byte> destination,
             out int bytesWritten
-        ) {
+        )
+        {
             bool addedRef = false;
             try
             {

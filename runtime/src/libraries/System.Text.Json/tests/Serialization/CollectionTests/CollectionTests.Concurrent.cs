@@ -53,7 +53,8 @@ namespace System.Text.Json.Serialization.Tests
         public static void Read_ConcurrentCollection_NoPublicConstructor_Throws(
             Type type,
             string json
-        ) {
+        )
+        {
             NotSupportedException ex = Assert.Throws<NotSupportedException>(
                 () => JsonSerializer.Deserialize(json, type)
             );

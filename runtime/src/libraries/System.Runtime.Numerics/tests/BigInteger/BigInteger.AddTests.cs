@@ -24747,7 +24747,8 @@ namespace System.Numerics.Tests
             BigInteger bigInteger1,
             BigInteger bigInteger2,
             BigInteger expected
-        ) {
+        )
+        {
             Assert.Equal(expected, bigInteger1 + bigInteger2);
             Assert.Equal(expected, bigInteger2 + bigInteger1);
 

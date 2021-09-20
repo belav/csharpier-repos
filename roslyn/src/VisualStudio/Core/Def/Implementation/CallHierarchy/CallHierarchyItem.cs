@@ -36,7 +36,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.CallHierarchy
             CallHierarchyProvider provider,
             IEnumerable<Location> callsites,
             Workspace workspace
-        ) {
+        )
+        {
             _symbolId = symbol.GetSymbolKey();
             _projectId = projectId;
             _finders = finders;
@@ -145,7 +146,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.CallHierarchy
             string categoryName,
             CallHierarchySearchScope searchScope,
             ICallHierarchySearchCallback callback
-        ) {
+        )
+        {
             var finder = _finders.FirstOrDefault(s => s.SearchCategory == categoryName);
             finder.StartSearch(_workspace, searchScope, callback);
         }
@@ -167,7 +169,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.CallHierarchy
             CallHierarchySearchScope searchScope,
             ICallHierarchySearchCallback callback,
             IImmutableSet<Document> documents
-        ) {
+        )
+        {
             var finder = _finders.FirstOrDefault(s => s.SearchCategory == categoryName);
             finder.SetDocuments(documents);
             finder.StartSearch(_workspace, searchScope, callback);

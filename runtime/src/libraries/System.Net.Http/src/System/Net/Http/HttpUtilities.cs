@@ -44,7 +44,8 @@ namespace System.Net.Http
             this Task<T> task,
             object state,
             Action<Task<T>, object?> continuation
-        ) {
+        )
+        {
             return task.ContinueWith(
                 continuation,
                 state,

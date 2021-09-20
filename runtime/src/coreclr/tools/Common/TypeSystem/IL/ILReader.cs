@@ -147,7 +147,8 @@ namespace Internal.IL
             if (
                 (currentOpcode >= ILOpcode.br_s && currentOpcode <= ILOpcode.blt_un_s)
                 || currentOpcode == ILOpcode.leave_s
-            ) {
+            )
+            {
                 return (sbyte)ReadILByte() + Offset;
             }
             else

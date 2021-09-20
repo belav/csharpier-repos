@@ -56,7 +56,8 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation.NativeHosting
 
         public static System.Collections.Generic.IEnumerable<object[]> GetFrameworkCompatibilityTestData(
             string scenario
-        ) {
+        )
+        {
             var testData = new System.Collections.Generic.List<FrameworkCompatibilityTestData>();
             switch (scenario)
             {
@@ -94,7 +95,8 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation.NativeHosting
 
         private static System.Collections.Generic.IEnumerable<FrameworkCompatibilityTestData> GetFrameworkCompatibilityTestData(
             ExistingContextType existingContextType
-        ) {
+        )
+        {
             var exactVersion = Version.Parse(SharedTestState.NetCoreAppVersion);
             Assert.True(exactVersion.Major >= 1 && exactVersion.Minor >= 1);
 
@@ -140,7 +142,8 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation.NativeHosting
                     if (
                         existingContextType
                         == ExistingContextType.SelfContained_NoIncludedFrameworks
-                    ) {
+                    )
+                    {
                         // Self-contained without included frameworks is always considered compatible
                         isCompatibleVersion = true;
                     }

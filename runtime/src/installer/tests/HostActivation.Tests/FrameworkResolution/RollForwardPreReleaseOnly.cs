@@ -64,7 +64,8 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation.FrameworkResolution
             string rollForward,
             bool? applyPatches,
             string resolvedFramework
-        ) {
+        )
+        {
             RunTest("5.1.0", rollForward, applyPatches)
                 .ShouldHaveResolvedFrameworkOrFailToFind(MicrosoftNETCoreApp, resolvedFramework);
         }
@@ -86,7 +87,8 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation.FrameworkResolution
             string rollForward,
             bool? applyPatches,
             string resolvedFramework
-        ) {
+        )
+        {
             RunTest("5.0.0", rollForward, applyPatches)
                 .ShouldHaveResolvedFrameworkOrFailToFind(MicrosoftNETCoreApp, resolvedFramework);
         }
@@ -107,7 +109,8 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation.FrameworkResolution
             string rollForward,
             bool? applyPatches,
             string resolvedFramework
-        ) {
+        )
+        {
             RunTest("4.0.0", rollForward, applyPatches)
                 .ShouldHaveResolvedFrameworkOrFailToFind(MicrosoftNETCoreApp, resolvedFramework);
         }
@@ -188,7 +191,8 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation.FrameworkResolution
             string rollForward,
             bool? applyPatches,
             string resolvedFramework
-        ) {
+        )
+        {
             RunTest("5.1.1-preview.1", rollForward, applyPatches)
                 .ShouldHaveResolvedFrameworkOrFailToFind(MicrosoftNETCoreApp, resolvedFramework);
         }
@@ -211,7 +215,8 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation.FrameworkResolution
             string rollForward,
             bool? applyPatches,
             string resolvedFramework
-        ) {
+        )
+        {
             RunTest("5.1.2-preview.0", rollForward, applyPatches)
                 .ShouldHaveResolvedFrameworkOrFailToFind(MicrosoftNETCoreApp, resolvedFramework);
         }
@@ -234,7 +239,8 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation.FrameworkResolution
             string rollForward,
             bool? applyPatches,
             string resolvedFramework
-        ) {
+        )
+        {
             RunTest("5.1.0-preview.1", rollForward, applyPatches)
                 .ShouldHaveResolvedFrameworkOrFailToFind(MicrosoftNETCoreApp, resolvedFramework);
         }
@@ -256,7 +262,8 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation.FrameworkResolution
             string rollForward,
             bool? applyPatches,
             string resolvedFramework
-        ) {
+        )
+        {
             RunTest("5.0.0-preview.5", rollForward, applyPatches)
                 .ShouldHaveResolvedFrameworkOrFailToFind(MicrosoftNETCoreApp, resolvedFramework);
         }
@@ -277,7 +284,8 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation.FrameworkResolution
             string rollForward,
             bool? applyPatches,
             string resolvedFramework
-        ) {
+        )
+        {
             RunTest("4.1.0-preview.6", rollForward, applyPatches)
                 .ShouldHaveResolvedFrameworkOrFailToFind(MicrosoftNETCoreApp, resolvedFramework);
         }
@@ -286,7 +294,8 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation.FrameworkResolution
             string frameworkReferenceVersion,
             string rollForward,
             bool? applyPatches
-        ) {
+        )
+        {
             return RunTest(
                 SharedState.DotNetWithNETCoreAppPreRelease,
                 SharedState.FrameworkReferenceApp,

@@ -24,7 +24,8 @@ namespace Microsoft.EntityFrameworkCore.Query
         [MemberData(nameof(IsAsyncData))]
         public virtual async Task Projecting_collection_correlated_with_keyless_entity_throws(
             bool async
-        ) {
+        )
+        {
             var message =
                 (
                     await Assert.ThrowsAsync<InvalidOperationException>(
@@ -60,7 +61,8 @@ namespace Microsoft.EntityFrameworkCore.Query
         [MemberData(nameof(IsAsyncData))]
         public virtual async Task Collection_of_entities_projecting_correlated_collection_of_keyless_entities(
             bool async
-        ) {
+        )
+        {
             var message =
                 (
                     await Assert.ThrowsAsync<InvalidOperationException>(

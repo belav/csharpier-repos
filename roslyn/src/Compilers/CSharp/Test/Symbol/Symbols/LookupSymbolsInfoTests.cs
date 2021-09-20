@@ -92,7 +92,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
             string source,
             string symbolName,
             int expectedSymbolCount
-        ) {
+        )
+        {
             var compilation = CreateCompilation(source);
 
             var tree = compilation.SyntaxTrees.Single();

@@ -180,7 +180,8 @@ namespace Microsoft.CodeAnalysis
                     searchPattern: "*",
                     searchOption: SearchOption.AllDirectories
                 )
-            ) {
+            )
+            {
                 ClearReadOnlyFlagOnFile(file);
             }
         }

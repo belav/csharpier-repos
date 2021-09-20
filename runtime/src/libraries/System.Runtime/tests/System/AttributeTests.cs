@@ -225,7 +225,8 @@ namespace System.Tests
             object obj,
             bool expected,
             bool hashEqualityExpected
-        ) {
+        )
+        {
             Assert.Equal(expected, attr1.Equals(obj));
 
             Attribute attr2 = obj as Attribute;

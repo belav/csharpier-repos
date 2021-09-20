@@ -22,7 +22,8 @@ namespace ILCompiler
             EcmaModule module,
             ProfileDataManager profileDataManager,
             bool profileDrivenPartialNGen
-        ) {
+        )
+        {
             _module = module;
             _profileData = profileDataManager.GetMethodsForModuleDesc(module);
             _profileDrivenPartialNGen = profileDrivenPartialNGen;
@@ -38,7 +39,8 @@ namespace ILCompiler
                     if (
                         method.OwningType.IsGenericDefinition
                         || method.OwningType.ContainsSignatureVariables()
-                    ) {
+                    )
+                    {
                         continue;
                     }
 

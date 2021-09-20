@@ -32,7 +32,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             BoundNode node,
             BindingDiagnosticBag diagnostics,
             MethodSymbol containingSymbol
-        ) {
+        )
+        {
             Debug.Assert(node != null);
             Debug.Assert((object)containingSymbol != null);
 
@@ -57,7 +58,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             CSharpCompilation compilation,
             BindingDiagnosticBag diagnostics,
             MethodSymbol containingSymbol
-        ) {
+        )
+        {
             Debug.Assert(diagnostics != null);
             Debug.Assert((object)containingSymbol != null);
 
@@ -103,7 +105,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                 _inExpressionLambda
                 && node.Indices.Length == 1
                 && node.Indices[0].Type!.SpecialType == SpecialType.None
-            ) {
+            )
+            {
                 Error(ErrorCode.ERR_ExpressionTreeContainsPatternIndexOrRangeIndexer, node);
             }
 
@@ -112,7 +115,8 @@ namespace Microsoft.CodeAnalysis.CSharp
 
         public override BoundNode VisitIndexOrRangePatternIndexerAccess(
             BoundIndexOrRangePatternIndexerAccess node
-        ) {
+        )
+        {
             if (_inExpressionLambda)
             {
                 Error(ErrorCode.ERR_ExpressionTreeContainsPatternIndexOrRangeIndexer, node);
@@ -217,7 +221,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             if (
                 _staticLocalOrAnonymousFunction is object
                 && Symbol.IsCaptured(symbol, _staticLocalOrAnonymousFunction)
-            ) {
+            )
+            {
                 var diagnostic =
                     _staticLocalOrAnonymousFunction.MethodKind == MethodKind.LocalFunction
                         ? ErrorCode.ERR_StaticLocalFunctionCannotCaptureVariable
@@ -234,7 +239,8 @@ namespace Microsoft.CodeAnalysis.CSharp
         private void CheckReferenceToMethodIfLocalFunction(
             BoundExpression node,
             MethodSymbol method
-        ) {
+        )
+        {
             if (method?.OriginalDefinition is LocalFunctionSymbol localFunction)
             {
                 CheckReferenceToVariable(node, localFunction);
@@ -243,7 +249,8 @@ namespace Microsoft.CodeAnalysis.CSharp
 
         public override BoundNode VisitConvertedSwitchExpression(
             BoundConvertedSwitchExpression node
-        ) {
+        )
+        {
             if (_inExpressionLambda)
             {
                 Error(ErrorCode.ERR_ExpressionTreeContainsSwitchExpression, node);
@@ -254,7 +261,8 @@ namespace Microsoft.CodeAnalysis.CSharp
 
         public override BoundNode VisitDeconstructionAssignmentOperator(
             BoundDeconstructionAssignmentOperator node
-        ) {
+        )
+        {
             if (!node.HasAnyErrors)
             {
                 CheckForDeconstructionAssignmentToSelf((BoundTupleExpression)node.Left, node.Right);
@@ -271,7 +279,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                 _inExpressionLambda
                 && node.Left.Kind != BoundKind.ObjectInitializerMember
                 && node.Left.Kind != BoundKind.DynamicObjectInitializerMember
-            ) {
+            )
+            {
                 Error(ErrorCode.ERR_ExpressionTreeContainsAssignment, node);
             }
 
@@ -280,7 +289,8 @@ namespace Microsoft.CodeAnalysis.CSharp
 
         public override BoundNode VisitDynamicObjectInitializerMember(
             BoundDynamicObjectInitializerMember node
-        ) {
+        )
+        {
             if (_inExpressionLambda)
             {
                 Error(ErrorCode.ERR_ExpressionTreeContainsDynamicOperation, node);
@@ -335,7 +345,8 @@ namespace Microsoft.CodeAnalysis.CSharp
 
         public override BoundNode VisitCompoundAssignmentOperator(
             BoundCompoundAssignmentOperator node
-        ) {
+        )
+        {
             CheckCompoundAssignmentOperator(node);
 
             return base.VisitCompoundAssignmentOperator(node);
@@ -349,7 +360,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             ImmutableArray<string> argumentNamesOpt,
             BitVector defaultArguments,
             BoundNode node
-        ) {
+        )
+        {
             Debug.Assert((object)method != null);
             Debug.Assert(
                 ((object)propertyAccess == null)
@@ -370,7 +382,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                     (object)propertyAccess != null
                     && propertyAccess.IsIndexedProperty()
                     && !propertyAccess.IsIndexer
-                ) {
+                )
+                {
                     Error(ErrorCode.ERR_ExpressionTreeContainsIndexedProperty, node);
                 }
                 else if (hasDefaultArgument(arguments, defaultArguments))
@@ -398,7 +411,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             static bool hasDefaultArgument(
                 ImmutableArray<BoundExpression> arguments,
                 BitVector defaultArguments
-            ) {
+            )
+            {
                 for (int i = 0; i < arguments.Length; i++)
                 {
                     if (defaultArguments[i])
@@ -421,7 +435,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                 && node is BoundExpression expr
                 && expr.Type is TypeSymbol type
                 && type.IsRestrictedType()
-            ) {
+            )
+            {
                 Error(ErrorCode.ERR_ExpressionTreeCantContainRefStruct, node, type.Name);
             }
             return base.Visit(node);
@@ -529,7 +544,8 @@ namespace Microsoft.CodeAnalysis.CSharp
 
         public override BoundNode VisitCollectionElementInitializer(
             BoundCollectionElementInitializer node
-        ) {
+        )
+        {
             if (_inExpressionLambda && node.AddMethod.IsStatic)
             {
                 Error(ErrorCode.ERR_ExtensionCollectionElementInitializerInExpressionTree, node);
@@ -714,7 +730,8 @@ namespace Microsoft.CodeAnalysis.CSharp
 
         public override BoundNode VisitUserDefinedConditionalLogicalOperator(
             BoundUserDefinedConditionalLogicalOperator node
-        ) {
+        )
+        {
             CheckLiftedUserDefinedConditionalLogicalOperator(node);
             return base.VisitUserDefinedConditionalLogicalOperator(node);
         }
@@ -772,7 +789,8 @@ namespace Microsoft.CodeAnalysis.CSharp
 
         public override BoundNode VisitPointerIndirectionOperator(
             BoundPointerIndirectionOperator node
-        ) {
+        )
+        {
             NoteUnsafe(node);
             return base.VisitPointerIndirectionOperator(node);
         }
@@ -834,7 +852,8 @@ namespace Microsoft.CodeAnalysis.CSharp
 
         public override BoundNode VisitDelegateCreationExpression(
             BoundDelegateCreationExpression node
-        ) {
+        )
+        {
             if (node.Argument.Kind != BoundKind.MethodGroup)
             {
                 this.Visit(node.Argument);
@@ -863,7 +882,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             MethodSymbol method,
             bool parentIsConversion,
             TypeSymbol convertedToType
-        ) {
+        )
+        {
             // Formerly reported ERR_MemGroupInExpressionTree when this occurred, but the expanded
             // ERR_LambdaInIsAs makes this impossible (since the node will always be wrapped in
             // a failed conversion).
@@ -902,7 +922,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             if (
                 _inExpressionLambda
                 && (node.LeftOperand.IsLiteralNull() || node.LeftOperand.IsLiteralDefault())
-            ) {
+            )
+            {
                 Error(ErrorCode.ERR_ExpressionTreeContainsBadCoalesce, node.LeftOperand);
             }
 
@@ -911,7 +932,8 @@ namespace Microsoft.CodeAnalysis.CSharp
 
         public override BoundNode VisitNullCoalescingAssignmentOperator(
             BoundNullCoalescingAssignmentOperator node
-        ) {
+        )
+        {
             if (_inExpressionLambda)
             {
                 Error(ErrorCode.ERR_ExpressionTreeCantContainNullCoalescingAssignment, node);
@@ -959,7 +981,8 @@ namespace Microsoft.CodeAnalysis.CSharp
 
         public override BoundNode VisitDynamicCollectionElementInitializer(
             BoundDynamicCollectionElementInitializer node
-        ) {
+        )
+        {
             if (_inExpressionLambda)
             {
                 Error(ErrorCode.ERR_ExpressionTreeContainsDynamicOperation, node);
@@ -970,7 +993,8 @@ namespace Microsoft.CodeAnalysis.CSharp
 
         public override BoundNode VisitDynamicObjectCreationExpression(
             BoundDynamicObjectCreationExpression node
-        ) {
+        )
+        {
             if (_inExpressionLambda)
             {
                 Error(ErrorCode.ERR_ExpressionTreeContainsDynamicOperation, node);

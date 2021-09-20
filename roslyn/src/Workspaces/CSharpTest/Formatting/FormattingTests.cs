@@ -10221,7 +10221,8 @@ public class Test
             )]
                 string targetType,
             bool spacingAfterMethodDeclarationName
-        ) {
+        )
+        {
             var expectedSpacing = spacingAfterMethodDeclarationName ? " " : "";
             var initialSpacing = spacingAfterMethodDeclarationName ? "" : " ";
             var changedOptionSet = new OptionsCollection(LanguageNames.CSharp)

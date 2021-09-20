@@ -18,10 +18,8 @@ namespace System.Web.Razor.Test.Framework
             IEnumerable<SyntaxTreeNode> children
         ) : base(ThisBlockType, children, codeGenerator) { }
 
-        public StatementBlock(
-            IBlockCodeGenerator codeGenerator,
-            params SyntaxTreeNode[] children
-        ) : this(codeGenerator, (IEnumerable<SyntaxTreeNode>)children) { }
+        public StatementBlock(IBlockCodeGenerator codeGenerator, params SyntaxTreeNode[] children)
+            : this(codeGenerator, (IEnumerable<SyntaxTreeNode>)children) { }
 
         public StatementBlock(params SyntaxTreeNode[] children)
             : this(BlockCodeGenerator.Null, children) { }
@@ -39,10 +37,8 @@ namespace System.Web.Razor.Test.Framework
             IEnumerable<SyntaxTreeNode> children
         ) : base(ThisBlockType, children, codeGenerator) { }
 
-        public DirectiveBlock(
-            IBlockCodeGenerator codeGenerator,
-            params SyntaxTreeNode[] children
-        ) : this(codeGenerator, (IEnumerable<SyntaxTreeNode>)children) { }
+        public DirectiveBlock(IBlockCodeGenerator codeGenerator, params SyntaxTreeNode[] children)
+            : this(codeGenerator, (IEnumerable<SyntaxTreeNode>)children) { }
 
         public DirectiveBlock(params SyntaxTreeNode[] children)
             : this(BlockCodeGenerator.Null, children) { }
@@ -60,10 +56,8 @@ namespace System.Web.Razor.Test.Framework
             IEnumerable<SyntaxTreeNode> children
         ) : base(ThisBlockType, children, codeGenerator) { }
 
-        public FunctionsBlock(
-            IBlockCodeGenerator codeGenerator,
-            params SyntaxTreeNode[] children
-        ) : this(codeGenerator, (IEnumerable<SyntaxTreeNode>)children) { }
+        public FunctionsBlock(IBlockCodeGenerator codeGenerator, params SyntaxTreeNode[] children)
+            : this(codeGenerator, (IEnumerable<SyntaxTreeNode>)children) { }
 
         public FunctionsBlock(params SyntaxTreeNode[] children)
             : this(BlockCodeGenerator.Null, children) { }
@@ -81,10 +75,8 @@ namespace System.Web.Razor.Test.Framework
             IEnumerable<SyntaxTreeNode> children
         ) : base(ThisBlockType, children, codeGenerator) { }
 
-        public ExpressionBlock(
-            IBlockCodeGenerator codeGenerator,
-            params SyntaxTreeNode[] children
-        ) : this(codeGenerator, (IEnumerable<SyntaxTreeNode>)children) { }
+        public ExpressionBlock(IBlockCodeGenerator codeGenerator, params SyntaxTreeNode[] children)
+            : this(codeGenerator, (IEnumerable<SyntaxTreeNode>)children) { }
 
         public ExpressionBlock(params SyntaxTreeNode[] children)
             : this(new ExpressionCodeGenerator(), children) { }
@@ -97,15 +89,11 @@ namespace System.Web.Razor.Test.Framework
     {
         private const BlockType ThisBlockType = BlockType.Helper;
 
-        public HelperBlock(
-            IBlockCodeGenerator codeGenerator,
-            IEnumerable<SyntaxTreeNode> children
-        ) : base(ThisBlockType, children, codeGenerator) { }
+        public HelperBlock(IBlockCodeGenerator codeGenerator, IEnumerable<SyntaxTreeNode> children)
+            : base(ThisBlockType, children, codeGenerator) { }
 
-        public HelperBlock(
-            IBlockCodeGenerator codeGenerator,
-            params SyntaxTreeNode[] children
-        ) : this(codeGenerator, (IEnumerable<SyntaxTreeNode>)children) { }
+        public HelperBlock(IBlockCodeGenerator codeGenerator, params SyntaxTreeNode[] children)
+            : this(codeGenerator, (IEnumerable<SyntaxTreeNode>)children) { }
 
         public HelperBlock(params SyntaxTreeNode[] children)
             : this(BlockCodeGenerator.Null, children) { }
@@ -118,15 +106,11 @@ namespace System.Web.Razor.Test.Framework
     {
         private const BlockType ThisBlockType = BlockType.Markup;
 
-        public MarkupBlock(
-            IBlockCodeGenerator codeGenerator,
-            IEnumerable<SyntaxTreeNode> children
-        ) : base(ThisBlockType, children, codeGenerator) { }
+        public MarkupBlock(IBlockCodeGenerator codeGenerator, IEnumerable<SyntaxTreeNode> children)
+            : base(ThisBlockType, children, codeGenerator) { }
 
-        public MarkupBlock(
-            IBlockCodeGenerator codeGenerator,
-            params SyntaxTreeNode[] children
-        ) : this(codeGenerator, (IEnumerable<SyntaxTreeNode>)children) { }
+        public MarkupBlock(IBlockCodeGenerator codeGenerator, params SyntaxTreeNode[] children)
+            : this(codeGenerator, (IEnumerable<SyntaxTreeNode>)children) { }
 
         public MarkupBlock(params SyntaxTreeNode[] children)
             : this(BlockCodeGenerator.Null, children) { }
@@ -139,15 +123,11 @@ namespace System.Web.Razor.Test.Framework
     {
         private const BlockType ThisBlockType = BlockType.Section;
 
-        public SectionBlock(
-            IBlockCodeGenerator codeGenerator,
-            IEnumerable<SyntaxTreeNode> children
-        ) : base(ThisBlockType, children, codeGenerator) { }
+        public SectionBlock(IBlockCodeGenerator codeGenerator, IEnumerable<SyntaxTreeNode> children)
+            : base(ThisBlockType, children, codeGenerator) { }
 
-        public SectionBlock(
-            IBlockCodeGenerator codeGenerator,
-            params SyntaxTreeNode[] children
-        ) : this(codeGenerator, (IEnumerable<SyntaxTreeNode>)children) { }
+        public SectionBlock(IBlockCodeGenerator codeGenerator, params SyntaxTreeNode[] children)
+            : this(codeGenerator, (IEnumerable<SyntaxTreeNode>)children) { }
 
         public SectionBlock(params SyntaxTreeNode[] children)
             : this(BlockCodeGenerator.Null, children) { }
@@ -165,10 +145,8 @@ namespace System.Web.Razor.Test.Framework
             IEnumerable<SyntaxTreeNode> children
         ) : base(ThisBlockType, children, codeGenerator) { }
 
-        public TemplateBlock(
-            IBlockCodeGenerator codeGenerator,
-            params SyntaxTreeNode[] children
-        ) : this(codeGenerator, (IEnumerable<SyntaxTreeNode>)children) { }
+        public TemplateBlock(IBlockCodeGenerator codeGenerator, params SyntaxTreeNode[] children)
+            : this(codeGenerator, (IEnumerable<SyntaxTreeNode>)children) { }
 
         public TemplateBlock(params SyntaxTreeNode[] children)
             : this(new TemplateBlockCodeGenerator(), children) { }
@@ -181,15 +159,11 @@ namespace System.Web.Razor.Test.Framework
     {
         private const BlockType ThisBlockType = BlockType.Comment;
 
-        public CommentBlock(
-            IBlockCodeGenerator codeGenerator,
-            IEnumerable<SyntaxTreeNode> children
-        ) : base(ThisBlockType, children, codeGenerator) { }
+        public CommentBlock(IBlockCodeGenerator codeGenerator, IEnumerable<SyntaxTreeNode> children)
+            : base(ThisBlockType, children, codeGenerator) { }
 
-        public CommentBlock(
-            IBlockCodeGenerator codeGenerator,
-            params SyntaxTreeNode[] children
-        ) : this(codeGenerator, (IEnumerable<SyntaxTreeNode>)children) { }
+        public CommentBlock(IBlockCodeGenerator codeGenerator, params SyntaxTreeNode[] children)
+            : this(codeGenerator, (IEnumerable<SyntaxTreeNode>)children) { }
 
         public CommentBlock(params SyntaxTreeNode[] children)
             : this(new RazorCommentCodeGenerator(), children) { }

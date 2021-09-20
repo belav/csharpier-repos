@@ -18,7 +18,8 @@ namespace Microsoft.VisualStudio.LanguageServices.CSharp.CodeModel.Extenders
             bool isPartial,
             bool isDeclaration,
             bool hasOtherPart
-        ) {
+        )
+        {
             var result = new PartialMethodExtender(isPartial, isDeclaration, hasOtherPart);
             return (ICSPartialMethodExtender)ComAggregate.CreateAggregatedObject(result);
         }

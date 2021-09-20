@@ -10,7 +10,8 @@ namespace System.Text.Json.Serialization
             object? value,
             JsonSerializerOptions options,
             ref WriteStack state
-        ) {
+        )
+        {
             if (IsValueType)
             {
                 // Value types can never have a null except for Nullable<T>.
@@ -23,7 +24,8 @@ namespace System.Text.Json.Serialization
                 if (
                     options.ReferenceHandlingStrategy == ReferenceHandlingStrategy.IgnoreCycles
                     && value != null
-                ) {
+                )
+                {
                     state.ReferenceResolver.PushReferenceForCycleDetection(value);
                 }
             }
@@ -37,7 +39,8 @@ namespace System.Text.Json.Serialization
             in T value,
             JsonSerializerOptions options,
             ref WriteStack state
-        ) {
+        )
+        {
             try
             {
                 return TryWrite(writer, value, options, ref state);

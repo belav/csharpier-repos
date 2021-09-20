@@ -324,7 +324,8 @@ internal partial class IntelHardwareIntrinsicTest
             || (result[5] != 9)
             || (result[6] != 10)
             || (result[7] != 11)
-        ) {
+        )
+        {
             Console.WriteLine("Vector128Int16ReturnTest did not return expected value");
             Console.Write("[ ");
             for (int i = 0; i < 8; i++)
@@ -407,7 +408,8 @@ internal partial class IntelHardwareIntrinsicTest
             || (result[5] != 9)
             || (result[6] != 10)
             || (result[7] != 11)
-        ) {
+        )
+        {
             Console.WriteLine("Vector256Int32ReturnTest did not return expected value");
             Console.Write("[ ");
             for (int i = 0; i < 8; i++)

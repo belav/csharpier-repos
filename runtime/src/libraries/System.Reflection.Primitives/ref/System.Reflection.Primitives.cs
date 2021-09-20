@@ -71,13 +71,15 @@ namespace System.Reflection.Emit
         public static bool operator ==(
             System.Reflection.Emit.OpCode a,
             System.Reflection.Emit.OpCode b
-        ) {
+        )
+        {
             throw null;
         }
         public static bool operator !=(
             System.Reflection.Emit.OpCode a,
             System.Reflection.Emit.OpCode b
-        ) {
+        )
+        {
             throw null;
         }
         public override string? ToString()

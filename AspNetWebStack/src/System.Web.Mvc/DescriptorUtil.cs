@@ -71,7 +71,8 @@ namespace System.Web.Mvc
             Func<TArgument, TReflection[]> initializer,
             Func<TReflection, TArgument, TDescriptor> converter,
             TArgument state
-        ) {
+        )
+        {
             // did we already calculate this once?
             TDescriptor[] existingCache = Interlocked.CompareExchange(
                 ref cacheLocation,

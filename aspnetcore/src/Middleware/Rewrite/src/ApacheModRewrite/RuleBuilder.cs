@@ -277,7 +277,8 @@ namespace Microsoft.AspNetCore.Rewrite.ApacheModRewrite
                             CultureInfo.InvariantCulture,
                             out responseStatusCode
                         )
-                    ) {
+                    )
+                    {
                         throw new FormatException(
                             Resources.FormatError_InputParserInvalidInteger(statusCode, -1)
                         );

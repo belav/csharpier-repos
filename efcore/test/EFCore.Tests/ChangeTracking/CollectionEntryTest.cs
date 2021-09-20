@@ -345,7 +345,8 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking
         public void IsModified_can_set_fk_to_modified_principal_with_Added_or_Deleted_dependents(
             EntityState principalState,
             EntityState dependentState
-        ) {
+        )
+        {
             using var context = new FreezerContext();
             var cherry = new Cherry();
             var chunky1 = new Chunky { Id = 1, Garcia = cherry };
@@ -400,7 +401,8 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking
         public void IsModified_can_set_fk_to_modified_principal_with_Unchanged_dependents(
             EntityState principalState,
             EntityState dependentState
-        ) {
+        )
+        {
             using var context = new FreezerContext();
             var cherry = new Cherry();
             var chunky1 = new Chunky { Id = 1, Garcia = cherry };
@@ -439,7 +441,8 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking
         public void IsModified_can_set_fk_to_modified_principal_with_Modified_dependents(
             EntityState principalState,
             EntityState dependentState
-        ) {
+        )
+        {
             using var context = new FreezerContext();
             var cherry = new Cherry { Id = 1 };
             var chunky1 = new Chunky { Id = 1, Garcia = cherry };

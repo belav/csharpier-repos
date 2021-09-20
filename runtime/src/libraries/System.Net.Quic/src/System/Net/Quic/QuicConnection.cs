@@ -23,12 +23,13 @@ namespace System.Net.Quic
             EndPoint remoteEndPoint,
             SslClientAuthenticationOptions? sslClientAuthenticationOptions,
             IPEndPoint? localEndPoint = null
-        ) : this(
-            QuicImplementationProviders.Default,
-            remoteEndPoint,
-            sslClientAuthenticationOptions,
-            localEndPoint
-        ) { }
+        )
+            : this(
+                QuicImplementationProviders.Default,
+                remoteEndPoint,
+                sslClientAuthenticationOptions,
+                localEndPoint
+            ) { }
 
         /// <summary>
         /// Create an outbound QUIC connection.
@@ -43,21 +44,23 @@ namespace System.Net.Quic
             EndPoint remoteEndPoint,
             SslClientAuthenticationOptions? sslClientAuthenticationOptions,
             IPEndPoint? localEndPoint = null
-        ) : this(
-            implementationProvider,
-            new QuicClientConnectionOptions()
-            {
-                RemoteEndPoint = remoteEndPoint,
-                ClientAuthenticationOptions = sslClientAuthenticationOptions,
-                LocalEndPoint = localEndPoint
-            }
-        ) { }
+        )
+            : this(
+                implementationProvider,
+                new QuicClientConnectionOptions()
+                {
+                    RemoteEndPoint = remoteEndPoint,
+                    ClientAuthenticationOptions = sslClientAuthenticationOptions,
+                    LocalEndPoint = localEndPoint
+                }
+            ) { }
 
         // !!! TEMPORARY: Remove or make internal before shipping
         public QuicConnection(
             QuicImplementationProvider implementationProvider,
             QuicClientConnectionOptions options
-        ) {
+        )
+        {
             _provider = implementationProvider.CreateConnection(options);
         }
 

@@ -137,7 +137,8 @@ namespace System.Data.Common
             object store,
             BitArray nullbits,
             int storeIndex
-        ) {
+        )
+        {
             SqlBinary[] typedStore = (SqlBinary[])store;
             typedStore[storeIndex] = _values[record];
             nullbits.Set(storeIndex, IsNull(record));

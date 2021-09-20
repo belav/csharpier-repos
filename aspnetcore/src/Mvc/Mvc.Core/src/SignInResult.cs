@@ -53,7 +53,8 @@ namespace Microsoft.AspNetCore.Mvc
             string? authenticationScheme,
             ClaimsPrincipal principal,
             AuthenticationProperties? properties
-        ) {
+        )
+        {
             Principal = principal ?? throw new ArgumentNullException(nameof(principal));
             AuthenticationScheme = authenticationScheme;
             Properties = properties;

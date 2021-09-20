@@ -31,7 +31,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.IntelliSense.SignatureHel
             public void ComputeModel(
                 ImmutableArray<ISignatureHelpProvider> providers,
                 SignatureHelpTriggerInfo triggerInfo
-            ) {
+            )
+            {
                 AssertIsForeground();
 
                 var caretPosition =
@@ -63,7 +64,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.IntelliSense.SignatureHel
                 DisconnectedBufferGraph disconnectedBufferGraph,
                 SignatureHelpTriggerInfo triggerInfo,
                 CancellationToken cancellationToken
-            ) {
+            )
+            {
                 try
                 {
                     using (
@@ -71,7 +73,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.IntelliSense.SignatureHel
                             FunctionId.SignatureHelp_ModelComputation_ComputeModelInBackground,
                             cancellationToken
                         )
-                    ) {
+                    )
+                    {
                         AssertIsBackground();
                         cancellationToken.ThrowIfCancellationRequested();
 
@@ -92,7 +95,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.IntelliSense.SignatureHel
 
                         if (
                             triggerInfo.TriggerReason == SignatureHelpTriggerReason.RetriggerCommand
-                        ) {
+                        )
+                        {
                             if (currentModel == null)
                             {
                                 return null;
@@ -103,7 +107,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.IntelliSense.SignatureHel
                                 && !currentModel.Provider.IsRetriggerCharacter(
                                     triggerInfo.TriggerCharacter.Value
                                 )
-                            ) {
+                            )
+                            {
                                 return currentModel;
                             }
                         }
@@ -135,7 +140,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.IntelliSense.SignatureHel
                             && currentModel.ArgumentIndex == items.ArgumentIndex
                             && currentModel.ArgumentCount == items.ArgumentCount
                             && currentModel.ArgumentName == items.ArgumentName
-                        ) {
+                        )
+                        {
                             // The new model is the same as the current model.  Return the currentModel
                             // so we keep the active selection.
                             return currentModel;
@@ -193,7 +199,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.IntelliSense.SignatureHel
                 SignatureHelpItems items,
                 ISignatureHelpProvider provider,
                 out bool userSelected
-            ) {
+            )
+            {
                 // Try to find the most appropriate item in the list to select by default.
 
                 // If it's the same provider as the previous model we have, and we had a user-selection,
@@ -202,7 +209,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.IntelliSense.SignatureHel
                     currentModel != null
                     && currentModel.Provider == provider
                     && currentModel.UserSelected
-                ) {
+                )
+                {
                     var userSelectedItem = items.Items.FirstOrDefault(
                         i => DisplayPartsMatch(i, currentModel.SelectedItem)
                     );
@@ -251,7 +259,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.IntelliSense.SignatureHel
                 SignatureHelpTriggerInfo triggerInfo,
                 Document document,
                 CancellationToken cancellationToken
-            ) {
+            )
+            {
                 try
                 {
                     ISignatureHelpProvider bestProvider = null;
@@ -273,7 +282,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.IntelliSense.SignatureHel
                         if (
                             currentItems != null
                             && currentItems.ApplicableSpan.IntersectsWith(caretPosition.Position)
-                        ) {
+                        )
+                        {
                             // If another provider provides sig help items, then only take them if they
                             // start after the last batch of items.  i.e. we want the set of items that
                             // conceptually are closer to where the caret position is.  This way if you have:

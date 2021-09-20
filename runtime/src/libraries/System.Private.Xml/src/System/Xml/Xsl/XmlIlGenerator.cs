@@ -374,7 +374,8 @@ namespace System.Xml.Xsl
                     _qil!.IsDebug
                     || OptimizerPatterns.Read(ndIter)
                         .MatchesPattern(OptimizerPatternName.MaybeSideEffects)
-                ) {
+                )
+                {
                     // Get MethodInfo that evaluates the global value and discard its return value
                     methInfo = XmlILAnnotation.Write(ndIter).FunctionBinding;
                     Debug.Assert(

@@ -273,13 +273,15 @@ namespace System.Collections.Generic
                     if (
                         current.Left != null
                         && (!_lBoundActive || Comparer.Compare(_min, current.Item) < 0)
-                    ) {
+                    )
+                    {
                         processQueue.Enqueue(current.Left);
                     }
                     if (
                         current.Right != null
                         && (!_uBoundActive || Comparer.Compare(_max, current.Item) > 0)
-                    ) {
+                    )
+                    {
                         processQueue.Enqueue(current.Right);
                     }
                 }

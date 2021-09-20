@@ -115,7 +115,8 @@ namespace Microsoft.CSharp.RuntimeBinder.Semantics
                 );
                 symCur != null;
                 symCur = symCur.LookupNext(symbmask_t.MASK_Member)
-            ) {
+            )
+            {
                 Debug.Assert(!(symCur is AggregateSymbol));
                 // Check for arity.
                 // For non-zero arity, only methods of the correct arity are considered.
@@ -125,7 +126,8 @@ namespace Microsoft.CSharp.RuntimeBinder.Semantics
                 if (
                     _arity > 0
                     && (!(symCur is MethodSymbol curMeth) || curMeth.typeVars.Count != _arity)
-                ) {
+                )
+                {
                     if (!_swtBadArity)
                     {
                         _swtBadArity.Set(symCur, typeCur);
@@ -145,7 +147,8 @@ namespace Microsoft.CSharp.RuntimeBinder.Semantics
                     methProp != null
                     && (_flags & MemLookFlags.UserCallable) != 0
                     && !methProp.isUserCallable()
-                ) {
+                )
+                {
                     // If its an indexed property method symbol, let it through.
                     // This is too liberal, but maintained for compatibility.
                     if (
@@ -159,7 +162,8 @@ namespace Microsoft.CSharp.RuntimeBinder.Semantics
                                 !symCur.name.Text.StartsWith("get_", StringComparison.Ordinal)
                                 || meth.Params.Count <= 0
                             )
-                    ) {
+                    )
+                    {
                         if (!_swtInaccess)
                         {
                             _swtInaccess.Set(symCur, typeCur);
@@ -171,7 +175,8 @@ namespace Microsoft.CSharp.RuntimeBinder.Semantics
                 if (
                     fInaccess
                     || !CSemanticChecker.CheckAccess(symCur, typeCur, _symWhere, _typeQual)
-                ) {
+                )
+                {
                     // Not accessible so get the next sym.
                     if (!_swtInaccess)
                     {
@@ -191,7 +196,8 @@ namespace Microsoft.CSharp.RuntimeBinder.Semantics
                     ((_flags & MemLookFlags.Ctor) == 0) != (meth == null || !meth.IsConstructor())
                     || ((_flags & MemLookFlags.Operator) == 0) != (meth == null || !meth.isOperator)
                     || ((_flags & MemLookFlags.Indexer) == 0) != !(prop is IndexerSymbol)
-                ) {
+                )
+                {
                     if (!_swtBad)
                     {
                         _swtBad.Set(symCur, typeCur);
@@ -206,7 +212,8 @@ namespace Microsoft.CSharp.RuntimeBinder.Semantics
                     !(symCur is MethodSymbol)
                     && (_flags & MemLookFlags.Indexer) == 0
                     && CSemanticChecker.CheckBogus(symCur)
-                ) {
+                )
+                {
                     // A bogus member - we can't use these, so only record them for error reporting.
                     if (!_swtBogus)
                     {
@@ -229,7 +236,8 @@ namespace Microsoft.CSharp.RuntimeBinder.Semantics
                             && !IsDelegateType(prop.RetType, typeCur)
                             && !IsDynamicMember(symCur)
                         )
-                    ) {
+                    )
+                    {
                         if (!_swtBad)
                         {
                             _swtBad.Set(symCur, typeCur);
@@ -263,7 +271,8 @@ namespace Microsoft.CSharp.RuntimeBinder.Semantics
                                 // accessible in the scope in which it is declared,
                                 // but in the EE we ignore accessibility...
                                 && _swtFirst.Field().isEvent
-                            ) {
+                            )
+                            {
                                 // m_swtFirst is just the field behind the event symCur so ignore symCur.
                                 continue;
                             }
@@ -409,7 +418,8 @@ namespace Microsoft.CSharp.RuntimeBinder.Semantics
                 typeCur = typeStart;
                 typeCur != typeEnd && typeCur != null;
                 typeCur = typeCur.BaseClass
-            ) {
+            )
+            {
                 Debug.Assert(!typeCur.IsInterfaceType);
 
                 SearchSingleType(typeCur, out bool fHideByName);
@@ -579,7 +589,8 @@ namespace Microsoft.CSharp.RuntimeBinder.Semantics
             Name name,
             int arity,
             MemLookFlags flags
-        ) {
+        )
+        {
             Debug.Assert((flags & ~MemLookFlags.All) == 0);
             Debug.Assert(obj == null || obj.Type != null);
             Debug.Assert(typeSrc is AggregateType);
@@ -637,7 +648,8 @@ namespace Microsoft.CSharp.RuntimeBinder.Semantics
                     (typeIface != null || ifaces.Count > 0)
                     && LookupInInterfaces(typeIface, ifaces)
                     && typeCls2 != null
-                ) {
+                )
+                {
                     // Search object last.
                     Debug.Assert(
                         typeCls2 != null && typeCls2.IsPredefType(PredefinedType.PT_OBJECT)

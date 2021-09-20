@@ -11,7 +11,8 @@ namespace Microsoft.AspNetCore.Razor.Language.Legacy
             string name,
             SyntaxNode value,
             AttributeStructure attributeStructure
-        ) {
+        )
+        {
             Name = name;
             Value = value;
             AttributeStructure = attributeStructure;

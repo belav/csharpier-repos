@@ -158,7 +158,8 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.NavigateTo
             TestHost testHost,
             string content,
             Func<TestWorkspace, Task> body
-        ) {
+        )
+        {
             await TestAsync(content, body, testHost, null);
             await TestAsync(
                 content,
@@ -179,7 +180,8 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.NavigateTo
             Func<TestWorkspace, Task> body,
             TestHost testHost,
             Func<HostWorkspaceServices, IDocumentTrackingService> createTrackingService
-        ) {
+        )
+        {
             using var workspace = CreateWorkspace(content, testHost, createTrackingService);
             await body(workspace);
         }
@@ -188,7 +190,8 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.NavigateTo
             XElement workspaceElement,
             TestHost testHost,
             Func<HostWorkspaceServices, IDocumentTrackingService> createTrackingService
-        ) {
+        )
+        {
             var exportProvider = s_composition.WithTestHostParts(testHost)
                 .ExportProviderFactory.CreateExportProvider();
 
@@ -206,7 +209,8 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.NavigateTo
             string content,
             TestHost testHost,
             Func<HostWorkspaceServices, IDocumentTrackingService> createTrackingService
-        ) {
+        )
+        {
             var exportProvider = s_composition.WithTestHostParts(testHost)
                 .ExportProviderFactory.CreateExportProvider();
 
@@ -233,7 +237,8 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.NavigateTo
         protected static void VerifyNavigateToResultItems(
             List<NavigateToItem> expecteditems,
             IEnumerable<NavigateToItem> items
-        ) {
+        )
+        {
             expecteditems = expecteditems.OrderBy(i => i.Name).ToList();
             items = items.OrderBy(i => i.Name).ToList();
 
@@ -284,7 +289,8 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.NavigateTo
             string navigateToItemKind,
             Glyph glyph,
             string additionalInfo = null
-        ) {
+        )
+        {
             // Verify symbol information
             Assert.Equal(name, result.Name);
             Assert.Equal(matchKind, result.PatternMatch.Kind);

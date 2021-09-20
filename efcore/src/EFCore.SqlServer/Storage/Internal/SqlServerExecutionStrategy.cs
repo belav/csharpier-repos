@@ -48,7 +48,8 @@ namespace Microsoft.EntityFrameworkCore.SqlServer.Storage.Internal
             TState state,
             Func<DbContext, TState, TResult> operation,
             Func<DbContext, TState, ExecutionResult<TResult>>? verifySucceeded
-        ) {
+        )
+        {
             try
             {
                 return operation(Dependencies.CurrentContext.Context, state);
@@ -83,7 +84,8 @@ namespace Microsoft.EntityFrameworkCore.SqlServer.Storage.Internal
                 Task<ExecutionResult<TResult>>
             >? verifySucceeded,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             try
             {
                 return await operation(

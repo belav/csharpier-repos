@@ -33,7 +33,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             MethodSymbol method,
             LookupResultKind resultKind = LookupResultKind.Viable,
             DiagnosticInfo error = null
-        ) {
+        )
+        {
             this.PopulateHelper(receiverOpt, resultKind, error);
             this.Methods.Add(method);
         }
@@ -44,7 +45,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             ImmutableArray<TypeWithAnnotations> typeArguments,
             LookupResultKind resultKind = LookupResultKind.Viable,
             DiagnosticInfo error = null
-        ) {
+        )
+        {
             this.PopulateHelper(receiverOpt, resultKind, error);
             this.IsExtensionMethodGroup = true;
             foreach (var member in members)
@@ -63,7 +65,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             ImmutableArray<TypeWithAnnotations> typeArguments,
             LookupResultKind resultKind = LookupResultKind.Viable,
             DiagnosticInfo error = null
-        ) {
+        )
+        {
             this.PopulateHelper(receiverOpt, resultKind, error);
             this.Methods.AddRange(methods);
             if (!typeArguments.IsDefault)
@@ -76,7 +79,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             BoundExpression receiverOpt,
             LookupResultKind resultKind,
             DiagnosticInfo error
-        ) {
+        )
+        {
             VerifyClear();
             this.Receiver = receiverOpt;
             this.Error = error;

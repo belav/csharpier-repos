@@ -16,10 +16,8 @@ namespace Microsoft.AspNetCore.DataProtection
         public TypeForwardingActivator(IServiceProvider services)
             : this(services, NullLoggerFactory.Instance) { }
 
-        public TypeForwardingActivator(
-            IServiceProvider services,
-            ILoggerFactory loggerFactory
-        ) : base(services)
+        public TypeForwardingActivator(IServiceProvider services, ILoggerFactory loggerFactory)
+            : base(services)
         {
             _logger = loggerFactory.CreateLogger(typeof(TypeForwardingActivator));
         }
@@ -32,7 +30,8 @@ namespace Microsoft.AspNetCore.DataProtection
             Type expectedBaseType,
             string originalTypeName,
             out bool forwarded
-        ) {
+        )
+        {
             var forwardedTypeName = originalTypeName;
             var candidate = false;
             if (originalTypeName.Contains(OldNamespace))
@@ -44,7 +43,8 @@ namespace Microsoft.AspNetCore.DataProtection
             if (
                 candidate
                 || forwardedTypeName.StartsWith(CurrentNamespace + ".", StringComparison.Ordinal)
-            ) {
+            )
+            {
                 candidate = true;
                 forwardedTypeName = RemoveVersionFromAssemblyName(forwardedTypeName);
             }

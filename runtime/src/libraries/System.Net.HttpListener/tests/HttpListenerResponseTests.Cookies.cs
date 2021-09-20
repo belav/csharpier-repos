@@ -103,7 +103,8 @@ namespace System.Net.Tests
             int expectedBytes,
             string expectedSetCookie,
             string expectedSetCookie2
-        ) {
+        )
+        {
             HttpListenerResponse response = await GetResponse();
             response.Cookies = cookies;
 

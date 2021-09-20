@@ -29,7 +29,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Utilities
         private UsingsAndExternAliasesDirectiveComparer(
             IComparer<NameSyntax> nameComparer,
             IComparer<SyntaxToken> tokenComparer
-        ) {
+        )
+        {
             RoslynDebug.AssertNotNull(nameComparer);
             RoslynDebug.AssertNotNull(tokenComparer);
             _nameComparer = nameComparer;
@@ -47,7 +48,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Utilities
         private static UsingKind GetUsingKind(
             UsingDirectiveSyntax? usingDirective,
             ExternAliasDirectiveSyntax? externDirective
-        ) {
+        )
+        {
             if (externDirective != null)
             {
                 return UsingKind.Extern;

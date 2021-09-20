@@ -55,13 +55,15 @@ namespace Microsoft.CodeAnalysis.CSharp.PopulateSwitch
             SwitchExpressionSyntax switchNode,
             int insertLocation,
             List<SwitchExpressionArmSyntax> newArms
-        ) {
+        )
+        {
             // If the existing switch expression ends with a comma, then ensure that we preserve
             // that.  Also do this for an empty switch statement.
             if (
                 switchNode.Arms.Count == 0
                 || !switchNode.Arms.GetWithSeparators().LastOrDefault().IsNode
-            ) {
+            )
+            {
                 return switchNode.WithArms(
                     switchNode.Arms.InsertRangeWithTrailingSeparator(
                         insertLocation,

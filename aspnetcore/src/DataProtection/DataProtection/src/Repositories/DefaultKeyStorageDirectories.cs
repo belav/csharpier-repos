@@ -44,7 +44,8 @@ namespace Microsoft.AspNetCore.DataProtection.Repositories
             if (
                 RuntimeInformation.IsOSPlatform(OSPlatform.Windows)
                 && !string.IsNullOrEmpty(localAppDataFromSystemPath)
-            ) {
+            )
+            {
                 // To preserve backwards-compatibility with 1.x, Environment.SpecialFolder.LocalApplicationData
                 // cannot take precedence over $LOCALAPPDATA and $HOME/.aspnet on non-Windows platforms
                 retVal = GetKeyStorageDirectoryFromBaseAppDataPath(localAppDataFromSystemPath);

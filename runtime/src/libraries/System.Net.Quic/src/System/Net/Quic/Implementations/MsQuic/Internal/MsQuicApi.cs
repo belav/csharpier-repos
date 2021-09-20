@@ -156,7 +156,8 @@ namespace System.Net.Quic.Implementations.MsQuic.Internal
                     DllImportSearchPath.AssemblyDirectory,
                     out IntPtr msQuicHandle
                 )
-            ) {
+            )
+            {
                 try
                 {
                     if (
@@ -165,7 +166,8 @@ namespace System.Net.Quic.Implementations.MsQuic.Internal
                             "MsQuicOpen",
                             out IntPtr msQuicOpenAddress
                         )
-                    ) {
+                    )
+                    {
                         MsQuicOpenDelegate msQuicOpen =
                             Marshal.GetDelegateForFunctionPointer<MsQuicOpenDelegate>(
                                 msQuicOpenAddress

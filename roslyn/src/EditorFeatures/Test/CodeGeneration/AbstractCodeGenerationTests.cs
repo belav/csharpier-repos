@@ -27,7 +27,8 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.CodeGeneration
             AdhocWorkspace workspace,
             SyntaxNode syntaxNode,
             string languageName
-        ) {
+        )
+        {
             var projectId = ProjectId.CreateNewId();
 
             var project = workspace.CurrentSolution.AddProject(
@@ -58,7 +59,8 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.CodeGeneration
         private static SyntaxNode WrapExpressionInBoilerplate(
             SyntaxNode expression,
             SyntaxGenerator codeDefFactory
-        ) {
+        )
+        {
             return codeDefFactory.CompilationUnit(
                 codeDefFactory.NamespaceImportDeclaration(codeDefFactory.IdentifierName("System")),
                 codeDefFactory.ClassDeclaration(
@@ -84,7 +86,8 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.CodeGeneration
             string csSimple,
             string vb,
             string vbSimple
-        ) {
+        )
+        {
             Assert.True(
                 cs != null || csSimple != null || vb != null || vbSimple != null,
                 $"At least one of {nameof(cs)}, {nameof(csSimple)}, {nameof(vb)}, {nameof(vbSimple)} must be provided"

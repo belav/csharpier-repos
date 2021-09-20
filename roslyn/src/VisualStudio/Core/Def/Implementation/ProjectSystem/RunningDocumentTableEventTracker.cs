@@ -34,7 +34,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.ProjectSystem
             IVsEditorAdaptersFactoryService editorAdaptersFactoryService,
             IVsRunningDocumentTable runningDocumentTable,
             IRunningDocumentTableEventListener listener
-        ) {
+        )
+        {
             Contract.ThrowIfNull(threadingContext);
             Contract.ThrowIfNull(editorAdaptersFactoryService);
             Contract.ThrowIfNull(runningDocumentTable);
@@ -67,7 +68,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.ProjectSystem
             uint dwRDTLockType,
             uint dwReadLocksRemaining,
             uint dwEditLocksRemaining
-        ) {
+        )
+        {
             if (dwReadLocksRemaining + dwEditLocksRemaining == 0)
             {
                 _foregroundAffinitization.AssertIsForeground();
@@ -93,7 +95,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.ProjectSystem
             IVsHierarchy pHierNew,
             uint itemidNew,
             string pszMkDocumentNew
-        ) {
+        )
+        {
             // Did we rename?
             if ((grfAttribs & (uint)__VSRDTATTRIB.RDTA_MkDocument) != 0)
             {
@@ -101,7 +104,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.ProjectSystem
                 if (
                     _runningDocumentTable.IsDocumentInitialized(docCookie)
                     && TryGetBuffer(docCookie, out var buffer)
-                ) {
+                )
+                {
                     _listener.OnRenameDocument(
                         newMoniker: pszMkDocumentNew,
                         oldMoniker: pszMkDocumentOld,
@@ -122,13 +126,15 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.ProjectSystem
                         | (uint)__VSRDTATTRIB3.RDTA_DocumentInitialized
                     )
                 ) != 0
-            ) {
+            )
+            {
                 _foregroundAffinitization.AssertIsForeground();
                 if (
                     _runningDocumentTable.IsDocumentInitialized(docCookie)
                     && TryGetMoniker(docCookie, out var moniker)
                     && TryGetBuffer(docCookie, out var buffer)
-                ) {
+                )
+                {
                     _runningDocumentTable.GetDocumentHierarchyItem(
                         docCookie,
                         out var hierarchy,
@@ -144,7 +150,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.ProjectSystem
                 if (
                     _runningDocumentTable.IsDocumentInitialized(docCookie)
                     && TryGetMoniker(docCookie, out var moniker)
-                ) {
+                )
+                {
                     _runningDocumentTable.GetDocumentHierarchyItem(
                         docCookie,
                         out var hierarchy,
@@ -165,7 +172,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.ProjectSystem
                 && _runningDocumentTable.IsDocumentInitialized(docCookie)
                 && TryGetMoniker(docCookie, out var moniker)
                 && TryGetBuffer(docCookie, out var buffer)
-            ) {
+            )
+            {
                 _runningDocumentTable.GetDocumentHierarchyItem(docCookie, out var hierarchy, out _);
                 _listener.OnOpenDocument(moniker, buffer, hierarchy, pFrame);
             }
@@ -193,7 +201,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.ProjectSystem
         public bool TryGetBufferFromMoniker(
             string moniker,
             [NotNullWhen(true)] out ITextBuffer? textBuffer
-        ) {
+        )
+        {
             _foregroundAffinitization.AssertIsForeground();
 
             return _runningDocumentTable.TryGetBufferFromMoniker(
@@ -254,7 +263,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.ProjectSystem
                     enumRunningDocuments.Next((uint)cookies.Length, cookies, out var cookiesFetched)
                 )
                 && cookiesFetched > 0
-            ) {
+            )
+            {
                 for (var cookieIndex = 0; cookieIndex < cookiesFetched; cookieIndex++)
                 {
                     var cookie = cookies[cookieIndex];

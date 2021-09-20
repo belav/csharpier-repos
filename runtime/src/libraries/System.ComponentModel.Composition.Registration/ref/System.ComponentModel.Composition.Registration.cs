@@ -12,23 +12,27 @@ namespace System.ComponentModel.Composition.Registration
         public System.ComponentModel.Composition.Registration.ExportBuilder AddMetadata(
             string name,
             System.Func<System.Type, object> itemFunc
-        ) {
+        )
+        {
             throw null;
         }
         public System.ComponentModel.Composition.Registration.ExportBuilder AddMetadata(
             string name,
             object value
-        ) {
+        )
+        {
             throw null;
         }
         public System.ComponentModel.Composition.Registration.ExportBuilder AsContractName(
             string contractName
-        ) {
+        )
+        {
             throw null;
         }
         public System.ComponentModel.Composition.Registration.ExportBuilder AsContractType(
             System.Type type
-        ) {
+        )
+        {
             throw null;
         }
         public System.ComponentModel.Composition.Registration.ExportBuilder AsContractType<T>()
@@ -53,12 +57,14 @@ namespace System.ComponentModel.Composition.Registration
         }
         public System.ComponentModel.Composition.Registration.ImportBuilder AsContractName(
             string contractName
-        ) {
+        )
+        {
             throw null;
         }
         public System.ComponentModel.Composition.Registration.ImportBuilder AsContractType(
             System.Type type
-        ) {
+        )
+        {
             throw null;
         }
         public System.ComponentModel.Composition.Registration.ImportBuilder AsContractType<T>()
@@ -67,17 +73,20 @@ namespace System.ComponentModel.Composition.Registration
         }
         public System.ComponentModel.Composition.Registration.ImportBuilder AsMany(
             bool isMany = true
-        ) {
+        )
+        {
             throw null;
         }
         public System.ComponentModel.Composition.Registration.ImportBuilder RequiredCreationPolicy(
             System.ComponentModel.Composition.CreationPolicy requiredCreationPolicy
-        ) {
+        )
+        {
             throw null;
         }
         public System.ComponentModel.Composition.Registration.ImportBuilder Source(
             System.ComponentModel.Composition.ImportSource source
-        ) {
+        )
+        {
             throw null;
         }
     }
@@ -90,7 +99,8 @@ namespace System.ComponentModel.Composition.Registration
         }
         public T Import<T>(
             System.Action<System.ComponentModel.Composition.Registration.ImportBuilder> configure
-        ) {
+        )
+        {
             throw null;
         }
     }
@@ -100,13 +110,15 @@ namespace System.ComponentModel.Composition.Registration
         public System.ComponentModel.Composition.Registration.PartBuilder AddMetadata(
             string name,
             System.Func<System.Type, object> itemFunc
-        ) {
+        )
+        {
             throw null;
         }
         public System.ComponentModel.Composition.Registration.PartBuilder AddMetadata(
             string name,
             object value
-        ) {
+        )
+        {
             throw null;
         }
         public System.ComponentModel.Composition.Registration.PartBuilder Export()
@@ -115,7 +127,8 @@ namespace System.ComponentModel.Composition.Registration
         }
         public System.ComponentModel.Composition.Registration.PartBuilder Export(
             System.Action<System.ComponentModel.Composition.Registration.ExportBuilder> exportConfiguration
-        ) {
+        )
+        {
             throw null;
         }
         public System.ComponentModel.Composition.Registration.PartBuilder ExportInterfaces()
@@ -124,7 +137,8 @@ namespace System.ComponentModel.Composition.Registration
         }
         public System.ComponentModel.Composition.Registration.PartBuilder ExportInterfaces(
             System.Predicate<System.Type> interfaceFilter
-        ) {
+        )
+        {
             throw null;
         }
         public System.ComponentModel.Composition.Registration.PartBuilder ExportInterfaces(
@@ -133,12 +147,14 @@ namespace System.ComponentModel.Composition.Registration
                 System.Type,
                 System.ComponentModel.Composition.Registration.ExportBuilder
             > exportConfiguration
-        ) {
+        )
+        {
             throw null;
         }
         public System.ComponentModel.Composition.Registration.PartBuilder ExportProperties(
             System.Predicate<System.Reflection.PropertyInfo> propertyFilter
-        ) {
+        )
+        {
             throw null;
         }
         public System.ComponentModel.Composition.Registration.PartBuilder ExportProperties(
@@ -147,12 +163,14 @@ namespace System.ComponentModel.Composition.Registration
                 System.Reflection.PropertyInfo,
                 System.ComponentModel.Composition.Registration.ExportBuilder
             > exportConfiguration
-        ) {
+        )
+        {
             throw null;
         }
         public System.ComponentModel.Composition.Registration.PartBuilder ExportProperties<T>(
             System.Predicate<System.Reflection.PropertyInfo> propertyFilter
-        ) {
+        )
+        {
             throw null;
         }
         public System.ComponentModel.Composition.Registration.PartBuilder ExportProperties<T>(
@@ -161,7 +179,8 @@ namespace System.ComponentModel.Composition.Registration
                 System.Reflection.PropertyInfo,
                 System.ComponentModel.Composition.Registration.ExportBuilder
             > exportConfiguration
-        ) {
+        )
+        {
             throw null;
         }
         public System.ComponentModel.Composition.Registration.PartBuilder Export<T>()
@@ -170,12 +189,14 @@ namespace System.ComponentModel.Composition.Registration
         }
         public System.ComponentModel.Composition.Registration.PartBuilder Export<T>(
             System.Action<System.ComponentModel.Composition.Registration.ExportBuilder> exportConfiguration
-        ) {
+        )
+        {
             throw null;
         }
         public System.ComponentModel.Composition.Registration.PartBuilder ImportProperties(
             System.Predicate<System.Reflection.PropertyInfo> propertyFilter
-        ) {
+        )
+        {
             throw null;
         }
         public System.ComponentModel.Composition.Registration.PartBuilder ImportProperties(
@@ -184,12 +205,14 @@ namespace System.ComponentModel.Composition.Registration
                 System.Reflection.PropertyInfo,
                 System.ComponentModel.Composition.Registration.ImportBuilder
             > importConfiguration
-        ) {
+        )
+        {
             throw null;
         }
         public System.ComponentModel.Composition.Registration.PartBuilder ImportProperties<T>(
             System.Predicate<System.Reflection.PropertyInfo> propertyFilter
-        ) {
+        )
+        {
             throw null;
         }
         public System.ComponentModel.Composition.Registration.PartBuilder ImportProperties<T>(
@@ -198,7 +221,8 @@ namespace System.ComponentModel.Composition.Registration
                 System.Reflection.PropertyInfo,
                 System.ComponentModel.Composition.Registration.ImportBuilder
             > importConfiguration
-        ) {
+        )
+        {
             throw null;
         }
         public System.ComponentModel.Composition.Registration.PartBuilder SelectConstructor(
@@ -206,7 +230,8 @@ namespace System.ComponentModel.Composition.Registration
                 System.Reflection.ConstructorInfo[],
                 System.Reflection.ConstructorInfo
             > constructorFilter
-        ) {
+        )
+        {
             throw null;
         }
         public System.ComponentModel.Composition.Registration.PartBuilder SelectConstructor(
@@ -218,12 +243,14 @@ namespace System.ComponentModel.Composition.Registration
                 System.Reflection.ParameterInfo,
                 System.ComponentModel.Composition.Registration.ImportBuilder
             > importConfiguration
-        ) {
+        )
+        {
             throw null;
         }
         public System.ComponentModel.Composition.Registration.PartBuilder SetCreationPolicy(
             System.ComponentModel.Composition.CreationPolicy creationPolicy
-        ) {
+        )
+        {
             throw null;
         }
     }
@@ -232,46 +259,54 @@ namespace System.ComponentModel.Composition.Registration
         internal PartBuilder() { }
         public System.ComponentModel.Composition.Registration.PartBuilder<T> ExportProperty(
             System.Linq.Expressions.Expression<System.Func<T, object>> propertyFilter
-        ) {
+        )
+        {
             throw null;
         }
         public System.ComponentModel.Composition.Registration.PartBuilder<T> ExportProperty(
             System.Linq.Expressions.Expression<System.Func<T, object>> propertyFilter,
             System.Action<System.ComponentModel.Composition.Registration.ExportBuilder> exportConfiguration
-        ) {
+        )
+        {
             throw null;
         }
         public System.ComponentModel.Composition.Registration.PartBuilder<T> ExportProperty<TContract>(
             System.Linq.Expressions.Expression<System.Func<T, object>> propertyFilter
-        ) {
+        )
+        {
             throw null;
         }
         public System.ComponentModel.Composition.Registration.PartBuilder<T> ExportProperty<TContract>(
             System.Linq.Expressions.Expression<System.Func<T, object>> propertyFilter,
             System.Action<System.ComponentModel.Composition.Registration.ExportBuilder> exportConfiguration
-        ) {
+        )
+        {
             throw null;
         }
         public System.ComponentModel.Composition.Registration.PartBuilder<T> ImportProperty(
             System.Linq.Expressions.Expression<System.Func<T, object>> propertyFilter
-        ) {
+        )
+        {
             throw null;
         }
         public System.ComponentModel.Composition.Registration.PartBuilder<T> ImportProperty(
             System.Linq.Expressions.Expression<System.Func<T, object>> propertyFilter,
             System.Action<System.ComponentModel.Composition.Registration.ImportBuilder> importConfiguration
-        ) {
+        )
+        {
             throw null;
         }
         public System.ComponentModel.Composition.Registration.PartBuilder<T> ImportProperty<TContract>(
             System.Linq.Expressions.Expression<System.Func<T, object>> propertyFilter
-        ) {
+        )
+        {
             throw null;
         }
         public System.ComponentModel.Composition.Registration.PartBuilder<T> ImportProperty<TContract>(
             System.Linq.Expressions.Expression<System.Func<T, object>> propertyFilter,
             System.Action<System.ComponentModel.Composition.Registration.ImportBuilder> importConfiguration
-        ) {
+        )
+        {
             throw null;
         }
         public System.ComponentModel.Composition.Registration.PartBuilder<T> SelectConstructor(
@@ -279,7 +314,8 @@ namespace System.ComponentModel.Composition.Registration
                     System.ComponentModel.Composition.Registration.ParameterImportBuilder,
                     T
                 >> constructorFilter
-        ) {
+        )
+        {
             throw null;
         }
     }
@@ -292,7 +328,8 @@ namespace System.ComponentModel.Composition.Registration
         }
         public System.ComponentModel.Composition.Registration.PartBuilder ForTypesDerivedFrom(
             System.Type type
-        ) {
+        )
+        {
             throw null;
         }
         public System.ComponentModel.Composition.Registration.PartBuilder<T> ForTypesDerivedFrom<T>()
@@ -301,12 +338,14 @@ namespace System.ComponentModel.Composition.Registration
         }
         public System.ComponentModel.Composition.Registration.PartBuilder ForTypesMatching(
             System.Predicate<System.Type> typeFilter
-        ) {
+        )
+        {
             throw null;
         }
         public System.ComponentModel.Composition.Registration.PartBuilder<T> ForTypesMatching<T>(
             System.Predicate<System.Type> typeFilter
-        ) {
+        )
+        {
             throw null;
         }
         public System.ComponentModel.Composition.Registration.PartBuilder<T> ForType<T>()
@@ -316,13 +355,15 @@ namespace System.ComponentModel.Composition.Registration
         protected override System.Collections.Generic.IEnumerable<object> GetCustomAttributes(
             System.Reflection.MemberInfo member,
             System.Collections.Generic.IEnumerable<object> declaredAttributes
-        ) {
+        )
+        {
             throw null;
         }
         protected override System.Collections.Generic.IEnumerable<object> GetCustomAttributes(
             System.Reflection.ParameterInfo parameter,
             System.Collections.Generic.IEnumerable<object> declaredAttributes
-        ) {
+        )
+        {
             throw null;
         }
     }

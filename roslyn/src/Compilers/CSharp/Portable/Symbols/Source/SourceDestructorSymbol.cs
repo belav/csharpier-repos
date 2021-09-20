@@ -21,12 +21,14 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             DestructorDeclarationSyntax syntax,
             bool isNullableAnalysisEnabled,
             BindingDiagnosticBag diagnostics
-        ) : base(
-            containingType,
-            syntax.GetReference(),
-            syntax.Identifier.GetLocation(),
-            isIterator: SyntaxFacts.HasYieldOperations(syntax.Body)
-        ) {
+        )
+            : base(
+                containingType,
+                syntax.GetReference(),
+                syntax.Identifier.GetLocation(),
+                isIterator: SyntaxFacts.HasYieldOperations(syntax.Body)
+            )
+        {
             const MethodKind methodKind = MethodKind.Destructor;
             Location location = this.Locations[0];
 
@@ -145,7 +147,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             Location location,
             BindingDiagnosticBag diagnostics,
             out bool modifierErrors
-        ) {
+        )
+        {
             // Check that the set of modifiers is allowed
             const DeclarationModifiers allowedModifiers =
                 DeclarationModifiers.Extern | DeclarationModifiers.Unsafe;
@@ -192,7 +195,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
 
         internal sealed override bool IsMetadataVirtual(
             bool ignoreInterfaceImplementationChanges = false
-        ) {
+        )
+        {
             return true;
         }
 
@@ -203,7 +207,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
 
         internal sealed override bool IsMetadataNewSlot(
             bool ignoreInterfaceImplementationChanges = false
-        ) {
+        )
+        {
             return (object)this.ContainingType.BaseTypeNoUseSiteDiagnostics == null;
         }
 

@@ -32,7 +32,8 @@ namespace System.Web.Http.Validation
 
         public static ModelValidator GetModelValidator(
             IEnumerable<ModelValidatorProvider> validatorProviders
-        ) {
+        )
+        {
             return new CompositeModelValidator(validatorProviders);
         }
 
@@ -43,14 +44,14 @@ namespace System.Web.Http.Validation
 
         private class CompositeModelValidator : ModelValidator
         {
-            public CompositeModelValidator(
-                IEnumerable<ModelValidatorProvider> validatorProviders
-            ) : base(validatorProviders) { }
+            public CompositeModelValidator(IEnumerable<ModelValidatorProvider> validatorProviders)
+                : base(validatorProviders) { }
 
             public override IEnumerable<ModelValidationResult> Validate(
                 ModelMetadata metadata,
                 object container
-            ) {
+            )
+            {
                 bool propertiesValid = true;
 
                 foreach (ModelMetadata propertyMetadata in metadata.Properties)
@@ -59,13 +60,15 @@ namespace System.Web.Http.Validation
                         ModelValidator propertyValidator in propertyMetadata.GetValidators(
                             ValidatorProviders
                         )
-                    ) {
+                    )
+                    {
                         foreach (
                             ModelValidationResult propertyResult in propertyValidator.Validate(
                                 metadata,
                                 container
                             )
-                        ) {
+                        )
+                        {
                             propertiesValid = false;
                             yield return new ModelValidationResult
                             {
@@ -83,13 +86,15 @@ namespace System.Web.Http.Validation
                 {
                     foreach (
                         ModelValidator typeValidator in metadata.GetValidators(ValidatorProviders)
-                    ) {
+                    )
+                    {
                         foreach (
                             ModelValidationResult typeResult in typeValidator.Validate(
                                 metadata,
                                 container
                             )
-                        ) {
+                        )
+                        {
                             yield return typeResult;
                         }
                     }

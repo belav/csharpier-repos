@@ -240,7 +240,8 @@ namespace Microsoft.AspNetCore.Mvc.DataAnnotations
         public void AttributesOverrideMetadataStrings(
             object attribute,
             Func<ModelMetadata, string> accessor
-        ) {
+        )
+        {
             // Arrange
             var attributes = new[] { attribute };
             var provider = CreateProvider(attributes);
@@ -368,7 +369,8 @@ namespace Microsoft.AspNetCore.Mvc.DataAnnotations
             Attribute attribute,
             Func<ModelMetadata, bool> accessor,
             bool expectedResult
-        ) {
+        )
+        {
             // Arrange
             var attributes = new[] { attribute };
             var provider = CreateProvider(attributes);
@@ -1061,7 +1063,8 @@ namespace Microsoft.AspNetCore.Mvc.DataAnnotations
                         }
                     ),
                     Options.Create(new MvcOptions())
-                ) {
+                )
+            {
                 _attributes = attributes;
             }
 
@@ -1085,7 +1088,8 @@ namespace Microsoft.AspNetCore.Mvc.DataAnnotations
 
             protected override DefaultMetadataDetails[] CreatePropertyDetails(
                 ModelMetadataIdentity key
-            ) {
+            )
+            {
                 var entries = base.CreatePropertyDetails(key);
                 return entries.Select(
                         e =>

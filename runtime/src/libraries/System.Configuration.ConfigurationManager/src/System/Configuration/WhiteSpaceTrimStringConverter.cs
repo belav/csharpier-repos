@@ -13,7 +13,8 @@ namespace System.Configuration
             CultureInfo ci,
             object value,
             Type type
-        ) {
+        )
+        {
             ValidateType(value, typeof(string));
 
             return value == null ? string.Empty : ((string)value).Trim();

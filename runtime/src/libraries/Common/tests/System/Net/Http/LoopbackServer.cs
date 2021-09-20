@@ -73,7 +73,8 @@ namespace System.Net.Test.Common
         public static async Task CreateServerAsync(
             Func<LoopbackServer, Task> funcAsync,
             Options options = null
-        ) {
+        )
+        {
             using (var server = new LoopbackServer(options))
             {
                 await funcAsync(server).ConfigureAwait(false);
@@ -83,7 +84,8 @@ namespace System.Net.Test.Common
         public static Task CreateServerAsync(
             Func<LoopbackServer, Uri, Task> funcAsync,
             Options options = null
-        ) {
+        )
+        {
             return CreateServerAsync(server => funcAsync(server, server.Address), options);
         }
 
@@ -91,7 +93,8 @@ namespace System.Net.Test.Common
             Func<Uri, Task> clientFunc,
             Func<LoopbackServer, Task> serverFunc,
             Options options = null
-        ) {
+        )
+        {
             return CreateServerAsync(
                 async server =>
                 {
@@ -146,7 +149,8 @@ namespace System.Net.Test.Common
 
         public async Task<List<string>> AcceptConnectionSendCustomResponseAndCloseAsync(
             string response
-        ) {
+        )
+        {
             List<string> lines = null;
 
             // Note, we assume there's no request body.
@@ -167,7 +171,8 @@ namespace System.Net.Test.Common
 
         public async Task<List<string>> AcceptConnectionSendCustomResponseAndCloseAsync(
             byte[] response
-        ) {
+        )
+        {
             List<string> lines = null;
 
             // Note, we assume there's no request body.
@@ -190,7 +195,8 @@ namespace System.Net.Test.Common
             HttpStatusCode statusCode = HttpStatusCode.OK,
             string additionalHeaders = null,
             string content = null
-        ) {
+        )
+        {
             List<string> lines = null;
 
             // Note, we assume there's no request body.
@@ -353,7 +359,8 @@ namespace System.Net.Test.Common
             ContentMode mode,
             string content,
             bool connectionClose = false
-        ) {
+        )
+        {
             switch (mode)
             {
                 case ContentMode.ContentLength:
@@ -511,7 +518,8 @@ namespace System.Net.Test.Common
                 Socket socket,
                 Stream stream,
                 Options httpOptions
-            ) {
+            )
+            {
                 if (httpOptions.UseSsl)
                 {
                     var sslStream = new SslStream(
@@ -526,7 +534,8 @@ namespace System.Net.Test.Common
                         X509Certificate2 cert =
                             httpOptions.Certificate
                             ?? Configuration.Certificates.GetServerCertificate()
-                    ) {
+                    )
+                    {
                         await sslStream.AuthenticateAsServerAsync(
                                 cert,
                                 clientCertificateRequired: true, // allowed but not required
@@ -815,14 +824,16 @@ namespace System.Net.Test.Common
                 HttpStatusCode statusCode = HttpStatusCode.OK,
                 string additionalHeaders = null,
                 string content = null
-            ) {
+            )
+            {
                 await SendResponseAsync(GetHttpResponse(statusCode, additionalHeaders, content))
                     .ConfigureAwait(false);
             }
 
             public async Task<List<string>> ReadRequestHeaderAndSendCustomResponseAsync(
                 string response
-            ) {
+            )
+            {
                 List<string> lines = await ReadRequestHeaderAsync().ConfigureAwait(false);
                 await WriteStringAsync(response);
                 return lines;
@@ -830,7 +841,8 @@ namespace System.Net.Test.Common
 
             public async Task<List<string>> ReadRequestHeaderAndSendCustomResponseAsync(
                 byte[] response
-            ) {
+            )
+            {
                 List<string> lines = await ReadRequestHeaderAsync().ConfigureAwait(false);
                 await _stream.WriteAsync(response, 0, response.Length).ConfigureAwait(false);
                 return lines;
@@ -840,7 +852,8 @@ namespace System.Net.Test.Common
                 HttpStatusCode statusCode = HttpStatusCode.OK,
                 string additionalHeaders = null,
                 string content = null
-            ) {
+            )
+            {
                 List<string> lines = await ReadRequestHeaderAsync().ConfigureAwait(false);
                 await SendResponseAsync(statusCode, additionalHeaders, content)
                     .ConfigureAwait(false);
@@ -888,7 +901,8 @@ namespace System.Net.Test.Common
                     else if (
                         requestData.GetHeaderValueCount("Transfer-Encoding") != 0
                         && requestData.GetSingleHeaderValue("Transfer-Encoding") == "chunked"
-                    ) {
+                    )
+                    {
                         _contentLength = -1;
                     }
                 }
@@ -966,7 +980,8 @@ namespace System.Net.Test.Common
                 string content = null,
                 bool isFinal = true,
                 int requestId = 0
-            ) {
+            )
+            {
                 MemoryStream headerBytes = new MemoryStream();
                 int contentLength = -1;
                 bool isChunked = false;
@@ -982,7 +997,8 @@ namespace System.Net.Test.Common
                                 "Content-Length",
                                 StringComparison.OrdinalIgnoreCase
                             )
-                        ) {
+                        )
+                        {
                             hasContentLength = true;
                             if (headerData.Value == null)
                             {
@@ -1000,7 +1016,8 @@ namespace System.Net.Test.Common
                                 "chunked",
                                 StringComparison.OrdinalIgnoreCase
                             )
-                        ) {
+                        )
+                        {
                             isChunked = true;
                         }
 
@@ -1055,7 +1072,8 @@ namespace System.Net.Test.Common
                 HttpStatusCode statusCode = HttpStatusCode.OK,
                 IList<HttpHeaderData> headers = null,
                 int requestId = 0
-            ) {
+            )
+            {
                 string headerString = null;
 
                 if (headers != null)
@@ -1080,7 +1098,8 @@ namespace System.Net.Test.Common
                 byte[] body,
                 bool isFinal = true,
                 int requestId = 0
-            ) {
+            )
+            {
                 await SendResponseAsync(body).ConfigureAwait(false);
             }
 
@@ -1088,7 +1107,8 @@ namespace System.Net.Test.Common
                 HttpStatusCode statusCode = HttpStatusCode.OK,
                 IList<HttpHeaderData> headers = null,
                 string content = ""
-            ) {
+            )
+            {
                 HttpRequestData requestData = await ReadRequestDataAsync().ConfigureAwait(false);
 
                 // For historical reasons, we added Date and "Connection: close" (to improve test reliability)
@@ -1120,7 +1140,8 @@ namespace System.Net.Test.Common
             public override async Task WaitForCancellationAsync(
                 bool ignoreIncomingData = true,
                 int requestId = 0
-            ) {
+            )
+            {
                 var buffer = new byte[1024];
                 while (true)
                 {
@@ -1143,7 +1164,8 @@ namespace System.Net.Test.Common
             HttpStatusCode statusCode = HttpStatusCode.OK,
             IList<HttpHeaderData> headers = null,
             string content = ""
-        ) {
+        )
+        {
             using (Connection connection = await EstablishConnectionAsync().ConfigureAwait(false))
             {
                 return await connection.HandleRequestAsync(statusCode, headers, content)
@@ -1171,7 +1193,8 @@ namespace System.Net.Test.Common
             Func<GenericLoopbackServer, Uri, Task> funcAsync,
             int millisecondsTimeout = 60_000,
             GenericLoopbackOptions options = null
-        ) {
+        )
+        {
             return LoopbackServer.CreateServerAsync(
                 (server, uri) => funcAsync(server, uri),
                 options: CreateOptions(options)
@@ -1182,7 +1205,8 @@ namespace System.Net.Test.Common
             Socket socket,
             Stream stream,
             GenericLoopbackOptions options = null
-        ) {
+        )
+        {
             return await LoopbackServer.Connection.CreateAsync(
                 socket,
                 stream,

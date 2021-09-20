@@ -40,7 +40,8 @@ namespace System.Data.Odbc
         internal static ArgumentOutOfRangeException NotSupportedEnumerationValue(
             Type type,
             int value
-        ) {
+        )
+        {
             return ADP.ArgumentOutOfRange(
                 SR.GetString(
                     SR.ODBC_NotSupportedEnumerationValue,
@@ -733,7 +734,8 @@ namespace System.Data.Odbc
             string? source,
             OdbcHandle hrHandle,
             RetCode retcode
-        ) {
+        )
+        {
             OdbcErrorCollection errors = new OdbcErrorCollection();
             GetDiagErrors(errors, source, hrHandle, retcode);
             return errors;
@@ -744,7 +746,8 @@ namespace System.Data.Odbc
             string? source,
             OdbcHandle hrHandle,
             RetCode retcode
-        ) {
+        )
+        {
             Debug.Assert(
                 retcode != ODBC32.RetCode.INVALID_HANDLE,
                 "retcode must never be ODBC32.RetCode.INVALID_HANDLE"
@@ -771,7 +774,8 @@ namespace System.Data.Odbc
                     );
                     if (
                         (RetCode.SUCCESS_WITH_INFO == retcode) && (message.Capacity - 1 < cchActual)
-                    ) {
+                    )
+                    {
                         message.Capacity = cchActual + 1;
                         retcode = hrHandle.GetDiagnosticRecord(
                             iRec,
@@ -1124,7 +1128,8 @@ namespace System.Data.Odbc
             int bsize,
             int csize,
             bool signType
-        ) {
+        )
+        {
             _odbcType = odbcType;
             _dbType = dbType;
             _type = type;

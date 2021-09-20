@@ -162,7 +162,8 @@ namespace System.Net.Http.Formatting.Internal
             bool urlEncode,
             string name,
             string value
-        ) {
+        )
+        {
             string effectiveName = name ?? String.Empty;
             string encodedName = urlEncode
                 ? UriQueryUtility.UrlEncode(effectiveName)

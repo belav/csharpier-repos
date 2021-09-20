@@ -167,7 +167,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Extensions
             SyntaxTree syntaxTree,
             CancellationToken cancellationToken,
             bool findInsideTrivia = false
-        ) {
+        )
+        {
             var span = trivia.FullSpan;
             if (span.Start == 0)
             {
@@ -181,7 +182,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Extensions
         public static IEnumerable<SyntaxTrivia> FilterComments(
             this IEnumerable<SyntaxTrivia> trivia,
             bool addElasticMarker
-        ) {
+        )
+        {
             var previousIsSingleLineComment = false;
             foreach (var t in trivia)
             {
@@ -221,7 +223,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Extensions
             out bool isDisable,
             out bool isActive,
             out SeparatedSyntaxList<SyntaxNode> errorCodes
-        ) {
+        )
+        {
             if (trivia.IsKind(SyntaxKind.PragmaWarningDirectiveTrivia))
             {
                 var pragmaWarning = (PragmaWarningDirectiveTriviaSyntax)trivia.GetStructure();

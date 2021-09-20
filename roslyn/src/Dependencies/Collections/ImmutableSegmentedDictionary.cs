@@ -64,10 +64,8 @@ namespace Microsoft.CodeAnalysis.Collections
         public static ImmutableSegmentedDictionary<TKey, TValue> ToImmutableSegmentedDictionary<
             TKey,
             TValue
-        >(
-            this IEnumerable<KeyValuePair<TKey, TValue>> items,
-            IEqualityComparer<TKey>? keyComparer
-        ) where TKey : notnull
+        >(this IEnumerable<KeyValuePair<TKey, TValue>> items, IEqualityComparer<TKey>? keyComparer)
+            where TKey : notnull
         {
             if (items is null)
                 throw new ArgumentNullException(nameof(items));

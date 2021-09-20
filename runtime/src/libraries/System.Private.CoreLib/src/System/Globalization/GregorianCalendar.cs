@@ -78,7 +78,8 @@ namespace System.Globalization
             if (
                 type < GregorianCalendarTypes.Localized
                 || type > GregorianCalendarTypes.TransliteratedFrench
-            ) {
+            )
+            {
                 throw new ArgumentOutOfRangeException(
                     nameof(type),
                     type,
@@ -102,7 +103,8 @@ namespace System.Globalization
                 if (
                     value < GregorianCalendarTypes.Localized
                     || value > GregorianCalendarTypes.TransliteratedFrench
-                ) {
+                )
+                {
                     throw new ArgumentOutOfRangeException(
                         nameof(value),
                         value,
@@ -338,7 +340,8 @@ namespace System.Globalization
                 || month < 1
                 || month > 12
                 || day < 1
-            ) {
+            )
+            {
                 return false;
             }
 
@@ -483,7 +486,8 @@ namespace System.Globalization
             int second,
             int millisecond,
             int era
-        ) {
+        )
+        {
             if (era != CurrentEra && era != ADEra)
             {
                 throw new ArgumentOutOfRangeException(
@@ -506,7 +510,8 @@ namespace System.Globalization
             int millisecond,
             int era,
             out DateTime result
-        ) {
+        )
+        {
             if (era != CurrentEra && era != ADEra)
             {
                 result = DateTime.MinValue;

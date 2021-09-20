@@ -21,9 +21,7 @@ namespace System.Reflection
             HResult = HResults.COR_E_CUSTOMATTRIBUTEFORMAT;
         }
 
-        protected CustomAttributeFormatException(
-            SerializationInfo info,
-            StreamingContext context
-        ) : base(info, context) { }
+        protected CustomAttributeFormatException(SerializationInfo info, StreamingContext context)
+            : base(info, context) { }
     }
 }

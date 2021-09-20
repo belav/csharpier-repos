@@ -50,7 +50,8 @@ namespace Microsoft.AspNetCore.Server.IIS.FunctionalTests
             if (
                 !principal.IsInRole(WindowsBuiltInRole.Administrator)
                 && !SkipInVSTSAttribute.RunningInVSTS
-            ) {
+            )
+            {
                 _skipReasonStatic += "The current console is not running as admin.";
                 return;
             }
@@ -58,7 +59,8 @@ namespace Microsoft.AspNetCore.Server.IIS.FunctionalTests
             if (
                 !File.Exists(Path.Combine(Environment.SystemDirectory, "inetsrv", "w3wp.exe"))
                 && !SkipInVSTSAttribute.RunningInVSTS
-            ) {
+            )
+            {
                 _skipReasonStatic += "The machine does not have IIS installed.";
                 return;
             }
@@ -115,7 +117,8 @@ namespace Microsoft.AspNetCore.Server.IIS.FunctionalTests
                     File.Exists(
                         Path.Combine(Environment.SystemDirectory, "inetsrv", module.DllName)
                     ) || SkipInVSTSAttribute.RunningInVSTS
-                ) {
+                )
+                {
                     _modulesAvailable |= module.Capability;
                 }
             }

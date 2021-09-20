@@ -48,7 +48,8 @@ namespace System.CodeDom.Tests
         public void Ctor_String_CodeTypeReference(
             string localName,
             CodeTypeReference catchExceptionType
-        ) {
+        )
+        {
             var catchClause = new CodeCatchClause(localName, catchExceptionType);
             Assert.Equal(localName ?? string.Empty, catchClause.LocalName);
             Assert.Equal(
@@ -81,7 +82,8 @@ namespace System.CodeDom.Tests
             string localName,
             CodeTypeReference catchExceptionType,
             CodeStatement[] statements
-        ) {
+        )
+        {
             var catchClause = new CodeCatchClause(localName, catchExceptionType, statements);
             Assert.Equal(localName ?? string.Empty, catchClause.LocalName);
             Assert.Equal(

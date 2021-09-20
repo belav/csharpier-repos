@@ -66,7 +66,8 @@ namespace Microsoft.EntityFrameworkCore.Query.Internal
         public virtual void SetSingleQueryCollectionContext(
             int collectionId,
             SingleQueryCollectionContext singleQueryCollectionContext
-        ) {
+        )
+        {
             while (Collections.Count <= collectionId)
             {
                 Collections.Add(null);

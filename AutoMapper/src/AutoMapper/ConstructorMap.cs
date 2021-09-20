@@ -56,7 +56,8 @@ namespace AutoMapper
             ParameterInfo parameter,
             IEnumerable<MemberInfo> sourceMembers,
             bool canResolveValue
-        ) {
+        )
+        {
             TypeMap = typeMap;
             Parameter = parameter;
             _sourceMembers = sourceMembers.ToArray();

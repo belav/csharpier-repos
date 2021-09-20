@@ -54,11 +54,13 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.LineSeparators
             IEditorFormatMapService editorFormatMapService,
             IForegroundNotificationService notificationService,
             IAsynchronousOperationListenerProvider listenerProvider
-        ) : base(
-            threadingContext,
-            listenerProvider.GetListener(FeatureAttribute.LineSeparators),
-            notificationService
-        ) {
+        )
+            : base(
+                threadingContext,
+                listenerProvider.GetListener(FeatureAttribute.LineSeparators),
+                notificationService
+            )
+        {
             _editorFormatMap = editorFormatMapService.GetEditorFormatMap("text");
             _editorFormatMap.FormatMappingChanged += OnFormatMappingChanged;
             _lineSeparatorTag = new LineSeparatorTag(_editorFormatMap);
@@ -75,7 +77,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.LineSeparators
         protected override ITaggerEventSource CreateEventSource(
             ITextView textView,
             ITextBuffer subjectBuffer
-        ) {
+        )
+        {
             return TaggerEventSources.Compose(
                 new EditorFormatMapChangedEventSource(_editorFormatMap, TaggerDelay.NearImmediate),
                 TaggerEventSources.OnTextChanged(subjectBuffer, TaggerDelay.NearImmediate)
@@ -86,7 +89,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.LineSeparators
             TaggerContext<LineSeparatorTag> context,
             DocumentSnapshotSpan documentSnapshotSpan,
             int? caretPosition
-        ) {
+        )
+        {
             var cancellationToken = context.CancellationToken;
             var document = documentSnapshotSpan.Document;
             if (document == null)
@@ -113,7 +117,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.LineSeparators
                     FunctionId.Tagger_LineSeparator_TagProducer_ProduceTags,
                     cancellationToken
                 )
-            ) {
+            )
+            {
                 var snapshotSpan = documentSnapshotSpan.SnapshotSpan;
                 var lineSeparatorService = document.GetLanguageService<ILineSeparatorService>();
                 var lineSeparatorSpans = await lineSeparatorService.GetLineSeparatorsAsync(

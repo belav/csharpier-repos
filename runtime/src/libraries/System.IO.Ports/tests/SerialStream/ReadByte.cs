@@ -47,7 +47,8 @@ namespace System.IO.Ports.Tests
             )
             using (
                 var com2 = new SerialPort(TCSupport.LocalMachineSerialInfo.SecondAvailablePortName)
-            ) {
+            )
+            {
                 var rndGen = new Random(-55);
 
                 int bufferSize = numRndByte;

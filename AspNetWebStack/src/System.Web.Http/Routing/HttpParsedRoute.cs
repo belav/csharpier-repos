@@ -41,7 +41,8 @@ namespace System.Web.Http.Routing
             IDictionary<string, object> values,
             HttpRouteValueDictionary defaultValues,
             HttpRouteValueDictionary constraints
-        ) {
+        )
+        {
             if (currentValues == null)
             {
                 currentValues = new HttpRouteValueDictionary();
@@ -166,7 +167,8 @@ namespace System.Web.Http.Routing
                                 defaultValues,
                                 out defaultValue
                             )
-                        ) {
+                        )
+                        {
                             // Add the default value only if there isn't already a new value for it and
                             // only if it actually has a default value, which we determine based on whether
                             // the parameter value is required.
@@ -351,7 +353,8 @@ namespace System.Web.Http.Routing
                                             acceptedParameterValue,
                                             defaultParameterValue
                                         )
-                                    ) {
+                                    )
+                                    {
                                         // If the accepted value is the same as the default value, mark it as pending since
                                         // we won't necessarily add it to the URI we generate.
                                         pendingParts.Append(
@@ -485,7 +488,8 @@ namespace System.Web.Http.Routing
         private static bool ForEachParameter(
             List<PathSegment> pathSegments,
             Func<PathParameterSubsegment, bool> action
-        ) {
+        )
+        {
             for (int i = 0; i < pathSegments.Count; i++)
             {
                 PathSegment pathSegment = pathSegments[i];
@@ -541,7 +545,8 @@ namespace System.Web.Http.Routing
         private static PathParameterSubsegment GetParameterSubsegment(
             List<PathSegment> pathSegments,
             string parameterName
-        ) {
+        )
+        {
             PathParameterSubsegment foundParameterSubsegment = null;
 
             ForEachParameter(
@@ -554,7 +559,8 @@ namespace System.Web.Http.Routing
                             parameterSubsegment.ParameterName,
                             StringComparison.OrdinalIgnoreCase
                         )
-                    ) {
+                    )
+                    {
                         foundParameterSubsegment = parameterSubsegment;
                         return false;
                     }
@@ -572,7 +578,8 @@ namespace System.Web.Http.Routing
             PathParameterSubsegment parameterSubsegment,
             HttpRouteValueDictionary defaultValues,
             out object defaultValue
-        ) {
+        )
+        {
             if (parameterSubsegment.IsCatchAll)
             {
                 defaultValue = null;
@@ -595,7 +602,8 @@ namespace System.Web.Http.Routing
         public HttpRouteValueDictionary Match(
             RoutingContext context,
             HttpRouteValueDictionary defaultValues
-        ) {
+        )
+        {
             List<string> requestPathSegments = context.PathSegments;
 
             if (defaultValues == null)
@@ -669,7 +677,8 @@ namespace System.Web.Http.Routing
                                     defaultValues,
                                     matchedValues
                                 )
-                            ) {
+                            )
+                            {
                                 return null;
                             }
                         }
@@ -717,7 +726,8 @@ namespace System.Web.Http.Routing
             IEnumerable<string> remainingRequestSegments,
             HttpRouteValueDictionary defaultValues,
             HttpRouteValueDictionary matchedValues
-        ) {
+        )
+        {
             string remainingRequest = String.Join(String.Empty, remainingRequestSegments.ToArray());
 
             PathParameterSubsegment catchAllSegment =
@@ -742,7 +752,8 @@ namespace System.Web.Http.Routing
             string requestPathSegment,
             HttpRouteValueDictionary defaultValues,
             HttpRouteValueDictionary matchedValues
-        ) {
+        )
+        {
             if (String.IsNullOrEmpty(requestPathSegment))
             {
                 // If there's no data to parse, we must have exactly one parameter segment and no other segments - otherwise no match
@@ -763,7 +774,8 @@ namespace System.Web.Http.Routing
                 object parameterValue;
                 if (
                     defaultValues.TryGetValue(parameterSubsegment.ParameterName, out parameterValue)
-                ) {
+                )
+                {
                     // If there's a default value for this parameter, use that default value
                     matchedValues.Add(parameterSubsegment.ParameterName, parameterValue);
                     return true;
@@ -843,7 +855,8 @@ namespace System.Web.Http.Routing
                             if (
                                 (indexOfLiteral + literalSubsegment.Literal.Length)
                                 != requestPathSegment.Length
-                            ) {
+                            )
+                            {
                                 return false;
                             }
                         }
@@ -862,7 +875,8 @@ namespace System.Web.Http.Routing
                         ((lastLiteral != null) && (parameterSubsegment == null))
                         || (indexOfLastSegmentUsed == 0)
                     )
-                ) {
+                )
+                {
                     // If we have a pending parameter that needs a value, grab that value
 
                     int parameterStartIndex;
@@ -938,7 +952,8 @@ namespace System.Web.Http.Routing
             PathSubsegment pathSubsegment,
             string requestPathSegment,
             HttpRouteValueDictionary matchedValues
-        ) {
+        )
+        {
             PathParameterSubsegment parameterSubsegment = pathSubsegment as PathParameterSubsegment;
             if (parameterSubsegment == null)
             {

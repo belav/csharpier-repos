@@ -28,7 +28,8 @@ namespace Microsoft.CodeAnalysis.CodeGeneration
             ImmutableArray<SyntaxNode> statements,
             ImmutableArray<SyntaxNode> baseConstructorArguments,
             ImmutableArray<SyntaxNode> thisConstructorArguments
-        ) {
+        )
+        {
             _isPrimaryConstructor = isPrimaryConstructor;
             _isUnsafe = isUnsafe;
             _typeName = typeName;
@@ -45,7 +46,8 @@ namespace Microsoft.CodeAnalysis.CodeGeneration
             ImmutableArray<SyntaxNode> statements,
             ImmutableArray<SyntaxNode> baseConstructorArguments,
             ImmutableArray<SyntaxNode> thisConstructorArguments
-        ) {
+        )
+        {
             var info = new CodeGenerationConstructorInfo(
                 isPrimaryConstructor,
                 isUnsafe,

@@ -13,7 +13,8 @@ namespace System.Net.Http.Functional.Tests
         protected static WinHttpClientHandler CreateHttpClientHandler(
             Version useVersion = null,
             bool allowAllHttp2Certificates = true
-        ) {
+        )
+        {
             useVersion ??= HttpVersion.Version11;
 
             WinHttpClientHandler handler = new WinHttpClientHandler(useVersion);

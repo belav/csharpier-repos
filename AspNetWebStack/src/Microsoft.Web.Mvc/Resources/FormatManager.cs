@@ -84,7 +84,8 @@ namespace Microsoft.Web.Mvc.Resources
             ModelBindingContext bindingContext,
             ContentType requestFormat,
             out object model
-        ) {
+        )
+        {
             for (int i = 0; i < this.RequestFormatHandlers.Count; ++i)
             {
                 if (this.RequestFormatHandlers[i].CanDeserialize(requestFormat))
@@ -147,7 +148,8 @@ namespace Microsoft.Web.Mvc.Resources
                         formatName,
                         out contentType
                     )
-                ) {
+                )
+                {
                     return true;
                 }
             }

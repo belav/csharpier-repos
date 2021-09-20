@@ -193,7 +193,8 @@ namespace Microsoft.EntityFrameworkCore.Cosmos.Infrastructure.Internal
                     || MaxRequestsPerTcpConnection != cosmosOptions.MaxRequestsPerTcpConnection
                     || EnableContentResponseOnWrite != cosmosOptions.EnableContentResponseOnWrite
                 )
-            ) {
+            )
+            {
                 throw new InvalidOperationException(
                     CoreStrings.SingletonOptionChanged(
                         nameof(CosmosDbContextOptionsExtensions.UseCosmos),

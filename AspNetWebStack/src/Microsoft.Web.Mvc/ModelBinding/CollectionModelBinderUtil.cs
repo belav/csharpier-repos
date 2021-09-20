@@ -15,7 +15,8 @@ namespace Microsoft.Web.Mvc.ModelBinding
             ExtensibleModelBindingContext bindingContext,
             IEnumerable<TElement> incomingElements,
             Func<ICollection<TElement>> creator
-        ) {
+        )
+        {
             ICollection<TElement> collection = bindingContext.Model as ICollection<TElement>;
             if (collection == null || collection.IsReadOnly)
             {
@@ -34,7 +35,8 @@ namespace Microsoft.Web.Mvc.ModelBinding
             ExtensibleModelBindingContext bindingContext,
             IEnumerable<KeyValuePair<TKey, TValue>> incomingElements,
             Func<IDictionary<TKey, TValue>> creator
-        ) {
+        )
+        {
             IDictionary<TKey, TValue> dictionary =
                 bindingContext.Model as IDictionary<TKey, TValue>;
             if (dictionary == null || dictionary.IsReadOnly)
@@ -67,7 +69,8 @@ namespace Microsoft.Web.Mvc.ModelBinding
             Type newInstanceType,
             Type openBinderType,
             ModelMetadata modelMetadata
-        ) {
+        )
+        {
             Type[] typeArguments = GetTypeArgumentsForUpdatableGenericCollection(
                 supportedInterfaceType,
                 newInstanceType,
@@ -88,7 +91,8 @@ namespace Microsoft.Web.Mvc.ModelBinding
         )]
         public static IEnumerable<string> GetIndexNamesFromValueProviderResult(
             ValueProviderResult valueProviderResultIndex
-        ) {
+        )
+        {
             IEnumerable<string> indexNames = null;
             if (valueProviderResultIndex != null)
             {
@@ -118,7 +122,8 @@ namespace Microsoft.Web.Mvc.ModelBinding
             Type supportedInterfaceType,
             Type newInstanceType,
             ModelMetadata modelMetadata
-        ) {
+        )
+        {
             /*
              * Check that we can extract proper type arguments from the model.
              */
@@ -126,7 +131,8 @@ namespace Microsoft.Web.Mvc.ModelBinding
             if (
                 !modelMetadata.ModelType.IsGenericType
                 || modelMetadata.ModelType.IsGenericTypeDefinition
-            ) {
+            )
+            {
                 // not a closed generic type
                 return null;
             }

@@ -30,7 +30,8 @@ namespace System.IO.Pipes
             int inBufferSize,
             int outBufferSize,
             HandleInheritability inheritability
-        ) {
+        )
+        {
             Debug.Assert(pipeName != null && pipeName.Length != 0, "fullPipeName is null or empty");
             Debug.Assert(
                 direction >= PipeDirection.In && direction <= PipeDirection.InOut,

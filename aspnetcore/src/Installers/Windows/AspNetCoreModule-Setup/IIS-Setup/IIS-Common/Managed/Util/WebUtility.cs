@@ -26,7 +26,8 @@ namespace Microsoft.Web.Utility
                 || String.Equals(serverName, "localhost", StringComparison.OrdinalIgnoreCase)
                 || String.Equals(serverName, "127.0.0.1")
                 || String.Equals(serverName, "::1")
-            ) {
+            )
+            {
                 return true;
             }
 

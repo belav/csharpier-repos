@@ -64,7 +64,8 @@ namespace System.Net.Sockets
             if (
                 _addressFamily != AddressFamily.InterNetwork
                 && _addressFamily != AddressFamily.InterNetworkV6
-            ) {
+            )
+            {
                 _handle.Dispose();
                 _handle = null!;
                 throw new NotSupportedException(SR.net_invalidversion);
@@ -84,7 +85,8 @@ namespace System.Net.Sockets
             {
                 fixed (byte* bufferPtr = socketAddress.Buffer)fixed (
                     int* sizePtr = &socketAddress.InternalSize
-                ) {
+                )
+                {
                     errorCode = SocketPal.GetSockName(_handle, bufferPtr, sizePtr);
                 }
             }
@@ -113,7 +115,8 @@ namespace System.Net.Sockets
             out bool blocking,
             out bool isListening,
             out bool isSocket
-        ) {
+        )
+        {
             // This can be called without winsock initialized. The handle is not going to be a valid socket handle in that case and the code will throw exception anyway.
             // Initializing winsock will ensure the error SocketError.NotSocket as opposed to SocketError.NotInitialized.
             Interop.Winsock.EnsureInitialized();
@@ -130,7 +133,8 @@ namespace System.Net.Sockets
                     (byte*)&info,
                     ref optionLength
                 ) == SocketError.SocketError
-            ) {
+            )
+            {
                 throw new SocketException((int)SocketPal.GetLastSocketError());
             }
 
@@ -190,7 +194,8 @@ namespace System.Net.Sockets
             int receiveSize,
             AsyncCallback? callback,
             object? state
-        ) {
+        )
+        {
             return BeginAcceptCommon(acceptSocket, receiveSize, callback, state);
         }
 
@@ -210,7 +215,8 @@ namespace System.Net.Sockets
             out byte[] buffer,
             out int bytesTransferred,
             IAsyncResult asyncResult
-        ) {
+        )
+        {
             return EndAcceptCommon(out buffer!, out bytesTransferred, asyncResult);
         }
 
@@ -232,7 +238,8 @@ namespace System.Net.Sockets
             int remoteAddressLength,
             out int bytesReceived,
             NativeOverlapped* overlapped
-        ) {
+        )
+        {
             AcceptExDelegate acceptEx = GetDynamicWinsockMethods()
                 .GetAcceptExDelegate(listenSocketHandle);
 
@@ -257,7 +264,8 @@ namespace System.Net.Sockets
             out int localSocketAddressLength,
             out IntPtr remoteSocketAddress,
             out int remoteSocketAddressLength
-        ) {
+        )
+        {
             GetAcceptExSockaddrsDelegate getAcceptExSockaddrs = GetDynamicWinsockMethods()
                 .GetGetAcceptExSockaddrsDelegate(_handle);
 
@@ -278,7 +286,8 @@ namespace System.Net.Sockets
             NativeOverlapped* overlapped,
             int flags,
             int reserved
-        ) {
+        )
+        {
             DisconnectExDelegate disconnectEx = GetDynamicWinsockMethods()
                 .GetDisconnectExDelegate(socketHandle);
 
@@ -289,7 +298,8 @@ namespace System.Net.Sockets
             SafeSocketHandle socketHandle,
             int flags,
             int reserved
-        ) {
+        )
+        {
             DisconnectExDelegate disconnectEx = GetDynamicWinsockMethods()
                 .GetDisconnectExDelegate(socketHandle);
 
@@ -340,7 +350,8 @@ namespace System.Net.Sockets
             int dataLength,
             out int bytesSent,
             NativeOverlapped* overlapped
-        ) {
+        )
+        {
             ConnectExDelegate connectEx = GetDynamicWinsockMethods()
                 .GetConnectExDelegate(socketHandle);
 
@@ -361,7 +372,8 @@ namespace System.Net.Sockets
             out int bytesTransferred,
             NativeOverlapped* overlapped,
             IntPtr completionRoutine
-        ) {
+        )
+        {
             WSARecvMsgDelegate recvMsg = GetDynamicWinsockMethods()
                 .GetWSARecvMsgDelegate(socketHandle);
 
@@ -372,7 +384,8 @@ namespace System.Net.Sockets
             SafeSocketHandle socketHandle,
             IntPtr msg,
             out int bytesTransferred
-        ) {
+        )
+        {
             WSARecvMsgDelegate recvMsg = GetDynamicWinsockMethods().GetWSARecvMsgDelegate(_handle);
 
             return recvMsg(socketHandle, msg, out bytesTransferred, null, IntPtr.Zero);
@@ -385,7 +398,8 @@ namespace System.Net.Sockets
             int sendSize,
             NativeOverlapped* overlapped,
             TransmitFileOptions flags
-        ) {
+        )
+        {
             TransmitPacketsDelegate transmitPackets = GetDynamicWinsockMethods()
                 .GetTransmitPacketsDelegate(socketHandle);
 
@@ -403,7 +417,8 @@ namespace System.Net.Sockets
             IList? socketList,
             Span<IntPtr> fileDescriptorSet,
             ref int refsAdded
-        ) {
+        )
+        {
             int count;
             if (socketList == null || (count = socketList.Count) == 0)
             {
@@ -440,7 +455,8 @@ namespace System.Net.Sockets
             IList? socketList,
             Span<IntPtr> fileDescriptorSet,
             ref int refsAdded
-        ) {
+        )
+        {
             // Walk the list in order.
             //
             // Note that the counter is not necessarily incremented at each step;
@@ -478,11 +494,13 @@ namespace System.Net.Sockets
                         currentFileDescriptor = 0;
                         currentFileDescriptor < returnedCount;
                         currentFileDescriptor++
-                    ) {
+                    )
+                    {
                         if (
                             fileDescriptorSet[currentFileDescriptor + 1]
                             == socket._handle.DangerousGetHandle()
-                        ) {
+                        )
+                        {
                             break;
                         }
                     }
@@ -504,7 +522,8 @@ namespace System.Net.Sockets
             bool checkDisconnected,
             string propertyName,
             out SafeSocketHandle handle
-        ) {
+        )
+        {
             // If an acceptSocket isn't specified, then we need to create one.
             if (acceptSocket == null)
             {
@@ -513,7 +532,8 @@ namespace System.Net.Sockets
             else if (
                 acceptSocket._rightEndPoint != null
                 && (!checkDisconnected || !acceptSocket._isDisconnected)
-            ) {
+            )
+            {
                 throw new InvalidOperationException(
                     SR.Format(SR.net_sockets_namedmustnotbebound, propertyName)
                 );
@@ -528,7 +548,8 @@ namespace System.Net.Sockets
             ReadOnlySpan<byte> preBuffer,
             ReadOnlySpan<byte> postBuffer,
             TransmitFileOptions flags
-        ) {
+        )
+        {
             // Open the file, if any
             FileStream? fileStream = OpenFile(fileName);
 
@@ -564,7 +585,8 @@ namespace System.Net.Sockets
             TransmitFileOptions flags,
             AsyncCallback? callback,
             object? state
-        ) {
+        )
+        {
             FileStream? fileStream = OpenFile(fileName);
 
             TransmitFileAsyncResult asyncResult = new TransmitFileAsyncResult(

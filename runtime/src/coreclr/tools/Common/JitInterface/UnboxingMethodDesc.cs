@@ -19,10 +19,8 @@ namespace Internal.JitInterface
 
         public MethodDesc Target => _wrappedMethod;
 
-        public UnboxingMethodDesc(
-            MethodDesc wrappedMethod,
-            UnboxingMethodDescFactory factory
-        ) : base(wrappedMethod)
+        public UnboxingMethodDesc(MethodDesc wrappedMethod, UnboxingMethodDescFactory factory)
+            : base(wrappedMethod)
         {
             Debug.Assert(wrappedMethod.OwningType.IsValueType);
             Debug.Assert(!wrappedMethod.Signature.IsStatic);
@@ -59,7 +57,8 @@ namespace Internal.JitInterface
         public override MethodDesc InstantiateSignature(
             Instantiation typeInstantiation,
             Instantiation methodInstantiation
-        ) {
+        )
+        {
             MethodDesc realInstantiateSignature = _wrappedMethod.InstantiateSignature(
                 typeInstantiation,
                 methodInstantiation

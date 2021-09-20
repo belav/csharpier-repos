@@ -29,7 +29,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
         public virtual void ProcessNavigationAdded(
             IConventionNavigationBuilder navigationBuilder,
             IConventionContext<IConventionNavigationBuilder> context
-        ) {
+        )
+        {
             ProcessNavigation(navigationBuilder);
             context.StopProcessingIfChanged(navigationBuilder.Metadata.Builder);
         }
@@ -38,7 +39,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
         public virtual void ProcessForeignKeyPrincipalEndChanged(
             IConventionForeignKeyBuilder relationshipBuilder,
             IConventionContext<IConventionForeignKeyBuilder> context
-        ) {
+        )
+        {
             var fk = relationshipBuilder.Metadata;
             if (fk.DependentToPrincipal != null)
             {

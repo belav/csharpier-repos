@@ -25,7 +25,8 @@ namespace Microsoft.AspNetCore.Authorization
             IEnumerable<IAuthorizationRequirement> requirements,
             ClaimsPrincipal user,
             object? resource
-        ) {
+        )
+        {
             return new AuthorizationHandlerContext(requirements, user, resource);
         }
     }

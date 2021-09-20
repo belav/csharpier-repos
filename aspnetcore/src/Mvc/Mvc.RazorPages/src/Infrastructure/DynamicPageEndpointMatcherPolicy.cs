@@ -24,7 +24,8 @@ namespace Microsoft.AspNetCore.Mvc.RazorPages.Infrastructure
             DynamicPageEndpointSelectorCache selectorCache,
             PageLoader loader,
             EndpointMetadataComparer comparer
-        ) {
+        )
+        {
             if (selectorCache == null)
             {
                 throw new ArgumentNullException(nameof(selectorCache));
@@ -71,7 +72,8 @@ namespace Microsoft.AspNetCore.Mvc.RazorPages.Infrastructure
                 if (
                     endpoints[i].Metadata.GetMetadata<DynamicPageRouteValueTransformerMetadata>()
                     != null
-                ) {
+                )
+                {
                     // Found a dynamic page endpoint
                     return true;
                 }
@@ -223,7 +225,8 @@ namespace Microsoft.AspNetCore.Mvc.RazorPages.Infrastructure
         private DynamicPageEndpointSelector ResolveSelector(
             DynamicPageEndpointSelector currentSelector,
             Endpoint endpoint
-        ) {
+        )
+        {
             var selector = _selectorCache.GetEndpointSelector(endpoint);
 
             Debug.Assert(currentSelector == null || ReferenceEquals(currentSelector, selector));

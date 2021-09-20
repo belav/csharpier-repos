@@ -17,7 +17,8 @@ namespace System.Reflection
             byte[]? pkt,
             AssemblyNameFlags flags = 0,
             AssemblyContentType contentType = 0
-        ) {
+        )
+        {
             const int PUBLIC_KEY_TOKEN_LEN = 8;
             Debug.Assert(name.Length != 0);
 

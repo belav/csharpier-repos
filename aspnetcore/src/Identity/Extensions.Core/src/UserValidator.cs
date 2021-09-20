@@ -39,7 +39,8 @@ namespace Microsoft.AspNetCore.Identity
         public virtual async Task<IdentityResult> ValidateAsync(
             UserManager<TUser> manager,
             TUser user
-        ) {
+        )
+        {
             if (manager == null)
             {
                 throw new ArgumentNullException(nameof(manager));
@@ -63,7 +64,8 @@ namespace Microsoft.AspNetCore.Identity
             UserManager<TUser> manager,
             TUser user,
             ICollection<IdentityError> errors
-        ) {
+        )
+        {
             var userName = await manager.GetUserNameAsync(user);
             if (string.IsNullOrWhiteSpace(userName))
             {
@@ -72,7 +74,8 @@ namespace Microsoft.AspNetCore.Identity
             else if (
                 !string.IsNullOrEmpty(manager.Options.User.AllowedUserNameCharacters)
                 && userName.Any(c => !manager.Options.User.AllowedUserNameCharacters.Contains(c))
-            ) {
+            )
+            {
                 errors.Add(Describer.InvalidUserName(userName));
             }
             else
@@ -84,7 +87,8 @@ namespace Microsoft.AspNetCore.Identity
                         await manager.GetUserIdAsync(owner),
                         await manager.GetUserIdAsync(user)
                     )
-                ) {
+                )
+                {
                     errors.Add(Describer.DuplicateUserName(userName));
                 }
             }
@@ -95,7 +99,8 @@ namespace Microsoft.AspNetCore.Identity
             UserManager<TUser> manager,
             TUser user,
             List<IdentityError> errors
-        ) {
+        )
+        {
             var email = await manager.GetEmailAsync(user);
             if (string.IsNullOrWhiteSpace(email))
             {
@@ -114,7 +119,8 @@ namespace Microsoft.AspNetCore.Identity
                     await manager.GetUserIdAsync(owner),
                     await manager.GetUserIdAsync(user)
                 )
-            ) {
+            )
+            {
                 errors.Add(Describer.DuplicateEmail(email));
             }
         }

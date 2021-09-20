@@ -20,11 +20,12 @@ namespace System.Net.Quic
         public QuicListener(
             IPEndPoint listenEndPoint,
             SslServerAuthenticationOptions sslServerAuthenticationOptions
-        ) : this(
-            QuicImplementationProviders.Default,
-            listenEndPoint,
-            sslServerAuthenticationOptions
-        ) { }
+        )
+            : this(
+                QuicImplementationProviders.Default,
+                listenEndPoint,
+                sslServerAuthenticationOptions
+            ) { }
 
         /// <summary>
         /// Create a QUIC listener.
@@ -38,20 +39,22 @@ namespace System.Net.Quic
             QuicImplementationProvider implementationProvider,
             IPEndPoint listenEndPoint,
             SslServerAuthenticationOptions sslServerAuthenticationOptions
-        ) : this(
-            implementationProvider,
-            new QuicListenerOptions()
-            {
-                ListenEndPoint = listenEndPoint,
-                ServerAuthenticationOptions = sslServerAuthenticationOptions
-            }
-        ) { }
+        )
+            : this(
+                implementationProvider,
+                new QuicListenerOptions()
+                {
+                    ListenEndPoint = listenEndPoint,
+                    ServerAuthenticationOptions = sslServerAuthenticationOptions
+                }
+            ) { }
 
         // !!! TEMPORARY: Remove or make internal before shipping
         public QuicListener(
             QuicImplementationProvider implementationProvider,
             QuicListenerOptions options
-        ) {
+        )
+        {
             _provider = implementationProvider.CreateListener(options);
         }
 

@@ -43,7 +43,8 @@ namespace Microsoft.AspNetCore.TestHost
         public static IWebHostBuilder UseTestServer(
             this IWebHostBuilder builder,
             Action<TestServerOptions> configureOptions
-        ) {
+        )
+        {
             return builder.ConfigureServices(
                 services =>
                 {
@@ -83,7 +84,8 @@ namespace Microsoft.AspNetCore.TestHost
         public static IWebHostBuilder ConfigureTestServices(
             this IWebHostBuilder webHostBuilder,
             Action<IServiceCollection> servicesConfiguration
-        ) {
+        )
+        {
             if (webHostBuilder == null)
             {
                 throw new ArgumentNullException(nameof(webHostBuilder));
@@ -126,7 +128,8 @@ namespace Microsoft.AspNetCore.TestHost
         public static IWebHostBuilder ConfigureTestContainer<TContainer>(
             this IWebHostBuilder webHostBuilder,
             Action<TContainer> servicesConfiguration
-        ) {
+        )
+        {
             if (webHostBuilder == null)
             {
                 throw new ArgumentNullException(nameof(webHostBuilder));
@@ -167,7 +170,8 @@ namespace Microsoft.AspNetCore.TestHost
             this IWebHostBuilder builder,
             string solutionRelativePath,
             string solutionName = "*.sln"
-        ) {
+        )
+        {
             return builder.UseSolutionRelativeContentRoot(
                 solutionRelativePath,
                 AppContext.BaseDirectory,
@@ -193,7 +197,8 @@ namespace Microsoft.AspNetCore.TestHost
             string solutionRelativePath,
             string applicationBasePath,
             string solutionName = "*.sln"
-        ) {
+        )
+        {
             if (solutionRelativePath == null)
             {
                 throw new ArgumentNullException(nameof(solutionRelativePath));
@@ -234,7 +239,8 @@ namespace Microsoft.AspNetCore.TestHost
 
             public ConfigureTestServicesStartupConfigureServicesFilter(
                 Action<IServiceCollection> servicesConfiguration
-            ) {
+            )
+            {
                 if (servicesConfiguration == null)
                 {
                     throw new ArgumentNullException(nameof(servicesConfiguration));
@@ -260,7 +266,8 @@ namespace Microsoft.AspNetCore.TestHost
 
             public ConfigureTestServicesStartupConfigureContainerFilter(
                 Action<TContainer> containerConfiguration
-            ) {
+            )
+            {
                 if (containerConfiguration == null)
                 {
                     throw new ArgumentNullException(nameof(containerConfiguration));

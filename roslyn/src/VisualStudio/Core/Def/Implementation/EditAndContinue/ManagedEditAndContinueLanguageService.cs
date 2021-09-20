@@ -44,7 +44,8 @@ namespace Microsoft.VisualStudio.LanguageServices.EditAndContinue
             IManagedEditAndContinueDebuggerService debuggerService,
             IDiagnosticAnalyzerService diagnosticService,
             EditAndContinueDiagnosticUpdateSource diagnosticUpdateSource
-        ) {
+        )
+        {
             _proxy = new RemoteEditAndContinueServiceProxy(workspace);
             _debuggingService = workspace.Services.GetRequiredService<IDebuggingWorkspaceService>();
             _activeStatementTrackingService =
@@ -60,7 +61,8 @@ namespace Microsoft.VisualStudio.LanguageServices.EditAndContinue
         public async Task StartDebuggingAsync(
             DebugSessionFlags flags,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             _debuggingService.OnBeforeDebuggingStateChanged(
                 DebuggingState.Design,
                 DebuggingState.Run
@@ -208,7 +210,8 @@ namespace Microsoft.VisualStudio.LanguageServices.EditAndContinue
         public async Task<bool> HasChangesAsync(
             string? sourceFilePath,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             try
             {
                 var solution = _proxy.Workspace.CurrentSolution;
@@ -229,7 +232,8 @@ namespace Microsoft.VisualStudio.LanguageServices.EditAndContinue
 
         public async Task<ManagedModuleUpdates> GetManagedModuleUpdatesAsync(
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             try
             {
                 var solution = _proxy.Workspace.CurrentSolution;
@@ -256,7 +260,8 @@ namespace Microsoft.VisualStudio.LanguageServices.EditAndContinue
         public async Task<SourceSpan?> GetCurrentActiveStatementPositionAsync(
             ManagedInstructionId instruction,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             try
             {
                 var solution = _proxy.Workspace.CurrentSolution;
@@ -291,7 +296,8 @@ namespace Microsoft.VisualStudio.LanguageServices.EditAndContinue
         public async Task<bool?> IsActiveStatementInExceptionRegionAsync(
             ManagedInstructionId instruction,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             try
             {
                 var solution = _proxy.Workspace.CurrentSolution;

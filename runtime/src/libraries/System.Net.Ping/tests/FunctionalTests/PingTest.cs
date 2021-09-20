@@ -57,12 +57,14 @@ namespace System.Net.NetworkInformation.Tests
             PingReply pingReply,
             IPAddress[] localIpAddresses,
             ITestOutputHelper output
-        ) {
+        )
+        {
             if (
                 pingReply.Status == IPStatus.TimedOut
                 && pingReply.Address.AddressFamily == AddressFamily.InterNetworkV6
                 && PlatformDetection.IsOSXLike
-            ) {
+            )
+            {
                 // Workaround OSX ping6 bug, see https://github.com/dotnet/runtime/issues/19861
                 return;
             }
@@ -556,7 +558,8 @@ namespace System.Net.NetworkInformation.Tests
         [InlineData(AddressFamily.InterNetworkV6)]
         public void SendPingWithIPAddressAndTimeoutAndBufferAndPingOptions_Unix(
             AddressFamily addressFamily
-        ) {
+        )
+        {
             IPAddress localIpAddress = TestSettings.GetLocalIPAddress(addressFamily);
             if (localIpAddress == null)
             {
@@ -594,7 +597,8 @@ namespace System.Net.NetworkInformation.Tests
         [InlineData(AddressFamily.InterNetworkV6)]
         public async Task SendPingAsyncWithIPAddressAndTimeoutAndBufferAndPingOptions_Unix(
             AddressFamily addressFamily
-        ) {
+        )
+        {
             IPAddress localIpAddress = await TestSettings.GetLocalIPAddressAsync(addressFamily);
             if (localIpAddress == null)
             {
@@ -1046,7 +1050,8 @@ namespace System.Net.NetworkInformation.Tests
         private static void SendBatchPing(
             Func<Ping, PingReply> sendPing,
             Action<PingReply> pingResultValidator
-        ) {
+        )
+        {
             for (int i = 0; i < s_pingcount; i++)
             {
                 SendPing(sendPing, pingResultValidator);
@@ -1056,7 +1061,8 @@ namespace System.Net.NetworkInformation.Tests
         private static Task SendBatchPingAsync(
             Func<Ping, Task<PingReply>> sendPing,
             Action<PingReply> pingResultValidator
-        ) {
+        )
+        {
             // create several concurrent pings
             Task[] pingTasks = new Task[s_pingcount];
             for (int i = 0; i < s_pingcount; i++)
@@ -1069,7 +1075,8 @@ namespace System.Net.NetworkInformation.Tests
         private static void SendPing(
             Func<Ping, PingReply> sendPing,
             Action<PingReply> pingResultValidator
-        ) {
+        )
+        {
             var pingResult = sendPing(new Ping());
             pingResultValidator(pingResult);
         }
@@ -1077,7 +1084,8 @@ namespace System.Net.NetworkInformation.Tests
         private static async Task SendPingAsync(
             Func<Ping, Task<PingReply>> sendPing,
             Action<PingReply> pingResultValidator
-        ) {
+        )
+        {
             var pingResult = await sendPing(new Ping());
             pingResultValidator(pingResult);
         }
@@ -1217,7 +1225,8 @@ namespace System.Net.NetworkInformation.Tests
         [OuterLoop] // Depends on sudo
         public void SendPingWithIPAddressAndTimeoutAndBufferAndPingOptions_ElevatedUnix(
             AddressFamily addressFamily
-        ) {
+        )
+        {
             IPAddress localIpAddress = TestSettings.GetLocalIPAddress(addressFamily);
             if (localIpAddress == null)
             {
@@ -1269,7 +1278,8 @@ namespace System.Net.NetworkInformation.Tests
             string envVar_LANG,
             string envVar_LC_MESSAGES,
             string envVar_LC_ALL
-        ) {
+        )
+        {
             IPAddress localIpAddress = TestSettings.GetLocalIPAddress(addressFamily);
             if (localIpAddress == null)
             {
@@ -1317,7 +1327,8 @@ namespace System.Net.NetworkInformation.Tests
             string envVar_LANG,
             string envVar_LC_MESSAGES,
             string envVar_LC_ALL
-        ) {
+        )
+        {
             IPAddress localIpAddress = TestSettings.GetLocalIPAddress(addressFamily);
             if (localIpAddress == null)
             {

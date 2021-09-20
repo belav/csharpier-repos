@@ -115,7 +115,8 @@ namespace Microsoft.EntityFrameworkCore.TestUtilities.FakeProvider
             byte[] buffer,
             int bufferOffset,
             int length
-        ) {
+        )
+        {
             throw new NotImplementedException();
         }
 
@@ -127,7 +128,8 @@ namespace Microsoft.EntityFrameworkCore.TestUtilities.FakeProvider
             char[] buffer,
             int bufferOffset,
             int length
-        ) {
+        )
+        {
             throw new NotImplementedException();
         }
 

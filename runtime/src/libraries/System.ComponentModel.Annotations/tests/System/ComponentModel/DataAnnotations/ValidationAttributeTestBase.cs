@@ -44,7 +44,8 @@ namespace System.ComponentModel.DataAnnotations.Tests
             object value,
             ValidationContext validationContext,
             bool isValid
-        ) {
+        )
+        {
             if (isValid)
             {
                 attribute.Validate(value, validationContext);
@@ -168,7 +169,8 @@ namespace System.ComponentModel.DataAnnotations.Tests
 
         private void ErrorMessageResourceNameSet_ErrorMessageResourceTypeSet_NoSuchProperty(
             TestCase test
-        ) {
+        )
+        {
             test.Attribute.ErrorMessageResourceName = "NoSuchProperty";
             test.Attribute.ErrorMessageResourceType = typeof(ErrorMessageResources);
             Assert.Throws(
@@ -179,7 +181,8 @@ namespace System.ComponentModel.DataAnnotations.Tests
 
         private void ErrorMessageResourceNameSet_ErrorMessageResourceTypeSet_InstanceProperty(
             TestCase test
-        ) {
+        )
+        {
             test.Attribute.ErrorMessageResourceName = nameof(
                 ErrorMessageResources.InstanceProperty
             );
@@ -192,7 +195,8 @@ namespace System.ComponentModel.DataAnnotations.Tests
 
         private void ErrorMessageResourceNameSet_ErrorMessageResourceTypeSet_PrivateProperty(
             TestCase test
-        ) {
+        )
+        {
             test.Attribute.ErrorMessageResourceName = "PrivateProperty";
             test.Attribute.ErrorMessageResourceType = typeof(ErrorMessageResources);
             Assert.Throws(
@@ -203,7 +207,8 @@ namespace System.ComponentModel.DataAnnotations.Tests
 
         private void ErrorMessageResourceNameSet_ErrorMessageResourceTypeSet_NonStringProperty(
             TestCase test
-        ) {
+        )
+        {
             test.Attribute.ErrorMessageResourceName = nameof(ErrorMessageResources.BoolProperty);
             test.Attribute.ErrorMessageResourceType = typeof(ErrorMessageResources);
             Assert.Throws(
@@ -255,7 +260,8 @@ namespace System.ComponentModel.DataAnnotations.Tests
                 ValidationAttribute attribute,
                 object value,
                 ValidationContext validationContext = null
-            ) {
+            )
+            {
                 Attribute = attribute;
                 Value = value;
                 ValidationContext = validationContext ?? new ValidationContext(new object());

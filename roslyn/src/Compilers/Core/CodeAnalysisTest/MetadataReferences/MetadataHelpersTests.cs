@@ -78,7 +78,8 @@ namespace Microsoft.CodeAnalysis.UnitTests
                 int pointerCount,
                 ArrayKind arrayKind,
                 bool assemblyQualified
-            ) {
+            )
+            {
                 this.NestingLevel = nestingLevel;
                 this.GenericParamsConfig = genericParamsConfig;
                 this.PointerCount = pointerCount;
@@ -109,7 +110,8 @@ namespace Microsoft.CodeAnalysis.UnitTests
 
                         foreach (
                             var genericParamsConfig in genericParamsConfigBuilder.ToImmutableAndFree()
-                        ) {
+                        )
+                        {
                             builder.Add(
                                 new TypeNameConfig(
                                     nestingLevel,
@@ -139,7 +141,8 @@ namespace Microsoft.CodeAnalysis.UnitTests
         private static string[] GenerateTypeNamesToDecode(
             TypeNameConfig[] typeNameConfigs,
             out MetadataHelpers.AssemblyQualifiedTypeName[] expectedDecodeNames
-        ) {
+        )
+        {
             var pooledStrBuilder = PooledStringBuilder.GetInstance();
             StringBuilder typeNameBuilder = pooledStrBuilder.Builder;
 
@@ -281,7 +284,8 @@ namespace Microsoft.CodeAnalysis.UnitTests
             MetadataHelpers.AssemblyQualifiedTypeName[] expectedTypeArguments,
             int expectedPointerCount,
             int[] expectedArrayRanks
-        ) {
+        )
+        {
             Assert.Equal(expectedTopLevelType, decodedName.TopLevelType);
             Assert.Equal(expectedAssemblyName, decodedName.AssemblyName);
             Assert.Equal(expectedNestedTypes, decodedName.NestedTypes);
@@ -320,7 +324,8 @@ namespace Microsoft.CodeAnalysis.UnitTests
             MetadataHelpers.AssemblyQualifiedTypeName[] expectedTypeArguments = null,
             int expectedPointerCount = 0,
             int[] expectedArrayRanks = null
-        ) {
+        )
+        {
             MetadataHelpers.AssemblyQualifiedTypeName decodedName = MetadataHelpers.DecodeTypeName(
                 nameToDecode
             );
@@ -338,7 +343,8 @@ namespace Microsoft.CodeAnalysis.UnitTests
         private static void DecodeTypeNamesAndVerify(
             string[] namesToDecode,
             MetadataHelpers.AssemblyQualifiedTypeName[] expectedDecodedNames
-        ) {
+        )
+        {
             Assert.Equal(namesToDecode.Length, expectedDecodedNames.Length);
 
             for (int i = 0; i < namesToDecode.Length; i++)

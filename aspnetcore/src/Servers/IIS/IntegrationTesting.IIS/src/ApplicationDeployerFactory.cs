@@ -21,7 +21,8 @@ namespace Microsoft.AspNetCore.Server.IntegrationTesting
         public static ApplicationDeployer Create(
             DeploymentParameters deploymentParameters,
             ILoggerFactory loggerFactory
-        ) {
+        )
+        {
             if (deploymentParameters == null)
             {
                 throw new ArgumentNullException(nameof(deploymentParameters));

@@ -25,7 +25,8 @@ namespace System.Composition.Lightweight.UnitTests
             public override IEnumerable<ExportDescriptorPromise> GetExportDescriptors(
                 CompositionContract contract,
                 DependencyAccessor descriptorAccessor
-            ) {
+            )
+            {
                 if (!contract.Equals(_supportedContract))
                     return NoExportDescriptors;
 

@@ -13,7 +13,8 @@ namespace System.Linq
         public static IEnumerable<TResult> Select<TSource, TResult>(
             this IEnumerable<TSource> source,
             Func<TSource, TResult> selector
-        ) {
+        )
+        {
             if (source == null)
             {
                 ThrowHelper.ThrowArgumentNullException(ExceptionArgument.source);
@@ -68,7 +69,8 @@ namespace System.Linq
         public static IEnumerable<TResult> Select<TSource, TResult>(
             this IEnumerable<TSource> source,
             Func<TSource, int, TResult> selector
-        ) {
+        )
+        {
             if (source == null)
             {
                 ThrowHelper.ThrowArgumentNullException(ExceptionArgument.source);
@@ -85,7 +87,8 @@ namespace System.Linq
         private static IEnumerable<TResult> SelectIterator<TSource, TResult>(
             IEnumerable<TSource> source,
             Func<TSource, int, TResult> selector
-        ) {
+        )
+        {
             int index = -1;
             foreach (TSource element in source)
             {
@@ -112,7 +115,8 @@ namespace System.Linq
             public SelectEnumerableIterator(
                 IEnumerable<TSource> source,
                 Func<TSource, TResult> selector
-            ) {
+            )
+            {
                 Debug.Assert(source != null);
                 Debug.Assert(selector != null);
                 _source = source;

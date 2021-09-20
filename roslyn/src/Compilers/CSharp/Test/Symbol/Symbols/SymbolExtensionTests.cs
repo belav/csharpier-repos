@@ -116,7 +116,8 @@ namespace NB
             string[] namespaceNames,
             NamedTypeSymbol type,
             string expectedName
-        ) {
+        )
+        {
             Assert.True(Array.IndexOf(namespaceNames, expectedName) >= 0);
             foreach (var namespaceName in namespaceNames)
             {

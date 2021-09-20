@@ -56,7 +56,8 @@ namespace Microsoft.Extensions.DependencyInjection.ServiceLookup
             if (
                 descriptor.ServiceType.IsGenericType
                 && !descriptor.ServiceType.IsConstructedGenericType
-            ) {
+            )
+            {
                 return;
             }
 
@@ -101,7 +102,8 @@ namespace Microsoft.Extensions.DependencyInjection.ServiceLookup
         internal object GetService(
             Type serviceType,
             ServiceProviderEngineScope serviceProviderEngineScope
-        ) {
+        )
+        {
             if (_disposed)
             {
                 ThrowHelper.ThrowObjectDisposedException();

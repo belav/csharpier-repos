@@ -395,7 +395,8 @@ namespace System.Linq.Expressions
 
         protected internal override Expression VisitRuntimeVariables(
             RuntimeVariablesExpression node
-        ) {
+        )
+        {
             VisitExpressions('(', node.Variables, ')');
             return node;
         }

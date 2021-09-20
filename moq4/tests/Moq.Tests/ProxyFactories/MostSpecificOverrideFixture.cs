@@ -53,7 +53,8 @@ namespace Moq.Tests.ProxyFactories
             Type proxiedType,
             Type overrideType,
             string overrideName
-        ) {
+        )
+        {
             var expected = overrideType.GetMethod(
                 overrideName,
                 BindingFlags.Public

@@ -53,7 +53,8 @@ namespace Binding
                                 .GetProperties(BindingFlags.Instance | BindingFlags.Public)
                                 .Where(p => p.CanRead)
                                 .OrderBy(p => p.Name)
-                        ) {
+                        )
+                        {
                             sb.AppendLine(
                                 $"{property.Name}: {property.GetValue(obj)} ({property.PropertyType})"
                             );

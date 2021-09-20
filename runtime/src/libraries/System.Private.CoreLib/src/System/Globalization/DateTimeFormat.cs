@@ -197,7 +197,8 @@ namespace System
             int value,
             int len,
             bool overrideLengthLimit
-        ) {
+        )
+        {
             Debug.Assert(value >= 0, "DateTimeFormat.FormatDigits(): value >= 0");
 
             // Limit the use of this function to be two-digits, so that we have the same behavior
@@ -303,7 +304,8 @@ namespace System
             int month,
             int repeatCount,
             DateTimeFormatInfo dtfi
-        ) {
+        )
+        {
             Debug.Assert(repeatCount != 3 || repeatCount != 4, "repeateCount should be 3 or 4");
             if (dtfi.Calendar.IsLeapYear(dtfi.Calendar.GetYear(time)))
             {
@@ -330,7 +332,8 @@ namespace System
             ReadOnlySpan<char> format,
             int pos,
             StringBuilder result
-        ) {
+        )
+        {
             //
             // NOTE : pos will be the index of the quote character in the 'format' string.
             //
@@ -416,7 +419,8 @@ namespace System
             int index,
             int tokenLen,
             char patternToMatch
-        ) {
+        )
+        {
             int i;
             int repeat = 0;
             //
@@ -487,7 +491,8 @@ namespace System
             DateTimeFormatInfo dtfi,
             TimeSpan offset,
             StringBuilder? result
-        ) {
+        )
+        {
             Calendar cal = dtfi.Calendar;
 
             bool resultBuilderIsPooled = false;
@@ -724,7 +729,8 @@ namespace System
                                         == DateTimeFormatInfoScanner.CJKYearSuff
                                 )
                             )
-                        ) {
+                        )
+                        {
                             // We are formatting a Japanese date with year equals 1 and the year number is followed by the year sign \u5e74
                             // In Japanese dates, the first year in the era is not formatted as a number 1 instead it is formatted as \u5143 which means
                             // first or beginning of the era.
@@ -861,7 +867,8 @@ namespace System
             int tokenLen,
             bool timeOnly,
             StringBuilder result
-        ) {
+        )
+        {
             // See if the instance already has an offset
             bool dateTimeFormat = (offset.Ticks == NullOffset);
             if (dateTimeFormat)
@@ -922,7 +929,8 @@ namespace System
             DateTime dateTime,
             TimeSpan offset,
             StringBuilder result
-        ) {
+        )
+        {
             // The objective of this format is to round trip the data in the type
             // For DateTime it should round-trip the Kind value and preserve the time zone.
             // DateTimeOffset instance, it should do so by using the internal time zone.
@@ -1042,7 +1050,8 @@ namespace System
             ref DateTime dateTime,
             ref DateTimeFormatInfo dtfi,
             TimeSpan offset
-        ) {
+        )
+        {
             switch (format[0])
             {
                 case 'o':
@@ -1093,7 +1102,8 @@ namespace System
             string? format,
             IFormatProvider? provider,
             TimeSpan offset
-        ) {
+        )
+        {
             if (format != null && format.Length == 1)
             {
                 // Optimize for these standard formats that are not affected by culture.
@@ -1154,7 +1164,8 @@ namespace System
             ReadOnlySpan<char> format,
             IFormatProvider? provider,
             TimeSpan offset
-        ) {
+        )
+        {
             if (format.Length == 1)
             {
                 // Optimize for these standard formats that are not affected by culture.
@@ -1195,7 +1206,8 @@ namespace System
             ReadOnlySpan<char> format,
             DateTimeFormatInfo dtfi,
             TimeSpan offset
-        ) {
+        )
+        {
             Debug.Assert(dtfi != null);
             if (format.Length == 0)
             {
@@ -1396,7 +1408,8 @@ namespace System
             int second,
             long fraction,
             Span<char> destination
-        ) {
+        )
+        {
             if (destination.Length < 16)
             {
                 return false;
@@ -1421,7 +1434,8 @@ namespace System
             int minute,
             int second,
             Span<char> destination
-        ) {
+        )
+        {
             if (destination.Length < 8)
             {
                 return false;
@@ -1445,7 +1459,8 @@ namespace System
             int month,
             int day,
             Span<char> destination
-        ) {
+        )
+        {
             if (destination.Length < 10)
             {
                 return false;
@@ -1469,7 +1484,8 @@ namespace System
             int month,
             int day,
             Span<char> destination
-        ) {
+        )
+        {
             if (destination.Length < 16)
             {
                 return false;
@@ -1507,7 +1523,8 @@ namespace System
             TimeSpan offset,
             Span<char> destination,
             out int charsWritten
-        ) {
+        )
+        {
             const int MinimumBytesNeeded = 27;
 
             int charsRequired = MinimumBytesNeeded;
@@ -1601,7 +1618,8 @@ namespace System
             TimeSpan offset,
             Span<char> destination,
             out int charsWritten
-        ) {
+        )
+        {
             if (destination.Length <= 28)
             {
                 charsWritten = 0;
@@ -1674,7 +1692,8 @@ namespace System
             uint value,
             Span<char> buffer,
             int startingIndex = 0
-        ) {
+        )
+        {
             Debug.Assert(value <= 9999);
 
             uint temp = '0' + value;
@@ -1713,7 +1732,8 @@ namespace System
             DateTime dateTime,
             char format,
             DateTimeFormatInfo dtfi
-        ) {
+        )
+        {
             Debug.Assert(dtfi != null);
             string[] allFormats;
             string[] results;

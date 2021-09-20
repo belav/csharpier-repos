@@ -27,7 +27,8 @@ namespace Microsoft.CodeAnalysis.QuickInfo
                 ImmutableArray<ISymbol> symbols,
                 bool showAwaitReturn = false,
                 NullableFlowState nullableFlowState = NullableFlowState.None
-            ) {
+            )
+            {
                 Symbols = symbols;
                 ShowAwaitReturn = showAwaitReturn;
                 NullableFlowState = nullableFlowState;

@@ -52,7 +52,8 @@ namespace System.Formats.Asn1
             AsnEncodingRules ruleSet,
             out int bytesConsumed,
             Asn1Tag? expectedTag = null
-        ) {
+        )
+        {
             // TODO: Inline this call when it won't cause a PR/diff problem.
             return ReadObjectIdentifier(source, ruleSet, expectedTag, out bytesConsumed);
         }
@@ -62,7 +63,8 @@ namespace System.Formats.Asn1
             out int bytesRead,
             out long? smallValue,
             out BigInteger? largeValue
-        ) {
+        )
+        {
             Debug.Assert(source.Length > 0);
 
             // T-REC-X.690-201508 sec 8.19.2 (last sentence)
@@ -177,7 +179,8 @@ namespace System.Formats.Asn1
             AsnEncodingRules ruleSet,
             Asn1Tag? expectedTag,
             out int totalBytesRead
-        ) {
+        )
+        {
             // T-REC-X.690-201508 sec 8.19.1
             ReadOnlySpan<byte> contents = GetPrimitiveContentSpan(
                 source,

@@ -21,7 +21,8 @@ namespace Microsoft.CodeAnalysis.Remote
         public RemoteTodoCommentsIncrementalAnalyzer(
             RemoteCallback<IRemoteTodoCommentsDiscoveryService.ICallback> callback,
             RemoteServiceCallbackId callbackId
-        ) {
+        )
+        {
             _callback = callback;
             _callbackId = callbackId;
         }
@@ -30,7 +31,8 @@ namespace Microsoft.CodeAnalysis.Remote
             DocumentId documentId,
             ImmutableArray<TodoCommentData> data,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             await _callback.InvokeAsync(
                     (callback, cancellationToken) =>
                         callback.ReportTodoCommentDataAsync(

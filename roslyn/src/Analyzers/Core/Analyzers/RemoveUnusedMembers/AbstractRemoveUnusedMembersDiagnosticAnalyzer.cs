@@ -113,7 +113,8 @@ namespace Microsoft.CodeAnalysis.RemoveUnusedMembers
                     TDocumentationCommentTriviaSyntax,
                     TIdentifierNameSyntax
                 > analyzer
-            ) {
+            )
+            {
                 _gate = new object();
                 _analyzer = analyzer;
 
@@ -133,7 +134,8 @@ namespace Microsoft.CodeAnalysis.RemoveUnusedMembers
 
             private static IEnumerable<INamedTypeSymbol> GetAttributesForMethodsToIgnore(
                 Compilation compilation
-            ) {
+            )
+            {
                 // Ignore methods with special serialization attributes, which are invoked by the runtime
                 // for deserialization.
                 var onDeserializingAttribute = compilation.OnDeserializingAttribute();
@@ -179,7 +181,8 @@ namespace Microsoft.CodeAnalysis.RemoveUnusedMembers
                     TDocumentationCommentTriviaSyntax,
                     TIdentifierNameSyntax
                 > analyzer
-            ) {
+            )
+            {
                 var compilationAnalyzer = new CompilationAnalyzer(
                     compilationStartContext.Compilation,
                     analyzer
@@ -273,7 +276,8 @@ namespace Microsoft.CodeAnalysis.RemoveUnusedMembers
                             if (
                                 context.Operation.Kind == OperationKind.None
                                 && context.Operation.Parent != null
-                            ) {
+                            )
+                            {
                                 hasUnsupportedOperation = true;
                             }
                         }
@@ -335,7 +339,8 @@ namespace Microsoft.CodeAnalysis.RemoveUnusedMembers
                             memberSymbol,
                             out var currentUsageInfo
                         )
-                    ) {
+                    )
+                    {
                         usageInfo = currentUsageInfo | usageInfo;
                     }
 
@@ -480,7 +485,8 @@ namespace Microsoft.CodeAnalysis.RemoveUnusedMembers
             private void OnSymbolEnd(
                 SymbolAnalysisContext symbolEndContext,
                 bool hasUnsupportedOperation
-            ) {
+            )
+            {
                 if (hasUnsupportedOperation)
                 {
                     return;
@@ -489,7 +495,8 @@ namespace Microsoft.CodeAnalysis.RemoveUnusedMembers
                 if (
                     symbolEndContext.Symbol.GetAttributes()
                         .Any(a => a.AttributeClass == _structLayoutAttributeType)
-                ) {
+                )
+                {
                     // Bail out for types with 'StructLayoutAttribute' as the ordering of the members is critical,
                     // and removal of unused members might break semantics.
                     return;
@@ -518,7 +525,8 @@ namespace Microsoft.CodeAnalysis.RemoveUnusedMembers
                         if (
                             TryRemove(member, out var valueUsageInfo)
                             && !valueUsageInfo.IsReadFrom()
-                        ) {
+                        )
+                        {
                             Debug.Assert(IsCandidateSymbol(member));
                             Debug.Assert(!member.IsImplicitlyDeclared);
 
@@ -557,7 +565,8 @@ namespace Microsoft.CodeAnalysis.RemoveUnusedMembers
                                 debuggerDisplayAttributeArguments.Any(
                                     arg => arg.Contains(member.Name)
                                 )
-                            ) {
+                            )
+                            {
                                 continue;
                             }
 
@@ -576,7 +585,8 @@ namespace Microsoft.CodeAnalysis.RemoveUnusedMembers
                                 rule == s_removeUnreadMembersRule
                                 && member is IPropertySymbol property
                                 && property.IsWriteOnly
-                            ) {
+                            )
+                            {
                                 continue;
                             }
 
@@ -637,13 +647,15 @@ namespace Microsoft.CodeAnalysis.RemoveUnusedMembers
             private static bool HasSyntaxErrors(
                 INamedTypeSymbol namedTypeSymbol,
                 CancellationToken cancellationToken
-            ) {
+            )
+            {
                 foreach (var tree in namedTypeSymbol.Locations.Select(l => l.SourceTree))
                 {
                     if (
                         tree.GetDiagnostics(cancellationToken)
                             .Any(d => d.Severity == DiagnosticSeverity.Error)
-                    ) {
+                    )
+                    {
                         return true;
                     }
                 }
@@ -655,19 +667,22 @@ namespace Microsoft.CodeAnalysis.RemoveUnusedMembers
                 INamedTypeSymbol namedTypeSymbol,
                 Compilation compilation,
                 CancellationToken cancellationToken
-            ) {
+            )
+            {
                 var builder = PooledHashSet<ISymbol>.GetInstance();
                 foreach (
                     var root in namedTypeSymbol.Locations.Select(
                         l => l.SourceTree.GetRoot(cancellationToken)
                     )
-                ) {
+                )
+                {
                     SemanticModel lazyModel = null;
                     foreach (
                         var node in root.DescendantNodes(descendIntoTrivia: true)
                             .OfType<TDocumentationCommentTriviaSyntax>()
                             .SelectMany(n => n.DescendantNodes().OfType<TIdentifierNameSyntax>())
-                    ) {
+                    )
+                    {
                         lazyModel ??= compilation.GetSemanticModel(root.SyntaxTree);
                         var symbol = lazyModel.GetSymbolInfo(node, cancellationToken).Symbol;
                         if (symbol != null && IsCandidateSymbol(symbol))
@@ -682,7 +697,8 @@ namespace Microsoft.CodeAnalysis.RemoveUnusedMembers
 
             private ArrayBuilder<string> GetDebuggerDisplayAttributeArguments(
                 INamedTypeSymbol namedTypeSymbol
-            ) {
+            )
+            {
                 var builder = ArrayBuilder<string>.GetInstance();
                 AddDebuggerDisplayAttributeArguments(namedTypeSymbol, builder);
                 return builder;
@@ -691,7 +707,8 @@ namespace Microsoft.CodeAnalysis.RemoveUnusedMembers
             private void AddDebuggerDisplayAttributeArguments(
                 INamedTypeSymbol namedTypeSymbol,
                 ArrayBuilder<string> builder
-            ) {
+            )
+            {
                 AddDebuggerDisplayAttributeArgumentsCore(namedTypeSymbol, builder);
 
                 foreach (var member in namedTypeSymbol.GetMembers())
@@ -713,7 +730,8 @@ namespace Microsoft.CodeAnalysis.RemoveUnusedMembers
             private void AddDebuggerDisplayAttributeArgumentsCore(
                 ISymbol symbol,
                 ArrayBuilder<string> builder
-            ) {
+            )
+            {
                 foreach (var attribute in symbol.GetAttributes())
                 {
                     if (
@@ -722,7 +740,8 @@ namespace Microsoft.CodeAnalysis.RemoveUnusedMembers
                         && attribute.ConstructorArguments[0] is var arg
                         && arg.Kind == TypedConstantKind.Primitive
                         && arg.Type.SpecialType == SpecialType.System_String
-                    ) {
+                    )
+                    {
                         if (arg.Value is string value)
                         {
                             builder.Add(value);
@@ -751,7 +770,8 @@ namespace Microsoft.CodeAnalysis.RemoveUnusedMembers
                 if (
                     memberSymbol.DeclaredAccessibility == Accessibility.Private
                     && !memberSymbol.IsImplicitlyDeclared
-                ) {
+                )
+                {
                     switch (memberSymbol.Kind)
                     {
                         case SymbolKind.Method:
@@ -775,7 +795,8 @@ namespace Microsoft.CodeAnalysis.RemoveUnusedMembers
                                         _deserializationConstructorCheck.IsDeserializationConstructor(
                                             methodSymbol
                                         )
-                                    ) {
+                                    )
+                                    {
                                         return false;
                                     }
 
@@ -802,7 +823,8 @@ namespace Microsoft.CodeAnalysis.RemoveUnusedMembers
                                         || methodSymbol.IsVirtual
                                         || methodSymbol.IsOverride
                                         || methodSymbol.IsExtern
-                                    ) {
+                                    )
+                                    {
                                         return false;
                                     }
 

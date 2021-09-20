@@ -49,7 +49,8 @@ namespace System.Xml
                         if (
                             reader.NodeType == XmlNodeType.EndElement
                             || (reader.NodeType == XmlNodeType.Element && reader.IsEmptyElement)
-                        ) {
+                        )
+                        {
                             _state = State.EndOfFile;
                             SetEmptyNode();
                             return false;
@@ -128,7 +129,8 @@ namespace System.Xml
                                 while (
                                     reader.NodeType != XmlNodeType.EndElement
                                     && reader.Depth > _initialDepth
-                                ) {
+                                )
+                                {
                                     await reader.SkipAsync().ConfigureAwait(false);
                                 }
                             }
@@ -226,7 +228,8 @@ namespace System.Xml
         public override async Task<object> ReadContentAsAsync(
             Type returnType,
             IXmlNamespaceResolver? namespaceResolver
-        ) {
+        )
+        {
             try
             {
                 InitReadContentAsType("ReadContentAs");
@@ -246,7 +249,8 @@ namespace System.Xml
             byte[] buffer,
             int index,
             int count
-        ) {
+        )
+        {
             switch (_state)
             {
                 case State.Initial:
@@ -336,7 +340,8 @@ namespace System.Xml
             byte[] buffer,
             int index,
             int count
-        ) {
+        )
+        {
             switch (_state)
             {
                 case State.Initial:
@@ -351,7 +356,8 @@ namespace System.Xml
                     if (
                         !await InitReadElementContentAsBinaryAsync(State.ReadElementContentAsBase64)
                             .ConfigureAwait(false)
-                    ) {
+                    )
+                    {
                         return 0;
                     }
                     goto case State.ReadElementContentAsBase64;
@@ -403,7 +409,8 @@ namespace System.Xml
             byte[] buffer,
             int index,
             int count
-        ) {
+        )
+        {
             switch (_state)
             {
                 case State.Initial:
@@ -493,7 +500,8 @@ namespace System.Xml
             byte[] buffer,
             int index,
             int count
-        ) {
+        )
+        {
             switch (_state)
             {
                 case State.Initial:
@@ -508,7 +516,8 @@ namespace System.Xml
                     if (
                         !await InitReadElementContentAsBinaryAsync(State.ReadElementContentAsBinHex)
                             .ConfigureAwait(false)
-                    ) {
+                    )
+                    {
                         return 0;
                     }
                     goto case State.ReadElementContentAsBinHex;

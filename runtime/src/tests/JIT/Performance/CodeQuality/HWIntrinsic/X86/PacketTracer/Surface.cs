@@ -18,7 +18,8 @@ internal class Surface
         VectorPacket256 Specular,
         Func<VectorPacket256, Vector256<float>> Reflect,
         float Roughness
-    ) {
+    )
+    {
         this.Diffuse = Diffuse;
         this.Specular = Specular;
         this.Reflect = Reflect;

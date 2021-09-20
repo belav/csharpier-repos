@@ -15,7 +15,8 @@ namespace System.IO.Tests
             if (
                 IOInputs.SupportsGettingCreationTime
                 && (!requiresRoundtripping || IOInputs.SupportsSettingCreationTime)
-            ) {
+            )
+            {
                 yield return TimeFunction.Create(
                     ((path, time) => Directory.SetCreationTime(path, time)),
                     ((path) => Directory.GetCreationTime(path)),

@@ -31,16 +31,18 @@ namespace Microsoft.CodeAnalysis.CSharp
                 NullableWalker.SnapshotManager snapshotManagerOpt,
                 ImmutableDictionary<Symbol, Symbol> parentRemappedSymbolsOpt,
                 int position
-            ) : base(
-                root,
-                owner,
-                rootBinder,
-                containingSemanticModelOpt: null,
-                parentSemanticModelOpt: parentSemanticModel,
-                snapshotManagerOpt,
-                parentRemappedSymbolsOpt,
-                speculatedPosition: position
-            ) {
+            )
+                : base(
+                    root,
+                    owner,
+                    rootBinder,
+                    containingSemanticModelOpt: null,
+                    parentSemanticModelOpt: parentSemanticModel,
+                    snapshotManagerOpt,
+                    parentRemappedSymbolsOpt,
+                    speculatedPosition: position
+                )
+            {
                 Debug.Assert(parentSemanticModel is not null);
             }
 
@@ -57,7 +59,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                 bool createSnapshots,
                 out NullableWalker.SnapshotManager snapshotManager,
                 ref ImmutableDictionary<Symbol, Symbol> remappedSymbols
-            ) {
+            )
+            {
                 Debug.Assert(boundRoot.Syntax is TypeSyntax);
                 return NullableWalker.AnalyzeAndRewrite(
                     Compilation,
@@ -77,7 +80,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                 Binder binder,
                 DiagnosticBag diagnostics,
                 bool createSnapshots
-            ) {
+            )
+            {
                 NullableWalker.AnalyzeWithoutRewrite(
                     Compilation,
                     MemberSymbol as MethodSymbol,
@@ -101,7 +105,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                 int position,
                 ConstructorInitializerSyntax constructorInitializer,
                 out SemanticModel speculativeModel
-            ) {
+            )
+            {
                 throw ExceptionUtilities.Unreachable;
             }
 
@@ -110,7 +115,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                 int position,
                 PrimaryConstructorBaseTypeSyntax constructorInitializer,
                 out SemanticModel speculativeModel
-            ) {
+            )
+            {
                 throw ExceptionUtilities.Unreachable;
             }
 
@@ -119,7 +125,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                 int position,
                 EqualsValueClauseSyntax initializer,
                 out SemanticModel speculativeModel
-            ) {
+            )
+            {
                 throw ExceptionUtilities.Unreachable;
             }
 
@@ -128,7 +135,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                 int position,
                 ArrowExpressionClauseSyntax expressionBody,
                 out SemanticModel speculativeModel
-            ) {
+            )
+            {
                 throw ExceptionUtilities.Unreachable;
             }
 
@@ -137,7 +145,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                 int position,
                 StatementSyntax statement,
                 out SemanticModel speculativeModel
-            ) {
+            )
+            {
                 throw ExceptionUtilities.Unreachable;
             }
 
@@ -146,7 +155,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                 int position,
                 BaseMethodDeclarationSyntax method,
                 out SemanticModel speculativeModel
-            ) {
+            )
+            {
                 throw ExceptionUtilities.Unreachable;
             }
 
@@ -155,7 +165,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                 int position,
                 AccessorDeclarationSyntax accessor,
                 out SemanticModel speculativeModel
-            ) {
+            )
+            {
                 throw ExceptionUtilities.Unreachable;
             }
         }

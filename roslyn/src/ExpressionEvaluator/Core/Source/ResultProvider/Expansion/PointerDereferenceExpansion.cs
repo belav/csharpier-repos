@@ -31,7 +31,8 @@ namespace Microsoft.CodeAnalysis.ExpressionEvaluator
             int count,
             bool visitAll,
             ref int index
-        ) {
+        )
+        {
             if (InRange(startIndex, count, index))
             {
                 rows.Add(
@@ -54,7 +55,8 @@ namespace Microsoft.CodeAnalysis.ExpressionEvaluator
             DkmClrValue pointer,
             TypeAndCustomInfo elementTypeAndInfo,
             EvalResultDataItem parent
-        ) {
+        )
+        {
             var value = pointer.Dereference(inspectionContext);
             var wasExceptionThrown = value.EvalFlags.Includes(
                 DkmEvaluationResultFlags.ExceptionThrown

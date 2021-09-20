@@ -31,7 +31,8 @@ namespace Microsoft.AspNetCore.ConcurrencyLimiter
             ILoggerFactory loggerFactory,
             IQueuePolicy queue,
             IOptions<ConcurrencyLimiterOptions> options
-        ) {
+        )
+        {
             if (options.Value.OnRejected == null)
             {
                 throw new ArgumentException(

@@ -24,7 +24,8 @@ namespace System.Net.Http
             SafeWinHttpHandle requestHandle,
             WinHttpRequestState state,
             HttpResponseMessage responseMessage
-        ) {
+        )
+        {
             _state = state;
             _responseMessage = responseMessage;
             _requestHandle = requestHandle;
@@ -84,7 +85,8 @@ namespace System.Net.Http
             Stream destination,
             int bufferSize,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             // Validate arguments as would base CopyToAsync
             StreamHelpers.ValidateCopyToArgs(this, destination, bufferSize);
 
@@ -112,7 +114,8 @@ namespace System.Net.Http
             Stream destination,
             byte[] buffer,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             _state.PinReceiveBuffer(buffer);
             CancellationTokenRegistration ctr = cancellationToken.Register(
                 s => ((WinHttpResponseStream)s).CancelPendingResponseStreamReadOperation(),
@@ -156,7 +159,8 @@ namespace System.Net.Http
                                 (uint)Math.Min(bytesAvailable, buffer.Length),
                                 IntPtr.Zero
                             )
-                        ) {
+                        )
+                        {
                             throw new IOException(
                                 SR.net_http_io_read,
                                 WinHttpException.CreateExceptionUsingLastError(
@@ -199,7 +203,8 @@ namespace System.Net.Http
             int offset,
             int count,
             CancellationToken token
-        ) {
+        )
+        {
             if (buffer == null)
             {
                 throw new ArgumentNullException(nameof(buffer));
@@ -255,7 +260,8 @@ namespace System.Net.Http
             int offset,
             int count,
             CancellationToken token
-        ) {
+        )
+        {
             if (count == 0)
             {
                 return 0;
@@ -295,7 +301,8 @@ namespace System.Net.Http
                             (uint)Math.Min(bytesAvailable, count),
                             IntPtr.Zero
                         )
-                    ) {
+                    )
+                    {
                         throw new IOException(
                             SR.net_http_io_read,
                             WinHttpException.CreateExceptionUsingLastError(
@@ -332,7 +339,8 @@ namespace System.Net.Http
                 !WinHttpTrailersHelper.OsSupportsTrailers
                 || _responseMessage.Version < WinHttpHandler.HttpVersion20
                 || _readTrailingHeaders
-            ) {
+            )
+            {
                 return;
             }
 

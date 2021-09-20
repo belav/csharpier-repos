@@ -65,7 +65,8 @@ namespace System.IO.Tests
             if (
                 IOInputs.SupportsGettingCreationTime
                 && (!requiresRoundtripping || IOInputs.SupportsSettingCreationTime)
-            ) {
+            )
+            {
                 yield return TimeFunction.Create(
                     (
                         (testFile, time) =>

@@ -158,7 +158,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
         public virtual EntityType? AddEntityType(
             string name,
             ConfigurationSource configurationSource
-        ) {
+        )
+        {
             Check.NotEmpty(name, nameof(name));
 
             var entityType = new EntityType(name, this, configurationSource);
@@ -191,7 +192,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
             string name,
             Type type,
             ConfigurationSource configurationSource
-        ) {
+        )
+        {
             Check.NotEmpty(name, nameof(name));
             Check.NotNull(type, nameof(type));
 
@@ -225,7 +227,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
                     _entityTypes.Any(
                         et => !et.Value.HasSharedClrType && et.Value.ClrType == entityType.ClrType
                     )
-                ) {
+                )
+                {
                     throw new InvalidOperationException(
                         CoreStrings.ClashingNonSharedType(
                             entityType.Name,
@@ -389,7 +392,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
             string definingNavigationName,
             EntityType definingEntityType,
             ConfigurationSource configurationSource
-        ) {
+        )
+        {
             Check.NotEmpty(name, nameof(name));
 
             name = definingEntityType.GetOwnedName(name, definingNavigationName);
@@ -414,7 +418,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
             string definingNavigationName,
             EntityType definingEntityType,
             ConfigurationSource configurationSource
-        ) {
+        )
+        {
             Check.NotNull(type, nameof(type));
 
             var name = definingEntityType.GetOwnedName(
@@ -581,7 +586,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
             string name,
             Type? type,
             ConfigurationSource configurationSource
-        ) {
+        )
+        {
             EnsureMutable();
 
             if (_ignoredTypeNames.TryGetValue(name, out var existingIgnoredConfigurationSource))
@@ -695,7 +701,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
             if (
                 this[CoreAnnotationNames.OwnedTypes]
                 is not Dictionary<string, ConfigurationSource> ownedTypes
-            ) {
+            )
+            {
                 return null;
             }
 
@@ -705,7 +712,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
             {
                 if (
                     ownedTypes.TryGetValue(GetDisplayName(currentType), out var configurationSource)
-                ) {
+                )
+                {
                     return configurationSource;
                 }
 
@@ -730,7 +738,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
                     this[CoreAnnotationNames.OwnedTypes]
                     is Dictionary<string, ConfigurationSource> ownedTypes
                 )
-            ) {
+            )
+            {
                 ownedTypes = new Dictionary<string, ConfigurationSource>(StringComparer.Ordinal);
                 this[CoreAnnotationNames.OwnedTypes] = ownedTypes;
             }
@@ -757,7 +766,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
             if (
                 this[CoreAnnotationNames.OwnedTypes]
                 is not Dictionary<string, ConfigurationSource> ownedTypes
-            ) {
+            )
+            {
                 return null;
             }
 
@@ -863,7 +873,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
         public virtual ChangeTrackingStrategy? SetChangeTrackingStrategy(
             ChangeTrackingStrategy? changeTrackingStrategy,
             ConfigurationSource configurationSource
-        ) {
+        )
+        {
             EnsureMutable();
 
             _changeTrackingStrategy = changeTrackingStrategy;
@@ -920,7 +931,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
         public virtual T Track<T>(
             Func<T> func,
             [DisallowNull] ref IConventionForeignKey? foreignKey
-        ) {
+        )
+        {
             EnsureMutable();
             return ConventionDispatcher.Track(func, ref foreignKey);
         }

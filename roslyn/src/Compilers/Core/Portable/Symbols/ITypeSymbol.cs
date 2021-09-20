@@ -232,13 +232,15 @@ namespace Microsoft.CodeAnalysis
 
         internal static bool IsSignedIntegralType(
             [NotNullWhen(returnValue: true)] ITypeSymbol? type
-        ) {
+        )
+        {
             return type?.SpecialType.IsSignedIntegralType() == true;
         }
 
         internal static bool IsUnsignedIntegralType(
             [NotNullWhen(returnValue: true)] ITypeSymbol? type
-        ) {
+        )
+        {
             return type?.SpecialType.IsUnsignedIntegralType() == true;
         }
 

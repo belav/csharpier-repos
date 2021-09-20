@@ -84,7 +84,8 @@ namespace Microsoft.AspNetCore.Components
                 }
                 else if (
                     parameter.Name.Equals(nameof(ChildContent), StringComparison.OrdinalIgnoreCase)
-                ) {
+                )
+                {
                     ChildContent = (RenderFragment)parameter.Value;
                 }
                 else if (parameter.Name.Equals(nameof(Name), StringComparison.OrdinalIgnoreCase))

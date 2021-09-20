@@ -23,7 +23,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             SyntaxTree syntaxTree,
             GreenNode? node,
             int position
-        ) {
+        )
+        {
             _syntaxTree = null;
             _current = null;
             _position = position;

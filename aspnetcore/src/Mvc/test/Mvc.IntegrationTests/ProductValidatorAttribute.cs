@@ -10,7 +10,8 @@ namespace Microsoft.AspNetCore.Mvc.IntegrationTests
         protected override ValidationResult IsValid(
             object value,
             ValidationContext validationContext
-        ) {
+        )
+        {
             var product = value as ProductViewModel;
             if (product != null)
             {

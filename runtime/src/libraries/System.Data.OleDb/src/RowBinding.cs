@@ -31,7 +31,8 @@ namespace System.Data.OleDb
             int bindingCount,
             int databuffersize,
             bool needToReset
-        ) {
+        )
+        {
             int headerLength = RowBinding.AlignDataSize(bindingCount * ODB.SizeOf_tagDBBINDING);
             int length = RowBinding.AlignDataSize(headerLength + databuffersize) + 8; // 8 bytes for a null terminated string
             return new RowBinding(bindingCount, headerLength, databuffersize, length, needToReset);
@@ -103,7 +104,8 @@ namespace System.Data.OleDb
             UnsafeNativeMethods.IAccessor iaccessor,
             int flags,
             ColumnBinding[] bindings
-        ) {
+        )
+        {
             OleDbHResult hr = 0;
             int[] rowBindStatus = new int[BindingCount()];
 
@@ -150,7 +152,8 @@ namespace System.Data.OleDb
             OleDbParameter[]? parameters,
             tagDBBINDING[] dbbindings,
             bool ifIRowsetElseIRow
-        ) {
+        )
+        {
             Debug.Assert(null != bindings, "null bindings");
             Debug.Assert(dbbindings.Length == BindingCount(), "count mismatch");
 
@@ -186,7 +189,8 @@ namespace System.Data.OleDb
                 int indexWithinAccessor = 0;
                 indexWithinAccessor < columns.Length;
                 ++indexWithinAccessor
-            ) {
+            )
+            {
                 int index = indexStart + indexWithinAccessor;
                 OleDbParameter? parameter = ((null != parameters) ? parameters[index] : null);
                 columns[indexWithinAccessor] = new ColumnBinding(

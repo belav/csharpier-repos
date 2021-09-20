@@ -103,7 +103,8 @@ namespace System.Net.Http.Functional.Tests
         [MemberData(nameof(InternationalHostNames))]
         public async Task InternationalResponseHeaderValues_UsesIdnaDecoding_Success(
             string hostname
-        ) {
+        )
+        {
             if (!SupportsIdna)
             {
                 return;

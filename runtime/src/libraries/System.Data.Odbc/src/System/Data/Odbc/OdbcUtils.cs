@@ -152,7 +152,8 @@ namespace System.Data.Odbc
             ODBC32.SQL_C sqlctype,
             int sizeorprecision,
             int valueOffset
-        ) {
+        )
+        {
             switch (sqlctype)
             {
                 case ODBC32.SQL_C.WCHAR:
@@ -583,7 +584,8 @@ namespace System.Data.Odbc
                     tokenString.Length,
                     StringComparison.OrdinalIgnoreCase
                 )
-            ) {
+            )
+            {
                 // Reset current position and token
                 _idx = 0;
                 NextToken();

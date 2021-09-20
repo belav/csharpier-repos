@@ -43,16 +43,17 @@ namespace Microsoft.VisualStudio.LanguageServices.Xaml
             [Import(typeof(SAsyncServiceProvider))]
                 VSShell.IAsyncServiceProvider asyncServiceProvider,
             IThreadingContext threadingContext
-        ) : base(
-            xamlDispatcherFactory,
-            workspace,
-            diagnosticService,
-            listenerProvider,
-            lspWorkspaceRegistrationService,
-            asyncServiceProvider,
-            threadingContext,
-            diagnosticsClientName: null
-        ) { }
+        )
+            : base(
+                xamlDispatcherFactory,
+                workspace,
+                diagnosticService,
+                listenerProvider,
+                lspWorkspaceRegistrationService,
+                asyncServiceProvider,
+                threadingContext,
+                diagnosticsClientName: null
+            ) { }
 
         /// <summary>
         /// Gets the name of the language client (displayed in yellow bars).

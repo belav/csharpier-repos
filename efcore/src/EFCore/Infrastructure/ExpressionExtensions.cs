@@ -49,13 +49,15 @@ namespace Microsoft.EntityFrameworkCore.Infrastructure
         public static MemberExpression MakeMemberAccess(
             this Expression? expression,
             MemberInfo member
-        ) {
+        )
+        {
             var memberDeclaringClrType = member.DeclaringType;
             if (
                 expression != null
                 && memberDeclaringClrType != expression.Type
                 && expression.Type.IsAssignableFrom(memberDeclaringClrType)
-            ) {
+            )
+            {
                 expression = Expression.Convert(expression, memberDeclaringClrType);
             }
 
@@ -71,7 +73,8 @@ namespace Microsoft.EntityFrameworkCore.Infrastructure
         public static Expression Assign(
             this MemberExpression memberExpression,
             Expression valueExpression
-        ) {
+        )
+        {
             if (memberExpression.Member is FieldInfo fieldInfo && fieldInfo.IsInitOnly)
             {
                 return (BinaryExpression)Activator.CreateInstance(
@@ -104,11 +107,13 @@ namespace Microsoft.EntityFrameworkCore.Infrastructure
             this MethodCallExpression methodCallExpression,
             [NotNullWhen(true)] out Expression? entityExpression,
             [NotNullWhen(true)] out string? propertyName
-        ) {
+        )
+        {
             if (
                 methodCallExpression.Method.IsEFPropertyMethod()
                 && methodCallExpression.Arguments[1] is ConstantExpression propertyNameExpression
-            ) {
+            )
+            {
                 entityExpression = methodCallExpression.Arguments[0];
                 propertyName = (string)propertyNameExpression.Value!;
                 return true;
@@ -132,11 +137,13 @@ namespace Microsoft.EntityFrameworkCore.Infrastructure
             IModel model,
             [NotNullWhen(true)] out Expression? entityExpression,
             [NotNullWhen(true)] out string? propertyName
-        ) {
+        )
+        {
             if (
                 model.IsIndexerMethod(methodCallExpression.Method)
                 && methodCallExpression.Arguments[0] is ConstantExpression propertyNameExpression
-            ) {
+            )
+            {
                 entityExpression = methodCallExpression.Object!;
                 propertyName = (string)propertyNameExpression.Value!;
 
@@ -205,7 +212,8 @@ namespace Microsoft.EntityFrameworkCore.Infrastructure
                 && declaringType.IsInterface
                 && declaringType.IsAssignableFrom(parameterType)
                 && memberInfo is PropertyInfo propertyInfo
-            ) {
+            )
+            {
                 var propertyGetter = propertyInfo.GetMethod;
                 var interfaceMapping = parameterType.GetTypeInfo()
                     .GetRuntimeInterfaceMap(declaringType);
@@ -243,7 +251,8 @@ namespace Microsoft.EntityFrameworkCore.Infrastructure
         /// <returns> The list of referenced properties. </returns>
         public static IReadOnlyList<PropertyInfo> GetPropertyAccessList(
             this LambdaExpression propertyAccessExpression
-        ) {
+        )
+        {
             Check.NotNull(propertyAccessExpression, nameof(propertyAccessExpression));
 
             if (propertyAccessExpression.Parameters.Count != 1)
@@ -286,7 +295,8 @@ namespace Microsoft.EntityFrameworkCore.Infrastructure
         /// <returns> The list of referenced members. </returns>
         public static IReadOnlyList<MemberInfo> GetMemberAccessList(
             this LambdaExpression memberAccessExpression
-        ) {
+        )
+        {
             Check.NotNull(memberAccessExpression, nameof(memberAccessExpression));
 
             var memberPaths = memberAccessExpression.MatchMemberAccessList(
@@ -420,11 +430,13 @@ namespace Microsoft.EntityFrameworkCore.Infrastructure
             Type propertyType,
             string propertyName,
             bool makeNullable
-        ) {
+        )
+        {
             if (
                 propertyDeclaringType != target.Type
                 && target.Type.IsAssignableFrom(propertyDeclaringType)
-            ) {
+            )
+            {
                 target = Expression.Convert(target, propertyDeclaringType);
             }
 

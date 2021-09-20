@@ -384,7 +384,8 @@ namespace System.Drawing.Printing
                 if (
                     (mode.dmFields & SafeNativeMethods.DM_PAPERSIZE)
                     == SafeNativeMethods.DM_PAPERSIZE
-                ) {
+                )
+                {
                     mode.dmPaperSize = unchecked((short)_paperSize.RawKind);
                 }
 
@@ -394,7 +395,8 @@ namespace System.Drawing.Printing
                 if (
                     (mode.dmFields & SafeNativeMethods.DM_PAPERLENGTH)
                     == SafeNativeMethods.DM_PAPERLENGTH
-                ) {
+                )
+                {
                     // dmPaperLength is always in tenths of millimeter but paperSizes are in hundredth of inch ..
                     // so we need to convert :: use PrinterUnitConvert.Convert(value, PrinterUnit.TenthsOfAMillimeter /*fromUnit*/, PrinterUnit.Display /*ToUnit*/)
                     int length = PrinterUnitConvert.Convert(
@@ -408,7 +410,8 @@ namespace System.Drawing.Printing
                 if (
                     (mode.dmFields & SafeNativeMethods.DM_PAPERWIDTH)
                     == SafeNativeMethods.DM_PAPERWIDTH
-                ) {
+                )
+                {
                     int width = PrinterUnitConvert.Convert(
                         _paperSize.Width,
                         PrinterUnit.Display,
@@ -449,7 +452,8 @@ namespace System.Drawing.Printing
                     (mode.dmFields & SafeNativeMethods.DM_DEFAULTSOURCE)
                     == SafeNativeMethods.DM_DEFAULTSOURCE
                 )
-            ) {
+            )
+            {
                 mode.dmDefaultSource = unchecked((short)_paperSource.RawKind);
             }
 
@@ -460,13 +464,15 @@ namespace System.Drawing.Printing
                     if (
                         (mode.dmFields & SafeNativeMethods.DM_PRINTQUALITY)
                         == SafeNativeMethods.DM_PRINTQUALITY
-                    ) {
+                    )
+                    {
                         mode.dmPrintQuality = unchecked((short)_printerResolution.X);
                     }
                     if (
                         (mode.dmFields & SafeNativeMethods.DM_YRESOLUTION)
                         == SafeNativeMethods.DM_YRESOLUTION
-                    ) {
+                    )
+                    {
                         mode.dmYResolution = unchecked((short)_printerResolution.Y);
                     }
                 }
@@ -475,7 +481,8 @@ namespace System.Drawing.Printing
                     if (
                         (mode.dmFields & SafeNativeMethods.DM_PRINTQUALITY)
                         == SafeNativeMethods.DM_PRINTQUALITY
-                    ) {
+                    )
+                    {
                         mode.dmPrintQuality = unchecked((short)_printerResolution.Kind);
                     }
                 }
@@ -618,7 +625,8 @@ namespace System.Drawing.Printing
             if (
                 (mode.dmFields & SafeNativeMethods.DM_DEFAULTSOURCE)
                 == SafeNativeMethods.DM_DEFAULTSOURCE
-            ) {
+            )
+            {
                 for (int i = 0; i < sources.Length; i++)
                 {
                     // the dmDefaultSource == to the RawKind in the Papersource.. and Not the Kind...
@@ -647,7 +655,8 @@ namespace System.Drawing.Printing
                         (mode.dmFields & SafeNativeMethods.DM_YRESOLUTION)
                         == SafeNativeMethods.DM_YRESOLUTION
                     )
-                ) {
+                )
+                {
                     if (
                         resolutions[i].X
                             == unchecked((int)(PrinterResolutionKind)mode.dmPrintQuality)
@@ -661,7 +670,8 @@ namespace System.Drawing.Printing
                     if (
                         (mode.dmFields & SafeNativeMethods.DM_PRINTQUALITY)
                         == SafeNativeMethods.DM_PRINTQUALITY
-                    ) {
+                    )
+                    {
                         if (resolutions[i].Kind == (PrinterResolutionKind)mode.dmPrintQuality)
                             return resolutions[i];
                     }
@@ -698,7 +708,8 @@ namespace System.Drawing.Printing
             if (
                 (mode.dmFields & SafeNativeMethods.DM_ORIENTATION)
                 == SafeNativeMethods.DM_ORIENTATION
-            ) {
+            )
+            {
                 _landscape = (mode.dmOrientation == SafeNativeMethods.DMORIENT_LANDSCAPE);
             }
 

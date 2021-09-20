@@ -138,7 +138,8 @@ namespace System.ComponentModel.Design.Tests
                                 "_temp_SerializeWithBinaryFormatter_DeserializeWithBinaryWriter"
                             )
                         )
-                    ) {
+                    )
+                    {
                         stream.Seek(position, SeekOrigin.Begin);
                         stream.CopyTo(outStream);
                     }
@@ -182,7 +183,8 @@ namespace System.ComponentModel.Design.Tests
                                 ),
                                 FileMode.Open
                             )
-                        ) {
+                        )
+                        {
                             TargetInvocationException exception =
                                 Assert.Throws<TargetInvocationException>(
                                     () =>

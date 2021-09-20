@@ -30,7 +30,8 @@ namespace LocalizationWebsite
             // This localizer is used in tests to prevent a regression of https://github.com/aspnet/Localization/issues/293
             // Namely that english was always being returned if it existed.
             IStringLocalizer<StartupCustomCulturePreserved> customCultureLocalizer
-        ) {
+        )
+        {
             app.UseRequestLocalization(
                 new RequestLocalizationOptions
                 {

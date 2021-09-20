@@ -62,7 +62,8 @@ namespace Microsoft.AspNetCore.DataProtection.AuthenticatedEncryption.Configurat
 
         private static IAuthenticatedEncryptor CreateEncryptorInstanceFromDescriptor(
             CngGcmAuthenticatedEncryptorDescriptor descriptor
-        ) {
+        )
+        {
             var encryptorFactory = new CngGcmAuthenticatedEncryptorFactory(
                 NullLoggerFactory.Instance
             );

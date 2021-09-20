@@ -44,7 +44,8 @@ namespace Roslyn.Test.PdbUtilities
         private static ISymUnmanagedReader5 CreateNativeSymReader(
             Stream pdbStream,
             object metadataImporter
-        ) {
+        )
+        {
             object symReader = null;
 
             var guid = default(Guid);
@@ -65,7 +66,8 @@ namespace Roslyn.Test.PdbUtilities
         private static ISymUnmanagedReader5 CreatePortableSymReader(
             Stream pdbStream,
             object metadataImporter
-        ) {
+        )
+        {
             return (ISymUnmanagedReader5)new PortablePdb.SymBinder().GetReaderFromStream(
                 pdbStream,
                 metadataImporter
@@ -83,7 +85,8 @@ namespace Roslyn.Test.PdbUtilities
         public static ISymUnmanagedReader5 CreateReader(
             ImmutableArray<byte> pdbImage,
             ImmutableArray<byte> peImageOpt = default(ImmutableArray<byte>)
-        ) {
+        )
+        {
             return CreateReader(
                 new MemoryStream(pdbImage.ToArray()),
                 (peImageOpt.IsDefault) ? null : new PEReader(peImageOpt)
@@ -107,7 +110,8 @@ namespace Roslyn.Test.PdbUtilities
             Stream pdbStream,
             MetadataReader metadataReaderOpt,
             IDisposable metadataMemoryOwnerOpt
-        ) {
+        )
+        {
             return CreateReaderImpl(
                 pdbStream,
                 metadataImporter: new DummyMetadataImport(metadataReaderOpt, metadataMemoryOwnerOpt)
@@ -117,7 +121,8 @@ namespace Roslyn.Test.PdbUtilities
         public static ISymUnmanagedReader5 CreateReaderImpl(
             Stream pdbStream,
             object metadataImporter
-        ) {
+        )
+        {
             pdbStream.Position = 0;
             bool isPortable =
                 pdbStream.ReadByte() == 'B'

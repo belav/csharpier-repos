@@ -17,7 +17,8 @@ namespace Microsoft.CodeAnalysis
             string documentationMemberID,
             CultureInfo preferredCulture,
             CancellationToken cancellationToken = default
-        ) {
+        )
+        {
             var symbol = DocumentationCommentId.GetFirstSymbolForDeclarationId(
                 documentationMemberID,
                 _compilation

@@ -37,7 +37,8 @@ namespace Microsoft.AspNetCore.Identity.InMemory.Test
             bool lockoutEnabled = false,
             DateTimeOffset? lockoutEnd = default(DateTimeOffset?),
             bool useNamePrefixAsUserName = false
-        ) {
+        )
+        {
             return new PocoUser
             {
                 UserName = useNamePrefixAsUserName

@@ -75,11 +75,8 @@ namespace Internal.TypeSystem
                 AssemblyName = assemblyName;
             }
 
-            internal TypeLoadException(
-                ExceptionStringID id,
-                string typeName,
-                string assemblyName
-            ) : base(id, new string[] { typeName, assemblyName })
+            internal TypeLoadException(ExceptionStringID id, string typeName, string assemblyName)
+                : base(id, new string[] { typeName, assemblyName })
             {
                 TypeName = typeName;
                 AssemblyName = assemblyName;
@@ -92,10 +89,8 @@ namespace Internal.TypeSystem
         /// </summary>
         public abstract class MissingMemberException : TypeSystemException
         {
-            protected internal MissingMemberException(
-                ExceptionStringID id,
-                params string[] args
-            ) : base(id, args) { }
+            protected internal MissingMemberException(ExceptionStringID id, params string[] args)
+                : base(id, args) { }
         }
 
         /// <summary>

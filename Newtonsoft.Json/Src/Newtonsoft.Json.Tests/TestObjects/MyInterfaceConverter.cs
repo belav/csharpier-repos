@@ -58,7 +58,8 @@ namespace Newtonsoft.Json.Tests.TestObjects
             ITypeDescriptorContext context,
             CultureInfo culture,
             object value
-        ) {
+        )
+        {
             if (value == null)
             {
                 return null;
@@ -72,7 +73,8 @@ namespace Newtonsoft.Json.Tests.TestObjects
             CultureInfo culture,
             object value,
             Type destinationType
-        ) {
+        )
+        {
             if (value == null)
             {
                 return null;

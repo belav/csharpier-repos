@@ -27,7 +27,8 @@ namespace Microsoft.AspNetCore.Mvc.DataAnnotations
                 typeToValidate == typeof(float)
                 || typeToValidate == typeof(double)
                 || typeToValidate == typeof(decimal)
-            ) {
+            )
+            {
                 var results = context.Results;
                 // Read interface .Count once rather than per iteration
                 var resultsCount = results.Count;

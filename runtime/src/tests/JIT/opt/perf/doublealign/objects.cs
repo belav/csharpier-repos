@@ -66,7 +66,8 @@ public class CTest
                 double* p1 = &c1.m_d1,
                     p2 = &c1.m_d2,
                     p3 = &c1.m_d3
-            ) {
+            )
+            {
                 bool aligned = true;
                 if (!CheckDoubleAlignment(p1))
                     aligned = false;

@@ -13,11 +13,8 @@ namespace Microsoft.AspNetCore.Identity.FunctionalTests.Account.Manage
     {
         private readonly IHtmlFormElement _deleteForm;
 
-        public DeleteUser(
-            HttpClient client,
-            IHtmlDocument deleteUser,
-            DefaultUIContext context
-        ) : base(client, deleteUser, context)
+        public DeleteUser(HttpClient client, IHtmlDocument deleteUser, DefaultUIContext context)
+            : base(client, deleteUser, context)
         {
             _deleteForm = HtmlAssert.HasForm("#delete-user", deleteUser);
         }

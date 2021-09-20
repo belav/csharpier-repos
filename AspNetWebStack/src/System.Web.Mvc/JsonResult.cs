@@ -45,7 +45,8 @@ namespace System.Web.Mvc
                     "GET",
                     StringComparison.OrdinalIgnoreCase
                 )
-            ) {
+            )
+            {
                 throw new InvalidOperationException(MvcResources.JsonRequest_GetNotAllowed);
             }
 

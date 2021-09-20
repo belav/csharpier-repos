@@ -47,7 +47,8 @@ namespace System.Globalization.Tests
                     if (
                         PlatformDetection.ICUVersion.Major == 59
                         || PlatformDetection.ICUVersion.Major == 58
-                    ) {
+                    )
+                    {
                         return new int[] { 8 };
                     }
                     else if (PlatformDetection.ICUVersion.Major > 59)

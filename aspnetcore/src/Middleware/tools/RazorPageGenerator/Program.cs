@@ -57,7 +57,8 @@ Examples:
             string rootNamespace,
             string targetProjectDirectory,
             Action<RazorProjectEngineBuilder> configure = null
-        ) {
+        )
+        {
             var fileSystem = RazorProjectFileSystem.Create(targetProjectDirectory);
             var projectEngine = RazorProjectEngine.Create(
                 RazorConfiguration.Default,
@@ -102,7 +103,8 @@ Examples:
             RazorProjectEngine projectEngine,
             string targetProjectDirectory,
             string physicalPathPrefix
-        ) {
+        )
+        {
             var viewDirectories = Directory.EnumerateDirectories(
                 targetProjectDirectory,
                 "Views",
@@ -141,7 +143,8 @@ Examples:
             RazorProjectEngine projectEngine,
             RazorProjectItem projectItem,
             string physicalPathPrefix
-        ) {
+        )
+        {
             var projectItemWrapper = new FileSystemRazorProjectItemWrapper(
                 projectItem,
                 physicalPathPrefix
@@ -208,7 +211,8 @@ Examples:
             public FileSystemRazorProjectItemWrapper(
                 RazorProjectItem item,
                 string physicalPathPrefix
-            ) {
+            )
+            {
                 _source = item;
 
                 // Mask the full name since we don't want a developer's local file paths to be committed.

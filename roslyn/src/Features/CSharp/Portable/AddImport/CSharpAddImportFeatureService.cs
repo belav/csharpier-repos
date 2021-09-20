@@ -41,7 +41,8 @@ namespace Microsoft.CodeAnalysis.CSharp.AddImport
             SyntaxNode node,
             bool allowInHiddenRegions,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             cancellationToken.ThrowIfCancellationRequested();
             return node.CanAddUsingDirectives(allowInHiddenRegions, cancellationToken);
         }
@@ -51,7 +52,8 @@ namespace Microsoft.CodeAnalysis.CSharp.AddImport
             ISyntaxFacts syntaxFacts,
             SyntaxNode node,
             out SimpleNameSyntax nameNode
-        ) {
+        )
+        {
             nameNode = null;
 
             switch (diagnosticId)
@@ -64,7 +66,8 @@ namespace Microsoft.CodeAnalysis.CSharp.AddImport
                             SyntaxKind.ConditionalAccessExpression,
                             out ConditionalAccessExpressionSyntax conditionalAccess
                         )
-                    ) {
+                    )
+                    {
                         node = conditionalAccess.WhenNotNull;
                     }
                     else if (
@@ -72,7 +75,8 @@ namespace Microsoft.CodeAnalysis.CSharp.AddImport
                             SyntaxKind.MemberBindingExpression,
                             out MemberBindingExpressionSyntax memberBinding1
                         )
-                    ) {
+                    )
+                    {
                         node = memberBinding1.Name;
                     }
                     else if (node.Parent.IsKind(SyntaxKind.CollectionInitializerExpression))
@@ -131,7 +135,8 @@ namespace Microsoft.CodeAnalysis.CSharp.AddImport
             if (
                 !nameNode.IsParentKind(SyntaxKind.SimpleMemberAccessExpression)
                 && !nameNode.IsParentKind(SyntaxKind.MemberBindingExpression)
-            ) {
+            )
+            {
                 return false;
             }
 
@@ -142,14 +147,16 @@ namespace Microsoft.CodeAnalysis.CSharp.AddImport
                 || memberAccess.IsParentKind(SyntaxKind.ElementAccessExpression)
                 || memberBinding.IsParentKind(SyntaxKind.SimpleMemberAccessExpression)
                 || memberBinding.IsParentKind(SyntaxKind.ElementAccessExpression)
-            ) {
+            )
+            {
                 return false;
             }
 
             if (
                 !syntaxFacts.IsNameOfSimpleMemberAccessExpression(node)
                 && !syntaxFacts.IsNameOfMemberBindingExpression(node)
-            ) {
+            )
+            {
                 return false;
             }
 
@@ -190,7 +197,8 @@ namespace Microsoft.CodeAnalysis.CSharp.AddImport
             string diagnosticId,
             SyntaxNode node,
             out SimpleNameSyntax nameNode
-        ) {
+        )
+        {
             nameNode = null;
             return false;
         }
@@ -209,7 +217,8 @@ namespace Microsoft.CodeAnalysis.CSharp.AddImport
             string diagnosticId,
             SyntaxNode node,
             out SimpleNameSyntax nameNode
-        ) {
+        )
+        {
             nameNode = null;
             switch (diagnosticId)
             {
@@ -273,7 +282,8 @@ namespace Microsoft.CodeAnalysis.CSharp.AddImport
             SemanticModel semanticModel,
             SyntaxNode node,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             return semanticModel.GetUsingNamespacesInScope(node);
         }
 
@@ -281,7 +291,8 @@ namespace Microsoft.CodeAnalysis.CSharp.AddImport
             SemanticModel semanticModel,
             SyntaxNode node,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             return semanticModel.GetTypeInfo(node, cancellationToken).Type;
         }
 
@@ -289,14 +300,16 @@ namespace Microsoft.CodeAnalysis.CSharp.AddImport
             SemanticModel semanticModel,
             SyntaxNode node,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var query = node.AncestorsAndSelf().OfType<QueryExpressionSyntax>().First();
 
             if (
                 InfoBoundSuccessfully(
                     semanticModel.GetQueryClauseInfo(query.FromClause, cancellationToken)
                 )
-            ) {
+            )
+            {
                 return null;
             }
 
@@ -306,7 +319,8 @@ namespace Microsoft.CodeAnalysis.CSharp.AddImport
                     InfoBoundSuccessfully(
                         semanticModel.GetQueryClauseInfo(clause, cancellationToken)
                     )
-                ) {
+                )
+                {
                     return null;
                 }
             }
@@ -315,7 +329,8 @@ namespace Microsoft.CodeAnalysis.CSharp.AddImport
                 InfoBoundSuccessfully(
                     semanticModel.GetSymbolInfo(query.Body.SelectOrGroup, cancellationToken)
                 )
-            ) {
+            )
+            {
                 return null;
             }
 
@@ -344,7 +359,8 @@ namespace Microsoft.CodeAnalysis.CSharp.AddImport
             SemanticModel semanticModel,
             SyntaxNode contextNode,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var root = GetCompilationUnitSyntaxNode(contextNode, cancellationToken);
 
             // See if this is a reference to a type from a reference that has a specific alias
@@ -404,7 +420,8 @@ namespace Microsoft.CodeAnalysis.CSharp.AddImport
             bool placeSystemNamespaceFirst,
             bool allowInHiddenRegions,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var root = GetCompilationUnitSyntaxNode(contextNode, cancellationToken);
             var newRoot = await AddImportWorkerAsync(
                     document,
@@ -427,7 +444,8 @@ namespace Microsoft.CodeAnalysis.CSharp.AddImport
             bool placeSystemNamespaceFirst,
             bool allowInHiddenRegions,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var semanticModel = await document.GetSemanticModelAsync(cancellationToken)
                 .ConfigureAwait(false);
 
@@ -484,7 +502,8 @@ namespace Microsoft.CodeAnalysis.CSharp.AddImport
             bool placeSystemNamespaceFirst,
             bool allowInHiddenRegions,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var root = GetCompilationUnitSyntaxNode(contextNode, cancellationToken);
 
             var usingDirective = SyntaxFactory.UsingDirective(
@@ -527,7 +546,8 @@ namespace Microsoft.CodeAnalysis.CSharp.AddImport
             INamespaceOrTypeSymbol namespaceSymbol,
             SemanticModel semanticModel,
             SyntaxNode contextNode
-        ) {
+        )
+        {
             var (val, hasExistingExtern) = GetExternAliasString(
                 namespaceSymbol,
                 semanticModel,
@@ -551,7 +571,8 @@ namespace Microsoft.CodeAnalysis.CSharp.AddImport
             SemanticModel semanticModel,
             CompilationUnitSyntax root,
             SyntaxNode contextNode
-        ) {
+        )
+        {
             var addImportService = document.GetLanguageService<IAddImportsService>();
             var generator = SyntaxGenerator.GetGenerator(document);
 
@@ -625,7 +646,8 @@ namespace Microsoft.CodeAnalysis.CSharp.AddImport
             SemanticModel semanticModel,
             NameSyntax nameSyntax,
             NamespaceDeclarationSyntax namespaceToAddTo
-        ) {
+        )
+        {
             var aliasQualifiedName = nameSyntax.DescendantNodesAndSelf()
                 .OfType<AliasQualifiedNameSyntax>()
                 .FirstOrDefault();
@@ -646,7 +668,8 @@ namespace Microsoft.CodeAnalysis.CSharp.AddImport
             SemanticModel semanticModel,
             NamespaceDeclarationSyntax namespaceToAddTo,
             string rightOfAliasName
-        ) {
+        )
+        {
             if (namespaceToAddTo != null)
             {
                 var containingNamespaceSymbol = semanticModel.GetDeclaredSymbol(namespaceToAddTo);
@@ -654,7 +677,8 @@ namespace Microsoft.CodeAnalysis.CSharp.AddImport
                 while (
                     containingNamespaceSymbol != null
                     && !containingNamespaceSymbol.IsGlobalNamespace
-                ) {
+                )
+                {
                     if (containingNamespaceSymbol.GetMembers(rightOfAliasName).Any())
                     {
                         // A containing namespace had this name in it.  We need to stay globally qualified.
@@ -689,7 +713,8 @@ namespace Microsoft.CodeAnalysis.CSharp.AddImport
             INamespaceOrTypeSymbol namespaceSymbol,
             SemanticModel semanticModel,
             SyntaxNode contextNode
-        ) {
+        )
+        {
             string externAliasString = null;
             var metadataReference = semanticModel.Compilation.GetMetadataReference(
                 namespaceSymbol.ContainingAssembly
@@ -736,7 +761,8 @@ namespace Microsoft.CodeAnalysis.CSharp.AddImport
         private static CompilationUnitSyntax GetCompilationUnitSyntaxNode(
             SyntaxNode contextNode,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             return (CompilationUnitSyntax)contextNode.SyntaxTree.GetRoot(cancellationToken);
         }
 
@@ -746,7 +772,8 @@ namespace Microsoft.CodeAnalysis.CSharp.AddImport
             SemanticModel semanticModel,
             ISyntaxFacts syntaxFacts,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var leftExpression =
                 syntaxFacts.GetExpressionOfMemberAccessExpression(expression)
                 ?? syntaxFacts.GetTargetOfMemberBinding(expression);

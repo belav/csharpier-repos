@@ -139,7 +139,8 @@ namespace Roslyn.Utilities
         private static ReferenceCountedDisposable<T>? TryAddReferenceImpl(
             T? target,
             StrongBox<int> referenceCount
-        ) {
+        )
+        {
             lock (referenceCount)
             {
                 if (referenceCount.Value == 0)

@@ -14,7 +14,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Library.ObjectB
             ObjectListItem listItem,
             IVsObjectBrowserDescription3 description,
             _VSOBJDESCOPTIONS options
-        ) {
+        )
+        {
             var project = GetProject(listItem);
             if (project == null)
             {

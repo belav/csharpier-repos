@@ -29,7 +29,8 @@ namespace Microsoft.CodeAnalysis.ExpressionEvaluator
                 string,
                 ImmutableArray<(AssemblyIdentity Identity, MetadataReference Reference)>
             > referencesBySimpleName
-        ) {
+        )
+        {
             _identityComparer = identityComparer;
             _referencesBySimpleName = referencesBySimpleName;
         }
@@ -39,7 +40,8 @@ namespace Microsoft.CodeAnalysis.ExpressionEvaluator
         public override PortableExecutableReference? ResolveMissingAssembly(
             MetadataReference definition,
             AssemblyIdentity referenceIdentity
-        ) {
+        )
+        {
             (AssemblyIdentity? Identity, MetadataReference? Reference) result = default;
             if (_referencesBySimpleName.TryGetValue(referenceIdentity.Name, out var references))
             {
@@ -68,7 +70,8 @@ namespace Microsoft.CodeAnalysis.ExpressionEvaluator
         private (AssemblyIdentity? Identity, MetadataReference? Reference) GetBestMatch(
             ImmutableArray<(AssemblyIdentity Identity, MetadataReference Reference)> references,
             AssemblyIdentity referenceIdentity
-        ) {
+        )
+        {
             (AssemblyIdentity? Identity, MetadataReference? Reference) best = default;
             foreach (var pair in references)
             {

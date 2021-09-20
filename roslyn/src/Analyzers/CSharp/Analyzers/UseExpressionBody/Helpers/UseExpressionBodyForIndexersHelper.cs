@@ -64,7 +64,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UseExpressionBody
         protected override IndexerDeclarationSyntax WithBody(
             IndexerDeclarationSyntax declaration,
             BlockSyntax body
-        ) {
+        )
+        {
             if (body == null)
             {
                 return declaration.WithAccessorList(null);
@@ -89,7 +90,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UseExpressionBody
             ExpressionBodyPreference conversionPreference,
             out ArrowExpressionClauseSyntax arrowExpression,
             out SyntaxToken semicolonToken
-        ) {
+        )
+        {
             return TryConvertToExpressionBodyForBaseProperty(
                 declaration,
                 options,

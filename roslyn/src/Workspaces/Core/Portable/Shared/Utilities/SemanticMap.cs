@@ -22,7 +22,8 @@ namespace Microsoft.CodeAnalysis.Shared.Utilities
             SemanticModel semanticModel,
             SyntaxNode node,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var map = new SemanticMap();
             var walker = new Walker(semanticModel, map, cancellationToken);
             walker.Visit(node);

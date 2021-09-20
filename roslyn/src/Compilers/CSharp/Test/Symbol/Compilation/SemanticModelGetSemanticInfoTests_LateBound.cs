@@ -633,7 +633,8 @@ class C
                     "&&",
                     "||"
                 }
-            ) {
+            )
+            {
                 string sourceCode =
                     @"
 class C

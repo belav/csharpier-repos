@@ -20,7 +20,8 @@ namespace Microsoft.CodeAnalysis.Remote
         public RemoteProjectTelemetryIncrementalAnalyzerProvider(
             RemoteCallback<IRemoteProjectTelemetryService.ICallback> callback,
             RemoteServiceCallbackId callbackId
-        ) {
+        )
+        {
             _callback = callback;
             _callbackId = callbackId;
         }

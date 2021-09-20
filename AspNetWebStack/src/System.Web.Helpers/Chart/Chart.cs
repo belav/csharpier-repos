@@ -95,7 +95,8 @@ namespace System.Web.Helpers
             int height,
             string theme = null,
             string themePath = null
-        ) {
+        )
+        {
             Contract.Assert(httpContext != null);
             Contract.Assert(virtualPathProviderFunc != null);
 
@@ -215,7 +216,8 @@ namespace System.Web.Helpers
             string xField = null,
             IEnumerable yValues = null,
             string yFields = null
-        ) {
+        )
+        {
             if (String.IsNullOrEmpty(chartType))
             {
                 throw new ArgumentException(
@@ -311,7 +313,8 @@ namespace System.Web.Helpers
             string yFields,
             string otherFields = null,
             string pointSortOrder = "Ascending"
-        ) {
+        )
+        {
             if (dataSource == null)
             {
                 throw new ArgumentNullException("dataSource");
@@ -468,7 +471,8 @@ namespace System.Web.Helpers
             string key = null,
             int minutesToCache = 20,
             bool slidingExpiration = true
-        ) {
+        )
+        {
             if (String.IsNullOrEmpty(key))
             {
                 key = GetUniqueKey();
@@ -549,7 +553,8 @@ namespace System.Web.Helpers
             using (
                 UI.DataVisualization.Charting.Chart chart =
                     new UI.DataVisualization.Charting.Chart()
-            ) {
+            )
+            {
                 chart.Width = new Unit(_width);
                 chart.Height = new Unit(_height);
 
@@ -593,7 +598,8 @@ namespace System.Web.Helpers
         private static void LoadChartThemeFromFile(
             UI.DataVisualization.Charting.Chart chart,
             Stream templateStream
-        ) {
+        )
+        {
             // workarounds for Chart templating bugs mentioned in:
             // http://social.msdn.microsoft.com/Forums/en-US/MSWinWebChart/thread/b50d5b7e-30e2-4948-af7a-370d9be1268a
             chart.Serializer.Content = SerializationContents.All;
@@ -636,7 +642,8 @@ namespace System.Web.Helpers
             HttpContextBase context,
             string key,
             string format = "jpeg"
-        ) {
+        )
+        {
             var chart = GetFromCache(context, key);
             if (chart != null)
             {

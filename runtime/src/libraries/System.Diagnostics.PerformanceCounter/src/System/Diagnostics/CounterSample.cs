@@ -35,7 +35,8 @@ namespace System.Diagnostics
             long timeStamp,
             long timeStamp100nSec,
             PerformanceCounterType counterType
-        ) {
+        )
+        {
             _rawValue = rawValue;
             _baseValue = baseValue;
             _timeStamp = timeStamp;
@@ -55,7 +56,8 @@ namespace System.Diagnostics
             long timeStamp100nSec,
             PerformanceCounterType counterType,
             long counterTimeStamp
-        ) {
+        )
+        {
             _rawValue = rawValue;
             _baseValue = baseValue;
             _timeStamp = timeStamp;

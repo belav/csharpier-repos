@@ -142,7 +142,8 @@ namespace JIT.HardwareIntrinsics.X86
                     || (alignment * 2) < sizeOfinArray1
                     || (alignment * 2) < sizeOfinArray2
                     || (alignment * 2) < sizeOfoutArray
-                ) {
+                )
+                {
                     throw new ArgumentException("Invalid value of alignment");
                 }
 
@@ -445,7 +446,8 @@ namespace JIT.HardwareIntrinsics.X86
 
             fixed (Vector128<Int64>* pClsVar1 = &_clsVar1)fixed (
                 Vector128<Int64>* pClsVar2 = &_clsVar2
-            ) {
+            )
+            {
                 var result = Sse2.UnpackHigh(
                     Sse2.LoadVector128((Int64*)(pClsVar1)),
                     Sse2.LoadVector128((Int64*)(pClsVar2))
@@ -511,7 +513,8 @@ namespace JIT.HardwareIntrinsics.X86
 
             fixed (Vector128<Int64>* pFld1 = &test._fld1)fixed (
                 Vector128<Int64>* pFld2 = &test._fld2
-            ) {
+            )
+            {
                 var result = Sse2.UnpackHigh(
                     Sse2.LoadVector128((Int64*)(pFld1)),
                     Sse2.LoadVector128((Int64*)(pFld2))
@@ -615,7 +618,8 @@ namespace JIT.HardwareIntrinsics.X86
             Vector128<Int64> op2,
             void* result,
             [CallerMemberName] string method = ""
-        ) {
+        )
+        {
             Int64[] inArray1 = new Int64[Op1ElementCount];
             Int64[] inArray2 = new Int64[Op2ElementCount];
             Int64[] outArray = new Int64[RetElementCount];
@@ -636,7 +640,8 @@ namespace JIT.HardwareIntrinsics.X86
             void* op2,
             void* result,
             [CallerMemberName] string method = ""
-        ) {
+        )
+        {
             Int64[] inArray1 = new Int64[Op1ElementCount];
             Int64[] inArray2 = new Int64[Op2ElementCount];
             Int64[] outArray = new Int64[RetElementCount];
@@ -665,7 +670,8 @@ namespace JIT.HardwareIntrinsics.X86
             Int64[] right,
             Int64[] result,
             [CallerMemberName] string method = ""
-        ) {
+        )
+        {
             bool succeeded = true;
 
             if (result[0] != left[1] || result[1] != right[1])
@@ -680,7 +686,8 @@ namespace JIT.HardwareIntrinsics.X86
                         (i % 2 == 0)
                             ? result[i] != left[i / 2 + 1]
                             : result[i] != right[(i - 1) / 2 + 1]
-                    ) {
+                    )
+                    {
                         succeeded = false;
                         break;
                     }

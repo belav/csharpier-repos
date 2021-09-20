@@ -41,7 +41,8 @@ namespace Microsoft.CodeAnalysis.ProjectTelemetry
             int metadataReferencesCount,
             int documentsCount,
             int additionalDocumentsCount
-        ) {
+        )
+        {
             ProjectId = projectId;
             Language = language;
             AnalyzerReferencesCount = analyzerReferencesCount;

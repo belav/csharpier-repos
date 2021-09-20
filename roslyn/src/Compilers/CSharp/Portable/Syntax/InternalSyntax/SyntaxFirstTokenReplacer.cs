@@ -22,7 +22,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Syntax.InternalSyntax
             SyntaxToken oldToken,
             SyntaxToken newToken,
             int diagnosticOffsetDelta
-        ) {
+        )
+        {
             _oldToken = oldToken;
             _newToken = newToken;
             _diagnosticOffsetDelta = diagnosticOffsetDelta;

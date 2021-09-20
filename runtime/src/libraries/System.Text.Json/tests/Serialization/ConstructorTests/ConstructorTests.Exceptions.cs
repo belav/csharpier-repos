@@ -352,7 +352,8 @@ namespace System.Text.Json.Serialization.Tests
             public Parameterized_ClassWithExtensionProperty(
                 SimpleTestClass myNestedClass,
                 int myInt
-            ) {
+            )
+            {
                 MyNestedClass = myNestedClass;
                 MyInt = myInt;
             }

@@ -37,7 +37,8 @@ namespace Microsoft.CodeAnalysis.Rename
                 string documentName,
                 ImmutableArray<string> documentFolders,
                 OptionSet optionSet
-            ) {
+            )
+            {
                 ApplicableActions = actions;
                 _documentFolders = documentFolders;
                 _documentId = documentId;
@@ -77,7 +78,8 @@ namespace Microsoft.CodeAnalysis.Rename
                 Solution solution,
                 ImmutableArray<RenameDocumentAction> actions,
                 CancellationToken cancellationToken
-            ) {
+            )
+            {
                 if (solution is null)
                 {
                     throw new ArgumentNullException(nameof(solution));

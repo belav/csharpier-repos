@@ -23,7 +23,8 @@ namespace System.Speech.Internal.Synthesis
             SpeechAudioFormatInfo formatInfo,
             bool headerInfo,
             IAsyncDispatch asyncDispatch
-        ) {
+        )
+        {
             _asyncDispatch = asyncDispatch;
             _stream = stream;
             _startStreamPosition = _stream.Position;

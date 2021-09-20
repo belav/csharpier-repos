@@ -27,7 +27,8 @@ namespace Microsoft.CodeAnalysis.Serialization
         public static Checksum CreateChecksum(
             MetadataReference reference,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             if (reference is PortableExecutableReference portable)
             {
                 return CreatePortableExecutableReferenceChecksum(portable, cancellationToken);
@@ -43,7 +44,8 @@ namespace Microsoft.CodeAnalysis.Serialization
         public static Checksum CreateChecksum(
             AnalyzerReference reference,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             cancellationToken.ThrowIfCancellationRequested();
 
             using var stream = SerializableBytes.CreateWritableStream();
@@ -71,7 +73,8 @@ namespace Microsoft.CodeAnalysis.Serialization
             ObjectWriter writer,
             SolutionReplicationContext context,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             if (reference is PortableExecutableReference portable)
             {
                 if (portable is ISupportTemporaryStorage supportTemporaryStorage)
@@ -83,7 +86,8 @@ namespace Microsoft.CodeAnalysis.Serialization
                             context,
                             cancellationToken
                         )
-                    ) {
+                    )
+                    {
                         return;
                     }
                 }
@@ -98,7 +102,8 @@ namespace Microsoft.CodeAnalysis.Serialization
         public virtual MetadataReference ReadMetadataReferenceFrom(
             ObjectReader reader,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var type = reader.ReadString();
             if (type == nameof(PortableExecutableReference))
             {
@@ -112,7 +117,8 @@ namespace Microsoft.CodeAnalysis.Serialization
             AnalyzerReference reference,
             ObjectWriter writer,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             cancellationToken.ThrowIfCancellationRequested();
 
             switch (reference)
@@ -131,7 +137,8 @@ namespace Microsoft.CodeAnalysis.Serialization
         public AnalyzerReference ReadAnalyzerReferenceFrom(
             ObjectReader reader,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             cancellationToken.ThrowIfCancellationRequested();
 
             var type = reader.ReadString();
@@ -153,7 +160,8 @@ namespace Microsoft.CodeAnalysis.Serialization
             SerializationKinds kind,
             ObjectWriter writer,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             writer.WriteString(nameof(PortableExecutableReference));
             writer.WriteInt32((int)kind);
 
@@ -164,7 +172,8 @@ namespace Microsoft.CodeAnalysis.Serialization
             PortableExecutableReference reference,
             ObjectWriter writer,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             WriteTo(reference.Properties, writer, cancellationToken);
             writer.WriteString(reference.FilePath);
         }
@@ -172,7 +181,8 @@ namespace Microsoft.CodeAnalysis.Serialization
         private static Checksum CreatePortableExecutableReferenceChecksum(
             PortableExecutableReference reference,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             using var stream = SerializableBytes.CreateWritableStream();
 
             using (var writer = new ObjectWriter(stream, leaveOpen: true, cancellationToken))
@@ -189,7 +199,8 @@ namespace Microsoft.CodeAnalysis.Serialization
             Metadata? metadata,
             ObjectWriter writer,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             if (metadata == null)
             {
                 // handle error case where we couldn't load metadata of the reference.
@@ -223,7 +234,8 @@ namespace Microsoft.CodeAnalysis.Serialization
         private static bool TryGetModules(
             AssemblyMetadata assemblyMetadata,
             out ImmutableArray<ModuleMetadata> modules
-        ) {
+        )
+        {
             // Gracefully handle documented exceptions from 'GetModules' invocation.
             try
             {
@@ -245,7 +257,8 @@ namespace Microsoft.CodeAnalysis.Serialization
             ModuleMetadata metadata,
             ObjectWriter writer,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             cancellationToken.ThrowIfCancellationRequested();
 
             writer.WriteInt32((int)metadata.Kind);
@@ -262,7 +275,8 @@ namespace Microsoft.CodeAnalysis.Serialization
             PortableExecutableReference reference,
             ObjectWriter writer,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             WritePortableExecutableReferenceHeaderTo(
                 reference,
                 SerializationKinds.Bits,
@@ -277,7 +291,8 @@ namespace Microsoft.CodeAnalysis.Serialization
         private PortableExecutableReference ReadPortableExecutableReferenceFrom(
             ObjectReader reader,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var kind = (SerializationKinds)reader.ReadInt32();
             if (kind == SerializationKinds.Bits || kind == SerializationKinds.MemoryMapFile)
             {
@@ -327,7 +342,8 @@ namespace Microsoft.CodeAnalysis.Serialization
             MetadataReferenceProperties properties,
             ObjectWriter writer,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             cancellationToken.ThrowIfCancellationRequested();
 
             writer.WriteInt32((int)properties.Kind);
@@ -338,7 +354,8 @@ namespace Microsoft.CodeAnalysis.Serialization
         private static MetadataReferenceProperties ReadMetadataReferencePropertiesFrom(
             ObjectReader reader,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             cancellationToken.ThrowIfCancellationRequested();
 
             var kind = (MetadataImageKind)reader.ReadInt32();
@@ -352,7 +369,8 @@ namespace Microsoft.CodeAnalysis.Serialization
             Metadata? metadata,
             ObjectWriter writer,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             if (metadata == null)
             {
                 // handle error case where metadata failed to load
@@ -389,7 +407,8 @@ namespace Microsoft.CodeAnalysis.Serialization
             ObjectWriter writer,
             SolutionReplicationContext context,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var storages = reference.GetStorages();
             if (storages == null)
             {
@@ -436,7 +455,8 @@ namespace Microsoft.CodeAnalysis.Serialization
             ObjectReader reader,
             SerializationKinds kind,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var imageKind = reader.ReadInt32();
             if (imageKind == MetadataFailed)
             {
@@ -508,7 +528,8 @@ namespace Microsoft.CodeAnalysis.Serialization
             ObjectReader reader,
             SerializationKinds kind,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             cancellationToken.ThrowIfCancellationRequested();
 
             GetTemporaryStorage(reader, kind, out var storage, out var length, cancellationToken);
@@ -528,7 +549,8 @@ namespace Microsoft.CodeAnalysis.Serialization
         private static ModuleMetadata ReadModuleMetadataFrom(
             ObjectReader reader,
             SerializationKinds kind
-        ) {
+        )
+        {
             Contract.ThrowIfFalse(SerializationKinds.Bits == kind);
 
             var array = reader.ReadArray<byte>();
@@ -552,7 +574,8 @@ namespace Microsoft.CodeAnalysis.Serialization
             out ITemporaryStreamStorage storage,
             out long length,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             if (kind == SerializationKinds.Bits)
             {
                 storage = _storageService.CreateTemporaryStreamStorage(cancellationToken);
@@ -595,7 +618,8 @@ namespace Microsoft.CodeAnalysis.Serialization
             long length,
             out ModuleMetadata metadata,
             out object lifeTimeObject
-        ) {
+        )
+        {
             if (stream is ISupportDirectMemoryAccess directAccess)
             {
                 metadata = ModuleMetadata.CreateFromMetadata(
@@ -611,7 +635,8 @@ namespace Microsoft.CodeAnalysis.Serialization
                 stream is MemoryStream memory
                 && memory.TryGetBuffer(out var buffer)
                 && buffer.Offset == 0
-            ) {
+            )
+            {
                 pinnedObject = new PinnedObject(buffer.Array!);
             }
             else
@@ -629,7 +654,8 @@ namespace Microsoft.CodeAnalysis.Serialization
             ObjectReader reader,
             Stream stream,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             cancellationToken.ThrowIfCancellationRequested();
 
             // TODO: make reader be able to read byte[] chunk
@@ -641,7 +667,8 @@ namespace Microsoft.CodeAnalysis.Serialization
             ModuleMetadata metadata,
             ObjectWriter writer,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             writer.WriteInt32((int)metadata.Kind);
 
             WriteTo(metadata.GetMetadataReader(), writer, cancellationToken);
@@ -651,7 +678,8 @@ namespace Microsoft.CodeAnalysis.Serialization
             MetadataReader reader,
             ObjectWriter writer,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             cancellationToken.ThrowIfCancellationRequested();
 
             writer.WriteValue(
@@ -662,7 +690,8 @@ namespace Microsoft.CodeAnalysis.Serialization
         private static void WriteUnresolvedAnalyzerReferenceTo(
             AnalyzerReference reference,
             ObjectWriter writer
-        ) {
+        )
+        {
             writer.WriteString(nameof(UnresolvedAnalyzerReference));
             writer.WriteString(reference.FullPath);
         }

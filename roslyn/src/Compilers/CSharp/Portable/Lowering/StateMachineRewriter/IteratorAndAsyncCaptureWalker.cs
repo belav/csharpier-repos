@@ -45,14 +45,15 @@ namespace Microsoft.CodeAnalysis.CSharp
             MethodSymbol method,
             BoundNode node,
             HashSet<Symbol> initiallyAssignedVariables
-        ) : base(
-            compilation,
-            method,
-            node,
-            EmptyStructTypeCache.CreateNeverEmpty(),
-            trackUnassignments: true,
-            initiallyAssignedVariables: initiallyAssignedVariables
-        ) { }
+        )
+            : base(
+                compilation,
+                method,
+                node,
+                EmptyStructTypeCache.CreateNeverEmpty(),
+                trackUnassignments: true,
+                initiallyAssignedVariables: initiallyAssignedVariables
+            ) { }
 
         // Returns deterministically ordered list of variables that ought to be hoisted.
         public static OrderedSet<Symbol> Analyze(
@@ -60,7 +61,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             MethodSymbol method,
             BoundNode node,
             DiagnosticBag diagnostics
-        ) {
+        )
+        {
             var initiallyAssignedVariables = UnassignedVariablesWalker.Analyze(
                 compilation,
                 method,
@@ -104,7 +106,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                     if (
                         variable is SynthesizedLocal local
                         && local.SynthesizedKind == SynthesizedLocalKind.Spill
-                    ) {
+                    )
+                    {
                         Debug.Assert(local.TypeWithAnnotations.IsRestrictedType());
                         diagnostics.Add(
                             ErrorCode.ERR_ByRefTypeAndAwait,
@@ -283,7 +286,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             SyntaxNode node,
             int slot,
             bool skipIfUseBeforeDeclaration
-        ) {
+        )
+        {
             switch (symbol.Kind)
             {
                 case SymbolKind.Field:
@@ -352,7 +356,8 @@ namespace Microsoft.CodeAnalysis.CSharp
         protected override void VisitFinallyBlock(
             BoundStatement finallyBlock,
             ref LocalState unsetInFinally
-        ) {
+        )
+        {
             if (_seenYieldInCurrentTry)
             {
                 // Locals cannot be used to communicate between the finally block and the rest of the method.

@@ -48,7 +48,8 @@ namespace System.Runtime.Intrinsics.X86
             public static Vector128<float> ConvertScalarToVector128Single(
                 Vector128<float> upper,
                 long value
-            ) {
+            )
+            {
                 throw new PlatformNotSupportedException();
             }
 
@@ -124,7 +125,8 @@ namespace System.Runtime.Intrinsics.X86
         public static bool CompareScalarUnorderedEqual(
             Vector128<float> left,
             Vector128<float> right
-        ) {
+        )
+        {
             throw new PlatformNotSupportedException();
         }
 
@@ -135,7 +137,8 @@ namespace System.Runtime.Intrinsics.X86
         public static Vector128<float> CompareScalarEqual(
             Vector128<float> left,
             Vector128<float> right
-        ) {
+        )
+        {
             throw new PlatformNotSupportedException();
         }
 
@@ -146,7 +149,8 @@ namespace System.Runtime.Intrinsics.X86
         public static Vector128<float> CompareGreaterThan(
             Vector128<float> left,
             Vector128<float> right
-        ) {
+        )
+        {
             throw new PlatformNotSupportedException();
         }
 
@@ -157,7 +161,8 @@ namespace System.Runtime.Intrinsics.X86
         public static bool CompareScalarOrderedGreaterThan(
             Vector128<float> left,
             Vector128<float> right
-        ) {
+        )
+        {
             throw new PlatformNotSupportedException();
         }
 
@@ -168,7 +173,8 @@ namespace System.Runtime.Intrinsics.X86
         public static bool CompareScalarUnorderedGreaterThan(
             Vector128<float> left,
             Vector128<float> right
-        ) {
+        )
+        {
             throw new PlatformNotSupportedException();
         }
 
@@ -179,7 +185,8 @@ namespace System.Runtime.Intrinsics.X86
         public static Vector128<float> CompareScalarGreaterThan(
             Vector128<float> left,
             Vector128<float> right
-        ) {
+        )
+        {
             throw new PlatformNotSupportedException();
         }
 
@@ -190,7 +197,8 @@ namespace System.Runtime.Intrinsics.X86
         public static Vector128<float> CompareGreaterThanOrEqual(
             Vector128<float> left,
             Vector128<float> right
-        ) {
+        )
+        {
             throw new PlatformNotSupportedException();
         }
 
@@ -201,7 +209,8 @@ namespace System.Runtime.Intrinsics.X86
         public static bool CompareScalarOrderedGreaterThanOrEqual(
             Vector128<float> left,
             Vector128<float> right
-        ) {
+        )
+        {
             throw new PlatformNotSupportedException();
         }
 
@@ -212,7 +221,8 @@ namespace System.Runtime.Intrinsics.X86
         public static bool CompareScalarUnorderedGreaterThanOrEqual(
             Vector128<float> left,
             Vector128<float> right
-        ) {
+        )
+        {
             throw new PlatformNotSupportedException();
         }
 
@@ -223,7 +233,8 @@ namespace System.Runtime.Intrinsics.X86
         public static Vector128<float> CompareScalarGreaterThanOrEqual(
             Vector128<float> left,
             Vector128<float> right
-        ) {
+        )
+        {
             throw new PlatformNotSupportedException();
         }
 
@@ -234,7 +245,8 @@ namespace System.Runtime.Intrinsics.X86
         public static Vector128<float> CompareLessThan(
             Vector128<float> left,
             Vector128<float> right
-        ) {
+        )
+        {
             throw new PlatformNotSupportedException();
         }
 
@@ -245,7 +257,8 @@ namespace System.Runtime.Intrinsics.X86
         public static bool CompareScalarOrderedLessThan(
             Vector128<float> left,
             Vector128<float> right
-        ) {
+        )
+        {
             throw new PlatformNotSupportedException();
         }
 
@@ -256,7 +269,8 @@ namespace System.Runtime.Intrinsics.X86
         public static bool CompareScalarUnorderedLessThan(
             Vector128<float> left,
             Vector128<float> right
-        ) {
+        )
+        {
             throw new PlatformNotSupportedException();
         }
 
@@ -267,7 +281,8 @@ namespace System.Runtime.Intrinsics.X86
         public static Vector128<float> CompareScalarLessThan(
             Vector128<float> left,
             Vector128<float> right
-        ) {
+        )
+        {
             throw new PlatformNotSupportedException();
         }
 
@@ -278,7 +293,8 @@ namespace System.Runtime.Intrinsics.X86
         public static Vector128<float> CompareLessThanOrEqual(
             Vector128<float> left,
             Vector128<float> right
-        ) {
+        )
+        {
             throw new PlatformNotSupportedException();
         }
 
@@ -289,7 +305,8 @@ namespace System.Runtime.Intrinsics.X86
         public static bool CompareScalarOrderedLessThanOrEqual(
             Vector128<float> left,
             Vector128<float> right
-        ) {
+        )
+        {
             throw new PlatformNotSupportedException();
         }
 
@@ -300,7 +317,8 @@ namespace System.Runtime.Intrinsics.X86
         public static bool CompareScalarUnorderedLessThanOrEqual(
             Vector128<float> left,
             Vector128<float> right
-        ) {
+        )
+        {
             throw new PlatformNotSupportedException();
         }
 
@@ -311,7 +329,8 @@ namespace System.Runtime.Intrinsics.X86
         public static Vector128<float> CompareScalarLessThanOrEqual(
             Vector128<float> left,
             Vector128<float> right
-        ) {
+        )
+        {
             throw new PlatformNotSupportedException();
         }
 
@@ -322,7 +341,8 @@ namespace System.Runtime.Intrinsics.X86
         public static Vector128<float> CompareNotEqual(
             Vector128<float> left,
             Vector128<float> right
-        ) {
+        )
+        {
             throw new PlatformNotSupportedException();
         }
 
@@ -333,7 +353,8 @@ namespace System.Runtime.Intrinsics.X86
         public static bool CompareScalarOrderedNotEqual(
             Vector128<float> left,
             Vector128<float> right
-        ) {
+        )
+        {
             throw new PlatformNotSupportedException();
         }
 
@@ -344,7 +365,8 @@ namespace System.Runtime.Intrinsics.X86
         public static bool CompareScalarUnorderedNotEqual(
             Vector128<float> left,
             Vector128<float> right
-        ) {
+        )
+        {
             throw new PlatformNotSupportedException();
         }
 
@@ -355,7 +377,8 @@ namespace System.Runtime.Intrinsics.X86
         public static Vector128<float> CompareScalarNotEqual(
             Vector128<float> left,
             Vector128<float> right
-        ) {
+        )
+        {
             throw new PlatformNotSupportedException();
         }
 
@@ -366,7 +389,8 @@ namespace System.Runtime.Intrinsics.X86
         public static Vector128<float> CompareNotGreaterThan(
             Vector128<float> left,
             Vector128<float> right
-        ) {
+        )
+        {
             throw new PlatformNotSupportedException();
         }
 
@@ -377,7 +401,8 @@ namespace System.Runtime.Intrinsics.X86
         public static Vector128<float> CompareScalarNotGreaterThan(
             Vector128<float> left,
             Vector128<float> right
-        ) {
+        )
+        {
             throw new PlatformNotSupportedException();
         }
 
@@ -388,7 +413,8 @@ namespace System.Runtime.Intrinsics.X86
         public static Vector128<float> CompareNotGreaterThanOrEqual(
             Vector128<float> left,
             Vector128<float> right
-        ) {
+        )
+        {
             throw new PlatformNotSupportedException();
         }
 
@@ -399,7 +425,8 @@ namespace System.Runtime.Intrinsics.X86
         public static Vector128<float> CompareScalarNotGreaterThanOrEqual(
             Vector128<float> left,
             Vector128<float> right
-        ) {
+        )
+        {
             throw new PlatformNotSupportedException();
         }
 
@@ -410,7 +437,8 @@ namespace System.Runtime.Intrinsics.X86
         public static Vector128<float> CompareNotLessThan(
             Vector128<float> left,
             Vector128<float> right
-        ) {
+        )
+        {
             throw new PlatformNotSupportedException();
         }
 
@@ -421,7 +449,8 @@ namespace System.Runtime.Intrinsics.X86
         public static Vector128<float> CompareScalarNotLessThan(
             Vector128<float> left,
             Vector128<float> right
-        ) {
+        )
+        {
             throw new PlatformNotSupportedException();
         }
 
@@ -432,7 +461,8 @@ namespace System.Runtime.Intrinsics.X86
         public static Vector128<float> CompareNotLessThanOrEqual(
             Vector128<float> left,
             Vector128<float> right
-        ) {
+        )
+        {
             throw new PlatformNotSupportedException();
         }
 
@@ -443,7 +473,8 @@ namespace System.Runtime.Intrinsics.X86
         public static Vector128<float> CompareScalarNotLessThanOrEqual(
             Vector128<float> left,
             Vector128<float> right
-        ) {
+        )
+        {
             throw new PlatformNotSupportedException();
         }
 
@@ -463,7 +494,8 @@ namespace System.Runtime.Intrinsics.X86
         public static Vector128<float> CompareScalarOrdered(
             Vector128<float> left,
             Vector128<float> right
-        ) {
+        )
+        {
             throw new PlatformNotSupportedException();
         }
 
@@ -474,7 +506,8 @@ namespace System.Runtime.Intrinsics.X86
         public static Vector128<float> CompareUnordered(
             Vector128<float> left,
             Vector128<float> right
-        ) {
+        )
+        {
             throw new PlatformNotSupportedException();
         }
 
@@ -485,7 +518,8 @@ namespace System.Runtime.Intrinsics.X86
         public static Vector128<float> CompareScalarUnordered(
             Vector128<float> left,
             Vector128<float> right
-        ) {
+        )
+        {
             throw new PlatformNotSupportedException();
         }
 
@@ -505,7 +539,8 @@ namespace System.Runtime.Intrinsics.X86
         public static Vector128<float> ConvertScalarToVector128Single(
             Vector128<float> upper,
             int value
-        ) {
+        )
+        {
             throw new PlatformNotSupportedException();
         }
 
@@ -742,7 +777,8 @@ namespace System.Runtime.Intrinsics.X86
         public static Vector128<float> ReciprocalScalar(
             Vector128<float> upper,
             Vector128<float> value
-        ) {
+        )
+        {
             throw new PlatformNotSupportedException();
         }
 
@@ -772,7 +808,8 @@ namespace System.Runtime.Intrinsics.X86
         public static Vector128<float> ReciprocalSqrtScalar(
             Vector128<float> upper,
             Vector128<float> value
-        ) {
+        )
+        {
             throw new PlatformNotSupportedException();
         }
 
@@ -784,7 +821,8 @@ namespace System.Runtime.Intrinsics.X86
             Vector128<float> left,
             Vector128<float> right,
             byte control
-        ) {
+        )
+        {
             throw new PlatformNotSupportedException();
         }
 

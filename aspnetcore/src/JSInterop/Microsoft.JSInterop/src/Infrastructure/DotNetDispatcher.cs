@@ -50,7 +50,8 @@ namespace Microsoft.JSInterop.Infrastructure
             JSRuntime jsRuntime,
             in DotNetInvocationInfo invocationInfo,
             string argsJson
-        ) {
+        )
+        {
             // This method doesn't need [JSInvokable] because the platform is responsible for having
             // some way to dispatch calls here. The logic inside here is the thing that checks whether
             // the targeted method has [JSInvokable]. It is not itself subject to that restriction,
@@ -87,7 +88,8 @@ namespace Microsoft.JSInterop.Infrastructure
             JSRuntime jsRuntime,
             DotNetInvocationInfo invocationInfo,
             string argsJson
-        ) {
+        )
+        {
             // This method doesn't need [JSInvokable] because the platform is responsible for having
             // some way to dispatch calls here. The logic inside here is the thing that checks whether
             // the targeted method has [JSInvokable]. It is not itself subject to that restriction,
@@ -173,7 +175,8 @@ namespace Microsoft.JSInterop.Infrastructure
             in DotNetInvocationInfo callInfo,
             IDotNetObjectReference? objectReference,
             string argsJson
-        ) {
+        )
+        {
             var assemblyName = callInfo.AssemblyName;
             var methodIdentifier = callInfo.MethodIdentifier;
 
@@ -200,7 +203,8 @@ namespace Microsoft.JSInterop.Infrastructure
                         methodIdentifier,
                         StringComparison.Ordinal
                     )
-                ) {
+                )
+                {
                     // The client executed dotNetObjectReference.dispose(). Dispose the reference and exit.
                     objectReference.Dispose();
                     return default;
@@ -241,7 +245,8 @@ namespace Microsoft.JSInterop.Infrastructure
             string methodIdentifier,
             string arguments,
             Type[] parameterTypes
-        ) {
+        )
+        {
             if (parameterTypes.Length == 0)
             {
                 return Array.Empty<object>();
@@ -261,12 +266,14 @@ namespace Microsoft.JSInterop.Infrastructure
                 index < parameterTypes.Length
                 && reader.Read()
                 && reader.TokenType != JsonTokenType.EndArray
-            ) {
+            )
+            {
                 var parameterType = parameterTypes[index];
                 if (
                     reader.TokenType == JsonTokenType.StartObject
                     && IsIncorrectDotNetObjectRefUse(parameterType, reader)
-                ) {
+                )
+                {
                     throw new InvalidOperationException(
                         $"In call to '{methodIdentifier}', parameter of type '{parameterType.Name}' at index {(index + 1)} must be declared as type 'DotNetObjectRef<{parameterType.Name}>' to receive the incoming value."
                     );
@@ -308,7 +315,8 @@ namespace Microsoft.JSInterop.Infrastructure
                     jsonReader.Read()
                     && jsonReader.TokenType == JsonTokenType.PropertyName
                     && jsonReader.ValueTextEquals(DotNetObjectRefKey.EncodedUtf8Bytes)
-                ) {
+                )
+                {
                     // The JSON payload has the shape we expect from a DotNetObjectRef instance.
                     return !parameterType.IsGenericType
                         || parameterType.GetGenericTypeDefinition()
@@ -372,7 +380,8 @@ namespace Microsoft.JSInterop.Infrastructure
         private static (MethodInfo, Type[]) GetCachedMethodInfo(
             AssemblyKey assemblyKey,
             string methodIdentifier
-        ) {
+        )
+        {
             if (string.IsNullOrWhiteSpace(assemblyKey.AssemblyName))
             {
                 throw new ArgumentException(
@@ -408,7 +417,8 @@ namespace Microsoft.JSInterop.Infrastructure
         private static (MethodInfo methodInfo, Type[] parameterTypes) GetCachedMethodInfo(
             IDotNetObjectReference objectReference,
             string methodIdentifier
-        ) {
+        )
+        {
             var type = objectReference.Value.GetType();
             var assemblyMethods = _cachedMethodsByType.GetOrAdd(type, ScanTypeForCallableMethods);
             if (assemblyMethods.TryGetValue(methodIdentifier, out var result))
@@ -470,7 +480,8 @@ namespace Microsoft.JSInterop.Infrastructure
         )]
         private static Dictionary<string, (MethodInfo, Type[])> ScanAssemblyForCallableMethods(
             AssemblyKey assemblyKey
-        ) {
+        )
+        {
             // TODO: Consider looking first for assembly-level attributes (i.e., if there are any,
             // only use those) to avoid scanning, especially for framework assemblies.
             var result = new Dictionary<string, (MethodInfo, Type[])>(StringComparer.Ordinal);

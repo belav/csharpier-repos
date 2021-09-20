@@ -38,7 +38,8 @@ namespace System.Text.Tests
             bool bigEndian,
             bool byteOrderMark,
             bool throwOnInvalidBytes
-        ) {
+        )
+        {
             UTF32Encoding encoding = new UTF32Encoding(
                 bigEndian,
                 byteOrderMark,
@@ -52,7 +53,8 @@ namespace System.Text.Tests
             bool bigEndian,
             bool byteOrderMark,
             bool throwOnInvalidBytes
-        ) {
+        )
+        {
             if (byteOrderMark)
             {
                 if (bigEndian)

@@ -656,7 +656,8 @@ namespace System.Xml
                 string? s2,
                 string? s3,
                 object? o
-            ) {
+            )
+            {
                 _eventType = eventType;
                 _s1 = s1;
                 _s2 = s2;

@@ -3992,7 +3992,8 @@ namespace Microsoft.AspNetCore.Mvc.IntegrationTests
         public record RecordTypesWithDifferentMetadataOnParameterAndProperty(
             [FromQuery] string Id,
             string Name
-        ) {
+        )
+        {
             [FromHeader]
             public string Id { get; init; } = Id;
 
@@ -4590,7 +4591,8 @@ namespace Microsoft.AspNetCore.Mvc.IntegrationTests
         private ModelMetadata GetMetadata(
             ModelBindingTestContext context,
             ParameterDescriptor parameter
-        ) {
+        )
+        {
             return context.MetadataProvider.GetMetadataForType(parameter.ParameterType);
         }
 
@@ -4598,7 +4600,8 @@ namespace Microsoft.AspNetCore.Mvc.IntegrationTests
             ModelBindingTestContext context,
             ParameterDescriptor parameter,
             ModelMetadata metadata
-        ) {
+        )
+        {
             var factory = ModelBindingTestHelper.GetModelBinderFactory(
                 context.MetadataProvider,
                 context.HttpContext.RequestServices

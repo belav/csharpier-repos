@@ -185,7 +185,8 @@ namespace System.Web.Http.ApiExplorer
         public void VerifyDescription_OnDefaultRoute(
             Type controllerType,
             List<object> expectedResults
-        ) {
+        )
+        {
             HttpConfiguration config = new HttpConfiguration();
             config.Routes.MapHttpRoute(
                 "Default",
@@ -250,7 +251,8 @@ namespace System.Web.Http.ApiExplorer
         public void VerifyDescription_OnRouteWithControllerOnDefaults(
             Type controllerType,
             List<object> expectedResults
-        ) {
+        )
+        {
             HttpConfiguration config = new HttpConfiguration();
             config.Routes.MapHttpRoute(
                 "Default",
@@ -417,7 +419,8 @@ namespace System.Web.Http.ApiExplorer
         public void VerifyDescription_OnRouteWithActionVariable(
             Type controllerType,
             List<object> expectedResults
-        ) {
+        )
+        {
             HttpConfiguration config = new HttpConfiguration();
             config.Routes.MapHttpRoute(
                 "Default",
@@ -458,7 +461,8 @@ namespace System.Web.Http.ApiExplorer
         public void VerifyDescription_On_RouteWithActionOnDefaults(
             Type controllerType,
             List<object> expectedResults
-        ) {
+        )
+        {
             HttpConfiguration config = new HttpConfiguration();
             config.Routes.MapHttpRoute(
                 "Default",

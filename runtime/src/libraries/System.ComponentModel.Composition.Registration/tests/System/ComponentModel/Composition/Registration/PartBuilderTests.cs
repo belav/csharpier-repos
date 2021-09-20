@@ -381,7 +381,8 @@ namespace System.ComponentModel.Composition.Registration.Tests
             out List<Tuple<object, List<Attribute>>> configuredMembers,
             out IEnumerable<Attribute> typeAtts,
             Type targetType = null
-        ) {
+        )
+        {
             if (targetType == null)
             {
                 targetType = typeof(FooImpl);

@@ -16,7 +16,8 @@ namespace Microsoft.CodeAnalysis.FindSymbols
         private async Task ProcessDocumentQueueAsync(
             Document document,
             HashSet<(SymbolGroup group, ISymbol symbol, IReferenceFinder finder)> documentQueue
-        ) {
+        )
+        {
             await _progress.OnFindInDocumentStartedAsync(document).ConfigureAwait(false);
 
             SemanticModel? model = null;
@@ -54,7 +55,8 @@ namespace Microsoft.CodeAnalysis.FindSymbols
             SymbolGroup group,
             ISymbol symbol,
             IReferenceFinder finder
-        ) {
+        )
+        {
             using (
                 Logger.LogBlock(
                     FunctionId.FindReference_ProcessDocumentAsync,
@@ -63,7 +65,8 @@ namespace Microsoft.CodeAnalysis.FindSymbols
                     symbol,
                     _cancellationToken
                 )
-            ) {
+            )
+            {
                 try
                 {
                     var references = await finder.FindReferencesInDocumentAsync(

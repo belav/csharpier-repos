@@ -29,7 +29,8 @@ namespace Microsoft.CodeAnalysis.Remote
             SerializableRenameOptionSet options,
             ImmutableArray<SerializableSymbolAndProjectId> nonConflictSymbolIds,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             return RunServiceAsync(
                 async cancellationToken =>
                 {
@@ -72,7 +73,8 @@ namespace Microsoft.CodeAnalysis.Remote
             SerializableSymbolAndProjectId symbolAndProjectId,
             SerializableRenameOptionSet options,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             return RunServiceAsync(
                 async cancellationToken =>
                 {
@@ -107,7 +109,8 @@ namespace Microsoft.CodeAnalysis.Remote
             string replacementText,
             ImmutableArray<SerializableSymbolAndProjectId> nonConflictSymbolIds,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             return RunServiceAsync(
                 async cancellationToken =>
                 {
@@ -146,7 +149,8 @@ namespace Microsoft.CodeAnalysis.Remote
             Solution solution,
             ImmutableArray<SerializableSymbolAndProjectId> nonConflictSymbolIds,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             if (nonConflictSymbolIds.IsDefault)
             {
                 return null;

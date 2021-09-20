@@ -35,7 +35,8 @@ namespace System.Reflection.Metadata.Ecma335
         public InstructionEncoder(
             BlobBuilder codeBuilder,
             ControlFlowBuilder? controlFlowBuilder = null
-        ) {
+        )
+        {
             if (codeBuilder == null)
             {
                 Throw.BuilderArgumentNull();
@@ -103,7 +104,8 @@ namespace System.Reflection.Metadata.Ecma335
                 methodHandle.Kind != HandleKind.MethodDefinition
                 && methodHandle.Kind != HandleKind.MethodSpecification
                 && methodHandle.Kind != HandleKind.MemberReference
-            ) {
+            )
+            {
                 Throw.InvalidArgument_Handle(nameof(methodHandle));
             }
 

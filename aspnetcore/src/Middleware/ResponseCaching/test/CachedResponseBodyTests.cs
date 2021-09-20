@@ -95,7 +95,8 @@ namespace Microsoft.AspNetCore.ResponseCaching.Tests
             CachedResponseBody body,
             PipeWriter writer,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             await body.CopyToAsync(writer, cancellationToken);
             await writer.CompleteAsync();
         }
@@ -104,7 +105,8 @@ namespace Microsoft.AspNetCore.ResponseCaching.Tests
             PipeReader reader,
             List<byte[]> receivedSegments,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             while (true)
             {
                 var result = await reader.ReadAsync(cancellationToken);

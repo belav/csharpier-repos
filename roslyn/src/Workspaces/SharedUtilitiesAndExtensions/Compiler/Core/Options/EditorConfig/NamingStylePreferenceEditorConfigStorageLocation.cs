@@ -18,7 +18,8 @@ namespace Microsoft.CodeAnalysis.Options
             IReadOnlyDictionary<string, string?> rawOptions,
             Type type,
             out object result
-        ) {
+        )
+        {
             var tuple = ParseDictionary(rawOptions, type);
             result = tuple.result;
             return tuple.succeeded;
@@ -27,7 +28,8 @@ namespace Microsoft.CodeAnalysis.Options
         private static (object result, bool succeeded) ParseDictionary(
             IReadOnlyDictionary<string, string?> allRawConventions,
             Type type
-        ) {
+        )
+        {
             if (type == typeof(NamingStylePreferences))
             {
                 var editorconfigNamingStylePreferences =
@@ -37,7 +39,8 @@ namespace Microsoft.CodeAnalysis.Options
                     !editorconfigNamingStylePreferences.NamingRules.Any()
                     && !editorconfigNamingStylePreferences.NamingStyles.Any()
                     && !editorconfigNamingStylePreferences.SymbolSpecifications.Any()
-                ) {
+                )
+                {
                     // We were not able to parse any rules from editorconfig, tell the caller that the parse failed
                     return (result: editorconfigNamingStylePreferences, succeeded: false);
                 }

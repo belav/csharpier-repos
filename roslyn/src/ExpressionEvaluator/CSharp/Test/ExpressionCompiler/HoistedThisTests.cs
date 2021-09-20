@@ -970,7 +970,8 @@ class C
                                         GeneratedNames.GetKind(m.Name)
                                         == GeneratedNameKind.LambdaMethod
                                 )
-                        ) {
+                        )
+                        {
                             var lambdaMethodName = string.Format(
                                 "C.{0}.{1}",
                                 displayClassName,
@@ -1061,7 +1062,8 @@ class C
                                         GeneratedNames.GetKind(m.Name)
                                         == GeneratedNameKind.LambdaMethod
                                 )
-                        ) {
+                        )
+                        {
                             var lambdaMethodName = string.Format(
                                 "C.{0}.{1}",
                                 displayClassName,
@@ -1081,7 +1083,8 @@ class C
             string expectedType,
             string expectedIL,
             bool thisCanBeElided = true
-        ) {
+        )
+        {
             var sourceCompilation = CreateCompilationWithMscorlib45(
                 source,
                 options: TestOptions.DebugDll,
@@ -1128,7 +1131,8 @@ class C
             EvaluationContext context,
             string expectedType,
             string expectedIL
-        ) {
+        )
+        {
             var locals = ArrayBuilder<LocalAndMethod>.GetInstance();
             string typeName;
             var testData = new CompilationTestData();
@@ -1170,7 +1174,8 @@ class C
             CompilationTestData.MethodData methodData,
             string expectedType,
             string expectedIL
-        ) {
+        )
+        {
             methodData.VerifyIL(expectedIL);
             var method = (MethodSymbol)methodData.Method;
             VerifyTypeParameters(method);
@@ -1686,7 +1691,8 @@ public class C
         private static void CheckIteratorOverloading(
             string source,
             Func<MethodSymbol, bool> isDesiredOverload
-        ) {
+        )
+        {
             var comp1 = CreateCompilation(source, options: TestOptions.DebugDll);
             var ref1 = comp1.EmitToImageReference();
             var comp2 = CreateCompilation("", new[] { ref1 }, options: TestOptions.DebugDll);

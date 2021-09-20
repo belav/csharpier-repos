@@ -52,7 +52,8 @@ namespace System.Reflection.TypeLoading.Ecma
         public string GetGenericInstantiation(
             string genericType,
             ImmutableArray<string> typeArguments
-        ) {
+        )
+        {
             StringBuilder sb = new StringBuilder();
             sb.Append(genericType);
             sb.Append('[');

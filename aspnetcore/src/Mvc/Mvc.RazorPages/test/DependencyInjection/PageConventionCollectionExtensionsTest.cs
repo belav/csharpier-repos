@@ -236,7 +236,8 @@ namespace Microsoft.Extensions.DependencyInjection
         [InlineData("/Users/")]
         public void AuthorizePage_WithoutEndpointRouting_AddsAllowAnonymousFilterToPageUnderFolder(
             string folderName
-        ) {
+        )
+        {
             // Arrange
             var conventions = GetConventions(enableEndpointRouting: false);
             var models = new[]
@@ -333,7 +334,8 @@ namespace Microsoft.Extensions.DependencyInjection
         [InlineData("/Users/")]
         public void AuthorizePage_WithoutEndpointRouting_AddsAllowAnonymousFilterToPagesUnderFolder(
             string folderName
-        ) {
+        )
+        {
             // Arrange
             var conventions = GetConventions(enableEndpointRouting: false);
             var models = new[]
@@ -748,7 +750,8 @@ namespace Microsoft.Extensions.DependencyInjection
         [InlineData("/Users/")]
         public void AuthorizePage_WithoutEndpointRouting_AddsAuthorizeFilterWithPolicyToPagesUnderFolder(
             string folderName
-        ) {
+        )
+        {
             // Arrange
             var conventions = GetConventions();
             var models = new[]
@@ -792,7 +795,8 @@ namespace Microsoft.Extensions.DependencyInjection
         [InlineData("/Users/")]
         public void AuthorizePage_WithoutEndpointRouting_AddsAuthorizeFilterWithoutPolicyToPagesUnderFolder(
             string folderName
-        ) {
+        )
+        {
             // Arrange
             var conventions = GetConventions(enableEndpointRouting: false);
             var models = new[]
@@ -1205,7 +1209,8 @@ namespace Microsoft.Extensions.DependencyInjection
         private static SelectorModel CreateSelectorModel(
             string template,
             bool suppressLinkGeneration = false
-        ) {
+        )
+        {
             return new SelectorModel
             {
                 AttributeRouteModel = new AttributeRouteModel
@@ -1219,7 +1224,8 @@ namespace Microsoft.Extensions.DependencyInjection
         private static void ApplyConventions(
             PageConventionCollection conventions,
             PageRouteModel[] models
-        ) {
+        )
+        {
             foreach (var convention in conventions.OfType<IPageRouteModelConvention>())
             {
                 foreach (var model in models)
@@ -1231,7 +1237,8 @@ namespace Microsoft.Extensions.DependencyInjection
         private static void ApplyConventions(
             PageConventionCollection conventions,
             PageApplicationModel[] models
-        ) {
+        )
+        {
             foreach (var convention in conventions.OfType<IPageApplicationModelConvention>())
             {
                 foreach (var model in models)
@@ -1245,7 +1252,8 @@ namespace Microsoft.Extensions.DependencyInjection
             string relativePath,
             string viewEnginePath,
             string areaName = null
-        ) {
+        )
+        {
             var descriptor = new PageActionDescriptor
             {
                 ViewEnginePath = viewEnginePath,

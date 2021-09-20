@@ -51,7 +51,8 @@ namespace System.IO.Packaging
                             WebNameUnicode,
                             StringComparison.OrdinalIgnoreCase
                         )
-                    ) {
+                    )
+                    {
                         return;
                     }
                     else
@@ -106,7 +107,8 @@ namespace System.IO.Packaging
                 if (
                     !string.Equals(reader.Name, XmlNamespace, StringComparison.Ordinal)
                     && !string.Equals(reader.Prefix, XmlNamespace, StringComparison.Ordinal)
-                ) {
+                )
+                {
                     readerCount++;
                 }
             }

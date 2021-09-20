@@ -54,7 +54,8 @@ namespace System.Security.Cryptography
         public static ECParameters ExportParameters(
             SafeEcKeyHandle currentKey,
             bool includePrivateParameters
-        ) {
+        )
+        {
             ECParameters ecparams;
             string? curveName = Interop.AndroidCrypto.EcKeyGetCurveName(currentKey);
             if (curveName is not null)
@@ -76,7 +77,8 @@ namespace System.Security.Cryptography
             SafeEcKeyHandle key,
             string curveName,
             bool includePrivateParameters
-        ) {
+        )
+        {
             CheckInvalidKey(key);
 
             ECParameters parameters = Interop.AndroidCrypto.GetECKeyParameters(
@@ -100,7 +102,8 @@ namespace System.Security.Cryptography
         private static ECParameters ExportExplicitCurveParameters(
             SafeEcKeyHandle key,
             bool includePrivateParameters
-        ) {
+        )
+        {
             CheckInvalidKey(key);
 
             ECParameters parameters = Interop.AndroidCrypto.GetECCurveParameters(

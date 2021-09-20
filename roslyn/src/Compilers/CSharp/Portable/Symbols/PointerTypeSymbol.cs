@@ -76,7 +76,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
 
         internal override ImmutableArray<NamedTypeSymbol> InterfacesNoUseSiteDiagnostics(
             ConsList<TypeSymbol> basesBeingResolved
-        ) {
+        )
+        {
             // Pointers do not support boxing, so they really have no interfaces
             return ImmutableArray<NamedTypeSymbol>.Empty;
         }
@@ -163,7 +164,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
         internal override TResult Accept<TArgument, TResult>(
             CSharpSymbolVisitor<TArgument, TResult> visitor,
             TArgument argument
-        ) {
+        )
+        {
             return visitor.VisitPointerType(this, argument);
         }
 
@@ -223,7 +225,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             ImmutableArray<byte> transforms,
             ref int position,
             out TypeSymbol result
-        ) {
+        )
+        {
             TypeWithAnnotations oldPointedAtType = PointedAtTypeWithAnnotations;
             TypeWithAnnotations newPointedAtType;
 
@@ -234,7 +237,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                     ref position,
                     out newPointedAtType
                 )
-            ) {
+            )
+            {
                 result = this;
                 return false;
             }
@@ -245,7 +249,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
 
         internal override TypeSymbol SetNullabilityForReferenceTypes(
             Func<TypeWithAnnotations, TypeWithAnnotations> transform
-        ) {
+        )
+        {
             return WithPointedAtType(transform(PointedAtTypeWithAnnotations));
         }
 
@@ -289,7 +294,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             ref DiagnosticInfo result,
             Symbol owner,
             ref HashSet<TypeSymbol> checkedTypes
-        ) {
+        )
+        {
             return this.PointedAtTypeWithAnnotations.GetUnificationUseSiteDiagnosticRecursive(
                 ref result,
                 owner,
@@ -304,7 +310,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
 
         protected override ITypeSymbol CreateITypeSymbol(
             CodeAnalysis.NullableAnnotation nullableAnnotation
-        ) {
+        )
+        {
             Debug.Assert(nullableAnnotation != DefaultNullableAnnotation);
             return new PublicModel.PointerTypeSymbol(this, nullableAnnotation);
         }

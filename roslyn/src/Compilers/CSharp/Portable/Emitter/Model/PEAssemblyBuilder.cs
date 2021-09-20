@@ -67,13 +67,15 @@ namespace Microsoft.CodeAnalysis.CSharp.Emit
             Cci.ModulePropertiesForSerialization serializationProperties,
             IEnumerable<ResourceDescription> manifestResources,
             ImmutableArray<NamedTypeSymbol> additionalTypes
-        ) : base(
-            (SourceModuleSymbol)sourceAssembly.Modules[0],
-            emitOptions,
-            outputKind,
-            serializationProperties,
-            manifestResources
-        ) {
+        )
+            : base(
+                (SourceModuleSymbol)sourceAssembly.Modules[0],
+                emitOptions,
+                outputKind,
+                serializationProperties,
+                manifestResources
+            )
+        {
             Debug.Assert(sourceAssembly is object);
 
             _sourceAssembly = sourceAssembly;
@@ -96,7 +98,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Emit
 
         internal sealed override ImmutableArray<NamedTypeSymbol> GetEmbeddedTypes(
             BindingDiagnosticBag diagnostics
-        ) {
+        )
+        {
             var builder = ArrayBuilder<NamedTypeSymbol>.GetInstance();
 
             CreateEmbeddedAttributesIfNeeded(diagnostics);
@@ -123,7 +126,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Emit
 
             ImmutableArray<Cci.IFileReference> getFiles(
                 ref ImmutableArray<Cci.IFileReference> lazyFiles
-            ) {
+            )
+            {
                 if (lazyFiles.IsDefault)
                 {
                     var builder = ArrayBuilder<Cci.IFileReference>.GetInstance();
@@ -156,12 +160,14 @@ namespace Microsoft.CodeAnalysis.CSharp.Emit
                                 builder.ToImmutable()
                             )
                             && lazyFiles.Length > 0
-                        ) {
+                        )
+                        {
                             if (
                                 !CryptographicHashProvider.IsSupportedAlgorithm(
                                     _sourceAssembly.HashAlgorithm
                                 )
-                            ) {
+                            )
+                            {
                                 context.Diagnostics.Add(
                                     new CSDiagnostic(
                                         new CSDiagnosticInfo(ErrorCode.ERR_CryptoHashFailed),
@@ -185,7 +191,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Emit
         protected override void AddEmbeddedResourcesFromAddedModules(
             ArrayBuilder<Cci.ManagedResource> builder,
             DiagnosticBag diagnostics
-        ) {
+        )
+        {
             var modules = _sourceAssembly.Modules;
             int count = modules.Length;
 
@@ -199,7 +206,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Emit
                         EmbeddedResource resource in (
                             (Symbols.Metadata.PE.PEModuleSymbol)modules[i]
                         ).Module.GetEmbeddedResourcesOrThrow()
-                    ) {
+                    )
+                    {
                         builder.Add(
                             new Cci.ManagedResource(
                                 resource.Name,
@@ -238,7 +246,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Emit
         internal override SynthesizedAttributeData SynthesizeNullableAttribute(
             WellKnownMember member,
             ImmutableArray<TypedConstant> arguments
-        ) {
+        )
+        {
             if ((object)_lazyNullableAttribute != null)
             {
                 var constructorIndex =
@@ -260,7 +269,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Emit
 
         internal override SynthesizedAttributeData SynthesizeNullableContextAttribute(
             ImmutableArray<TypedConstant> arguments
-        ) {
+        )
+        {
             if ((object)_lazyNullableContextAttribute != null)
             {
                 return new SynthesizedAttributeData(
@@ -275,7 +285,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Emit
 
         internal override SynthesizedAttributeData SynthesizeNullablePublicOnlyAttribute(
             ImmutableArray<TypedConstant> arguments
-        ) {
+        )
+        {
             if ((object)_lazyNullablePublicOnlyAttribute != null)
             {
                 return new SynthesizedAttributeData(
@@ -291,7 +302,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Emit
         internal override SynthesizedAttributeData SynthesizeNativeIntegerAttribute(
             WellKnownMember member,
             ImmutableArray<TypedConstant> arguments
-        ) {
+        )
+        {
             if ((object)_lazyNativeIntegerAttribute != null)
             {
                 var constructorIndex =
@@ -364,7 +376,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Emit
                     diagnostics,
                     Location.None
                 )
-            ) {
+            )
+            {
                 needsAttributes |= EmbeddableAttributes.NullablePublicOnlyAttribute;
             }
             else if (needsAttributes == 0)
@@ -549,7 +562,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Emit
         private void AddDiagnosticsForExistingAttribute(
             AttributeDescription description,
             BindingDiagnosticBag diagnostics
-        ) {
+        )
+        {
             var attributeMetadataName = MetadataTypeName.FromFullName(description.FullName);
             var userDefinedAttribute = _sourceAssembly.SourceModule.LookupTopLevelMetadataType(
                 ref attributeMetadataName
@@ -591,7 +605,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Emit
         private NamedTypeSymbol GetWellKnownType(
             WellKnownType type,
             BindingDiagnosticBag diagnostics
-        ) {
+        )
+        {
             var result = _sourceAssembly.DeclaringCompilation.GetWellKnownType(type);
             Binder.ReportUseSite(result, diagnostics, Location.None);
             return result;
@@ -636,14 +651,15 @@ namespace Microsoft.CodeAnalysis.CSharp.Emit
             OutputKind outputKind,
             Cci.ModulePropertiesForSerialization serializationProperties,
             IEnumerable<ResourceDescription> manifestResources
-        ) : base(
-            sourceAssembly,
-            emitOptions,
-            outputKind,
-            serializationProperties,
-            manifestResources,
-            ImmutableArray<NamedTypeSymbol>.Empty
-        ) { }
+        )
+            : base(
+                sourceAssembly,
+                emitOptions,
+                outputKind,
+                serializationProperties,
+                manifestResources,
+                ImmutableArray<NamedTypeSymbol>.Empty
+            ) { }
 
         public override int CurrentGenerationOrdinal => 0;
     }

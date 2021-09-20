@@ -130,7 +130,8 @@ namespace Microsoft.AspNetCore.Components.Forms
             private static bool TryGetValidatableProperty(
                 in FieldIdentifier fieldIdentifier,
                 [NotNullWhen(true)] out PropertyInfo? propertyInfo
-            ) {
+            )
+            {
                 var cacheKey = (
                     ModelType: fieldIdentifier.Model.GetType(),
                     fieldIdentifier.FieldName

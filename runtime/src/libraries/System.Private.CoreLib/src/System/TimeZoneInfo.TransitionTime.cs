@@ -59,7 +59,8 @@ namespace System
                 int day,
                 DayOfWeek dayOfWeek,
                 bool isFixedDateRule
-            ) {
+            )
+            {
                 ValidateTransitionTime(timeOfDay, month, week, day, dayOfWeek);
 
                 _timeOfDay = timeOfDay;
@@ -100,7 +101,8 @@ namespace System
                 int week,
                 int day,
                 DayOfWeek dayOfWeek
-            ) {
+            )
+            {
                 if (timeOfDay.Kind != DateTimeKind.Unspecified)
                 {
                     throw new ArgumentException(
@@ -152,7 +154,8 @@ namespace System
                     || timeOfDayMonth != 1
                     || timeOfDayDay != 1
                     || (timeOfDay.Ticks % TimeSpan.TicksPerMillisecond != 0)
-                ) {
+                )
+                {
                     throw new ArgumentException(SR.Argument_DateTimeHasTicks, nameof(timeOfDay));
                 }
             }

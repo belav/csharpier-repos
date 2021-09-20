@@ -24,7 +24,8 @@ namespace System.Xml.Xsl.XsltOld
             string name,
             string? nsUri,
             InputScopeManager? manager
-        ) {
+        )
+        {
             // if name == "xmlns" we don't need to generate this attribute.
             // to avoid its generation we can return false and not add AttributeCreation to it's parent container action
             // for now not creating this.qname will do the trick at execution time
@@ -47,7 +48,8 @@ namespace System.Xml.Xsl.XsltOld
                     if (
                         qname.Namespace == XmlReservedNs.NsXml
                         && (qname.Name == "lang" || qname.Name == "space")
-                    ) {
+                    )
+                    {
                         // preserve prefix for xml:lang and xml:space
                     }
                     else
@@ -156,7 +158,8 @@ namespace System.Xml.Xsl.XsltOld
                             qname.Namespace,
                             false
                         ) == false
-                    ) {
+                    )
+                    {
                         // Come back later
                         frame.State = NameDone;
                         break;

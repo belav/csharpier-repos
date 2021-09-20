@@ -43,7 +43,8 @@ namespace System.Net.Tests
         [InlineData("Unknown")]
         public async Task NoAuthentication_AuthenticationProvided_ReturnsForbiddenStatusCode(
             string headerType
-        ) {
+        )
+        {
             _listener.AuthenticationSchemes = AuthenticationSchemes.None;
 
             using (HttpClient client = new HttpClient())
@@ -64,7 +65,8 @@ namespace System.Net.Tests
         [InlineData("Unknown")]
         public async Task NoAuthenticationGetContextAsync_AuthenticationProvided_ReturnsForbiddenStatusCode(
             string headerType
-        ) {
+        )
+        {
             _listener.AuthenticationSchemes = AuthenticationSchemes.None;
 
             using (HttpClient client = new HttpClient())
@@ -82,7 +84,8 @@ namespace System.Net.Tests
         [InlineData(AuthenticationSchemes.Basic | AuthenticationSchemes.Anonymous)]
         public async Task BasicAuthentication_ValidUsernameAndPassword_Success(
             AuthenticationSchemes authScheme
-        ) {
+        )
+        {
             _listener.AuthenticationSchemes = authScheme;
             await ValidateValidUser();
         }
@@ -92,7 +95,8 @@ namespace System.Net.Tests
         public async Task BasicAuthentication_InvalidRequest_SendsStatusCodeClient(
             string header,
             HttpStatusCode statusCode
-        ) {
+        )
+        {
             _listener.AuthenticationSchemes = AuthenticationSchemes.Basic;
 
             using (HttpClient client = new HttpClient())
@@ -180,7 +184,8 @@ namespace System.Net.Tests
             string authString,
             string expectedName,
             string expectedPassword
-        ) {
+        )
+        {
             _listener.AuthenticationSchemes = AuthenticationSchemes.Basic;
             await ValidateValidUser(authString, expectedName, expectedPassword);
         }
@@ -230,7 +235,8 @@ namespace System.Net.Tests
         public async Task NtlmAuthentication_InvalidRequestHeaders_ReturnsExpectedStatusCode(
             string header,
             HttpStatusCode statusCode
-        ) {
+        )
+        {
             _listener.AuthenticationSchemes = AuthenticationSchemes.Ntlm;
 
             using (var client = new HttpClient())
@@ -277,7 +283,8 @@ namespace System.Net.Tests
         public async Task NegotiateAuthentication_InvalidRequestHeaders_ReturnsExpectedStatusCode(
             string header,
             HttpStatusCode statusCode
-        ) {
+        )
+        {
             _listener.AuthenticationSchemes = AuthenticationSchemes.Negotiate;
 
             using (var client = new HttpClient())
@@ -490,7 +497,8 @@ namespace System.Net.Tests
         public async Task<HttpResponseMessage> AuthenticationFailure(
             HttpClient client,
             HttpStatusCode errorCode
-        ) {
+        )
+        {
             Task<HttpResponseMessage> clientTask = client.GetAsync(_factory.ListeningUrl);
 
             // The server task will hang forever if it is not cancelled.
@@ -516,7 +524,8 @@ namespace System.Net.Tests
         public async Task<HttpResponseMessage> AuthenticationFailureAsyncContext(
             HttpClient client,
             HttpStatusCode errorCode
-        ) {
+        )
+        {
             Task<HttpResponseMessage> clientTask = client.GetAsync(_factory.ListeningUrl);
             Task<HttpListenerContext> serverTask = _listener.GetContextAsync();
 
@@ -566,7 +575,8 @@ namespace System.Net.Tests
             string authHeader,
             string expectedUsername,
             string expectedPassword
-        ) {
+        )
+        {
             Task<HttpListenerContext> serverContextTask = _listener.GetContextAsync();
             using (HttpClient client = new HttpClient())
             {

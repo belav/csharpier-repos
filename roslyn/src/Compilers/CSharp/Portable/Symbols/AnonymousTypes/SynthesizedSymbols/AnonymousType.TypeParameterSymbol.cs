@@ -109,7 +109,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
 
             internal override ImmutableArray<TypeWithAnnotations> GetConstraintTypes(
                 ConsList<TypeParameterSymbol> inProgress
-            ) {
+            )
+            {
                 return ImmutableArray<TypeWithAnnotations>.Empty;
             }
 
@@ -120,19 +121,22 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
 
             internal override ImmutableArray<NamedTypeSymbol> GetInterfaces(
                 ConsList<TypeParameterSymbol> inProgress
-            ) {
+            )
+            {
                 return ImmutableArray<NamedTypeSymbol>.Empty;
             }
 
             internal override NamedTypeSymbol GetEffectiveBaseClass(
                 ConsList<TypeParameterSymbol> inProgress
-            ) {
+            )
+            {
                 return null;
             }
 
             internal override TypeSymbol GetDeducedBaseType(
                 ConsList<TypeParameterSymbol> inProgress
-            ) {
+            )
+            {
                 return null;
             }
         }

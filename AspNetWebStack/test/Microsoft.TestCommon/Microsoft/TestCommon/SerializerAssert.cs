@@ -32,7 +32,8 @@ namespace Microsoft.TestCommon
             Type type,
             object objectInstance,
             Action<Stream> codeThatChecks
-        ) {
+        )
+        {
             if (type == null)
             {
                 throw new ArgumentNullException("type");
@@ -79,7 +80,8 @@ namespace Microsoft.TestCommon
             Type type,
             object objectInstance,
             Action<Stream> codeThatChecks
-        ) {
+        )
+        {
             if (type == null)
             {
                 throw new ArgumentNullException("type");
@@ -126,7 +128,8 @@ namespace Microsoft.TestCommon
             Type type,
             object objectInstance,
             Action<Stream> codeThatChecks
-        ) {
+        )
+        {
             if (type == null)
             {
                 throw new ArgumentNullException("type");
@@ -160,7 +163,8 @@ namespace Microsoft.TestCommon
         public void UsingDataContractJsonSerializer<T>(
             T objectInstance,
             Action<Stream> codeThatChecks
-        ) {
+        )
+        {
             UsingDataContractJsonSerializer(typeof(T), objectInstance, codeThatChecks);
         }
     }

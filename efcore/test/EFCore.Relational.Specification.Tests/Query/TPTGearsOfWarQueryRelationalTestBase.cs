@@ -15,7 +15,8 @@ namespace Microsoft.EntityFrameworkCore.Query
         [ConditionalTheory(Skip = "issue #22691")]
         public override async Task Cast_to_derived_followed_by_include_and_FirstOrDefault(
             bool async
-        ) {
+        )
+        {
             await base.Cast_to_derived_followed_by_include_and_FirstOrDefault(async);
         }
 

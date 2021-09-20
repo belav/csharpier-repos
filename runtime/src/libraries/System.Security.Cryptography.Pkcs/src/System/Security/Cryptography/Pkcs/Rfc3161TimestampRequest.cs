@@ -68,7 +68,8 @@ namespace System.Security.Cryptography.Pkcs
         public Rfc3161TimestampToken ProcessResponse(
             ReadOnlyMemory<byte> responseBytes,
             out int bytesConsumed
-        ) {
+        )
+        {
             if (
                 ProcessResponse(
                     responseBytes,
@@ -77,7 +78,8 @@ namespace System.Security.Cryptography.Pkcs
                     out int localBytesRead,
                     shouldThrow: true
                 )
-            ) {
+            )
+            {
                 Debug.Assert(status == Rfc3161RequestResponseStatus.Accepted);
                 bytesConsumed = localBytesRead;
                 return token;
@@ -93,7 +95,8 @@ namespace System.Security.Cryptography.Pkcs
             out Rfc3161RequestResponseStatus status,
             out int bytesConsumed,
             bool shouldThrow
-        ) {
+        )
+        {
             status = Rfc3161RequestResponseStatus.Unknown;
             token = null;
 
@@ -151,7 +154,8 @@ namespace System.Security.Cryptography.Pkcs
                     out token,
                     out _
                 )
-            ) {
+            )
+            {
                 if (shouldThrow)
                 {
                     throw new CryptographicException(SR.Cryptography_TimestampReq_BadResponse);
@@ -191,7 +195,8 @@ namespace System.Security.Cryptography.Pkcs
             ReadOnlyMemory<byte>? nonce = null,
             bool requestSignerCertificates = false,
             X509ExtensionCollection? extensions = null
-        ) {
+        )
+        {
             if (signerInfo == null)
             {
                 throw new ArgumentNullException(nameof(signerInfo));
@@ -219,7 +224,8 @@ namespace System.Security.Cryptography.Pkcs
             ReadOnlyMemory<byte>? nonce = null,
             bool requestSignerCertificates = false,
             X509ExtensionCollection? extensions = null
-        ) {
+        )
+        {
             using (IncrementalHash hasher = IncrementalHash.CreateHash(hashAlgorithm))
             {
                 hasher.AppendData(data);
@@ -243,7 +249,8 @@ namespace System.Security.Cryptography.Pkcs
             ReadOnlyMemory<byte>? nonce = null,
             bool requestSignerCertificates = false,
             X509ExtensionCollection? extensions = null
-        ) {
+        )
+        {
             string oidStr = PkcsHelpers.GetOidFromHashAlgorithm(hashAlgorithm);
 
             return CreateFromHash(
@@ -288,7 +295,8 @@ namespace System.Security.Cryptography.Pkcs
             ReadOnlyMemory<byte>? nonce = null,
             bool requestSignerCertificates = false,
             X509ExtensionCollection? extensions = null
-        ) {
+        )
+        {
             // Normalize the nonce:
             if (nonce.HasValue)
             {
@@ -370,7 +378,8 @@ namespace System.Security.Cryptography.Pkcs
             ReadOnlyMemory<byte> encodedBytes,
             [NotNullWhen(true)] out Rfc3161TimestampRequest? request,
             out int bytesConsumed
-        ) {
+        )
+        {
             try
             {
                 // RFC 3161 doesn't have a concise statement that TimeStampReq will
@@ -406,7 +415,8 @@ namespace System.Security.Cryptography.Pkcs
         private Rfc3161RequestResponseStatus ValidateResponse(
             Rfc3161TimestampToken token,
             bool shouldThrow
-        ) {
+        )
+        {
             Debug.Assert(token != null);
 
             // This method validates the acceptance criteria sprinkled throughout the
@@ -451,7 +461,8 @@ namespace System.Security.Cryptography.Pkcs
                 if (
                     responseNonce == null
                     || !requestNonce.Value.Span.SequenceEqual(responseNonce.Value.Span)
-                ) {
+                )
+                {
                     if (shouldThrow)
                     {
                         throw new CryptographicException(SR.Cryptography_TimestampReq_BadNonce);

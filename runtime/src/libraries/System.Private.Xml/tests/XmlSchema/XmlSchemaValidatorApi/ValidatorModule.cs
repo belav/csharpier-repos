@@ -50,7 +50,8 @@ namespace System.Xml.Tests
         protected XmlSchemaValidator CreateValidator(
             XmlSchemaSet schemas,
             XmlSchemaValidationFlags flags
-        ) {
+        )
+        {
             return new XmlSchemaValidator(
                 schemas.NameTable,
                 schemas,
@@ -63,7 +64,8 @@ namespace System.Xml.Tests
             XmlSchemaSet schemas,
             IXmlNamespaceResolver nsRes,
             XmlSchemaValidationFlags flags
-        ) {
+        )
+        {
             return new XmlSchemaValidator(schemas.NameTable, schemas, nsRes, flags);
         }
 
@@ -76,7 +78,8 @@ namespace System.Xml.Tests
             string xsdFilename,
             string targetNamespace,
             XmlSchemaValidationFlags flags
-        ) {
+        )
+        {
             string path = xsdFilename;
             XmlSchemaSet schemas = new XmlSchemaSet();
             schemas.XmlResolver = new XmlUrlResolver();
@@ -313,7 +316,8 @@ namespace System.Xml.Tests
             int countGE,
             int countGA,
             string str
-        ) {
+        )
+        {
             _output.WriteLine(str);
             Assert.Equal(ss.Count, schCount);
             Assert.Equal(ss.IsCompiled, isCompiled);

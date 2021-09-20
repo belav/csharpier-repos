@@ -430,7 +430,8 @@ namespace System.Web.Util
             int offset,
             int count,
             bool alwaysCreateNewReturnValue
-        ) {
+        )
+        {
             byte[]? encoded = UrlEncode(bytes, offset, count);
 
             return (alwaysCreateNewReturnValue && (encoded != null) && (encoded == bytes))
@@ -627,7 +628,8 @@ namespace System.Web.Util
                     out path,
                     out queryAndFragment
                 )
-            ) {
+            )
+            {
                 // If the value is not a valid url, we treat it as a relative url.
                 // We don't need to extract query string from the url since UrlPathEncode()
                 // does not encode query string.
@@ -662,7 +664,8 @@ namespace System.Web.Util
             [NotNullWhen(true)] byte[]? bytes,
             int offset,
             int count
-        ) {
+        )
+        {
             if (bytes == null && count == 0)
             {
                 return false;

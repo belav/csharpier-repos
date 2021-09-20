@@ -137,8 +137,9 @@ namespace System
         public static void Throws<TNetCoreExceptionType, TNetFxExceptionType>(
             string expectedParamName,
             Action action
-        ) where TNetCoreExceptionType : ArgumentException
-          where TNetFxExceptionType : Exception
+        )
+            where TNetCoreExceptionType : ArgumentException
+            where TNetFxExceptionType : Exception
         {
             if (IsNetFramework)
             {
@@ -171,7 +172,8 @@ namespace System
             Type netCoreExceptionType,
             Type netFxExceptionType,
             Action action
-        ) {
+        )
+        {
             if (IsNetFramework)
             {
                 return Assert.Throws(netFxExceptionType, action);
@@ -186,8 +188,9 @@ namespace System
             string netCoreParamName,
             string netFxParamName,
             Action action
-        ) where TNetCoreExceptionType : ArgumentException
-          where TNetFxExceptionType : ArgumentException
+        )
+            where TNetCoreExceptionType : ArgumentException
+            where TNetFxExceptionType : ArgumentException
         {
             if (IsNetFramework)
             {
@@ -203,7 +206,8 @@ namespace System
             Type firstExceptionType,
             Type secondExceptionType,
             Action action
-        ) {
+        )
+        {
             ThrowsAnyInternal(action, firstExceptionType, secondExceptionType);
         }
 
@@ -463,7 +467,8 @@ namespace System
             IEnumerable<T> expected,
             IEnumerable<T> actual,
             IEqualityComparer<T> comparer
-        ) {
+        )
+        {
             var actualItemCountMapping = new Dictionary<T, ItemCount>(comparer);
             int actualCount = 0;
             foreach (T actualItem in actual)
@@ -499,7 +504,8 @@ namespace System
                         currentExpectedItem,
                         out ItemCount countInfo
                     )
-                ) {
+                )
+                {
                     throw new XunitException($"Expected: {currentExpectedItem} but not found");
                 }
 

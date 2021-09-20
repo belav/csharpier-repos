@@ -41,7 +41,8 @@ namespace Microsoft.CodeAnalysis.Tools.Analyzers
             ImmutableHashSet<string> fixableCompilerDiagnostics,
             ILogger logger,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             // If are not running any analyzers and are not reporting compiler diagnostics, then there is
             // nothing to report.
             if (analyzers.IsEmpty && fixableCompilerDiagnostics.IsEmpty)
@@ -107,7 +108,8 @@ namespace Microsoft.CodeAnalysis.Tools.Analyzers
                     && diagnostic.Location.IsInSource
                     && diagnostic.Location.SourceTree != null
                     && formattableDocumentPaths.Contains(diagnostic.Location.SourceTree.FilePath)
-                ) {
+                )
+                {
                     result.AddDiagnostic(project, diagnostic);
                 }
             }
@@ -121,7 +123,8 @@ namespace Microsoft.CodeAnalysis.Tools.Analyzers
                     !project.MetadataReferences.Any(
                         reference => reference.Display?.EndsWith("mscorlib.dll") == true
                     )
-                ) {
+                )
+                {
                     return false;
                 }
 

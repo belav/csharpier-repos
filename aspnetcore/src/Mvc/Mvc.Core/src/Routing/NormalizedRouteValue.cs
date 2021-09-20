@@ -44,14 +44,16 @@ namespace Microsoft.AspNetCore.Mvc.Routing
             if (
                 actionDescriptor.RouteValues.TryGetValue(key, out var value)
                 && !string.IsNullOrEmpty(value)
-            ) {
+            )
+            {
                 normalizedValue = value;
             }
 
             var stringRouteValue = Convert.ToString(routeValue, CultureInfo.InvariantCulture);
             if (
                 string.Equals(normalizedValue, stringRouteValue, StringComparison.OrdinalIgnoreCase)
-            ) {
+            )
+            {
                 return normalizedValue;
             }
 

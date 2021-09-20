@@ -35,13 +35,15 @@ namespace System.Web.Http.Tracing.Tracers
 
         public ILookup<string, HttpActionDescriptor> GetActionMapping(
             HttpControllerDescriptor controllerDescriptor
-        ) {
+        )
+        {
             return _innerSelector.GetActionMapping(controllerDescriptor);
         }
 
         HttpActionDescriptor IHttpActionSelector.SelectAction(
             HttpControllerContext controllerContext
-        ) {
+        )
+        {
             HttpActionDescriptor actionDescriptor = null;
 
             _traceWriter.TraceBeginEnd(

@@ -33,7 +33,8 @@ namespace Microsoft.CodeAnalysis.Differencing
             TNode root2,
             TreeComparer<TNode> comparer,
             IEnumerable<KeyValuePair<TNode, TNode>> knownMatches
-        ) {
+        )
+        {
             _root1 = root1;
             _root2 = root2;
             _comparer = comparer;
@@ -100,7 +101,8 @@ namespace Microsoft.CodeAnalysis.Differencing
             int labelCount,
             out List<TNode>[] nodes,
             out int totalCount
-        ) {
+        )
+        {
             nodes = new List<TNode>[labelCount];
             var count = 0;
 
@@ -196,7 +198,8 @@ namespace Microsoft.CodeAnalysis.Differencing
             List<TNode> s2,
             int tiedToAncestor,
             double maxAcceptableDistance
-        ) {
+        )
+        {
             // Obviously, the algorithm below is O(n^2). However, in the common case, the 2 lists will
             // be sequences that exactly match. The purpose of "firstNonMatch2" is to reduce the complexity
             // to O(n) in this case. Basically, the pointer is the 1st non-matched node in the list of nodes of tree2
@@ -415,7 +418,8 @@ namespace Microsoft.CodeAnalysis.Differencing
         public IEnumerable<Edit<TNode>> GetSequenceEdits(
             IEnumerable<TNode> oldNodes,
             IEnumerable<TNode> newNodes
-        ) {
+        )
+        {
             if (oldNodes == null)
             {
                 throw new ArgumentNullException(nameof(oldNodes));

@@ -137,7 +137,8 @@ namespace DebuggerTests
         public async Task EvaluateShadowAsync(
             DateTime dateTime,
             EvaluateTestsClassWithProperties me
-        ) {
+        )
+        {
             string a = "hello";
             Console.WriteLine($"EvaluateShadowAsync - break here");
             await Task.CompletedTask;
@@ -156,7 +157,8 @@ namespace DebuggerTests
             int h,
             string valString,
             EvaluateTestsClassWithProperties me
-        ) {
+        )
+        {
             int d = g + 1;
             int e = g + 2;
             int f = g + 3;
@@ -176,7 +178,8 @@ namespace DebuggerTests
             int h,
             string valString,
             EvaluateTestsClassWithProperties me
-        ) {
+        )
+        {
             int d = g + 1;
             int e = g + 2;
             int f = g + 3;
@@ -195,7 +198,8 @@ namespace DebuggerTests
             int h,
             string valString,
             EvaluateTestsClassWithProperties me
-        ) {
+        )
+        {
             int d = g + 1;
             int e = g + 2;
             int f = g + 3;
@@ -215,7 +219,8 @@ namespace DebuggerTests
             int h,
             string valString,
             EvaluateTestsClassWithProperties me
-        ) {
+        )
+        {
             int d = g + 1;
             int e = g + 2;
             int f = g + 3;
@@ -302,7 +307,8 @@ namespace DebuggerTests
         public async Task EvaluateShadowAsync(
             DateTime dateTime,
             EvaluateTestsStructWithProperties me
-        ) {
+        )
+        {
             string a = "hello";
             Console.WriteLine($"EvaluateShadowAsync - break here");
             await Task.CompletedTask;
@@ -321,7 +327,8 @@ namespace DebuggerTests
             int h,
             string valString,
             EvaluateTestsStructWithProperties me
-        ) {
+        )
+        {
             int d = g + 1;
             int e = g + 2;
             int f = g + 3;
@@ -341,7 +348,8 @@ namespace DebuggerTests
             int h,
             string valString,
             EvaluateTestsStructWithProperties me
-        ) {
+        )
+        {
             int d = g + 1;
             int e = g + 2;
             int f = g + 3;
@@ -360,7 +368,8 @@ namespace DebuggerTests
             int h,
             string valString,
             EvaluateTestsStructWithProperties me
-        ) {
+        )
+        {
             int d = g + 1;
             int e = g + 2;
             int f = g + 3;
@@ -380,7 +389,8 @@ namespace DebuggerTests
             int h,
             string valString,
             EvaluateTestsStructWithProperties me
-        ) {
+        )
+        {
             int d = g + 1;
             int e = g + 2;
             int f = g + 3;

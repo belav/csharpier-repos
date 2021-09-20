@@ -19,7 +19,8 @@ namespace Microsoft.CodeAnalysis.Extensions
             this IExtensionManager extensionManager,
             object extension,
             Action action
-        ) {
+        )
+        {
             try
             {
                 if (!extensionManager.IsDisabled(extension))
@@ -42,7 +43,8 @@ namespace Microsoft.CodeAnalysis.Extensions
             object extension,
             Func<T> function,
             T defaultValue
-        ) {
+        )
+        {
             try
             {
                 if (!extensionManager.IsDisabled(extension))
@@ -66,7 +68,8 @@ namespace Microsoft.CodeAnalysis.Extensions
             this IExtensionManager extensionManager,
             object extension,
             Func<Task?> function
-        ) {
+        )
+        {
             try
             {
                 if (!extensionManager.IsDisabled(extension))
@@ -90,7 +93,8 @@ namespace Microsoft.CodeAnalysis.Extensions
             object extension,
             Func<Task<T>?> function,
             T defaultValue
-        ) {
+        )
+        {
             if (extensionManager.IsDisabled(extension))
             {
                 return defaultValue;
@@ -122,7 +126,8 @@ namespace Microsoft.CodeAnalysis.Extensions
             this IExtensionManager extensionManager,
             IEnumerable<TExtension> extensions,
             Func<TExtension, ImmutableArray<Type>> nodeTypeGetter
-        ) {
+        )
+        {
             var map = new ConcurrentDictionary<Type, ImmutableArray<TExtension>>();
 
             ImmutableArray<TExtension> GetExtensions(Type t1)
@@ -152,7 +157,8 @@ namespace Microsoft.CodeAnalysis.Extensions
             this IExtensionManager extensionManager,
             IEnumerable<TExtension> extensions,
             Func<TExtension, ImmutableArray<int>> tokenKindGetter
-        ) {
+        )
+        {
             var map = new ConcurrentDictionary<int, ImmutableArray<TExtension>>();
             ImmutableArray<TExtension> GetExtensions(int k)
             {

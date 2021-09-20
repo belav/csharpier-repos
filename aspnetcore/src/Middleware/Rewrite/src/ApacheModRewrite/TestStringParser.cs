@@ -105,7 +105,8 @@ namespace Microsoft.AspNetCore.Rewrite.ApacheModRewrite
         private static void ParseConditionParameter(
             ParserContext context,
             IList<PatternSegment> results
-        ) {
+        )
+        {
             // Parse { }
             if (context.Current == OpenBrace)
             {

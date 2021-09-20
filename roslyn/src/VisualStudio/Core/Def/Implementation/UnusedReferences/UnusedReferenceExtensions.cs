@@ -13,7 +13,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.UnusedReference
     {
         public static ReferenceInfo ToReferenceInfo(
             this ProjectSystemReferenceInfo projectSystemReference
-        ) {
+        )
+        {
             return new ReferenceInfo(
                 (ReferenceType)projectSystemReference.ReferenceType,
                 projectSystemReference.ItemSpecification,
@@ -25,7 +26,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.UnusedReference
 
         public static ProjectSystemReferenceUpdate ToProjectSystemReferenceUpdate(
             this ReferenceUpdate referenceUpdate
-        ) {
+        )
+        {
             var updateAction = referenceUpdate.Action switch
             {
                 UpdateAction.TreatAsUsed => ProjectSystemUpdateAction.SetTreatAsUsed,
@@ -41,7 +43,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.UnusedReference
 
         public static ProjectSystemReferenceInfo ToProjectSystemReferenceInfo(
             this ReferenceInfo reference
-        ) {
+        )
+        {
             return new ProjectSystemReferenceInfo(
                 (ProjectSystemReferenceType)reference.ReferenceType,
                 reference.ItemSpecification,

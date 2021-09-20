@@ -36,7 +36,8 @@ namespace Microsoft.Extensions.DependencyInjection
         public static IMvcBuilder AddDataAnnotationsLocalization(
             this IMvcBuilder builder,
             Action<MvcDataAnnotationsLocalizationOptions>? setupAction
-        ) {
+        )
+        {
             if (builder == null)
             {
                 throw new ArgumentNullException(nameof(builder));

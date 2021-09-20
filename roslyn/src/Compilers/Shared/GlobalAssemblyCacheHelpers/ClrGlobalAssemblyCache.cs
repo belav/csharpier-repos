@@ -106,7 +106,8 @@ namespace Microsoft.CodeAnalysis
             AssemblyName partialName,
             ImmutableArray<ProcessorArchitecture> architectureFilter =
                 default(ImmutableArray<ProcessorArchitecture>)
-        ) {
+        )
+        {
             return GetAssemblyIdentities(
                 FusionAssemblyIdentity.ToAssemblyNameObject(partialName),
                 architectureFilter
@@ -123,7 +124,8 @@ namespace Microsoft.CodeAnalysis
             string partialName = null,
             ImmutableArray<ProcessorArchitecture> architectureFilter =
                 default(ImmutableArray<ProcessorArchitecture>)
-        ) {
+        )
+        {
             FusionAssemblyIdentity.IAssemblyName nameObj;
             if (partialName != null)
             {
@@ -149,7 +151,8 @@ namespace Microsoft.CodeAnalysis
         public override IEnumerable<string> GetAssemblySimpleNames(
             ImmutableArray<ProcessorArchitecture> architectureFilter =
                 default(ImmutableArray<ProcessorArchitecture>)
-        ) {
+        )
+        {
             var q =
                 from nameObject in GetAssemblyObjects(
                     partialNameFilter: null,
@@ -162,7 +165,8 @@ namespace Microsoft.CodeAnalysis
         private static IEnumerable<AssemblyIdentity> GetAssemblyIdentities(
             FusionAssemblyIdentity.IAssemblyName partialName,
             ImmutableArray<ProcessorArchitecture> architectureFilter
-        ) {
+        )
+        {
             return from nameObject in GetAssemblyObjects(partialName, architectureFilter)
             select FusionAssemblyIdentity.ToAssemblyIdentity(nameObject);
         }
@@ -174,7 +178,8 @@ namespace Microsoft.CodeAnalysis
         internal static IEnumerable<FusionAssemblyIdentity.IAssemblyName> GetAssemblyObjects(
             FusionAssemblyIdentity.IAssemblyName partialNameFilter,
             ImmutableArray<ProcessorArchitecture> architectureFilter
-        ) {
+        )
+        {
             IAssemblyEnum enumerator;
             FusionAssemblyIdentity.IApplicationContext applicationContext = null;
 
@@ -251,7 +256,8 @@ namespace Microsoft.CodeAnalysis
             out string location,
             ImmutableArray<ProcessorArchitecture> architectureFilter,
             CultureInfo preferredCulture
-        ) {
+        )
+        {
             if (displayName == null)
             {
                 throw new ArgumentNullException(nameof(displayName));
@@ -283,7 +289,8 @@ namespace Microsoft.CodeAnalysis
 
         internal static unsafe string GetAssemblyLocation(
             FusionAssemblyIdentity.IAssemblyName nameObject
-        ) {
+        )
+        {
             // NAME | VERSION | CULTURE | PUBLIC_KEY_TOKEN | RETARGET | PROCESSORARCHITECTURE
             string fullName = FusionAssemblyIdentity.GetDisplayName(
                 nameObject,

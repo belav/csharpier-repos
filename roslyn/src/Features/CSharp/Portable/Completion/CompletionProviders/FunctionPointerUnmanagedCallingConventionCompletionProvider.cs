@@ -72,7 +72,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Completion.Providers
                 if (
                     token.Parent
                     is not FunctionPointerUnmanagedCallingConventionListSyntax callingConventionList
-                ) {
+                )
+                {
                     return;
                 }
 
@@ -111,7 +112,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Completion.Providers
             int contextPosition,
             SemanticModel semanticModel,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             // We have to find the set of types that meet the criteria listed in
             // https://github.com/dotnet/csharplang/blob/main/proposals/csharp-9.0/function-pointers.md#mapping-the-calling_convention_specifier-to-a-callkind
             // We skip the check of an type being in the core assembly since that's not really necessary for our work.
@@ -133,7 +135,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Completion.Providers
                 if (
                     type.DeclaredAccessibility == Accessibility.Public
                     && type.Name.StartsWith(CallConvPrefix)
-                ) {
+                )
+                {
                     var displayName = type.Name[CallConvPrefix.Length..];
                     completionItems.Add(
                         SymbolCompletionItem.CreateWithSymbolId(

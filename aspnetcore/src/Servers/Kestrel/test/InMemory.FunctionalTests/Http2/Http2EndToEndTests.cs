@@ -135,7 +135,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel.InMemory.FunctionalTests.Http2
                     TState state,
                     Exception exception,
                     Func<TState, Exception, string> formatter
-                ) {
+                )
+                {
                     if (formatter(state, exception) != _loggerProvider._expectedLogMessage)
                     {
                         return;

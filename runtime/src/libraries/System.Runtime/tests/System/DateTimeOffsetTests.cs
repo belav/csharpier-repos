@@ -1283,7 +1283,8 @@ namespace System.Tests
             DateTimeOffset dt,
             TimeSpan ts,
             DateTimeOffset expected
-        ) {
+        )
+        {
             Assert.Equal(expected, dt - ts);
             Assert.Equal(expected, dt.Subtract(ts));
         }
@@ -1326,7 +1327,8 @@ namespace System.Tests
             DateTimeOffset dt1,
             DateTimeOffset dt2,
             TimeSpan expected
-        ) {
+        )
+        {
             Assert.Equal(expected, dt1 - dt2);
             Assert.Equal(expected, dt1.Subtract(dt2));
         }
@@ -1359,7 +1361,8 @@ namespace System.Tests
             DateTimeOffset dateTimeOffset,
             TimeSpan timeSpan,
             DateTimeOffset expected
-        ) {
+        )
+        {
             Assert.Equal(expected, dateTimeOffset.Add(timeSpan));
             Assert.Equal(expected, dateTimeOffset + timeSpan);
         }
@@ -1405,7 +1408,8 @@ namespace System.Tests
             DateTimeOffset dateTimeOffset,
             int years,
             DateTimeOffset expected
-        ) {
+        )
+        {
             Assert.Equal(expected, dateTimeOffset.AddYears(years));
         }
 
@@ -1459,7 +1463,8 @@ namespace System.Tests
             DateTimeOffset dateTimeOffset,
             int months,
             DateTimeOffset expected
-        ) {
+        )
+        {
             Assert.Equal(expected, dateTimeOffset.AddMonths(months));
         }
 
@@ -1513,7 +1518,8 @@ namespace System.Tests
             DateTimeOffset dateTimeOffset,
             double days,
             DateTimeOffset expected
-        ) {
+        )
+        {
             Assert.Equal(expected, dateTimeOffset.AddDays(days));
         }
 
@@ -1558,7 +1564,8 @@ namespace System.Tests
             DateTimeOffset dateTimeOffset,
             double hours,
             DateTimeOffset expected
-        ) {
+        )
+        {
             Assert.Equal(expected, dateTimeOffset.AddHours(hours));
         }
 
@@ -1603,7 +1610,8 @@ namespace System.Tests
             DateTimeOffset dateTimeOffset,
             double minutes,
             DateTimeOffset expected
-        ) {
+        )
+        {
             Assert.Equal(expected, dateTimeOffset.AddMinutes(minutes));
         }
 
@@ -1648,7 +1656,8 @@ namespace System.Tests
             DateTimeOffset dateTimeOffset,
             double seconds,
             DateTimeOffset expected
-        ) {
+        )
+        {
             Assert.Equal(expected, dateTimeOffset.AddSeconds(seconds));
         }
 
@@ -1693,7 +1702,8 @@ namespace System.Tests
             DateTimeOffset dateTimeOffset,
             double milliseconds,
             DateTimeOffset expected
-        ) {
+        )
+        {
             Assert.Equal(expected, dateTimeOffset.AddMilliseconds(milliseconds));
         }
 
@@ -1738,7 +1748,8 @@ namespace System.Tests
             DateTimeOffset dateTimeOffset,
             long ticks,
             DateTimeOffset expected
-        ) {
+        )
+        {
             Assert.Equal(expected, dateTimeOffset.AddTicks(ticks));
         }
 
@@ -2096,7 +2107,8 @@ namespace System.Tests
             object obj,
             bool expectedEquals,
             bool expectedEqualsExact
-        ) {
+        )
+        {
             Assert.Equal(expectedEquals, dateTimeOffset1.Equals(obj));
             if (obj is DateTimeOffset)
             {
@@ -2146,7 +2158,8 @@ namespace System.Tests
             DateTimeOffset dateTimeOffset1,
             DateTimeOffset dateTimeOffset2,
             int expected
-        ) {
+        )
+        {
             Assert.Equal(expected, Math.Sign(dateTimeOffset1.CompareTo(dateTimeOffset2)));
             Assert.Equal(
                 expected,
@@ -2428,7 +2441,8 @@ namespace System.Tests
         public static void ParseExact_String_String_FormatProvider_DateTimeStyles_O(
             DateTimeOffset dt,
             string input
-        ) {
+        )
+        {
             string expectedString = dt.ToString("o");
 
             Assert.Equal(expectedString, DateTimeOffset.ParseExact(input, "o", null).ToString("o"));
@@ -2503,7 +2517,8 @@ namespace System.Tests
                     new TimeSpan(-1, 23, 0),
                     new TimeSpan(7, 0, 0)
                 }
-            ) {
+            )
+            {
                 var dto = new DateTimeOffset(
                     new DateTime(1234567891234567891, DateTimeKind.Unspecified),
                     offset
@@ -2552,7 +2567,8 @@ namespace System.Tests
         public static void ParseExact_String_String_FormatProvider_DateTimeStyles_R(
             DateTimeOffset dt,
             string input
-        ) {
+        )
+        {
             Assert.Equal(
                 dt.ToString("r"),
                 DateTimeOffset.ParseExact(input, "r", null).ToString("r")
@@ -2775,7 +2791,8 @@ namespace System.Tests
             int second,
             int millisecond,
             TimeSpan? offset
-        ) {
+        )
+        {
             Assert.Equal(year, dateTimeOffset.Year);
             Assert.Equal(month, dateTimeOffset.Month);
             Assert.Equal(day, dateTimeOffset.Day);
@@ -2804,7 +2821,8 @@ namespace System.Tests
                 DateTimeOffset dateTimeOffset,
                 long unixTimeMilliseconds,
                 long unixTimeSeconds
-            ) {
+            )
+            {
                 DateTimeOffset = dateTimeOffset;
                 UnixTimeMilliseconds = unixTimeMilliseconds;
                 UnixTimeSeconds = unixTimeSeconds;
@@ -2813,7 +2831,8 @@ namespace System.Tests
             public static TestTime FromMilliseconds(
                 DateTimeOffset dateTimeOffset,
                 long unixTimeMilliseconds
-            ) {
+            )
+            {
                 long unixTimeSeconds = unixTimeMilliseconds / 1000;
 
                 // Always round UnixTimeSeconds down toward 1/1/0001 00:00:00
@@ -3212,7 +3231,8 @@ namespace System.Tests
             string format,
             IFormatProvider provider,
             string expected
-        ) {
+        )
+        {
             if (provider == null)
             {
                 Assert.Equal(expected, dateTimeOffset.ToString(format));
@@ -3249,7 +3269,8 @@ namespace System.Tests
             string format,
             CultureInfo culture,
             string expected
-        ) {
+        )
+        {
             Assert.Equal(expected, dateTimeOffset.ToString(format, culture));
         }
 
@@ -3394,7 +3415,8 @@ namespace System.Tests
             string format,
             IFormatProvider provider,
             string expected
-        ) {
+        )
+        {
             var destination = new char[expected.Length];
 
             Assert.False(

@@ -41,7 +41,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Formatting
             List<SuppressOperation> list,
             SyntaxNode node,
             in NextSuppressOperationAction nextOperation
-        ) {
+        )
+        {
             nextOperation.Invoke();
 
             if (node is QueryExpressionSyntax queryExpression)
@@ -57,7 +58,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Formatting
         private static void AddIndentBlockOperationsForFromClause(
             List<IndentBlockOperation> list,
             FromClauseSyntax fromClause
-        ) {
+        )
+        {
             // Only add the indent block operation if the 'in' keyword is present. Otherwise, we'll get the following:
             //
             //     from x
@@ -90,7 +92,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Formatting
             List<IndentBlockOperation> list,
             SyntaxNode node,
             in NextIndentBlockOperationAction nextOperation
-        ) {
+        )
+        {
             nextOperation.Invoke();
 
             if (node is QueryExpressionSyntax queryExpression)
@@ -121,7 +124,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Formatting
             List<AnchorIndentationOperation> list,
             SyntaxNode node,
             in NextAnchorIndentationOperationAction nextOperation
-        ) {
+        )
+        {
             nextOperation.Invoke();
             switch (node)
             {
@@ -161,7 +165,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Formatting
             in SyntaxToken previousToken,
             in SyntaxToken currentToken,
             in NextGetAdjustNewLinesOperation nextOperation
-        ) {
+        )
+        {
             if (previousToken.IsNestedQueryExpression())
             {
                 return CreateAdjustNewLinesOperation(0, AdjustNewLinesOption.PreserveLines);
@@ -226,7 +231,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Formatting
             private static T GetOptionOrDefault<T>(
                 AnalyzerConfigOptions? options,
                 Option2<T> option
-            ) {
+            )
+            {
                 if (options is null)
                     return option.DefaultValue;
 

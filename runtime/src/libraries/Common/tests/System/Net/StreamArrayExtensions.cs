@@ -28,7 +28,8 @@ namespace System.Net
             this Stream stream,
             ReadOnlyMemory<byte> buffer,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             bool isArray = MemoryMarshal.TryGetArray(buffer, out ArraySegment<byte> segment);
             Assert.True(isArray);
 

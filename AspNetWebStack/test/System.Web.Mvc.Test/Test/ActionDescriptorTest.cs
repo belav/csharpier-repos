@@ -289,7 +289,8 @@ namespace System.Web.Mvc.Test
             public override object Execute(
                 ControllerContext controllerContext,
                 IDictionary<string, object> parameters
-            ) {
+            )
+            {
                 throw new NotImplementedException();
             }
 

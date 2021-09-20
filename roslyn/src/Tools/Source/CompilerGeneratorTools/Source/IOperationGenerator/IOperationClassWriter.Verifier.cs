@@ -115,7 +115,8 @@ namespace IOperationGenerator
                         if (
                             splitOrder.Count != properties.Count
                             || (properties.Count == 1 && properties[0] != splitOrder[0])
-                        ) {
+                        )
+                        {
                             Console.WriteLine(
                                 $"{node.Name} has inconsistent ChildrenOrder and properties"
                             );

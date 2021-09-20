@@ -23,7 +23,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Organizing.Organizers
         protected override EnumDeclarationSyntax Organize(
             EnumDeclarationSyntax syntax,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             return syntax.Update(
                 syntax.AttributeLists,
                 ModifiersOrganizer.Organize(syntax.Modifiers),

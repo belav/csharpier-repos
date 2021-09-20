@@ -37,7 +37,8 @@ namespace System.ComponentModel.Composition
     {
         private static void Constructor_NullReflectionContextArgument_ShouldThrowArgumentNull(
             Func<ReflectionContext, TypeCatalog> catalogCreator
-        ) {
+        )
+        {
             Assert.Throws<ArgumentNullException>(
                 "reflectionContext",
                 () =>
@@ -49,7 +50,8 @@ namespace System.ComponentModel.Composition
 
         private static void Constructor_NullDefinitionOriginArgument_ShouldThrowArgumentNull(
             Func<ICompositionElement, TypeCatalog> catalogCreator
-        ) {
+        )
+        {
             Assert.Throws<ArgumentNullException>(
                 "definitionOrigin",
                 () =>

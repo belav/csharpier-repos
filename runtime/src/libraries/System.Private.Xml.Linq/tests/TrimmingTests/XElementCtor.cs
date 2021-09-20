@@ -96,7 +96,8 @@ public class Program
                 if (
                     (object)Reader.LocalName != id1_MyClass
                     || (object)Reader.NamespaceURI != id2_Item
-                ) {
+                )
+                {
                     throw CreateUnknownNodeException();
                 }
                 result = Read2_MyClass(isNullable: true, checkType: true);
@@ -123,7 +124,8 @@ public class Program
                     (object)xmlQualifiedName.Name != id1_MyClass
                     || (object)xmlQualifiedName.Namespace != id2_Item
                 )
-            ) {
+            )
+            {
                 throw CreateUnknownTypeException(xmlQualifiedName);
             }
             if (flag)
@@ -157,7 +159,8 @@ public class Program
                         !array[0]
                         && (object)Reader.LocalName == id3_Element
                         && (object)Reader.NamespaceURI == id2_Item
-                    ) {
+                    )
+                    {
                         // This line would fail if the XElement ctor needed was trimmed out.
                         myClass.Element = (XElement)ReadSerializable(
                             (IXmlSerializable)Activator.CreateInstance(

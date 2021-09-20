@@ -27,7 +27,8 @@ namespace Microsoft.AspNetCore.Rewrite.IISUrlRewrite
             ConditionCollection? conditions,
             UrlAction action,
             bool global
-        ) {
+        )
+        {
             Name = name;
             InitialMatch = initialMatch;
             Conditions = conditions;

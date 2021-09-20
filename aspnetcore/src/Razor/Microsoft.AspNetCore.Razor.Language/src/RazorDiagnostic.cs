@@ -38,7 +38,8 @@ namespace Microsoft.AspNetCore.Razor.Language
             RazorDiagnosticDescriptor descriptor,
             SourceSpan span,
             params object[] args
-        ) {
+        )
+        {
             if (descriptor == null)
             {
                 throw new ArgumentNullException(nameof(descriptor));

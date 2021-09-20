@@ -22,7 +22,8 @@ namespace Microsoft.CodeAnalysis
             this AnalyzerConfigOptions analyzerConfigOptions,
             PerLanguageOption2<T> option,
             string language
-        ) {
+        )
+        {
             // Language is not used for .editorconfig lookups
             _ = language;
 
@@ -53,7 +54,8 @@ namespace Microsoft.CodeAnalysis
         private static T GetOptionWithAssertOnFailure<T>(
             AnalyzerConfigOptions analyzerConfigOptions,
             TOption option
-        ) {
+        )
+        {
             if (!TryGetEditorConfigOptionOrDefault(analyzerConfigOptions, option, out T value))
             {
                 // There are couple of reasons this assert might fire:
@@ -95,7 +97,8 @@ namespace Microsoft.CodeAnalysis
             TOption option,
             bool useDefaultIfMissing,
             out T? value
-        ) {
+        )
+        {
             var hasEditorConfigStorage = false;
             foreach (var storageLocation in option.StorageLocations)
             {
@@ -107,7 +110,8 @@ namespace Microsoft.CodeAnalysis
                         out var stringValue
                     )
                     && editorConfigStorageLocation.TryGetOption(stringValue, typeof(T), out value)
-                ) {
+                )
+                {
                     return true;
                 }
 
@@ -125,7 +129,8 @@ namespace Microsoft.CodeAnalysis
                         option.Type,
                         out var objectValue
                     )
-                ) {
+                )
+                {
                     value = (T)objectValue;
                     return true;
                 }

@@ -49,7 +49,8 @@ namespace System.Linq.Parallel
             QueryOperator<TOutput> queryOperator,
             ParallelMergeOptions? mergeOptions,
             bool suppressOrderPreservation
-        ) {
+        )
+        {
             Debug.Assert(queryOperator != null);
 
             _queryOperator = queryOperator;

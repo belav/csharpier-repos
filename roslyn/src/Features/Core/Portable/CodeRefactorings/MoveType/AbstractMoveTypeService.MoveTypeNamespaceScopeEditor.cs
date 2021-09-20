@@ -59,7 +59,8 @@ namespace Microsoft.CodeAnalysis.CodeRefactorings.MoveType
                 TTypeDeclarationSyntax typeToMove,
                 Document documentToEdit,
                 CancellationToken cancellationToken
-            ) {
+            )
+            {
                 var syntaxFactsService = documentToEdit.GetLanguageService<ISyntaxFactsService>();
                 var childNodes = syntaxFactsService.GetMembersOfNamespaceDeclaration(
                     namespaceDeclaration
@@ -140,7 +141,8 @@ namespace Microsoft.CodeAnalysis.CodeRefactorings.MoveType
                 SyntaxNode syntaxNode,
                 bool leading = true,
                 bool trailing = true
-            ) {
+            )
+            {
                 if (leading && syntaxNode.HasLeadingTrivia)
                 {
                     syntaxNode = syntaxNode.WithLeadingTrivia(
@@ -160,7 +162,8 @@ namespace Microsoft.CodeAnalysis.CodeRefactorings.MoveType
 
             private static IEnumerable<SyntaxNode> WithElasticTrivia(
                 IEnumerable<SyntaxNode> syntaxNodes
-            ) {
+            )
+            {
                 if (syntaxNodes.Any())
                 {
                     var firstNode = syntaxNodes.First();

@@ -25,7 +25,8 @@ namespace System.Xml.Serialization
             Type[]? extraTypes,
             XmlRootAttribute? root,
             string? defaultNamespace
-        ) {
+        )
+        {
             return CreateSerializer(type, overrides, extraTypes, root, defaultNamespace, null);
         }
 
@@ -73,7 +74,8 @@ namespace System.Xml.Serialization
             XmlRootAttribute? root,
             string? defaultNamespace,
             string? location
-        ) {
+        )
+        {
             return new XmlSerializer(type, overrides, extraTypes, root, defaultNamespace, location);
         }
     }

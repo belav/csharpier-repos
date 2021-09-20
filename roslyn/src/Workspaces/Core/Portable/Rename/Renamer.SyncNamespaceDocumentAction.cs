@@ -46,7 +46,8 @@ namespace Microsoft.CodeAnalysis.Rename
                 Document document,
                 OptionSet _,
                 CancellationToken cancellationToken
-            ) {
+            )
+            {
                 var changeNamespaceService =
                     document.GetRequiredLanguageService<IChangeNamespaceService>();
                 var solution = await changeNamespaceService.TryChangeTopLevelNamespacesAsync(
@@ -66,7 +67,8 @@ namespace Microsoft.CodeAnalysis.Rename
                 Document document,
                 IReadOnlyList<string> newFolders,
                 CancellationToken _
-            ) {
+            )
+            {
                 var analysisResult = Analyze(document, newFolders);
 
                 if (analysisResult.HasValue)
@@ -80,7 +82,8 @@ namespace Microsoft.CodeAnalysis.Rename
             private static AnalysisResult? Analyze(
                 Document document,
                 IReadOnlyCollection<string> newFolders
-            ) {
+            )
+            {
                 // https://github.com/dotnet/roslyn/issues/41841
                 // VB implementation is incomplete for sync namespace
                 if (document.Project.Language == LanguageNames.CSharp)

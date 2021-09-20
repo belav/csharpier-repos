@@ -32,7 +32,8 @@ namespace Microsoft.CodeAnalysis.ExpressionEvaluator.UnitTests
             IntPtr metadataAddress,
             object symReader,
             bool includeLocalSignatures
-        ) {
+        )
+        {
             _metadataOpt = metadata;
             ModuleVersionId = moduleVersionId;
             MetadataLength = metadataLength;
@@ -45,7 +46,8 @@ namespace Microsoft.CodeAnalysis.ExpressionEvaluator.UnitTests
             PEMemoryBlock metadata,
             Guid moduleVersionId,
             ISymUnmanagedReader symReader = null
-        ) {
+        )
+        {
             return Create((IntPtr)metadata.Pointer, metadata.Length, moduleVersionId, symReader);
         }
 
@@ -54,7 +56,8 @@ namespace Microsoft.CodeAnalysis.ExpressionEvaluator.UnitTests
             int metadataLength,
             Guid moduleVersionId,
             ISymUnmanagedReader symReader = null
-        ) {
+        )
+        {
             return new ModuleInstance(
                 metadata: null,
                 moduleVersionId: moduleVersionId,
@@ -75,7 +78,8 @@ namespace Microsoft.CodeAnalysis.ExpressionEvaluator.UnitTests
             ImmutableArray<byte> assemblyImage,
             ISymUnmanagedReader symReader,
             bool includeLocalSignatures = true
-        ) {
+        )
+        {
             // create a new instance of metadata, the resulting object takes an ownership:
             return Create(
                 AssemblyMetadata.CreateFromImage(assemblyImage),
@@ -88,7 +92,8 @@ namespace Microsoft.CodeAnalysis.ExpressionEvaluator.UnitTests
             Metadata metadata,
             object symReader,
             bool includeLocalSignatures
-        ) {
+        )
+        {
             var assemblyMetadata = metadata as AssemblyMetadata;
             var moduleMetadata =
                 (assemblyMetadata == null)

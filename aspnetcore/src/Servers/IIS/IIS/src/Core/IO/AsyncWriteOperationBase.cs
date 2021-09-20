@@ -115,7 +115,8 @@ namespace Microsoft.AspNetCore.Server.IIS.Core.IO
             ReadOnlySequence<byte> buffer,
             HttpApiTypes.HTTP_DATA_CHUNK* pDataChunks,
             out bool fCompletionExpected
-        ) {
+        )
+        {
             var currentChunk = 0;
 
             if (_handles == null || _handles.Length < nChunks)

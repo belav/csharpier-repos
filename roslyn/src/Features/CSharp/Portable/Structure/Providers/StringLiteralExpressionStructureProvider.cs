@@ -17,7 +17,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Structure
             ref TemporaryArray<BlockSpan> spans,
             BlockStructureOptionProvider optionProvider,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             if (node.IsKind(SyntaxKind.StringLiteralExpression) && !node.ContainsDiagnostics)
             {
                 spans.Add(

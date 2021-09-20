@@ -54,7 +54,8 @@ namespace Microsoft.AspNetCore.Mvc.Razor
         public virtual IEnumerable<string> ExpandViewLocations(
             ViewLocationExpanderContext context,
             IEnumerable<string> viewLocations
-        ) {
+        )
+        {
             if (context == null)
             {
                 throw new ArgumentNullException(nameof(context));
@@ -88,7 +89,8 @@ namespace Microsoft.AspNetCore.Mvc.Razor
         private IEnumerable<string> ExpandViewLocationsCore(
             IEnumerable<string> viewLocations,
             CultureInfo cultureInfo
-        ) {
+        )
+        {
             foreach (var location in viewLocations)
             {
                 var temporaryCultureInfo = cultureInfo;

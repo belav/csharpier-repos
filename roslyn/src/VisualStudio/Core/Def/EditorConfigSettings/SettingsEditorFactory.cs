@@ -45,7 +45,8 @@ namespace Microsoft.VisualStudio.LanguageServices.EditorConfigSettings
             ITableManagerProvider tableMangerProvider,
             IVsEditorAdaptersFactoryService vsEditorAdaptersFactoryService,
             IThreadingContext threadingContext
-        ) {
+        )
+        {
             _settingsDataProviderFactory =
                 workspace.Services.GetRequiredService<ISettingsAggregator>();
             _workspace = workspace;
@@ -76,7 +77,8 @@ namespace Microsoft.VisualStudio.LanguageServices.EditorConfigSettings
             out string? pbstrEditorCaption,
             out Guid pguidCmdUI,
             out int pgrfCDW
-        ) {
+        )
+        {
             // Initialize to null
             ppunkDocView = IntPtr.Zero;
             ppunkDocData = IntPtr.Zero;
@@ -98,7 +100,8 @@ namespace Microsoft.VisualStudio.LanguageServices.EditorConfigSettings
                     _vsServiceProvider.TryGetService<SLocalRegistry, ILocalRegistry>(
                         out var localRegistry
                     )
-                ) {
+                )
+                {
                     var textLinesGuid = typeof(IVsTextLines).GUID;
                     _ = localRegistry.CreateInstance(
                         typeof(VsTextBufferClass).GUID,

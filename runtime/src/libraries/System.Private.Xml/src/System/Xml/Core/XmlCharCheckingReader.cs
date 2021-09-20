@@ -709,14 +709,16 @@ namespace System.Xml
             bool ignoreComments,
             bool ignorePis,
             DtdProcessing dtdProcessing
-        ) : base(
-            reader,
-            checkCharacters,
-            ignoreWhitespace,
-            ignoreComments,
-            ignorePis,
-            dtdProcessing
-        ) {
+        )
+            : base(
+                reader,
+                checkCharacters,
+                ignoreWhitespace,
+                ignoreComments,
+                ignorePis,
+                dtdProcessing
+            )
+        {
             Debug.Assert(readerAsNSResolver != null);
             this.readerAsNSResolver = readerAsNSResolver;
         }
@@ -725,7 +727,8 @@ namespace System.Xml
         //
         IDictionary<string, string> IXmlNamespaceResolver.GetNamespacesInScope(
             XmlNamespaceScope scope
-        ) {
+        )
+        {
             return readerAsNSResolver.GetNamespacesInScope(scope);
         }
 

@@ -36,7 +36,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.CallHierarchy.Finders
             ProjectId projectId,
             IAsynchronousOperationListener asyncListener,
             CallHierarchyProvider provider
-        ) {
+        )
+        {
             _asyncListener = asyncListener;
             _symbolKey = symbol.GetSymbolKey();
             this.SymbolName = symbol.Name;
@@ -56,7 +57,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.CallHierarchy.Finders
             Workspace workspace,
             CallHierarchySearchScope searchScope,
             ICallHierarchySearchCallback callback
-        ) {
+        )
+        {
             var asyncToken = _asyncListener.BeginAsyncOperation(this.GetType().Name + ".Search");
 
             // NOTE: This task has CancellationToken.None specified, since it must complete no matter what
@@ -106,7 +108,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.CallHierarchy.Finders
             CallHierarchySearchScope scope,
             ICallHierarchySearchCallback callback,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var project = workspace.CurrentSolution.GetProject(_projectId);
 
             if (project == null)
@@ -144,11 +147,13 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.CallHierarchy.Finders
         private IImmutableSet<Document> IncludeDocuments(
             CallHierarchySearchScope scope,
             Project project
-        ) {
+        )
+        {
             if (
                 scope == CallHierarchySearchScope.CurrentDocument
                 || scope == CallHierarchySearchScope.CurrentProject
-            ) {
+            )
+            {
                 var documentTrackingService =
                     project.Solution.Workspace.Services.GetService<IDocumentTrackingService>();
                 if (documentTrackingService == null)
@@ -189,7 +194,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.CallHierarchy.Finders
             ICallHierarchySearchCallback callback,
             IImmutableSet<Document> documents,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var callers = await GetCallersAsync(symbol, project, documents, cancellationToken)
                 .ConfigureAwait(false);
 

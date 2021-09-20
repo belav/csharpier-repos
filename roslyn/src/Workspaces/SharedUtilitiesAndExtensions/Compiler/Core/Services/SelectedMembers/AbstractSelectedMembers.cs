@@ -43,7 +43,8 @@ namespace Microsoft.CodeAnalysis.LanguageServices
             TextSpan textSpan,
             bool allowPartialSelection,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var text = await tree.GetTextAsync(cancellationToken).ConfigureAwait(false);
             var root = await tree.GetRootAsync(cancellationToken).ConfigureAwait(false);
 
@@ -87,7 +88,8 @@ namespace Microsoft.CodeAnalysis.LanguageServices
             TextSpan textSpan,
             TMemberDeclarationSyntax firstMember,
             bool allowPartialSelection
-        ) {
+        )
+        {
             var containingType = (TTypeDeclarationSyntax)firstMember.Parent;
             var members = GetMembers(containingType);
             var fieldIndex = members.IndexOf(firstMember);
@@ -203,13 +205,15 @@ namespace Microsoft.CodeAnalysis.LanguageServices
             SyntaxNode root,
             SyntaxNode member,
             int position
-        ) {
+        )
+        {
             var token = root.FindToken(position);
             if (
                 token == member.GetFirstToken()
                 && position <= token.SpanStart
                 && text.AreOnSameLine(position, token.SpanStart)
-            ) {
+            )
+            {
                 return true;
             }
 
@@ -217,7 +221,8 @@ namespace Microsoft.CodeAnalysis.LanguageServices
                 token == member.GetLastToken()
                 && position >= token.Span.End
                 && text.AreOnSameLine(position, token.Span.End)
-            ) {
+            )
+            {
                 return true;
             }
 

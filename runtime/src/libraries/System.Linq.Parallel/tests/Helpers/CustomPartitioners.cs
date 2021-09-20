@@ -42,7 +42,8 @@ namespace System.Linq.Parallel.Tests
                 int partitionCount,
                 int index,
                 int count
-            ) {
+            )
+            {
                 _partition = partition;
                 _elements = Math.Min(
                     (count - 1) / partitionCount + 1,
@@ -111,7 +112,8 @@ namespace System.Linq.Parallel.Tests
 
         public override IList<IEnumerator<KeyValuePair<long, int>>> GetOrderablePartitions(
             int partitionCount
-        ) {
+        )
+        {
             IEnumerator<KeyValuePair<long, int>>[] partitions = new IEnumerator<
                 KeyValuePair<long, int>
             >[partitionCount];
@@ -160,7 +162,8 @@ namespace System.Linq.Parallel.Tests
                 int count,
                 bool keysOrderedInEachPartition,
                 bool keysNormalized
-            ) {
+            )
+            {
                 _start = start;
                 _count = count;
                 _keysOrderedInEachPartition = keysOrderedInEachPartition;

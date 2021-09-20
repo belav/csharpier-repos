@@ -40,7 +40,8 @@ namespace Microsoft.CodeAnalysis.ConvertIfToSwitch
             if (
                 ifStatement == null
                 || ifStatement.GetDiagnostics().Any(d => d.Severity == DiagnosticSeverity.Error)
-            ) {
+            )
+            {
                 return;
             }
 
@@ -110,7 +111,8 @@ namespace Microsoft.CodeAnalysis.ConvertIfToSwitch
             if (
                 analyzer.Supports(Feature.SwitchExpression)
                 && CanConvertToSwitchExpression(analyzer.Supports(Feature.OrPattern), sections)
-            ) {
+            )
+            {
                 context.RegisterRefactoring(
                     new MyCodeAction(
                         GetTitle(forSwitchExpression: true),
@@ -134,7 +136,8 @@ namespace Microsoft.CodeAnalysis.ConvertIfToSwitch
         private static bool CanConvertToSwitchExpression(
             bool supportsOrPattern,
             ImmutableArray<AnalyzedSwitchSection> sections
-        ) {
+        )
+        {
             // There must be a default case for an exhaustive switch expression
             if (!sections.Any(section => section.Labels.IsDefault))
                 return false;
@@ -170,7 +173,8 @@ namespace Microsoft.CodeAnalysis.ConvertIfToSwitch
             static bool CanConvertSectionForSwitchExpression(
                 bool supportsOrPattern,
                 AnalyzedSwitchSection section
-            ) {
+            )
+            {
                 // All arms must be convertible to a switch arm
                 if (GetSwitchArmKind(section.Body) == default)
                     return false;

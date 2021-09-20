@@ -30,7 +30,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             SwitchStatementSyntax node,
             Binder originalBinder,
             BindingDiagnosticBag diagnostics
-        ) {
+        )
+        {
             Debug.Assert(SwitchSyntax.Equals(node));
 
             if (node.Sections.Count == 0)
@@ -95,7 +96,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             ref ImmutableArray<BoundSwitchSection> switchSections,
             BoundDecisionDag decisionDag,
             BindingDiagnosticBag diagnostics
-        ) {
+        )
+        {
             var reachableLabels = decisionDag.ReachableLabels;
             bool isSubsumed(BoundSwitchLabel switchLabel)
             {
@@ -124,7 +126,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                         !label.HasErrors
                         && isSubsumed(label)
                         && label.Syntax.Kind() != SyntaxKind.DefaultSwitchLabel
-                    ) {
+                    )
+                    {
                         var syntax = label.Syntax;
                         switch (syntax)
                         {
@@ -143,7 +146,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                                     && !cp.ConstantValue.IsBad
                                     && FindMatchingSwitchCaseLabel(cp.ConstantValue, p)
                                         != label.Label
-                                ) {
+                                )
+                                {
                                     // We use the traditional diagnostic when possible
                                     diagnostics.Add(
                                         ErrorCode.ERR_DuplicateCaseLabel,
@@ -195,7 +199,8 @@ namespace Microsoft.CodeAnalysis.CSharp
         internal override void BindPatternSwitchLabelForInference(
             CasePatternSwitchLabelSyntax node,
             BindingDiagnosticBag diagnostics
-        ) {
+        )
+        {
             // node should be a label of this switch statement.
             Debug.Assert(this.SwitchSyntax == node.Parent.Parent);
 
@@ -219,7 +224,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             Binder originalBinder,
             BindingDiagnosticBag diagnostics,
             out BoundSwitchLabel defaultLabel
-        ) {
+        )
+        {
             // Bind match sections
             var boundSwitchSectionsBuilder = ArrayBuilder<BoundSwitchSection>.GetInstance(
                 SwitchSyntax.Sections.Count
@@ -247,7 +253,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             Binder originalBinder,
             ref BoundSwitchLabel defaultLabel,
             BindingDiagnosticBag diagnostics
-        ) {
+        )
+        {
             // Bind match section labels
             var boundLabelsBuilder = ArrayBuilder<BoundSwitchLabel>.GetInstance(node.Labels.Count);
             Binder sectionBinder = originalBinder.GetBinder(node); // this binder can bind pattern variables from the section.
@@ -298,7 +305,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             else if (
                 boundStatement is BoundMultipleLocalDeclarationsBase boundMultiple
                 && !boundMultiple.LocalDeclarations.IsDefaultOrEmpty
-            ) {
+            )
+            {
                 return boundMultiple.LocalDeclarations[0].LocalSymbol.IsUsing;
             }
             return false;
@@ -310,7 +318,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             LabelSymbol label,
             ref BoundSwitchLabel defaultLabel,
             BindingDiagnosticBag diagnostics
-        ) {
+        )
+        {
             switch (node.Kind())
             {
                 case SyntaxKind.CaseSwitchLabel:
@@ -399,7 +408,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             {
                 if (
                     pattern is BoundConstantPattern { HasErrors: false } && IsUnderscore(expression)
-                ) {
+                )
+                {
                     diagnostics.Add(ErrorCode.WRN_CaseConstantNamedUnderscore, expression.Location);
                 }
             }

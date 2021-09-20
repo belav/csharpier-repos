@@ -34,7 +34,8 @@ namespace Microsoft.CodeAnalysis.Razor
         // don't want to update the tests when that happens.
         protected static TagHelperDescriptor[] ExcludeBuiltInComponents(
             TagHelperDescriptorProviderContext context
-        ) {
+        )
+        {
             var results = context.Results.Where(
                     c => c.AssemblyName != "Microsoft.AspNetCore.Razor.Test.ComponentShim"
                 )
@@ -55,7 +56,8 @@ namespace Microsoft.CodeAnalysis.Razor
         protected static TagHelperDescriptor[] AssertAndExcludeFullyQualifiedNameMatchComponents(
             TagHelperDescriptor[] components,
             int expectedCount
-        ) {
+        )
+        {
             var componentLookup = new Dictionary<string, List<TagHelperDescriptor>>();
             var fullyQualifiedNameMatchComponents = components.Where(
                     c => c.IsComponentFullyQualifiedNameMatch()

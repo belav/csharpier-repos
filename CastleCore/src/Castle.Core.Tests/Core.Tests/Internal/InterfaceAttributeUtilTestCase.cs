@@ -205,7 +205,8 @@ namespace Castle.Core.Internal.Tests
         private static void AssertAttributes(
             Type interfaceType,
             params MockAttribute[] expectedAttributes
-        ) {
+        )
+        {
             var attributes = InterfaceAttributeUtil.GetAttributes(interfaceType, true);
 
             Assert.IsNotNull(attributes);

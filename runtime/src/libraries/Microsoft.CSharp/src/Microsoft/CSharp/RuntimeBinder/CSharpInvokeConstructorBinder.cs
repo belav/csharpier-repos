@@ -52,7 +52,8 @@ namespace Microsoft.CSharp.RuntimeBinder
             CSharpCallFlags flags,
             Type callingContext,
             IEnumerable<CSharpArgumentInfo> argumentInfo
-        ) {
+        )
+        {
             Flags = flags;
             _callingContext = callingContext;
             _argumentInfo = BinderHelper.ToArray(argumentInfo);
@@ -84,7 +85,8 @@ namespace Microsoft.CSharp.RuntimeBinder
                 || Name != otherBinder.Name
                 || TypeArguments.Length != otherBinder.TypeArguments.Length
                 || _argumentInfo.Length != otherBinder._argumentInfo.Length
-            ) {
+            )
+            {
                 return false;
             }
 

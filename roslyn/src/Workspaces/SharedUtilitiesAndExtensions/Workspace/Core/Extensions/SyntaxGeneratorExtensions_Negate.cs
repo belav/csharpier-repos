@@ -42,7 +42,8 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
             SyntaxNode expression,
             SemanticModel semanticModel,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             return Negate(
                 generator,
                 generatorInternal,
@@ -60,7 +61,8 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
             SemanticModel semanticModel,
             bool negateBinary,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var syntaxFacts = generatorInternal.SyntaxFacts;
             if (syntaxFacts.IsParenthesizedExpression(expressionOrPattern))
             {
@@ -157,7 +159,8 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
             SyntaxGeneratorInternal generatorInternal,
             SemanticModel semanticModel,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var syntaxFacts = generatorInternal.SyntaxFacts;
             syntaxFacts.GetPartsOfBinaryExpression(
                 expressionNode,
@@ -207,13 +210,15 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
                 if (
                     binaryOperation.OperatorKind == BinaryOperatorKind.Or
                     && syntaxFacts.IsLogicalOrExpression(expressionNode)
-                ) {
+                )
+                {
                     negatedKind = BinaryOperatorKind.ConditionalAnd;
                 }
                 else if (
                     binaryOperation.OperatorKind == BinaryOperatorKind.And
                     && syntaxFacts.IsLogicalAndExpression(expressionNode)
-                ) {
+                )
+                {
                     negatedKind = BinaryOperatorKind.ConditionalOr;
                 }
 
@@ -258,7 +263,8 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
             SyntaxGeneratorInternal generatorInternal,
             SemanticModel semanticModel,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             // Apply demorgans's law here.
             //
             //  not (a and b)   ->   not a or not b
@@ -304,7 +310,8 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
             SyntaxGeneratorInternal generatorInternal,
             SemanticModel semanticModel,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             // Don't recurse into patterns if the language doesn't support negated patterns.
             // Just wrap with a normal '!' expression.
             var syntaxFacts = generatorInternal.SyntaxFacts;
@@ -347,7 +354,8 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
             ISyntaxFacts syntaxFacts,
             SyntaxNode pattern,
             bool designatorsLegal
-        ) {
+        )
+        {
             // It is illegal to create a pattern that has a designator under a not-pattern or or-pattern
             if (syntaxFacts.IsBinaryPattern(pattern))
             {
@@ -404,7 +412,8 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
             BinaryOperatorKind operationKind,
             SyntaxNode rightOperand,
             SyntaxGenerator generator
-        ) {
+        )
+        {
             switch (operationKind)
             {
                 case BinaryOperatorKind.Equals:
@@ -452,7 +461,8 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
         public static bool IsSpecialCaseBinaryExpression(
             IBinaryOperation binaryOperation,
             BinaryOperatorKind operationKind
-        ) {
+        )
+        {
             if (binaryOperation == null)
             {
                 return false;
@@ -488,7 +498,8 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
         private static bool CanSimplifyToLengthEqualsZeroExpression(
             IOperation variableExpression,
             ILiteralOperation numericLiteralExpression
-        ) {
+        )
+        {
             var numericValue = numericLiteralExpression.ConstantValue;
             if (numericValue.HasValue && numericValue.Value is 0)
             {
@@ -501,7 +512,8 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
                         if (
                             containingType?.SpecialType == SpecialType.System_Array
                             || containingType.SpecialType == SpecialType.System_String
-                        ) {
+                        )
+                        {
                             return true;
                         }
                     }
@@ -528,7 +540,8 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
             SyntaxNode expression,
             SyntaxGenerator generator,
             SemanticModel semanticModel
-        ) {
+        )
+        {
             var operation = semanticModel.GetOperation(expression);
             SyntaxNode newLiteralExpression;
 
@@ -536,14 +549,16 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
                 operation?.Kind == OperationKind.Literal
                 && operation.ConstantValue.HasValue
                 && operation.ConstantValue.Value is true
-            ) {
+            )
+            {
                 newLiteralExpression = generator.FalseLiteralExpression();
             }
             else if (
                 operation?.Kind == OperationKind.Literal
                 && operation.ConstantValue.HasValue
                 && operation.ConstantValue.Value is false
-            ) {
+            )
+            {
                 newLiteralExpression = generator.TrueLiteralExpression();
             }
             else
@@ -558,7 +573,8 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
             SyntaxNode pattern,
             SyntaxGenerator generator,
             SyntaxGeneratorInternal generatorInternal
-        ) {
+        )
+        {
             var syntaxFacts = generatorInternal.SyntaxFacts;
 
             // If we have `is true/false` just swap that to be `is false/true`.
@@ -577,7 +593,8 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
         private static SyntaxNode GetNegationOfLogicalNotExpression(
             SyntaxNode expression,
             ISyntaxFacts syntaxFacts
-        ) {
+        )
+        {
             var operatorToken = syntaxFacts.GetOperatorTokenOfPrefixUnaryExpression(expression);
             var operand = syntaxFacts.GetOperandOfPrefixUnaryExpression(expression);
 
@@ -589,7 +606,8 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
             SyntaxNode pattern,
             SyntaxGeneratorInternal generatorInternal,
             ISyntaxFacts syntaxFacts
-        ) {
+        )
+        {
             syntaxFacts.GetPartsOfUnaryPattern(pattern, out var opToken, out var subPattern);
 
             // not not p    ->   p

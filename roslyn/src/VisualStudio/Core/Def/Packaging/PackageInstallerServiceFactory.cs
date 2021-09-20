@@ -108,13 +108,15 @@ namespace Microsoft.VisualStudio.LanguageServices.Packaging
             [Import(AllowDefault = true)] Lazy<IVsPackageInstaller2>? packageInstaller,
             [Import(AllowDefault = true)] Lazy<IVsPackageUninstaller>? packageUninstaller,
             [Import(AllowDefault = true)] Lazy<IVsPackageSourceProvider>? packageSourceProvider
-        ) : base(
-            threadingContext,
-            workspace,
-            SymbolSearchOptions.Enabled,
-            SymbolSearchOptions.SuggestForTypesInReferenceAssemblies,
-            SymbolSearchOptions.SuggestForTypesInNuGetPackages
-        ) {
+        )
+            : base(
+                threadingContext,
+                workspace,
+                SymbolSearchOptions.Enabled,
+                SymbolSearchOptions.SuggestForTypesInReferenceAssemblies,
+                SymbolSearchOptions.SuggestForTypesInNuGetPackages
+            )
+        {
             _workspace = workspace;
 
             _serviceProvider = serviceProvider;
@@ -303,7 +305,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Packaging
             string versionOpt,
             bool includePrerelease,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             this.AssertIsForeground();
 
             // The 'workspace == _workspace' line is probably not necessary. However, we include
@@ -344,7 +347,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Packaging
             bool includePrerelease,
             EnvDTE.DTE dte,
             EnvDTE.Project dteProject
-        ) {
+        )
+        {
             this.AssertIsForeground();
             Contract.ThrowIfFalse(IsEnabled);
 
@@ -417,7 +421,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Packaging
             string packageName,
             EnvDTE.DTE dte,
             EnvDTE.Project dteProject
-        ) {
+        )
+        {
             this.AssertIsForeground();
             Contract.ThrowIfFalse(IsEnabled);
 
@@ -523,7 +528,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Packaging
         private Task ProcessWorkQueueAsync(
             ImmutableArray<(bool solutionChanged, ProjectId? changedProject)> workQueue,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             ThisCanBeCalledOnAnyThread();
 
             Contract.ThrowIfNull(
@@ -542,7 +548,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Packaging
         private async Task ProcessWorkQueueWorkerAsync(
             ImmutableArray<(bool solutionChanged, ProjectId? changedProject)> workQueue,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             ThisCanBeCalledOnAnyThread();
 
             var serviceContainer =
@@ -595,7 +602,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Packaging
             ImmutableArray<(bool solutionChanged, ProjectId? changedProject)> workQueue,
             Solution solution,
             HashSet<ProjectId> projectsToProcess
-        ) {
+        )
+        {
             ThisCanBeCalledOnAnyThread();
 
             // If we detected a solution change, then we need to process all projects.
@@ -617,7 +625,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Packaging
             Solution solution,
             ProjectId projectId,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             ThisCanBeCalledOnAnyThread();
 
             var project = solution.GetProject(projectId);
@@ -631,7 +640,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Packaging
             if (
                 project?.Language == LanguageNames.CSharp
                 || project?.Language == LanguageNames.VisualBasic
-            ) {
+            )
+            {
                 var projectGuid = _workspace.GetProjectGuid(projectId);
                 if (projectGuid != Guid.Empty)
                 {
@@ -654,7 +664,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Packaging
             INuGetProjectService nugetService,
             Guid projectGuid,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             cancellationToken.ThrowIfCancellationRequested();
             try
             {
@@ -744,7 +755,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Packaging
             Solution solution,
             string packageName,
             string version
-        ) {
+        )
+        {
             ThisCanBeCalledOnAnyThread();
 
             using var _ = ArrayBuilder<Project>.GetInstance(out var result);
@@ -754,7 +766,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Packaging
                 if (
                     state.TryGetInstalledVersion(packageName, out var installedVersion)
                     && installedVersion == version
-                ) {
+                )
+                {
                     var project = solution.GetProject(projectId);
                     if (project != null)
                         result.Add(project);
@@ -768,7 +781,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Packaging
 
         private bool TryGetOrLoadNuGetPackageManager(
             [NotNullWhen(true)] out IVsPackage? nugetPackageManager
-        ) {
+        )
+        {
             this.AssertIsForeground();
 
             if (_nugetPackageManager != null)

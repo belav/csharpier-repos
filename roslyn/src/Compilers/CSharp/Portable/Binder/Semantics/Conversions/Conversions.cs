@@ -29,12 +29,14 @@ namespace Microsoft.CodeAnalysis.CSharp
             int currentRecursionDepth,
             bool includeNullability,
             Conversions otherNullabilityOpt
-        ) : base(
-            binder.Compilation.Assembly.CorLibrary,
-            currentRecursionDepth,
-            includeNullability,
-            otherNullabilityOpt
-        ) {
+        )
+            : base(
+                binder.Compilation.Assembly.CorLibrary,
+                currentRecursionDepth,
+                includeNullability,
+                otherNullabilityOpt
+            )
+        {
             _binder = binder;
         }
 
@@ -63,7 +65,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             BoundMethodGroup source,
             TypeSymbol destination,
             ref CompoundUseSiteInfo<AssemblySymbol> useSiteInfo
-        ) {
+        )
+        {
             // Must be a bona fide delegate type, not an expression tree type.
             if (!destination.IsDelegateType())
             {
@@ -101,7 +104,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             BoundMethodGroup source,
             FunctionPointerTypeSymbol destination,
             ref CompoundUseSiteInfo<AssemblySymbol> useSiteInfo
-        ) {
+        )
+        {
             var resolution = ResolveDelegateOrFunctionPointerMethodGroup(
                 _binder,
                 source,
@@ -129,7 +133,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             BoundUnconvertedInterpolatedString source,
             TypeSymbol destination,
             ref CompoundUseSiteInfo<AssemblySymbol> useSiteInfo
-        ) {
+        )
+        {
             // An interpolated string expression may be converted to the types
             // System.IFormattable and System.FormattableString
             return (
@@ -159,7 +164,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             bool isFunctionPointer,
             in CallingConventionInfo callingConventionInfo,
             ref CompoundUseSiteInfo<AssemblySymbol> useSiteInfo
-        ) {
+        )
+        {
             if ((object)delegateInvokeMethodOpt != null)
             {
                 var analyzedArguments = AnalyzedArguments.GetInstance();
@@ -200,7 +206,8 @@ namespace Microsoft.CodeAnalysis.CSharp
         /// </summary>
         private static (MethodSymbol, bool isFunctionPointer, CallingConventionInfo callingConventionInfo) GetDelegateInvokeOrFunctionPointerMethodIfAvailable(
             TypeSymbol type
-        ) {
+        )
+        {
             if (type is FunctionPointerTypeSymbol { Signature: { } signature })
             {
                 return (
@@ -233,7 +240,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             BoundMethodGroup expr,
             TypeSymbol targetType,
             BindingDiagnosticBag diagnostics
-        ) {
+        )
+        {
             var (invokeMethodOpt, isFunctionPointer, callingConventionInfo) =
                 GetDelegateInvokeOrFunctionPointerMethodIfAvailable(targetType);
             CompoundUseSiteInfo<AssemblySymbol> useSiteInfo = binder.GetNewCompoundUseSiteInfo(
@@ -305,7 +313,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                         !hasErrors
                         && !resolution.IsEmpty
                         && resolution.ResultKind == LookupResultKind.Viable
-                    ) {
+                    )
+                    {
                         var overloadDiagnostics = BindingDiagnosticBag.GetInstance(
                             withDiagnostics: true,
                             diagnostics.AccumulatesDependencies
@@ -343,7 +352,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             MethodGroup methodGroup,
             NamedTypeSymbol delegateType,
             ref CompoundUseSiteInfo<AssemblySymbol> useSiteInfo
-        ) {
+        )
+        {
             var analyzedArguments = AnalyzedArguments.GetInstance();
             var result = OverloadResolutionResult<MethodSymbol>.GetInstance();
             var delegateInvokeMethod = delegateType.DelegateInvokeMethod;
@@ -385,7 +395,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             AnalyzedArguments analyzedArguments,
             ImmutableArray<ParameterSymbol> delegateParameters,
             CSharpCompilation compilation
-        ) {
+        )
+        {
             foreach (var p in delegateParameters)
             {
                 ParameterSymbol parameter = p;
@@ -421,7 +432,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             OverloadResolutionResult<MethodSymbol> result,
             MethodGroup methodGroup,
             int parameterCount
-        ) {
+        )
+        {
             // 6.6 An implicit conversion (6.1) exists from a method group (7.1) to a compatible
             // delegate type. Given a delegate type D and an expression E that is classified as
             // a method group, an implicit conversion exists from E to D if E contains at least
@@ -454,7 +466,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             if (
                 method.RequiresInstanceReceiver
                 && methodGroup.Receiver?.Type?.IsRestrictedType() == true
-            ) {
+            )
+            {
                 return Conversion.NoConversion;
             }
 
@@ -490,7 +503,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             BoundStackAllocArrayCreation sourceExpression,
             TypeSymbol destination,
             ref CompoundUseSiteInfo<AssemblySymbol> useSiteInfo
-        ) {
+        )
+        {
             if (sourceExpression.NeedsToBeConverted())
             {
                 Debug.Assert((object)sourceExpression.Type == null);

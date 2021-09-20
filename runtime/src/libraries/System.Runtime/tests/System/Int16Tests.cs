@@ -245,7 +245,8 @@ namespace System.Tests
             string format,
             IFormatProvider provider,
             string expected
-        ) {
+        )
+        {
             // Format is case insensitive
             string upperFormat = format.ToUpperInvariant();
             string lowerFormat = format.ToLowerInvariant();
@@ -328,7 +329,8 @@ namespace System.Tests
             NumberStyles style,
             IFormatProvider provider,
             short expected
-        ) {
+        )
+        {
             short result;
 
             // Default style and provider
@@ -408,7 +410,8 @@ namespace System.Tests
             NumberStyles style,
             IFormatProvider provider,
             Type exceptionType
-        ) {
+        )
+        {
             short result;
 
             // Default style and provider
@@ -451,7 +454,8 @@ namespace System.Tests
         public static void TryParse_InvalidNumberStyle_ThrowsArgumentException(
             NumberStyles style,
             string paramName
-        ) {
+        )
+        {
             short result = 0;
             AssertExtensions.Throws<ArgumentException>(
                 paramName,
@@ -532,7 +536,8 @@ namespace System.Tests
             NumberStyles style,
             IFormatProvider provider,
             short expected
-        ) {
+        )
+        {
             short result;
 
             // Default style and provider
@@ -555,7 +560,8 @@ namespace System.Tests
             NumberStyles style,
             IFormatProvider provider,
             Type exceptionType
-        ) {
+        )
+        {
             if (value != null)
             {
                 short result;
@@ -581,7 +587,8 @@ namespace System.Tests
             string format,
             IFormatProvider provider,
             string expected
-        ) {
+        )
+        {
             char[] actual;
             int charsWritten;
 

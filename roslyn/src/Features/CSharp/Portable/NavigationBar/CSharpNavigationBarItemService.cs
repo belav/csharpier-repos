@@ -54,7 +54,8 @@ namespace Microsoft.CodeAnalysis.CSharp.NavigationBar
             Document document,
             bool supportsCodeGeneration,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var typesInFile = await GetTypesInFileAsync(document, cancellationToken)
                 .ConfigureAwait(false);
             var tree = await document.GetRequiredSyntaxTreeAsync(cancellationToken)
@@ -66,13 +67,15 @@ namespace Microsoft.CodeAnalysis.CSharp.NavigationBar
             SyntaxTree tree,
             IEnumerable<INamedTypeSymbol> types,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             using (
                 Logger.LogBlock(
                     FunctionId.NavigationBar_ItemService_GetMembersInTypes_CSharp,
                     cancellationToken
                 )
-            ) {
+            )
+            {
                 var typeSymbolIndexProvider = new NavigationBarSymbolIdIndexProvider(
                     caseSensitive: true
                 );
@@ -93,7 +96,8 @@ namespace Microsoft.CodeAnalysis.CSharp.NavigationBar
                             member.IsImplicitlyDeclared
                             || member.Kind == SymbolKind.NamedType
                             || IsAccessor(member)
-                        ) {
+                        )
+                        {
                             continue;
                         }
 
@@ -177,7 +181,8 @@ namespace Microsoft.CodeAnalysis.CSharp.NavigationBar
         private static async Task<IEnumerable<INamedTypeSymbol>> GetTypesInFileAsync(
             Document document,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var semanticModel = await document.GetRequiredSemanticModelAsync(cancellationToken)
                 .ConfigureAwait(false);
 
@@ -187,13 +192,15 @@ namespace Microsoft.CodeAnalysis.CSharp.NavigationBar
         private static IEnumerable<INamedTypeSymbol> GetTypesInFile(
             SemanticModel semanticModel,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             using (
                 Logger.LogBlock(
                     FunctionId.NavigationBar_ItemService_GetTypesInFile_CSharp,
                     cancellationToken
                 )
-            ) {
+            )
+            {
                 var types = new HashSet<INamedTypeSymbol>();
                 var nodesToVisit = new Stack<SyntaxNode>();
 
@@ -220,7 +227,8 @@ namespace Microsoft.CodeAnalysis.CSharp.NavigationBar
                         || node is BaseFieldDeclarationSyntax
                         || node is StatementSyntax
                         || node is ExpressionSyntax
-                    ) {
+                    )
+                    {
                         // quick bail out to prevent us from creating every nodes exist in current file
                         continue;
                     }
@@ -267,7 +275,8 @@ namespace Microsoft.CodeAnalysis.CSharp.NavigationBar
             int symbolIndex,
             SyntaxTree tree,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var spans = GetSpansInDocument(member, tree, cancellationToken);
 
             return new RoslynNavigationBarItem.SymbolItem(
@@ -284,7 +293,8 @@ namespace Microsoft.CodeAnalysis.CSharp.NavigationBar
             ISymbol symbol,
             SyntaxTree tree,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             using var _ = ArrayBuilder<TextSpan>.GetInstance(out var spans);
             if (!cancellationToken.IsCancellationRequested)
             {
@@ -323,7 +333,8 @@ namespace Microsoft.CodeAnalysis.CSharp.NavigationBar
             ISymbol symbol,
             SyntaxTree tree,
             ArrayBuilder<TextSpan> spans
-        ) {
+        )
+        {
             var reference = symbol.DeclaringSyntaxReferences.FirstOrDefault(
                 r => r.SyntaxTree == tree
             );
@@ -360,7 +371,8 @@ namespace Microsoft.CodeAnalysis.CSharp.NavigationBar
             ISymbol symbol,
             SyntaxTree tree,
             ArrayBuilder<TextSpan> spans
-        ) {
+        )
+        {
             // Ideally we want the span of this to include the trailing comma, so let's find
             // the declaration
             var reference = symbol.DeclaringSyntaxReferences.FirstOrDefault(

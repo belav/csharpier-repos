@@ -45,7 +45,8 @@ namespace Microsoft.AspNetCore.Razor.TagHelpers
             char[] value,
             int startIndex,
             int characterCount
-        ) {
+        )
+        {
             if (output == null)
             {
                 throw new ArgumentNullException(nameof(output));
@@ -69,7 +70,8 @@ namespace Microsoft.AspNetCore.Razor.TagHelpers
             string value,
             int startIndex,
             int characterCount
-        ) {
+        )
+        {
             if (output == null)
             {
                 throw new ArgumentNullException(nameof(output));
@@ -103,7 +105,8 @@ namespace Microsoft.AspNetCore.Razor.TagHelpers
             char* buffer,
             int bufferLength,
             out int numberOfCharactersWritten
-        ) {
+        )
+        {
             if (buffer == null)
             {
                 throw new ArgumentNullException(nameof(buffer));

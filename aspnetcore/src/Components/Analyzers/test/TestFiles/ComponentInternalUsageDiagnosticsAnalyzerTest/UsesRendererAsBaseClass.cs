@@ -17,7 +17,8 @@ namespace Microsoft.AspNetCore.Components.Analyzers.Tests.TestFiles.ComponentInt
 
         protected override Task UpdateDisplayAsync( /*M1*/
             in RenderBatch renderBatch
-        ) {
+        )
+        {
             throw new NotImplementedException();
         }
     }

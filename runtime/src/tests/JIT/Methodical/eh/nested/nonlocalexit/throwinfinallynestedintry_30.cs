@@ -383,7 +383,8 @@ class Class1
                                                                                                                                     i
                                                                                                                                         % 2
                                                                                                                                     == 1
-                                                                                                                                ) {
+                                                                                                                                )
+                                                                                                                                {
                                                                                                                                     Console.WriteLine(
                                                                                                                                         "------------------------------throwing an exception [i = {0}]",
                                                                                                                                         i
@@ -411,7 +412,8 @@ class Class1
                                                                                                                                     i
                                                                                                                                         % 2
                                                                                                                                     == 0
-                                                                                                                                ) {
+                                                                                                                                )
+                                                                                                                                {
                                                                                                                                     Console.WriteLine(
                                                                                                                                         "------------------------------throwing an exception [i = {0}]",
                                                                                                                                         i
@@ -445,7 +447,8 @@ class Class1
                                                                                                                                 i
                                                                                                                                     % 2
                                                                                                                                 == 0
-                                                                                                                            ) {
+                                                                                                                            )
+                                                                                                                            {
                                                                                                                                 Console.WriteLine(
                                                                                                                                     "-----------------------------throwing an exception [i = {0}]",
                                                                                                                                     i
@@ -473,7 +476,8 @@ class Class1
                                                                                                                                 i
                                                                                                                                     % 2
                                                                                                                                 == 1
-                                                                                                                            ) {
+                                                                                                                            )
+                                                                                                                            {
                                                                                                                                 Console.WriteLine(
                                                                                                                                     "-----------------------------throwing an exception [i = {0}]",
                                                                                                                                     i
@@ -507,7 +511,8 @@ class Class1
                                                                                                                             i
                                                                                                                                 % 2
                                                                                                                             == 1
-                                                                                                                        ) {
+                                                                                                                        )
+                                                                                                                        {
                                                                                                                             Console.WriteLine(
                                                                                                                                 "----------------------------throwing an exception [i = {0}]",
                                                                                                                                 i
@@ -535,7 +540,8 @@ class Class1
                                                                                                                             i
                                                                                                                                 % 2
                                                                                                                             == 0
-                                                                                                                        ) {
+                                                                                                                        )
+                                                                                                                        {
                                                                                                                             Console.WriteLine(
                                                                                                                                 "----------------------------throwing an exception [i = {0}]",
                                                                                                                                 i
@@ -569,7 +575,8 @@ class Class1
                                                                                                                         i
                                                                                                                             % 2
                                                                                                                         == 0
-                                                                                                                    ) {
+                                                                                                                    )
+                                                                                                                    {
                                                                                                                         Console.WriteLine(
                                                                                                                             "---------------------------throwing an exception [i = {0}]",
                                                                                                                             i
@@ -597,7 +604,8 @@ class Class1
                                                                                                                         i
                                                                                                                             % 2
                                                                                                                         == 1
-                                                                                                                    ) {
+                                                                                                                    )
+                                                                                                                    {
                                                                                                                         Console.WriteLine(
                                                                                                                             "---------------------------throwing an exception [i = {0}]",
                                                                                                                             i
@@ -631,7 +639,8 @@ class Class1
                                                                                                                     i
                                                                                                                         % 2
                                                                                                                     == 1
-                                                                                                                ) {
+                                                                                                                )
+                                                                                                                {
                                                                                                                     Console.WriteLine(
                                                                                                                         "--------------------------throwing an exception [i = {0}]",
                                                                                                                         i
@@ -659,7 +668,8 @@ class Class1
                                                                                                                     i
                                                                                                                         % 2
                                                                                                                     == 0
-                                                                                                                ) {
+                                                                                                                )
+                                                                                                                {
                                                                                                                     Console.WriteLine(
                                                                                                                         "--------------------------throwing an exception [i = {0}]",
                                                                                                                         i
@@ -693,7 +703,8 @@ class Class1
                                                                                                                 i
                                                                                                                     % 2
                                                                                                                 == 0
-                                                                                                            ) {
+                                                                                                            )
+                                                                                                            {
                                                                                                                 Console.WriteLine(
                                                                                                                     "-------------------------throwing an exception [i = {0}]",
                                                                                                                     i
@@ -721,7 +732,8 @@ class Class1
                                                                                                                 i
                                                                                                                     % 2
                                                                                                                 == 1
-                                                                                                            ) {
+                                                                                                            )
+                                                                                                            {
                                                                                                                 Console.WriteLine(
                                                                                                                     "-------------------------throwing an exception [i = {0}]",
                                                                                                                     i
@@ -755,7 +767,8 @@ class Class1
                                                                                                             i
                                                                                                                 % 2
                                                                                                             == 1
-                                                                                                        ) {
+                                                                                                        )
+                                                                                                        {
                                                                                                             Console.WriteLine(
                                                                                                                 "------------------------throwing an exception [i = {0}]",
                                                                                                                 i
@@ -783,7 +796,8 @@ class Class1
                                                                                                             i
                                                                                                                 % 2
                                                                                                             == 0
-                                                                                                        ) {
+                                                                                                        )
+                                                                                                        {
                                                                                                             Console.WriteLine(
                                                                                                                 "------------------------throwing an exception [i = {0}]",
                                                                                                                 i
@@ -817,7 +831,8 @@ class Class1
                                                                                                         i
                                                                                                             % 2
                                                                                                         == 0
-                                                                                                    ) {
+                                                                                                    )
+                                                                                                    {
                                                                                                         Console.WriteLine(
                                                                                                             "-----------------------throwing an exception [i = {0}]",
                                                                                                             i
@@ -845,7 +860,8 @@ class Class1
                                                                                                         i
                                                                                                             % 2
                                                                                                         == 1
-                                                                                                    ) {
+                                                                                                    )
+                                                                                                    {
                                                                                                         Console.WriteLine(
                                                                                                             "-----------------------throwing an exception [i = {0}]",
                                                                                                             i
@@ -879,7 +895,8 @@ class Class1
                                                                                                     i
                                                                                                         % 2
                                                                                                     == 1
-                                                                                                ) {
+                                                                                                )
+                                                                                                {
                                                                                                     Console.WriteLine(
                                                                                                         "----------------------throwing an exception [i = {0}]",
                                                                                                         i
@@ -907,7 +924,8 @@ class Class1
                                                                                                     i
                                                                                                         % 2
                                                                                                     == 0
-                                                                                                ) {
+                                                                                                )
+                                                                                                {
                                                                                                     Console.WriteLine(
                                                                                                         "----------------------throwing an exception [i = {0}]",
                                                                                                         i
@@ -941,7 +959,8 @@ class Class1
                                                                                                 i
                                                                                                     % 2
                                                                                                 == 0
-                                                                                            ) {
+                                                                                            )
+                                                                                            {
                                                                                                 Console.WriteLine(
                                                                                                     "---------------------throwing an exception [i = {0}]",
                                                                                                     i
@@ -969,7 +988,8 @@ class Class1
                                                                                                 i
                                                                                                     % 2
                                                                                                 == 1
-                                                                                            ) {
+                                                                                            )
+                                                                                            {
                                                                                                 Console.WriteLine(
                                                                                                     "---------------------throwing an exception [i = {0}]",
                                                                                                     i
@@ -1002,7 +1022,8 @@ class Class1
                                                                                         if (
                                                                                             i % 2
                                                                                             == 1
-                                                                                        ) {
+                                                                                        )
+                                                                                        {
                                                                                             Console.WriteLine(
                                                                                                 "--------------------throwing an exception [i = {0}]",
                                                                                                 i
@@ -1029,7 +1050,8 @@ class Class1
                                                                                         if (
                                                                                             i % 2
                                                                                             == 0
-                                                                                        ) {
+                                                                                        )
+                                                                                        {
                                                                                             Console.WriteLine(
                                                                                                 "--------------------throwing an exception [i = {0}]",
                                                                                                 i

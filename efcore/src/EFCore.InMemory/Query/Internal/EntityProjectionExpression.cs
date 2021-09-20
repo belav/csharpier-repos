@@ -35,7 +35,8 @@ namespace Microsoft.EntityFrameworkCore.InMemory.Query.Internal
         public EntityProjectionExpression(
             IEntityType entityType,
             IReadOnlyDictionary<IProperty, MethodCallExpression> readExpressionMap
-        ) {
+        )
+        {
             EntityType = entityType;
             _readExpressionMap = readExpressionMap;
         }
@@ -89,7 +90,8 @@ namespace Microsoft.EntityFrameworkCore.InMemory.Query.Internal
                 if (
                     derivedType.IsAssignableFrom(property.DeclaringEntityType)
                     || property.DeclaringEntityType.IsAssignableFrom(derivedType)
-                ) {
+                )
+                {
                     readExpressionMap[property] = kvp.Value;
                 }
             }
@@ -108,7 +110,8 @@ namespace Microsoft.EntityFrameworkCore.InMemory.Query.Internal
             if (
                 !EntityType.IsAssignableFrom(property.DeclaringEntityType)
                 && !property.DeclaringEntityType.IsAssignableFrom(EntityType)
-            ) {
+            )
+            {
                 throw new InvalidOperationException(
                     InMemoryStrings.UnableToBindMemberToEntityProjection(
                         "property",
@@ -130,11 +133,13 @@ namespace Microsoft.EntityFrameworkCore.InMemory.Query.Internal
         public virtual void AddNavigationBinding(
             INavigation navigation,
             EntityShaperExpression entityShaper
-        ) {
+        )
+        {
             if (
                 !EntityType.IsAssignableFrom(navigation.DeclaringEntityType)
                 && !navigation.DeclaringEntityType.IsAssignableFrom(EntityType)
-            ) {
+            )
+            {
                 throw new InvalidOperationException(
                     InMemoryStrings.UnableToBindMemberToEntityProjection(
                         "navigation",
@@ -158,7 +163,8 @@ namespace Microsoft.EntityFrameworkCore.InMemory.Query.Internal
             if (
                 !EntityType.IsAssignableFrom(navigation.DeclaringEntityType)
                 && !navigation.DeclaringEntityType.IsAssignableFrom(EntityType)
-            ) {
+            )
+            {
                 throw new InvalidOperationException(
                     InMemoryStrings.UnableToBindMemberToEntityProjection(
                         "navigation",

@@ -68,7 +68,8 @@ namespace Microsoft.CodeAnalysis.ReplaceMethodWithProperty
             if (
                 !(semanticModel.GetDeclaredSymbol(methodDeclaration) is IMethodSymbol methodSymbol)
                 || !IsValidGetMethod(methodSymbol)
-            ) {
+            )
+            {
                 return;
             }
 
@@ -205,7 +206,8 @@ namespace Microsoft.CodeAnalysis.ReplaceMethodWithProperty
             IMethodSymbol getMethod,
             IMethodSymbol? setMethod,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var semanticModel = await document.GetSemanticModelAsync(cancellationToken)
                 .ConfigureAwait(false);
 
@@ -272,7 +274,8 @@ namespace Microsoft.CodeAnalysis.ReplaceMethodWithProperty
             ILookup<Document, ReferenceLocation> getReferencesByDocument,
             ILookup<Document, ReferenceLocation> setReferencesByDocument,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var allReferenceDocuments = getReferencesByDocument.Concat(setReferencesByDocument)
                 .Select(g => g.Key)
                 .Distinct();
@@ -303,7 +306,8 @@ namespace Microsoft.CodeAnalysis.ReplaceMethodWithProperty
             IEnumerable<ReferenceLocation> getReferences,
             IEnumerable<ReferenceLocation> setReferences,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var root = await originalDocument.GetRequiredSyntaxRootAsync(cancellationToken)
                 .ConfigureAwait(false);
 
@@ -346,7 +350,8 @@ namespace Microsoft.CodeAnalysis.ReplaceMethodWithProperty
             SyntaxEditor editor,
             IReplaceMethodWithPropertyService service,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             if (getReferences != null)
             {
                 foreach (var referenceLocation in getReferences)
@@ -389,7 +394,8 @@ namespace Microsoft.CodeAnalysis.ReplaceMethodWithProperty
             SyntaxEditor editor,
             IReplaceMethodWithPropertyService service,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             if (setReferences != null)
             {
                 foreach (var referenceLocation in setReferences)
@@ -433,7 +439,8 @@ namespace Microsoft.CodeAnalysis.ReplaceMethodWithProperty
             IEnumerable<ReferencedSymbol> setMethodReferences,
             bool updateSetMethod,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var getDefinitionsByDocumentId = await GetDefinitionsByDocumentIdAsync(
                     originalSolution,
                     getMethodReferences,
@@ -483,7 +490,8 @@ namespace Microsoft.CodeAnalysis.ReplaceMethodWithProperty
             MultiDictionary<DocumentId, IMethodSymbol>.ValueSet originalSetDefinitions,
             bool updateSetMethod,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var updatedDocument = updatedSolution.GetRequiredDocument(documentId);
             var compilation = await updatedDocument.Project.GetRequiredCompilationAsync(
                     cancellationToken
@@ -571,7 +579,8 @@ namespace Microsoft.CodeAnalysis.ReplaceMethodWithProperty
             MultiDictionary<DocumentId, IMethodSymbol>.ValueSet originalDefinitions,
             bool updateSetMethod,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             using var _ = ArrayBuilder<GetAndSetMethods>.GetInstance(out var result);
             foreach (var originalDefinition in originalDefinitions)
             {
@@ -600,7 +609,8 @@ namespace Microsoft.CodeAnalysis.ReplaceMethodWithProperty
                         getMethodDeclaration != null
                         && updatedSolution.GetDocument(getMethodDeclaration.SyntaxTree)?.Id
                             == documentId
-                    ) {
+                    )
+                    {
                         result.Add(
                             new GetAndSetMethods(
                                 getMethod,
@@ -630,7 +640,8 @@ namespace Microsoft.CodeAnalysis.ReplaceMethodWithProperty
         private static async Task<SyntaxNode?> GetMethodDeclarationAsync(
             IMethodSymbol? method,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             if (method == null)
             {
                 return null;
@@ -647,7 +658,8 @@ namespace Microsoft.CodeAnalysis.ReplaceMethodWithProperty
             Solution originalSolution,
             IEnumerable<ReferencedSymbol> referencedSymbols,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var result = new MultiDictionary<DocumentId, IMethodSymbol>();
             foreach (var referencedSymbol in referencedSymbols)
             {

@@ -33,7 +33,8 @@ namespace System.Net.Http.HPack
             string value,
             int index,
             EncoderHeaderEntry? next
-        ) {
+        )
+        {
             Debug.Assert(name != null);
             Debug.Assert(value != null);
 

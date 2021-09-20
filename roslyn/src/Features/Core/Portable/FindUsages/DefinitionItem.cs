@@ -122,16 +122,17 @@ namespace Microsoft.CodeAnalysis.FindUsages
             ImmutableArray<DocumentSpan> sourceSpans,
             ImmutableDictionary<string, string> properties,
             bool displayIfNoReferences
-        ) : this(
-            tags,
-            displayParts,
-            nameDisplayParts,
-            originationParts,
-            sourceSpans,
-            properties,
-            ImmutableDictionary<string, string>.Empty,
-            displayIfNoReferences
-        ) { }
+        )
+            : this(
+                tags,
+                displayParts,
+                nameDisplayParts,
+                originationParts,
+                sourceSpans,
+                properties,
+                ImmutableDictionary<string, string>.Empty,
+                displayIfNoReferences
+            ) { }
 
         protected DefinitionItem(
             ImmutableArray<string> tags,
@@ -142,7 +143,8 @@ namespace Microsoft.CodeAnalysis.FindUsages
             ImmutableDictionary<string, string> properties,
             ImmutableDictionary<string, string> displayableProperties,
             bool displayIfNoReferences
-        ) {
+        )
+        {
             Tags = tags;
             DisplayParts = displayParts;
             NameDisplayParts = nameDisplayParts.IsDefaultOrEmpty ? displayParts : nameDisplayParts;
@@ -181,7 +183,8 @@ namespace Microsoft.CodeAnalysis.FindUsages
             DocumentSpan sourceSpan,
             ImmutableArray<TaggedText> nameDisplayParts = default,
             bool displayIfNoReferences = true
-        ) {
+        )
+        {
             return Create(
                 tags,
                 displayParts,
@@ -198,7 +201,8 @@ namespace Microsoft.CodeAnalysis.FindUsages
             ImmutableArray<DocumentSpan> sourceSpans,
             ImmutableArray<TaggedText> nameDisplayParts,
             bool displayIfNoReferences
-        ) {
+        )
+        {
             return Create(
                 tags,
                 displayParts,
@@ -217,7 +221,8 @@ namespace Microsoft.CodeAnalysis.FindUsages
             ImmutableArray<TaggedText> nameDisplayParts = default,
             ImmutableDictionary<string, string> properties = null,
             bool displayIfNoReferences = true
-        ) {
+        )
+        {
             return Create(
                 tags,
                 displayParts,
@@ -237,7 +242,8 @@ namespace Microsoft.CodeAnalysis.FindUsages
             ImmutableDictionary<string, string> properties = null,
             ImmutableDictionary<string, string> displayableProperties = null,
             bool displayIfNoReferences = true
-        ) {
+        )
+        {
             if (sourceSpans.Length == 0)
             {
                 throw new ArgumentException($"{nameof(sourceSpans)} cannot be empty.");
@@ -268,7 +274,8 @@ namespace Microsoft.CodeAnalysis.FindUsages
             ISymbol symbol,
             ImmutableDictionary<string, string> properties = null,
             bool displayIfNoReferences = true
-        ) {
+        )
+        {
             properties ??= ImmutableDictionary<string, string>.Empty;
 
             var symbolKey = symbol.GetSymbolKey().ToString();
@@ -299,7 +306,8 @@ namespace Microsoft.CodeAnalysis.FindUsages
             ImmutableArray<TaggedText> displayParts,
             ImmutableArray<TaggedText> originationParts,
             bool displayIfNoReferences
-        ) {
+        )
+        {
             return CreateNonNavigableItem(
                 tags,
                 displayParts,
@@ -315,7 +323,8 @@ namespace Microsoft.CodeAnalysis.FindUsages
             ImmutableArray<TaggedText> originationParts = default,
             ImmutableDictionary<string, string> properties = null,
             bool displayIfNoReferences = true
-        ) {
+        )
+        {
             properties ??= ImmutableDictionary<string, string>.Empty;
             properties = properties.Add(NonNavigable, "");
 

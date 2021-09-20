@@ -19,7 +19,8 @@ namespace System.Net.WebSockets.Client.Tests
             WebSocket ws,
             ArraySegment<byte> arraySegment,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             ValueWebSocketReceiveResult r = await ws.ReceiveAsync(
                     (Memory<byte>)arraySegment,
                     cancellationToken
@@ -103,7 +104,8 @@ namespace System.Net.WebSockets.Client.Tests
                     TimeOutMilliseconds,
                     _output
                 )
-            ) {
+            )
+            {
                 var ctsDefault = new CancellationTokenSource(TimeOutMilliseconds);
 
                 // The server will read buffers and aggregate it before echoing back a complete message.
@@ -170,7 +172,8 @@ namespace System.Net.WebSockets.Client.Tests
                     TimeOutMilliseconds,
                     _output
                 )
-            ) {
+            )
+            {
                 var ctsDefault = new CancellationTokenSource(TimeOutMilliseconds);
 
                 // Send data to the server; the server will reply back with one or more partial messages. We should be
@@ -217,14 +220,16 @@ namespace System.Net.WebSockets.Client.Tests
         [ConditionalTheory(nameof(WebSocketsSupported)), MemberData(nameof(EchoServers))]
         public async Task SendAsync_SendCloseMessageType_ThrowsArgumentExceptionWithMessage(
             Uri server
-        ) {
+        )
+        {
             using (
                 ClientWebSocket cws = await WebSocketHelper.GetConnectedWebSocket(
                     server,
                     TimeOutMilliseconds,
                     _output
                 )
-            ) {
+            )
+            {
                 var cts = new CancellationTokenSource(TimeOutMilliseconds);
 
                 string expectedInnerMessage = ResourceHelper.GetExceptionMessage(
@@ -267,7 +272,8 @@ namespace System.Net.WebSockets.Client.Tests
                     TimeOutMilliseconds,
                     _output
                 )
-            ) {
+            )
+            {
                 var cts = new CancellationTokenSource(TimeOutMilliseconds);
 
                 Task[] tasks = new Task[10];
@@ -336,7 +342,8 @@ namespace System.Net.WebSockets.Client.Tests
                     TimeOutMilliseconds,
                     _output
                 )
-            ) {
+            )
+            {
                 var cts = new CancellationTokenSource(TimeOutMilliseconds);
 
                 Task[] tasks = new Task[2];
@@ -410,7 +417,8 @@ namespace System.Net.WebSockets.Client.Tests
                     TimeOutMilliseconds,
                     _output
                 )
-            ) {
+            )
+            {
                 var cts = new CancellationTokenSource(TimeOutMilliseconds);
                 string message = "hello";
                 await SendAsync(
@@ -460,7 +468,8 @@ namespace System.Net.WebSockets.Client.Tests
                     TimeOutMilliseconds,
                     _output
                 )
-            ) {
+            )
+            {
                 var rand = new Random();
                 var ctsDefault = new CancellationTokenSource(TimeOutMilliseconds);
 
@@ -485,7 +494,8 @@ namespace System.Net.WebSockets.Client.Tests
                         ushort.MaxValue + 1,
                         ushort.MaxValue * 2
                     }
-                ) {
+                )
+                {
                     byte[] sendBuffer = new byte[bufferSize];
                     rand.NextBytes(sendBuffer);
                     await SendAsync(
@@ -539,7 +549,8 @@ namespace System.Net.WebSockets.Client.Tests
                     TimeOutMilliseconds,
                     _output
                 )
-            ) {
+            )
+            {
                 var ctsDefault = new CancellationTokenSource(TimeOutMilliseconds);
 
                 byte[] receiveBuffer = new byte[10];
@@ -683,7 +694,8 @@ namespace System.Net.WebSockets.Client.Tests
                     TimeOutMilliseconds,
                     _output
                 )
-            ) {
+            )
+            {
                 var ctsDefault = new CancellationTokenSource(TimeOutMilliseconds);
 
                 // Do a 0-byte receive.  It shouldn't complete yet.

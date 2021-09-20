@@ -20,13 +20,15 @@ namespace Roslyn.Test.PdbUtilities
             ISymUnmanagedReader3 reader,
             MethodDefinitionHandle handle,
             int methodVersion
-        ) {
+        )
+        {
             return reader.GetCustomDebugInfo(MetadataTokens.GetToken(handle), methodVersion);
         }
 
         public static ImmutableArray<byte> GetEditAndContinueLocalSlotMapRecord(
             byte[] customDebugInfoBlob
-        ) {
+        )
+        {
             return CustomDebugInfoReader.TryGetCustomDebugInfoRecord(
                 customDebugInfoBlob,
                 CustomDebugInfoKind.EditAndContinueLocalSlotMap
@@ -35,7 +37,8 @@ namespace Roslyn.Test.PdbUtilities
 
         public static ImmutableArray<byte> GetEditAndContinueLambdaMapRecord(
             byte[] customDebugInfoBlob
-        ) {
+        )
+        {
             return CustomDebugInfoReader.TryGetCustomDebugInfoRecord(
                 customDebugInfoBlob,
                 CustomDebugInfoKind.EditAndContinueLambdaMap

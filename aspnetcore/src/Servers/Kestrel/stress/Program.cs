@@ -126,7 +126,8 @@ public class Program
         bool aspnetLog,
         bool listOps,
         int seed
-    ) {
+    )
+    {
         // Handle command-line arguments.
         EventListener listener =
             logPath == null
@@ -249,7 +250,8 @@ public class Program
                         {
                             Version = httpVersion
                         }
-                    ) {
+                    )
+                    {
                         var cts = new CancellationTokenSource();
                         Task<HttpResponseMessage> t = ctx.HttpClient.SendAsync(
                             req,
@@ -282,7 +284,8 @@ public class Program
                             {
                                 Version = httpVersion
                             }
-                        ) {
+                        )
+                        {
                             await ctx.HttpClient.SendAsync(req);
                         }
                         throw new Exception("Completed unexpectedly");
@@ -310,7 +313,8 @@ public class Program
                                     if (
                                         e.InnerException.Message.Contains("INTERNAL_ERROR")
                                         || e.InnerException.Message.Contains("CANCEL")
-                                    ) {
+                                    )
+                                    {
                                         return;
                                     }
                                     break;
@@ -363,7 +367,8 @@ public class Program
                             req,
                             HttpCompletionOption.ResponseHeadersRead
                         )
-                    ) {
+                    )
+                    {
                         ValidateResponse(m, httpVersion);
                         ValidateContent(content, await m.Content.ReadAsStringAsync());
                     }
@@ -390,7 +395,8 @@ public class Program
                             req,
                             HttpCompletionOption.ResponseHeadersRead
                         )
-                    ) {
+                    )
+                    {
                         ValidateResponse(m, httpVersion);
                         ValidateContent(content, await m.Content.ReadAsStringAsync());
                     }
@@ -409,14 +415,16 @@ public class Program
                             Version = httpVersion,
                             Content = new StringContent(content)
                         }
-                    ) {
+                    )
+                    {
                         req.Headers.ExpectContinue = true;
                         using (
                             HttpResponseMessage m = await ctx.HttpClient.SendAsync(
                                 req,
                                 HttpCompletionOption.ResponseHeadersRead
                             )
-                        ) {
+                        )
+                        {
                             ValidateResponse(m, httpVersion);
                             ValidateContent(content, await m.Content.ReadAsStringAsync());
                         }
@@ -436,7 +444,8 @@ public class Program
                             Version = httpVersion,
                             Content = new StringContent(content)
                         }
-                    ) {
+                    )
+                    {
                         var cts = new CancellationTokenSource();
                         req.Content = new CancelableContent(cts.Token);
                         Task<HttpResponseMessage> t = ctx.HttpClient.SendAsync(
@@ -860,7 +869,8 @@ public class Program
                                                 && hre.InnerException is SocketException se
                                                 && se.SocketErrorCode
                                                     == SocketError.AddressAlreadyInUse
-                                            ) {
+                                            )
+                                            {
                                                 Interlocked.Increment(ref reuseAddressFailure);
                                             }
                                             else
@@ -943,7 +953,8 @@ public class Program
         protected override async Task SerializeToStreamAsync(
             Stream stream,
             TransportContext context
-        ) {
+        )
+        {
             await stream.WriteAsync(new byte[] { 1, 2, 3 });
 
             var tcs = new TaskCompletionSource<bool>(
@@ -991,7 +1002,8 @@ public class Program
         protected override async Task SerializeToStreamAsync(
             Stream stream,
             TransportContext context
-        ) {
+        )
+        {
             for (int i = 0; i < _buffer.Length; i++)
             {
                 await stream.WriteAsync(_buffer.AsMemory(i, 1));

@@ -43,7 +43,8 @@ namespace Microsoft.AspNetCore.Razor.Language
             if (
                 FileKinds.IsComponent(codeDocument.GetFileKind())
                 && (parserOptions == null || parserOptions.FeatureFlags.AllowComponentFileKind)
-            ) {
+            )
+            {
                 codeDocument.TryComputeNamespace(
                     fallbackToRootNamespace: true,
                     out var currentNamespace
@@ -97,7 +98,8 @@ namespace Microsoft.AspNetCore.Razor.Language
             TagHelperDescriptor descriptor,
             string typePattern,
             string assemblyName
-        ) {
+        )
+        {
             if (!string.Equals(descriptor.AssemblyName, assemblyName, StringComparison.Ordinal))
             {
                 return false;
@@ -188,14 +190,16 @@ namespace Microsoft.AspNetCore.Razor.Language
                                     addTagHelper.TypePattern,
                                     addTagHelper.AssemblyName
                                 )
-                            ) {
+                            )
+                            {
                                 Matches.Add(tagHelper);
                             }
                         }
                     }
                     else if (
                         context.ChunkGenerator is RemoveTagHelperChunkGenerator removeTagHelper
-                    ) {
+                    )
+                    {
                         if (removeTagHelper.AssemblyName == null)
                         {
                             // Skip this one, it's an error
@@ -217,7 +221,8 @@ namespace Microsoft.AspNetCore.Razor.Language
                                     removeTagHelper.TypePattern,
                                     removeTagHelper.AssemblyName
                                 )
-                            ) {
+                            )
+                            {
                                 Matches.Remove(tagHelper);
                             }
                         }
@@ -225,7 +230,8 @@ namespace Microsoft.AspNetCore.Razor.Language
                     else if (
                         context.ChunkGenerator
                         is TagHelperPrefixDirectiveChunkGenerator tagHelperPrefix
-                    ) {
+                    )
+                    {
                         if (!string.IsNullOrEmpty(tagHelperPrefix.DirectiveText))
                         {
                             // We only expect to see a single one of these per file, but that's enforced at another level.
@@ -238,7 +244,8 @@ namespace Microsoft.AspNetCore.Razor.Language
             private bool AssemblyContainsTagHelpers(
                 string assemblyName,
                 IReadOnlyList<TagHelperDescriptor> tagHelpers
-            ) {
+            )
+            {
                 for (var i = 0; i < tagHelpers.Count; i++)
                 {
                     if (
@@ -247,7 +254,8 @@ namespace Microsoft.AspNetCore.Razor.Language
                             assemblyName,
                             StringComparison.Ordinal
                         )
-                    ) {
+                    )
+                    {
                         return true;
                     }
                 }
@@ -266,7 +274,8 @@ namespace Microsoft.AspNetCore.Razor.Language
                 string filePath,
                 IReadOnlyList<TagHelperDescriptor> tagHelpers,
                 string currentNamespace
-            ) {
+            )
+            {
                 _filePath = filePath;
 
                 // We don't want to consider non-component tag helpers in a component document.
@@ -344,7 +353,8 @@ namespace Microsoft.AspNetCore.Razor.Language
                     }
                     else if (
                         context.ChunkGenerator is RemoveTagHelperChunkGenerator removeTagHelper
-                    ) {
+                    )
+                    {
                         // Make sure this node exists in the file we're parsing and not in its imports.
                         if (_filePath.Equals(_source.FilePath, StringComparison.Ordinal))
                         {
@@ -358,7 +368,8 @@ namespace Microsoft.AspNetCore.Razor.Language
                     else if (
                         context.ChunkGenerator
                         is TagHelperPrefixDirectiveChunkGenerator tagHelperPrefix
-                    ) {
+                    )
+                    {
                         // Make sure this node exists in the file we're parsing and not in its imports.
                         if (_filePath.Equals(_source.FilePath, StringComparison.Ordinal))
                         {
@@ -372,7 +383,8 @@ namespace Microsoft.AspNetCore.Razor.Language
                     else if (
                         context.ChunkGenerator is AddImportChunkGenerator usingStatement
                         && !usingStatement.IsStatic
-                    ) {
+                    )
+                    {
                         // Get the namespace from the using statement.
                         var @namespace = usingStatement.ParsedNamespace;
                         if (@namespace.Contains('='))
@@ -417,7 +429,8 @@ namespace Microsoft.AspNetCore.Razor.Language
                 if (
                     !TrySplitNamespaceAndType(typeName, out var namespaceTextSpan, out var _)
                     || namespaceTextSpan.Length == 0
-                ) {
+                )
+                {
                     // Either the typeName is not the full type name or this type is at the top level.
                     return true;
                 }
@@ -443,7 +456,8 @@ namespace Microsoft.AspNetCore.Razor.Language
                 if (
                     !TrySplitNamespaceAndType(typeName, out var namespaceTextSpan, out var _)
                     || namespaceTextSpan.Length == 0
-                ) {
+                )
+                {
                     // Either the typeName is not the full type name or this type is at the top level.
                     return true;
                 }
@@ -469,7 +483,8 @@ namespace Microsoft.AspNetCore.Razor.Language
                             currentNamespaceSegments[i],
                             StringComparison.Ordinal
                         )
-                    ) {
+                    )
+                    {
                         return false;
                     }
                 }
@@ -503,7 +518,8 @@ namespace Microsoft.AspNetCore.Razor.Language
                 string fullTypeName,
                 out TextSpan @namespace,
                 out TextSpan typeName
-            ) {
+            )
+            {
                 @namespace = default;
                 typeName = default;
 

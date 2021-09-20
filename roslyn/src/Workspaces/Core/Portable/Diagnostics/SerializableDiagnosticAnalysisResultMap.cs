@@ -26,7 +26,8 @@ namespace Microsoft.CodeAnalysis.Diagnostics
         public SerializableDiagnosticAnalysisResults(
             ImmutableArray<(string analyzerId, SerializableDiagnosticMap diagnosticMap)> diagnostics,
             ImmutableArray<(string analyzerId, AnalyzerTelemetryInfo)> telemetry
-        ) {
+        )
+        {
             Diagnostics = diagnostics;
             Telemetry = telemetry;
         }
@@ -52,7 +53,8 @@ namespace Microsoft.CodeAnalysis.Diagnostics
             ImmutableArray<(DocumentId, ImmutableArray<DiagnosticData>)> semantic,
             ImmutableArray<(DocumentId, ImmutableArray<DiagnosticData>)> nonLocal,
             ImmutableArray<DiagnosticData> other
-        ) {
+        )
+        {
             Syntax = syntax;
             Semantic = semantic;
             NonLocal = nonLocal;

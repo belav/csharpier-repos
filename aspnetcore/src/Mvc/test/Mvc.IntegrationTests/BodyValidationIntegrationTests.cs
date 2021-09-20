@@ -605,7 +605,8 @@ namespace Microsoft.AspNetCore.Mvc.IntegrationTests
         public async Task FromBodyWithEmptyBody_JsonFormatterAddsModelErrorWhenExpected(
             bool allowEmptyInputInBodyModelBindingSetting,
             bool expectedModelStateIsValid
-        ) {
+        )
+        {
             // Arrange
             var parameter = new ParameterDescriptor
             {
@@ -676,7 +677,8 @@ namespace Microsoft.AspNetCore.Mvc.IntegrationTests
         [InlineData("{}")]
         public async Task FromBodyOnTopLevelProperty_RequiredOnSubProperty_AddsModelStateError(
             string inputText
-        ) {
+        )
+        {
             // Arrange
             var parameterBinder = ModelBindingTestHelper.GetParameterBinder();
             var parameter = new ParameterDescriptor
@@ -734,7 +736,8 @@ namespace Microsoft.AspNetCore.Mvc.IntegrationTests
         [InlineData("{}")]
         public async Task FromBodyOnProperty_Succeeds_IgnoresRequiredOnValueTypeSubProperty(
             string inputText
-        ) {
+        )
+        {
             // Arrange
             var parameterBinder = ModelBindingTestHelper.GetParameterBinder();
             var parameter = new ParameterDescriptor
@@ -873,7 +876,8 @@ namespace Microsoft.AspNetCore.Mvc.IntegrationTests
 
         private Dictionary<string, string> CreateValidationDictionary(
             ModelStateDictionary modelState
-        ) {
+        )
+        {
             var result = new Dictionary<string, string>();
             foreach (var item in modelState)
             {

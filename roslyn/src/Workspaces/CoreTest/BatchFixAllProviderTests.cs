@@ -160,7 +160,8 @@ class TestClass {{
                 TextSpan sourceSpan,
                 int replacement,
                 CancellationToken cancellationToken
-            ) {
+            )
+            {
                 var tree = await document.GetSyntaxTreeAsync(cancellationToken);
                 var root = await tree.GetRootAsync(cancellationToken);
                 var token = root.FindToken(sourceSpan.Start);
@@ -182,7 +183,8 @@ class TestClass {{
             public CSharpTest(
                 ImmutableArray<ImmutableArray<int>> replacementGroups,
                 bool nested = false
-            ) {
+            )
+            {
                 _replacementGroups = replacementGroups;
                 _nested = nested;
             }

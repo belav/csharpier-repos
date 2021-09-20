@@ -45,7 +45,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                 ParseOptions options,
                 Encoding encoding,
                 SyntaxNode root
-            ) {
+            )
+            {
                 options ??= GetDefaultParseOptions();
                 return CSharpSyntaxTree.Create(
                     (CSharpSyntaxNode)root,
@@ -60,7 +61,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                 ParseOptions options,
                 SourceText text,
                 CancellationToken cancellationToken
-            ) {
+            )
+            {
                 options ??= GetDefaultParseOptions();
                 return SyntaxFactory.ParseSyntaxTree(
                     text,
@@ -87,7 +89,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                 ValueSource<TextAndVersion> text,
                 Encoding encoding,
                 SyntaxNode root
-            ) {
+            )
+            {
                 System.Diagnostics.Debug.Assert(CanCreateRecoverableTree(root));
                 return RecoverableSyntaxTree.CreateRecoverableTree(
                     this,

@@ -12,7 +12,8 @@ namespace Microsoft.AspNetCore.Razor.Language
         public DefaultRazorProjectEngineBuilder(
             RazorConfiguration configuration,
             RazorProjectFileSystem fileSystem
-        ) {
+        )
+        {
             if (fileSystem == null)
             {
                 throw new ArgumentNullException(nameof(fileSystem));

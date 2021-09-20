@@ -22,7 +22,8 @@ namespace CustomPolicyProvider
         protected override Task HandleRequirementAsync(
             AuthorizationHandlerContext context,
             MinimumAgeRequirement requirement
-        ) {
+        )
+        {
             // Log as a warning so that it's very clear in sample output which authorization policies
             // (and requirements/handlers) are in use
             _logger.LogWarning(

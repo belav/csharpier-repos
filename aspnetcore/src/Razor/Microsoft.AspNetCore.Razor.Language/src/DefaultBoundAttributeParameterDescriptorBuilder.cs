@@ -18,7 +18,8 @@ namespace Microsoft.AspNetCore.Razor.Language
         public DefaultBoundAttributeParameterDescriptorBuilder(
             DefaultBoundAttributeDescriptorBuilder parent,
             string kind
-        ) {
+        )
+        {
             _parent = parent;
             _kind = kind;
 
@@ -102,7 +103,8 @@ namespace Microsoft.AspNetCore.Razor.Language
                     if (
                         char.IsWhiteSpace(character)
                         || HtmlConventions.InvalidNonWhitespaceHtmlCharacters.Contains(character)
-                    ) {
+                    )
+                    {
                         var diagnostic =
                             RazorDiagnosticFactory.CreateTagHelper_InvalidBoundAttributeParameterName(
                                 _parent.Name,

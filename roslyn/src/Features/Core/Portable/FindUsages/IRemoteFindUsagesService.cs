@@ -199,7 +199,8 @@ namespace Microsoft.CodeAnalysis.FindUsages
         public async ValueTask<DocumentSpan> RehydrateAsync(
             Solution solution,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var document =
                 solution.GetDocument(DocumentId)
                 ?? await solution.GetSourceGeneratedDocumentAsync(DocumentId, cancellationToken)
@@ -249,7 +250,8 @@ namespace Microsoft.CodeAnalysis.FindUsages
             ImmutableDictionary<string, string> properties,
             ImmutableDictionary<string, string> displayableProperties,
             bool displayIfNoReferences
-        ) {
+        )
+        {
             Id = id;
             Tags = tags;
             DisplayParts = displayParts;
@@ -277,7 +279,8 @@ namespace Microsoft.CodeAnalysis.FindUsages
         public async ValueTask<DefinitionItem> RehydrateAsync(
             Solution solution,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var sourceSpans = await SourceSpans.SelectAsArrayAsync(
                     (ss, cancellationToken) => ss.RehydrateAsync(solution, cancellationToken),
                     cancellationToken
@@ -317,7 +320,8 @@ namespace Microsoft.CodeAnalysis.FindUsages
             SerializableDocumentSpan sourceSpan,
             SymbolUsageInfo symbolUsageInfo,
             ImmutableDictionary<string, string> additionalProperties
-        ) {
+        )
+        {
             DefinitionId = definitionId;
             SourceSpan = sourceSpan;
             SymbolUsageInfo = symbolUsageInfo;

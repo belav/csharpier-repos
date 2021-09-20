@@ -16,7 +16,8 @@ namespace Microsoft.AspNetCore.Razor.Language.Extensions
         public string GetIdentifier(
             RazorCodeDocument codeDocument,
             RazorSourceDocument sourceDocument
-        ) {
+        )
+        {
             if (codeDocument == null)
             {
                 throw new ArgumentNullException(nameof(codeDocument));

@@ -101,7 +101,8 @@ namespace Microsoft.CodeAnalysis.Editor.CommandHandlers
         CommandState IChainedCommandHandler<TypeCharCommandArgs>.GetCommandState(
             TypeCharCommandArgs args,
             Func<CommandState> nextHandler
-        ) {
+        )
+        {
             AssertIsForeground();
             return GetCommandStateWorker(args, nextHandler);
         }
@@ -110,7 +111,8 @@ namespace Microsoft.CodeAnalysis.Editor.CommandHandlers
             TypeCharCommandArgs args,
             Action nextHandler,
             CommandExecutionContext context
-        ) {
+        )
+        {
             AssertIsForeground();
             ExecuteCommandWorker(args, nextHandler, context);
         }
@@ -118,7 +120,8 @@ namespace Microsoft.CodeAnalysis.Editor.CommandHandlers
         CommandState IChainedCommandHandler<InvokeSignatureHelpCommandArgs>.GetCommandState(
             InvokeSignatureHelpCommandArgs args,
             Func<CommandState> nextHandler
-        ) {
+        )
+        {
             AssertIsForeground();
             return CommandState.Available;
         }
@@ -127,7 +130,8 @@ namespace Microsoft.CodeAnalysis.Editor.CommandHandlers
             InvokeSignatureHelpCommandArgs args,
             Action nextHandler,
             CommandExecutionContext context
-        ) {
+        )
+        {
             AssertIsForeground();
             ExecuteCommandWorker(args, nextHandler, context);
         }

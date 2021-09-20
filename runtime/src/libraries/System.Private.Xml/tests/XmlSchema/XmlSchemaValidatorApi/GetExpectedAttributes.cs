@@ -75,7 +75,8 @@ namespace System.Xml.Tests
         [InlineData("FixedRequired")]
         public void CallOnElementWith_Required_Optional_Default_Fixed_FixedRequired_AttributesAfterValidateElement(
             string attrType
-        ) {
+        )
+        {
             XmlSchemaValidator val = CreateValidator(XSDFILE_GET_EXPECTED_ATTRIBUTES);
             XmlSchemaInfo info = new XmlSchemaInfo();
 
@@ -102,7 +103,8 @@ namespace System.Xml.Tests
         public void Call_Before_After_GetUnspecifiedDefaultAttributeWhenJust_Required_Optional_Fixed_FixedRequired_AttributesAreLeft(
             string attrType,
             string callOrder
-        ) {
+        )
+        {
             XmlSchemaValidator val = CreateValidator(XSDFILE_GET_EXPECTED_ATTRIBUTES);
             XmlSchemaInfo info = new XmlSchemaInfo();
             ArrayList def = new ArrayList();
@@ -128,7 +130,8 @@ namespace System.Xml.Tests
         [InlineData("after")]
         public void Call_Before_After_GetUnspecifiedDefaultAttributesWhenJustDefaultAttributesAreLeft(
             string callOrder
-        ) {
+        )
+        {
             XmlSchemaValidator val = CreateValidator(XSDFILE_GET_EXPECTED_ATTRIBUTES);
             XmlSchemaInfo info = new XmlSchemaInfo();
             ArrayList def = new ArrayList();

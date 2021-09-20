@@ -20,7 +20,8 @@ namespace Microsoft.AspNetCore.Mvc.ApiExplorer
         /// <param name="responseMetadataProviders">The sequence of <see cref="IApiResponseMetadataProvider"/> that are associated with the action.</param>
         public ApiConventionResult(
             IReadOnlyList<IApiResponseMetadataProvider> responseMetadataProviders
-        ) {
+        )
+        {
             ResponseMetadataProviders =
                 responseMetadataProviders
                 ?? throw new ArgumentNullException(nameof(responseMetadataProviders));
@@ -35,7 +36,8 @@ namespace Microsoft.AspNetCore.Mvc.ApiExplorer
             MethodInfo method,
             ApiConventionTypeAttribute[] apiConventionAttributes,
             [NotNullWhen(true)] out ApiConventionResult? result
-        ) {
+        )
+        {
             var apiConventionMethodAttribute =
                 method.GetCustomAttribute<ApiConventionMethodAttribute>(inherit: true);
             var conventionMethod = apiConventionMethodAttribute?.Method;
@@ -61,7 +63,8 @@ namespace Microsoft.AspNetCore.Mvc.ApiExplorer
         private static MethodInfo? GetConventionMethod(
             MethodInfo method,
             ApiConventionTypeAttribute[] apiConventionAttributes
-        ) {
+        )
+        {
             foreach (var attribute in apiConventionAttributes)
             {
                 var conventionMethods = attribute.ConventionType.GetMethods(

@@ -130,7 +130,8 @@ namespace JIT.HardwareIntrinsics.Arm
                     (alignment != 16 && alignment != 8)
                     || (alignment * 2) < sizeOfinArray
                     || (alignment * 2) < sizeOfoutArray
-                ) {
+                )
+                {
                     throw new ArgumentException("Invalid value of alignment");
                 }
 
@@ -189,7 +190,8 @@ namespace JIT.HardwareIntrinsics.Arm
 
             public void RunStructFldScenario(
                 ImmUnaryOpTest__ShiftRightArithmeticRoundedNarrowingSaturateScalar_Vector64_Int32_64 testClass
-            ) {
+            )
+            {
                 var result = AdvSimd.Arm64.ShiftRightArithmeticRoundedNarrowingSaturateScalar(
                     _fld,
                     32
@@ -201,7 +203,8 @@ namespace JIT.HardwareIntrinsics.Arm
 
             public void RunStructFldScenario_Load(
                 ImmUnaryOpTest__ShiftRightArithmeticRoundedNarrowingSaturateScalar_Vector64_Int32_64 testClass
-            ) {
+            )
+            {
                 fixed (Vector64<Int64>* pFld = &_fld)
                 {
                     var result = AdvSimd.Arm64.ShiftRightArithmeticRoundedNarrowingSaturateScalar(
@@ -515,7 +518,8 @@ namespace JIT.HardwareIntrinsics.Arm
             Vector64<Int64> firstOp,
             void* result,
             [CallerMemberName] string method = ""
-        ) {
+        )
+        {
             Int64[] inArray = new Int64[Op1ElementCount];
             Int32[] outArray = new Int32[RetElementCount];
 
@@ -533,7 +537,8 @@ namespace JIT.HardwareIntrinsics.Arm
             void* firstOp,
             void* result,
             [CallerMemberName] string method = ""
-        ) {
+        )
+        {
             Int64[] inArray = new Int64[Op1ElementCount];
             Int32[] outArray = new Int32[RetElementCount];
 
@@ -555,7 +560,8 @@ namespace JIT.HardwareIntrinsics.Arm
             Int64[] firstOp,
             Int32[] result,
             [CallerMemberName] string method = ""
-        ) {
+        )
+        {
             bool succeeded = true;
 
             if (Helpers.ShiftRightArithmeticRoundedNarrowingSaturate(firstOp[0], Imm) != result[0])

@@ -183,7 +183,8 @@ namespace Castle.Components.DictionaryAdapter.Xml
             IXmlKnownTypeMap knownTypes,
             IXmlNamespaceSource namespaces,
             CursorFlags flags
-        ) {
+        )
+        {
             return node.SelectChildren(knownTypes, namespaces, flags);
         }
 
@@ -197,7 +198,8 @@ namespace Castle.Components.DictionaryAdapter.Xml
             IXmlIncludedTypeMap knownTypes,
             IXmlNamespaceSource namespaces,
             CursorFlags flags
-        ) {
+        )
+        {
             return node.Select(path, knownTypes, namespaces, flags);
         }
 

@@ -441,7 +441,8 @@ namespace System.ComponentModel.Composition
             Expression<Func<ExportDefinition, bool>> constraint,
             string contractName,
             IEnumerable<KeyValuePair<string, Type>> requiredMetadata
-        ) {
+        )
+        {
             Assert.NotNull(constraint);
 
             string contractNameResult = null;

@@ -81,13 +81,15 @@ namespace Microsoft.AspNetCore.Mvc.Razor.Extensions
             protected override void ExecuteCore(
                 RazorCodeDocument codeDocument,
                 DocumentIntermediateNode documentNode
-            ) {
+            )
+            {
                 if (
                     documentNode.DocumentKind
                         != RazorPageDocumentClassifierPass.RazorPageDocumentKind
                     && documentNode.DocumentKind
                         != MvcViewDocumentClassifierPass.MvcViewDocumentKind
-                ) {
+                )
+                {
                     // Not a MVC file. Skip.
                     return;
                 }
@@ -124,7 +126,8 @@ namespace Microsoft.AspNetCore.Mvc.Razor.Extensions
 
             public override void VisitNamespaceDeclaration(
                 NamespaceDeclarationIntermediateNode node
-            ) {
+            )
+            {
                 if (Namespace == null)
                 {
                     Namespace = node;

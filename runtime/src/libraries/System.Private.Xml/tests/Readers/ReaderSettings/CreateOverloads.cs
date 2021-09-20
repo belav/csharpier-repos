@@ -251,7 +251,8 @@ namespace System.Xml.Tests
                 Stream input,
                 XmlReaderSettings settings,
                 XmlParserContext parserContext
-            ) {
+            )
+            {
                 XmlReader reader = null;
                 try
                 {
@@ -298,7 +299,8 @@ namespace System.Xml.Tests
                 TextReader input,
                 XmlReaderSettings settings,
                 XmlParserContext parserContext
-            ) {
+            )
+            {
                 XmlReader reader = null;
                 try
                 {
@@ -323,7 +325,8 @@ namespace System.Xml.Tests
                 string url,
                 XmlReaderSettings settings,
                 XmlParserContext context
-            ) {
+            )
+            {
                 XmlReader reader = null;
                 try
                 {

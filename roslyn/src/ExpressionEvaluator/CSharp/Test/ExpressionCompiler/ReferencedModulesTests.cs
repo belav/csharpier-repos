@@ -76,7 +76,8 @@ namespace Microsoft.CodeAnalysis.CSharp.ExpressionEvaluator.UnitTests
                 var runtime = CreateRuntimeInstance(
                     new[] { moduleMscorlib, moduleA1, moduleA2, moduleB1, moduleB2, moduleC }
                 )
-            ) {
+            )
+            {
                 var stateB2 = GetContextState(runtime, "B2.M");
 
                 // B2.M with missing A1.
@@ -526,7 +527,8 @@ IL_0005:  ret
                 var runtime = CreateRuntimeInstance(
                     new[] { moduleMscorlib, moduleA1, moduleA2, moduleA3, moduleB1 }
                 )
-            ) {
+            )
+            {
                 var stateB = GetContextState(runtime, "B.M");
 
                 // Expected version of A.
@@ -911,7 +913,8 @@ IL_0005:  ret
                 var runtime = CreateRuntimeInstance(
                     new[] { moduleMscorlib, moduleA1, moduleA2, moduleB1 }
                 )
-            ) {
+            )
+            {
                 var blocks = runtime.Modules.SelectAsArray(m => m.MetadataBlock);
                 var stateA1 = GetContextState(runtime, "A1.M");
                 var stateA2 = GetContextState(runtime, "A2.M");
@@ -1015,7 +1018,8 @@ IL_0005:  ret
         private static void VerifyAppDomainMetadataContext(
             AppDomain appDomain,
             params Guid[] moduleVersionIds
-        ) {
+        )
+        {
             ExpressionCompilerTestHelpers.VerifyAppDomainMetadataContext(
                 appDomain.GetMetadataContext(),
                 moduleVersionIds
@@ -1839,7 +1843,8 @@ IL_0005:  ret
             string assemblyName,
             string source,
             params MetadataReference[] references
-        ) {
+        )
+        {
             var compilation = CreateCompilationWithMscorlib40AndSystemCore(
                 source,
                 options: TestOptions.DebugDll,
@@ -1856,7 +1861,8 @@ IL_0005:  ret
             string source,
             CSharpCompilationOptions options,
             params MetadataReference[] references
-        ) {
+        )
+        {
             var compilation = CreateCompilation(
                 identity,
                 new[] { source },
@@ -1872,7 +1878,8 @@ IL_0005:  ret
             MetadataReference target,
             ImmutableArray<MetadataReference> references,
             ImmutableArray<AssemblyIdentity> expectedIdentities
-        ) {
+        )
+        {
             Assert.True(references.Contains(target));
             var modules = references.SelectAsArray(r => r.ToModuleInstance());
             using (var runtime = new RuntimeInstance(modules, DebugInformationFormat.Pdb))
@@ -1919,7 +1926,8 @@ IL_0005:  ret
         private static void VerifyResolutionRequests(
             EvaluationContext context,
             params (AssemblyIdentity, AssemblyIdentity, int)[] expectedRequests
-        ) {
+        )
+        {
             ExpressionCompilerTestHelpers.VerifyResolutionRequests(
                 (EEMetadataReferenceResolver)context.Compilation.Options.MetadataReferenceResolver,
                 expectedRequests
@@ -2679,7 +2687,8 @@ namespace System
                     var runtime = RuntimeInstance.Create(
                         new[] { comp.ToModuleInstance(), moduleInstance }
                     )
-                ) {
+                )
+                {
                     string error;
                     var context = CreateMethodContext(runtime, "C.M");
 
@@ -2856,7 +2865,8 @@ namespace System
                         MscorlibRef.ToModuleInstance()
                     }
                 )
-            ) {
+            )
+            {
                 string error;
                 var context = CreateMethodContext(runtime, "C.M");
                 var testData = new CompilationTestData();
@@ -2879,7 +2889,8 @@ namespace System
         private static ExpressionCompiler.CreateContextDelegate CreateTypeContextFactory(
             Guid moduleVersionId,
             int typeToken
-        ) {
+        )
+        {
             return (blocks, useReferencedModulesOnly) =>
                 EvaluationContext.CreateTypeContext(
                     ToCompilation(blocks, useReferencedModulesOnly, moduleVersionId),
@@ -2893,7 +2904,8 @@ namespace System
             ISymUnmanagedReader symReader,
             int methodToken,
             int localSignatureToken
-        ) {
+        )
+        {
             return (blocks, useReferencedModulesOnly) =>
                 EvaluationContext.CreateMethodContext(
                     ToCompilation(blocks, useReferencedModulesOnly, moduleVersionId),
@@ -2910,7 +2922,8 @@ namespace System
             ImmutableArray<MetadataBlock> blocks,
             bool useReferencedModulesOnly,
             Guid moduleVersionId
-        ) {
+        )
+        {
             return blocks.ToCompilation(
                 moduleVersionId,
                 useReferencedModulesOnly
@@ -2930,20 +2943,23 @@ namespace System
                 CommonPEModuleBuilder builder,
                 EmitOptions emitOptions,
                 INamespaceTypeDefinition objectType
-            ) : base(
-                (SourceModuleSymbol)builder.CommonSourceModule,
-                emitOptions,
-                builder.OutputKind,
-                builder.SerializationProperties,
-                builder.ManifestResources
-            ) {
+            )
+                : base(
+                    (SourceModuleSymbol)builder.CommonSourceModule,
+                    emitOptions,
+                    builder.OutputKind,
+                    builder.SerializationProperties,
+                    builder.ManifestResources
+                )
+            {
                 _builder = builder;
                 _objectType = new NamespaceTypeDefinitionNoBase(objectType);
             }
 
             public override IEnumerable<INamespaceTypeDefinition> GetTopLevelSourceTypeDefinitions(
                 EmitContext context
-            ) {
+            )
+            {
                 foreach (var type in base.GetTopLevelSourceTypeDefinitions(context))
                 {
                     yield return (type == _objectType.UnderlyingType) ? _objectType : type;

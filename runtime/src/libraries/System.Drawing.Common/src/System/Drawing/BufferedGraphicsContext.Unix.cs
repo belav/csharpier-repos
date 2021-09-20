@@ -41,7 +41,8 @@ namespace System.Drawing
             Graphics? targetGraphics,
             IntPtr targetDC,
             Rectangle targetRectangle
-        ) {
+        )
+        {
             BufferedGraphics graphics = new BufferedGraphics(
                 targetGraphics,
                 targetDC,

@@ -11,7 +11,8 @@ namespace Microsoft.Web.Mvc.ModelBinding
         public ModelValidatedEventArgs(
             ControllerContext controllerContext,
             ModelValidationNode parentNode
-        ) {
+        )
+        {
             if (controllerContext == null)
             {
                 throw new ArgumentNullException("controllerContext");

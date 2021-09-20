@@ -117,7 +117,8 @@ namespace System.Data
                     (_columnFromName.TryGetValue(name, out column))
                     && (column != null)
                     && (column.Namespace == ns)
-                ) {
+                )
+                {
                     return column;
                 }
 
@@ -390,7 +391,8 @@ namespace System.Data
             int oldLength,
             DataColumn[] newArray,
             int newLength
-        ) {
+        )
+        {
             // We're doing a smart diff of oldArray and newArray to find out what
             // should be removed.  We'll pass through oldArray and see if it exists
             // in newArray, and if not, do remove work.  newBase is an opt. in case
@@ -550,7 +552,8 @@ namespace System.Data
                         new ParentForeignKeyConstraintEnumerator(_table.DataSet, _table);
                     en.GetNext();
 
-                ) {
+                )
+                {
                     Constraint constraint = en.GetConstraint();
                     if (((ForeignKeyConstraint)constraint).ParentKey.ContainsColumn(column))
                         if (!fThrowException)
@@ -764,7 +767,8 @@ namespace System.Data
                 if (
                     (hashcode == 0 || column._hashCode == 0 || column._hashCode == hashcode)
                     && NamesEqual(column.ColumnName, name, false, _table.Locale) != 0
-                ) {
+                )
+                {
                     if (cachedI == -1)
                     {
                         cachedI = i;
@@ -897,7 +901,8 @@ namespace System.Data
             if (
                 (column == null)
                 && NamesEqual(name, MakeName(_defaultNameIndex), true, _table.Locale) != 0
-            ) {
+            )
+            {
                 do
                 {
                     _defaultNameIndex++;

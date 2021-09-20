@@ -96,7 +96,8 @@ namespace Microsoft.AspNetCore.Server.HttpSys
             int count,
             AsyncCallback? callback,
             object? state
-        ) {
+        )
+        {
             return _requestStream.BeginRead(buffer, offset, count, callback, state);
         }
 
@@ -110,7 +111,8 @@ namespace Microsoft.AspNetCore.Server.HttpSys
             int offset,
             int count,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             return _requestStream.ReadAsync(buffer, offset, count, cancellationToken);
         }
 
@@ -118,7 +120,8 @@ namespace Microsoft.AspNetCore.Server.HttpSys
             Stream destination,
             int bufferSize,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             return _requestStream.CopyToAsync(destination, bufferSize, cancellationToken);
         }
 
@@ -142,7 +145,8 @@ namespace Microsoft.AspNetCore.Server.HttpSys
             int count,
             AsyncCallback? callback,
             object? state
-        ) {
+        )
+        {
             return _responseStream.BeginWrite(buffer, offset, count, callback, state);
         }
 
@@ -156,7 +160,8 @@ namespace Microsoft.AspNetCore.Server.HttpSys
             int offset,
             int count,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             return _responseStream.WriteAsync(buffer, offset, count, cancellationToken);
         }
 

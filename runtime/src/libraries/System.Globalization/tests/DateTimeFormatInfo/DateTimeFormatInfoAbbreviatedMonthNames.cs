@@ -131,7 +131,8 @@ namespace System.Globalization.Tests
         [MemberData(nameof(AbbreviatedMonthNames_SetInvalidLength_TestData))]
         public void AbbreviatedMonthNames_SetNullValueInValues_ThrowsArgumentException(
             string[] value
-        ) {
+        )
+        {
             var format = new DateTimeFormatInfo();
             AssertExtensions.Throws<ArgumentException>(
                 "value",

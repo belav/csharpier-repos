@@ -20,7 +20,8 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.CodeActions
         public static void VerifyStandardProperty(
             DiagnosticAnalyzer analyzer,
             AnalyzerProperty property
-        ) {
+        )
+        {
             switch (property)
             {
                 case AnalyzerProperty.Title:
@@ -76,7 +77,8 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.CodeActions
                     if (
                         !descriptor.IsEnabledByDefault
                         || descriptor.DefaultSeverity == DiagnosticSeverity.Hidden
-                    ) {
+                    )
+                    {
                         // The message only displayed if either enabled and not hidden, or configurable
                         return true;
                     }
@@ -110,7 +112,8 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.CodeActions
             string defaultFileExtension,
             string? explicitEditorConfig,
             OptionsCollection options
-        ) {
+        )
+        {
             if (options.Count == 0)
             {
                 var result =

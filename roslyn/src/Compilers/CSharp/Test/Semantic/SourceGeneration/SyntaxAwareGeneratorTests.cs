@@ -1070,7 +1070,8 @@ class D
                                     if (
                                         ctx.Node is ClassDeclarationSyntax cds
                                         && cds.Identifier.Value?.ToString() == "C"
-                                    ) {
+                                    )
+                                    {
                                         // ensure we can query the semantic model for D
                                         var dType =
                                             ctx.SemanticModel.Compilation.GetTypeByMetadataName(

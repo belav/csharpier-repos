@@ -122,7 +122,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Options
             CheckBox checkbox,
             Option2<bool?> nullableOptionKey,
             Func<bool> onNullValue
-        ) {
+        )
+        {
             var binding = new Binding()
             {
                 Source = new OptionBinding<bool?>(OptionStore, nullableOptionKey),
@@ -139,7 +140,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Options
             CheckBox checkbox,
             PerLanguageOption2<bool> optionKey,
             string languageName
-        ) {
+        )
+        {
             var binding = new Binding()
             {
                 Source = new PerLanguageOptionBinding<bool>(OptionStore, optionKey, languageName),
@@ -156,7 +158,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Options
             PerLanguageOption2<bool?> nullableOptionKey,
             string languageName,
             Func<bool> onNullValue
-        ) {
+        )
+        {
             var binding = new Binding()
             {
                 Source = new PerLanguageOptionBinding<bool?>(
@@ -190,7 +193,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Options
             TextBox textBox,
             PerLanguageOption2<int> optionKey,
             string languageName
-        ) {
+        )
+        {
             var binding = new Binding()
             {
                 Source = new PerLanguageOptionBinding<int>(OptionStore, optionKey, languageName),
@@ -220,7 +224,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Options
             ComboBox comboBox,
             PerLanguageOption2<T> optionKey,
             string languageName
-        ) {
+        )
+        {
             var binding = new Binding()
             {
                 Source = new PerLanguageOptionBinding<T>(OptionStore, optionKey, languageName),
@@ -238,7 +243,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Options
             PerLanguageOption2<T> optionKey,
             T optionValue,
             string languageName
-        ) {
+        )
+        {
             var binding = new Binding()
             {
                 Source = new PerLanguageOptionBinding<T>(OptionStore, optionKey, languageName),
@@ -272,7 +278,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Options
             Type targetType,
             object parameter,
             System.Globalization.CultureInfo culture
-        ) {
+        )
+        {
             return value.Equals(parameter);
         }
 
@@ -281,7 +288,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Options
             Type targetType,
             object parameter,
             System.Globalization.CultureInfo culture
-        ) {
+        )
+        {
             return value.Equals(true) ? parameter : Binding.DoNothing;
         }
     }
@@ -309,7 +317,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Options
             Type targetType,
             object parameter,
             CultureInfo culture
-        ) {
+        )
+        {
             var index = (int)value;
             if (index == -1)
             {

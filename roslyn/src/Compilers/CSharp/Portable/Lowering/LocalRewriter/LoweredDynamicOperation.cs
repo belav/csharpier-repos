@@ -32,7 +32,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             BoundExpression siteInvocation,
             TypeSymbol resultType,
             ImmutableArray<LocalSymbol> temps
-        ) {
+        )
+        {
             _factory = factory;
             _resultType = resultType;
             _temps = temps;
@@ -45,7 +46,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             ImmutableArray<BoundExpression> loweredArguments,
             BoundExpression? loweredRight,
             TypeSymbol resultType
-        ) {
+        )
+        {
             var children = ArrayBuilder<BoundExpression>.GetInstance();
             children.AddOptional(loweredReceiver);
             children.AddRange(loweredArguments);
@@ -57,7 +59,8 @@ namespace Microsoft.CodeAnalysis.CSharp
         public static LoweredDynamicOperation Bad(
             TypeSymbol resultType,
             ImmutableArray<BoundExpression> children
-        ) {
+        )
+        {
             Debug.Assert(children.Length > 0);
             var bad = new BoundBadExpression(
                 children[0].Syntax,

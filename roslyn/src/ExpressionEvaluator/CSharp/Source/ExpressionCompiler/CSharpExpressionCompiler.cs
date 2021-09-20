@@ -50,7 +50,8 @@ namespace Microsoft.CodeAnalysis.CSharp.ExpressionEvaluator
             Guid moduleVersionId,
             int typeToken,
             bool useReferencedModulesOnly
-        ) {
+        )
+        {
             return CreateTypeContext(
                 appDomain,
                 ad => ad.GetMetadataContext<CSharpMetadataContext>(),
@@ -68,7 +69,8 @@ namespace Microsoft.CodeAnalysis.CSharp.ExpressionEvaluator
             Guid moduleVersionId,
             int typeToken,
             MakeAssemblyReferencesKind kind
-        ) {
+        )
+        {
             CSharpCompilation? compilation;
 
             if (kind == MakeAssemblyReferencesKind.DirectReferencesOnly)
@@ -120,7 +122,8 @@ namespace Microsoft.CodeAnalysis.CSharp.ExpressionEvaluator
             uint ilOffset,
             int localSignatureToken,
             bool useReferencedModulesOnly
-        ) {
+        )
+        {
             return CreateMethodContext(
                 appDomain,
                 ad => ad.GetMetadataContext<CSharpMetadataContext>(),
@@ -148,7 +151,8 @@ namespace Microsoft.CodeAnalysis.CSharp.ExpressionEvaluator
             uint ilOffset,
             int localSignatureToken,
             MakeAssemblyReferencesKind kind
-        ) {
+        )
+        {
             CSharpCompilation compilation;
             int offset = EvaluationContextBase.NormalizeILOffset(ilOffset);
 
@@ -187,7 +191,8 @@ namespace Microsoft.CodeAnalysis.CSharp.ExpressionEvaluator
                     && previousContext.MethodContextReuseConstraints.HasValue
                     && previousContext.MethodContextReuseConstraints.GetValueOrDefault()
                         .AreSatisfied(moduleVersionId, methodToken, methodVersion, offset)
-                ) {
+                )
+                {
                     return previousContext;
                 }
             }
@@ -232,7 +237,8 @@ namespace Microsoft.CodeAnalysis.CSharp.ExpressionEvaluator
         internal override ImmutableArray<MetadataBlock> GetMetadataBlocks(
             DkmClrAppDomain appDomain,
             DkmClrRuntimeInstance runtimeInstance
-        ) {
+        )
+        {
             var previous = appDomain.GetMetadataContext<CSharpMetadataContext>();
             return runtimeInstance.GetMetadataBlocks(appDomain, previous.MetadataBlocks);
         }

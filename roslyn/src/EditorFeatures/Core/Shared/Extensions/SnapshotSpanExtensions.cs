@@ -21,7 +21,8 @@ namespace Microsoft.CodeAnalysis.Editor.Shared.Extensions
             out int startCharacterIndex,
             out int endLineNumber,
             out int endCharacterIndex
-        ) {
+        )
+        {
             snapshotSpan.Snapshot.GetLineAndCharacter(
                 snapshotSpan.Span.Start,
                 out startLineNumber,

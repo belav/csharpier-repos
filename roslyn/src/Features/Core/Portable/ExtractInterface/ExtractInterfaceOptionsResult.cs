@@ -30,7 +30,8 @@ namespace Microsoft.CodeAnalysis.ExtractInterface
             string interfaceName,
             string fileName,
             ExtractLocation location
-        ) {
+        )
+        {
             IsCancelled = isCancelled;
             IncludedMembers = includedMembers;
             InterfaceName = interfaceName;

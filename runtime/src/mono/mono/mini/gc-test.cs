@@ -712,7 +712,8 @@ class Tests
         int f,
         object o,
         ref string s
-    ) {
+    )
+    {
         GC.Collect(1);
         o.GetHashCode();
         s.GetHashCode();

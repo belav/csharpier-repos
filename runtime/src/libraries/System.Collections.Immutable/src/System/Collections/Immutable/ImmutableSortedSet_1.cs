@@ -355,7 +355,8 @@ namespace System.Collections.Immutable
                     other.TryGetCount(out count)
                     && (this.Count + count) * RefillOverIncrementalThreshold > this.Count
                 )
-            ) {
+            )
+            {
                 // The payload being added is so large compared to this collection's current size
                 // that we likely won't see much memory reuse in the node tree by performing an
                 // incremental update.  So just recreate the entire node tree since that will
@@ -1013,7 +1014,8 @@ namespace System.Collections.Immutable
         private static bool TryCastToImmutableSortedSet(
             IEnumerable<T> sequence,
             [NotNullWhen(true)] out ImmutableSortedSet<T>? other
-        ) {
+        )
+        {
             other = sequence as ImmutableSortedSet<T>;
             if (other != null)
             {

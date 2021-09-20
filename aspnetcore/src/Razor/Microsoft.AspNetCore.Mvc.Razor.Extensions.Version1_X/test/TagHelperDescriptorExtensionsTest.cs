@@ -71,7 +71,8 @@ namespace Microsoft.AspNetCore.Mvc.Razor.Extensions.Version1_X
 
         private static TagHelperDescriptor CreateViewComponentTagHelperDescriptor(
             string name = "ViewComponentName"
-        ) {
+        )
+        {
             var tagHelper = TagHelperDescriptorBuilder.Create(
                     ViewComponentTagHelperConventions.Kind,
                     "TypeName",

@@ -21,7 +21,8 @@ namespace Microsoft.CodeAnalysis.CSharp
         private BoundStatement? RewriteExpressionStatement(
             BoundExpressionStatement node,
             bool suppressInstrumentation = false
-        ) {
+        )
+        {
             var loweredExpression = VisitUnusedExpression(node.Expression);
 
             if (loweredExpression == null)

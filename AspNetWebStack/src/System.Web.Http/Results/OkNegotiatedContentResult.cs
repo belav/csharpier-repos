@@ -34,14 +34,15 @@ namespace System.Web.Http.Results
             IContentNegotiator contentNegotiator,
             HttpRequestMessage request,
             IEnumerable<MediaTypeFormatter> formatters
-        ) : this(
-            content,
-            new NegotiatedContentResult<T>.DirectDependencyProvider(
-                contentNegotiator,
-                request,
-                formatters
-            )
-        ) { }
+        )
+            : this(
+                content,
+                new NegotiatedContentResult<T>.DirectDependencyProvider(
+                    contentNegotiator,
+                    request,
+                    formatters
+                )
+            ) { }
 
         /// <summary>
         /// Initializes a new instance of the <see cref="OkNegotiatedContentResult{T}"/> class with the values
@@ -58,7 +59,8 @@ namespace System.Web.Http.Results
         private OkNegotiatedContentResult(
             T content,
             NegotiatedContentResult<T>.IDependencyProvider dependencies
-        ) {
+        )
+        {
             Contract.Assert(dependencies != null);
 
             _content = content;

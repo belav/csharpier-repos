@@ -34,7 +34,8 @@ namespace System.Security.AccessControl
             bool isInherited,
             InheritanceFlags inheritanceFlags,
             PropagationFlags propagationFlags
-        ) {
+        )
+        {
             if (identity == null)
             {
                 throw new ArgumentNullException(nameof(identity));
@@ -49,7 +50,8 @@ namespace System.Security.AccessControl
                 inheritanceFlags < InheritanceFlags.None
                 || inheritanceFlags
                     > (InheritanceFlags.ObjectInherit | InheritanceFlags.ContainerInherit)
-            ) {
+            )
+            {
                 throw new ArgumentOutOfRangeException(
                     nameof(inheritanceFlags),
                     SR.Format(SR.Argument_InvalidEnumValue, inheritanceFlags, "InheritanceFlags")
@@ -60,7 +62,8 @@ namespace System.Security.AccessControl
                 propagationFlags < PropagationFlags.None
                 || propagationFlags
                     > (PropagationFlags.NoPropagateInherit | PropagationFlags.InheritOnly)
-            ) {
+            )
+            {
                 throw new ArgumentOutOfRangeException(
                     nameof(propagationFlags),
                     SR.Format(SR.Argument_InvalidEnumValue, inheritanceFlags, "PropagationFlags")
@@ -146,7 +149,8 @@ namespace System.Security.AccessControl
                 inheritanceFlags < InheritanceFlags.None
                 || inheritanceFlags
                     > (InheritanceFlags.ObjectInherit | InheritanceFlags.ContainerInherit)
-            ) {
+            )
+            {
                 throw new ArgumentOutOfRangeException(
                     nameof(inheritanceFlags),
                     SR.Format(SR.Argument_InvalidEnumValue, inheritanceFlags, "InheritanceFlags")
@@ -157,7 +161,8 @@ namespace System.Security.AccessControl
                 propagationFlags < PropagationFlags.None
                 || propagationFlags
                     > (PropagationFlags.NoPropagateInherit | PropagationFlags.InheritOnly)
-            ) {
+            )
+            {
                 throw new ArgumentOutOfRangeException(
                     nameof(propagationFlags),
                     SR.Format(SR.Argument_InvalidEnumValue, inheritanceFlags, "PropagationFlags")
@@ -204,7 +209,8 @@ namespace System.Security.AccessControl
             if (
                 (!objectType.Equals(Guid.Empty))
                 && ((accessMask & ObjectAce.AccessMaskWithObjectType) != 0)
-            ) {
+            )
+            {
                 _objectType = objectType;
                 _objectFlags |= ObjectAceFlags.ObjectAceTypePresent;
             }
@@ -216,7 +222,8 @@ namespace System.Security.AccessControl
             if (
                 (!inheritedObjectType.Equals(Guid.Empty))
                 && ((inheritanceFlags & InheritanceFlags.ContainerInherit) != 0)
-            ) {
+            )
+            {
                 _inheritedObjectType = inheritedObjectType;
                 _objectFlags |= ObjectAceFlags.InheritedObjectAceTypePresent;
             }
@@ -318,7 +325,8 @@ namespace System.Security.AccessControl
             if (
                 (!objectType.Equals(Guid.Empty))
                 && ((accessMask & ObjectAce.AccessMaskWithObjectType) != 0)
-            ) {
+            )
+            {
                 _objectType = objectType;
                 _objectFlags |= ObjectAceFlags.ObjectAceTypePresent;
             }
@@ -330,7 +338,8 @@ namespace System.Security.AccessControl
             if (
                 (!inheritedObjectType.Equals(Guid.Empty))
                 && ((inheritanceFlags & InheritanceFlags.ContainerInherit) != 0)
-            ) {
+            )
+            {
                 _inheritedObjectType = inheritedObjectType;
                 _objectFlags |= ObjectAceFlags.InheritedObjectAceTypePresent;
             }

@@ -29,7 +29,8 @@ namespace Microsoft.CodeAnalysis.InlineHints
             int position,
             SymbolKey symbolKey,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var semanticModel = await document.GetRequiredSemanticModelAsync(cancellationToken)
                 .ConfigureAwait(false);
 
@@ -77,7 +78,8 @@ namespace Microsoft.CodeAnalysis.InlineHints
                         SymbolDescriptionGroups.AnonymousTypes,
                         out var anonymousTypes
                     )
-                ) {
+                )
+                {
                     if (!anonymousTypes.IsDefaultOrEmpty)
                     {
                         parts.AddLineBreak();

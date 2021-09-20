@@ -314,7 +314,8 @@ namespace Microsoft.EntityFrameworkCore.Migrations.Design
             Dictionary<string, (object Value, string Expected)> validAnnotations,
             string generationDefault,
             Action<TestCSharpSnapshotGenerator, IMutableAnnotatable, IndentedStringBuilder> test
-        ) {
+        )
+        {
             var sqlServerTypeMappingSource = new SqlServerTypeMappingSource(
                 TestServiceFactory.Instance.Create<TypeMappingSourceDependencies>(),
                 TestServiceFactory.Instance.Create<RelationalTypeMappingSourceDependencies>()
@@ -356,7 +357,8 @@ namespace Microsoft.EntityFrameworkCore.Migrations.Design
                 var field in coreAnnotations.Concat(
                     typeof(RelationalAnnotationNames).GetFields().Where(f => f.Name != "Prefix")
                 )
-            ) {
+            )
+            {
                 var annotationName = (string)field.GetValue(null);
 
                 if (!invalidAnnotations.Contains(annotationName))
@@ -407,9 +409,8 @@ namespace Microsoft.EntityFrameworkCore.Migrations.Design
         // ReSharper disable once ClassWithVirtualMembersNeverInherited.Local
         private class TestCSharpSnapshotGenerator : CSharpSnapshotGenerator
         {
-            public TestCSharpSnapshotGenerator(
-                CSharpSnapshotGeneratorDependencies dependencies
-            ) : base(dependencies) { }
+            public TestCSharpSnapshotGenerator(CSharpSnapshotGeneratorDependencies dependencies)
+                : base(dependencies) { }
 
             public virtual void TestGenerateEntityTypeAnnotations(
                 string builderName,
@@ -1013,7 +1014,8 @@ namespace MyNamespace
         private ModelSnapshot CompileModelSnapshot(
             string modelSnapshotCode,
             string modelSnapshotTypeName
-        ) {
+        )
+        {
             var build = new BuildSource
             {
                 References =

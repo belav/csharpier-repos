@@ -16,7 +16,8 @@ namespace CodeGenerator
             string[] implementedFeatures,
             string extraUsings,
             string fallbackFeatures
-        ) {
+        )
+        {
             // NOTE: This list MUST always match the set of feature interfaces implemented by TransportConnection.
             // See also: src/Kestrel/Http/TransportConnection.FeatureCollection.cs
             var features = allFeatures.Select(

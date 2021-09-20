@@ -137,7 +137,8 @@ namespace System.Runtime.Caching
             if (
                 sref != null
                 && Interlocked.CompareExchange(ref _sizedRefMultiple, null, sref) == sref
-            ) {
+            )
+            {
                 sref.Dispose();
             }
             IMemoryCacheManager memoryCacheManager = s_memoryCacheManager;

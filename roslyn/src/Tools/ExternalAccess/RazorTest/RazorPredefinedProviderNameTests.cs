@@ -27,7 +27,8 @@ namespace Microsoft.CodeAnalysis.ExternalAccess.Razor.UnitTests
         internal void RoslynNamesExistAndValuesMatchInRazorNamesClass(
             Type roslynProviderNamesType,
             Type razorProviderNamesType
-        ) {
+        )
+        {
             var roslynProviderNames = GetPredefinedNamesFromFields(roslynProviderNamesType);
             var razorProviderNames = GetPredefinedNamesFromProperties(razorProviderNamesType);
 
@@ -58,7 +59,8 @@ namespace Microsoft.CodeAnalysis.ExternalAccess.Razor.UnitTests
 
         private static ImmutableDictionary<string, string> GetPredefinedNamesFromFields(
             Type namesType
-        ) {
+        )
+        {
             return namesType.GetFields(
                     BindingFlags.DeclaredOnly | BindingFlags.Static | BindingFlags.Public
                 )
@@ -68,7 +70,8 @@ namespace Microsoft.CodeAnalysis.ExternalAccess.Razor.UnitTests
 
         private static ImmutableDictionary<string, string> GetPredefinedNamesFromProperties(
             Type namesType
-        ) {
+        )
+        {
             return namesType.GetProperties(
                     BindingFlags.DeclaredOnly | BindingFlags.Static | BindingFlags.Public
                 )

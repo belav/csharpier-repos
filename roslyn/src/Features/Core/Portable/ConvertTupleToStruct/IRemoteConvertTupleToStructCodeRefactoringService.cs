@@ -36,7 +36,8 @@ namespace Microsoft.CodeAnalysis.ConvertTupleToStruct
         public SerializableConvertTupleToStructResult(
             ImmutableArray<(DocumentId, ImmutableArray<TextChange>)> documentTextChanges,
             (DocumentId, TextSpan) renamedToken
-        ) {
+        )
+        {
             DocumentTextChanges = documentTextChanges;
             RenamedToken = renamedToken;
         }

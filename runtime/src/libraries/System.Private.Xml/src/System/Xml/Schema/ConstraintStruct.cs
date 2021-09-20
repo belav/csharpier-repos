@@ -242,7 +242,8 @@ namespace System.Xml.Schema
                 xsdtype.Variety == XmlSchemaDatatypeVariety.List
                 || xsdtype is Datatype_base64Binary
                 || xsdtype is Datatype_hexBinary
-            ) {
+            )
+            {
                 _isList = true;
                 _dim = ((Array)obj!).Length;
             }

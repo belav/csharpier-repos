@@ -125,7 +125,8 @@ namespace System.CodeDom.Compiler.Tests
         public void GenerateBinaryOperatorExpression_Invoke_Success(
             CodeBinaryOperatorExpression e,
             string expected
-        ) {
+        )
+        {
             CodeGeneratorTests generator = this;
             PerformActionWithOutput(
                 writer =>
@@ -239,7 +240,8 @@ namespace System.CodeDom.Compiler.Tests
             CodeTypeMember member,
             CodeGeneratorOptions options,
             string expected
-        ) {
+        )
+        {
             CodeGeneratorTests generator = this;
             generator.GenerateCommentStatementsAction = (actualE, baseMethod) =>
                 baseMethod(actualE);
@@ -880,7 +882,8 @@ namespace System.CodeDom.Compiler.Tests
         [MemberData(nameof(GenerateDefaultValueExpression_TestData))]
         public void GenerateDefaultValueExpression_InvokeWithOutput_Nop(
             CodeDefaultValueExpression e
-        ) {
+        )
+        {
             CodeGeneratorTests generator = this;
             PerformActionWithOutput(
                 writer =>
@@ -896,7 +899,8 @@ namespace System.CodeDom.Compiler.Tests
         [MemberData(nameof(GenerateDefaultValueExpression_TestData))]
         public void GenerateDefaultValueExpression_InvokeWithoutOutput_Nop(
             CodeDefaultValueExpression e
-        ) {
+        )
+        {
             CodeGeneratorTests generator = this;
             generator.GenerateDefaultValueExpressionAction = (actualE, baseMethod) =>
                 baseMethod(actualE);
@@ -917,7 +921,8 @@ namespace System.CodeDom.Compiler.Tests
         public void GenerateDirectionExpression_Invoke_Success(
             FieldDirection direction,
             string expected
-        ) {
+        )
+        {
             CodeGeneratorTests generator = this;
             PerformActionWithOutput(
                 writer =>
@@ -978,7 +983,8 @@ namespace System.CodeDom.Compiler.Tests
         [InlineData(FieldDirection.Ref)]
         public void GenerateDirectionExpression_InvokeNonInWithoutWriter_ThrowsNullReferenceException(
             FieldDirection direction
-        ) {
+        )
+        {
             CodeGeneratorTests generator = this;
             var e = new CodeDirectionExpression(direction, new CodePrimitiveExpression(1));
             generator.GenerateDirectionExpressionAction = (actualE, baseMethod) =>
@@ -1753,7 +1759,8 @@ namespace System.CodeDom.Compiler.Tests
             string name,
             FieldDirection direction,
             string expected
-        ) {
+        )
+        {
             CodeGeneratorTests generator = this;
             PerformActionWithOutput(
                 writer =>
@@ -2069,7 +2076,8 @@ namespace System.CodeDom.Compiler.Tests
         [MemberData(nameof(GeneratePrimitiveExpression_WithoutOutput_TestData))]
         public void GeneratePrimitiveExpression_InvokeWithoutOutput_ThrowsNullRefereneException(
             object value
-        ) {
+        )
+        {
             CodeGeneratorTests generator = this;
             var e = new CodePrimitiveExpression(value);
             generator.GeneratePrimitiveExpressionAction = (actualE, baseMethod) =>
@@ -2758,7 +2766,8 @@ namespace System.CodeDom.Compiler.Tests
             CodeTypeDeclaration type,
             CodeGeneratorOptions options,
             string expected
-        ) {
+        )
+        {
             CodeGeneratorTests generator = this;
             PerformActionWithOutput(
                 writer =>
@@ -3121,7 +3130,8 @@ namespace System.CodeDom.Compiler.Tests
         public void IsValidLanguageIndependentIdentifier_Invoke_ReturnsExpected(
             string value,
             bool expected
-        ) {
+        )
+        {
             Assert.Equal(expected, CodeGenerator.IsValidLanguageIndependentIdentifier(value));
         }
 
@@ -3193,7 +3203,8 @@ namespace System.CodeDom.Compiler.Tests
         [InlineData("name")]
         public void OutputAttributeArgument_InvokeNonNullNameWithoutOutput_ThrowsNullReferenceException(
             string name
-        ) {
+        )
+        {
             CodeGeneratorTests generator = this;
             var arg = new CodeAttributeArgument(name, new CodePrimitiveExpression(1));
             generator.OutputIdentifierAction = (actualIdentifier, baseMethod) =>
@@ -3371,7 +3382,8 @@ namespace System.CodeDom.Compiler.Tests
         [InlineData(FieldDirection.Ref)]
         public void OutputDirection_InvokeWithoutOutput_ThrowsNullReferenceException(
             FieldDirection direction
-        ) {
+        )
+        {
             CodeGeneratorTests generator = this;
             generator.OutputDirectionAction = (actualDirection, baseMethod) =>
                 baseMethod(actualDirection);
@@ -3384,7 +3396,8 @@ namespace System.CodeDom.Compiler.Tests
         [InlineData(FieldDirection.Ref + 1)]
         public void OutputDirection_InvokeWithoutOutputInvaliddirection_Ndirection(
             FieldDirection direction
-        ) {
+        )
+        {
             CodeGeneratorTests generator = this;
             generator.OutputDirectionAction = (actualDirection, baseMethod) =>
                 baseMethod(actualDirection);
@@ -3416,7 +3429,8 @@ namespace System.CodeDom.Compiler.Tests
         public void OutputFieldScopeModifier_Invoke_Success(
             MemberAttributes attributes,
             string expected
-        ) {
+        )
+        {
             CodeGeneratorTests generator = this;
             PerformActionWithOutput(
                 writer =>
@@ -3440,7 +3454,8 @@ namespace System.CodeDom.Compiler.Tests
         [InlineData(MemberAttributes.New | MemberAttributes.Const)]
         public void OutputFieldScopeModifier_InvokeWithoutOutput_ThrowsNullReferenceException(
             MemberAttributes attributes
-        ) {
+        )
+        {
             CodeGeneratorTests generator = this;
             generator.OutputFieldScopeModifierAction = (actualAttributes, baseMethod) =>
                 baseMethod(actualAttributes);
@@ -3465,7 +3480,8 @@ namespace System.CodeDom.Compiler.Tests
         [InlineData(MemberAttributes.AccessMask)]
         public void OutputFieldScopeModifier_InvokeWithoutOutputInvalid_Nop(
             MemberAttributes attributes
-        ) {
+        )
+        {
             CodeGeneratorTests generator = this;
             generator.OutputFieldScopeModifierAction = (actualAttributes, baseMethod) =>
                 baseMethod(actualAttributes);
@@ -3650,7 +3666,8 @@ namespace System.CodeDom.Compiler.Tests
         public void OutputMemberAccessModifier_Invoke_Success(
             MemberAttributes attributes,
             string expected
-        ) {
+        )
+        {
             CodeGeneratorTests generator = this;
             PerformActionWithOutput(
                 writer =>
@@ -3728,7 +3745,8 @@ namespace System.CodeDom.Compiler.Tests
         [InlineData(MemberAttributes.New | MemberAttributes.Const | MemberAttributes.Public)]
         public void OutputMemberAccessModifier_InvokeWithoutOutput_ThrowsNullReferenceException(
             MemberAttributes attributes
-        ) {
+        )
+        {
             CodeGeneratorTests generator = this;
             generator.OutputMemberAccessModifierAction = (actualAttributes, baseMethod) =>
                 baseMethod(actualAttributes);
@@ -3750,7 +3768,8 @@ namespace System.CodeDom.Compiler.Tests
         [InlineData(MemberAttributes.AccessMask)]
         public void OutputMemberAccessModifier_InvokeWithoutOutputInvalid_Nop(
             MemberAttributes attributes
-        ) {
+        )
+        {
             CodeGeneratorTests generator = this;
             generator.OutputMemberAccessModifierAction = (actualAttributes, baseMethod) =>
                 baseMethod(actualAttributes);
@@ -3903,7 +3922,8 @@ namespace System.CodeDom.Compiler.Tests
         public void OutputMemberScopeModifier_Invoke_Success(
             MemberAttributes attributes,
             string expected
-        ) {
+        )
+        {
             CodeGeneratorTests generator = this;
             PerformActionWithOutput(
                 writer =>
@@ -3982,7 +4002,8 @@ namespace System.CodeDom.Compiler.Tests
         [InlineData(MemberAttributes.New | MemberAttributes.Const | MemberAttributes.Public)]
         public void OutputMemberScopeModifier_InvokeWithoutOutput_ThrowsNullReferenceException(
             MemberAttributes attributes
-        ) {
+        )
+        {
             CodeGeneratorTests generator = this;
             generator.OutputMemberScopeModifierAction = (actualAttributes, baseMethod) =>
                 baseMethod(actualAttributes);
@@ -4003,7 +4024,8 @@ namespace System.CodeDom.Compiler.Tests
         [InlineData(MemberAttributes.AccessMask)]
         public void OutputMemberScopeModifier_InvokeWithoutOutputInvalid_Nop(
             MemberAttributes attributes
-        ) {
+        )
+        {
             CodeGeneratorTests generator = this;
             generator.OutputMemberScopeModifierAction = (actualAttributes, baseMethod) =>
                 baseMethod(actualAttributes);
@@ -4063,7 +4085,8 @@ namespace System.CodeDom.Compiler.Tests
         [InlineData(CodeBinaryOperatorType.ValueEquality)]
         public void OutputOperator_InvokeWithoutOutput_ThrowsNullReferenceException(
             CodeBinaryOperatorType op
-        ) {
+        )
+        {
             CodeGeneratorTests generator = this;
             generator.OutputOperatorAction = (actualOp, baseMethod) => baseMethod(actualOp);
             Assert.Throws<NullReferenceException>(() => generator.OutputOperator(op));
@@ -4151,7 +4174,8 @@ namespace System.CodeDom.Compiler.Tests
         public void OutputParameter_Invoke_Success(
             CodeParameterDeclarationExpression[] parametersArray,
             string expected
-        ) {
+        )
+        {
             CodeGeneratorTests generator = this;
             PerformActionWithOutput(
                 writer =>
@@ -4355,7 +4379,8 @@ namespace System.CodeDom.Compiler.Tests
             bool isStruct,
             bool isEnum,
             string expected
-        ) {
+        )
+        {
             CodeGeneratorTests generator = this;
             PerformActionWithOutput(
                 writer =>
@@ -4421,7 +4446,8 @@ namespace System.CodeDom.Compiler.Tests
             TypeAttributes attributes,
             bool isStruct,
             bool isEnum
-        ) {
+        )
+        {
             CodeGeneratorTests generator = this;
             generator.OutputTypeAttributesAction = (
                 actualAttributes,
@@ -4488,7 +4514,8 @@ namespace System.CodeDom.Compiler.Tests
         public void ICodeGeneratorCreateEscapedIdentifier_Invoke_ReturnsExpected(
             string value,
             string result
-        ) {
+        )
+        {
             CodeGeneratorTests generator = this;
             int callCount = 0;
             generator.CreateEscapedIdentifierAction = (actualValue) =>
@@ -4515,7 +4542,8 @@ namespace System.CodeDom.Compiler.Tests
         public void ICodeGeneratorCreateValidIdentifier_Invoke_ReturnsExpected(
             string value,
             string result
-        ) {
+        )
+        {
             CodeGeneratorTests generator = this;
             int callCount = 0;
             generator.CreateValidIdentifierAction = (actualValue) =>
@@ -4544,7 +4572,8 @@ namespace System.CodeDom.Compiler.Tests
         public void ICodeGeneratorGetTypeOutput_Invoke_ReturnsExpected(
             CodeTypeReference value,
             string result
-        ) {
+        )
+        {
             CodeGeneratorTests generator = this;
             int callCount = 0;
             generator.GetTypeOutputAction = (actualValue) =>
@@ -4573,7 +4602,8 @@ namespace System.CodeDom.Compiler.Tests
         public void ICodeGeneratorIsValidIdentifier_Invoke_ReturnsExpected(
             string value,
             bool result
-        ) {
+        )
+        {
             CodeGeneratorTests generator = this;
             int callCount = 0;
             generator.IsValidIdentifierAction = (actualValue) =>
@@ -4601,7 +4631,8 @@ namespace System.CodeDom.Compiler.Tests
         public void ICodeGeneratorSupports_Invoke_ReturnsExpected(
             GeneratorSupport support,
             bool result
-        ) {
+        )
+        {
             CodeGeneratorTests generator = this;
             int callCount = 0;
             generator.SupportsAction = (actualSupport) =>
@@ -4643,7 +4674,8 @@ namespace System.CodeDom.Compiler.Tests
         [SkipOnTargetFramework(TargetFrameworkMonikers.NetFramework, "Not fixed on NetFX")]
         public void ICodeGeneratorValidateIdentifier_InvokeInvalid_ThrowsArgumentException(
             string value
-        ) {
+        )
+        {
             CodeGeneratorTests generator = this;
             int isValidIdentifierCallCount = 0;
             generator.ValidateIdentifierAction = (actualValue, baseMethod) =>
@@ -4665,7 +4697,8 @@ namespace System.CodeDom.Compiler.Tests
         private void PerformActionWithOutput(
             Action<StringWriter> action,
             CodeGeneratorOptions options = null
-        ) {
+        )
+        {
             CodeGeneratorTests generator = this;
             ICodeGenerator iCodeGenerator = generator;
             var e = new CodeArrayCreateExpression(typeof(int));
@@ -4712,7 +4745,8 @@ namespace System.CodeDom.Compiler.Tests
 
         protected override void GenerateArgumentReferenceExpression(
             CodeArgumentReferenceExpression e
-        ) {
+        )
+        {
             GenerateArgumentReferenceExpressionAction(e);
         }
 
@@ -4748,7 +4782,8 @@ namespace System.CodeDom.Compiler.Tests
 
         protected override void GenerateAttributeDeclarationsEnd(
             CodeAttributeDeclarationCollection attributes
-        ) {
+        )
+        {
             GenerateAttributeDeclarationsEndAction(attributes);
         }
 
@@ -4756,7 +4791,8 @@ namespace System.CodeDom.Compiler.Tests
 
         protected override void GenerateAttributeDeclarationsStart(
             CodeAttributeDeclarationCollection attributes
-        ) {
+        )
+        {
             GenerateAttributeDeclarationsStartAction(attributes);
         }
 
@@ -4914,7 +4950,8 @@ namespace System.CodeDom.Compiler.Tests
         protected override void GenerateEntryPointMethod(
             CodeEntryPointMethod e,
             CodeTypeDeclaration c
-        ) {
+        )
+        {
             GenerateEntryPointMethodAction(e, c);
         }
 
@@ -5065,7 +5102,8 @@ namespace System.CodeDom.Compiler.Tests
 
         protected override void GenerateParameterDeclarationExpression(
             CodeParameterDeclarationExpression e
-        ) {
+        )
+        {
             GenerateParameterDeclarationExpressionAction(
                 e,
                 base.GenerateParameterDeclarationExpression
@@ -5093,7 +5131,8 @@ namespace System.CodeDom.Compiler.Tests
 
         protected override void GeneratePropertyReferenceExpression(
             CodePropertyReferenceExpression e
-        ) {
+        )
+        {
             GeneratePropertyReferenceExpressionAction(e);
         }
 
@@ -5101,7 +5140,8 @@ namespace System.CodeDom.Compiler.Tests
 
         protected override void GeneratePropertySetValueReferenceExpression(
             CodePropertySetValueReferenceExpression e
-        ) {
+        )
+        {
             GeneratePropertySetValueReferenceExpressionAction(e);
         }
 
@@ -5209,7 +5249,8 @@ namespace System.CodeDom.Compiler.Tests
 
         protected override void GenerateVariableDeclarationStatement(
             CodeVariableDeclarationStatement e
-        ) {
+        )
+        {
             GenerateVariableDeclarationStatementAction(e);
         }
 
@@ -5217,7 +5258,8 @@ namespace System.CodeDom.Compiler.Tests
 
         protected override void GenerateVariableReferenceExpression(
             CodeVariableReferenceExpression e
-        ) {
+        )
+        {
             GenerateVariableReferenceExpressionAction(e);
         }
 
@@ -5252,7 +5294,8 @@ namespace System.CodeDom.Compiler.Tests
 
         protected override void OutputAttributeDeclarations(
             CodeAttributeDeclarationCollection attributes
-        ) {
+        )
+        {
             OutputAttributeDeclarationsAction(attributes, base.OutputAttributeDeclarations);
         }
 
@@ -5317,7 +5360,8 @@ namespace System.CodeDom.Compiler.Tests
 
         protected override void OutputParameters(
             CodeParameterDeclarationExpressionCollection parameters
-        ) {
+        )
+        {
             OutputParametersAction(parameters, base.OutputParameters);
         }
 
@@ -5339,7 +5383,8 @@ namespace System.CodeDom.Compiler.Tests
             TypeAttributes attributes,
             bool isStruct,
             bool isEnum
-        ) {
+        )
+        {
             OutputTypeAttributesAction(attributes, isStruct, isEnum, base.OutputTypeAttributes);
         }
 

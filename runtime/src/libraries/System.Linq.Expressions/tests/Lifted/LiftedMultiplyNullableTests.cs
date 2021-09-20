@@ -319,7 +319,8 @@ namespace System.Linq.Expressions.Tests
             decimal? a,
             decimal? b,
             bool useInterpreter
-        ) {
+        )
+        {
             Expression<Func<decimal?>> e = Expression.Lambda<Func<decimal?>>(
                 Expression.Multiply(
                     Expression.Constant(a, typeof(decimal?)),

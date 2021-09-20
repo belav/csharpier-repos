@@ -110,7 +110,8 @@ namespace Microsoft.AspNetCore.Mvc.DataAnnotations
             object container,
             object model,
             string expectedMemberName
-        ) {
+        )
+        {
             // Arrange
             var attribute = new Mock<TestableValidationAttribute> { CallBase = true };
             attribute.Setup(p => p.IsValidPublic(It.IsAny<object>(), It.IsAny<ValidationContext>()))
@@ -411,7 +412,8 @@ namespace Microsoft.AspNetCore.Mvc.DataAnnotations
             string errorMessage,
             IEnumerable<string> memberNames,
             IEnumerable<ModelValidationResult> expectedResults
-        ) {
+        )
+        {
             // Arrange
             var metadata = _metadataProvider.GetMetadataForProperty(
                 typeof(string),
@@ -610,7 +612,8 @@ namespace Microsoft.AspNetCore.Mvc.DataAnnotations
             ValidationAttribute attribute,
             string model,
             object[] values
-        ) {
+        )
+        {
             // Arrange
             var stringLocalizer = new Mock<IStringLocalizer>();
 
@@ -646,7 +649,8 @@ namespace Microsoft.AspNetCore.Mvc.DataAnnotations
             protected override ValidationResult IsValid(
                 object value,
                 ValidationContext validationContext
-            ) {
+            )
+            {
                 return IsValidPublic(value, validationContext);
             }
 

@@ -883,7 +883,8 @@ class A
             IEnumerable<Span> expectedSelectedSpans,
             bool supportBlockComments,
             Operation operation
-        ) {
+        )
+        {
             var exportProvider = CreateExportProvider();
 
             using var disposableView = EditorFactory.CreateView(exportProvider, code);
@@ -906,7 +907,8 @@ class A
             IEnumerable<Span> expectedSelectedSpans,
             bool supportBlockComments,
             Operation operation
-        ) {
+        )
+        {
             var textUndoHistoryRegistry =
                 exportProvider.GetExportedValue<ITextUndoHistoryRegistry>();
             var editorOperationsFactory =

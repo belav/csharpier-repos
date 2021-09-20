@@ -14,7 +14,8 @@ namespace Roslyn.Test.Utilities
         public static void VerifyAndClear(
             this IInvocationList invocations,
             params (string Name, object[] Args)[] expectedInvocations
-        ) {
+        )
+        {
             AssertEx.Equal(
                 expectedInvocations.Select(i => $"{i.Name}: {string.Join(",", i.Args)}"),
                 invocations.Select(i => $"{i.Method.Name}: {string.Join(",", i.Arguments)}")

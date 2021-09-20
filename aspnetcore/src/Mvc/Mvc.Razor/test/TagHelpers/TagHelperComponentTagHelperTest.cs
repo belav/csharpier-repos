@@ -373,7 +373,8 @@ namespace Microsoft.AspNetCore.Mvc.Razor.TagHelpers
                 int order,
                 Action initCallback,
                 Action processAsyncCallback
-            ) {
+            )
+            {
                 _initCallback = initCallback;
                 _processAsyncCallback = processAsyncCallback;
                 _order = order;

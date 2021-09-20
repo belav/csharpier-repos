@@ -485,7 +485,8 @@ namespace System.Net
             string method,
             byte[] data,
             out WebRequest request
-        ) {
+        )
+        {
             WebRequest? tmpRequest = null;
             byte[] result;
 
@@ -515,7 +516,8 @@ namespace System.Net
             out byte[] buffer,
             ref byte[]? formHeaderBytes,
             ref byte[]? boundaryBytes
-        ) {
+        )
+        {
             fileName = Path.GetFullPath(fileName);
 
             WebHeaderCollection headers = Headers;
@@ -658,7 +660,8 @@ namespace System.Net
                     UploadValuesContentType,
                     StringComparison.OrdinalIgnoreCase
                 )
-            ) {
+            )
+            {
                 throw new WebException(SR.net_webclient_ContentType);
             }
 
@@ -878,7 +881,8 @@ namespace System.Net
                 !address.IsAbsoluteUri
                 && _baseAddress != null
                 && !Uri.TryCreate(_baseAddress, address, out uri)
-            ) {
+            )
+            {
                 return address;
             }
 
@@ -956,7 +960,8 @@ namespace System.Net
             Stream writeStream,
             AsyncOperation asyncOp,
             Action<byte[]?, Exception?, AsyncOperation> completionDelegate
-        ) {
+        )
+        {
             Debug.Assert(_progress != null, "ProgressData should have been initialized");
             Debug.Assert(asyncOp != null);
 
@@ -1048,7 +1053,8 @@ namespace System.Net
             int chunkSize,
             byte[]? header,
             byte[]? footer
-        ) {
+        )
+        {
             try
             {
                 if (request.RequestUri.Scheme == Uri.UriSchemeFile)
@@ -1116,7 +1122,8 @@ namespace System.Net
             byte[]? footer,
             AsyncOperation asyncOp,
             Action<byte[]?, Exception?, AsyncOperation> completionDelegate
-        ) {
+        )
+        {
             Debug.Assert(asyncOp != null);
             Debug.Assert(_progress != null, "ProgressData should have been initialized");
             _progress.HasUploadPhase = true;
@@ -1131,7 +1138,8 @@ namespace System.Net
 
                 using (
                     Stream writeStream = await request.GetRequestStreamAsync().ConfigureAwait(false)
-                ) {
+                )
+                {
                     if (header != null)
                     {
                         await writeStream.WriteAsync(new ReadOnlyMemory<byte>(header))
@@ -1340,7 +1348,8 @@ namespace System.Net
             int offset,
             int count,
             bool alwaysCreateReturnValue
-        ) {
+        )
+        {
             int cSpaces = 0;
             int cUnsafe = 0;
 
@@ -1418,7 +1427,8 @@ namespace System.Net
             AsyncOperation asyncOp,
             SendOrPostCallback callback,
             AsyncCompletedEventArgs eventArgs
-        ) {
+        )
+        {
             if (Interlocked.CompareExchange(ref _asyncOp, null, asyncOp) == asyncOp)
             {
                 EndOperation();
@@ -1547,7 +1557,8 @@ namespace System.Net
             byte[]? returnBytes,
             Exception? exception,
             object state
-        ) {
+        )
+        {
             AsyncOperation asyncOp = (AsyncOperation)state;
             string? stringData = null;
             try
@@ -1598,7 +1609,8 @@ namespace System.Net
             byte[]? returnBytes,
             Exception? exception,
             object state
-        ) {
+        )
+        {
             AsyncOperation asyncOp = (AsyncOperation)state;
             DownloadDataCompletedEventArgs eventArgs = new DownloadDataCompletedEventArgs(
                 returnBytes,
@@ -1636,7 +1648,8 @@ namespace System.Net
             byte[]? returnBytes,
             Exception? exception,
             object state
-        ) {
+        )
+        {
             AsyncOperation asyncOp = (AsyncOperation)state;
             AsyncCompletedEventArgs eventArgs = new AsyncCompletedEventArgs(
                 exception,
@@ -1882,7 +1895,8 @@ namespace System.Net
             string? method,
             NameValueCollection data,
             object? userToken
-        ) {
+        )
+        {
             ThrowIfNull(address, nameof(address));
             ThrowIfNull(data, nameof(data));
             if (method == null)
@@ -2264,7 +2278,8 @@ namespace System.Net
             Uri address,
             string? method,
             NameValueCollection data
-        ) {
+        )
+        {
             // Create the task to be returned
             var tcs = new TaskCompletionSource<byte[]>(address);
 
@@ -2417,11 +2432,8 @@ namespace System.Net
             private readonly WebRequest _request;
             private readonly WebClient _webClient;
 
-            public WebClientWriteStream(
-                Stream stream,
-                WebRequest request,
-                WebClient webClient
-            ) : base(stream)
+            public WebClientWriteStream(Stream stream, WebRequest request, WebClient webClient)
+                : base(stream)
             {
                 _request = request;
                 _webClient = webClient;

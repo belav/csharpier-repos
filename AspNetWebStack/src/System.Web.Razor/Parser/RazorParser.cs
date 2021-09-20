@@ -85,7 +85,8 @@ namespace System.Web.Razor.Parser
             TextReader input,
             Action<Span> spanCallback,
             Action<RazorError> errorCallback
-        ) {
+        )
+        {
             return CreateParseTask(input, new CallbackVisitor(spanCallback, errorCallback));
         }
 
@@ -94,7 +95,8 @@ namespace System.Web.Razor.Parser
             Action<Span> spanCallback,
             Action<RazorError> errorCallback,
             SynchronizationContext context
-        ) {
+        )
+        {
             return CreateParseTask(
                 input,
                 new CallbackVisitor(spanCallback, errorCallback)
@@ -109,7 +111,8 @@ namespace System.Web.Razor.Parser
             Action<Span> spanCallback,
             Action<RazorError> errorCallback,
             CancellationToken cancelToken
-        ) {
+        )
+        {
             return CreateParseTask(
                 input,
                 new CallbackVisitor(spanCallback, errorCallback) { CancelToken = cancelToken }
@@ -122,7 +125,8 @@ namespace System.Web.Razor.Parser
             Action<RazorError> errorCallback,
             SynchronizationContext context,
             CancellationToken cancelToken
-        ) {
+        )
+        {
             return CreateParseTask(
                 input,
                 new CallbackVisitor(spanCallback, errorCallback)

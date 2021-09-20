@@ -29,7 +29,8 @@ namespace Microsoft.EntityFrameworkCore.TestUtilities
         protected virtual async Task<(Diagnostic[], string)> GetDiagnosticsAsync(
             string source,
             params string[] extraUsings
-        ) {
+        )
+        {
             var sb = new StringBuilder();
             foreach (var @using in _usings.Concat(extraUsings))
             {

@@ -10,7 +10,8 @@ namespace Microsoft.AspNetCore.Razor.Language.IntegrationTests
         public static string Serialize(
             RazorCSharpDocument csharpDocument,
             RazorSourceDocument sourceDocument
-        ) {
+        )
+        {
             var builder = new StringBuilder();
             var charBuffer = new char[sourceDocument.Length];
             sourceDocument.CopyTo(0, charBuffer, 0, sourceDocument.Length);
@@ -40,7 +41,8 @@ namespace Microsoft.AspNetCore.Razor.Language.IntegrationTests
             StringBuilder builder,
             SourceSpan location,
             string content
-        ) {
+        )
+        {
             builder.AppendLine(location.ToString()).Append("|");
 
             for (var i = 0; i < location.Length; i++)

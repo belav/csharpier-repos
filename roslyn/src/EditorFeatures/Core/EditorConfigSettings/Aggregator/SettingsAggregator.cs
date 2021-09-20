@@ -97,7 +97,8 @@ namespace Microsoft.CodeAnalysis.Editor.EditorConfigSettings
                 string language,
                 Workspace workspace,
                 List<ISettingsProviderFactory<T>> providers
-            ) {
+            )
+            {
                 var provider = workspace.Services.GetLanguageServices(language)
                     .GetService<ILanguageSettingsProviderFactory<T>>();
                 if (provider is not null)

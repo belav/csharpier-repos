@@ -32,14 +32,16 @@ namespace Microsoft.CodeAnalysis.SolutionCrawler
                         IGlobalOperationNotificationService globalOperationNotificationService,
                         int backOffTimeSpanInMs,
                         CancellationToken shutdownToken
-                    ) : base(
-                        listener,
-                        processor,
-                        lazyAnalyzers,
-                        globalOperationNotificationService,
-                        backOffTimeSpanInMs,
-                        shutdownToken
-                    ) {
+                    )
+                        : base(
+                            listener,
+                            processor,
+                            lazyAnalyzers,
+                            globalOperationNotificationService,
+                            backOffTimeSpanInMs,
+                            shutdownToken
+                        )
+                    {
                         _workItemQueue = new AsyncProjectWorkItemQueue(
                             processor._registration.ProgressReporter,
                             processor._registration.Workspace
@@ -69,7 +71,8 @@ namespace Microsoft.CodeAnalysis.SolutionCrawler
                                     out var workItem,
                                     out var projectCancellation
                                 )
-                            ) {
+                            )
+                            {
                                 await ProcessProjectAsync(Analyzers, workItem, projectCancellation)
                                     .ConfigureAwait(false);
                             }
@@ -150,7 +153,8 @@ namespace Microsoft.CodeAnalysis.SolutionCrawler
                         ImmutableArray<IIncrementalAnalyzer> analyzers,
                         WorkItem workItem,
                         CancellationToken cancellationToken
-                    ) {
+                    )
+                    {
                         if (CancellationToken.IsCancellationRequested)
                         {
                             return;
@@ -170,7 +174,8 @@ namespace Microsoft.CodeAnalysis.SolutionCrawler
                                     workItem,
                                     cancellationToken
                                 )
-                            ) {
+                            )
+                            {
                                 var project = processingSolution.GetProject(projectId);
                                 if (project != null)
                                 {
@@ -251,7 +256,8 @@ namespace Microsoft.CodeAnalysis.SolutionCrawler
                     private async Task RemoveProjectAsync(
                         ProjectId projectId,
                         CancellationToken cancellationToken
-                    ) {
+                    )
+                    {
                         foreach (var analyzer in Analyzers)
                         {
                             await analyzer.RemoveProjectAsync(projectId, cancellationToken)
@@ -282,7 +288,8 @@ namespace Microsoft.CodeAnalysis.SolutionCrawler
                         internal void WaitUntilCompletion(
                             ImmutableArray<IIncrementalAnalyzer> analyzers,
                             List<WorkItem> items
-                        ) {
+                        )
+                        {
                             var uniqueIds = new HashSet<ProjectId>();
                             foreach (var item in items)
                             {

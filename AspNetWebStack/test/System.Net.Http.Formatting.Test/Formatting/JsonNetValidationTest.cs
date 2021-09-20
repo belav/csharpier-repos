@@ -58,7 +58,8 @@ namespace System.Net.Http.Formatting
             string json,
             Type type,
             int expectedErrors
-        ) {
+        )
+        {
             JsonMediaTypeFormatter formatter = new JsonMediaTypeFormatter();
             formatter.RequiredMemberSelector = new SimpleRequiredMemberSelector();
             Mock<IFormatterLogger> mockLogger = new Mock<IFormatterLogger>() {  };

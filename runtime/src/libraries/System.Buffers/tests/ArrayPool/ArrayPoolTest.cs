@@ -25,13 +25,15 @@ namespace System.Buffers.ArrayPool.Tests
             Action body,
             EventLevel level,
             Action<EventWrittenEventArgs> callback
-        ) {
+        )
+        {
             using (
                 TestEventListener listener = new TestEventListener(
                     "System.Buffers.ArrayPoolEventSource",
                     level
                 )
-            ) {
+            )
+            {
                 int count = 0;
                 listener.RunWithCallback(
                     e =>
@@ -58,7 +60,8 @@ namespace System.Buffers.ArrayPool.Tests
             Action<string> method,
             bool trim = false,
             int timeout = RemoteExecutor.FailWaitTimeoutMilliseconds
-        ) {
+        )
+        {
             var options = new RemoteInvokeOptions { TimeOut = timeout };
 
             options.StartInfo.UseShellExecute = false;

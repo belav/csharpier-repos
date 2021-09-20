@@ -15,7 +15,8 @@ namespace Microsoft.AspNetCore.Builder
 
         internal MinimalActionEndpointConventionBuilder(
             IEndpointConventionBuilder endpointConventionBuilder
-        ) {
+        )
+        {
             _endpointConventionBuilders = new List<IEndpointConventionBuilder>()
             {
                 endpointConventionBuilder
@@ -24,7 +25,8 @@ namespace Microsoft.AspNetCore.Builder
 
         internal MinimalActionEndpointConventionBuilder(
             List<IEndpointConventionBuilder> endpointConventionBuilders
-        ) {
+        )
+        {
             _endpointConventionBuilders = endpointConventionBuilders;
         }
 

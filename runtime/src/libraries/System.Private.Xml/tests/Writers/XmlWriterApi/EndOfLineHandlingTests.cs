@@ -566,7 +566,8 @@ namespace System.Xml.Tests
             NewLineHandling nlHandling,
             string newLineChars,
             string indentChars
-        ) {
+        )
+        {
             XmlWriterSettings wSettings = new XmlWriterSettings();
             string PrototypeOutput =
                 "<root>&NewLine&Indent<foo>&NewLine&Indent&Indent<bar />&NewLine&Indent</foo>&NewLine</root>";
@@ -641,7 +642,8 @@ namespace System.Xml.Tests
             XmlWriterUtils utils,
             NewLineHandling nlHandling,
             string newLineChars
-        ) {
+        )
+        {
             XmlWriterSettings wSettings = new XmlWriterSettings();
             string PrototypeOutput = "<root>foo&NewLinefoo&NewLinefoo&NewLinefoo\tfoo</root>";
 
@@ -713,7 +715,8 @@ namespace System.Xml.Tests
             XmlWriterUtils utils,
             NewLineHandling nlHandling,
             string newLineChars
-        ) {
+        )
+        {
             XmlWriterSettings wSettings = new XmlWriterSettings();
 
             wSettings.NewLineHandling = nlHandling;
@@ -783,7 +786,8 @@ namespace System.Xml.Tests
             XmlWriterUtils utils,
             NewLineHandling nlHandling,
             string newLineChars
-        ) {
+        )
+        {
             XmlWriterSettings wSettings = new XmlWriterSettings();
             string PrototypeOutput = "<root&NewLine  foo=\"fooval\"&NewLine  bar=\"barval\" />";
 
@@ -920,7 +924,8 @@ namespace System.Xml.Tests
             XmlWriterUtils utils,
             NewLineHandling nlHandling,
             string newLineChars
-        ) {
+        )
+        {
             XmlWriterSettings wSettings = new XmlWriterSettings();
             string PrototypeOutput =
                 "<root><![CDATA[foo&NewLinefoo&NewLinefoo&NewLinefoo\tfoo]]></root>&NewLine<?pi foo&NewLinefoo&NewLinefoo&NewLinefoo\tfoo?>&NewLine<!--foo&NewLinefoo&NewLinefoo&NewLinefoo\tfoo-->";
@@ -1121,7 +1126,8 @@ namespace System.Xml.Tests
             NewLineHandling nlHandling,
             string newLineChars,
             string indentChars
-        ) {
+        )
+        {
             XmlWriterSettings wSettings = new XmlWriterSettings();
             string PrototypeOutput =
                 "<root>&NewLine&Indent<foo>&NewLine&Indent&Indent<bar />&NewLine&Indent</foo>&NewLine</root>";

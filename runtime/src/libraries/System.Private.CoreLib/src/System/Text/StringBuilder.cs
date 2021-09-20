@@ -252,7 +252,8 @@ namespace System.Text
                 persistedCapacity < 0
                 || persistedCapacity < persistedString.Length
                 || persistedCapacity > persistedMaxCapacity
-            ) {
+            )
+            {
                 throw new SerializationException(SR.Serialization_StringBuilderCapacity);
             }
 
@@ -404,7 +405,8 @@ namespace System.Text
                     if (
                         (uint)(chunkLength + chunkOffset) > (uint)result.Length
                         || (uint)chunkLength > (uint)sourceArray.Length
-                    ) {
+                    )
+                    {
                         throw new ArgumentOutOfRangeException(
                             nameof(chunkLength),
                             SR.ArgumentOutOfRange_Index
@@ -1330,7 +1332,8 @@ namespace System.Text
                     format: default,
                     provider: null
                 )
-            ) {
+            )
+            {
                 m_ChunkLength += charsWritten;
                 return this;
             }
@@ -1441,7 +1444,8 @@ namespace System.Text
             char* separator,
             int separatorLength,
             IEnumerable<T> values
-        ) {
+        )
+        {
             Debug.Assert(separator != null);
             Debug.Assert(separatorLength >= 0);
 
@@ -1481,7 +1485,8 @@ namespace System.Text
             char* separator,
             int separatorLength,
             T[] values
-        ) {
+        )
+        {
             if (values == null)
             {
                 ThrowHelper.ThrowArgumentNullException(ExceptionArgument.values);
@@ -1702,7 +1707,8 @@ namespace System.Text
             IFormatProvider? provider,
             string format,
             params object?[] args
-        ) {
+        )
+        {
             if (args == null)
             {
                 // To preserve the original exception behavior, throw an exception about format if both
@@ -1727,7 +1733,8 @@ namespace System.Text
             IFormatProvider? provider,
             string format,
             ParamsArray args
-        ) {
+        )
+        {
             if (format == null)
             {
                 throw new ArgumentNullException(nameof(format));
@@ -1960,7 +1967,8 @@ namespace System.Text
                             itemFormatSpan,
                             provider
                         )
-                    ) {
+                    )
+                    {
                         if ((uint)charsWritten > (uint)RemainingCurrentChunk.Length)
                         {
                             // Untrusted ISpanFormattable implementations might return an erroneous charsWritten value,
@@ -2392,7 +2400,8 @@ namespace System.Text
             StringBuilder sourceChunk,
             int removeCount,
             string value
-        ) {
+        )
+        {
             if (replacementsCount <= 0)
             {
                 return;
@@ -2546,7 +2555,8 @@ namespace System.Text
             ref int indexInChunk,
             char* value,
             int count
-        ) {
+        )
+        {
             if (count != 0)
             {
                 while (true)
@@ -2641,7 +2651,8 @@ namespace System.Text
             if (
                 (minBlockCharCount + Length) > m_MaxCapacity
                 || minBlockCharCount + Length < minBlockCharCount
-            ) {
+            )
+            {
                 throw new ArgumentOutOfRangeException(
                     "requiredLength",
                     SR.ArgumentOutOfRange_SmallCapacity
@@ -2732,7 +2743,8 @@ namespace System.Text
             out StringBuilder chunk,
             out int indexInChunk,
             bool doNotMoveFollowingChars
-        ) {
+        )
+        {
             AssertInvariants();
             Debug.Assert(count > 0);
             Debug.Assert(index >= 0);
@@ -2760,7 +2772,8 @@ namespace System.Text
                 !doNotMoveFollowingChars
                 && chunk.m_ChunkLength <= DefaultCapacity * 2
                 && chunk.m_ChunkChars.Length - chunk.m_ChunkLength >= count
-            ) {
+            )
+            {
                 for (int i = chunk.m_ChunkLength; i > indexInChunk;)
                 {
                     --i;
@@ -2845,7 +2858,8 @@ namespace System.Text
             int count,
             out StringBuilder chunk,
             out int indexInChunk
-        ) {
+        )
+        {
             AssertInvariants();
             Debug.Assert(startIndex >= 0 && startIndex < Length);
 

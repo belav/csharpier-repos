@@ -57,7 +57,8 @@ namespace System.IO.Compression.Tests
             using (FileStream stream = new FileStream(archivePath, FileMode.Create))
             using (
                 ZipArchive archive = new ZipArchive(stream, ZipArchiveMode.Create, leaveOpen: true)
-            ) {
+            )
+            {
                 ZipArchiveEntry entry = archive.CreateEntry(entryName);
             }
 
@@ -114,7 +115,8 @@ namespace System.IO.Compression.Tests
         public void Windows_ZipWithInvalidFileNames_ThrowsArgumentException(
             string zipName,
             string paramName
-        ) {
+        )
+        {
             AssertExtensions.Throws<ArgumentException>(
                 paramName,
                 null,

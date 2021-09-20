@@ -54,7 +54,8 @@ namespace System.Reflection
         private ConstructorInfo? TryGetConstructor(
             CoreType attributeCoreType,
             params CoreType[] parameterCoreTypes
-        ) {
+        )
+        {
             int count = parameterCoreTypes.Length;
             Type? attributeType = TryGetCoreType(attributeCoreType);
             if (attributeType == null)

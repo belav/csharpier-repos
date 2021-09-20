@@ -55,7 +55,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Progression
             Solution solution,
             IEnumerable<GraphNode> inputNodes,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var builder = new GraphBuilder(solution, cancellationToken);
 
             foreach (var inputNode in inputNodes)
@@ -207,7 +208,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Progression
             ISymbol symbol,
             Project contextProject,
             Document contextDocument
-        ) {
+        )
+        {
             // Figure out what the location for this node should be. We'll arbitrarily pick the
             // first one, unless we have a contextDocument to restrict it
             var preferredLocation = symbol.Locations.FirstOrDefault(l => l.SourceTree != null);
@@ -296,7 +298,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Progression
             ISymbol symbol,
             Solution solution,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             GraphNode node;
 
             switch (symbol.Kind)
@@ -408,7 +411,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Progression
             IParameterSymbol parameterSymbol,
             Solution solution,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var id = await GraphNodeIdCreation.GetIdForParameterAsync(
                     parameterSymbol,
                     solution,
@@ -430,7 +434,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Progression
             ISymbol localSymbol,
             Solution solution,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var id = await GraphNodeIdCreation.GetIdForLocalVariableAsync(
                     localSymbol,
                     solution,
@@ -448,7 +453,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Progression
             IAssemblySymbol assemblySymbol,
             Solution solution,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var id = await GraphNodeIdCreation.GetIdForAssemblyAsync(
                     assemblySymbol,
                     solution,
@@ -712,7 +718,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Progression
             INamespaceSymbol symbol,
             Solution solution,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var id = await GraphNodeIdCreation.GetIdForNamespaceAsync(
                     symbol,
                     solution,
@@ -730,7 +737,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Progression
             INamedTypeSymbol namedType,
             Solution solution,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var id = await GraphNodeIdCreation.GetIdForTypeAsync(
                     namedType,
                     solution,
@@ -795,7 +803,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Progression
             IMethodSymbol method,
             Solution solution,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var id = await GraphNodeIdCreation.GetIdForMemberAsync(
                     method,
                     solution,
@@ -824,7 +833,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Progression
             IFieldSymbol field,
             Solution solution,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var id = await GraphNodeIdCreation.GetIdForMemberAsync(
                     field,
                     solution,
@@ -858,7 +868,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Progression
             IPropertySymbol property,
             Solution solution,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var id = await GraphNodeIdCreation.GetIdForMemberAsync(
                     property,
                     solution,
@@ -883,7 +894,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Progression
             IEventSymbol eventSymbol,
             Solution solution,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var id = await GraphNodeIdCreation.GetIdForMemberAsync(
                     eventSymbol,
                     solution,

@@ -29,7 +29,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Transport.Experimental.Quic.Intern
             IQuicTrace log,
             EndPoint endpoint,
             SslServerAuthenticationOptions sslServerAuthenticationOptions
-        ) {
+        )
+        {
             if (options.Alpn == null)
             {
                 throw new InvalidOperationException(
@@ -59,7 +60,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Transport.Experimental.Quic.Intern
         public async ValueTask<MultiplexedConnectionContext?> AcceptAsync(
             IFeatureCollection? features = null,
             CancellationToken cancellationToken = default
-        ) {
+        )
+        {
             try
             {
                 var quicConnection = await _listener.AcceptConnectionAsync(cancellationToken);

@@ -61,7 +61,8 @@ namespace Newtonsoft.Json.Tests.Documentation.Samples.Serializer
                 Type serializedType,
                 out string assemblyName,
                 out string typeName
-            ) {
+            )
+            {
                 assemblyName = null;
                 typeName = serializedType.Name;
             }

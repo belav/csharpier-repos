@@ -95,7 +95,8 @@ namespace Microsoft.AspNetCore.Razor.Language.Syntax
         public static SourceLocation GetSourceLocation(
             this SyntaxNode node,
             RazorSourceDocument source
-        ) {
+        )
+        {
             if (node == null)
             {
                 throw new ArgumentNullException(nameof(node));
@@ -192,8 +193,9 @@ namespace Microsoft.AspNetCore.Razor.Language.Syntax
             this TRoot root,
             IEnumerable<TNode> nodes,
             Func<TNode, TNode, SyntaxNode> computeReplacementNode
-        ) where TRoot : SyntaxNode
-          where TNode : SyntaxNode
+        )
+            where TRoot : SyntaxNode
+            where TNode : SyntaxNode
         {
             return (TRoot)root.ReplaceCore(
                 nodes: nodes,

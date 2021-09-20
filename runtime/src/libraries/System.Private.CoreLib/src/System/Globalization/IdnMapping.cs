@@ -167,14 +167,16 @@ namespace System.Globalization
             int inputLength,
             char* output,
             int outputLength
-        ) {
+        )
+        {
             Debug.Assert(inputLength > 0);
 
             if (
                 originalString.Length == inputLength
                 && inputLength == outputLength
                 && Ordinal.EqualsIgnoreCase(ref *input, ref *output, inputLength)
-            ) {
+            )
+            {
                 return originalString;
             }
 
@@ -483,7 +485,8 @@ namespace System.Globalization
                             m = c_maxint, j = iAfterLastDot;
                             j < iNextDot;
                             j += IsSupplementary(test) ? 2 : 1
-                        ) {
+                        )
+                        {
                             test = char.ConvertToUtf32(unicode, j);
                             if (test >= n && test < m)
                                 m = test;
@@ -707,7 +710,8 @@ namespace System.Globalization
                         c_strAcePrefix.Length,
                         StringComparison.OrdinalIgnoreCase
                     ) != 0
-                ) {
+                )
+                {
                     // Its ASCII, copy it
                     output.Append(ascii, iAfterLastDot, iNextDot - iAfterLastDot);
                 }
@@ -737,7 +741,8 @@ namespace System.Globalization
                             int copyAscii = iAfterLastDot;
                             copyAscii < iAfterLastDot + numBasicCodePoints;
                             copyAscii++
-                        ) {
+                        )
+                        {
                             // Make sure we don't allow unicode in the ascii part
                             if (ascii[copyAscii] > 0x7f)
                                 throw new ArgumentException(
@@ -856,7 +861,8 @@ namespace System.Globalization
                                 iCount = i, iUseInsertLocation = iOutputAfterLastDot;
                                 iCount > 0;
                                 iCount--, iUseInsertLocation++
-                            ) {
+                            )
+                            {
                                 // If its a surrogate, we have to go one more
                                 if (iUseInsertLocation >= output.Length)
                                     throw new ArgumentException(

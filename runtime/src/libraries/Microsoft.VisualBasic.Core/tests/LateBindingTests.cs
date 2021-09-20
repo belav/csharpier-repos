@@ -20,7 +20,8 @@ namespace Microsoft.VisualBasic.CompilerServices.Tests
             bool[] copyBack,
             Func<object, object> getResult,
             object expected
-        ) {
+        )
+        {
             LateBinding.LateCall(obj, objType, name, args, paramNames, copyBack);
             Assert.Equal(expected, getResult(obj));
         }
@@ -35,7 +36,8 @@ namespace Microsoft.VisualBasic.CompilerServices.Tests
             string[] paramNames,
             bool[] copyBack,
             object expected
-        ) {
+        )
+        {
             Assert.Equal(
                 expected,
                 LateBinding.LateGet(obj, objType, name, args, paramNames, copyBack)
@@ -52,7 +54,8 @@ namespace Microsoft.VisualBasic.CompilerServices.Tests
             string[] paramNames,
             Func<object, object> getResult,
             object expected
-        ) {
+        )
+        {
             LateBinding.LateSet(obj, objType, name, args, paramNames);
             Assert.Equal(expected, getResult(obj));
         }
@@ -67,7 +70,8 @@ namespace Microsoft.VisualBasic.CompilerServices.Tests
             string[] paramNames,
             bool missing,
             bool valueType
-        ) {
+        )
+        {
             if (missing)
             {
                 Assert.Throws<MissingMemberException>(
@@ -142,7 +146,8 @@ namespace Microsoft.VisualBasic.CompilerServices.Tests
             string[] paramNames,
             Func<object, object> getResult,
             object expected
-        ) {
+        )
+        {
             LateBinding.LateIndexSet(obj, args, paramNames);
             Assert.Equal(expected, getResult(obj));
         }
@@ -164,7 +169,8 @@ namespace Microsoft.VisualBasic.CompilerServices.Tests
             string[] paramNames,
             bool missing,
             bool valueType
-        ) {
+        )
+        {
             if (missing)
             {
                 Assert.Throws<MissingMemberException>(

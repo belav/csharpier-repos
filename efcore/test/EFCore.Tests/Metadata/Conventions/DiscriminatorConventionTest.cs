@@ -258,7 +258,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
         private void RunConvention(
             InternalEntityTypeBuilder entityTypeBuilder,
             EntityType oldBaseType
-        ) {
+        )
+        {
             var context = new ConventionContext<IConventionEntityType>(
                 entityTypeBuilder.Metadata.Model.ConventionDispatcher
             );

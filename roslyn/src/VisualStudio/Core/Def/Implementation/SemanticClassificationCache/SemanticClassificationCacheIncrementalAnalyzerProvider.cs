@@ -46,7 +46,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.SemanticClassif
                 SyntaxNode bodyOpt,
                 InvocationReasons reasons,
                 CancellationToken cancellationToken
-            ) {
+            )
+            {
                 // only process C# and VB.  OOP does not contain files for other languages.
                 if (
                     document.Project.Language

@@ -206,7 +206,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.IncrementalParsing
             string text,
             Action<SyntaxTree> validator,
             CSharpParseOptions options = null
-        ) {
+        )
+        {
             var oldTree = SyntaxFactory.ParseSyntaxTree(text);
             validator(oldTree);
         }

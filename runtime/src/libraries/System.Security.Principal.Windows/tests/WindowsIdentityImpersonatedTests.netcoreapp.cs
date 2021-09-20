@@ -186,7 +186,8 @@ public sealed class WindowsTestAccount : IDisposable
                     LOGON32_PROVIDER_DEFAULT,
                     out _accountTokenHandle
                 )
-            ) {
+            )
+            {
                 _accountTokenHandle = null;
                 throw new Exception(
                     $"Failed to get SafeAccessTokenHandle for test account {_userName}",

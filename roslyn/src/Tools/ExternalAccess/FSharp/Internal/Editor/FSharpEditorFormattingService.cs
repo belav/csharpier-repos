@@ -41,7 +41,8 @@ namespace Microsoft.CodeAnalysis.ExternalAccess.FSharp.Internal.Editor
             TextSpan? textSpan,
             DocumentOptionSet? documentOptions,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             return _service.GetFormattingChangesAsync(document, textSpan, cancellationToken);
         }
 
@@ -51,7 +52,8 @@ namespace Microsoft.CodeAnalysis.ExternalAccess.FSharp.Internal.Editor
             int position,
             DocumentOptionSet? documentOptions,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             return _service.GetFormattingChangesAsync(
                 document,
                 typedChar,
@@ -65,7 +67,8 @@ namespace Microsoft.CodeAnalysis.ExternalAccess.FSharp.Internal.Editor
             TextSpan textSpan,
             DocumentOptionSet? documentOptions,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             return _service.GetFormattingChangesOnPasteAsync(document, textSpan, cancellationToken);
         }
 
@@ -74,7 +77,8 @@ namespace Microsoft.CodeAnalysis.ExternalAccess.FSharp.Internal.Editor
             int position,
             DocumentOptionSet? documentOptions,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             return _service.GetFormattingChangesOnReturnAsync(
                 document,
                 position,

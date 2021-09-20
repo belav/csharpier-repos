@@ -52,10 +52,8 @@ namespace Microsoft.AspNetCore.Mvc
         /// <param name="authenticationScheme">The authentication schemes to challenge.</param>
         /// <param name="properties"><see cref="AuthenticationProperties"/> used to perform the authentication
         /// challenge.</param>
-        public ChallengeResult(
-            string authenticationScheme,
-            AuthenticationProperties? properties
-        ) : this(new[] { authenticationScheme }, properties) { }
+        public ChallengeResult(string authenticationScheme, AuthenticationProperties? properties)
+            : this(new[] { authenticationScheme }, properties) { }
 
         /// <summary>
         /// Initializes a new instance of <see cref="ChallengeResult"/> with the
@@ -67,7 +65,8 @@ namespace Microsoft.AspNetCore.Mvc
         public ChallengeResult(
             IList<string> authenticationSchemes,
             AuthenticationProperties? properties
-        ) {
+        )
+        {
             AuthenticationSchemes = authenticationSchemes;
             Properties = properties;
         }

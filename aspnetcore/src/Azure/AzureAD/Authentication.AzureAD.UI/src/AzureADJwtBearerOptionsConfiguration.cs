@@ -19,7 +19,8 @@ namespace Microsoft.AspNetCore.Authentication
         public AzureADJwtBearerOptionsConfiguration(
             IOptions<AzureADSchemeOptions> schemeOptions,
             IOptionsMonitor<AzureADOptions> azureADOptions
-        ) {
+        )
+        {
             _schemeOptions = schemeOptions;
             _azureADOptions = azureADOptions;
         }

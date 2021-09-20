@@ -21,7 +21,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.CodeModel.Inter
             FileCodeModel fileCodeModel,
             SyntaxNodeKey nodeKey,
             int? nodeKind
-        ) {
+        )
+        {
             var element = new CodeEvent(state, fileCodeModel, nodeKey, nodeKind);
             var result = (EnvDTE80.CodeEvent)ComAggregate.CreateAggregatedObject(element);
 
@@ -35,7 +36,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.CodeModel.Inter
             FileCodeModel fileCodeModel,
             int nodeKind,
             string name
-        ) {
+        )
+        {
             var element = new CodeEvent(state, fileCodeModel, nodeKind, name);
             return (EnvDTE80.CodeEvent)ComAggregate.CreateAggregatedObject(element);
         }

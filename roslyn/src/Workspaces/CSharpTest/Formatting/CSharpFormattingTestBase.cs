@@ -28,7 +28,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.Formatting
             OptionsCollection changedOptionSet = null,
             bool testWithTransformation = true,
             ParseOptions parseOptions = null
-        ) {
+        )
+        {
             return AssertFormatAsync(
                 code,
                 code,
@@ -47,7 +48,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.Formatting
             OptionsCollection changedOptionSet = null,
             bool testWithTransformation = true,
             ParseOptions parseOptions = null
-        ) {
+        )
+        {
             return AssertFormatAsync(
                 expected,
                 code,
@@ -67,7 +69,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.Formatting
             OptionsCollection changedOptionSet = null,
             bool testWithTransformation = true,
             ParseOptions parseOptions = null
-        ) {
+        )
+        {
             return AssertFormatAsync(
                 expected,
                 code,

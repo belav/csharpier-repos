@@ -117,7 +117,8 @@ namespace System.Runtime.Serialization.Json
             bool[] value,
             XmlDictionaryString itemName,
             XmlDictionaryString? itemNamespace
-        ) {
+        )
+        {
             for (int i = 0; i < value.Length; i++)
             {
                 WriteBoolean(value[i], itemName, itemNamespace);
@@ -128,7 +129,8 @@ namespace System.Runtime.Serialization.Json
             DateTime[] value,
             XmlDictionaryString itemName,
             XmlDictionaryString? itemNamespace
-        ) {
+        )
+        {
             for (int i = 0; i < value.Length; i++)
             {
                 WriteDateTime(value[i], itemName, itemNamespace);
@@ -139,7 +141,8 @@ namespace System.Runtime.Serialization.Json
             decimal[] value,
             XmlDictionaryString itemName,
             XmlDictionaryString? itemNamespace
-        ) {
+        )
+        {
             for (int i = 0; i < value.Length; i++)
             {
                 WriteDecimal(value[i], itemName, itemNamespace);
@@ -150,7 +153,8 @@ namespace System.Runtime.Serialization.Json
             int[] value,
             XmlDictionaryString itemName,
             XmlDictionaryString? itemNamespace
-        ) {
+        )
+        {
             for (int i = 0; i < value.Length; i++)
             {
                 WriteInt(value[i], itemName, itemNamespace);
@@ -161,7 +165,8 @@ namespace System.Runtime.Serialization.Json
             long[] value,
             XmlDictionaryString itemName,
             XmlDictionaryString? itemNamespace
-        ) {
+        )
+        {
             for (int i = 0; i < value.Length; i++)
             {
                 WriteLong(value[i], itemName, itemNamespace);
@@ -207,7 +212,8 @@ namespace System.Runtime.Serialization.Json
                     if (
                         (tickCount > DateTime.MaxValue.Ticks)
                         || (tickCount < DateTime.MinValue.Ticks)
-                    ) {
+                    )
+                    {
                         throw XmlObjectSerializer.CreateSerializationException(
                             SR.JsonDateTimeOutOfRange,
                             new ArgumentOutOfRangeException(nameof(value))
@@ -245,7 +251,8 @@ namespace System.Runtime.Serialization.Json
             float[] value,
             XmlDictionaryString itemName,
             XmlDictionaryString? itemNamespace
-        ) {
+        )
+        {
             for (int i = 0; i < value.Length; i++)
             {
                 WriteFloat(value[i], itemName, itemNamespace);
@@ -256,7 +263,8 @@ namespace System.Runtime.Serialization.Json
             double[] value,
             XmlDictionaryString itemName,
             XmlDictionaryString? itemNamespace
-        ) {
+        )
+        {
             for (int i = 0; i < value.Length; i++)
             {
                 WriteDouble(value[i], itemName, itemNamespace);

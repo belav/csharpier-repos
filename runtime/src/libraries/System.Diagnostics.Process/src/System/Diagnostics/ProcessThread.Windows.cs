@@ -18,7 +18,8 @@ namespace System.Diagnostics
                     SafeThreadHandle threadHandle = OpenThreadHandle(
                         Interop.Kernel32.ThreadOptions.THREAD_SET_INFORMATION
                     )
-                ) {
+                )
+                {
                     if (Interop.Kernel32.SetThreadIdealProcessor(threadHandle, value) < 0)
                     {
                         throw new Win32Exception();
@@ -50,7 +51,8 @@ namespace System.Diagnostics
                     SafeThreadHandle threadHandle = OpenThreadHandle(
                         Interop.Kernel32.ThreadOptions.THREAD_QUERY_INFORMATION
                     )
-                ) {
+                )
+                {
                     bool disabled;
                     if (!Interop.Kernel32.GetThreadPriorityBoost(threadHandle, out disabled))
                     {
@@ -65,7 +67,8 @@ namespace System.Diagnostics
                     SafeThreadHandle threadHandle = OpenThreadHandle(
                         Interop.Kernel32.ThreadOptions.THREAD_SET_INFORMATION
                     )
-                ) {
+                )
+                {
                     if (!Interop.Kernel32.SetThreadPriorityBoost(threadHandle, !value))
                         throw new Win32Exception();
                 }
@@ -85,7 +88,8 @@ namespace System.Diagnostics
                     SafeThreadHandle threadHandle = OpenThreadHandle(
                         Interop.Kernel32.ThreadOptions.THREAD_QUERY_INFORMATION
                     )
-                ) {
+                )
+                {
                     int value = Interop.Kernel32.GetThreadPriority(threadHandle);
                     if (value == 0x7fffffff)
                     {
@@ -100,7 +104,8 @@ namespace System.Diagnostics
                     SafeThreadHandle threadHandle = OpenThreadHandle(
                         Interop.Kernel32.ThreadOptions.THREAD_SET_INFORMATION
                     )
-                ) {
+                )
+                {
                     if (!Interop.Kernel32.SetThreadPriority(threadHandle, (int)value))
                     {
                         throw new Win32Exception();
@@ -125,7 +130,8 @@ namespace System.Diagnostics
                         Interop.Kernel32.ThreadOptions.THREAD_SET_INFORMATION
                             | Interop.Kernel32.ThreadOptions.THREAD_QUERY_INFORMATION
                     )
-                ) {
+                )
+                {
                     if (Interop.Kernel32.SetThreadAffinityMask(threadHandle, value) == IntPtr.Zero)
                     {
                         throw new Win32Exception();
@@ -175,7 +181,8 @@ namespace System.Diagnostics
                 SafeThreadHandle threadHandle = OpenThreadHandle(
                     Interop.Kernel32.ThreadOptions.THREAD_QUERY_INFORMATION
                 )
-            ) {
+            )
+            {
                 var threadTimes = new ProcessThreadTimes();
                 if (
                     !Interop.Kernel32.GetThreadTimes(
@@ -185,7 +192,8 @@ namespace System.Diagnostics
                         out threadTimes._kernel,
                         out threadTimes._user
                     )
-                ) {
+                )
+                {
                     throw new Win32Exception();
                 }
                 return threadTimes;

@@ -107,7 +107,8 @@ namespace System.Linq.Parallel.Tests
         public static void Where_NotPipelined_Longrunning(
             Labeled<ParallelQuery<int>> labeled,
             int count
-        ) {
+        )
+        {
             Where_NotPipelined(labeled, count);
         }
 
@@ -195,7 +196,8 @@ namespace System.Linq.Parallel.Tests
         public static void Where_Indexed_NotPipelined(
             Labeled<ParallelQuery<int>> labeled,
             int count
-        ) {
+        )
+        {
             ParallelQuery<int> query = labeled.Item;
             int seen = 0;
             Assert.All(
@@ -211,7 +213,8 @@ namespace System.Linq.Parallel.Tests
         public static void Where_Indexed_NotPipelined_Longrunning(
             Labeled<ParallelQuery<int>> labeled,
             int count
-        ) {
+        )
+        {
             Where_Indexed_NotPipelined(labeled, count);
         }
 

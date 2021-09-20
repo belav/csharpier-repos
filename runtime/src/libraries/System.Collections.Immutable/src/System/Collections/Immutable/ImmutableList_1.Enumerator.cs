@@ -101,7 +101,8 @@ namespace System.Collections.Immutable
                 int startIndex = -1,
                 int count = -1,
                 bool reversed = false
-            ) {
+            )
+            {
                 Requires.NotNull(root, nameof(root));
                 Requires.Range(startIndex >= -1, nameof(startIndex));
                 Requires.Range(count >= -1, nameof(count));
@@ -175,7 +176,8 @@ namespace System.Collections.Immutable
                 if (
                     _stack != null
                     && _stack.TryUse(ref this, out Stack<RefAsValueType<Node>>? stack)
-                ) {
+                )
+                {
                     stack.ClearFastWhenEmpty();
                     s_EnumeratingStacks.TryAdd(this, _stack!);
                 }

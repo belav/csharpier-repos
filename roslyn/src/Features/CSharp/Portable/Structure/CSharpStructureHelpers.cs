@@ -59,7 +59,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Structure
         private static (int spanEnd, int hintEnd) GetCollapsibleEnd(
             SyntaxToken lastToken,
             bool compressEmptyLines
-        ) {
+        )
+        {
             // If the token has any trailing comments, we use the end of the token;
             // otherwise, the behavior depends on 'compressEmptyLines':
             //   false: skip to the start of the first new line trivia
@@ -95,7 +96,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Structure
                 bool compressEmptyLines,
                 ref int end,
                 ref int? hintEnd
-            ) {
+            )
+            {
                 if (trivia.IsKind(SyntaxKind.EndOfLineTrivia))
                 {
                     end = trivia.SpanStart;
@@ -126,7 +128,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Structure
             var nextToken = lastToken.GetNextToken(includeSkipped: true);
             if (
                 nextToken.Kind() != SyntaxKind.None && nextToken.Kind() == SyntaxKind.SemicolonToken
-            ) {
+            )
+            {
                 var forStatement = nextToken.GetAncestor<ForStatementSyntax>();
                 if (forStatement != null && forStatement.FirstSemicolonToken == nextToken)
                 {
@@ -184,7 +187,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Structure
         private static BlockSpan CreateCommentBlockSpan(
             SyntaxTrivia startComment,
             SyntaxTrivia endComment
-        ) {
+        )
+        {
             var span = TextSpan.FromBounds(startComment.SpanStart, endComment.Span.End);
 
             return new BlockSpan(
@@ -200,7 +204,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Structure
         // For testing purposes
         internal static ImmutableArray<BlockSpan> CreateCommentBlockSpan(
             SyntaxTriviaList triviaList
-        ) {
+        )
+        {
             using var result = TemporaryArray<BlockSpan>.Empty;
             CollectCommentBlockSpans(triviaList, ref result.AsRef());
             return result.ToImmutableAndClear();
@@ -209,7 +214,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Structure
         public static void CollectCommentBlockSpans(
             SyntaxTriviaList triviaList,
             ref TemporaryArray<BlockSpan> spans
-        ) {
+        )
+        {
             if (triviaList.Count > 0)
             {
                 SyntaxTrivia? startComment = null;
@@ -252,7 +258,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Structure
                             SyntaxKind.EndOfLineTrivia,
                             SyntaxKind.EndOfFileToken
                         )
-                    ) {
+                    )
+                    {
                         completeSingleLineCommentGroup(ref spans);
                     }
                 }
@@ -265,7 +272,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Structure
             SyntaxNode node,
             ref TemporaryArray<BlockSpan> spans,
             BlockStructureOptionProvider optionProvider
-        ) {
+        )
+        {
             if (node == null)
             {
                 throw new ArgumentNullException(nameof(node));
@@ -274,7 +282,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Structure
             if (
                 optionProvider.IsMetadataAsSource
                 && TryGetLeadingCollapsibleSpan(node, out var span)
-            ) {
+            )
+            {
                 spans.Add(span);
             }
             else
@@ -332,7 +341,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Structure
                         SyntaxKind.ConstructorDeclaration,
                         out ConstructorDeclarationSyntax constructorDeclaration
                     )
-                ) {
+                )
+                {
                     return constructorDeclaration.Modifiers.FirstOrNull()
                         ?? constructorDeclaration.Identifier;
                 }
@@ -341,7 +351,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Structure
                         SyntaxKind.ConversionOperatorDeclaration,
                         out ConversionOperatorDeclarationSyntax conversionOperatorDeclaration
                     )
-                ) {
+                )
+                {
                     return conversionOperatorDeclaration.Modifiers.FirstOrNull()
                         ?? conversionOperatorDeclaration.ImplicitOrExplicitKeyword;
                 }
@@ -350,7 +361,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Structure
                         SyntaxKind.DelegateDeclaration,
                         out DelegateDeclarationSyntax delegateDeclaration
                     )
-                ) {
+                )
+                {
                     return delegateDeclaration.Modifiers.FirstOrNull()
                         ?? delegateDeclaration.DelegateKeyword;
                 }
@@ -359,7 +371,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Structure
                         SyntaxKind.DestructorDeclaration,
                         out DestructorDeclarationSyntax destructorDeclaration
                     )
-                ) {
+                )
+                {
                     return destructorDeclaration.TildeToken;
                 }
                 else if (
@@ -367,7 +380,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Structure
                         SyntaxKind.EnumDeclaration,
                         out EnumDeclarationSyntax enumDeclaration
                     )
-                ) {
+                )
+                {
                     return enumDeclaration.Modifiers.FirstOrNull() ?? enumDeclaration.EnumKeyword;
                 }
                 else if (
@@ -375,7 +389,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Structure
                         SyntaxKind.EnumMemberDeclaration,
                         out EnumMemberDeclarationSyntax enumMemberDeclaration
                     )
-                ) {
+                )
+                {
                     return enumMemberDeclaration.Identifier;
                 }
                 else if (
@@ -383,7 +398,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Structure
                         SyntaxKind.EventDeclaration,
                         out EventDeclarationSyntax eventDeclaration
                     )
-                ) {
+                )
+                {
                     return eventDeclaration.Modifiers.FirstOrNull()
                         ?? eventDeclaration.EventKeyword;
                 }
@@ -392,7 +408,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Structure
                         SyntaxKind.EventFieldDeclaration,
                         out EventFieldDeclarationSyntax eventFieldDeclaration
                     )
-                ) {
+                )
+                {
                     return eventFieldDeclaration.Modifiers.FirstOrNull()
                         ?? eventFieldDeclaration.EventKeyword;
                 }
@@ -401,7 +418,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Structure
                         SyntaxKind.FieldDeclaration,
                         out FieldDeclarationSyntax fieldDeclaration
                     )
-                ) {
+                )
+                {
                     return fieldDeclaration.Modifiers.FirstOrNull()
                         ?? fieldDeclaration.Declaration.GetFirstToken();
                 }
@@ -410,7 +428,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Structure
                         SyntaxKind.IndexerDeclaration,
                         out IndexerDeclarationSyntax indexerDeclaration
                     )
-                ) {
+                )
+                {
                     return indexerDeclaration.Modifiers.FirstOrNull()
                         ?? indexerDeclaration.Type.GetFirstToken();
                 }
@@ -419,7 +438,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Structure
                         SyntaxKind.MethodDeclaration,
                         out MethodDeclarationSyntax methodDeclaration
                     )
-                ) {
+                )
+                {
                     return methodDeclaration.Modifiers.FirstOrNull()
                         ?? methodDeclaration.ReturnType.GetFirstToken();
                 }
@@ -428,7 +448,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Structure
                         SyntaxKind.OperatorDeclaration,
                         out OperatorDeclarationSyntax operatorDeclaration
                     )
-                ) {
+                )
+                {
                     return operatorDeclaration.Modifiers.FirstOrNull()
                         ?? operatorDeclaration.ReturnType.GetFirstToken();
                 }
@@ -437,7 +458,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Structure
                         SyntaxKind.PropertyDeclaration,
                         out PropertyDeclarationSyntax propertyDeclaration
                     )
-                ) {
+                )
+                {
                     return propertyDeclaration.Modifiers.FirstOrNull()
                         ?? propertyDeclaration.Type.GetFirstToken();
                 }
@@ -449,7 +471,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Structure
                     || node.IsKind(SyntaxKind.RecordDeclaration, out typeDeclaration)
                     || node.IsKind(SyntaxKind.StructDeclaration, out typeDeclaration)
                     || node.IsKind(SyntaxKind.InterfaceDeclaration, out typeDeclaration)
-                ) {
+                )
+                {
                     return typeDeclaration.Modifiers.FirstOrNull() ?? typeDeclaration.Keyword;
                 }
                 else
@@ -465,7 +488,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Structure
                         SyntaxKind.EnumDeclaration,
                         out EnumDeclarationSyntax enumDeclaration
                     )
-                ) {
+                )
+                {
                     return enumDeclaration.OpenBraceToken.GetPreviousToken();
                 }
                 else if (
@@ -476,7 +500,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Structure
                     || node.IsKind(SyntaxKind.RecordDeclaration, out typeDeclaration)
                     || node.IsKind(SyntaxKind.StructDeclaration, out typeDeclaration)
                     || node.IsKind(SyntaxKind.InterfaceDeclaration, out typeDeclaration)
-                ) {
+                )
+                {
                     return typeDeclaration.OpenBraceToken.GetPreviousToken();
                 }
                 else
@@ -492,7 +517,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Structure
             bool autoCollapse,
             string type,
             bool isCollapsible
-        ) {
+        )
+        {
             return CreateBlockSpan(
                 textSpan,
                 textSpan,
@@ -510,7 +536,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Structure
             bool autoCollapse,
             string type,
             bool isCollapsible
-        ) {
+        )
+        {
             return new BlockSpan(
                 textSpan: textSpan,
                 hintSpan: hintSpan,
@@ -527,7 +554,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Structure
             bool autoCollapse,
             string type,
             bool isCollapsible
-        ) {
+        )
+        {
             return CreateBlockSpan(node.Span, bannerText, autoCollapse, type, isCollapsible);
         }
 
@@ -539,7 +567,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Structure
             bool autoCollapse,
             string type,
             bool isCollapsible
-        ) {
+        )
+        {
             return CreateBlockSpan(
                 node,
                 syntaxToken,
@@ -561,7 +590,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Structure
             bool autoCollapse,
             string type,
             bool isCollapsible
-        ) {
+        )
+        {
             // If the SyntaxToken is actually missing, don't attempt to create an outlining region.
             if (startToken.IsMissing)
             {
@@ -604,7 +634,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Structure
             bool autoCollapse,
             string type,
             bool isCollapsible
-        ) {
+        )
+        {
             var (spanEnd, hintEnd) = GetCollapsibleEnd(endToken, compressEmptyLines);
             return CreateBlockSpan(
                 node,
@@ -623,7 +654,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Structure
             bool autoCollapse,
             string type,
             bool isCollapsible
-        ) {
+        )
+        {
             return CreateBlockSpan(
                 node,
                 bannerText: Ellipsis,
@@ -642,7 +674,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Structure
             bool autoCollapse,
             string type,
             bool isCollapsible
-        ) {
+        )
+        {
             return CreateBlockSpan(
                 node,
                 syntaxToken,
@@ -664,7 +697,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Structure
             bool autoCollapse,
             string type,
             bool isCollapsible
-        ) {
+        )
+        {
             return CreateBlockSpan(
                 node,
                 startToken,
@@ -686,7 +720,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Structure
             bool autoCollapse,
             string type,
             bool isCollapsible
-        ) {
+        )
+        {
             if (syntaxList.IsEmpty())
             {
                 return null;

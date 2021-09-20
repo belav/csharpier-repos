@@ -27,7 +27,8 @@ namespace Microsoft.CSharp.RuntimeBinder.ComInterop
                 || holdsNull
                 || type == typeof(System.Reflection.Missing)
                 || type == typeof(CurrencyWrapper)
-            ) {
+            )
+            {
                 return true;
             }
 
@@ -107,7 +108,8 @@ namespace Microsoft.CSharp.RuntimeBinder.ComInterop
 
         internal static BindingRestrictions GetTypeRestrictionForDynamicMetaObject(
             DynamicMetaObject obj
-        ) {
+        )
+        {
             if (obj.Value == null && obj.HasValue)
             {
                 //If the meta object holds a null value, create an instance restriction for checking null

@@ -23,7 +23,8 @@ namespace Microsoft.CodeAnalysis.UnitTests.Diagnostics
             string toolFileVersion,
             Version toolAssemblyVersion,
             CultureInfo culture
-        ) {
+        )
+        {
             return new SarifV2ErrorLogger(
                 stream,
                 toolName,

@@ -31,7 +31,8 @@ namespace System.Buffers.Text
             out Guid value,
             out int bytesConsumed,
             char standardFormat = default
-        ) {
+        )
+        {
             FastPath:
             if (standardFormat == default)
             {
@@ -73,7 +74,8 @@ namespace System.Buffers.Text
             ReadOnlySpan<byte> text,
             out Guid value,
             out int bytesConsumed
-        ) {
+        )
+        {
             if (text.Length < 32)
             {
                 value = default;
@@ -84,7 +86,8 @@ namespace System.Buffers.Text
             if (
                 !TryParseUInt32X(text.Slice(0, 8), out uint i1, out int justConsumed)
                 || justConsumed != 8
-            ) {
+            )
+            {
                 value = default;
                 bytesConsumed = 0;
                 return false; // 8 digits
@@ -93,7 +96,8 @@ namespace System.Buffers.Text
             if (
                 !TryParseUInt16X(text.Slice(8, 4), out ushort i2, out justConsumed)
                 || justConsumed != 4
-            ) {
+            )
+            {
                 value = default;
                 bytesConsumed = 0;
                 return false; // next 4 digits
@@ -102,7 +106,8 @@ namespace System.Buffers.Text
             if (
                 !TryParseUInt16X(text.Slice(12, 4), out ushort i3, out justConsumed)
                 || justConsumed != 4
-            ) {
+            )
+            {
                 value = default;
                 bytesConsumed = 0;
                 return false; // next 4 digits
@@ -111,7 +116,8 @@ namespace System.Buffers.Text
             if (
                 !TryParseUInt16X(text.Slice(16, 4), out ushort i4, out justConsumed)
                 || justConsumed != 4
-            ) {
+            )
+            {
                 value = default;
                 bytesConsumed = 0;
                 return false; // next 4 digits
@@ -120,7 +126,8 @@ namespace System.Buffers.Text
             if (
                 !TryParseUInt64X(text.Slice(20), out ulong i5, out justConsumed)
                 || justConsumed != 12
-            ) {
+            )
+            {
                 value = default;
                 bytesConsumed = 0;
                 return false; // next 4 digits
@@ -149,7 +156,8 @@ namespace System.Buffers.Text
             out Guid value,
             out int bytesConsumed,
             int ends
-        ) {
+        )
+        {
             int expectedCodingUnits = 36 + ((ends != 0) ? 2 : 0); // 32 hex digits + 4 delimiters + 2 optional ends
 
             if (source.Length < expectedCodingUnits)

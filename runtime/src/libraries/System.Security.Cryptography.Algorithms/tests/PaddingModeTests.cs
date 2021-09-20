@@ -43,7 +43,8 @@ namespace System.Security.Cryptography.Tests
             int expectedPaddingSize,
             string plainTextStr,
             string expectedCipherStr
-        ) {
+        )
+        {
             Assert.True(
                 paddingMode != PaddingMode.ISO10126,
                 "This tests only non-ISO10126 padding"
@@ -84,7 +85,8 @@ namespace System.Security.Cryptography.Tests
         public static void ValidatePaddingMode_ISO10126(
             int expectedPaddingSize,
             string plainTextStr
-        ) {
+        )
+        {
             byte[] key =
                 "1ed2f625c187b993256a8b3ccf9dcbfa5b44b4795c731012f70e4e64732efd5d".HexToByteArray();
             byte[] iv = "47d1e060ba3c8643f9f8b65feeda4b30".HexToByteArray();
@@ -122,7 +124,8 @@ namespace System.Security.Cryptography.Tests
             byte[] buffer,
             PaddingMode paddingMode,
             int expectedPaddingSize
-        ) {
+        )
+        {
             switch (paddingMode)
             {
                 case PaddingMode.PKCS7:

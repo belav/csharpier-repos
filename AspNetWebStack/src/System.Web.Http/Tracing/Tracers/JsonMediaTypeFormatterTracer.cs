@@ -72,7 +72,8 @@ namespace System.Web.Http.Tracing.Tracers
             Type type,
             HttpRequestMessage request,
             MediaTypeHeaderValue mediaType
-        ) {
+        )
+        {
             return _innerTracer.GetPerRequestFormatterInstance(type, request, mediaType);
         }
 
@@ -81,7 +82,8 @@ namespace System.Web.Http.Tracing.Tracers
             Stream readStream,
             HttpContent content,
             IFormatterLogger formatterLogger
-        ) {
+        )
+        {
             return _innerTracer.ReadFromStreamAsync(type, readStream, content, formatterLogger);
         }
 
@@ -91,7 +93,8 @@ namespace System.Web.Http.Tracing.Tracers
             HttpContent content,
             IFormatterLogger formatterLogger,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             return _innerTracer.ReadFromStreamAsync(
                 type,
                 readStream,
@@ -108,7 +111,8 @@ namespace System.Web.Http.Tracing.Tracers
             Stream readStream,
             Encoding effectiveEncoding,
             IFormatterLogger formatterLogger
-        ) {
+        )
+        {
             return _inner.ReadFromStream(type, readStream, effectiveEncoding, formatterLogger);
         }
 
@@ -118,7 +122,8 @@ namespace System.Web.Http.Tracing.Tracers
             Type type,
             Stream readStream,
             Encoding effectiveEncoding
-        ) {
+        )
+        {
             return _inner.CreateJsonReader(type, readStream, effectiveEncoding);
         }
 
@@ -128,7 +133,8 @@ namespace System.Web.Http.Tracing.Tracers
             Stream writeStream,
             HttpContent content,
             TransportContext transportContext
-        ) {
+        )
+        {
             return _innerTracer.WriteToStreamAsync(
                 type,
                 value,
@@ -145,7 +151,8 @@ namespace System.Web.Http.Tracing.Tracers
             HttpContent content,
             TransportContext transportContext,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             return _innerTracer.WriteToStreamAsync(
                 type,
                 value,
@@ -163,7 +170,8 @@ namespace System.Web.Http.Tracing.Tracers
             object value,
             Stream writeStream,
             Encoding effectiveEncoding
-        ) {
+        )
+        {
             _inner.WriteToStream(type, value, writeStream, effectiveEncoding);
         }
 
@@ -173,7 +181,8 @@ namespace System.Web.Http.Tracing.Tracers
             Type type,
             Stream writeStream,
             Encoding effectiveEncoding
-        ) {
+        )
+        {
             return _inner.CreateJsonWriter(type, writeStream, effectiveEncoding);
         }
 
@@ -181,7 +190,8 @@ namespace System.Web.Http.Tracing.Tracers
             Type type,
             HttpContentHeaders headers,
             MediaTypeHeaderValue mediaType
-        ) {
+        )
+        {
             _innerTracer.SetDefaultContentHeaders(type, headers, mediaType);
         }
 

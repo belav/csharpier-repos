@@ -324,10 +324,8 @@ namespace System.Text.RegularExpressions.Tests
         private sealed class SerializableDerivedRegex : Regex
         {
             public SerializableDerivedRegex() : base("") { }
-            public SerializableDerivedRegex(
-                SerializationInfo info,
-                StreamingContext context
-            ) : base(info, context) { }
+            public SerializableDerivedRegex(SerializationInfo info, StreamingContext context)
+                : base(info, context) { }
         }
 
         [ConditionalFact(typeof(RemoteExecutor), nameof(RemoteExecutor.IsSupported))]

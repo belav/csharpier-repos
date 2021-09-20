@@ -23,7 +23,8 @@ namespace Internal.IL
         public static MetadataType GetOptionalHelperType(
             this TypeSystemContext context,
             string name
-        ) {
+        )
+        {
             MetadataType helperType = context.SystemModule.GetType(
                 HelperTypesNamespace,
                 name,
@@ -36,7 +37,8 @@ namespace Internal.IL
             this TypeSystemContext context,
             string typeName,
             string methodName
-        ) {
+        )
+        {
             MetadataType helperType = context.GetHelperType(typeName);
             MethodDesc helperMethod = helperType.GetKnownMethod(methodName, null);
             return helperMethod;
@@ -46,7 +48,8 @@ namespace Internal.IL
             this TypeSystemContext context,
             string typeName,
             string methodName
-        ) {
+        )
+        {
             MetadataType helperType = context.GetOptionalHelperType(typeName);
             MethodDesc helperMethod = helperType?.GetMethod(methodName, null);
             return helperMethod;
@@ -61,7 +64,8 @@ namespace Internal.IL
             this ILCodeStream codeStream,
             ILEmitter emitter,
             MethodDesc method
-        ) {
+        )
+        {
             Debug.Assert(method.Signature.Length == 0 && method.Signature.IsStatic);
 
             // Emit a call followed by a branch to the call.
@@ -83,7 +87,8 @@ namespace Internal.IL
             this TypeDesc type,
             string name,
             MethodSignature signature
-        ) {
+        )
+        {
             MethodDesc method = type.GetMethod(name, signature);
             if (method == null)
             {
@@ -137,7 +142,8 @@ namespace Internal.IL
             this ModuleDesc module,
             string @namespace,
             string name
-        ) {
+        )
+        {
             MetadataType type = module.GetType(@namespace, name, NotFoundBehavior.ReturnNull);
             if (type == null)
             {

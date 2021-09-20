@@ -51,7 +51,8 @@ namespace Microsoft.EntityFrameworkCore.Update.Internal
         public virtual TValue GetOrAddValue(
             IUpdateEntry entry,
             SharedTableEntryValueFactory<TValue> createElement
-        ) {
+        )
+        {
             var mainEntry = GetMainEntry(entry);
             if (_entryValueMap.TryGetValue(mainEntry, out var sharedCommand))
             {

@@ -38,7 +38,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             SyntaxNode location,
             SyntaxNode container,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             // Get all the symbols visible to the current location.
             var visibleSymbols = semanticModel.LookupSymbols(location.SpanStart);
 
@@ -47,11 +48,13 @@ namespace Microsoft.CodeAnalysis.CSharp
                 (
                     (CSharpCompilation)semanticModel.Compilation
                 ).LanguageVersion.MapSpecifiedToEffectiveVersion() >= LanguageVersion.CSharp8
-            ) {
+            )
+            {
                 if (
                     SyntaxFacts.IsParameterList(container)
                     && SyntaxFacts.IsLocalFunctionStatement(container.Parent)
-                ) {
+                )
+                {
                     visibleSymbols = visibleSymbols.WhereAsArray(
                         s => !s.MatchesKind(SymbolKind.Local, SymbolKind.Parameter)
                     );
@@ -88,7 +91,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             SemanticModel semanticModel,
             int position,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             return semanticModel.SyntaxTree.IsExpressionContext(
                 position,
                 semanticModel.SyntaxTree.FindTokenOnLeftOfPosition(position, cancellationToken),
@@ -109,7 +113,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             SemanticModel semanticModel,
             int position,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             return semanticModel.SyntaxTree.IsStatementContext(
                 position,
                 semanticModel.SyntaxTree.FindTokenOnLeftOfPosition(position, cancellationToken),
@@ -141,7 +146,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             SemanticModel semanticModel,
             int position,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             return semanticModel.SyntaxTree.IsTypeDeclarationContext(
                 position,
                 semanticModel.SyntaxTree.FindTokenOnLeftOfPosition(position, cancellationToken),
@@ -153,7 +159,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             SemanticModel semanticModel,
             int position,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             return semanticModel.SyntaxTree.IsMemberDeclarationContext(
                 position,
                 semanticModel.SyntaxTree.FindTokenOnLeftOfPosition(position, cancellationToken)

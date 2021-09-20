@@ -777,7 +777,8 @@ namespace Microsoft.EntityFrameworkCore
             int? maxLength,
             bool? unicode,
             bool? fixedLength
-        ) {
+        )
+        {
             Assert.Same(typeof(T), mapping.ClrType);
             Assert.Equal(inferred, mapping.IsInferred);
             Assert.Equal(maxLength, mapping.ScaffoldMaxLength);

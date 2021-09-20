@@ -46,13 +46,14 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Transport.Libuv.Internal
             LibuvFunctions libuv,
             LibuvTransportContext libuvTransportContext,
             int maxLoops = 8
-        ) : this(
-            libuv,
-            libuvTransportContext.AppLifetime,
-            libuvTransportContext.Options.MemoryPoolFactory(),
-            libuvTransportContext.Log,
-            maxLoops
-        ) { }
+        )
+            : this(
+                libuv,
+                libuvTransportContext.AppLifetime,
+                libuvTransportContext.Options.MemoryPoolFactory(),
+                libuvTransportContext.Log,
+                maxLoops
+            ) { }
 
         public LibuvThread(
             LibuvFunctions libuv,
@@ -60,7 +61,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Transport.Libuv.Internal
             MemoryPool<byte> pool,
             ILibuvTrace log,
             int maxLoops = 8
-        ) {
+        )
+        {
             _libuv = libuv;
             _appLifetime = appLifetime;
             _log = log;

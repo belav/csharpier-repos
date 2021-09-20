@@ -20,7 +20,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Structure
             ref TemporaryArray<BlockSpan> spans,
             BlockStructureOptionProvider optionProvider,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             CSharpStructureHelpers.CollectCommentBlockSpans(
                 compilationUnit,
                 ref spans,
@@ -48,7 +49,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Structure
                 || compilationUnit.Externs.Count > 0
                 || compilationUnit.Members.Count > 0
                 || compilationUnit.AttributeLists.Count > 0
-            ) {
+            )
+            {
                 CSharpStructureHelpers.CollectCommentBlockSpans(
                     compilationUnit.EndOfFileToken.LeadingTrivia,
                     ref spans

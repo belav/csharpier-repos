@@ -11,7 +11,8 @@ namespace System.Runtime.InteropServices.CustomMarshalers
         public static TView GetOrCreateManagedViewFromComData<T, TView>(
             object comObject,
             Func<T, TView> createCallback
-        ) {
+        )
+        {
             object key = typeof(TView);
 
             if (Marshal.GetComObjectData(comObject, key) is TView managedView)

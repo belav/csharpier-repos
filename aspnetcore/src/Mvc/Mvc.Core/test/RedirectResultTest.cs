@@ -71,7 +71,8 @@ namespace Microsoft.AspNetCore.Mvc
             string appRoot,
             string contentPath,
             string expectedPath
-        ) {
+        )
+        {
             // Arrange
             var httpContext = GetHttpContext(appRoot);
             var actionContext = GetActionContext(httpContext);
@@ -99,7 +100,8 @@ namespace Microsoft.AspNetCore.Mvc
             string appRoot,
             string contentPath,
             string expectedPath
-        ) {
+        )
+        {
             // Arrange
             var httpContext = GetHttpContext(appRoot);
             var actionContext = GetActionContext(httpContext);

@@ -24,7 +24,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Http
         public HttpRequestHeaders(
             bool reuseHeaderValues = true,
             Func<string, Encoding?>? encodingSelector = null
-        ) {
+        )
+        {
             ReuseHeaderValues = reuseHeaderValues;
             EncodingSelector =
                 encodingSelector ?? KestrelServerOptions.DefaultRequestHeaderEncodingSelector;
@@ -95,7 +96,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Http
                 !Utf8Parser.TryParse(value, out long parsed, out var consumed)
                 || parsed < 0
                 || consumed != value.Length
-            ) {
+            )
+            {
                 KestrelBadHttpRequestException.Throw(
                     RequestRejectionReason.InvalidContentLength,
                     value.GetRequestHeaderString(HeaderNames.ContentLength, EncodingSelector)
@@ -109,7 +111,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Http
         private void AppendContentLengthCustomEncoding(
             ReadOnlySpan<byte> value,
             Encoding? customEncoding
-        ) {
+        )
+        {
             if (_contentLength.HasValue)
             {
                 KestrelBadHttpRequestException.Throw(RequestRejectionReason.MultipleContentLengths);
@@ -129,7 +132,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Http
                     out parsed
                 )
                 || parsed < 0
-            ) {
+            )
+            {
                 KestrelBadHttpRequestException.Throw(
                     RequestRejectionReason.InvalidContentLength,
                     value.GetRequestHeaderString(HeaderNames.ContentLength, EncodingSelector)

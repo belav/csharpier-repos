@@ -81,14 +81,16 @@ namespace System.Net.Http.Functional.Tests
             AuthenticationSchemes proxyAuthScheme,
             bool secureServer,
             bool proxyClosesConnectionAfterFirst407Response
-        ) {
+        )
+        {
             if (
                 !PlatformDetection.IsWindows
                 && (
                     proxyAuthScheme == AuthenticationSchemes.Negotiate
                     || proxyAuthScheme == AuthenticationSchemes.Ntlm
                 )
-            ) {
+            )
+            {
                 // CI machines don't have GSSAPI module installed and will fail with error from
                 // System.Net.Security.NegotiateStreamPal.AcquireCredentialsHandle():
                 //        "GSSAPI operation failed with error - An invalid status code was supplied
@@ -142,7 +144,8 @@ namespace System.Net.Http.Functional.Tests
                         };
                         using (
                             LoopbackProxyServer proxyServer = LoopbackProxyServer.Create(options)
-                        ) {
+                        )
+                        {
                             Environment.SetEnvironmentVariable(
                                 "http_proxy",
                                 proxyServer.Uri.AbsoluteUri.ToString()
@@ -153,7 +156,8 @@ namespace System.Net.Http.Functional.Tests
                                 HttpResponseMessage response = await client.GetAsync(
                                     Configuration.Http.RemoteEchoServer
                                 )
-                            ) {
+                            )
+                            {
                                 Assert.Equal(HttpStatusCode.OK, response.StatusCode);
                                 string body = await response.Content.ReadAsStringAsync();
                                 Assert.Contains(proxyServer.ViaHeader, body);
@@ -173,7 +177,8 @@ namespace System.Net.Http.Functional.Tests
             Uri uriPrefix,
             string authType,
             bool wrapCredsInCache
-        ) {
+        )
+        {
             if (wrapCredsInCache)
             {
                 var cache = new CredentialCache();
@@ -187,7 +192,8 @@ namespace System.Net.Http.Functional.Tests
         private void ValidateProxyBasicAuthentication(
             LoopbackProxyServer proxyServer,
             NetworkCredential cred
-        ) {
+        )
+        {
             if (cred != null)
             {
                 string expectedAuth = string.IsNullOrEmpty(cred.Domain)
@@ -220,7 +226,8 @@ namespace System.Net.Http.Functional.Tests
             NetworkCredential cred,
             bool wrapCredsInCache,
             bool connectionCloseAfter407
-        ) {
+        )
+        {
             var options = new LoopbackProxyServer.Options
             {
                 AuthenticationSchemes =
@@ -246,7 +253,8 @@ namespace System.Net.Http.Functional.Tests
                     HttpResponseMessage response = await client.GetAsync(
                         Configuration.Http.RemoteEchoServer
                     )
-                ) {
+                )
+                {
                     Assert.Equal(HttpStatusCode.OK, response.StatusCode);
                     TestHelper.VerifyResponseBody(
                         await response.Content.ReadAsStringAsync(),
@@ -267,7 +275,8 @@ namespace System.Net.Http.Functional.Tests
             NetworkCredential cred,
             bool wrapCredsInCache,
             bool connectionCloseAfter407
-        ) {
+        )
+        {
             if (IsWinHttpHandler)
             {
                 return;
@@ -300,7 +309,8 @@ namespace System.Net.Http.Functional.Tests
                         Configuration.Http.SecureRemoteEchoServer,
                         new StringContent(content)
                     )
-                ) {
+                )
+                {
                     string responseContent = await response.Content.ReadAsStringAsync();
 
                     Assert.Equal(HttpStatusCode.OK, response.StatusCode);
@@ -328,7 +338,8 @@ namespace System.Net.Http.Functional.Tests
                 HttpResponseMessage response = await client.GetAsync(
                     Configuration.Http.RemoteEchoServer
                 )
-            ) {
+            )
+            {
                 TestHelper.VerifyResponseBody(
                     await response.Content.ReadAsStringAsync(),
                     response.Content.Headers.ContentMD5,
@@ -356,7 +367,8 @@ namespace System.Net.Http.Functional.Tests
                     HttpResponseMessage response = await client.GetAsync(
                         Configuration.Http.RemoteEchoServer
                     )
-                ) {
+                )
+                {
                     Assert.Equal(HttpStatusCode.ProxyAuthenticationRequired, response.StatusCode);
                 }
             }
@@ -625,7 +637,8 @@ namespace System.Net.Http.Functional.Tests
                             clientTask
                             == await Task.WhenAny(clientTask, serverTask)
                                 .WaitAsync(TestHelper.PassingTestTimeout)
-                        ) {
+                        )
+                        {
                             // Client task shouldn't have completed successfully; propagate failure.
                             Assert.NotEqual(TaskStatus.RanToCompletion, clientTask.Status);
                             await clientTask;

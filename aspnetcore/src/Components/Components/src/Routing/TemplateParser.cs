@@ -129,7 +129,8 @@ namespace Microsoft.AspNetCore.Components.Routing
                         currentSegment.IsOptional
                         && !nextSegment.IsOptional
                         && !nextSegment.IsCatchAll
-                    ) {
+                    )
+                    {
                         throw new InvalidOperationException(
                             $"Invalid template '{template}'. Non-optional parameters or literal routes cannot appear after optional parameters."
                         );
@@ -141,7 +142,8 @@ namespace Microsoft.AspNetCore.Components.Routing
                             nextSegment.Value,
                             StringComparison.OrdinalIgnoreCase
                         )
-                    ) {
+                    )
+                    {
                         throw new InvalidOperationException(
                             $"Invalid template '{template}'. The parameter '{currentSegment}' appears multiple times."
                         );

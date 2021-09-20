@@ -31,7 +31,8 @@ namespace Microsoft.AspNetCore.Routing.Logging
             object routeValue,
             string routeKey,
             IRouteConstraint routeConstraint
-        ) {
+        )
+        {
             _constraintNotMatched(logger, routeValue, routeKey, routeConstraint, null);
         }
     }

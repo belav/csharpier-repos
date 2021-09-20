@@ -82,7 +82,8 @@ namespace Microsoft.Extensions.DependencyInjection
             string authenticationScheme,
             string? displayName,
             Action<NegotiateOptions> configureOptions
-        ) {
+        )
+        {
             builder.Services.TryAddEnumerable(
                 ServiceDescriptor.Singleton<
                     IPostConfigureOptions<NegotiateOptions>,

@@ -106,7 +106,8 @@ namespace System.Threading.Tasks.Dataflow
             Func<TInput, IEnumerable<TOutput>>? transformSync,
             Func<TInput, Task<IEnumerable<TOutput>>>? transformAsync,
             ExecutionDataflowBlockOptions dataflowBlockOptions
-        ) {
+        )
+        {
             // Validate arguments.  It's ok for the filterFunction to be null, but not the other parameters.
             if (transformSync == null && transformAsync == null)
                 throw new ArgumentNullException("transform");
@@ -145,7 +146,8 @@ namespace System.Threading.Tasks.Dataflow
             // However, a developer can override this with EnsureOrdered == false.
             if (
                 dataflowBlockOptions.SupportsParallelExecution && dataflowBlockOptions.EnsureOrdered
-            ) {
+            )
+            {
                 _reorderingBuffer = new ReorderingBuffer<IEnumerable<TOutput>>(
                     this,
                     (source, messages) =>
@@ -248,7 +250,8 @@ namespace System.Threading.Tasks.Dataflow
         private void ProcessMessage(
             Func<TInput, IEnumerable<TOutput>> transformFunction,
             KeyValuePair<TInput, long> messageWithId
-        ) {
+        )
+        {
             Debug.Assert(transformFunction != null, "Function to invoke is required.");
 
             bool userDelegateSucceeded = false;
@@ -280,7 +283,8 @@ namespace System.Threading.Tasks.Dataflow
         private void ProcessMessageWithTask(
             Func<TInput, Task<IEnumerable<TOutput>>> function,
             KeyValuePair<TInput, long> messageWithId
-        ) {
+        )
+        {
             Debug.Assert(function != null, "Function to invoke is required.");
 
             // Run the transform function to get the resulting task
@@ -360,7 +364,8 @@ namespace System.Threading.Tasks.Dataflow
         private void AsyncCompleteProcessMessageWithTask(
             Task<IEnumerable<TOutput>> completed,
             KeyValuePair<TInput, long> messageWithId
-        ) {
+        )
+        {
             Debug.Assert(completed != null, "A task should have been provided.");
             Debug.Assert(completed.IsCompleted, "The task should have been in a final state.");
 
@@ -434,7 +439,8 @@ namespace System.Threading.Tasks.Dataflow
         private void StoreOutputItems(
             KeyValuePair<TInput, long> messageWithId,
             IEnumerable<TOutput>? outputItems
-        ) {
+        )
+        {
             // If there's a reordering buffer, pass the data along to it.
             // The reordering buffer will handle all details, including bounding.
             if (_reorderingBuffer != null)
@@ -751,7 +757,8 @@ namespace System.Threading.Tasks.Dataflow
             TInput messageValue,
             ISourceBlock<TInput>? source,
             bool consumeToAccept
-        ) {
+        )
+        {
             return _target.OfferMessage(messageHeader, messageValue, source, consumeToAccept);
         }
 
@@ -760,7 +767,8 @@ namespace System.Threading.Tasks.Dataflow
             DataflowMessageHeader messageHeader,
             ITargetBlock<TOutput> target,
             out bool messageConsumed
-        ) {
+        )
+        {
             return _source.ConsumeMessage(messageHeader, target, out messageConsumed);
         }
 
@@ -768,7 +776,8 @@ namespace System.Threading.Tasks.Dataflow
         bool ISourceBlock<TOutput>.ReserveMessage(
             DataflowMessageHeader messageHeader,
             ITargetBlock<TOutput> target
-        ) {
+        )
+        {
             return _source.ReserveMessage(messageHeader, target);
         }
 
@@ -776,7 +785,8 @@ namespace System.Threading.Tasks.Dataflow
         void ISourceBlock<TOutput>.ReleaseReservation(
             DataflowMessageHeader messageHeader,
             ITargetBlock<TOutput> target
-        ) {
+        )
+        {
             _source.ReleaseReservation(messageHeader, target);
         }
 

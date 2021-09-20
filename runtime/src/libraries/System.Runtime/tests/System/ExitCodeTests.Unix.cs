@@ -48,7 +48,8 @@ namespace System.Tests
                     exitCodeOnSigterm?.ToString() ?? string.Empty,
                     options
                 )
-            ) {
+            )
+            {
                 Process process = remoteExecution.Process;
 
                 // Wait for the process to start and register the ProcessExit handler

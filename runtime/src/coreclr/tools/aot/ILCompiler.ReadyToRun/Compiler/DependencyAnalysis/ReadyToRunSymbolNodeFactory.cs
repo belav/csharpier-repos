@@ -43,7 +43,8 @@ namespace ILCompiler.DependencyAnalysis
         public ReadyToRunSymbolNodeFactory(
             NodeFactory codegenNodeFactory,
             bool verifyTypeAndFieldLayout
-        ) {
+        )
+        {
             _codegenNodeFactory = codegenNodeFactory;
             _verifyTypeAndFieldLayout = verifyTypeAndFieldLayout;
             CreateNodeCaches();
@@ -311,7 +312,8 @@ namespace ILCompiler.DependencyAnalysis
 
         public ISymbolNode PerMethodInstructionSetSupportFixup(
             InstructionSetSupport instructionSetSupport
-        ) {
+        )
+        {
             string key = ReadyToRunInstructionSetSupportSignature.ToInstructionSetSupportString(
                 instructionSetSupport
             );
@@ -565,7 +567,8 @@ namespace ILCompiler.DependencyAnalysis
                 MethodWithToken methodArgument,
                 FieldDesc fieldArgument,
                 GenericContext methodContext
-            ) {
+            )
+            {
                 LookupKind = lookupKind;
                 FixupKind = fixupKind;
                 TypeArgument = typeArgument;
@@ -621,7 +624,8 @@ namespace ILCompiler.DependencyAnalysis
             ReadyToRunHelperId helperId,
             object helperArgument,
             GenericContext methodContext
-        ) {
+        )
+        {
             switch (helperId)
             {
                 case ReadyToRunHelperId.TypeHandle:
@@ -690,7 +694,8 @@ namespace ILCompiler.DependencyAnalysis
             ReadyToRunFixupKind fixupKind,
             object helperArgument,
             GenericContext methodContext
-        ) {
+        )
+        {
             TypeDesc typeArgument;
             if (helperArgument is MethodWithToken methodWithToken)
             {
@@ -721,7 +726,8 @@ namespace ILCompiler.DependencyAnalysis
             ReadyToRunFixupKind fixupKind,
             FieldDesc fieldArgument,
             GenericContext methodContext
-        ) {
+        )
+        {
             GenericLookupKey key = new GenericLookupKey(
                 runtimeLookupKind,
                 fixupKind,
@@ -738,7 +744,8 @@ namespace ILCompiler.DependencyAnalysis
             ReadyToRunFixupKind fixupKind,
             MethodWithToken methodArgument,
             GenericContext methodContext
-        ) {
+        )
+        {
             GenericLookupKey key = new GenericLookupKey(
                 runtimeLookupKind,
                 fixupKind,

@@ -52,7 +52,8 @@ namespace Microsoft.VisualStudio.LanguageServices.CodeLens
             IThreadingContext threadingContext,
             SVsServiceProvider serviceProvider,
             VisualStudioWorkspaceImpl workspace
-        ) {
+        )
+        {
             _threadingContext = threadingContext;
             _serviceProvider = serviceProvider;
             _workspace = workspace;
@@ -61,7 +62,8 @@ namespace Microsoft.VisualStudio.LanguageServices.CodeLens
         public async Task<ImmutableDictionary<Guid, string>> GetProjectVersionsAsync(
             ImmutableArray<Guid> projectGuids,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var service = _workspace.Services.GetRequiredService<ICodeLensReferencesService>();
 
             var builder = ImmutableDictionary.CreateBuilder<Guid, string>();
@@ -89,7 +91,8 @@ namespace Microsoft.VisualStudio.LanguageServices.CodeLens
             CodeLensDescriptorContext descriptorContext,
             ReferenceCount? previousCount,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var solution = _workspace.CurrentSolution;
             var (documentId, node) = await GetDocumentIdAndNodeAsync(
                     solution,
@@ -135,7 +138,8 @@ namespace Microsoft.VisualStudio.LanguageServices.CodeLens
             CodeLensDescriptor descriptor,
             CodeLensDescriptorContext descriptorContext,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var solution = _workspace.CurrentSolution;
             var (documentId, node) = await GetDocumentIdAndNodeAsync(
                     solution,
@@ -175,7 +179,8 @@ namespace Microsoft.VisualStudio.LanguageServices.CodeLens
             CodeLensDescriptor descriptor,
             CodeLensDescriptorContext descriptorContext,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var solution = _workspace.CurrentSolution;
             var (documentId, node) = await GetDocumentIdAndNodeAsync(
                     solution,
@@ -204,7 +209,8 @@ namespace Microsoft.VisualStudio.LanguageServices.CodeLens
             CodeLensDescriptor descriptor,
             Span? span,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             if (span is null)
             {
                 return default;
@@ -217,7 +223,8 @@ namespace Microsoft.VisualStudio.LanguageServices.CodeLens
                     descriptor.FilePath,
                     out var document
                 )
-            ) {
+            )
+            {
                 return default;
             }
 
@@ -284,7 +291,8 @@ namespace Microsoft.VisualStudio.LanguageServices.CodeLens
             Guid projectGuid,
             string filePath,
             [NotNullWhen(true)] out Document? document
-        ) {
+        )
+        {
             document = null;
 
             if (projectGuid == VSConstants.CLSID.MiscellaneousFilesProject_guid)

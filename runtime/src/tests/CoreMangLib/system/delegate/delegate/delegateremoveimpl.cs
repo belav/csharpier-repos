@@ -105,7 +105,8 @@ namespace DelegateTest
                 if (
                     !delctor.starkWork.GetInvocationList()[0].Equals(bStartWork_Bool)
                     || !delctor.starkWork.GetInvocationList()[1].Equals(bCompleted_Bool)
-                ) {
+                )
+                {
                     TestLibrary.TestFramework.LogError("004", " remove failure ");
                     retVal = false;
                 }
@@ -212,7 +213,8 @@ namespace DelegateTest
                     !delctor.starkWork.GetInvocationList()[0].Equals(bStartWork_Bool)
                     || !delctor.starkWork.GetInvocationList()[1].Equals(bWorking_Bool)
                     || !delctor.starkWork.GetInvocationList()[2].Equals(bCompleted_Bool)
-                ) {
+                )
+                {
                     TestLibrary.TestFramework.LogError("010", " remove failure ");
                     retVal = false;
                 }
@@ -260,7 +262,8 @@ namespace DelegateTest
                     !delctor.starkWork.GetInvocationList()[0].Equals(bStartWork_Bool)
                     || !delctor.starkWork.GetInvocationList()[1].Equals(bWorking_Bool)
                     || !delctor.starkWork.GetInvocationList()[2].Equals(bCompleted_Bool)
-                ) {
+                )
+                {
                     TestLibrary.TestFramework.LogError("013", " remove failure ");
                     retVal = false;
                 }

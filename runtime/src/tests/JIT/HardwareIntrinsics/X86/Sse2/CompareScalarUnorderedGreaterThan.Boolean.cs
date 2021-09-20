@@ -138,7 +138,8 @@ namespace JIT.HardwareIntrinsics.X86
                     (alignment != 32 && alignment != 16)
                     || (alignment * 2) < sizeOfinArray1
                     || (alignment * 2) < sizeOfinArray2
-                ) {
+                )
+                {
                     throw new ArgumentException("Invalid value of alignment");
                 }
 
@@ -212,14 +213,16 @@ namespace JIT.HardwareIntrinsics.X86
 
             public void RunStructFldScenario(
                 BooleanBinaryOpTest__CompareScalarUnorderedGreaterThanBoolean testClass
-            ) {
+            )
+            {
                 var result = Sse2.CompareScalarUnorderedGreaterThan(_fld1, _fld2);
                 testClass.ValidateResult(_fld1, _fld2, result);
             }
 
             public void RunStructFldScenario_Load(
                 BooleanBinaryOpTest__CompareScalarUnorderedGreaterThanBoolean testClass
-            ) {
+            )
+            {
                 fixed (Vector128<Double>* pFld1 = &_fld1)fixed (Vector128<Double>* pFld2 = &_fld2)
                 {
                     var result = Sse2.CompareScalarUnorderedGreaterThan(
@@ -421,7 +424,8 @@ namespace JIT.HardwareIntrinsics.X86
 
             fixed (Vector128<Double>* pClsVar1 = &_clsVar1)fixed (
                 Vector128<Double>* pClsVar2 = &_clsVar2
-            ) {
+            )
+            {
                 var result = Sse2.CompareScalarUnorderedGreaterThan(
                     Sse2.LoadVector128((Double*)(pClsVar1)),
                     Sse2.LoadVector128((Double*)(pClsVar2))
@@ -482,7 +486,8 @@ namespace JIT.HardwareIntrinsics.X86
 
             fixed (Vector128<Double>* pFld1 = &test._fld1)fixed (
                 Vector128<Double>* pFld2 = &test._fld2
-            ) {
+            )
+            {
                 var result = Sse2.CompareScalarUnorderedGreaterThan(
                     Sse2.LoadVector128((Double*)(pFld1)),
                     Sse2.LoadVector128((Double*)(pFld2))
@@ -580,7 +585,8 @@ namespace JIT.HardwareIntrinsics.X86
             Vector128<Double> op2,
             bool result,
             [CallerMemberName] string method = ""
-        ) {
+        )
+        {
             Double[] inArray1 = new Double[Op1ElementCount];
             Double[] inArray2 = new Double[Op2ElementCount];
 
@@ -595,7 +601,8 @@ namespace JIT.HardwareIntrinsics.X86
             void* op2,
             bool result,
             [CallerMemberName] string method = ""
-        ) {
+        )
+        {
             Double[] inArray1 = new Double[Op1ElementCount];
             Double[] inArray2 = new Double[Op2ElementCount];
 
@@ -618,7 +625,8 @@ namespace JIT.HardwareIntrinsics.X86
             Double[] right,
             bool result,
             [CallerMemberName] string method = ""
-        ) {
+        )
+        {
             bool succeeded = true;
 
             if ((left[0] > right[0]) != result)

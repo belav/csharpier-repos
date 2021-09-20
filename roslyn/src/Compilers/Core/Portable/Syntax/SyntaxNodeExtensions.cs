@@ -61,8 +61,9 @@ namespace Microsoft.CodeAnalysis
             this TRoot root,
             IEnumerable<TNode> nodes,
             Func<TNode, TNode, SyntaxNode> computeReplacementNode
-        ) where TRoot : SyntaxNode
-          where TNode : SyntaxNode
+        )
+            where TRoot : SyntaxNode
+            where TNode : SyntaxNode
         {
             return (TRoot)root.ReplaceCore(
                 nodes: nodes,
@@ -512,7 +513,8 @@ namespace Microsoft.CodeAnalysis
         internal static SyntaxNode? AsRootOfNewTreeWithOptionsFrom(
             this SyntaxNode? node,
             SyntaxTree oldTree
-        ) {
+        )
+        {
             return node != null
               ? oldTree.WithRootAndOptions(node, oldTree.Options).GetRoot()
               : null;

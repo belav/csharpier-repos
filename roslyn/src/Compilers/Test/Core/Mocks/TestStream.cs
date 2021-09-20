@@ -31,7 +31,8 @@ namespace Roslyn.Test.Utilities
             Action<long> setPosition = null,
             Stream backingStream = null,
             Action dispose = null
-        ) {
+        )
+        {
             _canRead = canRead;
             _canSeek = canSeek;
             _canWrite = canWrite;

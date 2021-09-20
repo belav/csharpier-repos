@@ -15,7 +15,8 @@ namespace Microsoft.AspNetCore.Authorization.Policy
             HttpContext context,
             AuthorizationPolicy policy,
             PolicyAuthorizationResult authorizeResult
-        ) {
+        )
+        {
             if (authorizeResult.Challenged)
             {
                 if (policy.AuthenticationSchemes.Count > 0)

@@ -90,7 +90,8 @@ namespace System.CodeDom.Tests
             CodeTypeReference type,
             string name,
             CodeExpression initExpression
-        ) {
+        )
+        {
             var variableDeclaration = new CodeVariableDeclarationStatement(
                 type,
                 name,
@@ -124,7 +125,8 @@ namespace System.CodeDom.Tests
             string name,
             CodeExpression initExpression,
             string expectedBaseType
-        ) {
+        )
+        {
             var variableDeclaration = new CodeVariableDeclarationStatement(
                 type,
                 name,
@@ -161,7 +163,8 @@ namespace System.CodeDom.Tests
             string name,
             CodeExpression initExpression,
             string expectedBaseType
-        ) {
+        )
+        {
             var variableDeclaration = new CodeVariableDeclarationStatement(
                 type,
                 name,

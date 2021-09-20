@@ -270,7 +270,8 @@ namespace Microsoft.AspNetCore.HttpSys.Internal
             ref int scan,
             int end,
             ReadOnlySpan<byte> buffer
-        ) {
+        )
+        {
             if (buffer[scan++] != '%')
             {
                 return -1;

@@ -235,13 +235,15 @@ namespace Microsoft.Data.Sqlite
                 !string.IsNullOrEmpty(dataDirectory)
                 && (flags & SQLITE_OPEN_URI) == 0
                 && !filename.Equals(":memory:", StringComparison.OrdinalIgnoreCase)
-            ) {
+            )
+            {
                 if (
                     filename.StartsWith(
                         DataDirectoryMacro,
                         StringComparison.InvariantCultureIgnoreCase
                     )
-                ) {
+                )
+                {
                     filename = Path.Combine(
                         dataDirectory,
                         filename.Substring(DataDirectoryMacro.Length)
@@ -484,7 +486,8 @@ namespace Microsoft.Data.Sqlite
             string name,
             T state,
             Func<T, string, string, int>? comparison
-        ) {
+        )
+        {
             if (string.IsNullOrEmpty(name))
             {
                 throw new ArgumentNullException(nameof(name));
@@ -580,7 +583,8 @@ namespace Microsoft.Data.Sqlite
         public virtual SqliteTransaction BeginTransaction(
             IsolationLevel isolationLevel,
             bool deferred
-        ) {
+        )
+        {
             if (State != ConnectionState.Open)
             {
                 throw new InvalidOperationException(
@@ -692,7 +696,8 @@ namespace Microsoft.Data.Sqlite
             SqliteConnection destination,
             string destinationName,
             string sourceName
-        ) {
+        )
+        {
             if (State != ConnectionState.Open)
             {
                 throw new InvalidOperationException(
@@ -774,7 +779,8 @@ namespace Microsoft.Data.Sqlite
                     DbMetaDataCollectionNames.MetaDataCollections,
                     StringComparison.OrdinalIgnoreCase
                 )
-            ) {
+            )
+            {
                 return new DataTable(DbMetaDataCollectionNames.MetaDataCollections)
                 {
                     Columns =
@@ -796,7 +802,8 @@ namespace Microsoft.Data.Sqlite
                     DbMetaDataCollectionNames.ReservedWords,
                     StringComparison.OrdinalIgnoreCase
                 )
-            ) {
+            )
+            {
                 var dataTable = new DataTable(DbMetaDataCollectionNames.ReservedWords)
                 {
                     Columns = { { DbMetaDataColumnNames.ReservedWord } }
@@ -825,7 +832,8 @@ namespace Microsoft.Data.Sqlite
             TState state,
             Func<TState, SqliteValueReader, TResult>? function,
             bool isDeterministic
-        ) {
+        )
+        {
             if (name == null)
             {
                 throw new ArgumentNullException(nameof(name));
@@ -880,7 +888,8 @@ namespace Microsoft.Data.Sqlite
             Func<TAccumulate, SqliteValueReader, TAccumulate>? func,
             Func<TAccumulate, TResult>? resultSelector,
             bool isDeterministic
-        ) {
+        )
+        {
             if (name == null)
             {
                 throw new ArgumentNullException(nameof(name));

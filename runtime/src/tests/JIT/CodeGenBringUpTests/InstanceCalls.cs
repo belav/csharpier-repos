@@ -134,7 +134,8 @@ public class BringUpTest
         double v3,
         double v4,
         double v5
-    ) {
+    )
+    {
         int result = Pass;
 
         double s1 = m.Sum(a);

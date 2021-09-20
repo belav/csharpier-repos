@@ -502,7 +502,8 @@ namespace System.Threading
             uint dueTime,
             uint period,
             bool flowExecutionContext
-        ) {
+        )
+        {
             _timerCallback = timerCallback;
             _state = state;
             _dueTime = Timeout.UnsignedInfinite;
@@ -889,7 +890,8 @@ namespace System.Threading
             int dueTime,
             int period,
             bool flowExecutionContext
-        ) {
+        )
+        {
             if (dueTime < -1)
                 throw new ArgumentOutOfRangeException(
                     nameof(dueTime),
@@ -981,7 +983,8 @@ namespace System.Threading
             uint dueTime,
             uint period,
             bool flowExecutionContext = true
-        ) {
+        )
+        {
             if (callback == null)
                 throw new ArgumentNullException(nameof(callback));
 

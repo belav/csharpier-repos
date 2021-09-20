@@ -334,7 +334,8 @@ namespace System.Text
             int charCount,
             byte[] bytes,
             int byteIndex
-        ) {
+        )
+        {
             if (chars == null)
                 throw System.Runtime.Serialization.DiagnosticUtility.ExceptionUtility.ThrowHelperError(
                     new ArgumentNullException(nameof(chars))
@@ -463,7 +464,8 @@ namespace System.Text
             int charCount,
             byte[] bytes,
             int byteIndex
-        ) {
+        )
+        {
             if (chars == null)
                 throw System.Runtime.Serialization.DiagnosticUtility.ExceptionUtility.ThrowHelperError(
                     new ArgumentNullException(nameof(chars))
@@ -606,7 +608,8 @@ namespace System.Text
             int byteCount,
             char[] chars,
             int charIndex
-        ) {
+        )
+        {
             if (bytes == null)
                 throw System.Runtime.Serialization.DiagnosticUtility.ExceptionUtility.ThrowHelperError(
                     new ArgumentNullException(nameof(bytes))
@@ -727,7 +730,8 @@ namespace System.Text
             int byteCount,
             byte[] chars,
             int charIndex
-        ) {
+        )
+        {
             if (bytes == null)
                 throw System.Runtime.Serialization.DiagnosticUtility.ExceptionUtility.ThrowHelperError(
                     new ArgumentNullException(nameof(bytes))

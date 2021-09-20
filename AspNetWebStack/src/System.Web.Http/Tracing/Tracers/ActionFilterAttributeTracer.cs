@@ -32,7 +32,8 @@ namespace System.Web.Http.Tracing.Tracers
         public ActionFilterAttributeTracer(
             ActionFilterAttribute innerFilter,
             ITraceWriter traceWriter
-        ) {
+        )
+        {
             Contract.Assert(innerFilter != null);
             Contract.Assert(traceWriter != null);
 
@@ -83,7 +84,8 @@ namespace System.Web.Http.Tracing.Tracers
         public override Task OnActionExecutedAsync(
             HttpActionExecutedContext actionExecutedContext,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             return OnActionExecutedAsyncCore(actionExecutedContext, cancellationToken);
         }
 
@@ -91,7 +93,8 @@ namespace System.Web.Http.Tracing.Tracers
             HttpActionExecutedContext actionExecutedContext,
             CancellationToken cancellationToken,
             [CallerMemberName] string methodName = null
-        ) {
+        )
+        {
             return _traceWriter.TraceBeginEndAsync(
                 actionExecutedContext.Request,
                 TraceCategories.FiltersCategory,
@@ -148,7 +151,8 @@ namespace System.Web.Http.Tracing.Tracers
         public override Task OnActionExecutingAsync(
             HttpActionContext actionContext,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             return OnActionExecutingAsyncCore(actionContext, cancellationToken);
         }
 
@@ -156,7 +160,8 @@ namespace System.Web.Http.Tracing.Tracers
             HttpActionContext actionContext,
             CancellationToken cancellationToken,
             [CallerMemberName] string methodName = null
-        ) {
+        )
+        {
             return _traceWriter.TraceBeginEndAsync(
                 actionContext.Request,
                 TraceCategories.FiltersCategory,

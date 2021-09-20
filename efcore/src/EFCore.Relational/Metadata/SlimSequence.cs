@@ -37,7 +37,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata
             bool cyclic,
             long? minValue = null,
             long? maxValue = null
-        ) {
+        )
+        {
             Model = model;
             Name = name;
             _schema = schema;

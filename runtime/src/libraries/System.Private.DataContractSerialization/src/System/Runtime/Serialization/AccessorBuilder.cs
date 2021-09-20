@@ -132,11 +132,13 @@ namespace System.Runtime.Serialization
 
         private static Getter CreateGetterInternal<DeclaringType, PropertyType>(
             PropertyInfo propInfo
-        ) {
+        )
+        {
             if (
                 typeof(DeclaringType).IsGenericType
                 && typeof(DeclaringType).GetGenericTypeDefinition() == typeof(KeyValue<, >)
-            ) {
+            )
+            {
                 if (propInfo.Name == "Key")
                 {
                     return (obj) =>
@@ -180,11 +182,13 @@ namespace System.Runtime.Serialization
 
         private static Setter CreateSetterInternal<DeclaringType, PropertyType>(
             PropertyInfo propInfo
-        ) {
+        )
+        {
             if (
                 typeof(DeclaringType).IsGenericType
                 && typeof(DeclaringType).GetGenericTypeDefinition() == typeof(KeyValue<, >)
-            ) {
+            )
+            {
                 if (propInfo.Name == "Key")
                 {
                     return (ref object obj, object? val) =>

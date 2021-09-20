@@ -44,7 +44,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.Classification
             IForegroundNotificationService notificationService,
             ClassificationTypeMap typeMap,
             IAsynchronousOperationListenerProvider listenerProvider
-        ) {
+        )
+        {
             _threadingContext = threadingContext;
             _notificationService = notificationService;
             _typeMap = typeMap;

@@ -72,7 +72,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Preview
             TextDocument left,
             TextDocument right,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             if (left == null)
             {
                 // Added document.
@@ -110,7 +111,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Preview
             DocumentId id,
             SourceText oldText,
             SourceText newText
-        ) {
+        )
+        {
             var spanChanges = new List<SpanChange>();
             foreach (var difference in diff)
             {
@@ -218,7 +220,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Preview
         {
             if (
                 pIUnknownTextView != null && Children.Changes != null && Children.Changes.Length > 0
-            ) {
+            )
+            {
                 engine.SetTextView(pIUnknownTextView);
                 UpdatePreview();
             }
@@ -273,7 +276,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Preview
                         out pData[0].hImageList,
                         out pData[0].Image
                     )
-                ) {
+                )
+                {
                     pData[0].SelectedImage = pData[0].Image;
                     return;
                 }
@@ -290,7 +294,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Preview
             TextDocument left,
             TextDocument right,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             // TODO: it would be nice to have a syntax based differ for presentation here,
             //       current way of just using text differ has its own issue, and using syntax differ in compiler that are for incremental parser
             //       has its own drawbacks.

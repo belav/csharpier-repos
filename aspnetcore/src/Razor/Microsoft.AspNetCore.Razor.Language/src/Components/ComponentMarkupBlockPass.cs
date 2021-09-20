@@ -27,7 +27,8 @@ namespace Microsoft.AspNetCore.Razor.Language.Components
         protected override void ExecuteCore(
             RazorCodeDocument codeDocument,
             DocumentIntermediateNode documentNode
-        ) {
+        )
+        {
             if (!IsComponentDocument(documentNode))
             {
                 return;
@@ -73,7 +74,8 @@ namespace Microsoft.AspNetCore.Razor.Language.Components
                     var candidate = reference.Parent.Children[start - 1];
                     if (
                         trees.Count == 0 || !ReferenceEquals(trees[trees.Count - 1].Node, candidate)
-                    ) {
+                    )
+                    {
                         // This means the we're out of nodes, or the left sibling is not in the list.
                         break;
                     }
@@ -176,7 +178,8 @@ namespace Microsoft.AspNetCore.Razor.Language.Components
                                 element.TagName,
                                 StringComparison.OrdinalIgnoreCase
                             )
-                        ) {
+                        )
+                        {
                             _foundNonHtml = true;
                             break;
                         }

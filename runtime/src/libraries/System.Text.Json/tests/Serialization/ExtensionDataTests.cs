@@ -362,7 +362,8 @@ namespace System.Text.Json.Serialization.Tests
                 ref Utf8JsonReader reader,
                 Type typeToConvert,
                 JsonSerializerOptions options
-            ) {
+            )
+            {
                 throw new NotImplementedException();
             }
 
@@ -370,7 +371,8 @@ namespace System.Text.Json.Serialization.Tests
                 Utf8JsonWriter writer,
                 Dictionary<string, object> value,
                 JsonSerializerOptions options
-            ) {
+            )
+            {
                 writer.WriteString("MyCustomOverflowWrite", "OverflowValueWrite");
             }
         }
@@ -381,7 +383,8 @@ namespace System.Text.Json.Serialization.Tests
                 ref Utf8JsonReader reader,
                 Type typeToConvert,
                 JsonSerializerOptions options
-            ) {
+            )
+            {
                 throw new NotImplementedException();
             }
 
@@ -389,7 +392,8 @@ namespace System.Text.Json.Serialization.Tests
                 Utf8JsonWriter writer,
                 Dictionary<string, JsonElement> value,
                 JsonSerializerOptions options
-            ) {
+            )
+            {
                 writer.WriteString("MyCustomOverflowWrite", "OverflowValueWrite");
             }
         }
@@ -401,7 +405,8 @@ namespace System.Text.Json.Serialization.Tests
                 ref Utf8JsonReader reader,
                 Type typeToConvert,
                 JsonSerializerOptions options
-            ) {
+            )
+            {
                 throw new NotImplementedException();
             }
 
@@ -409,7 +414,8 @@ namespace System.Text.Json.Serialization.Tests
                 Utf8JsonWriter writer,
                 CustomOverflowDictionary<object> value,
                 JsonSerializerOptions options
-            ) {
+            )
+            {
                 writer.WriteString("MyCustomOverflowWrite", "OverflowValueWrite");
             }
         }
@@ -421,7 +427,8 @@ namespace System.Text.Json.Serialization.Tests
                 ref Utf8JsonReader reader,
                 Type typeToConvert,
                 JsonSerializerOptions options
-            ) {
+            )
+            {
                 throw new NotImplementedException();
             }
 
@@ -429,7 +436,8 @@ namespace System.Text.Json.Serialization.Tests
                 Utf8JsonWriter writer,
                 CustomOverflowDictionary<JsonElement> value,
                 JsonSerializerOptions options
-            ) {
+            )
+            {
                 writer.WriteString("MyCustomOverflowWrite", "OverflowValueWrite");
             }
         }
@@ -448,7 +456,8 @@ namespace System.Text.Json.Serialization.Tests
         public static void ExtensionProperty_SupportsWritingToCustomSerializerWithOptions(
             Type overflowType,
             Type converterType
-        ) {
+        )
+        {
             typeof(ExtensionDataTests).GetMethod(
                     nameof(ExtensionProperty_SupportsWritingToCustomSerializerWithOptionsInternal),
                     BindingFlags.Static | BindingFlags.NonPublic
@@ -530,7 +539,8 @@ namespace System.Text.Json.Serialization.Tests
         public static void ExtensionProperty_SupportsWritingToCustomSerializerWithExplicitConverter(
             Type attributedType,
             Type dictionaryType
-        ) {
+        )
+        {
             typeof(ExtensionDataTests).GetMethod(
                     nameof(
                         ExtensionProperty_SupportsWritingToCustomSerializerWithExplicitConverterInternal
@@ -579,7 +589,8 @@ namespace System.Text.Json.Serialization.Tests
             Type overflowType,
             Type converterType,
             Type elementType
-        ) {
+        )
+        {
             typeof(ExtensionDataTests).GetMethod(
                     nameof(ExtensionProperty_IgnoresCustomSerializerWithOptionsInternal),
                     BindingFlags.Static | BindingFlags.NonPublic
@@ -631,7 +642,8 @@ namespace System.Text.Json.Serialization.Tests
             Type attributedType,
             Type dictionaryType,
             Type elementType
-        ) {
+        )
+        {
             typeof(ExtensionDataTests).GetMethod(
                     nameof(ExtensionProperty_IgnoresCustomSerializerWithExplicitConverterInternal),
                     BindingFlags.Static | BindingFlags.NonPublic
@@ -1381,7 +1393,8 @@ namespace System.Text.Json.Serialization.Tests
                 ref Utf8JsonReader reader,
                 Type typeToConvert,
                 JsonSerializerOptions options
-            ) {
+            )
+            {
                 return reader.GetString() + "!!!";
             }
 
@@ -1389,7 +1402,8 @@ namespace System.Text.Json.Serialization.Tests
                 Utf8JsonWriter writer,
                 object value,
                 JsonSerializerOptions options
-            ) {
+            )
+            {
                 // Since we are in a user-provided (not internal to S.T.Json) object converter,
                 // this converter will be called, not the internal string converter.
                 writer.WriteStringValue((string)value);
@@ -1419,7 +1433,8 @@ namespace System.Text.Json.Serialization.Tests
                 ref Utf8JsonReader reader,
                 Type typeToConvert,
                 JsonSerializerOptions options
-            ) {
+            )
+            {
                 // Just return an empty JsonElement.
                 reader.Skip();
                 return new JsonElement();
@@ -1429,7 +1444,8 @@ namespace System.Text.Json.Serialization.Tests
                 Utf8JsonWriter writer,
                 JsonElement value,
                 JsonSerializerOptions options
-            ) {
+            )
+            {
                 // Write a string we can test against easily.
                 writer.WriteStartObject();
                 writer.WriteString("Hi", "There");

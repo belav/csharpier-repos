@@ -940,7 +940,8 @@ namespace System.Xml.Xsl.IlGen
                         if (
                             (object)qnameDup.Name == (object)qname.Name
                             && (object)qnameDup.Namespace == (object)qname.Namespace
-                        ) {
+                        )
+                        {
                             // A duplicate attribute has been encountered
                             this.parentInfo.MightHaveDuplicateAttributes = true;
                         }
@@ -1138,7 +1139,8 @@ namespace System.Xml.Xsl.IlGen
             if (
                 nd.NodeType == QilNodeType.AttributeCtor && ns.Length == 0
                 || prefix == "xml" && ns == XmlReservedNs.NsXml
-            ) {
+            )
+            {
                 XmlILConstructInfo.Write(nd).IsNamespaceInScope = true;
                 return true;
             }

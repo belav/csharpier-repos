@@ -17,7 +17,8 @@ namespace Microsoft.TestCommon
             string expected,
             string actual,
             params RegexReplacement[] regexReplacements
-        ) {
+        )
+        {
             if (regexReplacements != null)
             {
                 for (int i = 0; i < regexReplacements.Length; i++)

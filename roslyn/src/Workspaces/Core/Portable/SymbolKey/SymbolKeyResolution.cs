@@ -29,7 +29,8 @@ namespace Microsoft.CodeAnalysis
         internal SymbolKeyResolution(
             ImmutableArray<ISymbol> candidateSymbols,
             CandidateReason candidateReason
-        ) {
+        )
+        {
             Symbol = null;
             _candidateSymbols = candidateSymbols;
             CandidateReason = candidateReason;

@@ -27,7 +27,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             SyntaxTree syntaxTree,
             string scriptClassName,
             bool isSubmission
-        ) {
+        )
+        {
             _syntaxTree = syntaxTree;
             _scriptClassName = scriptClassName;
             _isSubmission = isSubmission;
@@ -37,7 +38,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             SyntaxTree syntaxTree,
             string scriptClassName,
             bool isSubmission
-        ) {
+        )
+        {
             var builder = new DeclarationTreeBuilder(syntaxTree, scriptClassName, isSubmission);
             return (RootSingleNamespaceDeclaration)builder.Visit(syntaxTree.GetRoot());
         }
@@ -46,7 +48,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             CSharpSyntaxNode node,
             SyntaxList<MemberDeclarationSyntax> members,
             CoreInternalSyntax.SyntaxList<Syntax.InternalSyntax.MemberDeclarationSyntax> internalMembers
-        ) {
+        )
+        {
             Debug.Assert(
                 node.Kind() == SyntaxKind.NamespaceDeclaration
                     || (
@@ -144,7 +147,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             ImmutableHashSet<string> memberNames,
             SyntaxReference container,
             SingleTypeDeclaration.TypeDeclarationFlags declFlags
-        ) {
+        )
+        {
             return new SingleTypeDeclaration(
                 kind: DeclarationKind.ImplicitClass,
                 name: TypeSymbol.ImplicitTypeName,
@@ -166,7 +170,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             bool hasAwaitExpressions,
             bool isIterator,
             bool hasReturnWithExpression
-        ) {
+        )
+        {
             return new SingleTypeDeclaration(
                 kind: DeclarationKind.SimpleProgram,
                 name: WellKnownMemberNames.TopLevelStatementsEntryPointTypeName,
@@ -205,7 +210,8 @@ namespace Microsoft.CodeAnalysis.CSharp
         /// </summary>
         private RootSingleNamespaceDeclaration CreateScriptRootDeclaration(
             CompilationUnitSyntax compilationUnit
-        ) {
+        )
+        {
             Debug.Assert(_syntaxTree.Options.Kind != SourceCodeKind.Regular);
 
             var members = compilationUnit.Members;
@@ -258,7 +264,8 @@ namespace Microsoft.CodeAnalysis.CSharp
 
         private static ImmutableArray<ReferenceDirective> GetReferenceDirectives(
             CompilationUnitSyntax compilationUnit
-        ) {
+        )
+        {
             IList<ReferenceDirectiveTriviaSyntax> directiveNodes =
                 compilationUnit.GetReferenceDirectives(
                     d => !d.File.ContainsDiagnostics && !string.IsNullOrEmpty(d.File.ValueText)
@@ -286,7 +293,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             ImmutableArray<SingleTypeDeclaration> children,
             ImmutableHashSet<string> memberNames,
             SingleTypeDeclaration.TypeDeclarationFlags declFlags
-        ) {
+        )
+        {
             Debug.Assert(
                 parent.Kind() == SyntaxKind.CompilationUnit
                     && _syntaxTree.Options.Kind != SourceCodeKind.Regular
@@ -330,7 +338,8 @@ namespace Microsoft.CodeAnalysis.CSharp
 
         public override SingleNamespaceOrTypeDeclaration VisitCompilationUnit(
             CompilationUnitSyntax compilationUnit
-        ) {
+        )
+        {
             if (_syntaxTree.Options.Kind != SourceCodeKind.Regular)
             {
                 return CreateScriptRootDeclaration(compilationUnit);
@@ -354,7 +363,8 @@ namespace Microsoft.CodeAnalysis.CSharp
 
         public override SingleNamespaceOrTypeDeclaration VisitNamespaceDeclaration(
             NamespaceDeclarationSyntax node
-        ) {
+        )
+        {
             var children = VisitNamespaceChildren(node, node.Members, node.Green.Members);
 
             bool hasUsings = node.Usings.Any();
@@ -458,19 +468,22 @@ namespace Microsoft.CodeAnalysis.CSharp
 
         public override SingleNamespaceOrTypeDeclaration VisitClassDeclaration(
             ClassDeclarationSyntax node
-        ) {
+        )
+        {
             return VisitTypeDeclaration(node, DeclarationKind.Class);
         }
 
         public override SingleNamespaceOrTypeDeclaration VisitStructDeclaration(
             StructDeclarationSyntax node
-        ) {
+        )
+        {
             return VisitTypeDeclaration(node, DeclarationKind.Struct);
         }
 
         public override SingleNamespaceOrTypeDeclaration VisitInterfaceDeclaration(
             InterfaceDeclarationSyntax node
-        ) {
+        )
+        {
             return VisitTypeDeclaration(node, DeclarationKind.Interface);
         }
 
@@ -481,7 +494,8 @@ namespace Microsoft.CodeAnalysis.CSharp
         private SingleNamespaceOrTypeDeclaration VisitTypeDeclaration(
             TypeDeclarationSyntax node,
             DeclarationKind kind
-        ) {
+        )
+        {
             SingleTypeDeclaration.TypeDeclarationFlags declFlags = node.AttributeLists.Any()
                 ? SingleTypeDeclaration.TypeDeclarationFlags.HasAnyAttributes
                 : SingleTypeDeclaration.TypeDeclarationFlags.None;
@@ -506,7 +520,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             if (
                 ((declFlags & SingleTypeDeclaration.TypeDeclarationFlags.HasAnyNontypeMembers) == 0)
                 && node is RecordDeclarationSyntax { ParameterList: { } }
-            ) {
+            )
+            {
                 declFlags |= SingleTypeDeclaration.TypeDeclarationFlags.HasAnyNontypeMembers;
             }
 
@@ -548,7 +563,8 @@ namespace Microsoft.CodeAnalysis.CSharp
 
         public override SingleNamespaceOrTypeDeclaration VisitDelegateDeclaration(
             DelegateDeclarationSyntax node
-        ) {
+        )
+        {
             var declFlags = node.AttributeLists.Any()
                 ? SingleTypeDeclaration.TypeDeclarationFlags.HasAnyAttributes
                 : SingleTypeDeclaration.TypeDeclarationFlags.None;
@@ -579,7 +595,8 @@ namespace Microsoft.CodeAnalysis.CSharp
 
         public override SingleNamespaceOrTypeDeclaration VisitEnumDeclaration(
             EnumDeclarationSyntax node
-        ) {
+        )
+        {
             var members = node.Members;
 
             SingleTypeDeclaration.TypeDeclarationFlags declFlags = node.AttributeLists.Any()
@@ -617,7 +634,8 @@ namespace Microsoft.CodeAnalysis.CSharp
 
         private static ImmutableHashSet<string> ToImmutableAndFree(
             ImmutableHashSet<string>.Builder builder
-        ) {
+        )
+        {
             var result = builder.ToImmutable();
             builder.Clear();
             s_memberNameBuilderPool.Free(builder);
@@ -627,7 +645,8 @@ namespace Microsoft.CodeAnalysis.CSharp
         private static ImmutableHashSet<string> GetEnumMemberNames(
             SeparatedSyntaxList<EnumMemberDeclarationSyntax> members,
             ref SingleTypeDeclaration.TypeDeclarationFlags declFlags
-        ) {
+        )
+        {
             var cnt = members.Count;
 
             var memberNamesBuilder = s_memberNameBuilderPool.Allocate();
@@ -658,7 +677,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             CoreInternalSyntax.SyntaxList<Syntax.InternalSyntax.MemberDeclarationSyntax> members,
             ref SingleTypeDeclaration.TypeDeclarationFlags declFlags,
             bool skipGlobalStatements = false
-        ) {
+        )
+        {
             bool anyMethodHadExtensionSyntax = false;
             bool anyMemberHasAttributes = false;
             bool anyNonTypeMembers = false;
@@ -709,7 +729,8 @@ namespace Microsoft.CodeAnalysis.CSharp
 
         private static bool CheckMethodMemberForExtensionSyntax(
             Syntax.InternalSyntax.CSharpSyntaxNode member
-        ) {
+        )
+        {
             if (member.Kind == SyntaxKind.MethodDeclaration)
             {
                 var methodDecl = (Syntax.InternalSyntax.MethodDeclarationSyntax)member;
@@ -798,7 +819,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             ImmutableHashSet<string>.Builder set,
             ref bool anyNonTypeMembers,
             bool skipGlobalStatements
-        ) {
+        )
+        {
             switch (member.Kind)
             {
                 case SyntaxKind.FieldDeclaration:

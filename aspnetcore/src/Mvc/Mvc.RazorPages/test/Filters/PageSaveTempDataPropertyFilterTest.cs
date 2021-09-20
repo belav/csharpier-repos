@@ -192,7 +192,8 @@ namespace Microsoft.AspNetCore.Mvc.Filters
         private PageSaveTempDataPropertyFilter CreatePageSaveTempDataPropertyFilter(
             TempDataDictionary tempData,
             string prefix
-        ) {
+        )
+        {
             var factory = new Mock<ITempDataDictionaryFactory>();
             factory.Setup(f => f.GetTempData(It.IsAny<HttpContext>())).Returns(tempData);
 

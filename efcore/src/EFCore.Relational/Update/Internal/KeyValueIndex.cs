@@ -31,7 +31,8 @@ namespace Microsoft.EntityFrameworkCore.Update.Internal
             TKey keyValue,
             IEqualityComparer<TKey> keyComparer,
             bool fromOriginalValues
-        ) {
+        )
+        {
             _foreignKey = foreignKey;
             _keyValue = keyValue;
             _fromOriginalValues = fromOriginalValues;

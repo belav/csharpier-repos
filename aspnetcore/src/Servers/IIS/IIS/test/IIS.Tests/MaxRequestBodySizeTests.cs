@@ -46,7 +46,8 @@ namespace IIS.Tests
                     },
                     LoggerFactory
                 )
-            ) {
+            )
+            {
                 using (var connection = testServer.CreateConnection())
                 {
                     await connection.Send(
@@ -92,7 +93,8 @@ namespace IIS.Tests
                     LoggerFactory,
                     new IISServerOptions { MaxRequestBodySize = maxRequestSize }
                 )
-            ) {
+            )
+            {
                 using (var connection = testServer.CreateConnection())
                 {
                     await connection.Send(
@@ -125,7 +127,8 @@ namespace IIS.Tests
                     LoggerFactory,
                     new IISServerOptions { MaxRequestBodySize = 0 }
                 )
-            ) {
+            )
+            {
                 using (var connection = testServer.CreateConnection())
                 {
                     await connection.Send(
@@ -156,7 +159,8 @@ namespace IIS.Tests
                     LoggerFactory,
                     new IISServerOptions { MaxRequestBodySize = 0 }
                 )
-            ) {
+            )
+            {
                 using (var connection = testServer.CreateConnection())
                 {
                     await connection.Send(
@@ -186,7 +190,8 @@ namespace IIS.Tests
                     LoggerFactory,
                     new IISServerOptions { MaxRequestBodySize = 0 }
                 )
-            ) {
+            )
+            {
                 using (var connection = testServer.CreateConnection())
                 {
                     await connection.Send("GET / HTTP/1.1", "Host: localhost", "", "");
@@ -208,7 +213,8 @@ namespace IIS.Tests
                     LoggerFactory,
                     new IISServerOptions { MaxRequestBodySize = 0 }
                 )
-            ) {
+            )
+            {
                 using (var connection = testServer.CreateConnection())
                 {
                     await connection.Send(
@@ -236,7 +242,8 @@ namespace IIS.Tests
                     LoggerFactory,
                     new IISServerOptions { MaxRequestBodySize = 0 }
                 )
-            ) {
+            )
+            {
                 using (var connection = testServer.CreateConnection())
                 {
                     await connection.Send(
@@ -279,7 +286,8 @@ namespace IIS.Tests
                     },
                     LoggerFactory
                 )
-            ) {
+            )
+            {
                 using (var connection = testServer.CreateConnection())
                 {
                     await connection.Send(
@@ -321,7 +329,8 @@ namespace IIS.Tests
                     LoggerFactory,
                     new IISServerOptions { MaxRequestBodySize = maxRequestSize }
                 )
-            ) {
+            )
+            {
                 using (var connection = testServer.CreateConnection())
                 {
                     await connection.Send(
@@ -364,7 +373,8 @@ namespace IIS.Tests
                     LoggerFactory,
                     new IISServerOptions { MaxRequestBodySize = 0 }
                 )
-            ) {
+            )
+            {
                 using (var connection = testServer.CreateConnection())
                 {
                     await connection.Send(

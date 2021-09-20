@@ -557,7 +557,8 @@ namespace Microsoft.AspNetCore.Mvc.Infrastructure
 
         private static ActionSelectionTable<ActionDescriptor> CreateTableWithActionDescriptors(
             IReadOnlyList<ActionDescriptor> actions
-        ) {
+        )
+        {
             return ActionSelectionTable<ActionDescriptor>.Create(
                 new ActionDescriptorCollection(actions, 0)
             );
@@ -565,7 +566,8 @@ namespace Microsoft.AspNetCore.Mvc.Infrastructure
 
         private static ActionSelectionTable<Endpoint> CreateTableWithEndpoints(
             IReadOnlyList<ActionDescriptor> actions
-        ) {
+        )
+        {
             var endpoints = actions.Select(
                 a =>
                 {

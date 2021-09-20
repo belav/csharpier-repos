@@ -24,35 +24,40 @@ namespace System.Text.Json
             System.Buffers.ReadOnlySequence<byte> utf8Json,
             System.Text.Json.JsonDocumentOptions options =
                 default(System.Text.Json.JsonDocumentOptions)
-        ) {
+        )
+        {
             throw null;
         }
         public static System.Text.Json.JsonDocument Parse(
             System.IO.Stream utf8Json,
             System.Text.Json.JsonDocumentOptions options =
                 default(System.Text.Json.JsonDocumentOptions)
-        ) {
+        )
+        {
             throw null;
         }
         public static System.Text.Json.JsonDocument Parse(
             System.ReadOnlyMemory<byte> utf8Json,
             System.Text.Json.JsonDocumentOptions options =
                 default(System.Text.Json.JsonDocumentOptions)
-        ) {
+        )
+        {
             throw null;
         }
         public static System.Text.Json.JsonDocument Parse(
             System.ReadOnlyMemory<char> json,
             System.Text.Json.JsonDocumentOptions options =
                 default(System.Text.Json.JsonDocumentOptions)
-        ) {
+        )
+        {
             throw null;
         }
         public static System.Text.Json.JsonDocument Parse(
             string json,
             System.Text.Json.JsonDocumentOptions options =
                 default(System.Text.Json.JsonDocumentOptions)
-        ) {
+        )
+        {
             throw null;
         }
         public static System.Threading.Tasks.Task<System.Text.Json.JsonDocument> ParseAsync(
@@ -61,19 +66,22 @@ namespace System.Text.Json
                 default(System.Text.Json.JsonDocumentOptions),
             System.Threading.CancellationToken cancellationToken =
                 default(System.Threading.CancellationToken)
-        ) {
+        )
+        {
             throw null;
         }
         public static System.Text.Json.JsonDocument ParseValue(
             ref System.Text.Json.Utf8JsonReader reader
-        ) {
+        )
+        {
             throw null;
         }
         public static bool TryParseValue(
             ref System.Text.Json.Utf8JsonReader reader,
             [System.Diagnostics.CodeAnalysis.NotNullWhenAttribute(true)]
                 out System.Text.Json.JsonDocument? document
-        ) {
+        )
+        {
             throw null;
         }
         public void WriteTo(System.Text.Json.Utf8JsonWriter writer) { }
@@ -215,7 +223,8 @@ namespace System.Text.Json
         }
         public static System.Text.Json.JsonElement ParseValue(
             ref System.Text.Json.Utf8JsonReader reader
-        ) {
+        )
+        {
             throw null;
         }
         public override string? ToString()
@@ -228,7 +237,8 @@ namespace System.Text.Json
         }
         public bool TryGetBytesFromBase64(
             [System.Diagnostics.CodeAnalysis.NotNullWhenAttribute(true)] out byte[]? value
-        ) {
+        )
+        {
             throw null;
         }
         public bool TryGetDateTime(out System.DateTime value)
@@ -266,13 +276,15 @@ namespace System.Text.Json
         public bool TryGetProperty(
             System.ReadOnlySpan<byte> utf8PropertyName,
             out System.Text.Json.JsonElement value
-        ) {
+        )
+        {
             throw null;
         }
         public bool TryGetProperty(
             System.ReadOnlySpan<char> propertyName,
             out System.Text.Json.JsonElement value
-        ) {
+        )
+        {
             throw null;
         }
         public bool TryGetProperty(string propertyName, out System.Text.Json.JsonElement value)
@@ -307,7 +319,8 @@ namespace System.Text.Json
             ref System.Text.Json.Utf8JsonReader reader,
             [System.Diagnostics.CodeAnalysis.NotNullWhenAttribute(true)]
                 out System.Text.Json.JsonElement? element
-        ) {
+        )
+        {
             throw null;
         }
         public bool ValueEquals(System.ReadOnlySpan<byte> utf8Text)
@@ -408,24 +421,28 @@ namespace System.Text.Json
         public static System.Text.Json.JsonEncodedText Encode(
             System.ReadOnlySpan<byte> utf8Value,
             System.Text.Encodings.Web.JavaScriptEncoder? encoder = null
-        ) {
+        )
+        {
             throw null;
         }
         public static System.Text.Json.JsonEncodedText Encode(
             System.ReadOnlySpan<char> value,
             System.Text.Encodings.Web.JavaScriptEncoder? encoder = null
-        ) {
+        )
+        {
             throw null;
         }
         public static System.Text.Json.JsonEncodedText Encode(
             string value,
             System.Text.Encodings.Web.JavaScriptEncoder? encoder = null
-        ) {
+        )
+        {
             throw null;
         }
         public override bool Equals(
             [System.Diagnostics.CodeAnalysis.NotNullWhenAttribute(true)] object? obj
-        ) {
+        )
+        {
             throw null;
         }
         public bool Equals(System.Text.Json.JsonEncodedText other)
@@ -548,7 +565,8 @@ namespace System.Text.Json
         private int _dummyPrimitive;
         public JsonReaderState(
             System.Text.Json.JsonReaderOptions options = default(System.Text.Json.JsonReaderOptions)
-        ) {
+        )
+        {
             throw null;
         }
         public System.Text.Json.JsonReaderOptions Options
@@ -567,7 +585,8 @@ namespace System.Text.Json
             )]
                 System.Type returnType,
             System.Text.Json.JsonSerializerOptions? options = null
-        ) {
+        )
+        {
             throw null;
         }
         public static object? Deserialize(
@@ -579,7 +598,8 @@ namespace System.Text.Json
             )]
                 System.Type returnType,
             System.Text.Json.JsonSerializerOptions? options = null
-        ) {
+        )
+        {
             throw null;
         }
         public static object? Deserialize(
@@ -591,7 +611,8 @@ namespace System.Text.Json
             )]
                 System.Type returnType,
             System.Text.Json.JsonSerializerOptions? options = null
-        ) {
+        )
+        {
             throw null;
         }
         public static object? Deserialize(
@@ -603,7 +624,8 @@ namespace System.Text.Json
             )]
                 System.Type returnType,
             System.Text.Json.JsonSerializerOptions? options = null
-        ) {
+        )
+        {
             throw null;
         }
         public static System.Threading.Tasks.ValueTask<object?> DeserializeAsync(
@@ -617,7 +639,8 @@ namespace System.Text.Json
             System.Text.Json.JsonSerializerOptions? options = null,
             System.Threading.CancellationToken cancellationToken =
                 default(System.Threading.CancellationToken)
-        ) {
+        )
+        {
             throw null;
         }
         public static System.Threading.Tasks.ValueTask<TValue?> DeserializeAsync<
@@ -632,7 +655,8 @@ namespace System.Text.Json
             System.Text.Json.JsonSerializerOptions? options = null,
             System.Threading.CancellationToken cancellationToken =
                 default(System.Threading.CancellationToken)
-        ) {
+        )
+        {
             throw null;
         }
         public static System.Collections.Generic.IAsyncEnumerable<TValue?> DeserializeAsyncEnumerable<
@@ -647,7 +671,8 @@ namespace System.Text.Json
             System.Text.Json.JsonSerializerOptions? options = null,
             System.Threading.CancellationToken cancellationToken =
                 default(System.Threading.CancellationToken)
-        ) {
+        )
+        {
             throw null;
         }
         public static TValue? Deserialize<
@@ -660,7 +685,8 @@ namespace System.Text.Json
         >(
             System.ReadOnlySpan<byte> utf8Json,
             System.Text.Json.JsonSerializerOptions? options = null
-        ) {
+        )
+        {
             throw null;
         }
         public static TValue? Deserialize<
@@ -695,7 +721,8 @@ namespace System.Text.Json
         >(
             ref System.Text.Json.Utf8JsonReader reader,
             System.Text.Json.JsonSerializerOptions? options = null
-        ) {
+        )
+        {
             throw null;
         }
         public static string Serialize(
@@ -706,7 +733,8 @@ namespace System.Text.Json
             )]
                 System.Type inputType,
             System.Text.Json.JsonSerializerOptions? options = null
-        ) {
+        )
+        {
             throw null;
         }
         public static void Serialize(
@@ -730,7 +758,8 @@ namespace System.Text.Json
             System.Text.Json.JsonSerializerOptions? options = null,
             System.Threading.CancellationToken cancellationToken =
                 default(System.Threading.CancellationToken)
-        ) {
+        )
+        {
             throw null;
         }
         public static System.Threading.Tasks.Task SerializeAsync<
@@ -745,7 +774,8 @@ namespace System.Text.Json
             System.Text.Json.JsonSerializerOptions? options = null,
             System.Threading.CancellationToken cancellationToken =
                 default(System.Threading.CancellationToken)
-        ) {
+        )
+        {
             throw null;
         }
         public static byte[] SerializeToUtf8Bytes(
@@ -756,7 +786,8 @@ namespace System.Text.Json
             )]
                 System.Type inputType,
             System.Text.Json.JsonSerializerOptions? options = null
-        ) {
+        )
+        {
             throw null;
         }
         public static byte[] SerializeToUtf8Bytes<
@@ -958,26 +989,30 @@ namespace System.Text.Json
             System.Buffers.ReadOnlySequence<byte> jsonData,
             bool isFinalBlock,
             System.Text.Json.JsonReaderState state
-        ) {
+        )
+        {
             throw null;
         }
         public Utf8JsonReader(
             System.Buffers.ReadOnlySequence<byte> jsonData,
             System.Text.Json.JsonReaderOptions options = default(System.Text.Json.JsonReaderOptions)
-        ) {
+        )
+        {
             throw null;
         }
         public Utf8JsonReader(
             System.ReadOnlySpan<byte> jsonData,
             bool isFinalBlock,
             System.Text.Json.JsonReaderState state
-        ) {
+        )
+        {
             throw null;
         }
         public Utf8JsonReader(
             System.ReadOnlySpan<byte> jsonData,
             System.Text.Json.JsonReaderOptions options = default(System.Text.Json.JsonReaderOptions)
-        ) {
+        )
+        {
             throw null;
         }
         public long BytesConsumed
@@ -1107,7 +1142,8 @@ namespace System.Text.Json
         }
         public bool TryGetBytesFromBase64(
             [System.Diagnostics.CodeAnalysis.NotNullWhenAttribute(true)] out byte[]? value
-        ) {
+        )
+        {
             throw null;
         }
         public bool TryGetDateTime(out System.DateTime value)
@@ -1218,7 +1254,8 @@ namespace System.Text.Json
         public System.Threading.Tasks.Task FlushAsync(
             System.Threading.CancellationToken cancellationToken =
                 default(System.Threading.CancellationToken)
-        ) {
+        )
+        {
             throw null;
         }
         public void Reset() { }
@@ -1420,7 +1457,8 @@ namespace System.Text.Json.Node
             System.Text.Json.JsonElement element,
             System.Text.Json.Node.JsonNodeOptions? options =
                 default(System.Text.Json.Node.JsonNodeOptions?)
-        ) {
+        )
+        {
             throw null;
         }
         bool System.Collections.Generic.ICollection<System.Text.Json.Node.JsonNode?>.IsReadOnly
@@ -1571,7 +1609,8 @@ namespace System.Text.Json.Node
         }
         public static explicit operator System.DateTimeOffset?(
             System.Text.Json.Node.JsonNode? value
-        ) {
+        )
+        {
             throw null;
         }
         public static explicit operator System.DateTime?(System.Text.Json.Node.JsonNode? value)
@@ -1712,7 +1751,8 @@ namespace System.Text.Json.Node
         }
         public static implicit operator System.Text.Json.Node.JsonNode?(
             System.DateTimeOffset? value
-        ) {
+        )
+        {
             throw null;
         }
         public static implicit operator System.Text.Json.Node.JsonNode?(System.DateTime? value)
@@ -1797,7 +1837,8 @@ namespace System.Text.Json.Node
         }
         System.Dynamic.DynamicMetaObject System.Dynamic.IDynamicMetaObjectProvider.GetMetaObject(
             System.Linq.Expressions.Expression parameter
-        ) {
+        )
+        {
             throw null;
         }
         public static System.Text.Json.Node.JsonNode? Parse(
@@ -1806,14 +1847,16 @@ namespace System.Text.Json.Node
                 default(System.Text.Json.Node.JsonNodeOptions?),
             System.Text.Json.JsonDocumentOptions documentOptions =
                 default(System.Text.Json.JsonDocumentOptions)
-        ) {
+        )
+        {
             throw null;
         }
         public static System.Text.Json.Node.JsonNode? Parse(
             ref System.Text.Json.Utf8JsonReader reader,
             System.Text.Json.Node.JsonNodeOptions? nodeOptions =
                 default(System.Text.Json.Node.JsonNodeOptions?)
-        ) {
+        )
+        {
             throw null;
         }
         public static System.Text.Json.Node.JsonNode? Parse(
@@ -1822,7 +1865,8 @@ namespace System.Text.Json.Node
                 default(System.Text.Json.Node.JsonNodeOptions?),
             System.Text.Json.JsonDocumentOptions documentOptions =
                 default(System.Text.Json.JsonDocumentOptions)
-        ) {
+        )
+        {
             throw null;
         }
         public static System.Text.Json.Node.JsonNode? Parse(
@@ -1831,7 +1875,8 @@ namespace System.Text.Json.Node
                 default(System.Text.Json.Node.JsonNodeOptions?),
             System.Text.Json.JsonDocumentOptions documentOptions =
                 default(System.Text.Json.JsonDocumentOptions)
-        ) {
+        )
+        {
             throw null;
         }
         public string ToJsonString(System.Text.Json.JsonSerializerOptions? options = null)
@@ -1889,7 +1934,8 @@ namespace System.Text.Json.Node
             System.Text.Json.JsonElement element,
             System.Text.Json.Node.JsonNodeOptions? options =
                 default(System.Text.Json.Node.JsonNodeOptions?)
-        ) {
+        )
+        {
             throw null;
         }
         bool System.Collections.Generic.ICollection<System.Collections.Generic.KeyValuePair<
@@ -1941,7 +1987,8 @@ namespace System.Text.Json.Node
                 System.Text.Json.Node.JsonNode?
             >>.Contains(
             System.Collections.Generic.KeyValuePair<string, System.Text.Json.Node.JsonNode> item
-        ) {
+        )
+        {
             throw null;
         }
         void System.Collections.Generic.ICollection<System.Collections.Generic.KeyValuePair<
@@ -1956,7 +2003,8 @@ namespace System.Text.Json.Node
                 System.Text.Json.Node.JsonNode?
             >>.Remove(
             System.Collections.Generic.KeyValuePair<string, System.Text.Json.Node.JsonNode> item
-        ) {
+        )
+        {
             throw null;
         }
         bool System.Collections.Generic.IDictionary<
@@ -1966,7 +2014,8 @@ namespace System.Text.Json.Node
             string propertyName,
             [System.Diagnostics.CodeAnalysis.NotNullWhen(true)]
                 out System.Text.Json.Node.JsonNode jsonNode
-        ) {
+        )
+        {
             throw null;
         }
         System.Collections.IEnumerator System.Collections.IEnumerable.GetEnumerator()
@@ -1976,7 +2025,8 @@ namespace System.Text.Json.Node
         public bool TryGetPropertyValue(
             string propertyName,
             out System.Text.Json.Node.JsonNode? jsonNode
-        ) {
+        )
+        {
             throw null;
         }
         public override void WriteTo(
@@ -1994,7 +2044,8 @@ namespace System.Text.Json.Node
             T value,
             System.Text.Json.Node.JsonNodeOptions? options =
                 default(System.Text.Json.Node.JsonNodeOptions?)
-        ) {
+        )
+        {
             throw null;
         }
         public abstract bool TryGetValue<
@@ -2050,7 +2101,8 @@ namespace System.Text.Json.Serialization
         }
         public virtual System.Text.Json.Serialization.JsonConverter? CreateConverter(
             System.Type typeToConvert
-        ) {
+        )
+        {
             throw null;
         }
     }
@@ -2198,7 +2250,8 @@ namespace System.Text.Json.Serialization
         public override System.Text.Json.Serialization.JsonConverter CreateConverter(
             System.Type typeToConvert,
             System.Text.Json.JsonSerializerOptions options
-        ) {
+        )
+        {
             throw null;
         }
     }
@@ -2334,7 +2387,8 @@ namespace System.Text.Json.Serialization.Metadata
             System.Text.Json.JsonSerializerOptions options,
             System.Text.Json.Serialization.Metadata.JsonTypeInfo elementInfo,
             System.Text.Json.Serialization.JsonNumberHandling numberHandling
-        ) {
+        )
+        {
             throw null;
         }
         public static System.Text.Json.Serialization.Metadata.JsonTypeInfo<TCollection> CreateDictionaryInfo<
@@ -2347,8 +2401,9 @@ namespace System.Text.Json.Serialization.Metadata
             System.Text.Json.Serialization.Metadata.JsonTypeInfo keyInfo,
             System.Text.Json.Serialization.Metadata.JsonTypeInfo valueInfo,
             System.Text.Json.Serialization.JsonNumberHandling numberHandling
-        ) where TCollection : System.Collections.Generic.Dictionary<TKey, TValue>
-          where TKey : notnull
+        )
+            where TCollection : System.Collections.Generic.Dictionary<TKey, TValue>
+            where TKey : notnull
         {
             throw null;
         }
@@ -2381,7 +2436,8 @@ namespace System.Text.Json.Serialization.Metadata
             System.Text.Json.Serialization.JsonNumberHandling numberHandling,
             string propertyName,
             System.Text.Json.JsonEncodedText jsonPropertyName
-        ) {
+        )
+        {
             throw null;
         }
         public static System.Text.Json.Serialization.Metadata.JsonTypeInfo<T> CreateValueInfo<

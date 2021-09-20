@@ -211,7 +211,8 @@ namespace System.Net
                 || value.IndexOfAny(ReservedToName) != -1
                 || value[0] == ' '
                 || value[value.Length - 1] == ' '
-            ) {
+            )
+            {
                 m_name = string.Empty;
                 return false;
             }
@@ -301,7 +302,8 @@ namespace System.Net
             string localDomain,
             bool setDefault,
             bool shouldThrow
-        ) {
+        )
+        {
             string host = uri.Host;
             int port = uri.Port;
             string path = uri.AbsolutePath;
@@ -329,7 +331,8 @@ namespace System.Net
                 || m_name.IndexOfAny(ReservedToName) != -1
                 || m_name[0] == ' '
                 || m_name[m_name.Length - 1] == ' '
-            ) {
+            )
+            {
                 if (shouldThrow)
                 {
                     throw new CookieException(
@@ -354,7 +357,8 @@ namespace System.Net
                     )
                     && m_value.IndexOfAny(ReservedToValue) != -1
                 )
-            ) {
+            )
+            {
                 if (shouldThrow)
                 {
                     throw new CookieException(
@@ -375,7 +379,8 @@ namespace System.Net
                     Comment.Length > 2 && Comment[0] == '\"' && Comment[Comment.Length - 1] == '\"'
                 )
                 && (Comment.IndexOfAny(ReservedToValue) != -1)
-            ) {
+            )
+            {
                 if (shouldThrow)
                 {
                     throw new CookieException(
@@ -394,7 +399,8 @@ namespace System.Net
                 Path != null
                 && !(Path.Length > 2 && Path[0] == '\"' && Path[Path.Length - 1] == '\"')
                 && (Path.IndexOfAny(ReservedToValue) != -1)
-            ) {
+            )
+            {
                 if (shouldThrow)
                 {
                     throw new CookieException(
@@ -451,7 +457,8 @@ namespace System.Net
                     if (
                         isLocalDomain
                         && string.Equals(localDomain, domain, StringComparison.OrdinalIgnoreCase)
-                    ) {
+                    )
+                    {
                         valid = true;
                     }
                     else if (domain.IndexOf('.', 1, domain.Length - 2) == -1)
@@ -481,7 +488,8 @@ namespace System.Net
                                         StringComparison.OrdinalIgnoreCase
                                     ) != 0
                                 )
-                            ) {
+                            )
+                            {
                                 valid = false;
                             }
                         }
@@ -499,7 +507,8 @@ namespace System.Net
                                 StringComparison.OrdinalIgnoreCase
                             ) != 0
                         )
-                    ) {
+                    )
+                    {
                         // Starting from the first dot, the host must match the domain.
                         //
                         // For null hosts, the host must match the domain exactly.
@@ -559,7 +568,8 @@ namespace System.Net
                             path.Length == 0
                             || path[0] != '/'
                             || (lastSlash = path.LastIndexOf('/')) == 0
-                        ) {
+                        )
+                        {
                             m_path = "/";
                             break;
                         }
@@ -635,7 +645,8 @@ namespace System.Net
                         || (ch >= 'A' && ch <= 'Z')
                         || (ch == '_')
                     )
-                ) {
+                )
+                {
                     return false;
                 }
             }

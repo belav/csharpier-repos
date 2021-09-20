@@ -85,7 +85,8 @@ namespace GenDefinedCharList
                         GetIsCodePointAllowedOverride(codepoint)
                         ?? IsAllowedUnicodeCategory(category)
                     )
-                ) {
+                )
+                {
                     continue;
                 }
 
@@ -231,7 +232,8 @@ namespace GenDefinedCharList
             string rawName,
             out string rangeName,
             out bool isStartOfRange
-        ) {
+        )
+        {
             // Ranges are represented within angle brackets, such as the following:
             // DC00;<Low Surrogate, First>;Cs;0;L;;;;;N;;;;;
             // DFFF;<Low Surrogate, Last>;Cs;0;L;;;;;N;;;;;

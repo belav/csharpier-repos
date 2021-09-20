@@ -40,7 +40,8 @@ namespace System.ComponentModel
             ITypeDescriptorContext context,
             CultureInfo culture,
             object value
-        ) {
+        )
+        {
             if (value is string text)
             {
                 text = text.Trim();
@@ -91,7 +92,8 @@ namespace System.ComponentModel
             CultureInfo culture,
             object value,
             Type destinationType
-        ) {
+        )
+        {
             if (destinationType == typeof(string) && value is DateTime)
             {
                 DateTime dt = (DateTime)value;

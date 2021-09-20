@@ -108,7 +108,8 @@ namespace Microsoft.CodeAnalysis.Differencing
             TNode node,
             int level,
             [MaybeNullWhen(false)] out TNode ancestor
-        ) {
+        )
+        {
             while (level > 0)
             {
                 if (TryGetParent(node, out var parent))

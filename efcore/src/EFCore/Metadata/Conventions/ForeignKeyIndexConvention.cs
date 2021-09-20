@@ -49,7 +49,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
         public virtual void ProcessForeignKeyAdded(
             IConventionForeignKeyBuilder relationshipBuilder,
             IConventionContext<IConventionForeignKeyBuilder> context
-        ) {
+        )
+        {
             var foreignKey = relationshipBuilder.Metadata;
             CreateIndex(
                 foreignKey.Properties,
@@ -68,7 +69,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
             IConventionEntityTypeBuilder entityTypeBuilder,
             IConventionForeignKey foreignKey,
             IConventionContext<IConventionForeignKey> context
-        ) {
+        )
+        {
             OnForeignKeyRemoved(foreignKey.DeclaringEntityType, foreignKey.Properties);
         }
 
@@ -84,7 +86,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
             IReadOnlyList<IConventionProperty> oldDependentProperties,
             IConventionKey oldPrincipalKey,
             IConventionContext<IReadOnlyList<IConventionProperty>> context
-        ) {
+        )
+        {
             var foreignKey = relationshipBuilder.Metadata;
             if (!foreignKey.Properties.SequenceEqual(oldDependentProperties))
             {
@@ -103,7 +106,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
         private static void OnForeignKeyRemoved(
             IConventionEntityType declaringType,
             IReadOnlyList<IConventionProperty> foreignKeyProperties
-        ) {
+        )
+        {
             var index = declaringType.FindIndex(foreignKeyProperties);
             if (index == null)
             {
@@ -132,14 +136,16 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
         public virtual void ProcessKeyAdded(
             IConventionKeyBuilder keyBuilder,
             IConventionContext<IConventionKeyBuilder> context
-        ) {
+        )
+        {
             var key = keyBuilder.Metadata;
             foreach (
                 var index in key.DeclaringEntityType.GetDerivedTypesInclusive()
                     .SelectMany(t => t.GetDeclaredIndexes())
                     .Where(i => AreIndexedBy(i.Properties, i.IsUnique, key.Properties, true))
                     .ToList()
-            ) {
+            )
+            {
                 RemoveIndex(index);
             }
         }
@@ -154,7 +160,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
             IConventionEntityTypeBuilder entityTypeBuilder,
             IConventionKey key,
             IConventionContext<IConventionKey> context
-        ) {
+        )
+        {
             foreach (
                 var otherForeignKey in key.DeclaringEntityType.GetDerivedTypesInclusive()
                     .SelectMany(t => t.GetDeclaredForeignKeys())
@@ -167,7 +174,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
                                 coveringIndexUnique: true
                             )
                     )
-            ) {
+            )
+            {
                 CreateIndex(
                     otherForeignKey.Properties,
                     otherForeignKey.IsUnique,
@@ -188,7 +196,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
             IConventionEntityType? newBaseType,
             IConventionEntityType? oldBaseType,
             IConventionContext<IConventionEntityType> context
-        ) {
+        )
+        {
             if (entityTypeBuilder.Metadata.BaseType != newBaseType)
             {
                 return;
@@ -199,7 +208,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
             foreach (
                 var foreignKey in entityTypeBuilder.Metadata.GetDeclaredForeignKeys()
                     .Concat(entityTypeBuilder.Metadata.GetDerivedForeignKeys())
-            ) {
+            )
+            {
                 var index = foreignKey.DeclaringEntityType.FindIndex(foreignKey.Properties);
                 if (index == null)
                 {
@@ -252,7 +262,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
         public virtual void ProcessIndexAdded(
             IConventionIndexBuilder indexBuilder,
             IConventionContext<IConventionIndexBuilder> context
-        ) {
+        )
+        {
             var index = indexBuilder.Metadata;
             foreach (
                 var otherIndex in index.DeclaringEntityType.GetDerivedTypesInclusive()
@@ -268,7 +279,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
                             )
                     )
                     .ToList()
-            ) {
+            )
+            {
                 RemoveIndex(otherIndex);
             }
         }
@@ -283,7 +295,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
             IConventionEntityTypeBuilder entityTypeBuilder,
             IConventionIndex index,
             IConventionContext<IConventionIndex> context
-        ) {
+        )
+        {
             foreach (
                 var foreignKey in index.DeclaringEntityType.GetDerivedTypesInclusive()
                     .SelectMany(t => t.GetDeclaredForeignKeys())
@@ -296,7 +309,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
                                 index.IsUnique
                             )
                     )
-            ) {
+            )
+            {
                 CreateIndex(
                     foreignKey.Properties,
                     foreignKey.IsUnique,
@@ -313,7 +327,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
         public virtual void ProcessForeignKeyUniquenessChanged(
             IConventionForeignKeyBuilder relationshipBuilder,
             IConventionContext<bool?> context
-        ) {
+        )
+        {
             var foreignKey = relationshipBuilder.Metadata;
             var index = foreignKey.DeclaringEntityType.FindIndex(foreignKey.Properties);
             if (index == null)
@@ -371,7 +386,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
         public virtual void ProcessIndexUniquenessChanged(
             IConventionIndexBuilder indexBuilder,
             IConventionContext<bool?> context
-        ) {
+        )
+        {
             var index = indexBuilder.Metadata;
             if (index.IsUnique)
             {
@@ -389,7 +405,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
                                 )
                         )
                         .ToList()
-                ) {
+                )
+                {
                     RemoveIndex(otherIndex);
                 }
             }
@@ -408,7 +425,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
                                     coveringIndexUnique: true
                                 )
                         )
-                ) {
+                )
+                {
                     CreateIndex(
                         foreignKey.Properties,
                         foreignKey.IsUnique,
@@ -429,7 +447,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
             IReadOnlyList<IConventionProperty> properties,
             bool unique,
             IConventionEntityTypeBuilder entityTypeBuilder
-        ) {
+        )
+        {
             foreach (var key in entityTypeBuilder.Metadata.GetKeys())
             {
                 if (AreIndexedBy(properties, unique, key.Properties, coveringIndexUnique: true))
@@ -447,7 +466,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
                         existingIndex.Properties,
                         existingIndex.IsUnique
                     )
-                ) {
+                )
+                {
                     return null;
                 }
             }
@@ -489,12 +509,14 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
         public virtual void ProcessModelFinalizing(
             IConventionModelBuilder modelBuilder,
             IConventionContext<IConventionModelBuilder> context
-        ) {
+        )
+        {
             var definition = CoreResources.LogRedundantIndexRemoved(Dependencies.Logger);
             if (
                 !Dependencies.Logger.ShouldLog(definition)
                 && !Dependencies.Logger.DiagnosticSource.IsEnabled(definition.EventId.Name!)
-            ) {
+            )
+            {
                 return;
             }
 
@@ -511,7 +533,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
                                 key.Properties,
                                 coveringIndexUnique: true
                             )
-                        ) {
+                        )
+                        {
                             if (declaredForeignKey.Properties.Count != key.Properties.Count)
                             {
                                 Dependencies.Logger.RedundantIndexRemoved(
@@ -531,11 +554,13 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
                                 existingIndex.Properties,
                                 existingIndex.IsUnique
                             )
-                        ) {
+                        )
+                        {
                             if (
                                 declaredForeignKey.Properties.Count
                                 != existingIndex.Properties.Count
-                            ) {
+                            )
+                            {
                                 Dependencies.Logger.RedundantIndexRemoved(
                                     declaredForeignKey.Properties,
                                     existingIndex.Properties

@@ -21,7 +21,8 @@ namespace System.Net.Mime
             Encoding encoding,
             bool useBase64Encoding,
             int headerTextLength
-        ) {
+        )
+        {
             byte[] header = CreateHeader(encoding, useBase64Encoding);
             byte[] footer = s_footer;
 

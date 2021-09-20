@@ -28,7 +28,8 @@ namespace Microsoft.CSharp.RuntimeBinder.ComInterop
             DynamicMetaObject target,
             DynamicMetaObject[] args,
             DynamicMetaObject errorSuggestion
-        ) {
+        )
+        {
             if (ComBinder.TryBindInvoke(this, target, args, out DynamicMetaObject res))
             {
                 return res;
@@ -74,7 +75,8 @@ namespace Microsoft.CSharp.RuntimeBinder.ComInterop
             object[] args,
             ReadOnlyCollection<ParameterExpression> parameters,
             LabelTarget returnLabel
-        ) {
+        )
+        {
             Debug.Assert(args.Length == 2);
 
             int count = ((object[])args[1]).Length;

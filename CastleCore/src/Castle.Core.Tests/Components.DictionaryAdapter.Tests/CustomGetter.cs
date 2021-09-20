@@ -36,7 +36,8 @@ namespace Castle.Components.DictionaryAdapter.Tests
             object storedValue,
             PropertyDescriptor property,
             bool ifExists
-        ) {
+        )
+        {
             propertiesFetched.Add(key);
             return storedValue;
         }

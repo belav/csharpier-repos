@@ -23,7 +23,8 @@ namespace Microsoft.CodeAnalysis.Diagnostics
             TextSpan? span,
             ImmutableArray<DiagnosticAnalyzer> analyzers,
             AnalysisKind kind
-        ) {
+        )
+        {
             Debug.Assert(kind == AnalysisKind.Syntax || kind == AnalysisKind.Semantic);
             Debug.Assert(!analyzers.IsDefaultOrEmpty);
 

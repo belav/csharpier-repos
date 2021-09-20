@@ -22,7 +22,8 @@ namespace Microsoft.AspNetCore.Rewrite.UrlMatches
             int compValue;
             if (
                 !int.TryParse(value, NumberStyles.None, CultureInfo.InvariantCulture, out compValue)
-            ) {
+            )
+            {
                 throw new FormatException(Resources.Error_IntegerMatch_FormatExceptionMessage);
             }
             _value = compValue;
@@ -34,7 +35,8 @@ namespace Microsoft.AspNetCore.Rewrite.UrlMatches
             int compValue;
             if (
                 !int.TryParse(input, NumberStyles.None, CultureInfo.InvariantCulture, out compValue)
-            ) {
+            )
+            {
                 return MatchResults.EmptyFailure;
             }
 

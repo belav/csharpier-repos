@@ -23,7 +23,8 @@ namespace Microsoft.Extensions.Configuration
         public static IConfigurationBuilder SetFileProvider(
             this IConfigurationBuilder builder,
             IFileProvider fileProvider
-        ) {
+        )
+        {
             if (builder == null)
             {
                 throw new ArgumentNullException(nameof(builder));
@@ -63,7 +64,8 @@ namespace Microsoft.Extensions.Configuration
         public static IConfigurationBuilder SetBasePath(
             this IConfigurationBuilder builder,
             string basePath
-        ) {
+        )
+        {
             if (builder == null)
             {
                 throw new ArgumentNullException(nameof(builder));
@@ -86,7 +88,8 @@ namespace Microsoft.Extensions.Configuration
         public static IConfigurationBuilder SetFileLoadExceptionHandler(
             this IConfigurationBuilder builder,
             Action<FileLoadExceptionContext> handler
-        ) {
+        )
+        {
             if (builder == null)
             {
                 throw new ArgumentNullException(nameof(builder));
@@ -103,7 +106,8 @@ namespace Microsoft.Extensions.Configuration
         /// <returns>The <see cref="IConfigurationBuilder"/>.</returns>
         public static Action<FileLoadExceptionContext> GetFileLoadExceptionHandler(
             this IConfigurationBuilder builder
-        ) {
+        )
+        {
             if (builder == null)
             {
                 throw new ArgumentNullException(nameof(builder));

@@ -146,7 +146,8 @@ namespace Microsoft.CodeAnalysis.EmbeddedLanguages.RegularExpressions
             private void RecordSimpleGroupingCapture(
                 RegexSimpleGroupingNode node,
                 RegexOptions options
-            ) {
+            )
+            {
                 if (HasOption(options, RegexOptions.ExplicitCapture))
                 {
                     // Don't automatically add simple groups if the explicit capture option is on.
@@ -171,7 +172,8 @@ namespace Microsoft.CodeAnalysis.EmbeddedLanguages.RegularExpressions
                     if (
                         leftMost.Node is RegexTextNode textNode
                         && IsTextChar(textNode.TextToken, '?')
-                    ) {
+                    )
+                    {
                         return;
                     }
                 }
@@ -209,7 +211,8 @@ namespace Microsoft.CodeAnalysis.EmbeddedLanguages.RegularExpressions
                 ArrayBuilder<T> list,
                 T val,
                 TextSpan span
-            ) {
+            )
+            {
                 if (!mapping.ContainsKey(val))
                 {
                     mapping.Add(val, span);

@@ -151,7 +151,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
         public virtual ServiceParameterBinding? SetParameterBinding(
             ServiceParameterBinding? parameterBinding,
             ConfigurationSource configurationSource
-        ) {
+        )
+        {
             EnsureMutable();
 
             _parameterBinding = parameterBinding;

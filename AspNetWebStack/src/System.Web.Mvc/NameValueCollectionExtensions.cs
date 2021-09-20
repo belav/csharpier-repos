@@ -11,7 +11,8 @@ namespace System.Web.Mvc
         public static void CopyTo(
             this NameValueCollection collection,
             IDictionary<string, object> destination
-        ) {
+        )
+        {
             CopyTo(
                 collection,
                 destination,
@@ -23,7 +24,8 @@ namespace System.Web.Mvc
             this NameValueCollection collection,
             IDictionary<string, object> destination,
             bool replaceEntries
-        ) {
+        )
+        {
             if (collection == null)
             {
                 throw new ArgumentNullException("collection");

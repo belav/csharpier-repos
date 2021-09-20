@@ -47,7 +47,8 @@ namespace Microsoft.CodeAnalysis.Completion.Providers
         protected override async Task ProvideCompletionsAsync(
             CompletionContext context,
             string pathThroughLastSlash
-        ) {
+        )
+        {
             var helper = GetFileSystemCompletionHelper(
                 context.Document,
                 Glyph.CSharpFile,

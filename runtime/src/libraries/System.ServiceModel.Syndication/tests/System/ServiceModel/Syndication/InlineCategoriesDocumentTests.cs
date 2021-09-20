@@ -68,7 +68,8 @@ namespace System.ServiceModel.Syndication.Tests
             IEnumerable<SyndicationCategory> categories,
             bool isFixed,
             string scheme
-        ) {
+        )
+        {
             var document = new InlineCategoriesDocument(categories, isFixed, scheme);
             Assert.Empty(document.AttributeExtensions);
             Assert.Null(document.BaseUri);
@@ -153,7 +154,8 @@ namespace System.ServiceModel.Syndication.Tests
             string ns,
             string value,
             string version
-        ) {
+        )
+        {
             var document = new InlineCategoriesDocumentSubclass();
             Assert.False(document.TryParseAttributeEntryPoint(name, ns, value, version));
         }

@@ -23,15 +23,18 @@ namespace Microsoft.CodeAnalysis.CSharp.Organizing
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
         public CSharpOrganizingService(
             [ImportMany] IEnumerable<Lazy<ISyntaxOrganizer, LanguageMetadata>> organizers
-        ) : base(
-            organizers.Where(o => o.Metadata.Language == LanguageNames.CSharp).Select(o => o.Value)
-        ) { }
+        )
+            : base(
+                organizers.Where(o => o.Metadata.Language == LanguageNames.CSharp)
+                    .Select(o => o.Value)
+            ) { }
 
         protected override async Task<Document> ProcessAsync(
             Document document,
             IEnumerable<ISyntaxOrganizer> organizers,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var root = await document.GetSyntaxRootAsync(cancellationToken).ConfigureAwait(false);
             var rewriter = new Rewriter(
                 this,

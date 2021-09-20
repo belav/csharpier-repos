@@ -36,7 +36,8 @@ namespace Roslyn.Test.Utilities
         public static unsafe EditAndContinueMethodDebugInformation GetEncMethodDebugInfo(
             this ISymUnmanagedReader3 symReader,
             MethodDefinitionHandle handle
-        ) {
+        )
+        {
             const int S_OK = 0;
 
             if (symReader is ISymUnmanagedReader4 symReader4)
@@ -86,7 +87,8 @@ namespace Roslyn.Test.Utilities
             EntityHandle handle,
             Guid kind,
             out CustomDebugInformation customDebugInfo
-        ) {
+        )
+        {
             bool foundAny = false;
             customDebugInfo = default(CustomDebugInformation);
             foreach (var infoHandle in reader.GetCustomDebugInformation(handle))
@@ -108,7 +110,8 @@ namespace Roslyn.Test.Utilities
 
         public static EditAndContinueMethodDebugInformation GetEncMethodDebugInfo(
             byte[] customDebugInfoBlob
-        ) {
+        )
+        {
             return EditAndContinueMethodDebugInformation.Create(
                 CustomDebugInfoUtilities.GetEditAndContinueLocalSlotMapRecord(customDebugInfoBlob),
                 CustomDebugInfoUtilities.GetEditAndContinueLambdaMapRecord(customDebugInfoBlob)

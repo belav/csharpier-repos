@@ -46,7 +46,8 @@ namespace Microsoft.AspNetCore.Http
             this HttpResponse response,
             string trailerName,
             StringValues trailerValues
-        ) {
+        )
+        {
             var feature = response.HttpContext.Features.Get<IHttpResponseTrailersFeature>();
             if (feature?.Trailers == null || feature.Trailers.IsReadOnly)
             {

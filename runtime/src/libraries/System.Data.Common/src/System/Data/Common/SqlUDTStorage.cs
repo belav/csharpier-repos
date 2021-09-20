@@ -33,7 +33,8 @@ namespace System.Data.Common
                 nullValue,
                 typeof(ICloneable).IsAssignableFrom(type),
                 GetStorageType(type)
-            ) {
+            )
+        {
             _implementsIXmlSerializable = typeof(IXmlSerializable).IsAssignableFrom(type);
             _implementsIComparable = typeof(IComparable).IsAssignableFrom(type);
         }
@@ -247,7 +248,8 @@ namespace System.Data.Common
             object value,
             XmlWriter xmlWriter,
             XmlRootAttribute? xmlAttrib
-        ) {
+        )
+        {
             if (null == xmlAttrib)
             {
                 Debug.Assert(
@@ -279,7 +281,8 @@ namespace System.Data.Common
             object store,
             BitArray nullbits,
             int storeIndex
-        ) {
+        )
+        {
             object[] typedStore = (object[])store;
             typedStore[storeIndex] = _values[record];
             nullbits.Set(storeIndex, IsNull(record));

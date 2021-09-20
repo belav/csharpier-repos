@@ -23,7 +23,8 @@ namespace Roslyn.Utilities
             Func<CancellationToken, Task> processAsync,
             IAsynchronousOperationListener? asyncListener,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             _processAsync = processAsync;
 
             // We use an AsyncBatchingWorkQueue with a boolean, and just always add the

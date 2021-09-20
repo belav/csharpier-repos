@@ -24,7 +24,8 @@ namespace Microsoft.CodeAnalysis.ExternalAccess.VSTypeScript
         public VSTypeScriptDiagnosticAnalyzerLanguageService(
             [Import(AllowDefault = true)]
                 IVSTypeScriptDiagnosticAnalyzerImplementation? implementation = null
-        ) {
+        )
+        {
             Implementation = implementation;
         }
     }

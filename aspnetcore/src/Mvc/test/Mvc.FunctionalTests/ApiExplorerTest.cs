@@ -471,7 +471,8 @@ namespace Microsoft.AspNetCore.Mvc.FunctionalTests
         [InlineData("GetTaskWithExplicitResponseTypeStatusCode")]
         public async Task ApiExplorer_ResponseType_VoidWithResponseTypeAttributeStatusCode(
             string action
-        ) {
+        )
+        {
             // Arrange & Act
             var response = await Client.GetAsync(
                 "http://localhost/ApiExplorerResponseTypeWithAttribute/" + action
@@ -493,7 +494,8 @@ namespace Microsoft.AspNetCore.Mvc.FunctionalTests
         [InlineData("GetTask")]
         public async Task ApiExplorer_ResponseType_VoidWithoutAttributeDefaultStatusCode(
             string action
-        ) {
+        )
+        {
             // Arrange & Act
             var response = await Client.GetAsync(
                 "http://localhost/ApiExplorerResponseTypeWithoutAttribute/" + action
@@ -1035,7 +1037,8 @@ namespace Microsoft.AspNetCore.Mvc.FunctionalTests
             string action,
             string contentType,
             Type formatterType
-        ) {
+        )
+        {
             // Arrange & Act
             var response = await Client.GetAsync(
                 "http://localhost/ApiExplorerResponseContentTypeOverrideOnAction/" + action

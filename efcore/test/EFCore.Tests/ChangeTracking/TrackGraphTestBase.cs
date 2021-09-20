@@ -21,7 +21,8 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking
                 DbContext context,
                 object root,
                 Action<EntityEntryGraphNode> callback
-            ) {
+            )
+            {
                 var traversal = new List<string>();
 
                 context.ChangeTracker.TrackGraph(
@@ -44,7 +45,8 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking
                 DbContext context,
                 object root,
                 Action<EntityEntryGraphNode> callback
-            ) {
+            )
+            {
                 var traversal = new List<string>();
 
                 context.ChangeTracker.TrackGraph<EntityState>(
@@ -97,7 +99,8 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking
         public void Can_attach_nullable_PK_parent_with_child_collection(
             bool useAttach,
             bool setKeys
-        ) {
+        )
+        {
             using var context = new EarlyLearningCenter(GetType().Name);
             var category = new NullbileCategory
             {
@@ -172,7 +175,8 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking
         public void Can_attach_nullable_PK_parent_with_one_to_one_children(
             bool useAttach,
             bool setKeys
-        ) {
+        )
+        {
             using var context = new EarlyLearningCenter(GetType().Name);
             var category = new NullbileCategory { Info = new NullbileCategoryInfo() };
 
@@ -229,7 +233,8 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking
             bool useAttach,
             bool setPrincipalKey,
             bool setDependentKey
-        ) {
+        )
+        {
             using var context = new EarlyLearningCenter(GetType().Name);
             var sweet = new Sweet
             {
@@ -330,7 +335,8 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking
         public void Can_attach_owned_dependent_with_reference_to_parent(
             bool useAttach,
             bool setDependentKey
-        ) {
+        )
+        {
             using var context = new EarlyLearningCenter(GetType().Name);
             var dreams = new Dreams
             {
@@ -714,7 +720,8 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking
         public void Can_add_owned_dependent_with_reference_to_parent(
             bool useAdd,
             bool setDependentKey
-        ) {
+        )
+        {
             using var context = new EarlyLearningCenter(GetType().Name);
             var dreams = new Dreams
             {
@@ -805,7 +812,8 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking
         public void Dependents_are_detached_not_deleted_when_principal_is_detached(
             bool delayCascade,
             bool trackNewDependents
-        ) {
+        )
+        {
             using var context = new EarlyLearningCenter(GetType().Name);
 
             var category = new Category
@@ -1011,7 +1019,8 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking
             foreach (
                 var entity in new object[] { category }.Concat(category.Products)
                     .Concat(category.Products.Select(e => e.Details))
-            ) {
+            )
+            {
                 Assert.Equal(EntityState.Detached, context.Entry(entity).State);
             }
         }
@@ -1073,7 +1082,8 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking
             string databaseName,
             Action<Category, ChangeTracker> tracker,
             bool expectModified = false
-        ) {
+        )
+        {
             using var context = new EarlyLearningCenter(databaseName);
             var category = new Category
             {

@@ -19,19 +19,20 @@ namespace System.Buffers.Text.Tests
             int minute,
             int second,
             bool expectSuccess
-        ) : this(
-            year,
-            month,
-            day,
-            hour,
-            minute,
-            second,
-            fraction: 0,
-            offsetNegative: false,
-            offsetHours: 0,
-            offsetMinutes: 0,
-            expectSuccess: expectSuccess
-        ) { }
+        )
+            : this(
+                year,
+                month,
+                day,
+                hour,
+                minute,
+                second,
+                fraction: 0,
+                offsetNegative: false,
+                offsetHours: 0,
+                offsetMinutes: 0,
+                expectSuccess: expectSuccess
+            ) { }
 
         public PseudoDateTime(
             int year,
@@ -45,7 +46,8 @@ namespace System.Buffers.Text.Tests
             int offsetHours,
             int offsetMinutes,
             bool expectSuccess
-        ) {
+        )
+        {
             Year = year;
             Month = month;
             Day = day;

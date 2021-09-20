@@ -44,7 +44,8 @@ namespace Microsoft.CodeAnalysis.Completion.Providers
             int position,
             OptionSet options,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var recommender = context.GetLanguageService<IRecommendationService>();
             var recommendedSymbols = recommender.GetRecommendedSymbolsAtPosition(
                 context.Workspace,
@@ -98,7 +99,8 @@ namespace Microsoft.CodeAnalysis.Completion.Providers
             ImmutableArray<(ISymbol symbol, bool preselect)> symbols,
             TSyntaxContext context,
             SupportedPlatformData? supportedPlatformData
-        ) {
+        )
+        {
             var rules = GetCompletionItemRules(symbols, context);
 
             var preselect = symbols.Any(t => t.preselect);
@@ -136,7 +138,8 @@ namespace Microsoft.CodeAnalysis.Completion.Providers
             CompletionContext completionContext,
             TSyntaxContext context,
             bool preselect
-        ) {
+        )
+        {
             return !preselect
                 && completionContext.Trigger.Kind == CompletionTriggerKind.Insertion
                 && context.IsOnArgumentListBracketOrComma
@@ -150,7 +153,8 @@ namespace Microsoft.CodeAnalysis.Completion.Providers
         {
             if (
                 symbol.MatchesKind(SymbolKind.Local, SymbolKind.Parameter, SymbolKind.RangeVariable)
-            ) {
+            )
+            {
                 return SymbolMatchPriority.PreferLocalOrParameterOrRangeVariable;
             }
 
@@ -171,7 +175,8 @@ namespace Microsoft.CodeAnalysis.Completion.Providers
             Document document,
             CompletionItem item,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var position = SymbolCompletionItem.GetContextPosition(item);
             var name = SymbolCompletionItem.GetSymbolName(item);
             var kind = SymbolCompletionItem.GetKind(item);
@@ -214,7 +219,8 @@ namespace Microsoft.CodeAnalysis.Completion.Providers
                                 out var index
                             )
                             && index > 0
-                        ) {
+                        )
+                        {
                             // Since the first symbol is used to get the item description by default,
                             // this would ensure the displayed one matches target types (if there's any).
                             var firstMatch = bestSymbols[index];
@@ -241,7 +247,8 @@ namespace Microsoft.CodeAnalysis.Completion.Providers
                 string name,
                 SymbolKind? kind,
                 bool isGeneric
-            ) {
+            )
+            {
                 return kind != null
                     && tuple.symbol.Kind == kind
                     && tuple.symbol.Name == name
@@ -253,7 +260,8 @@ namespace Microsoft.CodeAnalysis.Completion.Providers
             Document document,
             int characterPosition,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var result = await IsTriggerOnDotAsync(document, characterPosition, cancellationToken)
                 .ConfigureAwait(false);
             return result ?? true;
@@ -263,7 +271,8 @@ namespace Microsoft.CodeAnalysis.Completion.Providers
             Document document,
             int characterPosition,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var text = await document.GetTextAsync(cancellationToken).ConfigureAwait(false);
             if (text[characterPosition] != '.')
                 return null;

@@ -215,7 +215,8 @@ namespace JIT.HardwareIntrinsics.Arm
             UInt32 data,
             UInt32 result,
             [CallerMemberName] string method = ""
-        ) {
+        )
+        {
             var isUnexpectedResult = false;
 
             isUnexpectedResult = Helpers.ReverseElementBits(data) != result;

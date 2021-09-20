@@ -27,11 +27,8 @@ namespace Castle.Components.DictionaryAdapter.Xml
         protected XPathNavigator node;
         protected readonly CompiledXPath xpath;
 
-        protected XPathNode(
-            CompiledXPath path,
-            IXmlNamespaceSource namespaces,
-            IXmlNode parent
-        ) : base(namespaces, parent)
+        protected XPathNode(CompiledXPath path, IXmlNamespaceSource namespaces, IXmlNode parent)
+            : base(namespaces, parent)
         {
             this.xpath = path;
         }
@@ -208,7 +205,8 @@ namespace Castle.Components.DictionaryAdapter.Xml
             IXmlKnownTypeMap knownTypes,
             IXmlNamespaceSource namespaces,
             CursorFlags flags
-        ) {
+        )
+        {
             return new SysXmlCursor(this, knownTypes, namespaces, flags);
         }
 
@@ -222,7 +220,8 @@ namespace Castle.Components.DictionaryAdapter.Xml
             IXmlIncludedTypeMap includedTypes,
             IXmlNamespaceSource namespaces,
             CursorFlags flags
-        ) {
+        )
+        {
             return flags.SupportsMutation()
               ? (IXmlCursor)new XPathMutableCursor(this, path, includedTypes, namespaces, flags)
               : (IXmlCursor)new XPathReadOnlyCursor(this, path, includedTypes, namespaces, flags);

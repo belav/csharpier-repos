@@ -17,10 +17,8 @@ namespace System.Xml.Schema
     )]
     public class XmlSchemaInferenceException : XmlSchemaException
     {
-        protected XmlSchemaInferenceException(
-            SerializationInfo info,
-            StreamingContext context
-        ) : base(info, context) { }
+        protected XmlSchemaInferenceException(SerializationInfo info, StreamingContext context)
+            : base(info, context) { }
 
         public override void GetObjectData(SerializationInfo info, StreamingContext context)
         {

@@ -31,7 +31,8 @@ namespace ApiExplorerWebSite
             if (
                 context.ActionDescriptor is ControllerActionDescriptor controllerActionDescriptor
                 && controllerActionDescriptor.MethodInfo.IsDefined(typeof(PassThruAttribute))
-            ) {
+            )
+            {
                 return;
             }
 

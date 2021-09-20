@@ -117,7 +117,8 @@ namespace System.DirectoryServices.ActiveDirectory
             DirectoryContext context,
             DirectoryEntry connectionEntry,
             string name
-        ) {
+        )
+        {
             this.context = context;
             cachedDirectoryEntry = connectionEntry;
             _connectionName = name;
@@ -151,7 +152,8 @@ namespace System.DirectoryServices.ActiveDirectory
             DirectoryServer sourceServer,
             ActiveDirectorySchedule? schedule,
             ActiveDirectoryTransportType transport
-        ) {
+        )
+        {
             ValidateArgument(context, name);
 
             if (sourceServer == null)
@@ -237,7 +239,8 @@ namespace System.DirectoryServices.ActiveDirectory
                         if (
                             Utils.CheckCapability(tmpDE, Capability.ActiveDirectoryApplicationMode)
                             && transport == ActiveDirectoryTransportType.Smtp
-                        ) {
+                        )
+                        {
                             throw new NotSupportedException(SR.NotSupportTransportSMTP);
                         }
                     }
@@ -1039,7 +1042,8 @@ namespace System.DirectoryServices.ActiveDirectory
         private void ValidateTargetAndSourceServer(
             DirectoryContext context,
             DirectoryServer sourceServer
-        ) {
+        )
+        {
             bool targetIsDC = false;
             DirectoryEntry? targetDE = null;
             DirectoryEntry? sourceDE = null;
@@ -1054,7 +1058,8 @@ namespace System.DirectoryServices.ActiveDirectory
                 }
                 else if (
                     !Utils.CheckCapability(targetDE, Capability.ActiveDirectoryApplicationMode)
-                ) {
+                )
+                {
                     // if it is also not an ADAM instance, it is invalid then
                     throw new ArgumentException(SR.DirectoryContextNeedHost, nameof(context));
                 }

@@ -122,7 +122,8 @@ namespace Microsoft.Diagnostics.Tools.Pgo
                         help: "If the process contains multiple .NET runtimes, the instance ID must be specified.",
                         requireValue: true
                     ).IsSpecified
-                ) {
+                )
+                {
                     ClrInstanceId = clrInstanceIdLocal;
                 }
 

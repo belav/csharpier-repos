@@ -132,7 +132,8 @@ namespace Microsoft.EntityFrameworkCore.Utilities
             Func<TVertex, TVertex, IEnumerable<TEdge>, bool>? tryBreakEdge,
             Func<IReadOnlyList<Tuple<TVertex, TVertex, IEnumerable<TEdge>>>, string>? formatCycle,
             Func<string, string>? formatException = null
-        ) {
+        )
+        {
             var sortedQueue = new List<TVertex>();
             var predecessorCounts = new Dictionary<TVertex, int>();
 
@@ -169,7 +170,8 @@ namespace Microsoft.EntityFrameworkCore.Utilities
                     foreach (
                         var successor in GetOutgoingNeighbors(currentRoot)
                             .Where(neighbor => predecessorCounts.ContainsKey(neighbor))
-                    ) {
+                    )
+                    {
                         // Decrement counts for edges from sorted vertices and append any vertices that no longer have predecessors
                         predecessorCounts[successor]--;
                         if (predecessorCounts[successor] == 0)
@@ -195,7 +197,8 @@ namespace Microsoft.EntityFrameworkCore.Utilities
                         (candidateIndex < candidateVertices.Count)
                         && !broken
                         && tryBreakEdge != null
-                    ) {
+                    )
+                    {
                         var candidateVertex = candidateVertices[candidateIndex];
 
                         // Find vertices in the unsorted portion of the graph that have edges to the candidate
@@ -212,7 +215,8 @@ namespace Microsoft.EntityFrameworkCore.Utilities
                                     candidateVertex,
                                     _successorMap[incomingNeighbor][candidateVertex]
                                 )
-                            ) {
+                            )
+                            {
                                 predecessorCounts[candidateVertex]--;
                                 if (predecessorCounts[candidateVertex] == 0)
                                 {
@@ -241,7 +245,8 @@ namespace Microsoft.EntityFrameworkCore.Utilities
                             foreach (
                                 var predecessor in GetIncomingNeighbors(currentCycleVertex)
                                     .Where(neighbor => predecessorCounts.ContainsKey(neighbor))
-                            ) {
+                            )
+                            {
                                 if (predecessorCounts[predecessor] != 0)
                                 {
                                     predecessorCounts[currentCycleVertex] = -1;
@@ -268,7 +273,8 @@ namespace Microsoft.EntityFrameworkCore.Utilities
             List<TVertex> cycle,
             Func<IReadOnlyList<Tuple<TVertex, TVertex, IEnumerable<TEdge>>>, string>? formatCycle,
             Func<string, string>? formatException = null
-        ) {
+        )
+        {
             string cycleString;
             if (formatCycle == null)
             {
@@ -308,7 +314,8 @@ namespace Microsoft.EntityFrameworkCore.Utilities
 
         public IReadOnlyList<List<TVertex>> BatchingTopologicalSort(
             Func<IReadOnlyList<Tuple<TVertex, TVertex, IEnumerable<TEdge>>>, string>? formatCycle
-        ) {
+        )
+        {
             var currentRootsQueue = new List<TVertex>();
             var predecessorCounts = new Dictionary<TVertex, int>();
 

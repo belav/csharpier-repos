@@ -22,7 +22,8 @@ namespace System.ComponentModel.Tests
         public void Ctor_PropertyDescriptor_ListSortDirection(
             PropertyDescriptor property,
             ListSortDirection direction
-        ) {
+        )
+        {
             var sortDescription = new ListSortDescription(property, direction);
             Assert.Same(property, sortDescription.PropertyDescriptor);
             Assert.Equal(direction, sortDescription.SortDirection);

@@ -76,7 +76,8 @@ namespace System.Linq.Expressions.Tests
             InvocationExpression expr,
             Expression expression,
             IReadOnlyList<Expression> args
-        ) {
+        )
+        {
             int n = args.Count;
 
             InvocationExpression updated = Update(expr);

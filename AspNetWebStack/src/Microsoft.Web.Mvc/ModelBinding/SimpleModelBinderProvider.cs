@@ -30,7 +30,8 @@ namespace Microsoft.Web.Mvc.ModelBinding
         public SimpleModelBinderProvider(
             Type modelType,
             Func<IExtensibleModelBinder> modelBinderFactory
-        ) {
+        )
+        {
             if (modelType == null)
             {
                 throw new ArgumentNullException("modelType");
@@ -54,7 +55,8 @@ namespace Microsoft.Web.Mvc.ModelBinding
         public override IExtensibleModelBinder GetBinder(
             ControllerContext controllerContext,
             ExtensibleModelBindingContext bindingContext
-        ) {
+        )
+        {
             ModelBinderUtil.ValidateBindingContext(bindingContext);
 
             if (bindingContext.ModelType == ModelType)
@@ -62,7 +64,8 @@ namespace Microsoft.Web.Mvc.ModelBinding
                 if (
                     SuppressPrefixCheck
                     || bindingContext.ValueProvider.ContainsPrefix(bindingContext.ModelName)
-                ) {
+                )
+                {
                     return _modelBinderFactory();
                 }
             }

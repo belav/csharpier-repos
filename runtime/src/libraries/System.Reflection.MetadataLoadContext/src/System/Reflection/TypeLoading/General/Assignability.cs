@@ -46,7 +46,8 @@ namespace System.Reflection.TypeLoading
                 if (
                     toTypeInfo.IsConstructedGenericType
                     && toTypeInfo.GetGenericTypeDefinition() == coreTypes[CoreType.NullableT]
-                ) {
+                )
+                {
                     Type nullableUnderlyingType = toTypeInfo.GenericTypeArguments[0];
                     if (nullableUnderlyingType.Equals(fromTypeInfo))
                         return true;
@@ -203,7 +204,8 @@ namespace System.Reflection.TypeLoading
             this Type fromTypeInfo,
             Type toTypeInfo,
             CoreTypes coreTypes
-        ) {
+        )
+        {
             Debug.Assert(
                 !(
                     fromTypeInfo.IsArray
@@ -293,7 +295,8 @@ namespace System.Reflection.TypeLoading
             this Type fromTypeInfo,
             Type toTypeInfo,
             CoreTypes coreTypes
-        ) {
+        )
+        {
             if (fromTypeInfo.IsGcReferenceTypeAndCastableTo(toTypeInfo, coreTypes))
                 return true;
 
@@ -338,7 +341,8 @@ namespace System.Reflection.TypeLoading
             this Type fromTypeInfo,
             Type toTypeInfo,
             CoreTypes coreTypes
-        ) {
+        )
+        {
             if (fromTypeInfo.Equals(toTypeInfo))
                 return true;
 
@@ -399,7 +403,8 @@ namespace System.Reflection.TypeLoading
             this Type fromTypeInfo,
             Type toTypeInfo,
             CoreTypes coreTypes
-        ) {
+        )
+        {
             Debug.Assert(fromTypeInfo.IsArray);
             Debug.Assert(toTypeInfo.IsInterface);
 

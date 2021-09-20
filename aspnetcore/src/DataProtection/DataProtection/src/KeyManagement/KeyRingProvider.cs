@@ -34,7 +34,8 @@ namespace Microsoft.AspNetCore.DataProtection.KeyManagement
             IOptions<KeyManagementOptions> keyManagementOptions,
             IDefaultKeyResolver defaultKeyResolver,
             ILoggerFactory loggerFactory
-        ) {
+        )
+        {
             _keyManagementOptions = new KeyManagementOptions(keyManagementOptions.Value); // clone so new instance is immutable
             _keyManager = keyManager;
             CacheableKeyRingProvider = this;
@@ -149,7 +150,8 @@ namespace Microsoft.AspNetCore.DataProtection.KeyManagement
             CancellationToken cacheExpirationToken,
             IKey defaultKey,
             IEnumerable<IKey> allKeys
-        ) {
+        )
+        {
             Debug.Assert(defaultKey != null);
 
             // Invariant: our caller ensures that CreateEncryptorInstance succeeded at least once

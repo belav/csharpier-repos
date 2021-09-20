@@ -23,7 +23,8 @@ namespace Microsoft.AspNetCore.Http.Connections.Client.Internal
             HttpClient? httpClient,
             HttpConnectionOptions httpConnectionOptions,
             Func<Task<string?>> accessTokenProvider
-        ) {
+        )
+        {
             if (httpClient == null && requestedTransportType != HttpTransportType.WebSockets)
             {
                 throw new ArgumentNullException(nameof(httpClient));
@@ -45,7 +46,8 @@ namespace Microsoft.AspNetCore.Http.Connections.Client.Internal
                     & HttpTransportType.WebSockets
                     & _requestedTransportType
                 ) == HttpTransportType.WebSockets
-            ) {
+            )
+            {
                 try
                 {
                     return new WebSocketsTransport(
@@ -71,7 +73,8 @@ namespace Microsoft.AspNetCore.Http.Connections.Client.Internal
                     & HttpTransportType.ServerSentEvents
                     & _requestedTransportType
                 ) == HttpTransportType.ServerSentEvents
-            ) {
+            )
+            {
                 // We don't need to give the transport the accessTokenProvider because the HttpClient has a message handler that does the work for us.
                 return new ServerSentEventsTransport(_httpClient!, _loggerFactory);
             }
@@ -82,7 +85,8 @@ namespace Microsoft.AspNetCore.Http.Connections.Client.Internal
                     & HttpTransportType.LongPolling
                     & _requestedTransportType
                 ) == HttpTransportType.LongPolling
-            ) {
+            )
+            {
                 // We don't need to give the transport the accessTokenProvider because the HttpClient has a message handler that does the work for us.
                 return new LongPollingTransport(_httpClient!, _loggerFactory);
             }
@@ -106,7 +110,8 @@ namespace Microsoft.AspNetCore.Http.Connections.Client.Internal
                 ILogger logger,
                 HttpTransportType transportType,
                 Exception ex
-            ) {
+            )
+            {
                 _transportNotSupported(logger, transportType, ex);
             }
         }

@@ -262,12 +262,14 @@ namespace System.IO.Ports.Tests
             int offset,
             int count,
             Type expectedException
-        ) {
+        )
+        {
             using (
                 SerialPort com = new SerialPort(
                     TCSupport.LocalMachineSerialInfo.FirstAvailablePortName
                 )
-            ) {
+            )
+            {
                 int bufferLength = null == buffer ? 0 : buffer.Length;
 
                 Debug.WriteLine(
@@ -322,7 +324,8 @@ namespace System.IO.Ports.Tests
             int count,
             Encoding encoding,
             int numWrites
-        ) {
+        )
+        {
             using (SerialPort com1 = TCSupport.InitFirstSerialPort())
             using (SerialPort com2 = TCSupport.InitSecondSerialPort(com1))
             {
@@ -357,7 +360,8 @@ namespace System.IO.Ports.Tests
             int count,
             SerialPort com1,
             SerialPort com2
-        ) {
+        )
+        {
             VerifyWriteCharArray(buffer, offset, count, com1, com2, DEFAULT_NUM_WRITES);
         }
 
@@ -368,7 +372,8 @@ namespace System.IO.Ports.Tests
             SerialPort com1,
             SerialPort com2,
             int numWrites
-        ) {
+        )
+        {
             char[] oldBuffer,
                 expectedChars,
                 actualChars;

@@ -70,7 +70,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Infrastructure
             string connectionId,
             string? localEndPoint,
             string? remoteEndPoint
-        ) {
+        )
+        {
             WriteEvent(1, connectionId, localEndPoint, remoteEndPoint);
         }
 
@@ -124,7 +125,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Infrastructure
             string httpVersion,
             string path,
             string method
-        ) {
+        )
+        {
             WriteEvent(3, connectionId, requestId, httpVersion, path, method);
         }
 
@@ -160,7 +162,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Infrastructure
             string httpVersion,
             string path,
             string method
-        ) {
+        )
+        {
             WriteEvent(4, connectionId, requestId, httpVersion, path, method);
         }
 
@@ -190,7 +193,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Infrastructure
         public void TlsHandshakeStart(
             BaseConnectionContext connectionContext,
             SslServerAuthenticationOptions sslOptions
-        ) {
+        )
+        {
             Interlocked.Increment(ref _currentTlsHandshakes);
             Interlocked.Increment(ref _totalTlsHandshakes);
 
@@ -214,7 +218,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Infrastructure
         public void TlsHandshakeStop(
             BaseConnectionContext connectionContext,
             TlsConnectionFeature? feature
-        ) {
+        )
+        {
             Interlocked.Decrement(ref _currentTlsHandshakes);
 
             if (IsEnabled(EventLevel.Informational, EventKeywords.None))
@@ -242,7 +247,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Infrastructure
             string sslProtocols,
             string applicationProtocol,
             string hostName
-        ) {
+        )
+        {
             WriteEvent(9, connectionId, sslProtocols, applicationProtocol, hostName);
         }
 
@@ -381,7 +387,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Infrastructure
             string? arg3,
             string? arg4,
             string? arg5
-        ) {
+        )
+        {
             const int EventDataCount = 5;
 
             arg1 ??= string.Empty;

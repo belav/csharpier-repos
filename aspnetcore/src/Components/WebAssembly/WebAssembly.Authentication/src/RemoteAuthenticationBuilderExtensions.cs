@@ -28,11 +28,10 @@ namespace Microsoft.Extensions.DependencyInjection
             TAccount,
             [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicConstructors)]
                 TAccountClaimsPrincipalFactory
-        >(
-            this IRemoteAuthenticationBuilder<TRemoteAuthenticationState, TAccount> builder
-        ) where TRemoteAuthenticationState : RemoteAuthenticationState, new()
-          where TAccount : RemoteUserAccount
-          where TAccountClaimsPrincipalFactory : AccountClaimsPrincipalFactory<TAccount>
+        >(this IRemoteAuthenticationBuilder<TRemoteAuthenticationState, TAccount> builder)
+            where TRemoteAuthenticationState : RemoteAuthenticationState, new()
+            where TAccount : RemoteUserAccount
+            where TAccountClaimsPrincipalFactory : AccountClaimsPrincipalFactory<TAccount>
         {
             builder.Services.Replace(
                 ServiceDescriptor.Scoped<
@@ -58,10 +57,9 @@ namespace Microsoft.Extensions.DependencyInjection
             TRemoteAuthenticationState,
             [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicConstructors)]
                 TAccountClaimsPrincipalFactory
-        >(
-            this IRemoteAuthenticationBuilder<TRemoteAuthenticationState, RemoteUserAccount> builder
-        ) where TRemoteAuthenticationState : RemoteAuthenticationState, new()
-          where TAccountClaimsPrincipalFactory : AccountClaimsPrincipalFactory<RemoteUserAccount> =>
+        >(this IRemoteAuthenticationBuilder<TRemoteAuthenticationState, RemoteUserAccount> builder)
+            where TRemoteAuthenticationState : RemoteAuthenticationState, new()
+            where TAccountClaimsPrincipalFactory : AccountClaimsPrincipalFactory<RemoteUserAccount> =>
             builder.AddAccountClaimsPrincipalFactory<
                 TRemoteAuthenticationState,
                 RemoteUserAccount,
@@ -80,9 +78,8 @@ namespace Microsoft.Extensions.DependencyInjection
         > AddAccountClaimsPrincipalFactory<
             [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicConstructors)]
                 TAccountClaimsPrincipalFactory
-        >(
-            this IRemoteAuthenticationBuilder<RemoteAuthenticationState, RemoteUserAccount> builder
-        ) where TAccountClaimsPrincipalFactory : AccountClaimsPrincipalFactory<RemoteUserAccount> =>
+        >(this IRemoteAuthenticationBuilder<RemoteAuthenticationState, RemoteUserAccount> builder)
+            where TAccountClaimsPrincipalFactory : AccountClaimsPrincipalFactory<RemoteUserAccount> =>
             builder.AddAccountClaimsPrincipalFactory<
                 RemoteAuthenticationState,
                 RemoteUserAccount,

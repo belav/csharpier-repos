@@ -23,7 +23,8 @@ namespace Microsoft.EntityFrameworkCore.Diagnostics
         public EventData(
             EventDefinitionBase eventDefinition,
             Func<EventDefinitionBase, EventData, string> messageGenerator
-        ) {
+        )
+        {
             _eventDefinition = eventDefinition;
             _messageGenerator = messageGenerator;
         }

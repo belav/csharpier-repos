@@ -23,7 +23,8 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeGeneration
             EnumDeclarationSyntax destination,
             IFieldSymbol enumMember,
             CodeGenerationOptions options
-        ) {
+        )
+        {
             var members = new List<SyntaxNodeOrToken>();
             members.AddRange(destination.Members.GetWithSeparators());
 
@@ -57,7 +58,8 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeGeneration
             IFieldSymbol enumMember,
             EnumDeclarationSyntax destinationOpt,
             CodeGenerationOptions options
-        ) {
+        )
+        {
             var reusableSyntax = GetReuseableSyntaxNodeForSymbol<EnumMemberDeclarationSyntax>(
                 enumMember,
                 options
@@ -81,7 +83,8 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeGeneration
         private static ExpressionSyntax CreateEnumMemberValue(
             EnumDeclarationSyntax destinationOpt,
             IFieldSymbol enumMember
-        ) {
+        )
+        {
             if (!enumMember.HasConstantValue)
             {
                 return null;
@@ -96,7 +99,8 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeGeneration
                 && !(enumMember.ConstantValue is uint)
                 && !(enumMember.ConstantValue is long)
                 && !(enumMember.ConstantValue is ulong)
-            ) {
+            )
+            {
                 return null;
             }
 
@@ -118,7 +122,8 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeGeneration
                     if (
                         destinationOpt.Members.Count == value
                         && destinationOpt.Members.All(m => m.EqualsValue == null)
-                    ) {
+                    )
+                    {
                         return null;
                     }
 
@@ -132,7 +137,8 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeGeneration
                         if (
                             lastExpression.Kind() == SyntaxKind.LeftShiftExpression
                             && IntegerUtilities.HasOneBitSet(value)
-                        ) {
+                        )
+                        {
                             var binaryExpression = (BinaryExpressionSyntax)lastExpression;
                             if (binaryExpression.Left.Kind() == SyntaxKind.NumericLiteralExpression)
                             {
@@ -162,7 +168,8 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeGeneration
                                 SyntaxKind.NumericLiteralExpression,
                                 out LiteralExpressionSyntax numericLiteral
                             )
-                        ) {
+                        )
+                        {
                             var numericToken = numericLiteral.Token;
                             var numericText = numericToken.ToString();
 
@@ -179,7 +186,8 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeGeneration
                             }
                             else if (
                                 numericText.StartsWith("0b", StringComparison.OrdinalIgnoreCase)
-                            ) {
+                            )
+                            {
                                 return SyntaxFactory.LiteralExpression(
                                     SyntaxKind.NumericLiteralExpression,
                                     SyntaxFactory.Literal(

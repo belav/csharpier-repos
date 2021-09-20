@@ -46,7 +46,8 @@ namespace System.Net.Sockets.Tests
             int receiveBufferSize,
             EndPoint localEndPoint,
             ProtocolType protocolType = ProtocolType.Tcp
-        ) {
+        )
+        {
             _log = VerboseTestLogging.GetInstance();
             _totalBytesRead = 0;
             _numConnectedSockets = 0;
@@ -211,7 +212,8 @@ namespace System.Net.Sockets.Tests
                 if (
                     e.SocketError == SocketError.OperationAborted
                     || e.SocketError == SocketError.Interrupted
-                ) {
+                )
+                {
                     return;
                 }
 

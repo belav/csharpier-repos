@@ -325,7 +325,8 @@ FROM ""Orders"" AS ""o"""
         [ConditionalTheory(Skip = "Issue#17324")]
         public override Task Project_single_element_from_collection_with_OrderBy_over_navigation_Take_and_FirstOrDefault_2(
             bool async
-        ) {
+        )
+        {
             return base.Project_single_element_from_collection_with_OrderBy_over_navigation_Take_and_FirstOrDefault_2(
                 async
             );
@@ -341,7 +342,8 @@ FROM ""Orders"" AS ""o"""
         [ConditionalTheory(Skip = "Issue#17230")]
         public override Task SelectMany_with_collection_being_correlated_subquery_which_references_inner_and_outer_entity(
             bool async
-        ) {
+        )
+        {
             return base.SelectMany_with_collection_being_correlated_subquery_which_references_inner_and_outer_entity(
                 async
             );

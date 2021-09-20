@@ -168,13 +168,15 @@ namespace System.Diagnostics.Tests
                     PipeDirection.In,
                     HandleInheritability.Inheritable
                 )
-            ) {
+            )
+            {
                 using (
                     Process p = CreateProcess(
                         TestAsyncOutputStream_CancelOutputRead_RemotelyInvokable,
                         $"{pipeWrite.GetClientHandleAsString()} {pipeRead.GetClientHandleAsString()}"
                     )
-                ) {
+                )
+                {
                     var dataReceived = new List<int>();
                     var dataArrivedEvent = new AutoResetEvent(false);
 
@@ -233,7 +235,8 @@ namespace System.Diagnostics.Tests
 
         async private Task<int> TestAsyncOutputStream_CancelOutputRead_RemotelyInvokable(
             string pipesHandle
-        ) {
+        )
+        {
             string[] pipeHandlers = pipesHandle.Split(' ');
             using (
                 AnonymousPipeClientStream pipeRead = new AnonymousPipeClientStream(
@@ -246,7 +249,8 @@ namespace System.Diagnostics.Tests
                     PipeDirection.Out,
                     pipeHandlers[1]
                 )
-            ) {
+            )
+            {
                 // Signal child process start
                 await pipeWrite.WriteAsync(new byte[1], 0, 1);
 
@@ -286,13 +290,15 @@ namespace System.Diagnostics.Tests
                     PipeDirection.In,
                     HandleInheritability.Inheritable
                 )
-            ) {
+            )
+            {
                 using (
                     Process p = CreateProcess(
                         TestAsyncOutputStream_BeginCancelBeinOutputRead_RemotelyInvokable,
                         $"{pipeWrite.GetClientHandleAsString()} {pipeRead.GetClientHandleAsString()}"
                     )
-                ) {
+                )
+                {
                     var dataReceived = new BlockingCollection<int>();
 
                     p.StartInfo.RedirectStandardOutput = true;
@@ -383,7 +389,8 @@ namespace System.Diagnostics.Tests
 
         async private Task<int> TestAsyncOutputStream_BeginCancelBeinOutputRead_RemotelyInvokable(
             string pipesHandle
-        ) {
+        )
+        {
             string[] pipeHandlers = pipesHandle.Split(' ');
             using (
                 AnonymousPipeClientStream pipeRead = new AnonymousPipeClientStream(
@@ -396,7 +403,8 @@ namespace System.Diagnostics.Tests
                     PipeDirection.Out,
                     pipeHandlers[1]
                 )
-            ) {
+            )
+            {
                 // Signal child process start
                 await pipeWrite.WriteAsync(new byte[1], 0, 1);
 

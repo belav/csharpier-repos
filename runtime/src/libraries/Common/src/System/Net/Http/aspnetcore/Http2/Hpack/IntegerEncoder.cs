@@ -25,7 +25,8 @@ namespace System.Net.Http.HPack
             int numBits,
             Span<byte> destination,
             out int bytesWritten
-        ) {
+        )
+        {
             Debug.Assert(value >= 0);
             Debug.Assert(numBits >= 1 && numBits <= 8);
 

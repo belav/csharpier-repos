@@ -23,7 +23,8 @@ namespace System.Reflection.Tests
                 ||
                 // For interop attributes such as DllImport and Guid:
                 name.Equals("System.Runtime.InteropServices", StringComparison.OrdinalIgnoreCase)
-            ) {
+            )
+            {
                 if (_coreAssembly == null)
                 {
                     _coreAssembly = context.LoadFromStream(TestUtils.CreateStreamForCoreAssembly());

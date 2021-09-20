@@ -39,7 +39,8 @@ namespace System.IO
                     DefaultBufferSize,
                     FileOptions.None
                 )
-            ) {
+            )
+            {
                 Interop.CheckIo(Interop.Sys.CopyFile(src.SafeFileHandle, dst.SafeFileHandle));
             }
         }
@@ -122,7 +123,8 @@ namespace System.IO
             string destFullPath,
             string? destBackupFullPath,
             bool ignoreMetadataErrors
-        ) {
+        )
+        {
             if (destBackupFullPath != null)
             {
                 // We're backing up the destination file to the backup file, so we need to first delete the backup
@@ -266,7 +268,8 @@ namespace System.IO
                                 out fileExistsError
                             )
                             && fileExistsError.Error == Interop.Error.ENOENT
-                        ) {
+                        )
+                        {
                             return;
                         }
                         goto default;
@@ -373,7 +376,8 @@ namespace System.IO
                             !DirectoryExists(name, out errorInfo)
                             && errorInfo.Error == Interop.Error.EACCES
                         )
-                    ) {
+                    )
+                    {
                         // If there's a file in this directory's place, or if we have ERROR_ACCESS_DENIED when checking if the directory already exists throw.
                         firstError = errorInfo;
                         errorString = name;
@@ -453,7 +457,8 @@ namespace System.IO
             DirectoryInfo directory,
             bool recursive,
             bool throwOnTopLevelDirectoryNotFound
-        ) {
+        )
+        {
             Exception? firstException = null;
 
             if ((directory.Attributes & FileAttributes.ReparsePoint) != 0)
@@ -468,7 +473,8 @@ namespace System.IO
                 {
                     foreach (
                         string item in Directory.EnumerateFileSystemEntries(directory.FullName)
-                    ) {
+                    )
+                    {
                         if (!ShouldIgnoreDirectory(Path.GetFileName(item)))
                         {
                             try

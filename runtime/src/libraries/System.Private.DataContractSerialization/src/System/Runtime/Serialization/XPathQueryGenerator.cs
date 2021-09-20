@@ -19,7 +19,8 @@ namespace System.Runtime.Serialization
             Type type,
             MemberInfo[] pathToMember,
             out XmlNamespaceManager namespaces
-        ) {
+        )
+        {
             return CreateFromDataContractSerializer(type, pathToMember, null, out namespaces);
         }
 
@@ -29,7 +30,8 @@ namespace System.Runtime.Serialization
             MemberInfo[] pathToMember,
             StringBuilder? rootElementXpath,
             out XmlNamespaceManager namespaces
-        ) {
+        )
+        {
             if (type == null)
             {
                 throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
@@ -60,7 +62,8 @@ namespace System.Runtime.Serialization
                 int pathToMemberIndex = 0;
                 pathToMemberIndex < pathToMember.Length;
                 pathToMemberIndex++
-            ) {
+            )
+            {
                 currentContract = ProcessDataContract(
                     currentContract,
                     context,
@@ -76,7 +79,8 @@ namespace System.Runtime.Serialization
             DataContract contract,
             ExportContext context,
             MemberInfo memberNode
-        ) {
+        )
+        {
             if (contract is ClassDataContract)
             {
                 return ProcessClassDataContract((ClassDataContract)contract, context, memberNode);
@@ -92,14 +96,16 @@ namespace System.Runtime.Serialization
             ClassDataContract contract,
             ExportContext context,
             MemberInfo memberNode
-        ) {
+        )
+        {
             string prefix = context.SetNamespace(contract.Namespace!.Value);
             foreach (DataMember member in GetDataMembers(contract))
             {
                 if (
                     member.MemberInfo.Name == memberNode.Name
                     && member.MemberInfo.DeclaringType!.IsAssignableFrom(memberNode.DeclaringType)
-                ) {
+                )
+                {
                     context.WriteChildToContext(member, prefix);
                     return member.MemberTypeContract;
                 }

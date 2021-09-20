@@ -107,7 +107,8 @@ namespace System.Runtime.InteropServices
             object ptr,
             int ofs,
             Func<IntPtr, int, T> readValueHelper
-        ) {
+        )
+        {
             // Consumers of this method are documented to throw AccessViolationException on any AV
             if (ptr is null)
             {
@@ -189,7 +190,8 @@ namespace System.Runtime.InteropServices
             int ofs,
             T val,
             Action<IntPtr, int, T> writeValueHelper
-        ) {
+        )
+        {
             // Consumers of this method are documented to throw AccessViolationException on any AV
             if (ptr is null)
             {
@@ -457,7 +459,8 @@ namespace System.Runtime.InteropServices
         public static object GetObjectForIUnknown(
             IntPtr /* IUnknown* */
             pUnk
-        ) {
+        )
+        {
             if (pUnk == IntPtr.Zero)
             {
                 throw new ArgumentNullException(nameof(pUnk));

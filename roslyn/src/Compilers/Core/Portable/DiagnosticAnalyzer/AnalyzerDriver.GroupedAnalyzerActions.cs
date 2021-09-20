@@ -26,7 +26,8 @@ namespace Microsoft.CodeAnalysis.Diagnostics
             private GroupedAnalyzerActions(
                 ImmutableArray<(DiagnosticAnalyzer, GroupedAnalyzerActionsForAnalyzer)> groupedActionsAndAnalyzers,
                 in AnalyzerActions analyzerActions
-            ) {
+            )
+            {
                 GroupedActionsByAnalyzer = groupedActionsAndAnalyzers;
                 AnalyzerActions = analyzerActions;
             }
@@ -48,7 +49,8 @@ namespace Microsoft.CodeAnalysis.Diagnostics
             public static GroupedAnalyzerActions Create(
                 DiagnosticAnalyzer analyzer,
                 in AnalyzerActions analyzerActions
-            ) {
+            )
+            {
                 if (analyzerActions.IsEmpty)
                 {
                     return Empty;
@@ -69,7 +71,8 @@ namespace Microsoft.CodeAnalysis.Diagnostics
             public static GroupedAnalyzerActions Create(
                 ImmutableArray<DiagnosticAnalyzer> analyzers,
                 in AnalyzerActions analyzerActions
-            ) {
+            )
+            {
                 Debug.Assert(!analyzers.IsDefaultOrEmpty);
 
                 var groups = analyzers.SelectAsArray(
@@ -89,7 +92,8 @@ namespace Microsoft.CodeAnalysis.Diagnostics
 
             IGroupedAnalyzerActions IGroupedAnalyzerActions.Append(
                 IGroupedAnalyzerActions igroupedAnalyzerActions
-            ) {
+            )
+            {
                 var groupedAnalyzerActions = (GroupedAnalyzerActions)igroupedAnalyzerActions;
 
 #if DEBUG

@@ -705,7 +705,8 @@ namespace DebuggerTests
         async Task EvaluateOnCallFrameAndCheck(
             string call_frame_id,
             params (string expression, JObject expected)[] args
-        ) {
+        )
+        {
             foreach (var arg in args)
             {
                 var (eval_val, _) = await EvaluateOnCallFrame(call_frame_id, arg.expression);
@@ -726,7 +727,8 @@ namespace DebuggerTests
         async Task EvaluateOnCallFrameFail(
             string call_frame_id,
             params (string expression, string class_name)[] args
-        ) {
+        )
+        {
             foreach (var arg in args)
             {
                 var (_, res) = await EvaluateOnCallFrame(

@@ -488,7 +488,8 @@ namespace System.DirectoryServices.AccountManagement
             PrincipalContext context,
             IdentityType identityType,
             string identityValue
-        ) {
+        )
+        {
             CheckDisposed();
 
             if (context == null)
@@ -586,7 +587,8 @@ namespace System.DirectoryServices.AccountManagement
             if (
                 _insertedValuesCompleted.Contains(principal)
                 || _insertedValuesPending.Contains(principal)
-            ) {
+            )
+            {
                 GlobalDebug.WriteLineIf(
                     GlobalDebug.Info,
                     "PrincipalCollection",
@@ -599,7 +601,8 @@ namespace System.DirectoryServices.AccountManagement
             if (
                 _removedValuesCompleted.Contains(principal)
                 || _removedValuesPending.Contains(principal)
-            ) {
+            )
+            {
                 GlobalDebug.WriteLineIf(
                     GlobalDebug.Info,
                     "PrincipalCollection",
@@ -680,7 +683,8 @@ namespace System.DirectoryServices.AccountManagement
             PrincipalContext context,
             IdentityType identityType,
             string identityValue
-        ) {
+        )
+        {
             CheckDisposed();
 
             if (context == null)

@@ -28,7 +28,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
         /// <param name="dependencies"> Parameter object containing dependencies for this convention. </param>
         public ManyToManyJoinEntityTypeConvention(
             ProviderConventionSetBuilderDependencies dependencies
-        ) {
+        )
+        {
             Dependencies = dependencies;
         }
 
@@ -41,7 +42,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
         public virtual void ProcessSkipNavigationAdded(
             IConventionSkipNavigationBuilder skipNavigationBuilder,
             IConventionContext<IConventionSkipNavigationBuilder> context
-        ) {
+        )
+        {
             CreateJoinEntityType(skipNavigationBuilder);
         }
 
@@ -51,7 +53,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
             IConventionSkipNavigation? inverse,
             IConventionSkipNavigation? oldInverse,
             IConventionContext<IConventionSkipNavigation> context
-        ) {
+        )
+        {
             CreateJoinEntityType(skipNavigationBuilder);
         }
 
@@ -61,7 +64,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
             IConventionForeignKey? foreignKey,
             IConventionForeignKey? oldForeignKey,
             IConventionContext<IConventionForeignKey> context
-        ) {
+        )
+        {
             var joinEntityType = oldForeignKey?.DeclaringEntityType;
             var navigation = skipNavigationBuilder.Metadata;
             if (
@@ -69,7 +73,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
                 && joinEntityType.IsInModel
                 && navigation.IsCollection
                 && navigation.ForeignKey?.DeclaringEntityType != joinEntityType
-            ) {
+            )
+            {
                 ((InternalModelBuilder)joinEntityType.Model.Builder).RemoveImplicitJoinEntity(
                     (EntityType)joinEntityType
                 );
@@ -81,7 +86,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
             IConventionEntityTypeBuilder entityTypeBuilder,
             IConventionSkipNavigation navigation,
             IConventionContext<IConventionSkipNavigation> context
-        ) {
+        )
+        {
             var joinEntityType = navigation.ForeignKey?.DeclaringEntityType;
             if (joinEntityType is not null && joinEntityType.IsInModel && navigation.IsCollection)
             {
@@ -104,7 +110,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
                 inverseSkipNavigation == null
                 || inverseSkipNavigation.ForeignKey != null
                 || !inverseSkipNavigation.IsCollection
-            ) {
+            )
+            {
                 return;
             }
 

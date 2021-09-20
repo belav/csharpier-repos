@@ -451,7 +451,8 @@ public class Directory_Delete_MountVolume
                                 mountedDirName,
                                 Directory.Exists(mountedDirName)
                             )
-                        ) {
+                        )
+                        {
                             MountHelper.Unmount(mountedDirName);
                             DeleteDir(mountedDirName, true);
                         }
@@ -512,7 +513,8 @@ public class Directory_Delete_MountVolume
                                     "Err_974tsg! the sub directory has directories: {0}",
                                     mountedDirName
                                 )
-                            ) {
+                            )
+                            {
                                 foreach (string file in Directory.GetFiles(mountedDirName))
                                     File.Delete(file);
                                 if (
@@ -521,7 +523,8 @@ public class Directory_Delete_MountVolume
                                         "Err_13ref! the mounted directory has files: {0}",
                                         mountedDirName
                                     )
-                                ) {
+                                )
+                                {
                                     File.AppendAllText(
                                         debugFileName,
                                         string.Format(
@@ -559,7 +562,8 @@ public class Directory_Delete_MountVolume
                                 mountedDirName,
                                 Directory.Exists(mountedDirName)
                             )
-                        ) {
+                        )
+                        {
                             MountHelper.Unmount(mountedDirName);
                             DeleteDir(mountedDirName, true);
                         }
@@ -623,7 +627,8 @@ public class Directory_Delete_MountVolume
                                     "Err_492qwl! the sub directory has directories: {0}",
                                     mountedDirName
                                 )
-                            ) {
+                            )
+                            {
                                 foreach (string file in Directory.GetFiles(mountedDirName))
                                     File.Delete(file);
                                 if (
@@ -632,7 +637,8 @@ public class Directory_Delete_MountVolume
                                         "Err_904kij! the mounted directory has files: {0}",
                                         mountedDirName
                                     )
-                                ) {
+                                )
+                                {
                                     File.AppendAllText(
                                         debugFileName,
                                         string.Format(
@@ -673,7 +679,8 @@ public class Directory_Delete_MountVolume
                                 mountedDirName,
                                 Directory.Exists(mountedDirName)
                             )
-                        ) {
+                        )
+                        {
                             MountHelper.Unmount(mountedDirName);
                             DeleteDir(mountedDirName, true);
                         }
@@ -788,7 +795,8 @@ public class Directory_Delete_MountVolume
                     System.Globalization.CultureInfo.CurrentUICulture.Name == "en-US"
                     && msgExpected != null
                     && e.Message != msgExpected
-                ) {
+                )
+                {
                     exception = false;
                     error = string.Format("{0} Message Different: <{1}>", error, e.Message);
                 }

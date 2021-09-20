@@ -158,7 +158,8 @@ namespace Microsoft.AspNetCore.Http.Connections.Internal
                 ILogger logger,
                 string connectionId,
                 string requestId
-            ) {
+            )
+            {
                 _connectionAlreadyActive(logger, connectionId, requestId, null);
             }
 
@@ -191,7 +192,8 @@ namespace Microsoft.AspNetCore.Http.Connections.Internal
                 ILogger logger,
                 HttpTransportType transport,
                 HttpTransportType requestTransport
-            ) {
+            )
+            {
                 _cannotChangeTransport(logger, transport, requestTransport, null);
             }
 
@@ -208,7 +210,8 @@ namespace Microsoft.AspNetCore.Http.Connections.Internal
             public static void ReceivedDeleteRequestForUnsupportedTransport(
                 ILogger logger,
                 HttpTransportType transportType
-            ) {
+            )
+            {
                 _receivedDeleteRequestForUnsupportedTransport(logger, transportType, null);
             }
 
@@ -221,7 +224,8 @@ namespace Microsoft.AspNetCore.Http.Connections.Internal
                 ILogger logger,
                 string connectionId,
                 Exception ex
-            ) {
+            )
+            {
                 _connectionDisposedWhileWriteInProgress(logger, connectionId, ex);
             }
 
@@ -229,21 +233,24 @@ namespace Microsoft.AspNetCore.Http.Connections.Internal
                 ILogger logger,
                 string connectionId,
                 Exception ex
-            ) {
+            )
+            {
                 _failedToReadHttpRequestBody(logger, connectionId, ex);
             }
 
             public static void NegotiateProtocolVersionMismatch(
                 ILogger logger,
                 int clientProtocolVersion
-            ) {
+            )
+            {
                 _negotiateProtocolVersionMismatch(logger, clientProtocolVersion, null);
             }
 
             public static void InvalidNegotiateProtocolVersion(
                 ILogger logger,
                 string requestedProtocolVersion
-            ) {
+            )
+            {
                 _invalidNegotiateProtocolVersion(logger, requestedProtocolVersion, null);
             }
         }

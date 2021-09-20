@@ -37,7 +37,8 @@ namespace System.CommandLine.Binding
         public void BindConstructorArgumentFromValue(
             ParameterInfo parameter,
             IValueDescriptor valueDescriptor
-        ) {
+        )
+        {
             var constructor = FindConstructorOrThrow(
                 parameter,
                 "Parameter must be declared on a constructor."
@@ -86,7 +87,8 @@ namespace System.CommandLine.Binding
 
         private (bool success, object? newInstance, bool anyNonDefaults) CreateInstanceInternal(
             BindingContext bindingContext
-        ) {
+        )
+        {
             if (DisallowedBindingType())
             {
                 throw new InvalidOperationException(
@@ -138,7 +140,8 @@ namespace System.CommandLine.Binding
         private (bool success, object? newInstance, bool anyNonDefaults) GetSimpleModelValue(
             IDictionary<IValueDescriptor, IValueSource> bindingSources,
             BindingContext bindingContext
-        ) {
+        )
+        {
             var valueSource = GetValueSource(
                 bindingSources,
                 bindingContext,
@@ -159,7 +162,8 @@ namespace System.CommandLine.Binding
             ConstructorDescriptor constructor,
             IReadOnlyList<BoundValue>? boundValues,
             ref bool nonDefaultsUsed
-        ) {
+        )
+        {
             var values = boundValues.Select(x => x.Value).ToArray();
             object? newInstance = null;
             try
@@ -186,7 +190,8 @@ namespace System.CommandLine.Binding
         private bool UpdateInstanceInternalNotifyIfNonDefaultsUsed<T>(
             T instance,
             BindingContext bindingContext
-        ) {
+        )
+        {
             var (boundValues, anyNonDefaults) = GetBoundValues(
                 MemberBindingSources,
                 bindingContext,
@@ -249,7 +254,8 @@ namespace System.CommandLine.Binding
             bool enforceExplicitBinding,
             Type? parentType = null,
             bool includeMissingValues = true
-        ) {
+        )
+        {
             var values = new List<BoundValue>(valueDescriptors.Count);
             var anyNonDefaults = false;
 
@@ -287,7 +293,8 @@ namespace System.CommandLine.Binding
             BindingContext bindingContext,
             IValueDescriptor valueDescriptor,
             bool enforceExplicitBinding
-        ) {
+        )
+        {
             if (bindingSources.TryGetValue(valueDescriptor, out IValueSource? valueSource))
             {
                 return valueSource;
@@ -314,14 +321,16 @@ namespace System.CommandLine.Binding
             IValueDescriptor valueDescriptor,
             bool includeMissingValues,
             Type? parentType
-        ) {
+        )
+        {
             if (
                 bindingContext.TryBindToScalarValue(
                     valueDescriptor,
                     valueSource,
                     out var boundValue
                 )
-            ) {
+            )
+            {
                 return (boundValue, true);
             }
 
@@ -350,7 +359,8 @@ namespace System.CommandLine.Binding
                 if (
                     valueDescriptor is ParameterDescriptor parameterDescriptor
                     && parameterDescriptor.AllowsNull
-                ) {
+                )
+                {
                     return (
                         new BoundValue(
                             parameterDescriptor.GetDefaultValue(),
@@ -369,7 +379,8 @@ namespace System.CommandLine.Binding
 
         protected ConstructorDescriptor FindModelConstructorDescriptor(
             ConstructorInfo constructorInfo
-        ) {
+        )
+        {
             var constructorParameters = constructorInfo.GetParameters();
 
             return ModelDescriptor.ConstructorDescriptors.FirstOrDefault(
@@ -392,7 +403,8 @@ namespace System.CommandLine.Binding
         protected IValueDescriptor FindModelPropertyDescriptor(
             Type propertyType,
             string propertyName
-        ) {
+        )
+        {
             return ModelDescriptor.PropertyDescriptors.FirstOrDefault(
                 desc =>
                     desc.ValueType == propertyType
@@ -437,7 +449,8 @@ namespace System.CommandLine.Binding
                 ConstructorDescriptor constructor,
                 IReadOnlyList<BoundValue>? boundValues,
                 bool nonDefaultsUsed
-            ) {
+            )
+            {
                 Constructor = constructor;
                 BoundValues = boundValues;
                 NonDefaultsUsed = nonDefaultsUsed;

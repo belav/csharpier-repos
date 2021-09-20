@@ -128,7 +128,8 @@ namespace Microsoft.AspNetCore.Routing.Matching
                             WildcardHost,
                             StringComparison.OrdinalIgnoreCase
                         )
-                    ) {
+                    )
+                    {
                         // Can match any host
                     }
                     else if (
@@ -140,7 +141,8 @@ namespace Microsoft.AspNetCore.Routing.Matching
                             host.Slice(WildcardHost.Length),
                             StringComparison.OrdinalIgnoreCase
                         )
-                    ) {
+                    )
+                    {
                         // Matches a suffix wildcard.
                     }
                     else if (
@@ -149,7 +151,8 @@ namespace Microsoft.AspNetCore.Routing.Matching
                             host,
                             StringComparison.OrdinalIgnoreCase
                         )
-                    ) {
+                    )
+                    {
                         // Matches exactly
                     }
                     else
@@ -164,13 +167,15 @@ namespace Microsoft.AspNetCore.Routing.Matching
                             WildcardHost,
                             StringComparison.OrdinalIgnoreCase
                         )
-                    ) {
+                    )
+                    {
                         // Port is a wildcard, we allow any port.
                     }
                     else if (
                         port.Length > 0
                         && (!int.TryParse(port, out var parsed) || parsed != requestPort)
-                    ) {
+                    )
+                    {
                         // If we get here then the port doesn't match.
                         continue;
                     }
@@ -302,7 +307,8 @@ namespace Microsoft.AspNetCore.Routing.Matching
                                 && endpointKey.HasHostWildcard
                                 && edgeKey.Port == endpointKey.Port
                                 && edgeKey.MatchHost(endpointKey.Host)
-                            ) {
+                            )
+                            {
                                 kvp.Value.Add(endpoint);
                                 break;
                             }
@@ -318,7 +324,8 @@ namespace Microsoft.AspNetCore.Routing.Matching
         public PolicyJumpTable BuildJumpTable(
             int exitDestination,
             IReadOnlyList<PolicyJumpTableEdge> edges
-        ) {
+        )
+        {
             if (edges == null)
             {
                 throw new ArgumentNullException(nameof(edges));
@@ -375,7 +382,8 @@ namespace Microsoft.AspNetCore.Routing.Matching
                     httpContext.Request.Scheme,
                     StringComparison.OrdinalIgnoreCase
                 )
-            ) {
+            )
+            {
                 return (hostString.Host, 443);
             }
             else if (
@@ -384,7 +392,8 @@ namespace Microsoft.AspNetCore.Routing.Matching
                     httpContext.Request.Scheme,
                     StringComparison.OrdinalIgnoreCase
                 )
-            ) {
+            )
+            {
                 return (hostString.Host, 80);
             }
             else
@@ -413,7 +422,8 @@ namespace Microsoft.AspNetCore.Routing.Matching
             public HostPolicyJumpTable(
                 int exitDestination,
                 (EdgeKey host, int destination)[] destinations
-            ) {
+            )
+            {
                 _exitDestination = exitDestination;
                 _destinations = destinations;
             }
@@ -432,7 +442,8 @@ namespace Microsoft.AspNetCore.Routing.Matching
                     if (
                         (!destination.host.MatchesPort || destination.host.Port == port)
                         && destination.host.MatchHost(host)
-                    ) {
+                    )
+                    {
                         return destination.destination;
                     }
                 }

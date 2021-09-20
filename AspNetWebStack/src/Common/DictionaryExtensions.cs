@@ -18,7 +18,8 @@ namespace System.Collections.Generic
         public static void RemoveFromDictionary<TKey, TValue>(
             this IDictionary<TKey, TValue> dictionary,
             Func<KeyValuePair<TKey, TValue>, bool> removeCondition
-        ) {
+        )
+        {
             // Pass the delegate as the state to avoid a delegate and closure
             dictionary.RemoveFromDictionary(
                 (entry, innerCondition) =>
@@ -36,7 +37,8 @@ namespace System.Collections.Generic
             this IDictionary<TKey, TValue> dictionary,
             Func<KeyValuePair<TKey, TValue>, TState, bool> removeCondition,
             TState state
-        ) {
+        )
+        {
             Contract.Assert(dictionary != null);
             Contract.Assert(removeCondition != null);
 
@@ -71,7 +73,8 @@ namespace System.Collections.Generic
             this IDictionary<string, object> collection,
             string key,
             out T value
-        ) {
+        )
+        {
             Contract.Assert(collection != null);
 
             object valueObj;
@@ -91,7 +94,8 @@ namespace System.Collections.Generic
         internal static IEnumerable<KeyValuePair<string, TValue>> FindKeysWithPrefix<TValue>(
             this IDictionary<string, TValue> dictionary,
             string prefix
-        ) {
+        )
+        {
             Contract.Assert(dictionary != null);
             Contract.Assert(prefix != null);
 

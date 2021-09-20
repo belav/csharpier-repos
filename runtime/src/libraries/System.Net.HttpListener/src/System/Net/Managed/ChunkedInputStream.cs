@@ -87,7 +87,8 @@ namespace System.Net
             int size,
             AsyncCallback? cback,
             object? state
-        ) {
+        )
+        {
             HttpStreamAsyncResult ares = new HttpStreamAsyncResult(this);
             ares._callback = cback;
             ares._state = state;

@@ -28,7 +28,8 @@ namespace Microsoft.AspNetCore.Mvc.FunctionalTests
         public async Task StreamOutputFormatter_ReturnsAppropriateContentAndContentType(
             string actionName,
             string contentType
-        ) {
+        )
+        {
             // Arrange & Act
             var response = await Client.GetAsync("http://localhost/Stream/" + actionName);
             var body = await response.Content.ReadAsStringAsync();

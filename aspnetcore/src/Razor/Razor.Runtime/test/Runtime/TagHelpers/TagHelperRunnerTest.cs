@@ -75,7 +75,8 @@ namespace Microsoft.AspNetCore.Razor.Runtime.TagHelpers
         public async Task RunAsync_OrdersTagHelpers(
             int[] tagHelperOrders,
             int[] expectedTagHelperOrders
-        ) {
+        )
+        {
             // Arrange
             var runner = new TagHelperRunner();
             var executionContext = new TagHelperExecutionContext("p", TagMode.StartTagAndEndTag);

@@ -15,7 +15,8 @@ namespace CustomEncryptorSample
         public static IDataProtectionBuilder UseXmlEncryptor(
             this IDataProtectionBuilder builder,
             Func<IServiceProvider, IXmlEncryptor> factory
-        ) {
+        )
+        {
             builder.Services.AddSingleton<IConfigureOptions<KeyManagementOptions>>(
                 serviceProvider =>
                 {

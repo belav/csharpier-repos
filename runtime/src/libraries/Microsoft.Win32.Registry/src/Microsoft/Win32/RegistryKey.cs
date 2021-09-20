@@ -70,7 +70,8 @@ namespace Microsoft.Win32
             bool remoteKey,
             bool isPerfData,
             RegistryView view
-        ) {
+        )
+        {
             ValidateKeyView(view);
 
             _hkey = hkey;
@@ -168,7 +169,8 @@ namespace Microsoft.Win32
             RegistryKeyPermissionCheck permissionCheck,
             RegistryOptions registryOptions,
             RegistrySecurity? registrySecurity
-        ) {
+        )
+        {
             return CreateSubKey(subkey, permissionCheck, registryOptions);
         }
 
@@ -176,7 +178,8 @@ namespace Microsoft.Win32
             string subkey,
             RegistryKeyPermissionCheck permissionCheck,
             RegistrySecurity? registrySecurity
-        ) {
+        )
+        {
             return CreateSubKey(subkey, permissionCheck, RegistryOptions.None);
         }
 
@@ -184,7 +187,8 @@ namespace Microsoft.Win32
             string subkey,
             RegistryKeyPermissionCheck permissionCheck,
             RegistryOptions registryOptions
-        ) {
+        )
+        {
             ValidateKeyOptions(registryOptions);
             ValidateKeyName(subkey);
             ValidateKeyMode(permissionCheck);
@@ -358,7 +362,8 @@ namespace Microsoft.Win32
             RegistryHive hKey,
             string machineName,
             RegistryView view
-        ) {
+        )
+        {
             if (machineName == null)
             {
                 throw new ArgumentNullException(nameof(machineName));
@@ -412,7 +417,8 @@ namespace Microsoft.Win32
             string name,
             RegistryKeyPermissionCheck permissionCheck,
             RegistryRights rights
-        ) {
+        )
+        {
             ValidateKeyName(name);
             ValidateKeyMode(permissionCheck);
 
@@ -565,7 +571,8 @@ namespace Microsoft.Win32
             if (
                 options < RegistryValueOptions.None
                 || options > RegistryValueOptions.DoNotExpandEnvironmentNames
-            ) {
+            )
+            {
                 throw new ArgumentException(
                     SR.Format(SR.Arg_EnumIllegalVal, (int)options),
                     nameof(options)
@@ -801,7 +808,8 @@ namespace Microsoft.Win32
             if (
                 mode < RegistryKeyPermissionCheck.Default
                 || mode > RegistryKeyPermissionCheck.ReadWriteSubTree
-            ) {
+            )
+            {
                 throw new ArgumentException(
                     SR.Argument_InvalidRegistryKeyPermissionCheck,
                     nameof(mode)
@@ -826,7 +834,8 @@ namespace Microsoft.Win32
                 view != RegistryView.Default
                 && view != RegistryView.Registry32
                 && view != RegistryView.Registry64
-            ) {
+            )
+            {
                 throw new ArgumentException(SR.Argument_InvalidRegistryViewCheck, nameof(view));
             }
         }

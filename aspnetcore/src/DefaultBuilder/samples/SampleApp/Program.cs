@@ -48,7 +48,8 @@ namespace SampleApp
                     "http://localhost:8080",
                     context => context.Response.WriteAsync("Hello, World!")
                 )
-            ) {
+            )
+            {
                 //host.WaitForShutdown(); // TODO: https://github.com/aspnet/Hosting/issues/1022
                 Console.WriteLine(
                     "Running CustomUrl: Press any key to shutdown and start the next sample..."
@@ -86,7 +87,8 @@ namespace SampleApp
                             )
                             .MapGet("", (req, res, data) => res.WriteAsync($"Hello, World!"))
                 )
-            ) {
+            )
+            {
                 //host.WaitForShutdown(); // TODO: https://github.com/aspnet/Hosting/issues/1022
                 Console.WriteLine(
                     "Running CustomRouter: Press any key to shutdown and start the next sample..."
@@ -111,7 +113,8 @@ namespace SampleApp
                         );
                     }
                 )
-            ) {
+            )
+            {
                 //host.WaitForShutdown(); // TODO: https://github.com/aspnet/Hosting/issues/1022
                 Console.WriteLine(
                     "Running CustomApplicationBuilder: Press any key to shutdown and start the next sample..."

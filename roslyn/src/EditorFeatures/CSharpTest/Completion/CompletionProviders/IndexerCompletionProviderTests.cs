@@ -205,7 +205,8 @@ public class Program
         public async Task IndexerCompletionForDifferentExpressions(
             string expression,
             string fixedCode
-        ) {
+        )
+        {
             await VerifyCustomCommitProviderAsync(
                 $@"
 public class C

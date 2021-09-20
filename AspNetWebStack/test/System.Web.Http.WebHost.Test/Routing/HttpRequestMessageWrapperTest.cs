@@ -168,7 +168,8 @@ namespace System.Web.Http.WebHost.Routing
             string virtualPathRoot,
             string requestUri,
             string expectedPath
-        ) {
+        )
+        {
             // Arrange
             HttpRequestMessage request = new HttpRequestMessage
             {
@@ -192,7 +193,8 @@ namespace System.Web.Http.WebHost.Routing
             string virtualPathRoot,
             string requestUri,
             string expectedPath
-        ) {
+        )
+        {
             // Arrange
             HttpRequestMessage request = new HttpRequestMessage
             {
@@ -216,7 +218,8 @@ namespace System.Web.Http.WebHost.Routing
             string virtualPathRoot,
             string requestUri,
             string expectedPath
-        ) {
+        )
+        {
             // Arrange
             HttpRequestMessage request = new HttpRequestMessage
             {

@@ -166,7 +166,8 @@ namespace System.Web.Http.ModelBinding
             public bool BindModel(
                 HttpActionContext actionContext,
                 ModelBindingContext bindingContext
-            ) {
+            )
+            {
                 return true;
             }
         }

@@ -34,7 +34,8 @@ namespace Microsoft.CodeAnalysis.ExpressionEvaluator.UnitTests
             string moduleName,
             RequestSignature signature,
             Guid languageId = default(Guid)
-        ) {
+        )
+        {
             ModuleName = moduleName;
             Signature = signature;
             LanguageId = languageId;

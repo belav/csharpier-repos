@@ -19,7 +19,8 @@ namespace Microsoft.AspNetCore.Razor.Hosting
         /// <returns>A list of <see cref="IRazorSourceChecksumMetadata"/>.</returns>
         public static IReadOnlyList<IRazorSourceChecksumMetadata> GetChecksumMetadata(
             this RazorCompiledItem item
-        ) {
+        )
+        {
             if (item == null)
             {
                 throw new ArgumentNullException(nameof(item));

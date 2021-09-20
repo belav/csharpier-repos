@@ -50,7 +50,8 @@ namespace System.Net.Http.Formatting
         public static JObject Parse(
             IEnumerable<KeyValuePair<string, string>> nameValuePairs,
             int maxDepth
-        ) {
+        )
+        {
             return ParseInternal(nameValuePairs, maxDepth, true);
         }
 
@@ -66,7 +67,8 @@ namespace System.Net.Http.Formatting
         public static bool TryParse(
             IEnumerable<KeyValuePair<string, string>> nameValuePairs,
             out JObject value
-        ) {
+        )
+        {
             return (value = ParseInternal(nameValuePairs, Int32.MaxValue, false)) != null;
         }
 
@@ -84,7 +86,8 @@ namespace System.Net.Http.Formatting
             IEnumerable<KeyValuePair<string, string>> nameValuePairs,
             int maxDepth,
             out JObject value
-        ) {
+        )
+        {
             return (value = ParseInternal(nameValuePairs, maxDepth, false)) != null;
         }
 
@@ -102,7 +105,8 @@ namespace System.Net.Http.Formatting
             IEnumerable<KeyValuePair<string, string>> nameValuePairs,
             int maxDepth,
             bool throwOnError
-        ) {
+        )
+        {
             if (nameValuePairs == null)
             {
                 throw Error.ArgumentNull("nameValuePairs");
@@ -428,7 +432,8 @@ namespace System.Net.Http.Formatting
             string[] path,
             string value,
             bool throwOnError
-        ) {
+        )
+        {
             Contract.Assert(parent != null, "Parent cannot be null");
             Contract.Assert(
                 path.Length >= 2,
@@ -488,7 +493,8 @@ namespace System.Net.Http.Formatting
                             out tempInt
                         )
                         && tempInt > max
-                    ) {
+                    )
+                    {
                         max = tempInt;
                     }
                     else
@@ -582,7 +588,8 @@ namespace System.Net.Http.Formatting
                         CultureInfo.InvariantCulture,
                         out intKey
                     )
-                ) {
+                )
+                {
                     // if not a non-negative number, it cannot become an array
                     areContiguousIndices = false;
                     break;

@@ -18,7 +18,8 @@ namespace System.Reflection.TypeLoading.Ecma
         internal sealed override IEnumerable<ConstructorInfo> SpecializeConstructors(
             NameFilter? filter,
             RoInstantiationProviderType declaringType
-        ) {
+        )
+        {
             MetadataReader reader = Reader;
             foreach (MethodDefinitionHandle handle in TypeDefinition.GetMethods())
             {
@@ -38,7 +39,8 @@ namespace System.Reflection.TypeLoading.Ecma
             NameFilter? filter,
             Type reflectedType,
             RoInstantiationProviderType declaringType
-        ) {
+        )
+        {
             MetadataReader reader = Reader;
             foreach (MethodDefinitionHandle handle in TypeDefinition.GetMethods())
             {
@@ -59,7 +61,8 @@ namespace System.Reflection.TypeLoading.Ecma
             NameFilter? filter,
             Type reflectedType,
             RoInstantiationProviderType declaringType
-        ) {
+        )
+        {
             MetadataReader reader = Reader;
             foreach (EventDefinitionHandle handle in TypeDefinition.GetEvents())
             {
@@ -74,7 +77,8 @@ namespace System.Reflection.TypeLoading.Ecma
             NameFilter? filter,
             Type reflectedType,
             RoInstantiationProviderType declaringType
-        ) {
+        )
+        {
             MetadataReader reader = Reader;
             foreach (FieldDefinitionHandle handle in TypeDefinition.GetFields())
             {
@@ -89,7 +93,8 @@ namespace System.Reflection.TypeLoading.Ecma
             NameFilter? filter,
             Type reflectedType,
             RoInstantiationProviderType declaringType
-        ) {
+        )
+        {
             MetadataReader reader = Reader;
             foreach (PropertyDefinitionHandle handle in TypeDefinition.GetProperties())
             {

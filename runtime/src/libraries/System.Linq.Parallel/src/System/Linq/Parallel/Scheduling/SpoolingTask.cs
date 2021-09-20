@@ -34,7 +34,8 @@ namespace System.Linq.Parallel
             PartitionedStream<TInputOutput, TIgnoreKey> partitions,
             SynchronousChannel<TInputOutput>[] channels,
             TaskScheduler taskScheduler
-        ) {
+        )
+        {
             Debug.Assert(partitions.PartitionCount == channels.Length);
             Debug.Assert(groupState != null);
 
@@ -105,7 +106,8 @@ namespace System.Linq.Parallel
             PartitionedStream<TInputOutput, TIgnoreKey> partitions,
             AsynchronousChannel<TInputOutput>[] channels,
             TaskScheduler taskScheduler
-        ) {
+        )
+        {
             Debug.Assert(partitions.PartitionCount == channels.Length);
             Debug.Assert(groupState != null);
 
@@ -160,7 +162,8 @@ namespace System.Linq.Parallel
             QueryTaskGroupState groupState,
             PartitionedStream<TInputOutput, TIgnoreKey> partitions,
             TaskScheduler taskScheduler
-        ) {
+        )
+        {
             Debug.Assert(groupState != null);
 
             // Ensure all tasks in this query are parented under a common root.

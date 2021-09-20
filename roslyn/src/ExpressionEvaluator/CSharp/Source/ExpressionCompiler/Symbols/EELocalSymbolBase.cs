@@ -18,7 +18,8 @@ namespace Microsoft.CodeAnalysis.CSharp.ExpressionEvaluator
             this LocalSymbol local,
             MethodSymbol method,
             TypeMap typeMap
-        ) {
+        )
+        {
             var l = local as EELocalSymbolBase;
             if ((object)l != null)
             {
@@ -52,13 +53,15 @@ namespace Microsoft.CodeAnalysis.CSharp.ExpressionEvaluator
             SyntaxNode node,
             LocalSymbol inProgress,
             BindingDiagnosticBag diagnostics
-        ) {
+        )
+        {
             return null;
         }
 
         internal override ImmutableBindingDiagnostic<AssemblySymbol> GetConstantValueDiagnostics(
             BoundExpression boundInitValue
-        ) {
+        )
+        {
             return ImmutableBindingDiagnostic<AssemblySymbol>.Empty;
         }
 
@@ -75,7 +78,8 @@ namespace Microsoft.CodeAnalysis.CSharp.ExpressionEvaluator
         internal sealed override LocalSymbol WithSynthesizedLocalKindAndSyntax(
             SynthesizedLocalKind kind,
             SyntaxNode syntax
-        ) {
+        )
+        {
             throw ExceptionUtilities.Unreachable;
         }
 
@@ -96,7 +100,8 @@ namespace Microsoft.CodeAnalysis.CSharp.ExpressionEvaluator
             if (
                 !DeriveUseSiteInfoFromType(ref result, type, AllowedRequiredModifierType.None)
                 && this.ContainingModule.HasUnifiedReferences
-            ) {
+            )
+            {
                 // If the member is in an assembly with unified references,
                 // we check if its definition depends on a type from a unified reference.
                 HashSet<TypeSymbol> unificationCheckedTypes = null;

@@ -456,7 +456,8 @@ namespace System.Data
                                 row.NodeType == XmlNodeType.Text
                                 || row.NodeType == XmlNodeType.Whitespace
                                 || row.NodeType == XmlNodeType.SignificantWhitespace
-                            ) {
+                            )
+                            {
                                 string text = row.ReadString();
                                 column[record] = column.ConvertXmlToObject(text);
 
@@ -482,7 +483,8 @@ namespace System.Data
             while (
                 reader.NodeType == XmlNodeType.Whitespace
                 || reader.NodeType == XmlNodeType.SignificantWhitespace
-            ) {
+            )
+            {
                 reader.Read();
             }
         }

@@ -101,7 +101,8 @@ namespace System.Linq.Tests
         private static IEnumerable<object[]> EnumerateCollectionTypesAndCounts<T>(
             int count,
             IEnumerable<T> enumerable
-        ) {
+        )
+        {
             yield return new object[] { count, enumerable };
             yield return new object[] { count, enumerable.ToArray() };
             yield return new object[] { count, enumerable.ToList() };
@@ -174,7 +175,8 @@ namespace System.Linq.Tests
         public void NonEnumeratedCount_SupportedEnumerables_ShouldReturnExpectedCount<T>(
             int expectedCount,
             IEnumerable<T> source
-        ) {
+        )
+        {
             Assert.True(source.TryGetNonEnumeratedCount(out int actualCount));
             Assert.Equal(expectedCount, actualCount);
         }
@@ -183,7 +185,8 @@ namespace System.Linq.Tests
         [MemberData(nameof(NonEnumeratedCount_UnsupportedEnumerables))]
         public void NonEnumeratedCount_UnsupportedEnumerables_ShouldReturnFalse<T>(
             IEnumerable<T> source
-        ) {
+        )
+        {
             Assert.False(source.TryGetNonEnumeratedCount(out int actualCount));
             Assert.Equal(0, actualCount);
         }

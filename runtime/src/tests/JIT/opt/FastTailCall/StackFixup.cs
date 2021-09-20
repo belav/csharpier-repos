@@ -49,7 +49,8 @@ class TailCallStructPassing
         int w,
         int decision,
         int count
-    ) {
+    )
+    {
         if (decision < 100)
         {
             return foo(
@@ -116,7 +117,8 @@ class TailCallStructPassing
         int y,
         int z,
         A temp
-    ) {
+    )
+    {
         if (decision < 100)
         {
             return foo(

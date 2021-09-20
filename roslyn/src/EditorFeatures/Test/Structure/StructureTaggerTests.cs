@@ -164,7 +164,8 @@ End Module";
 
         private static async Task<List<IStructureTag>> GetTagsFromWorkspaceAsync(
             TestWorkspace workspace
-        ) {
+        )
+        {
             var hostdoc = workspace.Documents.First();
             var view = hostdoc.GetTextView();
 

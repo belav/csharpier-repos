@@ -72,7 +72,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             string name,
             int ordinal,
             IdentifierNameSyntax declaringSyntax
-        ) {
+        )
+        {
             _name = name;
             _ordinal = ordinal;
             _declaringSyntax = declaringSyntax.GetReference();
@@ -180,19 +181,22 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
 
         internal override ImmutableArray<TypeWithAnnotations> GetConstraintTypes(
             ConsList<TypeParameterSymbol> inProgress
-        ) {
+        )
+        {
             return ImmutableArray<TypeWithAnnotations>.Empty;
         }
 
         internal override ImmutableArray<NamedTypeSymbol> GetInterfaces(
             ConsList<TypeParameterSymbol> inProgress
-        ) {
+        )
+        {
             return ImmutableArray<NamedTypeSymbol>.Empty;
         }
 
         internal override NamedTypeSymbol GetEffectiveBaseClass(
             ConsList<TypeParameterSymbol> inProgress
-        ) {
+        )
+        {
             // Constraints are not checked in crefs, so this should never be examined.
             throw ExceptionUtilities.Unreachable;
         }

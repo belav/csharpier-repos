@@ -116,7 +116,8 @@ namespace Microsoft.AspNetCore.Hosting
         /// <returns>The <see cref="IWebHostBuilder"/>.</returns>
         public IWebHostBuilder ConfigureServices(
             Action<WebHostBuilderContext, IServiceCollection> configureServices
-        ) {
+        )
+        {
             _configureServices += configureServices;
             return this;
         }
@@ -132,7 +133,8 @@ namespace Microsoft.AspNetCore.Hosting
         /// </remarks>
         public IWebHostBuilder ConfigureAppConfiguration(
             Action<WebHostBuilderContext, IConfigurationBuilder> configureDelegate
-        ) {
+        )
+        {
             _configureAppConfigurationBuilder += configureDelegate;
             return this;
         }
@@ -265,7 +267,8 @@ namespace Microsoft.AspNetCore.Hosting
 
                         foreach (
                             var attribute in assembly.GetCustomAttributes<HostingStartupAttribute>()
-                        ) {
+                        )
+                        {
                             var hostingStartup = (IHostingStartup)Activator.CreateInstance(
                                 attribute.HostingStartupType
                             )!;
@@ -389,7 +392,8 @@ namespace Microsoft.AspNetCore.Hosting
         private void AddApplicationServices(
             IServiceCollection services,
             IServiceProvider hostingServiceProvider
-        ) {
+        )
+        {
             // We are forwarding services from hosting container so hosting container
             // can still manage their lifetime (disposal) shared instances with application services.
             // NOTE: This code overrides original services lifetime. Instances would always be singleton in

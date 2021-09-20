@@ -2920,7 +2920,8 @@ namespace System.Linq.Expressions.Tests
         [ClassData(typeof(CompilationTypes))]
         public static void StructStructMemberInitializationThroughPropertyThrowsException(
             bool useInterpreter
-        ) {
+        )
+        {
             Expression<Func<int, StructX>> f =
                 GetExpressionTreeForMemberInitializationThroughProperty<StructX>();
             Assert.Throws<InvalidOperationException>(() => f.Compile(useInterpreter));
@@ -2930,7 +2931,8 @@ namespace System.Linq.Expressions.Tests
         [ClassData(typeof(CompilationTypes))]
         public static void ClassStructMemberInitializationThroughPropertyThrowsException(
             bool useInterpreter
-        ) {
+        )
+        {
             Expression<Func<int, ClassX>> f =
                 GetExpressionTreeForMemberInitializationThroughProperty<ClassX>();
             Assert.Throws<InvalidOperationException>(() => f.Compile(useInterpreter));
@@ -3930,7 +3932,8 @@ namespace System.Linq.Expressions.Tests
             T v1,
             T v2,
             bool useInterpreter
-        ) {
+        )
+        {
             Func<T, T, R> d = f.Compile(useInterpreter);
             R rv = d(v1, v2);
             return rv;
@@ -4174,7 +4177,8 @@ namespace System.Linq.Expressions.Tests
             object value,
             bool testUnSigned,
             bool useInterpreter
-        ) {
+        )
+        {
             ParameterExpression p = Expression.Parameter(type, "x");
             if (testUnSigned)
                 Expression.Lambda(Expression.Negate(p), p)
@@ -4199,7 +4203,8 @@ namespace System.Linq.Expressions.Tests
             object value,
             bool testModulo,
             bool useInterpreter
-        ) {
+        )
+        {
             ParameterExpression p = Expression.Parameter(type, "x");
             if (testModulo)
                 Expression.Lambda(Expression.Modulo(p, p), p)
@@ -4231,7 +4236,8 @@ namespace System.Linq.Expressions.Tests
             bool testModulo,
             bool testUnSigned,
             bool useInterpreter
-        ) {
+        )
+        {
             ArimeticOperatorTests(type, value, testUnSigned, useInterpreter);
             RelationalOperatorTests(type, value, testModulo, useInterpreter);
         }
@@ -4247,7 +4253,8 @@ namespace System.Linq.Expressions.Tests
             bool testModulo,
             bool testUnsigned,
             bool useInterpreter
-        ) {
+        )
+        {
             NumericOperatorTests(type, value, testModulo, testUnsigned, useInterpreter);
             LogicalOperatorTests(type, value, useInterpreter);
         }
@@ -4317,7 +4324,8 @@ namespace System.Linq.Expressions.Tests
             object arg1,
             object arg2,
             bool useInterpreter
-        ) {
+        )
+        {
             ParameterExpression x = Expression.Parameter(type, "x");
             ParameterExpression y = Expression.Parameter(type, "y");
             Expression.Lambda(Expression.AndAlso(x, y), x, y)
@@ -4334,7 +4342,8 @@ namespace System.Linq.Expressions.Tests
             object arg1,
             object arg2,
             bool useInterpreter
-        ) {
+        )
+        {
             ParameterExpression x = Expression.Parameter(type, "x");
             ParameterExpression y = Expression.Parameter(type, "y");
             Expression.Lambda(Expression.And(x, y), x, y)

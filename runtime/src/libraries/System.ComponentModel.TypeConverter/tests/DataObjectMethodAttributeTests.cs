@@ -64,7 +64,8 @@ namespace System.ComponentModel.Tests
             DataObjectMethodAttribute attribute,
             object other,
             bool expected
-        ) {
+        )
+        {
             Assert.Equal(expected, attribute.Equals(other));
             if (other is DataObjectMethodAttribute)
             {
@@ -106,7 +107,8 @@ namespace System.ComponentModel.Tests
             DataObjectMethodAttribute attribute,
             object other,
             bool expected
-        ) {
+        )
+        {
             Assert.Equal(expected, attribute.Match(other));
         }
     }

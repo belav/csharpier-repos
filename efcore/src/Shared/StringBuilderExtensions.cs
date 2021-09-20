@@ -27,7 +27,8 @@ namespace System.Text
             IEnumerable<T> values,
             Action<StringBuilder, T> joinAction,
             string separator = ", "
-        ) {
+        )
+        {
             var appended = false;
 
             foreach (var value in values)
@@ -51,7 +52,8 @@ namespace System.Text
             TParam param,
             Action<StringBuilder, T, TParam> joinAction,
             string separator = ", "
-        ) {
+        )
+        {
             var appended = false;
 
             foreach (var value in values)
@@ -76,7 +78,8 @@ namespace System.Text
             TParam2 param2,
             Action<StringBuilder, T, TParam1, TParam2> joinAction,
             string separator = ", "
-        ) {
+        )
+        {
             var appended = false;
 
             foreach (var value in values)

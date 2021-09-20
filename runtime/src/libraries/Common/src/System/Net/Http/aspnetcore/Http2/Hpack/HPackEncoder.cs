@@ -25,7 +25,8 @@ namespace System.Net.Http.HPack
             int index,
             Span<byte> destination,
             out int bytesWritten
-        ) {
+        )
+        {
             // From https://tools.ietf.org/html/rfc7541#section-6.1
             // ----------------------------------------------------
             //   0   1   2   3   4   5   6   7
@@ -48,7 +49,8 @@ namespace System.Net.Http.HPack
             int statusCode,
             Span<byte> destination,
             out int bytesWritten
-        ) {
+        )
+        {
             // Bytes written depend on whether the status code value maps directly to an index
             switch (statusCode)
             {
@@ -74,7 +76,8 @@ namespace System.Net.Http.HPack
                             destination,
                             out var nameLength
                         )
-                    ) {
+                    )
+                    {
                         bytesWritten = 0;
                         return false;
                     }
@@ -87,7 +90,8 @@ namespace System.Net.Http.HPack
                             destination.Slice(nameLength),
                             out var valueLength
                         )
-                    ) {
+                    )
+                    {
                         bytesWritten = 0;
                         return false;
                     }
@@ -103,7 +107,8 @@ namespace System.Net.Http.HPack
             string value,
             Span<byte> destination,
             out int bytesWritten
-        ) {
+        )
+        {
             // From https://tools.ietf.org/html/rfc7541#section-6.2.2
             // ------------------------------------------------------
             //   0   1   2   3   4   5   6   7
@@ -128,7 +133,8 @@ namespace System.Net.Http.HPack
                             destination.Slice(indexLength),
                             out int nameLength
                         )
-                    ) {
+                    )
+                    {
                         bytesWritten = indexLength + nameLength;
                         return true;
                     }
@@ -145,7 +151,8 @@ namespace System.Net.Http.HPack
             string value,
             Span<byte> destination,
             out int bytesWritten
-        ) {
+        )
+        {
             // From https://tools.ietf.org/html/rfc7541#section-6.2.3
             // ------------------------------------------------------
             //   0   1   2   3   4   5   6   7
@@ -170,7 +177,8 @@ namespace System.Net.Http.HPack
                             destination.Slice(indexLength),
                             out int nameLength
                         )
-                    ) {
+                    )
+                    {
                         bytesWritten = indexLength + nameLength;
                         return true;
                     }
@@ -187,7 +195,8 @@ namespace System.Net.Http.HPack
             string value,
             Span<byte> destination,
             out int bytesWritten
-        ) {
+        )
+        {
             // From https://tools.ietf.org/html/rfc7541#section-6.2.2
             // ------------------------------------------------------
             //   0   1   2   3   4   5   6   7
@@ -212,7 +221,8 @@ namespace System.Net.Http.HPack
                             destination.Slice(indexLength),
                             out int nameLength
                         )
-                    ) {
+                    )
+                    {
                         bytesWritten = indexLength + nameLength;
                         return true;
                     }
@@ -231,7 +241,8 @@ namespace System.Net.Http.HPack
             int index,
             Span<byte> destination,
             out int bytesWritten
-        ) {
+        )
+        {
             // From https://tools.ietf.org/html/rfc7541#section-6.2.2
             // ------------------------------------------------------
             //   0   1   2   3   4   5   6   7
@@ -267,7 +278,8 @@ namespace System.Net.Http.HPack
             string value,
             Span<byte> destination,
             out int bytesWritten
-        ) {
+        )
+        {
             // From https://tools.ietf.org/html/rfc7541#section-6.2.2
             // ------------------------------------------------------
             //   0   1   2   3   4   5   6   7
@@ -292,7 +304,8 @@ namespace System.Net.Http.HPack
             string value,
             Span<byte> destination,
             out int bytesWritten
-        ) {
+        )
+        {
             // From https://tools.ietf.org/html/rfc7541#section-6.2.2
             // ------------------------------------------------------
             //   0   1   2   3   4   5   6   7
@@ -317,7 +330,8 @@ namespace System.Net.Http.HPack
             string value,
             Span<byte> destination,
             out int bytesWritten
-        ) {
+        )
+        {
             // From https://tools.ietf.org/html/rfc7541#section-6.2.3
             // ------------------------------------------------------
             //   0   1   2   3   4   5   6   7
@@ -342,7 +356,8 @@ namespace System.Net.Http.HPack
             string value,
             Span<byte> destination,
             out int bytesWritten
-        ) {
+        )
+        {
             if ((uint)destination.Length >= 3)
             {
                 destination[0] = mask;
@@ -354,7 +369,8 @@ namespace System.Net.Http.HPack
                         destination.Slice(1 + nameLength),
                         out int valueLength
                     )
-                ) {
+                )
+                {
                     bytesWritten = 1 + nameLength + valueLength;
                     return true;
                 }
@@ -371,7 +387,8 @@ namespace System.Net.Http.HPack
             string separator,
             Span<byte> destination,
             out int bytesWritten
-        ) {
+        )
+        {
             return EncodeLiteralHeaderFieldWithoutIndexingNewName(
                 name,
                 values,
@@ -389,7 +406,8 @@ namespace System.Net.Http.HPack
             Encoding? valueEncoding,
             Span<byte> destination,
             out int bytesWritten
-        ) {
+        )
+        {
             // From https://tools.ietf.org/html/rfc7541#section-6.2.2
             // ------------------------------------------------------
             //   0   1   2   3   4   5   6   7
@@ -417,7 +435,8 @@ namespace System.Net.Http.HPack
                         destination.Slice(1 + nameLength),
                         out int valueLength
                     )
-                ) {
+                )
+                {
                     bytesWritten = 1 + nameLength + valueLength;
                     return true;
                 }
@@ -435,7 +454,8 @@ namespace System.Net.Http.HPack
             string name,
             Span<byte> destination,
             out int bytesWritten
-        ) {
+        )
+        {
             // From https://tools.ietf.org/html/rfc7541#section-6.2.2
             // ------------------------------------------------------
             //   0   1   2   3   4   5   6   7
@@ -472,7 +492,8 @@ namespace System.Net.Http.HPack
             string value,
             Span<byte> destination,
             out int bytesWritten
-        ) {
+        )
+        {
             // From https://tools.ietf.org/html/rfc7541#section-5.2
             // ------------------------------------------------------
             //   0   1   2   3   4   5   6   7
@@ -528,7 +549,8 @@ namespace System.Net.Http.HPack
             ReadOnlySpan<byte> value,
             Span<byte> destination,
             out int bytesWritten
-        ) {
+        )
+        {
             // From https://tools.ietf.org/html/rfc7541#section-5.2
             // ------------------------------------------------------
             //   0   1   2   3   4   5   6   7
@@ -565,7 +587,8 @@ namespace System.Net.Http.HPack
             string value,
             Span<byte> destination,
             out int bytesWritten
-        ) {
+        )
+        {
             return EncodeStringLiteral(value, valueEncoding: null, destination, out bytesWritten);
         }
 
@@ -574,7 +597,8 @@ namespace System.Net.Http.HPack
             Encoding? valueEncoding,
             Span<byte> destination,
             out int bytesWritten
-        ) {
+        )
+        {
             // From https://tools.ietf.org/html/rfc7541#section-5.2
             // ------------------------------------------------------
             //   0   1   2   3   4   5   6   7
@@ -600,7 +624,8 @@ namespace System.Net.Http.HPack
                         destination,
                         out int integerLength
                     )
-                ) {
+                )
+                {
                     Debug.Assert(integerLength >= 1);
                     destination = destination.Slice(integerLength);
                     if (encodedStringLength <= destination.Length)
@@ -629,7 +654,8 @@ namespace System.Net.Http.HPack
             int value,
             Span<byte> destination,
             out int bytesWritten
-        ) {
+        )
+        {
             // From https://tools.ietf.org/html/rfc7541#section-6.3
             // ----------------------------------------------------
             //   0   1   2   3   4   5   6   7
@@ -652,7 +678,8 @@ namespace System.Net.Http.HPack
             string? separator,
             Span<byte> destination,
             out int bytesWritten
-        ) {
+        )
+        {
             return EncodeStringLiterals(
                 values,
                 separator,
@@ -668,7 +695,8 @@ namespace System.Net.Http.HPack
             Encoding? valueEncoding,
             Span<byte> destination,
             out int bytesWritten
-        ) {
+        )
+        {
             bytesWritten = 0;
 
             if (values.Length == 0)
@@ -772,7 +800,8 @@ namespace System.Net.Http.HPack
         /// </summary>
         public static byte[] EncodeLiteralHeaderFieldWithoutIndexingNewNameToAllocatedArray(
             string name
-        ) {
+        )
+        {
             Span<byte> span = stackalloc byte[256];
             bool success = EncodeLiteralHeaderFieldWithoutIndexingNewName(
                 name,
@@ -787,7 +816,8 @@ namespace System.Net.Http.HPack
         public static byte[] EncodeLiteralHeaderFieldWithoutIndexingToAllocatedArray(
             int index,
             string value
-        ) {
+        )
+        {
             Span<byte> span =
 #if DEBUG
                 stackalloc byte[4]; // to validate growth algorithm

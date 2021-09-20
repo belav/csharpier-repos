@@ -64,7 +64,8 @@ namespace System.Text
             int charCount,
             byte[] bytes,
             int byteIndex
-        ) {
+        )
+        {
             if (s == null || bytes == null)
                 throw new ArgumentNullException(
                     s == null ? nameof(s) : nameof(bytes),
@@ -112,7 +113,8 @@ namespace System.Text
             int charCount,
             byte[] bytes,
             int byteIndex
-        ) {
+        )
+        {
             if (chars == null || bytes == null)
                 throw new ArgumentNullException(
                     chars == null ? nameof(chars) : nameof(bytes),
@@ -189,7 +191,8 @@ namespace System.Text
             int byteCount,
             char[] chars,
             int charIndex
-        ) {
+        )
+        {
             if (bytes == null || chars == null)
                 throw new ArgumentNullException(
                     bytes == null ? nameof(bytes) : nameof(chars),
@@ -327,7 +330,8 @@ namespace System.Text
             int count,
             byte* pBytes,
             int byteCount
-        ) {
+        )
+        {
             int result = Interop.Kernel32.WideCharToMultiByte(
                 (uint)codePage,
                 0,
@@ -349,7 +353,8 @@ namespace System.Text
             int byteCount,
             char* pChars,
             int count
-        ) {
+        )
+        {
             int result = Interop.Kernel32.MultiByteToWideChar(
                 (uint)codePage,
                 0,

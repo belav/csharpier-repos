@@ -52,7 +52,8 @@ namespace System.Security.Cryptography.Pkcs
                         in _essCertIdV2,
                         TokenInfo
                     )
-                ) {
+                )
+                {
                     return signerCert;
                 }
 
@@ -75,7 +76,8 @@ namespace System.Security.Cryptography.Pkcs
                         in _essCertIdV2,
                         TokenInfo
                     )
-                ) {
+                )
+                {
                     return candidate;
                 }
             }
@@ -87,7 +89,8 @@ namespace System.Security.Cryptography.Pkcs
             ReadOnlySpan<byte> data,
             [NotNullWhen(true)] out X509Certificate2? signerCertificate,
             X509Certificate2Collection? extraCandidates = null
-        ) {
+        )
+        {
             signerCertificate = null;
 
             X509Certificate2? cert = GetSignerCertificate(extraCandidates);
@@ -111,7 +114,8 @@ namespace System.Security.Cryptography.Pkcs
             HashAlgorithmName hashAlgorithm,
             [NotNullWhen(true)] out X509Certificate2? signerCertificate,
             X509Certificate2Collection? extraCandidates = null
-        ) {
+        )
+        {
             signerCertificate = null;
 
             X509Certificate2? cert = GetSignerCertificate(extraCandidates);
@@ -135,7 +139,8 @@ namespace System.Security.Cryptography.Pkcs
             Oid hashAlgorithmId,
             [NotNullWhen(true)] out X509Certificate2? signerCertificate,
             X509Certificate2Collection? extraCandidates = null
-        ) {
+        )
+        {
             if (hashAlgorithmId == null)
             {
                 throw new ArgumentNullException(nameof(hashAlgorithmId));
@@ -167,7 +172,8 @@ namespace System.Security.Cryptography.Pkcs
             SignerInfo signerInfo,
             [NotNullWhen(true)] out X509Certificate2? signerCertificate,
             X509Certificate2Collection? extraCandidates = null
-        ) {
+        )
+        {
             if (signerInfo == null)
             {
                 throw new ArgumentNullException(nameof(signerInfo));
@@ -219,7 +225,8 @@ namespace System.Security.Cryptography.Pkcs
             in EssCertId? certId,
             in EssCertIdV2? certId2,
             Rfc3161TimestampTokenInfo tokenInfo
-        ) {
+        )
+        {
             Debug.Assert(tsaCertificate != null);
             Debug.Assert(signer != null);
             Debug.Assert(tokenInfo != null);
@@ -238,7 +245,8 @@ namespace System.Security.Cryptography.Pkcs
             if (
                 tsaCertificate.NotAfter < tokenInfo.Timestamp
                 || tsaCertificate.NotBefore > tokenInfo.Timestamp
-            ) {
+            )
+            {
                 return false;
             }
 
@@ -309,7 +317,8 @@ namespace System.Security.Cryptography.Pkcs
             ReadOnlyMemory<byte> encodedBytes,
             [NotNullWhen(true)] out Rfc3161TimestampToken? token,
             out int bytesConsumed
-        ) {
+        )
+        {
             bytesConsumed = 0;
             token = null;
 
@@ -381,7 +390,8 @@ namespace System.Security.Cryptography.Pkcs
                 if (
                     signerCert == null
                     && signer.SignerIdentifier.Type == SubjectIdentifierType.IssuerAndSerialNumber
-                ) {
+                )
+                {
                     // If the cert wasn't provided, but the identifier was IssuerAndSerialNumber,
                     // and the ESSCertId(V2) has specified an issuerSerial value, ensure it's a match.
                     X509IssuerSerial issuerSerial =
@@ -395,7 +405,8 @@ namespace System.Security.Cryptography.Pkcs
                                 issuerSerial.IssuerName,
                                 issuerSerial.SerialNumber
                             )
-                        ) {
+                        )
+                        {
                             return false;
                         }
                     }
@@ -408,7 +419,8 @@ namespace System.Security.Cryptography.Pkcs
                                 issuerSerial.IssuerName,
                                 issuerSerial.SerialNumber
                             )
-                        ) {
+                        )
+                        {
                             return false;
                         }
                     }
@@ -420,11 +432,13 @@ namespace System.Security.Cryptography.Pkcs
                         out Rfc3161TimestampTokenInfo? tokenInfo,
                         out _
                     )
-                ) {
+                )
+                {
                     if (
                         signerCert != null
                         && !CheckCertificate(signerCert, signer, in certId, in certId2, tokenInfo)
-                    ) {
+                    )
+                    {
                         return false;
                     }
 
@@ -451,7 +465,8 @@ namespace System.Security.Cryptography.Pkcs
             CadesIssuerSerial issuerSerial,
             string issuerDirectoryName,
             string serialNumber
-        ) {
+        )
+        {
             GeneralNameAsn[] issuerNames = issuerSerial.Issuer;
 
             if (issuerNames == null || issuerNames.Length != 1)
@@ -469,7 +484,8 @@ namespace System.Security.Cryptography.Pkcs
             if (
                 issuerDirectoryName
                 != new X500DistinguishedName(requiredName.DirectoryName.Value.ToArray()).Name
-            ) {
+            )
+            {
                 return false;
             }
 
@@ -480,7 +496,8 @@ namespace System.Security.Cryptography.Pkcs
             CadesIssuerSerial issuerSerial,
             ReadOnlySpan<byte> issuerDirectoryName,
             ReadOnlySpan<byte> serialNumber
-        ) {
+        )
+        {
             GeneralNameAsn[] issuerNames = issuerSerial.Issuer;
 
             if (issuerNames == null || issuerNames.Length != 1)
@@ -507,7 +524,8 @@ namespace System.Security.Cryptography.Pkcs
             X509Certificate2 signerCert,
             in EssCertId? certId,
             in EssCertIdV2? certId2
-        ) {
+        )
+        {
             Debug.Assert(signerCert != null);
             Debug.Assert(certId.HasValue || certId2.HasValue);
             byte[]? serialNumber = null;
@@ -520,7 +538,8 @@ namespace System.Security.Cryptography.Pkcs
                     !signerCert.TryGetCertHash(HashAlgorithmName.SHA1, thumbprint, out int written)
                     || written != thumbprint.Length
                     || !thumbprint.SequenceEqual(certId.Value.Hash.Span)
-                ) {
+                )
+                {
                     return false;
                 }
 
@@ -535,7 +554,8 @@ namespace System.Security.Cryptography.Pkcs
                             signerCert.IssuerName.RawData,
                             serialNumber
                         )
-                    ) {
+                    )
+                    {
                         return false;
                     }
                 }
@@ -588,7 +608,8 @@ namespace System.Security.Cryptography.Pkcs
                             signerCert.IssuerName.RawData,
                             serialNumber
                         )
-                    ) {
+                    )
+                    {
                         return false;
                     }
                 }
@@ -601,7 +622,8 @@ namespace System.Security.Cryptography.Pkcs
             SignerInfo signer,
             out EssCertId? certId,
             out EssCertIdV2? certId2
-        ) {
+        )
+        {
             // RFC 5035 says that SigningCertificateV2 (contains ESSCertIDv2) is a signed
             // attribute, with OID 1.2.840.113549.1.9.16.2.47, and that it must not be multiply defined.
 
@@ -618,7 +640,8 @@ namespace System.Security.Cryptography.Pkcs
                     setOid != null
                     && setOid != Oids.SigningCertificate
                     && setOid != Oids.SigningCertificateV2
-                ) {
+                )
+                {
                     continue;
                 }
 

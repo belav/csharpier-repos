@@ -18,7 +18,8 @@ namespace Microsoft.Extensions.DependencyModel
             this ref Utf8JsonReader reader,
             out string name,
             out string value
-        ) {
+        )
+        {
             name = null;
             value = null;
             if (reader.Read() && reader.IsTokenTypeProperty())
@@ -137,7 +138,8 @@ namespace Microsoft.Extensions.DependencyModel
         private static Exception CreateUnexpectedException(
             ref Utf8JsonReader reader,
             string expected
-        ) {
+        )
+        {
             // Replace with public API once https://github.com/dotnet/runtime/issues/28482 is fixed
             object boxedState = reader.CurrentState;
             long lineNumber = (long)(

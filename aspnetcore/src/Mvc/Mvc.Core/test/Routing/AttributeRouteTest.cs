@@ -533,7 +533,8 @@ namespace Microsoft.AspNetCore.Mvc.Routing
         [InlineData("GetBlogById")]
         public void AttributeRoute_ThrowsRouteCreationException_ForConstraintsNotTakingArguments(
             string routeName
-        ) {
+        )
+        {
             // Arrange
             var routeTemplate = "api/Blog/{id:int(10)}";
             var actions = new List<ActionDescriptor>()
@@ -818,7 +819,8 @@ namespace Microsoft.AspNetCore.Mvc.Routing
 
         private static Mock<IActionDescriptorCollectionProvider> CreateActionDescriptorProvider(
             IReadOnlyList<ActionDescriptor> actions
-        ) {
+        )
+        {
             var actionDescriptorProvider = new Mock<IActionDescriptorCollectionProvider>(
                 MockBehavior.Strict
             );
@@ -831,14 +833,16 @@ namespace Microsoft.AspNetCore.Mvc.Routing
         private static AttributeRoute CreateRoute(
             IRouter handler,
             IActionDescriptorCollectionProvider actionDescriptorProvider
-        ) {
+        )
+        {
             return CreateRoute((_) => handler, actionDescriptorProvider);
         }
 
         private static AttributeRoute CreateRoute(
             Func<ActionDescriptor[], IRouter> handlerFactory,
             IActionDescriptorCollectionProvider actionDescriptorProvider
-        ) {
+        )
+        {
             var services = new ServiceCollection().AddSingleton<ILoggerFactory>(
                     NullLoggerFactory.Instance
                 )
@@ -853,7 +857,8 @@ namespace Microsoft.AspNetCore.Mvc.Routing
         // the Dictionary class.
         private static RouteValueDictionary ToRouteValueDictionary(
             IDictionary<string, string> values
-        ) {
+        )
+        {
             var result = new RouteValueDictionary();
             foreach (var kvp in values)
             {

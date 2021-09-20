@@ -38,7 +38,8 @@ namespace Microsoft.CodeAnalysis.CodeGen
         public PermissionSetAttributeWithFileReference(
             Cci.ICustomAttribute sourceAttribute,
             string resolvedPermissionSetFilePath
-        ) {
+        )
+        {
             RoslynDebug.Assert(resolvedPermissionSetFilePath != null);
 
             _sourceAttribute = sourceAttribute;
@@ -187,7 +188,8 @@ namespace Microsoft.CodeAnalysis.CodeGen
             public HexPropertyMetadataNamedArgument(
                 Cci.ITypeReference type,
                 Cci.IMetadataExpression value
-            ) {
+            )
+            {
                 _type = type;
                 _value = value;
             }

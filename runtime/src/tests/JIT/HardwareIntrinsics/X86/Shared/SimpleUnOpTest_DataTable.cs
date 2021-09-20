@@ -30,7 +30,8 @@ namespace JIT.HardwareIntrinsics.X86
                 (alignment != 32 && alignment != 16)
                 || (alignment * 2) < sizeOfinArray
                 || (alignment * 2) < sizeOfoutArray
-            ) {
+            )
+            {
                 throw new ArgumentException("Invalid value of alignment");
             }
 

@@ -27,7 +27,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             BoundNode firstInRegion,
             BoundNode lastInRegion,
             out bool? succeeded
-        ) {
+        )
+        {
             var walker = new EntryPointsWalker(
                 compilation,
                 member,
@@ -78,7 +79,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             PendingBranch pending,
             BoundNode gotoStmt,
             BoundStatement targetStmt
-        ) {
+        )
+        {
             targetStmt.AssertIsLabeledStatement();
             if (
                 !gotoStmt.WasCompilerGenerated

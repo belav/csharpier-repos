@@ -149,7 +149,8 @@ namespace Microsoft.AspNetCore.Routing
             bool expectedMatch,
             string p1,
             string p2
-        ) {
+        )
+        {
             // Arrange
             var matcher = CreateMatcher(template);
 
@@ -184,7 +185,8 @@ namespace Microsoft.AspNetCore.Routing
             string p1,
             string p2,
             string p3
-        ) {
+        )
+        {
             // Arrange
             var matcher = CreateMatcher(template);
 
@@ -224,7 +226,8 @@ namespace Microsoft.AspNetCore.Routing
         public void TryMatch_OptionalParameter_FollowedByPeriod_Invalid(
             string template,
             string path
-        ) {
+        )
+        {
             // Arrange
             var matcher = CreateMatcher(template);
 
@@ -1007,7 +1010,8 @@ namespace Microsoft.AspNetCore.Routing
         [InlineData("///c/")]
         public void TryMatch_MultipleOptionalParameters_WithEmptyIntermediateSegmentsDoesNotMatch(
             string url
-        ) {
+        )
+        {
             // Arrange
             var route = CreateMatcher("{controller?}/{action?}/{id?}");
 
@@ -1113,7 +1117,8 @@ namespace Microsoft.AspNetCore.Routing
             string path,
             RouteValueDictionary defaults,
             IDictionary<string, object> expected
-        ) {
+        )
+        {
             // Arrange
             var matcher = new RoutePatternMatcher(
                 RoutePatternParser.Parse(template),

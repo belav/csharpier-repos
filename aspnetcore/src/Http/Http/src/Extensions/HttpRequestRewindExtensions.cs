@@ -85,7 +85,8 @@ namespace Microsoft.AspNetCore.Http
             this HttpRequest request,
             int bufferThreshold,
             long bufferLimit
-        ) {
+        )
+        {
             BufferingHelper.EnableRewind(request, bufferThreshold, bufferLimit);
         }
     }

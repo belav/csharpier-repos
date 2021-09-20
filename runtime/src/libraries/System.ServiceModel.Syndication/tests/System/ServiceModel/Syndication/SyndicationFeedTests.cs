@@ -80,7 +80,8 @@ namespace System.ServiceModel.Syndication.Tests
             string description,
             Uri feedAlternateLink,
             IEnumerable<SyndicationItem> items
-        ) {
+        )
+        {
             var feed = new SyndicationFeed(title, description, feedAlternateLink, items);
             VerifySyndicationFeed(
                 feed,
@@ -122,7 +123,8 @@ namespace System.ServiceModel.Syndication.Tests
             Uri feedAlternateLink,
             string id,
             DateTimeOffset lastUpdatedTime
-        ) {
+        )
+        {
             var feed = new SyndicationFeed(
                 title,
                 description,
@@ -173,7 +175,8 @@ namespace System.ServiceModel.Syndication.Tests
             string id,
             DateTimeOffset lastUpdatedTime,
             IEnumerable<SyndicationItem> items
-        ) {
+        )
+        {
             var feed = new SyndicationFeed(
                 title,
                 description,
@@ -436,7 +439,8 @@ namespace System.ServiceModel.Syndication.Tests
             string ns,
             string value,
             string version
-        ) {
+        )
+        {
             var feed = new SyndicationFeedSubclass();
             Assert.False(feed.TryParseAttributeEntryPoint(name, ns, value, version));
         }
@@ -545,7 +549,8 @@ namespace System.ServiceModel.Syndication.Tests
             string id,
             DateTimeOffset lastUpdatedTime,
             IEnumerable<SyndicationItem> items
-        ) {
+        )
+        {
             Assert.Empty(feed.AttributeExtensions);
             Assert.Empty(feed.Authors);
             Assert.Null(feed.BaseUri);

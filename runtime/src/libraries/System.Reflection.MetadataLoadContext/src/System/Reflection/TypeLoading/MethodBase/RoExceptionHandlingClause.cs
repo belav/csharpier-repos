@@ -21,7 +21,8 @@ namespace System.Reflection.TypeLoading
             int tryLength,
             int handlerOffset,
             int handlerLength
-        ) {
+        )
+        {
             _catchType = catchType;
             _flags = flags;
             _filterOffset = filterOffset;

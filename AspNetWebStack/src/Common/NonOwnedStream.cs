@@ -154,7 +154,8 @@ namespace System.Web.Http
             int count,
             AsyncCallback callback,
             object state
-        ) {
+        )
+        {
             ThrowIfDisposed();
             return InnerStream.BeginRead(buffer, offset, count, callback, state);
         }
@@ -165,7 +166,8 @@ namespace System.Web.Http
             int count,
             AsyncCallback callback,
             object state
-        ) {
+        )
+        {
             ThrowIfDisposed();
             return InnerStream.BeginWrite(buffer, offset, count, callback, state);
         }
@@ -182,7 +184,8 @@ namespace System.Web.Http
             Stream destination,
             int bufferSize,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             ThrowIfDisposed();
             return InnerStream.CopyToAsync(destination, bufferSize, cancellationToken);
         }
@@ -251,7 +254,8 @@ namespace System.Web.Http
             int offset,
             int count,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             ThrowIfDisposed();
             return InnerStream.ReadAsync(buffer, offset, count, cancellationToken);
         }
@@ -287,7 +291,8 @@ namespace System.Web.Http
             int offset,
             int count,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             ThrowIfDisposed();
             return InnerStream.WriteAsync(buffer, offset, count, cancellationToken);
         }

@@ -111,7 +111,8 @@ namespace System.Xml
             int combinedChar,
             out char lowChar,
             out char highChar
-        ) {
+        )
+        {
             int v = combinedChar - 0x10000;
             lowChar = (char)(SurLowStart + v % 1024);
             highChar = (char)(SurHighStart + v / 1024);
@@ -152,7 +153,8 @@ namespace System.Xml
                                 XmlCharType.IsHighSurrogate(str[i])
                                 && XmlCharType.IsLowSurrogate(str[i + 1])
                             )
-                        ) {
+                        )
+                        {
                             return i;
                         }
                         else

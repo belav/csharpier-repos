@@ -72,7 +72,8 @@ namespace Microsoft.CodeAnalysis.CSharp.RemoveUnusedVariable
             SyntaxEditor editor,
             SyntaxNode node,
             ISyntaxFactsService syntaxFacts
-        ) {
+        )
+        {
             switch (node.Kind())
             {
                 case SyntaxKind.SimpleAssignmentExpression:

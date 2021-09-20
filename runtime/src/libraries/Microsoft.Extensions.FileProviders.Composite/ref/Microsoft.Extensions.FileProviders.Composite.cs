@@ -20,7 +20,8 @@ namespace Microsoft.Extensions.FileProviders
         }
         public Microsoft.Extensions.FileProviders.IDirectoryContents GetDirectoryContents(
             string subpath
-        ) {
+        )
+        {
             throw null;
         }
         public Microsoft.Extensions.FileProviders.IFileInfo GetFileInfo(string subpath)

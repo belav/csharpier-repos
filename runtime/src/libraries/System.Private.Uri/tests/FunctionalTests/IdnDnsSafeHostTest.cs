@@ -109,7 +109,8 @@ namespace System.PrivateUri.Tests
             string host,
             string dnsSafeHost,
             string idnHost
-        ) {
+        )
+        {
             Asserts($"wss://{hostString}", host, dnsSafeHost, idnHost);
             Asserts($"wss://{hostString}:1", host, dnsSafeHost, idnHost);
             Asserts($"http://{hostString}", host, dnsSafeHost, idnHost);

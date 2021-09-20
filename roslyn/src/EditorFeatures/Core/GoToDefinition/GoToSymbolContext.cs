@@ -22,7 +22,8 @@ namespace Microsoft.CodeAnalysis.Editor.GoToDefinition
             Document document,
             int position,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             Document = document;
             Position = position;
             CancellationToken = cancellationToken;

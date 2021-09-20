@@ -61,7 +61,8 @@ namespace Microsoft.AspNetCore.Hosting
             public Task StartAsync<TContext>(
                 IHttpApplication<TContext> application,
                 CancellationToken cancellationToken
-            ) {
+            )
+            {
                 RequestDelegate = ctx => throw new NotSupportedException();
 
                 return Task.CompletedTask;

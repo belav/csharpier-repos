@@ -100,7 +100,8 @@ namespace Microsoft.AspNetCore.WebUtilities
         /// <returns></returns>
         public async Task<MultipartSection?> ReadNextSectionAsync(
             CancellationToken cancellationToken = new CancellationToken()
-        ) {
+        )
+        {
             // Drain the prior section.
             await _currentStream.DrainAsync(cancellationToken);
             // If we're at the end return null
@@ -127,7 +128,8 @@ namespace Microsoft.AspNetCore.WebUtilities
 
         private async Task<Dictionary<string, StringValues>> ReadHeadersAsync(
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             int totalSize = 0;
             var accumulator = new KeyValueAccumulator();
             var line = await _stream.ReadLineAsync(

@@ -186,7 +186,8 @@ namespace JIT.HardwareIntrinsics.General
             Double result,
             Double[] values,
             [CallerMemberName] string method = ""
-        ) {
+        )
+        {
             if (result != values[3])
             {
                 Succeeded = false;
@@ -207,7 +208,8 @@ namespace JIT.HardwareIntrinsics.General
             Double[] values,
             Double insertedValue,
             [CallerMemberName] string method = ""
-        ) {
+        )
+        {
             Double[] resultElements = new Double[ElementCount];
             Unsafe.WriteUnaligned(ref Unsafe.As<Double, byte>(ref resultElements[0]), result);
             ValidateWithResult(resultElements, values, insertedValue, method);
@@ -218,7 +220,8 @@ namespace JIT.HardwareIntrinsics.General
             Double[] values,
             Double insertedValue,
             [CallerMemberName] string method = ""
-        ) {
+        )
+        {
             bool succeeded = true;
 
             for (int i = 0; i < ElementCount; i++)

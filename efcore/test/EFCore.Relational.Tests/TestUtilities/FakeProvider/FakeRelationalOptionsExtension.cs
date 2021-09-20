@@ -31,7 +31,8 @@ namespace Microsoft.EntityFrameworkCore.TestUtilities.FakeProvider
 
         public static IServiceCollection AddEntityFrameworkRelationalDatabase(
             IServiceCollection serviceCollection
-        ) {
+        )
+        {
             var builder = new EntityFrameworkRelationalServicesBuilder(serviceCollection).TryAdd<
                 LoggingDefinitions,
                 TestRelationalLoggingDefinitions

@@ -69,7 +69,8 @@ namespace Microsoft.TestCommon
                                 param.Name,
                                 StringComparison.Ordinal
                             )
-                        ) {
+                        )
+                        {
                             this.hasNonQualityFactorParameter = true;
                         }
                     }

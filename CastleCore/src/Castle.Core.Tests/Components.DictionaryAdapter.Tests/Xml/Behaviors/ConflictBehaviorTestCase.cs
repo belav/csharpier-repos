@@ -163,7 +163,8 @@ namespace Castle.Components.DictionaryAdapter.Xml.Tests
                     IDictionaryAdapter source,
                     IDictionaryAdapter target,
                     ref Func<DictionaryAdapter.PropertyDescriptor, bool> selector
-                ) {
+                )
+                {
                     if (copying)
                         return false;
 

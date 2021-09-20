@@ -19,7 +19,8 @@ namespace Microsoft.CodeAnalysis.ExternalAccess.Razor
             string filePath,
             LinePositionSpan linePositionSpan,
             TextSpan span
-        ) {
+        )
+        {
             if (string.IsNullOrEmpty(filePath))
             {
                 throw new ArgumentException(nameof(filePath));

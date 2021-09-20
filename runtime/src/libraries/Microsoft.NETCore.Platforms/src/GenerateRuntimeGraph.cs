@@ -261,13 +261,15 @@ namespace Microsoft.NETCore.Platforms.BuildTasks
                         existingRuntimeDescription.RuntimeIdentifier,
                         out newRuntimeDescription
                     )
-                ) {
+                )
+                {
                     // overlapping RID, ensure that the imports match (same ordering and content)
                     if (
                         !existingRuntimeDescription.InheritedRuntimes.SequenceEqual(
                             newRuntimeDescription.InheritedRuntimes
                         )
-                    ) {
+                    )
+                    {
                         Log.LogError(
                             $"RuntimeGroup {runtimeGroup.BaseRID} defines RID {newRuntimeDescription.RuntimeIdentifier} with imports {string.Join(";", newRuntimeDescription.InheritedRuntimes)} which differ from existing imports {string.Join(";", existingRuntimeDescription.InheritedRuntimes)}.  You may avoid this by specifying {nameof(RuntimeGroup.OmitRIDDefinitions)} metadata with {newRuntimeDescription.RuntimeIdentifier}."
                         );
@@ -281,7 +283,8 @@ namespace Microsoft.NETCore.Platforms.BuildTasks
         private void ValidateImports(
             RuntimeGraph runtimeGraph,
             IDictionary<string, string> externalRIDs
-        ) {
+        )
+        {
             foreach (var runtimeDescription in runtimeGraph.Runtimes.Values)
             {
                 string externalRuntimeJson;
@@ -291,7 +294,8 @@ namespace Microsoft.NETCore.Platforms.BuildTasks
                         runtimeDescription.RuntimeIdentifier,
                         out externalRuntimeJson
                     )
-                ) {
+                )
+                {
                     Log.LogError(
                         $"Runtime {runtimeDescription.RuntimeIdentifier} is defined in both this RuntimeGraph and {externalRuntimeJson}."
                     );
@@ -302,7 +306,8 @@ namespace Microsoft.NETCore.Platforms.BuildTasks
                     if (
                         !runtimeGraph.Runtimes.ContainsKey(import)
                         && !externalRIDs.ContainsKey(import)
-                    ) {
+                    )
+                    {
                         Log.LogError(
                             $"Runtime {runtimeDescription.RuntimeIdentifier} imports {import} which is not defined."
                         );
@@ -333,7 +338,8 @@ namespace Microsoft.NETCore.Platforms.BuildTasks
 
         private static IDictionary<string, IEnumerable<string>> GetCompatibilityMap(
             RuntimeGraph graph
-        ) {
+        )
+        {
             Dictionary<string, IEnumerable<string>> compatibilityMap = new Dictionary<
                 string,
                 IEnumerable<string>
@@ -362,7 +368,8 @@ namespace Microsoft.NETCore.Platforms.BuildTasks
         private static void WriteCompatibilityMap(
             IDictionary<string, IEnumerable<string>> compatibilityMap,
             string mapFile
-        ) {
+        )
+        {
             var serializer = new JsonSerializer()
             {
                 Formatting = Formatting.Indented,
@@ -384,7 +391,8 @@ namespace Microsoft.NETCore.Platforms.BuildTasks
         private static bool CompatibilityMapEquals(
             IDictionary<string, IEnumerable<string>> left,
             IDictionary<string, IEnumerable<string>> right
-        ) {
+        )
+        {
             if (left.Count != right.Count)
             {
                 return false;

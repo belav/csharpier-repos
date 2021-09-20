@@ -328,7 +328,8 @@ namespace System.Web.WebPages.Test
             string httpMethod,
             NameValueCollection queryString,
             NameValueCollection httpHeaders = null
-        ) {
+        )
+        {
             var request = new Mock<HttpRequestBase>();
             request.Setup(r => r.HttpMethod).Returns(httpMethod);
             request.Setup(r => r.QueryString).Returns(queryString);

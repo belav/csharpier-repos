@@ -54,7 +54,8 @@ namespace Microsoft.CodeAnalysis.UnifiedSuggestions
                 !_targetSpan.HasValue
                 || !x.ApplicableToSpan.HasValue
                 || !y.ApplicableToSpan.HasValue
-            ) {
+            )
+            {
                 // Not enough data to compare, consider them equal
                 return 0;
             }

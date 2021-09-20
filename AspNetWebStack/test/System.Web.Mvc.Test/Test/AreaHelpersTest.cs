@@ -94,7 +94,8 @@ namespace System.Web.Mvc.Test
             public override VirtualPathData GetVirtualPath(
                 RequestContext requestContext,
                 RouteValueDictionary values
-            ) {
+            )
+            {
                 throw new NotImplementedException();
             }
         }

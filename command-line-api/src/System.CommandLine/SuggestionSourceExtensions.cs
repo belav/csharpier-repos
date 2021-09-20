@@ -25,7 +25,8 @@ namespace System.CommandLine
         public static void Add(
             this SuggestionSourceList suggestionSources,
             params string[] suggestions
-        ) {
+        )
+        {
             if (suggestionSources is null)
             {
                 throw new ArgumentNullException(nameof(suggestionSources));

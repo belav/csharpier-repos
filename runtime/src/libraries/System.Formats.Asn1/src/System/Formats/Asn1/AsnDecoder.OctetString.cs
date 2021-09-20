@@ -65,7 +65,8 @@ namespace System.Formats.Asn1
             out int bytesConsumed,
             out int bytesWritten,
             Asn1Tag? expectedTag = null
-        ) {
+        )
+        {
             if (source.Overlaps(destination))
             {
                 throw new ArgumentException(
@@ -85,7 +86,8 @@ namespace System.Formats.Asn1
                     out ReadOnlySpan<byte> contents,
                     out int consumed
                 )
-            ) {
+            )
+            {
                 if (contents.Length > destination.Length)
                 {
                     bytesWritten = 0;
@@ -163,7 +165,8 @@ namespace System.Formats.Asn1
             AsnEncodingRules ruleSet,
             out int bytesConsumed,
             Asn1Tag? expectedTag = null
-        ) {
+        )
+        {
             byte[]? rented = null;
 
             ReadOnlySpan<byte> contents = GetOctetStringContents(
@@ -195,7 +198,8 @@ namespace System.Formats.Asn1
             out int headerLength,
             out ReadOnlySpan<byte> contents,
             out int bytesConsumed
-        ) {
+        )
+        {
             Asn1Tag actualTag = ReadTagAndLength(
                 source,
                 ruleSet,
@@ -280,7 +284,8 @@ namespace System.Formats.Asn1
             out ReadOnlySpan<byte> value,
             out int bytesConsumed,
             Asn1Tag? expectedTag = null
-        ) {
+        )
+        {
             return TryReadPrimitiveOctetStringCore(
                 source,
                 ruleSet,
@@ -297,7 +302,8 @@ namespace System.Formats.Asn1
             ReadOnlySpan<byte> source,
             AsnEncodingRules ruleSet,
             bool isIndefinite
-        ) {
+        )
+        {
             int contentLength = CopyConstructedOctetString(
                 source,
                 ruleSet,
@@ -323,7 +329,8 @@ namespace System.Formats.Asn1
             bool isIndefinite,
             out int bytesRead,
             out int bytesWritten
-        ) {
+        )
+        {
             bytesWritten = CopyConstructedOctetString(
                 source,
                 ruleSet,
@@ -341,7 +348,8 @@ namespace System.Formats.Asn1
             bool write,
             bool isIndefinite,
             out int bytesRead
-        ) {
+        )
+        {
             bytesRead = 0;
             int lastSegmentLength = MaxCERSegmentSize;
 
@@ -362,7 +370,8 @@ namespace System.Formats.Asn1
                         if (
                             ruleSet == AsnEncodingRules.CER
                             && lastSegmentLength != MaxCERSegmentSize
-                        ) {
+                        )
+                        {
                             // T-REC-X.690-201508 sec 9.2
                             throw new AsnContentException(
                                 SR.ContentException_InvalidUnderCerOrDer_TryBer
@@ -384,7 +393,8 @@ namespace System.Formats.Asn1
 
                         if (
                             ruleSet == AsnEncodingRules.CER && lastSegmentLength > MaxCERSegmentSize
-                        ) {
+                        )
+                        {
                             // T-REC-X.690-201508 sec 9.2
                             throw new AsnContentException(
                                 SR.ContentException_InvalidUnderCerOrDer_TryBer
@@ -487,7 +497,8 @@ namespace System.Formats.Asn1
             bool isIndefinite,
             out int bytesRead,
             out int bytesWritten
-        ) {
+        )
+        {
             bytesRead = 0;
 
             int contentLength = CountConstructedOctetString(source, ruleSet, isIndefinite);
@@ -519,7 +530,8 @@ namespace System.Formats.Asn1
             out int bytesConsumed,
             ref byte[]? rented,
             Span<byte> tmpSpace = default
-        ) {
+        )
+        {
             Debug.Assert(rented == null);
 
             if (
@@ -533,7 +545,8 @@ namespace System.Formats.Asn1
                     out ReadOnlySpan<byte> contents,
                     out bytesConsumed
                 )
-            ) {
+            )
+            {
                 return contents;
             }
 
@@ -564,7 +577,8 @@ namespace System.Formats.Asn1
                     out int bytesRead,
                     out int bytesWritten
                 )
-            ) {
+            )
+            {
                 bytesConsumed = headerLength + bytesRead;
                 return tmpSpace.Slice(0, bytesWritten);
             }
@@ -615,7 +629,8 @@ namespace System.Formats.Asn1
             Span<byte> destination,
             out int bytesWritten,
             Asn1Tag? expectedTag = null
-        ) {
+        )
+        {
             bool ret = AsnDecoder.TryReadOctetString(
                 _data.Span,
                 destination,
@@ -708,7 +723,8 @@ namespace System.Formats.Asn1
         public bool TryReadPrimitiveOctetString(
             out ReadOnlyMemory<byte> contents,
             Asn1Tag? expectedTag = null
-        ) {
+        )
+        {
             bool ret = AsnDecoder.TryReadPrimitiveOctetString(
                 _data.Span,
                 RuleSet,

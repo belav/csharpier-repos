@@ -56,7 +56,8 @@ namespace Microsoft.AspNetCore.Mvc.Routing
             IActionInvokerFactory invokerFactory = null,
             ILoggerFactory loggerFactory = null,
             object diagnosticListener = null
-        ) {
+        )
+        {
             if (actionDescriptor == null)
             {
                 var mockAction = new Mock<ActionDescriptor>();

@@ -49,7 +49,8 @@ namespace System.Security.AccessControl
             bool includeExplicit,
             bool includeInherited,
             System.Type targetType
-        ) {
+        )
+        {
             ReadLock();
 
             try
@@ -71,7 +72,8 @@ namespace System.Security.AccessControl
                     if (
                         (SecurityDescriptor.ControlFlags & ControlFlags.DiscretionaryAclPresent)
                         != 0
-                    ) {
+                    )
+                    {
                         acl = SecurityDescriptor.DiscretionaryAcl;
                     }
                 }
@@ -133,7 +135,8 @@ namespace System.Security.AccessControl
                             if (
                                 ace.AceQualifier != AceQualifier.AccessAllowed
                                 && ace.AceQualifier != AceQualifier.AccessDenied
-                            ) {
+                            )
+                            {
                                 continue;
                             }
                         }
@@ -189,7 +192,8 @@ namespace System.Security.AccessControl
                         if (
                             ace.AceQualifier != AceQualifier.AccessAllowed
                             && ace.AceQualifier != AceQualifier.AccessDenied
-                        ) {
+                        )
+                        {
                             continue;
                         }
                     }
@@ -204,7 +208,8 @@ namespace System.Security.AccessControl
                     if (
                         (includeExplicit && ((ace.AceFlags & AceFlags.Inherited) == 0))
                         || (includeInherited && ((ace.AceFlags & AceFlags.Inherited) != 0))
-                    ) {
+                    )
+                    {
                         IdentityReference iref =
                             (targetType == typeof(SecurityIdentifier))
                                 ? ace.SecurityIdentifier
@@ -316,7 +321,8 @@ namespace System.Security.AccessControl
             AccessControlModification modification,
             ObjectAccessRule rule,
             out bool modified
-        ) {
+        )
+        {
             bool result = true;
 
             if (SecurityDescriptor.DiscretionaryAcl == null)
@@ -325,7 +331,8 @@ namespace System.Security.AccessControl
                     modification == AccessControlModification.Remove
                     || modification == AccessControlModification.RemoveAll
                     || modification == AccessControlModification.RemoveSpecific
-                ) {
+                )
+                {
                     modified = false;
                     return result;
                 }
@@ -340,7 +347,8 @@ namespace System.Security.AccessControl
                     || modification == AccessControlModification.Set
                     || modification == AccessControlModification.Reset
                 ) && (rule.ObjectFlags != ObjectAceFlags.None)
-            ) {
+            )
+            {
                 //
                 // This will result in an object ace being added to the dacl, so the dacl revision must be AclRevisionDS
                 //
@@ -551,7 +559,8 @@ namespace System.Security.AccessControl
             AccessControlModification modification,
             ObjectAuditRule rule,
             out bool modified
-        ) {
+        )
+        {
             bool result = true;
 
             if (SecurityDescriptor.SystemAcl == null)
@@ -560,7 +569,8 @@ namespace System.Security.AccessControl
                     modification == AccessControlModification.Remove
                     || modification == AccessControlModification.RemoveAll
                     || modification == AccessControlModification.RemoveSpecific
-                ) {
+                )
+                {
                     modified = false;
                     return result;
                 }
@@ -575,7 +585,8 @@ namespace System.Security.AccessControl
                     || modification == AccessControlModification.Set
                     || modification == AccessControlModification.Reset
                 ) && (rule.ObjectFlags != ObjectAceFlags.None)
-            ) {
+            )
+            {
                 //
                 // This will result in an object ace being added to the sacl, so the sacl revision must be AclRevisionDS
                 //
@@ -680,7 +691,8 @@ namespace System.Security.AccessControl
             AccessControlType type,
             Guid objectType,
             Guid inheritedObjectType
-        ) {
+        )
+        {
             throw NotImplemented.ByDesign;
         }
 
@@ -693,7 +705,8 @@ namespace System.Security.AccessControl
             AuditFlags flags,
             Guid objectType,
             Guid inheritedObjectType
-        ) {
+        )
+        {
             throw NotImplemented.ByDesign;
         }
 
@@ -701,7 +714,8 @@ namespace System.Security.AccessControl
             AccessControlModification modification,
             AccessRule rule,
             out bool modified
-        ) {
+        )
+        {
             ////if (this.AccessRuleType.IsAssignableFrom(rule.GetType().GetTypeInfo()))
             ////if (!TypeExtensions.IsAssignableFrom(this.AccessRuleType, rule.GetType()))
             //{
@@ -716,7 +730,8 @@ namespace System.Security.AccessControl
             AccessControlModification modification,
             AuditRule rule,
             out bool modified
-        ) {
+        )
+        {
             //if (this.AccessRuleType.IsAssignableFrom(rule.GetType().GetTypeInfo()))
             ////if (!TypeExtensions.IsAssignableFrom(this.AuditRuleType, rule.GetType()))
             //{
@@ -982,7 +997,8 @@ namespace System.Security.AccessControl
             bool includeExplicit,
             bool includeInherited,
             System.Type targetType
-        ) {
+        )
+        {
             return GetRules(true, includeExplicit, includeInherited, targetType);
         }
 
@@ -990,7 +1006,8 @@ namespace System.Security.AccessControl
             bool includeExplicit,
             bool includeInherited,
             System.Type targetType
-        ) {
+        )
+        {
             return GetRules(false, includeExplicit, includeInherited, targetType);
         }
 #endregion

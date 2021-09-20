@@ -16,7 +16,8 @@ namespace Microsoft.CodeAnalysis.CSharp
 
         internal LazyArrayElementCantBeRefAnyDiagnosticInfo(
             TypeWithAnnotations possiblyRestrictedTypeSymbol
-        ) {
+        )
+        {
             _possiblyRestrictedTypeSymbol = possiblyRestrictedTypeSymbol;
         }
 

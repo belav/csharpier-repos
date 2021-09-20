@@ -13,10 +13,8 @@ namespace System.Web.Mvc
         private IBuildManager _buildManager;
         private ControllerContext _controllerContext;
 
-        protected BuildManagerCompiledView(
-            ControllerContext controllerContext,
-            string viewPath
-        ) : this(controllerContext, viewPath, null) { }
+        protected BuildManagerCompiledView(ControllerContext controllerContext, string viewPath)
+            : this(controllerContext, viewPath, null) { }
 
         protected BuildManagerCompiledView(
             ControllerContext controllerContext,
@@ -29,7 +27,8 @@ namespace System.Web.Mvc
             string viewPath,
             IViewPageActivator viewPageActivator,
             IDependencyResolver dependencyResolver
-        ) {
+        )
+        {
             if (controllerContext == null)
             {
                 throw new ArgumentNullException("controllerContext");

@@ -17,7 +17,8 @@ namespace Microsoft.AspNetCore.Razor.Language.Legacy
             string typePattern,
             string assemblyName,
             List<RazorDiagnostic> diagnostics
-        ) {
+        )
+        {
             LookupText = lookupText;
             DirectiveText = directiveText;
             TypePattern = typePattern;

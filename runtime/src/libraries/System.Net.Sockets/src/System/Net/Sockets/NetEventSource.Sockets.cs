@@ -70,7 +70,8 @@ namespace System.Net
             string filePath,
             Socket socket,
             SocketAsyncOperation completedOperation
-        ) {
+        )
+        {
             if (Log.IsEnabled())
             {
                 Log.NotLoggedFile(filePath, GetHashCode(socket), completedOperation);
@@ -82,7 +83,8 @@ namespace System.Net
             string filePath,
             int socketHash,
             SocketAsyncOperation completedOperation
-        ) {
+        )
+        {
             WriteEvent(NotLoggedFileId, filePath, socketHash, (int)completedOperation);
         }
 
@@ -95,7 +97,8 @@ namespace System.Net
             object thisOrContextObject,
             Memory<byte> buffer,
             [CallerMemberName] string? memberName = null
-        ) {
+        )
+        {
             DumpBuffer(thisOrContextObject, buffer, 0, buffer.Length, memberName);
         }
 
@@ -112,7 +115,8 @@ namespace System.Net
             int offset,
             int count,
             [CallerMemberName] string? memberName = null
-        ) {
+        )
+        {
             if (Log.IsEnabled())
             {
                 if (offset < 0 || offset > buffer.Length - count)

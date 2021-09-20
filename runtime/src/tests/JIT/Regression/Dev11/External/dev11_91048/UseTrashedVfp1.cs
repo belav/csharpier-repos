@@ -86,7 +86,8 @@ namespace UseTrashedVfp1
             double d5,
             double d6,
             double d7
-        ) {
+        )
+        {
             return;
         }
 

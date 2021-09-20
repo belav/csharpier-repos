@@ -15,7 +15,8 @@ namespace System.Security.Cryptography.Csp.Tests
             int blockSize,
             int keySize,
             byte[] key = null
-        ) {
+        )
+        {
             alg.BlockSize = blockSize;
             Assert.Equal(blockSize, alg.BlockSize);
 

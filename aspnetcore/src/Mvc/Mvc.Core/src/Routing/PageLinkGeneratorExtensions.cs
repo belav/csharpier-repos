@@ -51,7 +51,8 @@ namespace Microsoft.AspNetCore.Routing
             PathString? pathBase = default,
             FragmentString fragment = default,
             LinkOptions? options = default
-        ) {
+        )
+        {
             if (generator == null)
             {
                 throw new ArgumentNullException(nameof(generator));
@@ -105,7 +106,8 @@ namespace Microsoft.AspNetCore.Routing
             PathString pathBase = default,
             FragmentString fragment = default,
             LinkOptions? options = default
-        ) {
+        )
+        {
             if (generator == null)
             {
                 throw new ArgumentNullException(nameof(generator));
@@ -178,7 +180,8 @@ namespace Microsoft.AspNetCore.Routing
             PathString? pathBase = default,
             FragmentString fragment = default,
             LinkOptions? options = default
-        ) {
+        )
+        {
             if (generator == null)
             {
                 throw new ArgumentNullException(nameof(generator));
@@ -242,7 +245,8 @@ namespace Microsoft.AspNetCore.Routing
             PathString pathBase = default,
             FragmentString fragment = default,
             LinkOptions? options = default
-        ) {
+        )
+        {
             if (generator == null)
             {
                 throw new ArgumentNullException(nameof(generator));
@@ -270,7 +274,8 @@ namespace Microsoft.AspNetCore.Routing
             string? page,
             string? handler,
             object? values
-        ) {
+        )
+        {
             var explicitValues = new RouteValueDictionary(values);
             var ambientValues = GetAmbientValues(httpContext);
 

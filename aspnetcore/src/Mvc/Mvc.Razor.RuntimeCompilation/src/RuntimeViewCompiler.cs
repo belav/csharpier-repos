@@ -40,7 +40,8 @@ namespace Microsoft.AspNetCore.Mvc.Razor.RuntimeCompilation
             CSharpCompiler csharpCompiler,
             IList<CompiledViewDescriptor> precompiledViews,
             ILogger logger
-        ) {
+        )
+        {
             if (fileProvider == null)
             {
                 throw new ArgumentNullException(nameof(fileProvider));
@@ -194,7 +195,8 @@ namespace Microsoft.AspNetCore.Mvc.Razor.RuntimeCompilation
                         _projectEngine.FileSystem,
                         item.Descriptor.Item
                     )
-                ) {
+                )
+                {
                     // If the item has checksums to validate, we should also have a precompiled view.
                     Debug.Assert(item.Descriptor != null);
 
@@ -221,7 +223,8 @@ namespace Microsoft.AspNetCore.Mvc.Razor.RuntimeCompilation
         private ViewCompilerWorkItem CreatePrecompiledWorkItem(
             string normalizedPath,
             CompiledViewDescriptor precompiledView
-        ) {
+        )
+        {
             // We have a precompiled view - but we're not sure that we can use it yet.
             //
             // We need to determine first if we have enough information to 'recompile' this view. If that's the case
@@ -232,7 +235,8 @@ namespace Microsoft.AspNetCore.Mvc.Razor.RuntimeCompilation
             if (
                 precompiledView.Item == null
                 || !ChecksumValidator.IsRecompilationSupported(precompiledView.Item)
-            ) {
+            )
+            {
                 return new ViewCompilerWorkItem()
                 {
                     // If we don't have a checksum for the primary source file we can't recompile.
@@ -323,7 +327,8 @@ namespace Microsoft.AspNetCore.Mvc.Razor.RuntimeCompilation
         private void GetChangeTokensFromImports(
             IList<IChangeToken> expirationTokens,
             RazorProjectItem projectItem
-        ) {
+        )
+        {
             // OK this means we can do compilation. For now let's just identify the other files we need to watch
             // so we can create the cache entry. Compilation will happen after we release the lock.
             var importFeature = _projectEngine.ProjectFeatures.OfType<IImportProjectFeature>()

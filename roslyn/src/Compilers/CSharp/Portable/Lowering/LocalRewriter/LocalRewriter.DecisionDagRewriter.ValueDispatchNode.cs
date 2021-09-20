@@ -121,7 +121,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                     private RelationalDispatch WithLeftAndRight(
                         ValueDispatchNode left,
                         ValueDispatchNode right
-                    ) {
+                    )
+                    {
                         // Note that this is a destructive implementation to reduce GC garbage.
                         // That requires clients to stop using the input node once this has been called.
 
@@ -143,7 +144,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                     public RelationalDispatch WithTrueAndFalseChildren(
                         ValueDispatchNode whenTrue,
                         ValueDispatchNode whenFalse
-                    ) {
+                    )
+                    {
                         if (whenTrue == this.WhenTrue && whenFalse == this.WhenFalse)
                             return this;
 
@@ -161,7 +163,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                         BinaryOperatorKind op,
                         ValueDispatchNode whenTrue,
                         ValueDispatchNode whenFalse
-                    ) {
+                    )
+                    {
                         // Keep the lower numbers on the left and the higher numbers on the right.
                         var (left, right) = IsReversed(op)
                             ? (whenFalse, whenTrue)
@@ -175,7 +178,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                         BinaryOperatorKind op,
                         ValueDispatchNode left,
                         ValueDispatchNode right
-                    ) {
+                    )
+                    {
                         Debug.Assert(op.OperandTypes() != 0);
 
                         // Build a height-balanced tree node that is semantically equivalent to a node with the given parameters.

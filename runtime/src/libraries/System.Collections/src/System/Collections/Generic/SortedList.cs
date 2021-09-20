@@ -205,12 +205,14 @@ namespace System.Collections.Generic
 
         bool ICollection<KeyValuePair<TKey, TValue>>.Contains(
             KeyValuePair<TKey, TValue> keyValuePair
-        ) {
+        )
+        {
             int index = IndexOfKey(keyValuePair.Key);
             if (
                 index >= 0
                 && EqualityComparer<TValue>.Default.Equals(values[index], keyValuePair.Value)
-            ) {
+            )
+            {
                 return true;
             }
             return false;
@@ -222,7 +224,8 @@ namespace System.Collections.Generic
             if (
                 index >= 0
                 && EqualityComparer<TValue>.Default.Equals(values[index], keyValuePair.Value)
-            ) {
+            )
+            {
                 RemoveAt(index);
                 return true;
             }
@@ -436,7 +439,8 @@ namespace System.Collections.Generic
         void ICollection<KeyValuePair<TKey, TValue>>.CopyTo(
             KeyValuePair<TKey, TValue>[] array,
             int arrayIndex
-        ) {
+        )
+        {
             if (array == null)
             {
                 throw new ArgumentNullException(nameof(array));

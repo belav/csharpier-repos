@@ -68,7 +68,8 @@ namespace System.Web.Mvc
         public static void SetResolver(
             Func<Type, object> getService,
             Func<Type, IEnumerable<object>> getServices
-        ) {
+        )
+        {
             _instance.InnerSetResolver(getService, getServices);
         }
 
@@ -102,7 +103,8 @@ namespace System.Web.Mvc
                 || getInstance.ReturnType != typeof(object)
                 || getInstances == null
                 || getInstances.ReturnType != typeof(IEnumerable<object>)
-            ) {
+            )
+            {
                 throw new ArgumentException(
                     String.Format(
                         CultureInfo.CurrentCulture,
@@ -137,7 +139,8 @@ namespace System.Web.Mvc
         public void InnerSetResolver(
             Func<Type, object> getService,
             Func<Type, IEnumerable<object>> getServices
-        ) {
+        )
+        {
             if (getService == null)
             {
                 throw new ArgumentNullException("getService");
@@ -230,7 +233,8 @@ namespace System.Web.Mvc
             public DelegateBasedDependencyResolver(
                 Func<Type, object> getService,
                 Func<Type, IEnumerable<object>> getServices
-            ) {
+            )
+            {
                 _getService = getService;
                 _getServices = getServices;
             }

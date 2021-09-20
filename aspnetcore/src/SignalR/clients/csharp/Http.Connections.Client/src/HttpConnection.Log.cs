@@ -200,7 +200,8 @@ namespace Microsoft.AspNetCore.Http.Connections.Client
                 ILogger logger,
                 HttpTransportType transportType,
                 Uri url
-            ) {
+            )
+            {
                 if (logger.IsEnabled(LogLevel.Debug))
                 {
                     _startingTransport(logger, transportType.ToString(), url, null);
@@ -226,7 +227,8 @@ namespace Microsoft.AspNetCore.Http.Connections.Client
                 ILogger logger,
                 HttpTransportType transportType,
                 Exception exception
-            ) {
+            )
+            {
                 _errorStartingTransport(logger, transportType, exception);
             }
 
@@ -239,7 +241,8 @@ namespace Microsoft.AspNetCore.Http.Connections.Client
                 ILogger logger,
                 HttpTransportType transport,
                 TransferFormat transferFormat
-            ) {
+            )
+            {
                 if (logger.IsEnabled(LogLevel.Debug))
                 {
                     _transportDoesNotSupportTransferFormat(
@@ -254,7 +257,8 @@ namespace Microsoft.AspNetCore.Http.Connections.Client
             public static void TransportDisabledByClient(
                 ILogger logger,
                 HttpTransportType transport
-            ) {
+            )
+            {
                 if (logger.IsEnabled(LogLevel.Debug))
                 {
                     _transportDisabledByClient(logger, transport.ToString(), null);
@@ -265,7 +269,8 @@ namespace Microsoft.AspNetCore.Http.Connections.Client
                 ILogger logger,
                 HttpTransportType transport,
                 Exception ex
-            ) {
+            )
+            {
                 if (logger.IsEnabled(LogLevel.Debug))
                 {
                     _transportFailed(logger, transport.ToString(), ex);

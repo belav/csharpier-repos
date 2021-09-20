@@ -41,7 +41,8 @@ namespace Microsoft.AspNetCore.Identity.EntityFrameworkCore.Test
             bool lockoutEnabled = false,
             DateTimeOffset? lockoutEnd = default(DateTimeOffset?),
             bool useNamePrefixAsUserName = false
-        ) {
+        )
+        {
             return new TUser
             {
                 UserName = useNamePrefixAsUserName

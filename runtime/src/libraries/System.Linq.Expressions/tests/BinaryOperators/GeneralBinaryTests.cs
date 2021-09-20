@@ -231,7 +231,8 @@ namespace System.Linq.Expressions.Tests
             BinaryExpression expression,
             bool useInterpreter,
             bool expected
-        ) {
+        )
+        {
             Expression<Func<bool>> e = Expression.Lambda<Func<bool>>(
                 expression,
                 Enumerable.Empty<ParameterExpression>()
@@ -337,7 +338,8 @@ namespace System.Linq.Expressions.Tests
             object lhs,
             object rhs,
             bool useInterpreter
-        ) {
+        )
+        {
             // The types of binary expression that can't have a converter just ignore any lambda
             // passed in. This probably shouldn't be the case (an ArgumentException would be
             // appropriate, but it would be a breaking change to stop this now.

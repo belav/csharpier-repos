@@ -86,7 +86,8 @@ namespace Castle.DynamicProxy.Internal
                             method.GetBaseDefinition(),
                             proxiedMethod
                         )
-                    ) {
+                    )
+                    {
                         methodOnTarget = method;
                         break;
                     }

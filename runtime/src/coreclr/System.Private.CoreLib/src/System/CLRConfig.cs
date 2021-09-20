@@ -21,7 +21,8 @@ namespace System
             string switchName,
             string environmentName,
             bool defaultValue
-        ) {
+        )
+        {
             bool value = GetBoolValue(switchName, out bool exists);
 
             if (exists)

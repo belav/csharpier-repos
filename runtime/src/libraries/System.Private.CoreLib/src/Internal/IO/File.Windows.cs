@@ -32,7 +32,8 @@ namespace Internal.IO
             string path,
             ref Interop.Kernel32.WIN32_FILE_ATTRIBUTE_DATA data,
             bool returnErrorOnNotFound
-        ) {
+        )
+        {
             int errorCode = Interop.Errors.ERROR_SUCCESS;
 
             using (DisableMediaInsertionPrompt.Create())
@@ -43,7 +44,8 @@ namespace Internal.IO
                         Interop.Kernel32.GET_FILEEX_INFO_LEVELS.GetFileExInfoStandard,
                         ref data
                     )
-                ) {
+                )
+                {
                     errorCode = Marshal.GetLastWin32Error();
                     if (errorCode == Interop.Errors.ERROR_ACCESS_DENIED)
                     {
@@ -58,7 +60,8 @@ namespace Internal.IO
                                 path,
                                 ref findData
                             )
-                        ) {
+                        )
+                        {
                             if (handle.IsInvalid)
                             {
                                 errorCode = Marshal.GetLastWin32Error();

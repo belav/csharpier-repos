@@ -35,7 +35,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Http2
             Http2Frame frame,
             uint maxFrameSize,
             out ReadOnlySequence<byte> framePayload
-        ) {
+        )
+        {
             framePayload = ReadOnlySequence<byte>.Empty;
 
             if (buffer.Length < HeaderLength)
@@ -82,7 +83,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Http2
         private static int ReadExtendedFields(
             Http2Frame frame,
             in ReadOnlySequence<byte> readableBuffer
-        ) {
+        )
+        {
             // Copy in any extra fields for the given frame type
             var extendedHeaderLength = GetPayloadFieldsLength(frame);
 

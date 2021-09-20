@@ -35,7 +35,8 @@ namespace Microsoft.CodeAnalysis.CSharp.BraceCompletion
             int openingPosition,
             Document document,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             // Only potentially valid for string literal completion if not in an interpolated string brace completion context.
             if (
                 OpeningBrace == brace
@@ -45,7 +46,8 @@ namespace Microsoft.CodeAnalysis.CSharp.BraceCompletion
                         cancellationToken
                     )
                     .ConfigureAwait(false)
-            ) {
+            )
+            {
                 return false;
             }
 
@@ -69,12 +71,14 @@ namespace Microsoft.CodeAnalysis.CSharp.BraceCompletion
             int position,
             Document document,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var syntaxFactsService = document.GetRequiredLanguageService<ISyntaxFactsService>();
             if (
                 ParentIsSkippedTokensTriviaOrNull(syntaxFactsService, token)
                 || !IsValidOpeningBraceToken(token)
-            ) {
+            )
+            {
                 return SpecializedTasks.False;
             }
 

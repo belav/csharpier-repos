@@ -129,7 +129,8 @@ namespace JIT.HardwareIntrinsics.Arm
                     (alignment != 16 && alignment != 8)
                     || (alignment * 2) < sizeOfinArray1
                     || (alignment * 2) < sizeOfoutArray
-                ) {
+                )
+                {
                     throw new ArgumentException("Invalid value of alignment");
                 }
 
@@ -188,7 +189,8 @@ namespace JIT.HardwareIntrinsics.Arm
 
             public void RunStructFldScenario(
                 SimpleUnaryOpTest__LeadingZeroCount_Vector64_SByte testClass
-            ) {
+            )
+            {
                 var result = AdvSimd.LeadingZeroCount(_fld1);
 
                 Unsafe.Write(testClass._dataTable.outArrayPtr, result);
@@ -197,7 +199,8 @@ namespace JIT.HardwareIntrinsics.Arm
 
             public void RunStructFldScenario_Load(
                 SimpleUnaryOpTest__LeadingZeroCount_Vector64_SByte testClass
-            ) {
+            )
+            {
                 fixed (Vector64<SByte>* pFld1 = &_fld1)
                 {
                     var result = AdvSimd.LeadingZeroCount(AdvSimd.LoadVector64((SByte*)(pFld1)));
@@ -476,7 +479,8 @@ namespace JIT.HardwareIntrinsics.Arm
             Vector64<SByte> op1,
             void* result,
             [CallerMemberName] string method = ""
-        ) {
+        )
+        {
             SByte[] inArray1 = new SByte[Op1ElementCount];
             SByte[] outArray = new SByte[RetElementCount];
 
@@ -513,7 +517,8 @@ namespace JIT.HardwareIntrinsics.Arm
             SByte[] firstOp,
             SByte[] result,
             [CallerMemberName] string method = ""
-        ) {
+        )
+        {
             bool succeeded = true;
 
             for (var i = 0; i < RetElementCount; i++)

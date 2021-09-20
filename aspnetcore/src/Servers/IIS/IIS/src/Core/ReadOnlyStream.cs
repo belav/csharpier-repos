@@ -57,7 +57,8 @@ namespace Microsoft.AspNetCore.Server.IIS.Core
             int offset,
             int count,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             throw new NotSupportedException();
         }
     }

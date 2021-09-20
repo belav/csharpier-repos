@@ -107,7 +107,8 @@ namespace System.Reflection.Emit
             UnmanagedType elemType,
             int sizeConst,
             int sizeParamIndex
-        ) {
+        )
+        {
             UnmanagedMarshal res = new UnmanagedMarshal(UnmanagedType.LPArray, elemType);
             res.count = sizeConst;
             res.param_num = sizeParamIndex;

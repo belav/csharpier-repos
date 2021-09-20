@@ -535,7 +535,8 @@ namespace Microsoft.CodeAnalysis
         private static IEnumerable<SyntaxAnnotation> GetAnnotationsSlow(
             SyntaxAnnotation[] annotations,
             string annotationKind
-        ) {
+        )
+        {
             foreach (var annotation in annotations)
             {
                 if (annotation.Kind == annotationKind)
@@ -565,7 +566,8 @@ namespace Microsoft.CodeAnalysis
         private static IEnumerable<SyntaxAnnotation> GetAnnotationsSlow(
             SyntaxAnnotation[] annotations,
             IEnumerable<string> annotationKinds
-        ) {
+        )
+        {
             foreach (var annotation in annotations)
             {
                 if (annotationKinds.Contains(annotation.Kind))
@@ -659,7 +661,8 @@ namespace Microsoft.CodeAnalysis
             static void processStack(
                 TextWriter writer,
                 ArrayBuilder<(GreenNode node, bool leading, bool trailing)> stack
-            ) {
+            )
+            {
                 while (stack.Count > 0)
                 {
                     var current = stack.Pop();
@@ -898,7 +901,8 @@ namespace Microsoft.CodeAnalysis
                     node1Child != null
                     && node2Child != null
                     && !node1Child.IsEquivalentTo(node2Child)
-                ) {
+                )
+                {
                     return false;
                 }
             }
@@ -959,7 +963,8 @@ namespace Microsoft.CodeAnalysis
         public static GreenNode? CreateList<TFrom>(
             IReadOnlyList<TFrom> list,
             Func<TFrom, GreenNode> select
-        ) {
+        )
+        {
             switch (list.Count)
             {
                 case 0:
@@ -1032,7 +1037,8 @@ namespace Microsoft.CodeAnalysis
             NodeFlags flags,
             GreenNode? child1,
             GreenNode? child2
-        ) {
+        )
+        {
             Debug.Assert(this.IsCacheable);
 
             return this.RawKind == kind
@@ -1047,7 +1053,8 @@ namespace Microsoft.CodeAnalysis
             GreenNode? child1,
             GreenNode? child2,
             GreenNode? child3
-        ) {
+        )
+        {
             Debug.Assert(this.IsCacheable);
 
             return this.RawKind == kind

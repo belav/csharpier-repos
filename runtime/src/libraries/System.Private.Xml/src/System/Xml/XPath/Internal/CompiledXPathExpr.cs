@@ -85,7 +85,8 @@ namespace MS.Internal.Xml.XPath
             XmlCaseOrder caseOrder,
             string lang,
             XmlDataType dataType
-        ) {
+        )
+        {
             AddSort(expr, new XPathComparerHelper(order, caseOrder, lang, dataType));
         }
 
@@ -127,7 +128,8 @@ namespace MS.Internal.Xml.XPath
             public UndefinedXsltContext(IXmlNamespaceResolver nsResolver)
                 : base( /*dummy*/
                     false
-                ) {
+                )
+            {
                 _nsResolver = nsResolver;
             }
             //----- Namespace support -----
@@ -158,7 +160,8 @@ namespace MS.Internal.Xml.XPath
                 string prefix,
                 string name,
                 XPathResultType[] ArgTypes
-            ) {
+            )
+            {
                 throw XPathException.Create(SR.Xp_UndefinedXsltContext);
             }
             public override bool Whitespace
@@ -188,7 +191,8 @@ namespace MS.Internal.Xml.XPath
             XmlCaseOrder caseOrder,
             string? lang,
             XmlDataType dataType
-        ) {
+        )
+        {
             if (lang == null)
             {
                 _cinfo = CultureInfo.CurrentCulture;

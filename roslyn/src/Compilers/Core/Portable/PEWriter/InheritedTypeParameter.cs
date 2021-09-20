@@ -20,7 +20,8 @@ namespace Microsoft.Cci
             ushort index,
             ITypeDefinition inheritingType,
             IGenericTypeParameter parentParameter
-        ) {
+        )
+        {
             _index = index;
             _inheritingType = inheritingType;
             _parentParameter = parentParameter;

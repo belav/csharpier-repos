@@ -41,7 +41,8 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.RenameTracking
             Solution newSolution,
             Solution oldSolution,
             bool showCheckBoxes = true
-        ) {
+        )
+        {
             Called = true;
             Title = title;
             HelpString = helpString;

@@ -319,7 +319,8 @@ namespace System.Linq.Expressions.Tests
             T value,
             bool useInterpreter,
             T original = default(T)
-        ) {
+        )
+        {
             ParameterExpression @ref = Expression.Parameter(typeof(T).MakeByRefType());
             ParameterExpression val = Expression.Parameter(typeof(T));
 
@@ -365,7 +366,8 @@ namespace System.Linq.Expressions.Tests
             object value,
             object increment,
             object result
-        ) {
+        )
+        {
             Type type = value.GetType();
 
             MethodInfo method = typeof(ParameterTests).GetMethod(
@@ -382,7 +384,8 @@ namespace System.Linq.Expressions.Tests
             T value,
             T increment,
             T result
-        ) {
+        )
+        {
             ParameterExpression param = Expression.Parameter(typeof(T).MakeByRefType());
             ByRefFunc<T> addOneInPlace = Expression.Lambda<ByRefFunc<T>>(
                     Expression.AddAssign(param, Expression.Constant(increment, typeof(T))),

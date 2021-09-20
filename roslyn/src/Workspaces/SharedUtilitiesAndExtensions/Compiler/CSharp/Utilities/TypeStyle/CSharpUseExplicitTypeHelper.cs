@@ -45,7 +45,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Utilities
         public override bool ShouldAnalyzeVariableDeclaration(
             VariableDeclarationSyntax variableDeclaration,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             if (!variableDeclaration.Type.StripRefIfNeeded().IsVar)
             {
                 // If the type is not 'var', this analyze has no work to do
@@ -60,7 +61,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Utilities
             ForEachStatementSyntax forEachStatement,
             SemanticModel semanticModel,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             if (!forEachStatement.Type.StripRefIfNeeded().IsVar)
             {
                 // If the type is not 'var', this analyze has no work to do
@@ -80,7 +82,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Utilities
             SemanticModel semanticModel,
             OptionSet optionSet,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             // var (x, y) = e;
             // foreach (var (x, y) in e) ...
             if (
@@ -88,7 +91,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Utilities
                     SyntaxKind.DeclarationExpression,
                     out DeclarationExpressionSyntax? declExpression
                 ) && declExpression.Designation.IsKind(SyntaxKind.ParenthesizedVariableDesignation)
-            ) {
+            )
+            {
                 return true;
             }
 
@@ -109,7 +113,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Utilities
                     SyntaxKind.ForStatement,
                     SyntaxKind.UsingStatement
                 )
-            ) {
+            )
+            {
                 // check assignment for variable declarations.
                 var variable = variableDeclaration.Variables.First();
                 RoslynDebug.AssertNotNull(variable.Initializer);
@@ -122,21 +127,24 @@ namespace Microsoft.CodeAnalysis.CSharp.Utilities
                         optionSet,
                         cancellationToken
                     )
-                ) {
+                )
+                {
                     return false;
                 }
 
                 // This error case is handled by a separate code fix (UseExplicitTypeForConst).
                 if (
                     (variableDeclaration.Parent as LocalDeclarationStatementSyntax)?.IsConst == true
-                ) {
+                )
+                {
                     return false;
                 }
             }
             else if (
                 typeName.Parent is ForEachStatementSyntax foreachStatement
                 && foreachStatement.Type == typeName
-            ) {
+            )
+            {
                 if (
                     !AssignmentSupportsStylePreference(
                         foreachStatement.Identifier,
@@ -146,7 +154,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Utilities
                         optionSet,
                         cancellationToken
                     )
-                ) {
+                )
+                {
                     return false;
                 }
             }
@@ -158,7 +167,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Utilities
             DeclarationExpressionSyntax declaration,
             SemanticModel semanticModel,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             if (!declaration.Type.IsVar)
             {
                 // If the type is not 'var', this analyze has no work to do
@@ -187,7 +197,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Utilities
             SemanticModel semanticModel,
             OptionSet optionSet,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             // is or contains an anonymous type
             // cases :
             //        var anon = new { Num = 1 };

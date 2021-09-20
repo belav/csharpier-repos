@@ -397,7 +397,8 @@ namespace System.Runtime.Serialization
                 if (
                     memberName.Length == count
                     && string.CompareOrdinal(value, index, memberName, 0, count) == 0
-                ) {
+                )
+                {
                     return Values![i];
                 }
             }
@@ -440,14 +441,16 @@ namespace System.Runtime.Serialization
             XmlWriterDelegator xmlWriter,
             object obj,
             XmlObjectSerializerWriteContext? context
-        ) {
+        )
+        {
             WriteEnumValue(xmlWriter, obj);
         }
 
         public override object ReadXmlValue(
             XmlReaderDelegator xmlReader,
             XmlObjectSerializerReadContext? context
-        ) {
+        )
+        {
             object obj = ReadEnumValue(xmlReader);
             if (context != null)
                 context.AddNewObject(obj);

@@ -36,7 +36,8 @@ namespace Microsoft.CodeAnalysis.VisualBasic.ExpressionEvaluator
                 TokenKind kind,
                 string text = null,
                 SyntaxKind keywordKind = SyntaxKind.None
-            ) {
+            )
+            {
                 Kind = kind;
                 Text = text;
                 KeywordKind = keywordKind;
@@ -130,12 +131,14 @@ namespace Microsoft.CodeAnalysis.VisualBasic.ExpressionEvaluator
                 if (
                     length > 0
                     && UnicodeCharacterUtilities.IsIdentifierStartCharacter(_text[_offset])
-                ) {
+                )
+                {
                     int n = 1;
                     while (
                         n < length
                         && UnicodeCharacterUtilities.IsIdentifierPartCharacter(_text[_offset + n])
-                    ) {
+                    )
+                    {
                         n++;
                     }
                     return n;

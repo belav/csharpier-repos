@@ -89,7 +89,8 @@ namespace Microsoft.AspNetCore.Antiforgery
             this ILogger logger,
             string formFieldName,
             string? headerName
-        ) {
+        )
+        {
             _missingRequestToken(logger, formFieldName, headerName, null);
         }
 

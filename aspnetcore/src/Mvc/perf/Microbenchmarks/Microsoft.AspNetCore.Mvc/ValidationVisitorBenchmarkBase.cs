@@ -59,7 +59,8 @@ namespace Microsoft.AspNetCore.Mvc.Microbenchmarks
 
         protected static ModelMetadataProvider CreateModelMetadataProvider(
             bool addHasValidatorsProvider
-        ) {
+        )
+        {
             var detailsProviders = new List<IMetadataDetailsProvider>
             {
                 new DefaultValidationMetadataProvider(),

@@ -9,7 +9,8 @@ namespace System.CommandLine.Help
             : base(
                 new[] { "-h", "/h", "--help", "-?", "/?" },
                 Resources.Instance.HelpOptionDescription()
-            ) {
+            )
+        {
             DisallowBinding = true;
         }
 

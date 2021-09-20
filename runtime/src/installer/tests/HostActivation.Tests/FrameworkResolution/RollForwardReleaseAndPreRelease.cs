@@ -92,7 +92,8 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation.FrameworkResolution
             bool? applyPatches,
             bool rollForwardToPreRelease,
             string resolvedFramework
-        ) {
+        )
+        {
             RunTest("4.1.1", rollForward, applyPatches, rollForwardToPreRelease)
                 .ShouldHaveResolvedFramework(MicrosoftNETCoreApp, resolvedFramework);
         }
@@ -136,7 +137,8 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation.FrameworkResolution
             bool? applyPatches,
             bool rollForwardToPreRelease,
             string resolvedFramework
-        ) {
+        )
+        {
             RunTest("4.1.0", rollForward, applyPatches, rollForwardToPreRelease)
                 .ShouldHaveResolvedFrameworkOrFailToFind(MicrosoftNETCoreApp, resolvedFramework);
         }
@@ -165,7 +167,8 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation.FrameworkResolution
             bool? applyPatches,
             bool rollForwardToPreRelease,
             string resolvedFramework
-        ) {
+        )
+        {
             RunTest("4.0.0", rollForward, applyPatches, rollForwardToPreRelease)
                 .ShouldHaveResolvedFramework(MicrosoftNETCoreApp, resolvedFramework);
         }
@@ -186,7 +189,8 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation.FrameworkResolution
             bool? applyPatches,
             bool rollForwardToPreRelease,
             string resolvedFramework
-        ) {
+        )
+        {
             RunTest("3.0.0", rollForward, applyPatches, rollForwardToPreRelease)
                 .ShouldHaveResolvedFramework(MicrosoftNETCoreApp, resolvedFramework);
         }
@@ -218,7 +222,8 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation.FrameworkResolution
             string rollForward,
             bool? applyPatches,
             string resolvedFramework
-        ) {
+        )
+        {
             RunTest("5.1.0-preview.1", rollForward, applyPatches)
                 .ShouldHaveResolvedFramework(MicrosoftNETCoreApp, resolvedFramework);
         }
@@ -241,7 +246,8 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation.FrameworkResolution
             string rollForward,
             bool? applyPatches,
             string resolvedFramework
-        ) {
+        )
+        {
             RunTest("5.1.0-preview.0", rollForward, applyPatches)
                 .ShouldHaveResolvedFrameworkOrFailToFind(MicrosoftNETCoreApp, resolvedFramework);
         }
@@ -261,7 +267,8 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation.FrameworkResolution
             string rollForward,
             bool? applyPatches,
             string resolvedFramework
-        ) {
+        )
+        {
             RunTest("5.0.0-preview.5", rollForward, applyPatches)
                 .ShouldHaveResolvedFramework(MicrosoftNETCoreApp, resolvedFramework);
         }
@@ -277,7 +284,8 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation.FrameworkResolution
             string rollForward,
             bool? applyPatches,
             string resolvedFramework
-        ) {
+        )
+        {
             RunTest("4.9.0-preview.6", rollForward, applyPatches)
                 .ShouldHaveResolvedFramework(MicrosoftNETCoreApp, resolvedFramework);
         }
@@ -288,7 +296,8 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation.FrameworkResolution
         [InlineData(true)]
         public void RollForwardOnPatch_FromPreReleaseToRelease_RollForwardToPreRelease(
             bool rollForwardToPreRelease
-        ) {
+        )
+        {
             // Defaults
             RunTest(
                     "5.1.0-preview.0",
@@ -313,7 +322,8 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation.FrameworkResolution
             string rollForward,
             bool? applyPatches,
             bool rollForwardToPreRelease = false
-        ) {
+        )
+        {
             return RunTest(
                 SharedState.DotNetWithNETCoreAppReleaseAndPreRelease,
                 SharedState.FrameworkReferenceApp,

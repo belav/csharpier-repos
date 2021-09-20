@@ -129,7 +129,8 @@ namespace System.Web.Razor.Parser
             string content,
             HtmlSymbolType type,
             IEnumerable<RazorError> errors
-        ) {
+        )
+        {
             return new HtmlSymbol(location, content, type, errors);
         }
     }

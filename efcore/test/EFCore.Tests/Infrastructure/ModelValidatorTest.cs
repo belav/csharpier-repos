@@ -1174,7 +1174,8 @@ namespace Microsoft.EntityFrameworkCore.Infrastructure
         [InlineData(ChangeTrackingStrategy.ChangingAndChangedNotificationsWithOriginalValues)]
         public virtual void Detects_non_notifying_entities(
             ChangeTrackingStrategy changeTrackingStrategy
-        ) {
+        )
+        {
             var model = CreateConventionlessModelBuilder().Model;
             var entityType = model.AddEntityType(typeof(NonNotifyingEntity));
             var id = entityType.AddProperty("Id");
@@ -1197,7 +1198,8 @@ namespace Microsoft.EntityFrameworkCore.Infrastructure
         [InlineData(ChangeTrackingStrategy.ChangingAndChangedNotificationsWithOriginalValues)]
         public virtual void Detects_changed_only_notifying_entities(
             ChangeTrackingStrategy changeTrackingStrategy
-        ) {
+        )
+        {
             var model = CreateConventionlessModelBuilder().Model;
             var entityType = model.AddEntityType(typeof(ChangedOnlyEntity));
             var id = entityType.AddProperty("Id");
@@ -1222,7 +1224,8 @@ namespace Microsoft.EntityFrameworkCore.Infrastructure
         [InlineData(ChangeTrackingStrategy.ChangingAndChangedNotificationsWithOriginalValues)]
         public virtual void Passes_for_fully_notifying_entities(
             ChangeTrackingStrategy changeTrackingStrategy
-        ) {
+        )
+        {
             var model = CreateConventionlessModelBuilder().Model;
             var entityType = model.AddEntityType(typeof(FullNotificationEntity));
             var id = entityType.AddProperty("Id");
@@ -1238,7 +1241,8 @@ namespace Microsoft.EntityFrameworkCore.Infrastructure
         [InlineData(ChangeTrackingStrategy.ChangedNotifications)]
         public virtual void Passes_for_changed_only_entities_with_snapshot_or_changed_only_tracking(
             ChangeTrackingStrategy changeTrackingStrategy
-        ) {
+        )
+        {
             var model = CreateConventionlessModelBuilder().Model;
             var entityType = model.AddEntityType(typeof(ChangedOnlyEntity));
             var id = entityType.AddProperty("Id");
@@ -1493,7 +1497,8 @@ namespace Microsoft.EntityFrameworkCore.Infrastructure
         [InlineData(false)]
         public virtual void Detects_reference_navigations_in_seeds2(
             bool sensitiveDataLoggingEnabled
-        ) {
+        )
+        {
             var modelBuilder = CreateConventionalModelBuilder(sensitiveDataLoggingEnabled);
             modelBuilder.Entity<Order>(
                 e =>
@@ -1528,7 +1533,8 @@ namespace Microsoft.EntityFrameworkCore.Infrastructure
         [InlineData(false)]
         public virtual void Detects_collection_navigations_in_seeds(
             bool sensitiveDataLoggingEnabled
-        ) {
+        )
+        {
             var modelBuilder = CreateConventionalModelBuilder(sensitiveDataLoggingEnabled);
             modelBuilder.Entity<SampleEntity>(
                 e =>

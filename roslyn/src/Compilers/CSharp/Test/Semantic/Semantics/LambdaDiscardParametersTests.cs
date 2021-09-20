@@ -152,7 +152,8 @@ public class C
             string expectedType,
             CodeAnalysis.NullableAnnotation expectedAnnotation,
             SemanticModel model
-        ) {
+        )
+        {
             Assert.Null(model.GetSymbolInfo(underscore).Symbol);
             var symbol1 = model.GetDeclaredSymbol(underscore);
             Assert.Equal(expectedType, symbol1.Type.ToTestDisplayString());

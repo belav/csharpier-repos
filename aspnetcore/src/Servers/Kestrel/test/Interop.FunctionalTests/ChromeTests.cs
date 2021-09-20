@@ -119,7 +119,8 @@ namespace Interop.FunctionalTests
                                                 HttpMethods.IsPost(
                                                     context.Request.Query["TestMethod"]
                                                 )
-                                            ) {
+                                            )
+                                            {
                                                 await context.Response.WriteAsync(_postHtml);
                                             }
                                             else
@@ -158,7 +159,8 @@ namespace Interop.FunctionalTests
                     Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location),
                     chromeOptions
                 )
-            ) {
+            )
+            {
                 driver.Navigate().GoToUrl(testUrl);
 
                 return driver.PageSource;
@@ -168,7 +170,8 @@ namespace Interop.FunctionalTests
         private void AssertExpectedResponseOrShowDebugInstructions(
             string expectedResponse,
             string actualResponse
-        ) {
+        )
+        {
             try
             {
                 Assert.Contains(expectedResponse, actualResponse);

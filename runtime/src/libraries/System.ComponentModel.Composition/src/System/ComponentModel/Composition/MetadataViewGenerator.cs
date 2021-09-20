@@ -167,7 +167,8 @@ namespace System.ComponentModel.Composition
         public static TMetadataView CreateMetadataView<TMetadataView>(
             MetadataViewFactory metadataViewFactory,
             IDictionary<string, object?> metadata
-        ) {
+        )
+        {
             if (metadataViewFactory == null)
             {
                 throw new ArgumentNullException(nameof(metadataViewFactory));
@@ -187,7 +188,8 @@ namespace System.ComponentModel.Composition
             this ILGenerator IL,
             DefaultValueAttribute[] attrs,
             LocalBuilder local
-        ) {
+        )
+        {
             if (attrs.Length > 0)
             {
                 DefaultValueAttribute defaultAttribute = attrs[0];
@@ -195,7 +197,8 @@ namespace System.ComponentModel.Composition
                 if (
                     (defaultAttribute.Value != null)
                     && (defaultAttribute.Value.GetType().IsValueType)
-                ) {
+                )
+                {
                     IL.Emit(OpCodes.Box, defaultAttribute.Value.GetType());
                 }
                 IL.Emit(OpCodes.Stloc, local);
@@ -206,7 +209,8 @@ namespace System.ComponentModel.Composition
             this ILGenerator IL,
             LocalBuilder local,
             FieldBuilder field
-        ) {
+        )
+        {
             IL.Emit(OpCodes.Ldarg_0);
             IL.Emit(OpCodes.Ldloc, local);
             IL.Emit(
@@ -220,7 +224,8 @@ namespace System.ComponentModel.Composition
             this ILGenerator IL,
             LocalBuilder local,
             bool flag
-        ) {
+        )
+        {
             IL.Emit(flag ? OpCodes.Ldc_I4_1 : OpCodes.Ldc_I4_0);
             IL.Emit(OpCodes.Stloc, local);
         }

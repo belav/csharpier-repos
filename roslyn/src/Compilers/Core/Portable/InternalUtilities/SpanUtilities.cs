@@ -12,7 +12,8 @@ namespace Microsoft.CodeAnalysis
             this ReadOnlySpan<TElement> span,
             TParam param,
             Func<TElement, TParam, bool> predicate
-        ) {
+        )
+        {
             foreach (var e in span)
             {
                 if (!predicate(e, param))

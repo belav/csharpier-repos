@@ -34,7 +34,8 @@ namespace Microsoft.Extensions.Internal
             MethodInfo methodInfo,
             TypeInfo targetTypeInfo,
             object?[]? parameterDefaultValues
-        ) {
+        )
+        {
             if (methodInfo == null)
             {
                 throw new ArgumentNullException(nameof(methodInfo));
@@ -97,7 +98,8 @@ namespace Microsoft.Extensions.Internal
             MethodInfo methodInfo,
             TypeInfo targetTypeInfo,
             object?[] parameterDefaultValues
-        ) {
+        )
+        {
             if (parameterDefaultValues == null)
             {
                 throw new ArgumentNullException(nameof(parameterDefaultValues));
@@ -231,7 +233,8 @@ namespace Microsoft.Extensions.Internal
             MethodInfo methodInfo,
             TypeInfo targetTypeInfo,
             CoercedAwaitableInfo coercedAwaitableInfo
-        ) {
+        )
+        {
             // Parameters to executor
             var targetParameter = Expression.Parameter(typeof(object), "target");
             var parametersParameter = Expression.Parameter(typeof(object[]), "parameters");

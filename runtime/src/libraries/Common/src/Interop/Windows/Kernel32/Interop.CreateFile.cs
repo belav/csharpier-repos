@@ -39,7 +39,8 @@ internal static partial class Interop
             FileMode dwCreationDisposition,
             int dwFlagsAndAttributes,
             IntPtr hTemplateFile
-        ) {
+        )
+        {
             lpFileName = PathInternal.EnsureExtendedPrefixIfNeeded(lpFileName);
             return CreateFilePrivate(
                 lpFileName,
@@ -58,7 +59,8 @@ internal static partial class Interop
             FileShare dwShareMode,
             FileMode dwCreationDisposition,
             int dwFlagsAndAttributes
-        ) {
+        )
+        {
             lpFileName = PathInternal.EnsureExtendedPrefixIfNeeded(lpFileName);
             return CreateFilePrivate(
                 lpFileName,

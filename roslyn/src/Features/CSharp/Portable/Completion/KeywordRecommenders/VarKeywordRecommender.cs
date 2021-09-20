@@ -20,7 +20,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Completion.KeywordRecommenders
                 || context.IsGlobalStatementContext
                 || context.IsPossibleTupleContext
                 || context.IsAtStartOfPattern
-            ) {
+            )
+            {
                 return true;
             }
 
@@ -31,7 +32,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Completion.KeywordRecommenders
             int position,
             CSharpSyntaxContext context,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             return IsValidContext(context)
               ? ImmutableArray.Create(new RecommendedKeyword("var"))
               : ImmutableArray<RecommendedKeyword>.Empty;

@@ -50,7 +50,8 @@ namespace Microsoft.CodeAnalysis.CSharp.EditAndContinue.UnitTests
             string fileName = "",
             CSharpParseOptions options = null,
             bool removeTags = false
-        ) {
+        )
+        {
             return new SourceWithMarkedNodes(
                 markedSource,
                 s => Parse(s, fileName, options),
@@ -62,7 +63,8 @@ namespace Microsoft.CodeAnalysis.CSharp.EditAndContinue.UnitTests
         internal static Func<SyntaxNode, SyntaxNode> GetSyntaxMapFromMarkers(
             SourceWithMarkedNodes source0,
             SourceWithMarkedNodes source1
-        ) {
+        )
+        {
             return SourceWithMarkedNodes.GetSyntaxMap(source0, source1);
         }
 
@@ -80,7 +82,8 @@ namespace Microsoft.CodeAnalysis.CSharp.EditAndContinue.UnitTests
         internal static Func<SyntaxNode, SyntaxNode> GetSyntaxMapByKind(
             MethodSymbol method0,
             params SyntaxKind[] kinds
-        ) {
+        )
+        {
             return newNode =>
             {
                 foreach (SyntaxKind kind in kinds)
@@ -101,7 +104,8 @@ namespace Microsoft.CodeAnalysis.CSharp.EditAndContinue.UnitTests
         internal static Func<SyntaxNode, SyntaxNode> GetEquivalentNodesMap(
             MethodSymbol method1,
             MethodSymbol method0
-        ) {
+        )
+        {
             var tree1 = method1.Locations[0].SourceTree;
             var tree0 = method0.Locations[0].SourceTree;
             Assert.NotEqual(tree1, tree0);
@@ -158,7 +162,8 @@ namespace Microsoft.CodeAnalysis.CSharp.EditAndContinue.UnitTests
             int rowNumber,
             TableIndex table,
             EditAndContinueOperation operation
-        ) {
+        )
+        {
             return new EditAndContinueLogEntry(MetadataTokens.Handle(table, rowNumber), operation);
         }
 
@@ -170,7 +175,8 @@ namespace Microsoft.CodeAnalysis.CSharp.EditAndContinue.UnitTests
         internal static void CheckEncLog(
             MetadataReader reader,
             params EditAndContinueLogEntry[] rows
-        ) {
+        )
+        {
             AssertEx.Equal(
                 rows,
                 reader.GetEditAndContinueLogEntries(),
@@ -181,7 +187,8 @@ namespace Microsoft.CodeAnalysis.CSharp.EditAndContinue.UnitTests
         internal static void CheckEncLogDefinitions(
             MetadataReader reader,
             params EditAndContinueLogEntry[] rows
-        ) {
+        )
+        {
             AssertEx.Equal(
                 rows,
                 reader.GetEditAndContinueLogEntries().Where(IsDefinition),
@@ -241,7 +248,8 @@ namespace Microsoft.CodeAnalysis.CSharp.EditAndContinue.UnitTests
         internal static void CheckAttributes(
             MetadataReader reader,
             params CustomAttributeRow[] rows
-        ) {
+        )
+        {
             AssertEx.Equal(
                 rows,
                 reader.GetCustomAttributeRows(),
@@ -253,7 +261,8 @@ namespace Microsoft.CodeAnalysis.CSharp.EditAndContinue.UnitTests
             MetadataReader reader,
             IEnumerable<StringHandle> handles,
             params string[] expectedNames
-        ) {
+        )
+        {
             CheckNames(new[] { reader }, handles, expectedNames);
         }
 
@@ -261,7 +270,8 @@ namespace Microsoft.CodeAnalysis.CSharp.EditAndContinue.UnitTests
             IEnumerable<MetadataReader> readers,
             IEnumerable<StringHandle> handles,
             params string[] expectedNames
-        ) {
+        )
+        {
             var actualNames = readers.GetStrings(handles);
             AssertEx.Equal(expectedNames, actualNames);
         }
@@ -270,7 +280,8 @@ namespace Microsoft.CodeAnalysis.CSharp.EditAndContinue.UnitTests
             IList<MetadataReader> readers,
             IEnumerable<(StringHandle Namespace, StringHandle Name)> handles,
             params string[] expectedNames
-        ) {
+        )
+        {
             var actualNames = handles.Select(
                     handlePair =>
                         string.Join(
@@ -328,7 +339,8 @@ namespace Microsoft.CodeAnalysis.CSharp.EditAndContinue.UnitTests
             string outputDirectory,
             CompilationVerifier baseline,
             params CompilationDifference[] diffs
-        ) {
+        )
+        {
             bool IsPortablePdb(ImmutableArray<byte> image) =>
                 image[0] == 'B' && image[1] == 'S' && image[2] == 'J' && image[3] == 'B';
 
@@ -365,7 +377,8 @@ namespace Microsoft.CodeAnalysis.CSharp.EditAndContinue.UnitTests
         internal static CSharpCompilation WithSource(
             this CSharpCompilation compilation,
             CSharpTestSource newSource
-        ) {
+        )
+        {
             return compilation.RemoveAllSyntaxTrees()
                 .AddSyntaxTrees(newSource.GetSyntaxTrees(TestOptions.Regular));
         }
@@ -373,7 +386,8 @@ namespace Microsoft.CodeAnalysis.CSharp.EditAndContinue.UnitTests
         internal static CSharpCompilation WithSource(
             this CSharpCompilation compilation,
             SyntaxTree newTree
-        ) {
+        )
+        {
             return compilation.RemoveAllSyntaxTrees().AddSyntaxTrees(newTree);
         }
     }

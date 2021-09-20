@@ -60,7 +60,8 @@ public struct GenericStructForLdtoken<T>
         V genericMethodValue,
         string toStringResult,
         int inputIntValue
-    ) {
+    )
+    {
         if (!((object)genericValue).Equals(_value))
             return 0;
         if (genericMethodValue.ToString() != toStringResult)

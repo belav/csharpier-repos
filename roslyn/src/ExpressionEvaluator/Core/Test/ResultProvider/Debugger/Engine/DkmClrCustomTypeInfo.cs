@@ -31,7 +31,8 @@ namespace Microsoft.VisualStudio.Debugger.Evaluation.ClrCompilation
         public static DkmClrCustomTypeInfo Create(
             Guid payloadTypeId,
             ReadOnlyCollection<byte> payload
-        ) {
+        )
+        {
             return new DkmClrCustomTypeInfo(payloadTypeId, payload);
         }
 

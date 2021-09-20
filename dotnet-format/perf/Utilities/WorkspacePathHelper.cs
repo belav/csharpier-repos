@@ -8,7 +8,8 @@ namespace Microsoft.CodeAnalysis.Tools.Perf
     {
         internal static (string workspacePath, WorkspaceType workspaceType) GetWorkspaceInfo(
             string workspaceFilePath
-        ) {
+        )
+        {
             var workspacePath = Path.GetFullPath(workspaceFilePath);
 
             WorkspaceType workspaceType;

@@ -86,7 +86,8 @@ namespace Microsoft.AspNetCore.Http
             string appString,
             string concatString,
             string expected
-        ) {
+        )
+        {
             // Arrange
             var appPath = new PathString(appString);
             var concatPath = new PathString(concatString);
@@ -128,7 +129,8 @@ namespace Microsoft.AspNetCore.Http
             string sourcePath,
             string testPath,
             bool expectedResult
-        ) {
+        )
+        {
             var source = new PathString(sourcePath);
             var test = new PathString(testPath);
 
@@ -147,7 +149,8 @@ namespace Microsoft.AspNetCore.Http
             string sourcePath,
             string testPath,
             bool expectedResult
-        ) {
+        )
+        {
             var source = new PathString(sourcePath);
             var test = new PathString(testPath);
 
@@ -177,7 +180,8 @@ namespace Microsoft.AspNetCore.Http
             string testPath,
             StringComparison comparison,
             bool expectedResult
-        ) {
+        )
+        {
             var source = new PathString(sourcePath);
             var test = new PathString(testPath);
 
@@ -207,7 +211,8 @@ namespace Microsoft.AspNetCore.Http
             string testPath,
             StringComparison comparison,
             bool expectedResult
-        ) {
+        )
+        {
             var source = new PathString(sourcePath);
             var test = new PathString(testPath);
 

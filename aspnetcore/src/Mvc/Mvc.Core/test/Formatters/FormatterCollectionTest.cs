@@ -53,7 +53,8 @@ namespace Microsoft.AspNetCore.Mvc.Formatters
             public override Task WriteResponseBodyAsync(
                 OutputFormatterWriteContext context,
                 Encoding selectedEncoding
-            ) {
+            )
+            {
                 throw new NotImplementedException();
             }
         }
@@ -63,7 +64,8 @@ namespace Microsoft.AspNetCore.Mvc.Formatters
             public override Task WriteResponseBodyAsync(
                 OutputFormatterWriteContext context,
                 Encoding selectedEncoding
-            ) {
+            )
+            {
                 throw new NotImplementedException();
             }
         }

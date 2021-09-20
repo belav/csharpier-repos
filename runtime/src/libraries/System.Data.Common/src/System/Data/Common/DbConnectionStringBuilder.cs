@@ -281,7 +281,8 @@ namespace System.Data.Common
             string keyword,
             string? value,
             bool useOdbcRules
-        ) {
+        )
+        {
             DbConnectionOptions.AppendKeyValuePairBuilder(builder, keyword, value, useOdbcRules);
         }
 
@@ -330,7 +331,8 @@ namespace System.Data.Common
             if (
                 (GetType() != connectionStringBuilder.GetType())
                 || (CurrentValues.Count != connectionStringBuilder.CurrentValues.Count)
-            ) {
+            )
+            {
                 return false;
             }
             object? value;
@@ -339,7 +341,8 @@ namespace System.Data.Common
                 if (
                     !connectionStringBuilder.CurrentValues.TryGetValue(entry.Key, out value)
                     || !entry.Value.Equals(value)
-                ) {
+                )
+                {
                     return false;
                 }
             }
@@ -539,7 +542,8 @@ namespace System.Data.Common
                                     DbConnectionStringSynonyms.Pwd,
                                     keyword
                                 )
-                            ) {
+                            )
+                            {
                                 useAttributes = new Attribute[]
                                 {
                                     BrowsableAttribute.Yes,
@@ -609,7 +613,8 @@ namespace System.Data.Common
                     if (
                         (attr == null && !attribute.IsDefaultAttribute())
                         || attr?.Match(attribute) == false
-                    ) {
+                    )
+                    {
                         match = false;
                         break;
                     }

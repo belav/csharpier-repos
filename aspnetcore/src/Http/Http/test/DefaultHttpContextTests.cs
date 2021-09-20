@@ -356,7 +356,8 @@ namespace Microsoft.AspNetCore.Http
             object value,
             IFeatureCollection features,
             IEnumerable<PropertyInfo> properties
-        ) {
+        )
+        {
             foreach (var property in properties)
             {
                 if (property.PropertyType == typeof(IFeatureCollection))

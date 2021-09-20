@@ -173,7 +173,8 @@ namespace System.Linq.Expressions.Compiler
         internal void EmitVariableAccess(
             LambdaCompiler lc,
             ReadOnlyCollection<ParameterExpression> vars
-        ) {
+        )
+        {
             if (NearestHoistedLocals != null && vars.Count > 0)
             {
                 // Find what array each variable is on & its index
@@ -533,7 +534,8 @@ namespace System.Linq.Expressions.Compiler
         public static bool Contains(
             this IParameterProvider provider,
             ParameterExpression? parameter
-        ) {
+        )
+        {
             return provider.IndexOf(parameter) >= 0;
         }
     }

@@ -19,7 +19,8 @@ namespace Microsoft.AspNetCore.Server.IntegrationTesting
         protected override async Task<HttpResponseMessage> SendAsync(
             HttpRequestMessage request,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             _logger.LogDebug("Sending {method} {url}", request.Method, request.RequestUri);
             try
             {

@@ -71,7 +71,8 @@ namespace Microsoft.EntityFrameworkCore.Scaffolding.Internal
         public override ScaffoldedModel GenerateModel(
             IModel model,
             ModelCodeGenerationOptions options
-        ) {
+        )
+        {
             Check.NotNull(model, nameof(model));
             Check.NotNull(options, nameof(options));
 

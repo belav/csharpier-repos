@@ -44,7 +44,8 @@ namespace System
             ITypeDescriptorContext context,
             CultureInfo culture,
             object value
-        ) {
+        )
+        {
             if (value is string uriString)
             {
                 if (string.IsNullOrEmpty(uriString))
@@ -73,7 +74,8 @@ namespace System
             CultureInfo culture,
             object value,
             Type destinationType
-        ) {
+        )
+        {
             if (destinationType == null)
             {
                 throw new ArgumentNullException(nameof(destinationType));

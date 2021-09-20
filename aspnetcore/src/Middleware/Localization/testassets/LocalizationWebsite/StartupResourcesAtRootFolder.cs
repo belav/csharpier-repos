@@ -27,7 +27,8 @@ namespace LocalizationWebsite
             IStringLocalizerFactory stringLocalizerFactory,
             IStringLocalizer<StartupResourcesAtRootFolder> startupStringLocalizer,
             IStringLocalizer<Customer> customerStringLocalizer
-        ) {
+        )
+        {
             app.UseRequestLocalization(
                 new RequestLocalizationOptions
                 {

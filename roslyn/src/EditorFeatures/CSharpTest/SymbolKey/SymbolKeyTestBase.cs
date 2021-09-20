@@ -42,7 +42,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.SymbolId
             IEnumerable<ISymbol> newSymbols,
             IEnumerable<ISymbol> originalSymbols,
             CSharpCompilation originalComp
-        ) {
+        )
+        {
             var newlist = newSymbols.OrderBy(s => s.Name).ToList();
             var origlist = originalSymbols.OrderBy(s => s.Name).ToList();
 
@@ -59,7 +60,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.SymbolId
             ITypeSymbol sourceSymbol,
             SemanticModel model,
             CSharpCompilation sourceComp
-        ) {
+        )
+        {
             var typeinfo = model.GetTypeInfo(node);
             ResolveAndVerifySymbol(
                 typeinfo.Type ?? typeinfo.ConvertedType,
@@ -74,7 +76,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.SymbolId
             SemanticModel model,
             CSharpCompilation sourceComp,
             SymbolKeyComparison comparison = SymbolKeyComparison.None
-        ) {
+        )
+        {
             var syminfo = model.GetSymbolInfo(node);
             ResolveAndVerifySymbol(syminfo.Symbol, sourceSymbol, sourceComp, comparison);
         }
@@ -84,7 +87,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.SymbolId
             ISymbol symbol2,
             Compilation compilation2,
             SymbolKeyComparison comparison = SymbolKeyComparison.None
-        ) {
+        )
+        {
             // same ID
             AssertSymbolKeysEqual(symbol1, symbol2, comparison);
 
@@ -101,7 +105,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.SymbolId
             ISymbol originalSymbol,
             Compilation targetCompilation,
             SymbolKeyComparison comparison
-        ) {
+        )
+        {
             var sid = SymbolKey.Create(originalSymbol, CancellationToken.None);
 
             // Verify that serialization works.
@@ -123,7 +128,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.SymbolId
             ISymbol symbol2,
             SymbolKeyComparison comparison,
             bool expectEqual = true
-        ) {
+        )
+        {
             var sid1 = SymbolKey.Create(symbol1, CancellationToken.None);
             var sid2 = SymbolKey.Create(symbol2, CancellationToken.None);
 
@@ -185,7 +191,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.SymbolId
         internal static IEnumerable<ISymbol> GetSourceSymbols(
             Microsoft.CodeAnalysis.CSharp.CSharpCompilation compilation,
             SymbolCategory category
-        ) {
+        )
+        {
             // NYI for local symbols
             var list = GetSourceSymbols(compilation, includeLocal: false);
 
@@ -238,7 +245,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.SymbolId
         internal static IList<ISymbol> GetSourceSymbols(
             CSharpCompilation compilation,
             bool includeLocal
-        ) {
+        )
+        {
             var list = new List<ISymbol>();
             var localDumper = includeLocal ? new LocalSymbolDumper(compilation) : null;
             GetSourceMemberSymbols(
@@ -265,7 +273,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.SymbolId
             INamespaceOrTypeSymbol symbol,
             List<ISymbol> list,
             LocalSymbolDumper localDumper
-        ) {
+        )
+        {
             foreach (var memberSymbol in symbol.GetMembers())
             {
                 list.Add(memberSymbol);
@@ -340,7 +349,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.SymbolId
                     if (
                         node is VariableDeclaratorSyntax declarator
                         && declarator.Initializer != null
-                    ) {
+                    )
+                    {
                         var model = _compilation.GetSemanticModel(declarator.SyntaxTree);
 
                         // Expression
@@ -405,7 +415,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.SymbolId
                             local.Type.Kind == SymbolKind.ArrayType
                             || local.Type.Kind == SymbolKind.PointerType
                         )
-                    ) {
+                    )
+                    {
                         list.Add(local.Type);
                     }
                 }
@@ -415,7 +426,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.SymbolId
                 BlockSyntax body,
                 SemanticModel model,
                 List<ISymbol> list
-            ) {
+            )
+            {
                 var labels = body.DescendantNodes().OfType<LabeledStatementSyntax>();
                 foreach (var n in labels)
                 {
@@ -440,7 +452,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.SymbolId
                 BlockSyntax body,
                 SemanticModel model,
                 List<ISymbol> list
-            ) {
+            )
+            {
                 IEnumerable<ExpressionSyntax> exprs = body.DescendantNodes()
                     .OfType<SimpleLambdaExpressionSyntax>();
                 IEnumerable<ExpressionSyntax> tmp = body.DescendantNodes()
@@ -462,14 +475,16 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.SymbolId
                 ExpressionSyntax expr,
                 SemanticModel model,
                 List<ISymbol> list
-            ) {
+            )
+            {
                 var kind = expr.Kind();
                 if (
                     kind != SyntaxKind.AnonymousObjectCreationExpression
                     && kind != SyntaxKind.AnonymousMethodExpression
                     && kind != SyntaxKind.ParenthesizedLambdaExpression
                     && kind != SyntaxKind.SimpleLambdaExpression
-                ) {
+                )
+                {
                     return;
                 }
 

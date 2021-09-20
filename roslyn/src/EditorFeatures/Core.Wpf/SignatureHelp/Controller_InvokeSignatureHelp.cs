@@ -16,7 +16,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.IntelliSense.SignatureHel
         CommandState IChainedCommandHandler<InvokeSignatureHelpCommandArgs>.GetCommandState(
             InvokeSignatureHelpCommandArgs args,
             Func<CommandState> nextHandler
-        ) {
+        )
+        {
             AssertIsForeground();
             return nextHandler();
         }
@@ -25,7 +26,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.IntelliSense.SignatureHel
             InvokeSignatureHelpCommandArgs args,
             Action nextHandler,
             CommandExecutionContext context
-        ) {
+        )
+        {
             AssertIsForeground();
             DismissSessionIfActive();
 

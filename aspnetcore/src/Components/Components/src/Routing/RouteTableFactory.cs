@@ -46,7 +46,8 @@ namespace Microsoft.AspNetCore.Components
                     if (
                         typeof(IComponent).IsAssignableFrom(type)
                         && type.IsDefined(typeof(RouteAttribute))
-                    ) {
+                    )
+                    {
                         routeableComponents.Add(type);
                     }
                 }

@@ -94,7 +94,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
 
         internal QuickAttributeChecker AddAliasesIfAny(
             SyntaxList<UsingDirectiveSyntax> usingsSyntax
-        ) {
+        )
+        {
             if (usingsSyntax.Count == 0)
             {
                 return this;
@@ -143,7 +144,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             if (
                 _nameToAttributeMap.TryGetValue(name, out foundAttributes)
                 || _nameToAttributeMap.TryGetValue(name + "Attribute", out foundAttributes)
-            ) {
+            )
+            {
                 return (foundAttributes & pattern) != 0;
             }
 

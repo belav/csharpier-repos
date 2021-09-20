@@ -19,7 +19,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Structure
             ref TemporaryArray<BlockSpan> spans,
             BlockStructureOptionProvider optionProvider,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var startPos = documentationComment.FullSpan.Start;
 
             // The trailing newline is included in XmlDocCommentSyntax, so we need to strip it.

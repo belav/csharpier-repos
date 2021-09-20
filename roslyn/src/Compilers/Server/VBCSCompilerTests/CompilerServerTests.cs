@@ -81,7 +81,8 @@ End Module"
 
         private static IEnumerable<KeyValuePair<string, string>> AddForLoggingEnvironmentVars(
             IEnumerable<KeyValuePair<string, string>> vars
-        ) {
+        )
+        {
             vars = vars ?? new KeyValuePair<string, string>[] {  };
             if (!vars.Where(kvp => kvp.Key == "RoslynCommandLineLogFile").Any())
             {
@@ -114,7 +115,8 @@ End Module"
                     out pipeName,
                     out errorMessage
                 )
-            ) {
+            )
+            {
                 if (hasShared && string.IsNullOrEmpty(pipeName))
                 {
                     throw new InvalidOperationException(
@@ -127,7 +129,8 @@ End Module"
         private static void ReferenceNetstandardDllIfCoreClr(
             TempDirectory currentDirectory,
             List<string> arguments
-        ) {
+        )
+        {
 #if !NET472
             var filePath = Path.Combine(currentDirectory.Path, "netstandard.dll");
             File.WriteAllBytes(filePath, TestMetadata.ResourcesNetStandard20.netstandard);
@@ -139,7 +142,8 @@ End Module"
         private static void CreateFiles(
             TempDirectory currentDirectory,
             IEnumerable<KeyValuePair<string, string>> files
-        ) {
+        )
+        {
             if (files != null)
             {
                 foreach (var pair in files)
@@ -153,7 +157,8 @@ End Module"
         private static T ApplyEnvironmentVariables<T>(
             IEnumerable<KeyValuePair<string, string>> environmentVariables,
             Func<T> func
-        ) {
+        )
+        {
             if (environmentVariables == null)
             {
                 return func();
@@ -186,7 +191,8 @@ End Module"
         private static (T Result, string Output) UseTextWriter<T>(
             Encoding encoding,
             Func<TextWriter, T> func
-        ) {
+        )
+        {
             MemoryStream memoryStream;
             TextWriter writer;
             if (encoding == null)
@@ -223,7 +229,8 @@ End Module"
             IEnumerable<KeyValuePair<string, string>> additionalEnvironmentVars = null,
             Encoding redirectEncoding = null,
             bool shouldRunOnServer = true
-        ) {
+        )
+        {
             var arguments = new List<string>(argumentsSingle.Split(' '));
 
             // This is validating that localization to a specific locale works no matter what the locale of the
@@ -277,7 +284,8 @@ End Module"
         private async Task<(byte[] assemblyBytes, string finalFlags)> CompileAndGetBytes(
             string source,
             string flags
-        ) {
+        )
+        {
             // Setup
             var tempDir = Temp.CreateDirectory();
             var srcFile = tempDir.CreateFile("test.cs").WriteAllText(source).Path;
@@ -342,7 +350,8 @@ End Module"
             (int ExitCode, string Output) result,
             TempDirectory path,
             string expectedOutput
-        ) {
+        )
+        {
             using (var resultFile = GetResultFile(path, "hello.exe"))
             {
                 VerifyResult(result);
@@ -1328,7 +1337,8 @@ class Hello
             string pipeName,
             int i,
             TempDirectory compilationDir
-        ) {
+        )
+        {
             string sourceFile;
             string exeFileName;
             string prefix;

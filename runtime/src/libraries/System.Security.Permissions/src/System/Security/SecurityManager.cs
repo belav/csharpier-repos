@@ -30,7 +30,8 @@ namespace System.Security
         public static void GetZoneAndOrigin(
             out System.Collections.ArrayList zone,
             out System.Collections.ArrayList origin
-        ) {
+        )
+        {
             zone = default(System.Collections.ArrayList);
             origin = default(System.Collections.ArrayList);
         }
@@ -66,7 +67,8 @@ namespace System.Security
             PermissionSet optPset,
             PermissionSet denyPset,
             out PermissionSet denied
-        ) {
+        )
+        {
             denied = default(System.Security.PermissionSet);
             return default(PermissionSet);
         }

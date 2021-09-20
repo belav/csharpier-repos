@@ -325,7 +325,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
         internal override TResult Accept<TArgument, TResult>(
             CSharpSymbolVisitor<TArgument, TResult> visitor,
             TArgument argument
-        ) {
+        )
+        {
             return visitor.VisitErrorType(this, argument);
         }
 
@@ -387,7 +388,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
 
         internal override ImmutableArray<NamedTypeSymbol> InterfacesNoUseSiteDiagnostics(
             ConsList<TypeSymbol>? basesBeingResolved
-        ) {
+        )
+        {
             return ImmutableArray<NamedTypeSymbol>.Empty;
         }
 
@@ -398,20 +400,23 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
 
         internal override NamedTypeSymbol? GetDeclaredBaseType(
             ConsList<TypeSymbol> basesBeingResolved
-        ) {
+        )
+        {
             return null;
         }
 
         internal override ImmutableArray<NamedTypeSymbol> GetDeclaredInterfaces(
             ConsList<TypeSymbol> basesBeingResolved
-        ) {
+        )
+        {
             return ImmutableArray<NamedTypeSymbol>.Empty;
         }
 
         protected override NamedTypeSymbol ConstructCore(
             ImmutableArray<TypeWithAnnotations> typeArguments,
             bool unbound
-        ) {
+        )
+        {
             return new ConstructedErrorTypeSymbol(this, typeArguments);
         }
 
@@ -505,7 +510,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
 
         protected sealed override ITypeSymbol CreateITypeSymbol(
             CodeAnalysis.NullableAnnotation nullableAnnotation
-        ) {
+        )
+        {
             Debug.Assert(nullableAnnotation != DefaultNullableAnnotation);
             return new PublicModel.ErrorTypeSymbol(this, nullableAnnotation);
         }

@@ -33,7 +33,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Simplification
             SemanticModel semanticModel,
             OptionSet optionSet,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             // If annotations are enabled, there's no further simplification to do
             var context = semanticModel.GetNullableContext(node.Span.End);
 

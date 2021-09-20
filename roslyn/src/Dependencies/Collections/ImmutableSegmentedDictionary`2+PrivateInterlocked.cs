@@ -16,7 +16,8 @@ namespace Microsoft.CodeAnalysis.Collections
         {
             internal static ImmutableSegmentedDictionary<TKey, TValue> VolatileRead(
                 in ImmutableSegmentedDictionary<TKey, TValue> location
-            ) {
+            )
+            {
                 var dictionary = Volatile.Read(ref Unsafe.AsRef(in location._dictionary));
                 if (dictionary is null)
                     return default;
@@ -27,7 +28,8 @@ namespace Microsoft.CodeAnalysis.Collections
             internal static ImmutableSegmentedDictionary<TKey, TValue> InterlockedExchange(
                 ref ImmutableSegmentedDictionary<TKey, TValue> location,
                 ImmutableSegmentedDictionary<TKey, TValue> value
-            ) {
+            )
+            {
                 var dictionary = Interlocked.Exchange(
                     ref Unsafe.AsRef(in location._dictionary),
                     value._dictionary
@@ -42,7 +44,8 @@ namespace Microsoft.CodeAnalysis.Collections
                 ref ImmutableSegmentedDictionary<TKey, TValue> location,
                 ImmutableSegmentedDictionary<TKey, TValue> value,
                 ImmutableSegmentedDictionary<TKey, TValue> comparand
-            ) {
+            )
+            {
                 var dictionary = Interlocked.CompareExchange(
                     ref Unsafe.AsRef(in location._dictionary),
                     value._dictionary,

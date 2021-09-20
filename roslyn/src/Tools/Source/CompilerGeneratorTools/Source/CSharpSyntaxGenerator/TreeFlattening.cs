@@ -29,7 +29,8 @@ namespace CSharpSyntaxGenerator
             List<TreeTypeChild> fieldsAndChoices,
             List<Field> fields,
             bool makeOptional
-        ) {
+        )
+        {
             foreach (var fieldOrChoice in fieldsAndChoices)
             {
                 switch (fieldOrChoice)

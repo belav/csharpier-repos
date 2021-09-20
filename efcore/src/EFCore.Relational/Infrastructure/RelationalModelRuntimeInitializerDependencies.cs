@@ -55,7 +55,8 @@ namespace Microsoft.EntityFrameworkCore.Infrastructure
         public RelationalModelRuntimeInitializerDependencies(
             RelationalModelDependencies singletonModelDependencies,
             IRelationalAnnotationProvider relationalAnnotationProvider
-        ) {
+        )
+        {
             Check.NotNull(singletonModelDependencies, nameof(singletonModelDependencies));
             Check.NotNull(relationalAnnotationProvider, nameof(relationalAnnotationProvider));
 

@@ -40,7 +40,8 @@ namespace System.Runtime.Intrinsics.X86
             Vector128<long> left,
             Vector128<long> right,
             byte control
-        ) {
+        )
+        {
             throw new PlatformNotSupportedException();
         }
         /// <summary>
@@ -51,7 +52,8 @@ namespace System.Runtime.Intrinsics.X86
             Vector128<ulong> left,
             Vector128<ulong> right,
             byte control
-        ) {
+        )
+        {
             throw new PlatformNotSupportedException();
         }
     }

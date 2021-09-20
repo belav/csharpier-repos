@@ -32,7 +32,8 @@ namespace Microsoft.AspNetCore.Mvc.ModelBinding
         [InlineData(typeof(FlagsEnum))]
         public async Task BindModel_AddsErrorToModelState_ForEmptyValue_AndNonNullableEnumTypes(
             Type modelType
-        ) {
+        )
+        {
             // Arrange
             var message = "The value '' is invalid.";
             var (bindingContext, binder) = GetBinderAndContext(modelType, valueProviderValue: "");
@@ -140,7 +141,8 @@ namespace Microsoft.AspNetCore.Mvc.ModelBinding
         public async Task BindModel_AddsErrorToModelState_ForInvalidEnumValues(
             Type modelType,
             string suppliedValue
-        ) {
+        )
+        {
             // Arrange
             var message = $"The value '{suppliedValue}' is invalid.";
             var (bindingContext, binder) = GetBinderAndContext(
@@ -162,7 +164,8 @@ namespace Microsoft.AspNetCore.Mvc.ModelBinding
         private static (DefaultModelBindingContext, IModelBinder) GetBinderAndContext(
             Type modelType,
             object valueProviderValue
-        ) {
+        )
+        {
             var binderProviderContext = new TestModelBinderProviderContext(modelType);
             var modelName = "theModelName";
             var bindingContext = new DefaultModelBindingContext

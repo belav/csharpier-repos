@@ -50,7 +50,8 @@ namespace Microsoft.CodeAnalysis.Test.Utilities
             Compilation compilation,
             IOperation operation,
             int initialIndent = 0
-        ) {
+        )
+        {
             var walker = new OperationTreeVerifier(compilation, operation, initialIndent);
             walker.Visit(operation);
             return walker._builder.ToString();
@@ -384,7 +385,8 @@ namespace Microsoft.CodeAnalysis.Test.Utilities
             bool logElementCount,
             bool logNullForDefault,
             Action<T> arrayElementVisitor
-        ) {
+        )
+        {
             Debug.Assert(!string.IsNullOrEmpty(header));
 
             Indent();
@@ -456,7 +458,8 @@ namespace Microsoft.CodeAnalysis.Test.Utilities
             string header,
             bool logElementCount,
             bool logNullForDefault = false
-        ) {
+        )
+        {
             VisitArrayCommon(
                 list,
                 header,
@@ -471,7 +474,8 @@ namespace Microsoft.CodeAnalysis.Test.Utilities
             string header,
             bool logElementCount,
             bool logNullForDefault = false
-        ) {
+        )
+        {
             VisitArrayCommon(
                 list,
                 header,
@@ -486,7 +490,8 @@ namespace Microsoft.CodeAnalysis.Test.Utilities
             string header,
             bool logElementCount,
             bool logNullForDefault = false
-        ) {
+        )
+        {
             VisitArrayCommon(
                 list,
                 header,
@@ -531,7 +536,8 @@ namespace Microsoft.CodeAnalysis.Test.Utilities
 
         public override void VisitVariableDeclarationGroup(
             IVariableDeclarationGroupOperation operation
-        ) {
+        )
+        {
             var variablesCountStr = $"{operation.Declarations.Length} declarations";
             LogString($"{nameof(IVariableDeclarationGroupOperation)} ({variablesCountStr})");
             LogCommonPropertiesAndNewLine(operation);
@@ -943,7 +949,8 @@ namespace Microsoft.CodeAnalysis.Test.Utilities
         private static void VerifyGetArgumentNamePublicApi(
             HasDynamicArgumentsExpression operation,
             ImmutableArray<string> argumentNames
-        ) {
+        )
+        {
             var length = operation.Arguments.Length;
             if (argumentNames.IsDefaultOrEmpty)
             {
@@ -965,7 +972,8 @@ namespace Microsoft.CodeAnalysis.Test.Utilities
         private static void VerifyGetArgumentRefKindPublicApi(
             HasDynamicArgumentsExpression operation,
             ImmutableArray<RefKind> argumentRefKinds
-        ) {
+        )
+        {
             var length = operation.Arguments.Length;
             if (argumentRefKinds.IsDefault)
             {
@@ -1026,7 +1034,8 @@ namespace Microsoft.CodeAnalysis.Test.Utilities
 
         internal override void VisitPointerIndirectionReference(
             IPointerIndirectionReferenceOperation operation
-        ) {
+        )
+        {
             LogString(nameof(IPointerIndirectionReferenceOperation));
             LogCommonPropertiesAndNewLine(operation);
 
@@ -1094,7 +1103,8 @@ namespace Microsoft.CodeAnalysis.Test.Utilities
                 if (
                     operation.Parent is IMemberReferenceOperation memberReference
                     && memberReference.Instance == operation
-                ) {
+                )
+                {
                     Assert.False(
                         memberReference.Member.IsStatic && !operation.HasErrors(this._compilation)
                     );
@@ -1102,7 +1112,8 @@ namespace Microsoft.CodeAnalysis.Test.Utilities
                 else if (
                     operation.Parent is IInvocationOperation invocation
                     && invocation.Instance == operation
-                ) {
+                )
+                {
                     Assert.False(invocation.TargetMethod.IsStatic);
                 }
             }
@@ -1190,7 +1201,8 @@ namespace Microsoft.CodeAnalysis.Test.Utilities
 
         public override void VisitConditionalAccessInstance(
             IConditionalAccessInstanceOperation operation
-        ) {
+        )
+        {
             LogString(nameof(IConditionalAccessInstanceOperation));
             LogCommonPropertiesAndNewLine(operation);
         }
@@ -1474,7 +1486,8 @@ namespace Microsoft.CodeAnalysis.Test.Utilities
 
         public override void VisitAnonymousObjectCreation(
             IAnonymousObjectCreationOperation operation
-        ) {
+        )
+        {
             LogString(nameof(IAnonymousObjectCreationOperation));
             LogCommonPropertiesAndNewLine(operation);
 
@@ -1522,7 +1535,8 @@ namespace Microsoft.CodeAnalysis.Test.Utilities
 
         public override void VisitObjectOrCollectionInitializer(
             IObjectOrCollectionInitializerOperation operation
-        ) {
+        )
+        {
             LogString(nameof(IObjectOrCollectionInitializerOperation));
             LogCommonPropertiesAndNewLine(operation);
 
@@ -1544,7 +1558,8 @@ namespace Microsoft.CodeAnalysis.Test.Utilities
         )]
         public override void VisitCollectionElementInitializer(
             ICollectionElementInitializerOperation operation
-        ) {
+        )
+        {
             // Kept to ensure that it's never called, as we can't override DefaultVisit in this visitor
             throw ExceptionUtilities.Unreachable;
         }
@@ -1674,7 +1689,8 @@ namespace Microsoft.CodeAnalysis.Test.Utilities
 
         public override void VisitDeconstructionAssignment(
             IDeconstructionAssignmentOperation operation
-        ) {
+        )
+        {
             LogString(nameof(IDeconstructionAssignmentOperation));
             LogCommonPropertiesAndNewLine(operation);
 
@@ -1779,7 +1795,8 @@ namespace Microsoft.CodeAnalysis.Test.Utilities
 
         public override void VisitTypeParameterObjectCreation(
             ITypeParameterObjectCreationOperation operation
-        ) {
+        )
+        {
             LogString(nameof(ITypeParameterObjectCreationOperation));
             LogCommonPropertiesAndNewLine(operation);
 
@@ -2098,7 +2115,8 @@ namespace Microsoft.CodeAnalysis.Test.Utilities
 
         public override void VisitStaticLocalInitializationSemaphore(
             IStaticLocalInitializationSemaphoreOperation operation
-        ) {
+        )
+        {
             LogString(nameof(IStaticLocalInitializationSemaphoreOperation));
             LogSymbol(operation.Local, " (Local Symbol");
             LogString(")");

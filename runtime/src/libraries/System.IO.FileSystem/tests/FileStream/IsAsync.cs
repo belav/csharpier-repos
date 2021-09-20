@@ -28,7 +28,8 @@ namespace System.IO.Tests
                     4096,
                     true
                 )
-            ) {
+            )
+            {
                 Assert.True(fs.IsAsync);
             }
 
@@ -41,7 +42,8 @@ namespace System.IO.Tests
                     4096,
                     false
                 )
-            ) {
+            )
+            {
                 Assert.False(fs.IsAsync);
             }
         }
@@ -58,7 +60,8 @@ namespace System.IO.Tests
                     4096,
                     FileOptions.Asynchronous
                 )
-            ) {
+            )
+            {
                 Assert.True(fs.IsAsync);
             }
 
@@ -71,7 +74,8 @@ namespace System.IO.Tests
                     4096,
                     FileOptions.None
                 )
-            ) {
+            )
+            {
                 Assert.False(fs.IsAsync);
             }
         }

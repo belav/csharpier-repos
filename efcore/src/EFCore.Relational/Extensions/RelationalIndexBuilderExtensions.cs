@@ -47,7 +47,8 @@ namespace Microsoft.EntityFrameworkCore
         public static IndexBuilder<TEntity> HasDatabaseName<TEntity>(
             this IndexBuilder<TEntity> indexBuilder,
             string? name
-        ) {
+        )
+        {
             indexBuilder.Metadata.SetDatabaseName(name);
 
             return indexBuilder;
@@ -80,7 +81,8 @@ namespace Microsoft.EntityFrameworkCore
             this IConventionIndexBuilder indexBuilder,
             string? name,
             bool fromDataAnnotation = false
-        ) {
+        )
+        {
             if (indexBuilder.CanSetDatabaseName(name, fromDataAnnotation))
             {
                 indexBuilder.Metadata.SetDatabaseName(name, fromDataAnnotation);
@@ -177,7 +179,8 @@ namespace Microsoft.EntityFrameworkCore
             this IConventionIndexBuilder indexBuilder,
             string? sql,
             bool fromDataAnnotation = false
-        ) {
+        )
+        {
             if (indexBuilder.CanSetFilter(sql, fromDataAnnotation))
             {
                 indexBuilder.Metadata.SetFilter(sql, fromDataAnnotation);

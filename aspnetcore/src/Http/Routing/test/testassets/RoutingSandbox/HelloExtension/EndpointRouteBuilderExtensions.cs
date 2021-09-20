@@ -17,7 +17,8 @@ namespace Microsoft.AspNetCore.Builder
             this IEndpointRouteBuilder endpoints,
             string pattern,
             string greeter
-        ) {
+        )
+        {
             if (endpoints == null)
             {
                 throw new ArgumentNullException(nameof(endpoints));

@@ -622,7 +622,8 @@ namespace System.Security.Principal
             if (
                 (sidType < WellKnownSidType.NullSid)
                 || (sidType > WellKnownSidType.WinCapabilityRemovableStorageSid)
-            ) {
+            )
+            {
                 throw new ArgumentException(SR.Argument_InvalidValue, nameof(sidType));
             }
 
@@ -633,7 +634,8 @@ namespace System.Security.Principal
             if (
                 (sidType >= WellKnownSidType.AccountAdministratorSid)
                 && (sidType <= WellKnownSidType.AccountRasAndIasServersSid)
-            ) {
+            )
+            {
                 if (domainSid == null)
                 {
                     throw new ArgumentNullException(
@@ -1037,7 +1039,8 @@ namespace System.Security.Principal
         private static IdentityReferenceCollection TranslateToNTAccounts(
             IdentityReferenceCollection sourceSids,
             out bool someFailed
-        ) {
+        )
+        {
             if (sourceSids == null)
             {
                 throw new ArgumentNullException(nameof(sourceSids));
@@ -1101,7 +1104,8 @@ namespace System.Security.Principal
                 if (
                     ReturnCode == Interop.StatusOptions.STATUS_NO_MEMORY
                     || ReturnCode == Interop.StatusOptions.STATUS_INSUFFICIENT_RESOURCES
-                ) {
+                )
+                {
                     throw new OutOfMemoryException();
                 }
                 else if (ReturnCode == Interop.StatusOptions.STATUS_ACCESS_DENIED)
@@ -1111,7 +1115,8 @@ namespace System.Security.Principal
                 else if (
                     ReturnCode == Interop.StatusOptions.STATUS_NONE_MAPPED
                     || ReturnCode == Interop.StatusOptions.STATUS_SOME_NOT_MAPPED
-                ) {
+                )
+                {
                     someFailed = true;
                 }
                 else if (ReturnCode != 0)
@@ -1223,7 +1228,8 @@ namespace System.Security.Principal
             IdentityReferenceCollection sourceSids,
             Type targetType,
             bool forceSuccess
-        ) {
+        )
+        {
             IdentityReferenceCollection result = Translate(
                 sourceSids,
                 targetType,
@@ -1255,7 +1261,8 @@ namespace System.Security.Principal
             IdentityReferenceCollection sourceSids,
             Type targetType,
             out bool someFailed
-        ) {
+        )
+        {
             if (sourceSids == null)
             {
                 throw new ArgumentNullException(nameof(sourceSids));

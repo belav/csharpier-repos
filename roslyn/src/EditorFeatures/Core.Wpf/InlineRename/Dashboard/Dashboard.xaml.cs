@@ -48,7 +48,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.InlineRename
             DashboardViewModel model,
             IEditorFormatMapService editorFormatMapService,
             IWpfTextView textView
-        ) {
+        )
+        {
             _model = model;
             InitializeComponent();
 
@@ -261,7 +262,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.InlineRename
                         RenameShortcutKey.RenameOverloads,
                         StringComparison.OrdinalIgnoreCase
                     )
-                ) {
+                )
+                {
                     this.OverloadsCheckbox.IsChecked = !this.OverloadsCheckbox.IsChecked;
                 }
                 else if (
@@ -270,7 +272,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.InlineRename
                         RenameShortcutKey.SearchInComments,
                         StringComparison.OrdinalIgnoreCase
                     )
-                ) {
+                )
+                {
                     this.CommentsCheckbox.IsChecked = !this.CommentsCheckbox.IsChecked;
                 }
                 else if (
@@ -279,7 +282,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.InlineRename
                         RenameShortcutKey.SearchInStrings,
                         StringComparison.OrdinalIgnoreCase
                     )
-                ) {
+                )
+                {
                     this.StringsCheckbox.IsChecked = !this.StringsCheckbox.IsChecked;
                 }
                 else if (
@@ -288,7 +292,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.InlineRename
                         RenameShortcutKey.PreviewChanges,
                         StringComparison.OrdinalIgnoreCase
                     )
-                ) {
+                )
+                {
                     this.PreviewChangesCheckbox.IsChecked = !this.PreviewChangesCheckbox.IsChecked;
                 }
                 else if (
@@ -297,7 +302,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.InlineRename
                         RenameShortcutKey.RenameFile,
                         StringComparison.OrdinalIgnoreCase
                     )
-                ) {
+                )
+                {
                     this.FileRenameCheckbox.IsChecked = !this.FileRenameCheckbox.IsChecked;
                 }
                 else if (
@@ -306,7 +312,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.InlineRename
                         RenameShortcutKey.Apply,
                         StringComparison.OrdinalIgnoreCase
                     )
-                ) {
+                )
+                {
                     this.Commit();
                 }
             }

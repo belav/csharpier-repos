@@ -22,7 +22,8 @@ namespace Microsoft.CodeAnalysis.CodeGen
             MetadataConstant compileTimeValue,
             ImmutableArray<bool> dynamicTransformFlags,
             ImmutableArray<string> tupleElementNames
-        ) {
+        )
+        {
             RoslynDebug.Assert(!RoslynString.IsNullOrEmpty(name));
             RoslynDebug.Assert(compileTimeValue != null);
 

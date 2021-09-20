@@ -14,7 +14,8 @@ internal static partial class Interop
         internal static unsafe SafeKeyHandle BCryptImportKey(
             SafeAlgorithmHandle hAlg,
             ReadOnlySpan<byte> key
-        ) {
+        )
+        {
             const string BCRYPT_KEY_DATA_BLOB = "KeyDataBlob";
             int keySize = key.Length;
             int blobSize = sizeof(BCRYPT_KEY_DATA_BLOB_HEADER) + keySize;

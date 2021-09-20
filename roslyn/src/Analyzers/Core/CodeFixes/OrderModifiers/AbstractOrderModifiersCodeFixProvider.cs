@@ -31,7 +31,8 @@ namespace Microsoft.CodeAnalysis.OrderModifiers
             ISyntaxFacts syntaxFacts,
             Option2<CodeStyleOption2<string>> option,
             AbstractOrderModifiersHelpers helpers
-        ) {
+        )
+        {
             _syntaxFacts = syntaxFacts;
             _option = option;
             _helpers = helpers;
@@ -65,7 +66,8 @@ namespace Microsoft.CodeAnalysis.OrderModifiers
             ImmutableArray<Diagnostic> diagnostics,
             SyntaxEditor editor,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var tree = await document.GetSyntaxTreeAsync(cancellationToken).ConfigureAwait(false);
             var option = document.Project.AnalyzerOptions.GetOption(
                 _option,
@@ -112,13 +114,12 @@ namespace Microsoft.CodeAnalysis.OrderModifiers
 
         private class MyCodeAction : CustomCodeActions.DocumentChangeAction
         {
-            public MyCodeAction(
-                Func<CancellationToken, Task<Document>> createChangedDocument
-            ) : base(
-                AnalyzersResources.Order_modifiers,
-                createChangedDocument,
-                AnalyzersResources.Order_modifiers
-            ) { }
+            public MyCodeAction(Func<CancellationToken, Task<Document>> createChangedDocument)
+                : base(
+                    AnalyzersResources.Order_modifiers,
+                    createChangedDocument,
+                    AnalyzersResources.Order_modifiers
+                ) { }
         }
     }
 }

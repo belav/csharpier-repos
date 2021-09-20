@@ -19,7 +19,8 @@ namespace System.Web.Http.Validation.Providers
             ModelMetadata metadata,
             IEnumerable<ModelValidatorProvider> validatorProviders,
             IEnumerable<Attribute> attributes
-        ) {
+        )
+        {
             // Types cannot be required; only properties can
             if (metadata.ContainerType == null || String.IsNullOrEmpty(metadata.PropertyName))
             {
@@ -37,7 +38,8 @@ namespace System.Web.Http.Validation.Providers
         internal static bool IsRequiredDataMember(
             Type containerType,
             IEnumerable<Attribute> attributes
-        ) {
+        )
+        {
             DataMemberAttribute dataMemberAttribute = attributes.OfType<DataMemberAttribute>()
                 .FirstOrDefault();
             if (dataMemberAttribute != null)

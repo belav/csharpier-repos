@@ -25,7 +25,8 @@ internal static partial class Interop
             Guid* relatedActivityId,
             int userDataCount,
             EventProvider.EventData* userData
-        ) {
+        )
+        {
             int HResult = EventWriteTransfer_PInvoke(
                 registrationHandle,
                 in eventDescriptor,

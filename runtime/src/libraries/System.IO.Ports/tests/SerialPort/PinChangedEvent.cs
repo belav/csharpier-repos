@@ -30,7 +30,8 @@ namespace System.IO.Ports.Tests
                 SerialPort com2 = new SerialPort(
                     TCSupport.LocalMachineSerialInfo.SecondAvailablePortName
                 )
-            ) {
+            )
+            {
                 PinChangedEventHandler eventHandler = new PinChangedEventHandler(com1);
 
                 Debug.WriteLine("Verifying CtsChanged event");
@@ -78,7 +79,8 @@ namespace System.IO.Ports.Tests
                 SerialPort com2 = new SerialPort(
                     TCSupport.LocalMachineSerialInfo.SecondAvailablePortName
                 )
-            ) {
+            )
+            {
                 PinChangedEventHandler eventHandler = new PinChangedEventHandler(com1);
 
                 // Some null-modem cables have a connection between CD and CSR/CTR, so we need to discard CDChanged events
@@ -125,7 +127,8 @@ namespace System.IO.Ports.Tests
                 SerialPort com2 = new SerialPort(
                     TCSupport.LocalMachineSerialInfo.SecondAvailablePortName
                 )
-            ) {
+            )
+            {
                 PinChangedEventHandler eventHandler = new PinChangedEventHandler(com1);
 
                 Debug.WriteLine("Verifying Break event");
@@ -169,7 +172,8 @@ namespace System.IO.Ports.Tests
                 SerialPort com2 = new SerialPort(
                     TCSupport.LocalMachineSerialInfo.SecondAvailablePortName
                 )
-            ) {
+            )
+            {
                 PinChangedEventHandler eventHandler = new PinChangedEventHandler(com1);
 
                 // Some null-modem cables have a connection between CD and CSR/CTR, so we need to discard CDChanged events

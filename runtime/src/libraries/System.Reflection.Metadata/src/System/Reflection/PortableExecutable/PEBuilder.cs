@@ -52,7 +52,8 @@ namespace System.Reflection.PortableExecutable
                 int relativeVirtualAddress,
                 int sizeOfRawData,
                 int pointerToRawData
-            ) {
+            )
+            {
                 Name = name;
                 Characteristics = characteristics;
                 Builder = builder;
@@ -67,7 +68,8 @@ namespace System.Reflection.PortableExecutable
         protected PEBuilder(
             PEHeaderBuilder header,
             Func<IEnumerable<Blob>, BlobContentId>? deterministicIdProvider
-        ) {
+        )
+        {
             if (header == null)
             {
                 Throw.ArgumentNull(nameof(header));
@@ -314,7 +316,8 @@ namespace System.Reflection.PortableExecutable
             BlobBuilder builder,
             ImmutableArray<SerializedSection> sections,
             out Blob stampFixup
-        ) {
+        )
+        {
             // Machine
             builder.WriteUInt16((ushort)(Header.Machine == 0 ? Machine.I386 : Header.Machine));
 
@@ -347,7 +350,8 @@ namespace System.Reflection.PortableExecutable
             BlobBuilder builder,
             PEDirectoriesBuilder directories,
             ImmutableArray<SerializedSection> sections
-        ) {
+        )
+        {
             builder.WriteUInt16((ushort)(Header.Is32Bit ? PEMagic.PE32 : PEMagic.PE32Plus));
             builder.WriteByte(Header.MajorLinkerVersion);
             builder.WriteByte(Header.MinorLinkerVersion);
@@ -501,7 +505,8 @@ namespace System.Reflection.PortableExecutable
         private void WriteSectionHeaders(
             BlobBuilder builder,
             ImmutableArray<SerializedSection> serializedSections
-        ) {
+        )
+        {
             foreach (var serializedSection in serializedSections)
             {
                 WriteSectionHeader(builder, serializedSection);
@@ -511,7 +516,8 @@ namespace System.Reflection.PortableExecutable
         private static void WriteSectionHeader(
             BlobBuilder builder,
             SerializedSection serializedSection
-        ) {
+        )
+        {
             if (serializedSection.VirtualSize == 0)
             {
                 return;
@@ -552,7 +558,8 @@ namespace System.Reflection.PortableExecutable
         private static int IndexOfSection(
             ImmutableArray<SerializedSection> sections,
             SectionCharacteristics characteristics
-        ) {
+        )
+        {
             for (int i = 0; i < sections.Length; i++)
             {
                 if ((sections[i].Characteristics & characteristics) == characteristics)
@@ -567,7 +574,8 @@ namespace System.Reflection.PortableExecutable
         private static int SumRawDataSizes(
             ImmutableArray<SerializedSection> sections,
             SectionCharacteristics characteristics
-        ) {
+        )
+        {
             int result = 0;
             for (int i = 0; i < sections.Length; i++)
             {
@@ -586,7 +594,8 @@ namespace System.Reflection.PortableExecutable
             int peHeadersSize,
             int peHeaderAlignment,
             Blob strongNameSignatureFixup
-        ) {
+        )
+        {
             // Signed content includes
             // - PE header without its alignment padding
             // - all sections including their alignment padding and excluding strong name signature blob
@@ -659,7 +668,8 @@ namespace System.Reflection.PortableExecutable
         internal static IEnumerable<Blob> GetContentToChecksum(
             BlobBuilder peImage,
             Blob checksumFixup
-        ) {
+        )
+        {
             foreach (var blob in peImage.GetBlobs())
             {
                 if (blob.Buffer == checksumFixup.Buffer)
@@ -678,7 +688,8 @@ namespace System.Reflection.PortableExecutable
             BlobBuilder peImage,
             Blob strongNameSignatureFixup,
             Func<IEnumerable<Blob>, byte[]> signatureProvider
-        ) {
+        )
+        {
             Debug.Assert(peImage != null);
             Debug.Assert(signatureProvider != null);
 

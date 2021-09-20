@@ -117,7 +117,8 @@ namespace System.Net.Http.Formatting
                             QueryStringParameterName,
                             StringComparison.OrdinalIgnoreCase
                         )
-                    ) {
+                    )
+                    {
                         string queryValue = queryString[queryParameter];
                         if (
                             String.Equals(
@@ -125,7 +126,8 @@ namespace System.Net.Http.Formatting
                                 QueryStringParameterValue,
                                 StringComparison.OrdinalIgnoreCase
                             )
-                        ) {
+                        )
+                        {
                             return true;
                         }
                     }

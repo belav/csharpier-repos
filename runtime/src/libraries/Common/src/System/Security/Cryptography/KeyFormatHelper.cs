@@ -23,12 +23,14 @@ namespace System.Security.Cryptography
             KeyReader<TRet> keyReader,
             out int bytesRead,
             out TRet ret
-        ) {
+        )
+        {
             fixed (byte* ptr = &MemoryMarshal.GetReference(source))
             {
                 using (
                     MemoryManager<byte> manager = new PointerMemoryManager<byte>(ptr, source.Length)
-                ) {
+                )
+                {
                     ReadSubjectPublicKeyInfo(
                         validOids,
                         manager.Memory,
@@ -44,7 +46,8 @@ namespace System.Security.Cryptography
             string[] validOids,
             ReadOnlyMemory<byte> source,
             out int bytesRead
-        ) {
+        )
+        {
             SubjectPublicKeyInfoAsn spki;
             int read;
 
@@ -75,7 +78,8 @@ namespace System.Security.Cryptography
             KeyReader<TRet> keyReader,
             out int bytesRead,
             out TRet ret
-        ) {
+        )
+        {
             SubjectPublicKeyInfoAsn spki;
             int read;
 
@@ -106,12 +110,14 @@ namespace System.Security.Cryptography
             KeyReader<TRet> keyReader,
             out int bytesRead,
             out TRet ret
-        ) {
+        )
+        {
             fixed (byte* ptr = &MemoryMarshal.GetReference(source))
             {
                 using (
                     MemoryManager<byte> manager = new PointerMemoryManager<byte>(ptr, source.Length)
-                ) {
+                )
+                {
                     ReadPkcs8(validOids, manager.Memory, keyReader, out bytesRead, out ret);
                 }
             }
@@ -121,7 +127,8 @@ namespace System.Security.Cryptography
             string[] validOids,
             ReadOnlyMemory<byte> source,
             out int bytesRead
-        ) {
+        )
+        {
             try
             {
                 AsnValueReader reader = new AsnValueReader(source.Span, AsnEncodingRules.BER);
@@ -148,7 +155,8 @@ namespace System.Security.Cryptography
             KeyReader<TRet> keyReader,
             out int bytesRead,
             out TRet ret
-        ) {
+        )
+        {
             try
             {
                 AsnValueReader reader = new AsnValueReader(source.Span, AsnEncodingRules.BER);
@@ -177,12 +185,14 @@ namespace System.Security.Cryptography
             KeyReader<TRet> keyReader,
             out int bytesRead,
             out TRet ret
-        ) {
+        )
+        {
             fixed (byte* ptr = &MemoryMarshal.GetReference(source))
             {
                 using (
                     MemoryManager<byte> manager = new PointerMemoryManager<byte>(ptr, source.Length)
-                ) {
+                )
+                {
                     ReadEncryptedPkcs8(
                         validOids,
                         manager.Memory,
@@ -202,12 +212,14 @@ namespace System.Security.Cryptography
             KeyReader<TRet> keyReader,
             out int bytesRead,
             out TRet ret
-        ) {
+        )
+        {
             fixed (byte* ptr = &MemoryMarshal.GetReference(source))
             {
                 using (
                     MemoryManager<byte> manager = new PointerMemoryManager<byte>(ptr, source.Length)
-                ) {
+                )
+                {
                     ReadEncryptedPkcs8(
                         validOids,
                         manager.Memory,
@@ -227,7 +239,8 @@ namespace System.Security.Cryptography
             KeyReader<TRet> keyReader,
             out int bytesRead,
             out TRet ret
-        ) {
+        )
+        {
             ReadEncryptedPkcs8(
                 validOids,
                 source,
@@ -246,7 +259,8 @@ namespace System.Security.Cryptography
             KeyReader<TRet> keyReader,
             out int bytesRead,
             out TRet ret
-        ) {
+        )
+        {
             ReadEncryptedPkcs8(
                 validOids,
                 source,
@@ -266,7 +280,8 @@ namespace System.Security.Cryptography
             KeyReader<TRet> keyReader,
             out int bytesRead,
             out TRet ret
-        ) {
+        )
+        {
             int read;
             EncryptedPrivateKeyInfoAsn epki;
 
@@ -323,7 +338,8 @@ namespace System.Security.Cryptography
             AsnWriter algorithmIdentifierWriter,
             AsnWriter privateKeyWriter,
             AsnWriter? attributesWriter = null
-        ) {
+        )
+        {
             // Ensure both algorithm identifier and key writers are balanced.
             int algorithmIdentifierLength = algorithmIdentifierWriter.GetEncodedLength();
             int privateKeyLength = privateKeyWriter.GetEncodedLength();
@@ -370,7 +386,8 @@ namespace System.Security.Cryptography
             ReadOnlySpan<char> password,
             AsnWriter pkcs8Writer,
             PbeParameters pbeParameters
-        ) {
+        )
+        {
             return WriteEncryptedPkcs8(
                 password,
                 ReadOnlySpan<byte>.Empty,
@@ -383,7 +400,8 @@ namespace System.Security.Cryptography
             ReadOnlySpan<byte> passwordBytes,
             AsnWriter pkcs8Writer,
             PbeParameters pbeParameters
-        ) {
+        )
+        {
             return WriteEncryptedPkcs8(
                 ReadOnlySpan<char>.Empty,
                 passwordBytes,
@@ -397,7 +415,8 @@ namespace System.Security.Cryptography
             ReadOnlySpan<byte> passwordBytes,
             AsnWriter pkcs8Writer,
             PbeParameters pbeParameters
-        ) {
+        )
+        {
             PasswordBasedEncryption.InitiateEncryption(
                 pbeParameters,
                 out SymmetricAlgorithm cipher,
@@ -476,7 +495,8 @@ namespace System.Security.Cryptography
             ReadOnlySpan<char> inputPassword,
             ReadOnlyMemory<byte> source,
             out int bytesRead
-        ) {
+        )
+        {
             return DecryptPkcs8(inputPassword, ReadOnlySpan<byte>.Empty, source, out bytesRead);
         }
 
@@ -484,7 +504,8 @@ namespace System.Security.Cryptography
             ReadOnlySpan<byte> inputPasswordBytes,
             ReadOnlyMemory<byte> source,
             out int bytesRead
-        ) {
+        )
+        {
             return DecryptPkcs8(
                 ReadOnlySpan<char>.Empty,
                 inputPasswordBytes,
@@ -498,7 +519,8 @@ namespace System.Security.Cryptography
             ReadOnlySpan<byte> inputPasswordBytes,
             ReadOnlyMemory<byte> source,
             out int bytesRead
-        ) {
+        )
+        {
             int localRead;
             EncryptedPrivateKeyInfoAsn epki;
 
@@ -543,7 +565,8 @@ namespace System.Security.Cryptography
             ReadOnlyMemory<byte> current,
             ReadOnlySpan<char> newPassword,
             PbeParameters pbeParameters
-        ) {
+        )
+        {
             ArraySegment<byte> decrypted = DecryptPkcs8(inputPassword, current, out int bytesRead);
 
             try
@@ -574,7 +597,8 @@ namespace System.Security.Cryptography
             ReadOnlyMemory<byte> current,
             ReadOnlySpan<byte> newPasswordBytes,
             PbeParameters pbeParameters
-        ) {
+        )
+        {
             ArraySegment<byte> decrypted = DecryptPkcs8(inputPassword, current, out int bytesRead);
 
             try

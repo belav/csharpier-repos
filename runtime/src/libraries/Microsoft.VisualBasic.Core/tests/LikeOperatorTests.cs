@@ -17,7 +17,8 @@ namespace Microsoft.VisualBasic.CompilerServices.Tests
             object pattern,
             object expectedBinaryCompare,
             object expectedTextCompare
-        ) {
+        )
+        {
             Assert.Equal(
                 expectedBinaryCompare,
                 LikeOperator.LikeObject(source, pattern, CompareMethod.Binary)
@@ -35,7 +36,8 @@ namespace Microsoft.VisualBasic.CompilerServices.Tests
             string pattern,
             bool expectedBinaryCompare,
             bool expectedTextCompare
-        ) {
+        )
+        {
             Assert.Equal(
                 expectedBinaryCompare,
                 LikeOperator.LikeString(source, pattern, CompareMethod.Binary)

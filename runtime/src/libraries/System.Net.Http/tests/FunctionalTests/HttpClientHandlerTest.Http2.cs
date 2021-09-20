@@ -188,7 +188,8 @@ namespace System.Net.Http.Functional.Tests
         public async Task Http2ClearText_SendAsync_Success(
             string clientContent,
             string serverContent
-        ) {
+        )
+        {
             await Http2LoopbackServer.CreateClientAndServerAsync(
                 async uri =>
                 {
@@ -264,7 +265,8 @@ namespace System.Net.Http.Functional.Tests
             SettingId settingId,
             uint value,
             ProtocolErrors expectedError
-        ) {
+        )
+        {
             using (Http2LoopbackServer server = Http2LoopbackServer.CreateServer())
             using (HttpClient client = CreateHttpClient())
             {
@@ -798,7 +800,8 @@ namespace System.Net.Http.Functional.Tests
         private async Task<Http2LoopbackConnection> AcceptConnectionAndReadSettings(
             Http2LoopbackServer server,
             TimeSpan timeout
-        ) {
+        )
+        {
             Http2LoopbackConnection connection = await server.AcceptConnectionAsync(timeout)
                 .ConfigureAwait(false);
             await connection.ReadSettingsAsync().ConfigureAwait(false);
@@ -808,7 +811,8 @@ namespace System.Net.Http.Functional.Tests
         private async Task<List<int>> AcceptRequests(
             Http2LoopbackConnection connection,
             int maxRequests = int.MaxValue
-        ) {
+        )
+        {
             List<int> streamIds = new List<int>();
             for (int i = 0; i < maxRequests; i++)
             {
@@ -1410,7 +1414,8 @@ namespace System.Net.Http.Functional.Tests
             HttpClient client,
             Uri serverAddress,
             Http2LoopbackConnection connection
-        ) {
+        )
+        {
             Task<HttpResponseMessage> sendTask = client.GetAsync(serverAddress);
 
             int streamId = await connection.ReadRequestHeaderAsync();
@@ -1443,7 +1448,8 @@ namespace System.Net.Http.Functional.Tests
         public async Task ResetResponseStream_FrameReceived_Ignored(
             ProtocolErrors error,
             bool dataFrame
-        ) {
+        )
+        {
             using (Http2LoopbackServer server = Http2LoopbackServer.CreateServer())
             using (HttpClient client = CreateHttpClient())
             {
@@ -1477,7 +1483,8 @@ namespace System.Net.Http.Functional.Tests
         private static async Task<(int, Http2LoopbackConnection)> EstablishConnectionAndProcessOneRequestAsync(
             HttpClient client,
             Http2LoopbackServer server
-        ) {
+        )
+        {
             int streamId = -1;
 
             // Establish connection and send initial request/response to ensure connection is available for subsequent use
@@ -1672,7 +1679,8 @@ namespace System.Net.Http.Functional.Tests
         private static async Task<int> ReadToEndOfStream(
             Http2LoopbackConnection connection,
             int streamId
-        ) {
+        )
+        {
             int bytesReceived = 0;
             while (true)
             {
@@ -1987,7 +1995,8 @@ namespace System.Net.Http.Functional.Tests
             TimeSpan keepAlivePingDelay,
             HttpKeepAlivePingPolicy keepAlivePingPolicy,
             bool expectRequestFail
-        ) {
+        )
+        {
             TimeSpan pingTimeout = TimeSpan.FromSeconds(5);
             // Simulate failure by delaying the pong, otherwise send it immediately.
             TimeSpan pongDelay = expectRequestFail ? pingTimeout * 2 : TimeSpan.Zero;
@@ -2732,7 +2741,8 @@ namespace System.Net.Http.Functional.Tests
             protected override async Task SerializeToStreamAsync(
                 Stream stream,
                 TransportContext context
-            ) {
+            )
+            {
                 _waitForCompletion = new TaskCompletionSource(
                     TaskCreationOptions.RunContinuationsAsynchronously
                 );
@@ -2761,7 +2771,8 @@ namespace System.Net.Http.Functional.Tests
             Stream responseStream,
             Http2LoopbackConnection connection,
             int streamId
-        ) {
+        )
+        {
             byte[] readBuffer = new byte[data.Length];
 
             await connection.SendResponseDataAsync(streamId, data, endStream: false);
@@ -2773,7 +2784,8 @@ namespace System.Net.Http.Functional.Tests
             Stream responseStream,
             Http2LoopbackConnection connection,
             int streamId
-        ) {
+        )
+        {
             byte[] readBuffer = new byte[1];
 
             await connection.SendResponseDataAsync(streamId, new byte[] {  }, endStream: true);
@@ -2801,7 +2813,8 @@ namespace System.Net.Http.Functional.Tests
             Stream requestStream,
             Http2LoopbackConnection connection,
             int streamId
-        ) {
+        )
+        {
             await requestStream.WriteAsync(data);
             await requestStream.FlushAsync();
             DataFrame dataFrame = (DataFrame)await connection.ReadFrameAsync(
@@ -2815,7 +2828,8 @@ namespace System.Net.Http.Functional.Tests
             Stream requestStream,
             Http2LoopbackConnection connection,
             int streamId
-        ) {
+        )
+        {
             duplexContent.Complete();
             DataFrame dataFrame = (DataFrame)await connection.ReadFrameAsync(
                 TimeSpan.FromSeconds(30)
@@ -3959,7 +3973,8 @@ namespace System.Net.Http.Functional.Tests
         public async Task SendAsync_ConcurentSendReceive_Ok(
             bool shouldWaitForRequestBody,
             HttpStatusCode responseCode
-        ) {
+        )
+        {
             string requestContent = new string('*', 300);
             const string responseContent = "SendAsync_ConcurentSendReceive_Ok";
 
@@ -4427,7 +4442,8 @@ namespace System.Net.Http.Functional.Tests
                     while (
                         requestException?.GetType()
                             .FullName.Equals("System.Net.Http.Http2ConnectionException") == false
-                    ) {
+                    )
+                    {
                         requestException = requestException.InnerException;
                     }
 
@@ -5029,7 +5045,8 @@ namespace System.Net.Http.Functional.Tests
                         int i = HPackEncoder.LargestStaticIndex + headers.Count();
                         i > HPackEncoder.LargestStaticIndex;
                         --i
-                    ) {
+                    )
+                    {
                         pos += HPackEncoder.EncodeHeader(i, frameData.AsSpan(pos));
                     }
 

@@ -88,7 +88,8 @@ namespace MvcSandbox
             foreach (
                 var endpoint in dataSource.Endpoints.OfType<RouteEndpoint>()
                     .OrderBy(e => e.RoutePattern.RawText, StringComparer.OrdinalIgnoreCase)
-            ) {
+            )
+            {
                 sb.AppendLine($"- {endpoint.RoutePattern.RawText} '{endpoint.DisplayName}'");
             }
 

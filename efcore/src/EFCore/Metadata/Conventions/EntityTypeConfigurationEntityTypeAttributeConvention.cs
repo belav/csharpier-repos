@@ -40,7 +40,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
             IConventionEntityTypeBuilder entityTypeBuilder,
             EntityTypeConfigurationAttribute attribute,
             IConventionContext<IConventionEntityTypeBuilder> context
-        ) {
+        )
+        {
             var entityTypeConfigurationType = attribute.EntityTypeConfigurationType;
 
             if (
@@ -51,7 +52,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
                             && x.GetGenericTypeDefinition() == typeof(IEntityTypeConfiguration<>)
                             && x.GenericTypeArguments[0] == entityTypeBuilder.Metadata.ClrType
                     )
-            ) {
+            )
+            {
                 throw new InvalidOperationException(
                     CoreStrings.InvalidEntityTypeConfigurationAttribute(
                         entityTypeConfigurationType.ShortDisplayName(),

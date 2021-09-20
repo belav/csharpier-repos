@@ -50,11 +50,12 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core
             IEnumerable<IConnectionListenerFactory> transportFactories,
             IEnumerable<IMultiplexedConnectionListenerFactory> multiplexedFactories,
             ILoggerFactory loggerFactory
-        ) : this(
-            transportFactories,
-            multiplexedFactories,
-            CreateServiceContext(options, loggerFactory)
-        ) { }
+        )
+            : this(
+                transportFactories,
+                multiplexedFactories,
+                CreateServiceContext(options, loggerFactory)
+            ) { }
 
         // For testing
         internal KestrelServerImpl(
@@ -67,7 +68,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core
             IEnumerable<IConnectionListenerFactory> transportFactories,
             IEnumerable<IMultiplexedConnectionListenerFactory>? multiplexedFactories,
             ServiceContext serviceContext
-        ) {
+        )
+        {
             if (transportFactories == null)
             {
                 throw new ArgumentNullException(nameof(transportFactories));
@@ -99,7 +101,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core
         private static ServiceContext CreateServiceContext(
             IOptions<KestrelServerOptions> options,
             ILoggerFactory loggerFactory
-        ) {
+        )
+        {
             if (options == null)
             {
                 throw new ArgumentNullException(nameof(options));
@@ -322,7 +325,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core
                         !_serverAddresses.PreferHostingUrls
                         || _serverAddresses.InternalCollection.Count == 0
                     )
-                ) {
+                )
+                {
                     reloadToken = Options.ConfigurationLoader.Configuration.GetReloadToken();
                 }
 
@@ -451,7 +455,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core
             if (
                 Options.Limits.MaxRequestBufferSize.HasValue
                 && Options.Limits.MaxRequestBufferSize < Options.Limits.MaxRequestLineSize
-            ) {
+            )
+            {
                 throw new InvalidOperationException(
                     CoreStrings.FormatMaxRequestBufferSmallerThanRequestLineBuffer(
                         Options.Limits.MaxRequestBufferSize.Value,
@@ -463,7 +468,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core
             if (
                 Options.Limits.MaxRequestBufferSize.HasValue
                 && Options.Limits.MaxRequestBufferSize < Options.Limits.MaxRequestHeadersTotalSize
-            ) {
+            )
+            {
                 throw new InvalidOperationException(
                     CoreStrings.FormatMaxRequestBufferSmallerThanRequestHeaderBuffer(
                         Options.Limits.MaxRequestBufferSize.Value,
@@ -477,7 +483,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core
             ConnectionDelegate innerDelegate,
             long? connectionLimit,
             IKestrelTrace trace
-        ) {
+        )
+        {
             if (!connectionLimit.HasValue)
             {
                 return innerDelegate;
@@ -494,7 +501,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core
             MultiplexedConnectionDelegate innerDelegate,
             long? connectionLimit,
             IKestrelTrace trace
-        ) {
+        )
+        {
             if (!connectionLimit.HasValue)
             {
                 return innerDelegate;

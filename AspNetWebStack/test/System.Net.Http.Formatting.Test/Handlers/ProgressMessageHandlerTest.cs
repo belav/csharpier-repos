@@ -22,7 +22,8 @@ namespace System.Net.Http.Handlers
         public async Task SendAsync_DoesNotInsertSendProgressWithoutEntityOrHandlerPresent(
             bool insertRequestEntity,
             bool addSendProgressHandler
-        ) {
+        )
+        {
             // Arrange
             HttpMessageInvoker invoker = CreateMessageInvoker(
                 includeResponseEntity: false,
@@ -69,7 +70,8 @@ namespace System.Net.Http.Handlers
         public async Task SendAsync_InsertsReceiveProgressWhenResponseEntityPresent(
             bool insertResponseEntity,
             bool addReceiveProgressHandler
-        ) {
+        )
+        {
             // Arrange
             HttpMessageInvoker invoker = CreateMessageInvoker(
                 includeResponseEntity: insertResponseEntity,
@@ -105,7 +107,8 @@ namespace System.Net.Http.Handlers
             bool includeResponseEntity,
             bool addSendProgressHandler,
             bool addReceiveProgressHandler
-        ) {
+        )
+        {
             ShortCircuitMessageHandler innerHandler = new ShortCircuitMessageHandler(
                 includeResponseEntity
             );
@@ -143,7 +146,8 @@ namespace System.Net.Http.Handlers
             protected override Task<HttpResponseMessage> SendAsync(
                 HttpRequestMessage request,
                 CancellationToken cancellationToken
-            ) {
+            )
+            {
 #if NETFX_CORE  // Extension method only available on non portable library
                 HttpResponseMessage response = new HttpResponseMessage()
                 {

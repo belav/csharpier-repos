@@ -50,7 +50,8 @@ namespace Microsoft.AspNetCore.Server.IIS.Core
             int count,
             AsyncCallback? callback,
             object? state
-        ) {
+        )
+        {
             return TaskToApm.Begin(WriteAsync(buffer, offset, count), callback, state);
         }
 
@@ -64,7 +65,8 @@ namespace Microsoft.AspNetCore.Server.IIS.Core
             int offset,
             int count,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             ValidateState(cancellationToken);
 
             return _context.WriteAsync(
@@ -76,7 +78,8 @@ namespace Microsoft.AspNetCore.Server.IIS.Core
         public override ValueTask WriteAsync(
             ReadOnlyMemory<byte> source,
             CancellationToken cancellationToken = default
-        ) {
+        )
+        {
             ValidateState(cancellationToken);
 
             return new ValueTask(_context.WriteAsync(source, cancellationToken));

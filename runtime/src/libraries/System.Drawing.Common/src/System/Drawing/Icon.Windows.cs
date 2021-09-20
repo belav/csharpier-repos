@@ -73,7 +73,8 @@ namespace System.Drawing
                     FileAccess.Read,
                     FileShare.Read
                 )
-            ) {
+            )
+            {
                 Debug.Assert(
                     f != null,
                     "File.OpenRead returned null instead of throwing an exception"
@@ -459,7 +460,8 @@ namespace System.Drawing
                     graphics,
                     ApplyGraphicsProperties.Clipping
                 )
-            ) {
+            )
+            {
                 IntPtr dc = wg.GetHdc();
                 DrawIcon(dc, Rectangle.Empty, copy, true);
             }
@@ -482,7 +484,8 @@ namespace System.Drawing
                     graphics,
                     ApplyGraphicsProperties.Clipping
                 )
-            ) {
+            )
+            {
                 IntPtr dc = wg.GetHdc();
                 DrawIcon(dc, Rectangle.Empty, copy, false);
             }
@@ -566,7 +569,8 @@ namespace System.Drawing
                     sizeof(SafeNativeMethods.ICONDIRENTRY) * (dir->idCount - 1)
                         + sizeof(SafeNativeMethods.ICONDIR)
                     > _iconData.Length
-                ) {
+                )
+                {
                     throw new ArgumentException(
                         SR.Format(SR.InvalidPictureType, "picture", nameof(Icon))
                     );
@@ -627,7 +631,8 @@ namespace System.Drawing
                                     || _bestBitDepth > s_bitDepth && iconBitDepth < _bestBitDepth
                                 )
                             )
-                        ) {
+                        )
+                        {
                             fUpdateBestFit = true;
                         }
                     }

@@ -24,7 +24,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.PickMembers
             IGlyphService glyphService,
             ImmutableArray<ISymbol> members,
             ImmutableArray<PickMembersOption> options
-        ) {
+        )
+        {
             MemberContainers = members.Select(m => new MemberSymbolViewModel(m, glyphService))
                 .ToList();
             Options = options.Select(o => new OptionViewModel(o)).ToList();

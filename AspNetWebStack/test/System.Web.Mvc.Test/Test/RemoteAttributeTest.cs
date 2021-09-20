@@ -590,11 +590,8 @@ namespace System.Web.Mvc.Test
                 AreaReference areaReference
             ) : base(action, controller, areaReference) { }
 
-            public TestableRemoteAttribute(
-                string action,
-                string controller,
-                string areaName
-            ) : base(action, controller, areaName) { }
+            public TestableRemoteAttribute(string action, string controller, string areaName)
+                : base(action, controller, areaName) { }
 
             public TestableRemoteAttribute(string action, string controller)
                 : base(action, controller) { }

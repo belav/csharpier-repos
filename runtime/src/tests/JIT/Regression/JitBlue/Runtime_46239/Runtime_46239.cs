@@ -69,7 +69,8 @@ namespace Runtime_46239
             int num,
             T a,
             T b
-        ) {
+        )
+        {
             return 100;
         }
 
@@ -87,7 +88,8 @@ namespace Runtime_46239
             T a,
             T b,
             T c
-        ) {
+        )
+        {
             return 100;
         }
 
@@ -105,7 +107,8 @@ namespace Runtime_46239
             T a,
             T b,
             T c
-        ) {
+        )
+        {
             return 100;
         }
 
@@ -122,7 +125,8 @@ namespace Runtime_46239
             T a,
             T b,
             T c
-        ) {
+        )
+        {
             return 100;
         }
 
@@ -140,7 +144,8 @@ namespace Runtime_46239
             T a,
             T b,
             int i
-        ) {
+        )
+        {
             return 100;
         }
 
@@ -157,7 +162,8 @@ namespace Runtime_46239
             T a,
             T b,
             int i
-        ) {
+        )
+        {
             return 100;
         }
 
@@ -175,7 +181,8 @@ namespace Runtime_46239
             T a,
             T b,
             byte b2
-        ) {
+        )
+        {
             return 100;
         }
 
@@ -192,7 +199,8 @@ namespace Runtime_46239
             T a,
             T b,
             byte b1
-        ) {
+        )
+        {
             return 100;
         }
 

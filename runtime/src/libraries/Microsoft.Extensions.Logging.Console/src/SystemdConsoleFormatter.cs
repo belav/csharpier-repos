@@ -36,7 +36,8 @@ namespace Microsoft.Extensions.Logging.Console
             in LogEntry<TState> logEntry,
             IExternalScopeProvider scopeProvider,
             TextWriter textWriter
-        ) {
+        )
+        {
             string message = logEntry.Formatter(logEntry.State, logEntry.Exception);
             if (logEntry.Exception == null && message == null)
             {
@@ -122,7 +123,8 @@ namespace Microsoft.Extensions.Logging.Console
         private void WriteScopeInformation(
             TextWriter textWriter,
             IExternalScopeProvider scopeProvider
-        ) {
+        )
+        {
             if (FormatterOptions.IncludeScopes && scopeProvider != null)
             {
                 scopeProvider.ForEachScope(

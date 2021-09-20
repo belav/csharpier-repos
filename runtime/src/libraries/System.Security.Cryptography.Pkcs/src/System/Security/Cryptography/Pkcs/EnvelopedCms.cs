@@ -236,7 +236,8 @@ namespace System.Security.Cryptography.Pkcs
         private void DecryptContent(
             RecipientInfoCollection recipientInfos,
             X509Certificate2Collection? extraStore
-        ) {
+        )
+        {
             CheckStateForDecryption();
             extraStore = extraStore ?? new X509Certificate2Collection();
 

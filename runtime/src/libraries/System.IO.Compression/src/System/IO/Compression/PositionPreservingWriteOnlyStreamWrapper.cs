@@ -47,7 +47,8 @@ namespace System.IO.Compression
             int count,
             AsyncCallback? callback,
             object? state
-        ) {
+        )
+        {
             _position += count;
             return _stream.BeginWrite(buffer, offset, count, callback, state);
         }
@@ -65,7 +66,8 @@ namespace System.IO.Compression
             int offset,
             int count,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             _position += count;
             return _stream.WriteAsync(buffer, offset, count, cancellationToken);
         }
@@ -73,7 +75,8 @@ namespace System.IO.Compression
         public override ValueTask WriteAsync(
             ReadOnlyMemory<byte> buffer,
             CancellationToken cancellationToken = default(CancellationToken)
-        ) {
+        )
+        {
             _position += buffer.Length;
             return _stream.WriteAsync(buffer, cancellationToken);
         }

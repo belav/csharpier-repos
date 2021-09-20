@@ -77,7 +77,8 @@ namespace Microsoft.Extensions.DependencyInjection
 
         internal static void AddViewComponentApplicationPartsProviders(
             ApplicationPartManager manager
-        ) {
+        )
+        {
             if (!manager.FeatureProviders.OfType<ViewComponentFeatureProvider>().Any())
             {
                 manager.FeatureProviders.Add(new ViewComponentFeatureProvider());
@@ -93,7 +94,8 @@ namespace Microsoft.Extensions.DependencyInjection
         public static IMvcCoreBuilder AddViews(
             this IMvcCoreBuilder builder,
             Action<MvcViewOptions> setupAction
-        ) {
+        )
+        {
             if (builder == null)
             {
                 throw new ArgumentNullException(nameof(builder));
@@ -123,7 +125,8 @@ namespace Microsoft.Extensions.DependencyInjection
         public static IMvcCoreBuilder AddCookieTempDataProvider(
             this IMvcCoreBuilder builder,
             Action<CookieTempDataProviderOptions> setupAction
-        ) {
+        )
+        {
             if (builder == null)
             {
                 throw new ArgumentNullException(nameof(builder));
@@ -149,7 +152,8 @@ namespace Microsoft.Extensions.DependencyInjection
         public static IMvcCoreBuilder ConfigureViews(
             this IMvcCoreBuilder builder,
             Action<MvcViewOptions> setupAction
-        ) {
+        )
+        {
             if (builder == null)
             {
                 throw new ArgumentNullException(nameof(builder));

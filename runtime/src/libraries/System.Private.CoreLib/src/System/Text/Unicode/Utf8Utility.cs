@@ -41,7 +41,8 @@ namespace System.Text.Unicode
         public static unsafe int GetIndexOfFirstInvalidUtf8Sequence(
             ReadOnlySpan<byte> utf8Data,
             out bool isAscii
-        ) {
+        )
+        {
             fixed (byte* pUtf8Data = &MemoryMarshal.GetReference(utf8Data))
             {
                 byte* pFirstInvalidByte = GetPointerToFirstInvalidByte(

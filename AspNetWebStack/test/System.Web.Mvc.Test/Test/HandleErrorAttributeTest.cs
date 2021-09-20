@@ -270,7 +270,8 @@ namespace System.Web.Mvc.Test
             HttpContextBase httpContext,
             ControllerBase controller,
             Exception exception
-        ) {
+        )
+        {
             RouteData rd = new RouteData();
             rd.Values["controller"] = "SomeController";
             rd.Values["action"] = "SomeAction";

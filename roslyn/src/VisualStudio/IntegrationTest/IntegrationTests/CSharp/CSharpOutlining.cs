@@ -87,7 +87,8 @@ namespace ClassLibrary1[|
         private void VerifySpansInConfiguration(
             IDictionary<string, ImmutableArray<TextSpan>> spans,
             string configuration
-        ) {
+        )
+        {
             VisualStudio.ExecuteCommand("Build.SolutionConfigurations", configuration);
 
             var expectedSpans = spans[""].Concat(spans[configuration]).OrderBy(s => s.Start);

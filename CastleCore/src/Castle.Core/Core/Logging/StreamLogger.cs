@@ -130,7 +130,8 @@ namespace Castle.Core.Logging
             string loggerName,
             string message,
             Exception exception
-        ) {
+        )
+        {
             if (writer == null)
             {
                 return; // just in case it's been disposed

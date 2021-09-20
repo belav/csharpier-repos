@@ -32,7 +32,8 @@ namespace Roslyn.Utilities
                         new[] { ',' },
                         StringSplitOptions.RemoveEmptyEntries
                     )
-                ) {
+                )
+                {
                     ParseFeatureCore(builder, feature);
                 }
             }

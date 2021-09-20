@@ -33,7 +33,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.InlineRename
             ITextBuffer subjectBuffer,
             ITextView view,
             bool deleteToStart
-        ) {
+        )
+        {
             if (_renameService.ActiveSession == null)
             {
                 return false;
@@ -47,7 +48,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.InlineRename
                         caretPoint.Value,
                         out var span
                     )
-                ) {
+                )
+                {
                     int start = caretPoint.Value;
                     int end = caretPoint.Value;
                     if (!view.Selection.IsEmpty)

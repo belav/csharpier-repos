@@ -98,7 +98,8 @@ namespace System.Net.NetworkInformation
             bool ipv4,
             int ttl = 0,
             PingFragmentOptions fragmentOption = PingFragmentOptions.Default
-        ) {
+        )
+        {
             var sb = new StringBuilder();
             sb.Append("-c 1"); // Just send a single ping ("count = 1")
 

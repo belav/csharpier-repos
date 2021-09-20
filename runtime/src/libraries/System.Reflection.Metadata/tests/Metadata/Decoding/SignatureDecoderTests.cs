@@ -89,7 +89,8 @@ namespace System.Reflection.Metadata.Decoding.Tests
         public unsafe void DecodeValidMethodSpecificationSignature(
             string[] expectedTypes,
             byte[] testSignature
-        ) {
+        )
+        {
             fixed (byte* testSignaturePtr = &testSignature[0])
             {
                 var signatureBlob = new BlobReader(testSignaturePtr, testSignature.Length);

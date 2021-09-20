@@ -225,7 +225,8 @@ namespace System.Runtime.Serialization.Xml.Canonicalization.Tests
             int offset,
             int count,
             XmlStringType valueType
-        ) {
+        )
+        {
             ValidateBufferBounds(buffer, offset, count);
             unsafe
             {

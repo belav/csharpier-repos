@@ -135,7 +135,8 @@ namespace System.Web.Http.Controllers
 
         private static ParameterBindingAttribute ChooseAttribute(
             IList<ParameterBindingAttribute> list
-        ) {
+        )
+        {
             if (list.Count == 0)
             {
                 return null;

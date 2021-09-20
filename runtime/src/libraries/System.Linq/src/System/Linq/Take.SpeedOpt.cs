@@ -11,7 +11,8 @@ namespace System.Linq
         private static IEnumerable<TSource> TakeIterator<TSource>(
             IEnumerable<TSource> source,
             int count
-        ) {
+        )
+        {
             Debug.Assert(source != null);
             Debug.Assert(count > 0);
 
@@ -26,7 +27,8 @@ namespace System.Linq
             IEnumerable<TSource> source,
             int startIndex,
             int endIndex
-        ) {
+        )
+        {
             Debug.Assert(source != null);
             Debug.Assert(startIndex >= 0 && startIndex < endIndex);
 
@@ -40,7 +42,8 @@ namespace System.Linq
                 IPartition<TSource> partition,
                 int startIndex,
                 int endIndex
-            ) {
+            )
+            {
                 partition =
                     endIndex == 0 ? EmptyPartition<TSource>.Instance : partition.Take(endIndex);
                 return startIndex == 0 ? partition : partition.Skip(startIndex);

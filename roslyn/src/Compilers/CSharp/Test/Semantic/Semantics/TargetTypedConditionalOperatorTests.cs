@@ -267,7 +267,8 @@ class C
                     LanguageVersion.CSharp8,
                     MessageID.IDS_FeatureTargetTypedConditional.RequiredVersion()
                 }
-            ) {
+            )
+            {
                 var comp = CreateCompilation(
                         source,
                         options: TestOptions.ReleaseExe,
@@ -300,7 +301,8 @@ class C
                     LanguageVersion.CSharp8,
                     MessageID.IDS_FeatureTargetTypedConditional.RequiredVersion()
                 }
-            ) {
+            )
+            {
                 var comp = CreateCompilation(
                         source,
                         options: TestOptions.ReleaseExe,
@@ -330,7 +332,8 @@ class C
                     LanguageVersion.CSharp8,
                     MessageID.IDS_FeatureTargetTypedConditional.RequiredVersion()
                 }
-            ) {
+            )
+            {
                 var comp = CreateCompilation(
                         source,
                         options: TestOptions.ReleaseExe,
@@ -373,7 +376,8 @@ class C { }
                     LanguageVersion.CSharp8,
                     MessageID.IDS_FeatureTargetTypedConditional.RequiredVersion()
                 }
-            ) {
+            )
+            {
                 var comp = CreateCompilation(
                         source,
                         options: TestOptions.ReleaseExe,
@@ -393,7 +397,8 @@ B->C"
             string targetType,
             string? naturalType,
             params DiagnosticDescription[] expectedDiagnostics
-        ) {
+        )
+        {
             TestConditional(
                 conditionalExpression,
                 targetType,
@@ -409,7 +414,8 @@ B->C"
             string? naturalType,
             CSharpParseOptions? parseOptions,
             params DiagnosticDescription[] expectedDiagnostics
-        ) {
+        )
+        {
             string source =
                 $@"
 class Program

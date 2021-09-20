@@ -69,7 +69,8 @@ namespace Microsoft.CodeAnalysis.CSharp.InvokeDelegateWithConditionalAccess
             if (
                 ((CSharpParseOptions)ifStatement.SyntaxTree.Options).LanguageVersion
                 < LanguageVersion.CSharp6
-            ) {
+            )
+            {
                 return;
             }
 
@@ -100,14 +101,16 @@ namespace Microsoft.CodeAnalysis.CSharp.InvokeDelegateWithConditionalAccess
                     SyntaxKind.ExpressionStatement,
                     out ExpressionStatementSyntax expressionStatement
                 )
-            ) {
+            )
+            {
                 return;
             }
 
             // Check that it's of the form: "if (a != null) { a(); }
             if (
                 !(expressionStatement.Expression is InvocationExpressionSyntax invocationExpression)
-            ) {
+            )
+            {
                 return;
             }
 
@@ -121,7 +124,8 @@ namespace Microsoft.CodeAnalysis.CSharp.InvokeDelegateWithConditionalAccess
                     invocationExpression,
                     severity
                 )
-            ) {
+            )
+            {
                 return;
             }
 
@@ -142,14 +146,16 @@ namespace Microsoft.CodeAnalysis.CSharp.InvokeDelegateWithConditionalAccess
             ExpressionStatementSyntax expressionStatement,
             InvocationExpressionSyntax invocationExpression,
             ReportDiagnostic severity
-        ) {
+        )
+        {
             var cancellationToken = syntaxContext.CancellationToken;
 
             // Look for the form:  "if (someExpr != null) someExpr()"
             if (
                 condition.Left.IsKind(SyntaxKind.NullLiteralExpression)
                 || condition.Right.IsKind(SyntaxKind.NullLiteralExpression)
-            ) {
+            )
+            {
                 var expr = condition.Left.IsKind(SyntaxKind.NullLiteralExpression)
                     ? condition.Right
                     : condition.Left;
@@ -161,7 +167,8 @@ namespace Microsoft.CodeAnalysis.CSharp.InvokeDelegateWithConditionalAccess
                         invocationExpression.Expression,
                         topLevel: false
                     )
-                ) {
+                )
+                {
                     cancellationToken.ThrowIfCancellationRequested();
 
                     // Looks good!
@@ -196,7 +203,8 @@ namespace Microsoft.CodeAnalysis.CSharp.InvokeDelegateWithConditionalAccess
             ReportDiagnostic severity,
             ImmutableArray<Location> additionalLocations,
             string kind
-        ) {
+        )
+        {
             var tree = syntaxContext.Node.SyntaxTree;
 
             var properties = ImmutableDictionary<string, string>.Empty.Add(Constants.Kind, kind);
@@ -258,7 +266,8 @@ namespace Microsoft.CodeAnalysis.CSharp.InvokeDelegateWithConditionalAccess
             ExpressionStatementSyntax expressionStatement,
             InvocationExpressionSyntax invocationExpression,
             ReportDiagnostic severity
-        ) {
+        )
+        {
             var cancellationToken = syntaxContext.CancellationToken;
             cancellationToken.ThrowIfCancellationRequested();
 
@@ -271,7 +280,8 @@ namespace Microsoft.CodeAnalysis.CSharp.InvokeDelegateWithConditionalAccess
             if (
                 !IsNullCheckExpression(condition.Left, condition.Right)
                 && !IsNullCheckExpression(condition.Right, condition.Left)
-            ) {
+            )
+            {
                 return false;
             }
 
@@ -306,7 +316,8 @@ namespace Microsoft.CodeAnalysis.CSharp.InvokeDelegateWithConditionalAccess
                     SyntaxKind.LocalDeclarationStatement,
                     out LocalDeclarationStatementSyntax localDeclarationStatement
                 )
-            ) {
+            )
+            {
                 return false;
             }
 
@@ -359,7 +370,8 @@ namespace Microsoft.CodeAnalysis.CSharp.InvokeDelegateWithConditionalAccess
             if (
                 analysis.ReadOutside.Contains(localSymbol)
                 || analysis.WrittenOutside.Contains(localSymbol)
-            ) {
+            )
+            {
                 return false;
             }
 

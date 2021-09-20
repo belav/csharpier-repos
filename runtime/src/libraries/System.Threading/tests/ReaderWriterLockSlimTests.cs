@@ -153,7 +153,8 @@ namespace System.Threading.Tests
                 ReaderWriterLockSlim rwls = new ReaderWriterLockSlim(
                     LockRecursionPolicy.SupportsRecursion
                 )
-            ) {
+            )
+            {
                 rwls.EnterReadLock();
                 Assert.Throws<LockRecursionException>(() => rwls.EnterWriteLock());
                 rwls.EnterReadLock();

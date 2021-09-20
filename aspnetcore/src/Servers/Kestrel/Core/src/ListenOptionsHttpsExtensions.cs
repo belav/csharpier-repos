@@ -56,7 +56,8 @@ namespace Microsoft.AspNetCore.Hosting
             this ListenOptions listenOptions,
             string fileName,
             string? password
-        ) {
+        )
+        {
             var env = listenOptions.ApplicationServices.GetRequiredService<IHostEnvironment>();
             return listenOptions.UseHttps(
                 new X509Certificate2(Path.Combine(env.ContentRootPath, fileName), password)
@@ -76,7 +77,8 @@ namespace Microsoft.AspNetCore.Hosting
             string fileName,
             string? password,
             Action<HttpsConnectionAdapterOptions> configureOptions
-        ) {
+        )
+        {
             var env = listenOptions.ApplicationServices.GetRequiredService<IHostEnvironment>();
             return listenOptions.UseHttps(
                 new X509Certificate2(Path.Combine(env.ContentRootPath, fileName), password),
@@ -153,7 +155,8 @@ namespace Microsoft.AspNetCore.Hosting
             bool allowInvalid,
             StoreLocation location,
             Action<HttpsConnectionAdapterOptions> configureOptions
-        ) {
+        )
+        {
             return listenOptions.UseHttps(
                 CertificateLoader.LoadFromStoreCert(
                     subject,
@@ -174,7 +177,8 @@ namespace Microsoft.AspNetCore.Hosting
         public static ListenOptions UseHttps(
             this ListenOptions listenOptions,
             X509Certificate2 serverCertificate
-        ) {
+        )
+        {
             if (serverCertificate == null)
             {
                 throw new ArgumentNullException(nameof(serverCertificate));
@@ -199,7 +203,8 @@ namespace Microsoft.AspNetCore.Hosting
             this ListenOptions listenOptions,
             X509Certificate2 serverCertificate,
             Action<HttpsConnectionAdapterOptions> configureOptions
-        ) {
+        )
+        {
             if (serverCertificate == null)
             {
                 throw new ArgumentNullException(nameof(serverCertificate));
@@ -228,7 +233,8 @@ namespace Microsoft.AspNetCore.Hosting
         public static ListenOptions UseHttps(
             this ListenOptions listenOptions,
             Action<HttpsConnectionAdapterOptions> configureOptions
-        ) {
+        )
+        {
             if (configureOptions == null)
             {
                 throw new ArgumentNullException(nameof(configureOptions));
@@ -275,7 +281,8 @@ namespace Microsoft.AspNetCore.Hosting
         public static ListenOptions UseHttps(
             this ListenOptions listenOptions,
             HttpsConnectionAdapterOptions httpsOptions
-        ) {
+        )
+        {
             var loggerFactory =
                 listenOptions.KestrelServerOptions?.ApplicationServices.GetRequiredService<ILoggerFactory>()
                 ?? NullLoggerFactory.Instance;
@@ -312,7 +319,8 @@ namespace Microsoft.AspNetCore.Hosting
             this ListenOptions listenOptions,
             ServerOptionsSelectionCallback serverOptionsSelectionCallback,
             object state
-        ) {
+        )
+        {
             return listenOptions.UseHttps(
                 serverOptionsSelectionCallback,
                 state,
@@ -334,7 +342,8 @@ namespace Microsoft.AspNetCore.Hosting
             ServerOptionsSelectionCallback serverOptionsSelectionCallback,
             object state,
             TimeSpan handshakeTimeout
-        ) {
+        )
+        {
             // HttpsOptionsCallback is an internal delegate that is just the ServerOptionsSelectionCallback + a ConnectionContext parameter.
             // Given that ConnectionContext will eventually be replaced by System.Net.Connections, it doesn't make much sense to make the HttpsOptionsCallback delegate public.
             HttpsOptionsCallback adaptedCallback = (
@@ -361,7 +370,8 @@ namespace Microsoft.AspNetCore.Hosting
             HttpsOptionsCallback httpsOptionsCallback,
             object state,
             TimeSpan handshakeTimeout
-        ) {
+        )
+        {
             var loggerFactory =
                 listenOptions.KestrelServerOptions?.ApplicationServices.GetRequiredService<ILoggerFactory>()
                 ?? NullLoggerFactory.Instance;

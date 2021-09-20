@@ -218,7 +218,8 @@ namespace Microsoft.AspNetCore.Rewrite.Tests.UrlRewrite
             bool global = false,
             UriMatchPart uriMatchPart = UriMatchPart.Path,
             RedirectType redirectType = RedirectType.Permanent
-        ) {
+        )
+        {
             return new IISUrlRewriteRule(
                 name,
                 new RegexMatch(new Regex("^OFF$"), negate),
@@ -236,7 +237,8 @@ namespace Microsoft.AspNetCore.Rewrite.Tests.UrlRewrite
         private void AssertUrlRewriteRuleEquality(
             IList<IISUrlRewriteRule> actual,
             IList<IISUrlRewriteRule> expected
-        ) {
+        )
+        {
             Assert.Equal(actual.Count, expected.Count);
             for (var i = 0; i < actual.Count; i++)
             {

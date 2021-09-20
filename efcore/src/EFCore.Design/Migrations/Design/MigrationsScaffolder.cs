@@ -75,7 +75,8 @@ namespace Microsoft.EntityFrameworkCore.Migrations.Design
             string? rootNamespace,
             string? subNamespace = null,
             string? language = null
-        ) {
+        )
+        {
             Check.NotEmpty(migrationName, nameof(migrationName));
 
             if (Dependencies.MigrationsAssembly.FindMigrationId(migrationName) != null)
@@ -262,7 +263,8 @@ namespace Microsoft.EntityFrameworkCore.Migrations.Design
             string? rootNamespace,
             bool force,
             string? language
-        ) {
+        )
+        {
             Check.NotEmpty(projectDir, nameof(projectDir));
 
             var files = new MigrationFiles();
@@ -291,7 +293,8 @@ namespace Microsoft.EntityFrameworkCore.Migrations.Design
                         Dependencies.SnapshotModelProcessor.Process(modelSnapshot.Model)
                             .GetRelationalModel()
                     )
-                ) {
+                )
+                {
                     var applied = false;
                     try
                     {
@@ -446,7 +449,8 @@ namespace Microsoft.EntityFrameworkCore.Migrations.Design
             string projectDir,
             ScaffoldedMigration migration,
             string? outputDir
-        ) {
+        )
+        {
             Check.NotEmpty(projectDir, nameof(projectDir));
             Check.NotNull(migration, nameof(migration));
 
@@ -526,7 +530,8 @@ namespace Microsoft.EntityFrameworkCore.Migrations.Design
             string projectDir,
             string? siblingFileName,
             string subnamespace
-        ) {
+        )
+        {
             Check.NotEmpty(projectDir, nameof(projectDir));
             Check.NotNull(subnamespace, nameof(subnamespace));
 

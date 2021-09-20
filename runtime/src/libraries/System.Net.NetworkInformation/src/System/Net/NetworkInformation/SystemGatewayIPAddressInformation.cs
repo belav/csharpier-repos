@@ -21,7 +21,8 @@ namespace System.Net.NetworkInformation
 
         internal static GatewayIPAddressInformationCollection ToGatewayIpAddressInformationCollection(
             IPAddressCollection addresses
-        ) {
+        )
+        {
             GatewayIPAddressInformationCollection gatewayList =
                 new GatewayIPAddressInformationCollection();
             foreach (IPAddress address in addresses)

@@ -32,7 +32,8 @@ namespace Microsoft.Extensions.DependencyInjection
         public static IHttpClientBuilder AddPolicyHandler(
             this IHttpClientBuilder builder,
             IAsyncPolicy<HttpResponseMessage> policy
-        ) {
+        )
+        {
             if (builder == null)
             {
                 throw new ArgumentNullException(nameof(builder));
@@ -64,7 +65,8 @@ namespace Microsoft.Extensions.DependencyInjection
         public static IHttpClientBuilder AddPolicyHandler(
             this IHttpClientBuilder builder,
             Func<HttpRequestMessage, IAsyncPolicy<HttpResponseMessage>> policySelector
-        ) {
+        )
+        {
             if (builder == null)
             {
                 throw new ArgumentNullException(nameof(builder));
@@ -100,7 +102,8 @@ namespace Microsoft.Extensions.DependencyInjection
                 HttpRequestMessage,
                 IAsyncPolicy<HttpResponseMessage>
             > policySelector
-        ) {
+        )
+        {
             if (builder == null)
             {
                 throw new ArgumentNullException(nameof(builder));
@@ -139,7 +142,8 @@ namespace Microsoft.Extensions.DependencyInjection
         public static IHttpClientBuilder AddPolicyHandlerFromRegistry(
             this IHttpClientBuilder builder,
             string policyKey
-        ) {
+        )
+        {
             if (builder == null)
             {
                 throw new ArgumentNullException(nameof(builder));
@@ -184,7 +188,8 @@ namespace Microsoft.Extensions.DependencyInjection
                 HttpRequestMessage,
                 IAsyncPolicy<HttpResponseMessage>
             > policySelector
-        ) {
+        )
+        {
             if (builder == null)
             {
                 throw new ArgumentNullException(nameof(builder));
@@ -241,7 +246,8 @@ namespace Microsoft.Extensions.DependencyInjection
                 PolicyBuilder<HttpResponseMessage>,
                 IAsyncPolicy<HttpResponseMessage>
             > configurePolicy
-        ) {
+        )
+        {
             if (builder == null)
             {
                 throw new ArgumentNullException(nameof(builder));
@@ -286,7 +292,8 @@ namespace Microsoft.Extensions.DependencyInjection
                 IAsyncPolicy<HttpResponseMessage>
             > policyFactory,
             Func<HttpRequestMessage, string> keySelector
-        ) {
+        )
+        {
             if (builder == null)
             {
                 throw new ArgumentNullException(nameof(builder));
@@ -316,7 +323,8 @@ namespace Microsoft.Extensions.DependencyInjection
                                     key,
                                     out var policy
                                 )
-                            ) {
+                            )
+                            {
                                 return policy;
                             }
 

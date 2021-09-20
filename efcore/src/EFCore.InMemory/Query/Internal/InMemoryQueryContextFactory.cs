@@ -37,7 +37,8 @@ namespace Microsoft.EntityFrameworkCore.InMemory.Query.Internal
             QueryContextDependencies dependencies,
             IInMemoryStoreCache storeCache,
             IDbContextOptions contextOptions
-        ) {
+        )
+        {
             _store = storeCache.GetStore(contextOptions);
             _dependencies = dependencies;
         }

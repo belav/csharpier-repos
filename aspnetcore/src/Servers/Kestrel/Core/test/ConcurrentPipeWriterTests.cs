@@ -486,7 +486,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Tests
 
             public override ValueTask<FlushResult> FlushAsync(
                 CancellationToken cancellationToken = default
-            ) {
+            )
+            {
                 FlushCallCount++;
                 FlushTcs?.TrySetResult();
                 return new ValueTask<FlushResult>(_flushResults[FlushCallCount - 1].Task);

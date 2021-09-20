@@ -126,7 +126,8 @@ namespace Microsoft.CodeAnalysis.LanguageServer.UnitTests.Definitions
         private static async Task<LSP.Location[]> RunGotoDefinitionAsync(
             TestLspServer testLspServer,
             LSP.Location caret
-        ) {
+        )
+        {
             return await testLspServer.ExecuteRequestAsync<
                 LSP.TextDocumentPositionParams,
                 LSP.Location[]

@@ -20,7 +20,8 @@ namespace System.Composition.TypedParts.ActivationFeatures
             CompositeActivator activatorBody,
             IDictionary<string, object> partMetadata,
             IEnumerable<CompositionDependency> dependencies
-        ) {
+        )
+        {
             if (!ContractHelpers.IsShared(partMetadata))
                 return activatorBody;
 

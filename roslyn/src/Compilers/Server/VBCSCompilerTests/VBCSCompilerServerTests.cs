@@ -59,7 +59,8 @@ namespace Microsoft.CodeAnalysis.CompilerServer.UnitTests
                 bool waitForProcess = true,
                 TimeSpan? timeout = null,
                 CancellationToken cancellationToken = default(CancellationToken)
-            ) {
+            )
+            {
                 var appSettings = new NameValueCollection();
                 return new BuildServerController(appSettings, Logger).RunShutdownAsync(
                     pipeName,

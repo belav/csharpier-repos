@@ -58,7 +58,8 @@ namespace Microsoft.CodeAnalysis.RemoveUnnecessarySuppressions
             ImmutableArray<Diagnostic> diagnostics,
             SyntaxEditor editor,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             foreach (var diagnostic in diagnostics)
             {
                 var node = editor.OriginalRoot.FindNode(diagnostic.Location.SourceSpan);
@@ -70,13 +71,12 @@ namespace Microsoft.CodeAnalysis.RemoveUnnecessarySuppressions
 
         private class MyCodeAction : CustomCodeActions.DocumentChangeAction
         {
-            public MyCodeAction(
-                Func<CancellationToken, Task<Document>> createChangedDocument
-            ) : base(
-                AnalyzersResources.Remove_unnecessary_suppression,
-                createChangedDocument,
-                nameof(RemoveUnnecessaryAttributeSuppressionsCodeFixProvider)
-            ) { }
+            public MyCodeAction(Func<CancellationToken, Task<Document>> createChangedDocument)
+                : base(
+                    AnalyzersResources.Remove_unnecessary_suppression,
+                    createChangedDocument,
+                    nameof(RemoveUnnecessaryAttributeSuppressionsCodeFixProvider)
+                ) { }
         }
     }
 }

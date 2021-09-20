@@ -40,7 +40,8 @@ namespace System.Security.Cryptography
                                 hashAlgorithm.Name!,
                                 null
                             )
-                        ) {
+                        )
+                        {
                             return hashProvider.HashSizeInBytes;
                         }
                     }
@@ -54,7 +55,8 @@ namespace System.Security.Cryptography
                 byte[] hash,
                 HashAlgorithmName hashAlgorithm,
                 RSASignaturePadding padding
-            ) {
+            )
+            {
                 if (hash == null)
                 {
                     throw new ArgumentNullException(nameof(hash));
@@ -134,7 +136,8 @@ namespace System.Security.Cryptography
                 HashAlgorithmName hashAlgorithm,
                 RSASignaturePadding padding,
                 out int bytesWritten
-            ) {
+            )
+            {
                 string? hashAlgorithmName = hashAlgorithm.Name;
                 if (string.IsNullOrEmpty(hashAlgorithmName))
                 {
@@ -209,7 +212,8 @@ namespace System.Security.Cryptography
                 byte[] signature,
                 HashAlgorithmName hashAlgorithm,
                 RSASignaturePadding padding
-            ) {
+            )
+            {
                 if (hash == null)
                 {
                     throw new ArgumentNullException(nameof(hash));
@@ -232,7 +236,8 @@ namespace System.Security.Cryptography
                 ReadOnlySpan<byte> signature,
                 HashAlgorithmName hashAlgorithm,
                 RSASignaturePadding padding
-            ) {
+            )
+            {
                 string? hashAlgorithmName = hashAlgorithm.Name;
                 if (string.IsNullOrEmpty(hashAlgorithmName))
                 {

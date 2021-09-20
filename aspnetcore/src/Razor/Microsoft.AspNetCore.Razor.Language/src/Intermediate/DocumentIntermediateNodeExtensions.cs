@@ -10,7 +10,8 @@ namespace Microsoft.AspNetCore.Razor.Language.Intermediate
     {
         public static ClassDeclarationIntermediateNode FindPrimaryClass(
             this DocumentIntermediateNode node
-        ) {
+        )
+        {
             if (node == null)
             {
                 throw new ArgumentNullException(nameof(node));
@@ -24,7 +25,8 @@ namespace Microsoft.AspNetCore.Razor.Language.Intermediate
 
         public static MethodDeclarationIntermediateNode FindPrimaryMethod(
             this DocumentIntermediateNode node
-        ) {
+        )
+        {
             if (node == null)
             {
                 throw new ArgumentNullException(nameof(node));
@@ -38,7 +40,8 @@ namespace Microsoft.AspNetCore.Razor.Language.Intermediate
 
         public static NamespaceDeclarationIntermediateNode FindPrimaryNamespace(
             this DocumentIntermediateNode node
-        ) {
+        )
+        {
             if (node == null)
             {
                 throw new ArgumentNullException(nameof(node));
@@ -53,7 +56,8 @@ namespace Microsoft.AspNetCore.Razor.Language.Intermediate
         public static IReadOnlyList<IntermediateNodeReference> FindDirectiveReferences(
             this DocumentIntermediateNode node,
             DirectiveDescriptor directive
-        ) {
+        )
+        {
             if (node == null)
             {
                 throw new ArgumentNullException(nameof(node));
@@ -89,7 +93,8 @@ namespace Microsoft.AspNetCore.Razor.Language.Intermediate
             if (
                 node is T target
                 && object.ReferenceEquals(target.Annotations[annotation], annotation)
-            ) {
+            )
+            {
                 return target;
             }
 

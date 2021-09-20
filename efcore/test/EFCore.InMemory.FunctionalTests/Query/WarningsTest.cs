@@ -129,7 +129,8 @@ namespace Microsoft.EntityFrameworkCore.Query
                     defaultThrow: false,
                     CoreEventId.LazyLoadOnDisposedContextWarning
                 )
-            ) {
+            )
+            {
                 context.Add(new WarningAsErrorEntity { Nav = new IncludedEntity() });
                 context.SaveChanges();
             }
@@ -142,7 +143,8 @@ namespace Microsoft.EntityFrameworkCore.Query
                     defaultThrow: false,
                     CoreEventId.LazyLoadOnDisposedContextWarning
                 )
-            ) {
+            )
+            {
                 entity = context.WarningAsErrorEntities.OrderBy(e => e.Id).First();
             }
 
@@ -175,7 +177,8 @@ namespace Microsoft.EntityFrameworkCore.Query
                     defaultThrow: false,
                     toChangeLevel: (CoreEventId.LazyLoadOnDisposedContextWarning, LogLevel.Debug)
                 )
-            ) {
+            )
+            {
                 context.Add(new WarningAsErrorEntity { Nav = new IncludedEntity() });
                 context.SaveChanges();
             }
@@ -188,7 +191,8 @@ namespace Microsoft.EntityFrameworkCore.Query
                     defaultThrow: false,
                     toChangeLevel: (CoreEventId.LazyLoadOnDisposedContextWarning, LogLevel.Debug)
                 )
-            ) {
+            )
+            {
                 entity = context.WarningAsErrorEntities.OrderBy(e => e.Id).First();
             }
 
@@ -276,7 +280,8 @@ namespace Microsoft.EntityFrameworkCore.Query
                 EventId? toLog = null,
                 EventId? toThrow = null,
                 (EventId Id, LogLevel Level)? toChangeLevel = null
-            ) {
+            )
+            {
                 _serviceProvider = serviceProvider;
                 _defaultThrow = defaultThrow;
                 _toLog = toLog;

@@ -246,7 +246,8 @@ namespace System.Runtime.CompilerServices
             CSharpCompilationOptions options = null,
             IEnumerable<MetadataReference> references = null,
             string assemblyName = null
-        ) {
+        )
+        {
             Assert.NotNull(CorelibraryWithCovariantReturnSupport);
             references =
                 (references == null)

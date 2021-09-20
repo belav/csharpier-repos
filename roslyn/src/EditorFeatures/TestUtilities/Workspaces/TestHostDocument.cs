@@ -117,7 +117,8 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Workspaces
             ImmutableArray<string> roles = default,
             ITextBuffer? textBuffer = null,
             bool isSourceGenerated = false
-        ) {
+        )
+        {
             Contract.ThrowIfNull(filePath);
 
             _exportProvider = exportProvider;
@@ -161,7 +162,8 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Workspaces
             IReadOnlyList<string>? folders = null,
             ExportProvider? exportProvider = null,
             IDocumentServiceProvider? documentServiceProvider = null
-        ) {
+        )
+        {
             _exportProvider = exportProvider;
             _id = id;
             _initialText = text;
@@ -290,7 +292,8 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Workspaces
                 foreach (
                     var linkedId in workspace.CurrentSolution.GetDocumentIdsWithFilePath(FilePath)
                         .Concat(this.Id)
-                ) {
+                )
+                {
                     var testDocument = workspace.GetTestDocument(linkedId);
 
                     if (testDocument != null)
@@ -337,7 +340,8 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Workspaces
                     reiteratedVersionNumber: null,
                     editTag: null
                 )
-            ) {
+            )
+            {
                 var oldText = buffer.CurrentSnapshot.AsText();
                 var changes = newText.GetTextChanges(oldText);
 
@@ -359,7 +363,8 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Workspaces
                         reiteratedVersionNumber: null,
                         editTag: null
                     )
-            ) {
+            )
+            {
                 edit.Replace(new Span(0, this.GetTextBuffer().CurrentSnapshot.Length), newText);
                 edit.Apply();
             }

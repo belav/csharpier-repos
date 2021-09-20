@@ -54,7 +54,8 @@ class C
                 var token in tree.GetRoot()
                     .DescendantTokens()
                     .Where(t => t.Kind() != SyntaxKind.EndOfFileToken)
-            ) {
+            )
+            {
                 Assert.False(string.IsNullOrEmpty(token.Text));
                 Assert.False(string.IsNullOrEmpty(token.ValueText));
             }

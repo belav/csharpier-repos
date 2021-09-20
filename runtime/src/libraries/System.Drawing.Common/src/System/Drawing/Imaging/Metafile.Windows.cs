@@ -67,7 +67,8 @@ namespace System.Drawing.Imaging
             MetafileFrameUnit frameUnit,
             EmfType type,
             string? desc
-        ) {
+        )
+        {
             IntPtr metafile = IntPtr.Zero;
 
             if (frameRect.IsEmpty)
@@ -133,7 +134,8 @@ namespace System.Drawing.Imaging
             MetafileFrameUnit frameUnit,
             EmfType type,
             string? description
-        ) {
+        )
+        {
             // Called in order to emulate exception behavior from .NET Framework related to invalid file paths.
             Path.GetFullPath(fileName);
 
@@ -201,7 +203,8 @@ namespace System.Drawing.Imaging
             MetafileFrameUnit frameUnit,
             EmfType type,
             string? description
-        ) {
+        )
+        {
             Gdip.CheckStatus(
                 Gdip.GdipRecordMetafileStream(
                     new GPStream(stream),
@@ -227,7 +230,8 @@ namespace System.Drawing.Imaging
             MetafileFrameUnit frameUnit,
             EmfType type,
             string? description
-        ) {
+        )
+        {
             IntPtr metafile = IntPtr.Zero;
 
             if (frameRect.IsEmpty)
@@ -268,7 +272,8 @@ namespace System.Drawing.Imaging
         public static MetafileHeader GetMetafileHeader(
             IntPtr hmetafile,
             WmfPlaceableFileHeader wmfHeader
-        ) {
+        )
+        {
             MetafileHeader header = new MetafileHeader { wmf = new MetafileHeaderWmf() };
 
             Gdip.CheckStatus(Gdip.GdipGetMetafileHeaderFromWmf(hmetafile, wmfHeader, header.wmf));

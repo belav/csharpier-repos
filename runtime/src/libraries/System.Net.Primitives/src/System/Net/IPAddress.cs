@@ -228,7 +228,8 @@ namespace System.Net
         public static bool TryParse(
             [NotNullWhen(true)] string? ipString,
             [NotNullWhen(true)] out IPAddress? address
-        ) {
+        )
+        {
             if (ipString == null)
             {
                 address = null;
@@ -242,7 +243,8 @@ namespace System.Net
         public static bool TryParse(
             ReadOnlySpan<char> ipSpan,
             [NotNullWhen(true)] out IPAddress? address
-        ) {
+        )
+        {
             address = IPAddressParser.Parse(ipSpan, tryParse: true);
             return (address != null);
         }

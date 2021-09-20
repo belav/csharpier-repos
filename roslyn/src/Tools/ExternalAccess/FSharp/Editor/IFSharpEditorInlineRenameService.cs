@@ -44,7 +44,8 @@ namespace Microsoft.CodeAnalysis.ExternalAccess.FSharp.Editor
             FSharpInlineRenameReplacementKind kind,
             TextSpan originalSpan,
             TextSpan newSpan
-        ) {
+        )
+        {
             this.Kind = kind;
             this.OriginalSpan = originalSpan;
             this.NewSpan = newSpan;

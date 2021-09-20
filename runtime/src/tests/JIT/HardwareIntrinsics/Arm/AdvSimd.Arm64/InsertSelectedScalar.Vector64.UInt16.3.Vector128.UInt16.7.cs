@@ -134,7 +134,8 @@ namespace JIT.HardwareIntrinsics.Arm
                     || (alignment * 2) < sizeOfinArray1
                     || (alignment * 2) < sizeOfinArray3
                     || (alignment * 2) < sizeOfoutArray
-                ) {
+                )
+                {
                     throw new ArgumentException("Invalid value of alignment");
                 }
 
@@ -213,7 +214,8 @@ namespace JIT.HardwareIntrinsics.Arm
 
             public void RunStructFldScenario(
                 InsertSelectedScalarTest__InsertSelectedScalar_Vector64_UInt16_3_Vector128_UInt16_7 testClass
-            ) {
+            )
+            {
                 var result = AdvSimd.Arm64.InsertSelectedScalar(_fld1, 3, _fld3, 7);
 
                 Unsafe.Write(testClass._dataTable.outArrayPtr, result);
@@ -222,7 +224,8 @@ namespace JIT.HardwareIntrinsics.Arm
 
             public void RunStructFldScenario_Load(
                 InsertSelectedScalarTest__InsertSelectedScalar_Vector64_UInt16_3_Vector128_UInt16_7 testClass
-            ) {
+            )
+            {
                 fixed (Vector64<UInt16>* pFld1 = &_fld1)fixed (Vector128<UInt16>* pFld2 = &_fld3)
                 {
                     var result = AdvSimd.Arm64.InsertSelectedScalar(
@@ -429,7 +432,8 @@ namespace JIT.HardwareIntrinsics.Arm
 
             fixed (Vector64<UInt16>* pClsVar1 = &_clsVar1)fixed (
                 Vector128<UInt16>* pClsVar3 = &_clsVar3
-            ) {
+            )
+            {
                 var result = AdvSimd.Arm64.InsertSelectedScalar(
                     AdvSimd.LoadVector64((UInt16*)(pClsVar1)),
                     3,
@@ -487,7 +491,8 @@ namespace JIT.HardwareIntrinsics.Arm
 
             fixed (Vector64<UInt16>* pFld1 = &test._fld1)fixed (
                 Vector128<UInt16>* pFld2 = &test._fld3
-            ) {
+            )
+            {
                 var result = AdvSimd.Arm64.InsertSelectedScalar(
                     AdvSimd.LoadVector64((UInt16*)pFld1),
                     3,
@@ -597,7 +602,8 @@ namespace JIT.HardwareIntrinsics.Arm
             Vector128<UInt16> op3,
             void* result,
             [CallerMemberName] string method = ""
-        ) {
+        )
+        {
             UInt16[] inArray1 = new UInt16[Op1ElementCount];
             UInt16[] inArray3 = new UInt16[Op3ElementCount];
             UInt16[] outArray = new UInt16[RetElementCount];
@@ -618,7 +624,8 @@ namespace JIT.HardwareIntrinsics.Arm
             void* op3,
             void* result,
             [CallerMemberName] string method = ""
-        ) {
+        )
+        {
             UInt16[] inArray1 = new UInt16[Op1ElementCount];
             UInt16[] inArray3 = new UInt16[Op3ElementCount];
             UInt16[] outArray = new UInt16[RetElementCount];
@@ -647,7 +654,8 @@ namespace JIT.HardwareIntrinsics.Arm
             UInt16[] thirdOp,
             UInt16[] result,
             [CallerMemberName] string method = ""
-        ) {
+        )
+        {
             bool succeeded = true;
 
             for (var i = 0; i < RetElementCount; i++)

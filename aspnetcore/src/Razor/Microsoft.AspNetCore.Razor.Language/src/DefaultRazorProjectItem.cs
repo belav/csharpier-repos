@@ -25,7 +25,8 @@ namespace Microsoft.AspNetCore.Razor.Language
             string fileKind,
             FileInfo file,
             string cssScope
-        ) {
+        )
+        {
             BasePath = basePath;
             FilePath = filePath;
             RelativePhysicalPath = relativePhysicalPath;

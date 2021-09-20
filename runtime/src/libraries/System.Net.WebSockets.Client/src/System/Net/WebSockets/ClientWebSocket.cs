@@ -110,7 +110,8 @@ namespace System.Net.WebSockets
                     (int)InternalState.Connected,
                     (int)InternalState.Connecting
                 ) != InternalState.Connecting
-            ) {
+            )
+            {
                 Debug.Assert(_state == (int)InternalState.Disposed);
                 throw new ObjectDisposedException(GetType().FullName);
             }
@@ -186,7 +187,8 @@ namespace System.Net.WebSockets
             if (
                 (InternalState)Interlocked.Exchange(ref _state, (int)InternalState.Disposed)
                 != InternalState.Disposed
-            ) {
+            )
+            {
                 _innerWebSocket?.Dispose();
             }
         }

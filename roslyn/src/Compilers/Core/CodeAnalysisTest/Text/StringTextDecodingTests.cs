@@ -21,7 +21,8 @@ namespace Microsoft.CodeAnalysis.UnitTests
             Encoding writeEncoding,
             Encoding readEncodingOpt,
             SourceHashAlgorithm algorithm = SourceHashAlgorithm.Sha1
-        ) {
+        )
+        {
             byte[] bytes = writeEncoding.GetBytesWithPreamble(text);
 
             return CreateMemoryStreamBasedEncodedText(bytes, readEncodingOpt, algorithm);
@@ -31,7 +32,8 @@ namespace Microsoft.CodeAnalysis.UnitTests
             byte[] bytes,
             Encoding readEncodingOpt,
             SourceHashAlgorithm algorithm = SourceHashAlgorithm.Sha1
-        ) {
+        )
+        {
             // For testing purposes, create a bigger buffer so that we verify
             // that the implementation only uses the part that's covered by the stream and not the entire array.
             byte[] buffer = new byte[bytes.Length + 10];
@@ -45,7 +47,8 @@ namespace Microsoft.CodeAnalysis.UnitTests
                     writable: true,
                     publiclyVisible: true
                 )
-            ) {
+            )
+            {
                 return EncodedStringText.Create(stream, readEncodingOpt, algorithm);
             }
         }
@@ -55,7 +58,8 @@ namespace Microsoft.CodeAnalysis.UnitTests
             Func<Encoding> getEncoding,
             Encoding readEncodingOpt = null,
             SourceHashAlgorithm algorithm = SourceHashAlgorithm.Sha1
-        ) {
+        )
+        {
             // For testing purposes, create a bigger buffer so that we verify
             // that the implementation only uses the part that's covered by the stream and not the entire array.
             byte[] buffer = new byte[bytes.Length + 10];
@@ -69,7 +73,8 @@ namespace Microsoft.CodeAnalysis.UnitTests
                     writable: true,
                     publiclyVisible: true
                 )
-            ) {
+            )
+            {
                 return EncodedStringText.TestAccessor.Create(
                     stream,
                     new Lazy<Encoding>(getEncoding),
@@ -351,7 +356,8 @@ namespace Microsoft.CodeAnalysis.UnitTests
                             FileAccess.Read,
                             FileShare.Read
                         )
-                    ) {
+                    )
+                    {
                         var sourceText = EncodedStringText.Create(stream);
                         Assert.Equal(expectedText, sourceText.ToString());
                     }

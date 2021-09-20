@@ -105,7 +105,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel.FunctionalTests
             long? maxRequestBufferSize,
             bool connectionAdapter,
             bool expectPause
-        ) {
+        )
+        {
             // Parameters
             var data = new byte[_dataLength];
             var bytesWrittenTimeout = TimeSpan.FromMilliseconds(100);
@@ -133,7 +134,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel.FunctionalTests
                     clientFinishedSendingRequestBody,
                     memoryPoolFactory.Create
                 )
-            ) {
+            )
+            {
                 var port = host.GetPort();
                 using (var socket = CreateSocket(port))
                 using (var stream = new NetworkStream(socket))
@@ -182,7 +184,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel.FunctionalTests
                         while (
                             (DateTime.Now - lastBytesWritten) < bytesWrittenTimeout
                             || bytesWritten < minimumExpectedBytesWritten
-                        ) {
+                        )
+                        {
                             await Task.Delay(bytesWrittenPollingInterval);
                         }
 
@@ -247,7 +250,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel.FunctionalTests
                     clientFinishedSendingRequestBody,
                     memoryPoolFactory.Create
                 )
-            ) {
+            )
+            {
                 var port = host.GetPort();
                 using (var socket = CreateSocket(port))
                 using (var stream = new NetworkStream(socket))
@@ -292,7 +296,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel.FunctionalTests
                     while (
                         (DateTime.Now - lastBytesWritten) < bytesWrittenTimeout
                         || bytesWritten < minimumExpectedBytesWritten
-                    ) {
+                    )
+                    {
                         await Task.Delay(bytesWrittenPollingInterval);
                     }
 
@@ -327,7 +332,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel.FunctionalTests
             TaskCompletionSource startReadingRequestBody,
             TaskCompletionSource clientFinishedSendingRequestBody,
             Func<MemoryPool<byte>> memoryPoolFactory = null
-        ) {
+        )
+        {
             var host = TransportSelector.GetHostBuilder(memoryPoolFactory, maxRequestBufferSize)
                 .ConfigureWebHost(
                     webHostBuilder =>
@@ -352,7 +358,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel.FunctionalTests
                                         maxRequestBufferSize.HasValue
                                         && maxRequestBufferSize.Value
                                             < options.Limits.MaxRequestLineSize
-                                    ) {
+                                    )
+                                    {
                                         options.Limits.MaxRequestLineSize =
                                             (int)maxRequestBufferSize;
                                     }
@@ -361,7 +368,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel.FunctionalTests
                                         maxRequestBufferSize.HasValue
                                         && maxRequestBufferSize.Value
                                             < options.Limits.MaxRequestHeadersTotalSize
-                                    ) {
+                                    )
+                                    {
                                         options.Limits.MaxRequestHeadersTotalSize =
                                             (int)maxRequestBufferSize;
                                     }
@@ -403,7 +411,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel.FunctionalTests
                                                     0,
                                                     1
                                                 ) != 0
-                                            ) {
+                                            )
+                                            {
                                                 context.Response.StatusCode =
                                                     StatusCodes.Status500InternalServerError;
                                                 await context.Response.WriteAsync(
@@ -454,7 +463,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel.FunctionalTests
                     bufferSize: 1024,
                     leaveOpen: true
                 )
-            ) {
+            )
+            {
                 foreach (var line in _requestLines)
                 {
                     await writer.WriteAsync(line).ConfigureAwait(false);

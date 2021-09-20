@@ -49,7 +49,8 @@ namespace System.Net.NetworkInformation
                         if (
                             s_addressChangedSubscribers.Count == 0
                             && s_availabilityChangedSubscribers.Count == 0
-                        ) {
+                        )
+                        {
                             CreateAndStartRunLoop();
                         }
 
@@ -70,7 +71,8 @@ namespace System.Net.NetworkInformation
                             hadAddressChangedSubscribers
                             && s_addressChangedSubscribers.Count == 0
                             && s_availabilityChangedSubscribers.Count == 0
-                        ) {
+                        )
+                        {
                             StopRunLoop();
                         }
                     }
@@ -89,7 +91,8 @@ namespace System.Net.NetworkInformation
                         if (
                             s_addressChangedSubscribers.Count == 0
                             && s_availabilityChangedSubscribers.Count == 0
-                        ) {
+                        )
+                        {
                             CreateAndStartRunLoop();
                         }
                         else
@@ -116,7 +119,8 @@ namespace System.Net.NetworkInformation
                             hadSubscribers
                             && s_addressChangedSubscribers.Count == 0
                             && s_availabilityChangedSubscribers.Count == 0
-                        ) {
+                        )
+                        {
                             StopRunLoop();
                         }
                     }
@@ -133,7 +137,8 @@ namespace System.Net.NetworkInformation
                 SafeCreateHandle storeName = Interop.CoreFoundation.CFStringCreateWithCString(
                     "NetworkAddressChange.OSX"
                 )
-            ) {
+            )
+            {
                 s_dynamicStoreRef = Interop.SystemConfiguration.SCDynamicStoreCreate(
                     storeName.DangerousGetHandle(),
                     &OnAddressChanged,
@@ -158,13 +163,15 @@ namespace System.Net.NetworkInformation
             using (
                 SafeCreateHandle entNetIpv6String =
                     Interop.CoreFoundation.CFStringCreateWithCString("IPv6")
-            ) {
+            )
+            {
                 if (
                     dynamicStoreDomainStateString.IsInvalid
                     || compAnyRegexString.IsInvalid
                     || entNetIpv4String.IsInvalid
                     || entNetIpv6String.IsInvalid
-                ) {
+                )
+                {
                     s_dynamicStoreRef.Dispose();
                     s_dynamicStoreRef = null;
                     throw new NetworkInformationException(SR.net_PInvokeError);
@@ -195,7 +202,8 @@ namespace System.Net.NetworkInformation
                         },
                         (UIntPtr)2
                     )
-                ) {
+                )
+                {
                     // Try to register our pattern strings with the dynamic store instance.
                     if (
                         patterns.IsInvalid
@@ -204,7 +212,8 @@ namespace System.Net.NetworkInformation
                             IntPtr.Zero,
                             patterns.DangerousGetHandle()
                         )
-                    ) {
+                    )
+                    {
                         s_dynamicStoreRef.Dispose();
                         s_dynamicStoreRef = null;
                         throw new NetworkInformationException(SR.net_PInvokeError);
@@ -307,7 +316,8 @@ namespace System.Net.NetworkInformation
                         NetworkAddressChangedEventHandler,
                         ExecutionContext?
                     > subscriber in addressChangedSubscribers
-                ) {
+                )
+                {
                     NetworkAddressChangedEventHandler handler = subscriber.Key;
                     ExecutionContext? ec = subscriber.Value;
 
@@ -336,7 +346,8 @@ namespace System.Net.NetworkInformation
                         NetworkAvailabilityChangedEventHandler,
                         ExecutionContext?
                     > subscriber in availabilityChangedSubscribers
-                ) {
+                )
+                {
                     NetworkAvailabilityChangedEventHandler handler = subscriber.Key;
                     ExecutionContext? ec = subscriber.Value;
 

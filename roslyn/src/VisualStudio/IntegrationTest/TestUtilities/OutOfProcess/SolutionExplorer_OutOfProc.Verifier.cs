@@ -25,7 +25,8 @@ namespace Microsoft.VisualStudio.IntegrationTest.Utilities.OutOfProcess
                 string assemblyName,
                 string assemblyVersion,
                 string assemblyPublicKeyToken
-            ) {
+            )
+            {
                 var assemblyReferences = _solutionExplorer.GetAssemblyReferences(project);
                 var expectedAssemblyReference =
                     assemblyName + "," + assemblyVersion + "," + assemblyPublicKeyToken.ToUpper();
@@ -35,7 +36,8 @@ namespace Microsoft.VisualStudio.IntegrationTest.Utilities.OutOfProcess
             public void ProjectReferencePresent(
                 ProjectUtils.Project project,
                 string referencedProjectName
-            ) {
+            )
+            {
                 var projectReferences = _solutionExplorer.GetProjectReferences(project);
                 Assert.Contains(referencedProjectName, projectReferences);
             }
@@ -44,7 +46,8 @@ namespace Microsoft.VisualStudio.IntegrationTest.Utilities.OutOfProcess
                 ProjectUtils.Project project,
                 string fileName,
                 string expectedContents
-            ) {
+            )
+            {
                 var actualContents = _solutionExplorer.GetFileContents(project, fileName);
                 Assert.Equal(expectedContents, actualContents);
             }

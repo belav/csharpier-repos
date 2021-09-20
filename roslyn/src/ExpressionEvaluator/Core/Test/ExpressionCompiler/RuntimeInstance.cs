@@ -21,7 +21,8 @@ namespace Microsoft.CodeAnalysis.ExpressionEvaluator.UnitTests
         internal RuntimeInstance(
             ImmutableArray<ModuleInstance> modules,
             DebugInformationFormat debugFormat
-        ) {
+        )
+        {
             Modules = modules;
             DebugFormat = debugFormat;
         }
@@ -48,7 +49,8 @@ namespace Microsoft.CodeAnalysis.ExpressionEvaluator.UnitTests
             DebugInformationFormat debugFormat,
             bool includeLocalSignatures,
             bool includeIntrinsicAssembly
-        ) {
+        )
+        {
             var module = compilation.ToModuleInstance(debugFormat, includeLocalSignatures);
 
             if (references == null)
@@ -73,7 +75,8 @@ namespace Microsoft.CodeAnalysis.ExpressionEvaluator.UnitTests
             ModuleInstance module,
             IEnumerable<MetadataReference> references,
             DebugInformationFormat debugFormat
-        ) {
+        )
+        {
             // Create modules for the references and the program
             var modules = ImmutableArray.CreateRange(
                 references.Select(r => r.ToModuleInstance()).Concat(new[] { module })

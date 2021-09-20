@@ -130,7 +130,8 @@ namespace Microsoft.AspNetCore.Mvc.Routing
             string appRoot,
             string host,
             string protocol
-        ) {
+        )
+        {
             return CreateUrlHelper(GetDefaultEndpoints(), appRoot, host, protocol);
         }
 
@@ -140,7 +141,8 @@ namespace Microsoft.AspNetCore.Mvc.Routing
             string protocol,
             string routeName,
             string template
-        ) {
+        )
+        {
             var endpoints = GetDefaultEndpoints();
             endpoints.Add(CreateEndpoint(template, routeName: routeName));
             return CreateUrlHelper(endpoints, appRoot, host, protocol);
@@ -172,7 +174,8 @@ namespace Microsoft.AspNetCore.Mvc.Routing
             string routeName,
             string template,
             object defaults
-        ) {
+        )
+        {
             var endpoint = CreateEndpoint(
                 template,
                 new RouteValueDictionary(defaults),
@@ -187,7 +190,8 @@ namespace Microsoft.AspNetCore.Mvc.Routing
         private IUrlHelper CreateUrlHelper(
             IEnumerable<RouteEndpoint> endpoints,
             ActionContext actionContext = null
-        ) {
+        )
+        {
             var serviceProvider = CreateServices(endpoints);
             var httpContext = CreateHttpContext(serviceProvider, null, null, "http");
             actionContext = actionContext ?? CreateActionContext(httpContext);
@@ -199,7 +203,8 @@ namespace Microsoft.AspNetCore.Mvc.Routing
             string appRoot,
             string host,
             string protocol
-        ) {
+        )
+        {
             var serviceProvider = CreateServices(endpoints);
             var httpContext = CreateHttpContext(serviceProvider, appRoot, host, protocol);
             var actionContext = CreateActionContext(httpContext);
@@ -295,7 +300,8 @@ namespace Microsoft.AspNetCore.Mvc.Routing
             int order = 0,
             string routeName = null,
             IList<object> metadata = null
-        ) {
+        )
+        {
             metadata = metadata ?? new List<object>();
 
             if (routeName != null)

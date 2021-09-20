@@ -96,7 +96,8 @@ namespace System.Dynamic
         public static BindingRestrictions GetInstanceRestriction(
             Expression expression,
             object? instance
-        ) {
+        )
+        {
             ContractUtils.RequiresNotNull(expression, nameof(expression));
 
             return new InstanceRestriction(expression, instance);

@@ -18,7 +18,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation
             uint executeInformation,
             IntPtr pvaIn,
             IntPtr pvaOut
-        ) {
+        )
+        {
             try
             {
                 this.CurrentlyExecutingCommand = commandId;
@@ -91,7 +92,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation
             uint executeInformation,
             IntPtr pvaIn,
             IntPtr pvaOut
-        ) {
+        )
+        {
             switch ((VSConstants.VSStd97CmdID)commandId)
             {
                 case VSConstants.VSStd97CmdID.Paste:
@@ -127,7 +129,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation
             uint executeInformation,
             IntPtr pvaIn,
             IntPtr pvaOut
-        ) {
+        )
+        {
             switch ((VSConstants.VSStd2KCmdID)commandId)
             {
                 case VSConstants.VSStd2KCmdID.TYPECHAR:

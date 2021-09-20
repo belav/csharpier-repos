@@ -23,7 +23,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.CodeGen
         public static IMethodSymbol FindLocalFunction(
             this CompilationVerifier verifier,
             string localFunctionName
-        ) {
+        )
+        {
             localFunctionName = (char)GeneratedNameKind.LocalFunction + "__" + localFunctionName;
             var methods = verifier.TestData.GetMethodsByName();
             IMethodSymbol result = null;
@@ -6303,7 +6304,8 @@ class C
             void checkImplAttributes(
                 LocalFunctionStatementSyntax localFunctionStatement,
                 MethodImplAttributes expectedFlags
-            ) {
+            )
+            {
                 var localFunction = semanticModel.GetDeclaredSymbol(localFunctionStatement)
                     .GetSymbol<LocalFunctionSymbol>();
                 Assert.Equal(expectedFlags, localFunction.ImplementationAttributes);
@@ -6525,7 +6527,8 @@ public class Program
             string output,
             CSharpCompilationOptions options,
             Verification verify = Verification.Passes
-        ) {
+        )
+        {
             var comp = CreateCompilationWithMscorlib45AndCSharp(source, options: options);
             return CompileAndVerify(comp, expectedOutput: output, verify: verify)
                 .VerifyDiagnostics(); // no diagnostics
@@ -6544,7 +6547,8 @@ public class Program
             string methodBody,
             string output,
             params string[] usings
-        ) {
+        )
+        {
             for (var i = 0; i < usings.Length; i++)
             {
                 usings[i] = "using " + usings[i] + ";";

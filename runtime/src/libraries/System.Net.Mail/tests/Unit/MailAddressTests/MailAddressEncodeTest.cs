@@ -84,7 +84,8 @@ namespace System.Net.Mail.Tests
         [MemberData(nameof(MailAddressFactory_Address))]
         public void EncodeSingleMailAddress_WithAddressAndNoUnicode_AndPaddingValueOfNonZero_ShouldEncodeCorrectly(
             Func<string, MailAddress> factory
-        ) {
+        )
+        {
             MailAddress testAddress = factory("test@example.com");
 
             string result = testAddress.Encode(2, false);
@@ -98,7 +99,8 @@ namespace System.Net.Mail.Tests
         [MemberData(nameof(MailAddressFactory_AddressDisplayName))]
         public void EncodeSingleMailAddress_WithAddressAndUnicode_AndPaddingValueOfNonZero_ShouldEncodeCorrectly(
             Func<string, string, MailAddress> factory
-        ) {
+        )
+        {
             MailAddress testAddress = factory(
                 "jeff@nclmailtest.com",
                 "jeff \u00C3\u00DA\u00EA\u00EB\u00EF\u00EF"
@@ -120,7 +122,8 @@ namespace System.Net.Mail.Tests
         [MemberData(nameof(MailAddressFactory_Address))]
         public void EncodeSingleMailAddress_WithAddressOnly_ShouldEncodeAsAddress(
             Func<string, MailAddress> factory
-        ) {
+        )
+        {
             MailAddress testAddress = factory("test@example.com");
             string result = testAddress.Encode(0, false);
             Assert.Equal("test@example.com", result);
@@ -130,7 +133,8 @@ namespace System.Net.Mail.Tests
         [MemberData(nameof(MailAddressFactory_AddressDisplayName))]
         public void EncodeSingleMailAddress_WithAddressAndDisplayName_ShouldEncodeAsDisplayNameAndAddressInBrackets(
             Func<string, string, MailAddress> factory
-        ) {
+        )
+        {
             MailAddress testAddress = factory("test@example.com", "test");
             string result = testAddress.Encode(0, false);
             Assert.Equal("\"test\" <test@example.com>", result);
@@ -143,7 +147,8 @@ namespace System.Net.Mail.Tests
         [MemberData(nameof(MailAddressFactory_AddressDisplayName))]
         public void EncodeSingleMailAddress_WithAddressAndDisplayNameUnicode_ShouldQEncode(
             Func<string, string, MailAddress> factory
-        ) {
+        )
+        {
             MailAddress testAddress = factory("test@example.com", "test\u00DC");
 
             string result = testAddress.Encode(0, false);
@@ -157,7 +162,8 @@ namespace System.Net.Mail.Tests
         [MemberData(nameof(MailAddressFactory_AddressDisplayName))]
         public void EncodeSingleMailAddress_WithAddressAndLongDisplayNameUnicode_ShouldQEncode(
             Func<string, string, MailAddress> factory
-        ) {
+        )
+        {
             MailAddress testAddress = factory(
                 "test@example.com",
                 "test\u00DCtesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttest"
@@ -181,7 +187,8 @@ namespace System.Net.Mail.Tests
         [MemberData(nameof(MailAddressFactory_AddressDisplayName))]
         public void EncodeSingleMailAddress_WithAddressAndNonAsciiAndRangeOfChars_ShouldQEncode(
             Func<string, string, MailAddress> factory
-        ) {
+        )
+        {
             MailAddress testAddress = factory(
                 "test@example.com",
                 "\u00AE !#$%&'()+,-./0123456789:;<=>?@ABCDEFGHIJKLMNOPQRSTUVWXYZ[\\]^_`abcdefghijklmnopqrstuvwxyz{|}~"
@@ -206,7 +213,8 @@ namespace System.Net.Mail.Tests
         [MemberData(nameof(MailAddressFactory_AddressDisplayName))]
         public void EncodeMultipleMailAddress_WithOneAddressAndDisplayName_ShouldEncodeAsDisplayNameAndAddressInBrackets(
             Func<string, string, MailAddress> factory
-        ) {
+        )
+        {
             MailAddress testAddress = factory("test@example.com", "test");
             MailAddressCollection collection = new MailAddressCollection();
             collection.Add(testAddress);
@@ -222,7 +230,8 @@ namespace System.Net.Mail.Tests
         [MemberData(nameof(MailAddressFactory_AddressDisplayName))]
         public void EncodeMultipleMailAddress_WithTwoAddressesThatAreTheSame_ShouldEncodeCorrectly(
             Func<string, string, MailAddress> factory
-        ) {
+        )
+        {
             MailAddress testAddress = factory("test@example.com", "test");
             MailAddress testAddress2 = factory("test@example.com", "test");
             MailAddressCollection collection = new MailAddressCollection();
@@ -240,7 +249,8 @@ namespace System.Net.Mail.Tests
         [MemberData(nameof(MailAddressFactory_AddressDisplayName))]
         public void EncodeMultipleMailAddress_WithTwoAddressesThatAreDifferentAndContainUnicode_ShouldEncodeCorrectly(
             Func<string, string, MailAddress> factory
-        ) {
+        )
+        {
             MailAddress testAddress = factory("test@example.com", "test");
             MailAddress testAddress2 = factory("test2@example.com", "test\u00DC");
             MailAddressCollection collection = new MailAddressCollection();
@@ -262,7 +272,8 @@ namespace System.Net.Mail.Tests
         public void EncodeMultipleMailAddress_WithManyAddressesThatAreDifferentAndContainUnicode_ShouldEncodeCorrectly(
             Func<string, MailAddress> factoryAddress,
             Func<string, string, MailAddress> factoryAddressDisplayName
-        ) {
+        )
+        {
             MailAddress testAddress = factoryAddressDisplayName("test@example.com", "test");
             MailAddress testAddress2 = factoryAddressDisplayName("test2@example.com", "test\u00DC");
             MailAddress testAddress3 = factoryAddress("test5@example2.com");

@@ -54,7 +54,8 @@ namespace Microsoft.EntityFrameworkCore.Query.Internal
             TContext context,
             CancellationToken cancellationToken,
             params object?[] parameters
-        ) {
+        )
+        {
             var executor = EnsureExecutor(context);
             var queryContextFactory = context.GetService<IQueryContextFactory>();
             var queryContext = queryContextFactory.Create();
@@ -107,7 +108,8 @@ namespace Microsoft.EntityFrameworkCore.Query.Internal
             public QueryExpressionRewriter(
                 TContext context,
                 IReadOnlyCollection<ParameterExpression> parameters
-            ) {
+            )
+            {
                 _context = context;
                 _parameters = parameters;
             }

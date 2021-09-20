@@ -12,7 +12,8 @@ namespace System.CodeDom
             CodeExpression testExpression,
             CodeStatement incrementStatement,
             params CodeStatement[] statements
-        ) {
+        )
+        {
             InitStatement = initStatement;
             TestExpression = testExpression;
             IncrementStatement = incrementStatement;

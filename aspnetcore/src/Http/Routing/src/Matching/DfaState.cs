@@ -18,7 +18,8 @@ namespace Microsoft.AspNetCore.Routing.Matching
             IEndpointSelectorPolicy[] policies,
             JumpTable pathTransitions,
             PolicyJumpTable policyTransitions
-        ) {
+        )
+        {
             Candidates = candidates;
             Policies = policies;
             PathTransitions = pathTransitions;

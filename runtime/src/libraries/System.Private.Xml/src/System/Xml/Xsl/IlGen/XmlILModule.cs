@@ -135,7 +135,8 @@ namespace System.Xml.Xsl.IlGen
             Type[] paramTypes,
             string?[] paramNames,
             XmlILMethodAttributes xmlAttrs
-        ) {
+        )
+        {
             MethodInfo methResult;
             int uniqueId = 1;
             string nameOrig = name;

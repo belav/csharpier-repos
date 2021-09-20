@@ -82,7 +82,8 @@ namespace System.Linq.Parallel
             CancellationToken externalCancellationToken,
             ParallelExecutionMode? executionMode,
             ParallelMergeOptions? mergeOptions
-        ) {
+        )
+        {
             _taskScheduler = taskScheduler;
             _degreeOfParallelism = degreeOfParallelism;
             _cancellationState = new CancellationState(externalCancellationToken);
@@ -111,7 +112,8 @@ namespace System.Linq.Parallel
             if (
                 this.CancellationState.ExternalCancellationToken.CanBeCanceled
                 && settings2.CancellationState.ExternalCancellationToken.CanBeCanceled
-            ) {
+            )
+            {
                 throw new InvalidOperationException(SR.ParallelQuery_DuplicateWithCancellation);
             }
 
@@ -158,7 +160,8 @@ namespace System.Linq.Parallel
         internal QuerySettings WithPerExecutionSettings(
             CancellationTokenSource topLevelCancellationTokenSource,
             Shared<bool> topLevelDisposedFlag
-        ) {
+        )
+        {
             //Initialize a new QuerySettings structure and copy in the current settings.
             //Note: this has the very important effect of newing a fresh CancellationSettings,
             //      and _not_ copying in the current internalCancellationSource or topLevelDisposedFlag which should not be

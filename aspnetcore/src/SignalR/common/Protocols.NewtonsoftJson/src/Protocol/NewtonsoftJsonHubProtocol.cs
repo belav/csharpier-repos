@@ -77,7 +77,8 @@ namespace Microsoft.AspNetCore.SignalR.Protocol
             ref ReadOnlySequence<byte> input,
             IInvocationBinder binder,
             [NotNullWhen(true)] out HubMessage? message
-        ) {
+        )
+        {
             if (!TextMessageParser.TryParseMessage(ref input, out var payload))
             {
                 message = null;
@@ -309,7 +310,8 @@ namespace Microsoft.AspNetCore.SignalR.Protocol
                                                     reader.Depth == initialDepth
                                                         && reader.TokenType == JsonToken.StartArray
                                                     || reader.Depth > initialDepth
-                                                ) {
+                                                )
+                                                {
                                                     JsonUtils.CheckRead(reader);
                                                 }
                                             }
@@ -630,7 +632,8 @@ namespace Microsoft.AspNetCore.SignalR.Protocol
         private void WriteCancelInvocationMessage(
             CancelInvocationMessage message,
             JsonTextWriter writer
-        ) {
+        )
+        {
             WriteInvocationId(message, writer);
         }
 
@@ -655,7 +658,8 @@ namespace Microsoft.AspNetCore.SignalR.Protocol
         private void WriteStreamInvocationMessage(
             StreamInvocationMessage message,
             JsonTextWriter writer
-        ) {
+        )
+        {
             WriteInvocationId(message, writer);
             writer.WritePropertyName(TargetPropertyName);
             writer.WriteValue(message.Target);
@@ -741,7 +745,8 @@ namespace Microsoft.AspNetCore.SignalR.Protocol
             object? result,
             bool hasResult,
             IInvocationBinder binder
-        ) {
+        )
+        {
             if (string.IsNullOrEmpty(invocationId))
             {
                 throw new InvalidDataException(
@@ -769,7 +774,8 @@ namespace Microsoft.AspNetCore.SignalR.Protocol
             object? item,
             bool hasItem,
             IInvocationBinder binder
-        ) {
+        )
+        {
             if (string.IsNullOrEmpty(invocationId))
             {
                 throw new InvalidDataException(
@@ -792,7 +798,8 @@ namespace Microsoft.AspNetCore.SignalR.Protocol
             bool hasArguments,
             string[]? streamIds,
             IInvocationBinder binder
-        ) {
+        )
+        {
             if (string.IsNullOrEmpty(invocationId))
             {
                 throw new InvalidDataException(
@@ -826,7 +833,8 @@ namespace Microsoft.AspNetCore.SignalR.Protocol
             bool hasArguments,
             string[]? streamIds,
             IInvocationBinder binder
-        ) {
+        )
+        {
             if (string.IsNullOrEmpty(target))
             {
                 throw new InvalidDataException(
@@ -850,7 +858,8 @@ namespace Microsoft.AspNetCore.SignalR.Protocol
             JsonTextReader reader,
             IReadOnlyList<Type> paramTypes,
             int paramIndex
-        ) {
+        )
+        {
             if (paramIndex < paramTypes.Count)
             {
                 var paramType = paramTypes[paramIndex];

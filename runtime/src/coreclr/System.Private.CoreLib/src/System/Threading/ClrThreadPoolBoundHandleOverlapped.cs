@@ -23,7 +23,8 @@ namespace System.Threading
             object? state,
             object? pinData,
             PreAllocatedOverlapped? preAllocated
-        ) {
+        )
+        {
             _userCallback = callback;
             _userState = state;
             _preAllocated = preAllocated;
@@ -37,7 +38,8 @@ namespace System.Threading
             uint errorCode,
             uint numBytes,
             NativeOverlapped* nativeOverlapped
-        ) {
+        )
+        {
             ThreadPoolBoundHandleOverlapped overlapped =
                 (ThreadPoolBoundHandleOverlapped)Overlapped.Unpack(nativeOverlapped);
 

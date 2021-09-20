@@ -408,7 +408,8 @@ namespace Microsoft.CodeAnalysis.Scripting.Test
         [InlineData(OptimizationLevel.Release)]
         public void WithOptimizationLevel_SameValueTwice_DoesNotCreateNewInstance(
             OptimizationLevel optimizationLevel
-        ) {
+        )
+        {
             var options = ScriptOptions.Default.WithOptimizationLevel(optimizationLevel);
             Assert.Same(options, options.WithOptimizationLevel(optimizationLevel));
         }
@@ -418,7 +419,8 @@ namespace Microsoft.CodeAnalysis.Scripting.Test
         [InlineData(OptimizationLevel.Release)]
         public void OptimizationLevel_Is_AppliedTo_CompilationOption(
             OptimizationLevel optimizationLevel
-        ) {
+        )
+        {
             var scriptOptions = ScriptOptions.Default.WithOptimizationLevel(optimizationLevel);
             var compilation = CSharpScript.Create(string.Empty, scriptOptions).GetCompilation();
             Assert.Equal(scriptOptions.OptimizationLevel, compilation.Options.OptimizationLevel);

@@ -13,7 +13,8 @@ namespace Roslyn.Utilities
             this string text,
             char escapePrefix,
             params char[] prohibitedCharacters
-        ) {
+        )
+        {
             StringBuilder? builder = null;
 
             var startIndex = 0;

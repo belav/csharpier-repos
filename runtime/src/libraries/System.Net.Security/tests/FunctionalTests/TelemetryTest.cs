@@ -152,7 +152,8 @@ namespace System.Net.Security.Tests
         private static void ValidateHandshakeStopEventPayload(
             EventWrittenEventArgs stopEvent,
             bool failure
-        ) {
+        )
+        {
             Assert.Equal("HandshakeStop", stopEvent.EventName);
             Assert.Equal(1, stopEvent.Payload.Count);
 
@@ -172,7 +173,8 @@ namespace System.Net.Security.Tests
         private static void VerifyEventCounters(
             ConcurrentQueue<EventWrittenEventArgs> events,
             bool shouldHaveFailures
-        ) {
+        )
+        {
             Dictionary<string, double[]> eventCounters = events.Where(
                     e => e.EventName == "EventCounters"
                 )

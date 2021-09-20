@@ -48,7 +48,8 @@ namespace Microsoft.AspNetCore.Owin
 
         internal static IHeaderDictionary MakeHeaderDictionary(
             IDictionary<string, string[]> dictionary
-        ) {
+        )
+        {
             var wrapper = dictionary as DictionaryStringArrayWrapper;
             if (wrapper != null)
             {
@@ -59,7 +60,8 @@ namespace Microsoft.AspNetCore.Owin
 
         internal static IDictionary<string, string[]> MakeDictionaryStringArray(
             IHeaderDictionary dictionary
-        ) {
+        )
+        {
             var wrapper = dictionary as DictionaryStringValuesWrapper;
             if (wrapper != null)
             {

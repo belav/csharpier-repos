@@ -15,7 +15,8 @@ namespace System.Formats.Cbor.Tests
         [InlineData((CborConformanceMode)(-1))]
         public static void InvalidConformanceMode_ShouldThrowArgumentOutOfRangeException(
             CborConformanceMode mode
-        ) {
+        )
+        {
             Assert.Throws<ArgumentOutOfRangeException>(
                 () => new CborReader(Array.Empty<byte>(), conformanceMode: mode)
             );
@@ -91,7 +92,8 @@ namespace System.Formats.Cbor.Tests
         public static void Peek_SingleByteBuffer_ShouldReturnExpectedState(
             byte majorType,
             CborReaderState expectedResult
-        ) {
+        )
+        {
             ReadOnlyMemory<byte> buffer = new byte[] { (byte)(majorType << 5) };
             var reader = new CborReader(buffer);
             Assert.Equal(expectedResult, reader.PeekState());
@@ -135,7 +137,8 @@ namespace System.Formats.Cbor.Tests
             object expectedValue,
             int repetitions,
             string hexEncoding
-        ) {
+        )
+        {
             var reader = new CborReader(
                 hexEncoding.HexToByteArray(),
                 allowMultipleRootLevelValues: true
@@ -217,7 +220,8 @@ namespace System.Formats.Cbor.Tests
         [MemberData(nameof(EncodedValueInvalidInputs))]
         public static void ReadEncodedValue_InvalidCbor_ShouldThrowCborContentException(
             string hexEncoding
-        ) {
+        )
+        {
             byte[] encoding = hexEncoding.HexToByteArray();
             var reader = new CborReader(encoding);
             Assert.Throws<CborContentException>(() => reader.ReadEncodedValue());
@@ -234,7 +238,8 @@ namespace System.Formats.Cbor.Tests
         public static void ReadEncodedValue_InvalidConformance_ConformanceCheckEnabled_ShouldThrowCborContentException(
             CborConformanceMode mode,
             string hexEncoding
-        ) {
+        )
+        {
             byte[] encoding = hexEncoding.HexToByteArray();
             var reader = new CborReader(encoding, mode);
             Assert.Throws<CborContentException>(
@@ -248,7 +253,8 @@ namespace System.Formats.Cbor.Tests
         public static void ReadEncodedValue_InvalidConformance_ConformanceCheckDisabled_ShouldSucceed(
             CborConformanceMode mode,
             string hexEncoding
-        ) {
+        )
+        {
             byte[] encoding = hexEncoding.HexToByteArray();
             var reader = new CborReader(encoding, mode);
             ReadOnlyMemory<byte> encodedValue = reader.ReadEncodedValue(
@@ -294,7 +300,8 @@ namespace System.Formats.Cbor.Tests
             string hexExpectedQy,
             string? expectedHashAlgorithmName,
             string curveFriendlyName
-        ) {
+        )
+        {
             ECPoint q = new ECPoint()
             {
                 X = hexExpectedQx.HexToByteArray(),

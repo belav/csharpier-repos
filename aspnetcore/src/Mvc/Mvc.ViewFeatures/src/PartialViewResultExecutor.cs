@@ -43,14 +43,16 @@ namespace Microsoft.AspNetCore.Mvc.ViewFeatures
             DiagnosticListener diagnosticListener,
             ILoggerFactory loggerFactory,
             IModelMetadataProvider modelMetadataProvider
-        ) : base(
-            viewOptions,
-            writerFactory,
-            viewEngine,
-            tempDataFactory,
-            diagnosticListener,
-            modelMetadataProvider
-        ) {
+        )
+            : base(
+                viewOptions,
+                writerFactory,
+                viewEngine,
+                tempDataFactory,
+                diagnosticListener,
+                modelMetadataProvider
+            )
+        {
             if (loggerFactory == null)
             {
                 throw new ArgumentNullException(nameof(loggerFactory));
@@ -73,7 +75,8 @@ namespace Microsoft.AspNetCore.Mvc.ViewFeatures
         public virtual ViewEngineResult FindView(
             ActionContext actionContext,
             PartialViewResult viewResult
-        ) {
+        )
+        {
             if (actionContext == null)
             {
                 throw new ArgumentNullException(nameof(actionContext));
@@ -159,7 +162,8 @@ namespace Microsoft.AspNetCore.Mvc.ViewFeatures
             ActionContext actionContext,
             IView view,
             PartialViewResult viewResult
-        ) {
+        )
+        {
             if (actionContext == null)
             {
                 throw new ArgumentNullException(nameof(actionContext));
@@ -229,14 +233,16 @@ namespace Microsoft.AspNetCore.Mvc.ViewFeatures
             if (
                 actionDescriptor.RouteValues.TryGetValue(ActionNameKey, out var value)
                 && !string.IsNullOrEmpty(value)
-            ) {
+            )
+            {
                 normalizedValue = value;
             }
 
             var stringRouteValue = Convert.ToString(routeValue, CultureInfo.InvariantCulture);
             if (
                 string.Equals(normalizedValue, stringRouteValue, StringComparison.OrdinalIgnoreCase)
-            ) {
+            )
+            {
                 return normalizedValue;
             }
 

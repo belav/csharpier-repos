@@ -58,7 +58,8 @@ namespace System.Net.Security.Tests
         [ClassData(typeof(SslProtocolSupport.SupportedSslProtocolsTestData))]
         public async Task ClientAsyncAuthenticate_EachSupportedProtocol_Success(
             SslProtocols protocol
-        ) {
+        )
+        {
             await ClientAsyncSslHelper(protocol, protocol);
         }
 
@@ -82,7 +83,8 @@ namespace System.Net.Security.Tests
             SslProtocols serverProtocol,
             SslProtocols clientProtocol,
             Type expectedException
-        ) {
+        )
+        {
             Exception e = await Record.ExceptionAsync(
                 () => ClientAsyncSslHelper(serverProtocol, clientProtocol)
             );
@@ -103,7 +105,8 @@ namespace System.Net.Security.Tests
         [ClassData(typeof(SslProtocolSupport.SupportedSslProtocolsTestData))]
         public async Task ClientAsyncAuthenticate_AllServerVsIndividualClientSupportedProtocols_Success(
             SslProtocols clientProtocol
-        ) {
+        )
+        {
             await ClientAsyncSslHelper(clientProtocol, SslProtocolSupport.SupportedSslProtocols);
         }
 
@@ -111,7 +114,8 @@ namespace System.Net.Security.Tests
         [ClassData(typeof(SslProtocolSupport.SupportedSslProtocolsTestData))]
         public async Task ClientAsyncAuthenticate_IndividualServerVsAllClientSupportedProtocols_Success(
             SslProtocols serverProtocol
-        ) {
+        )
+        {
             await ClientAsyncSslHelper(SslProtocolSupport.SupportedSslProtocols, serverProtocol);
             // Cached Tls creds fail when used against Tls servers of higher versions.
             // Servers are not expected to dynamically change versions.
@@ -176,7 +180,8 @@ namespace System.Net.Security.Tests
         private Task ClientAsyncSslHelper(
             SslProtocols clientSslProtocols,
             SslProtocols serverSslProtocols
-        ) {
+        )
+        {
             return ClientAsyncSslHelper(
                 EncryptionPolicy.RequireEncryption,
                 clientSslProtocols,
@@ -189,7 +194,8 @@ namespace System.Net.Security.Tests
             SslProtocols clientSslProtocols,
             SslProtocols serverSslProtocols,
             RemoteCertificateValidationCallback certificateCallback = null
-        ) {
+        )
+        {
             _log.WriteLine("Server: " + serverSslProtocols + "; Client: " + clientSslProtocols);
 
             IPEndPoint endPoint = new IPEndPoint(IPAddress.Loopback, 0);
@@ -218,7 +224,8 @@ namespace System.Net.Security.Tests
                           : AllowAnyServerCertificate,
                         null
                     )
-                ) {
+                )
+                {
                     Task clientAuthTask = sslStream.AuthenticateAsClientAsync(
                         serverName,
                         null,
@@ -251,7 +258,8 @@ namespace System.Net.Security.Tests
             X509Certificate certificate,
             X509Chain chain,
             SslPolicyErrors sslPolicyErrors
-        ) {
+        )
+        {
             return true; // allow everything
         }
 
@@ -260,7 +268,8 @@ namespace System.Net.Security.Tests
             X509Certificate certificate,
             X509Chain chain,
             SslPolicyErrors sslPolicyErrors
-        ) {
+        )
+        {
             SslStream stream = (SslStream)sender;
 
             Assert.NotEqual(SslProtocols.None, stream.SslProtocol);

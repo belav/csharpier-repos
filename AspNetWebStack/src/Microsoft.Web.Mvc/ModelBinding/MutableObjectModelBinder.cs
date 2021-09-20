@@ -30,7 +30,8 @@ namespace Microsoft.Web.Mvc.ModelBinding
         public virtual bool BindModel(
             ControllerContext controllerContext,
             ExtensibleModelBindingContext bindingContext
-        ) {
+        )
+        {
             ModelBinderUtil.ValidateBindingContext(bindingContext);
 
             EnsureModel(controllerContext, bindingContext);
@@ -93,7 +94,8 @@ namespace Microsoft.Web.Mvc.ModelBinding
             ControllerContext controllerContext,
             ExtensibleModelBindingContext bindingContext,
             IEnumerable<ModelMetadata> propertyMetadatas
-        ) {
+        )
+        {
             // create a DTO and call into the DTO binder
             ComplexModelDto originalDto = new ComplexModelDto(
                 bindingContext.ModelMetadata,
@@ -121,7 +123,8 @@ namespace Microsoft.Web.Mvc.ModelBinding
         protected virtual object CreateModel(
             ControllerContext controllerContext,
             ExtensibleModelBindingContext bindingContext
-        ) {
+        )
+        {
             // If the Activator throws an exception, we want to propagate it back up the call stack, since the application
             // developer should know that this was an invalid type to try to bind to.
             try
@@ -150,7 +153,8 @@ namespace Microsoft.Web.Mvc.ModelBinding
             ControllerContext controllerContext,
             ModelMetadata modelMetadata,
             object incomingValue
-        ) {
+        )
+        {
             return (sender, e) =>
             {
                 ModelValidationNode validationNode = (ModelValidationNode)sender;
@@ -175,7 +179,8 @@ namespace Microsoft.Web.Mvc.ModelBinding
         protected virtual void EnsureModel(
             ControllerContext controllerContext,
             ExtensibleModelBindingContext bindingContext
-        ) {
+        )
+        {
             if (bindingContext.Model == null)
             {
                 bindingContext.ModelMetadata.Model = CreateModel(controllerContext, bindingContext);
@@ -185,7 +190,8 @@ namespace Microsoft.Web.Mvc.ModelBinding
         protected virtual IEnumerable<ModelMetadata> GetMetadataForProperties(
             ControllerContext controllerContext,
             ExtensibleModelBindingContext bindingContext
-        ) {
+        )
+        {
             // keep a set of the required properties so that we can cross-reference bound properties later
             HashSet<string> requiredProperties;
             HashSet<string> skipProperties;
@@ -214,7 +220,8 @@ namespace Microsoft.Web.Mvc.ModelBinding
             Type modelType,
             out HashSet<string> requiredProperties,
             out HashSet<string> skipProperties
-        ) {
+        )
+        {
             requiredProperties = new HashSet<string>(StringComparer.OrdinalIgnoreCase);
             skipProperties = new HashSet<string>(StringComparer.OrdinalIgnoreCase);
 
@@ -251,7 +258,8 @@ namespace Microsoft.Web.Mvc.ModelBinding
             ControllerContext controllerContext,
             ExtensibleModelBindingContext bindingContext,
             ComplexModelDto dto
-        ) {
+        )
+        {
             HashSet<string> requiredProperties;
             HashSet<string> skipProperties;
             GetRequiredPropertiesCollection(
@@ -297,7 +305,8 @@ namespace Microsoft.Web.Mvc.ModelBinding
             ExtensibleModelBindingContext bindingContext,
             ModelMetadata propertyMetadata,
             ComplexModelDtoResult dtoResult
-        ) {
+        )
+        {
             PropertyDescriptor propertyDescriptor = TypeDescriptorHelper.Get(
                     bindingContext.ModelType
                 )
@@ -335,7 +344,8 @@ namespace Microsoft.Web.Mvc.ModelBinding
                             ModelValidationResult validationResult in requiredValidator.Validate(
                                 bindingContext.Model
                             )
-                        ) {
+                        )
+                        {
                             bindingContext.ModelState.AddModelError(
                                 modelStateKey,
                                 validationResult.Message

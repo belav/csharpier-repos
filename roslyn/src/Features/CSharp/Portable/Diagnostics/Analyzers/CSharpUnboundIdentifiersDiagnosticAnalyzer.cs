@@ -63,7 +63,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Diagnostics
             SyntaxNode node,
             SymbolInfo info,
             SemanticModel model
-        ) {
+        )
+        {
             var argList = (node.Parent as ObjectCreationExpressionSyntax)?.ArgumentList?.Arguments;
             if (!argList.HasValue)
             {

@@ -26,14 +26,16 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.UnusedReference
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
         public VisualStudioReferenceCleanupService(
             IProjectSystemReferenceCleanupService projectSystemReferenceUpdateService
-        ) {
+        )
+        {
             _projectSystemReferenceUpdateService = projectSystemReferenceUpdateService;
         }
 
         public async Task<ImmutableArray<ReferenceInfo>> GetProjectReferencesAsync(
             string projectPath,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var projectSystemReferences =
                 await _projectSystemReferenceUpdateService.GetProjectReferencesAsync(
                         projectPath,
@@ -48,7 +50,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.UnusedReference
             string projectPath,
             ReferenceUpdate referenceUpdate,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             return _projectSystemReferenceUpdateService.TryUpdateReferenceAsync(
                 projectPath,
                 referenceUpdate.ToProjectSystemReferenceUpdate(),

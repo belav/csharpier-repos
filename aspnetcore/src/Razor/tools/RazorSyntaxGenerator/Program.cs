@@ -98,7 +98,8 @@ namespace RazorSyntaxGenerator
             Tree tree,
             Action<TextWriter, Tree> writeAction,
             string outputFile
-        ) {
+        )
+        {
             var stringBuilder = new StringBuilder();
             var writer = new StringWriter(stringBuilder);
             writeAction(writer, tree);
@@ -118,7 +119,8 @@ namespace RazorSyntaxGenerator
                         File.Open(outputFile, FileMode.Create),
                         Encoding.UTF8
                     )
-                ) {
+                )
+                {
                     outFile.Write(text);
                 }
             }

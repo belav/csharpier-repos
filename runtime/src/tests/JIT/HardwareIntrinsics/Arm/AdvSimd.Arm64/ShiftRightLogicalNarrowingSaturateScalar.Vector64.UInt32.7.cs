@@ -130,7 +130,8 @@ namespace JIT.HardwareIntrinsics.Arm
                     (alignment != 16 && alignment != 8)
                     || (alignment * 2) < sizeOfinArray
                     || (alignment * 2) < sizeOfoutArray
-                ) {
+                )
+                {
                     throw new ArgumentException("Invalid value of alignment");
                 }
 
@@ -189,7 +190,8 @@ namespace JIT.HardwareIntrinsics.Arm
 
             public void RunStructFldScenario(
                 ImmUnaryOpTest__ShiftRightLogicalNarrowingSaturateScalar_Vector64_UInt32_7 testClass
-            ) {
+            )
+            {
                 var result = AdvSimd.Arm64.ShiftRightLogicalNarrowingSaturateScalar(_fld, 31);
 
                 Unsafe.Write(testClass._dataTable.outArrayPtr, result);
@@ -198,7 +200,8 @@ namespace JIT.HardwareIntrinsics.Arm
 
             public void RunStructFldScenario_Load(
                 ImmUnaryOpTest__ShiftRightLogicalNarrowingSaturateScalar_Vector64_UInt32_7 testClass
-            ) {
+            )
+            {
                 fixed (Vector64<UInt64>* pFld = &_fld)
                 {
                     var result = AdvSimd.Arm64.ShiftRightLogicalNarrowingSaturateScalar(
@@ -501,7 +504,8 @@ namespace JIT.HardwareIntrinsics.Arm
             Vector64<UInt64> firstOp,
             void* result,
             [CallerMemberName] string method = ""
-        ) {
+        )
+        {
             UInt64[] inArray = new UInt64[Op1ElementCount];
             UInt32[] outArray = new UInt32[RetElementCount];
 
@@ -519,7 +523,8 @@ namespace JIT.HardwareIntrinsics.Arm
             void* firstOp,
             void* result,
             [CallerMemberName] string method = ""
-        ) {
+        )
+        {
             UInt64[] inArray = new UInt64[Op1ElementCount];
             UInt32[] outArray = new UInt32[RetElementCount];
 
@@ -541,7 +546,8 @@ namespace JIT.HardwareIntrinsics.Arm
             UInt64[] firstOp,
             UInt32[] result,
             [CallerMemberName] string method = ""
-        ) {
+        )
+        {
             bool succeeded = true;
 
             if (Helpers.ShiftRightLogicalNarrowingSaturate(firstOp[0], Imm) != result[0])

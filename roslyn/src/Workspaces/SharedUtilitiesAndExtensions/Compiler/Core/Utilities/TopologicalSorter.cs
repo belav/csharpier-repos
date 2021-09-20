@@ -13,7 +13,8 @@ namespace Roslyn.Utilities
         public static IEnumerable<T> TopologicalSort<T>(
             this IEnumerable<T> items,
             Func<T, IEnumerable<T>> itemsBefore
-        ) {
+        )
+        {
             var result = new List<T>();
             var visited = new HashSet<T>();
 
@@ -40,7 +41,8 @@ namespace Roslyn.Utilities
             Func<T, IEnumerable<T>> itemsBefore,
             List<T> result,
             HashSet<T> visited
-        ) {
+        )
+        {
             if (visited.Add(item))
             {
                 foreach (var before in itemsBefore(item))

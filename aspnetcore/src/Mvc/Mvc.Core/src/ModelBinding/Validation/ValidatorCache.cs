@@ -26,7 +26,8 @@ namespace Microsoft.AspNetCore.Mvc.ModelBinding.Validation
         public IReadOnlyList<IModelValidator> GetValidators(
             ModelMetadata metadata,
             IModelValidatorProvider validatorProvider
-        ) {
+        )
+        {
             if (_cacheEntries.TryGetValue(metadata, out var entry))
             {
                 return GetValidatorsFromEntry(entry, metadata, validatorProvider);
@@ -71,7 +72,8 @@ namespace Microsoft.AspNetCore.Mvc.ModelBinding.Validation
             CacheEntry entry,
             ModelMetadata metadata,
             IModelValidatorProvider validationProvider
-        ) {
+        )
+        {
             if (entry.Validators != null)
             {
                 return entry.Validators;
@@ -102,7 +104,8 @@ namespace Microsoft.AspNetCore.Mvc.ModelBinding.Validation
             IModelValidatorProvider validatorProvider,
             ModelMetadata metadata,
             List<ValidatorItem> items
-        ) {
+        )
+        {
             var context = new ModelValidatorProviderContext(metadata, items);
             validatorProvider.CreateValidators(context);
         }

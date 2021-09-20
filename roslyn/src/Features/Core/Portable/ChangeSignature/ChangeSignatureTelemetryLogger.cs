@@ -72,7 +72,8 @@ namespace Microsoft.CodeAnalysis.ChangeSignature
             int numParametersAdded,
             int numParametersRemoved,
             bool anyParametersReordered
-        ) {
+        )
+        {
             LogTransformationCombination(
                 numParametersAdded > 0,
                 numParametersRemoved > 0,
@@ -105,7 +106,8 @@ namespace Microsoft.CodeAnalysis.ChangeSignature
             bool parametersAdded,
             bool parametersRemoved,
             bool parametersReordered
-        ) {
+        )
+        {
             // All three transformations
             if (parametersAdded && parametersRemoved && parametersReordered)
             {
@@ -158,7 +160,8 @@ namespace Microsoft.CodeAnalysis.ChangeSignature
             int numDeclarationsUpdated,
             int numCallSitesUpdated,
             int elapsedMS
-        ) {
+        )
+        {
             s_logAggregator.IncreaseCount((int)ActionInfo.ChangeSignatureCommitCompleted);
 
             s_logAggregator.IncreaseCountBy(

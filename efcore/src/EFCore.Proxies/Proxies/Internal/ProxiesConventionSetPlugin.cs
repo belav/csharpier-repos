@@ -42,7 +42,8 @@ namespace Microsoft.EntityFrameworkCore.Proxies.Internal
             IDbContextOptions options,
             LazyLoaderParameterBindingFactoryDependencies lazyLoaderParameterBindingFactoryDependencies,
             ProviderConventionSetBuilderDependencies conventionSetBuilderDependencies
-        ) {
+        )
+        {
             _proxyFactory = proxyFactory;
             _options = options;
             _lazyLoaderParameterBindingFactoryDependencies =

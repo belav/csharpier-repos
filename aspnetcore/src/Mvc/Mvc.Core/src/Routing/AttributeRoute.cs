@@ -29,7 +29,8 @@ namespace Microsoft.AspNetCore.Mvc.Routing
             IActionDescriptorCollectionProvider actionDescriptorCollectionProvider,
             IServiceProvider services,
             Func<ActionDescriptor[], IRouter> handlerFactory
-        ) {
+        )
+        {
             if (actionDescriptorCollectionProvider == null)
             {
                 throw new ArgumentNullException(nameof(actionDescriptorCollectionProvider));
@@ -146,7 +147,8 @@ namespace Microsoft.AspNetCore.Mvc.Routing
 
         private static IEnumerable<IGrouping<RouteInfo, ActionDescriptor>> GetInboundRouteGroups(
             List<RouteInfo> routeInfos
-        ) {
+        )
+        {
             return routeInfos.Where(routeInfo => !routeInfo.SuppressPathMatching)
                 .GroupBy(r => r, r => r.ActionDescriptor, RouteInfoEqualityComparer.Instance);
         }
@@ -206,7 +208,8 @@ namespace Microsoft.AspNetCore.Mvc.Routing
         private static RouteInfo GetRouteInfo(
             Dictionary<string, RouteTemplate> templateCache,
             ActionDescriptor action
-        ) {
+        )
+        {
             var routeInfo = new RouteInfo() { ActionDescriptor = action, };
 
             try

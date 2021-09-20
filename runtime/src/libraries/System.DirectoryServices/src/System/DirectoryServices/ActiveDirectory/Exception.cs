@@ -17,7 +17,8 @@ namespace System.DirectoryServices.ActiveDirectory
             string errorMessage,
             string? sourceServer,
             string? targetServer
-        ) {
+        )
+        {
             ErrorCategory = category;
             ErrorCode = errorCode;
             ErrorMessage = errorMessage;
@@ -42,11 +43,8 @@ namespace System.DirectoryServices.ActiveDirectory
     )]
     public class ActiveDirectoryObjectNotFoundException : Exception, ISerializable
     {
-        public ActiveDirectoryObjectNotFoundException(
-            string? message,
-            Type? type,
-            string? name
-        ) : base(message)
+        public ActiveDirectoryObjectNotFoundException(string? message, Type? type, string? name)
+            : base(message)
         {
             Type = type;
             Name = name;
@@ -71,7 +69,8 @@ namespace System.DirectoryServices.ActiveDirectory
         public override void GetObjectData(
             SerializationInfo serializationInfo,
             StreamingContext streamingContext
-        ) {
+        )
+        {
             base.GetObjectData(serializationInfo, streamingContext);
         }
 
@@ -96,11 +95,8 @@ namespace System.DirectoryServices.ActiveDirectory
     )]
     public class ActiveDirectoryOperationException : Exception, ISerializable
     {
-        public ActiveDirectoryOperationException(
-            string? message,
-            Exception? inner,
-            int errorCode
-        ) : base(message, inner)
+        public ActiveDirectoryOperationException(string? message, Exception? inner, int errorCode)
+            : base(message, inner)
         {
             ErrorCode = errorCode;
         }
@@ -127,7 +123,8 @@ namespace System.DirectoryServices.ActiveDirectory
         public override void GetObjectData(
             SerializationInfo serializationInfo,
             StreamingContext streamingContext
-        ) {
+        )
+        {
             base.GetObjectData(serializationInfo, streamingContext);
         }
     }
@@ -149,11 +146,8 @@ namespace System.DirectoryServices.ActiveDirectory
             Name = name;
         }
 
-        public ActiveDirectoryServerDownException(
-            string? message,
-            int errorCode,
-            string? name
-        ) : base(message)
+        public ActiveDirectoryServerDownException(string? message, int errorCode, string? name)
+            : base(message)
         {
             ErrorCode = errorCode;
             Name = name;
@@ -190,7 +184,8 @@ namespace System.DirectoryServices.ActiveDirectory
         public override void GetObjectData(
             SerializationInfo serializationInfo,
             StreamingContext streamingContext
-        ) {
+        )
+        {
             base.GetObjectData(serializationInfo, streamingContext);
         }
     }
@@ -270,7 +265,8 @@ namespace System.DirectoryServices.ActiveDirectory
         public override void GetObjectData(
             SerializationInfo serializationInfo,
             StreamingContext streamingContext
-        ) {
+        )
+        {
             base.GetObjectData(serializationInfo, streamingContext);
         }
     }
@@ -297,10 +293,8 @@ namespace System.DirectoryServices.ActiveDirectory
 
         public ForestTrustCollisionException() : base(SR.ForestTrustCollision) { }
 
-        protected ForestTrustCollisionException(
-            SerializationInfo info,
-            StreamingContext context
-        ) : base(info, context) { }
+        protected ForestTrustCollisionException(SerializationInfo info, StreamingContext context)
+            : base(info, context) { }
 
         public ForestTrustRelationshipCollisionCollection? Collisions { get; } =
             new ForestTrustRelationshipCollisionCollection();
@@ -308,7 +302,8 @@ namespace System.DirectoryServices.ActiveDirectory
         public override void GetObjectData(
             SerializationInfo serializationInfo,
             StreamingContext streamingContext
-        ) {
+        )
+        {
             base.GetObjectData(serializationInfo, streamingContext);
         }
     }
@@ -343,7 +338,8 @@ namespace System.DirectoryServices.ActiveDirectory
         internal static Exception GetExceptionFromCOMException(
             DirectoryContext? context,
             COMException e
-        ) {
+        )
+        {
             Exception exception;
             int errorCode = e.ErrorCode;
             string errorMessage = e.Message;
@@ -397,7 +393,8 @@ namespace System.DirectoryServices.ActiveDirectory
                 (errorCode == unchecked((int)0x8007203a))
                 || (errorCode == unchecked((int)0x8007200e))
                 || (errorCode == unchecked((int)0x8007200f))
-            ) {
+            )
+            {
                 //
                 // ServerDown/Unavailable/Busy
                 //
@@ -479,7 +476,8 @@ namespace System.DirectoryServices.ActiveDirectory
         internal static SyncFromAllServersOperationException? CreateSyncAllException(
             IntPtr errorInfo,
             bool singleError
-        ) {
+        )
+        {
             if (errorInfo == (IntPtr)0)
                 return new SyncFromAllServersOperationException();
 

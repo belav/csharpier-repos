@@ -2853,7 +2853,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Tests
         [InlineData(255)]
         public async Task HEADERS_Received_PaddingEqualToFramePayloadLength_ConnectionError(
             byte padLength
-        ) {
+        )
+        {
             await InitializeConnectionAsync(_noopApplication);
 
             // The payload length includes the pad length field
@@ -2893,7 +2894,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Tests
         public async Task HEADERS_Received_PaddingGreaterThanFramePayloadLength_ConnectionError(
             int frameLength,
             byte padLength
-        ) {
+        )
+        {
             await InitializeConnectionAsync(_noopApplication);
 
             await SendInvalidHeadersFrameAsync(1, frameLength, padLength);
@@ -3006,7 +3008,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Tests
         public async Task HEADERS_Received_WithTrailers_ContainsIllegalTrailer_ConnectionError(
             byte[] trailers,
             string expectedErrorMessage
-        ) {
+        )
+        {
             await InitializeConnectionAsync(_readTrailersApplication);
 
             await SendHeadersAsync(1, Http2HeadersFrameFlags.END_HEADERS, _browserRequestHeaders);
@@ -3029,7 +3032,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Tests
         [InlineData((int)Http2HeadersFrameFlags.END_HEADERS)]
         public async Task HEADERS_Received_WithTrailers_EndStreamNotSet_ConnectionError(
             int intFlags
-        ) {
+        )
+        {
             var flags = (Http2HeadersFrameFlags)intFlags;
             await InitializeConnectionAsync(_readTrailersApplication);
 
@@ -3048,7 +3052,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Tests
         [MemberData(nameof(UpperCaseHeaderNameData))]
         public async Task HEADERS_Received_HeaderNameContainsUpperCaseCharacter_ConnectionError(
             byte[] headerBlock
-        ) {
+        )
+        {
             await InitializeConnectionAsync(_noopApplication);
 
             await SendHeadersAsync(1, Http2HeadersFrameFlags.END_HEADERS, headerBlock);
@@ -3098,7 +3103,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Tests
         [MemberData(nameof(DuplicatePseudoHeaderFieldData))]
         public Task HEADERS_Received_HeaderBlockContainsDuplicatePseudoHeaderField_ConnectionError(
             IEnumerable<KeyValuePair<string, string>> headers
-        ) {
+        )
+        {
             return HEADERS_Received_InvalidHeaderFields_ConnectionError(
                 headers,
                 expectedErrorMessage: CoreStrings.Http2ErrorDuplicatePseudoHeaderField
@@ -3109,7 +3115,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Tests
         [MemberData(nameof(ConnectMissingPseudoHeaderFieldData))]
         public async Task HEADERS_Received_HeaderBlockDoesNotContainMandatoryPseudoHeaderField_MethodIsCONNECT_NoError(
             IEnumerable<KeyValuePair<string, string>> headers
-        ) {
+        )
+        {
             await InitializeConnectionAsync(_noopApplication);
 
             await SendHeadersAsync(
@@ -3134,7 +3141,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Tests
         [MemberData(nameof(PseudoHeaderFieldAfterRegularHeadersData))]
         public Task HEADERS_Received_HeaderBlockContainsPseudoHeaderFieldAfterRegularHeaders_ConnectionError(
             IEnumerable<KeyValuePair<string, string>> headers
-        ) {
+        )
+        {
             return HEADERS_Received_InvalidHeaderFields_ConnectionError(
                 headers,
                 expectedErrorMessage: CoreStrings.Http2ErrorPseudoHeaderFieldAfterRegularHeaders
@@ -3144,7 +3152,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Tests
         private async Task HEADERS_Received_InvalidHeaderFields_ConnectionError(
             IEnumerable<KeyValuePair<string, string>> headers,
             string expectedErrorMessage
-        ) {
+        )
+        {
             await InitializeConnectionAsync(_noopApplication);
             await StartStreamAsync(1, headers, endStream: true);
             await WaitForConnectionErrorAsync<Http2ConnectionErrorException>(
@@ -3159,7 +3168,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Tests
         [MemberData(nameof(MissingPseudoHeaderFieldData))]
         public async Task HEADERS_Received_HeaderBlockDoesNotContainMandatoryPseudoHeaderField_StreamError(
             IEnumerable<KeyValuePair<string, string>> headers
-        ) {
+        )
+        {
             await InitializeConnectionAsync(_noopApplication);
 
             await SendHeadersAsync(
@@ -4136,7 +4146,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Tests
             int intParameter,
             uint value,
             int intExpectedErrorCode
-        ) {
+        )
+        {
             var parameter = (Http2SettingsParameter)intParameter;
             var expectedErrorCode = (Http2ErrorCode)intExpectedErrorCode;
 
@@ -4929,7 +4940,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Tests
         public async Task WINDOW_UPDATE_Received_LengthNotFour_ConnectionError(
             int streamId,
             int length
-        ) {
+        )
+        {
             await InitializeConnectionAsync(_noopApplication);
 
             await SendInvalidWindowUpdateAsync(streamId, sizeIncrement: 42, length: length);
@@ -5420,7 +5432,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Tests
         public async Task CONTINUATION_Received_WithTrailers_ContainsIllegalTrailer_ConnectionError(
             byte[] trailers,
             string expectedErrorMessage
-        ) {
+        )
+        {
             await InitializeConnectionAsync(_readTrailersApplication);
 
             await SendHeadersAsync(1, Http2HeadersFrameFlags.END_HEADERS, _browserRequestHeaders);
@@ -5439,7 +5452,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Tests
         [MemberData(nameof(MissingPseudoHeaderFieldData))]
         public async Task CONTINUATION_Received_HeaderBlockDoesNotContainMandatoryPseudoHeaderField_StreamError(
             IEnumerable<KeyValuePair<string, string>> headers
-        ) {
+        )
+        {
             await InitializeConnectionAsync(_noopApplication);
 
             Assert.True(await SendHeadersAsync(1, Http2HeadersFrameFlags.END_STREAM, headers));
@@ -5472,7 +5486,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Tests
         [MemberData(nameof(ConnectMissingPseudoHeaderFieldData))]
         public async Task CONTINUATION_Received_HeaderBlockDoesNotContainMandatoryPseudoHeaderField_MethodIsCONNECT_NoError(
             IEnumerable<KeyValuePair<string, string>> headers
-        ) {
+        )
+        {
             await InitializeConnectionAsync(_noopApplication);
 
             await SendHeadersAsync(1, Http2HeadersFrameFlags.END_STREAM, headers);
@@ -6321,7 +6336,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Tests
         [InlineData((int)(Http2FrameType.CONTINUATION))]
         public async Task AbortedStream_ResetsAndDrainsRequest_RefusesFramesAfterEndOfStream(
             int intFinalFrameType
-        ) {
+        )
+        {
             var finalFrameType = (Http2FrameType)intFinalFrameType;
 
             var headers = new[]
@@ -6436,7 +6452,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Tests
         [InlineData((int)(Http2FrameType.HEADERS))]
         public async Task AbortedStream_ResetsAndDrainsRequest_RefusesFramesAfterClientReset(
             int intFinalFrameType
-        ) {
+        )
+        {
             var finalFrameType = (Http2FrameType)intFinalFrameType;
 
             var headers = new[]

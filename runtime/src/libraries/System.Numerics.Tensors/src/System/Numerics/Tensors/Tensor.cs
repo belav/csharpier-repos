@@ -125,7 +125,8 @@ namespace System.Numerics.Tensors
                     int diagProjectionOffset = 0;
                     diagProjectionOffset < sizePerDiagonal;
                     diagProjectionOffset++
-                ) {
+                )
+                {
                     result.SetValue(
                         resultBase + diagProjectionOffset * resultProjectionStride,
                         diagonal.GetValue(diagBase + diagProjectionOffset * diagProjectionStride)
@@ -530,7 +531,8 @@ namespace System.Numerics.Tensors
                     int diagProjectionIndex = 0;
                     diagProjectionIndex < sizePerDiagonal;
                     diagProjectionIndex++
-                ) {
+                )
+                {
                     diagonalTensor.SetValue(
                         diagBase + diagProjectionIndex * diagProjectionStride,
                         GetValue(sourceBase + diagProjectionIndex * sourceProjectionStride)
@@ -645,7 +647,8 @@ namespace System.Numerics.Tensors
                         int projectionIndex = 0;
                         projectionIndex < projectionSize;
                         projectionIndex++
-                    ) {
+                    )
+                    {
                         var index = baseIndex + projectionIndex * projectionStride;
 
                         result.SetValue(index, GetValue(index));

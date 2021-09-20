@@ -70,7 +70,8 @@ namespace Castle.DynamicProxy
         public static string CreateMessageForInaccessibleType(
             Type inaccessibleType,
             Type typeToProxy
-        ) {
+        )
+        {
             var targetAssembly = typeToProxy.Assembly;
 
             string inaccessibleTypeDescription =

@@ -24,7 +24,8 @@ namespace Microsoft.CodeAnalysis.CodeFixes
             string title,
             FixAllContext fixAllContext,
             FixAllContexts fixAllContextsAsync
-        ) {
+        )
+        {
             Contract.ThrowIfFalse(
                 fixAllContext.Scope
                     is FixAllScope.Document
@@ -72,7 +73,8 @@ namespace Microsoft.CodeAnalysis.CodeFixes
         private static Task<Solution?> GetSolutionFixesAsync(
             FixAllContext fixAllContext,
             FixAllContexts fixAllContextsAsync
-        ) {
+        )
+        {
             var solution = fixAllContext.Solution;
             var dependencyGraph = solution.GetProjectDependencyGraph();
 

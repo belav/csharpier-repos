@@ -57,7 +57,8 @@ namespace Microsoft.CodeAnalysis.Collections.Internal
             int length,
             T value,
             IComparer<T>? comparer
-        ) {
+        )
+        {
             try
             {
                 comparer ??= Comparer<T>.Default;
@@ -101,7 +102,8 @@ namespace Microsoft.CodeAnalysis.Collections.Internal
             int length,
             T value,
             IComparer<T> comparer
-        ) {
+        )
+        {
             Debug.Assert(
                 index >= 0 && length >= 0 && (array.Length - index >= length),
                 "Check the arguments in the caller!"
@@ -134,7 +136,8 @@ namespace Microsoft.CodeAnalysis.Collections.Internal
             Comparison<T> comparer,
             int i,
             int j
-        ) {
+        )
+        {
             Debug.Assert(i != j);
 
             if (comparer(keys[i], keys[j]) > 0)
@@ -158,7 +161,8 @@ namespace Microsoft.CodeAnalysis.Collections.Internal
         internal static void IntrospectiveSort(
             SegmentedArraySegment<T> keys,
             Comparison<T> comparer
-        ) {
+        )
+        {
             Debug.Assert(comparer != null);
 
             if (keys.Length > 1)
@@ -175,7 +179,8 @@ namespace Microsoft.CodeAnalysis.Collections.Internal
             SegmentedArraySegment<T> keys,
             int depthLimit,
             Comparison<T> comparer
-        ) {
+        )
+        {
             Debug.Assert(keys.Length > 0);
             Debug.Assert(depthLimit >= 0);
             Debug.Assert(comparer != null);
@@ -221,7 +226,8 @@ namespace Microsoft.CodeAnalysis.Collections.Internal
         private static int PickPivotAndPartition(
             SegmentedArraySegment<T> keys,
             Comparison<T> comparer
-        ) {
+        )
+        {
             Debug.Assert(keys.Length >= SegmentedArrayHelper.IntrosortSizeThreshold);
             Debug.Assert(comparer != null);
 
@@ -290,7 +296,8 @@ namespace Microsoft.CodeAnalysis.Collections.Internal
             int n,
             int lo,
             Comparison<T> comparer
-        ) {
+        )
+        {
             Debug.Assert(comparer != null);
             Debug.Assert(lo >= 0);
             Debug.Assert(lo < keys.Length);
@@ -349,7 +356,8 @@ namespace Microsoft.CodeAnalysis.Collections.Internal
                             typeof(T) == typeof(double)
                             || typeof(T) == typeof(float)
                             || typeof(T) == typeof(Half)
-                        ) {
+                        )
+                        {
                             int nanLeft = SegmentedArraySortUtils.MoveNansToFront(
                                 keys,
                                 default(Span<byte>)
@@ -388,7 +396,8 @@ namespace Microsoft.CodeAnalysis.Collections.Internal
             int length,
             T value,
             IComparer<T>? comparer
-        ) {
+        )
+        {
             Debug.Assert(
                 index >= 0 && length >= 0 && (array.Length - index >= length),
                 "Check the arguments in the caller!"
@@ -565,7 +574,8 @@ namespace Microsoft.CodeAnalysis.Collections.Internal
                 {
                     while (
                         leftIndex < nextToLastIndex && GreaterThan(ref pivot, ref keys[++leftIndex])
-                    ) {
+                    )
+                    {
                         // Intentionally empty
                     }
 
@@ -624,7 +634,8 @@ namespace Microsoft.CodeAnalysis.Collections.Internal
                         keys[lo + child - 1] == null
                         || LessThan(ref keys[lo + child - 1], ref keys[lo + child])
                     )
-                ) {
+                )
+                {
                     child++;
                 }
 
@@ -739,7 +750,8 @@ namespace Microsoft.CodeAnalysis.Collections.Internal
             SegmentedArraySegment<TKey> keys,
             Span<TValue> values,
             IComparer<TKey>? comparer
-        ) {
+        )
+        {
             // Add a try block here to detect IComparers (or their
             // underlying IComparables, etc) that are bogus.
             try
@@ -765,7 +777,8 @@ namespace Microsoft.CodeAnalysis.Collections.Internal
             IComparer<TKey> comparer,
             int i,
             int j
-        ) {
+        )
+        {
             Debug.Assert(comparer != null);
             Debug.Assert(0 <= i && i < keys.Length && i < values.Length);
             Debug.Assert(0 <= j && j < keys.Length && j < values.Length);
@@ -789,7 +802,8 @@ namespace Microsoft.CodeAnalysis.Collections.Internal
             Span<TValue> values,
             int i,
             int j
-        ) {
+        )
+        {
             Debug.Assert(i != j);
 
             TKey k = keys[i];
@@ -805,7 +819,8 @@ namespace Microsoft.CodeAnalysis.Collections.Internal
             SegmentedArraySegment<TKey> keys,
             Span<TValue> values,
             IComparer<TKey> comparer
-        ) {
+        )
+        {
             Debug.Assert(comparer != null);
             Debug.Assert(keys.Length == values.Length);
 
@@ -825,7 +840,8 @@ namespace Microsoft.CodeAnalysis.Collections.Internal
             Span<TValue> values,
             int depthLimit,
             IComparer<TKey> comparer
-        ) {
+        )
+        {
             Debug.Assert(keys.Length > 0);
             Debug.Assert(values.Length == keys.Length);
             Debug.Assert(depthLimit >= 0);
@@ -890,7 +906,8 @@ namespace Microsoft.CodeAnalysis.Collections.Internal
             SegmentedArraySegment<TKey> keys,
             Span<TValue> values,
             IComparer<TKey> comparer
-        ) {
+        )
+        {
             Debug.Assert(keys.Length >= SegmentedArrayHelper.IntrosortSizeThreshold);
             Debug.Assert(comparer != null);
 
@@ -939,7 +956,8 @@ namespace Microsoft.CodeAnalysis.Collections.Internal
             SegmentedArraySegment<TKey> keys,
             Span<TValue> values,
             IComparer<TKey> comparer
-        ) {
+        )
+        {
             Debug.Assert(comparer != null);
             Debug.Assert(keys.Length > 0);
 
@@ -963,7 +981,8 @@ namespace Microsoft.CodeAnalysis.Collections.Internal
             int n,
             int lo,
             IComparer<TKey> comparer
-        ) {
+        )
+        {
             Debug.Assert(comparer != null);
             Debug.Assert(lo >= 0);
             Debug.Assert(lo < keys.Length);
@@ -995,7 +1014,8 @@ namespace Microsoft.CodeAnalysis.Collections.Internal
             SegmentedArraySegment<TKey> keys,
             Span<TValue> values,
             IComparer<TKey> comparer
-        ) {
+        )
+        {
             Debug.Assert(comparer != null);
 
             for (int i = 0; i < keys.Length - 1; i++)
@@ -1024,7 +1044,8 @@ namespace Microsoft.CodeAnalysis.Collections.Internal
             SegmentedArraySegment<TKey> keys,
             Span<TValue> values,
             IComparer<TKey>? comparer
-        ) {
+        )
+        {
             // Add a try block here to detect IComparers (or their
             // underlying IComparables, etc) that are bogus.
             try
@@ -1040,7 +1061,8 @@ namespace Microsoft.CodeAnalysis.Collections.Internal
                             typeof(TKey) == typeof(double)
                             || typeof(TKey) == typeof(float)
                             || typeof(TKey) == typeof(Half)
-                        ) {
+                        )
+                        {
                             int nanLeft = SegmentedArraySortUtils.MoveNansToFront(keys, values);
                             if (nanLeft == keys.Length)
                             {
@@ -1084,7 +1106,8 @@ namespace Microsoft.CodeAnalysis.Collections.Internal
             Span<TValue> values,
             int i,
             int j
-        ) {
+        )
+        {
             Debug.Assert(i != j);
 
             ref TKey keyRef = ref keys[i];
@@ -1106,7 +1129,8 @@ namespace Microsoft.CodeAnalysis.Collections.Internal
             Span<TValue> values,
             int i,
             int j
-        ) {
+        )
+        {
             Debug.Assert(i != j);
 
             TKey k = keys[i];
@@ -1122,7 +1146,8 @@ namespace Microsoft.CodeAnalysis.Collections.Internal
             SegmentedArraySegment<TKey> keys,
             Span<TValue> values,
             int depthLimit
-        ) {
+        )
+        {
             Debug.Assert(keys.Length > 0);
             Debug.Assert(values.Length == keys.Length);
             Debug.Assert(depthLimit >= 0);
@@ -1175,7 +1200,8 @@ namespace Microsoft.CodeAnalysis.Collections.Internal
         private static int PickPivotAndPartition(
             SegmentedArraySegment<TKey> keys,
             Span<TValue> values
-        ) {
+        )
+        {
             Debug.Assert(keys.Length >= SegmentedArrayHelper.IntrosortSizeThreshold);
 
             int hi = keys.Length - 1;
@@ -1257,7 +1283,8 @@ namespace Microsoft.CodeAnalysis.Collections.Internal
             int i,
             int n,
             int lo
-        ) {
+        )
+        {
             Debug.Assert(lo >= 0);
             Debug.Assert(lo < keys.Length);
 
@@ -1273,7 +1300,8 @@ namespace Microsoft.CodeAnalysis.Collections.Internal
                         keys[lo + child - 1] == null
                         || LessThan(ref keys[lo + child - 1], ref keys[lo + child])
                     )
-                ) {
+                )
+                {
                     child++;
                 }
 
@@ -1442,7 +1470,8 @@ namespace Microsoft.CodeAnalysis.Collections.Internal
                     (typeof(TKey) == typeof(double) && double.IsNaN((double)(object)keys[i]))
                     || (typeof(TKey) == typeof(float) && float.IsNaN((float)(object)keys[i]))
                     || (typeof(TKey) == typeof(Half) && Half.IsNaN((Half)(object)keys[i]))
-                ) {
+                )
+                {
                     TKey temp = keys[left];
                     keys[left] = keys[i];
                     keys[i] = temp;

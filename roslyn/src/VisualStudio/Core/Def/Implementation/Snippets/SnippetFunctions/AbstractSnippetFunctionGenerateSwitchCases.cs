@@ -66,14 +66,16 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Snippets.Snippe
             CancellationToken cancellationToken,
             out string value,
             out int hasCurrentValue
-        ) {
+        )
+        {
             // If the switch expression is invalid, still show the default case
             value = DefaultCase;
             hasCurrentValue = 1;
             if (
                 !TryGetEnumTypeSymbol(cancellationToken, out var typeSymbol)
                 || typeSymbol.TypeKind != TypeKind.Enum
-            ) {
+            )
+            {
                 return VSConstants.S_OK;
             }
 
@@ -90,7 +92,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Snippets.Snippe
                     cancellationToken,
                     out simplifiedTypeName
                 )
-            ) {
+            )
+            {
                 return VSConstants.S_OK;
             }
 
@@ -111,7 +114,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Snippets.Snippe
             string firstEnumMemberName,
             CancellationToken cancellationToken,
             out string simplifiedTypeName
-        ) {
+        )
+        {
             simplifiedTypeName = string.Empty;
             if (!TryGetDocument(out var document))
             {
@@ -126,7 +130,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Snippets.Snippe
                     CaseGenerationLocationField,
                     surfaceBufferFieldSpan
                 ) != VSConstants.S_OK
-            ) {
+            )
+            {
                 return false;
             }
 
@@ -135,7 +140,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Snippets.Snippe
                     surfaceBufferFieldSpan[0],
                     out var subjectBufferFieldSpan
                 )
-            ) {
+            )
+            {
                 return false;
             }
 

@@ -161,7 +161,8 @@ namespace System.Reflection.Metadata
             if (
                 unchecked((ulong)(uint)offset + (uint)byteCount)
                 > (ulong)(_endPointer - _currentPointer)
-            ) {
+            )
+            {
                 Throw.OutOfBounds();
             }
         }

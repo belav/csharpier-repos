@@ -85,7 +85,8 @@ namespace Microsoft.Win32
             string subkey,
             RegistryKeyPermissionCheck permissionCheck,
             RegistryOptions registryOptions
-        ) {
+        )
+        {
             Interop.Kernel32.SECURITY_ATTRIBUTES secAttrs = default;
 
             // By default, the new key will be writable.
@@ -174,7 +175,8 @@ namespace Microsoft.Win32
             if (
                 errorCode == Interop.Errors.ERROR_FILE_NOT_FOUND
                 || errorCode == Interop.Errors.ERROR_FILENAME_EXCED_RANGE
-            ) {
+            )
+            {
                 if (throwOnMissingValue)
                 {
                     throw new ArgumentException(SR.Arg_RegSubKeyValueAbsent);
@@ -230,7 +232,8 @@ namespace Microsoft.Win32
             RegistryHive hKey,
             string machineName,
             RegistryView view
-        ) {
+        )
+        {
             int index = (int)hKey & 0x0FFFFFFF;
             if (index < 0 || index >= s_hkeyNames.Length || ((int)hKey & 0xFFFFFFF0) != 0x80000000)
             {
@@ -278,7 +281,8 @@ namespace Microsoft.Win32
             string name,
             RegistryKeyPermissionCheck permissionCheck,
             int rights
-        ) {
+        )
+        {
             int ret = Interop.Advapi32.RegOpenKeyEx(
                 _hkey,
                 name,
@@ -304,7 +308,8 @@ namespace Microsoft.Win32
             if (
                 ret == Interop.Errors.ERROR_ACCESS_DENIED
                 || ret == Interop.Errors.ERROR_BAD_IMPERSONATION_LEVEL
-            ) {
+            )
+            {
                 // We need to throw SecurityException here for compatibility reason,
                 // although UnauthorizedAccessException will make more sense.
                 throw new SecurityException(SR.Security_RegistryPermission);
@@ -341,7 +346,8 @@ namespace Microsoft.Win32
             if (
                 ret == Interop.Errors.ERROR_ACCESS_DENIED
                 || ret == Interop.Errors.ERROR_BAD_IMPERSONATION_LEVEL
-            ) {
+            )
+            {
                 // We need to throw SecurityException here for compatibility reasons,
                 // although UnauthorizedAccessException will make more sense.
                 throw new SecurityException(SR.Security_RegistryPermission);
@@ -354,7 +360,8 @@ namespace Microsoft.Win32
         internal RegistryKey? InternalOpenSubKeyWithoutSecurityChecksCore(
             string name,
             bool writable
-        ) {
+        )
+        {
             int ret = Interop.Advapi32.RegOpenKeyEx(
                 _hkey,
                 name,
@@ -483,7 +490,8 @@ namespace Microsoft.Win32
                             null
                         )
                     ) != Interop.Errors.ERROR_NO_MORE_ITEMS
-                ) {
+                )
+                {
                     switch (result)
                     {
                         case Interop.Errors.ERROR_SUCCESS:
@@ -566,7 +574,8 @@ namespace Microsoft.Win32
                             null
                         )
                     ) != Interop.Errors.ERROR_NO_MORE_ITEMS
-                ) {
+                )
+                {
                     switch (result)
                     {
                         // The size is only ever reported back correctly in the case
@@ -652,7 +661,8 @@ namespace Microsoft.Win32
                                 ref sizeInput
                             )
                         )
-                    ) {
+                    )
+                    {
                         if (size == int.MaxValue)
                         {
                             // ERROR_MORE_DATA was returned however we cannot increase the buffer size beyond Int32.MaxValue

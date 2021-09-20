@@ -27,7 +27,8 @@ namespace System.Speech.Recognition.SrgsGrammar
             using (
                 XmlTextReader reader =
                     new(new Uri(inputPath, UriKind.RelativeOrAbsolute).ToString())
-            ) {
+            )
+            {
                 SrgsCompiler.CompileStream(
                     new XmlReader[] { reader },
                     null,
@@ -78,7 +79,8 @@ namespace System.Speech.Recognition.SrgsGrammar
             string outputPath,
             string[] referencedAssemblies,
             string keyFile
-        ) {
+        )
+        {
             Helpers.ThrowIfNull(inputPaths, nameof(inputPaths));
             Helpers.ThrowIfEmptyOrNull(outputPath, nameof(outputPath));
 
@@ -130,7 +132,8 @@ namespace System.Speech.Recognition.SrgsGrammar
             string outputPath,
             string[] referencedAssemblies,
             string keyFile
-        ) {
+        )
+        {
             Helpers.ThrowIfNull(srgsGrammar, nameof(srgsGrammar));
             Helpers.ThrowIfEmptyOrNull(outputPath, nameof(outputPath));
 
@@ -152,7 +155,8 @@ namespace System.Speech.Recognition.SrgsGrammar
             string outputPath,
             string[] referencedAssemblies,
             string keyFile
-        ) {
+        )
+        {
             Helpers.ThrowIfNull(reader, nameof(reader));
             Helpers.ThrowIfEmptyOrNull(outputPath, nameof(outputPath));
 
@@ -189,7 +193,8 @@ namespace System.Speech.Recognition.SrgsGrammar
             Stream inputStream,
             Stream outputStream,
             Uri orginalUri
-        ) {
+        )
+        {
             // Wrap stream in case Seek is not supported:
             SeekableReadStream seekableInputStream = new(inputStream);
 

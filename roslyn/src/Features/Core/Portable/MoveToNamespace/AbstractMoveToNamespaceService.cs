@@ -72,7 +72,8 @@ namespace Microsoft.CodeAnalysis.MoveToNamespace
             Document document,
             TextSpan span,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             // Code actions cannot be completed without the options needed
             // to fill in missing information.
             if (OptionsService != null)
@@ -99,7 +100,8 @@ namespace Microsoft.CodeAnalysis.MoveToNamespace
             Document document,
             int position,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var root = await document.GetSyntaxRootAsync(cancellationToken).ConfigureAwait(false);
 
             var token = root.FindToken(position);
@@ -132,12 +134,14 @@ namespace Microsoft.CodeAnalysis.MoveToNamespace
             SyntaxNode node,
             int position,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var declarationSyntax = node.FirstAncestorOrSelf<TNamespaceDeclarationSyntax>();
             if (
                 declarationSyntax == null
                 || !IsContainedInNamespaceDeclaration(declarationSyntax, position)
-            ) {
+            )
+            {
                 return null;
             }
 
@@ -152,7 +156,8 @@ namespace Microsoft.CodeAnalysis.MoveToNamespace
                             cancellationToken
                         )
                         .ConfigureAwait(false)
-                ) {
+                )
+                {
                     var namespaceName = GetNamespaceName(declarationSyntax);
                     var namespaces = await GetNamespacesAsync(document, cancellationToken)
                         .ConfigureAwait(false);
@@ -174,7 +179,8 @@ namespace Microsoft.CodeAnalysis.MoveToNamespace
             Document document,
             SyntaxNode node,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var namespaceInSpineCount = GetNamespaceInSpineCount(node);
 
             // Nested namespaces are currently not supported by the underlying ChangeNamespace service
@@ -212,7 +218,8 @@ namespace Microsoft.CodeAnalysis.MoveToNamespace
                             cancellationToken
                         )
                         .ConfigureAwait(false)
-                ) {
+                )
+                {
                     var namespaces = await GetNamespacesAsync(document, cancellationToken)
                         .ConfigureAwait(false);
                     return new MoveToNamespaceAnalysisResult(
@@ -243,7 +250,8 @@ namespace Microsoft.CodeAnalysis.MoveToNamespace
             MoveToNamespaceAnalysisResult analysisResult,
             string targetNamespace,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             if (!analysisResult.CanPerform)
             {
                 return Task.FromResult(MoveToNamespaceResult.Failed);
@@ -273,7 +281,8 @@ namespace Microsoft.CodeAnalysis.MoveToNamespace
             Document document,
             SyntaxNode container,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var semanticModel = await document.GetSemanticModelAsync(cancellationToken)
                 .ConfigureAwait(false);
             switch (container)
@@ -306,7 +315,8 @@ namespace Microsoft.CodeAnalysis.MoveToNamespace
             SyntaxNode container,
             string targetNamespace,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var memberSymbols = await GetMemberSymbolsAsync(document, container, cancellationToken)
                 .ConfigureAwait(false);
             var newNameOriginalSymbolMapping = memberSymbols.ToImmutableDictionary(
@@ -343,7 +353,8 @@ namespace Microsoft.CodeAnalysis.MoveToNamespace
             SyntaxNode container,
             string targetNamespace,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var moveTypeService = document.GetLanguageService<IMoveTypeService>();
             if (moveTypeService == null)
             {
@@ -398,7 +409,8 @@ namespace Microsoft.CodeAnalysis.MoveToNamespace
         private static async Task<Solution> PropagateChangeToLinkedDocumentsAsync(
             Document document,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             // Need to make sure elastic trivia is formatted properly before pushing the text to other documents.
             var formattedDocument = await Formatter.FormatAsync(
                     document,
@@ -441,7 +453,8 @@ namespace Microsoft.CodeAnalysis.MoveToNamespace
         private static async Task<IEnumerable<string>> GetNamespacesAsync(
             Document document,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var compilation = await document.Project.GetCompilationAsync(cancellationToken)
                 .ConfigureAwait(false);
 
@@ -458,7 +471,8 @@ namespace Microsoft.CodeAnalysis.MoveToNamespace
             Document document,
             string defaultNamespace,
             ImmutableArray<string> namespaces
-        ) {
+        )
+        {
             var syntaxFactsService = document.GetLanguageService<ISyntaxFactsService>();
 
             return OptionsService.GetChangeNamespaceOptions(

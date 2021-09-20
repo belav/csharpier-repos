@@ -41,7 +41,8 @@ namespace System.Net.Tests
         public async Task AcceptTypes_GetProperty_ReturnsExpected(
             string acceptString,
             string[] expected
-        ) {
+        )
+        {
             HttpListenerRequest request = await GetRequest(
                 "POST",
                 "",
@@ -259,7 +260,8 @@ namespace System.Net.Tests
         public async Task ContentEncoding_GetProperty_ReturnsExpected(
             string header,
             Encoding expected
-        ) {
+        )
+        {
             HttpListenerRequest request = await GetRequest("POST", "", new string[] { header });
             Assert.Equal(expected, request.ContentEncoding);
         }
@@ -297,7 +299,8 @@ namespace System.Net.Tests
             string contentLengthString,
             long expected,
             bool hasEntityBody
-        ) {
+        )
+        {
             HttpListenerRequest request = await GetRequest(
                 method,
                 "",
@@ -352,7 +355,8 @@ namespace System.Net.Tests
         public async Task UserAgent_GetProperty_ReturnsExpected(
             string userAgentString,
             string expected
-        ) {
+        )
+        {
             HttpListenerRequest request = await GetRequest(
                 "POST",
                 "",
@@ -410,7 +414,8 @@ namespace System.Net.Tests
         public async Task IsWebSocketRequest_GetProperty_ReturnsExpected(
             string webSocketString,
             bool expected
-        ) {
+        )
+        {
             if (PlatformDetection.IsWindows7)
             {
                 return;
@@ -444,7 +449,8 @@ namespace System.Net.Tests
         public async Task UserLanguages_GetProperty_ReturnsExpected(
             string userLanguageString,
             string[] expected
-        ) {
+        )
+        {
             HttpListenerRequest request = await GetRequest(
                 "POST",
                 "",
@@ -542,7 +548,8 @@ namespace System.Net.Tests
         [InlineData(ChannelBindingKind.Unique)]
         public async Task TransportContext_GetChannelBindingInvalid_ThrowsNotSupportedException(
             ChannelBindingKind kind
-        ) {
+        )
+        {
             HttpListenerRequest request = await GetRequest("POST", null, null);
             Assert.Throws<NotSupportedException>(
                 () => request.TransportContext.GetChannelBinding(kind)
@@ -613,7 +620,8 @@ namespace System.Net.Tests
         public async Task QueryString_GetProperty_ReturnsExpected(
             string query,
             NameValueCollection expected
-        ) {
+        )
+        {
             HttpListenerRequest request = await GetRequest("POST", query, null);
             NameValueCollection queryString = request.QueryString;
             Assert.Equal(expected.Count, queryString.Count);
@@ -664,7 +672,8 @@ namespace System.Net.Tests
             string httpVersion,
             string[] headers,
             bool expected
-        ) {
+        )
+        {
             HttpListenerRequest request = await GetRequest(
                 "POST",
                 "",
@@ -792,7 +801,8 @@ namespace System.Net.Tests
         public async Task Cookies_GetProperty_ReturnsExpected(
             string cookieString,
             CookieCollection expected
-        ) {
+        )
+        {
             HttpListenerRequest request = await GetRequest("POST", null, new[] { cookieString });
 
             Assert.Equal(expected.Count, request.Cookies.Count);
@@ -825,7 +835,8 @@ namespace System.Net.Tests
         public async Task Headers_Get_ReturnsExpected(
             string[] headers,
             WebHeaderCollection expected
-        ) {
+        )
+        {
             HttpListenerRequest request = await GetRequest("POST", null, headers);
             foreach (string name in expected)
             {
@@ -840,7 +851,8 @@ namespace System.Net.Tests
             string[] headers,
             string content = "Text\r\n",
             string httpVersion = "1.1"
-        ) {
+        )
+        {
             Client.Send(
                 Factory.GetContent(httpVersion, requestType, query, content, headers, true)
             );

@@ -71,7 +71,8 @@ namespace Microsoft.CodeAnalysis.CSharp.MakeLocalFunctionStatic
                     localFunction,
                     semanticModel
                 )
-            ) {
+            )
+            {
                 context.ReportDiagnostic(
                     DiagnosticHelper.Create(
                         Descriptor,

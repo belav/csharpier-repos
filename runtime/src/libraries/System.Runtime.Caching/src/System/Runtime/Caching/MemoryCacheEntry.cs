@@ -187,7 +187,8 @@ namespace System.Runtime.Caching
         private void CallCacheEntryRemovedCallback(
             MemoryCache cache,
             CacheEntryRemovedReason reason
-        ) {
+        )
+        {
             if (_callback == null)
             {
                 return;
@@ -231,7 +232,8 @@ namespace System.Runtime.Caching
         internal void ConfigureUpdateSentinel(
             MemoryCacheStore sentinelStore,
             MemoryCacheEntry sentinelEntry
-        ) {
+        )
+        {
             lock (this)
             {
                 if (_fields == null)
@@ -328,7 +330,8 @@ namespace System.Runtime.Caching
                 if (
                     utcNewExpires - _utcAbsExp >= CacheExpires.MIN_UPDATE_DELTA
                     || utcNewExpires < _utcAbsExp
-                ) {
+                )
+                {
                     expires.UtcUpdate(this, utcNewExpires);
                 }
             }

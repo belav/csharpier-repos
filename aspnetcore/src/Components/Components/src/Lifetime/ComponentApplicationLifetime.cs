@@ -100,7 +100,8 @@ namespace Microsoft.AspNetCore.Components.Lifetime
             static Task ExecuteCallback(
                 ComponentApplicationState.OnPersistingCallback callback,
                 ILogger<ComponentApplicationLifetime> logger
-            ) {
+            )
+            {
                 try
                 {
                     var current = callback();

@@ -22,7 +22,8 @@ namespace Microsoft.CodeAnalysis.ExternalAccess.FSharp.Internal.Diagnostics
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
         public FSharpDiagnosticAnalyzerService(
             Microsoft.CodeAnalysis.Diagnostics.IDiagnosticAnalyzerService delegatee
-        ) {
+        )
+        {
             _delegatee = delegatee;
         }
 
@@ -31,7 +32,8 @@ namespace Microsoft.CodeAnalysis.ExternalAccess.FSharp.Internal.Diagnostics
             IEnumerable<ProjectId> projectIds = null,
             IEnumerable<DocumentId> documentIds = null,
             bool highPriority = false
-        ) {
+        )
+        {
             _delegatee.Reanalyze(workspace, projectIds, documentIds, highPriority);
         }
     }

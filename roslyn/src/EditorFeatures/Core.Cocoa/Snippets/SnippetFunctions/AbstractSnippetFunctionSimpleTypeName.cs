@@ -39,7 +39,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Snippets.Snippe
             CancellationToken cancellationToken,
             out string value,
             out bool hasCurrentValue
-        ) {
+        )
+        {
             value = _fullyQualifiedName;
             hasCurrentValue = true;
             if (!TryGetDocument(out var document))
@@ -53,7 +54,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Snippets.Snippe
                     out var updatedTextSpan,
                     out var documentWithFullyQualifiedTypeName
                 )
-            ) {
+            )
+            {
                 throw new System.Exception();
             }
 
@@ -64,7 +66,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Snippets.Snippe
                     cancellationToken,
                     out var simplifiedName
                 )
-            ) {
+            )
+            {
                 throw new System.Exception();
             }
 
@@ -76,7 +79,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Snippets.Snippe
             Document document,
             out TextSpan updatedTextSpan,
             [NotNullWhen(returnValue: true)] out Document? documentWithFullyQualifiedTypeName
-        ) {
+        )
+        {
             documentWithFullyQualifiedTypeName = null;
             updatedTextSpan = default;
 
@@ -91,7 +95,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Snippets.Snippe
                     surfaceBufferFieldSpan,
                     out var subjectBufferFieldSpan
                 )
-            ) {
+            )
+            {
                 return false;
             }
 

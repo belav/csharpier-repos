@@ -47,7 +47,8 @@ namespace Microsoft.CodeAnalysis.EncapsulateField
             TextSpan span,
             bool useDefaultBehavior,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var fields = await GetFieldsAsync(document, span, cancellationToken)
                 .ConfigureAwait(false);
             if (fields.IsDefaultOrEmpty)
@@ -65,7 +66,8 @@ namespace Microsoft.CodeAnalysis.EncapsulateField
             Document document,
             TextSpan span,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var fields = await GetFieldsAsync(document, span, cancellationToken)
                 .ConfigureAwait(false);
             if (fields.IsDefaultOrEmpty)
@@ -94,7 +96,8 @@ namespace Microsoft.CodeAnalysis.EncapsulateField
         private ImmutableArray<CodeAction> EncapsulateAllFields(
             Document document,
             ImmutableArray<IFieldSymbol> fields
-        ) {
+        )
+        {
             return ImmutableArray.Create<CodeAction>(
                 new MyCodeAction(
                     FeaturesResources.Encapsulate_fields_and_use_property,
@@ -110,7 +113,8 @@ namespace Microsoft.CodeAnalysis.EncapsulateField
         private ImmutableArray<CodeAction> EncapsulateOneField(
             Document document,
             IFieldSymbol field
-        ) {
+        )
+        {
             var fields = ImmutableArray.Create(field);
             return ImmutableArray.Create<CodeAction>(
                 new MyCodeAction(
@@ -135,7 +139,8 @@ namespace Microsoft.CodeAnalysis.EncapsulateField
             ImmutableArray<IFieldSymbol> fields,
             bool updateReferences,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             cancellationToken.ThrowIfCancellationRequested();
 
             using (Logger.LogBlock(FunctionId.Renamer_FindRenameLocationsAsync, cancellationToken))
@@ -197,7 +202,8 @@ namespace Microsoft.CodeAnalysis.EncapsulateField
             ImmutableArray<IFieldSymbol> fields,
             bool updateReferences,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             Contract.ThrowIfTrue(fields.Length == 0);
 
             // For now, build up the multiple field case by encapsulating one at a time.
@@ -240,7 +246,8 @@ namespace Microsoft.CodeAnalysis.EncapsulateField
             IFieldSymbol field,
             bool updateReferences,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var originalField = field;
             var (finalFieldName, generatedPropertyName) = GenerateFieldAndPropertyNames(field);
 
@@ -384,7 +391,8 @@ namespace Microsoft.CodeAnalysis.EncapsulateField
             string finalFieldName,
             string generatedPropertyName,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             if (!updateReferences)
             {
                 return solution;
@@ -447,7 +455,8 @@ namespace Microsoft.CodeAnalysis.EncapsulateField
             string finalName,
             Func<Location, bool> filter,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var initialLocations = await Renamer.FindRenameLocationsAsync(
                     solution,
                     field,
@@ -468,7 +477,8 @@ namespace Microsoft.CodeAnalysis.EncapsulateField
         private static bool IntersectsWithAny(
             Location location,
             ISet<Location> constructorLocations
-        ) {
+        )
+        {
             foreach (var constructor in constructorLocations)
             {
                 if (location.IntersectsWith(constructor))
@@ -491,7 +501,8 @@ namespace Microsoft.CodeAnalysis.EncapsulateField
             IFieldSymbol field,
             IPropertySymbol property,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var codeGenerationService = document.GetLanguageService<ICodeGenerationService>();
 
             var fieldDeclaration = field.DeclaringSyntaxReferences.First();
@@ -534,7 +545,8 @@ namespace Microsoft.CodeAnalysis.EncapsulateField
             INamedTypeSymbol containingSymbol,
             SyntaxAnnotation annotation,
             Document document
-        ) {
+        )
+        {
             var factory = document.GetLanguageService<SyntaxGenerator>();
 
             var propertySymbol = annotation.AddAnnotationToSymbol(
@@ -571,12 +583,14 @@ namespace Microsoft.CodeAnalysis.EncapsulateField
         protected static Accessibility ComputeAccessibility(
             Accessibility accessibility,
             ITypeSymbol type
-        ) {
+        )
+        {
             var computedAccessibility = accessibility;
             if (
                 accessibility == Accessibility.NotApplicable
                 || accessibility == Accessibility.Private
-            ) {
+            )
+            {
                 computedAccessibility = Accessibility.Public;
             }
 
@@ -589,7 +603,8 @@ namespace Microsoft.CodeAnalysis.EncapsulateField
             string originalFieldName,
             IFieldSymbol field,
             SyntaxGenerator factory
-        ) {
+        )
+        {
             var assigned = !field.IsStatic
                 ? factory.MemberAccessExpression(
                       factory.ThisExpression(),
@@ -615,7 +630,8 @@ namespace Microsoft.CodeAnalysis.EncapsulateField
             string originalFieldName,
             IFieldSymbol field,
             SyntaxGenerator factory
-        ) {
+        )
+        {
             var value = !field.IsStatic
                 ? factory.MemberAccessExpression(
                       factory.ThisExpression(),

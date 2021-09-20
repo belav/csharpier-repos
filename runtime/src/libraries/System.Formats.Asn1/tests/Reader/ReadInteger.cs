@@ -29,7 +29,8 @@ namespace System.Formats.Asn1.Tests.Reader
             string description,
             AsnEncodingRules ruleSet,
             string inputHex
-        ) {
+        )
+        {
             _ = description;
             byte[] data = inputHex.HexToByteArray();
             AsnReader reader = new AsnReader(data, ruleSet);
@@ -55,7 +56,8 @@ namespace System.Formats.Asn1.Tests.Reader
             AsnEncodingRules ruleSet,
             string inputHex,
             int expectedValue
-        ) {
+        )
+        {
             byte[] data = inputHex.HexToByteArray();
             AsnReader reader = new AsnReader(data, ruleSet);
 
@@ -94,7 +96,8 @@ namespace System.Formats.Asn1.Tests.Reader
             AsnEncodingRules ruleSet,
             string inputHex,
             uint expectedValue
-        ) {
+        )
+        {
             byte[] data = inputHex.HexToByteArray();
             AsnReader reader = new AsnReader(data, ruleSet);
 
@@ -165,7 +168,8 @@ namespace System.Formats.Asn1.Tests.Reader
             AsnEncodingRules ruleSet,
             string inputHex,
             long expectedValue
-        ) {
+        )
+        {
             byte[] data = inputHex.HexToByteArray();
             AsnReader reader = new AsnReader(data, ruleSet);
 
@@ -212,7 +216,8 @@ namespace System.Formats.Asn1.Tests.Reader
             AsnEncodingRules ruleSet,
             string inputHex,
             ulong expectedValue
-        ) {
+        )
+        {
             byte[] data = inputHex.HexToByteArray();
             AsnReader reader = new AsnReader(data, ruleSet);
 
@@ -453,7 +458,8 @@ namespace System.Formats.Asn1.Tests.Reader
             string inputHex,
             TagClass tagClass,
             int tagValue
-        ) {
+        )
+        {
             byte[] inputData = inputHex.HexToByteArray();
             AsnReader reader = new AsnReader(inputData, ruleSet);
             ReadOnlyMemory<byte> val1 = reader.ReadIntegerBytes(

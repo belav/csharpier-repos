@@ -107,7 +107,8 @@ namespace System.Web.Razor
             TextChange change,
             RazorEditorParser parser,
             bool treeStructureChanged
-        ) {
+        )
+        {
             if (!OutputDebuggingEnabled)
             {
                 return;

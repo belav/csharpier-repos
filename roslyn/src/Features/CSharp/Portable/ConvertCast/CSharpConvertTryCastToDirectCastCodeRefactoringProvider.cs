@@ -50,7 +50,8 @@ namespace Microsoft.CodeAnalysis.CSharp.ConvertCast
 
         protected override CastExpressionSyntax ConvertExpression(
             BinaryExpressionSyntax asExpression
-        ) {
+        )
+        {
             var expression = asExpression.Left;
             var typeNode = GetTypeNode(asExpression);
 

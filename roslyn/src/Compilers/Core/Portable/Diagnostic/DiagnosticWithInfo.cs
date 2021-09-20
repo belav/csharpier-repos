@@ -24,7 +24,8 @@ namespace Microsoft.CodeAnalysis
             DiagnosticInfo info,
             Location location,
             bool isSuppressed = false
-        ) {
+        )
+        {
             RoslynDebug.Assert(info != null);
             RoslynDebug.Assert(location != null);
             _info = info;

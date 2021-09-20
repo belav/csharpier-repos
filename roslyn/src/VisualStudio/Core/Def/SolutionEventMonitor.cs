@@ -28,7 +28,8 @@ namespace Microsoft.VisualStudio.LanguageServices
             if (
                 workspace.Services.GetService<IGlobalOperationNotificationService>()
                 is GlobalOperationNotificationService notificationService
-            ) {
+            )
+            {
                 // subscribe to events only if it is normal service. if it is one from unit test or other, don't bother to subscribe
                 _notificationService = notificationService;
 

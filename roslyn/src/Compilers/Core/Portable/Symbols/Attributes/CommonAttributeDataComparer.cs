@@ -57,7 +57,8 @@ namespace Microsoft.CodeAnalysis
 
         private static int GetHashCodeForConstructorArguments(
             ImmutableArray<TypedConstant> constructorArguments
-        ) {
+        )
+        {
             int hash = 0;
 
             foreach (var arg in constructorArguments)
@@ -70,7 +71,8 @@ namespace Microsoft.CodeAnalysis
 
         private static int GetHashCodeForNamedArguments(
             ImmutableArray<KeyValuePair<string, TypedConstant>> namedArguments
-        ) {
+        )
+        {
             int hash = 0;
 
             foreach (var arg in namedArguments)

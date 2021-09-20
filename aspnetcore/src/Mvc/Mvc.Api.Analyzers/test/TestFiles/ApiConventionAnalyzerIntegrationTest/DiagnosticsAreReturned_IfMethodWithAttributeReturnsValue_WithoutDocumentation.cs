@@ -7,7 +7,8 @@
         [ProducesResponseType(404)]
         public ActionResult<DiagnosticsAreReturned_IfMethodWithAttributeReturnsValue_WithoutDocumentationModel> Method(
             int id
-        ) {
+        )
+        {
             if (id == 0)
             {
                 return NotFound();

@@ -132,7 +132,8 @@ namespace Microsoft.Cci
         private BlobHandle SerializeSpans(
             ImmutableArray<SourceSpan> spans,
             Dictionary<DebugSourceDocument, int> documentIndex
-        ) {
+        )
+        {
             if (spans.Length == 0)
             {
                 return default(BlobHandle);
@@ -213,7 +214,8 @@ namespace Microsoft.Cci
         private int GetOrAddDocument(
             DebugSourceDocument document,
             Dictionary<DebugSourceDocument, int> index
-        ) {
+        )
+        {
             int documentRowId;
             if (!index.TryGetValue(document, out documentRowId))
             {

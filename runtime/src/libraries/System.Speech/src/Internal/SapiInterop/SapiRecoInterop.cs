@@ -228,7 +228,8 @@ namespace System.Speech.Internal.SapiInterop
             uint cchActiveChars,
             uint ulStartSelection,
             uint cchSelection
-        ) {
+        )
+        {
             this.ulStartActiveOffset = ulStartActiveOffset;
             this.cchActiveChars = cchActiveChars;
             this.ulStartSelection = ulStartSelection;
@@ -442,7 +443,8 @@ namespace System.Speech.Internal.SapiInterop
             CultureInfo culture,
             out GCHandle[] memHandles,
             out IntPtr coMem
-        ) {
+        )
+        {
             string[] words = phrase.Split(
                 Array.Empty<char>(),
                 StringSplitOptions.RemoveEmptyEntries
@@ -473,7 +475,8 @@ namespace System.Speech.Internal.SapiInterop
             CultureInfo culture,
             out GCHandle[] memHandles,
             out IntPtr coMem
-        ) {
+        )
+        {
             SPPHRASEELEMENT[] elements = new SPPHRASEELEMENT[words.Length];
 
             // build the unmanaged interop layer

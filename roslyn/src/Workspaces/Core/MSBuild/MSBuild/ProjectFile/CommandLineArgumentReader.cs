@@ -205,7 +205,8 @@ namespace Microsoft.CodeAnalysis.MSBuild
             {
                 foreach (
                     var feature in CompilerOptionParseUtilities.ParseFeatureFromMSBuild(features)
-                ) {
+                )
+                {
                     Add("features", feature);
                 }
             }
@@ -234,7 +235,8 @@ namespace Microsoft.CodeAnalysis.MSBuild
                     RoslynString.IsNullOrWhiteSpace(platform)
                     || string.Equals("anycpu", platform, StringComparison.OrdinalIgnoreCase)
                 )
-            ) {
+            )
+            {
                 platform = "anycpu32bitpreferred";
             }
 
@@ -267,7 +269,8 @@ namespace Microsoft.CodeAnalysis.MSBuild
                                         "global",
                                         StringComparison.OrdinalIgnoreCase
                                     )
-                                ) {
+                                )
+                                {
                                     Add("reference", filePath);
                                 }
                                 else

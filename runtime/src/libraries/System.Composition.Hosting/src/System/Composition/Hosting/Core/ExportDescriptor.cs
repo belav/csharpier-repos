@@ -31,7 +31,8 @@ namespace System.Composition.Hosting.Core
         public static ExportDescriptor Create(
             CompositeActivator activator,
             IDictionary<string, object> metadata
-        ) {
+        )
+        {
             return new DirectExportDescriptor(activator, metadata);
         }
     }

@@ -114,7 +114,8 @@ namespace Microsoft.CodeAnalysis.EditAndContinue
             > initialDocumentStates,
             DebuggingSessionTelemetry debuggingSessionTelemetry,
             EditSessionTelemetry editSessionTelemetry
-        ) {
+        )
+        {
             _compilationOutputsProvider = compilationOutputsProvider;
             _telemetry = debuggingSessionTelemetry;
 
@@ -155,7 +156,8 @@ namespace Microsoft.CodeAnalysis.EditAndContinue
         public void EndSession(
             out ImmutableArray<DocumentId> documentsToReanalyze,
             out DebuggingSessionTelemetry.Data telemetryData
-        ) {
+        )
+        {
             EndEditSession(out documentsToReanalyze);
             telemetryData = _telemetry.GetDataAndClear();
             Dispose();
@@ -164,7 +166,8 @@ namespace Microsoft.CodeAnalysis.EditAndContinue
         internal void RestartEditSession(
             bool inBreakState,
             out ImmutableArray<DocumentId> documentsToReanalyze
-        ) {
+        )
+        {
             EndEditSession(out documentsToReanalyze);
             EditSession = new EditSession(this, EditSession.Telemetry, inBreakState);
         }
@@ -226,7 +229,8 @@ namespace Microsoft.CodeAnalysis.EditAndContinue
         public async Task<(Guid Mvid, Diagnostic? Error)> GetProjectModuleIdAsync(
             Project project,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             lock (_projectModuleIdsGuard)
             {
                 if (_projectModuleIds.TryGetValue(project.Id, out var id))
@@ -285,7 +289,8 @@ namespace Microsoft.CodeAnalysis.EditAndContinue
             Project project,
             out ImmutableArray<Diagnostic> diagnostics,
             [NotNullWhen(true)] out EmitBaseline? baseline
-        ) {
+        )
+        {
             lock (_projectEmitBaselinesGuard)
             {
                 if (_projectEmitBaselines.TryGetValue(project.Id, out baseline))
@@ -304,7 +309,8 @@ namespace Microsoft.CodeAnalysis.EditAndContinue
                     out var debugInfoReaderProvider,
                     out var metadataReaderProvider
                 )
-            ) {
+            )
+            {
                 // Unable to read the DLL/PDB at this point (it might be open by another process).
                 // Don't cache the failure so that the user can attempt to apply changes again.
                 return false;
@@ -335,7 +341,8 @@ namespace Microsoft.CodeAnalysis.EditAndContinue
             [NotNullWhen(true)] out EmitBaseline? baseline,
             [NotNullWhen(true)] out DebugInformationReaderProvider? debugInfoReaderProvider,
             [NotNullWhen(true)] out MetadataReaderProvider? metadataReaderProvider
-        ) {
+        )
+        {
             // Read the metadata and symbols from the disk. Close the files as soon as we are done emitting the delta to minimize
             // the time when they are being locked. Since we need to use the baseline that is produced by delta emit for the subsequent
             // delta emit we need to keep the module metadata and symbol info backing the symbols of the baseline alive in memory.

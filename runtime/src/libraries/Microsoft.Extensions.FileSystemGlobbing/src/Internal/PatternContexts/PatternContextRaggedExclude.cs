@@ -32,7 +32,8 @@ namespace Microsoft.Extensions.FileSystemGlobbing.Internal.PatternContexts
                 Pattern.EndsWith.Count == 0
                 && Frame.SegmentGroupIndex == Pattern.Contains.Count - 1
                 && TestMatchingGroup(directory)
-            ) {
+            )
+            {
                 // directory excluded by matching up to final '/**'
                 return true;
             }

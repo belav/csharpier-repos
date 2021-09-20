@@ -132,7 +132,8 @@ namespace BasicWebSite.Controllers
         [HttpGet]
         public IActionResult GetAssemblyPartData(
             [FromServices] ApplicationPartManager applicationPartManager
-        ) {
+        )
+        {
             // Ensures that the entry assembly part is marked correctly.
             var assemblyPartMetadata =
                 applicationPartManager.ApplicationParts.OfType<AssemblyPart>()

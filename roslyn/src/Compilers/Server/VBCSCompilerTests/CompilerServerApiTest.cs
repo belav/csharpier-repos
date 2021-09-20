@@ -58,7 +58,8 @@ class Hello
         private async Task<BuildRequest> CreateBuildRequest(
             string sourceText,
             TimeSpan? keepAlive = null
-        ) {
+        )
+        {
             var directory = Temp.CreateDirectory();
             var file = directory.CreateFile("temp.cs");
             await file.WriteAllTextAsync(sourceText);
@@ -104,7 +105,8 @@ class Hello
             string pipeName,
             string sourceText,
             TimeSpan? keepAlive = null
-        ) {
+        )
+        {
             using (var namedPipe = new NamedPipeClientStream(".", pipeName, PipeDirection.InOut))
             {
                 var buildRequest = await CreateBuildRequest(sourceText, keepAlive);
@@ -134,7 +136,8 @@ class Hello
                     name: mutexName,
                     createdNew: out holdsMutex
                 )
-            ) {
+            )
+            {
                 Assert.True(holdsMutex);
                 try
                 {
@@ -285,7 +288,8 @@ class Hello
             string userName,
             bool isAdmin,
             string compilerExeDir
-        ) {
+        )
+        {
             Assert.Equal(
                 expectedName,
                 BuildServerConnection.GetPipeName(userName, isAdmin, compilerExeDir)

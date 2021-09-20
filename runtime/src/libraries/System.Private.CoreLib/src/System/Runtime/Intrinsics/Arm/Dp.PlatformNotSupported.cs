@@ -40,7 +40,8 @@ namespace System.Runtime.Intrinsics.Arm
             Vector64<int> addend,
             Vector64<sbyte> left,
             Vector64<sbyte> right
-        ) {
+        )
+        {
             throw new PlatformNotSupportedException();
         }
 
@@ -53,7 +54,8 @@ namespace System.Runtime.Intrinsics.Arm
             Vector64<uint> addend,
             Vector64<byte> left,
             Vector64<byte> right
-        ) {
+        )
+        {
             throw new PlatformNotSupportedException();
         }
 
@@ -66,7 +68,8 @@ namespace System.Runtime.Intrinsics.Arm
             Vector128<int> addend,
             Vector128<sbyte> left,
             Vector128<sbyte> right
-        ) {
+        )
+        {
             throw new PlatformNotSupportedException();
         }
 
@@ -79,7 +82,8 @@ namespace System.Runtime.Intrinsics.Arm
             Vector128<uint> addend,
             Vector128<byte> left,
             Vector128<byte> right
-        ) {
+        )
+        {
             throw new PlatformNotSupportedException();
         }
 
@@ -93,7 +97,8 @@ namespace System.Runtime.Intrinsics.Arm
             Vector64<sbyte> left,
             Vector64<sbyte> right,
             byte rightScaledIndex
-        ) {
+        )
+        {
             throw new PlatformNotSupportedException();
         }
 
@@ -107,7 +112,8 @@ namespace System.Runtime.Intrinsics.Arm
             Vector64<sbyte> left,
             Vector128<sbyte> right,
             byte rightScaledIndex
-        ) {
+        )
+        {
             throw new PlatformNotSupportedException();
         }
 
@@ -121,7 +127,8 @@ namespace System.Runtime.Intrinsics.Arm
             Vector64<byte> left,
             Vector64<byte> right,
             byte rightScaledIndex
-        ) {
+        )
+        {
             throw new PlatformNotSupportedException();
         }
 
@@ -135,7 +142,8 @@ namespace System.Runtime.Intrinsics.Arm
             Vector64<byte> left,
             Vector128<byte> right,
             byte rightScaledIndex
-        ) {
+        )
+        {
             throw new PlatformNotSupportedException();
         }
 
@@ -149,7 +157,8 @@ namespace System.Runtime.Intrinsics.Arm
             Vector128<sbyte> left,
             Vector128<sbyte> right,
             byte rightScaledIndex
-        ) {
+        )
+        {
             throw new PlatformNotSupportedException();
         }
 
@@ -163,7 +172,8 @@ namespace System.Runtime.Intrinsics.Arm
             Vector128<sbyte> left,
             Vector64<sbyte> right,
             byte rightScaledIndex
-        ) {
+        )
+        {
             throw new PlatformNotSupportedException();
         }
 
@@ -177,7 +187,8 @@ namespace System.Runtime.Intrinsics.Arm
             Vector128<byte> left,
             Vector128<byte> right,
             byte rightScaledIndex
-        ) {
+        )
+        {
             throw new PlatformNotSupportedException();
         }
 
@@ -191,7 +202,8 @@ namespace System.Runtime.Intrinsics.Arm
             Vector128<byte> left,
             Vector64<byte> right,
             byte rightScaledIndex
-        ) {
+        )
+        {
             throw new PlatformNotSupportedException();
         }
     }

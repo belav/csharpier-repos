@@ -40,7 +40,8 @@ namespace Microsoft.CodeAnalysis.FindSymbols
                 int parentIndex,
                 MultiDictionary<MetadataNode, ParameterTypeInfo>.ValueSet parameterTypeInfos =
                     default
-            ) {
+            )
+            {
                 Name = name;
                 ParentIndex = parentIndex;
                 ParameterTypeInfos = parameterTypeInfos;
@@ -169,7 +170,8 @@ namespace Microsoft.CodeAnalysis.FindSymbols
                 MetadataReader reader,
                 TypeDefinitionHandle handle,
                 byte rawTypeKind
-            ) {
+            )
+            {
                 var type = reader.GetTypeDefinition(handle);
                 var name = reader.GetString(type.Name);
                 return new ParameterTypeInfo(name, isComplex: false, isArray: false);
@@ -179,7 +181,8 @@ namespace Microsoft.CodeAnalysis.FindSymbols
                 MetadataReader reader,
                 TypeReferenceHandle handle,
                 byte rawTypeKind
-            ) {
+            )
+            {
                 var type = reader.GetTypeReference(handle);
                 var name = reader.GetString(type.Name);
                 return new ParameterTypeInfo(name, isComplex: false, isArray: false);
@@ -190,7 +193,8 @@ namespace Microsoft.CodeAnalysis.FindSymbols
                 object genericContext,
                 TypeSpecificationHandle handle,
                 byte rawTypeKind
-            ) {
+            )
+            {
                 var sigReader = reader.GetBlobReader(reader.GetTypeSpecification(handle).Signature);
                 return new SignatureDecoder<ParameterTypeInfo, object>(
                     Instance,

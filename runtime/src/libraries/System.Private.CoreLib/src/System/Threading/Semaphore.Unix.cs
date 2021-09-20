@@ -15,7 +15,8 @@ namespace System.Threading
             int maximumCount,
             string? name,
             out bool createdNew
-        ) {
+        )
+        {
             if (name != null)
             {
                 throw new PlatformNotSupportedException(

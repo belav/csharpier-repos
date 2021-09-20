@@ -105,7 +105,8 @@ namespace Microsoft.CodeAnalysis.CSharp.ChangeSignature
             int position,
             bool restrictToDeclarations,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var tree = await document.GetRequiredSyntaxTreeAsync(cancellationToken)
                 .ConfigureAwait(false);
             var root = await document.GetRequiredSyntaxRootAsync(cancellationToken)
@@ -160,14 +161,16 @@ namespace Microsoft.CodeAnalysis.CSharp.ChangeSignature
                     SyntaxKind.ObjectCreationExpression,
                     out ObjectCreationExpressionSyntax? objectCreation
                 ) && token.Parent.AncestorsAndSelf().Any(a => a == objectCreation.Type)
-            ) {
+            )
+            {
                 var typeSymbol =
                     semanticModel.GetSymbolInfo(objectCreation.Type, cancellationToken).Symbol;
                 if (
                     typeSymbol != null
                     && typeSymbol.IsKind(SymbolKind.NamedType)
                     && ((ITypeSymbol)typeSymbol).TypeKind == TypeKind.Delegate
-                ) {
+                )
+                {
                     return (typeSymbol, 0);
                 }
             }
@@ -195,7 +198,8 @@ namespace Microsoft.CodeAnalysis.CSharp.ChangeSignature
                 if (
                     restrictToDeclarations && current.Kind() == SyntaxKind.Block
                     || current.Kind() == SyntaxKind.ArrowExpressionClause
-                ) {
+                )
+                {
                     return null;
                 }
 
@@ -293,7 +297,8 @@ namespace Microsoft.CodeAnalysis.CSharp.ChangeSignature
             SyntaxNode originalNode,
             SignatureChange signaturePermutation,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var updatedNode = potentiallyUpdatedNode as CSharpSyntaxNode;
 
             // Update <param> tags.
@@ -302,7 +307,8 @@ namespace Microsoft.CodeAnalysis.CSharp.ChangeSignature
                 || updatedNode.IsKind(SyntaxKind.ConstructorDeclaration)
                 || updatedNode.IsKind(SyntaxKind.IndexerDeclaration)
                 || updatedNode.IsKind(SyntaxKind.DelegateDeclaration)
-            ) {
+            )
+            {
                 var updatedLeadingTrivia = UpdateParamTagsInLeadingTrivia(
                     document,
                     updatedNode,
@@ -321,7 +327,8 @@ namespace Microsoft.CodeAnalysis.CSharp.ChangeSignature
                     SyntaxKind.MethodDeclaration,
                     out MethodDeclarationSyntax? method
                 )
-            ) {
+            )
+            {
                 var updatedParameters = UpdateDeclaration(
                     method.ParameterList.Parameters,
                     signaturePermutation,
@@ -338,7 +345,8 @@ namespace Microsoft.CodeAnalysis.CSharp.ChangeSignature
                     SyntaxKind.LocalFunctionStatement,
                     out LocalFunctionStatementSyntax? localFunction
                 )
-            ) {
+            )
+            {
                 var updatedParameters = UpdateDeclaration(
                     localFunction.ParameterList.Parameters,
                     signaturePermutation,
@@ -355,7 +363,8 @@ namespace Microsoft.CodeAnalysis.CSharp.ChangeSignature
                     SyntaxKind.ConstructorDeclaration,
                     out ConstructorDeclarationSyntax? constructor
                 )
-            ) {
+            )
+            {
                 var updatedParameters = UpdateDeclaration(
                     constructor.ParameterList.Parameters,
                     signaturePermutation,
@@ -372,7 +381,8 @@ namespace Microsoft.CodeAnalysis.CSharp.ChangeSignature
                     SyntaxKind.IndexerDeclaration,
                     out IndexerDeclarationSyntax? indexer
                 )
-            ) {
+            )
+            {
                 var updatedParameters = UpdateDeclaration(
                     indexer.ParameterList.Parameters,
                     signaturePermutation,
@@ -389,7 +399,8 @@ namespace Microsoft.CodeAnalysis.CSharp.ChangeSignature
                     SyntaxKind.DelegateDeclaration,
                     out DelegateDeclarationSyntax? delegateDeclaration
                 )
-            ) {
+            )
+            {
                 var updatedParameters = UpdateDeclaration(
                     delegateDeclaration.ParameterList.Parameters,
                     signaturePermutation,
@@ -406,7 +417,8 @@ namespace Microsoft.CodeAnalysis.CSharp.ChangeSignature
                     SyntaxKind.AnonymousMethodExpression,
                     out AnonymousMethodExpressionSyntax? anonymousMethod
                 )
-            ) {
+            )
+            {
                 // Delegates may omit parameters in C#
                 if (anonymousMethod.ParameterList == null)
                 {
@@ -429,7 +441,8 @@ namespace Microsoft.CodeAnalysis.CSharp.ChangeSignature
                     SyntaxKind.SimpleLambdaExpression,
                     out SimpleLambdaExpressionSyntax? lambda
                 )
-            ) {
+            )
+            {
                 if (signaturePermutation.UpdatedConfiguration.ToListOfParameters().Any())
                 {
                     var updatedParameters = UpdateDeclaration(
@@ -465,7 +478,8 @@ namespace Microsoft.CodeAnalysis.CSharp.ChangeSignature
                     SyntaxKind.ParenthesizedLambdaExpression,
                     out ParenthesizedLambdaExpressionSyntax? parenLambda
                 )
-            ) {
+            )
+            {
                 var doNotSkipParameterType =
                     parenLambda.ParameterList.Parameters.FirstOrDefault()?.Type != null;
 
@@ -485,10 +499,12 @@ namespace Microsoft.CodeAnalysis.CSharp.ChangeSignature
                     SyntaxKind.NameMemberCref,
                     out NameMemberCrefSyntax? nameMemberCref
                 )
-            ) {
+            )
+            {
                 if (
                     nameMemberCref.Parameters == null || !nameMemberCref.Parameters.Parameters.Any()
-                ) {
+                )
+                {
                     return nameMemberCref;
                 }
 
@@ -511,7 +527,8 @@ namespace Microsoft.CodeAnalysis.CSharp.ChangeSignature
                     SyntaxKind.InvocationExpression,
                     out InvocationExpressionSyntax? invocation
                 )
-            ) {
+            )
+            {
                 var symbolInfo = semanticModel.GetSymbolInfo(
                     (InvocationExpressionSyntax)originalNode,
                     cancellationToken
@@ -576,7 +593,8 @@ namespace Microsoft.CodeAnalysis.CSharp.ChangeSignature
                     SyntaxKind.ThisConstructorInitializer,
                     out ConstructorInitializerSyntax? constructorInit
                 ) || updatedNode.IsKind(SyntaxKind.BaseConstructorInitializer, out constructorInit)
-            ) {
+            )
+            {
                 var symbolInfo = semanticModel.GetSymbolInfo(
                     (ConstructorInitializerSyntax)originalNode,
                     cancellationToken
@@ -607,7 +625,8 @@ namespace Microsoft.CodeAnalysis.CSharp.ChangeSignature
                     SyntaxKind.ElementAccessExpression,
                     out ElementAccessExpressionSyntax? elementAccess
                 )
-            ) {
+            )
+            {
                 var symbolInfo = semanticModel.GetSymbolInfo(
                     (ElementAccessExpressionSyntax)originalNode,
                     cancellationToken
@@ -718,7 +737,8 @@ namespace Microsoft.CodeAnalysis.CSharp.ChangeSignature
             Document document,
             int position,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var newArguments = PermuteAttributeArgumentList(
                 declarationSymbol,
                 argumentList.Arguments,
@@ -748,7 +768,8 @@ namespace Microsoft.CodeAnalysis.CSharp.ChangeSignature
             SyntaxNode node,
             SymbolInfo symbolInfo,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             if (symbolInfo.Symbol == null)
             {
                 return false;
@@ -824,7 +845,8 @@ namespace Microsoft.CodeAnalysis.CSharp.ChangeSignature
         private static ParameterSyntax CreateNewParameterSyntax(
             AddedParameter addedParameter,
             bool skipParameterType
-        ) {
+        )
+        {
             var equalsValueClause = addedParameter.HasDefaultValue
                 ? EqualsValueClause(ParseExpression(addedParameter.DefaultValue))
                 : null;
@@ -861,7 +883,8 @@ namespace Microsoft.CodeAnalysis.CSharp.ChangeSignature
         protected override T TransferLeadingWhitespaceTrivia<T>(
             T newArgument,
             SyntaxNode oldArgument
-        ) {
+        )
+        {
             var oldTrivia = oldArgument.GetLeadingTrivia();
             var oldOnlyHasWhitespaceTrivia = oldTrivia.All(
                 t => t.IsKind(SyntaxKind.WhitespaceTrivia)
@@ -891,7 +914,8 @@ namespace Microsoft.CodeAnalysis.CSharp.ChangeSignature
             Document document,
             int position,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var newArgumentList = await AddNewArgumentsToListAsync(
                     declarationSymbol,
                     newArguments,
@@ -915,7 +939,8 @@ namespace Microsoft.CodeAnalysis.CSharp.ChangeSignature
             ISymbol declarationSymbol,
             SeparatedSyntaxList<AttributeArgumentSyntax> arguments,
             SignatureChange updatedSignature
-        ) {
+        )
+        {
             var newArguments = PermuteArguments(
                 declarationSymbol,
                 arguments.Select(a => UnifiedArgumentSyntax.Create(a)).ToImmutableArray(),
@@ -940,7 +965,8 @@ namespace Microsoft.CodeAnalysis.CSharp.ChangeSignature
             SeparatedSyntaxList<ArgumentSyntax> arguments,
             SignatureChange updatedSignature,
             bool isReducedExtensionMethod = false
-        ) {
+        )
+        {
             var newArguments = PermuteArguments(
                 declarationSymbol,
                 arguments.Select(a => UnifiedArgumentSyntax.Create(a)).ToImmutableArray(),
@@ -964,8 +990,9 @@ namespace Microsoft.CodeAnalysis.CSharp.ChangeSignature
         private ImmutableArray<T> TransferLeadingWhitespaceTrivia<T, U>(
             IEnumerable<T> newArguments,
             SeparatedSyntaxList<U> oldArguments
-        ) where T : SyntaxNode
-          where U : SyntaxNode
+        )
+            where T : SyntaxNode
+            where U : SyntaxNode
         {
             var result = ImmutableArray.CreateBuilder<T>();
             var index = 0;
@@ -988,7 +1015,8 @@ namespace Microsoft.CodeAnalysis.CSharp.ChangeSignature
             CSharpSyntaxNode node,
             ISymbol declarationSymbol,
             SignatureChange updatedSignature
-        ) {
+        )
+        {
             if (!node.HasLeadingTrivia)
             {
                 return ImmutableArray<SyntaxTrivia>.Empty;
@@ -1019,7 +1047,8 @@ namespace Microsoft.CodeAnalysis.CSharp.ChangeSignature
             IEnumerable<XmlElementSyntax> paramNodes,
             ISymbol declarationSymbol,
             SignatureChange updatedSignature
-        ) {
+        )
+        {
             // Only reorder if count and order match originally.
             var originalParameters = updatedSignature.OriginalConfiguration.ToListOfParameters();
             var reorderedParameters = updatedSignature.UpdatedConfiguration.ToListOfParameters();
@@ -1054,7 +1083,8 @@ namespace Microsoft.CodeAnalysis.CSharp.ChangeSignature
                 if (
                     identifier == null
                     || identifier.ToString() != declaredParameters.ElementAt(i).Name
-                ) {
+                )
+                {
                     return ImmutableArray<SyntaxNode>.Empty;
                 }
 
@@ -1093,7 +1123,8 @@ namespace Microsoft.CodeAnalysis.CSharp.ChangeSignature
             IMethodSymbol symbol,
             Document document,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var root = await document.GetRequiredSyntaxRootAsync(cancellationToken)
                 .ConfigureAwait(false);
             var semanticModel = await document.GetRequiredSemanticModelAsync(cancellationToken)
@@ -1106,7 +1137,8 @@ namespace Microsoft.CodeAnalysis.CSharp.ChangeSignature
                         if (
                             !n.IsKind(SyntaxKind.IdentifierName)
                             || !semanticModel.GetMemberGroup(n, cancellationToken).Any()
-                        ) {
+                        )
+                        {
                             return false;
                         }
 
@@ -1160,7 +1192,8 @@ namespace Microsoft.CodeAnalysis.CSharp.ChangeSignature
             SeparatedSyntaxList<SyntaxNode> newArguments,
             int indexInExistingList,
             IParameterSymbol parameterSymbol
-        ) {
+        )
+        {
             RoslynDebug.Assert(parameterSymbol.IsParams);
 
             // These arguments are part of a params array, and should not have any modifiers, making it okay to just use their expressions.

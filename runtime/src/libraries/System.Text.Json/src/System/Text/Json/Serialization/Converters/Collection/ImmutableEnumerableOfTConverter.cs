@@ -21,14 +21,16 @@ namespace System.Text.Json.Serialization.Converters
             ref Utf8JsonReader reader,
             ref ReadStack state,
             JsonSerializerOptions options
-        ) {
+        )
+        {
             state.Current.ReturnValue = new List<TElement>();
         }
 
         protected override void ConvertCollection(
             ref ReadStack state,
             JsonSerializerOptions options
-        ) {
+        )
+        {
             JsonTypeInfo typeInfo = state.Current.JsonTypeInfo;
 
             Func<IEnumerable<TElement>, TCollection>? creator = (Func<
@@ -53,7 +55,8 @@ namespace System.Text.Json.Serialization.Converters
             TCollection value,
             JsonSerializerOptions options,
             ref WriteStack state
-        ) {
+        )
+        {
             IEnumerator<TElement> enumerator;
             if (state.Current.CollectionEnumerator == null)
             {

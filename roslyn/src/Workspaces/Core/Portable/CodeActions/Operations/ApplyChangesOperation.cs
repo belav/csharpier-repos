@@ -41,7 +41,8 @@ namespace Microsoft.CodeAnalysis.CodeActions
             Workspace workspace,
             IProgressTracker progressTracker,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             return workspace.TryApplyChanges(ChangedSolution, progressTracker);
         }
     }

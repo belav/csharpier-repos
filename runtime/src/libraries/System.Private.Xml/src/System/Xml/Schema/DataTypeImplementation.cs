@@ -178,7 +178,8 @@ namespace System.Xml.Schema
         internal static XmlSchemaSimpleType StartBuiltinType(
             XmlQualifiedName qname,
             XmlSchemaDatatype dataType
-        ) {
+        )
+        {
             XmlSchemaSimpleType simpleType;
             Debug.Assert(qname != null && dataType != null);
 
@@ -197,7 +198,8 @@ namespace System.Xml.Schema
         internal static void FinishBuiltinType(
             XmlSchemaSimpleType derivedType,
             XmlSchemaSimpleType baseType
-        ) {
+        )
+        {
             Debug.Assert(derivedType != null && baseType != null);
 
             // Create link from the derived type to the base type
@@ -404,7 +406,8 @@ namespace System.Xml.Schema
             XmlSchemaObjectCollection facets,
             XmlNameTable nameTable,
             XmlSchemaType schemaType
-        ) {
+        )
+        {
             DatatypeImplementation dt = (DatatypeImplementation)MemberwiseClone();
             dt._restriction = this.FacetsChecker.ConstructRestriction(this, facets, nameTable);
             dt._baseType = this;
@@ -427,7 +430,8 @@ namespace System.Xml.Schema
             else if (
                 _variety == XmlSchemaDatatypeVariety.Union
                 && !((Datatype_union)this).HasAtomicMembers()
-            ) {
+            )
+            {
                 throw new XmlSchemaException(SR.Sch_ListFromNonatomic, string.Empty);
             }
 
@@ -442,7 +446,8 @@ namespace System.Xml.Schema
         internal static new DatatypeImplementation DeriveByUnion(
             XmlSchemaSimpleType[] types,
             XmlSchemaType schemaType
-        ) {
+        )
+        {
             DatatypeImplementation dt = new Datatype_union(types);
             dt._baseType = s_anySimpleType; //Base type of a union is anySimpleType
             dt._variety = XmlSchemaDatatypeVariety.Union;
@@ -483,7 +488,8 @@ namespace System.Xml.Schema
                 && !datatype.HasLexicalFacets
                 && !datatype.HasValueFacets
                 && _variety != XmlSchemaDatatypeVariety.Union
-            ) { //base type is union (not a restriction of union) and derived type is not union
+            )
+            { //base type is union (not a restriction of union) and derived type is not union
                 return ((Datatype_union)datatype).IsUnionBaseOf(this);
             }
             else if (
@@ -492,7 +498,8 @@ namespace System.Xml.Schema
                     || _variety == XmlSchemaDatatypeVariety.List
                 )
                 && _restriction == null
-            ) { //derived type is union (not a restriction)
+            )
+            { //derived type is union (not a restriction)
                 return (datatype == s__anySimpleType.Datatype);
             }
             return false;
@@ -584,7 +591,8 @@ namespace System.Xml.Schema
                             | RestrictionFlags.FractionDigits
                         )
                     ) != 0
-                ) {
+                )
+                {
                     return true;
                 }
                 return false;
@@ -612,7 +620,8 @@ namespace System.Xml.Schema
                             | RestrictionFlags.Enumeration
                         )
                     ) != 0
-                ) {
+                )
+                {
                     return true;
                 }
                 return false;
@@ -637,7 +646,8 @@ namespace System.Xml.Schema
             string s,
             XmlNameTable? nameTable,
             IXmlNamespaceResolver? nsmgr
-        ) {
+        )
+        {
             object? typedValue;
             Exception? exception = TryParseValue(s, nameTable, nsmgr, out typedValue);
             if (exception != null)
@@ -668,7 +678,8 @@ namespace System.Xml.Schema
             XmlNameTable? nameTable,
             IXmlNamespaceResolver? nsmgr,
             bool createAtomicValue
-        ) {
+        )
+        {
             if (createAtomicValue)
             {
                 object? typedValue;
@@ -700,7 +711,8 @@ namespace System.Xml.Schema
             XmlNameTable? nameTable,
             IXmlNamespaceResolver? namespaceResolver,
             out object? typedValue
-        ) {
+        )
+        {
             Exception? exception = null;
             typedValue = null;
 
@@ -1152,7 +1164,8 @@ namespace System.Xml.Schema
                             atomicValues1[i].TypedValue,
                             atomicValues2[i].TypedValue
                         )
-                    ) {
+                    )
+                    {
                         return -1;
                     }
                 }
@@ -1218,7 +1231,8 @@ namespace System.Xml.Schema
             XmlNameTable? nameTable,
             IXmlNamespaceResolver? namespaceResolver,
             out object? typedValue
-        ) {
+        )
+        {
             Exception? exception;
             if (value == null)
             {
@@ -1317,7 +1331,8 @@ namespace System.Xml.Schema
             XmlNameTable? nameTable,
             IXmlNamespaceResolver? nsmgr,
             out object? typedValue
-        ) {
+        )
+        {
             Exception? exception;
 
             typedValue = null;
@@ -1488,7 +1503,8 @@ namespace System.Xml.Schema
             XmlNameTable? nameTable,
             IXmlNamespaceResolver? nsmgr,
             out object? typedValue
-        ) {
+        )
+        {
             Exception? exception;
             XmlSchemaSimpleType? memberType = null;
 
@@ -1533,7 +1549,8 @@ namespace System.Xml.Schema
             XmlNameTable? nameTable,
             IXmlNamespaceResolver? nsmgr,
             out object? typedValue
-        ) {
+        )
+        {
             Exception? exception;
             if (value == null)
             {
@@ -1553,7 +1570,8 @@ namespace System.Xml.Schema
                 if (
                     _types[i].Datatype!.TryParseValue(value, nameTable, nsmgr, out valueToCheck)
                     == null
-                ) { //no error
+                )
+                { //no error
                     memberType = _types[i];
                     break;
                 }
@@ -1668,7 +1686,8 @@ namespace System.Xml.Schema
             XmlNameTable? nameTable,
             IXmlNamespaceResolver? nsmgr,
             out object? typedValue
-        ) {
+        )
+        {
             typedValue = XmlComplianceUtil.NonCDataNormalize(s); //Whitespace facet is treated as collapse since thats the way it was in Everett
             return null;
         }
@@ -1776,7 +1795,8 @@ namespace System.Xml.Schema
             XmlNameTable? nameTable,
             IXmlNamespaceResolver? nsmgr,
             out object? typedValue
-        ) {
+        )
+        {
             Exception? exception;
 
             typedValue = null;
@@ -1867,7 +1887,8 @@ namespace System.Xml.Schema
             XmlNameTable? nameTable,
             IXmlNamespaceResolver? nsmgr,
             out object? typedValue
-        ) {
+        )
+        {
             Exception? exception;
             typedValue = null;
 
@@ -1973,7 +1994,8 @@ namespace System.Xml.Schema
             XmlNameTable? nameTable,
             IXmlNamespaceResolver? nsmgr,
             out object? typedValue
-        ) {
+        )
+        {
             Exception? exception;
 
             typedValue = null;
@@ -2084,7 +2106,8 @@ namespace System.Xml.Schema
             XmlNameTable? nameTable,
             IXmlNamespaceResolver? nsmgr,
             out object? typedValue
-        ) {
+        )
+        {
             Exception? exception;
             typedValue = null;
 
@@ -2203,7 +2226,8 @@ namespace System.Xml.Schema
             XmlNameTable? nameTable,
             IXmlNamespaceResolver? nsmgr,
             out object? typedValue
-        ) {
+        )
+        {
             Exception? exception;
 
             typedValue = null;
@@ -2315,7 +2339,8 @@ namespace System.Xml.Schema
             XmlNameTable? nameTable,
             IXmlNamespaceResolver? nsmgr,
             out object? typedValue
-        ) {
+        )
+        {
             Exception? exception;
             typedValue = null;
 
@@ -2353,7 +2378,8 @@ namespace System.Xml.Schema
             XmlNameTable? nameTable,
             IXmlNamespaceResolver? nsmgr,
             out object? typedValue
-        ) {
+        )
+        {
             Exception? exception;
             typedValue = null;
 
@@ -2409,7 +2435,8 @@ namespace System.Xml.Schema
             XmlNameTable? nameTable,
             IXmlNamespaceResolver? nsmgr,
             out object? typedValue
-        ) {
+        )
+        {
             Exception? exception;
 
             typedValue = null;
@@ -2520,7 +2547,8 @@ namespace System.Xml.Schema
             if (
                 dateTime1.Kind == DateTimeKind.Unspecified
                 || dateTime2.Kind == DateTimeKind.Unspecified
-            ) { //If either of them are unspecified, do not convert zones
+            )
+            { //If either of them are unspecified, do not convert zones
                 return dateTime1.CompareTo(dateTime2);
             }
             dateTime1 = dateTime1.ToUniversalTime();
@@ -2532,7 +2560,8 @@ namespace System.Xml.Schema
             XmlNameTable? nameTable,
             IXmlNamespaceResolver? nsmgr,
             out object? typedValue
-        ) {
+        )
+        {
             Exception? exception;
             typedValue = null;
 
@@ -2959,7 +2988,8 @@ namespace System.Xml.Schema
             XmlNameTable? nameTable,
             IXmlNamespaceResolver? nsmgr,
             out object? typedValue
-        ) {
+        )
+        {
             Exception? exception;
 
             typedValue = null;
@@ -3080,7 +3110,8 @@ namespace System.Xml.Schema
             XmlNameTable? nameTable,
             IXmlNamespaceResolver? nsmgr,
             out object? typedValue
-        ) {
+        )
+        {
             Exception? exception;
 
             typedValue = null;
@@ -3208,7 +3239,8 @@ namespace System.Xml.Schema
             XmlNameTable? nameTable,
             IXmlNamespaceResolver? nsmgr,
             out object? typedValue
-        ) {
+        )
+        {
             Exception? exception;
 
             typedValue = null;
@@ -3325,7 +3357,8 @@ namespace System.Xml.Schema
             XmlNameTable? nameTable,
             IXmlNamespaceResolver? nsmgr,
             out object? typedValue
-        ) {
+        )
+        {
             Exception? exception;
 
             typedValue = null;
@@ -3564,7 +3597,8 @@ namespace System.Xml.Schema
             XmlNameTable? nameTable,
             IXmlNamespaceResolver? nsmgr,
             out object? typedValue
-        ) {
+        )
+        {
             Exception? exception;
 
             typedValue = null;
@@ -3742,7 +3776,8 @@ namespace System.Xml.Schema
             XmlNameTable? nameTable,
             IXmlNamespaceResolver? nsmgr,
             out object? typedValue
-        ) {
+        )
+        {
             Exception? exception;
 
             typedValue = null;
@@ -3788,7 +3823,8 @@ namespace System.Xml.Schema
         internal override void VerifySchemaValid(
             XmlSchemaObjectTable notations,
             XmlSchemaObject caller
-        ) {
+        )
+        {
             // Only datatypes that are derived from NOTATION by specifying a value for enumeration can be used in a schema.
             // Furthermore, the value of all enumeration facets must match the name of a notation declared in the current schema.                    //
             for (Datatype_NOTATION? dt = this; dt != null; dt = (Datatype_NOTATION?)dt.Base)
@@ -3796,7 +3832,8 @@ namespace System.Xml.Schema
                 if (
                     dt.Restriction != null
                     && (dt.Restriction.Flags & RestrictionFlags.Enumeration) != 0
-                ) {
+                )
+                {
                     for (int i = 0; i < dt.Restriction.Enumeration!.Count; ++i)
                     {
                         XmlQualifiedName notation = (XmlQualifiedName)dt.Restriction.Enumeration[
@@ -3837,7 +3874,8 @@ namespace System.Xml.Schema
             XmlNameTable? nameTable,
             IXmlNamespaceResolver? nsmgr,
             out object? typedValue
-        ) {
+        )
+        {
             Exception? exception;
 
             typedValue = null;
@@ -3993,7 +4031,8 @@ namespace System.Xml.Schema
             XmlNameTable? nameTable,
             IXmlNamespaceResolver? nsmgr,
             out object? typedValue
-        ) {
+        )
+        {
             Exception? exception;
 
             typedValue = null;
@@ -4071,7 +4110,8 @@ namespace System.Xml.Schema
             XmlNameTable? nameTable,
             IXmlNamespaceResolver? nsmgr,
             out object? typedValue
-        ) {
+        )
+        {
             Exception? exception;
 
             typedValue = null;
@@ -4149,7 +4189,8 @@ namespace System.Xml.Schema
             XmlNameTable? nameTable,
             IXmlNamespaceResolver? nsmgr,
             out object? typedValue
-        ) {
+        )
+        {
             Exception? exception;
 
             typedValue = null;
@@ -4227,7 +4268,8 @@ namespace System.Xml.Schema
             XmlNameTable? nameTable,
             IXmlNamespaceResolver? nsmgr,
             out object? typedValue
-        ) {
+        )
+        {
             Exception? exception;
 
             typedValue = null;
@@ -4346,7 +4388,8 @@ namespace System.Xml.Schema
             XmlNameTable? nameTable,
             IXmlNamespaceResolver? nsmgr,
             out object? typedValue
-        ) {
+        )
+        {
             Exception? exception;
 
             typedValue = null;
@@ -4424,7 +4467,8 @@ namespace System.Xml.Schema
             XmlNameTable? nameTable,
             IXmlNamespaceResolver? nsmgr,
             out object? typedValue
-        ) {
+        )
+        {
             Exception? exception;
 
             typedValue = null;
@@ -4502,7 +4546,8 @@ namespace System.Xml.Schema
             XmlNameTable? nameTable,
             IXmlNamespaceResolver? nsmgr,
             out object? typedValue
-        ) {
+        )
+        {
             Exception? exception;
 
             typedValue = null;
@@ -4579,7 +4624,8 @@ namespace System.Xml.Schema
             XmlNameTable? nameTable,
             IXmlNamespaceResolver? nsmgr,
             out object? typedValue
-        ) {
+        )
+        {
             Exception? exception;
 
             typedValue = null;
@@ -4644,7 +4690,8 @@ namespace System.Xml.Schema
             string s,
             XmlNameTable? nameTable,
             IXmlNamespaceResolver? nsmgr
-        ) {
+        )
+        {
             double value;
             try
             {
@@ -4669,7 +4716,8 @@ namespace System.Xml.Schema
             string s,
             XmlNameTable? nameTable,
             IXmlNamespaceResolver? nsmgr
-        ) {
+        )
+        {
             float value;
             try
             {
@@ -4702,7 +4750,8 @@ namespace System.Xml.Schema
             string s,
             XmlNameTable? nameTable,
             IXmlNamespaceResolver? nsmgr
-        ) {
+        )
+        {
             if (s == null || s.Length == 0)
             {
                 throw new XmlSchemaException(SR.Sch_EmptyAttributeValue, string.Empty);
@@ -4775,7 +4824,8 @@ namespace System.Xml.Schema
             string s,
             XmlNameTable? nameTable,
             IXmlNamespaceResolver? nsmgr
-        ) {
+        )
+        {
             try
             {
                 return XmlConvert.ToChar(s);
@@ -4795,7 +4845,8 @@ namespace System.Xml.Schema
             XmlNameTable? nameTable,
             IXmlNamespaceResolver? nsmgr,
             out object? typedValue
-        ) {
+        )
+        {
             Exception? exception;
 
             typedValue = null;
@@ -4820,7 +4871,8 @@ namespace System.Xml.Schema
             string s,
             XmlNameTable? nameTable,
             IXmlNamespaceResolver? nsmgr
-        ) {
+        )
+        {
             Exception? exception;
 
             try
@@ -4852,7 +4904,8 @@ namespace System.Xml.Schema
             XmlNameTable? nameTable,
             IXmlNamespaceResolver? nsmgr,
             out object? typedValue
-        ) {
+        )
+        {
             Exception? exception;
 
             typedValue = null;
@@ -4911,7 +4964,8 @@ namespace System.Xml.Schema
             string s,
             XmlNameTable? nameTable,
             IXmlNamespaceResolver? nsmgr
-        ) {
+        )
+        {
             try
             {
                 return XmlConvert.ToGuid(s);
@@ -4931,7 +4985,8 @@ namespace System.Xml.Schema
             XmlNameTable? nameTable,
             IXmlNamespaceResolver? nsmgr,
             out object? typedValue
-        ) {
+        )
+        {
             Exception? exception;
 
             typedValue = null;

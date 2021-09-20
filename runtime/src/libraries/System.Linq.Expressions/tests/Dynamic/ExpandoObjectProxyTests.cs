@@ -76,7 +76,8 @@ namespace System.Dynamic.Tests
         private static void AssertSameCollectionIgnoreOrder<T>(
             ICollection<T> expected,
             ICollection<T> actual
-        ) {
+        )
+        {
             Assert.Equal(actual.Count, expected.Count);
             foreach (T item in actual)
                 Assert.Contains(item, expected);

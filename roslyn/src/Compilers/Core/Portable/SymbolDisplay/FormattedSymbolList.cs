@@ -21,7 +21,8 @@ namespace Microsoft.CodeAnalysis
         internal FormattedSymbolList(
             IEnumerable<ISymbol> symbols,
             SymbolDisplayFormat symbolDisplayFormat = null
-        ) {
+        )
+        {
             Debug.Assert(symbols != null);
 
             _symbols = symbols;

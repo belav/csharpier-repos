@@ -84,7 +84,8 @@ namespace Microsoft.AspNetCore.Components.WebView
                 if (
                     !PathStringHelper.IsValidPathChar(value[i])
                     || PathStringHelper.IsPercentEncodedChar(value, i)
-                ) {
+                )
+                {
                     break;
                 }
             }
@@ -254,7 +255,8 @@ namespace Microsoft.AspNetCore.Components.WebView
             PathString other,
             StringComparison comparisonType,
             out PathString remaining
-        ) {
+        )
+        {
             var value1 = Value ?? string.Empty;
             var value2 = other.Value ?? string.Empty;
             if (value1.StartsWith(value2, comparisonType))
@@ -281,7 +283,8 @@ namespace Microsoft.AspNetCore.Components.WebView
             PathString other,
             out PathString matched,
             out PathString remaining
-        ) {
+        )
+        {
             return StartsWithSegments(
                 other,
                 StringComparison.OrdinalIgnoreCase,
@@ -304,7 +307,8 @@ namespace Microsoft.AspNetCore.Components.WebView
             StringComparison comparisonType,
             out PathString matched,
             out PathString remaining
-        ) {
+        )
+        {
             var value1 = Value ?? string.Empty;
             var value2 = other.Value ?? string.Empty;
             if (value1.StartsWith(value2, comparisonType))

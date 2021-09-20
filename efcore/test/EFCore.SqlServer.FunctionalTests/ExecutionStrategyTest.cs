@@ -138,7 +138,8 @@ namespace Microsoft.EntityFrameworkCore
         private void Test_commit_failure(
             bool realFailure,
             Action<TestSqlServerRetryingExecutionStrategy, ExecutionStrategyContext> execute
-        ) {
+        )
+        {
             CleanContext();
 
             using (var context = CreateContext())
@@ -315,7 +316,8 @@ namespace Microsoft.EntityFrameworkCore
         private async Task Test_commit_failure_async(
             bool realFailure,
             Func<TestSqlServerRetryingExecutionStrategy, ExecutionStrategyContext, Task> execute
-        ) {
+        )
+        {
             CleanContext();
 
             using (var context = CreateContext())
@@ -415,7 +417,8 @@ namespace Microsoft.EntityFrameworkCore
             bool externalStrategy,
             bool openConnection,
             bool async
-        ) {
+        )
+        {
             CleanContext();
 
             using (var context = CreateContext())
@@ -683,7 +686,8 @@ namespace Microsoft.EntityFrameworkCore
         public async Task Retries_OpenConnection_on_execution_failure(
             bool externalStrategy,
             bool async
-        ) {
+        )
+        {
             using var context = CreateContext();
             var connection = (TestSqlServerConnection)context.GetService<ISqlServerConnection>();
 

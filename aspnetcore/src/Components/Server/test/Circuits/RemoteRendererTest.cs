@@ -534,7 +534,8 @@ namespace Microsoft.AspNetCore.Components.Web.Rendering
         private TestRemoteRenderer GetRemoteRenderer(
             IServiceProvider serviceProvider,
             CircuitClientProxy circuitClient = null
-        ) {
+        )
+        {
             return new TestRemoteRenderer(
                 serviceProvider,
                 NullLoggerFactory.Instance,

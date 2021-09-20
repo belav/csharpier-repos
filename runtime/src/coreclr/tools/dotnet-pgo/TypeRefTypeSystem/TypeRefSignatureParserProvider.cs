@@ -19,7 +19,8 @@ namespace Microsoft.Diagnostics.Tools.Pgo.TypeRefTypeSystem
             public TypeRefSignatureParserProvider(
                 TypeSystemContext tsc,
                 Dictionary<TypeReferenceHandle, TypeRefTypeSystemType> resolver
-            ) {
+            )
+            {
                 _tsc = tsc;
                 _resolver = resolver;
             }
@@ -43,7 +44,8 @@ namespace Microsoft.Diagnostics.Tools.Pgo.TypeRefTypeSystem
             public TypeDesc GetGenericInstantiation(
                 TypeDesc genericType,
                 ImmutableArray<TypeDesc> typeArguments
-            ) {
+            )
+            {
                 if (genericType is TypeRefTypeSystemType typeRefType)
                 {
                     typeRefType.SetGenericParameterCount(typeArguments.Length);
@@ -152,7 +154,8 @@ namespace Microsoft.Diagnostics.Tools.Pgo.TypeRefTypeSystem
                 MetadataReader reader,
                 TypeReferenceHandle handle,
                 byte rawTypeKind
-            ) {
+            )
+            {
                 bool isValueType = rawTypeKind == 0x11;
                 _resolver.TryGetValue(handle, out TypeRefTypeSystemType type);
                 if (type != null)
@@ -166,7 +169,8 @@ namespace Microsoft.Diagnostics.Tools.Pgo.TypeRefTypeSystem
                 object genericContext,
                 TypeSpecificationHandle handle,
                 byte rawTypeKind
-            ) {
+            )
+            {
                 var typeSpec = reader.GetTypeSpecification(handle);
                 return typeSpec.DecodeSignature(this, null);
             }

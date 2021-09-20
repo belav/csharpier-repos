@@ -129,7 +129,8 @@ namespace System.Diagnostics.Tests
             string fileName,
             int lineNumber,
             int columnNumber
-        ) {
+        )
+        {
             var stackFrame = new StackFrame(fileName, lineNumber, columnNumber);
             Assert.Equal(fileName, stackFrame.GetFileName());
             Assert.Equal(lineNumber, stackFrame.GetFileLineNumber());
@@ -216,7 +217,8 @@ namespace System.Diagnostics.Tests
             int skipFrames,
             MethodInfo expectedMethod,
             bool isCurrentFrame = false
-        ) {
+        )
+        {
             if (!hasFileInfo)
             {
                 Assert.Null(stackFrame.GetFileName());
@@ -239,7 +241,8 @@ namespace System.Diagnostics.Tests
             int skipFrames,
             MethodInfo expectedMethod,
             bool isCurrentFrame = false
-        ) {
+        )
+        {
             // GetILOffset returns StackFrame.OFFSET_UNKNOWN for unknown frames.
             if (skipFrames == int.MinValue || skipFrames > 0)
             {

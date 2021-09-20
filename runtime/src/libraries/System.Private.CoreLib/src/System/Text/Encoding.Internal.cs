@@ -75,7 +75,8 @@ namespace System.Text
             ReadOnlySpan<byte> bytes,
             out Rune value,
             out int bytesConsumed
-        ) {
+        )
+        {
             Debug.Fail("This should be overridden by a subclassed type.");
             throw NotImplemented.ByDesign;
         }
@@ -84,7 +85,8 @@ namespace System.Text
             Rune value,
             Span<byte> bytes,
             out int bytesWritten
-        ) {
+        )
+        {
             Debug.Fail("This should be overridden by a subclassed type.");
             throw NotImplemented.ByDesign;
         }
@@ -191,7 +193,8 @@ namespace System.Text
             int charsLength,
             EncoderFallback? fallback,
             out int charsConsumed
-        ) {
+        )
+        {
             // Any production-quality type would override this method and provide a real
             // implementation, so we won't provide a base implementation. However, a
             // non-shipping slow reference implementation is provided below for convenience.
@@ -245,7 +248,8 @@ namespace System.Text
             char* pCharsOriginal,
             int originalCharCount,
             int charsConsumedSoFar
-        ) {
+        )
+        {
             // This is a stub method that's marked "no-inlining" so that it we don't stack-spill spans
             // into our immediate caller. Doing so increases the method prolog in what's supposed to
             // be a very fast path.
@@ -285,7 +289,8 @@ namespace System.Text
             int originalCharCount,
             int charsConsumedSoFar,
             EncoderNLS encoder
-        ) {
+        )
+        {
             Debug.Assert(encoder != null, "This code path should only be called from EncoderNLS.");
             Debug.Assert(
                 0 <= charsConsumedSoFar && charsConsumedSoFar <= originalCharCount,
@@ -353,7 +358,8 @@ namespace System.Text
             ReadOnlySpan<char> chars,
             int originalCharsLength,
             EncoderNLS? encoder
-        ) {
+        )
+        {
             Debug.Assert(
                 !chars.IsEmpty,
                 "Caller shouldn't invoke this method with an empty input buffer."
@@ -385,7 +391,8 @@ namespace System.Text
                         ) == OperationStatus.NeedMoreData
                         && encoder != null
                         && !encoder.MustFlush
-                    ) {
+                    )
+                    {
                         // We saw a standalone high surrogate at the end of the buffer, and the
                         // active EncoderNLS instance isn't asking us to flush. Since a call to
                         // GetBytes would've consumed this char by storing it in EncoderNLS._charLeftOver,
@@ -477,7 +484,8 @@ namespace System.Text
             byte* pBytes,
             int byteCount,
             EncoderNLS? encoder
-        ) {
+        )
+        {
             Debug.Assert(encoder != null, "This code path should only be called from EncoderNLS.");
             Debug.Assert(charCount >= 0, "Caller should've checked this condition.");
             Debug.Assert(
@@ -546,7 +554,8 @@ namespace System.Text
             byte* pBytes,
             int bytesLength,
             out int charsConsumed
-        ) {
+        )
+        {
             // Any production-quality type would override this method and provide a real
             // implementation, so we won't provide a base implementation. However, a
             // non-shipping slow reference implementation is provided below for convenience.
@@ -598,7 +607,8 @@ namespace System.Text
             int originalByteCount,
             int charsConsumedSoFar,
             int bytesWrittenSoFar
-        ) {
+        )
+        {
             // This is a stub method that's marked "no-inlining" so that it we don't stack-spill spans
             // into our immediate caller. Doing so increases the method prolog in what's supposed to
             // be a very fast path.
@@ -647,7 +657,8 @@ namespace System.Text
             int charsConsumedSoFar,
             int bytesWrittenSoFar,
             EncoderNLS encoder
-        ) {
+        )
+        {
             Debug.Assert(encoder != null, "This code path should only be called from EncoderNLS.");
             Debug.Assert(
                 0 <= charsConsumedSoFar && charsConsumedSoFar <= originalCharCount,
@@ -739,7 +750,8 @@ namespace System.Text
             Span<byte> bytes,
             int originalBytesLength,
             EncoderNLS? encoder
-        ) {
+        )
+        {
             Debug.Assert(
                 !chars.IsEmpty,
                 "Caller shouldn't invoke this method with an empty input buffer."
@@ -751,7 +763,8 @@ namespace System.Text
 
             fixed (char* _pChars_Unused = &MemoryMarshal.GetReference(chars))fixed (
                 byte* _pBytes_Unused = &MemoryMarshal.GetReference(bytes)
-            ) {
+            )
+            {
                 EncoderFallbackBuffer fallbackBuffer = EncoderFallbackBuffer.CreateAndInitialize(
                     this,
                     encoder,
@@ -794,7 +807,8 @@ namespace System.Text
                             if (
                                 EncodeRune(firstScalarValue, bytes, out _)
                                 == OperationStatus.DestinationTooSmall
-                            ) {
+                            )
+                            {
                                 goto Finish; // source buffer contained valid UTF-16 but encoder ran out of space in destination buffer
                             }
                             break; // source buffer contained valid UTF-16 but encoder doesn't support this scalar value
@@ -968,7 +982,8 @@ namespace System.Text
             int bytesLength,
             DecoderFallback? fallback,
             out int bytesConsumed
-        ) {
+        )
+        {
             // Any production-quality type would override this method and provide a real
             // implementation, so we won't provide a base implementation. However, a
             // non-shipping slow reference implementation is provided below for convenience.
@@ -1021,7 +1036,8 @@ namespace System.Text
             byte* pBytesOriginal,
             int originalByteCount,
             int bytesConsumedSoFar
-        ) {
+        )
+        {
             // This is a stub method that's marked "no-inlining" so that it we don't stack-spill spans
             // into our immediate caller. Doing so increases the method prolog in what's supposed to
             // be a very fast path.
@@ -1061,7 +1077,8 @@ namespace System.Text
             int originalByteCount,
             int bytesConsumedSoFar,
             DecoderNLS decoder
-        ) {
+        )
+        {
             Debug.Assert(decoder != null, "This code path should only be called from DecoderNLS.");
             Debug.Assert(
                 0 <= bytesConsumedSoFar && bytesConsumedSoFar <= originalByteCount,
@@ -1135,7 +1152,8 @@ namespace System.Text
             ReadOnlySpan<byte> bytes,
             int originalBytesLength,
             DecoderNLS? decoder
-        ) {
+        )
+        {
             Debug.Assert(
                 !bytes.IsEmpty,
                 "Caller shouldn't invoke this method with an empty input buffer."
@@ -1166,7 +1184,8 @@ namespace System.Text
                         ) == OperationStatus.NeedMoreData
                         && decoder != null
                         && !decoder.MustFlush
-                    ) {
+                    )
+                    {
                         // We saw incomplete data at the end of the buffer, and the active DecoderNLS isntance
                         // isn't asking us to flush. Since a call to GetChars would've consumed this data by
                         // storing it in the DecoderNLS instance, we'll "consume" it by ignoring it.
@@ -1252,7 +1271,8 @@ namespace System.Text
             char* pChars,
             int charCount,
             DecoderNLS? decoder
-        ) {
+        )
+        {
             Debug.Assert(decoder != null, "This code path should only be called from DecoderNLS.");
             Debug.Assert(byteCount >= 0, "Caller should've checked this condition.");
             Debug.Assert(
@@ -1321,7 +1341,8 @@ namespace System.Text
             char* pChars,
             int charsLength,
             out int bytesConsumed
-        ) {
+        )
+        {
             // Any production-quality type would override this method and provide a real
             // implementation, so we won't provide a base implementation. However, a
             // non-shipping slow reference implementation is provided below for convenience.
@@ -1373,7 +1394,8 @@ namespace System.Text
             int originalCharCount,
             int bytesConsumedSoFar,
             int charsWrittenSoFar
-        ) {
+        )
+        {
             // This is a stub method that's marked "no-inlining" so that it we don't stack-spill spans
             // into our immediate caller. Doing so increases the method prolog in what's supposed to
             // be a very fast path.
@@ -1422,7 +1444,8 @@ namespace System.Text
             int bytesConsumedSoFar,
             int charsWrittenSoFar,
             DecoderNLS decoder
-        ) {
+        )
+        {
             Debug.Assert(decoder != null, "This code path should only be called from DecoderNLS.");
             Debug.Assert(
                 0 <= bytesConsumedSoFar && bytesConsumedSoFar <= originalByteCount,
@@ -1521,7 +1544,8 @@ namespace System.Text
             Span<char> chars,
             int originalCharsLength,
             DecoderNLS? decoder
-        ) {
+        )
+        {
             Debug.Assert(
                 !bytes.IsEmpty,
                 "Caller shouldn't invoke this method with an empty input buffer."
@@ -1533,7 +1557,8 @@ namespace System.Text
 
             fixed (byte* _pBytes_Unused = &MemoryMarshal.GetReference(bytes))fixed (
                 char* _pChars_Unused = &MemoryMarshal.GetReference(chars)
-            ) {
+            )
+            {
                 DecoderFallbackBuffer fallbackBuffer = DecoderFallbackBuffer.CreateAndInitialize(
                     this,
                     decoder,
@@ -1573,7 +1598,8 @@ namespace System.Text
                                     chars,
                                     out charsWrittenThisIteration
                                 )
-                            ) {
+                            )
+                            {
                                 // We successfully consumed some bytes, sent it through the fallback, and wrote some chars.
 
                                 Debug.Assert(

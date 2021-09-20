@@ -63,7 +63,8 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeFixes.AddExplicitCast
             SyntaxNode currentRoot,
             ExpressionSyntax targetNode,
             ITypeSymbol conversionType
-        ) {
+        )
+        {
             // TODO:
             // the Simplifier doesn't remove the redundant cast from the expression
             // Issue link: https://github.com/dotnet/roslyn/issues/41500
@@ -81,7 +82,8 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeFixes.AddExplicitCast
             ExpressionSyntax spanNode,
             CancellationToken cancellationToken,
             out ImmutableArray<(ExpressionSyntax, ITypeSymbol)> potentialConversionTypes
-        ) {
+        )
+        {
             potentialConversionTypes = ImmutableArray<(ExpressionSyntax, ITypeSymbol)>.Empty;
             using var _ = ArrayBuilder<(ExpressionSyntax, ITypeSymbol)>.GetInstance(
                 out var mutablePotentialConversionTypes
@@ -107,7 +109,8 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeFixes.AddExplicitCast
                     spanNode.GetAncestorOrThis<ArgumentSyntax>() is ArgumentSyntax targetArgument
                     && targetArgument.Parent is ArgumentListSyntax argumentList
                     && argumentList.Parent is SyntaxNode invocationNode
-                ) {
+                )
+                {
                     // invocationNode could be Invocation Expression, Object Creation, Base Constructor...)
                     mutablePotentialConversionTypes.AddRange(
                         _argumentFixer.GetPotentialConversionTypes(
@@ -126,7 +129,8 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeFixes.AddExplicitCast
                     && targetAttributeArgument.Parent
                         is AttributeArgumentListSyntax attributeArgumentList
                     && attributeArgumentList.Parent is AttributeSyntax attributeNode
-                ) {
+                )
+                {
                     // attribute node
                     mutablePotentialConversionTypes.AddRange(
                         _attributeArgumentFixer.GetPotentialConversionTypes(

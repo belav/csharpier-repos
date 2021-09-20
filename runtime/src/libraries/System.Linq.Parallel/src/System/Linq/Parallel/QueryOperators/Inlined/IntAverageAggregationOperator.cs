@@ -44,7 +44,8 @@ namespace System.Linq.Parallel
                     ParallelMergeOptions.FullyBuffered,
                     true
                 )
-            ) {
+            )
+            {
                 // Throw an error for empty results.
                 if (!enumerator.MoveNext())
                 {
@@ -79,7 +80,8 @@ namespace System.Linq.Parallel
             QueryOperatorEnumerator<int, TKey> source,
             object? sharedData,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             return new IntAverageAggregationOperatorEnumerator<TKey>(
                 source,
                 index,

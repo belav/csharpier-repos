@@ -72,7 +72,8 @@ namespace Microsoft.AspNetCore.Server.HttpSys
                         return Task.FromResult(0);
                     }
                 )
-            ) {
+            )
+            {
                 string response = await SendRequestAsync(root + "/basepath/SomePath?SomeQuery");
                 Assert.Equal(string.Empty, response);
             }
@@ -141,7 +142,8 @@ namespace Microsoft.AspNetCore.Server.HttpSys
                         return Task.FromResult(0);
                     }
                 )
-            ) {
+            )
+            {
                 string response = await SendRequestAsync(root + "/basepath/SomePath?SomeQuery");
                 Assert.Equal(string.Empty, response);
             }
@@ -209,7 +211,8 @@ namespace Microsoft.AspNetCore.Server.HttpSys
                         return Task.FromResult(0);
                     }
                 )
-            ) {
+            )
+            {
                 string response = await SendRequestAsync(root + "/basepath/SomePath?SomeQuery");
                 Assert.Equal(string.Empty, response);
             }
@@ -233,7 +236,8 @@ namespace Microsoft.AspNetCore.Server.HttpSys
             string requestPath,
             string expectedPathBase,
             string expectedPath
-        ) {
+        )
+        {
             string root;
             using (
                 Utilities.CreateHttpServerReturnRoot(
@@ -267,7 +271,8 @@ namespace Microsoft.AspNetCore.Server.HttpSys
                         return Task.FromResult(0);
                     }
                 )
-            ) {
+            )
+            {
                 string response = await SendRequestAsync(root + requestPath);
                 Assert.Equal(string.Empty, response);
             }
@@ -289,7 +294,8 @@ namespace Microsoft.AspNetCore.Server.HttpSys
                         return Task.FromResult(0);
                     }
                 )
-            ) {
+            )
+            {
                 var response = await SendSocketRequestAsync(root, "/%252F");
                 var responseStatusCode = response.Substring(9); // Skip "HTTP/1.1 "
                 Assert.Equal("200", responseStatusCode);
@@ -311,7 +317,8 @@ namespace Microsoft.AspNetCore.Server.HttpSys
                         return Task.CompletedTask;
                     }
                 )
-            ) {
+            )
+            {
                 // Send a HTTP request with the request line:
                 // GET http://localhost:5001 HTTP/1.1
                 var response = await SendSocketRequestAsync(root, root);
@@ -335,7 +342,8 @@ namespace Microsoft.AspNetCore.Server.HttpSys
                         return Task.CompletedTask;
                     }
                 )
-            ) {
+            )
+            {
                 // Send a HTTP request with the request line:
                 // GET http://localhost:5001?query=value/1/2 HTTP/1.1
                 // Should return a 400 as it is a client error
@@ -365,7 +373,8 @@ namespace Microsoft.AspNetCore.Server.HttpSys
             string requestPath,
             string expectedPathBase,
             string expectedPath
-        ) {
+        )
+        {
             string root;
             using (
                 CreateServer(
@@ -393,7 +402,8 @@ namespace Microsoft.AspNetCore.Server.HttpSys
                         return Task.FromResult(0);
                     }
                 )
-            ) {
+            )
+            {
                 string response = await SendRequestAsync(root + requestPath);
                 Assert.Equal(string.Empty, response);
             }
@@ -427,7 +437,8 @@ namespace Microsoft.AspNetCore.Server.HttpSys
                         return Task.FromResult(0);
                     }
                 )
-            ) {
+            )
+            {
                 var response = await SendSocketRequestAsync(root, rawPath);
                 var responseStatusCode = response.Substring(9); // Skip "HTTP/1.1 "
                 Assert.Equal("200", responseStatusCode);
@@ -451,7 +462,8 @@ namespace Microsoft.AspNetCore.Server.HttpSys
                         return Task.FromResult(0);
                     }
                 )
-            ) {
+            )
+            {
                 var response = await SendSocketRequestAsync(root, rawPath);
                 var responseStatusCode = response.Substring(9); // Skip "HTTP/1.1 "
                 Assert.Equal("200", responseStatusCode);
@@ -470,7 +482,8 @@ namespace Microsoft.AspNetCore.Server.HttpSys
             string input,
             string expectedPathBase,
             string expectedPath
-        ) {
+        )
+        {
             string root;
             using (
                 var server = Utilities.CreateHttpServerReturnRoot(
@@ -485,7 +498,8 @@ namespace Microsoft.AspNetCore.Server.HttpSys
                         return Task.FromResult(0);
                     }
                 )
-            ) {
+            )
+            {
                 var response = await SendSocketRequestAsync(root, input);
                 var responseStatusCode = response.Substring(9); // Skip "HTTP/1.1 "
                 Assert.Equal("200", responseStatusCode);
@@ -510,7 +524,8 @@ namespace Microsoft.AspNetCore.Server.HttpSys
                         return Task.FromResult(0);
                     }
                 )
-            ) {
+            )
+            {
                 var response = await SendSocketRequestAsync(root, input);
                 var responseStatusCode = response.Substring(9); // Skip "HTTP/1.1 "
                 Assert.Equal("200", responseStatusCode);
@@ -530,7 +545,8 @@ namespace Microsoft.AspNetCore.Server.HttpSys
                         throw new NotImplementedException();
                     }
                 )
-            ) {
+            )
+            {
                 for (var i = 0; i < 32; i++)
                 {
                     if (i == 9 || i == 10)
@@ -558,7 +574,8 @@ namespace Microsoft.AspNetCore.Server.HttpSys
                         throw new NotImplementedException();
                     }
                 )
-            ) {
+            )
+            {
                 for (var i = 0; i < 32; i++)
                 {
                     var response = await SendSocketRequestAsync(

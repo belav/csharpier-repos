@@ -64,7 +64,8 @@ namespace System.Security.AccessControl.Tests
             bool isDS,
             string sddl,
             bool verifierWasCanonicalInitially
-        ) {
+        )
+        {
             CommonSecurityDescriptor commonSecurityDescriptor = null;
             commonSecurityDescriptor = new CommonSecurityDescriptor(isContainer, isDS, sddl);
             Assert.True(

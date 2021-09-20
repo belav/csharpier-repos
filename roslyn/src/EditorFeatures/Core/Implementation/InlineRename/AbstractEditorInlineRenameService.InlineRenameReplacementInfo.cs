@@ -34,7 +34,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.InlineRename
 
             private IEnumerable<InlineRenameReplacement> GetNonComplexifiedReplacements(
                 DocumentId documentId
-            ) {
+            )
+            {
                 var modifiedSpans = _conflicts.GetModifiedSpanMap(documentId);
                 var locationsForDocument = _conflicts.GetRelatedLocationsForDocument(documentId);
 
@@ -65,7 +66,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.InlineRename
 
             private IEnumerable<InlineRenameReplacement> GetComplexifiedReplacements(
                 DocumentId documentId
-            ) {
+            )
+            {
                 return _conflicts.GetComplexifiedSpans(documentId)
                     .Select(
                         s =>

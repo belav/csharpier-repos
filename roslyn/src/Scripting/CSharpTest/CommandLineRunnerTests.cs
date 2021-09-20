@@ -92,7 +92,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Scripting.UnitTests
             string input = "",
             string responseFile = null,
             string workingDirectory = null
-        ) {
+        )
+        {
             var io = new TestConsoleIO(input);
             var clientDir = Path.GetDirectoryName(
                 RuntimeUtilities.GetAssemblyLocation(typeof(CommandLineRunnerTests))

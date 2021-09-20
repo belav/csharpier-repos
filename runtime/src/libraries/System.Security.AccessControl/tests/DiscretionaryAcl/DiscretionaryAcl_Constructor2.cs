@@ -43,7 +43,8 @@ namespace System.Security.AccessControl.Tests
                 && 0 == discretionaryAcl.Count
                 && 8 == discretionaryAcl.BinaryLength
                 && true == discretionaryAcl.IsCanonical
-            ) {
+            )
+            {
                 dAclBinaryForm = new byte[discretionaryAcl.BinaryLength];
                 rAclBinaryForm = new byte[rawAcl.BinaryLength];
                 discretionaryAcl.GetBinaryForm(dAclBinaryForm, 0);

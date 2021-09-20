@@ -14,7 +14,8 @@ namespace System.Web.WebPages.Deployment
         public static IDictionary<string, IEnumerable<string>> GetBinAssemblyReferences(
             string appPath,
             string configPath
-        ) {
+        )
+        {
             string binDirectory = Path.Combine(appPath, "bin");
             if (!Directory.Exists(binDirectory))
             {

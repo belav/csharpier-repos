@@ -52,7 +52,8 @@ namespace Microsoft.AspNetCore.Mvc.ViewEngines
         public static ViewEngineResult NotFound(
             string viewName,
             IEnumerable<string> searchedLocations
-        ) {
+        )
+        {
             if (viewName == null)
             {
                 throw new ArgumentNullException(nameof(viewName));

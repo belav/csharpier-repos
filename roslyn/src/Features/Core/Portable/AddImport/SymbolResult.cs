@@ -39,7 +39,8 @@ namespace Microsoft.CodeAnalysis.AddImport
                 TSimpleNameSyntax nameNode,
                 IReadOnlyList<string> nameParts,
                 double weight
-            ) {
+            )
+            {
                 DesiredName = desiredName;
                 Weight = weight;
                 NameNode = nameNode;
@@ -103,7 +104,8 @@ namespace Microsoft.CodeAnalysis.AddImport
                 TSimpleNameSyntax nameNode,
                 T symbol,
                 double weight
-            ) {
+            )
+            {
                 DesiredName = desiredName;
                 Symbol = symbol;
                 Weight = weight;

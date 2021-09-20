@@ -21,7 +21,8 @@ namespace Microsoft.Extensions.Configuration
         internal static IEnumerable<IConfigurationSection> GetChildrenImplementation(
             this IConfigurationRoot root,
             string path
-        ) {
+        )
+        {
             return root.Providers.Aggregate(
                     Enumerable.Empty<string>(),
                     (seed, source) => source.GetChildKeys(seed, path)

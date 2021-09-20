@@ -36,7 +36,8 @@ namespace System.Security
             SecurityContext securityContext,
             ContextCallback callback,
             object state
-        ) {
+        )
+        {
             throw new PlatformNotSupportedException(SR.PlatformNotSupported_CAS);
         }
         public static AsyncFlowControl SuppressFlow()

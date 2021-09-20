@@ -37,7 +37,8 @@ namespace Microsoft.CodeAnalysis
 
         private UnmanagedCallersOnlyAttributeData(
             ImmutableHashSet<INamedTypeSymbolInternal> callingConventionTypes
-        ) {
+        )
+        {
             CallingConventionTypes = callingConventionTypes;
         }
 
@@ -45,7 +46,8 @@ namespace Microsoft.CodeAnalysis
             string key,
             bool isField,
             in TypedConstant value
-        ) {
+        )
+        {
             return isField
                 && key == CallConvsPropertyName
                 && value.Kind == TypedConstantKind.Array

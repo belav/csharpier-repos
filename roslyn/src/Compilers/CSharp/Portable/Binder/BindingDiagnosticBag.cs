@@ -38,7 +38,8 @@ namespace Microsoft.CodeAnalysis.CSharp
         internal static BindingDiagnosticBag GetInstance(
             bool withDiagnostics,
             bool withDependencies
-        ) {
+        )
+        {
             if (withDiagnostics)
             {
                 if (withDependencies)
@@ -150,7 +151,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             DiagnosticInfo diagnosticInfo,
             DiagnosticBag diagnosticBag,
             Location location
-        ) {
+        )
+        {
             return Symbol.ReportUseSiteDiagnostic(diagnosticInfo, diagnosticBag, location);
         }
 
@@ -173,7 +175,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             Location location,
             ImmutableArray<Symbol> symbols,
             params object[] args
-        ) {
+        )
+        {
             var info = new CSDiagnosticInfo(code, args, symbols, ImmutableArray<Location>.Empty);
             Add(info, location);
             return info;

@@ -110,7 +110,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UsePatternCombinators
             AnalyzedPattern pattern,
             bool permitDesignations = true,
             bool isTopLevel = false
-        ) {
+        )
+        {
             switch (pattern)
             {
                 case Not p:

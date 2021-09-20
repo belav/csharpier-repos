@@ -86,7 +86,8 @@ namespace System.Net.Mime
                 else if (
                     ((index - startOfLine) > (_lineLength - charsAlreadyOnLine))
                     && lastSpace != startOfLine
-                ) {
+                )
+                {
                     _bufferBuilder.Append(
                         value,
                         startOfLine,

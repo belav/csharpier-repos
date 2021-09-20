@@ -29,7 +29,8 @@ namespace Internal.TypeSystem.Ecma
             IAssemblyDesc containingAssembly,
             PdbSymbolReader pdbReader,
             IModuleResolver customModuleResolver = null
-        ) {
+        )
+        {
             MetadataReader metadataReader = CreateMetadataReader(context, peReader);
 
             if (containingAssembly == null)

@@ -85,7 +85,8 @@ namespace System.Linq.Parallel.Tests
         public static void Reverse_NotPipelined_Longrunning(
             Labeled<ParallelQuery<int>> labeled,
             int count
-        ) {
+        )
+        {
             Reverse_NotPipelined(labeled, count);
         }
 

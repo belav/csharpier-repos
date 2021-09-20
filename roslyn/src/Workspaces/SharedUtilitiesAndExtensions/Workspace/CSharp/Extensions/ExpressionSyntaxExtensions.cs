@@ -17,7 +17,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Extensions
             this ExpressionSyntax expression,
             bool includeElasticTrivia = true,
             bool addSimplifierAnnotation = true
-        ) {
+        )
+        {
             // a 'ref' expression should never be parenthesized.  It fundamentally breaks the code.
             // This is because, from the language's perspective there is no such thing as a ref
             // expression.  instead, there are constructs like ```return ref expr``` or
@@ -55,7 +56,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Extensions
         private static ExpressionSyntax ParenthesizeWorker(
             this ExpressionSyntax expression,
             bool includeElasticTrivia
-        ) {
+        )
+        {
             var withoutTrivia = expression.WithoutTrivia();
             var parenthesized = includeElasticTrivia
                 ? SyntaxFactory.ParenthesizedExpression(withoutTrivia)
@@ -80,7 +82,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Extensions
             this PatternSyntax pattern,
             bool includeElasticTrivia = true,
             bool addSimplifierAnnotation = true
-        ) {
+        )
+        {
             var withoutTrivia = pattern.WithoutTrivia();
             var parenthesized = includeElasticTrivia
                 ? SyntaxFactory.ParenthesizedPattern(withoutTrivia)
@@ -107,7 +110,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Extensions
         public static CastExpressionSyntax Cast(
             this ExpressionSyntax expression,
             ITypeSymbol targetType
-        ) {
+        )
+        {
             var parenthesized = expression.Parenthesize();
             var castExpression = SyntaxFactory.CastExpression(
                     targetType.GenerateTypeSyntax(),
@@ -128,7 +132,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Extensions
             int position,
             SemanticModel semanticModel,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             if (targetType.ContainsAnonymousType())
             {
                 return expression;
@@ -174,7 +179,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Extensions
                     speculativeSemanticModel,
                     cancellationToken
                 )
-            ) {
+            )
+            {
                 return expression;
             }
 

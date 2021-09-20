@@ -25,7 +25,8 @@ namespace Microsoft.CodeAnalysis.Wrapping
             SyntaxTriviaList newLeftTrailingTrivia,
             SyntaxToken right,
             SyntaxTriviaList newRightLeadingTrivia
-        ) {
+        )
+        {
             Left = left;
             Right = right;
             NewLeftTrailingTrivia = newLeftTrailingTrivia;
@@ -59,7 +60,8 @@ namespace Microsoft.CodeAnalysis.Wrapping
             SyntaxTriviaList leftTrailingTrivia,
             SyntaxTrivia rightLeadingTrivia,
             SyntaxNodeOrToken right
-        ) {
+        )
+        {
             return UpdateBetween(
                 left,
                 leftTrailingTrivia,
@@ -73,7 +75,8 @@ namespace Microsoft.CodeAnalysis.Wrapping
             SyntaxTriviaList leftTrailingTrivia,
             SyntaxTriviaList rightLeadingTrivia,
             SyntaxNodeOrToken right
-        ) {
+        )
+        {
             var leftLastToken = left.IsToken ? left.AsToken() : left.AsNode().GetLastToken();
             var rightFirstToken = right.IsToken ? right.AsToken() : right.AsNode().GetFirstToken();
             return new Edit(leftLastToken, leftTrailingTrivia, rightFirstToken, rightLeadingTrivia);

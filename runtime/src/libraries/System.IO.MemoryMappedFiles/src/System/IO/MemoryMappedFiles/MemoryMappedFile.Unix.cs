@@ -13,7 +13,8 @@ namespace System.IO.MemoryMappedFiles
             long capacity,
             FileStream? fileStream,
             out long fileSize
-        ) {
+        )
+        {
             fileSize = -1;
 
             if (fileStream != null)
@@ -69,7 +70,8 @@ namespace System.IO.MemoryMappedFiles
             MemoryMappedFileAccess access,
             MemoryMappedFileOptions options,
             long capacity
-        ) {
+        )
+        {
             VerifyMemoryMappedFileAccess(access, capacity, fileStream, out long fileSize);
 
             if (mapName != null)
@@ -124,7 +126,8 @@ namespace System.IO.MemoryMappedFiles
                 if (
                     (protections & Interop.Sys.MemoryMappedProtections.PROT_WRITE) != 0
                     && capacity > 0
-                ) {
+                )
+                {
                     ownsFileStream = true;
                     fileStream = CreateSharedBackingObject(protections, capacity, inheritability);
                 }
@@ -149,7 +152,8 @@ namespace System.IO.MemoryMappedFiles
             MemoryMappedFileAccess access,
             MemoryMappedFileOptions options,
             long capacity
-        ) {
+        )
+        {
             // Since we don't support mapName != null, CreateOrOpenCore can't
             // be used to Open an existing map, and thus is identical to CreateCore.
             return CreateCore(null, mapName, inheritability, access, options, capacity);
@@ -165,7 +169,8 @@ namespace System.IO.MemoryMappedFiles
             HandleInheritability inheritability,
             MemoryMappedFileAccess access,
             bool createOrOpen
-        ) {
+        )
+        {
             throw CreateNamedMapsNotSupportedException();
         }
 
@@ -179,7 +184,8 @@ namespace System.IO.MemoryMappedFiles
             HandleInheritability inheritability,
             MemoryMappedFileRights rights,
             bool createOrOpen
-        ) {
+        )
+        {
             throw CreateNamedMapsNotSupportedException();
         }
 
@@ -191,7 +197,8 @@ namespace System.IO.MemoryMappedFiles
 
         private static FileAccess TranslateProtectionsToFileAccess(
             Interop.Sys.MemoryMappedProtections protections
-        ) {
+        )
+        {
             return
                 (
                     protections
@@ -210,7 +217,8 @@ namespace System.IO.MemoryMappedFiles
             Interop.Sys.MemoryMappedProtections protections,
             long capacity,
             HandleInheritability inheritability
-        ) {
+        )
+        {
             return CreateSharedBackingObjectUsingMemory(protections, capacity, inheritability)
                 ?? CreateSharedBackingObjectUsingFile(protections, capacity, inheritability);
         }
@@ -219,7 +227,8 @@ namespace System.IO.MemoryMappedFiles
             Interop.Sys.MemoryMappedProtections protections,
             long capacity,
             HandleInheritability inheritability
-        ) {
+        )
+        {
             // The POSIX shared memory object name must begin with '/'.  After that we just want something short and unique.
             string mapName = "/corefx_map_" + Guid.NewGuid().ToString("N");
 
@@ -273,7 +282,8 @@ namespace System.IO.MemoryMappedFiles
                 if (
                     inheritability == HandleInheritability.Inheritable
                     && Interop.Sys.Fcntl.SetFD(fd, 0) == -1
-                ) {
+                )
+                {
                     throw Interop.GetExceptionForIoErrno(Interop.Sys.GetLastErrorInfo());
                 }
 
@@ -291,7 +301,8 @@ namespace System.IO.MemoryMappedFiles
             Interop.Sys.MemoryMappedProtections protections,
             long capacity,
             HandleInheritability inheritability
-        ) {
+        )
+        {
             // We create a temporary backing file in TMPDIR.  We don't bother putting it into subdirectories as the file exists
             // extremely briefly: it's opened/created and then immediately unlinked.
             string path = Path.Combine(Path.GetTempPath(), Guid.NewGuid().ToString("N"));

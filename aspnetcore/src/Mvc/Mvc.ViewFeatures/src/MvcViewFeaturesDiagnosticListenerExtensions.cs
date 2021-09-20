@@ -16,7 +16,8 @@ namespace Microsoft.AspNetCore.Mvc.ViewFeatures
             this DiagnosticListener diagnosticListener,
             ViewComponentContext context,
             object viewComponent
-        ) {
+        )
+        {
             // Inlinable fast-path check if Diagnositcs is enabled
             if (diagnosticListener.IsEnabled())
             {
@@ -28,7 +29,8 @@ namespace Microsoft.AspNetCore.Mvc.ViewFeatures
             DiagnosticListener diagnosticListener,
             ViewComponentContext context,
             object viewComponent
-        ) {
+        )
+        {
             if (diagnosticListener.IsEnabled(Diagnostics.BeforeViewComponentEventData.EventName))
             {
                 diagnosticListener.Write(
@@ -47,7 +49,8 @@ namespace Microsoft.AspNetCore.Mvc.ViewFeatures
             ViewComponentContext context,
             IViewComponentResult result,
             object viewComponent
-        ) {
+        )
+        {
             // Inlinable fast-path check if Diagnositcs is enabled
             if (diagnosticListener.IsEnabled())
             {
@@ -60,7 +63,8 @@ namespace Microsoft.AspNetCore.Mvc.ViewFeatures
             ViewComponentContext context,
             IViewComponentResult result,
             object viewComponent
-        ) {
+        )
+        {
             if (diagnosticListener.IsEnabled(Diagnostics.AfterViewComponentEventData.EventName))
             {
                 diagnosticListener.Write(
@@ -79,7 +83,8 @@ namespace Microsoft.AspNetCore.Mvc.ViewFeatures
             this DiagnosticListener diagnosticListener,
             ViewComponentContext context,
             IView view
-        ) {
+        )
+        {
             // Inlinable fast-path check if Diagnositcs is enabled
             if (diagnosticListener.IsEnabled())
             {
@@ -91,12 +96,14 @@ namespace Microsoft.AspNetCore.Mvc.ViewFeatures
             DiagnosticListener diagnosticListener,
             ViewComponentContext context,
             IView view
-        ) {
+        )
+        {
             if (
                 diagnosticListener.IsEnabled(
                     Diagnostics.ViewComponentBeforeViewExecuteEventData.EventName
                 )
-            ) {
+            )
+            {
                 diagnosticListener.Write(
                     Diagnostics.ViewComponentBeforeViewExecuteEventData.EventName,
                     new ViewComponentBeforeViewExecuteEventData(
@@ -112,7 +119,8 @@ namespace Microsoft.AspNetCore.Mvc.ViewFeatures
             this DiagnosticListener diagnosticListener,
             ViewComponentContext context,
             IView view
-        ) {
+        )
+        {
             // Inlinable fast-path check if Diagnositcs is enabled
             if (diagnosticListener.IsEnabled())
             {
@@ -124,12 +132,14 @@ namespace Microsoft.AspNetCore.Mvc.ViewFeatures
             DiagnosticListener diagnosticListener,
             ViewComponentContext context,
             IView view
-        ) {
+        )
+        {
             if (
                 diagnosticListener.IsEnabled(
                     Diagnostics.ViewComponentAfterViewExecuteEventData.EventName
                 )
-            ) {
+            )
+            {
                 diagnosticListener.Write(
                     Diagnostics.ViewComponentAfterViewExecuteEventData.EventName,
                     new ViewComponentAfterViewExecuteEventData(
@@ -145,7 +155,8 @@ namespace Microsoft.AspNetCore.Mvc.ViewFeatures
             this DiagnosticListener diagnosticListener,
             IView view,
             ViewContext viewContext
-        ) {
+        )
+        {
             // Inlinable fast-path check if Diagnositcs is enabled
             if (diagnosticListener.IsEnabled())
             {
@@ -157,7 +168,8 @@ namespace Microsoft.AspNetCore.Mvc.ViewFeatures
             DiagnosticListener diagnosticListener,
             IView view,
             ViewContext viewContext
-        ) {
+        )
+        {
             if (diagnosticListener.IsEnabled(Diagnostics.BeforeViewEventData.EventName))
             {
                 diagnosticListener.Write(
@@ -171,7 +183,8 @@ namespace Microsoft.AspNetCore.Mvc.ViewFeatures
             this DiagnosticListener diagnosticListener,
             IView view,
             ViewContext viewContext
-        ) {
+        )
+        {
             // Inlinable fast-path check if Diagnositcs is enabled
             if (diagnosticListener.IsEnabled())
             {
@@ -183,7 +196,8 @@ namespace Microsoft.AspNetCore.Mvc.ViewFeatures
             DiagnosticListener diagnosticListener,
             IView view,
             ViewContext viewContext
-        ) {
+        )
+        {
             if (diagnosticListener.IsEnabled(Diagnostics.AfterViewEventData.EventName))
             {
                 diagnosticListener.Write(
@@ -200,7 +214,8 @@ namespace Microsoft.AspNetCore.Mvc.ViewFeatures
             ActionResult viewResult,
             string viewName,
             IView view
-        ) {
+        )
+        {
             // Inlinable fast-path check if Diagnositcs is enabled
             if (diagnosticListener.IsEnabled())
             {
@@ -222,7 +237,8 @@ namespace Microsoft.AspNetCore.Mvc.ViewFeatures
             ActionResult viewResult,
             string viewName,
             IView view
-        ) {
+        )
+        {
             if (diagnosticListener.IsEnabled(Diagnostics.ViewFoundEventData.EventName))
             {
                 diagnosticListener.Write(
@@ -239,7 +255,8 @@ namespace Microsoft.AspNetCore.Mvc.ViewFeatures
             ActionResult viewResult,
             string viewName,
             IEnumerable<string> searchedLocations
-        ) {
+        )
+        {
             // Inlinable fast-path check if Diagnositcs is enabled
             if (diagnosticListener.IsEnabled())
             {
@@ -261,7 +278,8 @@ namespace Microsoft.AspNetCore.Mvc.ViewFeatures
             ActionResult viewResult,
             string viewName,
             IEnumerable<string> searchedLocations
-        ) {
+        )
+        {
             if (diagnosticListener.IsEnabled(Diagnostics.ViewNotFoundEventData.EventName))
             {
                 diagnosticListener.Write(

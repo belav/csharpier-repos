@@ -23,19 +23,22 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
     {
         internal static OverriddenOrHiddenMembersResult MakeOverriddenOrHiddenMembers(
             this MethodSymbol member
-        ) {
+        )
+        {
             return MakeOverriddenOrHiddenMembersWorker(member);
         }
 
         internal static OverriddenOrHiddenMembersResult MakeOverriddenOrHiddenMembers(
             this PropertySymbol member
-        ) {
+        )
+        {
             return MakeOverriddenOrHiddenMembersWorker(member);
         }
 
         internal static OverriddenOrHiddenMembersResult MakeOverriddenOrHiddenMembers(
             this EventSymbol member
-        ) {
+        )
+        {
             return MakeOverriddenOrHiddenMembersWorker(member);
         }
 
@@ -86,7 +89,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
         /// </remarks>
         private static OverriddenOrHiddenMembersResult MakeOverriddenOrHiddenMembersWorker(
             Symbol member
-        ) {
+        )
+        {
             Debug.Assert(
                 member.Kind == SymbolKind.Method
                     || member.Kind == SymbolKind.Property
@@ -168,7 +172,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             bool memberIsFromSomeCompilation,
             out ArrayBuilder<Symbol> hiddenBuilder,
             out ImmutableArray<Symbol> overriddenMembers
-        ) {
+        )
+        {
             Symbol bestMatch = null;
             hiddenBuilder = null;
 
@@ -202,7 +207,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                 NamedTypeSymbol currType = containingType.BaseTypeNoUseSiteDiagnostics;
                 (object)currType != null && (object)bestMatch == null && hiddenBuilder == null;
                 currType = currType.BaseTypeNoUseSiteDiagnostics
-            ) {
+            )
+            {
                 bool unused;
                 FindOverriddenOrHiddenMembersInType(
                     member,
@@ -231,7 +237,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
         public static Symbol FindFirstHiddenMemberIfAny(
             Symbol member,
             bool memberIsFromSomeCompilation
-        ) {
+        )
+        {
             ArrayBuilder<Symbol> hiddenBuilder;
             FindOverriddenOrHiddenMembers(
                 member,
@@ -299,7 +306,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
         private static OverriddenOrHiddenMembersResult MakePropertyAccessorOverriddenOrHiddenMembers(
             MethodSymbol accessor,
             PropertySymbol associatedProperty
-        ) {
+        )
+        {
             Debug.Assert(accessor.IsAccessor());
             Debug.Assert((object)associatedProperty != null);
 
@@ -349,7 +357,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                 (object)overriddenAccessor != null
                 && IsOverriddenSymbolAccessible(overriddenAccessor, accessor.ContainingType)
                 && isAccessorOverride(accessor, overriddenAccessor)
-            ) {
+            )
+            {
                 FindRelatedMembers(
                     accessor.IsOverride,
                     accessorIsFromSomeCompilation,
@@ -381,7 +390,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                         KnownOverriddenClassMethod(accessor),
                         TypeCompareKind.AllIgnoreOptions
                     )
-                ) {
+                )
+                {
                     return true;
                 }
 
@@ -418,7 +428,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
         private static OverriddenOrHiddenMembersResult MakeEventAccessorOverriddenOrHiddenMembers(
             MethodSymbol accessor,
             EventSymbol associatedEvent
-        ) {
+        )
+        {
             Debug.Assert(accessor.IsAccessor());
             Debug.Assert((object)associatedEvent != null);
 
@@ -477,7 +488,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                               overriddenAccessor
                           )
                 )
-            ) {
+            )
+            {
                 FindRelatedMembers(
                     accessor.IsOverride,
                     accessorIsFromSomeCompilation,
@@ -520,7 +532,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
         internal static OverriddenOrHiddenMembersResult MakeInterfaceOverriddenOrHiddenMembers(
             Symbol member,
             bool memberIsFromSomeCompilation
-        ) {
+        )
+        {
             Debug.Assert(!member.IsAccessor());
 
             NamedTypeSymbol containingType = member.ContainingType;
@@ -664,7 +677,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             out Symbol currTypeBestMatch,
             out bool currTypeHasSameKindNonMatch,
             out ArrayBuilder<Symbol> hiddenBuilder
-        ) {
+        )
+        {
             Debug.Assert(!member.IsAccessor());
 
             currTypeBestMatch = null;
@@ -694,7 +708,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                 else if (
                     otherMember.IsAccessor()
                     && !((MethodSymbol)otherMember).IsIndexedPropertyAccessor()
-                ) {
+                )
+                {
                     //Indexed property accessors can be overridden or hidden by non-accessors.
                     //do nothing - no interaction between accessors and non-accessors
                 }
@@ -706,7 +721,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                     if (
                         otherMemberArity == memberArity
                         || (memberKind == SymbolKind.Method && otherMemberArity == 0)
-                    ) {
+                    )
+                    {
                         AddHiddenMemberIfApplicable(ref hiddenBuilder, memberKind, otherMember);
                     }
                 }
@@ -732,7 +748,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                                     knownOverriddenMember,
                                     TypeCompareKind.AllIgnoreOptions
                                 )
-                            ) {
+                            )
+                            {
                                 currTypeHasExactMatch = true;
                                 currTypeBestMatch = otherMember;
                             }
@@ -802,7 +819,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                         && memberIsFromSomeCompilation
                         && member.IsDefinition
                         && TypeOrReturnTypeHasCustomModifiers(currTypeBestMatch)
-                    ) {
+                    )
+                    {
 #if DEBUG
                         // If there were custom modifiers on the parameters, then the match wouldn't have been
                         // exact and so we would already have applied the custom modifier count as a tie-breaker.
@@ -829,13 +847,15 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                             if (
                                 otherMember.Kind == currTypeBestMatch.Kind
                                 && !ReferenceEquals(otherMember, currTypeBestMatch)
-                            ) {
+                            )
+                            {
                                 if (
                                     MemberSignatureComparer.CSharpOverrideComparer.Equals(
                                         otherMember,
                                         currTypeBestMatch
                                     )
-                                ) {
+                                )
+                                {
                                     int customModifierCount = CustomModifierCount(otherMember);
                                     if (customModifierCount < minCustomModifierCount)
                                     {
@@ -865,7 +885,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             Symbol representativeMember,
             out ImmutableArray<Symbol> overriddenMembers,
             ref ArrayBuilder<Symbol> hiddenBuilder
-        ) {
+        )
+        {
             overriddenMembers = ImmutableArray<Symbol>.Empty;
 
             if ((object)representativeMember != null)
@@ -928,12 +949,14 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             ref ArrayBuilder<Symbol> hiddenBuilder,
             SymbolKind hidingMemberKind,
             Symbol hiddenMember
-        ) {
+        )
+        {
             Debug.Assert((object)hiddenMember != null);
             if (
                 hiddenMember.Kind != SymbolKind.Method
                 || ((MethodSymbol)hiddenMember).CanBeHiddenByMemberKind(hidingMemberKind)
-            ) {
+            )
+            {
                 AccessOrGetInstance(ref hiddenBuilder).Add(hiddenMember);
             }
         }
@@ -969,7 +992,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             Symbol representativeMember,
             bool overridingMemberIsFromSomeCompilation,
             ArrayBuilder<Symbol> overriddenBuilder
-        ) {
+        )
+        {
             Debug.Assert((object)representativeMember != null);
             Debug.Assert(
                 representativeMember.Kind == SymbolKind.Property
@@ -982,7 +1006,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                 Symbol otherMember in representativeMember.ContainingType.GetMembers(
                     representativeMember.Name
                 )
-            ) {
+            )
+            {
                 if (otherMember.Kind == representativeMember.Kind)
                 {
                     if (otherMember != representativeMember)
@@ -1005,7 +1030,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                                 )
                                 && otherMember.CustomModifierCount()
                                     == representativeCustomModifierCount
-                            ) {
+                            )
+                            {
                                 overriddenBuilder.Add(otherMember);
                             }
                         }
@@ -1016,7 +1042,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                                     otherMember,
                                     representativeMember
                                 )
-                            ) {
+                            )
+                            {
                                 overriddenBuilder.Add(otherMember);
                             }
                         }
@@ -1050,7 +1077,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             SymbolKind hidingMemberKind,
             Symbol representativeMember,
             ref ArrayBuilder<Symbol> hiddenBuilder
-        ) {
+        )
+        {
             Debug.Assert((object)representativeMember != null);
             Debug.Assert(representativeMember.Kind != SymbolKind.Field);
             Debug.Assert(representativeMember.Kind != SymbolKind.NamedType);
@@ -1065,13 +1093,15 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                 Symbol otherMember in representativeMember.ContainingType.GetMembers(
                     representativeMember.Name
                 )
-            ) {
+            )
+            {
                 if (otherMember.Kind == representativeMember.Kind)
                 {
                     if (
                         otherMember != representativeMember
                         && comparer.Equals(otherMember, representativeMember)
-                    ) {
+                    )
+                    {
                         AddHiddenMemberIfApplicable(
                             ref hiddenBuilder,
                             hidingMemberKind,
@@ -1154,7 +1184,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
         internal static bool RequiresExplicitOverride(
             this MethodSymbol method,
             out bool warnAmbiguous
-        ) {
+        )
+        {
             warnAmbiguous = false;
             if (!method.IsOverride)
                 return false;
@@ -1229,7 +1260,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                 if (
                     otherMethod != method
                     && MemberSignatureComparer.RuntimeSignatureComparer.Equals(otherMethod, method)
-                ) {
+                )
+                {
                     return true;
                 }
             }
@@ -1251,7 +1283,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
         internal static MethodSymbol GetFirstRuntimeOverriddenMethodIgnoringNewSlot(
             this MethodSymbol method,
             out bool wasAmbiguous
-        ) {
+        )
+        {
             // WARN: If the method may override a source method and declaration diagnostics have yet to
             // be computed, then it is important for us to pass ignoreInterfaceImplementationChanges: true
             // (see MethodSymbol.IsMetadataVirtual for details).
@@ -1270,7 +1303,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                 NamedTypeSymbol currType = containingType.BaseTypeNoUseSiteDiagnostics;
                 !ReferenceEquals(currType, null);
                 currType = currType.BaseTypeNoUseSiteDiagnostics
-            ) {
+            )
+            {
                 MethodSymbol candidate = null;
                 foreach (Symbol otherMember in currType.GetMembers(method.Name))
                 {
@@ -1281,7 +1315,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                             method,
                             otherMember
                         )
-                    ) {
+                    )
+                    {
                         MethodSymbol overridden = (MethodSymbol)otherMember;
 
                         // NOTE: The runtime doesn't consider non-virtual methods during override resolution.
@@ -1317,7 +1352,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
         private static bool IsOverriddenSymbolAccessible(
             Symbol overridden,
             NamedTypeSymbol overridingContainingType
-        ) {
+        )
+        {
             var discardedUseSiteInfo = CompoundUseSiteInfo<AssemblySymbol>.Discarded;
             return AccessCheck.IsSymbolAccessible(
                 overridden.OriginalDefinition,

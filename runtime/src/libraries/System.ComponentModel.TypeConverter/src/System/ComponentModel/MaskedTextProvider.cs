@@ -248,7 +248,8 @@ namespace System.ComponentModel
             char promptChar,
             char passwordChar,
             bool restrictToAscii
-        ) {
+        )
+        {
             if (string.IsNullOrEmpty(mask))
             {
                 throw new ArgumentException(SR.MaskedTextProviderMaskNullOrEmpty, nameof(mask));
@@ -283,7 +284,8 @@ namespace System.ComponentModel
                     CultureInfo tempCulture in CultureInfo.GetCultures(
                         CultureTypes.SpecificCultures
                     )
-                ) {
+                )
+                {
                     if (culture.Equals(tempCulture.Parent))
                     {
                         Culture = tempCulture;
@@ -959,7 +961,8 @@ namespace System.ComponentModel
             int startPosition,
             int endPosition,
             bool direction
-        ) {
+        )
+        {
             if (AssignedEditPositionCount == 0)
             {
                 return INVALID_INDEX;
@@ -1016,7 +1019,8 @@ namespace System.ComponentModel
             int endPosition,
             bool direction,
             byte assignedStatus
-        ) {
+        )
+        {
             // out of range position is handled in FindEditPositionFrom method.
             int testPosition;
 
@@ -1111,7 +1115,8 @@ namespace System.ComponentModel
             int endPosition,
             bool direction,
             CharType charTypeFlags
-        ) {
+        )
+        {
             if (startPosition < 0)
             {
                 startPosition = 0;
@@ -1178,7 +1183,8 @@ namespace System.ComponentModel
             int startPosition,
             int endPosition,
             bool direction
-        ) {
+        )
+        {
             int position;
 
             while (true)
@@ -1245,7 +1251,8 @@ namespace System.ComponentModel
             int position,
             out int testPosition,
             out MaskedTextResultHint resultHint
-        ) {
+        )
+        {
             return InsertAt(input.ToString(), position, out testPosition, out resultHint);
         }
 
@@ -1274,7 +1281,8 @@ namespace System.ComponentModel
             int position,
             out int testPosition,
             out MaskedTextResultHint resultHint
-        ) {
+        )
+        {
             if (input == null)
             {
                 throw new ArgumentNullException(nameof(input));
@@ -1306,7 +1314,8 @@ namespace System.ComponentModel
             out int testPosition,
             out MaskedTextResultHint resultHint,
             bool testOnly
-        ) {
+        )
+        {
             Debug.Assert(
                 input != null && position >= 0 && position < _testString.Length,
                 "input param out of range."
@@ -1603,7 +1612,8 @@ namespace System.ComponentModel
             int endPosition,
             out int testPosition,
             out MaskedTextResultHint resultHint
-        ) {
+        )
+        {
             if (endPosition >= _testString.Length)
             {
                 testPosition = endPosition;
@@ -1644,7 +1654,8 @@ namespace System.ComponentModel
             out int testPosition,
             out MaskedTextResultHint resultHint,
             bool testOnly
-        ) {
+        )
+        {
             Debug.Assert(
                 startPosition >= 0
                     && startPosition <= endPosition
@@ -1673,7 +1684,8 @@ namespace System.ComponentModel
             if (
                 FindAssignedEditPositionInRange(startPosition, endPosition, FORWARD)
                 != INVALID_INDEX
-            ) {
+            )
+            {
                 resultHint = MaskedTextResultHint.Success;
             }
 
@@ -1791,7 +1803,8 @@ namespace System.ComponentModel
             int position,
             out int testPosition,
             out MaskedTextResultHint resultHint
-        ) {
+        )
+        {
             if (position < 0 || position >= _testString.Length)
             {
                 testPosition = position;
@@ -1840,7 +1853,8 @@ namespace System.ComponentModel
             int endPosition,
             out int testPosition,
             out MaskedTextResultHint resultHint
-        ) {
+        )
+        {
             if (endPosition >= _testString.Length)
             {
                 testPosition = endPosition;
@@ -1899,7 +1913,8 @@ namespace System.ComponentModel
             int position,
             out int testPosition,
             out MaskedTextResultHint resultHint
-        ) {
+        )
+        {
             if (input == null)
             {
                 throw new ArgumentNullException(nameof(input));
@@ -1943,7 +1958,8 @@ namespace System.ComponentModel
             int endPosition,
             out int testPosition,
             out MaskedTextResultHint resultHint
-        ) {
+        )
+        {
             if (input == null)
             {
                 throw new ArgumentNullException(nameof(input));
@@ -2001,7 +2017,8 @@ namespace System.ComponentModel
                             out tempHint, /*testOnly*/
                             false
                         )
-                    ) {
+                    )
+                    {
                         testPosition = tempPos;
                         resultHint = tempHint;
                         return false;
@@ -2282,7 +2299,8 @@ namespace System.ComponentModel
             MaskedTextProvider mtp,
             bool includePrompt,
             bool includeLiterals
-        ) {
+        )
+        {
             // Input options are processed in the following order:
             // 1. Literals
             // 2. Prompts
@@ -2525,7 +2543,8 @@ namespace System.ComponentModel
 
             if (
                 (ResetOnPrompt && (input == _promptChar)) || (ResetOnSpace && (input == SPACE_CHAR))
-            ) {
+            )
+            {
                 return true;
             }
 
@@ -2570,7 +2589,8 @@ namespace System.ComponentModel
             int position,
             out int testPosition,
             out MaskedTextResultHint resultHint
-        ) {
+        )
+        {
             if (TestString(input, position, out testPosition, out resultHint))
             {
                 SetString(input, position);
@@ -2593,7 +2613,8 @@ namespace System.ComponentModel
             int position,
             out int testPosition,
             out MaskedTextResultHint resultHint
-        ) {
+        )
+        {
             Debug.Assert(input != null, "null input.");
             Debug.Assert(position >= 0, "Position out of range.");
 
@@ -2766,7 +2787,8 @@ namespace System.ComponentModel
             bool includeLiterals,
             int startPosition,
             int length
-        ) {
+        )
+        {
             return ToString( /*ignorePwdChar*/
                 true,
                 includePrompt,
@@ -2787,7 +2809,8 @@ namespace System.ComponentModel
             bool includeLiterals,
             int startPosition,
             int length
-        ) {
+        )
+        {
             if (length <= 0)
             {
                 return string.Empty;
@@ -2949,7 +2972,8 @@ namespace System.ComponentModel
             string input,
             out int testPosition,
             out MaskedTextResultHint resultHint
-        ) {
+        )
+        {
             testPosition = 0;
 
             if (input == null || input.Length == 0) // nothing to verify.

@@ -113,7 +113,8 @@ namespace System.Reflection
             ref ValueStringBuilder sbParamList,
             Type[] parameterTypes,
             CallingConventions callingConvention
-        ) {
+        )
+        {
             string comma = "";
 
             for (int i = 0; i < parameterTypes.Length; i++)

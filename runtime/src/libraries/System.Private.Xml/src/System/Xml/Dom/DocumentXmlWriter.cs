@@ -492,7 +492,8 @@ namespace System.Xml
 
         IDictionary<string, string> IXmlNamespaceResolver.GetNamespacesInScope(
             XmlNamespaceScope scope
-        ) {
+        )
+        {
             return _namespaceManager!.GetNamespacesInScope(scope);
         }
 

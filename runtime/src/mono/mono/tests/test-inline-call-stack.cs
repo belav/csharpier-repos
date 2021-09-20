@@ -96,7 +96,8 @@ namespace Program
                 && (myStackFrame.GetMethod().Name != inlinedStackFrame.GetMethod().Name)
                 && (myConstructorCalledFrom != inlinedConstructorCalledFrom)
                 && (strictFlag == relaxedFlag)
-            ) {
+            )
+            {
                 return 0;
             }
             else

@@ -1430,7 +1430,8 @@ namespace System.Xml.Tests
             StringWriter sw = new StringWriter();
             using (
                 XmlWriter w = WriterHelper.Create(sw, ws, overrideAsync: true, async: utils.Async)
-            ) {
+            )
+            {
                 w.WriteStartElement("root", "uri");
                 w.WriteStartAttribute("xmlns", "p", "http://www.w3.org/2000/xmlns/");
                 w.WriteString("uri");

@@ -45,7 +45,8 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Utilities
             bool allowCancel,
             bool showProgress,
             Action<IWaitContext> action
-        ) {
+        )
+        {
             try
             {
                 action(_waitContext);
@@ -69,7 +70,8 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Utilities
             string message,
             bool allowCancel,
             Action<VisualStudioIndicator.IWaitContext> action
-        ) {
+        )
+        {
             try
             {
                 action(_platformWaitContext);

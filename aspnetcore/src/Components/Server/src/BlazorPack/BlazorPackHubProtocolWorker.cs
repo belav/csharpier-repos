@@ -14,7 +14,8 @@ namespace Microsoft.AspNetCore.Components.Server.BlazorPack
             ref MessagePackReader reader,
             Type type,
             string field
-        ) {
+        )
+        {
             try
             {
                 if (type == typeof(string))

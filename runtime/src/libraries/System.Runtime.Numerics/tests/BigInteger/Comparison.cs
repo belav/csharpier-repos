@@ -641,7 +641,8 @@ namespace System.Numerics.Tests
             BigInteger y,
             bool IsYNegative,
             int expectedResult
-        ) {
+        )
+        {
             bool expectedEquals = 0 == expectedResult;
             bool expectedLessThan = expectedResult < 0;
             bool expectedGreaterThan = expectedResult > 0;
@@ -717,7 +718,8 @@ namespace System.Numerics.Tests
             Random random,
             out BigInteger bigInteger1,
             out BigInteger bigInteger2
-        ) {
+        )
+        {
             byte[] byteArray1,
                 byteArray2;
             bool sameSize = 0 == random.Next(0, 2);
@@ -764,14 +766,16 @@ namespace System.Numerics.Tests
                 (bigInteger1 < 0 && bigInteger2 > 0)
                 || (bigInteger1 == 0 && bigInteger2 > 0)
                 || (bigInteger1 < 0 && bigInteger2 == 0)
-            ) {
+            )
+            {
                 return -1;
             }
             else if (
                 (bigInteger1 > 0 && bigInteger2 < 0)
                 || (bigInteger1 == 0 && bigInteger2 < 0)
                 || (bigInteger1 > 0 && bigInteger2 == 0)
-            ) {
+            )
+            {
                 return 1;
             }
             else if (bigInteger1 != 0 && bigInteger2 != 0)

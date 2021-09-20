@@ -17,7 +17,8 @@ namespace Roslyn.Utilities
             this KeyValuePair<TKey, TValue> keyValuePair,
             out TKey key,
             out TValue value
-        ) {
+        )
+        {
             key = keyValuePair.Key;
             value = keyValuePair.Value;
         }

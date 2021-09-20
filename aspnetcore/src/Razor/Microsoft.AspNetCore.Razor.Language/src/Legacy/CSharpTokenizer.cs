@@ -400,7 +400,8 @@ namespace Microsoft.AspNetCore.Razor.Language.Legacy
             string content,
             SyntaxKind kind,
             RazorDiagnostic[] errors
-        ) {
+        )
+        {
             return SyntaxFactory.Token(kind, content, errors);
         }
 
@@ -562,7 +563,8 @@ namespace Microsoft.AspNetCore.Razor.Language.Legacy
             SyntaxKind typeIfOnlyFirst,
             char second,
             SyntaxKind typeIfBoth
-        ) {
+        )
+        {
             return () =>
             {
                 if (CurrentCharacter == second)
@@ -580,7 +582,8 @@ namespace Microsoft.AspNetCore.Razor.Language.Legacy
             SyntaxKind typeIfOption1,
             char option2,
             SyntaxKind typeIfOption2
-        ) {
+        )
+        {
             return () =>
             {
                 if (CurrentCharacter == option1)
@@ -639,7 +642,8 @@ namespace Microsoft.AspNetCore.Razor.Language.Legacy
             char quote,
             Func<char, bool> isEndQuotedLiteral,
             SyntaxKind literalType
-        ) {
+        )
+        {
             TakeUntil(isEndQuotedLiteral);
             if (CurrentCharacter == '\\')
             {
@@ -740,7 +744,8 @@ namespace Microsoft.AspNetCore.Razor.Language.Legacy
                 IsRealLiteralSuffix(CurrentCharacter)
                 || CurrentCharacter == 'E'
                 || CurrentCharacter == 'e'
-            ) {
+            )
+            {
                 return RealLiteralExponentPart();
             }
             else

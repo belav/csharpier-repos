@@ -261,7 +261,8 @@ namespace Microsoft.AspNetCore.Mvc.Razor.Extensions.Version1_X
         private DocumentIntermediateNode CreateIRDocument(
             RazorEngine engine,
             RazorCodeDocument codeDocument
-        ) {
+        )
+        {
             for (var i = 0; i < engine.Phases.Count; i++)
             {
                 var phase = engine.Phases[i];
@@ -311,7 +312,8 @@ namespace Microsoft.AspNetCore.Mvc.Razor.Extensions.Version1_X
 
             public override void VisitNamespaceDeclaration(
                 NamespaceDeclarationIntermediateNode node
-            ) {
+            )
+            {
                 Node = node;
             }
         }

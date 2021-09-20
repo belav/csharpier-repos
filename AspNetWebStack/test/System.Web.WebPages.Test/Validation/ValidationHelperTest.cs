@@ -943,7 +943,8 @@ namespace System.Web.WebPages.Validation.Test
         private static ValidationHelper GetValidationHelper(
             HttpContextBase httpContext = null,
             ModelStateDictionary modelStateDictionary = null
-        ) {
+        )
+        {
             httpContext = httpContext ?? GetContext();
             modelStateDictionary = modelStateDictionary ?? new ModelStateDictionary();
 

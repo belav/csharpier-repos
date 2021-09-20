@@ -70,7 +70,8 @@ namespace System.Net
                             if (
                                 exception is CryptographicException
                                 || exception is SecurityException
-                            ) {
+                            )
+                            {
                                 Debug.Fail(
                                     $"Failed to open cert store, location: {storeLocation} exception: {exception}"
                                 );

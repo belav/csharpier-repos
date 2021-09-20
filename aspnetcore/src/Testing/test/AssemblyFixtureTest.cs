@@ -16,7 +16,8 @@ namespace Microsoft.AspNetCore.Testing
         public AssemblyFixtureTest(
             TestAssemblyFixture assemblyFixture,
             TestCollectionFixture collectionFixture
-        ) {
+        )
+        {
             AssemblyFixture = assemblyFixture;
             CollectionFixture = collectionFixture;
         }

@@ -57,7 +57,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Diagnostics.AddBraces
             ImmutableArray<Diagnostic> diagnostics,
             SyntaxEditor editor,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var root = editor.OriginalRoot;
             foreach (var diagnostic in diagnostics)
             {
@@ -85,13 +86,12 @@ namespace Microsoft.CodeAnalysis.CSharp.Diagnostics.AddBraces
 
         private sealed class MyCodeAction : CustomCodeActions.DocumentChangeAction
         {
-            public MyCodeAction(
-                Func<CancellationToken, Task<Document>> createChangedDocument
-            ) : base(
-                CSharpAnalyzersResources.Add_braces,
-                createChangedDocument,
-                CSharpAnalyzersResources.Add_braces
-            ) { }
+            public MyCodeAction(Func<CancellationToken, Task<Document>> createChangedDocument)
+                : base(
+                    CSharpAnalyzersResources.Add_braces,
+                    createChangedDocument,
+                    CSharpAnalyzersResources.Add_braces
+                ) { }
         }
     }
 }

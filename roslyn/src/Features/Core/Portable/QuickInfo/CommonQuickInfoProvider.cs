@@ -45,7 +45,8 @@ namespace Microsoft.CodeAnalysis.QuickInfo
             SyntaxToken token,
             int position,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             if (token != default && token.Span.IntersectsWith(position))
             {
                 return await BuildQuickInfoAsync(document, token, cancellationToken)

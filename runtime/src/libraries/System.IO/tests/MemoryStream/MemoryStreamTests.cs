@@ -166,7 +166,8 @@ namespace System.IO.Tests
                 int offset,
                 int count,
                 CancellationToken cancellationToken
-            ) {
+            )
+            {
                 ReadAsyncArrayInvoked = true;
                 return base.ReadAsync(buffer, offset, count, cancellationToken);
             }
@@ -176,7 +177,8 @@ namespace System.IO.Tests
                 int offset,
                 int count,
                 CancellationToken cancellationToken
-            ) {
+            )
+            {
                 WriteAsyncArrayInvoked = true;
                 return base.WriteAsync(buffer, offset, count, cancellationToken);
             }

@@ -64,7 +64,8 @@ namespace System.Xml.Tests
             while (
                 DataReader.NodeType == XmlNodeType.Whitespace
                 || DataReader.NodeType == XmlNodeType.SignificantWhitespace
-            ) {
+            )
+            {
                 // skip all whitespace nodes
                 // if EOF is reached NodeType=None
                 DataReader.Read();
@@ -240,7 +241,8 @@ namespace System.Xml.Tests
                 || IsXmlValidatingReader()
                 || IsCoreReader()
                 || IsXPathNavigatorReader()
-            ) {
+            )
+            {
                 strExpected = ST_ENT1_ATT_EXPAND_CHAR_ENTITIES4;
             }
             else if (IsXmlNodeReader())

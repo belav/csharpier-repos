@@ -22,7 +22,8 @@ namespace Roslyn.Utilities
             this ImmutableArray<TElement> array,
             TValue value,
             Func<TElement, TValue, int> comparer
-        ) {
+        )
+        {
             int low = 0;
             int high = array.Length - 1;
 

@@ -119,7 +119,8 @@ namespace System.Web.Http.Hosting
 
         private static SuppressHostPrincipalMessageHandler CreateProductUnderTest(
             HttpMessageHandler innerHandler
-        ) {
+        )
+        {
             SuppressHostPrincipalMessageHandler handler = new SuppressHostPrincipalMessageHandler();
             handler.InnerHandler = innerHandler;
             return handler;
@@ -137,7 +138,8 @@ namespace System.Web.Http.Hosting
             protected override Task<HttpResponseMessage> SendAsync(
                 HttpRequestMessage request,
                 CancellationToken cancellationToken
-            ) {
+            )
+            {
                 throw new NotImplementedException();
             }
         }
@@ -152,7 +154,8 @@ namespace System.Web.Http.Hosting
 
             public LambdaHttpMessageHandler(
                 Func<HttpRequestMessage, CancellationToken, Task<HttpResponseMessage>> sendAsync
-            ) {
+            )
+            {
                 if (sendAsync == null)
                 {
                     throw new ArgumentNullException("sendAsync");
@@ -164,7 +167,8 @@ namespace System.Web.Http.Hosting
             protected override Task<HttpResponseMessage> SendAsync(
                 HttpRequestMessage request,
                 CancellationToken cancellationToken
-            ) {
+            )
+            {
                 return _sendAsync.Invoke(request, cancellationToken);
             }
         }

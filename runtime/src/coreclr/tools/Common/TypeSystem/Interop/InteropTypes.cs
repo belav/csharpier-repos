@@ -84,7 +84,8 @@ namespace Internal.TypeSystem.Interop
             TypeDesc type,
             string @namespace,
             string name
-        ) {
+        )
+        {
             return type is MetadataType mdType
                 && mdType.Name == name
                 && mdType.Namespace == @namespace
@@ -144,21 +145,24 @@ namespace Internal.TypeSystem.Interop
         public static bool IsSystemRuntimeIntrinsicsVector64T(
             TypeSystemContext context,
             TypeDesc type
-        ) {
+        )
+        {
             return IsCoreNamedType(context, type, "System.Runtime.Intrinsics", "Vector64`1");
         }
 
         public static bool IsSystemRuntimeIntrinsicsVector128T(
             TypeSystemContext context,
             TypeDesc type
-        ) {
+        )
+        {
             return IsCoreNamedType(context, type, "System.Runtime.Intrinsics", "Vector128`1");
         }
 
         public static bool IsSystemRuntimeIntrinsicsVector256T(
             TypeSystemContext context,
             TypeDesc type
-        ) {
+        )
+        {
             return IsCoreNamedType(context, type, "System.Runtime.Intrinsics", "Vector256`1");
         }
 

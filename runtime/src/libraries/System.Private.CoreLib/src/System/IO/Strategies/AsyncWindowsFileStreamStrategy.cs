@@ -146,7 +146,8 @@ namespace System.IO.Strategies
         private unsafe ValueTask<int> ReadAsyncInternal(
             Memory<byte> destination,
             CancellationToken cancellationToken = default
-        ) {
+        )
+        {
             if (!CanRead)
             {
                 ThrowHelper.ThrowNotSupportedException_UnreadableStream();
@@ -293,7 +294,8 @@ namespace System.IO.Strategies
         private unsafe ValueTask WriteAsyncInternal(
             ReadOnlyMemory<byte> source,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             if (!CanWrite)
             {
                 ThrowHelper.ThrowNotSupportedException_UnwritableStream();
@@ -402,7 +404,8 @@ namespace System.IO.Strategies
             Stream destination,
             int bufferSize,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             ValidateCopyToArguments(destination, bufferSize);
 
             // Fail if the file was closed
@@ -428,7 +431,8 @@ namespace System.IO.Strategies
             Stream destination,
             int bufferSize,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             Debug.Assert(!_fileHandle.IsClosed, "!_handle.IsClosed");
             Debug.Assert(CanRead, "_parent.CanRead");
 

@@ -34,7 +34,8 @@ namespace Microsoft.AspNetCore.Mvc.RazorPages.Infrastructure
             IModelMetadataProvider modelMetadataProvider,
             IModelBinderFactory modelBinderFactory,
             IOptions<MvcOptions> mvcOptions
-        ) {
+        )
+        {
             _pageFactoryProvider = pageFactoryProvider;
             _modelFactoryProvider = modelFactoryProvider;
             _modelBinderFactory = modelBinderFactory;
@@ -47,7 +48,8 @@ namespace Microsoft.AspNetCore.Mvc.RazorPages.Infrastructure
 
         public (PageActionInvokerCacheEntry cacheEntry, IFilterMetadata[] filters) GetCachedResult(
             ActionContext actionContext
-        ) {
+        )
+        {
             var actionDescriptor = actionContext.ActionDescriptor as PageActionDescriptor;
 
             var compiledPageActionDescriptor = actionDescriptor.CompiledPageDescriptor;
@@ -86,7 +88,8 @@ namespace Microsoft.AspNetCore.Mvc.RazorPages.Infrastructure
         private PageActionInvokerCacheEntry CreateCacheEntry(
             CompiledPageActionDescriptor compiledActionDescriptor,
             FilterItem[] cachedFilters
-        ) {
+        )
+        {
             var viewDataFactory = ViewDataDictionaryFactory.CreateFactory(
                 compiledActionDescriptor.DeclaredModelTypeInfo
             );
@@ -135,7 +138,8 @@ namespace Microsoft.AspNetCore.Mvc.RazorPages.Infrastructure
         // Internal for testing.
         internal List<Func<IRazorPage>> GetViewStartFactories(
             CompiledPageActionDescriptor descriptor
-        ) {
+        )
+        {
             var viewStartFactories = new List<Func<IRazorPage>>();
             // Always pick up all _ViewStarts, including the ones outside the Pages root.
             foreach (var filePath in RazorFileHierarchy.GetViewStartPaths(descriptor.RelativePath))
@@ -152,11 +156,13 @@ namespace Microsoft.AspNetCore.Mvc.RazorPages.Infrastructure
 
         private static PageHandlerExecutorDelegate[] GetHandlerExecutors(
             CompiledPageActionDescriptor actionDescriptor
-        ) {
+        )
+        {
             if (
                 actionDescriptor.HandlerMethods == null
                 || actionDescriptor.HandlerMethods.Count == 0
-            ) {
+            )
+            {
                 return Array.Empty<PageHandlerExecutorDelegate>();
             }
 
@@ -172,11 +178,13 @@ namespace Microsoft.AspNetCore.Mvc.RazorPages.Infrastructure
 
         private PageHandlerBinderDelegate[] GetHandlerBinders(
             CompiledPageActionDescriptor actionDescriptor
-        ) {
+        )
+        {
             if (
                 actionDescriptor.HandlerMethods == null
                 || actionDescriptor.HandlerMethods.Count == 0
-            ) {
+            )
+            {
                 return Array.Empty<PageHandlerBinderDelegate>();
             }
 

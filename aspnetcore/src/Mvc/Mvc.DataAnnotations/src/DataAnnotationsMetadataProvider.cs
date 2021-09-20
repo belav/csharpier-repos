@@ -40,7 +40,8 @@ namespace Microsoft.AspNetCore.Mvc.DataAnnotations
             MvcOptions options,
             IOptions<MvcDataAnnotationsLocalizationOptions> localizationOptions,
             IStringLocalizerFactory? stringLocalizerFactory
-        ) {
+        )
+        {
             if (options == null)
             {
                 throw new ArgumentNullException(nameof(options));
@@ -126,7 +127,8 @@ namespace Microsoft.AspNetCore.Mvc.DataAnnotations
             if (
                 _stringLocalizerFactory != null
                 && _localizationOptions.DataAnnotationLocalizerProvider != null
-            ) {
+            )
+            {
                 localizer = _localizationOptions.DataAnnotationLocalizerProvider(
                     containerType,
                     _stringLocalizerFactory
@@ -140,7 +142,8 @@ namespace Microsoft.AspNetCore.Mvc.DataAnnotations
                     localizer != null
                     && !string.IsNullOrEmpty(displayAttribute.Description)
                     && displayAttribute.ResourceType == null
-                ) {
+                )
+                {
                     displayMetadata.Description = () => localizer[displayAttribute.Description];
                 }
                 else
@@ -163,7 +166,8 @@ namespace Microsoft.AspNetCore.Mvc.DataAnnotations
                     localizer != null
                     && !string.IsNullOrEmpty(displayAttribute.Name)
                     && displayAttribute.ResourceType == null
-                ) {
+                )
+                {
                     displayMetadata.DisplayName = () => localizer[displayAttribute.Name];
                 }
                 else
@@ -219,7 +223,8 @@ namespace Microsoft.AspNetCore.Mvc.DataAnnotations
                 if (
                     _stringLocalizerFactory != null
                     && _localizationOptions.DataAnnotationLocalizerProvider != null
-                ) {
+                )
+                {
                     enumLocalizer = _localizationOptions.DataAnnotationLocalizerProvider(
                         underlyingType,
                         _stringLocalizerFactory
@@ -259,7 +264,8 @@ namespace Microsoft.AspNetCore.Mvc.DataAnnotations
             if (
                 !string.IsNullOrEmpty(displayFormatAttribute?.DataFormatString)
                 && displayFormatAttribute?.ApplyFormatInEditMode == true
-            ) {
+            )
+            {
                 // Have a non-empty EditFormatString based on [DisplayFormat] from our cache.
                 if (dataTypeAttribute == null)
                 {
@@ -311,7 +317,8 @@ namespace Microsoft.AspNetCore.Mvc.DataAnnotations
                     localizer != null
                     && !string.IsNullOrEmpty(displayAttribute.Prompt)
                     && displayAttribute.ResourceType == null
-                ) {
+                )
+                {
                     displayMetadata.Placeholder = () => localizer[displayAttribute.Prompt];
                 }
                 else
@@ -387,7 +394,8 @@ namespace Microsoft.AspNetCore.Mvc.DataAnnotations
                 && requiredAttribute == null
                 && !context.Key.ModelType.IsValueType
                 && context.Key.MetadataKind != ModelMetadataKind.Type
-            ) {
+            )
+            {
                 var addInferredRequiredAttribute = false;
                 if (context.Key.MetadataKind == ModelMetadataKind.Type)
                 {
@@ -409,7 +417,8 @@ namespace Microsoft.AspNetCore.Mvc.DataAnnotations
                                 context.PropertyAttributes!,
                                 out var propertyHasNullableAttribute
                             )
-                        ) {
+                        )
+                        {
                             addInferredRequiredAttribute = propertyHasNullableAttribute;
                         }
                     }
@@ -477,7 +486,8 @@ namespace Microsoft.AspNetCore.Mvc.DataAnnotations
                     stringLocalizer != null
                     && !string.IsNullOrEmpty(name)
                     && display.ResourceType == null
-                ) {
+                )
+                {
                     name = stringLocalizer[name];
                 }
 
@@ -508,7 +518,8 @@ namespace Microsoft.AspNetCore.Mvc.DataAnnotations
             Type? containingType,
             MemberInfo? member,
             IEnumerable<object> attributes
-        ) {
+        )
+        {
             if (HasNullableAttribute(attributes, out var result))
             {
                 return result;
@@ -521,7 +532,8 @@ namespace Microsoft.AspNetCore.Mvc.DataAnnotations
         internal static bool HasNullableAttribute(
             IEnumerable<object> attributes,
             out bool isNullable
-        ) {
+        )
+        {
             // [Nullable] is compiler synthesized, comparing by name.
             var nullableAttribute = attributes.FirstOrDefault(
                 a =>
@@ -620,7 +632,8 @@ namespace Microsoft.AspNetCore.Mvc.DataAnnotations
                         nullableContextAttribute.GetType().GetField(NullableContextFlagsFieldName)
                             is FieldInfo field
                         && field.GetValue(nullableContextAttribute) is byte @byte
-                    ) {
+                    )
+                    {
                         return @byte == 1; // [NullableContext] found
                     }
                 }

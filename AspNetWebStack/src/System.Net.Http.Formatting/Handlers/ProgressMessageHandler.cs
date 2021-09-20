@@ -39,7 +39,8 @@ namespace System.Net.Http.Handlers
         protected override async Task<HttpResponseMessage> SendAsync(
             HttpRequestMessage request,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             AddRequestProgress(request);
             HttpResponseMessage response = await base.SendAsync(request, cancellationToken);
 
@@ -60,7 +61,8 @@ namespace System.Net.Http.Handlers
         protected internal virtual void OnHttpRequestProgress(
             HttpRequestMessage request,
             HttpProgressEventArgs e
-        ) {
+        )
+        {
             if (HttpSendProgress != null)
             {
                 HttpSendProgress(request, e);
@@ -75,7 +77,8 @@ namespace System.Net.Http.Handlers
         protected internal virtual void OnHttpResponseProgress(
             HttpRequestMessage request,
             HttpProgressEventArgs e
-        ) {
+        )
+        {
             if (HttpReceiveProgress != null)
             {
                 HttpReceiveProgress(request, e);
@@ -94,7 +97,8 @@ namespace System.Net.Http.Handlers
         private async Task<HttpResponseMessage> AddResponseProgressAsync(
             HttpRequestMessage request,
             HttpResponseMessage response
-        ) {
+        )
+        {
             Stream stream = await response.Content.ReadAsStreamAsync();
             ProgressStream progressStream = new ProgressStream(stream, this, request, response);
             HttpContent progressContent = new StreamContent(progressStream);

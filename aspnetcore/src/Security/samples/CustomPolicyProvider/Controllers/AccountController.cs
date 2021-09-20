@@ -21,7 +21,8 @@ namespace CustomPolicyProvider.Controllers
             string userName,
             DateTime? birthDate,
             string returnUrl = null
-        ) {
+        )
+        {
             if (string.IsNullOrEmpty(userName))
                 return BadRequest("A user name is required");
 

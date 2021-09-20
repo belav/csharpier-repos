@@ -258,7 +258,8 @@ namespace Microsoft.EntityFrameworkCore
         [InlineData(true)]
         public void Doesnt_raise_change_event_when_equal_and_check_equality_true(
             bool useLazyLoading
-        ) {
+        )
+        {
             using var context = new ChangeContext<ChangeValueEntity>(
                 useLazyLoading: useLazyLoading,
                 checkEquality: true
@@ -284,7 +285,8 @@ namespace Microsoft.EntityFrameworkCore
         [InlineData(true)]
         public void Doesnt_raise_changing_event_when_equal_and_check_equality_true(
             bool useLazyLoading
-        ) {
+        )
+        {
             using var context = new ChangeContext<ChangeValueEntity>(
                 useLazyLoading: useLazyLoading,
                 checkEquality: true
@@ -363,12 +365,14 @@ namespace Microsoft.EntityFrameworkCore
                 bool useLazyLoading = false,
                 bool checkEquality = true,
                 Action<EntityTypeBuilder<TEntity>> entityBuilderAction = null
-            ) : base(
-                dbName: "ChangeDetectionContext",
-                useLazyLoading: useLazyLoading,
-                useChangeDetection: true,
-                checkEquality: checkEquality
-            ) {
+            )
+                : base(
+                    dbName: "ChangeDetectionContext",
+                    useLazyLoading: useLazyLoading,
+                    useChangeDetection: true,
+                    checkEquality: checkEquality
+                )
+            {
                 _entityBuilderAction = entityBuilderAction;
             }
 
@@ -387,7 +391,8 @@ namespace Microsoft.EntityFrameworkCore
 
             public SharedChangeContext(
                 Action<EntityTypeBuilder<TEntity>> entityBuilderAction = null
-            ) {
+            )
+            {
                 _entityBuilderAction = entityBuilderAction;
             }
 

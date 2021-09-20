@@ -443,7 +443,8 @@ namespace System.Web.Http.Controllers
 
         private IExceptionFilter CreateExceptionFilter(
             Func<HttpActionExecutedContext, CancellationToken, Task> executeExceptionFilterAsync
-        ) {
+        )
+        {
             Mock<IExceptionFilter> mock = new Mock<IExceptionFilter>();
             mock.Setup(
                     f =>
@@ -458,7 +459,8 @@ namespace System.Web.Http.Controllers
 
         private static IExceptionLogger CreateExceptionLogger(
             Func<ExceptionLoggerContext, CancellationToken, Task> logAsync
-        ) {
+        )
+        {
             Mock<IExceptionLogger> mock = new Mock<IExceptionLogger>();
             mock.Setup(
                     l =>
@@ -505,7 +507,8 @@ namespace System.Web.Http.Controllers
             IExceptionLogger exceptionLogger,
             IExceptionHandler exceptionHandler,
             IHttpActionResult innerResult
-        ) {
+        )
+        {
             return new ExceptionFilterResult(
                 context,
                 filters,

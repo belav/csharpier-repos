@@ -28,7 +28,8 @@ namespace Microsoft.CodeAnalysis.FindSymbols
             ISymbol symbol,
             Solution solution,
             CancellationToken cancellationToken = default
-        ) {
+        )
+        {
             return FindReferencesAsync(
                 symbol,
                 solution,
@@ -42,7 +43,8 @@ namespace Microsoft.CodeAnalysis.FindSymbols
             Solution solution,
             FindReferencesSearchOptions options,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var progressCollector = new StreamingProgressCollector();
             await FindReferencesAsync(
                     symbol,
@@ -68,7 +70,8 @@ namespace Microsoft.CodeAnalysis.FindSymbols
             Solution solution,
             IImmutableSet<Document> documents,
             CancellationToken cancellationToken = default
-        ) {
+        )
+        {
             return FindReferencesAsync(
                 symbol,
                 solution,
@@ -93,7 +96,8 @@ namespace Microsoft.CodeAnalysis.FindSymbols
             IFindReferencesProgress progress,
             IImmutableSet<Document> documents,
             CancellationToken cancellationToken = default
-        ) {
+        )
+        {
             return await FindReferencesAsync(
                     symbol,
                     solution,
@@ -112,7 +116,8 @@ namespace Microsoft.CodeAnalysis.FindSymbols
             IImmutableSet<Document> documents,
             FindReferencesSearchOptions options,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             progress ??= NoOpFindReferencesProgress.Instance;
             var streamingProgress = new StreamingProgressCollector(
                 new StreamingFindReferencesProgressAdapter(progress)
@@ -138,7 +143,8 @@ namespace Microsoft.CodeAnalysis.FindSymbols
                 IImmutableSet<Document> documents,
                 FindReferencesSearchOptions options,
                 CancellationToken cancellationToken
-            ) {
+            )
+            {
                 return SymbolFinder.FindReferencesAsync(
                     symbol,
                     solution,

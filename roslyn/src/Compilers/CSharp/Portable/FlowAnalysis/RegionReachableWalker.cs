@@ -22,7 +22,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             BoundNode lastInRegion,
             out bool startPointIsReachable,
             out bool endPointIsReachable
-        ) {
+        )
+        {
             var walker = new RegionReachableWalker(
                 compilation,
                 member,

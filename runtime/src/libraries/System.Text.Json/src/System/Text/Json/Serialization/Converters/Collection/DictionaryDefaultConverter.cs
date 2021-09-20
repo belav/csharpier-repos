@@ -59,7 +59,8 @@ namespace System.Text.Json.Serialization.Converters
             JsonSerializerOptions options,
             ref ReadStack state,
             [MaybeNullWhen(false)] out TCollection value
-        ) {
+        )
+        {
             JsonTypeInfo elementTypeInfo = state.Current.JsonTypeInfo.ElementTypeInfo!;
 
             if (state.UseFastPath)
@@ -152,14 +153,16 @@ namespace System.Text.Json.Serialization.Converters
                 if (
                     preserveReferences
                     && state.Current.ObjectState < StackFrameObjectState.PropertyValue
-                ) {
+                )
+                {
                     if (
                         JsonSerializer.ResolveMetadataForJsonObject<TCollection>(
                             ref reader,
                             ref state,
                             options
                         )
-                    ) {
+                    )
+                    {
                         if (state.Current.ObjectState == StackFrameObjectState.ReadRefEndObject)
                         {
                             // This will never throw since it was previously validated in ResolveMetadataForJsonObject.
@@ -242,7 +245,8 @@ namespace System.Text.Json.Serialization.Converters
                                 ref reader,
                                 ref state
                             )
-                        ) {
+                        )
+                        {
                             state.Current.DictionaryKey = key;
                             value = default;
                             return false;
@@ -305,7 +309,8 @@ namespace System.Text.Json.Serialization.Converters
             TCollection dictionary,
             JsonSerializerOptions options,
             ref WriteStack state
-        ) {
+        )
+        {
             if (dictionary == null)
             {
                 writer.WriteNullValue();
@@ -321,7 +326,8 @@ namespace System.Text.Json.Serialization.Converters
                     if (
                         JsonSerializer.WriteReferenceForObject(this, dictionary, ref state, writer)
                         == MetadataPropertyName.Ref
-                    ) {
+                    )
+                    {
                         return true;
                     }
                 }

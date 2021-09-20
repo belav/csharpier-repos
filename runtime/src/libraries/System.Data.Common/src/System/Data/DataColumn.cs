@@ -267,7 +267,8 @@ namespace System.Data
                 if (
                     (BigInteger)AutoIncrementSeed
                     != BigIntegerStorage.ConvertToBigInteger(value, FormatProvider)
-                ) {
+                )
+                {
                     AutoInc.SetCurrent(value, FormatProvider);
                 }
             }
@@ -483,7 +484,8 @@ namespace System.Data
                 if (
                     (XmlConvert.DecodeName(value) == value)
                     && (XmlConvert.EncodeName(value) != value)
-                ) {
+                )
+                {
                     throw ExceptionBuilder.InvalidPrefix(value);
                 }
 
@@ -693,7 +695,8 @@ namespace System.Data
                             if (
                                 _dateTimeMode == DataSetDateTime.Unspecified
                                 || _dateTimeMode == DataSetDateTime.UnspecifiedLocal
-                            ) {
+                            )
+                            {
                                 break;
                             }
                             if (HasData)
@@ -1056,7 +1059,8 @@ namespace System.Data
                             ((oldValue < 0) || (value < oldValue))
                             && (null != _table)
                             && _table.EnforceConstraints
-                        ) {
+                        )
+                        {
                             if (!CheckMaxLength())
                             {
                                 _maxLength = oldValue;
@@ -1241,7 +1245,8 @@ namespace System.Data
                                 )
                             )
                         )
-                    ) {
+                    )
+                    {
                         // We need to re-bind all expression columns.
                         DataExpression!.Bind(table);
                     }
@@ -1381,7 +1386,8 @@ namespace System.Data
                                     IEnumerator e = _table.Constraints.GetEnumerator();
                                     e.MoveNext();
 
-                                ) {
+                                )
+                                {
                                     UniqueConstraint? o = (e.Current as UniqueConstraint);
                                     if (
                                         (null != o)
@@ -1862,7 +1868,8 @@ namespace System.Data
                             value != null
                             && value != DBNull.Value
                             && ((string)value).Length > MaxLength
-                        ) {
+                        )
+                        {
                             if (errorText == null)
                             {
                                 errorText = ExceptionBuilder.MaxLengthViolationText(ColumnName);
@@ -1877,7 +1884,8 @@ namespace System.Data
                         if (
                             !DataStorage.IsObjectNull(value)
                             && ((SqlString)value).Value.Length > MaxLength
-                        ) {
+                        )
+                        {
                             if (errorText == null)
                             {
                                 errorText = ExceptionBuilder.MaxLengthViolationText(ColumnName);
@@ -1968,7 +1976,8 @@ namespace System.Data
             object value,
             XmlWriter xmlWriter,
             XmlRootAttribute? xmlAttrib
-        ) {
+        )
+        {
             Debug.Assert(
                 value != null && (value != DBNull.Value),
                 "Caller is resposible for checking on DBNull"
@@ -1986,7 +1995,8 @@ namespace System.Data
             object store,
             BitArray nullbits,
             int storeIndex
-        ) {
+        )
+        {
             Debug.Assert(null != _storage, "no storage");
             _storage.CopyValueInternal(record, store, nullbits, storeIndex);
         }
@@ -2023,7 +2033,8 @@ namespace System.Data
         internal void HandleDependentColumnList(
             DataExpression? oldExpression,
             DataExpression? newExpression
-        ) {
+        )
+        {
             Debug.Assert(_table != null);
             DataColumn[] dependency;
 

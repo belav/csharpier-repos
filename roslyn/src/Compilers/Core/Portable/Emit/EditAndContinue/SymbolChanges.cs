@@ -30,7 +30,8 @@ namespace Microsoft.CodeAnalysis.Emit
             DefinitionMap definitionMap,
             IEnumerable<SemanticEdit> edits,
             Func<ISymbol, bool> isAddedSymbol
-        ) {
+        )
+        {
             _definitionMap = definitionMap;
             _isAddedSymbol = isAddedSymbol;
             _changes = CalculateChanges(edits);
@@ -75,7 +76,8 @@ namespace Microsoft.CodeAnalysis.Emit
                             !_definitionMap.DefinitionExists(
                                 (IDefinition)synthesizedSymbol.ContainingType.GetCciAdapter()
                             )
-                        ) {
+                        )
+                        {
                             return SymbolChange.Added;
                         }
 
@@ -214,7 +216,8 @@ namespace Microsoft.CodeAnalysis.Emit
 
         public IEnumerable<INamespaceTypeDefinition> GetTopLevelSourceTypeDefinitions(
             EmitContext context
-        ) {
+        )
+        {
             foreach (var symbol in _changes.Keys)
             {
                 var namespaceTypeDef = (
@@ -236,7 +239,8 @@ namespace Microsoft.CodeAnalysis.Emit
         /// </summary>
         private static IReadOnlyDictionary<ISymbol, SymbolChange> CalculateChanges(
             IEnumerable<SemanticEdit> edits
-        ) {
+        )
+        {
             var changes = new Dictionary<ISymbol, SymbolChange>();
 
             foreach (var edit in edits)
@@ -294,7 +298,8 @@ namespace Microsoft.CodeAnalysis.Emit
         private static void AddContainingTypesAndNamespaces(
             Dictionary<ISymbol, SymbolChange> changes,
             ISymbol symbol
-        ) {
+        )
+        {
             while (true)
             {
                 var containingSymbol = GetContainingSymbol(symbol);

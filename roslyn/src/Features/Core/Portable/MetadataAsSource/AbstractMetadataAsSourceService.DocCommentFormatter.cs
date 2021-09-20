@@ -32,7 +32,8 @@ namespace Microsoft.CodeAnalysis.MetadataAsSource
             internal static ImmutableArray<string> Format(
                 IDocumentationCommentFormattingService docCommentFormattingService,
                 DocumentationComment docComment
-            ) {
+            )
+            {
                 var formattedCommentLinesBuilder = ArrayBuilder<string>.GetInstance();
                 var lineBuilder = new StringBuilder();
 
@@ -184,7 +185,8 @@ namespace Microsoft.CodeAnalysis.MetadataAsSource
                 while (
                     formattedCommentLinesBuilder.Count > 0
                     && formattedCommentLinesBuilder[0].Length == 0
-                ) {
+                )
+                {
                     formattedCommentLinesBuilder.RemoveAt(0);
                 }
 
@@ -192,7 +194,8 @@ namespace Microsoft.CodeAnalysis.MetadataAsSource
                 while (
                     formattedCommentLinesBuilder.Count > 0
                     && formattedCommentLinesBuilder[^1].Length == 0
-                ) {
+                )
+                {
                     formattedCommentLinesBuilder.RemoveAt(formattedCommentLinesBuilder.Count - 1);
                 }
 
@@ -216,7 +219,8 @@ namespace Microsoft.CodeAnalysis.MetadataAsSource
             private static void SplitRawLineIntoFormattedLines(
                 string line,
                 ArrayBuilder<string> lines
-            ) {
+            )
+            {
                 var indent = new StringBuilder().Append(' ', s_indentSize * 2).ToString();
 
                 var words = line.Split(' ');

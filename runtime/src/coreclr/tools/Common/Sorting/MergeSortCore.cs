@@ -40,7 +40,8 @@ namespace ILCompiler.Sorting.Implementation
             int index,
             int length,
             TComparer comparer
-        ) {
+        )
+        {
             if (length < ParallelSortThreshold)
             {
                 SequentialSort(arrayToSort, index, length, comparer);
@@ -75,7 +76,8 @@ namespace ILCompiler.Sorting.Implementation
             int index,
             int length,
             TComparer comparer
-        ) {
+        )
+        {
             TDataStructureAccessor accessor = default(TDataStructureAccessor);
             T[] scratchSpace = new T[accessor.GetLength(arrayToSort) / 2];
             MergeSortHelper(arrayToSort, index, length, comparer, scratchSpace);
@@ -89,7 +91,8 @@ namespace ILCompiler.Sorting.Implementation
             int length,
             TComparer comparer,
             T[] scratchSpace
-        ) {
+        )
+        {
             if (length <= 1)
             {
                 return;
@@ -102,7 +105,8 @@ namespace ILCompiler.Sorting.Implementation
                         accessor.GetElement(arrayToSort, index),
                         accessor.GetElement(arrayToSort, index + 1)
                     ) > 0
-                ) {
+                )
+                {
                     accessor.SwapElements(arrayToSort, index, index + 1);
                 }
                 return;
@@ -123,7 +127,8 @@ namespace ILCompiler.Sorting.Implementation
             int halfLen,
             int length,
             TComparer comparer
-        ) {
+        )
+        {
             TDataStructureAccessor accessor = default(TDataStructureAccessor);
             int leftHalfIndex = 0;
             int rightHalfIndex = index + halfLen;

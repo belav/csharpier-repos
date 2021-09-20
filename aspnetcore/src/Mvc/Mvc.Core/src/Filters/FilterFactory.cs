@@ -12,7 +12,8 @@ namespace Microsoft.AspNetCore.Mvc.Filters
         public static FilterFactoryResult GetAllFilters(
             IFilterProvider[] filterProviders,
             ActionContext actionContext
-        ) {
+        )
+        {
             if (filterProviders == null)
             {
                 throw new ArgumentNullException(nameof(filterProviders));
@@ -61,7 +62,8 @@ namespace Microsoft.AspNetCore.Mvc.Filters
                 allFiltersAreReusable
                 && filterProviders.Length == 1
                 && filterProviders[0] is DefaultFilterProvider defaultFilterProvider
-            ) {
+            )
+            {
                 // If we know we can safely cache all filters and only the default filter provider is registered, we can
                 // probably re-use filters between requests.
                 actionDescriptor.CachedResuableFilters = filters;
@@ -74,7 +76,8 @@ namespace Microsoft.AspNetCore.Mvc.Filters
             IFilterProvider[] filterProviders,
             ActionContext actionContext,
             FilterItem[] cachedFilterItems
-        ) {
+        )
+        {
             if (filterProviders == null)
             {
                 throw new ArgumentNullException(nameof(filterProviders));
@@ -116,7 +119,8 @@ namespace Microsoft.AspNetCore.Mvc.Filters
             IFilterProvider[] filterProviders,
             ActionContext actionContext,
             List<FilterItem> filterItems
-        ) {
+        )
+        {
             // Execute providers
             var context = new FilterProviderContext(actionContext, filterItems);
 

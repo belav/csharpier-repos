@@ -35,7 +35,8 @@ internal static partial class Interop
             int qyLength,
             byte[]? d,
             int dLength
-        ) {
+        )
+        {
             SafeEcKeyHandle key;
             int rc = EcKeyCreateByKeyParameters(
                 out key,

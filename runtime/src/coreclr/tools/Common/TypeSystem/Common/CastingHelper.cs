@@ -141,7 +141,8 @@ namespace Internal.TypeSystem
                 || otherType.IsPointer
                 || thisType.IsFunctionPointer
                 || otherType.IsFunctionPointer
-            ) {
+            )
+            {
                 return false;
             }
 
@@ -166,7 +167,8 @@ namespace Internal.TypeSystem
             this TypeDesc thisType,
             TypeDesc otherType,
             StackOverflowProtect protect
-        ) {
+        )
+        {
             if (thisType == otherType)
             {
                 return true;
@@ -208,7 +210,8 @@ namespace Internal.TypeSystem
             this GenericParameterDesc thisType,
             TypeDesc otherType,
             StackOverflowProtect protect
-        ) {
+        )
+        {
             // A boxed variable type can be cast to any of its constraints, or object, if none are specified
             if (otherType.IsObject)
             {
@@ -218,7 +221,8 @@ namespace Internal.TypeSystem
             if (
                 thisType.HasNotNullableValueTypeConstraint
                 && otherType.IsWellKnownType(WellKnownType.ValueType)
-            ) {
+            )
+            {
                 return true;
             }
 
@@ -237,7 +241,8 @@ namespace Internal.TypeSystem
             this ArrayType thisType,
             TypeDesc otherType,
             StackOverflowProtect protect
-        ) {
+        )
+        {
             // Casting the array to one of the base types or interfaces?
             if (otherType.IsDefType)
             {
@@ -252,7 +257,8 @@ namespace Internal.TypeSystem
                     thisType.Category == TypeFlags.SzArray
                     && otherType.Category == TypeFlags.Array
                     && ((ArrayType)otherType).Rank == 1
-                ) {
+                )
+                {
                     return thisType.CanCastParamTo(((ArrayType)otherType).ParameterType, protect);
                 }
 
@@ -274,7 +280,8 @@ namespace Internal.TypeSystem
             this ParameterizedType thisType,
             TypeDesc paramType,
             StackOverflowProtect protect
-        ) {
+        )
+        {
             // While boxed value classes inherit from object their
             // unboxed versions do not.  Parameterized types have the
             // unboxed version, thus, if the from type parameter is value
@@ -306,7 +313,8 @@ namespace Internal.TypeSystem
                 if (
                     GetNormalizedIntegralArrayElementType(fromParamUnderlyingType)
                     == GetNormalizedIntegralArrayElementType(toParamUnderlyingType)
-                ) {
+                )
+                {
                     return true;
                 }
             }
@@ -362,7 +370,8 @@ namespace Internal.TypeSystem
             this TypeDesc thisType,
             TypeDesc otherType,
             StackOverflowProtect protect
-        ) {
+        )
+        {
             if (otherType.IsInterface)
             {
                 return thisType.CanCastToInterface(otherType, protect);
@@ -377,7 +386,8 @@ namespace Internal.TypeSystem
             this TypeDesc thisType,
             TypeDesc otherType,
             StackOverflowProtect protect
-        ) {
+        )
+        {
             if (!otherType.HasVariance)
             {
                 return thisType.CanCastToNonVariantInterface(otherType, protect);
@@ -405,7 +415,8 @@ namespace Internal.TypeSystem
             this TypeDesc thisType,
             TypeDesc otherType,
             StackOverflowProtect protect
-        ) {
+        )
+        {
             if (otherType == thisType)
             {
                 return true;
@@ -426,7 +437,8 @@ namespace Internal.TypeSystem
             this TypeDesc thisType,
             TypeDesc otherType,
             StackOverflowProtect protectInput
-        ) {
+        )
+        {
             if (!thisType.HasSameTypeDefinition(otherType))
             {
                 return false;
@@ -489,7 +501,8 @@ namespace Internal.TypeSystem
             this TypeDesc thisType,
             TypeDesc otherType,
             StackOverflowProtect protect
-        ) {
+        )
+        {
             TypeDesc curType = thisType;
 
             if (curType.IsInterface && otherType.IsObject)
@@ -547,7 +560,8 @@ namespace Internal.TypeSystem
             this TypeDesc thisType,
             TypeDesc otherType,
             StackOverflowProtect protect
-        ) {
+        )
+        {
             TypeDesc fromUnderlyingType = thisType.UnderlyingType;
 
             if (fromUnderlyingType.IsGCPointer)

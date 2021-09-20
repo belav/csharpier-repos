@@ -14,11 +14,8 @@ namespace System.ComponentModel.EventBasedAsync.Tests
     {
         public AsyncCompletedEventArgsTests() : base(null, false, null) { }
 
-        private AsyncCompletedEventArgsTests(
-            Exception error,
-            bool cancelled,
-            object userState
-        ) : base(error, cancelled, userState) { }
+        private AsyncCompletedEventArgsTests(Exception error, bool cancelled, object userState)
+            : base(error, cancelled, userState) { }
 
         public static IEnumerable<object[]> TestInput
         {
@@ -41,7 +38,8 @@ namespace System.ComponentModel.EventBasedAsync.Tests
             Exception expectedException,
             bool expectedCancelled,
             object expectedState
-        ) {
+        )
+        {
             var target = new AsyncCompletedEventArgsTests(
                 expectedException,
                 expectedCancelled,
@@ -58,7 +56,8 @@ namespace System.ComponentModel.EventBasedAsync.Tests
             Exception expectedError,
             bool cancelled,
             Type expectedExceptionType
-        ) {
+        )
+        {
             var target = new AsyncCompletedEventArgsTests(expectedError, cancelled, null);
 
             if (expectedExceptionType == null) // if null should NOT throw

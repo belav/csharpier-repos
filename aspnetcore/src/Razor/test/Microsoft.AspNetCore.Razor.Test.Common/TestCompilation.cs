@@ -71,7 +71,8 @@ namespace Microsoft.CodeAnalysis
                     assembly,
                     out IEnumerable<MetadataReference> metadataReferences
                 )
-            ) {
+            )
+            {
                 metadataReferences = GetMetadataReferences(assembly);
                 _referenceCache.TryAdd(assembly, metadataReferences);
             }

@@ -24,7 +24,8 @@ namespace System.Web.Http.ModelBinding
             ModelMetadataProvider metadataProvider,
             HttpActionContext actionContext,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             string name = Descriptor.ParameterName;
             HttpRequestMessage request = actionContext.ControllerContext.Request;
             actionContext.ActionArguments.Add(name, request);

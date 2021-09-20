@@ -44,7 +44,8 @@ namespace System.ComponentModel
             Type type,
             object instance,
             bool allowExceptions
-        ) {
+        )
+        {
             LicFileLicense lic = null;
 
             Debug.Assert(context != null, "No context provided!");

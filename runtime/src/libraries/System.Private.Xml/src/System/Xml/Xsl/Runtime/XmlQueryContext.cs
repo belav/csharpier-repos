@@ -48,7 +48,8 @@ namespace System.Xml.Xsl.Runtime
             XmlResolver dataSources,
             XsltArgumentList argList,
             WhitespaceRuleLookup wsRules
-        ) {
+        )
+        {
             _runtime = runtime;
             _dataSources = dataSources;
             _dataSourceCache = new Hashtable();
@@ -176,7 +177,8 @@ namespace System.Xml.Xsl.Runtime
             object dataSource,
             string uriRelative,
             Uri uriResolved
-        ) {
+        )
+        {
             Debug.Assert(dataSource != null, "GetType() below assumes dataSource is not null");
             Stream stream = dataSource as Stream;
             if (stream != null)
@@ -290,7 +292,8 @@ namespace System.Xml.Xsl.Runtime
             string name,
             string namespaceUri,
             IList<XPathItem>[] args
-        ) {
+        )
+        {
             object instance;
             object[] objActualArgs;
             XmlQueryType xmlTypeFormalArg;

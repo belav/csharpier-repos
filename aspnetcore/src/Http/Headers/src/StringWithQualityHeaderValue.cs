@@ -146,7 +146,8 @@ namespace Microsoft.Net.Http.Headers
         public static bool TryParse(
             StringSegment input,
             [NotNullWhen(true)] out StringWithQualityHeaderValue parsedValue
-        ) {
+        )
+        {
             var index = 0;
             return SingleValueParser.TryParseValue(input, ref index, out parsedValue!);
         }
@@ -180,7 +181,8 @@ namespace Microsoft.Net.Http.Headers
         public static bool TryParseList(
             IList<string>? input,
             [NotNullWhen(true)] out IList<StringWithQualityHeaderValue>? parsedValues
-        ) {
+        )
+        {
             return MultipleValueParser.TryParseValues(input, out parsedValues);
         }
 
@@ -193,7 +195,8 @@ namespace Microsoft.Net.Http.Headers
         public static bool TryParseStrictList(
             IList<string>? input,
             [NotNullWhen(true)] out IList<StringWithQualityHeaderValue>? parsedValues
-        ) {
+        )
+        {
             return MultipleValueParser.TryParseStrictValues(input, out parsedValues);
         }
 
@@ -201,7 +204,8 @@ namespace Microsoft.Net.Http.Headers
             StringSegment input,
             int startIndex,
             out StringWithQualityHeaderValue? parsedValue
-        ) {
+        )
+        {
             Contract.Requires(startIndex >= 0);
 
             parsedValue = null;
@@ -247,7 +251,8 @@ namespace Microsoft.Net.Http.Headers
             StringSegment input,
             StringWithQualityHeaderValue result,
             ref int index
-        ) {
+        )
+        {
             var current = index;
 
             // See if we have a quality value by looking for "q"
@@ -280,7 +285,8 @@ namespace Microsoft.Net.Http.Headers
                     out var quality,
                     out var qualityLength
                 )
-            ) {
+            )
+            {
                 return false;
             }
 

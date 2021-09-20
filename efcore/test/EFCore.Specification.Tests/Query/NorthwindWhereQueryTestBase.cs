@@ -155,7 +155,8 @@ namespace Microsoft.EntityFrameworkCore.Query
         [MemberData(nameof(IsAsyncData))]
         public virtual async Task Where_method_call_nullable_type_closure_via_query_cache(
             bool async
-        ) {
+        )
+        {
             var city = new City { Int = 2 };
 
             await AssertQuery(
@@ -177,7 +178,8 @@ namespace Microsoft.EntityFrameworkCore.Query
         [MemberData(nameof(IsAsyncData))]
         public virtual async Task Where_method_call_nullable_type_reverse_closure_via_query_cache(
             bool async
-        ) {
+        )
+        {
             var city = new City { NullableInt = 1 };
 
             await AssertQuery(
@@ -431,7 +433,8 @@ namespace Microsoft.EntityFrameworkCore.Query
         [MemberData(nameof(IsAsyncData))]
         public virtual async Task Where_new_instance_field_access_closure_via_query_cache(
             bool async
-        ) {
+        )
+        {
             var city = "London";
             await AssertQuery(
                 async,
@@ -513,7 +516,8 @@ namespace Microsoft.EntityFrameworkCore.Query
         [MemberData(nameof(IsAsyncData))]
         public virtual async Task Where_simple_closure_via_query_cache_nullable_type_reverse(
             bool async
-        ) {
+        )
+        {
             int? reportsTo = null;
 
             await AssertQuery(
@@ -923,7 +927,8 @@ namespace Microsoft.EntityFrameworkCore.Query
         [MemberData(nameof(IsAsyncData))]
         public virtual async Task Where_equals_on_mismatched_types_nullable_long_nullable_int(
             bool async
-        ) {
+        )
+        {
             ulong? nullableLongPrm = 2;
 
             await AssertQuery(
@@ -1559,7 +1564,8 @@ namespace Microsoft.EntityFrameworkCore.Query
         [MemberData(nameof(IsAsyncData))]
         public virtual Task Where_negated_boolean_expression_compared_to_another_negated_boolean_expression(
             bool async
-        ) {
+        )
+        {
             return AssertQuery(
                 async,
                 ss => ss.Set<Product>().Where(p => !(p.ProductID > 50) == !(p.ProductID > 20)),
@@ -1604,7 +1610,8 @@ namespace Microsoft.EntityFrameworkCore.Query
         [MemberData(nameof(IsAsyncData))]
         public virtual Task Where_bool_member_and_parameter_compared_to_binary_expression_nested(
             bool async
-        ) {
+        )
+        {
             var prm = true;
 
             return AssertQuery(
@@ -2404,7 +2411,8 @@ namespace Microsoft.EntityFrameworkCore.Query
         [MemberData(nameof(IsAsyncData))]
         public virtual Task Filter_non_nullable_value_after_FirstOrDefault_on_empty_collection(
             bool async
-        ) {
+        )
+        {
             return AssertQuery(
                 async,
                 ss =>
@@ -2450,7 +2458,8 @@ namespace Microsoft.EntityFrameworkCore.Query
         [MemberData(nameof(IsAsyncData))]
         public virtual Task Using_same_parameter_twice_in_query_generates_one_sql_parameter(
             bool async
-        ) {
+        )
+        {
             var i = 10;
             return AssertQuery(
                 async,
@@ -2814,7 +2823,8 @@ namespace Microsoft.EntityFrameworkCore.Query
         [MemberData(nameof(IsAsyncData))]
         public virtual Task Multiple_OrElse_on_same_column_with_null_constant_comparison_converted_to_in(
             bool async
-        ) {
+        )
+        {
             return AssertQuery(
                 async,
                 ss =>
@@ -2834,7 +2844,8 @@ namespace Microsoft.EntityFrameworkCore.Query
         [MemberData(nameof(IsAsyncData))]
         public virtual Task Constant_array_Contains_OrElse_comparison_with_constant_gets_combined_to_one_in(
             bool async
-        ) {
+        )
+        {
             return AssertQuery(
                 async,
                 ss =>
@@ -2852,7 +2863,8 @@ namespace Microsoft.EntityFrameworkCore.Query
         [MemberData(nameof(IsAsyncData))]
         public virtual Task Constant_array_Contains_OrElse_comparison_with_constant_gets_combined_to_one_in_with_overlap(
             bool async
-        ) {
+        )
+        {
             return AssertQuery(
                 async,
                 ss =>
@@ -2871,7 +2883,8 @@ namespace Microsoft.EntityFrameworkCore.Query
         [MemberData(nameof(IsAsyncData))]
         public virtual Task Constant_array_Contains_OrElse_another_Contains_gets_combined_to_one_in_with_overlap(
             bool async
-        ) {
+        )
+        {
             return AssertQuery(
                 async,
                 ss =>
@@ -2889,7 +2902,8 @@ namespace Microsoft.EntityFrameworkCore.Query
         [MemberData(nameof(IsAsyncData))]
         public virtual Task Constant_array_Contains_AndAlso_another_Contains_gets_combined_to_one_in_with_overlap(
             bool async
-        ) {
+        )
+        {
             return AssertQuery(
                 async,
                 ss =>
@@ -2907,7 +2921,8 @@ namespace Microsoft.EntityFrameworkCore.Query
         [MemberData(nameof(IsAsyncData))]
         public virtual Task Multiple_AndAlso_on_same_column_converted_to_in_using_parameters(
             bool async
-        ) {
+        )
+        {
             var prm1 = "ALFKI";
             var prm2 = "ANATR";
             var prm3 = "ANTON";
@@ -2928,7 +2943,8 @@ namespace Microsoft.EntityFrameworkCore.Query
         [MemberData(nameof(IsAsyncData))]
         public virtual Task Array_of_parameters_Contains_OrElse_comparison_with_constant_gets_combined_to_one_in(
             bool async
-        ) {
+        )
+        {
             var prm1 = "ALFKI";
             var prm2 = "ANATR";
 
@@ -2949,7 +2965,8 @@ namespace Microsoft.EntityFrameworkCore.Query
         [MemberData(nameof(IsAsyncData))]
         public virtual Task Multiple_OrElse_on_same_column_with_null_parameter_comparison_converted_to_in(
             bool async
-        ) {
+        )
+        {
             string prm = null;
 
             return AssertQuery(
@@ -2986,7 +3003,8 @@ namespace Microsoft.EntityFrameworkCore.Query
         [MemberData(nameof(IsAsyncData))]
         public virtual Task Parameter_array_Contains_OrElse_comparison_with_parameter_with_overlap(
             bool async
-        ) {
+        )
+        {
             var array = new[] { "ALFKI", "ANATR" };
             var prm1 = "ANTON";
             var prm2 = "ALFKI";
@@ -3043,7 +3061,8 @@ namespace Microsoft.EntityFrameworkCore.Query
         [MemberData(nameof(IsAsyncData))]
         public virtual Task Filter_with_property_compared_to_null_wrapped_in_explicit_convert_to_object(
             bool async
-        ) {
+        )
+        {
             return AssertQuery(
                 async,
                 ss => ss.Set<Customer>().Where(c => (object)c.Region == null),

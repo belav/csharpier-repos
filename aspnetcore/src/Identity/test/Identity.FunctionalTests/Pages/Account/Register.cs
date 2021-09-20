@@ -40,7 +40,8 @@ namespace Microsoft.AspNetCore.Identity.FunctionalTests.Account
         public async Task<Index> SubmitRegisterFormForValidUserAsync(
             string userName,
             string password
-        ) {
+        )
+        {
             var registered = await Client.SendAsync(
                 _registerForm,
                 new Dictionary<string, string>()
@@ -63,7 +64,8 @@ namespace Microsoft.AspNetCore.Identity.FunctionalTests.Account
             string userName,
             string password,
             bool hasRealEmail = false
-        ) {
+        )
+        {
             var registered = await Client.SendAsync(
                 _registerForm,
                 new Dictionary<string, string>()

@@ -30,7 +30,8 @@ namespace System.Buffers.Text
             out decimal value,
             out int bytesConsumed,
             char standardFormat = default
-        ) {
+        )
+        {
             ParseNumberOptions options;
             switch (standardFormat)
             {
@@ -66,7 +67,8 @@ namespace System.Buffers.Text
                     options,
                     out bool textUsedExponentNotation
                 )
-            ) {
+            )
+            {
                 value = default;
                 return false;
             }

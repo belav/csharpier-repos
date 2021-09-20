@@ -263,7 +263,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Builders
         [Obsolete("Use InMemoryEntityTypeBuilderExtensions.ToInMemoryQuery")]
         public virtual EntityTypeBuilder<TEntity> ToQuery(
             Expression<Func<IQueryable<TEntity>>> query
-        ) {
+        )
+        {
             Check.NotNull(query, nameof(query));
 
             Builder.HasDefiningQuery(query, ConfigurationSource.Explicit);
@@ -1501,7 +1502,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Builders
         /// <returns> A builder that allows the discriminator property to be configured. </returns>
         public virtual DiscriminatorBuilder<TDiscriminator> HasDiscriminator<TDiscriminator>(
             Expression<Func<TEntity, TDiscriminator>> propertyExpression
-        ) {
+        )
+        {
             Check.NotNull(propertyExpression, nameof(propertyExpression));
 
             return new DiscriminatorBuilder<TDiscriminator>(

@@ -83,7 +83,8 @@ namespace Microsoft.CSharp.RuntimeBinder.Semantics
             AggregateSymbol aggregate,
             AggregateType outer,
             TypeArray args
-        ) {
+        )
+        {
             RuntimeBinder.EnsureLockIsTaken();
             s_aggregateTable.TryGetValue(
                 MakeKey(aggregate, MakeKey(outer, args)),
@@ -97,7 +98,8 @@ namespace Microsoft.CSharp.RuntimeBinder.Semantics
             AggregateType outer,
             TypeArray args,
             AggregateType ats
-        ) {
+        )
+        {
             RuntimeBinder.EnsureLockIsTaken();
             Debug.Assert(LookupAggregate(aggregate, outer, args) == null);
             s_aggregateTable.Add(MakeKey(aggregate, MakeKey(outer, args)), ats);
@@ -135,7 +137,8 @@ namespace Microsoft.CSharp.RuntimeBinder.Semantics
             CType elementType,
             bool isOut,
             ParameterModifierType parameterModifier
-        ) {
+        )
+        {
             RuntimeBinder.EnsureLockIsTaken();
             Debug.Assert(LookupParameterModifier(elementType, isOut) == null);
             s_parameterModifierTable.Add(

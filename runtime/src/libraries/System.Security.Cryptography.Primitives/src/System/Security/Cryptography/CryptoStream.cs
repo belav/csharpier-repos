@@ -30,18 +30,16 @@ namespace System.Security.Cryptography
 
         // Constructors
 
-        public CryptoStream(
-            Stream stream,
-            ICryptoTransform transform,
-            CryptoStreamMode mode
-        ) : this(stream, transform, mode, false) { }
+        public CryptoStream(Stream stream, ICryptoTransform transform, CryptoStreamMode mode)
+            : this(stream, transform, mode, false) { }
 
         public CryptoStream(
             Stream stream,
             ICryptoTransform transform,
             CryptoStreamMode mode,
             bool leaveOpen
-        ) {
+        )
+        {
             _stream = stream;
             _transform = transform;
             _leaveOpen = leaveOpen;
@@ -131,7 +129,8 @@ namespace System.Security.Cryptography
         private async ValueTask FlushFinalBlockAsync(
             bool useAsync,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             if (_finalBlockTransformed)
                 throw new NotSupportedException(SR.Cryptography_CryptoStream_FlushFinalBlockTwice);
             _finalBlockTransformed = true;
@@ -228,7 +227,8 @@ namespace System.Security.Cryptography
             int offset,
             int count,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             CheckReadArguments(buffer, offset, count);
             return ReadAsyncInternal(buffer.AsMemory(offset, count), cancellationToken).AsTask();
         }
@@ -237,7 +237,8 @@ namespace System.Security.Cryptography
         public override ValueTask<int> ReadAsync(
             Memory<byte> buffer,
             CancellationToken cancellationToken = default
-        ) {
+        )
+        {
             if (!CanRead)
                 return ValueTask.FromException<int>(
                     new NotSupportedException(SR.NotSupported_UnreadableStream)
@@ -249,7 +250,8 @@ namespace System.Security.Cryptography
         private async ValueTask<int> ReadAsyncInternal(
             Memory<byte> buffer,
             CancellationToken cancellationToken = default
-        ) {
+        )
+        {
             // To avoid a race with a stream's position pointer & generating race
             // conditions with internal buffer indexes in our own streams that
             // don't natively support async IO operations when there are multiple
@@ -343,7 +345,8 @@ namespace System.Security.Cryptography
             Memory<byte> buffer,
             CancellationToken cancellationToken,
             bool useAsync
-        ) {
+        )
+        {
             // read <= count bytes from the input stream, transforming as we go.
             // Basic idea: first we deliver any bytes we already have in the
             // _OutputBuffer, because we know they're good.  Then, if asked to deliver
@@ -636,7 +639,8 @@ namespace System.Security.Cryptography
             int offset,
             int count,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             CheckWriteArguments(buffer, offset, count);
             return WriteAsyncInternal(buffer.AsMemory(offset, count), cancellationToken).AsTask();
         }
@@ -645,7 +649,8 @@ namespace System.Security.Cryptography
         public override ValueTask WriteAsync(
             ReadOnlyMemory<byte> buffer,
             CancellationToken cancellationToken = default
-        ) {
+        )
+        {
             if (!CanWrite)
                 return ValueTask.FromException(
                     new NotSupportedException(SR.NotSupported_UnwritableStream)
@@ -657,7 +662,8 @@ namespace System.Security.Cryptography
         private async ValueTask WriteAsyncInternal(
             ReadOnlyMemory<byte> buffer,
             CancellationToken cancellationToken = default
-        ) {
+        )
+        {
             // To avoid a race with a stream's position pointer & generating race
             // conditions with internal buffer indexes in our own streams that
             // don't natively support async IO operations when there are multiple
@@ -712,7 +718,8 @@ namespace System.Security.Cryptography
             ReadOnlyMemory<byte> buffer,
             CancellationToken cancellationToken,
             bool useAsync
-        ) {
+        )
+        {
             // write <= count bytes to the output stream, transforming as we go.
             // Basic idea: using bytes in the _InputBuffer first, make whole blocks,
             // transform them, and write them out.  Cache any remaining bytes in the _InputBuffer.
@@ -875,7 +882,8 @@ namespace System.Security.Cryptography
                 ReadOnlyMemory<byte> inputBuffer,
                 byte[] outputBuffer,
                 int outputOffset
-            ) {
+            )
+            {
                 if (MemoryMarshal.TryGetArray(inputBuffer, out ArraySegment<byte> segment))
                 {
                     // Skip the copy if readonlymemory is actually an array.
@@ -958,7 +966,8 @@ namespace System.Security.Cryptography
             Stream destination,
             int bufferSize,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             CheckCopyToArguments(destination, bufferSize);
             return CopyToAsyncInternal(destination, bufferSize, cancellationToken);
         }
@@ -967,7 +976,8 @@ namespace System.Security.Cryptography
             Stream destination,
             int bufferSize,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             // Use ArrayPool<byte>.Shared instead of CryptoPool because the array is passed out.
             byte[] rentedBuffer = ArrayPool<byte>.Shared.Rent(bufferSize);
             // Pin the array for security.

@@ -70,7 +70,8 @@ namespace System.Web.Mvc
             if (
                 _usersSplit.Length > 0
                 && !_usersSplit.Contains(user.Identity.Name, StringComparer.OrdinalIgnoreCase)
-            ) {
+            )
+            {
                 return false;
             }
 
@@ -86,7 +87,8 @@ namespace System.Web.Mvc
             HttpContext context,
             object data,
             ref HttpValidationStatus validationStatus
-        ) {
+        )
+        {
             validationStatus = OnCacheAuthorization(new HttpContextWrapper(context));
         }
 

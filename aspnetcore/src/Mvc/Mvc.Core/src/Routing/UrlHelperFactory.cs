@@ -51,7 +51,8 @@ namespace Microsoft.AspNetCore.Mvc.Routing
             if (
                 httpContext.Items.TryGetValue(typeof(IUrlHelper), out var value)
                 && value is IUrlHelper urlHelper
-            ) {
+            )
+            {
                 return urlHelper;
             }
 

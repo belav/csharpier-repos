@@ -61,7 +61,8 @@ namespace Microsoft.AspNetCore.Mvc.FunctionalTests
         [InlineData("2")]
         public async Task AttributeRoutedAction_WithAmbiguousVersionedRoutes_CanBeDisambiguatedUsingOrder(
             string version
-        ) {
+        )
+        {
             // Arrange
             var query = "?version=" + version;
             var message = new HttpRequestMessage(
@@ -177,7 +178,8 @@ namespace Microsoft.AspNetCore.Mvc.FunctionalTests
         [InlineData("4")]
         public async Task VersionedApi_CanReachOtherVersionOperations_OnTheSameController(
             string version
-        ) {
+        )
+        {
             // Arrange
             var message = new HttpRequestMessage(
                 HttpMethod.Post,
@@ -227,7 +229,8 @@ namespace Microsoft.AspNetCore.Mvc.FunctionalTests
             string method,
             string action,
             string version
-        ) {
+        )
+        {
             // Arrange
             var message = new HttpRequestMessage(
                 new HttpMethod(method),
@@ -255,7 +258,8 @@ namespace Microsoft.AspNetCore.Mvc.FunctionalTests
         [InlineData("DELETE")]
         public async Task VersionedApi_CanNotReachOtherVersionOperationsWithParameters_OnTheSameController_WithNoVersionSpecified(
             string method
-        ) {
+        )
+        {
             // Arrange
             var message = new HttpRequestMessage(
                 new HttpMethod(method),
@@ -278,7 +282,8 @@ namespace Microsoft.AspNetCore.Mvc.FunctionalTests
         [InlineData("5")]
         public async Task VersionedApi_CanUseOrderToDisambiguate_OverlappingVersionRanges(
             string version
-        ) {
+        )
+        {
             // Arrange
             var message = new HttpRequestMessage(
                 HttpMethod.Get,
@@ -304,7 +309,8 @@ namespace Microsoft.AspNetCore.Mvc.FunctionalTests
         [InlineData("6")]
         public async Task VersionedApi_OverlappingVersionRanges_FallsBackToLowerOrderAction(
             string version
-        ) {
+        )
+        {
             // Arrange
             var message = new HttpRequestMessage(
                 HttpMethod.Get,
@@ -330,7 +336,8 @@ namespace Microsoft.AspNetCore.Mvc.FunctionalTests
         public async Task VersionedApi_CanReachV1Operations_OnTheOriginalController_WithNoVersionSpecified(
             string method,
             string action
-        ) {
+        )
+        {
             // Arrange
             var message = new HttpRequestMessage(new HttpMethod(method), "http://localhost/Movies");
 
@@ -353,7 +360,8 @@ namespace Microsoft.AspNetCore.Mvc.FunctionalTests
         public async Task VersionedApi_CanReachV1Operations_OnTheOriginalController_WithVersionSpecified(
             string method,
             string action
-        ) {
+        )
+        {
             // Arrange
             var message = new HttpRequestMessage(
                 new HttpMethod(method),
@@ -380,7 +388,8 @@ namespace Microsoft.AspNetCore.Mvc.FunctionalTests
         public async Task VersionedApi_CanReachV1OperationsWithParameters_OnTheOriginalController(
             string method,
             string action
-        ) {
+        )
+        {
             // Arrange
             var message = new HttpRequestMessage(
                 new HttpMethod(method),
@@ -406,7 +415,8 @@ namespace Microsoft.AspNetCore.Mvc.FunctionalTests
         public async Task VersionedApi_CanReachV1OperationsWithParameters_OnTheOriginalController_WithVersionSpecified(
             string method,
             string action
-        ) {
+        )
+        {
             // Arrange
             var message = new HttpRequestMessage(
                 new HttpMethod(method),
@@ -454,7 +464,8 @@ namespace Microsoft.AspNetCore.Mvc.FunctionalTests
         [InlineData("v2/Pets")]
         public async Task VersionedApi_CanHaveTwoRoutesWithVersionOnTheUrl_OnTheSameAction(
             string url
-        ) {
+        )
+        {
             // Arrange
             var message = new HttpRequestMessage(HttpMethod.Get, "http://localhost/" + url);
 
@@ -477,7 +488,8 @@ namespace Microsoft.AspNetCore.Mvc.FunctionalTests
         public async Task VersionedApi_CanHaveTwoRoutesWithVersionOnTheUrl_OnDifferentActions(
             string url,
             string version
-        ) {
+        )
+        {
             // Arrange
             var message = new HttpRequestMessage(HttpMethod.Get, "http://localhost/" + url);
 
@@ -500,7 +512,8 @@ namespace Microsoft.AspNetCore.Mvc.FunctionalTests
         public async Task VersionedApi_CanHaveTwoRoutesWithVersionOnTheUrl_OnDifferentActions_WithInlineConstraint(
             string url,
             string version
-        ) {
+        )
+        {
             // Arrange
             var message = new HttpRequestMessage(HttpMethod.Post, "http://localhost/" + url);
 
@@ -527,7 +540,8 @@ namespace Microsoft.AspNetCore.Mvc.FunctionalTests
             string url,
             string query,
             string actionName
-        ) {
+        )
+        {
             // Arrange
             var message = new HttpRequestMessage(HttpMethod.Get, "http://localhost/" + url + query);
 
@@ -593,7 +607,8 @@ namespace Microsoft.AspNetCore.Mvc.FunctionalTests
         [InlineData("2")]
         public async Task VersionedApi_MultipleVersionsUsingAttributeRouting_OnTheSameMethod(
             string version
-        ) {
+        )
+        {
             // Arrange
             var path = "/" + version + "/Vouchers?version=" + version;
             var message = new HttpRequestMessage(HttpMethod.Get, "http://localhost" + path);

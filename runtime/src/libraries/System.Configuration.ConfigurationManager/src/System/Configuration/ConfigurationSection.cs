@@ -48,7 +48,8 @@ namespace System.Configuration
             ConfigurationElement parentElement,
             string name,
             ConfigurationSaveMode saveMode
-        ) {
+        )
+        {
             if (
                 (CurrentConfiguration != null)
                 && (CurrentConfiguration.TargetFramework != null)
@@ -88,7 +89,8 @@ namespace System.Configuration
             string propertyName,
             FrameworkName targetFramework,
             ConfigurationElement parentConfigurationElement
-        ) {
+        )
+        {
             return true;
         }
 
@@ -96,13 +98,15 @@ namespace System.Configuration
             ConfigurationElement element,
             string elementName,
             FrameworkName targetFramework
-        ) {
+        )
+        {
             return true;
         }
 
         protected internal virtual bool ShouldSerializeSectionInTargetVersion(
             FrameworkName targetFramework
-        ) {
+        )
+        {
             return true;
         }
     }

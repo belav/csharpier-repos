@@ -29,7 +29,8 @@ namespace System.Net.Http
         [TestDataSet(typeof(MimeBodyPartTest), "BadMultipartStreamProviders")]
         public async Task GetOutputStream_ThrowsOnInvalidStreamProvider(
             MultipartStreamProvider streamProvider
-        ) {
+        )
+        {
             // Arrange
             HttpContent parent = new StringContent("hello");
             MimeBodyPart bodypart = new MimeBodyPart(streamProvider, 1024, parent);

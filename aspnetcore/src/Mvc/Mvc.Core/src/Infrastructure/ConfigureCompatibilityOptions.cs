@@ -32,7 +32,8 @@ namespace Microsoft.AspNetCore.Mvc.Infrastructure
         protected ConfigureCompatibilityOptions(
             ILoggerFactory loggerFactory,
             IOptions<MvcCompatibilityOptions> compatibilityOptions
-        ) {
+        )
+        {
             if (loggerFactory == null)
             {
                 throw new ArgumentNullException(nameof(loggerFactory));
@@ -78,7 +79,8 @@ namespace Microsoft.AspNetCore.Mvc.Infrastructure
         private void ConfigureSwitch(
             ICompatibilitySwitch @switch,
             IReadOnlyDictionary<string, object> defaultValues
-        ) {
+        )
+        {
             if (@switch.IsValueSet)
             {
                 _logger.LogDebug(

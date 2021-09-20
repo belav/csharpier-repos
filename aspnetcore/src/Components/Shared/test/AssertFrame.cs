@@ -30,7 +30,8 @@ namespace Microsoft.AspNetCore.Components.Test.Helpers
             RenderTreeFrame frame,
             string markupContent,
             int? sequence = null
-        ) {
+        )
+        {
             Assert.Equal(RenderTreeFrameType.Markup, frame.FrameType);
             Assert.Equal(markupContent, frame.MarkupContent);
             Assert.Equal(0, frame.ElementSubtreeLength);
@@ -42,7 +43,8 @@ namespace Microsoft.AspNetCore.Components.Test.Helpers
             string elementName,
             int subtreeLength,
             int? sequence = null
-        ) {
+        )
+        {
             Assert.Equal(RenderTreeFrameType.Element, frame.FrameType);
             Assert.Equal(elementName, frame.ElementName);
             Assert.Equal(subtreeLength, frame.ElementSubtreeLength);
@@ -53,7 +55,8 @@ namespace Microsoft.AspNetCore.Components.Test.Helpers
             RenderTreeFrame frame,
             string attributeName,
             int? sequence = null
-        ) {
+        )
+        {
             Assert.Equal(RenderTreeFrameType.Attribute, frame.FrameType);
             Assert.Equal(attributeName, frame.AttributeName);
             AssertFrame.Sequence(frame, sequence);
@@ -64,7 +67,8 @@ namespace Microsoft.AspNetCore.Components.Test.Helpers
             string attributeName,
             string attributeValue,
             int? sequence = null
-        ) {
+        )
+        {
             AssertFrame.Attribute(frame, attributeName, sequence);
             Assert.Equal(attributeValue, frame.AttributeValue);
         }
@@ -74,7 +78,8 @@ namespace Microsoft.AspNetCore.Components.Test.Helpers
             string attributeName,
             Action<EventArgs> attributeEventHandlerValue,
             int? sequence = null
-        ) {
+        )
+        {
             AssertFrame.Attribute(frame, attributeName, sequence);
             Assert.Equal(attributeEventHandlerValue, frame.AttributeValue);
         }
@@ -84,7 +89,8 @@ namespace Microsoft.AspNetCore.Components.Test.Helpers
             string attributeName,
             object attributeValue,
             int? sequence = null
-        ) {
+        )
+        {
             AssertFrame.Attribute(frame, attributeName, sequence);
             Assert.Equal(attributeValue, frame.AttributeValue);
         }
@@ -94,7 +100,8 @@ namespace Microsoft.AspNetCore.Components.Test.Helpers
             string attributeName,
             Type valueType,
             int? sequence = null
-        ) {
+        )
+        {
             AssertFrame.Attribute(frame, attributeName, sequence);
             Assert.IsType(valueType, frame.AttributeValue);
         }
@@ -104,7 +111,8 @@ namespace Microsoft.AspNetCore.Components.Test.Helpers
             string attributeName,
             Action<object> attributeValidator,
             int? sequence = null
-        ) {
+        )
+        {
             AssertFrame.Attribute(frame, attributeName, sequence);
             attributeValidator(frame.AttributeValue);
         }
@@ -123,7 +131,8 @@ namespace Microsoft.AspNetCore.Components.Test.Helpers
             string typeName,
             int? subtreeLength = null,
             int? sequence = null
-        ) {
+        )
+        {
             Assert.Equal(RenderTreeFrameType.Component, frame.FrameType);
             Assert.Equal(typeName, frame.ComponentType.FullName);
             if (subtreeLength.HasValue)
@@ -170,7 +179,8 @@ namespace Microsoft.AspNetCore.Components.Test.Helpers
             RenderTreeFrame frame,
             Action<ElementReference> action,
             int? sequence = null
-        ) {
+        )
+        {
             Assert.Equal(RenderTreeFrameType.ElementReferenceCapture, frame.FrameType);
             Assert.Same(action, frame.ElementReferenceCaptureAction);
             AssertFrame.Sequence(frame, sequence);
@@ -187,7 +197,8 @@ namespace Microsoft.AspNetCore.Components.Test.Helpers
             RenderTreeFrame frame,
             Action<object> action,
             int? sequence = null
-        ) {
+        )
+        {
             Assert.Equal(RenderTreeFrameType.ComponentReferenceCapture, frame.FrameType);
             Assert.Same(action, frame.ComponentReferenceCaptureAction);
             AssertFrame.Sequence(frame, sequence);

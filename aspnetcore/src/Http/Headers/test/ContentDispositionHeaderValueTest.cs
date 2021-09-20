@@ -263,7 +263,8 @@ namespace Microsoft.Net.Http.Headers
         public void SetHttpFileName_ShouldSanitizeFileNameWhereNeeded(
             string httpFileName,
             string expectedFileName
-        ) {
+        )
+        {
             var contentDisposition = new ContentDispositionHeaderValue("inline");
             contentDisposition.SetHttpFileName(httpFileName);
             Assert.Equal(expectedFileName, contentDisposition.FileName);
@@ -841,7 +842,8 @@ namespace Microsoft.Net.Http.Headers
         public void ContentDispositionHeaderValue_ParseValid_Success(
             string input,
             ContentDispositionHeaderValue expected
-        ) {
+        )
+        {
             // System.Diagnostics.Debugger.Launch();
             var result = ContentDispositionHeaderValue.Parse(input);
             Assert.Equal(expected, result);

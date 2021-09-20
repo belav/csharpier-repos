@@ -80,7 +80,8 @@ namespace Microsoft.CodeAnalysis.Features.RQName
                 var currentType = type;
                 currentType != null;
                 currentType = currentType.ContainingType
-            ) {
+            )
+            {
                 typeInfos.Insert(
                     0,
                     new RQUnconstructedTypeInfo(currentType.Name, currentType.TypeParameters.Length)
@@ -152,7 +153,8 @@ namespace Microsoft.CodeAnalysis.Features.RQName
 
         private static IList<RQParameter>? BuildParameterList(
             ImmutableArray<IParameterSymbol> parameters
-        ) {
+        )
+        {
             var parameterList = new List<RQParameter>();
 
             foreach (var parameter in parameters)
@@ -225,7 +227,8 @@ namespace Microsoft.CodeAnalysis.Features.RQName
                 || symbol.MethodKind == MethodKind.EventRemove
                 || symbol.MethodKind == MethodKind.PropertySet
                 || symbol.MethodKind == MethodKind.PropertyGet
-            ) {
+            )
+            {
                 return null;
             }
 

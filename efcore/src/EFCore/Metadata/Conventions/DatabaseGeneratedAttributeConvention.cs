@@ -37,7 +37,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
             DatabaseGeneratedAttribute attribute,
             MemberInfo clrMember,
             IConventionContext context
-        ) {
+        )
+        {
             var valueGenerated =
                 attribute.DatabaseGeneratedOption == DatabaseGeneratedOption.Identity
                     ? ValueGenerated.OnAdd

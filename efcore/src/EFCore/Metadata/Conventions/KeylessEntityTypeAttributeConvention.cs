@@ -30,7 +30,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
             IConventionEntityTypeBuilder entityTypeBuilder,
             KeylessAttribute attribute,
             IConventionContext<IConventionEntityTypeBuilder> context
-        ) {
+        )
+        {
             entityTypeBuilder.HasNoKey(fromDataAnnotation: true);
         }
     }

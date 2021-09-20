@@ -62,7 +62,8 @@ namespace System.Net.Http
             this HttpContent content,
             Type type,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             return content.ReadAsAsync(
                 type,
                 DefaultMediaTypeFormatterCollection,
@@ -83,7 +84,8 @@ namespace System.Net.Http
             this HttpContent content,
             Type type,
             IEnumerable<MediaTypeFormatter> formatters
-        ) {
+        )
+        {
             return ReadAsAsync<object>(content, type, formatters, null);
         }
 
@@ -102,7 +104,8 @@ namespace System.Net.Http
             Type type,
             IEnumerable<MediaTypeFormatter> formatters,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             return ReadAsAsync<object>(content, type, formatters, null, cancellationToken);
         }
 
@@ -121,7 +124,8 @@ namespace System.Net.Http
             Type type,
             IEnumerable<MediaTypeFormatter> formatters,
             IFormatterLogger formatterLogger
-        ) {
+        )
+        {
             return ReadAsAsync<object>(content, type, formatters, formatterLogger);
         }
 
@@ -142,7 +146,8 @@ namespace System.Net.Http
             IEnumerable<MediaTypeFormatter> formatters,
             IFormatterLogger formatterLogger,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             return ReadAsAsync<object>(
                 content,
                 type,
@@ -177,7 +182,8 @@ namespace System.Net.Http
         public static Task<T> ReadAsAsync<T>(
             this HttpContent content,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             return content.ReadAsAsync<T>(DefaultMediaTypeFormatterCollection, cancellationToken);
         }
 
@@ -192,7 +198,8 @@ namespace System.Net.Http
         public static Task<T> ReadAsAsync<T>(
             this HttpContent content,
             IEnumerable<MediaTypeFormatter> formatters
-        ) {
+        )
+        {
             return ReadAsAsync<T>(content, typeof(T), formatters, null);
         }
 
@@ -209,7 +216,8 @@ namespace System.Net.Http
             this HttpContent content,
             IEnumerable<MediaTypeFormatter> formatters,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             return ReadAsAsync<T>(content, typeof(T), formatters, null, cancellationToken);
         }
 
@@ -226,7 +234,8 @@ namespace System.Net.Http
             this HttpContent content,
             IEnumerable<MediaTypeFormatter> formatters,
             IFormatterLogger formatterLogger
-        ) {
+        )
+        {
             return ReadAsAsync<T>(content, typeof(T), formatters, formatterLogger);
         }
 
@@ -245,7 +254,8 @@ namespace System.Net.Http
             IEnumerable<MediaTypeFormatter> formatters,
             IFormatterLogger formatterLogger,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             return ReadAsAsync<T>(
                 content,
                 typeof(T),
@@ -260,7 +270,8 @@ namespace System.Net.Http
             Type type,
             IEnumerable<MediaTypeFormatter> formatters,
             IFormatterLogger formatterLogger
-        ) {
+        )
+        {
             return ReadAsAsync<T>(
                 content,
                 type,
@@ -280,7 +291,8 @@ namespace System.Net.Http
             IEnumerable<MediaTypeFormatter> formatters,
             IFormatterLogger formatterLogger,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             if (content == null)
             {
                 throw Error.ArgumentNull("content");
@@ -299,7 +311,8 @@ namespace System.Net.Http
                 objectContent != null
                 && objectContent.Value != null
                 && type.IsAssignableFrom(objectContent.Value.GetType())
-            ) {
+            )
+            {
                 return Task.FromResult((T)objectContent.Value);
             }
 
@@ -337,7 +350,8 @@ namespace System.Net.Http
             IFormatterLogger formatterLogger,
             MediaTypeFormatter formatter,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             cancellationToken.ThrowIfCancellationRequested();
             Stream stream = await content.ReadAsStreamAsync();
 

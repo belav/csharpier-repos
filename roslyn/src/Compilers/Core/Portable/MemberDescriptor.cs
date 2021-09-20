@@ -98,7 +98,8 @@ namespace Microsoft.CodeAnalysis.RuntimeMembers
             string Name,
             ImmutableArray<byte> Signature,
             ushort Arity = 0
-        ) {
+        )
+        {
             this.Flags = Flags;
             this.DeclaringTypeId = DeclaringTypeId;
             this.Name = Name;
@@ -109,7 +110,8 @@ namespace Microsoft.CodeAnalysis.RuntimeMembers
         internal static ImmutableArray<MemberDescriptor> InitializeFromStream(
             Stream stream,
             string[] nameTable
-        ) {
+        )
+        {
             int count = nameTable.Length;
 
             var builder = ImmutableArray.CreateBuilder<MemberDescriptor>(count);
@@ -168,7 +170,8 @@ namespace Microsoft.CodeAnalysis.RuntimeMembers
         private static void ParseMethodOrPropertySignature(
             ImmutableArray<byte>.Builder builder,
             Stream stream
-        ) {
+        )
+        {
             int paramCount = stream.ReadByte();
             builder.Add((byte)paramCount);
 
@@ -186,7 +189,8 @@ namespace Microsoft.CodeAnalysis.RuntimeMembers
             ImmutableArray<byte>.Builder builder,
             Stream stream,
             bool allowByRef = false
-        ) {
+        )
+        {
             while (true)
             {
                 var typeCode = (SignatureTypeCode)stream.ReadByte();
@@ -245,7 +249,8 @@ namespace Microsoft.CodeAnalysis.RuntimeMembers
         private static void ParseGenericTypeInstance(
             ImmutableArray<byte>.Builder builder,
             Stream stream
-        ) {
+        )
+        {
             ParseType(builder, stream);
 
             // Generic type parameters

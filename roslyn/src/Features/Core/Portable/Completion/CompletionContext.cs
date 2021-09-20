@@ -93,7 +93,8 @@ namespace Microsoft.CodeAnalysis.Completion
             CompletionTrigger trigger,
             OptionSet options,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             Provider = provider ?? throw new ArgumentNullException(nameof(provider));
             Document = document ?? throw new ArgumentNullException(nameof(document));
             Position = position;

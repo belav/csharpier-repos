@@ -53,7 +53,8 @@ namespace Microsoft.AspNetCore.Components.WebAssembly.Services
             TState state,
             Exception? exception,
             Func<TState, Exception?, string> formatter
-        ) {
+        )
+        {
             if (!IsEnabled(logLevel))
             {
                 return;
@@ -78,7 +79,8 @@ namespace Microsoft.AspNetCore.Components.WebAssembly.Services
             int eventId,
             string message,
             Exception? exception
-        ) {
+        )
+        {
             lock (_logBuilder)
             {
                 try
@@ -144,7 +146,8 @@ namespace Microsoft.AspNetCore.Components.WebAssembly.Services
             int eventId,
             string message,
             Exception? exception
-        ) {
+        )
+        {
             logBuilder.Append(GetLogLevelString(logLevel));
             logBuilder.Append(_loglevelPadding);
             logBuilder.Append(logName);

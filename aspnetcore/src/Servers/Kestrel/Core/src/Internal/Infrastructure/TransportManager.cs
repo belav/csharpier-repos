@@ -28,7 +28,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Infrastructure
             IConnectionListenerFactory? transportFactory,
             IMultiplexedConnectionListenerFactory? multiplexedTransportFactory,
             ServiceContext serviceContext
-        ) {
+        )
+        {
             _transportFactory = transportFactory;
             _multiplexedTransportFactory = multiplexedTransportFactory;
             _serviceContext = serviceContext;
@@ -42,7 +43,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Infrastructure
             ConnectionDelegate connectionDelegate,
             EndpointConfig? endpointConfig,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             if (_transportFactory is null)
             {
                 throw new InvalidOperationException(
@@ -65,7 +67,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Infrastructure
             MultiplexedConnectionDelegate multiplexedConnectionDelegate,
             ListenOptions listenOptions,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             if (_multiplexedTransportFactory is null)
             {
                 throw new InvalidOperationException(
@@ -129,7 +132,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Infrastructure
         public Task StopEndpointsAsync(
             List<EndpointConfig> endpointsToStop,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var transportsToStop = _transports.Where(
                     t => t.EndpointConfig != null && endpointsToStop.Contains(t.EndpointConfig)
                 )
@@ -145,7 +149,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Infrastructure
         private async Task StopTransportsAsync(
             List<ActiveTransport> transportsToStop,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var tasks = new Task[transportsToStop.Count];
 
             for (int i = 0; i < transportsToStop.Count; i++)
@@ -162,13 +167,15 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Infrastructure
                             cancellationToken
                         )
                         .ConfigureAwait(false)
-                ) {
+                )
+                {
                     Trace.NotAllConnectionsClosedGracefully();
 
                     if (
                         !await transport.TransportConnectionManager.AbortAllConnectionsAsync()
                             .ConfigureAwait(false)
-                    ) {
+                    )
+                    {
                         Trace.NotAllConnectionsAborted();
                     }
                 }
@@ -201,7 +208,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Infrastructure
                 Task acceptLoopTask,
                 TransportConnectionManager transportConnectionManager,
                 EndpointConfig? endpointConfig = null
-            ) {
+            )
+            {
                 ConnectionListener = transport;
                 AcceptLoopTask = acceptLoopTask;
                 TransportConnectionManager = transportConnectionManager;
@@ -254,7 +262,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Infrastructure
 
             public GenericMultiplexedConnectionListener(
                 IMultiplexedConnectionListener multiplexedConnectionListener
-            ) {
+            )
+            {
                 _multiplexedConnectionListener = multiplexedConnectionListener;
             }
 

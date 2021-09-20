@@ -77,7 +77,8 @@ namespace System.Data
                     _baseSimpleType != null
                     && _baseSimpleType.Name != null
                     && _baseSimpleType.Name.Length > 0
-                ) {
+                )
+                {
                     _xmlBaseType = _baseSimpleType.XmlBaseType; //  SimpleTypeQualifiedName;
                 }
                 else

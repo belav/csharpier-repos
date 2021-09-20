@@ -39,7 +39,8 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.ChangeSignature
             string languageName,
             ParseOptions parseOptions = null,
             OptionsCollection options = null
-        ) {
+        )
+        {
             var workspace = languageName switch
             {
                 "XML" => TestWorkspace.Create(markup, composition: s_composition),
@@ -129,7 +130,8 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.ChangeSignature
             if (
                 context
                 is ChangeSignatureAnalysisSucceededContext changeSignatureAnalyzedSucceedContext
-            ) {
+            )
+            {
                 return changeSignatureAnalyzedSucceedContext.ParameterConfiguration;
             }
 

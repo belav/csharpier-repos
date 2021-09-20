@@ -21,7 +21,8 @@ namespace Microsoft.CodeAnalysis.UnitTests
             Func<EmitOptions, T, EmitOptions> factory,
             Func<EmitOptions, T> getter,
             T validNonDefaultValue
-        ) {
+        )
+        {
             var oldOpt1 = EmitOptions.Default;
 
             var validDefaultValue = getter(oldOpt1);

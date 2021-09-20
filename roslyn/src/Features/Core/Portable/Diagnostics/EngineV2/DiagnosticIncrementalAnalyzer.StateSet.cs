@@ -114,7 +114,8 @@ namespace Microsoft.CodeAnalysis.Diagnostics.EngineV2
             public void CollectDocumentsWithDiagnostics(
                 ProjectId projectId,
                 HashSet<DocumentId> set
-            ) {
+            )
+            {
                 RoslynDebug.Assert(set != null);
 
                 // Collect active documents with diagnostics
@@ -130,7 +131,8 @@ namespace Microsoft.CodeAnalysis.Diagnostics.EngineV2
                 if (
                     _projectStates.TryGetValue(projectId, out var projectState)
                     && !projectState.IsEmpty()
-                ) {
+                )
+                {
                     set.UnionWith(projectState.GetDocumentsWithDiagnostics());
                 }
             }
@@ -161,12 +163,14 @@ namespace Microsoft.CodeAnalysis.Diagnostics.EngineV2
             public async Task<bool> OnDocumentOpenedAsync(
                 IPersistentStorageService persistentStorageService,
                 TextDocument document
-            ) {
+            )
+            {
                 // can not be cancelled
                 if (
                     !TryGetProjectState(document.Project.Id, out var projectState)
                     || projectState.IsEmpty(document.Id)
-                ) {
+                )
+                {
                     // nothing to do
                     return false;
                 }
@@ -203,7 +207,8 @@ namespace Microsoft.CodeAnalysis.Diagnostics.EngineV2
             public async Task<bool> OnDocumentClosedAsync(
                 IPersistentStorageService persistentStorageService,
                 TextDocument document
-            ) {
+            )
+            {
                 // can not be cancelled
                 // remove active file state and put it in project state
                 if (!_activeFileStates.TryRemove(document.Id, out var activeFileState))

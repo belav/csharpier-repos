@@ -34,7 +34,8 @@ namespace Microsoft.Extensions.Caching.SqlServer
             string schemaName,
             string tableName,
             ISystemClock systemClock
-        ) {
+        )
+        {
             ConnectionString = connectionString;
             SchemaName = schemaName;
             TableName = tableName;
@@ -68,7 +69,8 @@ namespace Microsoft.Extensions.Caching.SqlServer
         public async Task DeleteCacheItemAsync(
             string key,
             CancellationToken token = default(CancellationToken)
-        ) {
+        )
+        {
             token.ThrowIfCancellationRequested();
 
             using (var connection = new SqlConnection(ConnectionString))
@@ -90,7 +92,8 @@ namespace Microsoft.Extensions.Caching.SqlServer
         public virtual async Task<byte[]> GetCacheItemAsync(
             string key,
             CancellationToken token = default(CancellationToken)
-        ) {
+        )
+        {
             token.ThrowIfCancellationRequested();
 
             return await GetCacheItemAsync(key, includeValue: true, token: token)
@@ -105,7 +108,8 @@ namespace Microsoft.Extensions.Caching.SqlServer
         public async Task RefreshCacheItemAsync(
             string key,
             CancellationToken token = default(CancellationToken)
-        ) {
+        )
+        {
             token.ThrowIfCancellationRequested();
 
             await GetCacheItemAsync(key, includeValue: false, token: token).ConfigureAwait(false);
@@ -130,7 +134,8 @@ namespace Microsoft.Extensions.Caching.SqlServer
             string key,
             byte[] value,
             DistributedCacheEntryOptions options
-        ) {
+        )
+        {
             var utcNow = SystemClock.UtcNow;
 
             var absoluteExpiration = GetAbsoluteExpiration(utcNow, options);
@@ -171,7 +176,8 @@ namespace Microsoft.Extensions.Caching.SqlServer
             byte[] value,
             DistributedCacheEntryOptions options,
             CancellationToken token = default(CancellationToken)
-        ) {
+        )
+        {
             token.ThrowIfCancellationRequested();
 
             var utcNow = SystemClock.UtcNow;
@@ -238,7 +244,8 @@ namespace Microsoft.Extensions.Caching.SqlServer
                             | CommandBehavior.SingleRow
                             | CommandBehavior.SingleResult
                     )
-                ) {
+                )
+                {
                     if (reader.Read())
                     {
                         if (includeValue)
@@ -262,7 +269,8 @@ namespace Microsoft.Extensions.Caching.SqlServer
             string key,
             bool includeValue,
             CancellationToken token = default(CancellationToken)
-        ) {
+        )
+        {
             token.ThrowIfCancellationRequested();
 
             var utcNow = SystemClock.UtcNow;
@@ -294,7 +302,8 @@ namespace Microsoft.Extensions.Caching.SqlServer
                             token
                         )
                         .ConfigureAwait(false)
-                ) {
+                )
+                {
                     if (await reader.ReadAsync(token).ConfigureAwait(false))
                     {
                         if (includeValue)
@@ -328,7 +337,8 @@ namespace Microsoft.Extensions.Caching.SqlServer
         protected DateTimeOffset? GetAbsoluteExpiration(
             DateTimeOffset utcNow,
             DistributedCacheEntryOptions options
-        ) {
+        )
+        {
             // calculate absolute expiration
             DateTimeOffset? absoluteExpiration = null;
             if (options.AbsoluteExpirationRelativeToNow.HasValue)
@@ -352,7 +362,8 @@ namespace Microsoft.Extensions.Caching.SqlServer
         protected void ValidateOptions(
             TimeSpan? slidingExpiration,
             DateTimeOffset? absoluteExpiration
-        ) {
+        )
+        {
             if (!slidingExpiration.HasValue && !absoluteExpiration.HasValue)
             {
                 throw new InvalidOperationException(

@@ -25,7 +25,8 @@ namespace Microsoft.Composition.Demos.ExtendedCollectionImports.Dictionaries
         public override IEnumerable<ExportDescriptorPromise> GetExportDescriptors(
             CompositionContract contract,
             DependencyAccessor descriptorAccessor
-        ) {
+        )
+        {
             if (
                 !(
                     contract.ContractType.IsConstructedGenericType
@@ -67,7 +68,8 @@ namespace Microsoft.Composition.Demos.ExtendedCollectionImports.Dictionaries
             CompositionContract valueContract,
             DependencyAccessor definitionAccessor,
             string keyByMetadataName
-        ) {
+        )
+        {
             return new ExportDescriptorPromise(
                 dictionaryContract,
                 typeof(IDictionary<TKey, TValue>).Name,
@@ -103,7 +105,8 @@ namespace Microsoft.Composition.Demos.ExtendedCollectionImports.Dictionaries
         private static void Validate<TKey>(
             Tuple<string, ExportDescriptor>[] partsWithMatchedDescriptors,
             string keyByMetadataName
-        ) {
+        )
+        {
             var missing = partsWithMatchedDescriptors.Where(
                     p => !p.Item2.Metadata.ContainsKey(keyByMetadataName)
                 )

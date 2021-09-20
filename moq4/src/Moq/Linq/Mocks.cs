@@ -142,7 +142,8 @@ namespace Moq
                     && ProxyFactory.Instance.IsMethodVisible(getter, out _)
                 )
                 && pi.CanWrite(out _)
-            ) {
+            )
+            {
                 // LINQ to Mocks allows setting non-interceptable properties, which is handy e.g. when initializing DTOs.
                 Mock.SetupSet(mock, expression, propertyToSet: pi, value);
             }

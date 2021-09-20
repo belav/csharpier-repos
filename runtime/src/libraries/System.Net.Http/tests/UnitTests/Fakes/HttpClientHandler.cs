@@ -109,7 +109,8 @@ namespace System.Net.Http
         protected internal override Task<HttpResponseMessage> SendAsync(
             HttpRequestMessage request,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             throw NotImplemented.ByDesignWithMessage(Message);
         }
         #endregion Request Execution

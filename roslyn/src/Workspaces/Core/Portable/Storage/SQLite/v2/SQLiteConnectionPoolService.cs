@@ -80,7 +80,8 @@ namespace Microsoft.CodeAnalysis.SQLite.v2
             IPersistentStorageFaultInjector? faultInjector,
             Action<SqlConnection, CancellationToken> initializer,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             lock (_gate)
             {
                 if (_connectionPools.TryGetValue(databaseFilePath, out var pool))

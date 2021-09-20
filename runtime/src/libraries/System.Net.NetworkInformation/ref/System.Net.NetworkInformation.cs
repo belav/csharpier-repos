@@ -43,7 +43,8 @@ namespace System.Net.NetworkInformation
         public virtual void Clear() { }
         public virtual bool Contains(
             System.Net.NetworkInformation.GatewayIPAddressInformation address
-        ) {
+        )
+        {
             throw null;
         }
         public virtual void CopyTo(
@@ -56,7 +57,8 @@ namespace System.Net.NetworkInformation
         }
         public virtual bool Remove(
             System.Net.NetworkInformation.GatewayIPAddressInformation address
-        ) {
+        )
+        {
             throw null;
         }
         System.Collections.IEnumerator System.Collections.IEnumerable.GetEnumerator()
@@ -189,12 +191,14 @@ namespace System.Net.NetworkInformation
         public virtual System.IAsyncResult BeginGetUnicastAddresses(
             System.AsyncCallback? callback,
             object? state
-        ) {
+        )
+        {
             throw null;
         }
         public virtual System.Net.NetworkInformation.UnicastIPAddressInformationCollection EndGetUnicastAddresses(
             System.IAsyncResult asyncResult
-        ) {
+        )
+        {
             throw null;
         }
         [System.Runtime.Versioning.UnsupportedOSPlatform("android")]
@@ -354,7 +358,8 @@ namespace System.Net.NetworkInformation
         public virtual void Clear() { }
         public virtual bool Contains(
             System.Net.NetworkInformation.MulticastIPAddressInformation address
-        ) {
+        )
+        {
             throw null;
         }
         public virtual void CopyTo(
@@ -367,7 +372,8 @@ namespace System.Net.NetworkInformation
         }
         public virtual bool Remove(
             System.Net.NetworkInformation.MulticastIPAddressInformation address
-        ) {
+        )
+        {
             throw null;
         }
         System.Collections.IEnumerator System.Collections.IEnumerable.GetEnumerator()
@@ -507,7 +513,8 @@ namespace System.Net.NetworkInformation
         }
         public virtual bool Supports(
             System.Net.NetworkInformation.NetworkInterfaceComponent networkInterfaceComponent
-        ) {
+        )
+        {
             throw null;
         }
     }
@@ -563,7 +570,8 @@ namespace System.Net.NetworkInformation
         public PhysicalAddress(byte[] address) { }
         public override bool Equals(
             [System.Diagnostics.CodeAnalysis.NotNullWhen(true)] object? comparand
-        ) {
+        )
+        {
             throw null;
         }
         public byte[] GetAddressBytes()
@@ -580,21 +588,24 @@ namespace System.Net.NetworkInformation
         }
         public static System.Net.NetworkInformation.PhysicalAddress Parse(
             ReadOnlySpan<char> address
-        ) {
+        )
+        {
             throw null;
         }
         public static bool TryParse(
             string? address,
             [System.Diagnostics.CodeAnalysis.NotNullWhenAttribute(true)]
                 out System.Net.NetworkInformation.PhysicalAddress? value
-        ) {
+        )
+        {
             throw null;
         }
         public static bool TryParse(
             ReadOnlySpan<char> address,
             [System.Diagnostics.CodeAnalysis.NotNullWhenAttribute(true)]
                 out System.Net.NetworkInformation.PhysicalAddress? value
-        ) {
+        )
+        {
             throw null;
         }
         public override string ToString()
@@ -720,7 +731,8 @@ namespace System.Net.NetworkInformation
         public virtual void Clear() { }
         public virtual bool Contains(
             System.Net.NetworkInformation.UnicastIPAddressInformation address
-        ) {
+        )
+        {
             throw null;
         }
         public virtual void CopyTo(
@@ -733,7 +745,8 @@ namespace System.Net.NetworkInformation
         }
         public virtual bool Remove(
             System.Net.NetworkInformation.UnicastIPAddressInformation address
-        ) {
+        )
+        {
             throw null;
         }
         System.Collections.IEnumerator System.Collections.IEnumerable.GetEnumerator()

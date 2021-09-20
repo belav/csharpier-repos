@@ -717,7 +717,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
         private string FormatPrimitiveIncludingTypeSuffix(
             object obj,
             bool useHexadecimalNumbers = false
-        ) {
+        )
+        {
             var options = useHexadecimalNumbers
                 ? ObjectDisplayOptions.UseHexadecimalNumbers
                 : ObjectDisplayOptions.None;

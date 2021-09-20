@@ -20,26 +20,28 @@ namespace System.Security.AccessControl
             InheritanceFlags inheritanceFlags,
             PropagationFlags propagationFlags,
             AuditFlags flags
-        ) : this(
-            identity,
-            AccessMaskFromRights(fileSystemRights),
-            false,
-            inheritanceFlags,
-            propagationFlags,
-            flags
-        ) { }
+        )
+            : this(
+                identity,
+                AccessMaskFromRights(fileSystemRights),
+                false,
+                inheritanceFlags,
+                propagationFlags,
+                flags
+            ) { }
 
         public FileSystemAuditRule(
             string identity,
             FileSystemRights fileSystemRights,
             AuditFlags flags
-        ) : this(
-            new NTAccount(identity),
-            fileSystemRights,
-            InheritanceFlags.None,
-            PropagationFlags.None,
-            flags
-        ) { }
+        )
+            : this(
+                new NTAccount(identity),
+                fileSystemRights,
+                InheritanceFlags.None,
+                PropagationFlags.None,
+                flags
+            ) { }
 
         public FileSystemAuditRule(
             string identity,
@@ -47,14 +49,15 @@ namespace System.Security.AccessControl
             InheritanceFlags inheritanceFlags,
             PropagationFlags propagationFlags,
             AuditFlags flags
-        ) : this(
-            new NTAccount(identity),
-            AccessMaskFromRights(fileSystemRights),
-            false,
-            inheritanceFlags,
-            propagationFlags,
-            flags
-        ) { }
+        )
+            : this(
+                new NTAccount(identity),
+                AccessMaskFromRights(fileSystemRights),
+                false,
+                inheritanceFlags,
+                propagationFlags,
+                flags
+            ) { }
 
         internal FileSystemAuditRule(
             IdentityReference identity,

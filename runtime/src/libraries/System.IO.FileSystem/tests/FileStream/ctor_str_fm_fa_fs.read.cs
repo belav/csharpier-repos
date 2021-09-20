@@ -21,7 +21,8 @@ namespace System.IO.Tests
                     FileAccess.ReadWrite,
                     FileShare.Read
                 )
-            ) {
+            )
+            {
                 using (
                     FileStream reader = CreateFileStream(
                         fileName,
@@ -52,7 +53,8 @@ namespace System.IO.Tests
                     FileAccess.ReadWrite,
                     FileShare.Read
                 )
-            ) {
+            )
+            {
                 using (
                     FileStream reader = CreateFileStream(
                         fileName,
@@ -78,7 +80,8 @@ namespace System.IO.Tests
                     FileAccess.ReadWrite,
                     FileShare.Write | FileShare.Delete
                 )
-            ) {
+            )
+            {
                 FSAssert.ThrowsSharingViolation(
                     () =>
                         CreateFileStream(

@@ -89,7 +89,8 @@ namespace Microsoft.CodeAnalysis.BuildTasks
                     if (
                         !string.IsNullOrWhiteSpace(itemType)
                         && !string.IsNullOrWhiteSpace(metadataName)
-                    ) {
+                    )
+                    {
                         builder.Append("build_metadata.")
                             .Append(itemType)
                             .Append(".")

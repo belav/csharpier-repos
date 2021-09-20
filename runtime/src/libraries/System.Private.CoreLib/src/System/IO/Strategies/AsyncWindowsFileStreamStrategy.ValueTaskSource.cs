@@ -117,7 +117,8 @@ namespace System.IO.Strategies
                         (packedResult != TaskSourceCodes.NoResult)
                         && (packedResult != TaskSourceCodes.CompletedCallback)
                         && (packedResult != TaskSourceCodes.RegisteringCancellation)
-                    ) {
+                    )
+                    {
                         CompleteCallback((ulong)packedResult);
                     }
                 }
@@ -144,7 +145,8 @@ namespace System.IO.Strategies
                 uint errorCode,
                 uint numBytes,
                 NativeOverlapped* pOverlapped
-            ) {
+            )
+            {
                 ValueTaskSource valueTaskSource =
                     (ValueTaskSource)ThreadPoolBoundHandle.GetNativeOverlappedState(pOverlapped)!;
                 Debug.Assert(valueTaskSource._overlapped == pOverlapped, "Overlaps don't match");
@@ -158,7 +160,8 @@ namespace System.IO.Strategies
                     errorCode != 0
                     && errorCode != Interop.Errors.ERROR_BROKEN_PIPE
                     && errorCode != Interop.Errors.ERROR_NO_DATA
-                ) {
+                )
+                {
                     packedResult = ((ulong)TaskSourceCodes.ResultError | errorCode);
                 }
                 else
@@ -171,14 +174,16 @@ namespace System.IO.Strategies
                 if (
                     Interlocked.Exchange(ref valueTaskSource._result, (long)packedResult)
                     == TaskSourceCodes.NoResult
-                ) {
+                )
+                {
                     // Successfully set the state, attempt to take back the callback
                     if (
                         Interlocked.Exchange(
                             ref valueTaskSource._result,
                             TaskSourceCodes.CompletedCallback
                         ) != TaskSourceCodes.NoResult
-                    ) {
+                    )
+                    {
                         // Successfully got the callback, finish the callback
                         valueTaskSource.CompleteCallback(packedResult);
                     }
@@ -232,7 +237,8 @@ namespace System.IO.Strategies
                 if (
                     !_strategy._fileHandle.IsInvalid
                     && !Interop.Kernel32.CancelIoEx(_strategy._fileHandle, _overlapped)
-                ) {
+                )
+                {
                     int errorCode = Marshal.GetLastWin32Error();
 
                     // ERROR_NOT_FOUND is returned if CancelIoEx cannot find the request to cancel.

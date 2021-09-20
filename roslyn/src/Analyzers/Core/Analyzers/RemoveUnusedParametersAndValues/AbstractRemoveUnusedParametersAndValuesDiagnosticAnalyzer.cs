@@ -137,18 +137,20 @@ namespace Microsoft.CodeAnalysis.RemoveUnusedParametersAndValues
             Option2<CodeStyleOption2<UnusedValuePreference>> unusedValueExpressionStatementOption,
             Option2<CodeStyleOption2<UnusedValuePreference>> unusedValueAssignmentOption,
             string language
-        ) : base(
-            ImmutableDictionary<DiagnosticDescriptor, ILanguageSpecificOption>.Empty.Add(
-                    s_expressionValueIsUnusedRule,
-                    unusedValueExpressionStatementOption
-                )
-                .Add(s_valueAssignedIsUnusedRule, unusedValueAssignmentOption),
-            ImmutableDictionary<DiagnosticDescriptor, IPerLanguageOption>.Empty.Add(
-                s_unusedParameterRule,
-                CodeStyleOptions2.UnusedParameters
-            ),
-            language
-        ) {
+        )
+            : base(
+                ImmutableDictionary<DiagnosticDescriptor, ILanguageSpecificOption>.Empty.Add(
+                        s_expressionValueIsUnusedRule,
+                        unusedValueExpressionStatementOption
+                    )
+                    .Add(s_valueAssignedIsUnusedRule, unusedValueAssignmentOption),
+                ImmutableDictionary<DiagnosticDescriptor, IPerLanguageOption>.Empty.Add(
+                    s_unusedParameterRule,
+                    CodeStyleOptions2.UnusedParameters
+                ),
+                language
+            )
+        {
             UnusedValueExpressionStatementOption = unusedValueExpressionStatementOption;
             UnusedValueAssignmentOption = unusedValueAssignmentOption;
         }
@@ -227,7 +229,8 @@ namespace Microsoft.CodeAnalysis.RemoveUnusedParametersAndValues
                 UnusedValuePreference preference,
                 bool isUnusedLocalAssignment,
                 bool isRemovableAssignment
-            ) {
+            )
+            {
                 var propertiesBuilder = ImmutableDictionary.CreateBuilder<string, string>();
 
                 propertiesBuilder.Add(UnusedValuePreferenceKey, preference.ToString());
@@ -269,7 +272,8 @@ namespace Microsoft.CodeAnalysis.RemoveUnusedParametersAndValues
             AnalyzerOptions analyzerOptions,
             CancellationToken cancellationToken,
             out Options options
-        ) {
+        )
+        {
             options = null;
 
             var unusedParametersOption = analyzerOptions.GetOption(
@@ -286,7 +290,8 @@ namespace Microsoft.CodeAnalysis.RemoveUnusedParametersAndValues
                 unusedParametersOption.Notification.Severity == ReportDiagnostic.Suppress
                 && unusedValueExpressionStatementSeverity == ReportDiagnostic.Suppress
                 && unusedValueAssignmentSeverity == ReportDiagnostic.Suppress
-            ) {
+            )
+            {
                 return false;
             }
 
@@ -303,7 +308,8 @@ namespace Microsoft.CodeAnalysis.RemoveUnusedParametersAndValues
             // Local functions.
             (UnusedValuePreference preference, ReportDiagnostic severity) GetPreferenceAndSeverity(
                 Option2<CodeStyleOption2<UnusedValuePreference>> codeStyleOption
-            ) {
+            )
+            {
                 var option = analyzerOptions.GetOption(
                     codeStyleOption,
                     syntaxTree,
@@ -313,7 +319,8 @@ namespace Microsoft.CodeAnalysis.RemoveUnusedParametersAndValues
                 if (
                     preferenceOpt == null
                     || option.Notification.Severity == ReportDiagnostic.Suppress
-                ) {
+                )
+                {
                     // Prefer does not matter as the severity is suppressed - we will never report this diagnostic.
                     return (default(UnusedValuePreference), ReportDiagnostic.Suppress);
                 }
@@ -322,7 +329,8 @@ namespace Microsoft.CodeAnalysis.RemoveUnusedParametersAndValues
                 if (
                     preferenceOpt.Value == UnusedValuePreference.DiscardVariable
                     && !SupportsDiscard(syntaxTree)
-                ) {
+                )
+                {
                     preferenceOpt = UnusedValuePreference.UnusedLocalVariable;
                 }
 
@@ -342,7 +350,8 @@ namespace Microsoft.CodeAnalysis.RemoveUnusedParametersAndValues
                 ReportDiagnostic unusedValueAssignmentSeverity,
                 UnusedParametersPreference unusedParametersPreference,
                 ReportDiagnostic unusedParametersSeverity
-            ) {
+            )
+            {
                 Debug.Assert(
                     unusedValueExpressionStatementSeverity != ReportDiagnostic.Suppress
                         || unusedValueAssignmentSeverity != ReportDiagnostic.Suppress
@@ -373,7 +382,8 @@ namespace Microsoft.CodeAnalysis.RemoveUnusedParametersAndValues
             ISymbol symbol,
             UnusedParametersPreference unusedParametersPreference,
             ReportDiagnostic unusedParametersSeverity
-        ) {
+        )
+        {
             if (unusedParametersSeverity == ReportDiagnostic.Suppress)
             {
                 return false;
@@ -390,14 +400,16 @@ namespace Microsoft.CodeAnalysis.RemoveUnusedParametersAndValues
         public static bool TryGetUnusedValuePreference(
             Diagnostic diagnostic,
             out UnusedValuePreference preference
-        ) {
+        )
+        {
             if (
                 diagnostic.Properties != null
                 && diagnostic.Properties.TryGetValue(
                     UnusedValuePreferenceKey,
                     out var preferenceString
                 )
-            ) {
+            )
+            {
                 switch (preferenceString)
                 {
                     case nameof(UnusedValuePreference.DiscardVariable):

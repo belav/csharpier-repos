@@ -20,7 +20,8 @@ namespace Microsoft.AspNetCore.JsonPatch.Internal
             IContractResolver contractResolver,
             object value,
             out string errorMessage
-        ) {
+        )
+        {
             var contract = (JsonDictionaryContract)contractResolver.ResolveContract(
                 target.GetType()
             );
@@ -49,7 +50,8 @@ namespace Microsoft.AspNetCore.JsonPatch.Internal
             IContractResolver contractResolver,
             out object value,
             out string errorMessage
-        ) {
+        )
+        {
             var contract = (JsonDictionaryContract)contractResolver.ResolveContract(
                 target.GetType()
             );
@@ -79,7 +81,8 @@ namespace Microsoft.AspNetCore.JsonPatch.Internal
             string segment,
             IContractResolver contractResolver,
             out string errorMessage
-        ) {
+        )
+        {
             var contract = (JsonDictionaryContract)contractResolver.ResolveContract(
                 target.GetType()
             );
@@ -108,7 +111,8 @@ namespace Microsoft.AspNetCore.JsonPatch.Internal
             IContractResolver contractResolver,
             object value,
             out string errorMessage
-        ) {
+        )
+        {
             var contract = (JsonDictionaryContract)contractResolver.ResolveContract(
                 target.GetType()
             );
@@ -144,7 +148,8 @@ namespace Microsoft.AspNetCore.JsonPatch.Internal
             IContractResolver contractResolver,
             object value,
             out string errorMessage
-        ) {
+        )
+        {
             var contract = (JsonDictionaryContract)contractResolver.ResolveContract(
                 target.GetType()
             );
@@ -182,7 +187,8 @@ namespace Microsoft.AspNetCore.JsonPatch.Internal
                     JsonConvert.SerializeObject(currentValue),
                     JsonConvert.SerializeObject(convertedValue)
                 )
-            ) {
+            )
+            {
                 errorMessage = Resources.FormatValueNotEqualToTestValue(
                     currentValue,
                     value,
@@ -203,7 +209,8 @@ namespace Microsoft.AspNetCore.JsonPatch.Internal
             IContractResolver contractResolver,
             out object nextTarget,
             out string errorMessage
-        ) {
+        )
+        {
             var contract = (JsonDictionaryContract)contractResolver.ResolveContract(
                 target.GetType()
             );
@@ -234,7 +241,8 @@ namespace Microsoft.AspNetCore.JsonPatch.Internal
             string key,
             out TKey convertedKey,
             out string errorMessage
-        ) {
+        )
+        {
             var conversionResult = ConversionResultProvider.ConvertTo(key, typeof(TKey));
             if (conversionResult.CanBeConverted)
             {
@@ -254,7 +262,8 @@ namespace Microsoft.AspNetCore.JsonPatch.Internal
             object value,
             out TValue convertedValue,
             out string errorMessage
-        ) {
+        )
+        {
             var conversionResult = ConversionResultProvider.ConvertTo(value, typeof(TValue));
             if (conversionResult.CanBeConverted)
             {

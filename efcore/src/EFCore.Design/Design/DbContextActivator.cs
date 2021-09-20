@@ -43,7 +43,8 @@ namespace Microsoft.EntityFrameworkCore.Design
             Assembly? startupAssembly,
             IOperationReportHandler? reportHandler,
             string[]? args
-        ) {
+        )
+        {
             Check.NotNull(contextType, nameof(contextType));
 
             return new DbContextOperations(

@@ -179,7 +179,8 @@ namespace Microsoft.EntityFrameworkCore.Query
                 ISet<string> tags,
                 bool splitQuery,
                 bool indexMap
-            ) {
+            )
+            {
                 _parentVisitor = parentVisitor;
                 _resultCoordinatorParameter = Expression.Parameter(
                     splitQuery
@@ -225,7 +226,8 @@ namespace Microsoft.EntityFrameworkCore.Query
                 ParameterExpression dataReaderParameter,
                 ParameterExpression resultContextParameter,
                 ReaderColumn[]? readerColumns
-            ) {
+            )
+            {
                 _parentVisitor = parentVisitor;
                 _resultCoordinatorParameter = resultCoordinatorParameter;
 
@@ -249,7 +251,8 @@ namespace Microsoft.EntityFrameworkCore.Query
                 ParameterExpression executionStrategyParameter,
                 SelectExpression selectExpression,
                 ISet<string> tags
-            ) {
+            )
+            {
                 _parentVisitor = parentVisitor;
                 _resultCoordinatorParameter = resultCoordinatorParameter;
                 _executionStrategyParameter = executionStrategyParameter;
@@ -281,7 +284,8 @@ namespace Microsoft.EntityFrameworkCore.Query
                 Expression shaperExpression,
                 out RelationalCommandCache? relationalCommandCache,
                 out LambdaExpression? relatedDataLoaders
-            ) {
+            )
+            {
                 relatedDataLoaders = null;
 
                 if (_indexMapParameter != null)
@@ -473,7 +477,8 @@ namespace Microsoft.EntityFrameworkCore.Query
                     binaryExpression.NodeType == ExpressionType.Assign
                     && binaryExpression.Left is ParameterExpression parameterExpression
                     && parameterExpression.Type == typeof(MaterializationContext)
-                ) {
+                )
+                {
                     var newExpression = (NewExpression)binaryExpression.Right;
                     var projectionBindingExpression =
                         (ProjectionBindingExpression)newExpression.Arguments[0];
@@ -498,7 +503,8 @@ namespace Microsoft.EntityFrameworkCore.Query
                     && binaryExpression.Left is MemberExpression memberExpression
                     && memberExpression.Member is FieldInfo fieldInfo
                     && fieldInfo.IsInitOnly
-                ) {
+                )
+                {
                     return memberExpression.Assign(Visit(binaryExpression.Right));
                 }
 
@@ -630,7 +636,8 @@ namespace Microsoft.EntityFrameworkCore.Query
                         if (
                             includeExpression.NavigationExpression
                             is RelationalCollectionShaperExpression relationalCollectionShaperExpression
-                        ) {
+                        )
+                        {
                             var innerShaper = new ShaperProcessingExpressionVisitor(
                                 _parentVisitor,
                                 _resultCoordinatorParameter,
@@ -650,7 +657,8 @@ namespace Microsoft.EntityFrameworkCore.Query
                             if (
                                 includingEntityType != entityType
                                 && includingEntityType.IsAssignableFrom(entityType)
-                            ) {
+                            )
+                            {
                                 includingEntityType = entityType;
                             }
 
@@ -748,7 +756,8 @@ namespace Microsoft.EntityFrameworkCore.Query
                         else if (
                             includeExpression.NavigationExpression
                             is RelationalSplitCollectionShaperExpression relationalSplitCollectionShaperExpression
-                        ) {
+                        )
+                        {
                             var innerProcessor = new ShaperProcessingExpressionVisitor(
                                 _parentVisitor,
                                 _resultCoordinatorParameter,
@@ -768,7 +777,8 @@ namespace Microsoft.EntityFrameworkCore.Query
                             if (
                                 includingEntityType != entityType
                                 && includingEntityType.IsAssignableFrom(entityType)
-                            ) {
+                            )
+                            {
                                 includingEntityType = entityType;
                             }
 
@@ -886,7 +896,8 @@ namespace Microsoft.EntityFrameworkCore.Query
                             if (
                                 includingType != entityType
                                 && includingType.IsAssignableFrom(entityType)
-                            ) {
+                            )
+                            {
                                 includingType = entityType;
                             }
 
@@ -1193,7 +1204,8 @@ namespace Microsoft.EntityFrameworkCore.Query
                     methodCallExpression.Method.IsGenericMethod
                     && methodCallExpression.Method.GetGenericMethodDefinition()
                         == Infrastructure.ExpressionExtensions.ValueBufferTryReadValueMethod
-                ) {
+                )
+                {
                     var property = methodCallExpression.Arguments[2].GetConstantValue<IProperty?>();
                     var mappingParameter = (ParameterExpression)(
                         (MethodCallExpression)methodCallExpression.Arguments[0]
@@ -1230,7 +1242,8 @@ namespace Microsoft.EntityFrameworkCore.Query
                 Type relatedEntityType,
                 INavigationBase navigation,
                 INavigationBase? inverseNavigation
-            ) {
+            )
+            {
                 var entityParameter = Expression.Parameter(entityType);
                 var relatedEntityParameter = Expression.Parameter(relatedEntityType);
                 var expressions = new List<Expression>
@@ -1327,7 +1340,8 @@ namespace Microsoft.EntityFrameworkCore.Query
                 RelationalTypeMapping typeMapping,
                 Type type,
                 IPropertyBase? property = null
-            ) {
+            )
+            {
                 Check.DebugAssert(
                     property != null || type.IsNullableType(),
                     "Must read nullable value from database if property is not specified."
@@ -1359,7 +1373,8 @@ namespace Microsoft.EntityFrameworkCore.Query
                     if (
                         !bufferedColumnType.IsValueType
                         || !BufferedDataReader.IsSupportedValueType(bufferedColumnType)
-                    ) {
+                    )
+                    {
                         bufferedColumnType = typeof(object);
                     }
 
@@ -1472,7 +1487,8 @@ namespace Microsoft.EntityFrameworkCore.Query
                 object value,
                 Type expectedType,
                 IPropertyBase? property = null
-            ) {
+            )
+            {
                 var actualType = value?.GetType();
 
                 string message;
@@ -1529,9 +1545,10 @@ namespace Microsoft.EntityFrameworkCore.Query
                 INavigationBase inverseNavigation,
                 Action<TIncludingEntity, TIncludedEntity> fixup,
                 bool trackingQuery
-            ) where TEntity : class
-              where TIncludingEntity : class, TEntity
-              where TIncludedEntity : class
+            )
+                where TEntity : class
+                where TIncludingEntity : class, TEntity
+                where TIncludedEntity : class
             {
                 if (entity is TIncludingEntity includingEntity)
                 {
@@ -1570,8 +1587,9 @@ namespace Microsoft.EntityFrameworkCore.Query
                 IClrCollectionAccessor clrCollectionAccessor,
                 bool trackingQuery,
                 bool setLoaded
-            ) where TParent : class
-              where TNavigationEntity : class, TParent
+            )
+                where TParent : class
+                where TNavigationEntity : class, TParent
             {
                 object? collection = null;
                 if (entity is TNavigationEntity)
@@ -1631,8 +1649,9 @@ namespace Microsoft.EntityFrameworkCore.Query
                 INavigationBase inverseNavigation,
                 Action<TIncludingEntity, TIncludedEntity> fixup,
                 bool trackingQuery
-            ) where TIncludingEntity : class
-              where TIncludedEntity : class
+            )
+                where TIncludingEntity : class
+                where TIncludedEntity : class
             {
                 var collectionMaterializationContext = resultCoordinator.Collections[collectionId]!;
                 if (collectionMaterializationContext.Parent is TIncludingEntity entity)
@@ -1650,7 +1669,8 @@ namespace Microsoft.EntityFrameworkCore.Query
                             outerIdentifier(queryContext, dbDataReader),
                             collectionMaterializationContext.OuterIdentifier
                         )
-                    ) {
+                    )
+                    {
                         // Outer changed so collection has ended. Materialize last element.
                         GenerateCurrentElementIfPending();
                         // If parent also changed then this row is now pointing to element of next collection
@@ -1660,7 +1680,8 @@ namespace Microsoft.EntityFrameworkCore.Query
                                 parentIdentifier(queryContext, dbDataReader),
                                 collectionMaterializationContext.ParentIdentifier
                             )
-                        ) {
+                        )
+                        {
                             resultCoordinator.HasNext = true;
                         }
 
@@ -1682,7 +1703,8 @@ namespace Microsoft.EntityFrameworkCore.Query
                                 innerKey,
                                 collectionMaterializationContext.SelfIdentifier
                             )
-                        ) {
+                        )
+                        {
                             // repeated row for current element
                             // If it is pending materialization then it may have nested elements
                             if (collectionMaterializationContext.ResultContext.Values != null)
@@ -1760,8 +1782,9 @@ namespace Microsoft.EntityFrameworkCore.Query
                 IClrCollectionAccessor clrCollectionAccessor,
                 bool trackingQuery,
                 bool setLoaded
-            ) where TParent : class
-              where TNavigationEntity : class, TParent
+            )
+                where TParent : class
+                where TNavigationEntity : class, TParent
             {
                 object? collection = null;
                 if (entity is TNavigationEntity)
@@ -1822,13 +1845,15 @@ namespace Microsoft.EntityFrameworkCore.Query
                 INavigationBase inverseNavigation,
                 Action<TIncludingEntity, TIncludedEntity> fixup,
                 bool trackingQuery
-            ) where TIncludingEntity : class
-              where TIncludedEntity : class
+            )
+                where TIncludingEntity : class
+                where TIncludedEntity : class
             {
                 if (
                     resultCoordinator.DataReaders.Count <= collectionId
                     || resultCoordinator.DataReaders[collectionId] == null
-                ) {
+                )
+                {
                     // Execute and fetch data reader
                     var dataReader = executionStrategy.Execute(
                         (queryContext, relationalCommandCache, detailedErrorsEnabled),
@@ -1841,7 +1866,8 @@ namespace Microsoft.EntityFrameworkCore.Query
                         RelationalQueryContext queryContext,
                         RelationalCommandCache relationalCommandCache,
                         bool detailedErrorsEnabled
-                    ) {
+                    )
+                    {
                         var relationalCommandTemplate = relationalCommandCache.GetRelationalCommand(
                             queryContext.ParameterValues
                         );
@@ -1876,7 +1902,8 @@ namespace Microsoft.EntityFrameworkCore.Query
                                 splitQueryCollectionContext.ParentIdentifier,
                                 childIdentifier(queryContext, dbDataReader)
                             )
-                        ) {
+                        )
+                        {
                             dataReaderContext.HasNext = true;
 
                             return;
@@ -1945,13 +1972,15 @@ namespace Microsoft.EntityFrameworkCore.Query
                 INavigationBase inverseNavigation,
                 Action<TIncludingEntity, TIncludedEntity> fixup,
                 bool trackingQuery
-            ) where TIncludingEntity : class
-              where TIncludedEntity : class
+            )
+                where TIncludingEntity : class
+                where TIncludedEntity : class
             {
                 if (
                     resultCoordinator.DataReaders.Count <= collectionId
                     || resultCoordinator.DataReaders[collectionId] == null
-                ) {
+                )
+                {
                     // Execute and fetch data reader
                     var dataReader = await executionStrategy.ExecuteAsync(
                             (queryContext, relationalCommandCache, detailedErrorsEnabled),
@@ -1974,7 +2003,8 @@ namespace Microsoft.EntityFrameworkCore.Query
                         RelationalCommandCache relationalCommandCache,
                         bool detailedErrorsEnabled,
                         CancellationToken cancellationToken
-                    ) {
+                    )
+                    {
                         var relationalCommandTemplate = relationalCommandCache.GetRelationalCommand(
                             queryContext.ParameterValues
                         );
@@ -2007,14 +2037,16 @@ namespace Microsoft.EntityFrameworkCore.Query
                         dataReaderContext.HasNext
                         ?? await dbDataReader.ReadAsync(queryContext.CancellationToken)
                             .ConfigureAwait(false)
-                    ) {
+                    )
+                    {
                         if (
                             !CompareIdentifiers(
                                 identifierValueComparers,
                                 splitQueryCollectionContext.ParentIdentifier,
                                 childIdentifier(queryContext, dbDataReader)
                             )
-                        ) {
+                        )
+                        {
                             dataReaderContext.HasNext = true;
 
                             return;
@@ -2108,8 +2140,9 @@ namespace Microsoft.EntityFrameworkCore.Query
                     SingleQueryResultCoordinator,
                     TRelatedEntity
                 > innerShaper
-            ) where TRelatedEntity : TElement
-              where TCollection : class, ICollection<TElement>
+            )
+                where TRelatedEntity : TElement
+                where TCollection : class, ICollection<TElement>
             {
                 var collectionMaterializationContext = resultCoordinator.Collections[collectionId]!;
                 if (collectionMaterializationContext.Collection is null)
@@ -2131,7 +2164,8 @@ namespace Microsoft.EntityFrameworkCore.Query
                         outerIdentifier(queryContext, dbDataReader),
                         collectionMaterializationContext.OuterIdentifier
                     )
-                ) {
+                )
+                {
                     // Outer changed so collection has ended. Materialize last element.
                     GenerateCurrentElementIfPending();
                     // If parent also changed then this row is now pointing to element of next collection
@@ -2141,7 +2175,8 @@ namespace Microsoft.EntityFrameworkCore.Query
                             parentIdentifier(queryContext, dbDataReader),
                             collectionMaterializationContext.ParentIdentifier
                         )
-                    ) {
+                    )
+                    {
                         resultCoordinator.HasNext = true;
                     }
 
@@ -2163,7 +2198,8 @@ namespace Microsoft.EntityFrameworkCore.Query
                             innerKey,
                             collectionMaterializationContext.SelfIdentifier
                         )
-                    ) {
+                    )
+                    {
                         // repeated row for current element
                         // If it is pending materialization then it may have nested elements
                         if (collectionMaterializationContext.ResultContext.Values != null)
@@ -2268,13 +2304,15 @@ namespace Microsoft.EntityFrameworkCore.Query
                     IExecutionStrategy,
                     SplitQueryResultCoordinator
                 > relatedDataLoaders
-            ) where TRelatedEntity : TElement
-              where TCollection : class, ICollection<TElement>
+            )
+                where TRelatedEntity : TElement
+                where TCollection : class, ICollection<TElement>
             {
                 if (
                     resultCoordinator.DataReaders.Count <= collectionId
                     || resultCoordinator.DataReaders[collectionId] == null
-                ) {
+                )
+                {
                     // Execute and fetch data reader
                     var dataReader = executionStrategy.Execute(
                         (queryContext, relationalCommandCache, detailedErrorsEnabled),
@@ -2287,7 +2325,8 @@ namespace Microsoft.EntityFrameworkCore.Query
                         RelationalQueryContext queryContext,
                         RelationalCommandCache relationalCommandCache,
                         bool detailedErrorsEnabled
-                    ) {
+                    )
+                    {
                         var relationalCommand = relationalCommandCache.GetRelationalCommand(
                             queryContext.ParameterValues
                         );
@@ -2324,7 +2363,8 @@ namespace Microsoft.EntityFrameworkCore.Query
                             splitQueryCollectionContext.ParentIdentifier,
                             childIdentifier(queryContext, dbDataReader)
                         )
-                    ) {
+                    )
+                    {
                         dataReaderContext.HasNext = true;
 
                         return;
@@ -2378,13 +2418,15 @@ namespace Microsoft.EntityFrameworkCore.Query
                     SplitQueryResultCoordinator,
                     Task
                 > relatedDataLoaders
-            ) where TRelatedEntity : TElement
-              where TCollection : class, ICollection<TElement>
+            )
+                where TRelatedEntity : TElement
+                where TCollection : class, ICollection<TElement>
             {
                 if (
                     resultCoordinator.DataReaders.Count <= collectionId
                     || resultCoordinator.DataReaders[collectionId] == null
-                ) {
+                )
+                {
                     // Execute and fetch data reader
                     var dataReader = await executionStrategy.ExecuteAsync(
                             (queryContext, relationalCommandCache, detailedErrorsEnabled),
@@ -2407,7 +2449,8 @@ namespace Microsoft.EntityFrameworkCore.Query
                         RelationalCommandCache relationalCommandCache,
                         bool detailedErrorsEnabled,
                         CancellationToken cancellationToken
-                    ) {
+                    )
+                    {
                         var relationalCommand = relationalCommandCache.GetRelationalCommand(
                             queryContext.ParameterValues
                         );
@@ -2442,14 +2485,16 @@ namespace Microsoft.EntityFrameworkCore.Query
                     dataReaderContext.HasNext
                     ?? await dbDataReader.ReadAsync(queryContext.CancellationToken)
                         .ConfigureAwait(false)
-                ) {
+                )
+                {
                     if (
                         !CompareIdentifiers(
                             identifierValueComparers,
                             splitQueryCollectionContext.ParentIdentifier,
                             childIdentifier(queryContext, dbDataReader)
                         )
-                    ) {
+                    )
+                    {
                         dataReaderContext.HasNext = true;
 
                         return;
@@ -2494,7 +2539,8 @@ namespace Microsoft.EntityFrameworkCore.Query
                 IReadOnlyList<ValueComparer> valueComparers,
                 object[] left,
                 object[] right
-            ) {
+            )
+            {
                 if (valueComparers != null)
                 {
                     // Ignoring size check on all for perf as they should be same unless bug in code.
@@ -2504,7 +2550,8 @@ namespace Microsoft.EntityFrameworkCore.Query
                             valueComparers[i] != null
                                 ? !valueComparers[i].Equals(left[i], right[i])
                                 : !Equals(left[i], right[i])
-                        ) {
+                        )
+                        {
                             return false;
                         }
                     }
@@ -2539,7 +2586,8 @@ namespace Microsoft.EntityFrameworkCore.Query
                     if (
                         expression is RelationalCollectionShaperExpression
                         || expression is RelationalSplitCollectionShaperExpression
-                    ) {
+                    )
+                    {
                         _containsCollection = true;
 
                         return expression;

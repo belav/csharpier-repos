@@ -17,7 +17,8 @@ namespace System.IO.Tests
             string directory,
             string name,
             string oldName
-        ) {
+        )
+        {
             RenamedEventArgs args = new RenamedEventArgs(changeType, directory, name, oldName);
             Assert.Equal(changeType, args.ChangeType);
             Assert.Equal(directory + Path.DirectorySeparatorChar + name, args.FullPath);
@@ -35,7 +36,8 @@ namespace System.IO.Tests
             string directory,
             string name,
             string oldName
-        ) {
+        )
+        {
             RenamedEventArgs args = new RenamedEventArgs(changeType, directory, name, oldName);
             Assert.Equal(directory + Path.DirectorySeparatorChar + oldName, args.OldFullPath);
         }

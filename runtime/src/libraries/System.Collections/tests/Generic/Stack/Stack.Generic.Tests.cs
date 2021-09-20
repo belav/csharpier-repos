@@ -85,7 +85,8 @@ namespace System.Collections.Tests
             int enumerableLength,
             int numberOfMatchingElements,
             int numberOfDuplicateElements
-        ) {
+        )
+        {
             _ = setLength;
             _ = numberOfMatchingElements;
             IEnumerable<T> enumerable = CreateEnumerable(
@@ -316,7 +317,8 @@ namespace System.Collections.Tests
         [MemberData(nameof(ValidCollectionSizes))]
         public void Stack_Generic_EnsureCapacity_RequestingLargerCapacity_DoesInvalidateEnumeration(
             int count
-        ) {
+        )
+        {
             Stack<T> stack = GenericStackFactory(count);
             IEnumerator<T> copiedEnumerator = new List<T>(stack).GetEnumerator();
             IEnumerator<T> enumerator = stack.GetEnumerator();
@@ -354,7 +356,8 @@ namespace System.Collections.Tests
         [ActiveIssue("https://github.com/dotnet/runtime/issues/51411", TestRuntimes.Mono)]
         public void Stack_Generic_EnsureCapacity_LargeCapacityRequested_Throws(
             int requestedCapacity
-        ) {
+        )
+        {
             var stack = GenericStackFactory();
             AssertExtensions.Throws<OutOfMemoryException>(
                 () => stack.EnsureCapacity(requestedCapacity)
@@ -365,7 +368,8 @@ namespace System.Collections.Tests
         [InlineData(5)]
         public void Stack_Generic_EnsureCapacity_RequestedCapacitySmallerThanOrEqualToCurrent_CapacityUnchanged(
             int currentCapacity
-        ) {
+        )
+        {
             var stack = new Stack<T>(currentCapacity);
 
             for (int requestCapacity = 0; requestCapacity <= currentCapacity; requestCapacity++)
@@ -378,7 +382,8 @@ namespace System.Collections.Tests
         [MemberData(nameof(ValidCollectionSizes))]
         public void Stack_Generic_EnsureCapacity_RequestedCapacitySmallerThanOrEqualToCount_CapacityUnchanged(
             int count
-        ) {
+        )
+        {
             Stack<T> stack = GenericStackFactory(count);
 
             for (int requestCapacity = 0; requestCapacity <= count; requestCapacity++)
@@ -404,7 +409,8 @@ namespace System.Collections.Tests
         [MemberData(nameof(ValidCollectionSizes))]
         public void Stack_Generic_EnsureCapacity_RequestingLargerCapacity_DoesNotImpactStackContent(
             int count
-        ) {
+        )
+        {
             Stack<T> stack = GenericStackFactory(count);
             var copiedList = new List<T>(stack);
 

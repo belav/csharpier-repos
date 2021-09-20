@@ -52,7 +52,8 @@ namespace Microsoft.CodeAnalysis.ExpressionEvaluator
                 TTypeSymbol,
                 TTypeParameterSymbol
             > instructionDecoder
-        ) {
+        )
+        {
             _instructionDecoder = instructionDecoder;
         }
 
@@ -62,7 +63,8 @@ namespace Microsoft.CodeAnalysis.ExpressionEvaluator
             DkmStackWalkFrame frame,
             DkmVariableInfoFlags argumentFlags,
             DkmCompletionRoutine<DkmGetFrameNameAsyncResult> completionRoutine
-        ) {
+        )
+        {
             try
             {
                 Debug.Assert(
@@ -108,7 +110,8 @@ namespace Microsoft.CodeAnalysis.ExpressionEvaluator
             DkmWorkList workList,
             DkmStackWalkFrame frame,
             DkmCompletionRoutine<DkmGetFrameReturnTypeAsyncResult> completionRoutine
-        ) {
+        )
+        {
             try
             {
                 GetNameWithGenericTypeArguments(
@@ -139,7 +142,8 @@ namespace Microsoft.CodeAnalysis.ExpressionEvaluator
             DkmStackWalkFrame frame,
             Action<TMethodSymbol> onSuccess,
             Action<Exception> onFailure
-        ) {
+        )
+        {
             // NOTE: We could always call GetClrGenericParameters, pass them to GetMethod and have that
             // return a constructed method symbol, but it seems unwise to call GetClrGenericParameters
             // for all frames (as this call requires a round-trip to the debuggee process).
@@ -193,7 +197,8 @@ namespace Microsoft.CodeAnalysis.ExpressionEvaluator
             DkmVariableInfoFlags argumentFlags,
             DkmCompletionRoutine<DkmGetFrameNameAsyncResult> completionRoutine,
             TMethodSymbol method
-        ) {
+        )
+        {
             var includeParameterTypes = argumentFlags.Includes(DkmVariableInfoFlags.Types);
             var includeParameterNames = argumentFlags.Includes(DkmVariableInfoFlags.Names);
 

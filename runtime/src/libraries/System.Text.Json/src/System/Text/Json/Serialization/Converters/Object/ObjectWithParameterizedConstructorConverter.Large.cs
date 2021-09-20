@@ -18,7 +18,8 @@ namespace System.Text.Json.Serialization.Converters
             ref ReadStack state,
             ref Utf8JsonReader reader,
             JsonParameterInfo jsonParameterInfo
-        ) {
+        )
+        {
             Debug.Assert(jsonParameterInfo.ShouldDeserialize);
             Debug.Assert(jsonParameterInfo.Options != null);
 
@@ -63,7 +64,8 @@ namespace System.Text.Json.Serialization.Converters
         protected override void InitializeConstructorArgumentCaches(
             ref ReadStack state,
             JsonSerializerOptions options
-        ) {
+        )
+        {
             JsonTypeInfo typeInfo = state.Current.JsonTypeInfo;
 
             if (typeInfo.CreateObjectWithArgs == null)

@@ -482,7 +482,8 @@ namespace Microsoft.AspNetCore.Mvc.RazorPages
             object model,
             Type modelType,
             string name
-        ) {
+        )
+        {
             if (model == null)
             {
                 throw new ArgumentNullException(nameof(model));
@@ -531,7 +532,8 @@ namespace Microsoft.AspNetCore.Mvc.RazorPages
             string name,
             IValueProvider valueProvider,
             Func<ModelMetadata, bool> propertyFilter
-        ) {
+        )
+        {
             if (model == null)
             {
                 throw new ArgumentNullException(nameof(model));
@@ -685,7 +687,8 @@ namespace Microsoft.AspNetCore.Mvc.RazorPages
             string content,
             string contentType,
             Encoding contentEncoding
-        ) {
+        )
+        {
             var mediaTypeHeaderValue = MediaTypeHeaderValue.Parse(contentType);
             mediaTypeHeaderValue.Encoding = contentEncoding ?? mediaTypeHeaderValue.Encoding;
             return Content(content, mediaTypeHeaderValue);
@@ -1111,7 +1114,8 @@ namespace Microsoft.AspNetCore.Mvc.RazorPages
             string controllerName,
             object routeValues,
             string fragment
-        ) {
+        )
+        {
             return new RedirectToActionResult(actionName, controllerName, routeValues, fragment)
             {
                 UrlHelper = Url,
@@ -1134,7 +1138,8 @@ namespace Microsoft.AspNetCore.Mvc.RazorPages
             string controllerName = null,
             object routeValues = null,
             string fragment = null
-        ) {
+        )
+        {
             return new RedirectToActionResult(
                 actionName: actionName,
                 controllerName: controllerName,
@@ -1233,7 +1238,8 @@ namespace Microsoft.AspNetCore.Mvc.RazorPages
             string controllerName,
             object routeValues,
             string fragment
-        ) {
+        )
+        {
             return new RedirectToActionResult(
                 actionName,
                 controllerName,
@@ -1261,7 +1267,8 @@ namespace Microsoft.AspNetCore.Mvc.RazorPages
             string controllerName = null,
             object routeValues = null,
             string fragment = null
-        ) {
+        )
+        {
             return new RedirectToActionResult(
                 actionName: actionName,
                 controllerName: controllerName,
@@ -1324,7 +1331,8 @@ namespace Microsoft.AspNetCore.Mvc.RazorPages
             string routeName,
             object routeValues,
             string fragment
-        ) {
+        )
+        {
             return new RedirectToRouteResult(routeName, routeValues, fragment) { UrlHelper = Url, };
         }
 
@@ -1341,7 +1349,8 @@ namespace Microsoft.AspNetCore.Mvc.RazorPages
             string routeName = null,
             object routeValues = null,
             string fragment = null
-        ) {
+        )
+        {
             return new RedirectToRouteResult(
                 routeName: routeName,
                 routeValues: routeValues,
@@ -1410,7 +1419,8 @@ namespace Microsoft.AspNetCore.Mvc.RazorPages
             string routeName,
             object routeValues,
             string fragment
-        ) {
+        )
+        {
             return new RedirectToRouteResult(
                 routeName,
                 routeValues,
@@ -1434,7 +1444,8 @@ namespace Microsoft.AspNetCore.Mvc.RazorPages
             string routeName = null,
             object routeValues = null,
             string fragment = null
-        ) {
+        )
+        {
             return new RedirectToRouteResult(
                 routeName: routeName,
                 routeValues: routeValues,
@@ -1655,7 +1666,8 @@ namespace Microsoft.AspNetCore.Mvc.RazorPages
             string pageHandler = null,
             object routeValues = null,
             string fragment = null
-        ) {
+        )
+        {
             return new RedirectToPageResult(
                 pageName: pageName,
                 pageHandler: pageHandler,
@@ -1681,7 +1693,8 @@ namespace Microsoft.AspNetCore.Mvc.RazorPages
             string pageHandler = null,
             object routeValues = null,
             string fragment = null
-        ) {
+        )
+        {
             return new RedirectToPageResult(
                 pageName: pageName,
                 pageHandler: pageHandler,
@@ -1947,7 +1960,8 @@ namespace Microsoft.AspNetCore.Mvc.RazorPages
         public virtual async Task OnPageHandlerExecutionAsync(
             PageHandlerExecutingContext context,
             PageHandlerExecutionDelegate next
-        ) {
+        )
+        {
             if (context == null)
             {
                 throw new ArgumentNullException(nameof(context));

@@ -22,7 +22,8 @@ namespace Microsoft.EntityFrameworkCore.TestUtilities.FakeProvider
             string connectionString,
             FakeCommandExecutor commandExecutor = null,
             ConnectionState state = ConnectionState.Closed
-        ) {
+        )
+        {
             ConnectionString = connectionString;
             _commandExecutor = commandExecutor ?? new FakeCommandExecutor();
             _state = state;

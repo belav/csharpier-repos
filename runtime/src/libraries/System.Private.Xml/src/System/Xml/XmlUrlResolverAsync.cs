@@ -13,12 +13,14 @@ namespace System.Xml
             Uri absoluteUri,
             string? role,
             Type? ofObjectToReturn
-        ) {
+        )
+        {
             if (
                 ofObjectToReturn == null
                 || ofObjectToReturn == typeof(System.IO.Stream)
                 || ofObjectToReturn == typeof(object)
-            ) {
+            )
+            {
                 return await DownloadManager.GetStreamAsync(absoluteUri, _credentials, _proxy)
                     .ConfigureAwait(false);
             }

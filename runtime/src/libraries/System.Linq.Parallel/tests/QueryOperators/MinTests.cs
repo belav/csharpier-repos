@@ -72,7 +72,8 @@ namespace System.Linq.Parallel.Tests
             Labeled<ParallelQuery<int>> labeled,
             int count,
             int min
-        ) {
+        )
+        {
             Min_Int(labeled, count, min);
         }
 
@@ -121,7 +122,8 @@ namespace System.Linq.Parallel.Tests
             Labeled<ParallelQuery<int>> labeled,
             int count,
             long min
-        ) {
+        )
+        {
             Min_Long(labeled, count, min);
         }
 
@@ -131,7 +133,8 @@ namespace System.Linq.Parallel.Tests
             Labeled<ParallelQuery<int>> labeled,
             int count,
             long min
-        ) {
+        )
+        {
             ParallelQuery<int> query = labeled.Item;
             Assert.Equal(count / 2, query.Select(x => x >= count / 2 ? (long?)x : null).Min());
             Assert.Equal(min, query.Min(x => x >= count / 2 ? -(long?)x : null));
@@ -143,7 +146,8 @@ namespace System.Linq.Parallel.Tests
             Labeled<ParallelQuery<int>> labeled,
             int count,
             long min
-        ) {
+        )
+        {
             _ = count;
             _ = min;
             ParallelQuery<int> query = labeled.Item;
@@ -188,7 +192,8 @@ namespace System.Linq.Parallel.Tests
             Labeled<ParallelQuery<int>> labeled,
             int count,
             float min
-        ) {
+        )
+        {
             Min_Float(labeled, count, min);
         }
 
@@ -198,7 +203,8 @@ namespace System.Linq.Parallel.Tests
             Labeled<ParallelQuery<int>> labeled,
             int count,
             float min
-        ) {
+        )
+        {
             ParallelQuery<int> query = labeled.Item;
             Assert.Equal(count / 2, query.Select(x => x >= count / 2 ? (float?)x : null).Min());
             Assert.Equal(min, query.Min(x => x >= count / 2 ? -(float?)x : null));
@@ -210,7 +216,8 @@ namespace System.Linq.Parallel.Tests
             Labeled<ParallelQuery<int>> labeled,
             int count,
             float min
-        ) {
+        )
+        {
             _ = min;
 
             // Null is defined as 'least' when ordered, but is not the minimum.
@@ -231,7 +238,8 @@ namespace System.Linq.Parallel.Tests
             Labeled<ParallelQuery<int>> labeled,
             int count,
             float min
-        ) {
+        )
+        {
             _ = count;
             _ = min;
             ParallelQuery<int> query = labeled.Item;
@@ -276,7 +284,8 @@ namespace System.Linq.Parallel.Tests
             Labeled<ParallelQuery<int>> labeled,
             int count,
             double min
-        ) {
+        )
+        {
             Min_Double(labeled, count, min);
         }
 
@@ -286,7 +295,8 @@ namespace System.Linq.Parallel.Tests
             Labeled<ParallelQuery<int>> labeled,
             int count,
             double min
-        ) {
+        )
+        {
             _ = min;
 
             // Null is defined as 'least' when ordered, but is not the minimum.
@@ -307,7 +317,8 @@ namespace System.Linq.Parallel.Tests
             Labeled<ParallelQuery<int>> labeled,
             int count,
             double min
-        ) {
+        )
+        {
             ParallelQuery<int> query = labeled.Item;
             Assert.Equal(count / 2, query.Select(x => x >= count / 2 ? (double?)x : null).Min());
             Assert.Equal(min, query.Min(x => x >= count / 2 ? -(double?)x : null));
@@ -319,7 +330,8 @@ namespace System.Linq.Parallel.Tests
             Labeled<ParallelQuery<int>> labeled,
             int count,
             double min
-        ) {
+        )
+        {
             _ = count;
             _ = min;
             ParallelQuery<int> query = labeled.Item;
@@ -352,7 +364,8 @@ namespace System.Linq.Parallel.Tests
             Labeled<ParallelQuery<int>> labeled,
             int count,
             decimal min
-        ) {
+        )
+        {
             Min_Decimal(labeled, count, min);
         }
 
@@ -362,7 +375,8 @@ namespace System.Linq.Parallel.Tests
             Labeled<ParallelQuery<int>> labeled,
             int count,
             decimal min
-        ) {
+        )
+        {
             ParallelQuery<int> query = labeled.Item;
             Assert.Equal(count / 2, query.Select(x => x >= count / 2 ? (decimal?)x : null).Min());
             Assert.Equal(min, query.Min(x => x >= count / 2 ? -(decimal?)x : null));
@@ -374,7 +388,8 @@ namespace System.Linq.Parallel.Tests
             Labeled<ParallelQuery<int>> labeled,
             int count,
             decimal min
-        ) {
+        )
+        {
             _ = count;
             _ = min;
             ParallelQuery<int> query = labeled.Item;
@@ -412,7 +427,8 @@ namespace System.Linq.Parallel.Tests
             Labeled<ParallelQuery<int>> labeled,
             int count,
             int min
-        ) {
+        )
+        {
             Min_Other(labeled, count, min);
         }
 
@@ -422,7 +438,8 @@ namespace System.Linq.Parallel.Tests
             Labeled<ParallelQuery<int>> labeled,
             int count,
             int min
-        ) {
+        )
+        {
             _ = count;
             _ = min;
             NotComparable a = new NotComparable(0);
@@ -435,7 +452,8 @@ namespace System.Linq.Parallel.Tests
             Labeled<ParallelQuery<int>> labeled,
             int count,
             int min
-        ) {
+        )
+        {
             _ = min;
             ParallelQuery<int> query = labeled.Item;
             Assert.Equal(
@@ -464,7 +482,8 @@ namespace System.Linq.Parallel.Tests
             Labeled<ParallelQuery<int>> labeled,
             int count,
             int min
-        ) {
+        )
+        {
             _ = count;
             _ = min;
             ParallelQuery<int> query = labeled.Item;

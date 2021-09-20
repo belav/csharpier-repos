@@ -125,7 +125,8 @@ namespace System.Reflection.Emit.Tests
             Type eventType,
             string expectedName,
             EventAttributes expectedAttributes
-        ) {
+        )
+        {
             TypeBuilder type = Helpers.DynamicType(TypeAttributes.Class | TypeAttributes.Public);
             type.DefineGenericParameters("T");
 

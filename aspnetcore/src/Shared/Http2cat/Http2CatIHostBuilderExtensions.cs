@@ -14,7 +14,8 @@ namespace Microsoft.Extensions.Hosting
             this IHostBuilder hostBuilder,
             string address,
             Func<Http2Utilities, Task> scenario
-        ) {
+        )
+        {
             hostBuilder.ConfigureServices(
                 services =>
                 {

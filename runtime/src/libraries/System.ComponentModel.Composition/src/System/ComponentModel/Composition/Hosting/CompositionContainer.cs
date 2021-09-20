@@ -112,11 +112,12 @@ namespace System.ComponentModel.Composition.Hosting
             ComposablePartCatalog? catalog,
             bool isThreadSafe,
             params ExportProvider[]? providers
-        ) : this(
-            catalog,
-            isThreadSafe ? CompositionOptions.IsThreadSafe : CompositionOptions.Default,
-            providers
-        ) { }
+        )
+            : this(
+                catalog,
+                isThreadSafe ? CompositionOptions.IsThreadSafe : CompositionOptions.Default,
+                providers
+            ) { }
 
         /// <summary>
         ///     Initializes a new instance of the <see cref="CompositionContainer"/> class
@@ -139,7 +140,8 @@ namespace System.ComponentModel.Composition.Hosting
             ComposablePartCatalog? catalog,
             CompositionOptions compositionOptions,
             params ExportProvider[]? providers
-        ) {
+        )
+        {
             if (
                 compositionOptions
                 > (
@@ -147,7 +149,8 @@ namespace System.ComponentModel.Composition.Hosting
                     | CompositionOptions.IsThreadSafe
                     | CompositionOptions.ExportCompositionService
                 )
-            ) {
+            )
+            {
                 throw new ArgumentOutOfRangeException(nameof(compositionOptions));
             }
             _compositionOptions = compositionOptions;
@@ -608,7 +611,8 @@ namespace System.ComponentModel.Composition.Hosting
         protected override IEnumerable<Export>? GetExportsCore(
             ImportDefinition definition,
             AtomicComposition? atomicComposition
-        ) {
+        )
+        {
             ThrowIfDisposed();
 
             IEnumerable<Export>? exports = null;
@@ -618,7 +622,8 @@ namespace System.ComponentModel.Composition.Hosting
                     CompositionConstants.ImportSourceMetadataName,
                     out object? source
                 )
-            ) {
+            )
+            {
                 source = ImportSource.Any;
             }
 

@@ -4558,9 +4558,8 @@ class C : I
    void I.M<T>() { }
 }
 ";
-            Action<CSharpCompilation> compilationVerifier = delegate(
-                CSharpCompilation compilation
-            ) {
+            Action<CSharpCompilation> compilationVerifier = delegate(CSharpCompilation compilation)
+            {
                 NamedTypeSymbol i2 = compilation.GetTypeByMetadataName("I2");
                 Assert.False(i2.IsErrorType());
                 Assert.Equal(1, i2.Arity);
@@ -4599,9 +4598,8 @@ class C : I
    void I.M<T>() { }
 }
 ";
-            Action<CSharpCompilation> compilationVerifier = delegate(
-                CSharpCompilation compilation
-            ) {
+            Action<CSharpCompilation> compilationVerifier = delegate(CSharpCompilation compilation)
+            {
                 NamedTypeSymbol i2 = compilation.GetTypeByMetadataName("I2`2");
                 Assert.False(i2.IsErrorType());
                 Assert.Equal(1, i2.Arity);
@@ -4640,9 +4638,8 @@ class C : I
    void I.M<T>() { }
 }
 ";
-            Action<CSharpCompilation> compilationVerifier = delegate(
-                CSharpCompilation compilation
-            ) {
+            Action<CSharpCompilation> compilationVerifier = delegate(CSharpCompilation compilation)
+            {
                 NamedTypeSymbol i2 = compilation.GetTypeByMetadataName("I2`1");
                 Assert.False(i2.IsErrorType());
                 Assert.Equal(1, i2.Arity);
@@ -4681,9 +4678,8 @@ class C : I
    void I.M<T>() { }
 }
 ";
-            Action<CSharpCompilation> compilationVerifier = delegate(
-                CSharpCompilation compilation
-            ) {
+            Action<CSharpCompilation> compilationVerifier = delegate(CSharpCompilation compilation)
+            {
                 NamedTypeSymbol i2 = compilation.GetTypeByMetadataName("I2`01");
                 Assert.False(i2.IsErrorType());
                 Assert.Equal(1, i2.Arity);
@@ -4737,9 +4733,8 @@ class C : I
    void I.M<T>() { }
 }
 ";
-            Action<CSharpCompilation> compilationVerifier = delegate(
-                CSharpCompilation compilation
-            ) {
+            Action<CSharpCompilation> compilationVerifier = delegate(CSharpCompilation compilation)
+            {
                 NamedTypeSymbol i2 = compilation.GetTypeByMetadataName("I2`1");
                 Assert.False(i2.IsErrorType());
                 Assert.Equal(0, i2.Arity);
@@ -5866,7 +5861,8 @@ class C : I<object>, I<C>
             MethodSymbol containingMethod,
             TypeSymbol type,
             int nReferencesExpected
-        ) {
+        )
+        {
             int nReferences = 0;
             type.VisitType(
                 (t, unused1, unused2) =>
@@ -7126,7 +7122,8 @@ End Module",
             string effectiveBaseClassDescription,
             string deducedBaseTypeDescription,
             params string[] constraintTypeDescriptions
-        ) {
+        )
+        {
             Assert.Equal(constraints, Utils.GetTypeParameterConstraints(typeParameter));
             Assert.Equal(typeParameter.IsValueType, isValueType);
             Assert.Equal(typeParameter.IsReferenceType, isReferenceType);

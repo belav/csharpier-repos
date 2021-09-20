@@ -352,7 +352,8 @@ namespace Microsoft.AspNetCore.Authentication.AzureADB2C.UI.AzureADB2C.Controlle
                 ActionDescriptor descriptor,
                 string contentPath,
                 string url
-            ) {
+            )
+            {
                 HttpContext = context;
                 RouteData = routeData;
                 ActionDescriptor = descriptor;
@@ -400,7 +401,8 @@ namespace Microsoft.AspNetCore.Authentication.AzureADB2C.UI.AzureADB2C.Controlle
                     && dicionary.TryGetValue("page", out var page)
                     && page is string pagePath
                     && ContentPath == pagePath
-                ) {
+                )
+                {
                     return Url;
                 }
 

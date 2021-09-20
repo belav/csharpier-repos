@@ -83,7 +83,8 @@ namespace Microsoft.CodeAnalysis.CSharp
 
         protected sealed override BoundExpression VisitExpressionWithoutStackGuard(
             BoundExpression node
-        ) {
+        )
+        {
             return (BoundExpression)base.Visit(node);
         }
     }

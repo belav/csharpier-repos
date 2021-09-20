@@ -41,7 +41,8 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation.NativeHosting
             string propertyValue1,
             string propertyName2,
             string propertyValue2
-        ) {
+        )
+        {
             var list = new List<PropertyTestData[]>()
             {
                 // No additional properties
@@ -208,7 +209,8 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation.NativeHosting
         public static IEnumerable<object[]> GetPropertyCompatibilityTestData(
             string scenario,
             bool hasSecondProperty
-        ) {
+        )
+        {
             List<PropertyTestData[]> properties;
             switch (scenario)
             {

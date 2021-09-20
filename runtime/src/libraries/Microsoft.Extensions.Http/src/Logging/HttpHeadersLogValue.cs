@@ -22,7 +22,8 @@ namespace Microsoft.Extensions.Http.Logging
             HttpHeaders headers,
             HttpHeaders contentHeaders,
             Func<string, bool> shouldRedactHeaderValue
-        ) {
+        )
+        {
             _kind = kind;
             _shouldRedactHeaderValue = shouldRedactHeaderValue;
 

@@ -113,7 +113,8 @@ namespace JIT.HardwareIntrinsics.X86
 
             public void RunStructFldScenario(
                 SimpleUnaryOpConvTest__ConvertToVector128Int32Vector128Double testClass
-            ) {
+            )
+            {
                 var result = Sse2.ConvertToVector128Int32(_fld);
 
                 Unsafe.Write(testClass._dataTable.outArrayPtr, result);
@@ -373,7 +374,8 @@ namespace JIT.HardwareIntrinsics.X86
             Vector128<Double> firstOp,
             void* result,
             [CallerMemberName] string method = ""
-        ) {
+        )
+        {
             Double[] inArray = new Double[Op1ElementCount];
             Int32[] outArray = new Int32[RetElementCount];
 
@@ -391,7 +393,8 @@ namespace JIT.HardwareIntrinsics.X86
             void* firstOp,
             void* result,
             [CallerMemberName] string method = ""
-        ) {
+        )
+        {
             Double[] inArray = new Double[Op1ElementCount];
             Int32[] outArray = new Int32[RetElementCount];
 
@@ -413,7 +416,8 @@ namespace JIT.HardwareIntrinsics.X86
             Double[] firstOp,
             Int32[] result,
             [CallerMemberName] string method = ""
-        ) {
+        )
+        {
             bool succeeded = true;
 
             if (result[0] != (int)Math.Round(firstOp[0]))

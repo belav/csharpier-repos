@@ -27,7 +27,8 @@ namespace Microsoft.AspNetCore.SignalR.Client.Tests
             Func<Task> onTransportStop = null,
             Func<Task> onTransportStart = null,
             TransferFormat transferFormat = TransferFormat.Text
-        ) {
+        )
+        {
             _stopHandler = onTransportStop ?? new Func<Task>(() => Task.CompletedTask);
             _startHandler = onTransportStart ?? new Func<Task>(() => Task.CompletedTask);
             Format = transferFormat;
@@ -37,7 +38,8 @@ namespace Microsoft.AspNetCore.SignalR.Client.Tests
             Uri url,
             TransferFormat transferFormat,
             CancellationToken cancellationToken = default
-        ) {
+        )
+        {
             if ((Format & transferFormat) == 0)
             {
                 throw new InvalidOperationException(

@@ -302,7 +302,8 @@ namespace Microsoft.CodeAnalysis
                 if (
                     Interlocked.CompareExchange(ref slot, newWeakReference, previousWeakReference)
                     == previousWeakReference
-                ) {
+                )
+                {
                     return newNode;
                 }
             }
@@ -352,7 +353,8 @@ namespace Microsoft.CodeAnalysis
         public SourceText GetText(
             Encoding? encoding = null,
             SourceHashAlgorithm checksumAlgorithm = SourceHashAlgorithm.Sha1
-        ) {
+        )
+        {
             var builder = new StringBuilder();
             this.WriteTo(new StringWriter(builder));
             return new StringBuilderText(builder, encoding, checksumAlgorithm);
@@ -775,7 +777,8 @@ namespace Microsoft.CodeAnalysis
         public IEnumerable<SyntaxNode> DescendantNodes(
             Func<SyntaxNode, bool>? descendIntoChildren = null,
             bool descendIntoTrivia = false
-        ) {
+        )
+        {
             return DescendantNodesImpl(
                 this.FullSpan,
                 descendIntoChildren,
@@ -794,7 +797,8 @@ namespace Microsoft.CodeAnalysis
             TextSpan span,
             Func<SyntaxNode, bool>? descendIntoChildren = null,
             bool descendIntoTrivia = false
-        ) {
+        )
+        {
             return DescendantNodesImpl(
                 span,
                 descendIntoChildren,
@@ -811,7 +815,8 @@ namespace Microsoft.CodeAnalysis
         public IEnumerable<SyntaxNode> DescendantNodesAndSelf(
             Func<SyntaxNode, bool>? descendIntoChildren = null,
             bool descendIntoTrivia = false
-        ) {
+        )
+        {
             return DescendantNodesImpl(
                 this.FullSpan,
                 descendIntoChildren,
@@ -830,7 +835,8 @@ namespace Microsoft.CodeAnalysis
             TextSpan span,
             Func<SyntaxNode, bool>? descendIntoChildren = null,
             bool descendIntoTrivia = false
-        ) {
+        )
+        {
             return DescendantNodesImpl(
                 span,
                 descendIntoChildren,
@@ -847,7 +853,8 @@ namespace Microsoft.CodeAnalysis
         public IEnumerable<SyntaxNodeOrToken> DescendantNodesAndTokens(
             Func<SyntaxNode, bool>? descendIntoChildren = null,
             bool descendIntoTrivia = false
-        ) {
+        )
+        {
             return DescendantNodesAndTokensImpl(
                 this.FullSpan,
                 descendIntoChildren,
@@ -866,7 +873,8 @@ namespace Microsoft.CodeAnalysis
             TextSpan span,
             Func<SyntaxNode, bool>? descendIntoChildren = null,
             bool descendIntoTrivia = false
-        ) {
+        )
+        {
             return DescendantNodesAndTokensImpl(
                 span,
                 descendIntoChildren,
@@ -883,7 +891,8 @@ namespace Microsoft.CodeAnalysis
         public IEnumerable<SyntaxNodeOrToken> DescendantNodesAndTokensAndSelf(
             Func<SyntaxNode, bool>? descendIntoChildren = null,
             bool descendIntoTrivia = false
-        ) {
+        )
+        {
             return DescendantNodesAndTokensImpl(
                 this.FullSpan,
                 descendIntoChildren,
@@ -902,7 +911,8 @@ namespace Microsoft.CodeAnalysis
             TextSpan span,
             Func<SyntaxNode, bool>? descendIntoChildren = null,
             bool descendIntoTrivia = false
-        ) {
+        )
+        {
             return DescendantNodesAndTokensImpl(
                 span,
                 descendIntoChildren,
@@ -925,7 +935,8 @@ namespace Microsoft.CodeAnalysis
             TextSpan span,
             bool findInsideTrivia = false,
             bool getInnermostNodeForTie = false
-        ) {
+        )
+        {
             if (!this.FullSpan.Contains(span))
             {
                 throw new ArgumentOutOfRangeException(nameof(span));
@@ -983,7 +994,8 @@ namespace Microsoft.CodeAnalysis
             bool includeSkipped = false,
             bool includeDirectives = false,
             bool includeDocumentationComments = false
-        ) {
+        )
+        {
             return SyntaxNavigator.Instance.GetFirstToken(
                 this,
                 includeZeroWidth,
@@ -1002,7 +1014,8 @@ namespace Microsoft.CodeAnalysis
             bool includeSkipped = false,
             bool includeDirectives = false,
             bool includeDocumentationComments = false
-        ) {
+        )
+        {
             return SyntaxNavigator.Instance.GetLastToken(
                 this,
                 includeZeroWidth,
@@ -1032,7 +1045,8 @@ namespace Microsoft.CodeAnalysis
         public IEnumerable<SyntaxToken> DescendantTokens(
             Func<SyntaxNode, bool>? descendIntoChildren = null,
             bool descendIntoTrivia = false
-        ) {
+        )
+        {
             return this.DescendantNodesAndTokens(descendIntoChildren, descendIntoTrivia)
                 .Where(sn => sn.IsToken)
                 .Select(sn => sn.AsToken());
@@ -1045,7 +1059,8 @@ namespace Microsoft.CodeAnalysis
             TextSpan span,
             Func<SyntaxNode, bool>? descendIntoChildren = null,
             bool descendIntoTrivia = false
-        ) {
+        )
+        {
             return this.DescendantNodesAndTokens(span, descendIntoChildren, descendIntoTrivia)
                 .Where(sn => sn.IsToken)
                 .Select(sn => sn.AsToken());
@@ -1108,7 +1123,8 @@ namespace Microsoft.CodeAnalysis
             SyntaxNode node,
             int textOffset,
             Func<SyntaxTrivia, bool>? stepInto = null
-        ) {
+        )
+        {
             recurse:
             if (textOffset >= 0)
             {
@@ -1136,7 +1152,8 @@ namespace Microsoft.CodeAnalysis
                                             trivia.HasStructure
                                             && stepInto != null
                                             && stepInto(trivia)
-                                        ) {
+                                        )
+                                        {
                                             node = trivia.GetStructure()!;
                                             goto recurse;
                                         }
@@ -1158,7 +1175,8 @@ namespace Microsoft.CodeAnalysis
                                             trivia.HasStructure
                                             && stepInto != null
                                             && stepInto(trivia)
-                                        ) {
+                                        )
+                                        {
                                             node = trivia.GetStructure()!;
                                             goto recurse;
                                         }
@@ -1187,7 +1205,8 @@ namespace Microsoft.CodeAnalysis
         public IEnumerable<SyntaxTrivia> DescendantTrivia(
             Func<SyntaxNode, bool>? descendIntoChildren = null,
             bool descendIntoTrivia = false
-        ) {
+        )
+        {
             return DescendantTriviaImpl(this.FullSpan, descendIntoChildren, descendIntoTrivia);
         }
 
@@ -1198,7 +1217,8 @@ namespace Microsoft.CodeAnalysis
             TextSpan span,
             Func<SyntaxNode, bool>? descendIntoChildren = null,
             bool descendIntoTrivia = false
-        ) {
+        )
+        {
             return DescendantTriviaImpl(span, descendIntoChildren, descendIntoTrivia);
         }
 
@@ -1276,7 +1296,8 @@ namespace Microsoft.CodeAnalysis
         /// </summary>
         public IEnumerable<SyntaxNodeOrToken> GetAnnotatedNodesAndTokens(
             params string[] annotationKinds
-        ) {
+        )
+        {
             return this.DescendantNodesAndTokensAndSelf(
                     n => n.ContainsAnnotations,
                     descendIntoTrivia: true
@@ -1289,7 +1310,8 @@ namespace Microsoft.CodeAnalysis
         /// </summary>
         public IEnumerable<SyntaxNodeOrToken> GetAnnotatedNodesAndTokens(
             SyntaxAnnotation annotation
-        ) {
+        )
+        {
             return this.DescendantNodesAndTokensAndSelf(
                     n => n.ContainsAnnotations,
                     descendIntoTrivia: true
@@ -1368,7 +1390,8 @@ namespace Microsoft.CodeAnalysis
 
         internal SyntaxNode WithAdditionalAnnotationsInternal(
             IEnumerable<SyntaxAnnotation> annotations
-        ) {
+        )
+        {
             return this.Green.WithAdditionalAnnotationsGreen(annotations).CreateRed();
         }
 
@@ -1427,7 +1450,8 @@ namespace Microsoft.CodeAnalysis
         public virtual void SerializeTo(
             Stream stream,
             CancellationToken cancellationToken = default
-        ) {
+        )
+        {
             if (stream == null)
             {
                 throw new ArgumentNullException(nameof(stream));
@@ -1579,7 +1603,8 @@ namespace Microsoft.CodeAnalysis
         internal static SyntaxTrivia GetTriviaThatContainsPosition(
             in SyntaxTriviaList list,
             int position
-        ) {
+        )
+        {
             foreach (var trivia in list)
             {
                 if (trivia.FullSpan.Contains(position))

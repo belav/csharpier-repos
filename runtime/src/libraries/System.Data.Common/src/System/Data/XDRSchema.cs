@@ -90,7 +90,8 @@ namespace System.Data
             if (
                 FEqualIdentity(node, Keywords.XDR_ELEMENT, Keywords.XDRNS)
                 || FEqualIdentity(node, Keywords.XDR_ATTRIBUTE, Keywords.XDRNS)
-            ) {
+            )
+            {
                 if (strType == null || strType.Length == 0)
                     return null;
 
@@ -109,7 +110,8 @@ namespace System.Data
                             FEqualIdentity(vn, Keywords.XDR_ATTRIBUTETYPE, Keywords.XDRNS)
                             && FEqualIdentity(node, Keywords.XDR_ATTRIBUTE, Keywords.XDRNS)
                         )
-                    ) {
+                    )
+                    {
                         if (
                             vn is XmlElement
                             && ((XmlElement)vn).GetAttribute(Keywords.NAME) == strType
@@ -161,7 +163,8 @@ namespace System.Data
                 || value == Keywords.ELTONLY
                 || value == Keywords.ELEMENTONLY
                 || value == Keywords.MIXED
-            ) {
+            )
+            {
                 return false;
             }
             if (value == Keywords.TEXTONLY)
@@ -218,7 +221,8 @@ namespace System.Data
                 if (
                     (Convert.ToInt32(occurs, CultureInfo.InvariantCulture) > 1)
                     && (typeNode == null)
-                ) {
+                )
+                {
                     return InstantiateSimpleTable(_ds, node);
                 }
 
@@ -358,7 +362,8 @@ namespace System.Data
             if (
                 FEqualIdentity(node, Keywords.XDR_ELEMENTTYPE, Keywords.XDRNS)
                 || FEqualIdentity(node, Keywords.XDR_ATTRIBUTETYPE, Keywords.XDRNS)
-            ) {
+            )
+            {
                 instanceName = node.GetAttribute(Keywords.NAME);
                 if (instanceName == null || instanceName.Length == 0)
                 {
@@ -543,7 +548,8 @@ namespace System.Data
             bool isAttribute,
             ref int minOccurs,
             ref int maxOccurs
-        ) {
+        )
+        {
             string occurs = elNode.GetAttribute(Keywords.MINOCCURS);
             if (occurs != null && occurs.Length > 0)
             {
@@ -613,7 +619,8 @@ namespace System.Data
                 if (
                     FEqualIdentity(n, Keywords.XDR_ATTRIBUTE, Keywords.XDRNS)
                     || FEqualIdentity(n, Keywords.XDR_ELEMENT, Keywords.XDRNS)
-                ) {
+                )
+                {
                     HandleColumn((XmlElement)n, table);
                     continue;
                 }

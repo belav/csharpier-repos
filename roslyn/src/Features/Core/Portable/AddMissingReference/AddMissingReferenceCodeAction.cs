@@ -27,7 +27,8 @@ namespace Microsoft.CodeAnalysis.AddMissingReference
             string title,
             ProjectReference projectReferenceToAdd,
             AssemblyIdentity missingAssemblyIdentity
-        ) {
+        )
+        {
             _project = project;
             Title = title;
             _projectReferenceToAdd = projectReferenceToAdd;
@@ -38,7 +39,8 @@ namespace Microsoft.CodeAnalysis.AddMissingReference
             Project project,
             AssemblyIdentity missingAssemblyIdentity,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var dependencyGraph = project.Solution.GetProjectDependencyGraph();
 
             // We want to find a project that generates this assembly, if one so exists. We therefore
@@ -62,7 +64,8 @@ namespace Microsoft.CodeAnalysis.AddMissingReference
                 var candidateProjectId in dependencyGraph.GetProjectsThatThisProjectTransitivelyDependsOn(
                     project.Id
                 )
-            ) {
+            )
+            {
                 var candidateProject = project.Solution.GetProject(candidateProjectId);
                 if (
                     string.Equals(
@@ -70,7 +73,8 @@ namespace Microsoft.CodeAnalysis.AddMissingReference
                         candidateProject.AssemblyName,
                         StringComparison.OrdinalIgnoreCase
                     )
-                ) {
+                )
+                {
                     // The name matches, so let's see if the full identities are equal.
                     var compilation = await candidateProject.GetCompilationAsync(cancellationToken)
                         .ConfigureAwait(false);
@@ -105,7 +109,8 @@ namespace Microsoft.CodeAnalysis.AddMissingReference
 
         protected override Task<IEnumerable<CodeActionOperation>> ComputeOperationsAsync(
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             // If we have a project reference to add, then add it
             if (_projectReferenceToAdd != null)
             {

@@ -37,7 +37,8 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Diagnostics
             IReadOnlyDictionary<string, ImmutableArray<DiagnosticAnalyzer>>? analyzerMap = null,
             IDiagnosticUpdateSource? updateSource = null,
             bool createTaggerProvider = true
-        ) {
+        )
+        {
             _threadingContext = workspace.GetService<IThreadingContext>();
             _listenerProvider = workspace.GetService<IAsynchronousOperationListenerProvider>();
 
@@ -95,7 +96,8 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Diagnostics
                         typeof(TProvider) == typeof(DiagnosticsSquiggleTaggerProvider)
                         || typeof(TProvider) == typeof(DiagnosticsSuggestionTaggerProvider)
                         || typeof(TProvider) == typeof(DiagnosticsClassificationTaggerProvider)
-                    ) {
+                    )
+                    {
                         _taggerProvider =
                             _workspace.ExportProvider.GetExportedValues<ITaggerProvider>()
                                 .OfType<TProvider>()

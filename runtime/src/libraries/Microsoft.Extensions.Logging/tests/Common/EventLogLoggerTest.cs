@@ -369,7 +369,8 @@ namespace Microsoft.Extensions.Logging
         public void MessageExceedingMaxSize_WritesSplitMessages(
             int messageSize,
             string[] expectedMessages
-        ) {
+        )
+        {
             // Arrange
             var headerLength = "EventId: 0".Length + "Category: ".Length;
             var loggerName = "Test";
@@ -413,7 +414,8 @@ namespace Microsoft.Extensions.Logging
                 EventLogEntryType type,
                 int eventID,
                 short category
-            ) {
+            )
+            {
                 Messages.Add(message);
                 Entries.Add((message, type, eventID, category));
             }

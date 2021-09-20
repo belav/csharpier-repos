@@ -33,7 +33,8 @@ namespace Microsoft.CodeAnalysis.CSharp.SimplifyThisOrMe
             OptionSet optionSet,
             out TextSpan issueSpan,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             return ExpressionSimplifier.Instance.TrySimplify(
                 node,
                 model,

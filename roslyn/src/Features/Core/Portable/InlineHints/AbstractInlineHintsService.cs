@@ -17,7 +17,8 @@ namespace Microsoft.CodeAnalysis.InlineHints
             Document document,
             TextSpan textSpan,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var inlineParameterService =
                 document.GetLanguageService<IInlineParameterNameHintsService>();
             var inlineTypeService = document.GetLanguageService<IInlineTypeHintsService>();

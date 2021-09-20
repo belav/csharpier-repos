@@ -29,7 +29,8 @@ namespace Microsoft.AspNetCore.Http.Connections.Internal.Transports
             PipeReader application,
             ILoggerFactory loggerFactory,
             HttpConnectionContext? connection
-        ) {
+        )
+        {
             _timeoutToken = timeoutToken;
             _application = application;
 

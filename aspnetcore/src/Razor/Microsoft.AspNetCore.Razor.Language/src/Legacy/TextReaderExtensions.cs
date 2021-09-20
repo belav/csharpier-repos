@@ -51,7 +51,8 @@ namespace Microsoft.AspNetCore.Razor.Language.Legacy
             this TextReader reader,
             bool inclusive,
             params char[] terminators
-        ) {
+        )
+        {
             if (reader == null)
             {
                 throw new ArgumentNullException(nameof(reader));
@@ -84,7 +85,8 @@ namespace Microsoft.AspNetCore.Razor.Language.Legacy
             this TextReader reader,
             Predicate<char> condition,
             bool inclusive
-        ) {
+        )
+        {
             if (reader == null)
             {
                 throw new ArgumentNullException(nameof(reader));
@@ -130,7 +132,8 @@ namespace Microsoft.AspNetCore.Razor.Language.Legacy
             this TextReader reader,
             Predicate<char> condition,
             bool inclusive
-        ) {
+        )
+        {
             if (reader == null)
             {
                 throw new ArgumentNullException(nameof(reader));

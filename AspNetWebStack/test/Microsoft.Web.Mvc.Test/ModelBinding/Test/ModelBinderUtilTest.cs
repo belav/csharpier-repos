@@ -354,7 +354,8 @@ namespace Microsoft.Web.Mvc.ModelBinding.Test
             public bool BindModel(
                 ControllerContext controllerContext,
                 ExtensibleModelBindingContext bindingContext
-            ) {
+            )
+            {
                 throw new NotImplementedException();
             }
         }

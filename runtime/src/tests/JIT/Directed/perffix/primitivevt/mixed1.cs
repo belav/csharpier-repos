@@ -1159,7 +1159,8 @@ unsafe class testout1
                     ) * Convert.ToSingle((((asgop1 - (4096.0F * 1.944519F)) + 0.0F) + asgop0))
                 )
             )
-        ) {
+        )
+        {
             if (
                 (
                     Convert.ToInt16(
@@ -1177,11 +1178,13 @@ unsafe class testout1
                         ) * Convert.ToSingle((((asgop1 - (4096.0F * 1.944519F)) + 0.0F) + asgop0))
                     )
                 )
-            ) {
+            )
+            {
                 if (
                     (arr3d_0_2_4_3[4, 0, 3])
                     > (Convert.ToDouble(Convert.ToDecimal(1M) * Convert.ToDecimal(a1_0_2_4_3)))
-                ) {
+                )
+                {
                     long if2_0retval_0_2_4_3 = Convert.ToInt64(
                         Convert.ToInt64(
                             Convert.ToInt16(
@@ -1349,7 +1352,8 @@ unsafe class testout1
                     )
                 )
             )
-        ) {
+        )
+        {
             return Convert.ToDouble(
                 (
                     asgop1
@@ -1411,7 +1415,8 @@ unsafe class testout1
                     Convert.ToInt64(5311646115785867264L) - Convert.ToInt64(5311646115785860164L)
                 )
             )
-        ) {
+        )
+        {
             if ((a1_0_2_4_1) > (0.3348266918179674605045979722M))
                 Console.WriteLine("Func_0_2_4_1: > true");
         }
@@ -1429,7 +1434,8 @@ unsafe class testout1
                         ) / 0.3348266918179674605045979722M
                     )
                 )
-            ) {
+            )
+            {
                 if (
                     (a0_0_2_4_1)
                     != (
@@ -1442,7 +1448,8 @@ unsafe class testout1
                             ) / 0.3348266918179674605045979722M
                         )
                     )
-                ) {
+                )
+                {
                     if (((Convert.ToInt32(a9_0_2_4_1 + asgop0))) != 10)
                         Console.WriteLine("Func_0_2_4_1: != true");
                     else
@@ -1938,7 +1945,8 @@ unsafe class testout1
                         )
                 )
             )
-        ) {
+        )
+        {
             return Convert.ToUInt32(
                 Convert.ToUInt32(
                     Convert.ToInt16(
@@ -2052,7 +2060,8 @@ unsafe class testout1
         if (
             ((((arr3d_0_2_1_1[4, 0, 3] * -16.0F) - asgop5) + (asgop0 - (arr3d_0_2_1_1[4, 0, 3]))))
             > (asgop5)
-        ) {
+        )
+        {
             if (
                 (
                     (
@@ -2060,7 +2069,8 @@ unsafe class testout1
                         + (asgop0 - (arr3d_0_2_1_1[4, 0, 3]))
                     )
                 ) < (asgop5)
-            ) {
+            )
+            {
                 if (
                     (asgop2)
                     != (
@@ -2074,7 +2084,8 @@ unsafe class testout1
                             ) + asgop2
                         )
                     )
-                ) {
+                )
+                {
                     if (((((arr3d_0_2_1_1[4, 9, 3] / asgop1) - 0.0F) / asgop4)) < (0.0F))
                         Console.WriteLine("Func_0_2_1_1: < true");
                 }
@@ -2318,7 +2329,8 @@ unsafe class testout1
                         )
                     )
                 )
-            ) {
+            )
+            {
                 if (
                     ((vtstatic_0_1_3_4.a2_0_1_3_4 * a5_0_1_3_4))
                     == (
@@ -3250,7 +3262,8 @@ unsafe class testout1
                             + Convert.ToInt64(val_0_1_3_2)
                     )
                 )
-            ) {
+            )
+            {
                 if (
                     (
                         (
@@ -3365,7 +3378,8 @@ unsafe class testout1
                         / (((asgop3 * 1.0) + val_0_1_1_4) * 529960.41904193407)
                 )
             )
-        ) {
+        )
+        {
             return Convert.ToInt32(
                 (
                     Convert.ToInt16(
@@ -3594,7 +3608,8 @@ unsafe class testout1
                         + (asgop1 / (Convert.ToDouble(64UL * -0.015617374328940947)))
                     )
                 ) < (0.5)
-            ) {
+            )
+            {
                 return Convert.ToDouble(
                     (
                         (

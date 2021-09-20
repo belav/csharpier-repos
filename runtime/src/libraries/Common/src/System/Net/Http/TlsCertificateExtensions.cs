@@ -77,7 +77,8 @@ namespace System.Net.Http
         internal static X509Chain? BuildNewChain(
             X509Certificate2 certificate,
             bool includeClientApplicationPolicy
-        ) {
+        )
+        {
             var chain = new X509Chain();
             chain.ChainPolicy.VerificationFlags = X509VerificationFlags.AllFlags;
             chain.ChainPolicy.RevocationFlag = X509RevocationFlag.ExcludeRoot;
@@ -106,7 +107,8 @@ namespace System.Net.Http
             ISet<string> allowedIssuers,
             out X509Certificate2? clientCertificate,
             out X509Chain? clientCertChain
-        ) {
+        )
+        {
             clientCertificate = null;
             clientCertChain = null;
             if (certificates == null)
@@ -143,7 +145,8 @@ namespace System.Net.Http
                             if (
                                 (chainStatus.Status & X509ChainStatusFlags.PartialChain)
                                 == X509ChainStatusFlags.PartialChain
-                            ) {
+                            )
+                            {
                                 isComplete = false;
                                 break;
                             }

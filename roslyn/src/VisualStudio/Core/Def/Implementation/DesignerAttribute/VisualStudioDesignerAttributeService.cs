@@ -147,7 +147,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.DesignerAttribu
 
         public void StartScanningForDesignerAttributesInCurrentProcess(
             CancellationToken cancellation
-        ) {
+        )
+        {
             var registrationService =
                 _workspace.Services.GetRequiredService<ISolutionCrawlerRegistrationService>();
             var analyzerProvider = new InProcDesignerAttributeIncrementalAnalyzerProvider(this);
@@ -165,7 +166,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.DesignerAttribu
         private async Task NotifyProjectSystemAsync(
             ImmutableArray<DesignerAttributeData> data,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             cancellationToken.ThrowIfCancellationRequested();
 
             using var _1 = ArrayBuilder<DesignerAttributeData>.GetInstance(out var filteredInfos);
@@ -186,7 +188,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.DesignerAttribu
         private void AddFilteredInfos(
             ImmutableArray<DesignerAttributeData> data,
             ArrayBuilder<DesignerAttributeData> filteredData
-        ) {
+        )
+        {
             using var _ = PooledHashSet<DocumentId>.GetInstance(out var seenDocumentIds);
 
             // Walk the list of designer items in reverse, and skip any items for a project once
@@ -204,7 +207,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.DesignerAttribu
             ProjectId projectId,
             IEnumerable<DesignerAttributeData> data,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             // Delegate to the CPS or legacy notification services as necessary.
             var cpsUpdateService = await GetUpdateServiceIfCpsProjectAsync(
                     projectId,
@@ -228,7 +232,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.DesignerAttribu
             ProjectId projectId,
             IEnumerable<DesignerAttributeData> data,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             // legacy project system can only be talked to on the UI thread.
             await ThreadingContext.JoinableTaskFactory.SwitchToMainThreadAsync(
                 alwaysYield: true,
@@ -257,7 +262,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.DesignerAttribu
             IVSMDDesignerService designerService,
             IVsHierarchy hierarchy,
             DesignerAttributeData data
-        ) {
+        )
+        {
             this.AssertIsForeground();
 
             var itemId = hierarchy.TryGetItemId(data.FilePath);
@@ -273,7 +279,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.DesignerAttribu
                         out var currentValue
                     )
                 )
-            ) {
+            )
+            {
                 var currentStringValue = string.IsNullOrEmpty(currentValue as string)
                     ? null
                     : (string)currentValue;
@@ -311,7 +318,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.DesignerAttribu
             IProjectItemDesignerTypeUpdateService updateService,
             IEnumerable<DesignerAttributeData> data,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             cancellationToken.ThrowIfCancellationRequested();
 
             // We may have updates for many different configurations of the same logical project system project.
@@ -337,7 +345,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.DesignerAttribu
             IProjectItemDesignerTypeUpdateService updateService,
             DesignerAttributeData data,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             cancellationToken.ThrowIfCancellationRequested();
 
             try
@@ -356,7 +365,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.DesignerAttribu
         private async Task<IProjectItemDesignerTypeUpdateService?> GetUpdateServiceIfCpsProjectAsync(
             ProjectId projectId,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             if (!_cpsProjects.TryGetValue(projectId, out var updateService))
             {
                 await ThreadingContext.JoinableTaskFactory.SwitchToMainThreadAsync(
@@ -402,7 +412,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.DesignerAttribu
         public ValueTask ReportDesignerAttributeDataAsync(
             ImmutableArray<DesignerAttributeData> data,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             Contract.ThrowIfNull(_workQueue);
             _workQueue.AddWork(data);
             return ValueTaskFactory.CompletedTask;
@@ -411,7 +422,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.DesignerAttribu
         public ValueTask OnProjectRemovedAsync(
             ProjectId projectId,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             _cpsProjects.TryRemove(projectId, out _);
             return ValueTaskFactory.CompletedTask;
         }

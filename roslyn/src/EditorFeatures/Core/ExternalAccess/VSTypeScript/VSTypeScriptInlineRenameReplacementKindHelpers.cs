@@ -14,7 +14,8 @@ namespace Microsoft.CodeAnalysis.ExternalAccess.VSTypeScript
     {
         public static VSTypeScriptInlineRenameReplacementKind ConvertFrom(
             InlineRenameReplacementKind kind
-        ) {
+        )
+        {
             return kind switch
             {
                 InlineRenameReplacementKind.NoConflict
@@ -33,7 +34,8 @@ namespace Microsoft.CodeAnalysis.ExternalAccess.VSTypeScript
 
         public static InlineRenameReplacementKind ConvertTo(
             VSTypeScriptInlineRenameReplacementKind kind
-        ) {
+        )
+        {
             return kind switch
             {
                 VSTypeScriptInlineRenameReplacementKind.NoConflict

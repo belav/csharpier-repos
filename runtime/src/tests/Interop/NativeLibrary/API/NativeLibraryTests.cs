@@ -125,7 +125,8 @@ public class NativeLibraryTest
             if (
                 TestLibrary.Utilities.IsWindows
                 && File.Exists(Path.Combine(Environment.SystemDirectory, libName))
-            ) {
+            )
+            {
                 // Calls on a valid library from System32 directory
                 success &= EXPECT(
                     LoadLibraryAdvanced(libName, assembly, DllImportSearchPath.System32)
@@ -354,7 +355,8 @@ public class NativeLibraryTest
         string libName,
         Assembly assembly,
         DllImportSearchPath? searchPath
-    ) {
+    )
+    {
         CurrentTest = String.Format("LoadLibrary({0}, {1}, {2})", libName, assembly, searchPath);
 
         IntPtr handle = IntPtr.Zero;
@@ -378,7 +380,8 @@ public class NativeLibraryTest
         string libName,
         Assembly assembly,
         DllImportSearchPath? searchPath
-    ) {
+    )
+    {
         CurrentTest = String.Format("TryLoadLibrary({0}, {1}, {2})", libName, assembly, searchPath);
 
         IntPtr handle = IntPtr.Zero;

@@ -24,17 +24,18 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             SourceMemberMethodSymbol accessor,
             TypeWithAnnotations paramType,
             int ordinal
-        ) : base(
-            accessor,
-            ordinal,
-            paramType,
-            RefKind.None,
-            ParameterSymbol.ValueParameterName,
-            accessor.Locations,
-            syntaxRef: null,
-            isParams: false,
-            isExtensionMethodThis: false
-        ) { }
+        )
+            : base(
+                accessor,
+                ordinal,
+                paramType,
+                RefKind.None,
+                ParameterSymbol.ValueParameterName,
+                accessor.Locations,
+                syntaxRef: null,
+                isParams: false,
+                isExtensionMethodThis: false
+            ) { }
 
         internal override FlowAnalysisAnnotations FlowAnalysisAnnotations
         {
@@ -44,7 +45,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                 if (
                     ContainingSymbol is SourcePropertyAccessorSymbol propertyAccessor
                     && propertyAccessor.AssociatedSymbol is SourcePropertySymbolBase property
-                ) {
+                )
+                {
                     if (property.HasDisallowNull)
                     {
                         result |= FlowAnalysisAnnotations.DisallowNull;
@@ -89,13 +91,15 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
         internal override void AddSynthesizedAttributes(
             PEModuleBuilder moduleBuilder,
             ref ArrayBuilder<SynthesizedAttributeData> attributes
-        ) {
+        )
+        {
             base.AddSynthesizedAttributes(moduleBuilder, ref attributes);
 
             if (
                 ContainingSymbol is SourcePropertyAccessorSymbol propertyAccessor
                 && propertyAccessor.AssociatedSymbol is SourcePropertySymbolBase property
-            ) {
+            )
+            {
                 var annotations = FlowAnalysisAnnotations;
                 if ((annotations & FlowAnalysisAnnotations.DisallowNull) != 0)
                 {

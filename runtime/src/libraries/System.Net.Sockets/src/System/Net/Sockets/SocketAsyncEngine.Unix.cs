@@ -45,7 +45,8 @@ namespace System.Net.Sockets
                     Environment.GetEnvironmentVariable("DOTNET_SYSTEM_NET_SOCKETS_THREAD_COUNT"),
                     out uint count
                 )
-            ) {
+            )
+            {
                 return (int)count;
             }
 
@@ -114,7 +115,8 @@ namespace System.Net.Sockets
             SocketAsyncContext context,
             out SocketAsyncEngine? engine,
             out Interop.Error error
-        ) {
+        )
+        {
             int engineIndex = Math.Abs(
                 Interlocked.Increment(ref s_allocateFromEngine) % s_engines.Length
             );
@@ -128,7 +130,8 @@ namespace System.Net.Sockets
             IntPtr socketHandle,
             SocketAsyncContext context,
             out Interop.Error error
-        ) {
+        )
+        {
             bool added = _handleToContextMap.TryAdd(
                 socketHandle,
                 new SocketAsyncContextWrapper(context)
@@ -336,13 +339,15 @@ namespace System.Net.Sockets
                 bool enqueuedEvent = false;
                 foreach (
                     var socketEvent in new ReadOnlySpan<Interop.Sys.SocketEvent>(Buffer, numEvents)
-                ) {
+                )
+                {
                     if (
                         _handleToContextMap.TryGetValue(
                             socketEvent.Data,
                             out SocketAsyncContextWrapper contextWrapper
                         )
-                    ) {
+                    )
+                    {
                         SocketAsyncContext context = contextWrapper.Context;
 
                         if (context.PreferInlineCompletions)

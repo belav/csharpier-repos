@@ -13,7 +13,8 @@ public class TestFramework
         string actualResult,
         string expectedResults,
         string invocationString
-    ) {
+    )
+    {
         Console.WriteLine(invocationString);
         Console.WriteLine("    -> EXPECTED: " + expectedResults);
         Console.WriteLine("    -> GOT:      " + actualResult);
@@ -30,7 +31,8 @@ public class TestFramework
         string constrainedCallerMethod,
         int count,
         params string[] actualResults
-    ) {
+    )
+    {
         Console.WriteLine(constrainedCallerMethod);
 
         string[] expectedResultsArray = expectedResults.Split(new char[] { '#' });
@@ -49,7 +51,8 @@ public class TestFramework
             || (expectedResults != "" && count == 0)
             || ((expectedResultsArray.Length - 1) != count)
             || (count > 0 && count != actualResults.Length)
-        ) {
+        )
+        {
             Console.WriteLine(
                 "Error in method count in constrained caller [ " + constrainedCallerMethod + " ]"
             );

@@ -110,7 +110,8 @@ namespace Microsoft.CodeAnalysis.GenerateMember.GenerateConstructor
             SemanticDocument document,
             IMethodSymbol delegatedConstructor,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             // Check if we're in a constructor.  If not, then we can always have our new constructor delegate to
             // another, as it can't cause a cycle.
             var currentConstructor = GetCurrentConstructor(
@@ -153,13 +154,15 @@ namespace Microsoft.CodeAnalysis.GenerateMember.GenerateConstructor
             Document document,
             SyntaxNode node,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             using (
                 Logger.LogBlock(
                     FunctionId.Refactoring_GenerateMember_GenerateConstructor,
                     cancellationToken
                 )
-            ) {
+            )
+            {
                 var semanticDocument = await SemanticDocument.CreateAsync(
                         document,
                         cancellationToken
@@ -283,7 +286,8 @@ namespace Microsoft.CodeAnalysis.GenerateMember.GenerateConstructor
             SemanticModel semanticModel,
             Argument argument,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             // If it named argument then we use the name provided.
             if (argument.IsNamed)
                 return argument.Name;
@@ -305,7 +309,8 @@ namespace Microsoft.CodeAnalysis.GenerateMember.GenerateConstructor
             IList<string> reservedNames,
             NamingRule parameterNamingRule,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             reservedNames ??= SpecializedCollections.EmptyList<string>();
 
             // We can't change the names of named parameters.  Any other names we're flexible on.

@@ -200,7 +200,8 @@ class A { }";
             string content,
             string expected,
             OptionsCollection changedOptionSet = null
-        ) {
+        )
+        {
             var tuple = PreprocessMarkers(content);
 
             return AssertFormatAsync(

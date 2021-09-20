@@ -11,7 +11,8 @@ namespace System.Security.Cryptography
             ref XmlKeyHelper.ParseState state,
             string name,
             int sizeHint = -1
-        ) {
+        )
+        {
             byte[]? ret = XmlKeyHelper.ReadCryptoBinary(ref state, name, sizeHint);
 
             if (ret == null)

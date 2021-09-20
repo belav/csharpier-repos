@@ -142,7 +142,8 @@ namespace ClientSample
         private static async Task<bool> ConnectAsync(
             HubConnection connection,
             CancellationToken token
-        ) {
+        )
+        {
             // Keep trying to until we can start
             while (true)
             {

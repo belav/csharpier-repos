@@ -66,7 +66,8 @@ namespace Microsoft.CodeAnalysis.CSharp.InvokeDelegateWithConditionalAccess
             ImmutableArray<Diagnostic> diagnostics,
             SyntaxEditor editor,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             foreach (var diagnostic in diagnostics)
             {
                 cancellationToken.ThrowIfCancellationRequested();
@@ -80,7 +81,8 @@ namespace Microsoft.CodeAnalysis.CSharp.InvokeDelegateWithConditionalAccess
             SyntaxEditor editor,
             Diagnostic diagnostic,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             if (diagnostic.Properties[Constants.Kind] == Constants.VariableAndIfStatementForm)
             {
                 HandleVariableAndIfStatementForm(editor, diagnostic, cancellationToken);
@@ -98,7 +100,8 @@ namespace Microsoft.CodeAnalysis.CSharp.InvokeDelegateWithConditionalAccess
             SyntaxEditor editor,
             Diagnostic diagnostic,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var root = editor.OriginalRoot;
 
             var ifStatementLocation = diagnostic.AdditionalLocations[0];
@@ -131,7 +134,8 @@ namespace Microsoft.CodeAnalysis.CSharp.InvokeDelegateWithConditionalAccess
             if (
                 ifStatement.Parent.IsKind(SyntaxKind.ElseClause)
                 && ifStatement.Statement.IsKind(SyntaxKind.Block, out BlockSyntax block)
-            ) {
+            )
+            {
                 newStatement = block.WithStatements(SyntaxFactory.SingletonList(newStatement));
             }
 
@@ -145,7 +149,8 @@ namespace Microsoft.CodeAnalysis.CSharp.InvokeDelegateWithConditionalAccess
             SyntaxEditor editor,
             Diagnostic diagnostic,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var root = editor.OriginalRoot;
 
             var localDeclarationLocation = diagnostic.AdditionalLocations[0];
@@ -194,12 +199,11 @@ namespace Microsoft.CodeAnalysis.CSharp.InvokeDelegateWithConditionalAccess
 
         private class MyCodeAction : CustomCodeActions.DocumentChangeAction
         {
-            public MyCodeAction(
-                Func<CancellationToken, Task<Document>> createChangedDocument
-            ) : base(
-                CSharpAnalyzersResources.Delegate_invocation_can_be_simplified,
-                createChangedDocument
-            ) { }
+            public MyCodeAction(Func<CancellationToken, Task<Document>> createChangedDocument)
+                : base(
+                    CSharpAnalyzersResources.Delegate_invocation_can_be_simplified,
+                    createChangedDocument
+                ) { }
         }
     }
 }

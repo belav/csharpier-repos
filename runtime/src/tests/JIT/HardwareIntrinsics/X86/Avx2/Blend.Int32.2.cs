@@ -435,7 +435,8 @@ namespace JIT.HardwareIntrinsics.X86
             Vector256<Int32> right,
             void* result,
             [CallerMemberName] string method = ""
-        ) {
+        )
+        {
             Int32[] inArray1 = new Int32[Op1ElementCount];
             Int32[] inArray2 = new Int32[Op2ElementCount];
             Int32[] outArray = new Int32[RetElementCount];
@@ -456,7 +457,8 @@ namespace JIT.HardwareIntrinsics.X86
             void* right,
             void* result,
             [CallerMemberName] string method = ""
-        ) {
+        )
+        {
             Int32[] inArray1 = new Int32[Op1ElementCount];
             Int32[] inArray2 = new Int32[Op2ElementCount];
             Int32[] outArray = new Int32[RetElementCount];
@@ -485,7 +487,8 @@ namespace JIT.HardwareIntrinsics.X86
             Int32[] right,
             Int32[] result,
             [CallerMemberName] string method = ""
-        ) {
+        )
+        {
             bool succeeded = true;
 
             if (result[0] != (((2 & (1 << 0)) == 0) ? left[0] : right[0]))

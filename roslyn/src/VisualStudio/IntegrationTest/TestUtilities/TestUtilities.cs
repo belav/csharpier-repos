@@ -120,7 +120,8 @@ namespace Microsoft.VisualStudio.IntegrationTest.Utilities
         public static void ThrowIfUnExpectedItemFound<TCollection>(
             IEnumerable<TCollection> actual,
             IEnumerable<TCollection> unexpected
-        ) {
+        )
+        {
             var shouldThrow = false;
             var sb = new StringBuilder();
             sb.Append("The following UN-expected item(s) were encountered:\r\n");

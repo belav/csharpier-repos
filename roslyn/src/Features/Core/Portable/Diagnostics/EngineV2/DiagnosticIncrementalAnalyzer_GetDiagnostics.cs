@@ -19,7 +19,8 @@ namespace Microsoft.CodeAnalysis.Diagnostics.EngineV2
             object id,
             bool includeSuppressedDiagnostics = false,
             CancellationToken cancellationToken = default
-        ) {
+        )
+        {
             if (!(id is LiveDiagnosticUpdateArgsId argsId))
             {
                 return SpecializedTasks.EmptyImmutableArray<DiagnosticData>();
@@ -123,7 +124,8 @@ namespace Microsoft.CodeAnalysis.Diagnostics.EngineV2
                 ProjectId? projectId,
                 DocumentId? documentId,
                 bool includeSuppressedDiagnostics
-            ) {
+            )
+            {
                 Owner = owner;
                 Solution = solution;
 
@@ -151,7 +153,8 @@ namespace Microsoft.CodeAnalysis.Diagnostics.EngineV2
 
             public async Task<ImmutableArray<DiagnosticData>> GetDiagnosticsAsync(
                 CancellationToken cancellationToken
-            ) {
+            )
+            {
                 if (ProjectId != null)
                 {
                     var project = Solution.GetProject(ProjectId);
@@ -184,7 +187,8 @@ namespace Microsoft.CodeAnalysis.Diagnostics.EngineV2
             protected async Task AppendDiagnosticsAsync(
                 Solution solution,
                 CancellationToken cancellationToken
-            ) {
+            )
+            {
                 // PERF: run projects in parallel rather than running CompilationWithAnalyzer with concurrency == true.
                 // We do this to not get into thread starvation causing hundreds of threads to be spawned.
                 var includeProjectNonLocalResult = true;
@@ -250,7 +254,8 @@ namespace Microsoft.CodeAnalysis.Diagnostics.EngineV2
                 IEnumerable<DocumentId> documentIds,
                 bool includeProjectNonLocalResult,
                 CancellationToken cancellationToken
-            ) {
+            )
+            {
                 foreach (var stateSet in StateManager.GetStateSets(project.Id))
                 {
                     foreach (var documentId in documentIds)
@@ -308,7 +313,8 @@ namespace Microsoft.CodeAnalysis.Diagnostics.EngineV2
                 DiagnosticAnalyzer analyzer,
                 AnalysisKind analysisKind,
                 CancellationToken cancellationToken
-            ) {
+            )
+            {
                 var project = Solution.GetProject(ProjectId);
                 if (project == null)
                 {
@@ -342,7 +348,8 @@ namespace Microsoft.CodeAnalysis.Diagnostics.EngineV2
                 DocumentId? documentId,
                 AnalysisKind kind,
                 CancellationToken cancellationToken
-            ) {
+            )
+            {
                 cancellationToken.ThrowIfCancellationRequested();
 
                 // active file diagnostics:
@@ -350,7 +357,8 @@ namespace Microsoft.CodeAnalysis.Diagnostics.EngineV2
                     documentId != null
                     && kind != AnalysisKind.NonLocal
                     && stateSet.TryGetActiveFileState(documentId, out var state)
-                ) {
+                )
+                {
                     return state.GetAnalysisData(kind).Items;
                 }
 
@@ -371,7 +379,8 @@ namespace Microsoft.CodeAnalysis.Diagnostics.EngineV2
                 DocumentId? documentId,
                 AnalysisKind kind,
                 CancellationToken cancellationToken
-            ) {
+            )
+            {
                 if (!stateSet.TryGetProjectState(project.Id, out var state))
                 {
                     // never analyzed this project yet.
@@ -427,7 +436,8 @@ namespace Microsoft.CodeAnalysis.Diagnostics.EngineV2
 
             public async Task<ImmutableArray<DiagnosticData>> GetProjectDiagnosticsAsync(
                 CancellationToken cancellationToken
-            ) {
+            )
+            {
                 if (ProjectId != null)
                 {
                     var project = Solution.GetProject(ProjectId);
@@ -457,7 +467,8 @@ namespace Microsoft.CodeAnalysis.Diagnostics.EngineV2
                 IEnumerable<DocumentId> documentIds,
                 bool includeProjectNonLocalResult,
                 CancellationToken cancellationToken
-            ) {
+            )
+            {
                 // get analyzers that are not suppressed.
                 var stateSets = StateManager.GetOrCreateStateSets(project)
                     .Where(s => ShouldIncludeStateSet(project, s))
@@ -518,7 +529,8 @@ namespace Microsoft.CodeAnalysis.Diagnostics.EngineV2
                     _diagnosticIds != null
                     && infoCache.GetDiagnosticDescriptors(stateSet.Analyzer)
                         .All(d => !_diagnosticIds.Contains(d.Id))
-                ) {
+                )
+                {
                     return false;
                 }
 

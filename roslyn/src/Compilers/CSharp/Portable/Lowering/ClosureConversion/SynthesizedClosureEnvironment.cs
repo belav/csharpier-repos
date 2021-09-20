@@ -81,7 +81,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             SyntaxNode scopeSyntaxOpt,
             DebugId methodId,
             DebugId closureId
-        ) {
+        )
+        {
             if (scopeSyntaxOpt == null)
             {
                 // Display class is shared among static non-generic lambdas across generations, method ordinal is -1 in that case.

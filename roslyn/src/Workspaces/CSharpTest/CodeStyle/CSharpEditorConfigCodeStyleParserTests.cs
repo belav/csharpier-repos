@@ -77,7 +77,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.CodeStyle
             string optionString,
             int parsedValue,
             ReportDiagnostic? severity
-        ) {
+        )
+        {
             var defaultValue = new CodeStyleOption2<ExpressionBodyPreference>(
                 ExpressionBodyPreference.Never,
                 NotificationOption2.Error
@@ -110,7 +111,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.CodeStyle
             string optionString,
             AddImportPlacement parsedValue,
             ReportDiagnostic? severity
-        ) {
+        )
+        {
             var defaultValue = new CodeStyleOption2<AddImportPlacement>(
                 AddImportPlacement.InsideNamespace,
                 NotificationOption2.Error

@@ -38,7 +38,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.LanguageService
         protected override async Task InitializeAsync(
             CancellationToken cancellationToken,
             IProgress<ServiceProgressData> progress
-        ) {
+        )
+        {
             await base.InitializeAsync(cancellationToken, progress).ConfigureAwait(true);
 
             await JoinableTaskFactory.SwitchToMainThreadAsync(cancellationToken);
@@ -182,7 +183,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.LanguageService
 
         protected virtual Task RegisterObjectBrowserLibraryManagerAsync(
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             // it is virtual rather than abstract to not break other languages which derived from our
             // base package implementations
             return Task.CompletedTask;
@@ -190,7 +192,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.LanguageService
 
         protected virtual Task UnregisterObjectBrowserLibraryManagerAsync(
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             // it is virtual rather than abstract to not break other languages which derived from our
             // base package implementations
             return Task.CompletedTask;

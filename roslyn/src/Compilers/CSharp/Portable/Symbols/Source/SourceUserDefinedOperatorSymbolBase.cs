@@ -59,7 +59,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                     || name == WellKnownMemberNames.EqualityOperatorName
                     || name == WellKnownMemberNames.InequalityOperatorName
                 )
-            ) {
+            )
+            {
                 // If we have a conversion or equality/inequality operator in an interface, we already have reported that fact as
                 // an error. No need to cascade the error further.
                 return;
@@ -115,7 +116,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             BaseMethodDeclarationSyntax syntax,
             Location location,
             BindingDiagnosticBag diagnostics
-        ) {
+        )
+        {
             var defaultAccess = DeclarationModifiers.Private;
             var allowedModifiers =
                 DeclarationModifiers.AccessibilityMask
@@ -139,7 +141,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             BaseMethodDeclarationSyntax declarationSyntax,
             TypeSyntax returnTypeSyntax,
             BindingDiagnosticBag diagnostics
-        ) {
+        )
+        {
             TypeWithAnnotations returnType;
             ImmutableArray<ParameterSymbol> parameters;
 
@@ -217,7 +220,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                         || Name == WellKnownMemberNames.InequalityOperatorName
                     )
                 ) || this.ContainingType.IsStatic
-            ) {
+            )
+            {
                 return;
             }
 
@@ -350,7 +354,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                 // allow conversion between T and Nullable<T> in declaration of Nullable<T>
                 !MatchesContainingType(source)
                 && !MatchesContainingType(target)
-            ) {
+            )
+            {
                 // CS0556: User-defined conversion must convert to or from the enclosing type
                 diagnostics.Add(
                     ErrorCode.ERR_ConversionNotInvolvingContainedType,
@@ -365,7 +370,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                 (ContainingType.SpecialType == SpecialType.System_Nullable_T)
                     ? source.Equals(target, ComparisonForUserDefinedOperators)
                     : source0.Equals(target0, ComparisonForUserDefinedOperators)
-            ) {
+            )
+            {
                 // CS0555: User-defined operator cannot take an object of the enclosing type
                 // and convert to an object of the enclosing type
                 diagnostics.Add(ErrorCode.ERR_IdentityConversion, this.Locations[0]);
@@ -588,7 +594,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                     ComparisonForUserDefinedOperators,
                     useSiteInfo: ref useSiteInfo
                 )
-            ) {
+            )
+            {
                 // CS0448: The return type for ++ or -- operator must match the parameter type
                 //         or be derived from the parameter type
                 diagnostics.Add(ErrorCode.ERR_BadIncDecRetType, this.Locations[0]);
@@ -611,7 +618,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             if (
                 !MatchesContainingType(this.GetParameterType(0).StrippedType())
                 || this.GetParameterType(1).StrippedType().SpecialType != SpecialType.System_Int32
-            ) {
+            )
+            {
                 // CS0546: The first operand of an overloaded shift operator must have the
                 //         same type as the containing type, and the type of the second
                 //         operand must be int
@@ -633,7 +641,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             if (
                 !MatchesContainingType(this.GetParameterType(0).StrippedType())
                 && !MatchesContainingType(this.GetParameterType(1).StrippedType())
-            ) {
+            )
+            {
                 // CS0563: One of the parameters of a binary operator must be the containing type
                 diagnostics.Add(ErrorCode.ERR_BadBinaryOperatorSignature, this.Locations[0]);
             }
@@ -736,7 +745,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
         internal sealed override void AfterAddingTypeMembersChecks(
             ConversionsBase conversions,
             BindingDiagnosticBag diagnostics
-        ) {
+        )
+        {
             // Check constraints on return type and parameters. Note: Dev10 uses the
             // method name location for any such errors. We'll do the same for return
             // type errors but for parameter errors, we'll use the parameter location.
@@ -786,7 +796,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             if (
                 compilation.ShouldEmitNullableAttributes(this)
                 && ReturnTypeWithAnnotations.NeedsNullableAttribute()
-            ) {
+            )
+            {
                 compilation.EnsureNullableAttributeExists(
                     diagnostics,
                     ReturnTypeLocation,

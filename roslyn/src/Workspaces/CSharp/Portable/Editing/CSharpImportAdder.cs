@@ -27,7 +27,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Editing
         protected override INamespaceSymbol? GetExplicitNamespaceSymbol(
             SyntaxNode node,
             SemanticModel model
-        ) {
+        )
+        {
             switch (node)
             {
                 case QualifiedNameSyntax name:
@@ -45,7 +46,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Editing
             ImmutableArray<INamespaceSymbol> namespaceSymbols,
             HashSet<INamespaceSymbol> conflicts,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var rewriter = new ConflictWalker(
                 model,
                 namespaceSymbols,
@@ -59,14 +61,16 @@ namespace Microsoft.CodeAnalysis.CSharp.Editing
             ExpressionSyntax fullName,
             ExpressionSyntax namespacePart,
             SemanticModel model
-        ) {
+        )
+        {
             // name must refer to something that is not a namespace, but be qualified with a namespace.
             var symbol = model.GetSymbolInfo(fullName).Symbol;
             if (
                 symbol != null
                 && symbol.Kind != SymbolKind.Namespace
                 && model.GetSymbolInfo(namespacePart).Symbol is INamespaceSymbol
-            ) {
+            )
+            {
                 // use the symbols containing namespace, and not the potentially less than fully qualified namespace in the full name expression.
                 var ns = symbol.ContainingNamespace;
                 if (ns != null)
@@ -183,7 +187,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Editing
 
             public override void VisitParenthesizedLambdaExpression(
                 ParenthesizedLambdaExpressionSyntax node
-            ) {
+            )
+            {
                 var previousInAnonymousMethod = _inAnonymousMethod;
                 _inAnonymousMethod = true;
                 base.VisitParenthesizedLambdaExpression(node);
@@ -192,7 +197,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Editing
 
             public override void VisitAnonymousMethodExpression(
                 AnonymousMethodExpressionSyntax node
-            ) {
+            )
+            {
                 var previousInAnonymousMethod = _inAnonymousMethod;
                 _inAnonymousMethod = true;
                 base.VisitAnonymousMethodExpression(node);

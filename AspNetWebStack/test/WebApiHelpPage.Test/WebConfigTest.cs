@@ -28,7 +28,8 @@ namespace WebApiHelpPageWebHost.UnitTest
                 Stream webConfigStream = typeof(WebConfigTest).Assembly.GetManifestResourceStream(
                     @"WebApiHelpPage.TestFiles.Web.config"
                 )
-            ) {
+            )
+            {
                 XDocument document = XDocument.Load(webConfigStream);
 
                 // Act

@@ -83,7 +83,8 @@ namespace Microsoft.EntityFrameworkCore.TestUtilities
         private static void CloneProperties(
             IReadOnlyEntityType sourceEntityType,
             IMutableEntityType targetEntityType
-        ) {
+        )
+        {
             foreach (var property in sourceEntityType.GetDeclaredProperties())
             {
                 var clonedProperty = targetEntityType.AddProperty(property.Name, property.ClrType);
@@ -100,7 +101,8 @@ namespace Microsoft.EntityFrameworkCore.TestUtilities
         private static void CloneKeys(
             IReadOnlyEntityType sourceEntityType,
             IMutableEntityType targetEntityType
-        ) {
+        )
+        {
             foreach (var key in sourceEntityType.GetDeclaredKeys())
             {
                 var clonedKey = targetEntityType.AddKey(
@@ -119,7 +121,8 @@ namespace Microsoft.EntityFrameworkCore.TestUtilities
         private static void CloneIndexes(
             IReadOnlyEntityType sourceEntityType,
             IMutableEntityType targetEntityType
-        ) {
+        )
+        {
             foreach (var index in sourceEntityType.GetDeclaredIndexes())
             {
                 var clonedIndex = targetEntityType.AddIndex(
@@ -134,7 +137,8 @@ namespace Microsoft.EntityFrameworkCore.TestUtilities
         private static void CloneForeignKeys(
             IReadOnlyEntityType sourceEntityType,
             IMutableEntityType targetEntityType
-        ) {
+        )
+        {
             foreach (var foreignKey in sourceEntityType.GetDeclaredForeignKeys())
             {
                 var targetPrincipalEntityType = targetEntityType.Model.FindEntityType(
@@ -161,7 +165,8 @@ namespace Microsoft.EntityFrameworkCore.TestUtilities
         private static void CloneNavigations(
             IReadOnlyEntityType sourceEntityType,
             IMutableEntityType targetEntityType
-        ) {
+        )
+        {
             foreach (var navigation in sourceEntityType.GetDeclaredNavigations())
             {
                 var targetDependentEntityType = targetEntityType.Model.FindEntityType(

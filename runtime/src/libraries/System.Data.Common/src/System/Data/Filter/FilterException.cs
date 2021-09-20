@@ -13,10 +13,8 @@ namespace System.Data
     )]
     public class InvalidExpressionException : DataException
     {
-        protected InvalidExpressionException(
-            SerializationInfo info,
-            StreamingContext context
-        ) : base(info, context) { }
+        protected InvalidExpressionException(SerializationInfo info, StreamingContext context)
+            : base(info, context) { }
 
         public InvalidExpressionException() : base() { }
         public InvalidExpressionException(string? s) : base(s) { }
@@ -198,7 +196,8 @@ namespace System.Data
             object value,
             Type type,
             Exception? innerException
-        ) {
+        )
+        {
             return _Eval(
                 SR.Format(SR.Expr_DatavalueConvertion, value.ToString(), type.ToString()),
                 innerException

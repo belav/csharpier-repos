@@ -110,7 +110,8 @@ namespace System.Runtime.CompilerServices { class AsyncMethodBuilderAttribute : 
             string worseOverload,
             bool implicitConversionToTask = false,
             bool isError = false
-        ) {
+        )
+        {
             var source =
                 @"using System;
 using System.Runtime.CompilerServices;

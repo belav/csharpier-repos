@@ -57,7 +57,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                 if (
                     result.Kind != SymbolKind.ErrorType
                     && result.DeclaredAccessibility != Accessibility.Public
-                ) {
+                )
+                {
                     result = new MissingMetadataTypeSymbol.TopLevel(module, ref emittedName, type);
                 }
                 RegisterDeclaredSpecialType(result);
@@ -93,7 +94,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                     corType,
                     null
                 ) != null
-            ) {
+            )
+            {
                 Debug.Assert(
                     ReferenceEquals(corType, _lazySpecialTypes[(int)typeId])
                         || (
@@ -146,7 +148,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
 
         internal sealed override NamedTypeSymbol GetNativeIntegerType(
             NamedTypeSymbol underlyingType
-        ) {
+        )
+        {
             if (_lazyNativeIntegerTypes == null)
             {
                 Interlocked.CompareExchange(
@@ -216,7 +219,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                     _lazySpecialTypeMembers[(int)member],
                     ErrorTypeSymbol.UnknownResultType
                 )
-            ) {
+            )
+            {
                 if (_lazySpecialTypeMembers == null)
                 {
                     var specialTypeMembers = new Symbol[(int)SpecialMember.Count];

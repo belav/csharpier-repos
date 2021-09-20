@@ -35,7 +35,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
         public VisualStudioSymbolRenamedCodeActionOperationFactoryWorkspaceService(
             [ImportMany] IEnumerable<IRefactorNotifyService> refactorNotifyServices
-        ) {
+        )
+        {
             _refactorNotifyServices = refactorNotifyServices;
         }
 
@@ -44,7 +45,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation
             string newName,
             Solution startingSolution,
             Solution updatedSolution
-        ) {
+        )
+        {
             return new RenameSymbolOperation(
                 _refactorNotifyServices,
                 symbol ?? throw new ArgumentNullException(nameof(symbol)),
@@ -68,7 +70,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation
                 string newName,
                 Solution startingSolution,
                 Solution updatedSolution
-            ) {
+            )
+            {
                 _refactorNotifyServices = refactorNotifyServices;
                 _symbol = symbol;
                 _newName = newName;
@@ -79,7 +82,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation
             public override void Apply(
                 Workspace workspace,
                 CancellationToken cancellationToken = default
-            ) {
+            )
+            {
                 var updatedDocumentIds = _updatedSolution.GetChanges(_startingSolution)
                     .GetProjectChanges()
                     .SelectMany(p => p.GetChangedDocuments());
@@ -98,7 +102,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation
                             _newName,
                             throwOnFailure: false
                         )
-                    ) {
+                    )
+                    {
                         refactorNotifyService.TryOnAfterGlobalSymbolRenamed(
                             workspace,
                             updatedDocumentIds,

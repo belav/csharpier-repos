@@ -69,7 +69,8 @@ namespace Microsoft.EntityFrameworkCore.Storage
         /// <returns> The type mapping, or <see langword="null" /> if none could be found. </returns>
         protected virtual RelationalTypeMapping? FindMapping(
             in RelationalTypeMappingInfo mappingInfo
-        ) {
+        )
+        {
             foreach (var plugin in RelationalDependencies.Plugins)
             {
                 var typeMapping = plugin.FindMapping(mappingInfo);
@@ -100,7 +101,8 @@ namespace Microsoft.EntityFrameworkCore.Storage
         private RelationalTypeMapping? FindMappingWithConversion(
             in RelationalTypeMappingInfo mappingInfo,
             IReadOnlyList<IProperty>? principals
-        ) {
+        )
+        {
             Type? providerClrType = null;
             ValueConverter? customConverter = null;
             if (principals != null)
@@ -149,7 +151,8 @@ namespace Microsoft.EntityFrameworkCore.Storage
                                     sourceType,
                                     providerType
                                 )
-                            ) {
+                            )
+                            {
                                 var mappingInfoUsed = info.WithConverter(converterInfo);
                                 mapping = FindMapping(mappingInfoUsed);
 
@@ -159,7 +162,8 @@ namespace Microsoft.EntityFrameworkCore.Storage
                                         var secondConverterInfo in Dependencies.ValueConverterSelector.Select(
                                             providerType
                                         )
-                                    ) {
+                                    )
+                                    {
                                         mapping = FindMapping(
                                             mappingInfoUsed.WithConverter(secondConverterInfo)
                                         );
@@ -389,7 +393,8 @@ namespace Microsoft.EntityFrameworkCore.Storage
             bool? fixedLength = null,
             int? precision = null,
             int? scale = null
-        ) {
+        )
+        {
             string? storeTypeBaseName = null;
 
             if (storeTypeName != null)
@@ -475,7 +480,8 @@ namespace Microsoft.EntityFrameworkCore.Storage
             out int? size,
             out int? precision,
             out int? scale
-        ) {
+        )
+        {
             unicode = null;
             size = null;
             precision = null;
@@ -506,7 +512,8 @@ namespace Microsoft.EntityFrameworkCore.Storage
                                     storeTypeName.Substring(openParen + 1, comma - openParen - 1),
                                     out var parsedPrecision
                                 )
-                            ) {
+                            )
+                            {
                                 precision = parsedPrecision;
                             }
 
@@ -515,7 +522,8 @@ namespace Microsoft.EntityFrameworkCore.Storage
                                     storeTypeName.Substring(comma + 1, closeParen - comma - 1),
                                     out var parsedScale
                                 )
-                            ) {
+                            )
+                            {
                                 scale = parsedScale;
                             }
                         }
@@ -525,7 +533,8 @@ namespace Microsoft.EntityFrameworkCore.Storage
                                     .Trim(),
                                 out var parsedSize
                             )
-                        ) {
+                        )
+                        {
                             size = parsedSize;
                         }
 

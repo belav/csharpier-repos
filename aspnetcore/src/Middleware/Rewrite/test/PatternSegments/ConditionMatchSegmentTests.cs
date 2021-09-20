@@ -16,7 +16,8 @@ namespace Microsoft.AspNetCore.Rewrite.Tests.PatternSegments
         public void ConditionMatch_AssertBackreferencesObtainsCorrectValue(
             int index,
             string expected
-        ) {
+        )
+        {
             // Arrange
             var condMatch = CreateTestMatch();
             var segment = new ConditionMatchSegment(index);

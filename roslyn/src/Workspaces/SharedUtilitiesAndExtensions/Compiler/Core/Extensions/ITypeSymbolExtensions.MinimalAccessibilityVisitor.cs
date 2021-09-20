@@ -27,7 +27,8 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
 
             public override Accessibility VisitFunctionPointerType(
                 IFunctionPointerTypeSymbol symbol
-            ) {
+            )
+            {
                 var accessibility = symbol.DeclaredAccessibility;
 
                 accessibility = AccessibilityUtilities.Minimum(
@@ -47,7 +48,8 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
                 // or the runtime creates special private types for it's own use, we'll be ready.
                 foreach (
                     var callingConventionType in symbol.Signature.UnmanagedCallingConventionTypes
-                ) {
+                )
+                {
                     accessibility = AccessibilityUtilities.Minimum(
                         accessibility,
                         callingConventionType.Accept(this)

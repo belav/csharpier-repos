@@ -18,7 +18,8 @@ namespace Microsoft.AspNetCore.Mvc.Razor.Extensions.Version2_X
         protected override void ExecuteCore(
             RazorCodeDocument codeDocument,
             DocumentIntermediateNode documentNode
-        ) {
+        )
+        {
             if (documentNode.Options.DesignTime)
             {
                 return;
@@ -58,7 +59,8 @@ namespace Microsoft.AspNetCore.Mvc.Razor.Extensions.Version2_X
             else if (
                 documentNode.DocumentKind == RazorPageDocumentClassifierPass.RazorPageDocumentKind
                 && PageDirective.TryGetPageDirective(documentNode, out var pageDirective)
-            ) {
+            )
+            {
                 var escapedRoutePrefix = MakeVerbatimStringLiteral(pageDirective.RouteTemplate);
                 attribute =
                     $"[assembly:{RazorPageAttribute}({escapedPath}, typeof({generatedTypeName}), {escapedRoutePrefix})]";
@@ -101,7 +103,8 @@ namespace Microsoft.AspNetCore.Mvc.Razor.Extensions.Version2_X
             if (
                 !relativePath.StartsWith("/", StringComparison.Ordinal)
                 && !relativePath.StartsWith("\\", StringComparison.Ordinal)
-            ) {
+            )
+            {
                 relativePath = "/" + relativePath;
             }
 

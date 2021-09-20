@@ -21,7 +21,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Extensions
             this SemanticModel semanticModel,
             SyntaxToken name,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             if (name.Parent is ExpressionSyntax expression)
             {
                 var results = semanticModel.LookupName(
@@ -41,7 +42,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Extensions
             this SemanticModel semanticModel,
             SyntaxToken name,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             if (name.Parent is ExpressionSyntax expression)
             {
                 return semanticModel.LookupName(expression, cancellationToken);
@@ -62,7 +64,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Extensions
             out ExpressionSyntax qualifier,
             out string name,
             out int arity
-        ) {
+        )
+        {
             switch (expression.Kind())
             {
                 case SyntaxKind.SimpleMemberAccessExpression:
@@ -108,7 +111,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Extensions
             this SemanticModel semanticModel,
             ExpressionSyntax expression,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var expr = SyntaxFactory.GetStandaloneExpression(expression);
             DecomposeName(expr, out var qualifier, out var name, out _);
 
@@ -171,7 +175,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Extensions
         public static ISet<INamespaceSymbol> GetUsingNamespacesInScope(
             this SemanticModel semanticModel,
             SyntaxNode location
-        ) {
+        )
+        {
             // Avoiding linq here for perf reasons. This is used heavily in the AddImport service
             var result = new HashSet<INamespaceSymbol>();
 
@@ -195,7 +200,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Extensions
             this SemanticModel semanticModel,
             TypeSyntax type,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             if (type == null)
             {
                 return Accessibility.Private;
@@ -219,7 +225,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Extensions
                     type.Parent is BaseTypeSyntax baseType
                     && baseType.IsParentKind(SyntaxKind.BaseList, out BaseListSyntax baseList)
                     && baseType.Type == type
-                ) {
+                )
+                {
                     var containingType =
                         semanticModel.GetDeclaredSymbol(
                             type.GetAncestor<BaseTypeDeclarationSyntax>(),
@@ -243,7 +250,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Extensions
                     SyntaxKind.VariableDeclaration,
                     out VariableDeclarationSyntax variableDeclaration
                 ) && variableDeclaration.IsParentKind(SyntaxKind.FieldDeclaration)
-            ) {
+            )
+            {
                 return semanticModel.GetDeclaredSymbol(
                     variableDeclaration.Variables[0],
                     cancellationToken
@@ -260,7 +268,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Extensions
                     out variableDeclaration
                 )
                 && variableDeclaration.IsParentKind(SyntaxKind.FieldDeclaration)
-            ) {
+            )
+            {
                 return semanticModel.GetDeclaredSymbol(
                     variableDeclaration.Variables[0],
                     cancellationToken
@@ -283,7 +292,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Extensions
                 || type.IsParentKind(SyntaxKind.EventDeclaration)
                 || type.IsParentKind(SyntaxKind.IndexerDeclaration)
                 || type.IsParentKind(SyntaxKind.OperatorDeclaration)
-            ) {
+            )
+            {
                 return semanticModel.GetDeclaredSymbol(
                     type.Parent,
                     cancellationToken
@@ -303,13 +313,15 @@ namespace Microsoft.CodeAnalysis.CSharp.Extensions
             if (
                 type.IsParentKind(SyntaxKind.Parameter)
                 && type.Parent.IsParentKind(SyntaxKind.ParameterList)
-            ) {
+            )
+            {
                 if (
                     type.Parent.Parent.IsParentKind(SyntaxKind.DelegateDeclaration)
                     || type.Parent.Parent.IsParentKind(SyntaxKind.MethodDeclaration)
                     || type.Parent.Parent.IsParentKind(SyntaxKind.IndexerDeclaration)
                     || type.Parent.Parent.IsParentKind(SyntaxKind.OperatorDeclaration)
-                ) {
+                )
+                {
                     return semanticModel.GetDeclaredSymbol(
                         type.Parent.Parent.Parent,
                         cancellationToken
@@ -333,7 +345,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Extensions
             if (
                 type.IsParentKind(SyntaxKind.VariableDeclaration, out variableDeclaration)
                 && variableDeclaration.IsParentKind(SyntaxKind.EventFieldDeclaration)
-            ) {
+            )
+            {
                 var symbol = semanticModel.GetDeclaredSymbol(
                     variableDeclaration.Variables[0],
                     cancellationToken
@@ -363,7 +376,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Extensions
             this SemanticModel semanticModel,
             TypeSyntax type,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             if (type == null)
             {
                 return false;
@@ -379,7 +393,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Extensions
                     symbol.DeclaredAccessibility == Accessibility.Private
                     || symbol.DeclaredAccessibility == Accessibility.ProtectedAndInternal
                     || symbol.DeclaredAccessibility == Accessibility.Internal
-                ) {
+                )
+                {
                     return false;
                 }
             }

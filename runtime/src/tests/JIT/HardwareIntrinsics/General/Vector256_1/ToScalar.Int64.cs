@@ -84,7 +84,8 @@ namespace JIT.HardwareIntrinsics.General
             Int64 result,
             Int64[] values,
             [CallerMemberName] string method = ""
-        ) {
+        )
+        {
             if (result != values[0])
             {
                 TestLibrary.TestFramework.LogInformation(

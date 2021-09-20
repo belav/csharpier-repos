@@ -66,14 +66,16 @@ namespace System.SpanTests
         [Theory, MemberData(nameof(s_casesDouble))]
         public static void BinarySearch_Double(
             (double[] Array, double Value, int ExpectedIndex) testCase
-        ) {
+        )
+        {
             TestOverloads(testCase.Array, testCase.Value, testCase.ExpectedIndex);
         }
 
         [Theory, MemberData(nameof(s_casesString))]
         public static void BinarySearch_String(
             (string[] Array, string Value, int ExpectedIndex) testCase
-        ) {
+        )
+        {
             TestOverloads(testCase.Array, testCase.Value, testCase.ExpectedIndex);
         }
 

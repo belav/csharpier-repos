@@ -41,7 +41,8 @@ namespace Microsoft.CodeAnalysis
             MetadataImageKind kind = MetadataImageKind.Assembly,
             ImmutableArray<string> aliases = default,
             bool embedInteropTypes = false
-        ) {
+        )
+        {
             if (!kind.IsValid())
             {
                 throw new ArgumentOutOfRangeException(nameof(kind));
@@ -211,14 +212,16 @@ namespace Microsoft.CodeAnalysis
         public static bool operator ==(
             MetadataReferenceProperties left,
             MetadataReferenceProperties right
-        ) {
+        )
+        {
             return left.Equals(right);
         }
 
         public static bool operator !=(
             MetadataReferenceProperties left,
             MetadataReferenceProperties right
-        ) {
+        )
+        {
             return !left.Equals(right);
         }
     }

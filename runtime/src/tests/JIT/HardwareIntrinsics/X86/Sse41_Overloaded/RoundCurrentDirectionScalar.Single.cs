@@ -138,7 +138,8 @@ namespace JIT.HardwareIntrinsics.X86
                     (alignment != 32 && alignment != 16)
                     || (alignment * 2) < sizeOfinArray1
                     || (alignment * 2) < sizeOfoutArray
-                ) {
+                )
+                {
                     throw new ArgumentException("Invalid value of alignment");
                 }
 
@@ -197,7 +198,8 @@ namespace JIT.HardwareIntrinsics.X86
 
             public void RunStructFldScenario(
                 SimpleUnaryOpTest__RoundCurrentDirectionScalarSingle testClass
-            ) {
+            )
+            {
                 var result = Sse41.RoundCurrentDirectionScalar(_fld1);
 
                 Unsafe.Write(testClass._dataTable.outArrayPtr, result);
@@ -206,7 +208,8 @@ namespace JIT.HardwareIntrinsics.X86
 
             public void RunStructFldScenario_Load(
                 SimpleUnaryOpTest__RoundCurrentDirectionScalarSingle testClass
-            ) {
+            )
+            {
                 fixed (Vector128<Single>* pFld1 = &_fld1)
                 {
                     var result = Sse41.RoundCurrentDirectionScalar(
@@ -531,7 +534,8 @@ namespace JIT.HardwareIntrinsics.X86
             Vector128<Single> op1,
             void* result,
             [CallerMemberName] string method = ""
-        ) {
+        )
+        {
             Single[] inArray1 = new Single[Op1ElementCount];
             Single[] outArray = new Single[RetElementCount];
 
@@ -568,13 +572,15 @@ namespace JIT.HardwareIntrinsics.X86
             Single[] firstOp,
             Single[] result,
             [CallerMemberName] string method = ""
-        ) {
+        )
+        {
             bool succeeded = true;
 
             if (
                 BitConverter.SingleToInt32Bits(result[0])
                 != BitConverter.SingleToInt32Bits(MathF.Round(firstOp[0]))
-            ) {
+            )
+            {
                 succeeded = false;
             }
             else
@@ -584,7 +590,8 @@ namespace JIT.HardwareIntrinsics.X86
                     if (
                         BitConverter.SingleToInt32Bits(result[i])
                         != BitConverter.SingleToInt32Bits(firstOp[i])
-                    ) {
+                    )
+                    {
                         succeeded = false;
                         break;
                     }

@@ -19,7 +19,8 @@ namespace System.IO.Ports.Tests
                 SerialPort com = new SerialPort(
                     TCSupport.LocalMachineSerialInfo.FirstAvailablePortName
                 )
-            ) {
+            )
+            {
                 Debug.WriteLine("Verifying EndWrite with null asyncResult");
 
                 com.Open();
@@ -34,7 +35,8 @@ namespace System.IO.Ports.Tests
                 SerialPort com = new SerialPort(
                     TCSupport.LocalMachineSerialInfo.FirstAvailablePortName
                 )
-            ) {
+            )
+            {
                 int numBytesToWrite1 = 8,
                     numBytesToWrite2 = 16,
                     numBytesToWrite3 = 10;
@@ -78,7 +80,8 @@ namespace System.IO.Ports.Tests
                 SerialPort com = new SerialPort(
                     TCSupport.LocalMachineSerialInfo.FirstAvailablePortName
                 )
-            ) {
+            )
+            {
                 int numBytesToWrite1 = 8,
                     numBytesToWrite2 = 16,
                     numBytesToWrite3 = 10;
@@ -124,7 +127,8 @@ namespace System.IO.Ports.Tests
             Stream serialStream,
             IAsyncResult asyncResult,
             Type expectedException
-        ) {
+        )
+        {
             if (expectedException == null)
             {
                 serialStream.EndWrite(asyncResult);

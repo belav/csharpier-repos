@@ -33,7 +33,8 @@ namespace System.Runtime.Serialization.Formatters.Binary
             object?[] typeInformationA,
             int[] memberAssemIds,
             int assemId
-        ) {
+        )
+        {
             _objectId = objectId;
             _assemId = assemId;
             _name = name;
@@ -111,7 +112,8 @@ namespace System.Runtime.Serialization.Formatters.Binary
                 if (
                     _binaryTypeEnumA[i] != BinaryTypeEnum.ObjectUrt
                     && _binaryTypeEnumA[i] != BinaryTypeEnum.ObjectUser
-                ) {
+                )
+                {
                     _typeInformationA[i] = BinaryTypeConverter.ReadTypeInfo(
                         _binaryTypeEnumA[i],
                         input,

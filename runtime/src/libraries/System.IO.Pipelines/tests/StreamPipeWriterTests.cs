@@ -639,7 +639,8 @@ namespace System.IO.Pipelines.Tests
                 int offset,
                 int count,
                 CancellationToken cancellationToken
-            ) {
+            )
+            {
                 throw new OperationCanceledException();
             }
 
@@ -652,7 +653,8 @@ namespace System.IO.Pipelines.Tests
             public override ValueTask WriteAsync(
                 ReadOnlyMemory<byte> buffer,
                 CancellationToken cancellationToken = default
-            ) {
+            )
+            {
                 throw new OperationCanceledException();
             }
 #endif

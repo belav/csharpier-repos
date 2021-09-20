@@ -21,7 +21,8 @@ namespace Microsoft.CodeAnalysis.AddParameter
             SeparatedSyntaxList<TArgumentSyntax> arguments,
             ImmutableArray<IMethodSymbol> methodCandidates,
             bool isConstructorInitializer
-        ) {
+        )
+        {
             Arguments = arguments;
             MethodCandidates = methodCandidates;
             IsConstructorInitializer = isConstructorInitializer;

@@ -153,7 +153,8 @@ namespace System.DirectoryServices.Protocols
             string distinguishedName,
             string attributeName,
             object value
-        ) {
+        )
+        {
             if (attributeName == null)
             {
                 throw new ArgumentNullException(nameof(attributeName));
@@ -181,7 +182,8 @@ namespace System.DirectoryServices.Protocols
             string distinguishedName,
             string newParentDistinguishedName,
             string newName
-        ) {
+        )
+        {
             DistinguishedName = distinguishedName;
             NewParentDistinguishedName = newParentDistinguishedName;
             NewName = newName;

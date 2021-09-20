@@ -158,7 +158,8 @@ namespace Microsoft.AspNetCore.Mvc.Formatters
             string content,
             string modelStateKey,
             string expectedMessage
-        ) {
+        )
+        {
             // Arrange
             var formatter = GetInputFormatter(allowInputFormatterExceptionMessages: true);
 
@@ -204,7 +205,8 @@ namespace Microsoft.AspNetCore.Mvc.Formatters
 
         protected override TextInputFormatter GetInputFormatter(
             bool allowInputFormatterExceptionMessages = true
-        ) {
+        )
+        {
             return new SystemTextJsonInputFormatter(
                 new JsonOptions
                 {
@@ -246,7 +248,8 @@ namespace Microsoft.AspNetCore.Mvc.Formatters
                 ref Utf8JsonReader reader,
                 Type typeToConvert,
                 JsonSerializerOptions options
-            ) {
+            )
+            {
                 return short.Parse(reader.GetString(), CultureInfo.InvariantCulture);
             }
 
@@ -254,7 +257,8 @@ namespace Microsoft.AspNetCore.Mvc.Formatters
                 Utf8JsonWriter writer,
                 short value,
                 JsonSerializerOptions options
-            ) {
+            )
+            {
                 throw new NotImplementedException();
             }
         }
@@ -265,7 +269,8 @@ namespace Microsoft.AspNetCore.Mvc.Formatters
                 ref Utf8JsonReader reader,
                 Type typeToConvert,
                 JsonSerializerOptions options
-            ) {
+            )
+            {
                 return DateTime.Parse(reader.GetString(), CultureInfo.InvariantCulture);
             }
 
@@ -273,7 +278,8 @@ namespace Microsoft.AspNetCore.Mvc.Formatters
                 Utf8JsonWriter writer,
                 DateTime value,
                 JsonSerializerOptions options
-            ) {
+            )
+            {
                 throw new NotImplementedException();
             }
         }

@@ -40,7 +40,8 @@ namespace Microsoft.EntityFrameworkCore
                 var context = new TwoDatabasesContext(
                     CreateTestOptions(new DbContextOptionsBuilder()).Options
                 )
-            ) {
+            )
+            {
                 context.Database.SetConnectionString(connectionString1);
 
                 var data = context.Foos.ToList();
@@ -77,7 +78,8 @@ namespace Microsoft.EntityFrameworkCore
                 var context = new TwoDatabasesContext(
                     CreateTestOptions(new DbContextOptionsBuilder()).Options
                 )
-            ) {
+            )
+            {
                 context.Database.SetDbConnection(context1.Database.GetDbConnection());
 
                 var data = context.Foos.ToList();
@@ -115,7 +117,8 @@ namespace Microsoft.EntityFrameworkCore
                             )
                         ).Options
                 )
-            ) {
+            )
+            {
                 var data = context.Foos.ToList();
                 data[0].Bar = "Modified One";
                 data[1].Bar = "Modified Two";
@@ -137,7 +140,8 @@ namespace Microsoft.EntityFrameworkCore
             public ConnectionStringConnectionInterceptor(
                 string goodConnectionString,
                 string dummyConnectionString
-            ) {
+            )
+            {
                 _goodConnectionString = goodConnectionString;
                 _dummyConnectionString = dummyConnectionString;
             }
@@ -146,7 +150,8 @@ namespace Microsoft.EntityFrameworkCore
                 DbConnection connection,
                 ConnectionEventData eventData,
                 InterceptionResult result
-            ) {
+            )
+            {
                 Assert.Equal(
                     _dummyConnectionString,
                     eventData.Context.Database.GetConnectionString()
@@ -159,7 +164,8 @@ namespace Microsoft.EntityFrameworkCore
             public override void ConnectionClosed(
                 DbConnection connection,
                 ConnectionEndEventData eventData
-            ) {
+            )
+            {
                 Assert.Equal(
                     _goodConnectionString,
                     eventData.Context.Database.GetConnectionString()

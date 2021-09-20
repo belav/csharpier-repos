@@ -421,7 +421,8 @@ namespace Microsoft.AspNetCore.Mvc.Rendering
         [MemberData(nameof(MethodDataSet))]
         public void BeginFormWithMethodParameter_CallsHtmlGeneratorWithExpectedValues(
             FormMethod method
-        ) {
+        )
+        {
             // Arrange
             var tagBuilder = new TagBuilder(tagName: "form");
             var htmlGenerator = new Mock<IHtmlGenerator>(MockBehavior.Strict);
@@ -467,7 +468,8 @@ namespace Microsoft.AspNetCore.Mvc.Rendering
         public void BeginFormWithMethodAndHtmlAttributesParameters_CallsHtmlGeneratorWithExpectedValues(
             FormMethod method,
             object htmlAttributes
-        ) {
+        )
+        {
             // Arrange
             var tagBuilder = new TagBuilder(tagName: "form");
             var htmlGenerator = new Mock<IHtmlGenerator>(MockBehavior.Strict);
@@ -513,7 +515,8 @@ namespace Microsoft.AspNetCore.Mvc.Rendering
         public void BeginFormWithMethodAndHtmlAttributesParameters_WithAntiforgery_CallsHtmlGeneratorWithExpectedValues(
             FormMethod method,
             object htmlAttributes
-        ) {
+        )
+        {
             // Arrange
             var tagBuilder = new TagBuilder(tagName: "form");
             var htmlGenerator = new Mock<IHtmlGenerator>(MockBehavior.Strict);
@@ -559,7 +562,8 @@ namespace Microsoft.AspNetCore.Mvc.Rendering
         public void BeginFormWithMethodAndHtmlAttributesParameters_SuppressAntiforgery_CallsHtmlGeneratorWithExpectedValues(
             FormMethod method,
             object htmlAttributes
-        ) {
+        )
+        {
             // Arrange
             var tagBuilder = new TagBuilder(tagName: "form");
             var htmlGenerator = new Mock<IHtmlGenerator>(MockBehavior.Strict);
@@ -601,7 +605,8 @@ namespace Microsoft.AspNetCore.Mvc.Rendering
         [MemberData(nameof(RouteValuesDataSet))]
         public void BeginFormWithRouteValuesParameter_CallsHtmlGeneratorWithExpectedValues(
             object routeValues
-        ) {
+        )
+        {
             // Arrange
             var tagBuilder = new TagBuilder(tagName: "form");
             var htmlGenerator = new Mock<IHtmlGenerator>(MockBehavior.Strict);
@@ -643,7 +648,8 @@ namespace Microsoft.AspNetCore.Mvc.Rendering
         public void BeginFormWithActionNameAndControllerNameParameters_CallsHtmlGeneratorWithExpectedValues(
             string actionName,
             string controllerName
-        ) {
+        )
+        {
             // Arrange
             var tagBuilder = new TagBuilder(tagName: "form");
             var htmlGenerator = new Mock<IHtmlGenerator>(MockBehavior.Strict);
@@ -686,7 +692,8 @@ namespace Microsoft.AspNetCore.Mvc.Rendering
             string actionName,
             string controllerName,
             object routeValues
-        ) {
+        )
+        {
             // Arrange
             var tagBuilder = new TagBuilder(tagName: "form");
             var htmlGenerator = new Mock<IHtmlGenerator>(MockBehavior.Strict);
@@ -729,7 +736,8 @@ namespace Microsoft.AspNetCore.Mvc.Rendering
             string actionName,
             string controllerName,
             FormMethod method
-        ) {
+        )
+        {
             // Arrange
             var tagBuilder = new TagBuilder(tagName: "form");
             var htmlGenerator = new Mock<IHtmlGenerator>(MockBehavior.Strict);
@@ -777,7 +785,8 @@ namespace Microsoft.AspNetCore.Mvc.Rendering
             string controllerName,
             object routeValues,
             FormMethod method
-        ) {
+        )
+        {
             // Arrange
             var tagBuilder = new TagBuilder(tagName: "form");
             var htmlGenerator = new Mock<IHtmlGenerator>(MockBehavior.Strict);
@@ -825,7 +834,8 @@ namespace Microsoft.AspNetCore.Mvc.Rendering
             string controllerName,
             FormMethod method,
             object htmlAttributes
-        ) {
+        )
+        {
             // Arrange
             var tagBuilder = new TagBuilder(tagName: "form");
             var htmlGenerator = new Mock<IHtmlGenerator>(MockBehavior.Strict);
@@ -873,7 +883,8 @@ namespace Microsoft.AspNetCore.Mvc.Rendering
             string controllerName,
             FormMethod method,
             object htmlAttributes
-        ) {
+        )
+        {
             // Arrange
             var tagBuilder = new TagBuilder(tagName: "form");
             var htmlGenerator = new Mock<IHtmlGenerator>(MockBehavior.Strict);
@@ -924,7 +935,8 @@ namespace Microsoft.AspNetCore.Mvc.Rendering
             string controllerName,
             FormMethod method,
             object htmlAttributes
-        ) {
+        )
+        {
             // Arrange
             var tagBuilder = new TagBuilder(tagName: "form");
             var htmlGenerator = new Mock<IHtmlGenerator>(MockBehavior.Strict);
@@ -969,7 +981,8 @@ namespace Microsoft.AspNetCore.Mvc.Rendering
         [MemberData(nameof(RouteValuesDataSet))]
         public void BeginRouteFormWithRouteValuesParameter_CallsHtmlGeneratorWithExpectedValues(
             object routeValues
-        ) {
+        )
+        {
             // Arrange
             var tagBuilder = new TagBuilder(tagName: "form");
             var htmlGenerator = new Mock<IHtmlGenerator>(MockBehavior.Strict);
@@ -1009,7 +1022,8 @@ namespace Microsoft.AspNetCore.Mvc.Rendering
         [MemberData(nameof(RouteValuesDataSet))]
         public void BeginRouteFormWithRouteValuesParameter_WithAntiforgery_CallsHtmlGeneratorWithExpectedValues(
             object routeValues
-        ) {
+        )
+        {
             // Arrange
             var tagBuilder = new TagBuilder(tagName: "form");
             var htmlGenerator = new Mock<IHtmlGenerator>(MockBehavior.Strict);
@@ -1049,7 +1063,8 @@ namespace Microsoft.AspNetCore.Mvc.Rendering
         [MemberData(nameof(RouteValuesDataSet))]
         public void BeginRouteFormWithRouteValuesParameter_SuppressAntiforgery_CallsHtmlGeneratorWithExpectedValues(
             object routeValues
-        ) {
+        )
+        {
             // Arrange
             var tagBuilder = new TagBuilder(tagName: "form");
             var htmlGenerator = new Mock<IHtmlGenerator>(MockBehavior.Strict);
@@ -1086,7 +1101,8 @@ namespace Microsoft.AspNetCore.Mvc.Rendering
         [MemberData(nameof(RouteNameDataSet))]
         public void BeginRouteFormWithRouteNameParameter_CallsHtmlGeneratorWithExpectedValues(
             string routeName
-        ) {
+        )
+        {
             // Arrange
             var tagBuilder = new TagBuilder(tagName: "form");
             var htmlGenerator = new Mock<IHtmlGenerator>(MockBehavior.Strict);
@@ -1126,7 +1142,8 @@ namespace Microsoft.AspNetCore.Mvc.Rendering
         [MemberData(nameof(RouteNameDataSet))]
         public void BeginRouteFormWithRouteNameParameter_WithAntiforgery_CallsHtmlGeneratorWithExpectedValues(
             string routeName
-        ) {
+        )
+        {
             // Arrange
             var tagBuilder = new TagBuilder(tagName: "form");
             var htmlGenerator = new Mock<IHtmlGenerator>(MockBehavior.Strict);
@@ -1166,7 +1183,8 @@ namespace Microsoft.AspNetCore.Mvc.Rendering
         [MemberData(nameof(RouteNameDataSet))]
         public void BeginRouteFormWithRouteNameParameter_SuppressAntiforgery_CallsHtmlGeneratorWithExpectedValues(
             string routeName
-        ) {
+        )
+        {
             // Arrange
             var tagBuilder = new TagBuilder(tagName: "form");
             var htmlGenerator = new Mock<IHtmlGenerator>(MockBehavior.Strict);
@@ -1204,7 +1222,8 @@ namespace Microsoft.AspNetCore.Mvc.Rendering
         public void BeginRouteFormWithRouteNameAndRouteValuesParameters_CallsHtmlGeneratorWithExpectedValues(
             string routeName,
             object routeValues
-        ) {
+        )
+        {
             // Arrange
             var tagBuilder = new TagBuilder(tagName: "form");
             var htmlGenerator = new Mock<IHtmlGenerator>(MockBehavior.Strict);
@@ -1245,7 +1264,8 @@ namespace Microsoft.AspNetCore.Mvc.Rendering
         public void BeginRouteFormWithRouteNameAndMethodParameters_CallsHtmlGeneratorWithExpectedValues(
             string routeName,
             FormMethod method
-        ) {
+        )
+        {
             // Arrange
             var tagBuilder = new TagBuilder(tagName: "form");
             var htmlGenerator = new Mock<IHtmlGenerator>(MockBehavior.Strict);
@@ -1291,7 +1311,8 @@ namespace Microsoft.AspNetCore.Mvc.Rendering
             string routeName,
             object routeValues,
             FormMethod method
-        ) {
+        )
+        {
             // Arrange
             var tagBuilder = new TagBuilder(tagName: "form");
             var htmlGenerator = new Mock<IHtmlGenerator>(MockBehavior.Strict);
@@ -1337,7 +1358,8 @@ namespace Microsoft.AspNetCore.Mvc.Rendering
             string routeName,
             FormMethod method,
             object htmlAttributes
-        ) {
+        )
+        {
             // Arrange
             var tagBuilder = new TagBuilder(tagName: "form");
             var htmlGenerator = new Mock<IHtmlGenerator>(MockBehavior.Strict);
@@ -1383,7 +1405,8 @@ namespace Microsoft.AspNetCore.Mvc.Rendering
             string routeName,
             FormMethod method,
             object htmlAttributes
-        ) {
+        )
+        {
             // Arrange
             var tagBuilder = new TagBuilder(tagName: "form");
             var htmlGenerator = new Mock<IHtmlGenerator>(MockBehavior.Strict);
@@ -1431,7 +1454,8 @@ namespace Microsoft.AspNetCore.Mvc.Rendering
             string routeName,
             FormMethod method,
             object htmlAttributes
-        ) {
+        )
+        {
             // Arrange
             var tagBuilder = new TagBuilder(tagName: "form");
             var htmlGenerator = new Mock<IHtmlGenerator>(MockBehavior.Strict);

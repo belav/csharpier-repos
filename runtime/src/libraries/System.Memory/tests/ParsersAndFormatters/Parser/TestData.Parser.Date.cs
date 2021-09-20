@@ -13,7 +13,8 @@ namespace System.Buffers.Text.Tests
             {
                 foreach (
                     ParserTestData<DateTime> testData in DateTimeFormatterTestData.ToParserTheoryDataCollection()
-                ) {
+                )
+                {
                     bool roundTrippable = testData.FormatSymbol == 'O';
                     if (roundTrippable)
                         yield return testData;
@@ -86,7 +87,8 @@ namespace System.Buffers.Text.Tests
                         "05/08/2017 10:30:45 +00:00",
                         default
                     )
-                ) {
+                )
+                {
                     yield return bad;
                 }
 
@@ -95,7 +97,8 @@ namespace System.Buffers.Text.Tests
                         "05/08/2017 10:30:45",
                         'G'
                     )
-                ) {
+                )
+                {
                     yield return bad;
                 }
 
@@ -104,7 +107,8 @@ namespace System.Buffers.Text.Tests
                         "Tue, 03 Jan 2017 08:08:05 GMT",
                         'R'
                     )
-                ) {
+                )
+                {
                     yield return bad;
                 }
 
@@ -113,7 +117,8 @@ namespace System.Buffers.Text.Tests
                         "tue, 03 jan 2017 08:08:05 gmt",
                         'l'
                     )
-                ) {
+                )
+                {
                     yield return bad;
                 }
 
@@ -122,13 +127,15 @@ namespace System.Buffers.Text.Tests
                         "2017-01-12T10:30:45.7680000-08:00",
                         'O'
                     )
-                ) {
+                )
+                {
                     yield return bad;
                 }
 
                 foreach (
                     ParserTestData<DateTimeOffset> testData in DateTimeOffsetFormatterTestData.ToParserTheoryDataCollection()
-                ) {
+                )
+                {
                     bool roundTrippable = testData.FormatSymbol == 'O';
                     if (roundTrippable)
                         yield return testData;
@@ -264,7 +271,8 @@ namespace System.Buffers.Text.Tests
         private static IEnumerable<ParserTestData<DateTimeOffset>> GenerateCorruptedDateTimeText(
             string goodText,
             char formatSymbol
-        ) {
+        )
+        {
             // Corrupt a single character
             {
                 for (int i = 0; i < goodText.Length; i++)
@@ -306,7 +314,8 @@ namespace System.Buffers.Text.Tests
                     int truncatedLength = 1;
                     truncatedLength < goodText.Length - 1;
                     truncatedLength++
-                ) {
+                )
+                {
                     if (!(formatSymbol == 'O' && truncatedLength == 27)) // Chopping off the offset entirely leaves you with a good string...
                     {
                         yield return new ParserTestData<DateTimeOffset>(

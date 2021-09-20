@@ -44,7 +44,8 @@ namespace BasicEventSourceTests
                     && eventSource.Name != "System.Reflection.Runtime.Tracing"
                     && eventSource.Name != "Microsoft-Windows-DotNETRuntime"
                     && eventSource.Name != "System.Runtime"
-                ) {
+                )
+                {
                     eventSourceNames += eventSource.Name + " ";
                 }
             }

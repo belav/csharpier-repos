@@ -174,7 +174,8 @@ namespace Microsoft.VisualStudio.IntegrationTest.Utilities
                 && (ApplicationVersion == watsonEntry.ApplicationVersion)
                 && (FaultingModule == watsonEntry.FaultingModule)
                 && (FaultingModuleVersion == watsonEntry.FaultingModuleVersion)
-            ) {
+            )
+            {
                 return true;
             }
 

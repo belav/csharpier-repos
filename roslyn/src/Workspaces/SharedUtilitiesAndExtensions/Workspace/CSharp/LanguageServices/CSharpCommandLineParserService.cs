@@ -28,7 +28,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             string baseDirectory,
             bool isInteractive,
             string sdkDirectory
-        ) {
+        )
+        {
 #if SCRIPTING
             var parser = isInteractive
                 ? CSharpCommandLineParser.Interactive

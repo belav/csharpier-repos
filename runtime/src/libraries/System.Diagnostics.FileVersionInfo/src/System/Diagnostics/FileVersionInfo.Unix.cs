@@ -19,7 +19,8 @@ namespace System.Diagnostics
             if (
                 Interop.Sys.Stat(_fileName, out Interop.Sys.FileStatus fileStatus) != 0
                 || (fileStatus.Mode & Interop.Sys.FileTypes.S_IFMT) != Interop.Sys.FileTypes.S_IFREG
-            ) {
+            )
+            {
                 throw new FileNotFoundException(
                     SR.Format(SR.IO_FileNotFound_FileName, _fileName),
                     _fileName
@@ -89,7 +90,8 @@ namespace System.Diagnostics
             if (
                 !assemblyName.EndsWith(".dll", StringComparison.OrdinalIgnoreCase)
                 && !assemblyName.EndsWith(".exe", StringComparison.OrdinalIgnoreCase)
-            ) {
+            )
+            {
                 assemblyName += isExe ? ".exe" : ".dll";
             }
             _internalName = _originalFilename = assemblyName;
@@ -140,7 +142,8 @@ namespace System.Diagnostics
                         out typeNamespaceHandle,
                         out typeNameHandle
                     ) && comparer.Equals(typeNamespaceHandle, "System.Reflection")
-                ) {
+                )
+                {
                     if (comparer.Equals(typeNameHandle, "AssemblyCompanyAttribute"))
                     {
                         GetStringAttributeArgumentValue(metadataReader, attr, ref _companyName);
@@ -166,7 +169,8 @@ namespace System.Diagnostics
                     }
                     else if (
                         comparer.Equals(typeNameHandle, "AssemblyInformationalVersionAttribute")
-                    ) {
+                    )
+                    {
                         GetStringAttributeArgumentValue(metadataReader, attr, ref _productVersion);
                         ParseVersion(
                             _productVersion,
@@ -219,7 +223,8 @@ namespace System.Diagnostics
             out int minor,
             out int build,
             out int priv
-        ) {
+        )
+        {
             // Relatively-forgiving parsing of a version:
             // - If there are more than four parts (separated by periods), all results are deemed 0
             // - If any part fails to parse completely as an integer, no further parts are parsed and are left as 0.
@@ -285,7 +290,8 @@ namespace System.Diagnostics
             CustomAttribute attr,
             out StringHandle typeNamespaceHandle,
             out StringHandle typeNameHandle
-        ) {
+        )
+        {
             EntityHandle ctorHandle = attr.Constructor;
             switch (ctorHandle.Kind)
             {
@@ -325,7 +331,8 @@ namespace System.Diagnostics
             MetadataReader reader,
             CustomAttribute attr,
             ref string? value
-        ) {
+        )
+        {
             EntityHandle ctorHandle = attr.Constructor;
             BlobHandle signature;
             switch (ctorHandle.Kind)

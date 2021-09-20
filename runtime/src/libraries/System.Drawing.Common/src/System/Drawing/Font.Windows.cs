@@ -81,7 +81,8 @@ namespace System.Drawing
             FontStyle style,
             GraphicsUnit unit,
             byte gdiCharSet
-        ) {
+        )
+        {
             Initialize(family, emSize, style, unit, gdiCharSet, false);
         }
 
@@ -95,7 +96,8 @@ namespace System.Drawing
             GraphicsUnit unit,
             byte gdiCharSet,
             bool gdiVerticalFont
-        ) {
+        )
+        {
             Initialize(family, emSize, style, unit, gdiCharSet, gdiVerticalFont);
         }
 
@@ -108,7 +110,8 @@ namespace System.Drawing
             FontStyle style,
             GraphicsUnit unit,
             byte gdiCharSet
-        ) {
+        )
+        {
             Initialize(familyName, emSize, style, unit, gdiCharSet, IsVerticalName(familyName));
         }
 
@@ -122,7 +125,8 @@ namespace System.Drawing
             GraphicsUnit unit,
             byte gdiCharSet,
             bool gdiVerticalFont
-        ) {
+        )
+        {
             if (float.IsNaN(emSize) || float.IsInfinity(emSize) || emSize <= 0)
             {
                 throw new ArgumentException(
@@ -283,7 +287,8 @@ namespace System.Drawing
             GraphicsUnit unit,
             byte gdiCharSet,
             bool gdiVerticalFont
-        ) {
+        )
+        {
             _originalFontName = familyName;
 
             SetFontFamily(new FontFamily(StripVerticalName(familyName), createDefaultOnFail: true));
@@ -300,7 +305,8 @@ namespace System.Drawing
             GraphicsUnit unit,
             byte gdiCharSet,
             bool gdiVerticalFont
-        ) {
+        )
+        {
             if (family == null)
             {
                 throw new ArgumentNullException(nameof(family));

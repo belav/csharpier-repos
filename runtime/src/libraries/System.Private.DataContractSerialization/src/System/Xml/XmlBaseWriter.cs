@@ -246,7 +246,8 @@ namespace System.Xml
             string localName,
             string? ns,
             XmlDictionaryString? xNs
-        ) {
+        )
+        {
             if (IsClosed)
                 ThrowClosed();
 
@@ -383,7 +384,8 @@ namespace System.Xml
             string? prefix,
             string localName,
             string? namespaceUri
-        ) {
+        )
+        {
             StartAttribute(ref prefix, localName, namespaceUri, null);
             if (!_isXmlnsAttribute)
             {
@@ -395,7 +397,8 @@ namespace System.Xml
             string? prefix,
             XmlDictionaryString localName,
             XmlDictionaryString? namespaceUri
-        ) {
+        )
+        {
             StartAttribute(
                 ref prefix,
                 (localName != null ? localName.Value : null)!,
@@ -576,7 +579,8 @@ namespace System.Xml
             else if (
                 text.IndexOf("--", StringComparison.Ordinal) != -1
                 || (text.Length > 0 && text[text.Length - 1] == '-')
-            ) {
+            )
+            {
                 throw System.Runtime.Serialization.DiagnosticUtility.ExceptionUtility.ThrowHelperError(
                     new ArgumentException(SR.XmlInvalidCommentChars, nameof(text))
                 );
@@ -647,7 +651,8 @@ namespace System.Xml
             string localName,
             string? ns,
             XmlDictionaryString? xNs
-        ) {
+        )
+        {
             if (IsClosed)
                 ThrowClosed();
 
@@ -715,7 +720,8 @@ namespace System.Xml
             string localName,
             string? ns,
             XmlDictionaryString? xNs
-        ) {
+        )
+        {
             if (IsClosed)
                 ThrowClosed();
 
@@ -747,7 +753,8 @@ namespace System.Xml
             string? prefix,
             string localName,
             string? namespaceUri
-        ) {
+        )
+        {
             prefix = await StartElementAsync(prefix, localName, namespaceUri, null)
                 .ConfigureAwait(false);
             await _writer.WriteStartElementAsync(prefix, localName).ConfigureAwait(false);
@@ -758,7 +765,8 @@ namespace System.Xml
             string localName,
             string? ns,
             XmlDictionaryString? xNs
-        ) {
+        )
+        {
             await FlushBase64Async().ConfigureAwait(false);
             await AutoCompleteAsync(WriteState.Element).ConfigureAwait(false);
             Element element = EnterScope();
@@ -801,7 +809,8 @@ namespace System.Xml
             string? prefix,
             string localName,
             string? namespaceUri
-        ) {
+        )
+        {
             StartElement(ref prefix, localName, namespaceUri, null);
             _writer.WriteStartElement(prefix, localName);
         }
@@ -810,7 +819,8 @@ namespace System.Xml
             string? prefix,
             string localName,
             string? namespaceUri
-        ) {
+        )
+        {
             PreStartElementAsyncCheck(prefix, localName, namespaceUri, null);
             return StartElementAndWriteStartElementAsync(prefix, localName, namespaceUri);
         }
@@ -819,7 +829,8 @@ namespace System.Xml
             string? prefix,
             XmlDictionaryString localName,
             XmlDictionaryString? namespaceUri
-        ) {
+        )
+        {
             StartElement(
                 ref prefix,
                 localName.Value,
@@ -1118,7 +1129,8 @@ namespace System.Xml
         public override void WriteQualifiedName(
             XmlDictionaryString localName,
             XmlDictionaryString? namespaceUri
-        ) {
+        )
+        {
             if (IsClosed)
                 ThrowClosed();
             if (localName == null)
@@ -1983,7 +1995,8 @@ namespace System.Xml
             Stream stream,
             bool includeComments,
             string[]? inclusivePrefixes
-        ) {
+        )
+        {
             if (IsClosed)
                 ThrowClosed();
             if (Signing)
@@ -2400,7 +2413,8 @@ namespace System.Xml
                 string prefix,
                 string uri,
                 XmlDictionaryString? uriDictionaryString
-            ) {
+            )
+            {
                 if (LookupNamespace(prefix) != uri)
                 {
                     AddNamespace(prefix, uri, uriDictionaryString);
@@ -2411,7 +2425,8 @@ namespace System.Xml
                 string prefix,
                 string uri,
                 XmlDictionaryString? uriDictionaryString
-            ) {
+            )
+            {
                 if (prefix.Length >= 3)
                 {
                     // Upper and lower case letter differ by a bit.
@@ -2419,7 +2434,8 @@ namespace System.Xml
                         (prefix[0] & ~32) == 'X'
                         && (prefix[1] & ~32) == 'M'
                         && (prefix[2] & ~32) == 'L'
-                    ) {
+                    )
+                    {
                         if (prefix == "xml" && uri == xmlNamespace)
                             return;
                         if (prefix == "xmlns" && uri == xmlnsNamespace)

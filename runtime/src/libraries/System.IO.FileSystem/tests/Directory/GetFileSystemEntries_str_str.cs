@@ -217,7 +217,8 @@ namespace System.IO.Tests
             string pattern,
             string[] sourceFiles,
             string[] expected
-        ) {
+        )
+        {
             string testDir = PrepareDirectory(sourceFiles);
             ValidatePatternMatch(expected, GetEntries(testDir, pattern));
         }
@@ -439,7 +440,8 @@ namespace System.IO.Tests
             string pattern,
             string[] sourceFiles,
             string[] expected
-        ) {
+        )
+        {
             // Tests for DOS_DOT, ", which is what periods get changed to when they are followed by a '?' or '*'.
             // We don't want to eat trailing space/periods in this test
             string testDir = PrepareDirectory(sourceFiles, useExtendedPaths: true);
@@ -537,7 +539,8 @@ namespace System.IO.Tests
             string pattern,
             string[] sourceFiles,
             string[] expected
-        ) {
+        )
+        {
             // Tests for DOS_STAR, which only occurs when the source pattern ends in *. These are the subset of tests
             // with trailing spaces that work as documented.
 
@@ -802,7 +805,8 @@ namespace System.IO.Tests
             string pattern,
             string[] sourceFiles,
             string[] expected
-        ) {
+        )
+        {
             // Tests for DOS_STAR, which only occurs when the source pattern ends in *.
             // These cases don't match documented behavior on Windows- matching *should* end at the final period.
 

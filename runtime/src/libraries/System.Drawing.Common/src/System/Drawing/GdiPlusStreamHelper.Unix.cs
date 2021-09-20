@@ -48,7 +48,8 @@ namespace System.Drawing
             Stream stream,
             bool seekToOrigin,
             bool makeSeekable = true
-        ) {
+        )
+        {
             // Seeking required
             if (makeSeekable && !stream.CanSeek)
             {

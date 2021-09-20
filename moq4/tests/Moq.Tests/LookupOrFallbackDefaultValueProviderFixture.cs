@@ -32,7 +32,8 @@ namespace Moq.Tests
         public void Falls_back_to_default_generation_strategy_when_no_handler_available(
             Type type,
             object fallbackValue
-        ) {
+        )
+        {
             var provider = new Provider(
                 (t, _) => t == type ? fallbackValue : throw new NotSupportedException()
             );

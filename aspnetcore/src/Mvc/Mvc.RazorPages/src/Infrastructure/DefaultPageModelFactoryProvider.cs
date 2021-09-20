@@ -55,7 +55,8 @@ namespace Microsoft.AspNetCore.Mvc.RazorPages.Infrastructure
 
         public Action<PageContext, object> CreateModelDisposer(
             CompiledPageActionDescriptor descriptor
-        ) {
+        )
+        {
             if (descriptor == null)
             {
                 throw new ArgumentNullException(nameof(descriptor));
@@ -71,7 +72,8 @@ namespace Microsoft.AspNetCore.Mvc.RazorPages.Infrastructure
 
         public Func<PageContext, object, ValueTask> CreateAsyncModelDisposer(
             CompiledPageActionDescriptor descriptor
-        ) {
+        )
+        {
             if (descriptor == null)
             {
                 throw new ArgumentNullException(nameof(descriptor));

@@ -26,7 +26,8 @@ namespace System.Drawing
             ITypeDescriptorContext context,
             CultureInfo culture,
             object value
-        ) {
+        )
+        {
             return value is byte[] bytes
               ? new Icon(new MemoryStream(bytes))
               : base.ConvertFrom(context, culture, value);
@@ -37,7 +38,8 @@ namespace System.Drawing
             CultureInfo culture,
             object value,
             Type destinationType
-        ) {
+        )
+        {
             if (destinationType == typeof(string))
             {
                 if (value == null)

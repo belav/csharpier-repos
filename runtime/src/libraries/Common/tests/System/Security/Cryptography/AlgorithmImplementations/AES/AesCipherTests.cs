@@ -2453,7 +2453,8 @@ namespace System.Security.Cryptography.Encryption.Aes.Tests
         [InlineData(PaddingMode.Zeros)]
         public static void VerifyKnownTransform_CFB8_128_NoOrZeroPadding_0_Extended(
             PaddingMode paddingMode
-        ) {
+        )
+        {
             // NIST CAVP AESMMT.ZIP CFB8MMT128.rsp, [ENCRYPT] COUNT=0
             // plaintext zero-extended to a full block, cipherBytes extended value
             // provided by .NET Framework
@@ -2473,7 +2474,8 @@ namespace System.Security.Cryptography.Encryption.Aes.Tests
         [InlineData(PaddingMode.Zeros)]
         public static void VerifyKnownTransform_CFB8_128_NoOrZeroPadding_9_Extended(
             PaddingMode paddingMode
-        ) {
+        )
+        {
             // NIST CAVP AESMMT.ZIP CFB8MMT128.rsp, [ENCRYPT] COUNT=9
             // plaintext zero-extended to a full block, cipherBytes extended value
             // provided by .NET Framework
@@ -2493,7 +2495,8 @@ namespace System.Security.Cryptography.Encryption.Aes.Tests
         [InlineData(PaddingMode.Zeros)]
         public static void VerifyKnownTransform_CFB8_192_NoOrZeroPadding_0_Extended(
             PaddingMode paddingMode
-        ) {
+        )
+        {
             // NIST CAVP AESMMT.ZIP CFB8MMT192.rsp, [ENCRYPT] COUNT=0
             // plaintext zero-extended to a full block, cipherBytes extended value
             // provided by .NET Framework
@@ -2513,7 +2516,8 @@ namespace System.Security.Cryptography.Encryption.Aes.Tests
         [InlineData(PaddingMode.Zeros)]
         public static void VerifyKnownTransform_CFB8_192_NoOrZeroPadding_9_Extended(
             PaddingMode paddingMode
-        ) {
+        )
+        {
             // NIST CAVP AESMMT.ZIP CFB8MMT192.rsp, [ENCRYPT] COUNT=9
             // plaintext zero-extended to a full block, cipherBytes extended value
             // provided by .NET Framework
@@ -2533,7 +2537,8 @@ namespace System.Security.Cryptography.Encryption.Aes.Tests
         [InlineData(PaddingMode.Zeros)]
         public static void VerifyKnownTransform_CFB8_256_NoOrZeroPadding_0_Extended(
             PaddingMode paddingMode
-        ) {
+        )
+        {
             // NIST CAVP AESMMT.ZIP CFB8MMT256.rsp, [ENCRYPT] COUNT=0
             // plaintext zero-extended to a full block, cipherBytes extended value
             // provided by .NET Framework
@@ -2553,7 +2558,8 @@ namespace System.Security.Cryptography.Encryption.Aes.Tests
         [InlineData(PaddingMode.Zeros)]
         public static void VerifyKnownTransform_CFB8_256_NoOrZeroPadding_9_Extended(
             PaddingMode paddingMode
-        ) {
+        )
+        {
             // NIST CAVP AESMMT.ZIP CFB8MMT256.rsp, [ENCRYPT] COUNT=9
             // plaintext zero-extended to a full block, cipherBytes extended value
             // provided by .NET Framework
@@ -2636,7 +2642,8 @@ namespace System.Security.Cryptography.Encryption.Aes.Tests
         public static void EncryptorReuse_LeadsToSameResults(
             CipherMode cipherMode,
             int feedbackSize
-        ) {
+        )
+        {
             // AppleCCCryptor does not allow calling Reset on CFB cipher.
             // this test validates that the behavior is taken into consideration.
             var input = "b72606c98d8e4fabf08839abf7a0ac61".HexToByteArray();
@@ -2668,7 +2675,8 @@ namespace System.Security.Cryptography.Encryption.Aes.Tests
         public static void DecryptorReuse_LeadsToSameResults(
             CipherMode cipherMode,
             int feedbackSize
-        ) {
+        )
+        {
             // AppleCCCryptor does not allow calling Reset on CFB cipher.
             // this test validates that the behavior is taken into consideration.
             var input = "2981761d979bb1765a28b2dd19125b54".HexToByteArray();
@@ -2881,7 +2889,8 @@ namespace System.Security.Cryptography.Encryption.Aes.Tests
             byte[] encryptedBytes,
             byte[] expectedAnswer,
             int? feedbackSize = default
-        ) {
+        )
+        {
             byte[] decryptedBytes;
 
             using (Aes aes = AesFactory.Create())
@@ -2926,7 +2935,8 @@ namespace System.Security.Cryptography.Encryption.Aes.Tests
             byte[] plainBytes,
             byte[] cipherBytes,
             int? feedbackSize = default
-        ) {
+        )
+        {
             byte[] liveEncryptBytes;
             byte[] liveDecryptBytes;
 
@@ -2957,7 +2967,8 @@ namespace System.Security.Cryptography.Encryption.Aes.Tests
                     aes.CreateEncryptor(key, iv),
                     CryptoStreamMode.Write
                 )
-            ) {
+            )
+            {
                 cryptoStream.Write(plainBytes, 0, plainBytes.Length);
                 cryptoStream.FlushFinalBlock();
 
@@ -2970,7 +2981,8 @@ namespace System.Security.Cryptography.Encryption.Aes.Tests
             byte[] key,
             byte[] iv,
             byte[] cipherBytes
-        ) {
+        )
+        {
             using (MemoryStream output = new MemoryStream())
             using (
                 CryptoStream cryptoStream = new CryptoStream(
@@ -2978,7 +2990,8 @@ namespace System.Security.Cryptography.Encryption.Aes.Tests
                     aes.CreateDecryptor(key, iv),
                     CryptoStreamMode.Write
                 )
-            ) {
+            )
+            {
                 cryptoStream.Write(cipherBytes, 0, cipherBytes.Length);
                 cryptoStream.FlushFinalBlock();
 
@@ -3033,7 +3046,8 @@ namespace System.Security.Cryptography.Encryption.Aes.Tests
                 ICryptoTransform xform = encrypt
                     ? alg.CreateEncryptor()
                     : alg.CreateDecryptor(alg.Key, alg.IV)
-            ) {
+            )
+            {
                 // 1 block, plus maybe three bytes
                 int outputPadding = blockAlignedOutput ? 0 : 3;
                 byte[] output = new byte[alg.BlockSize / 8 + outputPadding];

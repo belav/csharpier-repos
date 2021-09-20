@@ -81,7 +81,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.ChangeSignature
                             ChangeSignatureDialogViewModel._parametersWithDefaultValues.Any()
                             || ChangeSignatureDialogViewModel._paramsParameter != null
                         )
-                    ) {
+                    )
+                    {
                         return true;
                     }
 
@@ -89,7 +90,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.ChangeSignature
                         this
                             == ChangeSignatureDialogViewModel._parametersWithDefaultValues.LastOrDefault()
                         && ChangeSignatureDialogViewModel._paramsParameter != null
-                    ) {
+                    )
+                    {
                         return true;
                     }
 
@@ -204,7 +206,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.ChangeSignature
                         string? @in,
                         string? @params,
                         string? @this
-                    ) {
+                    )
+                    {
                         switch (ParameterSymbol.RefKind)
                         {
                             case RefKind.Out:
@@ -227,7 +230,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.ChangeSignature
                                     ChangeSignatureDialogViewModel._thisParameter
                                     as ExistingParameterViewModel
                                 ).ParameterSymbol
-                        ) {
+                        )
+                        {
                             return @this ?? string.Empty;
                         }
 

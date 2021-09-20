@@ -152,7 +152,8 @@ namespace System.Linq.Expressions.Tests
         private static void VerifyArithmeticNegateNullableDecimal(
             decimal? value,
             bool useInterpreter
-        ) {
+        )
+        {
             Expression<Func<decimal?>> e = Expression.Lambda<Func<decimal?>>(
                 Expression.Negate(Expression.Constant(value, typeof(decimal?))),
                 Enumerable.Empty<ParameterExpression>()

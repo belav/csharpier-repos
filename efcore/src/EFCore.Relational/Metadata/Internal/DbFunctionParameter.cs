@@ -129,7 +129,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
         public virtual string? SetStoreType(
             string? storeType,
             ConfigurationSource configurationSource
-        ) {
+        )
+        {
             _storeType = storeType;
 
             _storeTypeConfigurationSource = configurationSource.Max(_storeTypeConfigurationSource);
@@ -182,7 +183,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
         public virtual RelationalTypeMapping? SetTypeMapping(
             RelationalTypeMapping? typeMapping,
             ConfigurationSource configurationSource
-        ) {
+        )
+        {
             _typeMapping = typeMapping;
             _typeMappingConfigurationSource = configurationSource.Max(
                 _typeMappingConfigurationSource
@@ -212,7 +214,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
         public virtual bool SetPropagatesNullability(
             bool propagatesNullability,
             ConfigurationSource configurationSource
-        ) {
+        )
+        {
             if (!Function.IsScalar)
             {
                 throw new InvalidOperationException(

@@ -167,7 +167,8 @@ namespace Newtonsoft.Json.Utilities
             Type type,
             string methodName,
             BindingFlags bindingFlags
-        ) {
+        )
+        {
             MethodInfo methodInfo = type.GetMethod(methodName, bindingFlags);
 
             // if no matching method then attempt to find with nonpublic flag
@@ -177,7 +178,8 @@ namespace Newtonsoft.Json.Utilities
             if (
                 methodInfo == null
                 && (bindingFlags & BindingFlags.NonPublic) != BindingFlags.NonPublic
-            ) {
+            )
+            {
                 methodInfo = type.GetMethod(methodName, bindingFlags | BindingFlags.NonPublic);
             }
 
@@ -187,7 +189,8 @@ namespace Newtonsoft.Json.Utilities
         private static MethodCall<object?, object> CreateFSharpFuncCall(
             Type type,
             string methodName
-        ) {
+        )
+        {
             MethodInfo innerMethodInfo = GetMethodWithNonPublicFallback(
                 type,
                 methodName,

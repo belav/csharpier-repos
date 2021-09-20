@@ -42,7 +42,8 @@ namespace Microsoft.Extensions.DependencyInjection
         public static IServiceCollection AddLocalization(
             this IServiceCollection services,
             Action<LocalizationOptions> setupAction
-        ) {
+        )
+        {
             if (services == null)
             {
                 throw new ArgumentNullException(nameof(services));
@@ -71,7 +72,8 @@ namespace Microsoft.Extensions.DependencyInjection
         internal static void AddLocalizationServices(
             IServiceCollection services,
             Action<LocalizationOptions> setupAction
-        ) {
+        )
+        {
             AddLocalizationServices(services);
             services.Configure(setupAction);
         }

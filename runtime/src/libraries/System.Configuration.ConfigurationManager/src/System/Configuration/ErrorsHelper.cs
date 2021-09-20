@@ -21,7 +21,8 @@ namespace System.Configuration
         internal static void AddError(
             ref List<ConfigurationException> errors,
             ConfigurationException e
-        ) {
+        )
+        {
             Debug.Assert(e != null, "e != null");
 
             // Create on demand
@@ -44,7 +45,8 @@ namespace System.Configuration
         internal static void AddErrors(
             ref List<ConfigurationException> errors,
             ICollection<ConfigurationException> coll
-        ) {
+        )
+        {
             if ((coll == null) || (coll.Count == 0))
             {
                 // Nothing to do here, bail
@@ -57,7 +59,8 @@ namespace System.Configuration
 
         internal static ConfigurationErrorsException GetErrorsException(
             List<ConfigurationException> errors
-        ) {
+        )
+        {
             if (errors == null)
                 return null;
 

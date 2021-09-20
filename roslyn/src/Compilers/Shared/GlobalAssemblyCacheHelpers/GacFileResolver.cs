@@ -47,7 +47,8 @@ namespace Microsoft.CodeAnalysis.Scripting.Hosting
         public GacFileResolver(
             ImmutableArray<ProcessorArchitecture> architectures = default,
             CultureInfo preferredCulture = null
-        ) {
+        )
+        {
             if (!IsAvailable)
             {
                 throw new PlatformNotSupportedException();

@@ -579,7 +579,8 @@ namespace Microsoft.AspNetCore.Components.Forms
                 string value,
                 out T result,
                 out string validationErrorMessage
-            ) {
+            )
+            {
                 throw new NotImplementedException();
             }
 
@@ -607,7 +608,8 @@ namespace Microsoft.AspNetCore.Components.Forms
                 string value,
                 out DateTime result,
                 out string validationErrorMessage
-            ) {
+            )
+            {
                 if (DateTime.TryParse(value, out result))
                 {
                     validationErrorMessage = null;

@@ -29,7 +29,8 @@ namespace Microsoft.CodeAnalysis.Remote
             int scopeId,
             Checksum[] checksums,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             SolutionAsset? singleAsset = null;
             IReadOnlyDictionary<Checksum, SolutionAsset>? assetMap = null;
 
@@ -69,7 +70,8 @@ namespace Microsoft.CodeAnalysis.Remote
             int scopeId,
             Checksum[] checksums,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             writer.WriteInt32(scopeId);
 
             // special case
@@ -108,7 +110,8 @@ namespace Microsoft.CodeAnalysis.Remote
                 Checksum checksum,
                 SolutionAsset asset,
                 CancellationToken cancellationToken
-            ) {
+            )
+            {
                 checksum.WriteTo(writer);
                 writer.WriteInt32((int)asset.Kind);
 
@@ -126,7 +129,8 @@ namespace Microsoft.CodeAnalysis.Remote
             ISet<Checksum> checksums,
             ISerializerService serializerService,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             // We can cancel at entry, but once the pipe operations are scheduled we rely on both operations running to
             // avoid deadlocks (the exception handler in 'copyTask' ensures progress is made in the blocking read).
             cancellationToken.ThrowIfCancellationRequested();
@@ -186,7 +190,8 @@ namespace Microsoft.CodeAnalysis.Remote
             static bool IsEndOfStreamExceptionExpected(
                 Exception? copyException,
                 CancellationToken cancellationToken
-            ) {
+            )
+            {
                 // The local pipe is only closed in the 'finally' block of 'copyTask'. If the reader fails with an
                 // EndOfStreamException, we known 'copyTask' has already completed its work.
                 if (cancellationToken.IsCancellationRequested)
@@ -214,7 +219,8 @@ namespace Microsoft.CodeAnalysis.Remote
             ISet<Checksum> checksums,
             ISerializerService serializerService,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             Debug.Assert(!checksums.Contains(Checksum.Null));
 
             using var _ = ArrayBuilder<(Checksum, object)>.GetInstance(out var results);

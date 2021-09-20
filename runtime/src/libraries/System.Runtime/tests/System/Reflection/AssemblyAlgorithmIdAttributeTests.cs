@@ -21,7 +21,8 @@ namespace System.Reflection.Tests
         [InlineData(Configuration.Assemblies.AssemblyHashAlgorithm.SHA512)]
         public void Ctor_AssemblyHashAlgorithm(
             Configuration.Assemblies.AssemblyHashAlgorithm algorithmId
-        ) {
+        )
+        {
             var attribute = new AssemblyAlgorithmIdAttribute(algorithmId);
             Assert.Equal((uint)algorithmId, attribute.AlgorithmId);
         }

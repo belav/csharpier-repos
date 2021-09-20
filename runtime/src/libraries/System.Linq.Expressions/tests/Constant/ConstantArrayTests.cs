@@ -20,7 +20,8 @@ namespace System.Linq.Expressions.Tests
                     new bool[] { true, false },
                     new bool[100]
                 }
-            ) {
+            )
+            {
                 VerifyBoolArrayConstant(value, useInterpreter);
             }
         }
@@ -36,7 +37,8 @@ namespace System.Linq.Expressions.Tests
                     new byte[] { 0, 1, byte.MaxValue },
                     new byte[100]
                 }
-            ) {
+            )
+            {
                 VerifyByteArrayConstant(value, useInterpreter);
             }
         }
@@ -51,7 +53,8 @@ namespace System.Linq.Expressions.Tests
                     new C[] { null, new C(), new D(), new D(0), new D(5) },
                     new C[10]
                 }
-            ) {
+            )
+            {
                 VerifyCustomArrayConstant(value, useInterpreter);
             }
         }
@@ -67,7 +70,8 @@ namespace System.Linq.Expressions.Tests
                     new char[] { '\0', '\b', 'A', '\uffff' },
                     new char[100]
                 }
-            ) {
+            )
+            {
                 VerifyCharArrayConstant(value, useInterpreter);
             }
         }
@@ -82,7 +86,8 @@ namespace System.Linq.Expressions.Tests
                     new D[] { null, new D(), new D(0), new D(5) },
                     new D[10]
                 }
-            ) {
+            )
+            {
                 VerifyCustom2ArrayConstant(value, useInterpreter);
             }
         }
@@ -105,7 +110,8 @@ namespace System.Linq.Expressions.Tests
                     },
                     new decimal[100]
                 }
-            ) {
+            )
+            {
                 VerifyDecimalArrayConstant(value, useInterpreter);
             }
         }
@@ -133,7 +139,8 @@ namespace System.Linq.Expressions.Tests
                     },
                     new Delegate[100]
                 }
-            ) {
+            )
+            {
                 VerifyDelegateArrayConstant(value, useInterpreter);
             }
         }
@@ -160,7 +167,8 @@ namespace System.Linq.Expressions.Tests
                     },
                     new double[100]
                 }
-            ) {
+            )
+            {
                 VerifyDoubleArrayConstant(value, useInterpreter);
             }
         }
@@ -176,7 +184,8 @@ namespace System.Linq.Expressions.Tests
                     new E[] { (E)0, E.A, E.B, (E)int.MaxValue, (E)int.MinValue },
                     new E[100]
                 }
-            ) {
+            )
+            {
                 VerifyEnumArrayConstant(value, useInterpreter);
             }
         }
@@ -192,7 +201,8 @@ namespace System.Linq.Expressions.Tests
                     new El[] { (El)0, El.A, El.B, (El)long.MaxValue, (El)long.MinValue },
                     new El[100]
                 }
-            ) {
+            )
+            {
                 VerifyEnumLongArrayConstant(value, useInterpreter);
             }
         }
@@ -219,7 +229,8 @@ namespace System.Linq.Expressions.Tests
                     },
                     new float[100]
                 }
-            ) {
+            )
+            {
                 VerifyFloatArrayConstant(value, useInterpreter);
             }
         }
@@ -242,7 +253,8 @@ namespace System.Linq.Expressions.Tests
                     },
                     new Func<object>[100]
                 }
-            ) {
+            )
+            {
                 VerifyFuncOfObjectConstant(value, useInterpreter);
             }
         }
@@ -258,7 +270,8 @@ namespace System.Linq.Expressions.Tests
                     new I[] { null, new C(), new D(), new D(0), new D(5) },
                     new I[100]
                 }
-            ) {
+            )
+            {
                 VerifyInterfaceArrayConstant(value, useInterpreter);
             }
         }
@@ -274,7 +287,8 @@ namespace System.Linq.Expressions.Tests
                     new IEquatable<C>[] { null, new C(), new D(), new D(0), new D(5) },
                     new IEquatable<C>[100]
                 }
-            ) {
+            )
+            {
                 VerifyIEquatableOfCustomConstant(value, useInterpreter);
             }
         }
@@ -290,7 +304,8 @@ namespace System.Linq.Expressions.Tests
                     new IEquatable<D>[] { null, new D(), new D(0), new D(5) },
                     new IEquatable<D>[100]
                 }
-            ) {
+            )
+            {
                 VerifyIEquatableOfCustom2Constant(value, useInterpreter);
             }
         }
@@ -306,7 +321,8 @@ namespace System.Linq.Expressions.Tests
                     new int[] { 0, 1, -1, int.MinValue, int.MaxValue },
                     new int[100]
                 }
-            ) {
+            )
+            {
                 VerifyIntArrayConstant(value, useInterpreter);
             }
         }
@@ -322,7 +338,8 @@ namespace System.Linq.Expressions.Tests
                     new long[] { 0, 1, -1, long.MinValue, long.MaxValue },
                     new long[100]
                 }
-            ) {
+            )
+            {
                 VerifyLongArrayConstant(value, useInterpreter);
             }
         }
@@ -338,7 +355,8 @@ namespace System.Linq.Expressions.Tests
                     new object[] { null, new object(), new C(), new D(3) },
                     new object[100]
                 }
-            ) {
+            )
+            {
                 VerifyObjectArrayConstant(value, useInterpreter);
             }
         }
@@ -363,7 +381,8 @@ namespace System.Linq.Expressions.Tests
                     new sbyte[] { 0, 1, -1, sbyte.MinValue, sbyte.MaxValue },
                     new sbyte[100]
                 }
-            ) {
+            )
+            {
                 VerifySByteArrayConstant(value, useInterpreter);
             }
         }
@@ -379,7 +398,8 @@ namespace System.Linq.Expressions.Tests
                     new Sc[] { default(Sc), new Sc(), new Sc(null) },
                     new Sc[100]
                 }
-            ) {
+            )
+            {
                 VerifyStructWithStringArrayConstant(value, useInterpreter);
             }
         }
@@ -395,7 +415,8 @@ namespace System.Linq.Expressions.Tests
                     new Scs[] { default(Scs), new Scs(), new Scs(null, new S()) },
                     new Scs[100]
                 }
-            ) {
+            )
+            {
                 VerifyStructWithStringAndFieldArrayConstant(value, useInterpreter);
             }
         }
@@ -411,7 +432,8 @@ namespace System.Linq.Expressions.Tests
                     new short[] { 0, 1, -1, short.MinValue, short.MaxValue },
                     new short[100]
                 }
-            ) {
+            )
+            {
                 VerifyShortArrayConstant(value, useInterpreter);
             }
         }
@@ -427,7 +449,8 @@ namespace System.Linq.Expressions.Tests
                     new Sp[] { default(Sp), new Sp(), new Sp(5, 5.0) },
                     new Sp[100]
                 }
-            ) {
+            )
+            {
                 VerifyStructWithTwoValuesArrayConstant(value, useInterpreter);
             }
         }
@@ -443,7 +466,8 @@ namespace System.Linq.Expressions.Tests
                     new Ss[] { default(Ss), new Ss(), new Ss(new S()) },
                     new Ss[100]
                 }
-            ) {
+            )
+            {
                 VerifyStructWithValueArrayConstant(value, useInterpreter);
             }
         }
@@ -459,7 +483,8 @@ namespace System.Linq.Expressions.Tests
                     new string[] { null, "", "a", "foo" },
                     new string[100]
                 }
-            ) {
+            )
+            {
                 VerifyStringArrayConstant(value, useInterpreter);
             }
         }
@@ -475,7 +500,8 @@ namespace System.Linq.Expressions.Tests
                     new uint[] { 0, 1, uint.MaxValue },
                     new uint[100]
                 }
-            ) {
+            )
+            {
                 VerifyUIntArrayConstant(value, useInterpreter);
             }
         }
@@ -491,7 +517,8 @@ namespace System.Linq.Expressions.Tests
                     new ulong[] { 0, 1, ulong.MaxValue },
                     new ulong[100]
                 }
-            ) {
+            )
+            {
                 VerifyULongArrayConstant(value, useInterpreter);
             }
         }
@@ -507,7 +534,8 @@ namespace System.Linq.Expressions.Tests
                     new ushort[] { 0, 1, ushort.MaxValue },
                     new ushort[100]
                 }
-            ) {
+            )
+            {
                 VerifyUShortArrayConstant(value, useInterpreter);
             }
         }
@@ -515,21 +543,24 @@ namespace System.Linq.Expressions.Tests
         [Theory, ClassData(typeof(CompilationTypes))]
         public static void CheckGenericWithStructRestrictionWithEnumArrayConstantTest(
             bool useInterpreter
-        ) {
+        )
+        {
             CheckGenericWithStructRestrictionArrayConstantHelper<E>(useInterpreter);
         }
 
         [Theory, ClassData(typeof(CompilationTypes))]
         public static void CheckGenericWithStructRestrictionWithStructArrayConstantTest(
             bool useInterpreter
-        ) {
+        )
+        {
             CheckGenericWithStructRestrictionArrayConstantHelper<S>(useInterpreter);
         }
 
         [Theory, ClassData(typeof(CompilationTypes))]
         public static void CheckGenericWithStructRestrictionWithStructWithStringAndValueArrayConstantTest(
             bool useInterpreter
-        ) {
+        )
+        {
             CheckGenericWithStructRestrictionArrayConstantHelper<Scs>(useInterpreter);
         }
 
@@ -615,7 +646,8 @@ namespace System.Linq.Expressions.Tests
                     new Ts[] { default(Ts), new Ts() },
                     new Ts[100]
                 }
-            ) {
+            )
+            {
                 VerifyGenericArrayWithStructRestriction<Ts>(value, useInterpreter);
             }
         }
@@ -639,7 +671,8 @@ namespace System.Linq.Expressions.Tests
                     new Tc[] { null, default(Tc) },
                     new Tc[100]
                 }
-            ) {
+            )
+            {
                 VerifyGenericWithClassRestrictionArray<Tc>(value, useInterpreter);
             }
         }
@@ -656,7 +689,8 @@ namespace System.Linq.Expressions.Tests
                     new Tcn[] { null, default(Tcn), new Tcn() },
                     new Tcn[100]
                 }
-            ) {
+            )
+            {
                 VerifyGenericWithClassAndNewRestrictionArray<Tcn>(value, useInterpreter);
             }
         }
@@ -672,7 +706,8 @@ namespace System.Linq.Expressions.Tests
                     new TC[] { null, default(TC), (TC)new C() },
                     new TC[100]
                 }
-            ) {
+            )
+            {
                 VerifyGenericWithSubClassRestrictionArray<TC>(value, useInterpreter);
             }
         }
@@ -689,7 +724,8 @@ namespace System.Linq.Expressions.Tests
                     new TCn[] { null, default(TCn), new TCn(), (TCn)new C() },
                     new TCn[100]
                 }
-            ) {
+            )
+            {
                 VerifyGenericWithSubClassAndNewRestrictionArray<TCn>(value, useInterpreter);
             }
         }
@@ -831,7 +867,8 @@ namespace System.Linq.Expressions.Tests
         private static void VerifyIEquatableOfCustomConstant(
             IEquatable<C>[] value,
             bool useInterpreter
-        ) {
+        )
+        {
             Expression<Func<IEquatable<C>[]>> e = Expression.Lambda<Func<IEquatable<C>[]>>(
                 Expression.Constant(value, typeof(IEquatable<C>[])),
                 Enumerable.Empty<ParameterExpression>()
@@ -843,7 +880,8 @@ namespace System.Linq.Expressions.Tests
         private static void VerifyIEquatableOfCustom2Constant(
             IEquatable<D>[] value,
             bool useInterpreter
-        ) {
+        )
+        {
             Expression<Func<IEquatable<D>[]>> e = Expression.Lambda<Func<IEquatable<D>[]>>(
                 Expression.Constant(value, typeof(IEquatable<D>[])),
                 Enumerable.Empty<ParameterExpression>()
@@ -915,7 +953,8 @@ namespace System.Linq.Expressions.Tests
         private static void VerifyStructWithStringAndFieldArrayConstant(
             Scs[] value,
             bool useInterpreter
-        ) {
+        )
+        {
             Expression<Func<Scs[]>> e = Expression.Lambda<Func<Scs[]>>(
                 Expression.Constant(value, typeof(Scs[])),
                 Enumerable.Empty<ParameterExpression>()

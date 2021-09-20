@@ -77,7 +77,8 @@ namespace System.Net.Security
             Interop.SspiCli.ContextAttribute contextAttribute,
             byte* buffer,
             SafeHandle? refHandle
-        ) {
+        )
+        {
             int status = (int)Interop.SECURITY_STATUS.InvalidHandle;
 
             try
@@ -120,7 +121,8 @@ namespace System.Net.Security
             SafeDeleteContext phContext,
             Interop.SspiCli.ContextAttribute contextAttribute,
             byte[] buffer
-        ) {
+        )
+        {
             try
             {
                 bool ignore = false;
@@ -211,7 +213,8 @@ namespace System.Net.Security
             string package,
             Interop.SspiCli.CredentialUse intent,
             out SafeFreeCredentials outCredential
-        ) {
+        )
+        {
             int errorCode = -1;
             long timeStamp;
 
@@ -248,7 +251,8 @@ namespace System.Net.Security
             Interop.SspiCli.CredentialUse intent,
             ref SafeSspiAuthDataHandle authdata,
             out SafeFreeCredentials outCredential
-        ) {
+        )
+        {
             int errorCode = -1;
             long timeStamp;
 
@@ -278,7 +282,8 @@ namespace System.Net.Security
             Interop.SspiCli.CredentialUse intent,
             Interop.SspiCli.SCHANNEL_CRED* authdata,
             out SafeFreeCredentials outCredential
-        ) {
+        )
+        {
             int errorCode = -1;
             long timeStamp;
 
@@ -315,7 +320,8 @@ namespace System.Net.Security
             Interop.SspiCli.CredentialUse intent,
             Interop.SspiCli.SCH_CREDENTIALS* authdata,
             out SafeFreeCredentials outCredential
-        ) {
+        )
+        {
             long timeStamp;
 
             outCredential = new SafeFreeCredential_SECURITY();
@@ -382,7 +388,8 @@ namespace System.Net.Security
             InputSecurityBuffers inSecBuffers,
             ref SecurityBuffer outSecBuffer,
             ref Interop.SspiCli.ContextFlags outFlags
-        ) {
+        )
+        {
             if (inCredentials == null)
             {
                 throw new ArgumentNullException(nameof(inCredentials));
@@ -417,7 +424,8 @@ namespace System.Net.Security
                     void* pinnedToken0 = inSecBuffers._item0.Token
                 )fixed (void* pinnedToken1 = inSecBuffers._item1.Token)fixed (
                     void* pinnedToken2 = inSecBuffers._item2.Token
-                ) {
+                )
+                {
                     // Fix Descriptor pointer that points to unmanaged SecurityBuffers.
                     inSecurityBufferDescriptor.pBuffers = inUnmanagedBufferPtr;
                     // Updated pvBuffer with pinned address. UnmanagedToken takes precedence.
@@ -547,7 +555,8 @@ namespace System.Net.Security
                                 && inUnmanagedBuffer[1].BufferType
                                     == SecurityBufferType.SECBUFFER_EXTRA
                                 && inSecBuffers._item1.Type == SecurityBufferType.SECBUFFER_EMPTY
-                            ) {
+                            )
+                            {
                                 // OS function did not use all provided data and turned EMPTY to EXTRA
                                 // https://docs.microsoft.com/en-us/windows/win32/secauthn/extra-buffers-returned-by-schannel
 
@@ -634,7 +643,8 @@ namespace System.Net.Security
                                 if (
                                     inUnmanagedBuffer[1].BufferType
                                     == SecurityBufferType.SECBUFFER_EXTRA
-                                ) {
+                                )
+                                {
                                     // we are left with unprocessed data again. fail with SEC_E_INCOMPLETE_MESSAGE hResult.
                                     errorCode = unchecked((int)0x80090318);
                                 }
@@ -670,7 +680,8 @@ namespace System.Net.Security
             ref Interop.SspiCli.SecBufferDesc outputBuffer,
             ref Interop.SspiCli.ContextFlags attributes,
             SafeFreeContextBuffer? handleTemplate
-        ) {
+        )
+        {
             int errorCode = (int)Interop.SECURITY_STATUS.InvalidHandle;
 
             try
@@ -719,7 +730,8 @@ namespace System.Net.Security
                 if (
                     outContext._EffectiveCredential != inCredentials
                     && (errorCode & 0x80000000) == 0
-                ) {
+                )
+                {
                     // Disassociate the previous credential handle
                     outContext._EffectiveCredential?.DangerousRelease();
                     outContext._EffectiveCredential = inCredentials;
@@ -761,7 +773,8 @@ namespace System.Net.Security
             InputSecurityBuffers inSecBuffers,
             ref SecurityBuffer outSecBuffer,
             ref Interop.SspiCli.ContextFlags outFlags
-        ) {
+        )
+        {
             if (inCredentials == null)
             {
                 throw new ArgumentNullException(nameof(inCredentials));
@@ -923,7 +936,8 @@ namespace System.Net.Security
                             inSecBuffers.Count > 1
                             && inUnmanagedBuffer[1].BufferType == SecurityBufferType.SECBUFFER_EXTRA
                             && inSecBuffers._item1.Type == SecurityBufferType.SECBUFFER_EMPTY
-                        ) {
+                        )
+                        {
                             // OS function did not use all provided data and turned EMPTY to EXTRA
                             // https://docs.microsoft.com/en-us/windows/win32/secauthn/extra-buffers-returned-by-schannel
 
@@ -1004,7 +1018,8 @@ namespace System.Net.Security
                             if (
                                 inUnmanagedBuffer[1].BufferType
                                 == SecurityBufferType.SECBUFFER_EXTRA
-                            ) {
+                            )
+                            {
                                 // we are left with unprocessed data again. fail with SEC_E_INCOMPLETE_MESSAGE hResult.
                                 errorCode = unchecked((int)0x80090318);
                             }
@@ -1043,7 +1058,8 @@ namespace System.Net.Security
             ref Interop.SspiCli.SecBufferDesc outputBuffer,
             ref Interop.SspiCli.ContextFlags outFlags,
             SafeFreeContextBuffer? handleTemplate
-        ) {
+        )
+        {
             int errorCode = (int)Interop.SECURITY_STATUS.InvalidHandle;
 
             // Run the body of this method as a non-interruptible block.
@@ -1090,7 +1106,8 @@ namespace System.Net.Security
                 if (
                     outContext._EffectiveCredential != inCredentials
                     && (errorCode & 0x80000000) == 0
-                ) {
+                )
+                {
                     // Disassociate the previous credential handle.
                     outContext._EffectiveCredential?.DangerousRelease();
                     outContext._EffectiveCredential = inCredentials;
@@ -1126,7 +1143,8 @@ namespace System.Net.Security
         internal static unsafe int CompleteAuthToken(
             ref SafeDeleteSslContext? refContext,
             in SecurityBuffer inSecBuffer
-        ) {
+        )
+        {
             if (NetEventSource.Log.IsEnabled())
                 NetEventSource.Info(
                     null,
@@ -1191,7 +1209,8 @@ namespace System.Net.Security
         internal static unsafe int ApplyControlToken(
             ref SafeDeleteContext? refContext,
             in SecurityBuffer inSecBuffer
-        ) {
+        )
+        {
             if (NetEventSource.Log.IsEnabled())
                 NetEventSource.Info(
                     null,
@@ -1297,7 +1316,8 @@ namespace System.Net.Security
             Interop.SspiCli.ContextAttribute contextAttribute,
             SecPkgContext_Bindings* buffer,
             SafeFreeContextBufferChannelBinding refHandle
-        ) {
+        )
+        {
             int status = (int)Interop.SECURITY_STATUS.InvalidHandle;
 
             // SCHANNEL only supports SECPKG_ATTR_ENDPOINT_BINDINGS and SECPKG_ATTR_UNIQUE_BINDINGS which
@@ -1305,7 +1325,8 @@ namespace System.Net.Security
             if (
                 contextAttribute != Interop.SspiCli.ContextAttribute.SECPKG_ATTR_ENDPOINT_BINDINGS
                 && contextAttribute != Interop.SspiCli.ContextAttribute.SECPKG_ATTR_UNIQUE_BINDINGS
-            ) {
+            )
+            {
                 return status;
             }
 

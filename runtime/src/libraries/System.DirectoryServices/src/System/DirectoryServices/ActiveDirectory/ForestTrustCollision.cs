@@ -12,7 +12,8 @@ namespace System.DirectoryServices.ActiveDirectory
             TopLevelNameCollisionOptions TLNFlag,
             DomainCollisionOptions domainFlag,
             string record
-        ) {
+        )
+        {
             CollisionType = collisionType;
             TopLevelNameCollisionOption = TLNFlag;
             DomainCollisionOption = domainFlag;

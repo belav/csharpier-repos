@@ -20,7 +20,8 @@ namespace System.Security.AccessControl.Tests
             Guid inheritedType,
             bool isCallback,
             byte[] opaque
-        ) {
+        )
+        {
             Assert.Equal(aceFlags, ace.AceFlags);
             Assert.Equal(accessMask, ace.AccessMask);
             Assert.Equal(sid, ace.SecurityIdentifier);
@@ -43,7 +44,8 @@ namespace System.Security.AccessControl.Tests
             bool isCallback,
             int opaqueLength,
             int offset
-        ) {
+        )
+        {
             AceFlags aceFlags = (AceFlags)intFlags;
             AceQualifier qualifier = (AceQualifier)intQualifier;
             SecurityIdentifier sid = new SecurityIdentifier(stringsid);
@@ -459,7 +461,8 @@ namespace System.Security.AccessControl.Tests
             GenericAce testAce,
             byte[] expectedBinaryForm,
             int testOffset
-        ) {
+        )
+        {
             byte[] resultBinaryForm = new byte[testAce.BinaryLength + testOffset];
             testAce.GetBinaryForm(resultBinaryForm, testOffset);
             GenericAce_VerifyBinaryForms(expectedBinaryForm, resultBinaryForm, testOffset);
@@ -471,7 +474,8 @@ namespace System.Security.AccessControl.Tests
             GenericAce expectedAce,
             byte[] testBinaryForm,
             int testOffset
-        ) {
+        )
+        {
             GenericAce resultAce = ObjectAce.CreateFromBinaryForm(testBinaryForm, testOffset);
             GenericAce_VerifyAces(expectedAce, resultAce);
         }

@@ -61,7 +61,8 @@ namespace Microsoft.JSInterop.WebAssembly
             T0 arg0,
             T1 arg1,
             T2 arg2
-        ) {
+        )
+        {
             ThrowIfDisposed();
 
             return _jsRuntime.InvokeUnmarshalled<T0, T1, T2, TResult>(

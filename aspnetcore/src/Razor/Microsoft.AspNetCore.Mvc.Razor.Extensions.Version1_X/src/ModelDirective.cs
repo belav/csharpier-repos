@@ -74,7 +74,8 @@ namespace Microsoft.AspNetCore.Mvc.Razor.Extensions.Version1_X
             protected override void ExecuteCore(
                 RazorCodeDocument codeDocument,
                 DocumentIntermediateNode documentNode
-            ) {
+            )
+            {
                 var visitor = new Visitor();
                 var modelType = GetModelType(documentNode, visitor);
 
@@ -107,7 +108,8 @@ namespace Microsoft.AspNetCore.Mvc.Razor.Extensions.Version1_X
 
             public override void VisitNamespaceDeclaration(
                 NamespaceDeclarationIntermediateNode node
-            ) {
+            )
+            {
                 if (Namespace == null)
                 {
                     Namespace = node;

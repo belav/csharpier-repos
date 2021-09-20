@@ -16,7 +16,8 @@ namespace Microsoft.CodeAnalysis
             SyntaxNode declaredNode,
             ImmutableArray<SyntaxNode> executableCodeBlocks,
             ISymbol? declaredSymbol
-        ) {
+        )
+        {
             Debug.Assert(declaredNode != null);
             Debug.Assert(!executableCodeBlocks.IsDefault);
 

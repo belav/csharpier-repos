@@ -296,7 +296,8 @@ namespace Tests.Collections
             object expectedCurrent,
             bool expectCurrentThrow,
             bool atEnd
-        ) {
+        )
+        {
             if (expectCurrentThrow)
             {
                 Assert.Throws<InvalidOperationException>(() => enumerator.Current);
@@ -338,7 +339,8 @@ namespace Tests.Collections
             int count,
             bool validateStart,
             bool validateEnd
-        ) {
+        )
+        {
             bool needToMatchAllExpectedItems = count - startIndex == expectedItems.Length;
             if (validateStart)
             {
@@ -367,7 +369,8 @@ namespace Tests.Collections
                                 currentItem,
                                 expectedItems[i + (needToMatchAllExpectedItems ? startIndex : 0)]
                             )
-                        ) {
+                        )
+                        {
                             itemsVisited[i] = true;
                             itemFound = true;
                             break;

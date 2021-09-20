@@ -24,7 +24,8 @@ namespace System.Web.Http.Tracing.Tracers
         public DefaultHttpControllerTypeResolverTracer(
             DefaultHttpControllerTypeResolver innerResolver,
             ITraceWriter traceWriter
-        ) {
+        )
+        {
             Contract.Assert(innerResolver != null);
             Contract.Assert(traceWriter != null);
 

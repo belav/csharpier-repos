@@ -28,7 +28,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
         public override void ProcessModelFinalizing(
             IConventionModelBuilder modelBuilder,
             IConventionContext<IConventionModelBuilder> context
-        ) {
+        )
+        {
             foreach (var entityType in modelBuilder.Metadata.GetEntityTypes())
             {
                 var definingQuery = entityType.GetInMemoryQuery();

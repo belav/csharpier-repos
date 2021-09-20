@@ -60,7 +60,8 @@ namespace Microsoft.CodeAnalysis.Interactive
                     MetadataShadowCopyProvider metadataFileProvider,
                     ReplServiceProvider replServiceProvider,
                     InteractiveScriptGlobals globals
-                ) {
+                )
+                {
                     AssemblyLoader = assemblyLoader;
                     MetadataFileProvider = metadataFileProvider;
                     ReplServiceProvider = replServiceProvider;
@@ -82,7 +83,8 @@ namespace Microsoft.CodeAnalysis.Interactive
                     ScriptOptions scriptOptions,
                     ImmutableArray<string> sourceSearchPaths,
                     string workingDirectory
-                ) {
+                )
+                {
                     Debug.Assert(!sourceSearchPaths.IsDefault);
                     Debug.Assert(scriptOptions.MetadataResolver is ScriptMetadataResolver);
 
@@ -190,7 +192,8 @@ namespace Microsoft.CodeAnalysis.Interactive
             public Task<InteractiveHostPlatformInfo.Data> InitializeAsync(
                 string replServiceProviderTypeName,
                 string cultureName
-            ) {
+            )
+            {
                 // TODO (tomat): we should share the copied files with the host
                 var metadataFileProvider = new MetadataShadowCopyProvider(
                     Path.Combine(Path.GetTempPath(), "InteractiveHostShadow"),
@@ -227,7 +230,8 @@ namespace Microsoft.CodeAnalysis.Interactive
             private SourceReferenceResolver CreateSourceReferenceResolver(
                 ImmutableArray<string> searchPaths,
                 string baseDirectory
-            ) {
+            )
+            {
                 return new SourceFileResolver(searchPaths, baseDirectory);
             }
 
@@ -258,7 +262,8 @@ namespace Microsoft.CodeAnalysis.Interactive
             internal static Task RunServerAsync(
                 string[] args,
                 Func<Func<object>, object> invokeOnMainThread
-            ) {
+            )
+            {
                 Contract.ThrowIfFalse(
                     args.Length == 2,
                     "Expecting arguments: <pipe name> <client process id>"
@@ -277,7 +282,8 @@ namespace Microsoft.CodeAnalysis.Interactive
                 string pipeName,
                 int clientProcessId,
                 Func<Func<object>, object> invokeOnMainThread
-            ) {
+            )
+            {
                 if (!AttachToClientProcess(clientProcessId))
                 {
                     return;
@@ -313,7 +319,8 @@ namespace Microsoft.CodeAnalysis.Interactive
                 string[] referenceSearchPaths,
                 string[] sourceSearchPaths,
                 string? baseDirectory
-            ) {
+            )
+            {
                 var completionSource = new TaskCompletionSource<RemoteExecutionResult>();
                 lock (_lastTaskGuard)
                 {
@@ -335,7 +342,8 @@ namespace Microsoft.CodeAnalysis.Interactive
                 string[]? referenceSearchPaths,
                 string[]? sourceSearchPaths,
                 string? baseDirectory
-            ) {
+            )
+            {
                 var serviceState = GetServiceState();
                 var state = await ReportUnhandledExceptionIfAnyAsync(lastTask)
                     .ConfigureAwait(false);
@@ -368,7 +376,8 @@ namespace Microsoft.CodeAnalysis.Interactive
             public async Task<RemoteExecutionResult.Data> InitializeContextAsync(
                 string? initializationFilePath,
                 bool isRestarting
-            ) {
+            )
+            {
                 var completionSource = new TaskCompletionSource<RemoteExecutionResult>();
                 lock (_lastTaskGuard)
                 {
@@ -401,7 +410,8 @@ namespace Microsoft.CodeAnalysis.Interactive
                 Task<EvaluationState> lastTask,
                 TaskCompletionSource<bool> completionSource,
                 string reference
-            ) {
+            )
+            {
                 var state = await ReportUnhandledExceptionIfAnyAsync(lastTask)
                     .ConfigureAwait(false);
                 var success = false;
@@ -459,7 +469,8 @@ namespace Microsoft.CodeAnalysis.Interactive
                 TaskCompletionSource<RemoteExecutionResult> completionSource,
                 Task<EvaluationState> lastTask,
                 string text
-            ) {
+            )
+            {
                 var state = await ReportUnhandledExceptionIfAnyAsync(lastTask)
                     .ConfigureAwait(false);
 
@@ -505,7 +516,8 @@ namespace Microsoft.CodeAnalysis.Interactive
             {
                 if (
                     e is FileLoadException && e.InnerException is InteractiveAssemblyLoaderException
-                ) {
+                )
+                {
                     Console.Error.WriteLine(e.InnerException.Message);
                 }
                 else
@@ -536,7 +548,8 @@ namespace Microsoft.CodeAnalysis.Interactive
                 TaskCompletionSource<RemoteExecutionResult> completionSource,
                 bool success,
                 RemoteInitializationResult? initResult = null
-            ) {
+            )
+            {
                 // send any updates to the host object and current directory back to the client:
                 var globals = GetServiceState().Globals;
                 var newSourcePaths = globals.SourcePaths.ToImmutableArray();
@@ -599,7 +612,8 @@ namespace Microsoft.CodeAnalysis.Interactive
 
             private static async Task<EvaluationState> ReportUnhandledExceptionIfAnyAsync(
                 Task<EvaluationState> lastTask
-            ) {
+            )
+            {
                 try
                 {
                     return await lastTask.ConfigureAwait(false);
@@ -632,7 +646,8 @@ namespace Microsoft.CodeAnalysis.Interactive
                 TaskCompletionSource<RemoteExecutionResult> completionSource,
                 string? initializationFilePath,
                 bool isRestarting
-            ) {
+            )
+            {
                 Contract.ThrowIfFalse(
                     initializationFilePath == null
                         || PathUtilities.IsAbsolute(initializationFilePath)
@@ -806,7 +821,8 @@ namespace Microsoft.CodeAnalysis.Interactive
                 string baseDirectory,
                 ImmutableArray<string> searchPaths,
                 bool displayPath
-            ) {
+            )
+            {
                 var attempts = new List<string>();
                 bool fileExists(string file)
                 {
@@ -849,7 +865,8 @@ namespace Microsoft.CodeAnalysis.Interactive
                 string code,
                 string? path,
                 ScriptOptions options
-            ) {
+            )
+            {
                 var serviceState = GetServiceState();
 
                 Script script;
@@ -884,7 +901,8 @@ namespace Microsoft.CodeAnalysis.Interactive
                 TaskCompletionSource<RemoteExecutionResult> completionSource,
                 Task<EvaluationState> lastTask,
                 string path
-            ) {
+            )
+            {
                 var state = await ReportUnhandledExceptionIfAnyAsync(lastTask)
                     .ConfigureAwait(false);
                 var fullPath = ResolveRelativePath(
@@ -920,7 +938,8 @@ namespace Microsoft.CodeAnalysis.Interactive
             private async Task<ScriptState<object>?> TryExecuteFileAsync(
                 EvaluationState state,
                 string fullPath
-            ) {
+            )
+            {
                 Debug.Assert(PathUtilities.IsAbsolute(fullPath));
 
                 string? content = null;
@@ -955,7 +974,8 @@ namespace Microsoft.CodeAnalysis.Interactive
             private static void DisplaySearchPaths(
                 TextWriter writer,
                 List<string> attemptedFilePaths
-            ) {
+            )
+            {
                 var directories = attemptedFilePaths.Select(path => Path.GetDirectoryName(path))
                     .ToArray();
                 var uniqueDirectories = new HashSet<string>(directories);
@@ -980,7 +1000,8 @@ namespace Microsoft.CodeAnalysis.Interactive
                 Script<object> script,
                 ScriptState<object>? state,
                 bool displayResult
-            ) {
+            )
+            {
                 return (Task<ScriptState<object>>)_invokeOnMainThread(
                     (Func<Task<ScriptState<object>>>)(
                         async () =>
@@ -1020,7 +1041,8 @@ namespace Microsoft.CodeAnalysis.Interactive
             private void DisplayInteractiveErrors(
                 ImmutableArray<Diagnostic> diagnostics,
                 TextWriter output
-            ) {
+            )
+            {
                 var displayedDiagnostics = new List<Diagnostic>();
                 const int MaxErrorCount = 5;
                 for (int i = 0, n = Math.Min(diagnostics.Length, MaxErrorCount); i < n; i++)
@@ -1092,7 +1114,8 @@ namespace Microsoft.CodeAnalysis.Interactive
                     var stream = isError
                         ? Console.OpenStandardError()
                         : Console.OpenStandardOutput()
-                ) {
+                )
+                {
                     stream.Write(data, 0, data.Length);
                     stream.Flush();
                 }

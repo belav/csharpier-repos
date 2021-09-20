@@ -20,7 +20,8 @@ namespace System.UnitTesting
             IEnumerable<T> source,
             Predicate<T> predicate,
             string message
-        ) {
+        )
+        {
             Assert.NotNull(source);
 
             foreach (T t in source)

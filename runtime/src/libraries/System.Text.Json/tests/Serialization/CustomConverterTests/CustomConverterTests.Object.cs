@@ -21,7 +21,8 @@ namespace System.Text.Json.Serialization.Tests
                 ref Utf8JsonReader reader,
                 Type typeToConvert,
                 JsonSerializerOptions options
-            ) {
+            )
+            {
                 if (typeToConvert == typeof(Customer))
                 {
                     reader.Skip();
@@ -42,7 +43,8 @@ namespace System.Text.Json.Serialization.Tests
                 Utf8JsonWriter writer,
                 object value,
                 JsonSerializerOptions options
-            ) {
+            )
+            {
                 // Write the name of the type.
                 writer.WriteStringValue(value.GetType().ToString());
             }
@@ -95,7 +97,8 @@ namespace System.Text.Json.Serialization.Tests
                 ref Utf8JsonReader reader,
                 Type typeToConvert,
                 JsonSerializerOptions options
-            ) {
+            )
+            {
                 if (reader.TokenType == JsonTokenType.True)
                 {
                     return true;
@@ -122,7 +125,8 @@ namespace System.Text.Json.Serialization.Tests
                 Utf8JsonWriter writer,
                 object value,
                 JsonSerializerOptions options
-            ) {
+            )
+            {
                 throw new InvalidOperationException("Directly writing object not supported");
             }
         }
@@ -164,7 +168,8 @@ namespace System.Text.Json.Serialization.Tests
                 ref Utf8JsonReader reader,
                 Type typeToConvert,
                 JsonSerializerOptions options
-            ) {
+            )
+            {
                 Customer customer = null;
                 if (typeToConvert == typeof(Customer))
                 {
@@ -218,7 +223,8 @@ namespace System.Text.Json.Serialization.Tests
                 Utf8JsonWriter writer,
                 Customer value,
                 JsonSerializerOptions options
-            ) {
+            )
+            {
                 writer.WriteStartObject();
                 writer.WriteString("Name", value.Name);
                 writer.WriteNumber("CreditLimit", value.CreditLimit);
@@ -292,7 +298,8 @@ namespace System.Text.Json.Serialization.Tests
                 ref Utf8JsonReader reader,
                 Type typeToConvert,
                 JsonSerializerOptions options
-            ) {
+            )
+            {
                 if (reader.TokenType == JsonTokenType.True)
                 {
                     return true;
@@ -335,7 +342,8 @@ namespace System.Text.Json.Serialization.Tests
                 Utf8JsonWriter writer,
                 object value,
                 JsonSerializerOptions options
-            ) {
+            )
+            {
                 throw new InvalidOperationException("Should not get here.");
             }
         }
@@ -353,7 +361,8 @@ namespace System.Text.Json.Serialization.Tests
                 ref Utf8JsonReader reader,
                 Type typeToConvert,
                 JsonSerializerOptions options
-            ) {
+            )
+            {
                 ReadCallCount++;
 
                 if (reader.TokenType == JsonTokenType.True)
@@ -393,7 +402,8 @@ namespace System.Text.Json.Serialization.Tests
                 Utf8JsonWriter writer,
                 object value,
                 JsonSerializerOptions options
-            ) {
+            )
+            {
                 WriteCallCount++;
 
                 if (value is int i)

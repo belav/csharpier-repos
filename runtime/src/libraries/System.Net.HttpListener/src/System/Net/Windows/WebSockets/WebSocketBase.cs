@@ -58,7 +58,8 @@ namespace System.Net.WebSockets
             string? subProtocol,
             TimeSpan keepAliveInterval,
             WebSocketBuffer internalBuffer
-        ) {
+        )
+        {
             Debug.Assert(internalBuffer != null, "'internalBuffer' MUST NOT be NULL.");
             HttpWebSocket.ValidateInnerStream(innerStream);
             HttpWebSocket.ValidateOptions(
@@ -163,7 +164,8 @@ namespace System.Net.WebSockets
         public override Task<WebSocketReceiveResult> ReceiveAsync(
             ArraySegment<byte> buffer,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             WebSocketValidate.ValidateArraySegment(buffer, nameof(buffer));
             return ReceiveAsyncCore(buffer, cancellationToken);
         }
@@ -171,7 +173,8 @@ namespace System.Net.WebSockets
         private async Task<WebSocketReceiveResult> ReceiveAsyncCore(
             ArraySegment<byte> buffer,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             WebSocketReceiveResult receiveResult;
 
             ThrowIfPendingException();
@@ -252,11 +255,13 @@ namespace System.Net.WebSockets
             WebSocketMessageType messageType,
             bool endOfMessage,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             if (
                 messageType != WebSocketMessageType.Binary
                 && messageType != WebSocketMessageType.Text
-            ) {
+            )
+            {
                 throw new ArgumentException(
                     SR.Format(
                         SR.net_WebSockets_Argument_InvalidMessageType,
@@ -280,7 +285,8 @@ namespace System.Net.WebSockets
             WebSocketMessageType messageType,
             bool endOfMessage,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             Debug.Assert(
                 messageType == WebSocketMessageType.Binary
                     || messageType == WebSocketMessageType.Text,
@@ -315,7 +321,8 @@ namespace System.Net.WebSockets
                                 out linkedCancellationToken
                             )
                     )
-                ) {
+                )
+                {
                     Task? keepAliveTask;
 
                     lock (SessionHandle)
@@ -336,7 +343,8 @@ namespace System.Net.WebSockets
                                         cancellationToken,
                                         out linkedCancellationToken
                                     )
-                            ) {
+                            )
+                            {
                                 break;
                             }
                             else
@@ -387,7 +395,8 @@ namespace System.Net.WebSockets
         private async Task SendFrameAsync(
             IList<ArraySegment<byte>> sendBuffers,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             bool sendFrameLockTaken = false;
             try
             {
@@ -398,7 +407,8 @@ namespace System.Net.WebSockets
                     sendBuffers.Count > 1
                     && _innerStreamAsWebSocketStream != null
                     && _innerStreamAsWebSocketStream.SupportsMultipleWrite
-                ) {
+                )
+                {
                     await _innerStreamAsWebSocketStream.MultipleWriteAsync(
                             sendBuffers,
                             cancellationToken
@@ -490,7 +500,8 @@ namespace System.Net.WebSockets
             WebSocketCloseStatus closeStatus,
             string? statusDescription,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             WebSocketValidate.ValidateCloseStatus(closeStatus, statusDescription);
 
             return CloseOutputAsyncCore(closeStatus, statusDescription!, cancellationToken);
@@ -500,7 +511,8 @@ namespace System.Net.WebSockets
             WebSocketCloseStatus closeStatus,
             string statusDescription,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             string inputParameter = string.Empty;
             if (NetEventSource.Log.IsEnabled())
             {
@@ -564,7 +576,8 @@ namespace System.Net.WebSockets
                                     out linkedCancellationToken
                                 )
                         )
-                    ) {
+                    )
+                    {
                         if (_keepAliveTask != null)
                         {
                             Task keepAliveTask = _keepAliveTask;
@@ -693,7 +706,8 @@ namespace System.Net.WebSockets
             bool thisLockTakenSnapshot,
             bool sessionHandleLockTakenSnapshot,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             Debug.Assert(
                 thisLockTakenSnapshot,
                 "'thisLockTakenSnapshot' MUST be 'true' at this point."
@@ -761,7 +775,8 @@ namespace System.Net.WebSockets
             WebSocketCloseStatus closeStatus,
             string? statusDescription,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             WebSocketValidate.ValidateCloseStatus(closeStatus, statusDescription);
             return CloseAsyncCore(closeStatus, statusDescription, cancellationToken);
         }
@@ -770,7 +785,8 @@ namespace System.Net.WebSockets
             WebSocketCloseStatus closeStatus,
             string? statusDescription,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             string inputParameter = string.Empty;
             if (NetEventSource.Log.IsEnabled())
             {
@@ -1216,7 +1232,8 @@ namespace System.Net.WebSockets
         private static WebSocketProtocolComponent.BufferType GetBufferType(
             WebSocketMessageType messageType,
             bool endOfMessage
-        ) {
+        )
+        {
             Debug.Assert(
                 messageType == WebSocketMessageType.Binary
                     || messageType == WebSocketMessageType.Text,
@@ -1245,7 +1262,8 @@ namespace System.Net.WebSockets
 
         private static WebSocketMessageType GetMessageType(
             WebSocketProtocolComponent.BufferType bufferType
-        ) {
+        )
+        {
             switch (bufferType)
             {
                 case WebSocketProtocolComponent.BufferType.Close:
@@ -1293,7 +1311,8 @@ namespace System.Net.WebSockets
             WebSocketProtocolComponent.BufferType bufferType,
             Interop.WebSocket.Buffer[] dataBuffers,
             uint dataBufferCount
-        ) {
+        )
+        {
             _internalBuffer.ValidateNativeBuffers(action, bufferType, dataBuffers, dataBufferCount);
         }
 
@@ -1337,7 +1356,8 @@ namespace System.Net.WebSockets
             Exception exception,
             CancellationToken cancellationToken,
             bool aborted
-        ) {
+        )
+        {
             Debug.Assert(exception != null, "'exception' MUST NOT be NULL.");
 
             if (NetEventSource.Log.IsEnabled() && !string.IsNullOrEmpty(methodName))
@@ -1486,7 +1506,8 @@ namespace System.Net.WebSockets
             if (
                 Interlocked.CompareExchange<Exception>(ref _pendingException!, exception, null!)
                 == null
-            ) {
+            )
+            {
                 if (NetEventSource.Log.IsEnabled())
                 {
                     NetEventSource.Error(this, exception.ToString());
@@ -1521,7 +1542,8 @@ namespace System.Net.WebSockets
             if (
                 (receiveState = Interlocked.Exchange(ref _receiveState, newReceiveState))
                 != expectedReceiveState
-            ) {
+            )
+            {
                 Debug.Fail(
                     $"'_receiveState' had an invalid value '{receiveState}'. The expected value was '{expectedReceiveState}'."
                 );
@@ -1557,7 +1579,8 @@ namespace System.Net.WebSockets
         private void FinishOnCloseReceived(
             WebSocketCloseStatus closeStatus,
             string? closeStatusDescription
-        ) {
+        )
+        {
             _closeReceivedTaskCompletionSource?.TrySetResult();
 
             _closeStatus = closeStatus;
@@ -1597,7 +1620,8 @@ namespace System.Net.WebSockets
                     thisPtr._isDisposed
                     || thisPtr._state != WebSocketState.Open
                     || thisPtr._closeOutputTask != null
-                ) {
+                )
+                {
                     return;
                 }
 
@@ -1694,7 +1718,8 @@ namespace System.Net.WebSockets
                 Interop.WebSocket.Buffer[] dataBuffers,
                 uint dataBufferCount,
                 IntPtr actionContext
-            ) {
+            )
+            {
                 throw new NotImplementedException();
             }
 
@@ -1703,7 +1728,8 @@ namespace System.Net.WebSockets
             internal async Task<WebSocketReceiveResult?> Process(
                 Nullable<ArraySegment<byte>> buffer,
                 CancellationToken cancellationToken
-            ) {
+            )
+            {
                 Debug.Assert(
                     BufferCount >= 1 && BufferCount <= 2,
                     "'bufferCount' MUST ONLY BE '1' or '2'."
@@ -1929,7 +1955,8 @@ namespace System.Net.WebSockets
                                                 && bufferType
                                                     != WebSocketProtocolComponent.BufferType.UnsolicitedPong
                                             )
-                                        ) {
+                                        )
+                                        {
                                             if (dataBufferCount == 0)
                                             {
                                                 break;
@@ -1964,7 +1991,8 @@ namespace System.Net.WebSockets
                                                         dataBuffers[1],
                                                         bufferType
                                                     )
-                                                ) {
+                                                )
+                                                {
                                                     payload =
                                                         _webSocket._internalBuffer.ConvertPinnedSendPayloadFromNative(
                                                             dataBuffers[1],
@@ -2075,7 +2103,8 @@ namespace System.Net.WebSockets
                 protected override void Initialize(
                     Nullable<ArraySegment<byte>> buffer,
                     CancellationToken cancellationToken
-                ) {
+                )
+                {
                     Debug.Assert(buffer != null, "'buffer' MUST NOT be NULL.");
                     _pongReceived = false;
                     _receiveCompleted = false;
@@ -2104,7 +2133,8 @@ namespace System.Net.WebSockets
                                     buffer.Value,
                                     out receiveResult
                                 )
-                            ) {
+                            )
+                            {
                                 _webSocket.UpdateReceiveState(
                                     ReceiveState.Idle,
                                     ReceiveState.PayloadAvailable
@@ -2164,7 +2194,8 @@ namespace System.Net.WebSockets
                     Interop.WebSocket.Buffer[] dataBuffers,
                     uint dataBufferCount,
                     IntPtr actionContext
-                ) {
+                )
+                {
                     Debug.Assert(buffer != null, "'buffer MUST NOT be NULL.");
 
                     int bytesTransferred = 0;
@@ -2285,7 +2316,8 @@ namespace System.Net.WebSockets
 
                 protected virtual Nullable<Interop.WebSocket.Buffer> CreateBuffer(
                     Nullable<ArraySegment<byte>> buffer
-                ) {
+                )
+                {
                     if (buffer == null)
                     {
                         return null;
@@ -2322,7 +2354,8 @@ namespace System.Net.WebSockets
                 protected override void Initialize(
                     Nullable<ArraySegment<byte>> buffer,
                     CancellationToken cancellationToken
-                ) {
+                )
+                {
                     Debug.Assert(
                         !_BufferHasBeenPinned,
                         "'_BufferHasBeenPinned' MUST NOT be pinned at this point."
@@ -2370,7 +2403,8 @@ namespace System.Net.WebSockets
 
                 protected override Nullable<Interop.WebSocket.Buffer> CreateBuffer(
                     Nullable<ArraySegment<byte>> buffer
-                ) {
+                )
+                {
                     Debug.Assert(buffer == null, "'buffer' MUST BE NULL.");
                     _webSocket.ThrowIfDisposed();
                     _webSocket.ThrowIfPendingException();
@@ -2564,7 +2598,8 @@ namespace System.Net.WebSockets
             public bool TryStartOperation(
                 CancellationToken userCancellationToken,
                 out CancellationToken linkedCancellationToken
-            ) {
+            )
+            {
                 linkedCancellationToken = CancellationToken.None;
                 ThrowIfDisposed();
 
@@ -2622,7 +2657,8 @@ namespace System.Net.WebSockets
             // Has to be called under _ThisLock lock
             private CancellationToken CreateLinkedCancellationToken(
                 CancellationToken cancellationToken
-            ) {
+            )
+            {
                 var linkedCancellationTokenSource = CancellationTokenSource.CreateLinkedTokenSource(
                     cancellationToken
                 );

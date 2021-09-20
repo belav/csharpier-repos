@@ -20,7 +20,8 @@ namespace HealthChecksSample
         public Task<HealthCheckResult> CheckHealthAsync(
             HealthCheckContext context,
             CancellationToken cancellationToken = default(CancellationToken)
-        ) {
+        )
+        {
             if (_task.IsCompleted)
             {
                 return Task.FromResult(HealthCheckResult.Healthy("Dependency is ready"));

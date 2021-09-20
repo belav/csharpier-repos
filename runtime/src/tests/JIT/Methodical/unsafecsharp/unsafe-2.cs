@@ -412,7 +412,8 @@ internal class TestApp
                 1,
                 1
             ) != 100
-        ) {
+        )
+        {
             Console.WriteLine("test_128() failed.");
             return 228;
         }

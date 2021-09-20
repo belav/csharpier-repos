@@ -135,7 +135,8 @@ namespace Microsoft.EntityFrameworkCore.SqlServer.Query.Internal
         public SqlServerDateTimeMethodTranslator(
             ISqlExpressionFactory sqlExpressionFactory,
             IRelationalTypeMappingSource typeMappingSource
-        ) {
+        )
+        {
             _sqlExpressionFactory = sqlExpressionFactory;
             _typeMappingSource = typeMappingSource;
         }
@@ -151,14 +152,16 @@ namespace Microsoft.EntityFrameworkCore.SqlServer.Query.Internal
             MethodInfo method,
             IReadOnlyList<SqlExpression> arguments,
             IDiagnosticsLogger<DbLoggerCategory.Query> logger
-        ) {
+        )
+        {
             Check.NotNull(method, nameof(method));
             Check.NotNull(arguments, nameof(arguments));
             Check.NotNull(logger, nameof(logger));
 
             if (
                 _methodInfoDatePartMapping.TryGetValue(method, out var datePart) && instance != null
-            ) {
+            )
+            {
                 // DateAdd does not accept number argument outside of int range
                 // AddYears/AddMonths take int argument so no need to check for range
                 if (
@@ -167,7 +170,8 @@ namespace Microsoft.EntityFrameworkCore.SqlServer.Query.Internal
                     && arguments[0] is SqlConstantExpression sqlConstant
                     && sqlConstant.Value is double doubleValue
                     && (doubleValue >= int.MaxValue || doubleValue <= int.MinValue)
-                ) {
+                )
+                {
                     return null;
                 }
 

@@ -39,7 +39,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
             IConventionAnnotation? annotation,
             IConventionAnnotation? oldAnnotation,
             IConventionContext<IConventionAnnotation> context
-        ) {
+        )
+        {
             if (annotation == null || oldAnnotation?.Value != null)
             {
                 return;
@@ -53,7 +54,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
                     if (
                         propertyBuilder.HasValueGenerationStrategy(null, fromDataAnnotation) == null
                         && propertyBuilder.HasDefaultValue(null, fromDataAnnotation) != null
-                    ) {
+                    )
+                    {
                         context.StopProcessing();
                         return;
                     }
@@ -62,7 +64,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
                     if (
                         propertyBuilder.HasValueGenerationStrategy(null, fromDataAnnotation) == null
                         && propertyBuilder.HasDefaultValueSql(null, fromDataAnnotation) != null
-                    ) {
+                    )
+                    {
                         context.StopProcessing();
                         return;
                     }
@@ -71,7 +74,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
                     if (
                         propertyBuilder.HasValueGenerationStrategy(null, fromDataAnnotation) == null
                         && propertyBuilder.HasComputedColumnSql(null, fromDataAnnotation) != null
-                    ) {
+                    )
+                    {
                         context.StopProcessing();
                         return;
                     }
@@ -85,7 +89,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
                         )
                         && propertyBuilder.HasValueGenerationStrategy(null, fromDataAnnotation)
                             != null
-                    ) {
+                    )
+                    {
                         context.StopProcessing();
                         return;
                     }
@@ -105,7 +110,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
         protected override void Validate(
             IConventionProperty property,
             in StoreObjectIdentifier storeObject
-        ) {
+        )
+        {
             if (property.GetValueGenerationStrategyConfigurationSource() != null)
             {
                 var generationStrategy = property.GetValueGenerationStrategy(

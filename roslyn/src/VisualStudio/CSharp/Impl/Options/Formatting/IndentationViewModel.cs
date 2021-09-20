@@ -82,10 +82,8 @@ class MyClass
     }
 }";
 
-        public IndentationViewModel(
-            OptionStore optionStore,
-            IServiceProvider serviceProvider
-        ) : base(optionStore, serviceProvider, LanguageNames.CSharp)
+        public IndentationViewModel(OptionStore optionStore, IServiceProvider serviceProvider)
+            : base(optionStore, serviceProvider, LanguageNames.CSharp)
         {
             Items.Add(
                 new CheckBoxOptionViewModel(

@@ -355,7 +355,8 @@ namespace System.Net
                                     HttpKnownHeaderNames.SetCookie2,
                                     StringComparison.OrdinalIgnoreCase
                                 )
-                            ) {
+                            )
+                            {
                                 sb.Append("\r\n").Append(key).Append(": ");
                             }
                             else

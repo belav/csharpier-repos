@@ -71,7 +71,8 @@ namespace Microsoft.AspNetCore.Authorization
         /// <returns>A reference to this instance after the operation has completed.</returns>
         public AuthorizationPolicyBuilder AddRequirements(
             params IAuthorizationRequirement[] requirements
-        ) {
+        )
+        {
             foreach (var req in requirements)
             {
                 Requirements.Add(req);
@@ -106,7 +107,8 @@ namespace Microsoft.AspNetCore.Authorization
         public AuthorizationPolicyBuilder RequireClaim(
             string claimType,
             params string[] allowedValues
-        ) {
+        )
+        {
             if (claimType == null)
             {
                 throw new ArgumentNullException(nameof(claimType));
@@ -125,7 +127,8 @@ namespace Microsoft.AspNetCore.Authorization
         public AuthorizationPolicyBuilder RequireClaim(
             string claimType,
             IEnumerable<string> allowedValues
-        ) {
+        )
+        {
             if (claimType == null)
             {
                 throw new ArgumentNullException(nameof(claimType));
@@ -218,7 +221,8 @@ namespace Microsoft.AspNetCore.Authorization
         /// <returns>A reference to this instance after the operation has completed.</returns>
         public AuthorizationPolicyBuilder RequireAssertion(
             Func<AuthorizationHandlerContext, bool> handler
-        ) {
+        )
+        {
             if (handler == null)
             {
                 throw new ArgumentNullException(nameof(handler));
@@ -235,7 +239,8 @@ namespace Microsoft.AspNetCore.Authorization
         /// <returns>A reference to this instance after the operation has completed.</returns>
         public AuthorizationPolicyBuilder RequireAssertion(
             Func<AuthorizationHandlerContext, Task<bool>> handler
-        ) {
+        )
+        {
             if (handler == null)
             {
                 throw new ArgumentNullException(nameof(handler));

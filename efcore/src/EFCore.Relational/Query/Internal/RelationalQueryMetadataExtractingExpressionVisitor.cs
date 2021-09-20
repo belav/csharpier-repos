@@ -24,7 +24,8 @@ namespace Microsoft.EntityFrameworkCore.Query.Internal
         /// </summary>
         public RelationalQueryMetadataExtractingExpressionVisitor(
             RelationalQueryCompilationContext relationalQueryCompilationContext
-        ) {
+        )
+        {
             Check.NotNull(
                 relationalQueryCompilationContext,
                 nameof(relationalQueryCompilationContext)
@@ -45,7 +46,8 @@ namespace Microsoft.EntityFrameworkCore.Query.Internal
                 methodCallExpression.Method.IsGenericMethod
                 && methodCallExpression.Method.GetGenericMethodDefinition()
                     == RelationalQueryableExtensions.AsSplitQueryMethodInfo
-            ) {
+            )
+            {
                 var innerQueryable = Visit(methodCallExpression.Arguments[0]);
 
                 _relationalQueryCompilationContext.QuerySplittingBehavior =
@@ -58,7 +60,8 @@ namespace Microsoft.EntityFrameworkCore.Query.Internal
                 methodCallExpression.Method.IsGenericMethod
                 && methodCallExpression.Method.GetGenericMethodDefinition()
                     == RelationalQueryableExtensions.AsSingleQueryMethodInfo
-            ) {
+            )
+            {
                 var innerQueryable = Visit(methodCallExpression.Arguments[0]);
 
                 _relationalQueryCompilationContext.QuerySplittingBehavior =

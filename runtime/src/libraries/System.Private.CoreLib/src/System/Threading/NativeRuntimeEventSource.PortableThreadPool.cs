@@ -114,7 +114,8 @@ namespace System.Diagnostics.Tracing
             uint ActiveWorkerThreadCount,
             uint RetiredWorkerThreadCount = 0,
             ushort ClrInstanceID = DefaultClrInstanceId
-        ) {
+        )
+        {
             if (IsEnabled(EventLevel.Informational, Keywords.ThreadingKeyword))
             {
                 WriteThreadEvent(50, ActiveWorkerThreadCount);
@@ -134,7 +135,8 @@ namespace System.Diagnostics.Tracing
             uint ActiveWorkerThreadCount,
             uint RetiredWorkerThreadCount = 0,
             ushort ClrInstanceID = DefaultClrInstanceId
-        ) {
+        )
+        {
             if (IsEnabled(EventLevel.Informational, Keywords.ThreadingKeyword))
             {
                 WriteThreadEvent(51, ActiveWorkerThreadCount);
@@ -155,7 +157,8 @@ namespace System.Diagnostics.Tracing
             uint ActiveWorkerThreadCount,
             uint RetiredWorkerThreadCount = 0,
             ushort ClrInstanceID = DefaultClrInstanceId
-        ) {
+        )
+        {
             if (IsEnabled(EventLevel.Informational, Keywords.ThreadingKeyword))
             {
                 WriteThreadEvent(57, ActiveWorkerThreadCount);
@@ -181,7 +184,8 @@ namespace System.Diagnostics.Tracing
         public unsafe void ThreadPoolWorkerThreadAdjustmentSample(
             double Throughput,
             ushort ClrInstanceID = DefaultClrInstanceId
-        ) {
+        )
+        {
             if (!IsEnabled(EventLevel.Informational, Keywords.ThreadingKeyword))
             {
                 return;
@@ -217,7 +221,8 @@ namespace System.Diagnostics.Tracing
             uint NewWorkerThreadCount,
             ThreadAdjustmentReasonMap Reason,
             ushort ClrInstanceID = DefaultClrInstanceId
-        ) {
+        )
+        {
             if (!IsEnabled(EventLevel.Informational, Keywords.ThreadingKeyword))
             {
                 return;
@@ -266,7 +271,8 @@ namespace System.Diagnostics.Tracing
             double NewControlSetting,
             ushort NewThreadWaveMagnitude,
             ushort ClrInstanceID = DefaultClrInstanceId
-        ) {
+        )
+        {
             if (!IsEnabled(EventLevel.Verbose, Keywords.ThreadingKeyword))
             {
                 return;
@@ -329,7 +335,8 @@ namespace System.Diagnostics.Tracing
             IntPtr Overlapped,
             bool MultiDequeues,
             ushort ClrInstanceID = DefaultClrInstanceId
-        ) {
+        )
+        {
             int multiDequeuesInt = Convert.ToInt32(MultiDequeues); // bool maps to "win:Boolean", a 4-byte boolean
             EventData* data = stackalloc EventData[4];
             data[0].DataPointer = (IntPtr)(&NativeOverlapped);
@@ -358,7 +365,8 @@ namespace System.Diagnostics.Tracing
                     EventLevel.Verbose,
                     Keywords.ThreadingKeyword | Keywords.ThreadTransferKeyword
                 )
-            ) {
+            )
+            {
                 ThreadPoolIOEnqueue(
                     (IntPtr)registeredWaitHandle.GetHashCode(),
                     IntPtr.Zero,
@@ -387,7 +395,8 @@ namespace System.Diagnostics.Tracing
             IntPtr NativeOverlapped,
             IntPtr Overlapped,
             ushort ClrInstanceID = DefaultClrInstanceId
-        ) {
+        )
+        {
             EventData* data = stackalloc EventData[3];
             data[0].DataPointer = (IntPtr)(&NativeOverlapped);
             data[0].Size = IntPtr.Size;
@@ -412,7 +421,8 @@ namespace System.Diagnostics.Tracing
                     EventLevel.Verbose,
                     Keywords.ThreadingKeyword | Keywords.ThreadTransferKeyword
                 )
-            ) {
+            )
+            {
                 ThreadPoolIODequeue((IntPtr)registeredWaitHandle.GetHashCode(), IntPtr.Zero);
             }
         }
@@ -436,7 +446,8 @@ namespace System.Diagnostics.Tracing
         public unsafe void ThreadPoolWorkingThreadCount(
             uint Count,
             ushort ClrInstanceID = DefaultClrInstanceId
-        ) {
+        )
+        {
             if (!IsEnabled(EventLevel.Verbose, Keywords.ThreadingKeyword))
             {
                 return;

@@ -48,7 +48,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Http
 
         public override ValueTask<FlushResult> FlushAsync(
             CancellationToken cancellationToken = default
-        ) {
+        )
+        {
             ValidateState(cancellationToken);
             return _pipeControl.FlushPipeAsync(cancellationToken);
         }
@@ -68,7 +69,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Http
         public override ValueTask<FlushResult> WriteAsync(
             ReadOnlyMemory<byte> source,
             CancellationToken cancellationToken = default
-        ) {
+        )
+        {
             ValidateState(cancellationToken);
             return _pipeControl.WritePipeAsync(source, cancellationToken);
         }

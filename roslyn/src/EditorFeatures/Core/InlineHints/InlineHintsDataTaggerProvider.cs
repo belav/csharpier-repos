@@ -52,18 +52,21 @@ namespace Microsoft.CodeAnalysis.Editor.InlineHints
             IThreadingContext threadingContext,
             IAsynchronousOperationListenerProvider listenerProvider,
             IForegroundNotificationService notificationService
-        ) : base(
-            threadingContext,
-            listenerProvider.GetListener(FeatureAttribute.InlineParameterNameHints),
-            notificationService
-        ) {
+        )
+            : base(
+                threadingContext,
+                listenerProvider.GetListener(FeatureAttribute.InlineParameterNameHints),
+                notificationService
+            )
+        {
             _listener = listenerProvider.GetListener(FeatureAttribute.InlineParameterNameHints);
         }
 
         protected override ITaggerEventSource CreateEventSource(
             ITextView textViewOpt,
             ITextBuffer subjectBuffer
-        ) {
+        )
+        {
             return TaggerEventSources.Compose(
                 TaggerEventSources.OnViewSpanChanged(
                     ThreadingContext,
@@ -137,7 +140,8 @@ namespace Microsoft.CodeAnalysis.Editor.InlineHints
         protected override IEnumerable<SnapshotSpan> GetSpansToTag(
             ITextView textView,
             ITextBuffer subjectBuffer
-        ) {
+        )
+        {
             this.AssertIsForeground();
 
             // Find the visible span some 100 lines +/- what's actually in view.  This way
@@ -156,7 +160,8 @@ namespace Microsoft.CodeAnalysis.Editor.InlineHints
             TaggerContext<InlineHintDataTag> context,
             DocumentSnapshotSpan documentSnapshotSpan,
             int? caretPosition
-        ) {
+        )
+        {
             var cancellationToken = context.CancellationToken;
             var document = documentSnapshotSpan.Document;
             if (document == null)

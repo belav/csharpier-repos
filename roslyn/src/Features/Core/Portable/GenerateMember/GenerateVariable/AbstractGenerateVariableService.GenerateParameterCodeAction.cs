@@ -27,7 +27,8 @@ namespace Microsoft.CodeAnalysis.GenerateMember.GenerateVariable
                 Document document,
                 State state,
                 bool includeOverridesAndImplementations
-            ) {
+            )
+            {
                 _document = document;
                 _state = state;
                 _includeOverridesAndImplementations = includeOverridesAndImplementations;
@@ -47,7 +48,8 @@ namespace Microsoft.CodeAnalysis.GenerateMember.GenerateVariable
 
             protected override Task<Solution> GetChangedSolutionAsync(
                 CancellationToken cancellationToken
-            ) {
+            )
+            {
                 return AddParameterService.Instance.AddParameterAsync(
                     _document,
                     _state.ContainingMethod,

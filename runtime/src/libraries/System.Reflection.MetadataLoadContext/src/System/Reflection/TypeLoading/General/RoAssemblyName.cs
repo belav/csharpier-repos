@@ -38,7 +38,8 @@ namespace System.Reflection.TypeLoading
             string? cultureName,
             byte[]? publicKeyToken,
             AssemblyNameFlags flags
-        ) {
+        )
+        {
             // We forcefully normalize the representation so that Equality is dependable and fast.
             Debug.Assert(name != null);
 

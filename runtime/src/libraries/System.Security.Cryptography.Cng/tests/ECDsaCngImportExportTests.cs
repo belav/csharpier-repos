@@ -17,7 +17,8 @@ namespace System.Security.Cryptography.Cng.Tests
                     TestData.Key_ECDiffieHellmanP256,
                     CngKeyBlobFormat.GenericPublicBlob
                 )
-            ) {
+            )
+            {
                 Assert.Equal(CngAlgorithm.ECDiffieHellmanP256, key.Algorithm);
                 Assert.Equal(CngAlgorithmGroup.ECDiffieHellman, key.AlgorithmGroup);
                 Assert.Equal(CngExportPolicies.None, key.ExportPolicy);
@@ -48,7 +49,8 @@ namespace System.Security.Cryptography.Cng.Tests
                     TestData.Key_ECDiffieHellmanP256,
                     CngKeyBlobFormat.GenericPublicBlob
                 )
-            ) {
+            )
+            {
                 byte[] reExported = key.Export(CngKeyBlobFormat.GenericPublicBlob);
                 Assert.Equal<byte>(TestData.Key_ECDiffieHellmanP256, reExported);
             }

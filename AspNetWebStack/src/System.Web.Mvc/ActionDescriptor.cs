@@ -73,7 +73,8 @@ namespace System.Web.Mvc
             ParameterInfo parameterInfo,
             IDictionary<string, object> parameters,
             MethodInfo methodInfo
-        ) {
+        )
+        {
             object value;
 
             if (!parameters.TryGetValue(parameterInfo.Name, out value))
@@ -125,7 +126,8 @@ namespace System.Web.Mvc
         internal static object ExtractParameterOrDefaultFromDictionary(
             ParameterInfo parameterInfo,
             IDictionary<string, object> parameters
-        ) {
+        )
+        {
             Type parameterType = parameterInfo.ParameterType;
 
             object value;

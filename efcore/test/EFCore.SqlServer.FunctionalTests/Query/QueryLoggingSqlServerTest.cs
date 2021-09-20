@@ -20,7 +20,8 @@ namespace Microsoft.EntityFrameworkCore.Query
     {
         public QueryLoggingSqlServerTest(
             NorthwindQuerySqlServerFixture<NoopModelCustomizer> fixture
-        ) {
+        )
+        {
             Fixture = fixture;
             Fixture.TestSqlLoggerFactory.Clear();
         }

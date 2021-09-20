@@ -229,7 +229,8 @@ namespace Microsoft.AspNetCore.SignalR.Client.Tests
             [MemberData(nameof(MethodsNamesThatRequireActiveConnection))]
             public async Task MethodsThatRequireStartedConnectionFailIfConnectionNotYetStarted(
                 string name
-            ) {
+            )
+            {
                 var method = MethodsThatRequireActiveConnection[name];
 
                 var testConnection = new TestConnection();
@@ -253,7 +254,8 @@ namespace Microsoft.AspNetCore.SignalR.Client.Tests
             [MemberData(nameof(MethodsNamesThatRequireActiveConnection))]
             public async Task MethodsThatRequireStartedConnectionWaitForStartIfConnectionIsCurrentlyStarting(
                 string name
-            ) {
+            )
+            {
                 var method = MethodsThatRequireActiveConnection[name];
 
                 // Set up StartAsync to wait on the syncPoint when starting
@@ -557,7 +559,8 @@ namespace Microsoft.AspNetCore.SignalR.Client.Tests
             [MemberData(nameof(MethodsNamesThatRequireActiveConnection))]
             public async Task MethodsThatRequireActiveConnectionWaitForStopAndFailIfConnectionIsCurrentlyStopping(
                 string methodName
-            ) {
+            )
+            {
                 var method = MethodsThatRequireActiveConnection[methodName];
 
                 // Set up StartAsync to wait on the syncPoint when starting
@@ -790,7 +793,8 @@ namespace Microsoft.AspNetCore.SignalR.Client.Tests
             private static async Task AsyncUsing(
                 HubConnection connection,
                 Func<HubConnection, Task> action
-            ) {
+            )
+            {
                 try
                 {
                     // Using OrTimeout here will hide any timeout issues in the test :(.

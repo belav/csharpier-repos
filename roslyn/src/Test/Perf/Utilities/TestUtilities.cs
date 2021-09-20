@@ -103,7 +103,8 @@ namespace Roslyn.Test.Performance.Utilities
             string args,
             string workingDirectory = null,
             CancellationToken cancellationToken = default(CancellationToken)
-        ) {
+        )
+        {
             var result = ShellOut(file, args, workingDirectory, cancellationToken);
             if (result.Failed)
             {
@@ -120,7 +121,8 @@ namespace Roslyn.Test.Performance.Utilities
             string args,
             string workingDirectory = null,
             CancellationToken cancellationToken = default(CancellationToken)
-        ) {
+        )
+        {
             if (workingDirectory == null)
             {
                 workingDirectory = AppDomain.CurrentDomain.BaseDirectory;
@@ -191,7 +193,8 @@ namespace Roslyn.Test.Performance.Utilities
             string program,
             string args = "",
             string workingDirectory = null
-        ) {
+        )
+        {
             var result = ShellOut(program, args, workingDirectory);
             if (result.Failed)
             {

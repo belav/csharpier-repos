@@ -53,7 +53,8 @@ namespace Http2SampleApp
                                                     if (
                                                         tlsFeature.CipherAlgorithm
                                                         == CipherAlgorithmType.Null
-                                                    ) {
+                                                    )
+                                                    {
                                                         throw new NotSupportedException(
                                                             "Prohibited cipher: "
                                                                 + tlsFeature.CipherAlgorithm

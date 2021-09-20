@@ -69,7 +69,8 @@ namespace System.Security.Cryptography.Pkcs.Asn1
         internal static SignerIdentifierAsn Decode(
             ReadOnlyMemory<byte> encoded,
             AsnEncodingRules ruleSet
-        ) {
+        )
+        {
             try
             {
                 AsnValueReader reader = new AsnValueReader(encoded.Span, ruleSet);
@@ -88,7 +89,8 @@ namespace System.Security.Cryptography.Pkcs.Asn1
             ref AsnValueReader reader,
             ReadOnlyMemory<byte> rebind,
             out SignerIdentifierAsn decoded
-        ) {
+        )
+        {
             try
             {
                 DecodeCore(ref reader, rebind, out decoded);
@@ -103,7 +105,8 @@ namespace System.Security.Cryptography.Pkcs.Asn1
             ref AsnValueReader reader,
             ReadOnlyMemory<byte> rebind,
             out SignerIdentifierAsn decoded
-        ) {
+        )
+        {
             decoded = default;
             Asn1Tag tag = reader.PeekTag();
             ReadOnlySpan<byte> rebindSpan = rebind.Span;
@@ -127,7 +130,8 @@ namespace System.Security.Cryptography.Pkcs.Asn1
                         out tmpSpan,
                         new Asn1Tag(TagClass.ContextSpecific, 0)
                     )
-                ) {
+                )
+                {
                     decoded.SubjectKeyIdentifier = rebindSpan.Overlaps(tmpSpan, out offset)
                         ? rebind.Slice(offset, tmpSpan.Length)
                         : tmpSpan.ToArray();

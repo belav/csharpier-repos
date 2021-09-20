@@ -25,7 +25,8 @@ namespace Microsoft.AspNetCore.Razor.Language
         public static RazorCodeDocument Create(
             RazorSourceDocument source,
             IEnumerable<RazorSourceDocument> imports
-        ) {
+        )
+        {
             return new DefaultRazorCodeDocument(source, imports);
         }
     }

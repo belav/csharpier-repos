@@ -441,7 +441,8 @@ namespace System
             int length,
             TState state,
             SpanAction<char, TState> action
-        ) {
+        )
+        {
             if (action == null)
                 throw new ArgumentNullException(nameof(action));
 
@@ -516,7 +517,8 @@ namespace System
             char[] destination,
             int destinationIndex,
             int count
-        ) {
+        )
+        {
             if (destination == null)
                 throw new ArgumentNullException(nameof(destination));
             if (count < 0)
@@ -667,7 +669,8 @@ namespace System
             byte* bytes,
             int byteLength,
             Encoding encoding
-        ) {
+        )
+        {
             Debug.Assert(bytes != null);
             Debug.Assert(byteLength >= 0);
 

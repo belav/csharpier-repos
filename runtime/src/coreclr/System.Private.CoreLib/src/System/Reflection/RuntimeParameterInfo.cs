@@ -15,7 +15,8 @@ namespace System.Reflection
             IRuntimeMethodInfo method,
             MemberInfo member,
             Signature sig
-        ) {
+        )
+        {
             Debug.Assert(method is RuntimeMethodInfo || method is RuntimeConstructorInfo);
 
             return GetParameters(method, member, sig, out _, fetchReturnParameter: false);
@@ -25,7 +26,8 @@ namespace System.Reflection
             IRuntimeMethodInfo method,
             MemberInfo member,
             Signature sig
-        ) {
+        )
+        {
             Debug.Assert(method is RuntimeMethodInfo || method is RuntimeConstructorInfo);
 
             GetParameters(
@@ -44,7 +46,8 @@ namespace System.Reflection
             Signature sig,
             out ParameterInfo? returnParameter,
             bool fetchReturnParameter
-        ) {
+        )
+        {
             returnParameter = null;
             int sigArgCount = sig.Arguments.Length;
             ParameterInfo[] args = fetchReturnParameter
@@ -204,10 +207,8 @@ namespace System.Reflection
 
         #region Constructor
         // used by RuntimePropertyInfo
-        internal RuntimeParameterInfo(
-            RuntimeParameterInfo accessor,
-            RuntimePropertyInfo property
-        ) : this(accessor, (MemberInfo)property)
+        internal RuntimeParameterInfo(RuntimeParameterInfo accessor, RuntimePropertyInfo property)
+            : this(accessor, (MemberInfo)property)
         {
             m_signature = property.Signature;
         }
@@ -244,7 +245,8 @@ namespace System.Reflection
             int position,
             ParameterAttributes attributes,
             MemberInfo member
-        ) {
+        )
+        {
             Debug.Assert(member != null);
             Debug.Assert(
                 MdToken.IsNullToken(tkParamDef) == scope.Equals(MetadataImport.EmptyImport)
@@ -273,7 +275,8 @@ namespace System.Reflection
             string? name,
             Type parameterType,
             int position
-        ) {
+        )
+        {
             MemberImpl = owner;
             NameImpl = name;
             m_nameIsCached = true;
@@ -432,7 +435,8 @@ namespace System.Reflection
                 {
                     foreach (
                         CustomAttributeData attr in CustomAttributeData.GetCustomAttributes(this)
-                    ) {
+                    )
+                    {
                         Type? attrType = attr.Constructor.DeclaringType;
 
                         if (attrType == typeof(DateTimeConstantAttribute))

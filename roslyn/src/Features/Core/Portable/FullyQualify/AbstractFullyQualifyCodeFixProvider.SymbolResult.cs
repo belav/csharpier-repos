@@ -25,7 +25,8 @@ namespace Microsoft.CodeAnalysis.CodeFixes.FullyQualify
                 INamespaceOrTypeSymbol symbol,
                 int weight,
                 INamespaceOrTypeSymbol? originalSymbol
-            ) {
+            )
+            {
                 Symbol = symbol;
                 Weight = weight;
                 NameParts = INamespaceOrTypeSymbolExtensions.GetNameParts(symbol);

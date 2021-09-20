@@ -66,7 +66,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.NavigationBar
             ITextSnapshot textSnapshot,
             int modelUpdateDelay,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var previousModel = await modelTask.ConfigureAwait(false);
             if (!cancellationToken.IsCancellationRequested)
             {
@@ -93,7 +94,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.NavigationBar
             NavigationBarModel lastCompletedModel,
             ITextSnapshot snapshot,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             // When computing items just get the partial semantics workspace.  This will ensure we can get data for this
             // file, and hopefully have enough loaded to get data for other files in the case of partial types.  In the
             // event the other files aren't available, then partial-type information won't be correct.  That's ok though
@@ -120,7 +122,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.NavigationBar
                     if (
                         lastCompletedModel.SemanticVersionStamp == semanticVersion
                         && SpanStillValid(lastCompletedModel, snapshot, cancellationToken)
-                    ) {
+                    )
+                    {
                         // it looks like we can re-use previous model
                         return lastCompletedModel;
                     }
@@ -128,7 +131,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.NavigationBar
 
                 using (
                     Logger.LogBlock(FunctionId.NavigationBar_ComputeModelAsync, cancellationToken)
-                ) {
+                )
+                {
                     var items = await languageService.GetItemsAsync(document, cancellationToken)
                         .ConfigureAwait(false);
                     if (items != null)
@@ -189,7 +193,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.NavigationBar
             int delay,
             SnapshotPoint caretPosition,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             // First wait the delay before doing any other work.  That way if we get canceled due to other events (like
             // the user moving around), we don't end up doing anything, and the next task can take over.
             await Task.Delay(delay, cancellationToken).ConfigureAwait(false);
@@ -220,7 +225,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.NavigationBar
             NavigationBarModel model,
             SnapshotPoint caretPosition,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var (item, gray) = GetMatchingItem(
                 model.Types,
                 caretPosition,
@@ -315,7 +321,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.NavigationBar
             NavigationBarModel model,
             ITextSnapshot snapshot,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             // even if semantic version is same, portion of text could have been copied & pasted with
             // exact same top level content.
             // go through spans to see whether this happened.

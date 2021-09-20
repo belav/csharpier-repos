@@ -28,7 +28,8 @@ namespace Microsoft.Cci
             ushort startColumn,
             int endLine,
             ushort endColumn
-        ) {
+        )
+        {
             RoslynDebug.Assert(document != null);
 
             Offset = offset;

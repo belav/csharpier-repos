@@ -444,7 +444,8 @@ namespace System.Web.Http
         public void GetReturnType_ReturnsUnwrappedActionType(
             Type methodReturnType,
             Type expectedReturnType
-        ) {
+        )
+        {
             Mock<MethodInfo> methodMock = new Mock<MethodInfo>();
             methodMock.Setup(m => m.ReturnType).Returns(methodReturnType);
 

@@ -405,7 +405,8 @@ namespace BinderTracingTests
             private Assembly OnAssemblyLoadContextResolving(
                 AssemblyLoadContext context,
                 AssemblyName assemblyName
-            ) {
+            )
+            {
                 if (handlerReturn == HandlerReturn.Exception)
                     throw new BinderTestException(
                         "Exception in handler for AssemblyLoadContext.Resolving"

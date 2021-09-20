@@ -21,7 +21,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Completion.KeywordRecommenders
             int position,
             CSharpSyntaxContext context,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             return IsQueryContext(context) || IsTypeParameterConstraintContext(context);
         }
 
@@ -46,7 +47,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Completion.KeywordRecommenders
                 if (
                     typeParameters != null
                     && token == typeParameters.GetLastToken(includeSkipped: true)
-                ) {
+                )
+                {
                     var decl = typeParameters.GetAncestorOrThis<TypeDeclarationSyntax>();
                     if (decl != null && decl.TypeParameterList == typeParameters)
                     {
@@ -60,7 +62,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Completion.KeywordRecommenders
                 token.Kind() == SyntaxKind.CloseParenToken
                 && token.Parent.IsKind(SyntaxKind.ParameterList)
                 && token.Parent.IsParentKind(SyntaxKind.DelegateDeclaration)
-            ) {
+            )
+            {
                 var decl = token.GetAncestor<DelegateDeclarationSyntax>();
                 if (decl != null && decl.TypeParameterList != null)
                 {
@@ -74,7 +77,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Completion.KeywordRecommenders
                 token.Kind() == SyntaxKind.CloseParenToken
                 && token.Parent.IsKind(SyntaxKind.ParameterList)
                 && token.Parent.IsParentKind(SyntaxKind.MethodDeclaration)
-            ) {
+            )
+            {
                 var decl = token.GetAncestor<MethodDeclarationSyntax>();
                 if (decl != null && decl.Arity > 0)
                 {
@@ -91,13 +95,15 @@ namespace Microsoft.CodeAnalysis.CSharp.Completion.KeywordRecommenders
                     && typeDecl.BaseList.Types.Any(
                         t => token == t.GetLastToken(includeSkipped: true)
                     )
-                ) {
+                )
+                {
                     // token is IdentifierName "where"
                     // only suggest "where" if token's previous token is also "where"
                     if (
                         token.Parent is IdentifierNameSyntax
                         && token.HasMatchingText(SyntaxKind.WhereKeyword)
-                    ) {
+                    )
+                    {
                         // Check for zero-width tokens in case there is a missing comma in the base list.
                         // For example: class C<T> : Goo where where |
                         return token.GetPreviousToken(includeZeroWidth: true)
@@ -125,7 +131,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Completion.KeywordRecommenders
                     constraintClause.Constraints.Any(
                         c => token == c.GetLastToken(includeSkipped: true)
                     )
-                ) {
+                )
+                {
                     return true;
                 }
             }

@@ -171,7 +171,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UseIndexOrRangeOperator
             OperationAnalysisContext context,
             InfoCache infoCache,
             IPropertySymbol arrayLengthProperty
-        ) {
+        )
+        {
             var cancellationToken = context.CancellationToken;
             var arrayElementReference = (IArrayElementReferenceOperation)context.Operation;
 
@@ -200,7 +201,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UseIndexOrRangeOperator
             IOperation argumentValue,
             IPropertySymbol lengthLikePropertyOpt,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             // look for `s[s.Length - value]` or `s.Get(s.Length- value)`.
 
             // Needs to have the one arg for `s.Length - value`, and that arg needs to be
@@ -245,7 +247,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UseIndexOrRangeOperator
             if (
                 lengthLikePropertyOpt == null
                 || !IsInstanceLengthCheck(lengthLikePropertyOpt, instance, subtraction.LeftOperand)
-            ) {
+            )
+            {
                 return;
             }
 

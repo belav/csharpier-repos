@@ -58,7 +58,8 @@ namespace System.Xml
                 Exception /*XmlSchemaException*/
                 exception,
                 XmlSeverityType severity
-            ) {
+            )
+            {
                 if (_eventHandler != null)
                 {
                     _eventHandler(
@@ -69,7 +70,8 @@ namespace System.Xml
                 else if (
                     _reader._validationType != ValidationType.None
                     && severity == XmlSeverityType.Error
-                ) {
+                )
+                {
                     throw exception;
                 }
             }
@@ -218,7 +220,8 @@ namespace System.Xml
             XmlReader reader,
             ValidationEventHandler? settingsEventHandler,
             bool processIdentityConstraints
-        ) {
+        )
+        {
             XmlAsyncCheckReader? asyncCheckReader = reader as XmlAsyncCheckReader;
             if (asyncCheckReader != null)
             {
@@ -728,7 +731,8 @@ namespace System.Xml
             if (
                 _outerReader.NodeType == XmlNodeType.EntityReference
                 && _parsingFunction != ParsingFunction.ResolveEntityInternally
-            ) {
+            )
+            {
                 if (!_outerReader.Read())
                 {
                     throw new InvalidOperationException(SR.Xml_InvalidOperation);
@@ -767,7 +771,8 @@ namespace System.Xml
         //
         IDictionary<string, string> IXmlNamespaceResolver.GetNamespacesInScope(
             XmlNamespaceScope scope
-        ) {
+        )
+        {
             return this.GetNamespacesInScope(scope);
         }
 
@@ -814,7 +819,8 @@ namespace System.Xml
                     if (
                         schemaTypeObj != null
                         && schemaTypeObj.QualifiedName.Namespace == XmlReservedNs.NsXs
-                    ) {
+                    )
+                    {
                         return schemaTypeObj.Datatype;
                     }
 
@@ -926,7 +932,8 @@ namespace System.Xml
                                     && type != XmlNodeType.SignificantWhitespace
                                     && type != XmlNodeType.Comment
                                     && type != XmlNodeType.ProcessingInstruction
-                                ) {
+                                )
+                                {
                                     break;
                                 }
                             }
@@ -1074,7 +1081,8 @@ namespace System.Xml
                     if (
                         _coreReader.Depth > 0
                         || _coreReaderImpl.FragmentType != XmlNodeType.Document
-                    ) {
+                    )
+                    {
                         if (_validator.PreserveWhitespace)
                         {
                             _coreReaderImpl.ChangeCurrentNodeType(
@@ -1137,7 +1145,8 @@ namespace System.Xml
         internal void ValidateDefaultAttributeOnUse(
             IDtdDefaultAttributeInfo defaultAttribute,
             XmlTextReaderImpl coreReader
-        ) {
+        )
+        {
             SchemaAttDef? attdef = defaultAttribute as SchemaAttDef;
             if (attdef == null)
             {

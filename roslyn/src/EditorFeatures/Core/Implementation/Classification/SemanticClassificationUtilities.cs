@@ -32,7 +32,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.Classification
             DocumentSnapshotSpan spanToTag,
             IClassificationService classificationService,
             ClassificationTypeMap typeMap
-        ) {
+        )
+        {
             var document = spanToTag.Document;
             if (document == null)
                 return;
@@ -73,7 +74,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.Classification
             DocumentSnapshotSpan spanToTag,
             IClassificationService classificationService,
             ClassificationTypeMap typeMap
-        ) {
+        )
+        {
             var range = context.TextChangeRange;
             if (range == null)
             {
@@ -146,7 +148,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.Classification
             DocumentSnapshotSpan spanToTag,
             IClassificationService classificationService,
             ClassificationTypeMap typeMap
-        ) {
+        )
+        {
             try
             {
                 var document = spanToTag.Document;
@@ -159,7 +162,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.Classification
                         FunctionId.Tagger_SemanticClassification_TagProducer_ProduceTags,
                         cancellationToken
                     )
-                ) {
+                )
+                {
                     var classifiedSpans = ClassificationUtilities.GetOrCreateClassifiedSpanList();
 
                     await AddSemanticClassificationsAsync(
@@ -201,7 +205,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.Classification
             IClassificationService classificationService,
             List<ClassifiedSpan> classifiedSpans,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var workspaceStatusService =
                 document.Project.Solution.Workspace.Services.GetRequiredService<IWorkspaceStatusService>();
 
@@ -243,7 +248,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.Classification
             List<ClassifiedSpan> classifiedSpans,
             bool isFullyLoaded,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             // Don't use the cache if we're fully loaded.  We should just compute values normally.
             if (isFullyLoaded)
                 return false;

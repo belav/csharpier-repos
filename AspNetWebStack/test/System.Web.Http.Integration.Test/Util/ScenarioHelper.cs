@@ -16,7 +16,8 @@ namespace System.Web.Http
             HttpRequestMessage request,
             Func<HttpResponseMessage, Task> assert,
             Action<HttpConfiguration> configurer = null
-        ) {
+        )
+        {
             // Arrange
             HttpConfiguration config = new HttpConfiguration()
             {

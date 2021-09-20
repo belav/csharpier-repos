@@ -13,7 +13,8 @@ namespace Microsoft.AspNetCore.Mvc.Analyzers
             INamedTypeSymbol type,
             INamedTypeSymbol controllerAttribute,
             INamedTypeSymbol nonControllerAttribute
-        ) {
+        )
+        {
             type = type ?? throw new ArgumentNullException(nameof(type));
             controllerAttribute =
                 controllerAttribute ?? throw new ArgumentNullException(nameof(controllerAttribute));
@@ -55,7 +56,8 @@ namespace Microsoft.AspNetCore.Mvc.Analyzers
             if (
                 !type.Name.EndsWith("Controller", StringComparison.OrdinalIgnoreCase)
                 && !type.HasAttribute(controllerAttribute, inherit: true)
-            ) {
+            )
+            {
                 return false;
             }
 
@@ -66,7 +68,8 @@ namespace Microsoft.AspNetCore.Mvc.Analyzers
             IMethodSymbol method,
             INamedTypeSymbol nonActionAttribute,
             IMethodSymbol disposableDispose
-        ) {
+        )
+        {
             method = method ?? throw new ArgumentNullException(nameof(method));
             nonActionAttribute =
                 nonActionAttribute ?? throw new ArgumentNullException(nameof(nonActionAttribute));
@@ -128,7 +131,8 @@ namespace Microsoft.AspNetCore.Mvc.Analyzers
         private static bool IsIDisposableDispose(
             IMethodSymbol method,
             IMethodSymbol disposableDispose
-        ) {
+        )
+        {
             if (method.Name != disposableDispose.Name)
             {
                 return false;
@@ -150,7 +154,8 @@ namespace Microsoft.AspNetCore.Mvc.Analyzers
                 if (
                     method.ExplicitInterfaceImplementations[i].ContainingType.SpecialType
                     == SpecialType.System_IDisposable
-                ) {
+                )
+                {
                     return true;
                 }
             }

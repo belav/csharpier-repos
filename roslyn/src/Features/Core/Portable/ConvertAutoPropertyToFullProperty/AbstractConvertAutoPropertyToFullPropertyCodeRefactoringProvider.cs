@@ -104,7 +104,8 @@ namespace Microsoft.CodeAnalysis.ConvertAutoPropertyToFullProperty
             IPropertySymbol propertySymbol,
             SyntaxNode root,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var generator = SyntaxGenerator.GetGenerator(document);
             var workspace = document.Project.Solution.Workspace;
             var options = await document.GetOptionsAsync(cancellationToken).ConfigureAwait(false);

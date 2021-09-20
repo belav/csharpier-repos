@@ -19,7 +19,8 @@ namespace Microsoft.Extensions.Hosting.Systemd
             IHostApplicationLifetime applicationLifetime,
             ISystemdNotifier systemdNotifier,
             ILoggerFactory loggerFactory
-        ) {
+        )
+        {
             Environment = environment ?? throw new ArgumentNullException(nameof(environment));
             ApplicationLifetime =
                 applicationLifetime ?? throw new ArgumentNullException(nameof(applicationLifetime));

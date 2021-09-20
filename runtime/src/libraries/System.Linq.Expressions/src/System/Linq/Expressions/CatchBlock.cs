@@ -18,7 +18,8 @@ namespace System.Linq.Expressions
             ParameterExpression? variable,
             Expression body,
             Expression? filter
-        ) {
+        )
+        {
             Test = test;
             Variable = variable;
             Body = body;
@@ -125,7 +126,8 @@ namespace System.Linq.Expressions
             ParameterExpression variable,
             Expression body,
             Expression? filter
-        ) {
+        )
+        {
             ContractUtils.RequiresNotNull(variable, nameof(variable));
             return MakeCatchBlock(variable.Type, variable, body, filter);
         }
@@ -144,7 +146,8 @@ namespace System.Linq.Expressions
             ParameterExpression? variable,
             Expression body,
             Expression? filter
-        ) {
+        )
+        {
             ContractUtils.RequiresNotNull(type, nameof(type));
             ContractUtils.Requires(
                 variable == null || TypeUtils.AreEquivalent(variable.Type, type),

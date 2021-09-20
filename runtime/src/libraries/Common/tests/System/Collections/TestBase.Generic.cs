@@ -107,7 +107,8 @@ namespace System.Collections.Tests
             int count,
             int numberOfMatchingElements,
             int numberOfDuplicateElements
-        ) {
+        )
+        {
             Debug.Assert(count >= numberOfMatchingElements);
             Debug.Assert(count >= numberOfDuplicateElements);
 
@@ -166,7 +167,8 @@ namespace System.Collections.Tests
             int count,
             int numberOfMatchingElements,
             int numberOfDuplicateElements
-        ) {
+        )
+        {
             Queue<T> queue = new Queue<T>(count);
             int seed = 528;
             int duplicateAdded = 0;
@@ -219,7 +221,8 @@ namespace System.Collections.Tests
             int count,
             int numberOfMatchingElements,
             int numberOfDuplicateElements
-        ) {
+        )
+        {
             List<T> list = new List<T>(count);
             int seed = 528;
             int duplicateAdded = 0;
@@ -271,7 +274,8 @@ namespace System.Collections.Tests
             IEnumerable<T> enumerableToMatchTo,
             int count,
             int numberOfMatchingElements
-        ) {
+        )
+        {
             HashSet<T> set = new HashSet<T>(GetIEqualityComparer());
             int seed = 528;
             List<T> match = null;
@@ -319,7 +323,8 @@ namespace System.Collections.Tests
             IEnumerable<T> enumerableToMatchTo,
             int count,
             int numberOfMatchingElements
-        ) {
+        )
+        {
             SortedSet<T> set = new SortedSet<T>(GetIComparer());
             int seed = 528;
             List<T> match = null;
@@ -362,7 +367,8 @@ namespace System.Collections.Tests
             int count,
             int numberOfMatchingElements,
             int numberOfDuplicateElements
-        ) {
+        )
+        {
             IEnumerable<T> list = CreateList(
                 enumerableToMatchTo,
                 count,

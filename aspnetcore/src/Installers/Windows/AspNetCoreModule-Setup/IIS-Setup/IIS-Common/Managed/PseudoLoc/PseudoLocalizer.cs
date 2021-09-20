@@ -218,7 +218,8 @@ namespace Microsoft.Web.Utility
             }
             else if (
                 assembly.FullName.StartsWith("Microsoft.Web", StringComparison.OrdinalIgnoreCase)
-            ) {
+            )
+            {
                 isThisMyAssembly = true;
             }
             else
@@ -391,7 +392,8 @@ namespace Microsoft.Web.Utility
                 int originalStringLength,
                 double paddingRatio,
                 int minPadLength
-            ) {
+            )
+            {
                 int padLengthPerSide;
                 double exactTotalPadding = (originalStringLength * paddingRatio);
                 padLengthPerSide = (int)(exactTotalPadding + 1) / 2;

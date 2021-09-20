@@ -13,7 +13,8 @@ namespace Microsoft.AspNetCore.Razor.Language.Extensions
 
         public DefaultTagHelperHtmlAttributeIntermediateNode(
             TagHelperHtmlAttributeIntermediateNode htmlAttributeNode
-        ) {
+        )
+        {
             if (htmlAttributeNode == null)
             {
                 throw new ArgumentNullException(nameof(htmlAttributeNode));

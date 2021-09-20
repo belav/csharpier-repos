@@ -76,7 +76,8 @@ namespace System.Web.Http.ExceptionHandling
                             HttpStatusCode.InternalServerError,
                             context.ExceptionContext.Exception
                         )
-                    ) {
+                    )
+                    {
                         AssertErrorResponse(expectedResponse, response);
                     }
 
@@ -110,7 +111,8 @@ namespace System.Web.Http.ExceptionHandling
         private static void AssertErrorResponse(
             HttpResponseMessage expected,
             HttpResponseMessage actual
-        ) {
+        )
+        {
             Assert.NotNull(expected); // Guard
             ObjectContent<HttpError> expectedContent = Assert.IsType<ObjectContent<HttpError>>(
                 expected.Content
@@ -158,7 +160,8 @@ namespace System.Web.Http.ExceptionHandling
         private static ExceptionHandlerContext CreateValidContext(
             HttpRequestMessage request,
             ExceptionContextCatchBlock catchBlock
-        ) {
+        )
+        {
             return CreateContext(new ExceptionContext(CreateException(), catchBlock, request));
         }
     }

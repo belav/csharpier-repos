@@ -54,7 +54,8 @@ namespace Microsoft.EntityFrameworkCore.Query
         public RelationalQueryableMethodTranslatingExpressionVisitorDependencies(
             IRelationalSqlTranslatingExpressionVisitorFactory relationalSqlTranslatingExpressionVisitorFactory,
             ISqlExpressionFactory sqlExpressionFactory
-        ) {
+        )
+        {
             Check.NotNull(
                 relationalSqlTranslatingExpressionVisitorFactory,
                 nameof(relationalSqlTranslatingExpressionVisitorFactory)

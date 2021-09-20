@@ -263,7 +263,8 @@ namespace Microsoft.CSharp.RuntimeBinder.Semantics
             CType type,
             Expr arg1,
             Expr arg2
-        ) {
+        )
+        {
             Debug.Assert(arg1 != null);
             Debug.Assert(exprKind.IsUnaryOperator() == (arg2 == null));
             return exprKind.IsUnaryOperator()

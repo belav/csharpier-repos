@@ -49,15 +49,13 @@ namespace System.Linq.Parallel
         // Just constructs a new partition stream.
         //
 
-        internal PartitionedDataSource(
-            IEnumerable<T> source,
-            int partitionCount,
-            bool useStriping
-        ) : base(
-            partitionCount,
-            Util.GetDefaultComparer<int>(),
-            source is IList<T> ? OrdinalIndexState.Indexable : OrdinalIndexState.Correct
-        ) {
+        internal PartitionedDataSource(IEnumerable<T> source, int partitionCount, bool useStriping)
+            : base(
+                partitionCount,
+                Util.GetDefaultComparer<int>(),
+                source is IList<T> ? OrdinalIndexState.Indexable : OrdinalIndexState.Correct
+            )
+        {
             InitializePartitions(source, partitionCount, useStriping);
         }
 
@@ -76,7 +74,8 @@ namespace System.Linq.Parallel
             IEnumerable<T> source,
             int partitionCount,
             bool useStriping
-        ) {
+        )
+        {
             Debug.Assert(source != null);
             Debug.Assert(partitionCount > 0);
 
@@ -193,7 +192,8 @@ namespace System.Linq.Parallel
         private static QueryOperatorEnumerator<T, int>[] MakePartitions(
             IEnumerator<T> source,
             int partitionCount
-        ) {
+        )
+        {
             Debug.Assert(source != null);
             Debug.Assert(partitionCount > 0);
 
@@ -281,7 +281,8 @@ namespace System.Linq.Parallel
                 int partitionCount,
                 int partitionIndex,
                 int maxChunkSize
-            ) {
+            )
+            {
                 Debug.Assert(data != null, "data mustn't be null");
                 Debug.Assert(partitionCount > 0, "partitionCount must be positive");
                 Debug.Assert(partitionIndex >= 0, "partitionIndex can't be negative");
@@ -308,7 +309,8 @@ namespace System.Linq.Parallel
             internal override bool MoveNext(
                 [MaybeNullWhen(false), AllowNull] ref T currentElement,
                 ref int currentKey
-            ) {
+            )
+            {
                 // Lazily allocate the mutable holder.
                 Mutables? mutables = _mutables;
                 if (mutables == null)
@@ -320,7 +322,8 @@ namespace System.Linq.Parallel
                 if (
                     ++mutables._currentPositionInChunk < mutables._currentChunkSize
                     || MoveNextSlowPath()
-                ) {
+                )
+                {
                     currentKey = mutables._currentChunkOffset + mutables._currentPositionInChunk;
                     currentElement = _data[currentKey];
                     return true;
@@ -398,7 +401,8 @@ namespace System.Linq.Parallel
                 T[] data,
                 int partitionCount,
                 int partitionIndex
-            ) {
+            )
+            {
                 Debug.Assert(data != null, "data must not be null");
                 Debug.Assert(partitionCount > 0, "partitionCount must be positive");
                 Debug.Assert(partitionIndex >= 0, "partitionIndex can't be negative");
@@ -435,7 +439,8 @@ namespace System.Linq.Parallel
             internal override bool MoveNext(
                 [MaybeNullWhen(false), AllowNull] ref T currentElement,
                 ref int currentKey
-            ) {
+            )
+            {
                 // Lazily allocate the current index if needed.
                 if (_currentIndex == null)
                 {
@@ -486,7 +491,8 @@ namespace System.Linq.Parallel
                 int partitionCount,
                 int partitionIndex,
                 int maxChunkSize
-            ) {
+            )
+            {
                 Debug.Assert(data != null, "data must not be null");
                 Debug.Assert(partitionCount > 0, "partitionCount must be positive");
                 Debug.Assert(partitionIndex >= 0, "partitionIndex can't be negative");
@@ -513,7 +519,8 @@ namespace System.Linq.Parallel
             internal override bool MoveNext(
                 [MaybeNullWhen(false), AllowNull] ref T currentElement,
                 ref int currentKey
-            ) {
+            )
+            {
                 // Lazily allocate the mutable holder.
                 Mutables? mutables = _mutables;
                 if (mutables == null)
@@ -525,7 +532,8 @@ namespace System.Linq.Parallel
                 if (
                     ++mutables._currentPositionInChunk < mutables._currentChunkSize
                     || MoveNextSlowPath()
-                ) {
+                )
+                {
                     currentKey = mutables._currentChunkOffset + mutables._currentPositionInChunk;
                     currentElement = _data[currentKey];
                     return true;
@@ -603,7 +611,8 @@ namespace System.Linq.Parallel
                 IList<T> data,
                 int partitionCount,
                 int partitionIndex
-            ) {
+            )
+            {
                 Debug.Assert(data != null, "data must not be null");
                 Debug.Assert(partitionCount > 0, "partitionCount must be positive");
                 Debug.Assert(partitionIndex >= 0, "partitionIndex can't be negative");
@@ -640,7 +649,8 @@ namespace System.Linq.Parallel
             internal override bool MoveNext(
                 [MaybeNullWhen(false), AllowNull] ref T currentElement,
                 ref int currentKey
-            ) {
+            )
+            {
                 // Lazily allocate the current index if needed.
                 if (_currentIndex == null)
                 {
@@ -706,7 +716,8 @@ namespace System.Linq.Parallel
                 object sourceSyncLock,
                 Shared<int> currentIndex,
                 Shared<int> degreeOfParallelism
-            ) {
+            )
+            {
                 Debug.Assert(source != null);
                 Debug.Assert(sourceSyncLock != null);
                 Debug.Assert(currentIndex != null);
@@ -725,7 +736,8 @@ namespace System.Linq.Parallel
             internal override bool MoveNext(
                 [MaybeNullWhen(false), AllowNull] ref T currentElement,
                 ref int currentKey
-            ) {
+            )
+            {
                 Mutables? mutables = _mutables;
                 if (mutables == null)
                 {

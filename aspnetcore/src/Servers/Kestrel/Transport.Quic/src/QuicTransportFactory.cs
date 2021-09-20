@@ -26,7 +26,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Transport.Experimental.Quic
         public QuicTransportFactory(
             ILoggerFactory loggerFactory,
             IOptions<QuicTransportOptions> options
-        ) {
+        )
+        {
             if (options == null)
             {
                 throw new ArgumentNullException(nameof(options));
@@ -55,7 +56,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Transport.Experimental.Quic
             EndPoint endpoint,
             IFeatureCollection? features = null,
             CancellationToken cancellationToken = default
-        ) {
+        )
+        {
             var sslServerAuthenticationOptions = features?.Get<SslServerAuthenticationOptions>();
 
             if (sslServerAuthenticationOptions == null)

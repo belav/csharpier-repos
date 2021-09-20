@@ -10,7 +10,8 @@ namespace Microsoft.EntityFrameworkCore.Tests
     {
         public static IServiceCollection AddProviderServices(
             this IServiceCollection serviceCollection
-        ) {
+        )
+        {
             return serviceCollection.AddEntityFrameworkInMemoryDatabase();
         }
 

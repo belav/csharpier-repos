@@ -230,7 +230,8 @@ namespace Microsoft.CodeAnalysis.UnitTests
                 string documentationMemberID,
                 CultureInfo preferredCulture,
                 CancellationToken cancellationToken = default(CancellationToken)
-            ) {
+            )
+            {
                 return string.Format(
                     "<member name='{0}'><summary>{0}</summary></member>",
                     documentationMemberID
@@ -529,7 +530,8 @@ namespace Microsoft.CodeAnalysis.UnitTests
 
             protected override PortableExecutableReference WithPropertiesImpl(
                 MetadataReferenceProperties properties
-            ) {
+            )
+            {
                 throw new NotImplementedException();
             }
         }
@@ -556,7 +558,8 @@ namespace Microsoft.CodeAnalysis.UnitTests
 
             protected override PortableExecutableReference WithPropertiesImpl(
                 MetadataReferenceProperties properties
-            ) {
+            )
+            {
                 throw new NotImplementedException();
             }
         }
@@ -602,7 +605,8 @@ namespace Microsoft.CodeAnalysis.UnitTests
                         ReferenceEquals(r, s)
                         || ReferenceEquals(r, c1a) && ReferenceEquals(s, c1b)
                         || ReferenceEquals(s, c1a) && ReferenceEquals(r, c1b)
-                    ) {
+                    )
+                    {
                         Assert.True(
                             eq,
                             string.Format("expected '{0}' == '{1}'", r.Display, s.Display)

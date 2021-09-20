@@ -69,7 +69,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Options
         private System.Threading.Tasks.Task OnSettingChangedAsync(
             object sender,
             PropertyChangedEventArgs args
-        ) {
+        )
+        {
             List<OptionKey>? optionsToRefresh = null;
 
             lock (_optionsToMonitorForChangesGate)
@@ -79,7 +80,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Options
                         args.PropertyName,
                         out var optionsToRefreshInsideLock
                     )
-                ) {
+                )
+                {
                     // Make a copy of the list so we aren't using something that might mutate underneath us.
                     optionsToRefresh = optionsToRefreshInsideLock.ToList();
                 }
@@ -107,7 +109,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Options
         private object? GetFirstOrDefaultValue(
             OptionKey optionKey,
             IEnumerable<RoamingProfileStorageLocation> roamingSerializations
-        ) {
+        )
+        {
             Contract.ThrowIfNull(_settingManager);
 
             // There can be more than 1 roaming location in the order of their priority.
@@ -127,7 +130,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Options
                 if (
                     _settingManager.TryGetValue(storageKey, out object value)
                     == GetValueResult.Success
-                ) {
+                )
+                {
                     return value;
                 }
             }

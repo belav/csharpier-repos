@@ -62,7 +62,8 @@ namespace Microsoft.EntityFrameworkCore.Query
             IModel model,
             ICurrentDbContext currentContext,
             IExecutionStrategyFactory executionStrategyFactory
-        ) {
+        )
+        {
             Check.NotNull(model, nameof(model));
             Check.NotNull(currentContext, nameof(currentContext));
             Check.NotNull(executionStrategyFactory, nameof(executionStrategyFactory));

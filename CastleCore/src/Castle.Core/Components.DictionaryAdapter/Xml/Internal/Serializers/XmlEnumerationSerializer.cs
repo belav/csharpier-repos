@@ -32,7 +32,8 @@ namespace Castle.Components.DictionaryAdapter.Xml
             IXmlNode node,
             IDictionaryAdapter parent,
             IXmlAccessor accessor
-        ) {
+        )
+        {
             return Enum.Parse(node.ClrType, node.Value, true);
         }
     }

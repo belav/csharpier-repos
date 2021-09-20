@@ -25,7 +25,8 @@ namespace Microsoft.Extensions.Http
             LifetimeTrackingHttpMessageHandler handler,
             IServiceScope scope,
             TimeSpan lifetime
-        ) {
+        )
+        {
             Name = name;
             Handler = handler;
             Scope = scope;

@@ -59,7 +59,8 @@ namespace System.Diagnostics.Tracing
                 if (
                     e.Arguments.TryGetValue("EventCounterIntervalSec", out string? valueStr)
                     && float.TryParse(valueStr, out float value)
-                ) {
+                )
+                {
                     lock (s_counterGroupLock) // Lock the CounterGroup
                     {
                         EnableTimer(value);
@@ -145,7 +146,8 @@ namespace System.Diagnostics.Tracing
             else if (
                 _pollingIntervalInMilliseconds == 0
                 || pollingIntervalInSeconds * 1000 < _pollingIntervalInMilliseconds
-            ) {
+            )
+            {
                 _pollingIntervalInMilliseconds = (int)(pollingIntervalInSeconds * 1000);
                 ResetCounters(); // Reset statistics for counters before we start the thread.
 

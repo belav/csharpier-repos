@@ -130,7 +130,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Extensions
             public static bool TryCreateNativeIntegerType(
                 INamedTypeSymbol symbol,
                 [NotNullWhen(true)] out TypeSyntax? syntax
-            ) {
+            )
+            {
                 if (symbol.IsNativeIntegerType)
                 {
                     syntax = SyntaxFactory.IdentifierName(
@@ -154,7 +155,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Extensions
                         != System.Reflection.Metadata.SignatureCallingConvention.Default
                     && symbol.Signature.CallingConvention
                         != System.Reflection.Metadata.SignatureCallingConvention.VarArgs
-                ) {
+                )
+                {
                     var conventionsList = symbol.Signature.CallingConvention switch
                     {
                         System.Reflection.Metadata.SignatureCallingConvention.CDecl
@@ -248,7 +250,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Extensions
                     symbol.IsTupleType
                     && symbol.TupleUnderlyingType != null
                     && !symbol.Equals(symbol.TupleUnderlyingType)
-                ) {
+                )
+                {
                     return CreateSimpleTypeSyntax(symbol.TupleUnderlyingType);
                 }
 
@@ -390,7 +393,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Extensions
 
                 if (
                     symbol.NullableAnnotation == NullableAnnotation.Annotated && !symbol.IsValueType
-                ) {
+                )
+                {
                     typeSyntax = AddInformationTo(SyntaxFactory.NullableType(typeSyntax), symbol);
                 }
 
@@ -427,7 +431,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Extensions
             private static TypeSyntax AddGlobalAlias(
                 INamespaceOrTypeSymbol symbol,
                 SimpleNameSyntax syntax
-            ) {
+            )
+            {
                 return AddInformationTo(
                     SyntaxFactory.AliasQualifiedName(CreateGlobalIdentifier(), syntax),
                     symbol

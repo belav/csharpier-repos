@@ -154,7 +154,8 @@ namespace System.Data.Common
             object nullValue,
             bool isICloneable,
             StorageType storageType
-        ) {
+        )
+        {
             Debug.Assert(storageType == GetStorageType(type), "Incorrect storage type specified");
             _column = column;
             _table = column.Table!;
@@ -294,7 +295,8 @@ namespace System.Data.Common
             object value,
             XmlWriter xmlWriter,
             XmlRootAttribute? xmlAttrib
-        ) {
+        )
+        {
             xmlWriter.WriteString(ConvertObjectToXml(value)); // should it be NO OP?
         }
 
@@ -302,7 +304,8 @@ namespace System.Data.Common
             DataColumn column,
             Type dataType,
             StorageType typeCode
-        ) {
+        )
+        {
             Debug.Assert(typeCode == GetStorageType(dataType), "Incorrect storage type specified");
             if ((StorageType.Empty == typeCode) && (null != dataType))
             {
@@ -528,7 +531,8 @@ namespace System.Data.Common
             out bool xmlSerializable,
             out bool changeTracking,
             out bool revertibleChangeTracking
-        ) {
+        )
+        {
             Debug.Assert(typeCode == GetStorageType(dataType), "typeCode mismatches dataType");
             if (IsSqlType(typeCode))
             {

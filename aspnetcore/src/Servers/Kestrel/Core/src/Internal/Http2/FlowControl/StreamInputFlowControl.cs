@@ -20,7 +20,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Http2.FlowControl
             InputFlowControl connectionLevelFlowControl,
             uint initialWindowSize,
             uint minWindowSizeIncrement
-        ) {
+        )
+        {
             _connectionLevelFlowControl = connectionLevelFlowControl;
             _streamLevelFlowControl = new InputFlowControl(
                 initialWindowSize,

@@ -818,7 +818,8 @@ namespace Microsoft.Extensions.DependencyInjection.Specification
         public void ServiceContainerPicksConstructorWithLongestMatches(
             IServiceCollection serviceCollection,
             TypeWithSupersetConstructors expected
-        ) {
+        )
+        {
             // Arrange
             serviceCollection.AddTransient<TypeWithSupersetConstructors>();
             var serviceProvider = CreateServiceProvider(serviceCollection);
@@ -933,7 +934,8 @@ namespace Microsoft.Extensions.DependencyInjection.Specification
             Type implementation,
             Type resolve,
             ServiceLifetime lifetime
-        ) {
+        )
+        {
             // Arrange
             var serviceCollection = new TestServiceCollection
             {

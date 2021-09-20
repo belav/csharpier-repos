@@ -49,7 +49,8 @@ namespace System.ComponentModel.Tests
             ImmutableObjectAttribute attribute,
             object other,
             bool expected
-        ) {
+        )
+        {
             Assert.Equal(expected, attribute.Equals(other));
             if (other is ImmutableObjectAttribute)
             {
@@ -69,7 +70,8 @@ namespace System.ComponentModel.Tests
         public void DefaultProperties_GetImmutable_ReturnsExpected(
             ImmutableObjectAttribute attribute,
             bool expectedImmutableObject
-        ) {
+        )
+        {
             Assert.Equal(expectedImmutableObject, attribute.Immutable);
             Assert.Equal(!expectedImmutableObject, attribute.IsDefaultAttribute());
         }

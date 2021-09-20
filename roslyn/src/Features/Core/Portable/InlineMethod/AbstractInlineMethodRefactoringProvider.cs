@@ -81,7 +81,8 @@ namespace Microsoft.CodeAnalysis.InlineMethod
         protected AbstractInlineMethodRefactoringProvider(
             ISyntaxFacts syntaxFacts,
             ISemanticFactsService semanticFactsService
-        ) {
+        )
+        {
             _syntaxFacts = syntaxFacts;
             _semanticFactsService = semanticFactsService;
         }
@@ -183,7 +184,8 @@ namespace Microsoft.CodeAnalysis.InlineMethod
             if (
                 _syntaxFacts.IsThrowStatement(inlineExpression.Parent)
                 || _syntaxFacts.IsThrowExpression(inlineExpression)
-            ) {
+            )
+            {
                 // If this is a throw statement, then it should be valid for
                 // 1. If it is invoked as ExpressionStatement
                 // Example:
@@ -223,7 +225,8 @@ namespace Microsoft.CodeAnalysis.InlineMethod
                 if (
                     !CanBeReplacedByThrowExpression(calleeInvocationNode)
                     && !_syntaxFacts.IsExpressionStatement(calleeInvocationNode.Parent)
-                ) {
+                )
+                {
                     return;
                 }
             }
@@ -283,7 +286,8 @@ namespace Microsoft.CodeAnalysis.InlineMethod
             SyntaxNode callerMethodNode,
             TExpressionSyntax inlineExpression,
             IInvocationOperation invocationOperation
-        ) {
+        )
+        {
             var calleeMethodName = calleeMethodSymbol.ToNameDisplayString();
             var codeActionRemovesCallee = new MySolutionChangeAction(
                 string.Format(FeaturesResources.Inline_0, calleeMethodName),
@@ -336,7 +340,8 @@ namespace Microsoft.CodeAnalysis.InlineMethod
             IInvocationOperation invocationOperation,
             bool removeCalleeDeclarationNode,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             // Find the statement contains the invocation. This should happen when Callee is invoked in a block
             // example:
             // void Caller()
@@ -434,7 +439,8 @@ namespace Microsoft.CodeAnalysis.InlineMethod
             MethodParametersInfo methodParametersInfo,
             InlineMethodContext inlineMethodContext,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var semanticModel = await document.GetRequiredSemanticModelAsync(cancellationToken)
                 .ConfigureAwait(false);
             var syntaxGenerator = SyntaxGenerator.GetGenerator(document);
@@ -455,7 +461,8 @@ namespace Microsoft.CodeAnalysis.InlineMethod
                             callerDeclarationNode.SpanStart
                         )
                     )
-                ) {
+                )
+                {
                     var declarationModifiers = DeclarationModifiers.From(callerSymbol)
                         .WithAsync(true);
                     callerNodeEditor.SetModifiers(callerDeclarationNode, declarationModifiers);
@@ -466,7 +473,8 @@ namespace Microsoft.CodeAnalysis.InlineMethod
             {
                 foreach (
                     var statement in inlineMethodContext.StatementsToInsertBeforeInvocationOfCallee
-                ) {
+                )
+                {
                     // Add a CarriageReturn to make sure for VB the statement would be in different line.
                     callerNodeEditor.InsertBefore(
                         statementContainsInvocation,
@@ -503,7 +511,8 @@ namespace Microsoft.CodeAnalysis.InlineMethod
             SemanticModel semanticModel,
             SyntaxGenerator syntaxGenerator,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             if (statementContainsInvocation != null)
             {
                 if (methodParametersInfo.MergeInlineContentAndVariableDeclarationArgument)
@@ -528,7 +537,8 @@ namespace Microsoft.CodeAnalysis.InlineMethod
                 if (
                     _syntaxFacts.IsThrowStatement(rawInlineExpression.Parent)
                     && _syntaxFacts.IsExpressionStatement(calleeInvocationNode.Parent)
-                ) {
+                )
+                {
                     var throwStatement = (TStatementSyntax)syntaxGenerator.ThrowStatement(
                         inlineMethodContext.InlineExpression
                     );
@@ -541,7 +551,8 @@ namespace Microsoft.CodeAnalysis.InlineMethod
                 if (
                     _syntaxFacts.IsThrowExpression(rawInlineExpression)
                     && _syntaxFacts.IsExpressionStatement(calleeInvocationNode.Parent)
-                ) {
+                )
+                {
                     // Example:
                     // Before:
                     // void Caller() { Callee(); }
@@ -567,7 +578,8 @@ namespace Microsoft.CodeAnalysis.InlineMethod
                     && !IsValidExpressionUnderExpressionStatement(
                         inlineMethodContext.InlineExpression
                     )
-                ) {
+                )
+                {
                     // If the callee is invoked as ExpressionStatement, but the inlined expression in the callee can't be
                     // placed under ExpressionStatement
                     // Example:
@@ -638,7 +650,8 @@ namespace Microsoft.CodeAnalysis.InlineMethod
                 !_syntaxFacts.IsExpressionStatement(calleeInvocationNode.Parent)
                 && !calleeMethodSymbol.ReturnsVoid
                 && !_syntaxFacts.IsThrowExpression(inlineMethodContext.InlineExpression)
-            ) {
+            )
+            {
                 // Add type cast and parenthesis to the inline expression.
                 // It is required to cover cases like:
                 // Case 1 (parenthesis added):
@@ -681,7 +694,8 @@ namespace Microsoft.CodeAnalysis.InlineMethod
             TInvocationSyntax calleeMethodInvocationNode,
             SemanticModel semanticModel,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             for (SyntaxNode? node = calleeMethodInvocationNode; node != null; node = node.Parent)
             {
                 var declaredSymbol = semanticModel.GetDeclaredSymbol(node, cancellationToken);
@@ -689,7 +703,8 @@ namespace Microsoft.CodeAnalysis.InlineMethod
                     declaredSymbol.IsKind(SymbolKind.Property)
                     || declaredSymbol.IsKind(SymbolKind.Method)
                     || declaredSymbol.IsKind(SymbolKind.Event)
-                ) {
+                )
+                {
                     return declaredSymbol;
                 }
 
@@ -697,7 +712,8 @@ namespace Microsoft.CodeAnalysis.InlineMethod
                     IsFieldDeclarationSyntax(node)
                     && semanticModel.GetExistingSymbols(node, cancellationToken).SingleOrDefault()
                         is IFieldSymbol fieldSymbol
-                ) {
+                )
+                {
                     return fieldSymbol;
                 }
 

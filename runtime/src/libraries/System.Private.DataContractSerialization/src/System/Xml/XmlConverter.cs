@@ -476,7 +476,8 @@ namespace System.Xml
             int count,
             char[] chars,
             int charOffset
-        ) {
+        )
+        {
             try
             {
                 return UTF8Encoding.GetChars(buffer, offset, count, chars, charOffset);
@@ -1003,7 +1004,8 @@ namespace System.Xml
             int offset,
             int count,
             out DateTime result
-        ) {
+        )
+        {
             int offsetMax = offset + count;
             result = DateTime.MaxValue;
 
@@ -1116,7 +1118,8 @@ namespace System.Xml
                     if (
                         hourDelta >= 0 && (value < DateTime.MaxValue - ts)
                         || hourDelta < 0 && (value > DateTime.MinValue - ts)
-                    ) {
+                    )
+                    {
                         value = value.Add(ts).ToLocalTime();
                     }
                     else

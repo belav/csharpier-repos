@@ -63,7 +63,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UseExpressionBody
         protected override bool CreateReturnStatementForExpression(
             SemanticModel semanticModel,
             MethodDeclarationSyntax declaration
-        ) {
+        )
+        {
             if (declaration.Modifiers.Any(SyntaxKind.AsyncKeyword))
             {
                 // if it's 'async TaskLike' (where TaskLike is non-generic) we do *not* want to

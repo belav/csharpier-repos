@@ -54,7 +54,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UseExplicitTypeForConst
             if (
                 root.FindNode(context.Span) is VariableDeclarationSyntax variableDeclaration
                 && variableDeclaration.Variables.Count == 1
-            ) {
+            )
+            {
                 var semanticModel = await context.Document.GetSemanticModelAsync(
                         context.CancellationToken
                     )
@@ -82,7 +83,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UseExplicitTypeForConst
             TextSpan span,
             ITypeSymbol type,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var root = await document.GetSyntaxRootAsync(cancellationToken).ConfigureAwait(false);
             var variableDeclaration = (VariableDeclarationSyntax)root.FindNode(span);
 
@@ -95,12 +97,11 @@ namespace Microsoft.CodeAnalysis.CSharp.UseExplicitTypeForConst
 
         private sealed class MyCodeAction : CodeAction.DocumentChangeAction
         {
-            public MyCodeAction(
-                Func<CancellationToken, Task<Document>> createChangedDocument
-            ) : base(
-                CSharpAnalyzersResources.Use_explicit_type_instead_of_var,
-                createChangedDocument
-            ) { }
+            public MyCodeAction(Func<CancellationToken, Task<Document>> createChangedDocument)
+                : base(
+                    CSharpAnalyzersResources.Use_explicit_type_instead_of_var,
+                    createChangedDocument
+                ) { }
         }
     }
 }

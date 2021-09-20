@@ -89,7 +89,8 @@ class Program
             string code,
             TextSpan span,
             ParseOptions parseOptions
-        ) {
+        )
+        {
             using (var workspace = TestWorkspace.CreateCSharp(code, parseOptions))
             {
                 var document = workspace.CurrentSolution.GetDocument(
@@ -102,7 +103,8 @@ class Program
         protected static async Task<ImmutableArray<ClassifiedSpan>> GetSemanticClassificationsAsync(
             Document document,
             TextSpan span
-        ) {
+        )
+        {
             var tree = await document.GetSyntaxTreeAsync();
 
             var service = document.GetLanguageService<ISyntaxClassificationService>();

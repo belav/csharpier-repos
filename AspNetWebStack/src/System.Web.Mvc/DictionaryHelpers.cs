@@ -11,7 +11,8 @@ namespace System.Web.Mvc
         public static IEnumerable<KeyValuePair<string, TValue>> FindKeysWithPrefix<TValue>(
             IDictionary<string, TValue> dictionary,
             string prefix
-        ) {
+        )
+        {
             TValue exactMatchValue;
             if (dictionary.TryGetValue(prefix, out exactMatchValue))
             {
@@ -46,7 +47,8 @@ namespace System.Web.Mvc
         public static bool DoesAnyKeyHavePrefix<TValue>(
             IDictionary<string, TValue> dictionary,
             string prefix
-        ) {
+        )
+        {
             return FindKeysWithPrefix(dictionary, prefix).Any();
         }
 
@@ -54,7 +56,8 @@ namespace System.Web.Mvc
             this IDictionary<TKey, TValue> dict,
             TKey key,
             TValue @default
-        ) {
+        )
+        {
             TValue value;
             if (dict.TryGetValue(key, out value))
             {

@@ -217,7 +217,8 @@ namespace System.IO.Tests
             string envVar,
             string expected,
             string newTempPath
-        ) {
+        )
+        {
             string original = Path.GetTempPath();
             Assert.NotNull(original);
             try

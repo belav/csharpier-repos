@@ -17,7 +17,8 @@ namespace Internal.TypeSystem
         internal MethodForInstantiatedType(
             MethodDesc typicalMethodDef,
             InstantiatedType instantiatedType
-        ) {
+        )
+        {
             Debug.Assert(typicalMethodDef.GetTypicalMethodDefinition() == typicalMethodDef);
             _typicalMethodDef = typicalMethodDef;
             _instantiatedType = instantiatedType;

@@ -71,7 +71,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Diagnostics.SimplifyTyp
                 if (
                     root.FindNode(context.Span, getInnermostNodeForTie: true)
                     is SimpleNameSyntax node
-                ) {
+                )
+                {
                     var leadingTrivia = node.GetLeadingTrivia();
                     var newNode = SyntaxFactory.MemberAccessExpression(
                             SyntaxKind.SimpleMemberAccessExpression,

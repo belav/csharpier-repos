@@ -143,7 +143,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                 AttributeSyntax,
                 AttributeLocation
             > arguments
-        ) {
+        )
+        {
             return null;
         }
 
@@ -156,7 +157,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             > arguments,
             out CSharpAttributeData attributeData,
             out ObsoleteAttributeData obsoleteData
-        ) {
+        )
+        {
             var type = arguments.AttributeType;
             var syntax = arguments.AttributeSyntax;
 
@@ -167,7 +169,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                     syntax,
                     AttributeDescription.ObsoleteAttribute
                 )
-            ) {
+            )
+            {
                 kind = ObsoleteAttributeKind.Obsolete;
             }
             else if (
@@ -176,7 +179,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                     syntax,
                     AttributeDescription.DeprecatedAttribute
                 )
-            ) {
+            )
+            {
                 kind = ObsoleteAttributeKind.Deprecated;
             }
             else if (
@@ -185,7 +189,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                     syntax,
                     AttributeDescription.ExperimentalAttribute
                 )
-            ) {
+            )
+            {
                 kind = ObsoleteAttributeKind.Experimental;
             }
             else
@@ -301,7 +306,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             bool earlyDecodingOnly = false,
             Binder binderOpt = null,
             Func<AttributeSyntax, bool> attributeMatchesOpt = null
-        ) {
+        )
+        {
             var diagnostics = BindingDiagnosticBag.GetInstance();
             var compilation = this.DeclaringCompilation;
 
@@ -447,7 +453,8 @@ namespace Microsoft.CodeAnalysis.CSharp
 
         private void RecordPresenceOfBadAttributes(
             ImmutableArray<CSharpAttributeData> boundAttributes
-        ) {
+        )
+        {
             foreach (var attribute in boundAttributes)
             {
                 if (attribute.HasErrors)
@@ -476,7 +483,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             Func<AttributeSyntax, bool> attributeMatchesOpt,
             Binder rootBinderOpt,
             out ImmutableArray<Binder> binders
-        ) {
+        )
+        {
             var attributeTarget = (IAttributeTargetSymbol)this;
 
             ArrayBuilder<AttributeSyntax> syntaxBuilder = null;
@@ -499,7 +507,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                                 attributeDeclarationSyntax.Target,
                                 diagnostics
                             )
-                        ) {
+                        )
+                        {
                             if (syntaxBuilder == null)
                             {
                                 syntaxBuilder = new ArrayBuilder<AttributeSyntax>();
@@ -568,7 +577,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             AttributeLocation symbolPart,
             AttributeTargetSpecifierSyntax targetOpt,
             BindingDiagnosticBag diagnostics
-        ) {
+        )
+        {
             IAttributeTargetSymbol attributesOwner = attributeTarget.AttributesOwner;
 
             // Determine if the target symbol owns the attribute declaration.
@@ -665,7 +675,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             ImmutableArray<AttributeSyntax> attributesToBind,
             AttributeLocation symbolPart,
             CSharpAttributeData[] boundAttributesBuilder
-        ) {
+        )
+        {
             Debug.Assert(boundAttributeTypes.Any());
             Debug.Assert(attributesToBind.Any());
             Debug.Assert(binders.Any());
@@ -713,7 +724,8 @@ namespace Microsoft.CodeAnalysis.CSharp
         private void EarlyDecodeWellKnownAttributeTypes(
             ImmutableArray<NamedTypeSymbol> attributeTypes,
             ImmutableArray<AttributeSyntax> attributeSyntaxList
-        ) {
+        )
+        {
             Debug.Assert(attributeSyntaxList.Any());
             Debug.Assert(attributeTypes.Any());
 
@@ -741,7 +753,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             ImmutableArray<CSharpAttributeData> boundAttributes,
             BindingDiagnosticBag diagnostics,
             AttributeLocation symbolPart
-        ) {
+        )
+        {
             Debug.Assert(binders.Any());
             Debug.Assert(attributeSyntaxList.Any());
             Debug.Assert(boundAttributes.Any());
@@ -776,7 +789,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                         diagnostics,
                         uniqueAttributeTypes
                     )
-                ) {
+                )
+                {
                     arguments.Attribute = boundAttribute;
                     arguments.AttributeSyntaxOpt = attributeSyntax;
                     arguments.Index = i;
@@ -804,7 +818,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             AttributeLocation symbolPart,
             BindingDiagnosticBag diagnostics,
             HashSet<NamedTypeSymbol> uniqueAttributeTypes
-        ) {
+        )
+        {
             Debug.Assert(!attribute.HasErrors);
 
             NamedTypeSymbol attributeType = attribute.AttributeClass;

@@ -58,7 +58,8 @@ namespace Microsoft.AspNetCore.Http
         internal void Initialize(
             DefaultHttpContext httpContext,
             IFeatureCollection featureCollection
-        ) {
+        )
+        {
             Debug.Assert(featureCollection != null);
             Debug.Assert(httpContext != null);
 

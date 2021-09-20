@@ -29,7 +29,8 @@ namespace Microsoft.AspNetCore.Authentication.Negotiate
         public PostConfigureNegotiateOptions(
             IEnumerable<IServerIntegratedAuth> serverAuthServices,
             ILogger<NegotiateHandler> logger
-        ) {
+        )
+        {
             _serverAuth = serverAuthServices.LastOrDefault();
             _logger = logger;
         }

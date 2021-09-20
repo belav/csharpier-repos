@@ -71,7 +71,8 @@ namespace System.Net.Http.Functional.Tests
                     new HttpRequestMessage(),
                     CancellationToken.None
                 )
-            ) {
+            )
+            {
                 Assert.NotNull(response);
                 Assert.Equal(1, handler.SendAsyncCount);
                 Assert.Equal(1, transport.SendAsyncCount);
@@ -95,7 +96,8 @@ namespace System.Net.Http.Functional.Tests
                     new HttpRequestMessage(),
                     CancellationToken.None
                 )
-            ) {
+            )
+            {
                 Assert.NotNull(response);
                 Assert.Equal(1, handler.SendAsyncCount);
                 Assert.Equal(0, transport1.SendAsyncCount);
@@ -216,7 +218,8 @@ namespace System.Net.Http.Functional.Tests
             protected override Task<HttpResponseMessage> SendAsync(
                 HttpRequestMessage request,
                 CancellationToken cancellationToken
-            ) {
+            )
+            {
                 SendAsyncCount++;
                 return base.SendAsync(request, cancellationToken);
             }
@@ -224,7 +227,8 @@ namespace System.Net.Http.Functional.Tests
             public Task<HttpResponseMessage> TestSendAsync(
                 HttpRequestMessage request,
                 CancellationToken cancellationToken
-            ) {
+            )
+            {
                 return SendAsync(request, cancellationToken);
             }
 
@@ -243,7 +247,8 @@ namespace System.Net.Http.Functional.Tests
             protected override Task<HttpResponseMessage> SendAsync(
                 HttpRequestMessage request,
                 CancellationToken cancellationToken
-            ) {
+            )
+            {
                 SendAsyncCount++;
                 return Task.FromResult(new HttpResponseMessage());
             }
@@ -251,7 +256,8 @@ namespace System.Net.Http.Functional.Tests
             public Task<HttpResponseMessage> TestSendAsync(
                 HttpRequestMessage request,
                 CancellationToken cancellationToken
-            ) {
+            )
+            {
                 return SendAsync(request, cancellationToken);
             }
 

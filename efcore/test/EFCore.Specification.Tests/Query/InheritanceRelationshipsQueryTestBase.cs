@@ -542,7 +542,8 @@ namespace Microsoft.EntityFrameworkCore.Query
         [MemberData(nameof(IsAsyncData))]
         public virtual Task Include_reference_with_inheritance_on_derived_with_filter_reverse(
             bool async
-        ) {
+        )
+        {
             return AssertQuery(
                 async,
                 ss =>
@@ -868,7 +869,8 @@ namespace Microsoft.EntityFrameworkCore.Query
         [MemberData(nameof(IsAsyncData))]
         public virtual Task Nested_include_with_inheritance_collection_collection_reverse(
             bool async
-        ) {
+        )
+        {
             return AssertQuery(
                 async,
                 ss => ss.Set<NestedCollectionBase>().Include(e => e.ParentCollection.BaseParent),

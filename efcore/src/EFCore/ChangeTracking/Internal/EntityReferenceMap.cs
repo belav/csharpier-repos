@@ -49,7 +49,8 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
             InternalEntityEntry entry,
             EntityState state,
             EntityState? oldState
-        ) {
+        )
+        {
             var entityType = entry.EntityType;
             if (_hasSubMap && entityType.HasSharedClrType)
             {
@@ -125,7 +126,8 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
             IEntityType? entityType,
             [NotNullWhen(true)] out InternalEntityEntry? entry,
             bool throwOnNonUniqueness
-        ) {
+        )
+        {
             entry = null;
             var found =
                 _unchangedReferenceMap?.TryGetValue(entity, out entry) == true
@@ -157,7 +159,8 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
                                 out var foundEntry,
                                 throwOnNonUniqueness
                             )
-                        ) {
+                        )
+                        {
                             if (found)
                             {
                                 if (!throwOnNonUniqueness)
@@ -198,7 +201,8 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
             bool modified = false,
             bool deleted = false,
             bool unchanged = false
-        ) {
+        )
+        {
             var count = 0;
 
             if (added && _addedReferenceMap != null)
@@ -243,7 +247,8 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
             bool modified = false,
             bool deleted = false,
             bool unchanged = false
-        ) {
+        )
+        {
             // Perf sensitive
 
             var returnAdded = added && _addedReferenceMap != null && _addedReferenceMap.Count > 0;
@@ -320,7 +325,8 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
             bool returnModified,
             bool returnDeleted,
             bool returnUnchanged
-        ) {
+        )
+        {
             if (returnAdded)
             {
                 foreach (var entry in _addedReferenceMap!.Values)
@@ -359,13 +365,15 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
                 {
                     foreach (
                         var entry in subMap.GetEntriesForState(added, modified, deleted, unchanged)
-                    ) {
+                    )
+                    {
                         if (
                             (
                                 entry.SharedIdentityEntry == null
                                 || entry.EntityState != EntityState.Deleted
                             )
-                        ) {
+                        )
+                        {
                             yield return entry;
                         }
                     }

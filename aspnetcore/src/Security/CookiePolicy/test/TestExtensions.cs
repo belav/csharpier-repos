@@ -23,7 +23,8 @@ namespace Microsoft.AspNetCore.CookiePolicy
             this TestServer server,
             string uri,
             string cookieHeader = null
-        ) {
+        )
+        {
             var request = new HttpRequestMessage(HttpMethod.Get, uri);
             if (!string.IsNullOrEmpty(cookieHeader))
             {
@@ -45,7 +46,8 @@ namespace Microsoft.AspNetCore.CookiePolicy
                 transaction.Response.Content != null
                 && transaction.Response.Content.Headers.ContentType != null
                 && transaction.Response.Content.Headers.ContentType.MediaType == "text/xml"
-            ) {
+            )
+            {
                 transaction.ResponseElement = XElement.Parse(transaction.ResponseText);
             }
             return transaction;

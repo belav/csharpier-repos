@@ -37,7 +37,8 @@ namespace PInvokeTests
             IntPtr bufferSize,
             string formatString,
             __arglist
-        ) {
+        )
+        {
             TestArgIterator(builder, bufferSize, formatString, new ArgIterator(__arglist));
         }
 

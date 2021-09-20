@@ -41,7 +41,8 @@ namespace Microsoft.CodeAnalysis.ExpressionEvaluator
             MetadataReader reader,
             bool ignoreCase,
             OnFunctionResolvedDelegate<TModule, TRequest> onFunctionResolved
-        ) {
+        )
+        {
             _process = process;
             _module = module;
             _reader = reader;
@@ -95,7 +96,8 @@ namespace Microsoft.CodeAnalysis.ExpressionEvaluator
                             memberTypeParameters,
                             memberParameters
                         )
-                    ) {
+                    )
+                    {
                         OnFunctionResolved(request, methodHandle);
                     }
                 }
@@ -115,7 +117,8 @@ namespace Microsoft.CodeAnalysis.ExpressionEvaluator
                                 containingArity,
                                 memberParameters
                             )
-                        ) {
+                        )
+                        {
                             var accessors = propertyDef.GetAccessors();
                             OnAccessorResolved(request, accessors.Getter);
                             OnAccessorResolved(request, accessors.Setter);
@@ -162,7 +165,8 @@ namespace Microsoft.CodeAnalysis.ExpressionEvaluator
                     typeDef.GetGenericParameters(),
                     declaringTypeParameterCount
                 )
-            ) {
+            )
+            {
                 return -1;
             }
 
@@ -230,7 +234,8 @@ namespace Microsoft.CodeAnalysis.ExpressionEvaluator
             int containingArity,
             ImmutableArray<string> methodTypeParameters,
             ImmutableArray<ParameterSignature> methodParameters
-        ) {
+        )
+        {
             if ((methodDef.Attributes & MethodAttributes.RTSpecialName) != 0)
             {
                 if (!_reader.StringComparer.Equals(methodDef.Name, ".ctor", ignoreCase: false))
@@ -253,7 +258,8 @@ namespace Microsoft.CodeAnalysis.ExpressionEvaluator
                     methodDef.GetGenericParameters(),
                     offset: 0
                 )
-            ) {
+            )
+            {
                 return false;
             }
             if (methodParameters.IsDefault)
@@ -277,7 +283,8 @@ namespace Microsoft.CodeAnalysis.ExpressionEvaluator
             ImmutableArray<string> allTypeParameters,
             int containingArity,
             ImmutableArray<ParameterSignature> propertyParameters
-        ) {
+        )
+        {
             if (!_reader.StringComparer.Equals(propertyDef.Name, propertyName, _ignoreCase))
             {
                 return false;
@@ -319,7 +326,8 @@ namespace Microsoft.CodeAnalysis.ExpressionEvaluator
         private void GetAllGenericTypeParameters(
             Name typeName,
             ImmutableArray<string>.Builder builder
-        ) {
+        )
+        {
             if (typeName == null)
             {
                 return;
@@ -338,7 +346,8 @@ namespace Microsoft.CodeAnalysis.ExpressionEvaluator
             int containingArity,
             ImmutableArray<string> methodTypeParameters,
             ImmutableArray<ParameterSignature> methodParameters
-        ) {
+        )
+        {
             ImmutableArray<ParameterSignature> parameters;
             try
             {
@@ -390,7 +399,8 @@ namespace Microsoft.CodeAnalysis.ExpressionEvaluator
             ImmutableArray<string> typeArguments,
             GenericParameterHandleCollection typeParameters,
             int offset
-        ) {
+        )
+        {
             return typeArguments.Length == typeParameters.Count - offset;
         }
 
@@ -458,7 +468,8 @@ namespace Microsoft.CodeAnalysis.ExpressionEvaluator
             Name name,
             out QualifiedName qualifiedName,
             out ImmutableArray<string> typeParameters
-        ) {
+        )
+        {
             switch (name.Kind)
             {
                 case NameKind.GenericName:

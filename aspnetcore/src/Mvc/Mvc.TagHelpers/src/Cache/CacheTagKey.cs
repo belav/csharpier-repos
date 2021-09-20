@@ -275,7 +275,8 @@ namespace Microsoft.AspNetCore.Mvc.TagHelpers.Cache
             string keys,
             TSourceCollection collection,
             Func<TSourceCollection, string, string> accessor
-        ) {
+        )
+        {
             if (string.IsNullOrEmpty(keys))
             {
                 return null;
@@ -305,7 +306,8 @@ namespace Microsoft.AspNetCore.Mvc.TagHelpers.Cache
             StringBuilder builder,
             string collectionName,
             IList<KeyValuePair<string, string>> values
-        ) {
+        )
+        {
             if (values == null || values.Count == 0)
             {
                 return;
@@ -333,7 +335,8 @@ namespace Microsoft.AspNetCore.Mvc.TagHelpers.Cache
             ref HashCode hashCodeCombiner,
             string collectionName,
             IList<KeyValuePair<string, string>> values
-        ) {
+        )
+        {
             if (values != null)
             {
                 hashCodeCombiner.Add(collectionName, StringComparer.Ordinal);
@@ -350,7 +353,8 @@ namespace Microsoft.AspNetCore.Mvc.TagHelpers.Cache
         private static bool AreSame(
             IList<KeyValuePair<string, string>> values1,
             IList<KeyValuePair<string, string>> values2
-        ) {
+        )
+        {
             if (values1 == values2)
             {
                 return true;
@@ -366,7 +370,8 @@ namespace Microsoft.AspNetCore.Mvc.TagHelpers.Cache
                 if (
                     !string.Equals(values1[i].Key, values2[i].Key, StringComparison.Ordinal)
                     || !string.Equals(values1[i].Value, values2[i].Value, StringComparison.Ordinal)
-                ) {
+                )
+                {
                     return false;
                 }
             }

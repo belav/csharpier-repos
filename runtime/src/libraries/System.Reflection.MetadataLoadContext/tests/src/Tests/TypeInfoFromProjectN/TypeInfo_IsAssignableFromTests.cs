@@ -600,7 +600,8 @@ namespace System.Reflection.Tests
             TypeInfo left,
             TypeInfo right,
             bool expected
-        ) {
+        )
+        {
             {
                 //Fix to initialize Reflection
                 string str = typeof(object).Project().Name;
@@ -615,7 +616,8 @@ namespace System.Reflection.Tests
             Type leftElementType,
             Type rightElementType,
             bool expected
-        ) {
+        )
+        {
             VerifyIsAssignableFrom(
                 TestName,
                 leftElementType.MakeArrayType().GetTypeInfo(),

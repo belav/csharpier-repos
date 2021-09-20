@@ -68,7 +68,8 @@ namespace Microsoft.CodeAnalysis
             string documentationMemberID,
             CultureInfo preferredCulture,
             CancellationToken cancellationToken = default
-        ) {
+        )
+        {
             if (_docComments == null)
             {
                 using (_gate.DisposableWait(cancellationToken))

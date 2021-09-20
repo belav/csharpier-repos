@@ -58,7 +58,8 @@ namespace R2RTest
                 || !File.Exists(
                     Path.Combine(_options.AspNetPath.FullName, "Microsoft.AspNetCore.dll")
                 )
-            ) {
+            )
+            {
                 throw new ArgumentException(
                     $"Error: Asp.NET Core path must contain Microsoft.AspNetCore.dll"
                 );
@@ -121,7 +122,8 @@ namespace R2RTest
                             CompilerIndex.CPAOT,
                             out string reason
                         )
-                    ) {
+                    )
+                    {
                         _coreCompileAssemblies.Add(binAssembly);
                     }
                 }
@@ -148,7 +150,8 @@ namespace R2RTest
                         options.CoreRootDirectory.FullName,
                         "System.*.dll"
                     )
-                ) {
+                )
+                {
                     string simpleName = Path.GetFileNameWithoutExtension(frameworkDll);
                     if (
                         !FrameworkExclusion.Exclude(
@@ -156,7 +159,8 @@ namespace R2RTest
                             CompilerIndex.CPAOT,
                             out string reason
                         )
-                    ) {
+                    )
+                    {
                         _frameworkCompileAssemblies.Add(frameworkDll);
                     }
                 }
@@ -165,7 +169,8 @@ namespace R2RTest
                         options.CoreRootDirectory.FullName,
                         "Microsoft.*.dll"
                     )
-                ) {
+                )
+                {
                     string simpleName = Path.GetFileNameWithoutExtension(frameworkDll);
                     if (
                         !FrameworkExclusion.Exclude(
@@ -173,7 +178,8 @@ namespace R2RTest
                             CompilerIndex.CPAOT,
                             out string reason
                         )
-                    ) {
+                    )
+                    {
                         _frameworkCompileAssemblies.Add(frameworkDll);
                     }
                 }
@@ -619,7 +625,8 @@ namespace R2RTest
                     string reference in ComputeManagedAssemblies.GetManagedAssembliesInFolder(
                         referenceFolder
                     )
-                ) {
+                )
+                {
                     yield return reference;
                 }
             }
@@ -632,7 +639,8 @@ namespace R2RTest
         private static List<string> BackupAndUseOriginalAssemblies(
             string rootFolder,
             List<string> assemblies
-        ) {
+        )
+        {
             List<string> rewrittenList = new List<string>();
 
             foreach (var assembly in assemblies)
@@ -700,7 +708,8 @@ namespace R2RTest
         private static IEnumerable<string> FilterAssembliesNoSimpleNameDuplicates(
             HashSet<string> simpleNameSet,
             IEnumerable<string> assemblyFileList
-        ) {
+        )
+        {
             foreach (var x in assemblyFileList)
             {
                 string simpleName = Path.GetFileNameWithoutExtension(x);

@@ -113,7 +113,8 @@ namespace System.Net.Http.Functional.Tests
         [InlineData((long)int.MaxValue + (long)1)]
         public void MaxRequestContentBufferSize_SetInvalidValue_ThrowsArgumentOutOfRangeException(
             long value
-        ) {
+        )
+        {
             using (HttpClientHandler handler = CreateHttpClientHandler())
             {
                 Assert.Throws<ArgumentOutOfRangeException>(
@@ -287,7 +288,8 @@ namespace System.Net.Http.Functional.Tests
         public async Task GetAsync_SecureAndNonSecureIPBasedUri_CorrectlyFormatted(
             IPAddress address,
             bool useSsl
-        ) {
+        )
+        {
             if (LoopbackServerFactory.Version >= HttpVersion20.Value)
             {
                 // Host header is not supported on HTTP/2 and later.
@@ -339,7 +341,8 @@ namespace System.Net.Http.Functional.Tests
         public async Task GetAsync_ServerNeedsNonStandardAuthAndSetCredential_StatusCodeUnauthorized(
             string authHeadrName,
             string authHeaderValue
-        ) {
+        )
+        {
             if (IsWinHttpHandler && UseVersion >= HttpVersion20.Value)
             {
                 return;
@@ -383,7 +386,8 @@ namespace System.Net.Http.Functional.Tests
         [InlineData("Content-Length      ")]
         public async Task GetAsync_InvalidHeaderNameValue_ThrowsHttpRequestException(
             string invalidHeader
-        ) {
+        )
+        {
             if (UseVersion == HttpVersion30)
             {
                 return;
@@ -414,7 +418,8 @@ namespace System.Net.Http.Functional.Tests
         public async Task GetAsync_IncompleteData_ThrowsHttpRequestException(
             bool failDuringHeaders,
             bool getString
-        ) {
+        )
+        {
             if (IsWinHttpHandler)
             {
                 return; // see https://github.com/dotnet/runtime/issues/30115#issuecomment-508330958
@@ -797,7 +802,8 @@ namespace System.Net.Http.Functional.Tests
             string newline,
             string fold,
             bool dribble
-        ) {
+        )
+        {
             if (LoopbackServerFactory.Version >= HttpVersion20.Value)
             {
                 // Folding is not supported on HTTP/2 and later.
@@ -1273,7 +1279,8 @@ namespace System.Net.Http.Functional.Tests
                                     using (
                                         Stream clientStream =
                                             await response.Content.ReadAsStreamAsync(TestAsync)
-                                    ) {
+                                    )
+                                    {
                                         int bytesRead = await clientStream.ReadAsync(
                                             buffer,
                                             0,
@@ -1324,12 +1331,14 @@ namespace System.Net.Http.Functional.Tests
                             request,
                             CancellationToken.None
                         )
-                    ) {
+                    )
+                    {
                         using (
                             Stream responseStream = await response.Content.ReadAsStreamAsync(
                                 TestAsync
                             )
-                        ) {
+                        )
+                        {
                             Assert.Same(
                                 responseStream,
                                 await response.Content.ReadAsStreamAsync(TestAsync)
@@ -1657,7 +1666,8 @@ namespace System.Net.Http.Functional.Tests
                             Stream responseStream = await response.Content.ReadAsStreamAsync(
                                 TestAsync
                             )
-                        ) {
+                        )
+                        {
                             // Boolean properties returning correct values
                             Assert.True(responseStream.CanRead);
                             Assert.False(responseStream.CanWrite);
@@ -2081,7 +2091,8 @@ namespace System.Net.Http.Functional.Tests
         [MemberData(nameof(Interim1xxStatusCode))]
         public async Task SendAsync_1xxResponsesWithHeaders_InterimResponsesHeadersIgnored(
             HttpStatusCode responseStatusCode
-        ) {
+        )
+        {
             if (IsWinHttpHandler && UseVersion >= HttpVersion20.Value)
             {
                 return;
@@ -2198,7 +2209,8 @@ namespace System.Net.Http.Functional.Tests
         [MemberData(nameof(Interim1xxStatusCode))]
         public async Task SendAsync_Unexpected1xxResponses_DropAllInterimResponses(
             HttpStatusCode responseStatusCode
-        ) {
+        )
+        {
             if (IsWinHttpHandler && UseVersion >= HttpVersion20.Value)
             {
                 return;
@@ -2421,7 +2433,8 @@ namespace System.Net.Http.Functional.Tests
                                 TestAsync,
                                 initialMessage
                             )
-                        ) {
+                        )
+                        {
                             Assert.Equal(HttpStatusCode.OK, response.StatusCode);
                             Assert.Equal(
                                 ResponseString,
@@ -2571,7 +2584,8 @@ namespace System.Net.Http.Functional.Tests
         public async Task GetAsync_CallMethod_ExpectedStatusLine(
             HttpStatusCode statusCode,
             string reasonPhrase
-        ) {
+        )
+        {
             if (LoopbackServerFactory.Version >= HttpVersion20.Value)
             {
                 // Custom messages are not supported on HTTP2 and later.

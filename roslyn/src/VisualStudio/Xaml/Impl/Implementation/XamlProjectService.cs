@@ -49,7 +49,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Xaml
             VisualStudioWorkspace workspace,
             IXamlDocumentAnalyzerService analyzerService,
             IThreadingContext threadingContext
-        ) {
+        )
+        {
             _serviceProvider = serviceProvider;
             _editorAdaptersFactory = editorAdaptersFactoryService;
             _visualStudioProjectFactory = visualStudioProjectFactory;
@@ -147,7 +148,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Xaml
                         __VSHPROPID.VSHPROPID_ProjectIDGuid,
                         out var projectGuid
                     )
-                ) {
+                )
+                {
                     return null;
                 }
 
@@ -241,7 +243,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Xaml
             IVsHierarchy hierarchy,
             string oldMoniker,
             string newMoniker
-        ) {
+        )
+        {
             // If the moniker change only involves casing differences then the project system will
             // not remove & add the file again with the new name, so we should not clear any state.
             // Leaving the old casing in the DocumentKey is safe because DocumentKey equality

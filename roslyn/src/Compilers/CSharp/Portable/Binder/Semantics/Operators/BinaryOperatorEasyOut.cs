@@ -5545,7 +5545,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                 BinaryOperatorKind kind,
                 TypeSymbol left,
                 TypeSymbol right
-            ) {
+            )
+            {
                 int leftIndex = left.TypeToIndex();
                 if (leftIndex < 0)
                 {
@@ -5572,7 +5573,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                         leftIndex == (int)BinaryOperatorKind.Bool
                         && rightIndex == (int)BinaryOperatorKind.Bool
                     )
-                ) {
+                )
+                {
                     result = s_opkind[kind.OperatorIndex()][leftIndex, rightIndex];
                 }
 
@@ -5585,7 +5587,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             BoundExpression left,
             BoundExpression right,
             BinaryOperatorOverloadResolutionResult result
-        ) {
+        )
+        {
             var leftType = left.Type;
             if (leftType is null)
             {
@@ -5634,7 +5637,8 @@ namespace Microsoft.CodeAnalysis.CSharp
         private static bool PossiblyUnusualConstantOperation(
             BoundExpression left,
             BoundExpression right
-        ) {
+        )
+        {
             Debug.Assert(left != null);
             Debug.Assert((object?)left.Type != null);
             Debug.Assert(right != null);
@@ -5668,7 +5672,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                 left.Type.SpecialType == SpecialType.System_Int32
                 || left.Type.SpecialType == SpecialType.System_Boolean
                 || left.Type.SpecialType == SpecialType.System_String
-            ) {
+            )
+            {
                 // They are both int, both bool, or both string. Go for the fast path.
                 return false;
             }

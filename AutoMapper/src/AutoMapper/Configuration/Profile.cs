@@ -89,10 +89,8 @@ namespace AutoMapper
             memberConfiguration.NameMapper.NamedMappers.Add(_prePostfixName);
             _memberConfigurations.Add(memberConfiguration);
         }
-        protected Profile(
-            string profileName,
-            Action<IProfileExpression> configurationAction
-        ) : this(profileName) => configurationAction(this);
+        protected Profile(string profileName, Action<IProfileExpression> configurationAction)
+            : this(profileName) => configurationAction(this);
 
         IMemberConfiguration DefaultMemberConfig => _memberConfigurations[0];
         IMemberConfiguration IProfileExpressionInternal.DefaultMemberConfig => DefaultMemberConfig;
@@ -139,7 +137,8 @@ namespace AutoMapper
 
         void IProfileExpressionInternal.ForAllMaps(
             Action<TypeMap, IMappingExpression> configuration
-        ) {
+        )
+        {
             _allTypeMapActions ??= new();
             _allTypeMapActions.Add(configuration);
         }
@@ -147,7 +146,8 @@ namespace AutoMapper
         void IProfileExpressionInternal.ForAllPropertyMaps(
             Func<PropertyMap, bool> condition,
             Action<PropertyMap, IMemberConfigurationExpression> configuration
-        ) {
+        )
+        {
             _allPropertyMapActions ??= new();
             _allPropertyMapActions.Add(
                 (pm, cfg) =>
@@ -176,7 +176,8 @@ namespace AutoMapper
         private IMappingExpression<TSource, TDestination> CreateMapCore<TSource, TDestination>(
             MemberList memberList,
             bool projection = false
-        ) {
+        )
+        {
             var mappingExp = new MappingExpression<TSource, TDestination>(memberList, projection);
             _typeMapConfigs.Add(mappingExp);
             return mappingExp;
@@ -189,7 +190,8 @@ namespace AutoMapper
             Type sourceType,
             Type destinationType,
             MemberList memberList
-        ) {
+        )
+        {
             var types = new TypePair(sourceType, destinationType);
             var map = new MappingExpression(types, memberList);
             _typeMapConfigs.Add(map);

@@ -73,7 +73,8 @@ namespace Newtonsoft.Json.Linq.JsonPath
             JToken originalParent,
             JToken? container,
             JToken? value
-        ) {
+        )
+        {
             // step into container's values
             if (container != null && container.HasValues)
             {

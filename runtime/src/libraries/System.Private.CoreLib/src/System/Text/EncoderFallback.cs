@@ -89,7 +89,8 @@ namespace System.Text
             char* charEnd,
             EncoderNLS? encoder,
             bool setEncoder
-        ) {
+        )
+        {
             this.charStart = charStart;
             this.charEnd = charEnd;
             this.encoder = encoder;
@@ -103,7 +104,8 @@ namespace System.Text
             Encoding encoding,
             EncoderNLS? encoder,
             int originalCharCount
-        ) {
+        )
+        {
             // The original char count is only used for keeping track of what 'index' value needs
             // to be passed to the abstract Fallback method. The index value is calculated by subtracting
             // 'chars.Length' (where chars is expected to be the entire remaining input buffer)
@@ -192,7 +194,8 @@ namespace System.Text
             Span<byte> bytes,
             out int charsConsumed,
             out int bytesWritten
-        ) {
+        )
+        {
             if (InternalFallback(chars, out charsConsumed))
             {
                 // There's data in the fallback buffer - pull it out now.
@@ -301,7 +304,8 @@ namespace System.Text
             if (
                 Rune.TryCreate(firstChar, out Rune value)
                 || Rune.TryCreate(firstChar, GetNextChar(), out value)
-            ) {
+            )
+            {
                 return value;
             }
 

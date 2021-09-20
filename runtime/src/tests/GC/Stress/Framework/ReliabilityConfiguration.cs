@@ -298,7 +298,8 @@ public class ReliabilityConfig : IEnumerable, IEnumerator
                                             if (
                                                 currentXML.Value.ToLower() == "true"
                                                 || currentXML.Value == "1"
-                                            ) {
+                                            )
+                                            {
                                                 skipInclude = true;
                                             }
                                             break;
@@ -393,7 +394,8 @@ public class ReliabilityConfig : IEnumerable, IEnumerator
                                 if (
                                     testLevelStack.Count != 0
                                     && (string)testLevelStack.Peek() != configHost
-                                ) {
+                                )
+                                {
                                     throw new ArgumentException(
                                         "The test tag can only appear as a child to the reliabilityFramework tag or a top level tag."
                                     );
@@ -404,7 +406,8 @@ public class ReliabilityConfig : IEnumerable, IEnumerator
                                     _curTestSet != null
                                     && foundTests != null
                                     && foundTests.Count > 0
-                                ) {
+                                )
+                                {
                                     _curTestSet.Tests = (ReliabilityTest[])foundTests.ToArray(
                                         typeof(ReliabilityTest)
                                     );
@@ -481,14 +484,16 @@ public class ReliabilityConfig : IEnumerable, IEnumerator
                                                 currentXML.Value == "true"
                                                 || currentXML.Value == "1"
                                                 || currentXML.Value == "yes"
-                                            ) {
+                                            )
+                                            {
                                                 _curTestSet.InstallDetours = true;
                                             }
                                             else if (
                                                 currentXML.Value == "false"
                                                 || currentXML.Value == "0"
                                                 || currentXML.Value == "no"
-                                            ) {
+                                            )
+                                            {
                                                 _curTestSet.InstallDetours = false;
                                             }
                                             else
@@ -511,7 +516,8 @@ public class ReliabilityConfig : IEnumerable, IEnumerator
                                                     currentXML.Value,
                                                     RFConfigOptions.RFConfigOptions_Test_MinMaxTestsUseCPUCount
                                                 )
-                                            ) {
+                                            )
+                                            {
                                                 string numProcessors =
                                                     Environment.GetEnvironmentVariable(
                                                         "NUMBER_OF_PROCESSORS"
@@ -645,7 +651,8 @@ public class ReliabilityConfig : IEnumerable, IEnumerator
                                                         null != _curTestSet.DefaultDebugger
                                                         || null
                                                             != _curTestSet.DefaultDebuggerOptions
-                                                    ) {
+                                                    )
+                                                    {
                                                         throw new Exception(
                                                             String.Format(
                                                                 "{0} specified with default debugger or debugger options.  If you want a debugger per test please use {1}=\"{2}\" ",
@@ -791,7 +798,8 @@ public class ReliabilityConfig : IEnumerable, IEnumerator
                                                         currentXML.Value.Length - 7
                                                     )
                                                     .ToLower() == "cdb.exe"
-                                            ) {
+                                            )
+                                            {
                                                 _curTestSet.DefaultDebugger = currentXML.Value;
                                             }
                                             else if (
@@ -800,7 +808,8 @@ public class ReliabilityConfig : IEnumerable, IEnumerator
                                                         currentXML.Value.Length - 7
                                                     )
                                                     .ToLower() == "windbg.exe"
-                                            ) {
+                                            )
+                                            {
                                                 _curTestSet.DefaultDebugger = currentXML.Value;
                                             }
                                             else if (currentXML.Value.ToLower() == "none")
@@ -880,7 +889,8 @@ public class ReliabilityConfig : IEnumerable, IEnumerator
                                 if (
                                     testLevelStack.Count == 0
                                     || (string)testLevelStack.Peek() != concurrentConfigTest
-                                ) {
+                                )
+                                {
                                     throw new ArgumentException(
                                         "The assembly tag can only appear as a child to the test tag (curent parent tag=="
                                             + (string)testLevelStack.Peek()
@@ -921,7 +931,8 @@ public class ReliabilityConfig : IEnumerable, IEnumerator
                                 if (
                                     testLevelStack.Count == 0
                                     || (string)testLevelStack.Peek() != concurrentConfigTest
-                                ) {
+                                )
+                                {
                                     throw new ArgumentException(
                                         "The assembly tag can only appear as a child to the test tag (curent parent tag=="
                                             + (string)testLevelStack.Peek()
@@ -942,7 +953,8 @@ public class ReliabilityConfig : IEnumerable, IEnumerator
                                     if (
                                         _curTestSet.DefaultTestStartMode
                                         != TestStartModeEnum.ProcessLoader
-                                    ) {
+                                    )
+                                    {
                                         throw new Exception(
                                             String.Format(
                                                 "{0} specified with default debugger or debugger options.  If you want a debugger per test please use {1}=\"{2}\" ",
@@ -960,7 +972,8 @@ public class ReliabilityConfig : IEnumerable, IEnumerator
                                     if (
                                         _curTestSet.DefaultTestStartMode
                                         != TestStartModeEnum.ProcessLoader
-                                    ) {
+                                    )
+                                    {
                                         throw new Exception(
                                             String.Format(
                                                 "{0} specified with default debugger or debugger options.  If you want a debugger per test please use {1}=\"{2}\" ",
@@ -995,14 +1008,16 @@ public class ReliabilityConfig : IEnumerable, IEnumerator
                                                 || currentXML.Value == "1"
                                                 || String.Compare(currentXML.Value, "yes", true)
                                                     == 0
-                                            ) {
+                                            )
+                                            {
                                                 rt.RequiresSDK = true;
                                             }
                                             else if (
                                                 String.Compare(currentXML.Value, "false", true) == 0
                                                 || currentXML.Value == "0"
                                                 || String.Compare(currentXML.Value, "no", true) == 0
-                                            ) {
+                                            )
+                                            {
                                                 rt.RequiresSDK = false;
                                             }
                                             else
@@ -1044,7 +1059,8 @@ public class ReliabilityConfig : IEnumerable, IEnumerator
                                             if (
                                                 TestStartModeEnum.ProcessLoader
                                                 != _curTestSet.DefaultTestStartMode
-                                            ) {
+                                            )
+                                            {
                                                 throw new Exception(
                                                     String.Format(
                                                         "{0} can only be set for test sets with {1}=\"{2}\" set.",
@@ -1061,7 +1077,8 @@ public class ReliabilityConfig : IEnumerable, IEnumerator
                                                         currentXML.Value.Length - 7
                                                     )
                                                     .ToLower() == "cdb.exe"
-                                            ) {
+                                            )
+                                            {
                                                 rt.Debugger = currentXML.Value;
                                             }
                                             else if (
@@ -1070,7 +1087,8 @@ public class ReliabilityConfig : IEnumerable, IEnumerator
                                                         currentXML.Value.Length - 7
                                                     )
                                                     .ToLower() == "windbg.exe"
-                                            ) {
+                                            )
+                                            {
                                                 rt.Debugger = currentXML.Value;
                                             }
                                             else if (currentXML.Value.ToLower() == "none")
@@ -1090,7 +1108,8 @@ public class ReliabilityConfig : IEnumerable, IEnumerator
                                             if (
                                                 TestStartModeEnum.ProcessLoader
                                                 != _curTestSet.DefaultTestStartMode
-                                            ) {
+                                            )
+                                            {
                                                 throw new Exception(
                                                     String.Format(
                                                         "{0} can only be set for test sets with {1}=\"{2}\" set.",
@@ -1185,7 +1204,8 @@ public class ReliabilityConfig : IEnumerable, IEnumerator
                                                     if (
                                                         null != rt.Debugger
                                                         || null != rt.DebuggerOptions
-                                                    ) {
+                                                    )
+                                                    {
                                                         throw new Exception(
                                                             String.Format(
                                                                 "{0} specified with debugger or debugger options.  If you want a debugger per test please use {1}=\"{2}\" ",
@@ -1243,7 +1263,8 @@ public class ReliabilityConfig : IEnumerable, IEnumerator
                                                             groupName,
                                                             false
                                                         ) == 0
-                                                    ) {
+                                                    )
+                                                    {
                                                         test.Group.Add(rt);
                                                         rt.Group = test.Group;
                                                         break;
@@ -1318,7 +1339,8 @@ public class ReliabilityConfig : IEnumerable, IEnumerator
                                         rt.RequiresSDK == true
                                         && Environment.GetEnvironmentVariable("INSTALL_SDK") == null
                                     )
-                                ) {
+                                )
+                                {
                                     break;
                                 }
 
@@ -1328,7 +1350,8 @@ public class ReliabilityConfig : IEnumerable, IEnumerator
                                         == AppDomainLoaderMode.FullIsolation
                                     || _curTestSet.AssemblyLoadContextLoaderMode
                                         == AssemblyLoadContextLoaderMode.FullIsolation
-                                ) {
+                                )
+                                {
                                     // in this mode each copy of the test is ran in it's own app domain or AssemblyLoadContext,
                                     // fully isolated from all other copies of the test.  If the user
                                     // specified a cloning level we need to duplicate the test.
@@ -1340,7 +1363,8 @@ public class ReliabilityConfig : IEnumerable, IEnumerator
                                         == AppDomainLoaderMode.RoundRobin
                                     || _curTestSet.AssemblyLoadContextLoaderMode
                                         == AssemblyLoadContextLoaderMode.RoundRobin
-                                ) {
+                                )
+                                {
                                     // In this mode each test is ran in an app domain w/ other tests.
                                     testCopies = rt.ConcurrentCopies;
                                     rt.ConcurrentCopies = 1;
@@ -1376,7 +1400,8 @@ public class ReliabilityConfig : IEnumerable, IEnumerator
                                             if (
                                                 ((ReliabilityTest)foundTests[i]).RefOrID
                                                 == rt.RefOrID
-                                            ) {
+                                            )
+                                            {
                                                 rt.RefOrID = rt.RefOrID + "_" + i.ToString();
                                                 fRetry = true;
                                                 break;
@@ -1428,7 +1453,8 @@ public class ReliabilityConfig : IEnumerable, IEnumerator
                             currentXML.Name != configIncludes
                             && currentXML.Name != configInclude
                             && currentXML.Name != configHost
-                        ) {
+                        )
+                        {
                             testLevelStack.Pop();
                         }
                         break;

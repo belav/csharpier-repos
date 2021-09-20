@@ -37,7 +37,8 @@ namespace Microsoft.AspNetCore.Server.HttpSys
                         return Task.FromResult(0);
                     }
                 )
-            ) {
+            )
+            {
                 string response = await SendRequestAsync(address, "Hello World");
                 Assert.Equal("Hello World", response);
             }
@@ -59,7 +60,8 @@ namespace Microsoft.AspNetCore.Server.HttpSys
                         await httpContext.Response.Body.WriteAsync(input, 0, read);
                     }
                 )
-            ) {
+            )
+            {
                 string response = await SendRequestAsync(address, "Hello World");
                 Assert.Equal("Hello World", response);
             }
@@ -85,7 +87,8 @@ namespace Microsoft.AspNetCore.Server.HttpSys
                         return Task.FromResult(0);
                     }
                 )
-            ) {
+            )
+            {
                 string response = await SendRequestAsync(address, "Hello World");
                 Assert.Equal("Hello World", response);
             }
@@ -134,7 +137,8 @@ namespace Microsoft.AspNetCore.Server.HttpSys
                         return Task.FromResult(0);
                     }
                 )
-            ) {
+            )
+            {
                 string response = await SendRequestAsync(address, "Hello World");
                 Assert.Equal(string.Empty, response);
             }
@@ -161,7 +165,8 @@ namespace Microsoft.AspNetCore.Server.HttpSys
                         return Task.FromResult(0);
                     }
                 )
-            ) {
+            )
+            {
                 string response = await SendRequestAsync(address, content);
                 Assert.Equal(string.Empty, response);
             }
@@ -185,7 +190,8 @@ namespace Microsoft.AspNetCore.Server.HttpSys
                         Assert.Equal(5, read);
                     }
                 )
-            ) {
+            )
+            {
                 string response = await SendRequestAsync(address, content);
                 Assert.Equal(string.Empty, response);
             }
@@ -209,7 +215,8 @@ namespace Microsoft.AspNetCore.Server.HttpSys
                         await httpContext.Response.Body.WriteAsync(input, 0, 10);
                     }
                 )
-            ) {
+            )
+            {
                 string response = await SendSocketRequestAsync(address);
                 string[] lines = response.Split('\r', '\n');
                 Assert.Equal(13, lines.Length);
@@ -291,7 +298,8 @@ namespace Microsoft.AspNetCore.Server.HttpSys
             protected async override Task SerializeToStreamAsync(
                 Stream stream,
                 TransportContext context
-            ) {
+            )
+            {
                 await stream.WriteAsync(new byte[5], 0, 5);
                 await stream.FlushAsync();
                 Assert.True(await Block.WaitAsync(TimeSpan.FromSeconds(10)));

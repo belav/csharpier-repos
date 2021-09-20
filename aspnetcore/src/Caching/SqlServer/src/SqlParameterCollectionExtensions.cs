@@ -20,7 +20,8 @@ namespace Microsoft.Extensions.Caching.SqlServer
         public static SqlParameterCollection AddCacheItemId(
             this SqlParameterCollection parameters,
             string value
-        ) {
+        )
+        {
             return parameters.AddWithValue(
                 Columns.Names.CacheItemId,
                 SqlDbType.NVarChar,
@@ -32,7 +33,8 @@ namespace Microsoft.Extensions.Caching.SqlServer
         public static SqlParameterCollection AddCacheItemValue(
             this SqlParameterCollection parameters,
             byte[] value
-        ) {
+        )
+        {
             if (value != null && value.Length < DefaultValueColumnWidth)
             {
                 return parameters.AddWithValue(
@@ -56,7 +58,8 @@ namespace Microsoft.Extensions.Caching.SqlServer
         public static SqlParameterCollection AddSlidingExpirationInSeconds(
             this SqlParameterCollection parameters,
             TimeSpan? value
-        ) {
+        )
+        {
             if (value.HasValue)
             {
                 return parameters.AddWithValue(
@@ -78,7 +81,8 @@ namespace Microsoft.Extensions.Caching.SqlServer
         public static SqlParameterCollection AddAbsoluteExpiration(
             this SqlParameterCollection parameters,
             DateTimeOffset? utcTime
-        ) {
+        )
+        {
             if (utcTime.HasValue)
             {
                 return parameters.AddWithValue(
@@ -102,7 +106,8 @@ namespace Microsoft.Extensions.Caching.SqlServer
             string parameterName,
             SqlDbType dbType,
             object value
-        ) {
+        )
+        {
             var parameter = new SqlParameter(parameterName, dbType);
             parameter.Value = value;
             parameters.Add(parameter);
@@ -116,7 +121,8 @@ namespace Microsoft.Extensions.Caching.SqlServer
             SqlDbType dbType,
             int size,
             object value
-        ) {
+        )
+        {
             var parameter = new SqlParameter(parameterName, dbType, size);
             parameter.Value = value;
             parameters.Add(parameter);

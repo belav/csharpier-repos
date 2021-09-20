@@ -78,7 +78,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Tests
 
                 while (
                     (received = await context.Request.Body.ReadAsync(buffer, 0, buffer.Length)) > 0
-                ) {
+                )
+                {
                     await context.Response.Body.WriteAsync(buffer, 0, received);
                 }
             };
@@ -120,7 +121,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Tests
             MethodInfo methodInfo,
             object[] testMethodArguments,
             ITestOutputHelper testOutputHelper
-        ) {
+        )
+        {
             base.Initialize(context, methodInfo, testMethodArguments, testOutputHelper);
 
             _serviceContext = new TestServiceContext(LoggerFactory, _mockKestrelTrace.Object)
@@ -214,7 +216,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Tests
 
         internal async ValueTask<Http3RequestStream> InitializeConnectionAndStreamsAsync(
             RequestDelegate application
-        ) {
+        )
+        {
             await InitializeConnectionAsync(application);
 
             OutboundControlStream = await CreateControlStream();
@@ -385,7 +388,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Tests
                 Http3RawFrame frame,
                 Memory<byte> data,
                 bool endStream = false
-            ) {
+            )
+            {
                 var outputWriter = _pair.Application.Output;
                 frame.Length = data.Length;
                 Http3FrameWriter.WriteHeader(frame, outputWriter);
@@ -451,7 +455,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Tests
             public async Task<bool> SendHeadersAsync(
                 IEnumerable<KeyValuePair<string, string>> headers,
                 bool endStream = false
-            ) {
+            )
+            {
                 var frame = new Http3RawFrame();
                 frame.PrepareHeaders();
                 var buffer = _headerEncodingBuffer.AsMemory();
@@ -525,7 +530,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Tests
             internal async Task WaitForStreamErrorAsync(
                 Http3ErrorCode protocolError,
                 string expectedErrorMessage
-            ) {
+            )
+            {
                 var readResult = await _pair.Application.Input.ReadAsync().DefaultTimeout();
                 _testBase.Logger.LogTrace("Input is completed");
 
@@ -604,7 +610,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Tests
             internal async Task SendSettingsAsync(
                 List<Http3PeerSetting> settings,
                 bool endStream = false
-            ) {
+            )
+            {
                 var frame = new Http3RawFrame();
                 frame.PrepareSettings();
 
@@ -629,7 +636,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Tests
             internal static void WriteSettings(
                 List<Http3PeerSetting> settings,
                 Span<byte> destination
-            ) {
+            )
+            {
                 foreach (var setting in settings)
                 {
                     var parameterLength = VariableLengthIntegerHelper.WriteInteger(
@@ -738,7 +746,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Tests
 
             public override async ValueTask<ConnectionContext> AcceptAsync(
                 CancellationToken cancellationToken = default
-            ) {
+            )
+            {
                 while (await ToServerAcceptQueue.Reader.WaitToReadAsync())
                 {
                     while (ToServerAcceptQueue.Reader.TryRead(out var connection))
@@ -753,7 +762,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Tests
             public override ValueTask<ConnectionContext> ConnectAsync(
                 IFeatureCollection features = null,
                 CancellationToken cancellationToken = default
-            ) {
+            )
+            {
                 var stream = new Http3ControlStream(_testBase);
                 ToClientAcceptQueue.Writer.WriteAsync(stream);
                 return new ValueTask<ConnectionContext>(stream.StreamContext);
@@ -778,7 +788,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Tests
                 bool canWrite,
                 DuplexPipePair pair,
                 IProtocolErrorCodeFeature feature
-            ) {
+            )
+            {
                 _pair = pair;
                 Features = new FeatureCollection();
                 Features.Set<IStreamDirectionFeature>(this);

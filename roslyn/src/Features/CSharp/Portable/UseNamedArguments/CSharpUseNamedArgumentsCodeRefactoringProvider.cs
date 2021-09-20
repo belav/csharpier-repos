@@ -47,7 +47,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UseNamedArguments
                 ImmutableArray<IParameterSymbol> parameters,
                 TSyntax argument,
                 SemanticModel semanticModel
-            ) {
+            )
+            {
                 // There is no direct way to tell if an implicit range or index indexer was used.
                 // The heuristic we use here is to check if the parameter doesn't fit the method it's being used with.
                 // The easiest way to check that is to see if the argType only has at most an explicit conversion
@@ -61,7 +62,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UseNamedArguments
                             ContainingNamespace: { IsGlobalNamespace: true }
                         }
                     && (argType.Name == "Range" || argType.Name == "Index")
-                ) {
+                )
+                {
                     var conversion = semanticModel.Compilation.ClassifyConversion(
                         argType,
                         parameters[0].Type

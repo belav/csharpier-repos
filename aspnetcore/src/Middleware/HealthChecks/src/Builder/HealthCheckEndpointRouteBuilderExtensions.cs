@@ -26,7 +26,8 @@ namespace Microsoft.AspNetCore.Builder
         public static IEndpointConventionBuilder MapHealthChecks(
             this IEndpointRouteBuilder endpoints,
             string pattern
-        ) {
+        )
+        {
             if (endpoints == null)
             {
                 throw new ArgumentNullException(nameof(endpoints));
@@ -46,7 +47,8 @@ namespace Microsoft.AspNetCore.Builder
             this IEndpointRouteBuilder endpoints,
             string pattern,
             HealthCheckOptions options
-        ) {
+        )
+        {
             if (endpoints == null)
             {
                 throw new ArgumentNullException(nameof(endpoints));
@@ -64,7 +66,8 @@ namespace Microsoft.AspNetCore.Builder
             IEndpointRouteBuilder endpoints,
             string pattern,
             HealthCheckOptions? options
-        ) {
+        )
+        {
             if (endpoints.ServiceProvider.GetService(typeof(HealthCheckService)) == null)
             {
                 throw new InvalidOperationException(

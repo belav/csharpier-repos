@@ -45,7 +45,8 @@ namespace Internal.Cryptography.Pal
             protected override byte[] ExportPkcs8(
                 ICertificatePalCore certificatePal,
                 ReadOnlySpan<char> password
-            ) {
+            )
+            {
                 AppleCertificatePal pal = (AppleCertificatePal)certificatePal;
                 return pal.ExportPkcs8(password);
             }

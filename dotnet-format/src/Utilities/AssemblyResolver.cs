@@ -18,7 +18,8 @@ namespace Microsoft.CodeAnalysis.Tools.Utilities
             string searchPath,
             Dictionary<string, Assembly>? knownAssemblyPaths = null,
             ILogger? logger = null
-        ) {
+        )
+        {
             logger?.LogTrace($"Trying to resolve assembly {assemblyName.FullName}.");
 
             foreach (
@@ -30,7 +31,8 @@ namespace Microsoft.CodeAnalysis.Tools.Utilities
                     // of the assembly search directories, but fall back to the
                     // bare search directory if that fails.
                     : new[] { assemblyName.CultureName, string.Empty }
-            ) {
+            )
+            {
                 foreach (var extension in s_extensions)
                 {
                     var candidatePath = Path.Combine(

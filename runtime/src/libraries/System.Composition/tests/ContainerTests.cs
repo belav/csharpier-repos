@@ -22,7 +22,8 @@ namespace System.Composition.UnitTests
         protected static CompositionContext CreateContainer(
             ConventionBuilder rb,
             params Type[] types
-        ) {
+        )
+        {
             return new ContainerConfiguration().WithParts(types)
                 .WithDefaultConventions(rb)
                 .CreateContainer();

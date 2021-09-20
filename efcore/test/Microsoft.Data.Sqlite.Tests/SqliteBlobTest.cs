@@ -148,7 +148,8 @@ namespace Microsoft.Data.Sqlite
             long initialPosition,
             int offset,
             int count
-        ) {
+        )
+        {
             using (var stream = CreateStream())
             {
                 stream.Position = initialPosition;
@@ -316,7 +317,8 @@ namespace Microsoft.Data.Sqlite
             byte[] buffer,
             int offset,
             int count
-        ) {
+        )
+        {
             using (var stream = CreateStream())
             {
                 stream.Position = initialPosition;

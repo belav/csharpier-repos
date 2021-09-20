@@ -24,7 +24,8 @@ namespace Roslyn.Test.Utilities
             IEnumerable<KeyValuePair<string, string>> additionalEnvironmentVars = null,
             string stdInput = null,
             bool redirectStandardInput = false
-        ) {
+        )
+        {
             if (fileName == null)
                 throw new ArgumentNullException(nameof(fileName));
 
@@ -102,7 +103,8 @@ namespace Roslyn.Test.Utilities
             string fileName,
             string arguments,
             string workingDirectory = null
-        ) {
+        )
+        {
             if (fileName == null)
             {
                 throw new ArgumentNullException(nameof(fileName));
@@ -129,7 +131,8 @@ namespace Roslyn.Test.Utilities
             string arguments = null,
             int expectedRetCode = 0,
             string startFolder = null
-        ) {
+        )
+        {
             ProcessStartInfo startInfo = new ProcessStartInfo(exeFileName);
             if (arguments != null)
             {

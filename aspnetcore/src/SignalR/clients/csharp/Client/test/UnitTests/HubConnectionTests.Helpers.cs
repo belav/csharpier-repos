@@ -15,7 +15,8 @@ namespace Microsoft.AspNetCore.SignalR.Client.Tests
             TestConnection connection,
             IHubProtocol protocol = null,
             ILoggerFactory loggerFactory = null
-        ) {
+        )
+        {
             var builder = new HubConnectionBuilder().WithUrl("http://example.com");
 
             var delegateConnectionFactory = new DelegateConnectionFactory(

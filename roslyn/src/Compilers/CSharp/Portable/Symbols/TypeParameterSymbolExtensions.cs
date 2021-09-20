@@ -11,7 +11,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
         public static bool DependsOn(
             this TypeParameterSymbol typeParameter1,
             TypeParameterSymbol typeParameter2
-        ) {
+        )
+        {
             Debug.Assert((object)typeParameter1 != null);
             Debug.Assert((object)typeParameter2 != null);
 

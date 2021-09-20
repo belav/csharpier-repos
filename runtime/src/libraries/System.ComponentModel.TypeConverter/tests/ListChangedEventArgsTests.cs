@@ -64,7 +64,8 @@ namespace System.ComponentModel.Tests
         public void Ctor_ListChangedType_PropertyDescriptor(
             ListChangedType listChangedType,
             PropertyDescriptor propDesc
-        ) {
+        )
+        {
             var args = new ListChangedEventArgs(listChangedType, propDesc);
             Assert.Equal(listChangedType, args.ListChangedType);
             Assert.Equal(0, args.NewIndex);
@@ -87,7 +88,8 @@ namespace System.ComponentModel.Tests
             ListChangedType listChangedType,
             int newIndex,
             int oldIndex
-        ) {
+        )
+        {
             var args = new ListChangedEventArgs(listChangedType, newIndex, oldIndex);
             Assert.Equal(listChangedType, args.ListChangedType);
             Assert.Equal(newIndex, args.NewIndex);
@@ -155,7 +157,8 @@ namespace System.ComponentModel.Tests
             ListChangedType listChangedType,
             int newIndex,
             PropertyDescriptor propDesc
-        ) {
+        )
+        {
             var args = new ListChangedEventArgs(listChangedType, newIndex, propDesc);
             Assert.Equal(listChangedType, args.ListChangedType);
             Assert.Equal(newIndex, args.NewIndex);

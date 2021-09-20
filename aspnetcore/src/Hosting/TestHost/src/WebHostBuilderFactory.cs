@@ -21,7 +21,8 @@ namespace Microsoft.AspNetCore.TestHost
         public static IWebHostBuilder? CreateFromAssemblyEntryPoint(
             Assembly assembly,
             string[] args
-        ) {
+        )
+        {
             var factory = HostFactoryResolver.ResolveWebHostBuilderFactory<IWebHostBuilder>(
                 assembly
             );

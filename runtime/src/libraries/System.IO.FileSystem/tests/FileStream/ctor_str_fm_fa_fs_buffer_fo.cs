@@ -21,7 +21,8 @@ namespace System.IO.Tests
             FileAccess access,
             FileShare share,
             int bufferSize
-        ) {
+        )
+        {
             return CreateFileStream(path, mode, access, share, bufferSize, FileOptions.None);
         }
 
@@ -32,7 +33,8 @@ namespace System.IO.Tests
             FileShare share,
             int bufferSize,
             FileOptions options
-        ) {
+        )
+        {
             return new FileStream(path, mode, access, share, bufferSize, options);
         }
 
@@ -90,7 +92,8 @@ namespace System.IO.Tests
                     c_DefaultBufferSize,
                     option
                 )
-            ) {
+            )
+            {
                 // make sure we can write, seek, and read data with this option set
                 fs.Write(data, 0, data.Length);
                 fs.Position = 0;
@@ -149,7 +152,8 @@ namespace System.IO.Tests
                     0x1000,
                     options
                 )
-            ) {
+            )
+            {
                 Assert.True(File.Exists(path));
             }
             Assert.False(File.Exists(path));

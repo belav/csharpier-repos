@@ -44,7 +44,8 @@ namespace WebApiHelpPageWebHost.UnitTest
             Type type,
             string expectedModelName,
             string expectedDocumentation
-        ) {
+        )
+        {
             HttpConfiguration config = new HttpConfiguration();
             ModelDescriptionGenerator modelGenerator = new ModelDescriptionGenerator(config);
 
@@ -131,7 +132,8 @@ namespace WebApiHelpPageWebHost.UnitTest
             Type dictionaryType,
             Type keyType,
             Type valueType
-        ) {
+        )
+        {
             HttpConfiguration config = new HttpConfiguration();
             ModelDescriptionGenerator modelGenerator = new ModelDescriptionGenerator(config);
 
@@ -157,7 +159,8 @@ namespace WebApiHelpPageWebHost.UnitTest
             Type modelType,
             Type keyType,
             Type valueType
-        ) {
+        )
+        {
             HttpConfiguration config = new HttpConfiguration();
             ModelDescriptionGenerator modelGenerator = new ModelDescriptionGenerator(config);
 
@@ -278,7 +281,8 @@ namespace WebApiHelpPageWebHost.UnitTest
         public void CreateModelDescription_ComplexType_ReturnsExpectedModelName(
             Type type,
             string expectedModelName
-        ) {
+        )
+        {
             HttpConfiguration config = new HttpConfiguration();
             ModelDescriptionGenerator modelGenerator = new ModelDescriptionGenerator(config);
 
@@ -358,7 +362,8 @@ namespace WebApiHelpPageWebHost.UnitTest
         public void CreateModelDescription_ComplexType_WithAnnotation(
             Type type,
             Dictionary<string, string[]> annotationMapping
-        ) {
+        )
+        {
             HttpConfiguration config = new HttpConfiguration();
             ModelDescriptionGenerator modelGenerator = new ModelDescriptionGenerator(config);
 
@@ -415,7 +420,8 @@ namespace WebApiHelpPageWebHost.UnitTest
         public void CreateModelDescription_ComplexType_WithDocumentation(
             Type type,
             Dictionary<string, string> documentationMapping
-        ) {
+        )
+        {
             HttpConfiguration config = new HttpConfiguration();
             config.SetDocumentationProvider(
                 new XmlDocumentationProvider("WebApiHelpPage.Test.XML")

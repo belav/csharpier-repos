@@ -146,7 +146,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Completion.Providers
             SyntaxTree tree,
             int position,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             if (tree.IsInNonUserCode(position, cancellationToken))
             {
                 return default;

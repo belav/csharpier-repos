@@ -254,14 +254,16 @@ namespace Microsoft.AspNetCore.Mvc.ViewFeatures
         void ICollection<KeyValuePair<string, object?>>.CopyTo(
             KeyValuePair<string, object?>[] array,
             int index
-        ) {
+        )
+        {
             Load();
             ((ICollection<KeyValuePair<string, object?>>)_data).CopyTo(array, index);
         }
 
         void ICollection<KeyValuePair<string, object?>>.Add(
             KeyValuePair<string, object?> keyValuePair
-        ) {
+        )
+        {
             Load();
             _initialKeys.Add(keyValuePair.Key);
             ((ICollection<KeyValuePair<string, object?>>)_data).Add(keyValuePair);
@@ -269,14 +271,16 @@ namespace Microsoft.AspNetCore.Mvc.ViewFeatures
 
         bool ICollection<KeyValuePair<string, object?>>.Contains(
             KeyValuePair<string, object?> keyValuePair
-        ) {
+        )
+        {
             Load();
             return ((ICollection<KeyValuePair<string, object?>>)_data).Contains(keyValuePair);
         }
 
         bool ICollection<KeyValuePair<string, object?>>.Remove(
             KeyValuePair<string, object?> keyValuePair
-        ) {
+        )
+        {
             Load();
             _initialKeys.Remove(keyValuePair.Key);
             return ((ICollection<KeyValuePair<string, object?>>)_data).Remove(keyValuePair);

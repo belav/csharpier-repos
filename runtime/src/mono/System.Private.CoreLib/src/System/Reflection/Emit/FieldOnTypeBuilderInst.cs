@@ -123,7 +123,8 @@ namespace System.Reflection.Emit
             BindingFlags invokeAttr,
             Binder? binder,
             CultureInfo? culture
-        ) {
+        )
+        {
             throw new NotSupportedException();
         }
 

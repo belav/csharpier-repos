@@ -156,7 +156,8 @@ namespace Microsoft.AspNetCore.Mvc.Filters
 
         private static AuthorizationFilterContext CreateAuthorizationFilterContext(
             IFilterMetadata[] filters
-        ) {
+        )
+        {
             return new AuthorizationFilterContext(CreateActionContext(), filters);
         }
 

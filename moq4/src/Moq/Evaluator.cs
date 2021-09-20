@@ -24,7 +24,8 @@ namespace Moq
         public static Expression PartialEval(
             Expression expression,
             Func<Expression, bool> fnCanBeEvaluated
-        ) {
+        )
+        {
             return new SubtreeEvaluator(new Nominator(fnCanBeEvaluated).Nominate(expression)).Eval(
                 expression
             );

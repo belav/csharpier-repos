@@ -68,7 +68,8 @@ namespace System.Linq.Expressions
             LabelTarget? breakLabel,
             LabelTarget? continueLabel,
             Expression body
-        ) {
+        )
+        {
             if (breakLabel == BreakLabel && continueLabel == ContinueLabel && body == Body)
             {
                 return this;
@@ -111,7 +112,8 @@ namespace System.Linq.Expressions
             Expression body,
             LabelTarget? @break,
             LabelTarget? @continue
-        ) {
+        )
+        {
             ExpressionUtils.RequiresCanRead(body, nameof(body));
             if (@continue != null && @continue.Type != typeof(void))
                 throw Error.LabelTypeMustBeVoid(nameof(@continue));

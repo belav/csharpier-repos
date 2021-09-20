@@ -52,7 +52,8 @@ namespace Microsoft.AspNetCore.StaticFiles
             IFileProvider fileProvider,
             string? contentType,
             PathString subPath
-        ) {
+        )
+        {
             _context = context;
             _options = options;
             _request = context.Request;
@@ -167,7 +168,8 @@ namespace Microsoft.AspNetCore.StaticFiles
                     if (
                         etag.Equals(EntityTagHeaderValue.Any)
                         || etag.Compare(_etag, useStrongComparison: true)
-                    ) {
+                    )
+                    {
                         _ifMatchState = PreconditionState.ShouldProcess;
                         break;
                     }
@@ -184,7 +186,8 @@ namespace Microsoft.AspNetCore.StaticFiles
                     if (
                         etag.Equals(EntityTagHeaderValue.Any)
                         || etag.Compare(_etag, useStrongComparison: true)
-                    ) {
+                    )
+                    {
                         _ifNoneMatchState = PreconditionState.NotModified;
                         break;
                     }
@@ -240,7 +243,8 @@ namespace Microsoft.AspNetCore.StaticFiles
                     _etag != null
                     && ifRangeHeader.EntityTag != null
                     && !ifRangeHeader.EntityTag.Compare(_etag, useStrongComparison: true)
-                ) {
+                )
+                {
                     IsRangeRequest = false;
                 }
             }
@@ -441,7 +445,8 @@ namespace Microsoft.AspNetCore.StaticFiles
             RangeItemHeaderValue range,
             out long start,
             out long length
-        ) {
+        )
+        {
             start = range.From!.Value;
             var end = range.To!.Value;
             length = end - start + 1;

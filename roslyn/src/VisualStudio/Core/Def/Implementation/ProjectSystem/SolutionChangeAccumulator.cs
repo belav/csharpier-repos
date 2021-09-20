@@ -37,7 +37,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.ProjectSystem
             Solution newSolution,
             WorkspaceChangeKind changeKind,
             IEnumerable<DocumentId> documentIds
-        ) {
+        )
+        {
             // If the newSolution is the same as the current solution, there's nothing to actually do
             if (Solution == newSolution)
             {
@@ -86,7 +87,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.ProjectSystem
             Solution solution,
             WorkspaceChangeKind removeDocumentChangeKind,
             IEnumerable<DocumentId> documentIdsRemoved
-        ) {
+        )
+        {
             UpdateSolutionForDocumentAction(solution, removeDocumentChangeKind, documentIdsRemoved);
 
             _documentIdsRemoved.AddRange(documentIdsRemoved);

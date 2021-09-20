@@ -23,7 +23,8 @@ namespace System.IO.Pipelines.Tests
             int offset,
             int count,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             await WaitForWriteTask.Task;
 
             cancellationToken.ThrowIfCancellationRequested();
@@ -33,7 +34,8 @@ namespace System.IO.Pipelines.Tests
         public override async ValueTask WriteAsync(
             ReadOnlyMemory<byte> buffer,
             CancellationToken cancellationToken = default
-        ) {
+        )
+        {
             await WaitForWriteTask.Task;
 
             cancellationToken.ThrowIfCancellationRequested();

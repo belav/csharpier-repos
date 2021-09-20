@@ -69,7 +69,8 @@ namespace Microsoft.CodeAnalysis.FindSymbols
             Func<INamedTypeSymbol, bool> shouldContinueSearching,
             bool transitive,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             cancellationToken.ThrowIfCancellationRequested();
 
             type = type.OriginalDefinition;
@@ -163,7 +164,8 @@ namespace Microsoft.CodeAnalysis.FindSymbols
             Func<INamedTypeSymbol, bool> shouldContinueSearching,
             bool transitive,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             cancellationToken.ThrowIfCancellationRequested();
 
             Debug.Assert(project.SupportsCompilation);
@@ -237,7 +239,8 @@ namespace Microsoft.CodeAnalysis.FindSymbols
             SymbolSet foundTypes,
             Func<Location, bool> assert,
             string message
-        ) {
+        )
+        {
             foreach (var type in foundTypes)
                 Debug.Assert(type.Locations.All(assert), message);
         }
@@ -253,7 +256,8 @@ namespace Microsoft.CodeAnalysis.FindSymbols
             SymbolSet foundTypes,
             SymbolSet currentTypes,
             Func<INamedTypeSymbol, bool> shouldContinueSearching
-        ) {
+        )
+        {
             // Directly enumerate to avoid IEnumerator allocations.
             foreach (var type in foundTypes)
             {
@@ -267,7 +271,8 @@ namespace Microsoft.CodeAnalysis.FindSymbols
             Solution solution,
             bool searchInMetadata,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var dependencyGraph = solution.GetProjectDependencyGraph();
 
             if (searchInMetadata)
@@ -316,7 +321,8 @@ namespace Microsoft.CodeAnalysis.FindSymbols
         private static IEnumerable<ProjectId> GetProjectsThatCouldReferenceType(
             ProjectDependencyGraph dependencyGraph,
             Project project
-        ) {
+        )
+        {
             // Get all the projects that depend on 'project' as well as 'project' itself.
             return dependencyGraph.GetProjectsThatTransitivelyDependOnThisProject(project.Id)
                 .Concat(project.Id);
@@ -326,7 +332,8 @@ namespace Microsoft.CodeAnalysis.FindSymbols
             Solution solution,
             IImmutableSet<Project> projects,
             IEnumerable<ProjectId> projectsThatCouldReferenceType
-        ) {
+        )
+        {
             var projectsToExamine = GetProjectsToExamineWorker(
                 solution,
                 projects,
@@ -342,7 +349,8 @@ namespace Microsoft.CodeAnalysis.FindSymbols
         private static List<Project> OrderTopologically(
             Solution solution,
             IEnumerable<Project> projectsToExamine
-        ) {
+        )
+        {
             var order = new Dictionary<ProjectId, int>(capacity: solution.ProjectIds.Count);
 
             var index = 0;
@@ -361,7 +369,8 @@ namespace Microsoft.CodeAnalysis.FindSymbols
             Solution solution,
             IImmutableSet<Project> projects,
             IEnumerable<ProjectId> projectsThatCouldReferenceType
-        ) {
+        )
+        {
             var dependencyGraph = solution.GetProjectDependencyGraph();
 
             // Take the projects that were passed in, and find all the projects that
@@ -404,7 +413,8 @@ namespace Microsoft.CodeAnalysis.FindSymbols
             Func<INamedTypeSymbol, bool> shouldContinueSearching,
             bool transitive,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             Debug.Assert(project.SupportsCompilation);
 
             if (currentMetadataTypes.Count == 0)
@@ -458,7 +468,8 @@ namespace Microsoft.CodeAnalysis.FindSymbols
             PortableExecutableReference reference,
             SymbolSet result,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             cancellationToken.ThrowIfCancellationRequested();
 
             // We store an index in SymbolTreeInfo of the *simple* metadata type name
@@ -491,12 +502,14 @@ namespace Microsoft.CodeAnalysis.FindSymbols
                         compilation,
                         cancellationToken
                     )
-                ) {
+                )
+                {
                     if (
                         derivedType != null
                         && derivedType.Locations.Any(s_isInMetadata)
                         && typeMatches(derivedType, metadataTypes)
-                    ) {
+                    )
+                    {
                         result.Add(derivedType);
                     }
                 }
@@ -528,7 +541,8 @@ namespace Microsoft.CodeAnalysis.FindSymbols
             Func<INamedTypeSymbol, bool> shouldContinueSearching,
             bool transitive,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             cancellationToken.ThrowIfCancellationRequested();
 
             // We're going to be sweeping over this project over and over until we reach a
@@ -630,7 +644,8 @@ namespace Microsoft.CodeAnalysis.FindSymbols
             SymbolSet tempBuffer,
             bool transitive,
             Func<INamedTypeSymbol, bool> shouldContinueSearching
-        ) {
+        )
+        {
             // Clear out the information about the types we're looking for.  We'll
             // fill these in if we discover any more types that we need to keep searching
             // for.
@@ -658,7 +673,8 @@ namespace Microsoft.CodeAnalysis.FindSymbols
             SymbolSet result,
             string name,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             foreach (var (document, info) in index.NamedTypes[name])
             {
                 cancellationToken.ThrowIfCancellationRequested();
@@ -671,7 +687,8 @@ namespace Microsoft.CodeAnalysis.FindSymbols
                 if (
                     resolvedType is INamedTypeSymbol namedType
                     && typeMatches(namedType, typesToSearchFor)
-                ) {
+                )
+                {
                     result.Add(namedType);
                 }
             }
@@ -683,7 +700,8 @@ namespace Microsoft.CodeAnalysis.FindSymbols
             SymbolSet result,
             Func<INamedTypeSymbol, bool>? predicateOpt,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             foreach (var (document, infos) in documentToInfos)
             {
                 cancellationToken.ThrowIfCancellationRequested();
@@ -711,7 +729,8 @@ namespace Microsoft.CodeAnalysis.FindSymbols
 
         public static PooledDisposer<PooledHashSet<INamedTypeSymbol>> GetSymbolSet(
             out SymbolSet instance
-        ) {
+        )
+        {
             var pooledInstance = s_symbolSetPool.Allocate();
             Debug.Assert(pooledInstance.Count == 0);
             instance = pooledInstance;

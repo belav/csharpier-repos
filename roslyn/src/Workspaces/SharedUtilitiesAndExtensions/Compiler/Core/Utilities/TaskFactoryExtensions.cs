@@ -29,7 +29,8 @@ namespace Roslyn.Utilities
             Action action,
             CancellationToken cancellationToken,
             TaskScheduler scheduler
-        ) {
+        )
+        {
             void wrapped()
             {
                 try
@@ -60,7 +61,8 @@ namespace Roslyn.Utilities
             Func<TResult> func,
             CancellationToken cancellationToken,
             TaskScheduler scheduler
-        ) {
+        )
+        {
             TResult wrapped()
             {
                 try
@@ -86,7 +88,8 @@ namespace Roslyn.Utilities
             Func<Task> actionAsync,
             CancellationToken cancellationToken,
             TaskScheduler scheduler
-        ) {
+        )
+        {
             // The one and only place we can call StartNew<>().
             var task = factory.StartNew(
                     actionAsync,
@@ -104,7 +107,8 @@ namespace Roslyn.Utilities
             Func<Task<TResult>> funcAsync,
             CancellationToken cancellationToken,
             TaskScheduler scheduler
-        ) {
+        )
+        {
             // The one and only place we can call StartNew<>().
             var task = factory.StartNew(
                     funcAsync,

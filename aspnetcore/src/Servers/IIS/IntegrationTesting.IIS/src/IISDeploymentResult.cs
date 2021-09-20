@@ -20,13 +20,15 @@ namespace Microsoft.AspNetCore.Server.IntegrationTesting.IIS
             string contentRoot,
             CancellationToken hostShutdownToken,
             Process hostProcess
-        ) : base(
-            loggerFactory,
-            deploymentParameters,
-            applicationBaseUri,
-            contentRoot,
-            hostShutdownToken
-        ) {
+        )
+            : base(
+                loggerFactory,
+                deploymentParameters,
+                applicationBaseUri,
+                contentRoot,
+                hostShutdownToken
+            )
+        {
             HostProcess = hostProcess;
             Logger = loggerFactory.CreateLogger(deploymentParameters.SiteName);
             HttpClient = CreateClient(new HttpClientHandler());

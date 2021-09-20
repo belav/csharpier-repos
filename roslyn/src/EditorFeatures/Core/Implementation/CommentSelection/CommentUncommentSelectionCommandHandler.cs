@@ -89,7 +89,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.CommentSelection
             NormalizedSnapshotSpanCollection selectedSpans,
             Operation operation,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var spanTrackingList = ArrayBuilder<CommentTrackingSpan>.GetInstance();
             var textChanges = ArrayBuilder<TextChange>.GetInstance();
             foreach (var span in selectedSpans)
@@ -137,7 +138,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.CommentSelection
             ArrayBuilder<TextChange> textChanges,
             ArrayBuilder<CommentTrackingSpan> trackingSpans,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var (firstLine, lastLine) = DetermineFirstAndLastLine(span);
 
             if (span.IsEmpty && firstLine.IsEmptyOrWhitespace())
@@ -204,7 +206,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.CommentSelection
                     !span.IsEmpty
                     && !SpanIncludesAllTextOnIncludedLines(span)
                     && firstLine.LineNumber == lastLine.LineNumber
-                ) {
+                )
+                {
                     AddBlockComment(span, textChanges, trackingSpans, commentInfo);
                 }
                 else
@@ -228,7 +231,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.CommentSelection
             ITextSnapshotLine firstLine,
             ITextSnapshotLine lastLine,
             CommentSelectionInfo commentInfo
-        ) {
+        )
+        {
             // Select the entirety of the lines, so that another comment operation will add more
             // comments, not insert block comments.
             trackingSpans.Add(
@@ -251,7 +255,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.CommentSelection
             ArrayBuilder<TextChange> textChanges,
             ArrayBuilder<CommentTrackingSpan> trackingSpans,
             CommentSelectionInfo commentInfo
-        ) {
+        )
+        {
             trackingSpans.Add(new CommentTrackingSpan(TextSpan.FromBounds(span.Start, span.End)));
             InsertText(textChanges, span.Start, commentInfo.BlockCommentStartString);
             InsertText(textChanges, span.End, commentInfo.BlockCommentEndString);
@@ -267,7 +272,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.CommentSelection
             ArrayBuilder<TextChange> textChanges,
             ArrayBuilder<CommentTrackingSpan> spansToSelect,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var info = service.GetInfoAsync(document, span.Span.ToTextSpan(), cancellationToken)
                 .WaitAndGetResult(cancellationToken);
 
@@ -275,14 +281,16 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.CommentSelection
             if (
                 info.SupportsBlockComment
                 && TryUncommentExactlyBlockComment(info, span, textChanges, spansToSelect)
-            ) {
+            )
+            {
                 return;
             }
 
             if (
                 info.SupportsSingleLineComment
                 && TryUncommentSingleLineComments(info, span, textChanges, spansToSelect)
-            ) {
+            )
+            {
                 return;
             }
 
@@ -303,7 +311,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.CommentSelection
             SnapshotSpan span,
             ArrayBuilder<TextChange> textChanges,
             ArrayBuilder<CommentTrackingSpan> spansToSelect
-        ) {
+        )
+        {
             var spanText = span.GetText();
             var trimmedSpanText = spanText.Trim();
 
@@ -311,7 +320,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.CommentSelection
             if (
                 trimmedSpanText.StartsWith(info.BlockCommentStartString, StringComparison.Ordinal)
                 && trimmedSpanText.EndsWith(info.BlockCommentEndString, StringComparison.Ordinal)
-            ) {
+            )
+            {
                 var positionOfStart =
                     span.Start
                     + spanText.IndexOf(info.BlockCommentStartString, StringComparison.Ordinal);
@@ -330,7 +340,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.CommentSelection
             SnapshotSpan span,
             ArrayBuilder<TextChange> textChanges,
             ArrayBuilder<CommentTrackingSpan> spansToSelect
-        ) {
+        )
+        {
             // See if we are (textually) contained in a block comment.
             // This could allow a selection that spans multiple block comments to uncomment the beginning of
             // the first and end of the last.  Oh well.
@@ -374,7 +385,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.CommentSelection
             ArrayBuilder<CommentTrackingSpan> spansToSelect,
             int positionOfStart,
             int positionOfEnd
-        ) {
+        )
+        {
             if (positionOfStart < 0 || positionOfEnd < 0)
             {
                 return;
@@ -400,7 +412,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.CommentSelection
             SnapshotSpan span,
             ArrayBuilder<TextChange> textChanges,
             ArrayBuilder<CommentTrackingSpan> spansToSelect
-        ) {
+        )
+        {
             // First see if we're selecting any lines that have the single-line comment prefix.
             // If so, then we'll just remove the single-line comment prefix from those lines.
             var (firstLine, lastLine) = DetermineFirstAndLastLine(span);
@@ -409,13 +422,15 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.CommentSelection
                 var lineNumber = firstLine.LineNumber;
                 lineNumber <= lastLine.LineNumber;
                 ++lineNumber
-            ) {
+            )
+            {
                 var line = span.Snapshot.GetLineFromLineNumber(lineNumber);
                 var lineText = line.GetText();
                 if (
                     lineText.Trim()
                         .StartsWith(info.SingleLineCommentString, StringComparison.Ordinal)
-                ) {
+                )
+                {
                     DeleteText(
                         textChanges,
                         new TextSpan(
@@ -454,13 +469,15 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.CommentSelection
             ITextSnapshotLine firstLine,
             ITextSnapshotLine lastLine,
             int indentToCommentAt
-        ) {
+        )
+        {
             var snapshot = firstLine.Snapshot;
             for (
                 var lineNumber = firstLine.LineNumber;
                 lineNumber <= lastLine.LineNumber;
                 ++lineNumber
-            ) {
+            )
+            {
                 var line = snapshot.GetLineFromLineNumber(lineNumber);
                 if (!line.IsEmptyOrWhitespace())
                 {
@@ -481,7 +498,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.CommentSelection
         /// </summary>
         private static (ITextSnapshotLine firstLine, ITextSnapshotLine lastLine) DetermineFirstAndLastLine(
             SnapshotSpan span
-        ) {
+        )
+        {
             var firstLine = span.Snapshot.GetLineFromPosition(span.Start.Position);
             var lastLine = span.Snapshot.GetLineFromPosition(span.End.Position);
             if (lastLine.Start == span.End.Position && !span.IsEmpty)

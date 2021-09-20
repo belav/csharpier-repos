@@ -59,7 +59,8 @@ namespace Castle.Components.DictionaryAdapter
             string key,
             ref object value,
             PropertyDescriptor property
-        ) {
+        )
+        {
             if (ShouldRemove(value))
             {
                 dictionaryAdapter.ClearProperty(property, key);

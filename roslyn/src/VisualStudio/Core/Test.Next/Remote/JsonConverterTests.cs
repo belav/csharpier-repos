@@ -92,7 +92,8 @@ namespace Microsoft.CodeAnalysis.Remote.UnitTests
                         && x.ProjectId == y.ProjectId
                         && x.AnalyzerIds.Length == y.AnalyzerIds.Length
                         && x.AnalyzerIds.Except(y.AnalyzerIds).Count() == 0
-                    ) {
+                    )
+                    {
                         return 0;
                     }
 

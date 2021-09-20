@@ -154,7 +154,8 @@ namespace System.Linq.Parallel.Tests
         public static IEnumerable<object[]> BinaryRanges(
             IEnumerable<int> leftCounts,
             IEnumerable<int> rightCounts
-        ) {
+        )
+        {
             IEnumerable<object[]> rightRanges = Ranges(rightCounts);
             foreach (object[] left in Ranges(leftCounts))
             {
@@ -179,12 +180,14 @@ namespace System.Linq.Parallel.Tests
             IEnumerable<int> leftCounts,
             Func<int, int, int> rightStart,
             IEnumerable<int> rightCounts
-        ) {
+        )
+        {
             foreach (object[] left in Ranges(leftCounts))
             {
                 foreach (
                     object[] right in Ranges(right => rightStart((int)left[1], right), rightCounts)
-                ) {
+                )
+                {
                     yield return left.Concat(right).ToArray();
                 }
             }
@@ -204,7 +207,8 @@ namespace System.Linq.Parallel.Tests
         public static IEnumerable<object[]> Ranges<T>(
             IEnumerable<int> counts,
             Func<int, T> modifiers
-        ) {
+        )
+        {
             foreach (object[] parms in Ranges(counts))
             {
                 int count = (int)parms[1];
@@ -228,7 +232,8 @@ namespace System.Linq.Parallel.Tests
         public static IEnumerable<object[]> Ranges<T>(
             IEnumerable<int> counts,
             Func<int, IEnumerable<T>> modifiers
-        ) {
+        )
+        {
             foreach (object[] parms in Ranges(counts))
             {
                 foreach (T mod in modifiers((int)parms[1]))

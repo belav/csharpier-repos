@@ -21,7 +21,8 @@ namespace Microsoft.CodeAnalysis.VisualBasic.ExpressionEvaluator
 
         internal override RequestSignature GetParsedSignature(
             DkmRuntimeFunctionResolutionRequest request
-        ) {
+        )
+        {
             return MemberSignatureParser.Parse(request.FunctionName);
         }
 

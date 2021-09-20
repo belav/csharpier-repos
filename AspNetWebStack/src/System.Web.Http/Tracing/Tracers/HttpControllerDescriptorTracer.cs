@@ -27,7 +27,8 @@ namespace System.Web.Http.Tracing.Tracers
         public HttpControllerDescriptorTracer(
             HttpControllerDescriptor innerDescriptor,
             ITraceWriter traceWriter
-        ) {
+        )
+        {
             Contract.Assert(innerDescriptor != null);
             Contract.Assert(traceWriter != null);
 

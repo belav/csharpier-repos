@@ -32,7 +32,8 @@ namespace Microsoft.Extensions.Options
             IOptionsFactory<TOptions> factory,
             IEnumerable<IOptionsChangeTokenSource<TOptions>> sources,
             IOptionsMonitorCache<TOptions> cache
-        ) {
+        )
+        {
             _factory = factory;
             _cache = cache;
 
@@ -40,7 +41,8 @@ namespace Microsoft.Extensions.Options
                 IOptionsChangeTokenSource<TOptions> source in (
                     sources as IOptionsChangeTokenSource<TOptions>[] ?? sources.ToArray()
                 )
-            ) {
+            )
+            {
                 IDisposable registration = ChangeToken.OnChange(
                     () => source.GetChangeToken(),
                     (name) => InvokeChanged(name),
@@ -113,7 +115,8 @@ namespace Microsoft.Extensions.Options
             public ChangeTrackerDisposable(
                 OptionsMonitor<TOptions> monitor,
                 Action<TOptions, string> listener
-            ) {
+            )
+            {
                 _listener = listener;
                 _monitor = monitor;
             }

@@ -106,7 +106,8 @@ namespace RepoTasks
             string source,
             string target,
             List<string> errorMessages
-        ) {
+        )
+        {
             Random rng = new Random();
 
             Log.LogMessage(MessageImportance.High, $"Attempting download '{source}' to '{target}'");
@@ -133,7 +134,8 @@ namespace RepoTasks
                                 "The requested URI does not represent any resource on the server.",
                                 StringComparison.OrdinalIgnoreCase
                             ) == 0
-                        ) {
+                        )
+                        {
                             errorMessages.Add(
                                 $"Problems downloading file from '{source}'. Does the resource exist on the storage? {httpResponse.StatusCode} : {httpResponse.ReasonPhrase}"
                             );

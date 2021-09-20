@@ -39,11 +39,13 @@ namespace Microsoft.CodeAnalysis.AddImport
                 Document document,
                 AddImportFixData fixData,
                 IPackageInstallerService installerService
-            ) : base(
-                string.Format(FeaturesResources.Install_package_0, fixData.PackageName),
-                CreateNestedActions(document, fixData, installerService),
-                isInlinable: false
-            ) {
+            )
+                : base(
+                    string.Format(FeaturesResources.Install_package_0, fixData.PackageName),
+                    CreateNestedActions(document, fixData, installerService),
+                    isInlinable: false
+                )
+            {
                 Contract.ThrowIfFalse(fixData.Kind == AddImportFixKind.PackageSymbol);
             }
 
@@ -51,7 +53,8 @@ namespace Microsoft.CodeAnalysis.AddImport
                 Document document,
                 AddImportFixData fixData,
                 IPackageInstallerService installerService
-            ) {
+            )
+            {
                 // Determine what versions of this package are already installed in some project
                 // in this solution.  We'll offer to add those specific versions to this project,
                 // followed by an option to "Find and install latest version."
@@ -101,7 +104,8 @@ namespace Microsoft.CodeAnalysis.AddImport
                 IPackageInstallerService installerService,
                 string versionOpt,
                 bool isLocal
-            ) {
+            )
+            {
                 var title =
                     versionOpt == null
                         ? FeaturesResources.Find_and_install_latest_version

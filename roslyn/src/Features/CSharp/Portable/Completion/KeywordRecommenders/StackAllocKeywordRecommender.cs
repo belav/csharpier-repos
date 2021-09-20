@@ -17,7 +17,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Completion.KeywordRecommenders
             int position,
             CSharpSyntaxContext context,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             // Beginning with C# 8.0, stackalloc expression can be used inside other expressions
             // whenever a Span<T> or ReadOnlySpan<T> variable is allowed.
             return (context.IsAnyExpressionContext && !context.IsConstantExpressionContext)

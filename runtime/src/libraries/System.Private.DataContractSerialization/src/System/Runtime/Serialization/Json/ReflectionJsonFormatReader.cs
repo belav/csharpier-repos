@@ -31,7 +31,8 @@ namespace System.Runtime.Serialization.Json
             XmlObjectSerializerReadContextComplexJson? context,
             XmlDictionaryString emptyDictionaryString,
             XmlDictionaryString[]? memberNames
-        ) {
+        )
+        {
             Debug.Assert(_classContract != null);
             return _reflectionReader.ReflectionReadClass(
                 xmlReader,
@@ -54,7 +55,8 @@ namespace System.Runtime.Serialization.Json
             XmlDictionaryString emptyDictionaryString,
             XmlDictionaryString itemName,
             CollectionDataContract collectionContract
-        ) {
+        )
+        {
             return _reflectionReader.ReflectionReadCollection(
                 xmlReader,
                 context,
@@ -71,7 +73,8 @@ namespace System.Runtime.Serialization.Json
             XmlDictionaryString emptyDictionaryString,
             XmlDictionaryString itemName,
             CollectionDataContract collectionContract
-        ) {
+        )
+        {
             _reflectionReader.ReflectionReadGetOnlyCollection(
                 xmlReader,
                 context,
@@ -92,7 +95,8 @@ namespace System.Runtime.Serialization.Json
             XmlDictionaryString[]? memberNamespaces,
             ClassDataContract classContract,
             ref object obj
-        ) {
+        )
+        {
             var jsonContext = context as XmlObjectSerializerReadContextComplexJson;
             Debug.Assert(jsonContext != null);
 
@@ -147,13 +151,15 @@ namespace System.Runtime.Serialization.Json
 
         protected override string GetCollectionContractItemName(
             CollectionDataContract collectionContract
-        ) {
+        )
+        {
             return JsonGlobals.itemString;
         }
 
         protected override string GetCollectionContractNamespace(
             CollectionDataContract collectionContract
-        ) {
+        )
+        {
             return string.Empty;
         }
 
@@ -162,7 +168,8 @@ namespace System.Runtime.Serialization.Json
             XmlReaderDelegator xmlReader,
             XmlObjectSerializerReadContext context,
             CollectionDataContract collectionContract
-        ) {
+        )
+        {
             var jsonContext = context as XmlObjectSerializerReadContextComplexJson;
             Debug.Assert(jsonContext != null);
             Debug.Assert(
@@ -182,7 +189,8 @@ namespace System.Runtime.Serialization.Json
             XmlObjectSerializerReadContext context,
             CollectionDataContract collectionContract,
             object? resultCollection
-        ) {
+        )
+        {
             var jsonContext = context as XmlObjectSerializerReadContextComplexJson;
             Debug.Assert(jsonContext != null);
 
@@ -209,7 +217,8 @@ namespace System.Runtime.Serialization.Json
             CollectionDataContract collectionContract,
             Type keyValueType,
             object? dictionary
-        ) {
+        )
+        {
             Type[] keyValueTypes = keyValueType.GetGenericArguments();
             Type keyType = keyValueTypes[0];
             Type valueType = keyValueTypes[1];
@@ -218,7 +227,8 @@ namespace System.Runtime.Serialization.Json
             while (
                 keyType.IsGenericType
                 && keyType.GetGenericTypeDefinition() == Globals.TypeOfNullable
-            ) {
+            )
+            {
                 keyTypeNullableDepth++;
                 keyType = keyType.GetGenericArguments()[0];
             }

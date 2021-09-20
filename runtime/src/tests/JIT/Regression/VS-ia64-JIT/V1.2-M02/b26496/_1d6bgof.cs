@@ -22,7 +22,8 @@ public class AA
         ref byte[,,] param2,
         ulong param3,
         bool[,,] param4
-    ) {
+    )
+    {
         short local1 = App.m_shFwd1;
         while (App.m_bFwd2)
         {
@@ -132,7 +133,8 @@ public class AA
         TestEnum[,,] param6,
         sbyte param7,
         ulong[,,,][,,][,,] param8
-    ) {
+    )
+    {
         return param1;
     }
     public static double[,,] Static4(
@@ -144,7 +146,8 @@ public class AA
         ref byte[] param6,
         float[,] param7,
         ref TestEnum param8
-    ) {
+    )
+    {
         double[][,] local17 = (new double[101u][,]);
         int[,] local18 = (new int[85u, 101u]);
         ushort local19 = ((ushort)(77.0f));
@@ -159,7 +162,8 @@ public class AA
         ref float param6,
         uint[,,][] param7,
         long param8
-    ) {
+    )
+    {
         AA.m_fStatic1 /= AA.m_fStatic1;
         try
         {
@@ -170,7 +174,8 @@ public class AA
                 param2 += '\x6d';
                 Convert.ToBoolean(AA.m_fStatic1);
                 App.m_uFwd10 /= AA.Static2((new String[36u, 114u]), 48.0, ref param8)
-            ) {
+            )
+            {
                 byte[][][,,,][,,] local23 = new byte[][][,,,][,,]
                 {
                     (new byte[36u][,,,][,,]),

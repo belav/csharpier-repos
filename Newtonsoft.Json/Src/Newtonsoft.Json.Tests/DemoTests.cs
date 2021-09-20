@@ -121,7 +121,8 @@ namespace Newtonsoft.Json.Tests
                 JsonWriter writer,
                 object value,
                 JsonSerializer serializer
-            ) {
+            )
+            {
                 // create hex string from value
                 HtmlColor color = (HtmlColor)value;
                 string hexString =
@@ -144,7 +145,8 @@ namespace Newtonsoft.Json.Tests
                 Type objectType,
                 object existingValue,
                 JsonSerializer serializer
-            ) {
+            )
+            {
                 // get hex string
                 string hexString = (string)reader.Value;
                 hexString = hexString.TrimStart('#');
@@ -741,7 +743,8 @@ namespace Newtonsoft.Json.Tests
                         true
                     )
                 )
-            ) {
+            )
+            {
                 largeJson = await JArray.LoadAsync(new JsonTextReader(textReader));
             }
 
@@ -760,7 +763,8 @@ namespace Newtonsoft.Json.Tests
                         true
                     )
                 )
-            ) {
+            )
+            {
                 await largeJson.WriteToAsync(new JsonTextWriter(textWriter));
             }
         }

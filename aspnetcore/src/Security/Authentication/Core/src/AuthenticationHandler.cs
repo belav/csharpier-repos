@@ -123,7 +123,8 @@ namespace Microsoft.AspNetCore.Authentication
             ILoggerFactory logger,
             UrlEncoder encoder,
             ISystemClock clock
-        ) {
+        )
+        {
             Logger = logger.CreateLogger(this.GetType().FullName!);
             UrlEncoder = encoder;
             Clock = clock;

@@ -27,7 +27,8 @@ namespace Microsoft.Extensions.Logging.Console.Test
             SimpleConsoleFormatterOptions simpleOptions = null,
             ConsoleFormatterOptions systemdOptions = null,
             JsonConsoleFormatterOptions jsonOptions = null
-        ) {
+        )
+        {
             var defaultMonitor = new TestFormatterOptionsMonitor<SimpleConsoleFormatterOptions>(
                 simpleOptions ?? new SimpleConsoleFormatterOptions()
             );
@@ -136,7 +137,8 @@ namespace Microsoft.Extensions.Logging.Console.Test
         private static void UpdateFormatterOptions(
             ConsoleFormatter formatter,
             ConsoleLoggerOptions deprecatedFromOptions
-        ) {
+        )
+        {
             // kept for deprecated apis:
             if (formatter is SimpleConsoleFormatter defaultFormatter)
             {
@@ -322,7 +324,8 @@ namespace Microsoft.Extensions.Logging.Console.Test
         public void Options_FormatterNameNull_UsesDeprecatedProperties(
             string formatterName,
             int formatNumber
-        ) {
+        )
+        {
             // Arrange
             ConsoleLoggerFormat format = (ConsoleLoggerFormat)formatNumber;
             var options = new ConsoleLoggerOptions() { FormatterName = formatterName };
@@ -568,7 +571,8 @@ namespace Microsoft.Extensions.Logging.Console.Test
                 levelSequence = (int)LogLevel.Trace;
                 levelSequence < (int)LogLevel.None;
                 levelSequence++
-            ) {
+            )
+            {
                 logger.Log((LogLevel)levelSequence, 0, _state, null, _defaultFormatter);
             }
 
@@ -911,7 +915,8 @@ namespace Microsoft.Extensions.Logging.Console.Test
             {
                 using (
                     logger.BeginScope("Request matched action: {ActionName}", new object[] { null })
-                ) {
+                )
+                {
                     logger.Log(level, 0, _state, null, _defaultFormatter);
                 }
             }

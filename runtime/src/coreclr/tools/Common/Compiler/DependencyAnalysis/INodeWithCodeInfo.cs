@@ -43,7 +43,8 @@ namespace ILCompiler.DependencyAnalysis
             uint tryLength,
             uint handlerOffset,
             uint handlerLength
-        ) {
+        )
+        {
             TryOffset = tryOffset;
             TryLength = tryLength;
             HandlerOffset = handlerOffset;

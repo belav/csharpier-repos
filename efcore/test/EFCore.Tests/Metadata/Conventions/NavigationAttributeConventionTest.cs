@@ -650,7 +650,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
         [InlineData(true)]
         public void ForeignKeyAttribute_overrides_configuration_from_convention_source(
             bool useNavigation
-        ) {
+        )
+        {
             var dependentEntityTypeBuilder = CreateInternalEntityTypeBuilder<Dependent>();
             var principalEntityTypeBuilder = dependentEntityTypeBuilder.ModelBuilder.Entity(
                 typeof(Principal),
@@ -691,7 +692,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
         [InlineData(true)]
         public void ForeignKeyAttribute_does_not_override_configuration_from_explicit_source(
             bool useNavigation
-        ) {
+        )
+        {
             var dependentEntityTypeBuilder = CreateInternalEntityTypeBuilder<Dependent>();
             var principalEntityTypeBuilder = dependentEntityTypeBuilder.ModelBuilder.Entity(
                 typeof(Principal),
@@ -732,7 +734,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
         [InlineData(true)]
         public void ForeignKeyAttribute_sets_foreign_key_properties_when_applied_on_dependent_to_principal_navigation(
             bool useNavigation
-        ) {
+        )
+        {
             var dependentEntityTypeBuilder = CreateInternalEntityTypeBuilder<Dependent>();
             var principalEntityTypeBuilder = dependentEntityTypeBuilder.ModelBuilder.Entity(
                 typeof(Principal),
@@ -773,7 +776,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
         [InlineData(true)]
         public void ForeignKeyAttribute_sets_foreign_key_properties_when_applied_on_principal_to_dependent_navigation(
             bool useNavigation
-        ) {
+        )
+        {
             var dependentEntityTypeBuilder = CreateInternalEntityTypeBuilder<Dependent>();
             var principalEntityTypeBuilder = dependentEntityTypeBuilder.ModelBuilder.Entity(
                 typeof(Principal),
@@ -817,7 +821,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
         [InlineData(true)]
         public void ForeignKeyAttribute_sets_foreign_key_properties_when_applied_on_property_on_dependent_side(
             bool useNavigation
-        ) {
+        )
+        {
             var dependentEntityTypeBuilder = CreateInternalEntityTypeBuilder<Dependent>();
             var principalEntityTypeBuilder = dependentEntityTypeBuilder.ModelBuilder.Entity(
                 typeof(Principal),
@@ -861,7 +866,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
         [InlineData(true)]
         public void ForeignKeyAttribute_on_field_sets_foreign_key_properties_when_applied_on_property_on_dependent_side(
             bool useNavigation
-        ) {
+        )
+        {
             var dependentEntityTypeBuilder = CreateInternalEntityTypeBuilder<DependentField>();
             var principalEntityTypeBuilder = dependentEntityTypeBuilder.ModelBuilder.Entity(
                 typeof(PrincipalField),
@@ -905,7 +911,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
         [InlineData(true)]
         public void ForeignKeyAttribute_sets_foreign_key_properties_after_inverting_when_applied_on_property_on_principal_side(
             bool useNavigation
-        ) {
+        )
+        {
             var dependentEntityTypeBuilder = CreateInternalEntityTypeBuilder<Principal>();
             var principalEntityTypeBuilder = dependentEntityTypeBuilder.ModelBuilder.Entity(
                 typeof(Dependent),
@@ -968,7 +975,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
         [InlineData(true)]
         public void ForeignKeyAttribute_sets_composite_foreign_key_properties_when_applied_on_navigation(
             bool useNavigation
-        ) {
+        )
+        {
             var dependentEntityTypeBuilder = CreateInternalEntityTypeBuilder<Dependent>();
             var principalEntityTypeBuilder = dependentEntityTypeBuilder.ModelBuilder.Entity(
                 typeof(Principal),
@@ -1014,7 +1022,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
         [InlineData(true)]
         public void ForeignKeyAttribute_throws_when_values_on_property_and_navigation_in_entity_type_do_not_match(
             bool useNavigation
-        ) {
+        )
+        {
             var dependentEntityTypeBuilder =
                 CreateInternalEntityTypeBuilder<FkPropertyNavigationMismatch>();
             var principalEntityTypeBuilder = dependentEntityTypeBuilder.ModelBuilder.Entity(
@@ -1050,7 +1059,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
         [InlineData(true)]
         public void ForeignKeyAttribute_throws_when_defining_composite_foreign_key_using_attribute_on_properties(
             bool useNavigation
-        ) {
+        )
+        {
             var dependentEntityTypeBuilder =
                 CreateInternalEntityTypeBuilder<CompositeFkOnProperty>();
             var principalEntityTypeBuilder = dependentEntityTypeBuilder.ModelBuilder.Entity(
@@ -1082,7 +1092,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
         [InlineData(true)]
         public void ForeignKeyAttribute_throws_when_property_list_on_navigation_is_in_incorrect_format(
             bool useNavigation
-        ) {
+        )
+        {
             var dependentEntityTypeBuilder =
                 CreateInternalEntityTypeBuilder<InvalidPropertyListOnNavigation>();
             var principalEntityTypeBuilder = dependentEntityTypeBuilder.ModelBuilder.Entity(
@@ -1117,7 +1128,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
         [InlineData(true)]
         public void ForeignKeyAttribute_throws_when_same_set_of_properties_are_pointed_by_multiple_navigations(
             bool useNavigation
-        ) {
+        )
+        {
             var dependentEntityTypeBuilder =
                 CreateInternalEntityTypeBuilder<MultipleNavigationsSameFk>();
             var principalEntityTypeBuilder = dependentEntityTypeBuilder.ModelBuilder.Entity(
@@ -1153,7 +1165,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
         [InlineData(true)]
         public void ForeignKeyAttribute_throws_when_specified_on_principal_property_with_collection(
             bool useNavigation
-        ) {
+        )
+        {
             var dependentEntityTypeBuilder = CreateInternalEntityTypeBuilder<Dependent>();
             var principalEntityTypeBuilder = dependentEntityTypeBuilder.ModelBuilder.Entity(
                 typeof(InvertedPrincipal),
@@ -1214,7 +1227,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
 
         private InternalForeignKeyBuilder RunForeignKeyAttributeConvention(
             InternalForeignKeyBuilder relationshipBuilder
-        ) {
+        )
+        {
             var dependencies = CreateDependencies();
             var context = new ConventionContext<IConventionForeignKeyBuilder>(
                 relationshipBuilder.Metadata.DeclaringEntityType.Model.ConventionDispatcher
@@ -1233,7 +1247,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
         private InternalForeignKeyBuilder RunForeignKeyAttributeConvention(
             InternalForeignKeyBuilder relationshipBuilder,
             Navigation navigation
-        ) {
+        )
+        {
             var dependencies = CreateDependencies();
             var context = new ConventionContext<IConventionNavigationBuilder>(
                 relationshipBuilder.Metadata.DeclaringEntityType.Model.ConventionDispatcher
@@ -1252,7 +1267,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
         private void RunRequiredNavigationAttributeConvention(
             InternalForeignKeyBuilder relationshipBuilder,
             Navigation navigation
-        ) {
+        )
+        {
             var dependencies = CreateDependencies();
             var context = new ConventionContext<IConventionNavigationBuilder>(
                 relationshipBuilder.Metadata.DeclaringEntityType.Model.ConventionDispatcher
@@ -1267,7 +1283,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
         private void RunNavigationBackingFieldAttributeConvention(
             InternalForeignKeyBuilder relationshipBuilder,
             IConventionNavigationBuilder navigationBuilder
-        ) {
+        )
+        {
             var dependencies = CreateDependencies();
             var context = new ConventionContext<IConventionNavigationBuilder>(
                 relationshipBuilder.Metadata.DeclaringEntityType.Model.ConventionDispatcher

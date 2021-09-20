@@ -88,7 +88,8 @@ namespace ILCompiler.Reflection.ReadyToRun
             bool namespaceQualified = true,
             string owningTypeOverride = null,
             string signaturePrefix = ""
-        ) {
+        )
+        {
             MetadataNameFormatter formatter = new MetadataNameFormatter(metadataReader);
             return formatter.EmitHandleName(
                 handle,
@@ -102,7 +103,8 @@ namespace ILCompiler.Reflection.ReadyToRun
             IAssemblyResolver assemblyResolver,
             ReadyToRunReader r2rReader,
             int imageOffset
-        ) {
+        )
+        {
             SignatureFormattingOptions dummyOptions = new SignatureFormattingOptions();
             SignatureDecoder decoder = new SignatureDecoder(
                 assemblyResolver,
@@ -124,7 +126,8 @@ namespace ILCompiler.Reflection.ReadyToRun
             bool namespaceQualified,
             string owningTypeOverride,
             string signaturePrefix = ""
-        ) {
+        )
+        {
             try
             {
                 switch (handle.Kind)
@@ -213,7 +216,8 @@ namespace ILCompiler.Reflection.ReadyToRun
             MethodSpecificationHandle methodSpecHandle,
             string owningTypeOverride,
             string signaturePrefix
-        ) {
+        )
+        {
             ValidateHandle(methodSpecHandle, TableIndex.MethodSpec);
             MethodSpecification methodSpec = _metadataReader.GetMethodSpecification(
                 methodSpecHandle
@@ -242,7 +246,8 @@ namespace ILCompiler.Reflection.ReadyToRun
             MemberReferenceHandle memberRefHandle,
             string owningTypeOverride,
             string signaturePrefix
-        ) {
+        )
+        {
             ValidateHandle(memberRefHandle, TableIndex.MemberRef);
             MemberReference memberRef = _metadataReader.GetMemberReference(memberRefHandle);
             StringBuilder builder = new StringBuilder();
@@ -304,7 +309,8 @@ namespace ILCompiler.Reflection.ReadyToRun
             MethodDefinitionHandle methodDefinitionHandle,
             string owningTypeOverride,
             string signaturePrefix
-        ) {
+        )
+        {
             ValidateHandle(methodDefinitionHandle, TableIndex.MethodDef);
             MethodDefinition methodDef = _metadataReader.GetMethodDefinition(
                 methodDefinitionHandle
@@ -351,7 +357,8 @@ namespace ILCompiler.Reflection.ReadyToRun
                     int typeArgIndex = 0;
                     typeArgIndex < methodSignature.GenericParameterCount;
                     typeArgIndex++
-                ) {
+                )
+                {
                     if (firstTypeArg)
                     {
                         firstTypeArg = false;
@@ -393,7 +400,8 @@ namespace ILCompiler.Reflection.ReadyToRun
             MemberReference memberRef,
             string owningTypeOverride,
             string signaturePrefix
-        ) {
+        )
+        {
             if (owningTypeOverride == null)
             {
                 owningTypeOverride = EmitHandleName(
@@ -415,7 +423,8 @@ namespace ILCompiler.Reflection.ReadyToRun
             TypeReferenceHandle typeRefHandle,
             bool namespaceQualified,
             string signaturePrefix
-        ) {
+        )
+        {
             ValidateHandle(typeRefHandle, TableIndex.TypeRef);
             TypeReference typeRef = _metadataReader.GetTypeReference(typeRefHandle);
             string typeName = EmitString(typeRef.Name);
@@ -453,7 +462,8 @@ namespace ILCompiler.Reflection.ReadyToRun
             TypeDefinitionHandle typeDefHandle,
             bool namespaceQualified,
             string signaturePrefix
-        ) {
+        )
+        {
             ValidateHandle(typeDefHandle, TableIndex.TypeDef);
             TypeDefinition typeDef = _metadataReader.GetTypeDefinition(typeDefHandle);
             string typeName = signaturePrefix + EmitString(typeDef.Name);
@@ -494,7 +504,8 @@ namespace ILCompiler.Reflection.ReadyToRun
             TypeSpecificationHandle typeSpecHandle,
             bool namespaceQualified,
             string signaturePrefix
-        ) {
+        )
+        {
             ValidateHandle(typeSpecHandle, TableIndex.TypeSpec);
             TypeSpecification typeSpec = _metadataReader.GetTypeSpecification(typeSpecHandle);
             DisassemblingGenericContext genericContext = new DisassemblingGenericContext(
@@ -520,7 +531,8 @@ namespace ILCompiler.Reflection.ReadyToRun
             bool namespaceQualified,
             string owningTypeOverride,
             string signaturePrefix
-        ) {
+        )
+        {
             ValidateHandle(fieldDefHandle, TableIndex.Field);
             FieldDefinition fieldDef = _metadataReader.GetFieldDefinition(fieldDefHandle);
             DisassemblingGenericContext genericContext = new DisassemblingGenericContext(
@@ -629,7 +641,8 @@ namespace ILCompiler.Reflection.ReadyToRun
             MetadataReader metadataReader,
             ReadyToRunReader r2rReader,
             int offset
-        ) {
+        )
+        {
             Context = context;
             _provider = provider;
             _image = r2rReader.Image;
@@ -658,7 +671,8 @@ namespace ILCompiler.Reflection.ReadyToRun
             int offset,
             MetadataReader outerReader,
             ReadyToRunReader contextReader
-        ) {
+        )
+        {
             Context = context;
             _provider = provider;
             _image = signature;
@@ -856,7 +870,8 @@ namespace ILCompiler.Reflection.ReadyToRun
                         uint lowerBoundIndex = 0;
                         lowerBoundIndex < lowerBoundCount;
                         lowerBoundIndex++
-                    ) {
+                    )
+                    {
                         lowerBounds[lowerBoundIndex] = ReadInt();
                     }
                     ArrayShape arrayShape = new ArrayShape(
@@ -1059,7 +1074,8 @@ namespace ILCompiler.Reflection.ReadyToRun
                     methodFlags
                     & (uint)ReadyToRunMethodSigFlags.READYTORUN_METHOD_SIG_SlotInsteadOfToken
                 ) != 0
-            ) {
+            )
+            {
                 throw new NotImplementedException();
             }
 
@@ -1067,7 +1083,8 @@ namespace ILCompiler.Reflection.ReadyToRun
             if (
                 (methodFlags & (uint)ReadyToRunMethodSigFlags.READYTORUN_METHOD_SIG_MemberRefToken)
                 != 0
-            ) {
+            )
+            {
                 methodFlags &= ~(uint)ReadyToRunMethodSigFlags.READYTORUN_METHOD_SIG_MemberRefToken;
                 result = ParseMethodRefToken(owningTypeOverride: owningTypeOverride);
             }
@@ -1081,7 +1098,8 @@ namespace ILCompiler.Reflection.ReadyToRun
                     methodFlags
                     & (uint)ReadyToRunMethodSigFlags.READYTORUN_METHOD_SIG_MethodInstantiation
                 ) != 0
-            ) {
+            )
+            {
                 methodFlags &=
                     ~(uint)ReadyToRunMethodSigFlags.READYTORUN_METHOD_SIG_MethodInstantiation;
                 uint typeArgCount = ReadUInt();
@@ -1099,7 +1117,8 @@ namespace ILCompiler.Reflection.ReadyToRun
             if (
                 (methodFlags & (uint)ReadyToRunMethodSigFlags.READYTORUN_METHOD_SIG_Constrained)
                 != 0
-            ) {
+            )
+            {
                 methodFlags &= ~(uint)ReadyToRunMethodSigFlags.READYTORUN_METHOD_SIG_Constrained;
                 result = _provider.GetConstrainedMethod(result, ParseType());
             }
@@ -1148,7 +1167,8 @@ namespace ILCompiler.Reflection.ReadyToRun
         public TextSignatureDecoderContext(
             IAssemblyResolver assemblyResolver,
             SignatureFormattingOptions options
-        ) {
+        )
+        {
             AssemblyResolver = assemblyResolver;
             Options = options;
         }
@@ -1180,14 +1200,16 @@ namespace ILCompiler.Reflection.ReadyToRun
             public override string GetGenericMethodParameter(
                 TextSignatureDecoderContext genericContext,
                 int index
-            ) {
+            )
+            {
                 return $"mvar #{index}";
             }
 
             public override string GetGenericTypeParameter(
                 TextSignatureDecoderContext genericContext,
                 int index
-            ) {
+            )
+            {
                 return $"var #{index}";
             }
 
@@ -1196,7 +1218,8 @@ namespace ILCompiler.Reflection.ReadyToRun
                 TextSignatureDecoderContext genericContext,
                 TypeSpecificationHandle handle,
                 byte rawTypeKind
-            ) {
+            )
+            {
                 return MetadataNameFormatter.FormatHandle(reader, handle);
             }
 
@@ -1209,7 +1232,8 @@ namespace ILCompiler.Reflection.ReadyToRun
                 MetadataReader reader,
                 MethodDefinitionHandle handle,
                 string owningTypeOverride
-            ) {
+            )
+            {
                 uint methodDefToken = (uint)MetadataTokens.GetToken(handle);
                 return MetadataNameFormatter.FormatHandle(
                     reader,
@@ -1223,7 +1247,8 @@ namespace ILCompiler.Reflection.ReadyToRun
                 MetadataReader reader,
                 MemberReferenceHandle handle,
                 string owningTypeOverride
-            ) {
+            )
+            {
                 uint methodRefToken = (uint)MetadataTokens.GetToken(handle);
                 return MetadataNameFormatter.FormatHandle(
                     reader,
@@ -1236,7 +1261,8 @@ namespace ILCompiler.Reflection.ReadyToRun
             public string GetInstantiatedMethod(
                 string uninstantiatedMethod,
                 ImmutableArray<string> instantiation
-            ) {
+            )
+            {
                 StringBuilder builder = new StringBuilder();
                 builder.Append(uninstantiatedMethod);
                 builder.Append("<");
@@ -1286,13 +1312,14 @@ namespace ILCompiler.Reflection.ReadyToRun
             MetadataReader metadataReader,
             ReadyToRunReader r2rReader,
             int offset
-        ) : base(
-            TextTypeProvider.Singleton,
-            new TextSignatureDecoderContext(assemblyResolver, options),
-            metadataReader,
-            r2rReader,
-            offset
-        ) { }
+        )
+            : base(
+                TextTypeProvider.Singleton,
+                new TextSignatureDecoderContext(assemblyResolver, options),
+                metadataReader,
+                r2rReader,
+                offset
+            ) { }
 
         /// <summary>
         /// Construct the signature decoder by storing the image byte array and offset within the array.
@@ -1312,15 +1339,16 @@ namespace ILCompiler.Reflection.ReadyToRun
             int offset,
             MetadataReader outerReader,
             ReadyToRunReader contextReader
-        ) : base(
-            TextTypeProvider.Singleton,
-            new TextSignatureDecoderContext(assemblyResolver, options),
-            metadataReader,
-            signature,
-            offset,
-            outerReader,
-            contextReader
-        ) { }
+        )
+            : base(
+                TextTypeProvider.Singleton,
+                new TextSignatureDecoderContext(assemblyResolver, options),
+                metadataReader,
+                signature,
+                offset,
+                outerReader,
+                contextReader
+            ) { }
 
         /// <summary>
         /// Decode a R2R import signature. The signature starts with the fixup type followed
@@ -1445,7 +1473,8 @@ namespace ILCompiler.Reflection.ReadyToRun
         private ReadyToRunSignature ParseSignature(
             ReadyToRunFixupKind fixupType,
             StringBuilder builder
-        ) {
+        )
+        {
             ReadyToRunSignature result = new TodoSignature(this, fixupType);
             switch (fixupType)
             {
@@ -1628,7 +1657,8 @@ namespace ILCompiler.Reflection.ReadyToRun
                             !layoutFlags.HasFlag(
                                 ReadyToRunTypeLayoutFlags.READYTORUN_LAYOUT_Alignment_Native
                             )
-                        ) {
+                        )
+                        {
                             builder.Append($" Align {ReadUInt()}");
                         }
                     }
@@ -1639,7 +1669,8 @@ namespace ILCompiler.Reflection.ReadyToRun
                             !layoutFlags.HasFlag(
                                 ReadyToRunTypeLayoutFlags.READYTORUN_LAYOUT_GCLayout_Empty
                             )
-                        ) {
+                        )
+                        {
                             int cbGCRefMap =
                                 (actualSize / _contextReader.TargetPointerSize + 7) / 8;
                             builder.Append(" GCLayout ");

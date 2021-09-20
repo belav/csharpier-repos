@@ -291,7 +291,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                             ref discardedUseSiteInfo
                         )
                     )
-                ) {
+                )
+                {
                     break;
                 }
 
@@ -336,7 +337,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
         internal override TResult Accept<TArgument, TResult>(
             CSharpSymbolVisitor<TArgument, TResult> visitor,
             TArgument argument
-        ) {
+        )
+        {
             return visitor.VisitProperty(this, argument);
         }
 
@@ -393,7 +395,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                     AllowedRequiredModifierType.System_Runtime_InteropServices_InAttribute
                 )
                 || DeriveUseSiteInfoFromParameters(ref result, this.Parameters)
-            ) {
+            )
+            {
                 return true;
             }
 
@@ -421,7 +424,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                         this,
                         ref unificationCheckedTypes
                     )
-                ) {
+                )
+                {
                     result = result.AdjustDiagnosticInfo(diagnosticInfo);
                     return true;
                 }

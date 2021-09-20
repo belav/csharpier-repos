@@ -32,12 +32,14 @@ namespace Microsoft.CodeAnalysis.Differencing
             internal Dictionary<TNode, TNode> GetMatchingNodes(
                 IReadOnlyList<TNode> oldNodes,
                 IReadOnlyList<TNode> newNodes
-            ) {
+            )
+            {
                 var result = new Dictionary<TNode, TNode>();
 
                 foreach (
                     var pair in GetMatchingPairs(oldNodes, oldNodes.Count, newNodes, newNodes.Count)
-                ) {
+                )
+                {
                     result.Add(oldNodes[pair.Key], newNodes[pair.Value]);
                 }
 
@@ -47,7 +49,8 @@ namespace Microsoft.CodeAnalysis.Differencing
             internal IEnumerable<Edit<TNode>> GetEdits(
                 IReadOnlyList<TNode> oldNodes,
                 IReadOnlyList<TNode> newNodes
-            ) {
+            )
+            {
                 foreach (var edit in GetEdits(oldNodes, oldNodes.Count, newNodes, newNodes.Count))
                 {
                     yield return new Edit<TNode>(

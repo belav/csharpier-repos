@@ -23,7 +23,8 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeGeneration
         private static MemberDeclarationSyntax AfterMember(
             SyntaxList<MemberDeclarationSyntax> members,
             MemberDeclarationSyntax eventDeclaration
-        ) {
+        )
+        {
             if (eventDeclaration.Kind() == SyntaxKind.EventFieldDeclaration)
             {
                 // Field style events go after the last field event, or after the last field.
@@ -46,7 +47,8 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeGeneration
         private static MemberDeclarationSyntax BeforeMember(
             SyntaxList<MemberDeclarationSyntax> members,
             MemberDeclarationSyntax eventDeclaration
-        ) {
+        )
+        {
             // If it's a field style event, then it goes before everything else if we don't have any
             // existing fields/events.
             if (eventDeclaration.Kind() == SyntaxKind.FieldDeclaration)
@@ -63,7 +65,8 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeGeneration
             IEventSymbol @event,
             CodeGenerationOptions options,
             IList<bool> availableIndices
-        ) {
+        )
+        {
             var declaration = GenerateEventDeclaration(
                 @event,
                 CodeGenerationDestination.CompilationUnit,
@@ -88,7 +91,8 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeGeneration
             IEventSymbol @event,
             CodeGenerationOptions options,
             IList<bool> availableIndices
-        ) {
+        )
+        {
             var declaration = GenerateEventDeclaration(
                 @event,
                 GetDestination(destination),
@@ -114,7 +118,8 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeGeneration
             IEventSymbol @event,
             CodeGenerationDestination destination,
             CodeGenerationOptions options
-        ) {
+        )
+        {
             var reusableSyntax = GetReuseableSyntaxNodeForSymbol<MemberDeclarationSyntax>(
                 @event,
                 options
@@ -139,7 +144,8 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeGeneration
             IEventSymbol @event,
             CodeGenerationDestination destination,
             CodeGenerationOptions options
-        ) {
+        )
+        {
             return AddFormatterAndCodeGeneratorAnnotationsTo(
                 AddAnnotationsTo(
                     @event,
@@ -161,7 +167,8 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeGeneration
             IEventSymbol @event,
             CodeGenerationDestination destination,
             CodeGenerationOptions options
-        ) {
+        )
+        {
             var explicitInterfaceSpecifier = GenerateExplicitInterfaceSpecifier(
                 @event.ExplicitInterfaceImplementations
             );
@@ -185,7 +192,8 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeGeneration
             IEventSymbol @event,
             CodeGenerationDestination destination,
             CodeGenerationOptions options
-        ) {
+        )
+        {
             var accessors = new List<AccessorDeclarationSyntax>
             {
                 GenerateAccessorDeclaration(
@@ -213,7 +221,8 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeGeneration
             SyntaxKind kind,
             CodeGenerationDestination destination,
             CodeGenerationOptions options
-        ) {
+        )
+        {
             var hasBody =
                 options.GenerateMethodBodies && HasAccessorBodies(@event, destination, accessor);
             return accessor == null ? null : GenerateAccessorDeclaration(accessor, kind, hasBody);
@@ -223,7 +232,8 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeGeneration
             IMethodSymbol accessor,
             SyntaxKind kind,
             bool hasBody
-        ) {
+        )
+        {
             return AddAnnotationsTo(
                 accessor,
                 SyntaxFactory.AccessorDeclaration(kind)
@@ -247,7 +257,8 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeGeneration
             IEventSymbol @event,
             CodeGenerationDestination destination,
             IMethodSymbol accessor
-        ) {
+        )
+        {
             return destination != CodeGenerationDestination.InterfaceType
                 && !@event.IsAbstract
                 && accessor != null
@@ -258,7 +269,8 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeGeneration
             IEventSymbol @event,
             CodeGenerationDestination destination,
             CodeGenerationOptions options
-        ) {
+        )
+        {
             var tokens = ArrayBuilder<SyntaxToken>.GetInstance();
 
             // Most modifiers not allowed if we're an explicit impl.

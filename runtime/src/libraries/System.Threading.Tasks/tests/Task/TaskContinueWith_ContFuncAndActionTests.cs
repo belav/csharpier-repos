@@ -247,7 +247,8 @@ namespace System.Threading.Tasks.Tests
         private static void RunContinueWithTaskTask(
             TaskContinuationOptions options,
             bool runNegativeCases = false
-        ) {
+        )
+        {
             bool ran = false;
             if (runNegativeCases)
             {
@@ -305,7 +306,8 @@ namespace System.Threading.Tasks.Tests
         private static void RunContinueWithTaskFuture(
             TaskContinuationOptions options,
             bool runNegativeCases = false
-        ) {
+        )
+        {
             bool ran = false;
             if (runNegativeCases)
             {
@@ -365,7 +367,8 @@ namespace System.Threading.Tasks.Tests
         private static void RunContinueWithFutureTask(
             TaskContinuationOptions options,
             bool runNegativeCases = false
-        ) {
+        )
+        {
             bool ran = false;
             if (runNegativeCases)
             {
@@ -423,7 +426,8 @@ namespace System.Threading.Tasks.Tests
         private static void RunContinueWithFutureFuture(
             TaskContinuationOptions options,
             bool runNegativeCases = false
-        ) {
+        )
+        {
             bool ran = false;
             if (runNegativeCases)
             {
@@ -486,7 +490,8 @@ namespace System.Threading.Tasks.Tests
             Func<Task, Task> continuationMaker,
             Func<bool> ranValue,
             bool taskIsFuture
-        ) {
+        )
+        {
             Debug.WriteLine("    >> (1) ContinueWith after task finishes Successfully.");
             {
                 bool expect = (options & TaskContinuationOptions.NotOnRanToCompletion) == 0;
@@ -582,7 +587,8 @@ namespace System.Threading.Tasks.Tests
             Func<Task, Task> continuationMaker,
             Func<bool> ranValue,
             bool taskIsFuture
-        ) {
+        )
+        {
             Debug.WriteLine("    >> (3) ContinueWith after task finishes Exceptionally.");
             {
                 bool expect = (options & TaskContinuationOptions.NotOnFaulted) == 0;

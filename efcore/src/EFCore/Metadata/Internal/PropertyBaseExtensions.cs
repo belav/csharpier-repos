@@ -112,7 +112,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
             bool forSet,
             out MemberInfo? memberInfo,
             out string? errorMessage
-        ) {
+        )
+        {
             memberInfo = null;
             errorMessage = null;
 
@@ -133,7 +134,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
                 if (
                     mode == PropertyAccessMode.Field
                     || mode == PropertyAccessMode.FieldDuringConstruction
-                ) {
+                )
+                {
                     if (hasField)
                     {
                         memberInfo = fieldInfo;
@@ -180,7 +182,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
                 if (
                     mode == PropertyAccessMode.PreferField
                     || mode == PropertyAccessMode.PreferFieldDuringConstruction
-                ) {
+                )
+                {
                     if (hasField)
                     {
                         memberInfo = fieldInfo;
@@ -287,7 +290,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
                     mode == PropertyAccessMode.PreferProperty
                     || mode == PropertyAccessMode.FieldDuringConstruction
                     || mode == PropertyAccessMode.PreferFieldDuringConstruction
-                ) {
+                )
+                {
                     if (hasSetter)
                     {
                         memberInfo = setterProperty;
@@ -368,7 +372,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
                 mode == PropertyAccessMode.PreferProperty
                 || mode == PropertyAccessMode.FieldDuringConstruction
                 || mode == PropertyAccessMode.PreferFieldDuringConstruction
-            ) {
+            )
+            {
                 if (hasGetter)
                 {
                     memberInfo = getterProperty;

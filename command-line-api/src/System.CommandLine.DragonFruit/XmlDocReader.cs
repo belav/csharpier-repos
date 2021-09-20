@@ -49,7 +49,8 @@ namespace System.CommandLine.DragonFruit
         public bool TryGetMethodDescription(
             MethodInfo info,
             out CommandHelpMetadata commandHelpMetadata
-        ) {
+        )
+        {
             commandHelpMetadata = null;
 
             var sb = new StringBuilder();

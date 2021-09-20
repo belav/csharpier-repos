@@ -46,7 +46,8 @@ namespace Newtonsoft.Json.Tests.TestObjects
             Type objectType,
             object existingValue,
             JsonSerializer serializer
-        ) {
+        )
+        {
             return Enum.Parse(typeof(Color), reader.Value.ToString());
         }
 

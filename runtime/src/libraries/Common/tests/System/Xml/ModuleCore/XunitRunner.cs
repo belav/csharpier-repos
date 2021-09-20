@@ -65,7 +65,8 @@ namespace OLEDB.Test.ModuleCore
         public virtual IEnumerable<object[]> GetData(
             IAttributeInfo dataAttribute,
             IMethodInfo testMethod
-        ) {
+        )
+        {
             string methodName = (string)dataAttribute.GetConstructorArguments().Single();
             Func<CTestModule> moduleGenerator = XmlTestsAttribute.GetGenerator(
                 GetDeclaringType(testMethod),

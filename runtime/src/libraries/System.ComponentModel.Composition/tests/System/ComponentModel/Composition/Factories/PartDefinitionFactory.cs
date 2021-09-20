@@ -50,7 +50,8 @@ namespace System.ComponentModel.Composition.Factories
             Func<ComposablePart> partCreator,
             IEnumerable<ImportDefinition> imports,
             IEnumerable<ExportDefinition> exports
-        ) {
+        )
+        {
             return Create(metadata, partCreator, () => imports, () => exports);
         }
 
@@ -59,7 +60,8 @@ namespace System.ComponentModel.Composition.Factories
             Func<ComposablePart> partCreator,
             Func<IEnumerable<ImportDefinition>> importsCreator,
             Func<IEnumerable<ExportDefinition>> exportsCreator
-        ) {
+        )
+        {
             return new DerivedComposablePartDefinition(
                 metadata,
                 partCreator,

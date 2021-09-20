@@ -133,7 +133,8 @@ namespace System.Transactions.Tests
             IsolationLevel isoLevel,
             bool forcePromote,
             TransactionStatus expectedStatus
-        ) {
+        )
+        {
             TransactionOptions options = new TransactionOptions
             {
                 IsolationLevel = isoLevel,
@@ -286,7 +287,8 @@ namespace System.Transactions.Tests
             IsolationLevel isoLevel,
             bool forcePromote,
             TransactionStatus expectedStatus
-        ) {
+        )
+        {
             Run(cloneType, isoLevel, forcePromote, expectedStatus);
         }
     }

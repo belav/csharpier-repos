@@ -24,7 +24,8 @@ namespace Microsoft.CodeAnalysis.Serialization
             ObjectWriter writer,
             SolutionReplicationContext context,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             cancellationToken.ThrowIfCancellationRequested();
             if (text.Storage is not null)
             {
@@ -52,7 +53,8 @@ namespace Microsoft.CodeAnalysis.Serialization
         private SerializableSourceText DeserializeSerializableSourceText(
             ObjectReader reader,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             cancellationToken.ThrowIfCancellationRequested();
 
             var checksumAlgorithm = (SourceHashAlgorithm)reader.ReadInt32();
@@ -94,7 +96,8 @@ namespace Microsoft.CodeAnalysis.Serialization
         private SourceText DeserializeSourceText(
             ObjectReader reader,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var serializableSourceText = DeserializeSerializableSourceText(
                 reader,
                 cancellationToken
@@ -107,7 +110,8 @@ namespace Microsoft.CodeAnalysis.Serialization
             CompilationOptions options,
             ObjectWriter writer,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             cancellationToken.ThrowIfCancellationRequested();
 
             var language = options.Language;
@@ -122,7 +126,8 @@ namespace Microsoft.CodeAnalysis.Serialization
         private CompilationOptions DeserializeCompilationOptions(
             ObjectReader reader,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             cancellationToken.ThrowIfCancellationRequested();
 
             var language = reader.ReadString();
@@ -145,7 +150,8 @@ namespace Microsoft.CodeAnalysis.Serialization
         private ParseOptions DeserializeParseOptions(
             ObjectReader reader,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             cancellationToken.ThrowIfCancellationRequested();
 
             var language = reader.ReadString();
@@ -158,7 +164,8 @@ namespace Microsoft.CodeAnalysis.Serialization
             ProjectReference reference,
             ObjectWriter writer,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             cancellationToken.ThrowIfCancellationRequested();
 
             reference.ProjectId.WriteTo(writer);
@@ -169,7 +176,8 @@ namespace Microsoft.CodeAnalysis.Serialization
         private static ProjectReference DeserializeProjectReference(
             ObjectReader reader,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             cancellationToken.ThrowIfCancellationRequested();
 
             var projectId = ProjectId.ReadFrom(reader);
@@ -188,7 +196,8 @@ namespace Microsoft.CodeAnalysis.Serialization
             ObjectWriter writer,
             SolutionReplicationContext context,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             cancellationToken.ThrowIfCancellationRequested();
             WriteMetadataReferenceTo(reference, writer, context, cancellationToken);
         }
@@ -196,7 +205,8 @@ namespace Microsoft.CodeAnalysis.Serialization
         private MetadataReference DeserializeMetadataReference(
             ObjectReader reader,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             cancellationToken.ThrowIfCancellationRequested();
             return ReadMetadataReferenceFrom(reader, cancellationToken);
         }
@@ -205,7 +215,8 @@ namespace Microsoft.CodeAnalysis.Serialization
             AnalyzerReference reference,
             ObjectWriter writer,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             cancellationToken.ThrowIfCancellationRequested();
             WriteTo(reference, writer, cancellationToken);
         }
@@ -213,7 +224,8 @@ namespace Microsoft.CodeAnalysis.Serialization
         private AnalyzerReference DeserializeAnalyzerReference(
             ObjectReader reader,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             cancellationToken.ThrowIfCancellationRequested();
             return ReadAnalyzerReferenceFrom(reader, cancellationToken);
         }

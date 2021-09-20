@@ -33,7 +33,8 @@ namespace Microsoft.CSharp.RuntimeBinder.ComInterop
         internal Expression InitializeArgumentVariant(
             MemberExpression variant,
             Expression parameter
-        ) {
+        )
+        {
             //NOTE: we must remember our variant
             //the reason is that argument order does not map exactly to the order of variants for invoke
             //and when we are doing clean-up we must be sure we are cleaning the variant we have initialized.
@@ -78,7 +79,8 @@ namespace Microsoft.CSharp.RuntimeBinder.ComInterop
                 || (_targetComType == VarEnum.VT_VARIANT)
                 || (_targetComType == VarEnum.VT_RECORD)
                 || (_targetComType == VarEnum.VT_ARRAY)
-            ) {
+            )
+            {
                 // paramVariants._elementN.AsT = (cast)argN
                 return Expression.Assign(
                     Expression.Property(variant, Variant.GetAccessor(_targetComType)),

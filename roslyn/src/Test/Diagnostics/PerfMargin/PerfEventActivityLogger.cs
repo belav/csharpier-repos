@@ -37,7 +37,8 @@ namespace Roslyn.Hosting.Diagnostics.PerfMargin
             LogMessage logMessage,
             int uniquePairId,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             _model.BlockStart(functionId);
         }
 
@@ -47,7 +48,8 @@ namespace Roslyn.Hosting.Diagnostics.PerfMargin
             int uniquePairId,
             int delta,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             _model.BlockDisposed(functionId);
         }
     }

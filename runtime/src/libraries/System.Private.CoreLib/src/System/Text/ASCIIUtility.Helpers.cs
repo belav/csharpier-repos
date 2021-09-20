@@ -41,7 +41,8 @@ namespace System.Text
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         internal static uint CountNumberOfLeadingAsciiBytesFromUInt32WithSomeNonAsciiData(
             uint value
-        ) {
+        )
+        {
             Debug.Assert(
                 !AllBytesInUInt32AreAscii(value),
                 "Caller shouldn't provide an all-ASCII value."

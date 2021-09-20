@@ -1085,7 +1085,8 @@ namespace System.Runtime.Intrinsics.X86
             int* baseAddress,
             Vector128<int> index,
             byte scale
-        ) {
+        )
+        {
             return scale switch
             {
                 1 => GatherVector128(baseAddress, index, 1),
@@ -1104,7 +1105,8 @@ namespace System.Runtime.Intrinsics.X86
             uint* baseAddress,
             Vector128<int> index,
             byte scale
-        ) {
+        )
+        {
             return scale switch
             {
                 1 => GatherVector128(baseAddress, index, 1),
@@ -1123,7 +1125,8 @@ namespace System.Runtime.Intrinsics.X86
             long* baseAddress,
             Vector128<int> index,
             byte scale
-        ) {
+        )
+        {
             return scale switch
             {
                 1 => GatherVector128(baseAddress, index, 1),
@@ -1142,7 +1145,8 @@ namespace System.Runtime.Intrinsics.X86
             ulong* baseAddress,
             Vector128<int> index,
             byte scale
-        ) {
+        )
+        {
             return scale switch
             {
                 1 => GatherVector128(baseAddress, index, 1),
@@ -1161,7 +1165,8 @@ namespace System.Runtime.Intrinsics.X86
             float* baseAddress,
             Vector128<int> index,
             byte scale
-        ) {
+        )
+        {
             return scale switch
             {
                 1 => GatherVector128(baseAddress, index, 1),
@@ -1180,7 +1185,8 @@ namespace System.Runtime.Intrinsics.X86
             double* baseAddress,
             Vector128<int> index,
             byte scale
-        ) {
+        )
+        {
             return scale switch
             {
                 1 => GatherVector128(baseAddress, index, 1),
@@ -1199,7 +1205,8 @@ namespace System.Runtime.Intrinsics.X86
             int* baseAddress,
             Vector128<long> index,
             byte scale
-        ) {
+        )
+        {
             return scale switch
             {
                 1 => GatherVector128(baseAddress, index, 1),
@@ -1218,7 +1225,8 @@ namespace System.Runtime.Intrinsics.X86
             uint* baseAddress,
             Vector128<long> index,
             byte scale
-        ) {
+        )
+        {
             return scale switch
             {
                 1 => GatherVector128(baseAddress, index, 1),
@@ -1237,7 +1245,8 @@ namespace System.Runtime.Intrinsics.X86
             long* baseAddress,
             Vector128<long> index,
             byte scale
-        ) {
+        )
+        {
             return scale switch
             {
                 1 => GatherVector128(baseAddress, index, 1),
@@ -1256,7 +1265,8 @@ namespace System.Runtime.Intrinsics.X86
             ulong* baseAddress,
             Vector128<long> index,
             byte scale
-        ) {
+        )
+        {
             return scale switch
             {
                 1 => GatherVector128(baseAddress, index, 1),
@@ -1275,7 +1285,8 @@ namespace System.Runtime.Intrinsics.X86
             float* baseAddress,
             Vector128<long> index,
             byte scale
-        ) {
+        )
+        {
             return scale switch
             {
                 1 => GatherVector128(baseAddress, index, 1),
@@ -1294,7 +1305,8 @@ namespace System.Runtime.Intrinsics.X86
             double* baseAddress,
             Vector128<long> index,
             byte scale
-        ) {
+        )
+        {
             return scale switch
             {
                 1 => GatherVector128(baseAddress, index, 1),
@@ -1313,7 +1325,8 @@ namespace System.Runtime.Intrinsics.X86
             int* baseAddress,
             Vector256<int> index,
             byte scale
-        ) {
+        )
+        {
             return scale switch
             {
                 1 => GatherVector256(baseAddress, index, 1),
@@ -1332,7 +1345,8 @@ namespace System.Runtime.Intrinsics.X86
             uint* baseAddress,
             Vector256<int> index,
             byte scale
-        ) {
+        )
+        {
             return scale switch
             {
                 1 => GatherVector256(baseAddress, index, 1),
@@ -1351,7 +1365,8 @@ namespace System.Runtime.Intrinsics.X86
             long* baseAddress,
             Vector128<int> index,
             byte scale
-        ) {
+        )
+        {
             return scale switch
             {
                 1 => GatherVector256(baseAddress, index, 1),
@@ -1370,7 +1385,8 @@ namespace System.Runtime.Intrinsics.X86
             ulong* baseAddress,
             Vector128<int> index,
             byte scale
-        ) {
+        )
+        {
             return scale switch
             {
                 1 => GatherVector256(baseAddress, index, 1),
@@ -1389,7 +1405,8 @@ namespace System.Runtime.Intrinsics.X86
             float* baseAddress,
             Vector256<int> index,
             byte scale
-        ) {
+        )
+        {
             return scale switch
             {
                 1 => GatherVector256(baseAddress, index, 1),
@@ -1408,7 +1425,8 @@ namespace System.Runtime.Intrinsics.X86
             double* baseAddress,
             Vector128<int> index,
             byte scale
-        ) {
+        )
+        {
             return scale switch
             {
                 1 => GatherVector256(baseAddress, index, 1),
@@ -1427,7 +1445,8 @@ namespace System.Runtime.Intrinsics.X86
             int* baseAddress,
             Vector256<long> index,
             byte scale
-        ) {
+        )
+        {
             return scale switch
             {
                 1 => GatherVector128(baseAddress, index, 1),
@@ -1446,7 +1465,8 @@ namespace System.Runtime.Intrinsics.X86
             uint* baseAddress,
             Vector256<long> index,
             byte scale
-        ) {
+        )
+        {
             return scale switch
             {
                 1 => GatherVector128(baseAddress, index, 1),
@@ -1465,7 +1485,8 @@ namespace System.Runtime.Intrinsics.X86
             long* baseAddress,
             Vector256<long> index,
             byte scale
-        ) {
+        )
+        {
             return scale switch
             {
                 1 => GatherVector256(baseAddress, index, 1),
@@ -1484,7 +1505,8 @@ namespace System.Runtime.Intrinsics.X86
             ulong* baseAddress,
             Vector256<long> index,
             byte scale
-        ) {
+        )
+        {
             return scale switch
             {
                 1 => GatherVector256(baseAddress, index, 1),
@@ -1503,7 +1525,8 @@ namespace System.Runtime.Intrinsics.X86
             float* baseAddress,
             Vector256<long> index,
             byte scale
-        ) {
+        )
+        {
             return scale switch
             {
                 1 => GatherVector128(baseAddress, index, 1),
@@ -1522,7 +1545,8 @@ namespace System.Runtime.Intrinsics.X86
             double* baseAddress,
             Vector256<long> index,
             byte scale
-        ) {
+        )
+        {
             return scale switch
             {
                 1 => GatherVector256(baseAddress, index, 1),
@@ -1544,7 +1568,8 @@ namespace System.Runtime.Intrinsics.X86
             Vector128<int> index,
             Vector128<int> mask,
             byte scale
-        ) {
+        )
+        {
             return scale switch
             {
                 1 => GatherMaskVector128(source, baseAddress, index, mask, 1),
@@ -1565,7 +1590,8 @@ namespace System.Runtime.Intrinsics.X86
             Vector128<int> index,
             Vector128<uint> mask,
             byte scale
-        ) {
+        )
+        {
             return scale switch
             {
                 1 => GatherMaskVector128(source, baseAddress, index, mask, 1),
@@ -1586,7 +1612,8 @@ namespace System.Runtime.Intrinsics.X86
             Vector128<int> index,
             Vector128<long> mask,
             byte scale
-        ) {
+        )
+        {
             return scale switch
             {
                 1 => GatherMaskVector128(source, baseAddress, index, mask, 1),
@@ -1607,7 +1634,8 @@ namespace System.Runtime.Intrinsics.X86
             Vector128<int> index,
             Vector128<ulong> mask,
             byte scale
-        ) {
+        )
+        {
             return scale switch
             {
                 1 => GatherMaskVector128(source, baseAddress, index, mask, 1),
@@ -1628,7 +1656,8 @@ namespace System.Runtime.Intrinsics.X86
             Vector128<int> index,
             Vector128<float> mask,
             byte scale
-        ) {
+        )
+        {
             return scale switch
             {
                 1 => GatherMaskVector128(source, baseAddress, index, mask, 1),
@@ -1649,7 +1678,8 @@ namespace System.Runtime.Intrinsics.X86
             Vector128<int> index,
             Vector128<double> mask,
             byte scale
-        ) {
+        )
+        {
             return scale switch
             {
                 1 => GatherMaskVector128(source, baseAddress, index, mask, 1),
@@ -1670,7 +1700,8 @@ namespace System.Runtime.Intrinsics.X86
             Vector128<long> index,
             Vector128<int> mask,
             byte scale
-        ) {
+        )
+        {
             return scale switch
             {
                 1 => GatherMaskVector128(source, baseAddress, index, mask, 1),
@@ -1691,7 +1722,8 @@ namespace System.Runtime.Intrinsics.X86
             Vector128<long> index,
             Vector128<uint> mask,
             byte scale
-        ) {
+        )
+        {
             return scale switch
             {
                 1 => GatherMaskVector128(source, baseAddress, index, mask, 1),
@@ -1712,7 +1744,8 @@ namespace System.Runtime.Intrinsics.X86
             Vector128<long> index,
             Vector128<long> mask,
             byte scale
-        ) {
+        )
+        {
             return scale switch
             {
                 1 => GatherMaskVector128(source, baseAddress, index, mask, 1),
@@ -1733,7 +1766,8 @@ namespace System.Runtime.Intrinsics.X86
             Vector128<long> index,
             Vector128<ulong> mask,
             byte scale
-        ) {
+        )
+        {
             return scale switch
             {
                 1 => GatherMaskVector128(source, baseAddress, index, mask, 1),
@@ -1754,7 +1788,8 @@ namespace System.Runtime.Intrinsics.X86
             Vector128<long> index,
             Vector128<float> mask,
             byte scale
-        ) {
+        )
+        {
             return scale switch
             {
                 1 => GatherMaskVector128(source, baseAddress, index, mask, 1),
@@ -1775,7 +1810,8 @@ namespace System.Runtime.Intrinsics.X86
             Vector128<long> index,
             Vector128<double> mask,
             byte scale
-        ) {
+        )
+        {
             return scale switch
             {
                 1 => GatherMaskVector128(source, baseAddress, index, mask, 1),
@@ -1796,7 +1832,8 @@ namespace System.Runtime.Intrinsics.X86
             Vector256<int> index,
             Vector256<int> mask,
             byte scale
-        ) {
+        )
+        {
             return scale switch
             {
                 1 => GatherMaskVector256(source, baseAddress, index, mask, 1),
@@ -1817,7 +1854,8 @@ namespace System.Runtime.Intrinsics.X86
             Vector256<int> index,
             Vector256<uint> mask,
             byte scale
-        ) {
+        )
+        {
             return scale switch
             {
                 1 => GatherMaskVector256(source, baseAddress, index, mask, 1),
@@ -1838,7 +1876,8 @@ namespace System.Runtime.Intrinsics.X86
             Vector128<int> index,
             Vector256<long> mask,
             byte scale
-        ) {
+        )
+        {
             return scale switch
             {
                 1 => GatherMaskVector256(source, baseAddress, index, mask, 1),
@@ -1859,7 +1898,8 @@ namespace System.Runtime.Intrinsics.X86
             Vector128<int> index,
             Vector256<ulong> mask,
             byte scale
-        ) {
+        )
+        {
             return scale switch
             {
                 1 => GatherMaskVector256(source, baseAddress, index, mask, 1),
@@ -1880,7 +1920,8 @@ namespace System.Runtime.Intrinsics.X86
             Vector256<int> index,
             Vector256<float> mask,
             byte scale
-        ) {
+        )
+        {
             return scale switch
             {
                 1 => GatherMaskVector256(source, baseAddress, index, mask, 1),
@@ -1901,7 +1942,8 @@ namespace System.Runtime.Intrinsics.X86
             Vector128<int> index,
             Vector256<double> mask,
             byte scale
-        ) {
+        )
+        {
             return scale switch
             {
                 1 => GatherMaskVector256(source, baseAddress, index, mask, 1),
@@ -1922,7 +1964,8 @@ namespace System.Runtime.Intrinsics.X86
             Vector256<long> index,
             Vector128<int> mask,
             byte scale
-        ) {
+        )
+        {
             return scale switch
             {
                 1 => GatherMaskVector128(source, baseAddress, index, mask, 1),
@@ -1943,7 +1986,8 @@ namespace System.Runtime.Intrinsics.X86
             Vector256<long> index,
             Vector128<uint> mask,
             byte scale
-        ) {
+        )
+        {
             return scale switch
             {
                 1 => GatherMaskVector128(source, baseAddress, index, mask, 1),
@@ -1964,7 +2008,8 @@ namespace System.Runtime.Intrinsics.X86
             Vector256<long> index,
             Vector256<long> mask,
             byte scale
-        ) {
+        )
+        {
             return scale switch
             {
                 1 => GatherMaskVector256(source, baseAddress, index, mask, 1),
@@ -1985,7 +2030,8 @@ namespace System.Runtime.Intrinsics.X86
             Vector256<long> index,
             Vector256<ulong> mask,
             byte scale
-        ) {
+        )
+        {
             return scale switch
             {
                 1 => GatherMaskVector256(source, baseAddress, index, mask, 1),
@@ -2006,7 +2052,8 @@ namespace System.Runtime.Intrinsics.X86
             Vector256<long> index,
             Vector128<float> mask,
             byte scale
-        ) {
+        )
+        {
             return scale switch
             {
                 1 => GatherMaskVector128(source, baseAddress, index, mask, 1),
@@ -2027,7 +2074,8 @@ namespace System.Runtime.Intrinsics.X86
             Vector256<long> index,
             Vector256<double> mask,
             byte scale
-        ) {
+        )
+        {
             return scale switch
             {
                 1 => GatherMaskVector256(source, baseAddress, index, mask, 1),

@@ -644,7 +644,8 @@ class Test : StaticModClass
         private static void GetAllNamespaceNames(
             ArrayBuilder<string> builder,
             NamespaceSymbol @namespace
-        ) {
+        )
+        {
             builder.Add(@namespace.ToTestDisplayString());
             foreach (var member in @namespace.GetMembers())
             {

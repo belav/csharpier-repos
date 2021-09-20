@@ -125,7 +125,8 @@ namespace System.Threading
                 if (
                     workerThreads > _maxThreads
                     || !ThreadPool.CanSetMinIOCompletionThreads(ioCompletionThreads)
-                ) {
+                )
+                {
                     return false;
                 }
 
@@ -188,7 +189,8 @@ namespace System.Threading
                 if (
                     workerThreads < _minThreads
                     || !ThreadPool.CanSetMaxIOCompletionThreads(ioCompletionThreads)
-                ) {
+                )
+                {
                     return false;
                 }
 
@@ -262,7 +264,8 @@ namespace System.Threading
         private void NotifyWorkItemProgress(
             object threadLocalCompletionCountObject,
             int currentTimeMs
-        ) {
+        )
+        {
             ThreadInt64PersistentCounter.Increment(threadLocalCompletionCountObject);
             Volatile.Write(ref _separated.lastDequeueTime, Environment.TickCount);
 
@@ -281,7 +284,8 @@ namespace System.Threading
         internal bool NotifyWorkItemComplete(
             object? threadLocalCompletionCountObject,
             int currentTimeMs
-        ) {
+        )
+        {
             Debug.Assert(threadLocalCompletionCountObject != null);
 
             NotifyWorkItemProgress(threadLocalCompletionCountObject!, currentTimeMs);
@@ -351,7 +355,8 @@ namespace System.Threading
                         if (
                             oldCounts.NumThreadsGoal > currentCounts.NumThreadsGoal
                             && oldCounts.NumThreadsGoal >= newMax
-                        ) {
+                        )
+                        {
                             // someone (probably the gate thread) increased the thread count more than
                             // we are about to do.  Don't interfere.
                             break;

@@ -45,7 +45,8 @@ namespace Castle.DynamicProxy.Contributors
         public virtual void CollectMembersToProxy(
             IProxyGenerationHook hook,
             IMembersCollectorSink sink
-        ) {
+        )
+        {
             var checkedMethods = new HashSet<MethodInfo>();
 
             CollectProperties();
@@ -187,7 +188,8 @@ namespace Castle.DynamicProxy.Contributors
             MethodInfo method,
             bool onlyVirtuals,
             IProxyGenerationHook hook
-        ) {
+        )
+        {
             if (IsInternalAndNotVisibleToDynamicProxy(method))
             {
                 return false;
@@ -200,7 +202,8 @@ namespace Castle.DynamicProxy.Contributors
                     method.DeclaringType != typeof(MarshalByRefObject)
                     && method.IsGetType() == false
                     && method.IsMemberwiseClone() == false
-                ) {
+                )
+                {
                     Logger.DebugFormat(
                         "Excluded non-overridable method {0} on {1} because it cannot be intercepted.",
                         method.Name,
@@ -231,7 +234,8 @@ namespace Castle.DynamicProxy.Contributors
                     || method.IsFamilyOrAssembly
                     || method.IsFamilyAndAssembly
                 ) == false
-            ) {
+            )
+            {
                 return false;
             }
 

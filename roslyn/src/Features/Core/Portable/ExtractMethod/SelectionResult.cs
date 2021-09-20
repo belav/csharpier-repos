@@ -34,7 +34,8 @@ namespace Microsoft.CodeAnalysis.ExtractMethod
             SemanticDocument document,
             SyntaxAnnotation firstTokenAnnotation,
             SyntaxAnnotation lastTokenAnnotation
-        ) {
+        )
+        {
             Status = status;
 
             OriginalSpan = originalSpan;
@@ -124,7 +125,8 @@ namespace Microsoft.CodeAnalysis.ExtractMethod
                 var currentToken = firstToken;
                 currentToken.Span.End < lastToken.SpanStart;
                 currentToken = currentToken.GetNextToken()
-            ) {
+            )
+            {
                 // [|
                 //     async () => await ....
                 // |]
@@ -135,7 +137,8 @@ namespace Microsoft.CodeAnalysis.ExtractMethod
                     SemanticDocument.Project.LanguageServices.GetService<ISyntaxFactsService>()
                         .IsAwaitKeyword(currentToken)
                     && !UnderAnonymousOrLocalMethod(currentToken, firstToken, lastToken)
-                ) {
+                )
+                {
                     return true;
                 }
             }
@@ -160,7 +163,8 @@ namespace Microsoft.CodeAnalysis.ExtractMethod
                 if (
                     IsConfigureAwaitFalse(node)
                     && !UnderAnonymousOrLocalMethod(node.GetFirstToken(), firstToken, lastToken)
-                ) {
+                )
+                {
                     return true;
                 }
             }
@@ -190,7 +194,8 @@ namespace Microsoft.CodeAnalysis.ExtractMethod
                     identifier.ValueText,
                     nameof(Task.ConfigureAwait)
                 )
-            ) {
+            )
+            {
                 return false;
             }
 

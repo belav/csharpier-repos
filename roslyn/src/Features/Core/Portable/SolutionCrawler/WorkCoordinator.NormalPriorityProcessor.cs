@@ -55,14 +55,16 @@ namespace Microsoft.CodeAnalysis.SolutionCrawler
                         IGlobalOperationNotificationService globalOperationNotificationService,
                         int backOffTimeSpanInMs,
                         CancellationToken shutdownToken
-                    ) : base(
-                        listener,
-                        processor,
-                        lazyAnalyzers,
-                        globalOperationNotificationService,
-                        backOffTimeSpanInMs,
-                        shutdownToken
-                    ) {
+                    )
+                        : base(
+                            listener,
+                            processor,
+                            lazyAnalyzers,
+                            globalOperationNotificationService,
+                            backOffTimeSpanInMs,
+                            shutdownToken
+                        )
+                    {
                         _running = Task.CompletedTask;
                         _workItemQueue = new AsyncDocumentWorkItemQueue(
                             processor._registration.ProgressReporter,
@@ -118,7 +120,8 @@ namespace Microsoft.CodeAnalysis.SolutionCrawler
                             !item.InvocationReasons.Contains(
                                 PredefinedInvocationReasons.HighPriority
                             )
-                        ) {
+                        )
+                        {
                             return;
                         }
 
@@ -187,7 +190,8 @@ namespace Microsoft.CodeAnalysis.SolutionCrawler
                             if (
                                 await TryProcessOneHigherPriorityDocumentAsync()
                                     .ConfigureAwait(false)
-                            ) {
+                            )
+                            {
                                 // successfully processed a high priority document.
                                 return;
                             }
@@ -201,7 +205,8 @@ namespace Microsoft.CodeAnalysis.SolutionCrawler
                                     out var workItem,
                                     out var documentCancellation
                                 )
-                            ) {
+                            )
+                            {
                                 return;
                             }
 
@@ -279,7 +284,8 @@ namespace Microsoft.CodeAnalysis.SolutionCrawler
                             // Now any visible documents
                             foreach (
                                 var visibleDocumentId in Processor._documentTracker.GetVisibleDocuments()
-                            ) {
+                            )
+                            {
                                 yield return visibleDocumentId;
                             }
                         }
@@ -314,7 +320,8 @@ namespace Microsoft.CodeAnalysis.SolutionCrawler
                                         out var workItem,
                                         out var documentCancellation
                                     )
-                                ) {
+                                )
+                                {
                                     RemoveHigherPriorityDocument(documentId);
                                     continue;
                                 }
@@ -347,7 +354,8 @@ namespace Microsoft.CodeAnalysis.SolutionCrawler
                                 documentId,
                                 out var projectCache
                             )
-                        ) {
+                        )
+                        {
                             projectCache?.Dispose();
                         }
                     }
@@ -356,7 +364,8 @@ namespace Microsoft.CodeAnalysis.SolutionCrawler
                         ImmutableArray<IIncrementalAnalyzer> analyzers,
                         WorkItem workItem,
                         CancellationToken cancellationToken
-                    ) {
+                    )
+                    {
                         Contract.ThrowIfNull(workItem.DocumentId);
 
                         if (CancellationToken.IsCancellationRequested)
@@ -395,7 +404,8 @@ namespace Microsoft.CodeAnalysis.SolutionCrawler
                                     workItem,
                                     cancellationToken
                                 )
-                            ) {
+                            )
+                            {
                                 var textDocument = solution.GetTextDocument(documentId);
 
                                 if (textDocument != null)
@@ -494,13 +504,15 @@ namespace Microsoft.CodeAnalysis.SolutionCrawler
                         TextDocument textDocument,
                         bool isOpen,
                         CancellationToken cancellationToken
-                    ) {
+                    )
+                    {
                         if (
                             !isOpen
                             || !workItem.InvocationReasons.Contains(
                                 PredefinedInvocationReasons.DocumentOpened
                             )
-                        ) {
+                        )
+                        {
                             return;
                         }
 
@@ -523,7 +535,8 @@ namespace Microsoft.CodeAnalysis.SolutionCrawler
                             IIncrementalAnalyzer analyzer,
                             TextDocument textDocument,
                             CancellationToken cancellationToken
-                        ) {
+                        )
+                        {
                             if (textDocument is Document document)
                             {
                                 await analyzer.DocumentOpenAsync(document, cancellationToken)
@@ -546,13 +559,15 @@ namespace Microsoft.CodeAnalysis.SolutionCrawler
                         TextDocument textDocument,
                         bool isOpen,
                         CancellationToken cancellationToken
-                    ) {
+                    )
+                    {
                         if (
                             isOpen
                             || !workItem.InvocationReasons.Contains(
                                 PredefinedInvocationReasons.DocumentClosed
                             )
-                        ) {
+                        )
+                        {
                             return;
                         }
 
@@ -575,7 +590,8 @@ namespace Microsoft.CodeAnalysis.SolutionCrawler
                             IIncrementalAnalyzer analyzer,
                             TextDocument textDocument,
                             CancellationToken cancellationToken
-                        ) {
+                        )
+                        {
                             if (textDocument is Document document)
                             {
                                 await analyzer.DocumentCloseAsync(document, cancellationToken)
@@ -596,7 +612,8 @@ namespace Microsoft.CodeAnalysis.SolutionCrawler
                         WorkItem workItem,
                         TextDocument document,
                         CancellationToken cancellationToken
-                    ) {
+                    )
+                    {
                         try
                         {
 #if DEBUG
@@ -614,7 +631,8 @@ namespace Microsoft.CodeAnalysis.SolutionCrawler
                                 || !workItem.InvocationReasons.Contains(
                                     PredefinedInvocationReasons.Reanalyze
                                 )
-                            ) {
+                            )
+                            {
                                 return;
                             }
 
@@ -650,7 +668,8 @@ namespace Microsoft.CodeAnalysis.SolutionCrawler
                                 && !workItem.InvocationReasons.Contains(
                                     PredefinedInvocationReasons.SemanticChanged
                                 )
-                            ) {
+                            )
+                            {
                                 await Processor.RunAnalyzersAsync(
                                         reanalyzers,
                                         sourceDocument,
@@ -673,7 +692,8 @@ namespace Microsoft.CodeAnalysis.SolutionCrawler
                             IIncrementalAnalyzer analyzer,
                             TextDocument textDocument,
                             CancellationToken cancellationToken
-                        ) {
+                        )
+                        {
                             if (textDocument is Document document)
                             {
                                 await analyzer.DocumentResetAsync(document, cancellationToken)
@@ -694,7 +714,8 @@ namespace Microsoft.CodeAnalysis.SolutionCrawler
                             TextDocument textDocument,
                             InvocationReasons reasons,
                             CancellationToken cancellationToken
-                        ) {
+                        )
+                        {
                             if (textDocument is Document document)
                             {
                                 await analyzer.AnalyzeSyntaxAsync(
@@ -725,7 +746,8 @@ namespace Microsoft.CodeAnalysis.SolutionCrawler
                         ImmutableArray<IIncrementalAnalyzer> analyzers,
                         DocumentId documentId,
                         CancellationToken cancellationToken
-                    ) {
+                    )
+                    {
                         foreach (var analyzer in analyzers)
                         {
                             await analyzer.RemoveDocumentAsync(documentId, cancellationToken)
@@ -783,7 +805,8 @@ namespace Microsoft.CodeAnalysis.SolutionCrawler
                         void ResetLogAggregatorIfNeeded(
                             Solution currentSolution,
                             Solution? oldSolution
-                        ) {
+                        )
+                        {
                             if (oldSolution == null || currentSolution.Id == oldSolution.Id)
                             {
                                 // we log aggregated info when solution is changed such as
@@ -840,7 +863,8 @@ namespace Microsoft.CodeAnalysis.SolutionCrawler
                         internal void WaitUntilCompletion(
                             ImmutableArray<IIncrementalAnalyzer> analyzers,
                             List<WorkItem> items
-                        ) {
+                        )
+                        {
                             foreach (var item in items)
                             {
                                 _normalPriorityProcessor.ProcessDocumentAsync(

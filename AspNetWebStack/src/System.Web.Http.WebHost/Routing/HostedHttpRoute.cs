@@ -16,7 +16,8 @@ namespace System.Web.Http.WebHost.Routing
             IDictionary<string, object> constraints,
             IDictionary<string, object> dataTokens,
             HttpMessageHandler handler
-        ) {
+        )
+        {
             RouteValueDictionary routeDefaults =
                 defaults != null ? new RouteValueDictionary(defaults) : null;
             RouteValueDictionary routeConstraints =
@@ -88,7 +89,8 @@ namespace System.Web.Http.WebHost.Routing
         public IHttpVirtualPathData GetVirtualPath(
             HttpRequestMessage request,
             IDictionary<string, object> values
-        ) {
+        )
+        {
             if (request == null)
             {
                 throw Error.ArgumentNull("request");

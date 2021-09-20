@@ -790,7 +790,8 @@ namespace Microsoft.AspNetCore.Mvc.TagHelpers
             string tagName = "distributed-cache",
             TagHelperAttributeList attributes = null,
             string childContent = "some child content"
-        ) {
+        )
+        {
             attributes = attributes ?? new TagHelperAttributeList { { "attr", "value" } };
 
             return new TagHelperOutput(
@@ -807,7 +808,8 @@ namespace Microsoft.AspNetCore.Mvc.TagHelpers
 
         private static IDistributedCacheTagHelperStorage GetStorage(
             IOptions<MemoryDistributedCacheOptions> options = null
-        ) {
+        )
+        {
             return new DistributedCacheTagHelperStorage(
                 new MemoryDistributedCache(
                     options ?? Options.Create(new MemoryDistributedCacheOptions())

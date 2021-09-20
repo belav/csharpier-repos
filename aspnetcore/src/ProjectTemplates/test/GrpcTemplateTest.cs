@@ -75,7 +75,8 @@ namespace Templates.Test
                     hasListeningUri: !unsupported,
                     logger: Logger
                 )
-            ) {
+            )
+            {
                 // These templates are HTTPS + HTTP/2 only which is not supported on Mac due to missing ALPN support.
                 // https://github.com/dotnet/aspnetcore/issues/11061
                 if (isOsx)
@@ -121,7 +122,8 @@ namespace Templates.Test
                 var aspNetProcess = project.StartPublishedProjectAsync(
                     hasListeningUri: !unsupported
                 )
-            ) {
+            )
+            {
                 // These templates are HTTPS + HTTP/2 only which is not supported on Mac due to missing ALPN support.
                 // https://github.com/dotnet/aspnetcore/issues/11061
                 if (isOsx)

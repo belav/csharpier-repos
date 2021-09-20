@@ -78,7 +78,8 @@ namespace VersioningWebSite
             string lowerBound,
             string higherBound,
             string[] rangeValues
-        ) {
+        )
+        {
             // [3-5, (3-5, 3-5], 3-5), 3-5 are not valid
             if (string.IsNullOrEmpty(lowerBound) || string.IsNullOrEmpty(higherBound))
             {
@@ -104,13 +105,15 @@ namespace VersioningWebSite
             string lowerBound,
             string higherBound,
             string[] rangeValues
-        ) {
+        )
+        {
             // (5], [5), (5), [5, (5, 5], 5) are not valid
             if (
                 lowerBound == "("
                 || higherBound == ")"
                 || (string.IsNullOrEmpty(lowerBound) ^ string.IsNullOrEmpty(higherBound))
-            ) {
+            )
+            {
                 return null;
             }
 

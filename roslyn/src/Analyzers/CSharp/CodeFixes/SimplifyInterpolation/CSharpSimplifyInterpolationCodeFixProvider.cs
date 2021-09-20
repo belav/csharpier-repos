@@ -57,12 +57,14 @@ namespace Microsoft.CodeAnalysis.CSharp.SimplifyInterpolation
         protected override string Escape(
             InterpolatedStringExpressionSyntax interpolatedString,
             string formatString
-        ) {
+        )
+        {
             var result = new StringBuilder();
             if (
                 interpolatedString.StringStartToken.Kind()
                 == SyntaxKind.InterpolatedVerbatimStringStartToken
-            ) {
+            )
+            {
                 foreach (var c in formatString)
                 {
                     // in a verbatim string, the only char we have to escape is the double-quote char

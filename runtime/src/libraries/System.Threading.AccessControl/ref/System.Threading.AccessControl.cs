@@ -12,26 +12,28 @@ namespace System.Security.AccessControl
             System.Security.Principal.IdentityReference identity,
             System.Security.AccessControl.EventWaitHandleRights eventRights,
             System.Security.AccessControl.AccessControlType type
-        ) : base(
-            default(System.Security.Principal.IdentityReference),
-            default(int),
-            default(bool),
-            default(System.Security.AccessControl.InheritanceFlags),
-            default(System.Security.AccessControl.PropagationFlags),
-            default(System.Security.AccessControl.AccessControlType)
-        ) { }
+        )
+            : base(
+                default(System.Security.Principal.IdentityReference),
+                default(int),
+                default(bool),
+                default(System.Security.AccessControl.InheritanceFlags),
+                default(System.Security.AccessControl.PropagationFlags),
+                default(System.Security.AccessControl.AccessControlType)
+            ) { }
         public EventWaitHandleAccessRule(
             string identity,
             System.Security.AccessControl.EventWaitHandleRights eventRights,
             System.Security.AccessControl.AccessControlType type
-        ) : base(
-            default(System.Security.Principal.IdentityReference),
-            default(int),
-            default(bool),
-            default(System.Security.AccessControl.InheritanceFlags),
-            default(System.Security.AccessControl.PropagationFlags),
-            default(System.Security.AccessControl.AccessControlType)
-        ) { }
+        )
+            : base(
+                default(System.Security.Principal.IdentityReference),
+                default(int),
+                default(bool),
+                default(System.Security.AccessControl.InheritanceFlags),
+                default(System.Security.AccessControl.PropagationFlags),
+                default(System.Security.AccessControl.AccessControlType)
+            ) { }
         public System.Security.AccessControl.EventWaitHandleRights EventWaitHandleRights
         {
             get { throw null; }
@@ -43,14 +45,15 @@ namespace System.Security.AccessControl
             System.Security.Principal.IdentityReference identity,
             System.Security.AccessControl.EventWaitHandleRights eventRights,
             System.Security.AccessControl.AuditFlags flags
-        ) : base(
-            default(System.Security.Principal.IdentityReference),
-            default(int),
-            default(bool),
-            default(System.Security.AccessControl.InheritanceFlags),
-            default(System.Security.AccessControl.PropagationFlags),
-            default(System.Security.AccessControl.AuditFlags)
-        ) { }
+        )
+            : base(
+                default(System.Security.Principal.IdentityReference),
+                default(int),
+                default(bool),
+                default(System.Security.AccessControl.InheritanceFlags),
+                default(System.Security.AccessControl.PropagationFlags),
+                default(System.Security.AccessControl.AuditFlags)
+            ) { }
         public System.Security.AccessControl.EventWaitHandleRights EventWaitHandleRights
         {
             get { throw null; }
@@ -91,7 +94,8 @@ namespace System.Security.AccessControl
             System.Security.AccessControl.InheritanceFlags inheritanceFlags,
             System.Security.AccessControl.PropagationFlags propagationFlags,
             System.Security.AccessControl.AccessControlType type
-        ) {
+        )
+        {
             throw null;
         }
         public void AddAccessRule(System.Security.AccessControl.EventWaitHandleAccessRule rule) { }
@@ -103,7 +107,8 @@ namespace System.Security.AccessControl
             System.Security.AccessControl.InheritanceFlags inheritanceFlags,
             System.Security.AccessControl.PropagationFlags propagationFlags,
             System.Security.AccessControl.AuditFlags flags
-        ) {
+        )
+        {
             throw null;
         }
         public bool RemoveAccessRule(System.Security.AccessControl.EventWaitHandleAccessRule rule)
@@ -138,26 +143,28 @@ namespace System.Security.AccessControl
             System.Security.Principal.IdentityReference identity,
             System.Security.AccessControl.MutexRights eventRights,
             System.Security.AccessControl.AccessControlType type
-        ) : base(
-            default(System.Security.Principal.IdentityReference),
-            default(int),
-            default(bool),
-            default(System.Security.AccessControl.InheritanceFlags),
-            default(System.Security.AccessControl.PropagationFlags),
-            default(System.Security.AccessControl.AccessControlType)
-        ) { }
+        )
+            : base(
+                default(System.Security.Principal.IdentityReference),
+                default(int),
+                default(bool),
+                default(System.Security.AccessControl.InheritanceFlags),
+                default(System.Security.AccessControl.PropagationFlags),
+                default(System.Security.AccessControl.AccessControlType)
+            ) { }
         public MutexAccessRule(
             string identity,
             System.Security.AccessControl.MutexRights eventRights,
             System.Security.AccessControl.AccessControlType type
-        ) : base(
-            default(System.Security.Principal.IdentityReference),
-            default(int),
-            default(bool),
-            default(System.Security.AccessControl.InheritanceFlags),
-            default(System.Security.AccessControl.PropagationFlags),
-            default(System.Security.AccessControl.AccessControlType)
-        ) { }
+        )
+            : base(
+                default(System.Security.Principal.IdentityReference),
+                default(int),
+                default(bool),
+                default(System.Security.AccessControl.InheritanceFlags),
+                default(System.Security.AccessControl.PropagationFlags),
+                default(System.Security.AccessControl.AccessControlType)
+            ) { }
         public System.Security.AccessControl.MutexRights MutexRights
         {
             get { throw null; }
@@ -169,14 +176,15 @@ namespace System.Security.AccessControl
             System.Security.Principal.IdentityReference identity,
             System.Security.AccessControl.MutexRights eventRights,
             System.Security.AccessControl.AuditFlags flags
-        ) : base(
-            default(System.Security.Principal.IdentityReference),
-            default(int),
-            default(bool),
-            default(System.Security.AccessControl.InheritanceFlags),
-            default(System.Security.AccessControl.PropagationFlags),
-            default(System.Security.AccessControl.AuditFlags)
-        ) { }
+        )
+            : base(
+                default(System.Security.Principal.IdentityReference),
+                default(int),
+                default(bool),
+                default(System.Security.AccessControl.InheritanceFlags),
+                default(System.Security.AccessControl.PropagationFlags),
+                default(System.Security.AccessControl.AuditFlags)
+            ) { }
         public System.Security.AccessControl.MutexRights MutexRights
         {
             get { throw null; }
@@ -220,7 +228,8 @@ namespace System.Security.AccessControl
             System.Security.AccessControl.InheritanceFlags inheritanceFlags,
             System.Security.AccessControl.PropagationFlags propagationFlags,
             System.Security.AccessControl.AccessControlType type
-        ) {
+        )
+        {
             throw null;
         }
         public void AddAccessRule(System.Security.AccessControl.MutexAccessRule rule) { }
@@ -232,7 +241,8 @@ namespace System.Security.AccessControl
             System.Security.AccessControl.InheritanceFlags inheritanceFlags,
             System.Security.AccessControl.PropagationFlags propagationFlags,
             System.Security.AccessControl.AuditFlags flags
-        ) {
+        )
+        {
             throw null;
         }
         public bool RemoveAccessRule(System.Security.AccessControl.MutexAccessRule rule)
@@ -257,26 +267,28 @@ namespace System.Security.AccessControl
             System.Security.Principal.IdentityReference identity,
             System.Security.AccessControl.SemaphoreRights eventRights,
             System.Security.AccessControl.AccessControlType type
-        ) : base(
-            default(System.Security.Principal.IdentityReference),
-            default(int),
-            default(bool),
-            default(System.Security.AccessControl.InheritanceFlags),
-            default(System.Security.AccessControl.PropagationFlags),
-            default(System.Security.AccessControl.AccessControlType)
-        ) { }
+        )
+            : base(
+                default(System.Security.Principal.IdentityReference),
+                default(int),
+                default(bool),
+                default(System.Security.AccessControl.InheritanceFlags),
+                default(System.Security.AccessControl.PropagationFlags),
+                default(System.Security.AccessControl.AccessControlType)
+            ) { }
         public SemaphoreAccessRule(
             string identity,
             System.Security.AccessControl.SemaphoreRights eventRights,
             System.Security.AccessControl.AccessControlType type
-        ) : base(
-            default(System.Security.Principal.IdentityReference),
-            default(int),
-            default(bool),
-            default(System.Security.AccessControl.InheritanceFlags),
-            default(System.Security.AccessControl.PropagationFlags),
-            default(System.Security.AccessControl.AccessControlType)
-        ) { }
+        )
+            : base(
+                default(System.Security.Principal.IdentityReference),
+                default(int),
+                default(bool),
+                default(System.Security.AccessControl.InheritanceFlags),
+                default(System.Security.AccessControl.PropagationFlags),
+                default(System.Security.AccessControl.AccessControlType)
+            ) { }
         public System.Security.AccessControl.SemaphoreRights SemaphoreRights
         {
             get { throw null; }
@@ -288,14 +300,15 @@ namespace System.Security.AccessControl
             System.Security.Principal.IdentityReference identity,
             System.Security.AccessControl.SemaphoreRights eventRights,
             System.Security.AccessControl.AuditFlags flags
-        ) : base(
-            default(System.Security.Principal.IdentityReference),
-            default(int),
-            default(bool),
-            default(System.Security.AccessControl.InheritanceFlags),
-            default(System.Security.AccessControl.PropagationFlags),
-            default(System.Security.AccessControl.AuditFlags)
-        ) { }
+        )
+            : base(
+                default(System.Security.Principal.IdentityReference),
+                default(int),
+                default(bool),
+                default(System.Security.AccessControl.InheritanceFlags),
+                default(System.Security.AccessControl.PropagationFlags),
+                default(System.Security.AccessControl.AuditFlags)
+            ) { }
         public System.Security.AccessControl.SemaphoreRights SemaphoreRights
         {
             get { throw null; }
@@ -340,7 +353,8 @@ namespace System.Security.AccessControl
             System.Security.AccessControl.InheritanceFlags inheritanceFlags,
             System.Security.AccessControl.PropagationFlags propagationFlags,
             System.Security.AccessControl.AccessControlType type
-        ) {
+        )
+        {
             throw null;
         }
         public void AddAccessRule(System.Security.AccessControl.SemaphoreAccessRule rule) { }
@@ -352,7 +366,8 @@ namespace System.Security.AccessControl
             System.Security.AccessControl.InheritanceFlags inheritanceFlags,
             System.Security.AccessControl.PropagationFlags propagationFlags,
             System.Security.AccessControl.AuditFlags flags
-        ) {
+        )
+        {
             throw null;
         }
         public bool RemoveAccessRule(System.Security.AccessControl.SemaphoreAccessRule rule)
@@ -386,13 +401,15 @@ namespace System.Threading
             string? name,
             out bool createdNew,
             System.Security.AccessControl.EventWaitHandleSecurity? eventSecurity
-        ) {
+        )
+        {
             throw null;
         }
         public static System.Threading.EventWaitHandle OpenExisting(
             string name,
             System.Security.AccessControl.EventWaitHandleRights rights
-        ) {
+        )
+        {
             throw null;
         }
         public static bool TryOpenExisting(
@@ -400,7 +417,8 @@ namespace System.Threading
             System.Security.AccessControl.EventWaitHandleRights rights,
             [System.Diagnostics.CodeAnalysis.NotNullWhenAttribute(true)]
                 out System.Threading.EventWaitHandle? result
-        ) {
+        )
+        {
             throw null;
         }
     }
@@ -411,13 +429,15 @@ namespace System.Threading
             string? name,
             out bool createdNew,
             System.Security.AccessControl.MutexSecurity? mutexSecurity
-        ) {
+        )
+        {
             throw null;
         }
         public static System.Threading.Mutex OpenExisting(
             string name,
             System.Security.AccessControl.MutexRights rights
-        ) {
+        )
+        {
             throw null;
         }
         public static bool TryOpenExisting(
@@ -425,7 +445,8 @@ namespace System.Threading
             System.Security.AccessControl.MutexRights rights,
             [System.Diagnostics.CodeAnalysis.NotNullWhenAttribute(true)]
                 out System.Threading.Mutex? result
-        ) {
+        )
+        {
             throw null;
         }
     }
@@ -437,13 +458,15 @@ namespace System.Threading
             string? name,
             out bool createdNew,
             System.Security.AccessControl.SemaphoreSecurity? semaphoreSecurity
-        ) {
+        )
+        {
             throw null;
         }
         public static System.Threading.Semaphore OpenExisting(
             string name,
             System.Security.AccessControl.SemaphoreRights rights
-        ) {
+        )
+        {
             throw null;
         }
         public static bool TryOpenExisting(
@@ -451,7 +474,8 @@ namespace System.Threading
             System.Security.AccessControl.SemaphoreRights rights,
             [System.Diagnostics.CodeAnalysis.NotNullWhenAttribute(true)]
                 out System.Threading.Semaphore? result
-        ) {
+        )
+        {
             throw null;
         }
     }
@@ -459,17 +483,20 @@ namespace System.Threading
     {
         public static System.Security.AccessControl.EventWaitHandleSecurity GetAccessControl(
             this System.Threading.EventWaitHandle handle
-        ) {
+        )
+        {
             throw null;
         }
         public static System.Security.AccessControl.MutexSecurity GetAccessControl(
             this System.Threading.Mutex mutex
-        ) {
+        )
+        {
             throw null;
         }
         public static System.Security.AccessControl.SemaphoreSecurity GetAccessControl(
             this System.Threading.Semaphore semaphore
-        ) {
+        )
+        {
             throw null;
         }
         public static void SetAccessControl(

@@ -125,7 +125,8 @@ namespace Microsoft.AspNetCore.SignalR.Tests
         public ProfiledCommandEnumerable FinishProfiling(
             object forContext,
             bool allowCleanupSweep = true
-        ) {
+        )
+        {
             throw new NotImplementedException();
         }
 
@@ -232,7 +233,8 @@ namespace Microsoft.AspNetCore.SignalR.Tests
         public void ExportConfiguration(
             Stream destination,
             ExportOptions options = (ExportOptions)(-1)
-        ) {
+        )
+        {
             throw new NotImplementedException();
         }
     }
@@ -251,7 +253,8 @@ namespace Microsoft.AspNetCore.SignalR.Tests
             RedisChannel channel,
             RedisValue message,
             CommandFlags flags = CommandFlags.None
-        ) {
+        )
+        {
             if (_subscriptions.TryGetValue(channel, out var handlers))
             {
                 foreach (var handler in handlers)
@@ -267,7 +270,8 @@ namespace Microsoft.AspNetCore.SignalR.Tests
             RedisChannel channel,
             Action<RedisChannel, RedisValue> handler,
             CommandFlags flags = CommandFlags.None
-        ) {
+        )
+        {
             _subscriptions.AddOrUpdate(
                 channel,
                 _ => new List<Action<RedisChannel, RedisValue>> { handler },
@@ -283,7 +287,8 @@ namespace Microsoft.AspNetCore.SignalR.Tests
             RedisChannel channel,
             Action<RedisChannel, RedisValue> handler = null,
             CommandFlags flags = CommandFlags.None
-        ) {
+        )
+        {
             if (_subscriptions.TryGetValue(channel, out var list))
             {
                 list.Remove(handler);
@@ -306,14 +311,16 @@ namespace Microsoft.AspNetCore.SignalR.Tests
         public EndPoint IdentifyEndpoint(
             RedisChannel channel,
             CommandFlags flags = CommandFlags.None
-        ) {
+        )
+        {
             throw new NotImplementedException();
         }
 
         public Task<EndPoint> IdentifyEndpointAsync(
             RedisChannel channel,
             CommandFlags flags = CommandFlags.None
-        ) {
+        )
+        {
             throw new NotImplementedException();
         }
 
@@ -336,7 +343,8 @@ namespace Microsoft.AspNetCore.SignalR.Tests
             RedisChannel channel,
             RedisValue message,
             CommandFlags flags = CommandFlags.None
-        ) {
+        )
+        {
             return _server.Publish(channel, message, flags);
         }
 
@@ -344,7 +352,8 @@ namespace Microsoft.AspNetCore.SignalR.Tests
             RedisChannel channel,
             RedisValue message,
             CommandFlags flags = CommandFlags.None
-        ) {
+        )
+        {
             await Task.Yield();
             return Publish(channel, message, flags);
         }
@@ -353,7 +362,8 @@ namespace Microsoft.AspNetCore.SignalR.Tests
             RedisChannel channel,
             Action<RedisChannel, RedisValue> handler,
             CommandFlags flags = CommandFlags.None
-        ) {
+        )
+        {
             _server.Subscribe(channel, handler, flags);
         }
 
@@ -361,7 +371,8 @@ namespace Microsoft.AspNetCore.SignalR.Tests
             RedisChannel channel,
             Action<RedisChannel, RedisValue> handler,
             CommandFlags flags = CommandFlags.None
-        ) {
+        )
+        {
             Subscribe(channel, handler, flags);
             return Task.CompletedTask;
         }
@@ -380,7 +391,8 @@ namespace Microsoft.AspNetCore.SignalR.Tests
             RedisChannel channel,
             Action<RedisChannel, RedisValue> handler = null,
             CommandFlags flags = CommandFlags.None
-        ) {
+        )
+        {
             _server.Unsubscribe(channel, handler, flags);
         }
 
@@ -398,7 +410,8 @@ namespace Microsoft.AspNetCore.SignalR.Tests
             RedisChannel channel,
             Action<RedisChannel, RedisValue> handler = null,
             CommandFlags flags = CommandFlags.None
-        ) {
+        )
+        {
             Unsubscribe(channel, handler, flags);
             return Task.CompletedTask;
         }
@@ -421,14 +434,16 @@ namespace Microsoft.AspNetCore.SignalR.Tests
         public ChannelMessageQueue Subscribe(
             RedisChannel channel,
             CommandFlags flags = CommandFlags.None
-        ) {
+        )
+        {
             throw new NotImplementedException();
         }
 
         public Task<ChannelMessageQueue> SubscribeAsync(
             RedisChannel channel,
             CommandFlags flags = CommandFlags.None
-        ) {
+        )
+        {
             var t = Subscribe(channel, flags);
             return Task.FromResult(t);
         }

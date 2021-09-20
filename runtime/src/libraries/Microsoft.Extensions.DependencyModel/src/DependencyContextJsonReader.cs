@@ -93,7 +93,8 @@ namespace Microsoft.Extensions.DependencyModel
                 if (
                     written == utf8Bom.Length
                     && utf8Bom.SequenceEqual(rented.AsSpan(0, utf8Bom.Length))
-                ) {
+                )
+                {
                     written = 0;
                 }
 
@@ -257,7 +258,8 @@ namespace Microsoft.Extensions.DependencyModel
             ref Utf8JsonReader reader,
             out string runtimeTargetName,
             out string runtimeSignature
-        ) {
+        )
+        {
             runtimeTargetName = null;
             runtimeSignature = null;
 
@@ -502,7 +504,8 @@ namespace Microsoft.Extensions.DependencyModel
 
                 while (
                     reader.TryReadStringProperty(out string propertyName, out string propertyValue)
-                ) {
+                )
+                {
                     switch (propertyName)
                     {
                         case DependencyContextStrings.AssemblyVersionPropertyName:
@@ -526,7 +529,8 @@ namespace Microsoft.Extensions.DependencyModel
 
         private List<RuntimeTargetEntryStub> ReadTargetLibraryRuntimeTargets(
             ref Utf8JsonReader reader
-        ) {
+        )
+        {
             var runtimeTargets = new List<RuntimeTargetEntryStub>();
 
             reader.ReadStartObject();
@@ -539,7 +543,8 @@ namespace Microsoft.Extensions.DependencyModel
 
                 while (
                     reader.TryReadStringProperty(out string propertyName, out string propertyValue)
-                ) {
+                )
+                {
                     switch (propertyName)
                     {
                         case DependencyContextStrings.RidPropertyName:
@@ -582,7 +587,8 @@ namespace Microsoft.Extensions.DependencyModel
 
                 while (
                     reader.TryReadStringProperty(out string propertyName, out string propertyValue)
-                ) {
+                )
+                {
                     if (propertyName == DependencyContextStrings.LocalePropertyName)
                     {
                         locale = propertyValue;
@@ -695,7 +701,8 @@ namespace Microsoft.Extensions.DependencyModel
             IEnumerable<TargetLibrary> libraries,
             bool runtime,
             Dictionary<string, LibraryStub> libraryStubs
-        ) {
+        )
+        {
             if (libraries == null)
             {
                 return Enumerable.Empty<Library>();
@@ -708,13 +715,15 @@ namespace Microsoft.Extensions.DependencyModel
             TargetLibrary targetLibrary,
             bool runtime,
             Dictionary<string, LibraryStub> libraryStubs
-        ) {
+        )
+        {
             string nameWithVersion = targetLibrary.Name;
 
             if (
                 libraryStubs == null
                 || !libraryStubs.TryGetValue(nameWithVersion, out LibraryStub stub)
-            ) {
+            )
+            {
                 throw new InvalidOperationException(
                     SR.Format(SR.LibraryInformationNotFound, nameWithVersion)
                 );
@@ -745,7 +754,8 @@ namespace Microsoft.Extensions.DependencyModel
                             string,
                             RuntimeTargetEntryStub
                         > ridGroup in targetLibrary.RuntimeTargets.GroupBy(e => e.Rid)
-                    ) {
+                    )
+                    {
                         RuntimeFile[] groupRuntimeAssemblies = ridGroup.Where(
                                 e => e.Type == DependencyContextStrings.RuntimeAssetType
                             )

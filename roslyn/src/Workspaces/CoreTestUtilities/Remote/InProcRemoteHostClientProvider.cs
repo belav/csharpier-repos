@@ -48,10 +48,8 @@ namespace Microsoft.CodeAnalysis.Remote.Testing
 
         private sealed class WorkspaceManager : RemoteWorkspaceManager
         {
-            public WorkspaceManager(
-                SolutionAssetCache assetStorage,
-                Type[]? additionalRemoteParts
-            ) : base(assetStorage)
+            public WorkspaceManager(SolutionAssetCache assetStorage, Type[]? additionalRemoteParts)
+                : base(assetStorage)
             {
                 LazyWorkspace = new Lazy<RemoteWorkspace>(
                     () =>
@@ -79,7 +77,8 @@ namespace Microsoft.CodeAnalysis.Remote.Testing
         public InProcRemoteHostClientProvider(
             HostWorkspaceServices services,
             RemoteServiceCallbackDispatcherRegistry callbackDispatchers
-        ) {
+        )
+        {
             _services = services;
 
             _lazyManager = new Lazy<WorkspaceManager>(

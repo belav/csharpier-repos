@@ -35,7 +35,8 @@ namespace Microsoft.CodeAnalysis.Remote
             int position,
             ImmutableArray<DocumentId> documentIdsToSearch,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             return RunServiceAsync(
                 async cancellationToken =>
                 {

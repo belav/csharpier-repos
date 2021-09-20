@@ -15,7 +15,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Syntax.InternalSyntax
             GreenNode child1,
             SyntaxFactoryContext context,
             out int hash
-        ) {
+        )
+        {
             return SyntaxNodeCache.TryGetNode(kind, child1, GetNodeFlags(context), out hash);
         }
 
@@ -25,7 +26,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Syntax.InternalSyntax
             GreenNode child2,
             SyntaxFactoryContext context,
             out int hash
-        ) {
+        )
+        {
             return SyntaxNodeCache.TryGetNode(
                 kind,
                 child1,
@@ -42,7 +44,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Syntax.InternalSyntax
             GreenNode child3,
             SyntaxFactoryContext context,
             out int hash
-        ) {
+        )
+        {
             return SyntaxNodeCache.TryGetNode(
                 kind,
                 child1,

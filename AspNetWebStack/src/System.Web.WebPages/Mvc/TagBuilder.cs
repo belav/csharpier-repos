@@ -136,7 +136,8 @@ namespace System.Web.Mvc
                         "id",
                         StringComparison.Ordinal /* case-sensitive */
                     ) && String.IsNullOrEmpty(attribute.Value)
-                ) {
+                )
+                {
                     continue; // DevDiv Bugs #227595: don't output empty IDs
                 }
                 string value = HttpUtility.HtmlAttributeEncode(attribute.Value);
@@ -173,7 +174,8 @@ namespace System.Web.Mvc
         public void MergeAttributes<TKey, TValue>(
             IDictionary<TKey, TValue> attributes,
             bool replaceExisting
-        ) {
+        )
+        {
             if (attributes != null)
             {
                 foreach (var entry in attributes)

@@ -73,7 +73,8 @@ namespace System.Reflection
             PortableExecutableKinds pek,
             ImageFileMachine ifm,
             AssemblyNameFlags flags
-        ) {
+        )
+        {
             if (((uint)flags & 0xF0) == 0x70)
                 return ProcessorArchitecture.None;
 

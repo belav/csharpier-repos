@@ -45,7 +45,8 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.MoveType
             string expectedCode = null,
             bool expectedCodeAction = true,
             object fixProviderData = null
-        ) {
+        )
+        {
             var testOptions = new TestParameters(fixProviderData: fixProviderData);
             using (var workspace = CreateWorkspaceFromOptions(originalCode, testOptions))
             {
@@ -103,7 +104,8 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.MoveType
             bool expectedCodeAction = true,
             IList<string> destinationDocumentContainers = null,
             object fixProviderData = null
-        ) {
+        )
+        {
             var testOptions = new TestParameters(fixProviderData: fixProviderData);
             using (var workspace = CreateWorkspaceFromOptions(originalCode, testOptions))
             {
@@ -164,7 +166,8 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.MoveType
             Workspaces.TestWorkspace workspace,
             string expectedCode,
             string operation
-        ) {
+        )
+        {
             var (actions, _) = await GetCodeActionsAsync(workspace, parameters);
             var action = actions.Single(
                 a => a.Title.Equals(operation, StringComparison.CurrentCulture)
@@ -192,7 +195,8 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.MoveType
             bool expectedCodeAction = true,
             int index = 0,
             Action<Workspace> onAfterWorkspaceCreated = null
-        ) {
+        )
+        {
             var testOptions = new TestParameters(index: index);
             if (expectedCodeAction)
             {

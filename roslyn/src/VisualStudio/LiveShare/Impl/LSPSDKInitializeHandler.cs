@@ -34,7 +34,8 @@ namespace Microsoft.VisualStudio.LanguageServices.LiveShare
             LSP.InitializeParams request,
             RequestContext<Solution> requestContext,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var result = new LSP.InitializeResult { Capabilities = new LSP.ServerCapabilities() };
 
             return Task.FromResult(result);

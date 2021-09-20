@@ -36,7 +36,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation
             ISymbol symbol,
             string newName,
             bool throwOnFailure
-        ) {
+        )
+        {
             AssertIsForeground();
             if (
                 TryGetRenameAPIRequiredArguments(
@@ -46,7 +47,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation
                     out var hierarchyToItemIDsMap,
                     out var rqnames
                 )
-            ) {
+            )
+            {
                 foreach (var hierarchy in hierarchyToItemIDsMap.Keys)
                 {
                     var itemIDs = hierarchyToItemIDsMap[hierarchy];
@@ -86,7 +88,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation
             ISymbol symbol,
             string newName,
             bool throwOnFailure
-        ) {
+        )
+        {
             AssertIsForeground();
             if (
                 TryGetRenameAPIRequiredArguments(
@@ -96,7 +99,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation
                     out var hierarchyToItemIDsMap,
                     out var rqnames
                 )
-            ) {
+            )
+            {
                 foreach (var hierarchy in hierarchyToItemIDsMap.Keys)
                 {
                     var itemIDs = hierarchyToItemIDsMap[hierarchy];
@@ -135,7 +139,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation
             ISymbol symbol,
             out Dictionary<IVsHierarchy, List<uint>> hierarchyToItemIDsMap,
             out string[] rqnames
-        ) {
+        )
+        {
             AssertIsForeground();
 
             rqnames = null;
@@ -147,7 +152,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation
                     out hierarchyToItemIDsMap,
                     out var rqname
                 )
-            ) {
+            )
+            {
                 return false;
             }
 
@@ -161,7 +167,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation
             ISymbol symbol,
             out Dictionary<IVsHierarchy, List<uint>> hierarchyToItemIDsMap,
             out string rqname
-        ) {
+        )
+        {
             AssertIsForeground();
 
             hierarchyToItemIDsMap = null;
@@ -198,7 +205,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation
                 if (
                     methodSymbol.MethodKind == MethodKind.Constructor
                     || methodSymbol.MethodKind == MethodKind.Destructor
-                ) {
+                )
+                {
                     symbol = symbol.ContainingType;
                 }
             }
@@ -210,7 +218,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation
         private Dictionary<IVsHierarchy, List<uint>> GetHierarchiesAndItemIDsFromDocumentIDs(
             VisualStudioWorkspace visualStudioWorkspace,
             IEnumerable<DocumentId> changedDocumentIDs
-        ) {
+        )
+        {
             AssertIsForeground();
 
             var hierarchyToItemIDsMap = new Dictionary<IVsHierarchy, List<uint>>();
@@ -237,7 +246,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation
                         hierarchy,
                         out var itemIDsForCurrentHierarchy
                     )
-                ) {
+                )
+                {
                     itemIDsForCurrentHierarchy = new List<uint>();
                     hierarchyToItemIDsMap.Add(hierarchy, itemIDsForCurrentHierarchy);
                 }

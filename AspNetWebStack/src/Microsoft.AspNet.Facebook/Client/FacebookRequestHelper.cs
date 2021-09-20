@@ -14,7 +14,8 @@ namespace Microsoft.AspNet.Facebook.Client
         public static dynamic GetSignedRequest(
             HttpContextBase context,
             Func<string, object> parseSignedRequest
-        ) {
+        )
+        {
             if (context.Items.Contains(ParsedSignedRequestKey))
             {
                 return context.Items[ParsedSignedRequestKey];

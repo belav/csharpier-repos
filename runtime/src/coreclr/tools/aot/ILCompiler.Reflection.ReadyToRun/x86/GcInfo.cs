@@ -83,7 +83,8 @@ namespace ILCompiler.Reflection.ReadyToRun.x86
             ref uint curOffs,
             ref bool isThis,
             ref bool iptr
-        ) {
+        )
+        {
             if (isPop != 0)
             {
                 // A Pop of 0, means little-delta
@@ -427,7 +428,8 @@ namespace ILCompiler.Reflection.ReadyToRun.x86
             uint callPndMask,
             uint lastSkip,
             ref uint imask
-        ) {
+        )
+        {
             uint iregMask,
                 iargMask;
             iregMask = imask & 0xF;

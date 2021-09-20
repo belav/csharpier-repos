@@ -35,7 +35,8 @@ namespace System.Text
             this Encoding encoding,
             ReadOnlySpan<char> chars,
             IBufferWriter<byte> writer
-        ) {
+        )
+        {
             if (encoding is null)
             {
                 throw new ArgumentNullException(nameof(encoding));
@@ -88,7 +89,8 @@ namespace System.Text
             this Encoding encoding,
             in ReadOnlySequence<char> chars,
             IBufferWriter<byte> writer
-        ) {
+        )
+        {
             if (encoding is null)
             {
                 throw new ArgumentNullException(nameof(encoding));
@@ -135,7 +137,8 @@ namespace System.Text
             this Encoding encoding,
             in ReadOnlySequence<char> chars,
             Span<byte> bytes
-        ) {
+        )
+        {
             if (encoding is null)
             {
                 throw new ArgumentNullException(nameof(encoding));
@@ -286,7 +289,8 @@ namespace System.Text
             this Encoding encoding,
             ReadOnlySpan<byte> bytes,
             IBufferWriter<char> writer
-        ) {
+        )
+        {
             if (encoding is null)
             {
                 throw new ArgumentNullException(nameof(encoding));
@@ -339,7 +343,8 @@ namespace System.Text
             this Encoding encoding,
             in ReadOnlySequence<byte> bytes,
             IBufferWriter<char> writer
-        ) {
+        )
+        {
             if (encoding is null)
             {
                 throw new ArgumentNullException(nameof(encoding));
@@ -386,7 +391,8 @@ namespace System.Text
             this Encoding encoding,
             in ReadOnlySequence<byte> bytes,
             Span<char> chars
-        ) {
+        )
+        {
             if (encoding is null)
             {
                 throw new ArgumentNullException(nameof(encoding));
@@ -542,7 +548,8 @@ namespace System.Text
             bool flush,
             out long bytesUsed,
             out bool completed
-        ) {
+        )
+        {
             if (encoder is null)
             {
                 throw new ArgumentNullException(nameof(encoder));
@@ -613,7 +620,8 @@ namespace System.Text
             bool flush,
             out long bytesUsed,
             out bool completed
-        ) {
+        )
+        {
             // Parameter null checks will be performed by the workhorse routine.
 
             ReadOnlySequence<char> remainingChars = chars;
@@ -668,7 +676,8 @@ namespace System.Text
             bool flush,
             out long charsUsed,
             out bool completed
-        ) {
+        )
+        {
             if (decoder is null)
             {
                 throw new ArgumentNullException(nameof(decoder));
@@ -740,7 +749,8 @@ namespace System.Text
             bool flush,
             out long charsUsed,
             out bool completed
-        ) {
+        )
+        {
             // Parameter null checks will be performed by the workhorse routine.
 
             ReadOnlySequence<byte> remainingBytes = bytes;

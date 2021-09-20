@@ -35,7 +35,8 @@ namespace System.Net
                 addressFamily != AddressFamily.InterNetwork
                 && addressFamily != AddressFamily.InterNetworkV6
                 && addressFamily != AddressFamily.Unspecified
-            ) {
+            )
+            {
                 throw new ArgumentException(
                     SR.net_sockets_invalid_optionValue_all,
                     nameof(addressFamily)

@@ -35,7 +35,8 @@ namespace System.Linq
         public static IEnumerable<TSource[]> Chunk<TSource>(
             this IEnumerable<TSource> source,
             int size
-        ) {
+        )
+        {
             if (source == null)
             {
                 ThrowHelper.ThrowArgumentNullException(ExceptionArgument.source);
@@ -52,7 +53,8 @@ namespace System.Linq
         private static IEnumerable<TSource[]> ChunkIterator<TSource>(
             IEnumerable<TSource> source,
             int size
-        ) {
+        )
+        {
             using IEnumerator<TSource> e = source.GetEnumerator();
             while (e.MoveNext())
             {

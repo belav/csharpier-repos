@@ -30,7 +30,8 @@ namespace Microsoft.AspNetCore.Mvc.Diagnostics
             ActionDescriptor actionDescriptor,
             HttpContext httpContext,
             RouteData routeData
-        ) {
+        )
+        {
             ActionDescriptor = actionDescriptor;
             HttpContext = httpContext;
             RouteData = routeData;
@@ -85,7 +86,8 @@ namespace Microsoft.AspNetCore.Mvc.Diagnostics
             ActionDescriptor actionDescriptor,
             HttpContext httpContext,
             RouteData routeData
-        ) {
+        )
+        {
             ActionDescriptor = actionDescriptor;
             HttpContext = httpContext;
             RouteData = routeData;
@@ -140,7 +142,8 @@ namespace Microsoft.AspNetCore.Mvc.Diagnostics
             ActionDescriptor actionDescriptor,
             AuthorizationFilterContext authorizationContext,
             IFilterMetadata filter
-        ) {
+        )
+        {
             ActionDescriptor = actionDescriptor;
             AuthorizationContext = authorizationContext;
             Filter = filter;
@@ -199,7 +202,8 @@ namespace Microsoft.AspNetCore.Mvc.Diagnostics
             ActionDescriptor actionDescriptor,
             AuthorizationFilterContext authorizationContext,
             IFilterMetadata filter
-        ) {
+        )
+        {
             ActionDescriptor = actionDescriptor;
             AuthorizationContext = authorizationContext;
             Filter = filter;
@@ -258,7 +262,8 @@ namespace Microsoft.AspNetCore.Mvc.Diagnostics
             ActionDescriptor actionDescriptor,
             ResourceExecutingContext resourceExecutingContext,
             IFilterMetadata filter
-        ) {
+        )
+        {
             ActionDescriptor = actionDescriptor;
             ResourceExecutingContext = resourceExecutingContext;
             Filter = filter;
@@ -317,7 +322,8 @@ namespace Microsoft.AspNetCore.Mvc.Diagnostics
             ActionDescriptor actionDescriptor,
             ResourceExecutedContext resourceExecutedContext,
             IFilterMetadata filter
-        ) {
+        )
+        {
             ActionDescriptor = actionDescriptor;
             ResourceExecutedContext = resourceExecutedContext;
             Filter = filter;
@@ -376,7 +382,8 @@ namespace Microsoft.AspNetCore.Mvc.Diagnostics
             ActionDescriptor actionDescriptor,
             ResourceExecutingContext resourceExecutingContext,
             IFilterMetadata filter
-        ) {
+        )
+        {
             ActionDescriptor = actionDescriptor;
             ResourceExecutingContext = resourceExecutingContext;
             Filter = filter;
@@ -435,7 +442,8 @@ namespace Microsoft.AspNetCore.Mvc.Diagnostics
             ActionDescriptor actionDescriptor,
             ResourceExecutingContext resourceExecutingContext,
             IFilterMetadata filter
-        ) {
+        )
+        {
             ActionDescriptor = actionDescriptor;
             ResourceExecutingContext = resourceExecutingContext;
             Filter = filter;
@@ -494,7 +502,8 @@ namespace Microsoft.AspNetCore.Mvc.Diagnostics
             ActionDescriptor actionDescriptor,
             ResourceExecutedContext resourceExecutedContext,
             IFilterMetadata filter
-        ) {
+        )
+        {
             ActionDescriptor = actionDescriptor;
             ResourceExecutedContext = resourceExecutedContext;
             Filter = filter;
@@ -553,7 +562,8 @@ namespace Microsoft.AspNetCore.Mvc.Diagnostics
             ActionDescriptor actionDescriptor,
             ResourceExecutedContext resourceExecutedContext,
             IFilterMetadata filter
-        ) {
+        )
+        {
             ActionDescriptor = actionDescriptor;
             ResourceExecutedContext = resourceExecutedContext;
             Filter = filter;
@@ -612,7 +622,8 @@ namespace Microsoft.AspNetCore.Mvc.Diagnostics
             ActionDescriptor actionDescriptor,
             ExceptionContext exceptionContext,
             IFilterMetadata filter
-        ) {
+        )
+        {
             ActionDescriptor = actionDescriptor;
             ExceptionContext = exceptionContext;
             Filter = filter;
@@ -667,7 +678,8 @@ namespace Microsoft.AspNetCore.Mvc.Diagnostics
             ActionDescriptor actionDescriptor,
             ExceptionContext exceptionContext,
             IFilterMetadata filter
-        ) {
+        )
+        {
             ActionDescriptor = actionDescriptor;
             ExceptionContext = exceptionContext;
             Filter = filter;
@@ -722,7 +734,8 @@ namespace Microsoft.AspNetCore.Mvc.Diagnostics
             ActionDescriptor actionDescriptor,
             ActionExecutingContext actionExecutingContext,
             IFilterMetadata filter
-        ) {
+        )
+        {
             ActionDescriptor = actionDescriptor;
             ActionExecutingContext = actionExecutingContext;
             Filter = filter;
@@ -781,7 +794,8 @@ namespace Microsoft.AspNetCore.Mvc.Diagnostics
             ActionDescriptor actionDescriptor,
             ActionExecutedContext actionExecutedContext,
             IFilterMetadata filter
-        ) {
+        )
+        {
             ActionDescriptor = actionDescriptor;
             ActionExecutedContext = actionExecutedContext;
             Filter = filter;
@@ -840,7 +854,8 @@ namespace Microsoft.AspNetCore.Mvc.Diagnostics
             ActionDescriptor actionDescriptor,
             ActionExecutingContext actionExecutingContext,
             IFilterMetadata filter
-        ) {
+        )
+        {
             ActionDescriptor = actionDescriptor;
             ActionExecutingContext = actionExecutingContext;
             Filter = filter;
@@ -899,7 +914,8 @@ namespace Microsoft.AspNetCore.Mvc.Diagnostics
             ActionDescriptor actionDescriptor,
             ActionExecutingContext actionExecutingContext,
             IFilterMetadata filter
-        ) {
+        )
+        {
             ActionDescriptor = actionDescriptor;
             ActionExecutingContext = actionExecutingContext;
             Filter = filter;
@@ -958,7 +974,8 @@ namespace Microsoft.AspNetCore.Mvc.Diagnostics
             ActionDescriptor actionDescriptor,
             ActionExecutedContext actionExecutedContext,
             IFilterMetadata filter
-        ) {
+        )
+        {
             ActionDescriptor = actionDescriptor;
             ActionExecutedContext = actionExecutedContext;
             Filter = filter;
@@ -1017,7 +1034,8 @@ namespace Microsoft.AspNetCore.Mvc.Diagnostics
             ActionDescriptor actionDescriptor,
             ActionExecutedContext actionExecutedContext,
             IFilterMetadata filter
-        ) {
+        )
+        {
             ActionDescriptor = actionDescriptor;
             ActionExecutedContext = actionExecutedContext;
             Filter = filter;
@@ -1076,7 +1094,8 @@ namespace Microsoft.AspNetCore.Mvc.Diagnostics
             ActionContext actionContext,
             IReadOnlyDictionary<string, object> actionArguments,
             object controller
-        ) {
+        )
+        {
             ActionContext = actionContext;
             ActionArguments = actionArguments;
             Controller = controller;
@@ -1133,7 +1152,8 @@ namespace Microsoft.AspNetCore.Mvc.Diagnostics
             IReadOnlyDictionary<string, object> arguments,
             object controller,
             IActionResult result
-        ) {
+        )
+        {
             ActionContext = actionContext;
             Arguments = arguments;
             Controller = controller;
@@ -1195,7 +1215,8 @@ namespace Microsoft.AspNetCore.Mvc.Diagnostics
             ActionDescriptor actionDescriptor,
             ResultExecutingContext resultExecutingContext,
             IFilterMetadata filter
-        ) {
+        )
+        {
             ActionDescriptor = actionDescriptor;
             ResultExecutingContext = resultExecutingContext;
             Filter = filter;
@@ -1254,7 +1275,8 @@ namespace Microsoft.AspNetCore.Mvc.Diagnostics
             ActionDescriptor actionDescriptor,
             ResultExecutedContext resultExecutedContext,
             IFilterMetadata filter
-        ) {
+        )
+        {
             ActionDescriptor = actionDescriptor;
             ResultExecutedContext = resultExecutedContext;
             Filter = filter;
@@ -1313,7 +1335,8 @@ namespace Microsoft.AspNetCore.Mvc.Diagnostics
             ActionDescriptor actionDescriptor,
             ResultExecutingContext resultExecutingContext,
             IFilterMetadata filter
-        ) {
+        )
+        {
             ActionDescriptor = actionDescriptor;
             ResultExecutingContext = resultExecutingContext;
             Filter = filter;
@@ -1372,7 +1395,8 @@ namespace Microsoft.AspNetCore.Mvc.Diagnostics
             ActionDescriptor actionDescriptor,
             ResultExecutingContext resultExecutingContext,
             IFilterMetadata filter
-        ) {
+        )
+        {
             ActionDescriptor = actionDescriptor;
             ResultExecutingContext = resultExecutingContext;
             Filter = filter;
@@ -1431,7 +1455,8 @@ namespace Microsoft.AspNetCore.Mvc.Diagnostics
             ActionDescriptor actionDescriptor,
             ResultExecutedContext resultExecutedContext,
             IFilterMetadata filter
-        ) {
+        )
+        {
             ActionDescriptor = actionDescriptor;
             ResultExecutedContext = resultExecutedContext;
             Filter = filter;
@@ -1490,7 +1515,8 @@ namespace Microsoft.AspNetCore.Mvc.Diagnostics
             ActionDescriptor actionDescriptor,
             ResultExecutedContext resultExecutedContext,
             IFilterMetadata filter
-        ) {
+        )
+        {
             ActionDescriptor = actionDescriptor;
             ResultExecutedContext = resultExecutedContext;
             Filter = filter;

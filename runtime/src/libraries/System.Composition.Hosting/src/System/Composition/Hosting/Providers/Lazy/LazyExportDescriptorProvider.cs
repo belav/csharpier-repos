@@ -18,7 +18,8 @@ namespace System.Composition.Hosting.Providers.Lazy
         public override IEnumerable<ExportDescriptorPromise> GetExportDescriptors(
             CompositionContract exportKey,
             DependencyAccessor definitionAccessor
-        ) {
+        )
+        {
             if (
                 !exportKey.ContractType.IsConstructedGenericType
                 || exportKey.ContractType.GetGenericTypeDefinition() != typeof(Lazy<>)
@@ -37,7 +38,8 @@ namespace System.Composition.Hosting.Providers.Lazy
         private static ExportDescriptorPromise[] GetLazyDefinitions<TValue>(
             CompositionContract lazyContract,
             DependencyAccessor definitionAccessor
-        ) {
+        )
+        {
             return definitionAccessor.ResolveDependencies(
                     "value",
                     lazyContract.ChangeType(typeof(TValue)),

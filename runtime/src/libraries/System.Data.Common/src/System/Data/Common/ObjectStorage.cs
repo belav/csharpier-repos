@@ -34,7 +34,8 @@ namespace System.Data.Common
                 DBNull.Value,
                 typeof(ICloneable).IsAssignableFrom(type),
                 GetStorageType(type)
-            ) {
+            )
+        {
             _implementsIXmlSerializable = typeof(IXmlSerializable).IsAssignableFrom(type);
         }
 
@@ -450,7 +451,8 @@ namespace System.Data.Common
                                 type == typeof(string)
                                 && xmlReader.NodeType == XmlNodeType.Element
                                 && xmlReader.IsEmptyElement
-                            ) {
+                            )
+                            {
                                 retValue = string.Empty;
                             }
                             else
@@ -527,7 +529,8 @@ namespace System.Data.Common
             object value,
             XmlWriter xmlWriter,
             XmlRootAttribute? xmlAttrib
-        ) {
+        )
+        {
             if (null == xmlAttrib)
             { // implements IXmlSerializable
                 Debug.Assert(
@@ -556,7 +559,8 @@ namespace System.Data.Common
             object store,
             BitArray nullbits,
             int storeIndex
-        ) {
+        )
+        {
             object?[] typedStore = (object?[])store;
             typedStore[storeIndex] = _values[record];
             bool isNull = IsNull(record);
@@ -606,7 +610,8 @@ namespace System.Data.Common
             if (
                 typeof(IDynamicMetaObjectProvider).IsAssignableFrom(type)
                 && !typeof(IXmlSerializable).IsAssignableFrom(type)
-            ) {
+            )
+            {
                 throw ADP.InvalidOperation(SR.Xml_DynamicWithoutXmlSerializable);
             }
         }
@@ -659,7 +664,8 @@ namespace System.Data.Common
                                     KeyValuePair<Type, XmlRootAttribute>,
                                     XmlSerializer
                                 > entry in cache
-                            ) { // copy contents from old cache to new cache
+                            )
+                            { // copy contents from old cache to new cache
                                 tmp.Add(entry.Key, entry.Value);
                             }
                             cache = tmp;
@@ -704,7 +710,8 @@ namespace System.Data.Common
             public bool Equals(
                 KeyValuePair<Type, XmlRootAttribute> x,
                 KeyValuePair<Type, XmlRootAttribute> y
-            ) {
+            )
+            {
                 return (
                     (x.Key == y.Key)
                     && // same type

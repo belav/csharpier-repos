@@ -54,7 +54,8 @@ namespace Microsoft.AspNetCore.Components.Forms
             string? value,
             out string? result,
             [NotNullWhen(false)] out string? validationErrorMessage
-        ) {
+        )
+        {
             result = value;
             validationErrorMessage = null;
             return true;

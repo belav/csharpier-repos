@@ -425,7 +425,8 @@ namespace Microsoft.VisualStudio.IntegrationTest.Utilities.InProcess
         private async Task<IEnumerable<ISuggestedAction>> GetLightBulbActionsAsync(
             ILightBulbBroker broker,
             IWpfTextView view
-        ) {
+        )
+        {
             await ThreadHelper.JoinableTaskFactory.SwitchToMainThreadAsync();
 
             if (!broker.IsLightBulbSessionActive(view))
@@ -454,7 +455,8 @@ namespace Microsoft.VisualStudio.IntegrationTest.Utilities.InProcess
             if (
                 activeSession.TryGetSuggestedActionSets(out var actionSets)
                 != QuerySuggestedActionCompletionStatus.Completed
-            ) {
+            )
+            {
                 actionSets = Array.Empty<SuggestedActionSet>();
             }
 
@@ -465,7 +467,8 @@ namespace Microsoft.VisualStudio.IntegrationTest.Utilities.InProcess
             string actionName,
             FixAllScope? fixAllScope,
             bool blockUntilComplete
-        ) {
+        )
+        {
             var lightBulbAction = GetLightBulbApplicationAction(
                 actionName,
                 fixAllScope,
@@ -495,7 +498,8 @@ namespace Microsoft.VisualStudio.IntegrationTest.Utilities.InProcess
             string actionName,
             FixAllScope? fixAllScope,
             bool willBlockUntilComplete
-        ) {
+        )
+        {
             return async view =>
             {
                 await ThreadHelper.JoinableTaskFactory.SwitchToMainThreadAsync();
@@ -551,7 +555,8 @@ namespace Microsoft.VisualStudio.IntegrationTest.Utilities.InProcess
                         willBlockUntilComplete
                         && action is FixAllSuggestedAction fixAllSuggestedAction
                         && fixAllSuggestedAction.CodeAction is FixSomeCodeAction fixSomeCodeAction
-                    ) {
+                    )
+                    {
                         // Ensure the preview changes dialog will not be shown. Since the operation 'willBlockUntilComplete',
                         // the caller would not be able to interact with the preview changes dialog, and the tests would
                         // either timeout or deadlock.
@@ -575,7 +580,8 @@ namespace Microsoft.VisualStudio.IntegrationTest.Utilities.InProcess
 
         private async Task<IEnumerable<ISuggestedAction>> SelectActionsAsync(
             IEnumerable<SuggestedActionSet> actionSets
-        ) {
+        )
+        {
             await ThreadHelper.JoinableTaskFactory.SwitchToMainThreadAsync();
 
             var actions = new List<ISuggestedAction>();
@@ -605,7 +611,8 @@ namespace Microsoft.VisualStudio.IntegrationTest.Utilities.InProcess
         private static async Task<FixAllSuggestedAction> GetFixAllSuggestedActionAsync(
             IEnumerable<SuggestedActionSet> actionSets,
             FixAllScope fixAllScope
-        ) {
+        )
+        {
             await ThreadHelper.JoinableTaskFactory.SwitchToMainThreadAsync();
 
             foreach (var actionSet in actionSets)

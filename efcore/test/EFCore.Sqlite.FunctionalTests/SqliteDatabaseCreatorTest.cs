@@ -21,7 +21,8 @@ namespace Microsoft.EntityFrameworkCore
         public async Task Exists_returns_false_when_database_doesnt_exist(
             bool async,
             bool useCanConnect
-        ) {
+        )
+        {
             var context = CreateContext("Data Source=doesnt-exist.db");
 
             if (useCanConnect)

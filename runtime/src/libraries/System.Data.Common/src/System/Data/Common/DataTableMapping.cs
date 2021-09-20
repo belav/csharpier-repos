@@ -30,7 +30,8 @@ namespace System.Data.Common
             string? sourceTable,
             string? dataSetTable,
             DataColumnMapping[]? columnMappings
-        ) {
+        )
+        {
             SourceTable = sourceTable;
             DataSetTable = dataSetTable;
             if ((null != columnMappings) && (0 < columnMappings.Length))
@@ -113,7 +114,8 @@ namespace System.Data.Common
             DataTable dataTable,
             MissingMappingAction mappingAction,
             MissingSchemaAction schemaAction
-        ) {
+        )
+        {
             return DataColumnMappingCollection.GetDataColumn(
                 _columnMappings,
                 sourceColumn,
@@ -128,7 +130,8 @@ namespace System.Data.Common
         public DataColumnMapping? GetColumnMappingBySchemaAction(
             string sourceColumn,
             MissingMappingAction mappingAction
-        ) {
+        )
+        {
             return DataColumnMappingCollection.GetColumnMappingBySchemaAction(
                 _columnMappings,
                 sourceColumn,
@@ -140,7 +143,8 @@ namespace System.Data.Common
         public DataTable? GetDataTableBySchemaAction(
             DataSet dataSet,
             MissingSchemaAction schemaAction
-        ) {
+        )
+        {
             if (null == dataSet)
             {
                 throw ADP.ArgumentNull(nameof(dataSet));
@@ -197,7 +201,8 @@ namespace System.Data.Common
                 CultureInfo culture,
                 object value,
                 Type destinationType
-            ) {
+            )
+            {
                 if (null == destinationType)
                 {
                     throw ADP.ArgumentNull(nameof(destinationType));

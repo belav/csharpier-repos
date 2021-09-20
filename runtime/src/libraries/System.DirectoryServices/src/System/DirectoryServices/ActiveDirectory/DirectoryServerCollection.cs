@@ -23,7 +23,8 @@ namespace System.DirectoryServices.ActiveDirectory
             DirectoryContext context,
             string siteDN,
             string transportName
-        ) {
+        )
+        {
             Hashtable tempTable = new Hashtable();
 
             changeList = Hashtable.Synchronized(tempTable);
@@ -37,7 +38,8 @@ namespace System.DirectoryServices.ActiveDirectory
             DirectoryEntry? crossRefEntry,
             bool isADAM,
             ReadOnlyDirectoryServerCollection servers
-        ) {
+        )
+        {
             this.context = context;
             _crossRefEntry = crossRefEntry;
             _isADAM = isADAM;
@@ -277,7 +279,8 @@ namespace System.DirectoryServices.ActiveDirectory
                             _crossRefEntry.Properties.Contains(
                                 PropertyManager.MsDSNCReplicaLocations
                             )
-                        ) {
+                        )
+                        {
                             _crossRefEntry.Properties[
                                 PropertyManager.MsDSNCReplicaLocations
                             ].Clear();

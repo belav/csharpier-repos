@@ -41,7 +41,8 @@ namespace Microsoft.AspNetCore.Server.IIS.Core
             int count,
             AsyncCallback? callback,
             object? state
-        ) {
+        )
+        {
             return TaskToApm.Begin(ReadAsync(buffer, offset, count), callback, state);
         }
 
@@ -55,7 +56,8 @@ namespace Microsoft.AspNetCore.Server.IIS.Core
             int offset,
             int count,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             ValidateState(cancellationToken);
 
             return ReadAsyncInternal(new Memory<byte>(buffer, offset, count), cancellationToken)
@@ -65,7 +67,8 @@ namespace Microsoft.AspNetCore.Server.IIS.Core
         public override ValueTask<int> ReadAsync(
             Memory<byte> destination,
             CancellationToken cancellationToken = default
-        ) {
+        )
+        {
             ValidateState(cancellationToken);
 
             return ReadAsyncInternal(destination, cancellationToken);
@@ -74,7 +77,8 @@ namespace Microsoft.AspNetCore.Server.IIS.Core
         private async ValueTask<int> ReadAsyncInternal(
             Memory<byte> buffer,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             try
             {
                 Debug.Assert(_body != null, "Stream must be accepting reads.");
@@ -90,7 +94,8 @@ namespace Microsoft.AspNetCore.Server.IIS.Core
             Stream destination,
             int bufferSize,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             try
             {
                 Debug.Assert(_body != null, "Stream must be accepting reads.");

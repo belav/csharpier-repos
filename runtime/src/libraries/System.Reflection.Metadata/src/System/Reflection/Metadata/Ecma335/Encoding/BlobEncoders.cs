@@ -63,7 +63,8 @@ namespace System.Reflection.Metadata.Ecma335
             SignatureCallingConvention convention = SignatureCallingConvention.Default,
             int genericParameterCount = 0,
             bool isInstanceMethod = false
-        ) {
+        )
+        {
             if (unchecked((uint)genericParameterCount) > ushort.MaxValue)
             {
                 Throw.ArgumentOutOfRange(nameof(genericParameterCount));
@@ -114,7 +115,8 @@ namespace System.Reflection.Metadata.Ecma335
         public void CustomAttributeSignature(
             out FixedArgumentsEncoder fixedArguments,
             out CustomAttributeNamedArgumentsEncoder namedArguments
-        ) {
+        )
+        {
             Builder.WriteUInt16(0x0001);
 
             fixedArguments = new FixedArgumentsEncoder(Builder);
@@ -130,7 +132,8 @@ namespace System.Reflection.Metadata.Ecma335
         public void CustomAttributeSignature(
             Action<FixedArgumentsEncoder> fixedArguments,
             Action<CustomAttributeNamedArgumentsEncoder> namedArguments
-        ) {
+        )
+        {
             if (fixedArguments == null)
                 Throw.ArgumentNull(nameof(fixedArguments));
             if (namedArguments == null)
@@ -229,7 +232,8 @@ namespace System.Reflection.Metadata.Ecma335
             int parameterCount,
             out ReturnTypeEncoder returnType,
             out ParametersEncoder parameters
-        ) {
+        )
+        {
             if (unchecked((uint)parameterCount) > BlobWriterImpl.MaxCompressedIntegerValue)
             {
                 Throw.ArgumentOutOfRange(nameof(parameterCount));
@@ -252,7 +256,8 @@ namespace System.Reflection.Metadata.Ecma335
             int parameterCount,
             Action<ReturnTypeEncoder> returnType,
             Action<ParametersEncoder> parameters
-        ) {
+        )
+        {
             if (returnType == null)
                 Throw.ArgumentNull(nameof(returnType));
             if (parameters == null)
@@ -358,7 +363,8 @@ namespace System.Reflection.Metadata.Ecma335
         public PermissionSetEncoder AddPermission(
             string typeName,
             ImmutableArray<byte> encodedArguments
-        ) {
+        )
+        {
             if (typeName == null)
             {
                 Throw.ArgumentNull(nameof(typeName));
@@ -457,7 +463,8 @@ namespace System.Reflection.Metadata.Ecma335
         public void TaggedVector(
             out CustomAttributeArrayTypeEncoder arrayType,
             out VectorEncoder vector
-        ) {
+        )
+        {
             arrayType = new CustomAttributeArrayTypeEncoder(Builder);
             vector = new VectorEncoder(Builder);
         }
@@ -471,7 +478,8 @@ namespace System.Reflection.Metadata.Ecma335
         public void TaggedVector(
             Action<CustomAttributeArrayTypeEncoder> arrayType,
             Action<VectorEncoder> vector
-        ) {
+        )
+        {
             if (arrayType == null)
                 Throw.ArgumentNull(nameof(arrayType));
             if (vector == null)
@@ -502,7 +510,8 @@ namespace System.Reflection.Metadata.Ecma335
         public void TaggedScalar(
             out CustomAttributeElementTypeEncoder type,
             out ScalarEncoder scalar
-        ) {
+        )
+        {
             type = new CustomAttributeElementTypeEncoder(Builder);
             scalar = new ScalarEncoder(Builder);
         }
@@ -516,7 +525,8 @@ namespace System.Reflection.Metadata.Ecma335
         public void TaggedScalar(
             Action<CustomAttributeElementTypeEncoder> type,
             Action<ScalarEncoder> scalar
-        ) {
+        )
+        {
             if (type == null)
                 Throw.ArgumentNull(nameof(type));
             if (scalar == null)
@@ -701,7 +711,8 @@ namespace System.Reflection.Metadata.Ecma335
             out NamedArgumentTypeEncoder type,
             out NameEncoder name,
             out LiteralEncoder literal
-        ) {
+        )
+        {
             Builder.WriteByte(
                 isField
                   ? (byte)CustomAttributeNamedArgumentKind.Field
@@ -725,7 +736,8 @@ namespace System.Reflection.Metadata.Ecma335
             Action<NamedArgumentTypeEncoder> type,
             Action<NameEncoder> name,
             Action<LiteralEncoder> literal
-        ) {
+        )
+        {
             if (type == null)
                 Throw.ArgumentNull(nameof(type));
             if (name == null)
@@ -957,7 +969,8 @@ namespace System.Reflection.Metadata.Ecma335
         public void Array(
             Action<SignatureTypeEncoder> elementType,
             Action<ArrayShapeEncoder> arrayShape
-        ) {
+        )
+        {
             if (elementType == null)
                 Throw.ArgumentNull(nameof(elementType));
             if (arrayShape == null)
@@ -998,7 +1011,8 @@ namespace System.Reflection.Metadata.Ecma335
             SignatureCallingConvention convention = SignatureCallingConvention.Default,
             FunctionPointerAttributes attributes = FunctionPointerAttributes.None,
             int genericParameterCount = 0
-        ) {
+        )
+        {
             // Spec:
             // The EXPLICITTHIS (0x40) bit can be set only in signatures for function pointers.
             // If EXPLICITTHIS (0x40) in the signature is set, then HASTHIS (0x20) shall also be set.
@@ -1007,7 +1021,8 @@ namespace System.Reflection.Metadata.Ecma335
                 attributes != FunctionPointerAttributes.None
                 && attributes != FunctionPointerAttributes.HasThis
                 && attributes != FunctionPointerAttributes.HasExplicitThis
-            ) {
+            )
+            {
                 throw new ArgumentException(SR.InvalidSignature, nameof(attributes));
             }
 
@@ -1048,7 +1063,8 @@ namespace System.Reflection.Metadata.Ecma335
             EntityHandle genericType,
             int genericArgumentCount,
             bool isValueType
-        ) {
+        )
+        {
             if (unchecked((uint)(genericArgumentCount - 1)) > ushort.MaxValue - 1)
             {
                 Throw.ArgumentOutOfRange(nameof(genericArgumentCount));

@@ -46,7 +46,8 @@ namespace Microsoft.CodeAnalysis.CompilerServer.UnitTests
             this BlockingCollection<T> collection,
             TimeSpan? pollTimeSpan = null,
             CancellationToken cancellationToken = default
-        ) {
+        )
+        {
             var delay = pollTimeSpan ?? TimeSpan.FromSeconds(.25);
             do
             {

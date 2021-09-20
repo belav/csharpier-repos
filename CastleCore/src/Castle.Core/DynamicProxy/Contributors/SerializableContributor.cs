@@ -156,7 +156,8 @@ namespace Castle.DynamicProxy.Contributors
             ArgumentReference serializationInfo,
             MethodEmitter getObjectData,
             FieldReference field
-        ) {
+        )
+        {
             getObjectData.CodeBuilder.AddStatement(
                 new MethodInvocationExpression(
                     serializationInfo,

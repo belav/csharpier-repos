@@ -128,7 +128,8 @@ namespace System.Xml.Xsl.Xslt
                 if (
                     _records[_lastRecord].prefix!.Length == 0
                     && _records[_lastRecord - 1].prefix == null
-                ) {
+                )
+                {
                     return; // Averything was already done
                 }
 
@@ -144,7 +145,8 @@ namespace System.Xml.Xsl.Xslt
                 int record = _lastRecord; // from last record
                 _records[record].prefix != null; // till lookup barrier
                     --record // in reverce direction
-            ) {
+            )
+            {
                 Debug.Assert(
                     0 < record,
                     "first record is lookup barrier, so we don't need to check this condition runtime"

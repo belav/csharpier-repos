@@ -65,7 +65,8 @@ namespace System.Web.Razor.Editor
         protected override PartialParseResult CanAcceptChange(
             Span target,
             TextChange normalizedChange
-        ) {
+        )
+        {
             if (AcceptedCharacters == AcceptedCharacters.Any)
             {
                 return PartialParseResult.Rejected;
@@ -187,7 +188,8 @@ namespace System.Web.Razor.Editor
                     if (
                         symbolEndIndex >= change.OldPosition + change.OldLength
                         && symbol.Type == CSharpSymbolType.Identifier
-                    ) {
+                    )
+                    {
                         // The symbol we're changing happens to be an identifier. Need to check if its transformed state is also one.
                         // We do this transformation logic to capture the case that the new text change happens to not be an identifier;
                         // i.e. "5". Alone, it's numeric, within an identifier it's classified as identifier.
@@ -330,7 +332,8 @@ namespace System.Web.Razor.Editor
             Span target,
             char previousChar,
             TextChange change
-        ) {
+        )
+        {
             // What are we inserting after?
             if (previousChar == '.')
             {
@@ -340,7 +343,8 @@ namespace System.Web.Razor.Editor
                 ParserHelpers.IsIdentifierPart(previousChar)
                 || previousChar == ')'
                 || previousChar == ']'
-            ) {
+            )
+            {
                 return HandleInsertionAfterIdPart(target, change);
             }
             else
@@ -395,7 +399,8 @@ namespace System.Web.Razor.Editor
             Span target,
             TextChange change,
             PartialParseResult acceptResult = PartialParseResult.Accepted
-        ) {
+        )
+        {
             string content = change.ApplyChange(target);
             if (StartsWithKeyword(content))
             {

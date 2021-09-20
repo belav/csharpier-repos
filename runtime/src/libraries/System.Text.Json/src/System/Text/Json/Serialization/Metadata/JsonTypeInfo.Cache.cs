@@ -58,7 +58,8 @@ namespace System.Text.Json.Serialization.Metadata
             Type parentClassType,
             JsonNumberHandling? parentTypeNumberHandling,
             JsonSerializerOptions options
-        ) {
+        )
+        {
             JsonIgnoreCondition? ignoreCondition =
                 JsonPropertyInfo.GetAttribute<JsonIgnoreAttribute>(memberInfo)?.Condition;
             if (ignoreCondition == JsonIgnoreCondition.Always)
@@ -95,7 +96,8 @@ namespace System.Text.Json.Serialization.Metadata
             JsonSerializerOptions options,
             JsonNumberHandling? parentTypeNumberHandling = null,
             JsonIgnoreCondition? ignoreCondition = null
-        ) {
+        )
+        {
             // Create the JsonPropertyInfo instance.
             JsonPropertyInfo jsonPropertyInfo = converter.CreateJsonPropertyInfo();
 
@@ -124,7 +126,8 @@ namespace System.Text.Json.Serialization.Metadata
             JsonConverter converter,
             JsonNumberHandling? numberHandling,
             JsonSerializerOptions options
-        ) {
+        )
+        {
             JsonPropertyInfo jsonPropertyInfo = CreateProperty(
                 declaredPropertyType: declaredPropertyType,
                 runtimePropertyType: runtimePropertyType,
@@ -146,7 +149,8 @@ namespace System.Text.Json.Serialization.Metadata
             ReadOnlySpan<byte> propertyName,
             ref ReadStackFrame frame,
             out byte[] utf8PropertyName
-        ) {
+        )
+        {
             PropertyRef propertyRef;
 
             ulong key = GetKey(propertyName);
@@ -216,7 +220,8 @@ namespace System.Text.Json.Serialization.Metadata
                     JsonHelpers.Utf8GetString(propertyName),
                     out JsonPropertyInfo? info
                 )
-            ) {
+            )
+            {
                 if (Options.PropertyNameCaseInsensitive)
                 {
                     if (propertyName.SequenceEqual(info.NameAsUtf8Bytes))
@@ -287,7 +292,8 @@ namespace System.Text.Json.Serialization.Metadata
             ReadOnlySpan<byte> propertyName,
             ref ReadStackFrame frame,
             out byte[] utf8PropertyName
-        ) {
+        )
+        {
             ParameterRef parameterRef;
 
             ulong key = GetKey(propertyName);
@@ -357,7 +363,8 @@ namespace System.Text.Json.Serialization.Metadata
                     JsonHelpers.Utf8GetString(propertyName),
                     out JsonParameterInfo? info
                 )
-            ) {
+            )
+            {
                 if (Options.PropertyNameCaseInsensitive)
                 {
                     if (propertyName.SequenceEqual(info.NameAsUtf8Bytes))
@@ -425,14 +432,16 @@ namespace System.Text.Json.Serialization.Metadata
             in PropertyRef propertyRef,
             ReadOnlySpan<byte> propertyName,
             ulong key
-        ) {
+        )
+        {
             if (key == propertyRef.Key)
             {
                 // We compare the whole name, although we could skip the first 7 bytes (but it's not any faster)
                 if (
                     propertyName.Length <= PropertyNameKeyLength
                     || propertyName.SequenceEqual(propertyRef.NameFromJson)
-                ) {
+                )
+                {
                     return true;
                 }
             }
@@ -445,14 +454,16 @@ namespace System.Text.Json.Serialization.Metadata
             in ParameterRef parameterRef,
             ReadOnlySpan<byte> parameterName,
             ulong key
-        ) {
+        )
+        {
             if (key == parameterRef.Key)
             {
                 // We compare the whole name, although we could skip the first 7 bytes (but it's not any faster)
                 if (
                     parameterName.Length <= PropertyNameKeyLength
                     || parameterName.SequenceEqual(parameterRef.NameFromJson)
-                ) {
+                )
+                {
                     return true;
                 }
             }
@@ -611,7 +622,8 @@ namespace System.Text.Json.Serialization.Metadata
                 // Verify replacementList will not become too large.
                 while (
                     replacementList.Count + listToAppend.Count > ParameterNameCountCacheThreshold
-                ) {
+                )
+                {
                     // This code path is rare; keep it simple by using RemoveAt() instead of RemoveRange() which requires calculating index\count.
                     listToAppend.RemoveAt(listToAppend.Count - 1);
                 }
@@ -659,7 +671,8 @@ namespace System.Text.Json.Serialization.Metadata
                         jsonPropertyInfo.NameAsString,
                         jsonPropertyInfo
                     )
-                ) {
+                )
+                {
                     ThrowHelper.ThrowInvalidOperationException_SerializerPropertyNameConflict(
                         Type,
                         jsonPropertyInfo

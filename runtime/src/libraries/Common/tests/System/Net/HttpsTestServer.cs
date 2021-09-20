@@ -96,7 +96,8 @@ namespace System.Net.Test.Common
                 {
                     using (
                         Socket accepted = await _listener.AcceptSocketAsync().ConfigureAwait(false)
-                    ) {
+                    )
+                    {
                         _log.WriteLine("[Server] Client connected.");
 
                         using (NetworkStream ns = new NetworkStream(accepted, ownsSocket: false))
@@ -148,7 +149,8 @@ namespace System.Net.Test.Common
             X509Certificate certificate,
             X509Chain chain,
             SslPolicyErrors sslPolicyErrors
-        ) {
+        )
+        {
             if (!_options.RequireClientAuthentication)
             {
                 return true;
@@ -160,7 +162,8 @@ namespace System.Net.Test.Common
             );
             if (
                 (sslPolicyErrors | _options.IgnoreSslPolicyErrors) == _options.IgnoreSslPolicyErrors
-            ) {
+            )
+            {
                 return true;
             }
 

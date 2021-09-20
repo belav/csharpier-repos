@@ -36,7 +36,8 @@ namespace Microsoft.AspNetCore.Internal
             RequestHeaders requestHeaders,
             long length,
             ILogger logger
-        ) {
+        )
+        {
             var rawRangeHeader = context.Request.Headers[HeaderNames.Range];
             if (StringValues.IsNullOrEmpty(rawRangeHeader))
             {
@@ -94,7 +95,8 @@ namespace Microsoft.AspNetCore.Internal
         internal static RangeItemHeaderValue? NormalizeRange(
             RangeItemHeaderValue range,
             long length
-        ) {
+        )
+        {
             var start = range.From;
             var end = range.To;
 

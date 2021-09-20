@@ -47,7 +47,8 @@ namespace Moq.Protected
             Type[] genericTypeArguments,
             bool exactParameterMatch,
             params object[] args
-        ) {
+        )
+        {
             Guard.NotNull(genericTypeArguments, nameof(genericTypeArguments));
 
             return this.InternalSetup(methodName, genericTypeArguments, exactParameterMatch, args);
@@ -58,7 +59,8 @@ namespace Moq.Protected
             Type[] genericTypeArguments,
             bool exactParameterMatch,
             params object[] args
-        ) {
+        )
+        {
             Guard.NotNull(methodName, nameof(methodName));
 
             var method = GetMethod(methodName, genericTypeArguments, exactParameterMatch, args);
@@ -78,7 +80,8 @@ namespace Moq.Protected
             string methodName,
             bool exactParameterMatch,
             params object[] args
-        ) {
+        )
+        {
             return this.InternalSetup<TResult>(methodName, null, exactParameterMatch, args);
         }
 
@@ -87,7 +90,8 @@ namespace Moq.Protected
             Type[] genericTypeArguments,
             bool exactParameterMatch,
             params object[] args
-        ) {
+        )
+        {
             Guard.NotNull(genericTypeArguments, nameof(genericTypeArguments));
 
             return this.InternalSetup<TResult>(
@@ -103,7 +107,8 @@ namespace Moq.Protected
             Type[] genericTypeArguments,
             bool exactParameterMatch,
             params object[] args
-        ) {
+        )
+        {
             Guard.NotNullOrEmpty(methodName, nameof(methodName));
 
             var property = GetProperty(methodName);
@@ -155,7 +160,8 @@ namespace Moq.Protected
         public ISetupSequentialAction SetupSequence(
             string methodOrPropertyName,
             params object[] args
-        ) {
+        )
+        {
             return this.InternalSetupSequence(methodOrPropertyName, null, false, args);
         }
 
@@ -163,7 +169,8 @@ namespace Moq.Protected
             string methodOrPropertyName,
             bool exactParameterMatch,
             params object[] args
-        ) {
+        )
+        {
             return this.InternalSetupSequence(
                 methodOrPropertyName,
                 null,
@@ -177,7 +184,8 @@ namespace Moq.Protected
             Type[] genericTypeArguments,
             bool exactParameterMatch,
             params object[] args
-        ) {
+        )
+        {
             Guard.NotNull(genericTypeArguments, nameof(genericTypeArguments));
             return this.InternalSetupSequence(
                 methodOrPropertyName,
@@ -192,7 +200,8 @@ namespace Moq.Protected
             Type[] genericTypeArguments,
             bool exactParameterMatch,
             params object[] args
-        ) {
+        )
+        {
             Guard.NotNullOrEmpty(methodOrPropertyName, nameof(methodOrPropertyName));
 
             var method = GetMethod(
@@ -211,7 +220,8 @@ namespace Moq.Protected
         public ISetupSequentialResult<TResult> SetupSequence<TResult>(
             string methodOrPropertyName,
             params object[] args
-        ) {
+        )
+        {
             return this.InternalSetupSequence<TResult>(methodOrPropertyName, null, false, args);
         }
 
@@ -219,7 +229,8 @@ namespace Moq.Protected
             string methodOrPropertyName,
             bool exactParameterMatch,
             params object[] args
-        ) {
+        )
+        {
             return this.InternalSetupSequence<TResult>(
                 methodOrPropertyName,
                 null,
@@ -233,7 +244,8 @@ namespace Moq.Protected
             Type[] genericTypeArguments,
             bool exactParameterMatch,
             params object[] args
-        ) {
+        )
+        {
             Guard.NotNull(genericTypeArguments, nameof(genericTypeArguments));
             return this.InternalSetupSequence<TResult>(
                 methodOrPropertyName,
@@ -248,7 +260,8 @@ namespace Moq.Protected
             Type[] genericTypeArguments,
             bool exactParameterMatch,
             params object[] args
-        ) {
+        )
+        {
             Guard.NotNullOrEmpty(methodOrPropertyName, nameof(methodOrPropertyName));
 
             var property = GetProperty(methodOrPropertyName);
@@ -288,7 +301,8 @@ namespace Moq.Protected
             Type[] genericTypeArguments,
             Times times,
             params object[] args
-        ) {
+        )
+        {
             Guard.NotNull(genericTypeArguments, nameof(genericTypeArguments));
             this.InternalVerify(methodName, genericTypeArguments, times, false, args);
         }
@@ -304,7 +318,8 @@ namespace Moq.Protected
             Times times,
             bool exactParameterMatch,
             params object[] args
-        ) {
+        )
+        {
             Guard.NotNull(genericTypeArguments, nameof(genericTypeArguments));
             this.InternalVerify(methodName, genericTypeArguments, times, exactParameterMatch, args);
         }
@@ -315,7 +330,8 @@ namespace Moq.Protected
             Times times,
             bool exactParameterMatch,
             params object[] args
-        ) {
+        )
+        {
             Guard.NotNullOrEmpty(methodName, nameof(methodName));
 
             var method = GetMethod(methodName, genericTypeArguments, exactParameterMatch, args);
@@ -335,7 +351,8 @@ namespace Moq.Protected
             Type[] genericTypeArguments,
             Times times,
             params object[] args
-        ) {
+        )
+        {
             Guard.NotNull(genericTypeArguments, nameof(genericTypeArguments));
             this.InternalVerify<TResult>(methodName, genericTypeArguments, times, false, args);
         }
@@ -345,7 +362,8 @@ namespace Moq.Protected
             Times times,
             bool exactParameterMatch,
             object[] args
-        ) {
+        )
+        {
             this.InternalVerify<TResult>(methodName, null, times, exactParameterMatch, args);
         }
 
@@ -355,7 +373,8 @@ namespace Moq.Protected
             Times times,
             bool exactParameterMatch,
             params object[] args
-        ) {
+        )
+        {
             Guard.NotNull(genericTypeArguments, nameof(genericTypeArguments));
             this.InternalVerify<TResult>(methodName, null, times, exactParameterMatch, args);
         }
@@ -366,7 +385,8 @@ namespace Moq.Protected
             Times times,
             bool exactParameterMatch,
             params object[] args
-        ) {
+        )
+        {
             Guard.NotNullOrEmpty(methodName, nameof(methodName));
 
             var property = GetProperty(methodName);
@@ -431,7 +451,8 @@ namespace Moq.Protected
             Type[] genericTypeArguments,
             bool exact,
             params object[] args
-        ) {
+        )
+        {
             var argTypes = ToArgTypes(args);
             var methods = typeof(T).GetMethods(
                     BindingFlags.Instance | BindingFlags.NonPublic | BindingFlags.Public
@@ -455,7 +476,8 @@ namespace Moq.Protected
         private static Expression<Func<T, TResult>> GetMethodCall<TResult>(
             MethodInfo method,
             object[] args
-        ) {
+        )
+        {
             var param = Expression.Parameter(typeof(T), "mock");
             return Expression.Lambda<Func<T, TResult>>(
                 Expression.Call(param, method, ToExpressionArgs(method, args)),
@@ -484,7 +506,8 @@ namespace Moq.Protected
         private static Expression<Action<T>> GetSetterExpression(
             PropertyInfo property,
             Expression value
-        ) {
+        )
+        {
             var param = Expression.Parameter(typeof(T), "mock");
 
             return Expression.Lambda<Action<T>>(
@@ -512,7 +535,8 @@ namespace Moq.Protected
             string methodName,
             MethodInfo method,
             object[] args
-        ) {
+        )
+        {
             if (method == null)
             {
                 List<string> extractedTypeNames = new List<string>();

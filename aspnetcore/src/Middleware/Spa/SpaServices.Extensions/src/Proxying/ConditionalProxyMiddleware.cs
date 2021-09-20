@@ -29,7 +29,8 @@ namespace Microsoft.AspNetCore.SpaServices.Extensions.Proxy
             TimeSpan requestTimeout,
             Task<Uri> baseUriTask,
             IHostApplicationLifetime applicationLifetime
-        ) {
+        )
+        {
             if (!pathPrefix.StartsWith('/'))
             {
                 pathPrefix = "/" + pathPrefix;

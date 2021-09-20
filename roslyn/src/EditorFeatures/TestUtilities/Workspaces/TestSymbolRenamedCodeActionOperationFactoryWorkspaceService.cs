@@ -46,7 +46,8 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Workspaces
                 string newName,
                 Solution startingSolution,
                 Solution updatedSolution
-            ) {
+            )
+            {
                 _symbol = symbol;
                 _newName = newName;
                 _startingSolution = startingSolution;

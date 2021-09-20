@@ -22,7 +22,8 @@ namespace MS.Internal.Xml.Cache
             XPathNode[] pageElem,
             int idxElem,
             out XPathNode[]? pageNmsp
-        ) {
+        )
+        {
             if (pageElem[idxElem].HasNamespaceDecls)
             {
                 // Only elements have namespace nodes
@@ -42,7 +43,8 @@ namespace MS.Internal.Xml.Cache
             XPathNode[] pageElem,
             int idxElem,
             out XPathNode[]? pageNmsp
-        ) {
+        )
+        {
             XPathDocument doc;
 
             // Only elements have namespace nodes
@@ -198,7 +200,8 @@ namespace MS.Internal.Xml.Cache
             ref int idxNode,
             string? localName,
             string namespaceName
-        ) {
+        )
+        {
             XPathNode[]? page = pageNode;
             int idx = idxNode;
             Debug.Assert(pageNode != null && idxNode != 0, "Cannot pass null argument(s)");
@@ -235,7 +238,8 @@ namespace MS.Internal.Xml.Cache
             ref int idxNode,
             string? localName,
             string namespaceName
-        ) {
+        )
+        {
             XPathNode[]? page = pageNode;
             int idx = idxNode;
             Debug.Assert(pageNode != null && idxNode != 0, "Cannot pass null argument(s)");
@@ -270,7 +274,8 @@ namespace MS.Internal.Xml.Cache
             ref XPathNode[] pageNode,
             ref int idxNode,
             XPathNodeType typ
-        ) {
+        )
+        {
             XPathNode[]? page = pageNode;
             int idx = idxNode;
             int mask;
@@ -310,7 +315,8 @@ namespace MS.Internal.Xml.Cache
             ref XPathNode[] pageNode,
             ref int idxNode,
             XPathNodeType typ
-        ) {
+        )
+        {
             XPathNode[]? page = pageNode;
             int idx = idxNode;
             int mask = XPathNavigator.GetContentKindMask(typ);
@@ -415,7 +421,8 @@ namespace MS.Internal.Xml.Cache
             ref int idxNode,
             string? localName,
             string namespaceName
-        ) {
+        )
+        {
             XPathNode[]? page = pageNode;
             int idx = idxNode;
             Debug.Assert(pageNode != null && idxNode != 0, "Cannot pass null argument(s)");
@@ -454,7 +461,8 @@ namespace MS.Internal.Xml.Cache
             int idxEnd,
             string? localName,
             string namespaceName
-        ) {
+        )
+        {
             XPathNode[]? page = pageCurrent;
             int idx = idxCurrent;
             Debug.Assert(pageCurrent != null && idxCurrent != 0, "Cannot pass null argument(s)");
@@ -463,7 +471,8 @@ namespace MS.Internal.Xml.Cache
             if (
                 page[idx].NodeType == XPathNodeType.Element
                 && (object)page[idx].LocalName == (object?)localName
-            ) {
+            )
+            {
                 // Then follow similar element name pointers
                 int idxPageEnd = 0;
                 int idxPageCurrent;
@@ -564,7 +573,8 @@ namespace MS.Internal.Xml.Cache
             XPathNode[]? pageEnd,
             int idxEnd,
             XPathNodeType typ
-        ) {
+        )
+        {
             XPathNode[]? page = pageCurrent;
             int idx = idxCurrent;
             int mask = XPathNavigator.GetContentKindMask(typ);
@@ -635,7 +645,8 @@ namespace MS.Internal.Xml.Cache
             ref int idxCurrent,
             XPathNode[]? pageEnd,
             int idxEnd
-        ) {
+        )
+        {
             XPathNode[]? page = pageCurrent;
             int idx = idxCurrent;
             Debug.Assert(pageCurrent != null && idxCurrent != 0, "Cannot pass null argument(s)");

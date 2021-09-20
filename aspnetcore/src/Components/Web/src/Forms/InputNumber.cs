@@ -30,7 +30,8 @@ namespace Microsoft.AspNetCore.Components.Forms
                 || targetType == typeof(float)
                 || targetType == typeof(double)
                 || targetType == typeof(decimal)
-            ) {
+            )
+            {
                 _stepAttributeValue = "any";
             }
             else
@@ -83,7 +84,8 @@ namespace Microsoft.AspNetCore.Components.Forms
             string? value,
             [MaybeNullWhen(false)] out TValue result,
             [NotNullWhen(false)] out string? validationErrorMessage
-        ) {
+        )
+        {
             if (BindConverter.TryConvertTo<TValue>(value, CultureInfo.InvariantCulture, out result))
             {
                 validationErrorMessage = null;

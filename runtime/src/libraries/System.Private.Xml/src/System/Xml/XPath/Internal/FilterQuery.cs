@@ -43,7 +43,8 @@ namespace MS.Internal.Xml.XPath
                 _cond.StaticType != XPathResultType.Number
                 && _cond.StaticType != XPathResultType.Any
                 && _noPosition
-            ) {
+            )
+            {
                 // BugBug: We can do such trick at Evaluate time only.
                 // But to do this FilterQuery should stop inherit from BaseAxisQuery
                 ReversePositionQuery? query = qyInput as ReversePositionQuery;

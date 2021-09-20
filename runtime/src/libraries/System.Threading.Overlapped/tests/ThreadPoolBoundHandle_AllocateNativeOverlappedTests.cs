@@ -203,7 +203,8 @@ public partial class ThreadPoolBoundHandleTests
                     new object(),
                     new byte[256]
                 )
-            ) {
+            )
+            {
                 NativeOverlapped* overlapped = handle.AllocateNativeOverlapped(preAlloc);
 
                 Assert.Equal(IntPtr.Zero, overlapped->InternalLow);
@@ -338,7 +339,8 @@ public partial class ThreadPoolBoundHandleTests
                     null,
                     null
                 )
-            ) {
+            )
+            {
                 NativeOverlapped* overlapped = handle.AllocateNativeOverlapped(preAlloc);
 
                 AssertExtensions.Throws<ArgumentException>(

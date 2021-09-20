@@ -77,7 +77,8 @@ namespace System.Security.Cryptography.Rsa.Tests
         private static void VerifyDecryptKeyExchange(
             AsymmetricKeyExchangeFormatter formatter,
             AsymmetricKeyExchangeDeformatter deformatter
-        ) {
+        )
+        {
             byte[] encrypted = formatter.CreateKeyExchange(TestData.HelloBytes);
             byte[] decrypted = deformatter.DecryptKeyExchange(encrypted);
             Assert.Equal(TestData.HelloBytes, decrypted);

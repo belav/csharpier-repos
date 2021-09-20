@@ -21,7 +21,8 @@ namespace Microsoft.AspNetCore.SignalR.Tests
             InProcessTestServer serverFixture,
             ILoggerFactory loggerFactory,
             IDisposable wrappedDisposable
-        ) {
+        )
+        {
             _loggerFactory = loggerFactory;
             _serverFixture = serverFixture;
             _wrappedDisposable = wrappedDisposable;

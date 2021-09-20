@@ -136,7 +136,8 @@ internal static class Utils
         string expected,
         string actual,
         bool runSmartXmlComparerOnFailure = true
-    ) {
+    )
+    {
         // for CORECLR we get different xml hence we have updated code for smartyXMLcomparision
 
         CompareResult stringcompare = CompareString(expected, actual);
@@ -145,7 +146,8 @@ internal static class Utils
         {
             if (
                 (stringcompare.Equal != true) && (!string.IsNullOrEmpty(stringcompare.ErrorMessage))
-            ) {
+            )
+            {
                 Debug.WriteLine(
                     "Basic baseline XML comparison failed with the error : {0}\n. Running the smart XML comparer",
                     stringcompare.ErrorMessage
@@ -225,7 +227,8 @@ internal static class Utils
                             baselineXElement.Name.LocalName.Substring(0, deskIdx),
                             actualXElement.Name.LocalName.Substring(0, coreCLRIdx)
                         )
-                    ) {
+                    )
+                    {
                         // Check if the namespace matched.
                         if (baselineXElement.Name.Namespace.Equals(actualXElement.Name.Namespace))
                             return true;
@@ -280,7 +283,8 @@ internal static class Utils
                         deskAtrs[i].Name.NamespaceName,
                         coreCLRAtrs[i].Name.NamespaceName
                     )
-                ) {
+                )
+                {
                     Debug.WriteLine(
                         "Namespaces are different.Expected {0} namespace doesn't match with actual {1} namespace ",
                         deskAtrs[i].Name.NamespaceName,

@@ -32,7 +32,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.TableDataSource
             int version,
             ImmutableArray<TItem> items,
             ImmutableArray<ITrackingPoint> trackingPoints
-        ) {
+        )
+        {
             _version = version;
             _items = items;
             _trackingPoints = trackingPoints;
@@ -67,7 +68,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.TableDataSource
             if (
                 !(newerSnapshot is AbstractTableEntriesSnapshot<TItem> ourSnapshot)
                 || ourSnapshot.Count == 0
-            ) {
+            )
+            {
                 // not ours, we don't know how to track index
                 return -1;
             }
@@ -146,7 +148,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.TableDataSource
         private static LinePosition GetLinePosition(
             ITextSnapshot snapshot,
             ITrackingPoint trackingPoint
-        ) {
+        )
+        {
             var point = trackingPoint.GetPoint(snapshot);
             var line = point.GetContainingLine();
 
@@ -160,7 +163,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.TableDataSource
             bool previewTab,
             bool activate,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var navigationService = workspace.Services.GetService<IDocumentNavigationService>();
             if (navigationService == null)
             {
@@ -187,7 +191,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.TableDataSource
             bool previewTab,
             bool activate,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var item = GetItem(index);
             var documentId = item?.DocumentId;
             if (documentId == null)
@@ -210,7 +215,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.TableDataSource
                 workspace.IsDocumentOpen(documentId)
                 && (trackingLinePosition = GetTrackingLineColumn(document, index))
                     != LinePosition.Zero
-            ) {
+            )
+            {
                 position = trackingLinePosition;
             }
             else

@@ -45,7 +45,8 @@ namespace Microsoft.EntityFrameworkCore.Query
             Expression navigationExpression,
             INavigationBase navigation,
             bool setLoaded
-        ) {
+        )
+        {
             Check.NotNull(entityExpression, nameof(entityExpression));
             Check.NotNull(navigationExpression, nameof(navigationExpression));
             Check.NotNull(navigation, nameof(navigation));
@@ -108,7 +109,8 @@ namespace Microsoft.EntityFrameworkCore.Query
         public virtual IncludeExpression Update(
             Expression entityExpression,
             Expression navigationExpression
-        ) {
+        )
+        {
             Check.NotNull(entityExpression, nameof(entityExpression));
             Check.NotNull(navigationExpression, nameof(navigationExpression));
 

@@ -28,7 +28,8 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
             ParameterExpression parameter,
             Type[] types,
             IList<IPropertyBase> propertyBases
-        ) {
+        )
+        {
             var constructorExpression = Expression.Convert(
                 Expression.New(
                     Snapshot.CreateSnapshotType(types).GetDeclaredConstructor(types),

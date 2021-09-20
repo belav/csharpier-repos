@@ -45,7 +45,8 @@ namespace System.Composition.TypedParts.Discovery
             AttributedModelProvider attributeContext,
             ActivationFeature[] activationFeatures,
             Lazy<IDictionary<string, object>> partMetadata
-        ) {
+        )
+        {
             _partType = partType;
             _attributeContext = attributeContext;
             _activationFeatures = activationFeatures;
@@ -56,7 +57,8 @@ namespace System.Composition.TypedParts.Discovery
             TypeInfo partType,
             AttributedModelProvider attributeContext,
             ActivationFeature[] activationFeatures
-        ) {
+        )
+        {
             _partType = partType;
             _attributeContext = attributeContext;
             _activationFeatures = activationFeatures;
@@ -93,7 +95,8 @@ namespace System.Composition.TypedParts.Discovery
 
         private IEnumerable<CompositionDependency> GetPartActivatorDependencies(
             DependencyAccessor definitionAccessor
-        ) {
+        )
+        {
             var partTypeAsType = _partType.AsType();
 
             if (_constructor == null)
@@ -102,13 +105,15 @@ namespace System.Composition.TypedParts.Discovery
                     var c in _partType.DeclaredConstructors.Where(
                         ci => ci.IsPublic && !(ci.IsStatic)
                     )
-                ) {
+                )
+                {
                     if (
                         _attributeContext.GetDeclaredAttribute<ImportingConstructorAttribute>(
                             partTypeAsType,
                             c
                         ) != null
-                    ) {
+                    )
+                    {
                         if (_constructor != null)
                         {
                             string message = SR.Format(
@@ -198,7 +203,8 @@ namespace System.Composition.TypedParts.Discovery
                         genericPartType,
                         constructorInfo
                     ) != null
-                ) {
+                )
+                {
                     if (constructor != null)
                     {
                         string message = SR.Format(
@@ -218,7 +224,8 @@ namespace System.Composition.TypedParts.Discovery
         public CompositeActivator GetActivator(
             DependencyAccessor definitionAccessor,
             IEnumerable<CompositionDependency> dependencies
-        ) {
+        )
+        {
             if (_partActivator != null)
                 return _partActivator;
 
@@ -285,7 +292,8 @@ namespace System.Composition.TypedParts.Discovery
             var partMetadata = new Dictionary<string, object>();
             foreach (
                 var attr in _attributeContext.GetDeclaredAttributes(partType.AsType(), partType)
-            ) {
+            )
+            {
                 if (attr is PartMetadataAttribute)
                 {
                     var ma = (PartMetadataAttribute)attr;
@@ -304,11 +312,13 @@ namespace System.Composition.TypedParts.Discovery
                     var genericParameterConstraints in _partType.GenericTypeParameters[
                         index
                     ].GetTypeInfo().GetGenericParameterConstraints()
-                ) {
+                )
+                {
                     if (
                         !genericParameterConstraints.GetTypeInfo()
                             .IsAssignableFrom(typeArguments[index].GetTypeInfo())
-                    ) {
+                    )
+                    {
                         closed = null;
                         return false;
                     }

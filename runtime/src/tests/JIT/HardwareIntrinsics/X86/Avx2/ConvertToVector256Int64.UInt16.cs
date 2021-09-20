@@ -315,7 +315,8 @@ namespace JIT.HardwareIntrinsics.X86
             Vector128<UInt16> firstOp,
             void* result,
             [CallerMemberName] string method = ""
-        ) {
+        )
+        {
             UInt16[] inArray = new UInt16[Op1ElementCount];
             UInt64[] outArray = new UInt64[RetElementCount];
 
@@ -333,7 +334,8 @@ namespace JIT.HardwareIntrinsics.X86
             void* firstOp,
             void* result,
             [CallerMemberName] string method = ""
-        ) {
+        )
+        {
             UInt16[] inArray = new UInt16[Op1ElementCount];
             UInt64[] outArray = new UInt64[RetElementCount];
 
@@ -355,7 +357,8 @@ namespace JIT.HardwareIntrinsics.X86
             UInt16[] firstOp,
             UInt64[] result,
             [CallerMemberName] string method = ""
-        ) {
+        )
+        {
             if (result[0] != firstOp[0])
             {
                 Succeeded = false;

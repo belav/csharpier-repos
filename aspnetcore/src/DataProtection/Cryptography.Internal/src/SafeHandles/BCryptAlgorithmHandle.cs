@@ -184,7 +184,8 @@ namespace Microsoft.AspNetCore.Cryptography.SafeHandles
             string algorithmId,
             string? implementation = null,
             bool hmac = false
-        ) {
+        )
+        {
             // from bcrypt.h
             const uint BCRYPT_ALG_HANDLE_HMAC_FLAG = 0x00000008;
 

@@ -112,7 +112,8 @@ namespace System.Net.Http.Headers
         public static bool TryParse(
             [NotNullWhen(true)] string input,
             [NotNullWhen(true)] out ProductInfoHeaderValue? parsedValue
-        ) {
+        )
+        {
             int index = 0;
             parsedValue = null;
 
@@ -123,7 +124,8 @@ namespace System.Net.Http.Headers
                     ref index,
                     out object? output
                 )
-            ) {
+            )
+            {
                 if (index < input.Length)
                 {
                     // There is some invalid leftover data. Normally BaseHeaderParser.TryParseValue would
@@ -140,7 +142,8 @@ namespace System.Net.Http.Headers
             string? input,
             int startIndex,
             out ProductInfoHeaderValue? parsedValue
-        ) {
+        )
+        {
             Debug.Assert(startIndex >= 0);
 
             parsedValue = null;
@@ -161,7 +164,8 @@ namespace System.Net.Http.Headers
                 if (
                     HttpRuleParser.GetCommentLength(input, current, out commentLength)
                     != HttpParseResult.Parsed
-                ) {
+                )
+                {
                     return 0;
                 }
 

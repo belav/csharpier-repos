@@ -54,7 +54,8 @@ namespace Microsoft.EntityFrameworkCore.InMemory.Storage.Internal
                 clrType.FullName == "NetTopologySuite.Geometries.Geometry"
                 || clrType.GetBaseTypes()
                     .Any(t => t.FullName == "NetTopologySuite.Geometries.Geometry")
-            ) {
+            )
+            {
                 var comparer = (ValueComparer)Activator.CreateInstance(
                     typeof(GeometryValueComparer<>).MakeGenericType(clrType)
                 )!;

@@ -46,7 +46,8 @@ namespace System.Web.WebPages
                         BrowserOverrideCookieName,
                         StringComparison.OrdinalIgnoreCase
                     )
-                ) {
+                )
+                {
                     HttpCookie currentOverriddenBrowserCookie = responseCookies[
                         BrowserOverrideCookieName
                     ];

@@ -57,7 +57,8 @@ namespace System.CommandLine
             IArgument argument,
             int minimumNumberOfValues,
             int maximumNumberOfValues
-        ) {
+        )
+        {
             var argumentResult = symbolResult switch
             {
                 ArgumentResult a => a,

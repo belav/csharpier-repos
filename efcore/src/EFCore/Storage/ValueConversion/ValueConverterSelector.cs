@@ -113,7 +113,8 @@ namespace Microsoft.EntityFrameworkCore.Storage.ValueConversion
         public virtual IEnumerable<ValueConverterInfo> Select(
             Type modelClrType,
             Type? providerClrType = null
-        ) {
+        )
+        {
             Check.NotNull(modelClrType, nameof(modelClrType));
 
             if (modelClrType.IsEnum)
@@ -125,7 +126,8 @@ namespace Microsoft.EntityFrameworkCore.Storage.ValueConversion
                         typeof(EnumToNumberConverter<, >),
                         EnumToStringOrBytes
                     )
-                ) {
+                )
+                {
                     yield return converterInfo;
                 }
             }
@@ -138,7 +140,8 @@ namespace Microsoft.EntityFrameworkCore.Storage.ValueConversion
                         typeof(BoolToZeroOneConverter<>),
                         null
                     )
-                ) {
+                )
+                {
                     yield return converterInfo;
                 }
 
@@ -237,7 +240,8 @@ namespace Microsoft.EntityFrameworkCore.Storage.ValueConversion
                             typeof(StringToNumberConverter<>),
                             null
                         )
-                    ) {
+                    )
+                    {
                         yield return converterInfo;
                     }
                 }
@@ -295,7 +299,8 @@ namespace Microsoft.EntityFrameworkCore.Storage.ValueConversion
                 modelClrType == typeof(DateTime)
                 || modelClrType == typeof(DateTimeOffset)
                 || modelClrType == typeof(TimeSpan)
-            ) {
+            )
+            {
                 if (providerClrType == null || providerClrType == typeof(string))
                 {
                     yield return _converters.GetOrAdd(
@@ -392,7 +397,8 @@ namespace Microsoft.EntityFrameworkCore.Storage.ValueConversion
                     || providerClrType == typeof(string)
                     || _numerics.Contains(providerClrType)
                 )
-            ) {
+            )
+            {
                 foreach (
                     var converterInfo in FindNumericConventions(
                         modelClrType,
@@ -400,7 +406,8 @@ namespace Microsoft.EntityFrameworkCore.Storage.ValueConversion
                         typeof(CastingConverter<, >),
                         NumberToStringOrBytes
                     )
-                ) {
+                )
+                {
                     yield return converterInfo;
                 }
             }
@@ -409,7 +416,8 @@ namespace Microsoft.EntityFrameworkCore.Storage.ValueConversion
         private IEnumerable<ValueConverterInfo> ForChar(
             Type underlyingModelType,
             Type? underlyingProviderType
-        ) {
+        )
+        {
             if (underlyingProviderType == null || underlyingProviderType == typeof(string))
             {
                 yield return _converters.GetOrAdd(
@@ -425,7 +433,8 @@ namespace Microsoft.EntityFrameworkCore.Storage.ValueConversion
                     typeof(CastingConverter<, >),
                     CharToBytes
                 )
-            ) {
+            )
+            {
                 yield return converterInfo;
             }
         }
@@ -433,7 +442,8 @@ namespace Microsoft.EntityFrameworkCore.Storage.ValueConversion
         private IEnumerable<ValueConverterInfo> CharToBytes(
             Type underlyingModelType,
             Type? underlyingProviderType
-        ) {
+        )
+        {
             if (underlyingProviderType == null || underlyingProviderType == typeof(byte[]))
             {
                 yield return _converters.GetOrAdd(
@@ -446,7 +456,8 @@ namespace Microsoft.EntityFrameworkCore.Storage.ValueConversion
         private IEnumerable<ValueConverterInfo> EnumToStringOrBytes(
             Type underlyingModelType,
             Type? underlyingProviderType
-        ) {
+        )
+        {
             if (underlyingProviderType == null || underlyingProviderType == typeof(string))
             {
                 yield return _converters.GetOrAdd(
@@ -491,7 +502,8 @@ namespace Microsoft.EntityFrameworkCore.Storage.ValueConversion
         private IEnumerable<ValueConverterInfo> NumberToStringOrBytes(
             Type underlyingModelType,
             Type? underlyingProviderType
-        ) {
+        )
+        {
             if (underlyingProviderType == null || underlyingProviderType == typeof(string))
             {
                 yield return _converters.GetOrAdd(
@@ -520,7 +532,8 @@ namespace Microsoft.EntityFrameworkCore.Storage.ValueConversion
             Type? providerType,
             Type converterType,
             Func<Type, Type?, IEnumerable<ValueConverterInfo>>? afterPreferred
-        ) {
+        )
+        {
             var usedTypes = new List<Type> { modelType }; // List not hash because few members
             var underlyingModelType = modelType.UnwrapEnumType();
 
@@ -533,7 +546,8 @@ namespace Microsoft.EntityFrameworkCore.Storage.ValueConversion
                         providerType,
                         converterType
                     )
-                ) {
+                )
+                {
                     yield return converterInfo;
 
                     usedTypes.Add(converterInfo.ProviderClrType);
@@ -547,7 +561,8 @@ namespace Microsoft.EntityFrameworkCore.Storage.ValueConversion
                     providerType,
                     converterType
                 )
-            ) {
+            )
+            {
                 if (!usedTypes.Contains(converterInfo.ProviderClrType))
                 {
                     yield return converterInfo;
@@ -561,7 +576,8 @@ namespace Microsoft.EntityFrameworkCore.Storage.ValueConversion
                 || underlyingModelType == typeof(uint)
                 || underlyingModelType == typeof(ulong)
                 || underlyingModelType == typeof(ushort)
-            ) {
+            )
+            {
                 foreach (
                     var converterInfo in FindPreferredConversions(
                         _unsignedPreferred,
@@ -569,7 +585,8 @@ namespace Microsoft.EntityFrameworkCore.Storage.ValueConversion
                         providerType,
                         converterType
                     )
-                ) {
+                )
+                {
                     if (!usedTypes.Contains(converterInfo.ProviderClrType))
                     {
                         yield return converterInfo;
@@ -588,7 +605,8 @@ namespace Microsoft.EntityFrameworkCore.Storage.ValueConversion
                         providerType,
                         converterType
                     )
-                ) {
+                )
+                {
                     yield return converterInfo;
 
                     usedTypes.Add(converterInfo.ProviderClrType);
@@ -604,7 +622,8 @@ namespace Microsoft.EntityFrameworkCore.Storage.ValueConversion
                         providerType,
                         converterType
                     )
-                ) {
+                )
+                {
                     yield return converterInfo;
 
                     usedTypes.Add(converterInfo.ProviderClrType);
@@ -626,7 +645,8 @@ namespace Microsoft.EntityFrameworkCore.Storage.ValueConversion
                 if (
                     (providerType == null || providerType == numeric)
                     && !usedTypes.Contains(numeric)
-                ) {
+                )
+                {
                     yield return _converters.GetOrAdd(
                         (modelType, numeric),
                         k =>
@@ -645,7 +665,8 @@ namespace Microsoft.EntityFrameworkCore.Storage.ValueConversion
             Type modelType,
             Type? providerType,
             Type converterType
-        ) {
+        )
+        {
             var underlyingModelType = modelType.UnwrapEnumType();
 
             for (var i = 0; i < candidateTypes.Length; i++)

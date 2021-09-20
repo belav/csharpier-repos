@@ -44,7 +44,8 @@ namespace Microsoft.CodeAnalysis.UnifiedSuggestions
             bool isBlocking,
             Func<string, IDisposable?> addOperationScope,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             // It may seem strange that we kick off a task, but then immediately 'Wait' on
             // it. However, it's deliberate.  We want to make sure that the code runs on
             // the background so that no one takes an accidentally dependency on running on
@@ -76,7 +77,8 @@ namespace Microsoft.CodeAnalysis.UnifiedSuggestions
             Workspace workspace,
             ImmutableArray<CodeFixCollection> fixCollections,
             bool includeSuppressionFixes
-        ) {
+        )
+        {
             var map = ImmutableDictionary.CreateBuilder<
                 CodeFixGroupKey,
                 IList<UnifiedSuggestedAction>
@@ -104,7 +106,8 @@ namespace Microsoft.CodeAnalysis.UnifiedSuggestions
             IDictionary<CodeFixGroupKey, IList<UnifiedSuggestedAction>> map,
             ArrayBuilder<CodeFixGroupKey> order,
             bool includeSuppressionFixes
-        ) {
+        )
+        {
             foreach (var fixCollection in fixCollections)
             {
                 ProcessFixCollection(workspace, map, order, includeSuppressionFixes, fixCollection);
@@ -117,7 +120,8 @@ namespace Microsoft.CodeAnalysis.UnifiedSuggestions
             ArrayBuilder<CodeFixGroupKey> order,
             bool includeSuppressionFixes,
             CodeFixCollection fixCollection
-        ) {
+        )
+        {
             var fixes = fixCollection.Fixes;
             var fixCount = fixes.Length;
 
@@ -172,7 +176,8 @@ namespace Microsoft.CodeAnalysis.UnifiedSuggestions
             CodeFixCollection fixCollection,
             Func<CodeAction, UnifiedSuggestedActionSet?> getFixAllSuggestedActionSet,
             ImmutableArray<CodeFix> codeFixes
-        ) {
+        )
+        {
             foreach (var fix in codeFixes)
             {
                 var unifiedSuggestedAction = GetUnifiedSuggestedAction(fix.Action, fix);
@@ -225,7 +230,8 @@ namespace Microsoft.CodeAnalysis.UnifiedSuggestions
             UnifiedSuggestedAction suggestedAction,
             IDictionary<CodeFixGroupKey, IList<UnifiedSuggestedAction>> map,
             ArrayBuilder<CodeFixGroupKey> order
-        ) {
+        )
+        {
             var groupKey = GetGroupKey(fix);
             if (!map.ContainsKey(groupKey))
             {
@@ -262,7 +268,8 @@ namespace Microsoft.CodeAnalysis.UnifiedSuggestions
             ImmutableArray<FixAllScope> supportedScopes,
             Diagnostic firstDiagnostic,
             Workspace workspace
-        ) {
+        )
+        {
             if (fixAllState == null)
             {
                 return null;
@@ -319,7 +326,8 @@ namespace Microsoft.CodeAnalysis.UnifiedSuggestions
             ImmutableDictionary<CodeFixGroupKey, IList<UnifiedSuggestedAction>> map,
             ImmutableArray<CodeFixGroupKey> order,
             Workspace workspace
-        ) {
+        )
+        {
             using var _1 = ArrayBuilder<UnifiedSuggestedActionSet>.GetInstance(
                 out var nonSuppressionSets
             );
@@ -399,7 +407,8 @@ namespace Microsoft.CodeAnalysis.UnifiedSuggestions
             // Local functions
             static (TextSpan? span, string category) CombineSpansAndCategory(
                 IEnumerable<UnifiedSuggestedActionSet> sets
-            ) {
+            )
+            {
                 // We are combining the spans and categories of the given set of suggested action sets
                 // to generate a result span containing the spans of individual suggested action sets and
                 // a result category which is the maximum severity category amongst the set
@@ -448,7 +457,8 @@ namespace Microsoft.CodeAnalysis.UnifiedSuggestions
             IEnumerable<UnifiedSuggestedAction> actions,
             CodeFixGroupKey groupKey,
             ArrayBuilder<UnifiedSuggestedActionSet> sets
-        ) {
+        )
+        {
             foreach (var group in actions.GroupBy(a => a.CodeActionPriority))
             {
                 var priority = GetUnifiedSuggestedActionSetPriority(group.Key);
@@ -504,7 +514,8 @@ namespace Microsoft.CodeAnalysis.UnifiedSuggestions
             Func<string, IDisposable?> addOperationScope,
             bool filterOutsideSelection,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             // It may seem strange that we kick off a task, but then immediately 'Wait' on
             // it. However, it's deliberate.  We want to make sure that the code runs on
             // the background so that no one takes an accidentally dependency on running on
@@ -544,7 +555,8 @@ namespace Microsoft.CodeAnalysis.UnifiedSuggestions
             CodeRefactoring refactoring,
             TextSpan selection,
             bool filterOutsideSelection
-        ) {
+        )
+        {
             var actions = refactoring.CodeActions.WhereAsArray(IsActionAndSpanApplicable);
             return actions.Length == 0
               ? null
@@ -554,14 +566,16 @@ namespace Microsoft.CodeAnalysis.UnifiedSuggestions
 
             bool IsActionAndSpanApplicable(
                 (CodeAction action, TextSpan? applicableSpan) actionAndSpan
-            ) {
+            )
+            {
                 if (filterOutsideSelection)
                 {
                     // Filter out refactorings with applicable span outside the selection span.
                     if (
                         !actionAndSpan.applicableSpan.HasValue
                         || !selection.IntersectsWith(actionAndSpan.applicableSpan.Value)
-                    ) {
+                    )
+                    {
                         return false;
                     }
                 }
@@ -582,7 +596,8 @@ namespace Microsoft.CodeAnalysis.UnifiedSuggestions
         private static UnifiedSuggestedActionSet OrganizeRefactorings(
             Workspace workspace,
             CodeRefactoring refactoring
-        ) {
+        )
+        {
             using var refactoringSuggestedActionsDisposer =
                 ArrayBuilder<UnifiedSuggestedAction>.GetInstance(
                     out var refactoringSuggestedActions
@@ -674,7 +689,8 @@ namespace Microsoft.CodeAnalysis.UnifiedSuggestions
             ImmutableArray<UnifiedSuggestedActionSet> fixes,
             ImmutableArray<UnifiedSuggestedActionSet> refactorings,
             TextSpan? selectionOpt
-        ) {
+        )
+        {
             // Get the initial set of action sets, with refactorings and fixes appropriately
             // ordered against each other.
             var result = GetInitiallyOrderedActionSets(selectionOpt, fixes, refactorings);
@@ -696,7 +712,8 @@ namespace Microsoft.CodeAnalysis.UnifiedSuggestions
             TextSpan? selectionOpt,
             ImmutableArray<UnifiedSuggestedActionSet> fixes,
             ImmutableArray<UnifiedSuggestedActionSet> refactorings
-        ) {
+        )
+        {
             // First, order refactorings based on the order the providers actually gave for
             // their actions. This way, a low pri refactoring always shows after a medium pri
             // refactoring, no matter what we do below.
@@ -747,7 +764,8 @@ namespace Microsoft.CodeAnalysis.UnifiedSuggestions
         private static ImmutableArray<UnifiedSuggestedActionSet> OrderActionSets(
             ImmutableArray<UnifiedSuggestedActionSet> actionSets,
             TextSpan? selectionOpt
-        ) {
+        )
+        {
             return actionSets.OrderByDescending(s => s.Priority)
                 .ThenBy(s => s, new UnifiedSuggestedActionSetComparer(selectionOpt))
                 .ToImmutableArray();
@@ -760,7 +778,8 @@ namespace Microsoft.CodeAnalysis.UnifiedSuggestions
 
         private static ImmutableArray<UnifiedSuggestedActionSet> InlineActionSetsIfDesirable(
             ImmutableArray<UnifiedSuggestedActionSet> allActionSets
-        ) {
+        )
+        {
             // If we only have a single set of items, and that set only has three max suggestion
             // offered. Then we can consider inlining any nested actions into the top level list.
             // (but we only do this if the parent of the nested actions isn't invokable itself).
@@ -805,7 +824,8 @@ namespace Microsoft.CodeAnalysis.UnifiedSuggestions
 
         private static ImmutableArray<UnifiedSuggestedActionSet> FilterActionSetsByTitle(
             ImmutableArray<UnifiedSuggestedActionSet> allActionSets
-        ) {
+        )
+        {
             using var resultDisposer = ArrayBuilder<UnifiedSuggestedActionSet>.GetInstance(
                 out var result
             );
@@ -826,7 +846,8 @@ namespace Microsoft.CodeAnalysis.UnifiedSuggestions
         private static UnifiedSuggestedActionSet? FilterActionSetByTitle(
             UnifiedSuggestedActionSet set,
             HashSet<string> seenTitles
-        ) {
+        )
+        {
             using var actionsDisposer = ArrayBuilder<IUnifiedSuggestedAction>.GetInstance(
                 out var actions
             );

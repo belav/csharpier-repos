@@ -258,7 +258,8 @@ namespace Microsoft.AspNetCore.Mvc.ModelBinding.Binders
         [InlineData(typeof(FormFileCollection))]
         public async Task FormFileModelBinder_BindsFiles_ForCollectionsItCanCreate(
             Type destinationType
-        ) {
+        )
+        {
             // Arrange
             var binder = new FormFileModelBinder(NullLoggerFactory.Instance);
             var formFiles = GetTwoFiles();
@@ -335,7 +336,8 @@ namespace Microsoft.AspNetCore.Mvc.ModelBinding.Binders
         public async Task FormFileModelBinder_UsesFieldNameForTopLevelObject(
             bool isTopLevel,
             string expected
-        ) {
+        )
+        {
             // Arrange
             var formFiles = new FormFileCollection
             {
@@ -431,7 +433,8 @@ namespace Microsoft.AspNetCore.Mvc.ModelBinding.Binders
 
         private static DefaultModelBindingContext GetBindingContextForReadOnlyArray(
             HttpContext httpContext
-        ) {
+        )
+        {
             var metadataProvider = new TestModelMetadataProvider();
             metadataProvider.ForProperty<ModelWithReadOnlyArray>(
                     nameof(ModelWithReadOnlyArray.ArrayProperty)
@@ -448,7 +451,8 @@ namespace Microsoft.AspNetCore.Mvc.ModelBinding.Binders
         private static DefaultModelBindingContext GetBindingContext(
             Type modelType,
             HttpContext httpContext
-        ) {
+        )
+        {
             var metadataProvider = new EmptyModelMetadataProvider();
             var metadata = metadataProvider.GetMetadataForType(modelType);
 
@@ -458,7 +462,8 @@ namespace Microsoft.AspNetCore.Mvc.ModelBinding.Binders
         private static DefaultModelBindingContext GetBindingContext(
             ModelMetadata metadata,
             HttpContext httpContext
-        ) {
+        )
+        {
             var bindingContext = new DefaultModelBindingContext
             {
                 ActionContext = new ActionContext() { HttpContext = httpContext, },

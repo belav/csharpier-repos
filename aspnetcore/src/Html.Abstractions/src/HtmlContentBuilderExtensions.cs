@@ -32,7 +32,8 @@ namespace Microsoft.AspNetCore.Html
             this IHtmlContentBuilder builder,
             string format,
             params object[] args
-        ) {
+        )
+        {
             if (builder == null)
             {
                 throw new ArgumentNullException(nameof(builder));
@@ -72,7 +73,8 @@ namespace Microsoft.AspNetCore.Html
             IFormatProvider formatProvider,
             string format,
             params object[] args
-        ) {
+        )
+        {
             if (builder == null)
             {
                 throw new ArgumentNullException(nameof(builder));
@@ -118,7 +120,8 @@ namespace Microsoft.AspNetCore.Html
         public static IHtmlContentBuilder AppendLine(
             this IHtmlContentBuilder builder,
             string unencoded
-        ) {
+        )
+        {
             if (builder == null)
             {
                 throw new ArgumentNullException(nameof(builder));
@@ -138,7 +141,8 @@ namespace Microsoft.AspNetCore.Html
         public static IHtmlContentBuilder AppendLine(
             this IHtmlContentBuilder builder,
             IHtmlContent content
-        ) {
+        )
+        {
             if (builder == null)
             {
                 throw new ArgumentNullException(nameof(builder));
@@ -159,7 +163,8 @@ namespace Microsoft.AspNetCore.Html
         public static IHtmlContentBuilder AppendHtmlLine(
             this IHtmlContentBuilder builder,
             string encoded
-        ) {
+        )
+        {
             if (builder == null)
             {
                 throw new ArgumentNullException(nameof(builder));
@@ -180,7 +185,8 @@ namespace Microsoft.AspNetCore.Html
         public static IHtmlContentBuilder SetContent(
             this IHtmlContentBuilder builder,
             string unencoded
-        ) {
+        )
+        {
             if (builder == null)
             {
                 throw new ArgumentNullException(nameof(builder));
@@ -200,7 +206,8 @@ namespace Microsoft.AspNetCore.Html
         public static IHtmlContentBuilder SetHtmlContent(
             this IHtmlContentBuilder builder,
             IHtmlContent content
-        ) {
+        )
+        {
             if (builder == null)
             {
                 throw new ArgumentNullException(nameof(builder));
@@ -221,7 +228,8 @@ namespace Microsoft.AspNetCore.Html
         public static IHtmlContentBuilder SetHtmlContent(
             this IHtmlContentBuilder builder,
             string encoded
-        ) {
+        )
+        {
             if (builder == null)
             {
                 throw new ArgumentNullException(nameof(builder));

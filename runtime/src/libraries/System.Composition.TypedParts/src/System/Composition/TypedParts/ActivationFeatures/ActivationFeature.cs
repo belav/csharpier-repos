@@ -42,7 +42,8 @@ namespace System.Composition.TypedParts.ActivationFeatures
         public virtual IEnumerable<CompositionDependency> GetDependencies(
             TypeInfo partType,
             DependencyAccessor definitionAccessor
-        ) {
+        )
+        {
             return NoDependencies;
         }
     }

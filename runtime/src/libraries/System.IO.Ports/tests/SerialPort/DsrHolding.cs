@@ -20,7 +20,8 @@ namespace System.IO.Ports.Tests
                 SerialPort com1 = new SerialPort(
                     TCSupport.LocalMachineSerialInfo.FirstAvailablePortName
                 )
-            ) {
+            )
+            {
                 SerialPortProperties serPortProp = new SerialPortProperties();
 
                 Debug.WriteLine("Verifying default DsrHolding before Open");
@@ -41,7 +42,8 @@ namespace System.IO.Ports.Tests
                 SerialPort com1 = new SerialPort(
                     TCSupport.LocalMachineSerialInfo.FirstAvailablePortName
                 )
-            ) {
+            )
+            {
                 SerialPortProperties serPortProp = new SerialPortProperties();
 
                 Debug.WriteLine("Verifying default DsrHolding after Open");
@@ -68,7 +70,8 @@ namespace System.IO.Ports.Tests
                 SerialPort com2 = new SerialPort(
                     TCSupport.LocalMachineSerialInfo.SecondAvailablePortName
                 )
-            ) {
+            )
+            {
                 SerialPortProperties serPortProp = new SerialPortProperties();
 
                 Debug.WriteLine("Verifying DsrHolding=true on com1 when com2.DtrEnable=true");
@@ -102,7 +105,8 @@ namespace System.IO.Ports.Tests
                 SerialPort com2 = new SerialPort(
                     TCSupport.LocalMachineSerialInfo.SecondAvailablePortName
                 )
-            ) {
+            )
+            {
                 SerialPortProperties serPortProp = new SerialPortProperties();
 
                 Debug.WriteLine(
@@ -144,7 +148,8 @@ namespace System.IO.Ports.Tests
                 SerialPort com2 = new SerialPort(
                     TCSupport.LocalMachineSerialInfo.SecondAvailablePortName
                 )
-            ) {
+            )
+            {
                 SerialPortProperties serPortProp = new SerialPortProperties();
 
                 Debug.WriteLine(
@@ -190,7 +195,8 @@ namespace System.IO.Ports.Tests
                 SerialPort com2 = new SerialPort(
                     TCSupport.LocalMachineSerialInfo.SecondAvailablePortName
                 )
-            ) {
+            )
+            {
                 SerialPortProperties serPortProp = new SerialPortProperties();
 
                 Debug.WriteLine(

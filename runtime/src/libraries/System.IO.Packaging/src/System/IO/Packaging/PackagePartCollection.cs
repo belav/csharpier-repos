@@ -49,7 +49,8 @@ namespace System.IO.Packaging
 
         internal PackagePartCollection(
             SortedList<PackUriHelper.ValidatedPartUri, PackagePart> partList
-        ) {
+        )
+        {
             Debug.Assert(partList != null, "partDictionary parameter cannot be null");
             _partList = partList;
         }

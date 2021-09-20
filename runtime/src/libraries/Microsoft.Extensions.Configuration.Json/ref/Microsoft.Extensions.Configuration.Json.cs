@@ -14,26 +14,30 @@ namespace Microsoft.Extensions.Configuration
             string path,
             bool optional,
             bool reloadOnChange
-        ) {
+        )
+        {
             throw null;
         }
         public static Microsoft.Extensions.Configuration.IConfigurationBuilder AddJsonFile(
             this Microsoft.Extensions.Configuration.IConfigurationBuilder builder,
             System.Action<Microsoft.Extensions.Configuration.Json.JsonConfigurationSource> configureSource
-        ) {
+        )
+        {
             throw null;
         }
         public static Microsoft.Extensions.Configuration.IConfigurationBuilder AddJsonFile(
             this Microsoft.Extensions.Configuration.IConfigurationBuilder builder,
             string path
-        ) {
+        )
+        {
             throw null;
         }
         public static Microsoft.Extensions.Configuration.IConfigurationBuilder AddJsonFile(
             this Microsoft.Extensions.Configuration.IConfigurationBuilder builder,
             string path,
             bool optional
-        ) {
+        )
+        {
             throw null;
         }
         public static Microsoft.Extensions.Configuration.IConfigurationBuilder AddJsonFile(
@@ -41,13 +45,15 @@ namespace Microsoft.Extensions.Configuration
             string path,
             bool optional,
             bool reloadOnChange
-        ) {
+        )
+        {
             throw null;
         }
         public static Microsoft.Extensions.Configuration.IConfigurationBuilder AddJsonStream(
             this Microsoft.Extensions.Configuration.IConfigurationBuilder builder,
             System.IO.Stream stream
-        ) {
+        )
+        {
             throw null;
         }
     }
@@ -68,7 +74,8 @@ namespace Microsoft.Extensions.Configuration.Json
         public JsonConfigurationSource() { }
         public override Microsoft.Extensions.Configuration.IConfigurationProvider Build(
             Microsoft.Extensions.Configuration.IConfigurationBuilder builder
-        ) {
+        )
+        {
             throw null;
         }
     }
@@ -86,7 +93,8 @@ namespace Microsoft.Extensions.Configuration.Json
         public JsonStreamConfigurationSource() { }
         public override Microsoft.Extensions.Configuration.IConfigurationProvider Build(
             Microsoft.Extensions.Configuration.IConfigurationBuilder builder
-        ) {
+        )
+        {
             throw null;
         }
     }

@@ -60,7 +60,8 @@ namespace System.Security.Cryptography.Pkcs
                 HashAlgorithmName digestAlgorithmName,
                 ReadOnlyMemory<byte>? signatureParameters,
                 X509Certificate2 certificate
-            ) {
+            )
+            {
                 if (_expectedDigest != digestAlgorithmName)
                 {
                     throw new CryptographicException(
@@ -124,7 +125,8 @@ namespace System.Security.Cryptography.Pkcs
                 bool silent,
                 [NotNullWhen(true)] out string? signatureAlgorithm,
                 [NotNullWhen(true)] out byte[]? signatureValue
-            ) {
+            )
+            {
                 // If there's no private key, fall back to the public key for a "no private key" exception.
                 ECDsa? key =
                     certKey as ECDsa
@@ -179,7 +181,8 @@ namespace System.Security.Cryptography.Pkcs
                         if (
                             key != null
                             && !certificate.GetECDsaPublicKey()!.VerifyHash(dataHash, signedHash)
-                        ) {
+                        )
+                        {
                             // key did not match certificate
                             signatureValue = null;
                             return false;

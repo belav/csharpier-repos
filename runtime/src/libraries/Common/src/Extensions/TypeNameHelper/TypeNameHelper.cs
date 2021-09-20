@@ -58,7 +58,8 @@ namespace Microsoft.Extensions.Internal
             bool includeGenericParameterNames = false,
             bool includeGenericParameters = true,
             char nestedTypeDelimiter = DefaultNestedTypeDelimiter
-        ) {
+        )
+        {
             var builder = new StringBuilder();
             ProcessType(
                 builder,
@@ -77,7 +78,8 @@ namespace Microsoft.Extensions.Internal
             StringBuilder builder,
             Type type,
             in DisplayNameOptions options
-        ) {
+        )
+        {
             if (type.IsGenericType)
             {
                 Type[] genericArguments = type.GetGenericArguments();
@@ -125,7 +127,8 @@ namespace Microsoft.Extensions.Internal
             StringBuilder builder,
             Type type,
             in DisplayNameOptions options
-        ) {
+        )
+        {
             Type innerType = type;
             while (innerType.IsArray)
             {
@@ -149,7 +152,8 @@ namespace Microsoft.Extensions.Internal
             Type[] genericArguments,
             int length,
             in DisplayNameOptions options
-        ) {
+        )
+        {
             int offset = 0;
             if (type.IsNested)
             {
@@ -200,7 +204,8 @@ namespace Microsoft.Extensions.Internal
                     if (
                         options.IncludeGenericParameterNames
                         || !genericArguments[i + 1].IsGenericParameter
-                    ) {
+                    )
+                    {
                         builder.Append(' ');
                     }
                 }
@@ -215,7 +220,8 @@ namespace Microsoft.Extensions.Internal
                 bool includeGenericParameterNames,
                 bool includeGenericParameters,
                 char nestedTypeDelimiter
-            ) {
+            )
+            {
                 FullName = fullName;
                 IncludeGenericParameters = includeGenericParameters;
                 IncludeGenericParameterNames = includeGenericParameterNames;

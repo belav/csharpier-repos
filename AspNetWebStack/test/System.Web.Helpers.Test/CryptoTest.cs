@@ -58,7 +58,8 @@ namespace System.Web.Helpers.Test
                             salt,
                             iterations: 1000
                         )
-                    ) {
+                    )
+                    {
                         bw.Write((byte)0x00); // version identifier
                         bw.Write(salt); // salt
                         bw.Write(deriveBytes.GetBytes(32)); // subkey

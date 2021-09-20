@@ -54,7 +54,8 @@ namespace Microsoft.CodeAnalysis.Options
         private protected override AnalyzerConfigOptions CreateAnalyzerConfigOptions(
             IOptionService optionService,
             string? language
-        ) {
+        )
+        {
             Debug.Assert(
                 (language ?? _language) == _language,
                 $"Use of a {nameof(DocumentOptionSet)} is not expected to differ from the language it was constructed with."

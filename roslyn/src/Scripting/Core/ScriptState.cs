@@ -43,7 +43,8 @@ namespace Microsoft.CodeAnalysis.Scripting
             ScriptExecutionState executionState,
             Script script,
             Exception exceptionOpt
-        ) {
+        )
+        {
             Debug.Assert(executionState != null);
             Debug.Assert(script != null);
 
@@ -116,7 +117,8 @@ namespace Microsoft.CodeAnalysis.Scripting
                         field.IsPublic
                         && field.Name.Length > 0
                         && (char.IsLetterOrDigit(field.Name[0]) || field.Name[0] == '_')
-                    ) {
+                    )
+                    {
                         result.Add(new ScriptVariable(state, field));
                     }
                 }
@@ -282,14 +284,16 @@ namespace Microsoft.CodeAnalysis.Scripting
             Type instanceType,
             string name,
             MethodInfo delegateInvokeMethod
-        ) {
+        )
+        {
             var dprms = delegateInvokeMethod.GetParameters();
 
             foreach (
                 var mi in instanceType.GetMethods(
                     BindingFlags.Instance | BindingFlags.Public | BindingFlags.NonPublic
                 )
-            ) {
+            )
+            {
                 if (mi.Name == name)
                 {
                     var prms = mi.GetParameters();

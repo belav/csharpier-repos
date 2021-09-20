@@ -9,7 +9,8 @@ namespace System.Buffers.Text
             ReadOnlySpan<byte> source,
             out byte value,
             out int bytesConsumed
-        ) {
+        )
+        {
             if (source.Length < 1)
             {
                 bytesConsumed = 0;
@@ -68,7 +69,8 @@ namespace System.Buffers.Text
                     int index = ParserHelpers.ByteOverflowLengthHex;
                     index < source.Length;
                     index++
-                ) {
+                )
+                {
                     nextCharacter = source[index];
                     nextDigit = hexLookup[nextCharacter];
                     if (nextDigit == 0xFF)
@@ -97,7 +99,8 @@ namespace System.Buffers.Text
             ReadOnlySpan<byte> source,
             out ushort value,
             out int bytesConsumed
-        ) {
+        )
+        {
             if (source.Length < 1)
             {
                 bytesConsumed = 0;
@@ -156,7 +159,8 @@ namespace System.Buffers.Text
                     int index = ParserHelpers.Int16OverflowLengthHex;
                     index < source.Length;
                     index++
-                ) {
+                )
+                {
                     nextCharacter = source[index];
                     nextDigit = hexLookup[nextCharacter];
                     if (nextDigit == 0xFF)
@@ -185,7 +189,8 @@ namespace System.Buffers.Text
             ReadOnlySpan<byte> source,
             out uint value,
             out int bytesConsumed
-        ) {
+        )
+        {
             if (source.Length < 1)
             {
                 bytesConsumed = 0;
@@ -244,7 +249,8 @@ namespace System.Buffers.Text
                     int index = ParserHelpers.Int32OverflowLengthHex;
                     index < source.Length;
                     index++
-                ) {
+                )
+                {
                     nextCharacter = source[index];
                     nextDigit = hexLookup[nextCharacter];
                     if (nextDigit == 0xFF)
@@ -273,7 +279,8 @@ namespace System.Buffers.Text
             ReadOnlySpan<byte> source,
             out ulong value,
             out int bytesConsumed
-        ) {
+        )
+        {
             if (source.Length < 1)
             {
                 bytesConsumed = 0;
@@ -332,7 +339,8 @@ namespace System.Buffers.Text
                     int index = ParserHelpers.Int64OverflowLengthHex;
                     index < source.Length;
                     index++
-                ) {
+                )
+                {
                     nextCharacter = source[index];
                     nextDigit = hexLookup[nextCharacter];
                     if (nextDigit == 0xFF)

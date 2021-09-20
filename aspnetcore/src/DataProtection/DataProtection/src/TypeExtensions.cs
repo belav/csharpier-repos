@@ -18,7 +18,8 @@ namespace Microsoft.AspNetCore.DataProtection
         public static void AssertIsAssignableFrom(
             this Type expectedBaseType,
             Type implementationType
-        ) {
+        )
+        {
             if (!expectedBaseType.IsAssignableFrom(implementationType))
             {
                 // It might seem a bit weird to throw an InvalidCastException explicitly rather than

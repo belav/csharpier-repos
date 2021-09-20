@@ -28,7 +28,8 @@ namespace Microsoft.AspNetCore.Razor.Language
         protected sealed override void ExecuteCore(
             RazorCodeDocument codeDocument,
             DocumentIntermediateNode documentNode
-        ) {
+        )
+        {
             if (documentNode.DocumentKind != null)
             {
                 return;
@@ -105,7 +106,8 @@ namespace Microsoft.AspNetCore.Razor.Language
         protected virtual CodeTarget CreateTarget(
             RazorCodeDocument codeDocument,
             RazorCodeGenerationOptions options
-        ) {
+        )
+        {
             return CodeTarget.CreateDefault(
                 codeDocument,
                 options,
@@ -131,7 +133,8 @@ namespace Microsoft.AspNetCore.Razor.Language
             NamespaceDeclarationIntermediateNode @namespace,
             ClassDeclarationIntermediateNode @class,
             MethodDeclarationIntermediateNode @method
-        ) {
+        )
+        {
             // Intentionally empty.
         }
 
@@ -147,7 +150,8 @@ namespace Microsoft.AspNetCore.Razor.Language
                 IntermediateNodeBuilder @namespace,
                 IntermediateNodeBuilder @class,
                 IntermediateNodeBuilder method
-            ) {
+            )
+            {
                 _document = document;
                 _namespace = @namespace;
                 _class = @class;

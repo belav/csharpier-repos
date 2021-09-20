@@ -49,7 +49,8 @@ namespace System.Linq.Expressions.Tests
                     decimal.MinValue,
                     decimal.MaxValue
                 }
-            ) {
+            )
+            {
                 VerifyNullableDecimalConstant(value, useInterpreter);
             }
         }
@@ -71,7 +72,8 @@ namespace System.Linq.Expressions.Tests
                     double.PositiveInfinity,
                     double.NaN
                 }
-            ) {
+            )
+            {
                 VerifyNullableDoubleConstant(value, useInterpreter);
             }
         }
@@ -81,7 +83,8 @@ namespace System.Linq.Expressions.Tests
         {
             foreach (
                 E? value in new E?[] { null, (E)0, E.A, E.B, (E)int.MaxValue, (E)int.MinValue }
-            ) {
+            )
+            {
                 VerifyNullableEnumConstant(value, useInterpreter);
             }
         }
@@ -99,7 +102,8 @@ namespace System.Linq.Expressions.Tests
                     (El)long.MaxValue,
                     (El)long.MinValue
                 }
-            ) {
+            )
+            {
                 VerifyNullableEnumLongConstant(value, useInterpreter);
             }
         }
@@ -121,7 +125,8 @@ namespace System.Linq.Expressions.Tests
                     float.PositiveInfinity,
                     float.NaN
                 }
-            ) {
+            )
+            {
                 VerifyNullableFloatConstant(value, useInterpreter);
             }
         }
@@ -158,7 +163,8 @@ namespace System.Linq.Expressions.Tests
         {
             foreach (
                 sbyte? value in new sbyte?[] { null, 0, 1, -1, sbyte.MinValue, sbyte.MaxValue }
-            ) {
+            )
+            {
                 VerifyNullableSByteConstant(value, useInterpreter);
             }
         }
@@ -177,7 +183,8 @@ namespace System.Linq.Expressions.Tests
         {
             foreach (
                 Scs? value in new Scs?[] { null, default(Scs), new Scs(), new Scs(null, new S()) }
-            ) {
+            )
+            {
                 VerifyNullableStructWithStringAndFieldConstant(value, useInterpreter);
             }
         }
@@ -187,7 +194,8 @@ namespace System.Linq.Expressions.Tests
         {
             foreach (
                 short? value in new short?[] { null, 0, 1, -1, short.MinValue, short.MaxValue }
-            ) {
+            )
+            {
                 VerifyNullableShortConstant(value, useInterpreter);
             }
         }
@@ -240,21 +248,24 @@ namespace System.Linq.Expressions.Tests
         [Theory, ClassData(typeof(CompilationTypes))]
         public static void CheckNullableGenericWithStructRestrictionWithEnumConstantTest(
             bool useInterpreter
-        ) {
+        )
+        {
             CheckNullableGenericWithStructRestrictionConstantHelper<E>(useInterpreter);
         }
 
         [Theory, ClassData(typeof(CompilationTypes))]
         public static void CheckNullableGenericWithStructRestrictionWithStructConstantTest(
             bool useInterpreter
-        ) {
+        )
+        {
             CheckNullableGenericWithStructRestrictionConstantHelper<S>(useInterpreter);
         }
 
         [Theory, ClassData(typeof(CompilationTypes))]
         public static void CheckNullableGenericWithStructRestrictionWithStructWithStringAndValueConstantTest(
             bool useInterpreter
-        ) {
+        )
+        {
             CheckNullableGenericWithStructRestrictionConstantHelper<Scs>(useInterpreter);
         }
 
@@ -409,7 +420,8 @@ namespace System.Linq.Expressions.Tests
         private static void VerifyNullableStructWithStringAndFieldConstant(
             Scs? value,
             bool useInterpreter
-        ) {
+        )
+        {
             Expression<Func<Scs?>> e = Expression.Lambda<Func<Scs?>>(
                 Expression.Constant(value, typeof(Scs?)),
                 Enumerable.Empty<ParameterExpression>()
@@ -431,7 +443,8 @@ namespace System.Linq.Expressions.Tests
         private static void VerifyNullableStructWithTwoValuesConstant(
             Sp? value,
             bool useInterpreter
-        ) {
+        )
+        {
             Expression<Func<Sp?>> e = Expression.Lambda<Func<Sp?>>(
                 Expression.Constant(value, typeof(Sp?)),
                 Enumerable.Empty<ParameterExpression>()

@@ -20,7 +20,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Completion.KeywordRecommenders
             int position,
             CSharpSyntaxContext context,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             return (context.IsGlobalStatementContext && context.SyntaxTree.IsScript())
                 || IsValidContextForAccessor(context)
                 || IsValidContextForType(context, cancellationToken)
@@ -36,7 +37,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Completion.KeywordRecommenders
                 || context.TargetToken.IsAccessorDeclarationContext<IndexerDeclarationSyntax>(
                     context.Position
                 )
-            ) {
+            )
+            {
                 return CheckPreviousAccessibilityModifiers(context);
             }
 
@@ -46,7 +48,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Completion.KeywordRecommenders
         private static bool IsValidContextForMember(
             CSharpSyntaxContext context,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             if (
                 context.SyntaxTree.IsGlobalMemberDeclarationContext(
                     context.Position,
@@ -59,7 +62,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Completion.KeywordRecommenders
                     canBePartial: false,
                     cancellationToken: cancellationToken
                 )
-            ) {
+            )
+            {
                 var modifiers = context.PrecedingModifiers;
 
                 // can't have private + abstract/virtual/override/sealed
@@ -68,7 +72,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Completion.KeywordRecommenders
                     || modifiers.Contains(SyntaxKind.VirtualKeyword)
                     || modifiers.Contains(SyntaxKind.OverrideKeyword)
                     || modifiers.Contains(SyntaxKind.SealedKeyword)
-                ) {
+                )
+                {
                     return false;
                 }
 
@@ -81,7 +86,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Completion.KeywordRecommenders
         private static bool IsValidContextForType(
             CSharpSyntaxContext context,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             if (
                 context.IsTypeDeclarationContext(
                     validModifiers: SyntaxKindSet.AllTypeModifiers,
@@ -89,7 +95,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Completion.KeywordRecommenders
                     canBePartial: false,
                     cancellationToken: cancellationToken
                 )
-            ) {
+            )
+            {
                 // private things can't be in namespaces.
                 var typeDecl = context.ContainingTypeDeclaration;
                 if (typeDecl == null)

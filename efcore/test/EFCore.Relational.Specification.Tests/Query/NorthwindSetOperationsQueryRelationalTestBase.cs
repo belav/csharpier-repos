@@ -18,7 +18,8 @@ namespace Microsoft.EntityFrameworkCore.Query
 
         public override async Task Collection_projection_after_set_operation_fails_if_distinct(
             bool async
-        ) {
+        )
+        {
             var message =
                 (
                     await Assert.ThrowsAsync<InvalidOperationException>(

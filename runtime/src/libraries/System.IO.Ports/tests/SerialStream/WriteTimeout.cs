@@ -58,7 +58,8 @@ namespace System.IO.Ports.Tests
                 SerialPort com = new SerialPort(
                     TCSupport.LocalMachineSerialInfo.FirstAvailablePortName
                 )
-            ) {
+            )
+            {
                 com.Open();
                 Stream stream = com.BaseStream;
 
@@ -190,7 +191,8 @@ namespace System.IO.Ports.Tests
                 SerialPort com = new SerialPort(
                     TCSupport.LocalMachineSerialInfo.FirstAvailablePortName
                 )
-            ) {
+            )
+            {
                 com.Open();
                 com.Handshake = Handshake.RequestToSend;
                 Stream stream = com.BaseStream;
@@ -219,7 +221,8 @@ namespace System.IO.Ports.Tests
         {
             using (
                 var com1 = new SerialPort(TCSupport.LocalMachineSerialInfo.FirstAvailablePortName)
-            ) {
+            )
+            {
                 var asyncEnableRts = new AsyncEnableRts();
                 var t = new Task(asyncEnableRts.EnableRTS);
 
@@ -266,7 +269,8 @@ namespace System.IO.Ports.Tests
                 SerialPort com = new SerialPort(
                     TCSupport.LocalMachineSerialInfo.FirstAvailablePortName
                 )
-            ) {
+            )
+            {
                 com.Open();
                 com.Handshake = Handshake.RequestToSend;
                 Stream stream = com.BaseStream;
@@ -288,7 +292,8 @@ namespace System.IO.Ports.Tests
         {
             using (
                 var com1 = new SerialPort(TCSupport.LocalMachineSerialInfo.FirstAvailablePortName)
-            ) {
+            )
+            {
                 var asyncEnableRts = new AsyncEnableRts();
                 var t = new Task(asyncEnableRts.EnableRTS);
 
@@ -346,7 +351,8 @@ namespace System.IO.Ports.Tests
                 SerialPort com = new SerialPort(
                     TCSupport.LocalMachineSerialInfo.FirstAvailablePortName
                 )
-            ) {
+            )
+            {
                 com.Open();
                 com.BaudRate = LARGEWRITE_BAUDRATE;
                 com.Handshake = Handshake.RequestToSend;
@@ -375,7 +381,8 @@ namespace System.IO.Ports.Tests
                         var com2 = new SerialPort(
                             TCSupport.LocalMachineSerialInfo.SecondAvailablePortName
                         )
-                    ) {
+                    )
+                    {
                         int sleepPeriod = SUCCESSIVE_WriteTimeout_SOMEDATA / 2;
 
                         // Sleep some random period with of a maximum duration of half the largest possible timeout value for a write method on COM1
@@ -460,7 +467,8 @@ namespace System.IO.Ports.Tests
         {
             using (
                 var com1 = new SerialPort(TCSupport.LocalMachineSerialInfo.FirstAvailablePortName)
-            ) {
+            )
+            {
                 com1.Open();
                 com1.Handshake = Handshake.RequestToSend;
                 com1.BaseStream.ReadTimeout = 1;
@@ -543,7 +551,8 @@ namespace System.IO.Ports.Tests
         {
             using (
                 var com1 = new SerialPort(TCSupport.LocalMachineSerialInfo.FirstAvailablePortName)
-            ) {
+            )
+            {
                 com1.Open();
                 com1.Handshake = Handshake.RequestToSend;
                 com1.BaseStream.ReadTimeout = 1;
@@ -625,12 +634,14 @@ namespace System.IO.Ports.Tests
             int readTimeout,
             Type expectedExceptionAfterOpen,
             Type expectedExceptionAfterClose
-        ) {
+        )
+        {
             using (
                 SerialPort com = new SerialPort(
                     TCSupport.LocalMachineSerialInfo.FirstAvailablePortName
                 )
-            ) {
+            )
+            {
                 com.Open();
                 Stream stream = com.BaseStream;
 

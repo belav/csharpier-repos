@@ -33,16 +33,18 @@ namespace Microsoft.CodeAnalysis.UseCompoundAssignment
         protected AbstractUseCompoundAssignmentDiagnosticAnalyzer(
             ISyntaxFacts syntaxFacts,
             ImmutableArray<(TSyntaxKind exprKind, TSyntaxKind assignmentKind, TSyntaxKind tokenKind)> kinds
-        ) : base(
-            IDEDiagnosticIds.UseCompoundAssignmentDiagnosticId,
-            EnforceOnBuildValues.UseCompoundAssignment,
-            CodeStyleOptions2.PreferCompoundAssignment,
-            new LocalizableResourceString(
-                nameof(AnalyzersResources.Use_compound_assignment),
-                AnalyzersResources.ResourceManager,
-                typeof(AnalyzersResources)
+        )
+            : base(
+                IDEDiagnosticIds.UseCompoundAssignmentDiagnosticId,
+                EnforceOnBuildValues.UseCompoundAssignment,
+                CodeStyleOptions2.PreferCompoundAssignment,
+                new LocalizableResourceString(
+                    nameof(AnalyzersResources.Use_compound_assignment),
+                    AnalyzersResources.ResourceManager,
+                    typeof(AnalyzersResources)
+                )
             )
-        ) {
+        {
             _syntaxFacts = syntaxFacts;
             UseCompoundAssignmentUtilities.GenerateMaps(kinds, out _binaryToAssignmentMap, out _);
 
@@ -165,7 +167,8 @@ namespace Microsoft.CodeAnalysis.UseCompoundAssignment
                     semanticModel,
                     cancellationToken
                 )
-            ) {
+            )
+            {
                 return;
             }
 

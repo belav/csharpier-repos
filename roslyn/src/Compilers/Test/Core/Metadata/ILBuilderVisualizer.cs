@@ -92,7 +92,8 @@ namespace Roslyn.Test.Utilities
         /// </summary>
         private static List<HandlerSpan> GetHandlerSpans(
             ImmutableArray<Cci.ExceptionHandlerRegion> regions
-        ) {
+        )
+        {
             if (regions.Length == 0)
             {
                 return null;
@@ -173,7 +174,8 @@ namespace Roslyn.Test.Utilities
             ILBuilder builder,
             Func<Cci.ILocalDefinition, LocalInfo> mapLocal = null,
             IReadOnlyDictionary<int, string> markers = null
-        ) {
+        )
+        {
             var sb = new StringBuilder();
 
             var ilStream = builder.RealizedIL;
@@ -220,7 +222,8 @@ namespace Roslyn.Test.Utilities
         internal static string LocalSignatureToString(
             ILBuilder builder,
             Func<Cci.ILocalDefinition, LocalInfo> mapLocal = null
-        ) {
+        )
+        {
             var sb = new StringBuilder();
 
             if (mapLocal == null)

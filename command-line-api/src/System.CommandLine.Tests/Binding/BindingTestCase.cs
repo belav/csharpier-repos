@@ -12,7 +12,8 @@ namespace System.CommandLine.Tests.Binding
             Type parameterType,
             Action<object> assertBoundValue,
             string variationName
-        ) {
+        )
+        {
             _assertBoundValue = assertBoundValue;
             VariationName = variationName;
             CommandLine = commandLine;

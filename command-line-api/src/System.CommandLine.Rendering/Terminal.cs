@@ -16,7 +16,8 @@
             this ITerminal terminal,
             FormattableString value,
             Region region = null
-        ) {
+        )
+        {
             if (terminal is IRenderable t)
             {
                 var renderer = new ConsoleRenderer(terminal, t.OutputMode);
@@ -31,7 +32,8 @@
             this IConsole console,
             bool preferVirtualTerminal = true,
             OutputMode outputMode = OutputMode.Auto
-        ) {
+        )
+        {
             if (console == null)
             {
                 throw new ArgumentNullException(nameof(console));
@@ -53,7 +55,8 @@
                 preferVirtualTerminal
                 && VirtualTerminalMode.TryEnable() is VirtualTerminalMode virtualTerminalMode
                 && virtualTerminalMode.IsEnabled
-            ) {
+            )
+            {
                 terminal = new VirtualTerminal(console, virtualTerminalMode);
             }
             else

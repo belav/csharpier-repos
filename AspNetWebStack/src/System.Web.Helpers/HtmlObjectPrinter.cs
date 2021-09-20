@@ -88,7 +88,8 @@ namespace System.Web.Helpers
             IEnumerable<object> keys,
             Func<object, object> valueSelector,
             int depth
-        ) {
+        )
+        {
             string id = GetObjectId(value);
             HtmlElement ul = new HtmlElement("ul");
             ul.AddCssClass("typeEnumeration");
@@ -167,7 +168,8 @@ namespace System.Web.Helpers
             Func<string, Type> typeSelector,
             Func<string, object> valueSelector,
             int depth
-        ) {
+        )
+        {
             HtmlElement ul = new HtmlElement("ul");
             ul.AddCssClass("typeProperties");
 

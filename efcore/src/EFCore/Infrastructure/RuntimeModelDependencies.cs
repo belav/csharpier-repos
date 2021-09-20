@@ -57,7 +57,8 @@ namespace Microsoft.EntityFrameworkCore.Infrastructure
             ITypeMappingSource typeMappingSource,
             IConstructorBindingFactory constructorBindingFactory,
             IParameterBindingFactories parameterBindingFactories
-        ) {
+        )
+        {
             Check.NotNull(typeMappingSource, nameof(typeMappingSource));
             Check.NotNull(constructorBindingFactory, nameof(constructorBindingFactory));
             Check.NotNull(parameterBindingFactories, nameof(parameterBindingFactories));

@@ -18,7 +18,8 @@ namespace Microsoft.AspNetCore.Authentication.OAuth
             AuthenticationProperties properties,
             string code,
             string redirectUri
-        ) {
+        )
+        {
             Properties = properties;
             Code = code;
             RedirectUri = redirectUri;

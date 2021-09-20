@@ -23,7 +23,8 @@ namespace Microsoft.Extensions.Logging.Testing
             ITestOutputHelper output,
             LogLevel minLevel,
             DateTimeOffset? logStart
-        ) {
+        )
+        {
             _output = output;
             _minLevel = minLevel;
             _logStart = logStart;
@@ -50,7 +51,8 @@ namespace Microsoft.Extensions.Logging.Testing
             string category,
             LogLevel minLogLevel,
             DateTimeOffset? logStart
-        ) {
+        )
+        {
             _minLogLevel = minLogLevel;
             _category = category;
             _output = output;
@@ -63,7 +65,8 @@ namespace Microsoft.Extensions.Logging.Testing
             TState state,
             Exception exception,
             Func<TState, Exception, string> formatter
-        ) {
+        )
+        {
             if (!IsEnabled(logLevel))
             {
                 return;

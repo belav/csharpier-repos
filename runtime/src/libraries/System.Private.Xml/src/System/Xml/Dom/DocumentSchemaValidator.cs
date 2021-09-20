@@ -58,7 +58,8 @@ namespace System.Xml
             XmlDocument ownerDocument,
             XmlSchemaSet schemas,
             ValidationEventHandler? eventHandler
-        ) {
+        )
+        {
             _schemas = schemas;
             _eventHandler = eventHandler;
             _document = ownerDocument;
@@ -277,7 +278,8 @@ namespace System.Xml
         private void CreateValidator(
             XmlSchemaObject? partialValidationType,
             XmlSchemaValidationFlags validationFlags
-        ) {
+        )
+        {
             _validator = new XmlSchemaValidator(
                 _nameTable,
                 _schemas,
@@ -689,7 +691,8 @@ namespace System.Xml
             XmlElement elementToValidate,
             XmlSchemaObject? ancestorType,
             int ancestorsCount
-        ) {
+        )
+        {
             //schemaInfo is currentNode's schemaInfo
             _validator = CreateTypeFinderValidator(ancestorType);
             _schemaInfo = new XmlSchemaInfo();
@@ -792,7 +795,8 @@ namespace System.Xml
             XmlElement elementNode,
             bool skipToEnd,
             XmlSchemaInfo? newSchemaInfo
-        ) {
+        )
+        {
             _nsManager.PushScope();
             Debug.Assert(elementNode != null);
 

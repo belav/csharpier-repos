@@ -131,7 +131,8 @@ namespace JIT.HardwareIntrinsics.Arm
                 Byte[] inArray3,
                 UInt16[] outArray,
                 int alignment
-            ) {
+            )
+            {
                 int sizeOfinArray1 = inArray1.Length * Unsafe.SizeOf<UInt16>();
                 int sizeOfinArray2 = inArray2.Length * Unsafe.SizeOf<Byte>();
                 int sizeOfinArray3 = inArray3.Length * Unsafe.SizeOf<Byte>();
@@ -142,7 +143,8 @@ namespace JIT.HardwareIntrinsics.Arm
                     || (alignment * 2) < sizeOfinArray2
                     || (alignment * 2) < sizeOfinArray3
                     || (alignment * 2) < sizeOfoutArray
-                ) {
+                )
+                {
                     throw new ArgumentException("Invalid value of alignment");
                 }
 
@@ -241,7 +243,8 @@ namespace JIT.HardwareIntrinsics.Arm
 
             public void RunStructFldScenario(
                 SimpleTernaryOpTest__MultiplyWideningUpperAndSubtract_Vector128_Byte testClass
-            ) {
+            )
+            {
                 var result = AdvSimd.MultiplyWideningUpperAndSubtract(_fld1, _fld2, _fld3);
 
                 Unsafe.Write(testClass._dataTable.outArrayPtr, result);
@@ -250,7 +253,8 @@ namespace JIT.HardwareIntrinsics.Arm
 
             public void RunStructFldScenario_Load(
                 SimpleTernaryOpTest__MultiplyWideningUpperAndSubtract_Vector128_Byte testClass
-            ) {
+            )
+            {
                 fixed (Vector128<UInt16>* pFld1 = &_fld1)fixed (
                     Vector128<Byte>* pFld2 = &_fld2
                 )fixed (Vector128<Byte>* pFld3 = &_fld3)
@@ -589,7 +593,8 @@ namespace JIT.HardwareIntrinsics.Arm
 
             fixed (Vector128<UInt16>* pFld1 = &_fld1)fixed (Vector128<Byte>* pFld2 = &_fld2)fixed (
                 Vector128<Byte>* pFld3 = &_fld3
-            ) {
+            )
+            {
                 var result = AdvSimd.MultiplyWideningUpperAndSubtract(
                     AdvSimd.LoadVector128((UInt16*)(pFld1)),
                     AdvSimd.LoadVector128((Byte*)(pFld2)),
@@ -674,7 +679,8 @@ namespace JIT.HardwareIntrinsics.Arm
             Vector128<Byte> op3,
             void* result,
             [CallerMemberName] string method = ""
-        ) {
+        )
+        {
             UInt16[] inArray1 = new UInt16[Op1ElementCount];
             Byte[] inArray2 = new Byte[Op2ElementCount];
             Byte[] inArray3 = new Byte[Op3ElementCount];
@@ -698,7 +704,8 @@ namespace JIT.HardwareIntrinsics.Arm
             void* op3,
             void* result,
             [CallerMemberName] string method = ""
-        ) {
+        )
+        {
             UInt16[] inArray1 = new UInt16[Op1ElementCount];
             Byte[] inArray2 = new Byte[Op2ElementCount];
             Byte[] inArray3 = new Byte[Op3ElementCount];
@@ -734,7 +741,8 @@ namespace JIT.HardwareIntrinsics.Arm
             Byte[] thirdOp,
             UInt16[] result,
             [CallerMemberName] string method = ""
-        ) {
+        )
+        {
             bool succeeded = true;
 
             for (var i = 0; i < RetElementCount; i++)
@@ -742,7 +750,8 @@ namespace JIT.HardwareIntrinsics.Arm
                 if (
                     Helpers.MultiplyWideningUpperAndSubtract(firstOp, secondOp, thirdOp, i)
                     != result[i]
-                ) {
+                )
+                {
                     succeeded = false;
                     break;
                 }

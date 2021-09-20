@@ -19,7 +19,8 @@ namespace Microsoft.CodeAnalysis.Completion
             IParameterSymbol parameter,
             string? previousValue,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             Provider = provider ?? throw new ArgumentNullException(nameof(provider));
             SemanticModel = semanticModel ?? throw new ArgumentNullException(nameof(semanticModel));
             Position = position;

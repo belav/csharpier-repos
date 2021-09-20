@@ -27,7 +27,8 @@ namespace Microsoft.AspNetCore.Cors.Infrastructure
         [InlineData("PUT")]
         public async Task CorsRequest_MatchesPolicy_OnCaseInsensitiveAccessControlRequestMethod(
             string accessControlRequestMethod
-        ) {
+        )
+        {
             // Arrange
             using var host = new HostBuilder().ConfigureWebHost(
                     webHostBuilder =>
@@ -141,7 +142,8 @@ namespace Microsoft.AspNetCore.Cors.Infrastructure
         [InlineData("OPTIONS")]
         public async Task PreFlight_MatchesPolicy_OnCaseInsensitiveOptionsMethod(
             string preflightMethod
-        ) {
+        )
+        {
             // Arrange
             var policy = new CorsPolicy();
             policy.Origins.Add(OriginUrl);

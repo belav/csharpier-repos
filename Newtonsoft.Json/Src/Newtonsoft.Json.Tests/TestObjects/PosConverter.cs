@@ -48,7 +48,8 @@ namespace Newtonsoft.Json.Tests.TestObjects
             Type objectType,
             object existingValue,
             JsonSerializer serializer
-        ) {
+        )
+        {
             throw new NotImplementedException();
         }
 

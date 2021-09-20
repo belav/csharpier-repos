@@ -988,7 +988,8 @@ namespace System.SpanTests
             string[] spanInput,
             string[] searchInput,
             int expected
-        ) {
+        )
+        {
             Span<string> theStrings = spanInput;
             Assert.Equal(expected, theStrings.IndexOfAny(searchInput));
             Assert.Equal(expected, theStrings.IndexOfAny((ReadOnlySpan<string>)searchInput));

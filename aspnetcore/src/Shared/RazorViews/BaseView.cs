@@ -149,7 +149,8 @@ namespace Microsoft.Extensions.RazorViews
             int endValue,
             int dealyo,
             bool yesno
-        ) {
+        )
+        {
             if (AttributeValues == null)
             {
                 AttributeValues = new List<string>();
@@ -167,7 +168,8 @@ namespace Microsoft.Extensions.RazorViews
             string ending,
             int endPosition,
             int thingy
-        ) {
+        )
+        {
             Debug.Assert(string.IsNullOrEmpty(AttributeEnding));
 
             Output.Write(beginning);
@@ -199,7 +201,8 @@ namespace Microsoft.Extensions.RazorViews
             string leader,
             string trailer,
             params AttributeValue[] values
-        ) {
+        )
+        {
             if (name == null)
             {
                 throw new ArgumentNullException(nameof(name));

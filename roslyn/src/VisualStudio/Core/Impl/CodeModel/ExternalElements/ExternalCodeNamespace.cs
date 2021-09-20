@@ -25,7 +25,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.CodeModel.Exter
             CodeModelState state,
             ProjectId projectId,
             INamespaceSymbol namespaceSymbol
-        ) {
+        )
+        {
             var newElement = new ExternalCodeNamespace(state, projectId, namespaceSymbol);
             return (EnvDTE.CodeNamespace)ComAggregate.CreateAggregatedObject(newElement);
         }

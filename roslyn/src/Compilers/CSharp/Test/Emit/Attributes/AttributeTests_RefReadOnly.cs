@@ -3009,7 +3009,8 @@ public class Test
         private void AssertGeneratedEmbeddedAttribute(
             AssemblySymbol assembly,
             string expectedTypeName
-        ) {
+        )
+        {
             var typeSymbol = assembly.GetTypeByMetadataName(expectedTypeName);
             Assert.NotNull(typeSymbol);
             Assert.Equal(Accessibility.Internal, typeSymbol.DeclaredAccessibility);

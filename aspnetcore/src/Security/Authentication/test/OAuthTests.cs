@@ -32,7 +32,8 @@ namespace Microsoft.AspNetCore.Authentication.OAuth
         protected override void RegisterAuth(
             AuthenticationBuilder services,
             Action<OAuthOptions> configure
-        ) {
+        )
+        {
             services.AddOAuth(
                 DefaultScheme,
                 o =>
@@ -533,7 +534,8 @@ namespace Microsoft.AspNetCore.Authentication.OAuth
         private static async Task<IHost> CreateHost(
             Action<IServiceCollection> configureServices,
             Func<HttpContext, Task<bool>> handler = null
-        ) {
+        )
+        {
             var host = new HostBuilder().ConfigureWebHost(
                     builder =>
                         builder.UseTestServer()

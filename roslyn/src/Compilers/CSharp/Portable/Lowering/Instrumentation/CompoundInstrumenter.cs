@@ -27,70 +27,80 @@ namespace Microsoft.CodeAnalysis.CSharp
         public override BoundStatement InstrumentNoOpStatement(
             BoundNoOpStatement original,
             BoundStatement rewritten
-        ) {
+        )
+        {
             return Previous.InstrumentNoOpStatement(original, rewritten);
         }
 
         public override BoundStatement InstrumentYieldBreakStatement(
             BoundYieldBreakStatement original,
             BoundStatement rewritten
-        ) {
+        )
+        {
             return Previous.InstrumentYieldBreakStatement(original, rewritten);
         }
 
         public override BoundStatement InstrumentYieldReturnStatement(
             BoundYieldReturnStatement original,
             BoundStatement rewritten
-        ) {
+        )
+        {
             return Previous.InstrumentYieldReturnStatement(original, rewritten);
         }
 
         public override BoundStatement InstrumentThrowStatement(
             BoundThrowStatement original,
             BoundStatement rewritten
-        ) {
+        )
+        {
             return Previous.InstrumentThrowStatement(original, rewritten);
         }
 
         public override BoundStatement InstrumentContinueStatement(
             BoundContinueStatement original,
             BoundStatement rewritten
-        ) {
+        )
+        {
             return Previous.InstrumentContinueStatement(original, rewritten);
         }
 
         public override BoundStatement InstrumentGotoStatement(
             BoundGotoStatement original,
             BoundStatement rewritten
-        ) {
+        )
+        {
             return Previous.InstrumentGotoStatement(original, rewritten);
         }
 
         public override BoundStatement InstrumentExpressionStatement(
             BoundExpressionStatement original,
             BoundStatement rewritten
-        ) {
+        )
+        {
             return Previous.InstrumentExpressionStatement(original, rewritten);
         }
 
         public override BoundStatement InstrumentFieldOrPropertyInitializer(
             BoundStatement original,
             BoundStatement rewritten
-        ) {
+        )
+        {
             return Previous.InstrumentFieldOrPropertyInitializer(original, rewritten);
         }
 
         public override BoundStatement InstrumentBreakStatement(
             BoundBreakStatement original,
             BoundStatement rewritten
-        ) {
+        )
+        {
             return Previous.InstrumentBreakStatement(original, rewritten);
         }
 
         public override BoundStatement? CreateBlockPrologue(
             BoundBlock original,
             out Symbols.LocalSymbol? synthesizedLocal
-        ) {
+        )
+        {
             return Previous.CreateBlockPrologue(original, out synthesizedLocal);
         }
 
@@ -103,14 +113,16 @@ namespace Microsoft.CodeAnalysis.CSharp
             BoundDoStatement original,
             BoundExpression rewrittenCondition,
             SyntheticBoundNodeFactory factory
-        ) {
+        )
+        {
             return Previous.InstrumentDoStatementCondition(original, rewrittenCondition, factory);
         }
 
         public override BoundStatement InstrumentDoStatementConditionalGotoStart(
             BoundDoStatement original,
             BoundStatement ifConditionGotoStart
-        ) {
+        )
+        {
             return Previous.InstrumentDoStatementConditionalGotoStart(
                 original,
                 ifConditionGotoStart
@@ -120,7 +132,8 @@ namespace Microsoft.CodeAnalysis.CSharp
         public override BoundStatement? InstrumentForEachStatementCollectionVarDeclaration(
             BoundForEachStatement original,
             BoundStatement? collectionVarDecl
-        ) {
+        )
+        {
             return Previous.InstrumentForEachStatementCollectionVarDeclaration(
                 original,
                 collectionVarDecl
@@ -130,14 +143,16 @@ namespace Microsoft.CodeAnalysis.CSharp
         public override BoundStatement InstrumentForEachStatement(
             BoundForEachStatement original,
             BoundStatement rewritten
-        ) {
+        )
+        {
             return Previous.InstrumentForEachStatement(original, rewritten);
         }
 
         public override BoundStatement InstrumentForEachStatementIterationVarDeclaration(
             BoundForEachStatement original,
             BoundStatement iterationVarDecl
-        ) {
+        )
+        {
             return Previous.InstrumentForEachStatementIterationVarDeclaration(
                 original,
                 iterationVarDecl
@@ -147,14 +162,16 @@ namespace Microsoft.CodeAnalysis.CSharp
         public override BoundStatement InstrumentForStatementConditionalGotoStartOrBreak(
             BoundForStatement original,
             BoundStatement branchBack
-        ) {
+        )
+        {
             return Previous.InstrumentForStatementConditionalGotoStartOrBreak(original, branchBack);
         }
 
         public override BoundStatement InstrumentForEachStatementConditionalGotoStart(
             BoundForEachStatement original,
             BoundStatement branchBack
-        ) {
+        )
+        {
             return Previous.InstrumentForEachStatementConditionalGotoStart(original, branchBack);
         }
 
@@ -162,14 +179,16 @@ namespace Microsoft.CodeAnalysis.CSharp
             BoundForStatement original,
             BoundExpression rewrittenCondition,
             SyntheticBoundNodeFactory factory
-        ) {
+        )
+        {
             return Previous.InstrumentForStatementCondition(original, rewrittenCondition, factory);
         }
 
         public override BoundStatement InstrumentIfStatement(
             BoundIfStatement original,
             BoundStatement rewritten
-        ) {
+        )
+        {
             return Previous.InstrumentIfStatement(original, rewritten);
         }
 
@@ -177,49 +196,56 @@ namespace Microsoft.CodeAnalysis.CSharp
             BoundIfStatement original,
             BoundExpression rewrittenCondition,
             SyntheticBoundNodeFactory factory
-        ) {
+        )
+        {
             return Previous.InstrumentIfStatementCondition(original, rewrittenCondition, factory);
         }
 
         public override BoundStatement InstrumentLabelStatement(
             BoundLabeledStatement original,
             BoundStatement rewritten
-        ) {
+        )
+        {
             return Previous.InstrumentLabelStatement(original, rewritten);
         }
 
         public override BoundStatement InstrumentLocalInitialization(
             BoundLocalDeclaration original,
             BoundStatement rewritten
-        ) {
+        )
+        {
             return Previous.InstrumentLocalInitialization(original, rewritten);
         }
 
         public override BoundStatement InstrumentLockTargetCapture(
             BoundLockStatement original,
             BoundStatement lockTargetCapture
-        ) {
+        )
+        {
             return Previous.InstrumentLockTargetCapture(original, lockTargetCapture);
         }
 
         public override BoundStatement InstrumentReturnStatement(
             BoundReturnStatement original,
             BoundStatement rewritten
-        ) {
+        )
+        {
             return Previous.InstrumentReturnStatement(original, rewritten);
         }
 
         public override BoundStatement InstrumentSwitchStatement(
             BoundSwitchStatement original,
             BoundStatement rewritten
-        ) {
+        )
+        {
             return Previous.InstrumentSwitchStatement(original, rewritten);
         }
 
         public override BoundStatement InstrumentSwitchWhenClauseConditionalGotoBody(
             BoundExpression original,
             BoundStatement ifConditionGotoBody
-        ) {
+        )
+        {
             return Previous.InstrumentSwitchWhenClauseConditionalGotoBody(
                 original,
                 ifConditionGotoBody
@@ -229,7 +255,8 @@ namespace Microsoft.CodeAnalysis.CSharp
         public override BoundStatement InstrumentUsingTargetCapture(
             BoundUsingStatement original,
             BoundStatement usingTargetCapture
-        ) {
+        )
+        {
             return Previous.InstrumentUsingTargetCapture(original, usingTargetCapture);
         }
 
@@ -237,7 +264,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             BoundWhileStatement original,
             BoundExpression rewrittenCondition,
             SyntheticBoundNodeFactory factory
-        ) {
+        )
+        {
             return Previous.InstrumentWhileStatementCondition(
                 original,
                 rewrittenCondition,
@@ -248,7 +276,8 @@ namespace Microsoft.CodeAnalysis.CSharp
         public override BoundStatement InstrumentWhileStatementConditionalGotoStartOrBreak(
             BoundWhileStatement original,
             BoundStatement ifConditionGotoStart
-        ) {
+        )
+        {
             return Previous.InstrumentWhileStatementConditionalGotoStartOrBreak(
                 original,
                 ifConditionGotoStart
@@ -259,7 +288,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             BoundCatchBlock original,
             BoundExpression rewrittenFilter,
             SyntheticBoundNodeFactory factory
-        ) {
+        )
+        {
             return Previous.InstrumentCatchClauseFilter(original, rewrittenFilter, factory);
         }
 
@@ -267,7 +297,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             BoundStatement original,
             BoundExpression rewrittenExpression,
             SyntheticBoundNodeFactory factory
-        ) {
+        )
+        {
             return Previous.InstrumentSwitchStatementExpression(
                 original,
                 rewrittenExpression,
@@ -279,7 +310,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             BoundExpression original,
             BoundExpression rewrittenExpression,
             SyntheticBoundNodeFactory factory
-        ) {
+        )
+        {
             return Previous.InstrumentSwitchExpressionArmExpression(
                 original,
                 rewrittenExpression,
@@ -289,14 +321,16 @@ namespace Microsoft.CodeAnalysis.CSharp
 
         public override BoundStatement InstrumentSwitchBindCasePatternVariables(
             BoundStatement bindings
-        ) {
+        )
+        {
             return Previous.InstrumentSwitchBindCasePatternVariables(bindings);
         }
 
         public override BoundStatement InstrumentForEachStatementDeconstructionVariablesDeclaration(
             BoundForEachStatement original,
             BoundStatement iterationVarDecl
-        ) {
+        )
+        {
             return Previous.InstrumentForEachStatementDeconstructionVariablesDeclaration(
                 original,
                 iterationVarDecl

@@ -95,7 +95,8 @@ namespace System.UnitTesting
             RetryMode retry,
             Action action,
             Action<Exception, int> validator
-        ) {
+        )
+        {
             Run(
                 retry,
                 action,
@@ -115,7 +116,8 @@ namespace System.UnitTesting
             RetryMode retry,
             Action action,
             Action<Exception, int> validator
-        ) {
+        )
+        {
             Exception exception = null;
 
             for (int i = -1; i < (int)retry; i++)
@@ -145,7 +147,8 @@ namespace System.UnitTesting
             object instance,
             ObjectDisposedException actual,
             int retryCount
-        ) {
+        )
+        {
             string objectName = instance.GetType().FullName;
 
             Assert.Equal(objectName, actual.ObjectName);
@@ -155,7 +158,8 @@ namespace System.UnitTesting
             Type expectedType,
             Exception actual,
             int retryCount
-        ) {
+        )
+        {
             if (actual == null)
                 throw new NotImplementedException();
 

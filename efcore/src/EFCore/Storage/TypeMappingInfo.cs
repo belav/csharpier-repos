@@ -47,7 +47,8 @@ namespace Microsoft.EntityFrameworkCore.Storage
             int? fallbackSize = null,
             int? fallbackPrecision = null,
             int? fallbackScale = null
-        ) {
+        )
+        {
             Check.NotNull(principals, nameof(principals));
 
             ValueConverter? customConverter = null;
@@ -158,7 +159,8 @@ namespace Microsoft.EntityFrameworkCore.Storage
             bool? rowVersion = null,
             int? precision = null,
             int? scale = null
-        ) {
+        )
+        {
             ClrType = type?.UnwrapNullableType();
 
             IsKeyOrIndex = keyOrIndex;
@@ -185,7 +187,8 @@ namespace Microsoft.EntityFrameworkCore.Storage
             int? size = null,
             int? precision = null,
             int? scale = null
-        ) {
+        )
+        {
             Check.NotNull(source, nameof(source));
 
             IsRowVersion = source.IsRowVersion;

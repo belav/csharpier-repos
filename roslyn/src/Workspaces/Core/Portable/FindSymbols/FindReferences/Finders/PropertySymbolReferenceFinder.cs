@@ -35,7 +35,8 @@ namespace Microsoft.CodeAnalysis.FindSymbols.Finders
             FindReferencesSearchOptions options,
             FindReferencesCascadeDirection cascadeDirection,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var baseSymbols = await base.DetermineCascadedSymbolsAsync(
                     symbol,
                     solution,
@@ -69,7 +70,8 @@ namespace Microsoft.CodeAnalysis.FindSymbols.Finders
             IImmutableSet<Document>? documents,
             FindReferencesSearchOptions options,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var ordinaryDocuments = await FindDocumentsAsync(
                     project,
                     documents,
@@ -122,7 +124,8 @@ namespace Microsoft.CodeAnalysis.FindSymbols.Finders
             SemanticModel semanticModel,
             FindReferencesSearchOptions options,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var nameReferences = await FindReferencesInDocumentUsingSymbolNameAsync(
                     symbol,
                     document,
@@ -183,7 +186,8 @@ namespace Microsoft.CodeAnalysis.FindSymbols.Finders
             Project project,
             IImmutableSet<Document>? documents,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             return FindDocumentsWithPredicateAsync(
                 project,
                 documents,
@@ -196,7 +200,8 @@ namespace Microsoft.CodeAnalysis.FindSymbols.Finders
             Project project,
             IImmutableSet<Document>? documents,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             return FindDocumentsWithPredicateAsync(
                 project,
                 documents,
@@ -211,7 +216,8 @@ namespace Microsoft.CodeAnalysis.FindSymbols.Finders
             SemanticModel semanticModel,
             FindReferencesSearchOptions options,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             if (options.AssociatePropertyReferencesWithSpecificAccessor)
             {
                 // Looking for individual get/set references.  Don't find anything here.
@@ -286,7 +292,8 @@ namespace Microsoft.CodeAnalysis.FindSymbols.Finders
             SemanticModel semanticModel,
             SyntaxNode node,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var syntaxFacts = document.GetRequiredLanguageService<ISyntaxFactsService>();
             var symbolsMatchAsync = GetStandardSymbolsNodeMatchFunction(
                 symbol,
@@ -329,7 +336,8 @@ namespace Microsoft.CodeAnalysis.FindSymbols.Finders
             SemanticModel semanticModel,
             SyntaxNode node,
             SymbolsMatchAsync symbolsMatchAsync
-        ) {
+        )
+        {
             var (matched, reason) = await symbolsMatchAsync(node, semanticModel)
                 .ConfigureAwait(false);
 
@@ -346,7 +354,8 @@ namespace Microsoft.CodeAnalysis.FindSymbols.Finders
                 SemanticModel,
                 ValueTask<(bool matched, CandidateReason reason)>
             > symbolsMatchAsync
-        ) {
+        )
+        {
             // For a ConditionalAccessExpression the whenNotNull component is the indexer reference we are looking for
             syntaxFacts.GetPartsOfConditionalAccessExpression(
                 node,
@@ -372,7 +381,8 @@ namespace Microsoft.CodeAnalysis.FindSymbols.Finders
             SyntaxNode node,
             ISyntaxFactsService syntaxFacts,
             SymbolsMatchAsync symbolsMatchAsync
-        ) {
+        )
+        {
             // For an ElementAccessExpression the indexer we are looking for is the argumentList component.
             syntaxFacts.GetPartsOfElementAccessExpression(
                 node,
@@ -384,7 +394,8 @@ namespace Microsoft.CodeAnalysis.FindSymbols.Finders
                 && (
                     await symbolsMatchAsync(expression, semanticModel).ConfigureAwait(false)
                 ).matched
-            ) {
+            )
+            {
                 // Element access with explicit member name (allowed in VB). We will have
                 // already added a reference location for the member name identifier, so skip
                 // this one.

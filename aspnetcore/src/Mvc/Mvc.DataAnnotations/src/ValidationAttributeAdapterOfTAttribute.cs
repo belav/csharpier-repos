@@ -50,7 +50,8 @@ namespace Microsoft.AspNetCore.Mvc.DataAnnotations
             IDictionary<string, string> attributes,
             string key,
             string value
-        ) {
+        )
+        {
             if (attributes.ContainsKey(key))
             {
                 return false;
@@ -70,7 +71,8 @@ namespace Microsoft.AspNetCore.Mvc.DataAnnotations
         protected virtual string GetErrorMessage(
             ModelMetadata modelMetadata,
             params object[] arguments
-        ) {
+        )
+        {
             if (modelMetadata == null)
             {
                 throw new ArgumentNullException(nameof(modelMetadata));
@@ -81,7 +83,8 @@ namespace Microsoft.AspNetCore.Mvc.DataAnnotations
                 && !string.IsNullOrEmpty(Attribute.ErrorMessage)
                 && string.IsNullOrEmpty(Attribute.ErrorMessageResourceName)
                 && Attribute.ErrorMessageResourceType == null
-            ) {
+            )
+            {
                 return _stringLocalizer[Attribute.ErrorMessage, arguments];
             }
 

@@ -94,7 +94,8 @@ namespace Microsoft.Win32.SafeHandles
             if (
                 Interop.Sys.Stat(fullPath, out fileinfo) < 0
                 && Interop.Sys.LStat(fullPath, out fileinfo) < 0
-            ) {
+            )
+            {
                 return false;
             }
 

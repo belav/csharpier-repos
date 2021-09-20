@@ -45,7 +45,8 @@ namespace System.Web.Mvc
             RouteCollection routes,
             IBuildManager buildManager,
             object state
-        ) {
+        )
+        {
             List<Type> areaRegistrationTypes = TypeCacheUtil.GetFilteredTypesFromAssemblies(
                 TypeCacheName,
                 IsAreaRegistrationType,

@@ -109,7 +109,8 @@ namespace System.Web.Http
                 string parameterName,
                 IDictionary<string, object> values,
                 HttpRouteDirection routeDirection
-            ) {
+            )
+            {
                 throw new NotImplementedException();
             }
         }
@@ -122,7 +123,8 @@ namespace System.Web.Http
                 string routeTemplate,
                 string name,
                 object constraint
-            ) {
+            )
+            {
                 TimesValidateConstraintCalled++;
                 base.ValidateConstraint(routeTemplate, name, constraint);
             }

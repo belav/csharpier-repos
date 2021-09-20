@@ -115,7 +115,8 @@ namespace System.Security.Cryptography
                             _friendlyName != null
                             && !_friendlyName.Equals(value, StringComparison.Ordinal)
                         ) || (_friendlyName is null && value != null)
-                    ) {
+                    )
+                    {
                         throw new PlatformNotSupportedException(
                             SR.Cryptography_Oid_SetOnceFriendlyName
                         );

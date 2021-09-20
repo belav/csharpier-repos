@@ -35,7 +35,8 @@ namespace Microsoft.EntityFrameworkCore.Cosmos.Storage.Internal
             IDesignTimeModel designTimeModel,
             IUpdateAdapterFactory updateAdapterFactory,
             IDatabase database
-        ) {
+        )
+        {
             _cosmosClient = cosmosClient;
             _designTimeModel = designTimeModel;
             _updateAdapterFactory = updateAdapterFactory;
@@ -79,7 +80,8 @@ namespace Microsoft.EntityFrameworkCore.Cosmos.Storage.Internal
         /// </summary>
         public virtual async Task<bool> EnsureCreatedAsync(
             CancellationToken cancellationToken = default
-        ) {
+        )
+        {
             var created = await _cosmosClient.CreateDatabaseIfNotExistsAsync(cancellationToken)
                 .ConfigureAwait(false);
             foreach (var entityType in _designTimeModel.Model.GetEntityTypes())

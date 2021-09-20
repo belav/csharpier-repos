@@ -79,7 +79,8 @@ namespace System.Reflection
                             assemblyNameFromPath.Name,
                             StringComparison.OrdinalIgnoreCase
                         )
-                    ) {
+                    )
+                    {
                         ReadOnlySpan<byte> pktFromAssembly =
                             assemblyNameFromPath.GetPublicKeyToken();
 
@@ -91,7 +92,8 @@ namespace System.Reflection
                                 candidateWithSamePkt == null
                                 || assemblyNameFromPath.Version
                                     > candidateWithSamePkt.GetName().Version
-                            ) {
+                            )
+                            {
                                 candidateWithSamePkt = assemblyFromPath;
                             }
                         }
@@ -100,13 +102,15 @@ namespace System.Reflection
                         else if (
                             (candidateWithSamePkt == null && pktFromName.IsEmpty)
                             || ((assemblyName.Flags & AssemblyNameFlags.Retargetable) != 0)
-                        ) {
+                        )
+                        {
                             // Pick the highest version.
                             if (
                                 candidateIgnoringPkt == null
                                 || assemblyNameFromPath.Version
                                     > candidateIgnoringPkt.GetName().Version
-                            ) {
+                            )
+                            {
                                 candidateIgnoringPkt = assemblyFromPath;
                             }
                         }

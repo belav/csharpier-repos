@@ -41,7 +41,8 @@ namespace Microsoft.EntityFrameworkCore.Update
 
         protected override void AppendInsertOperation_appends_insert_and_select_store_generated_columns_but_no_identity_verification(
             StringBuilder stringBuilder
-        ) {
+        )
+        {
             Assert.Equal(
                 "INSERT INTO [dbo].[Ducks] ([Id], [Name], [Quacks], [ConcurrencyToken])"
                     + Environment.NewLine
@@ -60,7 +61,8 @@ namespace Microsoft.EntityFrameworkCore.Update
 
         protected override void AppendInsertOperation_appends_insert_and_select_and_where_if_store_generated_columns_exist_verification(
             StringBuilder stringBuilder
-        ) {
+        )
+        {
             Assert.Equal(
                 "INSERT INTO [dbo].[Ducks] ([Name], [Quacks], [ConcurrencyToken])"
                     + Environment.NewLine
@@ -79,7 +81,8 @@ namespace Microsoft.EntityFrameworkCore.Update
 
         protected override void AppendInsertOperation_appends_insert_and_select_for_only_single_identity_columns_verification(
             StringBuilder stringBuilder
-        ) {
+        )
+        {
             AssertBaseline(
                 @"INSERT INTO [dbo].[Ducks]
 DEFAULT VALUES;
@@ -94,7 +97,8 @@ WHERE @@ROWCOUNT = 1 AND [Id] = scope_identity();
 
         protected override void AppendInsertOperation_appends_insert_and_select_for_only_identity_verification(
             StringBuilder stringBuilder
-        ) {
+        )
+        {
             AssertBaseline(
                 @"INSERT INTO [dbo].[Ducks] ([Name], [Quacks], [ConcurrencyToken])
 VALUES (@p0, @p1, @p2);
@@ -109,7 +113,8 @@ WHERE @@ROWCOUNT = 1 AND [Id] = scope_identity();
 
         protected override void AppendInsertOperation_appends_insert_and_select_for_all_store_generated_columns_verification(
             StringBuilder stringBuilder
-        ) {
+        )
+        {
             AssertBaseline(
                 @"INSERT INTO [dbo].[Ducks]
 DEFAULT VALUES;

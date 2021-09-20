@@ -39,7 +39,8 @@ namespace Microsoft.AspNetCore.Analyzers
                             invocation.Arguments[0].Parameter?.Type,
                             _context.StartupSymbols.IApplicationBuilder
                         )
-                    ) {
+                    )
+                    {
                         middleware.Add(new MiddlewareItem(invocation));
                     }
                 },

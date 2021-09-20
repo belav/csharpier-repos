@@ -28,7 +28,8 @@ namespace Microsoft.CodeAnalysis.FlowAnalysis
             public ConditionalAccessOperationTracker(
                 ArrayBuilder<IOperation> operations,
                 BasicBlockBuilder whenNull
-            ) {
+            )
+            {
                 Debug.Assert(operations != null && whenNull != null);
                 Operations = operations;
                 WhenNull = whenNull;

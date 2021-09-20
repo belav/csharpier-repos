@@ -44,7 +44,8 @@ namespace Microsoft.AspNetCore.Components.Forms
             object? currentValue,
             string fieldClass,
             EventCallback<ChangeEventArgs> changeEventCallback
-        ) {
+        )
+        {
             _parentContext = parentContext;
 
             GroupName = groupName;

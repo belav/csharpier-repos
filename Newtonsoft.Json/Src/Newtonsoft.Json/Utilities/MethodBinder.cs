@@ -130,7 +130,8 @@ namespace Newtonsoft.Json.Utilities
             ParameterInfo[] parameters,
             IList<Type> types,
             bool enableParamArray
-        ) {
+        )
+        {
             ValidationUtils.ArgumentNotNull(parameters, nameof(parameters));
             ValidationUtils.ArgumentNotNull(types, nameof(types));
 
@@ -154,7 +155,8 @@ namespace Newtonsoft.Json.Utilities
                 if (
                     lastParam.ParameterType.IsArray
                     && lastParam.IsDefined(typeof(ParamArrayAttribute))
-                ) {
+                )
+                {
                     paramArrayType = lastParam.ParameterType.GetElementType();
                 }
             }
@@ -245,7 +247,8 @@ namespace Newtonsoft.Json.Utilities
                     if (
                         lastParam1.ParameterType.IsArray
                         && lastParam1.IsDefined(typeof(ParamArrayAttribute))
-                    ) {
+                    )
+                    {
                         paramArrayType1 = lastParam1.ParameterType.GetElementType();
                     }
 
@@ -253,7 +256,8 @@ namespace Newtonsoft.Json.Utilities
                     if (
                         lastParam2.ParameterType.IsArray
                         && lastParam2.IsDefined(typeof(ParamArrayAttribute))
-                    ) {
+                    )
+                    {
                         paramArrayType2 = lastParam2.ParameterType.GetElementType();
                     }
 

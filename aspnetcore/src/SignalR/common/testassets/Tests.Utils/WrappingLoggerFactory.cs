@@ -74,7 +74,8 @@ namespace Microsoft.AspNetCore.SignalR.Tests
                 TState state,
                 Exception exception,
                 Func<TState, Exception, string> formatter
-            ) {
+            )
+            {
                 // Build the message outside of the formatter
                 // Serilog doesn't appear to use the formatter and just writes the state
                 var connectionId = GetConnectionId();
@@ -115,7 +116,8 @@ namespace Microsoft.AspNetCore.SignalR.Tests
                                         || kv.Key == "ClientConnectionId"
                                 ).Value
                                 is string id
-                            ) {
+                            )
+                            {
                                 connectionId = id;
                             }
                         }

@@ -34,7 +34,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             TypeSymbol rightType,
             TypeSymbol returnType,
             MethodSymbol method = null
-        ) {
+        )
+        {
             this.Kind = kind;
             this.LeftType = leftType;
             this.RightType = rightType;

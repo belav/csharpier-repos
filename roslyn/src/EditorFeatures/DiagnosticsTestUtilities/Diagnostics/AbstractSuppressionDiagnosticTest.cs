@@ -42,7 +42,8 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Diagnostics
 
         protected override ImmutableArray<CodeAction> MassageActions(
             ImmutableArray<CodeAction> actions
-        ) {
+        )
+        {
             return actions.SelectMany(
                     a =>
                         a is AbstractConfigurationActionWithNestedActions
@@ -75,7 +76,8 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Diagnostics
         internal override async Task<IEnumerable<Diagnostic>> GetDiagnosticsAsync(
             TestWorkspace workspace,
             TestParameters parameters
-        ) {
+        )
+        {
             var (analyzer, _) = CreateDiagnosticProviderAndFixer(workspace);
             AddAnalyzerToWorkspace(workspace, analyzer, parameters);
 
@@ -91,7 +93,8 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Diagnostics
         internal override async Task<(ImmutableArray<Diagnostic>, ImmutableArray<CodeAction>, CodeAction actionToInvoke)> GetDiagnosticAndFixesAsync(
             TestWorkspace workspace,
             TestParameters parameters
-        ) {
+        )
+        {
             var (analyzer, fixer) = CreateDiagnosticProviderAndFixer(workspace);
             AddAnalyzerToWorkspace(workspace, analyzer, parameters);
 

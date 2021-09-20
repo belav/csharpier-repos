@@ -39,7 +39,8 @@ namespace Microsoft.EntityFrameworkCore.SqlServer.Query.Internal
         public SqlServerPolygonMethodTranslator(
             IRelationalTypeMappingSource typeMappingSource,
             ISqlExpressionFactory sqlExpressionFactory
-        ) {
+        )
+        {
             _typeMappingSource = typeMappingSource;
             _sqlExpressionFactory = sqlExpressionFactory;
         }
@@ -55,7 +56,8 @@ namespace Microsoft.EntityFrameworkCore.SqlServer.Query.Internal
             MethodInfo method,
             IReadOnlyList<SqlExpression> arguments,
             IDiagnosticsLogger<DbLoggerCategory.Query> logger
-        ) {
+        )
+        {
             Check.NotNull(method, nameof(method));
             Check.NotNull(arguments, nameof(arguments));
             Check.NotNull(logger, nameof(logger));

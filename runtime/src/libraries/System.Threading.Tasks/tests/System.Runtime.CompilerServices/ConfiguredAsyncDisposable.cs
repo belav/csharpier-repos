@@ -45,7 +45,8 @@ namespace System.Runtime.CompilerServices.Tests
         [InlineData(true)]
         public void DisposeAsync_ContinuesOnCapturedContextIfExpected(
             bool continueOnCapturedContext
-        ) {
+        )
+        {
             var d = new TrackingAsyncDisposable();
             d.ConfigureAwait(continueOnCapturedContext)
                 .DisposeAsync()

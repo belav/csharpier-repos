@@ -49,7 +49,8 @@ namespace Microsoft.Extensions.DependencyInjection
         public static IMvcCoreBuilder AddRazorPages(
             this IMvcCoreBuilder builder,
             Action<RazorPagesOptions> setupAction
-        ) {
+        )
+        {
             if (builder == null)
             {
                 throw new ArgumentNullException(nameof(builder));
@@ -78,7 +79,8 @@ namespace Microsoft.Extensions.DependencyInjection
         public static IMvcCoreBuilder WithRazorPagesRoot(
             this IMvcCoreBuilder builder,
             string rootDirectory
-        ) {
+        )
+        {
             if (builder == null)
             {
                 throw new ArgumentNullException(nameof(builder));

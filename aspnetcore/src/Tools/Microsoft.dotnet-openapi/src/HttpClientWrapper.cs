@@ -61,7 +61,8 @@ namespace Microsoft.DotNet.Openapi.Tools
                     BaseCommand.ContentDispositionHeaderName,
                     out var disposition
                 )
-            ) {
+            )
+            {
                 return new ContentDispositionHeaderValue(disposition.First());
             }
 

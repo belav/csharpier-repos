@@ -29,7 +29,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Syntax
             int position,
             ArrowExpressionClauseSyntax? expressionBodyOpt,
             SyntaxToken semicolonToken
-        ) {
+        )
+        {
             return expressionBodyOpt != null
                 && IsBeforeToken(position, expressionBodyOpt, semicolonToken);
         }
@@ -39,7 +40,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Syntax
             BlockSyntax? blockOpt,
             ArrowExpressionClauseSyntax? exprOpt,
             SyntaxToken semiOpt
-        ) {
+        )
+        {
             return IsInExpressionBody(position, exprOpt, semiOpt) || IsInBlock(position, blockOpt);
         }
 
@@ -102,7 +104,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Syntax
             int position,
             SyntaxToken firstIncluded,
             SyntaxToken firstExcluded
-        ) {
+        )
+        {
             return position >= firstIncluded.SpanStart && IsBeforeToken(position, firstExcluded);
         }
 
@@ -113,7 +116,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Syntax
             int position,
             CSharpSyntaxNode node,
             SyntaxToken firstExcluded
-        ) {
+        )
+        {
             return IsBeforeToken(position, firstExcluded) && position >= node.SpanStart;
         }
 
@@ -125,7 +129,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Syntax
         internal static bool IsInAttributeSpecification(
             int position,
             SyntaxList<AttributeListSyntax> attributesSyntaxList
-        ) {
+        )
+        {
             int count = attributesSyntaxList.Count;
             if (count == 0)
             {
@@ -161,7 +166,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Syntax
         internal static bool IsInMethodDeclaration(
             int position,
             BaseMethodDeclarationSyntax methodDecl
-        ) {
+        )
+        {
             Debug.Assert(methodDecl != null);
 
             var body = methodDecl.Body;
@@ -181,7 +187,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Syntax
         internal static bool IsInMethodDeclaration(
             int position,
             AccessorDeclarationSyntax accessorDecl
-        ) {
+        )
+        {
             Debug.Assert(accessorDecl != null);
 
             var body = accessorDecl.Body;
@@ -193,7 +200,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Syntax
         internal static bool IsInDelegateDeclaration(
             int position,
             DelegateDeclarationSyntax delegateDecl
-        ) {
+        )
+        {
             Debug.Assert(delegateDecl != null);
 
             return IsBeforeToken(position, delegateDecl, delegateDecl.SemicolonToken);
@@ -209,7 +217,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Syntax
         internal static bool IsInNamespaceDeclaration(
             int position,
             NamespaceDeclarationSyntax namespaceDecl
-        ) {
+        )
+        {
             Debug.Assert(namespaceDecl != null);
 
             return IsBetweenTokens(
@@ -222,7 +231,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Syntax
         internal static bool IsInConstructorParameterScope(
             int position,
             ConstructorDeclarationSyntax constructorDecl
-        ) {
+        )
+        {
             Debug.Assert(constructorDecl != null);
 
             var initializerOpt = constructorDecl.Initializer;
@@ -255,7 +265,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Syntax
         internal static bool IsInMethodTypeParameterScope(
             int position,
             MethodDeclarationSyntax methodDecl
-        ) {
+        )
+        {
             Debug.Assert(methodDecl != null);
             Debug.Assert(IsInMethodDeclaration(position, methodDecl));
 
@@ -345,7 +356,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Syntax
         internal static bool IsInCatchFilterScope(
             int position,
             CatchFilterClauseSyntax filterClause
-        ) {
+        )
+        {
             Debug.Assert(filterClause != null);
 
             return IsBetweenTokens(
@@ -508,7 +520,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Syntax
         internal static bool IsInAnonymousFunctionOrQuery(
             int position,
             SyntaxNode lambdaExpressionOrQueryNode
-        ) {
+        )
+        {
             Debug.Assert(
                 lambdaExpressionOrQueryNode.IsAnonymousFunction()
                     || lambdaExpressionOrQueryNode.IsQuery()

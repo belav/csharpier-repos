@@ -21,7 +21,8 @@ namespace Microsoft.Extensions.Configuration.CommandLine
         public CommandLineConfigurationProvider(
             IEnumerable<string> args,
             IDictionary<string, string> switchMappings = null
-        ) {
+        )
+        {
             Args = args ?? throw new ArgumentNullException(nameof(args));
 
             if (switchMappings != null)
@@ -82,7 +83,8 @@ namespace Microsoft.Extensions.Configuration.CommandLine
                         if (
                             _switchMappings != null
                             && _switchMappings.TryGetValue(currentArg, out string mappedKey)
-                        ) {
+                        )
+                        {
                             key = mappedKey;
                         }
                         // If the switch starts with a single "-" and it isn't in given mappings , it is an invalid usage so ignore it
@@ -113,7 +115,8 @@ namespace Microsoft.Extensions.Configuration.CommandLine
                         if (
                             _switchMappings != null
                             && _switchMappings.TryGetValue(keySegment, out string mappedKeySegment)
-                        ) {
+                        )
+                        {
                             key = mappedKeySegment;
                         }
                         // If the switch starts with a single "-" and it isn't in given mappings , it is an invalid usage
@@ -142,7 +145,8 @@ namespace Microsoft.Extensions.Configuration.CommandLine
 
         private Dictionary<string, string> GetValidatedSwitchMappingsCopy(
             IDictionary<string, string> switchMappings
-        ) {
+        )
+        {
             // The dictionary passed in might be constructed with a case-sensitive comparer
             // However, the keys in configuration providers are all case-insensitive
             // So we check whether the given switch mappings contain duplicated keys with case-insensitive comparer

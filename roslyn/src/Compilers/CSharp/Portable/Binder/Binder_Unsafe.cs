@@ -28,7 +28,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             SyntaxNode node,
             BindingDiagnosticBag diagnostics,
             TypeSymbol sizeOfTypeOpt = null
-        ) {
+        )
+        {
             Debug.Assert(
                 (node.Kind() == SyntaxKind.SizeOfExpression) == ((object)sizeOfTypeOpt != null),
                 "Should have a type for (only) sizeof expressions."

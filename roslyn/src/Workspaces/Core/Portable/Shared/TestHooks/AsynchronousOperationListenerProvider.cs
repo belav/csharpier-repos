@@ -126,7 +126,8 @@ namespace Microsoft.CodeAnalysis.Shared.TestHooks
             string[]? featureNames = null,
             Action? eventProcessingAction = null,
             TimeSpan? timeout = null
-        ) {
+        )
+        {
             var startTime = Stopwatch.StartNew();
             var smallTimeout = TimeSpan.FromMilliseconds(10);
 
@@ -134,7 +135,8 @@ namespace Microsoft.CodeAnalysis.Shared.TestHooks
             if (
                 workspace?.Services.GetService<IRemoteHostClientProvider>() is
                 { } remoteHostClientProvider
-            ) {
+            )
+            {
                 remoteHostClient = await remoteHostClientProvider.TryGetRemoteHostClientAsync(
                         CancellationToken.None
                     )
@@ -281,7 +283,8 @@ namespace Microsoft.CodeAnalysis.Shared.TestHooks
 
         private IEnumerable<IAsynchronousOperationWaiter> GetCandidateWaiters(
             string[]? featureNames
-        ) {
+        )
+        {
             if (featureNames == null || featureNames.Length == 0)
             {
                 return _singletonListeners.Values.Cast<IAsynchronousOperationWaiter>();

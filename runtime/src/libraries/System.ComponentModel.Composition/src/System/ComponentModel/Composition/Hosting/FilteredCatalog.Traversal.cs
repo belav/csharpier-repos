@@ -84,7 +84,8 @@ namespace System.ComponentModel.Composition.Hosting
         private static HashSet<ComposablePartDefinition> GetTraversalClosure(
             IEnumerable<ComposablePartDefinition> parts,
             IComposablePartCatalogTraversal traversal
-        ) {
+        )
+        {
             if (traversal == null)
             {
                 throw new ArgumentNullException(nameof(traversal));
@@ -98,7 +99,8 @@ namespace System.ComponentModel.Composition.Hosting
             IEnumerable<ComposablePartDefinition> parts,
             HashSet<ComposablePartDefinition> traversedParts,
             IComposablePartCatalogTraversal traversal
-        ) {
+        )
+        {
             foreach (var part in parts)
             {
                 if (traversedParts.Add(part))
@@ -108,7 +110,8 @@ namespace System.ComponentModel.Composition.Hosting
                             part,
                             out IEnumerable<ComposablePartDefinition>? partsToTraverse
                         )
-                    ) {
+                    )
+                    {
                         GetTraversalClosure(partsToTraverse, traversedParts, traversal);
                     }
                 }
@@ -134,7 +137,8 @@ namespace System.ComponentModel.Composition.Hosting
         private static void ThrowOnRecomposition(
             object? sender,
             ComposablePartCatalogChangeEventArgs e
-        ) {
+        )
+        {
             throw new ChangeRejectedException();
         }
     }

@@ -30,14 +30,16 @@ namespace Microsoft.EntityFrameworkCore
                 protected override void OnModelCreating(
                     ModelBuilder modelBuilder,
                     DbContext context
-                ) {
+                )
+                {
                     base.OnModelCreating(modelBuilder, context);
 
                     foreach (
                         var foreignKey in modelBuilder.Model.GetEntityTypes()
                             .SelectMany(e => e.GetDeclaredForeignKeys())
                             .Where(e => e.DeleteBehavior == DeleteBehavior.Cascade)
-                    ) {
+                    )
+                    {
                         foreignKey.DeleteBehavior = DeleteBehavior.ClientCascade;
                     }
                 }
@@ -62,13 +64,15 @@ namespace Microsoft.EntityFrameworkCore
                 protected override void OnModelCreating(
                     ModelBuilder modelBuilder,
                     DbContext context
-                ) {
+                )
+                {
                     base.OnModelCreating(modelBuilder, context);
 
                     foreach (
                         var foreignKey in modelBuilder.Model.GetEntityTypes()
                             .SelectMany(e => e.GetDeclaredForeignKeys())
-                    ) {
+                    )
+                    {
                         foreignKey.DeleteBehavior = DeleteBehavior.ClientNoAction;
                     }
                 }
@@ -91,7 +95,8 @@ namespace Microsoft.EntityFrameworkCore
                 protected override void OnModelCreating(
                     ModelBuilder modelBuilder,
                     DbContext context
-                ) {
+                )
+                {
                     modelBuilder.UseIdentityColumns();
 
                     base.OnModelCreating(modelBuilder, context);
@@ -183,7 +188,8 @@ namespace Microsoft.EntityFrameworkCore
                 protected override void OnModelCreating(
                     ModelBuilder modelBuilder,
                     DbContext context
-                ) {
+                )
+                {
                     modelBuilder.UseIdentityColumns();
 
                     base.OnModelCreating(modelBuilder, context);
@@ -207,7 +213,8 @@ namespace Microsoft.EntityFrameworkCore
                 protected override void OnModelCreating(
                     ModelBuilder modelBuilder,
                     DbContext context
-                ) {
+                )
+                {
                     modelBuilder.UseHiLo();
 
                     base.OnModelCreating(modelBuilder, context);
@@ -250,7 +257,8 @@ namespace Microsoft.EntityFrameworkCore
                 protected override void OnModelCreating(
                     ModelBuilder modelBuilder,
                     DbContext context
-                ) {
+                )
+                {
                     modelBuilder.Entity<Root>(
                         b =>
                         {

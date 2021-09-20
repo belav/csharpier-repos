@@ -48,7 +48,8 @@ namespace System.Reflection.Emit
         public ConstructorOnTypeBuilderInst(
             TypeBuilderInstantiation instantiation,
             ConstructorInfo cb
-        ) {
+        )
+        {
             this.instantiation = instantiation;
             this.cb = cb;
         }
@@ -181,7 +182,8 @@ namespace System.Reflection.Emit
             Binder? binder,
             object?[]? parameters,
             CultureInfo? culture
-        ) {
+        )
+        {
             return cb.Invoke(obj, invokeAttr, binder, parameters, culture);
         }
 
@@ -229,7 +231,8 @@ namespace System.Reflection.Emit
             Binder? binder,
             object?[]? parameters,
             CultureInfo? culture
-        ) {
+        )
+        {
             throw new InvalidOperationException();
         }
     }

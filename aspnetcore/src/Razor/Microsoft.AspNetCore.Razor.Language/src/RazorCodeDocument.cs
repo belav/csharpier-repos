@@ -21,7 +21,8 @@ namespace Microsoft.AspNetCore.Razor.Language
         public static RazorCodeDocument Create(
             RazorSourceDocument source,
             IEnumerable<RazorSourceDocument> imports
-        ) {
+        )
+        {
             if (source == null)
             {
                 throw new ArgumentNullException(nameof(source));
@@ -35,7 +36,8 @@ namespace Microsoft.AspNetCore.Razor.Language
             IEnumerable<RazorSourceDocument> imports,
             RazorParserOptions parserOptions,
             RazorCodeGenerationOptions codeGenerationOptions
-        ) {
+        )
+        {
             if (source == null)
             {
                 throw new ArgumentNullException(nameof(source));

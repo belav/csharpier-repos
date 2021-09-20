@@ -20,18 +20,20 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             SourceMemberContainerTypeSymbol containingType,
             int memberOffset,
             BindingDiagnosticBag diagnostics
-        ) : base(
-            containingType,
-            WellKnownMemberNames.ObjectEquals,
-            hasBody: true,
-            memberOffset,
-            diagnostics
-        ) { }
+        )
+            : base(
+                containingType,
+                WellKnownMemberNames.ObjectEquals,
+                hasBody: true,
+                memberOffset,
+                diagnostics
+            ) { }
 
         protected override DeclarationModifiers MakeDeclarationModifiers(
             DeclarationModifiers allowedModifiers,
             BindingDiagnosticBag diagnostics
-        ) {
+        )
+        {
             const DeclarationModifiers result =
                 DeclarationModifiers.Public
                 | DeclarationModifiers.Override
@@ -42,7 +44,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
 
         protected override (TypeWithAnnotations ReturnType, ImmutableArray<ParameterSymbol> Parameters, bool IsVararg, ImmutableArray<TypeParameterConstraintClause> DeclaredConstraintsForOverrideOrImplementation) MakeParametersAndBindReturnType(
             BindingDiagnosticBag diagnostics
-        ) {
+        )
+        {
             var compilation = DeclaringCompilation;
             var location = ReturnTypeLocation;
             return (
@@ -87,7 +90,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                     ContainingType.BaseTypeNoUseSiteDiagnostics,
                     TypeCompareKind.AllIgnoreOptions
                 )
-            ) {
+            )
+            {
                 diagnostics.Add(
                     ErrorCode.ERR_DoesNotOverrideBaseMethod,
                     Locations[0],
@@ -100,7 +104,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
         internal override void GenerateMethodBody(
             TypeCompilationState compilationState,
             BindingDiagnosticBag diagnostics
-        ) {
+        )
+        {
             var F = new SyntheticBoundNodeFactory(
                 this,
                 this.SyntaxNode,

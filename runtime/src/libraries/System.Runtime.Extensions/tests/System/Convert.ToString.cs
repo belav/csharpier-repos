@@ -239,7 +239,8 @@ namespace System.Tests
             TInput[] testValues,
             string[] expectedValues,
             IFormatProvider formatProvider = null
-        ) {
+        )
+        {
             Assert.Equal(expectedValues.Length, testValues.Length);
 
             if (formatProvider == null)

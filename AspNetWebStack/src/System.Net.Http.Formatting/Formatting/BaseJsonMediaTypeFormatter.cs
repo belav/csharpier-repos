@@ -194,7 +194,8 @@ namespace System.Net.Http.Formatting
             Stream readStream,
             HttpContent content,
             IFormatterLogger formatterLogger
-        ) {
+        )
+        {
             if (type == null)
             {
                 throw Error.ArgumentNull("type");
@@ -225,7 +226,8 @@ namespace System.Net.Http.Formatting
             Stream readStream,
             HttpContent content,
             IFormatterLogger formatterLogger
-        ) {
+        )
+        {
             Contract.Assert(type != null);
             Contract.Assert(readStream != null);
 
@@ -275,7 +277,8 @@ namespace System.Net.Http.Formatting
             Stream readStream,
             Encoding effectiveEncoding,
             IFormatterLogger formatterLogger
-        ) {
+        )
+        {
             if (type == null)
             {
                 throw Error.ArgumentNull("type");
@@ -297,7 +300,8 @@ namespace System.Net.Http.Formatting
                     readStream,
                     effectiveEncoding
                 )
-            ) {
+            )
+            {
                 jsonReader.CloseInput = false;
                 jsonReader.MaxDepth = _maxDepth;
 
@@ -337,7 +341,8 @@ namespace System.Net.Http.Formatting
             Type type,
             Stream readStream,
             Encoding effectiveEncoding
-        ) {
+        )
+        {
             Contract.Assert(type != null);
             Contract.Assert(readStream != null);
             Contract.Assert(effectiveEncoding != null);
@@ -430,7 +435,8 @@ namespace System.Net.Http.Formatting
             HttpContent content,
             TransportContext transportContext,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             if (type == null)
             {
                 throw Error.ArgumentNull("type");
@@ -483,7 +489,8 @@ namespace System.Net.Http.Formatting
             object value,
             Stream writeStream,
             Encoding effectiveEncoding
-        ) {
+        )
+        {
             if (type == null)
             {
                 throw Error.ArgumentNull("type");
@@ -505,7 +512,8 @@ namespace System.Net.Http.Formatting
                     writeStream,
                     effectiveEncoding
                 )
-            ) {
+            )
+            {
                 jsonWriter.CloseOutput = false;
 
                 JsonSerializer jsonSerializer = CreateJsonSerializerInternal();
@@ -518,7 +526,8 @@ namespace System.Net.Http.Formatting
             Type type,
             Stream writeStream,
             Encoding effectiveEncoding
-        ) {
+        )
+        {
             Contract.Assert(type != null);
             Contract.Assert(writeStream != null);
             Contract.Assert(effectiveEncoding != null);

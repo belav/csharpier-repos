@@ -75,7 +75,8 @@ namespace System.Security.Cryptography
                             null,
                             out bytesWritten
                         )
-                    ) {
+                    )
+                    {
                         bytesWritten = 0;
                         return false;
                     }
@@ -135,7 +136,8 @@ namespace System.Security.Cryptography
                 ReadOnlySpan<byte> hash,
                 ReadOnlySpan<byte> signature,
                 DSASignatureFormat signatureFormat
-            ) {
+            )
+            {
                 Span<byte> stackBuf = stackalloc byte[WindowsMaxQSize];
                 ReadOnlySpan<byte> source = AdjustHashSizeIfNecessary(hash, stackBuf);
 
@@ -183,7 +185,8 @@ namespace System.Security.Cryptography
             private ReadOnlySpan<byte> AdjustHashSizeIfNecessary(
                 ReadOnlySpan<byte> hash,
                 Span<byte> stackBuf
-            ) {
+            )
+            {
                 Debug.Assert(stackBuf.Length == WindowsMaxQSize);
 
                 // Windows CNG requires that the hash output and q match sizes, but we can better
@@ -234,7 +237,8 @@ namespace System.Security.Cryptography
                         if (
                             pBlob->Magic != KeyBlobMagicNumber.BCRYPT_DSA_PUBLIC_MAGIC_V2
                             && pBlob->Magic != KeyBlobMagicNumber.BCRYPT_DSA_PRIVATE_MAGIC_V2
-                        ) {
+                        )
+                        {
                             // This is a V1 BCRYPT_DSA_KEY_BLOB, which hardcodes the Q length to 20 bytes.
                             return Sha1HashOutputSize;
                         }

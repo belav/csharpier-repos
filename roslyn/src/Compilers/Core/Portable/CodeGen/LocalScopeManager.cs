@@ -212,7 +212,8 @@ namespace Microsoft.CodeAnalysis.CodeGen
                 ScopeType scopeType,
                 Microsoft.Cci.ITypeReference exceptionType,
                 ExceptionHandlerScope currentHandler
-            ) {
+            )
+            {
                 if (scopeType == ScopeType.TryCatchFinally)
                 {
                     return new ExceptionHandlerContainerScope(currentHandler);
@@ -341,7 +342,8 @@ namespace Microsoft.CodeAnalysis.CodeGen
                 ScopeType scopeType,
                 Cci.ITypeReference exceptionType,
                 ExceptionHandlerScope currentExceptionHandler
-            ) {
+            )
+            {
                 var scope = base.OpenScope(scopeType, exceptionType, currentExceptionHandler);
                 if (_nestedScopes == null)
                 {
@@ -430,7 +432,8 @@ namespace Microsoft.CodeAnalysis.CodeGen
 
             internal override void GetExceptionHandlerRegions(
                 ArrayBuilder<Cci.ExceptionHandlerRegion> regions
-            ) {
+            )
+            {
                 if (_nestedScopes != null)
                 {
                     for (int i = 0, cnt = _nestedScopes.Count; i < cnt; i++)
@@ -488,7 +491,8 @@ namespace Microsoft.CodeAnalysis.CodeGen
 
             internal override ScopeBounds GetHoistedLocalScopes(
                 ArrayBuilder<StateMachineHoistedLocalScope> result
-            ) {
+            )
+            {
                 int begin = int.MaxValue;
                 int end = 0;
 
@@ -579,7 +583,8 @@ namespace Microsoft.CodeAnalysis.CodeGen
                 ExceptionHandlerContainerScope containingScope,
                 ScopeType type,
                 Microsoft.Cci.ITypeReference exceptionType
-            ) {
+            )
+            {
                 Debug.Assert(
                     (type == ScopeType.Try)
                         || (type == ScopeType.Catch)
@@ -724,7 +729,8 @@ namespace Microsoft.CodeAnalysis.CodeGen
                 ScopeType scopeType,
                 Microsoft.Cci.ITypeReference exceptionType,
                 ExceptionHandlerScope currentExceptionHandler
-            ) {
+            )
+            {
                 Debug.Assert(
                     ((_handlers.Count == 0) && (scopeType == ScopeType.Try))
                         || (
@@ -785,7 +791,8 @@ namespace Microsoft.CodeAnalysis.CodeGen
 
             internal override void GetExceptionHandlerRegions(
                 ArrayBuilder<Cci.ExceptionHandlerRegion> regions
-            ) {
+            )
+            {
                 Debug.Assert(_handlers.Count > 1);
 
                 ExceptionHandlerScope tryScope = null;

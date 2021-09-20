@@ -59,7 +59,8 @@ namespace Microsoft.EntityFrameworkCore.Query
             ISqlExpressionFactory sqlExpressionFactory,
             IParameterNameGeneratorFactory parameterNameGeneratorFactory,
             IRelationalParameterBasedSqlProcessorFactory relationalParameterBasedSqlProcessorFactory
-        ) {
+        )
+        {
             Check.NotNull(querySqlGeneratorFactory, nameof(querySqlGeneratorFactory));
             Check.NotNull(sqlExpressionFactory, nameof(sqlExpressionFactory));
             Check.NotNull(parameterNameGeneratorFactory, nameof(parameterNameGeneratorFactory));

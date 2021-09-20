@@ -16,7 +16,8 @@ namespace Microsoft.EntityFrameworkCore.TestUtilities
             IEnumerable<MetadataReference> references,
             bool copyLocal = false,
             string path = null
-        ) {
+        )
+        {
             References = references;
             CopyLocal = copyLocal;
             Path = path;

@@ -75,7 +75,8 @@ namespace System.Security.Cryptography
                 || (key == 0xfefefefefefefefe)
                 || (key == 0x1f1f1f1f0e0e0e0e)
                 || (key == 0xe0e0e0e0f1f1f1f1)
-            ) {
+            )
+            {
                 return true;
             }
 
@@ -102,7 +103,8 @@ namespace System.Security.Cryptography
                 || (key == 0x1f011f010e010e01)
                 || (key == 0xe0fee0fef1fef1fe)
                 || (key == 0xfee0fee0fef1fef1)
-            ) {
+            )
+            {
                 return true;
             }
 

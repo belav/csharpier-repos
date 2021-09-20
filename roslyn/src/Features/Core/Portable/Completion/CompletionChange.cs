@@ -47,7 +47,8 @@ namespace Microsoft.CodeAnalysis.Completion
             ImmutableArray<TextChange> textChanges,
             int? newPosition,
             bool includesCommitCharacter
-        ) {
+        )
+        {
             TextChange = textChange;
             NewPosition = newPosition;
             IncludesCommitCharacter = includesCommitCharacter;
@@ -78,7 +79,8 @@ namespace Microsoft.CodeAnalysis.Completion
             ImmutableArray<TextChange> textChanges,
             int? newPosition = null,
             bool includesCommitCharacter = false
-        ) {
+        )
+        {
             return new CompletionChange(
                 textChanges.Single(),
                 textChanges,
@@ -93,7 +95,8 @@ namespace Microsoft.CodeAnalysis.Completion
             TextChange textChange,
             int? newPosition = null,
             bool includesCommitCharacter = false
-        ) {
+        )
+        {
             return new CompletionChange(
                 textChange,
                 textChanges: default,
@@ -111,7 +114,8 @@ namespace Microsoft.CodeAnalysis.Completion
             ImmutableArray<TextChange> textChanges,
             int? newPosition = null,
             bool includesCommitCharacter = false
-        ) {
+        )
+        {
             return new CompletionChange(
                 textChange,
                 textChanges,

@@ -33,7 +33,8 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
             ISymbol interfaceMember,
             Solution solution,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             // This method can return multiple results.  Consider the case of:
             //
             // interface IGoo<X> { void Goo(X x); }
@@ -54,7 +55,8 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
                 interfaceMember.Kind != SymbolKind.Event
                 && interfaceMember.Kind != SymbolKind.Method
                 && interfaceMember.Kind != SymbolKind.Property
-            ) {
+            )
+            {
                 return ImmutableArray<ISymbol>.Empty;
             }
 
@@ -129,7 +131,8 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
                     var currentType = typeSymbol;
                     currentType != null;
                     currentType = currentType.BaseType
-                ) {
+                )
+                {
                     seenTypeDeclaringInterface =
                         seenTypeDeclaringInterface
                         || currentType.GetOriginalInterfacesAndTheirBaseInterfaces()
@@ -201,7 +204,8 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
                     && typeSymbol.Locations.Any(location => location.IsInSource)
                 )
                 || typeSymbol.TypeKind == TypeKind.Interface
-            ) {
+            )
+            {
                 return explicitMatches.FirstOrDefault();
             }
 
@@ -228,7 +232,8 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
             this ITypeSymbol? type,
             Compilation compilation,
             IEnumerable<ITypeParameterSymbol> availableTypeParameters
-        ) {
+        )
+        {
             return type?.RemoveUnavailableTypeParameters(
                 compilation,
                 availableTypeParameters.Select(t => t.Name).ToSet()
@@ -240,7 +245,8 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
             this ITypeSymbol? type,
             Compilation compilation,
             ISet<string> availableTypeParameterNames
-        ) {
+        )
+        {
             return type?.Accept(
                 new UnavailableTypeParameterRemover(compilation, availableTypeParameterNames)
             );
@@ -250,7 +256,8 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
         public static ITypeSymbol? RemoveAnonymousTypes(
             this ITypeSymbol? type,
             Compilation compilation
-        ) {
+        )
+        {
             return type?.Accept(new AnonymousTypeRemover(compilation));
         }
 
@@ -258,14 +265,16 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
         public static ITypeSymbol? RemoveUnnamedErrorTypes(
             this ITypeSymbol? type,
             Compilation compilation
-        ) {
+        )
+        {
             return type?.Accept(new UnnamedErrorTypeRemover(compilation));
         }
 
         public static IList<ITypeParameterSymbol> GetReferencedMethodTypeParameters(
             this ITypeSymbol? type,
             IList<ITypeParameterSymbol>? result = null
-        ) {
+        )
+        {
             result ??= new List<ITypeParameterSymbol>();
             type?.Accept(
                 new CollectTypeParameterSymbolsVisitor(result, onlyMethodTypeParameters: true)
@@ -276,7 +285,8 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
         public static IList<ITypeParameterSymbol> GetReferencedTypeParameters(
             this ITypeSymbol? type,
             IList<ITypeParameterSymbol>? result = null
-        ) {
+        )
+        {
             result ??= new List<ITypeParameterSymbol>();
             type?.Accept(
                 new CollectTypeParameterSymbolsVisitor(result, onlyMethodTypeParameters: false)
@@ -289,8 +299,9 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
             this ITypeSymbol? type,
             IDictionary<TType1, TType2> mapping,
             Compilation compilation
-        ) where TType1 : ITypeSymbol
-          where TType2 : ITypeSymbol
+        )
+            where TType1 : ITypeSymbol
+            where TType2 : ITypeSymbol
         {
             return type.SubstituteTypes(mapping, new CompilationTypeGenerator(compilation));
         }
@@ -300,8 +311,9 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
             this ITypeSymbol? type,
             IDictionary<TType1, TType2> mapping,
             ITypeGenerator typeGenerator
-        ) where TType1 : ITypeSymbol
-          where TType2 : ITypeSymbol
+        )
+            where TType1 : ITypeSymbol
+            where TType2 : ITypeSymbol
         {
             return type?.Accept(new SubstituteTypesVisitor<TType1, TType2>(mapping, typeGenerator));
         }

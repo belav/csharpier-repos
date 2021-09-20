@@ -29,16 +29,17 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             bool isAdder,
             EventSymbol explicitlyImplementedEventOpt = null,
             string aliasQualifierOpt = null
-        ) : base(
-            @event,
-            null,
-            @event.Locations,
-            explicitlyImplementedEventOpt,
-            aliasQualifierOpt,
-            isAdder,
-            isIterator: false,
-            isNullableAnalysisEnabled: false
-        ) { }
+        )
+            : base(
+                @event,
+                null,
+                @event.Locations,
+                explicitlyImplementedEventOpt,
+                aliasQualifierOpt,
+                isAdder,
+                isIterator: false,
+                isNullableAnalysisEnabled: false
+            ) { }
 
         public override bool IsImplicitlyDeclared
         {
@@ -77,7 +78,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
         internal override void AddSynthesizedAttributes(
             PEModuleBuilder moduleBuilder,
             ref ArrayBuilder<SynthesizedAttributeData> attributes
-        ) {
+        )
+        {
             base.AddSynthesizedAttributes(moduleBuilder, ref attributes);
 
             var compilation = this.DeclaringCompilation;
@@ -107,7 +109,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                     && (object)DeclaringCompilation.GetWellKnownTypeMember(
                         WellKnownMember.System_Threading_Interlocked__CompareExchange_T
                     ) == null
-                ) {
+                )
+                {
                     // Under these conditions, this method needs to be synchronized.
                     result |= MethodImplAttributes.Synchronized;
                 }

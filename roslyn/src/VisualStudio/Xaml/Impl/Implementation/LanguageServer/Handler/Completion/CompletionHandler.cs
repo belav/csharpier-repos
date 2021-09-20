@@ -45,7 +45,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Xaml.LanguageServer.Handler
             CompletionParams request,
             RequestContext context,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var document = context.Document;
             if (document == null)
             {
@@ -95,7 +96,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Xaml.LanguageServer.Handler
             SourceText text,
             Position position,
             TextDocumentIdentifier textDocument
-        ) {
+        )
+        {
             var item = new VSCompletionItem
             {
                 Label = xamlCompletion.DisplayText,

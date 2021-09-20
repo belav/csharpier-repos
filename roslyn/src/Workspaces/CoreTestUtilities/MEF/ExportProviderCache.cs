@@ -55,11 +55,13 @@ namespace Microsoft.CodeAnalysis.Test.Utilities
         /// </summary>
         public static IExportProviderFactory GetOrCreateExportProviderFactory(
             IEnumerable<Assembly> assemblies
-        ) {
+        )
+        {
             if (
                 assemblies is ImmutableArray<Assembly> assembliesArray
                 && assembliesArray == MefHostServices.DefaultAssemblies
-            ) {
+            )
+            {
                 return s_defaultHostExportProviderComposition.ExportProviderFactory;
             }
 
@@ -72,7 +74,8 @@ namespace Microsoft.CodeAnalysis.Test.Utilities
         public static ComposableCatalog CreateAssemblyCatalog(
             IEnumerable<Assembly> assemblies,
             Resolver? resolver = null
-        ) {
+        )
+        {
             var discovery = resolver == null ? s_partDiscovery : CreatePartDiscovery(resolver);
 
             // If we run CreatePartsAsync on the test thread we may deadlock since it'll schedule stuff back
@@ -88,7 +91,8 @@ namespace Microsoft.CodeAnalysis.Test.Utilities
         public static ComposableCatalog CreateTypeCatalog(
             IEnumerable<Type> types,
             Resolver? resolver = null
-        ) {
+        )
+        {
             var discovery = resolver == null ? s_partDiscovery : CreatePartDiscovery(resolver);
 
             // If we run CreatePartsAsync on the test thread we may deadlock since it'll schedule stuff back
@@ -125,7 +129,8 @@ namespace Microsoft.CodeAnalysis.Test.Utilities
         public static ComposableCatalog WithoutPartsOfTypes(
             this ComposableCatalog catalog,
             IEnumerable<Type> types
-        ) {
+        )
+        {
             var parts = catalog.Parts.Where(
                 composablePartDefinition => !IsExcludedPart(composablePartDefinition)
             );
@@ -140,7 +145,8 @@ namespace Microsoft.CodeAnalysis.Test.Utilities
         public static IExportProviderFactory CreateExportProviderFactory(
             ComposableCatalog catalog,
             bool isRemoteHostComposition
-        ) {
+        )
+        {
             var scope = isRemoteHostComposition ? _remoteCompositionScope : _localCompositionScope;
             var configuration = CompositionConfiguration.Create(catalog.WithCompositionService());
             var runtimeComposition = RuntimeComposition.CreateRuntimeComposition(configuration);
@@ -166,7 +172,8 @@ namespace Microsoft.CodeAnalysis.Test.Utilities
                 ComposableCatalog catalog,
                 CompositionConfiguration configuration,
                 IExportProviderFactory exportProviderFactory
-            ) {
+            )
+            {
                 _scope = scope;
                 _catalog = catalog;
                 _configuration = configuration;
@@ -200,7 +207,8 @@ namespace Microsoft.CodeAnalysis.Test.Utilities
                             {
                                 foreach (
                                     var (importBinding, exportBindings) in part.SatisfyingExports
-                                ) {
+                                )
+                                {
                                     if (exportBindings.Count <= 1)
                                     {
                                         // Ignore composition errors for missing parts
@@ -210,7 +218,8 @@ namespace Microsoft.CodeAnalysis.Test.Utilities
                                     if (
                                         importBinding.ImportDefinition.Cardinality
                                         != ImportCardinality.ZeroOrMore
-                                    ) {
+                                    )
+                                    {
                                         // This failure occurs when a binding fails because multiple exports were
                                         // provided but only a single one (at most) is expected. This typically occurs
                                         // when a test ExportProvider is created with a mock implementation without

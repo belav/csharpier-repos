@@ -33,7 +33,8 @@ namespace Microsoft.CodeAnalysis.Test.Utilities.MoveToNamespace
             string targetNamespace = null,
             bool optionCancelled = false,
             IReadOnlyDictionary<string, string> expectedSymbolChanges = null
-        ) {
+        )
+        {
             testParameters ??= new TestParameters();
 
             var moveToNamespaceOptions = optionCancelled
@@ -115,7 +116,8 @@ namespace Microsoft.CodeAnalysis.Test.Utilities.MoveToNamespace
         public async Task TestMoveToNamespaceAnalysisAsync(
             string markup,
             string expectedNamespaceName
-        ) {
+        )
+        {
             var workspace = CreateWorkspaceFromOptions(markup, new TestParameters());
             using var testState = new TestState(workspace);
 

@@ -193,7 +193,8 @@ namespace System.Net.Http.Formatting
         public void CanReadType_ReturnsSameResultAsXmlSerializerConstructor(
             Type variationType,
             object testData
-        ) {
+        )
+        {
             TestXmlSerializerMediaTypeFormatter formatter =
                 new TestXmlSerializerMediaTypeFormatter();
 
@@ -311,7 +312,8 @@ namespace System.Net.Http.Formatting
         public async Task ReadFromStreamAsync_RoundTripsWriteToStreamAsyncUsingXmlSerializer(
             Type variationType,
             object testData
-        ) {
+        )
+        {
             // Guard
             bool canSerialize =
                 IsSerializableWithXmlSerializer(variationType, testData)
@@ -342,7 +344,8 @@ namespace System.Net.Http.Formatting
         public async Task ReadFromStreamAsync_RoundTripsWriteToStreamAsyncUsingXmlSerializer_ExtraTypes(
             Type variationType,
             object testData
-        ) {
+        )
+        {
             // Guard
             bool canSerialize =
                 IsSerializableWithXmlSerializer(variationType, testData)
@@ -391,7 +394,8 @@ namespace System.Net.Http.Formatting
             string content,
             string encoding,
             bool isDefaultEncoding
-        ) {
+        )
+        {
             if (!isDefaultEncoding)
             {
                 // XmlDictionaryReader/Writer only supports utf-8 and 16
@@ -425,7 +429,8 @@ namespace System.Net.Http.Formatting
             string content,
             string encoding,
             bool isDefaultEncoding
-        ) {
+        )
+        {
             if (!isDefaultEncoding)
             {
                 // XmlDictionaryReader/Writer only supports utf-8 and 16

@@ -52,7 +52,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             BoundNode node,
             BoundNode firstInRegion,
             BoundNode lastInRegion
-        ) {
+        )
+        {
             var walker = new ExitPointsWalker(
                 compilation,
                 member,

@@ -76,7 +76,8 @@ namespace System.Security.AccessControl.Tests
             bool isContainerSacl,
             bool isDSSacl,
             string newSaclStr
-        ) {
+        )
+        {
             CommonSecurityDescriptor commonSecurityDescriptor = new CommonSecurityDescriptor(
                 isContainerSD,
                 isDSSD,

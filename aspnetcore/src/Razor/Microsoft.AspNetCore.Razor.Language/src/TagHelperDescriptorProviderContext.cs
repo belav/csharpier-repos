@@ -23,7 +23,8 @@ namespace Microsoft.AspNetCore.Razor.Language
 
         public static TagHelperDescriptorProviderContext Create(
             ICollection<TagHelperDescriptor> results
-        ) {
+        )
+        {
             if (results == null)
             {
                 throw new ArgumentNullException(nameof(results));

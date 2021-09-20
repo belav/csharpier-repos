@@ -18,7 +18,8 @@ namespace Microsoft.CodeAnalysis.Formatting.Rules
             TextSpan textSpan,
             int indentationDelta,
             IndentBlockOption option
-        ) {
+        )
+        {
             Contract.ThrowIfFalse(option.IsMaskOn(IndentBlockOption.PositionMask));
 
             Contract.ThrowIfTrue(textSpan.Start < 0 || textSpan.Length < 0);
@@ -43,7 +44,8 @@ namespace Microsoft.CodeAnalysis.Formatting.Rules
             TextSpan textSpan,
             int indentationDelta,
             IndentBlockOption option
-        ) {
+        )
+        {
             Contract.ThrowIfFalse(option.IsMaskOn(IndentBlockOption.PositionMask));
 
             Contract.ThrowIfFalse(option.IsMaskOn(IndentBlockOption.RelativePositionMask));

@@ -115,7 +115,8 @@ namespace Microsoft.CodeAnalysis.ErrorReporting
         public static bool ReportAndPropagateUnlessCanceled(
             Exception exception,
             CancellationToken contextCancellationToken
-        ) {
+        )
+        {
             if (IsCurrentOperationBeingCancelled(exception, contextCancellationToken))
             {
                 return false;
@@ -164,7 +165,8 @@ namespace Microsoft.CodeAnalysis.ErrorReporting
         public static bool ReportAndCatchUnlessCanceled(
             Exception exception,
             CancellationToken contextCancellationToken
-        ) {
+        )
+        {
             if (IsCurrentOperationBeingCancelled(exception, contextCancellationToken))
             {
                 return false;
@@ -226,7 +228,8 @@ namespace Microsoft.CodeAnalysis.ErrorReporting
                 exception is AggregateException aggregate
                 && aggregate.InnerExceptions.Count == 1
                 && aggregate.InnerExceptions[0].Data[s_reportedMarker] != null
-            ) {
+            )
+            {
                 return;
             }
 #endif

@@ -725,7 +725,8 @@ namespace Microsoft.AspNetCore.DataProtection.KeyManagement
             string xml,
             IActivator activator,
             ILoggerFactory loggerFactory = null
-        ) {
+        )
+        {
             // Arrange
             var mockXmlRepository = new Mock<IXmlRepository>();
             mockXmlRepository.Setup(o => o.GetAllElements())
@@ -934,7 +935,8 @@ namespace Microsoft.AspNetCore.DataProtection.KeyManagement
             public TestEncryptorFactory(
                 IAuthenticatedEncryptorDescriptor associatedDescriptor = null,
                 IAuthenticatedEncryptor expectedEncryptor = null
-            ) {
+            )
+            {
                 _associatedDescriptor = associatedDescriptor;
                 _expectedEncryptor = expectedEncryptor;
             }

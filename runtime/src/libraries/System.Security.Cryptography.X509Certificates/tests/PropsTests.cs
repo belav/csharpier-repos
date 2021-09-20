@@ -496,7 +496,8 @@ Wry5FNNo
             string expected,
             X509NameType nameType,
             bool forIssuer
-        ) {
+        )
+        {
             // ComplexNameInfoCert has the following characteristics:
             //   Subject: E=subjectemail@example.org, CN=cn.subject.example.org, OU=ExampleOU, O=ExampleO, L=Locality, ST=State, C=Country
             //   Issuer: E=issueremail@example.org, CN=cn.issuer.example.org, OU=ExampleOU, O=ExampleO, L=Locality, ST=State, C=Country

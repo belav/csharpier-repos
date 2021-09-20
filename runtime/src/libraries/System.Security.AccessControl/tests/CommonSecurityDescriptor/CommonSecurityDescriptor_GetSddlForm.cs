@@ -404,7 +404,8 @@ namespace System.Security.AccessControl.Tests
             bool getSacl,
             bool getDacl,
             string expectedSddl
-        ) {
+        )
+        {
             CommonSecurityDescriptor commonSecurityDescriptor = null;
             string resultSddl = null;
 

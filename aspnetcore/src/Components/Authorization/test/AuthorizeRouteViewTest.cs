@@ -558,7 +558,8 @@ namespace Microsoft.AspNetCore.Components.Authorization
             public AuthorizeRouteViewWithExistingCascadedAuthenticationState(
                 Task<AuthenticationState> authenticationState,
                 RouteData routeData
-            ) {
+            )
+            {
                 _authenticationState = authenticationState;
                 _routeData = routeData;
             }

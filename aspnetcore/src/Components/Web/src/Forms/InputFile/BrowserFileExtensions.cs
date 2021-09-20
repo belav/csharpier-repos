@@ -32,7 +32,8 @@ namespace Microsoft.AspNetCore.Components.Forms
             string format,
             int maxWidth,
             int maxHeight
-        ) {
+        )
+        {
             if (browserFile is BrowserFile browserFileInternal)
             {
                 return browserFileInternal.Owner.ConvertToImageFileAsync(

@@ -89,7 +89,8 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeGen
             DiagnosticBag diagnostics,
             OptimizationLevel optimizations,
             bool emittingPdb
-        ) {
+        )
+        {
             Debug.Assert((object)method != null);
             Debug.Assert(boundBody != null);
             Debug.Assert(builder != null);
@@ -236,7 +237,8 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeGen
             out ImmutableArray<int> asyncYieldPoints,
             out ImmutableArray<int> asyncResumePoints,
             out bool hasStackAlloc
-        ) {
+        )
+        {
             this.GenerateImpl();
             hasStackAlloc = _sawStackalloc;
             Debug.Assert(_asyncCatchHandlerOffset >= 0);
@@ -368,7 +370,8 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeGen
             SyntaxNode syntaxNode,
             BoundArgListOperator optArgList,
             bool encodeAsRawDefinitionToken = false
-        ) {
+        )
+        {
             _builder.EmitToken(
                 _module.Translate(
                     method,
@@ -446,7 +449,8 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeGen
                 instructionsEmitted == 0
                 && span != default(TextSpan)
                 && _ilEmitStyle == ILEmitStyle.Debug
-            ) {
+            )
+            {
                 // if there was no code emitted, then emit nop
                 // otherwise this point could get associated with some random statement, possibly in a wrong scope
                 _builder.EmitOpCode(ILOpCode.Nop);

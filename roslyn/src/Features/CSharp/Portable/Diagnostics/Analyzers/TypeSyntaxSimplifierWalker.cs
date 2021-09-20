@@ -99,7 +99,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Diagnostics.SimplifyTypeNames
 
         private static ImmutableHashSet<string> GetAliasedNames(
             CompilationUnitSyntax? compilationUnit
-        ) {
+        )
+        {
             var aliasedNames = s_emptyAliasedNames;
             if (compilationUnit is null)
                 return aliasedNames;
@@ -124,7 +125,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Diagnostics.SimplifyTypeNames
                     if (
                         usingDirective.Name.GetRightmostName()
                         is IdentifierNameSyntax identifierName
-                    ) {
+                    )
+                    {
                         var identifierAlias = identifierName.Identifier.ValueText;
                         if (!RoslynString.IsNullOrEmpty(identifierAlias))
                         {
@@ -156,7 +158,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Diagnostics.SimplifyTypeNames
                     node.FullSpan.Start,
                     node.FullSpan.Length
                 ) ?? false
-            ) {
+            )
+            {
                 return;
             }
 
@@ -177,7 +180,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Diagnostics.SimplifyTypeNames
                     node.FullSpan.Start,
                     node.FullSpan.Length
                 ) ?? false
-            ) {
+            )
+            {
                 return;
             }
 
@@ -198,7 +202,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Diagnostics.SimplifyTypeNames
                     node.FullSpan.Start,
                     node.FullSpan.Length
                 ) ?? false
-            ) {
+            )
+            {
                 return;
             }
 
@@ -219,7 +224,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Diagnostics.SimplifyTypeNames
                     node.FullSpan.Start,
                     node.FullSpan.Length
                 ) ?? false
-            ) {
+            )
+            {
                 return;
             }
 
@@ -265,7 +271,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Diagnostics.SimplifyTypeNames
                     node.FullSpan.Start,
                     node.FullSpan.Length
                 ) ?? false
-            ) {
+            )
+            {
                 return;
             }
 
@@ -286,7 +293,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Diagnostics.SimplifyTypeNames
                     node.FullSpan.Start,
                     node.FullSpan.Length
                 ) ?? false
-            ) {
+            )
+            {
                 return;
             }
 

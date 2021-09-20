@@ -104,7 +104,8 @@ namespace Microsoft.CodeAnalysis
             Workspace workspace,
             DocumentId documentId,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             ValidateFileLength(workspace, Path);
 
             var prevLastWriteTime = FileUtilities.GetFileTimeStamp(Path);
@@ -189,7 +190,8 @@ namespace Microsoft.CodeAnalysis
                             useAsync: true
                         )
                 )
-            ) {
+            )
+            {
                 var version = VersionStamp.Create(prevLastWriteTime);
 
                 // we do this so that we asynchronously read from file. and this should allocate less for IDE case.
@@ -229,7 +231,8 @@ namespace Microsoft.CodeAnalysis
             Workspace workspace,
             DocumentId documentId,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             ValidateFileLength(workspace, Path);
 
             var prevLastWriteTime = FileUtilities.GetFileTimeStamp(Path);
@@ -249,7 +252,8 @@ namespace Microsoft.CodeAnalysis
                             useAsync: false
                         )
                 )
-            ) {
+            )
+            {
                 var version = VersionStamp.Create(prevLastWriteTime);
                 var text = CreateText(stream, workspace);
                 textAndVersion = TextAndVersion.Create(text, version, Path);

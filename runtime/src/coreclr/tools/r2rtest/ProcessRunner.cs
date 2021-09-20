@@ -122,7 +122,8 @@ public class ProcessRunner : IDisposable
         int processCount,
         ReadyToRunJittedMethods jittedMethods,
         AutoResetEvent processExitEvent
-    ) {
+    )
+    {
         _processInfo = processInfo;
         _processIndex = processIndex;
         _processCount = processCount;
@@ -163,7 +164,8 @@ public class ProcessRunner : IDisposable
                 string,
                 string
             > environmentOverride in _processInfo.Parameters.EnvironmentOverrides
-        ) {
+        )
+        {
             psi.EnvironmentVariables[environmentOverride.Key] = environmentOverride.Value;
         }
 

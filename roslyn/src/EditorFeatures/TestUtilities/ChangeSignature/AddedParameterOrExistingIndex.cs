@@ -29,7 +29,8 @@ namespace Microsoft.CodeAnalysis.Test.Utilities.ChangeSignature
         public AddedParameterOrExistingIndex(
             AddedParameter addedParameterWithoutTypeSymbol,
             string addedParameterFullyQualifiedTypeName
-        ) {
+        )
+        {
             OldIndex = null;
             IsExisting = false;
             _addedParameterWithoutTypeSymbol = addedParameterWithoutTypeSymbol;
@@ -44,7 +45,8 @@ namespace Microsoft.CodeAnalysis.Test.Utilities.ChangeSignature
             bool isRequired = true,
             string defaultValue = "",
             bool typeBinds = true
-        ) {
+        )
+        {
             var parameter = new AddedParameter(
                 type: null!, // Filled in later based on the fullTypeName
                 typeName: null!, // Not needed for engine testing

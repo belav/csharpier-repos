@@ -33,7 +33,8 @@ namespace System.Collections.Tests
         /// </summary>
         protected override IEnumerable<ModifyEnumerable> GetModifyEnumerables(
             ModifyOperation operations
-        ) {
+        )
+        {
             if ((operations & ModifyOperation.Clear) == ModifyOperation.Clear)
             {
                 yield return (IEnumerable enumerable) =>

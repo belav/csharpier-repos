@@ -42,7 +42,8 @@ namespace System.Net.Sockets
             byte[] socketAddress,
             int socketAddressSize,
             SocketError socketError
-        ) {
+        )
+        {
             CompleteAcceptOperation(
                 acceptedFileDescriptor,
                 socketAddress,
@@ -58,7 +59,8 @@ namespace System.Net.Sockets
             byte[] socketAddress,
             int socketAddressSize,
             SocketError socketError
-        ) {
+        )
+        {
             _acceptedFileDescriptor = acceptedFileDescriptor;
             Debug.Assert(
                 socketAddress == null || socketAddress == _acceptBuffer,
@@ -71,7 +73,8 @@ namespace System.Net.Sockets
             Socket socket,
             SafeSocketHandle handle,
             SafeSocketHandle? acceptHandle
-        ) {
+        )
+        {
             if (!_buffer.Equals(default))
             {
                 throw new PlatformNotSupportedException(SR.net_sockets_accept_receive_notsupported);
@@ -138,7 +141,8 @@ namespace System.Net.Sockets
             int socketAddressSize,
             SocketFlags receivedFlags,
             SocketError socketError
-        ) {
+        )
+        {
             CompleteTransferOperation(
                 bytesTransferred,
                 socketAddress,
@@ -156,7 +160,8 @@ namespace System.Net.Sockets
             int socketAddressSize,
             SocketFlags receivedFlags,
             SocketError socketError
-        ) {
+        )
+        {
             Debug.Assert(
                 socketAddress == null || socketAddress == _socketAddress!.Buffer,
                 $"Unexpected socketAddress: {socketAddress}"
@@ -168,7 +173,8 @@ namespace System.Net.Sockets
         internal unsafe SocketError DoOperationReceive(
             SafeSocketHandle handle,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             _receivedFlags = System.Net.Sockets.SocketFlags.None;
             _socketAddressSize = 0;
 
@@ -225,7 +231,8 @@ namespace System.Net.Sockets
         internal unsafe SocketError DoOperationReceiveFrom(
             SafeSocketHandle handle,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             _receivedFlags = System.Net.Sockets.SocketFlags.None;
             _socketAddressSize = 0;
 
@@ -281,7 +288,8 @@ namespace System.Net.Sockets
             SocketFlags receivedFlags,
             IPPacketInformation ipPacketInformation,
             SocketError errorCode
-        ) {
+        )
+        {
             CompleteReceiveMessageFromOperation(
                 bytesTransferred,
                 socketAddress,
@@ -301,7 +309,8 @@ namespace System.Net.Sockets
             SocketFlags receivedFlags,
             IPPacketInformation ipPacketInformation,
             SocketError errorCode
-        ) {
+        )
+        {
             Debug.Assert(_socketAddress != null, "Expected non-null _socketAddress");
             Debug.Assert(
                 socketAddress == null || _socketAddress.Buffer == socketAddress,
@@ -317,7 +326,8 @@ namespace System.Net.Sockets
             Socket socket,
             SafeSocketHandle handle,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             _receiveMessageFromPacketInfo = default(IPPacketInformation);
             _receivedFlags = System.Net.Sockets.SocketFlags.None;
             _socketAddressSize = 0;
@@ -367,7 +377,8 @@ namespace System.Net.Sockets
         internal unsafe SocketError DoOperationSend(
             SafeSocketHandle handle,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             _receivedFlags = System.Net.Sockets.SocketFlags.None;
             _socketAddressSize = 0;
 
@@ -479,7 +490,8 @@ namespace System.Net.Sockets
         internal SocketError DoOperationSendTo(
             SafeSocketHandle handle,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             _receivedFlags = System.Net.Sockets.SocketFlags.None;
             _socketAddressSize = 0;
 
@@ -585,7 +597,8 @@ namespace System.Net.Sockets
             int bytesTransferred,
             SocketFlags flags,
             SocketError socketError
-        ) {
+        )
+        {
             if (socketError == SocketError.Success)
             {
                 FinishOperationAsyncSuccess(bytesTransferred, flags);

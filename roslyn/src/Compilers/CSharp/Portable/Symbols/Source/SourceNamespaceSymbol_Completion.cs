@@ -14,7 +14,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
         internal override void ForceComplete(
             SourceLocation locationOpt,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             while (true)
             {
                 cancellationToken.ThrowIfCancellationRequested();
@@ -36,7 +37,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                             if (
                                 locationOpt == null
                                 || locationOpt.SourceTree == declaration.SyntaxReference.SyntaxTree
-                            ) {
+                            )
+                            {
                                 if (declaration.HasUsings || declaration.HasExternAliases)
                                 {
                                     this.DeclaringCompilation.GetImports(declaration)

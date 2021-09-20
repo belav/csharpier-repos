@@ -128,7 +128,8 @@ namespace Microsoft.CodeAnalysis.Host
             Solution solution,
             ProjectId initialProject,
             ISet<ProjectId> allProjects
-        ) {
+        )
+        {
             var cancellationToken = _cancellationSource.Token;
             return _taskQueue.ScheduleTask(
                 "BackgroundCompiler.BuildCompilationsAsync",
@@ -148,7 +149,8 @@ namespace Microsoft.CodeAnalysis.Host
             ProjectId initialProject,
             ISet<ProjectId> projectsToBuild,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var allProjectIds = new List<ProjectId>();
             if (initialProject != null)
             {

@@ -490,7 +490,8 @@ namespace Microsoft.CodeAnalysis.Remote.UnitTests
                         CancellationToken.None
                     )
                     .ConfigureAwait(false)
-            ) {
+            )
+            {
                 solutionId1 = await validator.GetValueAsync<SolutionStateChecksums>(
                         scope1.SolutionInfo.SolutionChecksum
                     )
@@ -503,7 +504,8 @@ namespace Microsoft.CodeAnalysis.Remote.UnitTests
                         CancellationToken.None
                     )
                     .ConfigureAwait(false)
-            ) {
+            )
+            {
                 solutionId2 = await validator.GetValueAsync<SolutionStateChecksums>(
                         scope2.SolutionInfo.SolutionChecksum
                     )
@@ -1191,7 +1193,8 @@ namespace Microsoft.CodeAnalysis.Remote.UnitTests
         private static async Task VerifyOptionSetsAsync(
             Workspace workspace,
             Action<OptionSet> verifyOptionValues
-        ) {
+        )
+        {
             var solution = workspace.CurrentSolution;
 
             verifyOptionValues(workspace.Options);

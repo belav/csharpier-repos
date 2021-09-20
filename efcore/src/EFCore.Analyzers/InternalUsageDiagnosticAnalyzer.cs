@@ -141,7 +141,8 @@ namespace Microsoft.EntityFrameworkCore
         private static void AnalyzeInvocation(
             OperationAnalysisContext context,
             IInvocationOperation invocation
-        ) {
+        )
+        {
             // First check for any internal type parameters
             foreach (var a in invocation.TargetMethod.TypeArguments)
             {
@@ -160,7 +161,8 @@ namespace Microsoft.EntityFrameworkCore
         private static void AnalyzeVariableDeclaration(
             OperationAnalysisContext context,
             IVariableDeclarationOperation variableDeclaration
-        ) {
+        )
+        {
             foreach (var declarator in variableDeclaration.Declarators)
             {
                 if (IsInternal(context, declarator.Symbol.Type))
@@ -220,7 +222,8 @@ namespace Microsoft.EntityFrameworkCore
         private static void AnalyzeNamedTypeSymbol(
             SymbolAnalysisContext context,
             INamedTypeSymbol symbol
-        ) {
+        )
+        {
             if (symbol.BaseType is ITypeSymbol baseSymbol && IsInternal(context, baseSymbol))
             {
                 foreach (var declaringSyntax in symbol.DeclaringSyntaxReferences)
@@ -254,11 +257,13 @@ namespace Microsoft.EntityFrameworkCore
         private static void AnalyzeMethodTypeSymbol(
             SymbolAnalysisContext context,
             IMethodSymbol symbol
-        ) {
+        )
+        {
             if (
                 symbol.MethodKind == MethodKind.PropertyGet
                 || symbol.MethodKind == MethodKind.PropertySet
-            ) {
+            )
+            {
                 // Property getters/setters are handled via IPropertySymbol
                 return;
             }
@@ -300,7 +305,8 @@ namespace Microsoft.EntityFrameworkCore
             SymbolAnalysisContext context,
             ISymbol declarationSymbol,
             ITypeSymbol typeSymbol
-        ) {
+        )
+        {
             if (IsInternal(context, typeSymbol))
             {
                 foreach (var declaringSyntax in declarationSymbol.DeclaringSyntaxReferences)

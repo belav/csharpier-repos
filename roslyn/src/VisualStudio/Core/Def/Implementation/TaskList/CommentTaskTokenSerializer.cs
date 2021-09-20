@@ -20,7 +20,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.TaskList
         public CommentTaskTokenSerializer(
             IGlobalOptionService globalOptionService,
             ITaskList? taskList
-        ) {
+        )
+        {
             _globalOptionService = globalOptionService;
 
             // The SVsTaskList may not be available or doesn't actually implement ITaskList

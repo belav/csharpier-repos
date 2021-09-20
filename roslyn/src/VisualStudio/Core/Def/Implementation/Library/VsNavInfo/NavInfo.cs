@@ -46,7 +46,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Library.VsNavIn
             string namespaceName = null,
             string className = null,
             string memberName = null
-        ) {
+        )
+        {
             _factory = factory;
 
             _libraryName = libraryName;
@@ -89,7 +90,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Library.VsNavIn
             ImmutableArray<NavInfoNode> baseNodes,
             bool isCanonical,
             bool isObjectBrowser
-        ) {
+        )
+        {
             if (nodes.IsDefault)
             {
                 var builder = ImmutableArray.CreateBuilder<NavInfoNode>();
@@ -103,7 +105,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Library.VsNavIn
                     && !isCanonical
                     && baseNodes.Length >= 2
                     && baseNodes[1].ListType == _LIB_LISTTYPE.LLT_HIERARCHY
-                ) {
+                )
+                {
                     startIndex = 2;
                 }
 

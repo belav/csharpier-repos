@@ -37,7 +37,8 @@ namespace Internal.Cryptography.Pal
             DateTime verificationTime,
             TimeSpan timeout,
             bool disableAia
-        ) {
+        )
+        {
             var chainPal = new AndroidCertPath();
             try
             {
@@ -104,7 +105,8 @@ namespace Internal.Cryptography.Pal
                 X509Certificate2Collection? extraStore,
                 X509Certificate2Collection customTrustStore,
                 X509ChainTrustMode trustMode
-            ) {
+            )
+            {
                 List<SafeHandle> extraCertHandles = new List<SafeHandle>()
                 {
                     ((AndroidCertificatePal)cert).SafeHandle
@@ -213,7 +215,8 @@ namespace Internal.Cryptography.Pal
                 OidCollection certificatePolicy,
                 X509RevocationMode revocationMode,
                 X509RevocationFlag revocationFlag
-            ) {
+            )
+            {
                 Debug.Assert(_chainContext != null);
 
                 long timeInMsFromUnixEpoch = new DateTimeOffset(
@@ -286,7 +289,8 @@ namespace Internal.Cryptography.Pal
                                     s.Status == X509ChainStatusFlags.Revoked
                                     || s.Status == X509ChainStatusFlags.RevocationStatusUnknown
                             )
-                        ) {
+                        )
+                        {
                             firstRevocationErrorIndex = Math.Max(index, firstRevocationErrorIndex);
                         }
                         else
@@ -383,7 +387,8 @@ namespace Internal.Cryptography.Pal
                 ref X509ChainStatus statusToSet,
                 List<X509ChainStatus>[] statuses,
                 List<X509ChainStatus> overallStatus
-            ) {
+            )
+            {
                 AddUniqueStatus(overallStatus, ref statusToSet);
                 for (int i = index; i >= 0; i--)
                 {
@@ -399,7 +404,8 @@ namespace Internal.Cryptography.Pal
             private static void AddUniqueStatus(
                 List<X509ChainStatus> list,
                 ref X509ChainStatus status
-            ) {
+            )
+            {
                 X509ChainStatusFlags statusFlags = status.Status;
                 string statusInfo = status.StatusInformation;
                 if (!list.Exists(s => s.Status == statusFlags && s.StatusInformation == statusInfo))
@@ -410,7 +416,8 @@ namespace Internal.Cryptography.Pal
 
             private static Dictionary<int, List<X509ChainStatus>> GetStatusByIndex(
                 SafeX509ChainContextHandle ctx
-            ) {
+            )
+            {
                 var statusByIndex = new Dictionary<int, List<X509ChainStatus>>();
                 Interop.AndroidCrypto.ValidationError[] errors =
                     Interop.AndroidCrypto.X509ChainGetErrors(ctx);
@@ -433,7 +440,8 @@ namespace Internal.Cryptography.Pal
 
             private static X509ChainStatus ValidationErrorToChainStatus(
                 Interop.AndroidCrypto.ValidationError error
-            ) {
+            )
+            {
                 X509ChainStatusFlags statusFlags = (X509ChainStatusFlags)error.Status;
                 Debug.Assert(statusFlags != X509ChainStatusFlags.NoError);
 
@@ -448,7 +456,8 @@ namespace Internal.Cryptography.Pal
                 X509Certificate2[] certs,
                 OidCollection? applicationPolicy,
                 OidCollection? certificatePolicy
-            ) {
+            )
+            {
                 bool hasApplicationPolicy =
                     applicationPolicy != null && applicationPolicy.Count > 0;
                 bool hasCertificatePolicy =
@@ -462,14 +471,16 @@ namespace Internal.Cryptography.Pal
                 if (
                     hasCertificatePolicy
                     && !policyChain.MatchesCertificatePolicies(certificatePolicy!)
-                ) {
+                )
+                {
                     return false;
                 }
 
                 if (
                     hasApplicationPolicy
                     && !policyChain.MatchesApplicationPolicies(applicationPolicy!)
-                ) {
+                )
+                {
                     return false;
                 }
 

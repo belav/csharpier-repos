@@ -62,7 +62,8 @@ namespace Microsoft.AspNetCore.Mvc
             long? end,
             string expectedString,
             long contentLength
-        ) {
+        )
+        {
             // Arrange
             var path = Path.GetFullPath(Path.Combine("TestFiles", "FilePathResultTestFile.txt"));
             var result = new TestPhysicalFileResult(path, "text/plain");
@@ -228,7 +229,8 @@ namespace Microsoft.AspNetCore.Mvc
         [InlineData("bytes = 1-4, 5-11")]
         public async Task WriteFileAsync_RangeHeaderMalformed_RangeRequestIgnored(
             string rangeString
-        ) {
+        )
+        {
             // Arrange
             var path = Path.GetFullPath(Path.Combine("TestFiles", "FilePathResultTestFile.txt"));
             var result = new TestPhysicalFileResult(path, "text/plain");
@@ -398,7 +400,8 @@ namespace Microsoft.AspNetCore.Mvc
             long? start,
             long? end,
             long contentLength
-        ) {
+        )
+        {
             // Arrange
             var path = Path.GetFullPath(Path.Combine("TestFiles", "FilePathResultTestFile.txt"));
             var result = new TestPhysicalFileResult(path, "text/plain");
@@ -539,7 +542,8 @@ namespace Microsoft.AspNetCore.Mvc
         [InlineData(".\\SubFolder/SubFolderTestFile.txt")]
         public void ExecuteAsync_ThrowsDirectoryNotFound_IfItCanNotFindTheDirectory_ForRootPaths(
             string path
-        ) {
+        )
+        {
             // Arrange
             var result = new TestPhysicalFileResult(path, "text/plain");
             var context = new ActionContext(
@@ -635,7 +639,8 @@ namespace Microsoft.AspNetCore.Mvc
                 long offset,
                 long? length,
                 CancellationToken cancellation
-            ) {
+            )
+            {
                 Name = path;
                 Offset = offset;
                 Length = length;

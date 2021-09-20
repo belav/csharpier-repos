@@ -23,7 +23,8 @@ namespace Microsoft.EntityFrameworkCore
         public static PropertyBuilder ToJsonProperty(
             this PropertyBuilder propertyBuilder,
             string name
-        ) {
+        )
+        {
             Check.NotNull(propertyBuilder, nameof(propertyBuilder));
             Check.NotNull(name, nameof(name));
 
@@ -63,7 +64,8 @@ namespace Microsoft.EntityFrameworkCore
             this IConventionPropertyBuilder propertyBuilder,
             string? name,
             bool fromDataAnnotation = false
-        ) {
+        )
+        {
             if (!propertyBuilder.CanSetJsonProperty(name, fromDataAnnotation))
             {
                 return null;

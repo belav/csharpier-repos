@@ -46,7 +46,8 @@ namespace Microsoft.CodeAnalysis.CodeFixes.MatchFolderAndNamespace
             Document document,
             ImmutableArray<Diagnostic> diagnostics,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             // All the target namespaces should be the same for a given document
             Debug.Assert(
                 diagnostics.Select(

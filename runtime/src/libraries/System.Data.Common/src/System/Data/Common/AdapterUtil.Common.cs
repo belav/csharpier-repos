@@ -135,7 +135,8 @@ namespace System.Data.Common
         // KeyRestrictionBehavior
         internal static ArgumentOutOfRangeException InvalidKeyRestrictionBehavior(
             KeyRestrictionBehavior value
-        ) {
+        )
+        {
 #if DEBUG
             switch (value)
             {
@@ -167,7 +168,8 @@ namespace System.Data.Common
         // IDataAdapter.MissingMappingAction
         internal static ArgumentOutOfRangeException InvalidMissingMappingAction(
             MissingMappingAction value
-        ) {
+        )
+        {
 #if DEBUG
             switch (value)
             {
@@ -184,7 +186,8 @@ namespace System.Data.Common
         // IDataAdapter.MissingSchemaAction
         internal static ArgumentOutOfRangeException InvalidMissingSchemaAction(
             MissingSchemaAction value
-        ) {
+        )
+        {
 #if DEBUG
             switch (value)
             {
@@ -268,7 +271,8 @@ namespace System.Data.Common
         internal static ArgumentOutOfRangeException NotSupportedStatementType(
             StatementType value,
             string method
-        ) {
+        )
+        {
             return NotSupportedEnumerationValue(typeof(StatementType), value.ToString(), method);
         }
 
@@ -299,7 +303,8 @@ namespace System.Data.Common
             Type itemType,
             string propertyName,
             string propertyValue
-        ) {
+        )
+        {
             return Argument(
                 SR.Format(SR.ADP_CollectionUniqueValue, itemType.Name, propertyName, propertyValue)
             );
@@ -323,7 +328,8 @@ namespace System.Data.Common
         internal static InvalidOperationException ColumnSchemaExpression(
             string srcColumn,
             string cacheColumn
-        ) {
+        )
+        {
             return DataMapping(SR.Format(SR.ADP_ColumnSchemaExpression, srcColumn, cacheColumn));
         }
 
@@ -332,7 +338,8 @@ namespace System.Data.Common
             string srcColumn,
             Type srcType,
             DataColumn column
-        ) {
+        )
+        {
             return DataMapping(
                 SR.Format(
                     SR.ADP_ColumnSchemaMismatch,
@@ -349,7 +356,8 @@ namespace System.Data.Common
             string cacheColumn,
             string tableName,
             string srcColumn
-        ) {
+        )
+        {
             if (string.IsNullOrEmpty(tableName))
             {
                 return InvalidOperation(
@@ -371,7 +379,8 @@ namespace System.Data.Common
         internal static InvalidOperationException MissingTableSchema(
             string cacheTable,
             string srcTable
-        ) {
+        )
+        {
             return DataMapping(SR.Format(SR.ADP_MissingTableSchema, cacheTable, srcTable));
         }
 
@@ -510,7 +519,8 @@ namespace System.Data.Common
         internal static InvalidOperationException UpdateConnectionRequired(
             StatementType statementType,
             bool isRowUpdatingCommand
-        ) {
+        )
+        {
             string resource;
             if (isRowUpdatingCommand)
             {
@@ -551,7 +561,8 @@ namespace System.Data.Common
             StatementType statementType,
             bool isRowUpdatingCommand,
             ConnectionState state
-        ) {
+        )
+        {
             string resource;
             if (isRowUpdatingCommand)
             {
@@ -647,7 +658,8 @@ namespace System.Data.Common
         }
         internal static InvalidOperationException UpdateRequiresSourceTable(
             string defaultSrcTableName
-        ) {
+        )
+        {
             return InvalidOperation(
                 SR.Format(SR.ADP_UpdateRequiresSourceTable, defaultSrcTableName)
             );
@@ -666,7 +678,8 @@ namespace System.Data.Common
             int affected,
             int expected,
             DataRow[] dataRows
-        ) {
+        )
+        {
             string resource;
             switch (statementType)
             {
@@ -704,7 +717,8 @@ namespace System.Data.Common
         internal static InvalidOperationException UpdateRequiresCommand(
             StatementType statementType,
             bool isRowUpdatingCommand
-        ) {
+        )
+        {
             string resource;
             if (isRowUpdatingCommand)
             {
@@ -935,7 +949,8 @@ namespace System.Data.Common
             ref string columnName,
             int index,
             int uniqueIndex
-        ) {
+        )
+        {
             for (;; ++uniqueIndex)
             {
                 string uniqueName = columnName + uniqueIndex.ToString(CultureInfo.InvariantCulture);

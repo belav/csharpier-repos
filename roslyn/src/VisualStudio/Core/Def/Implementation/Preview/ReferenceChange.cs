@@ -36,7 +36,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Preview
             IEnumerable<ProjectChanges> projectChangesList,
             PreviewEngine engine,
             ArrayBuilder<AbstractChange> builder
-        ) {
+        )
+        {
             foreach (var projectChanges in projectChangesList)
             {
                 var projectId = projectChanges.ProjectId;
@@ -176,7 +177,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Preview
                 pIUnknownTextView != null
                 && Children?.Changes != null
                 && Children.Changes.Length > 0
-            ) {
+            )
+            {
                 engine.SetTextView(pIUnknownTextView);
                 UpdatePreview();
             }

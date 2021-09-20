@@ -104,7 +104,8 @@ namespace Microsoft.VisualStudio.IntegrationTest.Utilities.InProcess
             string feature,
             string language,
             object value
-        ) {
+        )
+        {
             var option = GetOption(optionName, feature);
             var result = GetValue(value, option);
             var optionKey = new OptionKey(option, language);
@@ -161,7 +162,8 @@ namespace Microsoft.VisualStudio.IntegrationTest.Utilities.InProcess
             TimeSpan timeout,
             string featuresToWaitFor,
             bool waitForWorkspaceFirst = true
-        ) {
+        )
+        {
             if (waitForWorkspaceFirst || featuresToWaitFor == FeatureAttribute.Workspace)
             {
                 WaitForProjectSystem(timeout);
@@ -199,7 +201,8 @@ namespace Microsoft.VisualStudio.IntegrationTest.Utilities.InProcess
                     var token in (
                         (AsynchronousOperationListenerProvider)listenerProvider
                     ).GetTokens()
-                ) {
+                )
+                {
                     messageBuilder.AppendLine().Append($"  {token}");
                 }
 

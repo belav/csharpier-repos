@@ -14,7 +14,8 @@ namespace Microsoft.Net.Http.Headers
         public void TryParse_SetOfValidValueStrings_ParsedCorrectly(
             string input,
             DateTimeOffset expected
-        ) {
+        )
+        {
             // We don't need to validate all possible date values, since they're already tested in HttpRuleParserTest.
             // Just make sure the parser calls HttpRuleParser methods correctly.
             Assert.True(HeaderUtilities.TryParseDate(input, out var result));

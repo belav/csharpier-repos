@@ -131,11 +131,13 @@ namespace Microsoft.CodeAnalysis.Test.Utilities
                 exportProvider.GetExportedValues<IAsynchronousOperationListenerProvider>()
                     .SingleOrDefault() is
                 { } listenerProvider
-            ) {
+            )
+            {
                 if (
                     exportProvider.GetExportedValues<IThreadingContext>()
                         .SingleOrDefault()?.HasMainThread ?? false
-                ) {
+                )
+                {
                     // Immediately clear items from the foreground notification service for which cancellation is
                     // requested. This service maintains a queue separately from Tasks, and work items scheduled for
                     // execution after a delay are not immediately purged when cancellation is requested. This code
@@ -190,7 +192,8 @@ namespace Microsoft.CodeAnalysis.Test.Utilities
                             var token in (
                                 (AsynchronousOperationListenerProvider)listenerProvider
                             ).GetTokens()
-                        ) {
+                        )
+                        {
                             messageBuilder.AppendLine().Append($"  {token}");
                         }
 
@@ -202,7 +205,8 @@ namespace Microsoft.CodeAnalysis.Test.Utilities
 
                 foreach (
                     var testErrorHandler in exportProvider.GetExportedValues<ITestErrorHandler>()
-                ) {
+                )
+                {
                     var exceptions = testErrorHandler.Exceptions;
                     if (exceptions.Count > 0)
                     {
@@ -223,7 +227,8 @@ namespace Microsoft.CodeAnalysis.Test.Utilities
                 assemblies is ImmutableArray<Assembly> array
                 && array == MefHostServices.DefaultAssemblies
                 && ExportProviderCache.LocalExportProviderForCleanup != null
-            ) {
+            )
+            {
                 if (_hostServices != null)
                 {
                     return _hostServices;
@@ -248,7 +253,8 @@ namespace Microsoft.CodeAnalysis.Test.Utilities
 
         private static MefHostServices DenyMefHostServicesCreationBetweenTests(
             IEnumerable<Assembly> assemblies
-        ) {
+        )
+        {
             // If you hit this, one of three situations occurred:
             //
             // 1. A test method that uses ExportProvider is not marked with UseExportProviderAttribute (can also be

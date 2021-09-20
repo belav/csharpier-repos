@@ -22,17 +22,19 @@ namespace System.ComponentModel.Composition.ReflectionModel
             CreationPolicy requiredCreationPolicy,
             IDictionary<string, object?> metadata,
             ICompositionElement? origin
-        ) : base(
-            contractName,
-            requiredTypeIdentity,
-            requiredMetadata,
-            cardinality,
-            isRecomposable,
-            isPrerequisite,
-            requiredCreationPolicy,
-            metadata,
-            origin
-        ) {
+        )
+            : base(
+                contractName,
+                requiredTypeIdentity,
+                requiredMetadata,
+                cardinality,
+                isRecomposable,
+                isPrerequisite,
+                requiredCreationPolicy,
+                metadata,
+                origin
+            )
+        {
             if (contractName == null)
             {
                 throw new ArgumentNullException(nameof(contractName));

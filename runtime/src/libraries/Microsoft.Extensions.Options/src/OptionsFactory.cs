@@ -40,7 +40,8 @@ namespace Microsoft.Extensions.Options
             IEnumerable<IConfigureOptions<TOptions>> setups,
             IEnumerable<IPostConfigureOptions<TOptions>> postConfigures,
             IEnumerable<IValidateOptions<TOptions>> validations
-        ) {
+        )
+        {
             _setups = setups as IConfigureOptions<TOptions>[] ?? setups.ToArray();
             _postConfigures =
                 postConfigures as IPostConfigureOptions<TOptions>[] ?? postConfigures.ToArray();

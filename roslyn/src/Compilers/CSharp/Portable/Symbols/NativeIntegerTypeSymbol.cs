@@ -126,7 +126,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                             if (
                                 underlyingProperty.ParameterCount == 0
                                 && underlyingProperty.Name != "Size"
-                            ) {
+                            )
+                            {
                                 var property = new NativeIntegerPropertySymbol(
                                     this,
                                     underlyingProperty,
@@ -238,7 +239,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
 
         private ImmutableArray<NamedTypeSymbol> GetInterfaces(
             ConsList<TypeSymbol>? basesBeingResolved
-        ) {
+        )
+        {
             if (_lazyInterfaces.IsDefault)
             {
                 var interfaces = _underlyingType.InterfacesNoUseSiteDiagnostics(basesBeingResolved)
@@ -326,7 +328,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
 
             internal override ImmutableArray<CustomModifier> SubstituteCustomModifiers(
                 ImmutableArray<CustomModifier> customModifiers
-            ) {
+            )
+            {
                 return customModifiers;
             }
         }
@@ -346,7 +349,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             NativeIntegerTypeSymbol container,
             MethodSymbol underlyingMethod,
             NativeIntegerPropertySymbol? associatedSymbol
-        ) {
+        )
+        {
             Debug.Assert(!underlyingMethod.IsGenericMethod);
             _container = container;
             _associatedSymbol = associatedSymbol;

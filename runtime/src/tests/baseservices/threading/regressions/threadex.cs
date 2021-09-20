@@ -10,7 +10,8 @@ public class ThreadEx
         foreach (
             MethodInfo m in thread.GetType()
                 .GetMethods(BindingFlags.NonPublic | BindingFlags.Instance)
-        ) {
+        )
+        {
             if (m.Name.Equals("AbortInternal") && m.GetParameters().Length == 0)
                 abort = m;
         }

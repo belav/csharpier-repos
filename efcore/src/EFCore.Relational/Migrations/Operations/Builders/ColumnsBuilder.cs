@@ -65,7 +65,8 @@ namespace Microsoft.EntityFrameworkCore.Migrations.Operations.Builders
             int? precision = null,
             int? scale = null,
             bool? stored = null
-        ) {
+        )
+        {
             var operation = new AddColumnOperation
             {
                 Schema = _createTableOperation.Schema,

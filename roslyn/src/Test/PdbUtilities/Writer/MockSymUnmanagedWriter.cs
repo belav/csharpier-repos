@@ -55,7 +55,8 @@ namespace Roslyn.Test.Utilities
             Guid algorithmId,
             ReadOnlySpan<byte> checksum,
             ReadOnlySpan<byte> source
-        ) {
+        )
+        {
             throw MakeException();
         }
 
@@ -63,7 +64,8 @@ namespace Roslyn.Test.Utilities
             string name,
             object value,
             int constantSignatureToken
-        ) {
+        )
+        {
             throw MakeException();
         }
 
@@ -72,7 +74,8 @@ namespace Roslyn.Test.Utilities
             string name,
             int attributes,
             int localSignatureToken
-        ) {
+        )
+        {
             throw MakeException();
         }
 
@@ -84,7 +87,8 @@ namespace Roslyn.Test.Utilities
             int[] startColumns,
             int[] endLines,
             int[] endColumns
-        ) {
+        )
+        {
             throw MakeException();
         }
 
@@ -105,7 +109,8 @@ namespace Roslyn.Test.Utilities
             int startColumn,
             int endLine,
             int endColumn
-        ) {
+        )
+        {
             throw MakeException();
         }
 
@@ -130,7 +135,8 @@ namespace Roslyn.Test.Utilities
             int catchHandlerOffset,
             ReadOnlySpan<int> yieldOffsets,
             ReadOnlySpan<int> resumeOffsets
-        ) {
+        )
+        {
             throw MakeException();
         }
 

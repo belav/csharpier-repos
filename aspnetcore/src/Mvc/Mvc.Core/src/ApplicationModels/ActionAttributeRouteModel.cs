@@ -124,7 +124,8 @@ namespace Microsoft.AspNetCore.Mvc.ApplicationModels
         private static void AddActionConstraints(
             SelectorModel selector,
             IList<IActionConstraintMetadata>? actionConstraints
-        ) {
+        )
+        {
             if (actionConstraints != null)
             {
                 for (var i = 0; i < actionConstraints.Count; i++)
@@ -137,7 +138,8 @@ namespace Microsoft.AspNetCore.Mvc.ApplicationModels
         private static void AddEndpointMetadata(
             SelectorModel selector,
             IList<object>? controllerMetadata
-        ) {
+        )
+        {
             if (controllerMetadata != null)
             {
                 // It is criticial to get the order in which metadata appears in endpoint metadata correct. More significant metadata
@@ -152,7 +154,8 @@ namespace Microsoft.AspNetCore.Mvc.ApplicationModels
 
         public static IEnumerable<(AttributeRouteModel? route, SelectorModel actionSelector, SelectorModel? controllerSelector)> GetAttributeRoutes(
             ActionModel actionModel
-        ) {
+        )
+        {
             var controllerAttributeRoutes = actionModel.Controller.Selectors.Where(
                     sm => sm.AttributeRouteModel != null
                 )

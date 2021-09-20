@@ -43,10 +43,8 @@ namespace System.Management
         /// </summary>
         /// <param name='info'>The <see cref='System.Runtime.Serialization.SerializationInfo'/> to populate with data.</param>
         /// <param name='context'>The destination (see <see cref='System.Runtime.Serialization.StreamingContext'/> ) for this serialization.</param>
-        protected ManagementNamedValueCollection(
-            SerializationInfo info,
-            StreamingContext context
-        ) : base(info, context)
+        protected ManagementNamedValueCollection(SerializationInfo info, StreamingContext context)
+            : base(info, context)
         {
             throw new PlatformNotSupportedException();
         }

@@ -93,7 +93,8 @@ namespace Microsoft.CodeAnalysis.Editor.Tagging
                         currentTags != null
                         && currentTags.GetIntersectingSpans(new SnapshotSpan(caret.Value, 0)).Count
                             > 0
-                    ) {
+                    )
+                    {
                         // Caret is inside a tag.  No need to do anything.
                         return;
                     }
@@ -194,7 +195,8 @@ namespace Microsoft.CodeAnalysis.Editor.Tagging
                     _dataSource.TextChangeBehavior.HasFlag(
                         TaggerTextChangeBehavior.RemoveTagsThatIntersectEdits
                     )
-                ) {
+                )
+                {
                     RemoveTagsThatIntersectEdit(e);
                     return;
                 }
@@ -251,7 +253,8 @@ namespace Microsoft.CodeAnalysis.Editor.Tagging
             private TagSpanIntervalTree<TTag> GetTagTree(
                 ITextSnapshot snapshot,
                 ImmutableDictionary<ITextBuffer, TagSpanIntervalTree<TTag>> tagTrees
-            ) {
+            )
+            {
                 return tagTrees.TryGetValue(snapshot.TextBuffer, out var tagTree)
                   ? tagTree
                   : new TagSpanIntervalTree<TTag>(
@@ -298,7 +301,8 @@ namespace Microsoft.CodeAnalysis.Editor.Tagging
                         originalSpan.Snapshot.TextBuffer,
                         out relatedIntervalTree
                     )
-                ) {
+                )
+                {
                     return false;
                 }
 
@@ -346,7 +350,8 @@ namespace Microsoft.CodeAnalysis.Editor.Tagging
                         FunctionId.Tagger_TagSource_RecomputeTags,
                         CancellationToken.None
                     )
-                ) {
+                )
+                {
                     // Stop any existing work we're currently engaged in
                     _workQueue.CancelCurrentWork();
 
@@ -444,7 +449,8 @@ namespace Microsoft.CodeAnalysis.Editor.Tagging
                 ISet<ITextBuffer> buffersToTag,
                 ILookup<ITextBuffer, ITagSpan<TTag>> newTagsByBuffer,
                 IEnumerable<DocumentSnapshotSpan> spansTagged
-            ) {
+            )
+            {
                 var spansToInvalidateByBuffer = spansTagged.ToLookup(
                     keySelector: span => span.SnapshotSpan.Snapshot.TextBuffer,
                     elementSelector: span => span.SnapshotSpan
@@ -477,7 +483,8 @@ namespace Microsoft.CodeAnalysis.Editor.Tagging
                 ITextBuffer textBuffer,
                 IEnumerable<ITagSpan<TTag>> newTags,
                 IEnumerable<SnapshotSpan> spansToInvalidate
-            ) {
+            )
+            {
                 var noNewTags = newTags.IsEmpty();
                 var noSpansToInvalidate = spansToInvalidate.IsEmpty();
                 oldTagTrees.TryGetValue(textBuffer, out var oldTagTree);
@@ -527,7 +534,8 @@ namespace Microsoft.CodeAnalysis.Editor.Tagging
             private IEnumerable<ITagSpan<TTag>> GetNonIntersectingTagSpans(
                 IEnumerable<SnapshotSpan> spansToInvalidate,
                 TagSpanIntervalTree<TTag> oldTagTree
-            ) {
+            )
+            {
                 var snapshot = spansToInvalidate.First().Snapshot;
 
                 var tagSpansToInvalidate = new List<ITagSpan<TTag>>(
@@ -545,7 +553,8 @@ namespace Microsoft.CodeAnalysis.Editor.Tagging
                 ImmutableDictionary<ITextBuffer, TagSpanIntervalTree<TTag>> oldTagTrees,
                 bool initialTags,
                 CancellationToken cancellationToken
-            ) {
+            )
+            {
                 cancellationToken.ThrowIfCancellationRequested();
 
                 var context = new TaggerContext<TTag>(
@@ -600,7 +609,8 @@ namespace Microsoft.CodeAnalysis.Editor.Tagging
                 ImmutableDictionary<ITextBuffer, TagSpanIntervalTree<TTag>> oldTagTrees,
                 TaggerContext<TTag> context,
                 bool initialTags
-            ) {
+            )
+            {
                 var buffersToTag = context.SpansToTag.Select(
                         dss => dss.SnapshotSpan.Snapshot.TextBuffer
                     )
@@ -635,11 +645,13 @@ namespace Microsoft.CodeAnalysis.Editor.Tagging
                 object newState,
                 bool initialTags,
                 CancellationToken cancellationToken
-            ) {
+            )
+            {
                 var bufferToChanges = new Dictionary<ITextBuffer, DiffResult>();
                 using (
                     Logger.LogBlock(FunctionId.Tagger_TagSource_ProcessNewTags, cancellationToken)
-                ) {
+                )
+                {
                     foreach (var (latestBuffer, latestSpans) in newTagTrees)
                     {
                         var snapshot =
@@ -744,7 +756,8 @@ namespace Microsoft.CodeAnalysis.Editor.Tagging
                 Dictionary<ITextBuffer, DiffResult> bufferToChanges,
                 object newState,
                 bool initialTags
-            ) {
+            )
+            {
                 _workQueue.AssertIsForeground();
 
                 // Now that we're back on the UI thread, we can safely update our state with
@@ -779,7 +792,8 @@ namespace Microsoft.CodeAnalysis.Editor.Tagging
                 ITextSnapshot snapshot,
                 TagSpanIntervalTree<TTag> latestSpans,
                 TagSpanIntervalTree<TTag> previousSpans
-            ) {
+            )
+            {
                 return Difference(
                     latestSpans.GetSpans(snapshot),
                     previousSpans.GetSpans(snapshot),
@@ -807,7 +821,8 @@ namespace Microsoft.CodeAnalysis.Editor.Tagging
             public TagSpanIntervalTree<TTag> GetAccurateTagIntervalTreeForBuffer(
                 ITextBuffer buffer,
                 CancellationToken cancellationToken
-            ) {
+            )
+            {
                 _workQueue.AssertIsForeground();
 
                 if (!this.UpToDate)

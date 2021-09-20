@@ -19,7 +19,8 @@ namespace System.Web.Mvc.Html
             this HtmlHelper html,
             string expression,
             ModelMetadataProvider metadataProvider
-        ) {
+        )
+        {
             return DisplayNameHelper(
                 ModelMetadata.FromStringExpression(expression, html.ViewData, metadataProvider),
                 expression
@@ -34,7 +35,8 @@ namespace System.Web.Mvc.Html
         public static MvcHtmlString DisplayNameFor<TModel, TValue>(
             this HtmlHelper<IEnumerable<TModel>> html,
             Expression<Func<TModel, TValue>> expression
-        ) {
+        )
+        {
             return DisplayNameForInternal(html, expression, metadataProvider: null);
         }
 
@@ -47,7 +49,8 @@ namespace System.Web.Mvc.Html
             this HtmlHelper<IEnumerable<TModel>> html,
             Expression<Func<TModel, TValue>> expression,
             ModelMetadataProvider metadataProvider
-        ) {
+        )
+        {
             return DisplayNameHelper(
                 ModelMetadata.FromLambdaExpression(
                     expression,
@@ -66,7 +69,8 @@ namespace System.Web.Mvc.Html
         public static MvcHtmlString DisplayNameFor<TModel, TValue>(
             this HtmlHelper<TModel> html,
             Expression<Func<TModel, TValue>> expression
-        ) {
+        )
+        {
             return DisplayNameForInternal(html, expression, metadataProvider: null);
         }
 
@@ -74,7 +78,8 @@ namespace System.Web.Mvc.Html
             this HtmlHelper<TModel> html,
             Expression<Func<TModel, TValue>> expression,
             ModelMetadataProvider metadataProvider
-        ) {
+        )
+        {
             return DisplayNameHelper(
                 ModelMetadata.FromLambdaExpression(expression, html.ViewData, metadataProvider),
                 ExpressionHelper.GetExpressionText(expression)
@@ -89,7 +94,8 @@ namespace System.Web.Mvc.Html
         internal static MvcHtmlString DisplayNameHelper(
             ModelMetadata metadata,
             string htmlFieldName
-        ) {
+        )
+        {
             // We don't call ModelMetadata.GetDisplayName here because we want to fall back to the field name rather than the ModelType.
             // This is similar to how the LabelHelpers get the text of a label.
             string resolvedDisplayName =

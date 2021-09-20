@@ -34,7 +34,8 @@ namespace IntelHardwareIntrinsicTest
                         new double[4] { 22, -1, -50, 0 },
                         new double[4]
                     )
-                ) {
+                )
+                {
                     var vf1 = Unsafe.Read<Vector256<float>>(floatTable.inArray1Ptr);
                     var vf2 = Unsafe.Read<Vector256<float>>(floatTable.inArray2Ptr);
                     var vf3 = Avx.UnpackLow(vf1, vf2);
@@ -52,7 +53,8 @@ namespace IntelHardwareIntrinsicTest
                                 && (left[5] == result[6])
                                 && (right[5] == result[7])
                         )
-                    ) {
+                    )
+                    {
                         Console.WriteLine("Avx UnpackLow failed on float:");
                         foreach (var item in floatTable.outArray)
                         {
@@ -75,7 +77,8 @@ namespace IntelHardwareIntrinsicTest
                                 && (left[2] == result[2])
                                 && (right[2] == result[3])
                         )
-                    ) {
+                    )
+                    {
                         Console.WriteLine("Avx UnpackLow failed on double:");
                         foreach (var item in doubleTable.outArray)
                         {

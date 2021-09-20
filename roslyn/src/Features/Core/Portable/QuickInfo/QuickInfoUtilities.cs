@@ -47,7 +47,8 @@ namespace Microsoft.CodeAnalysis.QuickInfo
             bool showAwaitReturn,
             NullableFlowState flowState,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var descriptionService = workspace.Services.GetLanguageServices(semanticModel.Language)
                 .GetRequiredService<ISymbolDisplayService>();
             var groups = await descriptionService.ToDescriptionGroupsAsync(
@@ -78,7 +79,8 @@ namespace Microsoft.CodeAnalysis.QuickInfo
                         SymbolDescriptionGroups.MainDescription,
                         out var mainDescriptionTaggedParts
                     )
-                ) {
+                )
+                {
                     // We'll take the existing message and wrap it with a message saying this was returned from the task.
                     var defaultSymbol = "{0}";
                     var symbolIndex = FeaturesResources.Awaited_task_returns_0.IndexOf(
@@ -104,7 +106,8 @@ namespace Microsoft.CodeAnalysis.QuickInfo
                     SymbolDescriptionGroups.MainDescription,
                     out var mainDescriptionTaggedParts
                 )
-            ) {
+            )
+            {
                 AddSection(QuickInfoSectionKinds.Description, mainDescriptionTaggedParts);
             }
 
@@ -137,7 +140,8 @@ namespace Microsoft.CodeAnalysis.QuickInfo
                     SymbolDescriptionGroups.ReturnsDocumentation,
                     out var returnsDocumentation
                 ) && !returnsDocumentation.IsDefaultOrEmpty
-            ) {
+            )
+            {
                 var builder = ImmutableArray.CreateBuilder<TaggedText>();
                 builder.AddLineBreak();
                 builder.AddRange(returnsDocumentation);
@@ -152,7 +156,8 @@ namespace Microsoft.CodeAnalysis.QuickInfo
                     SymbolDescriptionGroups.ValueDocumentation,
                     out var valueDocumentation
                 ) && !valueDocumentation.IsDefaultOrEmpty
-            ) {
+            )
+            {
                 var builder = ImmutableArray.CreateBuilder<TaggedText>();
                 builder.AddLineBreak();
                 builder.AddRange(valueDocumentation);
@@ -164,7 +169,8 @@ namespace Microsoft.CodeAnalysis.QuickInfo
                     SymbolDescriptionGroups.TypeParameterMap,
                     out var typeParameterMapText
                 )
-            ) {
+            )
+            {
                 var builder = ImmutableArray.CreateBuilder<TaggedText>();
                 builder.AddLineBreak();
                 builder.AddRange(typeParameterMapText);
@@ -236,7 +242,8 @@ namespace Microsoft.CodeAnalysis.QuickInfo
             Workspace workspace,
             IDictionary<SymbolDescriptionGroups, ImmutableArray<TaggedText>> sections,
             SemanticModel semanticModel
-        ) {
+        )
+        {
             if (
                 !workspace.Options.GetOption(
                     QuickInfoOptions.ShowRemarksInQuickInfo,

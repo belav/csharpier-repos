@@ -22,11 +22,8 @@ namespace Castle.Components.DictionaryAdapter
         private readonly object newValue;
         private bool cancel;
 
-        public PropertyChangingEventArgsEx(
-            string propertyName,
-            object oldValue,
-            object newValue
-        ) : base(propertyName)
+        public PropertyChangingEventArgsEx(string propertyName, object oldValue, object newValue)
+            : base(propertyName)
         {
             this.oldValue = oldValue;
             this.newValue = newValue;

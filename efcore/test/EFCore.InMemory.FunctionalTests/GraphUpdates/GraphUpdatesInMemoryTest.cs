@@ -16,136 +16,156 @@ namespace Microsoft.EntityFrameworkCore
         public override void Required_many_to_one_dependents_are_cascade_deleted_in_store(
             CascadeTiming? cascadeDeleteTiming,
             CascadeTiming? deleteOrphansTiming
-        ) {
+        )
+        {
             // FK uniqueness not enforced in in-memory database
         }
 
         public override void Optional_many_to_one_dependents_are_orphaned_in_store(
             CascadeTiming? cascadeDeleteTiming,
             CascadeTiming? deleteOrphansTiming
-        ) {
+        )
+        {
             // FK uniqueness not enforced in in-memory database
         }
 
         public override void Required_many_to_one_dependents_with_alternate_key_are_cascade_deleted_in_store(
             CascadeTiming? cascadeDeleteTiming,
             CascadeTiming? deleteOrphansTiming
-        ) {
+        )
+        {
             // FK uniqueness not enforced in in-memory database
         }
 
         public override void Optional_many_to_one_dependents_with_alternate_key_are_orphaned_in_store(
             CascadeTiming? cascadeDeleteTiming,
             CascadeTiming? deleteOrphansTiming
-        ) {
+        )
+        {
             // FK uniqueness not enforced in in-memory database
         }
 
         public override void Optional_one_to_one_relationships_are_one_to_one(
             CascadeTiming? deleteOrphansTiming
-        ) {
+        )
+        {
             // FK uniqueness not enforced in in-memory database
         }
 
         public override void Required_one_to_one_relationships_are_one_to_one(
             CascadeTiming? deleteOrphansTiming
-        ) {
+        )
+        {
             // FK uniqueness not enforced in in-memory database
         }
 
         public override void Save_required_one_to_one_changed_by_reference(
             ChangeMechanism changeMechanism,
             CascadeTiming? deleteOrphansTiming
-        ) {
+        )
+        {
             // FK uniqueness not enforced in in-memory database
         }
 
         public override void Sever_required_one_to_one(
             ChangeMechanism changeMechanism,
             CascadeTiming? deleteOrphansTiming
-        ) {
+        )
+        {
             // FK uniqueness not enforced in in-memory database
         }
 
         public override void Required_one_to_one_are_cascade_deleted_in_store(
             CascadeTiming? cascadeDeleteTiming,
             CascadeTiming? deleteOrphansTiming
-        ) {
+        )
+        {
             // FK uniqueness not enforced in in-memory database
         }
 
         public override void Required_non_PK_one_to_one_are_cascade_deleted_in_store(
             CascadeTiming? cascadeDeleteTiming,
             CascadeTiming? deleteOrphansTiming
-        ) {
+        )
+        {
             // FK uniqueness not enforced in in-memory database
         }
 
         public override void Optional_one_to_one_are_orphaned_in_store(
             CascadeTiming? cascadeDeleteTiming,
             CascadeTiming? deleteOrphansTiming
-        ) {
+        )
+        {
             // FK uniqueness not enforced in in-memory database
         }
 
         public override void Required_one_to_one_are_cascade_detached_when_Added(
             CascadeTiming? cascadeDeleteTiming,
             CascadeTiming? deleteOrphansTiming
-        ) {
+        )
+        {
             // FK uniqueness not enforced in in-memory database
         }
 
         public override void Required_non_PK_one_to_one_are_cascade_detached_when_Added(
             CascadeTiming? cascadeDeleteTiming,
             CascadeTiming? deleteOrphansTiming
-        ) {
+        )
+        {
             // FK uniqueness not enforced in in-memory database
         }
 
         public override void Optional_one_to_one_with_AK_relationships_are_one_to_one(
             CascadeTiming? deleteOrphansTiming
-        ) {
+        )
+        {
             // FK uniqueness not enforced in in-memory database
         }
 
         public override void Required_one_to_one_with_AK_relationships_are_one_to_one(
             CascadeTiming? deleteOrphansTiming
-        ) {
+        )
+        {
             // FK uniqueness not enforced in in-memory database
         }
 
         public override void Required_one_to_one_with_alternate_key_are_cascade_deleted_in_store(
             CascadeTiming? cascadeDeleteTiming,
             CascadeTiming? deleteOrphansTiming
-        ) {
+        )
+        {
             // FK uniqueness not enforced in in-memory database
         }
 
         public override void Required_non_PK_one_to_one_with_alternate_key_are_cascade_deleted_in_store(
             CascadeTiming? cascadeDeleteTiming,
             CascadeTiming? deleteOrphansTiming
-        ) {
+        )
+        {
             // FK uniqueness not enforced in in-memory database
         }
 
         public override void Optional_one_to_one_with_alternate_key_are_orphaned_in_store(
             CascadeTiming? cascadeDeleteTiming,
             CascadeTiming? deleteOrphansTiming
-        ) {
+        )
+        {
             // FK uniqueness not enforced in in-memory database
         }
 
         public override void Required_non_PK_one_to_one_with_alternate_key_are_cascade_detached_when_Added(
             CascadeTiming? cascadeDeleteTiming,
             CascadeTiming? deleteOrphansTiming
-        ) {
+        )
+        {
             // FK uniqueness not enforced in in-memory database
         }
 
         public override void Required_one_to_one_with_alternate_key_are_cascade_detached_when_Added(
             CascadeTiming? cascadeDeleteTiming,
             CascadeTiming? deleteOrphansTiming
-        ) {
+        )
+        {
             // FK uniqueness not enforced in in-memory database
         }
 
@@ -154,7 +174,8 @@ namespace Microsoft.EntityFrameworkCore
             Action<DbContext> nestedTestOperation1 = null,
             Action<DbContext> nestedTestOperation2 = null,
             Action<DbContext> nestedTestOperation3 = null
-        ) {
+        )
+        {
             base.ExecuteWithStrategyInTransaction(
                 testOperation,
                 nestedTestOperation1,

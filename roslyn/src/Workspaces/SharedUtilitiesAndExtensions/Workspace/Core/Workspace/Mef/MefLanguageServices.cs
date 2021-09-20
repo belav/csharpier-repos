@@ -80,7 +80,8 @@ namespace Microsoft.CodeAnalysis.Host.Mef
         internal bool TryGetService(
             Type serviceType,
             out Lazy<ILanguageService, LanguageServiceMetadata> service
-        ) {
+        )
+        {
             if (!_serviceMap.TryGetValue(serviceType, out service))
             {
                 service = ImmutableInterlocked.GetOrAdd(
@@ -102,7 +103,8 @@ namespace Microsoft.CodeAnalysis.Host.Mef
 
         private Lazy<ILanguageService, LanguageServiceMetadata> PickLanguageService(
             IEnumerable<Lazy<ILanguageService, LanguageServiceMetadata>> services
-        ) {
+        )
+        {
             Lazy<ILanguageService, LanguageServiceMetadata> service;
 #if !CODE_STYLE
             // test layer overrides everything else
@@ -149,7 +151,8 @@ namespace Microsoft.CodeAnalysis.Host.Mef
             string layer,
             IEnumerable<Lazy<ILanguageService, LanguageServiceMetadata>> services,
             out Lazy<ILanguageService, LanguageServiceMetadata> service
-        ) {
+        )
+        {
             service = services.SingleOrDefault(lz => lz.Metadata.Layer == layer);
             return service != null;
         }

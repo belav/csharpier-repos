@@ -1524,7 +1524,8 @@ namespace Microsoft.AspNetCore.Authentication.Test.OpenIdConnect
                 string securityToken,
                 TokenValidationParameters validationParameters,
                 out SecurityToken validatedToken
-            ) {
+            )
+            {
                 Assert.Equal("my_id_token", securityToken);
                 validatedToken = new JwtSecurityToken();
                 return new ClaimsPrincipal(new ClaimsIdentity("customAuthType"));
@@ -1551,14 +1552,16 @@ namespace Microsoft.AspNetCore.Authentication.Test.OpenIdConnect
             protected override Task<HttpResponseMessage> SendAsync(
                 HttpRequestMessage request,
                 CancellationToken cancellationToken
-            ) {
+            )
+            {
                 if (
                     string.Equals(
                         "/tokens",
                         request.RequestUri.AbsolutePath,
                         StringComparison.Ordinal
                     )
-                ) {
+                )
+                {
                     return Task.FromResult(
                         new HttpResponseMessage()
                         {
@@ -1576,7 +1579,8 @@ namespace Microsoft.AspNetCore.Authentication.Test.OpenIdConnect
                         request.RequestUri.AbsolutePath,
                         StringComparison.Ordinal
                     )
-                ) {
+                )
+                {
                     return Task.FromResult(
                         new HttpResponseMessage()
                         {

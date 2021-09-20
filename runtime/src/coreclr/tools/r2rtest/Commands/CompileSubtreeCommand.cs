@@ -65,7 +65,8 @@ namespace R2RTest
                 relativePathOffset > 0
                 && options.InputDirectory.FullName[relativePathOffset - 1]
                     != Path.DirectorySeparatorChar
-            ) {
+            )
+            {
                 relativePathOffset++;
             }
 
@@ -168,12 +169,14 @@ namespace R2RTest
             string coreRootFolder,
             string testHostFolder,
             ConcurrentBag<string> directories
-        ) {
+        )
+        {
             if (
                 !Path.GetExtension(folder).Equals(".out", StringComparison.OrdinalIgnoreCase)
                 && !folder.Equals(coreRootFolder, StringComparison.OrdinalIgnoreCase)
                 && !folder.Equals(testHostFolder, StringComparison.OrdinalIgnoreCase)
-            ) {
+            )
+            {
                 directories.Add(folder);
                 List<Task> subfolderTasks = new List<Task>();
                 foreach (string subdir in Directory.EnumerateDirectories(folder))

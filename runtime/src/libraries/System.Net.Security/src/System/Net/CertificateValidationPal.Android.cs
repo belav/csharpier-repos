@@ -16,7 +16,8 @@ namespace System.Net
             bool checkCertName,
             bool isServer,
             string? hostName
-        ) {
+        )
+        {
             if (remoteCertificate == null)
                 return SslPolicyErrors.RemoteCertificateNotAvailable;
 
@@ -30,7 +31,8 @@ namespace System.Net
                 SafeDeleteSslContext sslContext = (SafeDeleteSslContext)securityContext;
                 if (
                     !Interop.AndroidCrypto.SSLStreamVerifyHostname(sslContext.SslContext, hostName!)
-                ) {
+                )
+                {
                     errors |= SslPolicyErrors.RemoteCertificateNameMismatch;
                 }
             }
@@ -49,7 +51,8 @@ namespace System.Net
         internal static X509Certificate2? GetRemoteCertificate(
             SafeDeleteContext? securityContext,
             out X509Certificate2Collection? remoteCertificateStore
-        ) {
+        )
+        {
             if (securityContext == null)
             {
                 remoteCertificateStore = null;
@@ -63,7 +66,8 @@ namespace System.Net
         private static X509Certificate2? GetRemoteCertificate(
             SafeDeleteContext securityContext,
             X509Certificate2Collection? remoteCertificateStore
-        ) {
+        )
+        {
             if (securityContext == null)
                 return null;
 
@@ -79,7 +83,8 @@ namespace System.Net
                     SafeX509Handle handle = Interop.AndroidCrypto.SSLStreamGetPeerCertificate(
                         sslContext
                     )
-                ) {
+                )
+                {
                     if (!handle.IsInvalid)
                     {
                         cert = new X509Certificate2(handle.DangerousGetHandle());

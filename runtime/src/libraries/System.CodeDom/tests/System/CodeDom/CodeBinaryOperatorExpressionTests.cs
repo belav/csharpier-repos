@@ -47,7 +47,8 @@ namespace System.CodeDom.Tests
             CodeExpression left,
             CodeBinaryOperatorType operatorType,
             CodeExpression right
-        ) {
+        )
+        {
             var binaryOperator = new CodeBinaryOperatorExpression(left, operatorType, right);
             Assert.Equal(left, binaryOperator.Left);
             Assert.Equal(operatorType, binaryOperator.Operator);

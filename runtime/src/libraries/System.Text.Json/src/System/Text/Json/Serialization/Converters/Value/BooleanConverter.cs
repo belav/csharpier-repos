@@ -11,7 +11,8 @@ namespace System.Text.Json.Serialization.Converters
             ref Utf8JsonReader reader,
             Type typeToConvert,
             JsonSerializerOptions options
-        ) {
+        )
+        {
             return reader.GetBoolean();
         }
 
@@ -26,7 +27,8 @@ namespace System.Text.Json.Serialization.Converters
             if (
                 Utf8Parser.TryParse(propertyName, out bool value, out int bytesConsumed)
                 && propertyName.Length == bytesConsumed
-            ) {
+            )
+            {
                 return value;
             }
 
@@ -38,7 +40,8 @@ namespace System.Text.Json.Serialization.Converters
             bool value,
             JsonSerializerOptions options,
             ref WriteStack state
-        ) {
+        )
+        {
             writer.WritePropertyName(value);
         }
     }

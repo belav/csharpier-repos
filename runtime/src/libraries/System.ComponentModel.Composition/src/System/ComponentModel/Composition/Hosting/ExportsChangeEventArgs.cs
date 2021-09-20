@@ -45,7 +45,8 @@ namespace System.ComponentModel.Composition.Hosting
             IEnumerable<ExportDefinition> addedExports,
             IEnumerable<ExportDefinition> removedExports,
             AtomicComposition? atomicComposition
-        ) {
+        )
+        {
             Requires.NotNull(addedExports, nameof(addedExports));
             Requires.NotNull(removedExports, nameof(removedExports));
 

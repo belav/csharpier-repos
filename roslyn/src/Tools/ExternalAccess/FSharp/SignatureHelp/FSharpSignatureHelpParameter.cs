@@ -66,7 +66,8 @@ namespace Microsoft.CodeAnalysis.ExternalAccess.FSharp.SignatureHelp
             IEnumerable<TaggedText> prefixDisplayParts = null,
             IEnumerable<TaggedText> suffixDisplayParts = null,
             IEnumerable<TaggedText> selectedDisplayParts = null
-        ) {
+        )
+        {
             this.Name = name ?? string.Empty;
             this.IsOptional = isOptional;
             this.DocumentationFactory = documentationFactory ?? s_emptyDocumentationFactory;

@@ -11,7 +11,8 @@ namespace Microsoft.AspNetCore.Analyzers
         public MiddlewareAnalysis(
             IMethodSymbol configureMethod,
             ImmutableArray<MiddlewareItem> middleware
-        ) {
+        )
+        {
             ConfigureMethod = configureMethod;
             Middleware = middleware;
         }

@@ -47,7 +47,8 @@ namespace Microsoft.Extensions.Logging
         public static ILoggingBuilder AddConsole(
             this ILoggingBuilder builder,
             Action<ConsoleLoggerOptions> configure
-        ) {
+        )
+        {
             if (configure == null)
             {
                 throw new ArgumentNullException(nameof(configure));
@@ -74,7 +75,8 @@ namespace Microsoft.Extensions.Logging
         public static ILoggingBuilder AddSimpleConsole(
             this ILoggingBuilder builder,
             Action<SimpleConsoleFormatterOptions> configure
-        ) {
+        )
+        {
             return builder.AddConsoleWithFormatter<SimpleConsoleFormatterOptions>(
                 ConsoleFormatterNames.Simple,
                 configure
@@ -96,7 +98,8 @@ namespace Microsoft.Extensions.Logging
         public static ILoggingBuilder AddJsonConsole(
             this ILoggingBuilder builder,
             Action<JsonConsoleFormatterOptions> configure
-        ) {
+        )
+        {
             return builder.AddConsoleWithFormatter<JsonConsoleFormatterOptions>(
                 ConsoleFormatterNames.Json,
                 configure
@@ -111,7 +114,8 @@ namespace Microsoft.Extensions.Logging
         public static ILoggingBuilder AddSystemdConsole(
             this ILoggingBuilder builder,
             Action<ConsoleFormatterOptions> configure
-        ) {
+        )
+        {
             return builder.AddConsoleWithFormatter<ConsoleFormatterOptions>(
                 ConsoleFormatterNames.Systemd,
                 configure
@@ -188,11 +192,9 @@ namespace Microsoft.Extensions.Logging
             [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicConstructors)]
                 TFormatter,
             TOptions
-        >(
-            this ILoggingBuilder builder,
-            Action<TOptions> configure
-        ) where TOptions : ConsoleFormatterOptions
-          where TFormatter : ConsoleFormatter
+        >(this ILoggingBuilder builder, Action<TOptions> configure)
+            where TOptions : ConsoleFormatterOptions
+            where TFormatter : ConsoleFormatter
         {
             if (configure == null)
             {

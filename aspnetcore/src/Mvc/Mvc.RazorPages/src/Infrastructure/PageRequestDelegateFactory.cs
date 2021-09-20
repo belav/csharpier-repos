@@ -41,7 +41,8 @@ namespace Microsoft.AspNetCore.Mvc.RazorPages.Infrastructure
             ILoggerFactory loggerFactory,
             IActionResultTypeMapper mapper,
             IActionContextAccessor actionContextAccessor = null
-        ) {
+        )
+        {
             _cache = cache;
             _valueProviderFactories = mvcOptions.Value.ValueProviderFactories.ToArray();
             _modelMetadataProvider = modelMetadataProvider;
@@ -58,7 +59,8 @@ namespace Microsoft.AspNetCore.Mvc.RazorPages.Infrastructure
         public RequestDelegate CreateRequestDelegate(
             ActionDescriptor actionDescriptor,
             RouteValueDictionary dataTokens
-        ) {
+        )
+        {
             if (_enableActionInvokers || actionDescriptor is not CompiledPageActionDescriptor page)
             {
                 return null;

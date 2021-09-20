@@ -470,7 +470,8 @@ namespace Microsoft.AspNetCore.Authentication.Negotiate
         private static async Task KerberosStage1And2Auth(
             TestServer server,
             TestConnection testConnection
-        ) {
+        )
+        {
             await KerberosStage1Auth(server, testConnection);
             await KerberosStage2Auth(server, testConnection);
         }
@@ -478,7 +479,8 @@ namespace Microsoft.AspNetCore.Authentication.Negotiate
         private static async Task KerberosStage1Auth(
             TestServer server,
             TestConnection testConnection
-        ) {
+        )
+        {
             var result = await SendAsync(
                 server,
                 "/Authenticate",
@@ -495,7 +497,8 @@ namespace Microsoft.AspNetCore.Authentication.Negotiate
         private static async Task KerberosStage2Auth(
             TestServer server,
             TestConnection testConnection
-        ) {
+        )
+        {
             var result = await SendAsync(
                 server,
                 "/Authenticate",
@@ -511,7 +514,8 @@ namespace Microsoft.AspNetCore.Authentication.Negotiate
 
         private static async Task<IHost> CreateHostAsync(
             Action<NegotiateOptions> configureOptions = null
-        ) {
+        )
+        {
             var builder = new HostBuilder().ConfigureServices(
                     services =>
                         services.AddRouting()
@@ -576,7 +580,8 @@ namespace Microsoft.AspNetCore.Authentication.Negotiate
             string path,
             TestConnection connection,
             string authorizationHeader = null
-        ) {
+        )
+        {
             return server.SendAsync(
                 context =>
                 {
@@ -651,7 +656,8 @@ namespace Microsoft.AspNetCore.Authentication.Negotiate
                 string incomingBlob,
                 out BlobErrorType errorType,
                 out Exception ex
-            ) {
+            )
+            {
                 if (IsDisposed)
                 {
                     throw new ObjectDisposedException(nameof(TestNegotiateState));

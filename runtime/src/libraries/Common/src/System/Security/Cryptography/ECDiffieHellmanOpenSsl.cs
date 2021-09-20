@@ -95,7 +95,8 @@ namespace System.Security.Cryptography
                 ReadOnlySpan<byte> passwordBytes,
                 ReadOnlySpan<byte> source,
                 out int bytesRead
-            ) {
+            )
+            {
                 ThrowIfDisposed();
                 base.ImportEncryptedPkcs8PrivateKey(passwordBytes, source, out bytesRead);
             }
@@ -104,7 +105,8 @@ namespace System.Security.Cryptography
                 ReadOnlySpan<char> password,
                 ReadOnlySpan<byte> source,
                 out int bytesRead
-            ) {
+            )
+            {
                 ThrowIfDisposed();
                 base.ImportEncryptedPkcs8PrivateKey(password, source, out bytesRead);
             }

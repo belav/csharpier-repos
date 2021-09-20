@@ -20,7 +20,8 @@ namespace Microsoft.CodeAnalysis.AddConstructorParametersFromMembers
                 IMethodSymbol constructor,
                 ImmutableArray<ISymbol> missingMembers,
                 ImmutableArray<IParameterSymbol> missingParameters
-            ) {
+            )
+            {
                 Constructor = constructor;
                 MissingMembers = missingMembers;
                 MissingParameters = missingParameters;

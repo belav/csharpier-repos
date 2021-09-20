@@ -61,7 +61,8 @@ namespace Microsoft.EntityFrameworkCore.Cosmos.Query.Internal
         public virtual SqlExpression ApplyTypeMapping(
             SqlExpression sqlExpression,
             CoreTypeMapping typeMapping
-        ) {
+        )
+        {
             if (sqlExpression == null || sqlExpression.TypeMapping != null)
             {
                 return sqlExpression;
@@ -97,7 +98,8 @@ namespace Microsoft.EntityFrameworkCore.Cosmos.Query.Internal
         private SqlExpression ApplyTypeMappingOnSqlConditional(
             SqlConditionalExpression sqlConditionalExpression,
             CoreTypeMapping typeMapping
-        ) {
+        )
+        {
             return sqlConditionalExpression.Update(
                 sqlConditionalExpression.Test,
                 ApplyTypeMapping(sqlConditionalExpression.IfTrue, typeMapping),
@@ -108,7 +110,8 @@ namespace Microsoft.EntityFrameworkCore.Cosmos.Query.Internal
         private SqlExpression ApplyTypeMappingOnSqlUnary(
             SqlUnaryExpression sqlUnaryExpression,
             CoreTypeMapping typeMapping
-        ) {
+        )
+        {
             SqlExpression operand;
             Type resultType;
             CoreTypeMapping resultTypeMapping;
@@ -159,7 +162,8 @@ namespace Microsoft.EntityFrameworkCore.Cosmos.Query.Internal
         private SqlExpression ApplyTypeMappingOnSqlBinary(
             SqlBinaryExpression sqlBinaryExpression,
             CoreTypeMapping typeMapping
-        ) {
+        )
+        {
             var left = sqlBinaryExpression.Left;
             var right = sqlBinaryExpression.Right;
 
@@ -255,7 +259,8 @@ namespace Microsoft.EntityFrameworkCore.Cosmos.Query.Internal
             SqlExpression left,
             SqlExpression right,
             CoreTypeMapping typeMapping
-        ) {
+        )
+        {
             var returnType = left.Type;
             switch (operatorType)
             {
@@ -442,7 +447,8 @@ namespace Microsoft.EntityFrameworkCore.Cosmos.Query.Internal
             SqlExpression operand,
             Type type,
             CoreTypeMapping typeMapping = null
-        ) {
+        )
+        {
             return (SqlUnaryExpression)ApplyTypeMapping(
                 new SqlUnaryExpression(operatorType, operand, type, null),
                 typeMapping
@@ -508,7 +514,8 @@ namespace Microsoft.EntityFrameworkCore.Cosmos.Query.Internal
             IEnumerable<SqlExpression> arguments,
             Type returnType,
             CoreTypeMapping typeMapping = null
-        ) {
+        )
+        {
             var typeMappedArguments = new List<SqlExpression>();
 
             foreach (var argument in arguments)
@@ -534,7 +541,8 @@ namespace Microsoft.EntityFrameworkCore.Cosmos.Query.Internal
             SqlExpression test,
             SqlExpression ifTrue,
             SqlExpression ifFalse
-        ) {
+        )
+        {
             var typeMapping = ExpressionExtensions.InferTypeMapping(ifTrue, ifFalse);
 
             return new SqlConditionalExpression(

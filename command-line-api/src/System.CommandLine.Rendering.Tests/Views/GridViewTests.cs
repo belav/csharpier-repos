@@ -134,7 +134,8 @@ namespace System.CommandLine.Rendering.Tests.Views
         [InlineData(OutputMode.NonAnsi)]
         public void Size_to_content_grid_with_wide_region_adjusts_to_content_size(
             OutputMode outputMode
-        ) {
+        )
+        {
             var grid = new GridView();
             grid.SetColumns(ColumnDefinition.SizeToContent(), ColumnDefinition.SizeToContent());
             grid.SetRows(RowDefinition.SizeToContent(), RowDefinition.SizeToContent());
@@ -165,7 +166,8 @@ namespace System.CommandLine.Rendering.Tests.Views
         [InlineData(OutputMode.NonAnsi)]
         public void Size_to_content_grid_with_narrow_region_increases_row_height(
             OutputMode outputMode
-        ) {
+        )
+        {
             var grid = new GridView();
             grid.SetColumns(ColumnDefinition.SizeToContent(), ColumnDefinition.SizeToContent());
             grid.SetRows(RowDefinition.SizeToContent(), RowDefinition.SizeToContent());

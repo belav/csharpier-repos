@@ -33,7 +33,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Tests
             string address,
             string expectedAddress,
             int expectedPort
-        ) {
+        )
+        {
             Assert.True(
                 AddressBinder.TryCreateIPEndPoint(BindingAddress.Parse(address), out var endpoint)
             );

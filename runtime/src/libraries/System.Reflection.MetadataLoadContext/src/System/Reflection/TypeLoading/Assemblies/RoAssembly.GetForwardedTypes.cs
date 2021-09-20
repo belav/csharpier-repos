@@ -21,7 +21,8 @@ namespace System.Reflection.TypeLoading
                     RoAssembly redirectedAssembly,
                     ReadOnlySpan<byte> ns,
                     ReadOnlySpan<byte> name
-                ) {
+                )
+                {
                     Type? type = null;
                     Exception? exception = null;
                     if (redirectedAssembly is RoExceptionAssembly exceptionAssembly)

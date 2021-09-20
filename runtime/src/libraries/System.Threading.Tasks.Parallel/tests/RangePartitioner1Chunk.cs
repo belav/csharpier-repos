@@ -306,7 +306,8 @@ namespace System.Threading.Tasks.Tests
         private static void VerifyAggregateException(
             AggregateException aggregatEx,
             Exception userException
-        ) {
+        )
+        {
             Assert.Contains(userException, aggregatEx.InnerExceptions);
             Assert.Equal(1, aggregatEx.Flatten().InnerExceptions.Count);
         }

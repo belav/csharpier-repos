@@ -113,7 +113,8 @@ namespace System.Diagnostics
             bool isRemoteMachine,
             int processId,
             ProcessInfo? processInfo
-        ) {
+        )
+        {
             GC.SuppressFinalize(this);
             _processInfo = processInfo;
             _machineName = machineName;
@@ -890,7 +891,8 @@ namespace System.Diagnostics
                             _outputStreamReadMode == StreamReadMode.AsyncMode
                             || _outputStreamReadMode == StreamReadMode.Undefined
                         )
-                    ) {
+                    )
+                    {
                         if (_outputStreamReadMode == StreamReadMode.AsyncMode)
                         {
                             _output?.CancelOperation();
@@ -905,7 +907,8 @@ namespace System.Diagnostics
                             _errorStreamReadMode == StreamReadMode.AsyncMode
                             || _errorStreamReadMode == StreamReadMode.Undefined
                         )
-                    ) {
+                    )
+                    {
                         if (_errorStreamReadMode == StreamReadMode.AsyncMode)
                         {
                             _error?.CancelOperation();
@@ -1526,7 +1529,8 @@ namespace System.Diagnostics
                                 ((TaskCompletionSource)s!).TrySetCanceled(cancellationToken),
                             tcs
                         )
-                    ) {
+                    )
+                    {
                         await tcs.Task.ConfigureAwait(false);
                     }
                 }

@@ -44,7 +44,8 @@ namespace Microsoft.CodeAnalysis.Emit.NoPia
             protected CommonEmbeddedTypeParameter(
                 TEmbeddedMethod containingMethod,
                 TTypeParameterSymbol underlyingTypeParameter
-            ) {
+            )
+            {
                 this.ContainingMethod = containingMethod;
                 this.UnderlyingTypeParameter = underlyingTypeParameter;
             }
@@ -65,7 +66,8 @@ namespace Microsoft.CodeAnalysis.Emit.NoPia
 
             IEnumerable<Cci.TypeReferenceWithAttributes> Cci.IGenericParameter.GetConstraints(
                 EmitContext context
-            ) {
+            )
+            {
                 return GetConstraints(context);
             }
 
@@ -145,7 +147,8 @@ namespace Microsoft.CodeAnalysis.Emit.NoPia
 
             Cci.INamespaceTypeDefinition Cci.ITypeReference.AsNamespaceTypeDefinition(
                 EmitContext context
-            ) {
+            )
+            {
                 return null;
             }
 

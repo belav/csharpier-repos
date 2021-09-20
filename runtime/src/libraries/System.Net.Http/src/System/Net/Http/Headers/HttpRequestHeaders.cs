@@ -101,7 +101,8 @@ namespace System.Net.Http.Headers
                         KnownHeaders.Expect.Descriptor,
                         HeaderUtilities.ExpectContinue
                     )
-                ) {
+                )
+                {
                     if (ExpectCore.IsSpecialValueSet)
                     {
                         return true;
@@ -164,7 +165,8 @@ namespace System.Net.Http.Headers
                     && (
                         HttpRuleParser.GetHostLength(value, 0, false, out string? _) != value.Length
                     )
-                ) {
+                )
+                {
                     throw new FormatException(SR.net_http_headers_invalid_host_header);
                 }
                 SetOrRemoveParsedValue(KnownHeaders.Host.Descriptor, value);

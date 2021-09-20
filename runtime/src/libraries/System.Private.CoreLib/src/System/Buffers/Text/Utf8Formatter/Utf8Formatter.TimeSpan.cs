@@ -32,7 +32,8 @@ namespace System.Buffers.Text
             Span<byte> destination,
             out int bytesWritten,
             StandardFormat format = default
-        ) {
+        )
+        {
             char symbol = FormattingHelpers.GetSymbolOrDefault(format, 'c');
 
             switch (symbol)

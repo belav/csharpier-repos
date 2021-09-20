@@ -67,7 +67,8 @@ namespace System.Web.WebPages.Deployment
             string path,
             NameValueCollection configuration,
             IFileSystem fileSystem
-        ) {
+        )
+        {
             if (String.IsNullOrEmpty(path))
             {
                 throw new ArgumentException(
@@ -171,7 +172,8 @@ namespace System.Web.WebPages.Deployment
             IFileSystem fileSystem,
             string path,
             NameValueCollection appSettings
-        ) {
+        )
+        {
             bool? enabled = GetEnabled(appSettings);
             if (!enabled.HasValue)
             {
@@ -207,7 +209,8 @@ namespace System.Web.WebPages.Deployment
             NameValueCollection appSettings,
             Version binVersion,
             Version defaultVersion
-        ) {
+        )
+        {
             // Return version values with the following precedence:
             // 1) Version in config
             // 2) Version in bin
@@ -218,7 +221,8 @@ namespace System.Web.WebPages.Deployment
         private static Version GetVersionWithoutEnabledCheckInternal(
             string path,
             Version defaultVersion
-        ) {
+        )
+        {
             if (String.IsNullOrEmpty(path))
             {
                 throw new ArgumentException(

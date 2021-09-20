@@ -293,7 +293,8 @@ namespace Microsoft.AspNetCore.Antiforgery.Internal
             bool isRequestSecure,
             CookieSecurePolicy policy,
             bool? expectedCookieSecureFlag
-        ) {
+        )
+        {
             // Arrange
             var token = "serialized-value";
             bool defaultCookieSecureValue = expectedCookieSecureFlag ?? false; // pulled from config; set by ctor
@@ -332,7 +333,8 @@ namespace Microsoft.AspNetCore.Antiforgery.Internal
         public void SaveCookieToken_SetsCookieWithApproriatePathBase(
             string requestPathBase,
             string expectedCookiePath
-        ) {
+        )
+        {
             // Arrange
             var token = "serialized-value";
             var cookies = new MockResponseCookieCollection();

@@ -102,7 +102,8 @@ namespace System.ComponentModel.Tests
             DescriptionAttribute attribute,
             object other,
             bool expected
-        ) {
+        )
+        {
             Assert.Equal(expected, attribute.Equals(other));
             if (other is DescriptionAttribute otherAttribute)
             {

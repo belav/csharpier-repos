@@ -48,7 +48,8 @@ namespace Microsoft.AspNetCore.HostFiltering
             RequestDelegate next,
             ILogger<HostFilteringMiddleware> logger,
             IOptionsMonitor<HostFilteringOptions> optionsMonitor
-        ) {
+        )
+        {
             _next = next ?? throw new ArgumentNullException(nameof(next));
             _logger = logger ?? throw new ArgumentNullException(nameof(logger));
             _optionsMonitor =
@@ -113,7 +114,8 @@ namespace Microsoft.AspNetCore.HostFiltering
             if (
                 _options.AllowedHosts?.Count > 0
                 && !TryProcessHosts(_options.AllowedHosts, allowedHosts)
-            ) {
+            )
+            {
                 _logger.WildcardDetected();
                 _allowedHosts = allowedHosts;
                 _allowAnyNonEmptyHost = true;

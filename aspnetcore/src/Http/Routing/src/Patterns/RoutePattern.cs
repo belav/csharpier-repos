@@ -44,7 +44,8 @@ namespace Microsoft.AspNetCore.Routing.Patterns
             IReadOnlyDictionary<string, object?> requiredValues,
             IReadOnlyList<RoutePatternParameterPart> parameters,
             IReadOnlyList<RoutePatternPathSegment> pathSegments
-        ) {
+        )
+        {
             Debug.Assert(defaults != null);
             Debug.Assert(parameterPolicies != null);
             Debug.Assert(parameters != null);

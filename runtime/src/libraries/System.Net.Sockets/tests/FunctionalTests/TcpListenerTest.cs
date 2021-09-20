@@ -192,7 +192,8 @@ namespace System.Net.Sockets.Tests
                               null
                           ),
                     }
-                ) {
+                )
+                {
                     Assert.False(listener.Pending());
                 }
                 await connectTask;
@@ -216,7 +217,8 @@ namespace System.Net.Sockets.Tests
                               null
                           ),
                     }
-                ) {
+                )
+                {
                     Assert.False(listener.Pending());
                 }
                 await connectTask;

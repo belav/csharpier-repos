@@ -71,11 +71,13 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Builders
             IConventionEntityType entityType,
             object? value,
             bool fromDataAnnotation = false
-        ) {
+        )
+        {
             if (
                 !EntityType.IsAssignableFrom(entityType)
                 && !entityType.Builder.CanSetBaseType(EntityType, fromDataAnnotation)
-            ) {
+            )
+            {
                 return false;
             }
 

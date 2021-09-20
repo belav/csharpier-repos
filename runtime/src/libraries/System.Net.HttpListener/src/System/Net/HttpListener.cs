@@ -133,7 +133,8 @@ namespace System.Net
                         7,
                         StringComparison.OrdinalIgnoreCase
                     ) == 0
-                ) {
+                )
+                {
                     i = 7;
                 }
                 else if (
@@ -145,7 +146,8 @@ namespace System.Net
                         8,
                         StringComparison.OrdinalIgnoreCase
                     ) == 0
-                ) {
+                )
+                {
                     i = 8;
                 }
                 else
@@ -158,7 +160,8 @@ namespace System.Net
                     j < uriPrefix.Length
                     && uriPrefix[j] != '/'
                     && (uriPrefix[j] != ':' || inSquareBrakets)
-                ) {
+                )
+                {
                     if (uriPrefix[j] == '[')
                     {
                         if (inSquareBrakets)

@@ -87,7 +87,8 @@ namespace System.Reflection.Metadata.Ecma335
             int stringHeapStartOffset = 0,
             int blobHeapStartOffset = 0,
             int guidHeapStartOffset = 0
-        ) {
+        )
+        {
             // -1 for the 0 we always write at the beginning of the heap:
             if (userStringHeapStartOffset >= UserStringHeapSizeLimit - 1)
             {
@@ -543,7 +544,8 @@ namespace System.Reflection.Metadata.Ecma335
             BlobBuilder heapBuilder,
             Dictionary<string, StringHandle> strings,
             int stringHeapStartOffset
-        ) {
+        )
+        {
             // Sort by suffix and remove stringIndex
             var sorted = new List<KeyValuePair<string, StringHandle>>(strings);
             sorted.Sort(SuffixSort.Instance);
@@ -566,7 +568,8 @@ namespace System.Reflection.Metadata.Ecma335
                 if (
                     prev.EndsWith(entry.Key, StringComparison.Ordinal)
                     && !BlobUtilities.IsLowSurrogateChar(entry.Key[0])
-                ) {
+                )
+                {
                     // Map over the tail of prev string. Watch for null-terminator of prev string.
                     stringVirtualIndexToHeapOffsetMap[entry.Value.GetWriterVirtualIndex()] =
                         position - (BlobUtilities.GetUTF8ByteCount(entry.Key) + 1);
@@ -596,7 +599,8 @@ namespace System.Reflection.Metadata.Ecma335
             public int Compare(
                 KeyValuePair<string, StringHandle> xPair,
                 KeyValuePair<string, StringHandle> yPair
-            ) {
+            )
+            {
                 string x = xPair.Key;
                 string y = yPair.Key;
 

@@ -24,7 +24,8 @@ namespace LocalizationWebsite
             IApplicationBuilder app,
             ILoggerFactory loggerFactory,
             IStringLocalizerFactory stringLocalizerFactory
-        ) {
+        )
+        {
             var supportedCultures = new List<CultureInfo>()
             {
                 new CultureInfo("en-US"),

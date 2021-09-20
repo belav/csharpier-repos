@@ -37,7 +37,8 @@ namespace AutoMapper
             Type destinationType,
             ProfileMap profile,
             bool isReverseMap = false
-        ) {
+        )
+        {
             Types = new(sourceType, destinationType);
             Profile = profile;
             SourceTypeDetails = profile.CreateTypeDetails(sourceType);
@@ -56,7 +57,8 @@ namespace AutoMapper
                         sourceMembers,
                         isReverseMap
                     )
-                ) {
+                )
+                {
                     AddPropertyMap(destinationProperty, propertyType, sourceMembers);
                 }
             }
@@ -75,7 +77,8 @@ namespace AutoMapper
             LambdaExpression destinationExpression,
             MemberPath path,
             TypeMap typeMap
-        ) {
+        )
+        {
             _pathMaps ??= new();
             var pathMap = _pathMaps.GetOrDefault(path);
             if (pathMap == null)
@@ -205,7 +208,8 @@ namespace AutoMapper
             MemberInfo destProperty,
             Type destinationPropertyType,
             IEnumerable<MemberInfo> sourceMembers
-        ) {
+        )
+        {
             var propertyMap = new PropertyMap(destProperty, destinationPropertyType, this);
 
             propertyMap.MapByConvention(sourceMembers);
@@ -268,7 +272,8 @@ namespace AutoMapper
         public PropertyMap FindOrCreatePropertyMapFor(
             MemberInfo destinationProperty,
             Type destinationPropertyType
-        ) {
+        )
+        {
             var propertyMap = GetPropertyMap(destinationProperty.Name);
             if (propertyMap != null)
                 return propertyMap;
@@ -320,14 +325,16 @@ namespace AutoMapper
         }
         public void AddValueTransformation(
             ValueTransformerConfiguration valueTransformerConfiguration
-        ) {
+        )
+        {
             _valueTransformerConfigs ??= new();
             _valueTransformerConfigs.Add(valueTransformerConfiguration);
         }
         public void Seal(
             IGlobalConfiguration configurationProvider,
             HashSet<TypeMap> typeMapsPath = null
-        ) {
+        )
+        {
             if (_sealed)
             {
                 return;

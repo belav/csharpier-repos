@@ -80,7 +80,8 @@ namespace System.Net.Http.Tests
             int startIndex,
             StringWithQualityHeaderValue expectedResult,
             int expectedIndex
-        ) {
+        )
+        {
             HttpHeaderParser parser = GenericHeaderParser.MultipleValueStringWithQualityParser;
             object result = null;
             Assert.True(

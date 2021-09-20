@@ -18,10 +18,8 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking
         ///     doing so can result in application failures when updating to a new Entity Framework Core release.
         /// </summary>
         [EntityFrameworkInternal]
-        public EntityTrackedEventArgs(
-            InternalEntityEntry internalEntityEntry,
-            bool fromQuery
-        ) : base(internalEntityEntry)
+        public EntityTrackedEventArgs(InternalEntityEntry internalEntityEntry, bool fromQuery)
+            : base(internalEntityEntry)
         {
             FromQuery = fromQuery;
         }

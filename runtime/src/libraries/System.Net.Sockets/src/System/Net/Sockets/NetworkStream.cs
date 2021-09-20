@@ -390,7 +390,8 @@ namespace System.Net.Sockets
             int count,
             AsyncCallback? callback,
             object? state
-        ) {
+        )
+        {
             ValidateBufferArguments(buffer, offset, count);
             ThrowIfDisposed();
             if (!CanRead)
@@ -463,7 +464,8 @@ namespace System.Net.Sockets
             int count,
             AsyncCallback? callback,
             object? state
-        ) {
+        )
+        {
             ValidateBufferArguments(buffer, offset, count);
             ThrowIfDisposed();
             if (!CanWrite)
@@ -533,7 +535,8 @@ namespace System.Net.Sockets
             int offset,
             int count,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             ValidateBufferArguments(buffer, offset, count);
             ThrowIfDisposed();
             if (!CanRead)
@@ -560,7 +563,8 @@ namespace System.Net.Sockets
         public override ValueTask<int> ReadAsync(
             Memory<byte> buffer,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             bool canRead = CanRead; // Prevent race with Dispose.
             ThrowIfDisposed();
             if (!canRead)
@@ -603,7 +607,8 @@ namespace System.Net.Sockets
             int offset,
             int count,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             ValidateBufferArguments(buffer, offset, count);
             ThrowIfDisposed();
             if (!CanWrite)
@@ -629,7 +634,8 @@ namespace System.Net.Sockets
         public override ValueTask WriteAsync(
             ReadOnlyMemory<byte> buffer,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             bool canWrite = CanWrite; // Prevent race with Dispose.
             ThrowIfDisposed();
             if (!canWrite)
@@ -717,7 +723,8 @@ namespace System.Net.Sockets
         private static IOException WrapException(
             string resourceFormatString,
             Exception innerException
-        ) {
+        )
+        {
             return new IOException(
                 SR.Format(resourceFormatString, innerException.Message),
                 innerException

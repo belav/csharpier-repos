@@ -22,7 +22,8 @@ namespace Microsoft.CodeAnalysis.ExternalAccess.UnitTesting.Api
 
         public UnitTestingRemoteServiceCallbackDispatcherRegistry(
             IEnumerable<(Type serviceType, UnitTestingRemoteServiceCallbackDispatcher dispatcher)> lazyDispatchers
-        ) {
+        )
+        {
             _lazyDispatchers = lazyDispatchers.ToImmutableDictionary(
                 e => e.serviceType,
                 e => e.dispatcher

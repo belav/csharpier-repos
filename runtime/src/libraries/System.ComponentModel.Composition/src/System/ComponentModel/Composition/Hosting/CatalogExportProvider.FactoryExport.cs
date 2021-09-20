@@ -20,7 +20,8 @@ namespace System.ComponentModel.Composition.Hosting
             public FactoryExport(
                 ComposablePartDefinition partDefinition,
                 ExportDefinition exportDefinition
-            ) {
+            )
+            {
                 _partDefinition = partDefinition;
                 _exportDefinition = exportDefinition;
                 _factoryExportDefinition = new PartCreatorExportDefinition(_exportDefinition);
@@ -123,7 +124,8 @@ namespace System.ComponentModel.Composition.Hosting
                 public override void SetImport(
                     ImportDefinition definition,
                     IEnumerable<Export> exports
-                ) {
+                )
+                {
                     throw ExceptionBuilder.CreateImportDefinitionNotOnThisComposablePart(
                         nameof(definition)
                     );

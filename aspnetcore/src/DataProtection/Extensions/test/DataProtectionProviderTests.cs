@@ -158,7 +158,8 @@ namespace Microsoft.AspNetCore.DataProtection
                     "password",
                     X509KeyStorageFlags.Exportable
                 )
-            ) {
+            )
+            {
                 using (var store = new X509Store(StoreName.My, StoreLocation.CurrentUser))
                 {
                     store.Open(OpenFlags.ReadWrite);
@@ -255,7 +256,8 @@ namespace Microsoft.AspNetCore.DataProtection
                             StoreName.My,
                             StoreLocation.CurrentUser
                         )
-                    ) {
+                    )
+                    {
                         certificateStore.Open(OpenFlags.ReadWrite);
                         var certInStore = certificateStore.Certificates.Find(
                             X509FindType.FindBySubjectName,

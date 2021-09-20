@@ -44,27 +44,29 @@ namespace System.Security.AccessControl
             IdentityReference identity,
             SemaphoreRights eventRights,
             AccessControlType type
-        ) : this(
-            identity,
-            (int)eventRights,
-            false,
-            InheritanceFlags.None,
-            PropagationFlags.None,
-            type
-        ) { }
+        )
+            : this(
+                identity,
+                (int)eventRights,
+                false,
+                InheritanceFlags.None,
+                PropagationFlags.None,
+                type
+            ) { }
 
         public SemaphoreAccessRule(
             string identity,
             SemaphoreRights eventRights,
             AccessControlType type
-        ) : this(
-            new NTAccount(identity),
-            (int)eventRights,
-            false,
-            InheritanceFlags.None,
-            PropagationFlags.None,
-            type
-        ) { }
+        )
+            : this(
+                new NTAccount(identity),
+                (int)eventRights,
+                false,
+                InheritanceFlags.None,
+                PropagationFlags.None,
+                type
+            ) { }
 
         //
         // Internal constructor to be called by public constructors
@@ -91,14 +93,15 @@ namespace System.Security.AccessControl
             IdentityReference identity,
             SemaphoreRights eventRights,
             AuditFlags flags
-        ) : this(
-            identity,
-            (int)eventRights,
-            false,
-            InheritanceFlags.None,
-            PropagationFlags.None,
-            flags
-        ) { }
+        )
+            : this(
+                identity,
+                (int)eventRights,
+                false,
+                InheritanceFlags.None,
+                PropagationFlags.None,
+                flags
+            ) { }
 
         internal SemaphoreAuditRule(
             IdentityReference identity,
@@ -125,10 +128,8 @@ namespace System.Security.AccessControl
             // Let the underlying ACL API's demand unmanaged code permission.
         }
 
-        internal SemaphoreSecurity(
-            SafeWaitHandle handle,
-            AccessControlSections includeSections
-        ) : base(true, ResourceType.KernelObject, handle, includeSections, HandleErrorCode, null)
+        internal SemaphoreSecurity(SafeWaitHandle handle, AccessControlSections includeSections)
+            : base(true, ResourceType.KernelObject, handle, includeSections, HandleErrorCode, null)
         {
             // Let the underlying ACL API's demand unmanaged code permission.
         }
@@ -138,7 +139,8 @@ namespace System.Security.AccessControl
             string? name,
             SafeHandle? handle,
             object? context
-        ) {
+        )
+        {
             System.Exception? exception = null;
 
             switch (errorCode)
@@ -165,7 +167,8 @@ namespace System.Security.AccessControl
             InheritanceFlags inheritanceFlags,
             PropagationFlags propagationFlags,
             AccessControlType type
-        ) {
+        )
+        {
             return new SemaphoreAccessRule(
                 identityReference,
                 accessMask,
@@ -183,7 +186,8 @@ namespace System.Security.AccessControl
             InheritanceFlags inheritanceFlags,
             PropagationFlags propagationFlags,
             AuditFlags flags
-        ) {
+        )
+        {
             return new SemaphoreAuditRule(
                 identityReference,
                 accessMask,

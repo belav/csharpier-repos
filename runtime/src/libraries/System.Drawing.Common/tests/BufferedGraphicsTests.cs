@@ -70,7 +70,8 @@ namespace System.Drawing.Tests
                         graphics,
                         new Rectangle(0, 0, 3, 3)
                     )
-                ) {
+                )
+                {
                     bufferedGraphics.Render();
 
                     Helpers.VerifyBitmap(
@@ -105,7 +106,8 @@ namespace System.Drawing.Tests
                             hdc,
                             new Rectangle(0, 0, 3, 3)
                         )
-                    ) {
+                    )
+                    {
                         bufferedGraphics.Render();
                     }
                 }
@@ -137,7 +139,8 @@ namespace System.Drawing.Tests
                         originalGraphics,
                         new Rectangle(0, 0, 3, 3)
                     )
-                ) {
+                )
+                {
                     graphics.Render(targetGraphics);
 
                     Helpers.VerifyBitmap(
@@ -164,7 +167,8 @@ namespace System.Drawing.Tests
                     graphics,
                     new Rectangle(0, 0, 1, 1)
                 )
-            ) {
+            )
+            {
                 bufferedGraphics.Render(null);
             }
         }

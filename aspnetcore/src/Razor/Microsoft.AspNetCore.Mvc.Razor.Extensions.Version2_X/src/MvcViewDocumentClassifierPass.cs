@@ -25,7 +25,8 @@ namespace Microsoft.AspNetCore.Mvc.Razor.Extensions.Version2_X
             NamespaceDeclarationIntermediateNode @namespace,
             ClassDeclarationIntermediateNode @class,
             MethodDeclarationIntermediateNode method
-        ) {
+        )
+        {
             base.OnDocumentStructureCreated(codeDocument, @namespace, @class, method);
 
             @namespace.Content = "AspNetCore";

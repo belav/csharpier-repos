@@ -28,7 +28,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                         getNotSet: true,
                         isWinMdOutput: false
                     )
-                ) {
+                )
+            {
                 _property = property;
             }
 
@@ -78,7 +79,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
 
             internal sealed override bool IsMetadataVirtual(
                 bool ignoreInterfaceImplementationChanges = false
-            ) {
+            )
+            {
                 return false;
             }
 
@@ -90,7 +92,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             internal override void AddSynthesizedAttributes(
                 PEModuleBuilder moduleBuilder,
                 ref ArrayBuilder<SynthesizedAttributeData> attributes
-            ) {
+            )
+            {
                 // Do not call base.AddSynthesizedAttributes.
                 // Dev11 does not emit DebuggerHiddenAttribute in property accessors
             }

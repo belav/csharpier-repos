@@ -54,7 +54,8 @@ namespace System.ComponentModel
                 Type objectType,
             Type[] argTypes,
             object[] args
-        ) {
+        )
+        {
             if (_parent != null)
             {
                 return _parent.CreateInstance(provider, objectType, argTypes, args);
@@ -188,7 +189,8 @@ namespace System.ComponentModel
             [DynamicallyAccessedMembers(TypeDescriptor.ReflectTypesDynamicallyAccessedMembers)]
                 Type objectType,
             object instance
-        ) {
+        )
+        {
             if (_parent != null)
             {
                 return _parent.GetReflectionType(objectType, instance);
@@ -233,7 +235,8 @@ namespace System.ComponentModel
         /// </summary>
         public ICustomTypeDescriptor GetTypeDescriptor(
             [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)] Type objectType
-        ) {
+        )
+        {
             return GetTypeDescriptor(objectType, null);
         }
 
@@ -273,7 +276,8 @@ namespace System.ComponentModel
         public virtual ICustomTypeDescriptor GetTypeDescriptor(
             [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)] Type objectType,
             object instance
-        ) {
+        )
+        {
             if (_parent != null)
             {
                 return _parent.GetTypeDescriptor(objectType, instance);

@@ -92,7 +92,8 @@ namespace Newtonsoft.Json.Converters
             Type objectType,
             object? existingValue,
             JsonSerializer serializer
-        ) {
+        )
+        {
             bool nullable = ReflectionUtils.IsNullable(objectType);
             if (reader.TokenType == JsonToken.Null)
             {

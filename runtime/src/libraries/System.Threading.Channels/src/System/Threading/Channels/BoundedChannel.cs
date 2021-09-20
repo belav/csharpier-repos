@@ -52,7 +52,8 @@ namespace System.Threading.Channels
             BoundedChannelFullMode mode,
             bool runContinuationsAsynchronously,
             Action<T>? itemDropped
-        ) {
+        )
+        {
             Debug.Assert(bufferedCapacity > 0);
             _bufferedCapacity = bufferedCapacity;
             _mode = mode;
@@ -529,7 +530,8 @@ namespace System.Threading.Channels
                     if (
                         parent._items.Count < parent._bufferedCapacity
                         || parent._mode != BoundedChannelFullMode.Wait
-                    ) {
+                    )
+                    {
                         return new ValueTask<bool>(true);
                     }
 

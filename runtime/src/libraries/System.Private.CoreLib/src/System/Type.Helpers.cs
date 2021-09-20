@@ -146,7 +146,8 @@ namespace System
             BindingFlags bindingAttr,
             MemberFilter? filter,
             object? filterCriteria
-        ) {
+        )
+        {
             // Define the work arrays
             MethodInfo?[]? m = null;
             ConstructorInfo?[]? c = null;
@@ -527,7 +528,8 @@ namespace System
             MemberInfo m,
             object filterCriteria,
             StringComparison comparison
-        ) {
+        )
+        {
             // Check that the criteria object is a String object
             if (!(filterCriteria is string filterCriteriaString))
             {

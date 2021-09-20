@@ -47,7 +47,8 @@ namespace Microsoft.EntityFrameworkCore.Design.Internal
             string? rootNamespace,
             string? language,
             string[]? args
-        ) {
+        )
+        {
             Check.NotNull(reporter, nameof(reporter));
             Check.NotNull(assembly, nameof(assembly));
             Check.NotNull(startupAssembly, nameof(startupAssembly));
@@ -85,7 +86,8 @@ namespace Microsoft.EntityFrameworkCore.Design.Internal
             string? outputDir,
             string? contextType,
             string? @namespace
-        ) {
+        )
+        {
             Check.NotEmpty(name, nameof(name));
 
             if (outputDir != null)
@@ -154,7 +156,8 @@ namespace Microsoft.EntityFrameworkCore.Design.Internal
             string? contextType,
             string? connectionString,
             bool noConnect
-        ) {
+        )
+        {
             using var context = _contextOperations.CreateContext(contextType);
 
             if (connectionString != null)
@@ -205,7 +208,8 @@ namespace Microsoft.EntityFrameworkCore.Design.Internal
             string? toMigration,
             MigrationsSqlGenerationOptions options,
             string? contextType
-        ) {
+        )
+        {
             using var context = _contextOperations.CreateContext(contextType);
             var services = _servicesBuilder.Build(context);
             EnsureServices(services);
@@ -225,7 +229,8 @@ namespace Microsoft.EntityFrameworkCore.Design.Internal
             string? targetMigration,
             string? connectionString,
             string? contextType
-        ) {
+        )
+        {
             using (var context = _contextOperations.CreateContext(contextType))
             {
                 if (connectionString != null)
@@ -290,7 +295,8 @@ namespace Microsoft.EntityFrameworkCore.Design.Internal
             if (
                 assemblyName.Name != migrationsAssemblyName
                 && assemblyName.FullName != migrationsAssemblyName
-            ) {
+            )
+            {
                 throw new OperationException(
                     DesignStrings.MigrationsAssemblyMismatch(
                         assemblyName.Name,

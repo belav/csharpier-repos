@@ -40,7 +40,8 @@ namespace System.Runtime.Intrinsics.Arm
             Vector128<uint> hash_abcd,
             Vector128<uint> hash_efgh,
             Vector128<uint> wk
-        ) {
+        )
+        {
             throw new PlatformNotSupportedException();
         }
 
@@ -53,7 +54,8 @@ namespace System.Runtime.Intrinsics.Arm
             Vector128<uint> hash_efgh,
             Vector128<uint> hash_abcd,
             Vector128<uint> wk
-        ) {
+        )
+        {
             throw new PlatformNotSupportedException();
         }
 
@@ -76,7 +78,8 @@ namespace System.Runtime.Intrinsics.Arm
             Vector128<uint> w0_3,
             Vector128<uint> w8_11,
             Vector128<uint> w12_15
-        ) {
+        )
+        {
             throw new PlatformNotSupportedException();
         }
     }

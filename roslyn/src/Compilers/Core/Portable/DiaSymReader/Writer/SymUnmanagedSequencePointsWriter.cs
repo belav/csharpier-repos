@@ -62,7 +62,8 @@ namespace Microsoft.DiaSymReader
             int startColumn,
             int endLine,
             int endColumn
-        ) {
+        )
+        {
             if (documentIndex < 0)
             {
                 throw new ArgumentOutOfRangeException(nameof(documentIndex));

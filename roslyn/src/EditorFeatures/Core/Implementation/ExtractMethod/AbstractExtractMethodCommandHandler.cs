@@ -34,7 +34,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.ExtractMethod
             IThreadingContext threadingContext,
             ITextBufferUndoManagerProvider undoManager,
             IInlineRenameService renameService
-        ) {
+        )
+        {
             Contract.ThrowIfNull(threadingContext);
             Contract.ThrowIfNull(undoManager);
             Contract.ThrowIfNull(renameService);
@@ -57,7 +58,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.ExtractMethod
                 !args.SubjectBuffer.TryGetWorkspace(out var workspace)
                 || !workspace.CanApplyChange(ApplyChangesKind.ChangeDocument)
                 || !args.SubjectBuffer.SupportsRefactorings()
-            ) {
+            )
+            {
                 return CommandState.Unspecified;
             }
 
@@ -83,7 +85,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.ExtractMethod
                     allowCancellation: true,
                     EditorFeaturesResources.Applying_Extract_Method_refactoring
                 )
-            ) {
+            )
+            {
                 return Execute(args.SubjectBuffer, args.TextView, context.OperationContext);
             }
         }
@@ -92,7 +95,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.ExtractMethod
             ITextBuffer textBuffer,
             ITextView view,
             IUIThreadOperationContext waitContext
-        ) {
+        )
+        {
             var cancellationToken = waitContext.UserCancellationToken;
 
             var spans = view.Selection.GetSnapshotSpansOnBuffer(textBuffer);
@@ -151,7 +155,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.ExtractMethod
                                 title: EditorFeaturesResources.Extract_Method,
                                 severity: NotificationSeverity.Error
                             )
-                        ) {
+                        )
+                        {
                             // We handled the command, displayed a notification and did not produce code.
                             return true;
                         }
@@ -200,7 +205,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.ExtractMethod
             Document document,
             ExtractMethodResult result,
             IUIThreadOperationContext waitContext
-        ) {
+        )
+        {
             // We are about to show a modal UI dialog so we should take over the command execution
             // wait context. That means the command system won't attempt to show its own wait dialog
             // and also will take it into consideration when measuring command handling duration.
@@ -215,7 +221,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.ExtractMethod
                 !solution.Options.GetOption(ExtractMethodOptions.AllowBestEffort, project.Language)
                 || !result.Status.HasBestEffort()
                 || result.Document == null
-            ) {
+            )
+            {
                 if (notificationService != null)
                 {
                     notificationService.SendNotification(
@@ -250,7 +257,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.ExtractMethod
                         title: EditorFeaturesResources.Extract_Method,
                         severity: NotificationSeverity.Warning
                     )
-                ) {
+                )
+                {
                     return true;
                 }
             }
@@ -263,7 +271,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.ExtractMethod
             NormalizedSnapshotSpanCollection spans,
             ExtractMethodResult result,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var options = document.Project.Solution.Options;
 
             if (
@@ -271,7 +280,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.ExtractMethod
                     ExtractMethodOptions.DontPutOutOrRefOnStruct,
                     document.Project.Language
                 ) || !result.Reasons.IsSingle()
-            ) {
+            )
+            {
                 return null;
             }
 
@@ -292,7 +302,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.ExtractMethod
                     length,
                     StringComparison.Ordinal
                 ) >= 0
-            ) {
+            )
+            {
                 options = options.WithChangedOption(
                     ExtractMethodOptions.DontPutOutOrRefOnStruct,
                     document.Project.Language,
@@ -324,7 +335,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.ExtractMethod
             ExtractMethodResult extractMethodResult,
             ITextBuffer subjectBuffer,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             using var undoTransaction = _undoManager.GetTextBufferUndoManager(subjectBuffer)
                 .TextBufferUndoHistory.CreateTransaction("Extract Method");
 

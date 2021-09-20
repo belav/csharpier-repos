@@ -37,7 +37,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Transport.Libuv.Internal.Networkin
             string name,
             Action<UvConnectRequest, int, UvException, object> callback,
             object state
-        ) {
+        )
+        {
             _callback = callback;
             _state = state;
 

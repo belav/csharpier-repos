@@ -94,7 +94,8 @@ namespace System.Management
             ref object pVal,
             ref int pType,
             ref int plFlavor
-        ) {
+        )
+        {
             if (pWbemClassObject == IntPtr.Zero)
                 throw new ObjectDisposedException(name);
             int hr = WmiNetUtilsHelper.Get_f(
@@ -144,7 +145,8 @@ namespace System.Management
             int lFlags,
             ref object pQualifierVal,
             out string[] pNames
-        ) {
+        )
+        {
             if (pWbemClassObject == IntPtr.Zero)
                 throw new ObjectDisposedException(name);
             int res = WmiNetUtilsHelper.GetNames_f(
@@ -172,7 +174,8 @@ namespace System.Management
             ref object pVal,
             ref int pType,
             ref int plFlavor
-        ) {
+        )
+        {
             if (pWbemClassObject == IntPtr.Zero)
                 throw new ObjectDisposedException(name);
             pVal = null;
@@ -200,7 +203,8 @@ namespace System.Management
         public int GetPropertyQualifierSet_(
             string wszProperty,
             out IWbemQualifierSetFreeThreaded ppQualSet
-        ) {
+        )
+        {
             if (pWbemClassObject == IntPtr.Zero)
                 throw new ObjectDisposedException(name);
             IntPtr pQualSet;
@@ -322,7 +326,8 @@ namespace System.Management
             int lFlags,
             out IWbemClassObjectFreeThreaded ppInSignature,
             out IWbemClassObjectFreeThreaded ppOutSignature
-        ) {
+        )
+        {
             if (pWbemClassObject == IntPtr.Zero)
                 throw new ObjectDisposedException(name);
             IntPtr pInSignature;
@@ -354,7 +359,8 @@ namespace System.Management
             int lFlags,
             IWbemClassObjectFreeThreaded pInSignature,
             IWbemClassObjectFreeThreaded pOutSignature
-        ) {
+        )
+        {
             if (pWbemClassObject == IntPtr.Zero)
                 throw new ObjectDisposedException(name);
             int res = WmiNetUtilsHelper.PutMethod_f(
@@ -389,7 +395,8 @@ namespace System.Management
             out string pstrName,
             out IWbemClassObjectFreeThreaded ppInSignature,
             out IWbemClassObjectFreeThreaded ppOutSignature
-        ) {
+        )
+        {
             if (pWbemClassObject == IntPtr.Zero)
                 throw new ObjectDisposedException(name);
 
@@ -427,7 +434,8 @@ namespace System.Management
         public int GetMethodQualifierSet_(
             string wszMethod,
             out IWbemQualifierSetFreeThreaded ppQualSet
-        ) {
+        )
+        {
             if (pWbemClassObject == IntPtr.Zero)
                 throw new ObjectDisposedException(name);
             IntPtr pQualSet;
@@ -2805,7 +2813,8 @@ namespace System.Management
             ThreadWorkerMethodWithReturn workerMethod,
             ApartmentState aptState,
             bool background
-        ) {
+        )
+        {
             this.threadParams = threadParams;
             this.threadWorkerMethodWithReturn = workerMethod;
             this.thread = new Thread(new ThreadStart(ThreadEntryPointMethodWithReturn));
@@ -2825,7 +2834,8 @@ namespace System.Management
             ThreadWorkerMethodWithReturnAndParam workerMethod,
             ApartmentState aptState,
             bool background
-        ) {
+        )
+        {
             this.threadParams = threadParams;
             this.threadWorkerMethodWithReturnAndParam = workerMethod;
             this.thread = new Thread(new ThreadStart(ThreadEntryPointMethodWithReturnAndParam));
@@ -2845,7 +2855,8 @@ namespace System.Management
             ThreadWorkerMethod workerMethod,
             ApartmentState aptState,
             bool background
-        ) {
+        )
+        {
             this.threadParams = threadParams;
             this.threadWorkerMethod = workerMethod;
             this.thread = new Thread(new ThreadStart(ThreadEntryPoint));
@@ -2865,7 +2876,8 @@ namespace System.Management
             ThreadWorkerMethodWithParam workerMethod,
             ApartmentState aptState,
             bool background
-        ) {
+        )
+        {
             this.threadParams = threadParams;
             this.threadWorkerMethodWithParam = workerMethod;
             this.thread = new Thread(new ThreadStart(ThreadEntryPointMethodWithParam));

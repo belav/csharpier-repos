@@ -23,7 +23,8 @@ namespace System.Web.WebPages.Html
             string name,
             object value,
             IDictionary<string, object> htmlAttributes
-        ) {
+        )
+        {
             if (String.IsNullOrEmpty(name))
             {
                 throw new ArgumentException(
@@ -50,7 +51,8 @@ namespace System.Web.WebPages.Html
             object value,
             bool isChecked,
             object htmlAttributes
-        ) {
+        )
+        {
             return RadioButton(
                 name,
                 value,
@@ -64,7 +66,8 @@ namespace System.Web.WebPages.Html
             object value,
             bool isChecked,
             IDictionary<string, object> htmlAttributes
-        ) {
+        )
+        {
             if (name == null)
             {
                 throw new ArgumentException(
@@ -80,7 +83,8 @@ namespace System.Web.WebPages.Html
             object value,
             bool? isChecked,
             IDictionary<string, object> attributes
-        ) {
+        )
+        {
             string valueString = ConvertTo(value, typeof(string)) as string;
 
             TagBuilder builder = new TagBuilder("input");

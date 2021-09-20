@@ -84,7 +84,8 @@ namespace Internal.Cryptography.Pal
             bool certificateAuthority,
             bool hasPathLengthConstraint,
             int pathLengthConstraint
-        ) {
+        )
+        {
             unsafe
             {
                 CERT_BASIC_CONSTRAINTS2_INFO constraintsInfo = new CERT_BASIC_CONSTRAINTS2_INFO()
@@ -103,7 +104,8 @@ namespace Internal.Cryptography.Pal
             out bool certificateAuthority,
             out bool hasPathLengthConstraint,
             out int pathLengthConstraint
-        ) {
+        )
+        {
             unsafe
             {
                 (certificateAuthority, hasPathLengthConstraint, pathLengthConstraint) =
@@ -132,7 +134,8 @@ namespace Internal.Cryptography.Pal
             out bool certificateAuthority,
             out bool hasPathLengthConstraint,
             out int pathLengthConstraint
-        ) {
+        )
+        {
             unsafe
             {
                 (certificateAuthority, hasPathLengthConstraint, pathLengthConstraint) =
@@ -200,7 +203,8 @@ namespace Internal.Cryptography.Pal
 
         public byte[] EncodeX509SubjectKeyIdentifierExtension(
             ReadOnlySpan<byte> subjectKeyIdentifier
-        ) {
+        )
+        {
             unsafe
             {
                 fixed (byte* pSubkectKeyIdentifier = subjectKeyIdentifier)
@@ -217,7 +221,8 @@ namespace Internal.Cryptography.Pal
         public void DecodeX509SubjectKeyIdentifierExtension(
             byte[] encoded,
             out byte[] subjectKeyIdentifier
-        ) {
+        )
+        {
             unsafe
             {
                 subjectKeyIdentifier = encoded.DecodeObject(

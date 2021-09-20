@@ -22,7 +22,8 @@ namespace Microsoft.AspNetCore.Builder
         public static IApplicationBuilder UseWelcomePage(
             this IApplicationBuilder app,
             WelcomePageOptions options
-        ) {
+        )
+        {
             if (app == null)
             {
                 throw new ArgumentNullException(nameof(app));
@@ -44,7 +45,8 @@ namespace Microsoft.AspNetCore.Builder
         public static IApplicationBuilder UseWelcomePage(
             this IApplicationBuilder app,
             PathString path
-        ) {
+        )
+        {
             if (app == null)
             {
                 throw new ArgumentNullException(nameof(app));

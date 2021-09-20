@@ -31,7 +31,8 @@ namespace Newtonsoft.Json.Tests.TestObjects
             string privateString,
             string internalString,
             string readonlyString
-        ) {
+        )
+        {
             _privateString = privateString;
             _readonlyString = readonlyString;
             _internalString = internalString;

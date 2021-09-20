@@ -47,7 +47,8 @@ namespace System.Diagnostics
             string userName,
             SecureString password,
             string domain
-        ) {
+        )
+        {
             throw new PlatformNotSupportedException(
                 SR.ProcessStartWithPasswordAndDomainNotSupported
             );
@@ -61,7 +62,8 @@ namespace System.Diagnostics
             string userName,
             SecureString password,
             string domain
-        ) {
+        )
+        {
             throw new PlatformNotSupportedException(
                 SR.ProcessStartWithPasswordAndDomainNotSupported
             );
@@ -437,7 +439,8 @@ namespace System.Diagnostics
                     startInfo.RedirectStandardInput
                     || startInfo.RedirectStandardOutput
                     || startInfo.RedirectStandardError
-                ) {
+                )
+                {
                     throw new InvalidOperationException(SR.CantRedirectStreams);
                 }
             }
@@ -475,7 +478,8 @@ namespace System.Diagnostics
                 if (
                     verb != string.Empty
                     && !string.Equals(verb, "open", StringComparison.OrdinalIgnoreCase)
-                ) {
+                )
+                {
                     throw new Win32Exception(Interop.Errors.ERROR_NO_ASSOCIATION);
                 }
 
@@ -619,7 +623,8 @@ namespace System.Diagnostics
             out int stderrFd,
             bool usesTerminal,
             bool throwOnNoExec = true
-        ) {
+        )
+        {
             if (string.IsNullOrEmpty(filename))
             {
                 throw new Win32Exception(Interop.Error.ENOENT.Info().RawErrno);
@@ -682,7 +687,8 @@ namespace System.Diagnostics
                     if (
                         !throwOnNoExec
                         && new Interop.ErrorInfo(errno).Error == Interop.Error.ENOEXEC
-                    ) {
+                    )
+                    {
                         return false;
                     }
 
@@ -719,13 +725,15 @@ namespace System.Diagnostics
             ProcessStartInfo psi,
             string? resolvedExe = null,
             bool ignoreArguments = false
-        ) {
+        )
+        {
             if (
                 string.IsNullOrEmpty(resolvedExe)
                 && (
                     ignoreArguments || (string.IsNullOrEmpty(psi.Arguments) && !psi.HasArgumentList)
                 )
-            ) {
+            )
+            {
                 return new string[] { psi.FileName };
             }
 
@@ -772,7 +780,8 @@ namespace System.Diagnostics
         private static string? ResolveExecutableForShellExecute(
             string filename,
             string? workingDirectory
-        ) {
+        )
+        {
             // Determine if filename points to an executable file.
             // filename may be an absolute path, a relative path or a uri.
 
@@ -1055,7 +1064,8 @@ namespace System.Diagnostics
 
         private static (uint userId, uint groupId, uint[] groups) GetUserAndGroupIds(
             ProcessStartInfo startInfo
-        ) {
+        )
+        {
             Debug.Assert(!string.IsNullOrEmpty(startInfo.UserName));
 
             (uint? userId, uint? groupId) = GetUserAndGroupIds(startInfo.UserName);
@@ -1123,7 +1133,8 @@ namespace System.Diagnostics
             byte* buf,
             int bufLen,
             out Interop.Sys.Passwd? passwd
-        ) {
+        )
+        {
             // Call getpwnam_r to get the passwd struct
             Interop.Sys.Passwd tempPasswd;
             int error = Interop.Sys.GetPwNamR(name, out tempPasswd, buf, bufLen);

@@ -114,7 +114,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.PickMembers
                         Members.ItemContainerGenerator.ContainerFromIndex(Members.SelectedIndex)
                         is ListViewItem row
                     )
-                ) {
+                )
+                {
                     Members.ScrollIntoView(Members.SelectedItem);
                     row =
                         Members.ItemContainerGenerator.ContainerFromIndex(Members.SelectedIndex)

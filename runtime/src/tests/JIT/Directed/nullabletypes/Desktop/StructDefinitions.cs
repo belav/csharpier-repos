@@ -395,7 +395,8 @@ internal static class Helper
     }
     public static NotEmptyStructConstrainedGenQA<int> Create(
         NotEmptyStructConstrainedGenQA<int> val
-    ) {
+    )
+    {
         NotEmptyStructConstrainedGenQA<int> neq = new NotEmptyStructConstrainedGenQA<int>();
         neq.Field = new int?[] { 17 };
         return neq;
@@ -596,25 +597,29 @@ internal static class Helper
     public static bool Compare(
         NotEmptyStructConstrainedGen<int> val,
         NotEmptyStructConstrainedGen<int> val1
-    ) {
+    )
+    {
         return val.Field == val1.Field;
     }
     public static bool Compare(
         NotEmptyStructConstrainedGenA<int> val,
         NotEmptyStructConstrainedGenA<int> val1
-    ) {
+    )
+    {
         return val.Field[0] == val1.Field[0];
     }
     public static bool Compare(
         NotEmptyStructConstrainedGenQ<int> val,
         NotEmptyStructConstrainedGenQ<int> val1
-    ) {
+    )
+    {
         return val.Field == val1.Field;
     }
     public static bool Compare(
         NotEmptyStructConstrainedGenQA<int> val,
         NotEmptyStructConstrainedGenQA<int> val1
-    ) {
+    )
+    {
         return val.Field[0] == val1.Field[0];
     }
     public static bool Compare(NestedStruct val, NestedStruct val1)
@@ -644,13 +649,15 @@ internal static class Helper
     public static bool Compare(
         ImplementOneInterfaceGen<int> val,
         ImplementOneInterfaceGen<int> val1
-    ) {
+    )
+    {
         return val is IEmptyGen<int> && val.Equals(val1);
     }
     public static bool Compare(
         ImplementTwoInterfaceGen<int> val,
         ImplementTwoInterfaceGen<int> val1
-    ) {
+    )
+    {
         return val is IEmptyGen<int> && val is INotEmptyGen<int> && val.Equals(val1);
     }
     public static bool Compare(ImplementAllInterface<int> val, ImplementAllInterface<int> val1)
@@ -801,25 +808,29 @@ internal static class Helper
     public static bool Compare(
         NotEmptyStructConstrainedGen<int>? val,
         NotEmptyStructConstrainedGen<int> val1
-    ) {
+    )
+    {
         return val == null ? false : Compare(val.Value, val1);
     }
     public static bool Compare(
         NotEmptyStructConstrainedGenA<int>? val,
         NotEmptyStructConstrainedGenA<int> val1
-    ) {
+    )
+    {
         return val == null ? false : Compare(val.Value, val1);
     }
     public static bool Compare(
         NotEmptyStructConstrainedGenQ<int>? val,
         NotEmptyStructConstrainedGenQ<int> val1
-    ) {
+    )
+    {
         return val == null ? false : Compare(val.Value, val1);
     }
     public static bool Compare(
         NotEmptyStructConstrainedGenQA<int>? val,
         NotEmptyStructConstrainedGenQA<int> val1
-    ) {
+    )
+    {
         return val == null ? false : Compare(val.Value, val1);
     }
     public static bool Compare(NestedStruct? val, NestedStruct val1)
@@ -849,13 +860,15 @@ internal static class Helper
     public static bool Compare(
         ImplementOneInterfaceGen<int>? val,
         ImplementOneInterfaceGen<int> val1
-    ) {
+    )
+    {
         return val == null ? false : Compare(val.Value, val1);
     }
     public static bool Compare(
         ImplementTwoInterfaceGen<int>? val,
         ImplementTwoInterfaceGen<int> val1
-    ) {
+    )
+    {
         return val == null ? false : Compare(val.Value, val1);
     }
     public static bool Compare(ImplementAllInterface<int>? val, ImplementAllInterface<int> val1)

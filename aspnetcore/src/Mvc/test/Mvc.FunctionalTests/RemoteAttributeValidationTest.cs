@@ -18,7 +18,8 @@ namespace Microsoft.AspNetCore.Mvc.FunctionalTests
 
         public RemoteAttributeValidationTest(
             MvcTestFixture<BasicWebSite.StartupWithoutEndpointRouting> fixture
-        ) {
+        )
+        {
             Client = fixture.CreateDefaultClient();
         }
 
@@ -30,7 +31,8 @@ namespace Microsoft.AspNetCore.Mvc.FunctionalTests
         public async Task RemoteAttribute_LeadsToExpectedValidationAttributes(
             string areaName,
             string pathSegment
-        ) {
+        )
+        {
             // Arrange
             var outputFile =
                 "compiler/resources/BasicWebSite." + areaName + ".RemoteAttribute_Home.Create.html";
@@ -68,7 +70,8 @@ namespace Microsoft.AspNetCore.Mvc.FunctionalTests
         public async Task RemoteAttribute_VerificationAction_GetReturnsExpectedJson(
             string pathSegment,
             string expectedContent
-        ) {
+        )
+        {
             // Arrange
             var url =
                 "http://localhost"
@@ -92,7 +95,8 @@ namespace Microsoft.AspNetCore.Mvc.FunctionalTests
         public async Task RemoteAttribute_VerificationAction_PostReturnsExpectedJson(
             string pathSegment,
             string expectedContent
-        ) {
+        )
+        {
             // Arrange
             var url = "http://localhost" + pathSegment + "/RemoteAttribute_Verify/IsIdAvailable";
             var contentDictionary = new Dictionary<string, string>

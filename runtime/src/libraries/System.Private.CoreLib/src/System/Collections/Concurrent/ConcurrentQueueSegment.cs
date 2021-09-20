@@ -139,7 +139,8 @@ namespace System.Collections.Concurrent
                             currentHead + 1,
                             currentHead
                         ) == currentHead
-                    ) {
+                    )
+                    {
                         // Successfully reserved the slot.  Note that after the above CompareExchange, other threads
                         // trying to dequeue from this slot will end up spinning until we do the subsequent Write.
                         item = slots[slotsIndex].Item!;
@@ -173,7 +174,8 @@ namespace System.Collections.Concurrent
                     if (
                         currentTail - currentHead <= 0
                         || (frozen && (currentTail - FreezeOffset - currentHead <= 0))
-                    ) {
+                    )
+                    {
                         item = default;
                         return false;
                     }
@@ -244,7 +246,8 @@ namespace System.Collections.Concurrent
                     if (
                         currentTail - currentHead <= 0
                         || (frozen && (currentTail - FreezeOffset - currentHead <= 0))
-                    ) {
+                    )
+                    {
                         result = default;
                         return false;
                     }
@@ -305,7 +308,8 @@ namespace System.Collections.Concurrent
                             currentTail + 1,
                             currentTail
                         ) == currentTail
-                    ) {
+                    )
+                    {
                         // Successfully reserved the slot.  Note that after the above CompareExchange, other threads
                         // trying to return will end up spinning until we do the subsequent Write.
                         slots[slotsIndex].Item = item;

@@ -241,7 +241,8 @@ namespace Internal.Cryptography.Pal
         private static SafeNCryptKeyHandle? TryAcquireCngPrivateKey(
             SafeCertContextHandle certificateContext,
             out CngKeyHandleOpenOptions handleOptions
-        ) {
+        )
+        {
             Debug.Assert(certificateContext != null, "certificateContext != null");
             Debug.Assert(
                 !certificateContext.IsClosed && !certificateContext.IsInvalid,
@@ -263,7 +264,8 @@ namespace Internal.Cryptography.Pal
                         out privateKeyPtr,
                         ref cbData
                     )
-                ) {
+                )
+                {
                     handleOptions = CngKeyHandleOpenOptions.EphemeralKey;
                     return new SafeNCryptKeyHandle(privateKeyPtr, certificateContext);
                 }
@@ -284,7 +286,8 @@ namespace Internal.Cryptography.Pal
                         out keySpec,
                         out freeKey
                     )
-                ) {
+                )
+                {
                     // The documentation for CryptAcquireCertificatePrivateKey says that freeKey
                     // should already be false if "key acquisition fails", and it can be presumed
                     // that privateKey was set to 0.  But, just in case:
@@ -344,7 +347,8 @@ namespace Internal.Cryptography.Pal
                     null,
                     ref cbData
                 )
-            ) {
+            )
+            {
                 int dwErrorCode = Marshal.GetLastWin32Error();
                 if (dwErrorCode == ErrorCode.CRYPT_E_NOT_FOUND)
                     return null;
@@ -412,7 +416,8 @@ namespace Internal.Cryptography.Pal
 
             fixed (char* keyNamePtr = cngKey.KeyName)fixed (
                 char* provNamePtr = cngKey.Provider!.Provider
-            ) {
+            )
+            {
                 keyProvInfo.pwszContainerName = keyNamePtr;
                 keyProvInfo.pwszProvName = provNamePtr;
                 keyProvInfo.dwFlags = machineKey
@@ -427,7 +432,8 @@ namespace Internal.Cryptography.Pal
                         CertSetPropertyFlags.None,
                         &keyProvInfo
                     )
-                ) {
+                )
+                {
                     pal.Dispose();
                     throw Marshal.GetLastWin32Error().ToCryptographicException();
                 }
@@ -441,11 +447,13 @@ namespace Internal.Cryptography.Pal
             string keyName,
             bool machineKey,
             CngAlgorithmGroup? algorithmGroup
-        ) {
+        )
+        {
             if (
                 provider == CngProvider.MicrosoftSoftwareKeyStorageProvider
                 || provider == CngProvider.MicrosoftSmartCardKeyStorageProvider
-            ) {
+            )
+            {
                 // Well-known CNG providers, keySpec is 0.
                 return 0;
             }
@@ -497,7 +505,8 @@ namespace Internal.Cryptography.Pal
             CspParameters cspParameters,
             CngAlgorithmGroup? algorithmGroup,
             out int keySpec
-        ) {
+        )
+        {
             if (algorithmGroup == CngAlgorithmGroup.Rsa)
             {
                 return TryGuessRsaKeySpec(cspParameters, out keySpec);
@@ -586,7 +595,8 @@ namespace Internal.Cryptography.Pal
 
         private unsafe ICertificatePal? CopyWithPersistedCapiKey(
             CspKeyContainerInfo keyContainerInfo
-        ) {
+        )
+        {
             if (string.IsNullOrEmpty(keyContainerInfo.KeyContainerName))
             {
                 return null;
@@ -602,7 +612,8 @@ namespace Internal.Cryptography.Pal
 
             fixed (char* keyName = keyContainerInfo.KeyContainerName)fixed (
                 char* provName = keyContainerInfo.ProviderName
-            ) {
+            )
+            {
                 keyProvInfo.pwszContainerName = keyName;
                 keyProvInfo.pwszProvName = provName;
                 keyProvInfo.dwFlags = keyContainerInfo.MachineKeyStore
@@ -618,7 +629,8 @@ namespace Internal.Cryptography.Pal
                         CertSetPropertyFlags.None,
                         &keyProvInfo
                     )
-                ) {
+                )
+                {
                     pal.Dispose();
                     throw Marshal.GetLastWin32Error().ToCryptographicException();
                 }
@@ -647,7 +659,8 @@ namespace Internal.Cryptography.Pal
                     CertSetPropertyFlags.CERT_SET_PROPERTY_INHIBIT_PERSIST_FLAG,
                     handle
                 )
-            ) {
+            )
+            {
                 pal.Dispose();
                 throw Marshal.GetLastWin32Error().ToCryptographicException();
             }

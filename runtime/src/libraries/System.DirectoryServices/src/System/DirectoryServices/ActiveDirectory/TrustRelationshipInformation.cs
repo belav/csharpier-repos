@@ -35,7 +35,8 @@ namespace System.DirectoryServices.ActiveDirectory
             DirectoryContext context,
             string? source,
             TrustObject obj
-        ) {
+        )
+        {
             // security context
             this.context = context;
             // source

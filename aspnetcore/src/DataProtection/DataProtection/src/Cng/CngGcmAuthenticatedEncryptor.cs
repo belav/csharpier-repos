@@ -42,7 +42,8 @@ namespace Microsoft.AspNetCore.DataProtection.Cng
             BCryptAlgorithmHandle symmetricAlgorithmHandle,
             uint symmetricAlgorithmKeySizeInBytes,
             IBCryptGenRandom? genRandom = null
-        ) {
+        )
+        {
             // Is the key size appropriate?
             AlgorithmAssert.IsAllowableSymmetricAlgorithmKeySize(
                 checked(symmetricAlgorithmKeySizeInBytes * 8)
@@ -138,7 +139,8 @@ namespace Microsoft.AspNetCore.DataProtection.Cng
             uint cbCiphertext,
             byte* pbAdditionalAuthenticatedData,
             uint cbAdditionalAuthenticatedData
-        ) {
+        )
+        {
             // Argument checking: input must at the absolute minimum contain a key modifier, nonce, and tag
             if (cbCiphertext < KEY_MODIFIER_SIZE_IN_BYTES + NONCE_SIZE_IN_BYTES + TAG_SIZE_IN_BYTES)
             {
@@ -183,7 +185,8 @@ namespace Microsoft.AspNetCore.DataProtection.Cng
                             pbSymmetricDecryptionSubkey,
                             _symmetricAlgorithmSubkeyLengthInBytes
                         )
-                    ) {
+                    )
+                    {
                         byte dummy;
                         byte* pbPlaintext = (pbRetVal != null) ? pbRetVal : &dummy; // CLR doesn't like pinning empty buffers
 
@@ -249,7 +252,8 @@ namespace Microsoft.AspNetCore.DataProtection.Cng
             uint cbPlaintextData,
             byte* pbEncryptedData,
             byte* pbTag
-        ) {
+        )
+        {
             BCRYPT_AUTHENTICATED_CIPHER_MODE_INFO authCipherInfo;
             BCRYPT_AUTHENTICATED_CIPHER_MODE_INFO.Init(out authCipherInfo);
             authCipherInfo.pbNonce = pbNonce;
@@ -284,7 +288,8 @@ namespace Microsoft.AspNetCore.DataProtection.Cng
             uint cbAdditionalAuthenticatedData,
             uint cbPreBuffer,
             uint cbPostBuffer
-        ) {
+        )
+        {
             // Allocate a buffer to hold the key modifier, nonce, encrypted data, and tag.
             // In GCM, the encrypted output will be the same length as the plaintext input.
             var retVal = new byte[

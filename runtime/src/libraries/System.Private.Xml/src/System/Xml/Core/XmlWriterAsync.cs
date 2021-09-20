@@ -48,7 +48,8 @@ namespace System.Xml
             string? pubid,
             string? sysid,
             string? subset
-        ) {
+        )
+        {
             throw new NotImplementedException();
         }
 
@@ -79,7 +80,8 @@ namespace System.Xml
             string localName,
             string? ns,
             string? value
-        ) {
+        )
+        {
             Task task = WriteStartAttributeAsync(prefix, localName, ns);
             if (task.IsSuccess())
             {
@@ -105,7 +107,8 @@ namespace System.Xml
             string? prefix,
             string localName,
             string? ns
-        ) {
+        )
+        {
             throw new NotImplementedException();
         }
 
@@ -264,7 +267,8 @@ namespace System.Xml
             if (
                 reader.NodeType == XmlNodeType.Element
                 || reader.NodeType == XmlNodeType.XmlDeclaration
-            ) {
+            )
+            {
                 if (reader.MoveToFirstAttribute())
                 {
                     await WriteAttributesAsync(reader, defattr).ConfigureAwait(false);
@@ -366,7 +370,8 @@ namespace System.Xml
                                         WriteNodeBufferSize
                                     )
                                 ) > 0
-                            ) {
+                            )
+                            {
                                 await this.WriteCharsAsync(_writeNodeBuffer, 0, read)
                                     .ConfigureAwait(false);
                             }
@@ -459,7 +464,8 @@ namespace System.Xml
                                         )
                                         .ConfigureAwait(false)
                                 ) > 0
-                            ) {
+                            )
+                            {
                                 await this.WriteCharsAsync(_writeNodeBuffer, 0, read)
                                     .ConfigureAwait(false);
                             }
@@ -660,7 +666,8 @@ namespace System.Xml
             string localName,
             string? ns,
             string value
-        ) {
+        )
+        {
             await WriteStartElementAsync(prefix, localName, ns).ConfigureAwait(false);
             if (null != value && 0 != value.Length)
             {

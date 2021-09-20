@@ -24,7 +24,8 @@ namespace Microsoft.CodeAnalysis.ExternalAccess.Apex
         public ApexAsynchronousOperationListenerProviderAccessor(
             AsynchronousOperationListenerProvider implementation,
             [Import(AllowDefault = true)] VisualStudioWorkspace? workspace
-        ) {
+        )
+        {
             _implementation = implementation;
             _workspace = workspace;
         }

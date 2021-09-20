@@ -19,7 +19,8 @@ namespace System.IO.Pipes.Tests
         internal static unsafe bool TryGetImpersonationUserName(
             SafePipeHandle handle,
             out string impersonationUserName
-        ) {
+        )
+        {
             const uint UserNameMaxLength = Interop.Kernel32.CREDUI_MAX_USERNAME_LENGTH + 1;
             char* userName = stackalloc char[(int)UserNameMaxLength];
 
@@ -33,7 +34,8 @@ namespace System.IO.Pipes.Tests
                     userName,
                     UserNameMaxLength
                 )
-            ) {
+            )
+            {
                 impersonationUserName = new string(userName);
                 return true;
             }
@@ -50,7 +52,8 @@ namespace System.IO.Pipes.Tests
         internal static unsafe bool TryGetNumberOfServerInstances(
             SafePipeHandle handle,
             out uint numberOfServerInstances
-        ) {
+        )
+        {
             uint serverInstances;
 
             if (
@@ -63,7 +66,8 @@ namespace System.IO.Pipes.Tests
                     null,
                     0
                 )
-            ) {
+            )
+            {
                 numberOfServerInstances = serverInstances;
                 return true;
             }
@@ -85,13 +89,15 @@ namespace System.IO.Pipes.Tests
             uint userNameMaxLength,
             char* userName,
             out string impersonationUserName
-        ) {
+        )
+        {
             if (
                 (
                     error == Interop.Errors.ERROR_SUCCESS
                     || error == Interop.Errors.ERROR_CANNOT_IMPERSONATE
                 ) && Environment.Is64BitProcess
-            ) {
+            )
+            {
                 Interop.Kernel32.LoadLibraryEx(
                     "sspicli.dll",
                     IntPtr.Zero,
@@ -108,7 +114,8 @@ namespace System.IO.Pipes.Tests
                         userName,
                         userNameMaxLength
                     )
-                ) {
+                )
+                {
                     impersonationUserName = new string(userName);
                     return true;
                 }

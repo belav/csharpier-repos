@@ -14,7 +14,8 @@ namespace Microsoft.Extensions.Logging.Testing
         public TestSink(
             Func<WriteContext, bool> writeEnabled = null,
             Func<BeginScopeContext, bool> beginEnabled = null
-        ) {
+        )
+        {
             WriteEnabled = writeEnabled;
             BeginEnabled = beginEnabled;
 

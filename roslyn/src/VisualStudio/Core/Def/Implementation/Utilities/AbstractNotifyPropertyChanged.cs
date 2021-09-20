@@ -21,7 +21,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Utilities
             ref T field,
             T value,
             [CallerMemberName] string propertyName = ""
-        ) {
+        )
+        {
             if (!EqualityComparer<T>.Default.Equals(field, value))
             {
                 field = value;

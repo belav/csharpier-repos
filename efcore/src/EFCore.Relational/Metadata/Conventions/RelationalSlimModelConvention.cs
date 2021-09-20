@@ -48,7 +48,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
             IModel model,
             SlimModel slimModel,
             bool runtime
-        ) {
+        )
+        {
             base.ProcessModelAnnotations(annotations, model, slimModel, runtime);
 
             if (runtime)
@@ -65,7 +66,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
                         RelationalAnnotationNames.DbFunctions,
                         out var functions
                     )
-                ) {
+                )
+                {
                     var slimFunctions = new SortedDictionary<string, IDbFunction>();
                     foreach (var functionPair in (SortedDictionary<string, IDbFunction>)functions!)
                     {
@@ -113,7 +115,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
                             (string, string?),
                             ISequence
                         >)sequences!
-                    ) {
+                    )
+                    {
                         var slimSequence = Create(sequencePair.Value, slimModel);
                         slimSequences[sequencePair.Key] = slimSequence;
 
@@ -147,7 +150,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
             IEntityType entityType,
             SlimEntityType slimEntityType,
             bool runtime
-        ) {
+        )
+        {
             base.ProcessEntityTypeAnnotations(annotations, entityType, slimEntityType, runtime);
 
             if (runtime)
@@ -165,11 +169,13 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
                         RelationalAnnotationNames.CheckConstraints,
                         out var constraints
                     )
-                ) {
+                )
+                {
                     var slimCheckConstraints = new Dictionary<string, ICheckConstraint>();
                     foreach (
                         var constraintPair in (Dictionary<string, ICheckConstraint>?)constraints!
-                    ) {
+                    )
+                    {
                         var slimCheckConstraint = Create(constraintPair.Value, slimEntityType);
                         slimCheckConstraints[constraintPair.Key] = slimCheckConstraint;
 
@@ -209,8 +215,9 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
                 TTarget,
                 bool
             > process
-        ) where TSource : IAnnotatable
-          where TTarget : AnnotatableBase
+        )
+            where TSource : IAnnotatable
+            where TTarget : AnnotatableBase
         {
             var annotations = source.GetAnnotations().ToDictionary(a => a.Name, a => a.Value);
             process(this, annotations, source, target, false);
@@ -336,7 +343,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
             IProperty property,
             SlimProperty slimProperty,
             bool runtime
-        ) {
+        )
+        {
             base.ProcessPropertyAnnotations(annotations, property, slimProperty, runtime);
 
             if (runtime)
@@ -354,7 +362,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
                         RelationalAnnotationNames.RelationalOverrides,
                         out var overrides
                     )
-                ) {
+                )
+                {
                     var slimPropertyOverrides = new SortedDictionary<
                         StoreObjectIdentifier,
                         IRelationalPropertyOverrides
@@ -364,7 +373,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
                             StoreObjectIdentifier,
                             IRelationalPropertyOverrides
                         >?)overrides!
-                    ) {
+                    )
+                    {
                         var slimOverrides = Create(overridesPair.Value, slimProperty);
                         slimPropertyOverrides[overridesPair.Key] = slimOverrides;
 
@@ -423,7 +433,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
             IKey key,
             SlimKey slimKey,
             bool runtime
-        ) {
+        )
+        {
             base.ProcessKeyAnnotations(annotations, key, slimKey, runtime);
 
             if (runtime)
@@ -444,7 +455,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
             IIndex index,
             SlimIndex slimIndex,
             bool runtime
-        ) {
+        )
+        {
             base.ProcessIndexAnnotations(annotations, index, slimIndex, runtime);
 
             if (runtime)
@@ -465,7 +477,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
             IForeignKey foreignKey,
             SlimForeignKey slimForeignKey,
             bool runtime
-        ) {
+        )
+        {
             base.ProcessForeignKeyAnnotations(annotations, foreignKey, slimForeignKey, runtime);
 
             if (runtime)

@@ -158,7 +158,8 @@ namespace Newtonsoft.Json.Serialization
                         typeof(ICollection<>),
                         out _genericCollectionDefinitionType
                     )
-                ) {
+                )
+                {
                     CollectionItemType = _genericCollectionDefinitionType.GetGenericArguments()[0];
                 }
                 else
@@ -194,7 +195,8 @@ namespace Newtonsoft.Json.Serialization
                     typeof(ICollection<>),
                     out _genericCollectionDefinitionType
                 )
-            ) {
+            )
+            {
                 CollectionItemType = _genericCollectionDefinitionType.GetGenericArguments()[0];
 
                 if (
@@ -206,7 +208,8 @@ namespace Newtonsoft.Json.Serialization
                         NonNullableUnderlyingType,
                         typeof(IList<>)
                     )
-                ) {
+                )
+                {
                     CreatedType = typeof(List<>).MakeGenericType(CollectionItemType);
                 }
 
@@ -231,7 +234,8 @@ namespace Newtonsoft.Json.Serialization
                     typeof(IReadOnlyCollection<>),
                     out tempCollectionType
                 )
-            ) {
+            )
+            {
                 CollectionItemType = tempCollectionType.GetGenericArguments()[0];
 
                 if (
@@ -243,7 +247,8 @@ namespace Newtonsoft.Json.Serialization
                         NonNullableUnderlyingType,
                         typeof(IReadOnlyList<>)
                     )
-                ) {
+                )
+                {
                     CreatedType = typeof(ReadOnlyCollection<>).MakeGenericType(CollectionItemType);
                 }
 
@@ -269,7 +274,8 @@ namespace Newtonsoft.Json.Serialization
                     typeof(IEnumerable<>),
                     out tempCollectionType
                 )
-            ) {
+            )
+            {
                 CollectionItemType = tempCollectionType.GetGenericArguments()[0];
 
                 if (ReflectionUtils.IsGenericDefinition(UnderlyingType, typeof(IEnumerable<>)))
@@ -289,7 +295,8 @@ namespace Newtonsoft.Json.Serialization
                 if (
                     NonNullableUnderlyingType.IsGenericType()
                     && NonNullableUnderlyingType.GetGenericTypeDefinition() == typeof(IEnumerable<>)
-                ) {
+                )
+                {
                     _genericCollectionDefinitionType = tempCollectionType;
 
                     IsReadOnlyOrFixedSize = false;
@@ -327,7 +334,8 @@ namespace Newtonsoft.Json.Serialization
                         typeof(List<>),
                         out tempCollectionType
                     ) || (IsArray && !IsMultidimensionalArray)
-                ) {
+                )
+                {
                     ShouldCreateWrapper = true;
                 }
             }
@@ -341,7 +349,8 @@ namespace Newtonsoft.Json.Serialization
                     out Type? immutableCreatedType,
                     out ObjectConstructor<object>? immutableParameterizedCreator
                 )
-            ) {
+            )
+            {
                 CreatedType = immutableCreatedType;
                 _parameterizedCreator = immutableParameterizedCreator;
                 IsReadOnlyOrFixedSize = true;
@@ -368,7 +377,8 @@ namespace Newtonsoft.Json.Serialization
                     )
                     || _genericCollectionDefinitionType.GetGenericTypeDefinition()
                         == typeof(IEnumerable<>)
-                ) {
+                )
+                {
                     constructorArgument = typeof(ICollection<>).MakeGenericType(CollectionItemType);
                 }
                 else
@@ -414,7 +424,8 @@ namespace Newtonsoft.Json.Serialization
             if (
                 !HasParameterizedCreatorInternal
                 && underlyingType.Name == FSharpUtils.FSharpListTypeName
-            ) {
+            )
+            {
                 FSharpUtils.EnsureInitialized(underlyingType.Assembly());
                 _parameterizedCreator = FSharpUtils.Instance.CreateSeq(CollectionItemType!);
             }

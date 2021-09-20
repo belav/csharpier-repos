@@ -18,7 +18,8 @@ namespace System.Net.Sockets.Tests
                     SocketType.Stream,
                     ProtocolType.Tcp
                 )
-            ) {
+            )
+            {
                 Assert.Equal(0, socket.ReceiveTimeout);
 
                 socket.ReceiveTimeout = 100;
@@ -38,7 +39,8 @@ namespace System.Net.Sockets.Tests
                     SocketType.Stream,
                     ProtocolType.Tcp
                 )
-            ) {
+            )
+            {
                 Assert.Equal(0, socket.SendTimeout);
 
                 socket.SendTimeout = 100;
@@ -72,7 +74,8 @@ namespace System.Net.Sockets.Tests
                     SocketType.Stream,
                     ProtocolType.Tcp
                 )
-            ) {
+            )
+            {
                 int port = localSocket.BindToAnonymousPort(IPAddress.IPv6Loopback);
                 localSocket.Listen(1);
                 IAsyncResult localAsync = localSocket.BeginAccept(null, null);
@@ -124,7 +127,8 @@ namespace System.Net.Sockets.Tests
                     SocketType.Stream,
                     ProtocolType.Tcp
                 )
-            ) {
+            )
+            {
                 int port = localSocket.BindToAnonymousPort(IPAddress.IPv6Loopback);
                 localSocket.Listen(1);
                 IAsyncResult localAsync = localSocket.BeginAccept(null, null);

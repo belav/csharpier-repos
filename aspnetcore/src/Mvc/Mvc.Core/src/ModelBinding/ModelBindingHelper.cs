@@ -177,7 +177,8 @@ namespace Microsoft.AspNetCore.Mvc.ModelBinding
             IModelBinderFactory modelBinderFactory,
             IValueProvider valueProvider,
             IObjectModelValidator objectModelValidator
-        ) {
+        )
+        {
             return TryUpdateModelAsync(
                 model,
                 modelType,
@@ -220,7 +221,8 @@ namespace Microsoft.AspNetCore.Mvc.ModelBinding
             IValueProvider valueProvider,
             IObjectModelValidator objectModelValidator,
             Func<ModelMetadata, bool> propertyFilter
-        ) {
+        )
+        {
             if (model == null)
             {
                 throw new ArgumentNullException(nameof(model));
@@ -340,7 +342,8 @@ namespace Microsoft.AspNetCore.Mvc.ModelBinding
             if (
                 expression.NodeType == ExpressionType.Convert
                 || expression.NodeType == ExpressionType.ConvertChecked
-            ) {
+            )
+            {
                 // For Boxed Value Types
                 expression = ((UnaryExpression)expression).Operand;
             }
@@ -382,7 +385,8 @@ namespace Microsoft.AspNetCore.Mvc.ModelBinding
         /// <returns>An expression which can be used with <see cref="IPropertyFilterProvider"/>.</returns>
         public static Expression<Func<ModelMetadata, bool>> GetPropertyFilterExpression<TModel>(
             Expression<Func<TModel, object>>[] expressions
-        ) {
+        )
+        {
             if (expressions.Length == 0)
             {
                 // If nothing is included explicitly, treat everything as included.
@@ -408,7 +412,8 @@ namespace Microsoft.AspNetCore.Mvc.ModelBinding
 
         private static Expression<Func<ModelMetadata, bool>> GetPredicateExpression<TModel>(
             Expression<Func<TModel, object>> expression
-        ) {
+        )
+        {
             var propertyName = GetPropertyName(expression.Body);
 
             return (metadata) =>
@@ -427,7 +432,8 @@ namespace Microsoft.AspNetCore.Mvc.ModelBinding
             ModelStateDictionary modelState,
             IModelMetadataProvider metadataProvider,
             string modelKey
-        ) {
+        )
+        {
             if (modelType == null)
             {
                 throw new ArgumentNullException(nameof(modelType));
@@ -460,7 +466,8 @@ namespace Microsoft.AspNetCore.Mvc.ModelBinding
             ModelMetadata modelMetadata,
             ModelStateDictionary modelState,
             string? modelKey
-        ) {
+        )
+        {
             if (modelMetadata == null)
             {
                 throw new ArgumentNullException(nameof(modelMetadata));
@@ -622,14 +629,16 @@ namespace Microsoft.AspNetCore.Mvc.ModelBinding
         public static ICollection<T> GetCompatibleCollection<T>(
             ModelBindingContext bindingContext,
             int capacity
-        ) {
+        )
+        {
             return GetCompatibleCollection<T>(bindingContext, (int?)capacity);
         }
 
         private static ICollection<T> GetCompatibleCollection<T>(
             ModelBindingContext bindingContext,
             int? capacity
-        ) {
+        )
+        {
             var model = bindingContext.Model;
             var modelType = bindingContext.ModelType;
 
@@ -723,7 +732,8 @@ namespace Microsoft.AspNetCore.Mvc.ModelBinding
             object value,
             Type destinationType,
             CultureInfo culture
-        ) {
+        )
+        {
             // array conversion results in four cases, as below
             var valueAsArray = value as Array;
             if (destinationType.IsArray)
@@ -779,7 +789,8 @@ namespace Microsoft.AspNetCore.Mvc.ModelBinding
             object? value,
             Type destinationType,
             CultureInfo culture
-        ) {
+        )
+        {
             if (value == null || destinationType.IsAssignableFrom(value.GetType()))
             {
                 return value;
@@ -815,7 +826,8 @@ namespace Microsoft.AspNetCore.Mvc.ModelBinding
                         || value is byte
                         || value is sbyte
                     )
-                ) {
+                )
+                {
                     return Enum.ToObject(destinationType, value);
                 }
 

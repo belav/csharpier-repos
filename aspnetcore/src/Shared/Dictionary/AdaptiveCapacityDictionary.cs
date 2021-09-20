@@ -89,7 +89,8 @@ namespace Microsoft.AspNetCore.Internal
             IEnumerable<KeyValuePair<TKey, TValue>> values,
             int capacity,
             IEqualityComparer<TKey> comparer
-        ) {
+        )
+        {
             _comparer = comparer ?? EqualityComparer<TKey>.Default;
 
             _arrayStorage = new KeyValuePair<TKey, TValue>[capacity];
@@ -314,7 +315,8 @@ namespace Microsoft.AspNetCore.Internal
         void ICollection<KeyValuePair<TKey, TValue>>.CopyTo(
             KeyValuePair<TKey, TValue>[] array,
             int arrayIndex
-        ) {
+        )
+        {
             if (array == null)
             {
                 throw new ArgumentNullException(nameof(array));
@@ -388,7 +390,8 @@ namespace Microsoft.AspNetCore.Internal
                 if (
                     index >= 0
                     && EqualityComparer<TValue>.Default.Equals(array[index].Value, item.Value)
-                ) {
+                )
+                {
                     Array.Copy(array, index + 1, array, index, _count - index);
                     _count--;
                     array[_count] = default;

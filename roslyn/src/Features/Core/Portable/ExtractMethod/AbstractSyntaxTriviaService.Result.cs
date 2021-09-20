@@ -31,7 +31,8 @@ namespace Microsoft.CodeAnalysis.ExtractMethod
                 int endOfLineKind,
                 Dictionary<TriviaLocation, SyntaxAnnotation> annotations,
                 Dictionary<TriviaLocation, IEnumerable<SyntaxTrivia>> triviaList
-            ) {
+            )
+            {
                 Contract.ThrowIfNull(root);
                 Contract.ThrowIfNull(annotations);
                 Contract.ThrowIfNull(triviaList);
@@ -49,7 +50,8 @@ namespace Microsoft.CodeAnalysis.ExtractMethod
                 SyntaxNode root,
                 AnnotationResolver annotationResolver = null,
                 TriviaResolver triviaResolver = null
-            ) {
+            )
+            {
                 var tokens = RecoverTokensAtEdges(root, annotationResolver);
                 var map = CreateOldToNewTokensMap(tokens, triviaResolver);
 
@@ -59,7 +61,8 @@ namespace Microsoft.CodeAnalysis.ExtractMethod
             private static Dictionary<SyntaxToken, SyntaxToken> CreateOldToNewTokensMap(
                 Dictionary<TriviaLocation, PreviousNextTokenPair> tokenPairs,
                 Dictionary<TriviaLocation, LeadingTrailingTriviaPair> triviaPairs
-            ) {
+            )
+            {
                 var map = new Dictionary<SyntaxToken, SyntaxToken>();
                 foreach (var pair in CreateUniqueTokenTriviaPairs(tokenPairs, triviaPairs))
                 {
@@ -86,7 +89,8 @@ namespace Microsoft.CodeAnalysis.ExtractMethod
 
             private LeadingTrailingTriviaPair GetTrailingAndLeadingTrivia(
                 IEnumerable<SyntaxTrivia> trivia
-            ) {
+            )
+            {
                 var list = trivia.ToList();
 
                 // there are some noisy trivia
@@ -115,7 +119,8 @@ namespace Microsoft.CodeAnalysis.ExtractMethod
             private Dictionary<TriviaLocation, SyntaxToken> RecoverTokensAtEdges(
                 SyntaxNode root,
                 AnnotationResolver annotationResolver
-            ) {
+            )
+            {
                 var resolver = annotationResolver ?? s_defaultAnnotationResolver;
 
                 var tokens = Enumerable.Range(
@@ -146,7 +151,8 @@ namespace Microsoft.CodeAnalysis.ExtractMethod
             private Dictionary<SyntaxToken, SyntaxToken> CreateOldToNewTokensMap(
                 Dictionary<TriviaLocation, SyntaxToken> tokens,
                 TriviaResolver triviaResolver
-            ) {
+            )
+            {
                 var tokenPairs = CreatePreviousNextTokenPairs(tokens);
                 var tokenToLeadingTrailingTriviaMap = CreateTokenLeadingTrailingTriviaMap(tokens);
 
@@ -176,7 +182,8 @@ namespace Microsoft.CodeAnalysis.ExtractMethod
             private LeadingTrailingTriviaPair CreateTriviaPairs(
                 PreviousNextTokenPair tokenPair,
                 IEnumerable<SyntaxTrivia> trivia
-            ) {
+            )
+            {
                 // beginning of the tree
                 if (tokenPair.PreviousToken.RawKind == 0)
                 {
@@ -195,14 +202,16 @@ namespace Microsoft.CodeAnalysis.ExtractMethod
             > CreateUniqueTokenTriviaPairs(
                 Dictionary<TriviaLocation, PreviousNextTokenPair> tokenPairs,
                 Dictionary<TriviaLocation, LeadingTrailingTriviaPair> triviaPairs
-            ) {
+            )
+            {
                 // if there are dup, duplicated one will be ignored.
                 var set = new HashSet<PreviousNextTokenPair>();
                 for (
                     var i = (int)TriviaLocation.BeforeBeginningOfSpan;
                     i <= (int)TriviaLocation.AfterEndOfSpan;
                     i++
-                ) {
+                )
+                {
                     var location = (TriviaLocation)i;
                     var key = tokenPairs[location];
                     if (set.Contains(key))
@@ -300,7 +309,8 @@ namespace Microsoft.CodeAnalysis.ExtractMethod
                 List<SyntaxTrivia> list,
                 int startIndex,
                 int endIndex
-            ) {
+            )
+            {
                 if (startIndex > endIndex)
                 {
                     yield break;
@@ -316,7 +326,8 @@ namespace Microsoft.CodeAnalysis.ExtractMethod
                 SyntaxNode root,
                 TriviaLocation location,
                 SyntaxAnnotation annotation
-            ) {
+            )
+            {
                 return root.GetAnnotatedNodesAndTokens(annotation).FirstOrDefault().AsToken();
             }
 
@@ -324,7 +335,8 @@ namespace Microsoft.CodeAnalysis.ExtractMethod
                 TriviaLocation location,
                 PreviousNextTokenPair tokenPair,
                 Dictionary<SyntaxToken, LeadingTrailingTriviaPair> triviaMap
-            ) {
+            )
+            {
                 var previousTriviaPair = triviaMap.ContainsKey(tokenPair.PreviousToken)
                     ? triviaMap[tokenPair.PreviousToken]
                     : default;

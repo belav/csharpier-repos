@@ -19,7 +19,8 @@ namespace FormatterWebSite
             Type objectType,
             object existingValue,
             JsonSerializer serializer
-        ) {
+        )
+        {
             return new DerivedModel { DerivedProperty = reader.Value.ToString(), };
         }
 

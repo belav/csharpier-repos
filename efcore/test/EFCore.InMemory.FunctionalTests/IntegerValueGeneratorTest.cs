@@ -367,7 +367,8 @@ namespace Microsoft.EntityFrameworkCore
                 string databaseName,
                 InMemoryDatabaseRoot root = null,
                 IServiceProvider internalServiceProvider = null
-            ) {
+            )
+            {
                 _databaseName = databaseName;
                 _root = root;
                 _internalServiceProvider = internalServiceProvider;

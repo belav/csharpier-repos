@@ -16,7 +16,8 @@ namespace Microsoft.AspNetCore.Rewrite.ApacheModRewrite
             UrlMatch initialMatch,
             IList<Condition>? conditions,
             IList<UrlAction> urlActions
-        ) {
+        )
+        {
             Conditions = conditions;
             InitialMatch = initialMatch;
             Actions = urlActions;

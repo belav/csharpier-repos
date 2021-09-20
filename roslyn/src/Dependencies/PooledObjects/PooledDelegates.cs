@@ -21,15 +21,16 @@ namespace Microsoft.CodeAnalysis.PooledObjects
             TUnboundDelegate unboundDelegate,
             TArg argument,
             out TBoundDelegate boundDelegate
-        ) where TPooled : AbstractDelegateWithBoundArgument<
-                  TPooled,
-                  TArg,
-                  TUnboundDelegate,
-                  TBoundDelegate
-              >,
-              new()
-          where TUnboundDelegate : Delegate
-          where TBoundDelegate : Delegate
+        )
+            where TPooled : AbstractDelegateWithBoundArgument<
+                    TPooled,
+                    TArg,
+                    TUnboundDelegate,
+                    TBoundDelegate
+                >,
+                new()
+            where TUnboundDelegate : Delegate
+            where TBoundDelegate : Delegate
         {
             var obj = DefaultDelegatePool<TPooled>.Instance.Allocate();
             obj.Initialize(unboundDelegate, argument);

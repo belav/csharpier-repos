@@ -364,10 +364,8 @@ namespace System.Runtime.Serialization.Formatters.Tests
     public sealed class DerivedISerializableWithNonPublicDeserializationCtor
         : BasicISerializableObject
     {
-        public DerivedISerializableWithNonPublicDeserializationCtor(
-            int value1,
-            string value2
-        ) : base(value1, value2) { }
+        public DerivedISerializableWithNonPublicDeserializationCtor(int value1, string value2)
+            : base(value1, value2) { }
         private DerivedISerializableWithNonPublicDeserializationCtor(
             SerializationInfo info,
             StreamingContext context
@@ -457,7 +455,8 @@ namespace System.Runtime.Serialization.Formatters.Tests
             SerializationInfo info,
             StreamingContext context,
             ISurrogateSelector selector
-        ) {
+        )
+        {
             var pair = (NonSerializablePair<int, string>)obj;
             pair.Value1 = info.GetInt32("Value1");
             pair.Value2 = info.GetString("Value2");

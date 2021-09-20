@@ -383,7 +383,8 @@ namespace ROOT_PROJECT_NAMESPACE.Areas.HelpPage.ModelDescriptions
         private CollectionModelDescription GenerateCollectionModelDescription(
             Type modelType,
             Type elementType
-        ) {
+        )
+        {
             ModelDescription collectionModelDescription = GetOrCreateModelDescription(elementType);
             if (collectionModelDescription != null)
             {
@@ -464,7 +465,8 @@ namespace ROOT_PROJECT_NAMESPACE.Areas.HelpPage.ModelDescriptions
             Type modelType,
             Type keyType,
             Type valueType
-        ) {
+        )
+        {
             ModelDescription keyModelDescription = GetOrCreateModelDescription(keyType);
             ModelDescription valueModelDescription = GetOrCreateModelDescription(valueType);
 
@@ -489,7 +491,8 @@ namespace ROOT_PROJECT_NAMESPACE.Areas.HelpPage.ModelDescriptions
                 modelType.GetCustomAttribute<DataContractAttribute>() != null;
             foreach (
                 FieldInfo field in modelType.GetFields(BindingFlags.Public | BindingFlags.Static)
-            ) {
+            )
+            {
                 if (ShouldDisplayMember(field, hasDataContractAttribute))
                 {
                     EnumValueDescription enumValue = new EnumValueDescription
@@ -513,7 +516,8 @@ namespace ROOT_PROJECT_NAMESPACE.Areas.HelpPage.ModelDescriptions
             Type modelType,
             Type keyType,
             Type valueType
-        ) {
+        )
+        {
             ModelDescription keyModelDescription = GetOrCreateModelDescription(keyType);
             ModelDescription valueModelDescription = GetOrCreateModelDescription(valueType);
 

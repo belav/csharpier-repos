@@ -220,7 +220,8 @@ namespace System.Threading.Tasks.Tests
                     schedPair.ConcurrentScheduler,
                     schedPair.ExclusiveScheduler
                 }
-            ) {
+            )
+            {
                 Exception caughtException = null;
                 try
                 {
@@ -262,7 +263,8 @@ namespace System.Threading.Tasks.Tests
             int maxConcurrency,
             int maxItemsPerTask,
             bool completeBeforeTaskWait
-        ) {
+        )
+        {
             //Create a custom TaskScheduler with specified max concurrency (TrackingTaskScheduler is defined in Common\tools\CommonUtils\TPLTestSchedulers.cs)
             TrackingTaskScheduler scheduler = new TrackingTaskScheduler(maxConcurrency);
             //We need to use the custom scheduler to achieve the results. As a by-product, we test to ensure custom schedulers are supported
@@ -815,7 +817,8 @@ namespace System.Threading.Tasks.Tests
             int taskCount,
             TaskScheduler scheduler,
             Action work
-        ) {
+        )
+        {
             switch (apiType)
             {
                 case "StartNew":
@@ -912,7 +915,8 @@ namespace System.Threading.Tasks.Tests
                         "ContinueWhenAll",
                         "ContinueWhenAny"
                     }
-                ) {
+                )
+                {
                     foreach (bool useReader in new bool[] { true, false })
                     {
                         values.Add(new object[] { apiType, useReader });

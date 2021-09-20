@@ -35,11 +35,8 @@ namespace System.IO
             FileName = fileName;
         }
 
-        public FileNotFoundException(
-            string? message,
-            string? fileName,
-            Exception? innerException
-        ) : base(message, innerException)
+        public FileNotFoundException(string? message, string? fileName, Exception? innerException)
+            : base(message, innerException)
         {
             HResult = HResults.COR_E_FILENOTFOUND;
             FileName = fileName;

@@ -264,7 +264,8 @@ namespace System.Linq.Expressions.Interpreter
                 && paramTypes.Length == 2
                 && paramInfos[0].ParameterType.IsByRef
                 && paramInfos[1].ParameterType.IsByRef
-            ) {
+            )
+            {
                 runMethod = typeof(LightLambda).GetMethod(
                     "RunVoidRef2",
                     BindingFlags.NonPublic | BindingFlags.Instance

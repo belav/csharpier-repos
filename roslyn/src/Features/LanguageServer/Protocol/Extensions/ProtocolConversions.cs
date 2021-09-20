@@ -79,7 +79,8 @@ namespace Microsoft.CodeAnalysis.LanguageServer
             Document document,
             int position,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             if (context == null)
             {
                 // Some LSP clients don't support sending extra context, so all we can do is invoke
@@ -137,7 +138,8 @@ namespace Microsoft.CodeAnalysis.LanguageServer
                 Document document,
                 int position,
                 CancellationToken cancellationToken
-            ) {
+            )
+            {
                 var text = await document.GetTextAsync(cancellationToken).ConfigureAwait(false);
 
                 // We use 'position - 1' here since we want to find the character that was just inserted.
@@ -161,7 +163,8 @@ namespace Microsoft.CodeAnalysis.LanguageServer
             int position,
             SourceText text,
             Document document
-        ) {
+        )
+        {
             return new LSP.TextDocumentPositionParams()
             {
                 TextDocument = DocumentToTextDocumentIdentifier(document),
@@ -237,7 +240,8 @@ namespace Microsoft.CodeAnalysis.LanguageServer
             DocumentSpan documentSpan,
             ClassifiedTextElement text,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var location = await TextSpanToLocationAsync(
                     documentSpan.Document,
                     documentSpan.SourceSpan,
@@ -360,7 +364,8 @@ namespace Microsoft.CodeAnalysis.LanguageServer
             Document document,
             TextSpan textSpan,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var result = await GetMappedSpanResultAsync(
                     document,
                     ImmutableArray.Create(textSpan),
@@ -390,7 +395,8 @@ namespace Microsoft.CodeAnalysis.LanguageServer
                 Document document,
                 TextSpan span,
                 CancellationToken cancellationToken
-            ) {
+            )
+            {
                 var text = await document.GetTextAsync(cancellationToken).ConfigureAwait(false);
 
                 return ConvertTextSpanWithTextToLocation(span, text, document.GetURI());
@@ -400,7 +406,8 @@ namespace Microsoft.CodeAnalysis.LanguageServer
                 TextSpan span,
                 SourceText text,
                 Uri documentUri
-            ) {
+            )
+            {
                 var location = new LSP.Location
                 {
                     Uri = documentUri,
@@ -434,7 +441,8 @@ namespace Microsoft.CodeAnalysis.LanguageServer
 
         public static LSP.DocumentHighlightKind HighlightSpanKindToDocumentHighlightKind(
             HighlightSpanKind kind
-        ) {
+        )
+        {
             switch (kind)
             {
                 case HighlightSpanKind.Reference:
@@ -608,7 +616,8 @@ namespace Microsoft.CodeAnalysis.LanguageServer
         // The mappings here are roughly based off of SymbolUsageInfoExtensions.ToSymbolReferenceKinds.
         public static LSP.ReferenceKind[] SymbolUsageInfoToReferenceKinds(
             SymbolUsageInfo symbolUsageInfo
-        ) {
+        )
+        {
             using var _ = ArrayBuilder<LSP.ReferenceKind>.GetInstance(out var referenceKinds);
             if (symbolUsageInfo.ValueUsageInfoOpt.HasValue)
             {
@@ -697,7 +706,8 @@ namespace Microsoft.CodeAnalysis.LanguageServer
             LSP.FormattingOptions options,
             Document document,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var documentOptions = await document.GetOptionsAsync(cancellationToken)
                 .ConfigureAwait(false);
             // LSP doesn't currently support indent size as an option. However, except in special
@@ -715,7 +725,8 @@ namespace Microsoft.CodeAnalysis.LanguageServer
             TextDocument textDocument,
             ImmutableArray<TextSpan> textSpans,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             if (textDocument is not Document document)
             {
                 return null;

@@ -26,7 +26,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             ImmutableArray<CustomModifier> refCustomModifiers,
             bool isParams,
             RefKind refKind
-        ) {
+        )
+        {
             Debug.Assert((object)type.Type != null);
             Debug.Assert(!refCustomModifiers.IsDefault);
 

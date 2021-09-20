@@ -19,16 +19,15 @@ namespace Microsoft.AspNetCore.Testing
             : this(operatingSystem, GetCurrentOS()) { }
 
         [Obsolete("Use the Minimum/MaximumOSVersionAttribute for version checks.", error: true)]
-        public OSSkipConditionAttribute(
-            OperatingSystems operatingSystem,
-            params string[] versions
-        ) : this(operatingSystem, GetCurrentOS()) { }
+        public OSSkipConditionAttribute(OperatingSystems operatingSystem, params string[] versions)
+            : this(operatingSystem, GetCurrentOS()) { }
 
         // to enable unit testing
         internal OSSkipConditionAttribute(
             OperatingSystems operatingSystem,
             OperatingSystems osPlatform
-        ) {
+        )
+        {
             _excludedOperatingSystem = operatingSystem;
             _osPlatform = osPlatform;
         }

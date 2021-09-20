@@ -119,7 +119,8 @@ namespace Microsoft.AspNetCore.Server.IIS.FunctionalTests
 
             using (
                 var connection = new TestConnection(deploymentResult.HttpClient.BaseAddress.Port)
-            ) {
+            )
+            {
                 await connection.Send(
                     "POST /HelloWorld HTTP/1.1",
                     $"Content-Length: 30000001",

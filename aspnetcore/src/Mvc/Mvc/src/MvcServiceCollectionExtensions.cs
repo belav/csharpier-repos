@@ -44,7 +44,8 @@ namespace Microsoft.Extensions.DependencyInjection
         public static IMvcBuilder AddMvc(
             this IServiceCollection services,
             Action<MvcOptions> setupAction
-        ) {
+        )
+        {
             if (services == null)
             {
                 throw new ArgumentNullException(nameof(services));
@@ -126,7 +127,8 @@ namespace Microsoft.Extensions.DependencyInjection
         public static IMvcBuilder AddControllers(
             this IServiceCollection services,
             Action<MvcOptions> configure
-        ) {
+        )
+        {
             if (services == null)
             {
                 throw new ArgumentNullException(nameof(services));
@@ -214,7 +216,8 @@ namespace Microsoft.Extensions.DependencyInjection
         public static IMvcBuilder AddControllersWithViews(
             this IServiceCollection services,
             Action<MvcOptions> configure
-        ) {
+        )
+        {
             if (services == null)
             {
                 throw new ArgumentNullException(nameof(services));
@@ -299,7 +302,8 @@ namespace Microsoft.Extensions.DependencyInjection
         public static IMvcBuilder AddRazorPages(
             this IServiceCollection services,
             Action<RazorPagesOptions> configure
-        ) {
+        )
+        {
             if (services == null)
             {
                 throw new ArgumentNullException(nameof(services));
@@ -335,7 +339,8 @@ namespace Microsoft.Extensions.DependencyInjection
             if (
                 !partManager.ApplicationParts.OfType<AssemblyPart>()
                     .Any(p => p.Assembly == mvcTagHelpersAssembly)
-            ) {
+            )
+            {
                 partManager.ApplicationParts.Add(new FrameworkAssemblyPart(mvcTagHelpersAssembly));
             }
 
@@ -343,7 +348,8 @@ namespace Microsoft.Extensions.DependencyInjection
             if (
                 !partManager.ApplicationParts.OfType<AssemblyPart>()
                     .Any(p => p.Assembly == mvcRazorAssembly)
-            ) {
+            )
+            {
                 partManager.ApplicationParts.Add(new FrameworkAssemblyPart(mvcRazorAssembly));
             }
         }

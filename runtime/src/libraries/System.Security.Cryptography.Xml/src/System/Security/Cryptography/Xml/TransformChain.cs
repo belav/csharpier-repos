@@ -63,7 +63,8 @@ namespace System.Security.Cryptography.Xml
             Type inputType,
             XmlResolver resolver,
             string baseUri
-        ) {
+        )
+        {
             object currentInput = inputObject;
             foreach (Transform transform in _transforms)
             {
@@ -182,7 +183,8 @@ namespace System.Security.Cryptography.Xml
             XmlDocument document,
             XmlResolver resolver,
             string baseUri
-        ) {
+        )
+        {
             return TransformToOctetStream(document, typeof(XmlDocument), resolver, baseUri);
         }
 

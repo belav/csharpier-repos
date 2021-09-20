@@ -35,7 +35,8 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking
             InternalEntityEntry entry,
             InternalEntityEntry? sourceEntry,
             INavigationBase? inboundNavigation
-        ) {
+        )
+        {
             Check.NotNull(entry, nameof(entry));
 
             _entry = entry;
@@ -100,7 +101,8 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking
             EntityEntryGraphNode currentNode,
             InternalEntityEntry internalEntityEntry,
             INavigationBase reachedVia
-        ) {
+        )
+        {
             Check.NotNull(currentNode, nameof(currentNode));
             Check.NotNull(internalEntityEntry, nameof(internalEntityEntry));
             Check.NotNull(reachedVia, nameof(reachedVia));

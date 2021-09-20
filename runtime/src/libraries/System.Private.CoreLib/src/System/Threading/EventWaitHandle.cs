@@ -21,7 +21,8 @@ namespace System.Threading
             EventResetMode mode,
             string? name,
             out bool createdNew
-        ) {
+        )
+        {
             if (mode != EventResetMode.AutoReset && mode != EventResetMode.ManualReset)
                 throw new ArgumentException(SR.Argument_InvalidFlag, nameof(mode));
 

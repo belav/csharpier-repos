@@ -29,7 +29,8 @@ namespace WebServer
             else if (
                 string.Equals("Negotiate", authType, StringComparison.OrdinalIgnoreCase)
                 || string.Equals("NTLM", authType, StringComparison.OrdinalIgnoreCase)
-            ) {
+            )
+            {
                 if (
                     !HandleChallengeResponseAuthentication(
                         context,
@@ -38,7 +39,8 @@ namespace WebServer
                         password,
                         domain
                     )
-                ) {
+                )
+                {
                     context.Response.End();
                     return false;
                 }
@@ -59,7 +61,8 @@ namespace WebServer
             string user,
             string password,
             string domain
-        ) {
+        )
+        {
             const string WwwAuthenticateHeaderValue = "Basic realm=\"corefx-networking\"";
 
             string authHeader = context.Request.Headers["Authorization"];
@@ -112,7 +115,8 @@ namespace WebServer
             string user,
             string password,
             string domain
-        ) {
+        )
+        {
             string authHeader = context.Request.Headers["Authorization"];
             if (authHeader == null)
             {

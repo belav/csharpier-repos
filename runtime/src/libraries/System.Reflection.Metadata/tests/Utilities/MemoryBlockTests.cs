@@ -239,7 +239,8 @@ namespace System.Reflection.Metadata.Tests
             byte[] bytes;
             fixed (
                 byte* ptr = (bytes = Encoding.Unicode.GetBytes("\u00C7a marche tr\u00E8s bien."))
-            ) {
+            )
+            {
                 Assert.Equal(
                     "\u00C7a marche tr\u00E8s bien.",
                     decoder.GetString(ptr, bytes.Length)
@@ -320,7 +321,8 @@ namespace System.Reflection.Metadata.Tests
             string value,
             bool unicode = false,
             bool ignoreCase = false
-        ) {
+        )
+        {
             byte[] heap;
             MetadataStringDecoder decoder = MetadataStringDecoder.DefaultUTF8;
 
@@ -356,7 +358,8 @@ namespace System.Reflection.Metadata.Tests
             string heapSubstr,
             MetadataStringDecoder decoder,
             bool ignoreCase
-        ) {
+        )
+        {
             // equals:
             bool actualEq = block.Utf8NullTerminatedEquals(
                 offset,
@@ -549,7 +552,8 @@ namespace System.Reflection.Metadata.Tests
                         0x85
                     }
                 )
-            ) {
+            )
+            {
                 var block = new MemoryBlock(heapPtr, heap.Length);
 
                 TestUtf8NullTerminatedFastCompare(
@@ -718,7 +722,8 @@ namespace System.Reflection.Metadata.Tests
             bool ignoreCase,
             MemoryBlock.FastComparisonResult expectedResult,
             int expectedFirstDifferenceIndex
-        ) {
+        )
+        {
             int actualFirstDifferenceIndex;
             var actualResult = block.Utf8NullTerminatedFastCompare(
                 offset,

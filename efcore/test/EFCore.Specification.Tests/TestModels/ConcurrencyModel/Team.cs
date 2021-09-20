@@ -34,7 +34,8 @@ namespace Microsoft.EntityFrameworkCore.TestModels.ConcurrencyModel
             int poles,
             int fastestLaps,
             int? gearboxId
-        ) {
+        )
+        {
             _loader = loader;
             Id = id;
             Name = name;

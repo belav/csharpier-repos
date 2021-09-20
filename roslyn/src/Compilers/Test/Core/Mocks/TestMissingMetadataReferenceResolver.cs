@@ -43,7 +43,8 @@ namespace Roslyn.Test.Utilities
         public override PortableExecutableReference ResolveMissingAssembly(
             MetadataReference definition,
             AssemblyIdentity referenceIdentity
-        ) {
+        )
+        {
             ResolutionAttempts.Add(new ReferenceAndIdentity(definition, referenceIdentity));
 
             string nameAndVersion =

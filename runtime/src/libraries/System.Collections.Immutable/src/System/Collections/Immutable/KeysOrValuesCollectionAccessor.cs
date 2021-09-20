@@ -34,7 +34,8 @@ namespace System.Collections.Immutable
         protected KeysOrValuesCollectionAccessor(
             IImmutableDictionary<TKey, TValue> dictionary,
             IEnumerable<T> keysOrValues
-        ) {
+        )
+        {
             Requires.NotNull(dictionary, nameof(dictionary));
             Requires.NotNull(keysOrValues, nameof(keysOrValues));
 

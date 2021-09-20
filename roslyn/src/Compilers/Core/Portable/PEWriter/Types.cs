@@ -337,7 +337,8 @@ namespace Microsoft.Cci
         public MethodImplementation(
             Cci.IMethodDefinition ImplementingMethod,
             Cci.IMethodReference ImplementedMethod
-        ) {
+        )
+        {
             this.ImplementingMethod = ImplementingMethod;
             this.ImplementedMethod = ImplementedMethod;
         }
@@ -417,7 +418,8 @@ namespace Microsoft.Cci
         public TypeReferenceWithAttributes(
             ITypeReference typeRef,
             ImmutableArray<ICustomAttribute> attributes = default(ImmutableArray<ICustomAttribute>)
-        ) {
+        )
+        {
             TypeRef = typeRef;
             Attributes = attributes.NullToEmpty();
         }

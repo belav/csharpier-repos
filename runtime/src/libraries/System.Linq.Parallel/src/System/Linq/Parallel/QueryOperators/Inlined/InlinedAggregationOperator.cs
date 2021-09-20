@@ -72,7 +72,8 @@ namespace System.Linq.Parallel
                         && cancelEx.CancellationToken
                             == SpecifiedQuerySettings.CancellationState.ExternalCancellationToken
                         && SpecifiedQuerySettings.CancellationState.ExternalCancellationToken.IsCancellationRequested
-                    ) {
+                    )
+                    {
                         throw;
                     }
 
@@ -113,7 +114,8 @@ namespace System.Linq.Parallel
         internal override QueryResults<TIntermediate> Open(
             QuerySettings settings,
             bool preferStriping
-        ) {
+        )
+        {
             QueryResults<TSource> childQueryResults = Child.Open(settings, preferStriping);
             return new UnaryQueryOperatorResults(childQueryResults, this, settings, preferStriping);
         }
@@ -123,7 +125,8 @@ namespace System.Linq.Parallel
             IPartitionedStreamRecipient<TIntermediate> recipient,
             bool preferStriping,
             QuerySettings settings
-        ) {
+        )
+        {
             int partitionCount = inputStream.PartitionCount;
             PartitionedStream<TIntermediate, int> outputStream = new PartitionedStream<
                 TIntermediate,

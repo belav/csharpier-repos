@@ -24,7 +24,8 @@ namespace System.Web.Mvc.Html
         public static MvcHtmlString DisplayTextFor<TModel, TResult>(
             this HtmlHelper<TModel> html,
             Expression<Func<TModel, TResult>> expression
-        ) {
+        )
+        {
             return DisplayTextHelper(
                 html,
                 ModelMetadata.FromLambdaExpression(expression, html.ViewData)

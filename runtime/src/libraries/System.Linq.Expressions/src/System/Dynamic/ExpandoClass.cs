@@ -71,7 +71,8 @@ namespace System.Dynamic
                             newKey,
                             StringComparison.Ordinal
                         )
-                    ) {
+                    )
+                    {
                         // the new key is the key we added in this transition
                         return klass;
                     }

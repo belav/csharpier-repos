@@ -35,10 +35,8 @@ namespace Microsoft.AspNetCore.Mvc.ModelBinding.Binders
         /// The <see cref="IModelBinder"/> for binding <typeparamref name="TElement"/>.
         /// </param>
         /// <param name="loggerFactory">The <see cref="ILoggerFactory"/>.</param>
-        public CollectionModelBinder(
-            IModelBinder elementBinder,
-            ILoggerFactory loggerFactory
-        ) : this(elementBinder, loggerFactory, allowValidatingTopLevelNodes: true) { }
+        public CollectionModelBinder(IModelBinder elementBinder, ILoggerFactory loggerFactory)
+            : this(elementBinder, loggerFactory, allowValidatingTopLevelNodes: true) { }
 
         /// <summary>
         /// Creates a new <see cref="CollectionModelBinder{TElement}"/>.
@@ -56,7 +54,8 @@ namespace Microsoft.AspNetCore.Mvc.ModelBinding.Binders
             IModelBinder elementBinder,
             ILoggerFactory loggerFactory,
             bool allowValidatingTopLevelNodes
-        ) {
+        )
+        {
             if (elementBinder == null)
             {
                 throw new ArgumentNullException(nameof(elementBinder));
@@ -276,7 +275,8 @@ namespace Microsoft.AspNetCore.Mvc.ModelBinding.Binders
         internal async Task<CollectionResult> BindSimpleCollection(
             ModelBindingContext bindingContext,
             ValueProviderResult values
-        ) {
+        )
+        {
             var boundCollection = new List<TElement?>();
 
             var elementMetadata = bindingContext.ModelMetadata.ElementMetadata!;
@@ -298,7 +298,8 @@ namespace Microsoft.AspNetCore.Mvc.ModelBinding.Binders
                         modelName: bindingContext.ModelName,
                         model: null
                     )
-                ) {
+                )
+                {
                     await ElementBinder.BindModelAsync(bindingContext);
 
                     if (bindingContext.Result.IsModelSet)
@@ -339,7 +340,8 @@ namespace Microsoft.AspNetCore.Mvc.ModelBinding.Binders
         internal async Task<CollectionResult> BindComplexCollectionFromIndexes(
             ModelBindingContext bindingContext,
             IEnumerable<string>? indexNames
-        ) {
+        )
+        {
             bool indexNamesIsFinite;
             if (indexNames != null)
             {
@@ -375,7 +377,8 @@ namespace Microsoft.AspNetCore.Mvc.ModelBinding.Binders
                         modelName: fullChildName,
                         model: null
                     )
-                ) {
+                )
+                {
                     await ElementBinder.BindModelAsync(bindingContext);
                     result = bindingContext.Result;
                 }
@@ -461,7 +464,8 @@ namespace Microsoft.AspNetCore.Mvc.ModelBinding.Binders
         protected virtual object? ConvertToCollectionType(
             Type targetType,
             IEnumerable<TElement?> collection
-        ) {
+        )
+        {
             if (collection == null)
             {
                 return null;
@@ -512,7 +516,8 @@ namespace Microsoft.AspNetCore.Mvc.ModelBinding.Binders
 
         private static IEnumerable<string>? GetIndexNamesFromValueProviderResult(
             ValueProviderResult valueProviderResult
-        ) {
+        )
+        {
             var indexes = (string[]?)valueProviderResult;
             return (indexes == null || indexes.Length == 0) ? null : indexes;
         }

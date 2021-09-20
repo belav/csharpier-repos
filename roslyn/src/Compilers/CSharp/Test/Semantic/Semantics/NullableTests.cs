@@ -362,7 +362,8 @@ class C
 
             foreach (
                 string type in new[] { "uint", "short", "sbyte", "ulong", "double", "decimal" }
-            ) {
+            )
+            {
                 string expected = "0";
                 var verifier = CompileAndVerify(
                     source: source.Replace("TYPE", type),

@@ -17,7 +17,8 @@ namespace Microsoft.CodeAnalysis.EditAndContinue
         public BidirectionalMap(
             IReadOnlyDictionary<T, T> forward,
             IReadOnlyDictionary<T, T> reverse
-        ) {
+        )
+        {
             Forward = forward;
             Reverse = reverse;
         }

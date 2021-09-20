@@ -160,7 +160,8 @@ struct mainMethod
         string csm,
         string dm,
         string cm
-    ) {
+    )
+    {
         /*
 int tmp = 1;
         printCount(ref DSS.ds_count, ds, dsm);

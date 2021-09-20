@@ -3356,7 +3356,8 @@ public class Bar
 
         internal override IChainedCommandHandler<AutomaticLineEnderCommandArgs> GetCommandHandler(
             TestWorkspace workspace
-        ) {
+        )
+        {
             return Assert.IsType<AutomaticLineEnderCommandHandler>(
                 workspace.GetService<ICommandHandler>(
                     ContentTypeNames.CSharpContentType,

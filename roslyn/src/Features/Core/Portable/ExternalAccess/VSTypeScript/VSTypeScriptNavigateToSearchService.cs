@@ -30,7 +30,8 @@ namespace Microsoft.CodeAnalysis.ExternalAccess.VSTypeScript
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
         public VSTypeScriptNavigateToSearchService(
             [Import(AllowDefault = true)] IVSTypeScriptNavigateToSearchService? searchService
-        ) {
+        )
+        {
             _searchService = searchService;
         }
 
@@ -46,7 +47,8 @@ namespace Microsoft.CodeAnalysis.ExternalAccess.VSTypeScript
             Func<INavigateToSearchResult, Task> onResultFound,
             bool isFullyLoaded,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             if (_searchService != null)
             {
                 var results = await _searchService.SearchDocumentAsync(
@@ -71,7 +73,8 @@ namespace Microsoft.CodeAnalysis.ExternalAccess.VSTypeScript
             Func<INavigateToSearchResult, Task> onResultFound,
             bool isFullyLoaded,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             if (_searchService != null)
             {
                 var results = await _searchService.SearchProjectAsync(

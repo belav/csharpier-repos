@@ -17,7 +17,8 @@ namespace Microsoft.CodeAnalysis.Collections
 
                 internal Enumerator(
                     ImmutableSegmentedDictionary<TKey, TValue>.Enumerator enumerator
-                ) {
+                )
+                {
                     _enumerator = enumerator;
                 }
 

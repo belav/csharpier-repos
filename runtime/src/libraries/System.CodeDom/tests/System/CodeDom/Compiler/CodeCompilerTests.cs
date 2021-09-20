@@ -29,7 +29,8 @@ namespace System.CodeDom.Compiler.Tests
         [MemberData(nameof(CodeCompileUnit_TestData))]
         public void CompileAssemblyFromDom_ValidCodeCompileUnit_ReturnsExpected(
             CodeCompileUnit compilationUnit
-        ) {
+        )
+        {
             ICodeCompiler compiler = new StubCompiler();
             var options = new CompilerParameters();
             options.ReferencedAssemblies.Add("referenced");
@@ -41,7 +42,8 @@ namespace System.CodeDom.Compiler.Tests
         [SkipOnTargetFramework(TargetFrameworkMonikers.NetFramework)]
         public void CompileAssemblyFromDom_ValidCodeCompileUnit_ThrowsPlatformNotSupportedException(
             CodeCompileUnit compilationUnit
-        ) {
+        )
+        {
             ICodeCompiler compiler = new Compiler();
             var options = new CompilerParameters();
             options.ReferencedAssemblies.Add("referenced");
@@ -75,7 +77,8 @@ namespace System.CodeDom.Compiler.Tests
         [SkipOnTargetFramework(TargetFrameworkMonikers.NetFramework)]
         public void FromDom_ValidCodeCompileUnit_ThrowsPlatformNotSupportedException(
             CodeCompileUnit compilationUnit
-        ) {
+        )
+        {
             var compiler = new Compiler();
             var options = new CompilerParameters();
             options.ReferencedAssemblies.Add("referenced");
@@ -109,7 +112,8 @@ namespace System.CodeDom.Compiler.Tests
         [MemberData(nameof(CodeCompileUnits_TestData))]
         public void CompileAssemblyFromDomBatch_ValidCodeCompileUnits_ReturnsExpected(
             CodeCompileUnit[] compilationUnits
-        ) {
+        )
+        {
             ICodeCompiler compiler = new StubCompiler();
             Assert.Null(
                 compiler.CompileAssemblyFromDomBatch(new CompilerParameters(), compilationUnits)
@@ -121,7 +125,8 @@ namespace System.CodeDom.Compiler.Tests
         [SkipOnTargetFramework(TargetFrameworkMonikers.NetFramework)]
         public void CompileAssemblyFromDomBatch_ValidCodeCompileUnits_ThrowsPlatformNotSupportedException(
             CodeCompileUnit[] compilationUnits
-        ) {
+        )
+        {
             ICodeCompiler compiler = new Compiler();
             Assert.Throws<PlatformNotSupportedException>(
                 () =>
@@ -153,7 +158,8 @@ namespace System.CodeDom.Compiler.Tests
         [MemberData(nameof(CodeCompileUnits_TestData))]
         public void FromDomBatch_ValidCodeCompileUnits_ReturnsExpected(
             CodeCompileUnit[] compilationUnits
-        ) {
+        )
+        {
             var compiler = new StubCompiler();
             Assert.Null(
                 compiler.FromDomBatchEntryPoint(new CompilerParameters(), compilationUnits)
@@ -165,7 +171,8 @@ namespace System.CodeDom.Compiler.Tests
         [SkipOnTargetFramework(TargetFrameworkMonikers.NetFramework)]
         public void FromDomBatch_ValidCodeCompileUnits_ThrowsPlatformNotSupportedException(
             CodeCompileUnit[] compilationUnits
-        ) {
+        )
+        {
             var compiler = new Compiler();
             Assert.Throws<PlatformNotSupportedException>(
                 () => compiler.FromDomBatchEntryPoint(new CompilerParameters(), compilationUnits)
@@ -415,7 +422,8 @@ namespace System.CodeDom.Compiler.Tests
         [SkipOnTargetFramework(TargetFrameworkMonikers.NetFramework)]
         public void FromFileBatch_ValidFileNames_ThrowsPlatformNotSupportedException(
             string[] fileNames
-        ) {
+        )
+        {
             var compiler = new Compiler();
             Assert.Throws<PlatformNotSupportedException>(
                 () => compiler.FromFileBatchEntryPoint(new CompilerParameters(), fileNames)
@@ -462,7 +470,8 @@ namespace System.CodeDom.Compiler.Tests
         [SkipOnTargetFramework(TargetFrameworkMonikers.NetFramework)]
         public void CompileAssemblyFromSource_ValidSource_ThrowsPlatformNotSupportedException(
             string source
-        ) {
+        )
+        {
             ICodeCompiler compiler = new Compiler();
             Assert.Throws<PlatformNotSupportedException>(
                 () => compiler.CompileAssemblyFromSource(new CompilerParameters(), source)
@@ -529,7 +538,8 @@ namespace System.CodeDom.Compiler.Tests
         [SkipOnTargetFramework(TargetFrameworkMonikers.NetFramework)]
         public void CompileAssemblyFromSourceBatch_ValidSources_ThrowsPlatformNotSupportedException(
             string[] sources
-        ) {
+        )
+        {
             ICodeCompiler compiler = new Compiler();
             Assert.Throws<PlatformNotSupportedException>(
                 () => compiler.CompileAssemblyFromSourceBatch(new CompilerParameters(), sources)
@@ -569,7 +579,8 @@ namespace System.CodeDom.Compiler.Tests
         [SkipOnTargetFramework(TargetFrameworkMonikers.NetFramework)]
         public void FromSourceBatch_ValidSources_ThrowsPlatformNotSupportedException(
             string[] sources
-        ) {
+        )
+        {
             var compiler = new Compiler();
             Assert.Throws<PlatformNotSupportedException>(
                 () => compiler.FromSourceBatchEntryPoint(new CompilerParameters(), sources)
@@ -636,7 +647,8 @@ namespace System.CodeDom.Compiler.Tests
             string[] sa,
             string separator,
             string expected
-        ) {
+        )
+        {
             var compiler = new Compiler();
             Assert.Equal(expected, compiler.JoinStringArrayEntryPoint(sa, separator));
         }
@@ -875,7 +887,8 @@ namespace System.CodeDom.Compiler.Tests
             protected override CompilerResults FromFileBatch(
                 CompilerParameters options,
                 string[] fileNames
-            ) {
+            )
+            {
                 return null;
             }
         }

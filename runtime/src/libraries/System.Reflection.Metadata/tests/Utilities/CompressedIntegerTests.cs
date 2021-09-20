@@ -210,7 +210,8 @@ namespace System.Reflection.Metadata.Tests
             int numberOfBytesExpected,
             Func<int, byte[]> compress,
             Func<byte[], int> read
-        ) {
+        )
+        {
             byte[] bytes = compress(valueToRoundTrip);
 
             if (bytes == null)

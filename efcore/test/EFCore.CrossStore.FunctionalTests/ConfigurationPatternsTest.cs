@@ -112,11 +112,13 @@ namespace Microsoft.EntityFrameworkCore
             using (
                 var serviceScope = serviceProvider.GetRequiredService<IServiceScopeFactory>()
                     .CreateScope()
-            ) {
+            )
+            {
                 using (
                     context1 =
                         serviceScope.ServiceProvider.GetRequiredService<MultipleProvidersContext>()
-                ) {
+                )
+                {
                     context1.UseSqlServer = true;
 
                     Assert.True(context1.SimpleEntities.Any());
@@ -125,7 +127,8 @@ namespace Microsoft.EntityFrameworkCore
                 using (
                     var context1B =
                         serviceScope.ServiceProvider.GetRequiredService<MultipleProvidersContext>()
-                ) {
+                )
+                {
                     Assert.Same(context1, context1B);
                 }
 
@@ -136,11 +139,13 @@ namespace Microsoft.EntityFrameworkCore
             using (
                 var serviceScope = serviceProvider.GetRequiredService<IServiceScopeFactory>()
                     .CreateScope()
-            ) {
+            )
+            {
                 using (
                     context2 =
                         serviceScope.ServiceProvider.GetRequiredService<MultipleProvidersContext>()
-                ) {
+                )
+                {
                     context2.UseSqlServer = false;
 
                     Assert.False(context2.SimpleEntities.Any());
@@ -149,7 +154,8 @@ namespace Microsoft.EntityFrameworkCore
                 using (
                     var context2B =
                         serviceScope.ServiceProvider.GetRequiredService<MultipleProvidersContext>()
-                ) {
+                )
+                {
                     Assert.Same(context2, context2B);
                 }
 
@@ -267,7 +273,8 @@ namespace Microsoft.EntityFrameworkCore
             private async Task NestedContextTest(
                 Func<BlogContext> createBlogContext,
                 Func<CrossStoreContext> createSimpleContext
-            ) {
+            )
+            {
                 using var context0 = createBlogContext();
                 Assert.Empty(context0.ChangeTracker.Entries());
                 var blog0 = context0.Add(new Blog { Id = 1, Name = "Giddyup" }).Entity;

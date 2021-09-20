@@ -178,7 +178,8 @@ namespace System.Net.Http.Formatting
         [InlineData("")]
         public async Task ReadFromStreamAsync_WhenContentLengthIsZero_ReturnsDefaultTypeValue<T>(
             T value
-        ) {
+        )
+        {
             // Arrange
             GC.KeepAlive(value); // Mark parameter as used. See xUnit1026, [Theory] method doesn't use all parameters.
             TFormatter formatter = CreateFormatter();
@@ -489,7 +490,8 @@ namespace System.Net.Http.Formatting
             MediaTypeFormatter formatter,
             Type variationType,
             object testData
-        ) {
+        )
+        {
             // Arrange
             HttpContent content = new StringContent(String.Empty);
             HttpContentHeaders contentHeaders = content.Headers;
@@ -531,7 +533,8 @@ namespace System.Net.Http.Formatting
             string mediaType,
             string encoding,
             bool isDefaultEncoding
-        ) {
+        )
+        {
             // Arrange
             Encoding enc = null;
             if (isDefaultEncoding)
@@ -579,7 +582,8 @@ namespace System.Net.Http.Formatting
             string mediaType,
             string encoding,
             bool isDefaultEncoding
-        ) {
+        )
+        {
             // Arrange
             Encoding enc = null;
             if (isDefaultEncoding)
@@ -628,7 +632,8 @@ namespace System.Net.Http.Formatting
             MediaTypeFormatter formatter,
             string encoding,
             bool isDefaultEncoding
-        ) {
+        )
+        {
             Encoding enc = null;
             if (isDefaultEncoding)
             {
@@ -652,7 +657,8 @@ namespace System.Net.Http.Formatting
             string mediaType,
             string encoding,
             bool isDefaultEncoding
-        ) {
+        )
+        {
             // Arrange
             Encoding enc = CreateOrGetSupportedEncoding(formatter, encoding, isDefaultEncoding);
             byte[] sourceData = enc.GetBytes(formattedContent);
@@ -671,7 +677,8 @@ namespace System.Net.Http.Formatting
             string content,
             byte[] sourceData,
             string mediaType
-        ) {
+        )
+        {
             // Arrange
             MemoryStream memStream = new MemoryStream(sourceData);
 
@@ -705,7 +712,8 @@ namespace System.Net.Http.Formatting
             string mediaType,
             string encoding,
             bool isDefaultEncoding
-        ) {
+        )
+        {
             // Arrange
             Encoding enc = CreateOrGetSupportedEncoding(formatter, encoding, isDefaultEncoding);
 
@@ -729,7 +737,8 @@ namespace System.Net.Http.Formatting
             string content,
             byte[] expectedData,
             string mediaType
-        ) {
+        )
+        {
             // Arrange
             MemoryStream memStream = new MemoryStream();
 

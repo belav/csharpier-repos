@@ -190,7 +190,8 @@ namespace XmlCoreTest.Common
                         - endText.Length * 2
                         - iterContent.Length * 2
                     < 0
-                ) {
+                )
+                {
                     break;
                 }
                 nodeValue.Append(iterContent);

@@ -15,7 +15,8 @@ namespace System.Net
             Stream innerStream,
             bool ownsStream,
             RemoteCertificateValidationCallback callback
-        ) {
+        )
+        {
             return new SslStream(innerStream, ownsStream, callback);
         }
 

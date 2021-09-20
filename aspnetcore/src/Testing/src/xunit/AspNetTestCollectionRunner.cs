@@ -25,15 +25,17 @@ namespace Microsoft.AspNetCore.Testing
             ITestCaseOrderer testCaseOrderer,
             ExceptionAggregator aggregator,
             CancellationTokenSource cancellationTokenSource
-        ) : base(
-            testCollection,
-            testCases,
-            diagnosticMessageSink,
-            messageBus,
-            testCaseOrderer,
-            aggregator,
-            cancellationTokenSource
-        ) {
+        )
+            : base(
+                testCollection,
+                testCases,
+                diagnosticMessageSink,
+                messageBus,
+                testCaseOrderer,
+                aggregator,
+                cancellationTokenSource
+            )
+        {
             _assemblyFixtureMappings = assemblyFixtureMappings;
             _diagnosticMessageSink = diagnosticMessageSink;
         }
@@ -68,7 +70,8 @@ namespace Microsoft.AspNetCore.Testing
             ITestClass testClass,
             IReflectionTypeInfo @class,
             IEnumerable<IXunitTestCase> testCases
-        ) {
+        )
+        {
             var runner = new AspNetTestClassRunner(
                 testClass,
                 @class,

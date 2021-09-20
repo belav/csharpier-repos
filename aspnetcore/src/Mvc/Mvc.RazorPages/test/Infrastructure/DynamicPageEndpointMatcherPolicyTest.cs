@@ -510,14 +510,16 @@ namespace Microsoft.AspNetCore.Mvc.RazorPages.Infrastructure
                 HttpContext httpContext,
                 RouteValueDictionary values,
                 IReadOnlyList<Endpoint> endpoints
-            ) {
+            )
+            {
                 return Filter(httpContext, values, State, endpoints);
             }
 
             public override ValueTask<RouteValueDictionary> TransformAsync(
                 HttpContext httpContext,
                 RouteValueDictionary values
-            ) {
+            )
+            {
                 return Transform(httpContext, values, State);
             }
         }

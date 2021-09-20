@@ -25,14 +25,16 @@ namespace Microsoft.CodeAnalysis.CodeGeneration
             string name,
             bool hasConstantValue,
             object constantValue
-        ) : base(
-            containingType?.ContainingAssembly,
-            containingType,
-            attributes,
-            accessibility,
-            modifiers,
-            name
-        ) {
+        )
+            : base(
+                containingType?.ContainingAssembly,
+                containingType,
+                attributes,
+                accessibility,
+                modifiers,
+                name
+            )
+        {
             this.Type = type;
             this.HasConstantValue = hasConstantValue;
             this.ConstantValue = constantValue;

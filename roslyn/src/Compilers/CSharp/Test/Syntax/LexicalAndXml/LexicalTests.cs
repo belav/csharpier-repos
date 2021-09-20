@@ -1417,7 +1417,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
                     null,
                     out d
                 )
-            ) {
+            )
+            {
                 Assert.Equal(0, errors.Length);
             }
             else

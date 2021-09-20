@@ -17,7 +17,8 @@ namespace Microsoft.AspNetCore.Mvc.Filters
         public Task OnResultExecutionAsync(
             ResultExecutingContext context,
             ResultExecutionDelegate next
-        ) {
+        )
+        {
             if (context == null)
             {
                 throw new ArgumentNullException(nameof(context));
@@ -57,7 +58,8 @@ namespace Microsoft.AspNetCore.Mvc.Filters
             ResultExecutingContext context,
             ResultExecutionDelegate next,
             IResultFilter resultFilter
-        ) {
+        )
+        {
             resultFilter.OnResultExecuting(context);
             if (!context.Cancel)
             {

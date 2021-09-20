@@ -60,7 +60,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
             EntityType dependentEntityType,
             EntityType principalEntityType,
             ConfigurationSource configurationSource
-        ) {
+        )
+        {
             Check.NotEmpty(dependentProperties, nameof(dependentProperties));
             Check.HasNoNulls(dependentProperties, nameof(dependentProperties));
             Check.NotNull(principalKey, nameof(principalKey));
@@ -226,7 +227,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
             IReadOnlyList<Property> properties,
             Key principalKey,
             ConfigurationSource? configurationSource
-        ) {
+        )
+        {
             EnsureMutable();
 
             Validate(properties, principalKey, DeclaringEntityType, PrincipalEntityType);
@@ -272,7 +274,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
         /// </summary>
         public virtual void UpdatePropertiesConfigurationSource(
             ConfigurationSource configurationSource
-        ) {
+        )
+        {
             _propertiesConfigurationSource = configurationSource.Max(
                 _propertiesConfigurationSource
             );
@@ -300,7 +303,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
         /// </summary>
         public virtual void UpdatePrincipalKeyConfigurationSource(
             ConfigurationSource configurationSource
-        ) {
+        )
+        {
             _principalKeyConfigurationSource = configurationSource.Max(
                 _principalKeyConfigurationSource
             );
@@ -476,7 +480,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
             MemberIdentity? propertyIdentity,
             ConfigurationSource configurationSource,
             bool pointsToPrincipal
-        ) {
+        )
+        {
             EnsureMutable();
 
             var name = propertyIdentity?.Name;
@@ -632,7 +637,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
                 && PrincipalEntityType.ClrType != Model.DefaultPropertyBagType
                 && DeclaringEntityType.ClrType != Model.DefaultPropertyBagType
                 && PrincipalToDependent != null
-            ) {
+            )
+            {
                 if (
                     !Internal.Navigation.IsCompatible(
                         PrincipalToDependent.Name,
@@ -642,7 +648,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
                         !unique,
                         shouldThrow: false
                     )
-                ) {
+                )
+                {
                     throw new InvalidOperationException(
                         CoreStrings.UnableToSetIsUnique(
                             unique.Value,
@@ -757,7 +764,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
         public virtual bool? SetIsRequiredDependent(
             bool? required,
             ConfigurationSource configurationSource
-        ) {
+        )
+        {
             EnsureMutable();
 
             if (!IsUnique && required == true)
@@ -828,7 +836,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
         public virtual DeleteBehavior? SetDeleteBehavior(
             DeleteBehavior? deleteBehavior,
             ConfigurationSource configurationSource
-        ) {
+        )
+        {
             EnsureMutable();
 
             _deleteBehavior = deleteBehavior;
@@ -897,7 +906,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
         public virtual bool? SetIsOwnership(
             bool? ownership,
             ConfigurationSource configurationSource
-        ) {
+        )
+        {
             EnsureMutable();
 
             var oldIsOwnership = IsOwnership;
@@ -1056,7 +1066,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
             Key principalKey,
             EntityType declaringEntityType,
             EntityType principalEntityType
-        ) {
+        )
+        {
             for (var i = 0; i < properties.Count; i++)
             {
                 var property = properties[i];
@@ -1079,7 +1090,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
                         property.DeclaringEntityType
                     ) != true
                     || !property.IsInModel
-                ) {
+                )
+                {
                     throw new InvalidOperationException(
                         CoreStrings.ForeignKeyPropertiesWrongEntity(
                             properties.Format(),
@@ -1145,7 +1157,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
             IReadOnlyList<IReadOnlyProperty>? principalProperties,
             bool? unique,
             bool shouldThrow
-        ) {
+        )
+        {
             Check.NotNull(principalEntityType, nameof(principalEntityType));
             Check.NotNull(dependentEntityType, nameof(dependentEntityType));
 
@@ -1159,7 +1172,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
                     shouldBeCollection: false,
                     shouldThrow: shouldThrow
                 )
-            ) {
+            )
+            {
                 return false;
             }
 
@@ -1173,7 +1187,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
                     shouldBeCollection: !unique,
                     shouldThrow: shouldThrow
                 )
-            ) {
+            )
+            {
                 return false;
             }
 
@@ -1200,7 +1215,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
             IReadOnlyEntityType principalEntityType,
             IReadOnlyEntityType dependentEntityType,
             bool shouldThrow
-        ) {
+        )
+        {
             Check.NotNull(principalProperties, nameof(principalProperties));
             Check.NotNull(dependentProperties, nameof(dependentProperties));
             Check.NotNull(principalEntityType, nameof(principalEntityType));

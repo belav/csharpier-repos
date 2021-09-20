@@ -104,7 +104,8 @@ namespace System.IO.Pipelines
         public static PipeWriter Create(
             Stream stream,
             StreamPipeWriterOptions? writerOptions = null
-        ) {
+        )
+        {
             return new StreamPipeWriter(stream, writerOptions ?? StreamPipeWriterOptions.s_default);
         }
 
@@ -115,7 +116,8 @@ namespace System.IO.Pipelines
         public virtual ValueTask<FlushResult> WriteAsync(
             ReadOnlyMemory<byte> source,
             CancellationToken cancellationToken = default
-        ) {
+        )
+        {
             this.Write(source.Span);
             return FlushAsync(cancellationToken);
         }
@@ -127,7 +129,8 @@ namespace System.IO.Pipelines
         protected internal virtual async Task CopyFromAsync(
             Stream source,
             CancellationToken cancellationToken = default
-        ) {
+        )
+        {
             while (true)
             {
                 Memory<byte> buffer = GetMemory();

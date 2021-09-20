@@ -21,7 +21,8 @@ namespace Microsoft.CodeAnalysis.Navigation
             ISymbol symbol,
             Location location,
             ImmutableArray<TaggedText>? displayTaggedParts
-        ) {
+        )
+        {
             return new SymbolLocationNavigableItem(solution, symbol, location, displayTaggedParts);
         }
 
@@ -30,7 +31,8 @@ namespace Microsoft.CodeAnalysis.Navigation
             ISymbol symbol,
             ImmutableArray<TaggedText>? displayTaggedParts,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var locations = GetPreferredSourceLocations(solution, symbol, cancellationToken);
             return locations.SelectAsArray(
                 loc => GetItemFromSymbolLocation(solution, symbol, loc, displayTaggedParts)
@@ -41,7 +43,8 @@ namespace Microsoft.CodeAnalysis.Navigation
             Solution solution,
             ISymbol symbol,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             // Prefer non-generated source locations over generated ones.
 
             var sourceLocations = GetPreferredSourceLocations(symbol);

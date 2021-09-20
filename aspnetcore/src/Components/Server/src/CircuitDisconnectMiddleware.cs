@@ -19,7 +19,8 @@ namespace Microsoft.AspNetCore.Components.Server
             CircuitRegistry registry,
             CircuitIdFactory circuitIdFactory,
             RequestDelegate next
-        ) {
+        )
+        {
             Logger = logger;
             Registry = registry;
             CircuitIdFactory = circuitIdFactory;

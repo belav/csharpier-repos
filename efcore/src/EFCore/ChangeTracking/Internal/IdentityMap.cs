@@ -36,7 +36,8 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
             IKey key,
             IPrincipalKeyValueFactory<TKey> principalKeyValueFactory,
             bool sensitiveLoggingEnabled
-        ) {
+        )
+        {
             _sensitiveLoggingEnabled = sensitiveLoggingEnabled;
             Key = key;
             PrincipalKeyValueFactory = principalKeyValueFactory;
@@ -114,7 +115,8 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
             object?[] keyValues,
             bool throwOnNullKey,
             out bool hasNullKey
-        ) {
+        )
+        {
             var key = PrincipalKeyValueFactory.CreateFromKeyValues(keyValues);
 
             if (key == null)

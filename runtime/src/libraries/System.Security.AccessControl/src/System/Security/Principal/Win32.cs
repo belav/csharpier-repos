@@ -19,7 +19,8 @@ namespace System.Security.Principal
             TokenAccessLevels dwDesiredAccess,
             WinSecurityContext dwOpenAs,
             out SafeTokenHandle? phThreadToken
-        ) {
+        )
+        {
             int hr = 0;
             bool openAsSelf = true;
             if (dwOpenAs == WinSecurityContext.Thread)
@@ -32,7 +33,8 @@ namespace System.Security.Principal
                     openAsSelf,
                     out phThreadToken
                 )
-            ) {
+            )
+            {
                 if (dwOpenAs == WinSecurityContext.Both)
                 {
                     openAsSelf = false;

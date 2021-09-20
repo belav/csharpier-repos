@@ -38,7 +38,8 @@ namespace System.Web.Mvc
             IControllerActivator controllerActivator,
             IResolver<IControllerActivator> activatorResolver,
             IDependencyResolver dependencyResolver
-        ) {
+        )
+        {
             if (controllerActivator != null)
             {
                 _controllerActivator = controllerActivator;
@@ -97,7 +98,8 @@ namespace System.Web.Mvc
             RouteBase route,
             string controllerName,
             ICollection<Type> matchingTypes
-        ) {
+        )
+        {
             // we need to generate an exception containing all the controller types
             StringBuilder typeList = new StringBuilder();
             foreach (Type matchedType in matchingTypes)
@@ -135,7 +137,8 @@ namespace System.Web.Mvc
 
         private static InvalidOperationException CreateDirectRouteAmbiguousControllerException(
             ICollection<Type> matchingTypes
-        ) {
+        )
+        {
             // we need to generate an exception containing all the controller types
             StringBuilder typeList = new StringBuilder();
             foreach (Type matchedType in matchingTypes)
@@ -157,7 +160,8 @@ namespace System.Web.Mvc
         public virtual IController CreateController(
             RequestContext requestContext,
             string controllerName
-        ) {
+        )
+        {
             if (requestContext == null)
             {
                 throw new ArgumentNullException("requestContext");
@@ -169,7 +173,8 @@ namespace System.Web.Mvc
                     requestContext.RouteData == null
                     || !requestContext.RouteData.HasDirectRouteMatch()
                 )
-            ) {
+            )
+            {
                 throw new ArgumentException(MvcResources.Common_NullOrEmpty, "controllerName");
             }
 
@@ -181,7 +186,8 @@ namespace System.Web.Mvc
         protected internal virtual IController GetControllerInstance(
             RequestContext requestContext,
             Type controllerType
-        ) {
+        )
+        {
             if (requestContext == null)
             {
                 throw new ArgumentNullException("requestContext");
@@ -215,7 +221,8 @@ namespace System.Web.Mvc
         protected internal virtual SessionStateBehavior GetControllerSessionBehavior(
             RequestContext requestContext,
             Type controllerType
-        ) {
+        )
+        {
             if (controllerType == null)
             {
                 return SessionStateBehavior.Default;
@@ -240,7 +247,8 @@ namespace System.Web.Mvc
         protected internal virtual Type GetControllerType(
             RequestContext requestContext,
             string controllerName
-        ) {
+        )
+        {
             if (requestContext == null)
             {
                 throw new ArgumentNullException("requestContext");
@@ -252,7 +260,8 @@ namespace System.Web.Mvc
                     requestContext.RouteData == null
                     || !requestContext.RouteData.HasDirectRouteMatch()
                 )
-            ) {
+            )
+            {
                 throw new ArgumentException(MvcResources.Common_NullOrEmpty, "controllerName");
             }
 
@@ -271,7 +280,8 @@ namespace System.Web.Mvc
                     RouteDataTokenKeys.Namespaces,
                     out routeNamespacesObj
                 )
-            ) {
+            )
+            {
                 IEnumerable<string> routeNamespaces = routeNamespacesObj as IEnumerable<string>;
                 if (routeNamespaces != null && routeNamespaces.Any())
                 {
@@ -291,7 +301,8 @@ namespace System.Web.Mvc
                         || false.Equals(
                             routeData.DataTokens[RouteDataTokenKeys.UseNamespaceFallback]
                         )
-                    ) {
+                    )
+                    {
                         // got a match or the route requested we stop looking
                         return match;
                     }
@@ -370,7 +381,8 @@ namespace System.Web.Mvc
             RouteBase route,
             string controllerName,
             HashSet<string> namespaces
-        ) {
+        )
+        {
             // Once the master list of controllers has been created we can quickly index into it
             ControllerTypeCache.EnsureInitialized(BuildManager);
 
@@ -412,7 +424,8 @@ namespace System.Web.Mvc
         SessionStateBehavior IControllerFactory.GetControllerSessionBehavior(
             RequestContext requestContext,
             string controllerName
-        ) {
+        )
+        {
             if (requestContext == null)
             {
                 throw new ArgumentNullException("requestContext");

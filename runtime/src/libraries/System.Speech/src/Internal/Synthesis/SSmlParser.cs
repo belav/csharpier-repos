@@ -255,7 +255,8 @@ namespace System.Speech.Internal.Synthesis
             SsmlAttributes ssmAttributesParent,
             bool fIgnore,
             List<SsmlXmlAttribute> extraAttributes
-        ) {
+        )
+        {
             // Make a local copy of the ssmlAttribute
             SsmlAttributes ssmlAttributes = new();
 
@@ -366,7 +367,8 @@ namespace System.Speech.Internal.Synthesis
             SsmlElement element,
             SsmlAttributes ssmAttributesParent,
             bool fIgnore
-        ) {
+        )
+        {
             // Validate the SSML markup
             string sElement = ValidateElement(element, SsmlElement.Audio, reader.Name);
 
@@ -418,7 +420,8 @@ namespace System.Speech.Internal.Synthesis
                 if (
                     isInvalidAttribute
                     && !ssmlAttributes.AddUnknowAttribute(reader, ref extraAttributes)
-                ) {
+                )
+                {
                     ThrowFormatException(SRID.InvalidItemAttribute, reader.Name);
                 }
             }
@@ -451,7 +454,8 @@ namespace System.Speech.Internal.Synthesis
             SsmlElement element,
             SsmlAttributes ssmAttributesParent,
             bool fIgnore
-        ) {
+        )
+        {
             // Validate the SSML markup
             string sElement = ValidateElement(element, SsmlElement.Break, reader.Name);
 
@@ -501,7 +505,8 @@ namespace System.Speech.Internal.Synthesis
                                     if (
                                         ssmlAttributes._fragmentState.Emphasis
                                         != (int)EmphasisBreak.None
-                                    ) {
+                                    )
+                                    {
                                         ssmlAttributes._fragmentState.Emphasis =
                                             (int)s_breakEmphasis[pos];
                                     }
@@ -517,7 +522,8 @@ namespace System.Speech.Internal.Synthesis
                 if (
                     isInvalidAttribute
                     && !ssmlAttributes.AddUnknowAttribute(reader, ref extraAttributes)
-                ) {
+                )
+                {
                     ThrowFormatException(SRID.InvalidSpeakAttribute, reader.Name, "break");
                 }
             }
@@ -543,7 +549,8 @@ namespace System.Speech.Internal.Synthesis
             SsmlElement element,
             SsmlAttributes ssmAttributesParent,
             bool fIgnore
-        ) {
+        )
+        {
             // Validate the SSML markup
             string sElement = ValidateElement(element, SsmlElement.Desc, reader.Name);
 
@@ -586,7 +593,8 @@ namespace System.Speech.Internal.Synthesis
                 if (
                     isInvalidAttribute
                     && !ssmlAttributes.AddUnknowAttribute(reader, ref extraAttributes)
-                ) {
+                )
+                {
                     ThrowFormatException(SRID.InvalidItemAttribute, reader.Name);
                 }
             }
@@ -614,7 +622,8 @@ namespace System.Speech.Internal.Synthesis
             SsmlElement element,
             SsmlAttributes ssmAttributesParent,
             bool fIgnore
-        ) {
+        )
+        {
             // Validate the SSML markup
             string sElement = ValidateElement(element, SsmlElement.Emphasis, reader.Name);
 
@@ -660,7 +669,8 @@ namespace System.Speech.Internal.Synthesis
                 if (
                     isInvalidAttribute
                     && !ssmlAttributes.AddUnknowAttribute(reader, ref extraAttributes)
-                ) {
+                )
+                {
                     ThrowFormatException(SRID.InvalidItemAttribute, reader.Name);
                 }
             }
@@ -693,7 +703,8 @@ namespace System.Speech.Internal.Synthesis
             SsmlElement element,
             SsmlAttributes ssmAttributesParent,
             bool fIgnore
-        ) {
+        )
+        {
             // Validate the SSML markup
             string sElement = ValidateElement(element, SsmlElement.Mark, reader.Name);
 
@@ -727,7 +738,8 @@ namespace System.Speech.Internal.Synthesis
                 if (
                     isInvalidAttribute
                     && !ssmlAttributes.AddUnknowAttribute(reader, ref extraAttributes)
-                ) {
+                )
+                {
                     ThrowFormatException(SRID.InvalidItemAttribute, reader.Name);
                 }
             }
@@ -758,7 +770,8 @@ namespace System.Speech.Internal.Synthesis
             SsmlElement element,
             SsmlAttributes ssmAttributesParent,
             bool fIgnore
-        ) {
+        )
+        {
             // Validate the SSML markup
             ValidateElement(element, SsmlElement.MetaData, reader.Name);
 
@@ -779,7 +792,8 @@ namespace System.Speech.Internal.Synthesis
                     if (
                         reader.NodeType == XmlNodeType.EndElement
                         || reader.NodeType == XmlNodeType.None
-                    ) {
+                    )
+                    {
                         cEndNode--;
                     }
                 } while (cEndNode > 0);
@@ -795,7 +809,8 @@ namespace System.Speech.Internal.Synthesis
             SsmlElement element,
             SsmlAttributes ssmAttributesParent,
             bool fIgnore
-        ) {
+        )
+        {
             // Validate the SSML markup
             string sElement = ValidateElement(element, SsmlElement.Paragraph, reader.Name);
 
@@ -808,7 +823,8 @@ namespace System.Speech.Internal.Synthesis
             SsmlElement element,
             SsmlAttributes ssmAttributesParent,
             bool fIgnore
-        ) {
+        )
+        {
             // Validate the SSML markup
             string sElement = ValidateElement(element, SsmlElement.Sentence, reader.Name);
 
@@ -822,7 +838,8 @@ namespace System.Speech.Internal.Synthesis
             string sElement,
             SsmlAttributes ssmAttributesParent,
             bool fIgnore
-        ) {
+        )
+        {
             // Make a local copy of the ssmlAttribute
             SsmlAttributes ssmlAttributes = new();
             List<SsmlXmlAttribute> extraAttributes = null;
@@ -861,7 +878,8 @@ namespace System.Speech.Internal.Synthesis
                 if (
                     isInvalidAttribute
                     && !ssmlAttributes.AddUnknowAttribute(reader, ref extraAttributes)
-                ) {
+                )
+                {
                     ThrowFormatException(SRID.InvalidItemAttribute, reader.Name);
                 }
             }
@@ -912,7 +930,8 @@ namespace System.Speech.Internal.Synthesis
             SsmlElement element,
             SsmlAttributes ssmAttributesParent,
             bool fIgnore
-        ) {
+        )
+        {
             // Validate the SSML markup
             string sElement = ValidateElement(element, SsmlElement.Phoneme, reader.Name);
 
@@ -975,7 +994,8 @@ namespace System.Speech.Internal.Synthesis
                 if (
                     isInvalidAttribute
                     && !ssmlAttributes.AddUnknowAttribute(reader, ref extraAttributes)
-                ) {
+                )
+                {
                     ThrowFormatException(SRID.InvalidItemAttribute, reader.Name);
                 }
             }
@@ -1060,7 +1080,8 @@ namespace System.Speech.Internal.Synthesis
             SsmlElement element,
             SsmlAttributes ssmAttributesParent,
             bool fIgnore
-        ) {
+        )
+        {
             // Validate the SSML markup
             string sElement = ValidateElement(element, SsmlElement.Prosody, reader.Name);
 
@@ -1152,7 +1173,8 @@ namespace System.Speech.Internal.Synthesis
                 if (
                     isInvalidAttribute
                     && !ssmlAttributes.AddUnknowAttribute(reader, ref extraAttributes)
-                ) {
+                )
+                {
                     ThrowFormatException(SRID.InvalidItemAttribute, reader.Name);
                 }
             }
@@ -1164,7 +1186,8 @@ namespace System.Speech.Internal.Synthesis
                 && string.IsNullOrEmpty(sRate)
                 && string.IsNullOrEmpty(sDuration)
                 && string.IsNullOrEmpty(sVolume)
-            ) {
+            )
+            {
                 ThrowFormatException(
                     SRID.MissingRequiredAttribute,
                     "pitch, contour, range, rate, duration, volume",
@@ -1201,7 +1224,8 @@ namespace System.Speech.Internal.Synthesis
             SsmlElement element,
             SsmlAttributes ssmAttributesParent,
             bool fIgnore
-        ) {
+        )
+        {
             // Validate the SSML markup
             string sElement = ValidateElement(element, SsmlElement.SayAs, reader.Name);
 
@@ -1249,7 +1273,8 @@ namespace System.Speech.Internal.Synthesis
                 if (
                     isInvalidAttribute
                     && !ssmlAttributes.AddUnknowAttribute(reader, ref extraAttributes)
-                ) {
+                )
+                {
                     ThrowFormatException(SRID.InvalidItemAttribute, reader.Name);
                 }
             }
@@ -1285,7 +1310,8 @@ namespace System.Speech.Internal.Synthesis
             SsmlElement element,
             SsmlAttributes ssmAttributesParent,
             bool fIgnore
-        ) {
+        )
+        {
             // Validate the SSML markup
             string sElement = ValidateElement(element, SsmlElement.Sub, reader.Name);
 
@@ -1329,7 +1355,8 @@ namespace System.Speech.Internal.Synthesis
                 if (
                     isInvalidAttribute
                     && !ssmlAttributes.AddUnknowAttribute(reader, ref extraAttributes)
-                ) {
+                )
+                {
                     ThrowFormatException(SRID.InvalidItemAttribute, reader.Name);
                 }
             }
@@ -1367,7 +1394,8 @@ namespace System.Speech.Internal.Synthesis
             SsmlElement element,
             SsmlAttributes ssmAttributesParent,
             bool fIgnore
-        ) {
+        )
+        {
             // Validate the SSML markup
             string sElement = ValidateElement(element, SsmlElement.Voice, reader.Name);
 
@@ -1520,7 +1548,8 @@ namespace System.Speech.Internal.Synthesis
                 if (
                     isInvalidAttribute
                     && !ssmlAttributes.AddUnknowAttribute(reader, ref extraAttributes)
-                ) {
+                )
+                {
                     ThrowFormatException(SRID.InvalidItemAttribute, reader.Name);
                 }
             }
@@ -1541,7 +1570,8 @@ namespace System.Speech.Internal.Synthesis
                 && string.IsNullOrEmpty(sVariant)
                 && string.IsNullOrEmpty(sName)
                 && string.IsNullOrEmpty(xmlns)
-            ) {
+            )
+            {
                 ThrowFormatException(
                     SRID.MissingRequiredAttribute,
                     "'xml:lang' or 'gender' or 'age' or 'variant' or 'name'",
@@ -1598,7 +1628,8 @@ namespace System.Speech.Internal.Synthesis
             SsmlElement element,
             SsmlAttributes ssmAttributesParent,
             bool fIgnore
-        ) {
+        )
+        {
             // Validate the SSML markup
             string sElement = ValidateElement(element, SsmlElement.Lexicon, reader.Name);
 
@@ -1636,7 +1667,8 @@ namespace System.Speech.Internal.Synthesis
                 if (
                     isInvalidAttribute
                     && !ssmlAttributes.AddUnknowAttribute(reader, ref extraAttributes)
-                ) {
+                )
+                {
                     ThrowFormatException(SRID.InvalidItemAttribute, reader.Name);
                 }
             }
@@ -1676,7 +1708,8 @@ namespace System.Speech.Internal.Synthesis
             ProcessPromptEngine0 process,
             SsmlAttributes ssmAttributesParent,
             bool fIgnore
-        ) {
+        )
+        {
             // Validate the SSML markup
             string sElement = ValidateElement(elementAllowed, element, reader.Name);
 
@@ -1726,7 +1759,8 @@ namespace System.Speech.Internal.Synthesis
             ProcessPromptEngine1 process,
             SsmlAttributes ssmAttributesParent,
             bool fIgnore
-        ) {
+        )
+        {
             // Validate the SSML markup
             string sElement = ValidateElement(elementAllowed, element, reader.Name);
 
@@ -1775,7 +1809,8 @@ namespace System.Speech.Internal.Synthesis
             SsmlElement element,
             SsmlAttributes ssmAttributesParent,
             bool fIgnore
-        ) {
+        )
+        {
             // Increase the ref count for the Prompt output
             ssmAttributesParent._cPromptOutput++;
 
@@ -1803,7 +1838,8 @@ namespace System.Speech.Internal.Synthesis
             SsmlElement element,
             SsmlAttributes ssmAttributesParent,
             bool fIgnore
-        ) {
+        )
+        {
             ParsePromptEngine0(
                 reader,
                 engine,
@@ -1824,7 +1860,8 @@ namespace System.Speech.Internal.Synthesis
             SsmlElement element,
             SsmlAttributes ssmAttributesParent,
             bool fIgnore
-        ) {
+        )
+        {
             // Validate the SSML markup
             string sElement = ValidateElement(
                 element,
@@ -1892,7 +1929,8 @@ namespace System.Speech.Internal.Synthesis
             SsmlElement element,
             SsmlAttributes ssmAttributesParent,
             bool fIgnore
-        ) {
+        )
+        {
             ParsePromptEngine1(
                 reader,
                 engine,
@@ -1914,7 +1952,8 @@ namespace System.Speech.Internal.Synthesis
             SsmlElement element,
             SsmlAttributes ssmAttributesParent,
             bool fIgnore
-        ) {
+        )
+        {
             ParsePromptEngine0(
                 reader,
                 engine,
@@ -1936,7 +1975,8 @@ namespace System.Speech.Internal.Synthesis
             SsmlElement element,
             SsmlAttributes ssmAttributesParent,
             bool fIgnore
-        ) {
+        )
+        {
             string tag = ParsePromptEngine1(
                 reader,
                 engine,
@@ -1959,7 +1999,8 @@ namespace System.Speech.Internal.Synthesis
             SsmlElement element,
             SsmlAttributes ssmAttributesParent,
             bool fIgnore
-        ) {
+        )
+        {
             string name = ParsePromptEngine1(
                 reader,
                 engine,
@@ -2058,7 +2099,8 @@ namespace System.Speech.Internal.Synthesis
                             ref timePosition
                         )
                         || timePosition.SsmlAttributeId == ProsodyNumber.AbsoluteNumber
-                    ) {
+                    )
+                    {
                         return null;
                     }
                     if (
@@ -2068,7 +2110,8 @@ namespace System.Speech.Internal.Synthesis
                             true,
                             out hz
                         )
-                    ) {
+                    )
+                    {
                         return null;
                     }
 
@@ -2136,7 +2179,8 @@ namespace System.Speech.Internal.Synthesis
             char expected,
             bool skipDigit,
             out bool percent
-        ) {
+        )
+        {
             percent = false;
 
             // skip the whitespace
@@ -2148,7 +2192,8 @@ namespace System.Speech.Internal.Synthesis
                     || ach[start] == '\n'
                     || ach[start] == '\r'
                 )
-            ) {
+            )
+            {
                 start++;
             }
 
@@ -2167,7 +2212,8 @@ namespace System.Speech.Internal.Synthesis
                         || ach[start] == '+'
                         || ach[start] == '-'
                     )
-                ) {
+                )
+                {
                     start++;
                 }
 
@@ -2180,7 +2226,8 @@ namespace System.Speech.Internal.Synthesis
                         || ach[start] == '\n'
                         || ach[start] == '\r'
                     )
-                ) {
+                )
+                {
                     start++;
                 }
             }
@@ -2205,7 +2252,8 @@ namespace System.Speech.Internal.Synthesis
             string[] attributeValues,
             int[] attributeConst,
             ref ProsodyNumber number
-        ) {
+        )
+        {
             bool isInvalidAttribute = false;
             bool isHz;
 
@@ -2231,7 +2279,8 @@ namespace System.Speech.Internal.Synthesis
             string[] attributeValues,
             int[] attributeConst,
             ref ProsodyNumber number
-        ) {
+        )
+        {
             bool isInvalidAttribute = false;
 
             CheckForDuplicates(ref attribute, reader);
@@ -2310,7 +2359,8 @@ namespace System.Speech.Internal.Synthesis
             ref ProsodyNumber number,
             bool acceptHzRelative,
             out bool isHz
-        ) {
+        )
+        {
             isHz = false;
 
             // Find the Hz at the end of the number
@@ -2354,7 +2404,8 @@ namespace System.Speech.Internal.Synthesis
             SsmlElement possibleElements,
             SsmlElement currentElement,
             string sElement
-        ) {
+        )
+        {
             if ((possibleElements & currentElement) == 0)
             {
                 ThrowFormatException(SRID.InvalidElement, sElement);
@@ -2377,7 +2428,8 @@ namespace System.Speech.Internal.Synthesis
             Exception innerException,
             SRID id,
             params object[] args
-        ) {
+        )
+        {
             throw new FormatException(SR.Get(id, args), innerException);
         }
 
@@ -2390,7 +2442,8 @@ namespace System.Speech.Internal.Synthesis
             SsmlElement element,
             SsmlAttributes ssmlAttributes,
             bool fIgnore
-        ) {
+        )
+        {
             // No Children allowed .
             ProcessElement(reader, engine, null, 0, ssmlAttributes, true, null);
         }
@@ -2424,7 +2477,8 @@ namespace System.Speech.Internal.Synthesis
             internal bool AddUnknowAttribute(
                 SsmlXmlAttribute attribute,
                 ref List<SsmlXmlAttribute> extraAttributes
-            ) {
+            )
+            {
                 foreach (SsmlXmlAttribute ns in _unknownNamespaces)
                 {
                     if (ns._name == attribute._prefix)
@@ -2443,7 +2497,8 @@ namespace System.Speech.Internal.Synthesis
             internal bool AddUnknowAttribute(
                 XmlReader reader,
                 ref List<SsmlXmlAttribute> extraAttributes
-            ) {
+            )
+            {
                 foreach (SsmlXmlAttribute ns in _unknownNamespaces)
                 {
                     if (ns._name == reader.Prefix)

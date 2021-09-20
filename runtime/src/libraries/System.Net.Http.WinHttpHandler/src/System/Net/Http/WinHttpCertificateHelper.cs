@@ -22,7 +22,8 @@ namespace System.Net.Http
             bool checkCertificateRevocationList,
             out X509Chain chain,
             out SslPolicyErrors sslPolicyErrors
-        ) {
+        )
+        {
             chain = null;
             sslPolicyErrors = SslPolicyErrors.None;
 
@@ -84,11 +85,13 @@ namespace System.Net.Http
                             ref cppStruct,
                             ref status
                         )
-                    ) {
+                    )
+                    {
                         if (
                             status.dwError
                             == Interop.Crypt32.CertChainPolicyErrors.CERT_E_CN_NO_MATCH
-                        ) {
+                        )
+                        {
                             if (NetEventSource.Log.IsEnabled())
                                 NetEventSource.Error(
                                     certificate,

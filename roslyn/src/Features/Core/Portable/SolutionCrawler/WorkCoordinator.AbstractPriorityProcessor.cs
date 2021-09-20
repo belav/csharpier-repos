@@ -32,12 +32,14 @@ namespace Microsoft.CodeAnalysis.SolutionCrawler
                         IGlobalOperationNotificationService globalOperationNotificationService,
                         int backOffTimeSpanInMs,
                         CancellationToken shutdownToken
-                    ) : base(
-                        listener,
-                        globalOperationNotificationService,
-                        backOffTimeSpanInMs,
-                        shutdownToken
-                    ) {
+                    )
+                        : base(
+                            listener,
+                            globalOperationNotificationService,
+                            backOffTimeSpanInMs,
+                            shutdownToken
+                        )
+                    {
                         _gate = new object();
                         _lazyAnalyzers = lazyAnalyzers;
 
@@ -85,7 +87,8 @@ namespace Microsoft.CodeAnalysis.SolutionCrawler
                                 FunctionId.WorkCoordinator_WaitForHigherPriorityOperationsAsync,
                                 CancellationToken
                             )
-                        ) {
+                        )
+                        {
                             do
                             {
                                 // Host is shutting down
@@ -98,7 +101,8 @@ namespace Microsoft.CodeAnalysis.SolutionCrawler
                                 if (
                                     !GlobalOperationTask.IsCompleted
                                     || !HigherQueueOperationTask.IsCompleted
-                                ) {
+                                )
+                                {
                                     await Task.WhenAll(
                                             GlobalOperationTask,
                                             HigherQueueOperationTask

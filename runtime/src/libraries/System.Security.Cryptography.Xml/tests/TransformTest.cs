@@ -86,7 +86,8 @@ namespace System.Security.Cryptography.Xml.Tests
         public void PropagatedNamespaces_XmlDecryptionTransform(
             bool addPropagatedNamespace,
             string expectedResult
-        ) {
+        )
+        {
             XmlDocument baseDocument = new XmlDocument();
             baseDocument.LoadXml("<a><b><c xmlns=\"urn:foo\"/></b></a>");
 

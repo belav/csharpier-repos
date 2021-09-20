@@ -32,7 +32,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.IntelliSense.QuickInfo
             IThreadingContext threadingContext,
             Lazy<IStreamingFindUsagesPresenter> streamingPresenter,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             // Build the first line of QuickInfo item, the images and the Description section should be on the first line with Wrapped style
             var glyphs = quickInfoItem.Tags.GetGlyphs();
             var symbolGlyph = glyphs.FirstOrDefault(g => g != Glyph.CompletionWarning);
@@ -62,7 +63,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.IntelliSense.QuickInfo
                         threadingContext,
                         streamingPresenter
                     )
-                ) {
+                )
+                {
                     if (isFirstElement)
                     {
                         isFirstElement = false;
@@ -95,7 +97,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.IntelliSense.QuickInfo
                         threadingContext,
                         streamingPresenter
                     )
-                ) {
+                )
+                {
                     if (isFirstElement)
                     {
                         isFirstElement = false;
@@ -187,7 +190,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.IntelliSense.QuickInfo
             IThreadingContext threadingContext,
             Lazy<IStreamingFindUsagesPresenter> streamingPresenter,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var content = await BuildInteractiveContentAsync(
                     quickInfoItem,
                     document,
@@ -210,7 +214,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.IntelliSense.QuickInfo
             CodeAnalysisQuickInfoItem quickInfoItem,
             Document document,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             return BuildInteractiveContentAsync(
                 quickInfoItem,
                 document,

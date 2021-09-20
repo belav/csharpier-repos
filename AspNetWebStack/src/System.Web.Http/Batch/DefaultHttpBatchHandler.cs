@@ -78,7 +78,8 @@ namespace System.Web.Http.Batch
             IList<HttpResponseMessage> responses,
             HttpRequestMessage request,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             if (responses == null)
             {
                 throw Error.ArgumentNull("responses");
@@ -104,7 +105,8 @@ namespace System.Web.Http.Batch
         public override async Task<HttpResponseMessage> ProcessBatchAsync(
             HttpRequestMessage request,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             if (request == null)
             {
                 throw Error.ArgumentNull("request");
@@ -150,7 +152,8 @@ namespace System.Web.Http.Batch
         public virtual async Task<IList<HttpResponseMessage>> ExecuteRequestMessagesAsync(
             IEnumerable<HttpRequestMessage> requests,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             if (requests == null)
             {
                 throw Error.ArgumentNull("requests");
@@ -209,7 +212,8 @@ namespace System.Web.Http.Batch
         public virtual async Task<IList<HttpRequestMessage>> ParseBatchRequestsAsync(
             HttpRequestMessage request,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             if (request == null)
             {
                 throw Error.ArgumentNull("request");
@@ -275,7 +279,8 @@ namespace System.Web.Http.Batch
                     contentType.MediaType,
                     StringComparer.OrdinalIgnoreCase
                 )
-            ) {
+            )
+            {
                 throw new HttpResponseException(
                     request.CreateErrorResponse(
                         HttpStatusCode.BadRequest,

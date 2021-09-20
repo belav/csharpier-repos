@@ -411,7 +411,8 @@ namespace System.Linq.Expressions.Tests
                     MemberBindingType.MemberBinding,
                     (MemberBindingType)(-1)
                 }
-            ) {
+            )
+            {
                 yield return new object[] { new BogusBinding(type, member) };
             }
         }

@@ -273,7 +273,8 @@ namespace System.Net.Http.Tests
             int startIndex,
             int expectedLength,
             out RetryConditionHeaderValue result
-        ) {
+        )
+        {
             object temp = null;
             Assert.Equal(
                 expectedLength,

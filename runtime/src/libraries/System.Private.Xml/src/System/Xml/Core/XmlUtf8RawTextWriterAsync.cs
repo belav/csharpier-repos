@@ -117,7 +117,8 @@ namespace System.Xml
             string pubid,
             string sysid,
             string subset
-        ) {
+        )
+        {
             CheckAsyncCall();
             Debug.Assert(name != null && name.Length > 0);
 
@@ -242,7 +243,8 @@ namespace System.Xml
             string prefix,
             string localName,
             string ns
-        ) {
+        )
+        {
             CheckAsyncCall();
             Debug.Assert(localName != null && localName.Length > 0);
             Debug.Assert(prefix != null);
@@ -288,7 +290,8 @@ namespace System.Xml
         internal override async Task WriteNamespaceDeclarationAsync(
             string prefix,
             string namespaceName
-        ) {
+        )
+        {
             CheckAsyncCall();
             Debug.Assert(prefix != null && namespaceName != null);
 
@@ -630,7 +633,8 @@ namespace System.Xml
                         pDst < pDstEnd
                         && XmlCharType.IsAttributeValueChar((char)(ch = *pSrc))
                         && ch <= 0x7F
-                    ) {
+                    )
+                    {
                         *pDst = (byte)ch;
                         pDst++;
                         pSrc++;
@@ -818,7 +822,8 @@ namespace System.Xml
             char* pSrc,
             char* pSrcEnd,
             out bool needWriteNewLine
-        ) {
+        )
+        {
             needWriteNewLine = false;
             char* pRaw = pSrc;
 
@@ -839,7 +844,8 @@ namespace System.Xml
                         pDst < pDstEnd
                         && XmlCharType.IsAttributeValueChar((char)(ch = *pSrc))
                         && ch <= 0x7F
-                    ) {
+                    )
+                    {
                         *pDst = (byte)ch;
                         pDst++;
                         pSrc++;
@@ -951,7 +957,8 @@ namespace System.Xml
             int index,
             int count,
             out bool needWriteNewLine
-        ) {
+        )
+        {
             needWriteNewLine = false;
             if (count == 0)
             {
@@ -971,7 +978,8 @@ namespace System.Xml
             int index,
             int count,
             out bool needWriteNewLine
-        ) {
+        )
+        {
             needWriteNewLine = false;
             if (count == 0)
             {
@@ -1048,7 +1056,8 @@ namespace System.Xml
             string text,
             int curIndex,
             int leftCount
-        ) {
+        )
+        {
             int writeLen = 0;
             bool needWriteNewLine = false;
 
@@ -1180,7 +1189,8 @@ namespace System.Xml
             string text2 = null,
             string text3 = null,
             string text4 = null
-        ) {
+        )
+        {
             Debug.Assert(text1 != null);
             Debug.Assert(text2 != null || (text3 == null && text4 == null));
             Debug.Assert(text3 != null || (text4 == null));
@@ -1242,7 +1252,8 @@ namespace System.Xml
             string text2 = null,
             string text3 = null,
             string text4 = null
-        ) {
+        )
+        {
             Debug.Assert(text1 != null);
             Debug.Assert(text2 != null || (text3 == null && text4 == null));
             Debug.Assert(text3 != null || (text4 == null));
@@ -1272,7 +1283,8 @@ namespace System.Xml
             char* pSrcBegin,
             char* pSrcEnd,
             out bool needWriteNewLine
-        ) {
+        )
+        {
             needWriteNewLine = false;
             char* pRaw = pSrcBegin;
 
@@ -1292,7 +1304,8 @@ namespace System.Xml
 
                     while (
                         pDst < pDstEnd && XmlCharType.IsTextChar((char)(ch = *pSrc)) && ch <= 0x7F
-                    ) {
+                    )
+                    {
                         *pDst = (byte)ch;
                         pDst++;
                         pSrc++;
@@ -1389,7 +1402,8 @@ namespace System.Xml
             int index,
             int count,
             out bool needWriteNewLine
-        ) {
+        )
+        {
             needWriteNewLine = false;
             if (count == 0)
             {
@@ -1408,7 +1422,8 @@ namespace System.Xml
             int index,
             int count,
             out bool needWriteNewLine
-        ) {
+        )
+        {
             needWriteNewLine = false;
             if (count == 0)
             {
@@ -1486,7 +1501,8 @@ namespace System.Xml
             int count,
             int stopChar,
             out bool needWriteNewLine
-        ) {
+        )
+        {
             needWriteNewLine = false;
             if (count == 0)
             {
@@ -1520,7 +1536,8 @@ namespace System.Xml
                             && XmlCharType.IsTextChar((char)(ch = *pSrc))
                             && ch != stopChar
                             && ch <= 0x7F
-                        ) {
+                        )
+                        {
                             *pDst = (byte)ch;
                             pDst++;
                             pSrc++;
@@ -1686,7 +1703,8 @@ namespace System.Xml
             int index,
             int count,
             out bool needWriteNewLine
-        ) {
+        )
+        {
             needWriteNewLine = false;
             if (count == 0)
             {
@@ -1723,7 +1741,8 @@ namespace System.Xml
                             && XmlCharType.IsAttributeValueChar((char)(ch = *pSrc))
                             && ch != ']'
                             && ch <= 0x7F
-                        ) {
+                        )
+                        {
                             *pDst = (byte)ch;
                             pDst++;
                             pSrc++;
@@ -1886,7 +1905,8 @@ namespace System.Xml
             string pubid,
             string sysid,
             string subset
-        ) {
+        )
+        {
             CheckAsyncCall();
             // Add indentation
             if (!_mixedContent && base._textPos != base._bufPos)
@@ -1900,7 +1920,8 @@ namespace System.Xml
             string prefix,
             string localName,
             string ns
-        ) {
+        )
+        {
             CheckAsyncCall();
             Debug.Assert(
                 localName != null && localName.Length != 0 && prefix != null && ns != null
@@ -1921,7 +1942,8 @@ namespace System.Xml
             string prefix,
             string localName,
             string ns
-        ) {
+        )
+        {
             CheckAsyncCall();
             // Add indentation
             _indentLevel--;
@@ -1942,7 +1964,8 @@ namespace System.Xml
             string prefix,
             string localName,
             string ns
-        ) {
+        )
+        {
             CheckAsyncCall();
             // Add indentation
             _indentLevel--;
@@ -1964,7 +1987,8 @@ namespace System.Xml
             string prefix,
             string localName,
             string ns
-        ) {
+        )
+        {
             CheckAsyncCall();
             // Add indentation
             if (_newLineOnAttributes)

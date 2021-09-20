@@ -113,7 +113,8 @@ namespace Microsoft.AspNetCore.Authentication.Negotiate
             string incomingBlob,
             out BlobErrorType status,
             out Exception? error
-        ) {
+        )
+        {
             byte[]? decodedIncomingBlob = null;
             if (incomingBlob != null && incomingBlob.Length > 0)
             {
@@ -139,7 +140,8 @@ namespace Microsoft.AspNetCore.Authentication.Negotiate
             byte[]? incomingBlob,
             out BlobErrorType status,
             out Exception? error
-        ) {
+        )
+        {
             try
             {
                 // byte[] GetOutgoingBlob(byte[] incomingBlob, bool throwOnError, out SecurityStatusPal statusCode)
@@ -160,7 +162,8 @@ namespace Microsoft.AspNetCore.Authentication.Negotiate
                     errorCode == SecurityStatusPalErrorCode.InternalError
                     && !OperatingSystem.IsWindows()
                     && _gssExceptionType!.IsInstanceOfType(error)
-                ) {
+                )
+                {
                     var majorStatus = (uint)error.HResult;
                     var minorStatus = (uint)_gssMinorStatus!.GetValue(error)!;
 
@@ -180,7 +183,8 @@ namespace Microsoft.AspNetCore.Authentication.Negotiate
                     errorCode == SecurityStatusPalErrorCode.OK
                     || errorCode == SecurityStatusPalErrorCode.ContinueNeeded
                     || errorCode == SecurityStatusPalErrorCode.CompleteNeeded
-                ) {
+                )
+                {
                     status = BlobErrorType.None;
                 }
                 else if (IsCredentialError(errorCode))

@@ -197,7 +197,8 @@ namespace System.Diagnostics
             System.Diagnostics.ActivitySpanId spanId,
             System.Diagnostics.ActivityTraceFlags activityTraceFlags =
                 System.Diagnostics.ActivityTraceFlags.None
-        ) {
+        )
+        {
             throw null;
         }
         public System.Diagnostics.Activity SetParentId(string parentId)
@@ -211,7 +212,8 @@ namespace System.Diagnostics
         public System.Diagnostics.Activity SetStatus(
             System.Diagnostics.ActivityStatusCode code,
             string? description = null
-        ) {
+        )
+        {
             throw null;
         }
         public System.Diagnostics.Activity Start()
@@ -254,7 +256,8 @@ namespace System.Diagnostics
                     string,
                     object?
                 >> list
-        ) {
+        )
+        {
             throw null;
         }
         public object? this[string key]
@@ -301,7 +304,8 @@ namespace System.Diagnostics
         public void CopyTo(
             System.Collections.Generic.KeyValuePair<string, object?>[] array,
             int arrayIndex
-        ) {
+        )
+        {
             throw null;
         }
         System.Collections.Generic.IEnumerator<System.Collections.Generic.KeyValuePair<
@@ -387,17 +391,20 @@ namespace System.Diagnostics
         public void CopyTo(System.Span<byte> destination) { }
         public static System.Diagnostics.ActivitySpanId CreateFromBytes(
             System.ReadOnlySpan<byte> idData
-        ) {
+        )
+        {
             throw null;
         }
         public static System.Diagnostics.ActivitySpanId CreateFromString(
             System.ReadOnlySpan<char> idData
-        ) {
+        )
+        {
             throw null;
         }
         public static System.Diagnostics.ActivitySpanId CreateFromUtf8String(
             System.ReadOnlySpan<byte> idData
-        ) {
+        )
+        {
             throw null;
         }
         public static System.Diagnostics.ActivitySpanId CreateRandom()
@@ -410,7 +417,8 @@ namespace System.Diagnostics
         }
         public override bool Equals(
             [System.Diagnostics.CodeAnalysis.NotNullWhenAttribute(true)] object? obj
-        ) {
+        )
+        {
             throw null;
         }
         public override int GetHashCode()
@@ -420,13 +428,15 @@ namespace System.Diagnostics
         public static bool operator ==(
             System.Diagnostics.ActivitySpanId spanId1,
             System.Diagnostics.ActivitySpanId spandId2
-        ) {
+        )
+        {
             throw null;
         }
         public static bool operator !=(
             System.Diagnostics.ActivitySpanId spanId1,
             System.Diagnostics.ActivitySpanId spandId2
-        ) {
+        )
+        {
             throw null;
         }
         public string ToHexString()
@@ -459,7 +469,8 @@ namespace System.Diagnostics
         public System.Diagnostics.Activity? CreateActivity(
             string name,
             System.Diagnostics.ActivityKind kind
-        ) {
+        )
+        {
             throw null;
         }
         public System.Diagnostics.Activity? CreateActivity(
@@ -473,7 +484,8 @@ namespace System.Diagnostics
             System.Collections.Generic.IEnumerable<System.Diagnostics.ActivityLink>? links = null,
             System.Diagnostics.ActivityIdFormat idFormat =
                 System.Diagnostics.ActivityIdFormat.Unknown
-        ) {
+        )
+        {
             throw null;
         }
         public System.Diagnostics.Activity? CreateActivity(
@@ -487,13 +499,15 @@ namespace System.Diagnostics
             System.Collections.Generic.IEnumerable<System.Diagnostics.ActivityLink>? links = null,
             System.Diagnostics.ActivityIdFormat idFormat =
                 System.Diagnostics.ActivityIdFormat.Unknown
-        ) {
+        )
+        {
             throw null;
         }
         public System.Diagnostics.Activity? StartActivity(
             [System.Runtime.CompilerServices.CallerMemberName] string name = "",
             System.Diagnostics.ActivityKind kind = ActivityKind.Internal
-        ) {
+        )
+        {
             throw null;
         }
         public System.Diagnostics.Activity? StartActivity(
@@ -506,7 +520,8 @@ namespace System.Diagnostics
                 >>? tags = null,
             System.Collections.Generic.IEnumerable<System.Diagnostics.ActivityLink>? links = null,
             System.DateTimeOffset startTime = default
-        ) {
+        )
+        {
             throw null;
         }
         public System.Diagnostics.Activity? StartActivity(
@@ -519,7 +534,8 @@ namespace System.Diagnostics
                 >>? tags = null,
             System.Collections.Generic.IEnumerable<System.Diagnostics.ActivityLink>? links = null,
             System.DateTimeOffset startTime = default
-        ) {
+        )
+        {
             throw null;
         }
         public System.Diagnostics.Activity? StartActivity(
@@ -532,7 +548,8 @@ namespace System.Diagnostics
             System.Collections.Generic.IEnumerable<System.Diagnostics.ActivityLink>? links = null,
             DateTimeOffset startTime = default,
             [System.Runtime.CompilerServices.CallerMemberName] string name = ""
-        ) {
+        )
+        {
             throw null;
         }
         public static void AddActivityListener(System.Diagnostics.ActivityListener listener)
@@ -561,17 +578,20 @@ namespace System.Diagnostics
         public void CopyTo(System.Span<byte> destination) { }
         public static System.Diagnostics.ActivityTraceId CreateFromBytes(
             System.ReadOnlySpan<byte> idData
-        ) {
+        )
+        {
             throw null;
         }
         public static System.Diagnostics.ActivityTraceId CreateFromString(
             System.ReadOnlySpan<char> idData
-        ) {
+        )
+        {
             throw null;
         }
         public static System.Diagnostics.ActivityTraceId CreateFromUtf8String(
             System.ReadOnlySpan<byte> idData
-        ) {
+        )
+        {
             throw null;
         }
         public static System.Diagnostics.ActivityTraceId CreateRandom()
@@ -584,7 +604,8 @@ namespace System.Diagnostics
         }
         public override bool Equals(
             [System.Diagnostics.CodeAnalysis.NotNullWhenAttribute(true)] object? obj
-        ) {
+        )
+        {
             throw null;
         }
         public override int GetHashCode()
@@ -594,13 +615,15 @@ namespace System.Diagnostics
         public static bool operator ==(
             System.Diagnostics.ActivityTraceId traceId1,
             System.Diagnostics.ActivityTraceId traceId2
-        ) {
+        )
+        {
             throw null;
         }
         public static bool operator !=(
             System.Diagnostics.ActivityTraceId traceId1,
             System.Diagnostics.ActivityTraceId traceId2
-        ) {
+        )
+        {
             throw null;
         }
         public string ToHexString()
@@ -627,7 +650,8 @@ namespace System.Diagnostics
             System.Func<string, object?, object?, bool>? isEnabled,
             System.Action<System.Diagnostics.Activity, object?>? onActivityImport = null,
             System.Action<System.Diagnostics.Activity, object?>? onActivityExport = null
-        ) {
+        )
+        {
             throw null;
         }
     }
@@ -647,7 +671,8 @@ namespace System.Diagnostics
         public System.Diagnostics.Activity StartActivity(
             System.Diagnostics.Activity activity,
             object? args
-        ) {
+        )
+        {
             throw null;
         }
         [System.Diagnostics.CodeAnalysis.RequiresUnreferencedCode(
@@ -680,7 +705,8 @@ namespace System.Diagnostics
             string name,
             System.DateTimeOffset timestamp = default,
             System.Diagnostics.ActivityTagsCollection? tags = null
-        ) {
+        )
+        {
             throw null;
         }
         public string Name
@@ -707,7 +733,8 @@ namespace System.Diagnostics
             System.Diagnostics.ActivityTraceFlags traceFlags,
             string? traceState = null,
             bool isRemote = false
-        ) {
+        )
+        {
             throw null;
         }
         public System.Diagnostics.ActivityTraceId TraceId
@@ -734,25 +761,29 @@ namespace System.Diagnostics
             string traceParent,
             string? traceState,
             out System.Diagnostics.ActivityContext context
-        ) {
+        )
+        {
             throw null;
         }
         public static System.Diagnostics.ActivityContext Parse(
             string traceParent,
             string? traceState
-        ) {
+        )
+        {
             throw null;
         }
         public static bool operator ==(
             System.Diagnostics.ActivityContext left,
             System.Diagnostics.ActivityContext right
-        ) {
+        )
+        {
             throw null;
         }
         public static bool operator !=(
             System.Diagnostics.ActivityContext left,
             System.Diagnostics.ActivityContext right
-        ) {
+        )
+        {
             throw null;
         }
         public bool Equals(System.Diagnostics.ActivityContext value)
@@ -761,7 +792,8 @@ namespace System.Diagnostics
         }
         public override bool Equals(
             [System.Diagnostics.CodeAnalysis.NotNullWhenAttribute(true)] object? obj
-        ) {
+        )
+        {
             throw null;
         }
         public override int GetHashCode()
@@ -774,7 +806,8 @@ namespace System.Diagnostics
         public ActivityLink(
             System.Diagnostics.ActivityContext context,
             System.Diagnostics.ActivityTagsCollection? tags = null
-        ) {
+        )
+        {
             throw null;
         }
         public System.Diagnostics.ActivityContext Context
@@ -790,7 +823,8 @@ namespace System.Diagnostics
         }
         public override bool Equals(
             [System.Diagnostics.CodeAnalysis.NotNullWhenAttribute(true)] object? obj
-        ) {
+        )
+        {
             throw null;
         }
         public bool Equals(System.Diagnostics.ActivityLink value)
@@ -800,13 +834,15 @@ namespace System.Diagnostics
         public static bool operator ==(
             System.Diagnostics.ActivityLink left,
             System.Diagnostics.ActivityLink right
-        ) {
+        )
+        {
             throw null;
         }
         public static bool operator !=(
             System.Diagnostics.ActivityLink left,
             System.Diagnostics.ActivityLink right
-        ) {
+        )
+        {
             throw null;
         }
         public override int GetHashCode()

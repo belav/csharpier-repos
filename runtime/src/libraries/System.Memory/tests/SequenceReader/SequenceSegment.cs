@@ -60,7 +60,8 @@ namespace System.Memory.Tests.SequenceReader
             int start,
             int end,
             bool readOnly = false
-        ) {
+        )
+        {
             _ownedMemory = ownedMemory;
 
             AvailableMemory = _ownedMemory.Memory;

@@ -389,7 +389,8 @@ namespace System.Web.WebPages.Administration.Test
             bool passwordExists,
             bool temporaryPasswordExists,
             string expectedUrl
-        ) {
+        )
+        {
             // Arrange
             var vpp = new Mock<VirtualPathProvider>();
             if (temporaryPasswordExists)

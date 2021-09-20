@@ -142,7 +142,8 @@ namespace JIT.HardwareIntrinsics.X86
                     || (alignment * 2) < sizeOfinArray1
                     || (alignment * 2) < sizeOfinArray2
                     || (alignment * 2) < sizeOfoutArray
-                ) {
+                )
+                {
                     throw new ArgumentException("Invalid value of alignment");
                 }
 
@@ -229,7 +230,8 @@ namespace JIT.HardwareIntrinsics.X86
 
             public void RunStructFldScenario_Load(
                 SimpleBinaryOpTest__PermuteVar8x32UInt32 testClass
-            ) {
+            )
+            {
                 fixed (Vector256<UInt32>* pFld1 = &_fld1)fixed (Vector256<UInt32>* pFld2 = &_fld2)
                 {
                     var result = Avx2.PermuteVar8x32(
@@ -446,7 +448,8 @@ namespace JIT.HardwareIntrinsics.X86
 
             fixed (Vector256<UInt32>* pClsVar1 = &_clsVar1)fixed (
                 Vector256<UInt32>* pClsVar2 = &_clsVar2
-            ) {
+            )
+            {
                 var result = Avx2.PermuteVar8x32(
                     Avx.LoadVector256((UInt32*)(pClsVar1)),
                     Avx.LoadVector256((UInt32*)(pClsVar2))
@@ -512,7 +515,8 @@ namespace JIT.HardwareIntrinsics.X86
 
             fixed (Vector256<UInt32>* pFld1 = &test._fld1)fixed (
                 Vector256<UInt32>* pFld2 = &test._fld2
-            ) {
+            )
+            {
                 var result = Avx2.PermuteVar8x32(
                     Avx.LoadVector256((UInt32*)(pFld1)),
                     Avx.LoadVector256((UInt32*)(pFld2))
@@ -616,7 +620,8 @@ namespace JIT.HardwareIntrinsics.X86
             Vector256<UInt32> op2,
             void* result,
             [CallerMemberName] string method = ""
-        ) {
+        )
+        {
             UInt32[] inArray1 = new UInt32[Op1ElementCount];
             UInt32[] inArray2 = new UInt32[Op2ElementCount];
             UInt32[] outArray = new UInt32[RetElementCount];
@@ -637,7 +642,8 @@ namespace JIT.HardwareIntrinsics.X86
             void* op2,
             void* result,
             [CallerMemberName] string method = ""
-        ) {
+        )
+        {
             UInt32[] inArray1 = new UInt32[Op1ElementCount];
             UInt32[] inArray2 = new UInt32[Op2ElementCount];
             UInt32[] outArray = new UInt32[RetElementCount];
@@ -666,7 +672,8 @@ namespace JIT.HardwareIntrinsics.X86
             UInt32[] right,
             UInt32[] result,
             [CallerMemberName] string method = ""
-        ) {
+        )
+        {
             bool succeeded = true;
 
             if (left[(right[0] & (uint)7)] != result[0])

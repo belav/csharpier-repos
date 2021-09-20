@@ -94,7 +94,8 @@ namespace Internal.Cryptography.Pal
             [NotNullWhen(true)] out OpenSslPkcs12Reader? pkcs12Reader,
             out Exception? openSslException,
             bool captureException
-        ) {
+        )
+        {
             openSslException = null;
 
             try

@@ -27,7 +27,8 @@ namespace Microsoft.AspNetCore.Mvc.ModelBinding.Binders
             if (
                 modelType.IsGenericType
                 && modelType.GetGenericTypeDefinition() == typeof(KeyValuePair<, >)
-            ) {
+            )
+            {
                 var typeArguments = modelType.GenericTypeArguments;
 
                 var keyMetadata = context.MetadataProvider.GetMetadataForType(typeArguments[0]);

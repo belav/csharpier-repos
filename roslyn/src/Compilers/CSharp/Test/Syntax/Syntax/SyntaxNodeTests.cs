@@ -1279,7 +1279,8 @@ using goo.bar;
                 var child = children[0];
                 child.Kind() != SyntaxKind.None;
                 child = child.GetNextSibling()
-            ) {
+            )
+            {
                 list.Add(child);
             }
 
@@ -1301,7 +1302,8 @@ using goo.bar;
                 var child = children[children.Count - 1];
                 child.Kind() != SyntaxKind.None;
                 child = child.GetPreviousSibling()
-            ) {
+            )
+            {
                 list.Add(child);
             }
 
@@ -4186,7 +4188,8 @@ namespace HelloWorld
             string inputText,
             string expectedText,
             Action<CompilationUnitSyntax, string> action
-        ) {
+        )
+        {
             inputText = inputText.NormalizeLineEndings();
             expectedText = expectedText.NormalizeLineEndings();
 

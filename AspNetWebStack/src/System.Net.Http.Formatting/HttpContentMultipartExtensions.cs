@@ -64,7 +64,8 @@ namespace System.Net.Http
                         "multipart/" + subtype,
                         StringComparison.OrdinalIgnoreCase
                     )
-                ) {
+                )
+                {
                     return true;
                 }
             }
@@ -79,7 +80,8 @@ namespace System.Net.Http
         /// <returns>A <see cref="Task{T}"/> representing the tasks of getting the result of reading the MIME content.</returns>
         public static Task<MultipartMemoryStreamProvider> ReadAsMultipartAsync(
             this HttpContent content
-        ) {
+        )
+        {
             return ReadAsMultipartAsync<MultipartMemoryStreamProvider>(
                 content,
                 new MultipartMemoryStreamProvider(),
@@ -96,7 +98,8 @@ namespace System.Net.Http
         public static Task<MultipartMemoryStreamProvider> ReadAsMultipartAsync(
             this HttpContent content,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             return ReadAsMultipartAsync<MultipartMemoryStreamProvider>(
                 content,
                 new MultipartMemoryStreamProvider(),
@@ -238,7 +241,8 @@ namespace System.Net.Http
         private static async Task MultipartReadAsync(
             MultipartAsyncContext context,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             Contract.Assert(context != null, "context cannot be null");
             while (true)
             {
@@ -318,7 +322,8 @@ namespace System.Net.Http
                 MimeMultipartBodyPartParser mimeParser,
                 byte[] data,
                 ICollection<HttpContent> result
-            ) {
+            )
+            {
                 Contract.Assert(contentStream != null);
                 Contract.Assert(mimeParser != null);
                 Contract.Assert(data != null);

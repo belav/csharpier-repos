@@ -19,7 +19,8 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Completion
         private static void AssertItemsEqual(
             ImmutableArray<CompletionItem> actual,
             params string[] expected
-        ) {
+        )
+        {
             AssertEx.Equal(
                 expected,
                 actual.Select(

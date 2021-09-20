@@ -37,7 +37,8 @@ namespace Microsoft.AspNetCore.Mvc.Cors
                     CorsConstants.PreflightHttpMethod,
                     StringComparison.OrdinalIgnoreCase
                 ) && !StringValues.IsNullOrEmpty(accessControlRequestMethod)
-            ) {
+            )
+            {
                 // Short circuit if the request is preflight as that should not result in action execution.
                 context.Result = new StatusCodeResult(StatusCodes.Status204NoContent);
             }

@@ -60,7 +60,8 @@ namespace Microsoft.CodeAnalysis.UnitTests.WorkspaceServices
 
         public SerializableOptionSet GetSerializableOptionsSnapshot(
             ImmutableHashSet<string> languages
-        ) {
+        )
+        {
             throw new NotImplementedException();
         }
 
@@ -74,13 +75,15 @@ namespace Microsoft.CodeAnalysis.UnitTests.WorkspaceServices
             string language,
             [NotNullWhen(true)] out IEditorConfigStorageLocation2 storageLocation,
             out OptionKey optionKey
-        ) {
+        )
+        {
             throw new NotImplementedException();
         }
 
         public ImmutableHashSet<IOption> GetRegisteredSerializableOptions(
             ImmutableHashSet<string> languages
-        ) {
+        )
+        {
             throw new NotImplementedException();
         }
 
@@ -92,7 +95,8 @@ namespace Microsoft.CodeAnalysis.UnitTests.WorkspaceServices
 
         public void RegisterDocumentOptionsProvider(
             IDocumentOptionsProvider documentOptionsProvider
-        ) {
+        )
+        {
             throw new NotImplementedException();
         }
 
@@ -100,7 +104,8 @@ namespace Microsoft.CodeAnalysis.UnitTests.WorkspaceServices
             Document document,
             OptionSet optionSet,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             throw new NotImplementedException();
         }
 

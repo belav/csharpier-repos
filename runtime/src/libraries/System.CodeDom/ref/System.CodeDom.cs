@@ -1889,43 +1889,50 @@ namespace System.CodeDom.Compiler
         protected virtual System.CodeDom.Compiler.CompilerResults FromDom(
             System.CodeDom.Compiler.CompilerParameters options,
             System.CodeDom.CodeCompileUnit e
-        ) {
+        )
+        {
             throw null;
         }
         protected virtual System.CodeDom.Compiler.CompilerResults FromDomBatch(
             System.CodeDom.Compiler.CompilerParameters options,
             System.CodeDom.CodeCompileUnit[] ea
-        ) {
+        )
+        {
             throw null;
         }
         protected virtual System.CodeDom.Compiler.CompilerResults FromFile(
             System.CodeDom.Compiler.CompilerParameters options,
             string fileName
-        ) {
+        )
+        {
             throw null;
         }
         protected virtual System.CodeDom.Compiler.CompilerResults FromFileBatch(
             System.CodeDom.Compiler.CompilerParameters options,
             string[] fileNames
-        ) {
+        )
+        {
             throw null;
         }
         protected virtual System.CodeDom.Compiler.CompilerResults FromSource(
             System.CodeDom.Compiler.CompilerParameters options,
             string source
-        ) {
+        )
+        {
             throw null;
         }
         protected virtual System.CodeDom.Compiler.CompilerResults FromSourceBatch(
             System.CodeDom.Compiler.CompilerParameters options,
             string[] sources
-        ) {
+        )
+        {
             throw null;
         }
         protected virtual string GetResponseFileCmdArgs(
             System.CodeDom.Compiler.CompilerParameters options,
             string cmdArgs
-        ) {
+        )
+        {
             throw null;
         }
         protected static string JoinStringArray(string[] sa, string separator)
@@ -1939,37 +1946,43 @@ namespace System.CodeDom.Compiler
         System.CodeDom.Compiler.CompilerResults System.CodeDom.Compiler.ICodeCompiler.CompileAssemblyFromDom(
             System.CodeDom.Compiler.CompilerParameters options,
             System.CodeDom.CodeCompileUnit e
-        ) {
+        )
+        {
             throw null;
         }
         System.CodeDom.Compiler.CompilerResults System.CodeDom.Compiler.ICodeCompiler.CompileAssemblyFromDomBatch(
             System.CodeDom.Compiler.CompilerParameters options,
             System.CodeDom.CodeCompileUnit[] ea
-        ) {
+        )
+        {
             throw null;
         }
         System.CodeDom.Compiler.CompilerResults System.CodeDom.Compiler.ICodeCompiler.CompileAssemblyFromFile(
             System.CodeDom.Compiler.CompilerParameters options,
             string fileName
-        ) {
+        )
+        {
             throw null;
         }
         System.CodeDom.Compiler.CompilerResults System.CodeDom.Compiler.ICodeCompiler.CompileAssemblyFromFileBatch(
             System.CodeDom.Compiler.CompilerParameters options,
             string[] fileNames
-        ) {
+        )
+        {
             throw null;
         }
         System.CodeDom.Compiler.CompilerResults System.CodeDom.Compiler.ICodeCompiler.CompileAssemblyFromSource(
             System.CodeDom.Compiler.CompilerParameters options,
             string source
-        ) {
+        )
+        {
             throw null;
         }
         System.CodeDom.Compiler.CompilerResults System.CodeDom.Compiler.ICodeCompiler.CompileAssemblyFromSourceBatch(
             System.CodeDom.Compiler.CompilerParameters options,
             string[] sources
-        ) {
+        )
+        {
             throw null;
         }
     }
@@ -1988,19 +2001,22 @@ namespace System.CodeDom.Compiler
         public virtual System.CodeDom.Compiler.CompilerResults CompileAssemblyFromDom(
             System.CodeDom.Compiler.CompilerParameters options,
             params System.CodeDom.CodeCompileUnit[] compilationUnits
-        ) {
+        )
+        {
             throw null;
         }
         public virtual System.CodeDom.Compiler.CompilerResults CompileAssemblyFromFile(
             System.CodeDom.Compiler.CompilerParameters options,
             params string[] fileNames
-        ) {
+        )
+        {
             throw null;
         }
         public virtual System.CodeDom.Compiler.CompilerResults CompileAssemblyFromSource(
             System.CodeDom.Compiler.CompilerParameters options,
             params string[] sources
-        ) {
+        )
+        {
             throw null;
         }
         [System.ObsoleteAttribute(
@@ -2017,7 +2033,8 @@ namespace System.CodeDom.Compiler
         public abstract System.CodeDom.Compiler.ICodeGenerator CreateGenerator();
         public virtual System.CodeDom.Compiler.ICodeGenerator CreateGenerator(
             System.IO.TextWriter output
-        ) {
+        )
+        {
             throw null;
         }
         public virtual System.CodeDom.Compiler.ICodeGenerator CreateGenerator(string fileName)
@@ -2038,7 +2055,8 @@ namespace System.CodeDom.Compiler
         public static System.CodeDom.Compiler.CodeDomProvider CreateProvider(
             string language,
             System.Collections.Generic.IDictionary<string, string> providerOptions
-        ) {
+        )
+        {
             throw null;
         }
         public virtual string CreateValidIdentifier(string value)
@@ -2410,7 +2428,8 @@ namespace System.CodeDom.Compiler
         ) { }
         string System.CodeDom.Compiler.ICodeGenerator.GetTypeOutput(
             System.CodeDom.CodeTypeReference type
-        ) {
+        )
+        {
             throw null;
         }
         bool System.CodeDom.Compiler.ICodeGenerator.IsValidIdentifier(string value)
@@ -2419,7 +2438,8 @@ namespace System.CodeDom.Compiler
         }
         bool System.CodeDom.Compiler.ICodeGenerator.Supports(
             System.CodeDom.Compiler.GeneratorSupport support
-        ) {
+        )
+        {
             throw null;
         }
         void System.CodeDom.Compiler.ICodeGenerator.ValidateIdentifier(string value) { }
@@ -2567,7 +2587,8 @@ namespace System.CodeDom.Compiler
         }
         public System.CodeDom.Compiler.CodeDomProvider CreateProvider(
             System.Collections.Generic.IDictionary<string, string> providerOptions
-        ) {
+        )
+        {
             throw null;
         }
         public override bool Equals(object o)
@@ -2714,7 +2735,8 @@ namespace System.CodeDom.Compiler
             System.CodeDom.Compiler.TempFileCollection tempFiles,
             ref string outputName,
             ref string errorName
-        ) {
+        )
+        {
             throw null;
         }
         public static int ExecWaitWithCapture(
@@ -2724,7 +2746,8 @@ namespace System.CodeDom.Compiler
             System.CodeDom.Compiler.TempFileCollection tempFiles,
             ref string outputName,
             ref string errorName
-        ) {
+        )
+        {
             throw null;
         }
         public static int ExecWaitWithCapture(
@@ -2732,7 +2755,8 @@ namespace System.CodeDom.Compiler
             System.CodeDom.Compiler.TempFileCollection tempFiles,
             ref string outputName,
             ref string errorName
-        ) {
+        )
+        {
             throw null;
         }
         public static int ExecWaitWithCapture(
@@ -2741,7 +2765,8 @@ namespace System.CodeDom.Compiler
             System.CodeDom.Compiler.TempFileCollection tempFiles,
             ref string outputName,
             ref string errorName
-        ) {
+        )
+        {
             throw null;
         }
     }

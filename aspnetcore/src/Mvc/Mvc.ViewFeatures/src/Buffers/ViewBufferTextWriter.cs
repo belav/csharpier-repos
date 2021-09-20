@@ -60,7 +60,8 @@ namespace Microsoft.AspNetCore.Mvc.ViewFeatures.Buffers
             Encoding encoding,
             HtmlEncoder htmlEncoder,
             TextWriter inner
-        ) {
+        )
+        {
             if (buffer == null)
             {
                 throw new ArgumentNullException(nameof(buffer));

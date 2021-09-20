@@ -194,7 +194,8 @@ namespace Microsoft.AspNetCore.Http2Cat
             ConnectionContext clientConnectionContext,
             ILogger logger,
             CancellationToken stopToken
-        ) {
+        )
+        {
             _hpackDecoder = new HPackDecoder(
                 (int)_clientSettings.HeaderTableSize,
                 MaxRequestHeaderFieldSize
@@ -304,7 +305,8 @@ namespace Microsoft.AspNetCore.Http2Cat
             int streamId,
             IEnumerable<KeyValuePair<string, string>> headers,
             bool endStream
-        ) {
+        )
+        {
             var writableBuffer = _pair.Application.Output;
 
             var frame = new Http2Frame();
@@ -357,7 +359,8 @@ namespace Microsoft.AspNetCore.Http2Cat
 
         private static IEnumerator<KeyValuePair<string, string>> GetHeadersEnumerator(
             IEnumerable<KeyValuePair<string, string>> headers
-        ) {
+        )
+        {
             var headersEnumerator = headers.GetEnumerator();
             return headersEnumerator;
         }
@@ -365,7 +368,8 @@ namespace Microsoft.AspNetCore.Http2Cat
         internal Dictionary<string, string> DecodeHeaders(
             Http2FrameWithPayload frame,
             bool endHeaders = false
-        ) {
+        )
+        {
             Assert.Equal(Http2FrameType.HEADERS, frame.Type);
             _hpackDecoder.Decode(frame.PayloadSequence, endHeaders, handler: this);
             return _decodedHeaders;
@@ -421,7 +425,8 @@ namespace Microsoft.AspNetCore.Http2Cat
             IEnumerable<KeyValuePair<string, string>> headers,
             byte padLength,
             bool endStream
-        ) {
+        )
+        {
             var writableBuffer = _pair.Application.Output;
 
             var frame = new Http2Frame();
@@ -476,7 +481,8 @@ namespace Microsoft.AspNetCore.Http2Cat
             byte priority,
             int streamDependency,
             bool endStream
-        ) {
+        )
+        {
             var writableBuffer = _pair.Application.Output;
 
             var frame = new Http2Frame();
@@ -532,7 +538,8 @@ namespace Microsoft.AspNetCore.Http2Cat
             byte priority,
             int streamDependency,
             bool endStream
-        ) {
+        )
+        {
             var writableBuffer = _pair.Application.Output;
 
             var frame = new Http2Frame();
@@ -653,7 +660,8 @@ namespace Microsoft.AspNetCore.Http2Cat
         internal async Task SendSettingsWithInvalidParameterValueAsync(
             Http2SettingsParameter parameter,
             uint value
-        ) {
+        )
+        {
             var writableBuffer = _pair.Application.Output;
             var frame = new Http2Frame();
             frame.PrepareSettings(Http2SettingsFrameFlags.NONE);
@@ -686,7 +694,8 @@ namespace Microsoft.AspNetCore.Http2Cat
             int streamId,
             Http2HeadersFrameFlags flags,
             IEnumerable<KeyValuePair<string, string>> headers
-        ) {
+        )
+        {
             var outputWriter = _pair.Application.Output;
             var frame = new Http2Frame();
 
@@ -709,7 +718,8 @@ namespace Microsoft.AspNetCore.Http2Cat
             int streamId,
             Http2HeadersFrameFlags flags,
             byte[] headerBlock
-        ) {
+        )
+        {
             var outputWriter = _pair.Application.Output;
             var frame = new Http2Frame();
 
@@ -724,7 +734,8 @@ namespace Microsoft.AspNetCore.Http2Cat
             int streamId,
             int payloadLength,
             byte padLength
-        ) {
+        )
+        {
             Assert.True(
                 padLength >= payloadLength,
                 $"{nameof(padLength)} must be greater than or equal to {nameof(payloadLength)} to create an invalid frame."
@@ -767,7 +778,8 @@ namespace Microsoft.AspNetCore.Http2Cat
             int streamId,
             Http2ContinuationFrameFlags flags,
             IEnumerator<KeyValuePair<string, string>> headersEnumerator
-        ) {
+        )
+        {
             var outputWriter = _pair.Application.Output;
             var frame = new Http2Frame();
 
@@ -790,7 +802,8 @@ namespace Microsoft.AspNetCore.Http2Cat
             int streamId,
             Http2ContinuationFrameFlags flags,
             byte[] payload
-        ) {
+        )
+        {
             var outputWriter = _pair.Application.Output;
             var frame = new Http2Frame();
 
@@ -805,7 +818,8 @@ namespace Microsoft.AspNetCore.Http2Cat
             int streamId,
             Http2ContinuationFrameFlags flags,
             IEnumerable<KeyValuePair<string, string>> headers
-        ) {
+        )
+        {
             var outputWriter = _pair.Application.Output;
             var frame = new Http2Frame();
 
@@ -827,7 +841,8 @@ namespace Microsoft.AspNetCore.Http2Cat
         internal Task SendEmptyContinuationFrameAsync(
             int streamId,
             Http2ContinuationFrameFlags flags
-        ) {
+        )
+        {
             var outputWriter = _pair.Application.Output;
             var frame = new Http2Frame();
 
@@ -874,7 +889,8 @@ namespace Microsoft.AspNetCore.Http2Cat
             Memory<byte> data,
             byte padLength,
             bool endStream
-        ) {
+        )
+        {
             var outputWriter = _pair.Application.Output;
             var frame = new Http2Frame();
 
@@ -1070,7 +1086,8 @@ namespace Microsoft.AspNetCore.Http2Cat
 
         internal async Task<Http2FrameWithPayload> ReceiveFrameAsync(
             uint maxFrameSize = Http2PeerSettings.DefaultMaxFrameSize
-        ) {
+        )
+        {
             var frame = new Http2FrameWithPayload();
 
             while (true)
@@ -1091,7 +1108,8 @@ namespace Microsoft.AspNetCore.Http2Cat
                             maxFrameSize,
                             out var framePayload
                         )
-                    ) {
+                    )
+                    {
                         consumed = examined = framePayload.End;
                         frame.Payload = framePayload.ToArray();
                         return frame;
@@ -1120,7 +1138,8 @@ namespace Microsoft.AspNetCore.Http2Cat
             int withLength,
             byte withFlags,
             int withStreamId
-        ) {
+        )
+        {
             var frame = await ReceiveFrameAsync((uint)withLength);
 
             Assert.Equal(type, frame.Type);
@@ -1157,7 +1176,8 @@ namespace Microsoft.AspNetCore.Http2Cat
             int expectedStreamId,
             bool endStream = false,
             Action<IDictionary<string, string>> verifyHeaders = null
-        ) {
+        )
+        {
             var headersFrame = await ReceiveFrameAsync();
             Assert.Equal(Http2FrameType.HEADERS, headersFrame.Type);
             Assert.Equal(expectedStreamId, headersFrame.StreamId);
@@ -1178,7 +1198,8 @@ namespace Microsoft.AspNetCore.Http2Cat
             int expectedStreamId,
             bool endOfStream,
             int length
-        ) {
+        )
+        {
             Assert.Equal(Http2FrameType.DATA, frame.Type);
             Assert.Equal(expectedStreamId, frame.StreamId);
             Assert.Equal(
@@ -1192,7 +1213,8 @@ namespace Microsoft.AspNetCore.Http2Cat
             Http2Frame frame,
             int expectedLastStreamId,
             Http2ErrorCode expectedErrorCode
-        ) {
+        )
+        {
             Assert.Equal(Http2FrameType.GOAWAY, frame.Type);
             Assert.Equal(8, frame.PayloadLength);
             Assert.Equal(0, frame.Flags);
@@ -1205,7 +1227,8 @@ namespace Microsoft.AspNetCore.Http2Cat
             Http2Frame frame,
             int expectedStreamId,
             Http2ErrorCode expectedErrorCode
-        ) {
+        )
+        {
             Assert.Equal(Http2FrameType.RST_STREAM, frame.Type);
             Assert.Equal(expectedStreamId, frame.StreamId);
             Assert.Equal(expectedErrorCode, frame.RstStreamErrorCode);
@@ -1249,7 +1272,8 @@ namespace Microsoft.AspNetCore.Http2Cat
         internal async Task WaitForStreamErrorAsync(
             int expectedStreamId,
             Http2ErrorCode expectedErrorCode
-        ) {
+        )
+        {
             var frame = await ReceiveFrameAsync();
 
             Assert.Equal(Http2FrameType.RST_STREAM, frame.Type);
@@ -1307,7 +1331,8 @@ namespace Microsoft.AspNetCore.Http2Cat
                           ? StringComparison.InvariantCultureIgnoreCase
                           : StringComparison.InvariantCulture
                     )
-                ) {
+                )
+                {
                     throw new Exception($"Assert.Equal('{expected}', '{actual}') failed");
                 }
             }

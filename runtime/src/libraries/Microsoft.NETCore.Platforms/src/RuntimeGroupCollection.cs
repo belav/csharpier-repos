@@ -97,18 +97,21 @@ namespace Microsoft.NETCore.Platforms.BuildTasks
                         if (
                             !rid.HasArchitecture
                             || candidate.Architectures.Contains(rid.Architecture)
-                        ) {
+                        )
+                        {
                             if (
                                 !rid.HasQualifier
                                 || candidate.AdditionalQualifiers.Contains(rid.Qualifier)
-                            ) {
+                            )
+                            {
                                 // matched on arch and qualifier.
                                 runtimeGroup = candidate;
                             }
                             else if (
                                 rid.HasArchitecture
                                 && !runtimeGroup.Architectures.Contains(rid.Architecture)
-                            ) {
+                            )
+                            {
                                 // matched only on arch and existing match doesn't match arch
                                 runtimeGroup = candidate;
                             }

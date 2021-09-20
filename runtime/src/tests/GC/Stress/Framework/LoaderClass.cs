@@ -57,7 +57,8 @@ public class LoaderClass
         ,
         ReliabilityFramework rf
 #endif
-    ) {
+    )
+    {
 #if !PROJECTK_BUILD
         myRf = rf;
 
@@ -140,7 +141,8 @@ public class LoaderClass
         ,
         ReliabilityFramework rf
 #endif
-    ) {
+    )
+    {
 #if !PROJECTK_BUILD
         myRf = rf;
 
@@ -221,7 +223,8 @@ public class LoaderClass
                 if (
                     t.GetInterface("ISingleReliabilityTest") != null
                     || t.GetInterface("IMultipleReliabilityTest") != null
-                ) {
+                )
+                {
 #if !PROJECTK_BUILD
                     ObjectHandle handle;
                     if (assembly.IndexOf("\\") != -1)

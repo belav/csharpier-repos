@@ -11,7 +11,8 @@ namespace Microsoft.AspNetCore.Razor.Language
         public static void SetPropertyName(
             this BoundAttributeDescriptorBuilder builder,
             string propertyName
-        ) {
+        )
+        {
             if (builder == null)
             {
                 throw new ArgumentNullException(nameof(builder));
@@ -44,7 +45,8 @@ namespace Microsoft.AspNetCore.Razor.Language
             this BoundAttributeDescriptorBuilder builder,
             string attributeNamePrefix,
             string valueTypeName
-        ) {
+        )
+        {
             if (builder == null)
             {
                 throw new ArgumentNullException(nameof(builder));
@@ -71,7 +73,8 @@ namespace Microsoft.AspNetCore.Razor.Language
         public static void SetPropertyName(
             this BoundAttributeParameterDescriptorBuilder builder,
             string propertyName
-        ) {
+        )
+        {
             if (builder == null)
             {
                 throw new ArgumentNullException(nameof(builder));

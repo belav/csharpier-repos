@@ -33,7 +33,8 @@ namespace System.Diagnostics.Tracing
             {
                 if (
                     !initializedPersistentListener && XplatEventLogger.IsEventSourceLoggingEnabled()
-                ) {
+                )
+                {
                     initializedPersistentListener = true;
                     return new XplatEventLogger();
                 }
@@ -98,7 +99,8 @@ namespace System.Diagnostics.Tracing
             ReadOnlyCollection<string>? payloadName,
             ReadOnlyCollection<object?>? payload,
             string? eventMessage
-        ) {
+        )
+        {
             if (payloadName == null || payload == null)
                 return string.Empty;
 
@@ -192,7 +194,8 @@ namespace System.Diagnostics.Tracing
                     eventSource.Name.IndexOf(eventSourceFilter, StringComparison.OrdinalIgnoreCase)
                     >= 0
                 )
-            ) {
+            )
+            {
                 EnableEvents(eventSource, EventLevel.LogAlways, EventKeywords.All, null);
             }
         }
@@ -216,7 +219,8 @@ namespace System.Diagnostics.Tracing
                     eventData.EventName!.IndexOf(eventFilter, StringComparison.OrdinalIgnoreCase)
                     >= 0
                 )
-            ) {
+            )
+            {
                 LogOnEventWritten(eventData);
             }
         }

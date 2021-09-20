@@ -11,42 +11,49 @@ namespace System.Numerics.Tensors
         public static System.Numerics.Tensors.CompressedSparseTensor<T> ToCompressedSparseTensor<T>(
             this System.Array array,
             bool reverseStride = false
-        ) {
+        )
+        {
             throw null;
         }
         public static System.Numerics.Tensors.CompressedSparseTensor<T> ToCompressedSparseTensor<T>(
             this T[,,] array,
             bool reverseStride = false
-        ) {
+        )
+        {
             throw null;
         }
         public static System.Numerics.Tensors.CompressedSparseTensor<T> ToCompressedSparseTensor<T>(
             this T[,] array,
             bool reverseStride = false
-        ) {
+        )
+        {
             throw null;
         }
         public static System.Numerics.Tensors.CompressedSparseTensor<T> ToCompressedSparseTensor<T>(
             this T[] array
-        ) {
+        )
+        {
             throw null;
         }
         public static System.Numerics.Tensors.SparseTensor<T> ToSparseTensor<T>(
             this System.Array array,
             bool reverseStride = false
-        ) {
+        )
+        {
             throw null;
         }
         public static System.Numerics.Tensors.SparseTensor<T> ToSparseTensor<T>(
             this T[,,] array,
             bool reverseStride = false
-        ) {
+        )
+        {
             throw null;
         }
         public static System.Numerics.Tensors.SparseTensor<T> ToSparseTensor<T>(
             this T[,] array,
             bool reverseStride = false
-        ) {
+        )
+        {
             throw null;
         }
         public static System.Numerics.Tensors.SparseTensor<T> ToSparseTensor<T>(this T[] array)
@@ -56,19 +63,22 @@ namespace System.Numerics.Tensors
         public static System.Numerics.Tensors.DenseTensor<T> ToTensor<T>(
             this System.Array array,
             bool reverseStride = false
-        ) {
+        )
+        {
             throw null;
         }
         public static System.Numerics.Tensors.DenseTensor<T> ToTensor<T>(
             this T[,,] array,
             bool reverseStride = false
-        ) {
+        )
+        {
             throw null;
         }
         public static System.Numerics.Tensors.DenseTensor<T> ToTensor<T>(
             this T[,] array,
             bool reverseStride = false
-        ) {
+        )
+        {
             throw null;
         }
         public static System.Numerics.Tensors.DenseTensor<T> ToTensor<T>(this T[] array)
@@ -126,7 +136,8 @@ namespace System.Numerics.Tensors
         }
         public override System.Numerics.Tensors.Tensor<TResult> CloneEmpty<TResult>(
             System.ReadOnlySpan<int> dimensions
-        ) {
+        )
+        {
             throw null;
         }
         public override T GetValue(int index)
@@ -135,7 +146,8 @@ namespace System.Numerics.Tensors
         }
         public override System.Numerics.Tensors.Tensor<T> Reshape(
             System.ReadOnlySpan<int> dimensions
-        ) {
+        )
+        {
             throw null;
         }
         public override void SetValue(int index, T value) { }
@@ -172,7 +184,8 @@ namespace System.Numerics.Tensors
         }
         public override System.Numerics.Tensors.Tensor<TResult> CloneEmpty<TResult>(
             System.ReadOnlySpan<int> dimensions
-        ) {
+        )
+        {
             throw null;
         }
         protected override void CopyTo(T[] array, int arrayIndex) { }
@@ -186,7 +199,8 @@ namespace System.Numerics.Tensors
         }
         public override System.Numerics.Tensors.Tensor<T> Reshape(
             System.ReadOnlySpan<int> dimensions
-        ) {
+        )
+        {
             throw null;
         }
         public override void SetValue(int index, T value) { }
@@ -208,7 +222,8 @@ namespace System.Numerics.Tensors
         }
         public override System.Numerics.Tensors.Tensor<TResult> CloneEmpty<TResult>(
             System.ReadOnlySpan<int> dimensions
-        ) {
+        )
+        {
             throw null;
         }
         public override T GetValue(int index)
@@ -217,7 +232,8 @@ namespace System.Numerics.Tensors
         }
         public override System.Numerics.Tensors.Tensor<T> Reshape(
             System.ReadOnlySpan<int> dimensions
-        ) {
+        )
+        {
             throw null;
         }
         public override void SetValue(int index, T value) { }
@@ -238,13 +254,15 @@ namespace System.Numerics.Tensors
     {
         public static System.Numerics.Tensors.Tensor<T> CreateFromDiagonal<T>(
             System.Numerics.Tensors.Tensor<T> diagonal
-        ) {
+        )
+        {
             throw null;
         }
         public static System.Numerics.Tensors.Tensor<T> CreateFromDiagonal<T>(
             System.Numerics.Tensors.Tensor<T> diagonal,
             int offset
-        ) {
+        )
+        {
             throw null;
         }
         public static System.Numerics.Tensors.Tensor<T> CreateIdentity<T>(int size)
@@ -259,7 +277,8 @@ namespace System.Numerics.Tensors
             int size,
             bool columMajor,
             T oneValue
-        ) {
+        )
+        {
             throw null;
         }
     }
@@ -357,7 +376,8 @@ namespace System.Numerics.Tensors
         }
         public virtual System.Numerics.Tensors.Tensor<T> CloneEmpty(
             System.ReadOnlySpan<int> dimensions
-        ) {
+        )
+        {
             throw null;
         }
         public virtual System.Numerics.Tensors.Tensor<TResult> CloneEmpty<TResult>()
@@ -370,7 +390,8 @@ namespace System.Numerics.Tensors
         public static int Compare(
             System.Numerics.Tensors.Tensor<T> left,
             System.Numerics.Tensors.Tensor<T> right
-        ) {
+        )
+        {
             throw null;
         }
         protected virtual bool Contains(T item)
@@ -381,7 +402,8 @@ namespace System.Numerics.Tensors
         public static bool Equals(
             System.Numerics.Tensors.Tensor<T> left,
             System.Numerics.Tensors.Tensor<T> right
-        ) {
+        )
+        {
             throw null;
         }
         public virtual void Fill(T value) { }
@@ -476,18 +498,21 @@ namespace System.Numerics.Tensors
         int System.Collections.IStructuralComparable.CompareTo(
             object other,
             System.Collections.IComparer comparer
-        ) {
+        )
+        {
             throw null;
         }
         bool System.Collections.IStructuralEquatable.Equals(
             object other,
             System.Collections.IEqualityComparer comparer
-        ) {
+        )
+        {
             throw null;
         }
         int System.Collections.IStructuralEquatable.GetHashCode(
             System.Collections.IEqualityComparer comparer
-        ) {
+        )
+        {
             throw null;
         }
         public virtual System.Numerics.Tensors.CompressedSparseTensor<T> ToCompressedSparseTensor()

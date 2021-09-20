@@ -106,7 +106,8 @@ namespace System.Web.Http
             if (
                 _usersSplit.Length > 0
                 && !_usersSplit.Contains(user.Identity.Name, StringComparer.OrdinalIgnoreCase)
-            ) {
+            )
+            {
                 return false;
             }
 

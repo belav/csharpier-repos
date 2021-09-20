@@ -56,14 +56,16 @@ namespace Microsoft.CodeAnalysis.CSharp.Extensions
                 || nameSyntax.IsParentKind(SyntaxKind.NameColon)
                 || nameSyntax.IsParentKind(SyntaxKind.NameEquals)
                 || nameSyntax.IsParentKind(SyntaxKind.TypeParameterConstraintClause)
-            ) {
+            )
+            {
                 return false;
             }
 
             if (
                 nameSyntax.CheckParent<QualifiedNameSyntax>(q => q.Right == nameSyntax)
                 || nameSyntax.CheckParent<MemberAccessExpressionSyntax>(m => m.Name == nameSyntax)
-            ) {
+            )
+            {
                 return false;
             }
 

@@ -34,7 +34,8 @@ internal static partial class Interop
             int socketAddressSize,
             NativeOverlapped* overlapped,
             IntPtr completionRoutine
-        ) {
+        )
+        {
             // We intentionally do NOT copy this back after the function completes:
             // We don't want to cause a race in async scenarios.
             // The WSABuffer struct should be unchanged anyway.
@@ -62,7 +63,8 @@ internal static partial class Interop
             int socketAddressSize,
             NativeOverlapped* overlapped,
             IntPtr completionRoutine
-        ) {
+        )
+        {
             Debug.Assert(buffers != null && buffers.Length > 0);
             fixed (WSABuffer* buffersPtr = &buffers[0])
             {

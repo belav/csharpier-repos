@@ -107,7 +107,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
         public static string ToTestDisplayString(
             this TypeWithAnnotations type,
             bool includeNonNullable = false
-        ) {
+        )
+        {
             SymbolDisplayFormat format = GetDisplayFormat(includeNonNullable);
             return type.ToDisplayString(format);
         }
@@ -125,7 +126,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
         public static string[] ToTestDisplayStrings(
             this IEnumerable<Symbol> symbols,
             SymbolDisplayFormat format = null
-        ) {
+        )
+        {
             format ??= SymbolDisplayFormat.TestFormat;
             return symbols.Select(s => s.ToDisplayString(format)).ToArray();
         }

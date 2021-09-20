@@ -85,7 +85,8 @@ namespace ServerSimulator
                     }
                     else if (
                         total_reqs == ServerSimulator.Params.SteadyStateFactor * nreqs_to_steady
-                    ) {
+                    )
+                    {
                         break;
                     }
                 }

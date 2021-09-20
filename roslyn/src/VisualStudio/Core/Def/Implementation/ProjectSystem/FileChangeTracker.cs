@@ -61,7 +61,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.ProjectSystem
             IVsFileChangeEx fileChangeService,
             string filePath,
             _VSFILECHANGEFLAGS fileChangeFlags = DefaultFileChangeFlags
-        ) {
+        )
+        {
             _fileChangeService = fileChangeService;
             _filePath = filePath;
             _fileChangeFlags = fileChangeFlags;
@@ -239,7 +240,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.ProjectSystem
             uint cChanges,
             string[] rgpszFile,
             uint[] rggrfChange
-        ) {
+        )
+        {
             UpdatedOnDisk?.Invoke(this, EventArgs.Empty);
 
             return VSConstants.S_OK;
@@ -272,7 +274,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.ProjectSystem
             uint cChanges,
             string[] rgpszFile,
             uint[] rggrfChange
-        ) {
+        )
+        {
             UpdatedOnDisk?.Invoke(this, EventArgs.Empty);
 
             return VSConstants.S_OK;

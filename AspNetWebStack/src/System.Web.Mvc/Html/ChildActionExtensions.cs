@@ -31,7 +31,8 @@ namespace System.Web.Mvc.Html
             this HtmlHelper htmlHelper,
             string actionName,
             object routeValues
-        ) {
+        )
+        {
             return Action(
                 htmlHelper,
                 actionName,
@@ -45,7 +46,8 @@ namespace System.Web.Mvc.Html
             this HtmlHelper htmlHelper,
             string actionName,
             RouteValueDictionary routeValues
-        ) {
+        )
+        {
             return Action(
                 htmlHelper,
                 actionName,
@@ -59,7 +61,8 @@ namespace System.Web.Mvc.Html
             this HtmlHelper htmlHelper,
             string actionName,
             string controllerName
-        ) {
+        )
+        {
             return Action(
                 htmlHelper,
                 actionName,
@@ -73,7 +76,8 @@ namespace System.Web.Mvc.Html
             string actionName,
             string controllerName,
             object routeValues
-        ) {
+        )
+        {
             return Action(
                 htmlHelper,
                 actionName,
@@ -87,7 +91,8 @@ namespace System.Web.Mvc.Html
             string actionName,
             string controllerName,
             RouteValueDictionary routeValues
-        ) {
+        )
+        {
             using (StringWriter writer = new StringWriter(CultureInfo.CurrentCulture))
             {
                 ActionHelper(htmlHelper, actionName, controllerName, routeValues, writer);
@@ -112,7 +117,8 @@ namespace System.Web.Mvc.Html
             this HtmlHelper htmlHelper,
             string actionName,
             object routeValues
-        ) {
+        )
+        {
             RenderAction(
                 htmlHelper,
                 actionName,
@@ -126,7 +132,8 @@ namespace System.Web.Mvc.Html
             this HtmlHelper htmlHelper,
             string actionName,
             RouteValueDictionary routeValues
-        ) {
+        )
+        {
             RenderAction(
                 htmlHelper,
                 actionName,
@@ -140,7 +147,8 @@ namespace System.Web.Mvc.Html
             this HtmlHelper htmlHelper,
             string actionName,
             string controllerName
-        ) {
+        )
+        {
             RenderAction(
                 htmlHelper,
                 actionName,
@@ -154,7 +162,8 @@ namespace System.Web.Mvc.Html
             string actionName,
             string controllerName,
             object routeValues
-        ) {
+        )
+        {
             RenderAction(
                 htmlHelper,
                 actionName,
@@ -168,7 +177,8 @@ namespace System.Web.Mvc.Html
             string actionName,
             string controllerName,
             RouteValueDictionary routeValues
-        ) {
+        )
+        {
             ActionHelper(
                 htmlHelper,
                 actionName,
@@ -186,7 +196,8 @@ namespace System.Web.Mvc.Html
             string controllerName,
             RouteValueDictionary routeValues,
             TextWriter textWriter
-        ) {
+        )
+        {
             if (htmlHelper == null)
             {
                 throw new ArgumentNullException("htmlHelper");
@@ -257,7 +268,8 @@ namespace System.Web.Mvc.Html
             RouteValueDictionary routeValues,
             RouteValueDictionary dataTokens,
             ViewContext parentViewContext
-        ) {
+        )
+        {
             RouteData routeData = new RouteData();
 
             foreach (KeyValuePair<string, object> kvp in routeValues)
@@ -303,7 +315,8 @@ namespace System.Web.Mvc.Html
 
         private static RouteValueDictionary MergeDictionaries(
             params RouteValueDictionary[] dictionaries
-        ) {
+        )
+        {
             // Merge existing route values with the user provided values
             var result = new RouteValueDictionary();
 

@@ -48,7 +48,8 @@ namespace Ignitor
             ReadOnlySpan<byte> data,
             ReadOnlySpan<byte> indexes,
             string[] strings
-        ) {
+        )
+        {
             var result = new RenderTreeDiff[indexes.Length / 4];
 
             for (var i = 0; i < indexes.Length; i += 4)
@@ -150,7 +151,8 @@ namespace Ignitor
         private static ArrayRange<RenderTreeFrame> ReadReferenceFrames(
             ReadOnlySpan<byte> data,
             string[] strings
-        ) {
+        )
+        {
             var result = new RenderTreeFrame[data.Length / ReferenceFrameSize];
 
             for (var i = 0; i < data.Length; i += ReferenceFrameSize)
@@ -259,7 +261,8 @@ namespace Ignitor
             ReadOnlySpan<byte> data,
             int startOffset,
             out int numBytesRead
-        ) {
+        )
+        {
             var result = (uint)0;
             var shift = 0;
             var currentByte = (byte)128;
@@ -301,7 +304,8 @@ namespace Ignitor
                 int disposedComponentIds,
                 int disposedEventHandlerIds,
                 int strings
-            ) {
+            )
+            {
                 _updatedComponents = updatedComponents;
                 _referenceFrames = referenceFrames;
                 _disposedComponentIds = disposedComponentIds;

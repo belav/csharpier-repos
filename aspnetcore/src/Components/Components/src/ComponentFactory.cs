@@ -32,7 +32,8 @@ namespace Microsoft.AspNetCore.Components
         public IComponent InstantiateComponent(
             IServiceProvider serviceProvider,
             [DynamicallyAccessedMembers(Component)] Type componentType
-        ) {
+        )
+        {
             var component = _componentActivator.CreateInstance(componentType);
             if (component is null)
             {
@@ -63,7 +64,8 @@ namespace Microsoft.AspNetCore.Components
 
         private Action<IServiceProvider, IComponent> CreateInitializer(
             [DynamicallyAccessedMembers(Component)] Type type
-        ) {
+        )
+        {
             // Do all the reflection up front
             var injectableProperties = MemberAssignment.GetPropertiesIncludingInherited(
                     type,

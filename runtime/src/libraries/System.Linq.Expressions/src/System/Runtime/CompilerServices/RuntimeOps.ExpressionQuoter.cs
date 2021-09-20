@@ -27,7 +27,8 @@ namespace System.Runtime.CompilerServices
             Expression? expression,
             object hoistedLocals,
             object[] locals
-        ) {
+        )
+        {
             Debug.Assert(hoistedLocals != null && locals != null);
             var quoter = new ExpressionQuoter((HoistedLocals)hoistedLocals, locals);
             return quoter.Visit(expression);
@@ -45,7 +46,8 @@ namespace System.Runtime.CompilerServices
             IRuntimeVariables first,
             IRuntimeVariables second,
             int[] indexes
-        ) {
+        )
+        {
             return new MergedRuntimeVariables(first, second, indexes);
         }
 
@@ -137,7 +139,8 @@ namespace System.Runtime.CompilerServices
 
             protected internal override Expression VisitRuntimeVariables(
                 RuntimeVariablesExpression node
-            ) {
+            )
+            {
                 int count = node.Variables.Count;
                 var boxes = new List<IStrongBox>();
                 var vars = new List<ParameterExpression>();

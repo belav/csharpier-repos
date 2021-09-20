@@ -19,14 +19,15 @@ namespace System.Web.Mvc
             string layoutPath,
             bool runViewStartPages,
             IEnumerable<string> viewStartFileExtensions
-        ) : this(
-            controllerContext,
-            viewPath,
-            layoutPath,
-            runViewStartPages,
-            viewStartFileExtensions,
-            null
-        ) { }
+        )
+            : this(
+                controllerContext,
+                viewPath,
+                layoutPath,
+                runViewStartPages,
+                viewStartFileExtensions,
+                null
+            ) { }
 
         public RazorView(
             ControllerContext controllerContext,
@@ -59,7 +60,8 @@ namespace System.Web.Mvc
             ViewContext viewContext,
             TextWriter writer,
             object instance
-        ) {
+        )
+        {
             if (writer == null)
             {
                 throw new ArgumentNullException("writer");

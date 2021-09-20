@@ -174,7 +174,8 @@ namespace Microsoft.AspNetCore.StaticFiles
             string baseUrl,
             string baseDir,
             string requestUrl
-        ) {
+        )
+        {
             await FoundFile_Served(baseUrl, baseDir, requestUrl);
         }
 
@@ -234,7 +235,8 @@ namespace Microsoft.AspNetCore.StaticFiles
             string baseUrl,
             string baseDir,
             string requestUrl
-        ) {
+        )
+        {
             using var host = new HostBuilder().ConfigureWebHost(
                     webHostBuilder =>
                     {

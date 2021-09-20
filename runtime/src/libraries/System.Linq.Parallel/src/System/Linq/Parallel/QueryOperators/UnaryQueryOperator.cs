@@ -99,7 +99,8 @@ namespace System.Linq.Parallel
                 UnaryQueryOperator<TInput, TOutput> op,
                 QuerySettings settings,
                 bool preferStriping
-            ) {
+            )
+            {
                 _childQueryResults = childQueryResults;
                 _op = op;
                 _settings = settings;
@@ -108,7 +109,8 @@ namespace System.Linq.Parallel
 
             internal override void GivePartitionedStream(
                 IPartitionedStreamRecipient<TOutput> recipient
-            ) {
+            )
+            {
                 Debug.Assert(IsIndexible == (_op.OrdinalIndexState == OrdinalIndexState.Indexable));
 
                 Debug.Assert(
@@ -117,7 +119,8 @@ namespace System.Linq.Parallel
                 if (
                     _settings.ExecutionMode.Value == ParallelExecutionMode.Default
                     && _op.LimitsParallelism
-                ) {
+                )
+                {
                     // We need to run the query sequentially, up to and including this operator
                     IEnumerable<TOutput> opSequential = _op.AsSequentialQuery(
                         _settings.CancellationState.ExternalCancellationToken
@@ -167,7 +170,8 @@ namespace System.Linq.Parallel
                     UnaryQueryOperator<TInput, TOutput> op,
                     bool preferStriping,
                     QuerySettings settings
-                ) {
+                )
+                {
                     _outputRecipient = outputRecipient;
                     _op = op;
                     _preferStriping = preferStriping;

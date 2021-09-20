@@ -28,7 +28,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
             IReadOnlyForeignKey duplicateForeignKey,
             in StoreObjectIdentifier storeObject,
             bool shouldThrow
-        ) {
+        )
+        {
             var principalType = foreignKey.PrincipalKey.IsPrimaryKey()
                 ? foreignKey.PrincipalEntityType
                 : foreignKey.PrincipalKey.DeclaringEntityType;
@@ -81,7 +82,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
                     duplicateForeignKey.PrincipalKey.Properties.GetColumnNames(principalTable.Value)
                     is IReadOnlyList<string> duplicatePrincipalColumns
                 )
-            ) {
+            )
+            {
                 if (shouldThrow)
                 {
                     throw new InvalidOperationException(

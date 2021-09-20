@@ -35,7 +35,8 @@ namespace Microsoft.AspNetCore.Mvc.DataAnnotations
             IValidationAttributeAdapterProvider validationAttributeAdapterProvider,
             IOptions<MvcDataAnnotationsLocalizationOptions> options,
             IStringLocalizerFactory? stringLocalizerFactory
-        ) {
+        )
+        {
             if (validationAttributeAdapterProvider == null)
             {
                 throw new ArgumentNullException(nameof(validationAttributeAdapterProvider));
@@ -56,7 +57,8 @@ namespace Microsoft.AspNetCore.Mvc.DataAnnotations
             if (
                 _stringLocalizerFactory != null
                 && _options.Value.DataAnnotationLocalizerProvider != null
-            ) {
+            )
+            {
                 stringLocalizer = _options.Value.DataAnnotationLocalizerProvider(
                     context.ModelMetadata.ContainerType ?? context.ModelMetadata.ModelType,
                     _stringLocalizerFactory

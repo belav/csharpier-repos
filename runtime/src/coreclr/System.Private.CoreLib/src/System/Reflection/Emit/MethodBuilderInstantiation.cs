@@ -74,7 +74,8 @@ namespace System.Reflection.Emit
             Binder? binder,
             object?[]? parameters,
             CultureInfo? culture
-        ) {
+        )
+        {
             throw new NotSupportedException();
         }
         public override CallingConventions CallingConvention => m_method.CallingConvention;

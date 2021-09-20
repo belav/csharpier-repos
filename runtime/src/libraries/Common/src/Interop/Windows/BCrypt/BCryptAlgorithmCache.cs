@@ -21,7 +21,8 @@ internal static partial class Interop
                 string hashAlgorithmId,
                 BCryptOpenAlgorithmProviderFlags flags,
                 out int hashSizeInBytes
-            ) {
+            )
+            {
                 // There aren't that many hash algorithms around so rather than use a LowLevelDictionary and guard it with a lock,
                 // we'll use a simple list. To avoid locking, we'll recreate the entire list each time an entry is added and replace it atomically.
                 //

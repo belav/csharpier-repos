@@ -128,7 +128,8 @@ namespace System.Text.RegularExpressions
         /// <remarks>true if a character class could be computed; otherwise, false.</remarks>
         public static (string CharClass, bool CaseInsensitive)[]? ComputeFirstCharClass(
             RegexTree tree
-        ) {
+        )
+        {
             var s = new RegexPrefixAnalyzer(stackalloc int[StackBufferSize]);
             RegexFC? fc = s.RegexFCFromRegexTree(tree);
             s.Dispose();
@@ -161,7 +162,8 @@ namespace System.Text.RegularExpressions
         public static (string CharClass, bool CaseInsensitive)[]? ComputeMultipleCharClasses(
             RegexTree tree,
             int maxChars
-        ) {
+        )
+        {
             Debug.Assert(maxChars > 1);
 
             if ((tree.Options & RegexOptions.RightToLeft) != 0)
@@ -250,7 +252,8 @@ namespace System.Text.RegularExpressions
                                             c < concatChild.Str!.Length
                                                 && classPos < classes.Length;
                                             c++
-                                        ) {
+                                        )
+                                        {
                                             (classes[classPos++] ??= new RegexCharClass()).AddChar(
                                                 concatChild.Str[c]
                                             );

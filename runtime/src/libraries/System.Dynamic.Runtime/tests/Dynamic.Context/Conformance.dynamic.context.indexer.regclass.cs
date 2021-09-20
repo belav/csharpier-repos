@@ -2433,7 +2433,8 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.indexer.regclas
                         "MyString",
                         "Chars"
                     )
-                ) {
+                )
+                {
                     flag = 0;
                 }
             }

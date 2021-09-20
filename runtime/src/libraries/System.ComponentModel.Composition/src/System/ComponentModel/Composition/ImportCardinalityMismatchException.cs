@@ -48,10 +48,8 @@ namespace System.ComponentModel.Composition
         ///     <see cref="ImportCardinalityMismatchException"/>; or <see langword="null"/> to set
         ///     the <see cref="Exception.InnerException"/> property to <see langword="null"/>.
         /// </param>
-        public ImportCardinalityMismatchException(
-            string? message,
-            Exception? innerException
-        ) : base(message, innerException) { }
+        public ImportCardinalityMismatchException(string? message, Exception? innerException)
+            : base(message, innerException) { }
 
         /// <summary>
         ///     Initializes a new instance of the <see cref="ImportCardinalityMismatchException"/> class

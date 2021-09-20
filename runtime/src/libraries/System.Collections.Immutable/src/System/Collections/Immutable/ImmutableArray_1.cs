@@ -172,7 +172,8 @@ namespace System.Collections.Immutable
             int startIndex,
             int count,
             IEqualityComparer<T>? equalityComparer
-        ) {
+        )
+        {
             var self = this;
             self.ThrowNullRefIfNotInitialized();
 
@@ -266,7 +267,8 @@ namespace System.Collections.Immutable
             int startIndex,
             int count,
             IEqualityComparer<T>? equalityComparer
-        ) {
+        )
+        {
             var self = this;
             self.ThrowNullRefIfNotInitialized();
 
@@ -513,7 +515,8 @@ namespace System.Collections.Immutable
             T oldValue,
             T newValue,
             IEqualityComparer<T>? equalityComparer
-        ) {
+        )
+        {
             var self = this;
             int index = self.IndexOf(oldValue, 0, self.Length, equalityComparer);
             if (index < 0)
@@ -613,7 +616,8 @@ namespace System.Collections.Immutable
         public ImmutableArray<T> RemoveRange(
             IEnumerable<T> items,
             IEqualityComparer<T>? equalityComparer
-        ) {
+        )
+        {
             var self = this;
             self.ThrowNullRefIfNotInitialized();
             Requires.NotNull(items, nameof(items));
@@ -657,7 +661,8 @@ namespace System.Collections.Immutable
         public ImmutableArray<T> RemoveRange(
             ImmutableArray<T> items,
             IEqualityComparer<T>? equalityComparer
-        ) {
+        )
+        {
             var self = this;
             Requires.NotNull(items.array!, nameof(items));
 
@@ -924,7 +929,8 @@ namespace System.Collections.Immutable
         IImmutableList<T> IImmutableList<T>.RemoveRange(
             IEnumerable<T> items,
             IEqualityComparer<T>? equalityComparer
-        ) {
+        )
+        {
             var self = this;
             self.ThrowInvalidOperationIfNotInitialized();
             return self.RemoveRange(items, equalityComparer);
@@ -967,7 +973,8 @@ namespace System.Collections.Immutable
             T oldValue,
             T newValue,
             IEqualityComparer<T>? equalityComparer
-        ) {
+        )
+        {
             var self = this;
             self.ThrowInvalidOperationIfNotInitialized();
             return self.Replace(oldValue, newValue, equalityComparer);

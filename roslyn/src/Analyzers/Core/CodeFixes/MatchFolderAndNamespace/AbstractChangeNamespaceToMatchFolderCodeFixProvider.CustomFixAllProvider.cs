@@ -57,7 +57,8 @@ namespace Microsoft.CodeAnalysis.CodeFixes.MatchFolderAndNamespace
 
                 static async Task<ImmutableArray<Diagnostic>> GetSolutionDiagnosticsAsync(
                     FixAllContext fixAllContext
-                ) {
+                )
+                {
                     var diagnostics = ImmutableArray.CreateBuilder<Diagnostic>();
 
                     foreach (var project in fixAllContext.Solution.Projects)
@@ -78,7 +79,8 @@ namespace Microsoft.CodeAnalysis.CodeFixes.MatchFolderAndNamespace
                 ImmutableArray<Diagnostic> diagnostics,
                 IProgressTracker progressTracker,
                 CancellationToken cancellationToken
-            ) {
+            )
+            {
                 // Use documentId instead of tree here because the
                 // FixAsync call can modify more than one document per call. The
                 // important thing is that the fix works on fixing the namespaces in a single document,

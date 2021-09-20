@@ -29,7 +29,8 @@ namespace CookieExtensionsTest
                 || actual.Port != expected.Port
                 || actual.Path != expected.Path
                 || actual.Domain != expected.Domain
-            ) {
+            )
+            {
                 return -1;
             }
 

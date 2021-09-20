@@ -24,7 +24,8 @@ namespace System.Net.Security.Tests
         protected static async Task WithServerCertificate(
             X509Certificate serverCertificate,
             Func<X509Certificate, string, Task> func
-        ) {
+        )
+        {
             X509Certificate certificate =
                 serverCertificate ?? Configuration.Certificates.GetServerCertificate();
             try
@@ -100,7 +101,8 @@ namespace System.Net.Security.Tests
         public async Task SslStream_StreamToStream_Authentication_Success(
             X509Certificate serverCert = null,
             X509Certificate clientCert = null
-        ) {
+        )
+        {
             (Stream stream1, Stream stream2) = TestHelper.GetConnectedStreams();
             using (var client = new SslStream(stream1, false, AllowAnyServerCertificate))
             using (
@@ -112,7 +114,8 @@ namespace System.Net.Security.Tests
                         return true;
                     }
                 )
-            ) {
+            )
+            {
                 await DoHandshake(client, server, serverCert, clientCert);
                 Assert.True(client.IsAuthenticated);
                 Assert.True(server.IsAuthenticated);
@@ -304,7 +307,8 @@ namespace System.Net.Security.Tests
                     false,
                     AllowAnyServerCertificate
                 )
-            ) {
+            )
+            {
                 var serverSslStream = new SslStream(DelegateDelegatingStream.NopDispose(stream2));
                 await DoHandshake(clientSslStream, serverSslStream);
 
@@ -334,7 +338,8 @@ namespace System.Net.Security.Tests
                 // it's only wrapped on .NET Framework.
                 if (
                     this is SslStreamStreamToStreamTest_BeginEnd || PlatformDetection.IsNetFramework
-                ) {
+                )
+                {
                     await Assert.ThrowsAsync<ObjectDisposedException>(() => serverReadTask);
                 }
                 else
@@ -440,7 +445,8 @@ namespace System.Net.Security.Tests
             X509Certificate certificate,
             X509Chain chain,
             SslPolicyErrors sslPolicyErrors
-        ) {
+        )
+        {
             SslPolicyErrors expectedSslPolicyErrors = SslPolicyErrors.None;
 
             if (!Capability.IsTrustedRootCertificateInstalled())
@@ -495,7 +501,8 @@ namespace System.Net.Security.Tests
                 int count,
                 AsyncCallback callback,
                 object state
-            ) {
+            )
+            {
                 PreReadWriteAction?.Invoke();
                 return _stream.BeginRead(buffer, offset, count, callback, state);
             }
@@ -507,7 +514,8 @@ namespace System.Net.Security.Tests
                 int offset,
                 int count,
                 CancellationToken cancellationToken
-            ) {
+            )
+            {
                 PreReadWriteAction?.Invoke();
                 return _stream.ReadAsync(buffer, offset, count, cancellationToken);
             }
@@ -524,7 +532,8 @@ namespace System.Net.Security.Tests
                 int count,
                 AsyncCallback callback,
                 object state
-            ) {
+            )
+            {
                 PreReadWriteAction?.Invoke();
                 return _stream.BeginWrite(buffer, offset, count, callback, state);
             }
@@ -537,7 +546,8 @@ namespace System.Net.Security.Tests
                 int offset,
                 int count,
                 CancellationToken cancellationToken
-            ) {
+            )
+            {
                 PreReadWriteAction?.Invoke();
                 return _stream.WriteAsync(buffer, offset, count, cancellationToken);
             }
@@ -567,7 +577,8 @@ namespace System.Net.Security.Tests
             SslStream serverSslStream,
             X509Certificate serverCertificate = null,
             X509Certificate clientCertificate = null
-        ) {
+        )
+        {
             X509CertificateCollection clientCerts =
                 clientCertificate != null
                     ? new X509CertificateCollection() { clientCertificate }
@@ -616,7 +627,8 @@ namespace System.Net.Security.Tests
             SslStream serverSslStream,
             X509Certificate serverCertificate = null,
             X509Certificate clientCertificate = null
-        ) {
+        )
+        {
             X509CertificateCollection clientCerts =
                 clientCertificate != null
                     ? new X509CertificateCollection() { clientCertificate }
@@ -696,7 +708,8 @@ namespace System.Net.Security.Tests
             int offset,
             int count,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             if (cancellationToken.IsCancellationRequested)
             {
                 return Task.FromCanceled<int>(cancellationToken);
@@ -718,7 +731,8 @@ namespace System.Net.Security.Tests
             int offset,
             int count,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             if (cancellationToken.IsCancellationRequested)
             {
                 return Task.FromCanceled<int>(cancellationToken);
@@ -771,7 +785,8 @@ namespace System.Net.Security.Tests
             (Stream stream1, Stream stream2) = TestHelper.GetConnectedStreams();
             using (
                 var serverSslStream = new SslStream(DelegateDelegatingStream.NopDispose(stream1))
-            ) {
+            )
+            {
                 var clientSslStream = new SslStream(
                     DelegateDelegatingStream.NopDispose(stream2),
                     false,
@@ -795,7 +810,8 @@ namespace System.Net.Security.Tests
                     false,
                     AllowAnyServerCertificate
                 )
-            ) {
+            )
+            {
                 var serverSslStream = new SslStream(DelegateDelegatingStream.NopDispose(stream2));
                 serverSslStream.Dispose();
 
@@ -814,7 +830,8 @@ namespace System.Net.Security.Tests
             SslStream serverSslStream,
             X509Certificate serverCertificate = null,
             X509Certificate clientCertificate = null
-        ) {
+        )
+        {
             X509CertificateCollection clientCerts =
                 clientCertificate != null
                     ? new X509CertificateCollection() { clientCertificate }
@@ -854,7 +871,8 @@ namespace System.Net.Security.Tests
             SslStream serverSslStream,
             X509Certificate serverCertificate = null,
             X509Certificate clientCertificate = null
-        ) {
+        )
+        {
             X509CertificateCollection clientCerts =
                 clientCertificate != null
                     ? new X509CertificateCollection() { clientCertificate }
@@ -891,7 +909,8 @@ namespace System.Net.Security.Tests
             SslStream serverSslStream,
             X509Certificate serverCertificate = null,
             X509Certificate clientCertificate = null
-        ) {
+        )
+        {
             X509CertificateCollection clientCerts =
                 clientCertificate != null
                     ? new X509CertificateCollection() { clientCertificate }

@@ -24,7 +24,8 @@ namespace System.Resources.ResourceWriterTests
         public static ResourceWriter GenerateResourceStream(
             Dictionary<string, string> inp_dict,
             MemoryStream ms
-        ) {
+        )
+        {
             ResourceWriter rw = new ResourceWriter(ms);
             foreach (KeyValuePair<string, string> e in inp_dict)
             {

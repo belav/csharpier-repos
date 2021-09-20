@@ -220,7 +220,8 @@ namespace System.Diagnostics.Tracing
         /// </summary>
         private static Func<PropertyValue, PropertyValue> GetBoxedValueTypePropertyGetter(
             PropertyInfo property
-        ) {
+        )
+        {
             Type type = property.PropertyType;
 
             if (type.IsEnum)
@@ -240,7 +241,8 @@ namespace System.Diagnostics.Tracing
         /// <returns></returns>
         private static Func<PropertyValue, PropertyValue> GetReferenceTypePropertyGetter(
             PropertyInfo property
-        ) {
+        )
+        {
             var helper = (TypeHelper)Activator.CreateInstance(
                 typeof(ReferenceTypeHelper<>).MakeGenericType(property.DeclaringType!)
             )!;
@@ -265,7 +267,8 @@ namespace System.Diagnostics.Tracing
         {
             public override Func<PropertyValue, PropertyValue> GetPropertyGetter(
                 PropertyInfo property
-            ) {
+            )
+            {
                 Type type = property.PropertyType;
 
                 if (!type.IsValueType)

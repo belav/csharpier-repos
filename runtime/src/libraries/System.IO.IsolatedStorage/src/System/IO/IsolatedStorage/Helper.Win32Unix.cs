@@ -37,7 +37,8 @@ namespace System.IO.IsolatedStorage
             out object identity,
             out string hash,
             char separator
-        ) {
+        )
+        {
             // In .NET Framework IsolatedStorage uses identity from System.Security.Policy.Evidence to build
             // the folder structure on disk. It would use the "best" available evidence in this order:
             //

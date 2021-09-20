@@ -15,7 +15,8 @@ namespace System.Linq.Tests
         public void SameResultsWithQueryAndRepeatCalls_Int(
             IEnumerable<int> first,
             IEnumerable<int> second
-        ) {
+        )
+        {
             // workaround: xUnit type inference doesn't work if the input type is not T (like IEnumerable<T>)
             SameResultsWithQueryAndRepeatCallsWorker(first, second);
         }
@@ -28,7 +29,8 @@ namespace System.Linq.Tests
         public void SameResultsWithQueryAndRepeatCalls_String(
             IEnumerable<string> first,
             IEnumerable<string> second
-        ) {
+        )
+        {
             // workaround: xUnit type inference doesn't work if the input type is not T (like IEnumerable<T>)
             SameResultsWithQueryAndRepeatCallsWorker(first, second);
         }
@@ -36,7 +38,8 @@ namespace System.Linq.Tests
         private static void SameResultsWithQueryAndRepeatCallsWorker<T>(
             IEnumerable<T> first,
             IEnumerable<T> second
-        ) {
+        )
+        {
             first = from item in first select item;
             second = from item in second select item;
 
@@ -52,7 +55,8 @@ namespace System.Linq.Tests
             IEnumerable<int> first,
             IEnumerable<int> second,
             IEnumerable<int> expected
-        ) {
+        )
+        {
             VerifyEqualsWorker(expected, first.Concat(second));
             VerifyEqualsWorker(
                 expected.Skip(first.Count()).Concat(expected.Take(first.Count())),
@@ -213,7 +217,8 @@ namespace System.Linq.Tests
         private static IEnumerable<object[]> GenerateSourcesData(
             Func<IEnumerable<int>, IEnumerable<int>> outerTransform = null,
             Func<IEnumerable<int>, IEnumerable<int>> innerTransform = null
-        ) {
+        )
+        {
             outerTransform = outerTransform ?? (e => e);
             innerTransform = innerTransform ?? (e => e);
 

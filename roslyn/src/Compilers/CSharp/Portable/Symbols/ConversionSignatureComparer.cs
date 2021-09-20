@@ -24,7 +24,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
         public bool Equals(
             SourceUserDefinedConversionSymbol member1,
             SourceUserDefinedConversionSymbol member2
-        ) {
+        )
+        {
             if (ReferenceEquals(member1, member2))
             {
                 return true;

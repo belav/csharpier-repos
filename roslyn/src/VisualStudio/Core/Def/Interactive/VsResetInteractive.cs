@@ -43,11 +43,13 @@ namespace Microsoft.VisualStudio.LanguageServices.Interactive
             IVsSolutionBuildManager buildManager,
             Func<string, string> createReference,
             Func<string, string> createImport
-        ) : base(
-            componentModel.GetService<IEditorOptionsFactoryService>(),
-            createReference,
-            createImport
-        ) {
+        )
+            : base(
+                componentModel.GetService<IEditorOptionsFactoryService>(),
+                createReference,
+                createImport
+            )
+        {
             _workspace = workspace;
             _dte = dte;
             _componentModel = componentModel;
@@ -65,7 +67,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Interactive
             out ImmutableArray<string> projectNamespaces,
             out string projectDirectory,
             out InteractiveHostPlatform? platform
-        ) {
+        )
+        {
             var hierarchyPointer = default(IntPtr);
             var selectionContainerPointer = default(IntPtr);
             references = ImmutableArray<string>.Empty;
@@ -118,7 +121,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Interactive
             out ImmutableArray<string> projectNamespaces,
             out string projectDirectory,
             out InteractiveHostPlatform? platform
-        ) {
+        )
+        {
             var hierarchy = (IVsHierarchy)Marshal.GetObjectForIUnknown(hierarchyPointer);
             Marshal.ThrowExceptionForHR(
                 hierarchy.GetProperty(
@@ -202,7 +206,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Interactive
             VisualStudioWorkspace workspace,
             ProjectId projectId,
             IVsHierarchy hierarchy
-        ) {
+        )
+        {
             var hierarchyForProject = workspace.GetHierarchy(projectId);
 
             if (hierarchyForProject == null)
@@ -241,14 +246,16 @@ namespace Microsoft.VisualStudio.LanguageServices.Interactive
         private static InteractiveHostPlatform? GetInteractiveHostPlatform(
             string targetFrameworkMoniker,
             Platform platform
-        ) {
+        )
+        {
             if (
                 targetFrameworkMoniker.StartsWith(".NETCoreApp", StringComparison.OrdinalIgnoreCase)
                 || targetFrameworkMoniker.StartsWith(
                     ".NETStandard",
                     StringComparison.OrdinalIgnoreCase
                 )
-            ) {
+            )
+            {
                 return InteractiveHostPlatform.Core;
             }
 
@@ -322,7 +329,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Interactive
                         identity,
                         possibleGacName
                     )
-                ) {
+                )
+                {
                     foundEquivalent = true;
                 }
                 else
@@ -388,7 +396,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Interactive
         protected override async Task<IEnumerable<string>> GetNamespacesToImportAsync(
             IEnumerable<string> namespacesToImport,
             IInteractiveWindow interactiveWindow
-        ) {
+        )
+        {
             var document =
                 interactiveWindow.CurrentLanguageBuffer.CurrentSnapshot.GetOpenDocumentInCurrentContextWithChanges();
             var compilation = await document.Project.GetCompilationAsync().ConfigureAwait(true);

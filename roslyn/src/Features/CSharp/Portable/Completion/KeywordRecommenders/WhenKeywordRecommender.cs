@@ -23,14 +23,16 @@ namespace Microsoft.CodeAnalysis.CSharp.Completion.KeywordRecommenders
             int position,
             CSharpSyntaxContext context,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             return context.IsCatchFilterContext
                 || IsAfterCompleteExpressionOrPatternInCaseLabel(context);
         }
 
         private static bool IsAfterCompleteExpressionOrPatternInCaseLabel(
             CSharpSyntaxContext context
-        ) {
+        )
+        {
             var switchLabel = context.TargetToken.GetAncestor<SwitchLabelSyntax>();
             if (switchLabel == null)
                 return false;

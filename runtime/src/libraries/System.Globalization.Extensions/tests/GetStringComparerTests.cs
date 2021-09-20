@@ -57,7 +57,8 @@ namespace System.Globalization.Tests
             CompareOptions options,
             int expectedNls,
             int expectedICU
-        ) {
+        )
+        {
             int expected = PlatformDetection.IsNlsGlobalization ? expectedNls : expectedICU;
             StringComparer comparer = new CultureInfo(cultureName).CompareInfo.GetStringComparer(
                 options
@@ -103,7 +104,8 @@ namespace System.Globalization.Tests
             string cultureName2,
             CompareOptions options2,
             bool expected
-        ) {
+        )
+        {
             StringComparer comparer1 = new CultureInfo(cultureName1).CompareInfo.GetStringComparer(
                 options1
             );

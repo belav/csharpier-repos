@@ -31,7 +31,8 @@ namespace Microsoft.AspNetCore.Razor.Hosting
             string checksumAlgorithm,
             string checksum,
             string identifier
-        ) {
+        )
+        {
             if (checksumAlgorithm == null)
             {
                 throw new ArgumentNullException(nameof(checksumAlgorithm));

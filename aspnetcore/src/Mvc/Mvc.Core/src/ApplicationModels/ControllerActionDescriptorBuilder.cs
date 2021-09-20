@@ -30,7 +30,8 @@ namespace Microsoft.AspNetCore.Mvc.ApplicationModels
             ControllerModel controller,
             ActionModel action,
             SelectorModel selector
-        ) {
+        )
+        {
             var actionDescriptor = new ControllerActionDescriptor
             {
                 ActionName = action.ActionName,
@@ -61,7 +62,8 @@ namespace Microsoft.AspNetCore.Mvc.ApplicationModels
         private static void AddControllerPropertyDescriptors(
             ActionDescriptor actionDescriptor,
             ControllerModel controller
-        ) {
+        )
+        {
             actionDescriptor.BoundProperties = controller.ControllerProperties.Where(
                     p => p.BindingInfo != null
                 )
@@ -72,7 +74,8 @@ namespace Microsoft.AspNetCore.Mvc.ApplicationModels
         private static void AddParameterDescriptors(
             ActionDescriptor actionDescriptor,
             ActionModel action
-        ) {
+        )
+        {
             var parameterDescriptors = new List<ParameterDescriptor>(action.Parameters.Count);
             foreach (var parameter in action.Parameters)
             {
@@ -114,7 +117,8 @@ namespace Microsoft.AspNetCore.Mvc.ApplicationModels
             ApplicationModel application,
             ControllerModel controller,
             ActionModel action
-        ) {
+        )
+        {
             var isVisible =
                 action.ApiExplorer?.IsVisible
                 ?? controller.ApiExplorer?.IsVisible
@@ -158,7 +162,8 @@ namespace Microsoft.AspNetCore.Mvc.ApplicationModels
             ActionModel action,
             ControllerModel controller,
             ApplicationModel application
-        ) {
+        )
+        {
             foreach (var item in application.Properties)
             {
                 actionDescriptor.Properties[item.Key] = item.Value;
@@ -180,7 +185,8 @@ namespace Microsoft.AspNetCore.Mvc.ApplicationModels
             IEnumerable<IFilterMetadata> actionFilters,
             IEnumerable<IFilterMetadata> controllerFilters,
             IEnumerable<IFilterMetadata> globalFilters
-        ) {
+        )
+        {
             actionDescriptor.FilterDescriptors = actionFilters.Select(
                     f => new FilterDescriptor(f, FilterScope.Action)
                 )
@@ -195,7 +201,8 @@ namespace Microsoft.AspNetCore.Mvc.ApplicationModels
         private static void AddActionConstraints(
             ControllerActionDescriptor actionDescriptor,
             SelectorModel selectorModel
-        ) {
+        )
+        {
             if (selectorModel.ActionConstraints?.Count > 0)
             {
                 actionDescriptor.ActionConstraints = new List<IActionConstraintMetadata>(
@@ -207,7 +214,8 @@ namespace Microsoft.AspNetCore.Mvc.ApplicationModels
         private static void AddEndpointMetadata(
             ControllerActionDescriptor actionDescriptor,
             SelectorModel selectorModel
-        ) {
+        )
+        {
             if (selectorModel.EndpointMetadata?.Count > 0)
             {
                 actionDescriptor.EndpointMetadata = new List<object>(
@@ -219,7 +227,8 @@ namespace Microsoft.AspNetCore.Mvc.ApplicationModels
         private static void AddAttributeRoute(
             ControllerActionDescriptor actionDescriptor,
             SelectorModel selectorModel
-        ) {
+        )
+        {
             if (selectorModel.AttributeRouteModel != null)
             {
                 actionDescriptor.AttributeRouteInfo = new AttributeRouteInfo
@@ -238,7 +247,8 @@ namespace Microsoft.AspNetCore.Mvc.ApplicationModels
             ControllerActionDescriptor actionDescriptor,
             ControllerModel controller,
             ActionModel action
-        ) {
+        )
+        {
             // Apply all the constraints defined on the action, then controller (for example, [Area])
             // to the actions. Also keep track of all the constraints that require preventing actions
             // without the constraint to match. For example, actions without an [Area] attribute on their

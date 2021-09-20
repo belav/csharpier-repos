@@ -35,7 +35,8 @@ namespace System.Reflection.Metadata
             ushort startColumn,
             int endLine,
             ushort endColumn
-        ) {
+        )
+        {
             Document = document;
             Offset = offset;
             StartLine = startLine;

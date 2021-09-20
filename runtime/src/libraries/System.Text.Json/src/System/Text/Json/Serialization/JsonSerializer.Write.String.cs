@@ -24,7 +24,8 @@ namespace System.Text.Json
         public static string Serialize<[DynamicallyAccessedMembers(MembersAccessedOnWrite)] TValue>(
             TValue value,
             JsonSerializerOptions? options = null
-        ) {
+        )
+        {
             return Serialize<TValue>(value, typeof(TValue), options);
         }
 
@@ -50,7 +51,8 @@ namespace System.Text.Json
             object? value,
             [DynamicallyAccessedMembers(MembersAccessedOnWrite)] Type inputType,
             JsonSerializerOptions? options = null
-        ) {
+        )
+        {
             if (inputType == null)
             {
                 throw new ArgumentNullException(nameof(inputType));
@@ -68,7 +70,8 @@ namespace System.Text.Json
             in TValue value,
             Type inputType,
             JsonSerializerOptions? options
-        ) {
+        )
+        {
             if (options == null)
             {
                 options = JsonSerializerOptions.s_defaultOptions;

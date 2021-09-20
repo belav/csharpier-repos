@@ -12,7 +12,8 @@ namespace Microsoft.AspNetCore.Razor.Language.Intermediate
 
         public ComponentAttributeIntermediateNode(
             TagHelperHtmlAttributeIntermediateNode attributeNode
-        ) {
+        )
+        {
             if (attributeNode == null)
             {
                 throw new ArgumentNullException(nameof(attributeNode));
@@ -65,7 +66,8 @@ namespace Microsoft.AspNetCore.Razor.Language.Intermediate
 
         public ComponentAttributeIntermediateNode(
             TagHelperDirectiveAttributeIntermediateNode directiveAttributeNode
-        ) {
+        )
+        {
             if (directiveAttributeNode == null)
             {
                 throw new ArgumentNullException(nameof(directiveAttributeNode));
@@ -94,7 +96,8 @@ namespace Microsoft.AspNetCore.Razor.Language.Intermediate
 
         public ComponentAttributeIntermediateNode(
             TagHelperDirectiveAttributeParameterIntermediateNode directiveAttributeParameterNode
-        ) {
+        )
+        {
             if (directiveAttributeParameterNode == null)
             {
                 throw new ArgumentNullException(nameof(directiveAttributeParameterNode));
@@ -184,7 +187,8 @@ namespace Microsoft.AspNetCore.Razor.Language.Intermediate
                     ComponentsApi.EventCallback.FullTypeName,
                     StringComparison.Ordinal
                 )
-            ) {
+            )
+            {
                 // Non-Generic
                 argument = null;
                 return false;
@@ -199,7 +203,8 @@ namespace Microsoft.AspNetCore.Razor.Language.Intermediate
                 )
                 && TypeName[ComponentsApi.EventCallback.FullTypeName.Length] == '<'
                 && TypeName[TypeName.Length - 1] == '>'
-            ) {
+            )
+            {
                 // OK this is promising.
                 //
                 // Chop off leading `...EventCallback<` and let the length so the ending `>` is cut off as well.

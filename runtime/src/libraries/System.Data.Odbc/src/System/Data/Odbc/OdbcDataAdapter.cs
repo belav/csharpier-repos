@@ -154,7 +154,8 @@ namespace System.Data.Odbc
             IDbCommand? command,
             StatementType statementType,
             DataTableMapping tableMapping
-        ) {
+        )
+        {
             return new OdbcRowUpdatedEventArgs(dataRow, command, statementType, tableMapping);
         }
 
@@ -163,7 +164,8 @@ namespace System.Data.Odbc
             IDbCommand? command,
             StatementType statementType,
             DataTableMapping tableMapping
-        ) {
+        )
+        {
             return new OdbcRowUpdatingEventArgs(dataRow, command, statementType, tableMapping);
         }
 

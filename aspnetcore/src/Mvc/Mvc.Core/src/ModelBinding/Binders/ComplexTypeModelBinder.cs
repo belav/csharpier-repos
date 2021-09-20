@@ -69,7 +69,8 @@ namespace Microsoft.AspNetCore.Mvc.ModelBinding.Binders
             IDictionary<ModelMetadata, IModelBinder> propertyBinders,
             ILoggerFactory loggerFactory,
             bool allowValidatingTopLevelNodes
-        ) {
+        )
+        {
             if (propertyBinders == null)
             {
                 throw new ArgumentNullException(nameof(propertyBinders));
@@ -142,7 +143,8 @@ namespace Microsoft.AspNetCore.Mvc.ModelBinding.Binders
                         !bindingContext.IsTopLevelObject
                         && !propertyBindingSucceeded
                         && propertyData == GreedyPropertiesMayHaveData
-                    ) {
+                    )
+                    {
                         // Have no confirmation of data for the current instance. Postpone completing the loop until
                         // we _know_ the current instance is useful. Recursion would otherwise occur prior to the
                         // block with a similar condition after the loop.
@@ -205,7 +207,8 @@ namespace Microsoft.AspNetCore.Mvc.ModelBinding.Binders
                 !attemptedPropertyBinding
                 && bindingContext.IsTopLevelObject
                 && modelMetadata.IsBindingRequired
-            ) {
+            )
+            {
                 var messageProvider = modelMetadata.ModelBindingMessageProvider;
                 var message = messageProvider.MissingBindRequiredValueAccessor(
                     bindingContext.FieldName
@@ -239,7 +242,8 @@ namespace Microsoft.AspNetCore.Mvc.ModelBinding.Binders
                 !bindingContext.IsTopLevelObject
                 && !propertyBindingSucceeded
                 && propertyData == GreedyPropertiesMayHaveData
-            ) {
+            )
+            {
                 bindingContext.Result = ModelBindingResult.Failed();
                 return;
             }
@@ -257,7 +261,8 @@ namespace Microsoft.AspNetCore.Mvc.ModelBinding.Binders
         protected virtual bool CanBindProperty(
             ModelBindingContext bindingContext,
             ModelMetadata propertyMetadata
-        ) {
+        )
+        {
             var metadataProviderFilter =
                 bindingContext.ModelMetadata.PropertyFilterProvider?.PropertyFilter;
             if (metadataProviderFilter?.Invoke(propertyMetadata) == false)
@@ -288,7 +293,8 @@ namespace Microsoft.AspNetCore.Mvc.ModelBinding.Binders
             ModelMetadata property,
             string fieldName,
             string modelName
-        ) {
+        )
+        {
             // Pass complex (including collection) values down so that binding system does not unnecessarily
             // recreate instances or overwrite inner properties that are not bound. No need for this with simple
             // values because they will be overwritten if binding succeeds. Arrays are never reused because they
@@ -298,7 +304,8 @@ namespace Microsoft.AspNetCore.Mvc.ModelBinding.Binders
                 property.PropertyGetter != null
                 && property.IsComplexType
                 && !property.ModelType.IsArray
-            ) {
+            )
+            {
                 propertyModel = property.PropertyGetter(bindingContext.Model);
             }
 
@@ -310,7 +317,8 @@ namespace Microsoft.AspNetCore.Mvc.ModelBinding.Binders
                     modelName: modelName,
                     model: propertyModel
                 )
-            ) {
+            )
+            {
                 await BindProperty(bindingContext);
                 result = bindingContext.Result;
             }
@@ -440,7 +448,8 @@ namespace Microsoft.AspNetCore.Mvc.ModelBinding.Binders
                         modelName: modelName,
                         model: null
                     )
-                ) {
+                )
+                {
                     // If any property can be bound from a value provider, then success.
                     if (bindingContext.ValueProvider.ContainsPrefix(bindingContext.ModelName))
                     {
@@ -563,7 +572,8 @@ namespace Microsoft.AspNetCore.Mvc.ModelBinding.Binders
             string modelName,
             ModelMetadata propertyMetadata,
             ModelBindingResult result
-        ) {
+        )
+        {
             if (bindingContext == null)
             {
                 throw new ArgumentNullException(nameof(bindingContext));
@@ -607,7 +617,8 @@ namespace Microsoft.AspNetCore.Mvc.ModelBinding.Binders
             Exception exception,
             string modelName,
             ModelBindingContext bindingContext
-        ) {
+        )
+        {
             var targetInvocationException = exception as TargetInvocationException;
             if (targetInvocationException?.InnerException != null)
             {

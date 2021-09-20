@@ -35,7 +35,8 @@ namespace System.Reflection
         public static MethodBase? GetMethodFromHandle(
             RuntimeMethodHandle handle,
             RuntimeTypeHandle declaringType
-        ) {
+        )
+        {
             if (handle.IsNullHandle())
                 throw new ArgumentException(SR.Argument_InvalidHandle);
 
@@ -87,7 +88,8 @@ namespace System.Reflection
             BindingFlags invokeAttr,
             CultureInfo? culture,
             Signature sig
-        ) {
+        )
+        {
             Debug.Assert(
                 Unsafe.SizeOf<StackAllocedArguments>()
                     == StackAllocedArguments.MaxStackAllocArgCount * Unsafe.SizeOf<object>(),

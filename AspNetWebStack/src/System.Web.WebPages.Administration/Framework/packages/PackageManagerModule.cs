@@ -96,7 +96,8 @@ namespace System.Web.WebPages.Administration.PackageManager
         public static bool InitPackageSourceFile(
             IPackagesSourceFile sourceFile,
             ref ISet<WebPackageSource> packageSources
-        ) {
+        )
+        {
             if (packageSources != null)
             {
                 return true;
@@ -137,7 +138,8 @@ namespace System.Web.WebPages.Administration.PackageManager
         public static WebPackageSource GetSource(
             IEnumerable<WebPackageSource> packageSources,
             string sourceName
-        ) {
+        )
+        {
             lock (_sourceFileLock)
             {
                 return packageSources.Where(
@@ -171,7 +173,8 @@ namespace System.Web.WebPages.Administration.PackageManager
             IPackagesSourceFile sourceFile,
             ISet<WebPackageSource> packageSources,
             WebPackageSource packageSource
-        ) {
+        )
+        {
             if (GetSource(packageSources, packageSource.Name) != null)
             {
                 return false;
@@ -197,7 +200,8 @@ namespace System.Web.WebPages.Administration.PackageManager
             IPackagesSourceFile sourceFile,
             ISet<WebPackageSource> packageSources,
             string name
-        ) {
+        )
+        {
             var packageSource = GetSource(packageSources, name);
             lock (_sourceFileLock)
             {

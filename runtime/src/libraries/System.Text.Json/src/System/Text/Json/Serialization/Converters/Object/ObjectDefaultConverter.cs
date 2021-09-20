@@ -19,7 +19,8 @@ namespace System.Text.Json.Serialization.Converters
             JsonSerializerOptions options,
             ref ReadStack state,
             [MaybeNullWhen(false)] out T value
-        ) {
+        )
+        {
             object obj;
 
             if (state.UseFastPath)
@@ -106,7 +107,8 @@ namespace System.Text.Json.Serialization.Converters
                                 ref state,
                                 options
                             )
-                        ) {
+                        )
+                        {
                             if (state.Current.ObjectState == StackFrameObjectState.ReadRefEndObject)
                             {
                                 // This will never throw since it was previously validated in ResolveMetadataForJsonObject.
@@ -239,7 +241,8 @@ namespace System.Text.Json.Serialization.Converters
                                     ref state,
                                     ref reader
                                 )
-                            ) {
+                            )
+                            {
                                 // No need to set 'value' here since JsonElement must be read in full.
                                 state.Current.ReturnValue = obj;
                                 value = default;
@@ -268,7 +271,8 @@ namespace System.Text.Json.Serialization.Converters
             T value,
             JsonSerializerOptions options,
             ref WriteStack state
-        ) {
+        )
+        {
             // Minimize boxing for structs by only boxing once here
             object objectValue = value!;
 
@@ -280,7 +284,8 @@ namespace System.Text.Json.Serialization.Converters
                     if (
                         JsonSerializer.WriteReferenceForObject(this, objectValue, ref state, writer)
                         == MetadataPropertyName.Ref
-                    ) {
+                    )
+                    {
                         return true;
                     }
                 }
@@ -314,7 +319,8 @@ namespace System.Text.Json.Serialization.Converters
                                     ref state,
                                     writer
                                 )
-                            ) {
+                            )
+                            {
                                 return false;
                             }
                         }
@@ -326,7 +332,8 @@ namespace System.Text.Json.Serialization.Converters
                                     ref state,
                                     writer
                                 )
-                            ) {
+                            )
+                            {
                                 Debug.Assert(
                                     jsonPropertyInfo.ConverterBase.ConverterStrategy
                                         != ConverterStrategy.Value
@@ -356,7 +363,8 @@ namespace System.Text.Json.Serialization.Converters
                                 ref state,
                                 writer
                             ) == MetadataPropertyName.Ref
-                        ) {
+                        )
+                        {
                             return true;
                         }
                     }
@@ -393,7 +401,8 @@ namespace System.Text.Json.Serialization.Converters
                                     ref state,
                                     writer
                                 )
-                            ) {
+                            )
+                            {
                                 return false;
                             }
                         }
@@ -405,7 +414,8 @@ namespace System.Text.Json.Serialization.Converters
                                     ref state,
                                     writer
                                 )
-                            ) {
+                            )
+                            {
                                 Debug.Assert(
                                     jsonPropertyInfo.ConverterBase.ConverterStrategy
                                         != ConverterStrategy.Value
@@ -442,7 +452,8 @@ namespace System.Text.Json.Serialization.Converters
             ref Utf8JsonReader reader,
             JsonPropertyInfo jsonPropertyInfo,
             bool useExtensionProperty
-        ) {
+        )
+        {
             // Skip the property if not found.
             if (!jsonPropertyInfo.ShouldDeserialize)
             {
@@ -471,7 +482,8 @@ namespace System.Text.Json.Serialization.Converters
             ref ReadStack state,
             ref Utf8JsonReader reader,
             JsonPropertyInfo jsonPropertyInfo
-        ) {
+        )
+        {
             // Returning false below will cause the read-ahead functionality to finish the read.
             state.Current.PropertyState = StackFramePropertyState.ReadValue;
 
@@ -483,7 +495,8 @@ namespace System.Text.Json.Serialization.Converters
                         ref reader,
                         ref state
                     )
-                ) {
+                )
+                {
                     return false;
                 }
             }
@@ -503,7 +516,8 @@ namespace System.Text.Json.Serialization.Converters
             ref Utf8JsonReader reader,
             ref ReadStack state,
             JsonSerializerOptions options
-        ) {
+        )
+        {
             if (state.Current.JsonTypeInfo.CreateObject == null)
             {
                 ThrowHelper.ThrowNotSupportedException_DeserializeNoConstructor(

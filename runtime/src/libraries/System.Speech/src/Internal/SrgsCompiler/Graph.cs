@@ -299,7 +299,8 @@ namespace System.Speech.Internal.SrgsCompiler
                     state.InArcs.CountIsOne
                     && state.InArcs.First.IsEpsilonTransition
                     && (state != state.Rule._firstState)
-                ) {
+                )
+                {
                     // State has a single input epsilon transition and is not the rule initial state.
                     Arc epsilonArc = state.InArcs.First;
 
@@ -331,7 +332,8 @@ namespace System.Speech.Internal.SrgsCompiler
                     (state.OutArcs.CountIsOne)
                     && state.OutArcs.First.IsEpsilonTransition
                     && (state != state.Rule._firstState)
-                ) {
+                )
+                {
                     // State has a single output epsilon transition
                     Arc epsilonArc = state.OutArcs.First;
 
@@ -341,7 +343,8 @@ namespace System.Speech.Internal.SrgsCompiler
                     if (
                         !((state == state.Rule._firstState) && (epsilonArc.End == null))
                         && MoveSemanticTagLeft(epsilonArc)
-                    ) {
+                    )
+                    {
                         // Delete the output epsilon transition
                         State pEpsilonEndState = epsilonArc.End;
 
@@ -692,7 +695,8 @@ namespace System.Speech.Internal.SrgsCompiler
                     if (
                         (duplicatedEndState != duplicatedEndState.Rule._firstState)
                         && MoveSemanticTagRight(duplicatedArc)
-                    ) {
+                    )
+                    {
                         // duplicatedArc != commonArc
                         if (commonArc != null)
                         {
@@ -766,7 +770,8 @@ namespace System.Speech.Internal.SrgsCompiler
                 (startState.InArcs.CountIsOne)
                 && (startState.OutArcs.CountIsOne)
                 && CanTagsBeMoved(previousArc, arc)
-            ) {
+            )
+            {
                 // Move semantic tag ownership to the previous arc.
                 Arc.CopyTags(arc, previousArc, Direction.Left);
 
@@ -803,7 +808,8 @@ namespace System.Speech.Internal.SrgsCompiler
                 (endState.InArcs.CountIsOne)
                 && (endState.OutArcs.CountIsOne)
                 && CanTagsBeMoved(arc, pNextArc)
-            ) {
+            )
+            {
                 // Move semantic tag ownership to the next arc.
                 Arc.CopyTags(arc, pNextArc, Direction.Right);
 

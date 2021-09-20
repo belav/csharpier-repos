@@ -124,7 +124,8 @@ namespace System.Collections.Specialized.Tests
         private static void Keys_CopyTo_Helper(
             MyNameObjectCollection nameObjectCollection,
             int index
-        ) {
+        )
+        {
             ICollection keys = nameObjectCollection.Keys;
             string[] keysArray = new string[index + keys.Count + index];
             keys.CopyTo(keysArray, index);

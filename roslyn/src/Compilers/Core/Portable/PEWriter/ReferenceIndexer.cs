@@ -62,7 +62,8 @@ namespace Microsoft.Cci
                         definingAssembly,
                         Context.Module.GetContainingAssembly(Context)
                     )
-                ) {
+                )
+                {
                     Visit(definingAssembly);
                 }
             }

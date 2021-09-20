@@ -308,7 +308,8 @@ namespace System.Threading.Tasks.Sources.Tests
         [InlineData(true)]
         public async Task OnCompleted_ContinuationAlwaysInvokedAsynchronously(
             bool runContinuationsAsynchronously
-        ) {
+        )
+        {
             var mrvts = new ManualResetValueTaskSource<int>()
             {
                 RunContinuationsAsynchronously = runContinuationsAsynchronously
@@ -344,7 +345,8 @@ namespace System.Threading.Tasks.Sources.Tests
         [InlineData(true)]
         public async Task SetResult_RunContinuationsAsynchronously_ContinuationInvokedAccordingly(
             bool runContinuationsAsynchronously
-        ) {
+        )
+        {
             var mrvts = new ManualResetValueTaskSource<int>()
             {
                 RunContinuationsAsynchronously = runContinuationsAsynchronously
@@ -388,7 +390,8 @@ namespace System.Threading.Tasks.Sources.Tests
             bool runContinuationsAsynchronously,
             bool captureSyncCtx,
             bool setBeforeOnCompleted
-        ) {
+        )
+        {
             await Task.Run(
                 async () => // escape xunit sync ctx
                 {
@@ -440,7 +443,8 @@ namespace System.Threading.Tasks.Sources.Tests
             bool runContinuationsAsynchronously,
             bool captureTaskScheduler,
             bool setBeforeOnCompleted
-        ) {
+        )
+        {
             await Task.Run(
                 async () => // escape xunit sync ctx
                 {
@@ -603,7 +607,8 @@ namespace System.Threading.Tasks.Sources.Tests
 
             public IAsyncEnumerator<int> GetAsyncEnumerator(
                 CancellationToken cancellationToken = default
-            ) {
+            )
+            {
                 CountAsyncEnumerable cae =
                     Interlocked.CompareExchange(ref _state, StateStart, StateCtor) == StateCtor
                         ? this

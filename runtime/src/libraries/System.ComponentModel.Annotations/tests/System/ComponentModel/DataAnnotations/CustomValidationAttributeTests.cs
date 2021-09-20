@@ -214,7 +214,8 @@ namespace System.ComponentModel.DataAnnotations.Tests
         public static void RequiresValidationContext_Get_ReturnsExpected(
             string method,
             bool expected
-        ) {
+        )
+        {
             CustomValidationAttribute attribute = GetAttribute(method);
 
             // The .NET Framework has a bug where CustomValidationAttribute doesn't
@@ -282,7 +283,8 @@ namespace System.ComponentModel.DataAnnotations.Tests
         public static void RequiresValidationContext_BadlyFormed_NetCore_ThrowsInvalidOperationException(
             Type validatorType,
             string method
-        ) {
+        )
+        {
             CustomValidationAttribute attribute = new CustomValidationAttribute(
                 validatorType,
                 method
@@ -299,7 +301,8 @@ namespace System.ComponentModel.DataAnnotations.Tests
         public static void RequiresValidationContext_BadlyFormed_NetFx_DoesNotThrow(
             Type validatorType,
             string method
-        ) {
+        )
+        {
             CustomValidationAttribute attribute = new CustomValidationAttribute(
                 validatorType,
                 method
@@ -312,7 +315,8 @@ namespace System.ComponentModel.DataAnnotations.Tests
         public static void Validate_BadlyFormed_ThrowsInvalidOperationException(
             Type validatorType,
             string method
-        ) {
+        )
+        {
             CustomValidationAttribute attribute = new CustomValidationAttribute(
                 validatorType,
                 method
@@ -327,7 +331,8 @@ namespace System.ComponentModel.DataAnnotations.Tests
         public static void FormatErrorMessage_BadlyFormed_ThrowsInvalidOperationException(
             Type validatorType,
             string method
-        ) {
+        )
+        {
             CustomValidationAttribute attribute = new CustomValidationAttribute(
                 validatorType,
                 method
@@ -402,7 +407,8 @@ namespace System.ComponentModel.DataAnnotations.Tests
             public static ValidationResult ValidationMethodTwoArgsButSecondIsNotValidationContext(
                 object o,
                 object someOtherObject
-            ) {
+            )
+            {
                 return ValidationResult.Success;
             }
 
@@ -415,7 +421,8 @@ namespace System.ComponentModel.DataAnnotations.Tests
                 object o,
                 ValidationContext context,
                 object someOtherObject
-            ) {
+            )
+            {
                 return ValidationResult.Success;
             }
 
@@ -438,7 +445,8 @@ namespace System.ComponentModel.DataAnnotations.Tests
             public static ValidationResult CorrectValidationMethodTwoArgs(
                 object o,
                 ValidationContext context
-            ) {
+            )
+            {
                 if (o is TestClass)
                 {
                     return ValidationResult.Success;
@@ -449,7 +457,8 @@ namespace System.ComponentModel.DataAnnotations.Tests
             public static ValidationResult CorrectValidationMethodTwoArgsStronglyTyped(
                 TestClass tc,
                 ValidationContext context
-            ) {
+            )
+            {
                 return ValidationResult.Success;
             }
 
@@ -458,7 +467,8 @@ namespace System.ComponentModel.DataAnnotations.Tests
 
             public static ValidationResult CorrectValidationMethodOneArgNullable(
                 TestStruct? testStruct
-            ) {
+            )
+            {
                 if (testStruct == null)
                 {
                     return ValidationResult.Success;
@@ -475,14 +485,16 @@ namespace System.ComponentModel.DataAnnotations.Tests
 
             public static ValidationResult CorrectValidationMethodOneArgGenericStruct(
                 GenericStruct<int> testStruct
-            ) {
+            )
+            {
                 return ValidationResult.Success;
             }
 
             public static ValidationResult CorrectValidationMethodTwoArgsWithFirstNullable(
                 TestStruct? testStruct,
                 ValidationContext context
-            ) {
+            )
+            {
                 if (testStruct == null)
                 {
                     return ValidationResult.Success;

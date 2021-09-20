@@ -24,7 +24,8 @@ namespace Microsoft.AspNetCore.Testing
                         FileAccess.ReadWrite,
                         FileShare.None
                     )
-                ) {
+                )
+                {
                     // Dump the process!
                     var exceptionInfo = new NativeMethods.MINIDUMP_EXCEPTION_INFORMATION();
                     if (
@@ -37,7 +38,8 @@ namespace Microsoft.AspNetCore.Testing
                             IntPtr.Zero,
                             IntPtr.Zero
                         )
-                    ) {
+                    )
+                    {
                         var err = Marshal.GetHRForLastWin32Error();
                         Marshal.ThrowExceptionForHR(err);
                     }

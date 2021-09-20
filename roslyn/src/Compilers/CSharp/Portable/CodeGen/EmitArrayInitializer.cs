@@ -41,7 +41,8 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeGen
         private void EmitArrayInitializers(
             ArrayTypeSymbol arrayType,
             BoundArrayInitialization inits
-        ) {
+        )
+        {
             var initExprs = inits.Initializers;
             var initializationStyle = ShouldEmitBlockInitializer(arrayType.ElementType, initExprs);
 
@@ -65,7 +66,8 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeGen
             ArrayTypeSymbol arrayType,
             ImmutableArray<BoundExpression> inits,
             bool includeConstants
-        ) {
+        )
+        {
             if (!IsMultidimensionalInitializer(inits))
             {
                 EmitVectorElementInitializers(arrayType, inits, includeConstants);
@@ -80,7 +82,8 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeGen
             ArrayTypeSymbol arrayType,
             ImmutableArray<BoundExpression> inits,
             bool includeConstants
-        ) {
+        )
+        {
             for (int i = 0; i < inits.Length; i++)
             {
                 var init = inits[i];
@@ -134,7 +137,8 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeGen
             ArrayTypeSymbol arrayType,
             ImmutableArray<BoundExpression> inits,
             bool includeConstants
-        ) {
+        )
+        {
             // Using a List for the stack instead of the framework Stack because IEnumerable from Stack is top to bottom.
             // This algorithm requires the IEnumerable to be from bottom to top. See extensions for List in CollectionExtensions.vb.
 
@@ -169,7 +173,8 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeGen
             ArrayTypeSymbol arrayType,
             ArrayBuilder<IndexDesc> indices,
             bool includeConstants
-        ) {
+        )
+        {
             var top = indices.Peek();
             var inits = top.Initializers;
 
@@ -254,7 +259,8 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeGen
         private ArrayInitializerStyle ShouldEmitBlockInitializer(
             TypeSymbol elementType,
             ImmutableArray<BoundExpression> inits
-        ) {
+        )
+        {
             if (!_module.SupportsPrivateImplClass)
             {
                 return ArrayInitializerStyle.Element;
@@ -306,7 +312,8 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeGen
             ImmutableArray<BoundExpression> inits,
             ref int initCount,
             ref int constInits
-        ) {
+        )
+        {
             if (inits.Length == 0)
             {
                 return;
@@ -396,7 +403,8 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeGen
             BoundExpression wrappedExpression,
             bool used,
             bool inPlace
-        ) {
+        )
+        {
             ImmutableArray<byte> data = default;
             int elementCount = -1;
             TypeSymbol elementType = null;
@@ -495,7 +503,8 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeGen
         private int TryGetRawDataForArrayInit(
             BoundArrayInitialization initializer,
             out ImmutableArray<byte> data
-        ) {
+        )
+        {
             data = default;
 
             if (initializer == null)

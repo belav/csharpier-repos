@@ -39,7 +39,8 @@ namespace System.Net.Security.Tests
         [InlineData(true)]
         public async Task CertificateValidationClientServer_EndToEnd_Ok(
             bool useClientSelectionCallback
-        ) {
+        )
+        {
             IPEndPoint endPoint = new IPEndPoint(IPAddress.Loopback, 0);
             var server = new TcpListener(endPoint);
             server.Start();
@@ -50,7 +51,8 @@ namespace System.Net.Security.Tests
                 PlatformDetection.IsWindows7
                 && !useClientSelectionCallback
                 && !Capability.IsTrustedRootCertificateInstalled()
-            ) {
+            )
+            {
                 // https://technet.microsoft.com/en-us/library/hh831771.aspx#BKMK_Changes2012R2
                 // Starting with Windows 8, the "Management of trusted issuers for client authentication" has changed:
                 // The behavior to send the Trusted Issuers List by default is off.
@@ -95,7 +97,8 @@ namespace System.Net.Security.Tests
                         false,
                         ServerSideRemoteClientCertificateValidation
                     )
-                ) {
+                )
+                {
                     string serverName = _serverCertificate.GetNameInfo(
                         X509NameType.SimpleName,
                         false
@@ -170,7 +173,8 @@ namespace System.Net.Security.Tests
             X509CertificateCollection localCertificates,
             X509Certificate remoteCertificate,
             string[] acceptableIssuers
-        ) {
+        )
+        {
             return _clientCertificate;
         }
 
@@ -179,7 +183,8 @@ namespace System.Net.Security.Tests
             X509Certificate certificate,
             X509Chain chain,
             SslPolicyErrors sslPolicyErrors
-        ) {
+        )
+        {
             SslPolicyErrors expectedSslPolicyErrors = SslPolicyErrors.None;
 
             if (!Capability.IsTrustedRootCertificateInstalled())
@@ -213,7 +218,8 @@ namespace System.Net.Security.Tests
             X509Certificate certificate,
             X509Chain chain,
             SslPolicyErrors sslPolicyErrors
-        ) {
+        )
+        {
             SslPolicyErrors expectedSslPolicyErrors = SslPolicyErrors.None;
 
             if (!Capability.IsTrustedRootCertificateInstalled())

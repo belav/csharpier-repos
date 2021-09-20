@@ -61,7 +61,8 @@ namespace Microsoft.CodeAnalysis.PopulateSwitch
                 if (
                     !TryGetAllEnumMembers(switchExpressionType, enumMembers)
                     || !TryRemoveExistingEnumMembers(switchStatement, enumMembers)
-                ) {
+                )
+                {
                     return SpecializedCollections.EmptyCollection<ISymbol>();
                 }
             }
@@ -72,7 +73,8 @@ namespace Microsoft.CodeAnalysis.PopulateSwitch
         private static bool TryRemoveExistingEnumMembers(
             ISwitchOperation switchStatement,
             Dictionary<long, ISymbol> enumValues
-        ) {
+        )
+        {
             foreach (var switchCase in switchStatement.Cases)
             {
                 foreach (var clause in switchCase.Clauses)
@@ -113,14 +115,16 @@ namespace Microsoft.CodeAnalysis.PopulateSwitch
         public static bool TryGetAllEnumMembers(
             ITypeSymbol enumType,
             Dictionary<long, ISymbol> enumValues
-        ) {
+        )
+        {
             foreach (var member in enumType.GetMembers())
             {
                 // skip `.ctor` and `__value`
                 if (
                     !(member is IFieldSymbol fieldSymbol)
                     || fieldSymbol.Type.SpecialType != SpecialType.None
-                ) {
+                )
+                {
                     continue;
                 }
 

@@ -57,7 +57,8 @@ namespace System.Data.Common
         IColumnMapping IColumnMappingCollection.Add(
             string? sourceColumnName,
             string? dataSetColumnName
-        ) {
+        )
+        {
             return Add(sourceColumnName, dataSetColumnName);
         }
         IColumnMapping IColumnMappingCollection.GetByDataSetColumn(string dataSetColumnName)
@@ -448,7 +449,8 @@ namespace System.Data.Common
             DataTable dataTable,
             MissingMappingAction mappingAction,
             MissingSchemaAction schemaAction
-        ) {
+        )
+        {
             if (null != columnMappings)
             {
                 int index = columnMappings.IndexOf(sourceColumn);
@@ -490,7 +492,8 @@ namespace System.Data.Common
             DataColumnMappingCollection? columnMappings,
             string sourceColumn,
             MissingMappingAction mappingAction
-        ) {
+        )
+        {
             if (null != columnMappings)
             {
                 int index = columnMappings.IndexOf(sourceColumn);

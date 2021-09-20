@@ -60,7 +60,8 @@ namespace System.Formats.Asn1
             this Encoding encoding,
             ReadOnlySpan<char> chars,
             Span<byte> bytes
-        ) {
+        )
+        {
             if (chars.IsEmpty)
             {
                 // Ensure a non-null pointer is obtained.
@@ -76,7 +77,8 @@ namespace System.Formats.Asn1
             {
                 fixed (char* charsPtr = &MemoryMarshal.GetReference(chars))fixed (
                     byte* bytesPtr = &MemoryMarshal.GetReference(bytes)
-                ) {
+                )
+                {
                     return encoding.GetBytes(charsPtr, chars.Length, bytesPtr, bytes.Length);
                 }
             }
@@ -121,7 +123,8 @@ namespace System.Formats.Asn1
             int charCount,
             byte[] bytes,
             int byteIndex
-        ) {
+        )
+        {
             return GetBytes(
                 new ReadOnlySpan<char>(chars, charIndex, charCount),
                 new Span<byte>(bytes, byteIndex, bytes.Length - byteIndex),
@@ -163,7 +166,8 @@ namespace System.Formats.Asn1
             int byteCount,
             char[] chars,
             int charIndex
-        ) {
+        )
+        {
             return GetChars(
                 new ReadOnlySpan<byte>(bytes, byteIndex, byteCount),
                 new Span<char>(chars, charIndex, chars.Length - charIndex),
@@ -460,7 +464,8 @@ namespace System.Formats.Asn1
             int charCount,
             byte[] bytes,
             int byteIndex
-        ) {
+        )
+        {
             return s_utf8Encoding.GetBytes(chars, charIndex, charCount, bytes, byteIndex);
         }
 
@@ -513,7 +518,8 @@ namespace System.Formats.Asn1
             int byteCount,
             char[] chars,
             int charIndex
-        ) {
+        )
+        {
             try
             {
                 return s_utf8Encoding.GetChars(bytes, byteIndex, byteCount, chars, charIndex);

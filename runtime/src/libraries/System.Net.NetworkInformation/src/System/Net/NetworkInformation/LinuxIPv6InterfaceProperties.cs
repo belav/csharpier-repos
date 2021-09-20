@@ -27,7 +27,8 @@ namespace System.Net.NetworkInformation
                 || scopeLevel == ScopeLevel.Interface
                 || scopeLevel == ScopeLevel.Link
                 || scopeLevel == ScopeLevel.Subnet
-            ) {
+            )
+            {
                 return _linuxNetworkInterface.Index;
             }
 

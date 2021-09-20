@@ -458,7 +458,8 @@ namespace Microsoft.AspNetCore.Mvc.Core
             string expression,
             string expectedText,
             string expectedId
-        ) {
+        )
+        {
             // Arrange
             var helper = DefaultTemplatesUtilities.GetHtmlHelper();
 

@@ -107,7 +107,8 @@ namespace Microsoft.CodeAnalysis.UnitTests.Collections
         public void TestAddRange(
             [CombinatorialRange(0, 6)] int initialItems,
             [CombinatorialRange(0, 6)] int addedItems
-        ) {
+        )
+        {
             using var array = TemporaryArray<int>.Empty;
             for (var i = 0; i < initialItems; i++)
                 array.Add(i);

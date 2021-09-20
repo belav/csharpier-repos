@@ -64,7 +64,8 @@ namespace System.Data
             T2 arg2,
             T3 arg3,
             T4 arg4
-        ) {
+        )
+        {
             if (!Log.IsEnabled())
                 return;
             Trace(string.Format(format, arg0, arg1, arg2, arg3, arg4));
@@ -80,7 +81,8 @@ namespace System.Data
             T4 arg4,
             T5 arg5,
             T6 arg6
-        ) {
+        )
+        {
             if (!Log.IsEnabled())
                 return;
             Trace(string.Format(format, arg0, arg1, arg2, arg3, arg4, arg5, arg6));

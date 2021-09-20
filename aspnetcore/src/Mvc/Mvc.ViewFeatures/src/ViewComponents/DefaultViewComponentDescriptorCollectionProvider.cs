@@ -20,7 +20,8 @@ namespace Microsoft.AspNetCore.Mvc.ViewComponents
         /// <param name="descriptorProvider">The <see cref="IViewComponentDescriptorProvider"/>.</param>
         public DefaultViewComponentDescriptorCollectionProvider(
             IViewComponentDescriptorProvider descriptorProvider
-        ) {
+        )
+        {
             _descriptorProvider = descriptorProvider;
         }
 

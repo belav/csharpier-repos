@@ -29,7 +29,8 @@ namespace Microsoft.CodeAnalysis.CSharp
         private SynthesizedMetadataCompiler(
             PEModuleBuilder moduleBeingBuilt,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             Debug.Assert(moduleBeingBuilt != null);
             _moduleBeingBuilt = moduleBeingBuilt;
             _cancellationToken = cancellationToken;
@@ -44,7 +45,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             CSharpCompilation compilation,
             PEModuleBuilder moduleBeingBuilt,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             Debug.Assert(moduleBeingBuilt != null);
 
             var compiler = new SynthesizedMetadataCompiler(moduleBeingBuilt, cancellationToken);
@@ -78,7 +80,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                         var synthesizedExplicitImpl in sourceTypeSymbol.GetSynthesizedExplicitImplementations(
                             _cancellationToken
                         )
-                    ) {
+                    )
+                    {
                         _moduleBeingBuilt.AddSynthesizedDefinition(
                             symbol,
                             synthesizedExplicitImpl.GetCciAdapter()

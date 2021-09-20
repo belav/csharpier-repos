@@ -26,7 +26,8 @@ namespace System.Linq.Expressions.Tests
         public static string GetIL(
             this LambdaExpression expression,
             bool appendInnerLambdas = false
-        ) {
+        )
+        {
             Delegate d = expression.Compile();
 
             MethodInfo method = d.GetMethodInfo();

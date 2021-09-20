@@ -1088,7 +1088,8 @@ namespace Microsoft.AspNetCore.ResponseCaching.Tests
         private static void Assert304Headers(
             HttpResponseMessage initialResponse,
             HttpResponseMessage subsequentResponse
-        ) {
+        )
+        {
             // https://tools.ietf.org/html/rfc7232#section-4.1
             // The server generating a 304 response MUST generate any of the
             // following header fields that would have been sent in a 200 (OK)
@@ -1115,7 +1116,8 @@ namespace Microsoft.AspNetCore.ResponseCaching.Tests
         private static async Task AssertCachedResponseAsync(
             HttpResponseMessage initialResponse,
             HttpResponseMessage subsequentResponse
-        ) {
+        )
+        {
             initialResponse.EnsureSuccessStatusCode();
             subsequentResponse.EnsureSuccessStatusCode();
 
@@ -1136,7 +1138,8 @@ namespace Microsoft.AspNetCore.ResponseCaching.Tests
         private static async Task AssertFreshResponseAsync(
             HttpResponseMessage initialResponse,
             HttpResponseMessage subsequentResponse
-        ) {
+        )
+        {
             initialResponse.EnsureSuccessStatusCode();
             subsequentResponse.EnsureSuccessStatusCode();
 
@@ -1145,7 +1148,8 @@ namespace Microsoft.AspNetCore.ResponseCaching.Tests
             if (
                 initialResponse.RequestMessage.Method == HttpMethod.Head
                 && subsequentResponse.RequestMessage.Method == HttpMethod.Head
-            ) {
+            )
+            {
                 Assert.True(initialResponse.Headers.Contains("X-Value"));
                 Assert.NotEqual(
                     initialResponse.Headers.GetValues("X-Value"),

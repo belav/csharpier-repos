@@ -22,7 +22,8 @@ namespace Microsoft.AspNetCore.Authorization.Infrastructure
         protected override Task HandleRequirementAsync(
             AuthorizationHandlerContext context,
             DenyAnonymousAuthorizationRequirement requirement
-        ) {
+        )
+        {
             var user = context.User;
             var userIsAnonymous =
                 user?.Identity == null || !user.Identities.Any(i => i.IsAuthenticated);

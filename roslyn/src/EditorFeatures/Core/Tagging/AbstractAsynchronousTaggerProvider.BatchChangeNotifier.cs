@@ -137,7 +137,8 @@ namespace Microsoft.CodeAnalysis.Editor.Tagging
                 if (
                     Math.Abs(currentTick - _lastReportTick)
                     > TaggerDelay.NearImmediate.ComputeTimeDelay(_subjectBuffer).TotalMilliseconds
-                ) {
+                )
+                {
                     _lastReportTick = currentTick;
                     this.NotifyEditor();
                 }
@@ -192,7 +193,8 @@ namespace Microsoft.CodeAnalysis.Editor.Tagging
                         FunctionId.Tagger_BatchChangeNotifier_NotifyEditor,
                         CancellationToken.None
                     )
-                ) {
+                )
+                {
                     // Go through and report the snapshots from oldest to newest.
                     foreach (var snapshotAndSpans in _snapshotVersionToSpansMap)
                     {

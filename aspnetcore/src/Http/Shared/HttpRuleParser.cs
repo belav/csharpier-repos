@@ -212,7 +212,8 @@ namespace Microsoft.Net.Http.Headers
             StringSegment input,
             int startIndex,
             out int length
-        ) {
+        )
+        {
             var nestedCount = 0;
             return GetExpressionLength(
                 input,
@@ -231,7 +232,8 @@ namespace Microsoft.Net.Http.Headers
             StringSegment input,
             int startIndex,
             out int length
-        ) {
+        )
+        {
             Contract.Requires((startIndex >= 0) && (startIndex < input.Length));
             Contract.Ensures(
                 (Contract.ValueAtReturn(out length) >= 0)
@@ -287,7 +289,8 @@ namespace Microsoft.Net.Http.Headers
             bool supportsNesting,
             ref int nestedCount,
             out int length
-        ) {
+        )
+        {
             Contract.Requires(input != null);
             Contract.Requires((startIndex >= 0) && (startIndex < input.Length));
             Contract.Ensures(
@@ -314,7 +317,8 @@ namespace Microsoft.Net.Http.Headers
                         GetQuotedPairLength(input, current, out quotedPairLength)
                         == HttpParseResult.Parsed
                     )
-                ) {
+                )
+                {
                     // We ignore invalid quoted-pairs. Invalid quoted-pairs may mean that it looked like a quoted pair,
                     // but we actually have a quoted-string: e.g. "\ü" ('\' followed by a char >127 - quoted-pair only
                     // allows ASCII chars after '\'; qdtext allows both '\' and >127 chars).

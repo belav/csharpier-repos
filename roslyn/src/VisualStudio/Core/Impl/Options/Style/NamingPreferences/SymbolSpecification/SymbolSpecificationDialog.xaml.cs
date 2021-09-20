@@ -82,7 +82,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Options.Style.N
 
         private AutomationDelegatingListView CreateAutomationDelegatingListView(
             string itemsSourceName
-        ) {
+        )
+        {
             var listView = new AutomationDelegatingListView();
             listView.SelectionMode = SelectionMode.Extended;
             listView.SetBinding(ItemsControl.ItemsSourceProperty, new Binding(itemsSourceName));
@@ -130,7 +131,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Options.Style.N
         {
             foreach (
                 var item in symbolKindsListView.Items.OfType<SymbolSpecificationViewModel.SymbolKindViewModel>()
-            ) {
+            )
+            {
                 item.IsChecked = true;
             }
         }
@@ -139,7 +141,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Options.Style.N
         {
             foreach (
                 var item in symbolKindsListView.Items.OfType<SymbolSpecificationViewModel.SymbolKindViewModel>()
-            ) {
+            )
+            {
                 item.IsChecked = false;
             }
         }
@@ -148,7 +151,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Options.Style.N
         {
             foreach (
                 var item in accessibilitiesListView.Items.OfType<SymbolSpecificationViewModel.AccessibilityViewModel>()
-            ) {
+            )
+            {
                 item.IsChecked = true;
             }
         }
@@ -157,7 +161,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Options.Style.N
         {
             foreach (
                 var item in accessibilitiesListView.Items.OfType<SymbolSpecificationViewModel.AccessibilityViewModel>()
-            ) {
+            )
+            {
                 item.IsChecked = false;
             }
         }
@@ -166,7 +171,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Options.Style.N
         {
             foreach (
                 var item in modifiersListView.Items.OfType<SymbolSpecificationViewModel.ModifierViewModel>()
-            ) {
+            )
+            {
                 item.IsChecked = true;
             }
         }
@@ -175,7 +181,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Options.Style.N
         {
             foreach (
                 var item in modifiersListView.Items.OfType<SymbolSpecificationViewModel.ModifierViewModel>()
-            ) {
+            )
+            {
                 item.IsChecked = false;
             }
         }

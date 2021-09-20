@@ -36,7 +36,8 @@ namespace Microsoft.AspNetCore.SignalR.StackExchangeRedis.Tests
             int port,
             string password,
             bool useSsl
-        ) {
+        )
+        {
             var services = new ServiceCollection();
             services.AddSignalR().AddStackExchangeRedis(connectionString);
             var provider = services.BuildServiceProvider();

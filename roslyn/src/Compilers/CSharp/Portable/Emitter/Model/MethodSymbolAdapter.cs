@@ -58,7 +58,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                         !AdaptedMethodSymbol.IsGenericMethod
                         || PEModuleBuilder.IsGenericType(AdaptedMethodSymbol.ContainingType)
                     )
-                ) {
+                )
+                {
                     Debug.Assert(
                         (object)AdaptedMethodSymbol.ContainingType != null
                             && PEModuleBuilder.IsGenericType(AdaptedMethodSymbol.ContainingType)
@@ -192,14 +193,16 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
 
         ImmutableArray<Cci.IParameterTypeInformation> Cci.ISignature.GetParameters(
             EmitContext context
-        ) {
+        )
+        {
             Debug.Assert(this.IsDefinitionOrDistinct());
 
             PEModuleBuilder moduleBeingBuilt = (PEModuleBuilder)context.Module;
             if (
                 AdaptedMethodSymbol.IsDefinition
                 && AdaptedMethodSymbol.ContainingModule == moduleBeingBuilt.SourceModule
-            ) {
+            )
+            {
                 return StaticCast<Cci.IParameterTypeInformation>.From(
                     this.EnumerateDefinitionParameters()
                 );
@@ -260,7 +263,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
 
         IEnumerable<Cci.ITypeReference> Cci.IGenericMethodInstanceReference.GetGenericArguments(
             EmitContext context
-        ) {
+        )
+        {
             PEModuleBuilder moduleBeingBuilt = (PEModuleBuilder)context.Module;
 
             Debug.Assert(((Cci.IMethodReference)this).AsGenericMethodInstanceReference != null);
@@ -278,7 +282,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
 
         Cci.IMethodReference Cci.IGenericMethodInstanceReference.GetGenericMethod(
             EmitContext context
-        ) {
+        )
+        {
             Debug.Assert(((Cci.IMethodReference)this).AsGenericMethodInstanceReference != null);
 
             NamedTypeSymbol container = AdaptedMethodSymbol.ContainingType;
@@ -448,7 +453,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
 
         System.Reflection.MethodImplAttributes Cci.IMethodDefinition.GetImplementationAttributes(
             EmitContext context
-        ) {
+        )
+        {
             CheckDefinitionInvariant();
             return AdaptedMethodSymbol.ImplementationAttributes;
         }
@@ -519,7 +525,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
 
         IEnumerable<Cci.ICustomAttribute> Cci.IMethodDefinition.GetReturnValueAttributes(
             EmitContext context
-        ) {
+        )
+        {
             CheckDefinitionInvariant();
 
             ImmutableArray<CSharpAttributeData> userDefined =

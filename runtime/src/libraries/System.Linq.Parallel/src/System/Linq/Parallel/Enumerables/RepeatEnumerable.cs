@@ -110,7 +110,8 @@ namespace System.Linq.Parallel
             internal override bool MoveNext(
                 [MaybeNullWhen(false), AllowNull] ref TResult currentElement,
                 ref int currentKey
-            ) {
+            )
+            {
                 if (_currentIndex == null)
                     _currentIndex = new Shared<int>(-1);
 

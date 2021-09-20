@@ -323,7 +323,8 @@ End Namespace
             int file,
             string snippet = null,
             bool expectBodySpan = true
-        ) {
+        )
+        {
             AddConsoleExpectation($"Method {method}");
             AddConsoleExpectation($"File {file}");
             var result = new MethodChecker(this, noSnippets: snippet == null);
@@ -388,7 +389,8 @@ End Namespace
             int method,
             DynamicAnalysisDataReader reader,
             string[] sourceLines
-        ) {
+        )
+        {
             var actualSpans = reader.GetSpans(reader.Methods[method - 1].Blob);
 
             return actualSpans.SelectAsArray(

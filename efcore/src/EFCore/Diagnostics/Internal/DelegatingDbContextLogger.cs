@@ -26,7 +26,8 @@ namespace Microsoft.EntityFrameworkCore.Diagnostics.Internal
         public DelegatingDbContextLogger(
             Action<EventData> logger,
             Func<EventId, LogLevel, bool> filter
-        ) {
+        )
+        {
             _logger = logger;
             _filter = filter;
         }

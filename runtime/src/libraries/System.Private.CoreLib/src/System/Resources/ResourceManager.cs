@@ -179,7 +179,8 @@ namespace System.Resources
                     | DynamicallyAccessedMemberTypes.NonPublicConstructors
             )]
                 Type? userResourceSet
-        ) {
+        )
+        {
             if (null == baseName)
                 throw new ArgumentNullException(nameof(baseName));
             if (null == resourceDir)
@@ -219,7 +220,8 @@ namespace System.Resources
                     | DynamicallyAccessedMemberTypes.NonPublicConstructors
             )]
                 Type? usingResourceSet
-        ) {
+        )
+        {
             if (null == baseName)
                 throw new ArgumentNullException(nameof(baseName));
             if (null == assembly)
@@ -337,7 +339,8 @@ namespace System.Resources
                     | DynamicallyAccessedMemberTypes.NonPublicConstructors
             )]
                 Type? usingResourceSet
-        ) {
+        )
+        {
             return new ResourceManager(baseName, resourceDir, usingResourceSet);
         }
 
@@ -424,7 +427,8 @@ namespace System.Resources
             CultureInfo culture,
             bool createIfNotExists,
             bool tryParents
-        ) {
+        )
+        {
             if (null == culture)
                 throw new ArgumentNullException(nameof(culture));
 
@@ -467,7 +471,8 @@ namespace System.Resources
             CultureInfo culture,
             bool createIfNotExists,
             bool tryParents
-        ) {
+        )
+        {
             Debug.Assert(culture != null, "culture != null");
             Debug.Assert(_resourceSets != null);
 
@@ -549,7 +554,8 @@ namespace System.Resources
             Dictionary<string, ResourceSet> localResourceSets,
             string cultureName,
             ref ResourceSet rs
-        ) {
+        )
+        {
             // InternalGetResourceSet is both recursive and reentrant -
             // assembly load callbacks in particular are a way we can call
             // back into the ResourceManager in unexpectedly on the same thread.

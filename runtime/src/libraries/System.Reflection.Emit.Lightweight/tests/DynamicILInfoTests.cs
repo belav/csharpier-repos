@@ -1870,7 +1870,8 @@ namespace System.Reflection.Emit.Tests
         [InlineData(false)]
         public unsafe void SetX_NegativeInputSize_ThrowsArgumentOutOfRangeException(
             bool skipVisibility
-        ) {
+        )
+        {
             DynamicMethod method = GetDynamicMethod(skipVisibility);
             DynamicILInfo dynamicILInfo = method.GetDynamicILInfo();
             var bytes = new byte[] { 0x02, 0x02, 0x02, 0x02, 0x02, 0x02, 0x02, 0x02, 0x02, 0x02 };

@@ -42,7 +42,8 @@ namespace IgnitorSample
             this BlazorClient client,
             string url,
             CancellationToken cancellationToken = default
-        ) {
+        )
+        {
             return client.HubConnection.InvokeAsync(
                 "OnLocationChanged",
                 url,

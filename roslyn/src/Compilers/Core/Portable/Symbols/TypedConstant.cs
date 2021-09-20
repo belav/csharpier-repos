@@ -33,10 +33,8 @@ namespace Microsoft.CodeAnalysis
             _value = value;
         }
 
-        internal TypedConstant(
-            ITypeSymbolInternal type,
-            ImmutableArray<TypedConstant> array
-        ) : this(type, TypedConstantKind.Array, value: array.IsDefault ? null : (object)array) { }
+        internal TypedConstant(ITypeSymbolInternal type, ImmutableArray<TypedConstant> array)
+            : this(type, TypedConstantKind.Array, value: array.IsDefault ? null : (object)array) { }
 
         /// <summary>
         /// The kind of the constant.
@@ -144,7 +142,8 @@ namespace Microsoft.CodeAnalysis
             if (
                 _type!.SpecialType == specialType
                 || (_type.TypeKind == TypeKind.Enum && specialType == SpecialType.System_Enum)
-            ) {
+            )
+            {
                 value = (T)_value!;
                 return true;
             }
@@ -161,7 +160,8 @@ namespace Microsoft.CodeAnalysis
         internal static TypedConstantKind GetTypedConstantKind(
             ITypeSymbolInternal type,
             Compilation compilation
-        ) {
+        )
+        {
             RoslynDebug.Assert(type != null);
 
             switch (type.SpecialType)

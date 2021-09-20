@@ -135,7 +135,8 @@ namespace System.Text.Tests
             int count,
             int expected,
             string errorno
-        ) {
+        )
+        {
             int ret = decoder.GetCharCount(bytes, index, count);
             Assert.Equal(expected, ret);
         }

@@ -24,7 +24,8 @@ namespace Roslyn.Utilities
         public static IEnumerable<T> GetEnumerableMetadata<T>(
             this IReadOnlyDictionary<string, object> metadata,
             string name
-        ) {
+        )
+        {
             switch (metadata.GetValueOrDefault(name))
             {
                 case IEnumerable<T> enumerable:
@@ -38,8 +39,9 @@ namespace Roslyn.Utilities
 
         public static IReadOnlyDictionary<TKey, TValue?> AsNullable<TKey, TValue>(
             this IReadOnlyDictionary<TKey, TValue> dictionary
-        ) where TKey : notnull
-          where TValue : class
+        )
+            where TKey : notnull
+            where TValue : class
         {
             // this is a safe cast, even though the language doesn't allow the interface to be 'out TValue'
             return dictionary!;

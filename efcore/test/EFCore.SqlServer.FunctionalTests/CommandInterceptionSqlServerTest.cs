@@ -14,9 +14,8 @@ namespace Microsoft.EntityFrameworkCore
 {
     public abstract class CommandInterceptionSqlServerTestBase : CommandInterceptionTestBase
     {
-        protected CommandInterceptionSqlServerTestBase(
-            InterceptionSqlServerFixtureBase fixture
-        ) : base(fixture) { }
+        protected CommandInterceptionSqlServerTestBase(InterceptionSqlServerFixtureBase fixture)
+            : base(fixture) { }
 
         public override async Task<string> Intercept_query_passively(bool async, bool inject)
         {
@@ -31,7 +30,8 @@ namespace Microsoft.EntityFrameworkCore
         public override async Task<string> Intercept_query_to_mutate_command(
             bool async,
             bool inject
-        ) {
+        )
+        {
             AssertSql(
                 @"SELECT [s].[Id], [s].[Type] FROM [Brane] AS [s]",
                 await base.Intercept_query_to_mutate_command(async, inject)
@@ -43,7 +43,8 @@ namespace Microsoft.EntityFrameworkCore
         public override async Task<string> Intercept_query_to_replace_execution(
             bool async,
             bool inject
-        ) {
+        )
+        {
             AssertSql(
                 @"SELECT [s].[Id], [s].[Type] FROM [Singularity] AS [s]",
                 await base.Intercept_query_to_replace_execution(async, inject)

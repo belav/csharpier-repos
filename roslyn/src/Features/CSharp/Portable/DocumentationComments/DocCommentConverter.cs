@@ -22,7 +22,8 @@ namespace Microsoft.CodeAnalysis.CSharp.DocumentationComments
             SyntaxNode node,
             IDocumentationCommentFormattingService formattingService,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var converter = new DocCommentConverter(formattingService, cancellationToken);
 
             return converter.Visit(node);
@@ -85,7 +86,8 @@ namespace Microsoft.CodeAnalysis.CSharp.DocumentationComments
 
         private IEnumerable<SyntaxTrivia> ConvertDocCommentToRegularComment(
             DocumentationCommentTriviaSyntax structuredTrivia
-        ) {
+        )
+        {
             var xmlFragment = DocumentationCommentUtilities.ExtractXMLFragment(
                 structuredTrivia.ToFullString(),
                 "///"

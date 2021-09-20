@@ -30,7 +30,8 @@ public class ApkBuilder
         string abi,
         string mainLibraryFileName,
         string monoRuntimeHeaders
-    ) {
+    )
+    {
         if (string.IsNullOrEmpty(AppDir) || !Directory.Exists(AppDir))
         {
             throw new ArgumentException($"AppDir='{AppDir}' is empty or doesn't exist");
@@ -39,7 +40,8 @@ public class ApkBuilder
         if (
             !string.IsNullOrEmpty(mainLibraryFileName)
             && !File.Exists(Path.Combine(AppDir, mainLibraryFileName))
-        ) {
+        )
+        {
             throw new ArgumentException(
                 $"MainLibraryFileName='{mainLibraryFileName}' was not found in AppDir='{AppDir}'"
             );
@@ -107,7 +109,8 @@ public class ApkBuilder
             int.TryParse(BuildApiLevel, out int intApi)
             && int.TryParse(MinApiLevel, out int intMinApi)
             && intApi < intMinApi
-        ) {
+        )
+        {
             throw new ArgumentException(
                 $"BuildApiLevel={BuildApiLevel} <= MinApiLevel={MinApiLevel}. "
                     + "Make sure you've downloaded some recent build-tools in Android SDK"

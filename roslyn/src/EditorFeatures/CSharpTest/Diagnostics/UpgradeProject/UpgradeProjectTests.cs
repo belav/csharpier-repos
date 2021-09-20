@@ -36,7 +36,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Diagnostics.UpgradeProj
             LanguageVersion expected,
             ParseOptions parseOptions,
             int index = 0
-        ) {
+        )
+        {
             var parameters = new TestParameters(parseOptions: parseOptions, index: index);
             using (var workspace = CreateWorkspaceFromOptions(initialMarkup, parameters))
             {
@@ -74,7 +75,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Diagnostics.UpgradeProj
             string initialMarkup,
             ParseOptions parseOptions,
             int index = 0
-        ) {
+        )
+        {
             var parameters = new TestParameters(parseOptions: parseOptions, index: index);
             using var workspace = CreateWorkspaceFromOptions(initialMarkup, parameters);
             var (actions, actionsToInvoke) = await GetCodeActionsAsync(workspace, parameters);

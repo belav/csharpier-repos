@@ -23,7 +23,8 @@ namespace System.Security.Authentication.ExtendedProtection
             PolicyEnforcement policyEnforcement,
             ProtectionScenario protectionScenario,
             ServiceNameCollection? customServiceNames
-        ) {
+        )
+        {
             if (policyEnforcement == PolicyEnforcement.Never)
             {
                 throw new ArgumentException(
@@ -49,18 +50,20 @@ namespace System.Security.Authentication.ExtendedProtection
             PolicyEnforcement policyEnforcement,
             ProtectionScenario protectionScenario,
             ICollection? customServiceNames
-        ) : this(
-            policyEnforcement,
-            protectionScenario,
-            customServiceNames == null
-              ? (ServiceNameCollection?)null
-              : new ServiceNameCollection(customServiceNames)
-        ) { }
+        )
+            : this(
+                policyEnforcement,
+                protectionScenario,
+                customServiceNames == null
+                  ? (ServiceNameCollection?)null
+                  : new ServiceNameCollection(customServiceNames)
+            ) { }
 
         public ExtendedProtectionPolicy(
             PolicyEnforcement policyEnforcement,
             ChannelBinding customChannelBinding
-        ) {
+        )
+        {
             if (policyEnforcement == PolicyEnforcement.Never)
             {
                 throw new ArgumentException(

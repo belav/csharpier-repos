@@ -294,7 +294,8 @@ namespace System.Diagnostics
                 {
                     fixed (char* bufUserName = new char[userNameLen])fixed (
                         char* bufDomainName = new char[domainNameLen]
-                    ) {
+                    )
+                    {
                         if (
                             Interop.Advapi32.LookupAccountSid(
                                 MachineName,
@@ -305,7 +306,8 @@ namespace System.Diagnostics
                                 ref domainNameLen,
                                 out int sidNameUse
                             ) != 0
-                        ) {
+                        )
+                        {
                             return new string(bufDomainName) + "\\" + new string(bufUserName);
                         }
                     }
@@ -400,7 +402,8 @@ namespace System.Diagnostics
             string logName,
             string source,
             string machineName
-        ) {
+        )
+        {
             RegistryKey eventKey = null;
             RegistryKey logKey = null;
 

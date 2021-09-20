@@ -240,7 +240,8 @@ namespace Microsoft.AspNetCore.Server.IntegrationTesting
             if (
                 addressFamily != AddressFamily.InterNetwork
                 && addressFamily != AddressFamily.InterNetworkV6
-            ) {
+            )
+            {
                 throw new ArgumentException(
                     $"TestConnection does not support address family of type {addressFamily}",
                     nameof(addressFamily)

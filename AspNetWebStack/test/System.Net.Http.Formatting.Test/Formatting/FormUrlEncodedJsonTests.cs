@@ -109,7 +109,8 @@ namespace System.Net.Http.Formatting
 
         private static IEnumerable<KeyValuePair<string, string>> CreateQuery(
             params KeyValuePair<string, string>[] namevaluepairs
-        ) {
+        )
+        {
             return new List<KeyValuePair<string, string>>(namevaluepairs);
         }
     }

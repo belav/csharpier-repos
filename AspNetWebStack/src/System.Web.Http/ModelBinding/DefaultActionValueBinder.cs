@@ -79,7 +79,8 @@ namespace System.Web.Http.ModelBinding
         // This is all sync. We don't need to actually read the body just to determine that we'll bind to the body.
         protected virtual HttpParameterBinding GetParameterBinding(
             HttpParameterDescriptor parameter
-        ) {
+        )
+        {
             // Attribute has the highest precedence
             // Presence of a model binder attribute overrides.
             ParameterBindingAttribute attr = parameter.ParameterBinderAttribute;

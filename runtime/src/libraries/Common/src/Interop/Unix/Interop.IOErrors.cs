@@ -13,7 +13,8 @@ internal static partial class Interop
         string? path,
         bool isDirectory,
         Func<ErrorInfo, ErrorInfo>? errorRewriter
-    ) {
+    )
+    {
         Debug.Assert(errorInfo.Error != Error.SUCCESS);
         Debug.Assert(
             errorInfo.Error != Error.EINTR,
@@ -33,7 +34,8 @@ internal static partial class Interop
         string? path = null,
         bool isDirectory = false,
         Func<ErrorInfo, ErrorInfo>? errorRewriter = null
-    ) {
+    )
+    {
         if (error != Interop.Error.SUCCESS)
         {
             ThrowExceptionForIoErrno(error.Info(), path, isDirectory, errorRewriter);
@@ -57,7 +59,8 @@ internal static partial class Interop
         string? path = null,
         bool isDirectory = false,
         Func<ErrorInfo, ErrorInfo>? errorRewriter = null
-    ) {
+    )
+    {
         if (result < 0)
         {
             ThrowExceptionForIoErrno(Sys.GetLastErrorInfo(), path, isDirectory, errorRewriter);
@@ -79,7 +82,8 @@ internal static partial class Interop
         string? path = null,
         bool isDirectory = false,
         Func<ErrorInfo, ErrorInfo>? errorRewriter = null
-    ) {
+    )
+    {
         CheckIo((long)result, path, isDirectory, errorRewriter);
 
         return result;
@@ -98,7 +102,8 @@ internal static partial class Interop
         string? path = null,
         bool isDirectory = false,
         Func<ErrorInfo, ErrorInfo>? errorRewriter = null
-    ) {
+    )
+    {
         CheckIo((long)result, path, isDirectory, errorRewriter);
 
         return result;
@@ -138,7 +143,8 @@ internal static partial class Interop
         ErrorInfo errorInfo,
         string? path = null,
         bool isDirectory = false
-    ) {
+    )
+    {
         // Translate the errno into a known set of exception types.  For cases where multiple errnos map
         // to the same exception type, include an inner exception with the details.
         switch (errorInfo.Error)

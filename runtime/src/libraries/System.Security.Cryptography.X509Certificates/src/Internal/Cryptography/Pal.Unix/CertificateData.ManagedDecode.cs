@@ -273,7 +273,8 @@ namespace Internal.Cryptography.Pal
             byte[] extensionBytes,
             GeneralNameType matchType,
             string? otherOid
-        ) {
+        )
+        {
             // If Other, have OID, else, no OID.
             Debug.Assert(
                 (otherOid == null) == (matchType != GeneralNameType.OtherName),
@@ -314,7 +315,8 @@ namespace Internal.Cryptography.Pal
                             if (
                                 generalName.OtherName.HasValue
                                 && generalName.OtherName.Value.TypeId == otherOid
-                            ) {
+                            )
+                            {
                                 // Currently only UPN is supported, which is a UTF8 string per
                                 // https://msdn.microsoft.com/en-us/library/ff842518.aspx
                                 AsnValueReader nameReader = new AsnValueReader(
@@ -360,7 +362,8 @@ namespace Internal.Cryptography.Pal
 
         private static IEnumerable<KeyValuePair<string, string>> ReadReverseRdns(
             X500DistinguishedName name
-        ) {
+        )
+        {
             Stack<AsnReader> rdnReaders;
 
             try

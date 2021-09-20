@@ -1267,7 +1267,8 @@ namespace UnhandledExceptionTest
                     int i = TestDescription.MIN_CONFIG_CODE;
                     i <= TestDescription.MAX_CONFIG_CODE;
                     i++
-                ) {
+                )
+                {
                     TestDescription test = TestDescription.FromCode(i);
                     if (test != null)
                     {

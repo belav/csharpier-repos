@@ -73,7 +73,8 @@ namespace Microsoft.CodeAnalysis.CodeFixes.Configuration.ConfigureSeverity
             Project project,
             IEnumerable<Diagnostic> diagnostics,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var result = ArrayBuilder<CodeFix>.GetInstance();
             var analyzerDiagnosticsByCategory = new SortedDictionary<
                 string,
@@ -140,7 +141,8 @@ namespace Microsoft.CodeAnalysis.CodeFixes.Configuration.ConfigureSeverity
             void AddBulkConfigurationCodeFixes(
                 ImmutableArray<Diagnostic> diagnostics,
                 string? category
-            ) {
+            )
+            {
                 var nestedActions = ArrayBuilder<CodeAction>.GetInstance();
                 foreach (var (name, value) in s_editorConfigSeverityStrings)
                 {

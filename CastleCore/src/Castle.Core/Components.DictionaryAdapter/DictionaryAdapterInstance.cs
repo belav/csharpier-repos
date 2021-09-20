@@ -30,7 +30,8 @@ namespace Castle.Components.DictionaryAdapter
             DictionaryAdapterMeta meta,
             PropertyDescriptor descriptor,
             IDictionaryAdapterFactory factory
-        ) {
+        )
+        {
             Dictionary = dictionary;
             Descriptor = descriptor;
             Factory = factory;
@@ -98,7 +99,8 @@ namespace Castle.Components.DictionaryAdapter
         private static IDictionaryInitializer[] MergeInitializers(
             IDictionaryInitializer[] source,
             List<IDictionaryBehavior> behaviors
-        ) {
+        )
+        {
             int index,
                 count;
             IDictionaryInitializer initializer;
@@ -118,7 +120,8 @@ namespace Castle.Components.DictionaryAdapter
 
         private static IDictionary<string, PropertyDescriptor> MergeProperties(
             IDictionary<string, PropertyDescriptor> source
-        ) {
+        )
+        {
             var properties = new Dictionary<string, PropertyDescriptor>();
 
             foreach (var sourceProperty in source)
@@ -132,7 +135,8 @@ namespace Castle.Components.DictionaryAdapter
         private static IDictionary<string, PropertyDescriptor> MergeProperties(
             IDictionary<string, PropertyDescriptor> source,
             List<IDictionaryBehavior> behaviors
-        ) {
+        )
+        {
             int index,
                 count = behaviors.Count;
             var properties = new Dictionary<string, PropertyDescriptor>();

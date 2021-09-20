@@ -167,7 +167,8 @@ namespace System
                 ModuleMetadata block = ModuleMetadata.CreateFromStream(
                     new MemoryStream(compileResult.Assembly)
                 )
-            ) {
+            )
+            {
                 var reader = block.MetadataReader;
 
                 var appRef = app.Assembly.Identity.Name;

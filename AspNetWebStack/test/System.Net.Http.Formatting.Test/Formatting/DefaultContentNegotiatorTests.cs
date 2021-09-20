@@ -579,7 +579,8 @@ namespace System.Net.Http.Formatting
         private static MediaTypeFormatterMatch CreateMatch(
             double? quality,
             MediaTypeFormatterMatchRanking ranking
-        ) {
+        )
+        {
             MockMediaTypeFormatter formatter = new MockMediaTypeFormatter();
             MediaTypeHeaderValue mediaType = new MediaTypeHeaderValue("text/test");
             return new MediaTypeFormatterMatch(formatter, mediaType, quality, ranking);
@@ -989,7 +990,8 @@ namespace System.Net.Http.Formatting
             string expectedMediaType,
             double expectedQuality,
             int ranking
-        ) {
+        )
+        {
             // Arrange
             MockContentNegotiator negotiator = new MockContentNegotiator();
 
@@ -1049,7 +1051,8 @@ namespace System.Net.Http.Formatting
             string requestMediaType,
             string[] supportedMediaTypes,
             string expectedMediaType
-        ) {
+        )
+        {
             // Arrange
             MockContentNegotiator negotiator = new MockContentNegotiator();
 
@@ -1096,7 +1099,8 @@ namespace System.Net.Http.Formatting
             bool excludeMatchOnType,
             string[] acceptHeaders,
             bool expectedResult
-        ) {
+        )
+        {
             // Arrange
             MockContentNegotiator negotiator = new MockContentNegotiator(excludeMatchOnType);
             List<MediaTypeWithQualityHeaderValue> unsortedAcceptHeaders = acceptHeaders.Select(
@@ -1171,7 +1175,8 @@ namespace System.Net.Http.Formatting
         public void SelectResponseMediaTypeFormatter_SelectsMediaType(
             ICollection<MediaTypeFormatterMatch> matches,
             MediaTypeFormatterMatch expectedWinner
-        ) {
+        )
+        {
             // Arrange
             MockContentNegotiator negotiator = new MockContentNegotiator();
 
@@ -1209,7 +1214,8 @@ namespace System.Net.Http.Formatting
             string requestEncoding,
             string[] supportedEncodings,
             string expectedEncoding
-        ) {
+        )
+        {
             // Arrange
             MockContentNegotiator negotiator = new MockContentNegotiator();
 
@@ -1272,7 +1278,8 @@ namespace System.Net.Http.Formatting
         public void SortMediaTypeWithQualityHeaderValuesByQFactor_SortsCorrectly(
             IEnumerable<string> unsorted,
             IEnumerable<string> expectedSorted
-        ) {
+        )
+        {
             // Arrange
             MockContentNegotiator negotiator = new MockContentNegotiator();
 
@@ -1312,7 +1319,8 @@ namespace System.Net.Http.Formatting
         public void SortStringWithQualityHeaderValuesByQFactor_SortsCorrectly(
             IEnumerable<string> unsorted,
             IEnumerable<string> expectedSorted
-        ) {
+        )
+        {
             // Arrange
             MockContentNegotiator negotiator = new MockContentNegotiator();
 
@@ -1340,7 +1348,8 @@ namespace System.Net.Http.Formatting
             MediaTypeFormatterMatch current,
             MediaTypeFormatterMatch replacement,
             bool currentWins
-        ) {
+        )
+        {
             // Arrange
             MockContentNegotiator negotiator = new MockContentNegotiator();
 

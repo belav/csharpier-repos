@@ -80,7 +80,8 @@ namespace Microsoft.Diagnostics.Tools.Pgo.TypeRefTypeSystem
             string nameSpace,
             string name,
             NotFoundBehavior notFoundBehavior
-        ) {
+        )
+        {
             MetadataType type = GetTypeInternal(nameSpace, name);
             if ((type == null) && notFoundBehavior != NotFoundBehavior.ReturnNull)
             {

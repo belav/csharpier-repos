@@ -36,7 +36,8 @@ namespace BasicWebSite.Controllers
         [RequestFormLimits]
         public ActionResult<Product> OverrideControllerLevelLimitsUsingDefaultLimits(
             Product product
-        ) {
+        )
+        {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);

@@ -319,7 +319,8 @@ namespace Internal.Cryptography.Pal
         private static void ReadCertPolicyConstraintsExtension(
             byte[] rawData,
             CertificatePolicy policy
-        ) {
+        )
+        {
             PolicyConstraintsAsn constraints = PolicyConstraintsAsn.Decode(
                 rawData,
                 AsnEncodingRules.DER
@@ -387,7 +388,8 @@ namespace Internal.Cryptography.Pal
 
         private static List<CertificatePolicyMappingAsn> ReadCertPolicyMappingsExtension(
             byte[] rawData
-        ) {
+        )
+        {
             try
             {
                 AsnValueReader reader = new AsnValueReader(rawData, AsnEncodingRules.DER);

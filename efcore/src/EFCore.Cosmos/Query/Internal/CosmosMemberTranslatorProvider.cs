@@ -30,7 +30,8 @@ namespace Microsoft.EntityFrameworkCore.Cosmos.Query.Internal
         public CosmosMemberTranslatorProvider(
             ISqlExpressionFactory sqlExpressionFactory,
             IEnumerable<IMemberTranslatorPlugin> plugins
-        ) {
+        )
+        {
             _plugins.AddRange(plugins.SelectMany(p => p.Translators));
             //_translators
             //    .AddRange(
@@ -51,7 +52,8 @@ namespace Microsoft.EntityFrameworkCore.Cosmos.Query.Internal
             MemberInfo member,
             Type returnType,
             IDiagnosticsLogger<DbLoggerCategory.Query> logger
-        ) {
+        )
+        {
             Check.NotNull(member, nameof(member));
             Check.NotNull(returnType, nameof(returnType));
             Check.NotNull(logger, nameof(logger));

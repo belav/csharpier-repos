@@ -71,7 +71,8 @@ namespace System.Speech.Internal.GrammarBuilding
             IElement parent,
             IRule rule,
             IdentifierCollection ruleIds
-        ) {
+        )
+        {
             // Create the rule associated with this key
             _ruleRef.Rule.CreateElement(elementFactory, parent, rule, ruleIds);
 

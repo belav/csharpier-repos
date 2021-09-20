@@ -59,7 +59,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UsePatternMatching
             ImmutableArray<Diagnostic> diagnostics,
             SyntaxEditor editor,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             using var _1 = PooledHashSet<Location>.GetInstance(out var declaratorLocations);
             using var _2 = PooledHashSet<SyntaxNode>.GetInstance(out var statementParentScopes);
 
@@ -120,7 +121,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UsePatternMatching
             LanguageVersion languageVersion,
             Action<StatementSyntax> removeStatement,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var declaratorLocation = diagnostic.AdditionalLocations[0];
             var comparisonLocation = diagnostic.AdditionalLocations[1];
             var asExpressionLocation = diagnostic.AdditionalLocations[2];
@@ -156,7 +158,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UsePatternMatching
                 declarator.Parent is VariableDeclarationSyntax declaration
                 && declaration.Parent is LocalDeclarationStatementSyntax localDeclaration
                 && declaration.Variables.Count == 1
-            ) {
+            )
+            {
                 // Trivia on the local declaration will move to the next statement.
                 // use the callback form as the next statement may be the place where we're
                 // inlining the declaration, and thus need to see the effects of that change.
@@ -180,7 +183,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UsePatternMatching
             ExpressionSyntax comparison,
             BinaryExpressionSyntax asExpression,
             DeclarationPatternSyntax declarationPattern
-        ) {
+        )
+        {
             var isPatternExpression = SyntaxFactory.IsPatternExpression(
                 asExpression.Left,
                 declarationPattern
@@ -210,9 +214,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UsePatternMatching
 
         private class MyCodeAction : CustomCodeActions.DocumentChangeAction
         {
-            public MyCodeAction(
-                Func<CancellationToken, Task<Document>> createChangedDocument
-            ) : base(CSharpAnalyzersResources.Use_pattern_matching, createChangedDocument) { }
+            public MyCodeAction(Func<CancellationToken, Task<Document>> createChangedDocument)
+                : base(CSharpAnalyzersResources.Use_pattern_matching, createChangedDocument) { }
         }
     }
 }

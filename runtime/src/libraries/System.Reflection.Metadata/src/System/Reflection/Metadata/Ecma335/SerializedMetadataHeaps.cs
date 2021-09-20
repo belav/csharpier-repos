@@ -15,7 +15,8 @@ namespace System.Reflection.Metadata.Ecma335
             MetadataSizes sizes,
             BlobBuilder stringHeap,
             ImmutableArray<int> stringMap
-        ) {
+        )
+        {
             Sizes = sizes;
             StringHeap = stringHeap;
             StringMap = stringMap;

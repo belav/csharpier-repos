@@ -42,7 +42,8 @@ namespace BuildValidator
             byte[] AssemblyBytes,
             PEReader AssemblyReader,
             MetadataReader PdbMetadataReader
-        ) {
+        )
+        {
             public MetadataReader AssemblyMetadataReader { get; } =
                 AssemblyReader.GetMetadataReader();
         }
@@ -101,7 +102,8 @@ namespace BuildValidator
             LocalReferenceResolver? localReferenceResolver = null,
             ImmutableArray<MetadataReferenceInfo> references = default,
             string? message = null
-        ) {
+        )
+        {
             AssemblyInfo = assemblyInfo;
             Result = outcome;
             _diagnostics = diagnostics;
@@ -135,7 +137,8 @@ namespace BuildValidator
             CompilationFactory compilationFactory,
             RebuildArtifactResolver artifactResolver,
             ILogger logger
-        ) {
+        )
+        {
             using var rebuildPeStream = new MemoryStream();
             var hasEmbeddedPdb = compilationFactory.OptionsReader.HasEmbeddedPdb;
             var rebuildPdbStream = hasEmbeddedPdb ? null : new MemoryStream();
@@ -260,7 +263,8 @@ namespace BuildValidator
                             info.ModuleVersionId,
                             out var assemblyInfo
                         )
-                    ) {
+                    )
+                    {
                         writer.WriteLine(
                             $"Found: {info.ModuleVersionId} {info.FileName} at {assemblyInfo.FilePath}"
                         );
@@ -272,7 +276,8 @@ namespace BuildValidator
                             var cachedInfo in _localReferenceResolver.GetCachedAssemblyInfos(
                                 info.FileName
                             )
-                        ) {
+                        )
+                        {
                             writer.WriteLine($"\t{cachedInfo.Mvid} {cachedInfo.FilePath}");
                         }
                     }
@@ -322,7 +327,8 @@ namespace BuildValidator
                 BuildInfo originalInfo,
                 BuildInfo rebuildInfo,
                 Compilation compilation
-            ) {
+            )
+            {
                 var assemblyName = Path.GetFileNameWithoutExtension(assemblyFileName);
                 var originalDataFiles = createBuildArtifacts(
                     Path.Combine(debugPath, "original"),
@@ -360,7 +366,8 @@ namespace BuildValidator
                     string scriptName,
                     string originalFilePath,
                     string rebuildFilePath
-                ) {
+                )
+                {
                     originalFilePath = getRelativePath(originalFilePath);
                     rebuildFilePath = getRelativePath(rebuildFilePath);
 
@@ -390,7 +397,8 @@ namespace BuildValidator
                 string outputPath,
                 string assemblyFileName,
                 BuildInfo buildInfo
-            ) {
+            )
+            {
                 var assemblyName = Path.GetFileNameWithoutExtension(assemblyFileName);
                 var assemblyFilePath = Path.Combine(outputPath, assemblyFileName);
                 var buildDataFiles = new BuildDataFiles(
@@ -475,7 +483,8 @@ namespace BuildValidator
             static void createMetadataVisualization(
                 string outputFilePath,
                 MetadataReader metadataReader
-            ) {
+            )
+            {
                 using var writer = new StreamWriter(outputFilePath, append: false);
                 var visualizer = new MetadataVisualizer(metadataReader, writer);
                 visualizer.Visualize();
@@ -487,7 +496,8 @@ namespace BuildValidator
                 string outputFilePath,
                 PEReader peReader,
                 MetadataReader pdbMetadataReader
-            ) {
+            )
+            {
                 using var writer = new StreamWriter(outputFilePath, append: false);
                 var peMetadataReader = peReader.GetMetadataReader();
 
@@ -536,7 +546,8 @@ namespace BuildValidator
             ILogger logger,
             BuildInfo originalInfo,
             BuildInfo rebuildInfo
-        ) {
+        )
+        {
             return hasPdbCompressionDifferences();
 
             bool hasPdbCompressionDifferences()
@@ -548,7 +559,8 @@ namespace BuildValidator
                 if (
                     originalEntry.Type == DebugDirectoryEntryType.Unknown
                     && rebuildEntry.Type == DebugDirectoryEntryType.Unknown
-                ) {
+                )
+                {
                     return false;
                 }
 
@@ -557,7 +569,8 @@ namespace BuildValidator
                 if (
                     originalMissingEmbeddedPdb
                     || rebuildEntry.Type == DebugDirectoryEntryType.Unknown
-                ) {
+                )
+                {
                     var (hasEmbedded, doesntHaveEmbedded) = originalMissingEmbeddedPdb
                         ? ("rebuild", "original")
                         : ("original", "rebuild");

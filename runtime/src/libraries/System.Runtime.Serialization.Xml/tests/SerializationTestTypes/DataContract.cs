@@ -235,7 +235,8 @@ namespace SerializationTestTypes
         internal static string ExpandGenericParameters(
             string format,
             IGenericNameProvider genericNameProvider
-        ) {
+        )
+        {
             string digest = null;
             StringBuilder typeName = new StringBuilder();
             for (int i = 0; i < format.Length; i++)
@@ -324,7 +325,8 @@ namespace SerializationTestTypes
         internal virtual DataContract BindGenericParameters(
             DataContract[] paramContracts,
             Dictionary<DataContract, DataContract> boundContracts
-        ) {
+        )
+        {
             return this;
         }
 
@@ -337,7 +339,8 @@ namespace SerializationTestTypes
             RuntimeTypeHandle typeHandle,
             Type type,
             bool supportCollectionDataContract
-        ) {
+        )
+        {
             DataContract dataContract = null;
             if (!cache.TryGetValue(typeHandle, out dataContract))
             {
@@ -387,7 +390,8 @@ namespace SerializationTestTypes
                         out itemType,
                         true
                     )
-                ) {
+                )
+                {
                     return collectionDataContract;
                 }
             }
@@ -415,7 +419,8 @@ namespace SerializationTestTypes
             Type type,
             out bool hasDataContract,
             bool supportCollectionDataContract
-        ) {
+        )
+        {
             DataContract primitiveContract = PrimitiveDataContract.GetPrimitiveDataContract(type);
             if (primitiveContract != null)
             {
@@ -535,7 +540,8 @@ namespace SerializationTestTypes
                         supportCollectionDataContract
                         && collectionDataContractAttributes != null
                         && collectionDataContractAttributes.Length > 0
-                    ) {
+                    )
+                    {
                         CollectionDataContractAttribute collectionDataContractAttribute =
                             (CollectionDataContractAttribute)collectionDataContractAttributes[0];
                         hasDataContract = true;
@@ -622,7 +628,8 @@ namespace SerializationTestTypes
         static string GetGlobalContractNamespace(
             string clrNs,
             ICustomAttributeProvider customAttribuetProvider
-        ) {
+        )
+        {
             object[] nsAttributes = customAttribuetProvider.GetCustomAttributes(
                 typeof(ContractNamespaceAttribute),
                 false
@@ -676,7 +683,8 @@ namespace SerializationTestTypes
                         !dataContractAttribute.IsReference
                         && this is ClassDataContract
                         && ((ClassDataContract)this).BaseContract != null
-                    ) {
+                    )
+                    {
                         return ((ClassDataContract)this).BaseContract.IsReference;
                     }
                     else
@@ -704,7 +712,8 @@ namespace SerializationTestTypes
                 if (
                     collectionDataContractAttributes != null
                     && collectionDataContractAttributes.Length > 0
-                ) {
+                )
+                {
                     CollectionDataContractAttribute collectionDataContractAttribute =
                         (CollectionDataContractAttribute)collectionDataContractAttributes[0];
                     return collectionDataContractAttribute.IsReference;
@@ -1015,7 +1024,8 @@ namespace SerializationTestTypes
             List<DataMember> members,
             DataMember memberContract,
             Dictionary<string, DataMember> memberNamesTable
-        ) {
+        )
+        {
             DataMember existingMemberContract;
             if (memberNamesTable.TryGetValue(memberContract.Name, out existingMemberContract))
                 throw new Exception(
@@ -1850,7 +1860,8 @@ namespace SerializationTestTypes
             if (
                 collectionDataContractAttributes != null
                 && collectionDataContractAttributes.Length > 0
-            ) {
+            )
+            {
                 collectionContractAttribute =
                     (CollectionDataContractAttribute)collectionDataContractAttributes[0];
             }
@@ -1927,7 +1938,8 @@ namespace SerializationTestTypes
             out DataContract dataContract,
             out Type itemType,
             bool constructorRequired
-        ) {
+        )
+        {
             dataContract = null;
             itemType = Globals.TypeOfObject;
             MethodInfo addMethod,
@@ -1948,7 +1960,8 @@ namespace SerializationTestTypes
                 !Globals.TypeOfIEnumerable.IsAssignableFrom(type)
                 || IsDC(type)
                 || Globals.TypeOfIXmlSerializable.IsAssignableFrom(type)
-            ) {
+            )
+            {
                 return false;
             }
 
@@ -2060,7 +2073,8 @@ namespace SerializationTestTypes
                 kind == CollectionKind.Enumerable
                 || kind == CollectionKind.Collection
                 || kind == CollectionKind.GenericEnumerable
-            ) {
+            )
+            {
                 if (multipleDefinitions)
                     knownInterfaceType = Globals.TypeOfIEnumerable;
                 itemType = knownInterfaceType.IsGenericType
@@ -2152,7 +2166,8 @@ namespace SerializationTestTypes
             if (
                 type.GetCustomAttributes(Globals.TypeOfDataContractAttribute, false) != null
                 && type.GetCustomAttributes(Globals.TypeOfDataContractAttribute, false).Length > 0
-            ) {
+            )
+            {
                 return true;
             }
             else
@@ -2204,7 +2219,8 @@ namespace SerializationTestTypes
             Type interfaceType,
             ref MethodInfo addMethod,
             ref MethodInfo getEnumeratorMethod
-        ) {
+        )
+        {
             InterfaceMapping mapping = type.GetInterfaceMap(interfaceType);
             for (int i = 0; i < mapping.TargetMethods.Length; i++)
             {
@@ -2235,7 +2251,8 @@ namespace SerializationTestTypes
             bool addMethodOnInterface,
             out MethodInfo getEnumeratorMethod,
             out MethodInfo addMethod
-        ) {
+        )
+        {
             addMethod = getEnumeratorMethod = null;
 
             if (addMethodOnInterface)
@@ -2250,7 +2267,8 @@ namespace SerializationTestTypes
                 if (
                     addMethod == null
                     || addMethod.GetParameters()[0].ParameterType != addMethodTypeArray[0]
-                ) {
+                )
+                {
                     FindCollectionMethodsOnInterface(
                         type,
                         interfaceType,
@@ -2304,7 +2322,8 @@ namespace SerializationTestTypes
                 if (
                     getEnumeratorMethod == null
                     || !Globals.TypeOfIEnumerator.IsAssignableFrom(getEnumeratorMethod.ReturnType)
-                ) {
+                )
+                {
                     Type ienumerableInterface = interfaceType.GetInterface(
                         "System.Collections.Generic.IEnumerable*"
                     );
@@ -2323,7 +2342,8 @@ namespace SerializationTestTypes
             string name,
             Type type,
             Type interfaceType
-        ) {
+        )
+        {
             InterfaceMapping mapping = type.GetInterfaceMap(interfaceType);
             for (int i = 0; i < mapping.TargetMethods.Length; i++)
             {
@@ -2363,7 +2383,8 @@ namespace SerializationTestTypes
                     }
                     if (
                         collectionContract.TopLevelElementNamespace != this.TopLevelElementNamespace
-                    ) {
+                    )
+                    {
                         return false;
                     }
                     if (collectionContract.IsDictionary != this.IsDictionary)

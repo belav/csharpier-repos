@@ -16,7 +16,8 @@ namespace System.Globalization
             int lengthA,
             ref char strB,
             int lengthB
-        ) {
+        )
+        {
             int length = Math.Min(lengthA, lengthB);
             int range = length;
 
@@ -35,7 +36,8 @@ namespace System.Globalization
                         (charA | 0x20) == (charB | 0x20)
                         && (uint)((charA | 0x20) - 'a') <= (uint)('z' - 'a')
                     )
-                ) {
+                )
+                {
                     length--;
                     charA = ref Unsafe.Add(ref charA, 1);
                     charB = ref Unsafe.Add(ref charB, 1);
@@ -80,7 +82,8 @@ namespace System.Globalization
             int lengthA,
             ref char strB,
             int lengthB
-        ) {
+        )
+        {
             if (GlobalizationMode.Invariant)
             {
                 return CompareIgnoreCaseInvariantMode(ref strA, lengthA, ref strB, lengthB);
@@ -220,7 +223,8 @@ namespace System.Globalization
             int lengthA,
             ref char strB,
             int lengthB
-        ) {
+        )
+        {
             Debug.Assert(GlobalizationMode.Invariant);
             int length = Math.Min(lengthA, lengthB);
 
@@ -260,7 +264,8 @@ namespace System.Globalization
             int startIndex,
             int count,
             bool ignoreCase
-        ) {
+        )
+        {
             if (source == null)
             {
                 ThrowHelper.ThrowArgumentNullException(ExceptionArgument.source);
@@ -302,7 +307,8 @@ namespace System.Globalization
         internal static int IndexOfOrdinalIgnoreCase(
             ReadOnlySpan<char> source,
             ReadOnlySpan<char> value
-        ) {
+        )
+        {
             if (value.Length == 0)
             {
                 return 0;
@@ -346,7 +352,8 @@ namespace System.Globalization
             int startIndex,
             int count,
             bool ignoreCase
-        ) {
+        )
+        {
             if (source == null)
             {
                 ThrowHelper.ThrowArgumentNullException(ExceptionArgument.source);
@@ -450,7 +457,8 @@ namespace System.Globalization
         internal static int LastIndexOfOrdinalIgnoreCase(
             ReadOnlySpan<char> source,
             ReadOnlySpan<char> value
-        ) {
+        )
+        {
             if (value.Length == 0)
             {
                 return source.Length;

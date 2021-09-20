@@ -77,7 +77,8 @@ namespace Microsoft.CodeAnalysis
             string path,
             string? basePath,
             IFormatProvider? formatter
-        ) {
+        )
+        {
             // ignore base path
             return path;
         }

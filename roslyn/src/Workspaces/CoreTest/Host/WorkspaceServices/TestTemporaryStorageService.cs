@@ -80,7 +80,8 @@ namespace Microsoft.CodeAnalysis.UnitTests.Persistence
             public async Task WriteStreamAsync(
                 Stream stream,
                 CancellationToken cancellationToken = default
-            ) {
+            )
+            {
                 var newStream = new MemoryStream();
                 await stream.CopyToAsync(newStream).ConfigureAwait(false);
                 _stream = newStream;
@@ -116,7 +117,8 @@ namespace Microsoft.CodeAnalysis.UnitTests.Persistence
             public Task WriteTextAsync(
                 SourceText text,
                 CancellationToken cancellationToken = default
-            ) {
+            )
+            {
                 WriteText(text, cancellationToken);
                 return Task.CompletedTask;
             }

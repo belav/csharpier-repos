@@ -30,7 +30,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             AssignmentExpressionSyntax node,
             BindingDiagnosticBag diagnostics,
             bool resultIsUsedOverride = false
-        ) {
+        )
+        {
             var left = node.Left;
             var right = node.Right;
             DeclarationExpressionSyntax? declaration = null;
@@ -116,7 +117,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             ref ExpressionSyntax? expression,
             bool resultIsUsedOverride = false,
             BoundDeconstructValuePlaceholder? rightPlaceholder = null
-        ) {
+        )
+        {
             DeconstructionVariable locals = BindDeconstructionVariables(
                 left,
                 diagnostics,
@@ -163,7 +165,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             ArrayBuilder<DeconstructionVariable> checkedVariables,
             bool resultIsUsed,
             BindingDiagnosticBag diagnostics
-        ) {
+        )
+        {
             Debug.Assert(diagnostics.DiagnosticBag is object);
             uint rightEscape = GetValEscape(boundRHS, this.LocalScopeDepth);
 
@@ -294,7 +297,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             BoundExpression boundRHS,
             CSharpSyntaxNode syntax,
             BindingDiagnosticBag diagnostics
-        ) {
+        )
+        {
             Debug.Assert(diagnostics.DiagnosticBag is object);
 
             if (boundRHS.Kind == BoundKind.TupleLiteral)
@@ -343,7 +347,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             BindingDiagnosticBag diagnostics,
             ArrayBuilder<DeconstructionVariable> variables,
             out Conversion conversion
-        ) {
+        )
+        {
             Debug.Assert((object)type != null);
             ImmutableArray<TypeSymbol> tupleOrDeconstructedTypes;
             conversion = Conversion.Deconstruction;
@@ -479,7 +484,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             ArrayBuilder<DeconstructionVariable> variables,
             ImmutableArray<TypeSymbol> foundTypes,
             BindingDiagnosticBag diagnostics
-        ) {
+        )
+        {
             var matchCount = Math.Min(variables.Count, foundTypes.Length);
             for (int i = 0; i < matchCount; i++)
             {
@@ -503,7 +509,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             BoundExpression expression,
             TypeSymbol type,
             BindingDiagnosticBag diagnostics
-        ) {
+        )
+        {
             switch (expression.Kind)
             {
                 case BoundKind.DeconstructionVariablePendingInference:
@@ -534,7 +541,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             ArrayBuilder<DeconstructionVariable> variables,
             BindingDiagnosticBag diagnostics,
             uint rhsValEscape
-        ) {
+        )
+        {
             int count = variables.Count;
             for (int i = 0; i < count; i++)
             {
@@ -612,7 +620,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             internal DeconstructionVariable(
                 ArrayBuilder<DeconstructionVariable> variables,
                 SyntaxNode syntax
-            ) {
+            )
+            {
                 Single = null;
                 NestedVariables = variables;
                 Syntax = (CSharpSyntaxNode)syntax;
@@ -620,7 +629,8 @@ namespace Microsoft.CodeAnalysis.CSharp
 
             internal static void FreeDeconstructionVariables(
                 ArrayBuilder<DeconstructionVariable> variables
-            ) {
+            )
+            {
                 variables.FreeAll(v => v.NestedVariables);
             }
 
@@ -645,7 +655,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             BoundTupleLiteral rhsLiteral,
             CSharpSyntaxNode syntax,
             BindingDiagnosticBag? diagnostics
-        ) {
+        )
+        {
             int leftLength = lhsVariables.Count;
             int rightLength = rhsLiteral.Arguments.Length;
 
@@ -739,7 +750,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             ArrayBuilder<DeconstructionVariable> variables,
             BindingDiagnosticBag diagnostics,
             bool ignoreDiagnosticsFromTuple
-        ) {
+        )
+        {
             int count = variables.Count;
             var valuesBuilder = ArrayBuilder<BoundExpression>.GetInstance(count);
             var typesWithAnnotationsBuilder = ArrayBuilder<TypeWithAnnotations>.GetInstance(count);
@@ -827,7 +839,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             BindingDiagnosticBag diagnostics,
             out ImmutableArray<BoundDeconstructValuePlaceholder> outPlaceholders,
             out bool anyApplicableCandidates
-        ) {
+        )
+        {
             anyApplicableCandidates = false;
             var receiverSyntax = (CSharpSyntaxNode)receiver.Syntax;
             if (receiver.Type?.IsDynamic() ?? false)
@@ -925,7 +938,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                     int i = (deconstructMethod.IsExtensionMethod ? 1 : 0);
                     i < parameters.Length;
                     i++
-                ) {
+                )
+                {
                     if (parameters[i].RefKind != RefKind.Out)
                     {
                         return MissingDeconstruct(
@@ -982,7 +996,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             BindingDiagnosticBag diagnostics,
             out ImmutableArray<BoundDeconstructValuePlaceholder> outPlaceholders,
             BoundExpression childNode
-        ) {
+        )
+        {
             if (receiver.Type?.IsErrorType() == false)
             {
                 Error(
@@ -1009,7 +1024,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             BindingDiagnosticBag diagnostics,
             ref DeclarationExpressionSyntax? declaration,
             ref ExpressionSyntax? expression
-        ) {
+        )
+        {
             switch (node.Kind())
             {
                 case SyntaxKind.DeclarationExpression:
@@ -1035,7 +1051,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                     if (
                         component.Designation.Kind() == SyntaxKind.ParenthesizedVariableDesignation
                         && !isVar
-                    ) {
+                    )
+                    {
                         // An explicit is not allowed with a parenthesized designation
                         Error(
                             diagnostics,
@@ -1106,7 +1123,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             VariableDesignationSyntax node,
             CSharpSyntaxNode syntax,
             BindingDiagnosticBag diagnostics
-        ) {
+        )
+        {
             switch (node.Kind())
             {
                 case SyntaxKind.SingleVariableDesignation:
@@ -1150,7 +1168,8 @@ namespace Microsoft.CodeAnalysis.CSharp
         private static BoundDiscardExpression BindDiscardExpression(
             SyntaxNode syntax,
             TypeWithAnnotations declTypeWithAnnotations
-        ) {
+        )
+        {
             return new BoundDiscardExpression(syntax, declTypeWithAnnotations.Type);
         }
 
@@ -1164,7 +1183,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             SingleVariableDesignationSyntax designation,
             CSharpSyntaxNode syntax,
             BindingDiagnosticBag diagnostics
-        ) {
+        )
+        {
             SourceLocalSymbol localSymbol = LookupLocal(designation.Identifier);
 
             // is this a local?

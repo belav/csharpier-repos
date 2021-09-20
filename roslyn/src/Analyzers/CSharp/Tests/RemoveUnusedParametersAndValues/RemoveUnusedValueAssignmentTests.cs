@@ -163,7 +163,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnusedParametersA
         [InlineData(UnusedValuePreference.UnusedLocalVariable)]
         public async Task Initialization_ConstantValue_DoNotCopyLeadingTriviaDirectives(
             object option
-        ) {
+        )
+        {
             var source =
                 @"class C {
     void M()
@@ -504,7 +505,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnusedParametersA
                 object option,
             [CombinatorialValues(CodeFixTestBehaviors.None, CodeFixTestBehaviors.FixOne)]
                 CodeFixTestBehaviors testBehaviors
-        ) {
+        )
+        {
             var source =
                 @"class C
 {
@@ -570,7 +572,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnusedParametersA
                 object option,
             [CombinatorialValues(CodeFixTestBehaviors.None, CodeFixTestBehaviors.FixOne)]
                 CodeFixTestBehaviors testBehaviors
-        ) {
+        )
+        {
             var source =
                 @"class C
 {
@@ -706,7 +709,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnusedParametersA
         [InlineData(UnusedValuePreference.UnusedLocalVariable)]
         public async Task Initialization_NonConstantValue_FieldReferenceWithThisReceiver(
             object option
-        ) {
+        )
+        {
             var source =
                 @"class C
 {
@@ -786,7 +790,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnusedParametersA
         public async Task Assignment_NonConstantValue_FieldReferenceWithReceiver(
             object option,
             string fix
-        ) {
+        )
+        {
             var source =
                 @"class C
 {
@@ -829,7 +834,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnusedParametersA
         public async Task Initialization_NonConstantValue_PropertyReference(
             object option,
             string fix
-        ) {
+        )
+        {
             var source =
                 @"class C
 {
@@ -872,7 +878,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnusedParametersA
         public async Task Initialization_NonConstantValue_MethodInvocation(
             object option,
             string fix
-        ) {
+        )
+        {
             var source =
                 @"class C
 {
@@ -1038,7 +1045,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnusedParametersA
         public async Task Assignment_NonConstantValue_UserDefinedConversion(
             object option,
             string fix
-        ) {
+        )
+        {
             var source =
                 @"class C
 {
@@ -1104,7 +1112,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnusedParametersA
                 CodeFixTestBehaviors.FixOne | CodeFixTestBehaviors.SkipFixAllCheck
             )]
                 CodeFixTestBehaviors testBehaviors
-        ) {
+        )
+        {
             var source =
                 @"class C
 {
@@ -1193,7 +1202,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnusedParametersA
                 CodeFixTestBehaviors.FixOne | CodeFixTestBehaviors.SkipFixAllCheck
             )]
                 CodeFixTestBehaviors testBehaviors
-        ) {
+        )
+        {
             var source =
                 @"class C
 {
@@ -1326,7 +1336,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnusedParametersA
                 UnusedValuePreference.UnusedLocalVariable
             )]
                 object option
-        ) {
+        )
+        {
             var (prefix, postfix) = applyAsPrefix ? (@operator, "") : ("", @operator);
             var source =
                 $@"class C
@@ -1385,7 +1396,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnusedParametersA
                 UnusedValuePreference.UnusedLocalVariable
             )]
                 object option
-        ) {
+        )
+        {
             var (prefix, postfix) = applyAsPrefix ? (@operator, "") : ("", @operator);
             var source =
                 $@"class C
@@ -1418,7 +1430,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnusedParametersA
                 UnusedValuePreference.UnusedLocalVariable
             )]
                 object option
-        ) {
+        )
+        {
             var (prefix, postfix) = applyAsPrefix ? (@operator, "") : ("", @operator);
             var source =
                 $@"class C
@@ -1461,7 +1474,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnusedParametersA
                 UnusedValuePreference.UnusedLocalVariable
             )]
                 object option
-        ) {
+        )
+        {
             var source =
                 $@"class C
 {{
@@ -1527,7 +1541,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnusedParametersA
                 UnusedValuePreference.UnusedLocalVariable
             )]
                 object option
-        ) {
+        )
+        {
             var source =
                 $@"class C
 {{
@@ -1565,7 +1580,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnusedParametersA
                 UnusedValuePreference.UnusedLocalVariable
             )]
                 object option
-        ) {
+        )
+        {
             var source =
                 $@"class C
 {{
@@ -1603,7 +1619,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnusedParametersA
                 UnusedValuePreference.UnusedLocalVariable
             )]
                 object option
-        ) {
+        )
+        {
             var source =
                 $@"class C
 {{
@@ -1657,7 +1674,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnusedParametersA
         public async Task CompoundAssignmentOperator_ValueNotUsed_NonConstantValue(
             string optionName,
             string fix
-        ) {
+        )
+        {
             await TestInRegularAndScriptAsync(
                 $@"class C
 {{
@@ -1707,7 +1725,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnusedParametersA
         [InlineData(nameof(PreferUnusedLocal))]
         public async Task LValueFlowCapture_Assignment_ControlFlowInAssignedTarget(
             string optionName
-        ) {
+        )
+        {
             await TestMissingInRegularAndScriptAsync(
                 @"class C
 {
@@ -1730,7 +1749,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnusedParametersA
         public async Task LValueFlowCapture_Assignment_ControlFlowInAssignedValue_01(
             string optionName,
             string fix
-        ) {
+        )
+        {
             await TestInRegularAndScriptAsync(
                 @"class C
 {
@@ -1763,7 +1783,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnusedParametersA
         [InlineData(nameof(PreferUnusedLocal))]
         public async Task LValueFlowCapture_Assignment_ControlFlowInAssignedValue_02(
             string optionName
-        ) {
+        )
+        {
             await TestMissingInRegularAndScriptAsync(
                 @"class C
 {
@@ -1785,7 +1806,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnusedParametersA
         [InlineData(nameof(PreferUnusedLocal))]
         public async Task LValueFlowCapture_DeconstructionAssignment_ControlFlowInAssignedTarget(
             string optionName
-        ) {
+        )
+        {
             await TestMissingInRegularAndScriptAsync(
                 @"class C
 {
@@ -1808,7 +1830,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnusedParametersA
         public async Task LValueFlowCapture_DeconstructionAssignment_ControlFlowInAssignedValue_01(
             string optionName,
             string fix
-        ) {
+        )
+        {
             await TestInRegularAndScriptAsync(
                 @"class C
 {
@@ -1842,7 +1865,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnusedParametersA
         [InlineData(nameof(PreferUnusedLocal))]
         public async Task LValueFlowCapture_DeconstructionAssignment_ControlFlowInAssignedValue_02(
             string optionName
-        ) {
+        )
+        {
             await TestMissingInRegularAndScriptAsync(
                 @"class C
 {
@@ -2769,7 +2793,8 @@ class Q
         public async Task DeclarationPatternInSwitchCase_WithOnlyWriteReference_PreferUnusedLocal(
             [CombinatorialValues(LanguageVersion.CSharp8, LanguageVersion.CSharp9)]
                 LanguageVersion languageVersion
-        ) {
+        )
+        {
             await TestMissingInRegularAndScriptAsync(
                 @"class C
 {
@@ -2795,7 +2820,8 @@ class Q
         public async Task DeclarationPatternInSwitchCase_WithOnlyWriteReference_TypePattern(
             [CombinatorialValues(CodeFixTestBehaviors.None, CodeFixTestBehaviors.FixOne)]
                 CodeFixTestBehaviors testBehaviors
-        ) {
+        )
+        {
             var source =
                 @"class C
 {
@@ -2958,7 +2984,8 @@ class Q
         public async Task DeclarationPatternInIsPattern_WithReadAndWriteReference(
             string optionName,
             string fix
-        ) {
+        )
+        {
             await TestInRegularAndScriptAsync(
                 @"class C
 {
@@ -3016,7 +3043,8 @@ class Q
         public async Task DeclarationPatternInRecursivePattern_WithNoReference_PreferUnusedLocal(
             [CombinatorialValues(LanguageVersion.CSharp8, LanguageVersion.CSharp9)]
                 LanguageVersion languageVersion
-        ) {
+        )
+        {
             await TestMissingInRegularAndScriptAsync(
                 @"class C
 {
@@ -3036,7 +3064,8 @@ class Q
         public async Task DeclarationPatternInRecursivePattern_WithNoReference_TypePattern(
             [CombinatorialValues(CodeFixTestBehaviors.None, CodeFixTestBehaviors.FixOne)]
                 CodeFixTestBehaviors testBehaviors
-        ) {
+        )
+        {
             var source =
                 @"class C
 {
@@ -3130,7 +3159,8 @@ class Q
         public async Task DeclarationPatternInRecursivePattern_WithOnlyWriteReference_PreferUnusedLocal(
             [CombinatorialValues(LanguageVersion.CSharp8, LanguageVersion.CSharp9)]
                 LanguageVersion languageVersion
-        ) {
+        )
+        {
             await TestMissingInRegularAndScriptAsync(
                 @"class C
 {
@@ -3156,7 +3186,8 @@ class Q
         public async Task DeclarationPatternInRecursivePattern_WithOnlyWriteReference_TypePattern(
             [CombinatorialValues(CodeFixTestBehaviors.None, CodeFixTestBehaviors.FixOne)]
                 CodeFixTestBehaviors testBehaviors
-        ) {
+        )
+        {
             var source =
                 @"class C
 {
@@ -3233,7 +3264,8 @@ class Q
         public async Task DeclarationPatternInRecursivePattern_WithReadAndWriteReference(
             string optionName,
             string fix
-        ) {
+        )
+        {
             await TestInRegularAndScriptAsync(
                 @"class C
 {
@@ -3272,7 +3304,8 @@ class Q
         public async Task DeclarationPatternInRecursivePattern_WithReadAndWriteReference_TypePatternxxxxxxxxxxxxxxxxxxxxxx(
             string optionName,
             string fix
-        ) {
+        )
+        {
             await TestInRegularAndScriptAsync(
                 @"class C
 {
@@ -3318,7 +3351,8 @@ class Q
                 CodeFixTestBehaviors.FixOne | CodeFixTestBehaviors.SkipFixAllCheck
             )]
                 CodeFixTestBehaviors testBehaviors
-        ) {
+        )
+        {
             var source =
                 @"class C
 {
@@ -4361,7 +4395,8 @@ class C
         [InlineData(nameof(PreferUnusedLocal))]
         public async Task UseInLocalFunction_PassedAsArgument_CastFromDelegateType(
             string optionName
-        ) {
+        )
+        {
             await TestMissingInRegularAndScriptAsync(
                 @"using System;
 
@@ -4555,7 +4590,8 @@ class C
         [InlineData(nameof(PreferUnusedLocal))]
         public async Task WrittenInLambdaAndLocalFunctionTargets_DelegatePassedAsArgument(
             string optionName
-        ) {
+        )
+        {
             await TestMissingInRegularAndScriptAsync(
                 @"using System;
 
@@ -4816,7 +4852,8 @@ class C
         [InlineData(nameof(PreferUnusedLocal))]
         public async Task UseInLambda_LambdaAndLocalFunctionTargets_ThroughLocalsAndParameters(
             string optionName
-        ) {
+        )
+        {
             await TestMissingInRegularAndScriptAsync(
                 @"using System;
 
@@ -4882,7 +4919,8 @@ class C
         [InlineData(nameof(PreferUnusedLocal))]
         public async Task NotUsed_LambdaAndLocalFunctionTargets_ThroughLocalsAndParameters(
             string optionName
-        ) {
+        )
+        {
             await TestInRegularAndScriptAsync(
                 @"using System;
 
@@ -5142,7 +5180,8 @@ class C
         [InlineData(nameof(PreferUnusedLocal))]
         public async Task AssignedInLocalFunction_MayBeUsedAfterOneOfTheInvocations(
             string optionName
-        ) {
+        )
+        {
             await TestMissingInRegularAndScriptAsync(
                 @"using System;
 
@@ -5446,7 +5485,8 @@ class C
         public async Task DeclarationPatternInSwitchCase_WithReadAndWriteReferences(
             string optionName,
             string fix
-        ) {
+        )
+        {
             await TestInRegularAndScriptAsync(
                 @"class C
 {
@@ -6128,7 +6168,8 @@ class C
         public async Task IfElse_OverwrittenInAllControlFlowPaths(
             string ifBranchCode,
             string elseBranchCode
-        ) {
+        )
+        {
             await TestInRegularAndScriptWithAllOptionsAsync(
                 $@"class C
 {{
@@ -6189,7 +6230,8 @@ class C
         public async Task IfElse_OverwrittenInSomeControlFlowPaths(
             string ifBranchCode,
             string elseBranchCode
-        ) {
+        )
+        {
             await TestMissingInRegularAndScriptWithAllOptionsAsync(
                 $@"class C
 {{
@@ -6220,7 +6262,8 @@ class C
             string condition,
             string ifBranchCode,
             string elseBranchCode
-        ) {
+        )
+        {
             await TestInRegularAndScriptWithAllOptionsAsync(
                 $@"class C
 {{
@@ -6518,7 +6561,8 @@ class C
         public async Task SwitchCase_UnusedNonConstantValue_WithReadsAndWrites(
             string optionName,
             string fix
-        ) {
+        )
+        {
             await TestInRegularAndScriptAsync(
                 @"class C
 {
@@ -6585,7 +6629,8 @@ class C
             string loopHeader,
             string loopBody,
             string? loopFooter = null
-        ) {
+        )
+        {
             await TestMissingInRegularAndScriptWithAllOptionsAsync(
                 $@"class C
 {{
@@ -6658,7 +6703,8 @@ class C
             string fixedLoopHeader,
             string fixedLoopBody,
             string fixedLoopFooter
-        ) {
+        )
+        {
             await TestInRegularAndScriptWithAllOptionsAsync(
                 $@"class C
 {{
@@ -8438,7 +8484,8 @@ class C
         public async Task DeclarationPatternInSwitchCase_WithTrivia_PreferUnusedLocal(
             [CombinatorialValues(LanguageVersion.CSharp8, LanguageVersion.CSharp9)]
                 LanguageVersion languageVersion
-        ) {
+        )
+        {
             await TestMissingInRegularAndScriptAsync(
                 @"class C
 {
@@ -8464,7 +8511,8 @@ class C
         public async Task DeclarationPatternInSwitchCase_WithTrivia_TypePattern(
             [CombinatorialValues(CodeFixTestBehaviors.None, CodeFixTestBehaviors.FixOne)]
                 CodeFixTestBehaviors testBehaviors
-        ) {
+        )
+        {
             var source =
                 @"class C
 {
@@ -9116,7 +9164,8 @@ public class Test
         public async Task DeclarationPatternInSwitchExpressionArm_UnusedLocal_PreferUnusedLocal(
             [CombinatorialValues(LanguageVersion.CSharp8, LanguageVersion.CSharp9)]
                 LanguageVersion languageVersion
-        ) {
+        )
+        {
             await TestDiagnosticMissingAsync(
                 @"class C
 {
@@ -9229,7 +9278,8 @@ public class Test
         public async Task UnusedVarLocalDefinedInPropertySubPattern_PreferDiscard(
             [CombinatorialValues(LanguageVersion.CSharp8, LanguageVersion.CSharp9)]
                 LanguageVersion languageVersion
-        ) {
+        )
+        {
             await TestInRegularAndScriptAsync(
                 @"class C
 {
@@ -9258,7 +9308,8 @@ public class Test
         public async Task UnusedLocalDefinedInPropertySubPattern_PreferUnusedLocal(
             [CombinatorialValues(LanguageVersion.CSharp8, LanguageVersion.CSharp9)]
                 LanguageVersion languageVersion
-        ) {
+        )
+        {
             await TestDiagnosticMissingAsync(
                 @"class C
 {

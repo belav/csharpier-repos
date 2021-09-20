@@ -68,12 +68,8 @@ namespace System.Configuration
         [Obsolete(
             "This class is obsolete, to create a new exception create a System.Configuration.ConfigurationErrorsException"
         )]
-        public ConfigurationException(
-            string message,
-            Exception inner,
-            string filename,
-            int line
-        ) : base(message, inner)
+        public ConfigurationException(string message, Exception inner, string filename, int line)
+            : base(message, inner)
         {
             Init(filename, line);
         }

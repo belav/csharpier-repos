@@ -37,7 +37,8 @@ namespace Microsoft.AspNetCore.DataProtection.XmlEncryption
         private static X509Certificate2? GetCertificateFromStore(
             StoreLocation location,
             string thumbprint
-        ) {
+        )
+        {
             var store = new X509Store(location);
             try
             {

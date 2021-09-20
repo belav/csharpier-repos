@@ -62,7 +62,8 @@ namespace Microsoft.CodeAnalysis.PreferFrameworkType
             ImmutableArray<Diagnostic> diagnostics,
             SyntaxEditor editor,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var generator = document.GetLanguageService<SyntaxGenerator>();
             var semanticModel = await document.GetSemanticModelAsync(cancellationToken)
                 .ConfigureAwait(false);
@@ -78,7 +79,8 @@ namespace Microsoft.CodeAnalysis.PreferFrameworkType
                 if (
                     semanticModel.GetSymbolInfo(node, cancellationToken).Symbol
                     is ITypeSymbol typeSymbol
-                ) {
+                )
+                {
                     var replacementNode = generator.TypeExpression(typeSymbol).WithTriviaFrom(node);
                     editor.ReplaceNode(node, replacementNode);
                 }
@@ -92,11 +94,12 @@ namespace Microsoft.CodeAnalysis.PreferFrameworkType
         {
             public PreferFrameworkTypeCodeAction(
                 Func<CancellationToken, Task<Document>> createChangedDocument
-            ) : base(
-                FeaturesResources.Use_framework_type,
-                createChangedDocument,
-                FeaturesResources.Use_framework_type
-            ) { }
+            )
+                : base(
+                    FeaturesResources.Use_framework_type,
+                    createChangedDocument,
+                    FeaturesResources.Use_framework_type
+                ) { }
         }
     }
 }

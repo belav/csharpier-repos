@@ -265,7 +265,8 @@ namespace System.IO.Ports
                             _handshake == Handshake.RequestToSend
                             || _handshake == Handshake.RequestToSendXOnXOff
                         )
-                    ) {
+                    )
+                    {
                         SetDcbFlag(
                             Interop.Kernel32.DCBFlags.FRTSCONTROL,
                             Interop.Kernel32.DCBRTSFlowControl.RTS_CONTROL_HANDSHAKE
@@ -670,7 +671,8 @@ namespace System.IO.Ports
             bool rtsEnable,
             bool discardNull,
             byte parityReplace
-        ) {
+        )
+        {
             if (portName == null)
             {
                 throw new ArgumentNullException(nameof(portName));
@@ -679,7 +681,8 @@ namespace System.IO.Ports
             if (
                 !portName.StartsWith("COM", StringComparison.OrdinalIgnoreCase)
                 || !uint.TryParse(portName.Substring(3), out uint portNumber)
-            ) {
+            )
+            {
                 throw new ArgumentException(
                     SR.Format(SR.Arg_InvalidSerialPort, portName),
                     nameof(portName)
@@ -732,7 +735,8 @@ namespace System.IO.Ports
                 if (
                     !Interop.Kernel32.GetCommProperties(_handle, ref _commProp)
                     || !Interop.Kernel32.GetCommModemStatus(_handle, ref pinStatus)
-                ) {
+                )
+                {
                     // If the portName they have passed in is a FILE_TYPE_CHAR but not a serial port,
                     // for example "LPT1", this API will fail.  For this reason we handle the error message specially.
                     int errorCode = Marshal.GetLastWin32Error();
@@ -865,7 +869,8 @@ namespace System.IO.Ports
                             _handle,
                             Interop.Kernel32.CommFunctions.CLRDTR
                         )
-                    ) {
+                    )
+                    {
                         int hr = Marshal.GetLastWin32Error();
 
                         // access denied can happen if USB is yanked out. If that happens, we
@@ -881,7 +886,8 @@ namespace System.IO.Ports
                                 || hr == Interop.Errors.ERROR_BAD_COMMAND
                                 || hr == ERROR_DEVICE_REMOVED
                             ) && !disposing
-                        ) {
+                        )
+                        {
                             skipSPAccess = true;
                         }
                         else
@@ -951,7 +957,8 @@ namespace System.IO.Ports
             int numBytes,
             AsyncCallback userCallback,
             object stateObject
-        ) {
+        )
+        {
             CheckReadWriteArguments(array, offset, numBytes);
 
             int oldtimeout = ReadTimeout;
@@ -981,7 +988,8 @@ namespace System.IO.Ports
             int numBytes,
             AsyncCallback userCallback,
             object stateObject
-        ) {
+        )
+        {
             CheckWriteArguments(array, offset, numBytes);
 
             int oldtimeout = WriteTimeout;
@@ -1366,7 +1374,8 @@ namespace System.IO.Ports
             int dataBits,
             StopBits stopBits,
             bool discardNull
-        ) {
+        )
+        {
             // first get the current dcb structure setup
             if (Interop.Kernel32.GetCommState(_handle, ref _dcb) == false)
             {
@@ -1463,7 +1472,8 @@ namespace System.IO.Ports
                     _handshake == Handshake.RequestToSend
                     || _handshake == Handshake.RequestToSendXOnXOff
                 )
-            ) {
+            )
+            {
                 SetDcbFlag(
                     Interop.Kernel32.DCBFlags.FRTSCONTROL,
                     Interop.Kernel32.DCBRTSFlowControl.RTS_CONTROL_HANDSHAKE
@@ -1472,7 +1482,8 @@ namespace System.IO.Ports
             else if (
                 GetDcbFlag(Interop.Kernel32.DCBFlags.FRTSCONTROL)
                 == Interop.Kernel32.DCBRTSFlowControl.RTS_CONTROL_HANDSHAKE
-            ) {
+            )
+            {
                 SetDcbFlag(
                     Interop.Kernel32.DCBFlags.FRTSCONTROL,
                     Interop.Kernel32.DCBRTSFlowControl.RTS_CONTROL_DISABLE
@@ -1514,7 +1525,8 @@ namespace System.IO.Ports
             if (
                 whichFlag == Interop.Kernel32.DCBFlags.FDTRCONTROL
                 || whichFlag == Interop.Kernel32.DCBFlags.FRTSCONTROL
-            ) {
+            )
+            {
                 mask = 0x3;
             }
             else if (whichFlag == Interop.Kernel32.DCBFlags.FDUMMY2)
@@ -1546,7 +1558,8 @@ namespace System.IO.Ports
             if (
                 whichFlag == Interop.Kernel32.DCBFlags.FDTRCONTROL
                 || whichFlag == Interop.Kernel32.DCBFlags.FRTSCONTROL
-            ) {
+            )
+            {
                 mask = 0x3;
             }
             else if (whichFlag == Interop.Kernel32.DCBFlags.FDUMMY2)
@@ -1573,7 +1586,8 @@ namespace System.IO.Ports
             int numBytes,
             AsyncCallback userCallback,
             object stateObject
-        ) {
+        )
+        {
             // Create and store async stream class library specific data in the
             // async result
             SerialStreamAsyncResult asyncResult = new SerialStreamAsyncResult();
@@ -1629,7 +1643,8 @@ namespace System.IO.Ports
             int numBytes,
             AsyncCallback userCallback,
             object stateObject
-        ) {
+        )
+        {
             // Create and store async stream class library specific data in the
             // async result
             SerialStreamAsyncResult asyncResult = new SerialStreamAsyncResult();
@@ -1684,7 +1699,8 @@ namespace System.IO.Ports
             int count,
             NativeOverlapped* overlapped,
             out int hr
-        ) {
+        )
+        {
             // Don't corrupt memory when multiple threads are erroneously writing
             // to this stream simultaneously.
             if (bytes.Length - offset < count)
@@ -1747,7 +1763,8 @@ namespace System.IO.Ports
             int count,
             NativeOverlapped* overlapped,
             out int hr
-        ) {
+        )
+        {
             // Don't corrupt memory when multiple threads are erroneously writing
             // to this stream simultaneously.  (Note that the OS is reading from
             // the array we pass to WriteFile, but if we read beyond the end and
@@ -1812,7 +1829,8 @@ namespace System.IO.Ports
             uint errorCode,
             uint numBytes,
             NativeOverlapped* pOverlapped
-        ) {
+        )
+        {
             // Extract async the result from overlapped structure
             SerialStreamAsyncResult asyncResult =
                 (SerialStreamAsyncResult)ThreadPoolBoundHandle.GetNativeOverlappedState(
@@ -1926,7 +1944,8 @@ namespace System.IO.Ports
                         if (
                             Interop.Kernel32.WaitCommEvent(handle, eventsOccurredPtr, intOverlapped)
                             == false
-                        ) {
+                        )
+                        {
                             int hr = Marshal.GetLastWin32Error();
 
                             // When a device is disconnected unexpectedly from a serial port, there appear to be
@@ -1936,7 +1955,8 @@ namespace System.IO.Ports
                                 hr == Interop.Errors.ERROR_ACCESS_DENIED
                                 || hr == Interop.Errors.ERROR_BAD_COMMAND
                                 || hr == ERROR_DEVICE_REMOVED
-                            ) {
+                            )
+                            {
                                 doCleanup = true;
                                 break;
                             }
@@ -2022,7 +2042,8 @@ namespace System.IO.Ports
                 uint errorCode,
                 uint numBytes,
                 NativeOverlapped* pOverlapped
-            ) {
+            )
+            {
                 // Extract the async result from overlapped structure
                 SerialStreamAsyncResult asyncResult =
                     (SerialStreamAsyncResult)ThreadPoolBoundHandle.GetNativeOverlappedState(
@@ -2046,7 +2067,8 @@ namespace System.IO.Ports
                             | Interop.Kernel32.CommEvents.EV_RXCHAR
                         )
                     ) != 0
-                ) {
+                )
+                {
                     int errors = 0;
                     if (Interop.Kernel32.ClearCommError(handle, ref errors, IntPtr.Zero) == false)
                     {

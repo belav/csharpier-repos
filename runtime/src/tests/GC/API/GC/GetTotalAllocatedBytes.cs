@@ -50,7 +50,8 @@ public class Test
     private static Counts CallGetTotalAllocatedBytes(
         Counts previous,
         out long differenceBetweenPreciseAndImprecise
-    ) {
+    )
+    {
         long precise = GetTotalAllocatedBytes(true);
         long imprecise = GetTotalAllocatedBytes(false);
 

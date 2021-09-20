@@ -270,7 +270,8 @@ namespace System.Xml
             string localName,
             string? namespaceURI,
             IXmlSchemaInfo? schemaInfo
-        ) {
+        )
+        {
             XmlName n = _domNameTable.AddName(prefix, localName, namespaceURI, schemaInfo);
             Debug.Assert((prefix == null) ? (n.Prefix.Length == 0) : (prefix == n.Prefix));
             Debug.Assert(n.LocalName == localName);
@@ -287,7 +288,8 @@ namespace System.Xml
             string localName,
             string? namespaceURI,
             IXmlSchemaInfo? schemaInfo
-        ) {
+        )
+        {
             XmlName? n = _domNameTable.GetName(prefix, localName, namespaceURI, schemaInfo);
             Debug.Assert(
                 n == null || ((prefix == null) ? (n.Prefix.Length == 0) : (prefix == n.Prefix))
@@ -309,7 +311,8 @@ namespace System.Xml
             string localName,
             string? namespaceURI,
             IXmlSchemaInfo? schemaInfo
-        ) {
+        )
+        {
             XmlName xmlName = AddXmlName(prefix, localName, namespaceURI, schemaInfo);
             Debug.Assert(
                 (prefix == null) ? (xmlName.Prefix.Length == 0) : (prefix == xmlName.Prefix)
@@ -751,7 +754,8 @@ namespace System.Xml
             string? publicId,
             string? systemId,
             string? internalSubset
-        ) {
+        )
+        {
             return new XmlDocumentType(name, publicId, systemId, internalSubset, this);
         }
 
@@ -782,7 +786,8 @@ namespace System.Xml
                     if (
                         attdef.Presence == SchemaDeclBase.Use.Default
                         || attdef.Presence == SchemaDeclBase.Use.Fixed
-                    ) {
+                    )
+                    {
                         //build a default attribute and return
                         string attrPrefix;
                         string attrLocalname = attdef.Name.Name;
@@ -834,7 +839,8 @@ namespace System.Xml
             string attrPrefix,
             string attrLocalname,
             string attrNamespaceURI
-        ) {
+        )
+        {
             SetDefaultNamespace(attrPrefix, attrLocalname, ref attrNamespaceURI);
             XmlAttribute defattr = CreateDefaultAttribute(
                 attrPrefix,
@@ -863,7 +869,8 @@ namespace System.Xml
         public virtual XmlProcessingInstruction CreateProcessingInstruction(
             string target,
             string data
-        ) {
+        )
+        {
             return new XmlProcessingInstruction(target, data, this);
         }
 
@@ -872,7 +879,8 @@ namespace System.Xml
             string version,
             string? encoding,
             string? standalone
-        ) {
+        )
+        {
             return new XmlDeclaration(version, encoding, standalone, this);
         }
 
@@ -942,7 +950,8 @@ namespace System.Xml
                             if (
                                 parentType == XmlNodeType.Document
                                 || parentType == XmlNodeType.Attribute
-                            ) {
+                            )
+                            {
                                 return null;
                             }
                             else if (parentType == XmlNodeType.EntityReference)
@@ -995,7 +1004,8 @@ namespace System.Xml
                         if (
                             intnode.ParentNode != null
                             && intnode.ParentNode.NodeType == XmlNodeType.EntityReference
-                        ) {
+                        )
+                        {
                             if (intnode.ParentNode.PreviousSibling != null)
                             {
                                 n = intnode.ParentNode.PreviousSibling;
@@ -1212,7 +1222,8 @@ namespace System.Xml
             string? prefix,
             string localName,
             string? namespaceURI
-        ) {
+        )
+        {
             return new XmlAttribute(AddAttrXmlName(prefix, localName, namespaceURI, null), this);
         }
 
@@ -1220,7 +1231,8 @@ namespace System.Xml
             string? prefix,
             string localName,
             string? namespaceURI
-        ) {
+        )
+        {
             return new XmlUnspecifiedAttribute(prefix, localName, namespaceURI, this);
         }
 
@@ -1228,7 +1240,8 @@ namespace System.Xml
             string? prefix,
             string localName,
             string? namespaceURI
-        ) {
+        )
+        {
             XmlElement elem = new XmlElement(
                 AddXmlName(prefix, localName, namespaceURI, null),
                 true,
@@ -1281,7 +1294,8 @@ namespace System.Xml
             string? prefix,
             string name,
             string? namespaceURI
-        ) {
+        )
+        {
             switch (type)
             {
                 case XmlNodeType.Element:
@@ -1725,7 +1739,8 @@ namespace System.Xml
             string? oldValue,
             string? newValue,
             XmlNodeChangedAction action
-        ) {
+        )
+        {
             _reportValidity = false;
 
             switch (action)
@@ -1833,7 +1848,8 @@ namespace System.Xml
             string attrPrefix,
             string attrLocalname,
             string attrNamespaceURI
-        ) {
+        )
+        {
             SchemaInfo? schInfo = DtdSchemaInfo;
             SchemaElementDecl? ed = GetSchemaElementDecl(elem);
             if (ed != null && ed.AttDefs != null)
@@ -1844,7 +1860,8 @@ namespace System.Xml
                     if (
                         attdef.Presence == SchemaDeclBase.Use.Default
                         || attdef.Presence == SchemaDeclBase.Use.Fixed
-                    ) {
+                    )
+                    {
                         if (attdef.Name.Name == attrLocalname)
                         {
                             if (
@@ -1856,7 +1873,8 @@ namespace System.Xml
                                     schInfo.SchemaType != SchemaType.DTD
                                     && attdef.Name.Namespace == attrNamespaceURI
                                 )
-                            ) {
+                            )
+                            {
                                 //find a def attribute with the same name, build a default attribute and return
                                 XmlAttribute defattr = PrepareDefaultAttribute(
                                     attdef,

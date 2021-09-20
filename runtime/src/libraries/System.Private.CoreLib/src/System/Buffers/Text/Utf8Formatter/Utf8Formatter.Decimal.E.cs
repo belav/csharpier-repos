@@ -13,7 +13,8 @@ namespace System.Buffers.Text
             out int bytesWritten,
             byte precision,
             byte exponentSymbol
-        ) {
+        )
+        {
             const int NumExponentDigits = 3;
 
             int scale = number.Scale;

@@ -27,7 +27,8 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeRefactorings
         protected override IEnumerable<SyntaxNode> ExtractNodesSimple(
             SyntaxNode? node,
             ISyntaxFactsService syntaxFacts
-        ) {
+        )
+        {
             if (node == null)
             {
                 yield break;
@@ -51,7 +52,8 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeRefactorings
                 var declaration = declarator.Parent;
                 if (
                     declaration?.Parent is LocalDeclarationStatementSyntax localDeclarationStatement
-                ) {
+                )
+                {
                     var variables = syntaxFacts.GetVariablesOfLocalDeclarationStatement(
                         localDeclarationStatement
                     );

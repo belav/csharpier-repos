@@ -39,7 +39,8 @@ namespace System.Web.Http.Batch
                     HttpMethod.Post,
                     baseAddress + "$batch"
                 )
-            ) {
+            )
+            {
                 batchRequest.Content = new MultipartContent("mixed")
                 {
                     new HttpMessageContent(
@@ -61,7 +62,8 @@ namespace System.Web.Http.Batch
                         batchRequest,
                         CancellationToken.None
                     )
-                ) {
+                )
+                {
                     MultipartStreamProvider streamProvider =
                         await batchResponse.Content.ReadAsMultipartAsync();
                     foreach (HttpContent content in streamProvider.Contents)
@@ -97,7 +99,8 @@ namespace System.Web.Http.Batch
             public override async Task<IList<HttpRequestMessage>> ParseBatchRequestsAsync(
                 HttpRequestMessage request,
                 CancellationToken cancellationToken
-            ) {
+            )
+            {
                 IList<HttpRequestMessage> subRequests = await base.ParseBatchRequestsAsync(
                     request,
                     cancellationToken

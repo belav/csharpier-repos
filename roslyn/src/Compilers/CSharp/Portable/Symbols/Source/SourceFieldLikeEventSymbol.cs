@@ -30,15 +30,17 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             SyntaxTokenList modifiers,
             VariableDeclaratorSyntax declaratorSyntax,
             BindingDiagnosticBag diagnostics
-        ) : base(
-            containingType,
-            declaratorSyntax,
-            modifiers,
-            isFieldLike: true,
-            interfaceSpecifierSyntaxOpt: null,
-            nameTokenSyntax: declaratorSyntax.Identifier,
-            diagnostics: diagnostics
-        ) {
+        )
+            : base(
+                containingType,
+                declaratorSyntax,
+                modifiers,
+                isFieldLike: true,
+                interfaceSpecifierSyntaxOpt: null,
+                nameTokenSyntax: declaratorSyntax.Identifier,
+                diagnostics: diagnostics
+            )
+        {
             Debug.Assert(declaratorSyntax.Parent is object);
 
             _name = declaratorSyntax.Identifier.ValueText;
@@ -191,7 +193,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
 
         private SourceEventFieldSymbol MakeAssociatedField(
             VariableDeclaratorSyntax declaratorSyntax
-        ) {
+        )
+        {
             var field = new SourceEventFieldSymbol(
                 this,
                 declaratorSyntax,
@@ -205,7 +208,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
         internal override void ForceComplete(
             SourceLocation? locationOpt,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             if ((object?)this.AssociatedField != null)
             {
                 this.AssociatedField.ForceComplete(locationOpt, cancellationToken);

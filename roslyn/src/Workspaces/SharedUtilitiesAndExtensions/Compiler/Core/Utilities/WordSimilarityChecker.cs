@@ -95,7 +95,8 @@ namespace Roslyn.Utilities
             string originalText,
             string candidateText,
             out double similarityWeight
-        ) {
+        )
+        {
             return AreSimilar(
                 originalText,
                 candidateText,
@@ -114,7 +115,8 @@ namespace Roslyn.Utilities
             string candidateText,
             bool substringsAreSimilar,
             out double similarityWeight
-        ) {
+        )
+        {
             var checker = Allocate(originalText, substringsAreSimilar);
             var result = checker.AreSimilar(candidateText, out similarityWeight);
             checker.Free();
@@ -168,7 +170,8 @@ namespace Roslyn.Utilities
                 if (
                     _substringsAreSimilar
                     && candidateText.IndexOf(_source, StringComparison.OrdinalIgnoreCase) >= 0
-                ) {
+                )
+                {
                     similarityWeight = _threshold;
                 }
                 else

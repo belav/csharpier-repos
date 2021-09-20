@@ -14,7 +14,8 @@ namespace Microsoft.CodeAnalysis.Serialization
             SerializableOptionSet options,
             ObjectWriter writer,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             cancellationToken.ThrowIfCancellationRequested();
 
             options.Serialize(writer, cancellationToken);
@@ -23,7 +24,8 @@ namespace Microsoft.CodeAnalysis.Serialization
         private SerializableOptionSet DeserializeOptionSet(
             ObjectReader reader,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             cancellationToken.ThrowIfCancellationRequested();
 
             var optionService = _workspaceServices.GetRequiredService<IOptionService>();

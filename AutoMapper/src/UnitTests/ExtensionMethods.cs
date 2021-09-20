@@ -32,7 +32,8 @@ namespace AutoMapper.UnitTests
         public static int GetValue(this object obj) => 12;
         public static string GetSimpleName(
             this When_null_is_passed_to_an_extension_method.Bar source
-        ) {
+        )
+        {
             if (source == null)
                 throw new ArgumentNullException("source");
             return "SimpleName";
@@ -130,7 +131,8 @@ namespace AutoMapper.UnitTests
     {
         public static When_extension_method_returns_object.Nested GetInsideThing(
             this When_extension_method_returns_object.Source source
-        ) {
+        )
+        {
             return new When_extension_method_returns_object.Nested
             {
                 Property = source.Value1 + 10

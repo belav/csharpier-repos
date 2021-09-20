@@ -85,7 +85,8 @@ namespace System.Globalization
             char* buffer = stackalloc char[ICU_ULOC_FULLNAME_CAPACITY];
             if (
                 !Interop.Globalization.GetLocaleName(localeName, buffer, ICU_ULOC_FULLNAME_CAPACITY)
-            ) {
+            )
+            {
                 windowsName = null;
                 return false; // fail
             }
@@ -97,7 +98,8 @@ namespace System.Globalization
 
         internal static unsafe bool GetDefaultLocaleName(
             [NotNullWhen(true)] out string? windowsName
-        ) {
+        )
+        {
             // Get the default (system) locale name from ICU
             char* buffer = stackalloc char[ICU_ULOC_FULLNAME_CAPACITY];
             if (!Interop.Globalization.GetDefaultLocaleName(buffer, ICU_ULOC_FULLNAME_CAPACITY))
@@ -451,7 +453,8 @@ namespace System.Globalization
                     if (
                         (enumNeutrals && ci.IsNeutralCulture)
                         || (enumSpecificss && !ci.IsNeutralCulture)
-                    ) {
+                    )
+                    {
                         list.Add(ci);
                     }
                 }
@@ -504,7 +507,8 @@ namespace System.Globalization
                     || (uint)(c - 'a') <= ('z' - 'a')
                     || (uint)(c - '0') <= ('9' - '0')
                     || c == '\0'
-                ) {
+                )
+                {
                     continue;
                 }
 

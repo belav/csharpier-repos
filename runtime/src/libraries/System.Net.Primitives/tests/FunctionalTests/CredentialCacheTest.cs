@@ -84,7 +84,8 @@ namespace System.Net.Primitives.Functional.Tests
         private static CredentialCacheCount CreateUriCredentialCacheCount(
             CredentialCache cc = null,
             int count = 0
-        ) {
+        )
+        {
             cc = cc ?? new CredentialCache();
 
             cc.Add(uriPrefix1, authenticationType1, credential1);
@@ -106,7 +107,8 @@ namespace System.Net.Primitives.Functional.Tests
         private static CredentialCacheCount CreateHostPortCredentialCacheCount(
             CredentialCache cc = null,
             int count = 0
-        ) {
+        )
+        {
             cc = cc ?? new CredentialCache();
 
             cc.Add(host1, port1, authenticationType1, credential1);
@@ -464,7 +466,8 @@ namespace System.Net.Primitives.Functional.Tests
         public static void GetEnumerator_MoveNextSynchronization_Invalid(
             CredentialCache cc,
             bool addUri
-        ) {
+        )
+        {
             //An InvalidOperationException is thrown when moving the enumerator
             //when a credential is added to the cache after getting the enumerator
             IEnumerator enumerator = cc.GetEnumerator();
@@ -486,7 +489,8 @@ namespace System.Net.Primitives.Functional.Tests
         public static void GetEnumerator_CurrentSynchronization_Invalid(
             CredentialCache cc,
             bool addUri
-        ) {
+        )
+        {
             //An InvalidOperationException is thrown when getting the current enumerated object
             //when a credential is added to the cache after getting the enumerator
             IEnumerator enumerator = cc.GetEnumerator();
@@ -555,7 +559,8 @@ namespace System.Net.Primitives.Functional.Tests
             if (
                 string.Equals(authType, authenticationTypeBasic, StringComparison.OrdinalIgnoreCase)
                 && (nc == CredentialCache.DefaultNetworkCredentials)
-            ) {
+            )
+            {
                 return;
             }
 
@@ -568,7 +573,8 @@ namespace System.Net.Primitives.Functional.Tests
                     authenticationTypeDigest,
                     StringComparison.OrdinalIgnoreCase
                 ) && (nc == CredentialCache.DefaultNetworkCredentials)
-            ) {
+            )
+            {
                 if (PlatformDetection.IsNetFramework)
                 {
                     // In .NET Framework, when authType == Digest, if WDigestAvailable == true, it will pass the validation.
@@ -597,7 +603,8 @@ namespace System.Net.Primitives.Functional.Tests
         public static void Add_UriCustomAuthTypeWithDefaultCredential_ThrowsArgumentException(
             string authType,
             NetworkCredential nc
-        ) {
+        )
+        {
             CredentialCache cc = new CredentialCache();
             AssertExtensions.Throws<ArgumentException>(
                 "authType",
@@ -611,12 +618,14 @@ namespace System.Net.Primitives.Functional.Tests
         public static void Add_HostPortAuthenticationType_Success(
             string authType,
             NetworkCredential nc
-        ) {
+        )
+        {
             // Default credentials cannot be supplied for the Basic authentication scheme.
             if (
                 string.Equals(authType, "Basic", StringComparison.OrdinalIgnoreCase)
                 && (nc == CredentialCache.DefaultNetworkCredentials)
-            ) {
+            )
+            {
                 return;
             }
 
@@ -629,7 +638,8 @@ namespace System.Net.Primitives.Functional.Tests
                     authenticationTypeDigest,
                     StringComparison.OrdinalIgnoreCase
                 ) && (nc == CredentialCache.DefaultNetworkCredentials)
-            ) {
+            )
+            {
                 if (PlatformDetection.IsNetFramework)
                 {
                     // In .NET Framework, when authType == Digest, if WDigestAvailable == true, it will pass the validation.
@@ -658,7 +668,8 @@ namespace System.Net.Primitives.Functional.Tests
         public static void Add_HostPortCustomAuthTypeWithDefaultCredential_ThrowsArgumentException(
             string authType,
             NetworkCredential nc
-        ) {
+        )
+        {
             CredentialCache cc = new CredentialCache();
             AssertExtensions.Throws<ArgumentException>(
                 "authenticationType",

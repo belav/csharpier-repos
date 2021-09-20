@@ -115,7 +115,8 @@ namespace System.Runtime.Serialization.Formatters.Tests
             this IEnumerable @this,
             IEnumerable other,
             bool isSamePlatform
-        ) {
+        )
+        {
             if (@this == null || other == null)
             {
                 Assert.Equal(@this, other);
@@ -153,7 +154,8 @@ namespace System.Runtime.Serialization.Formatters.Tests
             this WeakReference @this,
             WeakReference other,
             bool isSamePlatform
-        ) {
+        )
+        {
             if (@this == null && other == null)
                 return;
 
@@ -216,7 +218,8 @@ namespace System.Runtime.Serialization.Formatters.Tests
             this StreamingContext @this,
             StreamingContext other,
             bool isSamePlatform
-        ) {
+        )
+        {
             Assert.Equal(@this.State, other.State);
             CheckEquals(@this.Context, other.Context, isSamePlatform);
         }
@@ -225,7 +228,8 @@ namespace System.Runtime.Serialization.Formatters.Tests
             this CookieContainer @this,
             CookieContainer other,
             bool isSamePlatform
-        ) {
+        )
+        {
             if (@this == null && other == null)
                 return;
 
@@ -314,7 +318,8 @@ namespace System.Runtime.Serialization.Formatters.Tests
             this DictionaryEntry @this,
             DictionaryEntry other,
             bool isSamePlatform
-        ) {
+        )
+        {
             CheckEquals(@this.Key, other.Key, isSamePlatform);
             CheckEquals(@this.Value, other.Value, isSamePlatform);
         }
@@ -323,7 +328,8 @@ namespace System.Runtime.Serialization.Formatters.Tests
             this StringDictionary @this,
             StringDictionary other,
             bool isSamePlatform
-        ) {
+        )
+        {
             if (@this == null && other == null)
                 return;
 
@@ -369,7 +375,8 @@ namespace System.Runtime.Serialization.Formatters.Tests
             this Dictionary<int, string> @this,
             Dictionary<int, string> other,
             bool isSamePlatform
-        ) {
+        )
+        {
             if (@this == null && other == null)
                 return;
 
@@ -390,7 +397,8 @@ namespace System.Runtime.Serialization.Formatters.Tests
             this PointEqualityComparer @this,
             PointEqualityComparer other,
             bool isSamePlatform
-        ) {
+        )
+        {
             if (@this == null && other == null)
                 return;
 
@@ -402,7 +410,8 @@ namespace System.Runtime.Serialization.Formatters.Tests
             this HashSet<Point> @this,
             HashSet<Point> other,
             bool isSamePlatform
-        ) {
+        )
+        {
             if (@this == null && other == null)
                 return;
 
@@ -417,7 +426,8 @@ namespace System.Runtime.Serialization.Formatters.Tests
             this LinkedListNode<Point> @this,
             LinkedListNode<Point> other,
             bool isSamePlatform
-        ) {
+        )
+        {
             if (@this == null && other == null)
                 return;
 
@@ -430,7 +440,8 @@ namespace System.Runtime.Serialization.Formatters.Tests
             this LinkedList<Point> @this,
             LinkedList<Point> other,
             bool isSamePlatform
-        ) {
+        )
+        {
             if (@this == null && other == null)
                 return;
 
@@ -469,7 +480,8 @@ namespace System.Runtime.Serialization.Formatters.Tests
             this SortedList<int, Point> @this,
             SortedList<int, Point> other,
             bool isSamePlatform
-        ) {
+        )
+        {
             if (@this == null && other == null)
                 return;
 
@@ -487,7 +499,8 @@ namespace System.Runtime.Serialization.Formatters.Tests
             this SortedSet<Point> @this,
             SortedSet<Point> other,
             bool isSamePlatform
-        ) {
+        )
+        {
             if (@this == null && other == null)
                 return;
 
@@ -535,7 +548,8 @@ namespace System.Runtime.Serialization.Formatters.Tests
             this Collection<int> @this,
             Collection<int> other,
             bool isSamePlatform
-        ) {
+        )
+        {
             if (@this == null && other == null)
                 return;
 
@@ -549,7 +563,8 @@ namespace System.Runtime.Serialization.Formatters.Tests
             this ObservableCollection<int> @this,
             ObservableCollection<int> other,
             bool isSamePlatform
-        ) {
+        )
+        {
             if (@this == null && other == null)
                 return;
 
@@ -563,7 +578,8 @@ namespace System.Runtime.Serialization.Formatters.Tests
             this ReadOnlyCollection<int> @this,
             ReadOnlyCollection<int> other,
             bool isSamePlatform
-        ) {
+        )
+        {
             if (@this == null && other == null)
                 return;
 
@@ -577,7 +593,8 @@ namespace System.Runtime.Serialization.Formatters.Tests
             this ReadOnlyDictionary<int, string> @this,
             ReadOnlyDictionary<int, string> other,
             bool isSamePlatform
-        ) {
+        )
+        {
             if (@this == null && other == null)
                 return;
 
@@ -597,7 +614,8 @@ namespace System.Runtime.Serialization.Formatters.Tests
             this ReadOnlyObservableCollection<int> @this,
             ReadOnlyObservableCollection<int> other,
             bool isSamePlatform
-        ) {
+        )
+        {
             if (@this == null && other == null)
                 return;
 
@@ -640,7 +658,8 @@ namespace System.Runtime.Serialization.Formatters.Tests
             this HybridDictionary @this,
             HybridDictionary other,
             bool isSamePlatform
-        ) {
+        )
+        {
             if (@this == null && other == null)
                 return;
 
@@ -663,7 +682,8 @@ namespace System.Runtime.Serialization.Formatters.Tests
             this ListDictionary @this,
             ListDictionary other,
             bool isSamePlatform
-        ) {
+        )
+        {
             if (@this == null && other == null)
                 return;
 
@@ -686,7 +706,8 @@ namespace System.Runtime.Serialization.Formatters.Tests
             this NameValueCollection @this,
             NameValueCollection other,
             bool isSamePlatform
-        ) {
+        )
+        {
             if (@this == null && other == null)
                 return;
 
@@ -706,7 +727,8 @@ namespace System.Runtime.Serialization.Formatters.Tests
             this OrderedDictionary @this,
             OrderedDictionary other,
             bool isSamePlatform
-        ) {
+        )
+        {
             if (@this == null && other == null)
                 return;
 
@@ -727,7 +749,8 @@ namespace System.Runtime.Serialization.Formatters.Tests
             this StringCollection @this,
             StringCollection other,
             bool isSamePlatform
-        ) {
+        )
+        {
             if (@this == null && other == null)
                 return;
 
@@ -755,7 +778,8 @@ namespace System.Runtime.Serialization.Formatters.Tests
             this BindingList<int> @this,
             BindingList<int> other,
             bool isSamePlatform
-        ) {
+        )
+        {
             if (@this == null && other == null)
                 return;
 
@@ -773,7 +797,8 @@ namespace System.Runtime.Serialization.Formatters.Tests
             this BindingList<Point> @this,
             BindingList<Point> other,
             bool isSamePlatform
-        ) {
+        )
+        {
             if (@this == null && other == null)
                 return;
 
@@ -791,7 +816,8 @@ namespace System.Runtime.Serialization.Formatters.Tests
             this PropertyCollection @this,
             PropertyCollection other,
             bool isSamePlatform
-        ) {
+        )
+        {
             if (@this == null && other == null)
                 return;
 
@@ -860,7 +886,8 @@ namespace System.Runtime.Serialization.Formatters.Tests
             this CookieCollection @this,
             CookieCollection other,
             bool isSamePlatform
-        ) {
+        )
+        {
             if (@this == null && other == null)
                 return;
 
@@ -874,7 +901,8 @@ namespace System.Runtime.Serialization.Formatters.Tests
             this BasicISerializableObject @this,
             BasicISerializableObject other,
             bool isSamePlatform
-        ) {
+        )
+        {
             if (@this == null && other == null)
                 return;
 
@@ -886,7 +914,8 @@ namespace System.Runtime.Serialization.Formatters.Tests
             this DerivedISerializableWithNonPublicDeserializationCtor @this,
             DerivedISerializableWithNonPublicDeserializationCtor other,
             bool isSamePlatform
-        ) {
+        )
+        {
             if (@this == null && other == null)
                 return;
 
@@ -908,7 +937,8 @@ namespace System.Runtime.Serialization.Formatters.Tests
 
         private static Dictionary<int, Graph<int>> InvertDictionary(
             Dictionary<Graph<int>, int> dict
-        ) {
+        )
+        {
             var ret = new Dictionary<int, Graph<int>>();
             foreach (KeyValuePair<Graph<int>, int> kv in dict)
             {
@@ -926,7 +956,8 @@ namespace System.Runtime.Serialization.Formatters.Tests
         /// <returns>returns ((id -> node), (node -> node[]))</returns>
         private static Tuple<Dictionary<int, Graph<int>>, List<List<int>>> FlattenGraph(
             Graph<int> n
-        ) {
+        )
+        {
             // ref -> id
             var nodes = new Dictionary<Graph<int>, int>(ReferenceEqualityComparer.Instance);
             GetIdsForGraphDFS(n, nodes);
@@ -970,7 +1001,8 @@ namespace System.Runtime.Serialization.Formatters.Tests
             this ArraySegment<int> @this,
             ArraySegment<int> other,
             bool isSamePlatform
-        ) {
+        )
+        {
             Assert.True((@this.Array != null) == (other.Array != null));
             Assert.Equal(@this.Count, other.Count);
             Assert.Equal(@this.Offset, other.Offset);
@@ -984,7 +1016,8 @@ namespace System.Runtime.Serialization.Formatters.Tests
             this ObjectWithArrays @this,
             ObjectWithArrays other,
             bool isSamePlatform
-        ) {
+        )
+        {
             if (@this == null && other == null)
                 return;
 
@@ -1002,7 +1035,8 @@ namespace System.Runtime.Serialization.Formatters.Tests
             this ObjectWithIntStringUShortUIntULongAndCustomObjectFields @this,
             ObjectWithIntStringUShortUIntULongAndCustomObjectFields other,
             bool isSamePlatform
-        ) {
+        )
+        {
             if (@this == null && other == null)
                 return;
 
@@ -1045,7 +1079,8 @@ namespace System.Runtime.Serialization.Formatters.Tests
             this SealedObjectWithIntStringFields @this,
             SealedObjectWithIntStringFields other,
             bool isSamePlatform
-        ) {
+        )
+        {
             if (@this == null && other == null)
                 return;
 
@@ -1060,7 +1095,8 @@ namespace System.Runtime.Serialization.Formatters.Tests
             this SimpleKeyedCollection @this,
             SimpleKeyedCollection other,
             bool isSamePlatform
-        ) {
+        )
+        {
             if (@this == null && other == null)
                 return;
 
@@ -1118,7 +1154,8 @@ namespace System.Runtime.Serialization.Formatters.Tests
             this Tuple<int, string> @this,
             Tuple<int, string> other,
             bool isSamePlatform
-        ) {
+        )
+        {
             if (@this == null && other == null)
                 return;
 
@@ -1132,7 +1169,8 @@ namespace System.Runtime.Serialization.Formatters.Tests
             this Tuple<int, string, uint> @this,
             Tuple<int, string, uint> other,
             bool isSamePlatform
-        ) {
+        )
+        {
             if (@this == null && other == null)
                 return;
 
@@ -1147,7 +1185,8 @@ namespace System.Runtime.Serialization.Formatters.Tests
             this Tuple<int, string, uint, long> @this,
             Tuple<int, string, uint, long> other,
             bool isSamePlatform
-        ) {
+        )
+        {
             if (@this == null && other == null)
                 return;
 
@@ -1163,7 +1202,8 @@ namespace System.Runtime.Serialization.Formatters.Tests
             this Tuple<int, string, uint, long, double> @this,
             Tuple<int, string, uint, long, double> other,
             bool isSamePlatform
-        ) {
+        )
+        {
             if (@this == null && other == null)
                 return;
 
@@ -1180,7 +1220,8 @@ namespace System.Runtime.Serialization.Formatters.Tests
             this Tuple<int, string, uint, long, double, float> @this,
             Tuple<int, string, uint, long, double, float> other,
             bool isSamePlatform
-        ) {
+        )
+        {
             if (@this == null && other == null)
                 return;
 
@@ -1198,7 +1239,8 @@ namespace System.Runtime.Serialization.Formatters.Tests
             this Tuple<int, string, uint, long, double, float, decimal> @this,
             Tuple<int, string, uint, long, double, float, decimal> other,
             bool isSamePlatform
-        ) {
+        )
+        {
             if (@this == null && other == null)
                 return;
 
@@ -1217,7 +1259,8 @@ namespace System.Runtime.Serialization.Formatters.Tests
             this Tuple<int, string, uint, long, double, float, decimal, Tuple<Tuple<int>>> @this,
             Tuple<int, string, uint, long, double, float, decimal, Tuple<Tuple<int>>> other,
             bool isSamePlatform
-        ) {
+        )
+        {
             if (@this == null && other == null)
                 return;
 
@@ -1296,14 +1339,16 @@ namespace System.Runtime.Serialization.Formatters.Tests
                         || @this is ThreadAbortException
                     ) && !isSamePlatform
                 )
-            ) {
+            )
+            {
                 if (
                     !(
                         @this is ActiveDirectoryServerDownException
                         || @this is SocketException
                         || @this is NetworkInformationException
                     )
-                ) {
+                )
+                {
                     Assert.Equal(@this.Message, other.Message);
                 }
             }
@@ -1326,7 +1371,8 @@ namespace System.Runtime.Serialization.Formatters.Tests
                         (@this is NetworkInformationException || @this is SocketException)
                         && !isSamePlatform
                     )
-                ) {
+                )
+                {
                     Assert.Equal(@this.StackTrace, other.StackTrace);
                 }
 
@@ -1339,14 +1385,16 @@ namespace System.Runtime.Serialization.Formatters.Tests
                             || @this is ThreadAbortException
                         ) && !isSamePlatform
                     )
-                ) {
+                )
+                {
                     if (
                         !(
                             @this is ActiveDirectoryServerDownException
                             || @this is NetworkInformationException
                             || @this is SocketException
                         )
-                    ) {
+                    )
+                    {
                         Assert.Equal(@this.ToString(), other.ToString());
                     }
                 }
@@ -1358,7 +1406,8 @@ namespace System.Runtime.Serialization.Formatters.Tests
                     (@this is NetworkInformationException || @this is SocketException)
                     && !isSamePlatform
                 )
-            ) {
+            )
+            {
                 Assert.Equal(@this.HResult, other.HResult);
             }
         }
@@ -1367,7 +1416,8 @@ namespace System.Runtime.Serialization.Formatters.Tests
             this AggregateException @this,
             AggregateException other,
             bool isSamePlatform
-        ) {
+        )
+        {
             if (@this == null && other == null)
                 return;
 
@@ -1382,7 +1432,8 @@ namespace System.Runtime.Serialization.Formatters.Tests
             this JsonException @this,
             JsonException other,
             bool isSamePlatform
-        ) {
+        )
+        {
             if (@this == null && other == null)
                 return;
 

@@ -118,15 +118,16 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Workspaces
             ParseOptions parseOptions,
             string assemblyName,
             params MetadataReference[] references
-        ) : this(
-            languageServices,
-            compilationOptions,
-            parseOptions,
-            assemblyName: assemblyName,
-            projectName: assemblyName,
-            references: references,
-            documents: Array.Empty<TestHostDocument>()
-        ) { }
+        )
+            : this(
+                languageServices,
+                compilationOptions,
+                parseOptions,
+                assemblyName: assemblyName,
+                projectName: assemblyName,
+                references: references,
+                documents: Array.Empty<TestHostDocument>()
+            ) { }
 
         internal TestHostProject(
             HostLanguageServices languageServices,
@@ -143,7 +144,8 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Workspaces
             string filePath = null,
             IList<AnalyzerReference> analyzerReferences = null,
             string defaultNamespace = null
-        ) {
+        )
+        {
             _assemblyName = assemblyName;
             _name = projectName;
             _id = ProjectId.CreateNewId(debugName: this.AssemblyName);
@@ -180,21 +182,22 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Workspaces
             IEnumerable<AnalyzerReference> analyzerReferences = null,
             string assemblyName = null,
             string defaultNamespace = null
-        ) : this(
-            workspace,
-            name,
-            language,
-            compilationOptions,
-            parseOptions,
-            SpecializedCollections.SingletonEnumerable(document),
-            SpecializedCollections.EmptyEnumerable<TestHostDocument>(),
-            SpecializedCollections.EmptyEnumerable<TestHostDocument>(),
-            projectReferences,
-            metadataReferences,
-            analyzerReferences,
-            assemblyName,
-            defaultNamespace
-        ) { }
+        )
+            : this(
+                workspace,
+                name,
+                language,
+                compilationOptions,
+                parseOptions,
+                SpecializedCollections.SingletonEnumerable(document),
+                SpecializedCollections.EmptyEnumerable<TestHostDocument>(),
+                SpecializedCollections.EmptyEnumerable<TestHostDocument>(),
+                projectReferences,
+                metadataReferences,
+                analyzerReferences,
+                assemblyName,
+                defaultNamespace
+            ) { }
 
         public TestHostProject(
             TestWorkspace workspace,
@@ -210,7 +213,8 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Workspaces
             IEnumerable<AnalyzerReference> analyzerReferences = null,
             string assemblyName = null,
             string defaultNamespace = null
-        ) {
+        )
+        {
             _name = name ?? "TestProject";
 
             _id = ProjectId.CreateNewId(debugName: this.Name);

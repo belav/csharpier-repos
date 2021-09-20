@@ -10,13 +10,15 @@ namespace Microsoft.Win32
     {
         public static System.Security.AccessControl.RegistrySecurity GetAccessControl(
             this Microsoft.Win32.RegistryKey key
-        ) {
+        )
+        {
             throw null;
         }
         public static System.Security.AccessControl.RegistrySecurity GetAccessControl(
             this Microsoft.Win32.RegistryKey key,
             System.Security.AccessControl.AccessControlSections includeSections
-        ) {
+        )
+        {
             throw null;
         }
         public static void SetAccessControl(

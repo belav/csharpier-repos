@@ -73,7 +73,8 @@ namespace System.IO.Pipes
             int inBufferSize,
             int outBufferSize,
             HandleInheritability inheritability
-        ) {
+        )
+        {
             Create(
                 pipeName,
                 direction,
@@ -100,7 +101,8 @@ namespace System.IO.Pipes
             PipeSecurity? pipeSecurity,
             HandleInheritability inheritability,
             PipeAccessRights additionalAccessRights
-        ) {
+        )
+        {
             Debug.Assert(pipeName != null && pipeName.Length != 0, "fullPipeName is null or empty");
             Debug.Assert(
                 direction >= PipeDirection.In && direction <= PipeDirection.InOut,
@@ -128,7 +130,8 @@ namespace System.IO.Pipes
                     @"\\.\pipe\anonymous",
                     StringComparison.OrdinalIgnoreCase
                 )
-            ) {
+            )
+            {
                 throw new ArgumentOutOfRangeException(
                     nameof(pipeName),
                     SR.ArgumentOutOfRange_AnonymousReserved
@@ -245,7 +248,8 @@ namespace System.IO.Pipes
                     if (
                         errorCode == Interop.Errors.ERROR_PIPE_CONNECTED
                         && State == PipeState.Connected
-                    ) {
+                    )
+                    {
                         throw new InvalidOperationException(
                             SR.InvalidOperation_PipeAlreadyConnected
                         );
@@ -313,7 +317,8 @@ namespace System.IO.Pipes
                     userName,
                     UserNameMaxLength
                 )
-            ) {
+            )
+            {
                 return new string(userName);
             }
 

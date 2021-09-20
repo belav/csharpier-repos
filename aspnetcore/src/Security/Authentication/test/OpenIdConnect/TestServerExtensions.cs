@@ -20,7 +20,8 @@ namespace Microsoft.AspNetCore.Authentication.Test.OpenIdConnect
             this TestServer server,
             string url,
             string cookieHeader
-        ) {
+        )
+        {
             return SendAsync(server, new HttpRequestMessage(HttpMethod.Get, url), cookieHeader);
         }
 
@@ -28,7 +29,8 @@ namespace Microsoft.AspNetCore.Authentication.Test.OpenIdConnect
             this TestServer server,
             HttpRequestMessage request,
             string cookieHeader
-        ) {
+        )
+        {
             if (!string.IsNullOrEmpty(cookieHeader))
             {
                 request.Headers.Add("Cookie", cookieHeader);
@@ -51,7 +53,8 @@ namespace Microsoft.AspNetCore.Authentication.Test.OpenIdConnect
                 transaction.Response.Content != null
                 && transaction.Response.Content.Headers.ContentType != null
                 && transaction.Response.Content.Headers.ContentType.MediaType == "text/xml"
-            ) {
+            )
+            {
                 transaction.ResponseElement = XElement.Parse(transaction.ResponseText);
             }
 

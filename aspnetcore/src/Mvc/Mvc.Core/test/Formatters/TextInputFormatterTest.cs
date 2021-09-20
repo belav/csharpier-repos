@@ -71,7 +71,8 @@ namespace Microsoft.AspNetCore.Mvc.Formatters
         [InlineData("invalid")]
         public void SelectCharacterEncoding_ReturnsNull_IfItCanNotUnderstandContentTypeEncoding(
             string charset
-        ) {
+        )
+        {
             // Arrange
             var formatter = new TestFormatter();
             formatter.SupportedEncodings.Add(Encoding.UTF32);
@@ -123,7 +124,8 @@ namespace Microsoft.AspNetCore.Mvc.Formatters
         [InlineData("unicode-2-0-utf-8")]
         public void SelectCharacterEncoding_ReturnsUTF8Encoding_IfContentTypeIsAnAlias(
             string charset
-        ) {
+        )
+        {
             // Arrange
             var formatter = new TestFormatter();
             formatter.SupportedEncodings.Add(Encoding.UTF32);
@@ -159,7 +161,8 @@ namespace Microsoft.AspNetCore.Mvc.Formatters
         [InlineData("us")]
         public void SelectCharacterEncoding_ReturnsAsciiEncoding_IfContentTypeIsAnAlias(
             string charset
-        ) {
+        )
+        {
             // Arrange
             var formatter = new TestFormatter();
             formatter.SupportedEncodings.Add(Encoding.UTF32);
@@ -195,7 +198,8 @@ namespace Microsoft.AspNetCore.Mvc.Formatters
         [InlineData("application/json; version=(garbage); charset=utf-32")]
         public void SelectCharacterEncoding_ReturnsFirstEncoding_IfContentTypeIsMissingInvalidOrDoesNotHaveEncoding(
             string contentType
-        ) {
+        )
+        {
             // Arrange
             var formatter = new TestFormatter();
             formatter.SupportedEncodings.Add(Encoding.UTF8);
@@ -239,7 +243,8 @@ namespace Microsoft.AspNetCore.Mvc.Formatters
             public override Task<InputFormatterResult> ReadRequestBodyAsync(
                 InputFormatterContext context,
                 Encoding encoding
-            ) {
+            )
+            {
                 return InputFormatterResult.SuccessAsync(_object);
             }
 

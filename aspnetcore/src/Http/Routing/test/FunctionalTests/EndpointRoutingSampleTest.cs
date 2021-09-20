@@ -180,7 +180,8 @@ namespace Microsoft.AspNetCore.Routing.FunctionalTests
         public async Task GeneratesLink_ToEndpointWithSingleAsteriskCatchAllParameter_EncodesValue(
             string url,
             string expected
-        ) {
+        )
+        {
             // Arrange & Act
             var response = await _client.GetAsync(url);
 
@@ -204,7 +205,8 @@ namespace Microsoft.AspNetCore.Routing.FunctionalTests
         public async Task GeneratesLink_ToEndpointWithDoubleAsteriskCatchAllParameter_DoesNotEncodeSlashes(
             string url,
             string expected
-        ) {
+        )
+        {
             // Arrange & Act
             var response = await _client.GetAsync(url);
 

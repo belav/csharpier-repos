@@ -26,7 +26,8 @@ namespace Microsoft.AspNetCore.Diagnostics
             int startColumn,
             int endLine,
             int endColumn
-        ) {
+        )
+        {
             Message = message;
             SourceFilePath = filePath;
             StartLine = startLine;

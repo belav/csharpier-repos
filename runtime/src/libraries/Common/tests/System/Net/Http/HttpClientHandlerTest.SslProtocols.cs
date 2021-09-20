@@ -91,7 +91,8 @@ namespace System.Net.Http.Functional.Tests
                 if (
                     protocol != SslProtocols.None
                     && (protocol & SslProtocolSupport.SupportedSslProtocols) == protocol
-                ) {
+                )
+                {
                     yield return new object[] { protocol, true };
 #pragma warning disable 0618 // SSL2/3 are deprecated
                     // On certain platforms these are completely disabled and cannot be used at all.
@@ -109,7 +110,8 @@ namespace System.Net.Http.Functional.Tests
         public async Task GetAsync_AllowedSSLVersion_Succeeds(
             SslProtocols acceptedProtocol,
             bool requestOnlyThisProtocol
-        ) {
+        )
+        {
             int count = 0;
             using (HttpClientHandler handler = CreateHttpClientHandler())
             using (HttpClient client = CreateHttpClient(handler))
@@ -233,7 +235,8 @@ namespace System.Net.Http.Functional.Tests
         public async Task GetAsync_SupportedSSLVersion_Succeeds(
             SslProtocols sslProtocols,
             string url
-        ) {
+        )
+        {
             using (HttpClientHandler handler = CreateHttpClientHandler())
             {
                 handler.SslProtocols = sslProtocols;
@@ -288,7 +291,8 @@ namespace System.Net.Http.Functional.Tests
         public async Task GetAsync_UnsupportedSSLVersion_Throws(
             SslProtocols sslProtocols,
             string url
-        ) {
+        )
+        {
             using (HttpClientHandler handler = CreateHttpClientHandler())
             using (HttpClient client = CreateHttpClient(handler))
             {
@@ -351,12 +355,14 @@ namespace System.Net.Http.Functional.Tests
         public async Task GetAsync_AllowedClientSslVersionDiffersFromServer_ThrowsException(
             SslProtocols allowedClientProtocols,
             SslProtocols acceptedServerProtocols
-        ) {
+        )
+        {
             if (
                 IsWinHttpHandler
                 && allowedClientProtocols == (SslProtocols.Tls11 | SslProtocols.Tls12)
                 && acceptedServerProtocols == SslProtocols.Tls
-            ) {
+            )
+            {
                 // Native WinHTTP sometimes uses multiple TCP connections to try other TLS protocols when
                 // getting TLS protocol failures as part of its TLS fallback algorithm. The loopback server
                 // doesn't expect this and stops listening for more connections. This causes unexpected test

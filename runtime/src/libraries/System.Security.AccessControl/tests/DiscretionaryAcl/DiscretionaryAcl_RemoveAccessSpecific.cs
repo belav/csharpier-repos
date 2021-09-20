@@ -214,7 +214,8 @@ namespace System.Security.AccessControl.Tests
             int accessMask,
             InheritanceFlags inheritanceFlags,
             PropagationFlags propagationFlags
-        ) {
+        )
+        {
             bool result = true;
 
             byte[] dAclBinaryForm = null;
@@ -230,7 +231,8 @@ namespace System.Security.AccessControl.Tests
             if (
                 discretionaryAcl.Count == rawAcl.Count
                 && discretionaryAcl.BinaryLength == rawAcl.BinaryLength
-            ) {
+            )
+            {
                 dAclBinaryForm = new byte[discretionaryAcl.BinaryLength];
                 rAclBinaryForm = new byte[rawAcl.BinaryLength];
                 discretionaryAcl.GetBinaryForm(dAclBinaryForm, 0);
@@ -266,7 +268,8 @@ namespace System.Security.AccessControl.Tests
             int propagationFlags,
             string initialRawAclStr,
             string verifierRawAclStr
-        ) {
+        )
+        {
             RawAcl rawAcl = Utils.CreateRawAclFromString(initialRawAclStr);
             DiscretionaryAcl discretionaryAcl = new DiscretionaryAcl(isContainer, isDS, rawAcl);
             rawAcl = Utils.CreateRawAclFromString(verifierRawAclStr);

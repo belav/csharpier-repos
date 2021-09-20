@@ -31,7 +31,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.SolutionExplore
         public AnalyzerItemSource(
             AnalyzersFolderItem analyzersFolder,
             IAnalyzersCommandHandler commandHandler
-        ) {
+        )
+        {
             _analyzersFolder = analyzersFolder;
             _commandHandler = commandHandler;
 
@@ -221,7 +222,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.SolutionExplore
         private ImmutableArray<AnalyzerReference> GetFilteredAnalyzers(
             IEnumerable<AnalyzerReference> analyzerReferences,
             Project project
-        ) {
+        )
+        {
             var analyzersWithLoadErrors = GetAnalyzersWithLoadErrors();
 
             // Filter out analyzer dependencies which have no diagnostic analyzers, but still retain the unresolved analyzers and analyzers with load errors.
@@ -240,7 +242,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.SolutionExplore
                     && analyzerReference.GetGenerators(project.Language).IsDefaultOrEmpty
                     && analyzerReference.FullPath != null
                     && !analyzersWithLoadErrors.Contains(analyzerReference.FullPath)
-                ) {
+                )
+                {
                     continue;
                 }
 

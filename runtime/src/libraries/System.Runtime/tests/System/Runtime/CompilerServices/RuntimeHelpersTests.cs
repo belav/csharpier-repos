@@ -352,7 +352,8 @@ namespace System.Runtime.CompilerServices.Tests
         public static void GetUninitializedObject_InvalidArguments_ThrowsException(
             Type typeToInstantiate,
             Type expectedExceptionType
-        ) {
+        )
+        {
             Assert.Throws(
                 expectedExceptionType,
                 () => RuntimeHelpers.GetUninitializedObject(typeToInstantiate)

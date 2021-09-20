@@ -27,7 +27,8 @@ namespace Roslyn.Test.Utilities
         public override PortableExecutableReference ResolveMissingAssembly(
             MetadataReference definition,
             AssemblyIdentity referenceIdentity
-        ) {
+        )
+        {
             // resolve assemblies from the directory containing the test and from directory containing corlib
 
             string name = referenceIdentity.Name;
@@ -62,7 +63,8 @@ namespace Roslyn.Test.Utilities
             string reference,
             string baseFilePath,
             MetadataReferenceProperties properties
-        ) {
+        )
+        {
             // Note: currently not handling relative paths, since we don't have tests that use them
 
             if (File.Exists(reference))

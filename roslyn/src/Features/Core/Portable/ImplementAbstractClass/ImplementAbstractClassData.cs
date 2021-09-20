@@ -38,7 +38,8 @@ namespace Microsoft.CodeAnalysis.ImplementAbstractClass
             INamedTypeSymbol classType,
             INamedTypeSymbol abstractClassType,
             ImmutableArray<(INamedTypeSymbol type, ImmutableArray<ISymbol> members)> unimplementedMembers
-        ) {
+        )
+        {
             _document = document;
             _classNode = classNode;
             _classIdentifier = classIdentifier;
@@ -52,7 +53,8 @@ namespace Microsoft.CodeAnalysis.ImplementAbstractClass
             SyntaxNode classNode,
             SyntaxToken classIdentifier,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var semanticModel = await document.GetRequiredSemanticModelAsync(cancellationToken)
                 .ConfigureAwait(false);
             if (
@@ -97,7 +99,8 @@ namespace Microsoft.CodeAnalysis.ImplementAbstractClass
             SyntaxNode classNode,
             SyntaxToken classIdentifier,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var data = await TryGetDataAsync(
                     document,
                     classNode,
@@ -120,7 +123,8 @@ namespace Microsoft.CodeAnalysis.ImplementAbstractClass
             ISymbol? throughMember,
             bool? canDelegateAllMembers,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var compilation = await _document.Project.GetRequiredCompilationAsync(cancellationToken)
                 .ConfigureAwait(false);
 
@@ -180,7 +184,8 @@ namespace Microsoft.CodeAnalysis.ImplementAbstractClass
             ISymbol? throughMember,
             ImplementTypePropertyGenerationBehavior propertyGenerationBehavior,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             return _unimplementedMembers.SelectMany(t => t.members)
                 .Select(
                     m =>
@@ -202,7 +207,8 @@ namespace Microsoft.CodeAnalysis.ImplementAbstractClass
             ISymbol? throughMember,
             ImplementTypePropertyGenerationBehavior propertyGenerationBehavior,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             cancellationToken.ThrowIfCancellationRequested();
 
             // Check if we need to add 'unsafe' to the signature we're generating.
@@ -225,7 +231,8 @@ namespace Microsoft.CodeAnalysis.ImplementAbstractClass
             ISymbol? throughMember,
             bool addUnsafe,
             ImplementTypePropertyGenerationBehavior propertyGenerationBehavior
-        ) {
+        )
+        {
             var modifiers = new DeclarationModifiers(isOverride: true, isUnsafe: addUnsafe);
             var accessibility = member.ComputeResultantAccessibility(ClassType);
 
@@ -234,7 +241,8 @@ namespace Microsoft.CodeAnalysis.ImplementAbstractClass
             if (
                 throughMember != null
                 && !member.IsAccessibleWithin(ClassType, throughMember.GetMemberType())
-            ) {
+            )
+            {
                 return null;
             }
 
@@ -263,7 +271,8 @@ namespace Microsoft.CodeAnalysis.ImplementAbstractClass
             ISymbol? throughMember,
             DeclarationModifiers modifiers,
             Accessibility accessibility
-        ) {
+        )
+        {
             var syntaxFacts = _document.GetRequiredLanguageService<ISyntaxFactsService>();
             var generator = _document.GetRequiredLanguageService<SyntaxGenerator>();
             var body =
@@ -288,7 +297,8 @@ namespace Microsoft.CodeAnalysis.ImplementAbstractClass
             DeclarationModifiers modifiers,
             Accessibility accessibility,
             ImplementTypePropertyGenerationBehavior propertyGenerationBehavior
-        ) {
+        )
+        {
             if (property.GetMethod == null)
             {
                 // Can't generate an auto-prop for a setter-only property.
@@ -343,7 +353,8 @@ namespace Microsoft.CodeAnalysis.ImplementAbstractClass
             ISymbol? throughMember,
             Accessibility accessibility,
             DeclarationModifiers modifiers
-        ) {
+        )
+        {
             var generator = _document.GetRequiredLanguageService<SyntaxGenerator>();
             return CodeGenerationSymbolFactory.CreateEventSymbol(
                 @event,
@@ -369,7 +380,8 @@ namespace Microsoft.CodeAnalysis.ImplementAbstractClass
             IMethodSymbol? accessor,
             ISymbol? throughMember,
             Func<SyntaxNode, SyntaxNode, SyntaxNode> createAddOrRemoveHandler
-        ) {
+        )
+        {
             if (accessor == null || throughMember == null)
                 return null;
 

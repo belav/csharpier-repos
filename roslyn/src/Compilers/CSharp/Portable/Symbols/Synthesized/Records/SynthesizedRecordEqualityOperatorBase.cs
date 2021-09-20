@@ -32,19 +32,21 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             string name,
             int memberOffset,
             BindingDiagnosticBag diagnostics
-        ) : base(
-            MethodKind.UserDefinedOperator,
-            name,
-            containingType,
-            containingType.Locations[0],
-            (CSharpSyntaxNode)containingType.SyntaxReferences[0].GetSyntax(),
-            DeclarationModifiers.Public | DeclarationModifiers.Static,
-            hasBody: true,
-            isExpressionBodied: false,
-            isIterator: false,
-            isNullableAnalysisEnabled: false,
-            diagnostics
-        ) {
+        )
+            : base(
+                MethodKind.UserDefinedOperator,
+                name,
+                containingType,
+                containingType.Locations[0],
+                (CSharpSyntaxNode)containingType.SyntaxReferences[0].GetSyntax(),
+                DeclarationModifiers.Public | DeclarationModifiers.Static,
+                hasBody: true,
+                isExpressionBodied: false,
+                isIterator: false,
+                isNullableAnalysisEnabled: false,
+                diagnostics
+            )
+        {
             Debug.Assert(
                 name == WellKnownMemberNames.EqualityOperatorName
                     || name == WellKnownMemberNames.InequalityOperatorName
@@ -77,7 +79,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
 
         protected sealed override (TypeWithAnnotations ReturnType, ImmutableArray<ParameterSymbol> Parameters) MakeParametersAndBindReturnType(
             BindingDiagnosticBag diagnostics
-        ) {
+        )
+        {
             var compilation = DeclaringCompilation;
             var location = ReturnTypeLocation;
             return (

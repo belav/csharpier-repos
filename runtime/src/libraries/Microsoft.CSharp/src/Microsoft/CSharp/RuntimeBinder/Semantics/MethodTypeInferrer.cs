@@ -86,7 +86,8 @@ namespace Microsoft.CSharp.RuntimeBinder.Semantics
             TypeArray pMethodFormalParameterTypes,
             ArgInfos pMethodArguments,
             out TypeArray ppInferredTypeArguments
-        ) {
+        )
+        {
             Debug.Assert(pMethod != null);
             Debug.Assert(pMethod.typeVars.Count > 0);
             Debug.Assert(pMethod.isParamArray || pMethod.Params == pMethodFormalParameterTypes);
@@ -125,7 +126,8 @@ namespace Microsoft.CSharp.RuntimeBinder.Semantics
             TypeArray pMethodFormalParameterTypes,
             ArgInfos pMethodArguments,
             TypeArray pMethodTypeParameters
-        ) {
+        )
+        {
             _binder = exprBinder;
             _pMethodFormalParameterTypes = pMethodFormalParameterTypes;
             _pMethodArguments = pMethodArguments;
@@ -635,7 +637,8 @@ namespace Microsoft.CSharp.RuntimeBinder.Semantics
                 if (
                     0 != ((_ppDependencies[iParam][kParam]) & Dependency.DependsMask)
                     && 0 != ((_ppDependencies[kParam][jParam]) & Dependency.DependsMask)
-                ) {
+                )
+                {
                     return true;
                 }
             }
@@ -831,7 +834,8 @@ namespace Microsoft.CSharp.RuntimeBinder.Semantics
             if (
                 pArraySource.Rank != pArrayDest.Rank
                 || pArraySource.IsSZArray != pArrayDest.IsSZArray
-            ) {
+            )
+            {
                 return false;
             }
 
@@ -866,7 +870,8 @@ namespace Microsoft.CSharp.RuntimeBinder.Semantics
                 !(pSource is AggregateType pConstructedSource)
                 || !(pDest is AggregateType pConstructedDest)
                 || pConstructedSource.OwningAggregate != pConstructedDest.OwningAggregate
-            ) {
+            )
+            {
                 return false;
             }
 
@@ -1019,7 +1024,8 @@ namespace Microsoft.CSharp.RuntimeBinder.Semantics
                 if (
                     pArrayDest.Rank != pArraySource.Rank
                     || pArrayDest.IsSZArray != pArraySource.IsSZArray
-                ) {
+                )
+                {
                     return false;
                 }
 
@@ -1031,7 +1037,8 @@ namespace Microsoft.CSharp.RuntimeBinder.Semantics
                 || pDest.IsPredefType(PredefinedType.PT_G_ILIST)
                 || pDest.IsPredefType(PredefinedType.PT_G_IREADONLYCOLLECTION)
                 || pDest.IsPredefType(PredefinedType.PT_G_IREADONLYLIST)
-            ) {
+            )
+            {
                 if (!pArraySource.IsSZArray)
                 {
                     return false;
@@ -1105,7 +1112,8 @@ namespace Microsoft.CSharp.RuntimeBinder.Semantics
             if (
                 pSource is AggregateType aggSource
                 && aggSource.OwningAggregate == pConstructedDest.OwningAggregate
-            ) {
+            )
+            {
                 if (aggSource.IsInterfaceType || aggSource.IsDelegateType)
                 {
                     LowerBoundTypeArgumentInference(aggSource, pConstructedDest);
@@ -1206,7 +1214,8 @@ namespace Microsoft.CSharp.RuntimeBinder.Semantics
             if (
                 pSource is AggregateType sourceAts
                 && (sourceAts.IsStructType || sourceAts.IsClassType || sourceAts.IsInterfaceType)
-            ) {
+            )
+            {
                 AggregateType iface = null;
                 foreach (AggregateType current in sourceAts.IfacesAll.Items)
                 {
@@ -1376,7 +1385,8 @@ namespace Microsoft.CSharp.RuntimeBinder.Semantics
                 if (
                     pArrayDest.Rank != pArraySource.Rank
                     || pArrayDest.IsSZArray != pArraySource.IsSZArray
-                ) {
+                )
+                {
                     return false;
                 }
 
@@ -1388,7 +1398,8 @@ namespace Microsoft.CSharp.RuntimeBinder.Semantics
                 || pSource.IsPredefType(PredefinedType.PT_G_ILIST)
                 || pSource.IsPredefType(PredefinedType.PT_G_IREADONLYLIST)
                 || pSource.IsPredefType(PredefinedType.PT_G_IREADONLYCOLLECTION)
-            ) {
+            )
+            {
                 if (!pArrayDest.IsSZArray)
                 {
                     return false;
@@ -1437,7 +1448,8 @@ namespace Microsoft.CSharp.RuntimeBinder.Semantics
             if (
                 pDest is AggregateType aggDest
                 && pConstructedSource.OwningAggregate == aggDest.OwningAggregate
-            ) {
+            )
+            {
                 if (aggDest.IsInterfaceType || aggDest.IsDelegateType)
                 {
                     UpperBoundTypeArgumentInference(pConstructedSource, aggDest);
@@ -1519,7 +1531,8 @@ namespace Microsoft.CSharp.RuntimeBinder.Semantics
             if (
                 pDest is AggregateType destAts
                 && (destAts.IsStructType || destAts.IsClassType || destAts.IsInterfaceType)
-            ) {
+            )
+            {
                 AggregateType iface = null;
                 foreach (AggregateType current in destAts.IfacesAll.Items)
                 {

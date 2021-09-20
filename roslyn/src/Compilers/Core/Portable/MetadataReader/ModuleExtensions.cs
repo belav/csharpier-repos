@@ -21,7 +21,8 @@ namespace Microsoft.CodeAnalysis
         public static bool ShouldImportNestedType(
             this PEModule module,
             TypeDefinitionHandle typeDef
-        ) {
+        )
+        {
             // Currently, it appears that we must import ALL types, even private ones,
             // in order to maintain language semantics. This is because a class may implement
             // private interfaces, and we use the interfaces (even if inaccessible) to determine
@@ -46,7 +47,8 @@ namespace Microsoft.CodeAnalysis
             this PEModule module,
             FieldDefinitionHandle field,
             MetadataImportOptions importOptions
-        ) {
+        )
+        {
             try
             {
                 var flags = module.GetFieldDefFlagsOrThrow(field);
@@ -65,7 +67,8 @@ namespace Microsoft.CodeAnalysis
         public static bool ShouldImportField(
             FieldAttributes flags,
             MetadataImportOptions importOptions
-        ) {
+        )
+        {
             switch (flags & FieldAttributes.FieldAccessMask)
             {
                 case FieldAttributes.Private:
@@ -89,7 +92,8 @@ namespace Microsoft.CodeAnalysis
             this PEModule module,
             MethodDefinitionHandle methodDef,
             MetadataImportOptions importOptions
-        ) {
+        )
+        {
             try
             {
                 var flags = module.GetMethodDefFlagsOrThrow(methodDef);
@@ -180,7 +184,8 @@ namespace Microsoft.CodeAnalysis
                     || index >= emittedMethodName.Length - 1
                     || emittedMethodName[index] != '_'
                     || !char.IsDigit(emittedMethodName, index + 1)
-                ) {
+                )
+                {
                     return 1;
                 }
 
@@ -194,7 +199,8 @@ namespace Microsoft.CodeAnalysis
                         out countOfSlots
                     )
                     && countOfSlots > 0
-                ) {
+                )
+                {
                     return countOfSlots;
                 }
 

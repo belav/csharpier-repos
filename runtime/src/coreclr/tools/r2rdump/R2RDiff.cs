@@ -86,7 +86,8 @@ namespace R2RDump
         private IEnumerable<ReadyToRunMethod> TryGetMethods(
             ReadyToRunReader reader,
             int moduleIndex
-        ) {
+        )
+        {
             List<ReadyToRunMethod> methods = new List<ReadyToRunMethod>();
             switch (moduleIndex)
             {
@@ -263,7 +264,8 @@ namespace R2RDump
                             assemblyName,
                             out int leftModuleIndex
                         )
-                    ) {
+                    )
+                    {
                         leftModuleIndex = InvalidModule;
                     }
                     if (
@@ -271,7 +273,8 @@ namespace R2RDump
                             assemblyName,
                             out int rightModuleIndex
                         )
-                    ) {
+                    )
+                    {
                         rightModuleIndex = InvalidModule;
                     }
                     Dictionary<string, int> leftMap = GetR2RMethodMap(
@@ -291,7 +294,8 @@ namespace R2RDump
             Dictionary<string, int> leftMethods,
             Dictionary<string, int> rightMethods,
             string diffName
-        ) {
+        )
+        {
             Dictionary<string, int> empty = new Dictionary<string, int>();
             Dictionary<string, int> leftOnly = new Dictionary<string, int>();
             Dictionary<string, int> rightOnly = new Dictionary<string, int>();
@@ -346,7 +350,8 @@ namespace R2RDump
             Dictionary<string, int> leftObjects,
             Dictionary<string, int> rightObjects,
             string diffName
-        ) {
+        )
+        {
             Dictionary<string, int> allObjects = new Dictionary<string, int>();
             foreach (KeyValuePair<string, int> left in leftObjects)
             {
@@ -377,7 +382,8 @@ namespace R2RDump
             Dictionary<string, int> rightObjects,
             IEnumerable<string> orderedKeys,
             string diffName
-        ) {
+        )
+        {
             string title =
                 $@" LEFT_SIZE RIGHT_SIZE       DIFF  {diffName} ({orderedKeys.Count()} ELEMENTS)";
 
@@ -463,7 +469,8 @@ namespace R2RDump
                     ReadyToRunSectionType,
                     ReadyToRunSection
                 > typeAndSection in reader.ReadyToRunHeader.Sections
-            ) {
+            )
+            {
                 string name = typeAndSection.Key.ToString();
                 sectionMap.Add(name, typeAndSection.Value.Size);
             }
@@ -501,7 +508,8 @@ namespace R2RDump
             Dumper dumper,
             int moduleIndex,
             Dictionary<string, MethodPair> signatureFilter
-        ) {
+        )
+        {
             IEnumerable<ReadyToRunMethod> filteredMethods = TryGetMethods(
                     dumper.Reader,
                     moduleIndex
@@ -517,7 +525,8 @@ namespace R2RDump
 
         private static Dictionary<string, ReadyToRunImportSection.ImportSectionEntry> GetImports(
             ReadyToRunReader reader
-        ) {
+        )
+        {
             var result = new Dictionary<string, ReadyToRunImportSection.ImportSectionEntry>();
             var signatureOptions = new SignatureFormattingOptions() { Naked = true };
             foreach (ReadyToRunImportSection section in reader.ImportSections)
@@ -537,7 +546,8 @@ namespace R2RDump
         /// <returns>Filtered method enumeration</returns>
         private IEnumerable<KeyValuePair<string, MethodPair>> HideMethodsWithSameDisassembly(
             IEnumerable<KeyValuePair<string, MethodPair>> commonMethods
-        ) {
+        )
+        {
             bool first = true;
             foreach (KeyValuePair<string, MethodPair> commonMethod in commonMethods)
             {
@@ -551,7 +561,8 @@ namespace R2RDump
                         int rtfIndex = 0;
                         match && rtfIndex < commonMethod.Value.LeftMethod.RuntimeFunctions.Count;
                         rtfIndex++
-                    ) {
+                    )
+                    {
                         RuntimeFunction leftRuntimeFunction =
                             commonMethod.Value.LeftMethod.RuntimeFunctions[rtfIndex];
                         RuntimeFunction rightRuntimeFunction =

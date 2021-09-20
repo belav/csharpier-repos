@@ -80,7 +80,8 @@ namespace System.Linq.Parallel
         internal override IEnumerator<TElement> GetEnumerator(
             ParallelMergeOptions? mergeOptions,
             bool suppressOrderPreservation
-        ) {
+        )
+        {
             return _data.GetEnumerator();
         }
 
@@ -126,14 +127,16 @@ namespace System.Linq.Parallel
             internal ScanEnumerableQueryOperatorResults(
                 IEnumerable<TElement> data,
                 QuerySettings settings
-            ) {
+            )
+            {
                 _data = data;
                 _settings = settings;
             }
 
             internal override void GivePartitionedStream(
                 IPartitionedStreamRecipient<TElement> recipient
-            ) {
+            )
+            {
                 Debug.Assert(_settings.DegreeOfParallelism != null);
                 // Since we are not using _data as an IList, we can pass useStriping = false.
                 PartitionedStream<TElement, int> partitionedStream =

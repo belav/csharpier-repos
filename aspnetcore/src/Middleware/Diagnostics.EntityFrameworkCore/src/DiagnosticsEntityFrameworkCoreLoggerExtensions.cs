@@ -133,7 +133,8 @@ namespace Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore
             this ILogger logger,
             string context,
             Exception exception
-        ) {
+        )
+        {
             _migrationsEndPointMiddlewareException(logger, context, exception);
         }
 
@@ -165,14 +166,16 @@ namespace Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore
         public static void ContextNotRegisteredDatabaseErrorPageMiddleware(
             this ILogger logger,
             string contextTypeName
-        ) {
+        )
+        {
             _contextNotRegisteredDatabaseErrorPageMiddleware(logger, contextTypeName, null);
         }
 
         public static void DatabaseErrorPageMiddlewareException(
             this ILogger logger,
             Exception exception
-        ) {
+        )
+        {
             _databaseErrorPageMiddlewareException(logger, exception);
         }
     }

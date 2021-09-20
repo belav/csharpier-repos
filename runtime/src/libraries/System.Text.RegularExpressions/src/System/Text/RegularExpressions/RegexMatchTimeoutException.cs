@@ -56,10 +56,8 @@ namespace System.Text.RegularExpressions
         public RegexMatchTimeoutException(string message, Exception inner) : base(message, inner)
         { }
 
-        protected RegexMatchTimeoutException(
-            SerializationInfo info,
-            StreamingContext context
-        ) : base(info, context)
+        protected RegexMatchTimeoutException(SerializationInfo info, StreamingContext context)
+            : base(info, context)
         {
             Input = info.GetString("regexInput")!;
             Pattern = info.GetString("regexPattern")!;

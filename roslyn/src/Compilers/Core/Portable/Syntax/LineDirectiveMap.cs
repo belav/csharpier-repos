@@ -54,7 +54,8 @@ namespace Microsoft.CodeAnalysis
             SourceText sourceText,
             string treeFilePath,
             TextSpan span
-        ) {
+        )
+        {
             var unmappedStartPos = sourceText.Lines.GetLinePosition(span.Start);
             var unmappedEndPos = sourceText.Lines.GetLinePosition(span.End);
             var entry = FindEntry(unmappedStartPos.Line);
@@ -67,7 +68,8 @@ namespace Microsoft.CodeAnalysis
             string treeFilePath,
             LinePosition unmappedStartPos,
             LinePosition unmappedEndPos
-        ) {
+        )
+        {
             string path = entry.MappedPathOpt ?? treeFilePath;
             int mappedStartLine = unmappedStartPos.Line - entry.UnmappedLine + entry.MappedLine;
             int mappedEndLine = unmappedEndPos.Line - entry.UnmappedLine + entry.MappedLine;

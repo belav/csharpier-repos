@@ -138,7 +138,8 @@ namespace System.Security.Cryptography.Pkcs.Tests
             using (
                 X509Certificate2 signerCert =
                     Certificates.RSAKeyTransferCapi1.TryGetCertificateWithPrivateKey()
-            ) {
+            )
+            {
                 CmsSigner signer = new CmsSigner(
                     SubjectIdentifierType.SubjectKeyIdentifier,
                     signerCert
@@ -294,7 +295,8 @@ namespace System.Security.Cryptography.Pkcs.Tests
         public static void ProcessResponse_FreeTsa_WithCerts_NoNonce(
             Rfc3161RequestResponseStatus expectedStatus,
             int variant
-        ) {
+        )
+        {
             const string Padding = "0400";
 
             string inputHex =
@@ -541,7 +543,8 @@ namespace System.Security.Cryptography.Pkcs.Tests
         public static void ProcessResponse_Symantec_NoCerts_WithNonce(
             Rfc3161RequestResponseStatus expectedStatus,
             int variant
-        ) {
+        )
+        {
             const string Padding = "0403000000";
 
             string inputHex =
@@ -664,7 +667,8 @@ namespace System.Security.Cryptography.Pkcs.Tests
             Rfc3161TimestampRequest request,
             byte[] inputBytes,
             int paddingByteCount
-        ) {
+        )
+        {
             Rfc3161TimestampToken token;
             int bytesRead;
             Rfc3161RequestResponseStatus status;
@@ -820,7 +824,8 @@ namespace System.Security.Cryptography.Pkcs.Tests
             out Rfc3161TimestampToken token,
             out TimestampRequestTests.Rfc3161RequestResponseStatus status,
             out int bytesRead
-        ) {
+        )
+        {
             object[] parameters = { inputBytes, null, null, null, false };
             object result = s_tryProcesses.Invoke(request, parameters);
 

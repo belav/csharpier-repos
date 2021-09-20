@@ -41,7 +41,8 @@ namespace System.ComponentModel.Composition.Registration.Tests
 
         private static void AssertHasDeclaredAttributesUnderConvention<TSource>(
             RegistrationBuilder convention
-        ) {
+        )
+        {
             AssertHasAttributesUnderConvention<TSource>(
                 convention,
                 typeof(TSource).GetCustomAttributes(true)
@@ -51,7 +52,8 @@ namespace System.ComponentModel.Composition.Registration.Tests
         private static void AssertHasAttributesUnderConvention<TSource>(
             RegistrationBuilder convention,
             IEnumerable<object> expected
-        ) {
+        )
+        {
             TypeInfo mapped = convention.MapType(typeof(TSource).GetTypeInfo());
             var applied = mapped.GetCustomAttributes(true);
 
@@ -67,7 +69,8 @@ namespace System.ComponentModel.Composition.Registration.Tests
         private static void AssertHasDeclaredAttributesUnderConvention<TSource>(
             Expression<Func<TSource, object>> property,
             RegistrationBuilder convention
-        ) {
+        )
+        {
             PropertyInfo pi = GetPropertyFromAccessor(property);
             AssertHasAttributesUnderConvention<TSource>(
                 property,
@@ -80,7 +83,8 @@ namespace System.ComponentModel.Composition.Registration.Tests
             Expression<Func<TSource, object>> property,
             RegistrationBuilder convention,
             IEnumerable<object> expected
-        ) {
+        )
+        {
             TypeInfo mapped = convention.MapType(typeof(TSource).GetTypeInfo());
             PropertyInfo pi = GetPropertyFromAccessor(property);
             var applied = mapped.GetProperty(pi.Name).GetCustomAttributes(true);
@@ -92,7 +96,8 @@ namespace System.ComponentModel.Composition.Registration.Tests
         private static void AssertEquivalentAttributes(
             IEnumerable<object> expected,
             IEnumerable<object> applied
-        ) {
+        )
+        {
             // Ignore nullable attributes added by the compiler
             expected = expected.Where(
                 e =>
@@ -317,7 +322,8 @@ namespace System.ComponentModel.Composition.Registration.Tests
 
         private static RegistrationBuilder ConfigureExportPropertyConvention<TPart>(
             Expression<Func<TPart, object>> property
-        ) {
+        )
+        {
             var convention = new RegistrationBuilder();
 
             convention.ForType<TPart>()
@@ -465,7 +471,8 @@ namespace System.ComponentModel.Composition.Registration.Tests
         // This set of tests is for imports at the property level
         private static RegistrationBuilder ConfigureImportPropertyConvention<TPart>(
             Expression<Func<TPart, object>> property
-        ) {
+        )
+        {
             var convention = new RegistrationBuilder();
 
             convention.ForType<TPart>()

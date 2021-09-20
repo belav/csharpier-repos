@@ -391,7 +391,8 @@ unsafe class SuppressGCTransitionTest
             if (
                 args.Length != 0
                 && args[0].Equals("ILStubCache", StringComparison.OrdinalIgnoreCase)
-            ) {
+            )
+            {
                 // This test intentionally results in a fatal error, so only run when manually specified
                 n = ILStubCache_GCTransition_NoGCTransition(n);
             }

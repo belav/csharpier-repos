@@ -198,7 +198,8 @@ namespace System.Threading.Tasks
                         | ParallelLoopStateFlags.ParallelLoopStateCanceled,
                     ref oldValue
                 )
-            ) {
+            )
+            {
                 // If we were already stopped, we have a problem
                 if ((oldValue & ParallelLoopStateFlags.ParallelLoopStateStopped) != 0)
                 {
@@ -222,7 +223,8 @@ namespace System.Threading.Tasks
                 while (
                     Interlocked.CompareExchange(ref pflags._lowestBreakIteration, iteration, oldLBI)
                     != oldLBI
-                ) {
+                )
+                {
                     wait.SpinOnce();
                     oldLBI = pflags._lowestBreakIteration;
                     if (iteration > oldLBI)
@@ -245,7 +247,8 @@ namespace System.Threading.Tasks
                         | ParallelLoopStateFlags.ParallelLoopStateCanceled,
                     ref oldValue
                 )
-            ) {
+            )
+            {
                 // If we were already stopped, we have a problem
                 if ((oldValue & ParallelLoopStateFlags.ParallelLoopStateStopped) != 0)
                 {
@@ -269,7 +272,8 @@ namespace System.Threading.Tasks
                 while (
                     Interlocked.CompareExchange(ref pflags._lowestBreakIteration, iteration, oldLBI)
                     != oldLBI
-                ) {
+                )
+                {
                     wait.SpinOnce();
                     oldLBI = pflags.LowestBreakIteration;
                     if (iteration > oldLBI)
@@ -445,7 +449,8 @@ namespace System.Threading.Tasks
                 if (
                     Interlocked.CompareExchange(ref _loopStateFlags, oldState | newState, oldState)
                     == oldState
-                ) {
+                )
+                {
                     return true;
                 }
                 sw.SpinOnce();

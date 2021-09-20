@@ -481,7 +481,8 @@ namespace Microsoft.EntityFrameworkCore.Query
         [MemberData(nameof(IsAsyncData))]
         public virtual Task Include_with_join_and_inheritance_with_orderby_before_and_after_include(
             bool async
-        ) {
+        )
+        {
             var expectedIncludes = new IExpectedInclude[]
             {
                 new ExpectedInclude<Officer>(o => o.Reports)
@@ -704,7 +705,8 @@ namespace Microsoft.EntityFrameworkCore.Query
         [MemberData(nameof(IsAsyncData))]
         public virtual async Task Where_bitwise_and_nullable_enum_with_nullable_parameter(
             bool async
-        ) {
+        )
+        {
             AmmunitionType? ammunitionType = AmmunitionType.Cartridge;
 
             await AssertQuery(
@@ -1450,7 +1452,8 @@ namespace Microsoft.EntityFrameworkCore.Query
         [MemberData(nameof(IsAsyncData))]
         public virtual Task Select_null_propagation_works_for_navigations_with_composite_keys(
             bool async
-        ) {
+        )
+        {
             return AssertQuery(
                 async,
                 ss =>
@@ -1465,7 +1468,8 @@ namespace Microsoft.EntityFrameworkCore.Query
         [MemberData(nameof(IsAsyncData))]
         public virtual Task Select_null_propagation_works_for_multiple_navigations_with_composite_keys(
             bool async
-        ) {
+        )
+        {
             return AssertQuery(
                 async,
                 ss =>
@@ -1661,7 +1665,8 @@ namespace Microsoft.EntityFrameworkCore.Query
         [MemberData(nameof(IsAsyncData))]
         public virtual Task Select_Where_Navigation_Scalar_Equals_Navigation_Scalar_Projected(
             bool async
-        ) {
+        )
+        {
             return AssertQuery(
                 async,
                 ss =>
@@ -1822,7 +1827,8 @@ namespace Microsoft.EntityFrameworkCore.Query
         [MemberData(nameof(IsAsyncData))]
         public virtual Task Where_subquery_distinct_singleordefault_boolean_with_pushdown(
             bool async
-        ) {
+        )
+        {
             return AssertQuery(
                 async,
                 ss =>
@@ -1897,7 +1903,8 @@ namespace Microsoft.EntityFrameworkCore.Query
         [MemberData(nameof(IsAsyncData))]
         public virtual Task Where_subquery_distinct_orderby_firstordefault_boolean_with_pushdown(
             bool async
-        ) {
+        )
+        {
             return AssertQuery(
                 async,
                 ss =>
@@ -2210,7 +2217,8 @@ namespace Microsoft.EntityFrameworkCore.Query
         [MemberData(nameof(IsAsyncData))]
         public virtual Task Join_with_order_by_on_inner_sequence_navigation_translated_to_subquery_composite_key(
             bool async
-        ) {
+        )
+        {
             return AssertQuery(
                 async,
                 ss =>
@@ -2312,7 +2320,8 @@ namespace Microsoft.EntityFrameworkCore.Query
         [MemberData(nameof(IsAsyncData))]
         public virtual Task Non_unicode_string_literal_is_used_for_non_unicode_column_right(
             bool async
-        ) {
+        )
+        {
             return AssertQuery(
                 async,
                 ss => from c in ss.Set<City>() where "Unknown" == c.Location select c
@@ -2335,7 +2344,8 @@ namespace Microsoft.EntityFrameworkCore.Query
         [MemberData(nameof(IsAsyncData))]
         public virtual Task Non_unicode_string_literals_in_contains_is_used_for_non_unicode_column(
             bool async
-        ) {
+        )
+        {
             var cities = new List<string> { "Unknown", "Jacinto's location", "Ephyra's location" };
 
             return AssertQuery(
@@ -2348,7 +2358,8 @@ namespace Microsoft.EntityFrameworkCore.Query
         [MemberData(nameof(IsAsyncData))]
         public virtual Task Non_unicode_string_literals_is_used_for_non_unicode_column_with_subquery(
             bool async
-        ) {
+        )
+        {
             return AssertQuery(
                 async,
                 ss =>
@@ -2364,7 +2375,8 @@ namespace Microsoft.EntityFrameworkCore.Query
         [MemberData(nameof(IsAsyncData))]
         public virtual Task Non_unicode_string_literals_is_used_for_non_unicode_column_in_subquery(
             bool async
-        ) {
+        )
+        {
             return AssertQuery(
                 async,
                 ss =>
@@ -2378,7 +2390,8 @@ namespace Microsoft.EntityFrameworkCore.Query
         [MemberData(nameof(IsAsyncData))]
         public virtual Task Non_unicode_string_literals_is_used_for_non_unicode_column_with_contains(
             bool async
-        ) {
+        )
+        {
             return AssertQuery(
                 async,
                 ss => from c in ss.Set<City>() where c.Location.Contains("Jacinto") select c
@@ -2389,7 +2402,8 @@ namespace Microsoft.EntityFrameworkCore.Query
         [MemberData(nameof(IsAsyncData))]
         public virtual Task Non_unicode_string_literals_is_used_for_non_unicode_column_with_concat(
             bool async
-        ) {
+        )
+        {
             return AssertQuery(
                 async,
                 ss => from c in ss.Set<City>() where (c.Location + "Added").Contains("Add") select c
@@ -2442,7 +2456,8 @@ namespace Microsoft.EntityFrameworkCore.Query
         [MemberData(nameof(IsAsyncData))]
         public virtual Task Include_on_GroupJoin_SelectMany_DefaultIfEmpty_with_coalesce_result3(
             bool async
-        ) {
+        )
+        {
             var expectedIncludes = new IExpectedInclude[]
             {
                 new ExpectedInclude<Gear>(g => g.Weapons),
@@ -2466,7 +2481,8 @@ namespace Microsoft.EntityFrameworkCore.Query
         [MemberData(nameof(IsAsyncData))]
         public virtual Task Include_on_GroupJoin_SelectMany_DefaultIfEmpty_with_coalesce_result4(
             bool async
-        ) {
+        )
+        {
             var expectedIncludes = new IExpectedInclude[]
             {
                 new ExpectedInclude<Gear>(g => g.Weapons),
@@ -2496,7 +2512,8 @@ namespace Microsoft.EntityFrameworkCore.Query
         [MemberData(nameof(IsAsyncData))]
         public virtual Task Include_on_GroupJoin_SelectMany_DefaultIfEmpty_with_inheritance_and_coalesce_result(
             bool async
-        ) {
+        )
+        {
             var expectedIncludes = new IExpectedInclude[]
             {
                 new ExpectedInclude<Gear>(g => g.Weapons),
@@ -2520,7 +2537,8 @@ namespace Microsoft.EntityFrameworkCore.Query
         [MemberData(nameof(IsAsyncData))]
         public virtual Task Include_on_GroupJoin_SelectMany_DefaultIfEmpty_with_conditional_result(
             bool async
-        ) {
+        )
+        {
             var expectedIncludes = new IExpectedInclude[]
             {
                 new ExpectedInclude<Gear>(g => g.Weapons),
@@ -2546,7 +2564,8 @@ namespace Microsoft.EntityFrameworkCore.Query
         [MemberData(nameof(IsAsyncData))]
         public virtual Task Include_on_GroupJoin_SelectMany_DefaultIfEmpty_with_complex_projection_result(
             bool async
-        ) {
+        )
+        {
             var expectedIncludes = new IExpectedInclude[]
             {
                 new ExpectedInclude<Gear>(g => g.Weapons),
@@ -2642,7 +2661,8 @@ namespace Microsoft.EntityFrameworkCore.Query
         [MemberData(nameof(IsAsyncData))]
         public virtual Task Optional_navigation_type_compensation_works_with_predicate_negated(
             bool async
-        ) {
+        )
+        {
             return AssertQuery(
                 async,
                 ss => ss.Set<CogTag>().Where(t => !t.Gear.HasSoulPatch),
@@ -2654,7 +2674,8 @@ namespace Microsoft.EntityFrameworkCore.Query
         [MemberData(nameof(IsAsyncData))]
         public virtual Task Optional_navigation_type_compensation_works_with_predicate_negated_complex1(
             bool async
-        ) {
+        )
+        {
             return AssertQuery(
                 async,
                 ss =>
@@ -2677,7 +2698,8 @@ namespace Microsoft.EntityFrameworkCore.Query
         [MemberData(nameof(IsAsyncData))]
         public virtual Task Optional_navigation_type_compensation_works_with_predicate_negated_complex2(
             bool async
-        ) {
+        )
+        {
             return AssertQuery(
                 async,
                 ss =>
@@ -2700,7 +2722,8 @@ namespace Microsoft.EntityFrameworkCore.Query
         [MemberData(nameof(IsAsyncData))]
         public virtual Task Optional_navigation_type_compensation_works_with_conditional_expression(
             bool async
-        ) {
+        )
+        {
             return AssertQuery(
                 async,
                 // ReSharper disable once RedundantTernaryExpression
@@ -2712,7 +2735,8 @@ namespace Microsoft.EntityFrameworkCore.Query
         [MemberData(nameof(IsAsyncData))]
         public virtual Task Optional_navigation_type_compensation_works_with_binary_expression(
             bool async
-        ) {
+        )
+        {
             return AssertQuery(
                 async,
                 ss => ss.Set<CogTag>().Where(t => t.Gear.HasSoulPatch || t.Note.Contains("Cole"))
@@ -2723,7 +2747,8 @@ namespace Microsoft.EntityFrameworkCore.Query
         [MemberData(nameof(IsAsyncData))]
         public virtual Task Optional_navigation_type_compensation_works_with_binary_and_expression(
             bool async
-        ) {
+        )
+        {
             return AssertQueryScalar(
                 async,
                 ss => ss.Set<CogTag>().Select(t => t.Gear.HasSoulPatch && t.Note.Contains("Cole"))
@@ -2744,7 +2769,8 @@ namespace Microsoft.EntityFrameworkCore.Query
         [MemberData(nameof(IsAsyncData))]
         public virtual Task Optional_navigation_type_compensation_works_with_projection_into_anonymous_type(
             bool async
-        ) {
+        )
+        {
             return AssertQuery(
                 async,
                 ss =>
@@ -2772,7 +2798,8 @@ namespace Microsoft.EntityFrameworkCore.Query
         [MemberData(nameof(IsAsyncData))]
         public virtual Task Optional_navigation_type_compensation_works_with_list_initializers(
             bool async
-        ) {
+        )
+        {
             return AssertQuery(
                 async,
                 ss =>
@@ -2788,7 +2815,8 @@ namespace Microsoft.EntityFrameworkCore.Query
         [MemberData(nameof(IsAsyncData))]
         public virtual Task Optional_navigation_type_compensation_works_with_array_initializers(
             bool async
-        ) {
+        )
+        {
             return AssertQuery(
                 async,
                 ss =>
@@ -2828,7 +2856,8 @@ namespace Microsoft.EntityFrameworkCore.Query
         [MemberData(nameof(IsAsyncData))]
         public virtual Task Optional_navigation_type_compensation_works_with_negated_predicate(
             bool async
-        ) {
+        )
+        {
             return AssertQuery(
                 async,
                 ss =>
@@ -2922,7 +2951,8 @@ namespace Microsoft.EntityFrameworkCore.Query
         [MemberData(nameof(IsAsyncData))]
         public virtual async Task Select_correlated_filtered_collection_returning_queryable_throws(
             bool async
-        ) {
+        )
+        {
             Assert.Equal(
                 CoreStrings.QueryInvalidMaterializationType(
                     @"t => DbSet<Gear>()
@@ -3261,7 +3291,8 @@ namespace Microsoft.EntityFrameworkCore.Query
         [MemberData(nameof(IsAsyncData))]
         public virtual Task Orderby_added_for_client_side_GroupJoin_composite_dependent_to_principal_LOJ_when_incomplete_key_is_used(
             bool async
-        ) {
+        )
+        {
             return AssertQuery(
                 async,
                 ss =>
@@ -3277,7 +3308,8 @@ namespace Microsoft.EntityFrameworkCore.Query
 
         private static IEnumerable<TElement> ClientDefaultIfEmpty<TElement>(
             IEnumerable<TElement> source
-        ) {
+        )
+        {
             // ReSharper disable PossibleMultipleEnumeration
             return source?.Count() == 0 ? new[] { default(TElement) } : source;
             // ReSharper restore PossibleMultipleEnumeration
@@ -3336,7 +3368,8 @@ namespace Microsoft.EntityFrameworkCore.Query
         [MemberData(nameof(IsAsyncData))]
         public virtual Task FirstOrDefault_with_manually_created_groupjoin_is_translated_to_sql(
             bool async
-        ) {
+        )
+        {
             return AssertFirstOrDefault(
                 async,
                 ss =>
@@ -3352,7 +3385,8 @@ namespace Microsoft.EntityFrameworkCore.Query
         [MemberData(nameof(IsAsyncData))]
         public virtual Task Any_with_optional_navigation_as_subquery_predicate_is_translated_to_sql(
             bool async
-        ) {
+        )
+        {
             return AssertQuery(
                 async,
                 ss =>
@@ -3377,7 +3411,8 @@ namespace Microsoft.EntityFrameworkCore.Query
         [MemberData(nameof(IsAsyncData))]
         public virtual Task Client_side_equality_with_parameter_works_with_optional_navigations(
             bool async
-        ) {
+        )
+        {
             var prm = "Marcus' Tag";
 
             return AssertQuery(
@@ -3409,7 +3444,8 @@ namespace Microsoft.EntityFrameworkCore.Query
         [MemberData(nameof(IsAsyncData))]
         public virtual Task Unnecessary_include_doesnt_get_added_complex_when_projecting_EF_Property(
             bool async
-        ) {
+        )
+        {
             return AssertQuery(
                 async,
                 ss =>
@@ -3426,7 +3462,8 @@ namespace Microsoft.EntityFrameworkCore.Query
         [MemberData(nameof(IsAsyncData))]
         public virtual Task Multiple_order_bys_are_properly_lifted_from_subquery_created_by_include(
             bool async
-        ) {
+        )
+        {
             return AssertQuery(
                 async,
                 ss =>
@@ -3446,7 +3483,8 @@ namespace Microsoft.EntityFrameworkCore.Query
         [MemberData(nameof(IsAsyncData))]
         public virtual Task Order_by_is_properly_lifted_from_subquery_with_same_order_by_in_the_outer_query(
             bool async
-        ) {
+        )
+        {
             return AssertQuery(
                 async,
                 ss =>
@@ -3497,7 +3535,8 @@ namespace Microsoft.EntityFrameworkCore.Query
         [MemberData(nameof(IsAsyncData))]
         public virtual Task Subquery_containing_SelectMany_projecting_main_from_clause_gets_lifted(
             bool async
-        ) {
+        )
+        {
             return AssertQuery(
                 async,
                 ss =>
@@ -3518,7 +3557,8 @@ namespace Microsoft.EntityFrameworkCore.Query
         [MemberData(nameof(IsAsyncData))]
         public virtual Task Subquery_containing_join_projecting_main_from_clause_gets_lifted(
             bool async
-        ) {
+        )
+        {
             return AssertQuery(
                 async,
                 ss =>
@@ -3538,7 +3578,8 @@ namespace Microsoft.EntityFrameworkCore.Query
         [MemberData(nameof(IsAsyncData))]
         public virtual Task Subquery_containing_left_join_projecting_main_from_clause_gets_lifted(
             bool async
-        ) {
+        )
+        {
             return AssertQuery(
                 async,
                 ss =>
@@ -3727,7 +3768,8 @@ namespace Microsoft.EntityFrameworkCore.Query
         [MemberData(nameof(IsAsyncData))]
         public virtual Task Client_method_on_collection_navigation_in_predicate_accessed_by_ef_property(
             bool async
-        ) {
+        )
+        {
             return AssertTranslationFailed(
                 () =>
                     AssertQuery(
@@ -3765,7 +3807,8 @@ namespace Microsoft.EntityFrameworkCore.Query
         [MemberData(nameof(IsAsyncData))]
         public virtual Task Client_method_on_collection_navigation_in_additional_from_clause(
             bool async
-        ) {
+        )
+        {
             return AssertTranslationFailed(
                 () =>
                     AssertQuery(
@@ -3783,7 +3826,8 @@ namespace Microsoft.EntityFrameworkCore.Query
         [MemberData(nameof(IsAsyncData))]
         public virtual async Task Client_method_on_collection_navigation_in_outer_join_key(
             bool async
-        ) {
+        )
+        {
             var message =
                 (
                     await Assert.ThrowsAsync<InvalidOperationException>(
@@ -3931,7 +3975,8 @@ namespace Microsoft.EntityFrameworkCore.Query
         [MemberData(nameof(IsAsyncData))]
         public virtual Task Navigation_access_via_EFProperty_on_derived_entity_using_cast(
             bool async
-        ) {
+        )
+        {
             return AssertQuery(
                 async,
                 ss =>
@@ -3984,7 +4029,8 @@ namespace Microsoft.EntityFrameworkCore.Query
         [MemberData(nameof(IsAsyncData))]
         public virtual Task Collection_navigation_access_on_derived_entity_using_cast_in_SelectMany(
             bool async
-        ) {
+        )
+        {
             return AssertQuery(
                 async,
                 ss =>
@@ -4060,7 +4106,8 @@ namespace Microsoft.EntityFrameworkCore.Query
         [MemberData(nameof(IsAsyncData))]
         public virtual Task Cast_result_operator_on_subquery_is_properly_lifted_to_a_convert(
             bool async
-        ) {
+        )
+        {
             return AssertQueryScalar(
                 async,
                 ss =>
@@ -4334,7 +4381,8 @@ namespace Microsoft.EntityFrameworkCore.Query
         [MemberData(nameof(IsAsyncData))]
         public virtual Task Include_reference_on_derived_type_using_lambda_with_soft_cast(
             bool async
-        ) {
+        )
+        {
             return AssertQuery(
                 async,
                 ss => ss.Set<LocustLeader>().Include(ll => (ll as LocustCommander).DefeatedBy),
@@ -4387,7 +4435,8 @@ namespace Microsoft.EntityFrameworkCore.Query
         [MemberData(nameof(IsAsyncData))]
         public virtual Task Include_collection_on_derived_type_using_lambda_with_soft_cast(
             bool async
-        ) {
+        )
+        {
             return AssertQuery(
                 async,
                 ss => ss.Set<Gear>().Include(g => (g as Officer).Reports),
@@ -4540,7 +4589,8 @@ namespace Microsoft.EntityFrameworkCore.Query
         [MemberData(nameof(IsAsyncData))]
         public virtual async Task Include_collection_and_invalid_navigation_using_string_throws(
             bool async
-        ) {
+        )
+        {
             var message =
                 (
                     await Assert.ThrowsAsync<InvalidOperationException>(
@@ -4604,7 +4654,8 @@ namespace Microsoft.EntityFrameworkCore.Query
         [MemberData(nameof(IsAsyncData))]
         public virtual Task Correlated_collections_naked_navigation_with_ToList_followed_by_projecting_count(
             bool async
-        ) {
+        )
+        {
             return AssertQueryScalar(
                 async,
                 ss =>
@@ -4815,7 +4866,8 @@ namespace Microsoft.EntityFrameworkCore.Query
         [MemberData(nameof(IsAsyncData))]
         public virtual Task Correlated_collections_projection_of_collection_thru_navigation(
             bool async
-        ) {
+        )
+        {
             return AssertQuery(
                 async,
                 ss =>
@@ -4992,7 +5044,8 @@ namespace Microsoft.EntityFrameworkCore.Query
         [MemberData(nameof(IsAsyncData))]
         public virtual Task Correlated_collections_same_collection_projected_multiple_times(
             bool async
-        ) {
+        )
+        {
             return AssertQuery(
                 async,
                 ss =>
@@ -5017,7 +5070,8 @@ namespace Microsoft.EntityFrameworkCore.Query
         [MemberData(nameof(IsAsyncData))]
         public virtual Task Correlated_collections_similar_collection_projected_multiple_times(
             bool async
-        ) {
+        )
+        {
             return AssertQuery(
                 async,
                 ss =>
@@ -5076,7 +5130,8 @@ namespace Microsoft.EntityFrameworkCore.Query
         [MemberData(nameof(IsAsyncData))]
         public virtual Task Multiple_orderby_with_navigation_expansion_on_one_of_the_order_bys(
             bool async
-        ) {
+        )
+        {
             return AssertQuery(
                 async,
                 ss =>
@@ -5092,7 +5147,8 @@ namespace Microsoft.EntityFrameworkCore.Query
         [MemberData(nameof(IsAsyncData))]
         public virtual Task Multiple_orderby_with_navigation_expansion_on_one_of_the_order_bys_inside_subquery(
             bool async
-        ) {
+        )
+        {
             return AssertQuery(
                 async,
                 ss =>
@@ -5121,7 +5177,8 @@ namespace Microsoft.EntityFrameworkCore.Query
         [MemberData(nameof(IsAsyncData))]
         public virtual Task Multiple_orderby_with_navigation_expansion_on_one_of_the_order_bys_inside_subquery_duplicated_orderings(
             bool async
-        ) {
+        )
+        {
             return AssertQuery(
                 async,
                 ss =>
@@ -5151,7 +5208,8 @@ namespace Microsoft.EntityFrameworkCore.Query
         [MemberData(nameof(IsAsyncData))]
         public virtual Task Multiple_orderby_with_navigation_expansion_on_one_of_the_order_bys_inside_subquery_complex_orderings(
             bool async
-        ) {
+        )
+        {
             return AssertQuery(
                 async,
                 ss =>
@@ -5263,7 +5321,8 @@ namespace Microsoft.EntityFrameworkCore.Query
         [MemberData(nameof(IsAsyncData))]
         public virtual Task Correlated_collections_inner_subquery_selector_references_outer_qsre(
             bool async
-        ) {
+        )
+        {
             return AssertQuery(
                 async,
                 ss =>
@@ -5291,7 +5350,8 @@ namespace Microsoft.EntityFrameworkCore.Query
         [MemberData(nameof(IsAsyncData))]
         public virtual Task Correlated_collections_inner_subquery_predicate_references_outer_qsre(
             bool async
-        ) {
+        )
+        {
             return AssertQuery(
                 async,
                 ss =>
@@ -5320,7 +5380,8 @@ namespace Microsoft.EntityFrameworkCore.Query
         [MemberData(nameof(IsAsyncData))]
         public virtual Task Correlated_collections_nested_inner_subquery_references_outer_qsre_one_level_up(
             bool async
-        ) {
+        )
+        {
             return AssertQuery(
                 async,
                 ss =>
@@ -5368,7 +5429,8 @@ namespace Microsoft.EntityFrameworkCore.Query
         [MemberData(nameof(IsAsyncData))]
         public virtual Task Correlated_collections_nested_inner_subquery_references_outer_qsre_two_levels_up(
             bool async
-        ) {
+        )
+        {
             return AssertQuery(
                 async,
                 ss =>
@@ -5659,7 +5721,8 @@ namespace Microsoft.EntityFrameworkCore.Query
         [MemberData(nameof(IsAsyncData))]
         public virtual Task Correlated_collections_from_left_join_with_additional_elements_projected_of_that_join(
             bool async
-        ) {
+        )
+        {
             return AssertQuery(
                 async,
                 ss =>
@@ -5963,7 +6026,8 @@ namespace Microsoft.EntityFrameworkCore.Query
         [MemberData(nameof(IsAsyncData))]
         public virtual Task Correlated_collection_with_top_level_Last_with_orderby_on_outer(
             bool async
-        ) {
+        )
+        {
             return AssertLast(
                 async,
                 ss => ss.Set<Gear>().OrderByDescending(g => g.FullName).Select(g => g.Weapons),
@@ -5975,7 +6039,8 @@ namespace Microsoft.EntityFrameworkCore.Query
         [MemberData(nameof(IsAsyncData))]
         public virtual Task Correlated_collection_with_top_level_Last_with_order_by_on_inner(
             bool async
-        ) {
+        )
+        {
             return AssertLast(
                 async,
                 ss =>
@@ -5990,7 +6055,8 @@ namespace Microsoft.EntityFrameworkCore.Query
         [MemberData(nameof(IsAsyncData))]
         public virtual Task Null_semantics_on_nullable_bool_from_inner_join_subquery_is_fully_applied(
             bool async
-        ) {
+        )
+        {
             return AssertQuery(
                 async,
                 ss =>
@@ -6006,7 +6072,8 @@ namespace Microsoft.EntityFrameworkCore.Query
         [MemberData(nameof(IsAsyncData))]
         public virtual Task Null_semantics_on_nullable_bool_from_left_join_subquery_is_fully_applied(
             bool async
-        ) {
+        )
+        {
             return AssertQuery(
                 async,
                 ss =>
@@ -6370,7 +6437,8 @@ namespace Microsoft.EntityFrameworkCore.Query
         [MemberData(nameof(IsAsyncData))]
         public virtual Task Join_on_entity_qsre_keys_inner_key_is_navigation_composite_key(
             bool async
-        ) {
+        )
+        {
             return AssertQuery(
                 async,
                 ss =>
@@ -6450,7 +6518,8 @@ namespace Microsoft.EntityFrameworkCore.Query
         [MemberData(nameof(IsAsyncData))]
         public virtual async Task Streaming_correlated_collection_issue_11403_returning_ordered_enumerable_throws(
             bool async
-        ) {
+        )
+        {
             Assert.Equal(
                 CoreStrings.QueryInvalidMaterializationType(
                     @"g => g.Weapons
@@ -6521,7 +6590,8 @@ namespace Microsoft.EntityFrameworkCore.Query
         [MemberData(nameof(IsAsyncData))]
         public virtual Task Project_one_value_type_converted_to_nullable_from_empty_collection(
             bool async
-        ) {
+        )
+        {
             return AssertQuery(
                 async,
                 ss =>
@@ -6544,7 +6614,8 @@ namespace Microsoft.EntityFrameworkCore.Query
         [MemberData(nameof(IsAsyncData))]
         public virtual Task Project_one_value_type_with_client_projection_from_empty_collection(
             bool async
-        ) {
+        )
+        {
             return AssertQuery(
                 async,
                 ss =>
@@ -6570,7 +6641,8 @@ namespace Microsoft.EntityFrameworkCore.Query
         [MemberData(nameof(IsAsyncData))]
         public virtual Task Filter_on_subquery_projecting_one_value_type_from_empty_collection(
             bool async
-        ) {
+        )
+        {
             return AssertQuery(
                 async,
                 ss =>
@@ -6674,7 +6746,8 @@ namespace Microsoft.EntityFrameworkCore.Query
         [MemberData(nameof(IsAsyncData))]
         public virtual Task Select_subquery_projecting_multiple_constants_inside_anonymous(
             bool async
-        ) {
+        )
+        {
             return AssertQuery(
                 async,
                 ss =>
@@ -6735,7 +6808,8 @@ namespace Microsoft.EntityFrameworkCore.Query
         [MemberData(nameof(IsAsyncData))]
         public virtual Task Select_subquery_projecting_single_constant_null_of_non_mapped_type(
             bool async
-        ) {
+        )
+        {
             return AssertQuery(
                 async,
                 ss =>
@@ -6757,7 +6831,8 @@ namespace Microsoft.EntityFrameworkCore.Query
         [MemberData(nameof(IsAsyncData))]
         public virtual Task Select_subquery_projecting_single_constant_of_non_mapped_type(
             bool async
-        ) {
+        )
+        {
             return AssertQuery(
                 async,
                 ss =>
@@ -6788,7 +6863,8 @@ namespace Microsoft.EntityFrameworkCore.Query
         [MemberData(nameof(IsAsyncData))]
         public virtual Task Correlated_collection_order_by_constant_null_of_non_mapped_type(
             bool async
-        ) {
+        )
+        {
             return AssertQuery(
                 async,
                 ss =>
@@ -7098,7 +7174,8 @@ namespace Microsoft.EntityFrameworkCore.Query
         [MemberData(nameof(IsAsyncData))]
         public virtual Task Select_subquery_distinct_singleordefault_boolean_with_pushdown(
             bool async
-        ) {
+        )
+        {
             return AssertQueryScalar(
                 async,
                 ss =>
@@ -7156,7 +7233,8 @@ namespace Microsoft.EntityFrameworkCore.Query
         [MemberData(nameof(IsAsyncData))]
         public virtual Task Select_subquery_distinct_singleordefault_boolean_empty_with_pushdown(
             bool async
-        ) {
+        )
+        {
             return AssertQueryScalar(
                 async,
                 ss =>
@@ -7242,7 +7320,8 @@ namespace Microsoft.EntityFrameworkCore.Query
         [MemberData(nameof(IsAsyncData))]
         public virtual Task Correlated_collection_with_complex_order_by_funcletized_to_constant_bool(
             bool async
-        ) {
+        )
+        {
             var nicknames = new List<string>();
             return AssertQuery(
                 async,
@@ -7263,7 +7342,8 @@ namespace Microsoft.EntityFrameworkCore.Query
         [MemberData(nameof(IsAsyncData))]
         public virtual Task Double_order_by_on_nullable_bool_coming_from_optional_navigation(
             bool async
-        ) {
+        )
+        {
             return AssertQuery(
                 async,
                 ss =>
@@ -7586,7 +7666,8 @@ namespace Microsoft.EntityFrameworkCore.Query
         [MemberData(nameof(IsAsyncData))]
         public virtual Task Group_by_entity_key_with_include_on_that_entity_with_key_in_result_selector(
             bool async
-        ) {
+        )
+        {
             return AssertQuery(
                 async,
                 ss =>
@@ -7610,7 +7691,8 @@ namespace Microsoft.EntityFrameworkCore.Query
         [MemberData(nameof(IsAsyncData))]
         public virtual Task Group_by_entity_key_with_include_on_that_entity_with_key_in_result_selector_using_EF_Property(
             bool async
-        ) {
+        )
+        {
             return AssertQuery(
                 async,
                 ss =>
@@ -7669,7 +7751,8 @@ namespace Microsoft.EntityFrameworkCore.Query
         [MemberData(nameof(IsAsyncData))]
         public virtual Task Include_with_group_by_and_FirstOrDefault_gets_properly_applied(
             bool async
-        ) {
+        )
+        {
             var expectedIncludes = new IExpectedInclude[]
             {
                 new ExpectedInclude<Gear>(e => e.CityOfBirth),
@@ -7703,7 +7786,8 @@ namespace Microsoft.EntityFrameworkCore.Query
         [MemberData(nameof(IsAsyncData))]
         public virtual Task Include_with_client_method_and_member_access_still_applies_includes(
             bool async
-        ) {
+        )
+        {
             return AssertQuery(
                 async,
                 ss =>
@@ -7717,7 +7801,8 @@ namespace Microsoft.EntityFrameworkCore.Query
         [MemberData(nameof(IsAsyncData))]
         public virtual Task Include_with_projection_of_unmapped_property_still_gets_applied(
             bool async
-        ) {
+        )
+        {
             return AssertQueryScalar(
                 async,
                 ss => ss.Set<Gear>().Include(g => g.Weapons).Select(g => g.IsMarcus)
@@ -7751,7 +7836,8 @@ namespace Microsoft.EntityFrameworkCore.Query
         [MemberData(nameof(IsAsyncData))]
         public virtual Task OrderBy_same_expression_containing_IsNull_correctly_deduplicates_the_ordering(
             bool async
-        ) {
+        )
+        {
             return AssertQueryScalar(
                 async,
                 ss =>
@@ -7876,7 +7962,8 @@ namespace Microsoft.EntityFrameworkCore.Query
         [MemberData(nameof(IsAsyncData))]
         public virtual Task Query_with_complex_let_containing_ordering_and_filter_projecting_firstOrDefault_element_of_let(
             bool async
-        ) {
+        )
+        {
             return AssertQuery(
                 async,
                 ss =>
@@ -7898,7 +7985,8 @@ namespace Microsoft.EntityFrameworkCore.Query
         [MemberData(nameof(IsAsyncData))]
         public virtual Task Null_semantics_is_correctly_applied_for_function_comparisons_that_take_arguments_from_optional_navigation(
             bool async
-        ) {
+        )
+        {
             return AssertQuery(
                 async,
                 ss =>
@@ -7916,7 +8004,8 @@ namespace Microsoft.EntityFrameworkCore.Query
         [MemberData(nameof(IsAsyncData))]
         public virtual Task Null_semantics_is_correctly_applied_for_function_comparisons_that_take_arguments_from_optional_navigation_complex(
             bool async
-        ) {
+        )
+        {
             return AssertQuery(
                 async,
                 ss =>
@@ -8117,7 +8206,8 @@ namespace Microsoft.EntityFrameworkCore.Query
         [MemberData(nameof(IsAsyncData))]
         public virtual Task Anonymous_projection_take_followed_by_projecting_single_element_from_collection_navigation(
             bool async
-        ) {
+        )
+        {
             return AssertQuery(
                 async,
                 ss =>
@@ -8281,7 +8371,8 @@ namespace Microsoft.EntityFrameworkCore.Query
         [MemberData(nameof(IsAsyncData))]
         public virtual Task SelectMany_Where_DefaultIfEmpty_with_navigation_in_the_collection_selector(
             bool async
-        ) {
+        )
+        {
             var isAutomatic = true;
 
             return AssertQuery(
@@ -8297,7 +8388,8 @@ namespace Microsoft.EntityFrameworkCore.Query
         [MemberData(nameof(IsAsyncData))]
         public virtual Task SelectMany_Where_DefaultIfEmpty_with_navigation_in_the_collection_selector_not_equal(
             bool async
-        ) {
+        )
+        {
             var isAutomatic = true;
 
             return AssertQuery(
@@ -8313,7 +8405,8 @@ namespace Microsoft.EntityFrameworkCore.Query
         [MemberData(nameof(IsAsyncData))]
         public virtual Task SelectMany_Where_DefaultIfEmpty_with_navigation_in_the_collection_selector_order_comparison(
             bool async
-        ) {
+        )
+        {
             var prm = 1;
 
             return AssertQuery(
@@ -8343,7 +8436,8 @@ namespace Microsoft.EntityFrameworkCore.Query
         [MemberData(nameof(IsAsyncData))]
         public virtual Task Join_with_inner_being_a_subquery_projecting_anonymous_type_with_single_property(
             bool async
-        ) {
+        )
+        {
             return AssertQuery(
                 async,
                 ss =>
@@ -8479,7 +8573,8 @@ namespace Microsoft.EntityFrameworkCore.Query
         [MemberData(nameof(IsAsyncData))]
         public virtual Task Acessing_reference_navigation_collection_composition_generates_single_query(
             bool async
-        ) {
+        )
+        {
             return AssertQuery(
                 async,
                 ss =>
@@ -8527,7 +8622,8 @@ namespace Microsoft.EntityFrameworkCore.Query
         [MemberData(nameof(IsAsyncData))]
         public virtual Task Accessing_property_of_optional_navigation_in_child_projection_works(
             bool async
-        ) {
+        )
+        {
             return AssertQuery(
                 async,
                 ss =>
@@ -8689,7 +8785,8 @@ namespace Microsoft.EntityFrameworkCore.Query
         [MemberData(nameof(IsAsyncData))]
         public virtual Task Query_reusing_parameter_with_inner_query_doesnt_declare_duplicate_parameter(
             bool async
-        ) {
+        )
+        {
             var squadId = 1;
 
             return AssertQuery(
@@ -8708,7 +8805,8 @@ namespace Microsoft.EntityFrameworkCore.Query
         [MemberData(nameof(IsAsyncData))]
         public virtual Task Query_reusing_parameter_with_inner_query_expression_doesnt_declare_duplicate_parameter(
             bool async
-        ) {
+        )
+        {
             var gearId = 1;
             Expression<Func<Gear, bool>> predicate = s => s.SquadId == gearId;
 
@@ -8724,7 +8822,8 @@ namespace Microsoft.EntityFrameworkCore.Query
         [MemberData(nameof(IsAsyncData))]
         public virtual Task Query_reusing_parameter_doesnt_declare_duplicate_parameter_complex(
             bool async
-        ) {
+        )
+        {
             var prm = new ComplexParameter
             {
                 Inner = new ComplexParameterInner { Squad = new Squad { Id = 1 } }
@@ -8920,7 +9019,8 @@ namespace Microsoft.EntityFrameworkCore.Query
         [MemberData(nameof(IsAsyncData))]
         public virtual Task Group_by_over_projection_with_multiple_properties_accessed_thru_navigation(
             bool async
-        ) {
+        )
+        {
             return AssertQuery(
                 async,
                 ss =>
@@ -8973,7 +9073,8 @@ namespace Microsoft.EntityFrameworkCore.Query
         [MemberData(nameof(IsAsyncData))]
         public virtual Task Group_by_with_having_StartsWith_with_null_parameter_as_argument(
             bool async
-        ) {
+        )
+        {
             var prm = (string)null;
 
             return AssertQuery(
@@ -9075,7 +9176,8 @@ namespace Microsoft.EntityFrameworkCore.Query
         [MemberData(nameof(IsAsyncData))]
         public virtual Task FirstOrDefault_navigation_access_entity_equality_in_where_predicate_apply_peneding_selector(
             bool async
-        ) {
+        )
+        {
             return AssertQuery(
                 async,
                 ss =>
@@ -9094,7 +9196,8 @@ namespace Microsoft.EntityFrameworkCore.Query
         [MemberData(nameof(IsAsyncData))]
         public virtual Task Conditional_expression_with_test_being_simplified_to_constant_simple(
             bool isAsync
-        ) {
+        )
+        {
             var prm = true;
             var prm2 = (string)null;
 
@@ -9110,7 +9213,8 @@ namespace Microsoft.EntityFrameworkCore.Query
         [MemberData(nameof(IsAsyncData))]
         public virtual Task Conditional_expression_with_test_being_simplified_to_constant_complex(
             bool isAsync
-        ) {
+        )
+        {
             var prm = true;
             var prm2 = "Dom's Lancer";
             var prm3 = (string)null;
@@ -9133,7 +9237,8 @@ namespace Microsoft.EntityFrameworkCore.Query
         [MemberData(nameof(IsAsyncData))]
         public virtual async Task Bitwise_operation_with_non_null_parameter_optimizes_null_checks(
             bool async
-        ) {
+        )
+        {
             var ranks = MilitaryRank.Corporal | MilitaryRank.Sergeant | MilitaryRank.General;
 
             await AssertQuery(async, ss => ss.Set<Gear>().Where(g => (g.Rank & ranks) != 0));
@@ -9195,7 +9300,8 @@ namespace Microsoft.EntityFrameworkCore.Query
         [MemberData(nameof(IsAsyncData))]
         public virtual async Task Logical_operation_with_non_null_parameter_optimizes_null_checks(
             bool async
-        ) {
+        )
+        {
             var prm = true;
             await AssertQuery(
                 async,
@@ -9271,7 +9377,8 @@ namespace Microsoft.EntityFrameworkCore.Query
         [MemberData(nameof(IsAsyncData))]
         public virtual Task Byte_array_filter_by_length_literal_does_not_cast_on_varbinary_n(
             bool async
-        ) {
+        )
+        {
             return AssertQuery(
                 async,
                 ss => ss.Set<Squad>().Where(w => w.Banner5.Length == 5),
@@ -9349,7 +9456,8 @@ namespace Microsoft.EntityFrameworkCore.Query
         [MemberData(nameof(IsAsyncData))]
         public virtual Task Conditional_with_conditions_evaluating_to_false_gets_optimized(
             bool async
-        ) {
+        )
+        {
             return AssertQuery(
                 async,
                 ss =>
@@ -9367,7 +9475,8 @@ namespace Microsoft.EntityFrameworkCore.Query
         [MemberData(nameof(IsAsyncData))]
         public virtual Task Conditional_with_conditions_evaluating_to_true_gets_optimized(
             bool async
-        ) {
+        )
+        {
             return AssertQuery(
                 async,
                 ss =>
@@ -9409,7 +9518,8 @@ namespace Microsoft.EntityFrameworkCore.Query
         [MemberData(nameof(IsAsyncData))]
         public virtual Task Group_by_nullable_property_HasValue_and_project_the_grouping_key(
             bool async
-        ) {
+        )
+        {
             return AssertQueryScalar(
                 async,
                 ss => ss.Set<Weapon>().GroupBy(w => w.SynergyWithId.HasValue).Select(g => g.Key)
@@ -9420,7 +9530,8 @@ namespace Microsoft.EntityFrameworkCore.Query
         [MemberData(nameof(IsAsyncData))]
         public virtual Task Group_by_nullable_property_and_project_the_grouping_key_HasValue(
             bool async
-        ) {
+        )
+        {
             return AssertQueryScalar(
                 async,
                 ss => ss.Set<Weapon>().GroupBy(w => w.SynergyWithId).Select(g => g.Key.HasValue)
@@ -9581,7 +9692,8 @@ namespace Microsoft.EntityFrameworkCore.Query
         [MemberData(nameof(IsAsyncData))]
         public virtual Task Contains_on_collection_of_nullable_byte_subquery_null_constant(
             bool async
-        ) {
+        )
+        {
             return AssertQuery(
                 async,
                 ss =>
@@ -9599,7 +9711,8 @@ namespace Microsoft.EntityFrameworkCore.Query
         [MemberData(nameof(IsAsyncData))]
         public virtual Task Contains_on_collection_of_nullable_byte_subquery_null_parameter(
             bool async
-        ) {
+        )
+        {
             var prm = default(byte?);
 
             return AssertQuery(
@@ -9639,7 +9752,8 @@ namespace Microsoft.EntityFrameworkCore.Query
         [MemberData(nameof(IsAsyncData))]
         public virtual Task Subquery_projecting_non_nullable_scalar_contains_non_nullable_value_doesnt_need_null_expansion(
             bool async
-        ) {
+        )
+        {
             return AssertQuery(
                 async,
                 ss =>
@@ -9661,7 +9775,8 @@ namespace Microsoft.EntityFrameworkCore.Query
         [MemberData(nameof(IsAsyncData))]
         public virtual Task Subquery_projecting_non_nullable_scalar_contains_non_nullable_value_doesnt_need_null_expansion_negated(
             bool async
-        ) {
+        )
+        {
             return AssertQuery(
                 async,
                 ss =>
@@ -9683,7 +9798,8 @@ namespace Microsoft.EntityFrameworkCore.Query
         [MemberData(nameof(IsAsyncData))]
         public virtual Task Subquery_projecting_nullable_scalar_contains_nullable_value_needs_null_expansion(
             bool async
-        ) {
+        )
+        {
             return AssertQuery(
                 async,
                 ss =>
@@ -9705,7 +9821,8 @@ namespace Microsoft.EntityFrameworkCore.Query
         [MemberData(nameof(IsAsyncData))]
         public virtual Task Subquery_projecting_nullable_scalar_contains_nullable_value_needs_null_expansion_negated(
             bool async
-        ) {
+        )
+        {
             return AssertQuery(
                 async,
                 ss =>
@@ -9727,7 +9844,8 @@ namespace Microsoft.EntityFrameworkCore.Query
         [MemberData(nameof(IsAsyncData))]
         public virtual Task Enum_closure_typed_as_underlying_type_generates_correct_parameter_type(
             bool async
-        ) {
+        )
+        {
             var prm = (int)AmmunitionType.Cartridge;
 
             return AssertQuery(
@@ -9743,7 +9861,8 @@ namespace Microsoft.EntityFrameworkCore.Query
         [MemberData(nameof(IsAsyncData))]
         public virtual Task Enum_flags_closure_typed_as_underlying_type_generates_correct_parameter_type(
             bool async
-        ) {
+        )
+        {
             var prm =
                 (int)MilitaryRank.Private + (int)MilitaryRank.Sergeant + (int)MilitaryRank.General;
 
@@ -9757,7 +9876,8 @@ namespace Microsoft.EntityFrameworkCore.Query
         [MemberData(nameof(IsAsyncData))]
         public virtual Task Enum_flags_closure_typed_as_different_type_generates_correct_parameter_type(
             bool async
-        ) {
+        )
+        {
             var prm = (byte)MilitaryRank.Private + (byte)MilitaryRank.Sergeant;
 
             return AssertQuery(
@@ -9770,7 +9890,8 @@ namespace Microsoft.EntityFrameworkCore.Query
         [MemberData(nameof(IsAsyncData))]
         public virtual Task Constant_enum_with_same_underlying_value_as_previously_parameterized_int(
             bool async
-        ) {
+        )
+        {
             return AssertQueryScalar(
                 async,
                 ss =>
@@ -9889,7 +10010,8 @@ namespace Microsoft.EntityFrameworkCore.Query
         [MemberData(nameof(IsAsyncData))]
         public virtual Task Client_projection_with_nested_unmapped_property_bubbles_up_translation_failure_info(
             bool async
-        ) {
+        )
+        {
             return AssertTranslationFailedWithDetails(
                 () =>
                     AssertQuery(
@@ -9914,7 +10036,8 @@ namespace Microsoft.EntityFrameworkCore.Query
         [MemberData(nameof(IsAsyncData))]
         public virtual Task Client_member_and_unsupported_string_Equals_in_the_same_query(
             bool async
-        ) {
+        )
+        {
             return AssertQuery(
                 async,
                 ss =>
@@ -9948,7 +10071,8 @@ namespace Microsoft.EntityFrameworkCore.Query
         [MemberData(nameof(IsAsyncData))]
         public virtual Task Groupby_anonymous_type_with_navigations_followed_up_by_anonymous_projection_and_orderby(
             bool async
-        ) {
+        )
+        {
             return AssertQuery(
                 async,
                 ss =>
@@ -9966,7 +10090,8 @@ namespace Microsoft.EntityFrameworkCore.Query
         [MemberData(nameof(IsAsyncData))]
         public virtual Task SelectMany_predicate_with_non_equality_comparison_converted_to_inner_join(
             bool async
-        ) {
+        )
+        {
             return AssertQuery(
                 async,
                 ss =>
@@ -9987,7 +10112,8 @@ namespace Microsoft.EntityFrameworkCore.Query
         [MemberData(nameof(IsAsyncData))]
         public virtual Task SelectMany_predicate_with_non_equality_comparison_DefaultIfEmpty_converted_to_left_join(
             bool async
-        ) {
+        )
+        {
             return AssertQuery(
                 async,
                 ss =>
@@ -10010,7 +10136,8 @@ namespace Microsoft.EntityFrameworkCore.Query
         [MemberData(nameof(IsAsyncData))]
         public virtual Task SelectMany_predicate_after_navigation_with_non_equality_comparison_DefaultIfEmpty_converted_to_left_join(
             bool async
-        ) {
+        )
+        {
             return AssertQuery(
                 async,
                 ss =>
@@ -10042,7 +10169,8 @@ namespace Microsoft.EntityFrameworkCore.Query
         [MemberData(nameof(IsAsyncData))]
         public virtual Task SelectMany_without_result_selector_and_non_equality_comparison_converted_to_join(
             bool async
-        ) {
+        )
+        {
             return AssertQuery(
                 async,
                 ss =>
@@ -10060,7 +10188,8 @@ namespace Microsoft.EntityFrameworkCore.Query
         [MemberData(nameof(IsAsyncData))]
         public virtual Task Filtered_collection_projection_with_order_comparison_predicate_converted_to_join(
             bool async
-        ) {
+        )
+        {
             return AssertQuery(
                 async,
                 ss =>
@@ -10076,7 +10205,8 @@ namespace Microsoft.EntityFrameworkCore.Query
         [MemberData(nameof(IsAsyncData))]
         public virtual Task Filtered_collection_projection_with_order_comparison_predicate_converted_to_join2(
             bool async
-        ) {
+        )
+        {
             return AssertQuery(
                 async,
                 ss =>
@@ -10092,7 +10222,8 @@ namespace Microsoft.EntityFrameworkCore.Query
         [MemberData(nameof(IsAsyncData))]
         public virtual Task Filtered_collection_projection_with_order_comparison_predicate_converted_to_join3(
             bool async
-        ) {
+        )
+        {
             return AssertQuery(
                 async,
                 ss =>
@@ -10108,7 +10239,8 @@ namespace Microsoft.EntityFrameworkCore.Query
         [MemberData(nameof(IsAsyncData))]
         public virtual Task SelectMany_predicate_with_non_equality_comparison_with_Take_doesnt_convert_to_join(
             bool async
-        ) {
+        )
+        {
             return AssertQuery(
                 async,
                 ss =>
@@ -10152,7 +10284,8 @@ namespace Microsoft.EntityFrameworkCore.Query
         [MemberData(nameof(IsAsyncData))]
         public virtual Task Correlated_collection_with_inner_collection_references_element_two_levels_up(
             bool async
-        ) {
+        )
+        {
             return AssertQuery(
                 async,
                 ss =>
@@ -10482,7 +10615,8 @@ namespace Microsoft.EntityFrameworkCore.Query
         [MemberData(nameof(IsAsyncData))]
         public virtual Task Projecting_property_converted_to_nullable_with_addition_and_final_projection(
             bool async
-        ) {
+        )
+        {
             return AssertQuery(
                 async,
                 ss =>
@@ -10568,7 +10702,8 @@ namespace Microsoft.EntityFrameworkCore.Query
         [MemberData(nameof(IsAsyncData))]
         public virtual Task Projecting_property_converted_to_nullable_with_function_call2(
             bool async
-        ) {
+        )
+        {
             return AssertQuery(
                 async,
                 ss =>
@@ -10666,7 +10801,8 @@ namespace Microsoft.EntityFrameworkCore.Query
         [MemberData(nameof(IsAsyncData))]
         public virtual Task Projecting_property_converted_to_nullable_into_member_assignment(
             bool async
-        ) {
+        )
+        {
             return AssertQuery(
                 async,
                 ss =>
@@ -10794,7 +10930,8 @@ namespace Microsoft.EntityFrameworkCore.Query
         [MemberData(nameof(IsAsyncData))]
         public virtual Task Projecting_property_converted_to_nullable_and_use_it_in_order_by(
             bool async
-        ) {
+        )
+        {
             return AssertQuery(
                 async,
                 ss =>
@@ -10825,7 +10962,8 @@ namespace Microsoft.EntityFrameworkCore.Query
         [MemberData(nameof(IsAsyncData))]
         public virtual Task Correlated_collection_with_distinct_projecting_identifier_column(
             bool async
-        ) {
+        )
+        {
             return AssertQuery(
                 async,
                 ss =>
@@ -10862,7 +11000,8 @@ namespace Microsoft.EntityFrameworkCore.Query
         [MemberData(nameof(IsAsyncData))]
         public virtual Task Correlated_collection_with_distinct_projecting_identifier_column_and_correlation_key(
             bool async
-        ) {
+        )
+        {
             return AssertQuery(
                 async,
                 ss =>
@@ -10902,7 +11041,8 @@ namespace Microsoft.EntityFrameworkCore.Query
         [MemberData(nameof(IsAsyncData))]
         public virtual Task Correlated_collection_with_distinct_projecting_identifier_column_composite_key(
             bool async
-        ) {
+        )
+        {
             return AssertQuery(
                 async,
                 ss =>
@@ -10942,7 +11082,8 @@ namespace Microsoft.EntityFrameworkCore.Query
         [MemberData(nameof(IsAsyncData))]
         public virtual Task Correlated_collection_with_distinct_not_projecting_identifier_column(
             bool async
-        ) {
+        )
+        {
             return AssertQuery(
                 async,
                 ss =>
@@ -10979,7 +11120,8 @@ namespace Microsoft.EntityFrameworkCore.Query
         [MemberData(nameof(IsAsyncData))]
         public virtual Task Correlated_collection_with_distinct_not_projecting_identifier_column_also_projecting_complex_expressions(
             bool async
-        ) {
+        )
+        {
             return AssertQuery(
                 async,
                 ss =>
@@ -11025,7 +11167,8 @@ namespace Microsoft.EntityFrameworkCore.Query
         [MemberData(nameof(IsAsyncData))]
         public virtual Task Correlated_collection_with_groupby_not_projecting_identifier_column_but_only_grouping_key_in_final_projection(
             bool async
-        ) {
+        )
+        {
             return AssertQuery(
                 async,
                 ss =>
@@ -11062,7 +11205,8 @@ namespace Microsoft.EntityFrameworkCore.Query
         [MemberData(nameof(IsAsyncData))]
         public virtual Task Correlated_collection_with_groupby_not_projecting_identifier_column_with_group_aggregate_in_final_projection(
             bool async
-        ) {
+        )
+        {
             return AssertQuery(
                 async,
                 ss =>
@@ -11100,7 +11244,8 @@ namespace Microsoft.EntityFrameworkCore.Query
         [MemberData(nameof(IsAsyncData))]
         public virtual Task Correlated_collection_with_groupby_not_projecting_identifier_column_with_group_aggregate_in_final_projection_multiple_grouping_keys(
             bool async
-        ) {
+        )
+        {
             return AssertQuery(
                 async,
                 ss =>
@@ -11139,7 +11284,8 @@ namespace Microsoft.EntityFrameworkCore.Query
         [MemberData(nameof(IsAsyncData))]
         public virtual Task Correlated_collection_with_groupby_with_complex_grouping_key_not_projecting_identifier_column_with_group_aggregate_in_final_projection(
             bool async
-        ) {
+        )
+        {
             return AssertQuery(
                 async,
                 ss =>
@@ -11177,7 +11323,8 @@ namespace Microsoft.EntityFrameworkCore.Query
         [MemberData(nameof(IsAsyncData))]
         public virtual Task Correlated_collection_via_SelectMany_with_Distinct_missing_indentifying_columns_in_projection(
             bool async
-        ) {
+        )
+        {
             return AssertQuery(
                 async,
                 ss =>
@@ -11225,7 +11372,8 @@ namespace Microsoft.EntityFrameworkCore.Query
         [MemberData(nameof(IsAsyncData))]
         public virtual Task Projecting_some_properties_as_well_as_correlated_collection_followed_by_Distinct(
             bool async
-        ) {
+        )
+        {
             return AssertQuery(
                 async,
                 ss =>
@@ -11246,7 +11394,8 @@ namespace Microsoft.EntityFrameworkCore.Query
         [MemberData(nameof(IsAsyncData))]
         public virtual Task Projecting_entity_as_well_as_correlated_collection_followed_by_Distinct(
             bool async
-        ) {
+        )
+        {
             return AssertQuery(
                 async,
                 ss => ss.Set<Gear>().Select(g => new { g, g.Weapons }).Distinct(),
@@ -11263,7 +11412,8 @@ namespace Microsoft.EntityFrameworkCore.Query
         [MemberData(nameof(IsAsyncData))]
         public virtual Task Projecting_entity_as_well_as_complex_correlated_collection_followed_by_Distinct(
             bool async
-        ) {
+        )
+        {
             return AssertQuery(
                 async,
                 ss =>
@@ -11290,7 +11440,8 @@ namespace Microsoft.EntityFrameworkCore.Query
         [MemberData(nameof(IsAsyncData))]
         public virtual Task Projecting_entity_as_well_as_correlated_collection_of_scalars_followed_by_Distinct(
             bool async
-        ) {
+        )
+        {
             return AssertQuery(
                 async,
                 ss =>
@@ -11420,7 +11571,8 @@ namespace Microsoft.EntityFrameworkCore.Query
         [MemberData(nameof(IsAsyncData))]
         public virtual Task Correlated_collection_after_distinct_3_levels_without_original_identifiers(
             bool async
-        ) {
+        )
+        {
             return AssertQuery(
                 async,
                 ss =>

@@ -563,7 +563,8 @@ namespace Newtonsoft.Json.Tests.Issues
                 int p254,
                 int p255,
                 int p256
-            ) {
+            )
+            {
                 P0 = p0;
                 P256 = p256;
             }

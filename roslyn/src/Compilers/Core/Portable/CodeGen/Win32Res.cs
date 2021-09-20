@@ -29,7 +29,8 @@ namespace Microsoft.CodeAnalysis.CodeGen
             string name,
             int typeId,
             string typeName
-        ) {
+        )
+        {
             _data = data;
             _codePage = codePage;
             _languageId = languageId;

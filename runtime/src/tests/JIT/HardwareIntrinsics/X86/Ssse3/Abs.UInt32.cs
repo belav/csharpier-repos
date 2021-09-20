@@ -138,7 +138,8 @@ namespace JIT.HardwareIntrinsics.X86
                     (alignment != 32 && alignment != 16)
                     || (alignment * 2) < sizeOfinArray1
                     || (alignment * 2) < sizeOfoutArray
-                ) {
+                )
+                {
                     throw new ArgumentException("Invalid value of alignment");
                 }
 
@@ -517,7 +518,8 @@ namespace JIT.HardwareIntrinsics.X86
             Vector128<Int32> op1,
             void* result,
             [CallerMemberName] string method = ""
-        ) {
+        )
+        {
             Int32[] inArray1 = new Int32[Op1ElementCount];
             UInt32[] outArray = new UInt32[RetElementCount];
 
@@ -554,7 +556,8 @@ namespace JIT.HardwareIntrinsics.X86
             Int32[] firstOp,
             UInt32[] result,
             [CallerMemberName] string method = ""
-        ) {
+        )
+        {
             bool succeeded = true;
 
             if (result[0] != Math.Abs(firstOp[0]))

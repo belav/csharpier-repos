@@ -2678,7 +2678,8 @@ public class QueryExpressionTest
                 var ordering in tree.GetCompilationUnitRoot()
                     .DescendantNodes()
                     .OfType<OrderingSyntax>()
-            ) {
+            )
+            {
                 var symbolInfo = model.GetSemanticInfoSummary(ordering);
                 Assert.Equal(names[count++], symbolInfo.Symbol.Name);
             }

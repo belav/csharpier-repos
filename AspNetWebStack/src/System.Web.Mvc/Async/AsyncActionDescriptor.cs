@@ -21,7 +21,8 @@ namespace System.Web.Mvc.Async
         public override object Execute(
             ControllerContext controllerContext,
             IDictionary<string, object> parameters
-        ) {
+        )
+        {
             string errorMessage = String.Format(
                 CultureInfo.CurrentCulture,
                 MvcResources.AsyncActionDescriptor_CannotExecuteSynchronously,

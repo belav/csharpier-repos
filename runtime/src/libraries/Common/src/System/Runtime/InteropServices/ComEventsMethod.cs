@@ -81,7 +81,8 @@ namespace System.Runtime.InteropServices
                         pi.ParameterType.IsByRef
                         && pi.ParameterType.HasElementType
                         && pi.ParameterType.GetElementType()!.IsEnum
-                    ) {
+                    )
+                    {
                         if (targetTypes == null)
                         {
                             targetTypes = new Type?[_expectedParamsCount];
@@ -199,7 +200,8 @@ namespace System.Runtime.InteropServices
                     if (
                         wrapperMaybe.Delegate.GetType() == d.GetType()
                         && wrapperMaybe.WrapArgs == wrapArgs
-                    ) {
+                    )
+                    {
                         removeIdx = i;
                         wrapper = wrapperMaybe;
                         break;

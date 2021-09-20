@@ -28,7 +28,8 @@ namespace Microsoft.VisualStudio.LanguageServices.ExternalAccess.VSTypeScript.Ap
             SourceTextContainer sourceTextContainer,
             string fullPath,
             bool isLspContainedDocument = false
-        ) {
+        )
+        {
             var documentServiceProvider = isLspContainedDocument
                 ? LspContainedDocumentServiceProvider.Instance
                 : null;

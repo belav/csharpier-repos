@@ -36,7 +36,8 @@ namespace Microsoft.AspNetCore.Hosting
             ILogger logger,
             DiagnosticListener diagnosticListener,
             ActivitySource activitySource
-        ) {
+        )
+        {
             _logger = logger;
             _diagnosticListener = diagnosticListener;
             _activitySource = activitySource;
@@ -65,7 +66,8 @@ namespace Microsoft.AspNetCore.Hosting
                 loggingEnabled
                 || diagnosticListenerActivityCreationEnabled
                 || _activitySource.HasListeners()
-            ) {
+            )
+            {
                 context.Activity = StartActivity(
                     httpContext,
                     loggingEnabled,
@@ -111,7 +113,8 @@ namespace Microsoft.AspNetCore.Hosting
             HttpContext httpContext,
             Exception? exception,
             HostingApplication.Context context
-        ) {
+        )
+        {
             // Local cache items resolved multiple items, in order of use so they are primed in cpu pipeline when used
             var startTimestamp = context.StartTimestamp;
             long currentTimestamp = 0;
@@ -215,7 +218,8 @@ namespace Microsoft.AspNetCore.Hosting
             HostingApplication.Context context,
             long startTimestamp,
             long currentTimestamp
-        ) {
+        )
+        {
             // IsEnabled isn't checked in the caller, startTimestamp > 0 is used as a fast proxy check
             // but that may be because diagnostics are enabled, which also uses startTimestamp,
             // so check if we logged the start event
@@ -258,7 +262,8 @@ namespace Microsoft.AspNetCore.Hosting
             HttpContext httpContext,
             long currentTimestamp,
             Exception exception
-        ) {
+        )
+        {
             _diagnosticListener.Write(
                 DiagnosticsUnhandledExceptionKey,
                 new
@@ -285,7 +290,8 @@ namespace Microsoft.AspNetCore.Hosting
             bool loggingEnabled,
             bool diagnosticListenerActivityCreationEnabled,
             out bool hasDiagnosticListener
-        ) {
+        )
+        {
             var activity = _activitySource.CreateActivity(ActivityName, ActivityKind.Server);
             if (activity is null && (loggingEnabled || diagnosticListenerActivityCreationEnabled))
             {
@@ -354,7 +360,8 @@ namespace Microsoft.AspNetCore.Hosting
             HttpContext httpContext,
             Activity activity,
             bool hasDiagnosticListener
-        ) {
+        )
+        {
             if (hasDiagnosticListener)
             {
                 StopActivity(activity, httpContext);

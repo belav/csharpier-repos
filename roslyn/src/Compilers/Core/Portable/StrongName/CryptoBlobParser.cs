@@ -135,7 +135,8 @@ namespace Microsoft.CodeAnalysis
             var signatureAlgorithmId = new AlgorithmId(sigAlgId);
             if (
                 signatureAlgorithmId.IsSet && signatureAlgorithmId.Class != AlgorithmClass.Signature
-            ) {
+            )
+            {
                 return false;
             }
 
@@ -146,7 +147,8 @@ namespace Microsoft.CodeAnalysis
                     hashAlgorithmId.Class != AlgorithmClass.Hash
                     || hashAlgorithmId.SubId < AlgorithmSubId.Sha1Hash
                 )
-            ) {
+            )
+            {
                 return false;
             }
 
@@ -173,7 +175,8 @@ namespace Microsoft.CodeAnalysis
             uint bitLen,
             uint pubExp,
             ReadOnlySpan<byte> pubKeyData
-        ) {
+        )
+        {
             var w = new BlobWriter(3 * sizeof(uint) + s_offsetToKeyData + pubKeyData.Length);
             w.WriteUInt32(AlgorithmId.RsaSign);
             w.WriteUInt32(AlgorithmId.Sha);
@@ -212,7 +215,8 @@ namespace Microsoft.CodeAnalysis
             ImmutableArray<byte> blob,
             out ImmutableArray<byte> snKey,
             out RSAParameters? privateKey
-        ) {
+        )
+        {
             privateKey = null;
             snKey = default(ImmutableArray<byte>);
 
@@ -250,7 +254,8 @@ namespace Microsoft.CodeAnalysis
                 if (
                     !(bType == PrivateKeyBlobId && magic == RSA2)
                     && !(bType == PublicKeyBlobId && magic == RSA1)
-                ) {
+                )
+                {
                     return false;
                 }
 
@@ -286,7 +291,8 @@ namespace Microsoft.CodeAnalysis
         internal static RSAParameters ToRSAParameters(
             this ReadOnlySpan<byte> cspBlob,
             bool includePrivateParameters
-        ) {
+        )
+        {
             var br = new LittleEndianReader(cspBlob);
 
             byte bType = br.ReadByte(); // BLOBHEADER.bType: Expected to be 0x6 (PUBLICKEYBLOB) or 0x7 (PRIVATEKEYBLOB), though there's no check for backward compat reasons.

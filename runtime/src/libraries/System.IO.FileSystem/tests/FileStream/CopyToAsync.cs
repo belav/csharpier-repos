@@ -30,7 +30,8 @@ namespace System.IO.Tests
                     0x100,
                     useAsync
                 )
-            ) {
+            )
+            {
                 fs.SafeFileHandle.Dispose();
                 Assert.Throws<ObjectDisposedException>(
                     () =>
@@ -49,7 +50,8 @@ namespace System.IO.Tests
                     0x100,
                     useAsync
                 )
-            ) {
+            )
+            {
                 fs.Write(TestBuffer, 0, TestBuffer.Length);
                 fs.SafeFileHandle.Dispose();
                 Assert.Throws<ObjectDisposedException>(
@@ -99,7 +101,8 @@ namespace System.IO.Tests
             int bufferSize,
             int writeSize,
             int numWrites
-        ) {
+        )
+        {
             // Create the expected data
             long totalLength = writeSize * numWrites;
             var expectedData = new byte[totalLength];
@@ -280,7 +283,8 @@ namespace System.IO.Tests
                     useAsync,
                     () => readAsyncInvoked = true
                 )
-            ) {
+            )
+            {
                 await fs.CopyToAsync(new MemoryStream());
                 Assert.True(readAsyncInvoked);
             }
@@ -304,7 +308,8 @@ namespace System.IO.Tests
                 int offset,
                 int count,
                 CancellationToken cancellationToken
-            ) {
+            )
+            {
                 _readAsyncInvoked();
                 return base.ReadAsync(buffer, offset, count, cancellationToken);
             }

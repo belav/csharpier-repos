@@ -60,7 +60,8 @@ namespace System.IO.Packaging
             System.Uri partUri,
             string contentType,
             System.IO.Packaging.CompressionOption compressionOption
-        ) {
+        )
+        {
             throw null;
         }
         protected abstract System.IO.Packaging.PackagePart CreatePartCore(
@@ -72,7 +73,8 @@ namespace System.IO.Packaging
             System.Uri targetUri,
             System.IO.Packaging.TargetMode targetMode,
             string relationshipType
-        ) {
+        )
+        {
             throw null;
         }
         public System.IO.Packaging.PackageRelationship CreateRelationship(
@@ -80,7 +82,8 @@ namespace System.IO.Packaging
             System.IO.Packaging.TargetMode targetMode,
             string relationshipType,
             string? id
-        ) {
+        )
+        {
             throw null;
         }
         public void DeletePart(System.Uri partUri) { }
@@ -109,7 +112,8 @@ namespace System.IO.Packaging
         }
         public System.IO.Packaging.PackageRelationshipCollection GetRelationshipsByType(
             string relationshipType
-        ) {
+        )
+        {
             throw null;
         }
         public static System.IO.Packaging.Package Open(System.IO.Stream stream)
@@ -119,14 +123,16 @@ namespace System.IO.Packaging
         public static System.IO.Packaging.Package Open(
             System.IO.Stream stream,
             System.IO.FileMode packageMode
-        ) {
+        )
+        {
             throw null;
         }
         public static System.IO.Packaging.Package Open(
             System.IO.Stream stream,
             System.IO.FileMode packageMode,
             System.IO.FileAccess packageAccess
-        ) {
+        )
+        {
             throw null;
         }
         public static System.IO.Packaging.Package Open(string path)
@@ -141,7 +147,8 @@ namespace System.IO.Packaging
             string path,
             System.IO.FileMode packageMode,
             System.IO.FileAccess packageAccess
-        ) {
+        )
+        {
             throw null;
         }
         public static System.IO.Packaging.Package Open(
@@ -149,7 +156,8 @@ namespace System.IO.Packaging
             System.IO.FileMode packageMode,
             System.IO.FileAccess packageAccess,
             System.IO.FileShare packageShare
-        ) {
+        )
+        {
             throw null;
         }
         public virtual bool PartExists(System.Uri partUri)
@@ -196,7 +204,8 @@ namespace System.IO.Packaging
             System.Uri targetUri,
             System.IO.Packaging.TargetMode targetMode,
             string relationshipType
-        ) {
+        )
+        {
             throw null;
         }
         public System.IO.Packaging.PackageRelationship CreateRelationship(
@@ -204,7 +213,8 @@ namespace System.IO.Packaging
             System.IO.Packaging.TargetMode targetMode,
             string relationshipType,
             string? id
-        ) {
+        )
+        {
             throw null;
         }
         public void DeleteRelationship(string id) { }
@@ -222,7 +232,8 @@ namespace System.IO.Packaging
         }
         public System.IO.Packaging.PackageRelationshipCollection GetRelationshipsByType(
             string relationshipType
-        ) {
+        )
+        {
             throw null;
         }
         public System.IO.Stream GetStream()
@@ -349,7 +360,8 @@ namespace System.IO.Packaging
         }
         public System.Collections.Generic.List<System.IO.Packaging.PackageRelationship> Select(
             System.IO.Packaging.Package package
-        ) {
+        )
+        {
             throw null;
         }
     }
@@ -383,7 +395,8 @@ namespace System.IO.Packaging
         }
         public static System.Uri GetSourcePartUriFromRelationshipPartUri(
             System.Uri relationshipPartUri
-        ) {
+        )
+        {
             throw null;
         }
         public static bool IsRelationshipPartUri(System.Uri partUri)
@@ -407,7 +420,8 @@ namespace System.IO.Packaging
             System.Uri partUri,
             string contentType,
             System.IO.Packaging.CompressionOption compressionOption
-        ) {
+        )
+        {
             throw null;
         }
         protected override void DeletePartCore(System.Uri partUri) { }
@@ -429,7 +443,8 @@ namespace System.IO.Packaging
         protected override System.IO.Stream? GetStreamCore(
             System.IO.FileMode streamFileMode,
             System.IO.FileAccess streamFileAccess
-        ) {
+        )
+        {
             throw null;
         }
     }

@@ -31,7 +31,8 @@ namespace Microsoft.AspNetCore.Mvc.ModelBinding.Binders
                 modelType == typeof(IFormFile)
                 || modelType == typeof(IFormFileCollection)
                 || typeof(IEnumerable<IFormFile>).IsAssignableFrom(modelType)
-            ) {
+            )
+            {
                 var loggerFactory = context.Services.GetRequiredService<ILoggerFactory>();
                 return new FormFileModelBinder(loggerFactory);
             }

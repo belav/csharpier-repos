@@ -296,7 +296,8 @@ namespace System.Xml.Xsl.Runtime
         internal static XmlAtomicValue ConvertToType(
             XmlAtomicValue value,
             XmlQueryType destinationType
-        ) {
+        )
+        {
             Debug.Assert(
                 destinationType.IsStrict && destinationType.IsAtomicValue,
                 "Can only convert to strict atomic type."

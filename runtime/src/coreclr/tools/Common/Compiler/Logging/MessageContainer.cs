@@ -58,7 +58,8 @@ namespace ILCompiler.Logging
             int code,
             string subcategory = MessageSubCategory.None,
             MessageOrigin? origin = null
-        ) {
+        )
+        {
             if (!(code >= 1000 && code <= 2000))
                 throw new ArgumentOutOfRangeException(
                     nameof(code),
@@ -86,7 +87,8 @@ namespace ILCompiler.Logging
             int code,
             MessageOrigin origin,
             string subcategory = MessageSubCategory.None
-        ) {
+        )
+        {
             //if (!(code > 2000 && code <= 6000))
             //    throw new ArgumentOutOfRangeException(nameof(code), $"The provided code '{code}' does not fall into the warning category, which is in the range of 2001 to 6000 (inclusive).");
 
@@ -99,7 +101,8 @@ namespace ILCompiler.Logging
             int code,
             MessageOrigin origin,
             string subcategory = MessageSubCategory.None
-        ) {
+        )
+        {
             if (context.IsWarningSuppressed(code, origin))
                 return null;
 
@@ -141,7 +144,8 @@ namespace ILCompiler.Logging
             int? code,
             string subcategory = MessageSubCategory.None,
             MessageOrigin? origin = null
-        ) {
+        )
+        {
             Code = code;
             Category = category;
             Origin = origin;

@@ -20,7 +20,8 @@ namespace System.ComponentModel
             CultureInfo culture,
             object value,
             Type destinationType
-        ) {
+        )
+        {
             if (destinationType == typeof(string) && value is Array)
             {
                 return SR.Format(SR.Array, value.GetType().Name);
@@ -40,7 +41,8 @@ namespace System.ComponentModel
             ITypeDescriptorContext context,
             object value,
             Attribute[] attributes
-        ) {
+        )
+        {
             if (value == null)
             {
                 return null;

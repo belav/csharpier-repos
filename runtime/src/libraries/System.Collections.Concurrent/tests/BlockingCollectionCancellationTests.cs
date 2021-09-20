@@ -177,7 +177,8 @@ namespace System.Collections.Concurrent.Tests
         private static void EnsureOperationCanceledExceptionThrown(
             Action action,
             CancellationToken token
-        ) {
+        )
+        {
             OperationCanceledException operationCanceledEx =
                 Assert.Throws<OperationCanceledException>(action); // "BlockingCollectionCancellationTests: OperationCanceledException not thrown.");
             Assert.Equal(token, operationCanceledEx.CancellationToken);

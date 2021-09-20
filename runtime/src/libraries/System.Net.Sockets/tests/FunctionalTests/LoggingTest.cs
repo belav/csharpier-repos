@@ -53,7 +53,8 @@ namespace System.Net.Sockets.Tests
                                 "Private.InternalDiagnostics.System.Net.Sockets",
                                 EventLevel.Verbose
                             )
-                        ) {
+                        )
+                        {
                             var events = new ConcurrentQueue<EventWrittenEventArgs>();
                             listener.RunWithCallback(
                                 events.Enqueue,

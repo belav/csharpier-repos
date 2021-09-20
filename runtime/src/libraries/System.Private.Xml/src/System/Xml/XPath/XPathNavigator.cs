@@ -542,7 +542,8 @@ namespace System.Xml.XPath
                 (nt != XPathNodeType.Element && scope != XmlNamespaceScope.Local)
                 || nt == XPathNodeType.Attribute
                 || nt == XPathNodeType.Namespace
-            ) {
+            )
+            {
                 XPathNavigator navSave = Clone();
 
                 // If current item is not an element, then try parent
@@ -816,7 +817,8 @@ namespace System.Xml.XPath
             string localName,
             string namespaceURI,
             XPathNavigator? end
-        ) {
+        )
+        {
             XPathNavigator navSave = Clone();
 
             if (end != null)
@@ -1072,7 +1074,8 @@ namespace System.Xml.XPath
         public virtual bool CheckValidity(
             XmlSchemaSet schemas,
             ValidationEventHandler validationEventHandler
-        ) {
+        )
+        {
             IXmlSchemaInfo? schemaInfo;
             XmlSchemaType? schemaType = null;
             XmlSchemaElement? schemaElement = null;
@@ -1163,7 +1166,8 @@ namespace System.Xml.XPath
             XmlSchemaType? schemaType,
             XmlSchemaElement? schemaElement,
             XmlSchemaAttribute? schemaAttribute
-        ) {
+        )
+        {
             if (schemaAttribute != null)
             {
                 return schemaAttribute.Validate(reader, null, schemas, validationEvent);
@@ -1194,7 +1198,8 @@ namespace System.Xml.XPath
             internal CheckValidityHelper(
                 ValidationEventHandler nextEventHandler,
                 XPathNavigatorReader reader
-            ) {
+            )
+            {
                 _isValid = true;
                 _nextEventHandler = nextEventHandler;
                 _reader = reader;
@@ -1239,7 +1244,8 @@ namespace System.Xml.XPath
         public virtual XPathNavigator? SelectSingleNode(
             string xpath,
             IXmlNamespaceResolver? resolver
-        ) {
+        )
+        {
             return SelectSingleNode(XPathExpression.Compile(xpath, resolver));
         }
 
@@ -1363,7 +1369,8 @@ namespace System.Xml.XPath
             string name,
             string namespaceURI,
             bool matchSelf
-        ) {
+        )
+        {
             return new XPathAncestorIterator(this.Clone(), name, namespaceURI, matchSelf);
         }
 
@@ -1376,7 +1383,8 @@ namespace System.Xml.XPath
             string name,
             string namespaceURI,
             bool matchSelf
-        ) {
+        )
+        {
             return new XPathDescendantIterator(this.Clone(), name, namespaceURI, matchSelf);
         }
 
@@ -1432,7 +1440,8 @@ namespace System.Xml.XPath
                 type == XPathNodeType.Root
                 || type == XPathNodeType.Attribute
                 || type == XPathNodeType.Namespace
-            ) {
+            )
+            {
                 throw new InvalidOperationException(SR.Xpn_BadPosition);
             }
             XmlWriter writer = ReplaceRange(this);
@@ -1711,7 +1720,8 @@ namespace System.Xml.XPath
             string localName,
             string namespaceURI,
             string value
-        ) {
+        )
+        {
             XmlWriter writer = PrependChild();
             writer.WriteStartElement(prefix, localName, namespaceURI);
             if (value != null)
@@ -1727,7 +1737,8 @@ namespace System.Xml.XPath
             string localName,
             string namespaceURI,
             string value
-        ) {
+        )
+        {
             XmlWriter writer = AppendChild();
             writer.WriteStartElement(prefix, localName, namespaceURI);
             if (value != null)
@@ -1743,7 +1754,8 @@ namespace System.Xml.XPath
             string localName,
             string namespaceURI,
             string value
-        ) {
+        )
+        {
             XmlWriter writer = InsertBefore();
             writer.WriteStartElement(prefix, localName, namespaceURI);
             if (value != null)
@@ -1759,7 +1771,8 @@ namespace System.Xml.XPath
             string localName,
             string namespaceURI,
             string value
-        ) {
+        )
+        {
             XmlWriter writer = InsertAfter();
             writer.WriteStartElement(prefix, localName, namespaceURI);
             if (value != null)
@@ -1775,7 +1788,8 @@ namespace System.Xml.XPath
             string localName,
             string namespaceURI,
             string value
-        ) {
+        )
+        {
             XmlWriter writer = CreateAttributes();
             writer.WriteStartAttribute(prefix, localName, namespaceURI);
             if (value != null)

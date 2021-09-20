@@ -52,7 +52,8 @@ namespace System.Linq.Expressions.Tests
         [Theory, ClassData(typeof(CompilationTypes))]
         public static void CheckNewWithTwoParametersStructWithStringAndValueTest(
             bool useInterpreter
-        ) {
+        )
+        {
             string[] array1 = { null, "", "a", "foo" };
             S[] array2 = { default(S), new S() };
             for (int i = 0; i < array1.Length; i++)
@@ -76,7 +77,8 @@ namespace System.Linq.Expressions.Tests
             int a,
             double b,
             bool useInterpreter
-        ) {
+        )
+        {
             ConstructorInfo constructor = typeof(Sp).GetConstructor(
                 new[] { typeof(int), typeof(double) }
             );
@@ -117,7 +119,8 @@ namespace System.Linq.Expressions.Tests
             string a,
             S b,
             bool useInterpreter
-        ) {
+        )
+        {
             ConstructorInfo constructor = typeof(Scs).GetConstructor(
                 new[] { typeof(string), typeof(S) }
             );

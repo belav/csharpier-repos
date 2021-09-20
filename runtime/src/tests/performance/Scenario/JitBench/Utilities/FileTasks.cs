@@ -18,7 +18,8 @@ namespace JitBench
             string localExpandedDirPath,
             ITestOutputHelper output,
             bool deleteTempFiles = true
-        ) {
+        )
+        {
             string tempDownloadPath = Path.Combine(
                 Path.GetTempPath(),
                 Path.GetFileName(remotePath)
@@ -48,7 +49,8 @@ namespace JitBench
             ITestOutputHelper output,
             bool deleteZippedFiles = true,
             string tempTarPath = null
-        ) {
+        )
+        {
             if (zipPath.EndsWith(".zip"))
             {
                 await FileTasks.UnWinZip(zipPath, expandedDirPath, output);
@@ -90,7 +92,8 @@ namespace JitBench
             string zipPath,
             string expandedDirPath,
             ITestOutputHelper output
-        ) {
+        )
+        {
             output.WriteLine("Unziping: " + zipPath + " -> " + expandedDirPath);
             using (FileStream zipStream = File.OpenRead(zipPath))
             {
@@ -118,7 +121,8 @@ namespace JitBench
             string gzipPath,
             string expandedFilePath,
             ITestOutputHelper output
-        ) {
+        )
+        {
             output.WriteLine("Unziping: " + gzipPath + " -> " + expandedFilePath);
             using (FileStream gzipStream = File.OpenRead(gzipPath))
             {
@@ -127,7 +131,8 @@ namespace JitBench
                         gzipStream,
                         CompressionMode.Decompress
                     )
-                ) {
+                )
+                {
                     using (FileStream targetFileStream = File.OpenWrite(expandedFilePath))
                     {
                         await expandedStream.CopyToAsync(targetFileStream);
@@ -140,7 +145,8 @@ namespace JitBench
             string tarPath,
             string expandedDirPath,
             ITestOutputHelper output
-        ) {
+        )
+        {
             Directory.CreateDirectory(expandedDirPath);
             string tarToolPath = null;
             if (RuntimeInformation.IsOSPlatform(OSPlatform.Linux))
@@ -169,7 +175,8 @@ namespace JitBench
             string destDir,
             ITestOutputHelper output = null,
             bool overwrite = true
-        ) {
+        )
+        {
             if (output != null)
             {
                 output.WriteLine("Copying " + sourceDir + " -> " + destDir);
@@ -244,7 +251,8 @@ namespace JitBench
             string sourceDirName,
             string destDirName,
             ITestOutputHelper output
-        ) {
+        )
+        {
             if (output != null)
             {
                 output.WriteLine("Moving " + sourceDirName + " -> " + destDirName);
@@ -278,7 +286,8 @@ namespace JitBench
             string sourceFileName,
             string destFileName,
             ITestOutputHelper output
-        ) {
+        )
+        {
             if (output != null)
             {
                 output.WriteLine("Moving " + sourceFileName + " -> " + destFileName);

@@ -25,7 +25,8 @@ namespace System.Reflection.Metadata.Ecma335
             int guidHeapRefSize,
             MemoryBlock containingBlock,
             int containingBlockOffset
-        ) {
+        )
+        {
             this.NumberOfRows = numberOfRows;
             _IsStringHeapRefSizeSmall = stringHeapRefSize == 2;
             _IsGUIDHeapRefSizeSmall = guidHeapRefSize == 2;
@@ -97,7 +98,8 @@ namespace System.Reflection.Metadata.Ecma335
             int stringHeapRefSize,
             MemoryBlock containingBlock,
             int containingBlockOffset
-        ) {
+        )
+        {
             this.NumberOfRows = numberOfRows;
             _IsResolutionScopeRefSizeSmall = resolutionScopeRefSize == 2;
             _IsStringHeapRefSizeSmall = stringHeapRefSize == 2;
@@ -166,7 +168,8 @@ namespace System.Reflection.Metadata.Ecma335
             int stringHeapRefSize,
             MemoryBlock containingBlock,
             int containingBlockOffset
-        ) {
+        )
+        {
             this.NumberOfRows = numberOfRows;
             _IsFieldRefSizeSmall = fieldRefSize == 2;
             _IsMethodRefSizeSmall = methodRefSize == 2;
@@ -247,7 +250,8 @@ namespace System.Reflection.Metadata.Ecma335
         internal TypeDefinitionHandle FindTypeContainingMethod(
             int methodDefOrPtrRowId,
             int numberOfMethods
-        ) {
+        )
+        {
             int numOfRows = this.NumberOfRows;
             int slot = this.Block.BinarySearchForSlot(
                 numOfRows,
@@ -296,7 +300,8 @@ namespace System.Reflection.Metadata.Ecma335
         internal TypeDefinitionHandle FindTypeContainingField(
             int fieldDefOrPtrRowId,
             int numberOfFields
-        ) {
+        )
+        {
             int numOfRows = this.NumberOfRows;
             int slot = this.Block.BinarySearchForSlot(
                 numOfRows,
@@ -356,7 +361,8 @@ namespace System.Reflection.Metadata.Ecma335
             int fieldTableRowRefSize,
             MemoryBlock containingBlock,
             int containingBlockOffset
-        ) {
+        )
+        {
             this.NumberOfRows = numberOfRows;
             _IsFieldTableRowRefSizeSmall = fieldTableRowRefSize == 2;
             _FieldOffset = 0;
@@ -403,7 +409,8 @@ namespace System.Reflection.Metadata.Ecma335
             int blobHeapRefSize,
             MemoryBlock containingBlock,
             int containingBlockOffset
-        ) {
+        )
+        {
             this.NumberOfRows = numberOfRows;
             _IsStringHeapRefSizeSmall = stringHeapRefSize == 2;
             _IsBlobHeapRefSizeSmall = blobHeapRefSize == 2;
@@ -453,7 +460,8 @@ namespace System.Reflection.Metadata.Ecma335
             int methodTableRowRefSize,
             MemoryBlock containingBlock,
             int containingBlockOffset
-        ) {
+        )
+        {
             this.NumberOfRows = numberOfRows;
             _IsMethodTableRowRefSizeSmall = methodTableRowRefSize == 2;
             _MethodOffset = 0;
@@ -506,7 +514,8 @@ namespace System.Reflection.Metadata.Ecma335
             int blobHeapRefSize,
             MemoryBlock containingBlock,
             int containingBlockOffset
-        ) {
+        )
+        {
             this.NumberOfRows = numberOfRows;
             _IsParamRefSizeSmall = paramRefSize == 2;
             _IsStringHeapRefSizeSmall = stringHeapRefSize == 2;
@@ -578,7 +587,8 @@ namespace System.Reflection.Metadata.Ecma335
             int paramTableRowRefSize,
             MemoryBlock containingBlock,
             int containingBlockOffset
-        ) {
+        )
+        {
             this.NumberOfRows = numberOfRows;
             _IsParamTableRowRefSizeSmall = paramTableRowRefSize == 2;
             _ParamOffset = 0;
@@ -613,7 +623,8 @@ namespace System.Reflection.Metadata.Ecma335
             int stringHeapRefSize,
             MemoryBlock containingBlock,
             int containingBlockOffset
-        ) {
+        )
+        {
             this.NumberOfRows = numberOfRows;
             _IsStringHeapRefSizeSmall = stringHeapRefSize == 2;
             _FlagsOffset = 0;
@@ -664,7 +675,8 @@ namespace System.Reflection.Metadata.Ecma335
             int typeDefOrRefRefSize,
             MemoryBlock containingBlock,
             int containingBlockOffset
-        ) {
+        )
+        {
             this.NumberOfRows = numberOfRows;
             _IsTypeDefTableRowRefSizeSmall = typeDefTableRowRefSize == 2;
             _IsTypeDefOrRefRefSizeSmall = typeDefOrRefRefSize == 2;
@@ -695,7 +707,8 @@ namespace System.Reflection.Metadata.Ecma335
             TypeDefinitionHandle typeDef,
             out int firstImplRowId,
             out int lastImplRowId
-        ) {
+        )
+        {
             int typeDefRid = typeDef.RowId;
 
             int startRowNumber,
@@ -753,7 +766,8 @@ namespace System.Reflection.Metadata.Ecma335
             int blobHeapRefSize,
             MemoryBlock containingBlock,
             int containingBlockOffset
-        ) {
+        )
+        {
             this.NumberOfRows = numberOfRows;
             _IsMemberRefParentRefSizeSmall = memberRefParentRefSize == 2;
             _IsStringHeapRefSizeSmall = stringHeapRefSize == 2;
@@ -814,7 +828,8 @@ namespace System.Reflection.Metadata.Ecma335
             int blobHeapRefSize,
             MemoryBlock containingBlock,
             int containingBlockOffset
-        ) {
+        )
+        {
             this.NumberOfRows = numberOfRows;
             _IsHasConstantRefSizeSmall = hasConstantRefSize == 2;
             _IsBlobHeapRefSizeSmall = blobHeapRefSize == 2;
@@ -904,7 +919,8 @@ namespace System.Reflection.Metadata.Ecma335
             int blobHeapRefSize,
             MemoryBlock containingBlock,
             int containingBlockOffset
-        ) {
+        )
+        {
             this.NumberOfRows = numberOfRows;
             _IsHasCustomAttributeRefSizeSmall = hasCustomAttributeRefSize == 2;
             _IsCustomAttributeTypeRefSizeSmall = customAttributeTypeRefSize == 2;
@@ -964,7 +980,8 @@ namespace System.Reflection.Metadata.Ecma335
             EntityHandle parentHandle,
             out int firstImplRowId,
             out int lastImplRowId
-        ) {
+        )
+        {
             int startRowNumber,
                 endRowNumber;
 
@@ -1032,7 +1049,8 @@ namespace System.Reflection.Metadata.Ecma335
             int blobHeapRefSize,
             MemoryBlock containingBlock,
             int containingBlockOffset
-        ) {
+        )
+        {
             this.NumberOfRows = numberOfRows;
             _IsHasFieldMarshalRefSizeSmall = hasFieldMarshalRefSize == 2;
             _IsBlobHeapRefSizeSmall = blobHeapRefSize == 2;
@@ -1110,7 +1128,8 @@ namespace System.Reflection.Metadata.Ecma335
             int blobHeapRefSize,
             MemoryBlock containingBlock,
             int containingBlockOffset
-        ) {
+        )
+        {
             this.NumberOfRows = numberOfRows;
             _IsHasDeclSecurityRefSizeSmall = hasDeclSecurityRefSize == 2;
             _IsBlobHeapRefSizeSmall = blobHeapRefSize == 2;
@@ -1161,7 +1180,8 @@ namespace System.Reflection.Metadata.Ecma335
             EntityHandle parentToken,
             out int firstImplRowId,
             out int lastImplRowId
-        ) {
+        )
+        {
             int startRowNumber,
                 endRowNumber;
 
@@ -1213,7 +1233,8 @@ namespace System.Reflection.Metadata.Ecma335
             int typeDefTableRowRefSize,
             MemoryBlock containingBlock,
             int containingBlockOffset
-        ) {
+        )
+        {
             this.NumberOfRows = numberOfRows;
             _IsTypeDefTableRowRefSizeSmall = typeDefTableRowRefSize == 2;
             _PackagingSizeOffset = 0;
@@ -1289,7 +1310,8 @@ namespace System.Reflection.Metadata.Ecma335
             int fieldTableRowRefSize,
             MemoryBlock containingBlock,
             int containingBlockOffset
-        ) {
+        )
+        {
             this.NumberOfRows = numberOfRows;
             _IsFieldTableRowRefSizeSmall = fieldTableRowRefSize == 2;
             _OffsetOffset = 0;
@@ -1359,7 +1381,8 @@ namespace System.Reflection.Metadata.Ecma335
             int blobHeapRefSize,
             MemoryBlock containingBlock,
             int containingBlockOffset
-        ) {
+        )
+        {
             this.NumberOfRows = numberOfRows;
             _IsBlobHeapRefSizeSmall = blobHeapRefSize == 2;
             _SignatureOffset = 0;
@@ -1395,7 +1418,8 @@ namespace System.Reflection.Metadata.Ecma335
             int eventRefSize,
             MemoryBlock containingBlock,
             int containingBlockOffset
-        ) {
+        )
+        {
             this.NumberOfRows = numberOfRows;
             _IsTypeDefTableRowRefSizeSmall = typeDefTableRowRefSize == 2;
             _IsEventRefSizeSmall = eventRefSize == 2;
@@ -1451,7 +1475,8 @@ namespace System.Reflection.Metadata.Ecma335
             int eventTableRowRefSize,
             MemoryBlock containingBlock,
             int containingBlockOffset
-        ) {
+        )
+        {
             this.NumberOfRows = numberOfRows;
             _IsEventTableRowRefSizeSmall = eventTableRowRefSize == 2;
             _EventOffset = 0;
@@ -1488,7 +1513,8 @@ namespace System.Reflection.Metadata.Ecma335
             int stringHeapRefSize,
             MemoryBlock containingBlock,
             int containingBlockOffset
-        ) {
+        )
+        {
             this.NumberOfRows = numberOfRows;
             _IsTypeDefOrRefRefSizeSmall = typeDefOrRefRefSize == 2;
             _IsStringHeapRefSizeSmall = stringHeapRefSize == 2;
@@ -1544,7 +1570,8 @@ namespace System.Reflection.Metadata.Ecma335
             int propertyRefSize,
             MemoryBlock containingBlock,
             int containingBlockOffset
-        ) {
+        )
+        {
             this.NumberOfRows = numberOfRows;
             _IsTypeDefTableRowRefSizeSmall = typeDefTableRowRefSize == 2;
             _IsPropertyRefSizeSmall = propertyRefSize == 2;
@@ -1603,7 +1630,8 @@ namespace System.Reflection.Metadata.Ecma335
             int propertyTableRowRefSize,
             MemoryBlock containingBlock,
             int containingBlockOffset
-        ) {
+        )
+        {
             this.NumberOfRows = numberOfRows;
             _IsPropertyTableRowRefSizeSmall = propertyTableRowRefSize == 2;
             _PropertyOffset = 0;
@@ -1644,7 +1672,8 @@ namespace System.Reflection.Metadata.Ecma335
             int blobHeapRefSize,
             MemoryBlock containingBlock,
             int containingBlockOffset
-        ) {
+        )
+        {
             this.NumberOfRows = numberOfRows;
             _IsStringHeapRefSizeSmall = stringHeapRefSize == 2;
             _IsBlobHeapRefSizeSmall = blobHeapRefSize == 2;
@@ -1699,7 +1728,8 @@ namespace System.Reflection.Metadata.Ecma335
             int hasSemanticRefSize,
             MemoryBlock containingBlock,
             int containingBlockOffset
-        ) {
+        )
+        {
             this.NumberOfRows = numberOfRows;
             _IsMethodTableRowRefSizeSmall = methodTableRowRefSize == 2;
             _IsHasSemanticRefSizeSmall = hasSemanticRefSize == 2;
@@ -1749,7 +1779,8 @@ namespace System.Reflection.Metadata.Ecma335
         internal int FindSemanticMethodsForEvent(
             EventDefinitionHandle eventDef,
             out ushort methodCount
-        ) {
+        )
+        {
             methodCount = 0;
             uint searchCodedTag = HasSemanticsTag.ConvertEventHandleToTag(eventDef);
             return this.BinarySearchTag(searchCodedTag, ref methodCount);
@@ -1758,7 +1789,8 @@ namespace System.Reflection.Metadata.Ecma335
         internal int FindSemanticMethodsForProperty(
             PropertyDefinitionHandle propertyDef,
             out ushort methodCount
-        ) {
+        )
+        {
             methodCount = 0;
             uint searchCodedTag = HasSemanticsTag.ConvertPropertyHandleToTag(propertyDef);
             return this.BinarySearchTag(searchCodedTag, ref methodCount);
@@ -1816,7 +1848,8 @@ namespace System.Reflection.Metadata.Ecma335
             int methodDefOrRefRefSize,
             MemoryBlock containingBlock,
             int containingBlockOffset
-        ) {
+        )
+        {
             this.NumberOfRows = numberOfRows;
             _IsTypeDefTableRowRefSizeSmall = typeDefTableRowRefSize == 2;
             _IsMethodDefOrRefRefSizeSmall = methodDefOrRefRefSize == 2;
@@ -1869,7 +1902,8 @@ namespace System.Reflection.Metadata.Ecma335
             TypeDefinitionHandle typeDef,
             out int firstImplRowId,
             out int lastImplRowId
-        ) {
+        )
+        {
             int startRowNumber,
                 endRowNumber;
             this.Block.BinarySearchReferenceRange(
@@ -1917,7 +1951,8 @@ namespace System.Reflection.Metadata.Ecma335
             int stringHeapRefSize,
             MemoryBlock containingBlock,
             int containingBlockOffset
-        ) {
+        )
+        {
             this.NumberOfRows = numberOfRows;
             _IsStringHeapRefSizeSmall = stringHeapRefSize == 2;
             _NameOffset = 0;
@@ -1950,7 +1985,8 @@ namespace System.Reflection.Metadata.Ecma335
             int blobHeapRefSize,
             MemoryBlock containingBlock,
             int containingBlockOffset
-        ) {
+        )
+        {
             this.NumberOfRows = numberOfRows;
             _IsBlobHeapRefSizeSmall = blobHeapRefSize == 2;
             _SignatureOffset = 0;
@@ -1991,7 +2027,8 @@ namespace System.Reflection.Metadata.Ecma335
             int stringHeapRefSize,
             MemoryBlock containingBlock,
             int containingBlockOffset
-        ) {
+        )
+        {
             this.NumberOfRows = numberOfRows;
             _IsModuleRefTableRowRefSizeSmall = moduleRefTableRowRefSize == 2;
             _IsMemberForwardRowRefSizeSmall = memberForwardedRefSize == 2;
@@ -2085,7 +2122,8 @@ namespace System.Reflection.Metadata.Ecma335
             int fieldTableRowRefSize,
             MemoryBlock containingBlock,
             int containingBlockOffset
-        ) {
+        )
+        {
             this.NumberOfRows = numberOfRows;
             _IsFieldTableRowRefSizeSmall = fieldTableRowRefSize == 2;
             _RvaOffset = 0;
@@ -2144,7 +2182,8 @@ namespace System.Reflection.Metadata.Ecma335
             MemoryBlock containingBlock,
             int containingBlockOffset,
             MetadataStreamKind metadataStreamKind
-        ) {
+        )
+        {
             // EnC tables are not allowed in a compressed stream.
             // However when asked for a snapshot of the current metadata after an EnC change has been applied
             // the CLR includes the EnCLog table into the snapshot (but not EnCMap). We pretend EnCLog is empty.
@@ -2184,7 +2223,8 @@ namespace System.Reflection.Metadata.Ecma335
             int numberOfRows,
             MemoryBlock containingBlock,
             int containingBlockOffset
-        ) {
+        )
+        {
             this.NumberOfRows = numberOfRows;
             _TokenOffset = 0;
             this.RowSize = _TokenOffset + sizeof(uint);
@@ -2224,7 +2264,8 @@ namespace System.Reflection.Metadata.Ecma335
             int blobHeapRefSize,
             MemoryBlock containingBlock,
             int containingBlockOffset
-        ) {
+        )
+        {
             // NOTE: obfuscated assemblies may have more than one row in Assembly table,
             //       we ignore all rows but the first one
             this.NumberOfRows = numberOfRows > 1 ? 1 : numberOfRows;
@@ -2306,7 +2347,8 @@ namespace System.Reflection.Metadata.Ecma335
             int numberOfRows,
             MemoryBlock containingBlock,
             int containingBlockOffset
-        ) {
+        )
+        {
             this.NumberOfRows = numberOfRows;
             _ProcessorOffset = 0;
             this.RowSize = _ProcessorOffset + sizeof(uint);
@@ -2330,7 +2372,8 @@ namespace System.Reflection.Metadata.Ecma335
             int numberOfRows,
             MemoryBlock containingBlock,
             int containingBlockOffset
-        ) {
+        )
+        {
             this.NumberOfRows = numberOfRows;
             _OSPlatformIdOffset = 0;
             _OSMajorVersionIdOffset = _OSPlatformIdOffset + sizeof(uint);
@@ -2373,7 +2416,8 @@ namespace System.Reflection.Metadata.Ecma335
             MemoryBlock containingBlock,
             int containingBlockOffset,
             MetadataKind metadataKind
-        ) {
+        )
+        {
             this.NumberOfNonVirtualRows = numberOfRows;
             this.NumberOfVirtualRows =
                 (metadataKind == MetadataKind.Ecma335)
@@ -2465,7 +2509,8 @@ namespace System.Reflection.Metadata.Ecma335
             int assemblyRefTableRowRefSize,
             MemoryBlock containingBlock,
             int containingBlockOffset
-        ) {
+        )
+        {
             this.NumberOfRows = numberOfRows;
             _IsAssemblyRefTableRowSizeSmall = assemblyRefTableRowRefSize == 2;
             _ProcessorOffset = 0;
@@ -2494,7 +2539,8 @@ namespace System.Reflection.Metadata.Ecma335
             int assemblyRefTableRowRefSize,
             MemoryBlock containingBlock,
             int containingBlockOffset
-        ) {
+        )
+        {
             this.NumberOfRows = numberOfRows;
             _IsAssemblyRefTableRowRefSizeSmall = assemblyRefTableRowRefSize == 2;
             _OSPlatformIdOffset = 0;
@@ -2526,7 +2572,8 @@ namespace System.Reflection.Metadata.Ecma335
             int blobHeapRefSize,
             MemoryBlock containingBlock,
             int containingBlockOffset
-        ) {
+        )
+        {
             this.NumberOfRows = numberOfRows;
             _IsStringHeapRefSizeSmall = stringHeapRefSize == 2;
             _IsBlobHeapRefSizeSmall = blobHeapRefSize == 2;
@@ -2582,7 +2629,8 @@ namespace System.Reflection.Metadata.Ecma335
             int stringHeapRefSize,
             MemoryBlock containingBlock,
             int containingBlockOffset
-        ) {
+        )
+        {
             this.NumberOfRows = numberOfRows;
             _IsImplementationRefSizeSmall = implementationRefSize == 2;
             _IsStringHeapRefSizeSmall = stringHeapRefSize == 2;
@@ -2679,7 +2727,8 @@ namespace System.Reflection.Metadata.Ecma335
             int stringHeapRefSize,
             MemoryBlock containingBlock,
             int containingBlockOffset
-        ) {
+        )
+        {
             this.NumberOfRows = numberOfRows;
             _IsImplementationRefSizeSmall = implementationRefSize == 2;
             _IsStringHeapRefSizeSmall = stringHeapRefSize == 2;
@@ -2741,7 +2790,8 @@ namespace System.Reflection.Metadata.Ecma335
             int typeDefTableRowRefSize,
             MemoryBlock containingBlock,
             int containingBlockOffset
-        ) {
+        )
+        {
             this.NumberOfRows = numberOfRows;
             _IsTypeDefTableRowRefSizeSmall = typeDefTableRowRefSize == 2;
             _NestedClassOffset = 0;
@@ -2832,7 +2882,8 @@ namespace System.Reflection.Metadata.Ecma335
             int stringHeapRefSize,
             MemoryBlock containingBlock,
             int containingBlockOffset
-        ) {
+        )
+        {
             this.NumberOfRows = numberOfRows;
             _IsTypeOrMethodDefRefSizeSmall = typeOrMethodDefRefSize == 2;
             _IsStringHeapRefSizeSmall = stringHeapRefSize == 2;
@@ -2885,7 +2936,8 @@ namespace System.Reflection.Metadata.Ecma335
 
         internal GenericParameterHandleCollection FindGenericParametersForType(
             TypeDefinitionHandle typeDef
-        ) {
+        )
+        {
             ushort count = 0;
             uint searchCodedTag = TypeOrMethodDefTag.ConvertTypeDefRowIdToTag(typeDef);
             int startRid = this.BinarySearchTag(searchCodedTag, ref count);
@@ -2895,7 +2947,8 @@ namespace System.Reflection.Metadata.Ecma335
 
         internal GenericParameterHandleCollection FindGenericParametersForMethod(
             MethodDefinitionHandle methodDef
-        ) {
+        )
+        {
             ushort count = 0;
             uint searchCodedTag = TypeOrMethodDefTag.ConvertMethodDefToTag(methodDef);
             int startRid = this.BinarySearchTag(searchCodedTag, ref count);
@@ -2953,7 +3006,8 @@ namespace System.Reflection.Metadata.Ecma335
             int blobHeapRefSize,
             MemoryBlock containingBlock,
             int containingBlockOffset
-        ) {
+        )
+        {
             this.NumberOfRows = numberOfRows;
             _IsMethodDefOrRefRefSizeSmall = methodDefOrRefRefSize == 2;
             _IsBlobHeapRefSizeSmall = blobHeapRefSize == 2;
@@ -3006,7 +3060,8 @@ namespace System.Reflection.Metadata.Ecma335
             int typeDefOrRefRefSize,
             MemoryBlock containingBlock,
             int containingBlockOffset
-        ) {
+        )
+        {
             this.NumberOfRows = numberOfRows;
             _IsGenericParamTableRowRefSizeSmall = genericParamTableRowRefSize == 2;
             _IsTypeDefOrRefRefSizeSmall = typeDefOrRefRefSize == 2;
@@ -3026,7 +3081,8 @@ namespace System.Reflection.Metadata.Ecma335
 
         internal GenericParameterConstraintHandleCollection FindConstraintsForGenericParam(
             GenericParameterHandle genericParameter
-        ) {
+        )
+        {
             int startRowNumber,
                 endRowNumber;
             this.Block.BinarySearchReferenceRange(

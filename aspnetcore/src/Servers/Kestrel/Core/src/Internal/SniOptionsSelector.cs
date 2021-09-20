@@ -52,7 +52,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Internal
             HttpsConnectionAdapterOptions fallbackHttpsOptions,
             HttpProtocols fallbackHttpProtocols,
             ILogger<HttpsConnectionMiddleware> logger
-        ) {
+        )
+        {
             _endpointName = endpointName;
 
             _fallbackServerCertificateSelector = fallbackHttpsOptions.ServerCertificateSelector;
@@ -78,7 +79,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Internal
                     if (
                         fallbackHttpsOptions.ServerCertificate is null
                         && _fallbackServerCertificateSelector is null
-                    ) {
+                    )
+                    {
                         throw new InvalidOperationException(
                             CoreStrings.NoCertSpecifiedNoDevelopmentCertificateFound
                         );
@@ -104,7 +106,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Internal
                 if (
                     !certifcateConfigLoader.IsTestMock
                     && sslOptions.ServerCertificate is X509Certificate2 cert2
-                ) {
+                )
+                {
                     HttpsConnectionMiddleware.EnsureCertificateIsAllowedForServerAuth(cert2);
                 }
 
@@ -157,13 +160,15 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Internal
         public SslServerAuthenticationOptions GetOptions(
             ConnectionContext connection,
             string serverName
-        ) {
+        )
+        {
             SniOptions? sniOptions = null;
 
             if (
                 !string.IsNullOrEmpty(serverName)
                 && !_exactNameOptions.TryGetValue(serverName, out sniOptions)
-            ) {
+            )
+            {
                 foreach (var (suffix, options) in _wildcardPrefixOptions)
                 {
                     if (serverName.EndsWith(suffix, StringComparison.OrdinalIgnoreCase))
@@ -238,7 +243,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Internal
             SslClientHelloInfo clientHelloInfo,
             object state,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var sniOptionsSelector = (SniOptionsSelector)state;
             var options = sniOptionsSelector.GetOptions(connection, clientHelloInfo.ServerName);
             return new ValueTask<SslServerAuthenticationOptions>(options);
@@ -268,7 +274,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Internal
             public SniOptions(
                 SslServerAuthenticationOptions sslOptions,
                 HttpProtocols httpProtocols
-            ) {
+            )
+            {
                 SslOptions = sslOptions;
                 HttpProtocols = httpProtocols;
             }

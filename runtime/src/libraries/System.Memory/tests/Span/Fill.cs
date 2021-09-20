@@ -252,7 +252,8 @@ namespace System.SpanTests
                 ulong data5,
                 ulong data6,
                 ulong data7
-            ) {
+            )
+            {
                 Data0 = data0;
                 Data1 = data1;
                 Data2 = data2;

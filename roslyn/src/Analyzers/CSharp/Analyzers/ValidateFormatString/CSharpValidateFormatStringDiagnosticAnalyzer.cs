@@ -20,13 +20,15 @@ namespace Microsoft.CodeAnalysis.CSharp.ValidateFormatString
         protected override SyntaxNode? TryGetMatchingNamedArgument(
             SeparatedSyntaxList<SyntaxNode> arguments,
             string searchArgumentName
-        ) {
+        )
+        {
             foreach (var argument in arguments.Cast<ArgumentSyntax>())
             {
                 if (
                     argument.NameColon != null
                     && argument.NameColon.Name.Identifier.ValueText.Equals(searchArgumentName)
-                ) {
+                )
+                {
                     return argument;
                 }
             }

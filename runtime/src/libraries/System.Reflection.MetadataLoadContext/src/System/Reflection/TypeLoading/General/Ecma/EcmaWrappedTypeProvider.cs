@@ -56,7 +56,8 @@ namespace System.Reflection.TypeLoading.Ecma
         public RoType GetGenericInstantiation(
             RoType genericType,
             ImmutableArray<RoType> typeArguments
-        ) {
+        )
+        {
             genericType = genericType.SkipTypeWrappers();
             ImmutableArray<RoType> filteredTypeArguments = ImmutableArray<RoType>.Empty;
             for (int i = 0; i < typeArguments.Length; i++)

@@ -139,7 +139,8 @@ public class Test
                                 m.ContainingAssembly,
                                 AttributeDescription.AssemblyKeyFileAttribute
                             )
-                        ) {
+                        )
+                        {
                             haveAttribute = true;
                             break;
                         }
@@ -154,7 +155,8 @@ public class Test
         [MemberData(nameof(AllProviderParseOptions))]
         public void PubKeyFromKeyFileAttribute_AssemblyKeyFileResolver(
             CSharpParseOptions parseOptions
-        ) {
+        )
+        {
             string keyFileDir = Path.GetDirectoryName(s_keyPairFile);
             string keyFileName = Path.GetFileName(s_keyPairFile);
 
@@ -196,7 +198,8 @@ public class Test
         [MemberData(nameof(AllProviderParseOptions))]
         public void PubKeyFromKeyFileAttribute_AssemblyKeyFileResolver_RelativeToCurrentParent(
             CSharpParseOptions parseOptions
-        ) {
+        )
+        {
             string keyFileDir = Path.GetDirectoryName(s_keyPairFile);
             string keyFileName = Path.GetFileName(s_keyPairFile);
 
@@ -315,7 +318,8 @@ public class Test
                                 m.ContainingAssembly,
                                 AttributeDescription.AssemblyKeyNameAttribute
                             )
-                        ) {
+                        )
+                        {
                             haveAttribute = true;
                             break;
                         }
@@ -405,7 +409,8 @@ public class Test
         [MemberData(nameof(AllProviderParseOptions))]
         public void PubKeyFromKeyFileOptionsJustPublicKey_ReferenceResolver(
             CSharpParseOptions parseOptions
-        ) {
+        )
+        {
             string publicKeyFileDir = Path.GetDirectoryName(s_publicKeyFile);
             string publicKeyFileName = Path.GetFileName(s_publicKeyFile);
 
@@ -1818,7 +1823,8 @@ public class C
             MemoryStream moduleContents,
             AttributeDescription expectedModuleAttr,
             CSharpParseOptions parseOptions
-        ) {
+        )
+        {
             //a module doesn't get signed for real. It should have either a keyfile or keycontainer attribute
             //parked on a typeRef named 'AssemblyAttributesGoHere.' When the module is added to an assembly, the
             //resulting assembly is signed with the key referred to by the aforementioned attribute.
@@ -3464,7 +3470,8 @@ class B
         [MemberData(nameof(AllProviderParseOptions))]
         public void ConsistentErrorMessageWhenProvidingNullKeyFile_PublicSign(
             CSharpParseOptions parseOptions
-        ) {
+        )
+        {
             var options = TestOptions.DebugDll.WithPublicSign(true);
             Assert.Null(options.CryptoKeyFile);
             CreateCompilation(string.Empty, options: options, parseOptions: parseOptions)
@@ -3479,7 +3486,8 @@ class B
         [MemberData(nameof(AllProviderParseOptions))]
         public void ConsistentErrorMessageWhenProvidingEmptyKeyFile_PublicSign(
             CSharpParseOptions parseOptions
-        ) {
+        )
+        {
             var options = TestOptions.DebugDll.WithCryptoKeyFile(string.Empty).WithPublicSign(true);
             CreateCompilation(string.Empty, options: options, parseOptions: parseOptions)
                 .VerifyDiagnostics(

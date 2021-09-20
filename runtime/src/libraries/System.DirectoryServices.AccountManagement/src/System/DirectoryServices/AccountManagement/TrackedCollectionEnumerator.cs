@@ -160,7 +160,8 @@ namespace System.DirectoryServices.AccountManagement
             string outerClassName,
             TrackedCollection<T> trackedCollection,
             List<TrackedCollection<T>.ValueEl> combinedValues
-        ) {
+        )
+        {
             GlobalDebug.WriteLineIf(GlobalDebug.Info, "TrackedCollectionEnumerator", "Ctor");
 
             _outerClassName = outerClassName;

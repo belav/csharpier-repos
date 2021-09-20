@@ -29,7 +29,8 @@ namespace AutoMapper.UnitTests
                     int source,
                     int dest,
                     ResolutionContext context
-                ) {
+                )
+                {
                     return source + (int)context.Options.Items["Item"];
                 }
             }

@@ -35,7 +35,8 @@ namespace Microsoft.CodeAnalysis.MSBuild
             DiagnosticReporter diagnosticReporter,
             ProjectFileLoaderRegistry? projectFileLoaderRegistry,
             ImmutableDictionary<string, string>? properties
-        ) {
+        )
+        {
             _workspaceServices = workspaceServices;
             _diagnosticReporter = diagnosticReporter;
             _pathResolver = new PathResolver(_diagnosticReporter);
@@ -62,12 +63,13 @@ namespace Microsoft.CodeAnalysis.MSBuild
         public MSBuildProjectLoader(
             Workspace workspace,
             ImmutableDictionary<string, string>? properties = null
-        ) : this(
-            workspace.Services,
-            new DiagnosticReporter(workspace),
-            projectFileLoaderRegistry: null,
-            properties
-        ) { }
+        )
+            : this(
+                workspace.Services,
+                new DiagnosticReporter(workspace),
+                projectFileLoaderRegistry: null,
+                properties
+            ) { }
 
         /// <summary>
         /// The MSBuild properties used when interpreting project files.
@@ -160,7 +162,8 @@ namespace Microsoft.CodeAnalysis.MSBuild
             IProgress<ProjectLoadProgress>? progress = null,
             ILogger? msbuildLogger = null,
             CancellationToken cancellationToken = default
-        ) {
+        )
+        {
             if (solutionFilePath == null)
             {
                 throw new ArgumentNullException(nameof(solutionFilePath));
@@ -173,7 +176,8 @@ namespace Microsoft.CodeAnalysis.MSBuild
                     DiagnosticReportingMode.Throw,
                     out var absoluteSolutionPath
                 )
-            ) {
+            )
+            {
                 // TryGetAbsoluteSolutionPath should throw before we get here.
                 return null!;
             }
@@ -187,7 +191,8 @@ namespace Microsoft.CodeAnalysis.MSBuild
                     out absoluteSolutionPath,
                     out projectfilter
                 )
-            ) {
+            )
+            {
                 throw new Exception(
                     string.Format(
                         WorkspaceMSBuildResources.Failed_to_load_solution_filter_0,
@@ -275,7 +280,8 @@ namespace Microsoft.CodeAnalysis.MSBuild
             IProgress<ProjectLoadProgress>? progress = null,
             ILogger? msbuildLogger = null,
             CancellationToken cancellationToken = default
-        ) {
+        )
+        {
             if (projectFilePath == null)
             {
                 throw new ArgumentNullException(nameof(projectFilePath));

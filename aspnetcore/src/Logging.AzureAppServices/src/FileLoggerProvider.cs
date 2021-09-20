@@ -44,7 +44,8 @@ namespace Microsoft.Extensions.Logging.AzureAppServices
         internal override async Task WriteMessagesAsync(
             IEnumerable<LogMessage> messages,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             Directory.CreateDirectory(_path);
 
             foreach (var group in messages.GroupBy(GetGrouping))

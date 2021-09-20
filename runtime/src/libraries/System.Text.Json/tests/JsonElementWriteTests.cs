@@ -71,7 +71,8 @@ namespace System.Text.Json.Tests
             var buffer = new ArrayBufferWriter<byte>(1024);
             using (
                 var doc = JsonDocument.Parse("[ null, false, true, \"hi\", 5, {}, [] ]", s_options)
-            ) {
+            )
+            {
                 JsonElement root = doc.RootElement;
                 var options = new JsonWriterOptions { SkipValidation = skipValidation, };
 
@@ -136,7 +137,8 @@ namespace System.Text.Json.Tests
             var buffer = new ArrayBufferWriter<byte>(1024);
             using (
                 var doc = JsonDocument.Parse("[ null, false, true, \"hi\", 5, {}, [] ]", s_options)
-            ) {
+            )
+            {
                 JsonElement root = doc.RootElement;
                 var options = new JsonWriterOptions { SkipValidation = skipValidation, };
 
@@ -1219,7 +1221,8 @@ null,
             string jsonIn,
             string jsonOut,
             bool matchesRelaxedEscaping
-        ) {
+        )
+        {
             var buffer = new ArrayBufferWriter<byte>(1024);
 
             using (JsonDocument doc = PrepareDocument(jsonIn))
@@ -1283,7 +1286,8 @@ null,
             string jsonIn,
             string expectedIndent,
             string expectedMinimal
-        ) {
+        )
+        {
             var buffer = new ArrayBufferWriter<byte>(1024);
             byte[] bufferOutput;
 
@@ -1324,7 +1328,8 @@ null,
             string jsonIn,
             string expectedIndent,
             string expectedMinimal
-        ) {
+        )
+        {
             WritePropertyValue(indented, propertyName, jsonIn, expectedIndent, expectedMinimal);
 
             WritePropertyValue(
@@ -1358,7 +1363,8 @@ null,
             string jsonIn,
             string expectedIndent,
             string expectedMinimal
-        ) {
+        )
+        {
             var buffer = new ArrayBufferWriter<byte>(1024);
 
             using (JsonDocument doc = PrepareDocument(jsonIn))
@@ -1383,7 +1389,8 @@ null,
             string jsonIn,
             string expectedIndent,
             string expectedMinimal
-        ) {
+        )
+        {
             var buffer = new ArrayBufferWriter<byte>(1024);
 
             using (JsonDocument doc = PrepareDocument(jsonIn))
@@ -1408,7 +1415,8 @@ null,
             string jsonIn,
             string expectedIndent,
             string expectedMinimal
-        ) {
+        )
+        {
             var buffer = new ArrayBufferWriter<byte>(1024);
 
             using (JsonDocument doc = PrepareDocument(jsonIn))
@@ -1433,7 +1441,8 @@ null,
             string jsonIn,
             string expectedIndent,
             string expectedMinimal
-        ) {
+        )
+        {
             var buffer = new ArrayBufferWriter<byte>(1024);
 
             using (JsonDocument doc = PrepareDocument(jsonIn))

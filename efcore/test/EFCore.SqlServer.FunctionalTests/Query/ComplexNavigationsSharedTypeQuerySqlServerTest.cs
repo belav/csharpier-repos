@@ -214,7 +214,8 @@ ORDER BY [t1].[Id]"
 
         public override async Task Explicit_GroupJoin_in_subquery_with_unrelated_projection2(
             bool async
-        ) {
+        )
+        {
             await base.Explicit_GroupJoin_in_subquery_with_unrelated_projection2(async);
 
             AssertSql(
@@ -240,7 +241,8 @@ FROM (
 
         public override async Task Result_operator_nav_prop_reference_optional_via_DefaultIfEmpty(
             bool async
-        ) {
+        )
+        {
             await base.Result_operator_nav_prop_reference_optional_via_DefaultIfEmpty(async);
 
             AssertSql(
@@ -317,7 +319,8 @@ ORDER BY [l].[Id], [t].[Id], [t0].[Id], [t0].[Id0]"
 
         public override async Task SelectMany_with_navigation_and_Distinct_projecting_columns_including_join_key(
             bool async
-        ) {
+        )
+        {
             await base.SelectMany_with_navigation_and_Distinct_projecting_columns_including_join_key(
                 async
             );

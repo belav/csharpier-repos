@@ -33,7 +33,8 @@ namespace System.Resources.Extensions.Tests
             ITypeDescriptorContext context,
             CultureInfo culture,
             object value
-        ) {
+        )
+        {
             if (value is byte[] bytes)
             {
                 return new MyResourceType(bytes);
@@ -47,7 +48,8 @@ namespace System.Resources.Extensions.Tests
             CultureInfo culture,
             object value,
             Type destinationType
-        ) {
+        )
+        {
             if (destinationType == typeof(byte[]) && value is MyResourceType myResourceType)
             {
                 return myResourceType.Data;

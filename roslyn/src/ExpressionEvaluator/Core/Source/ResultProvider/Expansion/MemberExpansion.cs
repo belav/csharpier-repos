@@ -34,7 +34,8 @@ namespace Microsoft.CodeAnalysis.ExpressionEvaluator
             ResultProvider resultProvider,
             bool isProxyType,
             bool supportsFavorites
-        ) {
+        )
+        {
             // For members of type DynamicProperty (part of Dynamic View expansion), we want
             // to expand the underlying value (not the members of the DynamicProperty type).
             var type = value.Type;
@@ -55,7 +56,8 @@ namespace Microsoft.CodeAnalysis.ExpressionEvaluator
                 || runtimeType.IsFunctionPointer()
                 || runtimeType.IsIntPtr()
                 || runtimeType.IsUIntPtr()
-            ) {
+            )
+            {
                 return null;
             }
 
@@ -157,7 +159,8 @@ namespace Microsoft.CodeAnalysis.ExpressionEvaluator
                 if (
                     (inspectionContext.EvaluationFlags & DkmEvaluationFlags.FilterToFavorites)
                     == DkmEvaluationFlags.FilterToFavorites
-                ) {
+                )
+                {
                     instanceMembers.Free();
                     staticMembers.Free();
                     expansions.Free();
@@ -256,7 +259,8 @@ namespace Microsoft.CodeAnalysis.ExpressionEvaluator
             bool isProxyType,
             out Expansion publicExpansion,
             out Expansion nonPublicExpansion
-        ) {
+        )
+        {
             var publicExpansions = ArrayBuilder<Expansion>.GetInstance();
             var publicMembers = ArrayBuilder<MemberAndDeclarationInfo>.GetInstance();
             var nonPublicMembers = ArrayBuilder<MemberAndDeclarationInfo>.GetInstance();
@@ -290,7 +294,8 @@ namespace Microsoft.CodeAnalysis.ExpressionEvaluator
                     member.HideNonPublic
                     && !member.IsPublic
                     && (!isProxyType || !member.BrowsableState.HasValue)
-                ) {
+                )
+                {
                     nonPublicMembers.Add(member);
                 }
                 else
@@ -330,7 +335,8 @@ namespace Microsoft.CodeAnalysis.ExpressionEvaluator
             MemberAndDeclarationInfo[] members,
             CustomTypeInfoTypeArgumentMap customTypeInfoMap,
             bool containsFavorites = false
-        ) {
+        )
+        {
             Debug.Assert(members != null);
             Debug.Assert(members.Length > 0);
             Debug.Assert(customTypeInfoMap != null);
@@ -352,7 +358,8 @@ namespace Microsoft.CodeAnalysis.ExpressionEvaluator
             int count,
             bool visitAll,
             ref int index
-        ) {
+        )
+        {
             int startIndex2;
             int count2;
             GetIntersection(startIndex, count, index, _members.Length, out startIndex2, out count2);
@@ -382,7 +389,8 @@ namespace Microsoft.CodeAnalysis.ExpressionEvaluator
             MemberAndDeclarationInfo member,
             EvalResultDataItem parent,
             CustomTypeInfoTypeArgumentMap customTypeInfoMap
-        ) {
+        )
+        {
             var memberValue = value.GetMemberValue(member, inspectionContext);
             return CreateMemberDataItem(
                 resultProvider,
@@ -419,7 +427,8 @@ namespace Microsoft.CodeAnalysis.ExpressionEvaluator
                 int count,
                 bool visitAll,
                 ref int index
-            ) {
+            )
+            {
                 if (InRange(startIndex, count, index))
                 {
                     rows.Add(GetRow(inspectionContext, value, _members, parent));
@@ -436,7 +445,8 @@ namespace Microsoft.CodeAnalysis.ExpressionEvaluator
                 DkmClrValue value,
                 Expansion expansion,
                 EvalResultDataItem parent
-            ) {
+            )
+            {
                 return new EvalResult(
                     ExpansionKind.NonPublicMembers,
                     name: Resources.NonPublicMembers,
@@ -482,7 +492,8 @@ namespace Microsoft.CodeAnalysis.ExpressionEvaluator
                 int count,
                 bool visitAll,
                 ref int index
-            ) {
+            )
+            {
                 if (InRange(startIndex, count, index))
                 {
                     rows.Add(
@@ -505,7 +516,8 @@ namespace Microsoft.CodeAnalysis.ExpressionEvaluator
                 TypeAndCustomInfo declaredTypeAndInfo,
                 DkmClrValue value,
                 Expansion expansion
-            ) {
+            )
+            {
                 var fullName = resultProvider.FullNameProvider.GetClrTypeName(
                     inspectionContext,
                     declaredTypeAndInfo.ClrType,
@@ -541,7 +553,8 @@ namespace Microsoft.CodeAnalysis.ExpressionEvaluator
             CustomTypeInfoTypeArgumentMap customTypeInfoMap,
             ExpansionFlags flags,
             bool supportsFavorites
-        ) {
+        )
+        {
             var fullNameProvider = resultProvider.FullNameProvider;
             var declaredType = member.Type;
             var declaredTypeInfo = customTypeInfoMap.SubstituteCustomTypeInfo(
@@ -622,7 +635,8 @@ namespace Microsoft.CodeAnalysis.ExpressionEvaluator
             bool memberAccessRequiresExplicitCast,
             bool memberIsStatic,
             EvalResultDataItem parent
-        ) {
+        )
+        {
             // If the parent is an exception thrown during evaluation,
             // there is no valid fullname expression for the child.
             if (parent.Value.EvalFlags.Includes(DkmEvaluationResultFlags.ExceptionThrown))

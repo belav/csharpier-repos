@@ -45,7 +45,8 @@ namespace Microsoft.CodeAnalysis.CSharp.ConvertLinq.ConvertForEachToLinqQuery
             IEnumerable<SyntaxToken> leadingTokensForSelect,
             IEnumerable<SyntaxToken> trailingTokensForSelect,
             bool convertToQuery
-        ) {
+        )
+        {
             return convertToQuery
               ? CreateQueryExpression(
                     selectExpression,
@@ -175,7 +176,8 @@ namespace Microsoft.CodeAnalysis.CSharp.ConvertLinq.ConvertForEachToLinqQuery
             ExpressionSyntax selectExpression,
             IEnumerable<SyntaxToken> leadingTokensForSelect,
             IEnumerable<SyntaxToken> trailingTokensForSelect
-        ) {
+        )
+        {
             var foreachStatement = ForEachInfo.ForEachStatement;
             selectExpression = selectExpression.WithCommentsFrom(
                 leadingTokensForSelect,
@@ -201,7 +203,8 @@ namespace Microsoft.CodeAnalysis.CSharp.ConvertLinq.ConvertForEachToLinqQuery
             IEnumerable<SyntaxTrivia> trailingCommentsTrivia,
             ExpressionSyntax selectExpression,
             ref int currentExtendedNodeIndex
-        ) {
+        )
+        {
             leadingCommentsTrivia = forEachStatement.ForEachKeyword.GetAllTrivia()
                 .Concat(leadingCommentsTrivia);
 
@@ -264,7 +267,8 @@ namespace Microsoft.CodeAnalysis.CSharp.ConvertLinq.ConvertForEachToLinqQuery
                 invokedMethodName == nameof(Enumerable.Select)
                 && lambdaBody is IdentifierNameSyntax identifier
                 && identifier.Identifier.ValueText == forEachStatement.Identifier.ValueText
-            ) {
+            )
+            {
                 // Because we're dropping the lambda, any comments associated with it need to be preserved.
 
                 var droppedTrivia = new List<SyntaxTrivia>();
@@ -301,7 +305,8 @@ namespace Microsoft.CodeAnalysis.CSharp.ConvertLinq.ConvertForEachToLinqQuery
             ref int extendedNodeIndex,
             ref ExpressionSyntax receiver,
             ref bool hasForEachChild
-        ) {
+        )
+        {
             // Check if we have converted all the descendant foreach/if statements.
             // If so, we return the select expression.
             if (extendedNodeIndex == ForEachInfo.ConvertingExtendedNodes.Length)

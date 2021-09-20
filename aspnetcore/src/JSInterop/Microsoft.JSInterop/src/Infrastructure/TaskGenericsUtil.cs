@@ -55,7 +55,8 @@ namespace Microsoft.JSInterop.Infrastructure
                 && (
                     !taskType.IsGenericType || taskType.GetGenericTypeDefinition() != typeof(Task<>)
                 )
-            ) {
+            )
+            {
                 taskType =
                     taskType.BaseType
                     ?? throw new ArgumentException(

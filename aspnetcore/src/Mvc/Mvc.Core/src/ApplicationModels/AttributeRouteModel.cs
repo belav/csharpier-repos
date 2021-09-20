@@ -106,7 +106,8 @@ namespace Microsoft.AspNetCore.Mvc.ApplicationModels
         public static AttributeRouteModel? CombineAttributeRouteModel(
             AttributeRouteModel? left,
             AttributeRouteModel? right
-        ) {
+        )
+        {
             right = right ?? _default;
 
             // If the right template is an override template (starts with / or ~/)
@@ -270,7 +271,8 @@ namespace Microsoft.AspNetCore.Mvc.ApplicationModels
             string template,
             IDictionary<string, string?> values,
             IOutboundParameterTransformer? routeTokenTransformer
-        ) {
+        )
+        {
             var builder = new StringBuilder();
             var state = TemplateParserState.Plaintext;
 

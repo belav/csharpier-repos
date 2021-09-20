@@ -72,7 +72,8 @@ namespace Microsoft.CodeAnalysis.CodeGen
             LocalSlotManager localSlotManager,
             OptimizationLevel optimizations,
             bool areLocalsZeroed
-        ) {
+        )
+        {
             Debug.Assert(BitConverter.IsLittleEndian);
 
             this.module = module;
@@ -165,7 +166,8 @@ namespace Microsoft.CodeAnalysis.CodeGen
                 && _lastCompleteBlock.LastILMarker >= 0
                 && _allocatedILMarkers[_lastCompleteBlock.LastILMarker].BlockOffset
                     == _lastCompleteBlock.RegularInstructionsLength
-            ) {
+            )
+            {
                 int startMarker = -1;
                 int endMarker = -1;
 
@@ -173,7 +175,8 @@ namespace Microsoft.CodeAnalysis.CodeGen
                     _lastCompleteBlock.LastILMarker >= 0
                     && _allocatedILMarkers[_lastCompleteBlock.LastILMarker].BlockOffset
                         == _lastCompleteBlock.RegularInstructionsLength
-                ) {
+                )
+                {
                     Debug.Assert(
                         (startMarker < 0) || (startMarker == (_lastCompleteBlock.LastILMarker + 1))
                     );
@@ -289,7 +292,8 @@ namespace Microsoft.CodeAnalysis.CodeGen
         private static void PushReachableBlockToProcess(
             ArrayBuilder<BasicBlock> reachableBlocks,
             BasicBlock block
-        ) {
+        )
+        {
             if (block.Reachability == Reachability.NotReachable)
             {
                 reachableBlocks.Push(block);
@@ -302,7 +306,8 @@ namespace Microsoft.CodeAnalysis.CodeGen
         private static void MarkReachableFrom(
             ArrayBuilder<BasicBlock> reachableBlocks,
             BasicBlock block
-        ) {
+        )
+        {
             tryAgain:
 
             if (block != null && block.Reachability == Reachability.NotReachable)
@@ -351,7 +356,8 @@ namespace Microsoft.CodeAnalysis.CodeGen
         private static void MarkReachableFromBranch(
             ArrayBuilder<BasicBlock> reachableBlocks,
             BasicBlock block
-        ) {
+        )
+        {
             var branchBlock = block.BranchBlock;
 
             if (branchBlock != null)
@@ -407,7 +413,8 @@ namespace Microsoft.CodeAnalysis.CodeGen
         private static object BlockedBranchDestinationSlow(
             ExceptionHandlerScope destHandler,
             ExceptionHandlerScope srcHandler
-        ) {
+        )
+        {
             ScopeInfo destHandlerScope = null;
             if (destHandler != null)
             {
@@ -449,7 +456,8 @@ namespace Microsoft.CodeAnalysis.CodeGen
         private static void MarkReachableFromTry(
             ArrayBuilder<BasicBlock> reachableBlocks,
             BasicBlock block
-        ) {
+        )
+        {
             // Since the try block is reachable, associated
             // catch and finally blocks are also reachable.
             var handlerBlock = ((ExceptionHandlerLeaderBlock)block).NextExceptionHandler;
@@ -497,7 +505,8 @@ namespace Microsoft.CodeAnalysis.CodeGen
         private static void MarkReachableFromSwitch(
             ArrayBuilder<BasicBlock> reachableBlocks,
             BasicBlock block
-        ) {
+        )
+        {
             var switchBlock = (SwitchBlock)block;
             var blockBuilder = ArrayBuilder<BasicBlock>.GetInstance();
             switchBlock.GetBranchBlocks(blockBuilder);
@@ -640,7 +649,8 @@ namespace Microsoft.CodeAnalysis.CodeGen
         private static bool CanMoveLabelToAnotherHandler(
             ExceptionHandlerScope currentHandler,
             ExceptionHandlerScope newHandler
-        ) {
+        )
+        {
             // Generally, assuming already valid code that contains "LABEL1: goto LABEL2"
             // we can substitute LABEL1 for LABEL2 so that the branches go directly to
             // the final destination.
@@ -1146,7 +1156,8 @@ namespace Microsoft.CodeAnalysis.CodeGen
         internal void OpenLocalScope(
             ScopeType scopeType = ScopeType.Variable,
             Cci.ITypeReference exceptionType = null
-        ) {
+        )
+        {
             if (scopeType == ScopeType.TryCatchFinally && IsJustPastLabel())
             {
                 DefineHiddenSequencePoint();

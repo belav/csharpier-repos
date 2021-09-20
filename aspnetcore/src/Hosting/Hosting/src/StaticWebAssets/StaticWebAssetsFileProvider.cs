@@ -61,7 +61,8 @@ namespace Microsoft.AspNetCore.Hosting.StaticWebAssets
             }
             else if (
                 BasePath.StartsWithSegments(modifiedSub, FilePathComparison, out var remaining)
-            ) {
+            )
+            {
                 return new StaticWebAssetsDirectoryRoot(remaining);
             }
 

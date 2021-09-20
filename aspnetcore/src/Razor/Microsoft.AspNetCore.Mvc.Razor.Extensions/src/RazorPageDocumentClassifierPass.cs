@@ -53,7 +53,8 @@ namespace Microsoft.AspNetCore.Mvc.Razor.Extensions
         protected override bool IsMatch(
             RazorCodeDocument codeDocument,
             DocumentIntermediateNode documentNode
-        ) {
+        )
+        {
             return PageDirective.TryGetPageDirective(documentNode, out var pageDirective);
         }
 
@@ -62,7 +63,8 @@ namespace Microsoft.AspNetCore.Mvc.Razor.Extensions
             NamespaceDeclarationIntermediateNode @namespace,
             ClassDeclarationIntermediateNode @class,
             MethodDeclarationIntermediateNode method
-        ) {
+        )
+        {
             base.OnDocumentStructureCreated(codeDocument, @namespace, @class, method);
 
             if (
@@ -70,7 +72,8 @@ namespace Microsoft.AspNetCore.Mvc.Razor.Extensions
                     fallbackToRootNamespace: false,
                     out var namespaceName
                 )
-            ) {
+            )
+            {
                 @namespace.Content = _useConsolidatedMvcViews
                     ? "AspNetCoreGeneratedDocument"
                     : "AspNetCore";
@@ -123,7 +126,8 @@ namespace Microsoft.AspNetCore.Mvc.Razor.Extensions
             NamespaceDeclarationIntermediateNode @namespace,
             ClassDeclarationIntermediateNode @class,
             PageDirective pageDirective
-        ) {
+        )
+        {
             if (string.IsNullOrEmpty(pageDirective.RouteTemplate))
             {
                 return;
@@ -147,7 +151,8 @@ namespace Microsoft.AspNetCore.Mvc.Razor.Extensions
         private void EnsureValidPageDirective(
             RazorCodeDocument codeDocument,
             PageDirective pageDirective
-        ) {
+        )
+        {
             Debug.Assert(pageDirective != null);
 
             if (pageDirective.DirectiveNode.IsImported())

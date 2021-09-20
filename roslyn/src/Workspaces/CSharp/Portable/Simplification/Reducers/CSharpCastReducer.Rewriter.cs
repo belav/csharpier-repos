@@ -41,7 +41,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Simplification
                             node.Right.IsKind(SyntaxKind.CastExpression)
                             && !reducedNode.Right.IsKind(SyntaxKind.CastExpression)
                         )
-                    ) {
+                    )
+                    {
                         // Cast simplification inside a binary expression, check if we need to parenthesize the binary expression to avoid breaking parent syntax.
                         // For example, cast removal in below case leads to syntax errors in error free code, unless parenting binary expression is parenthesized:
                         //   Original:                  Goo(x < (int)i, x > y)
@@ -71,7 +72,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Simplification
                             if (
                                 reparsedAncestor != null
                                 && !reparsedAncestor.IsEquivalentTo(reducedAncestor)
-                            ) {
+                            )
+                            {
                                 return SyntaxFactory.ParenthesizedExpression(reducedNode)
                                     .WithAdditionalAnnotations(Simplifier.Annotation);
                             }

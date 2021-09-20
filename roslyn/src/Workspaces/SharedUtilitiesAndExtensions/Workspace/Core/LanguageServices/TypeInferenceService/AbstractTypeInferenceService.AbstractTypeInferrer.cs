@@ -30,7 +30,8 @@ namespace Microsoft.CodeAnalysis.LanguageServices.TypeInferenceService
             protected AbstractTypeInferrer(
                 SemanticModel semanticModel,
                 CancellationToken cancellationToken
-            ) {
+            )
+            {
                 this.SemanticModel = semanticModel;
                 this.CancellationToken = cancellationToken;
                 this.IsUsableTypeFunc = t =>
@@ -60,7 +61,8 @@ namespace Microsoft.CodeAnalysis.LanguageServices.TypeInferenceService
             public ImmutableArray<TypeInferenceInfo> InferTypes(
                 SyntaxNode expression,
                 bool filterUnusable = true
-            ) {
+            )
+            {
                 if (expression != null)
                 {
                     if (_seenExpressionInferType.Add(expression))
@@ -76,7 +78,8 @@ namespace Microsoft.CodeAnalysis.LanguageServices.TypeInferenceService
             protected IEnumerable<TypeInferenceInfo> GetTypes(
                 SyntaxNode expression,
                 bool objectAsDefault = false
-            ) {
+            )
+            {
                 if (expression != null)
                 {
                     if (_seenExpressionGetType.Add(expression))
@@ -91,7 +94,8 @@ namespace Microsoft.CodeAnalysis.LanguageServices.TypeInferenceService
             private ImmutableArray<TypeInferenceInfo> Filter(
                 IEnumerable<TypeInferenceInfo> types,
                 bool filterUnusable = true
-            ) {
+            )
+            {
                 return types.Where(filterUnusable ? IsUsableTypeFunc : s_isNotNull)
                     .Distinct()
                     .ToImmutableArray();
@@ -112,7 +116,8 @@ namespace Microsoft.CodeAnalysis.LanguageServices.TypeInferenceService
 
             protected static IEnumerable<ITypeSymbol> ExpandParamsParameter(
                 IParameterSymbol parameterSymbol
-            ) {
+            )
+            {
                 var result = new List<ITypeSymbol>();
                 result.Add(parameterSymbol.Type);
 
@@ -129,7 +134,8 @@ namespace Microsoft.CodeAnalysis.LanguageServices.TypeInferenceService
 
             protected static IEnumerable<TypeInferenceInfo> GetCollectionElementType(
                 INamedTypeSymbol type
-            ) {
+            )
+            {
                 if (type != null)
                 {
                     var parameters = type.TypeArguments;

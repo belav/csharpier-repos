@@ -49,7 +49,8 @@ namespace Microsoft.AspNetCore.WebSockets.ConformanceTest.Autobahn
                         "INFORMATIONAL",
                         StringComparison.Ordinal
                     )
-                ) {
+                )
+                {
                     Expectation expectation;
                     if (!_expectations.TryGetValue(caseResult.Name, out expectation))
                     {
@@ -77,7 +78,8 @@ namespace Microsoft.AspNetCore.WebSockets.ConformanceTest.Autobahn
                         case Expectation.Ok:
                             if (
                                 !caseResult.BehaviorIs("NON-STRICT") && !caseResult.BehaviorIs("OK")
-                            ) {
+                            )
+                            {
                                 failures.AppendLine(
                                     $"Case {serverResult.Name}:{caseResult.Name}. Expected 'NON-STRICT' or 'OK', but got '{caseResult.ActualBehavior}'"
                                 );
@@ -88,7 +90,8 @@ namespace Microsoft.AspNetCore.WebSockets.ConformanceTest.Autobahn
                                 !caseResult.BehaviorIs("NON-STRICT")
                                 && !caseResult.BehaviorIs("FAILED")
                                 && !caseResult.BehaviorIs("OK")
-                            ) {
+                            )
+                            {
                                 failures.AppendLine(
                                     $"Case {serverResult.Name}:{caseResult.Name}. Expected 'FAILED', 'NON-STRICT' or 'OK', but got '{caseResult.ActualBehavior}'"
                                 );

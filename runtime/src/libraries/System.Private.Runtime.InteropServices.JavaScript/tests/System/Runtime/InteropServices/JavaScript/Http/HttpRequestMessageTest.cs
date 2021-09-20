@@ -128,7 +128,8 @@ namespace System.Runtime.InteropServices.JavaScript.Http.Tests
         [InlineData("blob:http://example.com")]
         public void Dispose_DisposeObject_ContentGetsDisposedAndSettersWillThrowButGettersStillWork(
             string uriData
-        ) {
+        )
+        {
             var rm = new HttpRequestMessage(HttpMethod.Get, uriData);
             var content = new MockContent();
             rm.Content = content;
@@ -281,7 +282,8 @@ namespace System.Runtime.InteropServices.JavaScript.Http.Tests
         [InlineData("blob:https://example.com")]
         public void Properties_SetOptionsAndGetTheirValue_Set_EnableStreamingResponse(
             string uriData
-        ) {
+        )
+        {
             var rm = new HttpRequestMessage();
 
             var content = new MockContent();
@@ -313,7 +315,8 @@ namespace System.Runtime.InteropServices.JavaScript.Http.Tests
         [InlineData("blob:https://example.com")]
         public void Properties_SetOptionsAndGetTheirValue_NotSet_EnableStreamingResponse(
             string uriData
-        ) {
+        )
+        {
             var rm = new HttpRequestMessage();
 
             var content = new MockContent();

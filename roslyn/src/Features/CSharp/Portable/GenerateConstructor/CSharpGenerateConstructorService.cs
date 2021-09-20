@@ -55,7 +55,8 @@ namespace Microsoft.CodeAnalysis.CSharp.GenerateConstructor
             out SyntaxToken token,
             out ImmutableArray<Argument> arguments,
             out INamedTypeSymbol typeToGenerateIn
-        ) {
+        )
+        {
             var constructorInitializer = (ConstructorInitializerSyntax)node;
 
             if (!constructorInitializer.ArgumentList.CloseParenToken.IsMissing)
@@ -114,7 +115,8 @@ namespace Microsoft.CodeAnalysis.CSharp.GenerateConstructor
             out SyntaxToken token,
             out ImmutableArray<Argument> arguments,
             out INamedTypeSymbol typeToGenerateIn
-        ) {
+        )
+        {
             var simpleName = (SimpleNameSyntax)node;
             var fullName = simpleName.IsRightSideOfQualifiedName()
                 ? (NameSyntax)simpleName.Parent
@@ -125,7 +127,8 @@ namespace Microsoft.CodeAnalysis.CSharp.GenerateConstructor
                 if (
                     objectCreationExpression.ArgumentList != null
                     && !objectCreationExpression.ArgumentList.CloseParenToken.IsMissing
-                ) {
+                )
+                {
                     var symbolInfo = document.SemanticModel.GetSymbolInfo(
                         objectCreationExpression.Type,
                         cancellationToken
@@ -150,7 +153,8 @@ namespace Microsoft.CodeAnalysis.CSharp.GenerateConstructor
             out SyntaxToken token,
             out ImmutableArray<Argument> arguments,
             out INamedTypeSymbol typeToGenerateIn
-        ) {
+        )
+        {
             var simpleName = (SimpleNameSyntax)node;
             var fullName = simpleName.IsRightSideOfQualifiedName()
                 ? (NameSyntax)simpleName.Parent
@@ -161,7 +165,8 @@ namespace Microsoft.CodeAnalysis.CSharp.GenerateConstructor
                 if (
                     attribute.ArgumentList != null
                     && !attribute.ArgumentList.CloseParenToken.IsMissing
-                ) {
+                )
+                {
                     var symbolInfo = document.SemanticModel.GetSymbolInfo(
                         attribute,
                         cancellationToken
@@ -169,7 +174,8 @@ namespace Microsoft.CodeAnalysis.CSharp.GenerateConstructor
                     if (
                         symbolInfo.CandidateReason == CandidateReason.OverloadResolutionFailure
                         && !symbolInfo.CandidateSymbols.IsEmpty
-                    ) {
+                    )
+                    {
                         token = simpleName.Identifier;
                         arguments = GetArguments(attribute.ArgumentList.Arguments);
 
@@ -194,12 +200,14 @@ namespace Microsoft.CodeAnalysis.CSharp.GenerateConstructor
             out SyntaxToken token,
             out ImmutableArray<Argument> arguments,
             out INamedTypeSymbol typeToGenerateIn
-        ) {
+        )
+        {
             var implicitObjectCreation = (ImplicitObjectCreationExpressionSyntax)node;
             if (
                 implicitObjectCreation.ArgumentList != null
                 && !implicitObjectCreation.ArgumentList.CloseParenToken.IsMissing
-            ) {
+            )
+            {
                 var typeInfo = document.SemanticModel.GetTypeInfo(
                     implicitObjectCreation,
                     cancellationToken
@@ -260,14 +268,16 @@ namespace Microsoft.CodeAnalysis.CSharp.GenerateConstructor
             SemanticModel semanticModel,
             IMethodSymbol constructor,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             if (
                 constructor.DeclaringSyntaxReferences[0].GetSyntax(cancellationToken)
                     is ConstructorDeclarationSyntax constructorDeclarationSyntax
                 && constructorDeclarationSyntax.Initializer.IsKind(
                     SyntaxKind.ThisConstructorInitializer
                 )
-            ) {
+            )
+            {
                 return semanticModel.GetSymbolInfo(
                         constructorDeclarationSyntax.Initializer,
                         cancellationToken

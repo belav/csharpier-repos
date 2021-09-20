@@ -31,9 +31,7 @@ namespace System.Runtime.InteropServices
             HResult = HResults.COR_E_INVALIDOLEVARIANTTYPE;
         }
 
-        protected InvalidOleVariantTypeException(
-            SerializationInfo info,
-            StreamingContext context
-        ) : base(info, context) { }
+        protected InvalidOleVariantTypeException(SerializationInfo info, StreamingContext context)
+            : base(info, context) { }
     }
 }

@@ -130,7 +130,8 @@ namespace JIT.HardwareIntrinsics.Arm
                     (alignment != 16 && alignment != 8)
                     || (alignment * 2) < sizeOfinArray1
                     || (alignment * 2) < sizeOfoutArray
-                ) {
+                )
+                {
                     throw new ArgumentException("Invalid value of alignment");
                 }
 
@@ -484,7 +485,8 @@ namespace JIT.HardwareIntrinsics.Arm
             Vector64<Single> op1,
             void* result,
             [CallerMemberName] string method = ""
-        ) {
+        )
+        {
             Single[] inArray1 = new Single[Op1ElementCount];
             Single[] outArray = new Single[RetElementCount];
 
@@ -521,7 +523,8 @@ namespace JIT.HardwareIntrinsics.Arm
             Single[] firstOp,
             Single[] result,
             [CallerMemberName] string method = ""
-        ) {
+        )
+        {
             bool succeeded = true;
 
             for (int i = 0; i < RetElementCount; i++)
@@ -529,7 +532,8 @@ namespace JIT.HardwareIntrinsics.Arm
                 if (
                     BitConverter.SingleToInt32Bits(firstOp[i])
                     != BitConverter.SingleToInt32Bits(result[i])
-                ) {
+                )
+                {
                     succeeded = false;
                     break;
                 }

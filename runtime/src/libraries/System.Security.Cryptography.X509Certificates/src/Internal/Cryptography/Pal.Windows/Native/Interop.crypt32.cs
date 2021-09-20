@@ -133,7 +133,8 @@ internal static partial class Interop
             CertNameType certNameType,
             CertNameFlags certNameFlags,
             CertNameStringType strType
-        ) {
+        )
+        {
             int cchCount = CertGetNameString(
                 certContext,
                 certNameType,
@@ -159,7 +160,8 @@ internal static partial class Interop
                         ptr,
                         cchCount
                     ) == 0
-                ) {
+                )
+                {
                     throw Marshal.GetLastWin32Error().ToCryptographicException();
                 }
 
@@ -212,7 +214,8 @@ internal static partial class Interop
             IntPtr hCryptProv,
             CertStoreFlags dwFlags,
             string? pvPara
-        ) {
+        )
+        {
             return CertOpenStore(
                 (IntPtr)lpszStoreProvider,
                 dwMsgAndCertEncodingType,
@@ -257,7 +260,8 @@ internal static partial class Interop
         public static unsafe bool CertEnumCertificatesInStore(
             SafeCertStoreHandle hCertStore,
             [NotNull] ref SafeCertContextHandle? pCertContext
-        ) {
+        )
+        {
             CERT_CONTEXT* pPrevCertContext;
             if (pCertContext == null)
             {
@@ -353,7 +357,8 @@ internal static partial class Interop
             CryptDecodeObjectFlags dwFlags,
             byte[]? pvStructInfo,
             ref int pcbStructInfo
-        ) {
+        )
+        {
             return CryptDecodeObject(
                 dwCertEncodingType,
                 (IntPtr)lpszStructType,
@@ -384,7 +389,8 @@ internal static partial class Interop
             CryptDecodeObjectFlags dwFlags,
             void* pvStructInfo,
             ref int pcbStructInfo
-        ) {
+        )
+        {
             return CryptDecodeObjectPointer(
                 dwCertEncodingType,
                 (IntPtr)lpszStructType,
@@ -434,7 +440,8 @@ internal static partial class Interop
             void* pvStructInfo,
             byte[]? pbEncoded,
             ref int pcbEncoded
-        ) {
+        )
+        {
             return CryptEncodeObject(
                 dwCertEncodingType,
                 (IntPtr)lpszStructType,
@@ -465,7 +472,8 @@ internal static partial class Interop
         public static unsafe byte[] EncodeObject(
             CryptDecodeObjectStructType lpszStructType,
             void* decoded
-        ) {
+        )
+        {
             int cb = 0;
             if (
                 !Interop.crypt32.CryptEncodeObject(
@@ -524,13 +532,15 @@ internal static partial class Interop
 
         internal static SafeChainEngineHandle CertCreateCertificateChainEngine(
             ref CERT_CHAIN_ENGINE_CONFIG config
-        ) {
+        )
+        {
             if (
                 !CertCreateCertificateChainEngine(
                     ref config,
                     out SafeChainEngineHandle chainEngineHandle
                 )
-            ) {
+            )
+            {
                 int errorCode = Marshal.GetLastWin32Error();
                 throw errorCode.ToCryptographicException();
             }
@@ -592,7 +602,8 @@ internal static partial class Interop
             CertFindType dwFindType,
             void* pvFindPara,
             [NotNull] ref SafeCertContextHandle? pCertContext
-        ) {
+        )
+        {
             CERT_CONTEXT* pPrevCertContext =
                 pCertContext == null ? null : pCertContext.Disconnect();
             pCertContext = CertFindCertificateInStore(
@@ -668,7 +679,8 @@ internal static partial class Interop
             SafeX509ChainHandle pChainContext,
             ref CERT_CHAIN_POLICY_PARA pPolicyPara,
             ref CERT_CHAIN_POLICY_STATUS pPolicyStatus
-        ) {
+        )
+        {
             return CertVerifyCertificateChainPolicy(
                 (IntPtr)pszPolicyOID,
                 pChainContext,

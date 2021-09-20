@@ -34,7 +34,8 @@ namespace Microsoft.CodeAnalysis.Completion.Providers
             ImmutableArray<ITypeSymbol> targetTypesSymbols,
             bool forceIndexCreation,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             SerializableUnimportedExtensionMethods items;
 
             var ticks = Environment.TickCount;
@@ -123,7 +124,8 @@ namespace Microsoft.CodeAnalysis.Completion.Providers
             ImmutableArray<ITypeSymbol> targetTypes,
             bool forceIndexCreation,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var ticks = Environment.TickCount;
 
             // First find symbols of all applicable extension methods.
@@ -188,7 +190,8 @@ namespace Microsoft.CodeAnalysis.Completion.Providers
             ImmutableArray<IMethodSymbol> extentsionMethodSymbols,
             ImmutableArray<ITypeSymbol> targetTypeSymbols,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             Dictionary<ITypeSymbol, bool> typeConvertibilityCache = new();
             using var _1 = PooledDictionary<INamespaceSymbol, string>.GetInstance(
                 out var namespaceNameCache
@@ -226,7 +229,8 @@ namespace Microsoft.CodeAnalysis.Completion.Providers
                     if (
                         currentValue.includeInTargetTypedCompletion
                         == includeInTargetTypedCompletion
-                    ) {
+                    )
+                    {
                         bestSymbol =
                             currentValue.bestSymbol.Parameters.Length > symbol.Parameters.Length
                                 ? symbol
@@ -269,7 +273,8 @@ namespace Microsoft.CodeAnalysis.Completion.Providers
                     (containingNamespace, _, _),
                     (bestSymbol, overloadCount, includeInTargetTypedCompletion)
                 ) in overloadMap
-            ) {
+            )
+            {
                 // To display the count of of additional overloads, we need to substract total by 1.
                 var item = new SerializableImportCompletionItem(
                     SymbolKey.CreateString(bestSymbol, cancellationToken),
@@ -292,12 +297,14 @@ namespace Microsoft.CodeAnalysis.Completion.Providers
             IMethodSymbol methodSymbol,
             ImmutableArray<ITypeSymbol> targetTypeSymbols,
             Dictionary<ITypeSymbol, bool> typeConvertibilityCache
-        ) {
+        )
+        {
             if (
                 methodSymbol.ReturnsVoid
                 || methodSymbol.ReturnType == null
                 || targetTypeSymbols.IsEmpty
-            ) {
+            )
+            {
                 return false;
             }
 
@@ -319,7 +326,8 @@ namespace Microsoft.CodeAnalysis.Completion.Providers
         private static string GetFullyQualifiedNamespaceName(
             INamespaceSymbol symbol,
             Dictionary<INamespaceSymbol, string> stringCache
-        ) {
+        )
+        {
             if (symbol.ContainingNamespace == null || symbol.ContainingNamespace.IsGlobalNamespace)
             {
                 return symbol.Name;

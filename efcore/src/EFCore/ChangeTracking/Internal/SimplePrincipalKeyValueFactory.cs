@@ -132,7 +132,8 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
                 if (
                     comparer.Type != typeof(TKey)
                     && comparer.Type == typeof(TKey).UnwrapNullableType()
-                ) {
+                )
+                {
                     comparer = comparer.ToNonNullNullableComparer();
                 }
 

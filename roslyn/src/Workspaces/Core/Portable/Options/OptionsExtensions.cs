@@ -11,7 +11,8 @@ namespace Microsoft.CodeAnalysis.Options
     {
         public static Option<CodeStyleOption<T>> ToPublicOption<T>(
             this Option2<CodeStyleOption2<T>> option
-        ) {
+        )
+        {
             RoslynDebug.Assert(option != null);
 
             var codeStyleOption = new CodeStyleOption<T>(option.DefaultValue);
@@ -31,7 +32,8 @@ namespace Microsoft.CodeAnalysis.Options
 
         public static PerLanguageOption<CodeStyleOption<T>> ToPublicOption<T>(
             this PerLanguageOption2<CodeStyleOption2<T>> option
-        ) {
+        )
+        {
             RoslynDebug.Assert(option != null);
 
             var codeStyleOption = new CodeStyleOption<T>(option.DefaultValue);

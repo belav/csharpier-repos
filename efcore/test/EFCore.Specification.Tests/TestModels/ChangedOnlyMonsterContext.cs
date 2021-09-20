@@ -69,7 +69,8 @@ namespace Microsoft.EntityFrameworkCore.TestModels
                 T value,
                 ref T field,
                 [CallerMemberName] string propertyName = ""
-            ) {
+            )
+            {
                 if (!StructuralComparisons.StructuralEqualityComparer.Equals(field, value))
                 {
                     field = value;

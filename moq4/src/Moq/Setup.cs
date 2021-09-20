@@ -153,7 +153,8 @@ namespace Moq
             bool recursive,
             Func<ISetup, bool> predicate,
             HashSet<Mock> verifiedMocks
-        ) {
+        )
+        {
             // verify this setup:
             this.VerifySelf();
 

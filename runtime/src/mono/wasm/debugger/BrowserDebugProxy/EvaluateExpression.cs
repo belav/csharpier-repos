@@ -36,7 +36,8 @@ namespace Microsoft.WebAssembly.Diagnostics
                     node is MemberAccessExpressionSyntax maes
                     && node.Kind() == SyntaxKind.SimpleMemberAccessExpression
                     && !(node.Parent is MemberAccessExpressionSyntax)
-                ) {
+                )
+                {
                     memberAccesses.Add(maes);
                 }
 
@@ -44,7 +45,8 @@ namespace Microsoft.WebAssembly.Diagnostics
                     node is IdentifierNameSyntax identifier
                     && !(identifier.Parent is MemberAccessExpressionSyntax)
                     && !identifiers.Any(x => x.Identifier.Text == identifier.Identifier.Text)
-                ) {
+                )
+                {
                     identifiers.Add(identifier);
                 }
 
@@ -62,7 +64,8 @@ namespace Microsoft.WebAssembly.Diagnostics
                 SyntaxTree syntaxTree,
                 IEnumerable<JObject> ma_values,
                 IEnumerable<JObject> id_values
-            ) {
+            )
+            {
                 CompilationUnitSyntax root = syntaxTree.GetCompilationUnitRoot();
                 var memberAccessToParamName = new Dictionary<string, string>();
 
@@ -93,7 +96,8 @@ namespace Microsoft.WebAssembly.Diagnostics
                     (MemberAccessExpressionSyntax maes, JObject value) in memberAccesses.Zip(
                         ma_values
                     )
-                ) {
+                )
+                {
                     string node_str = maes.ToString();
                     if (!memberAccessToParamName.TryGetValue(node_str, out string id_name))
                     {
@@ -116,7 +120,8 @@ namespace Microsoft.WebAssembly.Diagnostics
                     CompilationUnitSyntax root,
                     string id_name,
                     JObject value
-                ) {
+                )
+                {
                     var classDeclaration = root.Members.ElementAt(0) as ClassDeclarationSyntax;
                     var method = classDeclaration.Members.ElementAt(0) as MethodDeclarationSyntax;
 
@@ -207,7 +212,8 @@ namespace Microsoft.WebAssembly.Diagnostics
             IEnumerable<MemberAccessExpressionSyntax> member_accesses,
             MemberReferenceResolver resolver,
             CancellationToken token
-        ) {
+        )
+        {
             var memberAccessValues = new List<JObject>();
             foreach (MemberAccessExpressionSyntax maes in member_accesses)
             {
@@ -229,7 +235,8 @@ namespace Microsoft.WebAssembly.Diagnostics
             IEnumerable<IdentifierNameSyntax> identifiers,
             MemberReferenceResolver resolver,
             CancellationToken token
-        ) {
+        )
+        {
             var values = new List<JObject>();
             foreach (IdentifierNameSyntax var in identifiers)
             {
@@ -250,7 +257,8 @@ namespace Microsoft.WebAssembly.Diagnostics
             string expression,
             MemberReferenceResolver resolver,
             CancellationToken token
-        ) {
+        )
+        {
             expression = expression.Trim();
             SyntaxTree syntaxTree = CSharpSyntaxTree.ParseText(
                 @"
@@ -282,7 +290,8 @@ namespace Microsoft.WebAssembly.Diagnostics
             if (
                 expressionTree.Kind() == SyntaxKind.IdentifierName
                 || expressionTree.Kind() == SyntaxKind.ThisExpression
-            ) {
+            )
+            {
                 string var_name = expressionTree.ToString();
                 JObject value = await resolver.Resolve(var_name, token);
                 if (value == null)
@@ -304,7 +313,8 @@ namespace Microsoft.WebAssembly.Diagnostics
             if (
                 expressionTree.Kind() == SyntaxKind.SimpleMemberAccessExpression
                 && findVarNMethodCall.memberAccesses.Count == 1
-            ) {
+            )
+            {
                 return memberAccessValues[0];
             }
 

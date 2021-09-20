@@ -40,7 +40,8 @@ namespace Microsoft.AspNetCore.SignalR.Internal
             bool enableDetailedErrors,
             ILogger<DefaultHubDispatcher<THub>> logger,
             List<IHubFilter>? hubFilters
-        ) {
+        )
+        {
             _serviceScopeFactory = serviceScopeFactory;
             _hubContext = hubContext;
             _enableDetailedErrors = enableDetailedErrors;
@@ -138,7 +139,8 @@ namespace Microsoft.AspNetCore.SignalR.Internal
         public override async Task OnDisconnectedAsync(
             HubConnectionContext connection,
             Exception? exception
-        ) {
+        )
+        {
             var scope = _serviceScopeFactory.CreateScope();
 
             try
@@ -179,7 +181,8 @@ namespace Microsoft.AspNetCore.SignalR.Internal
         public override Task DispatchMessageAsync(
             HubConnectionContext connection,
             HubMessage hubMessage
-        ) {
+        )
+        {
             // Messages are dispatched sequentially and will stop other messages from being processed until they complete.
             // Streaming methods will run sequentially until they start streaming, then they will fire-and-forget allowing other messages to run.
 
@@ -217,7 +220,8 @@ namespace Microsoft.AspNetCore.SignalR.Internal
                             cancelInvocationMessage.InvocationId!,
                             out var cts
                         )
-                    ) {
+                    )
+                    {
                         Log.CancelStream(_logger, cancelInvocationMessage.InvocationId!);
                         cts.Cancel();
                     }
@@ -260,7 +264,8 @@ namespace Microsoft.AspNetCore.SignalR.Internal
         private Task ProcessInvocationBindingFailure(
             HubConnectionContext connection,
             InvocationBindingFailureMessage bindingFailureMessage
-        ) {
+        )
+        {
             Log.InvalidHubParameters(
                 _logger,
                 bindingFailureMessage.Target,
@@ -282,7 +287,8 @@ namespace Microsoft.AspNetCore.SignalR.Internal
         private Task ProcessStreamBindingFailure(
             HubConnectionContext connection,
             StreamBindingFailureMessage bindingFailureMessage
-        ) {
+        )
+        {
             var errorString = ErrorMessageHelper.BuildErrorMessage(
                 "Failed to bind Stream message.",
                 bindingFailureMessage.BindingFailure.SourceException,
@@ -315,7 +321,8 @@ namespace Microsoft.AspNetCore.SignalR.Internal
             HubConnectionContext connection,
             HubMethodInvocationMessage hubMethodInvocationMessage,
             bool isStreamResponse
-        ) {
+        )
+        {
             if (!_methods.TryGetValue(hubMethodInvocationMessage.Target, out var descriptor))
             {
                 Log.UnknownHubMethod(_logger, hubMethodInvocationMessage.Target);
@@ -375,7 +382,8 @@ namespace Microsoft.AspNetCore.SignalR.Internal
             HubMethodInvocationMessage hubMethodInvocationMessage,
             bool isStreamResponse,
             bool isStreamCall
-        ) {
+        )
+        {
             var methodExecutor = descriptor.MethodExecutor;
 
             var disposeScope = true;
@@ -395,7 +403,8 @@ namespace Microsoft.AspNetCore.SignalR.Internal
                         hubMethodInvocationMessage.Arguments,
                         hub
                     )
-                ) {
+                )
+                {
                     Log.HubMethodNotAuthorized(_logger, hubMethodInvocationMessage.Target);
                     await SendInvocationError(
                         hubMethodInvocationMessage.InvocationId,
@@ -412,7 +421,8 @@ namespace Microsoft.AspNetCore.SignalR.Internal
                         hubMethodInvocationMessage,
                         connection
                     )
-                ) {
+                )
+                {
                     return;
                 }
 
@@ -482,7 +492,8 @@ namespace Microsoft.AspNetCore.SignalR.Internal
                             HubConnectionContext connection,
                             HubMethodInvocationMessage hubMethodInvocationMessage,
                             bool isStreamCall
-                        ) {
+                        )
+                        {
                             var logger = dispatcher._logger;
                             var enableDetailedErrors = dispatcher._enableDetailedErrors;
 
@@ -623,7 +634,8 @@ namespace Microsoft.AspNetCore.SignalR.Internal
             IHubActivator<THub>? hubActivator,
             THub? hub,
             IServiceScope scope
-        ) {
+        )
+        {
             if (hubMessage.StreamIds != null)
             {
                 foreach (var stream in hubMessage.StreamIds)
@@ -650,7 +662,8 @@ namespace Microsoft.AspNetCore.SignalR.Internal
             CancellationTokenSource? streamCts,
             HubMethodInvocationMessage hubMethodInvocationMessage,
             HubMethodDescriptor descriptor
-        ) {
+        )
+        {
             string? error = null;
 
             streamCts ??= CancellationTokenSource.CreateLinkedTokenSource(
@@ -755,7 +768,8 @@ namespace Microsoft.AspNetCore.SignalR.Internal
             object?[] arguments,
             HubConnectionContext connection,
             IServiceProvider serviceProvider
-        ) {
+        )
+        {
             if (_invokeMiddleware != null)
             {
                 var invocationContext = new HubInvocationContext(
@@ -786,7 +800,8 @@ namespace Microsoft.AspNetCore.SignalR.Internal
             ObjectMethodExecutor methodExecutor,
             Hub hub,
             object?[] arguments
-        ) {
+        )
+        {
             if (methodExecutor.IsMethodAsync)
             {
                 if (methodExecutor.MethodReturnType == typeof(Task))
@@ -809,7 +824,8 @@ namespace Microsoft.AspNetCore.SignalR.Internal
             string? invocationId,
             HubConnectionContext connection,
             string errorMessage
-        ) {
+        )
+        {
             if (string.IsNullOrEmpty(invocationId))
             {
                 return;
@@ -831,7 +847,8 @@ namespace Microsoft.AspNetCore.SignalR.Internal
             HubMethodDescriptor descriptor,
             object?[] hubMethodArguments,
             Hub hub
-        ) {
+        )
+        {
             // If there are no policies we don't need to run auth
             if (descriptor.Policies.Count == 0)
             {
@@ -857,7 +874,8 @@ namespace Microsoft.AspNetCore.SignalR.Internal
             ClaimsPrincipal principal,
             IList<IAuthorizeData> policies,
             HubInvocationContext resource
-        ) {
+        )
+        {
             var authService = provider.GetRequiredService<IAuthorizationService>();
             var policyProvider = provider.GetRequiredService<IAuthorizationPolicyProvider>();
 
@@ -879,7 +897,8 @@ namespace Microsoft.AspNetCore.SignalR.Internal
             bool isStreamResponse,
             HubMethodInvocationMessage hubMethodInvocationMessage,
             HubConnectionContext connection
-        ) {
+        )
+        {
             if (hubMethodDescriptor.IsStreamResponse && !isStreamResponse)
             {
                 // Non-null/empty InvocationId? Blocking
@@ -920,7 +939,8 @@ namespace Microsoft.AspNetCore.SignalR.Internal
             HubConnectionContext connection,
             ref object?[] arguments,
             out CancellationTokenSource? cts
-        ) {
+        )
+        {
             cts = null;
             // In order to add the synthetic arguments we need a new array because the invocation array is too small (it doesn't know about synthetic arguments)
             arguments = new object?[descriptor.OriginalParameterTypes!.Count];
@@ -939,7 +959,8 @@ namespace Microsoft.AspNetCore.SignalR.Internal
                             ]?.GetType()
                         )
                     )
-                ) {
+                )
+                {
                     // The types match so it isn't a synthetic argument, just copy it into the arguments array
                     arguments[parameterPointer] = hubMethodInvocationMessage.Arguments[
                         hubInvocationArgumentPointer
@@ -951,7 +972,8 @@ namespace Microsoft.AspNetCore.SignalR.Internal
                     if (
                         descriptor.OriginalParameterTypes[parameterPointer]
                         == typeof(CancellationToken)
-                    ) {
+                    )
+                    {
                         cts = CancellationTokenSource.CreateLinkedTokenSource(
                             connection.ConnectionAborted
                         );
@@ -963,7 +985,8 @@ namespace Microsoft.AspNetCore.SignalR.Internal
                             descriptor.OriginalParameterTypes[parameterPointer],
                             mustBeDirectType: true
                         )
-                    ) {
+                    )
+                    {
                         Log.StartingParameterStream(
                             _logger,
                             hubMethodInvocationMessage.StreamIds![streamPointer]

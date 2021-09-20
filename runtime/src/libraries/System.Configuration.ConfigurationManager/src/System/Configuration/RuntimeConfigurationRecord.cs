@@ -25,7 +25,8 @@ namespace System.Configuration
             InternalConfigRoot configRoot,
             IInternalConfigRecord parent,
             string configPath
-        ) {
+        )
+        {
             RuntimeConfigurationRecord configRecord = new RuntimeConfigurationRecord();
             configRecord.Init(configRoot, (BaseConfigurationRecord)parent, configPath, null);
             return configRecord;
@@ -44,7 +45,8 @@ namespace System.Configuration
             SectionRecord sectionRecord,
             object parentConfig,
             ConfigXmlReader reader
-        ) {
+        )
+        {
             // Get the factory used to create a section.
             RuntimeConfigurationFactory factory =
                 (RuntimeConfigurationFactory)factoryRecord.Factory;
@@ -66,7 +68,8 @@ namespace System.Configuration
             string configKey,
             object parentResult,
             SectionRecord sectionRecord
-        ) {
+        )
+        {
             return parentResult;
         }
 
@@ -107,7 +110,8 @@ namespace System.Configuration
             internal RuntimeConfigurationFactory(
                 RuntimeConfigurationRecord configRecord,
                 FactoryRecord factoryRecord
-            ) {
+            )
+            {
                 Init(configRecord, factoryRecord);
             }
 
@@ -172,7 +176,8 @@ namespace System.Configuration
                 SectionRecord sectionRecord,
                 object parentConfig,
                 ConfigXmlReader reader
-            ) {
+            )
+            {
                 object config;
 
                 if (_sectionCtor != null)

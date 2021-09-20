@@ -181,7 +181,8 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.property.autopr
                 && loc[0] == "Test"
                 && loc[1] == string.Empty
                 && loc[2] == null
-            ) {
+            )
+            {
                 return 0;
             }
             else

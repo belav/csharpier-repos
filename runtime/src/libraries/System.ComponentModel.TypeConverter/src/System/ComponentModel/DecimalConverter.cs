@@ -46,7 +46,8 @@ namespace System.ComponentModel
             CultureInfo culture,
             object value,
             Type destinationType
-        ) {
+        )
+        {
             if (destinationType == typeof(InstanceDescriptor) && value is decimal decimalValue)
             {
                 ConstructorInfo ctor = typeof(decimal).GetConstructor(new Type[] { typeof(int[]) });

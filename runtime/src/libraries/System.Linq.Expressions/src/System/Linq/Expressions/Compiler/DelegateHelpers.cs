@@ -21,7 +21,8 @@ namespace System.Linq.Expressions.Compiler
         internal static Type MakeCallSiteDelegate(
             ReadOnlyCollection<Expression> types,
             Type returnType
-        ) {
+        )
+        {
             lock (_DelegateCache)
             {
                 TypeInfo curTypeInfo = _DelegateCache;

@@ -68,7 +68,8 @@ namespace System.ComponentModel.Composition.Hosting
             this ComposablePartDefinition part,
             string contractName,
             ImportCardinality importCardinality
-        ) {
+        )
+        {
             Requires.NotNull(part, nameof(part));
             Requires.NotNull(contractName, nameof(contractName));
 
@@ -77,7 +78,8 @@ namespace System.ComponentModel.Composition.Hosting
                 if (
                     StringComparers.ContractName.Equals(contractName, import.ContractName)
                     && (import.Cardinality == importCardinality)
-                ) {
+                )
+                {
                     return true;
                 }
             }
@@ -96,7 +98,8 @@ namespace System.ComponentModel.Composition.Hosting
         public static bool ContainsPartMetadataWithKey(
             this ComposablePartDefinition part,
             string key
-        ) {
+        )
+        {
             Requires.NotNull(part, nameof(part));
             Requires.NotNull(key, nameof(key));
 
@@ -117,7 +120,8 @@ namespace System.ComponentModel.Composition.Hosting
             this ComposablePartDefinition part,
             string key,
             T value
-        ) {
+        )
+        {
             Requires.NotNull(part, nameof(part));
             Requires.NotNull(key, nameof(key));
 
@@ -145,7 +149,8 @@ namespace System.ComponentModel.Composition.Hosting
         public static FilteredCatalog Filter(
             this ComposablePartCatalog catalog,
             Func<ComposablePartDefinition, bool> filter
-        ) {
+        )
+        {
             Requires.NotNull(catalog, nameof(catalog));
             Requires.NotNull(filter, nameof(filter));
 

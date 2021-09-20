@@ -23,7 +23,8 @@ namespace System.Net.Http.Formatting
         public ContentNegotiationResult(
             MediaTypeFormatter formatter,
             MediaTypeHeaderValue mediaType
-        ) {
+        )
+        {
             if (formatter == null)
             {
                 throw Error.ArgumentNull("formatter");

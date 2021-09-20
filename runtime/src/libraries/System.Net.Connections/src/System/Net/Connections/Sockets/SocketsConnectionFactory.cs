@@ -32,7 +32,8 @@ namespace System.Net.Connections
             AddressFamily addressFamily,
             SocketType socketType,
             ProtocolType protocolType
-        ) {
+        )
+        {
             _addressFamily = addressFamily;
             _socketType = socketType;
             _protocolType = protocolType;
@@ -54,7 +55,8 @@ namespace System.Net.Connections
             EndPoint? endPoint,
             IConnectionProperties? options = null,
             CancellationToken cancellationToken = default
-        ) {
+        )
+        {
             if (endPoint == null)
                 throw new ArgumentNullException(nameof(endPoint));
             cancellationToken.ThrowIfCancellationRequested();
@@ -103,7 +105,8 @@ namespace System.Net.Connections
             ProtocolType protocolType,
             EndPoint? endPoint,
             IConnectionProperties? options
-        ) {
+        )
+        {
             Socket socket = new Socket(addressFamily, socketType, protocolType);
 
             if (protocolType == ProtocolType.Tcp)

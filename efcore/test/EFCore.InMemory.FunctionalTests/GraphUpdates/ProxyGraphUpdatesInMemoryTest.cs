@@ -82,7 +82,8 @@ namespace Microsoft.EntityFrameworkCore
                 Action<DbContext> nestedTestOperation1 = null,
                 Action<DbContext> nestedTestOperation2 = null,
                 Action<DbContext> nestedTestOperation3 = null
-            ) {
+            )
+            {
                 base.ExecuteWithStrategyInTransaction(
                     testOperation,
                     nestedTestOperation1,
@@ -137,9 +138,8 @@ namespace Microsoft.EntityFrameworkCore
         public class ChangeTracking
             : ProxyGraphUpdatesInMemoryTestBase<ChangeTracking.ProxyGraphUpdatesWithChangeTrackingInMemoryFixture>
         {
-            public ChangeTracking(
-                ProxyGraphUpdatesWithChangeTrackingInMemoryFixture fixture
-            ) : base(fixture) { }
+            public ChangeTracking(ProxyGraphUpdatesWithChangeTrackingInMemoryFixture fixture)
+                : base(fixture) { }
 
             protected override bool DoesLazyLoading => false;
 

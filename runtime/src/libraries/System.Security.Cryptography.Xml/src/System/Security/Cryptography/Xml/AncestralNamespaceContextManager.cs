@@ -23,7 +23,8 @@ namespace System.Security.Cryptography.Xml
         protected XmlAttribute GetNearestRenderedNamespaceWithMatchingPrefix(
             string nsPrefix,
             out int depth
-        ) {
+        )
+        {
             XmlAttribute attr = null;
             depth = -1;
             for (int i = _ancestorStack.Count - 1; i >= 0; i--)
@@ -40,7 +41,8 @@ namespace System.Security.Cryptography.Xml
         protected XmlAttribute GetNearestUnrenderedNamespaceWithMatchingPrefix(
             string nsPrefix,
             out int depth
-        ) {
+        )
+        {
             XmlAttribute attr = null;
             depth = -1;
             for (int i = _ancestorStack.Count - 1; i >= 0; i--)

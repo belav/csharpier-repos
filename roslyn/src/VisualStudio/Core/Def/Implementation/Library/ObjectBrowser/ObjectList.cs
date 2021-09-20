@@ -163,7 +163,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Library.ObjectB
                                 | Helpers.LLF_SEARCH_WITH_EXPANSION
                             )
                         ) == 0
-                    ) {
+                    )
+                    {
                         categoryField |= (uint)_LIB_LISTTYPE.LLT_HIERARCHY;
                     }
 
@@ -347,7 +348,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Library.ObjectB
             uint index,
             int category,
             out uint categoryField
-        ) {
+        )
+        {
             switch (category)
             {
                 case (int)LIB_CATEGORY.LC_LISTTYPE:
@@ -473,7 +475,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Library.ObjectB
             uint listType,
             uint flags,
             VSOBSEARCHCRITERIA2[] pobSrch
-        ) {
+        )
+        {
             var listItem = GetListItem(index);
 
             // We need to do a little massaging of the list type and parent item in a couple of cases.
@@ -693,7 +696,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Library.ObjectB
                     _kind == ObjectListKind.Types
                     || _kind == ObjectListKind.Namespaces
                     || _kind == ObjectListKind.Members
-                ) {
+                )
+                {
                     if (string.Equals(matchName, name, StringComparison.Ordinal))
                     {
                         index = i;
@@ -733,7 +737,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Library.ObjectB
             uint index,
             _VSOBJDESCOPTIONS options,
             IVsObjectBrowserDescription3 description
-        ) {
+        )
+        {
             var listItem = GetListItem(index);
 
             return this.LibraryManager.TryFillDescription(listItem, description, options);
@@ -743,7 +748,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Library.ObjectB
             uint index,
             _VSOBJLISTELEMPROPID propertyId,
             out object pvar
-        ) {
+        )
+        {
             pvar = null;
 
             var listItem = GetListItem(index);
@@ -792,7 +798,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Library.ObjectB
             out IVsHierarchy hierarchy,
             out uint itemid,
             out uint items
-        ) {
+        )
+        {
             hierarchy = null;
             itemid = 0;
             items = 0;
@@ -834,7 +841,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Library.ObjectB
                 if (
                     GetListItem(index) is SymbolListItem symbolItem
                     && symbolItem.SupportsGoToDefinition
-                ) {
+                )
+                {
                     var project = this.LibraryManager.Workspace.CurrentSolution.GetProject(
                         symbolItem.ProjectId
                     );
@@ -848,7 +856,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Library.ObjectB
                             project,
                             CancellationToken.None
                         )
-                    ) {
+                    )
+                    {
                         return VSConstants.S_OK;
                     }
                     else
@@ -945,7 +954,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Library.ObjectB
                             referenceListItem.MetadataReference
                             is PortableExecutableReference metadataReference
                         )
-                    ) {
+                    )
+                    {
                         continue;
                     }
 
@@ -955,7 +965,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Library.ObjectB
                             metadataReference.FilePath,
                             StringComparison.OrdinalIgnoreCase
                         )
-                    ) {
+                    )
+                    {
                         index = i;
                         return true;
                     }
@@ -975,7 +986,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Library.ObjectB
                             this.LibraryManager.ServiceProvider.GetService(typeof(SVsSolution))
                             is IVsSolution vsSolution
                         )
-                    ) {
+                    )
+                    {
                         return false;
                     }
 
@@ -983,7 +995,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Library.ObjectB
                         ErrorHandler.Failed(
                             vsSolution.GetProjrefOfProject(hierarchy, out var projectRef)
                         )
-                    ) {
+                    )
+                    {
                         return false;
                     }
 
@@ -1001,7 +1014,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Library.ObjectB
         protected override bool TryGetBrowseContainerData(
             uint index,
             ref VSCOMPONENTSELECTORDATA data
-        ) {
+        )
+        {
             var listItem = GetListItem(index);
 
             if (listItem is ProjectListItem projectListItem)
@@ -1019,7 +1033,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Library.ObjectB
                         this.LibraryManager.ServiceProvider.GetService(typeof(SVsSolution))
                         is IVsSolution vsSolution
                     )
-                ) {
+                )
+                {
                     return false;
                 }
 
@@ -1027,7 +1042,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Library.ObjectB
                     ErrorHandler.Failed(
                         vsSolution.GetProjrefOfProject(hierarchy, out var projectRef)
                     )
-                ) {
+                )
+                {
                     return false;
                 }
 
@@ -1056,7 +1072,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Library.ObjectB
                         referenceListItem.MetadataReference
                         is PortableExecutableReference portableExecutableReference
                     )
-                ) {
+                )
+                {
                     return false;
                 }
 

@@ -19,7 +19,8 @@ namespace System.CommandLine.Binding
             IValueDescriptor valueDescriptor,
             BindingContext? bindingContext,
             out object? boundValue
-        ) {
+        )
+        {
             var specificDescriptor = ValueDescriptor;
             switch (specificDescriptor)
             {

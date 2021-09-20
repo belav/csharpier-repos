@@ -334,7 +334,8 @@ namespace Microsoft.AspNetCore.Http
                 HttpContext context,
                 ref IServiceProvider? sp1,
                 out IServiceProvider? sp2
-            ) {
+            )
+            {
                 sp1 = null;
                 sp2 = null;
                 return Task.FromResult(0);

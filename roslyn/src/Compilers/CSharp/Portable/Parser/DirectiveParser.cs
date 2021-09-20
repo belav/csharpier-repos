@@ -30,7 +30,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Syntax.InternalSyntax
             bool endIsActive,
             bool isAfterFirstTokenInFile,
             bool isAfterNonWhitespaceOnLine
-        ) {
+        )
+        {
             var hashPosition = lexer.TextWindow.Position;
             var hash = this.EatToken(SyntaxKind.HashToken, false);
             if (isAfterNonWhitespaceOnLine)
@@ -170,7 +171,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Syntax.InternalSyntax
                         && contextualKind == SyntaxKind.ExclamationToken
                         && hashPosition == 0
                         && !hash.HasTrailingTrivia
-                    ) {
+                    )
+                    {
                         result = this.ParseShebangDirective(
                             hash,
                             this.EatToken(SyntaxKind.ExclamationToken),
@@ -205,7 +207,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Syntax.InternalSyntax
             SyntaxToken hash,
             SyntaxToken keyword,
             bool isActive
-        ) {
+        )
+        {
             var expr = this.ParseExpression();
             var eod = this.ParseEndOfDirective(ignoreErrors: false);
             var isTrue = this.EvaluateBool(expr);
@@ -226,7 +229,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Syntax.InternalSyntax
             SyntaxToken keyword,
             bool isActive,
             bool endIsActive
-        ) {
+        )
+        {
             var expr = this.ParseExpression();
             var eod = this.ParseEndOfDirective(ignoreErrors: false);
             if (_context.HasPreviousIfOrElif())
@@ -280,7 +284,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Syntax.InternalSyntax
             SyntaxToken keyword,
             bool isActive,
             bool endIsActive
-        ) {
+        )
+        {
             var eod = this.ParseEndOfDirective(ignoreErrors: false);
             if (_context.HasPreviousIfOrElif())
             {
@@ -321,7 +326,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Syntax.InternalSyntax
             SyntaxToken keyword,
             bool isActive,
             bool endIsActive
-        ) {
+        )
+        {
             var eod = this.ParseEndOfDirective(ignoreErrors: false);
             if (_context.HasUnfinishedIf())
             {
@@ -349,7 +355,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Syntax.InternalSyntax
             SyntaxToken hash,
             SyntaxToken keyword,
             bool isActive
-        ) {
+        )
+        {
             return SyntaxFactory.RegionDirectiveTrivia(
                 hash,
                 keyword,
@@ -362,7 +369,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Syntax.InternalSyntax
             SyntaxToken hash,
             SyntaxToken keyword,
             bool isActive
-        ) {
+        )
+        {
             var eod = this.ParseEndOfDirectiveWithOptionalPreprocessingMessage();
             if (_context.HasUnfinishedRegion())
             {
@@ -389,7 +397,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Syntax.InternalSyntax
             SyntaxToken keyword,
             bool isActive,
             bool isFollowingToken
-        ) {
+        )
+        {
             if (isFollowingToken)
             {
                 keyword = this.AddError(keyword, ErrorCode.ERR_PPDefFollowsToken);
@@ -434,7 +443,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Syntax.InternalSyntax
             SyntaxToken hash,
             SyntaxToken keyword,
             bool isActive
-        ) {
+        )
+        {
             var eod = this.ParseEndOfDirectiveWithOptionalPreprocessingMessage();
             bool isError = keyword.Kind == SyntaxKind.ErrorKeyword;
             if (isActive)
@@ -515,7 +525,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Syntax.InternalSyntax
                                 errorText.Substring(versionMarker.Length),
                                 out var languageVersion
                             )
-                        ) {
+                        )
+                        {
                             ErrorCode error = this.Options.LanguageVersion.GetErrorCode();
                             eod = this.AddError(
                                 eod,
@@ -544,7 +555,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Syntax.InternalSyntax
             SyntaxToken hash,
             SyntaxToken id,
             bool isActive
-        ) {
+        )
+        {
             SyntaxToken line;
             SyntaxToken file = null;
             bool sawLineButNotFile = false;
@@ -600,7 +612,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Syntax.InternalSyntax
             SyntaxToken keyword,
             bool isActive,
             bool isFollowingToken
-        ) {
+        )
+        {
             if (isActive)
             {
                 if (Options.Kind == SourceCodeKind.Regular)
@@ -631,7 +644,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Syntax.InternalSyntax
             SyntaxToken keyword,
             bool isActive,
             bool isFollowingToken
-        ) {
+        )
+        {
             if (isActive)
             {
                 if (Options.Kind == SourceCodeKind.Regular)
@@ -661,7 +675,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Syntax.InternalSyntax
             SyntaxToken hash,
             SyntaxToken token,
             bool isActive
-        ) {
+        )
+        {
             if (isActive)
             {
                 token = CheckFeatureAvailability(
@@ -714,7 +729,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Syntax.InternalSyntax
             SyntaxToken hash,
             SyntaxToken pragma,
             bool isActive
-        ) {
+        )
+        {
             if (isActive)
             {
                 pragma = CheckFeatureAvailability(pragma, MessageID.IDS_FeaturePragma);
@@ -728,7 +744,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Syntax.InternalSyntax
                 if (
                     this.CurrentToken.Kind == SyntaxKind.DisableKeyword
                     || this.CurrentToken.Kind == SyntaxKind.RestoreKeyword
-                ) {
+                )
+                {
                     style = this.EatToken();
 
                     var ids = new SeparatedSyntaxListBuilder<ExpressionSyntax>(10);
@@ -903,7 +920,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Syntax.InternalSyntax
             SyntaxToken hash,
             SyntaxToken exclamation,
             bool isActive
-        ) {
+        )
+        {
             // Shebang directives must appear at the first position in the file
             // (before all other directives), so they should always be active.
             Debug.Assert(isActive);
@@ -922,13 +940,15 @@ namespace Microsoft.CodeAnalysis.CSharp.Syntax.InternalSyntax
             if (
                 this.CurrentToken.Kind != SyntaxKind.EndOfDirectiveToken
                 && this.CurrentToken.Kind != SyntaxKind.EndOfFileToken
-            ) {
+            )
+            {
                 builder = new StringBuilder(this.CurrentToken.FullWidth);
 
                 while (
                     this.CurrentToken.Kind != SyntaxKind.EndOfDirectiveToken
                     && this.CurrentToken.Kind != SyntaxKind.EndOfFileToken
-                ) {
+                )
+                {
                     var token = this.EatToken();
 
                     builder.Append(token.ToFullString());
@@ -954,14 +974,16 @@ namespace Microsoft.CodeAnalysis.CSharp.Syntax.InternalSyntax
             bool ignoreErrors,
             bool afterPragma = false,
             bool afterLineNumber = false
-        ) {
+        )
+        {
             var skippedTokens = new SyntaxListBuilder<SyntaxToken>();
 
             // Consume all extraneous tokens as leading SkippedTokens trivia.
             if (
                 this.CurrentToken.Kind != SyntaxKind.EndOfDirectiveToken
                 && this.CurrentToken.Kind != SyntaxKind.EndOfFileToken
-            ) {
+            )
+            {
                 skippedTokens = new SyntaxListBuilder<SyntaxToken>(10);
 
                 if (!ignoreErrors)
@@ -984,7 +1006,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Syntax.InternalSyntax
                 while (
                     this.CurrentToken.Kind != SyntaxKind.EndOfDirectiveToken
                     && this.CurrentToken.Kind != SyntaxKind.EndOfFileToken
-                ) {
+                )
+                {
                     skippedTokens.Add(this.EatToken().WithoutDiagnosticsGreen());
                 }
             }
@@ -1052,7 +1075,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Syntax.InternalSyntax
             while (
                 this.CurrentToken.Kind == SyntaxKind.EqualsEqualsToken
                 || this.CurrentToken.Kind == SyntaxKind.ExclamationEqualsToken
-            ) {
+            )
+            {
                 var op = this.EatToken();
                 var right = this.ParseEquality();
                 left = SyntaxFactory.BinaryExpression(

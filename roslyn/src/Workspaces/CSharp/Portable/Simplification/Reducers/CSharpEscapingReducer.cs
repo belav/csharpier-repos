@@ -36,7 +36,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Simplification
             SemanticModel semanticModel,
             OptionSet optionSet,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var unescapedIdentifier = token.ValueText;
 
             var enclosingXmlNameAttr = token.GetAncestors(n => n is XmlNameAttributeSyntax)
@@ -46,7 +47,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Simplification
             if (
                 SyntaxFacts.GetKeywordKind(unescapedIdentifier) != SyntaxKind.None
                 && enclosingXmlNameAttr == null
-            ) {
+            )
+            {
                 return CreateNewIdentifierTokenFromToken(token, escape: true);
             }
 
@@ -57,7 +59,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Simplification
 
             if (
                 SyntaxFacts.GetContextualKeywordKind(unescapedIdentifier) == SyntaxKind.AwaitKeyword
-            ) {
+            )
+            {
                 var enclosingLambdaExpression = parent.GetAncestorsOrThis(
                         n =>
                             (
@@ -78,7 +81,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Simplification
 
                     if (
                         enclosingLambdaExpression is ParenthesizedLambdaExpressionSyntax parenLamdba
-                    ) {
+                    )
+                    {
                         if (parenLamdba.AsyncKeyword.Kind() == SyntaxKind.AsyncKeyword)
                         {
                             return token;
@@ -96,7 +100,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Simplification
                     && ((MethodDeclarationSyntax)enclosingMethodBlock).Modifiers.Any(
                         n => n.Kind() == SyntaxKind.AsyncKeyword
                     )
-                ) {
+                )
+                {
                     return token;
                 }
             }
@@ -158,7 +163,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Simplification
         private static SyntaxToken CreateNewIdentifierTokenFromToken(
             SyntaxToken originalToken,
             bool escape
-        ) {
+        )
+        {
             var isVerbatimIdentifier = originalToken.IsVerbatimIdentifier();
             if (isVerbatimIdentifier == escape)
             {

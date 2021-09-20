@@ -267,7 +267,8 @@ namespace System.Reflection.Emit.Tests
             string[] fieldNames,
             object[] fieldValues,
             object[] expectedFieldValues
-        ) {
+        )
+        {
             PropertyInfo[] namedProperties = Helpers.GetProperties(
                 typeof(TestAttribute),
                 propertyNames
@@ -334,7 +335,8 @@ namespace System.Reflection.Emit.Tests
             object[] propertyValues,
             FieldInfo[] fieldNames,
             object[] fieldValues
-        ) {
+        )
+        {
             AssemblyBuilder assembly = Helpers.DynamicAssembly();
             assembly.SetCustomAttribute(builder);
 
@@ -706,7 +708,8 @@ namespace System.Reflection.Emit.Tests
             object[] propertyValues,
             FieldInfo[] namedFields,
             object[] fieldValues
-        ) {
+        )
+        {
             CustomAttributeBuilder attribute = new CustomAttributeBuilder(
                 con,
                 constructorArgs,
@@ -918,7 +921,8 @@ namespace System.Reflection.Emit.Tests
         [InlineData(CallingConventions.VarArgs)]
         public static void ConstructorHasNonStandardCallingConvention_ThrowsArgumentException(
             CallingConventions callingConvention
-        ) {
+        )
+        {
             TypeBuilder typeBuilder = Helpers.DynamicType(TypeAttributes.Public);
             ConstructorBuilder constructorBuilder = typeBuilder.DefineConstructor(
                 MethodAttributes.Public,
@@ -1029,7 +1033,8 @@ namespace System.Reflection.Emit.Tests
         [MemberData(nameof(FloatEnum_DoubleEnum_TestData))]
         public void ConstructorArgsContainsFloatEnumOrDoubleEnum_ThrowsArgumentException(
             object value
-        ) {
+        )
+        {
             NotSupportedObjectInConstructorArgs_ThrowsArgumentException(value);
         }
 
@@ -1086,7 +1091,8 @@ namespace System.Reflection.Emit.Tests
         public void ConstructorAndConstructorArgsDontMatch_ThrowsArgumentException(
             Type[] constructorTypes,
             object[] constructorArgs
-        ) {
+        )
+        {
             ConstructorInfo con = typeof(TestAttribute).GetConstructor(constructorTypes);
 
             AssertExtensions.Throws<ArgumentException>(
@@ -1155,7 +1161,8 @@ namespace System.Reflection.Emit.Tests
         public void ConstructorParametersContainsIntPtrOrUIntPtrArgument_ThrowsArgumentException(
             Type type,
             object value
-        ) {
+        )
+        {
             ConstructorParametersNotSupportedInAttributes_ThrowsArgumentException(type, value);
         }
 
@@ -1165,7 +1172,8 @@ namespace System.Reflection.Emit.Tests
         public void ConstructorParametersNotSupportedInAttributes_ThrowsArgumentException(
             Type type,
             object value
-        ) {
+        )
+        {
             TypeBuilder typeBuilder = Helpers.DynamicType(TypeAttributes.Public);
             ConstructorInfo con = typeBuilder.DefineConstructor(
                 MethodAttributes.Public,
@@ -1276,7 +1284,8 @@ namespace System.Reflection.Emit.Tests
         [MemberData(nameof(NotSupportedPrimitives_TestData))]
         public static void NotSupportedPrimitiveInConstructorArgs_ThrowsArgumentException(
             object value
-        ) {
+        )
+        {
             ConstructorInfo con = typeof(TestAttribute).GetConstructor(
                 new Type[] { typeof(object) }
             );
@@ -1367,7 +1376,8 @@ namespace System.Reflection.Emit.Tests
         public void NamedFields_FieldTypeNotSupportedInAttributes_ThrowsArgumentException(
             Type type,
             object value
-        ) {
+        )
+        {
             TypeBuilder typeBuilder = Helpers.DynamicType(TypeAttributes.Public);
             FieldInfo field = typeBuilder.DefineField("Field", type, FieldAttributes.Public);
             ConstructorInfo con = typeof(TestAttribute).GetConstructor(new Type[0]);
@@ -1415,7 +1425,8 @@ namespace System.Reflection.Emit.Tests
         public void NamedFields_FieldDoesntBelongToConstructorDeclaringType_ThrowsArgumentException(
             ConstructorInfo con,
             FieldInfo field
-        ) {
+        )
+        {
             FieldInfo[] namedFields = new FieldInfo[] { field };
 
             AssertExtensions.Throws<ArgumentException>(
@@ -1685,7 +1696,8 @@ namespace System.Reflection.Emit.Tests
             string[] fieldNames,
             object[] fieldValues,
             string paramName
-        ) {
+        )
+        {
             ConstructorInfo con = typeof(TestAttribute).GetConstructor(new Type[0]);
             FieldInfo[] namedFields = Helpers.GetFields(typeof(TestAttribute), fieldNames);
 
@@ -1817,7 +1829,8 @@ namespace System.Reflection.Emit.Tests
         public void NamedProperties_TypeNotSupportedInAttributes_ThrowsArgumentException(
             Type type,
             object value
-        ) {
+        )
+        {
             TypeBuilder typeBuilder = Helpers.DynamicType(TypeAttributes.Public);
             PropertyBuilder property = typeBuilder.DefineProperty(
                 "Property",
@@ -1871,7 +1884,8 @@ namespace System.Reflection.Emit.Tests
         public void NamedProperties_PropertyDoesntBelongToConstructorDeclaringType_ThrowsArgumentException(
             ConstructorInfo con,
             PropertyInfo property
-        ) {
+        )
+        {
             PropertyInfo[] namedProperties = new PropertyInfo[] { property };
 
             AssertExtensions.Throws<ArgumentException>(
@@ -1994,7 +2008,8 @@ namespace System.Reflection.Emit.Tests
         )]
         public static void NotSupportedPrimitiveInPropertyValues_ThrowsArgumentException(
             object value
-        ) {
+        )
+        {
             ConstructorInfo con = typeof(TestAttribute).GetConstructor(new Type[0]);
             PropertyInfo[] namedProperties = Helpers.GetProperties(
                 typeof(TestAttribute),
@@ -2077,7 +2092,8 @@ namespace System.Reflection.Emit.Tests
             string[] propertyNames,
             object[] propertyValues,
             string paramName
-        ) {
+        )
+        {
             ConstructorInfo con = typeof(TestAttribute).GetConstructor(new Type[0]);
             PropertyInfo[] namedProperties = Helpers.GetProperties(
                 typeof(TestAttribute),
@@ -2155,7 +2171,8 @@ namespace System.Reflection.Emit.Tests
             Type t,
             int[] arr,
             object obj
-        ) {
+        )
+        {
             SByteConstructor = sb;
             ByteConstructor = b;
             ShortConstructor = s;

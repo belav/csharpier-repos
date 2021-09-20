@@ -47,7 +47,8 @@ namespace Microsoft.CodeAnalysis.CodeGen
         public static SequencePointList Create(
             ArrayBuilder<RawSequencePoint> seqPointBuilder,
             ILBuilder builder
-        ) {
+        )
+        {
             if (seqPointBuilder.Count == 0)
             {
                 return SequencePointList.s_empty;
@@ -63,7 +64,8 @@ namespace Microsoft.CodeAnalysis.CodeGen
                 if (
                     i == totalPoints
                     || seqPointBuilder[i].SyntaxTree != seqPointBuilder[i - 1].SyntaxTree
-                ) {
+                )
+                {
                     // Create a new list
                     SequencePointList next = new SequencePointList(
                         seqPointBuilder[i - 1].SyntaxTree,
@@ -97,7 +99,8 @@ namespace Microsoft.CodeAnalysis.CodeGen
             int start,
             int length,
             ILBuilder builder
-        ) {
+        )
+        {
             OffsetAndSpan[] result = new OffsetAndSpan[length];
             for (int i = 0; i < result.Length; i++)
             {
@@ -119,7 +122,8 @@ namespace Microsoft.CodeAnalysis.CodeGen
         public void GetSequencePoints(
             DebugDocumentProvider documentProvider,
             ArrayBuilder<Cci.SequencePoint> builder
-        ) {
+        )
+        {
             bool lastPathIsMapped = false;
             string lastPath = null;
             Cci.DebugSourceDocument lastDebugDocument = null;
@@ -186,7 +190,8 @@ namespace Microsoft.CodeAnalysis.CodeGen
                         if (
                             lastPath != fileLinePositionSpan.Path
                             || lastPathIsMapped != fileLinePositionSpan.HasMappedPath
-                        ) {
+                        )
+                        {
                             lastPath = fileLinePositionSpan.Path;
                             lastPathIsMapped = fileLinePositionSpan.HasMappedPath;
                             lastDebugDocument = documentProvider(

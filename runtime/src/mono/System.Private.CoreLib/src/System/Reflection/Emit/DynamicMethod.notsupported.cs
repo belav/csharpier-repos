@@ -47,7 +47,8 @@ namespace System.Reflection.Emit
             Type? returnType,
             Type[]? parameterTypes,
             bool restrictedSkipVisibility
-        ) {
+        )
+        {
             throw new PlatformNotSupportedException();
         }
 
@@ -67,7 +68,8 @@ namespace System.Reflection.Emit
             Type[]? parameterTypes,
             Module m,
             bool skipVisibility
-        ) {
+        )
+        {
             throw new PlatformNotSupportedException();
         }
 
@@ -77,7 +79,8 @@ namespace System.Reflection.Emit
             Type[]? parameterTypes,
             Type owner,
             bool skipVisibility
-        ) {
+        )
+        {
             throw new PlatformNotSupportedException();
         }
 
@@ -89,7 +92,8 @@ namespace System.Reflection.Emit
             Type[]? parameterTypes,
             Module m,
             bool skipVisibility
-        ) {
+        )
+        {
             throw new PlatformNotSupportedException();
         }
 
@@ -101,7 +105,8 @@ namespace System.Reflection.Emit
             Type[]? parameterTypes,
             Type owner,
             bool skipVisibility
-        ) {
+        )
+        {
             throw new PlatformNotSupportedException();
         }
 
@@ -193,7 +198,8 @@ namespace System.Reflection.Emit
             Binder? binder,
             object?[]? parameters,
             CultureInfo? culture
-        ) {
+        )
+        {
             throw new PlatformNotSupportedException();
         }
 

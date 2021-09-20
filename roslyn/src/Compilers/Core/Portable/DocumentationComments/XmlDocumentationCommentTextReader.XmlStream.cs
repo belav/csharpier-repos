@@ -146,7 +146,8 @@ namespace Microsoft.CodeAnalysis
                 char[] dest,
                 ref int destIndex,
                 ref int destCount
-            ) {
+            )
+            {
                 if (destCount == 0 || srcIndex < 0 || srcIndex >= src.Length)
                 {
                     return 0;

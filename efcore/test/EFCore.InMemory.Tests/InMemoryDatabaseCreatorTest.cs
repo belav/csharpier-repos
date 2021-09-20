@@ -49,7 +49,8 @@ namespace Microsoft.EntityFrameworkCore
 
         private static InMemoryDatabaseCreator CreateDatabaseCreator(
             IServiceProvider serviceProvider
-        ) {
+        )
+        {
             var optionsBuilder = new DbContextOptionsBuilder();
             optionsBuilder.UseInMemoryDatabase(nameof(InMemoryDatabaseCreatorTest));
 

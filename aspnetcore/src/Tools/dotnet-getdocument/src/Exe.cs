@@ -17,7 +17,8 @@ namespace Microsoft.Extensions.ApiDescription.Tool
             IReporter reporter,
             string workingDirectory = null,
             bool interceptOutput = false
-        ) {
+        )
+        {
             var arguments = ArgumentEscaper.EscapeAndConcatenate(args);
 
             reporter.WriteVerbose(executable + " " + arguments);

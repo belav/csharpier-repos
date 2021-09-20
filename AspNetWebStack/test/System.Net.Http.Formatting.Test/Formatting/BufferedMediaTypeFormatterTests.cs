@@ -163,7 +163,8 @@ namespace System.Net.Http.Formatting
             string content,
             string encoding,
             bool isDefaultEncoding
-        ) {
+        )
+        {
             // Arrange
             MediaTypeFormatter formatter = new MockBufferedMediaTypeFormatter();
             string mediaType = string.Format(
@@ -187,7 +188,8 @@ namespace System.Net.Http.Formatting
             string content,
             string encoding,
             bool isDefaultEncoding
-        ) {
+        )
+        {
             // Arrange
             MediaTypeFormatter formatter = new MockBufferedMediaTypeFormatter();
             string mediaType = string.Format(
@@ -279,7 +281,8 @@ namespace System.Net.Http.Formatting
             Stream stream,
             HttpContent content,
             IFormatterLogger formatterLogger
-        ) {
+        )
+        {
             object result = null;
             HttpContentHeaders contentHeaders = content == null ? null : content.Headers;
             Encoding effectiveEncoding = SelectCharacterEncoding(contentHeaders);
@@ -302,7 +305,8 @@ namespace System.Net.Http.Formatting
             object value,
             Stream stream,
             HttpContent content
-        ) {
+        )
+        {
             HttpContentHeaders contentHeaders = content == null ? null : content.Headers;
             Encoding effectiveEncoding = SelectCharacterEncoding(contentHeaders);
             using (StreamWriter sWriter = new StreamWriter(stream, effectiveEncoding))

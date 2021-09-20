@@ -19,7 +19,8 @@ namespace Microsoft.CodeAnalysis.CodeFixes
             this CodeFixContext context,
             IEnumerable<CodeAction> actions,
             Diagnostic diagnostic
-        ) {
+        )
+        {
             foreach (var action in actions)
             {
                 context.RegisterCodeFix(action, diagnostic);
@@ -33,7 +34,8 @@ namespace Microsoft.CodeAnalysis.CodeFixes
             this CodeFixContext context,
             IEnumerable<CodeAction> actions,
             ImmutableArray<Diagnostic> diagnostics
-        ) {
+        )
+        {
             if (actions != null)
             {
                 foreach (var action in actions)

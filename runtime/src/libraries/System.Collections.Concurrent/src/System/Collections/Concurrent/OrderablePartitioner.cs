@@ -83,7 +83,8 @@ namespace System.Collections.Concurrent
             bool keysOrderedInEachPartition,
             bool keysOrderedAcrossPartitions,
             bool keysNormalized
-        ) {
+        )
+        {
             KeysOrderedInEachPartition = keysOrderedInEachPartition;
             KeysOrderedAcrossPartitions = keysOrderedAcrossPartitions;
             KeysNormalized = keysNormalized;

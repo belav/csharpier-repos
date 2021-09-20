@@ -66,7 +66,8 @@ namespace Microsoft.Extensions.Logging.AzureAppServices
         internal override async Task WriteMessagesAsync(
             IEnumerable<LogMessage> messages,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var eventGroups = messages.GroupBy(GetBlobKey);
             foreach (var eventGroup in eventGroups)
             {

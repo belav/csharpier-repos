@@ -41,7 +41,8 @@ namespace Microsoft.CodeAnalysis.EditAndContinue
             ImmutableArray<(DocumentId, ImmutableArray<ActiveStatement>, ImmutableArray<
                     ImmutableArray<LinePositionSpan>
                 >)> newActiveStatements
-        ) {
+        )
+        {
             Debug.Assert(!semanticEdits.IsDefault);
             Debug.Assert(!lineChanges.IsDefault);
             Debug.Assert(!newActiveStatements.IsDefault);

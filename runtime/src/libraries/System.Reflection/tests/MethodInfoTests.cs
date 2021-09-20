@@ -225,7 +225,8 @@ namespace System.Reflection.Tests
             string name,
             Type delegateType,
             Type exceptionType
-        ) {
+        )
+        {
             MethodInfo methodInfo = GetMethod(type, name);
             Assert.Throws(exceptionType, () => methodInfo.CreateDelegate(delegateType));
         }
@@ -274,7 +275,8 @@ namespace System.Reflection.Tests
             Type delegateType,
             object target,
             Type exceptionType
-        ) {
+        )
+        {
             MethodInfo methodInfo = GetMethod(type, name);
             Assert.Throws(exceptionType, () => methodInfo.CreateDelegate(delegateType, target));
         }
@@ -872,7 +874,8 @@ namespace System.Reflection.Tests
             object obj,
             object[] parameters,
             object result
-        ) {
+        )
+        {
             MethodInfo method = GetMethod(methodDeclaringType, methodName);
             Assert.Equal(result, method.Invoke(obj, parameters));
         }
@@ -1427,7 +1430,8 @@ namespace System.Reflection.Tests
             ulong uint64 = 8,
             float single = 9.1f,
             double dbl = 11.12
-        ) {
+        )
+        {
             return FormattableString.Invariant(
                 $"{boolean}, {str}, {character}, {unsignedbyte}, {signedbyte}, {int16}, {uint16}, {int32}, {uint32}, {int64}, {uint64}, {single}, {dbl}"
             );

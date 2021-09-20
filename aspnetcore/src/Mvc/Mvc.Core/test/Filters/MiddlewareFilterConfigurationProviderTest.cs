@@ -132,7 +132,8 @@ namespace Microsoft.AspNetCore.Mvc.Filters
                 IApplicationBuilder appBuilder,
                 IWebHostEnvironment hostingEnvironment,
                 ILoggerFactory loggerFactory
-            ) {
+            )
+            {
                 if (hostingEnvironment == null)
                 {
                     throw new ArgumentNullException(nameof(hostingEnvironment));
@@ -155,7 +156,8 @@ namespace Microsoft.AspNetCore.Mvc.Filters
                 IApplicationBuilder appBuilder,
                 IWebHostEnvironment hostingEnvironment,
                 ILoggerFactory loggerFactory
-            ) {
+            )
+            {
                 if (hostingEnvironment == null)
                 {
                     throw new ArgumentNullException(nameof(hostingEnvironment));

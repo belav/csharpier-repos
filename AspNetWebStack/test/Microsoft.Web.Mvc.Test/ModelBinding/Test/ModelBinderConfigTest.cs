@@ -202,7 +202,8 @@ namespace Microsoft.Web.Mvc.ModelBinding.Test
             ControllerContext controllerContext,
             ModelMetadata modelMetadata,
             object incomingValue
-        ) {
+        )
+        {
             throw new NotImplementedException();
         }
 

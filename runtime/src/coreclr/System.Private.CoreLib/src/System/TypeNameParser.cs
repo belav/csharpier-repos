@@ -75,7 +75,8 @@ namespace System
             bool throwOnError,
             bool ignoreCase,
             ref StackCrawlMark stackMark
-        ) {
+        )
+        {
             if (typeName == null)
                 throw new ArgumentNullException(nameof(typeName));
             if (typeName.Length > 0 && typeName[0] == '\0')
@@ -130,7 +131,8 @@ namespace System
             bool throwOnError,
             bool ignoreCase,
             ref StackCrawlMark stackMark
-        ) {
+        )
+        {
             // assembly name
             Assembly? assembly = null;
             string asmName = GetAssemblyName();
@@ -224,7 +226,8 @@ namespace System
             Func<AssemblyName, Assembly?>? assemblyResolver,
             bool throwOnError,
             ref StackCrawlMark stackMark
-        ) {
+        )
+        {
             Debug.Assert(!string.IsNullOrEmpty(asmName));
 
             Assembly? assembly;
@@ -278,7 +281,8 @@ namespace System
             bool throwOnError,
             bool ignoreCase,
             ref StackCrawlMark stackMark
-        ) {
+        )
+        {
             Debug.Assert(names != null && names.Length > 0);
 
             Type? type;
@@ -368,7 +372,8 @@ namespace System
         private static SafeTypeNameParserHandle? CreateTypeNameParser(
             string typeName,
             bool throwOnError
-        ) {
+        )
+        {
             SafeTypeNameParserHandle? retHandle = null;
             _CreateTypeNameParser(
                 typeName,

@@ -178,7 +178,8 @@ namespace System.Xml
             ref byte cachedHalfByte,
             out int charsDecoded,
             out int bytesDecoded
-        ) {
+        )
+        {
             int iByte = 0;
             int iChar = 0;
 

@@ -43,7 +43,8 @@ namespace Microsoft.CodeAnalysis.Scripting
             ScriptOptions options,
             Type globalsTypeOpt,
             Script previousOpt
-        ) {
+        )
+        {
             Debug.Assert(sourceText != null);
             Debug.Assert(options != null);
             Debug.Assert(compiler != null);
@@ -63,7 +64,8 @@ namespace Microsoft.CodeAnalysis.Scripting
             ScriptOptions optionsOpt,
             Type globalsTypeOpt,
             InteractiveAssemblyLoader assemblyLoaderOpt
-        ) {
+        )
+        {
             return new Script<T>(
                 compiler,
                 new ScriptBuilder(assemblyLoaderOpt ?? new InteractiveAssemblyLoader()),
@@ -304,7 +306,8 @@ namespace Microsoft.CodeAnalysis.Scripting
             CommonMessageProvider messageProvider,
             DiagnosticBag diagnostics,
             MetadataReference languageRuntimeReferenceOpt = null
-        ) {
+        )
+        {
             var resolver = Options.MetadataResolver;
             var references = ArrayBuilder<MetadataReference>.GetInstance();
             try
@@ -413,7 +416,8 @@ namespace Microsoft.CodeAnalysis.Scripting
 
         internal override ImmutableArray<Diagnostic> CommonCompile(
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             // TODO: avoid throwing exception, report all diagnostics https://github.com/dotnet/roslyn/issues/5949
             try
             {
@@ -486,7 +490,8 @@ namespace Microsoft.CodeAnalysis.Scripting
         /// <exception cref="CompilationErrorException">Compilation has errors.</exception>
         private ImmutableArray<Func<object[], Task>> GetPrecedingExecutors(
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             if (_lazyPrecedingExecutors.IsDefault)
             {
                 var preceding = TryGetPrecedingExecutors(null, cancellationToken);
@@ -501,7 +506,8 @@ namespace Microsoft.CodeAnalysis.Scripting
         private ImmutableArray<Func<object[], Task>> TryGetPrecedingExecutors(
             Script lastExecutedScriptInChainOpt,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             Script script = Previous;
             if (script == lastExecutedScriptInChainOpt)
             {
@@ -583,7 +589,8 @@ namespace Microsoft.CodeAnalysis.Scripting
             object globals = null,
             Func<Exception, bool> catchException = null,
             CancellationToken cancellationToken = default(CancellationToken)
-        ) {
+        )
+        {
             // The following validation and executor construction may throw;
             // do so synchronously so that the exception is not wrapped in the task.
 
@@ -610,7 +617,8 @@ namespace Microsoft.CodeAnalysis.Scripting
         /// </remarks>
         public ScriptRunner<T> CreateDelegate(
             CancellationToken cancellationToken = default(CancellationToken)
-        ) {
+        )
+        {
             var precedingExecutors = GetPrecedingExecutors(cancellationToken);
             var currentExecutor = GetExecutor(cancellationToken);
             var globalsType = GlobalsType;
@@ -656,7 +664,8 @@ namespace Microsoft.CodeAnalysis.Scripting
             ScriptState previousState,
             Func<Exception, bool> catchException = null,
             CancellationToken cancellationToken = default(CancellationToken)
-        ) {
+        )
+        {
             // The following validation and executor construction may throw;
             // do so synchronously so that the exception is not wrapped in the task.
 
@@ -701,7 +710,8 @@ namespace Microsoft.CodeAnalysis.Scripting
             Func<object[], Task> currentExecutor,
             Func<Exception, bool> catchExceptionOpt,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var exceptionOpt = (catchExceptionOpt != null) ? new StrongBox<Exception>() : null;
             T result = await executionState.RunSubmissionsAsync<T>(
                     precedingExecutors,

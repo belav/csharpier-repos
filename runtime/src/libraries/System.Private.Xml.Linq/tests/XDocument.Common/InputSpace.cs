@@ -82,7 +82,8 @@ namespace CoreXml.Test.XLinq
                 foreach (
                     XElement e in xDoc.Descendants(ns + "variation")
                         .Where(x => x.Attribute("implemented").Value == "true")
-                ) {
+                )
+                {
                     file = e.Descendants(ns + "xml").FirstOrDefault().Value.Trim();
                     file = Path.Combine(filePath, file);
                     // check if the file exists, if not then continue
@@ -143,7 +144,8 @@ namespace CoreXml.Test.XLinq
             string masterControlFile = @"xlinq_master_xml.xml";
             using (
                 XmlReader reader = XmlReader.Create(FilePathUtil.getStream(masterControlFile), rs)
-            ) {
+            )
+            {
                 xDoc = XDocument.Load(reader);
             }
 
@@ -204,7 +206,8 @@ namespace CoreXml.Test.XLinq
             int namespaceCount,
             int elementCount,
             int childElementCount
-        ) {
+        )
+        {
             XElement root = new XElement("root");
             Random random = new Random(unchecked((int)DateTime.Now.Ticks));
 

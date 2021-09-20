@@ -58,7 +58,8 @@ namespace System.Diagnostics.Tests
         [MemberData(nameof(MachineName_Remote_TestData))]
         public void GetProcessesByName_RemoteMachineNameUnix_ThrowsPlatformNotSupportedException(
             string machineName
-        ) {
+        )
+        {
             Process currentProcess = Process.GetCurrentProcess();
             Assert.Throws<PlatformNotSupportedException>(
                 () => Process.GetProcessesByName(currentProcess.ProcessName, machineName)
@@ -132,7 +133,8 @@ namespace System.Diagnostics.Tests
                 OperatingSystem.IsLinux()
                 && s_allowedProgramsToRun.FirstOrDefault(program => IsProgramInstalled(program))
                     == null
-            ) {
+            )
+            {
                 return;
             }
             string fileToOpen = Path.Combine(Environment.CurrentDirectory, "_no_such_file.TXT");
@@ -140,7 +142,8 @@ namespace System.Diagnostics.Tests
                 var px = Process.Start(
                     new ProcessStartInfo { UseShellExecute = true, FileName = fileToOpen }
                 )
-            ) {
+            )
+            {
                 Assert.NotNull(px);
                 px.Kill();
                 px.WaitForExit();
@@ -175,7 +178,8 @@ namespace System.Diagnostics.Tests
                     var px = Process.Start(
                         new ProcessStartInfo { UseShellExecute = true, FileName = fileToOpen }
                     )
-                ) {
+                )
+                {
                     Assert.NotNull(px);
                     if (!OperatingSystem.IsMacOS()) // on OSX, process name is dotnet for some reason. Refer to https://github.com/dotnet/runtime/issues/23525
                     {
@@ -245,7 +249,8 @@ namespace System.Diagnostics.Tests
                                     FileName = fileToOpen
                                 }
                             )
-                        ) {
+                        )
+                        {
                             Assert.NotNull(px);
                             px.WaitForExit();
                             Assert.True(px.HasExited);
@@ -304,7 +309,8 @@ namespace System.Diagnostics.Tests
                         Arguments = testFilePath
                     }
                 )
-            ) {
+            )
+            {
                 Assert.NotNull(px);
                 px.WaitForExit();
                 Assert.Equal(0, px.ExitCode);
@@ -444,7 +450,8 @@ namespace System.Diagnostics.Tests
                     "/usr/bin/open",
                     "https://github.com/dotnet/corefx -a " + applicationToOpenWith
                 )
-            ) {
+            )
+            {
                 Assert.NotNull(px);
                 px.Kill();
                 px.WaitForExit();
@@ -457,7 +464,8 @@ namespace System.Diagnostics.Tests
         [OuterLoop("Opens browser")]
         public void ProcessStart_UseShellExecuteTrue_OpenUrl_SuccessfullyReadsArgument(
             string arguments
-        ) {
+        )
+        {
             var startInfo = new ProcessStartInfo
             {
                 UseShellExecute = true,
@@ -485,7 +493,8 @@ namespace System.Diagnostics.Tests
         [OuterLoop("Opens browser")]
         public void ProcessStart_UseShellExecuteTrue_OpenUrl_SuccessfullyReadsArgumentArray(
             string[] argumentList
-        ) {
+        )
+        {
             var startInfo = new ProcessStartInfo
             {
                 UseShellExecute = true,
@@ -620,7 +629,8 @@ namespace System.Diagnostics.Tests
             string groupId,
             string groupIdsJoined,
             string checkGroupsExact
-        ) {
+        )
+        {
             Assert.Equal(userId, getuid().ToString());
             Assert.Equal(userId, geteuid().ToString());
             Assert.Equal(groupId, getgid().ToString());
@@ -792,7 +802,8 @@ namespace System.Diagnostics.Tests
                 Process process = shortProcess
                     ? CreateShortProcess()
                     : CreateSleepProcess(durationMs: 500)
-            ) {
+            )
+            {
                 process.Start();
                 processId = process.Id;
                 if (enableEvents)
@@ -992,7 +1003,8 @@ namespace System.Diagnostics.Tests
                     DateTime now = DateTime.UtcNow;
                     if (
                         start.Ticks + (Helpers.PassingTestTimeoutMilliseconds * 10_000) <= now.Ticks
-                    ) {
+                    )
+                    {
                         Console.WriteLine(
                             "{0} Failed to kill process {1} started at {2}",
                             now,

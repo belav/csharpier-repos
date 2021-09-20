@@ -36,7 +36,8 @@ namespace System.Reflection.TypeLoading
         public sealed override void GetPEKind(
             out PortableExecutableKinds peKind,
             out ImageFileMachine machine
-        ) {
+        )
+        {
             peKind = PortableExecutableKinds.NotAPortableExecutableImage;
             machine = default;
         }
@@ -65,7 +66,8 @@ namespace System.Reflection.TypeLoading
             ReadOnlySpan<byte> ns,
             ReadOnlySpan<byte> name,
             out Exception? e
-        ) {
+        )
+        {
             e = new TypeLoadException(
                 SR.Format(SR.TypeNotFound, ns.ToUtf16().AppendTypeName(name.ToUtf16()), Assembly)
             );

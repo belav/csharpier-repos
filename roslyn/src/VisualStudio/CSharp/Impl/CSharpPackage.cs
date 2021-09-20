@@ -128,7 +128,8 @@ namespace Microsoft.VisualStudio.LanguageServices.CSharp.LanguageService
         protected override async Task InitializeAsync(
             CancellationToken cancellationToken,
             IProgress<ServiceProgressData> progress
-        ) {
+        )
+        {
             try
             {
                 await base.InitializeAsync(cancellationToken, progress).ConfigureAwait(true);
@@ -151,7 +152,8 @@ namespace Microsoft.VisualStudio.LanguageServices.CSharp.LanguageService
 
         protected override async Task RegisterObjectBrowserLibraryManagerAsync(
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var workspace = this.ComponentModel.GetService<VisualStudioWorkspace>();
 
             await JoinableTaskFactory.SwitchToMainThreadAsync(cancellationToken);
@@ -159,7 +161,8 @@ namespace Microsoft.VisualStudio.LanguageServices.CSharp.LanguageService
             if (
                 await GetServiceAsync(typeof(SVsObjectManager)).ConfigureAwait(true)
                 is IVsObjectManager2 objectManager
-            ) {
+            )
+            {
                 _libraryManager = new ObjectBrowserLibraryManager(this, ComponentModel, workspace);
 
                 if (
@@ -169,7 +172,8 @@ namespace Microsoft.VisualStudio.LanguageServices.CSharp.LanguageService
                             out _libraryManagerCookie
                         )
                     )
-                ) {
+                )
+                {
                     _libraryManagerCookie = 0;
                 }
             }
@@ -177,7 +181,8 @@ namespace Microsoft.VisualStudio.LanguageServices.CSharp.LanguageService
 
         protected override async Task UnregisterObjectBrowserLibraryManagerAsync(
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             await JoinableTaskFactory.SwitchToMainThreadAsync(cancellationToken);
 
             if (_libraryManagerCookie != 0)
@@ -185,7 +190,8 @@ namespace Microsoft.VisualStudio.LanguageServices.CSharp.LanguageService
                 if (
                     await GetServiceAsync(typeof(SVsObjectManager)).ConfigureAwait(true)
                     is IVsObjectManager2 objectManager
-                ) {
+                )
+                {
                     objectManager.UnregisterLibrary(_libraryManagerCookie);
                     _libraryManagerCookie = 0;
                 }
@@ -226,7 +232,8 @@ namespace Microsoft.VisualStudio.LanguageServices.CSharp.LanguageService
 
         protected override void RegisterMiscellaneousFilesWorkspaceInformation(
             MiscellaneousFilesWorkspace miscellaneousFilesWorkspace
-        ) {
+        )
+        {
             miscellaneousFilesWorkspace.RegisterLanguage(
                 Guids.CSharpLanguageServiceId,
                 LanguageNames.CSharp,

@@ -20,7 +20,8 @@ namespace Microsoft.AspNetCore.Authentication.AzureADB2C.UI
         public AzureADB2CCookieOptionsConfiguration(
             IOptions<AzureADB2CSchemeOptions> schemeOptions,
             IOptionsMonitor<AzureADB2COptions> azureADB2COptions
-        ) {
+        )
+        {
             _schemeOptions = schemeOptions;
             _azureADB2COptions = azureADB2COptions;
         }

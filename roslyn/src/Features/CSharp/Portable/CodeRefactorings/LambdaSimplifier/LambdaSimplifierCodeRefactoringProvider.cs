@@ -56,7 +56,8 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeRefactorings.LambdaSimplifier
                     lambda as ParenthesizedLambdaExpressionSyntax,
                     cancellationToken
                 )
-            ) {
+            )
+            {
                 return;
             }
 
@@ -81,7 +82,8 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeRefactorings.LambdaSimplifier
             Document document,
             SyntaxNode lambda,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var semanticDocument = await SemanticDocument.CreateAsync(document, cancellationToken)
                 .ConfigureAwait(false);
             var rewriter = new Rewriter(semanticDocument, n => n == lambda, cancellationToken);
@@ -92,7 +94,8 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeRefactorings.LambdaSimplifier
         private static async Task<Document> SimplifyAllLambdasAsync(
             Document document,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var semanticDocument = await SemanticDocument.CreateAsync(document, cancellationToken)
                 .ConfigureAwait(false);
             var rewriter = new Rewriter(semanticDocument, n => true, cancellationToken);
@@ -104,7 +107,8 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeRefactorings.LambdaSimplifier
             SemanticDocument document,
             SimpleLambdaExpressionSyntax node,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             if (node == null)
             {
                 return false;
@@ -125,7 +129,8 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeRefactorings.LambdaSimplifier
             SemanticDocument document,
             ParenthesizedLambdaExpressionSyntax node,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             if (node == null)
             {
                 return false;
@@ -142,7 +147,8 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeRefactorings.LambdaSimplifier
             List<SyntaxToken> paramNames,
             InvocationExpressionSyntax invocation,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             if (invocation == null)
             {
                 return false;
@@ -163,7 +169,8 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeRefactorings.LambdaSimplifier
                         SyntaxKind.IdentifierName,
                         out IdentifierNameSyntax identifierName
                     )
-                ) {
+                )
+                {
                     return false;
                 }
 
@@ -184,7 +191,8 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeRefactorings.LambdaSimplifier
             if (
                 !(lambdaSemanticInfo.Symbol is IMethodSymbol lambdaMethod)
                 || !(invocationSemanticInfo.Symbol is IMethodSymbol invocationMethod)
-            ) {
+            )
+            {
                 return false;
             }
 
@@ -209,7 +217,8 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeRefactorings.LambdaSimplifier
             if (
                 lambdaMethod.ReturnsVoid != invocationMethod.ReturnsVoid
                 || lambdaMethod.Parameters.Length != invocationMethod.Parameters.Length
-            ) {
+            )
+            {
                 return false;
             }
 
@@ -265,7 +274,8 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeRefactorings.LambdaSimplifier
             InvocationExpressionSyntax invocation,
             SemanticModel oldSemanticModel,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var annotation = new SyntaxAnnotation();
 
             // In order to check if there will be a problem, we actually make the change, fork the

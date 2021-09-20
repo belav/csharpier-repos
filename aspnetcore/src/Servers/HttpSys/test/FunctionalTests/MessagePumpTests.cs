@@ -41,7 +41,8 @@ namespace Microsoft.AspNetCore.Server.HttpSys
         [InlineData(null)]
         public void DoesNotOverrideDirectConfigurationWithIServerAddressesFeature_IfPreferHostinUrlsFalse(
             string overrideAddress
-        ) {
+        )
+        {
             var serverAddress = "http://localhost:11002/";
 
             using (var server = Utilities.CreatePump())
@@ -80,7 +81,8 @@ namespace Microsoft.AspNetCore.Server.HttpSys
         [InlineData(null)]
         public void OverridingIServerAddressesFeatureWithDirectConfiguration_WarnsOnStart(
             string serverAddress
-        ) {
+        )
+        {
             var overrideAddress = "http://localhost:11002/";
 
             using (var server = Utilities.CreatePump())

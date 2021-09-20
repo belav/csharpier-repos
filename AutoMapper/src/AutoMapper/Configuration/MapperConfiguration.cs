@@ -127,7 +127,8 @@ namespace AutoMapper
                 var request in _resolvedMaps.Keys.Where(t => !t.IsGenericTypeDefinition)
                     .Select(types => new MapRequest(types, types))
                     .ToArray()
-            ) {
+            )
+            {
                 GetExecutionPlan(request);
             }
         }
@@ -151,7 +152,8 @@ namespace AutoMapper
 
         private static MapperConfigurationExpression Build(
             Action<IMapperConfigurationExpression> configure
-        ) {
+        )
+        {
             var expr = new MapperConfigurationExpression();
             configure(expr);
             return expr;
@@ -203,7 +205,8 @@ namespace AutoMapper
         private static LambdaExpression GenerateTypeMapExpression(
             in MapRequest mapRequest,
             TypeMap typeMap
-        ) {
+        )
+        {
             typeMap.CheckProjection();
             if (mapRequest.RequestedTypes == typeMap.Types)
             {
@@ -236,7 +239,8 @@ namespace AutoMapper
         private LambdaExpression GenerateObjectMapperExpression(
             in MapRequest mapRequest,
             IObjectMapper mapperToUse
-        ) {
+        )
+        {
             var source = Parameter(mapRequest.RequestedTypes.SourceType, "source");
             var destination = Parameter(
                 mapRequest.RequestedTypes.DestinationType,
@@ -349,7 +353,8 @@ namespace AutoMapper
                     if (
                         sourceType == initialTypes.SourceType
                         && destinationType == initialTypes.DestinationType
-                    ) {
+                    )
+                    {
                         continue;
                     }
                     var types = new TypePair(sourceType, destinationType);
@@ -445,7 +450,8 @@ namespace AutoMapper
 
         TypeMap[] IGlobalConfiguration.GetIncludedTypeMaps(
             IReadOnlyCollection<TypePair> includedTypes
-        ) {
+        )
+        {
             if (includedTypes.Count == 0)
             {
                 return Array.Empty<TypeMap>();

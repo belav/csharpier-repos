@@ -10,7 +10,8 @@ namespace System.CodeDom
         public CodeTryCatchFinallyStatement(
             CodeStatement[] tryStatements,
             CodeCatchClause[] catchClauses
-        ) {
+        )
+        {
             TryStatements.AddRange(tryStatements);
             CatchClauses.AddRange(catchClauses);
         }
@@ -19,7 +20,8 @@ namespace System.CodeDom
             CodeStatement[] tryStatements,
             CodeCatchClause[] catchClauses,
             CodeStatement[] finallyStatements
-        ) {
+        )
+        {
             TryStatements.AddRange(tryStatements);
             CatchClauses.AddRange(catchClauses);
             FinallyStatements.AddRange(finallyStatements);

@@ -78,7 +78,8 @@ internal class MainApp
                 && (100 == Method_WithMultipleReturn_Inline())
                 && (100 == Method_WithOneReturn_Inline())
                 && (100 == Method_ConstantProp_Inline(2))
-            ) {
+            )
+            {
                 returncode = 100;
             }
             else

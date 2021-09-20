@@ -43,7 +43,8 @@ namespace System.Runtime.Serialization
 
         internal XmlFormatCollectionWriterDelegate GenerateCollectionWriter(
             CollectionDataContract collectionContract
-        ) {
+        )
+        {
             return _helper.GenerateCollectionWriter(collectionContract);
         }
 
@@ -74,7 +75,8 @@ namespace System.Runtime.Serialization
 
             internal XmlFormatClassWriterDelegate GenerateClassWriter(
                 ClassDataContract classContract
-            ) {
+            )
+            {
                 if (DataContractSerializer.Option == SerializationOption.ReflectionOnly)
                 {
                     return CreateReflectionXmlFormatClassWriterDelegate();
@@ -115,7 +117,8 @@ namespace System.Runtime.Serialization
 
             internal XmlFormatCollectionWriterDelegate GenerateCollectionWriter(
                 CollectionDataContract collectionContract
-            ) {
+            )
+            {
                 if (DataContractSerializer.Option == SerializationOption.ReflectionOnly)
                 {
                     return CreateReflectionXmlFormatCollectionWriterDelegate();
@@ -172,7 +175,8 @@ namespace System.Runtime.Serialization
                 else if (
                     objType.IsGenericType
                     && objType.GetGenericTypeDefinition() == Globals.TypeOfKeyValuePairAdapter
-                ) {
+                )
+                {
                     ClassDataContract dc = (ClassDataContract)DataContract.GetDataContract(objType);
                     _ilg.ConvertValue(
                         objectArg.ArgType,
@@ -297,7 +301,8 @@ namespace System.Runtime.Serialization
                 ClassDataContract classContract,
                 LocalBuilder? extensionDataLocal,
                 ClassDataContract derivedMostClassContract
-            ) {
+            )
+            {
                 int memberCount =
                     (classContract.BaseContract == null)
                         ? 0
@@ -361,7 +366,8 @@ namespace System.Runtime.Serialization
                             name: null,
                             nameIndex: i + _childElementIndex
                         )
-                    ) {
+                    )
+                    {
                         WriteStartElement(
                             memberType,
                             classContract.Namespace,
@@ -473,7 +479,8 @@ namespace System.Runtime.Serialization
                             itemName,
                             itemNamespace
                         )
-                    ) {
+                    )
+                    {
                         _ilg.For(i, 0, _objectLocal);
                         if (
                             !TryWritePrimitive(
@@ -488,7 +495,8 @@ namespace System.Runtime.Serialization
                                 itemName,
                                 0 /*nameIndex*/
                             )
-                        ) {
+                        )
+                        {
                             WriteStartElement(
                                 itemType,
                                 collectionContract.Namespace,
@@ -596,7 +604,8 @@ namespace System.Runtime.Serialization
                                 kind == CollectionKind.GenericDictionary
                                 || kind == CollectionKind.GenericCollection
                                 || kind == CollectionKind.GenericEnumerable
-                            ) {
+                            )
+                            {
                                 Type[] interfaceTypes = enumeratorType.GetInterfaces();
                                 foreach (Type interfaceType in interfaceTypes)
                                 {
@@ -606,7 +615,8 @@ namespace System.Runtime.Serialization
                                             == Globals.TypeOfIEnumeratorGeneric
                                         && interfaceType.GetGenericArguments()[0]
                                             == collectionContract.ItemType
-                                    ) {
+                                    )
+                                    {
                                         ienumeratorInterface = interfaceType;
                                         break;
                                     }
@@ -683,7 +693,8 @@ namespace System.Runtime.Serialization
                             itemName,
                             0 /*nameIndex*/
                         )
-                    ) {
+                    )
+                    {
                         WriteStartElement(
                             elementType,
                             collectionContract.Namespace,
@@ -725,7 +736,8 @@ namespace System.Runtime.Serialization
                 LocalBuilder ns,
                 LocalBuilder? name,
                 int nameIndex
-            ) {
+            )
+            {
                 PrimitiveDataContract? primitiveContract =
                     PrimitiveDataContract.GetPrimitiveDataContract(type);
                 if (
@@ -780,7 +792,8 @@ namespace System.Runtime.Serialization
                 LocalBuilder value,
                 LocalBuilder itemName,
                 LocalBuilder itemNamespace
-            ) {
+            )
+            {
                 PrimitiveDataContract? primitiveContract =
                     PrimitiveDataContract.GetPrimitiveDataContract(itemType);
                 if (primitiveContract == null)
@@ -889,7 +902,8 @@ namespace System.Runtime.Serialization
                         primitiveContract != null
                         && primitiveContract.UnderlyingType != Globals.TypeOfObject
                         && !writeXsiType
-                    ) {
+                    )
+                    {
                         if (isNullableOfT)
                         {
                             _ilg.Call(
@@ -915,7 +929,8 @@ namespace System.Runtime.Serialization
                             || //boxed Nullable<T>
                             memberType == Globals.TypeOfValueType
                             || ((IList)Globals.TypeOfNullable.GetInterfaces()).Contains(memberType)
-                        ) {
+                        )
+                        {
                             _ilg.Load(memberValue);
                             _ilg.ConvertValue(memberValue.LocalType, Globals.TypeOfObject);
                             memberValue = _ilg.DeclareLocal(
@@ -957,7 +972,8 @@ namespace System.Runtime.Serialization
                 LocalBuilder memberValue,
                 Type memberType,
                 bool writeXsiType
-            ) {
+            )
+            {
                 _ilg.Load(_contextArg);
                 _ilg.Load(_xmlWriterArg);
                 _ilg.Load(memberValue);
@@ -986,7 +1002,8 @@ namespace System.Runtime.Serialization
                 while (
                     memberType.IsGenericType
                     && memberType.GetGenericTypeDefinition() == Globals.TypeOfNullable
-                ) {
+                )
+                {
                     Type innerType = memberType.GetGenericArguments()[0];
                     _ilg.Dup();
                     _ilg.Call(
@@ -1027,7 +1044,8 @@ namespace System.Runtime.Serialization
                 LocalBuilder namespaceLocal,
                 LocalBuilder? nameLocal,
                 int nameIndex
-            ) {
+            )
+            {
                 bool needsPrefix = NeedsPrefix(type, ns);
                 _ilg.Load(_xmlWriterArg);
                 // prefix
@@ -1059,7 +1077,8 @@ namespace System.Runtime.Serialization
                 DataMember member,
                 ClassDataContract classContract,
                 ClassDataContract derivedMostClassContract
-            ) {
+            )
+            {
                 // Check for conflict with base type members
                 if (CheckIfConflictingMembersHaveDifferentTypes(member))
                     return true;

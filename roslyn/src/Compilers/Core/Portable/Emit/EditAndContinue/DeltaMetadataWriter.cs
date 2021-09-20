@@ -59,21 +59,23 @@ namespace Microsoft.CodeAnalysis.Emit
             DefinitionMap definitionMap,
             SymbolChanges changes,
             CancellationToken cancellationToken
-        ) : base(
-            metadata: MakeTablesBuilder(previousGeneration),
-            debugMetadataOpt: (
-                context.Module.DebugInformationFormat == DebugInformationFormat.PortablePdb
+        )
+            : base(
+                metadata: MakeTablesBuilder(previousGeneration),
+                debugMetadataOpt: (
+                    context.Module.DebugInformationFormat == DebugInformationFormat.PortablePdb
+                )
+                  ? new MetadataBuilder()
+                  : null,
+                dynamicAnalysisDataWriterOpt: null,
+                context: context,
+                messageProvider: messageProvider,
+                metadataOnly: false,
+                deterministic: false,
+                emitTestCoverageData: false,
+                cancellationToken: cancellationToken
             )
-              ? new MetadataBuilder()
-              : null,
-            dynamicAnalysisDataWriterOpt: null,
-            context: context,
-            messageProvider: messageProvider,
-            metadataOnly: false,
-            deterministic: false,
-            emitTestCoverageData: false,
-            cancellationToken: cancellationToken
-        ) {
+        {
             Debug.Assert(previousGeneration != null);
             Debug.Assert(encId != default(Guid));
             Debug.Assert(encId != previousGeneration.EncId);
@@ -196,7 +198,8 @@ namespace Microsoft.CodeAnalysis.Emit
             Compilation compilation,
             Guid encId,
             MetadataSizes metadataSizes
-        ) {
+        )
+        {
             var addedOrChangedMethodsByIndex = new Dictionary<int, AddedOrChangedMethodInfo>();
             foreach (var pair in _addedOrChangedMethods)
             {
@@ -328,7 +331,8 @@ namespace Microsoft.CodeAnalysis.Emit
                 if (
                     !_methodDefs.IsAddedNotChanged(def)
                     && def.GetBody(Context)?.SequencePoints.Length > 0
-                ) {
+                )
+                {
                     methods.Add(MetadataTokens.MethodDefinitionHandle(_methodDefs[def]));
                 }
             }
@@ -372,7 +376,8 @@ namespace Microsoft.CodeAnalysis.Emit
         protected override bool TryGetTypeDefinitionHandle(
             ITypeDefinition def,
             out TypeDefinitionHandle handle
-        ) {
+        )
+        {
             int index;
             bool result = _typeDefs.TryGetValue(def, out index);
             handle = MetadataTokens.TypeDefinitionHandle(index);
@@ -397,7 +402,8 @@ namespace Microsoft.CodeAnalysis.Emit
         protected override bool TryGetMethodDefinitionHandle(
             IMethodDefinition def,
             out MethodDefinitionHandle handle
-        ) {
+        )
+        {
             int index;
             bool result = _methodDefs.TryGetValue(def, out index);
             handle = MetadataTokens.MethodDefinitionHandle(index);
@@ -445,7 +451,8 @@ namespace Microsoft.CodeAnalysis.Emit
 
         protected override AssemblyReferenceHandle GetOrAddAssemblyReferenceHandle(
             IAssemblyReference reference
-        ) {
+        )
+        {
             var identity = reference.Identity;
             var versionPattern = reference.AssemblyVersionPattern;
 
@@ -478,7 +485,8 @@ namespace Microsoft.CodeAnalysis.Emit
 
         protected override MemberReferenceHandle GetOrAddMemberReferenceHandle(
             ITypeMemberReference reference
-        ) {
+        )
+        {
             return MetadataTokens.MemberReferenceHandle(_memberRefIndex.GetOrAdd(reference));
         }
 
@@ -489,7 +497,8 @@ namespace Microsoft.CodeAnalysis.Emit
 
         protected override MethodSpecificationHandle GetOrAddMethodSpecificationHandle(
             IGenericMethodInstanceReference reference
-        ) {
+        )
+        {
             return MetadataTokens.MethodSpecificationHandle(_methodSpecIndex.GetOrAdd(reference));
         }
 
@@ -503,7 +512,8 @@ namespace Microsoft.CodeAnalysis.Emit
         protected override bool TryGetTypeReferenceHandle(
             ITypeReference reference,
             out TypeReferenceHandle handle
-        ) {
+        )
+        {
             int index;
             bool result = _typeRefIndex.TryGetValue(reference, out index);
             handle = MetadataTokens.TypeReferenceHandle(index);
@@ -522,7 +532,8 @@ namespace Microsoft.CodeAnalysis.Emit
 
         protected override TypeSpecificationHandle GetOrAddTypeSpecificationHandle(
             ITypeReference reference
-        ) {
+        )
+        {
             return MetadataTokens.TypeSpecificationHandle(_typeSpecIndex.GetOrAdd(reference));
         }
 
@@ -533,7 +544,8 @@ namespace Microsoft.CodeAnalysis.Emit
 
         protected override StandaloneSignatureHandle GetOrAddStandaloneSignatureHandle(
             BlobHandle blobIndex
-        ) {
+        )
+        {
             return MetadataTokens.StandaloneSignatureHandle(
                 _standAloneSignatureIndex.GetOrAdd(blobIndex)
             );
@@ -736,7 +748,8 @@ namespace Microsoft.CodeAnalysis.Emit
 
         protected override StandaloneSignatureHandle SerializeLocalVariablesSignature(
             IMethodBody body
-        ) {
+        )
+        {
             StandaloneSignatureHandle localSignatureHandle;
             var localVariables = body.LocalVariables;
             var encInfos = ArrayBuilder<EncLocalInfo>.GetInstance();
@@ -965,7 +978,8 @@ namespace Microsoft.CodeAnalysis.Emit
             TableIndex tableIndex,
             ImmutableArray<int> previousSizes,
             ImmutableArray<int> deltaSizes
-        ) {
+        )
+        {
             PopulateEncLogTableRows(
                 tableIndex,
                 previousSizes[(int)tableIndex] + 1,
@@ -1120,7 +1134,8 @@ namespace Microsoft.CodeAnalysis.Emit
             TableIndex tableIndex,
             ImmutableArray<int> previousSizes,
             ImmutableArray<int> deltaSizes
-        ) {
+        )
+        {
             AddReferencedTokens(
                 builder,
                 tableIndex,
@@ -1134,7 +1149,8 @@ namespace Microsoft.CodeAnalysis.Emit
             TableIndex tableIndex,
             int firstRowId,
             int nTokens
-        ) {
+        )
+        {
             for (int i = 0; i < nTokens; i++)
             {
                 builder.Add(MetadataTokens.Handle(tableIndex, firstRowId + i));
@@ -1530,10 +1546,8 @@ namespace Microsoft.CodeAnalysis.Emit
 
             private readonly TryGetExistingIndex _tryGetExistingIndex;
 
-            public EventOrPropertyMapIndex(
-                TryGetExistingIndex tryGetExistingIndex,
-                int lastRowId
-            ) : base(lastRowId)
+            public EventOrPropertyMapIndex(TryGetExistingIndex tryGetExistingIndex, int lastRowId)
+                : base(lastRowId)
             {
                 _tryGetExistingIndex = tryGetExistingIndex;
             }

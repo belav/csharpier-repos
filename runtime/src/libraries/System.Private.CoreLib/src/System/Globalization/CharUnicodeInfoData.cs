@@ -15,7 +15,8 @@ namespace System.Globalization
             int level1BitCount,
             int level2BitCount,
             int level3BitCount
-        ) {
+        )
+        {
             // Ensures that the caller expects the same L1:L2:L3 count as the actual backing data.
             Debug.Assert(level1BitCount == 11, "Unexpected level 1 bit count.");
             Debug.Assert(level2BitCount == 5, "Unexpected level 2 bit count.");
@@ -19737,7 +19738,8 @@ namespace System.Globalization
             int level1BitCount,
             int level2BitCount,
             int level3BitCount
-        ) {
+        )
+        {
             // Ensures that the caller expects the same L1:L2:L3 count as the actual backing data.
             Debug.Assert(level1BitCount == 11, "Unexpected level 1 bit count.");
             Debug.Assert(level2BitCount == 5, "Unexpected level 2 bit count.");

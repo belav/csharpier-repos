@@ -253,7 +253,8 @@ namespace System.ComponentModel.Composition
 
                 foreach (
                     ImportDefinition import in this.ImportDefinitions.Where(i => i.IsPrerequisite)
-                ) {
+                )
+                {
                     object importValue;
                     if (!this._imports.TryGetValue(import, out importValue))
                     {

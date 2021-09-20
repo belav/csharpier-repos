@@ -26,7 +26,8 @@ namespace Microsoft.Extensions.Logging.Abstractions
             TState state,
             Exception? exception,
             Func<TState, Exception?, string> formatter
-        ) {
+        )
+        {
             LogLevel = logLevel;
             Category = category;
             EventId = eventId;

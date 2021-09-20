@@ -72,7 +72,8 @@ namespace System.Security.Claims
         }
         public virtual System.Security.Claims.Claim Clone(
             System.Security.Claims.ClaimsIdentity? identity
-        ) {
+        )
+        {
             throw null;
         }
         public override string ToString()
@@ -181,17 +182,20 @@ namespace System.Security.Claims
         }
         public virtual System.Collections.Generic.IEnumerable<System.Security.Claims.Claim> FindAll(
             System.Predicate<System.Security.Claims.Claim> match
-        ) {
+        )
+        {
             throw null;
         }
         public virtual System.Collections.Generic.IEnumerable<System.Security.Claims.Claim> FindAll(
             string type
-        ) {
+        )
+        {
             throw null;
         }
         public virtual System.Security.Claims.Claim? FindFirst(
             System.Predicate<System.Security.Claims.Claim> match
-        ) {
+        )
+        {
             throw null;
         }
         public virtual System.Security.Claims.Claim? FindFirst(string type)
@@ -274,22 +278,26 @@ namespace System.Security.Claims
         }
         protected virtual System.Security.Claims.ClaimsIdentity CreateClaimsIdentity(
             System.IO.BinaryReader reader
-        ) {
+        )
+        {
             throw null;
         }
         public virtual System.Collections.Generic.IEnumerable<System.Security.Claims.Claim> FindAll(
             System.Predicate<System.Security.Claims.Claim> match
-        ) {
+        )
+        {
             throw null;
         }
         public virtual System.Collections.Generic.IEnumerable<System.Security.Claims.Claim> FindAll(
             string type
-        ) {
+        )
+        {
             throw null;
         }
         public virtual System.Security.Claims.Claim? FindFirst(
             System.Predicate<System.Security.Claims.Claim> match
-        ) {
+        )
+        {
             throw null;
         }
         public virtual System.Security.Claims.Claim? FindFirst(string type)
@@ -484,7 +492,8 @@ namespace System.Security.Principal
         }
         public override bool IsInRole(
             [System.Diagnostics.CodeAnalysis.NotNullWhenAttribute(true)] string? role
-        ) {
+        )
+        {
             throw null;
         }
     }

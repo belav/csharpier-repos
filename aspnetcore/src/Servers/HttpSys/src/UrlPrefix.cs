@@ -19,7 +19,8 @@ namespace Microsoft.AspNetCore.Server.HttpSys
             string port,
             int portValue,
             string path
-        ) {
+        )
+        {
             IsHttps = isHttps;
             Scheme = scheme;
             Host = host;
@@ -73,7 +74,8 @@ namespace Microsoft.AspNetCore.Server.HttpSys
             }
             else if (
                 string.Equals(Constants.HttpsScheme, scheme, StringComparison.OrdinalIgnoreCase)
-            ) {
+            )
+            {
                 scheme = Constants.HttpsScheme; // Always use a lower case scheme
                 isHttps = true;
             }
@@ -170,7 +172,8 @@ namespace Microsoft.AspNetCore.Server.HttpSys
                         CultureInfo.InvariantCulture,
                         out portValue
                     )
-                ) {
+                )
+                {
                     host = whole.Substring(
                         hostDelimiterStart,
                         hostDelimiterEnd - hostDelimiterStart

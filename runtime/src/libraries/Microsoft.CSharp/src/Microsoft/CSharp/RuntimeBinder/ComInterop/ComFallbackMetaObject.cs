@@ -25,7 +25,8 @@ namespace Microsoft.CSharp.RuntimeBinder.ComInterop
         public override DynamicMetaObject BindGetIndex(
             GetIndexBinder binder,
             DynamicMetaObject[] indexes
-        ) {
+        )
+        {
             Requires.NotNull(binder, nameof(binder));
             return binder.FallbackGetIndex(UnwrapSelf(), indexes);
         }
@@ -34,7 +35,8 @@ namespace Microsoft.CSharp.RuntimeBinder.ComInterop
             SetIndexBinder binder,
             DynamicMetaObject[] indexes,
             DynamicMetaObject value
-        ) {
+        )
+        {
             Requires.NotNull(binder, nameof(binder));
             return binder.FallbackSetIndex(UnwrapSelf(), indexes, value);
         }
@@ -48,7 +50,8 @@ namespace Microsoft.CSharp.RuntimeBinder.ComInterop
         public override DynamicMetaObject BindInvokeMember(
             InvokeMemberBinder binder,
             DynamicMetaObject[] args
-        ) {
+        )
+        {
             Requires.NotNull(binder, nameof(binder));
             return binder.FallbackInvokeMember(UnwrapSelf(), args);
         }
@@ -56,7 +59,8 @@ namespace Microsoft.CSharp.RuntimeBinder.ComInterop
         public override DynamicMetaObject BindSetMember(
             SetMemberBinder binder,
             DynamicMetaObject value
-        ) {
+        )
+        {
             Requires.NotNull(binder, nameof(binder));
             return binder.FallbackSetMember(UnwrapSelf(), value);
         }

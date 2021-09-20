@@ -18,7 +18,8 @@ namespace System.IO.Pipelines
             this Stream stream,
             Memory<byte> buffer,
             CancellationToken cancellationToken = default
-        ) {
+        )
+        {
             if (MemoryMarshal.TryGetArray(buffer, out ArraySegment<byte> array))
             {
                 return new ValueTask<int>(
@@ -38,7 +39,8 @@ namespace System.IO.Pipelines
                     Task<int> readTask,
                     byte[] localBuffer,
                     Memory<byte> localDestination
-                ) {
+                )
+                {
                     try
                     {
                         int result = await readTask.ConfigureAwait(false);
@@ -80,7 +82,8 @@ namespace System.IO.Pipelines
             this Stream stream,
             ReadOnlyMemory<byte> buffer,
             CancellationToken cancellationToken = default
-        ) {
+        )
+        {
             if (MemoryMarshal.TryGetArray(buffer, out ArraySegment<byte> array))
             {
                 return new ValueTask(

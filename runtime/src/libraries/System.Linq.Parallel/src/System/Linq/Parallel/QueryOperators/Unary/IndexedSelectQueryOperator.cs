@@ -96,7 +96,8 @@ namespace System.Linq.Parallel
             IPartitionedStreamRecipient<TOutput> recipient,
             bool preferStriping,
             QuerySettings settings
-        ) {
+        )
+        {
             int partitionCount = inputStream.PartitionCount;
 
             // If the index is not correct, we need to reindex.
@@ -164,7 +165,8 @@ namespace System.Linq.Parallel
             internal IndexedSelectQueryOperatorEnumerator(
                 QueryOperatorEnumerator<TInput, int> source,
                 Func<TInput, int, TOutput> selector
-            ) {
+            )
+            {
                 Debug.Assert(source != null);
                 Debug.Assert(selector != null);
                 _source = source;
@@ -178,7 +180,8 @@ namespace System.Linq.Parallel
             internal override bool MoveNext(
                 [MaybeNullWhen(false), AllowNull] ref TOutput currentElement,
                 ref int currentKey
-            ) {
+            )
+            {
                 // So long as the source has a next element, we have an element.
                 TInput element = default(TInput)!;
                 if (_source.MoveNext(ref element!, ref currentKey))
@@ -221,7 +224,8 @@ namespace System.Linq.Parallel
                 IndexedSelectQueryOperator<TInput, TOutput> op,
                 QuerySettings settings,
                 bool preferStriping
-            ) {
+            )
+            {
                 if (childQueryResults.IsIndexible)
                 {
                     return new IndexedSelectQueryOperatorResults(

@@ -21,7 +21,8 @@ namespace JitBench
             string outputDir,
             bool useExistingSetup,
             ITestOutputHelper output
-        ) {
+        )
+        {
             if (!useExistingSetup)
             {
                 using (var setupSection = new IndentedTestOutputHelper("Setup " + Name, output))
@@ -95,7 +96,8 @@ namespace JitBench
             DotNetInstallation dotNetInstall,
             string outputDir,
             ITestOutputHelper output
-        ) {
+        )
+        {
             string tfm = DotNetSetup.GetTargetFrameworkMonikerForFrameworkVersion(
                 dotNetInstall.FrameworkVersion
             );
@@ -123,7 +125,8 @@ namespace JitBench
             DotNetInstallation dotNetInstall,
             string outputDir,
             string tfm
-        ) {
+        )
+        {
             string dir = Path.Combine(
                 GetAppSrcDirectory(outputDir),
                 "bin",

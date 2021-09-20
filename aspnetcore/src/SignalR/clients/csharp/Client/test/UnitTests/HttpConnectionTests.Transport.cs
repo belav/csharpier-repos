@@ -30,7 +30,8 @@ namespace Microsoft.AspNetCore.SignalR.Client.Tests
             [InlineData(HttpTransportType.ServerSentEvents)]
             public async Task HttpConnectionSetsAccessTokenOnAllRequests(
                 HttpTransportType transportType
-            ) {
+            )
+            {
                 var testHttpHandler = new TestHttpMessageHandler(autoNegotiate: false);
                 var requestsExecuted = false;
                 var callCount = 0;
@@ -104,7 +105,8 @@ namespace Microsoft.AspNetCore.SignalR.Client.Tests
             public async Task HttpConnectionSetsInherentKeepAliveFeature(
                 HttpTransportType transportType,
                 bool expectedValue
-            ) {
+            )
+            {
                 using (StartVerifiableLog())
                 {
                     var testHttpHandler = new TestHttpMessageHandler(autoNegotiate: false);
@@ -146,7 +148,8 @@ namespace Microsoft.AspNetCore.SignalR.Client.Tests
             [InlineData(HttpTransportType.ServerSentEvents)]
             public async Task HttpConnectionSetsUserAgentOnAllRequests(
                 HttpTransportType transportType
-            ) {
+            )
+            {
                 var testHttpHandler = new TestHttpMessageHandler(autoNegotiate: false);
                 var requestsExecuted = false;
 
@@ -208,7 +211,8 @@ namespace Microsoft.AspNetCore.SignalR.Client.Tests
             [InlineData(HttpTransportType.ServerSentEvents)]
             public async Task HttpConnectionSetsRequestedWithOnAllRequests(
                 HttpTransportType transportType
-            ) {
+            )
+            {
                 var testHttpHandler = new TestHttpMessageHandler(autoNegotiate: false);
                 var requestsExecuted = false;
 

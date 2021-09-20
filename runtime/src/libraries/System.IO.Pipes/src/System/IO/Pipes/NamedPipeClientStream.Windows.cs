@@ -62,7 +62,8 @@ namespace System.IO.Pipes
                 if (
                     errorCode != Interop.Errors.ERROR_PIPE_BUSY
                     && errorCode != Interop.Errors.ERROR_FILE_NOT_FOUND
-                ) {
+                )
+                {
                     throw Win32Marshal.GetExceptionForWin32Error(errorCode);
                 }
 
@@ -74,7 +75,8 @@ namespace System.IO.Pipes
                     if (
                         errorCode == Interop.Errors.ERROR_FILE_NOT_FOUND
                         || errorCode == Interop.Errors.ERROR_SEM_TIMEOUT
-                    ) {
+                    )
+                    {
                         return false;
                     }
 
@@ -137,7 +139,8 @@ namespace System.IO.Pipes
                         null,
                         0
                     )
-                ) {
+                )
+                {
                     throw WinIOError(Marshal.GetLastWin32Error());
                 }
 

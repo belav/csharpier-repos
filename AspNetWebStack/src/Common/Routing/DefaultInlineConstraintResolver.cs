@@ -82,7 +82,8 @@ namespace System.Web.Mvc.Routing
             if (
                 indexOfFirstOpenParens >= 0
                 && inlineConstraint.EndsWith(")", StringComparison.Ordinal)
-            ) {
+            )
+            {
                 constraintKey = inlineConstraint.Substring(0, indexOfFirstOpenParens);
                 argumentString = inlineConstraint.Substring(
                     indexOfFirstOpenParens + 1,

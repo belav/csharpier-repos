@@ -541,7 +541,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
             SyntaxToken openParen,
             CSharpSyntaxNode arg,
             SyntaxToken closeParen
-        ) {
+        )
+        {
             Assert.NotEqual(default, openParen);
             Assert.False(openParen.IsMissing);
             Assert.NotEqual(default, closeParen);

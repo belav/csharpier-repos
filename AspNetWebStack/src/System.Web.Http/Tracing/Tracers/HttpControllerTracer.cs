@@ -28,7 +28,8 @@ namespace System.Web.Http.Tracing.Tracers
             HttpRequestMessage request,
             IHttpController innerController,
             ITraceWriter traceWriter
-        ) {
+        )
+        {
             Contract.Assert(innerController != null);
             Contract.Assert(traceWriter != null);
 
@@ -64,7 +65,8 @@ namespace System.Web.Http.Tracing.Tracers
         Task<HttpResponseMessage> IHttpController.ExecuteAsync(
             HttpControllerContext controllerContext,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             return _traceWriter.TraceBeginEndAsync<HttpResponseMessage>(
                 controllerContext.Request,
                 TraceCategories.ControllersCategory,
@@ -92,7 +94,8 @@ namespace System.Web.Http.Tracing.Tracers
         private async Task<HttpResponseMessage> ExecuteAsyncCore(
             HttpControllerContext controllerContext,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             try
             {
                 return await _innerController.ExecuteAsync(controllerContext, cancellationToken);
@@ -114,7 +117,8 @@ namespace System.Web.Http.Tracing.Tracers
                             HttpPropertyKeys.DisposableRequestResourcesKey,
                             out disposables
                         )
-                    ) {
+                    )
+                    {
                         disposables.Remove(disposable);
                         disposables.Add(this);
                     }

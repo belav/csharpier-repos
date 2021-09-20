@@ -64,14 +64,16 @@ namespace Microsoft.AspNetCore.Server.IIS.Core
             int offset,
             int count,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             return _requestBody.ReadAsync(buffer, offset, count, cancellationToken);
         }
 
         public override ValueTask<int> ReadAsync(
             Memory<byte> buffer,
             CancellationToken cancellationToken = default
-        ) {
+        )
+        {
             return _requestBody.ReadAsync(buffer, cancellationToken);
         }
 
@@ -80,14 +82,16 @@ namespace Microsoft.AspNetCore.Server.IIS.Core
             int offset,
             int count,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             return _responseBody.WriteAsync(buffer, offset, count, cancellationToken);
         }
 
         public override ValueTask WriteAsync(
             ReadOnlyMemory<byte> buffer,
             CancellationToken cancellationToken = default
-        ) {
+        )
+        {
             return _responseBody.WriteAsync(buffer, cancellationToken);
         }
 
@@ -95,7 +99,8 @@ namespace Microsoft.AspNetCore.Server.IIS.Core
             Stream destination,
             int bufferSize,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             return _requestBody.CopyToAsync(destination, bufferSize, cancellationToken);
         }
 

@@ -80,7 +80,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols.Retargeting
 
         internal override ImmutableArray<TypeWithAnnotations> GetConstraintTypes(
             ConsList<TypeParameterSymbol> inProgress
-        ) {
+        )
+        {
             return this.RetargetingTranslator.Retarget(
                 _underlyingTypeParameter.GetConstraintTypes(inProgress)
             );
@@ -93,7 +94,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols.Retargeting
 
         internal override ImmutableArray<NamedTypeSymbol> GetInterfaces(
             ConsList<TypeParameterSymbol> inProgress
-        ) {
+        )
+        {
             return this.RetargetingTranslator.Retarget(
                 _underlyingTypeParameter.GetInterfaces(inProgress)
             );
@@ -101,7 +103,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols.Retargeting
 
         internal override NamedTypeSymbol GetEffectiveBaseClass(
             ConsList<TypeParameterSymbol> inProgress
-        ) {
+        )
+        {
             return this.RetargetingTranslator.Retarget(
                 _underlyingTypeParameter.GetEffectiveBaseClass(inProgress),
                 RetargetOptions.RetargetPrimitiveTypesByTypeCode

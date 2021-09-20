@@ -18,7 +18,8 @@ namespace Microsoft.CodeAnalysis.CSharp
         ImmutableArray<int> ArgsToParamsOpt,
         BitVector DefaultArguments,
         bool Expanded
-    ) {
+    )
+    {
         public static MethodArgumentInfo CreateParameterlessMethod(MethodSymbol method)
         {
             Debug.Assert(method.ParameterCount == 0);

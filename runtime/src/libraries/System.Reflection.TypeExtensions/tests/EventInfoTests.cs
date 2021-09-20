@@ -46,7 +46,8 @@ namespace System.Reflection.Tests
             EI_Class target,
             Delegate handler,
             int expectedStaticVariable
-        ) {
+        )
+        {
             // Add and make sure we bound the event.
             eventInfo.AddEventHandler(target, handler);
             target?.InvokeAllEvents();
@@ -106,7 +107,8 @@ namespace System.Reflection.Tests
             object target,
             Delegate handler,
             Type exceptionType
-        ) {
+        )
+        {
             Assert.Throws(exceptionType, () => eventInfo.AddEventHandler(target, handler));
             Assert.Throws(exceptionType, () => eventInfo.RemoveEventHandler(target, handler));
         }

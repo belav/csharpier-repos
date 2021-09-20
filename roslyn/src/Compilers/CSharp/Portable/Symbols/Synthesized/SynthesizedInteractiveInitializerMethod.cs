@@ -26,7 +26,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
         internal SynthesizedInteractiveInitializerMethod(
             SourceMemberContainerTypeSymbol containingType,
             BindingDiagnosticBag diagnostics
-        ) {
+        )
+        {
             Debug.Assert(containingType.IsScriptClass);
 
             _containingType = containingType;
@@ -274,7 +275,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             BindingDiagnosticBag diagnostics,
             out TypeSymbol resultType,
             out TypeSymbol returnType
-        ) {
+        )
+        {
             CSharpCompilation compilation = containingType.DeclaringCompilation;
             var submissionReturnTypeOpt = compilation.ScriptCompilationInfo?.ReturnTypeOpt;
             var taskT = compilation.GetWellKnownType(WellKnownType.System_Threading_Tasks_Task_T);

@@ -22,7 +22,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
             string text,
             int errorCount = 0,
             int memberCount = 0
-        ) {
+        )
+        {
             ParseAndRoundTripping(
                 text,
                 TestOptions.RegularWithDocumentationComments.WithLanguageVersion(
@@ -38,7 +39,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
             CSharpParseOptions options,
             int errorCount = 0,
             int memberCount = 0
-        ) {
+        )
+        {
             var tree = SyntaxFactory.ParseSyntaxTree(SourceText.From(text), options);
             var toText = tree.GetCompilationUnitRoot().ToFullString();
 

@@ -31,28 +31,32 @@ namespace Microsoft.CodeAnalysis.CSharp
         public override BoundStatement InstrumentNoOpStatement(
             BoundNoOpStatement original,
             BoundStatement rewritten
-        ) {
+        )
+        {
             return AddSequencePoint(base.InstrumentNoOpStatement(original, rewritten));
         }
 
         public override BoundStatement InstrumentBreakStatement(
             BoundBreakStatement original,
             BoundStatement rewritten
-        ) {
+        )
+        {
             return AddSequencePoint(base.InstrumentBreakStatement(original, rewritten));
         }
 
         public override BoundStatement InstrumentContinueStatement(
             BoundContinueStatement original,
             BoundStatement rewritten
-        ) {
+        )
+        {
             return AddSequencePoint(base.InstrumentContinueStatement(original, rewritten));
         }
 
         public override BoundStatement InstrumentExpressionStatement(
             BoundExpressionStatement original,
             BoundStatement rewritten
-        ) {
+        )
+        {
             rewritten = base.InstrumentExpressionStatement(original, rewritten);
 
             if (original.IsConstructorInitializer())
@@ -87,7 +91,8 @@ namespace Microsoft.CodeAnalysis.CSharp
         public override BoundStatement InstrumentFieldOrPropertyInitializer(
             BoundStatement original,
             BoundStatement rewritten
-        ) {
+        )
+        {
             rewritten = base.InstrumentFieldOrPropertyInitializer(original, rewritten);
             SyntaxNode syntax = original.Syntax;
 
@@ -109,7 +114,8 @@ namespace Microsoft.CodeAnalysis.CSharp
         private static BoundStatement InstrumentFieldOrPropertyInitializer(
             BoundStatement rewritten,
             SyntaxNode syntax
-        ) {
+        )
+        {
             if (syntax.IsKind(SyntaxKind.Parameter))
             {
                 // This is an initialization of a generated property based on record parameter.
@@ -136,21 +142,24 @@ namespace Microsoft.CodeAnalysis.CSharp
         public override BoundStatement InstrumentGotoStatement(
             BoundGotoStatement original,
             BoundStatement rewritten
-        ) {
+        )
+        {
             return AddSequencePoint(base.InstrumentGotoStatement(original, rewritten));
         }
 
         public override BoundStatement InstrumentThrowStatement(
             BoundThrowStatement original,
             BoundStatement rewritten
-        ) {
+        )
+        {
             return AddSequencePoint(base.InstrumentThrowStatement(original, rewritten));
         }
 
         public override BoundStatement InstrumentYieldBreakStatement(
             BoundYieldBreakStatement original,
             BoundStatement rewritten
-        ) {
+        )
+        {
             rewritten = base.InstrumentYieldBreakStatement(original, rewritten);
 
             if (original.WasCompilerGenerated && original.Syntax.Kind() == SyntaxKind.Block)
@@ -169,14 +178,16 @@ namespace Microsoft.CodeAnalysis.CSharp
         public override BoundStatement InstrumentYieldReturnStatement(
             BoundYieldReturnStatement original,
             BoundStatement rewritten
-        ) {
+        )
+        {
             return AddSequencePoint(base.InstrumentYieldReturnStatement(original, rewritten));
         }
 
         public override BoundStatement? CreateBlockPrologue(
             BoundBlock original,
             out Symbols.LocalSymbol? synthesizedLocal
-        ) {
+        )
+        {
             var previous = base.CreateBlockPrologue(original, out synthesizedLocal);
             if (original.Syntax.Kind() == SyntaxKind.Block && !original.WasCompilerGenerated)
             {
@@ -203,7 +214,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                 if (
                     parent == null
                     || !(parent.IsAnonymousFunction() || parent is BaseMethodDeclarationSyntax)
-                ) {
+                )
+                {
                     var cBspan = ((BlockSyntax)original.Syntax).CloseBraceToken.Span;
                     return new BoundSequencePointWithSpan(original.Syntax, previous, cBspan);
                 }
@@ -216,7 +228,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             BoundDoStatement original,
             BoundExpression rewrittenCondition,
             SyntheticBoundNodeFactory factory
-        ) {
+        )
+        {
             // EnC: We need to insert a hidden sequence point to handle function remapping in case
             // the containing method is edited while methods invoked in the condition are being executed.
             return AddConditionSequencePoint(
@@ -230,7 +243,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             BoundWhileStatement original,
             BoundExpression rewrittenCondition,
             SyntheticBoundNodeFactory factory
-        ) {
+        )
+        {
             // EnC: We need to insert a hidden sequence point to handle function remapping in case
             // the containing method is edited while methods invoked in the condition are being executed.
             return AddConditionSequencePoint(
@@ -243,7 +257,8 @@ namespace Microsoft.CodeAnalysis.CSharp
         public override BoundStatement InstrumentDoStatementConditionalGotoStart(
             BoundDoStatement original,
             BoundStatement ifConditionGotoStart
-        ) {
+        )
+        {
             var doSyntax = (DoStatementSyntax)original.Syntax;
             var span = TextSpan.FromBounds(
                 doSyntax.WhileKeyword.SpanStart,
@@ -260,7 +275,8 @@ namespace Microsoft.CodeAnalysis.CSharp
         public override BoundStatement InstrumentWhileStatementConditionalGotoStartOrBreak(
             BoundWhileStatement original,
             BoundStatement ifConditionGotoStart
-        ) {
+        )
+        {
             WhileStatementSyntax whileSyntax = (WhileStatementSyntax)original.Syntax;
             TextSpan conditionSequencePointSpan = TextSpan.FromBounds(
                 whileSyntax.WhileKeyword.SpanStart,
@@ -281,7 +297,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             BoundExpression condition,
             BoundStatement containingStatement,
             SyntheticBoundNodeFactory factory
-        ) {
+        )
+        {
             return AddConditionSequencePoint(condition, containingStatement.Syntax, factory);
         }
 
@@ -296,7 +313,8 @@ namespace Microsoft.CodeAnalysis.CSharp
         public override BoundStatement InstrumentForEachStatementCollectionVarDeclaration(
             BoundForEachStatement original,
             BoundStatement? collectionVarDecl
-        ) {
+        )
+        {
             var forEachSyntax = (CommonForEachStatementSyntax)original.Syntax;
             return new BoundSequencePoint(
                 forEachSyntax.Expression,
@@ -307,7 +325,8 @@ namespace Microsoft.CodeAnalysis.CSharp
         public override BoundStatement InstrumentForEachStatementDeconstructionVariablesDeclaration(
             BoundForEachStatement original,
             BoundStatement iterationVarDecl
-        ) {
+        )
+        {
             var forEachSyntax = (ForEachVariableStatementSyntax)original.Syntax;
             return new BoundSequencePointWithSpan(
                 forEachSyntax,
@@ -330,7 +349,8 @@ namespace Microsoft.CodeAnalysis.CSharp
         public override BoundStatement InstrumentForEachStatement(
             BoundForEachStatement original,
             BoundStatement rewritten
-        ) {
+        )
+        {
             var forEachSyntax = (CommonForEachStatementSyntax)original.Syntax;
             var span =
                 forEachSyntax.AwaitKeyword != default
@@ -365,7 +385,8 @@ namespace Microsoft.CodeAnalysis.CSharp
         public override BoundStatement InstrumentForEachStatementIterationVarDeclaration(
             BoundForEachStatement original,
             BoundStatement iterationVarDecl
-        ) {
+        )
+        {
             TextSpan iterationVarDeclSpan;
             switch (original.Syntax.Kind())
             {
@@ -397,7 +418,8 @@ namespace Microsoft.CodeAnalysis.CSharp
         public override BoundStatement InstrumentForStatementConditionalGotoStartOrBreak(
             BoundForStatement original,
             BoundStatement branchBack
-        ) {
+        )
+        {
             // hidden sequence point if there is no condition
             return BoundSequencePoint.Create(
                 original.Condition?.Syntax,
@@ -408,7 +430,8 @@ namespace Microsoft.CodeAnalysis.CSharp
         public override BoundStatement InstrumentForEachStatementConditionalGotoStart(
             BoundForEachStatement original,
             BoundStatement branchBack
-        ) {
+        )
+        {
             var syntax = (CommonForEachStatementSyntax)original.Syntax;
             return new BoundSequencePointWithSpan(
                 syntax,
@@ -421,7 +444,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             BoundForStatement original,
             BoundExpression rewrittenCondition,
             SyntheticBoundNodeFactory factory
-        ) {
+        )
+        {
             // EnC: We need to insert a hidden sequence point to handle function remapping in case
             // the containing method is edited while methods invoked in the condition are being executed.
             return AddConditionSequencePoint(
@@ -434,7 +458,8 @@ namespace Microsoft.CodeAnalysis.CSharp
         public override BoundStatement InstrumentIfStatement(
             BoundIfStatement original,
             BoundStatement rewritten
-        ) {
+        )
+        {
             var syntax = (IfStatementSyntax)original.Syntax;
             return new BoundSequencePointWithSpan(
                 syntax,
@@ -448,7 +473,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             BoundIfStatement original,
             BoundExpression rewrittenCondition,
             SyntheticBoundNodeFactory factory
-        ) {
+        )
+        {
             // EnC: We need to insert a hidden sequence point to handle function remapping in case
             // the containing method is edited while methods invoked in the condition are being executed.
             return AddConditionSequencePoint(
@@ -461,7 +487,8 @@ namespace Microsoft.CodeAnalysis.CSharp
         public override BoundStatement InstrumentLabelStatement(
             BoundLabeledStatement original,
             BoundStatement rewritten
-        ) {
+        )
+        {
             var labeledSyntax = (LabeledStatementSyntax)original.Syntax;
             var span = TextSpan.FromBounds(
                 labeledSyntax.Identifier.SpanStart,
@@ -477,7 +504,8 @@ namespace Microsoft.CodeAnalysis.CSharp
         public override BoundStatement InstrumentLocalInitialization(
             BoundLocalDeclaration original,
             BoundStatement rewritten
-        ) {
+        )
+        {
             return AddSequencePoint(
                 original.Syntax.Kind() == SyntaxKind.VariableDeclarator
                   ? (VariableDeclaratorSyntax)original.Syntax
@@ -491,7 +519,8 @@ namespace Microsoft.CodeAnalysis.CSharp
         public override BoundStatement InstrumentLockTargetCapture(
             BoundLockStatement original,
             BoundStatement lockTargetCapture
-        ) {
+        )
+        {
             LockStatementSyntax lockSyntax = (LockStatementSyntax)original.Syntax;
             return new BoundSequencePointWithSpan(
                 lockSyntax,
@@ -506,14 +535,16 @@ namespace Microsoft.CodeAnalysis.CSharp
         public override BoundStatement InstrumentReturnStatement(
             BoundReturnStatement original,
             BoundStatement rewritten
-        ) {
+        )
+        {
             rewritten = base.InstrumentReturnStatement(original, rewritten);
 
             if (
                 original.WasCompilerGenerated
                 && original.ExpressionOpt == null
                 && original.Syntax.Kind() == SyntaxKind.Block
-            ) {
+            )
+            {
                 // implicit return added by the compiler
                 return new BoundSequencePointWithSpan(
                     original.Syntax,
@@ -528,7 +559,8 @@ namespace Microsoft.CodeAnalysis.CSharp
         public override BoundStatement InstrumentSwitchStatement(
             BoundSwitchStatement original,
             BoundStatement rewritten
-        ) {
+        )
+        {
             SwitchStatementSyntax switchSyntax = (SwitchStatementSyntax)original.Syntax;
             TextSpan switchSequencePointSpan = TextSpan.FromBounds(
                 switchSyntax.SwitchKeyword.SpanStart,
@@ -548,7 +580,8 @@ namespace Microsoft.CodeAnalysis.CSharp
         public override BoundStatement InstrumentSwitchWhenClauseConditionalGotoBody(
             BoundExpression original,
             BoundStatement ifConditionGotoBody
-        ) {
+        )
+        {
             WhenClauseSyntax? whenClause = original.Syntax.FirstAncestorOrSelf<WhenClauseSyntax>();
             Debug.Assert(whenClause != null);
 
@@ -565,7 +598,8 @@ namespace Microsoft.CodeAnalysis.CSharp
         public override BoundStatement InstrumentUsingTargetCapture(
             BoundUsingStatement original,
             BoundStatement usingTargetCapture
-        ) {
+        )
+        {
             return AddSequencePoint(
                 (UsingStatementSyntax)original.Syntax,
                 base.InstrumentUsingTargetCapture(original, usingTargetCapture)
@@ -576,7 +610,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             BoundCatchBlock original,
             BoundExpression rewrittenFilter,
             SyntheticBoundNodeFactory factory
-        ) {
+        )
+        {
             rewrittenFilter = base.InstrumentCatchClauseFilter(original, rewrittenFilter, factory);
 
             // EnC: We need to insert a hidden sequence point to handle function remapping in case
@@ -598,7 +633,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             BoundStatement original,
             BoundExpression rewrittenExpression,
             SyntheticBoundNodeFactory factory
-        ) {
+        )
+        {
             // EnC: We need to insert a hidden sequence point to handle function remapping in case
             // the containing method is edited while methods invoked in the expression are being executed.
             return AddConditionSequencePoint(
@@ -612,7 +648,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             BoundExpression original,
             BoundExpression rewrittenExpression,
             SyntheticBoundNodeFactory factory
-        ) {
+        )
+        {
             return new BoundSequencePointExpression(
                 original.Syntax,
                 base.InstrumentSwitchExpressionArmExpression(
@@ -626,7 +663,8 @@ namespace Microsoft.CodeAnalysis.CSharp
 
         public override BoundStatement InstrumentSwitchBindCasePatternVariables(
             BoundStatement bindings
-        ) {
+        )
+        {
             // Mark the code that binds pattern variables to their values as hidden.
             // We do it to tell that this is not a part of previous statement.
             return BoundSequencePoint.CreateHidden(

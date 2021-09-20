@@ -158,7 +158,8 @@ namespace Microsoft.CSharp
                         char.IsHighSurrogate(value[i])
                         && (i < value.Length - 1)
                         && char.IsLowSurrogate(value[i + 1])
-                    ) {
+                    )
+                    {
                         b.Append(value[++i]);
                     }
 
@@ -307,7 +308,8 @@ namespace Microsoft.CSharp
             CodeTypeMember member,
             TextWriter writer,
             CodeGeneratorOptions options
-        ) {
+        )
+        {
             if (_output != null)
             {
                 throw new InvalidOperationException(SR.CodeGenReentrance);
@@ -1351,7 +1353,8 @@ namespace Microsoft.CSharp
                     current is CodeMemberMethod
                     && !(current is CodeTypeConstructor)
                     && !(current is CodeConstructor)
-                ) {
+                )
+                {
                     _currentMember = current;
 
                     if (_options.BlankLinesBetweenMembers)
@@ -1434,7 +1437,8 @@ namespace Microsoft.CSharp
             if (
                 !IsCurrentInterface
                 && (e.Attributes & MemberAttributes.ScopeMask) != MemberAttributes.Abstract
-            ) {
+            )
+            {
                 OutputStartingBrace();
                 Indent++;
 
@@ -1517,7 +1521,8 @@ namespace Microsoft.CSharp
             if (
                 e.Parameters.Count > 0
                 && string.Equals(e.Name, "Item", StringComparison.OrdinalIgnoreCase)
-            ) {
+            )
+            {
                 Output.Write("this[");
                 OutputParameters(e.Parameters);
                 Output.Write(']');
@@ -1535,7 +1540,8 @@ namespace Microsoft.CSharp
                 if (
                     IsCurrentInterface
                     || (e.Attributes & MemberAttributes.ScopeMask) == MemberAttributes.Abstract
-                ) {
+                )
+                {
                     Output.WriteLine("get;");
                 }
                 else
@@ -1553,7 +1559,8 @@ namespace Microsoft.CSharp
                 if (
                     IsCurrentInterface
                     || (e.Attributes & MemberAttributes.ScopeMask) == MemberAttributes.Abstract
-                ) {
+                )
+                {
                     Output.WriteLine("set;");
                 }
                 else
@@ -2250,7 +2257,8 @@ namespace Microsoft.CSharp
         private void OutputExpressionList(
             CodeExpressionCollection expressions,
             bool newlineBetweenItems
-        ) {
+        )
+        {
             bool first = true;
             Indent++;
             foreach (CodeExpression current in expressions)
@@ -2666,7 +2674,8 @@ namespace Microsoft.CSharp
             CodeAttributeDeclarationCollection attributes,
             string prefix,
             bool inLine
-        ) {
+        )
+        {
             if (attributes.Count == 0)
             {
                 return;
@@ -2684,7 +2693,8 @@ namespace Microsoft.CSharp
                         "system.paramarrayattribute",
                         StringComparison.OrdinalIgnoreCase
                     )
-                ) {
+                )
+                {
                     paramArray = true;
                     continue;
                 }
@@ -2946,7 +2956,8 @@ namespace Microsoft.CSharp
             int start,
             int length,
             StringBuilder sb
-        ) {
+        )
+        {
             sb.Append('<');
             bool first = true;
             for (int i = start; i < start + length; i++)
@@ -3011,7 +3022,8 @@ namespace Microsoft.CSharp
         CompilerResults ICodeCompiler.CompileAssemblyFromDom(
             CompilerParameters options,
             CodeCompileUnit e
-        ) {
+        )
+        {
             if (options == null)
             {
                 throw new ArgumentNullException(nameof(options));
@@ -3031,7 +3043,8 @@ namespace Microsoft.CSharp
         CompilerResults ICodeCompiler.CompileAssemblyFromFile(
             CompilerParameters options,
             string fileName
-        ) {
+        )
+        {
             if (options == null)
             {
                 throw new ArgumentNullException(nameof(options));
@@ -3051,7 +3064,8 @@ namespace Microsoft.CSharp
         CompilerResults ICodeCompiler.CompileAssemblyFromSource(
             CompilerParameters options,
             string source
-        ) {
+        )
+        {
             if (options == null)
             {
                 throw new ArgumentNullException(nameof(options));
@@ -3071,7 +3085,8 @@ namespace Microsoft.CSharp
         CompilerResults ICodeCompiler.CompileAssemblyFromSourceBatch(
             CompilerParameters options,
             string[] sources
-        ) {
+        )
+        {
             if (options == null)
             {
                 throw new ArgumentNullException(nameof(options));
@@ -3091,7 +3106,8 @@ namespace Microsoft.CSharp
         CompilerResults ICodeCompiler.CompileAssemblyFromFileBatch(
             CompilerParameters options,
             string[] fileNames
-        ) {
+        )
+        {
             if (options == null)
             {
                 throw new ArgumentNullException(nameof(options));
@@ -3122,7 +3138,8 @@ namespace Microsoft.CSharp
         CompilerResults ICodeCompiler.CompileAssemblyFromDomBatch(
             CompilerParameters options,
             CodeCompileUnit[] ea
-        ) {
+        )
+        {
             if (options == null)
             {
                 throw new ArgumentNullException(nameof(options));
@@ -3292,7 +3309,8 @@ namespace Microsoft.CSharp
             CodeTypeDeclaration e,
             TextWriter w,
             CodeGeneratorOptions o
-        ) {
+        )
+        {
             bool setLocal = false;
             if (_output != null && w != _output.InnerWriter)
             {
@@ -3324,7 +3342,8 @@ namespace Microsoft.CSharp
             CodeExpression e,
             TextWriter w,
             CodeGeneratorOptions o
-        ) {
+        )
+        {
             bool setLocal = false;
             if (_output != null && w != _output.InnerWriter)
             {
@@ -3356,7 +3375,8 @@ namespace Microsoft.CSharp
             CodeCompileUnit e,
             TextWriter w,
             CodeGeneratorOptions o
-        ) {
+        )
+        {
             bool setLocal = false;
             if (_output != null && w != _output.InnerWriter)
             {
@@ -3395,7 +3415,8 @@ namespace Microsoft.CSharp
             CodeNamespace e,
             TextWriter w,
             CodeGeneratorOptions o
-        ) {
+        )
+        {
             bool setLocal = false;
             if (_output != null && w != _output.InnerWriter)
             {
@@ -3427,7 +3448,8 @@ namespace Microsoft.CSharp
             CodeStatement e,
             TextWriter w,
             CodeGeneratorOptions o
-        ) {
+        )
+        {
             bool setLocal = false;
             if (_output != null && w != _output.InnerWriter)
             {

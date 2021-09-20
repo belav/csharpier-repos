@@ -131,7 +131,8 @@ namespace JIT.HardwareIntrinsics.Arm
                 SByte[] inArray3,
                 SByte[] outArray,
                 int alignment
-            ) {
+            )
+            {
                 int sizeOfinArray1 = inArray1.Length * Unsafe.SizeOf<SByte>();
                 int sizeOfinArray2 = inArray2.Length * Unsafe.SizeOf<SByte>();
                 int sizeOfinArray3 = inArray3.Length * Unsafe.SizeOf<SByte>();
@@ -142,7 +143,8 @@ namespace JIT.HardwareIntrinsics.Arm
                     || (alignment * 2) < sizeOfinArray2
                     || (alignment * 2) < sizeOfinArray3
                     || (alignment * 2) < sizeOfoutArray
-                ) {
+                )
+                {
                     throw new ArgumentException("Invalid value of alignment");
                 }
 
@@ -241,7 +243,8 @@ namespace JIT.HardwareIntrinsics.Arm
 
             public void RunStructFldScenario(
                 SimpleTernaryOpTest__BitwiseSelect_Vector128_SByte testClass
-            ) {
+            )
+            {
                 var result = AdvSimd.BitwiseSelect(_fld1, _fld2, _fld3);
 
                 Unsafe.Write(testClass._dataTable.outArrayPtr, result);
@@ -250,7 +253,8 @@ namespace JIT.HardwareIntrinsics.Arm
 
             public void RunStructFldScenario_Load(
                 SimpleTernaryOpTest__BitwiseSelect_Vector128_SByte testClass
-            ) {
+            )
+            {
                 fixed (Vector128<SByte>* pFld1 = &_fld1)fixed (
                     Vector128<SByte>* pFld2 = &_fld2
                 )fixed (Vector128<SByte>* pFld3 = &_fld3)
@@ -585,7 +589,8 @@ namespace JIT.HardwareIntrinsics.Arm
 
             fixed (Vector128<SByte>* pFld1 = &_fld1)fixed (Vector128<SByte>* pFld2 = &_fld2)fixed (
                 Vector128<SByte>* pFld3 = &_fld3
-            ) {
+            )
+            {
                 var result = AdvSimd.BitwiseSelect(
                     AdvSimd.LoadVector128((SByte*)(pFld1)),
                     AdvSimd.LoadVector128((SByte*)(pFld2)),
@@ -666,7 +671,8 @@ namespace JIT.HardwareIntrinsics.Arm
             Vector128<SByte> op3,
             void* result,
             [CallerMemberName] string method = ""
-        ) {
+        )
+        {
             SByte[] inArray1 = new SByte[Op1ElementCount];
             SByte[] inArray2 = new SByte[Op2ElementCount];
             SByte[] inArray3 = new SByte[Op3ElementCount];
@@ -690,7 +696,8 @@ namespace JIT.HardwareIntrinsics.Arm
             void* op3,
             void* result,
             [CallerMemberName] string method = ""
-        ) {
+        )
+        {
             SByte[] inArray1 = new SByte[Op1ElementCount];
             SByte[] inArray2 = new SByte[Op2ElementCount];
             SByte[] inArray3 = new SByte[Op3ElementCount];
@@ -726,7 +733,8 @@ namespace JIT.HardwareIntrinsics.Arm
             SByte[] thirdOp,
             SByte[] result,
             [CallerMemberName] string method = ""
-        ) {
+        )
+        {
             bool succeeded = true;
 
             for (var i = 0; i < RetElementCount; i++)

@@ -24,7 +24,8 @@ namespace Microsoft.VisualStudio.LanguageServices.CSharp.Options
         protected override AbstractOptionPageControl CreateOptionPage(
             IServiceProvider serviceProvider,
             OptionStore optionStore
-        ) {
+        )
+        {
             var componentModel = (IComponentModel)serviceProvider.GetService(
                 typeof(SComponentModel)
             );

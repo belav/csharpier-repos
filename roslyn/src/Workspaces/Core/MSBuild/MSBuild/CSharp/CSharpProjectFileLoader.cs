@@ -19,7 +19,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             MSB.Evaluation.Project? project,
             ProjectBuildManager buildManager,
             DiagnosticLog log
-        ) {
+        )
+        {
             return new CSharpProjectFile(this, project, buildManager, log);
         }
     }

@@ -49,7 +49,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Syntax.InternalSyntax
             bool allowModeReset,
             bool preLexIfNotIncremental = false,
             CancellationToken cancellationToken = default(CancellationToken)
-        ) {
+        )
+        {
             this.lexer = lexer;
             _mode = mode;
             _allowModeReset = allowModeReset;
@@ -370,7 +371,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Syntax.InternalSyntax
             if (
                 _tokenOffset > (_blendedTokens.Length >> 1)
                 && (_resetStart == -1 || _resetStart > _firstToken)
-            ) {
+            )
+            {
                 int shiftOffset = (_resetStart == -1) ? _tokenOffset : _resetStart - _firstToken;
                 int shiftCount = _tokenCount - shiftOffset;
                 Debug.Assert(shiftOffset > 0);
@@ -399,7 +401,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Syntax.InternalSyntax
             if (
                 _tokenOffset > (_lexedTokens.Length >> 1)
                 && (_resetStart == -1 || _resetStart > _firstToken)
-            ) {
+            )
+            {
                 int shiftOffset = (_resetStart == -1) ? _tokenOffset : _resetStart - _firstToken;
                 int shiftCount = _tokenCount - shiftOffset;
                 Debug.Assert(shiftOffset > 0);
@@ -514,7 +517,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Syntax.InternalSyntax
             SyntaxKind expected,
             SyntaxKind actual,
             bool reportError
-        ) {
+        )
+        {
             // should we eat the current ParseToken's leading trivia?
             var token = SyntaxFactory.MissingToken(expected);
             if (reportError)
@@ -532,7 +536,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Syntax.InternalSyntax
             SyntaxKind expected,
             ErrorCode code,
             bool reportError
-        ) {
+        )
+        {
             // should we eat the current ParseToken's leading trivia?
             var token = SyntaxFactory.MissingToken(expected);
             if (reportError)
@@ -605,7 +610,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Syntax.InternalSyntax
             SyntaxKind kind,
             ErrorCode code,
             bool reportError = true
-        ) {
+        )
+        {
             Debug.Assert(SyntaxFacts.IsAnyToken(kind));
 
             if (this.CurrentToken.ContextualKind != kind)
@@ -638,7 +644,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Syntax.InternalSyntax
             SyntaxKind actual,
             int offset,
             int width
-        ) {
+        )
+        {
             var code = GetExpectedTokenErrorCode(expected, actual);
             if (code == ErrorCode.ERR_SyntaxError || code == ErrorCode.ERR_IdentifierExpectedKW)
             {
@@ -659,7 +666,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Syntax.InternalSyntax
         protected virtual SyntaxDiagnosticInfo GetExpectedTokenError(
             SyntaxKind expected,
             SyntaxKind actual
-        ) {
+        )
+        {
             int offset,
                 width;
             this.GetDiagnosticSpanForMissingToken(out offset, out width);
@@ -900,7 +908,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Syntax.InternalSyntax
             int width,
             ErrorCode code,
             params object[] args
-        ) {
+        )
+        {
             return new SyntaxDiagnosticInfo(offset, width, code, args);
         }
 
@@ -908,7 +917,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Syntax.InternalSyntax
             GreenNode node,
             ErrorCode code,
             params object[] args
-        ) {
+        )
+        {
             return new SyntaxDiagnosticInfo(node.GetLeadingTriviaWidth(), node.Width, code, args);
         }
 
@@ -970,7 +980,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Syntax.InternalSyntax
             SyntaxToken target,
             GreenNode skippedSyntax,
             bool trailing
-        ) {
+        )
+        {
             var builder = new SyntaxListBuilder(4);
 
             // the error in we'll attach to the node

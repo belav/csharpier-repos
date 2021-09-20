@@ -57,7 +57,8 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
         public virtual bool TryCreateFromBuffer(
             in ValueBuffer valueBuffer,
             [NotNullWhen(true)] out object[]? key
-        ) {
+        )
+        {
             key = new object[Properties.Count];
             var index = 0;
 
@@ -130,7 +131,8 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
             IUpdateEntry entry,
             Func<IUpdateEntry, IProperty, object?> getValue,
             [NotNullWhen(true)] out object[]? key
-        ) {
+        )
+        {
             key = new object[Properties.Count];
             var index = 0;
 
@@ -157,7 +159,8 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
         /// </summary>
         protected static IEqualityComparer<object[]> CreateEqualityComparer(
             IReadOnlyList<IProperty> properties
-        ) {
+        )
+        {
             var comparers = properties.Select(p => p.GetKeyValueComparer()).ToList();
 
             return comparers.All(c => c != null)

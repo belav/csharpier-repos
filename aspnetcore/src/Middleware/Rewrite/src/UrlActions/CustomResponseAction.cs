@@ -23,7 +23,8 @@ namespace Microsoft.AspNetCore.Rewrite.UrlActions
             RewriteContext context,
             BackReferenceCollection? ruleBackReferences,
             BackReferenceCollection? conditionBackReferences
-        ) {
+        )
+        {
             var response = context.HttpContext.Response;
             response.StatusCode = StatusCode;
 

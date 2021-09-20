@@ -40,7 +40,8 @@ namespace Microsoft.AspNetCore.Http.Connections.Internal
             ILoggerFactory loggerFactory,
             IHostApplicationLifetime appLifetime,
             IOptions<ConnectionOptions> connectionOptions
-        ) {
+        )
+        {
             _logger = loggerFactory.CreateLogger<HttpConnectionManager>();
             _connectionLogger = loggerFactory.CreateLogger<HttpConnectionContext>();
             _nextHeartbeat = new TimerAwaitable(_heartbeatTickRate, _heartbeatTickRate);
@@ -64,7 +65,8 @@ namespace Microsoft.AspNetCore.Http.Connections.Internal
         internal bool TryGetConnection(
             string id,
             [NotNullWhen(true)] out HttpConnectionContext? connection
-        ) {
+        )
+        {
             connection = null;
 
             if (_connections.TryGetValue(id, out var pair))
@@ -88,7 +90,8 @@ namespace Microsoft.AspNetCore.Http.Connections.Internal
             PipeOptions transportPipeOptions,
             PipeOptions appPipeOptions,
             int negotiateVersion = 0
-        ) {
+        )
+        {
             string connectionToken;
             var id = MakeNewConnectionId();
             if (negotiateVersion > 0)
@@ -175,7 +178,8 @@ namespace Microsoft.AspNetCore.Http.Connections.Internal
                     !Debugger.IsAttached
                     && lastSeenUtc.HasValue
                     && (utcNow - lastSeenUtc.Value).TotalSeconds > _disconnectTimeout.TotalSeconds
-                ) {
+                )
+                {
                     Log.ConnectionTimedOut(_logger, connection.ConnectionId);
                     HttpConnectionsEventSource.Log.ConnectionTimedOut(connection.ConnectionId);
 
@@ -218,7 +222,8 @@ namespace Microsoft.AspNetCore.Http.Connections.Internal
         internal async Task DisposeAndRemoveAsync(
             HttpConnectionContext connection,
             bool closeGracefully
-        ) {
+        )
+        {
             try
             {
                 await connection.DisposeAsync(closeGracefully);

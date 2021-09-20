@@ -10,7 +10,8 @@ namespace System.Dynamic.Utils
         public static Expression[]? VisitBlockExpressions(
             ExpressionVisitor visitor,
             BlockExpression block
-        ) {
+        )
+        {
             Expression[]? newNodes = null;
             for (int i = 0, n = block.ExpressionCount; i < n; i++)
             {
@@ -38,7 +39,8 @@ namespace System.Dynamic.Utils
             ExpressionVisitor visitor,
             IParameterProvider nodes,
             string? callerName
-        ) {
+        )
+        {
             ParameterExpression[]? newNodes = null;
             for (int i = 0, n = nodes.ParameterCount; i < n; i++)
             {
@@ -65,7 +67,8 @@ namespace System.Dynamic.Utils
         public static Expression[]? VisitArguments(
             ExpressionVisitor visitor,
             IArgumentProvider nodes
-        ) {
+        )
+        {
             Expression[]? newNodes = null;
             for (int i = 0, n = nodes.ArgumentCount; i < n; i++)
             {

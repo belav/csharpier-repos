@@ -35,7 +35,8 @@ namespace Internal.Cryptography.Pal
             byte[] encodedKeyValue,
             byte[] encodedParameters,
             ICertificatePal? certificatePal
-        ) {
+        )
+        {
             switch (oid.Value)
             {
                 case Oids.Rsa:
@@ -51,7 +52,8 @@ namespace Internal.Cryptography.Pal
         public string X500DistinguishedNameDecode(
             byte[] encodedDistinguishedName,
             X500DistinguishedNameFlags flags
-        ) {
+        )
+        {
             return X500NameEncoder.X500DistinguishedNameDecode(
                 encodedDistinguishedName,
                 true,
@@ -62,7 +64,8 @@ namespace Internal.Cryptography.Pal
         public byte[] X500DistinguishedNameEncode(
             string distinguishedName,
             X500DistinguishedNameFlags flag
-        ) {
+        )
+        {
             return X500NameEncoder.X500DistinguishedNameEncode(distinguishedName, flag);
         }
 
@@ -86,7 +89,8 @@ namespace Internal.Cryptography.Pal
                 if (
                     OpenSslX509CertificateReader.TryReadX509Der(rawData, out certPal)
                     || OpenSslX509CertificateReader.TryReadX509Pem(rawData, out certPal)
-                ) {
+                )
+                {
                     certPal.Dispose();
 
                     return X509ContentType.Cert;
@@ -184,13 +188,15 @@ namespace Internal.Cryptography.Pal
         public override void DecodeX509KeyUsageExtension(
             byte[] encoded,
             out X509KeyUsageFlags keyUsages
-        ) {
+        )
+        {
             using (
                 SafeAsn1BitStringHandle bitString = Interop.Crypto.DecodeAsn1BitString(
                     encoded,
                     encoded.Length
                 )
-            ) {
+            )
+            {
                 Interop.Crypto.CheckValidOpenSslHandle(bitString);
 
                 byte[] decoded = Interop.Crypto.GetAsn1StringBytes(bitString.DangerousGetHandle());
@@ -245,7 +251,8 @@ namespace Internal.Cryptography.Pal
             out bool certificateAuthority,
             out bool hasPathLengthConstraint,
             out int pathLengthConstraint
-        ) {
+        )
+        {
             if (
                 !Interop.Crypto.DecodeX509BasicConstraints2Extension(
                     encoded,
@@ -254,7 +261,8 @@ namespace Internal.Cryptography.Pal
                     out hasPathLengthConstraint,
                     out pathLengthConstraint
                 )
-            ) {
+            )
+            {
                 throw Interop.Crypto.CreateOpenSslCryptographicException();
             }
         }
@@ -262,7 +270,8 @@ namespace Internal.Cryptography.Pal
         public override void DecodeX509EnhancedKeyUsageExtension(
             byte[] encoded,
             out OidCollection usages
-        ) {
+        )
+        {
             OidCollection oids = new OidCollection();
 
             using (
@@ -270,7 +279,8 @@ namespace Internal.Cryptography.Pal
                     encoded,
                     encoded.Length
                 )
-            ) {
+            )
+            {
                 Interop.Crypto.CheckValidOpenSslHandle(eku);
 
                 int count = Interop.Crypto.GetX509EkuFieldCount(eku);

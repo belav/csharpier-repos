@@ -13,7 +13,8 @@ namespace System.Diagnostics
             string? message,
             string? detailMessage,
             string errorSource
-        ) {
+        )
+        {
             if (s_FailCore != null)
             {
                 s_FailCore(stackTrace, message, detailMessage, errorSource);

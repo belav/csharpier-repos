@@ -58,7 +58,8 @@ namespace Microsoft.AspNetCore.TestHost
         protected override async Task<HttpResponseMessage> SendAsync(
             HttpRequestMessage request,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             if (request == null)
             {
                 throw new ArgumentNullException(nameof(request));
@@ -167,7 +168,8 @@ namespace Microsoft.AspNetCore.TestHost
                                 HeaderNames.UserAgent,
                                 StringComparison.OrdinalIgnoreCase
                             )
-                        ) {
+                        )
+                        {
                             req.Headers.Append(header.Key, string.Join(" ", header.Value));
                         }
                         else
@@ -233,7 +235,8 @@ namespace Microsoft.AspNetCore.TestHost
                         header.Key,
                         (IEnumerable<string>)header.Value
                     )
-                ) {
+                )
+                {
                     bool success = response.Content.Headers.TryAddWithoutValidation(
                         header.Key,
                         (IEnumerable<string>)header.Value

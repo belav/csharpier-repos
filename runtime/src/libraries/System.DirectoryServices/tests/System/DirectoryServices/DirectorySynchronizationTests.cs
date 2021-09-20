@@ -69,7 +69,8 @@ namespace System.DirectoryServices.Tests
         [InlineData((DirectorySynchronizationOptions)int.MaxValue)]
         public void Ctor_InvalidOption_ThrowsInvalidEnumArgumentException(
             DirectorySynchronizationOptions options
-        ) {
+        )
+        {
             AssertExtensions.Throws<InvalidEnumArgumentException>(
                 "value",
                 () => new DirectorySynchronization(options)

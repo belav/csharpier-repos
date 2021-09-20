@@ -43,7 +43,8 @@ namespace Microsoft.CodeAnalysis.Diagnostics
         public static void AddOptionMapping(
             string diagnosticId,
             ImmutableHashSet<IPerLanguageOption> perLanguageOptions
-        ) {
+        )
+        {
             diagnosticId = diagnosticId ?? throw new ArgumentNullException(nameof(diagnosticId));
             perLanguageOptions =
                 perLanguageOptions ?? throw new ArgumentNullException(nameof(perLanguageOptions));
@@ -56,7 +57,8 @@ namespace Microsoft.CodeAnalysis.Diagnostics
             string diagnosticId,
             ImmutableHashSet<ILanguageSpecificOption> languageSpecificOptions,
             string language
-        ) {
+        )
+        {
             diagnosticId = diagnosticId ?? throw new ArgumentNullException(nameof(diagnosticId));
             languageSpecificOptions =
                 languageSpecificOptions
@@ -75,7 +77,8 @@ namespace Microsoft.CodeAnalysis.Diagnostics
             ConcurrentDictionary<string, ImmutableHashSet<IOption2>> map,
             string diagnosticId,
             ImmutableHashSet<IOption2> options
-        ) {
+        )
+        {
             // Verify that the option is either being added for the first time, or the existing option is already the same.
             // Latter can happen in tests as we re-instantiate the analyzer for every test, which attempts to add the mapping every time.
             Debug.Assert(

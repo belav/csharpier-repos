@@ -187,7 +187,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Http
         protected virtual bool CopyToFast(
             KeyValuePair<string, StringValues>[] array,
             int arrayIndex
-        ) {
+        )
+        {
             throw new NotImplementedException();
         }
 
@@ -198,7 +199,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Http
 
         void ICollection<KeyValuePair<string, StringValues>>.Add(
             KeyValuePair<string, StringValues> item
-        ) {
+        )
+        {
             ((IDictionary<string, StringValues>)this).Add(item.Key, item.Value);
         }
 
@@ -230,7 +232,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Http
 
         bool ICollection<KeyValuePair<string, StringValues>>.Contains(
             KeyValuePair<string, StringValues> item
-        ) {
+        )
+        {
             return TryGetValueFast(item.Key, out var value) && value.Equals(item.Value);
         }
 
@@ -242,7 +245,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Http
         void ICollection<KeyValuePair<string, StringValues>>.CopyTo(
             KeyValuePair<string, StringValues>[] array,
             int arrayIndex
-        ) {
+        )
+        {
             if (!CopyToFast(array, arrayIndex))
             {
                 ThrowArgumentException();
@@ -263,7 +267,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Http
 
         bool ICollection<KeyValuePair<string, StringValues>>.Remove(
             KeyValuePair<string, StringValues> item
-        ) {
+        )
+        {
             return TryGetValueFast(item.Key, out var value)
                 && value.Equals(item.Value)
                 && RemoveFast(item.Key);
@@ -391,7 +396,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Http
                         if (
                             (BinaryPrimitives.ReadUInt64LittleEndian(byteValue) | lowerCaseKeep)
                             == keepAliveStart
-                        ) {
+                        )
+                        {
                             offset += sizeof(ulong) / 2;
                             byteValue = byteValue.Slice(sizeof(ulong));
 
@@ -558,14 +564,16 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Http
                         ToLowerCase(c) == 'c'
                         && TryReadLowerCaseUInt64(byteValue, out var result64)
                         && result64 == chunkedStart
-                    ) {
+                    )
+                    {
                         offset += sizeof(ulong) / 2;
                         byteValue = byteValue.Slice(sizeof(ulong));
 
                         if (
                             TryReadLowerCaseUInt32(byteValue, out var result32)
                             && result32 == chunkedEnd
-                        ) {
+                        )
+                        {
                             offset += sizeof(uint) / 2;
                             transferEncodingOptions = TransferCoding.Chunked;
                         }

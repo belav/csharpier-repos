@@ -231,13 +231,15 @@ namespace Moq.Tests
             this ReturnsValidationFixture fixture,
             object arg1,
             object arg2
-        ) {
+        )
+        {
             return default(ReturnsValidationFixture.IType);
         }
 
         internal static ReturnsValidationFixture.IType ExtensionMethodNoArgs(
             this ReturnsValidationFixture fixture
-        ) {
+        )
+        {
             return default(ReturnsValidationFixture.IType);
         }
     }

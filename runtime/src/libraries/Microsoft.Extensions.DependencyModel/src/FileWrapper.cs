@@ -30,7 +30,8 @@ namespace Microsoft.Extensions.DependencyModel
             FileShare fileShare,
             int bufferSize,
             FileOptions fileOptions
-        ) {
+        )
+        {
             return new FileStream(path, fileMode, fileAccess, fileShare, bufferSize, fileOptions);
         }
 

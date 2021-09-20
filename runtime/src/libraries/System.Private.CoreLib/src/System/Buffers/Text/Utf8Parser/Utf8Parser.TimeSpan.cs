@@ -32,7 +32,8 @@ namespace System.Buffers.Text
             out TimeSpan value,
             out int bytesConsumed,
             char standardFormat = default
-        ) {
+        )
+        {
             switch (standardFormat)
             {
                 case default(char):
@@ -60,7 +61,8 @@ namespace System.Buffers.Text
             ReadOnlySpan<byte> source,
             out uint value,
             out int bytesConsumed
-        ) {
+        )
+        {
             int srcIndex = 0;
 
             if (srcIndex == source.Length)
@@ -146,7 +148,8 @@ namespace System.Buffers.Text
             uint seconds,
             uint fraction,
             out TimeSpan timeSpan
-        ) {
+        )
+        {
             const long MaxMilliSeconds = long.MaxValue / TimeSpan.TicksPerMillisecond;
             const long MinMilliSeconds = long.MinValue / TimeSpan.TicksPerMillisecond;
 

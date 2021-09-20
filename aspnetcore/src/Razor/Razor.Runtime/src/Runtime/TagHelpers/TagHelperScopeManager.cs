@@ -28,7 +28,8 @@ namespace Microsoft.AspNetCore.Razor.Runtime.TagHelpers
         public TagHelperScopeManager(
             Action<HtmlEncoder> startTagHelperWritingScope,
             Func<TagHelperContent> endTagHelperWritingScope
-        ) {
+        )
+        {
             if (startTagHelperWritingScope == null)
             {
                 throw new ArgumentNullException(nameof(startTagHelperWritingScope));
@@ -58,7 +59,8 @@ namespace Microsoft.AspNetCore.Razor.Runtime.TagHelpers
             TagMode tagMode,
             string uniqueId,
             Func<Task> executeChildContentAsync
-        ) {
+        )
+        {
             if (tagName == null)
             {
                 throw new ArgumentNullException(nameof(tagName));
@@ -136,7 +138,8 @@ namespace Microsoft.AspNetCore.Razor.Runtime.TagHelpers
             public ExecutionContextPool(
                 Action<HtmlEncoder> startTagHelperWritingScope,
                 Func<TagHelperContent> endTagHelperWritingScope
-            ) {
+            )
+            {
                 _executionContexts = new List<TagHelperExecutionContext>();
                 _startTagHelperWritingScope = startTagHelperWritingScope;
                 _endTagHelperWritingScope = endTagHelperWritingScope;
@@ -151,7 +154,8 @@ namespace Microsoft.AspNetCore.Razor.Runtime.TagHelpers
                 IDictionary<object, object> items,
                 string uniqueId,
                 Func<Task> executeChildContentAsync
-            ) {
+            )
+            {
                 TagHelperExecutionContext tagHelperExecutionContext;
 
                 if (_nextIndex == _executionContexts.Count)

@@ -146,7 +146,8 @@ namespace XmlCoreTest.Common
         public override object ReadContentAs(
             Type returnType,
             IXmlNamespaceResolver namespaceResolver
-        ) {
+        )
+        {
             if (AsyncUtil.RedirectReader)
             {
                 try
@@ -168,7 +169,8 @@ namespace XmlCoreTest.Common
         public override Task<object> ReadContentAsAsync(
             Type returnType,
             IXmlNamespaceResolver namespaceResolver
-        ) {
+        )
+        {
             return CoreReader.ReadContentAsAsync(returnType, namespaceResolver);
         }
 
@@ -275,7 +277,8 @@ namespace XmlCoreTest.Common
         public override object ReadElementContentAs(
             Type returnType,
             IXmlNamespaceResolver namespaceResolver
-        ) {
+        )
+        {
             if (AsyncUtil.RedirectReader)
             {
                 try
@@ -300,7 +303,8 @@ namespace XmlCoreTest.Common
         public override Task<object> ReadElementContentAsAsync(
             Type returnType,
             IXmlNamespaceResolver namespaceResolver
-        ) {
+        )
+        {
             return CoreReader.ReadElementContentAsAsync(returnType, namespaceResolver);
         }
 
@@ -328,7 +332,8 @@ namespace XmlCoreTest.Common
             byte[] buffer,
             int index,
             int count
-        ) {
+        )
+        {
             return CoreReader.ReadElementContentAsBase64Async(buffer, index, count);
         }
 
@@ -356,7 +361,8 @@ namespace XmlCoreTest.Common
             byte[] buffer,
             int index,
             int count
-        ) {
+        )
+        {
             return CoreReader.ReadElementContentAsBinHexAsync(buffer, index, count);
         }
 
@@ -824,7 +830,8 @@ namespace XmlCoreTest.Common
             IXmlNamespaceResolver namespaceResolver,
             string localName,
             string namespaceURI
-        ) {
+        )
+        {
             return CoreReader.ReadElementContentAs(
                 returnType,
                 namespaceResolver,
@@ -910,7 +917,8 @@ namespace XmlCoreTest.Common
             string inputUri,
             XmlReaderSettings settings = null,
             XmlParserContext inputContext = null
-        ) {
+        )
+        {
             if (settings == null)
             {
                 settings = new XmlReaderSettings();
@@ -952,7 +960,8 @@ namespace XmlCoreTest.Common
             Stream input,
             XmlReaderSettings settings,
             XmlParserContext inputContext
-        ) {
+        )
+        {
             if (settings == null)
             {
                 settings = new XmlReaderSettings();
@@ -994,7 +1003,8 @@ namespace XmlCoreTest.Common
             TextReader input,
             XmlReaderSettings settings,
             XmlParserContext inputContext
-        ) {
+        )
+        {
             if (settings == null)
             {
                 settings = new XmlReaderSettings();
@@ -1087,7 +1097,8 @@ namespace XmlCoreTest.Common
             string localName,
             string ns,
             string value
-        ) {
+        )
+        {
             if (AsyncUtil.RedirectWriter)
             {
                 try
@@ -1109,7 +1120,8 @@ namespace XmlCoreTest.Common
             string localName,
             string ns,
             string value
-        ) {
+        )
+        {
             return CoreWriter.WriteAttributeStringAsync(prefix, localName, ns, value);
         }
 
@@ -1274,7 +1286,8 @@ namespace XmlCoreTest.Common
             string pubid,
             string sysid,
             string subset
-        ) {
+        )
+        {
             return CoreWriter.WriteDocTypeAsync(name, pubid, sysid, subset);
         }
 
@@ -1301,7 +1314,8 @@ namespace XmlCoreTest.Common
             string localName,
             string ns,
             string value
-        ) {
+        )
+        {
             return CoreWriter.WriteElementStringAsync(prefix, localName, ns, value);
         }
 

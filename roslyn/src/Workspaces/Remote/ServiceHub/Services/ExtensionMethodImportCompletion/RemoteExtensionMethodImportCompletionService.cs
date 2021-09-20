@@ -40,7 +40,8 @@ namespace Microsoft.CodeAnalysis.Remote
             ImmutableArray<string> targetTypesSymbolKeyData,
             bool forceIndexCreation,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             return RunServiceAsync(
                 async cancellationToken =>
                 {

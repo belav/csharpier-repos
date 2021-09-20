@@ -33,7 +33,8 @@ namespace System.Drawing
             Graphics? targetGraphics,
             IntPtr targetDC,
             Rectangle targetRectangle
-        ) {
+        )
+        {
             int oldBusy = Interlocked.CompareExchange(ref _busy, BufferBusyPainting, BufferFree);
 
             // In the case were we have contention on the buffer - i.e. two threads
@@ -115,7 +116,8 @@ namespace System.Drawing
             IntPtr hdc,
             IntPtr hpal,
             ref Interop.Gdi32.BITMAPINFO_FLAT pbmi
-        ) {
+        )
+        {
             IntPtr hbm = IntPtr.Zero;
             bool bRet = false;
             try
@@ -187,7 +189,8 @@ namespace System.Drawing
             IntPtr hdc,
             IntPtr hpal,
             ref Interop.Gdi32.BITMAPINFO_FLAT pbmi
-        ) {
+        )
+        {
             byte[] aj = new byte[sizeof(NativeMethods.PALETTEENTRY) * 256];
 
             fixed (byte* pcolors = pbmi.bmiColors)
@@ -302,7 +305,8 @@ namespace System.Drawing
             int ulWidth,
             int ulHeight,
             ref IntPtr ppvBits
-        ) {
+        )
+        {
             if (hdc == IntPtr.Zero)
             {
                 throw new ArgumentNullException(nameof(hdc));

@@ -27,9 +27,8 @@ namespace Microsoft.AspNetCore.Mvc.ModelBinding.Metadata
         /// Creates a new <see cref="DefaultModelMetadataProvider"/>.
         /// </summary>
         /// <param name="detailsProvider">The <see cref="ICompositeMetadataDetailsProvider"/>.</param>
-        public DefaultModelMetadataProvider(
-            ICompositeMetadataDetailsProvider detailsProvider
-        ) : this(detailsProvider, new DefaultModelBindingMessageProvider()) { }
+        public DefaultModelMetadataProvider(ICompositeMetadataDetailsProvider detailsProvider)
+            : this(detailsProvider, new DefaultModelBindingMessageProvider()) { }
 
         /// <summary>
         /// Creates a new <see cref="DefaultModelMetadataProvider"/>.
@@ -44,7 +43,8 @@ namespace Microsoft.AspNetCore.Mvc.ModelBinding.Metadata
         private DefaultModelMetadataProvider(
             ICompositeMetadataDetailsProvider detailsProvider,
             DefaultModelBindingMessageProvider modelBindingMessageProvider
-        ) {
+        )
+        {
             if (detailsProvider == null)
             {
                 throw new ArgumentNullException(nameof(detailsProvider));
@@ -106,7 +106,8 @@ namespace Microsoft.AspNetCore.Mvc.ModelBinding.Metadata
         public override ModelMetadata GetMetadataForParameter(
             ParameterInfo parameter,
             Type modelType
-        ) {
+        )
+        {
             if (parameter == null)
             {
                 throw new ArgumentNullException(nameof(parameter));
@@ -139,7 +140,8 @@ namespace Microsoft.AspNetCore.Mvc.ModelBinding.Metadata
         public override ModelMetadata GetMetadataForProperty(
             PropertyInfo propertyInfo,
             Type modelType
-        ) {
+        )
+        {
             if (propertyInfo == null)
             {
                 throw new ArgumentNullException(nameof(propertyInfo));
@@ -159,7 +161,8 @@ namespace Microsoft.AspNetCore.Mvc.ModelBinding.Metadata
         public override ModelMetadata GetMetadataForConstructor(
             ConstructorInfo constructorInfo,
             Type modelType
-        ) {
+        )
+        {
             if (constructorInfo is null)
             {
                 throw new ArgumentNullException(nameof(constructorInfo));
@@ -171,7 +174,8 @@ namespace Microsoft.AspNetCore.Mvc.ModelBinding.Metadata
 
         private static DefaultModelBindingMessageProvider GetMessageProvider(
             IOptions<MvcOptions> optionsAccessor
-        ) {
+        )
+        {
             if (optionsAccessor == null)
             {
                 throw new ArgumentNullException(nameof(optionsAccessor));
@@ -250,7 +254,8 @@ namespace Microsoft.AspNetCore.Mvc.ModelBinding.Metadata
 
         private DefaultMetadataDetails CreateSinglePropertyDetails(
             ModelMetadataIdentity propertyKey
-        ) {
+        )
+        {
             var propertyHelpers = PropertyHelper.GetVisibleProperties(propertyKey.ContainerType!);
             for (var i = 0; i < propertyHelpers.Length; i++)
             {
@@ -269,7 +274,8 @@ namespace Microsoft.AspNetCore.Mvc.ModelBinding.Metadata
 
         private DefaultMetadataDetails CreateConstructorDetails(
             ModelMetadataIdentity constructorKey
-        ) {
+        )
+        {
             var constructor = constructorKey.ConstructorInfo;
             var parameters = constructor!.GetParameters();
             var parameterMetadata = new ModelMetadata[parameters.Length];
@@ -312,7 +318,8 @@ namespace Microsoft.AspNetCore.Mvc.ModelBinding.Metadata
         private static Expression BuildFactoryExpression(
             ConstructorInfo constructor,
             Expression factoryArgumentArray
-        ) {
+        )
+        {
             var constructorParameters = constructor.GetParameters();
             var constructorArguments = new Expression[constructorParameters.Length];
 
@@ -330,7 +337,8 @@ namespace Microsoft.AspNetCore.Mvc.ModelBinding.Metadata
                         constructorParameter,
                         out var defaultValue
                     )
-                ) {
+                )
+                {
                     // We have a default value;
                 }
                 else if (parameterType.IsValueType)
@@ -421,7 +429,8 @@ namespace Microsoft.AspNetCore.Mvc.ModelBinding.Metadata
         private DefaultMetadataDetails CreateSinglePropertyDetails(
             ModelMetadataIdentity propertyKey,
             PropertyHelper propertyHelper
-        ) {
+        )
+        {
             Debug.Assert(propertyKey.MetadataKind == ModelMetadataKind.Property);
             var containerType = propertyKey.ContainerType!;
 
@@ -435,7 +444,8 @@ namespace Microsoft.AspNetCore.Mvc.ModelBinding.Metadata
             if (
                 propertyHelper.Property.CanRead
                 && propertyHelper.Property.GetMethod?.IsPublic == true
-            ) {
+            )
+            {
                 var getter = PropertyHelper.MakeNullSafeFastPropertyGetter(propertyHelper.Property);
                 propertyEntry.PropertyGetter = getter;
             }
@@ -444,7 +454,8 @@ namespace Microsoft.AspNetCore.Mvc.ModelBinding.Metadata
                 propertyHelper.Property.CanWrite
                 && propertyHelper.Property.SetMethod?.IsPublic == true
                 && !containerType.IsValueType
-            ) {
+            )
+            {
                 propertyEntry.PropertySetter = propertyHelper.ValueSetter;
             }
 

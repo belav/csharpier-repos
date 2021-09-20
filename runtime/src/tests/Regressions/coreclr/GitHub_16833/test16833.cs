@@ -71,7 +71,8 @@ namespace TestShufflingThunk
             double f9,
             double f10,
             int i5
-        ) {
+        )
+        {
             return $"Test2:  {i1}, {i2}, {i3}, {i4}, {s}, {f1}, {f2}, {f3}, {f4}, {f5}, {f6}, {f7}, {f8}, {f9}, {f10}, {i5}";
         }
         public static string Test3(int i1, int i2, int i3, int i4, int i5, SInt s, int i6)
@@ -103,7 +104,8 @@ namespace TestShufflingThunk
             double f8,
             double f9,
             double f10
-        ) {
+        )
+        {
             return $"Test6:  {i1}, {i2}, {i3}, {i4}, {i5}, {s}, {f1}, {f2}, {f3}, {f4}, {f5}, {f6}, {f7}, {f8}, {f9}, {f10}";
         }
 
@@ -114,7 +116,8 @@ namespace TestShufflingThunk
             int i4,
             SLongLong s,
             int i5
-        ) {
+        )
+        {
             string args = $"Test1RB:  {i1}, {i2}, {i3}, {i4}, {s}, {i5}";
             return new SLargeReturnStruct { x = -1, y = -2, z = -3, s = args };
         }
@@ -135,7 +138,8 @@ namespace TestShufflingThunk
             double f9,
             double f10,
             int i5
-        ) {
+        )
+        {
             string args =
                 $"Test2RB:  {i1}, {i2}, {i3}, {i4}, {s}, {f1}, {f2}, {f3}, {f4}, {f5}, {f6}, {f7}, {f8}, {f9}, {f10}, {i5}";
             return new SLargeReturnStruct { x = -1, y = -2, z = -3, s = args };
@@ -148,7 +152,8 @@ namespace TestShufflingThunk
             int i5,
             SInt s,
             int i6
-        ) {
+        )
+        {
             string args = $"Test3RB:  {i1}, {i2}, {i3}, {i4}, {i5}, {s}, {i6}";
             return new SLargeReturnStruct { x = -1, y = -2, z = -3, s = args };
         }
@@ -159,7 +164,8 @@ namespace TestShufflingThunk
             int i4,
             SIntDouble s,
             double i5
-        ) {
+        )
+        {
             string args = $"Test4RB:  {i1}, {i2}, {i3}, {i4}, {s}, {i5}";
             return new SLargeReturnStruct { x = -1, y = -2, z = -3, s = args };
         }
@@ -185,7 +191,8 @@ namespace TestShufflingThunk
             double f8,
             double f9,
             double f10
-        ) {
+        )
+        {
             string args =
                 $"Test6RB:  {i1}, {i2}, {i3}, {i4}, {i5}, {s}, {f1}, {f2}, {f3}, {f4}, {f5}, {f6}, {f7}, {f8}, {f9}, {f10}";
             return new SLargeReturnStruct { x = -1, y = -2, z = -3, s = args };
@@ -212,7 +219,8 @@ namespace TestShufflingThunk
             double f9,
             double f10,
             int i5
-        ) {
+        )
+        {
             return $"Test2M: i1, {i2}, {i3}, {i4}, {s}, {f1}, {f2}, {f3}, {f4}, {f5}, {f6}, {f7}, {f8}, {f9}, {f10}, {i5}";
         }
         public string Test3M(int i1, int i2, int i3, int i4, int i5, SInt s, int i6)
@@ -244,7 +252,8 @@ namespace TestShufflingThunk
             double f8,
             double f9,
             double f10
-        ) {
+        )
+        {
             return $"Test6M: i1, {i2}, {i3}, {i4}, {i5}, {s}, {f1}, {f2}, {f3}, {f4}, {f5}, {f6}, {f7}, {f8}, {f9}, {f10}";
         }
         public SLargeReturnStruct Test1MRB(int i1, int i2, int i3, int i4, SLongLong s, int i5)
@@ -269,7 +278,8 @@ namespace TestShufflingThunk
             double f9,
             double f10,
             int i5
-        ) {
+        )
+        {
             string args =
                 $"Test2MRB: {i1}, {i2}, {i3}, {i4}, {s}, {f1}, {f2}, {f3}, {f4}, {f5}, {f6}, {f7}, {f8}, {f9}, {f10}, {i5}";
             return new SLargeReturnStruct { x = -1, y = -2, z = -3, s = args };
@@ -306,7 +316,8 @@ namespace TestShufflingThunk
             double f8,
             double f9,
             double f10
-        ) {
+        )
+        {
             string args =
                 $"Test6MRB: {i1}, {i2}, {i3}, {i4}, {i5}, {s}, {f1}, {f2}, {f3}, {f4}, {f5}, {f6}, {f7}, {f8}, {f9}, {f10}";
             return new SLargeReturnStruct { x = -1, y = -2, z = -3, s = args };

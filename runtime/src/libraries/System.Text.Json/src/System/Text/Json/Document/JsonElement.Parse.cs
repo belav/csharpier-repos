@@ -67,7 +67,8 @@ namespace System.Text.Json
         internal static JsonElement ParseValue(
             ReadOnlySpan<byte> utf8Json,
             JsonDocumentOptions options
-        ) {
+        )
+        {
             JsonDocument document = JsonDocument.ParseValue(utf8Json, options);
             return document.RootElement;
         }
@@ -119,7 +120,8 @@ namespace System.Text.Json
         public static bool TryParseValue(
             ref Utf8JsonReader reader,
             [NotNullWhen(true)] out JsonElement? element
-        ) {
+        )
+        {
             bool ret = JsonDocument.TryParseValue(
                 ref reader,
                 out JsonDocument? document,

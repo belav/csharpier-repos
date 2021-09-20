@@ -77,7 +77,8 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking
                     if (
                         context.ChangeTracker.AutoDetectChangesEnabled
                         && !((IRuntimeModel)context.Model).SkipDetectChanges
-                    ) {
+                    )
+                    {
                         context.GetDependencies().ChangeDetector.DetectChanges(target);
                     }
                 }
@@ -181,7 +182,8 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking
             INavigation navigation,
             InternalEntityEntry internalEntityEntry,
             bool modified
-        ) {
+        )
+        {
             var anyNonPk = navigation.ForeignKey.Properties.Any(p => !p.IsPrimaryKey());
             foreach (var property in navigation.ForeignKey.Properties)
             {

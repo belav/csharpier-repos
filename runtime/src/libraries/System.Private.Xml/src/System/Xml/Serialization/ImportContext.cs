@@ -132,7 +132,8 @@ namespace System.Xml.Serialization
             XmlSchemaObject? item,
             XmlQualifiedName? qname,
             XmlSchemas schemas
-        ) {
+        )
+        {
             if (item == null)
                 return null;
             if (qname == null || qname.IsEmpty)
@@ -579,7 +580,8 @@ namespace System.Xml.Serialization
                         if (
                             attribute.LocalName == Wsdl.ArrayType
                             && attribute.NamespaceURI == Wsdl.Namespace
-                        ) {
+                        )
+                        {
                             string dims;
                             XmlQualifiedName qname = TypeScope.ParseWsdlArrayType(
                                 attribute.Value,

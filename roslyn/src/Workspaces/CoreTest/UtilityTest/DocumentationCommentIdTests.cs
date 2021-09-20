@@ -26,7 +26,8 @@ namespace Microsoft.CodeAnalysis.UnitTests
             string expectedId,
             INamespaceOrTypeSymbol symbol,
             Compilation compilation
-        ) {
+        )
+        {
             var id = DocumentationCommentId.CreateDeclarationId(symbol);
             Assert.Equal(expectedId, id);
 
@@ -66,7 +67,8 @@ namespace Microsoft.CodeAnalysis.UnitTests
             string expectedId,
             INamespaceOrTypeSymbol symbol,
             Compilation compilation
-        ) {
+        )
+        {
             var id = DocumentationCommentId.CreateReferenceId(symbol);
             Assert.Equal(expectedId, id);
 

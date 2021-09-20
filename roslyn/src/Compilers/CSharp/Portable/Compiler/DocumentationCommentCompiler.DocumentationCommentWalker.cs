@@ -69,14 +69,16 @@ namespace Microsoft.CodeAnalysis.CSharp
                 ArrayBuilder<CSharpSyntaxNode> includeElementNodes,
                 ref HashSet<ParameterSymbol> documentedParameters,
                 ref HashSet<TypeParameterSymbol> documentedTypeParameters
-            ) {
+            )
+            {
                 PooledStringBuilder pooled = PooledStringBuilder.GetInstance();
                 using (
                     StringWriter writer = new StringWriter(
                         pooled.Builder,
                         CultureInfo.InvariantCulture
                     )
-                ) {
+                )
+                {
                     DocumentationCommentWalker walker = new DocumentationCommentWalker(
                         compilation,
                         diagnostics,
@@ -181,7 +183,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                             nameSyntax.LocalName.ValueText,
                             DocumentationCommentXmlNames.IncludeElementName
                         )
-                    ) {
+                    )
+                    {
                         _includeElementNodes.Add((CSharpSyntaxNode)node);
                     }
                 }

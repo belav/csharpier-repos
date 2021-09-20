@@ -13,7 +13,8 @@ namespace System.Security.Cryptography
             string? alghashname,
             int keySize,
             byte[] rgbIV
-        ) {
+        )
+        {
             throw new PlatformNotSupportedException(
                 SR.Format(SR.Cryptography_CAPI_Required, nameof(CryptDeriveKey))
             );

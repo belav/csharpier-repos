@@ -37,7 +37,8 @@ namespace System.Security.Cryptography.X509Certificates.Asn1
             Asn1Tag expectedTag,
             ReadOnlyMemory<byte> encoded,
             AsnEncodingRules ruleSet
-        ) {
+        )
+        {
             try
             {
                 AsnValueReader reader = new AsnValueReader(encoded.Span, ruleSet);
@@ -56,7 +57,8 @@ namespace System.Security.Cryptography.X509Certificates.Asn1
             ref AsnValueReader reader,
             ReadOnlyMemory<byte> rebind,
             out ValidityAsn decoded
-        ) {
+        )
+        {
             Decode(ref reader, Asn1Tag.Sequence, rebind, out decoded);
         }
 
@@ -65,7 +67,8 @@ namespace System.Security.Cryptography.X509Certificates.Asn1
             Asn1Tag expectedTag,
             ReadOnlyMemory<byte> rebind,
             out ValidityAsn decoded
-        ) {
+        )
+        {
             try
             {
                 DecodeCore(ref reader, expectedTag, rebind, out decoded);
@@ -81,7 +84,8 @@ namespace System.Security.Cryptography.X509Certificates.Asn1
             Asn1Tag expectedTag,
             ReadOnlyMemory<byte> rebind,
             out ValidityAsn decoded
-        ) {
+        )
+        {
             decoded = default;
             AsnValueReader sequenceReader = reader.ReadSequence(expectedTag);
 

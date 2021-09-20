@@ -82,7 +82,8 @@ namespace Microsoft.AspNetCore.Mvc.Rendering
         public void TextAreaFor_ComplexExpressions_UsesModelValueForComplexExpressions(
             Expression<Func<ComplexModel, string>> expression,
             string expected
-        ) {
+        )
+        {
             // Arrange
             var model = new ComplexModel();
             var helper = DefaultTemplatesUtilities.GetHtmlHelper(model);
@@ -132,7 +133,8 @@ namespace Microsoft.AspNetCore.Mvc.Rendering
         public void TextAreaFor_ComplexExpressions_UsesModelStateValueForComplexExpressions(
             Expression<Func<ComplexModel, string>> expression,
             string expected
-        ) {
+        )
+        {
             // Arrange
             var model = new ComplexModel();
             var helper = DefaultTemplatesUtilities.GetHtmlHelper(model);

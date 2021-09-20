@@ -67,7 +67,8 @@ namespace System.IO.Compression
             int count,
             System.AsyncCallback? asyncCallback,
             object? asyncState
-        ) {
+        )
+        {
             throw null;
         }
         public override System.IAsyncResult BeginWrite(
@@ -76,7 +77,8 @@ namespace System.IO.Compression
             int count,
             System.AsyncCallback? asyncCallback,
             object? asyncState
-        ) {
+        )
+        {
             throw null;
         }
         public override void CopyTo(System.IO.Stream destination, int bufferSize) { }
@@ -84,7 +86,8 @@ namespace System.IO.Compression
             System.IO.Stream destination,
             int bufferSize,
             System.Threading.CancellationToken cancellationToken
-        ) {
+        )
+        {
             throw null;
         }
         protected override void Dispose(bool disposing) { }
@@ -100,7 +103,8 @@ namespace System.IO.Compression
         public override void Flush() { }
         public override System.Threading.Tasks.Task FlushAsync(
             System.Threading.CancellationToken cancellationToken
-        ) {
+        )
+        {
             throw null;
         }
         public override int Read(byte[] buffer, int offset, int count)
@@ -116,14 +120,16 @@ namespace System.IO.Compression
             int offset,
             int count,
             System.Threading.CancellationToken cancellationToken
-        ) {
+        )
+        {
             throw null;
         }
         public override System.Threading.Tasks.ValueTask<int> ReadAsync(
             System.Memory<byte> buffer,
             System.Threading.CancellationToken cancellationToken =
                 default(System.Threading.CancellationToken)
-        ) {
+        )
+        {
             throw null;
         }
         public override int ReadByte()
@@ -142,14 +148,16 @@ namespace System.IO.Compression
             int offset,
             int count,
             System.Threading.CancellationToken cancellationToken
-        ) {
+        )
+        {
             throw null;
         }
         public override System.Threading.Tasks.ValueTask WriteAsync(
             System.ReadOnlyMemory<byte> buffer,
             System.Threading.CancellationToken cancellationToken =
                 default(System.Threading.CancellationToken)
-        ) {
+        )
+        {
             throw null;
         }
     }
@@ -201,7 +209,8 @@ namespace System.IO.Compression
             int count,
             System.AsyncCallback? asyncCallback,
             object? asyncState
-        ) {
+        )
+        {
             throw null;
         }
         public override System.IAsyncResult BeginWrite(
@@ -210,7 +219,8 @@ namespace System.IO.Compression
             int count,
             System.AsyncCallback? asyncCallback,
             object? asyncState
-        ) {
+        )
+        {
             throw null;
         }
         public override void CopyTo(System.IO.Stream destination, int bufferSize) { }
@@ -218,7 +228,8 @@ namespace System.IO.Compression
             System.IO.Stream destination,
             int bufferSize,
             System.Threading.CancellationToken cancellationToken
-        ) {
+        )
+        {
             throw null;
         }
         protected override void Dispose(bool disposing) { }
@@ -234,7 +245,8 @@ namespace System.IO.Compression
         public override void Flush() { }
         public override System.Threading.Tasks.Task FlushAsync(
             System.Threading.CancellationToken cancellationToken
-        ) {
+        )
+        {
             throw null;
         }
         public override int Read(byte[] buffer, int offset, int count)
@@ -250,14 +262,16 @@ namespace System.IO.Compression
             int offset,
             int count,
             System.Threading.CancellationToken cancellationToken
-        ) {
+        )
+        {
             throw null;
         }
         public override System.Threading.Tasks.ValueTask<int> ReadAsync(
             System.Memory<byte> buffer,
             System.Threading.CancellationToken cancellationToken =
                 default(System.Threading.CancellationToken)
-        ) {
+        )
+        {
             throw null;
         }
         public override int ReadByte()
@@ -276,14 +290,16 @@ namespace System.IO.Compression
             int offset,
             int count,
             System.Threading.CancellationToken cancellationToken
-        ) {
+        )
+        {
             throw null;
         }
         public override System.Threading.Tasks.ValueTask WriteAsync(
             System.ReadOnlyMemory<byte> buffer,
             System.Threading.CancellationToken cancellationToken =
                 default(System.Threading.CancellationToken)
-        ) {
+        )
+        {
             throw null;
         }
     }
@@ -317,7 +333,8 @@ namespace System.IO.Compression
         public System.IO.Compression.ZipArchiveEntry CreateEntry(
             string entryName,
             System.IO.Compression.CompressionLevel compressionLevel
-        ) {
+        )
+        {
             throw null;
         }
         public void Dispose() { }
@@ -429,7 +446,8 @@ namespace System.IO.Compression
             int count,
             System.AsyncCallback? asyncCallback,
             object? asyncState
-        ) {
+        )
+        {
             throw null;
         }
         public override System.IAsyncResult BeginWrite(
@@ -438,7 +456,8 @@ namespace System.IO.Compression
             int count,
             System.AsyncCallback? asyncCallback,
             object? asyncState
-        ) {
+        )
+        {
             throw null;
         }
         public override void CopyTo(System.IO.Stream destination, int bufferSize) { }
@@ -446,7 +465,8 @@ namespace System.IO.Compression
             System.IO.Stream destination,
             int bufferSize,
             System.Threading.CancellationToken cancellationToken
-        ) {
+        )
+        {
             throw null;
         }
         protected override void Dispose(bool disposing) { }
@@ -462,7 +482,8 @@ namespace System.IO.Compression
         public override void Flush() { }
         public override System.Threading.Tasks.Task FlushAsync(
             System.Threading.CancellationToken cancellationToken
-        ) {
+        )
+        {
             throw null;
         }
         public override int Read(byte[] buffer, int offset, int count)
@@ -478,14 +499,16 @@ namespace System.IO.Compression
             int offset,
             int count,
             System.Threading.CancellationToken cancellationToken
-        ) {
+        )
+        {
             throw null;
         }
         public override System.Threading.Tasks.ValueTask<int> ReadAsync(
             System.Memory<byte> buffer,
             System.Threading.CancellationToken cancellationToken =
                 default(System.Threading.CancellationToken)
-        ) {
+        )
+        {
             throw null;
         }
         public override int ReadByte()
@@ -505,14 +528,16 @@ namespace System.IO.Compression
             int offset,
             int count,
             System.Threading.CancellationToken cancellationToken
-        ) {
+        )
+        {
             throw null;
         }
         public override System.Threading.Tasks.ValueTask WriteAsync(
             System.ReadOnlyMemory<byte> buffer,
             System.Threading.CancellationToken cancellationToken =
                 default(System.Threading.CancellationToken)
-        ) {
+        )
+        {
             throw null;
         }
     }

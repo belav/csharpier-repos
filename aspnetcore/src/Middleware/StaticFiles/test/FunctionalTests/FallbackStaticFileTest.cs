@@ -165,7 +165,8 @@ namespace Microsoft.AspNetCore.StaticFiles
             IWebHostEnvironment environment,
             string filePath,
             byte[] responseContent
-        ) {
+        )
+        {
             var fileInfo = environment.WebRootFileProvider.GetFileInfo(filePath);
             Assert.NotNull(fileInfo);
             Assert.True(fileInfo.Exists);

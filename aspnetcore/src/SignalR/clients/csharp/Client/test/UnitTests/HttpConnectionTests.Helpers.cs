@@ -25,7 +25,8 @@ namespace Microsoft.AspNetCore.SignalR.Client.Tests
             HttpTransportType? transportType = null,
             TransferFormat transferFormat = TransferFormat.Text,
             Func<Task<string>> accessTokenProvider = null
-        ) {
+        )
+        {
             var httpOptions = new HttpConnectionOptions
             {
                 Transports = transportType ?? HttpTransportType.LongPolling,
@@ -53,7 +54,8 @@ namespace Microsoft.AspNetCore.SignalR.Client.Tests
             ITransport transport = null,
             ITransportFactory transportFactory = null,
             TransferFormat transferFormat = TransferFormat.Text
-        ) {
+        )
+        {
             loggerFactory = loggerFactory ?? NullLoggerFactory.Instance;
             httpConnectionOptions.Url ??= new Uri("http://fakeuri.org/");
             httpConnectionOptions.DefaultTransferFormat = transferFormat;
@@ -77,7 +79,8 @@ namespace Microsoft.AspNetCore.SignalR.Client.Tests
         private static async Task WithConnectionAsync(
             HttpConnection connection,
             Func<HttpConnection, Task> body
-        ) {
+        )
+        {
             try
             {
                 // Using OrTimeout here will hide any timeout issues in the test :(.

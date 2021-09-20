@@ -82,7 +82,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Diagnostics.NamingStyle
         public async Task TestCamelCaseField_PrefixGetsStripped(
             string fieldName,
             string correctedName
-        ) {
+        )
+        {
             await TestInRegularAndScriptAsync(
                 $@"class C
 {{
@@ -119,7 +120,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Diagnostics.NamingStyle
         public async Task TestCamelCaseField_PrefixGetsStrippedBeforeAddition(
             string fieldName,
             string correctedName
-        ) {
+        )
+        {
             await TestInRegularAndScriptAsync(
                 $@"class C
 {{
@@ -211,7 +213,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Diagnostics.NamingStyle
         public async Task TestPascalCaseSymbol_NoneAndDefaultSymbolKinds(
             string camelCaseSymbol,
             string pascalCaseSymbol
-        ) {
+        )
+        {
             await TestMissingInRegularAndScriptAsync(
                 $@"class C
 {{
@@ -335,7 +338,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Diagnostics.NamingStyle
             string pascalCaseSymbol,
             object symbolKind,
             Accessibility accessibility
-        ) {
+        )
+        {
             var alternateSymbolKind = TypeKind.Class.Equals(symbolKind)
                 ? TypeKind.Interface
                 : TypeKind.Class;

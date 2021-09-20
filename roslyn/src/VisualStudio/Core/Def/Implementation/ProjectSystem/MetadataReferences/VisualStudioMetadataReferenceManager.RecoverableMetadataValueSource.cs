@@ -27,7 +27,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.ProjectSystem
                 AssemblyMetadata value,
                 List<ITemporaryStreamStorage> storages,
                 ConditionalWeakTable<Metadata, object> lifetimeMap
-            ) {
+            )
+            {
                 Contract.ThrowIfFalse(storages.Count > 0);
 
                 _weakValue = new WeakReference<AssemblyMetadata>(value);

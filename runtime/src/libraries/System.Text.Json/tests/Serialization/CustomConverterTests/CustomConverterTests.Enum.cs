@@ -25,7 +25,8 @@ namespace System.Text.Json.Serialization.Tests
                 ref Utf8JsonReader reader,
                 Type typeToConvert,
                 JsonSerializerOptions options
-            ) {
+            )
+            {
                 string enumValue = reader.GetString();
                 if (enumValue == "TRUE")
                 {
@@ -49,7 +50,8 @@ namespace System.Text.Json.Serialization.Tests
                 Utf8JsonWriter writer,
                 MyBoolEnum value,
                 JsonSerializerOptions options
-            ) {
+            )
+            {
                 if (value is MyBoolEnum.True)
                 {
                     writer.WriteStringValue("TRUE");
@@ -133,7 +135,8 @@ namespace System.Text.Json.Serialization.Tests
             public override JsonConverter CreateConverter(
                 Type typeToConvert,
                 JsonSerializerOptions options
-            ) {
+            )
+            {
                 JsonConverter converter = (JsonConverter)Activator.CreateInstance(
                     typeof(JsonConverterEnumArray<>).MakeGenericType(typeToConvert),
                     BindingFlags.Instance | BindingFlags.Public,
@@ -157,7 +160,8 @@ namespace System.Text.Json.Serialization.Tests
                 ref Utf8JsonReader reader,
                 Type typeToConvert,
                 JsonSerializerOptions options
-            ) {
+            )
+            {
                 if (reader.TokenType != JsonTokenType.StartArray)
                 {
                     throw new JsonException();
@@ -205,7 +209,8 @@ namespace System.Text.Json.Serialization.Tests
                 Utf8JsonWriter writer,
                 T value,
                 JsonSerializerOptions options
-            ) {
+            )
+            {
                 string[] enumString = value.ToString().Split(',');
 
                 writer.WriteStartArray();

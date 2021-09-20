@@ -859,7 +859,8 @@ namespace V8.Crypto
                             (int)x._t - i - 1
                         )
                     ) >= s_BI_DV
-                ) {
+                )
+                {
                     r_array[(int)i + x._t] -= s_BI_DV;
                     r_array[(int)i + x._t + 1] = 1;
                 }
@@ -2657,7 +2658,8 @@ namespace V8.Crypto
             String DP,
             String DQ,
             String C
-        ) {
+        )
+        {
             if (N != null && E != null && N.Length > 0 && E.Length > 0)
             {
                 _n = parseBigInt(N, 16);

@@ -35,7 +35,8 @@ namespace Castle.Components.DictionaryAdapter.Xml
             IXmlNode node,
             IDictionaryAdapter parent,
             IXmlAccessor accessor
-        ) {
+        )
+        {
             using (var reader = new XmlSubtreeReader(node, Root))
                 return serializer.CanDeserialize(reader) ? serializer.Deserialize(reader) : null;
         }
@@ -46,7 +47,8 @@ namespace Castle.Components.DictionaryAdapter.Xml
             IXmlAccessor accessor,
             object oldValue,
             ref object value
-        ) {
+        )
+        {
             using (var writer = new XmlSubtreeWriter(node))
                 serializer.Serialize(writer, value);
         }

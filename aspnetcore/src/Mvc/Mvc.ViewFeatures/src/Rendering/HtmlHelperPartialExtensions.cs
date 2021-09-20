@@ -27,7 +27,8 @@ namespace Microsoft.AspNetCore.Mvc.Rendering
         public static Task<IHtmlContent> PartialAsync(
             this IHtmlHelper htmlHelper,
             string partialViewName
-        ) {
+        )
+        {
             if (htmlHelper == null)
             {
                 throw new ArgumentNullException(nameof(htmlHelper));
@@ -61,7 +62,8 @@ namespace Microsoft.AspNetCore.Mvc.Rendering
             this IHtmlHelper htmlHelper,
             string partialViewName,
             ViewDataDictionary viewData
-        ) {
+        )
+        {
             if (htmlHelper == null)
             {
                 throw new ArgumentNullException(nameof(htmlHelper));
@@ -91,7 +93,8 @@ namespace Microsoft.AspNetCore.Mvc.Rendering
             this IHtmlHelper htmlHelper,
             string partialViewName,
             object model
-        ) {
+        )
+        {
             if (htmlHelper == null)
             {
                 throw new ArgumentNullException(nameof(htmlHelper));
@@ -143,7 +146,8 @@ namespace Microsoft.AspNetCore.Mvc.Rendering
             this IHtmlHelper htmlHelper,
             string partialViewName,
             ViewDataDictionary viewData
-        ) {
+        )
+        {
             return Partial(htmlHelper, partialViewName, htmlHelper.ViewData.Model, viewData);
         }
 
@@ -166,7 +170,8 @@ namespace Microsoft.AspNetCore.Mvc.Rendering
             this IHtmlHelper htmlHelper,
             string partialViewName,
             object model
-        ) {
+        )
+        {
             return Partial(htmlHelper, partialViewName, model, viewData: null);
         }
 
@@ -191,7 +196,8 @@ namespace Microsoft.AspNetCore.Mvc.Rendering
             string partialViewName,
             object model,
             ViewDataDictionary viewData
-        ) {
+        )
+        {
             if (htmlHelper == null)
             {
                 throw new ArgumentNullException(nameof(htmlHelper));
@@ -236,7 +242,8 @@ namespace Microsoft.AspNetCore.Mvc.Rendering
             this IHtmlHelper htmlHelper,
             string partialViewName,
             ViewDataDictionary viewData
-        ) {
+        )
+        {
             RenderPartial(htmlHelper, partialViewName, htmlHelper.ViewData.Model, viewData);
         }
 
@@ -255,7 +262,8 @@ namespace Microsoft.AspNetCore.Mvc.Rendering
             this IHtmlHelper htmlHelper,
             string partialViewName,
             object model
-        ) {
+        )
+        {
             RenderPartial(htmlHelper, partialViewName, model, viewData: null);
         }
 
@@ -276,7 +284,8 @@ namespace Microsoft.AspNetCore.Mvc.Rendering
             string partialViewName,
             object model,
             ViewDataDictionary viewData
-        ) {
+        )
+        {
             if (htmlHelper == null)
             {
                 throw new ArgumentNullException(nameof(htmlHelper));
@@ -337,7 +346,8 @@ namespace Microsoft.AspNetCore.Mvc.Rendering
             this IHtmlHelper htmlHelper,
             string partialViewName,
             ViewDataDictionary viewData
-        ) {
+        )
+        {
             if (htmlHelper == null)
             {
                 throw new ArgumentNullException(nameof(htmlHelper));
@@ -371,7 +381,8 @@ namespace Microsoft.AspNetCore.Mvc.Rendering
             this IHtmlHelper htmlHelper,
             string partialViewName,
             object model
-        ) {
+        )
+        {
             if (htmlHelper == null)
             {
                 throw new ArgumentNullException(nameof(htmlHelper));

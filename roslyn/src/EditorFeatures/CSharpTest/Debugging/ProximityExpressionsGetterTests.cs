@@ -78,7 +78,8 @@ namespace ConsoleApplication1
         private static async Task TestProximityExpressionGetterAsync(
             string markup,
             Func<CSharpProximityExpressionsService, Document, int, Task> continuation
-        ) {
+        )
+        {
             using var workspace = TestWorkspace.CreateCSharp(markup);
             var testDocument = workspace.Documents.Single();
             var caretPosition = testDocument.CursorPosition.Value;
@@ -116,7 +117,8 @@ namespace ConsoleApplication1
             string input,
             string expression,
             bool expectedValid
-        ) {
+        )
+        {
             await TestProximityExpressionGetterAsync(
                 input,
                 async (getter, semanticSnapshot, position) =>

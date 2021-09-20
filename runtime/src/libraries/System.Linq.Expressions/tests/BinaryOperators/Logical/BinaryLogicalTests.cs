@@ -143,7 +143,8 @@ namespace System.Linq.Expressions.Tests
             int expectedValue,
             bool calledMethod,
             bool useInterpreter
-        ) {
+        )
+        {
             TrueFalseClass left = new TrueFalseClass(leftValue);
             TrueFalseClass right = new TrueFalseClass(rightValue);
 
@@ -173,7 +174,8 @@ namespace System.Linq.Expressions.Tests
             int expectedValue,
             bool calledMethod,
             bool useInterpreter
-        ) {
+        )
+        {
             TrueFalseClass left = new TrueFalseClass(leftValue);
             TrueFalseClass right = new TrueFalseClass(rightValue);
 
@@ -216,7 +218,8 @@ namespace System.Linq.Expressions.Tests
             int expectedValue,
             bool calledMethod,
             bool useInterpreter
-        ) {
+        )
+        {
             MethodInfo method = typeof(TrueFalseClass).GetMethod(nameof(TrueFalseClass.AndMethod));
 
             TrueFalseClass left = new TrueFalseClass(leftValue);
@@ -257,7 +260,8 @@ namespace System.Linq.Expressions.Tests
             int expectedValue,
             bool calledMethod,
             bool useInterpreter
-        ) {
+        )
+        {
             TrueFalseClass left = new TrueFalseClass(leftValue);
             TrueFalseClass right = new TrueFalseClass(rightValue);
 
@@ -287,7 +291,8 @@ namespace System.Linq.Expressions.Tests
             int expectedValue,
             bool calledMethod,
             bool useInterpreter
-        ) {
+        )
+        {
             TrueFalseClass left = new TrueFalseClass(leftValue);
             TrueFalseClass right = new TrueFalseClass(rightValue);
 
@@ -330,7 +335,8 @@ namespace System.Linq.Expressions.Tests
             int expectedValue,
             bool calledMethod,
             bool useInterpreter
-        ) {
+        )
+        {
             MethodInfo method = typeof(TrueFalseClass).GetMethod(nameof(TrueFalseClass.OrMethod));
 
             TrueFalseClass left = new TrueFalseClass(leftValue);
@@ -488,7 +494,8 @@ namespace System.Linq.Expressions.Tests
         public static void Method_DoesntHaveTwoParameters_ThrowsArgumentException(
             Type type,
             string methodName
-        ) {
+        )
+        {
             MethodInfo method = type.GetMethod(methodName);
             AssertExtensions.Throws<ArgumentException>(
                 "method",
@@ -666,7 +673,8 @@ namespace System.Linq.Expressions.Tests
         [InlineData(3)]
         public static void AndAlso_NoMethod_DoesntHaveTwoParameters_ThrowsInvalidOperationException(
             int parameterCount
-        ) {
+        )
+        {
             TypeBuilder type = GetTypeBuilder();
             MethodBuilder andOperator = type.DefineMethod(
                 "op_BitwiseAnd",
@@ -690,7 +698,8 @@ namespace System.Linq.Expressions.Tests
         [InlineData(3)]
         public static void OrElse_NoMethod_DoesntHaveTwoParameters_ThrowsInvalidOperationException(
             int parameterCount
-        ) {
+        )
+        {
             TypeBuilder type = GetTypeBuilder();
             MethodBuilder andOperator = type.DefineMethod(
                 "op_BitwiseOr",
@@ -823,7 +832,8 @@ namespace System.Linq.Expressions.Tests
             TypeBuilder builder,
             Type returnType,
             Type[] parameterTypes
-        ) {
+        )
+        {
             MethodBuilder opTrue = builder.DefineMethod(
                 "op_True",
                 MethodAttributes.SpecialName | MethodAttributes.Static,
@@ -878,7 +888,8 @@ namespace System.Linq.Expressions.Tests
             TypeBuilder builder,
             Type returnType,
             Type[] parameterTypes
-        ) {
+        )
+        {
             MethodBuilder opTrue = builder.DefineMethod(
                 "op_True",
                 MethodAttributes.SpecialName | MethodAttributes.Static,
@@ -933,7 +944,8 @@ namespace System.Linq.Expressions.Tests
             TypeBuilder builder,
             Type returnType,
             Type[] parameterTypes
-        ) {
+        )
+        {
             MethodBuilder opTrue = builder.DefineMethod(
                 "op_True",
                 MethodAttributes.SpecialName | MethodAttributes.Static,
@@ -973,7 +985,8 @@ namespace System.Linq.Expressions.Tests
             TypeBuilder builder,
             Type returnType,
             Type[] parameterTypes
-        ) {
+        )
+        {
             MethodBuilder opTrue = builder.DefineMethod(
                 "op_True",
                 MethodAttributes.SpecialName | MethodAttributes.Static,
@@ -1279,7 +1292,8 @@ namespace System.Linq.Expressions.Tests
         [ClassData(typeof(UnreadableExpressionsData))]
         public static void AndAlso_LeftIsWriteOnly_ThrowsArgumentException(
             Expression unreadableExpression
-        ) {
+        )
+        {
             AssertExtensions.Throws<ArgumentException>(
                 "left",
                 () => Expression.AndAlso(unreadableExpression, Expression.Constant(true))
@@ -1290,7 +1304,8 @@ namespace System.Linq.Expressions.Tests
         [ClassData(typeof(UnreadableExpressionsData))]
         public static void AndAlso_RightIsWriteOnly_ThrowsArgumentException(
             Expression unreadableExpression
-        ) {
+        )
+        {
             AssertExtensions.Throws<ArgumentException>(
                 "right",
                 () => Expression.AndAlso(Expression.Constant(true), unreadableExpression)
@@ -1301,7 +1316,8 @@ namespace System.Linq.Expressions.Tests
         [ClassData(typeof(UnreadableExpressionsData))]
         public static void OrElse_LeftIsWriteOnly_ThrowsArgumentException(
             Expression unreadableExpression
-        ) {
+        )
+        {
             AssertExtensions.Throws<ArgumentException>(
                 "left",
                 () => Expression.OrElse(unreadableExpression, Expression.Constant(true))
@@ -1312,7 +1328,8 @@ namespace System.Linq.Expressions.Tests
         [ClassData(typeof(UnreadableExpressionsData))]
         public static void OrElse_RightIsWriteOnly_ThrowsArgumentException(
             Expression unreadableExpression
-        ) {
+        )
+        {
             AssertExtensions.Throws<ArgumentException>(
                 "right",
                 () => Expression.OrElse(Expression.Constant(false), unreadableExpression)
@@ -1474,7 +1491,8 @@ namespace System.Linq.Expressions.Tests
             public static ClassWithImplicitBoolOperator ConversionMethod(
                 ClassWithImplicitBoolOperator bool1,
                 ClassWithImplicitBoolOperator bool2
-            ) {
+            )
+            {
                 return bool1;
             }
 

@@ -62,7 +62,8 @@ namespace Microsoft.Web.Mvc.Resources
         public SessionStateBehavior GetControllerSessionBehavior(
             RequestContext requestContext,
             string controllerName
-        ) {
+        )
+        {
             return _inner.GetControllerSessionBehavior(requestContext, controllerName);
         }
 
@@ -79,7 +80,8 @@ namespace Microsoft.Web.Mvc.Resources
                 ControllerContext controllerContext,
                 ControllerDescriptor controllerDescriptor,
                 string actionName
-            ) {
+            )
+            {
                 if (actionName == RestActionToken)
                 {
                     // cleanup the restActionToken we set earlier
@@ -104,7 +106,8 @@ namespace Microsoft.Web.Mvc.Resources
                                             controllerContext.HttpContext.Request.GetHttpMethodOverride()
                                                 .ToUpperInvariant()
                                         )
-                                    ) {
+                                    )
+                                    {
                                         matches.Add(ad);
                                     }
                                 }
@@ -165,7 +168,8 @@ namespace Microsoft.Web.Mvc.Resources
                     ControllerDescriptor controllerDescriptor,
                     HttpStatusCode statusCode,
                     string message
-                ) {
+                )
+                {
                     this.message = message;
                     this.statusCode = statusCode;
                     this.controllerDescriptor = controllerDescriptor;
@@ -184,7 +188,8 @@ namespace Microsoft.Web.Mvc.Resources
                 public override object Execute(
                     ControllerContext controllerContext,
                     IDictionary<string, object> parameters
-                ) {
+                )
+                {
                     HttpException he = new HttpException((int)this.statusCode, this.message);
                     ResourceErrorActionResult rear;
                     if (
@@ -193,7 +198,8 @@ namespace Microsoft.Web.Mvc.Resources
                             he,
                             out rear
                         )
-                    ) {
+                    )
+                    {
                         rear = new ResourceErrorActionResult(
                             new HttpException((int)this.statusCode, this.message),
                             new ContentType("text/plain")

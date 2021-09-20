@@ -43,7 +43,8 @@ namespace Microsoft.AspNetCore.Mvc.ApplicationModels
                 else if (
                     property.PropertyType.IsValueType
                     || Nullable.GetUnderlyingType(property.PropertyType) != null
-                ) {
+                )
+                {
                     Assert.Equal(value1, value2);
 
                     // Ensure non-default value
@@ -155,7 +156,8 @@ namespace Microsoft.AspNetCore.Mvc.ApplicationModels
             string template,
             Dictionary<string, string> values,
             string expected
-        ) {
+        )
+        {
             // Arrange
             // Act
             var result = AttributeRouteModel.ReplaceTokens(template, values);
@@ -170,7 +172,8 @@ namespace Microsoft.AspNetCore.Mvc.ApplicationModels
             string template,
             Dictionary<string, string> values,
             string reason
-        ) {
+        )
+        {
             // Arrange
             var expected = string.Format(
                 CultureInfo.InvariantCulture,
@@ -231,7 +234,8 @@ namespace Microsoft.AspNetCore.Mvc.ApplicationModels
             AttributeRouteModel left,
             AttributeRouteModel right,
             int? expected
-        ) {
+        )
+        {
             // Arrange & Act
             var combined = AttributeRouteModel.CombineAttributeRouteModel(left, right);
 
@@ -246,7 +250,8 @@ namespace Microsoft.AspNetCore.Mvc.ApplicationModels
             AttributeRouteModel left,
             AttributeRouteModel right,
             AttributeRouteModel expectedResult
-        ) {
+        )
+        {
             // Arrange & Act
             var combined = AttributeRouteModel.CombineAttributeRouteModel(left, right);
 
@@ -260,7 +265,8 @@ namespace Microsoft.AspNetCore.Mvc.ApplicationModels
         public void Combine_NullOrNullTemplateReflectedAttributeRouteModels(
             AttributeRouteModel left,
             AttributeRouteModel right
-        ) {
+        )
+        {
             // Arrange & Act
             var combined = AttributeRouteModel.CombineAttributeRouteModel(left, right);
 
@@ -273,7 +279,8 @@ namespace Microsoft.AspNetCore.Mvc.ApplicationModels
         public void Combine_RightOverridesReflectedAttributeRouteModel(
             AttributeRouteModel left,
             AttributeRouteModel right
-        ) {
+        )
+        {
             // Arrange
             var expectedTemplate = AttributeRouteModel.CombineTemplates(null, right.Template);
 
@@ -292,7 +299,8 @@ namespace Microsoft.AspNetCore.Mvc.ApplicationModels
             AttributeRouteModel left,
             AttributeRouteModel right,
             string expectedName
-        ) {
+        )
+        {
             // Arrange & Act
             var combined = AttributeRouteModel.CombineAttributeRouteModel(left, right);
 
@@ -320,7 +328,8 @@ namespace Microsoft.AspNetCore.Mvc.ApplicationModels
         public void Combine_SetsSuppressLinkGenerationToTrue_IfEitherIsTrue(
             bool leftSuppress,
             bool rightSuppress
-        ) {
+        )
+        {
             // Arrange
             var left = new AttributeRouteModel
             {
@@ -353,7 +362,8 @@ namespace Microsoft.AspNetCore.Mvc.ApplicationModels
         public void Combine_SetsSuppressPathGenerationToTrue_IfEitherIsTrue(
             bool leftSuppress,
             bool rightSuppress
-        ) {
+        )
+        {
             // Arrange
             var left = new AttributeRouteModel
             {
@@ -899,7 +909,8 @@ namespace Microsoft.AspNetCore.Mvc.ApplicationModels
             string template,
             int? order = null,
             string name = null
-        ) {
+        )
+        {
             return new AttributeRouteModel { Template = template, Order = order, Name = name };
         }
     }

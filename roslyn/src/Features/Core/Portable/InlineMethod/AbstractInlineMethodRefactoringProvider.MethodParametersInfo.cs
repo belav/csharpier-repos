@@ -157,7 +157,8 @@ namespace Microsoft.CodeAnalysis.InlineMethod
                 ImmutableArray<(IParameterSymbol parameterSymbol, TExpressionSyntax initExpression)> parametersToGenerateFreshVariablesFor,
                 ImmutableDictionary<IParameterSymbol, TExpressionSyntax> parametersToReplace,
                 bool mergeInlineContentAndVariableDeclarationArgument
-            ) {
+            )
+            {
                 ParametersWithVariableDeclarationArgument =
                     parametersWithVariableDeclarationArgument;
                 ParametersToGenerateFreshVariablesFor = parametersToGenerateFreshVariablesFor;
@@ -175,7 +176,8 @@ namespace Microsoft.CodeAnalysis.InlineMethod
             TExpressionSyntax rawInlineExpression,
             IInvocationOperation invocationOperation,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var callerSemanticModel = await document.GetRequiredSemanticModelAsync(
                     cancellationToken
                 )
@@ -486,7 +488,8 @@ namespace Microsoft.CodeAnalysis.InlineMethod
             ImmutableArray<IArgumentOperation> arguments,
             TMethodDeclarationSyntax calleeMethodNode,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             using var _ = ArrayBuilder<IArgumentOperation>.GetInstance(out var builder);
             foreach (var argument in arguments)
             {
@@ -518,7 +521,8 @@ namespace Microsoft.CodeAnalysis.InlineMethod
                 if (
                     allReferencedLocations.Length == 1
                     && allReferencedLocations[0].SymbolUsageInfo.IsReadFrom()
-                ) {
+                )
+                {
                     builder.Add(argument);
                 }
             }
@@ -550,7 +554,8 @@ namespace Microsoft.CodeAnalysis.InlineMethod
             ImmutableArray<(IParameterSymbol parameterSymbol, string name)> parametersWithVariableDeclarationArgument,
             TExpressionSyntax inlineExpressionNode,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var semanticModel = await calleeDocument.GetRequiredSemanticModelAsync(
                     cancellationToken
                 )
@@ -569,7 +574,8 @@ namespace Microsoft.CodeAnalysis.InlineMethod
         private TExpressionSyntax GenerateArgumentExpression(
             SyntaxGenerator syntaxGenerator,
             IArgumentOperation argumentOperation
-        ) {
+        )
+        {
             var parameterSymbol = argumentOperation.Parameter;
             Debug.Assert(parameterSymbol is not null);
             var argumentExpressionOperation = argumentOperation.Value;
@@ -579,7 +585,8 @@ namespace Microsoft.CodeAnalysis.InlineMethod
                 && argumentExpressionOperation
                     is IArrayCreationOperation { Initializer: { } initializer }
                 && argumentOperation.IsImplicit
-            ) {
+            )
+            {
                 // if this argument is a param array & the array creation operation is implicitly generated,
                 // it means it is in this format:
                 // void caller() { Callee(1, 2, 3); }
@@ -598,7 +605,8 @@ namespace Microsoft.CodeAnalysis.InlineMethod
             if (
                 argumentOperation.ArgumentKind == ArgumentKind.DefaultValue
                 && parameterSymbol.HasExplicitDefaultValue
-            ) {
+            )
+            {
                 return GenerateLiteralExpression(
                     parameterSymbol.Type,
                     parameterSymbol.ExplicitDefaultValue

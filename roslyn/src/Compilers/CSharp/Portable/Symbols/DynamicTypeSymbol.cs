@@ -61,7 +61,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
 
         internal override ImmutableArray<NamedTypeSymbol> InterfacesNoUseSiteDiagnostics(
             ConsList<TypeSymbol>? basesBeingResolved
-        ) {
+        )
+        {
             return ImmutableArray<NamedTypeSymbol>.Empty;
         }
 
@@ -117,7 +118,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
         internal override TResult Accept<TArgument, TResult>(
             CSharpSymbolVisitor<TArgument, TResult> visitor,
             TArgument argument
-        ) {
+        )
+        {
             return visitor.VisitDynamicType(this, argument);
         }
 
@@ -145,7 +147,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             ref DiagnosticInfo result,
             Symbol owner,
             ref HashSet<TypeSymbol> checkedTypes
-        ) {
+        )
+        {
             return false;
         }
 
@@ -185,14 +188,16 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             ImmutableArray<byte> transforms,
             ref int position,
             out TypeSymbol result
-        ) {
+        )
+        {
             result = this;
             return true;
         }
 
         internal override TypeSymbol SetNullabilityForReferenceTypes(
             Func<TypeWithAnnotations, TypeWithAnnotations> transform
-        ) {
+        )
+        {
             return this;
         }
 
@@ -215,7 +220,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
 
         protected sealed override ITypeSymbol CreateITypeSymbol(
             CodeAnalysis.NullableAnnotation nullableAnnotation
-        ) {
+        )
+        {
             Debug.Assert(nullableAnnotation != DefaultNullableAnnotation);
             return new PublicModel.DynamicTypeSymbol(this, nullableAnnotation);
         }

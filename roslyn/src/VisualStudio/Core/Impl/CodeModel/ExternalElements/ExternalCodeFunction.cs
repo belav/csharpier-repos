@@ -25,7 +25,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.CodeModel.Exter
             CodeModelState state,
             ProjectId projectId,
             IMethodSymbol symbol
-        ) {
+        )
+        {
             var element = new ExternalCodeFunction(state, projectId, symbol);
             return (EnvDTE.CodeFunction)ComAggregate.CreateAggregatedObject(element);
         }
@@ -81,7 +82,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.CodeModel.Exter
                 if (
                     symbol.MethodKind != MethodKind.Ordinary
                     && symbol.MethodKind != MethodKind.Constructor
-                ) {
+                )
+                {
                     return false;
                 }
 

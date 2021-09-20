@@ -39,7 +39,8 @@ namespace System.Numerics.Tensors
             Tensor<T> left,
             Tensor<T> right,
             Tensor<T> result
-        ) {
+        )
+        {
             if (left.Rank != right.Rank || left.Length != right.Length)
             {
                 throw new ArgumentException(
@@ -88,7 +89,8 @@ namespace System.Numerics.Tensors
             Tensor<T> left,
             Tensor<T> right,
             Tensor<bool> result
-        ) {
+        )
+        {
             if (left.Rank != right.Rank || left.Length != right.Length)
             {
                 throw new ArgumentException(
@@ -179,7 +181,8 @@ namespace System.Numerics.Tensors
             Tensor<T> right,
             int[] leftAxes,
             int[] rightAxes
-        ) {
+        )
+        {
             if (leftAxes == null)
             {
                 throw new ArgumentNullException(nameof(left));
@@ -267,7 +270,8 @@ namespace System.Numerics.Tensors
             int[] leftAxes,
             int[] rightAxes,
             Tensor<T> result
-        ) {
+        )
+        {
             var expectedDimensions = ValidateContractArgs(left, right, leftAxes, rightAxes);
 
             if (result.Rank != expectedDimensions.Length)
@@ -368,7 +372,8 @@ namespace System.Numerics.Tensors
             int[] leftAxes,
             int[] rightAxes,
             Tensor<T> result
-        ) {
+        )
+        {
             ValidateContractArgs(left, right, leftAxes, rightAxes, result);
 
             TensorArithmetic<T>.Instance.Contract(left, right, leftAxes, rightAxes, result);
@@ -379,7 +384,8 @@ namespace System.Numerics.Tensors
             Tensor<T> right,
             int[] leftAxes,
             int[] rightAxes
-        ) {
+        )
+        {
             var resultDimensions = ValidateContractArgs(left, right, leftAxes, rightAxes);
 
             var result = left.CloneEmpty(resultDimensions);
@@ -483,7 +489,8 @@ namespace System.Numerics.Tensors
             Tensor<T> left,
             Tensor<T> right,
             Tensor<bool> result
-        ) {
+        )
+        {
             ValidateBinaryArgs(left, right, result);
 
             TensorArithmetic<T>.Instance.GreaterThanOrEqual(left, right, result);
@@ -558,7 +565,8 @@ namespace System.Numerics.Tensors
             Tensor<T> left,
             Tensor<T> right,
             Tensor<bool> result
-        ) {
+        )
+        {
             ValidateBinaryArgs(left, right, result);
 
             TensorArithmetic<T>.Instance.LessThanOrEqual(left, right, result);

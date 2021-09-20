@@ -156,7 +156,8 @@ namespace Microsoft.CodeAnalysis.CodeGeneration
             bool reuseSyntax = false,
             OptionSet? options = null,
             ParseOptions? parseOptions = null
-        ) {
+        )
+        {
             CheckLocation(contextLocation, nameof(contextLocation));
             CheckLocation(afterThisLocation, nameof(afterThisLocation));
             CheckLocation(beforeThisLocation, nameof(beforeThisLocation));
@@ -214,7 +215,8 @@ namespace Microsoft.CodeAnalysis.CodeGeneration
             Optional<bool> reuseSyntax = default,
             Optional<OptionSet> options = default,
             Optional<ParseOptions> parseOptions = default
-        ) {
+        )
+        {
             var newContextLocation = contextLocation.HasValue
                 ? contextLocation.Value
                 : this.ContextLocation;

@@ -57,7 +57,8 @@ namespace Microsoft.EntityFrameworkCore.Query
             IRelationalTypeMappingSource typeMappingSource,
             IMemberTranslatorProvider memberTranslatorProvider,
             IMethodCallTranslatorProvider methodCallTranslatorProvider
-        ) {
+        )
+        {
             Check.NotNull(sqlExpressionFactory, nameof(sqlExpressionFactory));
             Check.NotNull(typeMappingSource, nameof(typeMappingSource));
             Check.NotNull(memberTranslatorProvider, nameof(memberTranslatorProvider));

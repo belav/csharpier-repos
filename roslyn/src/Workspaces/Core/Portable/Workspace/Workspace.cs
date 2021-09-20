@@ -236,7 +236,8 @@ namespace Microsoft.CodeAnalysis
             WorkspaceChangeKind kind,
             ProjectId? projectId = null,
             DocumentId? documentId = null
-        ) {
+        )
+        {
             Contract.ThrowIfNull(transformation);
 
             var currentSolution = Volatile.Read(ref _latestSolution);
@@ -694,7 +695,8 @@ namespace Microsoft.CodeAnalysis
         protected internal void OnProjectReferenceAdded(
             ProjectId projectId,
             ProjectReference projectReference
-        ) {
+        )
+        {
             SetCurrentSolution(
                 oldSolution =>
                 {
@@ -720,7 +722,8 @@ namespace Microsoft.CodeAnalysis
         protected internal void OnProjectReferenceRemoved(
             ProjectId projectId,
             ProjectReference projectReference
-        ) {
+        )
+        {
             SetCurrentSolution(
                 oldSolution =>
                 {
@@ -740,7 +743,8 @@ namespace Microsoft.CodeAnalysis
         protected internal void OnMetadataReferenceAdded(
             ProjectId projectId,
             MetadataReference metadataReference
-        ) {
+        )
+        {
             SetCurrentSolution(
                 oldSolution =>
                 {
@@ -758,7 +762,8 @@ namespace Microsoft.CodeAnalysis
         protected internal void OnMetadataReferenceRemoved(
             ProjectId projectId,
             MetadataReference metadataReference
-        ) {
+        )
+        {
             SetCurrentSolution(
                 oldSolution =>
                 {
@@ -776,7 +781,8 @@ namespace Microsoft.CodeAnalysis
         protected internal void OnAnalyzerReferenceAdded(
             ProjectId projectId,
             AnalyzerReference analyzerReference
-        ) {
+        )
+        {
             SetCurrentSolution(
                 oldSolution =>
                 {
@@ -794,7 +800,8 @@ namespace Microsoft.CodeAnalysis
         protected internal void OnAnalyzerReferenceRemoved(
             ProjectId projectId,
             AnalyzerReference analyzerReference
-        ) {
+        )
+        {
             SetCurrentSolution(
                 oldSolution =>
                 {
@@ -956,7 +963,8 @@ namespace Microsoft.CodeAnalysis
         protected internal void OnDocumentTextLoaderChanged(
             DocumentId documentId,
             TextLoader loader
-        ) {
+        )
+        {
             using (_serializationLock.DisposableWait())
             {
                 CheckDocumentIsInCurrentSolution(documentId);
@@ -988,7 +996,8 @@ namespace Microsoft.CodeAnalysis
         protected internal void OnAdditionalDocumentTextLoaderChanged(
             DocumentId documentId,
             TextLoader loader
-        ) {
+        )
+        {
             using (_serializationLock.DisposableWait())
             {
                 CheckAdditionalDocumentIsInCurrentSolution(documentId);
@@ -1017,7 +1026,8 @@ namespace Microsoft.CodeAnalysis
         protected internal void OnAnalyzerConfigDocumentTextLoaderChanged(
             DocumentId documentId,
             TextLoader loader
-        ) {
+        )
+        {
             using (_serializationLock.DisposableWait())
             {
                 CheckAnalyzerConfigDocumentIsInCurrentSolution(documentId);
@@ -1101,7 +1111,8 @@ namespace Microsoft.CodeAnalysis
             DocumentId documentId,
             SourceText newText,
             PreservationMode mode
-        ) {
+        )
+        {
             OnAnyDocumentTextChanged(
                 documentId,
                 newText,
@@ -1122,7 +1133,8 @@ namespace Microsoft.CodeAnalysis
             DocumentId documentId,
             SourceText newText,
             PreservationMode mode
-        ) {
+        )
+        {
             OnAnyDocumentTextChanged(
                 documentId,
                 newText,
@@ -1143,7 +1155,8 @@ namespace Microsoft.CodeAnalysis
             DocumentId documentId,
             SourceText newText,
             PreservationMode mode
-        ) {
+        )
+        {
             OnAnyDocumentTextChanged(
                 documentId,
                 newText,
@@ -1178,7 +1191,8 @@ namespace Microsoft.CodeAnalysis
             > updateSolutionWithText,
             WorkspaceChangeKind changeKind,
             bool isCodeDocument
-        ) {
+        )
+        {
             using (_serializationLock.DisposableWait())
             {
                 checkIsInCurrentSolution(documentId);
@@ -1243,7 +1257,8 @@ namespace Microsoft.CodeAnalysis
         protected internal void OnDocumentSourceCodeKindChanged(
             DocumentId documentId,
             SourceCodeKind sourceCodeKind
-        ) {
+        )
+        {
             using (_serializationLock.DisposableWait())
             {
                 CheckDocumentIsInCurrentSolution(documentId);
@@ -1441,7 +1456,8 @@ namespace Microsoft.CodeAnalysis
                                     out matchingProjectId
                                 )
                             )
-                        ) {
+                        )
+                        {
                             var newProjRef = new ProjectReference(
                                 matchingProjectId,
                                 pemeta.Properties.Aliases,
@@ -1498,7 +1514,8 @@ namespace Microsoft.CodeAnalysis
         internal virtual bool TryApplyChanges(
             Solution newSolution,
             IProgressTracker progressTracker
-        ) {
+        )
+        {
             using (Logger.LogBlock(FunctionId.Workspace_ApplyChanges, CancellationToken.None))
             {
                 // If solution did not originate from this workspace then fail
@@ -1570,10 +1587,12 @@ namespace Microsoft.CodeAnalysis
                     !CurrentSolution.AnalyzerReferences.SequenceEqual(
                         newSolution.AnalyzerReferences
                     )
-                ) {
+                )
+                {
                     foreach (
                         var analyzerReference in solutionChanges.GetRemovedAnalyzerReferences()
-                    ) {
+                    )
+                    {
                         ApplySolutionAnalyzerReferenceRemoved(analyzerReference);
                     }
 
@@ -1597,7 +1616,8 @@ namespace Microsoft.CodeAnalysis
             if (
                 solutionChanges.GetRemovedProjects().Any()
                 && !this.CanApplyChange(ApplyChangesKind.RemoveProject)
-            ) {
+            )
+            {
                 throw new NotSupportedException(
                     WorkspacesResources.Removing_projects_is_not_supported
                 );
@@ -1606,7 +1626,8 @@ namespace Microsoft.CodeAnalysis
             if (
                 solutionChanges.GetAddedProjects().Any()
                 && !this.CanApplyChange(ApplyChangesKind.AddProject)
-            ) {
+            )
+            {
                 throw new NotSupportedException(
                     WorkspacesResources.Adding_projects_is_not_supported
                 );
@@ -1623,7 +1644,8 @@ namespace Microsoft.CodeAnalysis
             if (
                 projectChanges.OldProject.CompilationOptions
                 != projectChanges.NewProject.CompilationOptions
-            ) {
+            )
+            {
                 // It's OK to assert this: if they were both null, the if check above would have been false right away
                 // since they didn't change. Thus, at least one is non-null, and once you have a non-null CompilationOptions
                 // and ParseOptions, we don't let you ever make it null again. Further, it can't ever start non-null:
@@ -1643,7 +1665,8 @@ namespace Microsoft.CodeAnalysis
                 if (
                     projectChanges.OldProject.CompilationOptions
                     != newOptionsWithoutSyntaxTreeOptionsChange
-                ) {
+                )
+                {
                     // We're actually changing in a meaningful way, so now validate that the workspace can take it.
                     // We will pass into the CanApplyCompilationOptionChange newOptionsWithoutSyntaxTreeOptionsChange,
                     // which means it's only having to validate that the changes it's expected to apply are changing.
@@ -1655,7 +1678,8 @@ namespace Microsoft.CodeAnalysis
                             newOptionsWithoutSyntaxTreeOptionsChange,
                             projectChanges.NewProject
                         )
-                    ) {
+                    )
+                    {
                         throw new NotSupportedException(
                             WorkspacesResources.Changing_compilation_options_is_not_supported
                         );
@@ -1671,7 +1695,8 @@ namespace Microsoft.CodeAnalysis
                     projectChanges.NewProject.ParseOptions!,
                     projectChanges.NewProject
                 )
-            ) {
+            )
+            {
                 throw new NotSupportedException(
                     WorkspacesResources.Changing_parse_options_is_not_supported
                 );
@@ -1680,7 +1705,8 @@ namespace Microsoft.CodeAnalysis
             if (
                 projectChanges.GetAddedDocuments().Any()
                 && !this.CanApplyChange(ApplyChangesKind.AddDocument)
-            ) {
+            )
+            {
                 throw new NotSupportedException(
                     WorkspacesResources.Adding_documents_is_not_supported
                 );
@@ -1689,7 +1715,8 @@ namespace Microsoft.CodeAnalysis
             if (
                 projectChanges.GetRemovedDocuments().Any()
                 && !this.CanApplyChange(ApplyChangesKind.RemoveDocument)
-            ) {
+            )
+            {
                 throw new NotSupportedException(
                     WorkspacesResources.Removing_documents_is_not_supported
                 );
@@ -1704,7 +1731,8 @@ namespace Microsoft.CodeAnalysis
                                 projectChanges.OldProject.GetDocument(id)!
                             )
                     )
-            ) {
+            )
+            {
                 throw new NotSupportedException(
                     WorkspacesResources.Changing_document_property_is_not_supported
                 );
@@ -1719,7 +1747,8 @@ namespace Microsoft.CodeAnalysis
             if (
                 !this.CanApplyChange(ApplyChangesKind.ChangeDocument)
                 && changedDocumentIds.Length > 0
-            ) {
+            )
+            {
                 throw new NotSupportedException(
                     WorkspacesResources.Changing_documents_is_not_supported
                 );
@@ -1746,7 +1775,8 @@ namespace Microsoft.CodeAnalysis
             if (
                 projectChanges.GetAddedAdditionalDocuments().Any()
                 && !this.CanApplyChange(ApplyChangesKind.AddAdditionalDocument)
-            ) {
+            )
+            {
                 throw new NotSupportedException(
                     WorkspacesResources.Adding_additional_documents_is_not_supported
                 );
@@ -1755,7 +1785,8 @@ namespace Microsoft.CodeAnalysis
             if (
                 projectChanges.GetRemovedAdditionalDocuments().Any()
                 && !this.CanApplyChange(ApplyChangesKind.RemoveAdditionalDocument)
-            ) {
+            )
+            {
                 throw new NotSupportedException(
                     WorkspacesResources.Removing_additional_documents_is_not_supported
                 );
@@ -1764,7 +1795,8 @@ namespace Microsoft.CodeAnalysis
             if (
                 projectChanges.GetChangedAdditionalDocuments().Any()
                 && !this.CanApplyChange(ApplyChangesKind.ChangeAdditionalDocument)
-            ) {
+            )
+            {
                 throw new NotSupportedException(
                     WorkspacesResources.Changing_additional_documents_is_not_supported
                 );
@@ -1773,7 +1805,8 @@ namespace Microsoft.CodeAnalysis
             if (
                 projectChanges.GetAddedAnalyzerConfigDocuments().Any()
                 && !this.CanApplyChange(ApplyChangesKind.AddAnalyzerConfigDocument)
-            ) {
+            )
+            {
                 throw new NotSupportedException(
                     WorkspacesResources.Adding_analyzer_config_documents_is_not_supported
                 );
@@ -1782,7 +1815,8 @@ namespace Microsoft.CodeAnalysis
             if (
                 projectChanges.GetRemovedAnalyzerConfigDocuments().Any()
                 && !this.CanApplyChange(ApplyChangesKind.RemoveAnalyzerConfigDocument)
-            ) {
+            )
+            {
                 throw new NotSupportedException(
                     WorkspacesResources.Removing_analyzer_config_documents_is_not_supported
                 );
@@ -1791,7 +1825,8 @@ namespace Microsoft.CodeAnalysis
             if (
                 projectChanges.GetChangedAnalyzerConfigDocuments().Any()
                 && !this.CanApplyChange(ApplyChangesKind.ChangeAnalyzerConfigDocument)
-            ) {
+            )
+            {
                 throw new NotSupportedException(
                     WorkspacesResources.Changing_analyzer_config_documents_is_not_supported
                 );
@@ -1800,7 +1835,8 @@ namespace Microsoft.CodeAnalysis
             if (
                 projectChanges.GetAddedProjectReferences().Any()
                 && !this.CanApplyChange(ApplyChangesKind.AddProjectReference)
-            ) {
+            )
+            {
                 throw new NotSupportedException(
                     WorkspacesResources.Adding_project_references_is_not_supported
                 );
@@ -1809,7 +1845,8 @@ namespace Microsoft.CodeAnalysis
             if (
                 projectChanges.GetRemovedProjectReferences().Any()
                 && !this.CanApplyChange(ApplyChangesKind.RemoveProjectReference)
-            ) {
+            )
+            {
                 throw new NotSupportedException(
                     WorkspacesResources.Removing_project_references_is_not_supported
                 );
@@ -1818,7 +1855,8 @@ namespace Microsoft.CodeAnalysis
             if (
                 projectChanges.GetAddedMetadataReferences().Any()
                 && !this.CanApplyChange(ApplyChangesKind.AddMetadataReference)
-            ) {
+            )
+            {
                 throw new NotSupportedException(
                     WorkspacesResources.Adding_project_references_is_not_supported
                 );
@@ -1827,7 +1865,8 @@ namespace Microsoft.CodeAnalysis
             if (
                 projectChanges.GetRemovedMetadataReferences().Any()
                 && !this.CanApplyChange(ApplyChangesKind.RemoveMetadataReference)
-            ) {
+            )
+            {
                 throw new NotSupportedException(
                     WorkspacesResources.Removing_project_references_is_not_supported
                 );
@@ -1836,7 +1875,8 @@ namespace Microsoft.CodeAnalysis
             if (
                 projectChanges.GetAddedAnalyzerReferences().Any()
                 && !this.CanApplyChange(ApplyChangesKind.AddAnalyzerReference)
-            ) {
+            )
+            {
                 throw new NotSupportedException(
                     WorkspacesResources.Adding_analyzer_references_is_not_supported
                 );
@@ -1845,7 +1885,8 @@ namespace Microsoft.CodeAnalysis
             if (
                 projectChanges.GetRemovedAnalyzerReferences().Any()
                 && !this.CanApplyChange(ApplyChangesKind.RemoveAnalyzerReference)
-            ) {
+            )
+            {
                 throw new NotSupportedException(
                     WorkspacesResources.Removing_analyzer_references_is_not_supported
                 );
@@ -1906,7 +1947,8 @@ namespace Microsoft.CodeAnalysis
             if (
                 projectChanges.OldProject.CompilationOptions
                 != newOptionsWithoutSyntaxTreeOptionsChange
-            ) {
+            )
+            {
                 this.ApplyCompilationOptionsChanged(
                     projectChanges.ProjectId,
                     newOptionsWithoutSyntaxTreeOptionsChange!
@@ -2178,7 +2220,8 @@ namespace Microsoft.CodeAnalysis
         protected virtual void ApplyCompilationOptionsChanged(
             ProjectId projectId,
             CompilationOptions options
-        ) {
+        )
+        {
 #if DEBUG
             var oldProject = CurrentSolution.GetRequiredProject(projectId);
             var newProjectForAssert = oldProject.WithCompilationOptions(options);
@@ -2227,7 +2270,8 @@ namespace Microsoft.CodeAnalysis
         protected virtual void ApplyProjectReferenceAdded(
             ProjectId projectId,
             ProjectReference projectReference
-        ) {
+        )
+        {
             Debug.Assert(CanApplyChange(ApplyChangesKind.AddProjectReference));
             this.OnProjectReferenceAdded(projectId, projectReference);
         }
@@ -2240,7 +2284,8 @@ namespace Microsoft.CodeAnalysis
         protected virtual void ApplyProjectReferenceRemoved(
             ProjectId projectId,
             ProjectReference projectReference
-        ) {
+        )
+        {
             Debug.Assert(CanApplyChange(ApplyChangesKind.RemoveProjectReference));
             this.OnProjectReferenceRemoved(projectId, projectReference);
         }
@@ -2253,7 +2298,8 @@ namespace Microsoft.CodeAnalysis
         protected virtual void ApplyMetadataReferenceAdded(
             ProjectId projectId,
             MetadataReference metadataReference
-        ) {
+        )
+        {
             Debug.Assert(CanApplyChange(ApplyChangesKind.AddMetadataReference));
             this.OnMetadataReferenceAdded(projectId, metadataReference);
         }
@@ -2266,7 +2312,8 @@ namespace Microsoft.CodeAnalysis
         protected virtual void ApplyMetadataReferenceRemoved(
             ProjectId projectId,
             MetadataReference metadataReference
-        ) {
+        )
+        {
             Debug.Assert(CanApplyChange(ApplyChangesKind.RemoveMetadataReference));
             this.OnMetadataReferenceRemoved(projectId, metadataReference);
         }
@@ -2279,7 +2326,8 @@ namespace Microsoft.CodeAnalysis
         protected virtual void ApplyAnalyzerReferenceAdded(
             ProjectId projectId,
             AnalyzerReference analyzerReference
-        ) {
+        )
+        {
             Debug.Assert(CanApplyChange(ApplyChangesKind.AddAnalyzerReference));
             this.OnAnalyzerReferenceAdded(projectId, analyzerReference);
         }
@@ -2292,7 +2340,8 @@ namespace Microsoft.CodeAnalysis
         protected virtual void ApplyAnalyzerReferenceRemoved(
             ProjectId projectId,
             AnalyzerReference analyzerReference
-        ) {
+        )
+        {
             Debug.Assert(CanApplyChange(ApplyChangesKind.RemoveAnalyzerReference));
             this.OnAnalyzerReferenceRemoved(projectId, analyzerReference);
         }
@@ -2438,7 +2487,8 @@ namespace Microsoft.CodeAnalysis
         protected virtual void ApplyAnalyzerConfigDocumentTextChanged(
             DocumentId id,
             SourceText text
-        ) {
+        )
+        {
             Debug.Assert(CanApplyChange(ApplyChangesKind.ChangeAnalyzerConfigDocument));
             this.OnAnalyzerConfigDocumentTextLoaderChanged(
                 id,
@@ -2498,12 +2548,14 @@ namespace Microsoft.CodeAnalysis
         protected void CheckProjectHasProjectReference(
             ProjectId fromProjectId,
             ProjectReference projectReference
-        ) {
+        )
+        {
             if (
                 !this.CurrentSolution.GetProject(fromProjectId)!.ProjectReferences.Contains(
                     projectReference
                 )
-            ) {
+            )
+            {
                 throw new ArgumentException(
                     string.Format(
                         WorkspacesResources._0_is_not_referenced,
@@ -2519,12 +2571,14 @@ namespace Microsoft.CodeAnalysis
         protected void CheckProjectDoesNotHaveProjectReference(
             ProjectId fromProjectId,
             ProjectReference projectReference
-        ) {
+        )
+        {
             if (
                 this.CurrentSolution.GetProject(fromProjectId)!.ProjectReferences.Contains(
                     projectReference
                 )
-            ) {
+            )
+            {
                 throw new ArgumentException(
                     string.Format(
                         WorkspacesResources._0_is_already_referenced,
@@ -2540,7 +2594,8 @@ namespace Microsoft.CodeAnalysis
         protected void CheckProjectDoesNotHaveTransitiveProjectReference(
             ProjectId fromProjectId,
             ProjectId toProjectId
-        ) {
+        )
+        {
             var transitiveReferences = this.CurrentSolution.GetProjectDependencyGraph()
                 .GetProjectsThatThisProjectTransitivelyDependsOn(toProjectId);
             if (transitiveReferences.Contains(fromProjectId))
@@ -2561,12 +2616,14 @@ namespace Microsoft.CodeAnalysis
         protected void CheckProjectHasMetadataReference(
             ProjectId projectId,
             MetadataReference metadataReference
-        ) {
+        )
+        {
             if (
                 !this.CurrentSolution.GetProject(projectId)!.MetadataReferences.Contains(
                     metadataReference
                 )
-            ) {
+            )
+            {
                 throw new ArgumentException(WorkspacesResources.Metadata_is_not_referenced);
             }
         }
@@ -2577,12 +2634,14 @@ namespace Microsoft.CodeAnalysis
         protected void CheckProjectDoesNotHaveMetadataReference(
             ProjectId projectId,
             MetadataReference metadataReference
-        ) {
+        )
+        {
             if (
                 this.CurrentSolution.GetProject(projectId)!.MetadataReferences.Contains(
                     metadataReference
                 )
-            ) {
+            )
+            {
                 throw new ArgumentException(WorkspacesResources.Metadata_is_already_referenced);
             }
         }
@@ -2593,12 +2652,14 @@ namespace Microsoft.CodeAnalysis
         protected void CheckProjectHasAnalyzerReference(
             ProjectId projectId,
             AnalyzerReference analyzerReference
-        ) {
+        )
+        {
             if (
                 !this.CurrentSolution.GetProject(projectId)!.AnalyzerReferences.Contains(
                     analyzerReference
                 )
-            ) {
+            )
+            {
                 throw new ArgumentException(
                     string.Format(WorkspacesResources._0_is_not_present, analyzerReference)
                 );
@@ -2611,12 +2672,14 @@ namespace Microsoft.CodeAnalysis
         protected void CheckProjectDoesNotHaveAnalyzerReference(
             ProjectId projectId,
             AnalyzerReference analyzerReference
-        ) {
+        )
+        {
             if (
                 this.CurrentSolution.GetProject(projectId)!.AnalyzerReferences.Contains(
                     analyzerReference
                 )
-            ) {
+            )
+            {
                 throw new ArgumentException(
                     string.Format(WorkspacesResources._0_is_already_present, analyzerReference)
                 );
@@ -2629,7 +2692,8 @@ namespace Microsoft.CodeAnalysis
         internal static void CheckSolutionHasAnalyzerReference(
             Solution solution,
             AnalyzerReference analyzerReference
-        ) {
+        )
+        {
             if (!solution.AnalyzerReferences.Contains(analyzerReference))
             {
                 throw new ArgumentException(
@@ -2644,7 +2708,8 @@ namespace Microsoft.CodeAnalysis
         internal static void CheckSolutionDoesNotHaveAnalyzerReference(
             Solution solution,
             AnalyzerReference analyzerReference
-        ) {
+        )
+        {
             if (solution.AnalyzerReferences.Contains(analyzerReference))
             {
                 throw new ArgumentException(

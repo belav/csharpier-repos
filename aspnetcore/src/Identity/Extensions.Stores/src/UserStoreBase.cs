@@ -102,7 +102,8 @@ namespace Microsoft.AspNetCore.Identity
             string loginProvider,
             string name,
             string value
-        ) {
+        )
+        {
             return new TUserToken
             {
                 UserId = user.Id,
@@ -121,7 +122,8 @@ namespace Microsoft.AspNetCore.Identity
         public virtual Task<string> GetUserIdAsync(
             TUser user,
             CancellationToken cancellationToken = default(CancellationToken)
-        ) {
+        )
+        {
             cancellationToken.ThrowIfCancellationRequested();
             ThrowIfDisposed();
             if (user == null)
@@ -140,7 +142,8 @@ namespace Microsoft.AspNetCore.Identity
         public virtual Task<string> GetUserNameAsync(
             TUser user,
             CancellationToken cancellationToken = default(CancellationToken)
-        ) {
+        )
+        {
             cancellationToken.ThrowIfCancellationRequested();
             ThrowIfDisposed();
             if (user == null)
@@ -161,7 +164,8 @@ namespace Microsoft.AspNetCore.Identity
             TUser user,
             string userName,
             CancellationToken cancellationToken = default(CancellationToken)
-        ) {
+        )
+        {
             cancellationToken.ThrowIfCancellationRequested();
             ThrowIfDisposed();
             if (user == null)
@@ -181,7 +185,8 @@ namespace Microsoft.AspNetCore.Identity
         public virtual Task<string> GetNormalizedUserNameAsync(
             TUser user,
             CancellationToken cancellationToken = default(CancellationToken)
-        ) {
+        )
+        {
             cancellationToken.ThrowIfCancellationRequested();
             ThrowIfDisposed();
             if (user == null)
@@ -202,7 +207,8 @@ namespace Microsoft.AspNetCore.Identity
             TUser user,
             string normalizedName,
             CancellationToken cancellationToken = default(CancellationToken)
-        ) {
+        )
+        {
             cancellationToken.ThrowIfCancellationRequested();
             ThrowIfDisposed();
             if (user == null)
@@ -316,7 +322,8 @@ namespace Microsoft.AspNetCore.Identity
             TUser user,
             string passwordHash,
             CancellationToken cancellationToken = default(CancellationToken)
-        ) {
+        )
+        {
             cancellationToken.ThrowIfCancellationRequested();
             ThrowIfDisposed();
             if (user == null)
@@ -336,7 +343,8 @@ namespace Microsoft.AspNetCore.Identity
         public virtual Task<string> GetPasswordHashAsync(
             TUser user,
             CancellationToken cancellationToken = default(CancellationToken)
-        ) {
+        )
+        {
             cancellationToken.ThrowIfCancellationRequested();
             ThrowIfDisposed();
             if (user == null)
@@ -356,7 +364,8 @@ namespace Microsoft.AspNetCore.Identity
         public virtual Task<bool> HasPasswordAsync(
             TUser user,
             CancellationToken cancellationToken = default(CancellationToken)
-        ) {
+        )
+        {
             cancellationToken.ThrowIfCancellationRequested();
             return Task.FromResult(user.PasswordHash != null);
         }
@@ -525,7 +534,8 @@ namespace Microsoft.AspNetCore.Identity
             string loginProvider,
             string providerKey,
             CancellationToken cancellationToken = default(CancellationToken)
-        ) {
+        )
+        {
             cancellationToken.ThrowIfCancellationRequested();
             ThrowIfDisposed();
             var userLogin = await FindUserLoginAsync(loginProvider, providerKey, cancellationToken);
@@ -549,7 +559,8 @@ namespace Microsoft.AspNetCore.Identity
         public virtual Task<bool> GetEmailConfirmedAsync(
             TUser user,
             CancellationToken cancellationToken = default(CancellationToken)
-        ) {
+        )
+        {
             cancellationToken.ThrowIfCancellationRequested();
             ThrowIfDisposed();
             if (user == null)
@@ -570,7 +581,8 @@ namespace Microsoft.AspNetCore.Identity
             TUser user,
             bool confirmed,
             CancellationToken cancellationToken = default(CancellationToken)
-        ) {
+        )
+        {
             cancellationToken.ThrowIfCancellationRequested();
             ThrowIfDisposed();
             if (user == null)
@@ -592,7 +604,8 @@ namespace Microsoft.AspNetCore.Identity
             TUser user,
             string email,
             CancellationToken cancellationToken = default(CancellationToken)
-        ) {
+        )
+        {
             cancellationToken.ThrowIfCancellationRequested();
             ThrowIfDisposed();
             if (user == null)
@@ -612,7 +625,8 @@ namespace Microsoft.AspNetCore.Identity
         public virtual Task<string> GetEmailAsync(
             TUser user,
             CancellationToken cancellationToken = default(CancellationToken)
-        ) {
+        )
+        {
             cancellationToken.ThrowIfCancellationRequested();
             ThrowIfDisposed();
             if (user == null)
@@ -633,7 +647,8 @@ namespace Microsoft.AspNetCore.Identity
         public virtual Task<string> GetNormalizedEmailAsync(
             TUser user,
             CancellationToken cancellationToken = default(CancellationToken)
-        ) {
+        )
+        {
             cancellationToken.ThrowIfCancellationRequested();
             ThrowIfDisposed();
             if (user == null)
@@ -654,7 +669,8 @@ namespace Microsoft.AspNetCore.Identity
             TUser user,
             string normalizedEmail,
             CancellationToken cancellationToken = default(CancellationToken)
-        ) {
+        )
+        {
             cancellationToken.ThrowIfCancellationRequested();
             ThrowIfDisposed();
             if (user == null)
@@ -691,7 +707,8 @@ namespace Microsoft.AspNetCore.Identity
         public virtual Task<DateTimeOffset?> GetLockoutEndDateAsync(
             TUser user,
             CancellationToken cancellationToken = default(CancellationToken)
-        ) {
+        )
+        {
             cancellationToken.ThrowIfCancellationRequested();
             ThrowIfDisposed();
             if (user == null)
@@ -712,7 +729,8 @@ namespace Microsoft.AspNetCore.Identity
             TUser user,
             DateTimeOffset? lockoutEnd,
             CancellationToken cancellationToken = default(CancellationToken)
-        ) {
+        )
+        {
             cancellationToken.ThrowIfCancellationRequested();
             ThrowIfDisposed();
             if (user == null)
@@ -732,7 +750,8 @@ namespace Microsoft.AspNetCore.Identity
         public virtual Task<int> IncrementAccessFailedCountAsync(
             TUser user,
             CancellationToken cancellationToken = default(CancellationToken)
-        ) {
+        )
+        {
             cancellationToken.ThrowIfCancellationRequested();
             ThrowIfDisposed();
             if (user == null)
@@ -753,7 +772,8 @@ namespace Microsoft.AspNetCore.Identity
         public virtual Task ResetAccessFailedCountAsync(
             TUser user,
             CancellationToken cancellationToken = default(CancellationToken)
-        ) {
+        )
+        {
             cancellationToken.ThrowIfCancellationRequested();
             ThrowIfDisposed();
             if (user == null)
@@ -773,7 +793,8 @@ namespace Microsoft.AspNetCore.Identity
         public virtual Task<int> GetAccessFailedCountAsync(
             TUser user,
             CancellationToken cancellationToken = default(CancellationToken)
-        ) {
+        )
+        {
             cancellationToken.ThrowIfCancellationRequested();
             ThrowIfDisposed();
             if (user == null)
@@ -794,7 +815,8 @@ namespace Microsoft.AspNetCore.Identity
         public virtual Task<bool> GetLockoutEnabledAsync(
             TUser user,
             CancellationToken cancellationToken = default(CancellationToken)
-        ) {
+        )
+        {
             cancellationToken.ThrowIfCancellationRequested();
             ThrowIfDisposed();
             if (user == null)
@@ -815,7 +837,8 @@ namespace Microsoft.AspNetCore.Identity
             TUser user,
             bool enabled,
             CancellationToken cancellationToken = default(CancellationToken)
-        ) {
+        )
+        {
             cancellationToken.ThrowIfCancellationRequested();
             ThrowIfDisposed();
             if (user == null)
@@ -837,7 +860,8 @@ namespace Microsoft.AspNetCore.Identity
             TUser user,
             string phoneNumber,
             CancellationToken cancellationToken = default(CancellationToken)
-        ) {
+        )
+        {
             cancellationToken.ThrowIfCancellationRequested();
             ThrowIfDisposed();
             if (user == null)
@@ -857,7 +881,8 @@ namespace Microsoft.AspNetCore.Identity
         public virtual Task<string> GetPhoneNumberAsync(
             TUser user,
             CancellationToken cancellationToken = default(CancellationToken)
-        ) {
+        )
+        {
             cancellationToken.ThrowIfCancellationRequested();
             ThrowIfDisposed();
             if (user == null)
@@ -879,7 +904,8 @@ namespace Microsoft.AspNetCore.Identity
         public virtual Task<bool> GetPhoneNumberConfirmedAsync(
             TUser user,
             CancellationToken cancellationToken = default(CancellationToken)
-        ) {
+        )
+        {
             cancellationToken.ThrowIfCancellationRequested();
             ThrowIfDisposed();
             if (user == null)
@@ -900,7 +926,8 @@ namespace Microsoft.AspNetCore.Identity
             TUser user,
             bool confirmed,
             CancellationToken cancellationToken = default(CancellationToken)
-        ) {
+        )
+        {
             cancellationToken.ThrowIfCancellationRequested();
             ThrowIfDisposed();
             if (user == null)
@@ -922,7 +949,8 @@ namespace Microsoft.AspNetCore.Identity
             TUser user,
             string stamp,
             CancellationToken cancellationToken = default(CancellationToken)
-        ) {
+        )
+        {
             cancellationToken.ThrowIfCancellationRequested();
             ThrowIfDisposed();
             if (user == null)
@@ -946,7 +974,8 @@ namespace Microsoft.AspNetCore.Identity
         public virtual Task<string> GetSecurityStampAsync(
             TUser user,
             CancellationToken cancellationToken = default(CancellationToken)
-        ) {
+        )
+        {
             cancellationToken.ThrowIfCancellationRequested();
             ThrowIfDisposed();
             if (user == null)
@@ -968,7 +997,8 @@ namespace Microsoft.AspNetCore.Identity
             TUser user,
             bool enabled,
             CancellationToken cancellationToken = default(CancellationToken)
-        ) {
+        )
+        {
             cancellationToken.ThrowIfCancellationRequested();
             ThrowIfDisposed();
             if (user == null)
@@ -992,7 +1022,8 @@ namespace Microsoft.AspNetCore.Identity
         public virtual Task<bool> GetTwoFactorEnabledAsync(
             TUser user,
             CancellationToken cancellationToken = default(CancellationToken)
-        ) {
+        )
+        {
             cancellationToken.ThrowIfCancellationRequested();
             ThrowIfDisposed();
             if (user == null)
@@ -1059,7 +1090,8 @@ namespace Microsoft.AspNetCore.Identity
             string name,
             string value,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             cancellationToken.ThrowIfCancellationRequested();
             ThrowIfDisposed();
 
@@ -1092,7 +1124,8 @@ namespace Microsoft.AspNetCore.Identity
             string loginProvider,
             string name,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             cancellationToken.ThrowIfCancellationRequested();
             ThrowIfDisposed();
 
@@ -1120,7 +1153,8 @@ namespace Microsoft.AspNetCore.Identity
             string loginProvider,
             string name,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             cancellationToken.ThrowIfCancellationRequested();
             ThrowIfDisposed();
 
@@ -1182,7 +1216,8 @@ namespace Microsoft.AspNetCore.Identity
         public virtual async Task<int> CountCodesAsync(
             TUser user,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             cancellationToken.ThrowIfCancellationRequested();
             ThrowIfDisposed();
 
@@ -1215,7 +1250,8 @@ namespace Microsoft.AspNetCore.Identity
             TUser user,
             IEnumerable<string> recoveryCodes,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var mergedCodes = string.Join(";", recoveryCodes);
             return SetTokenAsync(
                 user,
@@ -1238,7 +1274,8 @@ namespace Microsoft.AspNetCore.Identity
             TUser user,
             string code,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             cancellationToken.ThrowIfCancellationRequested();
             ThrowIfDisposed();
 

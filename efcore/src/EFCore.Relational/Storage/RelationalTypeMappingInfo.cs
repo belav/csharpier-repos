@@ -56,7 +56,8 @@ namespace Microsoft.EntityFrameworkCore.Storage
             int? fallbackSize = null,
             int? fallbackPrecision = null,
             int? fallbackScale = null
-        ) {
+        )
+        {
             _coreTypeMappingInfo = new TypeMappingInfo(
                 principals,
                 fallbackUnicode,
@@ -86,7 +87,8 @@ namespace Microsoft.EntityFrameworkCore.Storage
             int? size,
             int? precision,
             int? scale
-        ) {
+        )
+        {
             // Note: Empty string is allowed for store type name because SQLite
             Check.NotNull(storeTypeName, nameof(storeTypeName));
             Check.NotNull(storeTypeNameBase, nameof(storeTypeNameBase));
@@ -123,7 +125,8 @@ namespace Microsoft.EntityFrameworkCore.Storage
             int? size = null,
             int? precision = null,
             int? scale = null
-        ) {
+        )
+        {
             Check.NotNull(member, nameof(member));
 
             _coreTypeMappingInfo = new TypeMappingInfo(member, unicode, size, precision, scale);
@@ -141,7 +144,8 @@ namespace Microsoft.EntityFrameworkCore.Storage
         public RelationalTypeMappingInfo(
             in RelationalTypeMappingInfo source,
             in ValueConverterInfo converter
-        ) {
+        )
+        {
             _coreTypeMappingInfo = new TypeMappingInfo(
                 source._coreTypeMappingInfo,
                 converter,
@@ -184,7 +188,8 @@ namespace Microsoft.EntityFrameworkCore.Storage
             bool? fixedLength = null,
             int? precision = null,
             int? scale = null
-        ) {
+        )
+        {
             _coreTypeMappingInfo = new TypeMappingInfo(
                 type,
                 keyOrIndex,

@@ -39,7 +39,8 @@ namespace Castle.DynamicProxy.Generators.Emitters.SimpleAST
             Reference owner,
             MethodInfo method,
             params IExpression[] args
-        ) {
+        )
+        {
             this.owner = owner;
             this.method = method;
             this.args = args;

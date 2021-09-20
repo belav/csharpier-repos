@@ -21,7 +21,8 @@ namespace System.Text.RegularExpressions.Tests
             string culture,
             RegexOptions options,
             bool expected
-        ) {
+        )
+        {
             // Regex compares characters one by one.  If that changes, it could impact the behavior of
             // a case like this, where these characters are not the same, but the strings compare
             // as equal with the invariant culture (and some other cultures as well).
@@ -29,7 +30,8 @@ namespace System.Text.RegularExpressions.Tests
             {
                 foreach (
                     RegexOptions compiled in new[] { RegexOptions.None, RegexOptions.Compiled }
-                ) {
+                )
+                {
                     Assert.Equal(expected, new Regex(pattern, options | compiled).IsMatch(input));
                 }
             }

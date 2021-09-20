@@ -36,7 +36,8 @@ namespace System.Data.ProviderBase
             Stream xmlStream,
             string serverVersion,
             string normalizedServerVersion
-        ) {
+        )
+        {
             ADP.CheckArgumentNull(xmlStream, "xmlStream");
             ADP.CheckArgumentNull(serverVersion, "serverVersion");
             ADP.CheckArgumentNull(normalizedServerVersion, "normalizedServerVersion");
@@ -66,7 +67,8 @@ namespace System.Data.ProviderBase
         protected DataTable CloneAndFilterCollection(
             string collectionName,
             string[]? hiddenColumnNames
-        ) {
+        )
+        {
             DataTable? sourceTable;
             DataTable destinationTable;
             DataColumn[] filteredSourceColumns;
@@ -129,7 +131,8 @@ namespace System.Data.ProviderBase
             DataRow requestedCollectionRow,
             string?[]? restrictions,
             DbConnection connection
-        ) {
+        )
+        {
             DataTable metaDataCollectionsTable = _metaDataCollectionsDataSet.Tables[
                 DbMetaDataCollectionNames.MetaDataCollections
             ]!;
@@ -173,7 +176,8 @@ namespace System.Data.ProviderBase
 
                 if (
                     (restrictions != null) && (restrictions.Length > i) && (restrictions[i] != null)
-                ) {
+                )
+                {
                     restrictionParameter.Value = restrictions[i];
                 }
                 else
@@ -237,7 +241,8 @@ namespace System.Data.ProviderBase
             DataTable sourceTable,
             string[]? hiddenColumnNames,
             DataColumnCollection destinationColumns
-        ) {
+        )
+        {
             DataColumn newDestinationColumn;
             int currentColumn;
             DataColumn[]? filteredSourceColumns = null;
@@ -433,7 +438,8 @@ namespace System.Data.ProviderBase
                 || (collectionName == null)
                 || (restrictionName == null)
                 || (restrictionNumber == null)
-            ) {
+            )
+            {
                 throw ADP.MissingRestrictionColumn();
             }
 
@@ -443,7 +449,8 @@ namespace System.Data.ProviderBase
                     ((string)restriction[collectionName] == neededCollectionName)
                     && ((int)restriction[restrictionNumber] == neededRestrictionNumber)
                     && (SupportedByCurrentVersion(restriction))
-                ) {
+                )
+                {
                     result = (string)restriction[parameterName];
                     break;
                 }
@@ -461,7 +468,8 @@ namespace System.Data.ProviderBase
             DbConnection connection,
             string collectionName,
             string?[]? restrictions
-        ) {
+        )
+        {
             Debug.Assert(_metaDataCollectionsDataSet != null);
 
             DataTable metaDataCollectionsTable = _metaDataCollectionsDataSet.Tables[
@@ -588,7 +596,8 @@ namespace System.Data.ProviderBase
             string collectionName,
             string?[]? restrictions,
             DbConnection connection
-        ) {
+        )
+        {
             throw ADP.NotSupported();
         }
 
@@ -615,7 +624,8 @@ namespace System.Data.ProviderBase
                                 (string)version,
                                 StringComparison.OrdinalIgnoreCase
                             )
-                        ) {
+                        )
+                        {
                             result = false;
                         }
                     }
@@ -640,7 +650,8 @@ namespace System.Data.ProviderBase
                                     (string)version,
                                     StringComparison.OrdinalIgnoreCase
                                 )
-                            ) {
+                            )
+                            {
                                 result = false;
                             }
                         }

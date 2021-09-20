@@ -448,7 +448,8 @@ namespace HttpStress
                     )
                     && values.Count == 1
                     && int.TryParse(values[0], out int result)
-                ) {
+                )
+                {
                     return result;
                 }
 

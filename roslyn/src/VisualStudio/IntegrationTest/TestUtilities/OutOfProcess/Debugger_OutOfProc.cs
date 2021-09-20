@@ -52,7 +52,8 @@ namespace Microsoft.VisualStudio.IntegrationTest.Utilities.OutOfProcess
             string expressionText,
             string expectedType,
             string expectedValue
-        ) {
+        )
+        {
             var entry = _debuggerInProc.GetExpression(expressionText);
             Assert.Equal(expectedType, entry.Type);
             Assert.Equal(expectedValue, entry.Value);

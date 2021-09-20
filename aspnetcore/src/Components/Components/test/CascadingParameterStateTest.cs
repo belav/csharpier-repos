@@ -451,7 +451,8 @@ namespace Microsoft.AspNetCore.Components.Test
         static ComponentState CreateComponentState(
             IComponent component,
             ComponentState parentComponentState = null
-        ) {
+        )
+        {
             return new ComponentState(new TestRenderer(), 0, component, parentComponentState);
         }
 

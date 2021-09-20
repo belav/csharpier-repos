@@ -24,7 +24,8 @@ namespace Microsoft.CodeAnalysis
             ProjectId projectId,
             ImmutableArray<string> aliases = default,
             bool embedInteropTypes = false
-        ) {
+        )
+        {
             Contract.ThrowIfNull(projectId);
 
             _projectId = projectId;

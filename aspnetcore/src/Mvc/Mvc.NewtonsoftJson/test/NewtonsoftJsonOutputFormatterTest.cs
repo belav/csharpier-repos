@@ -133,7 +133,8 @@ namespace Microsoft.AspNetCore.Mvc.Formatters
         public async Task NamingStrategy_AffectsSerialization(
             NamingStrategy strategy,
             string expected
-        ) {
+        )
+        {
             // Arrange
             var user = new User { FullName = "John", age = 35 };
             var context = GetOutputFormatterContext(user, typeof(User));
@@ -174,7 +175,8 @@ namespace Microsoft.AspNetCore.Mvc.Formatters
         [MemberData(nameof(NamingStrategy_DoesNotAffectSerializationData))]
         public async Task NamingStrategy_DoesNotAffectDictionarySerialization(
             NamingStrategy strategy
-        ) {
+        )
+        {
             // Arrange
             var dictionary = new Dictionary<string, int>(StringComparer.Ordinal)
             {
@@ -212,7 +214,8 @@ namespace Microsoft.AspNetCore.Mvc.Formatters
         [MemberData(nameof(NamingStrategy_DoesNotAffectSerializationData))]
         public async Task NamingStrategy_DoesNotAffectSerialization_WithJsonProperty(
             NamingStrategy strategy
-        ) {
+        )
+        {
             // Arrange
             var user = new UserWithJsonProperty
             {
@@ -247,7 +250,8 @@ namespace Microsoft.AspNetCore.Mvc.Formatters
         [MemberData(nameof(NamingStrategy_DoesNotAffectSerializationData))]
         public async Task NamingStrategy_DoesNotAffectSerialization_WithJsonObject(
             NamingStrategy strategy
-        ) {
+        )
+        {
             // Arrange
             var user = new UserWithJsonObject { age = 35, FullName = "John", };
             var expected = "{\"age\":35,\"full_name\":\"John\"}";

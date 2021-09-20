@@ -54,7 +54,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Http3
             MemoryPool<byte> memoryPool,
             IKestrelTrace log,
             IStreamIdFeature streamIdFeature
-        ) {
+        )
+        {
             _outputWriter = output;
             _connectionContext = connectionContext;
             _timeoutControl = timeoutControl;
@@ -316,7 +317,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Http3
         public ValueTask<FlushResult> FlushAsync(
             IHttpOutputAborter? outputAborter,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             lock (_writeLock)
             {
                 if (_completed)
@@ -422,7 +424,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Http3
 
         private static IEnumerable<KeyValuePair<string, string>> EnumerateHeaders(
             IHeaderDictionary headers
-        ) {
+        )
+        {
             foreach (var header in headers)
             {
                 foreach (var value in header.Value)

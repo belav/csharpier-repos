@@ -370,7 +370,8 @@ namespace System.Net.Quic.Tests
         private static async Task CreateAndTestBidirectionalStream(
             QuicConnection c1,
             QuicConnection c2
-        ) {
+        )
+        {
             using QuicStream s1 = c1.OpenBidirectionalStream();
             Assert.True(s1.CanRead);
             Assert.True(s1.CanWrite);
@@ -386,7 +387,8 @@ namespace System.Net.Quic.Tests
         private static async Task CreateAndTestUnidirectionalStream(
             QuicConnection c1,
             QuicConnection c2
-        ) {
+        )
+        {
             using QuicStream s1 = c1.OpenUnidirectionalStream();
 
             Assert.False(s1.CanRead);
@@ -435,7 +437,8 @@ namespace System.Net.Quic.Tests
             ReadOnlyMemory<byte> data,
             QuicStream s1,
             QuicStream s2
-        ) {
+        )
+        {
             await s1.WriteAsync(data);
             await ReceiveDataAsync(data, s2);
         }

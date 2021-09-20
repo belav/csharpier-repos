@@ -17,7 +17,8 @@ namespace Microsoft.Extensions.Hosting.Internal
 
         public ServiceFactoryAdapter(
             IServiceProviderFactory<TContainerBuilder> serviceProviderFactory
-        ) {
+        )
+        {
             _serviceProviderFactory =
                 serviceProviderFactory
                 ?? throw new ArgumentNullException(nameof(serviceProviderFactory));
@@ -26,7 +27,8 @@ namespace Microsoft.Extensions.Hosting.Internal
         public ServiceFactoryAdapter(
             Func<HostBuilderContext> contextResolver,
             Func<HostBuilderContext, IServiceProviderFactory<TContainerBuilder>> factoryResolver
-        ) {
+        )
+        {
             _contextResolver =
                 contextResolver ?? throw new ArgumentNullException(nameof(contextResolver));
             _factoryResolver =

@@ -50,7 +50,8 @@ namespace System.Web.Http
             int offset,
             int count,
             bool alwaysCreateNewReturnValue
-        ) {
+        )
+        {
             byte[] encoded = UrlEncode(bytes, offset, count);
 
             return (alwaysCreateNewReturnValue && (encoded != null) && (encoded == bytes))

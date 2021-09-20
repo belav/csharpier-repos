@@ -20,18 +20,19 @@ namespace Microsoft.CodeAnalysis.CSharp
             LookupResult lookupResult,
             BoundMethodGroupFlags flags,
             bool hasErrors = false
-        ) : this(
-            syntax,
-            typeArgumentsOpt,
-            name,
-            methods,
-            lookupResult.SingleSymbolOrDefault,
-            lookupResult.Error,
-            flags,
-            receiverOpt,
-            lookupResult.Kind,
-            hasErrors
-        ) { }
+        )
+            : this(
+                syntax,
+                typeArgumentsOpt,
+                name,
+                methods,
+                lookupResult.SingleSymbolOrDefault,
+                lookupResult.Error,
+                flags,
+                receiverOpt,
+                lookupResult.Kind,
+                hasErrors
+            ) { }
 
         public MemberAccessExpressionSyntax? MemberAccessExpressionSyntax
         {

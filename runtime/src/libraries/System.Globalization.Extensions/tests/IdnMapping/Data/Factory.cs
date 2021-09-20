@@ -47,7 +47,8 @@ namespace System.Globalization.Tests
         private static IEnumerable<IConformanceIdnaTest> ParseFile(
             Stream stream,
             Func<string, int, IConformanceIdnaTest> f
-        ) {
+        )
+        {
             using (var reader = new StreamReader(stream))
             {
                 int lineCount = 0;

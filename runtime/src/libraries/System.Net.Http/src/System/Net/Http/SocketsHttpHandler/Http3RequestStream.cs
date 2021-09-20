@@ -66,7 +66,8 @@ namespace System.Net.Http
             HttpRequestMessage request,
             Http3Connection connection,
             QuicStream stream
-        ) {
+        )
+        {
             _request = request;
             _connection = connection;
             _stream = stream;
@@ -198,7 +199,8 @@ namespace System.Net.Http
                         == await Task.WhenAny(sendContentTask, readResponseTask)
                             .ConfigureAwait(false)
                     || sendContentTask.IsCompleted
-                ) {
+                )
+                {
                     try
                     {
                         await sendContentTask.ConfigureAwait(false);
@@ -372,7 +374,8 @@ namespace System.Net.Http
         private async Task SendContentAsync(
             HttpContent content,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             // If we're using Expect 100 Continue, wait to send content
             // until we get a response back or until our timeout elapses.
             if (_expect100ContinueCompletionSource != null)
@@ -384,7 +387,8 @@ namespace System.Net.Http
                     if (
                         _connection.Pool.Settings._expect100ContinueTimeout
                         != Timeout.InfiniteTimeSpan
-                    ) {
+                    )
+                    {
                         timer = new Timer(
                             static o =>
                                 (
@@ -436,7 +440,8 @@ namespace System.Net.Http
         private async ValueTask WriteRequestContentAsync(
             ReadOnlyMemory<byte> buffer,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             if (buffer.Length == 0)
             {
                 return;
@@ -688,7 +693,8 @@ namespace System.Net.Http
                         && knownHeader != KnownHeaders.Connection
                         && knownHeader != KnownHeaders.Upgrade
                         && knownHeader != KnownHeaders.ProxyConnection
-                    ) {
+                    )
+                    {
                         if (header.Key.KnownHeader == KnownHeaders.TE)
                         {
                             // HTTP/2 allows only 'trailers' TE header. rfc7540 8.1.2.2
@@ -701,7 +707,8 @@ namespace System.Net.Http
                                         "trailers",
                                         StringComparison.OrdinalIgnoreCase
                                     )
-                                ) {
+                                )
+                                {
                                     BufferLiteralHeaderWithoutNameReference(
                                         "TE",
                                         value,
@@ -754,7 +761,8 @@ namespace System.Net.Http
                     _sendBuffer.AvailableSpan,
                     out bytesWritten
                 )
-            ) {
+            )
+            {
                 _sendBuffer.Grow();
             }
             _sendBuffer.Commit(bytesWritten);
@@ -764,7 +772,8 @@ namespace System.Net.Http
             int nameIndex,
             string value,
             Encoding? valueEncoding = null
-        ) {
+        )
+        {
             int bytesWritten;
             while (
                 !QPackEncoder.EncodeLiteralHeaderFieldWithStaticNameReference(
@@ -774,7 +783,8 @@ namespace System.Net.Http
                     _sendBuffer.AvailableSpan,
                     out bytesWritten
                 )
-            ) {
+            )
+            {
                 _sendBuffer.Grow();
             }
             _sendBuffer.Commit(bytesWritten);
@@ -785,7 +795,8 @@ namespace System.Net.Http
             ReadOnlySpan<string> values,
             string separator,
             Encoding? valueEncoding
-        ) {
+        )
+        {
             int bytesWritten;
             while (
                 !QPackEncoder.EncodeLiteralHeaderFieldWithoutNameReference(
@@ -796,7 +807,8 @@ namespace System.Net.Http
                     _sendBuffer.AvailableSpan,
                     out bytesWritten
                 )
-            ) {
+            )
+            {
                 _sendBuffer.Grow();
             }
             _sendBuffer.Commit(bytesWritten);
@@ -806,7 +818,8 @@ namespace System.Net.Http
             string name,
             string value,
             Encoding? valueEncoding
-        ) {
+        )
+        {
             int bytesWritten;
             while (
                 !QPackEncoder.EncodeLiteralHeaderFieldWithoutNameReference(
@@ -816,7 +829,8 @@ namespace System.Net.Http
                     _sendBuffer.AvailableSpan,
                     out bytesWritten
                 )
-            ) {
+            )
+            {
                 _sendBuffer.Grow();
             }
             _sendBuffer.Commit(bytesWritten);
@@ -826,7 +840,8 @@ namespace System.Net.Http
             ReadOnlySpan<string> values,
             string? separator,
             Encoding? valueEncoding
-        ) {
+        )
+        {
             int bytesWritten;
             while (
                 !QPackEncoder.EncodeValueString(
@@ -836,7 +851,8 @@ namespace System.Net.Http
                     _sendBuffer.AvailableSpan,
                     out bytesWritten
                 )
-            ) {
+            )
+            {
                 _sendBuffer.Grow();
             }
             _sendBuffer.Commit(bytesWritten);
@@ -852,7 +868,8 @@ namespace System.Net.Http
                     _sendBuffer.AvailableSpan,
                     out bytesWritten
                 )
-            ) {
+            )
+            {
                 _sendBuffer.Grow();
             }
             _sendBuffer.Commit(bytesWritten);
@@ -867,7 +884,8 @@ namespace System.Net.Http
 
         private async ValueTask<(Http3FrameType? frameType, long payloadLength)> ReadFrameEnvelopeAsync(
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             long frameType,
                 payloadLength;
             int bytesRead;
@@ -881,7 +899,8 @@ namespace System.Net.Http
                         out payloadLength,
                         out bytesRead
                     )
-                ) {
+                )
+                {
                     _recvBuffer.EnsureAvailableSpace(
                         VariableLengthIntegerHelper.MaximumEncodedLength * 2
                     );
@@ -944,7 +963,8 @@ namespace System.Net.Http
         private async ValueTask ReadHeadersAsync(
             long headersLength,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             // TODO: this header budget is sent as SETTINGS_MAX_HEADER_LIST_SIZE, so it should not use frame payload but rather 32 bytes + uncompressed size per entry.
             // https://tools.ietf.org/html/draft-ietf-quic-http-24#section-4.1.1
             if (headersLength > _headerBudgetRemaining)
@@ -1031,7 +1051,8 @@ namespace System.Net.Http
             int index,
             out HeaderDescriptor descriptor,
             out string? knownValue
-        ) {
+        )
+        {
             if (!HeaderDescriptor.TryGetStaticQPackHeader(index, out descriptor, out knownValue))
             {
                 if (NetEventSource.Log.IsEnabled())
@@ -1050,7 +1071,8 @@ namespace System.Net.Http
             HeaderDescriptor descriptor,
             string? staticValue,
             ReadOnlySpan<byte> literalValue
-        ) {
+        )
+        {
             if (descriptor.Name[0] == ':')
             {
                 if (descriptor.KnownHeader != KnownHeaders.PseudoStatus)
@@ -1102,7 +1124,8 @@ namespace System.Net.Http
                     if (
                         _response.StatusCode == HttpStatusCode.Continue
                         && _expect100ContinueCompletionSource != null
-                    ) {
+                    )
+                    {
                         _expect100ContinueCompletionSource.TrySetResult(true);
                     }
                 }
@@ -1195,7 +1218,8 @@ namespace System.Net.Http
         private async ValueTask SkipUnknownPayloadAsync(
             long payloadLength,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             while (payloadLength != 0)
             {
                 if (_recvBuffer.ActiveLength == 0)
@@ -1243,7 +1267,8 @@ namespace System.Net.Http
                             .AsTask()
                             .GetAwaiter()
                             .GetResult()
-                    ) {
+                    )
+                    {
                         // End of stream.
                         break;
                     }
@@ -1299,7 +1324,8 @@ namespace System.Net.Http
             HttpResponseMessage response,
             Memory<byte> buffer,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             // Response headers should be done reading by the time this is called. _response is nulled out as part of this.
             // Verify that this is being called in correct order.
             Debug.Assert(_response == null);
@@ -1314,7 +1340,8 @@ namespace System.Net.Http
                         _responseDataPayloadRemaining <= 0
                         && !await ReadNextDataFrameAsync(response, cancellationToken)
                             .ConfigureAwait(false)
-                    ) {
+                    )
+                    {
                         // End of stream.
                         break;
                     }
@@ -1373,7 +1400,8 @@ namespace System.Net.Http
         private void HandleReadResponseContentException(
             Exception ex,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             switch (ex)
             {
                 case QuicStreamAbortedException _:
@@ -1411,7 +1439,8 @@ namespace System.Net.Http
         private async ValueTask<bool> ReadNextDataFrameAsync(
             HttpResponseMessage response,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             if (_responseDataPayloadRemaining == -1)
             {
                 // EOS -- this branch will only be taken if user calls Read again after EOS.
@@ -1526,7 +1555,8 @@ namespace System.Net.Http
             public override ValueTask<int> ReadAsync(
                 Memory<byte> buffer,
                 CancellationToken cancellationToken
-            ) {
+            )
+            {
                 if (_stream == null)
                 {
                     return ValueTask.FromException<int>(
@@ -1541,7 +1571,8 @@ namespace System.Net.Http
             public override ValueTask WriteAsync(
                 ReadOnlyMemory<byte> buffer,
                 CancellationToken cancellationToken
-            ) {
+            )
+            {
                 throw new NotSupportedException();
             }
         }
@@ -1574,14 +1605,16 @@ namespace System.Net.Http
             public override ValueTask<int> ReadAsync(
                 Memory<byte> buffer,
                 CancellationToken cancellationToken
-            ) {
+            )
+            {
                 throw new NotSupportedException();
             }
 
             public override ValueTask WriteAsync(
                 ReadOnlyMemory<byte> buffer,
                 CancellationToken cancellationToken
-            ) {
+            )
+            {
                 if (_stream == null)
                 {
                     return ValueTask.FromException(

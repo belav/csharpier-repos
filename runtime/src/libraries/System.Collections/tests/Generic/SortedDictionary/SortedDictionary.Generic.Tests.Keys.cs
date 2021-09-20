@@ -112,7 +112,8 @@ namespace System.Collections.Tests
         [MemberData(nameof(ValidCollectionSizes))]
         public void SortedDictionary_Generic_KeyCollection_CopyTo_ExactlyEnoughSpaceInTypeCorrectArray(
             int count
-        ) {
+        )
+        {
             ICollection collection = NonGenericICollectionFactory(count);
             string[] array = new string[count];
             collection.CopyTo(array, 0);

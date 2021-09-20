@@ -183,7 +183,8 @@ namespace Microsoft.AspNetCore.Identity.EntityFrameworkCore
         public async override Task<IdentityResult> CreateAsync(
             TUser user,
             CancellationToken cancellationToken = default(CancellationToken)
-        ) {
+        )
+        {
             cancellationToken.ThrowIfCancellationRequested();
             ThrowIfDisposed();
             if (user == null)
@@ -204,7 +205,8 @@ namespace Microsoft.AspNetCore.Identity.EntityFrameworkCore
         public async override Task<IdentityResult> UpdateAsync(
             TUser user,
             CancellationToken cancellationToken = default(CancellationToken)
-        ) {
+        )
+        {
             cancellationToken.ThrowIfCancellationRequested();
             ThrowIfDisposed();
             if (user == null)
@@ -235,7 +237,8 @@ namespace Microsoft.AspNetCore.Identity.EntityFrameworkCore
         public async override Task<IdentityResult> DeleteAsync(
             TUser user,
             CancellationToken cancellationToken = default(CancellationToken)
-        ) {
+        )
+        {
             cancellationToken.ThrowIfCancellationRequested();
             ThrowIfDisposed();
             if (user == null)
@@ -266,7 +269,8 @@ namespace Microsoft.AspNetCore.Identity.EntityFrameworkCore
         public override Task<TUser> FindByIdAsync(
             string userId,
             CancellationToken cancellationToken = default(CancellationToken)
-        ) {
+        )
+        {
             cancellationToken.ThrowIfCancellationRequested();
             ThrowIfDisposed();
             var id = ConvertIdFromString(userId);
@@ -284,7 +288,8 @@ namespace Microsoft.AspNetCore.Identity.EntityFrameworkCore
         public override Task<TUser> FindByNameAsync(
             string normalizedUserName,
             CancellationToken cancellationToken = default(CancellationToken)
-        ) {
+        )
+        {
             cancellationToken.ThrowIfCancellationRequested();
             ThrowIfDisposed();
 
@@ -311,7 +316,8 @@ namespace Microsoft.AspNetCore.Identity.EntityFrameworkCore
         protected override Task<TUser> FindUserAsync(
             TKey userId,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             return Users.SingleOrDefaultAsync(u => u.Id.Equals(userId), cancellationToken);
         }
 
@@ -328,7 +334,8 @@ namespace Microsoft.AspNetCore.Identity.EntityFrameworkCore
             string loginProvider,
             string providerKey,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             return UserLogins.SingleOrDefaultAsync(
                 userLogin =>
                     userLogin.UserId.Equals(userId)
@@ -349,7 +356,8 @@ namespace Microsoft.AspNetCore.Identity.EntityFrameworkCore
             string loginProvider,
             string providerKey,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             return UserLogins.SingleOrDefaultAsync(
                 userLogin =>
                     userLogin.LoginProvider == loginProvider
@@ -367,7 +375,8 @@ namespace Microsoft.AspNetCore.Identity.EntityFrameworkCore
         public async override Task<IList<Claim>> GetClaimsAsync(
             TUser user,
             CancellationToken cancellationToken = default(CancellationToken)
-        ) {
+        )
+        {
             ThrowIfDisposed();
             if (user == null)
             {
@@ -390,7 +399,8 @@ namespace Microsoft.AspNetCore.Identity.EntityFrameworkCore
             TUser user,
             IEnumerable<Claim> claims,
             CancellationToken cancellationToken = default(CancellationToken)
-        ) {
+        )
+        {
             ThrowIfDisposed();
             if (user == null)
             {
@@ -420,7 +430,8 @@ namespace Microsoft.AspNetCore.Identity.EntityFrameworkCore
             Claim claim,
             Claim newClaim,
             CancellationToken cancellationToken = default(CancellationToken)
-        ) {
+        )
+        {
             ThrowIfDisposed();
             if (user == null)
             {
@@ -460,7 +471,8 @@ namespace Microsoft.AspNetCore.Identity.EntityFrameworkCore
             TUser user,
             IEnumerable<Claim> claims,
             CancellationToken cancellationToken = default(CancellationToken)
-        ) {
+        )
+        {
             ThrowIfDisposed();
             if (user == null)
             {
@@ -497,7 +509,8 @@ namespace Microsoft.AspNetCore.Identity.EntityFrameworkCore
             TUser user,
             UserLoginInfo login,
             CancellationToken cancellationToken = default(CancellationToken)
-        ) {
+        )
+        {
             cancellationToken.ThrowIfCancellationRequested();
             ThrowIfDisposed();
             if (user == null)
@@ -525,7 +538,8 @@ namespace Microsoft.AspNetCore.Identity.EntityFrameworkCore
             string loginProvider,
             string providerKey,
             CancellationToken cancellationToken = default(CancellationToken)
-        ) {
+        )
+        {
             cancellationToken.ThrowIfCancellationRequested();
             ThrowIfDisposed();
             if (user == null)
@@ -555,7 +569,8 @@ namespace Microsoft.AspNetCore.Identity.EntityFrameworkCore
         public async override Task<IList<UserLoginInfo>> GetLoginsAsync(
             TUser user,
             CancellationToken cancellationToken = default(CancellationToken)
-        ) {
+        )
+        {
             cancellationToken.ThrowIfCancellationRequested();
             ThrowIfDisposed();
             if (user == null)
@@ -583,7 +598,8 @@ namespace Microsoft.AspNetCore.Identity.EntityFrameworkCore
             string loginProvider,
             string providerKey,
             CancellationToken cancellationToken = default(CancellationToken)
-        ) {
+        )
+        {
             cancellationToken.ThrowIfCancellationRequested();
             ThrowIfDisposed();
             var userLogin = await FindUserLoginAsync(loginProvider, providerKey, cancellationToken);
@@ -605,7 +621,8 @@ namespace Microsoft.AspNetCore.Identity.EntityFrameworkCore
         public override Task<TUser> FindByEmailAsync(
             string normalizedEmail,
             CancellationToken cancellationToken = default(CancellationToken)
-        ) {
+        )
+        {
             cancellationToken.ThrowIfCancellationRequested();
             ThrowIfDisposed();
 
@@ -625,7 +642,8 @@ namespace Microsoft.AspNetCore.Identity.EntityFrameworkCore
         public async override Task<IList<TUser>> GetUsersForClaimAsync(
             Claim claim,
             CancellationToken cancellationToken = default(CancellationToken)
-        ) {
+        )
+        {
             cancellationToken.ThrowIfCancellationRequested();
             ThrowIfDisposed();
             if (claim == null)

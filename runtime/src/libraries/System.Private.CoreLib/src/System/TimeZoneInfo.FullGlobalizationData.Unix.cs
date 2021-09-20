@@ -29,7 +29,8 @@ namespace System
             ref string? standardDisplayName,
             ref string? daylightDisplayName,
             ref string? displayName
-        ) {
+        )
+        {
             // Determine the culture to use
             CultureInfo uiCulture = CultureInfo.CurrentUICulture;
             if (uiCulture.Name.Length == 0)
@@ -95,7 +96,8 @@ namespace System
             Interop.Globalization.TimeZoneDisplayNameType nameType,
             string uiCulture,
             ref string? displayName
-        ) {
+        )
+        {
             if (GlobalizationMode.Invariant)
             {
                 return;
@@ -160,7 +162,8 @@ namespace System
             TimeSpan baseUtcOffset,
             CultureInfo uiCulture,
             ref string? displayName
-        ) {
+        )
+        {
             // There are a few diffent ways we might show the display name depending on the data.
             // The algorithm used below should avoid duplicating the same words while still achieving the
             // goal of providing a unique, discoverable, and intuitive name.
@@ -251,7 +254,8 @@ namespace System
                     s_ZonesThatUseLocationName,
                     StringComparison.OrdinalIgnoreCase
                 )
-            ) {
+            )
+            {
                 displayName = $"{baseOffsetText} {genericLocationName}";
                 return;
             }
@@ -265,7 +269,8 @@ namespace System
                     CompareOptions.IgnoreCase | CompareOptions.IgnoreNonSpace
                 ) >= 0
                 && genericLocationName != null
-            ) {
+            )
+            {
                 // When an exemplar city is already part of the generic name,
                 // there's no need to repeat it again so just use the generic name.
 

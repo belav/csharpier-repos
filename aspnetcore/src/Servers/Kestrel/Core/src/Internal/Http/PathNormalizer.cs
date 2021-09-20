@@ -19,7 +19,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Http
             bool pathEncoded,
             string rawTarget,
             int queryLength
-        ) {
+        )
+        {
             int pathLength;
             if (pathEncoded)
             {
@@ -216,7 +217,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Http
                         if (
                             (ch2 == ByteDot && ch3 == ByteDot)
                             || (ch2 == ByteDot && ch3 == ByteSlash)
-                        ) {
+                        )
+                        {
                             return true;
                         }
                         break;
@@ -228,7 +230,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Http
                         if (
                             (ch2 == ByteDot && ch3 == ByteDot && ch4 == ByteSlash)
                             || (ch2 == ByteDot && ch3 == ByteSlash)
-                        ) {
+                        )
+                        {
                             return true;
                         }
                         break;

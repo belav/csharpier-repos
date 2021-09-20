@@ -18,7 +18,8 @@ namespace Microsoft.AspNetCore.Mvc.Infrastructure
         public ClientErrorResultFilter(
             IClientErrorFactory clientErrorFactory,
             ILogger<ClientErrorResultFilter> logger
-        ) {
+        )
+        {
             _clientErrorFactory =
                 clientErrorFactory ?? throw new ArgumentNullException(nameof(clientErrorFactory));
             _logger = logger ?? throw new ArgumentNullException(nameof(logger));

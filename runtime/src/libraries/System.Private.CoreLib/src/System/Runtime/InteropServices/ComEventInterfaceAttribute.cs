@@ -20,7 +20,8 @@ namespace System.Runtime.InteropServices
             [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicMethods)]
                 Type SourceInterface,
             [DynamicallyAccessedMembers(EventProviderAccessedMemberTypes)] Type EventProvider
-        ) {
+        )
+        {
             this.SourceInterface = SourceInterface;
             this.EventProvider = EventProvider;
         }

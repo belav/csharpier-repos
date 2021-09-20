@@ -19,7 +19,8 @@ namespace Microsoft.AspNetCore.Mvc.ApplicationModels
             if (
                 action.Controller.ApiExplorer.IsVisible == null
                 && action.ApiExplorer.IsVisible == null
-            ) {
+            )
+            {
                 // Enable ApiExplorer for the action if it wasn't already explicitly configured.
                 action.ApiExplorer.IsVisible = true;
             }

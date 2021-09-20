@@ -32,7 +32,8 @@ namespace System.IO.Packaging
             Uri sourceUri,
             PackageRelationshipSelectorType selectorType,
             string selectionCriteria
-        ) {
+        )
+        {
             if (sourceUri == null)
                 throw new ArgumentNullException(nameof(sourceUri));
 

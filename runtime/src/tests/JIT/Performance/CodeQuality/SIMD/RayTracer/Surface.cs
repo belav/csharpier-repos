@@ -16,7 +16,8 @@ internal class Surface
         Func<Vector, Color> Specular,
         Func<Vector, double> Reflect,
         double Roughness
-    ) {
+    )
+    {
         this.Diffuse = Diffuse;
         this.Specular = Specular;
         this.Reflect = Reflect;

@@ -40,7 +40,8 @@ namespace System.Dynamic
         public DynamicMetaObject FallbackBinaryOperation(
             DynamicMetaObject target,
             DynamicMetaObject arg
-        ) {
+        )
+        {
             return FallbackBinaryOperation(target, arg, null);
         }
 
@@ -66,7 +67,8 @@ namespace System.Dynamic
         public sealed override DynamicMetaObject Bind(
             DynamicMetaObject target,
             DynamicMetaObject[] args
-        ) {
+        )
+        {
             ContractUtils.RequiresNotNull(target, nameof(target));
             ContractUtils.RequiresNotNull(args, nameof(args));
             ContractUtils.Requires(args.Length == 1, nameof(args));

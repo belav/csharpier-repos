@@ -149,7 +149,8 @@ namespace System.Reflection.Metadata
         public static bool operator ==(
             AssemblyDefinitionHandle left,
             AssemblyDefinitionHandle right
-        ) {
+        )
+        {
             return left._rowId == right._rowId;
         }
 
@@ -172,7 +173,8 @@ namespace System.Reflection.Metadata
         public static bool operator !=(
             AssemblyDefinitionHandle left,
             AssemblyDefinitionHandle right
-        ) {
+        )
+        {
             return left._rowId != right._rowId;
         }
     }
@@ -237,7 +239,8 @@ namespace System.Reflection.Metadata
         public static bool operator ==(
             InterfaceImplementationHandle left,
             InterfaceImplementationHandle right
-        ) {
+        )
+        {
             return left._rowId == right._rowId;
         }
 
@@ -260,7 +263,8 @@ namespace System.Reflection.Metadata
         public static bool operator !=(
             InterfaceImplementationHandle left,
             InterfaceImplementationHandle right
-        ) {
+        )
+        {
             return left._rowId != right._rowId;
         }
     }
@@ -420,7 +424,8 @@ namespace System.Reflection.Metadata
         public static bool operator ==(
             MethodImplementationHandle left,
             MethodImplementationHandle right
-        ) {
+        )
+        {
             return left._rowId == right._rowId;
         }
 
@@ -443,7 +448,8 @@ namespace System.Reflection.Metadata
         public static bool operator !=(
             MethodImplementationHandle left,
             MethodImplementationHandle right
-        ) {
+        )
+        {
             return left._rowId != right._rowId;
         }
     }
@@ -508,7 +514,8 @@ namespace System.Reflection.Metadata
         public static bool operator ==(
             MethodSpecificationHandle left,
             MethodSpecificationHandle right
-        ) {
+        )
+        {
             return left._rowId == right._rowId;
         }
 
@@ -531,7 +538,8 @@ namespace System.Reflection.Metadata
         public static bool operator !=(
             MethodSpecificationHandle left,
             MethodSpecificationHandle right
-        ) {
+        )
+        {
             return left._rowId != right._rowId;
         }
     }
@@ -1178,7 +1186,8 @@ namespace System.Reflection.Metadata
         public static bool operator ==(
             PropertyDefinitionHandle left,
             PropertyDefinitionHandle right
-        ) {
+        )
+        {
             return left._rowId == right._rowId;
         }
 
@@ -1201,7 +1210,8 @@ namespace System.Reflection.Metadata
         public static bool operator !=(
             PropertyDefinitionHandle left,
             PropertyDefinitionHandle right
-        ) {
+        )
+        {
             return left._rowId != right._rowId;
         }
     }
@@ -1266,7 +1276,8 @@ namespace System.Reflection.Metadata
         public static bool operator ==(
             StandaloneSignatureHandle left,
             StandaloneSignatureHandle right
-        ) {
+        )
+        {
             return left._rowId == right._rowId;
         }
 
@@ -1289,7 +1300,8 @@ namespace System.Reflection.Metadata
         public static bool operator !=(
             StandaloneSignatureHandle left,
             StandaloneSignatureHandle right
-        ) {
+        )
+        {
             return left._rowId != right._rowId;
         }
     }
@@ -1521,7 +1533,8 @@ namespace System.Reflection.Metadata
         public static bool operator ==(
             GenericParameterConstraintHandle left,
             GenericParameterConstraintHandle right
-        ) {
+        )
+        {
             return left._rowId == right._rowId;
         }
 
@@ -1544,7 +1557,8 @@ namespace System.Reflection.Metadata
         public static bool operator !=(
             GenericParameterConstraintHandle left,
             GenericParameterConstraintHandle right
-        ) {
+        )
+        {
             return left._rowId != right._rowId;
         }
     }
@@ -1897,7 +1911,8 @@ namespace System.Reflection.Metadata
         public static bool operator ==(
             DeclarativeSecurityAttributeHandle left,
             DeclarativeSecurityAttributeHandle right
-        ) {
+        )
+        {
             return left._rowId == right._rowId;
         }
 
@@ -1920,7 +1935,8 @@ namespace System.Reflection.Metadata
         public static bool operator !=(
             DeclarativeSecurityAttributeHandle left,
             DeclarativeSecurityAttributeHandle right
-        ) {
+        )
+        {
             return left._rowId != right._rowId;
         }
     }
@@ -2402,7 +2418,8 @@ namespace System.Reflection.Metadata
             if (
                 (handle.VType & ~(HandleType.VirtualBit | HandleType.NonVirtualStringTypeMask))
                 != HandleType.String
-            ) {
+            )
+            {
                 Throw.InvalidCast();
             }
 
@@ -2590,14 +2607,16 @@ namespace System.Reflection.Metadata
         public static bool operator ==(
             NamespaceDefinitionHandle left,
             NamespaceDefinitionHandle right
-        ) {
+        )
+        {
             return left.Equals(right);
         }
 
         public static bool operator !=(
             NamespaceDefinitionHandle left,
             NamespaceDefinitionHandle right
-        ) {
+        )
+        {
             return !left.Equals(right);
         }
     }

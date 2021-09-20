@@ -822,7 +822,8 @@ namespace System.Numerics.Tests
             int bigShiftLoopLimit,
             int smallShift = 0,
             int smallShiftLoopLimit = 1
-        ) {
+        )
+        {
             BigInteger init = BigInteger.One << startShift;
 
             for (int i = 0; i < smallShiftLoopLimit; i++)
@@ -921,7 +922,8 @@ namespace System.Numerics.Tests
         private static void VerifySByteExplicitCastFromBigInteger(
             sbyte value,
             BigInteger bigInteger
-        ) {
+        )
+        {
             Assert.Equal(value, (sbyte)bigInteger);
         }
 
@@ -933,7 +935,8 @@ namespace System.Numerics.Tests
         private static void VerifyUInt16ExplicitCastFromBigInteger(
             ushort value,
             BigInteger bigInteger
-        ) {
+        )
+        {
             Assert.Equal(value, (ushort)bigInteger);
         }
 
@@ -945,7 +948,8 @@ namespace System.Numerics.Tests
         private static void VerifyInt16ExplicitCastFromBigInteger(
             short value,
             BigInteger bigInteger
-        ) {
+        )
+        {
             Assert.Equal(value, (short)bigInteger);
         }
 
@@ -957,7 +961,8 @@ namespace System.Numerics.Tests
         private static void VerifyUInt32ExplicitCastFromBigInteger(
             uint value,
             BigInteger bigInteger
-        ) {
+        )
+        {
             Assert.Equal(value, (uint)bigInteger);
         }
 
@@ -979,7 +984,8 @@ namespace System.Numerics.Tests
         private static void VerifyUInt64ExplicitCastFromBigInteger(
             ulong value,
             BigInteger bigInteger
-        ) {
+        )
+        {
             Assert.Equal(value, (ulong)bigInteger);
         }
 
@@ -1001,7 +1007,8 @@ namespace System.Numerics.Tests
         private static void VerifySingleExplicitCastFromBigInteger(
             float value,
             BigInteger bigInteger
-        ) {
+        )
+        {
             Assert.Equal((float)Math.Truncate(value), (float)bigInteger);
         }
 
@@ -1013,7 +1020,8 @@ namespace System.Numerics.Tests
         private static void VerifyDoubleExplicitCastFromBigInteger(
             double value,
             BigInteger bigInteger
-        ) {
+        )
+        {
             Assert.Equal(Math.Truncate(value), (double)bigInteger);
         }
 
@@ -1025,7 +1033,8 @@ namespace System.Numerics.Tests
         private static void VerifyDecimalExplicitCastFromBigInteger(
             decimal value,
             BigInteger bigInteger
-        ) {
+        )
+        {
             Assert.Equal(value, (decimal)bigInteger);
         }
 

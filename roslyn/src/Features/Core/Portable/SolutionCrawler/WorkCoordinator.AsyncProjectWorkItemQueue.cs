@@ -52,7 +52,8 @@ namespace Microsoft.CodeAnalysis.SolutionCrawler
                     ProjectDependencyGraph dependencyGraph,
                     IDiagnosticAnalyzerService? analyzerService,
                     out WorkItem workItem
-                ) {
+                )
+                {
                     // there must be at least one item in the map when this is called unless host is shutting down.
                     if (_projectWorkQueue.Count == 0)
                     {

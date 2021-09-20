@@ -23,7 +23,8 @@ public partial class ThreadPoolBoundHandleTests : FileCleanupTestBase
     private ThreadPoolBoundHandle CreateThreadPoolBoundHandle(
         [CallerMemberName] string memberName = null,
         [CallerLineNumber] int lineNumber = 0
-    ) {
+    )
+    {
         return CreateThreadPoolBoundHandle((SafeHandle)null, memberName, lineNumber);
     }
 
@@ -31,7 +32,8 @@ public partial class ThreadPoolBoundHandleTests : FileCleanupTestBase
         SafeHandle handle,
         [CallerMemberName] string memberName = null,
         [CallerLineNumber] int lineNumber = 0
-    ) {
+    )
+    {
         handle =
             handle
             ?? HandleFactory.CreateAsyncFileHandleForWrite(

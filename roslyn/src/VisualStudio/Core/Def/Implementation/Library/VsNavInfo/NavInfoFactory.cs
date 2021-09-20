@@ -37,7 +37,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Library.VsNavIn
             Project project,
             Compilation compilation,
             bool useExpandedHierarchy = false
-        ) {
+        )
+        {
             switch (symbol)
             {
                 case IAssemblySymbol assemblySymbol:
@@ -61,7 +62,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Library.VsNavIn
                 || symbol.Kind == SymbolKind.Field
                 || symbol.Kind == SymbolKind.Method
                 || symbol.Kind == SymbolKind.Property
-            ) {
+            )
+            {
                 return CreateForMember(symbol, project, compilation, useExpandedHierarchy);
             }
 
@@ -76,7 +78,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Library.VsNavIn
             Project project,
             Compilation compilation,
             bool useExpandedHierarchy = false
-        ) {
+        )
+        {
             return Create(
                 namespaceSymbol.ContainingAssembly,
                 project,
@@ -91,7 +94,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Library.VsNavIn
             Project project,
             Compilation compilation,
             bool useExpandedHierarchy = false
-        ) {
+        )
+        {
             while (typeSymbol != null)
             {
                 if (typeSymbol.SpecialType == SpecialType.System_Nullable_T)
@@ -119,7 +123,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Library.VsNavIn
                 || typeSymbol.TypeKind == TypeKind.Unknown
                 || typeSymbol.TypeKind == TypeKind.Dynamic
                 || typeSymbol.TypeKind == TypeKind.TypeParameter
-            ) {
+            )
+            {
                 return null;
             }
 
@@ -138,7 +143,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Library.VsNavIn
             Project project,
             Compilation compilation,
             bool useExpandedHierarchy = false
-        ) {
+        )
+        {
             memberSymbol = memberSymbol.OriginalDefinition;
 
             return Create(
@@ -160,7 +166,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Library.VsNavIn
             string namespaceName = null,
             string className = null,
             string memberName = null
-        ) {
+        )
+        {
             // useExpandedHierarchy is true when references are nested inside the project by the
             // hierarchy. In Class View, they are nested in the Project References node. In Object Browser,
             // they are not.
@@ -243,7 +250,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Library.VsNavIn
             if (
                 hierarchy.TryGetParentHierarchy(out var parentHierarchy)
                 && !(parentHierarchy is IVsSolution)
-            ) {
+            )
+            {
                 var builder = SharedPools.Default<StringBuilder>().AllocateAndClear();
                 builder.Append(result);
 

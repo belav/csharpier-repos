@@ -28,7 +28,8 @@ namespace System.DirectoryServices.Design
             ITypeDescriptorContext context,
             CultureInfo culture,
             object? value
-        ) {
+        )
+        {
             if (value != null && value is string)
             {
                 string text = ((string)value).Trim();
@@ -59,7 +60,8 @@ namespace System.DirectoryServices.Design
             CultureInfo culture,
             object? value,
             Type? destinationType
-        ) {
+        )
+        {
             if (destinationType != null && destinationType == typeof(string))
             {
                 if (value != null)

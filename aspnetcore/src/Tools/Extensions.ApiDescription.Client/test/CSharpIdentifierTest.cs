@@ -52,7 +52,8 @@ namespace Microsoft.Extensions.ApiDescription.Client
         public void SanitizeIdentifier_AddsUnderscore_WhenItShould(
             string input,
             string expectdOutput
-        ) {
+        )
+        {
             // Arrange and Act
             var output = CSharpIdentifier.SanitizeIdentifier(input);
 
@@ -68,7 +69,8 @@ namespace Microsoft.Extensions.ApiDescription.Client
         public void SanitizeIdentifier_DoesNotAddUnderscore_WhenValidStartCharacter(
             string input,
             string expectdOutput
-        ) {
+        )
+        {
             // Arrange and Act
             var output = CSharpIdentifier.SanitizeIdentifier(input);
 
@@ -86,7 +88,8 @@ namespace Microsoft.Extensions.ApiDescription.Client
         public void SanitizeIdentifier_DoesNotAddUnderscore_WhenInvalidCharacter(
             string input,
             string expectdOutput
-        ) {
+        )
+        {
             // Arrange and Act
             var output = CSharpIdentifier.SanitizeIdentifier(input);
 
@@ -104,7 +107,8 @@ namespace Microsoft.Extensions.ApiDescription.Client
         public void SanitizeIdentifier_ReplacesInvalidCharacters_WhenNotFirst(
             string input,
             string expectdOutput
-        ) {
+        )
+        {
             // Arrange and Act
             var output = CSharpIdentifier.SanitizeIdentifier(input);
 

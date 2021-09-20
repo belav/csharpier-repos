@@ -107,7 +107,8 @@ namespace Castle.DynamicProxy.Contributors
             MetaMethod method,
             ClassEmitter @class,
             OverrideMethodDelegate overrideMethod
-        ) {
+        )
+        {
             if (!method.Proxyable)
             {
                 return new ForwardingMethodGenerator(

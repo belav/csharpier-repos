@@ -34,7 +34,8 @@ namespace Microsoft.CodeAnalysis.Razor
         public void GlobalQualifiedTypeNameRewriter_CanQualifyNames(
             string original,
             string expected
-        ) {
+        )
+        {
             // Arrange
             var visitor = new GlobalQualifiedTypeNameRewriter(
                 new[] { "TItem1", "TItem2", "TItem3" }

@@ -52,7 +52,8 @@ namespace Microsoft.CodeAnalysis.CodeRefactorings
         public CodeRefactoringService(
             [ImportMany]
                 IEnumerable<Lazy<CodeRefactoringProvider, CodeChangeProviderMetadata>> providers
-        ) {
+        )
+        {
             // convert set of all code refactoring providers into a map from language to a lazy initialized list of ordered providers.
             _lazyLanguageToProvidersMap = new Lazy<
                 ImmutableDictionary<string, Lazy<ImmutableArray<CodeRefactoringProvider>>>
@@ -93,7 +94,8 @@ namespace Microsoft.CodeAnalysis.CodeRefactorings
             Lazy<CodeRefactoringProvider, OrderableLanguageMetadata>
         > DistributeLanguages(
             IEnumerable<Lazy<CodeRefactoringProvider, CodeChangeProviderMetadata>> providers
-        ) {
+        )
+        {
             foreach (var provider in providers)
             {
                 foreach (var language in provider.Metadata.Languages)
@@ -127,7 +129,8 @@ namespace Microsoft.CodeAnalysis.CodeRefactorings
             var allRefactorings = ImmutableArray<CodeRefactoringProvider>.Empty;
             if (
                 LanguageToProvidersMap.TryGetValue(document.Project.Language, out var lazyProviders)
-            ) {
+            )
+            {
                 allRefactorings = lazyProviders.Value;
             }
 
@@ -138,7 +141,8 @@ namespace Microsoft.CodeAnalysis.CodeRefactorings
             Document document,
             TextSpan state,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var extensionManager =
                 document.Project.Solution.Workspace.Services.GetRequiredService<IExtensionManager>();
 
@@ -193,13 +197,15 @@ namespace Microsoft.CodeAnalysis.CodeRefactorings
             bool isBlocking,
             Func<string, IDisposable?> addOperationScope,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             using (
                 Logger.LogBlock(
                     FunctionId.Refactoring_CodeRefactoringService_GetRefactoringsAsync,
                     cancellationToken
                 )
-            ) {
+            )
+            {
                 var extensionManager =
                     document.Project.Solution.Workspace.Services.GetRequiredService<IExtensionManager>();
                 using var _ = ArrayBuilder<Task<CodeRefactoring?>>.GetInstance(out var tasks);
@@ -223,7 +229,8 @@ namespace Microsoft.CodeAnalysis.CodeRefactorings
                                         providerName,
                                         cancellationToken
                                     )
-                                ) {
+                                )
+                                {
                                     return GetRefactoringFromProviderAsync(
                                         document,
                                         state,
@@ -253,7 +260,8 @@ namespace Microsoft.CodeAnalysis.CodeRefactorings
             IExtensionManager extensionManager,
             bool isBlocking,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             cancellationToken.ThrowIfCancellationRequested();
             if (extensionManager.IsDisabled(provider))
             {
@@ -324,7 +332,8 @@ namespace Microsoft.CodeAnalysis.CodeRefactorings
                     project.AnalyzerReferences,
                     out var refactorings
                 )
-            ) {
+            )
+            {
                 return refactorings.Value;
             }
 
@@ -375,7 +384,8 @@ namespace Microsoft.CodeAnalysis.CodeRefactorings
             protected override bool SupportsLanguage(
                 ExportCodeRefactoringProviderAttribute exportAttribute,
                 string language
-            ) {
+            )
+            {
                 return exportAttribute.Languages == null
                     || exportAttribute.Languages.Length == 0
                     || exportAttribute.Languages.Contains(language);
@@ -384,7 +394,8 @@ namespace Microsoft.CodeAnalysis.CodeRefactorings
             protected override bool TryGetExtensionsFromReference(
                 AnalyzerReference reference,
                 out ImmutableArray<CodeRefactoringProvider> extensions
-            ) {
+            )
+            {
                 // check whether the analyzer reference knows how to return fixers directly.
                 if (reference is ICodeRefactoringProviderFactory codeRefactoringProviderFactory)
                 {

@@ -19,7 +19,8 @@ namespace Microsoft.CodeAnalysis.Editor.EditorConfigSettings.Data
             ReportDiagnostic effectiveSeverity,
             AnalyzerSettingsUpdater settingsUpdater,
             Language language
-        ) {
+        )
+        {
             _descriptor = descriptor;
             _settingsUpdater = settingsUpdater;
             DiagnosticSeverity severity = default;

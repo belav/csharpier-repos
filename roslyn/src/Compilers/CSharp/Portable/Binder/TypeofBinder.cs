@@ -63,7 +63,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                 ExpressionSyntax typeSyntax,
                 out Dictionary<GenericNameSyntax, bool> allowedMap,
                 out bool isUnboundGenericType
-            ) {
+            )
+            {
                 OpenTypeVisitor visitor = new OpenTypeVisitor();
                 visitor.Visit(typeSyntax);
                 allowedMap = visitor._allowedMap;

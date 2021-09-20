@@ -281,7 +281,8 @@ namespace System.Data.Common
             object store,
             BitArray nullbits,
             int storeIndex
-        ) {
+        )
+        {
             ushort[] typedStore = (ushort[])store;
             typedStore[storeIndex] = _values[record];
             nullbits.Set(storeIndex, !HasValue(record));

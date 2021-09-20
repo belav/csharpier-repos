@@ -622,7 +622,8 @@ class Program
         protected override bool CompilationSucceeded(
             Compilation compilation,
             Stream temporaryStream
-        ) {
+        )
+        {
             var langCompilation = compilation;
             static bool isProblem(Diagnostic d) => d.Severity >= DiagnosticSeverity.Warning;
             return !langCompilation.GetDiagnostics().Any(isProblem)

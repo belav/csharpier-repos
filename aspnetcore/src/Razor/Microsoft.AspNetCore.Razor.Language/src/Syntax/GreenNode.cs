@@ -441,7 +441,8 @@ namespace Microsoft.AspNetCore.Razor.Language.Syntax
                     node1Child != null
                     && node2Child != null
                     && !node1Child.IsEquivalentTo(node2Child)
-                ) {
+                )
+                {
                     return false;
                 }
             }
@@ -454,7 +455,8 @@ namespace Microsoft.AspNetCore.Razor.Language.Syntax
         public virtual GreenNode CreateList(
             IEnumerable<GreenNode> nodes,
             bool alwaysCreateListNode = false
-        ) {
+        )
+        {
             if (nodes == null)
             {
                 return null;

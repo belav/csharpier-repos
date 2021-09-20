@@ -61,7 +61,8 @@ namespace Microsoft.CodeAnalysis.RemoveUnusedVariable
             ImmutableArray<Diagnostic> diagnostics,
             SyntaxEditor syntaxEditor,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var nodesToRemove = new HashSet<SyntaxNode>();
 
             // Create actions and keep their SpanStart.
@@ -149,7 +150,8 @@ namespace Microsoft.CodeAnalysis.RemoveUnusedVariable
             SyntaxEditor editor,
             SyntaxNode node,
             ISyntaxFactsService syntaxFacts
-        ) {
+        )
+        {
             var localDeclaration = node.GetAncestorOrThis<TLocalDeclarationStatement>();
             var removeOptions = CreateSyntaxRemoveOptions(localDeclaration, syntaxFacts);
             editor.RemoveNode(node, removeOptions);
@@ -158,7 +160,8 @@ namespace Microsoft.CodeAnalysis.RemoveUnusedVariable
         private static SyntaxRemoveOptions CreateSyntaxRemoveOptions(
             TLocalDeclarationStatement localDeclaration,
             ISyntaxFactsService syntaxFacts
-        ) {
+        )
+        {
             var removeOptions = SyntaxGenerator.DefaultRemoveOptions;
 
             if (localDeclaration != null)
@@ -233,13 +236,12 @@ namespace Microsoft.CodeAnalysis.RemoveUnusedVariable
 
         private class MyCodeAction : CodeAction.DocumentChangeAction
         {
-            public MyCodeAction(
-                Func<CancellationToken, Task<Document>> createChangedDocument
-            ) : base(
-                FeaturesResources.Remove_unused_variable,
-                createChangedDocument,
-                FeaturesResources.Remove_unused_variable
-            ) { }
+            public MyCodeAction(Func<CancellationToken, Task<Document>> createChangedDocument)
+                : base(
+                    FeaturesResources.Remove_unused_variable,
+                    createChangedDocument,
+                    FeaturesResources.Remove_unused_variable
+                ) { }
         }
     }
 }

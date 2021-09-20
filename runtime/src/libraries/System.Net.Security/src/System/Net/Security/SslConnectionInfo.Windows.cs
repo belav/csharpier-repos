@@ -8,7 +8,8 @@ namespace System.Net.Security
         public SslConnectionInfo(
             SecPkgContext_ConnectionInfo interopConnectionInfo,
             TlsCipherSuite cipherSuite
-        ) {
+        )
+        {
             Protocol = interopConnectionInfo.Protocol;
             DataCipherAlg = interopConnectionInfo.DataCipherAlg;
             DataKeySize = interopConnectionInfo.DataKeySize;

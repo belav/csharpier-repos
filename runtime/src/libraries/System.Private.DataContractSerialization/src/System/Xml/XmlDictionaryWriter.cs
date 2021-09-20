@@ -25,7 +25,8 @@ namespace System.Xml
         public static XmlDictionaryWriter CreateBinaryWriter(
             Stream stream,
             IXmlDictionary? dictionary
-        ) {
+        )
+        {
             return CreateBinaryWriter(stream, dictionary, null);
         }
 
@@ -33,7 +34,8 @@ namespace System.Xml
             Stream stream,
             IXmlDictionary? dictionary,
             XmlBinaryWriterSession? session
-        ) {
+        )
+        {
             return CreateBinaryWriter(stream, dictionary, session, true);
         }
 
@@ -42,7 +44,8 @@ namespace System.Xml
             IXmlDictionary? dictionary,
             XmlBinaryWriterSession? session,
             bool ownsStream
-        ) {
+        )
+        {
             XmlBinaryWriter writer = new XmlBinaryWriter();
             writer.SetOutput(stream, dictionary, session, ownsStream);
             return writer;
@@ -63,7 +66,8 @@ namespace System.Xml
             Stream stream,
             Encoding encoding,
             bool ownsStream
-        ) {
+        )
+        {
             XmlUTF8TextWriter writer = new XmlUTF8TextWriter();
             writer.SetOutput(stream, encoding, ownsStream);
             var asyncWriter = new XmlDictionaryAsyncCheckWriter(writer);
@@ -75,7 +79,8 @@ namespace System.Xml
             Encoding encoding,
             int maxSizeInBytes,
             string startInfo
-        ) {
+        )
+        {
             return CreateMtomWriter(
                 stream,
                 encoding,
@@ -97,7 +102,8 @@ namespace System.Xml
             string? startUri,
             bool writeMessageHeaders,
             bool ownsStream
-        ) {
+        )
+        {
             throw new PlatformNotSupportedException(SR.PlatformNotSupported_MtomEncoding);
         }
 
@@ -127,7 +133,8 @@ namespace System.Xml
         public void WriteStartElement(
             XmlDictionaryString localName,
             XmlDictionaryString? namespaceUri
-        ) {
+        )
+        {
             WriteStartElement((string?)null, localName, namespaceUri);
         }
 
@@ -135,7 +142,8 @@ namespace System.Xml
             string? prefix,
             XmlDictionaryString localName,
             XmlDictionaryString? namespaceUri
-        ) {
+        )
+        {
             WriteStartElement(
                 prefix,
                 XmlDictionaryString.GetString(localName),
@@ -146,7 +154,8 @@ namespace System.Xml
         public void WriteStartAttribute(
             XmlDictionaryString localName,
             XmlDictionaryString? namespaceUri
-        ) {
+        )
+        {
             WriteStartAttribute((string?)null, localName, namespaceUri);
         }
 
@@ -154,7 +163,8 @@ namespace System.Xml
             string? prefix,
             XmlDictionaryString localName,
             XmlDictionaryString? namespaceUri
-        ) {
+        )
+        {
             WriteStartAttribute(
                 prefix,
                 XmlDictionaryString.GetString(localName),
@@ -166,7 +176,8 @@ namespace System.Xml
             XmlDictionaryString localName,
             XmlDictionaryString? namespaceUri,
             string? value
-        ) {
+        )
+        {
             WriteAttributeString((string?)null, localName, namespaceUri, value);
         }
 
@@ -207,7 +218,8 @@ namespace System.Xml
         public virtual void WriteXmlAttribute(
             XmlDictionaryString localName,
             XmlDictionaryString? value
-        ) {
+        )
+        {
             WriteXmlAttribute(
                 XmlDictionaryString.GetString(localName),
                 XmlDictionaryString.GetString(value)
@@ -219,7 +231,8 @@ namespace System.Xml
             XmlDictionaryString localName,
             XmlDictionaryString? namespaceUri,
             string? value
-        ) {
+        )
+        {
             WriteStartAttribute(prefix, localName, namespaceUri);
             WriteString(value);
             WriteEndAttribute();
@@ -229,7 +242,8 @@ namespace System.Xml
             XmlDictionaryString localName,
             XmlDictionaryString? namespaceUri,
             string? value
-        ) {
+        )
+        {
             WriteElementString((string?)null, localName, namespaceUri, value);
         }
 
@@ -238,7 +252,8 @@ namespace System.Xml
             XmlDictionaryString localName,
             XmlDictionaryString? namespaceUri,
             string? value
-        ) {
+        )
+        {
             WriteStartElement(prefix, localName, namespaceUri);
             WriteString(value);
             WriteEndElement();
@@ -252,7 +267,8 @@ namespace System.Xml
         public virtual void WriteQualifiedName(
             XmlDictionaryString localName,
             XmlDictionaryString? namespaceUri
-        ) {
+        )
+        {
             if (localName == null)
                 throw System.Runtime.Serialization.DiagnosticUtility.ExceptionUtility.ThrowHelperError(
                     new ArgumentNullException(nameof(localName))
@@ -334,7 +350,8 @@ namespace System.Xml
             Stream stream,
             bool includeComments,
             string[]? inclusivePrefixes
-        ) {
+        )
+        {
             throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new NotSupportedException());
         }
 
@@ -350,7 +367,8 @@ namespace System.Xml
             if (
                 reader.TryGetLocalNameAsDictionaryString(out localName)
                 && reader.TryGetNamespaceUriAsDictionaryString(out namespaceUri)
-            ) {
+            )
+            {
                 WriteStartElement(reader.Prefix, localName, namespaceUri);
             }
             else
@@ -366,7 +384,8 @@ namespace System.Xml
                         if (
                             reader.TryGetLocalNameAsDictionaryString(out localName)
                             && reader.TryGetNamespaceUriAsDictionaryString(out namespaceUri)
-                        ) {
+                        )
+                        {
                             WriteStartAttribute(reader.Prefix, localName, namespaceUri);
                         }
                         else
@@ -405,7 +424,8 @@ namespace System.Xml
             string localName,
             string namespaceUri,
             Type type
-        ) {
+        )
+        {
             if (type == typeof(bool))
                 BooleanArrayHelperWithString.Instance.WriteArray(
                     this,
@@ -499,7 +519,8 @@ namespace System.Xml
             XmlDictionaryString localName,
             XmlDictionaryString namespaceUri,
             Type type
-        ) {
+        )
+        {
             if (type == typeof(bool))
                 BooleanArrayHelperWithDictionaryString.Instance.WriteArray(
                     this,
@@ -641,7 +662,8 @@ namespace System.Xml
                     nodeType == XmlNodeType.Text
                     || nodeType == XmlNodeType.Whitespace
                     || nodeType == XmlNodeType.SignificantWhitespace
-                ) {
+                )
+                {
                     // This will advance if necessary, so we don't need to call Read() explicitly
                     WriteTextNode(reader, false);
                 }
@@ -728,7 +750,8 @@ namespace System.Xml
             bool[] array,
             int offset,
             int count
-        ) {
+        )
+        {
             CheckArray(array, offset, count);
             for (int i = 0; i < count; i++)
             {
@@ -745,7 +768,8 @@ namespace System.Xml
             bool[] array,
             int offset,
             int count
-        ) {
+        )
+        {
             WriteArray(
                 prefix,
                 XmlDictionaryString.GetString(localName),
@@ -764,7 +788,8 @@ namespace System.Xml
             short[] array,
             int offset,
             int count
-        ) {
+        )
+        {
             CheckArray(array, offset, count);
             for (int i = 0; i < count; i++)
             {
@@ -781,7 +806,8 @@ namespace System.Xml
             short[] array,
             int offset,
             int count
-        ) {
+        )
+        {
             WriteArray(
                 prefix,
                 XmlDictionaryString.GetString(localName),
@@ -800,7 +826,8 @@ namespace System.Xml
             int[] array,
             int offset,
             int count
-        ) {
+        )
+        {
             CheckArray(array, offset, count);
             for (int i = 0; i < count; i++)
             {
@@ -817,7 +844,8 @@ namespace System.Xml
             int[] array,
             int offset,
             int count
-        ) {
+        )
+        {
             WriteArray(
                 prefix,
                 XmlDictionaryString.GetString(localName),
@@ -836,7 +864,8 @@ namespace System.Xml
             long[] array,
             int offset,
             int count
-        ) {
+        )
+        {
             CheckArray(array, offset, count);
             for (int i = 0; i < count; i++)
             {
@@ -853,7 +882,8 @@ namespace System.Xml
             long[] array,
             int offset,
             int count
-        ) {
+        )
+        {
             WriteArray(
                 prefix,
                 XmlDictionaryString.GetString(localName),
@@ -872,7 +902,8 @@ namespace System.Xml
             float[] array,
             int offset,
             int count
-        ) {
+        )
+        {
             CheckArray(array, offset, count);
             for (int i = 0; i < count; i++)
             {
@@ -889,7 +920,8 @@ namespace System.Xml
             float[] array,
             int offset,
             int count
-        ) {
+        )
+        {
             WriteArray(
                 prefix,
                 XmlDictionaryString.GetString(localName),
@@ -908,7 +940,8 @@ namespace System.Xml
             double[] array,
             int offset,
             int count
-        ) {
+        )
+        {
             CheckArray(array, offset, count);
             for (int i = 0; i < count; i++)
             {
@@ -925,7 +958,8 @@ namespace System.Xml
             double[] array,
             int offset,
             int count
-        ) {
+        )
+        {
             WriteArray(
                 prefix,
                 XmlDictionaryString.GetString(localName),
@@ -944,7 +978,8 @@ namespace System.Xml
             decimal[] array,
             int offset,
             int count
-        ) {
+        )
+        {
             CheckArray(array, offset, count);
             for (int i = 0; i < count; i++)
             {
@@ -961,7 +996,8 @@ namespace System.Xml
             decimal[] array,
             int offset,
             int count
-        ) {
+        )
+        {
             WriteArray(
                 prefix,
                 XmlDictionaryString.GetString(localName),
@@ -980,7 +1016,8 @@ namespace System.Xml
             DateTime[] array,
             int offset,
             int count
-        ) {
+        )
+        {
             CheckArray(array, offset, count);
             for (int i = 0; i < count; i++)
             {
@@ -997,7 +1034,8 @@ namespace System.Xml
             DateTime[] array,
             int offset,
             int count
-        ) {
+        )
+        {
             WriteArray(
                 prefix,
                 XmlDictionaryString.GetString(localName),
@@ -1016,7 +1054,8 @@ namespace System.Xml
             Guid[] array,
             int offset,
             int count
-        ) {
+        )
+        {
             CheckArray(array, offset, count);
             for (int i = 0; i < count; i++)
             {
@@ -1033,7 +1072,8 @@ namespace System.Xml
             Guid[] array,
             int offset,
             int count
-        ) {
+        )
+        {
             WriteArray(
                 prefix,
                 XmlDictionaryString.GetString(localName),
@@ -1052,7 +1092,8 @@ namespace System.Xml
             TimeSpan[] array,
             int offset,
             int count
-        ) {
+        )
+        {
             CheckArray(array, offset, count);
             for (int i = 0; i < count; i++)
             {
@@ -1069,7 +1110,8 @@ namespace System.Xml
             TimeSpan[] array,
             int offset,
             int count
-        ) {
+        )
+        {
             WriteArray(
                 prefix,
                 XmlDictionaryString.GetString(localName),
@@ -1157,7 +1199,8 @@ namespace System.Xml
                 string? pubid,
                 string? sysid,
                 string? subset
-            ) {
+            )
+            {
                 _writer.WriteDocType(name, pubid, sysid, subset);
             }
 
@@ -1226,7 +1269,8 @@ namespace System.Xml
                 string? prefix,
                 string localName,
                 string? namespaceUri
-            ) {
+            )
+            {
                 _writer.WriteStartAttribute(prefix, localName, namespaceUri);
                 _prefix++;
             }
@@ -1245,7 +1289,8 @@ namespace System.Xml
                 string? prefix,
                 string localName,
                 string? namespaceUri
-            ) {
+            )
+            {
                 _writer.WriteStartElement(prefix, localName, namespaceUri);
                 _depth++;
                 _prefix = 1;

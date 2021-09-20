@@ -41,13 +41,14 @@ namespace Microsoft.EntityFrameworkCore.Design.Internal
             Assembly assembly,
             Assembly startupAssembly,
             string[]? args
-        ) : this(
-            reporter,
-            assembly,
-            startupAssembly,
-            args,
-            new AppServiceProviderFactory(startupAssembly, reporter)
-        ) { }
+        )
+            : this(
+                reporter,
+                assembly,
+                startupAssembly,
+                args,
+                new AppServiceProviderFactory(startupAssembly, reporter)
+            ) { }
 
         /// <summary>
         ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -61,7 +62,8 @@ namespace Microsoft.EntityFrameworkCore.Design.Internal
             Assembly startupAssembly,
             string[]? args,
             AppServiceProviderFactory appServicesFactory
-        ) {
+        )
+        {
             Check.NotNull(reporter, nameof(reporter));
             Check.NotNull(assembly, nameof(assembly));
             Check.NotNull(startupAssembly, nameof(startupAssembly));
@@ -262,7 +264,8 @@ namespace Microsoft.EntityFrameworkCore.Design.Internal
             if (
                 ((IDatabaseFacadeDependenciesAccessor)context.Database).Dependencies
                 is IRelationalDatabaseFacadeDependencies
-            ) {
+            )
+            {
                 try
                 {
                     var connection = context.Database.GetDbConnection();
@@ -290,7 +293,8 @@ namespace Microsoft.EntityFrameworkCore.Design.Internal
         private Func<DbContext>? FindContextFromRuntimeDbContextFactory(
             IServiceProvider appServices,
             Type contextType
-        ) {
+        )
+        {
             var factoryInterface = typeof(IDbContextFactory<>).MakeGenericType(contextType);
             var service = appServices.GetService(factoryInterface);
             return service == null
@@ -383,7 +387,8 @@ namespace Microsoft.EntityFrameworkCore.Design.Internal
             IDictionary<Type, Func<DbContext>> types,
             string name,
             bool ignoreCase = false
-        ) {
+        )
+        {
             var comparisonType = ignoreCase
                 ? StringComparison.OrdinalIgnoreCase
                 : StringComparison.Ordinal;

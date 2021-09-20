@@ -37,7 +37,8 @@ namespace RoutingWebSite
                             || controllerToRemove.Actions.Contains(
                                 controllerActionDescriptor.ActionName
                             )
-                        ) {
+                        )
+                        {
                             context.Results.Remove(item);
                         }
                     }

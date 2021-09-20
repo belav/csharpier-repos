@@ -32,11 +32,8 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking
         ///     doing so can result in application failures when updating to a new Entity Framework Core release.
         /// </summary>
         [EntityFrameworkInternal]
-        protected NavigationEntry(
-            InternalEntityEntry internalEntry,
-            string name,
-            bool collection
-        ) : this(internalEntry, GetNavigation(internalEntry, name, collection)) { }
+        protected NavigationEntry(InternalEntityEntry internalEntry, string name, bool collection)
+            : this(internalEntry, GetNavigation(internalEntry, name, collection)) { }
 
         /// <summary>
         ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -45,16 +42,15 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking
         ///     doing so can result in application failures when updating to a new Entity Framework Core release.
         /// </summary>
         [EntityFrameworkInternal]
-        protected NavigationEntry(
-            InternalEntityEntry internalEntry,
-            INavigationBase navigation
-        ) : base(internalEntry, navigation) { }
+        protected NavigationEntry(InternalEntityEntry internalEntry, INavigationBase navigation)
+            : base(internalEntry, navigation) { }
 
         private static INavigationBase GetNavigation(
             InternalEntityEntry internalEntry,
             string name,
             bool collection
-        ) {
+        )
+        {
             var navigation =
                 (INavigationBase?)internalEntry.EntityType.FindNavigation(name)
                 ?? internalEntry.EntityType.FindSkipNavigation(name);

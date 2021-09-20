@@ -103,7 +103,8 @@ namespace Moq.Tests
         public void GetParameterTypeList_formats_parameter_lists_correctly(
             string methodName,
             string expected
-        ) {
+        )
+        {
             var actual = GetParameterTypeList(methodName);
             Assert.Equal(expected, actual);
         }

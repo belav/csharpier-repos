@@ -38,7 +38,8 @@ internal static partial class Interop
             byte[]? secretPrepend,
             byte[]? secretAppend,
             SecretAgreementFlags flags
-        ) {
+        )
+        {
             // First marshal the hash algoritm
             IntPtr hashAlgorithmString = IntPtr.Zero;
 
@@ -62,7 +63,8 @@ internal static partial class Interop
                         byte* pHmacKey = hmacKey,
                             pSecretPrepend = secretPrepend,
                             pSecretAppend = secretAppend
-                    ) {
+                    )
+                    {
                         //
                         // Now marshal the other parameters
                         //
@@ -127,7 +129,8 @@ internal static partial class Interop
             string kdf,
             ReadOnlySpan<NCryptBuffer> parameters,
             SecretAgreementFlags flags
-        ) {
+        )
+        {
             fixed (NCryptBuffer* pParameters = &MemoryMarshal.GetReference(parameters))
             {
                 NCryptBufferDesc parameterDesc = default;
@@ -184,7 +187,8 @@ internal static partial class Interop
             byte[]? secretPrepend,
             byte[]? secretAppend,
             SecretAgreementFlags flags
-        ) {
+        )
+        {
             return DeriveKeyMaterial(
                 secretAgreement,
                 BCryptNative.KeyDerivationFunction.Hash,
@@ -206,7 +210,8 @@ internal static partial class Interop
             byte[]? secretPrepend,
             byte[]? secretAppend,
             SecretAgreementFlags flags
-        ) {
+        )
+        {
             return DeriveKeyMaterial(
                 secretAgreement,
                 BCryptNative.KeyDerivationFunction.Hmac,
@@ -226,13 +231,15 @@ internal static partial class Interop
             byte[] label,
             byte[] seed,
             SecretAgreementFlags flags
-        ) {
+        )
+        {
             Span<NCryptBuffer> buffers = stackalloc NCryptBuffer[2];
 
             fixed (
                 byte* pLabel = label,
                     pSeed = seed
-            ) {
+            )
+            {
                 NCryptBuffer labelBuffer = default;
                 labelBuffer.cbBuffer = label.Length;
                 labelBuffer.BufferType = BufferType.KdfTlsLabel;

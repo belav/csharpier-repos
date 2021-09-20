@@ -29,7 +29,8 @@ namespace Microsoft.DotNet.CoreSetup.Test
         public RepoDirectoriesProvider(
             string builtDotnet = null,
             string microsoftNETCoreAppVersion = null
-        ) {
+        )
+        {
             RepoRoot = GetRepoRootDirectory();
             BaseArtifactsFolder = Path.Combine(RepoRoot, "artifacts");
 

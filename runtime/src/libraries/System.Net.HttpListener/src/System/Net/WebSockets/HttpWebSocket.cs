@@ -35,7 +35,8 @@ namespace System.Net.WebSockets
             string? clientSecWebSocketProtocol,
             string? subProtocol,
             out string acceptProtocol
-        ) {
+        )
+        {
             acceptProtocol = string.Empty;
             if (string.IsNullOrEmpty(clientSecWebSocketProtocol))
             {
@@ -80,7 +81,8 @@ namespace System.Net.WebSockets
                         currentRequestProtocol,
                         StringComparison.OrdinalIgnoreCase
                     )
-                ) {
+                )
+                {
                     return true;
                 }
             }
@@ -100,7 +102,8 @@ namespace System.Net.WebSockets
             int receiveBufferSize,
             int sendBufferSize,
             TimeSpan keepAliveInterval
-        ) {
+        )
+        {
             if (subProtocol != null)
             {
                 WebSocketValidate.ValidateSubprotocol(subProtocol);
@@ -212,7 +215,8 @@ namespace System.Net.WebSockets
                     SupportedVersion,
                     StringComparison.OrdinalIgnoreCase
                 )
-            ) {
+            )
+            {
                 throw new WebSocketException(
                     WebSocketError.UnsupportedVersion,
                     SR.Format(

@@ -52,7 +52,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             TypeCompilationState compilationState,
             BindingDiagnosticBag diagnostics,
             out IteratorStateMachine stateMachineType
-        ) {
+        )
+        {
             TypeWithAnnotations elementType = method.IteratorElementTypeWithAnnotations;
             if (elementType.IsDefault || method.IsAsync)
             {
@@ -355,7 +356,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             ArrayBuilder<BoundStatement> bodyBuilder,
             NamedTypeSymbol frameType,
             LocalSymbol stateMachineLocal
-        ) {
+        )
+        {
             // var stateMachineLocal = new IteratorImplementationClass(N)
             // where N is either 0 (if we're producing an enumerator) or -2 (if we're producing an enumerable)
             int initialState = _isEnumerable
@@ -373,7 +375,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             LocalSymbol stateMachineVariable,
             NamedTypeSymbol frameType,
             IReadOnlyDictionary<Symbol, CapturedSymbolReplacement> proxies
-        ) {
+        )
+        {
             var bodyBuilder = ArrayBuilder<BoundStatement>.GetInstance();
 
             bodyBuilder.Add(GenerateParameterStorage(stateMachineVariable, proxies));
@@ -387,7 +390,8 @@ namespace Microsoft.CodeAnalysis.CSharp
         private void GenerateMoveNextAndDispose(
             SynthesizedImplementationMethod moveNextMethod,
             SynthesizedImplementationMethod disposeMethod
-        ) {
+        )
+        {
             var rewriter = new IteratorMethodToStateMachineRewriter(
                 F,
                 method,

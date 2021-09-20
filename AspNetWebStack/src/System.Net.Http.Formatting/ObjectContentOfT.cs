@@ -37,10 +37,7 @@ namespace System.Net.Http
         /// <param name="formatter">The formatter to use when serializing the value.</param>
         /// <param name="mediaType">The authoritative value of the content's Content-Type header. Can be <c>null</c> in which case the
         /// <paramref name="formatter">formatter's</paramref> default content type will be used.</param>
-        public ObjectContent(
-            T value,
-            MediaTypeFormatter formatter,
-            MediaTypeHeaderValue mediaType
-        ) : base(typeof(T), value, formatter, mediaType) { }
+        public ObjectContent(T value, MediaTypeFormatter formatter, MediaTypeHeaderValue mediaType)
+            : base(typeof(T), value, formatter, mediaType) { }
     }
 }

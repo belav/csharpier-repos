@@ -129,7 +129,8 @@ namespace JIT.HardwareIntrinsics.Arm
                     (alignment != 16 && alignment != 8)
                     || (alignment * 2) < sizeOfinArray
                     || (alignment * 2) < sizeOfoutArray
-                ) {
+                )
+                {
                     throw new ArgumentException("Invalid value of alignment");
                 }
 
@@ -188,7 +189,8 @@ namespace JIT.HardwareIntrinsics.Arm
 
             public void RunStructFldScenario(
                 ImmUnaryOpTest__ShiftLeftLogical_Vector64_Byte_1 testClass
-            ) {
+            )
+            {
                 var result = AdvSimd.ShiftLeftLogical(_fld, 1);
 
                 Unsafe.Write(testClass._dataTable.outArrayPtr, result);
@@ -197,7 +199,8 @@ namespace JIT.HardwareIntrinsics.Arm
 
             public void RunStructFldScenario_Load(
                 ImmUnaryOpTest__ShiftLeftLogical_Vector64_Byte_1 testClass
-            ) {
+            )
+            {
                 fixed (Vector64<Byte>* pFld = &_fld)
                 {
                     var result = AdvSimd.ShiftLeftLogical(AdvSimd.LoadVector64((Byte*)(pFld)), 1);
@@ -479,7 +482,8 @@ namespace JIT.HardwareIntrinsics.Arm
             Vector64<Byte> firstOp,
             void* result,
             [CallerMemberName] string method = ""
-        ) {
+        )
+        {
             Byte[] inArray = new Byte[Op1ElementCount];
             Byte[] outArray = new Byte[RetElementCount];
 
@@ -497,7 +501,8 @@ namespace JIT.HardwareIntrinsics.Arm
             void* firstOp,
             void* result,
             [CallerMemberName] string method = ""
-        ) {
+        )
+        {
             Byte[] inArray = new Byte[Op1ElementCount];
             Byte[] outArray = new Byte[RetElementCount];
 
@@ -519,7 +524,8 @@ namespace JIT.HardwareIntrinsics.Arm
             Byte[] firstOp,
             Byte[] result,
             [CallerMemberName] string method = ""
-        ) {
+        )
+        {
             bool succeeded = true;
 
             for (var i = 0; i < RetElementCount; i++)

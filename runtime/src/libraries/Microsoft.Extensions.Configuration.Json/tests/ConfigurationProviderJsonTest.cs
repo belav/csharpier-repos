@@ -20,7 +20,8 @@ namespace Microsoft.Extensions.Configuration
 
         protected override (IConfigurationProvider Provider, Action Initializer) LoadThroughProvider(
             TestSection testConfig
-        ) {
+        )
+        {
             var jsonBuilder = new StringBuilder();
             SectionToJson(jsonBuilder, testConfig, includeComma: false);
 
@@ -37,7 +38,8 @@ namespace Microsoft.Extensions.Configuration
             StringBuilder jsonBuilder,
             TestSection section,
             bool includeComma = true
-        ) {
+        )
+        {
             string ValueToJson(object value) => value == null ? "null" : $"\"{value}\"";
 
             jsonBuilder.AppendLine("{");

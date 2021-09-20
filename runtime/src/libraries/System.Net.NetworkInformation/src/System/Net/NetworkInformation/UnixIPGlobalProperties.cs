@@ -42,14 +42,16 @@ namespace System.Net.NetworkInformation
         public override IAsyncResult BeginGetUnicastAddresses(
             AsyncCallback? callback,
             object? state
-        ) {
+        )
+        {
             Task<UnicastIPAddressInformationCollection> t = GetUnicastAddressesAsync();
             return TaskToApm.Begin(t, callback, state);
         }
 
         public override UnicastIPAddressInformationCollection EndGetUnicastAddresses(
             IAsyncResult asyncResult
-        ) {
+        )
+        {
             return TaskToApm.End<UnicastIPAddressInformationCollection>(asyncResult);
         }
 

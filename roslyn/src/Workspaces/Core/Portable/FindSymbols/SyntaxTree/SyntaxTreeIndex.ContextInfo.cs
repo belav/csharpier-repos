@@ -33,32 +33,34 @@ namespace Microsoft.CodeAnalysis.FindSymbols
                 bool containsImplicitObjectCreation,
                 bool containsGlobalAttributes,
                 bool containsConversion
-            ) : this(
-                predefinedTypes,
-                predefinedOperators,
-                ConvertToContainingNodeFlag(
-                    containsForEachStatement,
-                    containsLockStatement,
-                    containsUsingStatement,
-                    containsQueryExpression,
-                    containsThisConstructorInitializer,
-                    containsBaseConstructorInitializer,
-                    containsElementAccessExpression,
-                    containsIndexerMemberCref,
-                    containsDeconstruction,
-                    containsAwait,
-                    containsTupleExpressionOrTupleType,
-                    containsImplicitObjectCreation,
-                    containsGlobalAttributes,
-                    containsConversion
-                )
-            ) { }
+            )
+                : this(
+                    predefinedTypes,
+                    predefinedOperators,
+                    ConvertToContainingNodeFlag(
+                        containsForEachStatement,
+                        containsLockStatement,
+                        containsUsingStatement,
+                        containsQueryExpression,
+                        containsThisConstructorInitializer,
+                        containsBaseConstructorInitializer,
+                        containsElementAccessExpression,
+                        containsIndexerMemberCref,
+                        containsDeconstruction,
+                        containsAwait,
+                        containsTupleExpressionOrTupleType,
+                        containsImplicitObjectCreation,
+                        containsGlobalAttributes,
+                        containsConversion
+                    )
+                ) { }
 
             private ContextInfo(
                 int predefinedTypes,
                 int predefinedOperators,
                 ContainingNodes containingNodes
-            ) {
+            )
+            {
                 _predefinedTypes = predefinedTypes;
                 _predefinedOperators = predefinedOperators;
                 _containingNodes = containingNodes;
@@ -79,7 +81,8 @@ namespace Microsoft.CodeAnalysis.FindSymbols
                 bool containsImplicitObjectCreation,
                 bool containsGlobalAttributes,
                 bool containsConversion
-            ) {
+            )
+            {
                 var containingNodes = ContainingNodes.None;
 
                 containingNodes |= containsForEachStatement

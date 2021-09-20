@@ -29,14 +29,16 @@ namespace Microsoft.CodeAnalysis.CSharp.Extensions
         public static NameSyntax GenerateNameSyntax(
             this INamespaceOrTypeSymbol symbol,
             bool allowVar = true
-        ) {
+        )
+        {
             return (NameSyntax)GenerateTypeSyntax(symbol, nameSyntax: true, allowVar: allowVar);
         }
 
         public static TypeSyntax GenerateTypeSyntax(
             this INamespaceOrTypeSymbol symbol,
             bool allowVar = true
-        ) {
+        )
+        {
             return GenerateTypeSyntax(symbol, nameSyntax: false, allowVar: allowVar);
         }
 
@@ -44,7 +46,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Extensions
             INamespaceOrTypeSymbol symbol,
             bool nameSyntax,
             bool allowVar = true
-        ) {
+        )
+        {
             var type = symbol as ITypeSymbol;
             if (type != null && type.ContainsAnonymousType())
             {
@@ -112,7 +115,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Extensions
                         reference.GetSyntax()
                             .ChildTokens()
                             .Any(t => t.IsKind(SyntaxKind.UnsafeKeyword))
-                    ) {
+                    )
+                    {
                         return true;
                     }
                 }
@@ -127,7 +131,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Extensions
             int position,
             SemanticModel semanticModel,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             try
             {
                 if (semanticModel.IsSpeculativeSemanticModel)
@@ -162,7 +167,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Extensions
         private static IEnumerable<UsingDirectiveSyntax> GetApplicableUsings(
             int position,
             SyntaxNode root
-        ) {
+        )
+        {
             var namespaceUsings = root.FindToken(
                 position
             ).Parent!.GetAncestors<NamespaceDeclarationSyntax>().SelectMany(n => n.Usings);

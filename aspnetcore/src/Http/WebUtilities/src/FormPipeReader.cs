@@ -93,7 +93,8 @@ namespace Microsoft.AspNetCore.WebUtilities
         /// <returns>The collection containing the parsed HTTP form body.</returns>
         public async Task<Dictionary<string, StringValues>> ReadFormAsync(
             CancellationToken cancellationToken = default
-        ) {
+        )
+        {
             KeyValueAccumulator accumulator = default;
             while (true)
             {
@@ -138,7 +139,8 @@ namespace Microsoft.AspNetCore.WebUtilities
             ref ReadOnlySequence<byte> buffer,
             ref KeyValueAccumulator accumulator,
             bool isFinalBlock
-        ) {
+        )
+        {
             if (buffer.IsSingleSegment)
             {
                 ParseFormValuesFast(
@@ -161,7 +163,8 @@ namespace Microsoft.AspNetCore.WebUtilities
             ref KeyValueAccumulator accumulator,
             bool isFinalBlock,
             out int consumed
-        ) {
+        )
+        {
             ReadOnlySpan<byte> key;
             ReadOnlySpan<byte> value;
             consumed = 0;
@@ -242,7 +245,8 @@ namespace Microsoft.AspNetCore.WebUtilities
             ref ReadOnlySequence<byte> buffer,
             ref KeyValueAccumulator accumulator,
             bool isFinalBlock
-        ) {
+        )
+        {
             var sequenceReader = new SequenceReader<byte>(buffer);
             ReadOnlySequence<byte> keyValuePair;
 
@@ -261,7 +265,8 @@ namespace Microsoft.AspNetCore.WebUtilities
                         if (
                             (uint)(sequenceReader.Consumed - consumedBytes)
                             > (uint)KeyLengthLimit + (uint)ValueLengthLimit
-                        ) {
+                        )
+                        {
                             ThrowKeyOrValueTooLargeException();
                         }
                         break;
@@ -380,7 +385,8 @@ namespace Microsoft.AspNetCore.WebUtilities
             ref KeyValueAccumulator accumulator,
             string decodedKey,
             string decodedValue
-        ) {
+        )
+        {
             accumulator.Append(decodedKey, decodedValue);
 
             if (accumulator.ValueCount > ValueCountLimit)

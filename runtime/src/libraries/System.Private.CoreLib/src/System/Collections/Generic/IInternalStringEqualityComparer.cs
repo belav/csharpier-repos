@@ -19,7 +19,8 @@ namespace System.Collections.Generic
         /// </summary>
         internal static IEqualityComparer<string?> GetUnderlyingEqualityComparer(
             IEqualityComparer<string?>? outerComparer
-        ) {
+        )
+        {
             if (outerComparer is null)
             {
                 return EqualityComparer<string?>.Default;

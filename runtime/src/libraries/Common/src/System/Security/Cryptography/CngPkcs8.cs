@@ -35,7 +35,8 @@ namespace System.Security.Cryptography
             AsymmetricAlgorithm key,
             ReadOnlySpan<byte> passwordBytes,
             PbeParameters pbeParameters
-        ) {
+        )
+        {
             if (pbeParameters == null)
             {
                 throw new ArgumentNullException(nameof(pbeParameters));
@@ -63,7 +64,8 @@ namespace System.Security.Cryptography
             PbeParameters pbeParameters,
             Span<byte> destination,
             out int bytesWritten
-        ) {
+        )
+        {
             if (passwordBytes.Length == 0)
             {
                 // Switch to character-based, since that's the native input format.
@@ -83,7 +85,8 @@ namespace System.Security.Cryptography
             AsymmetricAlgorithm key,
             ReadOnlySpan<char> password,
             PbeParameters pbeParameters
-        ) {
+        )
+        {
             AsnWriter writer = RewriteEncryptedPkcs8PrivateKey(key, password, pbeParameters);
             return writer.Encode();
         }
@@ -94,7 +97,8 @@ namespace System.Security.Cryptography
             PbeParameters pbeParameters,
             Span<byte> destination,
             out int bytesWritten
-        ) {
+        )
+        {
             AsnWriter writer = RewriteEncryptedPkcs8PrivateKey(key, password, pbeParameters);
             return writer.TryEncode(destination, out bytesWritten);
         }
@@ -102,7 +106,8 @@ namespace System.Security.Cryptography
         internal static Pkcs8Response ImportPkcs8PrivateKey(
             ReadOnlySpan<byte> source,
             out int bytesRead
-        ) {
+        )
+        {
             int len;
 
             try
@@ -159,12 +164,14 @@ namespace System.Security.Cryptography
             ReadOnlySpan<byte> passwordBytes,
             ReadOnlySpan<byte> source,
             out int bytesRead
-        ) {
+        )
+        {
             fixed (byte* ptr = &MemoryMarshal.GetReference(source))
             {
                 using (
                     MemoryManager<byte> manager = new PointerMemoryManager<byte>(ptr, source.Length)
-                ) {
+                )
+                {
                     try
                     {
                         // Since there's no bytes-based-password PKCS8 import in CNG, just do the decryption
@@ -227,7 +234,8 @@ namespace System.Security.Cryptography
             ReadOnlySpan<char> password,
             ReadOnlySpan<byte> source,
             out int bytesRead
-        ) {
+        )
+        {
             try
             {
                 AsnDecoder.ReadEncodedValue(
@@ -247,7 +255,8 @@ namespace System.Security.Cryptography
                             ptr,
                             source.Length
                         )
-                    ) {
+                    )
+                    {
                         try
                         {
                             bytesRead = len;
@@ -319,7 +328,8 @@ namespace System.Security.Cryptography
             AsymmetricAlgorithm key,
             ReadOnlySpan<byte> passwordBytes,
             PbeParameters pbeParameters
-        ) {
+        )
+        {
             Debug.Assert(pbeParameters != null);
 
             // For RSA:
@@ -356,7 +366,8 @@ namespace System.Security.Cryptography
                         rented,
                         out rentWritten
                     )
-                ) {
+                )
+                {
                     int size = rented.Length;
                     byte[] current = rented;
                     rented = CryptoPool.Rent(checked(size * 2));
@@ -382,7 +393,8 @@ namespace System.Security.Cryptography
             AsymmetricAlgorithm key,
             ReadOnlySpan<char> password,
             PbeParameters pbeParameters
-        ) {
+        )
+        {
             Debug.Assert(pbeParameters != null);
 
             byte[] rented = CryptoPool.Rent(key.KeySize);
@@ -397,7 +409,8 @@ namespace System.Security.Cryptography
                         rented,
                         out rentWritten
                     )
-                ) {
+                )
+                {
                     int size = rented.Length;
                     byte[] current = rented;
                     rented = CryptoPool.Rent(checked(size * 2));
@@ -430,12 +443,14 @@ namespace System.Security.Cryptography
         // signaling the original exception should be thrown.
         private static unsafe AsnWriter? RewritePkcs8ECPrivateKeyWithZeroPublicKey(
             ReadOnlySpan<byte> source
-        ) {
+        )
+        {
             fixed (byte* ptr = &MemoryMarshal.GetReference(source))
             {
                 using (
                     MemoryManager<byte> manager = new PointerMemoryManager<byte>(ptr, source.Length)
-                ) {
+                )
+                {
                     PrivateKeyInfoAsn privateKeyInfo = PrivateKeyInfoAsn.Decode(
                         manager.Memory,
                         AsnEncodingRules.BER
@@ -465,7 +480,8 @@ namespace System.Security.Cryptography
                                 !ecParameters.Curve.IsExplicit
                                 || ecParameters.Q.X != null
                                 || ecParameters.Q.Y != null
-                            ) {
+                            )
+                            {
                                 return null;
                             }
 

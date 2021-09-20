@@ -61,7 +61,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Emit
         internal override bool TryGetTypeHandle(
             Cci.ITypeDefinition def,
             out TypeDefinitionHandle handle
-        ) {
+        )
+        {
             if (_mapToMetadata.MapDefinition(def)?.GetInternalSymbol() is PENamedTypeSymbol other)
             {
                 handle = other.Handle;
@@ -75,7 +76,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Emit
         internal override bool TryGetEventHandle(
             Cci.IEventDefinition def,
             out EventDefinitionHandle handle
-        ) {
+        )
+        {
             if (_mapToMetadata.MapDefinition(def)?.GetInternalSymbol() is PEEventSymbol other)
             {
                 handle = other.Handle;
@@ -89,7 +91,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Emit
         internal override bool TryGetFieldHandle(
             Cci.IFieldDefinition def,
             out FieldDefinitionHandle handle
-        ) {
+        )
+        {
             if (_mapToMetadata.MapDefinition(def)?.GetInternalSymbol() is PEFieldSymbol other)
             {
                 handle = other.Handle;
@@ -103,7 +106,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Emit
         internal override bool TryGetMethodHandle(
             Cci.IMethodDefinition def,
             out MethodDefinitionHandle handle
-        ) {
+        )
+        {
             if (_mapToMetadata.MapDefinition(def)?.GetInternalSymbol() is PEMethodSymbol other)
             {
                 handle = other.Handle;
@@ -117,7 +121,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Emit
         internal override bool TryGetPropertyHandle(
             Cci.IPropertyDefinition def,
             out PropertyDefinitionHandle handle
-        ) {
+        )
+        {
             if (_mapToMetadata.MapDefinition(def)?.GetInternalSymbol() is PEPropertySymbol other)
             {
                 handle = other.Handle;
@@ -134,7 +139,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Emit
             out IReadOnlyDictionary<EncHoistedLocalInfo, int> hoistedLocalMap,
             out IReadOnlyDictionary<Cci.ITypeReference, int> awaiterMap,
             out int awaiterSlotCount
-        ) {
+        )
+        {
             // we are working with PE symbols
             Debug.Assert(stateMachineType.ContainingAssembly is PEAssemblySymbol);
 
@@ -201,7 +207,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Emit
         protected override ImmutableArray<EncLocalInfo> GetLocalSlotMapFromMetadata(
             StandaloneSignatureHandle handle,
             EditAndContinueMethodDebugInformation debugInfo
-        ) {
+        )
+        {
             Debug.Assert(!handle.IsNil);
 
             var localInfos = _metadataDecoder.GetLocalsOrThrow(handle);
@@ -224,7 +231,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Emit
                     AttributeDescription.IteratorStateMachineAttribute,
                     out typeName
                 )
-            ) {
+            )
+            {
                 return _metadataDecoder.GetTypeSymbolForSerializedType(typeName);
             }
 
@@ -239,7 +247,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Emit
         private static ImmutableArray<EncLocalInfo> CreateLocalSlotMap(
             EditAndContinueMethodDebugInformation methodEncInfo,
             ImmutableArray<LocalInfo<TypeSymbol>> slotMetadata
-        ) {
+        )
+        {
             var result = new EncLocalInfo[slotMetadata.Length];
 
             var localSlots = methodEncInfo.LocalSlots;

@@ -1167,7 +1167,8 @@ class Test<T> where T : unmanaged
             Accessibility accessibility,
             TypeParameterSymbol typeParameter,
             string assemblyName
-        ) {
+        )
+        {
             var attributes = (
                 (PEModuleSymbol)typeParameter.ContainingModule
             ).GetCustomAttributesForToken(((PETypeParameterSymbol)typeParameter).Handle);

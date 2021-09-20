@@ -244,7 +244,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                 if (
                     escapeNonPrintable
                     && CharUnicodeInfo.GetUnicodeCategory(c) == UnicodeCategory.Surrogate
-                ) {
+                )
+                {
                     var category = CharUnicodeInfo.GetUnicodeCategory(value, i);
                     if (category == UnicodeCategory.Surrogate)
                     {
@@ -369,7 +370,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             sbyte value,
             ObjectDisplayOptions options,
             CultureInfo cultureInfo = null
-        ) {
+        )
+        {
             if (options.IncludesOption(ObjectDisplayOptions.UseHexadecimalNumbers))
             {
                 // Special Case: for sbyte and short, specifically, negatives are shown
@@ -386,7 +388,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             byte value,
             ObjectDisplayOptions options,
             CultureInfo cultureInfo = null
-        ) {
+        )
+        {
             if (options.IncludesOption(ObjectDisplayOptions.UseHexadecimalNumbers))
             {
                 return "0x" + value.ToString("x2");
@@ -401,7 +404,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             short value,
             ObjectDisplayOptions options,
             CultureInfo cultureInfo = null
-        ) {
+        )
+        {
             if (options.IncludesOption(ObjectDisplayOptions.UseHexadecimalNumbers))
             {
                 // Special Case: for sbyte and short, specifically, negatives are shown
@@ -418,7 +422,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             ushort value,
             ObjectDisplayOptions options,
             CultureInfo cultureInfo = null
-        ) {
+        )
+        {
             if (options.IncludesOption(ObjectDisplayOptions.UseHexadecimalNumbers))
             {
                 return "0x" + value.ToString("x4");
@@ -433,7 +438,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             int value,
             ObjectDisplayOptions options,
             CultureInfo cultureInfo = null
-        ) {
+        )
+        {
             if (options.IncludesOption(ObjectDisplayOptions.UseHexadecimalNumbers))
             {
                 return "0x" + value.ToString("x8");
@@ -448,7 +454,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             uint value,
             ObjectDisplayOptions options,
             CultureInfo cultureInfo = null
-        ) {
+        )
+        {
             var pooledBuilder = PooledStringBuilder.GetInstance();
             var sb = pooledBuilder.Builder;
 
@@ -474,7 +481,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             long value,
             ObjectDisplayOptions options,
             CultureInfo cultureInfo = null
-        ) {
+        )
+        {
             var pooledBuilder = PooledStringBuilder.GetInstance();
             var sb = pooledBuilder.Builder;
 
@@ -500,7 +508,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             ulong value,
             ObjectDisplayOptions options,
             CultureInfo cultureInfo = null
-        ) {
+        )
+        {
             var pooledBuilder = PooledStringBuilder.GetInstance();
             var sb = pooledBuilder.Builder;
 
@@ -526,7 +535,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             double value,
             ObjectDisplayOptions options,
             CultureInfo cultureInfo = null
-        ) {
+        )
+        {
             var result = value.ToString("R", GetFormatCulture(cultureInfo));
 
             return options.IncludesOption(ObjectDisplayOptions.IncludeTypeSuffix)
@@ -538,7 +548,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             float value,
             ObjectDisplayOptions options,
             CultureInfo cultureInfo = null
-        ) {
+        )
+        {
             var result = value.ToString("R", GetFormatCulture(cultureInfo));
 
             return options.IncludesOption(ObjectDisplayOptions.IncludeTypeSuffix)
@@ -550,7 +561,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             decimal value,
             ObjectDisplayOptions options,
             CultureInfo cultureInfo = null
-        ) {
+        )
+        {
             var result = value.ToString(GetFormatCulture(cultureInfo));
 
             return options.IncludesOption(ObjectDisplayOptions.IncludeTypeSuffix)

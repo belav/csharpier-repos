@@ -161,7 +161,8 @@ namespace Microsoft.EntityFrameworkCore.Query
                         visitedExpression is TableExpressionBase tableExpressionBase
                         && !_visitedTableExpressionBases.Contains(tableExpressionBase)
                         && tableExpressionBase.Alias != null
-                    ) {
+                    )
+                    {
                         if (_usedAliases.Contains(tableExpressionBase.Alias))
                         {
                             throw new InvalidOperationException(

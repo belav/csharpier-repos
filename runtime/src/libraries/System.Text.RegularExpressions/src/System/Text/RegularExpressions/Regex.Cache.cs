@@ -179,7 +179,8 @@ namespace System.Text.RegularExpressions
                 s_maxCacheSize != 0
                 && // hot-read of s_maxCacheSize to try to avoid the cost of the dictionary lookup if the cache is disabled
                 s_cacheDictionary.TryGetValue(key, out Node? node)
-            ) {
+            )
+            {
                 // We found our item in the cache. Make this node's last access stamp one higher than
                 // the previous one.  It's ok if multiple threads racing to update the last access cause
                 // multiple nodes to have the same value; it's an approximate value meant only to help

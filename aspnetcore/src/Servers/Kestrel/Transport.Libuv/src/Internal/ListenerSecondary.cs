@@ -37,7 +37,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Transport.Libuv.Internal
             byte[] pipeMessage,
             EndPoint endPoint,
             LibuvThread thread
-        ) {
+        )
+        {
             _pipeName = pipeName;
             _pipeMessage = pipeMessage;
             _buf = thread.Loop.Libuv.buf_init(_ptr, 4);
@@ -88,7 +89,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Transport.Libuv.Internal
             int status,
             UvException error,
             TaskCompletionSource<int> tcs
-        ) {
+        )
+        {
             var listener = (ListenerSecondary)tcs.Task.AsyncState;
             _ = listener.ConnectedCallback(connect, status, error, tcs);
         }
@@ -98,7 +100,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Transport.Libuv.Internal
             int status,
             UvException error,
             TaskCompletionSource<int> tcs
-        ) {
+        )
+        {
             connect.Dispose();
             if (error != null)
             {

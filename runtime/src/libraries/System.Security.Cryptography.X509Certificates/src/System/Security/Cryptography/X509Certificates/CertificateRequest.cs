@@ -94,7 +94,8 @@ namespace System.Security.Cryptography.X509Certificates
             X500DistinguishedName subjectName,
             ECDsa key,
             HashAlgorithmName hashAlgorithm
-        ) {
+        )
+        {
             if (subjectName == null)
                 throw new ArgumentNullException(nameof(subjectName));
             if (key == null)
@@ -135,7 +136,8 @@ namespace System.Security.Cryptography.X509Certificates
             RSA key,
             HashAlgorithmName hashAlgorithm,
             RSASignaturePadding padding
-        ) {
+        )
+        {
             if (subjectName == null)
                 throw new ArgumentNullException(nameof(subjectName));
             if (key == null)
@@ -178,7 +180,8 @@ namespace System.Security.Cryptography.X509Certificates
             RSA key,
             HashAlgorithmName hashAlgorithm,
             RSASignaturePadding padding
-        ) {
+        )
+        {
             if (subjectName == null)
                 throw new ArgumentNullException(nameof(subjectName));
             if (key == null)
@@ -216,7 +219,8 @@ namespace System.Security.Cryptography.X509Certificates
             X500DistinguishedName subjectName,
             PublicKey publicKey,
             HashAlgorithmName hashAlgorithm
-        ) {
+        )
+        {
             if (subjectName == null)
                 throw new ArgumentNullException(nameof(subjectName));
             if (publicKey == null)
@@ -352,7 +356,8 @@ namespace System.Security.Cryptography.X509Certificates
                     notAfter,
                     serialNumber
                 )
-            ) {
+            )
+            {
                 RSA? rsa = _key as RSA;
 
                 if (rsa != null)
@@ -417,7 +422,8 @@ namespace System.Security.Cryptography.X509Certificates
             DateTimeOffset notBefore,
             DateTimeOffset notAfter,
             byte[] serialNumber
-        ) {
+        )
+        {
             // The null case for serialNumber is the same exception type and message as an empty array,
             // so just let it turn into the empty span and call the span overload.
             return Create(
@@ -473,7 +479,8 @@ namespace System.Security.Cryptography.X509Certificates
             DateTimeOffset notBefore,
             DateTimeOffset notAfter,
             ReadOnlySpan<byte> serialNumber
-        ) {
+        )
+        {
             if (issuerCertificate == null)
                 throw new ArgumentNullException(nameof(issuerCertificate));
             if (!issuerCertificate.HasPrivateKey)
@@ -641,7 +648,8 @@ namespace System.Security.Cryptography.X509Certificates
             DateTimeOffset notBefore,
             DateTimeOffset notAfter,
             byte[] serialNumber
-        ) {
+        )
+        {
             // The null case for serialNumber is the same exception type and message as an empty array,
             // so just let it turn into the empty span and call the span overload.
             return Create(
@@ -688,7 +696,8 @@ namespace System.Security.Cryptography.X509Certificates
             DateTimeOffset notBefore,
             DateTimeOffset notAfter,
             ReadOnlySpan<byte> serialNumber
-        ) {
+        )
+        {
             if (issuerName == null)
                 throw new ArgumentNullException(nameof(issuerName));
             if (generator == null)
@@ -806,7 +815,8 @@ namespace System.Security.Cryptography.X509Certificates
                 leadingZeros < serialNumber.Length - 1
                 && serialNumber[leadingZeros] == 0
                 && serialNumber[leadingZeros + 1] < 0x80
-            ) {
+            )
+            {
                 leadingZeros++;
             }
 

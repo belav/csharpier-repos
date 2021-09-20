@@ -19,7 +19,8 @@ namespace Microsoft.AspNetCore.Mvc.FunctionalTests
     {
         public DoNotRespectBrowserAcceptHeaderTests(
             MvcTestFixture<FormatterWebSite.Startup> fixture
-        ) {
+        )
+        {
             Client = fixture.CreateDefaultClient();
         }
 
@@ -30,7 +31,8 @@ namespace Microsoft.AspNetCore.Mvc.FunctionalTests
         [InlineData("application/xml,*/*")]
         public async Task AllMediaRangeAcceptHeader_FirstFormatterInListWritesResponse(
             string acceptHeader
-        ) {
+        )
+        {
             // Arrange
             var request = RequestWithAccept(
                 "http://localhost/DoNotRespectBrowserAcceptHeader/EmployeeInfo",
@@ -91,7 +93,8 @@ namespace Microsoft.AspNetCore.Mvc.FunctionalTests
         [InlineData("application/xml,*/*")]
         public async Task AllMediaRangeAcceptHeader_WithContentTypeHeader_ContentTypeIsIgnored(
             string acceptHeader
-        ) {
+        )
+        {
             // Arrange
             var requestData =
                 "<DoNotRespectBrowserAcceptHeaderController.Employee xmlns:i=\"http://www.w3.org/2001/XMLSchema-instance\""
@@ -130,7 +133,8 @@ namespace Microsoft.AspNetCore.Mvc.FunctionalTests
         [InlineData("application/xml,application/json")]
         public async Task AllMediaRangeAcceptHeader_WithExactMatch_ReturnsExpectedContent(
             string acceptHeader
-        ) {
+        )
+        {
             // Arrange
             var requestData =
                 "<DoNotRespectBrowserAcceptHeaderController.Employee xmlns:i=\"http://www.w3.org/2001/XMLSchema-instance\""

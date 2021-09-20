@@ -47,7 +47,8 @@ namespace Microsoft.EntityFrameworkCore
             this IConventionEntityTypeBuilder entityTypeBuilder,
             LambdaExpression? query,
             bool fromDataAnnotation = false
-        ) {
+        )
+        {
             if (CanSetInMemoryQuery(entityTypeBuilder, query, fromDataAnnotation))
             {
                 entityTypeBuilder.Metadata.SetInMemoryQuery(query, fromDataAnnotation);

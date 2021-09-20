@@ -24,7 +24,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.ProjectSystem
         public FileChangeWatcherProvider(
             IThreadingContext threadingContext,
             [Import(typeof(SVsServiceProvider))] Shell.IAsyncServiceProvider serviceProvider
-        ) {
+        )
+        {
             // We do not want background work to implicitly block on the availability of the SVsFileChangeEx to avoid any deadlock risk,
             // since the first fetch for a file watcher might end up happening on the background.
             Watcher = new FileChangeWatcher(_fileChangeService.Task);

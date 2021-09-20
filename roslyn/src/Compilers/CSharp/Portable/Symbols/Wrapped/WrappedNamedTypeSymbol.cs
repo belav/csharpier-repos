@@ -27,10 +27,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
         /// </summary>
         protected readonly NamedTypeSymbol _underlyingType;
 
-        public WrappedNamedTypeSymbol(
-            NamedTypeSymbol underlyingType,
-            TupleExtraData tupleData
-        ) : base(tupleData)
+        public WrappedNamedTypeSymbol(NamedTypeSymbol underlyingType, TupleExtraData tupleData)
+            : base(tupleData)
         {
             Debug.Assert((object)underlyingType != null);
             _underlyingType = underlyingType;
@@ -80,7 +78,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             CultureInfo preferredCulture = null,
             bool expandIncludes = false,
             CancellationToken cancellationToken = default(CancellationToken)
-        ) {
+        )
+        {
             return _underlyingType.GetDocumentationCommentXml(
                 preferredCulture,
                 expandIncludes,

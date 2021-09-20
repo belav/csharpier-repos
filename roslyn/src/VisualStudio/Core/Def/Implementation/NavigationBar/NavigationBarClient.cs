@@ -48,7 +48,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.NavigationBar
             IVsCodeWindow codeWindow,
             IServiceProvider serviceProvider,
             VisualStudioWorkspaceImpl workspace
-        ) {
+        )
+        {
             _manager = manager;
             _codeWindow = codeWindow;
             _workspace = workspace;
@@ -111,7 +112,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.NavigationBar
             out uint pcEntries,
             out uint puEntryType,
             out IntPtr phImageList
-        ) {
+        )
+        {
             puEntryType = (uint)(
                 DROPDOWNENTRYTYPE.ENTRY_TEXT
                 | DROPDOWNENTRYTYPE.ENTRY_ATTR
@@ -153,7 +155,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.NavigationBar
             if (
                 _dropdownBar.GetCurrentSelection(iCombo, out var selectionIndex) == VSConstants.S_OK
                 && selectionIndex >= 0
-            ) {
+            )
+            {
                 selectedItemPreviewText = GetItem(iCombo, selectionIndex).Text;
             }
 
@@ -280,7 +283,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.NavigationBar
             int iCombo,
             out string pbstrName,
             out string pbstrId
-        ) {
+        )
+        {
             switch (iCombo)
             {
                 case 0:
@@ -307,7 +311,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.NavigationBar
             int iIndex,
             out int piImageIndex,
             out IntPtr phImageList
-        ) {
+        )
+        {
             // This class implements IVsDropdownBarClient4 and expects IVsDropdownBarClient4.GetEntryImage() to be called instead
             phImageList = IntPtr.Zero;
             piImageIndex = -1;
@@ -360,7 +365,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.NavigationBar
             ImmutableArray<NavigationBarItem> types,
             NavigationBarItem selectedType,
             NavigationBarItem selectedMember
-        ) {
+        )
+        {
             _projectItems = projects;
             _currentTypeItems = types;
 

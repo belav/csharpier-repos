@@ -488,7 +488,8 @@ namespace System.Collections.Immutable.Tests
         protected override List<T> SortTestHelper<T>(
             ImmutableList<T> list,
             Comparison<T> comparison
-        ) {
+        )
+        {
             var builder = list.ToBuilder();
             builder.Sort(comparison);
             return builder.ToImmutable().ToList();
@@ -506,7 +507,8 @@ namespace System.Collections.Immutable.Tests
             int index,
             int count,
             IComparer<T> comparer
-        ) {
+        )
+        {
             var builder = list.ToBuilder();
             builder.Sort(index, count, comparer);
             return builder.ToImmutable().ToList();

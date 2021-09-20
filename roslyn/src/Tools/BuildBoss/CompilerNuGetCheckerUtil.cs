@@ -67,7 +67,8 @@ namespace BuildBoss
             string repositoryDirectory,
             string artifactsDirectory,
             string configuration
-        ) {
+        )
+        {
             RepositoryDirectory = repositoryDirectory;
             ArtifactsDirectory = artifactsDirectory;
             Configuration = configuration;
@@ -322,14 +323,16 @@ namespace BuildBoss
             bool isDesktop,
             List<PackageAsset> packageAssets,
             params string[] directoryPaths
-        ) {
+        )
+        {
             var relativeNameMap = new Dictionary<string, PackageAsset>(PathComparer);
             var allGood = true;
 
             IEnumerable<string> enumerateAssets(
                 string directory,
                 SearchOption searchOption = SearchOption.TopDirectoryOnly
-            ) {
+            )
+            {
                 return Directory.EnumerateFiles(directory, "*.*", searchOption)
                     .Where(IsTrackedAsset);
             }
@@ -355,7 +358,8 @@ namespace BuildBoss
                                 runtimeDirectory,
                                 SearchOption.AllDirectories
                             )
-                        ) {
+                        )
+                        {
                             yield return filePath;
                         }
                     }
@@ -377,7 +381,8 @@ namespace BuildBoss
                             FileAccess.Read,
                             FileShare.Read
                         )
-                    ) {
+                    )
+                    {
                         var assetRelativeName = getRelativeName(assetFilePath);
                         var hash = md5.ComputeHash(stream);
                         var hashString = BitConverter.ToString(hash);
@@ -386,7 +391,8 @@ namespace BuildBoss
                                 assetRelativeName,
                                 out PackageAsset existingAsset
                             )
-                        ) {
+                        )
+                        {
                             // Make sure that all copies of the DLL have the same contents. The DLLs are being merged into
                             // a single directory in the resulting NuGet. If the contents are different then our merge is
                             // invalid.
@@ -449,7 +455,8 @@ namespace BuildBoss
             string packageFilePath,
             string folderRelativePath,
             IEnumerable<string> dllFileNames
-        ) {
+        )
+        {
             var map = dllFileNames.ToDictionary(
                 keySelector: x => Path.Combine(folderRelativePath, x),
                 elementSelector: _ => false,
@@ -502,7 +509,8 @@ namespace BuildBoss
         private static IEnumerable<PackagePart> GetPartsInFolder(
             string packageFilePath,
             string folderRelativePath
-        ) {
+        )
+        {
             Debug.Assert(string.IsNullOrEmpty(folderRelativePath) || folderRelativePath[0] != '\\');
 
             using (var package = Package.Open(packageFilePath, FileMode.Open, FileAccess.Read))

@@ -153,7 +153,8 @@ namespace System.Net.Http.Formatting
         public async Task ReadFromStreamAsync_RoundTripsWriteToStreamAsync(
             Type variationType,
             object testData
-        ) {
+        )
+        {
             // Guard
             bool canSerialize =
                 IsTypeSerializableWithJsonSerializer(variationType, testData)
@@ -182,7 +183,8 @@ namespace System.Net.Http.Formatting
         public async Task ReadFromStreamAsync_RoundTripsWriteToStreamAsync_KnownTypes(
             Type variationType,
             object testData
-        ) {
+        )
+        {
             // Guard
             bool canSerialize =
                 IsTypeSerializableWithJsonSerializer(variationType, testData)
@@ -296,7 +298,8 @@ namespace System.Net.Http.Formatting
             string content,
             string encoding,
             bool isDefaultEncoding
-        ) {
+        )
+        {
             if (!isDefaultEncoding)
             {
                 // XmlDictionaryReader/Writer only supports utf-8 and 16
@@ -323,7 +326,8 @@ namespace System.Net.Http.Formatting
             string content,
             string encoding,
             bool isDefaultEncoding
-        ) {
+        )
+        {
             // DataContractJsonSerializer does not honor the value of byteOrderMark in the UnicodeEncoding ctor.
             // It doesn't include the BOM when byteOrderMark is set to true.
             if (!isDefaultEncoding || encoding != "utf-8")

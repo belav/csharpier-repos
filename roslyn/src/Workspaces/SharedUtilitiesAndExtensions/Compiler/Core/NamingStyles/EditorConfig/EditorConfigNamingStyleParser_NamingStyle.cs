@@ -17,7 +17,8 @@ namespace Microsoft.CodeAnalysis.Diagnostics.Analyzers.NamingStyles
             string namingRuleName,
             IReadOnlyDictionary<string, string> rawOptions,
             out NamingStyle namingStyle
-        ) {
+        )
+        {
             namingStyle = default;
             if (!TryGetNamingStyleTitle(namingRuleName, rawOptions, out var namingStyleTitle))
             {
@@ -48,13 +49,15 @@ namespace Microsoft.CodeAnalysis.Diagnostics.Analyzers.NamingStyles
             string namingRuleName,
             IReadOnlyDictionary<string, string> conventionsDictionary,
             out string namingStyleName
-        ) {
+        )
+        {
             if (
                 conventionsDictionary.TryGetValue(
                     $"dotnet_naming_rule.{namingRuleName}.style",
                     out namingStyleName
                 )
-            ) {
+            )
+            {
                 return namingStyleName != null;
             }
 
@@ -96,7 +99,8 @@ namespace Microsoft.CodeAnalysis.Diagnostics.Analyzers.NamingStyles
             string namingStyleName,
             IReadOnlyDictionary<string, string> conventionsDictionary,
             out Capitalization capitalization
-        ) {
+        )
+        {
             var result = GetStringFromConventionsDictionary(
                 namingStyleName,
                 "capitalization",
@@ -109,7 +113,8 @@ namespace Microsoft.CodeAnalysis.Diagnostics.Analyzers.NamingStyles
             string namingStyleName,
             string optionName,
             IReadOnlyDictionary<string, string> conventionsDictionary
-        ) {
+        )
+        {
             conventionsDictionary.TryGetValue(
                 $"dotnet_naming_style.{namingStyleName}.{optionName}",
                 out var result
@@ -120,7 +125,8 @@ namespace Microsoft.CodeAnalysis.Diagnostics.Analyzers.NamingStyles
         private static bool TryParseCapitalizationScheme(
             string namingStyleCapitalization,
             out Capitalization capitalization
-        ) {
+        )
+        {
             switch (namingStyleCapitalization)
             {
                 case "pascal_case":

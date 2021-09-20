@@ -131,7 +131,8 @@ namespace Newtonsoft.Json.Serialization
                     typeof(IDictionary<, >),
                     out _genericCollectionDefinitionType
                 )
-            ) {
+            )
+            {
                 keyType = _genericCollectionDefinitionType.GetGenericArguments()[0];
                 valueType = _genericCollectionDefinitionType.GetGenericArguments()[1];
 
@@ -140,7 +141,8 @@ namespace Newtonsoft.Json.Serialization
                         NonNullableUnderlyingType,
                         typeof(IDictionary<, >)
                     )
-                ) {
+                )
+                {
                     CreatedType = typeof(Dictionary<, >).MakeGenericType(keyType, valueType);
                 }
                 else if (NonNullableUnderlyingType.IsGenericType())
@@ -169,7 +171,8 @@ namespace Newtonsoft.Json.Serialization
                     typeof(IReadOnlyDictionary<, >),
                     out _genericCollectionDefinitionType
                 )
-            ) {
+            )
+            {
                 keyType = _genericCollectionDefinitionType.GetGenericArguments()[0];
                 valueType = _genericCollectionDefinitionType.GetGenericArguments()[1];
 
@@ -178,7 +181,8 @@ namespace Newtonsoft.Json.Serialization
                         NonNullableUnderlyingType,
                         typeof(IReadOnlyDictionary<, >)
                     )
-                ) {
+                )
+                {
                     CreatedType = typeof(ReadOnlyDictionary<, >).MakeGenericType(
                         keyType,
                         valueType
@@ -213,7 +217,8 @@ namespace Newtonsoft.Json.Serialization
                 if (
                     !HasParameterizedCreatorInternal
                     && NonNullableUnderlyingType.Name == FSharpUtils.FSharpMapTypeName
-                ) {
+                )
+                {
                     FSharpUtils.EnsureInitialized(NonNullableUnderlyingType.Assembly());
                     _parameterizedCreator = FSharpUtils.Instance.CreateMap(keyType, valueType);
                 }
@@ -239,7 +244,8 @@ namespace Newtonsoft.Json.Serialization
                         typeof(Dictionary<, >),
                         out _
                     )
-                ) {
+                )
+                {
                     ShouldCreateWrapper = true;
                 }
             }
@@ -255,7 +261,8 @@ namespace Newtonsoft.Json.Serialization
                     out Type? immutableCreatedType,
                     out ObjectConstructor<object>? immutableParameterizedCreator
                 )
-            ) {
+            )
+            {
                 CreatedType = immutableCreatedType;
                 _parameterizedCreator = immutableParameterizedCreator;
                 IsReadOnlyOrFixedSize = true;

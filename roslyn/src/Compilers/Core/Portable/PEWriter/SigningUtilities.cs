@@ -20,7 +20,8 @@ namespace Microsoft.CodeAnalysis
         internal static byte[] CalculateRsaSignature(
             IEnumerable<Blob> content,
             RSAParameters privateKey
-        ) {
+        )
+        {
             var hash = CalculateSha1(content);
 
             using (var rsa = RSA.Create())
@@ -48,7 +49,8 @@ namespace Microsoft.CodeAnalysis
         internal static int CalculateStrongNameSignatureSize(
             CommonPEModuleBuilder module,
             RSAParameters? privateKey
-        ) {
+        )
+        {
             ISourceAssemblySymbolInternal? assembly = module.SourceAssemblyOpt;
             if (assembly == null && !privateKey.HasValue)
             {

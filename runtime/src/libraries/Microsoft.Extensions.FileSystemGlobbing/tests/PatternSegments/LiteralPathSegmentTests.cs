@@ -45,7 +45,8 @@ namespace Microsoft.Extensions.FileSystemGlobbing.Tests.PatternSegments
             string testSample,
             StringComparison comparisonType,
             bool expectation
-        ) {
+        )
+        {
             var pathSegment = new LiteralPathSegment(initialValue, comparisonType);
             Assert.Equal(initialValue, pathSegment.Value);
             Assert.Equal(expectation, pathSegment.Match(testSample));

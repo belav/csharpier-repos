@@ -33,7 +33,8 @@ namespace System.Xml
             string xmlFragment,
             XmlNodeType fragType,
             XmlParserContext context
-        ) {
+        )
+        {
             if (xmlFragment == null)
             {
                 throw new ArgumentNullException(nameof(xmlFragment));
@@ -47,7 +48,8 @@ namespace System.Xml
             Stream xmlFragment,
             XmlNodeType fragType,
             XmlParserContext context
-        ) {
+        )
+        {
             if (xmlFragment == null)
             {
                 throw new ArgumentNullException(nameof(xmlFragment));
@@ -289,7 +291,8 @@ namespace System.Xml
         //
         IDictionary<string, string> IXmlNamespaceResolver.GetNamespacesInScope(
             XmlNamespaceScope scope
-        ) {
+        )
+        {
             return _impl.GetNamespacesInScope(scope);
         }
 

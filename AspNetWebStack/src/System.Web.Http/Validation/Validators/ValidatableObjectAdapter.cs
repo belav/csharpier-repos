@@ -11,14 +11,14 @@ namespace System.Web.Http.Validation.Validators
 {
     public class ValidatableObjectAdapter : ModelValidator
     {
-        public ValidatableObjectAdapter(
-            IEnumerable<ModelValidatorProvider> validatorProviders
-        ) : base(validatorProviders) { }
+        public ValidatableObjectAdapter(IEnumerable<ModelValidatorProvider> validatorProviders)
+            : base(validatorProviders) { }
 
         public override IEnumerable<ModelValidationResult> Validate(
             ModelMetadata metadata,
             object container
-        ) {
+        )
+        {
             // NOTE: Container is never used here, because IValidatableObject doesn't give you
             // any way to get access to your container.
 
@@ -43,7 +43,8 @@ namespace System.Web.Http.Validation.Validators
 
         private static IEnumerable<ModelValidationResult> ConvertResults(
             IEnumerable<ValidationResult> results
-        ) {
+        )
+        {
             foreach (ValidationResult result in results)
             {
                 if (result != ValidationResult.Success)

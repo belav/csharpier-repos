@@ -31,20 +31,22 @@ namespace Microsoft.CodeAnalysis.IntroduceVariable
                 bool isConstant,
                 bool isLocal,
                 bool isQueryLocal
-            ) : base(
-                service,
-                document,
-                expression,
-                allOccurrences,
-                isConstant,
-                isLocal,
-                isQueryLocal
-            ) { }
+            )
+                : base(
+                    service,
+                    document,
+                    expression,
+                    allOccurrences,
+                    isConstant,
+                    isLocal,
+                    isQueryLocal
+                ) { }
 
             protected override async Task<Document> PostProcessChangesAsync(
                 Document document,
                 CancellationToken cancellationToken
-            ) {
+            )
+            {
                 document = await Simplifier.ReduceAsync(
                         document,
                         Simplifier.Annotation,

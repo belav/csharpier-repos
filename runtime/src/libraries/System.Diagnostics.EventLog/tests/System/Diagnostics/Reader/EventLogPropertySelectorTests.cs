@@ -49,7 +49,8 @@ namespace System.Diagnostics.Tests
                         EventLogRecord eventRecord = (EventLogRecord)logReader.ReadEvent();
                         eventRecord != null;
                         eventRecord = (EventLogRecord)logReader.ReadEvent()
-                    ) {
+                    )
+                    {
                         IList<object> logEventProps;
                         logEventProps = eventRecord.GetPropertyValues(logPropertyContext);
                         int eventId;
@@ -60,7 +61,8 @@ namespace System.Diagnostics.Tests
                         if (
                             !providerNameAndIds.ContainsKey(providerName)
                             && eventRecord.ProviderId.HasValue
-                        ) {
+                        )
+                        {
                             providerNameAndIds.Add(providerName, eventRecord.ProviderId.Value);
                         }
                     }

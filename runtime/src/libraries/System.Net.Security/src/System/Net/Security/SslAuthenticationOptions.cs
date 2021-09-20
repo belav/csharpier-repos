@@ -14,7 +14,8 @@ namespace System.Net.Security
             SslClientAuthenticationOptions sslClientAuthenticationOptions,
             RemoteCertificateValidationCallback? remoteCallback,
             LocalCertSelectionCallback? localCallback
-        ) {
+        )
+        {
             Debug.Assert(sslClientAuthenticationOptions.TargetHost != null);
 
             // Common options.
@@ -40,7 +41,8 @@ namespace System.Net.Security
 
         internal SslAuthenticationOptions(
             SslServerAuthenticationOptions sslServerAuthenticationOptions
-        ) {
+        )
+        {
             // Common options.
             AllowRenegotiation = sslServerAuthenticationOptions.AllowRenegotiation;
             ApplicationProtocols = sslServerAuthenticationOptions.ApplicationProtocols;
@@ -108,7 +110,8 @@ namespace System.Net.Security
             ServerOptionsSelectionCallback optionCallback,
             object? state,
             RemoteCertificateValidationCallback? remoteCallback
-        ) {
+        )
+        {
             CheckCertName = false;
             TargetHost = string.Empty;
             IsServer = true;
@@ -137,7 +140,8 @@ namespace System.Net.Security
                 sslServerAuthenticationOptions.ServerCertificate
                     is X509Certificate2 certificateWithKey
                 && certificateWithKey.HasPrivateKey
-            ) {
+            )
+            {
                 // given cert is X509Certificate2 with key. We can use it directly.
                 CertificateContext = SslStreamCertificateContext.Create(certificateWithKey);
             }

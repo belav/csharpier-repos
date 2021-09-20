@@ -33,7 +33,8 @@ namespace Microsoft.CodeAnalysis.Editor.FindUsages
             public FindLiteralsProgressAdapter(
                 IFindUsagesContext context,
                 DefinitionItem definition
-            ) {
+            )
+            {
                 _context = context;
                 _definition = definition;
             }
@@ -83,7 +84,8 @@ namespace Microsoft.CodeAnalysis.Editor.FindUsages
                 Solution solution,
                 IFindUsagesContext context,
                 FindReferencesSearchOptions options
-            ) {
+            )
+            {
                 _solution = solution;
                 _context = context;
                 _options = options;
@@ -133,7 +135,8 @@ namespace Microsoft.CodeAnalysis.Editor.FindUsages
                 SymbolGroup group,
                 ISymbol definition,
                 ReferenceLocation location
-            ) {
+            )
+            {
                 var definitionItem = await GetDefinitionItemAsync(group).ConfigureAwait(false);
                 var referenceItem = await location.TryCreateSourceReferenceItemAsync(
                         definitionItem,

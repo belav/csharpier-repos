@@ -104,7 +104,8 @@ namespace System.Net.Security.Tests
         public void Equality_Tests_Succeeds(
             SslApplicationProtocol left,
             SslApplicationProtocol right
-        ) {
+        )
+        {
             Assert.Equal(left, right);
             Assert.True(left == right);
             Assert.False(left != right);
@@ -116,7 +117,8 @@ namespace System.Net.Security.Tests
         public void InEquality_Tests_Succeeds(
             SslApplicationProtocol left,
             SslApplicationProtocol right
-        ) {
+        )
+        {
             Assert.NotEqual(left, right);
             Assert.True(left != right);
             Assert.False(left == right);

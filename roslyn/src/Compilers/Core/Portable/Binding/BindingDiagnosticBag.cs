@@ -116,7 +116,8 @@ namespace Microsoft.CodeAnalysis
         internal void AddRange(
             ImmutableBindingDiagnostic<TAssemblySymbol> other,
             bool allowMismatchInDependencyAccumulation = false
-        ) {
+        )
+        {
             AddRange(other.Diagnostics);
             Debug.Assert(
                 allowMismatchInDependencyAccumulation
@@ -130,7 +131,8 @@ namespace Microsoft.CodeAnalysis
         internal void AddRange(
             BindingDiagnosticBag<TAssemblySymbol>? other,
             bool allowMismatchInDependencyAccumulation = false
-        ) {
+        )
+        {
             if (other is object)
             {
                 AddRange(other.DiagnosticBag);
@@ -206,7 +208,8 @@ namespace Microsoft.CodeAnalysis
         internal void AddDependencies(
             BindingDiagnosticBag<TAssemblySymbol> dependencies,
             bool allowMismatchInDependencyAccumulation = false
-        ) {
+        )
+        {
             Debug.Assert(
                 allowMismatchInDependencyAccumulation
                     || !dependencies.AccumulatesDependencies
@@ -241,14 +244,16 @@ namespace Microsoft.CodeAnalysis
         internal bool AddDiagnostics(
             SyntaxNode node,
             CompoundUseSiteInfo<TAssemblySymbol> useSiteInfo
-        ) {
+        )
+        {
             return AddDiagnostics(node.Location, useSiteInfo);
         }
 
         internal bool AddDiagnostics(
             Location location,
             CompoundUseSiteInfo<TAssemblySymbol> useSiteInfo
-        ) {
+        )
+        {
             if (DiagnosticBag is DiagnosticBag diagnosticBag)
             {
                 if (!useSiteInfo.Diagnostics.IsNullOrEmpty())
@@ -347,7 +352,8 @@ namespace Microsoft.CodeAnalysis
         public ImmutableBindingDiagnostic(
             ImmutableArray<Diagnostic> diagnostics,
             ImmutableArray<TAssemblySymbol> dependencies
-        ) {
+        )
+        {
             _diagnostics = diagnostics.NullToEmpty();
             _dependencies = dependencies.NullToEmpty();
         }
@@ -358,7 +364,8 @@ namespace Microsoft.CodeAnalysis
         public static bool operator ==(
             ImmutableBindingDiagnostic<TAssemblySymbol> first,
             ImmutableBindingDiagnostic<TAssemblySymbol> second
-        ) {
+        )
+        {
             return first.Diagnostics == second.Diagnostics
                 && first.Dependencies == second.Dependencies;
         }
@@ -366,7 +373,8 @@ namespace Microsoft.CodeAnalysis
         public static bool operator !=(
             ImmutableBindingDiagnostic<TAssemblySymbol> first,
             ImmutableBindingDiagnostic<TAssemblySymbol> second
-        ) {
+        )
+        {
             return !(first == second);
         }
 

@@ -28,7 +28,8 @@ namespace Microsoft.DiaSymReader
             ComMemoryStream pdbStream,
             ISymUnmanagedWriter5 symWriter,
             string symWriterModuleName
-        ) {
+        )
+        {
             Debug.Assert(pdbStream != null);
             Debug.Assert(symWriter != null);
             Debug.Assert(symWriterModuleName != null);
@@ -158,7 +159,8 @@ namespace Microsoft.DiaSymReader
             Guid algorithmId,
             ReadOnlySpan<byte> checksum,
             ReadOnlySpan<byte> source
-        ) {
+        )
+        {
             if (name == null)
             {
                 throw new ArgumentNullException(nameof(name));
@@ -227,7 +229,8 @@ namespace Microsoft.DiaSymReader
             int[] startColumns,
             int[] endLines,
             int[] endColumns
-        ) {
+        )
+        {
             if (documentIndex < 0 || documentIndex >= _documentWriters.Count)
             {
                 throw new ArgumentOutOfRangeException(nameof(documentIndex));
@@ -250,7 +253,8 @@ namespace Microsoft.DiaSymReader
                 || count > startColumns.Length
                 || count > endLines.Length
                 || count > endColumns.Length
-            ) {
+            )
+            {
                 throw new ArgumentOutOfRangeException(nameof(count));
             }
 
@@ -334,7 +338,8 @@ namespace Microsoft.DiaSymReader
             string name,
             int attributes,
             int localSignatureToken
-        ) {
+        )
+        {
             var symWriter = GetSymWriter();
 
             try
@@ -362,7 +367,8 @@ namespace Microsoft.DiaSymReader
             string name,
             object value,
             int constantSignatureToken
-        ) {
+        )
+        {
             var symWriter = GetSymWriter();
 
             switch (value)
@@ -419,7 +425,8 @@ namespace Microsoft.DiaSymReader
             string name,
             object value,
             int constantSignatureToken
-        ) {
+        )
+        {
             VariantStructure variant = new VariantStructure();
 #pragma warning disable CS0618 // Type or member is obsolete
             Marshal.GetNativeVariantForObject(value, new IntPtr(&variant));
@@ -432,7 +439,8 @@ namespace Microsoft.DiaSymReader
             string name,
             string value,
             int constantSignatureToken
-        ) {
+        )
+        {
             Debug.Assert(value != null);
 
             int encodedLength;
@@ -541,7 +549,8 @@ namespace Microsoft.DiaSymReader
             int catchHandlerOffset,
             ReadOnlySpan<int> yieldOffsets,
             ReadOnlySpan<int> resumeOffsets
-        ) {
+        )
+        {
             if (yieldOffsets == null)
                 throw new ArgumentNullException(nameof(yieldOffsets));
             if (resumeOffsets == null)
@@ -554,7 +563,8 @@ namespace Microsoft.DiaSymReader
 
             if (
                 GetSymWriter() is ISymUnmanagedAsyncMethodPropertiesWriter asyncMethodPropertyWriter
-            ) {
+            )
+            {
                 int count = yieldOffsets.Length;
 
                 if (count > 0)
@@ -735,7 +745,8 @@ namespace Microsoft.DiaSymReader
             int startColumn,
             int endLine,
             int endColumn
-        ) {
+        )
+        {
             if (documentIndex < 0 || documentIndex >= _documentWriters.Count)
             {
                 throw new ArgumentOutOfRangeException(nameof(documentIndex));

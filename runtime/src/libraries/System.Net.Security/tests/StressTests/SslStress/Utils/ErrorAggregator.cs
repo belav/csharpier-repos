@@ -41,7 +41,8 @@ namespace SslStress.Utils
             Exception exception,
             string? metadata = null,
             DateTime? timestamp = null
-        ) {
+        )
+        {
             timestamp ??= DateTime.Now;
 
             (Type, string, string)[] key = ClassifyFailure(exception);
@@ -55,7 +56,8 @@ namespace SslStress.Utils
             // classify exception according to type, message and callsite of itself and any inner exceptions
             static (Type exception, string message, string callSite)[] ClassifyFailure(
                 Exception exn
-            ) {
+            )
+            {
                 var acc = new List<(Type exception, string message, string callSite)>();
 
                 for (Exception? e = exn; e != null;)
@@ -91,7 +93,8 @@ namespace SslStress.Utils
                 ErrorType failure in _failureTypes.Values.OrderByDescending(
                     x => x.Occurrences.Count
                 )
-            ) {
+            )
+            {
                 Console.ForegroundColor = ConsoleColor.Yellow;
                 Console.WriteLine($"Failure Type {++i}/{_failureTypes.Count}:");
                 Console.ResetColor();
@@ -103,7 +106,8 @@ namespace SslStress.Utils
                         string?,
                         (DateTime timestamp, string? metadata)
                     > grouping in failure.Occurrences.GroupBy(o => o.metadata)
-                ) {
+                )
+                {
                     Console.ForegroundColor = ConsoleColor.Cyan;
                     Console.Write($"\t{(grouping.Key ?? "").PadRight(30)}");
                     Console.ResetColor();

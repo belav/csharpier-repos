@@ -225,7 +225,8 @@ namespace Microsoft.Data.Sqlite
             byte[]? buffer,
             int bufferOffset,
             int length
-        ) {
+        )
+        {
             using var stream = GetStream(ordinal);
 
             if (buffer == null)
@@ -244,7 +245,8 @@ namespace Microsoft.Data.Sqlite
             char[]? buffer,
             int bufferOffset,
             int length
-        ) {
+        )
+        {
             using var reader = new StreamReader(GetStream(ordinal), Encoding.UTF8);
 
             if (buffer == null)
@@ -331,7 +333,8 @@ namespace Microsoft.Data.Sqlite
                     if (
                         string.Equals(dataType, "INTEGER", StringComparison.OrdinalIgnoreCase)
                         && primaryKey != 0
-                    ) {
+                    )
+                    {
                         if (pkColumns < 0L)
                         {
                             using (var command = _connection.CreateCommand())

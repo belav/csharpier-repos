@@ -27,7 +27,8 @@ namespace Microsoft.CodeAnalysis
                 AssemblyIdentity identity,
                 ImmutableArray<AssemblyData> referencedAssemblyData,
                 ImmutableArray<PEModule> modules
-            ) {
+            )
+            {
                 Debug.Assert(identity != null);
                 Debug.Assert(!referencedAssemblyData.IsDefault);
 
@@ -70,7 +71,8 @@ namespace Microsoft.CodeAnalysis
             public override AssemblyReferenceBinding[] BindAssemblyReferences(
                 ImmutableArray<AssemblyData> assemblies,
                 AssemblyIdentityComparer assemblyIdentityComparer
-            ) {
+            )
+            {
                 var boundReferences = new AssemblyReferenceBinding[_referencedAssemblies.Length];
 
                 for (int i = 0; i < _referencedAssemblyData.Length; i++)

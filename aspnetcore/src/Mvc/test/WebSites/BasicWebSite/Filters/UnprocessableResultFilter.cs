@@ -17,7 +17,8 @@ namespace BasicWebSite
             if (
                 context.Result is StatusCodeResult statusCodeResult
                 && statusCodeResult.StatusCode == 415
-            ) {
+            )
+            {
                 context.Result = new ObjectResult("Can't process this!") { StatusCode = 422, };
             }
         }

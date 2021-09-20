@@ -295,7 +295,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Http
                     string.IsNullOrEmpty(reasonPhrase)
                     || WebUtilities.ReasonPhrases.GetReasonPhrase(statusCode) == reasonPhrase
                 )
-            ) {
+            )
+            {
                 return candidate;
             }
 

@@ -156,7 +156,8 @@ namespace System.ComponentModel.DataAnnotations.Tests
         public void Validate_ICollection_NetFx_ThrowsInvalidCastException(
             MaxLengthAttribute attribute,
             object value
-        ) {
+        )
+        {
             Assert.Throws<InvalidCastException>(
                 () => attribute.Validate(value, new ValidationContext(new object()))
             );
@@ -168,7 +169,8 @@ namespace System.ComponentModel.DataAnnotations.Tests
         [InlineData(-10)]
         public static void GetValidationResult_InvalidLength_ThrowsInvalidOperationException(
             int length
-        ) {
+        )
+        {
             var attribute = new MaxLengthAttribute(length);
             Assert.Throws<InvalidOperationException>(
                 () => attribute.Validate("Twoflower", new ValidationContext(new object()))

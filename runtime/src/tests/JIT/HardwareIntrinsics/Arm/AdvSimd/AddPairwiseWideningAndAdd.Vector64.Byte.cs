@@ -133,7 +133,8 @@ namespace JIT.HardwareIntrinsics.Arm
                     || (alignment * 2) < sizeOfinArray1
                     || (alignment * 2) < sizeOfinArray2
                     || (alignment * 2) < sizeOfoutArray
-                ) {
+                )
+                {
                     throw new ArgumentException("Invalid value of alignment");
                 }
 
@@ -212,7 +213,8 @@ namespace JIT.HardwareIntrinsics.Arm
 
             public void RunStructFldScenario(
                 SimpleBinaryOpTest__AddPairwiseWideningAndAdd_Vector64_Byte testClass
-            ) {
+            )
+            {
                 var result = AdvSimd.AddPairwiseWideningAndAdd(_fld1, _fld2);
 
                 Unsafe.Write(testClass._dataTable.outArrayPtr, result);
@@ -221,7 +223,8 @@ namespace JIT.HardwareIntrinsics.Arm
 
             public void RunStructFldScenario_Load(
                 SimpleBinaryOpTest__AddPairwiseWideningAndAdd_Vector64_Byte testClass
-            ) {
+            )
+            {
                 fixed (Vector64<UInt16>* pFld1 = &_fld1)fixed (Vector64<Byte>* pFld2 = &_fld2)
                 {
                     var result = AdvSimd.AddPairwiseWideningAndAdd(
@@ -404,7 +407,8 @@ namespace JIT.HardwareIntrinsics.Arm
 
             fixed (Vector64<UInt16>* pClsVar1 = &_clsVar1)fixed (
                 Vector64<Byte>* pClsVar2 = &_clsVar2
-            ) {
+            )
+            {
                 var result = AdvSimd.AddPairwiseWideningAndAdd(
                     AdvSimd.LoadVector64((UInt16*)(pClsVar1)),
                     AdvSimd.LoadVector64((Byte*)(pClsVar2))
@@ -561,7 +565,8 @@ namespace JIT.HardwareIntrinsics.Arm
             Vector64<Byte> op2,
             void* result,
             [CallerMemberName] string method = ""
-        ) {
+        )
+        {
             UInt16[] inArray1 = new UInt16[Op1ElementCount];
             Byte[] inArray2 = new Byte[Op2ElementCount];
             UInt16[] outArray = new UInt16[RetElementCount];
@@ -582,7 +587,8 @@ namespace JIT.HardwareIntrinsics.Arm
             void* op2,
             void* result,
             [CallerMemberName] string method = ""
-        ) {
+        )
+        {
             UInt16[] inArray1 = new UInt16[Op1ElementCount];
             Byte[] inArray2 = new Byte[Op2ElementCount];
             UInt16[] outArray = new UInt16[RetElementCount];
@@ -611,7 +617,8 @@ namespace JIT.HardwareIntrinsics.Arm
             Byte[] right,
             UInt16[] result,
             [CallerMemberName] string method = ""
-        ) {
+        )
+        {
             bool succeeded = true;
 
             for (var i = 0; i < RetElementCount; i++)

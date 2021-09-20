@@ -19,7 +19,8 @@ namespace System.Runtime.InteropServices
         public ComAwareEventInfo(
             [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicEvents)] Type type,
             string eventName
-        ) {
+        )
+        {
             _innerEventInfo = type.GetEvent(eventName)!;
         }
 
@@ -106,7 +107,8 @@ namespace System.Runtime.InteropServices
             EventInfo eventInfo,
             out Guid sourceIid,
             out int dispid
-        ) {
+        )
+        {
             object[] comEventInterfaces = eventInfo.DeclaringType!.GetCustomAttributes(
                 typeof(ComEventInterfaceAttribute),
                 inherit: false

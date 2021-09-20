@@ -22,7 +22,8 @@ namespace Microsoft.CodeAnalysis.Razor
         public static RazorProjectEngineBuilder SetCSharpLanguageVersion(
             this RazorProjectEngineBuilder builder,
             LanguageVersion csharpLanguageVersion
-        ) {
+        )
+        {
             if (builder == null)
             {
                 throw new ArgumentNullException(nameof(builder));
@@ -69,7 +70,8 @@ namespace Microsoft.CodeAnalysis.Razor
 
                 if (
                     options.Configuration != null && options.Configuration.LanguageVersion.Major < 3
-                ) {
+                )
+                {
                     // Prior to 3.0 there were no C# version specific controlled features. Suppress nullability enforcement.
                     options.SuppressNullabilityEnforcement = true;
                 }

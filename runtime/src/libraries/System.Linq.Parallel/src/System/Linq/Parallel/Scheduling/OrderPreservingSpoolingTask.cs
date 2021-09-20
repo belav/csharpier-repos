@@ -74,7 +74,8 @@ namespace System.Linq.Parallel
             PartitionedStream<TInputOutput, TKey> partitions,
             Shared<TInputOutput[]?> results,
             TaskScheduler taskScheduler
-        ) {
+        )
+        {
             Debug.Assert(groupState != null);
             Debug.Assert(partitions != null);
             Debug.Assert(results != null);

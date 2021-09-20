@@ -47,7 +47,8 @@ namespace System.Transactions
         public TransactionScope(
             TransactionScopeOption scopeOption,
             TransactionScopeAsyncFlowOption asyncFlowOption
-        ) {
+        )
+        {
             TransactionsEtwProvider etwLog = TransactionsEtwProvider.Log;
             if (etwLog.IsEnabled())
             {
@@ -109,7 +110,8 @@ namespace System.Transactions
             TransactionScopeOption scopeOption,
             TimeSpan scopeTimeout,
             TransactionScopeAsyncFlowOption asyncFlowOption
-        ) {
+        )
+        {
             TransactionsEtwProvider etwLog = TransactionsEtwProvider.Log;
             if (etwLog.IsEnabled())
             {
@@ -131,7 +133,8 @@ namespace System.Transactions
                 (null != _expectedCurrent)
                 && (null == _committableTransaction)
                 && (TimeSpan.Zero != scopeTimeout)
-            ) {
+            )
+            {
                 // BUGBUG: Scopes should not use individual timers
                 _scopeTimer = new Timer(TimerCallback, this, scopeTimeout, TimeSpan.Zero);
             }
@@ -185,7 +188,8 @@ namespace System.Transactions
             TransactionScopeOption scopeOption,
             TransactionOptions transactionOptions,
             TransactionScopeAsyncFlowOption asyncFlowOption
-        ) {
+        )
+        {
             TransactionsEtwProvider etwLog = TransactionsEtwProvider.Log;
             if (etwLog.IsEnabled())
             {
@@ -215,7 +219,8 @@ namespace System.Transactions
                     if (
                         (IsolationLevel.Unspecified != transactionOptions.IsolationLevel)
                         && (_expectedCurrent.IsolationLevel != transactionOptions.IsolationLevel)
-                    ) {
+                    )
+                    {
                         throw new ArgumentException(
                             SR.TransactionScopeIsolationLevelDifferentFromTransaction,
                             nameof(transactionOptions)
@@ -228,7 +233,8 @@ namespace System.Transactions
                 (null != _expectedCurrent)
                 && (null == _committableTransaction)
                 && (TimeSpan.Zero != scopeTimeout)
-            ) {
+            )
+            {
                 // BUGBUG: Scopes should use a shared timer
                 _scopeTimer = new Timer(TimerCallback, this, scopeTimeout, TimeSpan.Zero);
             }
@@ -277,7 +283,8 @@ namespace System.Transactions
             TransactionScopeOption scopeOption,
             TransactionOptions transactionOptions,
             EnterpriseServicesInteropOption interopOption
-        ) {
+        )
+        {
             TransactionsEtwProvider etwLog = TransactionsEtwProvider.Log;
             if (etwLog.IsEnabled())
             {
@@ -309,7 +316,8 @@ namespace System.Transactions
                     if (
                         (IsolationLevel.Unspecified != transactionOptions.IsolationLevel)
                         && (_expectedCurrent.IsolationLevel != transactionOptions.IsolationLevel)
-                    ) {
+                    )
+                    {
                         throw new ArgumentException(
                             SR.TransactionScopeIsolationLevelDifferentFromTransaction,
                             nameof(transactionOptions)
@@ -322,7 +330,8 @@ namespace System.Transactions
                 (null != _expectedCurrent)
                 && (null == _committableTransaction)
                 && (TimeSpan.Zero != scopeTimeout)
-            ) {
+            )
+            {
                 // BUGBUG: Scopes should use a shared timer
                 _scopeTimer = new Timer(TimerCallback, this, scopeTimeout, TimeSpan.Zero);
             }
@@ -373,7 +382,8 @@ namespace System.Transactions
         public TransactionScope(
             Transaction transactionToUse,
             TransactionScopeAsyncFlowOption asyncFlowOption
-        ) {
+        )
+        {
             TransactionsEtwProvider etwLog = TransactionsEtwProvider.Log;
             if (etwLog.IsEnabled())
             {
@@ -397,7 +407,8 @@ namespace System.Transactions
             Transaction transactionToUse,
             TimeSpan scopeTimeout,
             TransactionScopeAsyncFlowOption asyncFlowOption
-        ) {
+        )
+        {
             TransactionsEtwProvider etwLog = TransactionsEtwProvider.Log;
             if (etwLog.IsEnabled())
             {
@@ -418,7 +429,8 @@ namespace System.Transactions
             Transaction transactionToUse,
             TimeSpan scopeTimeout,
             EnterpriseServicesInteropOption interopOption
-        ) {
+        )
+        {
             TransactionsEtwProvider etwLog = TransactionsEtwProvider.Log;
             if (etwLog.IsEnabled())
             {
@@ -474,7 +486,8 @@ namespace System.Transactions
             Transaction transactionToUse,
             TimeSpan scopeTimeout,
             bool interopModeSpecified
-        ) {
+        )
+        {
             if (null == transactionToUse)
             {
                 throw new ArgumentNullException(nameof(transactionToUse));
@@ -587,14 +600,16 @@ namespace System.Transactions
                     // Verify that expectedCurrent is the same as the "current" current if we the interopOption value is None.
                     else if (
                         EnterpriseServicesInteropOption.None == actualCurrentScope._interopOption
-                    ) {
+                    )
+                    {
                         if (
                             (
                                 (null != actualCurrentScope._expectedCurrent)
                                 && (!actualCurrentScope._expectedCurrent.Equals(current))
                             )
                             || ((null != current) && (null == actualCurrentScope._expectedCurrent))
-                        ) {
+                        )
+                        {
                             TransactionTraceIdentifier myId;
                             TransactionTraceIdentifier currentId;
 
@@ -705,7 +720,8 @@ namespace System.Transactions
                         if (
                             ((null != _expectedCurrent) && (!_expectedCurrent.Equals(current)))
                             || ((null != current) && (null == _expectedCurrent))
-                        ) {
+                        )
+                        {
                             TransactionTraceIdentifier myId;
                             TransactionTraceIdentifier currentId;
 
@@ -1190,7 +1206,8 @@ namespace System.Transactions
             if (
                 interopOption < EnterpriseServicesInteropOption.None
                 || interopOption > EnterpriseServicesInteropOption.Full
-            ) {
+            )
+            {
                 throw new ArgumentOutOfRangeException(nameof(interopOption));
             }
         }
@@ -1211,7 +1228,8 @@ namespace System.Transactions
             if (
                 asyncFlowOption < TransactionScopeAsyncFlowOption.Suppress
                 || asyncFlowOption > TransactionScopeAsyncFlowOption.Enabled
-            ) {
+            )
+            {
                 throw new ArgumentOutOfRangeException(nameof(asyncFlowOption));
             }
 

@@ -121,10 +121,8 @@ namespace MS.Internal.Xml.Cache
         /// <summary>
         /// Create an iterator that ranges over all content children of "parent" having the specified XPathNodeType.
         /// </summary>
-        public XPathDocumentKindChildIterator(
-            XPathDocumentNavigator parent,
-            XPathNodeType typ
-        ) : base(parent)
+        public XPathDocumentKindChildIterator(XPathDocumentNavigator parent, XPathNodeType typ)
+            : base(parent)
         {
             _typ = typ;
         }
@@ -204,9 +202,8 @@ namespace MS.Internal.Xml.Cache
         /// <summary>
         /// Create a new iterator that is a copy of "iter".
         /// </summary>
-        public XPathDocumentElementDescendantIterator(
-            XPathDocumentElementDescendantIterator iter
-        ) : base(iter)
+        public XPathDocumentElementDescendantIterator(XPathDocumentElementDescendantIterator iter)
+            : base(iter)
         {
             _end = iter._end;
             _localName = iter._localName;

@@ -77,7 +77,8 @@ namespace System.Threading.Tests
             using (
                 ManualResetEvent mre1 = new ManualResetEvent(true),
                     mre2 = new ManualResetEvent(false)
-            ) {
+            )
+            {
                 const int Iters = 10;
                 Task.WaitAll(
                     Task.Factory.StartNew(

@@ -254,7 +254,8 @@ namespace System.Drawing
             if (
                 c.IsEmpty
                 && string.Equals(htmlColor, "LightGrey", StringComparison.OrdinalIgnoreCase)
-            ) {
+            )
+            {
                 c = Color.LightGray;
             }
 

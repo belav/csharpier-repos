@@ -190,14 +190,16 @@ namespace Internal.NativeFormat
         public static int ComputeNestedTypeHashCode(
             int enclosingTypeHashCode,
             int nestedTypeNameHash
-        ) {
+        )
+        {
             return (enclosingTypeHashCode + _rotl(enclosingTypeHashCode, 11)) ^ nestedTypeNameHash;
         }
 
         public static int ComputeGenericInstanceHashCode<ARG>(
             int genericDefinitionHashCode,
             ARG[] genericTypeArguments
-        ) {
+        )
+        {
             int hashcode = genericDefinitionHashCode;
             for (int i = 0; i < genericTypeArguments.Length; i++)
             {
@@ -210,7 +212,8 @@ namespace Internal.NativeFormat
         public static int ComputeMethodSignatureHashCode<ARG>(
             int returnTypeHashCode,
             ARG[] parameters
-        ) {
+        )
+        {
             // We're not taking calling conventions into consideration here mostly because there's no
             // exchange enum type that would define them. We could define one, but the amount of additional
             // information it would bring (16 or so possibilities) is likely not worth it.
@@ -232,7 +235,8 @@ namespace Internal.NativeFormat
         public static int ComputeMethodHashCode(
             int typeHashCode,
             int nameOrNameAndGenericArgumentsHashCode
-        ) {
+        )
+        {
             // TODO! This hash combining function isn't good, but it matches logic used in the past
             // consider changing to a better combining function once all uses use this function
             return typeHashCode ^ nameOrNameAndGenericArgumentsHashCode;

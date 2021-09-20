@@ -63,7 +63,8 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Completion
         protected static async Task<bool> CanUseSpeculativeSemanticModelAsync(
             Document document,
             int position
-        ) {
+        )
+        {
             var service = document.GetLanguageService<ISyntaxFactsService>();
             var node = (await document.GetSyntaxRootAsync()).FindToken(position).Parent;
 
@@ -123,7 +124,8 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Completion
             int position,
             RoslynCompletion.CompletionTrigger triggerInfo,
             OptionSet options = null
-        ) {
+        )
+        {
             return service.GetCompletionsAsync(
                 document,
                 position,
@@ -149,7 +151,8 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Completion
             bool? isComplexTextEdit,
             List<CompletionFilter> matchingFilters,
             CompletionItemFlags? flags
-        ) {
+        )
+        {
             var code = (await document.GetTextAsync()).ToString();
 
             var trigger = RoslynCompletion.CompletionTrigger.Invoke;
@@ -263,7 +266,8 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Completion
         private static bool FiltersMatch(
             List<CompletionFilter> expectedMatchingFilters,
             RoslynCompletion.CompletionItem item
-        ) {
+        )
+        {
             var matchingFilters = FilterSet.GetFilters(item);
 
             // Check that the list has no duplicates.
@@ -287,7 +291,8 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Completion
             bool? isComplexTextEdit,
             List<CompletionFilter> matchingFilters,
             CompletionItemFlags? flags
-        ) {
+        )
+        {
             using var workspaceFixture = GetOrCreateWorkspaceFixture();
 
             var workspace = workspaceFixture.Target.GetWorkspace(markup, ExportProvider);
@@ -320,7 +325,8 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Completion
         protected async Task<CompletionList> GetCompletionListAsync(
             string markup,
             string workspaceKind = null
-        ) {
+        )
+        {
             using var workspaceFixture = GetOrCreateWorkspaceFixture();
             var workspace = workspaceFixture.Target.GetWorkspace(
                 markup,
@@ -349,7 +355,8 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Completion
             string expectedCodeAfterCommit,
             SourceCodeKind? sourceCodeKind = null,
             char? commitChar = null
-        ) {
+        )
+        {
             using var workspaceFixture = GetOrCreateWorkspaceFixture();
             using (workspaceFixture.Target.GetWorkspace(markupBeforeCommit, ExportProvider))
             {
@@ -395,7 +402,8 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Completion
             string expectedCodeAfterCommit,
             char? commitChar,
             SourceCodeKind? sourceCodeKind = null
-        ) {
+        )
+        {
             using var workspaceFixture = GetOrCreateWorkspaceFixture();
 
             workspaceFixture.Target.GetWorkspace(markupBeforeCommit, ExportProvider);
@@ -456,7 +464,8 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Completion
             bool? isComplexTextEdit = null,
             List<CompletionFilter> matchingFilters = null,
             CompletionItemFlags? flags = null
-        ) {
+        )
+        {
             if (sourceCodeKind.HasValue)
             {
                 await VerifyAsync(
@@ -530,7 +539,8 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Completion
             bool? isComplexTextEdit = null,
             List<CompletionFilter> matchingFilters = null,
             CompletionItemFlags? flags = null
-        ) {
+        )
+        {
             if (sourceCodeKind.HasValue)
             {
                 await VerifyAsync(
@@ -598,7 +608,8 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Completion
             string displayTextSuffix = null,
             string displayTextPrefix = null,
             string inlineDescription = null
-        ) {
+        )
+        {
             if (sourceCodeKind.HasValue)
             {
                 await VerifyAsync(
@@ -665,7 +676,8 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Completion
             bool? hasSuggestionModeItem = null,
             string displayTextSuffix = null,
             string inlineDescription = null
-        ) {
+        )
+        {
             if (sourceCodeKind.HasValue)
             {
                 await VerifyAsync(
@@ -752,7 +764,8 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Completion
             bool? isComplexTextEdit,
             List<CompletionFilter> matchingFilters,
             CompletionItemFlags? flags
-        ) {
+        )
+        {
             using var workspaceFixture = GetOrCreateWorkspaceFixture();
 
             workspaceFixture.Target.GetWorkspace(ExportProvider);
@@ -817,7 +830,8 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Completion
             string expectedCodeAfterCommit,
             SourceCodeKind sourceCodeKind,
             char? commitChar = null
-        ) {
+        )
+        {
             using var workspaceFixture = GetOrCreateWorkspaceFixture();
 
             var document1 = workspaceFixture.Target.UpdateDocument(
@@ -858,7 +872,8 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Completion
             string itemToCommit,
             string expectedCodeAfterCommit,
             char? commitChar
-        ) {
+        )
+        {
             document = WithChangedOptions(document);
 
             var service = GetCompletionService(document.Project);
@@ -876,7 +891,8 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Completion
             if (
                 service.GetProvider(firstItem)
                 is ICustomCommitCompletionProvider customCommitCompletionProvider
-            ) {
+            )
+            {
                 VerifyCustomCommitWorker(
                     service,
                     customCommitCompletionProvider,
@@ -913,7 +929,8 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Completion
             Document document,
             OptionKey optionKey,
             object value
-        ) {
+        )
+        {
             var workspace = document.Project.Solution.Workspace;
             var newOptions = workspace.Options.WithChangedOption(optionKey, value);
             workspace.TryApplyChanges(document.Project.Solution.WithOptions(newOptions));
@@ -928,7 +945,8 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Completion
             string codeBeforeCommit,
             string expectedCodeAfterCommit,
             char? commitChar = null
-        ) {
+        )
+        {
             using var workspaceFixture = GetOrCreateWorkspaceFixture();
 
             MarkupTestFile.GetPosition(
@@ -944,7 +962,8 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Completion
                     completionItem,
                     commitChar.Value
                 )
-            ) {
+            )
+            {
                 Assert.Equal(codeBeforeCommit, actualExpectedCode);
                 return;
             }
@@ -989,7 +1008,8 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Completion
             string codeBeforeCommit,
             string expectedCodeAfterCommit,
             char? commitChar = null
-        ) {
+        )
+        {
             using var workspaceFixture = GetOrCreateWorkspaceFixture();
 
             MarkupTestFile.GetPosition(
@@ -1005,7 +1025,8 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Completion
                     completionItem,
                     commitChar.Value
                 )
-            ) {
+            )
+            {
                 Assert.Equal(codeBeforeCommit, actualExpectedCode);
                 return;
             }
@@ -1044,7 +1065,8 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Completion
             string expectedCodeAfterCommit,
             char? commitChar,
             SourceCodeKind sourceCodeKind
-        ) {
+        )
+        {
             using var workspaceFixture = GetOrCreateWorkspaceFixture();
 
             var document1 = workspaceFixture.Target.UpdateDocument(
@@ -1082,7 +1104,8 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Completion
             string itemToCommit,
             string expectedCodeAfterCommit,
             char? commitCharOpt
-        ) {
+        )
+        {
             document = WithChangedOptions(document);
             var service = GetCompletionService(document.Project);
             var completionList = await GetCompletionListAsync(
@@ -1103,7 +1126,8 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Completion
             if (
                 commitChar == '\t'
                 || CommitManager.IsCommitCharacter(service.GetRules(), firstItem, commitChar)
-            ) {
+            )
+            {
                 var textChange =
                     (
                         await service.GetChangeAsync(
@@ -1149,7 +1173,8 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Completion
             string sourceLanguage,
             string referencedLanguage,
             bool hideAdvancedMembers = false
-        ) {
+        )
+        {
             await VerifyItemWithMetadataReferenceAsync(
                 markup,
                 referencedCode,
@@ -1191,7 +1216,8 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Completion
             string sourceLanguage,
             string referencedLanguage,
             bool hideAdvancedMembers
-        ) {
+        )
+        {
             var xmlString = CreateMarkupForProjectWithMetadataReference(
                 markup,
                 metadataReferenceCode,
@@ -1213,7 +1239,8 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Completion
             string sourceLanguage,
             string referenceLanguage,
             bool isProjectReference
-        ) {
+        )
+        {
             return isProjectReference
               ? CreateMarkupForProjectWithProjectReference(
                     currentFile,
@@ -1234,7 +1261,8 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Completion
             string metadataReferenceCode,
             string sourceLanguage,
             string referencedLanguage
-        ) {
+        )
+        {
             return string.Format(
                 @"
 <Workspace>
@@ -1260,7 +1288,8 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Completion
             string sourceLanguage,
             string referencedLanguage,
             bool hideAdvancedMembers
-        ) {
+        )
+        {
             var xmlString = CreateMarkupForProjectWithAliasedMetadataReference(
                 markup,
                 metadataAlias,
@@ -1284,7 +1313,8 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Completion
             string sourceLanguage,
             string referencedLanguage,
             bool hasGlobalAlias = true
-        ) {
+        )
+        {
             var aliases = hasGlobalAlias
                 ? $"{metadataAlias},{MetadataReferenceProperties.GlobalAlias}"
                 : $"{metadataAlias}";
@@ -1314,7 +1344,8 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Completion
             string sourceLanguage,
             string referencedLanguage,
             bool hideAdvancedMembers
-        ) {
+        )
+        {
             var xmlString = CreateMarkupForProjectWithProjectReference(
                 markup,
                 referencedCode,
@@ -1336,7 +1367,8 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Completion
             string referencedCode,
             string sourceLanguage,
             string referencedLanguage
-        ) {
+        )
+        {
             return string.Format(
                 @"
 <Workspace>
@@ -1362,7 +1394,8 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Completion
             string referencedCode,
             string sourceLanguage,
             string referencedLanguage
-        ) {
+        )
+        {
             return string.Format(
                 @"
 <Workspace>
@@ -1387,7 +1420,8 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Completion
             string sourceLanguage,
             string referencedLanguage,
             string[] referencedTexts
-        ) {
+        )
+        {
             return $@"
 <Workspace>
     <Project Language=""{sourceLanguage}"" CommonReferences=""true"" AssemblyName=""Project1"">
@@ -1432,7 +1466,8 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Completion
             string referencedCode,
             string sourceLanguage,
             string rootNamespace = ""
-        ) {
+        )
+        {
             return string.Format(
                 @"
 <Workspace>
@@ -1461,7 +1496,8 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Completion
             int expectedSymbols,
             string sourceLanguage,
             bool hideAdvancedMembers
-        ) {
+        )
+        {
             var xmlString = CreateMarkupForSingleProject(markup, referencedCode, sourceLanguage);
 
             return VerifyItemWithReferenceWorkerAsync(
@@ -1476,7 +1512,8 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Completion
             string markup,
             string referencedCode,
             string sourceLanguage
-        ) {
+        )
+        {
             return string.Format(
                 @"
 <Workspace>
@@ -1496,10 +1533,12 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Completion
             string expectedItem,
             int expectedSymbols,
             bool hideAdvancedMembers
-        ) {
+        )
+        {
             using (
                 var testWorkspace = TestWorkspace.Create(xmlString, exportProvider: ExportProvider)
-            ) {
+            )
+            {
                 var position =
                     testWorkspace.Documents.Single(
                         d => d.Name == "SourceDocument"
@@ -1568,7 +1607,8 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Completion
             string expectedItem,
             string expectedDescription,
             string sourceLanguage
-        ) {
+        )
+        {
             var xmlString = string.Format(
                 @"
 <Workspace>
@@ -1593,10 +1633,12 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Completion
             string xmlString,
             string expectedItem,
             string expectedDescription
-        ) {
+        )
+        {
             using (
                 var testWorkspace = TestWorkspace.Create(xmlString, exportProvider: ExportProvider)
-            ) {
+            )
+            {
                 var position =
                     testWorkspace.Documents.Single(
                         d => d.Name == "SourceDocument"
@@ -1642,10 +1684,12 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Completion
             string xmlString,
             string expectedItem,
             string expectedDescription
-        ) {
+        )
+        {
             using (
                 var testWorkspace = TestWorkspace.Create(xmlString, exportProvider: ExportProvider)
-            ) {
+            )
+            {
                 var position = testWorkspace.Documents.First().CursorPosition.Value;
                 var solution = testWorkspace.CurrentSolution;
                 var textContainer = testWorkspace.Documents.First()
@@ -1694,7 +1738,8 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Completion
             bool? isComplexTextEdit = null,
             List<CompletionFilter> matchingFilters = null,
             CompletionItemFlags? flags = null
-        ) {
+        )
+        {
             code = code.Substring(0, position) + insertText + code.Substring(position);
             position += insertText.Length;
 
@@ -1735,7 +1780,8 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Completion
             bool? isComplexTextEdit = null,
             List<CompletionFilter> matchingFilters = null,
             CompletionItemFlags? flags = null
-        ) {
+        )
+        {
             return VerifyAtPositionAsync(
                 code,
                 position,
@@ -1775,7 +1821,8 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Completion
             bool? isComplexTextEdit = null,
             List<CompletionFilter> matchingFilters = null,
             CompletionItemFlags? flags = null
-        ) {
+        )
+        {
             // only do this if the placeholder was at the end of the text.
             if (code.Length != position)
             {
@@ -1822,7 +1869,8 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Completion
             bool? isComplexTextEdit = null,
             List<CompletionFilter> matchingFilters = null,
             CompletionItemFlags? flags = null
-        ) {
+        )
+        {
             return VerifyAtPositionAsync(
                 code,
                 position,
@@ -1861,7 +1909,8 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Completion
             bool? isComplexTextEdit = null,
             List<CompletionFilter> matchingFilters = null,
             CompletionItemFlags? flags = null
-        ) {
+        )
+        {
             return VerifyAtEndOfFileAsync(
                 code,
                 position,
@@ -1900,7 +1949,8 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Completion
             bool? isComplexTextEdit = null,
             List<CompletionFilter> matchingFilters = null,
             CompletionItemFlags? flags = null
-        ) {
+        )
+        {
             return VerifyAtEndOfFileAsync(
                 code,
                 position,
@@ -1928,7 +1978,8 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Completion
             bool shouldTriggerWithTriggerOnLettersDisabled,
             SourceCodeKind sourceCodeKind = SourceCodeKind.Regular,
             bool showCompletionInArgumentLists = true
-        ) {
+        )
+        {
             VerifyTextualTriggerCharacterWorker(
                 markup,
                 expectedTriggerCharacter: shouldTriggerWithTriggerOnLettersEnabled,
@@ -1951,7 +2002,8 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Completion
             bool triggerOnLetter,
             SourceCodeKind sourceCodeKind,
             bool showCompletionInArgumentLists
-        ) {
+        )
+        {
             using (var workspace = CreateWorkspace(markup))
             {
                 var hostDocument = workspace.DocumentWithCursor;
@@ -2006,7 +2058,8 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Completion
         protected async Task VerifyCommonCommitCharactersAsync(
             string initialMarkup,
             string textTypedSoFar
-        ) {
+        )
+        {
             var commitCharacters = new[]
             {
                 ' ',
@@ -2050,7 +2103,8 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Completion
             char[] validChars,
             char[] invalidChars = null,
             SourceCodeKind sourceCodeKind = SourceCodeKind.Regular
-        ) {
+        )
+        {
             Assert.NotNull(validChars);
             invalidChars = invalidChars ?? new[] { 'x' };
 
@@ -2098,7 +2152,8 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Completion
             string markup,
             SourceCodeKind sourceCodeKind,
             bool usePreviousCharAsTrigger = false
-        ) {
+        )
+        {
             using var workspaceFixture = GetOrCreateWorkspaceFixture();
 
             workspaceFixture.Target.GetWorkspace(markup, ExportProvider);

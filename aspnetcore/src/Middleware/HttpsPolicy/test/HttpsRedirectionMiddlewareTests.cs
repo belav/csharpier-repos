@@ -89,7 +89,8 @@ namespace Microsoft.AspNetCore.HttpsPolicy.Tests
             int statusCode,
             int? httpsPort,
             string expected
-        ) {
+        )
+        {
             var sink = new TestSink(
                 TestSink.EnableWithTypeName<HttpsRedirectionMiddleware>,
                 TestSink.EnableWithTypeName<HttpsRedirectionMiddleware>
@@ -158,7 +159,8 @@ namespace Microsoft.AspNetCore.HttpsPolicy.Tests
             int statusCode,
             int? httpsPort,
             string expectedUrl
-        ) {
+        )
+        {
             var sink = new TestSink(
                 TestSink.EnableWithTypeName<HttpsRedirectionMiddleware>,
                 TestSink.EnableWithTypeName<HttpsRedirectionMiddleware>
@@ -231,7 +233,8 @@ namespace Microsoft.AspNetCore.HttpsPolicy.Tests
             string configHttpsPort,
             string serverAddressFeatureUrl,
             string expectedUrl
-        ) {
+        )
+        {
             using var host = new HostBuilder().ConfigureWebHost(
                     webHostBuilder =>
                     {

@@ -136,7 +136,8 @@ namespace ILCompiler.DependencyAnalysis
             public int Compare(
                 DependencyNodeCore<NodeFactory> x1,
                 DependencyNodeCore<NodeFactory> y1
-            ) {
+            )
+            {
                 ObjectNode x = x1 as ObjectNode;
                 ObjectNode y = y1 as ObjectNode;
 
@@ -167,7 +168,8 @@ namespace ILCompiler.DependencyAnalysis
             SortableDependencyNode x,
             SortableDependencyNode y,
             CompilerComparer comparer
-        ) {
+        )
+        {
             int phaseX = x.Phase;
             int phaseY = y.Phase;
 

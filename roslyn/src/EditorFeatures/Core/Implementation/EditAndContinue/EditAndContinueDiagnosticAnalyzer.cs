@@ -43,7 +43,8 @@ namespace Microsoft.CodeAnalysis.EditAndContinue
         public override Task<ImmutableArray<Diagnostic>> AnalyzeSemanticsAsync(
             Document document,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var workspace = document.Project.Solution.Workspace;
 
             // do not load EnC service and its dependencies if the app is not running:
@@ -61,7 +62,8 @@ namespace Microsoft.CodeAnalysis.EditAndContinue
         private static Task<ImmutableArray<Diagnostic>> AnalyzeSemanticsImplAsync(
             Document document,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var workspace = document.Project.Solution.Workspace;
             var proxy = new RemoteEditAndContinueServiceProxy(workspace);
 

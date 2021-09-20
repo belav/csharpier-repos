@@ -37,7 +37,8 @@ namespace Microsoft.AspNetCore.Mvc.ModelBinding
             IObjectModelValidator validator,
             IOptions<MvcOptions> mvcOptions,
             ILoggerFactory loggerFactory
-        ) {
+        )
+        {
             if (modelMetadataProvider == null)
             {
                 throw new ArgumentNullException(nameof(modelMetadataProvider));
@@ -122,7 +123,8 @@ namespace Microsoft.AspNetCore.Mvc.ModelBinding
             ModelMetadata metadata,
             object? value,
             object? container
-        ) {
+        )
+        {
             if (actionContext == null)
             {
                 throw new ArgumentNullException(nameof(actionContext));
@@ -232,7 +234,8 @@ namespace Microsoft.AspNetCore.Mvc.ModelBinding
             ModelBindingContext modelBindingContext,
             ModelBindingResult modelBindingResult,
             object? container
-        ) {
+        )
+        {
             RecalculateModelMetadata(parameter, modelBindingResult, ref metadata);
 
             if (!modelBindingResult.IsModelSet && metadata.IsBindingRequired)
@@ -272,7 +275,8 @@ namespace Microsoft.AspNetCore.Mvc.ModelBinding
                 if (
                     string.IsNullOrEmpty(modelBindingContext.ModelName)
                     && parameter.BindingInfo?.BinderModelName == null
-                ) {
+                )
+                {
                     // If we get here then this is a fallback case. The model name wasn't explicitly set
                     // and we ended up with an empty prefix.
                     modelName = modelBindingContext.FieldName;
@@ -294,7 +298,8 @@ namespace Microsoft.AspNetCore.Mvc.ModelBinding
             ParameterDescriptor parameter,
             ModelBindingResult modelBindingResult,
             ref ModelMetadata metadata
-        ) {
+        )
+        {
             // Attempt to recalculate ModelMetadata for top level parameters and properties using the actual
             // model type. This ensures validation uses a combination of top-level validation metadata
             // as well as metadata on the actual, rather than declared, model type.
@@ -303,7 +308,8 @@ namespace Microsoft.AspNetCore.Mvc.ModelBinding
                 !modelBindingResult.IsModelSet
                 || modelBindingResult.Model == null
                 || _modelMetadataProvider is not ModelMetadataProvider modelMetadataProvider
-            ) {
+            )
+            {
                 return;
             }
 

@@ -30,7 +30,8 @@ namespace Microsoft.AspNetCore.Mvc.DataAnnotations
             IValidationAttributeAdapterProvider validationAttributeAdapterProvider,
             ValidationAttribute attribute,
             IStringLocalizer? stringLocalizer
-        ) {
+        )
+        {
             if (validationAttributeAdapterProvider == null)
             {
                 throw new ArgumentNullException(nameof(validationAttributeAdapterProvider));
@@ -105,7 +106,8 @@ namespace Microsoft.AspNetCore.Mvc.DataAnnotations
                     && !string.IsNullOrEmpty(Attribute.ErrorMessage)
                     && string.IsNullOrEmpty(Attribute.ErrorMessageResourceName)
                     && Attribute.ErrorMessageResourceType == null
-                ) {
+                )
+                {
                     errorMessage = GetErrorMessage(validationContext) ?? result.ErrorMessage;
                 }
                 else

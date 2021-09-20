@@ -75,7 +75,8 @@ namespace System.Reflection.Tests
                 MemberTypes memberType = (MemberTypes)0;
                 memberType <= MemberTypes.All;
                 memberType++
-            ) {
+            )
+            {
                 MemberInfo[] m = t.GetMember(
                     "*",
                     memberType,
@@ -130,7 +131,8 @@ namespace System.Reflection.Tests
                 MemberTypes memberType = (MemberTypes)0;
                 memberType <= MemberTypes.All;
                 memberType++
-            ) {
+            )
+            {
                 MemberInfo[] members = t.GetMember(
                     "*",
                     memberType,

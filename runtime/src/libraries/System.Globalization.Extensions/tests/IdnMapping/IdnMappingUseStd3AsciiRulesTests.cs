@@ -47,7 +47,8 @@ namespace System.Globalization.Tests
         public void UseStd3AsciiRules_ChangesGetAsciiBehavior(
             string unicode,
             bool containsInvalidHyphen
-        ) {
+        )
+        {
             var idnStd3False = new IdnMapping { UseStd3AsciiRules = false };
             var idnStd3True = new IdnMapping { UseStd3AsciiRules = true };
 

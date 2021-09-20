@@ -135,7 +135,8 @@ namespace Microsoft.CodeAnalysis.RuntimeMembers
             ParameterSymbol parameter,
             ImmutableArray<byte> signature,
             ref int position
-        ) {
+        )
+        {
             bool isByRef = IsByRef(signature, ref position);
 
             if (IsByRefParam(parameter) != isByRef)
@@ -231,7 +232,8 @@ namespace Microsoft.CodeAnalysis.RuntimeMembers
                                 signature,
                                 ref position
                             )
-                        ) {
+                        )
+                        {
                             return false;
                         }
                     }

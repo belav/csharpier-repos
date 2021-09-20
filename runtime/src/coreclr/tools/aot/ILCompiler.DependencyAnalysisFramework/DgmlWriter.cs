@@ -15,7 +15,8 @@ namespace ILCompiler.DependencyAnalysisFramework
             Stream stream,
             DependencyAnalyzerBase<DependencyContextType> analysis,
             DependencyContextType context
-        ) {
+        )
+        {
             DgmlWriter<DependencyContextType>.WriteDependencyGraphToStream(
                 stream,
                 analysis,
@@ -63,7 +64,8 @@ namespace ILCompiler.DependencyAnalysisFramework
             Stream stream,
             DependencyAnalyzerBase<DependencyContextType> analysis,
             DependencyContextType context
-        ) {
+        )
+        {
             XmlWriterSettings writerSettings = new XmlWriterSettings();
             writerSettings.Indent = true;
             writerSettings.IndentChars = " ";
@@ -151,7 +153,8 @@ namespace ILCompiler.DependencyAnalysisFramework
             DependencyNodeCore<DependencyContextType> nodeDepender,
             DependencyNodeCore<DependencyContextType> nodeDependedOn,
             string reason
-        ) {
+        )
+        {
             _xmlWrite.WriteStartElement("Link");
             _xmlWrite.WriteAttributeString("Source", _nodeMappings[nodeDepender].ToString());
             _xmlWrite.WriteAttributeString("Target", _nodeMappings[nodeDependedOn].ToString());
@@ -163,7 +166,8 @@ namespace ILCompiler.DependencyAnalysisFramework
         void IDependencyAnalyzerLogEdgeVisitor<DependencyContextType>.VisitEdge(
             string root,
             DependencyNodeCore<DependencyContextType> dependedOn
-        ) {
+        )
+        {
             AddReason(root, dependedOn, null);
         }
 
@@ -172,7 +176,8 @@ namespace ILCompiler.DependencyAnalysisFramework
                 DependencyNodeCore<DependencyContextType>,
                 DependencyNodeCore<DependencyContextType>
             > node
-        ) {
+        )
+        {
             string label1 = node.Item1.GetNameInternal(_context);
             string label2 = node.Item2.GetNameInternal(_context);
 
@@ -196,7 +201,8 @@ namespace ILCompiler.DependencyAnalysisFramework
             DependencyNodeCore<DependencyContextType> nodeDependerOther,
             DependencyNodeCore<DependencyContextType> nodeDependedOn,
             string reason
-        ) {
+        )
+        {
             var combinedNode = new Tuple<
                 DependencyNodeCore<DependencyContextType>,
                 DependencyNodeCore<DependencyContextType>
@@ -233,7 +239,8 @@ namespace ILCompiler.DependencyAnalysisFramework
 
         void IDependencyAnalyzerLogNodeVisitor<DependencyContextType>.VisitNode(
             DependencyNodeCore<DependencyContextType> node
-        ) {
+        )
+        {
             AddNode(node);
         }
 

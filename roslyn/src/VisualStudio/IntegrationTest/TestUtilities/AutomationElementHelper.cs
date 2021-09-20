@@ -20,7 +20,8 @@ namespace Microsoft.VisualStudio.IntegrationTest.Utilities
         public static async Task ClickAutomationElementAsync(
             string elementName,
             bool recursive = false
-        ) {
+        )
+        {
             var element = await FindAutomationElementAsync(elementName, recursive)
                 .ConfigureAwait(false);
 
@@ -50,7 +51,8 @@ namespace Microsoft.VisualStudio.IntegrationTest.Utilities
         public static async Task<IUIAutomationElement> FindAutomationElementAsync(
             string elementName,
             bool recursive = false
-        ) {
+        )
+        {
             IUIAutomationElement element = null;
             var scope = recursive ? TreeScope.TreeScope_Descendants : TreeScope.TreeScope_Children;
             var condition = Helper.Automation.CreatePropertyCondition(

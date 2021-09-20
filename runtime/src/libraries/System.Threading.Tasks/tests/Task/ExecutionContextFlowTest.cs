@@ -126,7 +126,8 @@ namespace System.Threading.Tasks.Tests
         [MemberData(nameof(TaskCompletionSourceDoesntCaptureExecutionContext_MemberData))]
         public static async Task TaskCompletionSourceDoesntCaptureExecutionContext(
             Func<TaskCompletionSource<int>> tcsFactory
-        ) {
+        )
+        {
             // Create a finalizable object that'll be referenced by captured ExecutionContext,
             // create a TCS, and then hold on to that while forcing GCs and finalizers.
             // We want to make sure that holding on to the resulting TCS doesn't keep

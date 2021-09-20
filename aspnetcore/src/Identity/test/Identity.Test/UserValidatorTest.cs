@@ -59,7 +59,8 @@ namespace Microsoft.AspNetCore.Identity.Test
         public async Task DefaultAlphaNumericOnlyUserNameValidation(
             string userName,
             bool expectSuccess
-        ) {
+        )
+        {
             // Setup
             var manager = MockHelpers.TestUserManager(new NoopUserStore());
             var validator = new UserValidator<PocoUser>();

@@ -37,7 +37,8 @@ namespace System.Speech.Internal.SapiInterop
                 !IsSapi53
                 && System.Threading.Thread.CurrentThread.GetApartmentState()
                     == System.Threading.ApartmentState.STA
-            ) {
+            )
+            {
                 // must be recreated on a different thread
                 Marshal.ReleaseComObject(recognizer);
                 _proxy = new SapiProxy.MTAThread(type);

@@ -35,7 +35,8 @@ namespace System.Web.Http.Dispatcher
             HttpRequestMessage request,
             HttpControllerDescriptor controllerDescriptor,
             Type controllerType
-        ) {
+        )
+        {
             if (request == null)
             {
                 throw Error.ArgumentNull("request");
@@ -127,7 +128,8 @@ namespace System.Web.Http.Dispatcher
             HttpRequestMessage request,
             Type controllerType,
             out Func<IHttpController> activator
-        ) {
+        )
+        {
             Contract.Assert(request != null);
             Contract.Assert(controllerType != null);
 

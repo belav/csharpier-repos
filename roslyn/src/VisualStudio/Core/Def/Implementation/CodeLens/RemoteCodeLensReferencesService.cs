@@ -35,7 +35,8 @@ namespace Microsoft.VisualStudio.LanguageServices.CodeLens
             Solution solution,
             ProjectId projectId,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             // This value is more efficient to calculate in the current process
             return CodeLensReferencesServiceFactory.Instance.GetProjectCodeLensVersionAsync(
                 solution,
@@ -50,7 +51,8 @@ namespace Microsoft.VisualStudio.LanguageServices.CodeLens
             SyntaxNode? syntaxNode,
             int maxSearchResults,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             using (Logger.LogBlock(FunctionId.CodeLens_GetReferenceCountAsync, cancellationToken))
             {
                 if (syntaxNode == null)
@@ -101,10 +103,12 @@ namespace Microsoft.VisualStudio.LanguageServices.CodeLens
             DocumentId documentId,
             SyntaxNode? syntaxNode,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             using (
                 Logger.LogBlock(FunctionId.CodeLens_FindReferenceLocationsAsync, cancellationToken)
-            ) {
+            )
+            {
                 if (syntaxNode == null)
                 {
                     return null;
@@ -133,10 +137,12 @@ namespace Microsoft.VisualStudio.LanguageServices.CodeLens
             DocumentId documentId,
             SyntaxNode? syntaxNode,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             using (
                 Logger.LogBlock(FunctionId.CodeLens_FindReferenceMethodsAsync, cancellationToken)
-            ) {
+            )
+            {
                 if (syntaxNode == null)
                 {
                     return null;
@@ -183,7 +189,8 @@ namespace Microsoft.VisualStudio.LanguageServices.CodeLens
             DocumentId documentId,
             SyntaxNode? syntaxNode,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             using (Logger.LogBlock(FunctionId.CodeLens_GetFullyQualifiedName, cancellationToken))
             {
                 if (syntaxNode == null)
@@ -233,7 +240,8 @@ namespace Microsoft.VisualStudio.LanguageServices.CodeLens
             Solution solution,
             ImmutableArray<ReferenceLocationDescriptor> descriptors,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             using var _ = ArrayBuilder<ReferenceLocationDescriptor>.GetInstance(out var list);
             foreach (var descriptor in descriptors)
             {
@@ -333,7 +341,8 @@ namespace Microsoft.VisualStudio.LanguageServices.CodeLens
         private static (string text, int start, int length) GetReferenceInfo(
             ExcerptResult? reference,
             ReferenceLocationDescriptor descriptor
-        ) {
+        )
+        {
             if (reference.HasValue)
             {
                 return (
@@ -354,7 +363,8 @@ namespace Microsoft.VisualStudio.LanguageServices.CodeLens
             ExcerptResult? reference,
             ExcerptResult? tooltip,
             ReferenceLocationDescriptor descriptor
-        ) {
+        )
+        {
             if (reference == null || tooltip == null)
             {
                 return (
@@ -401,7 +411,8 @@ namespace Microsoft.VisualStudio.LanguageServices.CodeLens
             DocumentId documentId,
             SyntaxNode syntaxNode,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             if (syntaxNode == null)
             {
                 return ImmutableArray<ReferenceLocationDescriptor>.Empty;

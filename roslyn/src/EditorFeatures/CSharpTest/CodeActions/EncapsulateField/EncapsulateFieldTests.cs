@@ -47,7 +47,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeRefactorings.Encaps
             CompilationOptions compilationOptions = null,
             int index = 0,
             OptionsCollection options = null
-        ) {
+        )
+        {
             options ??= new OptionsCollection(GetLanguage());
             options.AddRange(AllOptionsOff);
 
@@ -709,7 +710,8 @@ class goo
         [Theory, CombinatorialData, Trait(Traits.Feature, Traits.Features.EncapsulateField)]
         public async Task EncapsulateSinglePublicFieldInMultipleVariableDeclarationAndUpdateReferences(
             TestHost host
-        ) {
+        )
+        {
             var text =
                 @"
 class goo
@@ -1263,7 +1265,8 @@ namespace ConsoleApplication1
         [Theory, CombinatorialData, Trait(Traits.Feature, Traits.Features.EncapsulateField)]
         public async Task AlwaysUseEnglishUSCultureWhenFixingVariableNames_TurkishDottedI(
             TestHost host
-        ) {
+        )
+        {
             using (new CultureContext(new CultureInfo("tr-TR", useUserOverride: false)))
             {
                 await TestAllOptionsOffAsync(
@@ -1297,7 +1300,8 @@ namespace ConsoleApplication1
         [Theory, CombinatorialData, Trait(Traits.Feature, Traits.Features.EncapsulateField)]
         public async Task AlwaysUseEnglishUSCultureWhenFixingVariableNames_TurkishUndottedI(
             TestHost host
-        ) {
+        )
+        {
             using (new CultureContext(new CultureInfo("tr-TR", useUserOverride: false)))
             {
                 await TestAllOptionsOffAsync(

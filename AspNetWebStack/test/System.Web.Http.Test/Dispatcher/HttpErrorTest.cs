@@ -447,7 +447,8 @@ namespace System.Web.Http.Dispatcher
             Func<string> productUnderTest,
             string key,
             string actualValue
-        ) {
+        )
+        {
             // Arrange
             httpError[key] = actualValue;
 

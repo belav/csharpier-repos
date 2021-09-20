@@ -230,7 +230,8 @@ namespace System.Threading.Tasks.Dataflow
             T messageValue,
             ISourceBlock<T>? source,
             bool consumeToAccept
-        ) {
+        )
+        {
             return _target.OfferMessage(messageHeader, messageValue, source, consumeToAccept);
         }
 
@@ -239,7 +240,8 @@ namespace System.Threading.Tasks.Dataflow
             DataflowMessageHeader messageHeader,
             ITargetBlock<T[]> target,
             out bool messageConsumed
-        ) {
+        )
+        {
             return _source.ConsumeMessage(messageHeader, target, out messageConsumed);
         }
 
@@ -247,7 +249,8 @@ namespace System.Threading.Tasks.Dataflow
         bool ISourceBlock<T[]>.ReserveMessage(
             DataflowMessageHeader messageHeader,
             ITargetBlock<T[]> target
-        ) {
+        )
+        {
             return _source.ReserveMessage(messageHeader, target);
         }
 
@@ -255,7 +258,8 @@ namespace System.Threading.Tasks.Dataflow
         void ISourceBlock<T[]>.ReleaseReservation(
             DataflowMessageHeader messageHeader,
             ITargetBlock<T[]> target
-        ) {
+        )
+        {
             _source.ReleaseReservation(messageHeader, target);
         }
 
@@ -466,7 +470,8 @@ namespace System.Threading.Tasks.Dataflow
                 int batchSize,
                 Action<T[]> batchCompletedAction,
                 GroupingDataflowBlockOptions dataflowBlockOptions
-            ) {
+            )
+            {
                 Debug.Assert(
                     owningBatch != null,
                     "This batch target core must be associated with a batch block."
@@ -504,7 +509,8 @@ namespace System.Threading.Tasks.Dataflow
                     if (
                         !_decliningPermanently
                         && !_dataflowBlockOptions.CancellationToken.IsCancellationRequested
-                    ) {
+                    )
+                    {
                         if (_nonGreedyState == null)
                         {
                             MakeBatchIfPossible(evenIfFewerThanBatchSize: true);
@@ -525,7 +531,8 @@ namespace System.Threading.Tasks.Dataflow
                 T messageValue,
                 ISourceBlock<T>? source,
                 bool consumeToAccept
-            ) {
+            )
+            {
                 // Validate arguments
                 if (!messageHeader.IsValid)
                     throw new ArgumentException(
@@ -563,7 +570,8 @@ namespace System.Threading.Tasks.Dataflow
                                 && _nonGreedyState.TaskForInputProcessing == null
                             )
                         )
-                    ) {
+                    )
+                    {
                         // Consume the message from the source if necessary
                         if (consumeToAccept)
                         {
@@ -593,7 +601,8 @@ namespace System.Threading.Tasks.Dataflow
                             !_decliningPermanently
                             && (_batchesCompleted + (_messages.Count / _batchSize))
                                 >= _dataflowBlockOptions.ActualMaxNumberOfGroups
-                        ) {
+                        )
+                        {
                             _decliningPermanently = true;
                         }
 
@@ -634,7 +643,8 @@ namespace System.Threading.Tasks.Dataflow
                 bool dropPendingMessages,
                 bool releaseReservedMessages,
                 bool revertProcessingState = false
-            ) {
+            )
+            {
                 // Ensure that no new messages may be added
                 lock (IncomingLock)
                 {
@@ -1186,7 +1196,8 @@ namespace System.Threading.Tasks.Dataflow
                     if (
                         shouldProceedToConsume
                         && (allowFewerThanBatchSize || reserved.Count == _batchSize)
-                    ) {
+                    )
+                    {
                         ConsumeReservedMessagesNonGreedy();
                     }
                     else
@@ -1434,7 +1445,8 @@ namespace System.Threading.Tasks.Dataflow
                             ISourceBlock<T>,
                             KeyValuePair<DataflowMessageHeader, T>
                         > sourceAndMessage in reserved
-                    ) {
+                    )
+                    {
                         _messages.Enqueue(sourceAndMessage.Value.Value);
                     }
                 }
@@ -1515,7 +1527,8 @@ namespace System.Threading.Tasks.Dataflow
                             ISourceBlock<T>,
                             KeyValuePair<DataflowMessageHeader, T>
                         > sourceAndMessage in reserved
-                    ) {
+                    )
+                    {
                         // If we didn't consume this message, the KeyValuePai will be default, i.e. the source will be null
                         if (sourceAndMessage.Key != null)
                             _messages.Enqueue(sourceAndMessage.Value.Value);

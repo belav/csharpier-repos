@@ -15,7 +15,8 @@ namespace Internal.Cryptography
             int iterations,
             HashAlgorithmName hashAlgorithmName,
             Span<byte> destination
-        ) {
+        )
+        {
             Debug.Assert(!destination.IsEmpty);
             Debug.Assert(hashAlgorithmName.Name is not null);
             // Fall back to managed implementation since Android doesn't support the full Pbkdf2 APIs
@@ -29,7 +30,8 @@ namespace Internal.Cryptography
                     clearPassword: true,
                     requireMinimumSaltLength: false
                 )
-            ) {
+            )
+            {
                 byte[] result = deriveBytes.GetBytes(destination.Length);
                 result.AsSpan().CopyTo(destination);
             }

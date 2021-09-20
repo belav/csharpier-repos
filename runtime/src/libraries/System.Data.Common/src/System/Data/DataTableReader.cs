@@ -367,7 +367,8 @@ namespace System.Data
             byte[]? buffer,
             int bufferIndex,
             int length
-        ) {
+        )
+        {
             ValidateState(nameof(GetBytes));
             ValidateReader();
             byte[] tempBuffer;
@@ -439,7 +440,8 @@ namespace System.Data
             char[]? buffer,
             int bufferIndex,
             int length
-        ) {
+        )
+        {
             ValidateState(nameof(GetChars));
             ValidateReader();
             char[] tempBuffer;
@@ -979,7 +981,8 @@ namespace System.Data
                 (_currentDataRow.RowState == DataRowState.Deleted)
                 || (_currentDataRow.RowState == DataRowState.Detached)
                 || _currentRowRemoved
-            ) {
+            )
+            {
                 throw ExceptionBuilder.InvalidCurrentRowInDataTableReader();
             }
             // user may have called clear (which removes the rows without raing event) or deleted part of rows without raising event!if so reader is invalid.

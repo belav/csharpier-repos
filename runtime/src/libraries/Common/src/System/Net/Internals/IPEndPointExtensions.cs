@@ -64,7 +64,8 @@ namespace System.Net.Sockets
 
         private static Internals.SocketAddress GetInternalSocketAddress(
             System.Net.SocketAddress address
-        ) {
+        )
+        {
             var result = new Internals.SocketAddress(address.Family, address.Size);
             for (int index = 0; index < address.Size; index++)
             {
@@ -76,7 +77,8 @@ namespace System.Net.Sockets
 
         internal static System.Net.SocketAddress GetNetSocketAddress(
             Internals.SocketAddress address
-        ) {
+        )
+        {
             var result = new System.Net.SocketAddress(address.Family, address.Size);
             for (int index = 0; index < address.Size; index++)
             {

@@ -13,7 +13,8 @@ namespace System.Globalization
         private static unsafe bool IcuIsNormalized(
             string strInput,
             NormalizationForm normalizationForm
-        ) {
+        )
+        {
             Debug.Assert(!GlobalizationMode.Invariant);
             Debug.Assert(!GlobalizationMode.UseNls);
 
@@ -43,7 +44,8 @@ namespace System.Globalization
         private static unsafe string IcuNormalize(
             string strInput,
             NormalizationForm normalizationForm
-        ) {
+        )
+        {
             Debug.Assert(!GlobalizationMode.Invariant);
             Debug.Assert(!GlobalizationMode.UseNls);
 
@@ -64,7 +66,8 @@ namespace System.Globalization
                     int realLen;
                     fixed (char* pInput = strInput)fixed (
                         char* pDest = &MemoryMarshal.GetReference(buffer)
-                    ) {
+                    )
+                    {
                         realLen = Interop.Globalization.NormalizeString(
                             normalizationForm,
                             pInput,
@@ -129,7 +132,8 @@ namespace System.Globalization
                     normalizationForm == NormalizationForm.FormKC
                     || normalizationForm == NormalizationForm.FormKD
                 )
-            ) {
+            )
+            {
                 // Browser's ICU doesn't contain data needed for FormKC and FormKD
                 throw new PlatformNotSupportedException();
             }
@@ -139,7 +143,8 @@ namespace System.Globalization
                 && normalizationForm != NormalizationForm.FormD
                 && normalizationForm != NormalizationForm.FormKC
                 && normalizationForm != NormalizationForm.FormKD
-            ) {
+            )
+            {
                 throw new ArgumentException(
                     SR.Argument_InvalidNormalizationForm,
                     nameof(normalizationForm)

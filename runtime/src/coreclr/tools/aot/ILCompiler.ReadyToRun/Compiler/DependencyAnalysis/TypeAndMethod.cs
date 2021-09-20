@@ -22,7 +22,8 @@ namespace ILCompiler.DependencyAnalysis
             MethodWithToken method,
             bool isInstantiatingStub,
             bool isPrecodeImportRequired
-        ) {
+        )
+        {
             Type = type;
             Method = method;
             IsInstantiatingStub = isInstantiatingStub;

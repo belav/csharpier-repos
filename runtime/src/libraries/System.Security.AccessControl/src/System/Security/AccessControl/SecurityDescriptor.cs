@@ -186,7 +186,8 @@ namespace System.Security.AccessControl
                     (ControlFlags & ControlFlags.DiscretionaryAclPresent) != 0
                     && GenericDacl != null
                     && !IsCraftedAefaDacl
-                ) {
+                )
+                {
                     result += GenericDacl.BinaryLength;
                 }
 
@@ -237,7 +238,8 @@ namespace System.Security.AccessControl
             if (
                 error == Interop.Errors.ERROR_INVALID_PARAMETER
                 || error == Interop.Errors.ERROR_UNKNOWN_REVISION
-            ) {
+            )
+            {
                 //
                 // Indicates that the marshaling logic in GetBinaryForm is busted
                 //
@@ -397,7 +399,8 @@ namespace System.Security.AccessControl
                 (ControlFlags & ControlFlags.DiscretionaryAclPresent) != 0
                 && GenericDacl != null
                 && !IsCraftedAefaDacl
-            ) {
+            )
+            {
                 MarshalInt(binaryForm, daclOffset, offset - originalOffset);
                 GenericDacl.GetBinaryForm(binaryForm, offset);
                 offset += GenericDacl.BinaryLength;
@@ -448,7 +451,8 @@ namespace System.Security.AccessControl
             SecurityIdentifier? group,
             RawAcl? systemAcl,
             RawAcl? discretionaryAcl
-        ) {
+        )
+        {
             SetFlags(flags);
             Owner = owner;
             Group = group;
@@ -668,7 +672,8 @@ namespace System.Security.AccessControl
                         out byteArray,
                         ref byteArraySize
                     )
-                ) {
+                )
+                {
                     error = Marshal.GetLastWin32Error();
 
                     if (
@@ -676,7 +681,8 @@ namespace System.Security.AccessControl
                         || error == Interop.Errors.ERROR_INVALID_ACL
                         || error == Interop.Errors.ERROR_INVALID_SECURITY_DESCR
                         || error == Interop.Errors.ERROR_UNKNOWN_REVISION
-                    ) {
+                    )
+                    {
                         throw new ArgumentException(
                             SR.ArgumentException_InvalidSDSddlForm,
                             nameof(sddlForm)
@@ -833,7 +839,8 @@ namespace System.Security.AccessControl
             SecurityIdentifier? group,
             SystemAcl? systemAcl,
             DiscretionaryAcl? discretionaryAcl
-        ) {
+        )
+        {
             if (systemAcl != null && systemAcl.IsContainer != isContainer)
             {
                 throw new ArgumentException(
@@ -945,7 +952,8 @@ namespace System.Security.AccessControl
             SecurityIdentifier? group,
             SystemAcl? systemAcl,
             DiscretionaryAcl? discretionaryAcl
-        ) {
+        )
+        {
             CreateFromParts(isContainer, isDS, flags, owner, group, systemAcl, discretionaryAcl);
         }
 
@@ -957,17 +965,18 @@ namespace System.Security.AccessControl
             SecurityIdentifier? group,
             RawAcl? systemAcl,
             RawAcl? discretionaryAcl
-        ) : this(
-            isContainer,
-            isDS,
-            flags,
-            owner,
-            group,
-            systemAcl == null ? null : new SystemAcl(isContainer, isDS, systemAcl),
-            discretionaryAcl == null
-              ? null
-              : new DiscretionaryAcl(isContainer, isDS, discretionaryAcl)
-        ) { }
+        )
+            : this(
+                isContainer,
+                isDS,
+                flags,
+                owner,
+                group,
+                systemAcl == null ? null : new SystemAcl(isContainer, isDS, systemAcl),
+                discretionaryAcl == null
+                  ? null
+                  : new DiscretionaryAcl(isContainer, isDS, discretionaryAcl)
+            ) { }
 
         public CommonSecurityDescriptor(
             bool isContainer,
@@ -980,7 +989,8 @@ namespace System.Security.AccessControl
             bool isDS,
             RawSecurityDescriptor rawSecurityDescriptor,
             bool trusted
-        ) {
+        )
+        {
             if (rawSecurityDescriptor == null)
             {
                 throw new ArgumentNullException(nameof(rawSecurityDescriptor));
@@ -1017,12 +1027,8 @@ namespace System.Security.AccessControl
         // Create a security descriptor from its binary representation
         //
 
-        public CommonSecurityDescriptor(
-            bool isContainer,
-            bool isDS,
-            byte[] binaryForm,
-            int offset
-        ) : this(isContainer, isDS, new RawSecurityDescriptor(binaryForm, offset), true) { }
+        public CommonSecurityDescriptor(bool isContainer, bool isDS, byte[] binaryForm, int offset)
+            : this(isContainer, isDS, new RawSecurityDescriptor(binaryForm, offset), true) { }
 
         #endregion
 

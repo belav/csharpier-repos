@@ -61,7 +61,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UseDefaultLiteral
                     context.SemanticModel,
                     cancellationToken
                 )
-            ) {
+            )
+            {
                 return;
             }
 

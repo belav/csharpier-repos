@@ -42,7 +42,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             BindingDiagnosticBag diagnostics,
             DebugDocumentProvider debugDocumentProvider,
             Instrumenter previous
-        ) {
+        )
+        {
             // Do not instrument implicitly-declared methods, except for constructors.
             // Instrument implicit constructors in order to instrument member initializers.
             if (method.IsImplicitlyDeclared && !method.IsImplicitConstructor)
@@ -74,7 +75,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             if (
                 (object)createPayloadForMethodsSpanningSingleFile == null
                 || (object)createPayloadForMethodsSpanningMultipleFiles == null
-            ) {
+            )
+            {
                 return null;
             }
 
@@ -83,7 +85,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             if (
                 method.Equals(createPayloadForMethodsSpanningSingleFile)
                 || method.Equals(createPayloadForMethodsSpanningMultipleFiles)
-            ) {
+            )
+            {
                 return null;
             }
 
@@ -141,7 +144,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             if (
                 !method.IsImplicitlyDeclared
                 && !(method is SynthesizedSimpleProgramEntryPointSymbol)
-            ) {
+            )
+            {
                 _methodEntryInstrumentation = AddAnalysisPoint(
                     syntax,
                     SkipAttributes(syntax),
@@ -193,7 +197,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             BoundExpression payloadSlot,
             SyntheticBoundNodeFactory methodBodyFactory,
             DebugDocumentProvider debugDocumentProvider
-        ) {
+        )
+        {
             MethodSymbol createPayloadOverload;
             BoundExpression fileIndexOrIndicesArgument;
 
@@ -358,21 +363,24 @@ namespace Microsoft.CodeAnalysis.CSharp
         public override BoundStatement InstrumentNoOpStatement(
             BoundNoOpStatement original,
             BoundStatement rewritten
-        ) {
+        )
+        {
             return AddDynamicAnalysis(original, base.InstrumentNoOpStatement(original, rewritten));
         }
 
         public override BoundStatement InstrumentBreakStatement(
             BoundBreakStatement original,
             BoundStatement rewritten
-        ) {
+        )
+        {
             return AddDynamicAnalysis(original, base.InstrumentBreakStatement(original, rewritten));
         }
 
         public override BoundStatement InstrumentContinueStatement(
             BoundContinueStatement original,
             BoundStatement rewritten
-        ) {
+        )
+        {
             return AddDynamicAnalysis(
                 original,
                 base.InstrumentContinueStatement(original, rewritten)
@@ -382,7 +390,8 @@ namespace Microsoft.CodeAnalysis.CSharp
         public override BoundStatement InstrumentExpressionStatement(
             BoundExpressionStatement original,
             BoundStatement rewritten
-        ) {
+        )
+        {
             return AddDynamicAnalysis(
                 original,
                 base.InstrumentExpressionStatement(original, rewritten)
@@ -392,7 +401,8 @@ namespace Microsoft.CodeAnalysis.CSharp
         public override BoundStatement InstrumentFieldOrPropertyInitializer(
             BoundStatement original,
             BoundStatement rewritten
-        ) {
+        )
+        {
             return AddDynamicAnalysis(
                 original,
                 base.InstrumentFieldOrPropertyInitializer(original, rewritten)
@@ -402,21 +412,24 @@ namespace Microsoft.CodeAnalysis.CSharp
         public override BoundStatement InstrumentGotoStatement(
             BoundGotoStatement original,
             BoundStatement rewritten
-        ) {
+        )
+        {
             return AddDynamicAnalysis(original, base.InstrumentGotoStatement(original, rewritten));
         }
 
         public override BoundStatement InstrumentThrowStatement(
             BoundThrowStatement original,
             BoundStatement rewritten
-        ) {
+        )
+        {
             return AddDynamicAnalysis(original, base.InstrumentThrowStatement(original, rewritten));
         }
 
         public override BoundStatement InstrumentYieldBreakStatement(
             BoundYieldBreakStatement original,
             BoundStatement rewritten
-        ) {
+        )
+        {
             return AddDynamicAnalysis(
                 original,
                 base.InstrumentYieldBreakStatement(original, rewritten)
@@ -426,7 +439,8 @@ namespace Microsoft.CodeAnalysis.CSharp
         public override BoundStatement InstrumentYieldReturnStatement(
             BoundYieldReturnStatement original,
             BoundStatement rewritten
-        ) {
+        )
+        {
             return AddDynamicAnalysis(
                 original,
                 base.InstrumentYieldReturnStatement(original, rewritten)
@@ -436,7 +450,8 @@ namespace Microsoft.CodeAnalysis.CSharp
         public override BoundStatement InstrumentForEachStatementIterationVarDeclaration(
             BoundForEachStatement original,
             BoundStatement iterationVarDecl
-        ) {
+        )
+        {
             return AddDynamicAnalysis(
                 original,
                 base.InstrumentForEachStatementIterationVarDeclaration(original, iterationVarDecl)
@@ -446,7 +461,8 @@ namespace Microsoft.CodeAnalysis.CSharp
         public override BoundStatement InstrumentForEachStatementDeconstructionVariablesDeclaration(
             BoundForEachStatement original,
             BoundStatement iterationVarDecl
-        ) {
+        )
+        {
             return AddDynamicAnalysis(
                 original,
                 base.InstrumentForEachStatementDeconstructionVariablesDeclaration(
@@ -459,14 +475,16 @@ namespace Microsoft.CodeAnalysis.CSharp
         public override BoundStatement InstrumentIfStatement(
             BoundIfStatement original,
             BoundStatement rewritten
-        ) {
+        )
+        {
             return AddDynamicAnalysis(original, base.InstrumentIfStatement(original, rewritten));
         }
 
         public override BoundStatement InstrumentWhileStatementConditionalGotoStartOrBreak(
             BoundWhileStatement original,
             BoundStatement ifConditionGotoStart
-        ) {
+        )
+        {
             return AddDynamicAnalysis(
                 original,
                 base.InstrumentWhileStatementConditionalGotoStartOrBreak(
@@ -479,7 +497,8 @@ namespace Microsoft.CodeAnalysis.CSharp
         public override BoundStatement InstrumentLocalInitialization(
             BoundLocalDeclaration original,
             BoundStatement rewritten
-        ) {
+        )
+        {
             return AddDynamicAnalysis(
                 original,
                 base.InstrumentLocalInitialization(original, rewritten)
@@ -489,7 +508,8 @@ namespace Microsoft.CodeAnalysis.CSharp
         public override BoundStatement InstrumentLockTargetCapture(
             BoundLockStatement original,
             BoundStatement lockTargetCapture
-        ) {
+        )
+        {
             return AddDynamicAnalysis(
                 original,
                 base.InstrumentLockTargetCapture(original, lockTargetCapture)
@@ -499,7 +519,8 @@ namespace Microsoft.CodeAnalysis.CSharp
         public override BoundStatement InstrumentReturnStatement(
             BoundReturnStatement original,
             BoundStatement rewritten
-        ) {
+        )
+        {
             rewritten = base.InstrumentReturnStatement(original, rewritten);
 
             // A synthesized return statement that does not return a value never requires instrumentation.
@@ -517,12 +538,14 @@ namespace Microsoft.CodeAnalysis.CSharp
 
         private static bool ReturnsValueWithinExpressionBodiedConstruct(
             BoundReturnStatement returnStatement
-        ) {
+        )
+        {
             if (
                 returnStatement.WasCompilerGenerated
                 && returnStatement.ExpressionOpt != null
                 && returnStatement.ExpressionOpt.Syntax != null
-            ) {
+            )
+            {
                 SyntaxKind parentKind = returnStatement.ExpressionOpt.Syntax.Parent.Kind();
                 switch (parentKind)
                 {
@@ -539,7 +562,8 @@ namespace Microsoft.CodeAnalysis.CSharp
         public override BoundStatement InstrumentSwitchStatement(
             BoundSwitchStatement original,
             BoundStatement rewritten
-        ) {
+        )
+        {
             return AddDynamicAnalysis(
                 original,
                 base.InstrumentSwitchStatement(original, rewritten)
@@ -549,7 +573,8 @@ namespace Microsoft.CodeAnalysis.CSharp
         public override BoundStatement InstrumentSwitchWhenClauseConditionalGotoBody(
             BoundExpression original,
             BoundStatement ifConditionGotoBody
-        ) {
+        )
+        {
             ifConditionGotoBody = base.InstrumentSwitchWhenClauseConditionalGotoBody(
                 original,
                 ifConditionGotoBody
@@ -575,7 +600,8 @@ namespace Microsoft.CodeAnalysis.CSharp
         public override BoundStatement InstrumentUsingTargetCapture(
             BoundUsingStatement original,
             BoundStatement usingTargetCapture
-        ) {
+        )
+        {
             return AddDynamicAnalysis(
                 original,
                 base.InstrumentUsingTargetCapture(original, usingTargetCapture)
@@ -590,7 +616,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                 if (
                     !original.IsConstructorInitializer()
                     || original.Syntax.Kind() != SyntaxKind.ConstructorDeclaration
-                ) {
+                )
+                {
                     return CollectDynamicAnalysis(original, rewritten);
                 }
             }
@@ -601,7 +628,8 @@ namespace Microsoft.CodeAnalysis.CSharp
         private BoundStatement CollectDynamicAnalysis(
             BoundStatement original,
             BoundStatement rewritten
-        ) {
+        )
+        {
             // Instrument the statement using a factory with the same syntax as the statement, so that the instrumentation appears to be part of the statement.
             SyntheticBoundNodeFactory statementFactory = new SyntheticBoundNodeFactory(
                 _method,
@@ -618,7 +646,8 @@ namespace Microsoft.CodeAnalysis.CSharp
         private static Cci.DebugSourceDocument GetSourceDocument(
             DebugDocumentProvider debugDocumentProvider,
             SyntaxNode syntax
-        ) {
+        )
+        {
             return GetSourceDocument(
                 debugDocumentProvider,
                 syntax,
@@ -630,7 +659,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             DebugDocumentProvider debugDocumentProvider,
             SyntaxNode syntax,
             FileLinePositionSpan span
-        ) {
+        )
+        {
             string path = span.Path;
             // If the path for the syntax node is empty, try the path for the entire syntax tree.
             if (path.Length == 0)
@@ -645,7 +675,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             SyntaxNode syntaxForSpan,
             Text.TextSpan alternateSpan,
             SyntheticBoundNodeFactory statementFactory
-        ) {
+        )
+        {
             return AddAnalysisPoint(
                 syntaxForSpan,
                 syntaxForSpan.SyntaxTree.GetMappedLineSpan(alternateSpan),
@@ -656,7 +687,8 @@ namespace Microsoft.CodeAnalysis.CSharp
         private BoundStatement AddAnalysisPoint(
             SyntaxNode syntaxForSpan,
             SyntheticBoundNodeFactory statementFactory
-        ) {
+        )
+        {
             return AddAnalysisPoint(
                 syntaxForSpan,
                 syntaxForSpan.GetLocation().GetMappedLineSpan(),
@@ -668,7 +700,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             SyntaxNode syntaxForSpan,
             FileLinePositionSpan span,
             SyntheticBoundNodeFactory statementFactory
-        ) {
+        )
+        {
             // Add an entry in the spans array.
             int spansIndex = _spansBuilder.Count;
             _spansBuilder.Add(
@@ -740,7 +773,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             WellKnownMember overload,
             SyntaxNode syntax,
             BindingDiagnosticBag diagnostics
-        ) {
+        )
+        {
             return (MethodSymbol)Binder.GetWellKnownTypeMember(
                 compilation,
                 overload,
@@ -840,7 +874,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             SyntaxTokenList modifiers,
             SyntaxToken keyword,
             TypeSyntax type
-        ) {
+        )
+        {
             Text.TextSpan originalSpan = syntax.Span;
             if (attributes.Count > 0)
             {

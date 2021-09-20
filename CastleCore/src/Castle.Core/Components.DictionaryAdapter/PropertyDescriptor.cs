@@ -263,7 +263,8 @@ namespace Castle.Components.DictionaryAdapter
             IDictionaryAdapter dictionaryAdapter,
             string key,
             PropertyDescriptor descriptor
-        ) {
+        )
+        {
             var behaviors = dictionaryBehaviors;
             if (behaviors != null)
             {
@@ -292,7 +293,8 @@ namespace Castle.Components.DictionaryAdapter
             object storedValue,
             PropertyDescriptor descriptor,
             bool ifExists
-        ) {
+        )
+        {
             key = GetKey(dictionaryAdapter, key, descriptor);
             storedValue = storedValue ?? dictionaryAdapter.ReadProperty(key);
 
@@ -329,7 +331,8 @@ namespace Castle.Components.DictionaryAdapter
             string key,
             ref object value,
             PropertyDescriptor descriptor
-        ) {
+        )
+        {
             key = GetKey(dictionaryAdapter, key, descriptor);
 
             var behaviors = dictionaryBehaviors;

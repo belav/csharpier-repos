@@ -20,7 +20,8 @@ namespace System.Net.Http.WinHttpHandlerUnitTests
             WinHttpHandler handler,
             Action setup,
             string fakeServerEndpoint
-        ) {
+        )
+        {
             TestServer.SetResponse(DecompressionMethods.None, TestServer.ExpectedResponseBody);
 
             setup();

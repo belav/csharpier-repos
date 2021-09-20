@@ -76,7 +76,8 @@ namespace System.Runtime.Serialization.Formatters.Binary
             IFormatterConverter converter,
             ObjectWriter objectWriter,
             SerializationBinder? binder
-        ) {
+        )
+        {
             WriteObjectInfo woi = GetObjectInfo(serObjectInfoInit);
             woi.InitSerialize(
                 obj,
@@ -100,7 +101,8 @@ namespace System.Runtime.Serialization.Formatters.Binary
             IFormatterConverter converter,
             ObjectWriter objectWriter,
             SerializationBinder? binder
-        ) {
+        )
+        {
             _context = context;
             _obj = obj;
             _serObjectInfoInit = serObjectInfoInit;
@@ -126,7 +128,8 @@ namespace System.Runtime.Serialization.Formatters.Binary
                         out surrogateSelectorTemp
                     )
                 ) != null
-            ) {
+            )
+            {
                 _si = new SerializationInfo(_objectType, converter);
                 if (!_objectType.IsPrimitive)
                 {
@@ -165,7 +168,8 @@ namespace System.Runtime.Serialization.Formatters.Binary
             SerObjectInfoInit serObjectInfoInit,
             IFormatterConverter converter,
             SerializationBinder? binder
-        ) {
+        )
+        {
             WriteObjectInfo woi = GetObjectInfo(serObjectInfoInit);
             woi.InitSerialize(
                 objectType,
@@ -186,7 +190,8 @@ namespace System.Runtime.Serialization.Formatters.Binary
             SerObjectInfoInit serObjectInfoInit,
             IFormatterConverter converter,
             SerializationBinder? binder
-        ) {
+        )
+        {
             _objectType = objectType;
             _context = context;
             _serObjectInfoInit = serObjectInfoInit;
@@ -218,7 +223,8 @@ namespace System.Runtime.Serialization.Formatters.Binary
             else if (
                 !ReferenceEquals(objectType, Converter.s_typeofObject)
                 && Converter.s_typeofISerializable.IsAssignableFrom(objectType)
-            ) {
+            )
+            {
                 _si = new SerializationInfo(objectType, converter);
                 _cache = new SerObjectInfoCache(objectType);
                 CheckTypeForwardedFrom(_cache, objectType, _binderAssemblyString);
@@ -289,7 +295,8 @@ namespace System.Runtime.Serialization.Formatters.Binary
             SerObjectInfoCache? cache,
             Type objectType,
             string? binderAssemblyString
-        ) {
+        )
+        {
             // nop
         }
 
@@ -349,7 +356,8 @@ namespace System.Runtime.Serialization.Formatters.Binary
             out string[]? outMemberNames,
             out Type[]? outMemberTypes,
             out object?[]? outMemberData
-        ) {
+        )
+        {
             outMemberNames = _cache._memberNames;
             outMemberTypes = _cache._memberTypes;
             outMemberData = _memberData;
@@ -432,7 +440,8 @@ namespace System.Runtime.Serialization.Formatters.Binary
             SerObjectInfoInit? serObjectInfoInit,
             IFormatterConverter? converter,
             bool bSimpleAssembly
-        ) {
+        )
+        {
             ReadObjectInfo roi = GetObjectInfo(serObjectInfoInit);
             roi.Init(
                 objectType,
@@ -454,7 +463,8 @@ namespace System.Runtime.Serialization.Formatters.Binary
             SerObjectInfoInit? serObjectInfoInit,
             IFormatterConverter? converter,
             bool bSimpleAssembly
-        ) {
+        )
+        {
             _objectType = objectType;
             _objectManager = objectManager;
             _context = context;
@@ -475,7 +485,8 @@ namespace System.Runtime.Serialization.Formatters.Binary
             SerObjectInfoInit? serObjectInfoInit,
             IFormatterConverter? converter,
             bool bSimpleAssembly
-        ) {
+        )
+        {
             ReadObjectInfo roi = GetObjectInfo(serObjectInfoInit);
             roi.Init(
                 objectType,
@@ -501,7 +512,8 @@ namespace System.Runtime.Serialization.Formatters.Binary
             SerObjectInfoInit? serObjectInfoInit,
             IFormatterConverter? converter,
             bool bSimpleAssembly
-        ) {
+        )
+        {
             _objectType = objectType;
             _objectManager = objectManager;
             _wireMemberNames = memberNames;
@@ -524,7 +536,8 @@ namespace System.Runtime.Serialization.Formatters.Binary
             Type objectType,
             ISurrogateSelector? surrogateSelector,
             StreamingContext context
-        ) {
+        )
+        {
             BinaryFormatterEventSource.Log.DeserializingObject(objectType);
 
             if (objectType.IsArray)
@@ -550,7 +563,8 @@ namespace System.Runtime.Serialization.Formatters.Binary
             else if (
                 !ReferenceEquals(objectType, Converter.s_typeofObject)
                 && Converter.s_typeofISerializable.IsAssignableFrom(objectType)
-            ) {
+            )
+            {
                 _isSi = true;
             }
 
@@ -647,7 +661,8 @@ namespace System.Runtime.Serialization.Formatters.Binary
             object? value,
             ref SerializationInfo? si,
             ref object?[]? memberData
-        ) {
+        )
+        {
             if (_isSi)
             {
                 Debug.Assert(si != null);
@@ -739,7 +754,8 @@ namespace System.Runtime.Serialization.Formatters.Binary
             else if (
                 (++_lastPosition < _cache._memberNames.Length)
                 && (_cache._memberNames[_lastPosition].Equals(name))
-            ) {
+            )
+            {
                 return _lastPosition;
             }
             else
@@ -821,7 +837,8 @@ namespace System.Runtime.Serialization.Formatters.Binary
                                 typeof(OptionalFieldAttribute),
                                 inherit: false
                             ) == null
-                        ) {
+                        )
+                        {
                             Debug.Assert(_cache._memberNames != null);
                             throw new SerializationException(
                                 SR.Format(
@@ -902,7 +919,8 @@ namespace System.Runtime.Serialization.Formatters.Binary
             string fullTypeName,
             string assemblyString,
             bool hasTypeForwardedFrom
-        ) {
+        )
+        {
             FullTypeName = fullTypeName;
             AssemblyString = assemblyString;
             HasTypeForwardedFrom = hasTypeForwardedFrom;

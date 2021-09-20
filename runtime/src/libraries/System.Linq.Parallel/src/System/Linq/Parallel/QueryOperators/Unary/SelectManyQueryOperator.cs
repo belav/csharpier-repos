@@ -124,7 +124,8 @@ namespace System.Linq.Parallel
             IPartitionedStreamRecipient<TOutput> recipient,
             bool preferStriping,
             QuerySettings settings
-        ) {
+        )
+        {
             int partitionCount = inputStream.PartitionCount;
 
             if (_indexedRightChildSelector != null)
@@ -182,7 +183,8 @@ namespace System.Linq.Parallel
             PartitionedStream<TLeftInput, TLeftKey> inputStream,
             IPartitionedStreamRecipient<TOutput> recipient,
             QuerySettings settings
-        ) {
+        )
+        {
             int partitionCount = inputStream.PartitionCount;
             var keyComparer = new PairComparer<TLeftKey, int>(
                 inputStream.KeyComparer,
@@ -213,7 +215,8 @@ namespace System.Linq.Parallel
             PartitionedStream<TLeftInput, int> inputStream,
             IPartitionedStreamRecipient<TOutput> recipient,
             QuerySettings settings
-        ) {
+        )
+        {
             var keyComparer = new PairComparer<int, int>(
                 inputStream.KeyComparer,
                 Util.GetDefaultComparer<int>()
@@ -331,7 +334,8 @@ namespace System.Linq.Parallel
                 QueryOperatorEnumerator<TLeftInput, int> leftSource,
                 SelectManyQueryOperator<TLeftInput, TRightInput, TOutput> selectManyOperator,
                 CancellationToken cancellationToken
-            ) {
+            )
+            {
                 Debug.Assert(leftSource != null);
                 Debug.Assert(selectManyOperator != null);
 
@@ -347,7 +351,8 @@ namespace System.Linq.Parallel
             internal override bool MoveNext(
                 [MaybeNullWhen(false), AllowNull] ref TOutput currentElement,
                 ref Pair<int, int> currentKey
-            ) {
+            )
+            {
                 while (true)
                 {
                     if (_currentRightSource == null)
@@ -367,7 +372,8 @@ namespace System.Linq.Parallel
                                 ref _mutables._currentLeftElement!,
                                 ref _mutables._currentLeftSourceIndex
                             )
-                        ) {
+                        )
+                        {
                             return false;
                         }
 
@@ -485,7 +491,8 @@ namespace System.Linq.Parallel
                 QueryOperatorEnumerator<TLeftInput, TLeftKey> leftSource,
                 SelectManyQueryOperator<TLeftInput, TRightInput, TOutput> selectManyOperator,
                 CancellationToken cancellationToken
-            ) {
+            )
+            {
                 Debug.Assert(leftSource != null);
                 Debug.Assert(selectManyOperator != null);
 
@@ -501,7 +508,8 @@ namespace System.Linq.Parallel
             internal override bool MoveNext(
                 [MaybeNullWhen(false), AllowNull] ref TOutput currentElement,
                 ref Pair<TLeftKey, int> currentKey
-            ) {
+            )
+            {
                 while (true)
                 {
                     if (_currentRightSource == null)
@@ -522,7 +530,8 @@ namespace System.Linq.Parallel
                                 ref _mutables._currentLeftElement!,
                                 ref _mutables._currentLeftKey
                             )
-                        ) {
+                        )
+                        {
                             return false;
                         }
 

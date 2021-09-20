@@ -40,7 +40,8 @@ namespace Microsoft.CodeAnalysis
             Compilation finalCompilation,
             VersionStamp version,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             solution.Workspace.LogTestMessage(
                 $"Looking to see if we already have a skeleton assembly for {projectReference.ProjectId} before we build one..."
             );
@@ -52,7 +53,8 @@ namespace Microsoft.CodeAnalysis
                     version,
                     out var reference
                 )
-            ) {
+            )
+            {
                 solution.Workspace.LogTestMessage(
                     $"A reference was found {projectReference.ProjectId} so we're skipping the build."
                 );
@@ -82,7 +84,8 @@ namespace Microsoft.CodeAnalysis
                         VersionStamp.Default,
                         out reference
                     )
-                ) {
+                )
+                {
                     solution.Workspace.LogTestMessage(
                         $"We failed to create metadata so we're using the one we just found from an earlier version."
                     );
@@ -140,7 +143,8 @@ namespace Microsoft.CodeAnalysis
             Compilation finalOrDeclarationCompilation,
             VersionStamp version,
             out MetadataReference reference
-        ) {
+        )
+        {
             // if we have one from snapshot cache, use it. it will make sure same compilation will get same metadata reference always.
             if (s_snapshotCache.TryGetValue(finalOrDeclarationCompilation, out var referenceSet))
             {
@@ -166,7 +170,8 @@ namespace Microsoft.CodeAnalysis
                     version,
                     out reference
                 )
-            ) {
+            )
+            {
                 solution.Workspace.LogTestMessage(
                     $"Found already cached metadata for the branch and version {version}"
                 );
@@ -184,7 +189,8 @@ namespace Microsoft.CodeAnalysis
                     version,
                     out reference
                 )
-            ) {
+            )
+            {
                 solution.Workspace.LogTestMessage(
                     $"Found already cached metadata for the primary branch and version {version}"
                 );
@@ -202,14 +208,16 @@ namespace Microsoft.CodeAnalysis
             Compilation finalOrDeclarationCompilation,
             VersionStamp version,
             out MetadataReference reference
-        ) {
+        )
+        {
             // get map for the branch
             var mapFromBranch = s_cache.GetValue(branchId, s_createReferenceSetMap);
             // if we have one, return it
             if (
                 mapFromBranch.TryGetValue(projectReference.ProjectId, out var referenceSet)
                 && (version == VersionStamp.Default || referenceSet.Version == version)
-            ) {
+            )
+            {
                 // record it to snapshot based cache.
                 var newReferenceSet = s_snapshotCache.GetValue(
                     finalOrDeclarationCompilation,
@@ -257,7 +265,8 @@ namespace Microsoft.CodeAnalysis
                 Compilation compilation,
                 ImmutableArray<string> aliases,
                 bool embedInteropTypes
-            ) {
+            )
+            {
                 var key = new MetadataReferenceProperties(
                     MetadataImageKind.Assembly,
                     aliases,
@@ -269,7 +278,8 @@ namespace Microsoft.CodeAnalysis
                     if (
                         !_metadataReferences.TryGetValue(key, out var weakMetadata)
                         || !weakMetadata.TryGetTarget(out var metadataReference)
-                    ) {
+                    )
+                    {
                         // here we give out strong reference to compilation. so there is possibility that we end up making 2 compilations for same project alive.
                         // one for final compilation and one for declaration only compilation. but the final compilation will be eventually kicked out from compilation cache
                         // if there is no activity on the project. or the declaration compilation will go away if the project that depends on the reference doesn't have any

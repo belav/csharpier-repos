@@ -48,7 +48,8 @@ namespace Microsoft.CodeAnalysis.CSharp.GenerateMember.GenerateVariable
             out SyntaxToken identifierToken,
             out IPropertySymbol propertySymbol,
             out INamedTypeSymbol typeToGenerateIn
-        ) {
+        )
+        {
             var propertyDeclaration = (PropertyDeclarationSyntax)node;
             identifierToken = propertyDeclaration.Identifier;
 
@@ -60,7 +61,8 @@ namespace Microsoft.CodeAnalysis.CSharp.GenerateMember.GenerateVariable
                     as IPropertySymbol;
                 if (
                     propertySymbol != null && !propertySymbol.ExplicitInterfaceImplementations.Any()
-                ) {
+                )
+                {
                     var info = semanticModel.GetTypeInfo(
                         propertyDeclaration.ExplicitInterfaceSpecifier.Name,
                         cancellationToken
@@ -84,13 +86,15 @@ namespace Microsoft.CodeAnalysis.CSharp.GenerateMember.GenerateVariable
             out ExpressionSyntax simpleNameOrMemberAccessExpression,
             out bool isInExecutableBlock,
             out bool isConditionalAccessExpression
-        ) {
+        )
+        {
             identifierToken = identifierName.Identifier;
             if (
                 identifierToken.ValueText != string.Empty
                 && !identifierName.IsVar
                 && !IsProbablyGeneric(identifierName, cancellationToken)
-            ) {
+            )
+            {
                 var memberAccess = identifierName.Parent as MemberAccessExpressionSyntax;
                 var conditionalMemberAccess =
                     identifierName.Parent.Parent as ConditionalAccessExpressionSyntax;
@@ -101,7 +105,8 @@ namespace Microsoft.CodeAnalysis.CSharp.GenerateMember.GenerateVariable
                 else if (
                     (conditionalMemberAccess?.WhenNotNull as MemberBindingExpressionSyntax)?.Name
                     == identifierName
-                ) {
+                )
+                {
                     simpleNameOrMemberAccessExpression = conditionalMemberAccess;
                 }
                 else
@@ -136,7 +141,8 @@ namespace Microsoft.CodeAnalysis.CSharp.GenerateMember.GenerateVariable
         private static bool IsProbablyGeneric(
             SimpleNameSyntax identifierName,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             if (identifierName.IsKind(SyntaxKind.GenericName))
             {
                 return true;
@@ -171,7 +177,8 @@ namespace Microsoft.CodeAnalysis.CSharp.GenerateMember.GenerateVariable
             SemanticDocument document,
             ExpressionSyntax expression,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             // TODO(cyrusn): Consider supporting this at some point.  It is difficult because we'd
             // need to replace the identifier typed with the fully qualified name of the field we
             // were generating.
@@ -193,7 +200,8 @@ namespace Microsoft.CodeAnalysis.CSharp.GenerateMember.GenerateVariable
             if (
                 expression.IsParentKind(SyntaxKind.NameColon)
                 && expression.Parent.IsParentKind(SyntaxKind.Subpattern)
-            ) {
+            )
+            {
                 return true;
             }
 
@@ -212,13 +220,15 @@ namespace Microsoft.CodeAnalysis.CSharp.GenerateMember.GenerateVariable
             SemanticModel semanticModel,
             CancellationToken cancellationToken,
             out SyntaxNode newRoot
-        ) {
+        )
+        {
             var token = identifierToken;
             var node = identifierToken.Parent as IdentifierNameSyntax;
             if (
                 node.IsLeftSideOfAssignExpression()
                 && node.Parent.IsParentKind(SyntaxKind.ExpressionStatement)
-            ) {
+            )
+            {
                 var assignExpression = (AssignmentExpressionSyntax)node.Parent;
                 var expressionStatement = (StatementSyntax)assignExpression.Parent;
 

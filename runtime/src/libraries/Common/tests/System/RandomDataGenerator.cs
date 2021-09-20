@@ -303,7 +303,8 @@ namespace System
             bool allowNulls,
             int minLength,
             int maxLength
-        ) {
+        )
+        {
             Seed = newSeed;
             return GetString(validPath, allowNulls, minLength, maxLength);
         }
@@ -320,7 +321,8 @@ namespace System
             bool allowNoWeight,
             int minLength,
             int maxLength
-        ) {
+        )
+        {
             Seed = newSeed;
             return GetString(validPath, allowNulls, allowNoWeight, minLength, maxLength);
         }
@@ -331,7 +333,8 @@ namespace System
             bool allowNoWeight,
             int minLength,
             int maxLength
-        ) {
+        )
+        {
             StringBuilder sVal = new StringBuilder();
             char c;
             int length;

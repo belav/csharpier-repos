@@ -36,7 +36,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             string name,
             bool isIndexer,
             bool isIndexedProperty
-        ) {
+        )
+        {
             _containingSymbol = containingSymbol;
             _typeWithAnnotations = TypeWithAnnotations.Create(type);
             _name = name;

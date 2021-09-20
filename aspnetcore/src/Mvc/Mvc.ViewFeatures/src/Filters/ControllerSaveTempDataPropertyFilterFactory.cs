@@ -12,7 +12,8 @@ namespace Microsoft.AspNetCore.Mvc.ViewFeatures.Filters
     {
         public ControllerSaveTempDataPropertyFilterFactory(
             IReadOnlyList<LifecycleProperty> properties
-        ) {
+        )
+        {
             TempDataProperties = properties;
         }
 

@@ -12,7 +12,8 @@ namespace Microsoft.AspNetCore.Razor.Language.Extensions
             this IReadOnlyList<T> list,
             Func<T, TArg, bool> predicate,
             TArg arg
-        ) {
+        )
+        {
             if (list is null)
             {
                 throw new ArgumentNullException(nameof(list));
@@ -38,7 +39,8 @@ namespace Microsoft.AspNetCore.Razor.Language.Extensions
             this IReadOnlyList<T> list,
             Func<T, TArg, bool> predicate,
             TArg arg
-        ) {
+        )
+        {
             if (list is null)
             {
                 throw new ArgumentNullException(nameof(list));

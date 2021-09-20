@@ -31,7 +31,8 @@ namespace Microsoft.AspNetCore.SignalR.Client.FunctionalTests
             ref ReadOnlySequence<byte> input,
             IInvocationBinder binder,
             out HubMessage message
-        ) {
+        )
+        {
             var inputCopy = input;
             if (!TryParseMessage(ref input, out var payload))
             {
@@ -57,7 +58,8 @@ namespace Microsoft.AspNetCore.SignalR.Client.FunctionalTests
         public static bool TryParseMessage(
             ref ReadOnlySequence<byte> buffer,
             out ReadOnlySequence<byte> payload
-        ) {
+        )
+        {
             var position = buffer.PositionOf((byte)0x1e);
             if (position == null)
             {

@@ -72,7 +72,8 @@ namespace Microsoft.AspNetCore.Routing.Matching
             in (string parameterName, int segmentIndex, int slotIndex) catchAll,
             (RoutePatternPathSegment pathSegment, int segmentIndex)[] complexSegments,
             KeyValuePair<string, IRouteConstraint>[] constraints
-        ) {
+        )
+        {
             Endpoint = endpoint;
             Score = score;
             Slots = slots;

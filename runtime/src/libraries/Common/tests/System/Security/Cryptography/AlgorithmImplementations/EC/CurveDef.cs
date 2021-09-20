@@ -48,7 +48,8 @@ namespace System.Security.Cryptography.Tests
                     && actual == ECCurve.ECCurveType.PrimeShortWeierstrass
                 || CurveType == ECCurve.ECCurveType.PrimeShortWeierstrass
                     && actual == ECCurve.ECCurveType.PrimeMontgomery
-            ) {
+            )
+            {
                 return true;
             }
 

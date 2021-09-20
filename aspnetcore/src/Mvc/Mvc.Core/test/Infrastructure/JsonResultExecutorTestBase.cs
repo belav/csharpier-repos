@@ -168,7 +168,8 @@ namespace Microsoft.AspNetCore.Mvc.Infrastructure
         public async Task ExecuteAsync_NoResultContentTypeSet_UsesDefaultEncoding_DoesNotSetCharset(
             string responseContentType,
             string expectedContentType
-        ) {
+        )
+        {
             // Arrange
             var expected = Encoding.UTF8.GetBytes(JsonSerializer.Serialize(new { foo = "abcd" }));
 

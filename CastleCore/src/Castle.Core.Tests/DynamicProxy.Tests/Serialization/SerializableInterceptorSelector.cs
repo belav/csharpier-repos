@@ -26,7 +26,8 @@ namespace Castle.DynamicProxy.Tests.Serialization
             Type type,
             MethodInfo method,
             IInterceptor[] interceptors
-        ) {
+        )
+        {
             return interceptors;
         }
     }

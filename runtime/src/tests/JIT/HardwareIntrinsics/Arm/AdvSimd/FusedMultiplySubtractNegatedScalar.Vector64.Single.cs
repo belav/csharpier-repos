@@ -132,7 +132,8 @@ namespace JIT.HardwareIntrinsics.Arm
                 Single[] inArray3,
                 Single[] outArray,
                 int alignment
-            ) {
+            )
+            {
                 int sizeOfinArray1 = inArray1.Length * Unsafe.SizeOf<Single>();
                 int sizeOfinArray2 = inArray2.Length * Unsafe.SizeOf<Single>();
                 int sizeOfinArray3 = inArray3.Length * Unsafe.SizeOf<Single>();
@@ -143,7 +144,8 @@ namespace JIT.HardwareIntrinsics.Arm
                     || (alignment * 2) < sizeOfinArray2
                     || (alignment * 2) < sizeOfinArray3
                     || (alignment * 2) < sizeOfoutArray
-                ) {
+                )
+                {
                     throw new ArgumentException("Invalid value of alignment");
                 }
 
@@ -242,7 +244,8 @@ namespace JIT.HardwareIntrinsics.Arm
 
             public void RunStructFldScenario(
                 SimpleTernaryOpTest__FusedMultiplySubtractNegatedScalar_Vector64_Single testClass
-            ) {
+            )
+            {
                 var result = AdvSimd.FusedMultiplySubtractNegatedScalar(_fld1, _fld2, _fld3);
 
                 Unsafe.Write(testClass._dataTable.outArrayPtr, result);
@@ -251,7 +254,8 @@ namespace JIT.HardwareIntrinsics.Arm
 
             public void RunStructFldScenario_Load(
                 SimpleTernaryOpTest__FusedMultiplySubtractNegatedScalar_Vector64_Single testClass
-            ) {
+            )
+            {
                 fixed (Vector64<Single>* pFld1 = &_fld1)fixed (
                     Vector64<Single>* pFld2 = &_fld2
                 )fixed (Vector64<Single>* pFld3 = &_fld3)
@@ -592,7 +596,8 @@ namespace JIT.HardwareIntrinsics.Arm
 
             fixed (Vector64<Single>* pFld1 = &_fld1)fixed (Vector64<Single>* pFld2 = &_fld2)fixed (
                 Vector64<Single>* pFld3 = &_fld3
-            ) {
+            )
+            {
                 var result = AdvSimd.FusedMultiplySubtractNegatedScalar(
                     AdvSimd.LoadVector64((Single*)(pFld1)),
                     AdvSimd.LoadVector64((Single*)(pFld2)),
@@ -677,7 +682,8 @@ namespace JIT.HardwareIntrinsics.Arm
             Vector64<Single> op3,
             void* result,
             [CallerMemberName] string method = ""
-        ) {
+        )
+        {
             Single[] inArray1 = new Single[Op1ElementCount];
             Single[] inArray2 = new Single[Op2ElementCount];
             Single[] inArray3 = new Single[Op3ElementCount];
@@ -701,7 +707,8 @@ namespace JIT.HardwareIntrinsics.Arm
             void* op3,
             void* result,
             [CallerMemberName] string method = ""
-        ) {
+        )
+        {
             Single[] inArray1 = new Single[Op1ElementCount];
             Single[] inArray2 = new Single[Op2ElementCount];
             Single[] inArray3 = new Single[Op3ElementCount];
@@ -737,14 +744,16 @@ namespace JIT.HardwareIntrinsics.Arm
             Single[] thirdOp,
             Single[] result,
             [CallerMemberName] string method = ""
-        ) {
+        )
+        {
             bool succeeded = true;
 
             if (
                 BitConverter.SingleToInt32Bits(
                     Helpers.FusedMultiplySubtractNegated(firstOp[0], secondOp[0], thirdOp[0])
                 ) != BitConverter.SingleToInt32Bits(result[0])
-            ) {
+            )
+            {
                 succeeded = false;
             }
             else

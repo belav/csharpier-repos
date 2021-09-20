@@ -23,7 +23,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Transport.Experimental.Quic
         public QuicConnectionFactory(
             IOptions<QuicTransportOptions> options,
             ILoggerFactory loggerFactory
-        ) {
+        )
+        {
             if (options == null)
             {
                 throw new ArgumentNullException(nameof(options));
@@ -41,7 +42,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Transport.Experimental.Quic
             EndPoint endPoint,
             IFeatureCollection? features = null,
             CancellationToken cancellationToken = default
-        ) {
+        )
+        {
             if (endPoint is not IPEndPoint)
             {
                 throw new NotSupportedException($"{endPoint} is not supported");

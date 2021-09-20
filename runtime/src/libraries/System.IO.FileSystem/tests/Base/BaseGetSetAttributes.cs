@@ -17,7 +17,8 @@ namespace System.IO.Tests
             string path = null,
             [CallerMemberName] string memberName = null,
             [CallerLineNumber] int lineNumber = 0
-        ) {
+        )
+        {
             path = path ?? GetTestFilePath(null, memberName, lineNumber);
             File.Create(path).Dispose();
             return path;

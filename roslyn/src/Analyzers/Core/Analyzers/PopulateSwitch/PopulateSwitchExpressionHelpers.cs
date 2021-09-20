@@ -16,7 +16,8 @@ namespace Microsoft.CodeAnalysis.PopulateSwitch
     {
         public static ICollection<ISymbol> GetMissingEnumMembers(
             ISwitchExpressionOperation operation
-        ) {
+        )
+        {
             var switchExpression = operation.Value;
             var switchExpressionType = switchExpression?.Type;
 
@@ -36,7 +37,8 @@ namespace Microsoft.CodeAnalysis.PopulateSwitch
                         switchExpressionType,
                         enumMembers
                     )
-                ) {
+                )
+                {
                     RemoveExistingEnumMembers(operation, enumMembers);
                     return enumMembers.Values;
                 }
@@ -48,7 +50,8 @@ namespace Microsoft.CodeAnalysis.PopulateSwitch
         private static void RemoveExistingEnumMembers(
             ISwitchExpressionOperation operation,
             Dictionary<long, ISymbol> enumMembers
-        ) {
+        )
+        {
             foreach (var arm in operation.Arms)
             {
                 RemoveIfConstantPatternHasValue(arm.Pattern, enumMembers);
@@ -62,7 +65,8 @@ namespace Microsoft.CodeAnalysis.PopulateSwitch
         private static void HandleBinaryPattern(
             IBinaryPatternOperation? binaryPattern,
             Dictionary<long, ISymbol> enumMembers
-        ) {
+        )
+        {
             if (binaryPattern?.OperatorKind == BinaryOperatorKind.Or)
             {
                 RemoveIfConstantPatternHasValue(binaryPattern.LeftPattern, enumMembers);
@@ -82,7 +86,8 @@ namespace Microsoft.CodeAnalysis.PopulateSwitch
         private static void RemoveIfConstantPatternHasValue(
             IOperation operation,
             Dictionary<long, ISymbol> enumMembers
-        ) {
+        )
+        {
             if (
                 operation is IConstantPatternOperation
                 {

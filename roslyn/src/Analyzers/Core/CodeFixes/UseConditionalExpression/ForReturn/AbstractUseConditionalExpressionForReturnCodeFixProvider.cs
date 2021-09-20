@@ -53,7 +53,8 @@ namespace Microsoft.CodeAnalysis.UseConditionalExpression
             Diagnostic diagnostic,
             SyntaxEditor editor,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var syntaxFacts = document.GetRequiredLanguageService<ISyntaxFactsService>();
             var ifStatement = (TIfStatementSyntax)diagnostic.AdditionalLocations[0].FindNode(
                 cancellationToken
@@ -80,7 +81,8 @@ namespace Microsoft.CodeAnalysis.UseConditionalExpression
                     out var trueReturn,
                     out var falseReturn
                 )
-            ) {
+            )
+            {
                 return;
             }
 
@@ -125,13 +127,12 @@ namespace Microsoft.CodeAnalysis.UseConditionalExpression
 
         private class MyCodeAction : CustomCodeActions.DocumentChangeAction
         {
-            public MyCodeAction(
-                Func<CancellationToken, Task<Document>> createChangedDocument
-            ) : base(
-                AnalyzersResources.Convert_to_conditional_expression,
-                createChangedDocument,
-                IDEDiagnosticIds.UseConditionalExpressionForReturnDiagnosticId
-            ) { }
+            public MyCodeAction(Func<CancellationToken, Task<Document>> createChangedDocument)
+                : base(
+                    AnalyzersResources.Convert_to_conditional_expression,
+                    createChangedDocument,
+                    IDEDiagnosticIds.UseConditionalExpressionForReturnDiagnosticId
+                ) { }
         }
     }
 }

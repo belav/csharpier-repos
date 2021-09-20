@@ -9,7 +9,8 @@ namespace System.Collections.Generic
             this IDictionary<TKey, TValue> dict,
             TKey key,
             TValue value
-        ) {
+        )
+        {
             if (!dict.ContainsKey(key))
             {
                 dict.Add(key, value);

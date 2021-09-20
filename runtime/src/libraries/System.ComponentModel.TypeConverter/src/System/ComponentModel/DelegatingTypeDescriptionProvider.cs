@@ -38,7 +38,8 @@ namespace System.ComponentModel
                 Type objectType,
             Type[] argTypes,
             object[] args
-        ) {
+        )
+        {
             return Provider.CreateInstance(provider, objectType, argTypes, args);
         }
 
@@ -103,7 +104,8 @@ namespace System.ComponentModel
             [DynamicallyAccessedMembers(TypeDescriptor.ReflectTypesDynamicallyAccessedMembers)]
                 Type objectType,
             object instance
-        ) {
+        )
+        {
             return Provider.GetReflectionType(objectType, instance);
         }
 
@@ -120,7 +122,8 @@ namespace System.ComponentModel
         public override ICustomTypeDescriptor GetTypeDescriptor(
             [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)] Type objectType,
             object instance
-        ) {
+        )
+        {
             return Provider.GetTypeDescriptor(objectType, instance);
         }
 

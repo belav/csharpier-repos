@@ -187,7 +187,8 @@ namespace Microsoft.AspNetCore.Mvc.ApplicationModels
 
         private static ApiBehaviorApplicationModelProvider GetProvider(
             ApiBehaviorOptions options = null
-        ) {
+        )
+        {
             options =
                 options ?? new ApiBehaviorOptions { InvalidModelStateResponseFactory = _ => null, };
             var optionsAccessor = Options.Create(options);

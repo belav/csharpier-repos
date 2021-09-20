@@ -133,7 +133,8 @@ namespace JIT.HardwareIntrinsics.Arm
                     || (alignment * 2) < sizeOfinArray1
                     || (alignment * 2) < sizeOfinArray2
                     || (alignment * 2) < sizeOfoutArray
-                ) {
+                )
+                {
                     throw new ArgumentException("Invalid value of alignment");
                 }
 
@@ -212,7 +213,8 @@ namespace JIT.HardwareIntrinsics.Arm
 
             public void RunStructFldScenario(
                 SimpleBinaryOpTest__AddSaturate_Vector64_SByte_Vector64_Byte testClass
-            ) {
+            )
+            {
                 var result = AdvSimd.Arm64.AddSaturate(_fld1, _fld2);
 
                 Unsafe.Write(testClass._dataTable.outArrayPtr, result);
@@ -221,7 +223,8 @@ namespace JIT.HardwareIntrinsics.Arm
 
             public void RunStructFldScenario_Load(
                 SimpleBinaryOpTest__AddSaturate_Vector64_SByte_Vector64_Byte testClass
-            ) {
+            )
+            {
                 fixed (Vector64<SByte>* pFld1 = &_fld1)fixed (Vector64<Byte>* pFld2 = &_fld2)
                 {
                     var result = AdvSimd.Arm64.AddSaturate(
@@ -404,7 +407,8 @@ namespace JIT.HardwareIntrinsics.Arm
 
             fixed (Vector64<SByte>* pClsVar1 = &_clsVar1)fixed (
                 Vector64<Byte>* pClsVar2 = &_clsVar2
-            ) {
+            )
+            {
                 var result = AdvSimd.Arm64.AddSaturate(
                     AdvSimd.LoadVector64((SByte*)(pClsVar1)),
                     AdvSimd.LoadVector64((Byte*)(pClsVar2))
@@ -561,7 +565,8 @@ namespace JIT.HardwareIntrinsics.Arm
             Vector64<Byte> op2,
             void* result,
             [CallerMemberName] string method = ""
-        ) {
+        )
+        {
             SByte[] inArray1 = new SByte[Op1ElementCount];
             Byte[] inArray2 = new Byte[Op2ElementCount];
             SByte[] outArray = new SByte[RetElementCount];
@@ -582,7 +587,8 @@ namespace JIT.HardwareIntrinsics.Arm
             void* op2,
             void* result,
             [CallerMemberName] string method = ""
-        ) {
+        )
+        {
             SByte[] inArray1 = new SByte[Op1ElementCount];
             Byte[] inArray2 = new Byte[Op2ElementCount];
             SByte[] outArray = new SByte[RetElementCount];
@@ -611,7 +617,8 @@ namespace JIT.HardwareIntrinsics.Arm
             Byte[] right,
             SByte[] result,
             [CallerMemberName] string method = ""
-        ) {
+        )
+        {
             bool succeeded = true;
 
             for (var i = 0; i < RetElementCount; i++)

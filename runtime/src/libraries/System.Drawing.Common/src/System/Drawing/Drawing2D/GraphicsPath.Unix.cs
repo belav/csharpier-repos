@@ -282,7 +282,8 @@ namespace System.Drawing.Drawing2D
             float height,
             float startAngle,
             float sweepAngle
-        ) {
+        )
+        {
             int status = Gdip.GdipAddPathArc(
                 _nativePath,
                 x,
@@ -347,7 +348,8 @@ namespace System.Drawing.Drawing2D
             float y3,
             float x4,
             float y4
-        ) {
+        )
+        {
             int status = Gdip.GdipAddPathBezier(_nativePath, x1, y1, x2, y2, x3, y3, x4, y4);
             Gdip.CheckStatus(status);
         }
@@ -502,7 +504,8 @@ namespace System.Drawing.Drawing2D
             float height,
             float startAngle,
             float sweepAngle
-        ) {
+        )
+        {
             int status = Gdip.GdipAddPathPie(
                 _nativePath,
                 x,
@@ -749,7 +752,8 @@ namespace System.Drawing.Drawing2D
             float emSize,
             Point origin,
             StringFormat? format
-        ) {
+        )
+        {
             Rectangle layout = default;
             layout.X = origin.X;
             layout.Y = origin.Y;
@@ -763,7 +767,8 @@ namespace System.Drawing.Drawing2D
             float emSize,
             PointF origin,
             StringFormat? format
-        ) {
+        )
+        {
             RectangleF layout = default;
             layout.X = origin.X;
             layout.Y = origin.Y;
@@ -777,7 +782,8 @@ namespace System.Drawing.Drawing2D
             float emSize,
             Rectangle layoutRect,
             StringFormat? format
-        ) {
+        )
+        {
             if (family == null)
                 throw new ArgumentNullException(nameof(family));
 
@@ -803,7 +809,8 @@ namespace System.Drawing.Drawing2D
             float emSize,
             RectangleF layoutRect,
             StringFormat? format
-        ) {
+        )
+        {
             if (family == null)
                 throw new ArgumentNullException(nameof(family));
 
@@ -1047,7 +1054,8 @@ namespace System.Drawing.Drawing2D
             Matrix? matrix,
             WarpMode warpMode,
             float flatness
-        ) {
+        )
+        {
             if (destPoints == null)
                 throw new ArgumentNullException(nameof(destPoints));
 

@@ -67,7 +67,8 @@ namespace System.Web.Mvc
             IValueProvider provider,
             string key,
             bool skipValidation
-        ) {
+        )
+        {
             // Since IUnvalidatedValueProvider is a superset of IValueProvider, it's always OK to use the
             // IUnvalidatedValueProvider-supplied members if they're present. Otherwise just call the
             // normal IValueProvider members.
@@ -81,7 +82,8 @@ namespace System.Web.Mvc
         internal static IDictionary<string, string> GetKeysFromPrefixFromProvider(
             IValueProvider provider,
             string prefix
-        ) {
+        )
+        {
             IEnumerableValueProvider enumeratedProvider = provider as IEnumerableValueProvider;
             return (enumeratedProvider != null)
               ? enumeratedProvider.GetKeysFromPrefix(prefix)

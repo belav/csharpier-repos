@@ -79,7 +79,8 @@ internal static partial class Interop
             ReadOnlySpan<byte> m,
             ReadOnlySpan<byte> sigbuf,
             SafeRsaHandle rsa
-        ) {
+        )
+        {
             bool ret = RsaVerify(
                 type,
                 ref MemoryMarshal.GetReference(m),
@@ -111,7 +112,8 @@ internal static partial class Interop
         internal static RSAParameters ExportRsaParameters(
             SafeRsaHandle key,
             bool includePrivateParameters
-        ) {
+        )
+        {
             Debug.Assert(
                 key != null && !key.IsInvalid,
                 "Callers should check the key is invalid and throw an exception with a message"
@@ -148,7 +150,8 @@ internal static partial class Interop
                         out dmq1,
                         out iqmp
                     )
-                ) {
+                )
+                {
                     throw new CryptographicException();
                 }
 

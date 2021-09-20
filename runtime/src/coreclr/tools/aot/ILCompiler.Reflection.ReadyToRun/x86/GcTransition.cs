@@ -220,12 +220,8 @@ namespace ILCompiler.Reflection.ReadyToRun.x86
             IArgs = 0;
         }
 
-        public GcTransitionCall(
-            int codeOffset,
-            bool isEbpFrame,
-            uint regMask,
-            uint byRefRegMask
-        ) : base(codeOffset)
+        public GcTransitionCall(int codeOffset, bool isEbpFrame, uint regMask, uint byRefRegMask)
+            : base(codeOffset)
         {
             CallRegisters = new List<CallRegister>();
             PtrArgs = new List<PtrArg>();

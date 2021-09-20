@@ -398,7 +398,8 @@ namespace Newtonsoft.Json.Tests.Converters
                 JsonWriter writer,
                 object value,
                 JsonSerializer serializer
-            ) {
+            )
+            {
                 DataTable d = (DataTable)value;
                 writer.WriteValue(d.TableName);
             }
@@ -408,7 +409,8 @@ namespace Newtonsoft.Json.Tests.Converters
                 Type objectType,
                 object existingValue,
                 JsonSerializer serializer
-            ) {
+            )
+            {
                 //reader.Read();
                 DataTable d = new DataTable((string)reader.Value);
 
@@ -731,7 +733,8 @@ namespace Newtonsoft.Json.Tests.Converters
                 Type objectType,
                 object existingValue,
                 JsonSerializer serializer
-            ) {
+            )
+            {
                 if (reader.Value == null || reader.Value == DBNull.Value)
                 {
                     return System.Data.SqlTypes.SqlDateTime.Null;
@@ -748,7 +751,8 @@ namespace Newtonsoft.Json.Tests.Converters
                 JsonWriter writer,
                 object value,
                 JsonSerializer serializer
-            ) {
+            )
+            {
                 if (((System.Data.SqlTypes.SqlDateTime)value).IsNull)
                 {
                     writer.WriteNull();
@@ -789,7 +793,8 @@ namespace Newtonsoft.Json.Tests.Converters
                 Type objectType,
                 object existingValue,
                 JsonSerializer serializer
-            ) {
+            )
+            {
                 if (existingValue == null)
                 {
                     existingValue = CreateTable();

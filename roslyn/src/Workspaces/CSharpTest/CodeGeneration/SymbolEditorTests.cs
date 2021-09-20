@@ -58,7 +58,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.Editing
         private static async Task<IEnumerable<ISymbol>> GetSymbolsAsync(
             Solution solution,
             string name
-        ) {
+        )
+        {
             var compilation = await solution.Projects.First().GetCompilationAsync();
             return compilation.GlobalNamespace.GetMembers(name);
         }

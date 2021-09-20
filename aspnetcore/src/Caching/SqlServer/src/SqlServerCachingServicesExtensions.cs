@@ -22,7 +22,8 @@ namespace Microsoft.Extensions.DependencyInjection
         public static IServiceCollection AddDistributedSqlServerCache(
             this IServiceCollection services,
             Action<SqlServerCacheOptions> setupAction
-        ) {
+        )
+        {
             if (services == null)
             {
                 throw new ArgumentNullException(nameof(services));

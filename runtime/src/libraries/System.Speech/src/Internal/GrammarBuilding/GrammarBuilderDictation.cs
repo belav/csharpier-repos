@@ -47,7 +47,8 @@ namespace System.Speech.Internal.GrammarBuilding
             IElement parent,
             IRule rule,
             IdentifierCollection ruleIds
-        ) {
+        )
+        {
             // Return the IRuleRef to the dictation grammar
             return CreateRuleRefToDictation(elementFactory, parent);
         }

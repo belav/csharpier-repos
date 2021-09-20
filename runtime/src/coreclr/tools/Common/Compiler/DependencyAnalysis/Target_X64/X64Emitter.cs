@@ -345,7 +345,8 @@ namespace ILCompiler.DependencyAnalysis.X64
                 addrMode.IndexReg.HasValue
                 && addrMode.IndexReg.Value >= Register.R8
                 && addrMode.IndexReg.Value <= Register.R15
-            ) {
+            )
+            {
                 rexPrefix |= 0x42; // REX.X - extension of the SIB index field
             }
 
@@ -354,7 +355,8 @@ namespace ILCompiler.DependencyAnalysis.X64
                 addrMode.BaseReg >= Register.R8 && addrMode.BaseReg <= Register.R15
                 || addrMode.BaseReg >= (int)Register.R8 + Register.RegDirect
                     && addrMode.BaseReg <= (int)Register.R15 + Register.RegDirect
-            ) {
+            )
+            {
                 rexPrefix |= 0x41; // REX.WB (Wide, extended Base)
             }
 

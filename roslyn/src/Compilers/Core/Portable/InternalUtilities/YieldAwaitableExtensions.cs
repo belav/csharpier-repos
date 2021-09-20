@@ -19,7 +19,8 @@ namespace Roslyn.Utilities
         public static ConfiguredYieldAwaitable ConfigureAwait(
             this YieldAwaitable awaitable,
             bool continueOnCapturedContext
-        ) {
+        )
+        {
             return new ConfiguredYieldAwaitable(awaitable, continueOnCapturedContext);
         }
     }

@@ -42,7 +42,8 @@ namespace Microsoft.AspNetCore.SignalR
                                 == "Microsoft.AspNetCore.SignalR.Internal.NonDefaultHubProtocolAttribute"
                         )
                         .Any()
-                ) {
+                )
+                {
                     continue;
                 }
                 _defaultProtocols.Add(hubProtocol.Name);

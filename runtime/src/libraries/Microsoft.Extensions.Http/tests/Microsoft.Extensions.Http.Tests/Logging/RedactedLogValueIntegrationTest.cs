@@ -227,7 +227,8 @@ Y-Non-Sensitive: innocuous value
             protected override Task<HttpResponseMessage> SendAsync(
                 HttpRequestMessage request,
                 CancellationToken cancellationToken
-            ) {
+            )
+            {
                 var response = new HttpResponseMessage();
                 response.Headers.Add("X-Sensitive", "secret value");
                 response.Headers.Add("Y-Non-Sensitive", "innocuous value");

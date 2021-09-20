@@ -22,7 +22,8 @@ namespace Microsoft.EntityFrameworkCore
         public static EntityTypeBuilder IsMemoryOptimized(
             this EntityTypeBuilder entityTypeBuilder,
             bool memoryOptimized = true
-        ) {
+        )
+        {
             Check.NotNull(entityTypeBuilder, nameof(entityTypeBuilder));
 
             entityTypeBuilder.Metadata.SetIsMemoryOptimized(memoryOptimized);
@@ -55,7 +56,8 @@ namespace Microsoft.EntityFrameworkCore
         public static OwnedNavigationBuilder IsMemoryOptimized(
             this OwnedNavigationBuilder collectionOwnershipBuilder,
             bool memoryOptimized = true
-        ) {
+        )
+        {
             Check.NotNull(collectionOwnershipBuilder, nameof(collectionOwnershipBuilder));
 
             collectionOwnershipBuilder.OwnedEntityType.SetIsMemoryOptimized(memoryOptimized);
@@ -77,8 +79,9 @@ namespace Microsoft.EntityFrameworkCore
         >(
             this OwnedNavigationBuilder<TEntity, TRelatedEntity> collectionOwnershipBuilder,
             bool memoryOptimized = true
-        ) where TEntity : class
-          where TRelatedEntity : class =>
+        )
+            where TEntity : class
+            where TRelatedEntity : class =>
             (OwnedNavigationBuilder<TEntity, TRelatedEntity>)IsMemoryOptimized(
                 (OwnedNavigationBuilder)collectionOwnershipBuilder,
                 memoryOptimized
@@ -98,7 +101,8 @@ namespace Microsoft.EntityFrameworkCore
             this IConventionEntityTypeBuilder entityTypeBuilder,
             bool? memoryOptimized,
             bool fromDataAnnotation = false
-        ) {
+        )
+        {
             if (entityTypeBuilder.CanSetIsMemoryOptimized(memoryOptimized, fromDataAnnotation))
             {
                 entityTypeBuilder.Metadata.SetIsMemoryOptimized(
@@ -122,7 +126,8 @@ namespace Microsoft.EntityFrameworkCore
             this IConventionEntityTypeBuilder entityTypeBuilder,
             bool? memoryOptimized,
             bool fromDataAnnotation = false
-        ) {
+        )
+        {
             Check.NotNull(entityTypeBuilder, nameof(entityTypeBuilder));
 
             return entityTypeBuilder.CanSetAnnotation(

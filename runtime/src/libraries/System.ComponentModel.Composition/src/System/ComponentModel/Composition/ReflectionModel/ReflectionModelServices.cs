@@ -138,7 +138,8 @@ namespace System.ComponentModel.Composition.ReflectionModel
 
         public static ContractBasedImportDefinition GetExportFactoryProductImportDefinition(
             ImportDefinition importDefinition
-        ) {
+        )
+        {
             Requires.NotNull(importDefinition, nameof(importDefinition));
 
             IPartCreatorImportDefinition? partCreatorImportDefinition =
@@ -164,7 +165,8 @@ namespace System.ComponentModel.Composition.ReflectionModel
             Lazy<IEnumerable<ExportDefinition>>? exports,
             Lazy<IDictionary<string, object?>>? metadata,
             ICompositionElement? origin
-        ) {
+        )
+        {
             Requires.NotNull(partType, nameof(partType));
 
             return new ReflectionComposablePartDefinition(
@@ -184,7 +186,8 @@ namespace System.ComponentModel.Composition.ReflectionModel
             string contractName,
             Lazy<IDictionary<string, object?>> metadata,
             ICompositionElement? origin
-        ) {
+        )
+        {
             Requires.NotNullOrEmpty(contractName, nameof(contractName));
             Requires.IsInMembertypeSet(
                 exportingMember.MemberType,
@@ -212,7 +215,8 @@ namespace System.ComponentModel.Composition.ReflectionModel
             bool isRecomposable,
             CreationPolicy requiredCreationPolicy,
             ICompositionElement? origin
-        ) {
+        )
+        {
             return CreateImportDefinition(
                 importingMember,
                 contractName,
@@ -238,7 +242,8 @@ namespace System.ComponentModel.Composition.ReflectionModel
             IDictionary<string, object?> metadata,
             bool isExportFactory,
             ICompositionElement? origin
-        ) {
+        )
+        {
             return CreateImportDefinition(
                 importingMember,
                 contractName,
@@ -266,7 +271,8 @@ namespace System.ComponentModel.Composition.ReflectionModel
             IDictionary<string, object?> metadata,
             bool isExportFactory,
             ICompositionElement? origin
-        ) {
+        )
+        {
             Requires.NotNullOrEmpty(contractName, nameof(contractName));
             Requires.IsInMembertypeSet(
                 importingMember.MemberType,
@@ -316,7 +322,8 @@ namespace System.ComponentModel.Composition.ReflectionModel
             ImportCardinality cardinality,
             CreationPolicy requiredCreationPolicy,
             ICompositionElement? origin
-        ) {
+        )
+        {
             return CreateImportDefinition(
                 parameter,
                 contractName,
@@ -340,7 +347,8 @@ namespace System.ComponentModel.Composition.ReflectionModel
             IDictionary<string, object?> metadata,
             bool isExportFactory,
             ICompositionElement? origin
-        ) {
+        )
+        {
             Requires.NotNull(parameter, nameof(parameter));
             Requires.NotNullOrEmpty(contractName, nameof(contractName));
 
@@ -380,7 +388,8 @@ namespace System.ComponentModel.Composition.ReflectionModel
             ComposablePartDefinition partDefinition,
             IEnumerable<Type> genericParameters,
             [NotNullWhen(true)] out ComposablePartDefinition? specialization
-        ) {
+        )
+        {
             Requires.NotNull(partDefinition, nameof(partDefinition));
 
             specialization = null;
@@ -418,7 +427,8 @@ namespace System.ComponentModel.Composition.ReflectionModel
             Lazy<IEnumerable<ExportDefinition>>? exports,
             Lazy<IDictionary<string, object?>>? metadata,
             ICompositionElement? origin
-        ) {
+        )
+        {
             if (partType == null)
             {
                 throw new ArgumentNullException(nameof(partType));

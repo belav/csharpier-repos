@@ -37,7 +37,8 @@ namespace Microsoft.AspNetCore.Mvc.RazorPages
         /// <returns>The delegate used to release the created page asynchronously.</returns>
         Func<PageContext, ViewContext, object, ValueTask> CreateAsyncPageDisposer(
             CompiledPageActionDescriptor descriptor
-        ) {
+        )
+        {
             var disposer = CreatePageDisposer(descriptor);
 
             return (context, viewContext, page) =>

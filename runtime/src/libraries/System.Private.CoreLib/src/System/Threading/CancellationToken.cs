@@ -302,7 +302,8 @@ namespace System.Threading
             object? state,
             bool useSynchronizationContext,
             bool useExecutionContext
-        ) {
+        )
+        {
             if (callback == null)
                 throw new ArgumentNullException(nameof(callback));
 

@@ -47,7 +47,8 @@ namespace Microsoft.CodeAnalysis.Text
             SourceText oldText,
             SourceText newText,
             ImmutableArray<TextChangeRange> changeRanges
-        ) {
+        )
+        {
             var deltaLength = 0;
             foreach (var change in changeRanges)
                 deltaLength += change.NewLength - change.Span.Length;
@@ -91,7 +92,8 @@ namespace Microsoft.CodeAnalysis.Text
                 ImmutableArray<TextChangeRange> changeRanges,
                 WeakReference<SourceText> weakOldText,
                 ChangeInfo? previous
-            ) {
+            )
+            {
                 this.ChangeRanges = changeRanges;
                 this.WeakOldText = weakOldText;
                 this.Previous = previous;
@@ -173,7 +175,8 @@ namespace Microsoft.CodeAnalysis.Text
             char[] destination,
             int destinationIndex,
             int count
-        ) {
+        )
+        {
             _newText.CopyTo(sourceIndex, destination, destinationIndex, count);
         }
 
@@ -253,7 +256,8 @@ namespace Microsoft.CodeAnalysis.Text
         private static IReadOnlyList<ImmutableArray<TextChangeRange>> GetChangesBetween(
             SourceText oldText,
             ChangedText newText
-        ) {
+        )
+        {
             var list = new List<ImmutableArray<TextChangeRange>>();
 
             ChangeInfo? change = newText._info;
@@ -283,7 +287,8 @@ namespace Microsoft.CodeAnalysis.Text
 
         private static ImmutableArray<TextChangeRange> Merge(
             IReadOnlyList<ImmutableArray<TextChangeRange>> changeSets
-        ) {
+        )
+        {
             Debug.Assert(changeSets.Count > 1);
 
             var merged = changeSets[0];
@@ -306,7 +311,8 @@ namespace Microsoft.CodeAnalysis.Text
             if (
                 !_info.WeakOldText.TryGetTarget(out oldText)
                 || !oldText.TryGetLines(out oldLineInfo)
-            ) {
+            )
+            {
                 // no old line starts? do it the hard way.
                 return base.GetLinesCore();
             }
@@ -352,7 +358,8 @@ namespace Microsoft.CodeAnalysis.Text
                         endsWithCR
                         && change.Span.Start < oldText.Length
                         && oldText[change.Span.Start] == '\n'
-                    ) {
+                    )
+                    {
                         lineStarts.Add(change.Span.Start + delta);
                     }
                 }

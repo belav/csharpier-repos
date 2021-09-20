@@ -70,7 +70,8 @@ namespace Microsoft.AspNetCore.Testing
             out ILoggerFactory loggerFactory,
             LogLevel minLogLevel,
             [CallerMemberName] string testName = null
-        ) {
+        )
+        {
             return AssemblyTestLog.ForAssembly(GetType().GetTypeInfo().Assembly)
                 .StartTestLog(
                     TestOutputHelper,
@@ -86,7 +87,8 @@ namespace Microsoft.AspNetCore.Testing
             MethodInfo methodInfo,
             object[] testMethodArguments,
             ITestOutputHelper testOutputHelper
-        ) {
+        )
+        {
             try
             {
                 TestOutputHelper = testOutputHelper;
@@ -128,7 +130,8 @@ namespace Microsoft.AspNetCore.Testing
             MethodInfo methodInfo,
             object[] testMethodArguments,
             ITestOutputHelper testOutputHelper
-        ) {
+        )
+        {
             Initialize(context, methodInfo, testMethodArguments, testOutputHelper);
             return InitializeCoreAsync(context);
         }
@@ -154,7 +157,8 @@ namespace Microsoft.AspNetCore.Testing
         Task ITestMethodLifecycle.OnTestStartAsync(
             TestContext context,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             Context = context;
             return InitializeAsync(
                 context,
@@ -168,7 +172,8 @@ namespace Microsoft.AspNetCore.Testing
             TestContext context,
             Exception exception,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             if (exception is not null)
             {
                 Logger.LogError(exception, "Test threw an exception.");

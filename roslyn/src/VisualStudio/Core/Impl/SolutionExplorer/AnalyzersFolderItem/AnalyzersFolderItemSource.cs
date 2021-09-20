@@ -25,7 +25,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.SolutionExplore
             ProjectId projectId,
             IVsHierarchyItem projectHierarchyItem,
             IAnalyzersCommandHandler commandHandler
-        ) {
+        )
+        {
             _workspace = workspace;
             _projectId = projectId;
             _projectHierarchyItem = projectHierarchyItem;

@@ -576,7 +576,8 @@ namespace System.ComponentModel.Composition
             string contractName,
             string[] metadataKeys,
             Type[] metadataValues
-        ) {
+        )
+        {
             Assert.Equal(metadataKeys.Length, metadataValues.Length);
             Dictionary<string, Type> requiredMetadata = new Dictionary<string, Type>();
             for (int i = 0; i < metadataKeys.Length; i++)
@@ -602,19 +603,22 @@ namespace System.ComponentModel.Composition
 
         private static CatalogExportProvider CreateCatalogExportProvider(
             params ComposablePartDefinition[] definitions
-        ) {
+        )
+        {
             return CreateCatalogExportProvider(CatalogFactory.Create(definitions));
         }
 
         private static CatalogExportProvider CreateCatalogExportProvider(
             params ComposablePart[] parts
-        ) {
+        )
+        {
             return CreateCatalogExportProvider(CatalogFactory.Create(parts));
         }
 
         private static CatalogExportProvider CreateCatalogExportProvider(
             ComposablePartCatalog catalog
-        ) {
+        )
+        {
             return new CatalogExportProvider(catalog);
         }
     }

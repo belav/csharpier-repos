@@ -22,7 +22,8 @@ namespace Microsoft.CodeAnalysis.UseCompoundAssignment
             ImmutableArray<(TSyntaxKind exprKind, TSyntaxKind assignmentKind, TSyntaxKind tokenKind)> kinds,
             out ImmutableDictionary<TSyntaxKind, TSyntaxKind> binaryToAssignmentMap,
             out ImmutableDictionary<TSyntaxKind, TSyntaxKind> assignmentToTokenMap
-        ) {
+        )
+        {
             var binaryToAssignmentBuilder = ImmutableDictionary.CreateBuilder<
                 TSyntaxKind,
                 TSyntaxKind
@@ -50,7 +51,8 @@ namespace Microsoft.CodeAnalysis.UseCompoundAssignment
             SyntaxNode expr,
             SemanticModel semanticModel,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             return IsSideEffectFreeRecurse(
                 syntaxFacts,
                 expr,
@@ -66,7 +68,8 @@ namespace Microsoft.CodeAnalysis.UseCompoundAssignment
             SemanticModel semanticModel,
             bool isTopLevel,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             if (expr == null)
             {
                 return false;
@@ -149,7 +152,8 @@ namespace Microsoft.CodeAnalysis.UseCompoundAssignment
             SemanticModel semanticModel,
             bool isTopLevel,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var symbolInfo = semanticModel.GetSymbolInfo(expr, cancellationToken);
             if (symbolInfo.CandidateSymbols.Length > 0 || symbolInfo.Symbol == null)
             {

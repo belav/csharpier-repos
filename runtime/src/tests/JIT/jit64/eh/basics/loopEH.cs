@@ -18,7 +18,8 @@ internal class Program
         string unused2,
         int unused3,
         long p_lFirstId
-    ) {
+    )
+    {
         liste = new List<string>();
 
         StringBuilder sbSql = new StringBuilder();

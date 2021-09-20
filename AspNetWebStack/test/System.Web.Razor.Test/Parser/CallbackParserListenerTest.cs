@@ -126,7 +126,8 @@ namespace System.Web.Razor.Test.Parser
             T expected,
             Func<Action<T>, CallbackVisitor> ctor,
             Action<CallbackVisitor, T> call
-        ) {
+        )
+        {
             // Arrange
             Mock<SynchronizationContext> mockContext = new Mock<SynchronizationContext>();
             mockContext.Setup(c => c.Post(It.IsAny<SendOrPostCallback>(), It.IsAny<object>()))
@@ -158,7 +159,8 @@ namespace System.Web.Razor.Test.Parser
         private static void RunOnStartBlockTest(
             Func<Action<BlockType>, CallbackVisitor> ctor,
             Action<BlockType, BlockType> verifyResults = null
-        ) {
+        )
+        {
             RunCallbackTest(
                 BlockType.Markup,
                 ctor,
@@ -171,7 +173,8 @@ namespace System.Web.Razor.Test.Parser
         private static void RunOnEndBlockTest(
             Func<Action<BlockType>, CallbackVisitor> ctor,
             Action<BlockType, BlockType> verifyResults = null
-        ) {
+        )
+        {
             RunCallbackTest(
                 BlockType.Markup,
                 ctor,
@@ -184,7 +187,8 @@ namespace System.Web.Razor.Test.Parser
         private static void RunOnErrorTest(
             Func<Action<RazorError>, CallbackVisitor> ctor,
             Action<RazorError, RazorError> verifyResults = null
-        ) {
+        )
+        {
             RunCallbackTest(
                 new RazorError("Foo", SourceLocation.Zero),
                 ctor,
@@ -196,7 +200,8 @@ namespace System.Web.Razor.Test.Parser
         private static void RunOnEndSpanTest(
             Func<Action<Span>, CallbackVisitor> ctor,
             Action<Span, Span> verifyResults = null
-        ) {
+        )
+        {
             RunCallbackTest(
                 new SpanBuilder().Build(),
                 ctor,
@@ -210,7 +215,8 @@ namespace System.Web.Razor.Test.Parser
             Func<Action<T>, CallbackVisitor> ctor,
             Action<CallbackVisitor, T> call,
             Action<T, T> verifyResults = null
-        ) {
+        )
+        {
             // Arrange
             object actual = null;
             Action<T> callback = t => actual = t;

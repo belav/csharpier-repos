@@ -111,7 +111,8 @@ namespace AutoMapper.Execution
                                 property.CanWrite
                                 || !property.Type.IsAssignableFrom(propertyEmitter.PropertyType)
                             )
-                        ) {
+                        )
+                        {
                             throw new ArgumentException(
                                 $"The interface has a conflicting property {property.Name}",
                                 nameof(interfaceType)
@@ -139,7 +140,8 @@ namespace AutoMapper.Execution
                         .SelectMany(intf => intf.GetProperties())
                         .Select(p => new PropertyDescription(p))
                         .Concat(typeDescription.AdditionalProperties)
-                ) {
+                )
+                {
                     if (property.CanWrite)
                     {
                         propertiesToImplement.Insert(0, property);
@@ -182,7 +184,8 @@ namespace AutoMapper.Execution
                 TypeBuilder owner,
                 PropertyDescription property,
                 FieldBuilder propertyChangedField
-            ) {
+            )
+            {
                 var name = property.Name;
                 var propertyType = property.Type;
                 _fieldBuilder = owner.DefineField(

@@ -18,7 +18,8 @@ namespace System.Net.Http.Json
             Type type,
             JsonSerializerOptions? options,
             CancellationToken cancellationToken = default
-        ) {
+        )
+        {
             if (client == null)
             {
                 throw new ArgumentNullException(nameof(client));
@@ -38,7 +39,8 @@ namespace System.Net.Http.Json
             Type type,
             JsonSerializerOptions? options,
             CancellationToken cancellationToken = default
-        ) {
+        )
+        {
             if (client == null)
             {
                 throw new ArgumentNullException(nameof(client));
@@ -57,7 +59,8 @@ namespace System.Net.Http.Json
             string? requestUri,
             JsonSerializerOptions? options,
             CancellationToken cancellationToken = default
-        ) {
+        )
+        {
             if (client == null)
             {
                 throw new ArgumentNullException(nameof(client));
@@ -76,7 +79,8 @@ namespace System.Net.Http.Json
             Uri? requestUri,
             JsonSerializerOptions? options,
             CancellationToken cancellationToken = default
-        ) {
+        )
+        {
             if (client == null)
             {
                 throw new ArgumentNullException(nameof(client));
@@ -121,7 +125,8 @@ namespace System.Net.Http.Json
             Type type,
             JsonSerializerOptions? options,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             using (HttpResponseMessage response = await taskResponse.ConfigureAwait(false))
             {
                 response.EnsureSuccessStatusCode();
@@ -137,7 +142,8 @@ namespace System.Net.Http.Json
             Task<HttpResponseMessage> taskResponse,
             JsonSerializerOptions? options,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             using (HttpResponseMessage response = await taskResponse.ConfigureAwait(false))
             {
                 response.EnsureSuccessStatusCode();

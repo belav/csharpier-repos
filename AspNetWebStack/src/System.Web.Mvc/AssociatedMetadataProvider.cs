@@ -18,7 +18,8 @@ namespace System.Web.Mvc
         private static void ApplyMetadataAwareAttributes(
             IEnumerable<Attribute> attributes,
             ModelMetadata result
-        ) {
+        )
+        {
             foreach (IMetadataAware awareAttribute in attributes.OfType<IMetadataAware>())
             {
                 awareAttribute.OnMetadataCreated(result);
@@ -37,11 +38,13 @@ namespace System.Web.Mvc
             Type containerType,
             PropertyDescriptor propertyDescriptor,
             IEnumerable<Attribute> attributes
-        ) {
+        )
+        {
             if (
                 typeof(ViewPage).IsAssignableFrom(containerType)
                 || typeof(ViewUserControl).IsAssignableFrom(containerType)
-            ) {
+            )
+            {
                 return attributes.Where(a => !(a is ReadOnlyAttribute));
             }
 
@@ -51,7 +54,8 @@ namespace System.Web.Mvc
         public override IEnumerable<ModelMetadata> GetMetadataForProperties(
             object container,
             Type containerType
-        ) {
+        )
+        {
             if (containerType == null)
             {
                 throw new ArgumentNullException("containerType");
@@ -85,7 +89,8 @@ namespace System.Web.Mvc
             Func<object> modelAccessor,
             Type containerType,
             string propertyName
-        ) {
+        )
+        {
             if (containerType == null)
             {
                 throw new ArgumentNullException("containerType");
@@ -116,7 +121,8 @@ namespace System.Web.Mvc
             Func<object> modelAccessor,
             Type containerType,
             PropertyDescriptor propertyDescriptor
-        ) {
+        )
+        {
             IEnumerable<Attribute> attributes = FilterAttributes(
                 containerType,
                 propertyDescriptor,
@@ -158,7 +164,8 @@ namespace System.Web.Mvc
         private static Func<object> GetPropertyValueAccessor(
             object container,
             PropertyDescriptor property
-        ) {
+        )
+        {
             return () => property.GetValue(container);
         }
 

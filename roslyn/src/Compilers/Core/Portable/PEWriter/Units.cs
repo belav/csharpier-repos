@@ -38,7 +38,8 @@ namespace Microsoft.Cci
             int startColumn,
             int endLine,
             int endColumn
-        ) {
+        )
+        {
             Debug.Assert(startLine >= 0);
             Debug.Assert(startColumn >= 0);
             Debug.Assert(endLine >= 0);

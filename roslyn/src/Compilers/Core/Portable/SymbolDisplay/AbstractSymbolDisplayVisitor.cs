@@ -31,7 +31,8 @@ namespace Microsoft.CodeAnalysis.SymbolDisplay
             SemanticModel semanticModelOpt,
             int positionOpt,
             bool inNamespaceOrType = false
-        ) {
+        )
+        {
             Debug.Assert(format != null);
 
             this.builder = builder;
@@ -98,7 +99,8 @@ namespace Microsoft.CodeAnalysis.SymbolDisplay
             ITypeSymbol type,
             object constantValue,
             bool preferNumericValueOrExpandedFlagsForEnum = false
-        ) {
+        )
+        {
             Debug.Assert(constantValue != null);
             if (type.TypeKind == TypeKind.Enum)
             {
@@ -118,7 +120,8 @@ namespace Microsoft.CodeAnalysis.SymbolDisplay
             INamedTypeSymbol enumType,
             object constantValue,
             bool preferNumericValueOrExpandedFlags
-        ) {
+        )
+        {
             // Code copied from System.Enum
             var isFlagsEnum = IsFlagsEnum(enumType);
             if (isFlagsEnum)
@@ -172,7 +175,8 @@ namespace Microsoft.CodeAnalysis.SymbolDisplay
                             && (
                                 (INamespaceSymbol)containingSymbol.ContainingSymbol
                             ).IsGlobalNamespace
-                        ) {
+                        )
+                        {
                             return true;
                         }
                     }
@@ -186,7 +190,8 @@ namespace Microsoft.CodeAnalysis.SymbolDisplay
             INamedTypeSymbol enumType,
             object constantValue,
             bool preferNumericValueOrExpandedFlags
-        ) {
+        )
+        {
             // These values are sorted by value. Don't change this.
             var allFieldsAndValues = ArrayBuilder<EnumField>.GetInstance();
             GetSortedEnumFields(enumType, allFieldsAndValues);
@@ -216,7 +221,8 @@ namespace Microsoft.CodeAnalysis.SymbolDisplay
             ArrayBuilder<EnumField> allFieldsAndValues,
             ArrayBuilder<EnumField> usedFieldsAndValues,
             bool preferNumericValueOrExpandedFlags
-        ) {
+        )
+        {
             var underlyingSpecialType = enumType.EnumUnderlyingType.SpecialType;
             var constantValueULong = EnumUtilities.ConvertEnumUnderlyingTypeToUInt64(
                 constantValue,
@@ -298,7 +304,8 @@ namespace Microsoft.CodeAnalysis.SymbolDisplay
         private static void GetSortedEnumFields(
             INamedTypeSymbol enumType,
             ArrayBuilder<EnumField> enumFields
-        ) {
+        )
+        {
             var underlyingSpecialType = enumType.EnumUnderlyingType.SpecialType;
             foreach (var member in enumType.GetMembers())
             {

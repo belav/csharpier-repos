@@ -128,7 +128,8 @@ namespace System.Xml
             byte[] buffer,
             int index,
             int count
-        ) {
+        )
+        {
             // check arguments
             if (buffer == null)
             {
@@ -191,7 +192,8 @@ namespace System.Xml
             byte[] buffer,
             int index,
             int count
-        ) {
+        )
+        {
             // check arguments
             if (buffer == null)
             {
@@ -360,7 +362,8 @@ namespace System.Xml
                                     )
                                     .ConfigureAwait(false)
                             ) == 0
-                        ) {
+                        )
+                        {
                             break;
                         }
                         _valueOffset = 0;

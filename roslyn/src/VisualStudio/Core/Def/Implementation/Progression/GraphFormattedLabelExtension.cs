@@ -42,7 +42,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Progression
             string graphCommandDefinitionIdentifier,
             GraphProperty propertyWithoutContainingSymbol,
             GraphProperty propertyWithContainingSymbol
-        ) {
+        )
+        {
             if (graphObject is GraphNode graphNode)
             {
                 if (graphCommandDefinitionIdentifier != GraphCommandDefinition.Contains.Id)

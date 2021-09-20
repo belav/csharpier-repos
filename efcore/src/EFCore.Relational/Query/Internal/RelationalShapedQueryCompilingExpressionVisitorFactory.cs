@@ -34,7 +34,8 @@ namespace Microsoft.EntityFrameworkCore.Query.Internal
         public RelationalShapedQueryCompilingExpressionVisitorFactory(
             ShapedQueryCompilingExpressionVisitorDependencies dependencies,
             RelationalShapedQueryCompilingExpressionVisitorDependencies relationalDependencies
-        ) {
+        )
+        {
             _dependencies = dependencies;
             _relationalDependencies = relationalDependencies;
         }
@@ -47,7 +48,8 @@ namespace Microsoft.EntityFrameworkCore.Query.Internal
         /// </summary>
         public virtual ShapedQueryCompilingExpressionVisitor Create(
             QueryCompilationContext queryCompilationContext
-        ) {
+        )
+        {
             Check.NotNull(queryCompilationContext, nameof(queryCompilationContext));
 
             return new RelationalShapedQueryCompilingExpressionVisitor(

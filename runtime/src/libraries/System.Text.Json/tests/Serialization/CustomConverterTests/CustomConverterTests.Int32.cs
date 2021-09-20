@@ -16,7 +16,8 @@ namespace System.Text.Json.Serialization.Tests
                 ref Utf8JsonReader reader,
                 Type typeToConvert,
                 JsonSerializerOptions options
-            ) {
+            )
+            {
                 if (reader.TokenType == JsonTokenType.String)
                 {
                     string stringValue = reader.GetString();
@@ -37,7 +38,8 @@ namespace System.Text.Json.Serialization.Tests
                 Utf8JsonWriter writer,
                 int value,
                 JsonSerializerOptions options
-            ) {
+            )
+            {
                 writer.WriteNumberValue(value);
             }
         }

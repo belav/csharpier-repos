@@ -844,7 +844,8 @@ namespace Microsoft.AspNetCore.Mvc.ApplicationModels
 
         private static InferParameterBindingInfoConvention GetConvention(
             IModelMetadataProvider modelMetadataProvider = null
-        ) {
+        )
+        {
             modelMetadataProvider = modelMetadataProvider ?? new EmptyModelMetadataProvider();
             return new InferParameterBindingInfoConvention(modelMetadataProvider);
         }
@@ -852,7 +853,8 @@ namespace Microsoft.AspNetCore.Mvc.ApplicationModels
         private static ApplicationModelProviderContext GetContext(
             Type type,
             IModelMetadataProvider modelMetadataProvider = null
-        ) {
+        )
+        {
             var context = new ApplicationModelProviderContext(new[] { type.GetTypeInfo() });
             var mvcOptions = Options.Create(new MvcOptions());
             modelMetadataProvider = modelMetadataProvider ?? new EmptyModelMetadataProvider();
@@ -866,7 +868,8 @@ namespace Microsoft.AspNetCore.Mvc.ApplicationModels
             Type controllerType,
             string actionName,
             IModelMetadataProvider modelMetadataProvider = null
-        ) {
+        )
+        {
             var context = GetContext(controllerType, modelMetadataProvider);
             var controller = Assert.Single(context.Result.Controllers);
             return Assert.Single(controller.Actions, m => m.ActionName == actionName);

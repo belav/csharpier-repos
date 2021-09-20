@@ -80,7 +80,8 @@ namespace Internal.Cryptography.Pal
         internal static SafeOcspResponseHandle? DownloadOcspGet(
             string uri,
             TimeSpan downloadTimeout
-        ) {
+        )
+        {
             byte[]? data = DownloadAsset(uri, downloadTimeout);
 
             if (data == null)
@@ -171,7 +172,8 @@ namespace Internal.Cryptography.Pal
                     || httpResponseMessageType == null
                     || httpResponseHeadersType == null
                     || httpContentType == null
-                ) {
+                )
+                {
                     Debug.Fail("Unable to load required type.");
                     return null;
                 }
@@ -223,7 +225,8 @@ namespace Internal.Cryptography.Pal
                     || responseHeadersProp == null
                     || responseHeadersLocationProp == null
                     || readAsStreamMethod == null
-                ) {
+                )
+                {
                     Debug.Fail("Unable to load required member.");
                     return null;
                 }
@@ -334,7 +337,8 @@ namespace Internal.Cryptography.Pal
             int statusCode,
             Uri? location,
             out bool hasRedirect
-        ) {
+        )
+        {
             if (!IsRedirectStatusCode(statusCode))
             {
                 hasRedirect = false;

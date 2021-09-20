@@ -23,7 +23,8 @@ namespace Internal.Cryptography.Pal.Windows
             out AlgorithmIdentifier contentEncryptionAlgorithm,
             out X509Certificate2Collection originatorCerts,
             out CryptographicAttributeObjectCollection unprotectedAttributes
-        ) {
+        )
+        {
             SafeCryptMsgHandle hCryptMsg = Interop.Crypt32.CryptMsgOpenToDecode(
                 MsgEncodingType.All,
                 0,
@@ -42,7 +43,8 @@ namespace Internal.Cryptography.Pal.Windows
                     encodedMessage.Length,
                     fFinal: true
                 )
-            ) {
+            )
+            {
                 throw Marshal.GetLastWin32Error().ToCryptographicException();
             }
 
@@ -59,7 +61,8 @@ namespace Internal.Cryptography.Pal.Windows
                 SafeHandle sh = hCryptMsg.GetMsgParamAsMemory(
                     CryptMsgParamType.CMSG_ENVELOPE_ALGORITHM_PARAM
                 )
-            ) {
+            )
+            {
                 unsafe
                 {
                     CRYPT_ALGORITHM_IDENTIFIER* pCryptAlgorithmIdentifier =

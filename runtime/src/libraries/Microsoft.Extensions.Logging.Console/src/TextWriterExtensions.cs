@@ -13,7 +13,8 @@ namespace Microsoft.Extensions.Logging.Console
             string message,
             ConsoleColor? background,
             ConsoleColor? foreground
-        ) {
+        )
+        {
             // Order: backgroundcolor, foregroundcolor, Message, reset foregroundcolor, reset backgroundcolor
             if (background.HasValue)
             {

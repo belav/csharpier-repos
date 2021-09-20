@@ -47,7 +47,8 @@ namespace SslStress
             Stream networkStream,
             Random random,
             CancellationToken token
-        ) {
+        )
+        {
             var sslStream = new SslStream(networkStream, leaveInnerStreamOpen: false);
             var clientOptions = new SslClientAuthenticationOptions
             {

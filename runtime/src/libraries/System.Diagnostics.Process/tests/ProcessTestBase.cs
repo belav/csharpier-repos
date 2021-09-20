@@ -59,7 +59,8 @@ namespace System.Diagnostics.Tests
                     method ?? (() => RemoteExecutor.SuccessExitCode),
                     new RemoteInvokeOptions { Start = false }
                 )
-            ) {
+            )
+            {
                 p = handle.Process;
                 handle.Process = null;
             }
@@ -75,7 +76,8 @@ namespace System.Diagnostics.Tests
                     method,
                     new RemoteInvokeOptions { Start = false }
                 )
-            ) {
+            )
+            {
                 p = handle.Process;
                 handle.Process = null;
             }
@@ -87,7 +89,8 @@ namespace System.Diagnostics.Tests
             Func<string, int> method,
             string arg,
             bool autoDispose = true
-        ) {
+        )
+        {
             Process p = null;
             using (
                 RemoteInvokeHandle handle = RemoteExecutor.Invoke(
@@ -95,7 +98,8 @@ namespace System.Diagnostics.Tests
                     arg,
                     new RemoteInvokeOptions { Start = false }
                 )
-            ) {
+            )
+            {
                 p = handle.Process;
                 handle.Process = null;
             }
@@ -113,7 +117,8 @@ namespace System.Diagnostics.Tests
             string arg1,
             string arg2,
             bool autoDispose = true
-        ) {
+        )
+        {
             Process p = null;
             using (
                 RemoteInvokeHandle handle = RemoteExecutor.Invoke(
@@ -122,7 +127,8 @@ namespace System.Diagnostics.Tests
                     arg2,
                     new RemoteInvokeOptions { Start = false }
                 )
-            ) {
+            )
+            {
                 p = handle.Process;
                 handle.Process = null;
             }
@@ -144,7 +150,8 @@ namespace System.Diagnostics.Tests
                     arg,
                     new RemoteInvokeOptions { Start = false }
                 )
-            ) {
+            )
+            {
                 p = handle.Process;
                 handle.Process = null;
             }

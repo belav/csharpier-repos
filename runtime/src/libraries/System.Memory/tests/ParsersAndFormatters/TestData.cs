@@ -655,7 +655,8 @@ namespace System.Buffers.Text.Tests
                         2,
                         9999
                     }
-                ) {
+                )
+                {
                     for (int month = 1; month <= 12; month++)
                     {
                         int daysInMonth = DateTime.DaysInMonth(year: year, month: month);

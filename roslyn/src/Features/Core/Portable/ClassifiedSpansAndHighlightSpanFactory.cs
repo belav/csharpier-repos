@@ -18,7 +18,8 @@ namespace Microsoft.CodeAnalysis.Classification
             Document document,
             TextSpan sourceSpan,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var classifiedSpans = await ClassifyAsync(document, sourceSpan, cancellationToken)
                 .ConfigureAwait(false);
 
@@ -33,7 +34,8 @@ namespace Microsoft.CodeAnalysis.Classification
         public static async Task<ClassifiedSpansAndHighlightSpan> ClassifyAsync(
             DocumentSpan documentSpan,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             // If the document span is providing us with the classified spans up front, then we
             // can just use that.  Otherwise, go back and actually classify the text for the line
             // the document span is on.
@@ -43,7 +45,8 @@ namespace Microsoft.CodeAnalysis.Classification
                     ClassifiedSpansAndHighlightSpan.Key,
                     out var value
                 )
-            ) {
+            )
+            {
                 return (ClassifiedSpansAndHighlightSpan)value;
             }
 
@@ -59,7 +62,8 @@ namespace Microsoft.CodeAnalysis.Classification
             Document document,
             TextSpan sourceSpan,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var sourceText = await document.GetTextAsync(cancellationToken).ConfigureAwait(false);
 
             var narrowSpan = sourceSpan;
@@ -78,7 +82,8 @@ namespace Microsoft.CodeAnalysis.Classification
         private static TextSpan GetLineSpanForReference(
             SourceText sourceText,
             TextSpan referenceSpan
-        ) {
+        )
+        {
             var sourceLine = sourceText.Lines.GetLineFromPosition(referenceSpan.Start);
             var firstNonWhitespacePosition = sourceLine.GetFirstNonWhitespacePosition().Value;
 
@@ -90,7 +95,8 @@ namespace Microsoft.CodeAnalysis.Classification
             TextSpan narrowSpan,
             TextSpan widenedSpan,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var highlightSpan = new TextSpan(
                 start: narrowSpan.Start - widenedSpan.Start,
                 length: narrowSpan.Length
@@ -111,7 +117,8 @@ namespace Microsoft.CodeAnalysis.Classification
             TextSpan narrowSpan,
             TextSpan widenedSpan,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var result = await ClassifierHelper.GetClassifiedSpansAsync(
                     document,
                     widenedSpan,

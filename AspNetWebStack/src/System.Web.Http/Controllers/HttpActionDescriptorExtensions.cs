@@ -22,7 +22,8 @@ namespace System.Web.Http.Controllers
         public static void SetIsAttributeRouted(
             this HttpActionDescriptor actionDescriptor,
             bool value
-        ) {
+        )
+        {
             if (actionDescriptor == null)
             {
                 throw new ArgumentNullException("actionDescriptor");

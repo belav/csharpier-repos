@@ -942,7 +942,8 @@ namespace System.Tests
             double value,
             string format,
             string expectedResult
-        ) {
+        )
+        {
             string actualResult = InvariantToStringDouble(value, format);
             Assert.Equal(expectedResult, actualResult);
         }
@@ -1826,7 +1827,8 @@ namespace System.Tests
             float value,
             string format,
             string expectedResult
-        ) {
+        )
+        {
             string actualResult = InvariantToStringSingle(value, format);
             Assert.Equal(expectedResult, actualResult);
         }

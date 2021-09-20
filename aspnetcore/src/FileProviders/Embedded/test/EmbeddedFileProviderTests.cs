@@ -200,7 +200,8 @@ namespace Microsoft.Extensions.FileProviders.Embedded.Tests
         [InlineData("/Resources")]
         public void GetDirectoryContents_ReturnsNotFoundDirectoryContents_IfHierarchicalPathIsSpecified(
             string path
-        ) {
+        )
+        {
             // Arrange
             var provider = new EmbeddedFileProvider(GetType().Assembly);
 

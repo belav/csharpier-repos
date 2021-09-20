@@ -161,7 +161,8 @@ namespace Microsoft.AspNetCore.Mvc.ActionConstraints
 
         private static ActionConstraintCache CreateCache(
             params IActionConstraintProvider[] providers
-        ) {
+        )
+        {
             var descriptorProvider = new DefaultActionDescriptorCollectionProvider(
                 Enumerable.Empty<IActionDescriptorProvider>(),
                 Enumerable.Empty<IActionDescriptorChangeProvider>()

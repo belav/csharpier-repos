@@ -18,7 +18,8 @@ namespace Internal.Cryptography
             AsymmetricPaddingMode paddingMode,
             void* pPaddingInfo,
             int estimatedSize
-        ) {
+        )
+        {
 #if DEBUG
             estimatedSize = 2; // Make sure the NTE_BUFFER_TOO_SMALL scenario gets exercised.
 #endif
@@ -92,7 +93,8 @@ namespace Internal.Cryptography
             AsymmetricPaddingMode paddingMode,
             void* pPaddingInfo,
             out int bytesWritten
-        ) {
+        )
+        {
             for (int i = 0; i <= StatusUnsuccessfulRetryCount; i++)
             {
                 ErrorCode error = Interop.NCrypt.NCryptSignHash(
@@ -134,7 +136,8 @@ namespace Internal.Cryptography
             ReadOnlySpan<byte> signature,
             AsymmetricPaddingMode paddingMode,
             void* pPaddingInfo
-        ) {
+        )
+        {
             ErrorCode errorCode = Interop.NCrypt.NCryptVerifySignature(
                 keyHandle,
                 pPaddingInfo,

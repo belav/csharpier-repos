@@ -531,7 +531,8 @@ namespace Microsoft.EntityFrameworkCore.Storage
             string telemetryName,
 #pragma warning restore xUnit1026 // Theory methods should use all of their parameters
             bool async
-        ) {
+        )
+        {
             var fakeConnection = CreateConnection();
 
             var relationalCommand = CreateRelationalCommand(
@@ -600,7 +601,8 @@ namespace Microsoft.EntityFrameworkCore.Storage
             string telemetryName,
 #pragma warning restore xUnit1026 // Theory methods should use all of their parameters
             bool async
-        ) {
+        )
+        {
             var fakeConnection = CreateConnection();
 
             var relationalCommand = CreateRelationalCommand(
@@ -675,7 +677,8 @@ namespace Microsoft.EntityFrameworkCore.Storage
             string telemetryName,
 #pragma warning restore xUnit1026 // Theory methods should use all of their parameters
             bool async
-        ) {
+        )
+        {
             var fakeConnection = CreateConnection();
 
             var relationalCommand = CreateRelationalCommand(
@@ -765,7 +768,8 @@ namespace Microsoft.EntityFrameworkCore.Storage
             string telemetryName,
 #pragma warning restore xUnit1026 // Theory methods should use all of their parameters
             bool async
-        ) {
+        )
+        {
             var fakeConnection = CreateConnection();
 
             var typeMapper = (IRelationalTypeMappingSource)new TestRelationalTypeMappingSource(
@@ -853,7 +857,8 @@ namespace Microsoft.EntityFrameworkCore.Storage
             string telemetryName,
 #pragma warning restore xUnit1026 // Theory methods should use all of their parameters
             bool async
-        ) {
+        )
+        {
             var fakeConnection = CreateConnection();
 
             var relationalCommand = CreateRelationalCommand(
@@ -947,7 +952,8 @@ namespace Microsoft.EntityFrameworkCore.Storage
             string telemetryName,
 #pragma warning restore xUnit1026 // Theory methods should use all of their parameters
             bool async
-        ) {
+        )
+        {
             var fakeConnection = CreateConnection();
 
             var relationalCommand = CreateRelationalCommand(
@@ -1027,7 +1033,8 @@ namespace Microsoft.EntityFrameworkCore.Storage
             string telemetryName,
 #pragma warning restore xUnit1026 // Theory methods should use all of their parameters
             bool async
-        ) {
+        )
+        {
             var fakeConnection = CreateConnection();
 
             var relationalCommand = CreateRelationalCommand(
@@ -1092,7 +1099,8 @@ namespace Microsoft.EntityFrameworkCore.Storage
             string telemetryName,
 #pragma warning restore xUnit1026 // Theory methods should use all of their parameters
             bool async
-        ) {
+        )
+        {
             var exception = new InvalidOperationException();
 
             var fakeDbConnection = new FakeDbConnection(
@@ -1245,7 +1253,8 @@ namespace Microsoft.EntityFrameworkCore.Storage
             string telemetryName,
 #pragma warning restore xUnit1026 // Theory methods should use all of their parameters
             bool async
-        ) {
+        )
+        {
             var exception = new InvalidOperationException();
 
             var fakeDbConnection = new FakeDbConnection(
@@ -1310,7 +1319,8 @@ namespace Microsoft.EntityFrameworkCore.Storage
             string telemetryName,
 #pragma warning restore xUnit1026 // Theory methods should use all of their parameters
             bool async
-        ) {
+        )
+        {
             var exception = new InvalidOperationException();
 
             var fakeDbConnection = new FakeDbConnection(
@@ -1375,7 +1385,8 @@ namespace Microsoft.EntityFrameworkCore.Storage
             string diagnosticName,
 #pragma warning restore xUnit1026 // Theory methods should use all of their parameters
             bool async
-        ) {
+        )
+        {
             var options = CreateOptions();
 
             var logFactory = new ListLoggerFactory();
@@ -1451,7 +1462,8 @@ namespace Microsoft.EntityFrameworkCore.Storage
             string diagnosticName,
 #pragma warning restore xUnit1026 // Theory methods should use all of their parameters
             bool async
-        ) {
+        )
+        {
             var optionsExtension = new FakeRelationalOptionsExtension().WithConnectionString(
                 ConnectionString
             );
@@ -1537,7 +1549,8 @@ namespace Microsoft.EntityFrameworkCore.Storage
             Delegate commandDelegate,
             DbCommandMethod diagnosticName,
             bool async
-        ) {
+        )
+        {
             var options = CreateOptions();
 
             var fakeConnection = new FakeRelationalConnection(options);
@@ -1611,7 +1624,8 @@ namespace Microsoft.EntityFrameworkCore.Storage
             Delegate commandDelegate,
             DbCommandMethod diagnosticName,
             bool async
-        ) {
+        )
+        {
             var exception = new InvalidOperationException();
 
             var fakeDbConnection = new FakeDbConnection(
@@ -1713,7 +1727,8 @@ namespace Microsoft.EntityFrameworkCore.Storage
 
         private static IDbContextOptions CreateOptions(
             RelationalOptionsExtension optionsExtension = null
-        ) {
+        )
+        {
             var optionsBuilder = new DbContextOptionsBuilder();
 
             ((IDbContextOptionsBuilderInfrastructure)optionsBuilder).AddOrUpdateExtension(

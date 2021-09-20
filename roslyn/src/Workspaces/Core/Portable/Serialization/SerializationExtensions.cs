@@ -52,7 +52,8 @@ namespace Microsoft.CodeAnalysis.Serialization
         public static CompilationOptions FixUpCompilationOptions(
             this ProjectInfo.ProjectAttributes info,
             CompilationOptions compilationOptions
-        ) {
+        )
+        {
             return compilationOptions.WithXmlReferenceResolver(GetXmlResolver(info.FilePath))
                 .WithStrongNameProvider(new DesktopStrongNameProvider(GetStrongNameKeyPaths(info)));
         }
@@ -76,7 +77,8 @@ namespace Microsoft.CodeAnalysis.Serialization
 
         private static ImmutableArray<string> GetStrongNameKeyPaths(
             ProjectInfo.ProjectAttributes info
-        ) {
+        )
+        {
             // Given FilePath/OutputFilePath can be any arbitrary strings project is created with.
             // for primary solution in host such as VSWorkspace, ETA or MSBuildWorkspace
             // filePath will point to actual file on disk, but in memory solultion, or

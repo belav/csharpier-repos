@@ -25,7 +25,8 @@ namespace System.Web.Http.Tracing
             string category,
             TraceLevel level,
             Action<TraceRecord> traceAction
-        ) {
+        )
+        {
             if (TraceSelector == null || TraceSelector(request, category, level))
             {
                 TraceRecord traceRecord = new TraceRecord(request, category, level);

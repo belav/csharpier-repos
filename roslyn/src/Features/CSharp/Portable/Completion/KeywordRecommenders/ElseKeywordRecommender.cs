@@ -20,7 +20,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Completion.KeywordRecommenders
             int position,
             CSharpSyntaxContext context,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             if (context.IsPreProcessorKeywordContext)
             {
                 return true;

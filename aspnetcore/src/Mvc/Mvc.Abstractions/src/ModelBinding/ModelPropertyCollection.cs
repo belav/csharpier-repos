@@ -44,7 +44,8 @@ namespace Microsoft.AspNetCore.Mvc.ModelBinding
                     var property = Items[i];
                     if (
                         string.Equals(property.PropertyName, propertyName, StringComparison.Ordinal)
-                    ) {
+                    )
+                    {
                         return property;
                     }
                 }

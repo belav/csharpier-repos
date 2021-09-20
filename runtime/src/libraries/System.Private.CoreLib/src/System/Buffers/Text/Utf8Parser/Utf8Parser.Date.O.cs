@@ -21,7 +21,8 @@ namespace System.Buffers.Text
             out DateTimeOffset value,
             out int bytesConsumed,
             out DateTimeKind kind
-        ) {
+        )
+        {
             if (source.Length < 27)
             {
                 value = default;
@@ -194,7 +195,8 @@ namespace System.Buffers.Text
                     || digit5 > 9
                     || digit6 > 9
                     || digit7 > 9
-                ) {
+                )
+                {
                     value = default;
                     bytesConsumed = 0;
                     kind = default;
@@ -217,7 +219,8 @@ namespace System.Buffers.Text
                 offsetChar != 'Z'
                 && offsetChar != Utf8Constants.Plus
                 && offsetChar != Utf8Constants.Minus
-            ) {
+            )
+            {
                 if (
                     !TryCreateDateTimeOffsetInterpretingDataAsLocalTime(
                         year: year,
@@ -229,7 +232,8 @@ namespace System.Buffers.Text
                         fraction: fraction,
                         out value
                     )
-                ) {
+                )
+                {
                     value = default;
                     bytesConsumed = 0;
                     kind = default;
@@ -257,7 +261,8 @@ namespace System.Buffers.Text
                         offsetMinutes: 0,
                         out value
                     )
-                ) {
+                )
+                {
                     value = default;
                     bytesConsumed = 0;
                     kind = default;
@@ -332,7 +337,8 @@ namespace System.Buffers.Text
                     offsetMinutes: offsetMinutes,
                     out value
                 )
-            ) {
+            )
+            {
                 value = default;
                 bytesConsumed = 0;
                 kind = default;

@@ -71,7 +71,8 @@ namespace Microsoft.CodeAnalysis.Text.Shared.Extensions
             this ITextSnapshotLine line,
             int startIndex = 0,
             int endIndex = -1
-        ) {
+        )
+        {
             Contract.ThrowIfNull(line, "line");
             Contract.ThrowIfFalse(startIndex >= 0);
 
@@ -96,7 +97,8 @@ namespace Microsoft.CodeAnalysis.Text.Shared.Extensions
         public static ITextSnapshotLine? GetPreviousMatchingLine(
             this ITextSnapshotLine line,
             Func<ITextSnapshotLine, bool> predicate
-        ) {
+        )
+        {
             Contract.ThrowIfNull(line, @"line");
             Contract.ThrowIfNull(predicate, @"tree");
 
@@ -150,7 +152,8 @@ namespace Microsoft.CodeAnalysis.Text.Shared.Extensions
             int index,
             string value,
             bool ignoreCase
-        ) {
+        )
+        {
             var snapshot = line.Snapshot;
             if (index + value.Length > snapshot.Length)
                 return false;
@@ -179,7 +182,8 @@ namespace Microsoft.CodeAnalysis.Text.Shared.Extensions
             int index,
             string value,
             bool ignoreCase
-        ) {
+        )
+        {
             var snapshot = line.Snapshot;
             for (var i = index; i < line.End; i++)
             {

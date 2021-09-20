@@ -41,7 +41,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Transport.Experimental.Quic.Intern
             QuicStream stream,
             QuicConnectionContext connection,
             QuicTransportContext context
-        ) {
+        )
+        {
             _stream = stream;
             _connection = connection;
             _context = context;

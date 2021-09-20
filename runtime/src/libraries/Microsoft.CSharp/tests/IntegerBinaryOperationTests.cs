@@ -18,7 +18,8 @@ namespace Microsoft.CSharp.RuntimeBinder.Tests
             bool checkedContext,
             bool constantLeftArgument,
             bool constantRightArgument
-        ) {
+        )
+        {
             CSharpArgumentInfo x = CSharpArgumentInfo.Create(
                 constantLeftArgument
                   ? CSharpArgumentInfoFlags.Constant
@@ -541,7 +542,8 @@ namespace Microsoft.CSharp.RuntimeBinder.Tests
             ExpressionType type,
             object result,
             bool shouldSucceedChecked
-        ) {
+        )
+        {
             var callsite = GetBinaryOperationCallSite(type, false, false, false);
             Assert.Equal(result, callsite.Target(callsite, x, y));
             callsite = GetBinaryOperationCallSite(type, true, false, false);
@@ -620,7 +622,8 @@ namespace Microsoft.CSharp.RuntimeBinder.Tests
             ExpressionType type,
             object result,
             bool shouldSucceedChecked
-        ) {
+        )
+        {
             var callsite = GetBinaryOperationCallSite(type, false, true, true);
             Assert.Equal(result, callsite.Target(callsite, x, y));
             callsite = GetBinaryOperationCallSite(type, true, true, true);
@@ -708,7 +711,8 @@ namespace Microsoft.CSharp.RuntimeBinder.Tests
             ExpressionType type,
             object dividend,
             object divisor
-        ) {
+        )
+        {
             var callsite = GetBinaryOperationCallSite(type, false, false, false);
             Assert.Throws<OverflowException>(() => callsite.Target(callsite, dividend, divisor));
             callsite = GetBinaryOperationCallSite(type, true, false, false);

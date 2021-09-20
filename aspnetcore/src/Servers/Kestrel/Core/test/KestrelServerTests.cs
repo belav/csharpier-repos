@@ -160,7 +160,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Tests
         public void StartWithMaxRequestBufferSizeLessThanMaxRequestLineSizeThrows(
             long maxRequestBufferSize,
             int maxRequestLineSize
-        ) {
+        )
+        {
             var testLogger = new TestApplicationErrorLogger { ThrowOnCriticalErrors = false };
             var options = new KestrelServerOptions
             {
@@ -194,7 +195,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Tests
         public void StartWithMaxRequestBufferSizeLessThanMaxRequestHeadersTotalSizeThrows(
             long maxRequestBufferSize,
             int maxRequestHeadersTotalSize
-        ) {
+        )
+        {
             var testLogger = new TestApplicationErrorLogger { ThrowOnCriticalErrors = false };
             var options = new KestrelServerOptions
             {
@@ -958,7 +960,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Tests
         private static KestrelServer CreateServer(
             KestrelServerOptions options,
             bool throwOnCriticalErrors = true
-        ) {
+        )
+        {
             return new KestrelServer(
                 Options.Create(options),
                 new MockTransportFactory(),
@@ -981,7 +984,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Tests
             public ValueTask<IConnectionListener> BindAsync(
                 EndPoint endpoint,
                 CancellationToken cancellationToken = default
-            ) {
+            )
+            {
                 var mock = new Mock<IConnectionListener>();
                 mock.Setup(m => m.EndPoint).Returns(endpoint);
                 return new ValueTask<IConnectionListener>(mock.Object);
@@ -993,7 +997,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Tests
             public ValueTask<IConnectionListener> BindAsync(
                 EndPoint endpoint,
                 CancellationToken cancellationToken = default
-            ) {
+            )
+            {
                 throw new InvalidOperationException();
             }
         }

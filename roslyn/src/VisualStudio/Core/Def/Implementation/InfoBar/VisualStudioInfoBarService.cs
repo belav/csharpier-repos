@@ -74,7 +74,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation
                         out var globalInfoBar
                     )
                 )
-            ) {
+            )
+            {
                 return false;
             }
 
@@ -89,7 +90,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation
                     _serviceProvider.GetService(typeof(SVsInfoBarUIFactory))
                     is IVsInfoBarUIFactory factory
                 )
-            ) {
+            )
+            {
                 // no info bar factory, don't do anything
                 return;
             }
@@ -165,7 +167,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation
             public void OnActionItemClicked(
                 IVsInfoBarUIElement infoBarUIElement,
                 IVsInfoBarActionItem actionItem
-            ) {
+            )
+            {
                 var item = _items.FirstOrDefault(i => i.Title == actionItem.Text);
                 if (item.IsDefault)
                 {
@@ -189,7 +192,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation
             IVsInfoBarUIFactory infoBarUIFactory,
             IVsInfoBar infoBar,
             out IVsInfoBarUIElement uiElement
-        ) {
+        )
+        {
             uiElement = infoBarUIFactory.CreateInfoBar(infoBar);
             return uiElement != null;
         }

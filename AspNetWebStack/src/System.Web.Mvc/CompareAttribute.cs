@@ -48,7 +48,8 @@ namespace System.Web.Mvc
         protected override ValidationResult IsValid(
             object value,
             ValidationContext validationContext
-        ) {
+        )
+        {
             PropertyInfo otherPropertyInfo = validationContext.ObjectType.GetProperty(
                 OtherProperty
             );
@@ -96,7 +97,8 @@ namespace System.Web.Mvc
         public IEnumerable<ModelClientValidationRule> GetClientValidationRules(
             ModelMetadata metadata,
             ControllerContext context
-        ) {
+        )
+        {
             if (metadata.ContainerType != null)
             {
                 if (OtherPropertyDisplayName == null)

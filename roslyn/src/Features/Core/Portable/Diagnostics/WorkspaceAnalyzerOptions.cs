@@ -35,7 +35,8 @@ namespace Microsoft.CodeAnalysis.Diagnostics
         public async ValueTask<OptionSet> GetDocumentOptionSetAsync(
             SyntaxTree syntaxTree,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var documentId = _solution.GetDocumentId(syntaxTree);
             if (documentId == null)
             {

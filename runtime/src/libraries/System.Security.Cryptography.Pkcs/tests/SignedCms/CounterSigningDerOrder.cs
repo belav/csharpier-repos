@@ -22,7 +22,8 @@ namespace System.Security.Cryptography.Pkcs.Tests
             using (
                 X509Certificate2 cert2 =
                     Certificates.RSAKeyTransferCapi1.TryGetCertificateWithPrivateKey()
-            ) {
+            )
+            {
                 CmsSigner signer = new CmsSigner(SubjectIdentifierType.SubjectKeyIdentifier, cert1);
                 cms.ComputeSignature(signer);
 
@@ -227,7 +228,8 @@ namespace System.Security.Cryptography.Pkcs.Tests
                 bool hasSignedAttrs,
                 bool hasUnsignedAttrs,
                 bool hasCounterSigners
-            ) {
+            )
+            {
                 Cert = cert;
                 Type = type;
                 HasSignedAttrs = hasSignedAttrs;

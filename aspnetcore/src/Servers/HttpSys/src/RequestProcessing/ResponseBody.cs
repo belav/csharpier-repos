@@ -97,7 +97,8 @@ namespace Microsoft.AspNetCore.Server.HttpSys
         private unsafe void FlushInternal(
             bool endOfRequest,
             ArraySegment<byte> data = new ArraySegment<byte>()
-        ) {
+        )
+        {
             Debug.Assert(
                 !(endOfRequest && data.Count > 0),
                 "Data is not supported at the end of the request."
@@ -178,7 +179,8 @@ namespace Microsoft.AspNetCore.Server.HttpSys
                         && statusCode != ErrorCodes.ERROR_INVALID_PARAMETER
                     )
                 )
-            ) {
+            )
+            {
                 if (ThrowWriteExceptions)
                 {
                     var exception = new IOException(
@@ -202,7 +204,8 @@ namespace Microsoft.AspNetCore.Server.HttpSys
             bool endOfRequest,
             ArraySegment<byte> data,
             out HttpApiTypes.HTTP_DATA_CHUNK[] dataChunks
-        ) {
+        )
+        {
             var pins = new List<GCHandle>();
             var hasData = data.Count > 0;
             var chunked = _requestContext.Response.BoundaryType == BoundaryType.Chunked;
@@ -300,7 +303,8 @@ namespace Microsoft.AspNetCore.Server.HttpSys
             ref int chunkIndex,
             List<GCHandle> pins,
             ArraySegment<byte> buffer
-        ) {
+        )
+        {
             var handle = GCHandle.Alloc(buffer.Array, GCHandleType.Pinned);
             pins.Add(handle);
             chunks[chunkIndex].DataChunkType =
@@ -334,7 +338,8 @@ namespace Microsoft.AspNetCore.Server.HttpSys
         private unsafe Task FlushInternalAsync(
             ArraySegment<byte> data,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             if (_skipWrites)
             {
                 return Task.CompletedTask;
@@ -459,7 +464,8 @@ namespace Microsoft.AspNetCore.Server.HttpSys
             int count,
             AsyncCallback? callback,
             object? state
-        ) {
+        )
+        {
             throw new InvalidOperationException(Resources.Exception_WriteOnlyStream);
         }
 
@@ -486,7 +492,8 @@ namespace Microsoft.AspNetCore.Server.HttpSys
         private HttpApiTypes.HTTP_FLAGS ComputeLeftToWrite(
             long writeCount,
             bool endOfRequest = false
-        ) {
+        )
+        {
             var flags = HttpApiTypes.HTTP_FLAGS.NONE;
             if (!_requestContext.Response.HasComputedHeaders)
             {
@@ -515,7 +522,8 @@ namespace Microsoft.AspNetCore.Server.HttpSys
             else if (
                 !endOfRequest
                 && (_leftToWrite != writeCount || _requestContext.Response.TrailersExpected)
-            ) {
+            )
+            {
                 flags |= HttpApiTypes.HTTP_FLAGS.HTTP_SEND_RESPONSE_FLAG_MORE_DATA;
             }
 
@@ -573,7 +581,8 @@ namespace Microsoft.AspNetCore.Server.HttpSys
                 _requestContext.Response.HasComputedHeaders
                 && _requestContext.Response.BoundaryType == BoundaryType.ContentLength
                 && _leftToWrite < count
-            ) {
+            )
+            {
                 throw new InvalidOperationException(
                     "More bytes written than specified in the Content-Length header."
                 );
@@ -586,7 +595,8 @@ namespace Microsoft.AspNetCore.Server.HttpSys
             int count,
             AsyncCallback? callback,
             object? state
-        ) {
+        )
+        {
             return TaskToApm.Begin(WriteAsync(buffer, offset, count), callback, state);
         }
 
@@ -605,7 +615,8 @@ namespace Microsoft.AspNetCore.Server.HttpSys
             int offset,
             int count,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             ValidateBufferArguments(buffer, offset, count);
 
             // Validates for null and bounds. Allows count == 0.
@@ -623,7 +634,8 @@ namespace Microsoft.AspNetCore.Server.HttpSys
             long offset,
             long? count,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             // It's too expensive to validate the file attributes before opening the file. Open the file and then check the lengths.
             // This all happens inside of ResponseStreamAsyncResult.
             // TODO: Verbose log parameters
@@ -644,7 +656,8 @@ namespace Microsoft.AspNetCore.Server.HttpSys
             long offset,
             long? count,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             if (_skipWrites)
             {
                 return Task.CompletedTask;
@@ -752,7 +765,8 @@ namespace Microsoft.AspNetCore.Server.HttpSys
             if (
                 statusCode != UnsafeNclNativeMethods.ErrorCodes.ERROR_SUCCESS
                 && statusCode != UnsafeNclNativeMethods.ErrorCodes.ERROR_IO_PENDING
-            ) {
+            )
+            {
                 if (cancellationToken.IsCancellationRequested)
                 {
                     Log.FileSendAsyncCancelled(Logger, statusCode);

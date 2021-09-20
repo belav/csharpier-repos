@@ -146,7 +146,8 @@ namespace Microsoft.AspNetCore.Mvc.ModelBinding
             string prefix,
             string entry,
             IDictionary<string, string> results
-        ) {
+        )
+        {
             string key;
             string fullName;
             var keyPosition = prefix.Length + 1;

@@ -26,7 +26,8 @@ namespace Microsoft.AspNetCore.ResponseCompression
         public ResponseCompressionMiddleware(
             RequestDelegate next,
             IResponseCompressionProvider provider
-        ) {
+        )
+        {
             if (next == null)
             {
                 throw new ArgumentNullException(nameof(next));

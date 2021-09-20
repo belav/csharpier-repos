@@ -80,7 +80,8 @@ namespace System.Runtime.InteropServices
         public IntPtr GetOrCreateComInterfaceForObject(
             object instance,
             CreateComInterfaceFlags flags
-        ) {
+        )
+        {
             IntPtr ptr;
             if (!TryGetOrCreateComInterfaceForObjectInternal(this, instance, flags, out ptr))
                 throw new ArgumentException(null, nameof(instance));
@@ -104,7 +105,8 @@ namespace System.Runtime.InteropServices
             object instance,
             CreateComInterfaceFlags flags,
             out IntPtr retValue
-        ) {
+        )
+        {
             if (instance == null)
                 throw new ArgumentNullException(nameof(instance));
 
@@ -133,7 +135,8 @@ namespace System.Runtime.InteropServices
             object obj,
             CreateComInterfaceFlags flags,
             out int count
-        ) {
+        )
+        {
             ComWrappers? impl = null;
             switch (scenario)
             {
@@ -171,7 +174,8 @@ namespace System.Runtime.InteropServices
         public object GetOrCreateObjectForComInstance(
             IntPtr externalComObject,
             CreateObjectFlags flags
-        ) {
+        )
+        {
             object? obj;
             if (
                 !TryGetOrCreateObjectForComInstanceInternal(
@@ -194,7 +198,8 @@ namespace System.Runtime.InteropServices
             ComWrappers? comWrappersImpl,
             IntPtr externalComObject,
             CreateObjectFlags flags
-        ) {
+        )
+        {
             ComWrappers? impl = null;
             switch (scenario)
             {
@@ -229,7 +234,8 @@ namespace System.Runtime.InteropServices
             IntPtr externalComObject,
             CreateObjectFlags flags,
             object wrapper
-        ) {
+        )
+        {
             return GetOrRegisterObjectForComInstance(
                 externalComObject,
                 flags,
@@ -259,7 +265,8 @@ namespace System.Runtime.InteropServices
             CreateObjectFlags flags,
             object wrapper,
             IntPtr inner
-        ) {
+        )
+        {
             if (wrapper == null)
                 throw new ArgumentNullException(nameof(wrapper));
 
@@ -299,7 +306,8 @@ namespace System.Runtime.InteropServices
             CreateObjectFlags flags,
             object? wrapperMaybe,
             out object? retValue
-        ) {
+        )
+        {
             if (externalComObject == IntPtr.Zero)
                 throw new ArgumentNullException(nameof(externalComObject));
 
@@ -362,7 +370,8 @@ namespace System.Runtime.InteropServices
                     instance,
                     null
                 )
-            ) {
+            )
+            {
                 throw new InvalidOperationException(
                     SR.InvalidOperation_ResetGlobalComWrappersInstance
                 );
@@ -396,7 +405,8 @@ namespace System.Runtime.InteropServices
             if (
                 null
                 != Interlocked.CompareExchange(ref s_globalInstanceForMarshalling, instance, null)
-            ) {
+            )
+            {
                 throw new InvalidOperationException(
                     SR.InvalidOperation_ResetGlobalComWrappersInstance
                 );
@@ -435,7 +445,8 @@ namespace System.Runtime.InteropServices
             object customQueryInterfaceMaybe,
             ref Guid iid,
             out IntPtr ppObject
-        ) {
+        )
+        {
             var customQueryInterface = customQueryInterfaceMaybe as ICustomQueryInterface;
             if (customQueryInterface is null)
             {

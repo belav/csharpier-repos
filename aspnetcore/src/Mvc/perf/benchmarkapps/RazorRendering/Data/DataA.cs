@@ -12,7 +12,8 @@ namespace Data
             int seconds,
             int max,
             float perHour
-        ) {
+        )
+        {
             Id = id;
             Icon = icon;
             Html = html;

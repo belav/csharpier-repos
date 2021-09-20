@@ -43,14 +43,16 @@ namespace Microsoft.AspNetCore.Mvc.ViewFeatures
             DiagnosticListener diagnosticListener,
             ILoggerFactory loggerFactory,
             IModelMetadataProvider modelMetadataProvider
-        ) : base(
-            viewOptions,
-            writerFactory,
-            viewEngine,
-            tempDataFactory,
-            diagnosticListener,
-            modelMetadataProvider
-        ) {
+        )
+            : base(
+                viewOptions,
+                writerFactory,
+                viewEngine,
+                tempDataFactory,
+                diagnosticListener,
+                modelMetadataProvider
+            )
+        {
             if (loggerFactory == null)
             {
                 throw new ArgumentNullException(nameof(loggerFactory));
@@ -141,7 +143,8 @@ namespace Microsoft.AspNetCore.Mvc.ViewFeatures
             ViewResult viewResult,
             string viewName,
             ViewEngineResult result
-        ) {
+        )
+        {
             if (result.Success)
             {
                 DiagnosticListener.ViewFound(
@@ -215,14 +218,16 @@ namespace Microsoft.AspNetCore.Mvc.ViewFeatures
             if (
                 actionDescriptor.RouteValues.TryGetValue(ActionNameKey, out var value)
                 && !string.IsNullOrEmpty(value)
-            ) {
+            )
+            {
                 normalizedValue = value;
             }
 
             var stringRouteValue = Convert.ToString(routeValue, CultureInfo.InvariantCulture);
             if (
                 string.Equals(normalizedValue, stringRouteValue, StringComparison.OrdinalIgnoreCase)
-            ) {
+            )
+            {
                 return normalizedValue;
             }
 

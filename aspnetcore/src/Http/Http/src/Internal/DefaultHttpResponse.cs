@@ -87,7 +87,8 @@ namespace Microsoft.AspNetCore.Http
                     otherFeature is StreamResponseBodyFeature streamFeature
                     && streamFeature.PriorFeature != null
                     && object.ReferenceEquals(value, streamFeature.PriorFeature.Stream)
-                ) {
+                )
+                {
                     // They're reverting the stream back to the prior one. Revert the whole feature.
                     _features.Collection.Set(streamFeature.PriorFeature);
                     return;

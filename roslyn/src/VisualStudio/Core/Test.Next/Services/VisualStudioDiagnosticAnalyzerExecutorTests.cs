@@ -331,7 +331,8 @@ End Class";
             ProjectId projectId,
             Type analyzerType,
             CancellationToken cancellationToken = default
-        ) {
+        )
+        {
             var executor = CreateAnalyzerRunner();
 
             var analyzerReference = new AnalyzerFileReference(
@@ -364,7 +365,8 @@ End Class";
             string language,
             string code,
             ParseOptions options = null
-        ) {
+        )
+        {
             var composition = EditorTestCompositions.EditorFeatures.WithTestHostParts(
                 TestHost.OutOfProcess
             );
@@ -499,7 +501,8 @@ End Class";
                 Solution solution,
                 IReadOnlyList<object> arguments,
                 CancellationToken cancellationToken
-            ) {
+            )
+            {
                 // cancel and throw cancellation exception
                 _source.Cancel();
                 _source.Token.ThrowIfCancellationRequested();
@@ -513,7 +516,8 @@ End Class";
                 IReadOnlyList<object> arguments,
                 Func<Stream, CancellationToken, Task<T>> dataReader,
                 CancellationToken cancellationToken
-            ) {
+            )
+            {
                 // cancel and throw cancellation exception
                 _source.Cancel();
                 _source.Token.ThrowIfCancellationRequested();

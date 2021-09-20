@@ -85,7 +85,8 @@ namespace Microsoft.AspNetCore.Components.RenderTree
             IServiceProvider serviceProvider,
             ILoggerFactory loggerFactory,
             IComponentActivator componentActivator
-        ) {
+        )
+        {
             if (serviceProvider is null)
             {
                 throw new ArgumentNullException(nameof(serviceProvider));
@@ -123,7 +124,8 @@ namespace Microsoft.AspNetCore.Components.RenderTree
 
         private static IComponentActivator GetComponentActivatorOrDefault(
             IServiceProvider serviceProvider
-        ) {
+        )
+        {
             return serviceProvider.GetService<IComponentActivator>()
                 ?? DefaultComponentActivator.Instance;
         }
@@ -178,7 +180,8 @@ namespace Microsoft.AspNetCore.Components.RenderTree
         /// <returns>The component instance.</returns>
         protected IComponent InstantiateComponent(
             [DynamicallyAccessedMembers(Component)] Type componentType
-        ) {
+        )
+        {
             return _componentFactory.InstantiateComponent(_serviceProvider, componentType);
         }
 
@@ -233,7 +236,8 @@ namespace Microsoft.AspNetCore.Components.RenderTree
         protected async Task RenderRootComponentAsync(
             int componentId,
             ParameterView initialParameters
-        ) {
+        )
+        {
             if (Interlocked.CompareExchange(ref _pendingTasks, new List<Task>(), null) != null)
             {
                 throw new InvalidOperationException("There is an ongoing rendering in progress.");
@@ -270,7 +274,8 @@ namespace Microsoft.AspNetCore.Components.RenderTree
         private void CaptureRootComponentForHotReload(
             ParameterView initialParameters,
             ComponentState componentState
-        ) {
+        )
+        {
             if (_hotReloadEnvironment?.IsHotReloadEnabled ?? false)
             {
                 // when we're doing hot-reload, stash away the parameters used while rendering root components.
@@ -342,7 +347,8 @@ namespace Microsoft.AspNetCore.Components.RenderTree
             ulong eventHandlerId,
             EventFieldInfo? fieldInfo,
             EventArgs eventArgs
-        ) {
+        )
+        {
             Dispatcher.AssertAccess();
 
             var callback = GetRequiredEventCallback(eventHandlerId);
@@ -419,7 +425,8 @@ namespace Microsoft.AspNetCore.Components.RenderTree
         internal void InstantiateChildComponentOnFrame(
             ref RenderTreeFrame frame,
             int parentComponentId
-        ) {
+        )
+        {
             if (frame.FrameTypeField != RenderTreeFrameType.Component)
             {
                 throw new ArgumentException(
@@ -561,7 +568,8 @@ namespace Microsoft.AspNetCore.Components.RenderTree
                     eventHandlerId,
                     out var replacementEventHandlerId
                 )
-            ) {
+            )
+            {
                 eventHandlerId = replacementEventHandlerId;
             }
 
@@ -660,7 +668,8 @@ namespace Microsoft.AspNetCore.Components.RenderTree
         private Task InvokeRenderCompletedCalls(
             ArrayRange<RenderTreeDiff> updatedComponents,
             Task updateDisplayTask
-        ) {
+        )
+        {
             if (updateDisplayTask.IsCanceled)
             {
                 // The display update was canceled.
@@ -711,7 +720,8 @@ namespace Microsoft.AspNetCore.Components.RenderTree
         private async Task InvokeRenderCompletedCallsAfterUpdateDisplayTask(
             Task updateDisplayTask,
             int[] updatedComponents
-        ) {
+        )
+        {
             try
             {
                 await updateDisplayTask;
@@ -863,7 +873,8 @@ namespace Microsoft.AspNetCore.Components.RenderTree
         private void RemoveEventHandlerIds(
             ArrayRange<ulong> eventHandlerIds,
             Task afterTaskIgnoreErrors
-        ) {
+        )
+        {
             if (eventHandlerIds.Count == 0)
             {
                 return;
@@ -890,7 +901,8 @@ namespace Microsoft.AspNetCore.Components.RenderTree
             async Task ContinueAfterTask(
                 ArrayRange<ulong> eventHandlerIds,
                 Task afterTaskIgnoreErrors
-            ) {
+            )
+            {
                 // We need to delay the actual removal (e.g., until we've confirmed the client
                 // has processed the batch and hence can be sure not to reuse the handler IDs
                 // any further). We must clone the data because the underlying RenderBatchBuilder
@@ -915,7 +927,8 @@ namespace Microsoft.AspNetCore.Components.RenderTree
         private async Task GetErrorHandledTask(
             Task taskToHandle,
             ComponentState? owningComponentState
-        ) {
+        )
+        {
             try
             {
                 await taskToHandle;
@@ -933,7 +946,8 @@ namespace Microsoft.AspNetCore.Components.RenderTree
         private void UpdateRenderTreeToMatchClientState(
             ulong eventHandlerId,
             EventFieldInfo fieldInfo
-        ) {
+        )
+        {
             var componentState = GetOptionalComponentState(fieldInfo.ComponentId);
             if (componentState != null)
             {
@@ -952,7 +966,8 @@ namespace Microsoft.AspNetCore.Components.RenderTree
         private void HandleExceptionViaErrorBoundary(
             Exception error,
             ComponentState? errorSourceOrNull
-        ) {
+        )
+        {
             // We only get here in specific situations. Currently, all of them are when we're
             // already on the sync context (and if not, we have a bug we want to know about).
             Dispatcher.AssertAccess();

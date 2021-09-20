@@ -159,7 +159,8 @@ namespace System.Reflection.Emit
             MethodBase method,
             Type[]? optionalParameterTypes,
             bool useMethodDef
-        ) {
+        )
+        {
             return ((ModuleBuilder)m_methodBuilder.Module).GetMethodTokenInternal(
                 method,
                 optionalParameterTypes,
@@ -172,7 +173,8 @@ namespace System.Reflection.Emit
             Type? returnType,
             Type[]? parameterTypes,
             Type[]? optionalParameterTypes
-        ) {
+        )
+        {
             return GetMemberRefSignature(
                 call,
                 returnType,
@@ -189,7 +191,8 @@ namespace System.Reflection.Emit
             Type[][]? requiredCustomModifiers,
             Type[][]? optionalCustomModifiers,
             Type[]? optionalParameterTypes
-        ) {
+        )
+        {
             return GetMemberRefSignature(
                 call,
                 returnType,
@@ -209,7 +212,8 @@ namespace System.Reflection.Emit
             Type[][]? optionalCustomModifiers,
             Type[]? optionalParameterTypes,
             int cGenericParameters
-        ) {
+        )
+        {
             return ((ModuleBuilder)m_methodBuilder.Module).GetMemberRefSignature(
                 call,
                 returnType,
@@ -537,7 +541,8 @@ namespace System.Reflection.Emit
                 opcode.Equals(OpCodes.Call)
                 || opcode.Equals(OpCodes.Callvirt)
                 || opcode.Equals(OpCodes.Newobj)
-            ) {
+            )
+            {
                 EmitCall(opcode, meth, null);
             }
             else
@@ -567,7 +572,8 @@ namespace System.Reflection.Emit
             Type? returnType,
             Type[]? parameterTypes,
             Type[]? optionalParameterTypes
-        ) {
+        )
+        {
             int stackchange = 0;
             if (optionalParameterTypes != null)
             {
@@ -616,7 +622,8 @@ namespace System.Reflection.Emit
             CallingConvention unmanagedCallConv,
             Type? returnType,
             Type[]? parameterTypes
-        ) {
+        )
+        {
             int stackchange = 0;
             int cParams = 0;
 
@@ -663,7 +670,8 @@ namespace System.Reflection.Emit
             OpCode opcode,
             MethodInfo methodInfo,
             Type[]? optionalParameterTypes
-        ) {
+        )
+        {
             if (methodInfo == null)
                 throw new ArgumentNullException(nameof(methodInfo));
 
@@ -1225,7 +1233,8 @@ namespace System.Reflection.Emit
                 DynamicallyAccessedMemberTypes.PublicParameterlessConstructor
             )]
                 Type excType
-        ) {
+        )
+        {
             // Emits the il to throw an exception
 
             if (excType == null)
@@ -1740,7 +1749,8 @@ namespace System.Reflection.Emit
             int slot,
             int startOffset,
             int endOffset
-        ) {
+        )
+        {
             int i = GetCurrentActiveScopeIndex();
             m_localSymInfos[i] ??= new LocalSymInfo();
             m_localSymInfos[i]!.AddLocalSymInfo(strName, signature, slot, startOffset, endOffset);
@@ -1851,7 +1861,8 @@ namespace System.Reflection.Emit
             int iStartColumn,
             int iEndLine,
             int iEndColumn
-        ) {
+        )
+        {
             // make sure that arrays are large enough to hold addition info
             int i = FindDocument(document);
 
@@ -1945,7 +1956,8 @@ namespace System.Reflection.Emit
             int iStartColumn,
             int iEndLine,
             int iEndColumn
-        ) {
+        )
+        {
             Debug.Assert(document == m_document, "Bad document look up!");
 
             // make sure that arrays are large enough to hold addition info

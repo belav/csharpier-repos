@@ -11,16 +11,16 @@ namespace Microsoft.EntityFrameworkCore
     public class ConcurrencyDetectorEnabledSqlServerTest
         : ConcurrencyDetectorEnabledRelationalTestBase<ConcurrencyDetectorEnabledSqlServerTest.ConcurrencyDetectorSqlServerFixture>
     {
-        public ConcurrencyDetectorEnabledSqlServerTest(
-            ConcurrencyDetectorSqlServerFixture fixture
-        ) : base(fixture)
+        public ConcurrencyDetectorEnabledSqlServerTest(ConcurrencyDetectorSqlServerFixture fixture)
+            : base(fixture)
         {
             Fixture.TestSqlLoggerFactory.Clear();
         }
 
         protected override async Task ConcurrencyDetectorTest(
             Func<ConcurrencyDetectorDbContext, Task<object>> test
-        ) {
+        )
+        {
             await base.ConcurrencyDetectorTest(test);
 
             Assert.Empty(Fixture.TestSqlLoggerFactory.SqlStatements);

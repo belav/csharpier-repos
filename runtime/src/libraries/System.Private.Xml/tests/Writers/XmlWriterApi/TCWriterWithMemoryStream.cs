@@ -15,7 +15,8 @@ namespace System.Xml.Tests
             XmlWriterUtils utils,
             Stream writerStream,
             XmlWriterSettings settings
-        ) {
+        )
+        {
             XmlWriterSettings wSettings = settings.Clone();
             wSettings.CloseOutput = false;
             wSettings.OmitXmlDeclaration = true;

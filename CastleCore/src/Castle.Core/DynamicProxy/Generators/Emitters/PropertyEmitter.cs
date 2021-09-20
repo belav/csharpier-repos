@@ -31,7 +31,8 @@ namespace Castle.DynamicProxy.Generators.Emitters
             PropertyAttributes attributes,
             Type propertyType,
             Type[] arguments
-        ) {
+        )
+        {
             this.parentTypeEmitter = parentTypeEmitter;
 
             builder = parentTypeEmitter.TypeBuilder.DefineProperty(
@@ -62,7 +63,8 @@ namespace Castle.DynamicProxy.Generators.Emitters
             MethodAttributes attrs,
             MethodInfo methodToOverride,
             params Type[] parameters
-        ) {
+        )
+        {
             if (getMethod != null)
             {
                 throw new InvalidOperationException("A get method exists");
@@ -76,7 +78,8 @@ namespace Castle.DynamicProxy.Generators.Emitters
             string name,
             MethodAttributes attributes,
             MethodInfo methodToOverride
-        ) {
+        )
+        {
             return CreateGetMethod(name, attributes, methodToOverride, Type.EmptyTypes);
         }
 
@@ -85,7 +88,8 @@ namespace Castle.DynamicProxy.Generators.Emitters
             MethodAttributes attrs,
             MethodInfo methodToOverride,
             params Type[] parameters
-        ) {
+        )
+        {
             if (setMethod != null)
             {
                 throw new InvalidOperationException("A set method exists");
@@ -99,7 +103,8 @@ namespace Castle.DynamicProxy.Generators.Emitters
             string name,
             MethodAttributes attributes,
             MethodInfo methodToOverride
-        ) {
+        )
+        {
             var method = CreateSetMethod(name, attributes, methodToOverride, Type.EmptyTypes);
             return method;
         }

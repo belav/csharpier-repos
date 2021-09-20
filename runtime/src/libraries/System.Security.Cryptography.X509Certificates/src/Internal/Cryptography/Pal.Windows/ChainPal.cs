@@ -54,7 +54,8 @@ namespace Internal.Cryptography.Pal
                         ref para,
                         ref status
                     )
-                ) {
+                )
+                {
                     int errorCode = Marshal.GetLastWin32Error();
                     exception = errorCode.ToCryptographicException();
                     return default(bool?);

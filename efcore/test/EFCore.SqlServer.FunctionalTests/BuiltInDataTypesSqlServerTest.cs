@@ -1692,7 +1692,8 @@ WHERE DATEDIFF(nanosecond, [m].[TimeSpanAsTime], @__timeSpan_1) = 0"
         private static void AssertNullMappedNullableDataTypes(
             MappedNullableDataTypes entity,
             int id
-        ) {
+        )
+        {
             Assert.Equal(id, entity.Int);
             Assert.Null(entity.LongAsBigint);
             Assert.Null(entity.ShortAsSmallint);
@@ -1959,7 +1960,8 @@ WHERE DATEDIFF(nanosecond, [m].[TimeSpanAsTime], @__timeSpan_1) = 0"
         private static void AssertMappedSizedSeparatelyDataTypes(
             MappedSizedSeparatelyDataTypes entity,
             int id
-        ) {
+        )
+        {
             Assert.Equal(id, entity.Id);
             Assert.Equal("Wor", entity.StringAsChar3);
             Assert.Equal("Lon", entity.StringAsCharacter3);
@@ -2118,7 +2120,8 @@ WHERE DATEDIFF(nanosecond, [m].[TimeSpanAsTime], @__timeSpan_1) = 0"
         private static void AssertMappedScaledSeparatelyDataTypes(
             MappedScaledSeparatelyDataTypes entity,
             int id
-        ) {
+        )
+        {
             Assert.Equal(id, entity.Id);
             Assert.Equal(83.3f, entity.FloatAsFloat3);
             Assert.Equal(85.5f, entity.FloatAsDoublePrecision3);
@@ -2187,7 +2190,8 @@ WHERE DATEDIFF(nanosecond, [m].[TimeSpanAsTime], @__timeSpan_1) = 0"
         private static void AssertMappedPrecisionAndScaledDataTypes(
             MappedPrecisionAndScaledDataTypes entity,
             int id
-        ) {
+        )
+        {
             Assert.Equal(id, entity.Id);
             Assert.Equal(101.1m, entity.DecimalAsDecimal52);
             Assert.Equal(102.2m, entity.DecimalAsDec52);
@@ -2239,7 +2243,8 @@ WHERE DATEDIFF(nanosecond, [m].[TimeSpanAsTime], @__timeSpan_1) = 0"
         private static void AssertMappedPrecisionAndScaledSeparatelyDataTypes(
             MappedPrecisionAndScaledSeparatelyDataTypes entity,
             int id
-        ) {
+        )
+        {
             Assert.Equal(id, entity.Id);
             Assert.Equal(101.1m, entity.DecimalAsDecimal52);
             Assert.Equal(102.2m, entity.DecimalAsDec52);
@@ -2338,7 +2343,8 @@ WHERE DATEDIFF(nanosecond, [m].[TimeSpanAsTime], @__timeSpan_1) = 0"
         private static void AssertMappedDataTypesWithIdentity(
             MappedDataTypesWithIdentity entity,
             int id
-        ) {
+        )
+        {
             Assert.Equal(id, entity.Int);
             Assert.Equal(78, entity.LongAsBigint);
             Assert.Equal(79, entity.ShortAsSmallint);
@@ -2546,7 +2552,8 @@ WHERE DATEDIFF(nanosecond, [m].[TimeSpanAsTime], @__timeSpan_1) = 0"
         private static void AssertMappedNullableDataTypesWithIdentity(
             MappedNullableDataTypesWithIdentity entity,
             int id
-        ) {
+        )
+        {
             Assert.Equal(id, entity.Int);
             Assert.Equal(78, entity.LongAsBigint);
             Assert.Equal(79, entity.ShortAsSmallint.Value);
@@ -2756,7 +2763,8 @@ WHERE DATEDIFF(nanosecond, [m].[TimeSpanAsTime], @__timeSpan_1) = 0"
         private static void AssertNullMappedNullableDataTypesWithIdentity(
             MappedNullableDataTypesWithIdentity entity,
             int id
-        ) {
+        )
+        {
             Assert.Equal(id, entity.Int);
             Assert.Null(entity.LongAsBigint);
             Assert.Null(entity.ShortAsSmallint);
@@ -2860,7 +2868,8 @@ WHERE DATEDIFF(nanosecond, [m].[TimeSpanAsTime], @__timeSpan_1) = 0"
         private static void AssertMappedSizedDataTypesWithIdentity(
             MappedSizedDataTypesWithIdentity entity,
             int id
-        ) {
+        )
+        {
             Assert.Equal(id, entity.Int);
             Assert.Equal("Wor", entity.StringAsChar3);
             Assert.Equal("Lon", entity.StringAsCharacter3);
@@ -2959,7 +2968,8 @@ WHERE DATEDIFF(nanosecond, [m].[TimeSpanAsTime], @__timeSpan_1) = 0"
         private static void AssertNullMappedSizedDataTypesWithIdentity(
             MappedSizedDataTypesWithIdentity entity,
             int id
-        ) {
+        )
+        {
             Assert.Equal(id, entity.Int);
             Assert.Null(entity.StringAsChar3);
             Assert.Null(entity.StringAsCharacter3);
@@ -3021,7 +3031,8 @@ WHERE DATEDIFF(nanosecond, [m].[TimeSpanAsTime], @__timeSpan_1) = 0"
         private static void AssertMappedScaledDataTypesWithIdentity(
             MappedScaledDataTypesWithIdentity entity,
             int id
-        ) {
+        )
+        {
             Assert.Equal(id, entity.Int);
             Assert.Equal(83.3f, entity.FloatAsFloat3);
             Assert.Equal(85.5f, entity.FloatAsDoublePrecision3);
@@ -3091,7 +3102,8 @@ WHERE DATEDIFF(nanosecond, [m].[TimeSpanAsTime], @__timeSpan_1) = 0"
         private static void AssertMappedPrecisionAndScaledDataTypesWithIdentity(
             MappedPrecisionAndScaledDataTypesWithIdentity entity,
             int id
-        ) {
+        )
+        {
             Assert.Equal(id, entity.Int);
             Assert.Equal(101.1m, entity.DecimalAsDecimal52);
             Assert.Equal(102.2m, entity.DecimalAsDec52);
@@ -4066,7 +4078,8 @@ UnicodeDataTypes.StringUnicode ---> [nullable nvarchar] [MaxLength = -1]
             foreach (
                 var property in context.Model.GetEntityTypes()
                     .SelectMany(e => e.GetDeclaredProperties())
-            ) {
+            )
+            {
                 var columnType = property.GetColumnType();
                 Assert.NotNull(columnType);
 
@@ -4184,7 +4197,8 @@ WHERE [b].[Id] = 13"
                     column.NumericPrecision.HasValue
                     || column.DateTimePrecision.HasValue
                     || column.NumericScale.HasValue
-                ) {
+                )
+                {
                     builder.Append("]");
                 }
 

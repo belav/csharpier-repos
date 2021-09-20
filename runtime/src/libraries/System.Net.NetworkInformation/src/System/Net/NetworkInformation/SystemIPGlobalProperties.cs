@@ -142,7 +142,8 @@ namespace System.Net.NetworkInformation
                 if (
                     result != Interop.IpHlpApi.ERROR_SUCCESS
                     && result != Interop.IpHlpApi.ERROR_NO_DATA
-                ) {
+                )
+                {
                     throw new NetworkInformationException((int)result);
                 }
             }
@@ -216,7 +217,8 @@ namespace System.Net.NetworkInformation
                 if (
                     result != Interop.IpHlpApi.ERROR_SUCCESS
                     && result != Interop.IpHlpApi.ERROR_NO_DATA
-                ) {
+                )
+                {
                     throw new NetworkInformationException((int)result);
                 }
             }
@@ -285,7 +287,8 @@ namespace System.Net.NetworkInformation
                 if (
                     result != Interop.IpHlpApi.ERROR_SUCCESS
                     && result != Interop.IpHlpApi.ERROR_NO_DATA
-                ) {
+                )
+                {
                     throw new NetworkInformationException((int)result);
                 }
             }
@@ -368,7 +371,8 @@ namespace System.Net.NetworkInformation
                 if (
                     result != Interop.IpHlpApi.ERROR_SUCCESS
                     && result != Interop.IpHlpApi.ERROR_NO_DATA
-                ) {
+                )
+                {
                     throw new NetworkInformationException((int)result);
                 }
             }
@@ -439,7 +443,8 @@ namespace System.Net.NetworkInformation
                     s => ((TaskCompletionSource<bool>)s).TrySetResult(true),
                     tcs
                 )
-            ) {
+            )
+            {
                 await tcs.Task.ConfigureAwait(false);
             }
 
@@ -450,7 +455,8 @@ namespace System.Net.NetworkInformation
             {
                 foreach (
                     UnicastIPAddressInformation address in ni.GetIPProperties().UnicastAddresses
-                ) {
+                )
+                {
                     if (!addresses.Contains(address))
                     {
                         addresses.InternalAdd(address);

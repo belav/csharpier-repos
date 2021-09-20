@@ -72,7 +72,8 @@ namespace TestResources
                         Encoding.UTF8,
                         detectEncodingFromByteOrderMarks: true
                     )
-                ) {
+                )
+                {
                     return streamReader.ReadToEnd();
                 }
             }

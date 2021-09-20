@@ -78,7 +78,8 @@ namespace Microsoft.AspNetCore.DataProtection.Cng
             byte* pbOptionalEntropy,
             uint cbOptionalEntropy,
             bool fLocalMachine = false
-        ) {
+        )
+        {
             byte dummy; // provides a valid memory address if the secret or entropy has zero length
 
             var dataIn = new DATA_BLOB()
@@ -135,7 +136,8 @@ namespace Microsoft.AspNetCore.DataProtection.Cng
         public static byte[] ProtectWithDpapiNG(
             ISecret secret,
             NCryptDescriptorHandle protectionDescriptorHandle
-        ) {
+        )
+        {
             Debug.Assert(secret != null);
             Debug.Assert(protectionDescriptorHandle != null);
 
@@ -166,7 +168,8 @@ namespace Microsoft.AspNetCore.DataProtection.Cng
             NCryptDescriptorHandle protectionDescriptorHandle,
             byte* pbData,
             uint cbData
-        ) {
+        )
+        {
             Debug.Assert(protectionDescriptorHandle != null);
             Debug.Assert(pbData != null);
 
@@ -246,7 +249,8 @@ namespace Microsoft.AspNetCore.DataProtection.Cng
             uint cbProtectedData,
             byte* pbOptionalEntropy,
             uint cbOptionalEntropy
-        ) {
+        )
+        {
             byte dummy; // provides a valid memory address if the secret or entropy has zero length
 
             var dataIn = new DATA_BLOB()

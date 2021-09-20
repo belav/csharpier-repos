@@ -26,7 +26,8 @@ namespace Microsoft.AspNetCore.Mvc.ApplicationModels
         public DefaultApplicationModelProvider(
             IOptions<MvcOptions> mvcOptionsAccessor,
             IModelMetadataProvider modelMetadataProvider
-        ) {
+        )
+        {
             _mvcOptions = mvcOptionsAccessor.Value;
             _modelMetadataProvider = modelMetadataProvider;
 
@@ -68,7 +69,8 @@ namespace Microsoft.AspNetCore.Mvc.ApplicationModels
 
                 foreach (
                     var propertyHelper in PropertyHelper.GetProperties(controllerType.AsType())
-                ) {
+                )
+                {
                     var propertyInfo = propertyHelper.Property;
                     var propertyModel = CreatePropertyModel(propertyInfo);
                     if (propertyModel != null)
@@ -209,13 +211,15 @@ namespace Microsoft.AspNetCore.Mvc.ApplicationModels
             if (
                 typeof(IAsyncActionFilter).GetTypeInfo().IsAssignableFrom(typeInfo)
                 || typeof(IActionFilter).GetTypeInfo().IsAssignableFrom(typeInfo)
-            ) {
+            )
+            {
                 controllerModel.Filters.Add(new ControllerActionFilter());
             }
             if (
                 typeof(IAsyncResultFilter).GetTypeInfo().IsAssignableFrom(typeInfo)
                 || typeof(IResultFilter).GetTypeInfo().IsAssignableFrom(typeInfo)
-            ) {
+            )
+            {
                 controllerModel.Filters.Add(new ControllerResultFilter());
             }
 
@@ -396,7 +400,8 @@ namespace Microsoft.AspNetCore.Mvc.ApplicationModels
             if (
                 _mvcOptions.SuppressAsyncSuffixInActionNames
                 && actionName.EndsWith(Suffix, StringComparison.Ordinal)
-            ) {
+            )
+            {
                 actionName = actionName.Substring(0, actionName.Length - Suffix.Length);
             }
 
@@ -619,7 +624,8 @@ namespace Microsoft.AspNetCore.Mvc.ApplicationModels
                         else if (
                             routeProvider is IActionHttpMethodProvider
                             && attribute is IActionHttpMethodProvider
-                        ) {
+                        )
+                        {
                             // Example:
                             // [HttpGet("template")]
                             // [AcceptVerbs("GET", "POST")]
@@ -659,7 +665,8 @@ namespace Microsoft.AspNetCore.Mvc.ApplicationModels
         private static bool InRouteProviders(
             List<IRouteTemplateProvider> routeProviders,
             object attribute
-        ) {
+        )
+        {
             foreach (var rp in routeProviders)
             {
                 if (ReferenceEquals(rp, attribute))
@@ -674,7 +681,8 @@ namespace Microsoft.AspNetCore.Mvc.ApplicationModels
         private static SelectorModel CreateSelectorModel(
             IRouteTemplateProvider? route,
             IList<object> attributes
-        ) {
+        )
+        {
             var selectorModel = new SelectorModel();
             if (route != null)
             {

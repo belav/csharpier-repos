@@ -26,7 +26,8 @@ namespace System.Net.Sockets.Tests
                     SocketType.Stream,
                     ProtocolType.Tcp
                 )
-            ) {
+            )
+            {
                 if (Capability.SocketsReuseUnicastPortSupport().Value)
                 {
                     Assert.Equal(
@@ -59,7 +60,8 @@ namespace System.Net.Sockets.Tests
                     SocketType.Stream,
                     ProtocolType.Tcp
                 )
-            ) {
+            )
+            {
                 if (Capability.SocketsReuseUnicastPortSupport().Value)
                 {
                     socket.SetSocketOption(
@@ -99,7 +101,8 @@ namespace System.Net.Sockets.Tests
                     SocketType.Dgram,
                     ProtocolType.Udp
                 )
-            ) {
+            )
+            {
                 socket.SetSocketOption(
                     SocketOptionLevel.IP,
                     SocketOptionName.AddMembership,
@@ -151,7 +154,8 @@ namespace System.Net.Sockets.Tests
                         SocketType.Dgram,
                         ProtocolType.Udp
                     )
-            ) {
+            )
+            {
                 receiveSocket.ReceiveTimeout = 1000;
                 receiveSocket.SetSocketOption(
                     SocketOptionLevel.IP,
@@ -193,7 +197,8 @@ namespace System.Net.Sockets.Tests
                     SocketType.Dgram,
                     ProtocolType.Udp
                 )
-            ) {
+            )
+            {
                 Assert.Throws<SocketException>(
                     () =>
                         s.SetSocketOption(
@@ -234,7 +239,8 @@ namespace System.Net.Sockets.Tests
                     SocketType.Dgram,
                     ProtocolType.Udp
                 )
-            ) {
+            )
+            {
                 // This should not throw. We currently do not have good mechanism how to verify that the TTL/Hops is actually set.
 
                 int ttl = (int)socket.GetSocketOption(
@@ -269,7 +275,8 @@ namespace System.Net.Sockets.Tests
                     SocketType.Dgram,
                     ProtocolType.Udp
                 )
-            ) {
+            )
+            {
                 // This should not throw. We currently do not have good mechanism how to verify that the TTL/Hops is actually set.
 
                 int ttl = (int)socket.GetSocketOption(
@@ -335,7 +342,8 @@ namespace System.Net.Sockets.Tests
                         SocketType.Dgram,
                         ProtocolType.Udp
                     )
-            ) {
+            )
+            {
                 receiveSocket.ReceiveTimeout = 1000;
                 receiveSocket.SetSocketOption(
                     SocketOptionLevel.IPv6,
@@ -377,7 +385,8 @@ namespace System.Net.Sockets.Tests
                     SocketType.Dgram,
                     ProtocolType.Udp
                 )
-            ) {
+            )
+            {
                 Assert.Throws<SocketException>(
                     () =>
                         s.SetSocketOption(
@@ -409,7 +418,8 @@ namespace System.Net.Sockets.Tests
                 ) {
                     Blocking = false
                 }
-            ) {
+            )
+            {
                 // Fail a Connect
                 using (
                     var server = new Socket(
@@ -417,7 +427,8 @@ namespace System.Net.Sockets.Tests
                         SocketType.Stream,
                         ProtocolType.Tcp
                     )
-                ) {
+                )
+                {
                     server.Bind(new IPEndPoint(IPAddress.Loopback, 0)); // bind but don't listen
                     Assert.ThrowsAny<Exception>(() => client.Connect(server.LocalEndPoint));
                 }
@@ -537,14 +548,16 @@ namespace System.Net.Sockets.Tests
             bool? firstSocketReuseAddress,
             bool? secondSocketReuseAddress,
             bool expectFailure
-        ) {
+        )
+        {
             using (
                 Socket a = new Socket(
                     AddressFamily.InterNetwork,
                     SocketType.Dgram,
                     ProtocolType.Udp
                 )
-            ) {
+            )
+            {
                 if (exclusiveAddressUse.HasValue)
                 {
                     a.SetSocketOption(
@@ -570,7 +583,8 @@ namespace System.Net.Sockets.Tests
                         SocketType.Dgram,
                         ProtocolType.Udp
                     )
-                ) {
+                )
+                {
                     if (secondSocketReuseAddress.HasValue)
                     {
                         b.SetSocketOption(
@@ -606,7 +620,8 @@ namespace System.Net.Sockets.Tests
             bool? firstSocketReuseAddress,
             bool? secondSocketReuseAddress,
             bool expectFailure
-        ) {
+        )
+        {
             ReuseAddress(
                 exclusiveAddressUse,
                 firstSocketReuseAddress,
@@ -628,7 +643,8 @@ namespace System.Net.Sockets.Tests
                     SocketType.Dgram,
                     ProtocolType.Udp
                 )
-            ) {
+            )
+            {
                 Assert.Equal(
                     1,
                     (int)a.GetSocketOption(
@@ -659,7 +675,8 @@ namespace System.Net.Sockets.Tests
                     SocketType.Dgram,
                     ProtocolType.Udp
                 )
-            ) {
+            )
+            {
                 a.SetSocketOption(
                     SocketOptionLevel.Socket,
                     SocketOptionName.ExclusiveAddressUse,
@@ -686,7 +703,8 @@ namespace System.Net.Sockets.Tests
                     SocketType.Dgram,
                     ProtocolType.Udp
                 )
-            ) {
+            )
+            {
                 a.SetSocketOption(SocketOptionLevel.Socket, SocketOptionName.ReuseAddress, value);
 
                 Assert.Equal(
@@ -715,7 +733,8 @@ namespace System.Net.Sockets.Tests
                     SocketType.Stream,
                     ProtocolType.Tcp
                 )
-            ) {
+            )
+            {
                 // ExclusiveAddressUse defaults to true on Unix, on Windows it defaults to false.
                 a.ExclusiveAddressUse = true;
 
@@ -729,7 +748,8 @@ namespace System.Net.Sockets.Tests
                         SocketType.Stream,
                         ProtocolType.Tcp
                     )
-                ) {
+                )
+                {
                     SocketException ex = Assert.ThrowsAny<SocketException>(
                         () => b.Bind(new IPEndPoint(IPAddress.Loopback, port))
                     );
@@ -766,7 +786,8 @@ namespace System.Net.Sockets.Tests
                     SocketType.Dgram,
                     ProtocolType.Udp
                 )
-            ) {
+            )
+            {
                 int value = 1;
                 s1.SetRawSocketOption(SOL_SOCKET, option, new Span<byte>(&value, sizeof(int)));
                 s1.Bind(new IPEndPoint(IPAddress.Any, 0));
@@ -776,7 +797,8 @@ namespace System.Net.Sockets.Tests
                         SocketType.Dgram,
                         ProtocolType.Udp
                     )
-                ) {
+                )
+                {
                     s2.SetSocketOption(
                         SocketOptionLevel.Socket,
                         SocketOptionName.ReuseAddress,
@@ -819,7 +841,8 @@ namespace System.Net.Sockets.Tests
             IPProtectionLevel level,
             AddressFamily family,
             SocketOptionLevel optionLevel
-        ) {
+        )
+        {
             using (var socket = new Socket(family, SocketType.Stream, ProtocolType.Tcp))
             {
                 socket.SetIPProtectionLevel(level);
@@ -875,7 +898,8 @@ namespace System.Net.Sockets.Tests
             if (
                 RuntimeInformation.IsOSPlatform(OSPlatform.Windows)
                 || RuntimeInformation.IsOSPlatform(OSPlatform.OSX)
-            ) {
+            )
+            {
                 SOL_SOCKET = 0xffff;
                 SO_RCVBUF = 0x1002;
             }
@@ -919,7 +943,8 @@ namespace System.Net.Sockets.Tests
                     SocketType.Stream,
                     ProtocolType.Tcp
                 )
-            ) {
+            )
+            {
                 Assert.Equal(
                     0,
                     s.GetSocketOption(SocketOptionLevel.Socket, SocketOptionName.AcceptConnection)
@@ -950,7 +975,8 @@ namespace System.Net.Sockets.Tests
                     SocketType.Stream,
                     ProtocolType.Tcp
                 )
-            ) {
+            )
+            {
                 a.Bind(new IPEndPoint(IPAddress.Loopback, 0));
                 port = (a.LocalEndPoint as IPEndPoint).Port;
                 a.Listen();
@@ -962,7 +988,8 @@ namespace System.Net.Sockets.Tests
                         SocketType.Stream,
                         ProtocolType.Tcp
                     )
-                ) {
+                )
+                {
                     client.Connect(new IPEndPoint(IPAddress.Loopback, port));
                     // accept socket and close it with zero linger time.
                     a.Accept().Close(0);
@@ -977,7 +1004,8 @@ namespace System.Net.Sockets.Tests
                     SocketType.Stream,
                     ProtocolType.Tcp
                 )
-            ) {
+            )
+            {
                 b.Bind(new IPEndPoint(IPAddress.Loopback, port));
             }
         }

@@ -324,7 +324,8 @@ namespace Microsoft.AspNetCore.Authentication.WsFederation
             string tokenFile,
             string wctx = null,
             bool suppressWctx = false
-        ) {
+        )
+        {
             var kvps = new List<KeyValuePair<string, string>>();
             kvps.Add(new KeyValuePair<string, string>("wa", "wsignin1.0"));
             kvps.Add(new KeyValuePair<string, string>("wresult", File.ReadAllText(tokenFile)));
@@ -403,7 +404,8 @@ namespace Microsoft.AspNetCore.Authentication.WsFederation
                                                                 "suppressWctx",
                                                                 out var suppress
                                                             )
-                                                        ) {
+                                                        )
+                                                        {
                                                             Assert.True(
                                                                 context.ProtocolMessage.Wctx.Equals(
                                                                     "customValue"
@@ -600,7 +602,8 @@ namespace Microsoft.AspNetCore.Authentication.WsFederation
                         if (
                             identity.NameClaimType == "Name_Failed"
                             && identity.RoleClaimType == "Role_Failed"
-                        ) {
+                        )
+                        {
                             context.Response.StatusCode = 500;
                             await context.Response.WriteAsync("SignIn_Failed");
                         }
@@ -608,7 +611,8 @@ namespace Microsoft.AspNetCore.Authentication.WsFederation
                             !identity.HasClaim("Authenticated", "true")
                             || !identity.HasClaim("ReturnEndpoint", "true")
                             || !identity.HasClaim(identity.RoleClaimType, "Guest")
-                        ) {
+                        )
+                        {
                             await context.Response.WriteAsync("Provider not invoked");
                             return;
                         }
@@ -628,7 +632,8 @@ namespace Microsoft.AspNetCore.Authentication.WsFederation
             protected override Task<HttpResponseMessage> SendAsync(
                 HttpRequestMessage request,
                 CancellationToken cancellationToken
-            ) {
+            )
+            {
                 var metadata = File.ReadAllText(@"WsFederation/federationmetadata.xml");
                 var newResponse = new HttpResponseMessage()
                 {

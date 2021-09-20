@@ -31,7 +31,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.PullMemberUp
         public VisualStudioPullMemberUpService(
             IGlyphService glyphService,
             IWaitIndicator waitIndicator
-        ) {
+        )
+        {
             _glyphService = glyphService;
             _waitIndicator = waitIndicator;
         }
@@ -39,7 +40,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.PullMemberUp
         public PullMembersUpOptions GetPullMemberUpOptions(
             Document document,
             ISymbol selectedMember
-        ) {
+        )
+        {
             var membersInType = selectedMember.ContainingType.GetMembers()
                 .WhereAsArray(member => MemberAndDestinationValidator.IsMemberValid(member));
             var memberViewModels = membersInType.SelectAsArray(

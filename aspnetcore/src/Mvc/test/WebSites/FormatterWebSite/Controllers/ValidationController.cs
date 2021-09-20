@@ -71,14 +71,16 @@ namespace FormatterWebSite
         [ModelStateValidationFilter]
         public SimpleTypePropertiesModel CreateSimpleTypePropertiesModel(
             [FromBody] SimpleTypePropertiesModel simpleTypePropertiesModel
-        ) {
+        )
+        {
             return simpleTypePropertiesModel;
         }
 
         [HttpPost]
         public IActionResult ValidationProviderAttribute(
             [FromBody] ValidationProviderAttributeModel validationProviderAttributeModel
-        ) {
+        )
+        {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
@@ -90,7 +92,8 @@ namespace FormatterWebSite
         [HttpPost]
         public IActionResult ValidationThrowsError_WhenValidationExceedsMaxValidationDepth(
             [FromBody] InfinitelyRecursiveModel model
-        ) {
+        )
+        {
             return Ok();
         }
 

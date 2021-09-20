@@ -56,7 +56,8 @@ namespace Microsoft.DotNet.Build.Tasks
                 if (
                     file.GetMetadata("IsSymbolFile")
                         .Equals("true", StringComparison.OrdinalIgnoreCase)
-                ) {
+                )
+                {
                     continue;
                 }
 

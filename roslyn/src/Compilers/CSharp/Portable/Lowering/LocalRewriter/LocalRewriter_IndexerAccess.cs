@@ -18,7 +18,8 @@ namespace Microsoft.CodeAnalysis.CSharp
         private BoundExpression MakeDynamicIndexerAccessReceiver(
             BoundDynamicIndexerAccess indexerAccess,
             BoundExpression loweredReceiver
-        ) {
+        )
+        {
             BoundExpression result;
 
             string? indexedPropertyName = indexerAccess.TryGetIndexedPropertyName();
@@ -65,7 +66,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             ImmutableArray<BoundExpression> loweredArguments,
             ImmutableArray<string> argumentNames,
             ImmutableArray<RefKind> refKinds
-        ) {
+        )
+        {
             // If we are calling a method on a NoPIA type, we need to embed all methods/properties
             // with the matching name of this dynamic invocation.
             EmbedIfNeedTo(loweredReceiver, node.ApplicableIndexers, node.Syntax);
@@ -130,7 +132,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             TypeSymbol type,
             BoundIndexerAccess? oldNodeOpt,
             bool isLeftOfAssignment
-        ) {
+        )
+        {
             if (isLeftOfAssignment && indexer.RefKind == RefKind.None)
             {
                 // This is an indexer set access. We return a BoundIndexerAccess node here.
@@ -207,21 +210,24 @@ namespace Microsoft.CodeAnalysis.CSharp
 
         public override BoundNode VisitIndexOrRangePatternIndexerAccess(
             BoundIndexOrRangePatternIndexerAccess node
-        ) {
+        )
+        {
             return VisitIndexOrRangePatternIndexerAccess(node, isLeftOfAssignment: false);
         }
 
         private BoundSequence VisitIndexOrRangePatternIndexerAccess(
             BoundIndexOrRangePatternIndexerAccess node,
             bool isLeftOfAssignment
-        ) {
+        )
+        {
             if (
                 TypeSymbol.Equals(
                     node.Argument.Type,
                     _compilation.GetWellKnownType(WellKnownType.System_Index),
                     TypeCompareKind.ConsiderEverything
                 )
-            ) {
+            )
+            {
                 return VisitIndexPatternIndexerAccess(
                     node.Syntax,
                     node.Receiver,
@@ -256,7 +262,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             PropertySymbol intIndexer,
             BoundExpression argument,
             bool isLeftOfAssignment
-        ) {
+        )
+        {
             // Lowered code:
             // ref var receiver = receiverExpr;
             // int length = receiver.length;
@@ -339,7 +346,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             BoundExpression unloweredExpr,
             BoundExpression lengthAccess,
             out bool usedLength
-        ) {
+        )
+        {
             Debug.Assert(
                 TypeSymbol.Equals(
                     unloweredExpr.Type,
@@ -365,7 +373,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                 {
                     Operand: { Type: { SpecialType: SpecialType.System_Int32 } } operand
                 }
-            ) {
+            )
+            {
                 // If the System.Index argument is a conversion from int to Index we
                 // can return the int directly
                 usedLength = false;
@@ -387,7 +396,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             PropertySymbol lengthOrCountProperty,
             MethodSymbol sliceMethod,
             BoundExpression rangeArg
-        ) {
+        )
+        {
             Debug.Assert(
                 TypeSymbol.Equals(
                     rangeArg.Type,

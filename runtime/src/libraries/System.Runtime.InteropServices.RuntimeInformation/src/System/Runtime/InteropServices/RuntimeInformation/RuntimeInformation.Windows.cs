@@ -73,7 +73,8 @@ namespace System.Runtime.InteropServices
 
         private static Architecture Map(
             Interop.Kernel32.ProcessorArchitecture processorArchitecture
-        ) {
+        )
+        {
             switch (processorArchitecture)
             {
                 case Interop.Kernel32.ProcessorArchitecture.Processor_Architecture_ARM64:

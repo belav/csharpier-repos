@@ -23,7 +23,8 @@ namespace Microsoft.AspNetCore.JsonPatch.Internal
             IContractResolver contractResolver,
             object value,
             out string errorMessage
-        ) {
+        )
+        {
             var list = (IList)target;
 
             if (!TryGetListTypeArgument(list, out var typeArgument, out errorMessage))
@@ -39,7 +40,8 @@ namespace Microsoft.AspNetCore.JsonPatch.Internal
                     out var positionInfo,
                     out errorMessage
                 )
-            ) {
+            )
+            {
                 return false;
             }
 
@@ -52,7 +54,8 @@ namespace Microsoft.AspNetCore.JsonPatch.Internal
                     out var convertedValue,
                     out errorMessage
                 )
-            ) {
+            )
+            {
                 return false;
             }
 
@@ -75,7 +78,8 @@ namespace Microsoft.AspNetCore.JsonPatch.Internal
             IContractResolver contractResolver,
             out object value,
             out string errorMessage
-        ) {
+        )
+        {
             var list = (IList)target;
 
             if (!TryGetListTypeArgument(list, out var typeArgument, out errorMessage))
@@ -92,7 +96,8 @@ namespace Microsoft.AspNetCore.JsonPatch.Internal
                     out var positionInfo,
                     out errorMessage
                 )
-            ) {
+            )
+            {
                 value = null;
                 return false;
             }
@@ -115,7 +120,8 @@ namespace Microsoft.AspNetCore.JsonPatch.Internal
             string segment,
             IContractResolver contractResolver,
             out string errorMessage
-        ) {
+        )
+        {
             var list = (IList)target;
 
             if (!TryGetListTypeArgument(list, out var typeArgument, out errorMessage))
@@ -131,7 +137,8 @@ namespace Microsoft.AspNetCore.JsonPatch.Internal
                     out var positionInfo,
                     out errorMessage
                 )
-            ) {
+            )
+            {
                 return false;
             }
 
@@ -154,7 +161,8 @@ namespace Microsoft.AspNetCore.JsonPatch.Internal
             IContractResolver contractResolver,
             object value,
             out string errorMessage
-        ) {
+        )
+        {
             var list = (IList)target;
 
             if (!TryGetListTypeArgument(list, out var typeArgument, out errorMessage))
@@ -170,7 +178,8 @@ namespace Microsoft.AspNetCore.JsonPatch.Internal
                     out var positionInfo,
                     out errorMessage
                 )
-            ) {
+            )
+            {
                 return false;
             }
 
@@ -183,7 +192,8 @@ namespace Microsoft.AspNetCore.JsonPatch.Internal
                     out var convertedValue,
                     out errorMessage
                 )
-            ) {
+            )
+            {
                 return false;
             }
 
@@ -206,7 +216,8 @@ namespace Microsoft.AspNetCore.JsonPatch.Internal
             IContractResolver contractResolver,
             object value,
             out string errorMessage
-        ) {
+        )
+        {
             var list = (IList)target;
 
             if (!TryGetListTypeArgument(list, out var typeArgument, out errorMessage))
@@ -222,7 +233,8 @@ namespace Microsoft.AspNetCore.JsonPatch.Internal
                     out var positionInfo,
                     out errorMessage
                 )
-            ) {
+            )
+            {
                 return false;
             }
 
@@ -235,7 +247,8 @@ namespace Microsoft.AspNetCore.JsonPatch.Internal
                     out var convertedValue,
                     out errorMessage
                 )
-            ) {
+            )
+            {
                 return false;
             }
 
@@ -245,7 +258,8 @@ namespace Microsoft.AspNetCore.JsonPatch.Internal
                     JsonConvert.SerializeObject(currentValue),
                     JsonConvert.SerializeObject(convertedValue)
                 )
-            ) {
+            )
+            {
                 errorMessage = Resources.FormatValueAtListPositionNotEqualToTestValue(
                     currentValue,
                     value,
@@ -266,7 +280,8 @@ namespace Microsoft.AspNetCore.JsonPatch.Internal
             IContractResolver contractResolver,
             out object value,
             out string errorMessage
-        ) {
+        )
+        {
             var list = target as IList;
             if (list == null)
             {
@@ -301,7 +316,8 @@ namespace Microsoft.AspNetCore.JsonPatch.Internal
             string segment,
             out object convertedValue,
             out string errorMessage
-        ) {
+        )
+        {
             return TryConvertValue(
                 originalValue,
                 listTypeArgument,
@@ -319,7 +335,8 @@ namespace Microsoft.AspNetCore.JsonPatch.Internal
             IContractResolver contractResolver,
             out object convertedValue,
             out string errorMessage
-        ) {
+        )
+        {
             var conversionResult = ConversionResultProvider.ConvertTo(
                 originalValue,
                 listTypeArgument,
@@ -341,7 +358,8 @@ namespace Microsoft.AspNetCore.JsonPatch.Internal
             IList list,
             out Type listTypeArgument,
             out string errorMessage
-        ) {
+        )
+        {
             // Arrays are not supported as they have fixed size and operations like Add, Insert do not make sense
             var listType = list.GetType();
             if (listType.IsArray)
@@ -379,7 +397,8 @@ namespace Microsoft.AspNetCore.JsonPatch.Internal
             OperationType operationType,
             out PositionInfo positionInfo,
             out string errorMessage
-        ) {
+        )
+        {
             if (segment == "-")
             {
                 positionInfo = new PositionInfo(PositionType.EndOfList, -1);

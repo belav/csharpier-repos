@@ -18,7 +18,8 @@ namespace Roslyn.Utilities
             out uint low,
             out uint mid,
             out uint high
-        ) {
+        )
+        {
             int[] bits = decimal.GetBits(value);
 
             // The return value is a four-element array of 32-bit signed integers.

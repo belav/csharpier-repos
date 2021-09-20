@@ -517,7 +517,8 @@ namespace System.Web.Http.Results
             IDictionary<string, object> routeValues,
             UrlHelper urlFactory,
             HttpRequestMessage request
-        ) {
+        )
+        {
             return new RedirectToRouteResult(routeName, routeValues, urlFactory, request);
         }
 
@@ -525,7 +526,8 @@ namespace System.Web.Http.Results
             string routeName,
             IDictionary<string, object> routeValues,
             ApiController controller
-        ) {
+        )
+        {
             return new RedirectToRouteResult(routeName, routeValues, controller);
         }
 

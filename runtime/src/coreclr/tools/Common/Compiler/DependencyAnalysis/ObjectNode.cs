@@ -18,7 +18,8 @@ namespace ILCompiler.DependencyAnalysis
                 Relocation[] relocs,
                 int alignment,
                 ISymbolDefinitionNode[] definedSymbols
-            ) {
+            )
+            {
                 Data = data;
                 Relocs = relocs;
                 Alignment = alignment;
@@ -60,7 +61,8 @@ namespace ILCompiler.DependencyAnalysis
 
         public sealed override IEnumerable<DependencyListEntry> GetStaticDependencies(
             NodeFactory factory
-        ) {
+        )
+        {
             DependencyList dependencies = ComputeNonRelocationBasedDependencies(factory);
             Relocation[] relocs = GetData(factory, true).Relocs;
 

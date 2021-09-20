@@ -36,7 +36,8 @@ namespace Microsoft.AspNetCore.Components.WebView
         internal void ReceiveIpcMessage(
             IpcCommon.IncomingMessageType messageType,
             params object[] args
-        ) {
+        )
+        {
             // Same serialization convention as used by blazor.webview.js
             MessageReceived(new Uri(AppBaseUri, "/page"), IpcCommon.Serialize(messageType, args));
         }

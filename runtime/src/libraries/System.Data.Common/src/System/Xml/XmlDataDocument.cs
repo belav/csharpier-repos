@@ -337,7 +337,8 @@ namespace System.Xml
             string? prefix,
             string localName,
             string? namespaceURI
-        ) {
+        )
+        {
             // There are three states for the document:
             //  - special listeners ON, no permananent listeners: this is when the data doc was created w/o any dataset, and the 1st time a new row/element
             //    is created we should subscribe the permenent listeners.
@@ -618,7 +619,8 @@ namespace System.Xml
                 else if (
                     node.ElementState == ElementState.WeakFoliation
                     && newState == ElementState.StrongFoliation
-                ) {
+                )
+                {
                     // Node must be a row-elem
                     Debug.Assert(node.Row != null);
                     node.ElementState = newState;
@@ -780,7 +782,8 @@ namespace System.Xml
             DataRow row,
             DataColumn col,
             XmlBoundElement rowElement
-        ) {
+        )
+        {
             XmlNode? prev = null;
             XmlNode? node = null;
 
@@ -884,7 +887,8 @@ namespace System.Xml
             DataRow row,
             XmlElement rowElement,
             XmlNode parentElement
-        ) {
+        )
+        {
             DataRow refRow = row;
             int i = 0;
             int pos;
@@ -1448,7 +1452,8 @@ namespace System.Xml
                 col.ColumnMapping == MappingType.SimpleContent
                 && Convert.IsDBNull(value)
                 && !rowElement.IsFoliated
-            ) {
+            )
+            {
                 ForceFoliation(rowElement, ElementState.WeakFoliation);
             }
             else
@@ -1525,7 +1530,8 @@ namespace System.Xml
                     if (
                         attr.LocalName == col.EncodedColumnName
                         && attr.NamespaceURI == col.Namespace
-                    ) {
+                    )
+                    {
                         if (Convert.IsDBNull(value))
                         {
                             attr.OwnerElement!.Attributes.Remove(attr);
@@ -1774,7 +1780,8 @@ namespace System.Xml
             DataRow child,
             XmlBoundElement childElement,
             DataColumn? childCol
-        ) {
+        )
+        {
             Debug.Assert(child.Element == childElement && childElement.Row == child);
             // This function is (and s/b) called as a result of ROM changes, therefore XML changes done here should not be sync-ed to ROM
             Debug.Assert(_ignoreXmlEvents == true);
@@ -1815,7 +1822,8 @@ namespace System.Xml
                                 parentRowInTree._tempRecord,
                                 comparedValue
                             ) != 0
-                        ) {
+                        )
+                        {
                             EnsureNonRowDocumentElement().AppendChild(childElement);
                         }
                         //else do nothing because its original parentRowInRelation will be changed so that this row will still be its child
@@ -2200,7 +2208,8 @@ namespace System.Xml
                                 if (
                                     Convert.IsDBNull(proposedValue)
                                     && !Convert.IsDBNull(currentValue)
-                                ) {
+                                )
+                                {
                                     // Foliate only for non-hidden columns (since hidden cols are not represented in XML)
                                     if (c.ColumnMapping != MappingType.Hidden)
                                         FoliateIfDataPointers(row, rowElement);
@@ -2247,7 +2256,8 @@ namespace System.Xml
         private void OnTableColumnsChanging(
             object oColumnsCollection,
             CollectionChangeEventArgs args
-        ) {
+        )
+        {
             // args.Action is one of CollectionChangeAction.Add, CollectionChangeAction.Remove or CollectionChangeAction.Refresh
             // args.Element is one of either the column (for Add and Remove actions or null, if the entire colection of columns is changing)
 
@@ -2258,7 +2268,8 @@ namespace System.Xml
         private void OnDataSetTablesChanging(
             object oTablesCollection,
             CollectionChangeEventArgs args
-        ) {
+        )
+        {
             // args.Action is one of CollectionChangeAction.Add, CollectionChangeAction.Remove or CollectionChangeAction.Refresh
             // args.Element is a table
 
@@ -2269,7 +2280,8 @@ namespace System.Xml
         private void OnDataSetRelationsChanging(
             object oRelationsCollection,
             CollectionChangeEventArgs args
-        ) {
+        )
+        {
             // args.Action is one of CollectionChangeAction.Add, CollectionChangeAction.Remove or CollectionChangeAction.Refresh
             // args.Element is a DataRelation
 
@@ -2303,7 +2315,8 @@ namespace System.Xml
         private void OnRelationPropertyChanging(
             object? oRelationsCollection,
             PropertyChangedEventArgs args
-        ) {
+        )
+        {
             if (args.PropertyName == "Nested")
                 throw new InvalidOperationException(SR.DataDom_DataSetNestedRelationsChange);
         }
@@ -2503,7 +2516,8 @@ namespace System.Xml
         private void SynchronizeRowFromRowElement(
             XmlBoundElement rowElement,
             ArrayList? rowElemList
-        ) {
+        )
+        {
             DataRow? row = rowElement.Row;
             Debug.Assert(row != null);
 
@@ -2546,7 +2560,8 @@ namespace System.Xml
         private void SynchronizeRowFromRowElementEx(
             XmlBoundElement rowElement,
             ArrayList? rowElemList
-        ) {
+        )
+        {
             Debug.Assert(rowElement != null);
             Debug.Assert(rowElement.Row != null);
             Debug.Assert(DataSet.EnforceConstraints == false);
@@ -2970,7 +2985,8 @@ namespace System.Xml
             XmlNode node,
             XmlBoundElement rowElement,
             ArrayList rowElemList
-        ) {
+        )
+        {
             // non-row-elem is beeing inserted
             DataRow? row = rowElement.Row;
             // Region should already have an associated data row (otherwise how was the original row-elem inserted ?)
@@ -2989,7 +3005,8 @@ namespace System.Xml
             XmlNode node,
             XmlBoundElement rowElement,
             ArrayList rowElemList
-        ) {
+        )
+        {
             // non-row-elem is beeing inserted
             DataRow? row = rowElement.Row;
             // Region should already have an associated data row (otherwise how was the original row-elem inserted ?)
@@ -3015,7 +3032,8 @@ namespace System.Xml
         private void SetNestedParentRegion(
             XmlBoundElement childRowElem,
             XmlBoundElement? parentRowElem
-        ) {
+        )
+        {
             DataRow childRow = childRowElem.Row!;
             if (parentRowElem == null)
             {

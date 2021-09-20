@@ -195,7 +195,8 @@ namespace Microsoft.AspNetCore.Mvc.ViewFeatures
             IHtmlHelper htmlHelper,
             string className,
             string inputType = null
-        ) {
+        )
+        {
             var htmlAttributesObject = htmlHelper.ViewData[HtmlAttributeKey];
             if (htmlAttributesObject != null)
             {
@@ -219,7 +220,8 @@ namespace Microsoft.AspNetCore.Mvc.ViewFeatures
             object htmlAttributesObject,
             string className,
             string inputType
-        ) {
+        )
+        {
             var htmlAttributes = HtmlHelper.AnonymousObjectToHtmlAttributes(htmlAttributesObject);
 
             if (htmlAttributes.TryGetValue("class", out var htmlClassObject))
@@ -350,7 +352,8 @@ namespace Microsoft.AspNetCore.Mvc.ViewFeatures
             if (
                 AppContext.TryGetSwitch(UsePasswordValue, out var usePasswordValue)
                 && usePasswordValue
-            ) {
+            )
+            {
                 value = htmlHelper.ViewData.TemplateInfo.FormattedModelValue;
             }
 
@@ -464,7 +467,8 @@ namespace Microsoft.AspNetCore.Mvc.ViewFeatures
         private static void ApplyRfc3339DateFormattingIfNeeded(
             IHtmlHelper htmlHelper,
             string format
-        ) {
+        )
+        {
             if (htmlHelper.Html5DateRenderingMode != Html5DateRenderingMode.Rfc3339)
             {
                 return;
@@ -475,7 +479,8 @@ namespace Microsoft.AspNetCore.Mvc.ViewFeatures
             if (
                 htmlHelper.ViewData.TemplateInfo.FormattedModelValue != value
                 && metadata.HasNonDefaultEditFormat
-            ) {
+            )
+            {
                 return;
             }
 
@@ -502,7 +507,8 @@ namespace Microsoft.AspNetCore.Mvc.ViewFeatures
             IHtmlHelper htmlHelper,
             string inputType,
             object value
-        ) {
+        )
+        {
             var htmlAttributes = CreateHtmlAttributes(
                 htmlHelper,
                 className: "text-box single-line",
@@ -516,7 +522,8 @@ namespace Microsoft.AspNetCore.Mvc.ViewFeatures
             IHtmlHelper htmlHelper,
             object value,
             object htmlAttributes
-        ) {
+        )
+        {
             return htmlHelper.TextBox(
                 expression: null,
                 value: value,
@@ -573,7 +580,8 @@ namespace Microsoft.AspNetCore.Mvc.ViewFeatures
                 char[] value,
                 int startIndex,
                 int characterCount
-            ) {
+            )
+            {
                 if (output == null)
                 {
                     throw new ArgumentNullException(nameof(output));
@@ -592,7 +600,8 @@ namespace Microsoft.AspNetCore.Mvc.ViewFeatures
                 string value,
                 int startIndex,
                 int characterCount
-            ) {
+            )
+            {
                 if (output == null)
                 {
                     throw new ArgumentNullException(nameof(output));
@@ -621,7 +630,8 @@ namespace Microsoft.AspNetCore.Mvc.ViewFeatures
                 char* buffer,
                 int bufferLength,
                 out int numberOfCharactersWritten
-            ) {
+            )
+            {
                 numberOfCharactersWritten = 0;
 
                 return false;

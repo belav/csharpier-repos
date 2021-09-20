@@ -35,7 +35,8 @@ namespace Microsoft.CodeAnalysis.IntroduceVariable
                     bindingMap.AllReferencedSymbols.OfType<ITypeParameterSymbol>()
                         .Where(tp => tp.TypeParameterKind == TypeParameterKind.Method)
                         .Any()
-                ) {
+                )
+                {
                     return false;
                 }
 

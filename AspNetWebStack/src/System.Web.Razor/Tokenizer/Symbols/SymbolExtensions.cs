@@ -24,14 +24,16 @@ namespace System.Web.Razor.Tokenizer.Symbols
         public static LocationTagged<string> GetContent(
             this SpanBuilder span,
             Func<IEnumerable<ISymbol>, IEnumerable<ISymbol>> filter
-        ) {
+        )
+        {
             return GetContent(filter(span.Symbols), span.Start);
         }
 
         public static LocationTagged<string> GetContent(
             this IEnumerable<ISymbol> symbols,
             SourceLocation spanStart
-        ) {
+        )
+        {
             if (symbols.Any())
             {
                 return new LocationTagged<string>(

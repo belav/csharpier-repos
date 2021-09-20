@@ -38,7 +38,8 @@ namespace Microsoft.AspNetCore.Authentication.JwtBearer
         protected override void RegisterAuth(
             AuthenticationBuilder services,
             Action<JwtBearerOptions> configure
-        ) {
+        )
+        {
             services.AddJwtBearer(
                 o =>
                 {
@@ -320,7 +321,8 @@ namespace Microsoft.AspNetCore.Authentication.JwtBearer
         public async Task ExceptionReportedInHeaderForAuthenticationFailures(
             Type errorType,
             string message
-        ) {
+        )
+        {
             using var host = await CreateHost(
                 options =>
                 {
@@ -363,7 +365,8 @@ namespace Microsoft.AspNetCore.Authentication.JwtBearer
         public async Task ExceptionReportedInHeaderWithDetailsForAuthenticationFailures(
             Type errorType,
             string message
-        ) {
+        )
+        {
             using var host = await CreateHost(
                 options =>
                 {
@@ -445,7 +448,8 @@ namespace Microsoft.AspNetCore.Authentication.JwtBearer
             string error,
             string description,
             string uri
-        ) {
+        )
+        {
             using var host = await CreateHost(
                 options =>
                 {
@@ -986,7 +990,8 @@ namespace Microsoft.AspNetCore.Authentication.JwtBearer
                 string securityToken,
                 TokenValidationParameters validationParameters,
                 out SecurityToken validatedToken
-            ) {
+            )
+            {
                 var constructor = ExceptionType.GetTypeInfo()
                     .GetConstructor(new[] { typeof(string) });
                 var exception = (Exception)constructor.Invoke(new[] { ExceptionType.Name });
@@ -1022,7 +1027,8 @@ namespace Microsoft.AspNetCore.Authentication.JwtBearer
                 string securityToken,
                 TokenValidationParameters validationParameters,
                 out SecurityToken validatedToken
-            ) {
+            )
+            {
                 if (ExceptionType == typeof(SecurityTokenInvalidAudienceException))
                 {
                     throw new SecurityTokenInvalidAudienceException(
@@ -1099,7 +1105,8 @@ namespace Microsoft.AspNetCore.Authentication.JwtBearer
                 string securityToken,
                 TokenValidationParameters validationParameters,
                 out SecurityToken validatedToken
-            ) {
+            )
+            {
                 validatedToken = null;
                 _tokenValidator?.Invoke(securityToken);
 
@@ -1119,7 +1126,8 @@ namespace Microsoft.AspNetCore.Authentication.JwtBearer
         private static async Task<IHost> CreateHost(
             Action<JwtBearerOptions> options = null,
             Func<HttpContext, Func<Task>, Task> handlerBeforeAuth = null
-        ) {
+        )
+        {
             var host = new HostBuilder().ConfigureWebHost(
                     builder =>
                         builder.UseTestServer()
@@ -1138,7 +1146,8 @@ namespace Microsoft.AspNetCore.Authentication.JwtBearer
                                             if (
                                                 context.Request.Path
                                                 == new PathString("/checkforerrors")
-                                            ) {
+                                            )
+                                            {
                                                 var result = await context.AuthenticateAsync(
                                                     JwtBearerDefaults.AuthenticationScheme
                                                 ); // this used to be "Automatic"
@@ -1153,12 +1162,14 @@ namespace Microsoft.AspNetCore.Authentication.JwtBearer
                                             }
                                             else if (
                                                 context.Request.Path == new PathString("/oauth")
-                                            ) {
+                                            )
+                                            {
                                                 if (
                                                     context.User == null
                                                     || context.User.Identity == null
                                                     || !context.User.Identity.IsAuthenticated
-                                                ) {
+                                                )
+                                                {
                                                     context.Response.StatusCode = 401;
                                                     // REVIEW: no more automatic challenge
                                                     await context.ChallengeAsync(
@@ -1180,7 +1191,8 @@ namespace Microsoft.AspNetCore.Authentication.JwtBearer
                                             }
                                             else if (
                                                 context.Request.Path == new PathString("/token")
-                                            ) {
+                                            )
+                                            {
                                                 var token = await context.GetTokenAsync(
                                                     "access_token"
                                                 );
@@ -1189,7 +1201,8 @@ namespace Microsoft.AspNetCore.Authentication.JwtBearer
                                             else if (
                                                 context.Request.Path
                                                 == new PathString("/unauthorized")
-                                            ) {
+                                            )
+                                            {
                                                 // Simulate Authorization failure
                                                 var result = await context.AuthenticateAsync(
                                                     JwtBearerDefaults.AuthenticationScheme
@@ -1200,7 +1213,8 @@ namespace Microsoft.AspNetCore.Authentication.JwtBearer
                                             }
                                             else if (
                                                 context.Request.Path == new PathString("/forbidden")
-                                            ) {
+                                            )
+                                            {
                                                 // Simulate Forbidden
                                                 await context.ForbidAsync(
                                                     JwtBearerDefaults.AuthenticationScheme
@@ -1208,7 +1222,8 @@ namespace Microsoft.AspNetCore.Authentication.JwtBearer
                                             }
                                             else if (
                                                 context.Request.Path == new PathString("/signIn")
-                                            ) {
+                                            )
+                                            {
                                                 await Assert.ThrowsAsync<InvalidOperationException>(
                                                     () =>
                                                         context.SignInAsync(
@@ -1219,7 +1234,8 @@ namespace Microsoft.AspNetCore.Authentication.JwtBearer
                                             }
                                             else if (
                                                 context.Request.Path == new PathString("/signOut")
-                                            ) {
+                                            )
+                                            {
                                                 await Assert.ThrowsAsync<InvalidOperationException>(
                                                     () =>
                                                         context.SignOutAsync(
@@ -1254,7 +1270,8 @@ namespace Microsoft.AspNetCore.Authentication.JwtBearer
             TestServer server,
             string uri,
             string authorizationHeader = null
-        ) {
+        )
+        {
             var request = new HttpRequestMessage(HttpMethod.Get, uri);
             if (!string.IsNullOrEmpty(authorizationHeader))
             {
@@ -1273,7 +1290,8 @@ namespace Microsoft.AspNetCore.Authentication.JwtBearer
                 transaction.Response.Content != null
                 && transaction.Response.Content.Headers.ContentType != null
                 && transaction.Response.Content.Headers.ContentType.MediaType == "text/xml"
-            ) {
+            )
+            {
                 transaction.ResponseElement = XElement.Parse(transaction.ResponseText);
             }
 

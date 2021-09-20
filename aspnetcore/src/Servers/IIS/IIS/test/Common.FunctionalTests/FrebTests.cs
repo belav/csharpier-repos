@@ -137,7 +137,8 @@ namespace Microsoft.AspNetCore.Server.IIS.FunctionalTests
 
         private async Task<IISDeploymentResult> SetupFrebApp(
             IISDeploymentParameters parameters = null
-        ) {
+        )
+        {
             parameters = parameters ?? Fixture.GetBaseDeploymentParameters();
             parameters.EnableFreb("Verbose", LogFolderPath);
 
@@ -149,14 +150,16 @@ namespace Microsoft.AspNetCore.Server.IIS.FunctionalTests
         private void AssertFrebLogs(
             IISDeploymentResult result,
             params FrebLogItem[] expectedFrebEvents
-        ) {
+        )
+        {
             AssertFrebLogs(result, (IEnumerable<FrebLogItem>)expectedFrebEvents);
         }
 
         private void AssertFrebLogs(
             IISDeploymentResult result,
             IEnumerable<FrebLogItem> expectedFrebEvents
-        ) {
+        )
+        {
             var frebEvent = GetFrebLogItems(result);
             foreach (var expectedEvent in expectedFrebEvents)
             {

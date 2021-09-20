@@ -368,7 +368,8 @@ namespace System.Web.Mvc.Async.Test
         private static ReflectedAsyncActionDescriptor GetActionDescriptor(
             MethodInfo asyncMethod,
             MethodInfo completedMethod
-        ) {
+        )
+        {
             return new ReflectedAsyncActionDescriptor(
                 asyncMethod,
                 completedMethod,

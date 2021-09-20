@@ -26,7 +26,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
             IReadOnlyList<Column> columns,
             string? filter,
             bool unique
-        ) {
+        )
+        {
             Name = name;
             Table = table;
             Columns = columns;

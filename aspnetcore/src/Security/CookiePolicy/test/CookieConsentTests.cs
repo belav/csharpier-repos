@@ -728,7 +728,8 @@ namespace Microsoft.AspNetCore.CookiePolicy.Test
             Action<CookiePolicyOptions> configureOptions,
             Action<HttpContext> configureRequest,
             RequestDelegate handleRequest
-        ) {
+        )
+        {
             var host = new HostBuilder().ConfigureWebHost(
                     webHostBuilder =>
                     {

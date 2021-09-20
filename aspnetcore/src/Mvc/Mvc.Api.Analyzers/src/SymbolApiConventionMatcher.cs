@@ -13,7 +13,8 @@ namespace Microsoft.AspNetCore.Mvc.Api.Analyzers
             ApiControllerSymbolCache symbolCache,
             IMethodSymbol method,
             IMethodSymbol conventionMethod
-        ) {
+        )
+        {
             return MethodMatches() && ParametersMatch();
 
             bool MethodMatches()
@@ -59,7 +60,8 @@ namespace Microsoft.AspNetCore.Mvc.Api.Analyzers
                             conventionParameter.Name,
                             nameMatchBehavior
                         )
-                    ) {
+                    )
+                    {
                         return false;
                     }
                 }
@@ -73,14 +75,16 @@ namespace Microsoft.AspNetCore.Mvc.Api.Analyzers
         internal static SymbolApiConventionNameMatchBehavior GetNameMatchBehavior(
             ApiControllerSymbolCache symbolCache,
             ISymbol symbol
-        ) {
+        )
+        {
             var attribute = symbol.GetAttributes(symbolCache.ApiConventionNameMatchAttribute)
                 .FirstOrDefault();
             if (
                 attribute == null
                 || attribute.ConstructorArguments.Length != 1
                 || attribute.ConstructorArguments[0].Kind != TypedConstantKind.Enum
-            ) {
+            )
+            {
                 return SymbolApiConventionNameMatchBehavior.Exact;
             }
 
@@ -99,14 +103,16 @@ namespace Microsoft.AspNetCore.Mvc.Api.Analyzers
         internal static SymbolApiConventionTypeMatchBehavior GetTypeMatchBehavior(
             ApiControllerSymbolCache symbolCache,
             ISymbol symbol
-        ) {
+        )
+        {
             var attribute = symbol.GetAttributes(symbolCache.ApiConventionTypeMatchAttribute)
                 .FirstOrDefault();
             if (
                 attribute == null
                 || attribute.ConstructorArguments.Length != 1
                 || attribute.ConstructorArguments[0].Kind != TypedConstantKind.Enum
-            ) {
+            )
+            {
                 return SymbolApiConventionTypeMatchBehavior.AssignableFrom;
             }
 
@@ -126,7 +132,8 @@ namespace Microsoft.AspNetCore.Mvc.Api.Analyzers
             string name,
             string conventionName,
             SymbolApiConventionNameMatchBehavior nameMatchBehavior
-        ) {
+        )
+        {
             switch (nameMatchBehavior)
             {
                 case SymbolApiConventionNameMatchBehavior.Any:
@@ -215,7 +222,8 @@ namespace Microsoft.AspNetCore.Mvc.Api.Analyzers
             ITypeSymbol type,
             ITypeSymbol conventionType,
             SymbolApiConventionTypeMatchBehavior typeMatchBehavior
-        ) {
+        )
+        {
             switch (typeMatchBehavior)
             {
                 case SymbolApiConventionTypeMatchBehavior.Any:

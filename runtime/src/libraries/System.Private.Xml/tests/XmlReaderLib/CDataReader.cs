@@ -599,7 +599,8 @@ namespace System.Xml.Tests
             IXmlNamespaceResolver resolver,
             string localName,
             string namespaceUri
-        ) {
+        )
+        {
             ResetWrappingReader();
             object x = Internal.ReadElementContentAs(type, resolver, localName, namespaceUri);
             CheckWrappingReader();
@@ -933,7 +934,8 @@ namespace System.Xml.Tests
                 if (
                     NodeType == XmlNodeType.ProcessingInstruction
                     && NodeType == XmlNodeType.XmlDeclaration
-                ) {
+                )
+                {
                     if (string.Compare(Name, 0, ST_XML, 0, 3) != 0)
                         return STATUS_PASSED;
                 }
@@ -999,7 +1001,8 @@ namespace System.Xml.Tests
                 if (
                     nodeType == XmlNodeType.ProcessingInstruction
                     && NodeType == XmlNodeType.XmlDeclaration
-                ) {
+                )
+                {
                     if (string.Compare(Name, 0, ST_XML, 0, 3) != 0)
                         return;
                 }

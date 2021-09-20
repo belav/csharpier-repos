@@ -121,7 +121,8 @@ namespace System.Security.Cryptography
 
         internal static ECParameters ExportPublicParametersFromPrivateKey(
             SafeSecKeyRefHandle handle
-        ) {
+        )
+        {
             const string ExportPassword = "DotnetExportPassphrase";
             byte[] keyBlob = Interop.AppleCrypto.SecKeyExport(
                 handle,
@@ -297,7 +298,8 @@ namespace System.Security.Cryptography
             {
                 using (
                     MemoryManager<byte> manager = new PointerMemoryManager<byte>(ptr, source.Length)
-                ) {
+                )
+                {
                     // Validate the DER value and get the number of bytes.
                     EccKeyFormatHelper.ReadSubjectPublicKeyInfo(manager.Memory, out int localRead);
 

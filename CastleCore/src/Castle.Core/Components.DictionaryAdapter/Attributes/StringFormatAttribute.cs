@@ -53,7 +53,8 @@ namespace Castle.Components.DictionaryAdapter
             object storedValue,
             PropertyDescriptor property,
             bool ifExists
-        ) {
+        )
+        {
             return string.Format(
                     Format,
                     GetFormatArguments(dictionaryAdapter, property.Property.Name)
@@ -66,7 +67,8 @@ namespace Castle.Components.DictionaryAdapter
         private object[] GetFormatArguments(
             IDictionaryAdapter dictionaryAdapter,
             string formattedPropertyName
-        ) {
+        )
+        {
             var properties = Properties.Split(
                 PropertyDelimeters,
                 StringSplitOptions.RemoveEmptyEntries

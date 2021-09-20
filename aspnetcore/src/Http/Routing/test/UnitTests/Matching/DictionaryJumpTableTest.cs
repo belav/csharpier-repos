@@ -9,7 +9,8 @@ namespace Microsoft.AspNetCore.Routing.Matching
             int defaultDestination,
             int exitDestination,
             params (string text, int destination)[] entries
-        ) {
+        )
+        {
             return new DictionaryJumpTable(defaultDestination, exitDestination, entries);
         }
     }

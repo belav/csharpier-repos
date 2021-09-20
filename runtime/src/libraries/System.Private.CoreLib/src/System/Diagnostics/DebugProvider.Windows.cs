@@ -10,7 +10,8 @@ namespace System.Diagnostics
             string? message,
             string? detailMessage,
             string errorSource
-        ) {
+        )
+        {
             if (s_FailCore != null)
             {
                 s_FailCore(stackTrace, message, detailMessage, errorSource);
@@ -64,7 +65,8 @@ namespace System.Diagnostics
                         offset = 0;
                         offset < message.Length - WriteChunkLength;
                         offset += WriteChunkLength
-                    ) {
+                    )
+                    {
                         WriteToDebugger(message.Substring(offset, WriteChunkLength));
                     }
                     WriteToDebugger(message.Substring(offset));

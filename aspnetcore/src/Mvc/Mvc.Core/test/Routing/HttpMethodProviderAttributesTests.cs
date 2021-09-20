@@ -14,7 +14,8 @@ namespace Microsoft.AspNetCore.Mvc.Routing
         public void HttpMethodProviderAttributes_ReturnsCorrectHttpMethodSequence(
             IActionHttpMethodProvider httpMethodProvider,
             IEnumerable<string> expectedHttpMethods
-        ) {
+        )
+        {
             // Act & Assert
             Assert.Equal(expectedHttpMethods, httpMethodProvider.HttpMethods);
         }

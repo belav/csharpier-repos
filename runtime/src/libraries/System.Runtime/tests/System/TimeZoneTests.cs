@@ -34,7 +34,8 @@ namespace System.Tests
                         rule.DateStart.Year <= year
                         && rule.DateEnd.Year >= year
                         && rule.DaylightDelta != TimeSpan.Zero
-                    ) {
+                    )
+                    {
                         currentRule = rule;
                         break;
                     }
@@ -104,7 +105,8 @@ namespace System.Tests
         private static DateTime TransitionTimeToDateTime(
             int year,
             TimeZoneInfo.TransitionTime transitionTime
-        ) {
+        )
+        {
             DateTime value;
             DateTime timeOfDay = transitionTime.TimeOfDay;
 

@@ -38,13 +38,15 @@ namespace Microsoft.CodeAnalysis.Completion.Providers
             HashSet<string> namespacesInScope,
             bool isExpandedCompletion,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             using (
                 Logger.LogBlock(
                     FunctionId.Completion_TypeImportCompletionProvider_GetCompletionItemsAsync,
                     cancellationToken
                 )
-            ) {
+            )
+            {
                 var telemetryCounter = new TelemetryCounter();
                 var typeImportCompletionService =
                     completionContext.Document.GetRequiredLanguageService<ITypeImportCompletionService>();
@@ -94,7 +96,8 @@ namespace Microsoft.CodeAnalysis.Completion.Providers
             Document document,
             SyntaxContext syntaxContext,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var syntaxFactsService = document.GetRequiredLanguageService<ISyntaxFactsService>();
             var dictionary = new MultiDictionary<string, string>(syntaxFactsService.StringComparer);
 
@@ -117,7 +120,8 @@ namespace Microsoft.CodeAnalysis.Completion.Providers
                     {
                         Target: ITypeSymbol { TypeKind: not TypeKind.Error } target
                     }
-                ) {
+                )
+                {
                     // If the target type is a type constructs from generics type, e.g.
                     // using AliasBar = Bar<int>
                     // namespace Foo
@@ -157,7 +161,8 @@ namespace Microsoft.CodeAnalysis.Completion.Providers
             HashSet<string> namespacesInScope,
             MultiDictionary<string, string> aliasTargetNamespaceToTypeNameMap,
             TelemetryCounter counter
-        ) {
+        )
+        {
             counter.ReferenceCount++;
             foreach (var item in items)
             {
@@ -176,7 +181,8 @@ namespace Microsoft.CodeAnalysis.Completion.Providers
                 CompletionItem item,
                 HashSet<string> namespacesInScope,
                 MultiDictionary<string, string> aliasTargetNamespaceToTypeNameMap
-            ) {
+            )
+            {
                 var containingNamespace = ImportCompletionItem.GetContainingNamespace(item);
                 // 1. if the namespace of the item is in scoop. Don't add the item
                 if (namespacesInScope.Contains(containingNamespace))
@@ -192,7 +198,8 @@ namespace Microsoft.CodeAnalysis.Completion.Providers
                     && aliasTargetNamespaceToTypeNameMap[containingNamespace].Contains(
                         ImportCompletionItem.GetTypeName(item)
                     )
-                ) {
+                )
+                {
                     return false;
                 }
 

@@ -108,7 +108,8 @@ namespace Microsoft.CSharp.RuntimeBinder
                 || Name != otherBinder.Name
                 || TypeArguments.Length != otherBinder.TypeArguments.Length
                 || _argumentInfo.Length != otherBinder._argumentInfo.Length
-            ) {
+            )
+            {
                 return false;
             }
 
@@ -136,7 +137,8 @@ namespace Microsoft.CSharp.RuntimeBinder
             DynamicMetaObject target,
             DynamicMetaObject[] args,
             DynamicMetaObject errorSuggestion
-        ) {
+        )
+        {
 #if ENABLECOMBINDER
             DynamicMetaObject com;
             if (ComInterop.ComBinder.TryBindInvokeMember(this, target, args, out com))
@@ -174,7 +176,8 @@ namespace Microsoft.CSharp.RuntimeBinder
             DynamicMetaObject target,
             DynamicMetaObject[] args,
             DynamicMetaObject errorSuggestion
-        ) {
+        )
+        {
             CSharpInvokeBinder c = new CSharpInvokeBinder(
                 Flags,
                 CallingContext,

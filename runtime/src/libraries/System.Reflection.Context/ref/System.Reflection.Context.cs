@@ -12,7 +12,8 @@ namespace System.Reflection.Context
         protected CustomReflectionContext(System.Reflection.ReflectionContext source) { }
         protected virtual System.Collections.Generic.IEnumerable<System.Reflection.PropertyInfo> AddProperties(
             System.Type type
-        ) {
+        )
+        {
             throw null;
         }
         protected System.Reflection.PropertyInfo CreateProperty(
@@ -20,7 +21,8 @@ namespace System.Reflection.Context
             string name,
             System.Func<object, object>? getter,
             System.Action<object, object>? setter
-        ) {
+        )
+        {
             throw null;
         }
         protected System.Reflection.PropertyInfo CreateProperty(
@@ -31,19 +33,22 @@ namespace System.Reflection.Context
             System.Collections.Generic.IEnumerable<System.Attribute>? propertyCustomAttributes,
             System.Collections.Generic.IEnumerable<System.Attribute>? getterCustomAttributes,
             System.Collections.Generic.IEnumerable<System.Attribute>? setterCustomAttributes
-        ) {
+        )
+        {
             throw null;
         }
         protected virtual System.Collections.Generic.IEnumerable<object> GetCustomAttributes(
             System.Reflection.MemberInfo member,
             System.Collections.Generic.IEnumerable<object> declaredAttributes
-        ) {
+        )
+        {
             throw null;
         }
         protected virtual System.Collections.Generic.IEnumerable<object> GetCustomAttributes(
             System.Reflection.ParameterInfo parameter,
             System.Collections.Generic.IEnumerable<object> declaredAttributes
-        ) {
+        )
+        {
             throw null;
         }
         public override System.Reflection.Assembly MapAssembly(System.Reflection.Assembly assembly)

@@ -41,7 +41,8 @@ namespace Newtonsoft.Json.Linq
             bool writeDateConstructorAsDate,
             bool writeComments,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             // Since JTokenReader is a common target (and with an optimised path) and since it can't
             // read truly async, catch that case.
             if (reader is JTokenReader)

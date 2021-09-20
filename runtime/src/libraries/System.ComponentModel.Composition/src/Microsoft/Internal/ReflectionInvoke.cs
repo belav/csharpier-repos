@@ -16,7 +16,8 @@ namespace Microsoft.Internal
         public static object SafeInvoke(
             this ConstructorInfo constructor,
             params object?[]? arguments
-        ) {
+        )
+        {
             return constructor.Invoke(arguments);
         }
 
@@ -24,7 +25,8 @@ namespace Microsoft.Internal
             this MethodInfo method,
             object? instance,
             params object?[]? arguments
-        ) {
+        )
+        {
             return method.Invoke(instance, arguments);
         }
 

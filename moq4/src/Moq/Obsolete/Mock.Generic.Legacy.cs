@@ -45,7 +45,8 @@ namespace Moq
         [EditorBrowsable(EditorBrowsableState.Never)]
         public ISetupGetter<T, TProperty> ExpectGet<TProperty>(
             Expression<Func<T, TProperty>> expression
-        ) {
+        )
+        {
             return SetupGet(expression);
         }
 
@@ -56,7 +57,8 @@ namespace Moq
         [EditorBrowsable(EditorBrowsableState.Never)]
         public ISetupSetter<T, TProperty> ExpectSet<TProperty>(
             Expression<Func<T, TProperty>> expression
-        ) {
+        )
+        {
             return this.SetupSet(expression);
         }
 
@@ -71,7 +73,8 @@ namespace Moq
         public ISetupSetter<T, TProperty> ExpectSet<TProperty>(
             Expression<Func<T, TProperty>> expression,
             TProperty value
-        ) {
+        )
+        {
             throw new NotSupportedException();
         }
     }

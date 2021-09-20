@@ -29,7 +29,8 @@ namespace System.Xml.Tests
             object expected1,
             object expected2,
             string message
-        ) {
+        )
+        {
             Assert.Equal(expected1, actual);
             Assert.Equal(expected2, actual);
             return true;

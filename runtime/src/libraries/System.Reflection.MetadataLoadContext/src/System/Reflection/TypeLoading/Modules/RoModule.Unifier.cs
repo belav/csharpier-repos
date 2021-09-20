@@ -62,7 +62,8 @@ namespace System.Reflection.TypeLoading
         internal RoConstructedGenericType GetUniqueConstructedGenericType(
             RoDefinitionType genericTypeDefinition,
             RoType[] genericTypeArguments
-        ) {
+        )
+        {
             return _constructedGenericTypeDict.GetOrAdd(
                 new RoConstructedGenericType.Key(genericTypeDefinition, genericTypeArguments),
                 s_constructedGenericTypeFactory

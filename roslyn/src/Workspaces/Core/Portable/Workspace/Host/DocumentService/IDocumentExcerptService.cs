@@ -79,7 +79,8 @@ namespace Microsoft.CodeAnalysis.Host
             ImmutableArray<ClassifiedSpan> classifiedSpans,
             Document document,
             TextSpan span
-        ) {
+        )
+        {
             Content = content;
             MappedSpan = mappedSpan;
             ClassifiedSpans = classifiedSpans;

@@ -24,7 +24,8 @@ namespace System.Xml
         async Task<IDtdInfo> IDtdParser.ParseInternalDtdAsync(
             IDtdParserAdapter adapter,
             bool saveInternalSubset
-        ) {
+        )
+        {
             Initialize(adapter);
             await ParseAsync(saveInternalSubset).ConfigureAwait(false);
             return _schemaInfo;
@@ -37,7 +38,8 @@ namespace System.Xml
             string systemId,
             string internalSubset,
             IDtdParserAdapter adapter
-        ) {
+        )
+        {
             InitializeFreeFloatingDtd(
                 baseUri,
                 docTypeName,
@@ -171,7 +173,8 @@ namespace System.Xml
             if (
                 !await _readerAdapter.PushExternalSubsetAsync(_systemId, _publicId)
                     .ConfigureAwait(false)
-            ) {
+            )
+            {
                 return;
             }
 
@@ -242,7 +245,8 @@ namespace System.Xml
                             if (
                                 _validate
                                 && _currentEntityId != _condSectionEntityIds![_condSectionDepth]
-                            ) {
+                            )
+                            {
                                 SendValidationEvent(
                                     _curPos,
                                     XmlSeverityType.Error,
@@ -275,7 +279,8 @@ namespace System.Xml
                             if (
                                 await GetTokenAsync(false).ConfigureAwait(false)
                                 != Token.GreaterThan
-                            ) {
+                            )
+                            {
                                 ThrowUnexpectedToken(_curPos, ">");
                             }
 #if DEBUG
@@ -373,7 +378,8 @@ namespace System.Xml
                                 && attrDef.Prefix.Length > 0
                                 && attrDef.Prefix.Equals("xml")
                                 && attrDef.Name.Name == "space"
-                            ) {
+                            )
+                            {
                                 attrDef.Reserved = SchemaAttDef.Reserve.XmlSpace;
                                 if (attrDef.Datatype.TokenizedType != XmlTokenizedType.ENUMERATION)
                                 {
@@ -461,7 +467,8 @@ namespace System.Xml
             SchemaAttDef attrDef,
             SchemaElementDecl elementDecl,
             bool ignoreErrors
-        ) {
+        )
+        {
             Token token = await GetTokenAsync(true).ConfigureAwait(false);
 
             if (token != Token.CDATA)
@@ -487,7 +494,8 @@ namespace System.Xml
                                     idAttrDef == null
                                     || idAttrDef.Datatype.TokenizedType != XmlTokenizedType.ID
                                 ) && !ignoreErrors
-                            ) {
+                            )
+                            {
                                 SendValidationEvent(
                                     XmlSeverityType.Error,
                                     SR.Sch_IdAttrDeclared,
@@ -519,7 +527,8 @@ namespace System.Xml
                             && elementDecl.ContentValidator.ContentType
                                 == XmlSchemaContentType.Empty
                             && !ignoreErrors
-                        ) {
+                        )
+                        {
                             SendValidationEvent(
                                 _curPos - 8,
                                 XmlSeverityType.Error,
@@ -554,7 +563,8 @@ namespace System.Xml
                         && attrDef.Values != null
                         && attrDef.Values.Contains(notationName)
                         && !ignoreErrors
-                    ) {
+                    )
+                    {
                         SendValidationEvent(
                             XmlSeverityType.Error,
                             new XmlSchemaException(
@@ -607,7 +617,8 @@ namespace System.Xml
                                 && attrDef.Values != null
                                 && attrDef.Values.Contains(nmtoken)
                                 && !ignoreErrors
-                            ) {
+                            )
+                            {
                                 SendValidationEvent(
                                     XmlSeverityType.Error,
                                     new XmlSchemaException(
@@ -788,7 +799,8 @@ namespace System.Xml
         private async Task ParseElementOnlyContentAsync(
             ParticleContentValidator pcv,
             int startParenEntityId
-        ) {
+        )
+        {
             Stack<ParseElementOnlyContent_LocalFrame> localFrames =
                 new Stack<ParseElementOnlyContent_LocalFrame>();
             ParseElementOnlyContent_LocalFrame currentFrame =
@@ -904,7 +916,8 @@ namespace System.Xml
         private async Task ParseElementMixedContentAsync(
             ParticleContentValidator pcv,
             int startParenEntityId
-        ) {
+        )
+        {
             bool hasNames = false;
             int connectorEntityId = -1;
             int contentEntityId = _currentEntityId;
@@ -927,7 +940,8 @@ namespace System.Xml
                         if (
                             await GetTokenAsync(false).ConfigureAwait(false) == Token.Star
                             && hasNames
-                        ) {
+                        )
+                        {
                             pcv.AddStar();
                         }
                         else if (hasNames)
@@ -1282,7 +1296,8 @@ namespace System.Xml
         private async Task<(string?, string?)> ParseExternalIdAsync(
             Token idTokenType,
             Token declType
-        ) {
+        )
+        {
             string? publicId;
             string? systemId;
 
@@ -1451,7 +1466,8 @@ namespace System.Xml
                             needWhiteSpace
                             && !_whitespaceSeen
                             && _scanningFunction != ScanningFunction.ParamEntitySpace
-                        ) {
+                        )
+                        {
                             Throw(
                                 _curPos,
                                 SR.Xml_ExpectingWhiteSpace,
@@ -1577,7 +1593,8 @@ namespace System.Xml
                                                 || _chars[_curPos + 6] != 'E'
                                                 || _chars[_curPos + 7] != 'N'
                                                 || _chars[_curPos + 8] != 'T'
-                                            ) {
+                                            )
+                                            {
                                                 Throw(_curPos, SR.Xml_ExpectDtdMarkup);
                                             }
                                             _curPos += 9;
@@ -1596,7 +1613,8 @@ namespace System.Xml
                                                 || _chars[_curPos + 5] != 'I'
                                                 || _chars[_curPos + 6] != 'T'
                                                 || _chars[_curPos + 7] != 'Y'
-                                            ) {
+                                            )
+                                            {
                                                 Throw(_curPos, SR.Xml_ExpectDtdMarkup);
                                             }
                                             _curPos += 8;
@@ -1625,7 +1643,8 @@ namespace System.Xml
                                             || _chars[_curPos + 6] != 'I'
                                             || _chars[_curPos + 7] != 'S'
                                             || _chars[_curPos + 8] != 'T'
-                                        ) {
+                                        )
+                                        {
                                             Throw(_curPos, SR.Xml_ExpectDtdMarkup);
                                         }
                                         _curPos += 9;
@@ -1646,7 +1665,8 @@ namespace System.Xml
                                             || _chars[_curPos + 7] != 'I'
                                             || _chars[_curPos + 8] != 'O'
                                             || _chars[_curPos + 9] != 'N'
-                                        ) {
+                                        )
+                                        {
                                             Throw(_curPos, SR.Xml_ExpectDtdMarkup);
                                         }
                                         _curPos += 10;
@@ -1806,7 +1826,8 @@ namespace System.Xml
                             && _chars[_curPos + 2] == 'P'
                             && _chars[_curPos + 3] == 'T'
                             && _chars[_curPos + 4] == 'Y'
-                        ) {
+                        )
+                        {
                             _curPos += 5;
                             _scanningFunction = ScanningFunction.ClosingTag;
                             return Token.EMPTY;
@@ -1854,7 +1875,8 @@ namespace System.Xml
                     && _chars[_curPos + 4] == 'A'
                     && _chars[_curPos + 5] == 'T'
                     && _chars[_curPos + 6] == 'A'
-                ) {
+                )
+                {
                     _curPos += 7;
                     _scanningFunction = ScanningFunction.Element6;
                     return Token.PCDATA;
@@ -1925,7 +1947,8 @@ namespace System.Xml
                             || _chars[_curPos + 2] != 'A'
                             || _chars[_curPos + 3] != 'T'
                             || _chars[_curPos + 4] != 'A'
-                        ) {
+                        )
+                        {
                             Throw(_curPos, SR.Xml_InvalidAttributeType1);
                         }
                         _curPos += 5;
@@ -1940,7 +1963,8 @@ namespace System.Xml
                             || _chars[_curPos + 2] != 'T'
                             || _chars[_curPos + 3] != 'I'
                             || _chars[_curPos + 4] != 'T'
-                        ) {
+                        )
+                        {
                             Throw(_curPos, SR.Xml_InvalidAttributeType);
                         }
                         switch (_chars[_curPos + 5])
@@ -2005,7 +2029,8 @@ namespace System.Xml
                                     || _chars[_curPos + 5] != 'I'
                                     || _chars[_curPos + 6] != 'O'
                                     || _chars[_curPos + 7] != 'N'
-                                ) {
+                                )
+                                {
                                     Throw(_curPos, SR.Xml_InvalidAttributeType);
                                 }
                                 _curPos += 8;
@@ -2018,7 +2043,8 @@ namespace System.Xml
                                     || _chars[_curPos + 4] != 'K'
                                     || _chars[_curPos + 5] != 'E'
                                     || _chars[_curPos + 6] != 'N'
-                                ) {
+                                )
+                                {
                                     Throw(_curPos, SR.Xml_InvalidAttributeType);
                                 }
                                 _scanningFunction = ScanningFunction.Attlist6;
@@ -2078,7 +2104,8 @@ namespace System.Xml
                                     || _chars[_curPos + 6] != 'R'
                                     || _chars[_curPos + 7] != 'E'
                                     || _chars[_curPos + 8] != 'D'
-                                ) {
+                                )
+                                {
                                     Throw(_curPos, SR.Xml_ExpectAttType);
                                 }
                                 _curPos += 9;
@@ -2094,7 +2121,8 @@ namespace System.Xml
                                     || _chars[_curPos + 5] != 'I'
                                     || _chars[_curPos + 6] != 'E'
                                     || _chars[_curPos + 7] != 'D'
-                                ) {
+                                )
+                                {
                                     Throw(_curPos, SR.Xml_ExpectAttType);
                                 }
                                 _curPos += 8;
@@ -2106,7 +2134,8 @@ namespace System.Xml
                                     || _chars[_curPos + 3] != 'X'
                                     || _chars[_curPos + 4] != 'E'
                                     || _chars[_curPos + 5] != 'D'
-                                ) {
+                                )
+                                {
                                     Throw(_curPos, SR.Xml_ExpectAttType);
                                 }
                                 _curPos += 6;
@@ -2494,7 +2523,8 @@ namespace System.Xml
                     && _chars[_curPos + 2] == 'A'
                     && _chars[_curPos + 3] == 'T'
                     && _chars[_curPos + 4] == 'A'
-                ) {
+                )
+                {
                     _curPos += 5;
                     _scanningFunction = ScanningFunction.Name;
                     _nextScaningFunction = ScanningFunction.ClosingTag;
@@ -2561,7 +2591,8 @@ namespace System.Xml
                             || _chars[_curPos + 4] != 'D'
                             || _chars[_curPos + 5] != 'E'
                             || XmlCharType.IsNameSingleChar(_chars[_curPos + 6])
-                        ) {
+                        )
+                        {
                             goto default;
                         }
                         _nextScaningFunction = ScanningFunction.SubsetContent;
@@ -2575,7 +2606,8 @@ namespace System.Xml
                             || _chars[_curPos + 3] != 'R'
                             || _chars[_curPos + 4] != 'E'
                             || XmlCharType.IsNameSingleChar(_chars[_curPos + 5])
-                        ) {
+                        )
+                        {
                             goto default;
                         }
                         _nextScaningFunction = ScanningFunction.CondSection3;
@@ -2879,7 +2911,8 @@ namespace System.Xml
                 || _chars[_curPos + 3] != 'L'
                 || _chars[_curPos + 4] != 'I'
                 || _chars[_curPos + 5] != 'C'
-            ) {
+            )
+            {
                 return false;
             }
             _curPos += 6;
@@ -2902,7 +2935,8 @@ namespace System.Xml
                 || _chars[_curPos + 3] != 'T'
                 || _chars[_curPos + 4] != 'E'
                 || _chars[_curPos + 5] != 'M'
-            ) {
+            )
+            {
                 return false;
             }
             _curPos += 6;
@@ -2927,7 +2961,8 @@ namespace System.Xml
             bool paramEntity,
             bool inLiteral,
             bool inAttribute
-        ) {
+        )
+        {
             Debug.Assert(_chars[_curPos] == '&' || _chars[_curPos] == '%');
             _curPos++;
 
@@ -2944,7 +2979,8 @@ namespace System.Xml
             bool paramEntity,
             bool inLiteral,
             bool inAttribute
-        ) {
+        )
+        {
             Debug.Assert(_chars[_curPos - 1] == ';');
 
             SaveParsingBuffer();

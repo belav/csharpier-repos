@@ -17,7 +17,8 @@ namespace Microsoft.CodeAnalysis.ExternalAccess.Razor
 
         public RazorDocumentExcerptServiceWrapper(
             IRazorDocumentExcerptService razorDocumentExcerptService
-        ) {
+        )
+        {
             _razorDocumentExcerptService =
                 razorDocumentExcerptService
                 ?? throw new ArgumentNullException(nameof(razorDocumentExcerptService));
@@ -28,7 +29,8 @@ namespace Microsoft.CodeAnalysis.ExternalAccess.Razor
             TextSpan span,
             ExcerptMode mode,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var razorMode = mode switch
             {
                 ExcerptMode.SingleLine => RazorExcerptMode.SingleLine,

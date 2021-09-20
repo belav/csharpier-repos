@@ -86,7 +86,8 @@ namespace System.Threading.Tasks.Dataflow
                 && dataflowBlockOptions.MaxDegreeOfParallelism == 1
                 && !dataflowBlockOptions.CancellationToken.CanBeCanceled
                 && dataflowBlockOptions.BoundedCapacity == DataflowBlockOptions.Unbounded
-            ) {
+            )
+            {
                 // Initialize the SPSC fast target to handle the bulk of the processing.
                 // The SpscTargetCore is only supported when BoundedCapacity, CancellationToken,
                 // and MaxDOP are all their default values.  It's also only supported for sync
@@ -179,7 +180,8 @@ namespace System.Threading.Tasks.Dataflow
         private void ProcessMessageWithTask(
             Func<TInput, Task> action,
             KeyValuePair<TInput, long> messageWithId
-        ) {
+        )
+        {
             Debug.Assert(action != null, "action needed for processing");
             Debug.Assert(_defaultTarget != null);
 
@@ -345,7 +347,8 @@ namespace System.Threading.Tasks.Dataflow
             TInput messageValue,
             ISourceBlock<TInput>? source,
             bool consumeToAccept
-        ) {
+        )
+        {
             return _defaultTarget != null
               ? _defaultTarget.OfferMessage(messageHeader, messageValue, source, consumeToAccept)
               : _spscTarget!.OfferMessage(messageHeader, messageValue, source, consumeToAccept);

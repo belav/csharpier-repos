@@ -41,7 +41,8 @@ namespace Microsoft.CodeAnalysis.Completion
             string baseDirectoryOpt,
             ImmutableArray<string> allowableExtensions,
             CompletionItemRules itemRules
-        ) {
+        )
+        {
             Debug.Assert(searchPaths.All(path => PathUtilities.IsAbsolute(path)));
             Debug.Assert(baseDirectoryOpt == null || PathUtilities.IsAbsolute(baseDirectoryOpt));
 
@@ -140,12 +141,14 @@ namespace Microsoft.CodeAnalysis.Completion
         private ImmutableArray<CompletionItem> GetItems(
             string directoryPath,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             if (
                 !PathUtilities.IsUnixLikePlatform
                 && directoryPath.Length == 1
                 && directoryPath[0] == '\\'
-            ) {
+            )
+            {
                 // The user has typed only "\".  In this case, we want to add "\\" to the list.
                 return ImmutableArray.Create(CreateNetworkRoot());
             }
@@ -256,7 +259,8 @@ namespace Microsoft.CodeAnalysis.Completion
         private IEnumerable<CompletionItem> GetItemsInDirectory(
             string fullDirectoryPath,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             Debug.Assert(PathUtilities.IsAbsolute(fullDirectoryPath));
 
             cancellationToken.ThrowIfCancellationRequested();
@@ -288,7 +292,8 @@ namespace Microsoft.CodeAnalysis.Completion
                           ? StringComparer.Ordinal
                           : StringComparer.OrdinalIgnoreCase
                     )
-                ) {
+                )
+                {
                     continue;
                 }
 

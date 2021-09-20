@@ -35,7 +35,8 @@ namespace Internal.JitInterface
             IEnumerable<CorJitFlag> jitFlags,
             IEnumerable<KeyValuePair<string, string>> parameters,
             string jitPath = null
-        ) {
+        )
+        {
             var config = new JitConfigProvider(jitFlags, parameters);
 
             // Make sure we didn't try to initialize two instances of JIT configuration.
@@ -92,7 +93,8 @@ namespace Internal.JitInterface
         public JitConfigProvider(
             IEnumerable<CorJitFlag> jitFlags,
             IEnumerable<KeyValuePair<string, string>> parameters
-        ) {
+        )
+        {
             ArrayBuilder<CorJitFlag> jitFlagBuilder = new ArrayBuilder<CorJitFlag>();
             foreach (CorJitFlag jitFlag in jitFlags)
             {
@@ -126,7 +128,8 @@ namespace Internal.JitInterface
             if (
                 _config.TryGetValue(name, out stringValue)
                 && Int32.TryParse(stringValue, NumberStyles.AllowHexSpecifier, null, out intValue)
-            ) {
+            )
+            {
                 return intValue;
             }
 
@@ -161,7 +164,8 @@ namespace Internal.JitInterface
             if (
                 (target.Architecture == TargetArchitecture.ARM64)
                 && (target.OperatingSystem == TargetOS.OSX)
-            ) {
+            )
+            {
                 targetOSComponent = "unix_osx";
             }
 
@@ -209,7 +213,8 @@ namespace Internal.JitInterface
             char* name,
             char* retBuffer,
             int retBufferLength
-        ) {
+        )
+        {
             string result = s_instance.GetStringConfigValue(new string(name));
 
             for (int i = 0; i < Math.Min(retBufferLength, result.Length); i++)

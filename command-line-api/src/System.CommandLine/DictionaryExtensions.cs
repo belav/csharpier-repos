@@ -8,7 +8,8 @@ namespace System.CommandLine
             this IDictionary<TKey, TValue> source,
             TKey key,
             Func<TKey, TValue> create
-        ) {
+        )
+        {
             if (source.TryGetValue(key, out TValue value))
             {
                 return value;
@@ -27,7 +28,8 @@ namespace System.CommandLine
             this IDictionary<TKey, TValue> source,
             TKey key,
             TValue value
-        ) {
+        )
+        {
             if (source.ContainsKey(key))
             {
                 return false;

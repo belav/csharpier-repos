@@ -35,7 +35,8 @@ namespace System.Configuration
                 if (
                     (collection == null)
                     && (_thisElement.Properties.DefaultCollectionProperty != null)
-                ) {
+                )
+                {
                     // this is not a collection but it may contain a default collection
                     collection =
                         _thisElement[_thisElement.Properties.DefaultCollectionProperty]

@@ -38,7 +38,8 @@ namespace System.Web.Http.Results
         private UnauthorizedResult(
             IEnumerable<AuthenticationHeaderValue> challenges,
             StatusCodeResult.IDependencyProvider dependencies
-        ) {
+        )
+        {
             if (challenges == null)
             {
                 throw new ArgumentNullException("challenges");

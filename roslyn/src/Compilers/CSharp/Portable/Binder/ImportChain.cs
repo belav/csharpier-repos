@@ -43,7 +43,8 @@ namespace Microsoft.CodeAnalysis.CSharp
         public Cci.IImportScope Translate(
             Emit.PEModuleBuilder moduleBuilder,
             DiagnosticBag diagnostics
-        ) {
+        )
+        {
             for (var scope = this; scope != null; scope = scope.ParentOpt)
             {
                 if (!scope._lazyTranslatedImports.IsDefault)
@@ -63,7 +64,8 @@ namespace Microsoft.CodeAnalysis.CSharp
         private ImmutableArray<Cci.UsedNamespaceOrType> TranslateImports(
             Emit.PEModuleBuilder moduleBuilder,
             DiagnosticBag diagnostics
-        ) {
+        )
+        {
             var usedNamespaces = ArrayBuilder<Cci.UsedNamespaceOrType>.GetInstance();
 
             // NOTE: order based on dev12: extern aliases, then usings, then aliases namespaces and types
@@ -157,7 +159,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             SyntaxNode syntaxNode,
             Emit.PEModuleBuilder moduleBuilder,
             DiagnosticBag diagnostics
-        ) {
+        )
+        {
             return moduleBuilder.Translate(type, syntaxNode, diagnostics);
         }
 
@@ -165,12 +168,14 @@ namespace Microsoft.CodeAnalysis.CSharp
             NamespaceSymbol @namespace,
             Emit.PEModuleBuilder moduleBuilder,
             DiagnosticBag diagnostics
-        ) {
+        )
+        {
             AssemblySymbol containingAssembly = @namespace.ContainingAssembly;
             if (
                 (object)containingAssembly != null
                 && (object)containingAssembly != moduleBuilder.CommonCompilation.Assembly
-            ) {
+            )
+            {
                 var referenceManager = (
                     (CSharpCompilation)moduleBuilder.CommonCompilation
                 ).GetBoundReferenceManager();

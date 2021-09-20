@@ -20,7 +20,8 @@ namespace Microsoft.Extensions.DependencyInjection
         public static IServiceCollection AddExceptionHandler(
             this IServiceCollection services,
             Action<ExceptionHandlerOptions> configureOptions
-        ) {
+        )
+        {
             if (services == null)
             {
                 throw new ArgumentNullException(nameof(services));

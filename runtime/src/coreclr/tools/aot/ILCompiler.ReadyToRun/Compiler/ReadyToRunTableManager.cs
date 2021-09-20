@@ -101,7 +101,8 @@ namespace ILCompiler
         public IEnumerable<IMethodNode> GetCompiledMethods(
             EcmaModule moduleToEnumerate,
             CompiledMethodCategory methodCategory
-        ) {
+        )
+        {
             lock (_methodsGenerated)
             {
                 if (!_sortedMethods)
@@ -170,13 +171,15 @@ namespace ILCompiler
 
         private IEnumerable<IMethodNode> GetCompiledMethodsAllMethodsInModuleHelper(
             EcmaModule moduleToEnumerate
-        ) {
+        )
+        {
             foreach (
                 var node in GetCompiledMethods(
                     moduleToEnumerate,
                     CompiledMethodCategory.Instantiated
                 )
-            ) {
+            )
+            {
                 yield return node;
             }
             foreach (
@@ -184,7 +187,8 @@ namespace ILCompiler
                     moduleToEnumerate,
                     CompiledMethodCategory.NonInstantiated
                 )
-            ) {
+            )
+            {
                 yield return node;
             }
         }

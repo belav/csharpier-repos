@@ -29,18 +29,19 @@ namespace Microsoft.CodeAnalysis.CSharp.Diagnostics.TypeStyle
             EnforceOnBuild enforceOnBuild,
             LocalizableString title,
             LocalizableString message
-        ) : base(
-            diagnosticId,
-            enforceOnBuild,
-            ImmutableHashSet.Create<ILanguageSpecificOption>(
-                CSharpCodeStyleOptions.VarForBuiltInTypes,
-                CSharpCodeStyleOptions.VarWhenTypeIsApparent,
-                CSharpCodeStyleOptions.VarElsewhere
-            ),
-            LanguageNames.CSharp,
-            title,
-            message
-        ) { }
+        )
+            : base(
+                diagnosticId,
+                enforceOnBuild,
+                ImmutableHashSet.Create<ILanguageSpecificOption>(
+                    CSharpCodeStyleOptions.VarForBuiltInTypes,
+                    CSharpCodeStyleOptions.VarWhenTypeIsApparent,
+                    CSharpCodeStyleOptions.VarElsewhere
+                ),
+                LanguageNames.CSharp,
+                title,
+                message
+            ) { }
 
         public override DiagnosticAnalyzerCategory GetAnalyzerCategory() =>
             DiagnosticAnalyzerCategory.SemanticSpanAnalysis;

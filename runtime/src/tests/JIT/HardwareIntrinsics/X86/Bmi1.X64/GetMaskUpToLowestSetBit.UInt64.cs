@@ -77,7 +77,8 @@ namespace JIT.HardwareIntrinsics.X86
 
             public void RunStructFldScenario(
                 ScalarUnaryOpTest__GetMaskUpToLowestSetBitUInt64 testClass
-            ) {
+            )
+            {
                 var result = Bmi1.X64.GetMaskUpToLowestSetBit(_fld);
                 testClass.ValidateResult(_fld, result);
             }
@@ -216,7 +217,8 @@ namespace JIT.HardwareIntrinsics.X86
             UInt64 data,
             UInt64 result,
             [CallerMemberName] string method = ""
-        ) {
+        )
+        {
             var isUnexpectedResult = false;
 
             isUnexpectedResult = (((data - 1) ^ data) != result);

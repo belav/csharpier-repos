@@ -52,7 +52,8 @@ namespace System.Diagnostics.Tests
             };
             using (
                 var eventLog = new EventLogReader(query, Helpers.GetBookmark(log, PathType.LogName))
-            ) {
+            )
+            {
                 using (EventRecord record = eventLog.ReadEvent())
                 {
                     Assert.IsType<EventLogRecord>(record);

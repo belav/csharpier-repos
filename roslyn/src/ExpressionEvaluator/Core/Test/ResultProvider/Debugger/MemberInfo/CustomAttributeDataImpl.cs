@@ -37,7 +37,8 @@ namespace Microsoft.CodeAnalysis.ExpressionEvaluator
 
         private static CustomAttributeTypedArgument MakeTypedArgument(
             System.Reflection.CustomAttributeTypedArgument a
-        ) {
+        )
+        {
             var argumentType = (TypeImpl)a.ArgumentType;
             if (!argumentType.IsArray)
             {

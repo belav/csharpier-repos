@@ -142,7 +142,8 @@ namespace System.IO.Tests
                     FileAccess.ReadWrite,
                     FileShare.None
                 )
-            ) {
+            )
+            {
                 RemoteExecutor.Invoke(
                         (p) =>
                         {
@@ -169,7 +170,8 @@ namespace System.IO.Tests
                     FileAccess.ReadWrite,
                     FileShare.None
                 )
-            ) {
+            )
+            {
                 stream.Lock(0, 10);
 
                 RemoteExecutor.Invoke(

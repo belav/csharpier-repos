@@ -30,7 +30,8 @@ namespace Microsoft.CodeAnalysis.CSharp.ExpressionEvaluator
             string name,
             string displayName,
             TypeSymbol type
-        ) {
+        )
+        {
             _method = method;
             _name = name;
             _type = TypeWithAnnotations.Create(type);
@@ -43,7 +44,8 @@ namespace Microsoft.CodeAnalysis.CSharp.ExpressionEvaluator
             MethodSymbol containingMethod,
             AssemblySymbol sourceAssembly,
             Alias alias
-        ) {
+        )
+        {
             var typeName = alias.Type;
             Debug.Assert(typeName.Length > 0);
 
@@ -197,7 +199,8 @@ namespace Microsoft.CodeAnalysis.CSharp.ExpressionEvaluator
             BoundExpression expr,
             TypeSymbol type,
             DiagnosticBag diagnostics
-        ) {
+        )
+        {
             var bindingDiagnostics = new BindingDiagnosticBag(diagnostics);
 
             if (type.IsPointerType())
@@ -214,7 +217,8 @@ namespace Microsoft.CodeAnalysis.CSharp.ExpressionEvaluator
                         bindingDiagnostics,
                         out conversionMethod
                     )
-                ) {
+                )
+                {
                     var temp = ConvertToLocalTypeHelper(
                         compilation,
                         expr,
@@ -248,7 +252,8 @@ namespace Microsoft.CodeAnalysis.CSharp.ExpressionEvaluator
             BoundExpression expr,
             TypeSymbol type,
             BindingDiagnosticBag diagnostics
-        ) {
+        )
+        {
             Debug.Assert(diagnostics.DiagnosticBag != null);
 
             // NOTE: This conversion can fail if some of the types involved are from not-yet-loaded modules.
@@ -281,7 +286,8 @@ namespace Microsoft.CodeAnalysis.CSharp.ExpressionEvaluator
         internal static MethodSymbol GetIntrinsicMethod(
             CSharpCompilation compilation,
             string methodName
-        ) {
+        )
+        {
             var type = compilation.GetTypeByMetadataName(
                 ExpressionCompilerConstants.IntrinsicAssemblyTypeMetadataName
             );
@@ -298,7 +304,8 @@ namespace Microsoft.CodeAnalysis.CSharp.ExpressionEvaluator
             TypeSymbol type,
             AssemblySymbol sourceAssembly,
             ReadOnlyCollection<byte> bytes
-        ) {
+        )
+        {
             var builder = ArrayBuilder<bool>.GetInstance();
             DynamicFlagsCustomTypeInfo.CopyTo(bytes, builder);
             var dynamicType = DynamicTypeDecoder.TransformTypeWithoutCustomModifierFlags(

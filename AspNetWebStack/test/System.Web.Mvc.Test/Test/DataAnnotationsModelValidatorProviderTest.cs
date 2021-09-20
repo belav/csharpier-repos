@@ -750,7 +750,8 @@ namespace System.Web.Mvc.Test
             ValidationAttribute validationAttr,
             Type expectedAdapterType,
             string expectedRuleName
-        ) {
+        )
+        {
             // Arrange
             var metadata = ModelMetadataProviders.Current.GetMetadataForType(
                 () => null,

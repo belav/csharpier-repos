@@ -39,7 +39,8 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Diagnostics
             string code,
             ParseOptions options,
             Func<string, bool> verifier
-        ) {
+        )
+        {
             var set = new HashSet<ValueTuple<SyntaxToken, SyntaxToken>>();
             return TestPragmaOrAttributeAsync(
                 code,
@@ -67,7 +68,8 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Diagnostics
             ParseOptions options,
             Func<SyntaxNode, bool> digInto,
             Func<string, bool> verifier
-        ) {
+        )
+        {
             var set = new HashSet<ISymbol>();
             return TestPragmaOrAttributeAsync(
                 code,
@@ -96,7 +98,8 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Diagnostics
             Func<SyntaxNode, bool> digInto,
             Func<string, bool> verifier,
             Func<CodeAction, bool> fixChecker
-        ) {
+        )
+        {
             using (var workspace = CreateWorkspaceFromFile(code, options))
             {
                 var (analyzer, fixer) = CreateDiagnosticProviderAndFixer(workspace);

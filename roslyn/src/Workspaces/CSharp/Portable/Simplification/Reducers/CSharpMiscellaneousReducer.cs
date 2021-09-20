@@ -30,12 +30,14 @@ namespace Microsoft.CodeAnalysis.CSharp.Simplification
             ParameterSyntax parameterSyntax,
             SemanticModel semanticModel,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             // We reduce any the parameters that are contained inside ParameterList
             if (
                 parameterSyntax.IsParentKind(SyntaxKind.ParameterList)
                 && parameterSyntax.Parent.IsParentKind(SyntaxKind.ParenthesizedLambdaExpression)
-            ) {
+            )
+            {
                 if (parameterSyntax.Type != null)
                 {
                     var annotation = new SyntaxAnnotation();
@@ -69,7 +71,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Simplification
                         oldSymbol != null
                         && newSymbol != null
                         && Equals(oldSymbol.Type, newSymbol.Type)
-                    ) {
+                    )
+                    {
                         return !speculationAnalyzer.ReplacementChangesSemantics();
                     }
                 }
@@ -91,7 +94,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Simplification
             SemanticModel semanticModel,
             OptionSet optionSet,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             if (CanRemoveTypeFromParameter(node, semanticModel, cancellationToken))
             {
                 var newParameterSyntax = node.WithType(null);
@@ -116,11 +120,13 @@ namespace Microsoft.CodeAnalysis.CSharp.Simplification
             SemanticModel semanticModel,
             OptionSet optionSet,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             if (
                 parenthesizedLambda.ParameterList != null
                 && parenthesizedLambda.ParameterList.Parameters.Count == 1
-            ) {
+            )
+            {
                 var parameter = parenthesizedLambda.ParameterList.Parameters.First();
                 if (CanRemoveTypeFromParameter(parameter, semanticModel, cancellationToken))
                 {
@@ -158,7 +164,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Simplification
             SemanticModel semanticModel,
             OptionSet optionSet,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             if (node.Statements.Count != 1)
             {
                 return node;
@@ -199,7 +206,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Simplification
                             node.Statements[0].GetFirstToken(),
                             node.Statements[0].GetLastToken()
                         )
-                    ) {
+                    )
+                    {
                         // Braces are not removed when the embedded statement is multiline
                         return node;
                     }
@@ -209,7 +217,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Simplification
                             node.Parent.GetFirstToken(),
                             node.GetFirstToken().GetPreviousToken()
                         )
-                    ) {
+                    )
+                    {
                         // Braces are not removed when the part of the 'if' statement preceding the embedded statement
                         // is multiline.
                         return node;

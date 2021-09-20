@@ -220,7 +220,8 @@ namespace Microsoft.AspNetCore.Mvc.Filters
         public void Execute_DoesNotSetLocationOrDuration_IfNoStoreIsSet(
             CacheProfile cacheProfile,
             string output
-        ) {
+        )
+        {
             // Arrange
             var executor = new ResponseCacheFilterExecutor(cacheProfile);
             var context = GetActionExecutingContext();
@@ -303,7 +304,8 @@ namespace Microsoft.AspNetCore.Mvc.Filters
             CacheProfile cacheProfile,
             string varyOutput,
             string cacheControlOutput
-        ) {
+        )
+        {
             // Arrange
             var executor = new ResponseCacheFilterExecutor(cacheProfile);
             var context = GetActionExecutingContext();
@@ -387,7 +389,8 @@ namespace Microsoft.AspNetCore.Mvc.Filters
             CacheProfile cacheProfile,
             string[] varyOutput,
             string cacheControlOutput
-        ) {
+        )
+        {
             // Arrange
             var executor = new ResponseCacheFilterExecutor(cacheProfile);
             var context = GetActionExecutingContext();
@@ -535,7 +538,8 @@ namespace Microsoft.AspNetCore.Mvc.Filters
 
         private ActionExecutingContext GetActionExecutingContext(
             List<IFilterMetadata> filters = null
-        ) {
+        )
+        {
             return new ActionExecutingContext(
                 new ActionContext(
                     new DefaultHttpContext(),

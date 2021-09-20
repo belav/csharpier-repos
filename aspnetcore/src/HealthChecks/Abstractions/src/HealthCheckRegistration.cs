@@ -60,7 +60,8 @@ namespace Microsoft.Extensions.Diagnostics.HealthChecks
             HealthStatus? failureStatus,
             IEnumerable<string>? tags,
             TimeSpan? timeout
-        ) {
+        )
+        {
             if (name == null)
             {
                 throw new ArgumentNullException(nameof(name));
@@ -120,7 +121,8 @@ namespace Microsoft.Extensions.Diagnostics.HealthChecks
             HealthStatus? failureStatus,
             IEnumerable<string>? tags,
             TimeSpan? timeout
-        ) {
+        )
+        {
             if (name == null)
             {
                 throw new ArgumentNullException(nameof(name));

@@ -37,7 +37,8 @@ namespace System.Resources
             Dictionary<string, ResourceSet> localResourceSets,
             bool tryParents,
             bool createIfNotExists
-        ) {
+        )
+        {
             Debug.Assert(culture != null, "culture shouldn't be null; check caller");
 
             ResourceSet? rs = null;

@@ -51,7 +51,8 @@ namespace Microsoft.CodeAnalysis.Remote
                 ServiceActivationOptions serviceActivationOptions,
                 IServiceBroker serviceBroker,
                 AuthorizationServiceClient? authorizationServiceClient
-            ) {
+            )
+            {
                 // Dispose the AuthorizationServiceClient since we won't be using it
                 authorizationServiceClient?.Dispose();
 
@@ -79,7 +80,8 @@ namespace Microsoft.CodeAnalysis.Remote
                 IServiceProvider hostProvidedServices,
                 ServiceActivationOptions serviceActivationOptions,
                 IServiceBroker serviceBroker
-            ) {
+            )
+            {
                 var descriptor = ServiceDescriptors.Instance.GetServiceDescriptorForServiceFactory(
                     typeof(TService)
                 );
@@ -127,7 +129,8 @@ namespace Microsoft.CodeAnalysis.Remote
                 ServiceRpcDescriptor descriptor,
                 ServiceRpcDescriptor.RpcConnection serverConnection,
                 object? clientRpcTarget
-            ) {
+            )
+            {
                 Contract.ThrowIfNull(descriptor.ClientInterface);
                 var callback = (TCallback)(
                     clientRpcTarget

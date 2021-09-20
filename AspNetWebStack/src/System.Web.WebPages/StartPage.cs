@@ -87,7 +87,8 @@ namespace System.Web.WebPages
             WebPageRenderingBase page,
             string fileName,
             IEnumerable<string> supportedExtensions
-        ) {
+        )
+        {
             if (page == null)
             {
                 throw new ArgumentNullException("page");
@@ -124,7 +125,8 @@ namespace System.Web.WebPages
             string appDomainAppVirtualPath,
             string fileName,
             IEnumerable<string> supportedExtensions
-        ) {
+        )
+        {
             // Build up a list of pages to execute, such as one of the following:
             // ~/somepage.cshtml
             // ~/_pageStart.cshtml --> ~/somepage.cshtml
@@ -139,7 +141,8 @@ namespace System.Web.WebPages
                 !String.IsNullOrEmpty(pageDirectory)
                 && pageDirectory != "/"
                 && PathUtil.IsWithinAppRoot(appDomainAppVirtualPath, pageDirectory)
-            ) {
+            )
+            {
                 // Go through the list of supported extensions
                 foreach (var extension in supportedExtensions)
                 {

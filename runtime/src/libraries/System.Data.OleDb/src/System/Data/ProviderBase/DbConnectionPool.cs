@@ -53,7 +53,8 @@ namespace System.Data.ProviderBase
                 DbConnection owner,
                 TaskCompletionSource<DbConnectionInternal> completion,
                 DbConnectionOptions? userOptions
-            ) {
+            )
+            {
                 DueTime = dueTime;
                 Owner = owner;
                 Completion = completion;
@@ -129,7 +130,8 @@ namespace System.Data.ProviderBase
             internal void PutTransactedObject(
                 SysTx.Transaction transaction,
                 DbConnectionInternal transactedObject
-            ) {
+            )
+            {
                 Debug.Assert(null != transaction, "null transaction?");
                 Debug.Assert(null != transactedObject, "null transactedObject?");
 
@@ -182,7 +184,8 @@ namespace System.Data.ProviderBase
                             //   transacted pool while threadA was processing the above instructions.
                             if (
                                 txnFound = _transactedCxns.TryGetValue(transaction, out connections)
-                            ) {
+                            )
+                            {
                                 Debug.Assert(connections != null);
 
                                 // synchronize multi-threaded access with GetTransactedObject
@@ -398,7 +401,8 @@ namespace System.Data.ProviderBase
             DbConnectionFactory connectionFactory,
             DbConnectionPoolGroup connectionPoolGroup,
             DbConnectionPoolIdentity identity
-        ) {
+        )
+        {
             Debug.Assert(ADP.IsWindowsNT, "Attempting to construct a connection pool on Win9x?");
             Debug.Assert(null != connectionPoolGroup, "null connectionPoolGroup");
 
@@ -558,7 +562,8 @@ namespace System.Data.ProviderBase
             { // While above MinPoolSize...
                 if (
                     _waitHandles.PoolSemaphore.WaitOne(0, false) /* != WAIT_TIMEOUT */
-                ) {
+                )
+                {
                     // We obtained a objects from the semaphore.
                     DbConnectionInternal? obj;
 
@@ -617,7 +622,8 @@ namespace System.Data.ProviderBase
             // new stack to old stack.
             if (
                 _waitHandles.PoolSemaphore.WaitOne(0, false) /* != WAIT_TIMEOUT */
-            ) {
+            )
+            {
                 while (true)
                 {
                     DbConnectionInternal? obj;
@@ -691,7 +697,8 @@ namespace System.Data.ProviderBase
             DbConnection? owningObject,
             DbConnectionOptions? userOptions,
             DbConnectionInternal? oldConnection
-        ) {
+        )
+        {
             DbConnectionInternal? newObj = null;
 
             try
@@ -1122,7 +1129,8 @@ namespace System.Data.ProviderBase
             TaskCompletionSource<DbConnectionInternal>? retry,
             DbConnectionOptions? userOptions,
             out DbConnectionInternal? connection
-        ) {
+        )
+        {
             uint waitForMultipleObjectsTimeout = 0;
             bool allowCreate = false;
 
@@ -1153,7 +1161,8 @@ namespace System.Data.ProviderBase
                     userOptions,
                     out connection
                 )
-            ) {
+            )
+            {
                 return true;
             }
             else if (retry == null)
@@ -1191,7 +1200,8 @@ namespace System.Data.ProviderBase
             bool onlyOneCheckConnection,
             DbConnectionOptions? userOptions,
             out DbConnectionInternal? connection
-        ) {
+        )
+        {
             DbConnectionInternal? obj = null;
             SysTx.Transaction? transaction = null;
 
@@ -1333,7 +1343,8 @@ namespace System.Data.ProviderBase
                                             _waitHandles.CreationSemaphore.WaitOne(
                                                 unchecked((int)waitForMultipleObjectsTimeout)
                                             )
-                                        ) {
+                                        )
+                                        {
                                             RuntimeHelpers.PrepareConstrainedRegions();
                                             try
                                             {
@@ -1428,7 +1439,8 @@ namespace System.Data.ProviderBase
             DbConnection owningObject,
             DbConnectionInternal obj,
             SysTx.Transaction? transaction
-        ) {
+        )
+        {
             lock (obj)
             { // Protect against Clear and ReclaimEmancipatedObjects, which call IsEmancipated, which is affected by PrePush and PostPop
                 obj.PostPop(owningObject);
@@ -1457,7 +1469,8 @@ namespace System.Data.ProviderBase
             DbConnection owningObject,
             DbConnectionOptions? userOptions,
             DbConnectionInternal? oldConnection
-        ) {
+        )
+        {
             PerformanceCounters.SoftConnectsPerSecond.Increment();
 
             DbConnectionInternal? newConnection = UserCreateRequest(
@@ -1578,7 +1591,8 @@ namespace System.Data.ProviderBase
                         if (
                             UsingIntegrateSecurity
                             && !_identity!.Equals(DbConnectionPoolIdentity.GetCurrent())
-                        ) {
+                        )
+                        {
                             return;
                         }
                         bool mustRelease = false;
@@ -1843,7 +1857,8 @@ namespace System.Data.ProviderBase
             DbConnection owningObject,
             DbConnectionOptions? userOptions,
             DbConnectionInternal? oldConnection = null
-        ) {
+        )
+        {
             // called by user when they were not able to obtain a free object but
             // instead obtained creation mutex
 

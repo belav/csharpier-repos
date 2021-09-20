@@ -144,7 +144,8 @@ namespace Tests.System.IO
             string second,
             StringComparison comparisonType,
             bool expected
-        ) {
+        )
+        {
             Assert.Equal(expected, PathInternal.AreRootsEqual(first, second, comparisonType));
         }
 

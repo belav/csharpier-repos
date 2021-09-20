@@ -70,7 +70,8 @@ namespace Microsoft.AspNetCore.Mvc.Controllers
                     ControllerTypeNameSuffix,
                     StringComparison.OrdinalIgnoreCase
                 ) && !typeInfo.IsDefined(typeof(ControllerAttribute))
-            ) {
+            )
+            {
                 return false;
             }
 

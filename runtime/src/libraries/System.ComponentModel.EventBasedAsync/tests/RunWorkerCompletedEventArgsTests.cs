@@ -48,7 +48,8 @@ namespace System.ComponentModel.EventBasedAsync.Tests
             Exception expectedError,
             bool cancelled,
             Type expectedExceptionType
-        ) {
+        )
+        {
             var target = new RunWorkerCompletedEventArgs(expectedResult, expectedError, cancelled);
 
             if (expectedExceptionType == null) // if null should NOT throw

@@ -24,7 +24,8 @@ namespace Microsoft.Data.Sqlite
             SqliteConnection connection,
             IsolationLevel isolationLevel,
             bool deferred
-        ) {
+        )
+        {
             if (
                 (
                     isolationLevel == IsolationLevel.ReadUncommitted
@@ -34,7 +35,8 @@ namespace Microsoft.Data.Sqlite
                 )
                 || isolationLevel == IsolationLevel.ReadCommitted
                 || isolationLevel == IsolationLevel.RepeatableRead
-            ) {
+            )
+            {
                 isolationLevel = IsolationLevel.Serializable;
             }
 

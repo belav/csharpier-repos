@@ -15,12 +15,14 @@ namespace Microsoft.Extensions.DependencyInjection
         ) { }
         public Microsoft.Extensions.DependencyInjection.IServiceCollection CreateBuilder(
             Microsoft.Extensions.DependencyInjection.IServiceCollection services
-        ) {
+        )
+        {
             throw null;
         }
         public System.IServiceProvider CreateServiceProvider(
             Microsoft.Extensions.DependencyInjection.IServiceCollection containerBuilder
-        ) {
+        )
+        {
             throw null;
         }
     }
@@ -83,19 +85,22 @@ namespace Microsoft.Extensions.DependencyInjection
     {
         public static Microsoft.Extensions.DependencyInjection.ServiceProvider BuildServiceProvider(
             this Microsoft.Extensions.DependencyInjection.IServiceCollection services
-        ) {
+        )
+        {
             throw null;
         }
         public static Microsoft.Extensions.DependencyInjection.ServiceProvider BuildServiceProvider(
             this Microsoft.Extensions.DependencyInjection.IServiceCollection services,
             Microsoft.Extensions.DependencyInjection.ServiceProviderOptions options
-        ) {
+        )
+        {
             throw null;
         }
         public static Microsoft.Extensions.DependencyInjection.ServiceProvider BuildServiceProvider(
             this Microsoft.Extensions.DependencyInjection.IServiceCollection services,
             bool validateScopes
-        ) {
+        )
+        {
             throw null;
         }
     }

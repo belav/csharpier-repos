@@ -34,7 +34,8 @@ internal partial class VectorTest
                     (Vector.Abs(sum) - new Vector<T>(checkValue)),
                     new Vector<T>(allowableError)
                 )
-            ) {
+            )
+            {
                 return Pass;
             }
             else
@@ -57,14 +58,16 @@ internal partial class VectorTest
                 Single.Epsilon,
                 1E-06f
             ) != Pass
-        ) {
+        )
+        {
             returnVal = Fail;
         }
 
         if (
             VectorExpTest<double>.VectorExp(Vector<double>.One, Math.Exp(1d), Double.Epsilon, 1E-14)
             != Pass
-        ) {
+        )
+        {
             returnVal = Fail;
         }
 

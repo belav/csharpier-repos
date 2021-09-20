@@ -80,7 +80,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions.Infrastructure
             IDbSetFinder setFinder,
             ICurrentDbContext currentContext,
             IModelValidator validator
-        ) {
+        )
+        {
             Check.NotNull(typeMappingSource, nameof(typeMappingSource));
             Check.NotNull(constructorBindingFactory, nameof(constructorBindingFactory));
             Check.NotNull(parameterBindingFactories, nameof(parameterBindingFactories));

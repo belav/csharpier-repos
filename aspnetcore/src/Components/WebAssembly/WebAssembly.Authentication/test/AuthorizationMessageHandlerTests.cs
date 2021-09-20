@@ -258,7 +258,8 @@ namespace Microsoft.AspNetCore.Components.WebAssembly.Authentication
         protected override Task<HttpResponseMessage> SendAsync(
             HttpRequestMessage request,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             _response.RequestMessage = request;
             return Task.FromResult(_response);
         }

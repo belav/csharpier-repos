@@ -55,7 +55,8 @@ namespace Microsoft.AspNetCore.Routing.Matching
             string path,
             string[] keys,
             string[] values
-        ) {
+        )
+        {
             // Arrange
             var (matcher, endpoint) = CreateMatcher(template);
             var httpContext = CreateContext(path);
@@ -171,7 +172,8 @@ namespace Microsoft.AspNetCore.Routing.Matching
             string path,
             string[] keys,
             string[] values
-        ) {
+        )
+        {
             // Arrange
             var (matcher, endpoint) = CreateMatcher(template);
             var httpContext = CreateContext(path);
@@ -237,7 +239,8 @@ namespace Microsoft.AspNetCore.Routing.Matching
             string path,
             string[] keys,
             string[] values
-        ) {
+        )
+        {
             // Arrange
             var (matcher, endpoint) = CreateMatcher(template);
             var httpContext = CreateContext(path);
@@ -261,7 +264,8 @@ namespace Microsoft.AspNetCore.Routing.Matching
             string path,
             string[] keys,
             string[] values
-        ) {
+        )
+        {
             // Arrange
             var (matcher, endpoint) = CreateMatcher(template);
             var httpContext = CreateContext(path);
@@ -345,7 +349,8 @@ namespace Microsoft.AspNetCore.Routing.Matching
             string path,
             string[] keys,
             string[] values
-        ) {
+        )
+        {
             // Arrange
             var (matcher, endpoint) = CreateMatcher(template);
             var httpContext = CreateContext(path);
@@ -443,7 +448,8 @@ namespace Microsoft.AspNetCore.Routing.Matching
             string path,
             string[] keys,
             string[] values
-        ) {
+        )
+        {
             // Arrange
             var (matcher, endpoint) = CreateMatcher(template);
             var httpContext = CreateContext(path);
@@ -533,7 +539,8 @@ namespace Microsoft.AspNetCore.Routing.Matching
             string path,
             string[] keys,
             string[] values
-        ) {
+        )
+        {
             // Arrange
             var (matcher, endpoint) = CreateMatcher(template);
             var httpContext = CreateContext(path);
@@ -560,7 +567,8 @@ namespace Microsoft.AspNetCore.Routing.Matching
         public virtual async Task Match_SelectEndpoint_BasedOnPrecedence(
             string template1,
             string template2
-        ) {
+        )
+        {
             // Arrange
             var expected = CreateEndpoint(template1);
             var other = CreateEndpoint(template2);
@@ -596,7 +604,8 @@ namespace Microsoft.AspNetCore.Routing.Matching
         public virtual async Task Match_SelectEndpoint_BasedOnOrder(
             string template1,
             string template2
-        ) {
+        )
+        {
             // Arrange
             var expected = CreateEndpoint(template1, order: 0);
             var other = CreateEndpoint(template2, order: 1);
@@ -651,7 +660,8 @@ namespace Microsoft.AspNetCore.Routing.Matching
         public virtual async Task Match_IntegrationTest_MultipleEndpoints(
             string path,
             string expectedTemplate
-        ) {
+        )
+        {
             // Arrange
             var templates = new[]
             {

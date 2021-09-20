@@ -48,7 +48,8 @@ namespace Microsoft.CodeAnalysis.ExpressionEvaluator.UnitTests
             int endOffset,
             ImmutableArray<string> locals,
             bool isEndInclusive
-        ) {
+        )
+        {
             this.StartOffset = startOffset;
             this.EndOffset = endOffset + (isEndInclusive ? 1 : 0);
             this.Locals = locals;
@@ -74,7 +75,8 @@ namespace Microsoft.CodeAnalysis.ExpressionEvaluator.UnitTests
             out string error,
             CompilationTestData testData = null,
             DiagnosticFormatter formatter = null
-        ) {
+        )
+        {
             ResultProperties resultProperties;
             ImmutableArray<AssemblyIdentity> missingAssemblyIdentities;
             var result = context.CompileAssignment(
@@ -122,7 +124,8 @@ namespace Microsoft.CodeAnalysis.ExpressionEvaluator.UnitTests
             out ImmutableArray<AssemblyIdentity> missingAssemblyIdentities,
             CultureInfo preferredUICulture,
             CompilationTestData testData
-        ) {
+        )
+        {
             var diagnostics = DiagnosticBag.GetInstance();
             var result = context.CompileAssignment(
                 target,
@@ -160,7 +163,8 @@ namespace Microsoft.CodeAnalysis.ExpressionEvaluator.UnitTests
             out string typeName,
             CompilationTestData testData,
             DiagnosticDescription[] expectedDiagnostics = null
-        ) {
+        )
+        {
             var diagnostics = DiagnosticBag.GetInstance();
             var result = context.CompileGetLocals(
                 locals,
@@ -181,7 +185,8 @@ namespace Microsoft.CodeAnalysis.ExpressionEvaluator.UnitTests
             out string error,
             CompilationTestData testData = null,
             DiagnosticFormatter formatter = null
-        ) {
+        )
+        {
             ResultProperties resultProperties;
             return CompileExpression(
                 context,
@@ -200,7 +205,8 @@ namespace Microsoft.CodeAnalysis.ExpressionEvaluator.UnitTests
             out string error,
             CompilationTestData testData = null,
             DiagnosticFormatter formatter = null
-        ) {
+        )
+        {
             ImmutableArray<AssemblyIdentity> missingAssemblyIdentities;
             var result = context.CompileExpression(
                 expr,
@@ -225,7 +231,8 @@ namespace Microsoft.CodeAnalysis.ExpressionEvaluator.UnitTests
             out string error,
             CompilationTestData testData = null,
             DiagnosticFormatter formatter = null
-        ) {
+        )
+        {
             ResultProperties resultProperties;
             ImmutableArray<AssemblyIdentity> missingAssemblyIdentities;
             var result = evaluationContext.CompileExpression(
@@ -260,7 +267,8 @@ namespace Microsoft.CodeAnalysis.ExpressionEvaluator.UnitTests
             out ImmutableArray<AssemblyIdentity> missingAssemblyIdentities,
             CultureInfo preferredUICulture,
             CompilationTestData testData
-        ) {
+        )
+        {
             var diagnostics = DiagnosticBag.GetInstance();
             var result = evaluationContext.CompileExpression(
                 expr,
@@ -297,7 +305,8 @@ namespace Microsoft.CodeAnalysis.ExpressionEvaluator.UnitTests
             ExpressionCompiler.CompileDelegate<CompileResult> compile,
             DkmUtilities.GetMetadataBytesPtrFunction getMetaDataBytesPtr,
             out string errorMessage
-        ) {
+        )
+        {
             return ExpressionCompiler.CompileWithRetry(
                 metadataBlocks,
                 DebuggerDiagnosticFormatter.Instance,
@@ -316,7 +325,8 @@ namespace Microsoft.CodeAnalysis.ExpressionEvaluator.UnitTests
             DkmUtilities.GetMetadataBytesPtrFunction getMetaDataBytesPtr,
             out string errorMessage,
             out CompilationTestData testData
-        ) {
+        )
+        {
             var r = ExpressionCompiler.CompileWithRetry(
                 metadataBlocks,
                 DebuggerDiagnosticFormatter.Instance,
@@ -350,7 +360,8 @@ namespace Microsoft.CodeAnalysis.ExpressionEvaluator.UnitTests
             internal CompileExpressionResult(
                 CompileResult compileResult,
                 CompilationTestData testData
-            ) {
+            )
+            {
                 this.CompileResult = compileResult;
                 this.TestData = testData;
             }
@@ -366,7 +377,8 @@ namespace Microsoft.CodeAnalysis.ExpressionEvaluator.UnitTests
             this MetadataReader reader,
             TypeDefinition typeDef,
             string methodName
-        ) {
+        )
+        {
             return typeDef.GetMethods()
                 .Select(reader.GetMethodDefinition)
                 .First(m => reader.StringComparer.Equals(m.Name, methodName));
@@ -376,7 +388,8 @@ namespace Microsoft.CodeAnalysis.ExpressionEvaluator.UnitTests
             this MetadataReader reader,
             TypeDefinition typeDef,
             string methodName
-        ) {
+        )
+        {
             return typeDef.GetMethods()
                 .First(
                     h =>
@@ -388,7 +401,8 @@ namespace Microsoft.CodeAnalysis.ExpressionEvaluator.UnitTests
             this MetadataReader reader,
             GenericParameterHandleCollection genericParameters,
             params string[] expectedNames
-        ) {
+        )
+        {
             var actualNames = genericParameters.Select(reader.GetGenericParameter)
                 .Select(tp => reader.GetString(tp.Name))
                 .ToArray();
@@ -418,7 +432,8 @@ namespace Microsoft.CodeAnalysis.ExpressionEvaluator.UnitTests
             this ISymUnmanagedReader symReader,
             int methodToken,
             int methodVersion = 1
-        ) {
+        )
+        {
             var method = symReader.GetMethodByVersion(methodToken, methodVersion);
             if (method == null)
             {
@@ -452,7 +467,8 @@ namespace Microsoft.CodeAnalysis.ExpressionEvaluator.UnitTests
             string expectedIL,
             [CallerLineNumber] int expectedValueSourceLine = 0,
             [CallerFilePath] string expectedValueSourcePath = null
-        ) {
+        )
+        {
             var parts = qualifiedName.Split('.');
             if (parts.Length != 2)
             {
@@ -511,7 +527,8 @@ namespace Microsoft.CodeAnalysis.ExpressionEvaluator.UnitTests
         internal static ImmutableArray<MetadataReference> GetEmittedReferences(
             Compilation compilation,
             MetadataReader mdReader
-        ) {
+        )
+        {
             // Determine the set of references that were actually used
             // and ignore any references that were dropped in emit.
             var referenceNames = new HashSet<string>(
@@ -527,7 +544,8 @@ namespace Microsoft.CodeAnalysis.ExpressionEvaluator.UnitTests
             int methodToken,
             int methodVersion,
             bool isEndInclusive
-        ) {
+        )
+        {
             var method = symReader.GetMethodByVersion(methodToken, methodVersion);
             if (method == null)
             {
@@ -567,7 +585,8 @@ namespace Microsoft.CodeAnalysis.ExpressionEvaluator.UnitTests
         private static string GetAssemblyReferenceName(
             MetadataReader reader,
             AssemblyReferenceHandle handle
-        ) {
+        )
+        {
             var reference = reader.GetAssemblyReference(handle);
             return reader.GetString(reference.Name);
         }
@@ -575,7 +594,8 @@ namespace Microsoft.CodeAnalysis.ExpressionEvaluator.UnitTests
         private static bool IsReferenced(
             MetadataReference reference,
             HashSet<string> referenceNames
-        ) {
+        )
+        {
             var assemblyMetadata =
                 ((PortableExecutableReference)reference).GetMetadataNoCopy() as AssemblyMetadata;
             if (assemblyMetadata == null)
@@ -596,7 +616,8 @@ namespace Microsoft.CodeAnalysis.ExpressionEvaluator.UnitTests
             this Compilation compilation,
             DebugInformationFormat debugFormat = DebugInformationFormat.Pdb,
             bool includeLocalSignatures = true
-        ) {
+        )
+        {
             var pdbStream = (debugFormat != 0) ? new MemoryStream() : null;
             var peImage = compilation.EmitToArray(
                 new EmitOptions(debugInformationFormat: debugFormat),
@@ -673,7 +694,8 @@ namespace Microsoft.CodeAnalysis.ExpressionEvaluator.UnitTests
         internal static void VerifyResolutionRequests(
             EEMetadataReferenceResolver resolver,
             (AssemblyIdentity, AssemblyIdentity, int)[] expectedRequests
-        ) {
+        )
+        {
 #if DEBUG
             var expected = ArrayBuilder<(AssemblyIdentity, AssemblyIdentity, int)>.GetInstance();
             var actual = ArrayBuilder<(AssemblyIdentity, AssemblyIdentity, int)>.GetInstance();
@@ -719,7 +741,8 @@ namespace Microsoft.CodeAnalysis.ExpressionEvaluator.UnitTests
             ImmutableArray<byte> peImage,
             string methodName,
             params string[] importStrings
-        ) {
+        )
+        {
             using (var peReader = new PEReader(peImage))
             {
                 var metadataReader = peReader.GetMetadataReader();
@@ -751,7 +774,8 @@ namespace Microsoft.CodeAnalysis.ExpressionEvaluator.UnitTests
 
         internal static ImmutableArray<MetadataReference> AddIntrinsicAssembly(
             this ImmutableArray<MetadataReference> references
-        ) {
+        )
+        {
             var builder = ArrayBuilder<MetadataReference>.GetInstance();
             builder.AddRange(references);
             builder.Add(IntrinsicAssemblyReference);
@@ -809,7 +833,8 @@ namespace Microsoft.CodeAnalysis.ExpressionEvaluator.UnitTests
         /// </summary>
         internal static ImmutableArray<MetadataReference> GetRuntimeWinMds(
             params string[] namespaces
-        ) {
+        )
+        {
             var paths = new HashSet<string>();
             foreach (var @namespace in namespaces)
             {
@@ -903,7 +928,8 @@ namespace Microsoft.CodeAnalysis.ExpressionEvaluator.UnitTests
             int methodToken,
             ISymUnmanagedReader symReader,
             int atLineNumber = -1
-        ) {
+        )
+        {
             int ilOffset;
             if (symReader == null)
             {
@@ -936,7 +962,8 @@ namespace Microsoft.CodeAnalysis.ExpressionEvaluator.UnitTests
         internal static string GetMethodOrTypeSignatureParts(
             string signature,
             out string[] parameterTypeNames
-        ) {
+        )
+        {
             var parameterListStart = signature.IndexOf('(');
             if (parameterListStart < 0)
             {
@@ -956,7 +983,8 @@ namespace Microsoft.CodeAnalysis.ExpressionEvaluator.UnitTests
         internal static unsafe ModuleMetadata ToModuleMetadata(
             this PEMemoryBlock metadata,
             bool ignoreAssemblyRefs
-        ) {
+        )
+        {
             return ModuleMetadata.CreateFromMetadata(
                 (IntPtr)metadata.Pointer,
                 metadata.Length,
@@ -980,7 +1008,8 @@ namespace Microsoft.CodeAnalysis.ExpressionEvaluator.UnitTests
             Func<CommonPEModuleBuilder, EmitOptions, CommonPEModuleBuilder> getModuleBuilder,
             out ImmutableArray<byte> peBytes,
             out ImmutableArray<byte> pdbBytes
-        ) {
+        )
+        {
             var diagnostics = DiagnosticBag.GetInstance();
             var emitOptions = EmitOptions.Default.WithRuntimeMetadataVersion("0.0.0.0")
                 .WithDebugInformationFormat(DebugInformationFormat.PortablePdb);

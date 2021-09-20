@@ -16,7 +16,8 @@ namespace Microsoft.AspNetCore.Routing.TestObjects
             string routeKey,
             RouteValueDictionary values,
             RouteDirection routeDirection
-        ) {
+        )
+        {
             Values = new RouteValueDictionary(values);
             return true;
         }

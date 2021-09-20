@@ -48,7 +48,8 @@ namespace System.Security.Cryptography.Pkcs
             ReadOnlyMemory<byte>? nonce = null,
             ReadOnlyMemory<byte>? timestampAuthorityName = null,
             X509ExtensionCollection? extensions = null
-        ) {
+        )
+        {
             _encodedBytes = Encode(
                 policyId,
                 hashAlgorithmId,
@@ -242,7 +243,8 @@ namespace System.Security.Cryptography.Pkcs
             ReadOnlyMemory<byte> encodedBytes,
             [NotNullWhen(true)] out Rfc3161TimestampTokenInfo? timestampTokenInfo,
             out int bytesConsumed
-        ) {
+        )
+        {
             if (
                 TryDecode(
                     encodedBytes,
@@ -251,7 +253,8 @@ namespace System.Security.Cryptography.Pkcs
                     out bytesConsumed,
                     out byte[]? copiedBytes
                 )
-            ) {
+            )
+            {
                 timestampTokenInfo = new Rfc3161TimestampTokenInfo(copiedBytes!, tstInfo);
                 return true;
             }
@@ -267,7 +270,8 @@ namespace System.Security.Cryptography.Pkcs
             out Rfc3161TstInfo tstInfo,
             out int bytesConsumed,
             out byte[]? copiedBytes
-        ) {
+        )
+        {
             // https://tools.ietf.org/html/rfc3161#section-2.4.2
             // The eContent SHALL be the DER-encoded value of TSTInfo.
             AsnReader reader = new AsnReader(source, AsnEncodingRules.DER);
@@ -306,7 +310,8 @@ namespace System.Security.Cryptography.Pkcs
                     || parsedInfo.Accuracy?.Millis > 999
                     || parsedInfo.Accuracy?.Millis < 1
                     || parsedInfo.Accuracy?.Seconds < 0
-                ) {
+                )
+                {
                     throw new CryptographicException(SR.Cryptography_Der_Invalid_Encoding);
                 }
 
@@ -341,7 +346,8 @@ namespace System.Security.Cryptography.Pkcs
             ReadOnlyMemory<byte>? nonce,
             ReadOnlyMemory<byte>? tsaName,
             X509ExtensionCollection? extensions
-        ) {
+        )
+        {
             if (policyId == null)
                 throw new ArgumentNullException(nameof(policyId));
             if (hashAlgorithmId == null)

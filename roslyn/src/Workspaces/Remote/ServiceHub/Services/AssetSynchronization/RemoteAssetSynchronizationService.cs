@@ -31,7 +31,8 @@ namespace Microsoft.CodeAnalysis.Remote
             Checksum checksum,
             int workspaceVersion,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             return RunServiceAsync(
                 async cancellationToken =>
                 {
@@ -42,7 +43,8 @@ namespace Microsoft.CodeAnalysis.Remote
                             checksum,
                             cancellationToken
                         )
-                    ) {
+                    )
+                    {
                         var workspace = GetWorkspace();
                         var assetProvider = workspace.CreateAssetProvider(
                             solutionInfo,
@@ -67,7 +69,8 @@ namespace Microsoft.CodeAnalysis.Remote
             Checksum baseTextChecksum,
             IEnumerable<TextChange> textChanges,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             return RunServiceAsync(
                 async cancellationToken =>
                 {
@@ -80,7 +83,8 @@ namespace Microsoft.CodeAnalysis.Remote
                             baseTextChecksum,
                             cancellationToken
                         )
-                    ) {
+                    )
+                    {
                         var serializer =
                             workspace.Services.GetRequiredService<ISerializerService>();
 
@@ -116,7 +120,8 @@ namespace Microsoft.CodeAnalysis.Remote
                                 baseTextChecksum,
                                 out var serializableSourceText
                             )
-                        ) {
+                        )
+                        {
                             return await serializableSourceText.GetTextAsync(cancellationToken)
                                 .ConfigureAwait(false);
                         }
@@ -136,7 +141,8 @@ namespace Microsoft.CodeAnalysis.Remote
                         if (
                             !document.State.TryGetStateChecksums(out var state)
                             || !state.Text.Equals(baseTextChecksum)
-                        ) {
+                        )
+                        {
                             return null;
                         }
 

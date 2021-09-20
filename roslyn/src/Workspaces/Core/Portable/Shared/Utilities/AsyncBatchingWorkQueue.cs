@@ -78,13 +78,14 @@ namespace Roslyn.Utilities
             TimeSpan delay,
             Func<ImmutableArray<TItem>, CancellationToken, Task> processBatchAsync,
             CancellationToken cancellationToken
-        ) : this(
-            delay,
-            processBatchAsync,
-            equalityComparer: null,
-            asyncListener: null,
-            cancellationToken
-        ) { }
+        )
+            : this(
+                delay,
+                processBatchAsync,
+                equalityComparer: null,
+                asyncListener: null,
+                cancellationToken
+            ) { }
 
         /// <param name="processBatchAsync">Callback to add the new items to the current batch.  It is legal to mutate
         /// the current batch (for example, clearing the batch or deduplicating)</param>
@@ -94,7 +95,8 @@ namespace Roslyn.Utilities
             IEqualityComparer<TItem>? equalityComparer,
             IAsynchronousOperationListener? asyncListener,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             _delay = delay;
             _processBatchAsync = processBatchAsync;
             _equalityComparer = equalityComparer;

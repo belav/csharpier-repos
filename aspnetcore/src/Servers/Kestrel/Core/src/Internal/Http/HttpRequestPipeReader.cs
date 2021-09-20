@@ -61,7 +61,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Http
 
         public override ValueTask<ReadResult> ReadAsync(
             CancellationToken cancellationToken = default
-        ) {
+        )
+        {
             ValidateState(cancellationToken);
 
             return _body!.ReadAsync(cancellationToken);

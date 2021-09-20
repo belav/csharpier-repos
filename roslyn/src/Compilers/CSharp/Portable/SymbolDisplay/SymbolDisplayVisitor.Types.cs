@@ -44,7 +44,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                 format.CompilerInternalOptions.IncludesOption(
                     SymbolDisplayCompilerInternalOptions.ReverseArrayRankSpecifiers
                 )
-            ) {
+            )
+            {
                 // Ironically, reverse order is simpler - we just have to recurse on the element type and then add a rank specifier.
                 symbol.ElementType.Accept(this);
                 AddArrayRank(symbol);
@@ -98,7 +99,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                         )
                         && !ITypeSymbolHelpers.IsNullableType(type)
                         && !type.IsValueType
-                    ) {
+                    )
+                    {
                         return true;
                     }
                     break;
@@ -113,7 +115,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                             type as Symbols.PublicModel.TypeSymbol
                         )?.UnderlyingTypeSymbol.IsTypeParameterDisallowingAnnotationInCSharp8()
                             != true
-                    ) {
+                    )
+                    {
                         return true;
                     }
                     break;
@@ -220,7 +223,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                         SymbolDisplayCompilerInternalOptions.UseNativeIntegerUnderlyingType
                     )
                 )
-            ) {
+            )
+            {
                 if (AddSpecialTypeKeyword(symbol))
                 {
                     //if we're using special type keywords and this is a special type, then no other work is required
@@ -232,7 +236,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                 !format.MiscellaneousOptions.IncludesOption(
                     SymbolDisplayMiscellaneousOptions.ExpandNullable
                 )
-            ) {
+            )
+            {
                 //if we're expanding nullable, we just visit nullable types normally
                 if (ITypeSymbolHelpers.IsNullableType(symbol) && !symbol.IsDefinition)
                 {
@@ -315,7 +320,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                     == SymbolDisplayTypeQualificationStyle.NameAndContainingTypes
                 || format.TypeQualificationStyle
                     == SymbolDisplayTypeQualificationStyle.NameAndContainingTypesAndNamespaces
-            ) {
+            )
+            {
                 if (IncludeNamedType(symbol.ContainingType))
                 {
                     symbol.ContainingType.Accept(this.NotFirstVisitor);
@@ -334,7 +340,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                 format.CompilerInternalOptions.IncludesOption(
                     SymbolDisplayCompilerInternalOptions.UseValueTuple
                 )
-            ) {
+            )
+            {
                 return true;
             }
 
@@ -402,7 +409,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                 )
                 && partKind == SymbolDisplayPartKind.ErrorTypeName
                 && string.IsNullOrEmpty(symbolName)
-            ) {
+            )
+            {
                 builder.Add(CreatePart(partKind, symbol, "?"));
             }
             else
@@ -415,7 +423,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                 format.CompilerInternalOptions.IncludesOption(
                     SymbolDisplayCompilerInternalOptions.UseArityForGenericTypes
                 )
-            ) {
+            )
+            {
                 // Only the compiler can set the internal option and the compiler doesn't use other implementations of INamedTypeSymbol.
                 if (underlyingTypeSymbol?.MangleName == true)
                 {
@@ -434,13 +443,15 @@ namespace Microsoft.CodeAnalysis.CSharp
                 && format.GenericsOptions.IncludesOption(
                     SymbolDisplayGenericsOptions.IncludeTypeParameters
                 )
-            ) {
+            )
+            {
                 // It would be nice to handle VB symbols too, but it's not worth the effort.
                 if (
                     underlyingTypeSymbol is UnsupportedMetadataTypeSymbol
                     || underlyingTypeSymbol is MissingMetadataTypeSymbol
                     || symbol.IsUnboundGenericType
-                ) {
+                )
+                {
                     AddPunctuation(SyntaxKind.LessThanToken);
                     for (int i = 0; i < symbol.Arity - 1; i++)
                     {
@@ -472,7 +483,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                 && format.CompilerInternalOptions.IncludesOption(
                     SymbolDisplayCompilerInternalOptions.FlagMissingMetadataTypes
                 )
-            ) {
+            )
+            {
                 //add it as punctuation - it's just for testing
                 AddPunctuation(SyntaxKind.OpenBracketToken);
                 builder.Add(CreatePart(InternalSymbolDisplayPartKind.Other, symbol, "missing"));
@@ -482,12 +494,14 @@ namespace Microsoft.CodeAnalysis.CSharp
 
         private ImmutableArray<ImmutableArray<CustomModifier>> GetTypeArgumentsModifiers(
             NamedTypeSymbol underlyingTypeSymbol
-        ) {
+        )
+        {
             if (
                 this.format.CompilerInternalOptions.IncludesOption(
                     SymbolDisplayCompilerInternalOptions.IncludeCustomModifiers
                 )
-            ) {
+            )
+            {
                 if ((object)underlyingTypeSymbol != null)
                 {
                     return underlyingTypeSymbol.TypeArgumentsWithAnnotationsNoUseSiteDiagnostics.SelectAsArray(
@@ -506,7 +520,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                 if (
                     format.DelegateStyle == SymbolDisplayDelegateStyle.NameAndParameters
                     || format.DelegateStyle == SymbolDisplayDelegateStyle.NameAndSignature
-                ) {
+                )
+                {
                     var method = symbol.DelegateInvokeMethod;
                     AddPunctuation(SyntaxKind.OpenParenToken);
                     AddParametersIfRequired(
@@ -574,7 +589,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                     tupleSymbol.TypeKind == TypeKind.Error
                     || HasNonDefaultTupleElements(tupleSymbol)
                     || containsModopt(tupleSymbol)
-                ) {
+                )
+                {
                     return false;
                 }
 
@@ -641,7 +657,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                 && format.CompilerInternalOptions.IncludesOption(
                     SymbolDisplayCompilerInternalOptions.FlagMissingMetadataTypes
                 )
-            ) {
+            )
+            {
                 //add it as punctuation - it's just for testing
                 AddPunctuation(SyntaxKind.OpenBracketToken);
                 builder.Add(CreatePart(InternalSymbolDisplayPartKind.Other, symbol, "missing"));
@@ -751,7 +768,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             if (
                 isFirstSymbolVisited
                 && format.KindOptions.IncludesOption(SymbolDisplayKindOptions.IncludeTypeKeyword)
-            ) {
+            )
+            {
                 if (symbol.IsAnonymousType)
                 {
                     builder.Add(
@@ -847,7 +865,8 @@ namespace Microsoft.CodeAnalysis.CSharp
         private void AddTypeArguments(
             ISymbol owner,
             ImmutableArray<ImmutableArray<CustomModifier>> modifiers
-        ) {
+        )
+        {
             ImmutableArray<ITypeSymbol> typeArguments;
 
             if (owner.Kind == SymbolKind.Method)
@@ -864,7 +883,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                 && format.GenericsOptions.IncludesOption(
                     SymbolDisplayGenericsOptions.IncludeTypeParameters
                 )
-            ) {
+            )
+            {
                 AddPunctuation(SyntaxKind.LessThanToken);
 
                 var first = true;
@@ -926,7 +946,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                 && format.GenericsOptions.IncludesOption(
                     SymbolDisplayGenericsOptions.IncludeTypeConstraints
                 )
-            ) {
+            )
+            {
                 foreach (var typeArg in typeArguments)
                 {
                     if (typeArg.Kind == SymbolKind.TypeParameter)
@@ -959,7 +980,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                                             format.MiscellaneousOptions.IncludesOption(
                                                 SymbolDisplayMiscellaneousOptions.IncludeNullableReferenceTypeModifier
                                             )
-                                        ) {
+                                        )
+                                        {
                                             AddPunctuation(SyntaxKind.QuestionToken);
                                         }
                                         break;
@@ -969,7 +991,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                                             format.MiscellaneousOptions.IncludesOption(
                                                 SymbolDisplayMiscellaneousOptions.IncludeNotNullableReferenceTypeModifier
                                             )
-                                        ) {
+                                        )
+                                        {
                                             AddPunctuation(SyntaxKind.ExclamationToken);
                                         }
                                         break;

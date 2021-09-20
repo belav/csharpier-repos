@@ -158,7 +158,8 @@ namespace Microsoft.AspNetCore.DataProtection.Managed
             ISecret keyDerivationKey,
             int derivedKeySizeInBytes,
             IManagedGenRandom? genRandom = null
-        ) {
+        )
+        {
             _keyDerivationKey = new Secret(keyDerivationKey);
             _derivedkeySizeInBytes = derivedKeySizeInBytes;
 
@@ -185,7 +186,8 @@ namespace Microsoft.AspNetCore.DataProtection.Managed
         public byte[] Decrypt(
             ArraySegment<byte> ciphertext,
             ArraySegment<byte> additionalAuthenticatedData
-        ) {
+        )
+        {
             ciphertext.Validate();
             additionalAuthenticatedData.Validate();
 
@@ -193,7 +195,8 @@ namespace Microsoft.AspNetCore.DataProtection.Managed
             if (
                 ciphertext.Count
                 < KEY_MODIFIER_SIZE_IN_BYTES + NONCE_SIZE_IN_BYTES + TAG_SIZE_IN_BYTES
-            ) {
+            )
+            {
                 throw Error.CryptCommon_PayloadInvalid();
             }
 
@@ -284,7 +287,8 @@ namespace Microsoft.AspNetCore.DataProtection.Managed
             ArraySegment<byte> additionalAuthenticatedData,
             uint preBufferSize,
             uint postBufferSize
-        ) {
+        )
+        {
             plaintext.Validate();
             additionalAuthenticatedData.Validate();
 

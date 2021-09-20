@@ -140,7 +140,8 @@ namespace JIT.HardwareIntrinsics.X86
                 SByte[] inArray3,
                 SByte[] outArray,
                 int alignment
-            ) {
+            )
+            {
                 int sizeOfinArray1 = inArray1.Length * Unsafe.SizeOf<SByte>();
                 int sizeOfinArray2 = inArray2.Length * Unsafe.SizeOf<SByte>();
                 int sizeOfinArray3 = inArray3.Length * Unsafe.SizeOf<SByte>();
@@ -151,7 +152,8 @@ namespace JIT.HardwareIntrinsics.X86
                     || (alignment * 2) < sizeOfinArray2
                     || (alignment * 2) < sizeOfinArray3
                     || (alignment * 2) < sizeOfoutArray
-                ) {
+                )
+                {
                     throw new ArgumentException("Invalid value of alignment");
                 }
 
@@ -656,7 +658,8 @@ namespace JIT.HardwareIntrinsics.X86
 
             fixed (Vector128<SByte>* pFld1 = &_fld1)fixed (Vector128<SByte>* pFld2 = &_fld2)fixed (
                 Vector128<SByte>* pFld3 = &_fld3
-            ) {
+            )
+            {
                 var result = Sse41.BlendVariable(
                     Sse2.LoadVector128((SByte*)(pFld1)),
                     Sse2.LoadVector128((SByte*)(pFld2)),
@@ -737,7 +740,8 @@ namespace JIT.HardwareIntrinsics.X86
             Vector128<SByte> op3,
             void* result,
             [CallerMemberName] string method = ""
-        ) {
+        )
+        {
             SByte[] inArray1 = new SByte[Op1ElementCount];
             SByte[] inArray2 = new SByte[Op2ElementCount];
             SByte[] inArray3 = new SByte[Op3ElementCount];
@@ -761,7 +765,8 @@ namespace JIT.HardwareIntrinsics.X86
             void* op3,
             void* result,
             [CallerMemberName] string method = ""
-        ) {
+        )
+        {
             SByte[] inArray1 = new SByte[Op1ElementCount];
             SByte[] inArray2 = new SByte[Op2ElementCount];
             SByte[] inArray3 = new SByte[Op3ElementCount];
@@ -797,7 +802,8 @@ namespace JIT.HardwareIntrinsics.X86
             SByte[] thirdOp,
             SByte[] result,
             [CallerMemberName] string method = ""
-        ) {
+        )
+        {
             bool succeeded = true;
 
             if (((thirdOp[0] >> 7) & 1) == 1 ? secondOp[0] != result[0] : firstOp[0] != result[0])
@@ -812,7 +818,8 @@ namespace JIT.HardwareIntrinsics.X86
                         ((thirdOp[i] >> 7) & 1) == 1
                             ? secondOp[i] != result[i]
                             : firstOp[i] != result[i]
-                    ) {
+                    )
+                    {
                         succeeded = false;
                         break;
                     }

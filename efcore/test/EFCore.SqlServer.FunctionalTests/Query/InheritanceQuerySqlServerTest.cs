@@ -18,7 +18,7 @@ namespace Microsoft.EntityFrameworkCore.Query
             ITestOutputHelper testOutputHelper
         )
 #pragma warning restore IDE0060 // Remove unused parameter
-          : base(fixture)
+            : base(fixture)
         {
             Fixture.TestSqlLoggerFactory.Clear();
             //Fixture.TestSqlLoggerFactory.SetTestOutputHelper(testOutputHelper);

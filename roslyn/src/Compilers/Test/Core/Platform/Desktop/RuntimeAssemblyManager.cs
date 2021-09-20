@@ -241,7 +241,8 @@ namespace Roslyn.Test.Utilities.Desktop
             ModuleDataId id,
             out AssemblyData assemblyData,
             out bool fullMatch
-        ) {
+        )
+        {
             if (_fullNameToAssemblyDataMap.TryGetValue(id.FullName, out assemblyData))
             {
                 fullMatch =
@@ -258,7 +259,8 @@ namespace Roslyn.Test.Utilities.Desktop
             ModuleDataId id,
             out AssemblyData assemblyData,
             out bool fullMatch
-        ) {
+        )
+        {
             if (_mvidToAssemblyDataMap.TryGetValue(id.Mvid, out assemblyData))
             {
                 fullMatch =
@@ -301,7 +303,8 @@ namespace Roslyn.Test.Utilities.Desktop
             if (
                 _mainMvids.Contains(assembly.ManifestModule.ModuleVersionId)
                 && _loadedAssemblies.Add(assembly)
-            ) {
+            )
+            {
                 if (!MonoHelpers.IsRunningOnMono())
                 {
                     assembly.ModuleResolve += ModuleResolve;
@@ -378,7 +381,8 @@ namespace Roslyn.Test.Utilities.Desktop
             string fullyQualifiedTypeName,
             string memberName,
             List<RuntimeModuleDataId> searchModules
-        ) {
+        )
+        {
             try
             {
                 var signatures = new SortedSet<string>();
@@ -391,7 +395,8 @@ namespace Roslyn.Test.Utilities.Desktop
                             fullyQualifiedTypeName,
                             memberName
                         )
-                    ) {
+                    )
+                    {
                         signatures.Add(signature);
                     }
                 }
@@ -429,7 +434,8 @@ namespace Roslyn.Test.Utilities.Desktop
             string[] mainArgs,
             int? expectedOutputLength,
             out string output
-        ) {
+        )
+        {
             ImmutableArray<byte> bytes = GetModuleBytesByName(moduleName);
             Assembly assembly = DesktopRuntimeUtil.LoadAsAssembly(moduleName, bytes);
             MethodInfo entryPoint = assembly.EntryPoint;

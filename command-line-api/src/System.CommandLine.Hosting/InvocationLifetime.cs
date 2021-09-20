@@ -27,7 +27,8 @@ namespace System.CommandLine.Hosting
             IHostApplicationLifetime applicationLifetime,
             InvocationContext context = null,
             ILoggerFactory loggerFactory = null
-        ) {
+        )
+        {
             Options = options?.Value ?? throw new ArgumentNullException(nameof(options));
             Environment = environment ?? throw new ArgumentNullException(nameof(environment));
             ApplicationLifetime =

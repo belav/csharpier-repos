@@ -948,7 +948,8 @@ namespace Newtonsoft.Json.Linq
             JsonLoadSettings? settings,
             IJsonLineInfo? lineInfo,
             JContainer parent
-        ) {
+        )
+        {
             DuplicatePropertyNameHandling duplicatePropertyNameHandling =
                 settings?.DuplicatePropertyNameHandling ?? DuplicatePropertyNameHandling.Replace;
 
@@ -1009,7 +1010,8 @@ namespace Newtonsoft.Json.Linq
 
         PropertyDescriptorCollection? ITypedList.GetItemProperties(
             PropertyDescriptor[] listAccessors
-        ) {
+        )
+        {
             ICustomTypeDescriptor? d = First as ICustomTypeDescriptor;
             return d?.GetProperties();
         }
@@ -1233,7 +1235,8 @@ namespace Newtonsoft.Json.Linq
             JContainer target,
             IEnumerable content,
             JsonMergeSettings? settings
-        ) {
+        )
+        {
             switch (settings?.MergeArrayHandling ?? MergeArrayHandling.Concat)
             {
                 case MergeArrayHandling.Concat:

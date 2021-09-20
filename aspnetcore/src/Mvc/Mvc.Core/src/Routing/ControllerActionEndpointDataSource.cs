@@ -54,7 +54,8 @@ namespace Microsoft.AspNetCore.Mvc.Routing
             RouteValueDictionary? defaults,
             IDictionary<string, object?>? constraints,
             RouteValueDictionary? dataTokens
-        ) {
+        )
+        {
             lock (Lock)
             {
                 var conventions = new List<Action<EndpointBuilder>>();
@@ -76,7 +77,8 @@ namespace Microsoft.AspNetCore.Mvc.Routing
         protected override List<Endpoint> CreateEndpoints(
             IReadOnlyList<ActionDescriptor> actions,
             IReadOnlyList<Action<EndpointBuilder>> conventions
-        ) {
+        )
+        {
             var endpoints = new List<Endpoint>();
             var keys = new HashSet<string>(StringComparer.OrdinalIgnoreCase);
 
@@ -139,7 +141,8 @@ namespace Microsoft.AspNetCore.Mvc.Routing
             Type transformerType,
             object? state,
             int? order = null
-        ) {
+        )
+        {
             CreateInertEndpoints = true;
             lock (Lock)
             {

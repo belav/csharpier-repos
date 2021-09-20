@@ -54,7 +54,8 @@ namespace System.Reflection.Emit.Tests
             Type[][] requiredCustomModifiers,
             Type[][] optionalCustomModifiers,
             int expectedLength
-        ) {
+        )
+        {
             ModuleBuilder module = Helpers.DynamicModule();
             SignatureHelper helper = SignatureHelper.GetFieldSigHelper(module);
 

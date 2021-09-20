@@ -35,7 +35,8 @@ internal static partial class Interop
             IntPtr progressData,
             ref int cancel,
             int flags
-        ) {
+        )
+        {
             src = PathInternal.EnsureExtendedPrefixIfNeeded(src);
             dst = PathInternal.EnsureExtendedPrefixIfNeeded(dst);
             return CopyFileExPrivate(src, dst, progressRoutine, progressData, ref cancel, flags);

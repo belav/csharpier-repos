@@ -14,7 +14,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.ProjectSystem
         public static bool IsDocumentInitialized(
             this IVsRunningDocumentTable4 runningDocTable,
             uint docCookie
-        ) {
+        )
+        {
             var flags = runningDocTable.GetDocumentFlags(docCookie);
 
             return (flags & (uint)_VSRDTFLAGS4.RDT_PendingInitialization) == 0;

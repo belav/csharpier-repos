@@ -63,7 +63,8 @@ namespace System.IO.Ports.Tests
                 SerialPort com = new SerialPort(
                     TCSupport.LocalMachineSerialInfo.FirstAvailablePortName
                 )
-            ) {
+            )
+            {
                 Debug.WriteLine("Verifying Write with a null string");
                 com.Open();
 
@@ -249,7 +250,8 @@ namespace System.IO.Ports.Tests
             SerialPort com2,
             string stringToWrite,
             int numWrites
-        ) {
+        )
+        {
             char[] expectedChars,
                 actualChars;
             byte[] expectedBytes,

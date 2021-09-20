@@ -224,7 +224,8 @@ namespace IntelHardwareIntrinsicTest
                         new ushort[16] { 22, 1, 50, 0, 22, 1, 50, 0, 22, 1, 50, 0, 22, 1, 50, 0 },
                         new ushort[16]
                     )
-                ) {
+                )
+                {
                     var vb1 = Unsafe.Read<Vector256<byte>>(byteTable.inArray1Ptr);
                     var vb2 = Unsafe.Read<Vector256<byte>>(byteTable.inArray2Ptr);
                     var vb3 = Avx2.SubtractSaturate(vb1, vb2);

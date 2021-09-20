@@ -368,7 +368,8 @@ WHERE (([e].[NullableBoolA] <> [e].[NullableBoolB]) AND ([e].[NullableBoolA] IS 
 
         public override async Task Compare_negated_bool_with_negated_bool_not_equal_negated(
             bool async
-        ) {
+        )
+        {
             await base.Compare_negated_bool_with_negated_bool_not_equal_negated(async);
 
             AssertSql(
@@ -818,7 +819,8 @@ WHERE ([e].[NullableStringA] = N'Foo') OR [e].[NullableStringA] IS NULL"
 
         public override async Task Where_multiple_ands_with_nullable_parameter_and_constant(
             bool async
-        ) {
+        )
+        {
             await base.Where_multiple_ands_with_nullable_parameter_and_constant(async);
 
             AssertSql(
@@ -832,7 +834,8 @@ WHERE ((([e].[NullableStringA] <> N'Foo') OR [e].[NullableStringA] IS NULL) AND 
 
         public override async Task Where_multiple_ands_with_nullable_parameter_and_constant_not_optimized(
             bool async
-        ) {
+        )
+        {
             await base.Where_multiple_ands_with_nullable_parameter_and_constant_not_optimized(
                 async
             );
@@ -1248,7 +1251,8 @@ WHERE @__p_0 = CAST(1 AS bit)"
 
         public override async Task Where_comparison_null_semantics_optimization_works_with_complex_predicates(
             bool async
-        ) {
+        )
+        {
             await base.Where_comparison_null_semantics_optimization_works_with_complex_predicates(
                 async
             );
@@ -1329,7 +1333,8 @@ FROM [Entities1] AS [e]"
 
         public override async Task Null_semantics_applied_when_comparing_function_with_nullable_argument_to_a_nullable_column(
             bool async
-        ) {
+        )
+        {
             await base.Null_semantics_applied_when_comparing_function_with_nullable_argument_to_a_nullable_column(
                 async
             );
@@ -1406,7 +1411,8 @@ ORDER BY [e].[Id]"
 
         public override async Task Null_semantics_applied_when_comparing_two_functions_with_nullable_arguments(
             bool async
-        ) {
+        )
+        {
             await base.Null_semantics_applied_when_comparing_two_functions_with_nullable_arguments(
                 async
             );
@@ -1489,7 +1495,8 @@ END IS NOT NULL)"
 
         public override async Task Null_semantics_applied_when_comparing_two_functions_with_multiple_nullable_arguments(
             bool async
-        ) {
+        )
+        {
             await base.Null_semantics_applied_when_comparing_two_functions_with_multiple_nullable_arguments(
                 async
             );
@@ -1800,7 +1807,8 @@ WHERE COALESCE([e].[NullableIntA], 0) <> 0"
 
         public override async Task Negated_order_comparison_on_non_nullable_arguments_gets_optimized(
             bool async
-        ) {
+        )
+        {
             await base.Negated_order_comparison_on_non_nullable_arguments_gets_optimized(async);
 
             AssertSql(
@@ -1832,7 +1840,8 @@ WHERE [e].[IntA] > @__i_0"
 
         public override async Task Negated_order_comparison_on_nullable_arguments_doesnt_get_optimized(
             bool async
-        ) {
+        )
+        {
             await base.Negated_order_comparison_on_nullable_arguments_doesnt_get_optimized(async);
 
             AssertSql(@"");
@@ -1851,7 +1860,8 @@ WHERE ([e].[NullableStringA] IS NOT NULL AND [e].[NullableStringB] IS NOT NULL) 
 
         public override async Task Nullable_column_info_doesnt_propagate_inside_binary_OrElse(
             bool async
-        ) {
+        )
+        {
             await base.Nullable_column_info_doesnt_propagate_inside_binary_OrElse(async);
 
             AssertSql(
@@ -1863,7 +1873,8 @@ WHERE ([e].[NullableStringA] IS NOT NULL OR [e].[NullableStringB] IS NOT NULL) A
 
         public override async Task Nullable_column_info_propagates_inside_binary_OrElse_when_info_is_duplicated(
             bool async
-        ) {
+        )
+        {
             await base.Nullable_column_info_propagates_inside_binary_OrElse_when_info_is_duplicated(
                 async
             );
@@ -1897,7 +1908,8 @@ FROM [Entities1] AS [e]"
 
         public override async Task Nullable_column_info_doesnt_propagate_between_projections(
             bool async
-        ) {
+        )
+        {
             await base.Nullable_column_info_doesnt_propagate_between_projections(async);
 
             AssertSql(
@@ -1914,7 +1926,8 @@ FROM [Entities1] AS [e]"
 
         public override async Task Nullable_column_info_doesnt_propagate_between_different_parts_of_select(
             bool async
-        ) {
+        )
+        {
             await base.Nullable_column_info_doesnt_propagate_between_different_parts_of_select(
                 async
             );
@@ -1961,7 +1974,8 @@ FROM [Entities1] AS [e]"
 
         public override async Task Nullable_string_FirstOrDefault_compared_to_nullable_string_LastOrDefault(
             bool async
-        ) {
+        )
+        {
             await base.Nullable_string_FirstOrDefault_compared_to_nullable_string_LastOrDefault(
                 async
             );
@@ -2032,7 +2046,8 @@ WHERE [e].[NullableStringA] IS NULL"
 
         public override async Task Multiple_non_equality_comparisons_with_null_in_the_middle(
             bool async
-        ) {
+        )
+        {
             await base.Multiple_non_equality_comparisons_with_null_in_the_middle(async);
 
             AssertSql(
@@ -2044,7 +2059,8 @@ WHERE [e].[NullableIntA] NOT IN (1, 2) AND [e].[NullableIntA] IS NOT NULL"
 
         public override async Task Multiple_non_equality_comparisons_including_null_comparison_work_for_relational_null_semantics(
             bool async
-        ) {
+        )
+        {
             await base.Multiple_non_equality_comparisons_including_null_comparison_work_for_relational_null_semantics(
                 async
             );
@@ -2058,7 +2074,8 @@ WHERE ([e].[NullableIntA] <> 1) AND [e].[NullableIntA] IS NOT NULL"
 
         public override async Task Multiple_non_equality_comparisons_without_null_comparison_work_for_relational_null_semantics(
             bool async
-        ) {
+        )
+        {
             await base.Multiple_non_equality_comparisons_without_null_comparison_work_for_relational_null_semantics(
                 async
             );
@@ -2072,7 +2089,8 @@ WHERE [e].[NullableIntA] NOT IN (1, 2)"
 
         public override async Task Multiple_equality_comparisons_including_null_comparison_work_for_relational_null_semantics(
             bool async
-        ) {
+        )
+        {
             await base.Multiple_equality_comparisons_including_null_comparison_work_for_relational_null_semantics(
                 async
             );
@@ -2086,7 +2104,8 @@ WHERE ([e].[NullableIntA] = 1) OR [e].[NullableIntA] IS NULL"
 
         public override async Task Multiple_contains_calls_get_combined_into_one_for_relational_null_semantics(
             bool async
-        ) {
+        )
+        {
             await base.Multiple_contains_calls_get_combined_into_one_for_relational_null_semantics(
                 async
             );
@@ -2100,7 +2119,8 @@ WHERE [e].[NullableIntA] IN (1, NULL, 2, 3)"
 
         public override async Task Multiple_negated_contains_calls_get_combined_into_one_for_relational_null_semantics(
             bool async
-        ) {
+        )
+        {
             await base.Multiple_negated_contains_calls_get_combined_into_one_for_relational_null_semantics(
                 async
             );
@@ -2114,7 +2134,8 @@ WHERE [e].[NullableIntA] NOT IN (1, NULL, 2, 3)"
 
         public override async Task Contains_with_comparison_dont_get_combined_for_relational_null_semantics(
             bool async
-        ) {
+        )
+        {
             await base.Contains_with_comparison_dont_get_combined_for_relational_null_semantics(
                 async
             );
@@ -2128,7 +2149,8 @@ WHERE [e].[NullableIntA] IN (1, 2) OR [e].[NullableIntA] IS NULL"
 
         public override async Task Negated_contains_with_comparison_dont_get_combined_for_relational_null_semantics(
             bool async
-        ) {
+        )
+        {
             await base.Negated_contains_with_comparison_dont_get_combined_for_relational_null_semantics(
                 async
             );
@@ -2142,7 +2164,8 @@ WHERE [e].[NullableIntA] IS NOT NULL AND [e].[NullableIntA] NOT IN (1, 2)"
 
         public override async Task Negated_contains_with_comparison_without_null_get_combined_for_relational_null_semantics(
             bool async
-        ) {
+        )
+        {
             await base.Negated_contains_with_comparison_without_null_get_combined_for_relational_null_semantics(
                 async
             );

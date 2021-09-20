@@ -49,7 +49,8 @@ namespace Microsoft.CodeAnalysis.LanguageServer.Handler.Completion
         public long UpdateCache(
             LSP.TextDocumentIdentifier textDocument,
             CompletionList completionList
-        ) {
+        )
+        {
             lock (_accessLock)
             {
                 // If cache exceeds maximum size, remove the oldest list in the cache

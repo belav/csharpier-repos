@@ -46,7 +46,8 @@ namespace Microsoft.CodeAnalysis.Tools.Analyzers
             IAnalyzerInformationProvider informationProvider,
             IAnalyzerRunner runner,
             ICodeFixApplier applier
-        ) {
+        )
+        {
             _name = name;
             Category = category;
             _informationProvider = informationProvider;
@@ -61,7 +62,8 @@ namespace Microsoft.CodeAnalysis.Tools.Analyzers
             ILogger logger,
             List<FormattedFile> formattedFiles,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var projectAnalyzersAndFixers = _informationProvider.GetAnalyzersAndFixers(
                 solution,
                 formatOptions,
@@ -176,7 +178,8 @@ namespace Microsoft.CodeAnalysis.Tools.Analyzers
             ILogger logger,
             List<FormattedFile> formattedFiles,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var result = new CodeAnalysisResult();
             var projects =
                 options.WorkspaceType == WorkspaceType.Solution
@@ -229,7 +232,8 @@ namespace Microsoft.CodeAnalysis.Tools.Analyzers
                 ILogger logger,
                 LogLevel logLevel,
                 List<FormattedFile> formattedFiles
-            ) {
+            )
+            {
                 foreach (var diagnostic in diagnostics)
                 {
                     var document = solution.GetDocument(diagnostic.Location.SourceTree);
@@ -277,7 +281,8 @@ namespace Microsoft.CodeAnalysis.Tools.Analyzers
             ImmutableHashSet<string> fixableCompilerDiagnostics,
             ILogger logger,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             // Determine the reported diagnostic ids
             var reportedDiagnostics = projectDiagnostics.SelectMany(kvp => kvp.Value)
                 .Distinct()
@@ -311,7 +316,8 @@ namespace Microsoft.CodeAnalysis.Tools.Analyzers
                     if (
                         !projectDiagnostics.TryGetValue(project.Id, out var diagnosticIds)
                         || !diagnosticIds.Contains(diagnosticId)
-                    ) {
+                    )
+                    {
                         continue;
                     }
 
@@ -362,7 +368,8 @@ namespace Microsoft.CodeAnalysis.Tools.Analyzers
             static ImmutableDictionary<string, ImmutableArray<CodeFixProvider>> CreateFixerMap(
                 ImmutableArray<string> diagnosticIds,
                 ImmutableArray<CodeFixProvider> fixers
-            ) {
+            )
+            {
                 return diagnosticIds.ToImmutableDictionary(
                     id => id,
                     id =>
@@ -381,7 +388,8 @@ namespace Microsoft.CodeAnalysis.Tools.Analyzers
             DiagnosticSeverity minimumSeverity,
             ImmutableHashSet<string> diagnostics,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             // We only want to run analyzers for each project that have the potential for reporting a diagnostic with
             // a severity equal to or greater than specified.
             var projectAnalyzers = ImmutableDictionary.CreateBuilder<
@@ -410,7 +418,8 @@ namespace Microsoft.CodeAnalysis.Tools.Analyzers
                         && !analyzer.SupportedDiagnostics.Any(
                             descriptor => diagnostics.Contains(descriptor.Id)
                         )
-                    ) {
+                    )
+                    {
                         continue;
                     }
 
@@ -419,7 +428,8 @@ namespace Microsoft.CodeAnalysis.Tools.Analyzers
                     if (
                         analyzer.GetType().FullName?.EndsWith("NamingStyleDiagnosticAnalyzer")
                         == true
-                    ) {
+                    )
+                    {
                         analyzers.Add(analyzer);
                         continue;
                     }
@@ -445,7 +455,8 @@ namespace Microsoft.CodeAnalysis.Tools.Analyzers
         private static bool DoesAnalyzerSupportLanguage(
             DiagnosticAnalyzer analyzer,
             string language
-        ) {
+        )
+        {
             return analyzer.GetType()
                 .GetCustomAttributes(typeof(DiagnosticAnalyzerAttribute), true)
                 .OfType<DiagnosticAnalyzerAttribute>()

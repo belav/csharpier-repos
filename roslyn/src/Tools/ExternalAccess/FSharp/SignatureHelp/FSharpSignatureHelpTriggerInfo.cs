@@ -16,7 +16,8 @@ namespace Microsoft.CodeAnalysis.ExternalAccess.FSharp.SignatureHelp
         internal FSharpSignatureHelpTriggerInfo(
             FSharpSignatureHelpTriggerReason triggerReason,
             char? triggerCharacter = null
-        ) {
+        )
+        {
             Contract.ThrowIfTrue(
                 triggerReason == FSharpSignatureHelpTriggerReason.TypeCharCommand
                     && triggerCharacter == null

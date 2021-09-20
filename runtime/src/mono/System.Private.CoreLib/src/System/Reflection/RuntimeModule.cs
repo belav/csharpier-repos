@@ -149,7 +149,8 @@ namespace System.Reflection
             CallingConventions callConvention,
             Type[]? types,
             ParameterModifier[]? modifiers
-        ) {
+        )
+        {
             if (IsResource())
                 return null;
 
@@ -183,7 +184,8 @@ namespace System.Reflection
         public override void GetPEKind(
             out PortableExecutableKinds peKind,
             out ImageFileMachine machine
-        ) {
+        )
+        {
             GetPEKind(_impl, out peKind, out machine);
         }
 
@@ -207,7 +209,8 @@ namespace System.Reflection
             int metadataToken,
             Type[]? genericTypeArguments,
             Type[]? genericMethodArguments
-        ) {
+        )
+        {
             return ResolveField(
                 this,
                 _impl,
@@ -223,7 +226,8 @@ namespace System.Reflection
             int metadataToken,
             Type[]? genericTypeArguments,
             Type[]? genericMethodArguments
-        ) {
+        )
+        {
             ResolveTokenError error;
 
             IntPtr handle = ResolveFieldToken(
@@ -244,7 +248,8 @@ namespace System.Reflection
             int metadataToken,
             Type[]? genericTypeArguments,
             Type[]? genericMethodArguments
-        ) {
+        )
+        {
             return ResolveMember(
                 this,
                 _impl,
@@ -260,7 +265,8 @@ namespace System.Reflection
             int metadataToken,
             Type[]? genericTypeArguments,
             Type[]? genericMethodArguments
-        ) {
+        )
+        {
             ResolveTokenError error;
 
             MemberInfo m = ResolveMemberToken(
@@ -281,7 +287,8 @@ namespace System.Reflection
             int metadataToken,
             Type[]? genericTypeArguments,
             Type[]? genericMethodArguments
-        ) {
+        )
+        {
             return ResolveMethod(
                 this,
                 _impl,
@@ -297,7 +304,8 @@ namespace System.Reflection
             int metadataToken,
             Type[]? genericTypeArguments,
             Type[]? genericMethodArguments
-        ) {
+        )
+        {
             ResolveTokenError error;
 
             IntPtr handle = ResolveMethodToken(
@@ -337,7 +345,8 @@ namespace System.Reflection
             int metadataToken,
             Type[]? genericTypeArguments,
             Type[]? genericMethodArguments
-        ) {
+        )
+        {
             return ResolveType(
                 this,
                 _impl,
@@ -353,7 +362,8 @@ namespace System.Reflection
             int metadataToken,
             Type[]? genericTypeArguments,
             Type[]? genericMethodArguments
-        ) {
+        )
+        {
             ResolveTokenError error;
 
             IntPtr handle = ResolveTypeToken(
@@ -419,7 +429,8 @@ namespace System.Reflection
             int metadataToken,
             ResolveTokenError error,
             string tokenType
-        ) {
+        )
+        {
             if (error == ResolveTokenError.OutOfRange)
                 return new ArgumentOutOfRangeException(
                     nameof(metadataToken),

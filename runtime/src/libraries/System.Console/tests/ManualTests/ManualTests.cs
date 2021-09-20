@@ -104,7 +104,8 @@ namespace System
                     ConsoleKey.L,
                     ConsoleKey.E
                 }
-            ) {
+            )
+            {
                 Assert.Equal(k, Console.ReadKey(intercept: true).Key);
             }
             AssertUserExpectedResults("\"console\" correctly not echoed as you typed it");
@@ -178,7 +179,8 @@ namespace System
                 char keyChar,
                 ConsoleKey consoleKey,
                 ConsoleModifiers modifiers
-            ) {
+            )
+            {
                 return new object[]
                 {
                     requestedKeyChord,

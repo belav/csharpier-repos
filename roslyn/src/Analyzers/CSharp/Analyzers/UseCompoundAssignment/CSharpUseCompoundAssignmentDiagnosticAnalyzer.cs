@@ -41,7 +41,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UseCompoundAssignment
                     or 1.0
                     or 1.0f
                     or 1.0m
-            ) {
+            )
+            {
                 return opKind switch
                 {
                     SyntaxKind.AddExpression => 1,
@@ -58,7 +59,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UseCompoundAssignment
                     or -1.0
                     or -1.0f
                     or -1.0m
-            ) {
+            )
+            {
                 return opKind switch
                 {
                     SyntaxKind.AddExpression => -1,

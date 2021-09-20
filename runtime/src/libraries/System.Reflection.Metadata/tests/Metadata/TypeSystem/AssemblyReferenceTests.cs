@@ -112,7 +112,8 @@ namespace System.Reflection.Metadata.Tests
             AssemblyName assemblyName,
             MetadataReader reader,
             AssemblyReference assemblyRef
-        ) {
+        )
+        {
             Assert.Equal(reader.GetString(assemblyRef.Name), assemblyName.Name);
             Assert.Equal(assemblyRef.Version, assemblyName.Version);
             Assert.Equal(
@@ -125,7 +126,8 @@ namespace System.Reflection.Metadata.Tests
             AssemblyName assemblyName,
             MetadataReader reader,
             AssemblyDefinition assemblyDef
-        ) {
+        )
+        {
             Assert.NotEqual(reader.GetString(assemblyDef.Name), assemblyName.Name);
             Assert.NotEqual(assemblyDef.Version, assemblyName.Version);
         }

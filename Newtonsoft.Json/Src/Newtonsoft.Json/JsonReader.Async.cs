@@ -109,7 +109,8 @@ namespace Newtonsoft.Json
 
         internal async Task<byte[]?> ReadArrayIntoByteArrayAsync(
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             List<byte> buffer = new List<byte>();
 
             while (true)
@@ -138,7 +139,8 @@ namespace Newtonsoft.Json
         /// classes can override this behaviour for true asynchronicity.</remarks>
         public virtual Task<DateTime?> ReadAsDateTimeAsync(
             CancellationToken cancellationToken = default
-        ) {
+        )
+        {
             return cancellationToken.CancelIfRequestedAsync<DateTime?>()
                 ?? Task.FromResult(ReadAsDateTime());
         }
@@ -153,7 +155,8 @@ namespace Newtonsoft.Json
         /// classes can override this behaviour for true asynchronicity.</remarks>
         public virtual Task<DateTimeOffset?> ReadAsDateTimeOffsetAsync(
             CancellationToken cancellationToken = default
-        ) {
+        )
+        {
             return cancellationToken.CancelIfRequestedAsync<DateTimeOffset?>()
                 ?? Task.FromResult(ReadAsDateTimeOffset());
         }
@@ -168,7 +171,8 @@ namespace Newtonsoft.Json
         /// classes can override this behaviour for true asynchronicity.</remarks>
         public virtual Task<decimal?> ReadAsDecimalAsync(
             CancellationToken cancellationToken = default
-        ) {
+        )
+        {
             return cancellationToken.CancelIfRequestedAsync<decimal?>()
                 ?? Task.FromResult(ReadAsDecimal());
         }
@@ -183,7 +187,8 @@ namespace Newtonsoft.Json
         /// classes can override this behaviour for true asynchronicity.</remarks>
         public virtual Task<double?> ReadAsDoubleAsync(
             CancellationToken cancellationToken = default
-        ) {
+        )
+        {
             return Task.FromResult(ReadAsDouble());
         }
 
@@ -211,7 +216,8 @@ namespace Newtonsoft.Json
         /// classes can override this behaviour for true asynchronicity.</remarks>
         public virtual Task<string?> ReadAsStringAsync(
             CancellationToken cancellationToken = default
-        ) {
+        )
+        {
             return cancellationToken.CancelIfRequestedAsync<string?>()
                 ?? Task.FromResult(ReadAsString());
         }
@@ -236,7 +242,8 @@ namespace Newtonsoft.Json
 
         private async Task<bool> MoveToContentFromNonContentAsync(
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             while (true)
             {
                 if (!await ReadAsync(cancellationToken).ConfigureAwait(false))

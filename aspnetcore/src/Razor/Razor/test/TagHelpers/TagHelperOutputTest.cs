@@ -112,7 +112,8 @@ namespace Microsoft.AspNetCore.Razor.TagHelpers
         [MemberData(nameof(HtmlEncoderData))]
         public async Task GetChildContentAsync_CallsGetChildContentAsyncWithEncoder(
             HtmlEncoder encoder
-        ) {
+        )
+        {
             // Arrange
             bool? passedUseCacheResult = null;
             HtmlEncoder passedEncoder = null;
@@ -143,7 +144,8 @@ namespace Microsoft.AspNetCore.Razor.TagHelpers
         [InlineData(true)]
         public async Task GetChildContentAsync_CallsGetChildContentAsyncWithCachedResult(
             bool useCachedResult
-        ) {
+        )
+        {
             // Arrange
             bool? passedUseCacheResult = null;
             HtmlEncoder passedEncoder = null;
@@ -192,7 +194,8 @@ namespace Microsoft.AspNetCore.Razor.TagHelpers
         public async Task GetChildContentAsync_CallsGetChildContentAsyncWithCacheAndEncoder(
             bool useCachedResult,
             HtmlEncoder encoder
-        ) {
+        )
+        {
             // Arrange
             bool? passedUseCacheResult = null;
             HtmlEncoder passedEncoder = null;
@@ -1188,7 +1191,8 @@ namespace Microsoft.AspNetCore.Razor.TagHelpers
             string content,
             string postContent,
             string postElement
-        ) {
+        )
+        {
             var output = new TagHelperOutput(
                 tagName,
                 attributes,

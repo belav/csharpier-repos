@@ -684,7 +684,8 @@ namespace System.Net.Sockets.Tests
                     4096,
                     FileOptions.DeleteOnClose | FileOptions.Asynchronous
                 )
-            ) {
+            )
+            {
                 SendPacketsElement element = new SendPacketsElement(stream);
                 Assert.Null(element.FilePath);
                 Assert.Equal(element.FileStream, stream);
@@ -706,7 +707,8 @@ namespace System.Net.Sockets.Tests
                     4096,
                     FileOptions.DeleteOnClose | FileOptions.Asynchronous
                 )
-            ) {
+            )
+            {
                 SendPacketsElement element = new SendPacketsElement(stream, 0, 0); // Send whole file
                 Assert.Null(element.FilePath);
                 Assert.Equal(element.FileStream, stream);
@@ -738,7 +740,8 @@ namespace System.Net.Sockets.Tests
                     4096,
                     FileOptions.DeleteOnClose | FileOptions.Asynchronous
                 )
-            ) {
+            )
+            {
                 Assert.Throws<ArgumentOutOfRangeException>(
                     () =>
                     {
@@ -775,7 +778,8 @@ namespace System.Net.Sockets.Tests
                     4096,
                     FileOptions.DeleteOnClose | FileOptions.Asynchronous
                 )
-            ) {
+            )
+            {
                 Assert.Throws<ArgumentOutOfRangeException>(
                     () =>
                     {
@@ -808,7 +812,8 @@ namespace System.Net.Sockets.Tests
         {
             using (
                 var stream = File.Create(Path.GetTempFileName(), 4096, FileOptions.DeleteOnClose)
-            ) {
+            )
+            {
                 Assert.Throws<ArgumentException>(
                     () =>
                     {
@@ -829,7 +834,8 @@ namespace System.Net.Sockets.Tests
                     4096,
                     FileOptions.DeleteOnClose | FileOptions.Asynchronous
                 )
-            ) {
+            )
+            {
                 var element = new SendPacketsElement(stream, 2, 8, true);
                 Assert.Null(element.FilePath);
                 Assert.Equal(element.FileStream, stream);
@@ -876,7 +882,8 @@ namespace System.Net.Sockets.Tests
                     4096,
                     FileOptions.DeleteOnClose | FileOptions.Asynchronous
                 )
-            ) {
+            )
+            {
                 SendPacketsElement element = new SendPacketsElement(stream, 6, 4, false);
                 Assert.Null(element.FilePath);
                 Assert.Equal(element.FileStream, stream);

@@ -331,7 +331,8 @@ namespace System.Xml.Xsl.Runtime
                             || cultName == zhHK
                             || cultName == zhSG
                             || cultName == zhMO
-                        ) {
+                        )
+                        {
                             cultInfo = new CultureInfo(cultName);
                         }
                         break;

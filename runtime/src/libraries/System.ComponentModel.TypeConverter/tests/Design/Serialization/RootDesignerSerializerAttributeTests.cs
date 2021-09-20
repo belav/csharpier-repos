@@ -20,7 +20,8 @@ namespace System.ComponentModel.Design.Serialization.Tests
             Type serializerType,
             Type baseSerializerType,
             bool reloadable
-        ) {
+        )
+        {
             var attribute = new RootDesignerSerializerAttribute(
                 serializerType,
                 baseSerializerType,
@@ -63,7 +64,8 @@ namespace System.ComponentModel.Design.Serialization.Tests
             string serializerTypeName,
             Type baseSerializerType,
             bool reloadable
-        ) {
+        )
+        {
             var attribute = new RootDesignerSerializerAttribute(
                 serializerTypeName,
                 baseSerializerType,
@@ -84,7 +86,8 @@ namespace System.ComponentModel.Design.Serialization.Tests
             string serializerTypeName,
             string baseSerializerTypeName,
             bool reloadable
-        ) {
+        )
+        {
             var attribute = new RootDesignerSerializerAttribute(
                 serializerTypeName,
                 baseSerializerTypeName,

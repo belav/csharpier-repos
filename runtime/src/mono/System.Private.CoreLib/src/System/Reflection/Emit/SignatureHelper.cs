@@ -93,7 +93,8 @@ namespace System.Reflection.Emit
         public static SignatureHelper GetMethodSigHelper(
             CallingConventions callingConvention,
             Type? returnType
-        ) {
+        )
+        {
             return GetMethodSigHelper(
                 null,
                 callingConvention,
@@ -106,7 +107,8 @@ namespace System.Reflection.Emit
         public static SignatureHelper GetMethodSigHelper(
             CallingConvention unmanagedCallingConvention,
             Type? returnType
-        ) {
+        )
+        {
             return GetMethodSigHelper(
                 null,
                 CallingConventions.Standard,
@@ -120,7 +122,8 @@ namespace System.Reflection.Emit
             Module? mod,
             CallingConventions callingConvention,
             Type? returnType
-        ) {
+        )
+        {
             return GetMethodSigHelper(
                 mod,
                 callingConvention,
@@ -134,7 +137,8 @@ namespace System.Reflection.Emit
             Module? mod,
             CallingConvention unmanagedCallConv,
             Type? returnType
-        ) {
+        )
+        {
             return GetMethodSigHelper(
                 mod,
                 CallingConventions.Standard,
@@ -148,7 +152,8 @@ namespace System.Reflection.Emit
             Module? mod,
             Type? returnType,
             Type[]? parameterTypes
-        ) {
+        )
+        {
             return GetMethodSigHelper(
                 mod,
                 CallingConventions.Standard,
@@ -163,7 +168,8 @@ namespace System.Reflection.Emit
             Module? mod,
             Type? returnType,
             Type[]? parameterTypes
-        ) {
+        )
+        {
             throw new NotImplementedException();
         }
 
@@ -176,7 +182,8 @@ namespace System.Reflection.Emit
             Type[]? parameterTypes,
             Type[][]? requiredParameterTypeCustomModifiers,
             Type[][]? optionalParameterTypeCustomModifiers
-        ) {
+        )
+        {
             throw new NotImplementedException();
         }
 
@@ -190,7 +197,8 @@ namespace System.Reflection.Emit
             Type[]? parameterTypes,
             Type[][]? requiredParameterTypeCustomModifiers,
             Type[][]? optionalParameterTypeCustomModifiers
-        ) {
+        )
+        {
             throw new NotImplementedException();
         }
 
@@ -282,7 +290,8 @@ namespace System.Reflection.Emit
             Type[]? arguments,
             Type[][]? requiredCustomModifiers,
             Type[][]? optionalCustomModifiers
-        ) {
+        )
+        {
             if (arguments == null)
                 throw new ArgumentNullException(nameof(arguments));
 
@@ -319,7 +328,8 @@ namespace System.Reflection.Emit
             Type argument,
             Type[]? requiredCustomModifiers,
             Type[]? optionalCustomModifiers
-        ) {
+        )
+        {
             if (argument == null)
                 throw new ArgumentNullException(nameof(argument));
 
@@ -467,7 +477,8 @@ namespace System.Reflection.Emit
             CallingConvention unmanagedCallingConvention,
             Type? returnType,
             Type[]? parameters
-        ) {
+        )
+        {
             if (mod != null && !(mod is ModuleBuilder))
                 throw new ArgumentException("ModuleBuilder is expected");
 

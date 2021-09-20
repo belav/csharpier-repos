@@ -62,7 +62,8 @@ namespace System.Xml
             string? pubid,
             string? sysid,
             string? subset
-        ) {
+        )
+        {
             try
             {
                 if (name == null || name.Length == 0)
@@ -232,7 +233,8 @@ namespace System.Xml
             string? prefix,
             string localName,
             string? ns
-        ) {
+        )
+        {
             try
             {
                 // lookup prefix / namespace
@@ -299,7 +301,8 @@ namespace System.Xml
             string? prefix,
             string localName,
             string? ns
-        ) {
+        )
+        {
             try
             {
                 await task.ConfigureAwait(false);
@@ -347,7 +350,8 @@ namespace System.Xml
             string prefix,
             string localName,
             string ns
-        ) {
+        )
+        {
             try
             {
                 await t.ConfigureAwait(false);
@@ -503,7 +507,8 @@ namespace System.Xml
             string? prefix,
             string localName,
             string? namespaceName
-        ) {
+        )
+        {
             try
             {
                 // check local name
@@ -551,7 +556,8 @@ namespace System.Xml
             string? prefix,
             string localName,
             string? namespaceName
-        ) {
+        )
+        {
             try
             {
                 // lookup prefix / namespace
@@ -682,7 +688,8 @@ namespace System.Xml
             string? prefix,
             string localName,
             string? namespaceName
-        ) {
+        )
+        {
             try
             {
                 await task.ConfigureAwait(false);
@@ -793,7 +800,8 @@ namespace System.Xml
                         if (
                             value == XmlReservedNs.NsXmlNs
                             || (value == XmlReservedNs.NsXml && _curDeclPrefix != "xml")
-                        ) {
+                        )
+                        {
                             throw new ArgumentException(SR.Xml_CanNotBindToReservedNamespace);
                         }
 
@@ -935,7 +943,8 @@ namespace System.Xml
                 if (
                     name.Length == 3
                     && string.Equals(name, "xml", StringComparison.OrdinalIgnoreCase)
-                ) {
+                )
+                {
                     if (_currentState != State.Start)
                     {
                         throw new ArgumentException(
@@ -1293,7 +1302,8 @@ namespace System.Xml
             byte[] buffer,
             int index,
             int count
-        ) {
+        )
+        {
             try
             {
                 await task.ConfigureAwait(false);
@@ -1459,7 +1469,8 @@ namespace System.Xml
             Task task,
             State newState,
             Token token
-        ) {
+        )
+        {
             await task.ConfigureAwait(false);
             _currentState = newState;
             await AdvanceStateAsync(token).ConfigureAwait(false);

@@ -27,7 +27,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
         internal static SynthesizedEntryPointSymbol Create(
             SynthesizedInteractiveInitializerMethod initializerMethod,
             BindingDiagnosticBag diagnostics
-        ) {
+        )
+        {
             var containingType = initializerMethod.ContainingType;
             var compilation = containingType.DeclaringCompilation;
             if (compilation.IsSubmission)
@@ -238,13 +239,15 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
 
         internal sealed override bool IsMetadataNewSlot(
             bool ignoreInterfaceImplementationChanges = false
-        ) {
+        )
+        {
             return false;
         }
 
         internal sealed override bool IsMetadataVirtual(
             bool ignoreInterfaceImplementationChanges = false
-        ) {
+        )
+        {
             return false;
         }
 
@@ -303,7 +306,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             CSharpSyntaxNode syntax,
             BoundExpression receiver,
             MethodSymbol method
-        ) {
+        )
+        {
             return new BoundCall(
                 syntax,
                 receiver,
@@ -391,7 +395,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             internal override void AddSynthesizedAttributes(
                 PEModuleBuilder moduleBuilder,
                 ref ArrayBuilder<SynthesizedAttributeData> attributes
-            ) {
+            )
+            {
                 base.AddSynthesizedAttributes(moduleBuilder, ref attributes);
 
                 AddSynthesizedAttribute(
@@ -526,7 +531,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                         syntax,
                         diagnostics
                     )
-                ) {
+                )
+                {
                     return new BoundBlock(
                         syntax: syntax,
                         locals: ImmutableArray<LocalSymbol>.Empty,

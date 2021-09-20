@@ -15,7 +15,8 @@ namespace System.Net.Http.Json
             TValue value,
             JsonSerializerOptions? options = null,
             CancellationToken cancellationToken = default
-        ) {
+        )
+        {
             if (client == null)
             {
                 throw new ArgumentNullException(nameof(client));
@@ -31,7 +32,8 @@ namespace System.Net.Http.Json
             TValue value,
             JsonSerializerOptions? options = null,
             CancellationToken cancellationToken = default
-        ) {
+        )
+        {
             if (client == null)
             {
                 throw new ArgumentNullException(nameof(client));

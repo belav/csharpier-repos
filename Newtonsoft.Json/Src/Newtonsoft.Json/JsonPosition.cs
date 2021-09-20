@@ -146,7 +146,8 @@ namespace Newtonsoft.Json
         internal static string BuildPath(
             List<JsonPosition> positions,
             JsonPosition? currentPosition
-        ) {
+        )
+        {
             int capacity = 0;
             if (positions != null)
             {

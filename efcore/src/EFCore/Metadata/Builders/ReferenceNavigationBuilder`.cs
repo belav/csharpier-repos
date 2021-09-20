@@ -71,7 +71,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Builders
         /// <returns> An object to further configure the relationship. </returns>
         public new virtual ReferenceCollectionBuilder<TRelatedEntity, TEntity> WithMany(
             string? navigationName = null
-        ) {
+        )
+        {
             return new(
                 RelatedEntityType,
                 DeclaringEntityType,
@@ -99,7 +100,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Builders
         /// <returns> An object to further configure the relationship. </returns>
         public virtual ReferenceCollectionBuilder<TRelatedEntity, TEntity> WithMany(
             Expression<Func<TRelatedEntity, IEnumerable<TEntity>?>>? navigationExpression
-        ) {
+        )
+        {
             return new(
                 RelatedEntityType,
                 DeclaringEntityType,

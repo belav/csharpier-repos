@@ -37,7 +37,8 @@ namespace Microsoft.CodeAnalysis.AddPackage
             string versionOpt,
             bool includePrerelease,
             bool isLocal
-        ) {
+        )
+        {
             _installerService = installerService;
             _document = document;
             _source = source;
@@ -86,7 +87,8 @@ namespace Microsoft.CodeAnalysis.AddPackage
             Workspace workspace,
             IProgressTracker progressTracker,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             return _installerService.TryInstallPackage(
                 workspace,
                 _document.Id,

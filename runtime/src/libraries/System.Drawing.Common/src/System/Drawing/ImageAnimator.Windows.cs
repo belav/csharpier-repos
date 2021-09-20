@@ -364,7 +364,8 @@ namespace System.Drawing
                                 onFrameChangedHandler != null
                                 && onFrameChangedHandler.Equals(imageInfo.FrameChangedHandler)
                             )
-                        ) {
+                        )
+                        {
                             s_imageInfoList.Remove(imageInfo);
                         }
                         break;

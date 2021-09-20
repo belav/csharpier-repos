@@ -352,7 +352,8 @@ namespace System.Net.Tests
         [InlineData(2)]
         public static void UrlDecodeToBytes_InvalidOffset_ThrowsArgumentOutOfRangeException(
             int offset
-        ) {
+        )
+        {
             AssertExtensions.Throws<ArgumentOutOfRangeException>(
                 "offset",
                 () => WebUtility.UrlDecodeToBytes(new byte[1], offset, 1)
@@ -368,7 +369,8 @@ namespace System.Net.Tests
             int byteCount,
             int offset,
             int count
-        ) {
+        )
+        {
             AssertExtensions.Throws<ArgumentOutOfRangeException>(
                 "count",
                 () => WebUtility.UrlDecodeToBytes(new byte[byteCount], offset, count)
@@ -458,7 +460,8 @@ namespace System.Net.Tests
         [InlineData(2)]
         public static void UrlEncodeToBytes_InvalidOffset_ThrowsArgumentOutOfRangeException(
             int offset
-        ) {
+        )
+        {
             AssertExtensions.Throws<ArgumentOutOfRangeException>(
                 "offset",
                 () => WebUtility.UrlEncodeToBytes(new byte[1], offset, 0)
@@ -474,7 +477,8 @@ namespace System.Net.Tests
             int byteCount,
             int offset,
             int count
-        ) {
+        )
+        {
             AssertExtensions.Throws<ArgumentOutOfRangeException>(
                 "count",
                 () => WebUtility.UrlEncodeToBytes(new byte[byteCount], offset, count)
@@ -515,7 +519,8 @@ namespace System.Net.Tests
             int offset,
             int count,
             string expected
-        ) {
+        )
+        {
             byte[] input = Encoding.UTF8.GetBytes(value);
             byte[] encoded = WebUtility.UrlEncodeToBytes(input, offset, count);
             string actual = Encoding.UTF8.GetString(encoded);

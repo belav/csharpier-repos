@@ -19,7 +19,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Completion.KeywordRecommenders
             int position,
             CSharpSyntaxContext context,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             return context.TargetToken.IsSwitchLabelContext()
                 || IsAfterGotoInSwitchContext(context);
         }
@@ -31,7 +32,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Completion.KeywordRecommenders
             if (
                 token.Kind() == SyntaxKind.GotoKeyword
                 && token.GetAncestor<SwitchStatementSyntax>() != null
-            ) {
+            )
+            {
                 // todo: what if we're in a lambda... or a try/finally or
                 // something?  Might want to filter this out.
                 return true;

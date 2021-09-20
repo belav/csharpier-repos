@@ -479,7 +479,8 @@ namespace Microsoft.Extensions.Logging
         public static void InvalidLogoutQueryStringRedirectUrl(
             this ILogger logger,
             string redirectUrl
-        ) {
+        )
+        {
             _invalidLogoutQueryStringRedirectUrl(logger, redirectUrl, null);
         }
 
@@ -498,7 +499,8 @@ namespace Microsoft.Extensions.Logging
             string error,
             string errorDescription,
             string errorUri
-        ) {
+        )
+        {
             _responseError(logger, error, errorDescription, errorUri, null);
         }
 
@@ -508,7 +510,8 @@ namespace Microsoft.Extensions.Logging
             string errorDescription,
             string errorUri,
             int statusCode
-        ) {
+        )
+        {
             _responseErrorWithStatusCode(
                 logger,
                 error,
@@ -567,7 +570,8 @@ namespace Microsoft.Extensions.Logging
         public static void EnteringOpenIdAuthenticationHandlerHandleRemoteAuthenticateAsync(
             this ILogger logger,
             string openIdConnectHandlerTypeName
-        ) {
+        )
+        {
             _enteringOpenIdAuthenticationHandlerHandleRemoteAuthenticateAsync(
                 logger,
                 openIdConnectHandlerTypeName,
@@ -578,7 +582,8 @@ namespace Microsoft.Extensions.Logging
         public static void EnteringOpenIdAuthenticationHandlerHandleUnauthorizedAsync(
             this ILogger logger,
             string openIdConnectHandlerTypeName
-        ) {
+        )
+        {
             _enteringOpenIdAuthenticationHandlerHandleUnauthorizedAsync(
                 logger,
                 openIdConnectHandlerTypeName,
@@ -589,7 +594,8 @@ namespace Microsoft.Extensions.Logging
         public static void EnteringOpenIdAuthenticationHandlerHandleSignOutAsync(
             this ILogger logger,
             string openIdConnectHandlerTypeName
-        ) {
+        )
+        {
             _enteringOpenIdAuthenticationHandlerHandleSignOutAsync(
                 logger,
                 openIdConnectHandlerTypeName,
@@ -640,7 +646,8 @@ namespace Microsoft.Extensions.Logging
         public static void AuthenticationSchemeSignedOut(
             this ILogger logger,
             string authenticationScheme
-        ) {
+        )
+        {
             _authenticationSchemeSignedOut(logger, authenticationScheme, null);
         }
 

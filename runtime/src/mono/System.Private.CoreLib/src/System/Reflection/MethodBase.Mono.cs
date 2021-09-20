@@ -35,7 +35,8 @@ namespace System.Reflection
         public static MethodBase? GetMethodFromHandle(
             RuntimeMethodHandle handle,
             RuntimeTypeHandle declaringType
-        ) {
+        )
+        {
             if (handle.IsNullHandle())
                 throw new ArgumentException(SR.Argument_InvalidHandle);
             MethodBase m = RuntimeMethodInfo.GetMethodFromHandleInternalType(

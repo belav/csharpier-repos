@@ -36,7 +36,8 @@ namespace Microsoft.AspNetCore.Mvc.ModelBinding.Binders
             ModelBindingContext bindingContext,
             ValueProviderResult valueProviderResult,
             object? model
-        ) {
+        )
+        {
             if (model == null)
             {
                 base.CheckModel(bindingContext, valueProviderResult, model);

@@ -29,7 +29,8 @@ namespace Microsoft.AspNetCore.Razor.Language
         public static void SetTagHelperContext(
             this RazorCodeDocument document,
             TagHelperDocumentContext context
-        ) {
+        )
+        {
             if (document == null)
             {
                 throw new ArgumentNullException(nameof(document));
@@ -40,7 +41,8 @@ namespace Microsoft.AspNetCore.Razor.Language
 
         internal static IReadOnlyList<TagHelperDescriptor> GetTagHelpers(
             this RazorCodeDocument document
-        ) {
+        )
+        {
             if (document == null)
             {
                 throw new ArgumentNullException(nameof(document));
@@ -52,7 +54,8 @@ namespace Microsoft.AspNetCore.Razor.Language
         internal static void SetTagHelpers(
             this RazorCodeDocument document,
             IReadOnlyList<TagHelperDescriptor> tagHelpers
-        ) {
+        )
+        {
             if (document == null)
             {
                 throw new ArgumentNullException(nameof(document));
@@ -74,7 +77,8 @@ namespace Microsoft.AspNetCore.Razor.Language
         public static void SetSyntaxTree(
             this RazorCodeDocument document,
             RazorSyntaxTree syntaxTree
-        ) {
+        )
+        {
             if (document == null)
             {
                 throw new ArgumentNullException(nameof(document));
@@ -85,7 +89,8 @@ namespace Microsoft.AspNetCore.Razor.Language
 
         public static IReadOnlyList<RazorSyntaxTree> GetImportSyntaxTrees(
             this RazorCodeDocument document
-        ) {
+        )
+        {
             if (document == null)
             {
                 throw new ArgumentNullException(nameof(document));
@@ -99,7 +104,8 @@ namespace Microsoft.AspNetCore.Razor.Language
         public static void SetImportSyntaxTrees(
             this RazorCodeDocument document,
             IReadOnlyList<RazorSyntaxTree> syntaxTrees
-        ) {
+        )
+        {
             if (document == null)
             {
                 throw new ArgumentNullException(nameof(document));
@@ -112,7 +118,8 @@ namespace Microsoft.AspNetCore.Razor.Language
 
         public static DocumentIntermediateNode GetDocumentIntermediateNode(
             this RazorCodeDocument document
-        ) {
+        )
+        {
             if (document == null)
             {
                 throw new ArgumentNullException(nameof(document));
@@ -124,7 +131,8 @@ namespace Microsoft.AspNetCore.Razor.Language
         public static void SetDocumentIntermediateNode(
             this RazorCodeDocument document,
             DocumentIntermediateNode documentNode
-        ) {
+        )
+        {
             if (document == null)
             {
                 throw new ArgumentNullException(nameof(document));
@@ -167,7 +175,8 @@ namespace Microsoft.AspNetCore.Razor.Language
         public static void SetCSharpDocument(
             this RazorCodeDocument document,
             RazorCSharpDocument csharp
-        ) {
+        )
+        {
             if (document == null)
             {
                 throw new ArgumentNullException(nameof(document));
@@ -189,7 +198,8 @@ namespace Microsoft.AspNetCore.Razor.Language
         public static void SetParserOptions(
             this RazorCodeDocument document,
             RazorParserOptions parserOptions
-        ) {
+        )
+        {
             if (document == null)
             {
                 throw new ArgumentNullException(nameof(document));
@@ -200,7 +210,8 @@ namespace Microsoft.AspNetCore.Razor.Language
 
         public static RazorCodeGenerationOptions GetCodeGenerationOptions(
             this RazorCodeDocument document
-        ) {
+        )
+        {
             if (document == null)
             {
                 throw new ArgumentNullException(nameof(document));
@@ -212,7 +223,8 @@ namespace Microsoft.AspNetCore.Razor.Language
         public static void SetCodeGenerationOptions(
             this RazorCodeDocument document,
             RazorCodeGenerationOptions codeGenerationOptions
-        ) {
+        )
+        {
             if (document == null)
             {
                 throw new ArgumentNullException(nameof(document));
@@ -270,7 +282,8 @@ namespace Microsoft.AspNetCore.Razor.Language
             this RazorCodeDocument document,
             bool fallbackToRootNamespace,
             out string @namespace
-        ) {
+        )
+        {
             if (document == null)
             {
                 throw new ArgumentNullException(nameof(document));
@@ -303,7 +316,8 @@ namespace Microsoft.AspNetCore.Razor.Language
                             out var importNamespaceContent,
                             out var importNamespaceLocation
                         )
-                    ) {
+                    )
+                    {
                         lastNamespaceContent = importNamespaceContent;
                         lastNamespaceLocation = importNamespaceLocation;
                     }
@@ -318,7 +332,8 @@ namespace Microsoft.AspNetCore.Razor.Language
                     out var namespaceContent,
                     out var namespaceLocation
                 )
-            ) {
+            )
+            {
                 lastNamespaceContent = namespaceContent;
                 lastNamespaceLocation = namespaceLocation;
             }
@@ -337,7 +352,8 @@ namespace Microsoft.AspNetCore.Razor.Language
                         StringComparison.OrdinalIgnoreCase
                     )
                     || document.Source.FilePath.Length <= directiveLocationDirectory.Length
-                ) {
+                )
+                {
                     // The most relevant directive is not from the directory hierarchy, can't compute a suffix.
                     appendSuffix = false;
                 }
@@ -482,7 +498,8 @@ namespace Microsoft.AspNetCore.Razor.Language
                 RazorSyntaxTree syntaxTree,
                 out string namespaceDirectiveContent,
                 out SourceSpan namespaceDirectiveSpan
-            ) {
+            )
+            {
                 var visitor = new NamespaceVisitor(syntaxTree.Source);
                 visitor.Visit(syntaxTree.Root);
                 if (string.IsNullOrEmpty(visitor.LastNamespaceContent))
@@ -510,7 +527,8 @@ namespace Microsoft.AspNetCore.Razor.Language
                             NamespaceDirective.Directive.Directive,
                             StringComparison.Ordinal
                         )
-                    ) {
+                    )
+                    {
                         LastNamespaceContent = directiveContent.Substring(
                                 NamespaceDirective.Directive.Directive.Length
                             )

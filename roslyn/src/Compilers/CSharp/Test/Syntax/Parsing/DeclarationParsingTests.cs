@@ -4473,7 +4473,8 @@ class Class1<T>{
             SyntaxKind accessorKind,
             SyntaxKind accessorKeyword,
             SyntaxKind tokenKind
-        ) {
+        )
+        {
             bool isEvent =
                 accessorKeyword == SyntaxKind.AddKeyword
                 || accessorKeyword == SyntaxKind.RemoveKeyword;
@@ -4543,7 +4544,8 @@ class Class1<T>{
             SyntaxKind accessorKind,
             SyntaxKind accessorKeyword,
             SyntaxKind tokenKind
-        ) {
+        )
+        {
             var text =
                 "class a { event b c { "
                 + SyntaxFacts.GetText(accessorKeyword)
@@ -5962,7 +5964,8 @@ System.Console.WriteLine(""Bad, breaking change"");
             string text,
             string desiredText,
             string undesiredText
-        ) {
+        )
+        {
             var file = this.ParseFile(text);
 
             Assert.NotNull(file);

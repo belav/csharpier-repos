@@ -31,7 +31,8 @@ namespace Microsoft.CodeAnalysis.UnitTests
         private FusionAssemblyPortabilityPolicy(
             IntPtr asmConfigCookie,
             ImmutableArray<byte> fileHash
-        ) {
+        )
+        {
             _assemblyConfigCookie = asmConfigCookie;
             _fileHash = fileHash;
         }

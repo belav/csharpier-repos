@@ -20,7 +20,8 @@ namespace System.Data.Common
             internal ProviderRegistration(
                 string factoryTypeAssemblyQualifiedName,
                 DbProviderFactory? factoryInstance
-            ) {
+            )
+            {
                 this.FactoryTypeAssemblyQualifiedName = factoryTypeAssemblyQualifiedName;
                 this.FactoryInstance = factoryInstance;
             }
@@ -48,7 +49,8 @@ namespace System.Data.Common
         public static bool TryGetFactory(
             string providerInvariantName,
             [NotNullWhen(true)] out DbProviderFactory? factory
-        ) {
+        )
+        {
             factory = GetFactory(providerInvariantName, throwOnError: false);
             return factory != null;
         }
@@ -142,7 +144,8 @@ namespace System.Data.Common
         public static void RegisterFactory(
             string providerInvariantName,
             string factoryTypeAssemblyQualifiedName
-        ) {
+        )
+        {
             ADP.CheckArgumentLength(providerInvariantName, nameof(providerInvariantName));
             ADP.CheckArgumentLength(
                 factoryTypeAssemblyQualifiedName,
@@ -182,7 +185,8 @@ namespace System.Data.Common
         private static DbProviderFactory? GetFactory(
             string providerInvariantName,
             bool throwOnError
-        ) {
+        )
+        {
             if (throwOnError)
             {
                 ADP.CheckArgumentLength(providerInvariantName, nameof(providerInvariantName));

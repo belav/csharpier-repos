@@ -29,7 +29,8 @@ namespace System.Text.RegularExpressions
             string[] capsList,
             RegexOptions options,
             int minRequiredLength
-        ) {
+        )
+        {
             Root = root;
             Caps = caps;
             CapNumList = capNumList;

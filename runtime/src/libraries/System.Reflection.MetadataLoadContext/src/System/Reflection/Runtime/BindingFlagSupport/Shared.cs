@@ -25,7 +25,8 @@ namespace System.Reflection.Runtime.BindingFlagSupport
             BindingFlags bindingFlags,
             CallingConventions callConv,
             Type[] argumentTypes
-        ) {
+        )
+        {
             Debug.Assert(methodBase != null);
             Debug.Assert(argumentTypes != null);
 

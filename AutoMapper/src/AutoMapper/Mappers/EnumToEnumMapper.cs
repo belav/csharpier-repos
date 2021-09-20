@@ -18,7 +18,8 @@ namespace AutoMapper.Internal.Mappers
             MemberMap memberMap,
             Expression sourceExpression,
             Expression destExpression
-        ) {
+        )
+        {
             var destinationType = destExpression.Type;
             var sourceToString = Call(sourceExpression, ObjectToString);
             var result = Variable(destinationType, "destinationEnumValue");

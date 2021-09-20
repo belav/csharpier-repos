@@ -18,7 +18,8 @@ namespace System
             this ArraySegment<T> arraySegment,
             int index,
             int count
-        ) {
+        )
+        {
             return new ArraySegment<T>(arraySegment.Array, arraySegment.Offset + index, count);
         }
 

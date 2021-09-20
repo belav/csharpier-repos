@@ -14,7 +14,8 @@ namespace System.Buffers.Text
             bool useLower,
             Span<byte> destination,
             out int bytesWritten
-        ) {
+        )
+        {
             int actualDigitCount = FormattingHelpers.CountHexDigits(value);
             int computedOutputLength =
                 (precision == StandardFormat.NoPrecision)

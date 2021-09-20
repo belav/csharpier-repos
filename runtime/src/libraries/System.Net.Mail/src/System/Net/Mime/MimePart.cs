@@ -283,7 +283,8 @@ namespace System.Net.Mime
             else if (
                 TransferEncoding == TransferEncoding.SevenBit
                 || TransferEncoding == TransferEncoding.EightBit
-            ) {
+            )
+            {
                 outputStream = new EightBitStream(outputStream);
             }
 
@@ -353,7 +354,8 @@ namespace System.Net.Mime
             AsyncCallback? callback,
             bool allowUnicode,
             object? state
-        ) {
+        )
+        {
             PrepareHeaders(allowUnicode);
             writer.WriteHeaders(Headers, allowUnicode);
             MimePartAsyncResult result = new MimePartAsyncResult(this, state, callback);

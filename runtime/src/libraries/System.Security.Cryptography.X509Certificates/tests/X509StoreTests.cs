@@ -118,7 +118,8 @@ namespace System.Security.Cryptography.X509Certificates.Tests
                     StoreLocation.CurrentUser,
                     OpenFlags.ReadOnly
                 )
-            ) {
+            )
+            {
                 Assert.True(store.IsOpen);
             }
         }
@@ -128,7 +129,8 @@ namespace System.Security.Cryptography.X509Certificates.Tests
         {
             using (
                 X509Store store = new X509Store("My", StoreLocation.CurrentUser, OpenFlags.ReadOnly)
-            ) {
+            )
+            {
                 Assert.True(store.IsOpen);
             }
         }
@@ -138,7 +140,8 @@ namespace System.Security.Cryptography.X509Certificates.Tests
         {
             using (
                 X509Store store = new X509Store("My", StoreLocation.CurrentUser, OpenFlags.ReadOnly)
-            ) {
+            )
+            {
                 store.Open(OpenFlags.ReadOnly);
                 Assert.True(store.IsOpen);
             }
@@ -198,7 +201,8 @@ namespace System.Security.Cryptography.X509Certificates.Tests
                     Guid.NewGuid().ToString("N"),
                     StoreLocation.CurrentUser
                 )
-            ) {
+            )
+            {
                 Assert.ThrowsAny<CryptographicException>(
                     () => store.Open(OpenFlags.OpenExistingOnly)
                 );
@@ -589,7 +593,8 @@ namespace System.Security.Cryptography.X509Certificates.Tests
                     {
                         using (
                             var store = new X509Store(StoreName.Root, StoreLocation.LocalMachine)
-                        ) {
+                        )
+                        {
                             store.Open(OpenFlags.OpenExistingOnly);
 
                             // Check nr of certificates in store.

@@ -49,7 +49,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.NavigationCommandHandlers
             int caretPosition,
             Document document,
             CommandExecutionContext context
-        ) {
+        )
+        {
             var streamingPresenter = base.GetStreamingPresenter();
             if (streamingPresenter != null)
             {
@@ -70,13 +71,15 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.NavigationCommandHandlers
             ISymbol symbol,
             Solution solution,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             // if the symbol is in an interface, or if it is an interface
             // we can use the FindInterfaceImplementationAsync call
             if (
                 symbol.ContainingType is INamedTypeSymbol namedTypeSymbol
                 && symbol.ContainingType.TypeKind == TypeKind.Interface
-            ) {
+            )
+            {
                 return (
                     await SymbolFinder.FindImplementationsAsync(
                             namedTypeSymbol,
@@ -90,7 +93,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.NavigationCommandHandlers
             else if (
                 symbol is INamedTypeSymbol namedTypeSymbol2
                 && namedTypeSymbol2.TypeKind == TypeKind.Interface
-            ) {
+            )
+            {
                 return (
                     await SymbolFinder.FindImplementationsAsync(
                             namedTypeSymbol2,
@@ -133,7 +137,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.NavigationCommandHandlers
             int caretPosition,
             IStreamingFindUsagesPresenter presenter,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             try
             {
                 using var token = _asyncListener.BeginAsyncOperation(
@@ -156,7 +161,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.NavigationCommandHandlers
                             ),
                             context.CancellationToken
                         )
-                    ) {
+                    )
+                    {
 #pragma warning disable CA2007 // Consider calling ConfigureAwait on the awaited task
                         var candidateSymbolProjectPair =
                             await FindUsagesHelpers.GetRelevantSymbolAndProjectAtPositionAsync(

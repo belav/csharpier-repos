@@ -20,7 +20,8 @@ namespace Microsoft.AspNetCore.Mvc.Filters
         public Task OnActionExecutionAsync(
             ActionExecutingContext context,
             ActionExecutionDelegate next
-        ) {
+        )
+        {
             if (context == null)
             {
                 throw new ArgumentNullException(nameof(context));
@@ -60,7 +61,8 @@ namespace Microsoft.AspNetCore.Mvc.Filters
             ActionExecutingContext context,
             ActionExecutionDelegate next,
             IActionFilter actionFilter
-        ) {
+        )
+        {
             actionFilter.OnActionExecuting(context);
             if (context.Result == null)
             {

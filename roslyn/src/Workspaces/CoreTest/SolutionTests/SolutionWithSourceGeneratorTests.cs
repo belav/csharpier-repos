@@ -24,7 +24,8 @@ namespace Microsoft.CodeAnalysis.UnitTests
         public async Task SourceGeneratorBasedOnAdditionalFileGeneratesSyntaxTreesOnce(
             bool fetchCompilationBeforeAddingGenerator,
             bool useRecoverableTrees
-        ) {
+        )
+        {
             using var workspace = useRecoverableTrees
                 ? CreateWorkspaceWithRecoverableSyntaxTreesAndWeakCompilations()
                 : CreateWorkspace();
@@ -99,7 +100,8 @@ namespace Microsoft.CodeAnalysis.UnitTests
                 Project project,
                 DocumentId documentId,
                 string expectedGeneratedContents
-            ) {
+            )
+            {
                 var compilation = await project.GetRequiredCompilationAsync(CancellationToken.None);
 
                 var regularDocumentSyntaxTree = await project.GetRequiredDocument(documentId)
@@ -142,7 +144,8 @@ namespace Microsoft.CodeAnalysis.UnitTests
             static async Task AssertCompilationContainsGeneratedFile(
                 Project project,
                 string expectedGeneratedContents
-            ) {
+            )
+            {
                 var compilation = await project.GetRequiredCompilationAsync(CancellationToken.None);
 
                 var generatedSyntaxTree = Assert.Single(compilation.SyntaxTrees);
@@ -246,7 +249,8 @@ namespace Microsoft.CodeAnalysis.UnitTests
             static Solution AddProjectWithReference(
                 Solution solution,
                 TestGeneratorReference analyzerReference
-            ) {
+            )
+            {
                 var project = AddEmptyProject(solution);
                 project = project.AddAnalyzerReference(analyzerReference);
                 project = project.AddAdditionalDocument("Test.txt", "Hello, world!").Project;

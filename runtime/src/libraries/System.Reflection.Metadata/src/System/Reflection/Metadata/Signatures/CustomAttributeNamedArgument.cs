@@ -15,7 +15,8 @@ namespace System.Reflection.Metadata
             CustomAttributeNamedArgumentKind kind,
             TType type,
             object? value
-        ) {
+        )
+        {
             Name = name;
             Kind = kind;
             Type = type;

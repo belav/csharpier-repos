@@ -23,7 +23,8 @@ namespace Microsoft.CodeAnalysis.GoToDefinition
             int position,
             bool includeType,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var workspace = document.Project.Solution.Workspace;
 
             var semanticModel = await document.GetRequiredSemanticModelAsync(cancellationToken)

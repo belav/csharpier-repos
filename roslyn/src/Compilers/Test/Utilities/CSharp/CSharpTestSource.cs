@@ -30,7 +30,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Test.Utilities
         public SyntaxTree[] GetSyntaxTrees(
             CSharpParseOptions parseOptions,
             string sourceFileName = ""
-        ) {
+        )
+        {
             switch (Value)
             {
                 case string source:

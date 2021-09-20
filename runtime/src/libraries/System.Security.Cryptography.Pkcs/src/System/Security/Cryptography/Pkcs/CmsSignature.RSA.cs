@@ -63,7 +63,8 @@ namespace System.Security.Cryptography.Pkcs
                 HashAlgorithmName digestAlgorithmName,
                 ReadOnlyMemory<byte>? signatureParameters,
                 X509Certificate2 certificate
-            ) {
+            )
+            {
                 if (_expectedDigest.HasValue && _expectedDigest.Value != digestAlgorithmName)
                 {
                     throw new CryptographicException(
@@ -121,7 +122,8 @@ namespace System.Security.Cryptography.Pkcs
                 string? digestAlgorithmOid,
                 HashAlgorithmName digestAlgorithmName,
                 int digestValueLength
-            ) {
+            )
+            {
                 if (signatureParameters == null)
                 {
                     return RSASignaturePadding.Pkcs1;
@@ -151,7 +153,8 @@ namespace System.Security.Cryptography.Pkcs
                 bool silent,
                 [NotNullWhen(true)] out string? signatureAlgorithm,
                 [NotNullWhen(true)] out byte[]? signatureValue
-            ) {
+            )
+            {
                 RSA certPublicKey = certificate.GetRSAPublicKey()!;
 
                 // If there's no private key, fall back to the public key for a "no private key" exception.
@@ -192,7 +195,8 @@ namespace System.Security.Cryptography.Pkcs
                             hashAlgorithmName,
                             RSASignaturePadding.Pkcs1
                         )
-                    ) {
+                    )
+                    {
                         // key did not match certificate
                         signatureValue = null;
                         return false;
@@ -219,7 +223,8 @@ namespace System.Security.Cryptography.Pkcs
                         hashAlgorithmName,
                         RSASignaturePadding.Pkcs1
                     )
-                ) {
+                )
+                {
                     // key did not match certificate
                     signatureValue = null;
                     return false;
@@ -238,7 +243,8 @@ namespace System.Security.Cryptography.Pkcs
                 string? digestAlgorithmOid,
                 HashAlgorithmName digestAlgorithmName,
                 int digestValueLength
-            ) {
+            )
+            {
                 if (signatureParameters == null)
                 {
                     throw new CryptographicException(SR.Cryptography_Pkcs_PssParametersMissing);
@@ -325,7 +331,8 @@ namespace System.Security.Cryptography.Pkcs
                 bool silent,
                 out string signatureAlgorithm,
                 out byte[] signatureValue
-            ) {
+            )
+            {
                 Debug.Fail("RSA-PSS requires building parameters, which has no API.");
                 throw new CryptographicException();
             }

@@ -116,7 +116,8 @@ namespace System.Xml.Xsl
                 uriString.Length != 0
                 && System.Uri.TryCreate(uriString, UriKind.Absolute, out uri)
                 && uri.IsFile
-            ) {
+            )
+            {
                 return uri.LocalPath;
             }
             return uriString;

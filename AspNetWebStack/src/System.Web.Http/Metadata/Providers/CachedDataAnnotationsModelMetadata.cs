@@ -20,13 +20,14 @@ namespace System.Web.Http.Metadata.Providers
             Type modelType,
             string propertyName,
             IEnumerable<Attribute> attributes
-        ) : base(
-            provider,
-            containerType,
-            modelType,
-            propertyName,
-            new CachedDataAnnotationsMetadataAttributes(attributes)
-        ) { }
+        )
+            : base(
+                provider,
+                containerType,
+                modelType,
+                propertyName,
+                new CachedDataAnnotationsMetadataAttributes(attributes)
+            ) { }
 
         protected override bool ComputeConvertEmptyStringToNull()
         {

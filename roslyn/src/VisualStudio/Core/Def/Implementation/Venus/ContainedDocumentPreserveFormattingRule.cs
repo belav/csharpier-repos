@@ -26,7 +26,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Venus
             in SyntaxToken previousToken,
             in SyntaxToken currentToken,
             in NextGetAdjustSpacesOperation nextOperation
-        ) {
+        )
+        {
             var operation = base.GetAdjustSpacesOperation(
                 in previousToken,
                 in currentToken,
@@ -44,7 +45,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Venus
             in SyntaxToken previousToken,
             in SyntaxToken currentToken,
             in NextGetAdjustNewLinesOperation nextOperation
-        ) {
+        )
+        {
             var operation = base.GetAdjustNewLinesOperation(
                 in previousToken,
                 in currentToken,

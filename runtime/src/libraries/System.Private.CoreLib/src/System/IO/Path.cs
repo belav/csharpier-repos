@@ -446,7 +446,8 @@ namespace System.IO
             ReadOnlySpan<char> path1,
             ReadOnlySpan<char> path2,
             ReadOnlySpan<char> path3
-        ) {
+        )
+        {
             if (path1.Length == 0)
                 return Join(path2, path3);
 
@@ -464,7 +465,8 @@ namespace System.IO
             ReadOnlySpan<char> path2,
             ReadOnlySpan<char> path3,
             ReadOnlySpan<char> path4
-        ) {
+        )
+        {
             if (path1.Length == 0)
                 return Join(path2, path3, path4);
 
@@ -534,7 +536,8 @@ namespace System.IO
                     if (
                         !PathInternal.IsDirectorySeparator(builder[builder.Length - 1])
                         && !PathInternal.IsDirectorySeparator(path[0])
-                    ) {
+                    )
+                    {
                         builder.Append(PathInternal.DirectorySeparatorChar);
                     }
 
@@ -550,7 +553,8 @@ namespace System.IO
             ReadOnlySpan<char> path2,
             Span<char> destination,
             out int charsWritten
-        ) {
+        )
+        {
             charsWritten = 0;
             if (path1.Length == 0 && path2.Length == 0)
                 return true;
@@ -591,7 +595,8 @@ namespace System.IO
             ReadOnlySpan<char> path3,
             Span<char> destination,
             out int charsWritten
-        ) {
+        )
+        {
             charsWritten = 0;
             if (path1.Length == 0 && path2.Length == 0 && path3.Length == 0)
                 return true;
@@ -665,7 +670,8 @@ namespace System.IO
             string second,
             string third,
             string fourth
-        ) {
+        )
+        {
             if (string.IsNullOrEmpty(first))
                 return CombineInternal(second, third, fourth);
             if (string.IsNullOrEmpty(second))
@@ -688,7 +694,8 @@ namespace System.IO
         private static unsafe string JoinInternal(
             ReadOnlySpan<char> first,
             ReadOnlySpan<char> second
-        ) {
+        )
+        {
             Debug.Assert(
                 first.Length > 0 && second.Length > 0,
                 "should have dealt with empty paths"
@@ -706,7 +713,8 @@ namespace System.IO
             fixed (
                 char* f = &MemoryMarshal.GetReference(first),
                     s = &MemoryMarshal.GetReference(second)
-            ) {
+            )
+            {
                 return StringExtensions.Create(
                     first.Length + second.Length + (hasSeparator ? 0 : 1),
                     (
@@ -739,7 +747,8 @@ namespace System.IO
                 char* third,
                 int thirdLength,
                 byte separators
-            ) {
+            )
+            {
                 First = first;
                 FirstLength = firstLength;
                 Second = second;
@@ -762,7 +771,8 @@ namespace System.IO
             ReadOnlySpan<char> first,
             ReadOnlySpan<char> second,
             ReadOnlySpan<char> third
-        ) {
+        )
+        {
             Debug.Assert(
                 first.Length > 0 && second.Length > 0 && third.Length > 0,
                 "should have dealt with empty paths"
@@ -783,7 +793,8 @@ namespace System.IO
                 char* f = &MemoryMarshal.GetReference(first),
                     s = &MemoryMarshal.GetReference(second),
                     t = &MemoryMarshal.GetReference(third)
-            ) {
+            )
+            {
                 var payload = new Join3Payload(
                     f,
                     first.Length,
@@ -836,7 +847,8 @@ namespace System.IO
                 char* fourth,
                 int fourthLength,
                 byte separators
-            ) {
+            )
+            {
                 First = first;
                 FirstLength = firstLength;
                 Second = second;
@@ -864,7 +876,8 @@ namespace System.IO
             ReadOnlySpan<char> second,
             ReadOnlySpan<char> third,
             ReadOnlySpan<char> fourth
-        ) {
+        )
+        {
             Debug.Assert(
                 first.Length > 0 && second.Length > 0 && third.Length > 0 && fourth.Length > 0,
                 "should have dealt with empty paths"
@@ -891,7 +904,8 @@ namespace System.IO
                     s = &MemoryMarshal.GetReference(second),
                     t = &MemoryMarshal.GetReference(third),
                     u = &MemoryMarshal.GetReference(fourth)
-            ) {
+            )
+            {
                 var payload = new Join4Payload(
                     f,
                     first.Length,
@@ -986,7 +1000,8 @@ namespace System.IO
             byte* bytes,
             int byteCount,
             Span<char> chars
-        ) {
+        )
+        {
             // This method requires bytes of length 8 and chars of length 12.
             Debug.Assert(bytes != null);
             Debug.Assert(byteCount == 8, $"Unexpected {nameof(byteCount)}");
@@ -1050,7 +1065,8 @@ namespace System.IO
             string relativeTo,
             string path,
             StringComparison comparisonType
-        ) {
+        )
+        {
             if (relativeTo == null)
                 throw new ArgumentNullException(nameof(relativeTo));
 

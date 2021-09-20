@@ -33,7 +33,8 @@ namespace System.Security.Cryptography.Pkcs.EnvelopedCmsTests.Tests
             using (
                 X509Certificate2 notMatchingCert =
                     Certificates.RSAKeyTransfer4_ExplicitSki.GetCertificate()
-            ) {
+            )
+            {
                 EnvelopedCms cms = GetDocWithRecipient(type, cert);
                 Assert.Equal(1, cms.RecipientInfos.Count);
                 Assert.False(
@@ -45,7 +46,8 @@ namespace System.Security.Cryptography.Pkcs.EnvelopedCmsTests.Tests
         private static EnvelopedCms GetDocWithRecipient(
             SubjectIdentifierType type,
             X509Certificate2 cert
-        ) {
+        )
+        {
             byte[] content = new byte[] { 1, 2, 3, 4 };
             EnvelopedCms cms = new EnvelopedCms(new ContentInfo(content));
             CmsRecipient recipient = new CmsRecipient(type, cert);

@@ -751,7 +751,8 @@ public class Point
                 var designation in tree.GetRoot()
                     .DescendantNodes()
                     .OfType<SingleVariableDesignationSyntax>()
-            ) {
+            )
+            {
                 var model = compilation.GetSemanticModel(tree);
                 var symbol = model.GetDeclaredSymbol(designation);
                 Assert.Equal(SymbolKind.Local, symbol.Kind);
@@ -3212,7 +3213,8 @@ class F
                 string expectedNaturalType,
                 string expectedConvertedType,
                 ConversionKind expectedConversionKind
-            ) {
+            )
+            {
                 var typeInfo = model.GetTypeInfo(expr);
                 var conversion = model.GetConversion(expr);
                 Assert.Equal(expectedNaturalType, typeInfo.Type?.ToTestDisplayString());

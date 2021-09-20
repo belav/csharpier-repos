@@ -37,7 +37,8 @@ namespace System.IO.Pipelines
             int minimumReadSize = -1,
             bool leaveOpen = false,
             bool useZeroByteReads = false
-        ) {
+        )
+        {
             Pool = pool ?? MemoryPool<byte>.Shared;
 
             IsDefaultSharedMemoryPool = Pool == MemoryPool<byte>.Shared;

@@ -244,7 +244,8 @@ namespace Microsoft.AspNetCore.Mvc.Core.Test
         [InlineData("")]
         public void LocalRedirectPermanentPreserveMethod_WithParameter_NullOrEmptyUrl_Throws(
             string url
-        ) {
+        )
+        {
             // Arrange
             var controller = new TestableController();
 
@@ -359,7 +360,8 @@ namespace Microsoft.AspNetCore.Mvc.Core.Test
         [InlineData("SampleController")]
         public void RedirectToAction_WithParameterActionAndControllerName_SetsEqualNames(
             string controllerName
-        ) {
+        )
+        {
             // Arrange
             var controller = new TestableController();
 
@@ -380,7 +382,8 @@ namespace Microsoft.AspNetCore.Mvc.Core.Test
         [InlineData("SampleController")]
         public void RedirectToActionPreserveMethod_WithParameterActionAndControllerName_SetsEqualNames(
             string controllerName
-        ) {
+        )
+        {
             // Arrange
             var controller = new TestableController();
 
@@ -404,7 +407,8 @@ namespace Microsoft.AspNetCore.Mvc.Core.Test
         [InlineData("SampleController")]
         public void RedirectToActionPermanent_WithParameterActionAndControllerName_SetsEqualNames(
             string controllerName
-        ) {
+        )
+        {
             // Arrange
             var controller = new TestableController();
 
@@ -428,7 +432,8 @@ namespace Microsoft.AspNetCore.Mvc.Core.Test
         [InlineData("SampleController")]
         public void RedirectToActionPermanentPreserveMethod_WithParameterActionAndControllerName_SetsEqualNames(
             string controllerName
-        ) {
+        )
+        {
             // Arrange
             var controller = new TestableController();
 
@@ -451,7 +456,8 @@ namespace Microsoft.AspNetCore.Mvc.Core.Test
         public void RedirectToAction_WithParameterActionControllerRouteValues_SetsResultProperties(
             object routeValues,
             IEnumerable<KeyValuePair<string, object>> expected
-        ) {
+        )
+        {
             // Arrange
             var controller = new TestableController();
 
@@ -476,7 +482,8 @@ namespace Microsoft.AspNetCore.Mvc.Core.Test
         public void RedirectToActionPreserveMethod_WithParameterActionControllerRouteValues_SetsResultProperties(
             object routeValues,
             IEnumerable<KeyValuePair<string, object>> expected
-        ) {
+        )
+        {
             // Arrange
             var controller = new TestableController();
 
@@ -501,7 +508,8 @@ namespace Microsoft.AspNetCore.Mvc.Core.Test
         public void RedirectToActionPermanent_WithParameterActionControllerRouteValues_SetsResultProperties(
             object routeValues,
             IEnumerable<KeyValuePair<string, object>> expected
-        ) {
+        )
+        {
             // Arrange
             var controller = new TestableController();
 
@@ -526,7 +534,8 @@ namespace Microsoft.AspNetCore.Mvc.Core.Test
         public void RedirectToActionPermanentPreserveMethod_WithParameterActionControllerRouteValues_SetsResultProperties(
             object routeValues,
             IEnumerable<KeyValuePair<string, object>> expected
-        ) {
+        )
+        {
             // Arrange
             var controller = new TestableController();
 
@@ -551,7 +560,8 @@ namespace Microsoft.AspNetCore.Mvc.Core.Test
         public void RedirectToAction_WithParameterActionAndRouteValues_SetsResultProperties(
             object routeValues,
             IEnumerable<KeyValuePair<string, object>> expected
-        ) {
+        )
+        {
             // Arrange
             var controller = new TestableController();
 
@@ -574,7 +584,8 @@ namespace Microsoft.AspNetCore.Mvc.Core.Test
         public void RedirectToActionPreserveMethod_WithParameterActionAndRouteValues_SetsResultProperties(
             object routeValues,
             IEnumerable<KeyValuePair<string, object>> expected
-        ) {
+        )
+        {
             // Arrange
             var controller = new TestableController();
 
@@ -597,7 +608,8 @@ namespace Microsoft.AspNetCore.Mvc.Core.Test
         public void RedirectToAction_WithParameterActionAndControllerAndRouteValuesAndFragment_SetsResultProperties(
             object routeValues,
             IEnumerable<KeyValuePair<string, object>> expectedRouteValues
-        ) {
+        )
+        {
             // Arrange
             var controller = new TestableController();
             var expectedAction = "Action";
@@ -622,7 +634,8 @@ namespace Microsoft.AspNetCore.Mvc.Core.Test
         public void RedirectToActionPreserveMethod_WithParameterActionAndControllerAndRouteValuesAndFragment_SetsResultProperties(
             object routeValues,
             IEnumerable<KeyValuePair<string, object>> expectedRouteValues
-        ) {
+        )
+        {
             // Arrange
             var controller = new TestableController();
             var expectedAction = "Action";
@@ -652,7 +665,8 @@ namespace Microsoft.AspNetCore.Mvc.Core.Test
         public void RedirectToActionPermanent_WithParameterActionAndRouteValues_SetsResultProperties(
             object routeValues,
             IEnumerable<KeyValuePair<string, object>> expected
-        ) {
+        )
+        {
             // Arrange
             var controller = new TestableController();
 
@@ -672,7 +686,8 @@ namespace Microsoft.AspNetCore.Mvc.Core.Test
         public void RedirectToActionPermanentPreserveMethod_WithParameterActionAndRouteValues_SetsResultProperties(
             object routeValues,
             IEnumerable<KeyValuePair<string, object>> expected
-        ) {
+        )
+        {
             // Arrange
             var controller = new TestableController();
 
@@ -695,7 +710,8 @@ namespace Microsoft.AspNetCore.Mvc.Core.Test
         public void RedirectToActionPermanent_WithParameterActionAndControllerAndRouteValuesAndFragment_SetsResultProperties(
             object routeValues,
             IEnumerable<KeyValuePair<string, object>> expectedRouteValues
-        ) {
+        )
+        {
             // Arrange
             var controller = new TestableController();
             var expectedAction = "Action";
@@ -725,7 +741,8 @@ namespace Microsoft.AspNetCore.Mvc.Core.Test
         public void RedirectToActionPermanentPreserveMethod_WithParameterActionAndControllerAndRouteValuesAndFragment_SetsResultProperties(
             object routeValues,
             IEnumerable<KeyValuePair<string, object>> expectedRouteValues
-        ) {
+        )
+        {
             // Arrange
             var controller = new TestableController();
             var expectedAction = "Action";
@@ -755,7 +772,8 @@ namespace Microsoft.AspNetCore.Mvc.Core.Test
         public void RedirectToRoute_WithParameterRouteValues_SetsResultEqualRouteValues(
             object routeValues,
             IEnumerable<KeyValuePair<string, object>> expected
-        ) {
+        )
+        {
             // Arrange
             var controller = new TestableController();
 
@@ -774,7 +792,8 @@ namespace Microsoft.AspNetCore.Mvc.Core.Test
         public void RedirectToRoutePreserveMethod_WithParameterRouteValues_SetsResultEqualRouteValues(
             object routeValues,
             IEnumerable<KeyValuePair<string, object>> expected
-        ) {
+        )
+        {
             // Arrange
             var controller = new TestableController();
 
@@ -795,7 +814,8 @@ namespace Microsoft.AspNetCore.Mvc.Core.Test
         public void RedirectToRoute_WithParameterRouteNameAndRouteValuesAndFragment_SetsResultProperties(
             object routeValues,
             IEnumerable<KeyValuePair<string, object>> expectedRouteValues
-        ) {
+        )
+        {
             // Arrange
             var controller = new TestableController();
             var expectedRoute = "TestRoute";
@@ -818,7 +838,8 @@ namespace Microsoft.AspNetCore.Mvc.Core.Test
         public void RedirectToRoutePreserveMethod_WithParameterRouteNameAndRouteValuesAndFragment_SetsResultProperties(
             object routeValues,
             IEnumerable<KeyValuePair<string, object>> expectedRouteValues
-        ) {
+        )
+        {
             // Arrange
             var controller = new TestableController();
             var expectedRoute = "TestRoute";
@@ -845,7 +866,8 @@ namespace Microsoft.AspNetCore.Mvc.Core.Test
         public void RedirectToRoutePermanent_WithParameterRouteValues_SetsResultEqualRouteValuesAndPermanent(
             object routeValues,
             IEnumerable<KeyValuePair<string, object>> expected
-        ) {
+        )
+        {
             // Arrange
             var controller = new TestableController();
 
@@ -864,7 +886,8 @@ namespace Microsoft.AspNetCore.Mvc.Core.Test
         public void RedirectToRoutePermanentPreserveMethod_WithParameterRouteValues_SetsResultEqualRouteValuesAndPermanent(
             object routeValues,
             IEnumerable<KeyValuePair<string, object>> expected
-        ) {
+        )
+        {
             // Arrange
             var controller = new TestableController();
 
@@ -885,7 +908,8 @@ namespace Microsoft.AspNetCore.Mvc.Core.Test
         public void RedirectToRoutePermanent_WithParameterRouteNameAndRouteValuesAndFragment_SetsResultProperties(
             object routeValues,
             IEnumerable<KeyValuePair<string, object>> expectedRouteValues
-        ) {
+        )
+        {
             // Arrange
             var controller = new TestableController();
             var expectedRoute = "TestRoute";
@@ -908,7 +932,8 @@ namespace Microsoft.AspNetCore.Mvc.Core.Test
         public void RedirectToRoutePermanentPreserveMethod_WithParameterRouteNameAndRouteValuesAndFragment_SetsResultProperties(
             object routeValues,
             IEnumerable<KeyValuePair<string, object>> expectedRouteValues
-        ) {
+        )
+        {
             // Arrange
             var controller = new TestableController();
             var expectedRoute = "TestRoute";
@@ -1005,7 +1030,8 @@ namespace Microsoft.AspNetCore.Mvc.Core.Test
         public void RedirectToRoute_WithParameterRouteNameAndRouteValues_SetsResultSameRouteNameAndRouteValues(
             object routeValues,
             IEnumerable<KeyValuePair<string, object>> expected
-        ) {
+        )
+        {
             // Arrange
             var controller = new TestableController();
             var routeName = "CustomRouteName";
@@ -1026,7 +1052,8 @@ namespace Microsoft.AspNetCore.Mvc.Core.Test
         public void RedirectToRoutePreserveMethod_WithParameterRouteNameAndRouteValues_SetsResultSameRouteNameAndRouteValues(
             object routeValues,
             IEnumerable<KeyValuePair<string, object>> expected
-        ) {
+        )
+        {
             // Arrange
             var controller = new TestableController();
             var routeName = "CustomRouteName";
@@ -1050,7 +1077,8 @@ namespace Microsoft.AspNetCore.Mvc.Core.Test
         public void RedirectToRoutePermanent_WithParameterRouteNameAndRouteValues_SetsResultProperties(
             object routeValues,
             IEnumerable<KeyValuePair<string, object>> expected
-        ) {
+        )
+        {
             // Arrange
             var controller = new TestableController();
             var routeName = "CustomRouteName";
@@ -1304,7 +1332,8 @@ namespace Microsoft.AspNetCore.Mvc.Core.Test
         public void RedirectToPagePreserveMethod_SetsResultProperties(
             object routeValues,
             IEnumerable<KeyValuePair<string, object>> expected
-        ) {
+        )
+        {
             // Arrange
             var pageModel = new TestableController();
             var pageName = "CustomRouteName";
@@ -1328,7 +1357,8 @@ namespace Microsoft.AspNetCore.Mvc.Core.Test
         public void RedirectToPagePermanentPreserveMethod_SetsResultProperties(
             object routeValues,
             IEnumerable<KeyValuePair<string, object>> expected
-        ) {
+        )
+        {
             // Arrange
             var pageModel = new TestableController();
             var routeName = "CustomRouteName";
@@ -1352,7 +1382,8 @@ namespace Microsoft.AspNetCore.Mvc.Core.Test
         public void RedirectToRoutePermanentPreserveMethod_WithParameterRouteNameAndRouteValues_SetsResultProperties(
             object routeValues,
             IEnumerable<KeyValuePair<string, object>> expected
-        ) {
+        )
+        {
             // Arrange
             var controller = new TestableController();
             var routeName = "CustomRouteName";
@@ -1440,7 +1471,8 @@ namespace Microsoft.AspNetCore.Mvc.Core.Test
         [InlineData("SampleController")]
         public void CreatedAtAction_WithActionControllerAndNullRouteValue_SetsSameValue(
             string controllerName
-        ) {
+        )
+        {
             // Arrange
             var controller = new TestableController();
 
@@ -1767,7 +1799,8 @@ namespace Microsoft.AspNetCore.Mvc.Core.Test
             string lastModifiedString,
             string entityTagString,
             bool enableRangeProcessing
-        ) {
+        )
+        {
             // Arrange
             var controller = new TestableController();
             var fileContents = new byte[0];
@@ -1824,7 +1857,8 @@ namespace Microsoft.AspNetCore.Mvc.Core.Test
             string lastModifiedString,
             string entityTagString,
             bool enableRangeProcessing
-        ) {
+        )
+        {
             // Arrange
             var controller = new TestableController();
             var fileContents = new byte[0];
@@ -1882,7 +1916,8 @@ namespace Microsoft.AspNetCore.Mvc.Core.Test
             string lastModifiedString,
             string entityTagString,
             bool enableRangeProcessing
-        ) {
+        )
+        {
             // Arrange
             var controller = new TestableController();
             var path = Path.GetFullPath("somepath");
@@ -1939,7 +1974,8 @@ namespace Microsoft.AspNetCore.Mvc.Core.Test
             string lastModifiedString,
             string entityTagString,
             bool enableRangeProcessing
-        ) {
+        )
+        {
             // Arrange
             var controller = new TestableController();
             var path = Path.GetFullPath("somepath");
@@ -2002,7 +2038,8 @@ namespace Microsoft.AspNetCore.Mvc.Core.Test
             string lastModifiedString,
             string entityTagString,
             bool enableRangeProcessing
-        ) {
+        )
+        {
             // Arrange
             var mockHttpContext = new Mock<HttpContext>();
             mockHttpContext.Setup(x => x.Response.RegisterForDispose(It.IsAny<IDisposable>()));
@@ -2068,7 +2105,8 @@ namespace Microsoft.AspNetCore.Mvc.Core.Test
             string lastModifiedString,
             string entityTagString,
             bool enableRangeProcessing
-        ) {
+        )
+        {
             // Arrange
             var mockHttpContext = new Mock<HttpContext>();
 
@@ -2303,7 +2341,8 @@ namespace Microsoft.AspNetCore.Mvc.Core.Test
         [MemberData(nameof(PublicNormalMethodsFromControllerBase))]
         public void NonActionAttribute_IsOnEveryPublicNormalMethodFromControllerBase(
             MethodInfo method
-        ) {
+        )
+        {
             // Arrange & Act & Assert
             Assert.True(method.IsDefined(typeof(NonActionAttribute)));
         }
@@ -2944,7 +2983,8 @@ namespace Microsoft.AspNetCore.Mvc.Core.Test
         [InlineData("prefix")]
         public async Task TryUpdateModel_IncludeExpressionOverload_UsesPassedArguments(
             string prefix
-        ) {
+        )
+        {
             // Arrange
             var valueProvider = new Mock<IValueProvider>();
             valueProvider.Setup(v => v.ContainsPrefix(prefix)).Returns(true);
@@ -2988,7 +3028,8 @@ namespace Microsoft.AspNetCore.Mvc.Core.Test
         [InlineData("prefix")]
         public async Task TryUpdateModel_IncludeExpressionWithValueProviderOverload_UsesPassedArguments(
             string prefix
-        ) {
+        )
+        {
             // Arrange
             var valueProvider = new Mock<IValueProvider>();
             valueProvider.Setup(v => v.ContainsPrefix(prefix)).Returns(true);
@@ -3366,7 +3407,8 @@ namespace Microsoft.AspNetCore.Mvc.Core.Test
         private static ControllerBase GetController(
             IModelBinder binder,
             IValueProvider valueProvider = null
-        ) {
+        )
+        {
             var metadataProvider = new EmptyModelMetadataProvider();
             var services = new ServiceCollection();
             services.AddSingleton<ILoggerFactory>(NullLoggerFactory.Instance);

@@ -150,7 +150,8 @@ namespace System.Diagnostics.PerformanceData
 
                 foreach (
                     KeyValuePair<int, CounterType> CounterDef in _instance._counterSet._idToCounter
-                ) {
+                )
+                {
                     CounterData thisCounterData = new CounterData(
                         (long*)(_dataBlock + CounterOffset * sizeof(long))
                     );

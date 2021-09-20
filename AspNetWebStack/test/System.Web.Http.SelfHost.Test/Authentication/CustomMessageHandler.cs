@@ -15,7 +15,8 @@ namespace System.Web.Http
         protected override async Task<HttpResponseMessage> SendAsync(
             HttpRequestMessage request,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             IPrincipal originalPrincipal = Thread.CurrentPrincipal;
 
             // here you can see the requestor's identity via the request message

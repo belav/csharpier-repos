@@ -28,17 +28,14 @@ namespace System.Web.Mvc
         /// <see cref="SelectListItem"/>.</param>
         /// <param name="disabledValues">The disabled values. Used to match the Disabled property of the corresponding
         /// <see cref="SelectListItem"/>.</param>
-        public SelectList(
-            IEnumerable items,
-            object selectedValue,
-            IEnumerable disabledValues
-        ) : this(
-            items,
-            dataValueField: null,
-            dataTextField: null,
-            selectedValue: selectedValue,
-            disabledValues: disabledValues
-        ) { }
+        public SelectList(IEnumerable items, object selectedValue, IEnumerable disabledValues)
+            : this(
+                items,
+                dataValueField: null,
+                dataTextField: null,
+                selectedValue: selectedValue,
+                disabledValues: disabledValues
+            ) { }
 
         public SelectList(IEnumerable items, string dataValueField, string dataTextField)
             : this(items, dataValueField, dataTextField, selectedValue: null) { }
@@ -124,14 +121,16 @@ namespace System.Web.Mvc
             string dataGroupField,
             object selectedValue,
             IEnumerable disabledValues
-        ) : base(
-            items,
-            dataValueField,
-            dataTextField,
-            dataGroupField,
-            ToEnumerable(selectedValue),
-            disabledValues
-        ) {
+        )
+            : base(
+                items,
+                dataValueField,
+                dataTextField,
+                dataGroupField,
+                ToEnumerable(selectedValue),
+                disabledValues
+            )
+        {
             SelectedValue = selectedValue;
         }
 
@@ -161,15 +160,17 @@ namespace System.Web.Mvc
             object selectedValue,
             IEnumerable disabledValues,
             IEnumerable disabledGroups
-        ) : base(
-            items,
-            dataValueField,
-            dataTextField,
-            dataGroupField,
-            ToEnumerable(selectedValue),
-            disabledValues,
-            disabledGroups
-        ) {
+        )
+            : base(
+                items,
+                dataValueField,
+                dataTextField,
+                dataGroupField,
+                ToEnumerable(selectedValue),
+                disabledValues,
+                disabledGroups
+            )
+        {
             SelectedValue = selectedValue;
         }
 

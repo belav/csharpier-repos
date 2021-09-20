@@ -42,7 +42,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UseIndexOrRangeOperator
                 MemberInfo memberInfo,
                 IOperation op1,
                 IOperation? op2
-            ) {
+            )
+            {
                 Kind = kind;
                 Option = option;
                 InvocationOperation = invocationOperation;

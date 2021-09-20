@@ -20,7 +20,8 @@ namespace Microsoft.CodeAnalysis.FindSymbols
             Solution solution,
             IStreamingFindLiteralReferencesProgress progress,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             using (Logger.LogBlock(FunctionId.FindReference, cancellationToken))
             {
                 var client = await RemoteHostClient.TryGetClientAsync(
@@ -68,7 +69,8 @@ namespace Microsoft.CodeAnalysis.FindSymbols
             Solution solution,
             IStreamingFindLiteralReferencesProgress progress,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var engine = new FindLiteralsSearchEngine(solution, progress, value, cancellationToken);
             return engine.FindReferencesAsync();
         }

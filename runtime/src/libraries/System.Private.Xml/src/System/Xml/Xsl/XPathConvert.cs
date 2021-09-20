@@ -558,13 +558,15 @@ namespace System.Xml.Xsl
                     if (
                         0 != (rgu2 & 0x40000000)
                         && (0 != (rgu2 & 0xBFFFFFFF) || 0 != rgu1 || 0 != rgu0)
-                    ) {
+                    )
+                    {
                         // Round up by 1
                         if (
                             0 != AddU(ref rgu2, 0x40000000)
                             && 0 != AddU(ref rgu3, 1)
                             && 0 != AddU(ref rgu4, 1)
-                        ) {
+                        )
+                        {
                             AddU(ref rgu5, 1);
                             if (0 != (rgu5 & 0x80000000))
                             {
@@ -593,13 +595,15 @@ namespace System.Xml.Xsl
                     if (
                         0 != (rgu2 & 0x80000000)
                         && (0 != (rgu3 & 1) || 0 != (rgu2 & 0x7FFFFFFF) || 0 != rgu1 || 0 != rgu0)
-                    ) {
+                    )
+                    {
                         // Round up by 1
                         if (
                             0 != AddU(ref rgu3, 1)
                             && 0 != AddU(ref rgu4, 1)
                             && 0 != AddU(ref rgu5, 1)
-                        ) {
+                        )
+                        {
                             Debug.Assert(0 == rgu3);
                             Debug.Assert(0 == rgu4);
                             Debug.Assert(0 == rgu5);
@@ -724,7 +728,8 @@ namespace System.Xml.Xsl
                     && 0 != AddU(ref _u0, uT)
                     && 0 != AddU(ref _u1, 1)
                     && 0 != AddU(ref _u2, 1)
-                ) {
+                )
+                {
                     Debug.Assert(0 == _u2 && 0 == _u1);
                     _u2 = 0x80000000;
                     _u0 = (_u0 >> 1) + (_u0 & 1);
@@ -743,7 +748,8 @@ namespace System.Xml.Xsl
                     0 != uT
                     && 0 == AddU(ref _u0, unchecked((uint)-(int)uT))
                     && 0 == AddU(ref _u1, 0xFFFFFFFF)
-                ) {
+                )
+                {
                     AddU(ref _u2, 0xFFFFFFFF);
                     if (0 == (0x80000000 & _u2))
                     {
@@ -763,7 +769,8 @@ namespace System.Xml.Xsl
                 byte[] mantissa,
                 out int exponent,
                 out int mantissaSize
-            ) {
+            )
+            {
                 BigNumber numHH,
                     numHL,
                     numLH,
@@ -1131,7 +1138,8 @@ namespace System.Xml.Xsl
                 byte[] mantissa,
                 out int exponent,
                 out int mantissaSize
-            ) {
+            )
+            {
                 BigInteger biNum = new BigInteger();
                 BigInteger biDen = new BigInteger();
                 BigInteger biHi = new BigInteger();
@@ -2502,7 +2510,8 @@ namespace System.Xml.Xsl
                     _exponent != other._exponent
                     || _sign != other._sign
                     || _mantissaSize != other._mantissaSize
-                ) {
+                )
+                {
                     return false;
                 }
                 for (int idx = 0; idx < _mantissaSize; idx++)

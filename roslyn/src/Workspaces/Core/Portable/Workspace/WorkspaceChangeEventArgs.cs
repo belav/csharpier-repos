@@ -68,7 +68,8 @@ namespace Microsoft.CodeAnalysis
             Solution newSolution,
             ProjectId? projectId = null,
             DocumentId? documentId = null
-        ) {
+        )
+        {
             if (!kind.IsValid())
                 throw new ArgumentOutOfRangeException(nameof(kind));
 

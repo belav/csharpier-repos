@@ -72,7 +72,8 @@ namespace Microsoft.Extensions.Logging.Testing.Tests
         public void Asserts_Success_ExpectedValues_SubsetOf_ActualValues(
             IEnumerable<KeyValuePair<string, object>> expectedValues,
             IEnumerable<KeyValuePair<string, object>> actualValues
-        ) {
+        )
+        {
             // Act && Assert
             LogValuesAssert.Contains(expectedValues, actualValues);
         }
@@ -119,7 +120,8 @@ namespace Microsoft.Extensions.Logging.Testing.Tests
         public void Asserts_Failure_ExpectedValues_MoreThan_ActualValues(
             IEnumerable<KeyValuePair<string, object>> expectedValues,
             IEnumerable<KeyValuePair<string, object>> actualValues
-        ) {
+        )
+        {
             // Act && Assert
             var equalException = Assert.Throws<EqualException>(
                 () => LogValuesAssert.Contains(expectedValues, actualValues)
@@ -210,7 +212,8 @@ namespace Microsoft.Extensions.Logging.Testing.Tests
         public void DefaultComparer_Performs_CaseSensitiveComparision(
             IEnumerable<KeyValuePair<string, object>> expectedValues,
             IEnumerable<KeyValuePair<string, object>> actualValues
-        ) {
+        )
+        {
             // Act && Assert
             var equalException = Assert.Throws<EqualException>(
                 () => LogValuesAssert.Contains(expectedValues, actualValues)

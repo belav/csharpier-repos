@@ -52,7 +52,8 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation.DependencyResolution
             public CommandResult RunComponentResolutionTest(
                 TestApp component,
                 Action<Command> commandCustomizer = null
-            ) {
+            )
+            {
                 return RunComponentResolutionTest(
                     component.AppDll,
                     FrameworkReferenceApp,
@@ -66,7 +67,8 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation.DependencyResolution
                 TestApp hostApp,
                 string hostFxrFolder,
                 Action<Command> commandCustomizer = null
-            ) {
+            )
+            {
                 string[] args =
                 {
                     resolve_component_dependencies,
@@ -92,7 +94,8 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation.DependencyResolution
             public CommandResult RunComponentResolutionMultiThreadedTest(
                 TestApp componentOne,
                 TestApp componentTwo
-            ) {
+            )
+            {
                 return RunComponentResolutionMultiThreadedTest(
                     componentOne.AppDll,
                     componentTwo.AppDll,
@@ -106,7 +109,8 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation.DependencyResolution
                 string componentTwoPath,
                 TestApp hostApp,
                 string hostFxrFolder
-            ) {
+            )
+            {
                 string[] args =
                 {
                     resolve_component_dependencies,

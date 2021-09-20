@@ -95,7 +95,8 @@ namespace Microsoft.AspNetCore.Http
             long offset,
             long? count,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             if (!_started)
             {
                 await StartAsync(cancellationToken);

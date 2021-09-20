@@ -128,7 +128,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.QuickInfo
         public async Task MultipleWarningsAreDisplayedDependingOnCursorPosition(
             string pragma,
             int errorCode
-        ) {
+        )
+        {
             await TestInMethodAsync(
                 @$"
 {pragma}
@@ -223,7 +224,8 @@ namespace T
         public async Task QuickInfoSuppressMessageAttributeUseCases(
             string suppressMessageAttribute,
             bool shouldShowQuickInfo
-        ) {
+        )
+        {
             var description = shouldShowQuickInfo
                 ? GetFormattedIDEAnalyzerTitle(
                       51,
@@ -259,7 +261,8 @@ namespace T
             int position,
             string expectedDescription,
             ImmutableArray<TextSpan> relatedSpans
-        ) {
+        )
+        {
             var info = await GetQuickinfo(workspace, document, position);
             var description = info?.Sections.FirstOrDefault(
                 s => s.Kind == QuickInfoSectionKinds.Description
@@ -282,7 +285,8 @@ namespace T
             TestWorkspace workspace,
             Document document,
             int position
-        ) {
+        )
+        {
             var diagnosticAnalyzerService =
                 workspace.ExportProvider.GetExportedValue<IDiagnosticAnalyzerService>();
             var provider = new CSharpDiagnosticAnalyzerQuickInfoProvider(diagnosticAnalyzerService);
@@ -296,7 +300,8 @@ namespace T
             TestWorkspace workspace,
             Document document,
             int position
-        ) {
+        )
+        {
             var info = await GetQuickinfo(workspace, document, position);
             Assert.Null(info);
         }
@@ -306,7 +311,8 @@ namespace T
             string expectedDescription,
             ImmutableArray<TextSpan> relatedSpans,
             CSharpParseOptions parseOptions = null
-        ) {
+        )
+        {
             using var workspace = TestWorkspace.CreateCSharp(code, parseOptions);
             var analyzerReference = new AnalyzerImageReference(
                 ImmutableArray.Create<DiagnosticAnalyzer>(
@@ -346,7 +352,8 @@ namespace T
         private static string GetFormattedIDEAnalyzerTitle(
             int ideDiagnosticId,
             string nameOfLocalizableStringResource
-        ) {
+        )
+        {
             var localizable = new LocalizableResourceString(
                 nameOfLocalizableStringResource,
                 AnalyzersResources.ResourceManager,

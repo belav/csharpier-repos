@@ -15,7 +15,8 @@ namespace Microsoft.AspNetCore.Mvc.Localization
             IServiceCollection services,
             LanguageViewLocationExpanderFormat format,
             Action<LocalizationOptions>? setupAction
-        ) {
+        )
+        {
             AddMvcViewLocalizationServices(services, format);
 
             if (setupAction == null)
@@ -32,7 +33,8 @@ namespace Microsoft.AspNetCore.Mvc.Localization
         public static void AddMvcViewLocalizationServices(
             IServiceCollection services,
             LanguageViewLocationExpanderFormat format
-        ) {
+        )
+        {
             services.Configure<RazorViewEngineOptions>(
                 options =>
                 {

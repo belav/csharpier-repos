@@ -21,7 +21,8 @@ namespace System.Net.Sockets
             byte[]? preBuffer,
             byte[]? postBuffer,
             bool doDisconnect
-        ) {
+        )
+        {
             _fileStream = fileStream;
             _doDisconnect = doDisconnect;
 

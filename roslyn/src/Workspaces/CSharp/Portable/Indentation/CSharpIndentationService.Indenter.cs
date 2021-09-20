@@ -56,7 +56,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Indentation
         private static IndentationResult? TryGetDesiredIndentation(
             Indenter indenter,
             SyntaxTrivia? triviaOpt
-        ) {
+        )
+        {
             // If we have a // comment, and it's the only thing on the line, then if we hit enter, we should align to
             // that.  This helps for cases like:
             //
@@ -84,7 +85,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Indentation
         private static IndentationResult? TryGetDesiredIndentation(
             Indenter indenter,
             SyntaxToken? tokenOpt
-        ) {
+        )
+        {
             if (tokenOpt == null)
                 return null;
 
@@ -94,7 +96,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Indentation
         private static IndentationResult GetIndentationBasedOnToken(
             Indenter indenter,
             SyntaxToken token
-        ) {
+        )
+        {
             Contract.ThrowIfNull(indenter.Tree);
             Contract.ThrowIfTrue(token.Kind() == SyntaxKind.None);
 
@@ -111,7 +114,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Indentation
                     token.IsKind(SyntaxKind.CloseBraceToken)
                     && token.Parent.IsKind(SyntaxKind.Interpolation)
                 )
-            ) {
+            )
+            {
                 return indenter.IndentFromStartOfLine(0);
             }
 
@@ -214,7 +218,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Indentation
                     if (
                         token.Parent.IsKind(SyntaxKind.AccessorList)
                         && token.Parent.Parent.IsKind(SyntaxKind.PropertyDeclaration)
-                    ) {
+                    )
+                    {
                         if (token.GetNextToken().IsEqualsTokenInAutoPropertyInitializers())
                         {
                             return GetDefaultIndentationFromToken(indenter, token);
@@ -379,7 +384,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Indentation
         private static IndentationResult GetDefaultIndentationFromToken(
             Indenter indenter,
             SyntaxToken token
-        ) {
+        )
+        {
             if (IsPartOfQueryExpression(token))
             {
                 return GetIndentationForQueryExpression(indenter, token);
@@ -391,7 +397,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Indentation
         private static IndentationResult GetIndentationForQueryExpression(
             Indenter indenter,
             SyntaxToken token
-        ) {
+        )
+        {
             // find containing non terminal node
             var queryExpressionClause = GetQueryExpressionClause(token);
             if (queryExpressionClause == null)
@@ -488,7 +495,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Indentation
             Indenter indenter,
             SyntaxToken token,
             int? additionalSpace = null
-        ) {
+        )
+        {
             var spaceToAdd =
                 additionalSpace
                 ?? indenter.OptionSet.GetOption(FormattingOptions.IndentationSize, token.Language);

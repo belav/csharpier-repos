@@ -1207,7 +1207,8 @@ xoMaz20Yx+2TSN5dSm2FcD+0YFI=",
             PbeParameters pbe,
             in ECParameters expected,
             bool isSupported = true
-        ) {
+        )
+        {
             if (isSupported)
             {
                 ReadWriteKey(
@@ -1273,7 +1274,8 @@ xoMaz20Yx+2TSN5dSm2FcD+0YFI=",
             PbeParameters pbe,
             in ECParameters expected,
             bool isSupported = true
-        ) {
+        )
+        {
             if (isSupported)
             {
                 ReadWriteKey(
@@ -1339,7 +1341,8 @@ xoMaz20Yx+2TSN5dSm2FcD+0YFI=",
             string base64Pkcs8,
             in ECParameters expected,
             bool isSupported = true
-        ) {
+        )
+        {
             if (isSupported)
             {
                 ReadWriteKey(
@@ -1372,7 +1375,8 @@ xoMaz20Yx+2TSN5dSm2FcD+0YFI=",
             string base64Pkcs8,
             in ECParameters expected,
             bool isSupported = true
-        ) {
+        )
+        {
             if (isSupported)
             {
                 ReadWriteKey(
@@ -1406,7 +1410,8 @@ xoMaz20Yx+2TSN5dSm2FcD+0YFI=",
             string base64SubjectPublicKeyInfo,
             in ECParameters expected,
             bool isSupported = true
-        ) {
+        )
+        {
             if (isSupported)
             {
                 ECParameters expectedPublic = expected;
@@ -1453,7 +1458,8 @@ xoMaz20Yx+2TSN5dSm2FcD+0YFI=",
             bool isEncrypted = false,
             Func<T, byte[]> writePublicArrayFunc = null,
             WriteKeyToSpanFunc writePublicSpanFunc = null
-        ) {
+        )
+        {
             bool isPrivateKey = expected.D != null;
 
             byte[] derBytes = Convert.FromBase64String(base64);

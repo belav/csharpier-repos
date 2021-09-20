@@ -92,7 +92,8 @@ namespace Microsoft.CodeAnalysis.Scripting.Hosting
                 Assembly assembly,
                 AssemblyIdentity identity,
                 string locationOpt
-            ) {
+            )
+            {
                 Debug.Assert(assembly != null && identity != null);
 
                 Assembly = assembly;
@@ -255,7 +256,8 @@ namespace Microsoft.CodeAnalysis.Scripting.Hosting
                     simpleName,
                     out sameSimpleNameAssemblyIdentities
                 )
-            ) {
+            )
+            {
                 sameSimpleNameAssemblyIdentities.Add(dependency);
             }
             else
@@ -270,7 +272,8 @@ namespace Microsoft.CodeAnalysis.Scripting.Hosting
         internal Assembly ResolveAssembly(
             string assemblyDisplayName,
             Assembly requestingAssemblyOpt
-        ) {
+        )
+        {
             AssemblyIdentity identity;
             if (!AssemblyIdentity.TryParseDisplayName(assemblyDisplayName, out identity))
             {
@@ -287,7 +290,8 @@ namespace Microsoft.CodeAnalysis.Scripting.Hosting
                         requestingAssemblyOpt,
                         out loadedAssembly
                     )
-                ) {
+                )
+                {
                     loadDirectoryOpt = Path.GetDirectoryName(loadedAssembly.OriginalPath);
                 }
                 else
@@ -357,7 +361,8 @@ namespace Microsoft.CodeAnalysis.Scripting.Hosting
                             TryReadMvid(assemblyFilePathOpt, out mvid)
                             && loadedAssemblyWithEqualNameAndVersionOpt.Assembly.ManifestModule.ModuleVersionId
                                 == mvid
-                        ) {
+                        )
+                        {
                             return loadedAssemblyWithEqualNameAndVersionOpt.Assembly;
                         }
 
@@ -430,7 +435,8 @@ namespace Microsoft.CodeAnalysis.Scripting.Hosting
                     && identity.Equals(
                         AssemblyIdentity.FromAssemblyDefinition(assemblyAndLocation.Assembly)
                     )
-                ) {
+                )
+                {
                     return assemblyAndLocation.Assembly;
                 }
             }
@@ -449,7 +455,8 @@ namespace Microsoft.CodeAnalysis.Scripting.Hosting
                         FileAccess.Read,
                         FileShare.ReadWrite | FileShare.Delete
                     )
-                ) {
+                )
+                {
                     using (var peReader = new PEReader(stream))
                     {
                         var metadataReader = peReader.GetMetadataReader();
@@ -491,7 +498,8 @@ namespace Microsoft.CodeAnalysis.Scripting.Hosting
                         identity.Name,
                         out sameSimpleNameIdentities
                     )
-                ) {
+                )
+                {
                     var identityAndLocation = FindHighestVersionOrFirstMatchingIdentity(
                         identity,
                         sameSimpleNameIdentities
@@ -505,7 +513,8 @@ namespace Microsoft.CodeAnalysis.Scripting.Hosting
                                 assemblyFileToLoad,
                                 out assemblyAndLocation
                             )
-                        ) {
+                        )
+                        {
                             return assemblyAndLocation.Assembly;
                         }
                     }
@@ -539,7 +548,8 @@ namespace Microsoft.CodeAnalysis.Scripting.Hosting
                         assemblyAndLocation.Assembly,
                         out loadedAssembly
                     )
-                ) {
+                )
+                {
                     return assemblyAndLocation;
                 }
 
@@ -565,7 +575,8 @@ namespace Microsoft.CodeAnalysis.Scripting.Hosting
         private static Assembly FindHighestVersionOrFirstMatchingIdentity(
             AssemblyIdentity identity,
             IEnumerable<LoadedAssemblyInfo> infos
-        ) {
+        )
+        {
             Assembly candidate = null;
             Version candidateVersion = null;
             foreach (var info in infos)
@@ -575,7 +586,8 @@ namespace Microsoft.CodeAnalysis.Scripting.Hosting
                         identity,
                         info.Identity
                     )
-                ) {
+                )
+                {
                     if (candidate == null || candidateVersion < info.Identity.Version)
                     {
                         candidate = info.Assembly;
@@ -590,7 +602,8 @@ namespace Microsoft.CodeAnalysis.Scripting.Hosting
         private static AssemblyIdentityAndLocation FindHighestVersionOrFirstMatchingIdentity(
             AssemblyIdentity identity,
             IEnumerable<AssemblyIdentityAndLocation> assemblies
-        ) {
+        )
+        {
             var candidate = default(AssemblyIdentityAndLocation);
             foreach (var assembly in assemblies)
             {
@@ -599,11 +612,13 @@ namespace Microsoft.CodeAnalysis.Scripting.Hosting
                         identity,
                         assembly.Identity
                     )
-                ) {
+                )
+                {
                     if (
                         candidate.Identity == null
                         || candidate.Identity.Version < assembly.Identity.Version
-                    ) {
+                    )
+                    {
                         candidate = assembly;
                     }
                 }

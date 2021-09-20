@@ -20,7 +20,8 @@ internal static class Program
         Type optionalAttributeTypeFilter,
         bool inherit,
         bool skipTypeValidation = false
-    ) {
+    )
+    {
         {
             PropertyInfo propertyInfo = element as PropertyInfo;
             if (propertyInfo != null)
@@ -36,7 +37,8 @@ internal static class Program
     private static IEnumerable<TOut> Select<TIn, TOut>(
         this IEnumerable<TIn> source,
         Func<TIn, TOut> transform
-    ) {
+    )
+    {
         foreach (var s in source)
             yield return transform(s);
     }

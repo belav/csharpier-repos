@@ -67,7 +67,8 @@ namespace Microsoft.CodeAnalysis.Shared.Utilities
             IEqualityComparer<IAssemblySymbol>? assemblyComparerOpt,
             bool distinguishRefFromOut,
             bool tupleNamesMustMatch
-        ) {
+        )
+        {
             _assemblyComparerOpt = assemblyComparerOpt;
             _tupleNamesMustMatch = tupleNamesMustMatch;
 
@@ -154,7 +155,8 @@ namespace Microsoft.CodeAnalysis.Shared.Utilities
         private EquivalenceVisitor GetEquivalenceVisitor(
             bool compareMethodTypeParametersByIndex = false,
             bool objectAndDynamicCompareEqually = false
-        ) {
+        )
+        {
             var visitorIndex = GetVisitorIndex(
                 compareMethodTypeParametersByIndex,
                 objectAndDynamicCompareEqually
@@ -165,7 +167,8 @@ namespace Microsoft.CodeAnalysis.Shared.Utilities
         private GetHashCodeVisitor GetGetHashCodeVisitor(
             bool compareMethodTypeParametersByIndex,
             bool objectAndDynamicCompareEqually
-        ) {
+        )
+        {
             var visitorIndex = GetVisitorIndex(
                 compareMethodTypeParametersByIndex,
                 objectAndDynamicCompareEqually
@@ -176,7 +179,8 @@ namespace Microsoft.CodeAnalysis.Shared.Utilities
         private static int GetVisitorIndex(
             bool compareMethodTypeParametersByIndex,
             bool objectAndDynamicCompareEqually
-        ) {
+        )
+        {
             if (compareMethodTypeParametersByIndex)
             {
                 if (objectAndDynamicCompareEqually)
@@ -226,7 +230,8 @@ namespace Microsoft.CodeAnalysis.Shared.Utilities
             ISymbol? x,
             ISymbol? y,
             Dictionary<INamedTypeSymbol, INamedTypeSymbol>? equivalentTypesWithDifferingAssemblies
-        ) {
+        )
+        {
             Debug.Assert(_assemblyComparerOpt == null);
             return EqualsCore(x, y, equivalentTypesWithDifferingAssemblies);
         }
@@ -275,7 +280,8 @@ namespace Microsoft.CodeAnalysis.Shared.Utilities
                 x.MethodKind == MethodKind.DelegateInvoke
                 && x.ContainingType != null
                 && x.ContainingType.IsAnonymousType
-            ) {
+            )
+            {
                 return false;
             }
             else if (x.MethodKind == MethodKind.FunctionPointerSignature)

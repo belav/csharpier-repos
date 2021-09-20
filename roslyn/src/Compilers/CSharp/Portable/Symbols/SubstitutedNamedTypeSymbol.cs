@@ -145,7 +145,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
 
         internal sealed override NamedTypeSymbol GetDeclaredBaseType(
             ConsList<TypeSymbol> basesBeingResolved
-        ) {
+        )
+        {
             return _unbound
               ? null
               : Map.SubstituteNamedType(OriginalDefinition.GetDeclaredBaseType(basesBeingResolved));
@@ -153,7 +154,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
 
         internal sealed override ImmutableArray<NamedTypeSymbol> GetDeclaredInterfaces(
             ConsList<TypeSymbol> basesBeingResolved
-        ) {
+        )
+        {
             return _unbound
               ? ImmutableArray<NamedTypeSymbol>.Empty
               : Map.SubstituteNamedTypes(
@@ -168,7 +170,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
 
         internal sealed override ImmutableArray<NamedTypeSymbol> InterfacesNoUseSiteDiagnostics(
             ConsList<TypeSymbol> basesBeingResolved
-        ) {
+        )
+        {
             return _unbound
               ? ImmutableArray<NamedTypeSymbol>.Empty
               : Map.SubstituteNamedTypes(
@@ -227,7 +230,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
         public sealed override ImmutableArray<NamedTypeSymbol> GetTypeMembers(
             string name,
             int arity
-        ) {
+        )
+        {
             return OriginalDefinition.GetTypeMembers(name, arity)
                 .SelectAsArray((t, self) => t.AsMember(self), this);
         }
@@ -427,7 +431,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
 
         internal override IEnumerable<CSharpAttributeData> GetCustomAttributesToEmit(
             PEModuleBuilder moduleBuilder
-        ) {
+        )
+        {
             throw ExceptionUtilities.Unreachable;
         }
 

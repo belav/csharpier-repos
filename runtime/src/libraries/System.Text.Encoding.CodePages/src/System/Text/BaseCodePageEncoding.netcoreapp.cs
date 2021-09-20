@@ -89,7 +89,8 @@ namespace System.Text
                             "Globalization_cp_",
                             StringComparison.OrdinalIgnoreCase
                         )
-                    ) {
+                    )
+                    {
                         displayName = SR.GetResourceString(resourceName);
                     }
 

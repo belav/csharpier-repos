@@ -24,7 +24,8 @@ unsafe public class GitHub_24846
         fixed (
             byte* destPtr = &destination[0],
                 srcPtr = &source[0]
-        ) {
+        )
+        {
             try
             {
                 TestCopy(destPtr, srcPtr);

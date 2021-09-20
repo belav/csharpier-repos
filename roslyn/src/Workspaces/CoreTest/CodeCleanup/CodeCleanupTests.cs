@@ -467,7 +467,8 @@ End Module";
         private static void VerifyRange(
             string codeWithMarker,
             string language = LanguageNames.CSharp
-        ) {
+        )
+        {
             MarkupTestFile.GetSpans(
                 codeWithMarker,
                 out var codeWithoutMarker,
@@ -492,7 +493,8 @@ End Module";
             ICodeCleanupProvider transformer,
             ref IEnumerable<TextSpan> expectedResult,
             string language = LanguageNames.CSharp
-        ) {
+        )
+        {
             MarkupTestFile.GetSpans(
                 codeWithMarker,
                 out var codeWithoutMarker,
@@ -514,7 +516,8 @@ End Module";
             ImmutableArray<TextSpan> spans,
             ref IEnumerable<TextSpan> expectedResult,
             string language
-        ) {
+        )
+        {
             var result = (IEnumerable<TextSpan>)null;
             var spanCodeCleanup = new SimpleCodeCleanupProvider(
                 "TestCodeCleanup",

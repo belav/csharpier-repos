@@ -182,7 +182,8 @@ namespace Microsoft.AspNetCore.Server.HttpSys
                 if (
                     statusCode != UnsafeNclNativeMethods.ErrorCodes.ERROR_SUCCESS
                     && statusCode != UnsafeNclNativeMethods.ErrorCodes.ERROR_HANDLE_EOF
-                ) {
+                )
+                {
                     Exception exception = new IOException(
                         string.Empty,
                         new HttpSysException((int)statusCode)
@@ -230,7 +231,8 @@ namespace Microsoft.AspNetCore.Server.HttpSys
             int offset,
             int size,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             ValidateReadBuffer(buffer, offset, size);
             CheckSizeLimit();
             if (_closed)
@@ -322,7 +324,8 @@ namespace Microsoft.AspNetCore.Server.HttpSys
             if (
                 statusCode != UnsafeNclNativeMethods.ErrorCodes.ERROR_SUCCESS
                 && statusCode != UnsafeNclNativeMethods.ErrorCodes.ERROR_IO_PENDING
-            ) {
+            )
+            {
                 asyncResult.Dispose();
                 if (statusCode == UnsafeNclNativeMethods.ErrorCodes.ERROR_HANDLE_EOF)
                 {
@@ -349,7 +352,8 @@ namespace Microsoft.AspNetCore.Server.HttpSys
             else if (
                 statusCode == UnsafeNclNativeMethods.ErrorCodes.ERROR_SUCCESS
                 && HttpSysListener.SkipIOCPCallbackOnSuccess
-            ) {
+            )
+            {
                 // IO operation completed synchronously - callback won't be called to signal completion.
                 asyncResult.Dispose();
                 uint totalRead = dataRead + bytesReturned;
@@ -375,7 +379,8 @@ namespace Microsoft.AspNetCore.Server.HttpSys
             int size,
             AsyncCallback? callback,
             object? state
-        ) {
+        )
+        {
             throw new InvalidOperationException(Resources.Exception_ReadOnlyStream);
         }
 
@@ -395,7 +400,8 @@ namespace Microsoft.AspNetCore.Server.HttpSys
                     contentLength.HasValue
                     && _maxSize.HasValue
                     && contentLength.Value > _maxSize.Value
-                ) {
+                )
+                {
                     throw new BadHttpRequestException(
                         $"The request's Content-Length {contentLength.Value} is larger than the request body size limit {_maxSize.Value}.",
                         StatusCodes.Status413PayloadTooLarge

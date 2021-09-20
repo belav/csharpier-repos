@@ -54,7 +54,8 @@ namespace Microsoft.EntityFrameworkCore
             this IConventionKeyBuilder keyBuilder,
             string? name,
             bool fromDataAnnotation = false
-        ) {
+        )
+        {
             if (keyBuilder.CanSetName(name, fromDataAnnotation))
             {
                 keyBuilder.Metadata.SetName(name, fromDataAnnotation);

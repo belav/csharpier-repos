@@ -28,7 +28,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Completion.KeywordRecommenders
             int position,
             CSharpSyntaxContext context,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             return context.IsGlobalStatementContext
                 || IsRefReadOnlyContext(context)
                 || IsValidContextForType(context, cancellationToken)
@@ -56,7 +57,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Completion.KeywordRecommenders
         private static bool IsValidContextForType(
             CSharpSyntaxContext context,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             return context.IsTypeDeclarationContext(
                 validModifiers: SyntaxKindSet.AllTypeModifiers,
                 validTypeDeclarations: SyntaxKindSet.ClassInterfaceStructRecordTypeDeclarations,

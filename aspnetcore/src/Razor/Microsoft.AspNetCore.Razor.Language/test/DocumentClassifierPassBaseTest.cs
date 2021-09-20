@@ -262,7 +262,8 @@ namespace Microsoft.AspNetCore.Razor.Language
             protected override bool IsMatch(
                 RazorCodeDocument codeDocument,
                 DocumentIntermediateNode documentNode
-            ) {
+            )
+            {
                 return ShouldMatch;
             }
 
@@ -271,7 +272,8 @@ namespace Microsoft.AspNetCore.Razor.Language
                 NamespaceDeclarationIntermediateNode @namespace,
                 ClassDeclarationIntermediateNode @class,
                 MethodDeclarationIntermediateNode method
-            ) {
+            )
+            {
                 @namespace.Content = Namespace;
                 @class.ClassName = Class;
                 @method.MethodName = Method;

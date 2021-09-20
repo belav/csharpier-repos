@@ -20,7 +20,8 @@ namespace System.Security.Cryptography.Encryption.Tests.Asymmetric
         protected override Task<StreamPair> CreateWrappedConnectedStreamsAsync(
             StreamPair wrapped,
             bool leaveOpen = false
-        ) {
+        )
+        {
             ICryptoTransform transform = new IdentityTransform(1, 1, true);
             (Stream writeable, Stream readable) = GetReadWritePair(wrapped);
             var encryptedWriteable = new CryptoStream(
@@ -96,7 +97,8 @@ namespace System.Security.Cryptography.Encryption.Tests.Asymmetric
             int inputBlockSize,
             int outputBlockSize,
             bool canTransformMultipleBlocks
-        ) {
+        )
+        {
             ICryptoTransform encryptor = new IdentityTransform(
                 inputBlockSize,
                 outputBlockSize,
@@ -115,7 +117,8 @@ namespace System.Security.Cryptography.Encryption.Tests.Asymmetric
                     encryptor,
                     CryptoStreamMode.Write
                 )
-            ) {
+            )
+            {
                 Assert.True(encryptStream.CanWrite);
                 Assert.False(encryptStream.CanRead);
                 Assert.False(encryptStream.CanSeek);
@@ -166,7 +169,8 @@ namespace System.Security.Cryptography.Encryption.Tests.Asymmetric
                     decryptor,
                     CryptoStreamMode.Read
                 )
-            ) {
+            )
+            {
                 Assert.False(decryptStream.CanWrite);
                 Assert.True(decryptStream.CanRead);
                 Assert.False(decryptStream.CanSeek);
@@ -211,7 +215,8 @@ namespace System.Security.Cryptography.Encryption.Tests.Asymmetric
                     true,
                     bufferSize: 10
                 )
-            ) {
+            )
+            {
                 Assert.Equal(
                     LoremText + LoremText + LoremText + LoremText,
                     reader.ReadToEndAsync().GetAwaiter().GetResult()
@@ -226,7 +231,8 @@ namespace System.Security.Cryptography.Encryption.Tests.Asymmetric
                     decryptor,
                     CryptoStreamMode.Read
                 )
-            ) {
+            )
+            {
                 string expectedStr = LoremText + LoremText + LoremText + LoremText;
                 foreach (char c in expectedStr)
                 {
@@ -247,7 +253,8 @@ namespace System.Security.Cryptography.Encryption.Tests.Asymmetric
                     encryptor,
                     CryptoStreamMode.Write
                 )
-            ) {
+            )
+            {
                 encryptStream.Clear();
                 Assert.Throws<NotSupportedException>(
                     () => encryptStream.Write(new byte[] { 1, 2, 3, 4, 5 }, 0, 5)
@@ -266,7 +273,8 @@ namespace System.Security.Cryptography.Encryption.Tests.Asymmetric
                     encryptor,
                     CryptoStreamMode.Write
                 )
-            ) {
+            )
+            {
                 await encryptStream.WriteAsync(new byte[] { 1, 2, 3, 4, 5 }, 0, 5);
                 await encryptStream.FlushFinalBlockAsync();
                 Assert.True(encryptStream.HasFlushedFinalBlock);
@@ -285,7 +293,8 @@ namespace System.Security.Cryptography.Encryption.Tests.Asymmetric
                     encryptor,
                     CryptoStreamMode.Write
                 )
-            ) {
+            )
+            {
                 await encryptStream.WriteAsync(new byte[] { 1, 2, 3, 4, 5 }, 0, 5);
                 ValueTask waitable = encryptStream.FlushFinalBlockAsync(
                     new Threading.CancellationToken(canceled: true)
@@ -306,7 +315,8 @@ namespace System.Security.Cryptography.Encryption.Tests.Asymmetric
                     encryptor,
                     CryptoStreamMode.Write
                 )
-            ) {
+            )
+            {
                 encryptStream.WriteAsync(new byte[] { 1, 2, 3, 4, 5 }, 0, 5);
                 Task waitable = encryptStream.FlushAsync(new Threading.CancellationToken(false));
                 Assert.False(waitable.IsCanceled);
@@ -328,7 +338,8 @@ namespace System.Security.Cryptography.Encryption.Tests.Asymmetric
                         encryptor,
                         CryptoStreamMode.Write
                     )
-                ) {
+                )
+                {
                     encryptStream.Dispose();
                 }
 
@@ -344,7 +355,8 @@ namespace System.Security.Cryptography.Encryption.Tests.Asymmetric
                         CryptoStreamMode.Write,
                         leaveOpen: false
                     )
-                ) {
+                )
+                {
                     encryptStream.Dispose();
                 }
 
@@ -360,7 +372,8 @@ namespace System.Security.Cryptography.Encryption.Tests.Asymmetric
                         CryptoStreamMode.Write,
                         leaveOpen: true
                     )
-                ) {
+                )
+                {
                     encryptStream.Dispose();
                 }
 
@@ -373,7 +386,8 @@ namespace System.Security.Cryptography.Encryption.Tests.Asymmetric
         [InlineData(true)]
         public static async Task DisposeAsync_DataFlushedCorrectly(
             bool explicitFlushFinalBeforeDispose
-        ) {
+        )
+        {
             const string Text = "hello";
 
             var stream = new MemoryStream();
@@ -383,7 +397,8 @@ namespace System.Security.Cryptography.Encryption.Tests.Asymmetric
                     new IdentityTransform(64, 64, true),
                     CryptoStreamMode.Write
                 )
-            ) {
+            )
+            {
                 Assert.Equal(0, stream.Position);
 
                 byte[] toWrite = Encoding.UTF8.GetBytes(Text);
@@ -410,7 +425,8 @@ namespace System.Security.Cryptography.Encryption.Tests.Asymmetric
                     new IdentityTransform(64, 64, true),
                     CryptoStreamMode.Read
                 )
-            ) {
+            )
+            {
                 using (StreamReader reader = new StreamReader(decryptStream))
                 {
                     Assert.Equal(Text, reader.ReadToEnd());
@@ -430,7 +446,8 @@ namespace System.Security.Cryptography.Encryption.Tests.Asymmetric
                     new IdentityTransform(64, 64, true),
                     CryptoStreamMode.Write
                 )
-            ) {
+            )
+            {
                 Assert.False(encryptStream.DisposeInvoked);
                 Assert.True(encryptStream.DisposeAsync().IsCompletedSuccessfully);
                 Assert.True(encryptStream.DisposeInvoked);
@@ -471,7 +488,8 @@ namespace System.Security.Cryptography.Encryption.Tests.Asymmetric
                         CryptoStreamMode.Write,
                         leaveOpen: true
                     )
-                ) {
+                )
+                {
                     cryptoStream.Write(
                         Encoding.ASCII.GetBytes(
                             "Sample string that's bigger than cryptoAlg.BlockSize"
@@ -487,7 +505,8 @@ namespace System.Security.Cryptography.Encryption.Tests.Asymmetric
                         aes.CreateDecryptor(),
                         CryptoStreamMode.Read
                     )
-                ) {
+                )
+                {
                     cryptoStream.ReadByte(); // Partially read the CryptoStream before disposing it.
                 }
                 // No exception should be thrown.
@@ -534,7 +553,8 @@ namespace System.Security.Cryptography.Encryption.Tests.Asymmetric
                 int inputBlockSize,
                 int outputBlockSize,
                 bool canTransformMultipleBlocks
-            ) {
+            )
+            {
                 _inputBlockSize = inputBlockSize;
                 _outputBlockSize = outputBlockSize;
                 _canTransformMultipleBlocks = canTransformMultipleBlocks;
@@ -569,7 +589,8 @@ namespace System.Security.Cryptography.Encryption.Tests.Asymmetric
                 int inputCount,
                 byte[] outputBuffer,
                 int outputOffset
-            ) {
+            )
+            {
                 lock (_lock)
                 {
                     _stream.Position = _writePos;

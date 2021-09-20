@@ -88,7 +88,8 @@ namespace BuildValidator
             bool quiet,
             bool debug,
             string? debugPath
-        ) {
+        )
+        {
             // If user provided a debug path then assume we should write debug outputs.
             debug |= debugPath is object;
             debugPath ??= Path.Combine(Path.GetTempPath(), $"BuildValidator");
@@ -183,7 +184,8 @@ namespace BuildValidator
             IEnumerable<string> assemblySearchPaths,
             IEnumerable<string> excludes,
             ILogger logger
-        ) {
+        )
+        {
             var map = new Dictionary<Guid, AssemblyInfo>();
             foreach (var directory in assemblySearchPaths)
             {
@@ -193,7 +195,8 @@ namespace BuildValidator
                         excludes.Any(
                             x => filePath.IndexOf(x, FileNameEqualityComparer.StringComparison) >= 0
                         )
-                    ) {
+                    )
+                    {
                         logger.LogInformation($"Skipping excluded file {filePath}");
                         continue;
                     }
@@ -246,7 +249,8 @@ namespace BuildValidator
             IEnumerable<AssemblyInfo> assemblyInfos,
             Options options,
             ILoggerFactory loggerFactory
-        ) {
+        )
+        {
             var logger = loggerFactory.CreateLogger<Program>();
             var referenceResolver = new LocalReferenceResolver(options, loggerFactory);
 
@@ -281,7 +285,8 @@ namespace BuildValidator
             {
                 foreach (
                     var diff in assembliesCompiled.Where(a => a.Result == RebuildResult.Success)
-                ) {
+                )
+                {
                     logger.LogInformation($"\t{diff.AssemblyInfo.FilePath}");
                 }
             }
@@ -292,7 +297,8 @@ namespace BuildValidator
                     var diff in assembliesCompiled.Where(
                         a => a.Result == RebuildResult.BinaryDifference
                     )
-                ) {
+                )
+                {
                     logger.LogWarning($"\t{diff.AssemblyInfo.FilePath}");
                     success = false;
                 }
@@ -304,7 +310,8 @@ namespace BuildValidator
                     var diff in assembliesCompiled.Where(
                         a => a.Result == RebuildResult.CompilationError
                     )
-                ) {
+                )
+                {
                     logger.LogError(
                         $"\t{diff.AssemblyInfo.FilePath} had {diff.Diagnostics.Length} diagnostics."
                     );
@@ -318,7 +325,8 @@ namespace BuildValidator
                     var diff in assembliesCompiled.Where(
                         a => a.Result == RebuildResult.MissingReferences
                     )
-                ) {
+                )
+                {
                     logger.LogError($"\t{diff.AssemblyInfo.FilePath}");
                     success = false;
                 }
@@ -328,7 +336,8 @@ namespace BuildValidator
             {
                 foreach (
                     var diff in assembliesCompiled.Where(a => a.Result == RebuildResult.MiscError)
-                ) {
+                )
+                {
                     logger.LogError($"{diff.AssemblyInfo.FilePath} {diff.MiscErrorMessage}");
                     success = false;
                 }
@@ -342,7 +351,8 @@ namespace BuildValidator
             AssemblyInfo assemblyInfo,
             ILogger logger,
             LocalReferenceResolver referenceResolver
-        ) {
+        )
+        {
             // Find the embedded pdb
             using var originalPeReader = new PEReader(File.OpenRead(assemblyInfo.FilePath));
             var originalBinary = new FileInfo(assemblyInfo.FilePath);
@@ -400,7 +410,8 @@ namespace BuildValidator
         private static ImmutableArray<SourceLinkEntry> ResolveSourceLinks(
             CompilationOptionsReader compilationOptionsReader,
             ILogger logger
-        ) {
+        )
+        {
             using var _ = logger.BeginScope("Source Links");
 
             var sourceLinkUTF8 = compilationOptionsReader.GetSourceLinkUTF8();

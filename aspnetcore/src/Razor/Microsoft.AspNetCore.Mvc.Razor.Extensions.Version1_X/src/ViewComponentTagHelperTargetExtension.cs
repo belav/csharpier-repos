@@ -66,7 +66,8 @@ namespace Microsoft.AspNetCore.Mvc.Razor.Extensions.Version1_X
         public void WriteViewComponentTagHelper(
             CodeRenderingContext context,
             ViewComponentTagHelperIntermediateNode node
-        ) {
+        )
+        {
             // Add target element.
             WriteTargetElementString(context.CodeWriter, node.TagHelper);
 
@@ -79,7 +80,8 @@ namespace Microsoft.AspNetCore.Mvc.Razor.Extensions.Version1_X
                     interfaces: null,
                     typeParameters: null
                 )
-            ) {
+            )
+            {
                 // Add view component helper.
                 context.CodeWriter.WriteVariableDeclaration(
                     $"private readonly {ViewComponentHelperTypeName}",
@@ -157,7 +159,8 @@ namespace Microsoft.AspNetCore.Mvc.Razor.Extensions.Version1_X
                         { TagHelperOutputTypeName, TagHelperOutputVariableName }
                     }
                 )
-            ) {
+            )
+            {
                 writer.WriteInstanceMethodInvocation(
                     $"({ViewComponentHelperVariableName} as {IViewContextAwareTypeName})?",
                     IViewContextAwareContextualizeMethodName,

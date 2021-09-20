@@ -53,7 +53,8 @@ namespace Microsoft.Extensions.DependencyInjection.ServiceLookup
             if (
                 ReferenceEquals(this, service)
                 || !(service is IDisposable || service is IAsyncDisposable)
-            ) {
+            )
+            {
                 return service;
             }
 

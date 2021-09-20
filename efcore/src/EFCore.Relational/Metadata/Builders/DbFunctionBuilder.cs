@@ -85,7 +85,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Builders
         /// <returns> The same builder instance so that multiple configuration calls can be chained. </returns>
         public virtual DbFunctionBuilder HasTranslation(
             Func<IReadOnlyList<SqlExpression>, SqlExpression> translation
-        ) {
+        )
+        {
             Builder.HasTranslation(translation, ConfigurationSource.Explicit);
 
             return this;

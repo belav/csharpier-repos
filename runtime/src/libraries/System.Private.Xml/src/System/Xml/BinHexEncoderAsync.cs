@@ -12,7 +12,8 @@ namespace System.Xml
             int index,
             int count,
             XmlWriter writer
-        ) {
+        )
+        {
             if (buffer == null)
             {
                 throw new ArgumentNullException(nameof(buffer));

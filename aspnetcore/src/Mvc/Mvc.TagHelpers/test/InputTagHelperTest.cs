@@ -66,7 +66,8 @@ namespace Microsoft.AspNetCore.Mvc.TagHelpers
         public async Task CheckBoxHandlesMultipleAttributesSameNameArePreserved(
             TagHelperAttributeList outputAttributes,
             string expectedAttributeString
-        ) {
+        )
+        {
             // Arrange
             var originalContent = "original content";
             var expectedContent =
@@ -731,7 +732,8 @@ namespace Microsoft.AspNetCore.Mvc.TagHelpers
             object model,
             NameAndId nameAndId,
             string expectedValue
-        ) {
+        )
+        {
             // Arrange
             var expectedAttributes = new TagHelperAttributeList
             {
@@ -879,7 +881,8 @@ namespace Microsoft.AspNetCore.Mvc.TagHelpers
         public void Process_GeneratesFormattedOutput_ForDateTime(
             string specifiedType,
             string expectedType
-        ) {
+        )
+        {
             // Arrange
             var expectedAttributes = new TagHelperAttributeList
             {
@@ -1350,7 +1353,8 @@ namespace Microsoft.AspNetCore.Mvc.TagHelpers
             string inputTypeName,
             string model,
             string format
-        ) {
+        )
+        {
             // Arrange
             var contextAttributes = new TagHelperAttributeList { { "class", "form-control" }, };
             if (!string.IsNullOrEmpty(inputTypeName))
@@ -1454,7 +1458,8 @@ namespace Microsoft.AspNetCore.Mvc.TagHelpers
             string dataTypeName,
             string inputTypeName,
             string model
-        ) {
+        )
+        {
             // Arrange
             var contextAttributes = new TagHelperAttributeList { { "class", "form-control" }, };
             if (!string.IsNullOrEmpty(inputTypeName))
@@ -1552,7 +1557,8 @@ namespace Microsoft.AspNetCore.Mvc.TagHelpers
         public async Task ProcessAsync_CallsGenerateRadioButton_WithExpectedParameters(
             string inputTypeName,
             string model
-        ) {
+        )
+        {
             // Arrange
             var value = "match"; // Real generator would use this for comparison with For.Metadata.Model.
             var contextAttributes = new TagHelperAttributeList
@@ -1669,7 +1675,8 @@ namespace Microsoft.AspNetCore.Mvc.TagHelpers
             string inputTypeName,
             string model,
             string format
-        ) {
+        )
+        {
             // Arrange
             var contextAttributes = new TagHelperAttributeList { { "class", "form-control" }, };
             if (!string.IsNullOrEmpty(inputTypeName))
@@ -1807,7 +1814,8 @@ namespace Microsoft.AspNetCore.Mvc.TagHelpers
             string dataTypeName,
             string expectedFormat,
             string expectedType
-        ) {
+        )
+        {
             // Arrange
             var expectedAttributes = new TagHelperAttributeList
             {
@@ -1994,7 +2002,8 @@ namespace Microsoft.AspNetCore.Mvc.TagHelpers
             Html5DateRenderingMode dateRenderingMode,
             string expectedFormat,
             string expectedType
-        ) {
+        )
+        {
             // Arrange
             var expectedAttributes = new TagHelperAttributeList
             {
@@ -2073,7 +2082,8 @@ namespace Microsoft.AspNetCore.Mvc.TagHelpers
             string propertyName,
             string expectedValue,
             string expectedType
-        ) {
+        )
+        {
             // Arrange
             var expectedAttributes = new TagHelperAttributeList
             {
@@ -2148,7 +2158,8 @@ namespace Microsoft.AspNetCore.Mvc.TagHelpers
             string editFormatString,
             string expectedValue,
             string expectedType
-        ) {
+        )
+        {
             // Arrange
             var expectedAttributes = new TagHelperAttributeList
             {
@@ -2213,7 +2224,8 @@ namespace Microsoft.AspNetCore.Mvc.TagHelpers
         public async Task ProcessAsync_CallsGenerateTextBox_ProducesExpectedValue_OverridesDefaultFormat(
             string propertyName,
             string expectedType
-        ) {
+        )
+        {
             // Arrange
             var expectedAttributes = new TagHelperAttributeList
             {
@@ -2275,7 +2287,8 @@ namespace Microsoft.AspNetCore.Mvc.TagHelpers
             object model,
             string propertyName,
             IModelMetadataProvider metadataProvider = null
-        ) {
+        )
+        {
             return GetTagHelper(
                 htmlGenerator,
                 container: new Model(),
@@ -2295,7 +2308,8 @@ namespace Microsoft.AspNetCore.Mvc.TagHelpers
             string propertyName,
             string expressionName,
             IModelMetadataProvider metadataProvider = null
-        ) {
+        )
+        {
             if (metadataProvider == null)
             {
                 metadataProvider = new TestModelMetadataProvider();

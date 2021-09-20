@@ -37,7 +37,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             NamespaceSymbol containingNamespace,
             ModuleSymbol containingModule,
             NamedTypeSymbol baseType
-        ) {
+        )
+        {
             Debug.Assert(name is object);
             Debug.Assert(containingNamespace is object);
             Debug.Assert(containingModule is object);
@@ -180,7 +181,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
         internal override void AddSynthesizedAttributes(
             PEModuleBuilder moduleBuilder,
             ref ArrayBuilder<SynthesizedAttributeData> attributes
-        ) {
+        )
+        {
             base.AddSynthesizedAttributes(moduleBuilder, ref attributes);
 
             AddSynthesizedAttribute(
@@ -259,7 +261,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
         internal override void GenerateMethodBody(
             TypeCompilationState compilationState,
             BindingDiagnosticBag diagnostics
-        ) {
+        )
+        {
             GenerateMethodBodyCore(compilationState, diagnostics);
         }
     }

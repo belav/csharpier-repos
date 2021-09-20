@@ -9,9 +9,8 @@ namespace Microsoft.EntityFrameworkCore.TestUtilities
 {
     public class TestRelationalMigrationSqlGenerator : MigrationsSqlGenerator
     {
-        public TestRelationalMigrationSqlGenerator(
-            MigrationsSqlGeneratorDependencies dependencies
-        ) : base(dependencies) { }
+        public TestRelationalMigrationSqlGenerator(MigrationsSqlGeneratorDependencies dependencies)
+            : base(dependencies) { }
 
         protected override void Generate(
             RenameTableOperation operation,

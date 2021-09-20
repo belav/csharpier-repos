@@ -16,7 +16,8 @@ namespace Microsoft.AspNetCore.Rewrite.UrlActions
             RewriteContext context,
             BackReferenceCollection? ruleBackReferences,
             BackReferenceCollection? conditionBackReferences
-        ) {
+        )
+        {
             context.Result = Result;
         }
     }

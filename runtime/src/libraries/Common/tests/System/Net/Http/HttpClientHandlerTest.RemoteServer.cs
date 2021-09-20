@@ -77,7 +77,8 @@ namespace System.Net.Http.Functional.Tests
         [InlineData(true)]
         public async Task UseDefaultCredentials_SetToFalseAndServerNeedsAuth_StatusCodeUnauthorized(
             bool useProxy
-        ) {
+        )
+        {
             HttpClientHandler handler = CreateHttpClientHandler();
             handler.UseProxy = useProxy;
             handler.UseDefaultCredentials = false;
@@ -114,14 +115,16 @@ namespace System.Net.Http.Functional.Tests
         [Theory, MemberData(nameof(RemoteServersMemberData))]
         public async Task SendAsync_MultipleRequestsReusingSameClient_Success(
             Configuration.Http.RemoteServer remoteServer
-        ) {
+        )
+        {
             using (HttpClient client = CreateHttpClientForRemoteServer(remoteServer))
             {
                 for (int i = 0; i < 3; i++)
                 {
                     using (
                         HttpResponseMessage response = await client.GetAsync(remoteServer.EchoUri)
-                    ) {
+                    )
+                    {
                         Assert.Equal(HttpStatusCode.OK, response.StatusCode);
                     }
                 }
@@ -132,7 +135,8 @@ namespace System.Net.Http.Functional.Tests
         [Theory, MemberData(nameof(RemoteServersMemberData))]
         public async Task GetAsync_ResponseContentAfterClientAndHandlerDispose_Success(
             Configuration.Http.RemoteServer remoteServer
-        ) {
+        )
+        {
             using (HttpClient client = CreateHttpClientForRemoteServer(remoteServer))
             using (HttpResponseMessage response = await client.GetAsync(remoteServer.EchoUri))
             {
@@ -153,7 +157,8 @@ namespace System.Net.Http.Functional.Tests
         [Theory, MemberData(nameof(RemoteServersMemberData))]
         public async Task GetAsync_ServerNeedsBasicAuthAndSetDefaultCredentials_StatusCodeUnauthorized(
             Configuration.Http.RemoteServer remoteServer
-        ) {
+        )
+        {
             HttpClientHandler handler = CreateHttpClientHandler();
             handler.Credentials = CredentialCache.DefaultCredentials;
             using (HttpClient client = CreateHttpClientForRemoteServer(remoteServer, handler))
@@ -170,7 +175,8 @@ namespace System.Net.Http.Functional.Tests
         [Theory, MemberData(nameof(RemoteServersMemberData))]
         public async Task GetAsync_ServerNeedsAuthAndSetCredential_StatusCodeOK(
             Configuration.Http.RemoteServer remoteServer
-        ) {
+        )
+        {
             HttpClientHandler handler = CreateHttpClientHandler();
             handler.Credentials = _credential;
             using (HttpClient client = CreateHttpClientForRemoteServer(remoteServer, handler))
@@ -187,7 +193,8 @@ namespace System.Net.Http.Functional.Tests
         [Theory, MemberData(nameof(RemoteServersMemberData))]
         public async Task GetAsync_ServerNeedsAuthAndNoCredential_StatusCodeUnauthorized(
             Configuration.Http.RemoteServer remoteServer
-        ) {
+        )
+        {
             using (HttpClient client = CreateHttpClientForRemoteServer(remoteServer))
             {
                 Uri uri = remoteServer.BasicAuthUriForCreds(userName: Username, password: Password);
@@ -204,7 +211,8 @@ namespace System.Net.Http.Functional.Tests
         public async Task GetAsync_RequestHeadersAddCustomHeaders_HeaderAndEmptyValueSent(
             Configuration.Http.RemoteServer remoteServer,
             Uri uri
-        ) {
+        )
+        {
             if (IsWinHttpHandler && !PlatformDetection.IsWindows10Version1709OrGreater)
             {
                 return;
@@ -233,7 +241,8 @@ namespace System.Net.Http.Functional.Tests
             string name,
             string value,
             Uri uri
-        ) {
+        )
+        {
             using (HttpClient client = CreateHttpClientForRemoteServer(remoteServer))
             {
                 _output.WriteLine($"name={name}, value={value}");
@@ -253,7 +262,8 @@ namespace System.Net.Http.Functional.Tests
         public async Task GetAsync_LargeRequestHeader_HeadersAndValuesSent(
             Configuration.Http.RemoteServer remoteServer,
             Uri uri
-        ) {
+        )
+        {
             // Unfortunately, our remote servers seem to have pretty strict limits (around 16K?)
             // on the total size of the request header.
             // TODO: Figure out how to reconfigure remote endpoints to allow larger request headers,
@@ -295,7 +305,8 @@ namespace System.Net.Http.Functional.Tests
                     Configuration.Http.RemoteServer remoteServer,
                     Uri uri
                 ) in RemoteServersAndHeaderEchoUris()
-            ) {
+            )
+            {
                 yield return new object[] { remoteServer, "X-CustomHeader", "x-value", uri };
                 yield return new object[] { remoteServer, "MyHeader", "1, 2, 3", uri };
 
@@ -317,7 +328,8 @@ namespace System.Net.Http.Functional.Tests
         {
             foreach (
                 Configuration.Http.RemoteServer remoteServer in Configuration.Http.RemoteServers
-            ) {
+            )
+            {
                 yield return (remoteServer, remoteServer.EchoUri);
                 yield return (
                     remoteServer,
@@ -337,7 +349,8 @@ namespace System.Net.Http.Functional.Tests
         [Theory, MemberData(nameof(RemoteServersMemberData))]
         public async Task GetAsync_ResponseHeadersRead_ReadFromEachIterativelyDoesntDeadlock(
             Configuration.Http.RemoteServer remoteServer
-        ) {
+        )
+        {
             using (HttpClient client = CreateHttpClientForRemoteServer(remoteServer))
             {
                 const int NumGets = 5;
@@ -369,7 +382,8 @@ namespace System.Net.Http.Functional.Tests
         [Theory, MemberData(nameof(RemoteServersMemberData))]
         public async Task SendAsync_HttpRequestMsgResponseHeadersRead_StatusCodeOK(
             Configuration.Http.RemoteServer remoteServer
-        ) {
+        )
+        {
             // Sync API supported only up to HTTP/1.1
             if (!TestAsync && remoteServer.HttpVersion.Major >= 2)
             {
@@ -390,7 +404,8 @@ namespace System.Net.Http.Functional.Tests
                         request,
                         HttpCompletionOption.ResponseHeadersRead
                     )
-                ) {
+                )
+                {
                     string responseContent = await response.Content.ReadAsStringAsync();
                     _output.WriteLine(responseContent);
                     TestHelper.VerifyResponseBody(
@@ -407,7 +422,8 @@ namespace System.Net.Http.Functional.Tests
         [Theory, MemberData(nameof(RemoteServersMemberData))]
         public async Task PostAsync_CallMethodTwice_StringContent(
             Configuration.Http.RemoteServer remoteServer
-        ) {
+        )
+        {
             using (HttpClient client = CreateHttpClientForRemoteServer(remoteServer))
             {
                 string data = "Test String";
@@ -433,7 +449,8 @@ namespace System.Net.Http.Functional.Tests
         [Theory, MemberData(nameof(RemoteServersMemberData))]
         public async Task PostAsync_CallMethod_UnicodeStringContent(
             Configuration.Http.RemoteServer remoteServer
-        ) {
+        )
+        {
             using (HttpClient client = CreateHttpClientForRemoteServer(remoteServer))
             {
                 string data =
@@ -446,7 +463,8 @@ namespace System.Net.Http.Functional.Tests
                         remoteServer.VerifyUploadUri,
                         content
                     )
-                ) {
+                )
+                {
                     Assert.Equal(HttpStatusCode.OK, response.StatusCode);
                 }
             }
@@ -458,7 +476,8 @@ namespace System.Net.Http.Functional.Tests
             Configuration.Http.RemoteServer remoteServer,
             HttpContent content,
             byte[] expectedData
-        ) {
+        )
+        {
             using (HttpClient client = CreateHttpClientForRemoteServer(remoteServer))
             {
                 content.Headers.ContentMD5 = TestHelper.ComputeMD5Hash(expectedData);
@@ -468,7 +487,8 @@ namespace System.Net.Http.Functional.Tests
                         remoteServer.VerifyUploadUri,
                         content
                     )
-                ) {
+                )
+                {
                     Assert.Equal(HttpStatusCode.OK, response.StatusCode);
                 }
             }
@@ -653,7 +673,8 @@ namespace System.Net.Http.Functional.Tests
         [Theory, MemberData(nameof(RemoteServersMemberData))]
         public async Task PostAsync_CallMethod_NullContent(
             Configuration.Http.RemoteServer remoteServer
-        ) {
+        )
+        {
             using (HttpClient client = CreateHttpClientForRemoteServer(remoteServer))
             {
                 using (
@@ -661,7 +682,8 @@ namespace System.Net.Http.Functional.Tests
                         remoteServer.EchoUri,
                         null
                     )
-                ) {
+                )
+                {
                     Assert.Equal(HttpStatusCode.OK, response.StatusCode);
 
                     string responseContent = await response.Content.ReadAsStringAsync();
@@ -680,7 +702,8 @@ namespace System.Net.Http.Functional.Tests
         [Theory, MemberData(nameof(RemoteServersMemberData))]
         public async Task PostAsync_CallMethod_EmptyContent(
             Configuration.Http.RemoteServer remoteServer
-        ) {
+        )
+        {
             using (HttpClient client = CreateHttpClientForRemoteServer(remoteServer))
             {
                 var content = new StringContent(string.Empty);
@@ -689,7 +712,8 @@ namespace System.Net.Http.Functional.Tests
                         remoteServer.EchoUri,
                         content
                     )
-                ) {
+                )
+                {
                     Assert.Equal(HttpStatusCode.OK, response.StatusCode);
 
                     string responseContent = await response.Content.ReadAsStringAsync();
@@ -770,7 +794,8 @@ namespace System.Net.Http.Functional.Tests
         [Theory, MemberData(nameof(RemoteServersMemberData))]
         public async Task PostAsync_Redirect_ResultingGetFormattedCorrectly(
             Configuration.Http.RemoteServer remoteServer
-        ) {
+        )
+        {
             const string ContentString = "This is the content string.";
             var content = new StringContent(ContentString);
             Uri redirectUri = remoteServer.RedirectUriForDestinationUri(
@@ -793,7 +818,8 @@ namespace System.Net.Http.Functional.Tests
         [Theory, MemberData(nameof(RemoteServersMemberData))]
         public async Task PostAsync_RedirectWith307_LargePayload(
             Configuration.Http.RemoteServer remoteServer
-        ) {
+        )
+        {
             if (remoteServer.HttpVersion == new Version(2, 0))
             {
                 // This is occasionally timing out in CI with SocketsHttpHandler and HTTP2, particularly on Linux
@@ -809,7 +835,8 @@ namespace System.Net.Http.Functional.Tests
         [Theory, MemberData(nameof(RemoteServersMemberData))]
         public async Task PostAsync_RedirectWith302_LargePayload(
             Configuration.Http.RemoteServer remoteServer
-        ) {
+        )
+        {
             await PostAsync_Redirect_LargePayload_Helper(remoteServer, 302, false);
         }
 
@@ -817,7 +844,8 @@ namespace System.Net.Http.Functional.Tests
             Configuration.Http.RemoteServer remoteServer,
             int statusCode,
             bool expectRedirectToPost
-        ) {
+        )
+        {
             using (
                 var fs = new FileStream(
                     Path.Combine(Path.GetTempPath(), Path.GetTempFileName()),
@@ -827,7 +855,8 @@ namespace System.Net.Http.Functional.Tests
                     0x1000,
                     FileOptions.DeleteOnClose
                 )
-            ) {
+            )
+            {
                 string contentString = string.Join("", Enumerable.Repeat("Content", 100000));
                 byte[] contentBytes = Encoding.UTF32.GetBytes(contentString);
                 fs.Write(contentBytes, 0, contentBytes.Length);
@@ -873,7 +902,8 @@ namespace System.Net.Http.Functional.Tests
         [Theory, MemberData(nameof(RemoteServersMemberData))]
         public async Task PostAsync_ReuseRequestContent_Success(
             Configuration.Http.RemoteServer remoteServer
-        ) {
+        )
+        {
             const string ContentString = "This is the content string.";
             using (HttpClient client = CreateHttpClientForRemoteServer(remoteServer))
             {
@@ -885,7 +915,8 @@ namespace System.Net.Http.Functional.Tests
                             remoteServer.EchoUri,
                             content
                         )
-                    ) {
+                    )
+                    {
                         Assert.Equal(HttpStatusCode.OK, response.StatusCode);
                         Assert.Contains(ContentString, await response.Content.ReadAsStringAsync());
                     }
@@ -899,7 +930,8 @@ namespace System.Net.Http.Functional.Tests
         public async Task SendAsync_SendRequestUsingMethodToEchoServerWithNoContent_MethodCorrectlySent(
             string method,
             Uri serverUri
-        ) {
+        )
+        {
             using (HttpClient client = CreateHttpClient())
             {
                 var request = new HttpRequestMessage(new HttpMethod(method), serverUri)
@@ -920,7 +952,8 @@ namespace System.Net.Http.Functional.Tests
         public async Task SendAsync_SendRequestUsingMethodToEchoServerWithContent_Success(
             string method,
             Uri serverUri
-        ) {
+        )
+        {
             using (HttpClient client = CreateHttpClient())
             {
                 var request = new HttpRequestMessage(new HttpMethod(method), serverUri)
@@ -954,7 +987,8 @@ namespace System.Net.Http.Functional.Tests
         public async Task SendAsync_SendRequestUsingNoBodyMethodToEchoServerWithContent_NoBodySent(
             string method,
             Uri serverUri
-        ) {
+        )
+        {
             using (HttpClient client = CreateHttpClient())
             {
                 var request = new HttpRequestMessage(new HttpMethod(method), serverUri)
@@ -1003,7 +1037,8 @@ namespace System.Net.Http.Functional.Tests
             Configuration.Http.RemoteServer remoteServer,
             string stringContent,
             int startingPosition
-        ) {
+        )
+        {
             using (var handler = new HttpMessageInvoker(CreateHttpClientHandler()))
             {
                 byte[] byteContent = Encoding.ASCII.GetBytes(stringContent);
@@ -1024,7 +1059,8 @@ namespace System.Net.Http.Functional.Tests
                             request,
                             CancellationToken.None
                         )
-                    ) {
+                    )
+                    {
                         Assert.Equal(HttpStatusCode.OK, response.StatusCode);
 
                         string responseContent = await response.Content.ReadAsStringAsync();

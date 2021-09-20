@@ -99,7 +99,8 @@ namespace Microsoft.EntityFrameworkCore.TestUtilities
             Func<DbContext> createContext,
             Action<DbContext> seed,
             Action<DbContext> clean
-        ) {
+        )
+        {
             if (CreateDatabase(clean))
             {
                 if (_scriptPath != null)
@@ -131,13 +132,15 @@ namespace Microsoft.EntityFrameworkCore.TestUtilities
                         multipleActiveResultSets: false
                     )
                 )
-            ) {
+            )
+            {
                 if (
                     ExecuteScalar<int>(
                         master,
                         $"SELECT COUNT(*) FROM sys.databases WHERE name = N'{Name}'"
                     ) > 0
-                ) {
+                )
+                {
                     // Only reseed scripted databases during CI runs
                     if (_scriptPath != null && !TestEnvironment.IsCI)
                     {
@@ -182,7 +185,8 @@ namespace Microsoft.EntityFrameworkCore.TestUtilities
                             RegexOptions.IgnoreCase | RegexOptions.Multiline,
                             TimeSpan.FromMilliseconds(1000.0)
                         ).Split(script).Where(b => !string.IsNullOrEmpty(b))
-                    ) {
+                    )
+                    {
                         command.CommandText = batch;
                         command.ExecuteNonQuery();
                     }
@@ -226,7 +230,8 @@ namespace Microsoft.EntityFrameworkCore.TestUtilities
                             && e.Number != 4060
                             && e.Number != 1832
                             && e.Number != 5120
-                    ) {
+                    )
+                    {
                         throw;
                     }
 
@@ -424,7 +429,8 @@ namespace Microsoft.EntityFrameworkCore.TestUtilities
             string sql,
             bool useTransaction,
             object[] parameters
-        ) {
+        )
+        {
             if (connection.State != ConnectionState.Closed)
             {
                 connection.Close();
@@ -480,7 +486,8 @@ namespace Microsoft.EntityFrameworkCore.TestUtilities
             string sql,
             bool useTransaction,
             IReadOnlyList<object> parameters
-        ) {
+        )
+        {
             if (connection.State != ConnectionState.Closed)
             {
                 await connection.CloseAsync();
@@ -519,7 +526,8 @@ namespace Microsoft.EntityFrameworkCore.TestUtilities
             DbConnection connection,
             string commandText,
             IReadOnlyList<object> parameters = null
-        ) {
+        )
+        {
             var command = (SqlCommand)connection.CreateCommand();
 
             command.CommandText = commandText;
@@ -543,7 +551,8 @@ namespace Microsoft.EntityFrameworkCore.TestUtilities
             if (
                 _fileName != null // Clean up the database using a local file, as it might get deleted later
                 || (TestEnvironment.IsSqlAzure && !Shared)
-            ) {
+            )
+            {
                 DeleteDatabase();
             }
         }
@@ -552,7 +561,8 @@ namespace Microsoft.EntityFrameworkCore.TestUtilities
             string name,
             string fileName = null,
             bool? multipleActiveResultSets = null
-        ) {
+        )
+        {
             var builder = new SqlConnectionStringBuilder(TestEnvironment.DefaultConnection)
             {
                 MultipleActiveResultSets = multipleActiveResultSets ?? new Random().Next(0, 2) == 1,

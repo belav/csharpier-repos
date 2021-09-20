@@ -197,7 +197,8 @@ namespace Microsoft.CodeAnalysis.Test.Utilities
                 || typeObject == typeof(DateTime)
                 || typeObject == typeof(decimal)
                 || typeObject.GetTypeInfo().IsEnum
-            ) {
+            )
+            {
                 return true;
             }
             else

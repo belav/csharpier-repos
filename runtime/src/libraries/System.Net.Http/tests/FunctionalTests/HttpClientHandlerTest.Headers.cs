@@ -224,7 +224,8 @@ namespace System.Net.Http.Functional.Tests
             string key,
             string value,
             bool parsable
-        ) {
+        )
+        {
             await LoopbackServerFactory.CreateClientAndServerAsync(
                 async uri =>
                 {
@@ -291,7 +292,8 @@ namespace System.Net.Http.Functional.Tests
                             uri,
                             HttpCompletionOption.ResponseHeadersRead
                         )
-                    ) {
+                    )
+                    {
                         Assert.Equal(headerValue, resp.Headers.GetValues(headerName).Single());
                         Assert.Equal(ContentString, await resp.Content.ReadAsStringAsync());
                     }
@@ -633,7 +635,8 @@ namespace System.Net.Http.Functional.Tests
 
                     foreach (
                         (string name, Encoding valueEncoding, string[] values) in s_nonAsciiHeaders
-                    ) {
+                    )
+                    {
                         byte[] valueBytes = valueEncoding.GetBytes(string.Join(", ", values));
                         Assert.Single(
                             requestData.Headers,
@@ -674,7 +677,8 @@ namespace System.Net.Http.Functional.Tests
                             s_nonAsciiHeaders.Any(
                                 h => h.Name.Equals(name, StringComparison.OrdinalIgnoreCase)
                             )
-                        ) {
+                        )
+                        {
                             return Assert.Single(
                                 s_nonAsciiHeaders,
                                 h => h.Name.Equals(name, StringComparison.OrdinalIgnoreCase)
@@ -694,7 +698,8 @@ namespace System.Net.Http.Functional.Tests
 
                     foreach (
                         (string name, Encoding valueEncoding, string[] values) in s_nonAsciiHeaders
-                    ) {
+                    )
+                    {
                         Assert.Contains(name, seenHeaderNames);
                         IEnumerable<string> receivedValues =
                             Assert.Single(

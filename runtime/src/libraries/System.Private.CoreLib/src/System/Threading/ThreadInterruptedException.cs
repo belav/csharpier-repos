@@ -21,7 +21,8 @@ namespace System.Threading
 #else
                 SR.Threading_ThreadInterrupted
 #endif
-            ) {
+            )
+        {
             HResult = HResults.COR_E_THREADINTERRUPTED;
         }
 
@@ -36,9 +37,7 @@ namespace System.Threading
             HResult = HResults.COR_E_THREADINTERRUPTED;
         }
 
-        protected ThreadInterruptedException(
-            SerializationInfo info,
-            StreamingContext context
-        ) : base(info, context) { }
+        protected ThreadInterruptedException(SerializationInfo info, StreamingContext context)
+            : base(info, context) { }
     }
 }

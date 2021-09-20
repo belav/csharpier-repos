@@ -33,7 +33,8 @@ namespace JitBench
                     $"Run {Name} iterations",
                     output
                 )
-            ) {
+            )
+            {
                 return MeasureIterations(run, runSectionOutput);
             }
         }
@@ -49,7 +50,8 @@ namespace JitBench
             DotNetInstallation dotNetInstall,
             string rootDir,
             IEnumerable<string> projectFileRelativePaths
-        ) {
+        )
+        {
             if (string.IsNullOrWhiteSpace(rootDir))
             {
                 throw new ArgumentNullException(rootDir);
@@ -88,13 +90,15 @@ namespace JitBench
                 foreach (
                     XmlElement e in root.SelectNodes("PropertyGroup/TargetFramework")
                         .OfType<XmlElement>()
-                ) {
+                )
+                {
                     e.ParentNode.ReplaceChild(doc.CreateComment(e.OuterXml), e);
                 }
                 foreach (
                     XmlElement e in root.SelectNodes("PropertyGroup/RuntimeFrameworkVersion")
                         .OfType<XmlElement>()
-                ) {
+                )
+                {
                     e.ParentNode.ReplaceChild(doc.CreateComment(e.OuterXml), e);
                 }
 
@@ -159,7 +163,8 @@ namespace JitBench
             TestRun run,
             BenchmarkConfiguration config,
             ITestOutputHelper output
-        ) {
+        )
+        {
             // The XunitPerformanceHarness is hardcoded to log to the console. It would be nice if the output was configurable somehow
             // but in lieue of that we can redirect all console output with light hackery.
             using (var redirector = new ConsoleRedirector(output))
@@ -275,7 +280,8 @@ namespace JitBench
             string stdout,
             string stderr,
             ITestOutputHelper output
-        ) {
+        )
+        {
             IterationResult iterationResult = new IterationResult();
             int elapsedMs = (int)(
                 scenarioIteration.ProcessExitInfo.ExitTime
@@ -285,7 +291,8 @@ namespace JitBench
             if (
                 !string.IsNullOrWhiteSpace(scenarioIteration.EventLogFileName)
                 && File.Exists(scenarioIteration.EventLogFileName)
-            ) {
+            )
+            {
                 AddEtwData(iterationResult, scenarioIteration, output);
             }
             return iterationResult;
@@ -295,7 +302,8 @@ namespace JitBench
             IterationResult iteration,
             ScenarioExecutionResult scenarioExecutionResult,
             ITestOutputHelper output
-        ) {
+        )
+        {
             string[] modulesOfInterest = new string[]
             {
                 "Anonymously Hosted DynamicMethods Assembly",
@@ -342,7 +350,8 @@ namespace JitBench
                             modulesOfInterest.Any(
                                 m => m.Equals(moduleName, StringComparison.OrdinalIgnoreCase)
                             )
-                        ) {
+                        )
+                        {
                             foreach (var pmcData in module.PerformanceMonitorCounterData)
                             {
                                 Metric m = new Metric(
@@ -378,7 +387,8 @@ namespace JitBench
             Metric originalMetric,
             out Metric newMetric,
             out string newScenarioModelName
-        ) {
+        )
+        {
             if (originalMetric.Name.StartsWith("PMC/"))
             {
                 int prefixLength = "PMC/".Length;

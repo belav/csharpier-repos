@@ -65,7 +65,8 @@ namespace Microsoft.EntityFrameworkCore
         private async Task TestPropertyValuesScalars(
             Func<EntityEntry<Building>, Task<PropertyValues>> getPropertyValues,
             bool expectOriginalValues
-        ) {
+        )
+        {
             using var context = CreateContext();
             var building = context.Set<Building>().Single(b => b.Name == "Building One");
 
@@ -131,7 +132,8 @@ namespace Microsoft.EntityFrameworkCore
         private async Task TestPropertyValuesScalarsIProperty(
             Func<EntityEntry<Building>, Task<PropertyValues>> getPropertyValues,
             bool expectOriginalValues
-        ) {
+        )
+        {
             using var context = CreateContext();
             var building = context.Set<Building>().Single(b => b.Name == "Building One");
 
@@ -198,7 +200,8 @@ namespace Microsoft.EntityFrameworkCore
         private async Task TestPropertyValuesDerivedScalars(
             Func<EntityEntry<CurrentEmployee>, Task<PropertyValues>> getPropertyValues,
             bool expectOriginalValues
-        ) {
+        )
+        {
             using var context = CreateContext();
             var employee = context.Set<Employee>()
                 .OfType<CurrentEmployee>()
@@ -269,7 +272,8 @@ namespace Microsoft.EntityFrameworkCore
         private async Task TestNonGenericPropertyValuesScalars(
             Func<EntityEntry, Task<PropertyValues>> getPropertyValues,
             bool expectOriginalValues
-        ) {
+        )
+        {
             using var context = CreateContext();
             object building = context.Set<Building>().Single(b => b.Name == "Building One");
 
@@ -345,7 +349,8 @@ namespace Microsoft.EntityFrameworkCore
         private async Task TestNonGenericPropertyValuesScalarsIProperty(
             Func<EntityEntry, Task<PropertyValues>> getPropertyValues,
             bool expectOriginalValues
-        ) {
+        )
+        {
             using var context = CreateContext();
             object building = context.Set<Building>().Single(b => b.Name == "Building One");
 
@@ -430,7 +435,8 @@ namespace Microsoft.EntityFrameworkCore
         private async Task TestNonGenericPropertyValuesDerivedScalars(
             Func<EntityEntry, Task<PropertyValues>> getPropertyValues,
             bool expectOriginalValues
-        ) {
+        )
+        {
             using var context = CreateContext();
             object employee = context.Set<Employee>()
                 .OfType<CurrentEmployee>()
@@ -483,7 +489,8 @@ namespace Microsoft.EntityFrameworkCore
         private void TestSetPropertyValuesScalars(
             Func<EntityEntry<Building>, PropertyValues> getPropertyValues,
             Func<EntityEntry, string, object> getValue
-        ) {
+        )
+        {
             using var context = CreateContext();
             var building = context.Set<Building>().Single(b => b.Name == "Building One");
             var values = getPropertyValues(context.Entry(building));
@@ -526,7 +533,8 @@ namespace Microsoft.EntityFrameworkCore
         private void TestSetPropertyValuesScalarsIProperty(
             Func<EntityEntry<Building>, PropertyValues> getPropertyValues,
             Func<EntityEntry, string, object> getValue
-        ) {
+        )
+        {
             using var context = CreateContext();
             var building = context.Set<Building>().Single(b => b.Name == "Building One");
             var entry = context.Entry(building);
@@ -569,7 +577,8 @@ namespace Microsoft.EntityFrameworkCore
         private void TestSetNonGenericPropertyValuesScalars(
             Func<EntityEntry, PropertyValues> getPropertyValues,
             Func<EntityEntry, string, object> getValue
-        ) {
+        )
+        {
             using var context = CreateContext();
             var building = context.Set<Building>().Single(b => b.Name == "Building One");
             var values = getPropertyValues(context.Entry(building));
@@ -630,7 +639,8 @@ namespace Microsoft.EntityFrameworkCore
         private async Task TestPropertyValuesClone(
             Func<EntityEntry<Building>, Task<PropertyValues>> getPropertyValues,
             bool expectOriginalValues
-        ) {
+        )
+        {
             using var context = CreateContext();
             var building = context.Set<Building>().Single(b => b.Name == "Building One");
 
@@ -694,7 +704,8 @@ namespace Microsoft.EntityFrameworkCore
         private async Task TestPropertyValuesDerivedClone(
             Func<EntityEntry<CurrentEmployee>, Task<PropertyValues>> getPropertyValues,
             bool expectOriginalValues
-        ) {
+        )
+        {
             using var context = CreateContext();
             var employee = context.Set<Employee>()
                 .OfType<CurrentEmployee>()
@@ -763,7 +774,8 @@ namespace Microsoft.EntityFrameworkCore
         private async Task TestNonGenericPropertyValuesClone(
             Func<EntityEntry, Task<PropertyValues>> getPropertyValues,
             bool expectOriginalValues
-        ) {
+        )
+        {
             using var context = CreateContext();
             object building = context.Set<Building>().Single(b => b.Name == "Building One");
 
@@ -827,7 +839,8 @@ namespace Microsoft.EntityFrameworkCore
         private async Task TestPropertyValuesCloneToValues(
             Func<EntityEntry<Building>, Task<PropertyValues>> getPropertyValues,
             bool expectOriginalValues
-        ) {
+        )
+        {
             using var context = CreateContext();
             var building = context.Set<Building>().Single(b => b.Name == "Building One");
 
@@ -1240,7 +1253,8 @@ namespace Microsoft.EntityFrameworkCore
         private async Task TestNonGenericPropertyValuesCloneToValues(
             Func<EntityEntry, Task<PropertyValues>> getPropertyValues,
             bool expectOriginalValues
-        ) {
+        )
+        {
             using var context = CreateContext();
             var building = context.Set<Building>().Single(b => b.Name == "Building One");
 
@@ -1504,7 +1518,8 @@ namespace Microsoft.EntityFrameworkCore
             Func<EntityEntry<Building>, Task<PropertyValues>> getPropertyValues,
             EntityState state,
             bool expectOriginalValues
-        ) {
+        )
+        {
             using var context = CreateContext();
             var building = context.Set<Building>().Single(b => b.Name == "Building One");
             var entry = context.Entry(building);
@@ -1538,7 +1553,8 @@ namespace Microsoft.EntityFrameworkCore
         public async Task Values_can_be_reloaded_from_database_for_entity_in_any_state(
             EntityState state,
             bool async
-        ) {
+        )
+        {
             using var context = CreateContext();
             var building = context.Set<Building>().Single(b => b.Name == "Building One");
             var entry = context.Entry(building);
@@ -1578,7 +1594,8 @@ namespace Microsoft.EntityFrameworkCore
         public async Task Reload_when_entity_deleted_in_store_can_happen_for_any_state(
             EntityState state,
             bool async
-        ) {
+        )
+        {
             using var context = CreateContext();
             var office = new Office { Number = "35" };
             var mailRoom = new MailRoom { id = 36 };
@@ -1645,7 +1662,8 @@ namespace Microsoft.EntityFrameworkCore
         private void TestGenericObjectSetValues(
             Func<EntityEntry<Building>, PropertyValues> getPropertyValues,
             Func<EntityEntry, string, object> getValue
-        ) {
+        )
+        {
             using var context = CreateContext();
             var building = context.Set<Building>().Single(b => b.Name == "Building One");
             var buildingValues = getPropertyValues(context.Entry(building));
@@ -1673,7 +1691,8 @@ namespace Microsoft.EntityFrameworkCore
             Func<EntityEntry, string, object> getValue,
             int shadow1,
             string shadow2
-        ) {
+        )
+        {
             Assert.Equal("Values End", getValue(buildingEntry, "Name"));
             Assert.Equal(1500000m, getValue(buildingEntry, "Value"));
             Assert.Equal(shadow1, getValue(buildingEntry, "Shadow1"));
@@ -1707,7 +1726,8 @@ namespace Microsoft.EntityFrameworkCore
         private void TestNonGenericObjectSetValues(
             Func<EntityEntry, PropertyValues> getPropertyValues,
             Func<EntityEntry, string, object> getValue
-        ) {
+        )
+        {
             using var context = CreateContext();
             var building = context.Set<Building>().Single(b => b.Name == "Building One");
             var buildingValues = getPropertyValues(context.Entry(building));
@@ -1748,7 +1768,8 @@ namespace Microsoft.EntityFrameworkCore
         private void TestNonGenericDtoSetValues(
             Func<EntityEntry, PropertyValues> getPropertyValues,
             Func<EntityEntry, string, object> getValue
-        ) {
+        )
+        {
             using var context = CreateContext();
             var building = context.Set<Building>().Single(b => b.Name == "Building One");
             var buildingValues = getPropertyValues(context.Entry(building));
@@ -1794,7 +1815,8 @@ namespace Microsoft.EntityFrameworkCore
         private void TestNonGenericDtoNoKeySetValues(
             Func<EntityEntry, PropertyValues> getPropertyValues,
             Func<EntityEntry, string, object> getValue
-        ) {
+        )
+        {
             using var context = CreateContext();
             var building = context.Set<Building>().Single(b => b.Name == "Building One");
             var buildingValues = getPropertyValues(context.Entry(building));
@@ -1832,7 +1854,8 @@ namespace Microsoft.EntityFrameworkCore
         private void TestDictionarySetValues(
             Func<EntityEntry, PropertyValues> getPropertyValues,
             Func<EntityEntry, string, object> getValue
-        ) {
+        )
+        {
             using var context = CreateContext();
             var building = context.Set<Building>().Single(b => b.Name == "Building One");
             var buildingValues = getPropertyValues(context.Entry(building));
@@ -1880,7 +1903,8 @@ namespace Microsoft.EntityFrameworkCore
         private void TestPartialDictionarySetValues(
             Func<EntityEntry, PropertyValues> getPropertyValues,
             Func<EntityEntry, string, object> getValue
-        ) {
+        )
+        {
             using var context = CreateContext();
             var building = context.Set<Building>().Single(b => b.Name == "Building One");
             var buildingValues = getPropertyValues(context.Entry(building));
@@ -1923,7 +1947,8 @@ namespace Microsoft.EntityFrameworkCore
         private void TestGenericValuesSetValues(
             Func<EntityEntry<Building>, PropertyValues> getPropertyValues,
             Func<EntityEntry, string, object> getValue
-        ) {
+        )
+        {
             using var context = CreateContext();
             var building = context.Set<Building>().Single(b => b.Name == "Building One");
             var buildingValues = getPropertyValues(context.Entry(building));
@@ -1969,7 +1994,8 @@ namespace Microsoft.EntityFrameworkCore
         private void TestNonGenericValuesSetValues(
             Func<EntityEntry, PropertyValues> getPropertyValues,
             Func<EntityEntry, string, object> getValue
-        ) {
+        )
+        {
             using var context = CreateContext();
             var building = context.Set<Building>().Single(b => b.Name == "Building One");
             var buildingValues = getPropertyValues(context.Entry(building));
@@ -2026,7 +2052,8 @@ namespace Microsoft.EntityFrameworkCore
         [InlineData(CascadeTiming.Never)]
         public virtual void Non_nullable_property_in_current_values_results_in_conceptual_null(
             CascadeTiming deleteOrphansTiming
-        ) {
+        )
+        {
             using var context = CreateContext();
             context.ChangeTracker.DeleteOrphansTiming = deleteOrphansTiming;
 
@@ -2042,7 +2069,8 @@ namespace Microsoft.EntityFrameworkCore
                 if (
                     context.GetService<IDbContextOptions>()
                         .FindExtension<CoreOptionsExtension>().IsSensitiveDataLoggingEnabled
-                ) {
+                )
+                {
                     Assert.Equal(
                         CoreStrings.PropertyConceptualNullSensitive(
                             "Value",
@@ -2083,7 +2111,8 @@ namespace Microsoft.EntityFrameworkCore
         [InlineData(CascadeTiming.Never)]
         public virtual void Non_nullable_shadow_property_in_current_values_results_in_conceptual_null(
             CascadeTiming deleteOrphansTiming
-        ) {
+        )
+        {
             using var context = CreateContext();
             context.ChangeTracker.DeleteOrphansTiming = deleteOrphansTiming;
 
@@ -2098,7 +2127,8 @@ namespace Microsoft.EntityFrameworkCore
                 if (
                     context.GetService<IDbContextOptions>()
                         .FindExtension<CoreOptionsExtension>().IsSensitiveDataLoggingEnabled
-                ) {
+                )
+                {
                     Assert.Equal(
                         CoreStrings.PropertyConceptualNullSensitive(
                             "Shadow1",
@@ -2211,7 +2241,8 @@ namespace Microsoft.EntityFrameworkCore
 
         private void TestSetWrongTypeShadow(
             Func<EntityEntry<Building>, PropertyValues> getPropertyValues
-        ) {
+        )
+        {
             using var context = CreateContext();
             var building = context.Set<Building>().Single(b => b.Name == "Building One");
             var values = getPropertyValues(context.Entry(building));
@@ -2251,7 +2282,8 @@ namespace Microsoft.EntityFrameworkCore
 
         private void TestKeyChangeByObject(
             Func<EntityEntry<Building>, PropertyValues> getPropertyValues
-        ) {
+        )
+        {
             using var context = CreateContext();
             var building = context.Set<Building>().Single(b => b.Name == "Building One");
             var values = getPropertyValues(context.Entry(building));
@@ -2281,7 +2313,8 @@ namespace Microsoft.EntityFrameworkCore
 
         private void TestKeyChangeByValues(
             Func<EntityEntry<Building>, PropertyValues> getPropertyValues
-        ) {
+        )
+        {
             using var context = CreateContext();
             var building = context.Set<Building>().Single(b => b.Name == "Building One");
             var values = getPropertyValues(context.Entry(building));
@@ -2327,7 +2360,8 @@ namespace Microsoft.EntityFrameworkCore
 
         private async Task TestProperties(
             Func<EntityEntry<Building>, Task<PropertyValues>> getPropertyValues
-        ) {
+        )
+        {
             using var context = CreateContext();
             var building = context.Set<Building>().Single(b => b.Name == "Building One");
             var buildingValues = await getPropertyValues(context.Entry(building));
@@ -2364,7 +2398,8 @@ namespace Microsoft.EntityFrameworkCore
 
         private async Task GetDatabaseValues_for_entity_not_in_the_store_returns_null_implementation(
             Func<EntityEntry, Task<PropertyValues>> getPropertyValues
-        ) {
+        )
+        {
             using var context = CreateContext();
             var building = (Building)context.Entry(
                     context.Set<Building>().Single(b => b.Name == "Building One")
@@ -2396,7 +2431,8 @@ namespace Microsoft.EntityFrameworkCore
 
         private async Task NonGeneric_GetDatabaseValues_for_entity_not_in_the_store_returns_null_implementation(
             Func<EntityEntry, Task<PropertyValues>> getPropertyValues
-        ) {
+        )
+        {
             using var context = CreateContext();
             var building = (Building)context.Entry(
                     context.Set<Building>().Single(b => b.Name == "Building One")
@@ -2427,7 +2463,8 @@ namespace Microsoft.EntityFrameworkCore
 
         private async Task GetDatabaseValues_for_derived_entity_not_in_the_store_returns_null_implementation(
             Func<EntityEntry, Task<PropertyValues>> getPropertyValues
-        ) {
+        )
+        {
             using var context = CreateContext();
             var employee = (CurrentEmployee)context.Entry(
                     context.Set<Employee>()
@@ -2460,7 +2497,8 @@ namespace Microsoft.EntityFrameworkCore
 
         private async Task NonGeneric_GetDatabaseValues_for_derived_entity_not_in_the_store_returns_null_implementation(
             Func<EntityEntry, Task<PropertyValues>> getPropertyValues
-        ) {
+        )
+        {
             using var context = CreateContext();
             var employee = (CurrentEmployee)context.Entry(
                     context.Set<Employee>()
@@ -2493,7 +2531,8 @@ namespace Microsoft.EntityFrameworkCore
 
         private async Task GetDatabaseValues_for_the_wrong_type_in_the_store_returns_null_implementation(
             Func<EntityEntry, Task<PropertyValues>> getPropertyValues
-        ) {
+        )
+        {
             using var context = CreateContext();
             var pastEmployeeId =
                 context.Set<Employee>()
@@ -2533,7 +2572,8 @@ namespace Microsoft.EntityFrameworkCore
 
         private async Task NonGeneric_GetDatabaseValues_for_the_wrong_type_in_the_store_throws_implementation(
             Func<EntityEntry, Task<PropertyValues>> getPropertyValues
-        ) {
+        )
+        {
             using var context = CreateContext();
             var pastEmployeeId =
                 context.Set<Employee>()
@@ -2573,7 +2613,8 @@ namespace Microsoft.EntityFrameworkCore
 
         private async Task Store_values_really_are_store_values_not_current_or_original_values_implementation(
             Func<EntityEntry, Task<PropertyValues>> getPropertyValues
-        ) {
+        )
+        {
             using var context = CreateContext();
             var building = context.Set<Building>().Single(b => b.Name == "Building One");
             building.Name = "Values End";

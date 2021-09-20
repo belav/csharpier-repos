@@ -26,7 +26,8 @@ namespace Microsoft.CodeAnalysis.Formatting
         /// </summary>
         internal static IEnumerable<AbstractFormattingRule> GetDefaultFormattingRules(
             ISyntaxFormattingService syntaxFormattingService
-        ) {
+        )
+        {
             if (syntaxFormattingService != null)
             {
                 return syntaxFormattingService.GetDefaultFormattingRules();
@@ -91,7 +92,8 @@ namespace Microsoft.CodeAnalysis.Formatting
             OptionSet options,
             IEnumerable<AbstractFormattingRule> rules,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             if (syntaxTree == null)
             {
                 throw new ArgumentNullException(nameof(syntaxTree));
@@ -149,7 +151,8 @@ namespace Microsoft.CodeAnalysis.Formatting
             OptionSet options,
             IEnumerable<AbstractFormattingRule> rules,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var spans =
                 (annotation == SyntaxAnnotation.ElasticAnnotation)
                     ? GetElasticSpans(node)
@@ -172,7 +175,8 @@ namespace Microsoft.CodeAnalysis.Formatting
             OptionSet options,
             IEnumerable<AbstractFormattingRule> rules,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var formattingResult = GetFormattingResult(
                 node,
                 syntaxFormattingService,
@@ -193,7 +197,8 @@ namespace Microsoft.CodeAnalysis.Formatting
             OptionSet options,
             IEnumerable<AbstractFormattingRule> rules,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var formattingResult = GetFormattingResult(
                 node,
                 syntaxFormattingService,
@@ -214,7 +219,8 @@ namespace Microsoft.CodeAnalysis.Formatting
             OptionSet options,
             IEnumerable<AbstractFormattingRule> rules,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             if (node == null)
             {
                 throw new ArgumentNullException(nameof(node));

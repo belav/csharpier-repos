@@ -1096,7 +1096,8 @@ namespace System.DirectoryServices.ActiveDirectory
                                     0,
                                     ocValue.Length
                                 ) == 0
-                            ) {
+                            )
+                            {
                                 hostNameTable.Add(
                                     (string)PropertyManager.GetSearchResultPropertyValue(
                                         r,
@@ -1126,7 +1127,8 @@ namespace System.DirectoryServices.ActiveDirectory
                                     0,
                                     ocValue.Length
                                 ) != 0
-                            ) {
+                            )
+                            {
                                 string fromServer =
                                     (string)PropertyManager.GetSearchResultPropertyValue(
                                         r,
@@ -1170,7 +1172,8 @@ namespace System.DirectoryServices.ActiveDirectory
                                             )!,
                                             fromSite
                                         ) != 0
-                                    ) {
+                                    )
+                                    {
                                         // the server is a bridgehead server
                                         bridgeHeadTable.Add(serverObjectName, hostName);
                                         nonBridgHeadTable.Remove(serverObjectName);
@@ -1272,7 +1275,8 @@ namespace System.DirectoryServices.ActiveDirectory
                                             PropertyManager.Cn
                                         )!
                                     ) != 0
-                                ) {
+                                )
+                                {
                                     string val = (string)nonBridgHeadTable[serverObject]!;
                                     nonBridgHeadTable.Remove(serverObject);
                                     bridgeHeadTable.Add(serverObject, val);
@@ -1725,7 +1729,8 @@ namespace System.DirectoryServices.ActiveDirectory
                             if (
                                 nameResult.status == DS_NAME_ERROR.DS_NAME_NO_ERROR
                                 || nameResult.status == DS_NAME_ERROR.DS_NAME_ERROR_DOMAIN_ONLY
-                            ) {
+                            )
+                            {
                                 string? domainName = Marshal.PtrToStringUni(nameResult.pName);
                                 if (domainName != null && domainName.Length > 0)
                                 {

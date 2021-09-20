@@ -110,13 +110,15 @@ namespace Microsoft.CodeAnalysis.CSharp.UseIndexOrRangeOperator
             InfoCache infoCache,
             AnalyzerOptions analyzerOptionsOpt,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             // Validate we're on a piece of syntax we expect.  While not necessary for analysis, we
             // want to make sure we're on something the fixer will know how to actually fix.
             if (
                 !(invocation.Syntax is InvocationExpressionSyntax invocationSyntax)
                 || invocationSyntax.ArgumentList is null
-            ) {
+            )
+            {
                 return null;
             }
 
@@ -161,7 +163,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UseIndexOrRangeOperator
             InfoCache infoCache,
             InvocationExpressionSyntax invocationSyntax,
             CodeStyleOption2<bool> option
-        ) {
+        )
+        {
             var targetMethod = invocation.TargetMethod;
 
             // We are dealing with a call like `.Substring(expr)`.
@@ -190,7 +193,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UseIndexOrRangeOperator
             InfoCache infoCache,
             InvocationExpressionSyntax invocationSyntax,
             CodeStyleOption2<bool> option
-        ) {
+        )
+        {
             // See if the call is to something slice-like.
             var targetMethod = invocation.TargetMethod;
 
@@ -200,7 +204,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UseIndexOrRangeOperator
             if (
                 !IsSubtraction(invocation.Arguments[1].Value, out var subtraction)
                 || !infoCache.TryGetMemberInfo(targetMethod, out var memberInfo)
-            ) {
+            )
+            {
                 return null;
             }
 
@@ -215,7 +220,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UseIndexOrRangeOperator
                 invocation.Syntax.IsLeftSideOfAnyAssignExpression()
                 && indexer != null
                 && IsWriteableIndexer(invocation, indexer)
-            ) {
+            )
+            {
                 return null;
             }
 
@@ -228,7 +234,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UseIndexOrRangeOperator
                     startOperation.Syntax,
                     subtraction.RightOperand.Syntax
                 )
-            ) {
+            )
+            {
                 return new Result(
                     ResultKind.Computed,
                     option,
@@ -251,7 +258,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UseIndexOrRangeOperator
                     invocation.Instance,
                     subtraction.LeftOperand
                 )
-            ) {
+            )
+            {
                 return new Result(
                     ResultKind.Constant,
                     option,
@@ -297,7 +305,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UseIndexOrRangeOperator
         private static bool IsWriteableIndexer(
             IInvocationOperation invocation,
             IPropertySymbol indexer
-        ) {
+        )
+        {
             var refReturnMismatch = indexer.ReturnsByRef != invocation.TargetMethod.ReturnsByRef;
             var indexerIsReadWrite = indexer.IsWriteableFieldOrProperty();
             return refReturnMismatch && !indexerIsReadWrite;

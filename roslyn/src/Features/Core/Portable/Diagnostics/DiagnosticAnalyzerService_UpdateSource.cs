@@ -50,7 +50,8 @@ namespace Microsoft.CodeAnalysis.Diagnostics
 
         internal void RaiseBulkDiagnosticsUpdated(
             Action<Action<DiagnosticsUpdatedArgs>> eventAction
-        ) {
+        )
+        {
             // all diagnostics events are serialized.
             var ev = _eventMap.GetEventHandlers<EventHandler<DiagnosticsUpdatedArgs>>(
                 DiagnosticsUpdatedEventName
@@ -73,7 +74,8 @@ namespace Microsoft.CodeAnalysis.Diagnostics
 
         internal void RaiseBulkDiagnosticsUpdated(
             Func<Action<DiagnosticsUpdatedArgs>, Task> eventActionAsync
-        ) {
+        )
+        {
             // all diagnostics events are serialized.
             var ev = _eventMap.GetEventHandlers<EventHandler<DiagnosticsUpdatedArgs>>(
                 DiagnosticsUpdatedEventName
@@ -103,7 +105,8 @@ namespace Microsoft.CodeAnalysis.Diagnostics
             object id,
             bool includeSuppressedDiagnostics,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             if (id != null)
             {
                 return new ValueTask<ImmutableArray<DiagnosticData>>(

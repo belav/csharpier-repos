@@ -66,7 +66,8 @@ namespace System.IO.Pipelines.Tests
         [MemberData(nameof(ReadCalls))]
         public async Task ReadingFromPipeReaderStreamReadsFromUnderlyingPipeReader(
             ReadAsyncDelegate readAsync
-        ) {
+        )
+        {
             byte[] helloBytes = Encoding.ASCII.GetBytes("Hello World");
             var pipe = new Pipe();
             await pipe.Writer.WriteAsync(helloBytes);
@@ -337,7 +338,8 @@ namespace System.IO.Pipelines.Tests
 
             public override ValueTask<ReadResult> ReadAsync(
                 CancellationToken cancellationToken = default
-            ) {
+            )
+            {
                 // Returns a ReadResult with no buffer and with IsCompleted and IsCancelled false
                 return default;
             }
@@ -391,7 +393,8 @@ namespace System.IO.Pipelines.Tests
 
             public override ValueTask<ReadResult> ReadAsync(
                 CancellationToken cancellationToken = default
-            ) {
+            )
+            {
                 ReadCalled = true;
                 return new ValueTask<ReadResult>(
                     new ReadResult(default, isCanceled: false, isCompleted: true)

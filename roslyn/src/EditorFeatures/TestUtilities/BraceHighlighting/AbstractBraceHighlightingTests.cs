@@ -27,7 +27,8 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.BraceHighlighting
             string markup,
             ParseOptions options = null,
             bool swapAnglesWithBrackets = false
-        ) {
+        )
+        {
             MarkupTestFile.GetPositionAndSpans(
                 markup,
                 out var text,

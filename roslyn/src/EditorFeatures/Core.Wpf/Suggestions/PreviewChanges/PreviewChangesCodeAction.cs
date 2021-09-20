@@ -25,7 +25,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.Suggestions
                     Workspace workspace,
                     CodeAction originalCodeAction,
                     SolutionChangeSummary changeSummary
-                ) {
+                )
+                {
                     _workspace = workspace;
                     _originalCodeAction = originalCodeAction;
                     _changeSummary = changeSummary;
@@ -38,7 +39,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.Suggestions
                 > GetOperationsCoreAsync(
                     IProgressTracker progressTracker,
                     CancellationToken cancellationToken
-                ) {
+                )
+                {
                     cancellationToken.ThrowIfCancellationRequested();
                     var previewDialogService =
                         _workspace.Services.GetService<IPreviewDialogService>();

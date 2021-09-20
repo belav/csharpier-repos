@@ -19,7 +19,8 @@ namespace System.Drawing
             string libraryName,
             Assembly assembly,
             DllImportSearchPath? searchPath
-        ) {
+        )
+        {
             if (libraryName == LibcupsNative.LibraryName)
                 return LibcupsNative.LoadLibcups();
             if (libraryName == SafeNativeMethods.Gdip.LibraryName)

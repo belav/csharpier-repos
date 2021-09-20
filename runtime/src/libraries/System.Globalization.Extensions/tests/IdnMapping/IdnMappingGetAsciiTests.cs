@@ -284,7 +284,8 @@ namespace System.Globalization.Tests
                 int index,
                 int count,
                 Type exceptionType
-            ) {
+            )
+            {
                 if (unicode == null || index + count == unicode.Length)
                 {
                     if (unicode == null || index == 0)

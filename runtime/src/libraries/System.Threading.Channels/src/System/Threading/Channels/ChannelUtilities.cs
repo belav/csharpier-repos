@@ -70,7 +70,8 @@ namespace System.Threading.Channels
         internal static void QueueWaiter(
             ref AsyncOperation<bool>? tail,
             AsyncOperation<bool> waiter
-        ) {
+        )
+        {
             AsyncOperation<bool>? c = tail;
             if (c == null)
             {
@@ -88,7 +89,8 @@ namespace System.Threading.Channels
             ref AsyncOperation<bool>? listTail,
             bool result,
             Exception? error = null
-        ) {
+        )
+        {
             AsyncOperation<bool>? tail = listTail;
             if (tail != null)
             {

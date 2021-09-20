@@ -37,7 +37,8 @@ namespace System.DirectoryServices.ActiveDirectory
             string adamInstanceName,
             DirectoryEntryManager directoryEntryMgr,
             bool nameIncludesPort
-        ) {
+        )
+        {
             this.context = context;
             this.replicaName = adamInstanceName;
             this.directoryEntryMgr = directoryEntryMgr;
@@ -55,7 +56,8 @@ namespace System.DirectoryServices.ActiveDirectory
             DirectoryContext context,
             string adamHostName,
             DirectoryEntryManager directoryEntryMgr
-        ) {
+        )
+        {
             this.context = context;
 
             // the replica name should be in the form dnshostname:port
@@ -555,7 +557,8 @@ namespace System.DirectoryServices.ActiveDirectory
         public override void SyncReplicaFromAllServers(
             string partition,
             SyncFromAllServersOptions options
-        ) {
+        )
+        {
             if (_disposed)
                 throw new ObjectDisposedException(GetType().Name);
 
@@ -713,7 +716,8 @@ namespace System.DirectoryServices.ActiveDirectory
                                     PropertyManager.FsmoRoleOwner
                                 )!
                             )
-                        ) {
+                        )
+                        {
                             roleList.Add(AdamRole.SchemaRole);
                         }
 
@@ -730,7 +734,8 @@ namespace System.DirectoryServices.ActiveDirectory
                                     PropertyManager.FsmoRoleOwner
                                 )!
                             )
-                        ) {
+                        )
+                        {
                             roleList.Add(AdamRole.NamingRole);
                         }
 
@@ -772,7 +777,8 @@ namespace System.DirectoryServices.ActiveDirectory
                         if (
                             ntdsaEntry.Properties[PropertyManager.MsDSDefaultNamingContext].Value
                             == null
-                        ) {
+                        )
+                        {
                             // property has not been set
                             _cachedDefaultPartition = null;
                         }

@@ -18,7 +18,8 @@ namespace System.Web.Http.ModelBinding
         private static Func<HttpParameterDescriptor, HttpParameterBinding> TypeCheck(
             Type type,
             Func<HttpParameterDescriptor, HttpParameterBinding> func
-        ) {
+        )
+        {
             return (param => (param.ParameterType == type) ? func(param) : null);
         }
 
@@ -31,7 +32,8 @@ namespace System.Web.Http.ModelBinding
         public void Add(
             Type typeMatch,
             Func<HttpParameterDescriptor, HttpParameterBinding> funcInner
-        ) {
+        )
+        {
             Add(TypeCheck(typeMatch, funcInner));
         }
 
@@ -46,7 +48,8 @@ namespace System.Web.Http.ModelBinding
             int index,
             Type typeMatch,
             Func<HttpParameterDescriptor, HttpParameterBinding> funcInner
-        ) {
+        )
+        {
             Insert(index, TypeCheck(typeMatch, funcInner));
         }
 

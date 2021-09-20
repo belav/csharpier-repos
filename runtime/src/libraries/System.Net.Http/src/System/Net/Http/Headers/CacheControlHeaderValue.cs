@@ -304,7 +304,8 @@ namespace System.Net.Http.Headers
                 || (_privateField != other._privateField)
                 || (_mustRevalidate != other._mustRevalidate)
                 || (_proxyRevalidate != other._proxyRevalidate)
-            ) {
+            )
+            {
                 return false;
             }
 
@@ -314,7 +315,8 @@ namespace System.Net.Http.Headers
                     other._noCacheHeaders,
                     StringComparer.OrdinalIgnoreCase
                 )
-            ) {
+            )
+            {
                 return false;
             }
 
@@ -324,7 +326,8 @@ namespace System.Net.Http.Headers
                     other._privateHeaders,
                     StringComparer.OrdinalIgnoreCase
                 )
-            ) {
+            )
+            {
                 return false;
             }
 
@@ -410,7 +413,8 @@ namespace System.Net.Http.Headers
                     ref index,
                     out object? output
                 )
-            ) {
+            )
+            {
                 parsedValue = (CacheControlHeaderValue?)output;
                 return true;
             }
@@ -422,7 +426,8 @@ namespace System.Net.Http.Headers
             int startIndex,
             CacheControlHeaderValue? storeValue,
             out CacheControlHeaderValue? parsedValue
-        ) {
+        )
+        {
             Debug.Assert(startIndex >= 0);
 
             parsedValue = null;
@@ -479,7 +484,8 @@ namespace System.Net.Http.Headers
         private static bool TrySetCacheControlValues(
             CacheControlHeaderValue cc,
             List<NameValueHeaderValue> nameValueList
-        ) {
+        )
+        {
             foreach (NameValueHeaderValue nameValue in nameValueList)
             {
                 bool success = true;
@@ -579,7 +585,8 @@ namespace System.Net.Http.Headers
             NameValueHeaderValue nameValue,
             ref bool boolField,
             ref ObjectCollection<string>? destination
-        ) {
+        )
+        {
             Debug.Assert(nameValue != null);
 
             if (nameValue.Value == null)
@@ -595,7 +602,8 @@ namespace System.Net.Http.Headers
                 (valueString.Length < 3)
                 || (valueString[0] != '\"')
                 || (valueString[valueString.Length - 1] != '\"')
-            ) {
+            )
+            {
                 return false;
             }
 

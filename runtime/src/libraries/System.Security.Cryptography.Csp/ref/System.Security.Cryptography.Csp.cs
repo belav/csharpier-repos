@@ -62,7 +62,8 @@ namespace System.Security.Cryptography
         public override System.Security.Cryptography.ICryptoTransform CreateDecryptor(
             byte[] rgbKey,
             byte[]? rgbIV
-        ) {
+        )
+        {
             throw null;
         }
         public override System.Security.Cryptography.ICryptoTransform CreateEncryptor()
@@ -72,7 +73,8 @@ namespace System.Security.Cryptography
         public override System.Security.Cryptography.ICryptoTransform CreateEncryptor(
             byte[] rgbKey,
             byte[]? rgbIV
-        ) {
+        )
+        {
             throw null;
         }
         protected override void Dispose(bool disposing) { }
@@ -187,7 +189,8 @@ namespace System.Security.Cryptography
         public override System.Security.Cryptography.ICryptoTransform CreateDecryptor(
             byte[] rgbKey,
             byte[]? rgbIV
-        ) {
+        )
+        {
             throw null;
         }
         public override System.Security.Cryptography.ICryptoTransform CreateEncryptor()
@@ -197,7 +200,8 @@ namespace System.Security.Cryptography
         public override System.Security.Cryptography.ICryptoTransform CreateEncryptor(
             byte[] rgbKey,
             byte[]? rgbIV
-        ) {
+        )
+        {
             throw null;
         }
         public override void GenerateIV() { }
@@ -262,7 +266,8 @@ namespace System.Security.Cryptography
         }
         public override System.Security.Cryptography.DSAParameters ExportParameters(
             bool includePrivateParameters
-        ) {
+        )
+        {
             throw null;
         }
         protected override byte[] HashData(
@@ -270,13 +275,15 @@ namespace System.Security.Cryptography
             int offset,
             int count,
             System.Security.Cryptography.HashAlgorithmName hashAlgorithm
-        ) {
+        )
+        {
             throw null;
         }
         protected override byte[] HashData(
             System.IO.Stream data,
             System.Security.Cryptography.HashAlgorithmName hashAlgorithm
-        ) {
+        )
+        {
             throw null;
         }
         public void ImportCspBlob(byte[] keyBlob) { }
@@ -417,7 +424,8 @@ namespace System.Security.Cryptography
             string? alghashname,
             int keySize,
             byte[] rgbIV
-        ) {
+        )
+        {
             throw null;
         }
         protected override void Dispose(bool disposing) { }
@@ -450,13 +458,15 @@ namespace System.Security.Cryptography
         public override System.Security.Cryptography.ICryptoTransform CreateDecryptor(
             byte[] rgbKey,
             byte[]? rgbIV
-        ) {
+        )
+        {
             throw null;
         }
         public override System.Security.Cryptography.ICryptoTransform CreateEncryptor(
             byte[] rgbKey,
             byte[]? rgbIV
-        ) {
+        )
+        {
             throw null;
         }
         public override void GenerateIV() { }
@@ -534,7 +544,8 @@ namespace System.Security.Cryptography
         public override byte[] Decrypt(
             byte[] data,
             System.Security.Cryptography.RSAEncryptionPadding padding
-        ) {
+        )
+        {
             throw null;
         }
         public override byte[] DecryptValue(byte[] rgb)
@@ -549,7 +560,8 @@ namespace System.Security.Cryptography
         public override byte[] Encrypt(
             byte[] data,
             System.Security.Cryptography.RSAEncryptionPadding padding
-        ) {
+        )
+        {
             throw null;
         }
         public override byte[] EncryptValue(byte[] rgb)
@@ -562,7 +574,8 @@ namespace System.Security.Cryptography
         }
         public override System.Security.Cryptography.RSAParameters ExportParameters(
             bool includePrivateParameters
-        ) {
+        )
+        {
             throw null;
         }
         protected override byte[] HashData(
@@ -570,13 +583,15 @@ namespace System.Security.Cryptography
             int offset,
             int count,
             System.Security.Cryptography.HashAlgorithmName hashAlgorithm
-        ) {
+        )
+        {
             throw null;
         }
         protected override byte[] HashData(
             System.IO.Stream data,
             System.Security.Cryptography.HashAlgorithmName hashAlgorithm
-        ) {
+        )
+        {
             throw null;
         }
         public void ImportCspBlob(byte[] keyBlob) { }
@@ -599,7 +614,8 @@ namespace System.Security.Cryptography
             byte[] hash,
             System.Security.Cryptography.HashAlgorithmName hashAlgorithm,
             System.Security.Cryptography.RSASignaturePadding padding
-        ) {
+        )
+        {
             throw null;
         }
         public byte[] SignHash(byte[] rgbHash, string? str)
@@ -615,7 +631,8 @@ namespace System.Security.Cryptography
             byte[] signature,
             System.Security.Cryptography.HashAlgorithmName hashAlgorithm,
             System.Security.Cryptography.RSASignaturePadding padding
-        ) {
+        )
+        {
             throw null;
         }
         public bool VerifyHash(byte[] rgbHash, string str, byte[] rgbSignature)
@@ -756,7 +773,8 @@ namespace System.Security.Cryptography
         public override System.Security.Cryptography.ICryptoTransform CreateDecryptor(
             byte[] rgbKey,
             byte[]? rgbIV
-        ) {
+        )
+        {
             throw null;
         }
         public override System.Security.Cryptography.ICryptoTransform CreateEncryptor()
@@ -766,7 +784,8 @@ namespace System.Security.Cryptography
         public override System.Security.Cryptography.ICryptoTransform CreateEncryptor(
             byte[] rgbKey,
             byte[]? rgbIV
-        ) {
+        )
+        {
             throw null;
         }
         protected override void Dispose(bool disposing) { }

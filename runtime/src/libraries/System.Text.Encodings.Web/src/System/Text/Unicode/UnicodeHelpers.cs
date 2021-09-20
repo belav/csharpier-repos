@@ -29,7 +29,8 @@ namespace System.Text.Unicode
             uint scalar,
             out char highSurrogate,
             out char lowSurrogate
-        ) {
+        )
+        {
             Debug.Assert(0x10000 <= scalar && scalar <= UNICODE_LAST_CODEPOINT);
 
             UnicodeDebug.AssertIsValidSupplementaryPlaneScalar(scalar);

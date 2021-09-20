@@ -34,7 +34,8 @@ namespace Microsoft.NETCore.Platforms.BuildTasks.Tests
             LogImportance importance,
             string message,
             params object[] messageArgs
-        ) {
+        )
+        {
             _output.WriteLine(message, messageArgs);
         }
 

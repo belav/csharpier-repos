@@ -24,7 +24,8 @@ namespace System.Web.Mvc.Html
             this HtmlHelper html,
             string expression,
             object htmlAttributes
-        ) {
+        )
+        {
             return Label(
                 html,
                 expression,
@@ -38,7 +39,8 @@ namespace System.Web.Mvc.Html
             this HtmlHelper html,
             string expression,
             IDictionary<string, object> htmlAttributes
-        ) {
+        )
+        {
             return Label(
                 html,
                 expression,
@@ -53,7 +55,8 @@ namespace System.Web.Mvc.Html
             string expression,
             string labelText,
             object htmlAttributes
-        ) {
+        )
+        {
             return Label(html, expression, labelText, htmlAttributes, metadataProvider: null);
         }
 
@@ -62,7 +65,8 @@ namespace System.Web.Mvc.Html
             string expression,
             string labelText,
             IDictionary<string, object> htmlAttributes
-        ) {
+        )
+        {
             return Label(html, expression, labelText, htmlAttributes, metadataProvider: null);
         }
 
@@ -72,7 +76,8 @@ namespace System.Web.Mvc.Html
             string labelText,
             object htmlAttributes,
             ModelMetadataProvider metadataProvider
-        ) {
+        )
+        {
             return Label(
                 html,
                 expression,
@@ -88,7 +93,8 @@ namespace System.Web.Mvc.Html
             string labelText,
             IDictionary<string, object> htmlAttributes,
             ModelMetadataProvider metadataProvider
-        ) {
+        )
+        {
             return LabelHelper(
                 html,
                 ModelMetadata.FromStringExpression(expression, html.ViewData, metadataProvider),
@@ -106,7 +112,8 @@ namespace System.Web.Mvc.Html
         public static MvcHtmlString LabelFor<TModel, TValue>(
             this HtmlHelper<TModel> html,
             Expression<Func<TModel, TValue>> expression
-        ) {
+        )
+        {
             return LabelFor<TModel, TValue>(html, expression, labelText: null);
         }
 
@@ -119,7 +126,8 @@ namespace System.Web.Mvc.Html
             this HtmlHelper<TModel> html,
             Expression<Func<TModel, TValue>> expression,
             string labelText
-        ) {
+        )
+        {
             return LabelFor(
                 html,
                 expression,
@@ -138,7 +146,8 @@ namespace System.Web.Mvc.Html
             this HtmlHelper<TModel> html,
             Expression<Func<TModel, TValue>> expression,
             object htmlAttributes
-        ) {
+        )
+        {
             return LabelFor(
                 html,
                 expression,
@@ -157,7 +166,8 @@ namespace System.Web.Mvc.Html
             this HtmlHelper<TModel> html,
             Expression<Func<TModel, TValue>> expression,
             IDictionary<string, object> htmlAttributes
-        ) {
+        )
+        {
             return LabelFor(
                 html,
                 expression,
@@ -177,7 +187,8 @@ namespace System.Web.Mvc.Html
             Expression<Func<TModel, TValue>> expression,
             string labelText,
             object htmlAttributes
-        ) {
+        )
+        {
             return LabelFor(html, expression, labelText, htmlAttributes, metadataProvider: null);
         }
 
@@ -191,7 +202,8 @@ namespace System.Web.Mvc.Html
             Expression<Func<TModel, TValue>> expression,
             string labelText,
             IDictionary<string, object> htmlAttributes
-        ) {
+        )
+        {
             return LabelFor(html, expression, labelText, htmlAttributes, metadataProvider: null);
         }
 
@@ -201,7 +213,8 @@ namespace System.Web.Mvc.Html
             string labelText,
             object htmlAttributes,
             ModelMetadataProvider metadataProvider
-        ) {
+        )
+        {
             return LabelFor(
                 html,
                 expression,
@@ -217,7 +230,8 @@ namespace System.Web.Mvc.Html
             string labelText,
             IDictionary<string, object> htmlAttributes,
             ModelMetadataProvider metadataProvider
-        ) {
+        )
+        {
             return LabelHelper(
                 html,
                 ModelMetadata.FromLambdaExpression(expression, html.ViewData, metadataProvider),
@@ -251,7 +265,8 @@ namespace System.Web.Mvc.Html
         public static MvcHtmlString LabelForModel(
             this HtmlHelper html,
             IDictionary<string, object> htmlAttributes
-        ) {
+        )
+        {
             return LabelHelper(
                 html,
                 html.ViewData.ModelMetadata,
@@ -265,7 +280,8 @@ namespace System.Web.Mvc.Html
             this HtmlHelper html,
             string labelText,
             object htmlAttributes
-        ) {
+        )
+        {
             return LabelHelper(
                 html,
                 html.ViewData.ModelMetadata,
@@ -279,7 +295,8 @@ namespace System.Web.Mvc.Html
             this HtmlHelper html,
             string labelText,
             IDictionary<string, object> htmlAttributes
-        ) {
+        )
+        {
             return LabelHelper(
                 html,
                 html.ViewData.ModelMetadata,
@@ -295,7 +312,8 @@ namespace System.Web.Mvc.Html
             string htmlFieldName,
             string labelText = null,
             IDictionary<string, object> htmlAttributes = null
-        ) {
+        )
+        {
             string resolvedLabelText =
                 labelText
                 ?? metadata.DisplayName

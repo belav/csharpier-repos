@@ -28,7 +28,8 @@ namespace System.IO.Tests
             string path,
             FileMode mode,
             FileAccess access
-        ) {
+        )
+        {
             return File.Open(path, mode, access);
         }
     }
@@ -49,7 +50,8 @@ namespace System.IO.Tests
             string path,
             FileMode mode,
             FileAccess access
-        ) {
+        )
+        {
             return File.Open(path, mode, access, FileShare.ReadWrite | FileShare.Delete);
         }
 
@@ -58,7 +60,8 @@ namespace System.IO.Tests
             FileMode mode,
             FileAccess access,
             FileShare share
-        ) {
+        )
+        {
             return File.Open(path, mode, access, share);
         }
     }
@@ -69,7 +72,8 @@ namespace System.IO.Tests
             string path,
             FileMode mode,
             FileAccess access
-        ) {
+        )
+        {
             if (mode == FileMode.Open && access == FileAccess.Read)
                 return File.OpenRead(path);
             else if (mode == FileMode.OpenOrCreate && access == FileAccess.Write)
@@ -83,7 +87,8 @@ namespace System.IO.Tests
             FileMode mode,
             FileAccess access,
             FileShare share
-        ) {
+        )
+        {
             if (mode == FileMode.Open && access == FileAccess.Read && share == FileShare.Read)
                 return File.OpenRead(path);
             else if (

@@ -23,7 +23,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
         public StoreGenerationConvention(
             ProviderConventionSetBuilderDependencies dependencies,
             RelationalConventionSetBuilderDependencies relationalDependencies
-        ) {
+        )
+        {
             Dependencies = dependencies;
         }
 
@@ -46,7 +47,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
             IConventionAnnotation? annotation,
             IConventionAnnotation? oldAnnotation,
             IConventionContext<IConventionAnnotation> context
-        ) {
+        )
+        {
             if (annotation == null || oldAnnotation?.Value != null)
             {
                 return;
@@ -63,7 +65,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
                             | propertyBuilder.HasComputedColumnSql(null, fromDataAnnotation) == null
                         )
                         && propertyBuilder.HasDefaultValue(null, fromDataAnnotation) != null
-                    ) {
+                    )
+                    {
                         context.StopProcessing();
                     }
                     break;
@@ -74,7 +77,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
                             | propertyBuilder.HasComputedColumnSql(null, fromDataAnnotation) == null
                         )
                         && propertyBuilder.HasDefaultValueSql(null, fromDataAnnotation) != null
-                    ) {
+                    )
+                    {
                         context.StopProcessing();
                     }
                     break;
@@ -85,7 +89,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
                             | propertyBuilder.HasDefaultValueSql(null, fromDataAnnotation) == null
                         )
                         && propertyBuilder.HasComputedColumnSql(null, fromDataAnnotation) != null
-                    ) {
+                    )
+                    {
                         context.StopProcessing();
                     }
                     break;
@@ -96,7 +101,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
         public virtual void ProcessModelFinalizing(
             IConventionModelBuilder modelBuilder,
             IConventionContext<IConventionModelBuilder> context
-        ) {
+        )
+        {
             foreach (var entityType in modelBuilder.Metadata.GetEntityTypes())
             {
                 var tableName = entityType.GetTableName();
@@ -121,7 +127,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
         protected virtual void Validate(
             IConventionProperty property,
             in StoreObjectIdentifier storeObject
-        ) {
+        )
+        {
             if (property.GetDefaultValue(storeObject) != null)
             {
                 if (property.GetDefaultValueSql(storeObject) != null)

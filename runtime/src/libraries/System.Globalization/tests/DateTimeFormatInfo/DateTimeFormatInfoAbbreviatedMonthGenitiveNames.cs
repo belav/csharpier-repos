@@ -137,7 +137,8 @@ namespace System.Globalization.Tests
         [MemberData(nameof(AbbreviatedMonthGenitiveNames_SetInvalidLength_TestData))]
         public void AbbreviatedMonthGenitiveNames_SetNullValueInValues_ThrowsArgumentException(
             string[] value
-        ) {
+        )
+        {
             var format = new DateTimeFormatInfo();
             AssertExtensions.Throws<ArgumentException>(
                 "value",
@@ -216,7 +217,8 @@ namespace System.Globalization.Tests
                         || !ci.DateTimeFormat.AbbreviatedMonthNames[i].Equals(
                             ci.DateTimeFormat.AbbreviatedMonthGenitiveNames[i]
                         )
-                    ) {
+                    )
+                    {
                         // We have genitive month names, we expect parsing to work and produce the exact original result.
                         Assert.Equal(dt, DateTime.Parse(formattedDate, ci));
                         break;

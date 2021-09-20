@@ -115,7 +115,8 @@ namespace Microsoft.CodeAnalysis.Tools.Tests.Formatters
             DiagnosticSeverity codeStyleSeverity = DiagnosticSeverity.Error,
             DiagnosticSeverity analyzerSeverity = DiagnosticSeverity.Error,
             string[]? diagnostics = null
-        ) {
+        )
+        {
             return AssertNoReportedFileChangesAsync(
                 code,
                 ToEditorConfig(editorConfig),
@@ -137,7 +138,8 @@ namespace Microsoft.CodeAnalysis.Tools.Tests.Formatters
             DiagnosticSeverity codeStyleSeverity = DiagnosticSeverity.Error,
             DiagnosticSeverity analyzerSeverity = DiagnosticSeverity.Error,
             string[]? diagnostics = null
-        ) {
+        )
+        {
             var (formattedText, formattedFiles, logger) = await ApplyFormatterAsync(
                 code,
                 editorConfig,
@@ -175,7 +177,8 @@ namespace Microsoft.CodeAnalysis.Tools.Tests.Formatters
             DiagnosticSeverity codeStyleSeverity = DiagnosticSeverity.Error,
             DiagnosticSeverity analyzerSeverity = DiagnosticSeverity.Error,
             string[]? diagnostics = null
-        ) {
+        )
+        {
             return AssertCodeUnchangedAsync(
                 code,
                 ToEditorConfig(editorConfig),
@@ -197,7 +200,8 @@ namespace Microsoft.CodeAnalysis.Tools.Tests.Formatters
             DiagnosticSeverity codeStyleSeverity = DiagnosticSeverity.Error,
             DiagnosticSeverity analyzerSeverity = DiagnosticSeverity.Error,
             string[]? diagnostics = null
-        ) {
+        )
+        {
             var (formattedText, _, logger) = await ApplyFormatterAsync(
                 code,
                 editorConfig,
@@ -233,7 +237,8 @@ namespace Microsoft.CodeAnalysis.Tools.Tests.Formatters
             DiagnosticSeverity codeStyleSeverity = DiagnosticSeverity.Error,
             DiagnosticSeverity analyzerSeverity = DiagnosticSeverity.Error,
             string[]? diagnostics = null
-        ) {
+        )
+        {
             return AssertCodeChangedAsync(
                 testCode,
                 expectedCode,
@@ -257,7 +262,8 @@ namespace Microsoft.CodeAnalysis.Tools.Tests.Formatters
             DiagnosticSeverity codeStyleSeverity = DiagnosticSeverity.Error,
             DiagnosticSeverity analyzerSeverity = DiagnosticSeverity.Error,
             string[]? diagnostics = null
-        ) {
+        )
+        {
             var (formattedText, _, logger) = await ApplyFormatterAsync(
                 testCode,
                 editorConfig,
@@ -291,7 +297,8 @@ namespace Microsoft.CodeAnalysis.Tools.Tests.Formatters
             DiagnosticSeverity codeStyleSeverity = DiagnosticSeverity.Error,
             DiagnosticSeverity analyzerSeverity = DiagnosticSeverity.Error,
             string[]? diagnostics = null
-        ) {
+        )
+        {
             var text = SourceText.From(code, encoding ?? Encoding.UTF8);
             TestState.Sources.Add(text);
 
@@ -384,7 +391,8 @@ namespace Microsoft.CodeAnalysis.Tools.Tests.Formatters
             MetadataReference[] additionalMetadataReferences,
             IReadOnlyDictionary<string, string> editorConfig,
             IEnumerable<AnalyzerReference>? analyzerReferences = null
-        ) {
+        )
+        {
             return await GetSolutionAsync(
                 sources,
                 additionalFiles,
@@ -409,7 +417,8 @@ namespace Microsoft.CodeAnalysis.Tools.Tests.Formatters
             MetadataReference[] additionalMetadataReferences,
             string editorConfig,
             IEnumerable<AnalyzerReference>? analyzerReferences = null
-        ) {
+        )
+        {
             analyzerReferences ??= Enumerable.Empty<AnalyzerReference>();
             var project = await CreateProjectAsync(
                 sources,
@@ -444,7 +453,8 @@ namespace Microsoft.CodeAnalysis.Tools.Tests.Formatters
             IEnumerable<AnalyzerReference> analyzerReferences,
             string language,
             SourceText editorConfigText
-        ) {
+        )
+        {
             language ??= Language;
             return await CreateProjectImplAsync(
                 sources,
@@ -474,7 +484,8 @@ namespace Microsoft.CodeAnalysis.Tools.Tests.Formatters
             IEnumerable<AnalyzerReference> analyzerReferences,
             string language,
             SourceText editorConfigText
-        ) {
+        )
+        {
             var projectId = ProjectId.CreateNewId(debugName: DefaultTestProjectName);
             var solution = (
                 await CreateSolutionAsync(projectId, language, editorConfigText)
@@ -514,7 +525,8 @@ namespace Microsoft.CodeAnalysis.Tools.Tests.Formatters
             ProjectId projectId,
             string language,
             SourceText editorConfigText
-        ) {
+        )
+        {
             var xmlReferenceResolver = new TestXmlReferenceResolver();
             foreach (var xmlReference in XmlReferences)
             {

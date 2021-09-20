@@ -11,7 +11,8 @@ namespace Internal.TypeSystem.Ecma
         public static TypeDesc GetPrimitiveType(
             TypeSystemContext context,
             PrimitiveTypeCode typeCode
-        ) {
+        )
+        {
             WellKnownType wkt;
 
             switch (typeCode)

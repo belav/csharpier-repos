@@ -981,7 +981,8 @@ public class Picard { }
                     Environment.StackTrace.Contains(
                         "Microsoft.CodeAnalysis.ExpressionEvaluator.ResultProvider.GetTypeName"
                     )
-                ) {
+                )
+                {
                     throw Exception;
                 }
 
@@ -992,7 +993,8 @@ public class Picard { }
         private IReadOnlyList<DkmEvaluationResult> DepthFirstSearch(
             DkmEvaluationResult root,
             int maxDepth
-        ) {
+        )
+        {
             var builder = ArrayBuilder<DkmEvaluationResult>.GetInstance();
 
             DepthFirstSearchInternal(builder, root, 0, maxDepth);
@@ -1005,7 +1007,8 @@ public class Picard { }
             DkmEvaluationResult curr,
             int depth,
             int maxDepth
-        ) {
+        )
+        {
             Assert.InRange(depth, 0, maxDepth);
             builder.Add(curr);
 

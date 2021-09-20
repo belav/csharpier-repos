@@ -42,7 +42,8 @@ namespace Microsoft.EntityFrameworkCore.InMemory.Storage.Internal
         /// </summary>
         public InMemoryTransactionManager(
             IDiagnosticsLogger<DbLoggerCategory.Database.Transaction> logger
-        ) {
+        )
+        {
             Check.NotNull(logger, nameof(logger));
 
             _logger = logger;
@@ -69,7 +70,8 @@ namespace Microsoft.EntityFrameworkCore.InMemory.Storage.Internal
         /// </summary>
         public virtual Task<IDbContextTransaction> BeginTransactionAsync(
             CancellationToken cancellationToken = default
-        ) {
+        )
+        {
             _logger.TransactionIgnoredWarning();
 
             return Task.FromResult<IDbContextTransaction>(_stubTransaction);

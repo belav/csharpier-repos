@@ -33,7 +33,8 @@ namespace R2RTest
             string workingDirectory,
             string packageName,
             StreamWriter logWriter
-        ) {
+        )
+        {
             return RunProcess(
                 "dotnet",
                 $"add package {packageName}",
@@ -54,7 +55,8 @@ namespace R2RTest
             string workingDirectory,
             int timeout,
             StreamWriter logWriter
-        ) {
+        )
+        {
             ProcessStartInfo psi = new ProcessStartInfo()
             {
                 FileName = processPath,

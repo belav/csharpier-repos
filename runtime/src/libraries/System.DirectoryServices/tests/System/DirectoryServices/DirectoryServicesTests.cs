@@ -125,7 +125,8 @@ namespace System.DirectoryServices.Tests
                                 "User 1 in caching OU",
                                 "1 111 111 1111"
                             )
-                        ) {
+                        )
+                        {
                             Assert.True(userEntry.UsePropertyCache);
 
                             SearchOrganizationalRole(rootOU, "caching.user.1");
@@ -140,7 +141,8 @@ namespace System.DirectoryServices.Tests
                                     rootOU,
                                     "caching.user.1"
                                 )
-                            ) {
+                            )
+                            {
                                 Assert.Equal(
                                     originalPhone,
                                     (string)sameUserEntry.Properties["telephoneNumber"].Value
@@ -154,7 +156,8 @@ namespace System.DirectoryServices.Tests
                                     rootOU,
                                     "caching.user.1"
                                 )
-                            ) {
+                            )
+                            {
                                 Assert.Equal(
                                     newPhone,
                                     (string)sameUserEntry.Properties["telephoneNumber"].Value
@@ -170,7 +173,8 @@ namespace System.DirectoryServices.Tests
                                     rootOU,
                                     "caching.user.1"
                                 )
-                            ) {
+                            )
+                            {
                                 Assert.Equal(
                                     originalPhone,
                                     (string)sameUserEntry.Properties["telephoneNumber"].Value
@@ -399,7 +403,8 @@ namespace System.DirectoryServices.Tests
                             "Grand Child User",
                             "1 222 222 2222"
                         )
-                    ) {
+                    )
+                    {
                         SearchOUByName(de, "RootToDelete");
                         SearchOUByName(rootOU, "Child1");
                         SearchOUByName(rootOU, "Child2");
@@ -488,7 +493,8 @@ namespace System.DirectoryServices.Tests
                     "wrongUser",
                     "wrongPassword"
                 )
-            ) {
+            )
+            {
                 CheckSpecificException(
                     () =>
                     {
@@ -508,7 +514,8 @@ namespace System.DirectoryServices.Tests
                     LdapConfiguration.Configuration.UserName,
                     "wrongPassword"
                 )
-            ) {
+            )
+            {
                 CheckSpecificException(
                     () =>
                     {
@@ -532,7 +539,8 @@ namespace System.DirectoryServices.Tests
                     LdapConfiguration.Configuration.UserName,
                     "wrongPassword"
                 )
-            ) {
+            )
+            {
                 using (DirectorySearcher ds = new DirectorySearcher(de))
                 {
                     ds.Filter = $"(objectClass=*))"; // invalid search filter
@@ -556,7 +564,8 @@ namespace System.DirectoryServices.Tests
                             "NegativeRoot",
                             "Negative Test Root OU"
                         )
-                    ) {
+                    )
+                    {
                         DirectoryEntry entry = rootOU.Children.Add($"cn=MyNamedObject", "Class");
                         entry.Properties["objectClass"].Value = "namedObject";
                         entry.Properties["cn"].Value = "MyNamedObject";
@@ -618,7 +627,8 @@ namespace System.DirectoryServices.Tests
                             "Grand Child User",
                             "1 222 222 2222"
                         )
-                    ) {
+                    )
+                    {
                         user1.Properties["postalCode"].Value = 98052;
                         user1.Properties["postalAddress"].Value =
                             "12345 SE 1st Street, City1, State1";
@@ -705,7 +715,8 @@ namespace System.DirectoryServices.Tests
                 {
                     using (
                         DirectoryEntry rootOU = CreateOU(de, "AttributesRoot", "Attributes Root OU")
-                    ) {
+                    )
+                    {
                         DirectoryEntry cnEntry = rootOU.Children.Add($"cn=CustomUser", "Class");
                         cnEntry.Properties["objectClass"].Value = new string[]
                         {
@@ -780,7 +791,8 @@ namespace System.DirectoryServices.Tests
             string cn,
             string description,
             string phone
-        ) {
+        )
+        {
             DirectoryEntry cnEntry = ouEntry.Children.Add($"cn={cn}", "Class");
             cnEntry.Properties["objectClass"].Value = "organizationalRole";
             cnEntry.Properties["cn"].Value = cn;

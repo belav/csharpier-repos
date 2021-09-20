@@ -61,7 +61,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation
             Project project,
             OptionSet? options,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             if (project == null || symbol == null)
             {
                 return false;
@@ -102,7 +103,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation
             if (
                 metadataLocation == null
                 || !_metadataAsSourceFileService.IsNavigableMetadataSymbol(symbol)
-            ) {
+            )
+            {
                 return false;
             }
 
@@ -112,7 +114,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation
                     VisualStudioNavigationOptions.NavigateToObjectBrowser,
                     project.Language
                 )
-            ) {
+            )
+            {
                 var libraryService = project.LanguageServices.GetService<ILibraryService>();
                 if (libraryService == null)
                 {
@@ -159,7 +162,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation
                     && !ThreadingContext.JoinableTaskFactory.Run(
                         () => eulaService.IsAcceptedAsync(cancellationToken)
                     )
-                ) {
+                )
+                {
                     var notificationService =
                         project.Solution.Workspace.Services.GetRequiredService<INotificationService>();
                     allowDecompilation = notificationService.ConfirmMessageBox(
@@ -258,7 +262,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation
             ISymbol symbol,
             Project project,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             await this.ThreadingContext.JoinableTaskFactory.SwitchToMainThreadAsync(
                 cancellationToken
             );
@@ -282,7 +287,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation
                     out var itemID,
                     out var navigationNotify
                 )
-            ) {
+            )
+            {
                 return false;
             }
 
@@ -303,7 +309,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation
             [NotNullWhen(true)] out string? filePath,
             out int lineNumber,
             out int charOffset
-        ) {
+        )
+        {
             definitionItem.Properties.TryGetValue(DefinitionItem.RQNameKey1, out var rqName1);
             definitionItem.Properties.TryGetValue(DefinitionItem.RQNameKey2, out var rqName2);
 
@@ -324,7 +331,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation
                     out lineNumber,
                     out charOffset
                 )
-            ) {
+            )
+            {
                 return true;
             }
 
@@ -341,7 +349,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation
             [NotNullWhen(true)] out string? filePath,
             out int lineNumber,
             out int charOffset
-        ) {
+        )
+        {
             AssertIsForeground();
 
             filePath = null;
@@ -362,7 +371,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation
                     out var itemID,
                     out var navigationNotify
                 )
-            ) {
+            )
+            {
                 return false;
             }
 
@@ -396,7 +406,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation
             [NotNullWhen(true)] out IVsHierarchy? hierarchy,
             out uint itemID,
             [NotNullWhen(true)] out IVsSymbolicNavigationNotify? navigationNotify
-        ) {
+        )
+        {
             AssertIsForeground();
 
             hierarchy = null;
@@ -443,13 +454,15 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation
             Document document,
             [NotNullWhen(true)] out IVsHierarchy? hierarchy,
             out uint itemID
-        ) {
+        )
+        {
             AssertIsForeground();
 
             if (
                 document.Project.Solution.Workspace is VisualStudioWorkspace visualStudioWorkspace
                 && document.FilePath is object
-            ) {
+            )
+            {
                 hierarchy = visualStudioWorkspace.GetHierarchy(document.Project.Id);
                 if (hierarchy is object)
                 {

@@ -78,7 +78,8 @@ namespace System.Collections.Specialized.Tests
         [MemberData(nameof(ValidCollectionSizes))]
         public override void ICollection_NonGeneric_CopyTo_IndexEqualToArrayCount_ThrowsArgumentException(
             int count
-        ) {
+        )
+        {
             ICollection collection = NonGenericICollectionFactory(count);
             object[] array = new object[count];
             if (count > 0)
@@ -94,7 +95,8 @@ namespace System.Collections.Specialized.Tests
         [MemberData(nameof(ValidCollectionSizes))]
         public override void ICollection_NonGeneric_CopyTo_NotEnoughSpaceInOffsettedArray_ThrowsArgumentException(
             int count
-        ) {
+        )
+        {
             if (count > 0) // Want the T array to have at least 1 element
             {
                 ICollection collection = NonGenericICollectionFactory(count);
@@ -110,7 +112,8 @@ namespace System.Collections.Specialized.Tests
         [MemberData(nameof(ValidCollectionSizes))]
         public override void ICollection_NonGeneric_CopyTo_IndexLargerThanArrayCount_ThrowsAnyArgumentException(
             int count
-        ) {
+        )
+        {
             ICollection collection = NonGenericICollectionFactory(count);
             object[] array = new object[count];
             if (count == 0)

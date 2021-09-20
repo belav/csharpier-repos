@@ -260,7 +260,8 @@ public static partial class DataContractSerializerTests
                 decimal.MinValue,
                 decimal.MaxValue
             }
-        ) {
+        )
+        {
             Assert.StrictEqual(
                 DataContractSerializerHelper.SerializeAndDeserialize<decimal>(
                     value,
@@ -400,7 +401,8 @@ public static partial class DataContractSerializerTests
     {
         foreach (
             long value in new long[] { (long)-1, (long)0, (long)2, long.MinValue, long.MaxValue }
-        ) {
+        )
+        {
             Assert.StrictEqual(
                 DataContractSerializerHelper.SerializeAndDeserialize<long>(
                     value,
@@ -477,7 +479,8 @@ public static partial class DataContractSerializerTests
                 short.MinValue,
                 short.MaxValue
             }
-        ) {
+        )
+        {
             Assert.StrictEqual(
                 DataContractSerializerHelper.SerializeAndDeserialize<short>(
                     value,
@@ -629,7 +632,8 @@ public static partial class DataContractSerializerTests
     {
         foreach (
             ushort value in new ushort[] { (ushort)3, (ushort)0, ushort.MinValue, ushort.MaxValue }
-        ) {
+        )
+        {
             Assert.StrictEqual(
                 DataContractSerializerHelper.SerializeAndDeserialize<ushort>(
                     value,
@@ -1704,7 +1708,8 @@ public static partial class DataContractSerializerTests
         XElement x1,
         XElement x2,
         bool checkFirstAttribute = true
-    ) {
+    )
+    {
         Assert.Equal(x1.Value, x2.Value);
         Assert.StrictEqual(x1.Name, x2.Name);
         if (checkFirstAttribute)
@@ -3264,7 +3269,8 @@ public static partial class DataContractSerializerTests
                 quotas,
                 onClose: null
             )
-        ) {
+        )
+        {
             var serializer = new DataContractSerializer(
                 typeof(TypeWithTypeWithIntAndStringPropertyProperty),
                 new DataContractSerializerSettings()
@@ -6734,7 +6740,8 @@ public static partial class DataContractSerializerTests
         bool shouldReportDeserializationExceptions = true,
         DataContractSerializerSettings settings = null,
         Func<DataContractSerializer> serializerFactory = null
-    ) {
+    )
+    {
         DataContractSerializer dcs;
         if (serializerFactory != null)
         {
@@ -6769,7 +6776,8 @@ public static partial class DataContractSerializerTests
         T o,
         string baseline,
         bool skipStringCompare = false
-    ) {
+    )
+    {
         var setting = new DataContractSerializerSettings()
         {
             DataContractResolver = new SerializationTestTypes.SimpleResolver()
@@ -6790,7 +6798,8 @@ public static partial class DataContractSerializerTests
         string netcorePayload,
         string desktopPayload,
         DataContractSerializerSettings settings = null
-    ) {
+    )
+    {
         var roundtripObject = DataContractSerializerHelper.SerializeAndDeserialize(
             value,
             string.Empty,

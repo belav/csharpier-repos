@@ -98,7 +98,8 @@ namespace Newtonsoft.Json.Converters
                         keyValueType,
                         out string? valueJson
                     )
-                ) {
+                )
+                {
                     writer.WriteValue(valueJson);
                 }
                 else
@@ -125,7 +126,8 @@ namespace Newtonsoft.Json.Converters
                     propertyName,
                     StringComparison.OrdinalIgnoreCase
                 )
-            ) {
+            )
+            {
                 throw new JsonSerializationException(
                     "Expected JSON property '{0}'.".FormatWith(
                         CultureInfo.InvariantCulture,
@@ -148,7 +150,8 @@ namespace Newtonsoft.Json.Converters
             Type objectType,
             object? existingValue,
             JsonSerializer serializer
-        ) {
+        )
+        {
             EnsureReflectionObject(objectType);
             MiscellaneousUtils.Assert(_reflectionObject != null);
 

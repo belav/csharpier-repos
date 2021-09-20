@@ -74,7 +74,8 @@ namespace Microsoft.CodeAnalysis.AddDebuggerDisplay
 
         private static async Task<(TTypeDeclarationSyntax type, CodeActionPriority priority)?> GetRelevantTypeFromHeaderAsync(
             CodeRefactoringContext context
-        ) {
+        )
+        {
             var type = await context.TryGetRelevantNodeAsync<TTypeDeclarationSyntax>()
                 .ConfigureAwait(false);
             if (type is null)
@@ -85,7 +86,8 @@ namespace Microsoft.CodeAnalysis.AddDebuggerDisplay
 
         private static async Task<(TTypeDeclarationSyntax type, CodeActionPriority priority)?> GetRelevantTypeFromMethodAsync(
             CodeRefactoringContext context
-        ) {
+        )
+        {
             var (document, _, cancellationToken) = context;
             var method = await context.TryGetRelevantNodeAsync<TMethodDeclarationSyntax>()
                 .ConfigureAwait(false);
@@ -140,7 +142,8 @@ namespace Microsoft.CodeAnalysis.AddDebuggerDisplay
             TTypeDeclarationSyntax type,
             INamedTypeSymbol debuggerAttributeTypeSymbol,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var syntaxRoot = await document.GetRequiredSyntaxRootAsync(cancellationToken)
                 .ConfigureAwait(false);
             var semanticModel = await document.GetRequiredSemanticModelAsync(cancellationToken)

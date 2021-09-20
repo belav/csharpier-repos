@@ -319,7 +319,8 @@ namespace System.Xml.Linq
         private static XNamespace EnsureNamespace(
             ref WeakReference<XNamespace>? refNmsp,
             string namespaceName
-        ) {
+        )
+        {
             WeakReference<XNamespace>? refOld;
 
             // Keep looping until a non-null namespace has been retrieved

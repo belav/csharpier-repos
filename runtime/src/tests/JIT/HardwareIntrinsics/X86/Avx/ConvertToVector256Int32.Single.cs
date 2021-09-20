@@ -287,7 +287,8 @@ namespace JIT.HardwareIntrinsics.X86
             Vector256<Single> firstOp,
             void* result,
             [CallerMemberName] string method = ""
-        ) {
+        )
+        {
             Single[] inArray = new Single[Op1ElementCount];
             Int32[] outArray = new Int32[RetElementCount];
 
@@ -305,7 +306,8 @@ namespace JIT.HardwareIntrinsics.X86
             void* firstOp,
             void* result,
             [CallerMemberName] string method = ""
-        ) {
+        )
+        {
             Single[] inArray = new Single[Op1ElementCount];
             Int32[] outArray = new Int32[RetElementCount];
 
@@ -327,7 +329,8 @@ namespace JIT.HardwareIntrinsics.X86
             Single[] firstOp,
             Int32[] result,
             [CallerMemberName] string method = ""
-        ) {
+        )
+        {
             if (result[0] != (Int32)(MathF.Round(firstOp[0])))
             {
                 Succeeded = false;

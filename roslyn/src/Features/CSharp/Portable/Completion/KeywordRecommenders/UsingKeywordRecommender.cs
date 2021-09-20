@@ -17,7 +17,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Completion.KeywordRecommenders
             int position,
             CSharpSyntaxContext context,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             // cases:
             //  using (goo) { }
             //  using Goo;
@@ -32,7 +33,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Completion.KeywordRecommenders
         private static bool IsUsingDirectiveContext(
             CSharpSyntaxContext context,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             // cases:
             // root: |
 
@@ -103,7 +105,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Completion.KeywordRecommenders
                     || (
                         (CompilationUnitSyntax)context.SyntaxTree.GetRoot(cancellationToken)
                     ).Externs.Count > 0
-                ) {
+                )
+                {
                     return false;
                 }
 
@@ -116,7 +119,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Completion.KeywordRecommenders
                     SyntaxKind.NamespaceDeclaration,
                     out NamespaceDeclarationSyntax _
                 )
-            ) {
+            )
+            {
                 // a child using can't come before externs
                 var nextToken = originalToken.GetNextToken(includeSkipped: true);
                 if (nextToken.Kind() == SyntaxKind.ExternKeyword)
@@ -137,7 +141,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Completion.KeywordRecommenders
                 if (
                     token.Parent.IsKind(SyntaxKind.ExternAliasDirective)
                     || token.Parent.IsKind(SyntaxKind.UsingDirective)
-                ) {
+                )
+                {
                     return true;
                 }
             }

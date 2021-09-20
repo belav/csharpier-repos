@@ -823,7 +823,8 @@ class C
                 ImmutableArray<CSharpAttributeData> attributes,
                 bool expectedTupleNamesAttribute,
                 string[] expectedElementNames = null
-            ) {
+            )
+            {
                 var synthesizedTupleElementNamesAttr = attributes.Where(
                     attr =>
                         string.Equals(

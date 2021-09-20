@@ -35,7 +35,8 @@ namespace Microsoft.Extensions.DependencyInjection
         public static ServiceProvider BuildServiceProvider(
             this IServiceCollection services,
             bool validateScopes
-        ) {
+        )
+        {
             return services.BuildServiceProvider(
                 new ServiceProviderOptions { ValidateScopes = validateScopes }
             );
@@ -53,7 +54,8 @@ namespace Microsoft.Extensions.DependencyInjection
         public static ServiceProvider BuildServiceProvider(
             this IServiceCollection services,
             ServiceProviderOptions options
-        ) {
+        )
+        {
             if (services == null)
             {
                 throw new ArgumentNullException(nameof(services));

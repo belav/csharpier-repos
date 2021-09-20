@@ -83,20 +83,22 @@ namespace Microsoft.CodeAnalysis.AddRequiredParentheses
 
         protected AbstractAddRequiredParenthesesDiagnosticAnalyzer(
             IPrecedenceService precedenceService
-        ) : base(
-            IDEDiagnosticIds.AddRequiredParenthesesDiagnosticId,
-            EnforceOnBuildValues.AddRequiredParentheses,
-            new LocalizableResourceString(
-                nameof(AnalyzersResources.Add_parentheses_for_clarity),
-                AnalyzersResources.ResourceManager,
-                typeof(AnalyzersResources)
-            ),
-            new LocalizableResourceString(
-                nameof(AnalyzersResources.Parentheses_should_be_added_for_clarity),
-                AnalyzersResources.ResourceManager,
-                typeof(AnalyzersResources)
+        )
+            : base(
+                IDEDiagnosticIds.AddRequiredParenthesesDiagnosticId,
+                EnforceOnBuildValues.AddRequiredParentheses,
+                new LocalizableResourceString(
+                    nameof(AnalyzersResources.Add_parentheses_for_clarity),
+                    AnalyzersResources.ResourceManager,
+                    typeof(AnalyzersResources)
+                ),
+                new LocalizableResourceString(
+                    nameof(AnalyzersResources.Parentheses_should_be_added_for_clarity),
+                    AnalyzersResources.ResourceManager,
+                    typeof(AnalyzersResources)
+                )
             )
-        ) {
+        {
             _precedenceService = precedenceService;
         }
 
@@ -168,12 +170,14 @@ namespace Microsoft.CodeAnalysis.AddRequiredParentheses
             ImmutableArray<Location> additionalLocations,
             string equivalenceKey,
             bool includeInFixAll
-        ) {
+        )
+        {
             if (
                 binaryLikeOpt != null
                 && IsBinaryLike(binaryLikeOpt)
                 && GetPrecedence(binaryLikeOpt) == precedence
-            ) {
+            )
+            {
                 var (left, operatorToken, right) = GetPartsOfBinaryLike(binaryLikeOpt);
 
                 var properties = GetProperties(includeInFixAll, equivalenceKey);

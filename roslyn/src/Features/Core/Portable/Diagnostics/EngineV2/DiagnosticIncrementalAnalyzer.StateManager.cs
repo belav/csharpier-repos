@@ -46,7 +46,8 @@ namespace Microsoft.CodeAnalysis.Diagnostics.EngineV2
             public StateManager(
                 IPersistentStorageService persistentStorageService,
                 DiagnosticAnalyzerInfoCache analyzerInfoCache
-            ) {
+            )
+            {
                 _persistentStorageService = persistentStorageService;
                 _analyzerInfoCache = analyzerInfoCache;
 
@@ -174,7 +175,8 @@ namespace Microsoft.CodeAnalysis.Diagnostics.EngineV2
                 if (
                     compilerAnalyzer != null
                     && hostStateSetMap.TryGetValue(compilerAnalyzer, out compilerStateSet)
-                ) {
+                )
+                {
                     stateSets.Add(compilerStateSet);
                 }
 
@@ -200,7 +202,8 @@ namespace Microsoft.CodeAnalysis.Diagnostics.EngineV2
                         if (
                             hostStateSetMap.TryGetValue(analyzer, out var stateSet)
                             && stateSet != compilerStateSet
-                        ) {
+                        )
+                        {
                             stateSets.Add(stateSet);
                         }
                     }
@@ -212,7 +215,8 @@ namespace Microsoft.CodeAnalysis.Diagnostics.EngineV2
             public static bool OnDocumentReset(
                 IEnumerable<StateSet> stateSets,
                 TextDocument document
-            ) {
+            )
+            {
                 // can not be cancelled
                 var removed = false;
                 foreach (var stateSet in stateSets)
@@ -226,7 +230,8 @@ namespace Microsoft.CodeAnalysis.Diagnostics.EngineV2
             public async Task<bool> OnDocumentOpenedAsync(
                 IEnumerable<StateSet> stateSets,
                 TextDocument document
-            ) {
+            )
+            {
                 // can not be cancelled
                 var opened = false;
                 foreach (var stateSet in stateSets)
@@ -244,7 +249,8 @@ namespace Microsoft.CodeAnalysis.Diagnostics.EngineV2
             public async Task<bool> OnDocumentClosedAsync(
                 IEnumerable<StateSet> stateSets,
                 TextDocument document
-            ) {
+            )
+            {
                 // can not be cancelled
                 var removed = false;
                 foreach (var stateSet in stateSets)
@@ -262,7 +268,8 @@ namespace Microsoft.CodeAnalysis.Diagnostics.EngineV2
             public static bool OnDocumentRemoved(
                 IEnumerable<StateSet> stateSets,
                 DocumentId documentId
-            ) {
+            )
+            {
                 var removed = false;
                 foreach (var stateSet in stateSets)
                 {
@@ -292,7 +299,8 @@ namespace Microsoft.CodeAnalysis.Diagnostics.EngineV2
                 string language,
                 IEnumerable<ImmutableArray<DiagnosticAnalyzer>> analyzerCollection,
                 bool includeFileContentLoadAnalyzer
-            ) {
+            )
+            {
                 var builder = ImmutableDictionary.CreateBuilder<DiagnosticAnalyzer, StateSet>();
 
                 if (includeFileContentLoadAnalyzer)

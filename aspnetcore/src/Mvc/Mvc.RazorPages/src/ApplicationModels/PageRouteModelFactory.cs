@@ -72,7 +72,8 @@ namespace Microsoft.AspNetCore.Mvc.ApplicationModels
             PageRouteModel model,
             string pageRoute,
             string routeTemplate
-        ) {
+        )
+        {
             model.RouteValues.Add("page", model.ViewEnginePath);
 
             var selectorModel = CreateSelectorModel(pageRoute, routeTemplate);
@@ -82,7 +83,8 @@ namespace Microsoft.AspNetCore.Mvc.ApplicationModels
             if (
                 !AttributeRouteModel.IsOverridePattern(routeTemplate)
                 && string.Equals(IndexFileName, fileName, StringComparison.OrdinalIgnoreCase)
-            ) {
+            )
+            {
                 // For pages without an override route, and ending in /Index.cshtml, we want to allow
                 // incoming routing, but force outgoing routes to match to the path sans /Index.
                 selectorModel.AttributeRouteModel.SuppressLinkGeneration = true;
@@ -98,7 +100,8 @@ namespace Microsoft.AspNetCore.Mvc.ApplicationModels
         internal bool TryParseAreaPath(
             string relativePath,
             out (string areaName, string viewEnginePath) result
-        ) {
+        )
+        {
             // path = "/Areas/Products/Pages/Manage/Home.cshtml"
             // Result ("Products", "/Manage/Home")
             const string AreaPagesRoot = "/Pages/";
@@ -143,7 +146,8 @@ namespace Microsoft.AspNetCore.Mvc.ApplicationModels
                     AreaPagesRoot.Length,
                     StringComparison.OrdinalIgnoreCase
                 ) != 0
-            ) {
+            )
+            {
                 _unsupportedAreaPath(_logger, relativePath, null);
                 return false;
             }

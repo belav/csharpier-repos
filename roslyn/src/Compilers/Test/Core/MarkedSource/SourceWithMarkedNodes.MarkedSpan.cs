@@ -26,7 +26,8 @@ namespace Roslyn.Test.Utilities
                 int syntaxKind,
                 int id,
                 int parentId
-            ) {
+            )
+            {
                 MarkedSyntax = markedSyntax;
                 MatchedSpan = matchedSpan;
                 TagName = tagName;

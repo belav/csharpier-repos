@@ -23,13 +23,15 @@ namespace Microsoft.CodeAnalysis.CSharp
             ImmutableArray<SingleNamespaceOrTypeDeclaration> children,
             ImmutableArray<ReferenceDirective> referenceDirectives,
             bool hasAssemblyAttributes
-        ) : base(
-            string.Empty,
-            treeNode,
-            nameLocation: new SourceLocation(treeNode),
-            children: children,
-            diagnostics: ImmutableArray<Diagnostic>.Empty
-        ) {
+        )
+            : base(
+                string.Empty,
+                treeNode,
+                nameLocation: new SourceLocation(treeNode),
+                children: children,
+                diagnostics: ImmutableArray<Diagnostic>.Empty
+            )
+        {
             Debug.Assert(!referenceDirectives.IsDefault);
 
             _referenceDirectives = referenceDirectives;

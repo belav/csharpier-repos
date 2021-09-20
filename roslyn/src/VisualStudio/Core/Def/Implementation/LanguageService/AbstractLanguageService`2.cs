@@ -223,7 +223,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.LanguageService
             if (
                 isOpenMetadataAsSource
                 && ErrorHandler.Succeeded(textView.GetBuffer(out var vsTextLines))
-            ) {
+            )
+            {
                 ((IVsTextBuffer)vsTextLines).SetStateFlags(
                     (uint)BUFFERSTATEFLAGS.BSF_USER_READONLY
                 );
@@ -251,7 +252,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.LanguageService
             IWpfTextView wpfTextView,
             Microsoft.CodeAnalysis.Workspace workspace,
             bool isOpenMetadataAsSource
-        ) {
+        )
+        {
             var outliningManagerService =
                 this.Package.ComponentModel.GetService<IOutliningManagerService>();
             var outliningManager = outliningManagerService.GetOutliningManager(wpfTextView);
@@ -262,7 +264,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.LanguageService
 
             if (
                 !workspace.Options.GetOption(FeatureOnOffOptions.Outlining, this.RoslynLanguageName)
-            ) {
+            )
+            {
                 outliningManager.Enabled = false;
             }
             else
@@ -370,7 +373,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.LanguageService
             VisualStudioProject project,
             IVsHierarchy hierarchy,
             uint itemid
-        ) {
+        )
+        {
             var filePath = ContainedLanguage.GetFilePathFromHierarchyAndItemId(hierarchy, itemid);
 
             return new ContainedLanguage(

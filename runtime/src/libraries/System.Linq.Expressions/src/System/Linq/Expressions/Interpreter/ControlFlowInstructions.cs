@@ -39,7 +39,8 @@ namespace System.Linq.Expressions.Interpreter
             object? cookie,
             Func<int, int> labelIndexer,
             IReadOnlyList<object>? objects
-        ) {
+        )
+        {
             return ToString() + (_offset != Unknown ? " -> " + (instructionIndex + _offset) : "");
         }
 
@@ -211,7 +212,8 @@ namespace System.Linq.Expressions.Interpreter
             object? cookie,
             Func<int, int> labelIndexer,
             IReadOnlyList<object>? objects
-        ) {
+        )
+        {
             Debug.Assert(_labelIndex != UnknownInstrIndex);
             int targetIndex = labelIndexer(_labelIndex);
             return ToString()
@@ -289,7 +291,8 @@ namespace System.Linq.Expressions.Interpreter
             bool hasResult,
             bool hasValue,
             bool labelTargetGetsValue
-        ) {
+        )
+        {
             if (labelIndex < CacheSize)
             {
                 int index =
@@ -429,7 +432,8 @@ namespace System.Linq.Expressions.Interpreter
                     int index = frame.InstructionIndex;
                     while (
                         index >= exHandler.HandlerStartIndex && index < exHandler.HandlerEndIndex
-                    ) {
+                    )
+                    {
                         index += instructions[index].Run(frame);
                         frame.InstructionIndex = index;
                     }
@@ -484,7 +488,8 @@ namespace System.Linq.Expressions.Interpreter
                     while (
                         index >= _tryHandler.FinallyStartIndex
                         && index < _tryHandler.FinallyEndIndex
-                    ) {
+                    )
+                    {
                         index += instructions[index].Run(frame);
                         frame.InstructionIndex = index;
                     }
@@ -571,7 +576,8 @@ namespace System.Linq.Expressions.Interpreter
                     while (
                         index >= _tryHandler.FinallyStartIndex
                         && index < _tryHandler.FinallyEndIndex
-                    ) {
+                    )
+                    {
                         index += instructions[index].Run(frame);
                         frame.InstructionIndex = index;
                     }

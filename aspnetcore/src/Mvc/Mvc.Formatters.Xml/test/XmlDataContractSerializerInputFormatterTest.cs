@@ -74,7 +74,8 @@ namespace Microsoft.AspNetCore.Mvc.Formatters.Xml
         public void CanRead_ReturnsTrueForAnySupportedContentType(
             string requestContentType,
             bool expectedCanRead
-        ) {
+        )
+        {
             // Arrange
             var formatter = new XmlDataContractSerializerInputFormatter(new MvcOptions());
             var contentBytes = Encoding.UTF8.GetBytes("content");
@@ -841,7 +842,8 @@ namespace Microsoft.AspNetCore.Mvc.Formatters.Xml
         private InputFormatterContext GetInputFormatterContext(
             HttpContext httpContext,
             Type modelType
-        ) {
+        )
+        {
             var provider = new EmptyModelMetadataProvider();
             var metadata = provider.GetMetadataForType(modelType);
             return new InputFormatterContext(
@@ -856,7 +858,8 @@ namespace Microsoft.AspNetCore.Mvc.Formatters.Xml
         private static HttpContext GetHttpContext(
             byte[] contentBytes,
             string contentType = "application/xml"
-        ) {
+        )
+        {
             var request = new Mock<HttpRequest>();
             var headers = new Mock<IHeaderDictionary>();
             request.SetupGet(r => r.Headers).Returns(headers.Object);

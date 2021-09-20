@@ -26,12 +26,13 @@ namespace Microsoft.VisualStudio.LanguageServices.CSharp.Snippets.SnippetFunctio
             ITextBuffer subjectBuffer,
             string caseGenerationLocationField,
             string switchExpressionField
-        ) : base(
-            snippetExpansionClient,
-            subjectBuffer,
-            caseGenerationLocationField,
-            switchExpressionField
-        ) { }
+        )
+            : base(
+                snippetExpansionClient,
+                subjectBuffer,
+                caseGenerationLocationField,
+                switchExpressionField
+            ) { }
 
         protected override string CaseFormat
         {
@@ -55,7 +56,8 @@ namespace Microsoft.VisualStudio.LanguageServices.CSharp.Snippets.SnippetFunctio
         protected override bool TryGetEnumTypeSymbol(
             CancellationToken cancellationToken,
             [NotNullWhen(returnValue: true)] out ITypeSymbol? typeSymbol
-        ) {
+        )
+        {
             typeSymbol = null;
             if (!TryGetDocument(out var document))
             {
@@ -97,7 +99,8 @@ namespace Microsoft.VisualStudio.LanguageServices.CSharp.Snippets.SnippetFunctio
             int endPosition,
             CancellationToken cancellationToken,
             out string simplifiedTypeName
-        ) {
+        )
+        {
             simplifiedTypeName = string.Empty;
             var typeAnnotation = new SyntaxAnnotation();
 

@@ -97,7 +97,8 @@ namespace System.Net.Internals
                         ? IPv4AddressSize
                         : IPv6AddressSize
                 )
-            ) {
+            )
+        {
             // No Port.
             SocketAddressPal.SetPort(Buffer, 0);
 

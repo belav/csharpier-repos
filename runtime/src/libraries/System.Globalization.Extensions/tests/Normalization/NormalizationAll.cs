@@ -48,7 +48,8 @@ namespace System.Globalization.Tests
                           ? "NormalizationDataWin7"
                           : "NormalizationDataWin8"
                     )
-            ) {
+            )
+            {
                 using (StreamReader sr = new StreamReader(stream))
                 {
                     int index = 0;
@@ -139,7 +140,8 @@ namespace System.Globalization.Tests
             string c3,
             string c4,
             string c5
-        ) {
+        )
+        {
             string normalized1 = c1.Normalize(normForm);
             string normalized2 = c2.Normalize(normForm);
             string normalized3 = c3.Normalize(normForm);

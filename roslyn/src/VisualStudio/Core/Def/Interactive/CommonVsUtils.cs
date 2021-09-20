@@ -29,7 +29,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Interactive
                     typeof(ITextDocument),
                     out var textDocument
                 )
-            ) {
+            )
+            {
                 return textDocument.FilePath;
             }
             else
@@ -59,7 +60,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Interactive
                         out var curDocument
                     )
                 )
-            ) {
+            )
+            {
                 // TODO: Report error
                 return null;
             }
@@ -74,7 +76,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Interactive
                 ErrorHandler.Failed(
                     frame.GetProperty((int)__VSFPROPID.VSFPROPID_DocView, out var docView)
                 )
-            ) {
+            )
+            {
                 // TODO: Report error
                 return null;
             }

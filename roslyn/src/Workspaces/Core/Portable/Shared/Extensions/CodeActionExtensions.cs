@@ -16,7 +16,8 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
             this CodeAction codeAction,
             IProgressTracker progressTracker,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var solution = await codeAction.GetChangedSolutionAsync(
                     progressTracker,
                     cancellationToken

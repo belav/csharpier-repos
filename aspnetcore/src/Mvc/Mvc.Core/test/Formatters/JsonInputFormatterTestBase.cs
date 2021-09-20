@@ -41,7 +41,8 @@ namespace Microsoft.AspNetCore.Mvc.Formatters
         public void CanRead_ReturnsTrueForAnySupportedContentType(
             string requestContentType,
             bool expectedCanRead
-        ) {
+        )
+        {
             // Arrange
             var formatter = GetInputFormatter();
 
@@ -454,7 +455,8 @@ namespace Microsoft.AspNetCore.Mvc.Formatters
             string content,
             bool treatEmptyInputAsDefaultValue,
             bool expectedIsModelSet
-        ) {
+        )
+        {
             // Arrange
             var formatter = GetInputFormatter();
 
@@ -621,14 +623,16 @@ namespace Microsoft.AspNetCore.Mvc.Formatters
         protected static HttpContext GetHttpContext(
             byte[] contentBytes,
             string contentType = "application/json"
-        ) {
+        )
+        {
             return GetHttpContext(new MemoryStream(contentBytes), contentType);
         }
 
         protected static HttpContext GetHttpContext(
             Stream requestStream,
             string contentType = "application/json"
-        ) {
+        )
+        {
             var httpContext = new DefaultHttpContext();
             httpContext.Request.Body = requestStream;
             httpContext.Request.ContentType = contentType;
@@ -641,7 +645,8 @@ namespace Microsoft.AspNetCore.Mvc.Formatters
             HttpContext httpContext,
             string modelName = null,
             bool treatEmptyInputAsDefaultValue = false
-        ) {
+        )
+        {
             var provider = new EmptyModelMetadataProvider();
             var metadata = provider.GetMetadataForType(modelType);
 

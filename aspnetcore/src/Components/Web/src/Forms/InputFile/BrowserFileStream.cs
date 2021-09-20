@@ -56,7 +56,8 @@ namespace Microsoft.AspNetCore.Components.Forms
         public override async ValueTask<int> ReadAsync(
             Memory<byte> buffer,
             CancellationToken cancellationToken = default
-        ) {
+        )
+        {
             int maxBytesToRead = (int)(Length - Position);
 
             if (maxBytesToRead > buffer.Length)

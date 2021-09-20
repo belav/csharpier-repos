@@ -72,7 +72,8 @@ namespace Microsoft.CodeAnalysis
             string entryPointName,
             MethodImportAttributes flags,
             bool preserveSig
-        ) {
+        )
+        {
             VerifySealed(expected: false);
             Debug.Assert(attributeIndex >= 0);
             _platformInvokeInfo = new DllImportData(moduleName, entryPointName, flags);
@@ -115,7 +116,8 @@ namespace Microsoft.CodeAnalysis
                                 || (_attributes & MethodImplAttributes.PreserveSig) == 0
                                 || _dllImportIndex < _methodImplIndex
                             )
-                        ) {
+                        )
+                        {
                             result &= ~MethodImplAttributes.PreserveSig;
                         }
                     }
@@ -129,7 +131,8 @@ namespace Microsoft.CodeAnalysis
                                 _dllImportIndex > _methodImplIndex
                                 || (_attributes & MethodImplAttributes.PreserveSig) == 0
                             )
-                        ) {
+                        )
+                        {
                             result &= ~MethodImplAttributes.PreserveSig;
                         }
                     }

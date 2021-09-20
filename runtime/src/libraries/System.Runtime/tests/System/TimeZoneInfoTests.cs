@@ -244,7 +244,8 @@ namespace System.Tests
             string displayName,
             string standardName,
             string daylightName
-        ) {
+        )
+        {
             // Edge case - Optionally allow some characters to be absent in the display name.
             const string chars = ".’";
             foreach (char c in chars)
@@ -252,7 +253,8 @@ namespace System.Tests
                 if (
                     displayName.Contains(c, StringComparison.Ordinal)
                     && !tzi.DisplayName.Contains(c, StringComparison.Ordinal)
-                ) {
+                )
+                {
                     displayName = displayName.Replace(c.ToString(), "", StringComparison.Ordinal);
                 }
             }
@@ -319,7 +321,8 @@ namespace System.Tests
                     rules.Length <= 0
                     || rules[rules.Length - 1].DateStart.Year != 2021
                     || rules[rules.Length - 1].DateEnd.Year != 9999
-                ) {
+                )
+                {
                     return;
                 }
 
@@ -3758,7 +3761,8 @@ namespace System.Tests
             string dateTimeString,
             bool expectedDST,
             string expectedOffsetString
-        ) {
+        )
+        {
             // Africa/Casablanca had DST from
             //     1940-02-25T00:00:00.0000000Z {+01:00:00 DST=True}
             //     1945-11-17T23:00:00.0000000Z { 00:00:00 DST=False}
@@ -3900,7 +3904,8 @@ namespace System.Tests
             string dateTimeString,
             bool expectedDST,
             string expectedOffsetString
-        ) {
+        )
+        {
             DateTime dt = DateTime.ParseExact(
                 dateTimeString,
                 "o",
@@ -3936,7 +3941,8 @@ namespace System.Tests
             bool isAmbiguousTime,
             string expectedOffsetString,
             string pacificOffsetString
-        ) {
+        )
+        {
             DateTime dt = DateTime.ParseExact(dateTimeString, "s", CultureInfo.InvariantCulture);
             VerifyInv(s_NewfoundlandTz, dt, isInvalidTime);
 
@@ -4119,7 +4125,8 @@ namespace System.Tests
         )]
         public static void ConvertTime_DateTimeOffset_InvalidDestination_TimeZoneNotFoundException(
             string destinationId
-        ) {
+        )
+        {
             DateTimeOffset time1 = new DateTimeOffset(2006, 5, 12, 0, 0, 0, TimeSpan.Zero);
             VerifyConvertException<TimeZoneNotFoundException>(time1, destinationId);
         }
@@ -4885,7 +4892,8 @@ namespace System.Tests
             int dayNumber,
             int monthNumber,
             bool shouldSucceed
-        ) {
+        )
+        {
             string zoneFilePath = Path.GetTempPath() + Path.GetRandomFileName();
             using (FileStream fs = new FileStream(zoneFilePath, FileMode.Create))
             {
@@ -4979,7 +4987,8 @@ namespace System.Tests
                         PlatformDetection.IsWindows
                         && tzi.BaseUtcOffset != ts
                         && (tzi.Id.Contains("Morocco") || tzi.Id.Contains("Volgograd"))
-                    ) {
+                    )
+                    {
                         // Windows data can report display name with UTC+01:00 offset which is not matching the actual BaseUtcOffset.
                         // We special case this in the test to avoid the test failures like:
                         //      01:00 != 00:00:00, dn:(UTC+01:00) Casablanca, sn:Morocco Standard Time
@@ -5129,7 +5138,8 @@ namespace System.Tests
             string windowsId,
             string ianaId,
             string region
-        ) {
+        )
+        {
             Assert.True(
                 TimeZoneInfo.TryConvertWindowsIdToIanaId(
                     windowsId,
@@ -5331,7 +5341,8 @@ namespace System.Tests
             DateTimeOffset inputTime,
             string destinationTimeZoneId,
             DateTimeOffset expectedTime
-        ) {
+        )
+        {
             DateTimeOffset returnedTime = TimeZoneInfo.ConvertTime(
                 inputTime,
                 TimeZoneInfo.FindSystemTimeZoneById(destinationTimeZoneId)
@@ -5352,7 +5363,8 @@ namespace System.Tests
             DateTime inputTime,
             string destinationTimeZoneId,
             DateTime expectedTime
-        ) {
+        )
+        {
             DateTime returnedTime = TimeZoneInfo.ConvertTime(
                 inputTime,
                 TimeZoneInfo.FindSystemTimeZoneById(destinationTimeZoneId)
@@ -5384,7 +5396,8 @@ namespace System.Tests
             string destinationTimeZoneId,
             DateTime expectedTime,
             DateTimeKind expectedKind
-        ) {
+        )
+        {
             DateTime returnedTime = TimeZoneInfo.ConvertTime(
                 inputTime,
                 TimeZoneInfo.FindSystemTimeZoneById(destinationTimeZoneId)
@@ -5416,7 +5429,8 @@ namespace System.Tests
             string sourceTimeZoneId,
             string destinationTimeZoneId,
             DateTime expectedTime
-        ) {
+        )
+        {
             DateTime returnedTime = TimeZoneInfo.ConvertTime(
                 inputTime,
                 TimeZoneInfo.FindSystemTimeZoneById(sourceTimeZoneId),
@@ -5450,7 +5464,8 @@ namespace System.Tests
             DateTime dt1,
             string sourceTimeZoneId,
             string destinationTimeZoneId
-        ) {
+        )
+        {
             TimeZoneInfo sourceTzi = TimeZoneInfo.FindSystemTimeZoneById(sourceTimeZoneId);
             TimeZoneInfo destTzi = TimeZoneInfo.FindSystemTimeZoneById(destinationTimeZoneId);
 
@@ -5508,7 +5523,8 @@ namespace System.Tests
             TimeSpan[] actual,
             TimeSpan[] expected,
             string errorMsg
-        ) {
+        )
+        {
             Assert.True(actual != null);
             Assert.True(expected != null);
             Assert.True(actual.Length == expected.Length);

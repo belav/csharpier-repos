@@ -19,7 +19,8 @@ namespace System.Xml
             string? oldValue,
             string? newValue,
             XmlNodeChangedAction action
-        ) {
+        )
+        {
             _node = node;
             _oldParent = oldParent;
             _newParent = newParent;

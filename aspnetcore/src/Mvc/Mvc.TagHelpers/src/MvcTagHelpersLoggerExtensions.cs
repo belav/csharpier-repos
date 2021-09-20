@@ -27,7 +27,8 @@ namespace Microsoft.AspNetCore.Mvc.TagHelpers
             this ILogger logger,
             string key,
             Exception exception
-        ) {
+        )
+        {
             _distributedFormatterDeserializedFailed(logger, key, exception);
         }
     }

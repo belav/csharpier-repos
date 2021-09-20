@@ -19,7 +19,8 @@ namespace System.Text.RegularExpressions
             DynamicMethod goMethod,
             DynamicMethod findFirstCharMethod,
             int trackcount
-        ) {
+        )
+        {
             _goMethod = goMethod;
             _findFirstCharMethod = findFirstCharMethod;
             _trackcount = trackcount;

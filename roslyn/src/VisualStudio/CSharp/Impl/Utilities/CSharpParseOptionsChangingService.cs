@@ -25,7 +25,8 @@ namespace Microsoft.VisualStudio.LanguageServices.CSharp.Utilities
             ParseOptions oldOptions,
             ParseOptions newOptions,
             string? maxLangVersion
-        ) {
+        )
+        {
             var oldCSharpOptions = (CSharpParseOptions)oldOptions;
             var newCSharpOptions = (CSharpParseOptions)newOptions;
 
@@ -33,7 +34,8 @@ namespace Microsoft.VisualStudio.LanguageServices.CSharp.Utilities
             if (
                 oldCSharpOptions.WithLanguageVersion(newCSharpOptions.SpecifiedLanguageVersion)
                 != newOptions
-            ) {
+            )
+            {
                 return false;
             }
 

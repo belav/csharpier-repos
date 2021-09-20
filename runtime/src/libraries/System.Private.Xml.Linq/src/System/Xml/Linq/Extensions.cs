@@ -41,7 +41,8 @@ namespace System.Xml.Linq
         public static IEnumerable<XAttribute> Attributes(
             this IEnumerable<XElement?> source,
             XName? name
-        ) {
+        )
+        {
             if (source == null)
                 throw new ArgumentNullException(nameof(source));
             return name != null ? GetAttributes(source, name) : XAttribute.EmptySequence;
@@ -117,7 +118,8 @@ namespace System.Xml.Linq
         public static IEnumerable<XElement> AncestorsAndSelf(
             this IEnumerable<XElement?> source,
             XName? name
-        ) {
+        )
+        {
             if (source == null)
                 throw new ArgumentNullException(nameof(source));
             return name != null ? GetAncestors(source, name, true) : XElement.EmptySequence;
@@ -253,7 +255,8 @@ namespace System.Xml.Linq
         public static IEnumerable<XElement> DescendantsAndSelf(
             this IEnumerable<XElement?> source,
             XName? name
-        ) {
+        )
+        {
             if (source == null)
                 throw new ArgumentNullException(nameof(source));
             return name != null ? GetDescendants(source, name, true) : XElement.EmptySequence;
@@ -363,7 +366,8 @@ namespace System.Xml.Linq
         private static IEnumerable<XAttribute> GetAttributes(
             IEnumerable<XElement?> source,
             XName? name
-        ) {
+        )
+        {
             foreach (XElement? e in source)
             {
                 if (e != null)

@@ -32,7 +32,8 @@ namespace Microsoft.AspNetCore.Components
             string? changeAttribute,
             bool isInvariantCulture,
             string? format
-        ) {
+        )
+        {
             if (valueAttribute == null)
             {
                 throw new ArgumentNullException(nameof(valueAttribute));

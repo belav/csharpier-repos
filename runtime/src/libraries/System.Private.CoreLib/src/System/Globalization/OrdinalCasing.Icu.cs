@@ -393,7 +393,8 @@ namespace System.Globalization
         public static void ToUpperInvariantMode(
             this ReadOnlySpan<char> source,
             Span<char> destination
-        ) {
+        )
+        {
             for (int i = 0; i < source.Length; i++)
             {
                 destination[i] = ToUpperInvariantMode(source[i]);
@@ -418,7 +419,8 @@ namespace System.Globalization
                     char.IsHighSurrogate(c)
                     && i < source.Length - 1
                     && char.IsLowSurrogate(source[i + 1])
-                ) {
+                )
+                {
                     // well formed surrogates
                     ToUpperSurrogate(c, source[i + 1], out ushort h, out ushort l);
                     destination[i] = (char)h;
@@ -516,7 +518,8 @@ namespace System.Globalization
             int lengthA,
             ref char strB,
             int lengthB
-        ) {
+        )
+        {
             Debug.Assert(!GlobalizationMode.Invariant);
             Debug.Assert(!GlobalizationMode.UseNls);
 
@@ -533,7 +536,8 @@ namespace System.Globalization
                     || length == 1
                     || !char.IsHighSurrogate(charA)
                     || !char.IsHighSurrogate(charB)
-                ) {
+                )
+                {
                     if (charA == charB)
                     {
                         length--;
@@ -609,7 +613,8 @@ namespace System.Globalization
 
             fixed (char* pSource = &MemoryMarshal.GetReference(source))fixed (
                 char* pValue = &MemoryMarshal.GetReference(value)
-            ) {
+            )
+            {
                 char* pSourceLimit = pSource + (source.Length - value.Length);
                 char* pValueLimit = pValue + value.Length - 1;
                 char* pCurrentSource = pSource;
@@ -635,7 +640,8 @@ namespace System.Globalization
                             char.IsHighSurrogate(*pSrc)
                             && char.IsLowSurrogate(*(pSrc + 1))
                             && char.IsLowSurrogate(*(pVal + 1))
-                        ) {
+                        )
+                        {
                             // Well formed surrogates
                             // both the source and the Value have well-formed surrogates.
                             if (!EqualSurrogate(*pSrc, *(pSrc + 1), *pVal, *(pVal + 1)))
@@ -676,7 +682,8 @@ namespace System.Globalization
 
             fixed (char* pSource = &MemoryMarshal.GetReference(source))fixed (
                 char* pValue = &MemoryMarshal.GetReference(value)
-            ) {
+            )
+            {
                 char* pValueLimit = pValue + value.Length - 1;
                 char* pCurrentSource = pSource + (source.Length - value.Length);
 
@@ -701,7 +708,8 @@ namespace System.Globalization
                             char.IsHighSurrogate(*pSrc)
                             && char.IsLowSurrogate(*(pSrc + 1))
                             && char.IsLowSurrogate(*(pVal + 1))
-                        ) {
+                        )
+                        {
                             // Well formed surrogates
                             // both the source and the Value have well-formed surrogates.
                             if (!EqualSurrogate(*pSrc, *(pSrc + 1), *pVal, *(pVal + 1)))

@@ -65,7 +65,8 @@ namespace System.Linq.Expressions
         public BlockExpression Update(
             IEnumerable<ParameterExpression>? variables,
             IEnumerable<Expression> expressions
-        ) {
+        )
+        {
             if (expressions != null)
             {
                 // Ensure variables is safe to enumerate twice.
@@ -149,7 +150,8 @@ namespace System.Linq.Expressions
         internal virtual BlockExpression Rewrite(
             ReadOnlyCollection<ParameterExpression>? variables,
             Expression[] args
-        ) {
+        )
+        {
             throw ContractUtils.Unreachable;
         }
 
@@ -169,7 +171,8 @@ namespace System.Linq.Expressions
         internal static ReadOnlyCollection<Expression> ReturnReadOnlyExpressions(
             BlockExpression provider,
             ref object collection
-        ) {
+        )
+        {
             if (collection is Expression tObj)
             {
                 // otherwise make sure only one read-only collection ever gets exposed
@@ -240,7 +243,8 @@ namespace System.Linq.Expressions
         internal override BlockExpression Rewrite(
             ReadOnlyCollection<ParameterExpression>? variables,
             Expression[] args
-        ) {
+        )
+        {
             Debug.Assert(args != null);
             Debug.Assert(args.Length == 2);
             Debug.Assert(variables == null || variables.Count == 0);
@@ -309,7 +313,8 @@ namespace System.Linq.Expressions
         internal override BlockExpression Rewrite(
             ReadOnlyCollection<ParameterExpression>? variables,
             Expression[] args
-        ) {
+        )
+        {
             Debug.Assert(args != null);
             Debug.Assert(args.Length == 3);
             Debug.Assert(variables == null || variables.Count == 0);
@@ -385,7 +390,8 @@ namespace System.Linq.Expressions
         internal override BlockExpression Rewrite(
             ReadOnlyCollection<ParameterExpression>? variables,
             Expression[] args
-        ) {
+        )
+        {
             Debug.Assert(args != null);
             Debug.Assert(args.Length == 4);
             Debug.Assert(variables == null || variables.Count == 0);
@@ -408,7 +414,8 @@ namespace System.Linq.Expressions
             Expression arg2,
             Expression arg3,
             Expression arg4
-        ) {
+        )
+        {
             _arg0 = arg0;
             _arg1 = arg1;
             _arg2 = arg2;
@@ -473,7 +480,8 @@ namespace System.Linq.Expressions
         internal override BlockExpression Rewrite(
             ReadOnlyCollection<ParameterExpression>? variables,
             Expression[] args
-        ) {
+        )
+        {
             Debug.Assert(args != null);
             Debug.Assert(args.Length == 5);
             Debug.Assert(variables == null || variables.Count == 0);
@@ -513,7 +521,8 @@ namespace System.Linq.Expressions
         internal override BlockExpression Rewrite(
             ReadOnlyCollection<ParameterExpression>? variables,
             Expression[] args
-        ) {
+        )
+        {
             Debug.Assert(variables == null || variables.Count == 0);
             Debug.Assert(args != null);
 
@@ -543,7 +552,8 @@ namespace System.Linq.Expressions
         // Used for rewrite of the nodes to either reuse existing set of variables if not rewritten.
         internal IReadOnlyList<ParameterExpression> ReuseOrValidateVariables(
             ReadOnlyCollection<ParameterExpression>? variables
-        ) {
+        )
+        {
             if (variables != null && variables != VariablesList)
             {
                 // Need to validate the new variables (uniqueness, not byref)
@@ -606,7 +616,8 @@ namespace System.Linq.Expressions
         internal override BlockExpression Rewrite(
             ReadOnlyCollection<ParameterExpression>? variables,
             Expression[]? args
-        ) {
+        )
+        {
             if (args == null)
             {
                 Debug.Assert(variables!.Count == Variables.Count);
@@ -649,7 +660,8 @@ namespace System.Linq.Expressions
         internal override BlockExpression Rewrite(
             ReadOnlyCollection<ParameterExpression>? variables,
             Expression[]? args
-        ) {
+        )
+        {
             if (args == null)
             {
                 Debug.Assert(variables!.Count == Variables.Count);
@@ -679,7 +691,8 @@ namespace System.Linq.Expressions
         internal override BlockExpression Rewrite(
             ReadOnlyCollection<ParameterExpression>? variables,
             Expression[]? args
-        ) {
+        )
+        {
             if (args == null)
             {
                 Debug.Assert(variables!.Count == Variables.Count);
@@ -893,7 +906,8 @@ namespace System.Linq.Expressions
             Expression arg1,
             Expression arg2,
             Expression arg3
-        ) {
+        )
+        {
             ExpressionUtils.RequiresCanRead(arg0, nameof(arg0));
             ExpressionUtils.RequiresCanRead(arg1, nameof(arg1));
             ExpressionUtils.RequiresCanRead(arg2, nameof(arg2));
@@ -916,7 +930,8 @@ namespace System.Linq.Expressions
             Expression arg2,
             Expression arg3,
             Expression arg4
-        ) {
+        )
+        {
             ExpressionUtils.RequiresCanRead(arg0, nameof(arg0));
             ExpressionUtils.RequiresCanRead(arg1, nameof(arg1));
             ExpressionUtils.RequiresCanRead(arg2, nameof(arg2));
@@ -981,7 +996,8 @@ namespace System.Linq.Expressions
         public static BlockExpression Block(
             IEnumerable<ParameterExpression>? variables,
             params Expression[] expressions
-        ) {
+        )
+        {
             return Block(variables, (IEnumerable<Expression>)expressions);
         }
 
@@ -996,7 +1012,8 @@ namespace System.Linq.Expressions
             Type type,
             IEnumerable<ParameterExpression>? variables,
             params Expression[] expressions
-        ) {
+        )
+        {
             return Block(type, variables, (IEnumerable<Expression>)expressions);
         }
 
@@ -1009,7 +1026,8 @@ namespace System.Linq.Expressions
         public static BlockExpression Block(
             IEnumerable<ParameterExpression>? variables,
             IEnumerable<Expression> expressions
-        ) {
+        )
+        {
             ContractUtils.RequiresNotNull(expressions, nameof(expressions));
             ReadOnlyCollection<ParameterExpression> variableList = variables.ToReadOnly();
 
@@ -1041,7 +1059,8 @@ namespace System.Linq.Expressions
             Type type,
             IEnumerable<ParameterExpression>? variables,
             IEnumerable<Expression> expressions
-        ) {
+        )
+        {
             ContractUtils.RequiresNotNull(type, nameof(type));
             ContractUtils.RequiresNotNull(expressions, nameof(expressions));
 
@@ -1072,7 +1091,8 @@ namespace System.Linq.Expressions
             Type? type,
             ReadOnlyCollection<ParameterExpression> variables,
             ReadOnlyCollection<Expression> expressions
-        ) {
+        )
+        {
             ValidateVariables(variables, nameof(variables));
 
             if (type != null)
@@ -1113,7 +1133,8 @@ namespace System.Linq.Expressions
         internal static void ValidateVariables(
             ReadOnlyCollection<ParameterExpression> varList,
             string collectionName
-        ) {
+        )
+        {
             int count = varList.Count;
             if (count != 0)
             {
@@ -1136,7 +1157,8 @@ namespace System.Linq.Expressions
 
         private static BlockExpression GetOptimizedBlockExpression(
             IReadOnlyList<Expression> expressions
-        ) {
+        )
+        {
             return expressions.Count switch
             {
                 0

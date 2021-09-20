@@ -418,7 +418,8 @@ namespace JIT.HardwareIntrinsics.X86
             Vector128<UInt64> right,
             void* result,
             [CallerMemberName] string method = ""
-        ) {
+        )
+        {
             UInt64[] inArray1 = new UInt64[Op1ElementCount];
             UInt64[] inArray2 = new UInt64[Op2ElementCount];
             UInt64[] outArray = new UInt64[RetElementCount];
@@ -443,7 +444,8 @@ namespace JIT.HardwareIntrinsics.X86
             void* right,
             void* result,
             [CallerMemberName] string method = ""
-        ) {
+        )
+        {
             UInt64[] inArray1 = new UInt64[Op1ElementCount];
             UInt64[] inArray2 = new UInt64[Op2ElementCount];
             UInt64[] outArray = new UInt64[RetElementCount];
@@ -472,7 +474,8 @@ namespace JIT.HardwareIntrinsics.X86
             UInt64[] right,
             UInt64[] result,
             [CallerMemberName] string method = ""
-        ) {
+        )
+        {
             bool succeeded = true;
 
             if (result[0] != (((right[0] & (1UL << 63)) != 0) ? left[0] : 0))

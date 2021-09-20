@@ -784,7 +784,8 @@ namespace System.Speech.Synthesis
             Uri redirectUri;
             using (
                 Stream stream = s_resourceLoader.LoadFile(ssmlFile, out localFile, out redirectUri)
-            ) {
+            )
+            {
                 try
                 {
                     AppendSsml(new XmlTextReader(stream));
@@ -1067,7 +1068,8 @@ namespace System.Speech.Synthesis
                 SsmlElement possibleChildren,
                 SsmlState state,
                 CultureInfo culture
-            ) {
+            )
+            {
                 _possibleChildren = possibleChildren;
                 _state = state;
                 _culture = culture;

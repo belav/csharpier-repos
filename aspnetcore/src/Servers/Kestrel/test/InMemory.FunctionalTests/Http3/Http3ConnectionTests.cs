@@ -32,7 +32,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Tests
                     while (
                         (received = await context.Request.Body.ReadAsync(buffer, 0, buffer.Length))
                         > 0
-                    ) {
+                    )
+                    {
                         await context.Response.Body.WriteAsync(buffer, 0, received);
                     }
 

@@ -16,7 +16,8 @@ namespace System.Buffers.Text
             ulong value,
             Span<byte> destination,
             out int bytesWritten
-        ) {
+        )
+        {
             if (value < 10)
             {
                 return TryFormatUInt32SingleDigit((uint)value, destination, out bytesWritten);
@@ -63,7 +64,8 @@ namespace System.Buffers.Text
             uint value,
             Span<byte> destination,
             out int bytesWritten
-        ) {
+        )
+        {
             if (destination.Length == 0)
             {
                 bytesWritten = 0;
@@ -79,7 +81,8 @@ namespace System.Buffers.Text
             uint value,
             Span<byte> destination,
             out int bytesWritten
-        ) {
+        )
+        {
             int digitCount = FormattingHelpers.CountDigits(value);
             // WriteDigits does not do bounds checks
             if (digitCount > destination.Length)
@@ -97,7 +100,8 @@ namespace System.Buffers.Text
             ulong value,
             Span<byte> destination,
             out int bytesWritten
-        ) {
+        )
+        {
             int digitCount = FormattingHelpers.CountDigits(value);
             // WriteDigits does not do bounds checks
             if (digitCount > destination.Length)
@@ -115,7 +119,8 @@ namespace System.Buffers.Text
             ulong value,
             Span<byte> destination,
             out int bytesWritten
-        ) {
+        )
+        {
             uint overNineDigits = (uint)(value / Utf8Constants.Billion);
             uint lastNineDigits = (uint)(value - (overNineDigits * Utf8Constants.Billion));
 
@@ -145,7 +150,8 @@ namespace System.Buffers.Text
             ulong value,
             Span<byte> destination,
             out int bytesWritten
-        ) {
+        )
+        {
             ulong overNineDigits = value / Utf8Constants.Billion;
             uint lastNineDigits = (uint)(value - (overNineDigits * Utf8Constants.Billion));
             uint overEighteenDigits = (uint)(overNineDigits / Utf8Constants.Billion);

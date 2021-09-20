@@ -17,7 +17,8 @@ namespace Microsoft.CodeAnalysis.SQLite.v2
             public PooledConnection(
                 SQLiteConnectionPool connectionPool,
                 SqlConnection sqlConnection
-            ) {
+            )
+            {
                 _connectionPool = connectionPool;
                 Connection = sqlConnection;
             }

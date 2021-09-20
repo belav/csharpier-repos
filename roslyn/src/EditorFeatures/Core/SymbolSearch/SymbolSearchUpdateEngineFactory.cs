@@ -25,7 +25,8 @@ namespace Microsoft.CodeAnalysis.SymbolSearch
             Workspace workspace,
             ISymbolSearchLogService logService,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var client = await RemoteHostClient.TryGetClientAsync(workspace, cancellationToken)
                 .ConfigureAwait(false);
             if (client != null)
@@ -97,7 +98,8 @@ namespace Microsoft.CodeAnalysis.SymbolSearch
                 string name,
                 int arity,
                 CancellationToken cancellationToken
-            ) {
+            )
+            {
                 var result = await _connection.TryInvokeAsync<
                     ImmutableArray<PackageWithTypeResult>
                 >(
@@ -121,7 +123,8 @@ namespace Microsoft.CodeAnalysis.SymbolSearch
                 string source,
                 string assemblyName,
                 CancellationToken cancellationToken
-            ) {
+            )
+            {
                 var result = await _connection.TryInvokeAsync<
                     ImmutableArray<PackageWithAssemblyResult>
                 >(
@@ -146,7 +149,8 @@ namespace Microsoft.CodeAnalysis.SymbolSearch
                 string name,
                 int arity,
                 CancellationToken cancellationToken
-            ) {
+            )
+            {
                 var result = await _connection.TryInvokeAsync<
                     ImmutableArray<ReferenceAssemblyWithTypeResult>
                 >(
@@ -170,7 +174,8 @@ namespace Microsoft.CodeAnalysis.SymbolSearch
                 string localSettingsDirectory,
                 ISymbolSearchLogService logService,
                 CancellationToken cancellationToken
-            ) {
+            )
+            {
                 // logService parameter is ignored since it's already set on the connection as a callback
                 _ = logService;
 

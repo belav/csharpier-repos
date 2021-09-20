@@ -130,7 +130,8 @@ namespace Microsoft.CodeAnalysis.CodeFixes.FullyQualify
             SyntaxNode node,
             SemanticModel semanticModel,
             IEnumerable<SymbolResult> proposedContainers
-        ) {
+        )
+        {
             foreach (var symbolResult in proposedContainers)
             {
                 var container = symbolResult.Symbol;
@@ -184,7 +185,8 @@ namespace Microsoft.CodeAnalysis.CodeFixes.FullyQualify
             string containerName,
             INamespaceOrTypeSymbol? originalSymbol,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             Contract.ThrowIfNull(
                 originalSymbol,
                 "Original symbol information missing. Haven't called GetContainers?"
@@ -205,7 +207,8 @@ namespace Microsoft.CodeAnalysis.CodeFixes.FullyQualify
             SemanticModel semanticModel,
             SyntaxNode node,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             cancellationToken.ThrowIfCancellationRequested();
 
             var syntaxFacts = project.LanguageServices.GetRequiredService<ISyntaxFactsService>();
@@ -269,7 +272,8 @@ namespace Microsoft.CodeAnalysis.CodeFixes.FullyQualify
             bool inAttributeContext,
             bool looksGeneric,
             INamedTypeSymbol searchResult
-        ) {
+        )
+        {
             if (arity != 0 && searchResult.GetArity() != arity)
             {
                 // If the user supplied type arguments, then the search result has to match the
@@ -315,7 +319,8 @@ namespace Microsoft.CodeAnalysis.CodeFixes.FullyQualify
             SemanticModel semanticModel,
             SyntaxNode simpleName,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var syntaxFacts = project.LanguageServices.GetRequiredService<ISyntaxFactsService>();
             if (syntaxFacts.IsAttributeName(simpleName))
             {
@@ -376,7 +381,8 @@ namespace Microsoft.CodeAnalysis.CodeFixes.FullyQualify
             INamespaceSymbol ns,
             string? rightName,
             bool isAttributeName
-        ) {
+        )
+        {
             // If there was no name on the right, then this binds without any problems.
             if (rightName == null)
             {
@@ -412,7 +418,8 @@ namespace Microsoft.CodeAnalysis.CodeFixes.FullyQualify
         private static IEnumerable<SymbolResult> GetContainers(
             ImmutableArray<SymbolResult> symbols,
             Compilation compilation
-        ) {
+        )
+        {
             foreach (var symbolResult in symbols)
             {
                 var containingSymbol =
@@ -448,10 +455,8 @@ namespace Microsoft.CodeAnalysis.CodeFixes.FullyQualify
 
         private class GroupingCodeAction : CodeAction.CodeActionWithNestedActions
         {
-            public GroupingCodeAction(
-                string title,
-                ImmutableArray<CodeAction> nestedActions
-            ) : base(title, nestedActions, isInlinable: true) { }
+            public GroupingCodeAction(string title, ImmutableArray<CodeAction> nestedActions)
+                : base(title, nestedActions, isInlinable: true) { }
         }
     }
 }

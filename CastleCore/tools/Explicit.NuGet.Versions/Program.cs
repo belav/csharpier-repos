@@ -35,7 +35,8 @@ namespace Explicit.NuGet.Versions
 
         private static void WriteNuspecToPackages(
             Dictionary<string, NuspecContentEntry> packageMetaData
-        ) {
+        )
+        {
             foreach (var packageFile in packageMetaData.ToList())
             {
                 using (var zipFile = ZipFile.Read(packageFile.Key))
@@ -49,7 +50,8 @@ namespace Explicit.NuGet.Versions
         private static void UpdateNuspecManifestContent(
             Dictionary<string, NuspecContentEntry> packageMetaData,
             string dependencyNugetId
-        ) {
+        )
+        {
             foreach (var packageFile in packageMetaData.ToList())
             {
                 var nuspecXmlDocument = new XmlDocument();
@@ -64,7 +66,8 @@ namespace Explicit.NuGet.Versions
                 using (var writer = new StringWriterWithEncoding(Encoding.UTF8))
                 using (
                     var xmlWriter = new XmlTextWriter(writer) { Formatting = Formatting.Indented }
-                ) {
+                )
+                {
                     nuspecXmlDocument.Save(xmlWriter);
                     updatedNuspecXml = writer.ToString();
                 }
@@ -76,7 +79,8 @@ namespace Explicit.NuGet.Versions
         private static void SetPackageDepencyVersionsToBeExplicitForXmlDocument(
             XmlDocument nuspecXmlDocument,
             string nugetIdFilter
-        ) {
+        )
+        {
             WalkDocumentNodes(
                 nuspecXmlDocument.ChildNodes,
                 node =>
@@ -85,12 +89,14 @@ namespace Explicit.NuGet.Versions
                         node.Name.ToLowerInvariant() == "dependency"
                         && !string.IsNullOrEmpty(node.Attributes["id"].Value)
                         && node.Attributes["id"].Value.ToLowerInvariant().StartsWith(nugetIdFilter)
-                    ) {
+                    )
+                    {
                         var currentVersion = node.Attributes["version"].Value;
                         if (
                             !node.Attributes["version"].Value.StartsWith("[")
                             && !node.Attributes["version"].Value.EndsWith("]")
-                        ) {
+                        )
+                        {
                             node.Attributes["version"].Value = $"[{currentVersion}]";
                         }
                     }
@@ -106,14 +112,16 @@ namespace Explicit.NuGet.Versions
 
         private static Dictionary<string, NuspecContentEntry> ReadNuspecFromPackages(
             DirectoryInfo packageDiscoverDirectoryInfo
-        ) {
+        )
+        {
             var packageNuspecDictionary = new Dictionary<string, NuspecContentEntry>();
             foreach (
                 var packageFilePath in packageDiscoverDirectoryInfo.GetFiles(
                     "*.nupkg",
                     SearchOption.AllDirectories
                 )
-            ) {
+            )
+            {
                 using (var zipFile = ZipFile.Read(packageFilePath.FullName))
                 {
                     foreach (var zipEntry in zipFile.Entries)

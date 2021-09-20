@@ -30,7 +30,8 @@ namespace System.Net.Http.Headers
         internal static void SetQuality(
             ObjectCollection<NameValueHeaderValue> parameters,
             double? value
-        ) {
+        )
+        {
             Debug.Assert(parameters != null);
 
             NameValueHeaderValue? qualityParameter = NameValueHeaderValue.Find(
@@ -114,7 +115,8 @@ namespace System.Net.Http.Headers
                     || utf8byte == '*'
                     || utf8byte == '\''
                     || utf8byte == '%'
-                ) {
+                )
+                {
                     // ASCII - Only one encoded byte.
                     AddHexEscaped(utf8byte, builder);
                 }
@@ -160,7 +162,8 @@ namespace System.Net.Http.Headers
                         NumberFormatInfo.InvariantInfo,
                         out qualityValue
                     )
-                ) {
+                )
+                {
                     return qualityValue;
                 }
                 // If the stored value is an invalid quality value, just return null and log a warning.
@@ -289,7 +292,8 @@ namespace System.Net.Http.Headers
                         if (
                             ((comparer == null) && xItem.Equals(yItem))
                             || ((comparer != null) && comparer.Equals(xItem, yItem))
-                        ) {
+                        )
+                        {
                             alreadyFound[i] = true;
                             found = true;
                             break;
@@ -319,7 +323,8 @@ namespace System.Net.Http.Headers
             int startIndex,
             bool skipEmptyValues,
             out bool separatorFound
-        ) {
+        )
+        {
             Debug.Assert(input != null);
             Debug.Assert(startIndex <= input.Length); // it's OK if index == value.Length.
 
@@ -353,7 +358,8 @@ namespace System.Net.Http.Headers
             HeaderDescriptor descriptor,
             HttpHeaders store,
             DateTimeOffset? defaultValue = null
-        ) {
+        )
+        {
             Debug.Assert(store != null);
 
             object? storedValue = store.GetParsedValues(descriptor);
@@ -433,7 +439,8 @@ namespace System.Net.Http.Headers
                 {
                     foreach (
                         KeyValuePair<string, string[]> header in hh.EnumerateWithoutValidation()
-                    ) {
+                    )
+                    {
                         foreach (string headerValue in header.Value)
                         {
                             sb.Append("  ");
@@ -456,7 +463,8 @@ namespace System.Net.Http.Headers
                     out ParseAddressInfo _,
                     throwExceptionIfFail: false
                 )
-            ) {
+            )
+            {
                 return true;
             }
             else
@@ -473,13 +481,15 @@ namespace System.Net.Http.Headers
         private static void ValidateToken(
             HttpHeaderValueCollection<string> collection,
             string value
-        ) {
+        )
+        {
             CheckValidToken(value, "item");
         }
 
         internal static ObjectCollection<NameValueHeaderValue>? Clone(
             this ObjectCollection<NameValueHeaderValue>? source
-        ) {
+        )
+        {
             if (source == null)
                 return null;
 

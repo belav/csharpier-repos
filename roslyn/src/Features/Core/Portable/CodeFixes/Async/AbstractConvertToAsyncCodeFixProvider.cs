@@ -78,7 +78,8 @@ namespace Microsoft.CodeAnalysis.CodeFixes.Async
             Document document,
             Diagnostic diagnostic,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var semanticModel = await document.GetSemanticModelAsync(cancellationToken)
                 .ConfigureAwait(false);
 

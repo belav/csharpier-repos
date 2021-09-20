@@ -21,7 +21,8 @@ namespace System.Runtime.InteropServices
             out int startIndex,
             [NotNullWhen(true)] out ReadOnlySequenceSegment<T>? endSegment,
             out int endIndex
-        ) {
+        )
+        {
             return sequence.TryGetReadOnlySequenceSegment(
                 out startSegment,
                 out startIndex,
@@ -46,7 +47,8 @@ namespace System.Runtime.InteropServices
         public static bool TryGetReadOnlyMemory<T>(
             ReadOnlySequence<T> sequence,
             out ReadOnlyMemory<T> memory
-        ) {
+        )
+        {
             if (!sequence.IsSingleSegment)
             {
                 memory = default;
@@ -66,7 +68,8 @@ namespace System.Runtime.InteropServices
             [NotNullWhen(true)] out string? text,
             out int start,
             out int length
-        ) {
+        )
+        {
             return sequence.TryGetString(out text, out start, out length);
         }
 

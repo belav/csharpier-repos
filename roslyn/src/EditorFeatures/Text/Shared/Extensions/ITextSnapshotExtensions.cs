@@ -19,7 +19,8 @@ namespace Microsoft.CodeAnalysis.Text.Shared.Extensions
             this ITextSnapshot snapshot,
             int lineNumber,
             int columnIndex
-        ) {
+        )
+        {
             var position = snapshot.TryGetPosition(lineNumber, columnIndex);
             if (position.HasValue)
             {
@@ -56,7 +57,8 @@ namespace Microsoft.CodeAnalysis.Text.Shared.Extensions
             this ITextSnapshot snapshot,
             int lineNumber,
             int columnIndex
-        ) {
+        )
+        {
             if (lineNumber < 0 || lineNumber >= snapshot.LineCount)
             {
                 return null;
@@ -76,7 +78,8 @@ namespace Microsoft.CodeAnalysis.Text.Shared.Extensions
             int lineNumber,
             int columnIndex,
             out SnapshotPoint position
-        ) {
+        )
+        {
             position = new SnapshotPoint();
 
             if (lineNumber < 0 || lineNumber >= snapshot.LineCount)
@@ -134,7 +137,8 @@ namespace Microsoft.CodeAnalysis.Text.Shared.Extensions
             int startIndex,
             int endLine,
             int endIndex
-        ) {
+        )
+        {
             var startPosition = snapshot.TryGetPosition(startLine, startIndex);
             var endPosition = snapshot.TryGetPosition(endLine, endIndex);
             if (startPosition == null || endPosition == null)
@@ -157,7 +161,8 @@ namespace Microsoft.CodeAnalysis.Text.Shared.Extensions
 
         public static NormalizedSnapshotSpanCollection GetSnapshotSpanCollection(
             this ITextSnapshot snapshot
-        ) {
+        )
+        {
             Contract.ThrowIfNull(snapshot);
 
             return new NormalizedSnapshotSpanCollection(snapshot.GetFullSpan());
@@ -168,7 +173,8 @@ namespace Microsoft.CodeAnalysis.Text.Shared.Extensions
             int position,
             out int lineNumber,
             out int characterIndex
-        ) {
+        )
+        {
             var line = snapshot.GetLineFromPosition(position);
 
             lineNumber = line.LineNumber;
@@ -181,7 +187,8 @@ namespace Microsoft.CodeAnalysis.Text.Shared.Extensions
         public static string GetLeadingWhitespaceOfLineAtPosition(
             this ITextSnapshot snapshot,
             int position
-        ) {
+        )
+        {
             Contract.ThrowIfNull(snapshot);
 
             var line = snapshot.GetLineFromPosition(position);

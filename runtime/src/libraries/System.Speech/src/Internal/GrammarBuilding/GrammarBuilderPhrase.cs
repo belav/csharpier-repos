@@ -16,16 +16,15 @@ namespace System.Speech.Internal.GrammarBuilding
         internal GrammarBuilderPhrase(string phrase)
             : this(phrase, false, SubsetMatchingMode.OrderedSubset) { }
 
-        internal GrammarBuilderPhrase(
-            string phrase,
-            SubsetMatchingMode subsetMatchingCriteria
-        ) : this(phrase, true, subsetMatchingCriteria) { }
+        internal GrammarBuilderPhrase(string phrase, SubsetMatchingMode subsetMatchingCriteria)
+            : this(phrase, true, subsetMatchingCriteria) { }
 
         private GrammarBuilderPhrase(
             string phrase,
             bool subsetMatching,
             SubsetMatchingMode subsetMatchingCriteria
-        ) {
+        )
+        {
             _phrase = phrase;
             _subsetMatching = subsetMatching;
             switch (subsetMatchingCriteria)
@@ -85,7 +84,8 @@ namespace System.Speech.Internal.GrammarBuilding
             IElement parent,
             IRule rule,
             IdentifierCollection ruleIds
-        ) {
+        )
+        {
             return CreatePhraseElement(elementFactory, parent);
         }
 

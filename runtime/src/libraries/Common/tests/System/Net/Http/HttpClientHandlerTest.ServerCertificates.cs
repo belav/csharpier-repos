@@ -109,7 +109,8 @@ namespace System.Net.Http.Functional.Tests
                     HttpResponseMessage response = await client.GetAsync(
                         Configuration.Http.SecureRemoteEchoServer
                     )
-                ) {
+                )
+                {
                     Assert.Equal(HttpStatusCode.OK, response.StatusCode);
                 }
 
@@ -140,7 +141,8 @@ namespace System.Net.Http.Functional.Tests
                     HttpResponseMessage response = await client.GetAsync(
                         Configuration.Http.RemoteEchoServer
                     )
-                ) {
+                )
+                {
                     Assert.Equal(HttpStatusCode.OK, response.StatusCode);
                 }
 
@@ -152,7 +154,8 @@ namespace System.Net.Http.Functional.Tests
         {
             foreach (
                 Configuration.Http.RemoteServer remoteServer in Configuration.Http.RemoteServers
-            ) {
+            )
+            {
                 if (remoteServer.IsSecure)
                 {
                     foreach (bool checkRevocation in BoolValues)
@@ -185,7 +188,8 @@ namespace System.Net.Http.Functional.Tests
             Configuration.Http.RemoteServer remoteServer,
             Uri url,
             bool checkRevocation
-        ) {
+        )
+        {
             HttpClientHandler handler = CreateHttpClientHandler();
             using (HttpClient client = CreateHttpClientForRemoteServer(remoteServer, handler))
             {
@@ -303,7 +307,8 @@ namespace System.Net.Http.Functional.Tests
                 HttpResponseMessage response = await client.GetAsync(
                     Configuration.Http.RevokedCertRemoteServer
                 )
-            ) {
+            )
+            {
                 Assert.Equal(HttpStatusCode.OK, response.StatusCode);
             }
         }
@@ -340,7 +345,8 @@ namespace System.Net.Http.Functional.Tests
             string url,
             string useHttp2String,
             SslPolicyErrors expectedErrors
-        ) {
+        )
+        {
             HttpClientHandler handler = CreateHttpClientHandler(useHttp2String);
             using (HttpClient client = CreateHttpClient(handler, useHttp2String))
             {
@@ -376,7 +382,8 @@ namespace System.Net.Http.Functional.Tests
         public async Task UseCallback_BadCertificate_ExpectedPolicyErrors(
             string url,
             SslPolicyErrors expectedErrors
-        ) {
+        )
+        {
             const int SEC_E_BUFFER_TOO_SMALL = unchecked((int)0x80090321);
 
             if (!ClientSupportsDHECipherSuites)
@@ -462,7 +469,8 @@ namespace System.Net.Http.Functional.Tests
                     Configuration.Http.SecureRemoteEchoServer,
                     content
                 )
-            ) {
+            )
+            {
                 // Validate status.
                 Assert.Equal(HttpStatusCode.OK, response.StatusCode);
 

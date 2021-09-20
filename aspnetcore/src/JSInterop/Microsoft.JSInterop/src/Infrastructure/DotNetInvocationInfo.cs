@@ -20,7 +20,8 @@ namespace Microsoft.JSInterop.Infrastructure
             string methodIdentifier,
             long dotNetObjectId,
             string? callId
-        ) {
+        )
+        {
             CallId = callId;
             AssemblyName = assemblyName;
             MethodIdentifier = methodIdentifier;

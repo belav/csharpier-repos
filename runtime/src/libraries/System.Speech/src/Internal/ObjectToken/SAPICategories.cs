@@ -44,7 +44,8 @@ namespace System.Speech.Internal.ObjectTokens
                 ObjectTokenCategory tokenCategory = ObjectTokenCategory.Create(
                     @"HKEY_CURRENT_USER\SOFTWARE\Microsoft\Speech\AudioOutput"
                 )
-            ) {
+            )
+            {
                 if (tokenCategory != null)
                 {
                     string deviceName;
@@ -58,7 +59,8 @@ namespace System.Speech.Internal.ObjectTokens
                                     deviceName.Substring(pos + 1),
                                     Registry.LocalMachine
                                 )
-                            ) {
+                            )
+                            {
                                 if (deviceKey != null)
                                 {
                                     device = AudioDeviceOut.GetDevicedId(deviceKey.Name);
@@ -108,7 +110,8 @@ namespace System.Speech.Internal.ObjectTokens
                         {
                             foreach (
                                 ObjectToken tokenSeed in (IEnumerable<ObjectToken>)tokenCategory
-                            ) {
+                            )
+                            {
                                 token = GetHighestTokenVersion(
                                     token,
                                     tokenSeed,
@@ -130,7 +133,8 @@ namespace System.Speech.Internal.ObjectTokens
 
                             foreach (
                                 ObjectToken tokenSeed in (IEnumerable<ObjectToken>)tokenCategory
-                            ) {
+                            )
+                            {
                                 if (tokenSeed.MatchesAttributes(sCultureId))
                                 {
                                     token = tokenSeed;
@@ -143,7 +147,8 @@ namespace System.Speech.Internal.ObjectTokens
                             {
                                 foreach (
                                     ObjectToken tokenSeed in (IEnumerable<ObjectToken>)tokenCategory
-                                ) {
+                                )
+                                {
                                     token = tokenSeed;
                                     break;
                                 }
@@ -185,7 +190,8 @@ namespace System.Speech.Internal.ObjectTokens
             ObjectToken token1,
             ObjectToken token2,
             out bool pfDidCompare
-        ) {
+        )
+        {
             pfDidCompare = false;
 
             RegistryDataKey attributes1 = null;
@@ -245,7 +251,8 @@ namespace System.Speech.Internal.ObjectTokens
                                 && language1 == language2
                             )
                         )
-                    ) {
+                    )
+                    {
                         pfDidCompare = true;
                         return CompareVersions(version1, version2);
                     }
@@ -355,7 +362,8 @@ namespace System.Speech.Internal.ObjectTokens
             ObjectToken token,
             ObjectToken tokenSeed,
             string[] criterias
-        ) {
+        )
+        {
             // if override and higher version - new preferred.
             bool fOverride = tokenSeed.MatchesAttributes(criterias);
 

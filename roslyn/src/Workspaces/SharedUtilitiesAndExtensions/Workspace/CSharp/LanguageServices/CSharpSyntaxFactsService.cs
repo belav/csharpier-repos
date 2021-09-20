@@ -29,7 +29,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                 SyntaxTree syntaxTree,
                 int position,
                 CancellationToken cancellationToken
-            ) {
+            )
+            {
                 if (syntaxTree == null)
                 {
                     return false;
@@ -42,7 +43,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                 SyntaxTree syntaxTree,
                 int position,
                 CancellationToken cancellationToken
-            ) {
+            )
+            {
                 if (syntaxTree == null)
                 {
                     return false;
@@ -68,7 +70,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                 SyntaxTree syntaxTree,
                 int position,
                 CancellationToken cancellationToken
-            ) {
+            )
+            {
                 var token = syntaxTree.FindTokenOnLeftOfPosition(position, cancellationToken);
                 return syntaxTree.IsPossibleTupleContext(token, position);
             }
@@ -113,7 +116,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                     if (
                         braces.openBrace.Kind() == SyntaxKind.None
                         && braces.closeBrace.Kind() == SyntaxKind.None
-                    ) {
+                    )
+                    {
                         // Not an item with braces.  Just pass it up.
                         return rewritten;
                     }

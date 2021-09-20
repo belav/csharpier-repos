@@ -255,7 +255,8 @@ namespace Microsoft.AspNetCore.SignalR.Client.Tests
                             request.Headers.Accept?.Contains(
                                 new MediaTypeWithQualityHeaderValue("text/event-stream")
                             ) == true
-                        ) {
+                        )
+                        {
                             // Receive loop started - allow stopping the transport
                             eventStreamTcs.SetResult();
 
@@ -432,7 +433,8 @@ namespace Microsoft.AspNetCore.SignalR.Client.Tests
                             request.Headers.Accept?.Contains(
                                 new MediaTypeWithQualityHeaderValue("text/event-stream")
                             ) == true
-                        ) {
+                        )
+                        {
                             // Receive loop started - allow stopping the transport
                             eventStreamTcs.SetResult();
 

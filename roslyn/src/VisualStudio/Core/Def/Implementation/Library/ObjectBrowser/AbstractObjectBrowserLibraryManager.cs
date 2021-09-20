@@ -127,7 +127,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Library.ObjectB
                     oldDocument.TryGetTextVersion(out var oldTextVersion)
                     && newDocument.TryGetTextVersion(out var newTextVersion)
                     && oldTextVersion == newTextVersion
-                ) {
+                )
+                {
                     return;
                 }
 
@@ -305,7 +306,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Library.ObjectB
             uint listType,
             uint flags,
             VSOBSEARCHCRITERIA2[] pobSrch
-        ) {
+        )
+        {
             var listKind = Helpers.ListTypeToObjectListKind(listType);
 
             if (Helpers.IsFindSymbol(flags))
@@ -339,7 +341,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Library.ObjectB
             SYMBOL_DESCRIPTION_NODE[] rgSymbolNodes,
             uint ulcNodes,
             out IVsNavInfo ppNavInfo
-        ) {
+        )
+        {
             Debug.Assert(
                 rgSymbolNodes != null || ulcNodes > 0,
                 "Invalid input parameters into CreateNavInfo"
@@ -490,7 +493,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Library.ObjectB
             Guid commandGroup,
             uint commandId,
             ref OLECMDF commandFlags
-        ) {
+        )
+        {
             if (commandGroup == VsMenus.guidStandardCommandSet97)
             {
                 switch (commandId)
@@ -553,7 +557,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Library.ObjectB
             SymbolListItem symbolListItem,
             Project project,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             try
             {
                 // Let the presented know we're starting a search.  It will give us back the context object that the FAR
@@ -593,7 +598,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Library.ObjectB
             SymbolListItem symbolListItem,
             Project project,
             CodeAnalysis.FindUsages.FindUsagesContext context
-        ) {
+        )
+        {
             var compilation = await project.GetCompilationAsync(context.CancellationToken)
                 .ConfigureAwait(false);
             var symbol = symbolListItem.ResolveSymbol(compilation);

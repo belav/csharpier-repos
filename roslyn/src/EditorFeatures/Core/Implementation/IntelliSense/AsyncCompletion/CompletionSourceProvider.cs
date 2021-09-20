@@ -27,7 +27,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.IntelliSense.AsyncComplet
         public CompletionSourceProvider(
             IThreadingContext threadingContext,
             Lazy<IStreamingFindUsagesPresenter> streamingPresenter
-        ) {
+        )
+        {
             _threadingContext = threadingContext;
             _streamingPresenter = streamingPresenter;
         }

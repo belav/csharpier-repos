@@ -18,7 +18,8 @@ namespace Microsoft.AspNetCore.Razor.Language.Components
         protected override void ExecuteCore(
             RazorCodeDocument codeDocument,
             DocumentIntermediateNode documentNode
-        ) {
+        )
+        {
             if (!IsComponentDocument(documentNode))
             {
                 return;
@@ -105,7 +106,8 @@ namespace Microsoft.AspNetCore.Razor.Language.Components
                     eventHandler != null
                     && eventHandler.TagHelper != null
                     && eventHandler.TagHelper.IsEventHandlerTagHelper()
-                ) {
+                )
+                {
                     for (var j = 0; j < parent.Children.Count; j++)
                     {
                         var componentAttribute =
@@ -115,7 +117,8 @@ namespace Microsoft.AspNetCore.Razor.Language.Components
                             && componentAttribute.TagHelper != null
                             && componentAttribute.TagHelper.IsComponentTagHelper()
                             && componentAttribute.AttributeName == eventHandler.AttributeName
-                        ) {
+                        )
+                        {
                             // Found a duplicate - remove the 'fallback' in favor of the component's own handling.
                             parent.Children.RemoveAt(i);
                             break;
@@ -170,7 +173,8 @@ namespace Microsoft.AspNetCore.Razor.Language.Components
         private IntermediateNode RewriteUsage(
             IntermediateNode parent,
             TagHelperDirectiveAttributeIntermediateNode node
-        ) {
+        )
+        {
             var original = GetAttributeContent(node);
             if (original.Count == 0)
             {
@@ -272,7 +276,8 @@ namespace Microsoft.AspNetCore.Razor.Language.Components
             if (
                 node.Children.Count == 1
                 && node.Children[0] is HtmlContentIntermediateNode htmlContentNode
-            ) {
+            )
+            {
                 // This case can be hit for a 'string' attribute. We want to turn it into
                 // an expression.
                 var tokens = htmlContentNode.FindDescendantNodes<IntermediateToken>();
@@ -295,7 +300,8 @@ namespace Microsoft.AspNetCore.Razor.Language.Components
         private IntermediateNode RewriteParameterUsage(
             IntermediateNode parent,
             TagHelperDirectiveAttributeParameterIntermediateNode node
-        ) {
+        )
+        {
             // Now rewrite the node to look like:
             //
             // builder.AddEventPreventDefaultAttribute(2, "onclick", true); // If minimized.

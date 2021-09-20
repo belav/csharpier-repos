@@ -21,12 +21,14 @@ namespace Microsoft.EntityFrameworkCore.TestUtilities
             Func<Expression, Expression> rewriteServerQueryExpression,
             bool ignoreEntryCount = false,
             bool canExecuteQueryString = false
-        ) : base(
-            queryFixture,
-            rewriteExpectedQueryExpression,
-            rewriteServerQueryExpression,
-            ignoreEntryCount
-        ) {
+        )
+            : base(
+                queryFixture,
+                rewriteExpectedQueryExpression,
+                rewriteServerQueryExpression,
+                ignoreEntryCount
+            )
+        {
             _canExecuteQueryString = canExecuteQueryString;
         }
 
@@ -43,7 +45,8 @@ namespace Microsoft.EntityFrameworkCore.TestUtilities
         private static (DbConnection, DbTransaction, int, int) ExecuteOurDbCommand(
             int expectedCount,
             IQueryable queryable
-        ) {
+        )
+        {
             using var command = queryable.CreateDbCommand();
             var count = ExecuteReader(command);
 
@@ -57,7 +60,8 @@ namespace Microsoft.EntityFrameworkCore.TestUtilities
         private static void ExecuteTheirDbCommand(
             IQueryable queryable,
             (DbConnection, DbTransaction, int, int) commandDependencies
-        ) {
+        )
+        {
             var (connection, transaction, timeout, expectedCount) = commandDependencies;
 
             var queryString = queryable.ToQueryString();

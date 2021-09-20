@@ -11,11 +11,8 @@ namespace System.Diagnostics
     {
         public BooleanSwitch(string displayName, string? description)
             : base(default(string), default(string)) { }
-        public BooleanSwitch(
-            string displayName,
-            string? description,
-            string defaultSwitchValue
-        ) : base(default(string), default(string)) { }
+        public BooleanSwitch(string displayName, string? description, string defaultSwitchValue)
+            : base(default(string), default(string)) { }
         public bool Enabled
         {
             get { throw null; }
@@ -74,7 +71,8 @@ namespace System.Diagnostics
             object?[]? args,
             object? data1,
             object?[]? data
-        ) {
+        )
+        {
             throw null;
         }
     }
@@ -95,7 +93,8 @@ namespace System.Diagnostics
             object?[]? args,
             object? data1,
             object?[]? data
-        ) {
+        )
+        {
             throw null;
         }
     }
@@ -194,7 +193,8 @@ namespace System.Diagnostics
         )]
         public static System.Diagnostics.SwitchAttribute[] GetAll(
             System.Reflection.Assembly assembly
-        ) {
+        )
+        {
             throw null;
         }
     }
@@ -624,11 +624,8 @@ namespace System.Diagnostics
     {
         public TraceSwitch(string displayName, string? description)
             : base(default(string), default(string)) { }
-        public TraceSwitch(
-            string displayName,
-            string? description,
-            string defaultSwitchValue
-        ) : base(default(string), default(string)) { }
+        public TraceSwitch(string displayName, string? description, string defaultSwitchValue)
+            : base(default(string), default(string)) { }
         public System.Diagnostics.TraceLevel Level
         {
             get { throw null; }

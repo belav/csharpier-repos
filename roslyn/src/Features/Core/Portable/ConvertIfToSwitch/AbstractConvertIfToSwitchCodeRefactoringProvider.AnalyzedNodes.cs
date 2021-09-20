@@ -32,7 +32,8 @@ namespace Microsoft.CodeAnalysis.ConvertIfToSwitch
                 ImmutableArray<AnalyzedSwitchLabel> labels,
                 IOperation body,
                 SyntaxNode syntaxToRemove
-            ) {
+            )
+            {
                 Labels = labels;
                 Body = body;
                 SyntaxToRemove = syntaxToRemove;
@@ -51,7 +52,8 @@ namespace Microsoft.CodeAnalysis.ConvertIfToSwitch
             public AnalyzedSwitchLabel(
                 AnalyzedPattern pattern,
                 ImmutableArray<TExpressionSyntax> guards
-            ) {
+            )
+            {
                 Pattern = pattern;
                 Guards = guards;
             }

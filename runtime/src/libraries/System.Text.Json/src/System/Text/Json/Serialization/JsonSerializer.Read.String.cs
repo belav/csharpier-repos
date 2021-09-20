@@ -114,7 +114,8 @@ namespace System.Text.Json
             string json,
             [DynamicallyAccessedMembers(JsonHelpers.MembersAccessedOnRead)] Type returnType,
             JsonSerializerOptions? options = null
-        ) {
+        )
+        {
             if (json == null)
             {
                 throw new ArgumentNullException(nameof(json));
@@ -161,7 +162,8 @@ namespace System.Text.Json
             ReadOnlySpan<char> json,
             [DynamicallyAccessedMembers(JsonHelpers.MembersAccessedOnRead)] Type returnType,
             JsonSerializerOptions? options = null
-        ) {
+        )
+        {
             // default/null span is treated as empty
 
             if (returnType == null)
@@ -178,7 +180,8 @@ namespace System.Text.Json
             ReadOnlySpan<char> json,
             Type returnType,
             JsonSerializerOptions? options
-        ) {
+        )
+        {
             const long ArrayPoolMaxSizeBeforeUsingNormalAlloc = 1024 * 1024;
 
             if (options == null)

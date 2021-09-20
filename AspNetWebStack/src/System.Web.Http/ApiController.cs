@@ -147,7 +147,8 @@ namespace System.Web.Http
                         contextOnRequest != null
                         && contextOnRequest != oldContext
                         && contextOnRequest != value
-                    ) {
+                    )
+                    {
                         // Prevent unit testers from setting conflicting requests contexts.
                         throw new InvalidOperationException(SRResources.RequestContextConflict);
                     }
@@ -183,7 +184,8 @@ namespace System.Web.Http
         public virtual Task<HttpResponseMessage> ExecuteAsync(
             HttpControllerContext controllerContext,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             if (_initialized)
             {
                 // if user has registered a controller factory which produces the same controller instance, we should throw here
@@ -332,7 +334,8 @@ namespace System.Web.Http
         /// <returns>An <see cref="InvalidModelStateResult"/> with the specified model state.</returns>
         protected internal virtual InvalidModelStateResult BadRequest(
             ModelStateDictionary modelState
-        ) {
+        )
+        {
             return new InvalidModelStateResult(modelState, this);
         }
 
@@ -351,7 +354,8 @@ namespace System.Web.Http
         protected internal virtual NegotiatedContentResult<T> Content<T>(
             HttpStatusCode statusCode,
             T value
-        ) {
+        )
+        {
             return new NegotiatedContentResult<T>(statusCode, value, this);
         }
 
@@ -365,7 +369,8 @@ namespace System.Web.Http
             HttpStatusCode statusCode,
             T value,
             MediaTypeFormatter formatter
-        ) {
+        )
+        {
             return Content(statusCode, value, formatter, (MediaTypeHeaderValue)null);
         }
 
@@ -381,7 +386,8 @@ namespace System.Web.Http
             T value,
             MediaTypeFormatter formatter,
             string mediaType
-        ) {
+        )
+        {
             return Content(statusCode, value, formatter, new MediaTypeHeaderValue(mediaType));
         }
 
@@ -400,7 +406,8 @@ namespace System.Web.Http
             T value,
             MediaTypeFormatter formatter,
             MediaTypeHeaderValue mediaType
-        ) {
+        )
+        {
             return new FormattedContentResult<T>(statusCode, value, formatter, mediaType, this);
         }
 
@@ -433,7 +440,8 @@ namespace System.Web.Http
         protected internal virtual CreatedNegotiatedContentResult<T> Created<T>(
             Uri location,
             T content
-        ) {
+        )
+        {
             return new CreatedNegotiatedContentResult<T>(location, content, this);
         }
 
@@ -449,7 +457,8 @@ namespace System.Web.Http
             string routeName,
             object routeValues,
             T content
-        ) {
+        )
+        {
             return CreatedAtRoute<T>(routeName, new HttpRouteValueDictionary(routeValues), content);
         }
 
@@ -465,7 +474,8 @@ namespace System.Web.Http
             string routeName,
             IDictionary<string, object> routeValues,
             T content
-        ) {
+        )
+        {
             return new CreatedAtRouteNegotiatedContentResult<T>(
                 routeName,
                 routeValues,
@@ -508,7 +518,8 @@ namespace System.Web.Http
         protected internal JsonResult<T> Json<T>(
             T content,
             JsonSerializerSettings serializerSettings
-        ) {
+        )
+        {
             return Json<T>(
                 content,
                 serializerSettings,
@@ -526,7 +537,8 @@ namespace System.Web.Http
             T content,
             JsonSerializerSettings serializerSettings,
             Encoding encoding
-        ) {
+        )
+        {
             return new JsonResult<T>(content, serializerSettings, encoding, this);
         }
 
@@ -583,7 +595,8 @@ namespace System.Web.Http
         protected internal RedirectToRouteResult RedirectToRoute(
             string routeName,
             object routeValues
-        ) {
+        )
+        {
             return RedirectToRoute(routeName, new HttpRouteValueDictionary(routeValues));
         }
 
@@ -594,7 +607,8 @@ namespace System.Web.Http
         protected internal virtual RedirectToRouteResult RedirectToRoute(
             string routeName,
             IDictionary<string, object> routeValues
-        ) {
+        )
+        {
             return new RedirectToRouteResult(routeName, routeValues, this);
         }
 
@@ -603,7 +617,8 @@ namespace System.Web.Http
         /// <returns>A <see cref="ResponseMessageResult"/> for the specified response.</returns>
         protected internal virtual ResponseMessageResult ResponseMessage(
             HttpResponseMessage response
-        ) {
+        )
+        {
             return new ResponseMessageResult(response);
         }
 
@@ -622,7 +637,8 @@ namespace System.Web.Http
         /// <returns>An <see cref="UnauthorizedResult"/> with the specified values.</returns>
         protected internal UnauthorizedResult Unauthorized(
             params AuthenticationHeaderValue[] challenges
-        ) {
+        )
+        {
             return Unauthorized((IEnumerable<AuthenticationHeaderValue>)challenges);
         }
 
@@ -633,7 +649,8 @@ namespace System.Web.Http
         /// <returns>An <see cref="UnauthorizedResult"/> with the specified values.</returns>
         protected internal virtual UnauthorizedResult Unauthorized(
             IEnumerable<AuthenticationHeaderValue> challenges
-        ) {
+        )
+        {
             return new UnauthorizedResult(challenges, this);
         }
 

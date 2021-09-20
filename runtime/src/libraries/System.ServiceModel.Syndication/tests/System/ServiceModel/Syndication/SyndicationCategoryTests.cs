@@ -138,7 +138,8 @@ namespace System.ServiceModel.Syndication.Tests
             string ns,
             string value,
             string version
-        ) {
+        )
+        {
             var category = new SyndicationCategorySubclass();
             Assert.False(category.TryParseAttributeEntryPoint(name, ns, value, version));
         }

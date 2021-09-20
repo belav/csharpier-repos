@@ -30,7 +30,8 @@ namespace Microsoft.AspNetCore.Mvc.ViewFeatures
             IOptions<MvcViewOptions> optionsAccessor,
             IModelMetadataProvider metadataProvider,
             ClientValidatorCache clientValidatorCache
-        ) {
+        )
+        {
             if (optionsAccessor == null)
             {
                 throw new ArgumentNullException(nameof(optionsAccessor));
@@ -60,7 +61,8 @@ namespace Microsoft.AspNetCore.Mvc.ViewFeatures
             ViewContext viewContext,
             ModelExplorer modelExplorer,
             IDictionary<string, string> attributes
-        ) {
+        )
+        {
             if (viewContext == null)
             {
                 throw new ArgumentNullException(nameof(viewContext));

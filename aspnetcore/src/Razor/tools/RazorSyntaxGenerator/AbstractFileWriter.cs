@@ -197,7 +197,8 @@ namespace RazorSyntaxGenerator
                 return true;
             if (
                 derivedTypeName != null && _parentMap.TryGetValue(derivedTypeName, out var baseType)
-            ) {
+            )
+            {
                 return IsDerivedType(typeName, baseType);
             }
             return false;

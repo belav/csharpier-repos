@@ -614,7 +614,8 @@ namespace System.Security.Cryptography.X509Certificates
             byte[] rawData,
             string? password,
             X509KeyStorageFlags keyStorageFlags
-        ) {
+        )
+        {
             base.Import(rawData, password, keyStorageFlags);
         }
 
@@ -623,7 +624,8 @@ namespace System.Security.Cryptography.X509Certificates
             byte[] rawData,
             SecureString? password,
             X509KeyStorageFlags keyStorageFlags
-        ) {
+        )
+        {
             base.Import(rawData, password, keyStorageFlags);
         }
 
@@ -636,7 +638,8 @@ namespace System.Security.Cryptography.X509Certificates
             string fileName,
             string? password,
             X509KeyStorageFlags keyStorageFlags
-        ) {
+        )
+        {
             base.Import(fileName, password, keyStorageFlags);
         }
 
@@ -645,7 +648,8 @@ namespace System.Security.Cryptography.X509Certificates
             string fileName,
             SecureString? password,
             X509KeyStorageFlags keyStorageFlags
-        ) {
+        )
+        {
             base.Import(fileName, password, keyStorageFlags);
         }
 
@@ -745,7 +749,8 @@ namespace System.Security.Cryptography.X509Certificates
                         publicKey.ExportParameters(false),
                         privateKey.ExportParameters(false)
                     )
-                ) {
+                )
+                {
                     throw new ArgumentException(
                         SR.Cryptography_PrivateKey_DoesNotMatch,
                         nameof(privateKey)
@@ -815,7 +820,8 @@ namespace System.Security.Cryptography.X509Certificates
         public static X509Certificate2 CreateFromPemFile(
             string certPemFilePath,
             string? keyPemFilePath = default
-        ) {
+        )
+        {
             if (certPemFilePath is null)
                 throw new ArgumentNullException(nameof(certPemFilePath));
 
@@ -886,7 +892,8 @@ namespace System.Security.Cryptography.X509Certificates
             string certPemFilePath,
             ReadOnlySpan<char> password,
             string? keyPemFilePath = default
-        ) {
+        )
+        {
             if (certPemFilePath is null)
                 throw new ArgumentNullException(nameof(certPemFilePath));
 
@@ -940,7 +947,8 @@ namespace System.Security.Cryptography.X509Certificates
         public static X509Certificate2 CreateFromPem(
             ReadOnlySpan<char> certPem,
             ReadOnlySpan<char> keyPem
-        ) {
+        )
+        {
             using (X509Certificate2 certificate = CreateFromPem(certPem))
             {
                 string keyAlgorithm = certificate.GetKeyAlgorithm();
@@ -1030,7 +1038,8 @@ namespace System.Security.Cryptography.X509Certificates
             ReadOnlySpan<char> certPem,
             ReadOnlySpan<char> keyPem,
             ReadOnlySpan<char> password
-        ) {
+        )
+        {
             using (X509Certificate2 certificate = CreateFromPem(certPem))
             {
                 string keyAlgorithm = certificate.GetKeyAlgorithm();
@@ -1127,7 +1136,8 @@ namespace System.Security.Cryptography.X509Certificates
                             out int bytesWritten
                         )
                         || bytesWritten != fields.DecodedDataLength
-                    ) {
+                    )
+                    {
                         Debug.Fail(
                             "The contents should have already been validated by the PEM reader."
                         );

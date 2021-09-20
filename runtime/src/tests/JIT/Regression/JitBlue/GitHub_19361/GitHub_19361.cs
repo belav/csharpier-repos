@@ -44,7 +44,8 @@ namespace Repro
 
         private List<(DateTime Date, CompositeSource Key, decimal Attribution)> GetNumbers(
             List<CompositeSource> sources
-        ) {
+        )
+        {
             var items = new List<(DateTime Date, CompositeSource Key, decimal Attribution)>();
 
             foreach (var _ in Enumerable.Range(0, rng.Next(50, 100)))

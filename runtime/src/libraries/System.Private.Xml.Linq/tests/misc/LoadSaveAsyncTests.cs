@@ -146,7 +146,8 @@ namespace CoreXml.Test.XLinq
             bool document,
             LoadOptions loadOptions,
             SaveOptions saveOptions
-        ) {
+        )
+        {
             // Create reader and writer settings
             var readerSettings = new XmlReaderSettings();
             var writerSettings = new XmlWriterSettings();
@@ -224,7 +225,8 @@ namespace CoreXml.Test.XLinq
             bool document,
             LoadOptions loadOptions,
             SaveOptions saveOptions
-        ) {
+        )
+        {
             // Roundtrip XML using synchronous and StreamReader/Writer
             MemoryStream syncOutput = new MemoryStream();
             using (
@@ -285,7 +287,8 @@ namespace CoreXml.Test.XLinq
             bool document,
             LoadOptions loadOptions,
             SaveOptions saveOptions
-        ) {
+        )
+        {
             // Roundtrip XML using synchronous and Stream
             MemoryStream syncOutput = new MemoryStream();
             using (Stream syncStream = FilePathUtil.getStream(GetTestFileName()))
@@ -360,7 +363,8 @@ namespace CoreXml.Test.XLinq
         public async Task SaveAsync_CallsAsyncOnly_SaveSync_CallsSyncOnly(
             bool isAsync,
             SaveOptions saveOptions
-        ) {
+        )
+        {
             XDocument document = XDocument.Parse("<root>Test document async save</root>");
             var element = new XElement("Test");
             using (ForceSyncAsyncStream stream = new ForceSyncAsyncStream(isAsync))
@@ -384,7 +388,8 @@ namespace CoreXml.Test.XLinq
             bool document,
             LoadOptions loadOptions,
             SaveOptions saveOptions
-        ) {
+        )
+        {
             // Create reader and writer settings
             var readerSettings = new XmlReaderSettings();
             var writerSettings = new XmlWriterSettings();
@@ -468,7 +473,8 @@ namespace CoreXml.Test.XLinq
             bool document,
             LoadOptions loadOptions,
             SaveOptions saveOptions
-        ) {
+        )
+        {
             // Roundtrip XML using synchronous and StreamReader/Writer
             CheckSyncAsyncStream syncInput = new CheckSyncAsyncStream(
                 async: false,
@@ -537,7 +543,8 @@ namespace CoreXml.Test.XLinq
             bool document,
             LoadOptions loadOptions,
             SaveOptions saveOptions
-        ) {
+        )
+        {
             // Roundtrip XML using synchronous and Stream
             MemoryStream syncOutputMemory = new MemoryStream();
             CheckSyncAsyncStream syncOutput = new CheckSyncAsyncStream(
@@ -549,7 +556,8 @@ namespace CoreXml.Test.XLinq
                     async: false,
                     FilePathUtil.getStream(GetTestFileName())
                 )
-            ) {
+            )
+            {
                 if (document)
                 {
                     XDocument syncDoc = XDocument.Load(syncStream, loadOptions);
@@ -573,7 +581,8 @@ namespace CoreXml.Test.XLinq
                     async: true,
                     FilePathUtil.getStream(GetTestFileName())
                 )
-            ) {
+            )
+            {
                 if (document)
                 {
                     XDocument asyncDoc = await XDocument.LoadAsync(
@@ -640,7 +649,8 @@ namespace CoreXml.Test.XLinq
             int offset,
             int count,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             Assert.True(
                 _isAsync,
                 "Stream is not in asynchronous mode when asynchronous Write is called"
@@ -651,7 +661,8 @@ namespace CoreXml.Test.XLinq
         public override ValueTask WriteAsync(
             ReadOnlyMemory<byte> source,
             CancellationToken cancellationToken = default
-        ) {
+        )
+        {
             Assert.True(
                 _isAsync,
                 "Stream is not in asynchronous mode when asynchronous Write is called"
@@ -716,7 +727,8 @@ namespace CoreXml.Test.XLinq
             int offset,
             int count,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             try
             {
                 Assert.True(
@@ -748,7 +760,8 @@ namespace CoreXml.Test.XLinq
             int offset,
             int count,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             try
             {
                 Assert.True(

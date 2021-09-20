@@ -152,7 +152,8 @@ namespace System.Linq.Parallel.Tests
         public static void OrderBy_Reversed_Longrunning(
             Labeled<ParallelQuery<int>> labeled,
             int count
-        ) {
+        )
+        {
             OrderBy_Reversed(labeled, count);
         }
 
@@ -193,7 +194,8 @@ namespace System.Linq.Parallel.Tests
         public static void OrderByDescending_Longrunning(
             Labeled<ParallelQuery<int>> labeled,
             int count
-        ) {
+        )
+        {
             OrderByDescending(labeled, count);
         }
 
@@ -208,7 +210,8 @@ namespace System.Linq.Parallel.Tests
         public static void OrderByDescending_Reversed(
             Labeled<ParallelQuery<int>> labeled,
             int count
-        ) {
+        )
+        {
             int prev = 0;
             int seen = 0;
             foreach (int i in labeled.Item.OrderByDescending(x => -x))
@@ -236,7 +239,8 @@ namespace System.Linq.Parallel.Tests
         public static void OrderByDescending_Reversed_Longrunning(
             Labeled<ParallelQuery<int>> labeled,
             int count
-        ) {
+        )
+        {
             OrderByDescending_Reversed(labeled, count);
         }
 
@@ -280,7 +284,8 @@ namespace System.Linq.Parallel.Tests
         public static void OrderBy_NotPipelined_Longrunning(
             Labeled<ParallelQuery<int>> labeled,
             int count
-        ) {
+        )
+        {
             OrderBy_NotPipelined(labeled, count);
         }
 
@@ -295,7 +300,8 @@ namespace System.Linq.Parallel.Tests
         public static void OrderBy_Reversed_NotPipelined(
             Labeled<ParallelQuery<int>> labeled,
             int count
-        ) {
+        )
+        {
             int prev = count - 1;
             int seen = 0;
             Assert.All(
@@ -326,7 +332,8 @@ namespace System.Linq.Parallel.Tests
         public static void OrderBy_Reversed_NotPipelined_Longrunning(
             Labeled<ParallelQuery<int>> labeled,
             int count
-        ) {
+        )
+        {
             OrderBy_Reversed_NotPipelined(labeled, count);
         }
 
@@ -341,7 +348,8 @@ namespace System.Linq.Parallel.Tests
         public static void OrderByDescending_NotPipelined(
             Labeled<ParallelQuery<int>> labeled,
             int count
-        ) {
+        )
+        {
             int prev = count - 1;
             int seen = 0;
             Assert.All(
@@ -372,7 +380,8 @@ namespace System.Linq.Parallel.Tests
         public static void OrderByDescending_NotPipelined_Longrunning(
             Labeled<ParallelQuery<int>> labeled,
             int count
-        ) {
+        )
+        {
             OrderByDescending_NotPipelined(labeled, count);
         }
 
@@ -387,7 +396,8 @@ namespace System.Linq.Parallel.Tests
         public static void OrderByDescending_Reversed_NotPipelined(
             Labeled<ParallelQuery<int>> labeled,
             int count
-        ) {
+        )
+        {
             int prev = 0;
             int seen = 0;
             Assert.All(
@@ -418,7 +428,8 @@ namespace System.Linq.Parallel.Tests
         public static void OrderByDescending_Reversed_NotPipelined_Longrunning(
             Labeled<ParallelQuery<int>> labeled,
             int count
-        ) {
+        )
+        {
             OrderByDescending_Reversed_NotPipelined(labeled, count);
         }
 
@@ -459,7 +470,8 @@ namespace System.Linq.Parallel.Tests
         public static void OrderBy_CustomComparator_Longrunning(
             Labeled<ParallelQuery<int>> labeled,
             int count
-        ) {
+        )
+        {
             OrderBy_CustomComparer(labeled, count);
         }
 
@@ -474,7 +486,8 @@ namespace System.Linq.Parallel.Tests
         public static void OrderByDescending_CustomComparer(
             Labeled<ParallelQuery<int>> labeled,
             int count
-        ) {
+        )
+        {
             int prev = 0;
             int seen = 0;
             foreach (int i in labeled.Item.OrderByDescending(x => x, ReverseComparer.Instance))
@@ -502,7 +515,8 @@ namespace System.Linq.Parallel.Tests
         public static void OrderByDescending_CustomComparator_Longrunning(
             Labeled<ParallelQuery<int>> labeled,
             int count
-        ) {
+        )
+        {
             OrderByDescending_CustomComparer(labeled, count);
         }
 
@@ -517,7 +531,8 @@ namespace System.Linq.Parallel.Tests
         public static void OrderBy_NotPipelined_CustomComparer(
             Labeled<ParallelQuery<int>> labeled,
             int count
-        ) {
+        )
+        {
             int prev = count - 1;
             int seen = 0;
             Assert.All(
@@ -548,7 +563,8 @@ namespace System.Linq.Parallel.Tests
         public static void OrderBy_NotPipelined_CustomComparator_Longrunning(
             Labeled<ParallelQuery<int>> labeled,
             int count
-        ) {
+        )
+        {
             OrderBy_NotPipelined_CustomComparer(labeled, count);
         }
 
@@ -563,7 +579,8 @@ namespace System.Linq.Parallel.Tests
         public static void OrderByDescending_NotPipelined_CustomComparer(
             Labeled<ParallelQuery<int>> labeled,
             int count
-        ) {
+        )
+        {
             int prev = 0;
             int seen = 0;
             Assert.All(
@@ -594,7 +611,8 @@ namespace System.Linq.Parallel.Tests
         public static void OrderByDescending_NotPipelined_CustomComparator_Longrunning(
             Labeled<ParallelQuery<int>> labeled,
             int count
-        ) {
+        )
+        {
             OrderByDescending_NotPipelined_CustomComparer(labeled, count);
         }
 
@@ -629,7 +647,8 @@ namespace System.Linq.Parallel.Tests
         public static void OrderByDescending_ExtremeComparer(
             Labeled<ParallelQuery<int>> labeled,
             int count
-        ) {
+        )
+        {
             int prev = count - 1;
             foreach (int i in labeled.Item.OrderByDescending(x => x, new ExtremeComparer<int>()))
             {
@@ -649,7 +668,8 @@ namespace System.Linq.Parallel.Tests
         public static void OrderBy_NotPipelined_ExtremeComparer(
             Labeled<ParallelQuery<int>> labeled,
             int count
-        ) {
+        )
+        {
             int prev = 0;
             Assert.All(
                 labeled.Item.OrderBy(x => x, new ExtremeComparer<int>()).ToList(),
@@ -672,7 +692,8 @@ namespace System.Linq.Parallel.Tests
         public static void OrderByDescending_NotPipelined_ExtremeComparer(
             Labeled<ParallelQuery<int>> labeled,
             int count
-        ) {
+        )
+        {
             int prev = count - 1;
             Assert.All(
                 labeled.Item.OrderByDescending(x => x, new ExtremeComparer<int>()).ToList(),
@@ -717,7 +738,8 @@ namespace System.Linq.Parallel.Tests
         public static void OrderBy_NotComparable_Comparator(
             Labeled<ParallelQuery<int>> labeled,
             int count
-        ) {
+        )
+        {
             int prev = 0;
             var comparer = Comparer<NotComparable>.Create(
                 (x, y) => ReverseComparer.Instance.Compare(x.Value, y.Value)
@@ -740,7 +762,8 @@ namespace System.Linq.Parallel.Tests
         public static void OrderBy_NotPipelined_NotComparable_Comparator(
             Labeled<ParallelQuery<int>> labeled,
             int count
-        ) {
+        )
+        {
             int prev = 0;
             var comparer = Comparer<NotComparable>.Create(
                 (x, y) => ReverseComparer.Instance.Compare(x.Value, y.Value)
@@ -766,7 +789,8 @@ namespace System.Linq.Parallel.Tests
         public static void OrderByDescending_NotComparable(
             Labeled<ParallelQuery<int>> labeled,
             int count
-        ) {
+        )
+        {
             _ = count;
             ParallelQuery<int> query = labeled.Item.OrderByDescending(x => new NotComparable(x));
             AssertThrows.Wrapped<ArgumentException>(
@@ -790,7 +814,8 @@ namespace System.Linq.Parallel.Tests
         public static void OrderByDescending_NotComparable_Comparator(
             Labeled<ParallelQuery<int>> labeled,
             int count
-        ) {
+        )
+        {
             int prev = count - 1;
             var comparer = Comparer<NotComparable>.Create(
                 (x, y) => ReverseComparer.Instance.Compare(x.Value, y.Value)
@@ -813,7 +838,8 @@ namespace System.Linq.Parallel.Tests
         public static void OrderByDescending_NotPipelined_NotComparable_Comparator(
             Labeled<ParallelQuery<int>> labeled,
             int count
-        ) {
+        )
+        {
             int prev = count - 1;
             var comparer = Comparer<NotComparable>.Create(
                 (x, y) => ReverseComparer.Instance.Compare(x.Value, y.Value)
@@ -891,7 +917,8 @@ namespace System.Linq.Parallel.Tests
             Labeled<ParallelQuery<int>> labeled,
             int count,
             int degree
-        ) {
+        )
+        {
             _ = count;
             ParallelQuery<int> query = labeled.Item.WithDegreeOfParallelism(degree)
                 .OrderBy<int, int>(
@@ -924,7 +951,8 @@ namespace System.Linq.Parallel.Tests
             Labeled<ParallelQuery<int>> labeled,
             int count,
             int degree
-        ) {
+        )
+        {
             int countdown = Math.Min(count / 2, degree) + 1;
 
             ParallelQuery<int> query = labeled.Item.WithDegreeOfParallelism(degree)
@@ -1048,7 +1076,8 @@ namespace System.Linq.Parallel.Tests
         public static void ThenBy_Reversed_Longrunning(
             Labeled<ParallelQuery<int>> labeled,
             int count
-        ) {
+        )
+        {
             ThenBy_Reversed(labeled, count);
         }
 
@@ -1072,7 +1101,8 @@ namespace System.Linq.Parallel.Tests
             foreach (
                 int i in labeled.Item.OrderByDescending(x => x % GroupFactor)
                     .ThenByDescending(x => -x)
-            ) {
+            )
+            {
                 Assert.InRange(i % GroupFactor, 0, prevPrimary);
                 if (i % GroupFactor != prevPrimary)
                 {
@@ -1102,7 +1132,8 @@ namespace System.Linq.Parallel.Tests
         public static void ThenByDescending_Longrunning(
             Labeled<ParallelQuery<int>> labeled,
             int count
-        ) {
+        )
+        {
             ThenByDescending(labeled, count);
         }
 
@@ -1126,7 +1157,8 @@ namespace System.Linq.Parallel.Tests
             foreach (
                 int i in labeled.Item.OrderByDescending(x => -x % GroupFactor)
                     .ThenByDescending(x => x)
-            ) {
+            )
+            {
                 Assert.InRange(i % GroupFactor, prevPrimary, count - 1);
                 if (i % GroupFactor != prevPrimary)
                 {
@@ -1156,7 +1188,8 @@ namespace System.Linq.Parallel.Tests
         public static void ThenByDescending_Reversed_Longrunning(
             Labeled<ParallelQuery<int>> labeled,
             int count
-        ) {
+        )
+        {
             ThenByDescending_Reversed(labeled, count);
         }
 
@@ -1211,7 +1244,8 @@ namespace System.Linq.Parallel.Tests
         public static void ThenBy_NotPipelined_Longrunning(
             Labeled<ParallelQuery<int>> labeled,
             int count
-        ) {
+        )
+        {
             ThenBy_NotPipelined(labeled, count);
         }
 
@@ -1230,7 +1264,8 @@ namespace System.Linq.Parallel.Tests
         public static void ThenBy_Reversed_NotPipelined(
             Labeled<ParallelQuery<int>> labeled,
             int count
-        ) {
+        )
+        {
             int prevPrimary = GroupFactor - 1;
             int prevSecondary = 0;
             int seen = 0;
@@ -1268,7 +1303,8 @@ namespace System.Linq.Parallel.Tests
         public static void ThenBy_Reversed_NotPipelined_Longrunning(
             Labeled<ParallelQuery<int>> labeled,
             int count
-        ) {
+        )
+        {
             ThenBy_Reversed_NotPipelined(labeled, count);
         }
 
@@ -1287,7 +1323,8 @@ namespace System.Linq.Parallel.Tests
         public static void ThenByDescending_NotPipelined(
             Labeled<ParallelQuery<int>> labeled,
             int count
-        ) {
+        )
+        {
             int prevPrimary = GroupFactor - 1;
             int prevSecondary = 0;
             int seen = 0;
@@ -1327,7 +1364,8 @@ namespace System.Linq.Parallel.Tests
         public static void ThenByDescending_NotPipelined_Longrunning(
             Labeled<ParallelQuery<int>> labeled,
             int count
-        ) {
+        )
+        {
             ThenByDescending_NotPipelined(labeled, count);
         }
 
@@ -1346,7 +1384,8 @@ namespace System.Linq.Parallel.Tests
         public static void ThenByDescending_Reversed_NotPipelined(
             Labeled<ParallelQuery<int>> labeled,
             int count
-        ) {
+        )
+        {
             int prevPrimary = 0;
             int prevSecondary = count - 1;
             int seen = 0;
@@ -1386,7 +1425,8 @@ namespace System.Linq.Parallel.Tests
         public static void ThenByDescending_Reversed_NotPipelined_Longrunning(
             Labeled<ParallelQuery<int>> labeled,
             int count
-        ) {
+        )
+        {
             ThenByDescending_Reversed_NotPipelined(labeled, count);
         }
 
@@ -1410,7 +1450,8 @@ namespace System.Linq.Parallel.Tests
             foreach (
                 int i in labeled.Item.OrderBy(x => x % GroupFactor)
                     .ThenBy(x => x, ReverseComparer.Instance)
-            ) {
+            )
+            {
                 Assert.InRange(i % GroupFactor, prevPrimary, count - 1);
                 if (i % GroupFactor != prevPrimary)
                 {
@@ -1440,7 +1481,8 @@ namespace System.Linq.Parallel.Tests
         public static void ThenBy_CustomComparator_Longrunning(
             Labeled<ParallelQuery<int>> labeled,
             int count
-        ) {
+        )
+        {
             ThenBy_CustomComparer(labeled, count);
         }
 
@@ -1459,14 +1501,16 @@ namespace System.Linq.Parallel.Tests
         public static void ThenByDescending_CustomComparer(
             Labeled<ParallelQuery<int>> labeled,
             int count
-        ) {
+        )
+        {
             int prevPrimary = GroupFactor - 1;
             int prevSecondary = 0;
             int seen = 0;
             foreach (
                 int i in labeled.Item.OrderByDescending(x => x % GroupFactor)
                     .ThenByDescending(x => x, ReverseComparer.Instance)
-            ) {
+            )
+            {
                 Assert.InRange(i % GroupFactor, 0, prevPrimary);
                 if (i % GroupFactor != prevPrimary)
                 {
@@ -1496,7 +1540,8 @@ namespace System.Linq.Parallel.Tests
         public static void ThenByDescending_CustomComparator_Longrunning(
             Labeled<ParallelQuery<int>> labeled,
             int count
-        ) {
+        )
+        {
             ThenByDescending_CustomComparer(labeled, count);
         }
 
@@ -1515,7 +1560,8 @@ namespace System.Linq.Parallel.Tests
         public static void ThenBy_NotPipelined_CustomComparer(
             Labeled<ParallelQuery<int>> labeled,
             int count
-        ) {
+        )
+        {
             int prevPrimary = 0;
             int prevSecondary = count - 1;
             int seen = 0;
@@ -1555,7 +1601,8 @@ namespace System.Linq.Parallel.Tests
         public static void ThenBy_NotPipelined_CustomComparator_Longrunning(
             Labeled<ParallelQuery<int>> labeled,
             int count
-        ) {
+        )
+        {
             ThenBy_NotPipelined_CustomComparer(labeled, count);
         }
 
@@ -1574,7 +1621,8 @@ namespace System.Linq.Parallel.Tests
         public static void ThenByDescending_NotPipelined_CustomComparer(
             Labeled<ParallelQuery<int>> labeled,
             int count
-        ) {
+        )
+        {
             int prevPrimary = GroupFactor - 1;
             int prevSecondary = 0;
             int seen = 0;
@@ -1614,7 +1662,8 @@ namespace System.Linq.Parallel.Tests
         public static void ThenByDescending_NotPipelined_CustomComparator_Longrunning(
             Labeled<ParallelQuery<int>> labeled,
             int count
-        ) {
+        )
+        {
             ThenByDescending_NotPipelined_CustomComparer(labeled, count);
         }
 
@@ -1632,7 +1681,8 @@ namespace System.Linq.Parallel.Tests
             int prev = 0;
             foreach (
                 int i in labeled.Item.OrderBy(x => 0).ThenBy(x => x, new ExtremeComparer<int>())
-            ) {
+            )
+            {
                 Assert.InRange(i, prev, count - 1);
                 prev = i;
             }
@@ -1650,12 +1700,14 @@ namespace System.Linq.Parallel.Tests
         public static void ThenByDescending_ExtremeComparer(
             Labeled<ParallelQuery<int>> labeled,
             int count
-        ) {
+        )
+        {
             int prev = count - 1;
             foreach (
                 int i in labeled.Item.OrderBy(x => 0)
                     .ThenByDescending(x => x, new ExtremeComparer<int>())
-            ) {
+            )
+            {
                 Assert.InRange(i, 0, prev);
                 prev = i;
             }
@@ -1671,7 +1723,8 @@ namespace System.Linq.Parallel.Tests
         public static void ThenBy_NotPipelined_ExtremeComparer(
             Labeled<ParallelQuery<int>> labeled,
             int count
-        ) {
+        )
+        {
             int prev = 0;
             Assert.All(
                 labeled.Item.OrderBy(x => 0).ThenBy(x => x, new ExtremeComparer<int>()).ToList(),
@@ -1694,7 +1747,8 @@ namespace System.Linq.Parallel.Tests
         public static void ThenByDescending_NotPipelined_ExtremeComparer(
             Labeled<ParallelQuery<int>> labeled,
             int count
-        ) {
+        )
+        {
             int prev = count - 1;
             Assert.All(
                 labeled.Item.OrderBy(x => 0)
@@ -1734,7 +1788,8 @@ namespace System.Linq.Parallel.Tests
                     .OrderBy(o => o.Key)
                     .ThenBy(o => o.Value.Key)
                     .ThenBy(o => o.Value.Value)
-            ) {
+            )
+            {
                 AssertLessThanOrEqual(prev, pOuter, count - 1);
                 prev = pOuter;
                 seen++;
@@ -1771,7 +1826,8 @@ namespace System.Linq.Parallel.Tests
         public static void ThenByDescending_ThenByDescending(
             Labeled<ParallelQuery<int>> labeled,
             int count
-        ) {
+        )
+        {
             var prev = KeyValuePair.Create(
                 GroupFactor - 1,
                 KeyValuePair.Create(KeyFactor - 1, count - 1)
@@ -1788,7 +1844,8 @@ namespace System.Linq.Parallel.Tests
                     .OrderByDescending(o => o.Key)
                     .ThenByDescending(o => o.Value.Key)
                     .ThenByDescending(o => o.Value.Value)
-            ) {
+            )
+            {
                 AssertGreaterOrEqual(prev, pOuter);
                 prev = pOuter;
                 seen++;
@@ -1812,7 +1869,8 @@ namespace System.Linq.Parallel.Tests
         public static void ThenByDescending_ThenByDescending_Longrunning(
             Labeled<ParallelQuery<int>> labeled,
             int count
-        ) {
+        )
+        {
             ThenByDescending_ThenByDescending(labeled, count);
         }
 
@@ -1827,7 +1885,8 @@ namespace System.Linq.Parallel.Tests
         public static void ThenBy_ThenBy_NotPipelined(
             Labeled<ParallelQuery<int>> labeled,
             int count
-        ) {
+        )
+        {
             var prev = KeyValuePair.Create(0, KeyValuePair.Create(0, 0));
             int seen = 0;
             Assert.All(
@@ -1868,7 +1927,8 @@ namespace System.Linq.Parallel.Tests
         public static void ThenBy_ThenBy_NotPipelined_Longrunning(
             Labeled<ParallelQuery<int>> labeled,
             int count
-        ) {
+        )
+        {
             ThenBy_ThenBy_NotPipelined(labeled, count);
         }
 
@@ -1883,7 +1943,8 @@ namespace System.Linq.Parallel.Tests
         public static void ThenByDescending_ThenByDescending_NotPipelined(
             Labeled<ParallelQuery<int>> labeled,
             int count
-        ) {
+        )
+        {
             var prev = KeyValuePair.Create(
                 GroupFactor - 1,
                 KeyValuePair.Create(KeyFactor - 1, count - 1)
@@ -1927,7 +1988,8 @@ namespace System.Linq.Parallel.Tests
         public static void ThenByDescending_ThenByDescending_NotPipelined_Longrunning(
             Labeled<ParallelQuery<int>> labeled,
             int count
-        ) {
+        )
+        {
             ThenByDescending_ThenByDescending_NotPipelined(labeled, count);
         }
 
@@ -1965,14 +2027,16 @@ namespace System.Linq.Parallel.Tests
         public static void ThenBy_NotComparable_Comparator(
             Labeled<ParallelQuery<int>> labeled,
             int count
-        ) {
+        )
+        {
             int prev = 0;
             var comparer = Comparer<NotComparable>.Create(
                 (x, y) => ReverseComparer.Instance.Compare(x.Value, y.Value)
             );
             foreach (
                 int i in labeled.Item.OrderBy(x => 0).ThenBy(x => new NotComparable(-x), comparer)
-            ) {
+            )
+            {
                 Assert.InRange(i, prev, count - 1);
                 prev = i;
             }
@@ -1989,7 +2053,8 @@ namespace System.Linq.Parallel.Tests
         public static void ThenBy_NotPipelined_NotComparable_Comparator(
             Labeled<ParallelQuery<int>> labeled,
             int count
-        ) {
+        )
+        {
             int prev = 0;
             var comparer = Comparer<NotComparable>.Create(
                 (x, y) => ReverseComparer.Instance.Compare(x.Value, y.Value)
@@ -2015,7 +2080,8 @@ namespace System.Linq.Parallel.Tests
         public static void ThenByDescending_NotComparable(
             Labeled<ParallelQuery<int>> labeled,
             int count
-        ) {
+        )
+        {
             _ = count;
             ParallelQuery<int> query = labeled.Item.OrderBy(x => 0)
                 .ThenByDescending(x => new NotComparable(x));
@@ -2040,7 +2106,8 @@ namespace System.Linq.Parallel.Tests
         public static void ThenByDescending_NotComparable_Comparator(
             Labeled<ParallelQuery<int>> labeled,
             int count
-        ) {
+        )
+        {
             int prev = count - 1;
             var comparer = Comparer<NotComparable>.Create(
                 (x, y) => ReverseComparer.Instance.Compare(x.Value, y.Value)
@@ -2048,7 +2115,8 @@ namespace System.Linq.Parallel.Tests
             foreach (
                 int i in labeled.Item.OrderBy(x => 0)
                     .ThenByDescending(x => new NotComparable(-x), comparer)
-            ) {
+            )
+            {
                 Assert.InRange(i, 0, prev);
                 prev = i;
             }
@@ -2065,7 +2133,8 @@ namespace System.Linq.Parallel.Tests
         public static void ThenByDescending_NotPipelined_NotComparable_Comparator(
             Labeled<ParallelQuery<int>> labeled,
             int count
-        ) {
+        )
+        {
             int prev = count - 1;
             var comparer = Comparer<NotComparable>.Create(
                 (x, y) => ReverseComparer.Instance.Compare(x.Value, y.Value)
@@ -2162,7 +2231,8 @@ namespace System.Linq.Parallel.Tests
                     )
                     .OrderBy(p => p.Value.Value)
                     .ThenBy(p => p.Value.Key)
-            ) {
+            )
+            {
                 Assert.InRange(pOuter.Value.Value, prev.Value.Value, count / GroupFactor);
                 if (pOuter.Value.Value == prev.Value.Value)
                 {
@@ -2242,7 +2312,8 @@ namespace System.Linq.Parallel.Tests
         public static void StableSort_NotPipelined_Longrunning(
             Labeled<ParallelQuery<int>> labeled,
             int count
-        ) {
+        )
+        {
             StableSort_NotPipelined(labeled, count);
         }
 
@@ -2267,7 +2338,8 @@ namespace System.Linq.Parallel.Tests
                     )
                     .OrderByDescending(p => p.Value.Value)
                     .ThenByDescending(p => p.Value.Key)
-            ) {
+            )
+            {
                 Assert.InRange(pOuter.Value.Value, 0, prev.Value.Value);
                 if (pOuter.Value.Value == prev.Value.Value)
                 {
@@ -2295,7 +2367,8 @@ namespace System.Linq.Parallel.Tests
         public static void StableSort_Descending_Longrunning(
             Labeled<ParallelQuery<int>> labeled,
             int count
-        ) {
+        )
+        {
             StableSort_Descending(labeled, count);
         }
 
@@ -2309,7 +2382,8 @@ namespace System.Linq.Parallel.Tests
         public static void StableSort_Descending_NotPipelined(
             Labeled<ParallelQuery<int>> labeled,
             int count
-        ) {
+        )
+        {
             var prev = KeyValuePair.Create(count, KeyValuePair.Create(count, count / GroupFactor));
             int seen = 0;
             Assert.All(
@@ -2352,14 +2426,16 @@ namespace System.Linq.Parallel.Tests
         public static void StableSort_Descending_NotPipelined_Longrunning(
             Labeled<ParallelQuery<int>> labeled,
             int count
-        ) {
+        )
+        {
             StableSort_Descending_NotPipelined(labeled, count);
         }
 
         private static void AssertGreaterOrEqual(
             KeyValuePair<int, KeyValuePair<int, int>> greater,
             KeyValuePair<int, KeyValuePair<int, int>> actual
-        ) {
+        )
+        {
             Assert.InRange(actual.Key, 0, greater.Key);
             if (greater.Key == actual.Key)
             {
@@ -2375,7 +2451,8 @@ namespace System.Linq.Parallel.Tests
             KeyValuePair<int, KeyValuePair<int, int>> lesser,
             KeyValuePair<int, KeyValuePair<int, int>> actual,
             int limit
-        ) {
+        )
+        {
             Assert.InRange(actual.Key, lesser.Key, GroupFactor - 1);
             if (lesser.Key == actual.Key)
             {

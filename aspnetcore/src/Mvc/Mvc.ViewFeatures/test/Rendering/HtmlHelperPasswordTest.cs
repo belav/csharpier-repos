@@ -63,7 +63,8 @@ namespace Microsoft.AspNetCore.Mvc.Rendering
         public void Password_UsesAttributeValueWhenValueArgumentIsNull(
             ViewDataDictionary<PasswordModel> viewData,
             object attributes
-        ) {
+        )
+        {
             // Arrange
             var expected =
                 @"<input id=""HtmlEncode[[Property1]]"" name=""HtmlEncode[[Property1]]"" "
@@ -83,7 +84,8 @@ namespace Microsoft.AspNetCore.Mvc.Rendering
         public void Password_UsesExplicitValue_IfSpecified(
             ViewDataDictionary<PasswordModel> viewData,
             object attributes
-        ) {
+        )
+        {
             // Arrange
             var expected =
                 @"<input id=""HtmlEncode[[Property1]]"" name=""HtmlEncode[[Property1]]"" "
@@ -259,7 +261,8 @@ namespace Microsoft.AspNetCore.Mvc.Rendering
         public void PasswordWithComplexExpressions_UsesIdDotSeparator(
             string expression,
             string expected
-        ) {
+        )
+        {
             // Arrange
             var viewData = GetViewDataWithModelStateAndModelAndViewDataValues();
             var helper = DefaultTemplatesUtilities.GetHtmlHelper(
@@ -384,7 +387,8 @@ namespace Microsoft.AspNetCore.Mvc.Rendering
         public void PasswordFor_WithComplexExpressionsAndFieldPrefix_UsesAttributeValueIfSpecified(
             Expression<Func<PasswordModel, string>> expression,
             string expected
-        ) {
+        )
+        {
             // Arrange
             var viewData = GetViewDataWithModelStateAndModelAndViewDataValues();
             viewData.ModelState.SetModelValue("pre.Property3[key]", "Property3Val", "Property3Val");
@@ -550,7 +554,8 @@ namespace Microsoft.AspNetCore.Mvc.Rendering
         public void PasswordFor_ComplexExpressions_IgnoresValueFromViewDataModelStateAndModel(
             Expression<Func<PasswordModel, string>> expression,
             string expected
-        ) {
+        )
+        {
             // Arrange
             var model = new PasswordModel();
             var helper = DefaultTemplatesUtilities.GetHtmlHelper(model);

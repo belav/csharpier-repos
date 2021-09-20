@@ -407,7 +407,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
         private MethodSymbol GetLeastOverriddenMethodCore(
             NamedTypeSymbol accessingTypeOpt,
             bool requireSameReturnType
-        ) {
+        )
+        {
             accessingTypeOpt = accessingTypeOpt?.OriginalDefinition;
             MethodSymbol m = this;
             while (m.IsOverride && !m.HidesBaseMethodsByName)
@@ -451,7 +452,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                             TypeCompareKind.AllIgnoreOptions
                         )
                     )
-                ) {
+                )
+                {
                     break;
                 }
 
@@ -471,7 +473,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
         internal MethodSymbol GetConstructedLeastOverriddenMethod(
             NamedTypeSymbol accessingTypeOpt,
             bool requireSameReturnType
-        ) {
+        )
+        {
             var m = this.ConstructedFrom.GetLeastOverriddenMethodCore(
                 accessingTypeOpt,
                 requireSameReturnType
@@ -707,7 +710,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
         internal override TResult Accept<TArgument, TResult>(
             CSharpSymbolVisitor<TArgument, TResult> visitor,
             TArgument argument
-        ) {
+        )
+        {
             return visitor.VisitMethod(this, argument);
         }
 
@@ -731,7 +735,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
         public MethodSymbol ReduceExtensionMethod(
             TypeSymbol receiverType,
             CSharpCompilation compilation
-        ) {
+        )
+        {
             if ((object)receiverType == null)
             {
                 throw new ArgumentNullException(nameof(receiverType));
@@ -811,7 +816,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
         /// <exception cref="System.ArgumentException">If <paramref name="reducedFromTypeParameter"/> doesn't belong to the corresponding <see cref="ReducedFrom"/> method.</exception>
         public virtual TypeSymbol GetTypeInferredDuringReduction(
             TypeParameterSymbol reducedFromTypeParameter
-        ) {
+        )
+        {
             throw new InvalidOperationException();
         }
 
@@ -869,7 +875,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                     this.TypeParameters,
                     typeArguments
                 )
-            ) {
+            )
+            {
                 return this;
             }
 
@@ -969,7 +976,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                     AllowedRequiredModifierType.System_Runtime_InteropServices_InAttribute
                 )
                 || DeriveUseSiteInfoFromParameters(ref result, this.Parameters)
-            ) {
+            )
+            {
                 return true;
             }
 
@@ -1004,7 +1012,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                         this,
                         ref unificationCheckedTypes
                     )
-                ) {
+                )
+                {
                     result = result.AdjustDiagnosticInfo(diagnosticInfo);
                     return true;
                 }
@@ -1022,7 +1031,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             bool isField,
             Location? location,
             BindingDiagnosticBag? diagnostics
-        ) {
+        )
+        {
             ImmutableHashSet<INamedTypeSymbolInternal>? callingConventionTypes = null;
 
             if (!UnmanagedCallersOnlyAttributeData.IsCallConvsTypedConstant(key, isField, in value))
@@ -1043,7 +1053,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                 if (
                     !(callConvTypedConstant.ValueInternal is NamedTypeSymbol callConvType)
                     || !FunctionPointerTypeSymbol.IsCallingConventionModifier(callConvType)
-                ) {
+                )
+                {
                     // `{0}` is not a valid calling convention type for 'UnmanagedCallersOnly'.
                     diagnostics?.Add(
                         ErrorCode.ERR_InvalidUnmanagedCallersOnlyCallConv,
@@ -1070,7 +1081,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
         internal bool CheckAndReportValidUnmanagedCallersOnlyTarget(
             Location? location,
             BindingDiagnosticBag? diagnostics
-        ) {
+        )
+        {
             Debug.Assert((location == null) == (diagnostics == null));
 
             if (!IsStatic || MethodKind is not (MethodKind.Ordinary or MethodKind.LocalFunction))
@@ -1150,7 +1162,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
         internal virtual void GenerateMethodBody(
             TypeCompilationState compilationState,
             BindingDiagnosticBag diagnostics
-        ) {
+        )
+        {
             throw ExceptionUtilities.Unreachable;
         }
 
@@ -1192,7 +1205,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
         internal virtual void AddSynthesizedReturnTypeAttributes(
             PEModuleBuilder moduleBuilder,
             ref ArrayBuilder<SynthesizedAttributeData> attributes
-        ) {
+        )
+        {
             if (this.ReturnsByRefReadonly)
             {
                 AddSynthesizedAttribute(
@@ -1210,7 +1224,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                     BindingDiagnosticBag.Discarded,
                     Location.None
                 )
-            ) {
+            )
+            {
                 AddSynthesizedAttribute(
                     ref attributes,
                     compilation.SynthesizeDynamicAttribute(
@@ -1235,7 +1250,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                     BindingDiagnosticBag.Discarded,
                     Location.None
                 )
-            ) {
+            )
+            {
                 AddSynthesizedAttribute(
                     ref attributes,
                     compilation.SynthesizeTupleNamesAttribute(type.Type)
@@ -1273,7 +1289,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
 
         IMethodSymbolInternal IMethodSymbolInternal.Construct(
             params ITypeSymbolInternal[] typeArguments
-        ) {
+        )
+        {
             return Construct((TypeSymbol[])typeArguments);
         }
 

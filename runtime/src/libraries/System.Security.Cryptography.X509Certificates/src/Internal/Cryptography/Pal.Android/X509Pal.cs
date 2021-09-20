@@ -42,7 +42,8 @@ namespace Internal.Cryptography.Pal
                 byte[] encodedKeyValue,
                 byte[] encodedParameters,
                 ICertificatePal? certificatePal
-            ) {
+            )
+            {
                 switch (oid.Value)
                 {
                     case Oids.Dsa:
@@ -83,7 +84,8 @@ namespace Internal.Cryptography.Pal
             public string X500DistinguishedNameDecode(
                 byte[] encodedDistinguishedName,
                 X500DistinguishedNameFlags flag
-            ) {
+            )
+            {
                 return X500NameEncoder.X500DistinguishedNameDecode(
                     encodedDistinguishedName,
                     true,
@@ -94,14 +96,16 @@ namespace Internal.Cryptography.Pal
             public byte[] X500DistinguishedNameEncode(
                 string distinguishedName,
                 X500DistinguishedNameFlags flag
-            ) {
+            )
+            {
                 return X500NameEncoder.X500DistinguishedNameEncode(distinguishedName, flag);
             }
 
             public string X500DistinguishedNameFormat(
                 byte[] encodedDistinguishedName,
                 bool multiLine
-            ) {
+            )
+            {
                 return X500NameEncoder.X500DistinguishedNameDecode(
                     encodedDistinguishedName,
                     true,
@@ -147,7 +151,8 @@ namespace Internal.Cryptography.Pal
             private static IntPtr GetPublicKey(
                 ICertificatePal pal,
                 Interop.AndroidCrypto.PAL_KeyAlgorithm algorithm
-            ) {
+            )
+            {
                 AndroidCertificatePal certPal = (AndroidCertificatePal)pal;
                 IntPtr ptr = Interop.AndroidCrypto.X509GetPublicKey(certPal.SafeHandle, algorithm);
                 if (ptr == IntPtr.Zero)

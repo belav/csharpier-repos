@@ -434,7 +434,8 @@ namespace System.IO.Ports.Tests
             int dataBits,
             Type expectedException,
             ThrowAt throwAt
-        ) {
+        )
+        {
             SerialPortProperties serPortProp = new SerialPortProperties();
 
             Debug.WriteLine(
@@ -448,7 +449,8 @@ namespace System.IO.Ports.Tests
             {
                 using (
                     SerialPort com = new SerialPort(portName, baudRate, (Parity)parity, dataBits)
-                ) {
+                )
+                {
                     if (null != expectedException && throwAt == ThrowAt.Set)
                     {
                         Fail("Err_7212ahsdj Expected Ctor to throw {0}", expectedException);

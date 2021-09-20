@@ -28,7 +28,8 @@ namespace Microsoft.CodeAnalysis.CSharp
 
         public static UserDefinedConversionResult NoApplicableOperators(
             ImmutableArray<UserDefinedConversionAnalysis> results
-        ) {
+        )
+        {
             return new UserDefinedConversionResult(
                 UserDefinedConversionResultKind.NoApplicableOperators,
                 results,
@@ -38,7 +39,8 @@ namespace Microsoft.CodeAnalysis.CSharp
 
         public static UserDefinedConversionResult NoBestSourceType(
             ImmutableArray<UserDefinedConversionAnalysis> results
-        ) {
+        )
+        {
             return new UserDefinedConversionResult(
                 UserDefinedConversionResultKind.NoBestSourceType,
                 results,
@@ -48,7 +50,8 @@ namespace Microsoft.CodeAnalysis.CSharp
 
         public static UserDefinedConversionResult NoBestTargetType(
             ImmutableArray<UserDefinedConversionAnalysis> results
-        ) {
+        )
+        {
             return new UserDefinedConversionResult(
                 UserDefinedConversionResultKind.NoBestTargetType,
                 results,
@@ -58,7 +61,8 @@ namespace Microsoft.CodeAnalysis.CSharp
 
         public static UserDefinedConversionResult Ambiguous(
             ImmutableArray<UserDefinedConversionAnalysis> results
-        ) {
+        )
+        {
             return new UserDefinedConversionResult(
                 UserDefinedConversionResultKind.Ambiguous,
                 results,
@@ -69,7 +73,8 @@ namespace Microsoft.CodeAnalysis.CSharp
         public static UserDefinedConversionResult Valid(
             ImmutableArray<UserDefinedConversionAnalysis> results,
             int best
-        ) {
+        )
+        {
             return new UserDefinedConversionResult(
                 UserDefinedConversionResultKind.Valid,
                 results,
@@ -81,7 +86,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             UserDefinedConversionResultKind kind,
             ImmutableArray<UserDefinedConversionAnalysis> results,
             int best
-        ) {
+        )
+        {
             this.Kind = kind;
             this.Results = results;
             this.Best = best;

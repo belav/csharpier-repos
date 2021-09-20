@@ -37,7 +37,8 @@ namespace Microsoft.CodeAnalysis.Rebuild
         internal static new CSharpCompilationFactory Create(
             string assemblyFileName,
             CompilationOptionsReader optionsReader
-        ) {
+        )
+        {
             Debug.Assert(optionsReader.GetLanguageName() == LanguageNames.CSharp);
             var (compilationOptions, parseOptions) = CreateCSharpCompilationOptions(
                 assemblyFileName,
@@ -68,7 +69,8 @@ namespace Microsoft.CodeAnalysis.Rebuild
         private static (CSharpCompilationOptions, CSharpParseOptions) CreateCSharpCompilationOptions(
             string assemblyFileName,
             CompilationOptionsReader optionsReader
-        ) {
+        )
+        {
             var pdbOptions = optionsReader.GetMetadataCompilationOptions();
 
             var langVersionString = pdbOptions.GetUniqueOption(

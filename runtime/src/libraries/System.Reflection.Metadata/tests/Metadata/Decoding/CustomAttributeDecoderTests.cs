@@ -39,7 +39,8 @@ namespace System.Reflection.Metadata.Decoding.Tests
                     CustomAttributeHandle attributeHandle in reader.GetCustomAttributes(
                         typeDefHandle
                     )
-                ) {
+                )
+                {
                     CustomAttribute attribute = reader.GetCustomAttribute(attributeHandle);
                     CustomAttributeValue<string> value = attribute.DecodeValue(provider);
 

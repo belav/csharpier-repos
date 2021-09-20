@@ -237,7 +237,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Http2
                 if (
                     !String.IsNullOrEmpty(HttpRequestHeaders.HeaderScheme)
                     || !String.IsNullOrEmpty(HttpRequestHeaders.HeaderPath)
-                ) {
+                )
+                {
                     ResetAndAbort(
                         new ConnectionAbortedException(
                             CoreStrings.Http2ErrorConnectMustNotSendSchemeOrPath
@@ -264,7 +265,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Http2
             if (
                 !ReferenceEquals(headerScheme, Scheme)
                 && !string.Equals(headerScheme, Scheme, StringComparison.OrdinalIgnoreCase)
-            ) {
+            )
+            {
                 ResetAndAbort(
                     new ConnectionAbortedException(
                         CoreStrings.FormatHttp2StreamErrorSchemeMismatch(
@@ -676,7 +678,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Http2
 
         private (StreamCompletionFlags OldState, StreamCompletionFlags NewState) ApplyCompletionFlag(
             StreamCompletionFlags completionState
-        ) {
+        )
+        {
             lock (_completionLock)
             {
                 var oldCompletionState = _completionState;
@@ -710,7 +713,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Http2
             bool indexedValue,
             ReadOnlySpan<byte> name,
             ReadOnlySpan<byte> value
-        ) {
+        )
+        {
             base.OnHeader(index, indexedValue, name, value);
 
             if (indexedValue)

@@ -77,7 +77,8 @@ namespace Microsoft.EntityFrameworkCore.Migrations.Internal
             Action<IReadOnlyList<MigrationOperation>> assertActionDown,
             Action<DbContextOptionsBuilder> builderOptionsAction,
             bool skipSourceConventions = false
-        ) {
+        )
+        {
             var sourceModelBuilder = CreateModelBuilder(skipSourceConventions);
             buildCommonAction(sourceModelBuilder);
             buildSourceAction(sourceModelBuilder);
@@ -167,7 +168,8 @@ namespace Microsoft.EntityFrameworkCore.Migrations.Internal
         protected static T[][] ToJaggedArray<T>(
             T[,] twoDimensionalArray,
             bool firstDimension = false
-        ) {
+        )
+        {
             var rowsFirstIndex = twoDimensionalArray.GetLowerBound(0);
             var rowsLastIndex = twoDimensionalArray.GetUpperBound(0);
             var numberOfRows = rowsLastIndex - rowsFirstIndex + 1;

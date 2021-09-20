@@ -28,7 +28,8 @@ namespace XPathTests.Common
             string xml,
             string startingNodePath,
             XmlNamespaceManager namespaceManager
-        ) {
+        )
+        {
             var xPathNavigator = CreateNavigatorFromFile(xml);
 
             if (string.IsNullOrWhiteSpace(startingNodePath))
@@ -52,7 +53,8 @@ namespace XPathTests.Common
             bool expected,
             XmlNamespaceManager namespaceManager = null,
             string startingNodePath = null
-        ) {
+        )
+        {
             var result = XPathMatch(xml, testExpression, namespaceManager, startingNodePath);
             Assert.Equal(expected, result);
         }
@@ -62,7 +64,8 @@ namespace XPathTests.Common
             string testExpression,
             XmlNamespaceManager namespaceManager,
             string startingNodePath
-        ) {
+        )
+        {
             var xPathNavigator = CreateNavigator(xml, startingNodePath, namespaceManager);
 
             var xPathExpression = xPathNavigator.Compile(testExpression);
@@ -97,7 +100,8 @@ namespace XPathTests.Common
             string testExpression,
             XmlNamespaceManager namespaceManager,
             string startingNodePath
-        ) {
+        )
+        {
             var xPathNavigator = CreateNavigator(xml, startingNodePath, namespaceManager);
 
             var xPathExpression = xPathNavigator.Compile(testExpression);
@@ -116,7 +120,8 @@ namespace XPathTests.Common
             object expected,
             XmlNamespaceManager namespaceManager = null,
             string startingNodePath = null
-        ) {
+        )
+        {
             var result = XPathObject<string>(
                 xml,
                 testExpression,
@@ -144,7 +149,8 @@ namespace XPathTests.Common
             double expected,
             XmlNamespaceManager namespaceManager = null,
             string startingNodePath = null
-        ) {
+        )
+        {
             var result = XPathObject<double>(
                 xml,
                 testExpression,
@@ -160,7 +166,8 @@ namespace XPathTests.Common
             bool expected,
             XmlNamespaceManager namespaceManager = null,
             string startingNodePath = null
-        ) {
+        )
+        {
             var result = XPathObject<bool>(xml, testExpression, namespaceManager, startingNodePath);
             Assert.Equal(expected, result);
         }
@@ -183,7 +190,8 @@ namespace XPathTests.Common
             XPathResult expected,
             XmlNamespaceManager namespaceManager = null,
             string startingNodePath = null
-        ) {
+        )
+        {
             var xPathNavigator = CreateNavigator(xml, startingNodePath, namespaceManager);
             var xExpression = xPathNavigator.Compile(testExpression);
 

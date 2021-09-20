@@ -40,7 +40,8 @@ namespace Microsoft.CodeAnalysis.ExtractClass
             INamedTypeSymbol selectedType,
             SyntaxNode selectedTypeDeclarationNode,
             ISymbol? selectedMember = null
-        ) {
+        )
+        {
             _document = document;
             _service = service;
             _selectedType = selectedType;
@@ -65,7 +66,8 @@ namespace Microsoft.CodeAnalysis.ExtractClass
         protected override async Task<IEnumerable<CodeActionOperation>> ComputeOperationsAsync(
             object options,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             if (options is ExtractClassOptions extractClassOptions)
             {
                 // Find the original type
@@ -171,7 +173,8 @@ namespace Microsoft.CodeAnalysis.ExtractClass
             AnnotatedSymbolMapping symbolMapping,
             ImmutableArray<ExtractClassMemberAnalysisResult> memberAnalysisResults,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             using var _ = ArrayBuilder<(ISymbol member, bool makeAbstract)>.GetInstance(
                 out var pullMembersBuilder
             );
@@ -266,7 +269,8 @@ namespace Microsoft.CodeAnalysis.ExtractClass
             Document document,
             SyntaxAnnotation typeAnnotation,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var root = await document.GetRequiredSyntaxRootAsync(cancellationToken)
                 .ConfigureAwait(false);
             var semanticModel = await document.GetRequiredSemanticModelAsync(cancellationToken)
@@ -285,7 +289,8 @@ namespace Microsoft.CodeAnalysis.ExtractClass
             INamedTypeSymbol newType,
             ImmutableArray<ExtractClassMemberAnalysisResult> memberAnalysisResults,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var unformattedSolution = solution;
             var remainingResults = new List<ExtractClassMemberAnalysisResult>(
                 memberAnalysisResults

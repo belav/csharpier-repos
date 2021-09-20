@@ -99,7 +99,8 @@ namespace Microsoft.CodeAnalysis.LanguageServer.UnitTests.Formatting
             LSP.Location locationTyped,
             bool insertSpaces = true,
             int tabSize = 4
-        ) {
+        )
+        {
             return await testLspServer.ExecuteRequestAsync<
                 LSP.DocumentOnTypeFormattingParams,
                 LSP.TextEdit[]

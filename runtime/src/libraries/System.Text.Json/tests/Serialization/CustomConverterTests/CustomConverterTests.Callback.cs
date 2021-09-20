@@ -22,7 +22,8 @@ namespace System.Text.Json.Serialization.Tests
                 ref Utf8JsonReader reader,
                 Type typeToConvert,
                 JsonSerializerOptions options
-            ) {
+            )
+            {
                 // The options are not passed here as that would cause an infinite loop.
                 Customer value = JsonSerializer.Deserialize<Customer>(ref reader);
 
@@ -34,7 +35,8 @@ namespace System.Text.Json.Serialization.Tests
                 Utf8JsonWriter writer,
                 Customer value,
                 JsonSerializerOptions options
-            ) {
+            )
+            {
                 writer.WriteStartArray();
 
                 long bytesWrittenSoFar = writer.BytesCommitted + writer.BytesPending;
@@ -82,7 +84,8 @@ namespace System.Text.Json.Serialization.Tests
                 ref Utf8JsonReader reader,
                 Type typeToConvert,
                 JsonSerializerOptions options
-            ) {
+            )
+            {
                 reader.Read();
                 Debug.Assert(reader.TokenType == JsonTokenType.PropertyName);
                 Debug.Assert(reader.GetString() == "Child");
@@ -103,7 +106,8 @@ namespace System.Text.Json.Serialization.Tests
                 Utf8JsonWriter writer,
                 ChildPocoWithConverter value,
                 JsonSerializerOptions options
-            ) {
+            )
+            {
                 writer.WriteStartObject();
                 writer.WritePropertyName("Child");
 

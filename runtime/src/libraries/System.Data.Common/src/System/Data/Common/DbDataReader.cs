@@ -104,7 +104,8 @@ namespace System.Data.Common
         /// <returns>A task representing the asynchronous operation.</returns>
         public virtual Task<DataTable?> GetSchemaTableAsync(
             CancellationToken cancellationToken = default
-        ) {
+        )
+        {
             if (cancellationToken.IsCancellationRequested)
             {
                 return Task.FromCanceled<DataTable?>(cancellationToken);
@@ -134,7 +135,8 @@ namespace System.Data.Common
         /// <returns>A task representing the asynchronous operation.</returns>
         public virtual Task<ReadOnlyCollection<DbColumn>> GetColumnSchemaAsync(
             CancellationToken cancellationToken = default
-        ) {
+        )
+        {
             if (cancellationToken.IsCancellationRequested)
             {
                 return Task.FromCanceled<ReadOnlyCollection<DbColumn>>(cancellationToken);
@@ -259,7 +261,8 @@ namespace System.Data.Common
         public virtual Task<T> GetFieldValueAsync<T>(
             int ordinal,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             if (cancellationToken.IsCancellationRequested)
             {
                 return ADP.CreatedTaskWithCancellation<T>();

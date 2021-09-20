@@ -41,7 +41,8 @@ namespace System.DirectoryServices
             int afterCount,
             int offset,
             DirectoryVirtualListViewContext? context
-        ) {
+        )
+        {
             BeforeCount = beforeCount;
             AfterCount = afterCount;
             Offset = offset;
@@ -53,7 +54,8 @@ namespace System.DirectoryServices
             int afterCount,
             string? target,
             DirectoryVirtualListViewContext? context
-        ) {
+        )
+        {
             BeforeCount = beforeCount;
             AfterCount = afterCount;
             Target = target;

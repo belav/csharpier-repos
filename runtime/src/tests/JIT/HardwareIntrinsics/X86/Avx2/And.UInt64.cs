@@ -142,7 +142,8 @@ namespace JIT.HardwareIntrinsics.X86
                     || (alignment * 2) < sizeOfinArray1
                     || (alignment * 2) < sizeOfinArray2
                     || (alignment * 2) < sizeOfoutArray
-                ) {
+                )
+                {
                     throw new ArgumentException("Invalid value of alignment");
                 }
 
@@ -445,7 +446,8 @@ namespace JIT.HardwareIntrinsics.X86
 
             fixed (Vector256<UInt64>* pClsVar1 = &_clsVar1)fixed (
                 Vector256<UInt64>* pClsVar2 = &_clsVar2
-            ) {
+            )
+            {
                 var result = Avx2.And(
                     Avx.LoadVector256((UInt64*)(pClsVar1)),
                     Avx.LoadVector256((UInt64*)(pClsVar2))
@@ -511,7 +513,8 @@ namespace JIT.HardwareIntrinsics.X86
 
             fixed (Vector256<UInt64>* pFld1 = &test._fld1)fixed (
                 Vector256<UInt64>* pFld2 = &test._fld2
-            ) {
+            )
+            {
                 var result = Avx2.And(
                     Avx.LoadVector256((UInt64*)(pFld1)),
                     Avx.LoadVector256((UInt64*)(pFld2))
@@ -615,7 +618,8 @@ namespace JIT.HardwareIntrinsics.X86
             Vector256<UInt64> op2,
             void* result,
             [CallerMemberName] string method = ""
-        ) {
+        )
+        {
             UInt64[] inArray1 = new UInt64[Op1ElementCount];
             UInt64[] inArray2 = new UInt64[Op2ElementCount];
             UInt64[] outArray = new UInt64[RetElementCount];
@@ -636,7 +640,8 @@ namespace JIT.HardwareIntrinsics.X86
             void* op2,
             void* result,
             [CallerMemberName] string method = ""
-        ) {
+        )
+        {
             UInt64[] inArray1 = new UInt64[Op1ElementCount];
             UInt64[] inArray2 = new UInt64[Op2ElementCount];
             UInt64[] outArray = new UInt64[RetElementCount];
@@ -665,7 +670,8 @@ namespace JIT.HardwareIntrinsics.X86
             UInt64[] right,
             UInt64[] result,
             [CallerMemberName] string method = ""
-        ) {
+        )
+        {
             bool succeeded = true;
 
             if ((ulong)(left[0] & right[0]) != result[0])

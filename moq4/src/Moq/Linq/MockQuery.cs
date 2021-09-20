@@ -76,7 +76,8 @@ namespace Moq.Linq
             if (
                 this.Expression.NodeType == ExpressionType.Constant
                 && ((ConstantExpression)this.Expression).Value == this
-            ) {
+            )
+            {
                 return "Query(" + typeof(T) + ")";
             }
 

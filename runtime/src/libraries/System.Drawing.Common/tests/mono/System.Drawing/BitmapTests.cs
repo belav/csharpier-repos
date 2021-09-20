@@ -444,7 +444,8 @@ namespace MonoTests.System.Drawing
                     new RectangleF(0, 0, width, height),
                     PixelFormat.Format32bppArgb
                 )
-            ) {
+            )
+            {
                 bmp_rotate.RotateFlip(rotate);
 
                 for (int y = 0; y < height; y++)
@@ -667,7 +668,8 @@ namespace MonoTests.System.Drawing
             int height,
             PixelFormat fmt,
             ImageLockMode mode
-        ) {
+        )
+        {
             int len = bmp.Width * bmp.Height * 4;
             byte[] pixels = new byte[len];
             BitmapData bd = bmp.LockBits(new Rectangle(0, 0, width, height), mode, fmt);

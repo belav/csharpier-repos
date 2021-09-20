@@ -140,7 +140,8 @@ namespace Microsoft.AspNetCore
                             filename,
                             StringComparison.OrdinalIgnoreCase
                         )
-                    ) {
+                    )
+                    {
                         using var fileStream = File.OpenRead(path);
                         using var peReader = new PEReader(fileStream, PEStreamOptions.Default);
                         var reader = peReader.GetMetadataReader(MetadataReaderOptions.Default);
@@ -461,7 +462,8 @@ namespace Microsoft.AspNetCore
             if (
                 !_isTargetingPackBuilding
                 || string.IsNullOrEmpty(Environment.GetEnvironmentVariable("helix"))
-            ) {
+            )
+            {
                 return;
             }
 

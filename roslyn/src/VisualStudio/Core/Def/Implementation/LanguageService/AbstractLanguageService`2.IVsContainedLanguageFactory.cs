@@ -29,14 +29,16 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.LanguageService
             if (
                 this.SystemServiceProvider.GetService(typeof(SWebApplicationCtxSvc))
                 is IWebApplicationCtxSvc webApplicationCtxSvc
-            ) {
+            )
+            {
                 if (
                     webApplicationCtxSvc.GetItemContext(
                         hierarchy,
                         itemid,
                         out var webServiceProvider
                     ) >= 0
-                ) {
+                )
+                {
                     var webFileCtxServiceGuid = typeof(IWebFileCtxService).GUID;
                     if (
                         webServiceProvider.QueryService(
@@ -44,7 +46,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.LanguageService
                             ref webFileCtxServiceGuid,
                             out var service
                         ) >= 0
-                    ) {
+                    )
+                    {
                         try
                         {
                             var webFileCtxService =
@@ -68,7 +71,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.LanguageService
                 if (
                     hierarchy
                     is IVsContainedLanguageProjectNameProvider containedLanguageProjectNameProvider
-                ) {
+                )
+                {
                     containedLanguageProjectNameProvider.GetProjectName(itemid, out projectName);
                 }
             }
@@ -86,7 +90,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.LanguageService
             uint itemid,
             IVsTextBufferCoordinator bufferCoordinator,
             out IVsContainedLanguage language
-        ) {
+        )
+        {
             var project = FindMatchingProject(hierarchy, itemid);
             if (project == null)
             {

@@ -30,7 +30,8 @@ namespace Microsoft.AspNetCore.Mvc.ActionConstraints
         public void HttpMethodActionConstraint_IgnoresPreflightRequests(
             IEnumerable<string> httpMethods,
             string accessControlMethod
-        ) {
+        )
+        {
             // Arrange
             var constraint = new HttpMethodActionConstraint(httpMethods);
             var context = CreateActionConstraintContext(constraint);
@@ -48,7 +49,8 @@ namespace Microsoft.AspNetCore.Mvc.ActionConstraints
         public void HttpMethodActionConstraint_Accept_CaseInsensitive(
             IEnumerable<string> httpMethods,
             string expectedMethod
-        ) {
+        )
+        {
             // Arrange
             var constraint = new HttpMethodActionConstraint(httpMethods);
             var context = CreateActionConstraintContext(constraint);
@@ -63,7 +65,8 @@ namespace Microsoft.AspNetCore.Mvc.ActionConstraints
 
         private static ActionConstraintContext CreateActionConstraintContext(
             HttpMethodActionConstraint constraint
-        ) {
+        )
+        {
             var context = new ActionConstraintContext();
 
             var actionSelectorCandidate = new ActionSelectorCandidate(
@@ -80,7 +83,8 @@ namespace Microsoft.AspNetCore.Mvc.ActionConstraints
         private static RouteContext CreateRouteContext(
             string requestedMethod,
             string accessControlMethod = null
-        ) {
+        )
+        {
             var httpContext = new DefaultHttpContext();
 
             httpContext.Request.Method = requestedMethod;

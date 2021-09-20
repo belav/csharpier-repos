@@ -863,7 +863,8 @@ class GitHub_18582
         int x847,
         int x848,
         int x849
-    ) {
+    )
+    {
         s_x = x000 + x099 + x749 + x849;
     }
 

@@ -171,7 +171,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
         private Navigation RunConvention(
             InternalForeignKeyBuilder relationshipBuilder,
             Navigation navigation
-        ) {
+        )
+        {
             var context = new ConventionContext<IConventionNavigationBuilder>(
                 relationshipBuilder.Metadata.DeclaringEntityType.Model.ConventionDispatcher
             );

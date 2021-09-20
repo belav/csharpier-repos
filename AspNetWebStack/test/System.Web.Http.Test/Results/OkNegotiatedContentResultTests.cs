@@ -319,7 +319,8 @@ namespace System.Web.Http.Results
                         expectedInputFormatter,
                         contentNegotiator
                     )
-                ) {
+                )
+                {
                     controller.Configuration = configuration;
                     controller.Request = expectedRequest;
 
@@ -361,7 +362,8 @@ namespace System.Web.Http.Results
                     CreateFormatter(),
                     CreateContentNegotiator()
                 )
-            ) {
+            )
+            {
                 controller.Configuration = configuration;
 
                 using (HttpRequestMessage request = CreateRequest())
@@ -402,7 +404,8 @@ namespace System.Web.Http.Results
                     CreateFormatter(),
                     CreateContentNegotiator()
                 )
-            ) {
+            )
+            {
                 controller.Configuration = configuration;
                 OkNegotiatedContentResult<object> result = CreateProductUnderTest(
                     content,
@@ -453,7 +456,8 @@ namespace System.Web.Http.Results
                         expectedFormatter,
                         contentNegotiator
                     )
-                ) {
+                )
+                {
                     controller.Configuration = lateConfiguration;
 
                     // Act
@@ -518,7 +522,8 @@ namespace System.Web.Http.Results
                     CreateFormatter(),
                     CreateContentNegotiator()
                 )
-            ) {
+            )
+            {
                 controller.Configuration = configuration;
 
                 OkNegotiatedContentResult<object> result = CreateProductUnderTest(
@@ -577,7 +582,8 @@ namespace System.Web.Http.Results
                         CreateFormatter(),
                         contentNegotiator
                     )
-                ) {
+                )
+                {
                     controller.Configuration = lateConfiguration;
 
                     // Act
@@ -661,7 +667,8 @@ namespace System.Web.Http.Results
                     CreateFormatter(),
                     CreateContentNegotiator()
                 )
-            ) {
+            )
+            {
                 controller.Configuration = configuration;
                 OkNegotiatedContentResult<object> result = CreateProductUnderTest(
                     content,
@@ -710,7 +717,8 @@ namespace System.Web.Http.Results
         private static HttpConfiguration CreateConfiguration(
             MediaTypeFormatter formatter,
             IContentNegotiator contentNegotiator
-        ) {
+        )
+        {
             HttpConfiguration configuration = new HttpConfiguration();
             configuration.Formatters.Clear();
             configuration.Formatters.Add(formatter);
@@ -753,7 +761,8 @@ namespace System.Web.Http.Results
             IContentNegotiator contentNegotiator,
             HttpRequestMessage request,
             IEnumerable<MediaTypeFormatter> formatters
-        ) {
+        )
+        {
             return new OkNegotiatedContentResult<object>(
                 content,
                 contentNegotiator,
@@ -765,7 +774,8 @@ namespace System.Web.Http.Results
         private static OkNegotiatedContentResult<object> CreateProductUnderTest(
             object content,
             ApiController controller
-        ) {
+        )
+        {
             return new OkNegotiatedContentResult<object>(content, controller);
         }
 
@@ -780,7 +790,8 @@ namespace System.Web.Http.Results
                 Type type,
                 HttpRequestMessage request,
                 IEnumerable<MediaTypeFormatter> formatters
-            ) {
+            )
+            {
                 throw new NotImplementedException();
             }
         }

@@ -30,7 +30,8 @@ namespace Microsoft.AspNetCore.Identity
             SignInManager<TUser> signInManager,
             ISystemClock clock,
             ILoggerFactory logger
-        ) {
+        )
+        {
             if (options == null)
             {
                 throw new ArgumentNullException(nameof(options));
@@ -77,7 +78,8 @@ namespace Microsoft.AspNetCore.Identity
         protected virtual async Task SecurityStampVerified(
             TUser user,
             CookieValidatePrincipalContext context
-        ) {
+        )
+        {
             var newPrincipal = await SignInManager.CreateUserPrincipalAsync(user);
 
             if (Options.OnRefreshingPrincipal != null)

@@ -38,7 +38,8 @@ namespace Microsoft.AspNetCore.Routing
             if (
                 applicationBuilder.ApplicationServices.GetService(typeof(RoutingMarkerService))
                 == null
-            ) {
+            )
+            {
                 throw new InvalidOperationException(
                     Resources.FormatUnableToFindServices(
                         nameof(IServiceCollection),

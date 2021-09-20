@@ -34,7 +34,8 @@ namespace Microsoft.CodeAnalysis.Editor.Shared.Preview
         public PreviewSolutionCrawlerRegistrationServiceFactory(
             IDiagnosticAnalyzerService analyzerService,
             IAsynchronousOperationListenerProvider listenerProvider
-        ) {
+        )
+        {
             // this service is directly tied to DiagnosticAnalyzerService and
             // depends on its implementation.
             _analyzerService = (DiagnosticAnalyzerService)analyzerService;
@@ -62,7 +63,8 @@ namespace Microsoft.CodeAnalysis.Editor.Shared.Preview
             public Service(
                 PreviewSolutionCrawlerRegistrationServiceFactory owner,
                 Workspace workspace
-            ) {
+            )
+            {
                 _owner = owner;
                 _workspace = workspace;
                 _source = new CancellationTokenSource();
@@ -167,7 +169,8 @@ namespace Microsoft.CodeAnalysis.Editor.Shared.Preview
             public void AddAnalyzerProvider(
                 IIncrementalAnalyzerProvider provider,
                 IncrementalAnalyzerProviderMetadata metadata
-            ) {
+            )
+            {
                 // preview solution crawler doesn't support adding and removing analyzer dynamically
                 throw new NotSupportedException();
             }

@@ -173,7 +173,8 @@ namespace System.Net.Security.Tests
             X509Certificate certificate,
             X509Chain chain,
             SslPolicyErrors sslPolicyErrors
-        ) {
+        )
+        {
             return false;
         }
 
@@ -182,7 +183,8 @@ namespace System.Net.Security.Tests
             X509Certificate certificate,
             X509Chain chain,
             SslPolicyErrors sslPolicyErrors
-        ) {
+        )
+        {
             return true;
         }
     }

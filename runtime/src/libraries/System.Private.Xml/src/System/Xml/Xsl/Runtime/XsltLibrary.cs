@@ -229,7 +229,8 @@ namespace System.Xml.Xsl.Runtime
             string infinitySymbol,
             string nanSymbol,
             string characters
-        ) {
+        )
+        {
             if (_decimalFormats == null)
             {
                 _decimalFormats = new Dictionary<XmlQualifiedName, DecimalFormat>();
@@ -242,7 +243,8 @@ namespace System.Xml.Xsl.Runtime
             string infinitySymbol,
             string nanSymbol,
             string characters
-        ) {
+        )
+        {
             // BUGBUG: Fallback to the old XSLT implementation
             NumberFormatInfo info = new NumberFormatInfo();
             info.NumberDecimalSeparator = char.ToString(characters[0]);
@@ -262,7 +264,8 @@ namespace System.Xml.Xsl.Runtime
             string infinitySymbol,
             string nanSymbol,
             string characters
-        ) {
+        )
+        {
             if (_decimalFormatters == null)
             {
                 _decimalFormatters = new List<DecimalFormatter>();
@@ -291,12 +294,14 @@ namespace System.Xml.Xsl.Runtime
             string formatPicture,
             XmlQualifiedName decimalFormatName,
             string errorMessageName
-        ) {
+        )
+        {
             DecimalFormat format;
             if (
                 _decimalFormats == null
                 || !_decimalFormats.TryGetValue(decimalFormatName, out format)
-            ) {
+            )
+            {
                 throw new XslTransformException(SR.Xslt_NoDecimalFormat, errorMessageName);
             }
 
@@ -311,7 +316,8 @@ namespace System.Xml.Xsl.Runtime
             string letterValue,
             string groupingSeparator,
             double groupingSize
-        ) {
+        )
+        {
             // REVIEW: For each execution of xsl:number new Format() object is created.
             // Then there is no AVTs we can build this object once and reuse it later to improve performance.
             NumberFormatter formatter = new NumberFormatter(
@@ -335,7 +341,8 @@ namespace System.Xml.Xsl.Runtime
             string lang,
             bool forwardCompatibility,
             IErrorHelper errorHelper
-        ) {
+        )
+        {
             int lcid = InvariantCultureLcid;
 
             if (lang != null)
@@ -391,7 +398,8 @@ namespace System.Xml.Xsl.Runtime
             string lang,
             bool forwardCompatibility,
             IErrorHelper errorHelper
-        ) {
+        )
+        {
             string cultName = InvariantCultureName;
 
             if (lang != null)
@@ -511,7 +519,8 @@ namespace System.Xml.Xsl.Runtime
             XPathItem left,
             XPathItem right,
             TypeCode compType
-        ) {
+        )
+        {
             if (compType == TypeCode.Double)
             {
                 return CompareNumbers(op, XsltConvert.ToDouble(left), XsltConvert.ToDouble(right));
@@ -538,7 +547,8 @@ namespace System.Xml.Xsl.Runtime
             IList<XPathNavigator> nodeset,
             XPathItem val,
             TypeCode compType
-        ) {
+        )
+        {
             Debug.Assert(
                 compType == TypeCode.Boolean
                     || compType == TypeCode.Double
@@ -572,7 +582,8 @@ namespace System.Xml.Xsl.Runtime
             IList<XPathNavigator> left,
             IList<XPathNavigator> right,
             TypeCode compType
-        ) {
+        )
+        {
             int leftLen = left.Count;
             int rightLen = right.Count;
             for (int leftIdx = 0; leftIdx < leftLen; leftIdx++)

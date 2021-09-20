@@ -62,7 +62,8 @@ namespace Microsoft.CodeAnalysis.UseCoalesceExpression
             ImmutableArray<Diagnostic> diagnostics,
             SyntaxEditor editor,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var semanticModel = await document.GetSemanticModelAsync(cancellationToken)
                 .ConfigureAwait(false);
             var expressionTypeOpt = semanticModel.Compilation.GetTypeByMetadataName(
@@ -94,7 +95,8 @@ namespace Microsoft.CodeAnalysis.UseCoalesceExpression
             ISemanticFactsService semanticFacts,
             Diagnostic diagnostic,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var root = editor.OriginalRoot;
             var conditionalExpression = root.FindNode(
                 diagnostic.AdditionalLocations[0].SourceSpan,
@@ -139,7 +141,8 @@ namespace Microsoft.CodeAnalysis.UseCoalesceExpression
                             expressionTypeOpt,
                             cancellationToken
                         )
-                    ) {
+                    )
+                    {
                         coalesceExpression = coalesceExpression.WithAdditionalAnnotations(
                             WarningAnnotation.Create(
                                 AnalyzersResources.Changes_to_expression_trees_may_result_in_behavior_changes_at_runtime
@@ -160,7 +163,8 @@ namespace Microsoft.CodeAnalysis.UseCoalesceExpression
             SyntaxNode conditionalPartLow,
             SyntaxNode currentWhenTrue,
             SyntaxNode currentWhenFalse
-        ) {
+        )
+        {
             return whenPart == whenTrue
               ? generator.CoalesceExpression(
                     conditionalPartLow,
@@ -174,9 +178,8 @@ namespace Microsoft.CodeAnalysis.UseCoalesceExpression
 
         private class MyCodeAction : CustomCodeActions.DocumentChangeAction
         {
-            public MyCodeAction(
-                Func<CancellationToken, Task<Document>> createChangedDocument
-            ) : base(AnalyzersResources.Use_coalesce_expression, createChangedDocument) { }
+            public MyCodeAction(Func<CancellationToken, Task<Document>> createChangedDocument)
+                : base(AnalyzersResources.Use_coalesce_expression, createChangedDocument) { }
         }
     }
 }

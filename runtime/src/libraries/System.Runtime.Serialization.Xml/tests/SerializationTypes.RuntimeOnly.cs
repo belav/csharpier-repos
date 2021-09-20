@@ -2496,19 +2496,13 @@ public class TypeWithEnumerableInterfaceGetOnlyCollection
 }
 
 [CollectionDataContract]
-public class RecursiveCollection : List<RecursiveCollection2>
-{
-}
+public class RecursiveCollection : List<RecursiveCollection2> { }
 
 [CollectionDataContract]
-public class RecursiveCollection2 : List<RecursiveCollection3>
-{
-}
+public class RecursiveCollection2 : List<RecursiveCollection3> { }
 
 [CollectionDataContract]
-public class RecursiveCollection3 : List<RecursiveCollection>
-{
-}
+public class RecursiveCollection3 : List<RecursiveCollection> { }
 
 [DataContract]
 public class TypeWithListOfReferenceChildren
@@ -2570,9 +2564,7 @@ public class TypeWithNonDefaultNamcespace
 }
 
 [CollectionDataContract(Namespace = "CollectionNamespace")]
-public class CollectionOfTypeWithNonDefaultNamcespace : List<TypeWithNonDefaultNamcespace>
-{
-}
+public class CollectionOfTypeWithNonDefaultNamcespace : List<TypeWithNonDefaultNamcespace> { }
 
 #region Type for Xml_ConstructorWithXmlAttributeOverrides
 
@@ -2628,7 +2620,8 @@ public class DTOResolver : DataContractResolver
         DataContractResolver knownTypeResolver,
         out XmlDictionaryString typeName,
         out XmlDictionaryString typeNamespace
-    ) {
+    )
+    {
         string resolvedTypeName = string.Empty;
         string resolvedNamespace = string.Empty;
         resolvedNamespace = "http://www.default.com";
@@ -2669,7 +2662,8 @@ public class DTOResolver : DataContractResolver
         string typeNamespace,
         Type declaredType,
         DataContractResolver knownTypeResolver
-    ) {
+    )
+    {
         switch (typeNamespace)
         {
             case "http://www.default.com":
@@ -2869,7 +2863,8 @@ public class ReaderWriterFactory
         XmlDictionaryReaderQuotas quotas,
         IXmlDictionary dictionary,
         OnXmlDictionaryReaderClose onClose
-    ) {
+    )
+    {
         XmlReader result = null;
         switch (rwType)
         {
@@ -2966,7 +2961,8 @@ public class ReaderWriterFactory
         XmlDictionaryReaderQuotas quotas,
         IXmlDictionary dictionary,
         OnXmlDictionaryReaderClose onClose
-    ) {
+    )
+    {
         XmlReader result = null;
         switch (rwType)
         {
@@ -3027,7 +3023,8 @@ public class ReaderWriterFactory
         Encoding encoding,
         XmlDictionaryReaderQuotas quotas,
         IXmlDictionary dictionary
-    ) {
+    )
+    {
         return CreateXmlReader(rwType, buffer, encoding, quotas, dictionary, null);
     }
 
@@ -3037,7 +3034,8 @@ public class ReaderWriterFactory
         Encoding encoding,
         XmlDictionaryReaderQuotas quotas,
         IXmlDictionary dictionary
-    ) {
+    )
+    {
         return CreateXmlReader(rwType, stream, encoding, quotas, dictionary, null);
     }
 
@@ -3046,7 +3044,8 @@ public class ReaderWriterFactory
         byte[] buffer,
         Encoding encoding,
         XmlDictionaryReaderQuotas quotas
-    ) {
+    )
+    {
         return CreateXmlReader(rwType, buffer, encoding, quotas, null);
     }
 
@@ -3055,7 +3054,8 @@ public class ReaderWriterFactory
         Stream stream,
         Encoding encoding,
         XmlDictionaryReaderQuotas quotas
-    ) {
+    )
+    {
         return CreateXmlReader(rwType, stream, encoding, quotas, null);
     }
 
@@ -3063,7 +3063,8 @@ public class ReaderWriterFactory
         ReaderWriterType rwType,
         byte[] buffer,
         Encoding encoding
-    ) {
+    )
+    {
         return CreateXmlReader(rwType, buffer, encoding, XmlDictionaryReaderQuotas.Max);
     }
 
@@ -3071,7 +3072,8 @@ public class ReaderWriterFactory
         ReaderWriterType rwType,
         Stream stream,
         Encoding encoding
-    ) {
+    )
+    {
         return CreateXmlReader(rwType, stream, encoding, XmlDictionaryReaderQuotas.Max);
     }
 
@@ -3079,7 +3081,8 @@ public class ReaderWriterFactory
         ReaderWriterType rwType,
         Stream stream,
         Encoding encoding
-    ) {
+    )
+    {
         return CreateXmlWriter(rwType, stream, encoding, null);
     }
 
@@ -3088,7 +3091,8 @@ public class ReaderWriterFactory
         Stream stream,
         Encoding encoding,
         IXmlDictionary dictionary
-    ) {
+    )
+    {
         XmlWriter result = null;
         switch (rwType)
         {
@@ -3252,7 +3256,8 @@ public static class FragmentHelper
         XmlDictionaryWriter writer,
         Stream stream,
         bool generateSelfContainedText
-    ) {
+    )
+    {
         EnsureWriterCanFragment(writer);
         ((IFragmentCapableXmlDictionaryWriter)writer).StartFragment(
             stream,
@@ -3361,9 +3366,7 @@ public class SampleTextWriter : IXmlTextWriterInitializer
     }
 }
 
-public class MycodeGenerator : XmlSerializationGeneratedCode
-{
-}
+public class MycodeGenerator : XmlSerializationGeneratedCode { }
 
 public class SoapEncodedTestType1
 {
@@ -4287,15 +4290,11 @@ public class NetNativeTestData
 
     public Func<object> Instantiate { get; set; }
 }
-public abstract class Invalid_Class_Base_Without_DataContract
-{
-}
+public abstract class Invalid_Class_Base_Without_DataContract { }
 
 // Invalid because it is a derived [DataContract] class whose base class is not
 [DataContract]
-public class Invalid_Class_Derived_With_DataContract : Invalid_Class_Base_Without_DataContract
-{
-}
+public class Invalid_Class_Derived_With_DataContract : Invalid_Class_Base_Without_DataContract { }
 
 // Invalid because its [KnownType] is an invalid type
 [KnownType(typeof(Invalid_Class_No_Parameterless_Ctor))]
@@ -4393,9 +4392,7 @@ public class TypeWithCollectionAndDateTimeOffset
 [KnownType(typeof(ushort))]
 [KnownType(typeof(Uri))]
 [CollectionDataContract]
-public class TypeWithPrimitiveKnownTypes : List<object>
-{
-}
+public class TypeWithPrimitiveKnownTypes : List<object> { }
 
 public enum TestEnum
 {

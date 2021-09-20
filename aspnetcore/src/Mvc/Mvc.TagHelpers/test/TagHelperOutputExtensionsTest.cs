@@ -305,7 +305,8 @@ namespace Microsoft.AspNetCore.Mvc.TagHelpers
             TagHelperAttributeList outputAttributes,
             TagHelperAttributeList allAttributes,
             IEnumerable<TagHelperAttribute> expectedAttributes
-        ) {
+        )
+        {
             // Arrange
             var output = new TagHelperOutput(
                 tagName: "p",
@@ -397,7 +398,8 @@ namespace Microsoft.AspNetCore.Mvc.TagHelpers
             string attributeNameToCopy,
             TagHelperAttributeList allAttributes,
             IEnumerable<TagHelperAttribute> expectedAttributes
-        ) {
+        )
+        {
             // Arrange
             var output = new TagHelperOutput(
                 tagName: "p",
@@ -429,7 +431,8 @@ namespace Microsoft.AspNetCore.Mvc.TagHelpers
         public void CopyHtmlAttribute_CopiesOriginalAttributes(
             string attributeName,
             string attributeValue
-        ) {
+        )
+        {
             // Arrange
             var tagHelperOutput = new TagHelperOutput(
                 "p",
@@ -712,7 +715,8 @@ namespace Microsoft.AspNetCore.Mvc.TagHelpers
             Dictionary<string, string> tagBuilderAttributes,
             TagHelperAttributeList outputAttributes,
             TagHelperAttributeList expectedAttributes
-        ) {
+        )
+        {
             // Arrange
             var tagHelperOutput = new TagHelperOutput(
                 "p",
@@ -798,7 +802,8 @@ namespace Microsoft.AspNetCore.Mvc.TagHelpers
         public void MergeAttributes_AppendsClass_TagHelperOutputAttributeValues_IgnoresCase(
             string originalName,
             string updateName
-        ) {
+        )
+        {
             // Arrange
             var tagHelperOutput = new TagHelperOutput(
                 tagName: "p",

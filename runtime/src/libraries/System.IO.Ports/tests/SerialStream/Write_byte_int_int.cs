@@ -249,7 +249,8 @@ namespace System.IO.Ports.Tests
         {
             using (
                 var com1 = new SerialPort(TCSupport.LocalMachineSerialInfo.FirstAvailablePortName)
-            ) {
+            )
+            {
                 Debug.WriteLine(
                     "Verifying Write throws InvalidOperationException while in a Break"
                 );
@@ -267,7 +268,8 @@ namespace System.IO.Ports.Tests
         {
             using (
                 var com1 = new SerialPort(TCSupport.LocalMachineSerialInfo.FirstAvailablePortName)
-            ) {
+            )
+            {
                 Debug.WriteLine("Verifying Write with count=0 returns immediately");
                 com1.Open();
                 com1.Handshake = Handshake.RequestToSend;
@@ -336,12 +338,14 @@ namespace System.IO.Ports.Tests
             int offset,
             int count,
             Type expectedException
-        ) {
+        )
+        {
             using (
                 SerialPort com = new SerialPort(
                     TCSupport.LocalMachineSerialInfo.FirstAvailablePortName
                 )
-            ) {
+            )
+            {
                 int bufferLength = null == buffer ? 0 : buffer.Length;
 
                 Debug.WriteLine(
@@ -378,13 +382,15 @@ namespace System.IO.Ports.Tests
             int count,
             Encoding encoding,
             int numWrites
-        ) {
+        )
+        {
             using (
                 var com1 = new SerialPort(TCSupport.LocalMachineSerialInfo.FirstAvailablePortName)
             )
             using (
                 var com2 = new SerialPort(TCSupport.LocalMachineSerialInfo.SecondAvailablePortName)
-            ) {
+            )
+            {
                 var rndGen = new Random(-55);
 
                 Debug.WriteLine(
@@ -417,7 +423,8 @@ namespace System.IO.Ports.Tests
             SerialPort com1,
             SerialPort com2,
             int numWrites
-        ) {
+        )
+        {
             var index = 0;
 
             var oldBuffer = (byte[])buffer.Clone();

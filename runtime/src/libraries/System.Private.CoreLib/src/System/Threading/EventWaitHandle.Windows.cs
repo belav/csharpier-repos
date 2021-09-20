@@ -24,7 +24,8 @@ namespace System.Threading
             EventResetMode mode,
             string? name,
             out bool createdNew
-        ) {
+        )
+        {
 #if TARGET_UNIX || TARGET_BROWSER
             if (name != null)
                 throw new PlatformNotSupportedException(
@@ -63,7 +64,8 @@ namespace System.Threading
         private static OpenExistingResult OpenExistingWorker(
             string name,
             out EventWaitHandle? result
-        ) {
+        )
+        {
 #if TARGET_WINDOWS
             if (name == null)
                 throw new ArgumentNullException(nameof(name));

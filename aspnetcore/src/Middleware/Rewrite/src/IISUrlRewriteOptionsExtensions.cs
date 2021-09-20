@@ -32,7 +32,8 @@ namespace Microsoft.AspNetCore.Rewrite
             IFileProvider fileProvider,
             string filePath,
             bool alwaysUseManagedServerVariables = false
-        ) {
+        )
+        {
             if (options == null)
             {
                 throw new ArgumentNullException(nameof(options));
@@ -70,7 +71,8 @@ namespace Microsoft.AspNetCore.Rewrite
             this RewriteOptions options,
             TextReader reader,
             bool alwaysUseManagedServerVariables = false
-        ) {
+        )
+        {
             if (options == null)
             {
                 throw new ArgumentNullException(nameof(options));

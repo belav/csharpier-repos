@@ -56,7 +56,8 @@ namespace System.Xml.Xsl.XsltOld
                             if (
                                 Ref.Equal(nspace, input.Atoms.UriXsl)
                                 && Ref.Equal(name, input.Atoms.WithParam)
-                            ) {
+                            )
+                            {
                                 WithParamAction par = compiler.CreateWithParamAction();
                                 CheckDuplicateParams(par.Name!);
                                 AddAction(par);

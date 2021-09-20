@@ -31,7 +31,8 @@ namespace Microsoft.Extensions.Hosting.Internal
             ILogger<Host> logger,
             IHostLifetime hostLifetime,
             IOptions<HostOptions> options
-        ) {
+        )
+        {
             Services = services ?? throw new ArgumentNullException(nameof(services));
             _applicationLifetime =
                 (
@@ -100,7 +101,8 @@ namespace Microsoft.Extensions.Hosting.Internal
                 if (
                     _options.BackgroundServiceExceptionBehavior
                     == BackgroundServiceExceptionBehavior.StopHost
-                ) {
+                )
+                {
                     _logger.BackgroundServiceStoppingHost(ex);
                     _applicationLifetime.StopApplication();
                 }
@@ -117,7 +119,8 @@ namespace Microsoft.Extensions.Hosting.Internal
                     cts.Token,
                     cancellationToken
                 )
-            ) {
+            )
+            {
                 CancellationToken token = linkedCts.Token;
                 // Trigger IHostApplicationLifetime.ApplicationStopping
                 _applicationLifetime.StopApplication();

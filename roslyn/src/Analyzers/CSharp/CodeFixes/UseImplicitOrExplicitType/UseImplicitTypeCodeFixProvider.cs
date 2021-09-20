@@ -58,7 +58,8 @@ namespace Microsoft.CodeAnalysis.CSharp.TypeStyle
             ImmutableArray<Diagnostic> diagnostics,
             SyntaxEditor editor,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var root = editor.OriginalRoot;
 
             foreach (var diagnostic in diagnostics)
@@ -83,13 +84,12 @@ namespace Microsoft.CodeAnalysis.CSharp.TypeStyle
 
         private class MyCodeAction : CustomCodeActions.DocumentChangeAction
         {
-            public MyCodeAction(
-                Func<CancellationToken, Task<Document>> createChangedDocument
-            ) : base(
-                CSharpAnalyzersResources.use_var_instead_of_explicit_type,
-                createChangedDocument,
-                CSharpAnalyzersResources.use_var_instead_of_explicit_type
-            ) { }
+            public MyCodeAction(Func<CancellationToken, Task<Document>> createChangedDocument)
+                : base(
+                    CSharpAnalyzersResources.use_var_instead_of_explicit_type,
+                    createChangedDocument,
+                    CSharpAnalyzersResources.use_var_instead_of_explicit_type
+                ) { }
         }
     }
 }

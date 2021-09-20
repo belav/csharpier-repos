@@ -186,7 +186,8 @@ namespace System.Threading
                     LinkedSlot? linkedSlot = _linkedSlot._next;
                     linkedSlot != null;
                     linkedSlot = linkedSlot._next
-                ) {
+                )
+                {
                     LinkedSlotVolatile[]? slotArray = linkedSlot._slotArray;
 
                     if (slotArray == null)
@@ -265,7 +266,8 @@ namespace System.Threading
                     && id < slotArray.Length // Is the table large enough?
                     && (slot = slotArray[id].Value) != null // Has a LinkedSlot object has been allocated for this ID?
                     && _initialized // Has the instance *still* not been disposed (important for a race condition with Dispose)?
-                ) {
+                )
+                {
                     // We verified that the instance has not been disposed *after* we got a reference to the slot.
                     // This guarantees that we have a reference to the right slot.
                     //
@@ -289,7 +291,8 @@ namespace System.Threading
                     && id < slotArray.Length // Is the table large enough?
                     && (slot = slotArray[id].Value) != null // Has a LinkedSlot object has been allocated for this ID?
                     && _initialized // Has the instance *still* not been disposed (important for a race condition with Dispose)?
-                ) {
+                )
+                {
                     // We verified that the instance has not been disposed *after* we got a reference to the slot.
                     // This guarantees that we have a reference to the right slot.
                     //
@@ -497,7 +500,8 @@ namespace System.Threading
                     linkedSlot = linkedSlot._next;
                     linkedSlot != null;
                     linkedSlot = linkedSlot._next
-                ) {
+                )
+                {
                     // We can safely read linkedSlot.Value. Even if this ThreadLocal has been disposed in the meantime, the LinkedSlot
                     // objects will never be assigned to another ThreadLocal instance.
                     yield return linkedSlot._value!;
@@ -515,7 +519,8 @@ namespace System.Threading
                     LinkedSlot? linkedSlot = _linkedSlot?._next;
                     linkedSlot != null;
                     linkedSlot = linkedSlot._next
-                ) {
+                )
+                {
                     count++;
                 }
                 return count;

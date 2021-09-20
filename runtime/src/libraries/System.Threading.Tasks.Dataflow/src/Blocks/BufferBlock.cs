@@ -116,7 +116,8 @@ namespace System.Threading.Tasks.Dataflow
             T messageValue,
             ISourceBlock<T>? source,
             bool consumeToAccept
-        ) {
+        )
+        {
             // Validate arguments
             if (!messageHeader.IsValid)
                 throw new ArgumentException(
@@ -151,7 +152,8 @@ namespace System.Threading.Tasks.Dataflow
                         && _boundingState.PostponedMessages.Count == 0
                         && _boundingState.TaskForInputProcessing == null
                     )
-                ) {
+                )
+                {
                     // Consume the message from the source if necessary
                     if (consumeToAccept)
                     {
@@ -208,7 +210,8 @@ namespace System.Threading.Tasks.Dataflow
             Exception? exception,
             bool storeExceptionEvenIfAlreadyCompleting,
             bool revertProcessingState = false
-        ) {
+        )
+        {
             Debug.Assert(
                 storeExceptionEvenIfAlreadyCompleting || !revertProcessingState,
                 "Indicating dirty processing state may only come with storeExceptionEvenIfAlreadyCompleting==true."
@@ -221,7 +224,8 @@ namespace System.Threading.Tasks.Dataflow
                 if (
                     exception != null
                     && (!_targetDecliningPermanently || storeExceptionEvenIfAlreadyCompleting)
-                ) {
+                )
+                {
                     _source.AddException(exception);
                 }
 
@@ -276,7 +280,8 @@ namespace System.Threading.Tasks.Dataflow
             DataflowMessageHeader messageHeader,
             ITargetBlock<T> target,
             out bool messageConsumed
-        ) {
+        )
+        {
             return _source.ConsumeMessage(messageHeader, target, out messageConsumed);
         }
 
@@ -284,7 +289,8 @@ namespace System.Threading.Tasks.Dataflow
         bool ISourceBlock<T>.ReserveMessage(
             DataflowMessageHeader messageHeader,
             ITargetBlock<T> target
-        ) {
+        )
+        {
             return _source.ReserveMessage(messageHeader, target);
         }
 
@@ -292,7 +298,8 @@ namespace System.Threading.Tasks.Dataflow
         void ISourceBlock<T>.ReleaseReservation(
             DataflowMessageHeader messageHeader,
             ITargetBlock<T> target
-        ) {
+        )
+        {
             _source.ReleaseReservation(messageHeader, target);
         }
 
@@ -335,7 +342,8 @@ namespace System.Threading.Tasks.Dataflow
                 && _boundingState.TaskForInputProcessing == null
                 && _boundingState.PostponedMessages.Count > 0
                 && _boundingState.CountIsLessThanBound
-            ) {
+            )
+            {
                 // Create task and store into _taskForInputProcessing prior to scheduling the task
                 // so that _taskForInputProcessing will be visibly set in the task loop.
                 _boundingState.TaskForInputProcessing = new Task(
@@ -501,7 +509,8 @@ namespace System.Threading.Tasks.Dataflow
                 _targetDecliningPermanently
                 && !_targetCompletionReserved
                 && (_boundingState == null || _boundingState.TaskForInputProcessing == null)
-            ) {
+            )
+            {
                 _targetCompletionReserved = true;
 
                 // If we're in bounding mode and we have any postponed messages, we need to clear them,

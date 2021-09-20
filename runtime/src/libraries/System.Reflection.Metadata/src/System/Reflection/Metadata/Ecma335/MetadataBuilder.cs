@@ -13,7 +13,8 @@ namespace System.Reflection.Metadata.Ecma335
             ImmutableArray<int> externalRowCounts,
             int metadataVersionByteCount,
             bool isStandaloneDebugMetadata
-        ) {
+        )
+        {
             var stringHeapBuilder = new HeapBlobBuilder(_stringHeapCapacity);
             var stringMap = SerializeStringHeap(
                 stringHeapBuilder,
@@ -48,7 +49,8 @@ namespace System.Reflection.Metadata.Ecma335
             BlobBuilder builder,
             string metadataVersion,
             MetadataSizes sizes
-        ) {
+        )
+        {
             int startOffset = builder.Count;
 
             // signature
@@ -78,7 +80,8 @@ namespace System.Reflection.Metadata.Ecma335
                 int i = 0;
                 i < sizes.MetadataVersionPaddedLength - (metadataVersionEnd - metadataVersionStart);
                 i++
-            ) {
+            )
+            {
                 builder.WriteByte(0);
             }
 
@@ -154,7 +157,8 @@ namespace System.Reflection.Metadata.Ecma335
             int alignedStreamSize,
             string streamName,
             BlobBuilder builder
-        ) {
+        )
+        {
             // 4 for the first uint (offset), 4 for the second uint (padded size), length of stream name + 1 for null terminator (then padded)
             int sizeOfStreamHeader = MetadataSizes.GetMetadataStreamHeaderSize(streamName);
             builder.WriteInt32(offsetFromStartOfMetadata);

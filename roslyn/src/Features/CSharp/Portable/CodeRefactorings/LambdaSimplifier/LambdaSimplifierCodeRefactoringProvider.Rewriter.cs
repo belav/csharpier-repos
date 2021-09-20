@@ -28,7 +28,8 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeRefactorings.LambdaSimplifier
                 SemanticDocument document,
                 Func<SyntaxNode, bool> predicate,
                 CancellationToken cancellationToken
-            ) {
+            )
+            {
                 _document = document;
                 _predicate = predicate;
                 _cancellationToken = cancellationToken;
@@ -65,7 +66,8 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeRefactorings.LambdaSimplifier
 
             public override SyntaxNode VisitSimpleLambdaExpression(
                 SimpleLambdaExpressionSyntax node
-            ) {
+            )
+            {
                 if (_predicate(node) && CanSimplify(_document, node, _cancellationToken))
                 {
                     var invocation = TryGetInvocationExpression(node.Body);
@@ -80,7 +82,8 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeRefactorings.LambdaSimplifier
 
             public override SyntaxNode VisitParenthesizedLambdaExpression(
                 ParenthesizedLambdaExpressionSyntax node
-            ) {
+            )
+            {
                 if (_predicate(node) && CanSimplify(_document, node, _cancellationToken))
                 {
                     var invocation = TryGetInvocationExpression(node.Body);

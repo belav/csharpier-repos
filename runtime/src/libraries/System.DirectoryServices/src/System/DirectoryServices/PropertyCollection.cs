@@ -81,7 +81,8 @@ namespace System.DirectoryServices
                 if (
                     (unmanagedResult == unchecked((int)0x8000500D))
                     || (unmanagedResult == unchecked((int)0x80005006))
-                ) {
+                )
+                {
                     return false;
                 }
                 else

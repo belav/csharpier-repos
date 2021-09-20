@@ -53,7 +53,8 @@ namespace Microsoft.DotNet.Build.Tasks
 
             if (
                 readmeLines.Contains(Begin(LinksComment)) && readmeLines.Contains(End(LinksComment))
-            ) {
+            )
+            {
                 // In the links section, extract the name of each reference-style Markdown link.
                 // For example, grabs 'win-x86-badge-2.1.X' from
                 // [win-x86-badge-2.1.X]: https://example.org/foo
@@ -79,7 +80,8 @@ namespace Microsoft.DotNet.Build.Tasks
                 if (
                     readmeLines.Contains(Begin(TableComment))
                     && readmeLines.Contains(End(TableComment))
-                ) {
+                )
+                {
                     string[] beforeTable = readmeLines.TakeWhile(
                             line => line != Begin(TableComment)
                         )

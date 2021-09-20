@@ -29,7 +29,8 @@ namespace Microsoft.CodeAnalysis
             public static SymbolKeyResolution Resolve(
                 SymbolKeyReader reader,
                 out string? failureReason
-            ) {
+            )
+            {
                 var callingConvention = (SignatureCallingConvention)reader.ReadInteger();
 
                 var callingConventionModifiers = ImmutableArray<INamedTypeSymbol>.Empty;

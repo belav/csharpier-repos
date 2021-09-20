@@ -46,14 +46,16 @@ namespace Microsoft.CodeAnalysis.ExpressionEvaluator
                 TTypeSymbol,
                 TTypeParameterSymbol
             > instructionDecoder
-        ) {
+        )
+        {
             _instructionDecoder = instructionDecoder;
         }
 
         string IDkmLanguageInstructionDecoder.GetMethodName(
             DkmLanguageInstructionAddress languageInstructionAddress,
             DkmVariableInfoFlags argumentFlags
-        ) {
+        )
+        {
             try
             {
                 // DkmVariableInfoFlags.FullNames was accepted by the old GetMethodName implementation,

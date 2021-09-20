@@ -22,7 +22,8 @@ namespace Microsoft.AspNetCore.Mvc.Razor.RuntimeCompilation
             RazorProjectEngine projectEngine,
             RuntimeCompilationFileProvider fileProvider,
             IOptions<RazorPagesOptions> razorPagesOptions
-        ) {
+        )
+        {
             if (projectEngine == null)
             {
                 throw new ArgumentNullException(nameof(projectEngine));
@@ -89,7 +90,8 @@ namespace Microsoft.AspNetCore.Mvc.Razor.RuntimeCompilation
         private static string[] GetImports(
             IImportProjectFeature[] importFeatures,
             RazorProjectItem file
-        ) {
+        )
+        {
             return importFeatures.SelectMany(f => f.GetImports(file))
                 .Where(f => f.FilePath != null)
                 .Select(f => f.FilePath)

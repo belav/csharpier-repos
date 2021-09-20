@@ -13,14 +13,16 @@ namespace System.Net.Http.Headers
             string name,
             int? http2StaticTableIndex = null,
             int? http3StaticTableIndex = null
-        ) : this(
-            name,
-            HttpHeaderType.Custom,
-            parser: null,
-            knownValues: null,
-            http2StaticTableIndex,
-            http3StaticTableIndex
-        ) {
+        )
+            : this(
+                name,
+                HttpHeaderType.Custom,
+                parser: null,
+                knownValues: null,
+                http2StaticTableIndex,
+                http3StaticTableIndex
+            )
+        {
             Debug.Assert(!string.IsNullOrEmpty(name));
             Debug.Assert(name[0] == ':' || HttpRuleParser.GetTokenLength(name, 0) == name.Length);
         }
@@ -32,7 +34,8 @@ namespace System.Net.Http.Headers
             string[]? knownValues = null,
             int? http2StaticTableIndex = null,
             int? http3StaticTableIndex = null
-        ) {
+        )
+        {
             Debug.Assert(!string.IsNullOrEmpty(name));
             Debug.Assert(name[0] == ':' || HttpRuleParser.GetTokenLength(name, 0) == name.Length);
 

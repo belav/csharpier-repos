@@ -87,7 +87,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UsePatternMatching
                     out var declarator,
                     out var castExpression
                 )
-            ) {
+            )
+            {
                 return;
             }
 
@@ -174,7 +175,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UsePatternMatching
             out LocalDeclarationStatementSyntax localDeclarationStatement,
             out VariableDeclaratorSyntax declarator,
             out CastExpressionSyntax castExpression
-        ) {
+        )
+        {
             localDeclarationStatement = null;
             declarator = null;
             castExpression = null;
@@ -201,7 +203,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UsePatternMatching
                     SyntaxKind.LocalDeclarationStatement,
                     out localDeclarationStatement
                 )
-            ) {
+            )
+            {
                 return false;
             }
 
@@ -233,7 +236,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UsePatternMatching
                     castExpression.Type,
                     topLevel: false
                 )
-            ) {
+            )
+            {
                 return false;
             }
 
@@ -243,7 +247,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UsePatternMatching
         private static bool ContainsVariableDeclaration(
             SyntaxNode scope,
             VariableDeclaratorSyntax variable
-        ) {
+        )
+        {
             var variableName = variable.Identifier.ValueText;
             return scope.DescendantNodes()
                 .OfType<VariableDeclaratorSyntax>()

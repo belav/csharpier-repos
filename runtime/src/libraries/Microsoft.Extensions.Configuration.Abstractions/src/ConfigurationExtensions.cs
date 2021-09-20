@@ -57,7 +57,8 @@ namespace Microsoft.Extensions.Configuration
         public static IEnumerable<KeyValuePair<string, string>> AsEnumerable(
             this IConfiguration configuration,
             bool makePathsRelative
-        ) {
+        )
+        {
             var stack = new Stack<IConfiguration>();
             stack.Push(configuration);
             var rootSection = configuration as IConfigurationSection;
@@ -70,7 +71,8 @@ namespace Microsoft.Extensions.Configuration
                 if (
                     config is IConfigurationSection section
                     && (!makePathsRelative || config != configuration)
-                ) {
+                )
+                {
                     yield return new KeyValuePair<string, string>(
                         section.Path.Substring(prefixLength),
                         section.Value
@@ -108,7 +110,8 @@ namespace Microsoft.Extensions.Configuration
         public static IConfigurationSection GetRequiredSection(
             this IConfiguration configuration,
             string key
-        ) {
+        )
+        {
             if (configuration == null)
             {
                 throw new ArgumentNullException(nameof(configuration));

@@ -51,12 +51,14 @@ namespace Microsoft.CodeAnalysis.CSharp.Formatting
 
         public static bool IsValidBracePair(
             this (SyntaxToken openBrace, SyntaxToken closeBrace) bracePair
-        ) {
+        )
+        {
             if (
                 bracePair.openBrace.IsKind(SyntaxKind.None)
                 || bracePair.openBrace.IsMissing
                 || bracePair.closeBrace.IsKind(SyntaxKind.None)
-            ) {
+            )
+            {
                 return false;
             }
 
@@ -108,7 +110,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Formatting
             if (
                 token.Parent.IsKind(SyntaxKind.PositionalPatternClause)
                 && token.Parent.Parent.IsKind(SyntaxKind.RecursivePattern)
-            ) {
+            )
+            {
                 // Avoid treating tuple expressions as positional patterns for formatting
                 return token.Parent.Parent.GetFirstToken() != token;
             }
@@ -392,7 +395,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Formatting
 
         public static bool IsEmbeddedStatementOwnerWithCloseParen(
             [NotNullWhen(true)] this SyntaxNode? node
-        ) {
+        )
+        {
             return node is IfStatementSyntax
                 || node is WhileStatementSyntax
                 || node is ForStatementSyntax
@@ -421,7 +425,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Formatting
 
         public static bool IsInitializerForObjectOrAnonymousObjectCreationExpression(
             [NotNullWhen(true)] this SyntaxNode? node
-        ) {
+        )
+        {
             if (node is InitializerExpressionSyntax initializer)
             {
                 var parent = initializer.Parent;
@@ -458,7 +463,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Formatting
 
         public static bool IsInitializerForArrayOrCollectionCreationExpression(
             [NotNullWhen(true)] this SyntaxNode? node
-        ) {
+        )
+        {
             if (node is InitializerExpressionSyntax initializer)
             {
                 var parent = initializer.Parent;
@@ -467,7 +473,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Formatting
                     || parent is ImplicitArrayCreationExpressionSyntax
                     || parent is EqualsValueClauseSyntax
                     || parent.IsKind(SyntaxKind.SimpleAssignmentExpression)
-                ) {
+                )
+                {
                     return true;
                 }
 
@@ -487,7 +494,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Formatting
                     || parent is EqualsValueClauseSyntax
                     || parent is ObjectCreationExpressionSyntax
                     || parent.IsKind(SyntaxKind.SimpleAssignmentExpression)
-                ) {
+                )
+                {
                     return true;
                 }
 
@@ -502,7 +510,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Formatting
         public static bool ParenOrBracketContainsNothing(
             this SyntaxToken token1,
             SyntaxToken token2
-        ) {
+        )
+        {
             return (
                     token1.Kind() == SyntaxKind.OpenParenToken
                     && token2.Kind() == SyntaxKind.CloseParenToken
@@ -518,7 +527,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Formatting
             if (
                 token.Kind() != SyntaxKind.SemicolonToken
                 && token.Kind() != SyntaxKind.CloseBraceToken
-            ) {
+            )
+            {
                 return false;
             }
 
@@ -532,7 +542,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Formatting
 
         public static (SyntaxToken firstToken, SyntaxToken lastToken) GetFirstAndLastMemberDeclarationTokensAfterAttributes(
             this MemberDeclarationSyntax node
-        ) {
+        )
+        {
             Contract.ThrowIfNull(node);
 
             // there are no attributes associated with the node. return back first and last token of the node.

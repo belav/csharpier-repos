@@ -21,11 +21,13 @@ namespace Moq
             LambdaExpression originalExpression,
             MethodInfo method,
             Func<object> getter
-        ) : base(
-            originalExpression: null,
-            mock,
-            new InvocationShape(originalExpression, method, noArguments)
-        ) {
+        )
+            : base(
+                originalExpression: null,
+                mock,
+                new InvocationShape(originalExpression, method, noArguments)
+            )
+        {
             this.getter = getter;
 
             this.MarkAsVerifiable();

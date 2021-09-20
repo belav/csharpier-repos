@@ -13,7 +13,8 @@ namespace Microsoft.AspNetCore.Server.IntegrationTesting
             ProcessStartInfo startInfo,
             IDictionary<string, string> environmentVariables,
             ILogger logger
-        ) {
+        )
+        {
             var environment = startInfo.Environment;
 
             foreach (var environmentVariable in environmentVariables)
@@ -32,7 +33,8 @@ namespace Microsoft.AspNetCore.Server.IntegrationTesting
             string name,
             string value,
             ILogger logger
-        ) {
+        )
+        {
             if (value == null)
             {
                 logger.LogInformation("Removing environment variable {name}", name);

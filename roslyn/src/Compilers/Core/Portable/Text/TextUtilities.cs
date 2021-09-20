@@ -54,7 +54,8 @@ namespace Microsoft.CodeAnalysis.Text
             int index,
             out int startLinebreak,
             out int lengthLinebreak
-        ) {
+        )
+        {
             char c = text[index];
             if (c == '\n')
             {

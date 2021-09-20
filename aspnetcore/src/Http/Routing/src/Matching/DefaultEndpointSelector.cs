@@ -63,7 +63,8 @@ namespace Microsoft.AspNetCore.Routing.Matching
         private static void ProcessFinalCandidates(
             HttpContext httpContext,
             CandidateState[] candidateState
-        ) {
+        )
+        {
             Endpoint? endpoint = null;
             RouteValueDictionary? values = null;
             int? foundScore = null;

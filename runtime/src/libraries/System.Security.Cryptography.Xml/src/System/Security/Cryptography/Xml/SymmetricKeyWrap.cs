@@ -100,7 +100,8 @@ namespace System.Security.Cryptography.Xml
         internal static byte[] TripleDESKeyWrapDecrypt(
             byte[] rgbKey,
             byte[] rgbEncryptedWrappedKeyData
-        ) {
+        )
+        {
             // Check to see whether the length of the encrypted key is reasonable
             if (
                 rgbEncryptedWrappedKeyData.Length != 32

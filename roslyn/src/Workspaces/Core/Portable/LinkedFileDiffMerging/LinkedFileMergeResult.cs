@@ -24,7 +24,8 @@ namespace Microsoft.CodeAnalysis
             IEnumerable<DocumentId> documentIds,
             SourceText mergedSourceText,
             IEnumerable<TextSpan> mergeConflictResolutionSpans
-        ) {
+        )
+        {
             DocumentIds = documentIds;
             MergedSourceText = mergedSourceText;
             MergeConflictResolutionSpans = mergeConflictResolutionSpans;

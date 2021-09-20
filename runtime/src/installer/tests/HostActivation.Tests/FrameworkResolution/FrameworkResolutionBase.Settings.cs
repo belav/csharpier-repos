@@ -19,7 +19,8 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation.FrameworkResolution
 
             public TestSettings WithRuntimeConfigCustomizer(
                 Func<RuntimeConfig, RuntimeConfig> customizer
-            ) {
+            )
+            {
                 Func<RuntimeConfig, RuntimeConfig> previousCustomizer = RuntimeConfigCustomizer;
                 if (previousCustomizer == null)
                 {
@@ -59,7 +60,8 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation.FrameworkResolution
 
             public TestSettings WithDotnetCustomizer(
                 Action<DotNetCliExtensions.DotNetCliCustomizer> customizer
-            ) {
+            )
+            {
                 Action<DotNetCliExtensions.DotNetCliCustomizer> previousCustomizer =
                     DotnetCustomizer;
                 if (previousCustomizer == null)
@@ -97,7 +99,8 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation.FrameworkResolution
             SettingLocation location,
             string value,
             string frameworkReferenceName = MicrosoftNETCoreApp
-        ) {
+        )
+        {
             if (value == null || location == SettingLocation.None)
             {
                 return testSettings => testSettings;
@@ -140,7 +143,8 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation.FrameworkResolution
             SettingLocation location,
             int? value,
             string frameworkReferenceName = MicrosoftNETCoreApp
-        ) {
+        )
+        {
             if (!value.HasValue || location == SettingLocation.None)
             {
                 return testSettings => testSettings;
@@ -186,7 +190,8 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation.FrameworkResolution
             SettingLocation location,
             bool? value,
             string frameworkReferenceName = MicrosoftNETCoreApp
-        ) {
+        )
+        {
             if (!value.HasValue || location == SettingLocation.None)
             {
                 return testSettings => testSettings;

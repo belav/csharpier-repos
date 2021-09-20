@@ -95,7 +95,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata
         void AddAnnotations(
             IEnumerable<IConventionAnnotation> annotations,
             bool fromDataAnnotation = false
-        ) {
+        )
+        {
             foreach (var annotation in annotations)
             {
                 AddAnnotation(annotation.Name, annotation.Value, fromDataAnnotation);

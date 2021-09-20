@@ -69,7 +69,8 @@ namespace Microsoft.AspNetCore.Mvc.ViewFeatures
                     modelExplorer.Model.GetType().FullName,
                     StringComparison.Ordinal
                 )
-            ) {
+            )
+            {
                 return stringResult;
             }
 

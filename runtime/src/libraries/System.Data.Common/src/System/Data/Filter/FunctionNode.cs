@@ -251,7 +251,8 @@ namespace System.Data
                         if (
                             (argumentValues[i] == DBNull.Value)
                             || (typeof(object) == s_funcs[_info]._parameters[i])
-                        ) {
+                        )
+                        {
                             // currently all supported functions with IsValidateArguments set to true
                             // NOTE: for IIF and ISNULL IsValidateArguments set to false
                             return DBNull.Value;
@@ -266,7 +267,8 @@ namespace System.Data
                                 && ExpressionNode.IsInteger(
                                     DataStorage.GetStorageType(argumentValues[i].GetType())
                                 )
-                            ) {
+                            )
+                            {
                                 argumentValues[i] = Convert.ToInt32(
                                     argumentValues[i],
                                     FormatProvider
@@ -276,11 +278,13 @@ namespace System.Data
                                 (s_funcs[_info]._id == FunctionId.Trim)
                                 || (s_funcs[_info]._id == FunctionId.Substring)
                                 || (s_funcs[_info]._id == FunctionId.Len)
-                            ) {
+                            )
+                            {
                                 if (
                                     (typeof(string) != (argumentValues[i].GetType()))
                                     && (typeof(SqlString) != (argumentValues[i].GetType()))
-                                ) {
+                                )
+                                {
                                     throw ExprException.ArgumentType(
                                         s_funcs[_info]._name,
                                         i + 1,
@@ -439,7 +443,8 @@ namespace System.Data
             object[] argumentValues,
             DataRow? row,
             DataRowVersion version
-        ) {
+        )
+        {
             StorageType storageType;
             switch (id)
             {
@@ -731,7 +736,8 @@ namespace System.Data
                         if (
                             ExpressionNode.IsFloatSql(storageType)
                             && ExpressionNode.IsIntegerSql(mytype)
-                        ) {
+                        )
+                        {
                             if (StorageType.Single == storageType)
                             {
                                 return SqlConvert.ChangeType2(
@@ -816,7 +822,8 @@ namespace System.Data
                             if (
                                 DateTimeOffset.Now.Offset.Hours != (int)argumentValues[1]
                                 && DateTimeOffset.Now.Offset.Minutes != (int)argumentValues[2]
-                            ) {
+                            )
+                            {
                                 throw ExprException.MismatchKindandTimeSpan();
                             }
                             break;
@@ -968,7 +975,8 @@ namespace System.Data
             Type? a1,
             Type? a2,
             Type? a3
-        ) {
+        )
+        {
             _name = name;
             _id = id;
             _result = result;

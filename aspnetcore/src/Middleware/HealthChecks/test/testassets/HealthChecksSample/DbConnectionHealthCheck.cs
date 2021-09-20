@@ -35,7 +35,8 @@ namespace HealthChecksSample
         public async Task<HealthCheckResult> CheckHealthAsync(
             HealthCheckContext context,
             CancellationToken cancellationToken = default(CancellationToken)
-        ) {
+        )
+        {
             using (var connection = CreateConnection(ConnectionString))
             {
                 try

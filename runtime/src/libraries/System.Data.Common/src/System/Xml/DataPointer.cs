@@ -133,7 +133,8 @@ namespace System.Xml
                     !_doc.IsNotMapped(c)
                     && (c.ColumnMapping == MappingType.Attribute) == fAttribute
                     && (fNulls || !Convert.IsDBNull(row[c, rowVersion]))
-                ) {
+                )
+                {
                     return c;
                 }
             }
@@ -294,7 +295,8 @@ namespace System.Xml
                         _fOnValue
                         || _doc.IsTextOnly(_column)
                         || _column.ColumnMapping != MappingType.Attribute
-                    ) {
+                    )
+                    {
                         return false;
                     }
 
@@ -353,7 +355,8 @@ namespace System.Xml
                 if (
                     (_column == null || _column.ColumnMapping == MappingType.Attribute)
                     && _node.NodeType == XmlNodeType.Element
-                ) {
+                )
+                {
                     if (!IsFoliated(_node))
                     {
                         DataColumn? c = NthColumn(Row!, true, i, false);

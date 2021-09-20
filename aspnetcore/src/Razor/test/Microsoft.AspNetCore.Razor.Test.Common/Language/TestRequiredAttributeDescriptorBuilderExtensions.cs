@@ -10,7 +10,8 @@ namespace Microsoft.AspNetCore.Razor.Language
         public static RequiredAttributeDescriptorBuilder Name(
             this RequiredAttributeDescriptorBuilder builder,
             string name
-        ) {
+        )
+        {
             if (builder == null)
             {
                 throw new ArgumentNullException(nameof(builder));
@@ -24,7 +25,8 @@ namespace Microsoft.AspNetCore.Razor.Language
         public static RequiredAttributeDescriptorBuilder NameComparisonMode(
             this RequiredAttributeDescriptorBuilder builder,
             RequiredAttributeDescriptor.NameComparisonMode nameComparison
-        ) {
+        )
+        {
             if (builder == null)
             {
                 throw new ArgumentNullException(nameof(builder));
@@ -38,7 +40,8 @@ namespace Microsoft.AspNetCore.Razor.Language
         public static RequiredAttributeDescriptorBuilder Value(
             this RequiredAttributeDescriptorBuilder builder,
             string value
-        ) {
+        )
+        {
             if (builder == null)
             {
                 throw new ArgumentNullException(nameof(builder));
@@ -52,7 +55,8 @@ namespace Microsoft.AspNetCore.Razor.Language
         public static RequiredAttributeDescriptorBuilder ValueComparisonMode(
             this RequiredAttributeDescriptorBuilder builder,
             RequiredAttributeDescriptor.ValueComparisonMode valueComparison
-        ) {
+        )
+        {
             if (builder == null)
             {
                 throw new ArgumentNullException(nameof(builder));
@@ -66,7 +70,8 @@ namespace Microsoft.AspNetCore.Razor.Language
         public static RequiredAttributeDescriptorBuilder AddDiagnostic(
             this RequiredAttributeDescriptorBuilder builder,
             RazorDiagnostic diagnostic
-        ) {
+        )
+        {
             builder.Diagnostics.Add(diagnostic);
 
             return builder;

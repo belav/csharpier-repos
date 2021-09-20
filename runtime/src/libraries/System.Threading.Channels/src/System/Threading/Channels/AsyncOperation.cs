@@ -89,7 +89,8 @@ namespace System.Threading.Channels
             bool runContinuationsAsynchronously,
             CancellationToken cancellationToken = default,
             bool pooled = false
-        ) {
+        )
+        {
             _continuation = pooled ? s_availableSentinel : null;
             _pooled = pooled;
             _runContinuationsAsynchronously = runContinuationsAsynchronously;
@@ -201,7 +202,8 @@ namespace System.Threading.Channels
                     Interlocked.CompareExchange(ref _continuation, null, s_availableSentinel),
                     s_availableSentinel
                 )
-            ) {
+            )
+            {
                 _continuationState = null;
                 _result = default;
                 _error = null;
@@ -223,7 +225,8 @@ namespace System.Threading.Channels
             object? state,
             short token,
             ValueTaskSourceOnCompletedFlags flags
-        ) {
+        )
+        {
             if (_currentId != token)
             {
                 ThrowIncorrectCurrentIdException();
@@ -423,7 +426,8 @@ namespace System.Threading.Channels
             if (
                 _continuation != null
                 || Interlocked.CompareExchange(ref _continuation, s_completedSentinel, null) != null
-            ) {
+            )
+            {
                 Debug.Assert(
                     _continuation != s_completedSentinel,
                     $"The continuation was the completion sentinel."

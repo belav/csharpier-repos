@@ -61,7 +61,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                 BinaryOperatorKind relation,
                 ConstantValue left,
                 ConstantValue right
-            ) {
+            )
+            {
                 Debug.Assert(relation == BinaryOperatorKind.Equal);
                 return left.IsBad || right.IsBad || left.BooleanValue == right.BooleanValue;
             }

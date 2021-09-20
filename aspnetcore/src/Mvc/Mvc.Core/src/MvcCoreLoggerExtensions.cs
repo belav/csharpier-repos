@@ -1171,7 +1171,8 @@ namespace Microsoft.AspNetCore.Mvc
         public static void RegisteredOutputFormatters(
             this ILogger logger,
             IEnumerable<IOutputFormatter> outputFormatters
-        ) {
+        )
+        {
             _registeredOutputFormatters(logger, outputFormatters, null);
         }
 
@@ -1179,7 +1180,8 @@ namespace Microsoft.AspNetCore.Mvc
             this ILogger logger,
             IEnumerable<MediaTypeSegmentWithQuality> acceptHeader,
             MediaTypeCollection mediaTypeCollection
-        ) {
+        )
+        {
             _selectingOutputFormatterUsingAcceptHeaderAndExplicitContentTypes(
                 logger,
                 acceptHeader,
@@ -1191,14 +1193,16 @@ namespace Microsoft.AspNetCore.Mvc
         public static void SelectingOutputFormatterUsingAcceptHeader(
             this ILogger logger,
             IEnumerable<MediaTypeSegmentWithQuality> acceptHeader
-        ) {
+        )
+        {
             _selectingOutputFormatterUsingAcceptHeader(logger, acceptHeader, null);
         }
 
         public static void SelectingOutputFormatterUsingContentTypes(
             this ILogger logger,
             MediaTypeCollection mediaTypeCollection
-        ) {
+        )
+        {
             _selectingOutputFormatterUsingContentTypes(logger, mediaTypeCollection, null);
         }
 
@@ -1273,7 +1277,8 @@ namespace Microsoft.AspNetCore.Mvc
         public static void AuthorizationFiltersExecutionPlan(
             this ILogger logger,
             IEnumerable<IFilterMetadata> filters
-        ) {
+        )
+        {
             if (!logger.IsEnabled(LogLevel.Debug))
             {
                 return;
@@ -1288,7 +1293,8 @@ namespace Microsoft.AspNetCore.Mvc
         public static void ResourceFiltersExecutionPlan(
             this ILogger logger,
             IEnumerable<IFilterMetadata> filters
-        ) {
+        )
+        {
             if (!logger.IsEnabled(LogLevel.Debug))
             {
                 return;
@@ -1303,7 +1309,8 @@ namespace Microsoft.AspNetCore.Mvc
         public static void ActionFiltersExecutionPlan(
             this ILogger logger,
             IEnumerable<IFilterMetadata> filters
-        ) {
+        )
+        {
             if (!logger.IsEnabled(LogLevel.Debug))
             {
                 return;
@@ -1316,7 +1323,8 @@ namespace Microsoft.AspNetCore.Mvc
         public static void ExceptionFiltersExecutionPlan(
             this ILogger logger,
             IEnumerable<IFilterMetadata> filters
-        ) {
+        )
+        {
             if (!logger.IsEnabled(LogLevel.Debug))
             {
                 return;
@@ -1331,7 +1339,8 @@ namespace Microsoft.AspNetCore.Mvc
         public static void ResultFiltersExecutionPlan(
             this ILogger logger,
             IEnumerable<IFilterMetadata> filters
-        ) {
+        )
+        {
             if (!logger.IsEnabled(LogLevel.Debug))
             {
                 return;
@@ -1346,7 +1355,8 @@ namespace Microsoft.AspNetCore.Mvc
             string filterType,
             string methodName,
             IFilterMetadata filter
-        ) {
+        )
+        {
             _beforeExecutingMethodOnFilter(logger, filterType, methodName, filter.GetType(), null);
         }
 
@@ -1355,7 +1365,8 @@ namespace Microsoft.AspNetCore.Mvc
             string filterType,
             string methodName,
             IFilterMetadata filter
-        ) {
+        )
+        {
             _afterExecutingMethodOnFilter(logger, filterType, methodName, filter.GetType(), null);
         }
 
@@ -1363,7 +1374,8 @@ namespace Microsoft.AspNetCore.Mvc
             this ILogger logger,
             ActionDescriptor action,
             TimeSpan timeSpan
-        ) {
+        )
+        {
             // Don't log if logging wasn't enabled at start of request as time will be wildly wrong.
             if (logger.IsEnabled(LogLevel.Information))
             {
@@ -1381,7 +1393,8 @@ namespace Microsoft.AspNetCore.Mvc
         public static void NoActionsMatched(
             this ILogger logger,
             IDictionary<string, object> routeValueDictionary
-        ) {
+        )
+        {
             if (logger.IsEnabled(LogLevel.Debug))
             {
                 string[] routeValues = null;
@@ -1415,14 +1428,16 @@ namespace Microsoft.AspNetCore.Mvc
         public static void BeforeExecutingActionResult(
             this ILogger logger,
             IActionResult actionResult
-        ) {
+        )
+        {
             _beforeExecutingActionResult(logger, actionResult.GetType(), null);
         }
 
         public static void AfterExecutingActionResult(
             this ILogger logger,
             IActionResult actionResult
-        ) {
+        )
+        {
             _afterExecutingActionResult(logger, actionResult.GetType(), null);
         }
 
@@ -1430,7 +1445,8 @@ namespace Microsoft.AspNetCore.Mvc
             this ILogger logger,
             ControllerContext context,
             object[] arguments
-        ) {
+        )
+        {
             if (logger.IsEnabled(LogLevel.Information))
             {
                 var actionName = context.ActionDescriptor.DisplayName;
@@ -1464,7 +1480,8 @@ namespace Microsoft.AspNetCore.Mvc
             ControllerContext context,
             IActionResult result,
             TimeSpan timeSpan
-        ) {
+        )
+        {
             if (logger.IsEnabled(LogLevel.Information))
             {
                 var actionName = context.ActionDescriptor.DisplayName;
@@ -1488,7 +1505,8 @@ namespace Microsoft.AspNetCore.Mvc
             string actionName,
             string actionId,
             IActionConstraint actionConstraint
-        ) {
+        )
+        {
             _constraintMismatch(logger, actionName, actionId, actionConstraint, null);
         }
 
@@ -1510,7 +1528,8 @@ namespace Microsoft.AspNetCore.Mvc
             this ILogger logger,
             FileResult fileResult,
             string fileName
-        ) {
+        )
+        {
             if (logger.IsEnabled(LogLevel.Information))
             {
                 var fileResultType = fileResult.GetType().Name;
@@ -1552,7 +1571,8 @@ namespace Microsoft.AspNetCore.Mvc
         public static void ExceptionFilterShortCircuited(
             this ILogger logger,
             IFilterMetadata filter
-        ) {
+        )
+        {
             _exceptionFilterShortCircuit(logger, filter, null);
         }
 
@@ -1564,7 +1584,8 @@ namespace Microsoft.AspNetCore.Mvc
         public static void ForbidResultExecuting(
             this ILogger logger,
             IList<string> authenticationSchemes
-        ) {
+        )
+        {
             if (logger.IsEnabled(LogLevel.Information))
             {
                 _forbidResultExecuting(logger, authenticationSchemes.ToArray(), null);
@@ -1575,14 +1596,16 @@ namespace Microsoft.AspNetCore.Mvc
             this ILogger logger,
             string authenticationScheme,
             ClaimsPrincipal principal
-        ) {
+        )
+        {
             _signInResultExecuting(logger, authenticationScheme, principal, null);
         }
 
         public static void SignOutResultExecuting(
             this ILogger logger,
             IList<string> authenticationSchemes
-        ) {
+        )
+        {
             if (logger.IsEnabled(LogLevel.Information))
             {
                 _signOutResultExecuting(logger, authenticationSchemes.ToArray(), null);
@@ -1603,7 +1626,8 @@ namespace Microsoft.AspNetCore.Mvc
             this ILogger logger,
             ObjectResult result,
             object value
-        ) {
+        )
+        {
             if (logger.IsEnabled(LogLevel.Information))
             {
                 var objectResultType = result.GetType().Name;
@@ -1616,7 +1640,8 @@ namespace Microsoft.AspNetCore.Mvc
             this ILogger logger,
             OutputFormatterCanWriteContext context,
             MediaTypeCollection contentTypes
-        ) {
+        )
+        {
             if (logger.IsEnabled(LogLevel.Warning))
             {
                 var considered = new List<string>(contentTypes);
@@ -1636,7 +1661,8 @@ namespace Microsoft.AspNetCore.Mvc
             this ILogger logger,
             IOutputFormatter outputFormatter,
             OutputFormatterCanWriteContext context
-        ) {
+        )
+        {
             if (logger.IsEnabled(LogLevel.Debug))
             {
                 var contentType = Convert.ToString(
@@ -1660,7 +1686,8 @@ namespace Microsoft.AspNetCore.Mvc
         public static void NoFormatterFromNegotiation(
             this ILogger logger,
             IList<MediaTypeSegmentWithQuality> acceptTypes
-        ) {
+        )
+        {
             _noFormatterFromNegotiation(logger, acceptTypes, null);
         }
 
@@ -1668,7 +1695,8 @@ namespace Microsoft.AspNetCore.Mvc
             this ILogger logger,
             IInputFormatter inputFormatter,
             InputFormatterContext formatterContext
-        ) {
+        )
+        {
             if (logger.IsEnabled(LogLevel.Debug))
             {
                 var contentType = formatterContext.HttpContext.Request.ContentType;
@@ -1680,7 +1708,8 @@ namespace Microsoft.AspNetCore.Mvc
             this ILogger logger,
             IInputFormatter inputFormatter,
             InputFormatterContext formatterContext
-        ) {
+        )
+        {
             if (logger.IsEnabled(LogLevel.Debug))
             {
                 var contentType = formatterContext.HttpContext.Request.ContentType;
@@ -1691,7 +1720,8 @@ namespace Microsoft.AspNetCore.Mvc
         public static void NoInputFormatterSelected(
             this ILogger logger,
             InputFormatterContext formatterContext
-        ) {
+        )
+        {
             if (logger.IsEnabled(LogLevel.Debug))
             {
                 var contentType = formatterContext.HttpContext.Request.ContentType;
@@ -1719,7 +1749,8 @@ namespace Microsoft.AspNetCore.Mvc
             this ILogger logger,
             string destination,
             string routeName
-        ) {
+        )
+        {
             _redirectToRouteResultExecuting(logger, destination, routeName, null);
         }
 
@@ -1761,7 +1792,8 @@ namespace Microsoft.AspNetCore.Mvc
             Type overridenFilter,
             Type overridingFilter,
             Type policyType
-        ) {
+        )
+        {
             _notMostEffectiveFilter(logger, overridenFilter, overridingFilter, policyType, null);
         }
 
@@ -1774,7 +1806,8 @@ namespace Microsoft.AspNetCore.Mvc
             this ILogger logger,
             string format,
             MediaTypeCollection supportedMediaTypes
-        ) {
+        )
+        {
             _actionDoesNotSupportFormatFilterContentType(logger, format, supportedMediaTypes, null);
         }
 
@@ -1795,7 +1828,8 @@ namespace Microsoft.AspNetCore.Mvc
             this ILogger logger,
             ParameterModel parameterModel,
             BindingSource bindingSource
-        ) {
+        )
+        {
             if (logger.IsEnabled(LogLevel.Debug))
             {
                 _inferredParameterSource(
@@ -1817,7 +1851,8 @@ namespace Microsoft.AspNetCore.Mvc
             this ILogger logger,
             DateTimeOffset? lastModified,
             DateTimeOffset? ifUnmodifiedSinceDate
-        ) {
+        )
+        {
             _ifUnmodifiedSincePreconditionFailed(logger, lastModified, ifUnmodifiedSinceDate, null);
         }
 
@@ -1825,7 +1860,8 @@ namespace Microsoft.AspNetCore.Mvc
             this ILogger logger,
             DateTimeOffset? lastModified,
             DateTimeOffset? ifRangeLastModifiedDate
-        ) {
+        )
+        {
             _ifRangeLastModifiedPreconditionFailed(
                 logger,
                 lastModified,
@@ -1838,21 +1874,24 @@ namespace Microsoft.AspNetCore.Mvc
             this ILogger logger,
             EntityTagHeaderValue currentETag,
             EntityTagHeaderValue ifRangeTag
-        ) {
+        )
+        {
             _ifRangeETagPreconditionFailed(logger, currentETag, ifRangeTag, null);
         }
 
         public static void RegisteredModelBinderProviders(
             this ILogger logger,
             IModelBinderProvider[] providers
-        ) {
+        )
+        {
             _registeredModelBinderProviders(logger, providers, null);
         }
 
         public static void FoundNoValueInRequest(
             this ILogger logger,
             ModelBindingContext bindingContext
-        ) {
+        )
+        {
             if (!logger.IsEnabled(LogLevel.Debug))
             {
                 return;
@@ -1894,7 +1933,8 @@ namespace Microsoft.AspNetCore.Mvc
         public static void NoPublicSettableProperties(
             this ILogger logger,
             ModelBindingContext bindingContext
-        ) {
+        )
+        {
             _noPublicSettableProperties(
                 logger,
                 bindingContext.ModelName,
@@ -1906,14 +1946,16 @@ namespace Microsoft.AspNetCore.Mvc
         public static void CannotBindToComplexType(
             this ILogger logger,
             ModelBindingContext bindingContext
-        ) {
+        )
+        {
             _cannotBindToComplexType(logger, bindingContext.ModelType, null);
         }
 
         public static void CannotBindToFilesCollectionDueToUnsupportedContentType(
             this ILogger logger,
             ModelBindingContext bindingContext
-        ) {
+        )
+        {
             _cannotBindToFilesCollectionDueToUnsupportedContentType(
                 logger,
                 bindingContext.ModelName,
@@ -1925,7 +1967,8 @@ namespace Microsoft.AspNetCore.Mvc
         public static void CannotCreateHeaderModelBinderCompatVersion_2_0(
             this ILogger logger,
             Type modelType
-        ) {
+        )
+        {
             _cannotCreateHeaderModelBinderCompatVersion_2_0(logger, modelType, null);
         }
 
@@ -1942,7 +1985,8 @@ namespace Microsoft.AspNetCore.Mvc
         public static void AttemptingToBindModel(
             this ILogger logger,
             ModelBindingContext bindingContext
-        ) {
+        )
+        {
             if (!logger.IsEnabled(LogLevel.Debug))
             {
                 return;
@@ -1984,7 +2028,8 @@ namespace Microsoft.AspNetCore.Mvc
         public static void DoneAttemptingToBindModel(
             this ILogger logger,
             ModelBindingContext bindingContext
-        ) {
+        )
+        {
             if (!logger.IsEnabled(LogLevel.Debug))
             {
                 return;
@@ -2025,7 +2070,8 @@ namespace Microsoft.AspNetCore.Mvc
             this ILogger logger,
             ParameterDescriptor parameter,
             ModelMetadata modelMetadata
-        ) {
+        )
+        {
             if (!logger.IsEnabled(LogLevel.Debug))
             {
                 return;
@@ -2079,7 +2125,8 @@ namespace Microsoft.AspNetCore.Mvc
             this ILogger logger,
             ParameterDescriptor parameter,
             ModelMetadata modelMetadata
-        ) {
+        )
+        {
             if (!logger.IsEnabled(LogLevel.Debug))
             {
                 return;
@@ -2133,7 +2180,8 @@ namespace Microsoft.AspNetCore.Mvc
             this ILogger logger,
             ParameterDescriptor parameter,
             ModelMetadata modelMetadata
-        ) {
+        )
+        {
             if (!logger.IsEnabled(LogLevel.Debug))
             {
                 return;
@@ -2188,7 +2236,8 @@ namespace Microsoft.AspNetCore.Mvc
             this ILogger logger,
             ParameterDescriptor parameter,
             ModelMetadata modelMetadata
-        ) {
+        )
+        {
             if (!logger.IsEnabled(LogLevel.Debug))
             {
                 return;
@@ -2242,7 +2291,8 @@ namespace Microsoft.AspNetCore.Mvc
         public static void NoNonIndexBasedFormatFoundForCollection(
             this ILogger logger,
             ModelBindingContext bindingContext
-        ) {
+        )
+        {
             var modelName = bindingContext.ModelName;
             _noNonIndexBasedFormatFoundForCollection(logger, modelName, modelName, null);
         }
@@ -2250,7 +2300,8 @@ namespace Microsoft.AspNetCore.Mvc
         public static void AttemptingToBindCollectionUsingIndices(
             this ILogger logger,
             ModelBindingContext bindingContext
-        ) {
+        )
+        {
             if (!logger.IsEnabled(LogLevel.Debug))
             {
                 return;
@@ -2268,7 +2319,8 @@ namespace Microsoft.AspNetCore.Mvc
                 if (
                     elementType.IsGenericType
                     && elementType.GetGenericTypeDefinition() == typeof(KeyValuePair<, >)
-                ) {
+                )
+                {
                     _attemptingToBindCollectionOfKeyValuePair(
                         logger,
                         modelName,
@@ -2298,7 +2350,8 @@ namespace Microsoft.AspNetCore.Mvc
         public static void NoKeyValueFormatForDictionaryModelBinder(
             this ILogger logger,
             ModelBindingContext bindingContext
-        ) {
+        )
+        {
             _noKeyValueFormatForDictionaryModelBinder(
                 logger,
                 bindingContext.ModelName,
@@ -2312,7 +2365,8 @@ namespace Microsoft.AspNetCore.Mvc
             this ILogger logger,
             ParameterDescriptor parameter,
             ModelMetadata modelMetadata
-        ) {
+        )
+        {
             if (!logger.IsEnabled(LogLevel.Debug))
             {
                 return;
@@ -2364,7 +2418,8 @@ namespace Microsoft.AspNetCore.Mvc
             Type initialType,
             Type replacedType,
             int? statusCode
-        ) {
+        )
+        {
             _transformingClientError(logger, initialType, statusCode, replacedType, null);
         }
 
@@ -2372,7 +2427,8 @@ namespace Microsoft.AspNetCore.Mvc
             ILogger logger,
             string filterType,
             IEnumerable<IFilterMetadata> filters
-        ) {
+        )
+        {
             var filterList = _noFilters;
             if (filters.Any())
             {
@@ -2385,7 +2441,8 @@ namespace Microsoft.AspNetCore.Mvc
         public static void ExecutingControllerFactory(
             this ILogger logger,
             ControllerContext context
-        ) {
+        )
+        {
             if (!logger.IsEnabled(LogLevel.Debug))
             {
                 return;

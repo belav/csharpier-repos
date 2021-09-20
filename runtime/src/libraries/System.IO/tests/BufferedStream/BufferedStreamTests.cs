@@ -169,7 +169,8 @@ namespace System.IO.Tests
         public async Task CopyToTest_ReadBeforeCopy_CopiesAllData(
             bool copyAsynchronously,
             bool wrappedStreamCanSeek
-        ) {
+        )
+        {
             byte[] data = Enumerable.Range(0, 1000).Select(i => (byte)(i % 256)).ToArray();
 
             var wrapped = new ManuallyReleaseAsyncOperationsStream();
@@ -349,7 +350,8 @@ namespace System.IO.Tests
             int offset,
             int count,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             await _tcs.Task;
             return await _stream.ReadAsync(buffer, offset, count, cancellationToken);
         }
@@ -359,7 +361,8 @@ namespace System.IO.Tests
             int offset,
             int count,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             await _tcs.Task;
             await _stream.WriteAsync(buffer, offset, count, cancellationToken);
         }

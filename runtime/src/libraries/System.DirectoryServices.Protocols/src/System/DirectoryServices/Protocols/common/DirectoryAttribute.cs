@@ -249,7 +249,8 @@ namespace System.DirectoryServices.Protocols
                 if (
                     value < DirectoryAttributeOperation.Add
                     || value > DirectoryAttributeOperation.Replace
-                ) {
+                )
+                {
                     throw new InvalidEnumArgumentException(
                         nameof(value),
                         (int)value,

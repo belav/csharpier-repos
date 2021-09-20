@@ -26,7 +26,8 @@ namespace Microsoft.AspNetCore.Builder
         public static IApplicationBuilder UseStatusCodePages(
             this IApplicationBuilder app,
             StatusCodePagesOptions options
-        ) {
+        )
+        {
             if (app == null)
             {
                 throw new ArgumentNullException(nameof(app));
@@ -65,7 +66,8 @@ namespace Microsoft.AspNetCore.Builder
         public static IApplicationBuilder UseStatusCodePages(
             this IApplicationBuilder app,
             Func<StatusCodeContext, Task> handler
-        ) {
+        )
+        {
             if (app == null)
             {
                 throw new ArgumentNullException(nameof(app));
@@ -90,7 +92,8 @@ namespace Microsoft.AspNetCore.Builder
             this IApplicationBuilder app,
             string contentType,
             string bodyFormat
-        ) {
+        )
+        {
             if (app == null)
             {
                 throw new ArgumentNullException(nameof(app));
@@ -121,7 +124,8 @@ namespace Microsoft.AspNetCore.Builder
         public static IApplicationBuilder UseStatusCodePagesWithRedirects(
             this IApplicationBuilder app,
             string locationFormat
-        ) {
+        )
+        {
             if (app == null)
             {
                 throw new ArgumentNullException(nameof(app));
@@ -172,7 +176,8 @@ namespace Microsoft.AspNetCore.Builder
         public static IApplicationBuilder UseStatusCodePages(
             this IApplicationBuilder app,
             Action<IApplicationBuilder> configuration
-        ) {
+        )
+        {
             if (app == null)
             {
                 throw new ArgumentNullException(nameof(app));
@@ -196,7 +201,8 @@ namespace Microsoft.AspNetCore.Builder
             this IApplicationBuilder app,
             string pathFormat,
             string? queryFormat = null
-        ) {
+        )
+        {
             if (app == null)
             {
                 throw new ArgumentNullException(nameof(app));

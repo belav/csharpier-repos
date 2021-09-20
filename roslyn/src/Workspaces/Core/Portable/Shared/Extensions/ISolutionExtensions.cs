@@ -17,7 +17,8 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
         public static async Task<ImmutableArray<INamespaceSymbol>> GetGlobalNamespacesAsync(
             this Solution solution,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var results = ArrayBuilder<INamespaceSymbol>.GetInstance();
 
             foreach (var projectId in solution.ProjectIds)
@@ -46,7 +47,8 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
             DocumentId documentId,
             SourceText text,
             PreservationMode mode = PreservationMode.PreserveIdentity
-        ) {
+        )
+        {
             var documentKind = solution.GetDocumentKind(documentId);
             switch (documentKind)
             {

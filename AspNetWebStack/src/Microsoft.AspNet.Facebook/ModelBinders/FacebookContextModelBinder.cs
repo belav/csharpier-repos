@@ -40,7 +40,8 @@ namespace Microsoft.AspNet.Facebook.ModelBinders
         public virtual object BindModel(
             ControllerContext controllerContext,
             ModelBindingContext bindingContext
-        ) {
+        )
+        {
             FacebookClient client = _config.ClientProvider.CreateClient();
             dynamic signedRequest = FacebookRequestHelpers.GetSignedRequest(
                 controllerContext.HttpContext,

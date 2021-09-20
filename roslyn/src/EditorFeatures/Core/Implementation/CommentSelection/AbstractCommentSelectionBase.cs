@@ -47,7 +47,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.CommentSelection
         internal AbstractCommentSelectionBase(
             ITextUndoHistoryRegistry undoHistoryRegistry,
             IEditorOperationsFactoryService editorOperationsFactoryService
-        ) {
+        )
+        {
             Contract.ThrowIfNull(undoHistoryRegistry);
             Contract.ThrowIfNull(editorOperationsFactoryService);
 
@@ -92,7 +93,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.CommentSelection
             ITextBuffer subjectBuffer,
             TCommand command,
             CommandExecutionContext context
-        ) {
+        )
+        {
             var title = GetTitle(command);
             var message = GetMessage(command);
 
@@ -146,7 +148,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.CommentSelection
             ICommentSelectionService service,
             string title,
             CommentSelectionResult edits
-        ) {
+        )
+        {
             // Create tracking spans to track the text changes.
             var currentSnapshot = subjectBuffer.CurrentSnapshot;
             var trackingSpans = edits.TrackingSpans.SelectAsArray(
@@ -169,7 +172,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.CommentSelection
                     _undoHistoryRegistry,
                     _editorOperationsFactoryService
                 )
-            ) {
+            )
+            {
                 document.Project.Solution.Workspace.ApplyTextChanges(
                     document.Id,
                     edits.TextChanges.Distinct(),
@@ -229,7 +233,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.CommentSelection
             Operation operation,
             ITextSnapshot snapshot,
             TextSpan textSpan
-        ) {
+        )
+        {
             // If a comment is being added, the tracking span must include changes at the edge.
             var spanTrackingMode =
                 operation == Operation.Comment
@@ -249,7 +254,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.CommentSelection
             ITextSnapshot snapshot,
             ITrackingSpan trackingSpan,
             CommentTrackingSpan originalSpan
-        ) {
+        )
+        {
             var snapshotSpan = trackingSpan.GetSpan(snapshot);
             if (originalSpan.HasPostApplyChanges())
             {
@@ -260,7 +266,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.CommentSelection
                 if (
                     updatedStart >= snapshotSpan.Start.Position
                     && updatedEnd <= snapshotSpan.End.Position
-                ) {
+                )
+                {
                     snapshotSpan = new SnapshotSpan(
                         snapshot,
                         Span.FromBounds(updatedStart, updatedEnd)
@@ -276,7 +283,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.CommentSelection
             ITextSnapshot snapshot,
             IEnumerable<SnapshotSpan> changes,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var document = snapshot.GetOpenDocumentInCurrentContextWithChanges();
             if (document == null)
             {
@@ -295,14 +303,16 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.CommentSelection
             SnapshotSpan span,
             ITextSnapshotLine firstLine,
             ITextSnapshotLine lastLine
-        ) {
+        )
+        {
             // TODO: This breaks if you have mixed tabs/spaces, and/or tabsize != indentsize.
             var indentToCommentAt = int.MaxValue;
             for (
                 var lineNumber = firstLine.LineNumber;
                 lineNumber <= lastLine.LineNumber;
                 ++lineNumber
-            ) {
+            )
+            {
                 var line = span.Snapshot.GetLineFromLineNumber(lineNumber);
                 var firstNonWhitespacePosition = line.GetFirstNonWhitespacePosition();
                 var firstNonWhitespaceOnLine = firstNonWhitespacePosition.HasValue

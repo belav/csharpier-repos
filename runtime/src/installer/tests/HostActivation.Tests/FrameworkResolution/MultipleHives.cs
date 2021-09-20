@@ -73,7 +73,8 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation.FrameworkResolution
                 TestOnlyProductBehavior.Enable(
                     SharedState.DotNetMainHive.GreatestVersionHostFxrFilePath
                 )
-            ) {
+            )
+            {
                 return RunTest(
                     SharedState.DotNetMainHive,
                     SharedState.FrameworkReferenceApp,

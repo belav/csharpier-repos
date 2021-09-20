@@ -89,7 +89,8 @@ namespace System.Web.Http.ModelBinding
 
         internal static IEnumerable<KeyValuePair<string, string>> GetJQueryNameValuePairs(
             this FormDataCollection formData
-        ) {
+        )
+        {
             if (formData == null)
             {
                 throw Error.ArgumentNull("formData");
@@ -158,7 +159,8 @@ namespace System.Web.Http.ModelBinding
             this FormDataCollection formData,
             Type type,
             HttpActionContext actionContext
-        ) {
+        )
+        {
             return ReadAs(formData, type, String.Empty, actionContext);
         }
 
@@ -167,7 +169,8 @@ namespace System.Web.Http.ModelBinding
             string modelName,
             IRequiredMemberSelector requiredMemberSelector,
             IFormatterLogger formatterLogger
-        ) {
+        )
+        {
             return (T)ReadAs(
                 formData,
                 typeof(T),
@@ -181,7 +184,8 @@ namespace System.Web.Http.ModelBinding
             this FormDataCollection formData,
             string modelName,
             HttpActionContext actionContext
-        ) {
+        )
+        {
             return (T)ReadAs(formData, typeof(T), modelName, actionContext);
         }
 
@@ -190,7 +194,8 @@ namespace System.Web.Http.ModelBinding
             Type type,
             string modelName,
             HttpActionContext actionContext
-        ) {
+        )
+        {
             if (formData == null)
             {
                 throw Error.ArgumentNull("formData");
@@ -213,7 +218,8 @@ namespace System.Web.Http.ModelBinding
             string modelName,
             IRequiredMemberSelector requiredMemberSelector,
             IFormatterLogger formatterLogger
-        ) {
+        )
+        {
             return ReadAs(
                 formData,
                 type,
@@ -245,7 +251,8 @@ namespace System.Web.Http.ModelBinding
             IRequiredMemberSelector requiredMemberSelector,
             IFormatterLogger formatterLogger,
             HttpConfiguration config
-        ) {
+        )
+        {
             if (formData == null)
             {
                 throw Error.ArgumentNull("formData");
@@ -303,7 +310,8 @@ namespace System.Web.Http.ModelBinding
             {
                 foreach (
                     KeyValuePair<string, ModelState> modelStatePair in actionContext.ModelState
-                ) {
+                )
+                {
                     foreach (ModelError modelError in modelStatePair.Value.Errors)
                     {
                         if (modelError.Exception != null)
@@ -326,7 +334,8 @@ namespace System.Web.Http.ModelBinding
             Type type,
             string modelName,
             HttpActionContext actionContext
-        ) {
+        )
+        {
             Contract.Assert(formData != null);
             Contract.Assert(type != null);
             Contract.Assert(actionContext != null);
@@ -357,7 +366,8 @@ namespace System.Web.Http.ModelBinding
         // Helper for ReadAs() to get a ModelBinderProvider to read FormUrl data.
         private static ModelBinderProvider CreateModelBindingProvider(
             HttpActionContext actionContext
-        ) {
+        )
+        {
             Contract.Assert(actionContext != null);
 
             ServicesContainer cs = actionContext.ControllerContext.Configuration.Services;
@@ -372,7 +382,8 @@ namespace System.Web.Http.ModelBinding
             string modelName,
             Type type,
             IValueProvider vp
-        ) {
+        )
+        {
             Contract.Assert(actionContext != null);
             Contract.Assert(type != null);
             Contract.Assert(vp != null);
@@ -394,7 +405,8 @@ namespace System.Web.Http.ModelBinding
         // Creates a default action context to invoke model binding
         private static HttpActionContext CreateActionContextForModelBinding(
             HttpConfiguration config
-        ) {
+        )
+        {
             Contract.Assert(config != null);
 
             HttpControllerContext controllerContext = new HttpControllerContext()
@@ -420,7 +432,8 @@ namespace System.Web.Http.ModelBinding
             public ServicesContainerWrapper(
                 HttpConfiguration originalConfig,
                 ModelValidatorProvider requiredMemberModelValidatorProvider
-            ) {
+            )
+            {
                 _originalConfig = originalConfig;
                 _requiredMemberModelValidatorProvider = requiredMemberModelValidatorProvider;
             }

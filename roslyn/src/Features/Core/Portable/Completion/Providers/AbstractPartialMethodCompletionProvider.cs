@@ -65,7 +65,8 @@ namespace Microsoft.CodeAnalysis.Completion.Providers
                     out var modifiers,
                     out var token
                 )
-            ) {
+            )
+            {
                 return;
             }
 
@@ -92,7 +93,8 @@ namespace Microsoft.CodeAnalysis.Completion.Providers
             Document document,
             CompletionItem item,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var syntaxFactory = document.GetLanguageService<SyntaxGenerator>();
             var semanticModel = await document.GetSemanticModelAsync(cancellationToken)
                 .ConfigureAwait(false);
@@ -132,7 +134,8 @@ namespace Microsoft.CodeAnalysis.Completion.Providers
             DeclarationModifiers modifiers,
             SyntaxToken token,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var semanticModel = await document.GetSemanticModelAsync(cancellationToken)
                 .ConfigureAwait(false);
 
@@ -168,7 +171,8 @@ namespace Microsoft.CodeAnalysis.Completion.Providers
             SemanticModel semanticModel,
             DeclarationModifiers modifiers,
             SyntaxToken token
-        ) {
+        )
+        {
             modifiers = new DeclarationModifiers(
                 method.IsStatic,
                 isUnsafe: method.RequiresUnsafeModifier(),

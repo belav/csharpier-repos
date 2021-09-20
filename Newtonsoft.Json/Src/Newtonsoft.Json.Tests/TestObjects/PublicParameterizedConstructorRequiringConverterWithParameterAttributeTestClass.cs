@@ -31,7 +31,8 @@ namespace Newtonsoft.Json.Tests.TestObjects
 
         public PublicParameterizedConstructorRequiringConverterWithParameterAttributeTestClass(
             [JsonConverter(typeof(NameContainerConverter))] NameContainer nameParameter
-        ) {
+        )
+        {
             _nameContainer = nameParameter;
         }
 

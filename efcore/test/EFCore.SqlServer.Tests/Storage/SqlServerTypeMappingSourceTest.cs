@@ -157,7 +157,8 @@ namespace Microsoft.EntityFrameworkCore
         public void Does_non_key_SQL_Server_string_mapping_with_value_that_fits_max_length(
             bool? unicode,
             bool? fixedLength
-        ) {
+        )
+        {
             var typeMapping = GetTypeMapping(typeof(string), null, 3, unicode, fixedLength);
 
             Assert.Null(typeMapping.DbType);
@@ -176,7 +177,8 @@ namespace Microsoft.EntityFrameworkCore
         public void Does_non_key_SQL_Server_string_mapping_with_max_length(
             bool? unicode,
             bool? fixedLength
-        ) {
+        )
+        {
             var typeMapping = GetTypeMapping(typeof(string), null, 3, unicode, fixedLength);
 
             Assert.Null(typeMapping.DbType);
@@ -195,7 +197,8 @@ namespace Microsoft.EntityFrameworkCore
         [InlineData(null)]
         public void Does_non_key_SQL_Server_fixed_string_mapping_with_max_length_large_value(
             bool? unicode
-        ) {
+        )
+        {
             var typeMapping = GetTypeMapping(typeof(string), null, 3, unicode, fixedLength: true);
 
             Assert.Equal(DbType.StringFixedLength, typeMapping.DbType);
@@ -214,7 +217,8 @@ namespace Microsoft.EntityFrameworkCore
         [InlineData(null)]
         public void Does_non_key_SQL_Server_fixed_string_mapping_with_max_length_small_value(
             bool? unicode
-        ) {
+        )
+        {
             var typeMapping = GetTypeMapping(typeof(string), null, 3, unicode, fixedLength: true);
 
             Assert.Equal(DbType.StringFixedLength, typeMapping.DbType);
@@ -233,7 +237,8 @@ namespace Microsoft.EntityFrameworkCore
         [InlineData(null)]
         public void Does_non_key_SQL_Server_fixed_string_mapping_with_max_length_exact_value(
             bool? unicode
-        ) {
+        )
+        {
             var typeMapping = GetTypeMapping(typeof(string), null, 3, unicode, fixedLength: true);
 
             Assert.Equal(DbType.StringFixedLength, typeMapping.DbType);
@@ -255,7 +260,8 @@ namespace Microsoft.EntityFrameworkCore
         public void Does_non_key_SQL_Server_string_mapping_with_long_string(
             bool? unicode,
             bool? fixedLength
-        ) {
+        )
+        {
             var typeMapping = GetTypeMapping(
                 typeof(string),
                 unicode: unicode,
@@ -281,7 +287,8 @@ namespace Microsoft.EntityFrameworkCore
         public void Does_non_key_SQL_Server_string_mapping_with_max_length_with_long_string(
             bool? unicode,
             bool? fixedLength
-        ) {
+        )
+        {
             var typeMapping = GetTypeMapping(typeof(string), null, 3, unicode, fixedLength);
 
             Assert.Null(typeMapping.DbType);
@@ -303,7 +310,8 @@ namespace Microsoft.EntityFrameworkCore
         public void Does_non_key_SQL_Server_required_string_mapping(
             bool? unicode,
             bool? fixedLength
-        ) {
+        )
+        {
             var typeMapping = GetTypeMapping(
                 typeof(string),
                 nullable: false,
@@ -382,7 +390,8 @@ namespace Microsoft.EntityFrameworkCore
         public void Does_required_foreign_key_SQL_Server_string_mapping(
             bool? unicode,
             bool? fixedLength
-        ) {
+        )
+        {
             var property = CreateEntityType<MyType>().AddProperty("MyProp", typeof(string));
             property.IsNullable = false;
             property.SetIsUnicode(unicode);
@@ -437,7 +446,8 @@ namespace Microsoft.EntityFrameworkCore
         public void Does_IndexAttribute_column_SQL_Server_string_mapping(
             bool? unicode,
             bool? fixedLength
-        ) {
+        )
+        {
             var entityType = CreateEntityType<MyTypeWithIndexAttribute>();
             var property = entityType.FindProperty("Name");
             property.SetIsUnicode(unicode);
@@ -481,7 +491,8 @@ namespace Microsoft.EntityFrameworkCore
         [InlineData(null)]
         public void Does_non_key_SQL_Server_string_mapping_for_value_that_fits_with_max_length_ansi(
             bool? fixedLength
-        ) {
+        )
+        {
             var typeMapping = GetTypeMapping(typeof(string), null, 3, unicode: false, fixedLength);
 
             Assert.Equal(DbType.AnsiString, typeMapping.DbType);
@@ -609,7 +620,8 @@ namespace Microsoft.EntityFrameworkCore
         [InlineData(null)]
         public void Does_non_key_SQL_Server_string_mapping_with_max_length_with_long_string_ansi(
             bool? fixedLength
-        ) {
+        )
+        {
             var typeMapping = GetTypeMapping(typeof(string), null, 3, unicode: false, fixedLength);
 
             Assert.Equal(DbType.AnsiString, typeMapping.DbType);
@@ -820,7 +832,8 @@ namespace Microsoft.EntityFrameworkCore
         [InlineData(null)]
         public void Does_non_key_SQL_Server_binary_mapping_with_max_length_with_long_array(
             bool? fixedLength
-        ) {
+        )
+        {
             var typeMapping = GetTypeMapping(typeof(byte[]), null, 3, fixedLength: fixedLength);
 
             Assert.Equal(DbType.Binary, typeMapping.DbType);
@@ -862,7 +875,8 @@ namespace Microsoft.EntityFrameworkCore
         public void Does_non_key_SQL_Server_fixed_length_binary_mapping_with_small_value(
             string typeName,
             int? maxLength
-        ) {
+        )
+        {
             var typeMapping = CreateBinaryMapping(typeName, maxLength);
 
             Assert.True(typeMapping.IsFixedLength);
@@ -882,7 +896,8 @@ namespace Microsoft.EntityFrameworkCore
         public void Does_non_key_SQL_Server_fixed_length_binary_mapping_with_exact_value(
             string typeName,
             int? maxLength
-        ) {
+        )
+        {
             var typeMapping = CreateBinaryMapping(typeName, maxLength);
 
             Assert.True(typeMapping.IsFixedLength);
@@ -902,7 +917,8 @@ namespace Microsoft.EntityFrameworkCore
         public void Does_non_key_SQL_Server_fixed_length_binary_mapping_with_large_value(
             string typeName,
             int? maxLength
-        ) {
+        )
+        {
             var typeMapping = CreateBinaryMapping(typeName, maxLength);
 
             Assert.True(typeMapping.IsFixedLength);
@@ -922,7 +938,8 @@ namespace Microsoft.EntityFrameworkCore
         public void Does_non_key_SQL_Server_fixed_length_binary_mapping_with_extreme_value(
             string typeName,
             int? maxLength
-        ) {
+        )
+        {
             var typeMapping = CreateBinaryMapping(typeName, maxLength);
 
             Assert.True(typeMapping.IsFixedLength);
@@ -1114,7 +1131,8 @@ namespace Microsoft.EntityFrameworkCore
             int? maxLength = null,
             bool? unicode = null,
             bool? fixedLength = null
-        ) {
+        )
+        {
             var property = CreateEntityType<MyType>().AddProperty("MyProp", propertyType);
 
             if (nullable.HasValue)
@@ -1268,7 +1286,8 @@ namespace Microsoft.EntityFrameworkCore
             bool unicode,
             bool fixedLength,
             string expectedType = null
-        ) {
+        )
+        {
             var mapping = CreateTypeMapper().FindMapping(typeName);
 
             Assert.Equal(type, mapping.ClrType);

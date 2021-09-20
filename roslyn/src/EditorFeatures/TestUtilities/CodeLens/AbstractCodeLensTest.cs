@@ -24,7 +24,8 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.CodeLens
             {
                 foreach (
                     var annotatedDocument in workspace.Documents.Where(d => d.AnnotatedSpans.Any())
-                ) {
+                )
+                {
                     var document = workspace.CurrentSolution.GetDocument(annotatedDocument.Id);
                     var syntaxNode = await document.GetSyntaxRootAsync();
                     foreach (var annotatedSpan in annotatedDocument.AnnotatedSpans)
@@ -61,7 +62,8 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.CodeLens
             {
                 foreach (
                     var annotatedDocument in workspace.Documents.Where(d => d.AnnotatedSpans.Any())
-                ) {
+                )
+                {
                     var document = workspace.CurrentSolution.GetDocument(annotatedDocument.Id);
                     var syntaxNode = await document.GetSyntaxRootAsync();
                     foreach (var annotatedSpan in annotatedDocument.AnnotatedSpans)
@@ -95,7 +97,8 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.CodeLens
             {
                 foreach (
                     var annotatedDocument in workspace.Documents.Where(d => d.AnnotatedSpans.Any())
-                ) {
+                )
+                {
                     var document = workspace.CurrentSolution.GetDocument(annotatedDocument.Id);
                     var syntaxNode = await document.GetSyntaxRootAsync();
                     foreach (var annotatedSpan in annotatedDocument.AnnotatedSpans)
@@ -129,7 +132,8 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.CodeLens
             {
                 foreach (
                     var annotatedDocument in workspace.Documents.Where(d => d.AnnotatedSpans.Any())
-                ) {
+                )
+                {
                     var document = workspace.CurrentSolution.GetDocument(annotatedDocument.Id);
                     var syntaxNode = await document.GetSyntaxRootAsync();
                     foreach (var annotatedSpan in annotatedDocument.AnnotatedSpans)

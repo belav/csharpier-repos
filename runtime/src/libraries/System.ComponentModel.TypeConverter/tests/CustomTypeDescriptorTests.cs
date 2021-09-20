@@ -294,7 +294,8 @@ namespace System.ComponentModel.Tests
                     null,
                     new EventDescriptorCollection(new EventDescriptor[] { null })
                 }
-            ) {
+            )
+            {
                 yield return new object[] { null, result };
                 yield return new object[]
                 {
@@ -309,7 +310,8 @@ namespace System.ComponentModel.Tests
         public void GetEvents_InvokeAttributesWithParent_ReturnsExpected(
             Attribute[] attributes,
             EventDescriptorCollection result
-        ) {
+        )
+        {
             var mockParentDescriptor = new Mock<ICustomTypeDescriptor>(MockBehavior.Strict);
             mockParentDescriptor.Setup(d => d.GetEvents(attributes)).Returns(result).Verifiable();
             var descriptor = new SubCustomTypeDescriptor(mockParentDescriptor.Object);
@@ -344,7 +346,8 @@ namespace System.ComponentModel.Tests
         [MemberData(nameof(GetProperties_WithParent_TestData))]
         public void GetProperties_InvokeWithParent_ReturnsExpected(
             PropertyDescriptorCollection result
-        ) {
+        )
+        {
             var mockParentDescriptor = new Mock<ICustomTypeDescriptor>(MockBehavior.Strict);
             mockParentDescriptor.Setup(d => d.GetProperties()).Returns(result).Verifiable();
             var descriptor = new SubCustomTypeDescriptor(mockParentDescriptor.Object);
@@ -381,7 +384,8 @@ namespace System.ComponentModel.Tests
                     null,
                     new PropertyDescriptorCollection(new PropertyDescriptor[] { null })
                 }
-            ) {
+            )
+            {
                 yield return new object[] { null, result };
                 yield return new object[]
                 {
@@ -396,7 +400,8 @@ namespace System.ComponentModel.Tests
         public void GetProperties_InvokeAttributesWithParent_ReturnsExpected(
             Attribute[] attributes,
             PropertyDescriptorCollection result
-        ) {
+        )
+        {
             var mockParentDescriptor = new Mock<ICustomTypeDescriptor>(MockBehavior.Strict);
             mockParentDescriptor.Setup(d => d.GetProperties(attributes))
                 .Returns(result)
@@ -452,7 +457,8 @@ namespace System.ComponentModel.Tests
         public void GetPropertyOwner_InvokeWithParent_ReturnsExpected(
             PropertyDescriptor pd,
             object result
-        ) {
+        )
+        {
             var mockParentDescriptor = new Mock<ICustomTypeDescriptor>(MockBehavior.Strict);
             mockParentDescriptor.Setup(d => d.GetPropertyOwner(pd)).Returns(result).Verifiable();
             var descriptor = new SubCustomTypeDescriptor(mockParentDescriptor.Object);

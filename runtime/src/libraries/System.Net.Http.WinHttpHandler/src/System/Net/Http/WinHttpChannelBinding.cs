@@ -27,7 +27,8 @@ namespace System.Net.Http
                     IntPtr.Zero,
                     ref dataSize
                 )
-            ) {
+            )
+            {
                 if (Marshal.GetLastWin32Error() == Interop.WinHttp.ERROR_INSUFFICIENT_BUFFER)
                 {
                     data = Marshal.AllocHGlobal((int)dataSize);
@@ -39,7 +40,8 @@ namespace System.Net.Http
                             data,
                             ref dataSize
                         )
-                    ) {
+                    )
+                    {
                         SetHandle(data);
                         _size = (int)dataSize;
                     }

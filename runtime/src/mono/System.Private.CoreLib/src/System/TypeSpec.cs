@@ -325,7 +325,8 @@ namespace System
             bool throwOnError,
             bool ignoreCase,
             ref StackCrawlMark stackMark
-        ) {
+        )
+        {
             Assembly? asm = null;
             if (assemblyResolver == null && typeResolver == null)
                 return RuntimeType.GetType(

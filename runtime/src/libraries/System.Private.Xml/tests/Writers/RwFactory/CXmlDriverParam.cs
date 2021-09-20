@@ -20,7 +20,8 @@ namespace System.Xml.Tests
             XElement originalNode,
             XElement virtualNode,
             CXmlDriverParamRawNodes parentParams
-        ) {
+        )
+        {
             this.poriginalNode = originalNode;
             this.pvirtualNode = virtualNode;
             this.pparentParams = parentParams;
@@ -147,7 +148,8 @@ namespace System.Xml.Tests
                     curNode == null
                     || route[i].StartsWith("@")
                     || curNode.NodeType != XmlNodeType.Element
-                ) {
+                )
+                {
                     break;
                 }
                 curNode = ((XElement)curNode).Element(route[i]);
@@ -267,7 +269,8 @@ namespace System.Xml.Tests
         internal static string GetTopLevelAttributeValue_Inline(
             CXmlDriverParamRawNodes param,
             string attrName
-        ) {
+        )
+        {
             XAttribute attr = null;
             if (param.Variation != null)
                 attr = param.Variation.Attribute(attrName);

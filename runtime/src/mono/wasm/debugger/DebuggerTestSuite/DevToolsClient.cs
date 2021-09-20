@@ -136,7 +136,8 @@ namespace Microsoft.WebAssembly.Diagnostics
             Uri uri,
             Func<string, CancellationToken, Task> receive,
             CancellationToken token
-        ) {
+        )
+        {
             logger.LogDebug("connecting to {0}", uri);
             this.socket = new ClientWebSocket();
             this.socket.Options.KeepAliveInterval = Timeout.InfiniteTimeSpan;
@@ -195,7 +196,8 @@ namespace Microsoft.WebAssembly.Diagnostics
         private async Task<(RunLoopStopReason, Exception)> RunLoop(
             Func<string, CancellationToken, Task> receive,
             CancellationTokenSource linkedCts
-        ) {
+        )
+        {
             var pending_ops = new List<Task>
             {
                 ReadOne(linkedCts.Token),

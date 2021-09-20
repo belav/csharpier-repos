@@ -22,7 +22,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.EventHookup
             TypeCharCommandArgs args,
             Action nextHandler,
             CommandExecutionContext context
-        ) {
+        )
+        {
             AssertIsForeground();
             nextHandler();
 
@@ -83,7 +84,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.EventHookup
         public CommandState GetCommandState(
             TypeCharCommandArgs args,
             Func<CommandState> nextHandler
-        ) {
+        )
+        {
             AssertIsForeground();
             return nextHandler();
         }

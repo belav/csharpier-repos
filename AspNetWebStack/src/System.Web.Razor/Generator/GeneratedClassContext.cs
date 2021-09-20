@@ -98,14 +98,16 @@ namespace System.Web.Razor.Generator
             string writeLiteralToMethodName,
             string templateTypeName,
             string defineSectionMethodName
-        ) : this(
-            executeMethodName,
-            writeMethodName,
-            writeLiteralMethodName,
-            writeToMethodName,
-            writeLiteralToMethodName,
-            templateTypeName
-        ) {
+        )
+            : this(
+                executeMethodName,
+                writeMethodName,
+                writeLiteralMethodName,
+                writeToMethodName,
+                writeLiteralToMethodName,
+                templateTypeName
+            )
+        {
             DefineSectionMethodName = defineSectionMethodName;
         }
 
@@ -119,15 +121,17 @@ namespace System.Web.Razor.Generator
             string defineSectionMethodName,
             string beginContextMethodName,
             string endContextMethodName
-        ) : this(
-            executeMethodName,
-            writeMethodName,
-            writeLiteralMethodName,
-            writeToMethodName,
-            writeLiteralToMethodName,
-            templateTypeName,
-            defineSectionMethodName
-        ) {
+        )
+            : this(
+                executeMethodName,
+                writeMethodName,
+                writeLiteralMethodName,
+                writeToMethodName,
+                writeLiteralToMethodName,
+                templateTypeName,
+                defineSectionMethodName
+            )
+        {
             BeginContextMethodName = beginContextMethodName;
             EndContextMethodName = endContextMethodName;
         }

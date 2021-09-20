@@ -20,7 +20,8 @@ namespace Microsoft.AspNetCore.Components.WebAssembly.Hosting
             T0 arg0,
             T1 arg1,
             T2 arg2
-        ) {
+        )
+        {
             switch (identifier)
             {
                 case "Blazor._internal.getApplicationEnvironment":

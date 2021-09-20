@@ -60,7 +60,8 @@ namespace Microsoft.AspNetCore.Hosting
         public static IWebHostBuilder UseLibuv(
             this IWebHostBuilder hostBuilder,
             Action<LibuvTransportOptions> configureOptions
-        ) {
+        )
+        {
             return hostBuilder.UseLibuv()
                 .ConfigureServices(
                     services =>

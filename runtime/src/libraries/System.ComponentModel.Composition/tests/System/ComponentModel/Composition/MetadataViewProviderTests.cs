@@ -11,7 +11,8 @@ namespace System.ComponentModel.Composition
     {
         public static int GetMetadataView_IMetadataViewWithDefaultedIntInTranparentType(
             ITrans_MetadataViewWithDefaultedInt view
-        ) {
+        )
+        {
             return view.MyInt;
         }
     }

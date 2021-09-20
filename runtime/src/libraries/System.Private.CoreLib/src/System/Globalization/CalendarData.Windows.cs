@@ -294,7 +294,8 @@ namespace System.Globalization
                         // See if that works
                         if (
                             !CallGetCalendarInfoEx(localeName, calendar, CAL_SCALNAME, out string _)
-                        ) {
+                        )
+                        {
                             // Failed again, just use en-US with the gregorian calendar
                             localeName = "en-US";
                             calendar = CalendarId.GREGORIAN;
@@ -319,7 +320,8 @@ namespace System.Globalization
             uint calType,
             uint lcType,
             out string[]? data
-        ) {
+        )
+        {
             EnumData context = default;
             context.userOverride = null;
             context.strings = new List<string>();
@@ -399,7 +401,8 @@ namespace System.Globalization
             CalendarId calendar,
             uint calType,
             out string[] outputStrings
-        ) {
+        )
+        {
             bool result = true;
 
             //
@@ -436,7 +439,8 @@ namespace System.Globalization
             CalendarId calendar,
             uint calType,
             out string[] outputStrings
-        ) {
+        )
+        {
             //
             // We'll need a new array of 13 items
             //
@@ -458,7 +462,8 @@ namespace System.Globalization
             string localeName,
             bool useUserOverride,
             CalendarId[] calendars
-        ) {
+        )
+        {
             Debug.Assert(!GlobalizationMode.Invariant);
 
             if (GlobalizationMode.UseNls)
@@ -503,7 +508,8 @@ namespace System.Globalization
             string localeName,
             bool useUserOverride,
             CalendarId[] calendars
-        ) {
+        )
+        {
             NlsEnumCalendarsData data = default;
             data.userOverride = 0;
             data.calendars = new List<int>();

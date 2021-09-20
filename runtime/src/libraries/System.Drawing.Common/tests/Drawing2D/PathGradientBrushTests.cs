@@ -73,7 +73,8 @@ namespace System.Drawing.Drawing2D.Tests
             using (PathGradientBrush brushInt = new PathGradientBrush(_defaultIntPoints, wrapMode))
             using (
                 PathGradientBrush brushFloat = new PathGradientBrush(_defaultFloatPoints, wrapMode)
-            ) {
+            )
+            {
                 AssertDefaults(brushInt);
                 Assert.Equal(wrapMode, brushInt.WrapMode);
                 AssertDefaults(brushFloat);
@@ -276,7 +277,8 @@ namespace System.Drawing.Drawing2D.Tests
         public void SurroundColors_InvalidColorsLength_ThrowsArgumentException(
             Point[] points,
             Color[] colors
-        ) {
+        )
+        {
             using (PathGradientBrush brush = new PathGradientBrush(points))
             {
                 AssertExtensions.Throws<ArgumentException>(
@@ -306,7 +308,8 @@ namespace System.Drawing.Drawing2D.Tests
                     _defaultFloatPoints,
                     WrapMode.TileFlipXY
                 )
-            ) {
+            )
+            {
                 Assert.Equal(defaultCentralPoint, brush.CenterPoint);
                 brush.CenterPoint = centralPoint;
                 Assert.Equal(centralPoint, brush.CenterPoint);
@@ -347,7 +350,8 @@ namespace System.Drawing.Drawing2D.Tests
                     _defaultFloatPoints,
                     WrapMode.TileFlipXY
                 )
-            ) {
+            )
+            {
                 brush.Blend = new Blend { Factors = factors, Positions = positions };
                 Assert.Equal(factors, brush.Blend.Factors);
                 Assert.Equal(expectedSize, brush.Blend.Positions.Length);
@@ -372,7 +376,8 @@ namespace System.Drawing.Drawing2D.Tests
                     _defaultFloatPoints,
                     WrapMode.TileFlipXY
                 )
-            ) {
+            )
+            {
                 brush.Blend.Factors = new float[0];
                 Assert.Equal(1, brush.Blend.Factors.Length);
                 brush.Blend.Factors = new float[2];

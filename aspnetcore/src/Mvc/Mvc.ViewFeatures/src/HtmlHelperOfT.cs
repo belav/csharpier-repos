@@ -76,7 +76,8 @@ namespace Microsoft.AspNetCore.Mvc.ViewFeatures
                     runtimeType != null
                     && typeof(TModel) != runtimeType
                     && typeof(TModel).IsAssignableFrom(runtimeType)
-                ) {
+                )
+                {
                     ViewData = new ViewDataDictionary<TModel>(
                         viewContext.ViewData,
                         viewContext.ViewData.Model
@@ -104,7 +105,8 @@ namespace Microsoft.AspNetCore.Mvc.ViewFeatures
         public IHtmlContent CheckBoxFor(
             Expression<Func<TModel, bool>> expression,
             object htmlAttributes
-        ) {
+        )
+        {
             if (expression == null)
             {
                 throw new ArgumentNullException(nameof(expression));
@@ -125,7 +127,8 @@ namespace Microsoft.AspNetCore.Mvc.ViewFeatures
             IEnumerable<SelectListItem> selectList,
             string optionLabel,
             object htmlAttributes
-        ) {
+        )
+        {
             if (expression == null)
             {
                 throw new ArgumentNullException(nameof(expression));
@@ -147,7 +150,8 @@ namespace Microsoft.AspNetCore.Mvc.ViewFeatures
             string templateName,
             string htmlFieldName,
             object additionalViewData
-        ) {
+        )
+        {
             if (expression == null)
             {
                 throw new ArgumentNullException(nameof(expression));
@@ -177,7 +181,8 @@ namespace Microsoft.AspNetCore.Mvc.ViewFeatures
         /// <inheritdoc />
         public string DisplayNameForInnerType<TModelItem, TResult>(
             Expression<Func<TModelItem, TResult>> expression
-        ) {
+        )
+        {
             if (expression == null)
             {
                 throw new ArgumentNullException(nameof(expression));
@@ -208,7 +213,8 @@ namespace Microsoft.AspNetCore.Mvc.ViewFeatures
             string templateName,
             string htmlFieldName,
             object additionalViewData
-        ) {
+        )
+        {
             if (expression == null)
             {
                 throw new ArgumentNullException(nameof(expression));
@@ -227,7 +233,8 @@ namespace Microsoft.AspNetCore.Mvc.ViewFeatures
         public IHtmlContent HiddenFor<TResult>(
             Expression<Func<TModel, TResult>> expression,
             object htmlAttributes
-        ) {
+        )
+        {
             if (expression == null)
             {
                 throw new ArgumentNullException(nameof(expression));
@@ -259,7 +266,8 @@ namespace Microsoft.AspNetCore.Mvc.ViewFeatures
             Expression<Func<TModel, TResult>> expression,
             string labelText,
             object htmlAttributes
-        ) {
+        )
+        {
             if (expression == null)
             {
                 throw new ArgumentNullException(nameof(expression));
@@ -279,7 +287,8 @@ namespace Microsoft.AspNetCore.Mvc.ViewFeatures
             Expression<Func<TModel, TResult>> expression,
             IEnumerable<SelectListItem> selectList,
             object htmlAttributes
-        ) {
+        )
+        {
             if (expression == null)
             {
                 throw new ArgumentNullException(nameof(expression));
@@ -307,7 +316,8 @@ namespace Microsoft.AspNetCore.Mvc.ViewFeatures
         public IHtmlContent PasswordFor<TResult>(
             Expression<Func<TModel, TResult>> expression,
             object htmlAttributes
-        ) {
+        )
+        {
             if (expression == null)
             {
                 throw new ArgumentNullException(nameof(expression));
@@ -327,7 +337,8 @@ namespace Microsoft.AspNetCore.Mvc.ViewFeatures
             Expression<Func<TModel, TResult>> expression,
             object value,
             object htmlAttributes
-        ) {
+        )
+        {
             if (expression == null)
             {
                 throw new ArgumentNullException(nameof(expression));
@@ -354,7 +365,8 @@ namespace Microsoft.AspNetCore.Mvc.ViewFeatures
             int rows,
             int columns,
             object htmlAttributes
-        ) {
+        )
+        {
             if (expression == null)
             {
                 throw new ArgumentNullException(nameof(expression));
@@ -375,7 +387,8 @@ namespace Microsoft.AspNetCore.Mvc.ViewFeatures
             Expression<Func<TModel, TResult>> expression,
             string format,
             object htmlAttributes
-        ) {
+        )
+        {
             if (expression == null)
             {
                 throw new ArgumentNullException(nameof(expression));
@@ -393,7 +406,8 @@ namespace Microsoft.AspNetCore.Mvc.ViewFeatures
 
         private ModelExpression GetModelExpression<TResult>(
             Expression<Func<TModel, TResult>> expression
-        ) {
+        )
+        {
             return _modelExpressionProvider.CreateModelExpression(ViewData, expression);
         }
 
@@ -420,7 +434,8 @@ namespace Microsoft.AspNetCore.Mvc.ViewFeatures
         /// <returns>The <see cref="ModelExplorer"/>.</returns>
         protected ModelExplorer GetModelExplorer<TResult>(
             Expression<Func<TModel, TResult>> expression
-        ) {
+        )
+        {
             if (expression == null)
             {
                 throw new ArgumentNullException(nameof(expression));
@@ -436,7 +451,8 @@ namespace Microsoft.AspNetCore.Mvc.ViewFeatures
             string message,
             object htmlAttributes,
             string tag
-        ) {
+        )
+        {
             if (expression == null)
             {
                 throw new ArgumentNullException(nameof(expression));

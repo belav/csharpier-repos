@@ -36,7 +36,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Builders
             MemberIdentity navigation,
             IMutableForeignKey? foreignKey,
             IMutableSkipNavigation? skipNavigation
-        ) {
+        )
+        {
             DeclaringEntityType = declaringEntityType;
             RelatedEntityType = relatedEntityType;
             CollectionMember = navigation.MemberInfo;
@@ -159,7 +160,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Builders
                 if (
                     ((IConventionSkipNavigation)SkipNavigation).GetConfigurationSource()
                     == ConfigurationSource.Explicit
-                ) {
+                )
+                {
                     throw new InvalidOperationException(
                         CoreStrings.ConflictingRelationshipNavigation(
                             SkipNavigation.DeclaringEntityType.DisplayName()
@@ -215,7 +217,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Builders
                 && foreignKey.GetDependentToPrincipalConfigurationSource()
                     == ConfigurationSource.Explicit
                 && foreignKey.DependentToPrincipal.Name != referenceName
-            ) {
+            )
+            {
                 InternalForeignKeyBuilder.ThrowForConflictingNavigation(
                     foreignKey,
                     referenceName,
@@ -332,7 +335,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Builders
             if (
                 foreignKey.GetDependentToPrincipalConfigurationSource()
                 == ConfigurationSource.Explicit
-            ) {
+            )
+            {
                 InternalForeignKeyBuilder.ThrowForConflictingNavigation(
                     foreignKey,
                     DeclaringEntityType,
@@ -384,7 +388,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Builders
         private IMutableSkipNavigation WithRightManyNavigation(
             MemberIdentity navigationMember,
             string? inverseName
-        ) {
+        )
+        {
             Check.DebugAssert(Builder == null, "Expected no associated foreign key at this point");
             Check.DebugAssert(
                 navigationMember.Name is not null,

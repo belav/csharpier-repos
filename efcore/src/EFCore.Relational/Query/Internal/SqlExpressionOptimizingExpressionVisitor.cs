@@ -50,7 +50,8 @@ namespace Microsoft.EntityFrameworkCore.Query.Internal
         public SqlExpressionOptimizingExpressionVisitor(
             ISqlExpressionFactory sqlExpressionFactory,
             bool useRelationalNulls
-        ) {
+        )
+        {
             _sqlExpressionFactory = sqlExpressionFactory;
             _useRelationalNulls = useRelationalNulls;
         }
@@ -105,7 +106,8 @@ namespace Microsoft.EntityFrameworkCore.Query.Internal
                         is SqlConstantExpression predicateConstantExpression
                     && predicateConstantExpression.Value is bool predicateBoolValue
                     && predicateBoolValue
-                ) {
+                )
+                {
                     newPredicate = null;
                     changed = true;
                 }
@@ -114,7 +116,8 @@ namespace Microsoft.EntityFrameworkCore.Query.Internal
                     newSelectExpression.Having is SqlConstantExpression havingConstantExpression
                     && havingConstantExpression.Value is bool havingBoolValue
                     && havingBoolValue
-                ) {
+                )
+                {
                     newHaving = null;
                     changed = true;
                 }
@@ -153,7 +156,8 @@ namespace Microsoft.EntityFrameworkCore.Query.Internal
             SqlExpression operand,
             Type type,
             RelationalTypeMapping typeMapping
-        ) {
+        )
+        {
             switch (operatorType)
             {
                 case ExpressionType.Not when type == typeof(bool):
@@ -195,7 +199,8 @@ namespace Microsoft.EntityFrameworkCore.Query.Internal
                                 if (
                                     binaryOperand.OperatorType == ExpressionType.AndAlso
                                     || binaryOperand.OperatorType == ExpressionType.OrElse
-                                ) {
+                                )
+                                {
                                     var newLeft = SimplifyUnaryExpression(
                                         ExpressionType.Not,
                                         binaryOperand.Left,
@@ -225,7 +230,8 @@ namespace Microsoft.EntityFrameworkCore.Query.Internal
                                 if (
                                     !_useRelationalNulls
                                     && TryNegate(binaryOperand.OperatorType, out var negated)
-                                ) {
+                                )
+                                {
                                     return SimplifyBinaryExpression(
                                         negated,
                                         binaryOperand.Left,
@@ -252,7 +258,8 @@ namespace Microsoft.EntityFrameworkCore.Query.Internal
             SqlExpression operand,
             Type type,
             RelationalTypeMapping? typeMapping
-        ) {
+        )
+        {
             switch (operatorType)
             {
                 case ExpressionType.Equal:
@@ -278,7 +285,8 @@ namespace Microsoft.EntityFrameworkCore.Query.Internal
                                 sqlUnaryOperand.OperatorType == ExpressionType.Convert
                                 || sqlUnaryOperand.OperatorType == ExpressionType.Not
                                 || sqlUnaryOperand.OperatorType == ExpressionType.Negate
-                            ) {
+                            )
+                            {
                                 // op(a) is null -> a is null
                                 // op(a) is not null -> a is not null
                                 return SimplifyNullNotNullExpression(
@@ -292,7 +300,8 @@ namespace Microsoft.EntityFrameworkCore.Query.Internal
                             if (
                                 sqlUnaryOperand.OperatorType == ExpressionType.Equal
                                 || sqlUnaryOperand.OperatorType == ExpressionType.NotEqual
-                            ) {
+                            )
+                            {
                                 // (a is null) is null -> false
                                 // (a is not null) is null -> false
                                 // (a is null) is not null -> true
@@ -314,7 +323,8 @@ namespace Microsoft.EntityFrameworkCore.Query.Internal
                             if (
                                 sqlBinaryOperand.OperatorType != ExpressionType.AndAlso
                                 && sqlBinaryOperand.OperatorType != ExpressionType.OrElse
-                            ) {
+                            )
+                            {
                                 var newLeft = SimplifyNullNotNullExpression(
                                     operatorType,
                                     sqlBinaryOperand.Left,
@@ -396,7 +406,8 @@ namespace Microsoft.EntityFrameworkCore.Query.Internal
             SqlExpression left,
             SqlExpression right,
             RelationalTypeMapping typeMapping
-        ) {
+        )
+        {
             switch (operatorType)
             {
                 case ExpressionType.AndAlso:
@@ -415,7 +426,8 @@ namespace Microsoft.EntityFrameworkCore.Query.Internal
                             || rightUnary.OperatorType == ExpressionType.NotEqual
                         )
                         && leftUnary.Operand.Equals(rightUnary.Operand)
-                    ) {
+                    )
+                    {
                         // a is null || a is null -> a is null
                         // a is not null || a is not null -> a is not null
                         // a is null && a is null -> a is null
@@ -480,7 +492,8 @@ namespace Microsoft.EntityFrameworkCore.Query.Internal
                             || left is ColumnExpression columnExpression
                                 && !columnExpression.IsNullable
                         ) && left.Equals(right)
-                    ) {
+                    )
+                    {
                         return _sqlExpressionFactory.Constant(
                             operatorType == ExpressionType.Equal,
                             typeMapping
@@ -499,11 +512,13 @@ namespace Microsoft.EntityFrameworkCore.Query.Internal
             bool leftNull,
             bool rightNull,
             RelationalTypeMapping? typeMapping
-        ) {
+        )
+        {
             if (
                 (operatorType == ExpressionType.Equal || operatorType == ExpressionType.NotEqual)
                 && (leftNull || rightNull)
-            ) {
+            )
+            {
                 if (leftNull && rightNull)
                 {
                     return _sqlExpressionFactory.Constant(
@@ -543,7 +558,8 @@ namespace Microsoft.EntityFrameworkCore.Query.Internal
             bool? leftBoolValue,
             bool? rightBoolValue,
             RelationalTypeMapping typeMapping
-        ) {
+        )
+        {
             if (leftBoolValue != null && rightBoolValue != null)
             {
                 return operatorType == ExpressionType.Equal
@@ -618,7 +634,8 @@ namespace Microsoft.EntityFrameworkCore.Query.Internal
             SqlExpression left,
             SqlExpression right,
             RelationalTypeMapping? typeMapping
-        ) {
+        )
+        {
             // true && a -> a
             // true || a -> true
             // false && a -> false
@@ -626,7 +643,8 @@ namespace Microsoft.EntityFrameworkCore.Query.Internal
             if (
                 left is SqlConstantExpression newLeftConstant
                 && newLeftConstant.Value is bool leftBoolValue
-            ) {
+            )
+            {
                 return operatorType == ExpressionType.AndAlso
                   ? leftBoolValue ? right : newLeftConstant
                   : leftBoolValue ? newLeftConstant : right;
@@ -635,7 +653,8 @@ namespace Microsoft.EntityFrameworkCore.Query.Internal
             if (
                 right is SqlConstantExpression newRightConstant
                 && newRightConstant.Value is bool rightBoolValue
-            ) {
+            )
+            {
                 // a && true -> a
                 // a || true -> true
                 // a && false -> false

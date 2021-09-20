@@ -86,7 +86,8 @@ namespace Microsoft.AspNetCore.Mvc.Formatters
         public void CanWriteResult_MatchesWildcardsOnlyWhenContentTypeProvidedByServer(
             bool contentTypeProvidedByServer,
             bool shouldMatchWildcards
-        ) {
+        )
+        {
             // Arrange
             var formatter = new TypeSpecificFormatter();
             formatter.SupportedMediaTypes.Add(MediaTypeHeaderValue.Parse("application/*+xml"));

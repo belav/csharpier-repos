@@ -32,7 +32,8 @@ namespace Microsoft.EntityFrameworkCore.Update
         /// <param name="dependencies"> Service dependencies. </param>
         protected ReaderModificationCommandBatch(
             ModificationCommandBatchFactoryDependencies dependencies
-        ) {
+        )
+        {
             Check.NotNull(dependencies, nameof(dependencies));
 
             Dependencies = dependencies;
@@ -213,7 +214,8 @@ namespace Microsoft.EntityFrameworkCore.Update
                     var columnIndex = 0;
                     columnIndex < command.ColumnModifications.Count;
                     columnIndex++
-                ) {
+                )
+                {
                     var columnModification = command.ColumnModifications[columnIndex];
                     if (columnModification.UseCurrentValueParameter)
                     {
@@ -303,7 +305,8 @@ namespace Microsoft.EntityFrameworkCore.Update
         public override async Task ExecuteAsync(
             IRelationalConnection connection,
             CancellationToken cancellationToken = default
-        ) {
+        )
+        {
             Check.NotNull(connection, nameof(connection));
 
             var storeCommand = CreateStoreCommand();

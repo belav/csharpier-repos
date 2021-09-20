@@ -52,7 +52,8 @@ public class doublemm
         ref double[,] b,
         int row,
         int col
-    ) {
+    )
+    {
         int i;
         res = 0;
         i = 0;
@@ -69,7 +70,8 @@ public class doublemm
         ref double[][] b,
         int row,
         int col
-    ) {
+    )
+    {
         int i;
         res = 0;
         i = 0;
@@ -119,7 +121,8 @@ public class doublemm
         double[][] b,
         int row,
         int col
-    ) {
+    )
+    {
         int i;
         res = 0;
         i = 0;

@@ -25,7 +25,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Venus
             string pszObjectName,
             string pszNameOfEvent,
             out string pbstrEventHandlerName
-        ) {
+        )
+        {
             string result = null;
 
             var waitIndicator = ComponentModel.GetService<IWaitIndicator>();
@@ -55,7 +56,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Venus
             out string pbstrUniqueMemberID,
             out string pbstrEventBody,
             TextSpan[] pSpanInsertionPoint
-        ) {
+        )
+        {
             var thisDocument = GetThisDocument();
             var targetDocumentId = this.ContainedDocument.FindProjectDocumentIdWithItemId(
                 itemidInsertionPoint
@@ -126,7 +128,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Venus
             out int pcMembers,
             IntPtr ppbstrEventHandlerNames,
             IntPtr ppbstrMemberIDs
-        ) {
+        )
+        {
             IEnumerable<Tuple<string, string>> membersAndIds = null;
 
             var waitIndicator = this.ComponentModel.GetService<IWaitIndicator>();
@@ -156,7 +159,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Venus
             string pszNameOfEvent,
             string pszEventHandlerName,
             out string pbstrUniqueMemberID
-        ) {
+        )
+        {
             string memberId = null;
 
             var waitIndicator = this.ComponentModel.GetService<IWaitIndicator>();
@@ -183,7 +187,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Venus
             string pszUniqueMemberID,
             TextSpan[] pSpanNavPoint,
             out uint pItemID
-        ) {
+        )
+        {
             uint itemId = 0;
             TextSpan textSpan = default;
             var succeeded = false;
@@ -203,7 +208,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Venus
                             out var targetDocument,
                             c.CancellationToken
                         )
-                    ) {
+                    )
+                    {
                         succeeded = true;
                         itemId = this.ContainedDocument.FindItemIdOfDocument(targetDocument);
                     }
@@ -221,7 +227,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Venus
             out int pcMembers,
             IntPtr ppbstrDisplayNames,
             IntPtr ppbstrMemberIDs
-        ) {
+        )
+        {
             IEnumerable<Tuple<string, string>> membersAndIds = null;
 
             var waitIndicator = this.ComponentModel.GetService<IWaitIndicator>();
@@ -272,7 +279,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Venus
                             refactorNotifyServices,
                             c.CancellationToken
                         )
-                    ) {
+                    )
+                    {
                         result = s_CONTAINEDLANGUAGE_CANNOTFINDITEM;
                     }
                     else

@@ -45,7 +45,8 @@ namespace System.Data.SqlTypes
         private static SerializationInfo SqlTypeExceptionSerialization(
             SerializationInfo? si,
             StreamingContext sc
-        ) {
+        )
+        {
             if ((null != si) && (1 == si.MemberCount))
             {
                 string? message = si.GetString("SqlTypeExceptionMessage");
@@ -79,7 +80,8 @@ namespace System.Data.SqlTypes
         private static SerializationInfo SqlNullValueExceptionSerialization(
             SerializationInfo si,
             StreamingContext sc
-        ) {
+        )
+        {
             if ((null != si) && (1 == si.MemberCount))
             {
                 string? message = si.GetString("SqlNullValueExceptionMessage");
@@ -113,7 +115,8 @@ namespace System.Data.SqlTypes
         private static SerializationInfo SqlTruncateExceptionSerialization(
             SerializationInfo si,
             StreamingContext sc
-        ) {
+        )
+        {
             if ((null != si) && (1 == si.MemberCount))
             {
                 string? message = si.GetString("SqlTruncateExceptionMessage");

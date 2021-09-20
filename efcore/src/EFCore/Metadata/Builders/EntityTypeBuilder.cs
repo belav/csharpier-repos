@@ -435,7 +435,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Builders
             string ownedTypeName,
             string navigationName,
             Action<OwnedNavigationBuilder> buildAction
-        ) {
+        )
+        {
             Check.NotEmpty(ownedTypeName, nameof(ownedTypeName));
             Check.NotEmpty(navigationName, nameof(navigationName));
             Check.NotNull(buildAction, nameof(buildAction));
@@ -473,7 +474,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Builders
             Type ownedType,
             string navigationName,
             Action<OwnedNavigationBuilder> buildAction
-        ) {
+        )
+        {
             Check.NotEmpty(ownedTypeName, nameof(ownedTypeName));
             Check.NotNull(ownedType, nameof(ownedType));
             Check.NotEmpty(navigationName, nameof(navigationName));
@@ -510,7 +512,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Builders
             Type ownedType,
             string navigationName,
             Action<OwnedNavigationBuilder> buildAction
-        ) {
+        )
+        {
             Check.NotNull(ownedType, nameof(ownedType));
             Check.NotEmpty(navigationName, nameof(navigationName));
             Check.NotNull(buildAction, nameof(buildAction));
@@ -524,7 +527,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Builders
         private OwnedNavigationBuilder OwnsOneBuilder(
             in TypeIdentity ownedType,
             string navigationName
-        ) {
+        )
+        {
             IMutableForeignKey foreignKey;
             using (var batch = Builder.Metadata.Model.DelayConventions())
             {
@@ -666,7 +670,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Builders
             string ownedTypeName,
             string navigationName,
             Action<OwnedNavigationBuilder> buildAction
-        ) {
+        )
+        {
             Check.NotEmpty(ownedTypeName, nameof(ownedTypeName));
             Check.NotEmpty(navigationName, nameof(navigationName));
             Check.NotNull(buildAction, nameof(buildAction));
@@ -704,7 +709,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Builders
             Type ownedType,
             string navigationName,
             Action<OwnedNavigationBuilder> buildAction
-        ) {
+        )
+        {
             Check.NotEmpty(ownedTypeName, nameof(ownedTypeName));
             Check.NotNull(ownedType, nameof(ownedType));
             Check.NotEmpty(navigationName, nameof(navigationName));
@@ -743,7 +749,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Builders
             Type ownedType,
             string navigationName,
             Action<OwnedNavigationBuilder> buildAction
-        ) {
+        )
+        {
             Check.NotNull(ownedType, nameof(ownedType));
             Check.NotEmpty(navigationName, nameof(navigationName));
             Check.NotNull(buildAction, nameof(buildAction));
@@ -757,7 +764,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Builders
         private OwnedNavigationBuilder OwnsManyBuilder(
             in TypeIdentity ownedType,
             string navigationName
-        ) {
+        )
+        {
             IMutableForeignKey foreignKey;
             using (var batch = Builder.Metadata.Model.DelayConventions())
             {
@@ -802,7 +810,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Builders
         public virtual ReferenceNavigationBuilder HasOne(
             string relatedTypeName,
             string? navigationName
-        ) {
+        )
+        {
             Check.NotEmpty(relatedTypeName, nameof(relatedTypeName));
             Check.NullButNotEmpty(navigationName, nameof(navigationName));
 
@@ -848,7 +857,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Builders
         public virtual ReferenceNavigationBuilder HasOne(
             Type relatedType,
             string? navigationName = null
-        ) {
+        )
+        {
             Check.NotNull(relatedType, nameof(relatedType));
             Check.NullButNotEmpty(navigationName, nameof(navigationName));
 
@@ -906,7 +916,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Builders
         protected virtual ForeignKey HasOneBuilder(
             MemberIdentity navigationId,
             EntityType relatedEntityType
-        ) {
+        )
+        {
             ForeignKey foreignKey;
             if (navigationId.MemberInfo != null)
             {
@@ -958,7 +969,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Builders
         public virtual CollectionNavigationBuilder HasMany(
             string relatedTypeName,
             string? navigationName
-        ) {
+        )
+        {
             Check.NotEmpty(relatedTypeName, nameof(relatedTypeName));
             Check.NullButNotEmpty(navigationName, nameof(navigationName));
 
@@ -1031,7 +1043,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Builders
         public virtual CollectionNavigationBuilder HasMany(
             Type relatedType,
             string? navigationName = null
-        ) {
+        )
+        {
             Check.NotNull(relatedType, nameof(relatedType));
             Check.NullButNotEmpty(navigationName, nameof(navigationName));
 
@@ -1041,7 +1054,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Builders
         private CollectionNavigationBuilder HasMany(
             string? navigationName,
             EntityType relatedEntityType
-        ) {
+        )
+        {
             // Note: delay setting ConfigurationSource of skip navigation (if it exists).
             // We do not yet know whether this will be a HasMany().WithOne() or a
             // HasMany().WithMany(). If the skip navigation was found by convention
@@ -1120,7 +1134,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Builders
         /// <returns> The same builder instance so that multiple configuration calls can be chained. </returns>
         public virtual EntityTypeBuilder HasChangeTrackingStrategy(
             ChangeTrackingStrategy changeTrackingStrategy
-        ) {
+        )
+        {
             Builder.HasChangeTrackingStrategy(changeTrackingStrategy, ConfigurationSource.Explicit);
 
             return this;
@@ -1145,7 +1160,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Builders
         /// <returns> The same builder instance so that multiple configuration calls can be chained. </returns>
         public virtual EntityTypeBuilder UsePropertyAccessMode(
             PropertyAccessMode propertyAccessMode
-        ) {
+        )
+        {
             Builder.UsePropertyAccessMode(propertyAccessMode, ConfigurationSource.Explicit);
 
             return this;
@@ -1206,7 +1222,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Builders
         /// <returns> A builder that allows the discriminator property to be configured. </returns>
         public virtual DiscriminatorBuilder<TDiscriminator> HasDiscriminator<TDiscriminator>(
             string name
-        ) {
+        )
+        {
             Check.NotEmpty(name, nameof(name));
 
             return new DiscriminatorBuilder<TDiscriminator>(

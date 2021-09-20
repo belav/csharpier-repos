@@ -18,7 +18,8 @@ namespace Microsoft.AspNetCore.Mvc.Infrastructure
             ControllerBinderDelegate? controllerBinderDelegate,
             ObjectMethodExecutor objectMethodExecutor,
             ActionMethodExecutor actionMethodExecutor
-        ) {
+        )
+        {
             ControllerFactory = controllerFactory;
             ControllerReleaser = controllerReleaser;
             ControllerBinderDelegate = controllerBinderDelegate;

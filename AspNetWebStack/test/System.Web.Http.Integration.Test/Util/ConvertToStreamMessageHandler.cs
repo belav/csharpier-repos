@@ -13,7 +13,8 @@ namespace System.Web.Http.Util
         protected override async Task<HttpResponseMessage> SendAsync(
             HttpRequestMessage request,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             HttpContent requestContent = await ToStreamContent(request.Content);
             request.Content = requestContent;
             HttpResponseMessage response = await base.SendAsync(request, cancellationToken);

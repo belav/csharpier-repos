@@ -9,7 +9,8 @@ namespace System.Buffers.Text
             ReadOnlySpan<byte> source,
             out TimeSpan value,
             out int bytesConsumed
-        ) {
+        )
+        {
             int srcIndex = 0;
             byte c = default;
             while (srcIndex != source.Length)
@@ -106,7 +107,8 @@ namespace System.Buffers.Text
                     out uint fraction,
                     out justConsumed
                 )
-            ) {
+            )
+            {
                 value = default;
                 bytesConsumed = 0;
                 return false;
@@ -124,7 +126,8 @@ namespace System.Buffers.Text
                     fraction: fraction,
                     out value
                 )
-            ) {
+            )
+            {
                 value = default;
                 bytesConsumed = 0;
                 return false;
@@ -140,7 +143,8 @@ namespace System.Buffers.Text
                     source[srcIndex] == Utf8Constants.Period
                     || source[srcIndex] == Utf8Constants.Colon
                 )
-            ) {
+            )
+            {
                 value = default;
                 bytesConsumed = 0;
                 return false;

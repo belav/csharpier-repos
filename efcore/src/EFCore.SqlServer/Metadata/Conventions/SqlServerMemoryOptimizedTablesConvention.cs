@@ -25,7 +25,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
         public SqlServerMemoryOptimizedTablesConvention(
             ProviderConventionSetBuilderDependencies dependencies,
             RelationalConventionSetBuilderDependencies relationalDependencies
-        ) {
+        )
+        {
             Dependencies = dependencies;
         }
 
@@ -48,7 +49,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
             IConventionAnnotation? annotation,
             IConventionAnnotation? oldAnnotation,
             IConventionContext<IConventionAnnotation> context
-        ) {
+        )
+        {
             if (name == SqlServerAnnotationNames.MemoryOptimized)
             {
                 var memoryOptimized = annotation?.Value as bool? == true;
@@ -60,7 +62,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
                 foreach (
                     var index in entityTypeBuilder.Metadata.GetDerivedTypesInclusive()
                         .SelectMany(et => et.GetDeclaredIndexes())
-                ) {
+                )
+                {
                     index.Builder.IsClustered(memoryOptimized ? false : (bool?)null);
                 }
             }
@@ -74,7 +77,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
         public virtual void ProcessKeyAdded(
             IConventionKeyBuilder keyBuilder,
             IConventionContext<IConventionKeyBuilder> context
-        ) {
+        )
+        {
             if (keyBuilder.Metadata.DeclaringEntityType.IsMemoryOptimized())
             {
                 keyBuilder.IsClustered(false);
@@ -89,11 +93,13 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
         public virtual void ProcessIndexAdded(
             IConventionIndexBuilder indexBuilder,
             IConventionContext<IConventionIndexBuilder> context
-        ) {
+        )
+        {
             if (
                 indexBuilder.Metadata.DeclaringEntityType.GetAllBaseTypesInclusive()
                     .Any(et => et.IsMemoryOptimized())
-            ) {
+            )
+            {
                 indexBuilder.IsClustered(false);
             }
         }

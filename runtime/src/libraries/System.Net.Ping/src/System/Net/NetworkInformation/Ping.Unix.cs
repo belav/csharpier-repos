@@ -26,7 +26,8 @@ namespace System.Net.NetworkInformation
             byte[] buffer,
             int timeout,
             PingOptions? options
-        ) {
+        )
+        {
             PingReply reply = RawSocketPermissions.CanUseRawSockets(address.AddressFamily)
                 ? SendIcmpEchoRequestOverRawSocket(address, buffer, timeout, options)
                 : SendWithPingUtility(address, buffer, timeout, options);
@@ -38,7 +39,8 @@ namespace System.Net.NetworkInformation
             byte[] buffer,
             int timeout,
             PingOptions? options
-        ) {
+        )
+        {
             Task<PingReply> t = RawSocketPermissions.CanUseRawSockets(address.AddressFamily)
                 ? SendIcmpEchoRequestOverRawSocketAsync(address, buffer, timeout, options)
                 : SendWithPingUtilityAsync(address, buffer, timeout, options);
@@ -58,7 +60,8 @@ namespace System.Net.NetworkInformation
             byte[] buffer,
             int timeout,
             PingOptions? options
-        ) {
+        )
+        {
             // Use a random value as the identifier. This doesn't need to be perfectly random
             // or very unpredictable, rather just good enough to avoid unexpected conflicts.
             ushort id = (ushort)Random.Shared.Next(ushort.MaxValue + 1);
@@ -149,7 +152,8 @@ namespace System.Net.NetworkInformation
                 && !(
                     addrFamily == AddressFamily.InterNetwork && (ep.Address.Address & 0xf0) == 0xe0
                 )
-            ) {
+            )
+            {
                 // If it is not multicast, use Connect to scope responses only to the target address.
                 socket.Connect(socketConfig.EndPoint);
             }
@@ -165,7 +169,8 @@ namespace System.Net.NetworkInformation
             Stopwatch sw,
             ref int ipHeaderLength,
             [NotNullWhen(true)] out PingReply? reply
-        ) {
+        )
+        {
             byte type,
                 code;
             reply = null;
@@ -220,7 +225,8 @@ namespace System.Net.NetworkInformation
             byte[] buffer,
             int timeout,
             PingOptions? options
-        ) {
+        )
+        {
             SocketConfig socketConfig = GetSocketConfig(address, buffer, timeout, options);
             using (Socket socket = GetRawSocket(socketConfig))
             {
@@ -273,7 +279,8 @@ namespace System.Net.NetworkInformation
                             ref ipHeaderLength,
                             out PingReply? reply
                         )
-                    ) {
+                    )
+                    {
                         return reply;
                     }
                 }
@@ -288,7 +295,8 @@ namespace System.Net.NetworkInformation
             byte[] buffer,
             int timeout,
             PingOptions? options
-        ) {
+        )
+        {
             SocketConfig socketConfig = GetSocketConfig(address, buffer, timeout, options);
             using (Socket socket = GetRawSocket(socketConfig))
             {
@@ -346,7 +354,8 @@ namespace System.Net.NetworkInformation
                             ref ipHeaderLength,
                             out PingReply? reply
                         )
-                    ) {
+                    )
+                    {
                         return reply;
                     }
                 }
@@ -361,7 +370,8 @@ namespace System.Net.NetworkInformation
             byte[] buffer,
             int timeout,
             PingOptions? options
-        ) {
+        )
+        {
             bool isIpv4 = address.AddressFamily == AddressFamily.InterNetwork;
             string? pingExecutable = isIpv4
                 ? UnixCommandLinePing.Ping4UtilityPath
@@ -402,7 +412,8 @@ namespace System.Net.NetworkInformation
             byte[] buffer,
             int timeout,
             PingOptions? options
-        ) {
+        )
+        {
             using (Process p = GetPingProcess(address, buffer, timeout, options))
             {
                 p.Start();
@@ -429,7 +440,8 @@ namespace System.Net.NetworkInformation
             byte[] buffer,
             int timeout,
             PingOptions? options
-        ) {
+        )
+        {
             using (Process p = GetPingProcess(address, buffer, timeout, options))
             {
                 var processCompletion = new TaskCompletionSource(
@@ -540,7 +552,8 @@ namespace System.Net.NetworkInformation
                 ProtocolType protocolType,
                 ushort id,
                 byte[] sendBuffer
-            ) {
+            )
+            {
                 EndPoint = endPoint;
                 Timeout = timeout;
                 Options = options;
@@ -563,7 +576,8 @@ namespace System.Net.NetworkInformation
             IpHeader ipHeader,
             IcmpHeader icmpHeader,
             byte[] payload
-        ) {
+        )
+        {
             int icmpHeaderSize = sizeof(IcmpHeader);
             int offset = 0;
             int packetSize =

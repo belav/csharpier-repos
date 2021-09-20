@@ -38,7 +38,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             BoundNode node,
             BoundNode firstInRegion,
             BoundNode lastInRegion
-        ) {
+        )
+        {
             var walker = new AlwaysAssignedWalker(
                 compilation,
                 member,
@@ -88,7 +89,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             BoundExpression arg,
             RefKind refKind,
             MethodSymbol method
-        ) {
+        )
+        {
             // ref parameter does not "always" assign.
             if (refKind == RefKind.Out)
             {
@@ -101,7 +103,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             LabelSymbol label,
             BoundStatement target,
             ref bool labelStateChanged
-        ) {
+        )
+        {
             // branches into a region are considered entry points
             if (IsInside && pending.Branch != null && !RegionContains(pending.Branch.Syntax.Span))
             {
@@ -155,7 +158,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                     branch.Branch != null
                     && RegionContains(branch.Branch.Syntax.Span)
                     && !_labelsInside.Contains(branch.Label)
-                ) {
+                )
+                {
                     Join(ref _endOfRegionState, ref branch.State);
                 }
             }

@@ -53,7 +53,8 @@ namespace Microsoft.AspNetCore.Server.IIS.Core
                 string connectionId,
                 string traceIdentifier,
                 Exception ex
-            ) {
+            )
+            {
                 _applicationError(logger, connectionId, traceIdentifier, ex);
             }
 
@@ -62,7 +63,8 @@ namespace Microsoft.AspNetCore.Server.IIS.Core
                 string className,
                 Exception ex,
                 [CallerMemberName] string? methodName = null
-            ) {
+            )
+            {
                 _unexpectedError(logger, className, methodName, ex);
             }
 
@@ -70,7 +72,8 @@ namespace Microsoft.AspNetCore.Server.IIS.Core
                 ILogger logger,
                 string connectionId,
                 Microsoft.AspNetCore.Http.BadHttpRequestException ex
-            ) {
+            )
+            {
                 _connectionBadRequest(logger, connectionId, ex.Message, ex);
             }
         }

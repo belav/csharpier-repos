@@ -48,7 +48,8 @@ namespace System.Net.Sockets.Tests
                     SocketType.Dgram,
                     ProtocolType.Udp
                 )
-            ) {
+            )
+            {
                 int receiverPort = receiver.BindToAnonymousPort(IPAddress.Loopback);
                 var receiverEndpoint = new IPEndPoint(IPAddress.Loopback, receiverPort);
 
@@ -71,7 +72,8 @@ namespace System.Net.Sockets.Tests
                     SocketType.Dgram,
                     ProtocolType.Udp
                 )
-            ) {
+            )
+            {
                 receiver.BindToAnonymousPort(IPAddress.Loopback);
 
                 var list = new List<Socket> { receiver };
@@ -104,7 +106,8 @@ namespace System.Net.Sockets.Tests
                     SocketType.Dgram,
                     ProtocolType.Udp
                 )
-            ) {
+            )
+            {
                 int firstReceiverPort = firstReceiver.BindToAnonymousPort(IPAddress.Loopback);
                 var firstReceiverEndpoint = new IPEndPoint(IPAddress.Loopback, firstReceiverPort);
 
@@ -164,7 +167,8 @@ namespace System.Net.Sockets.Tests
                     SocketType.Dgram,
                     ProtocolType.Udp
                 )
-            ) {
+            )
+            {
                 firstReceiver.BindToAnonymousPort(IPAddress.Loopback);
                 secondReceiver.BindToAnonymousPort(IPAddress.Loopback);
 
@@ -198,7 +202,8 @@ namespace System.Net.Sockets.Tests
                     SocketType.Dgram,
                     ProtocolType.Udp
                 )
-            ) {
+            )
+            {
                 firstReceiver.BindToAnonymousPort(IPAddress.Loopback);
 
                 int secondReceiverPort = secondReceiver.BindToAnonymousPort(IPAddress.Loopback);
@@ -233,7 +238,8 @@ namespace System.Net.Sockets.Tests
                     SocketType.Dgram,
                     ProtocolType.Udp
                 )
-            ) {
+            )
+            {
                 var list = new List<Socket> { sender };
                 Socket.Select(null, list, null, SelectSuccessTimeoutMicroseconds);
 
@@ -251,7 +257,8 @@ namespace System.Net.Sockets.Tests
                     SocketType.Stream,
                     ProtocolType.Tcp
                 )
-            ) {
+            )
+            {
                 listener.BindToAnonymousPort(IPAddress.Loopback);
                 listener.Listen(1);
                 listener.AcceptAsync();
@@ -279,7 +286,8 @@ namespace System.Net.Sockets.Tests
                     SocketType.Dgram,
                     ProtocolType.Udp
                 )
-            ) {
+            )
+            {
                 var list = new List<Socket> { firstSender, secondSender };
                 Socket.Select(null, list, null, SelectSuccessTimeoutMicroseconds);
 
@@ -305,7 +313,8 @@ namespace System.Net.Sockets.Tests
                     SocketType.Stream,
                     ProtocolType.Tcp
                 )
-            ) {
+            )
+            {
                 firstListener.BindToAnonymousPort(IPAddress.Loopback);
                 firstListener.Listen(1);
                 firstListener.AcceptAsync();
@@ -337,7 +346,8 @@ namespace System.Net.Sockets.Tests
                     SocketType.Dgram,
                     ProtocolType.Udp
                 )
-            ) {
+            )
+            {
                 listener.BindToAnonymousPort(IPAddress.Loopback);
                 listener.Listen(1);
                 listener.AcceptAsync();
@@ -369,7 +379,8 @@ namespace System.Net.Sockets.Tests
                     SocketType.Dgram,
                     ProtocolType.Udp
                 )
-            ) {
+            )
+            {
                 receiver.BindToAnonymousPort(IPAddress.Loopback);
 
                 var list = new List<Socket> { receiver };
@@ -395,7 +406,8 @@ namespace System.Net.Sockets.Tests
                     SocketType.Dgram,
                     ProtocolType.Udp
                 )
-            ) {
+            )
+            {
                 firstReceiver.BindToAnonymousPort(IPAddress.Loopback);
                 secondReceiver.BindToAnonymousPort(IPAddress.Loopback);
 
@@ -422,7 +434,8 @@ namespace System.Net.Sockets.Tests
                     SocketType.Dgram,
                     ProtocolType.Udp
                 )
-            ) {
+            )
+            {
                 int receiverPort = receiver.BindToAnonymousPort(IPAddress.Loopback);
                 var receiverEndpoint = new IPEndPoint(IPAddress.Loopback, receiverPort);
 
@@ -441,7 +454,8 @@ namespace System.Net.Sockets.Tests
                     SocketType.Dgram,
                     ProtocolType.Udp
                 )
-            ) {
+            )
+            {
                 receiver.BindToAnonymousPort(IPAddress.Loopback);
 
                 Assert.False(receiver.Poll(SelectTimeout, SelectMode.SelectRead));
@@ -457,7 +471,8 @@ namespace System.Net.Sockets.Tests
                     SocketType.Dgram,
                     ProtocolType.Udp
                 )
-            ) {
+            )
+            {
                 Assert.True(sender.Poll(SelectSuccessTimeoutMicroseconds, SelectMode.SelectWrite));
             }
         }
@@ -471,7 +486,8 @@ namespace System.Net.Sockets.Tests
                     SocketType.Stream,
                     ProtocolType.Tcp
                 )
-            ) {
+            )
+            {
                 listener.BindToAnonymousPort(IPAddress.Loopback);
                 listener.Listen(1);
                 listener.AcceptAsync();
@@ -489,7 +505,8 @@ namespace System.Net.Sockets.Tests
                     SocketType.Dgram,
                     ProtocolType.Udp
                 )
-            ) {
+            )
+            {
                 receiver.BindToAnonymousPort(IPAddress.Loopback);
 
                 Assert.False(receiver.Poll(SelectTimeout, SelectMode.SelectError));

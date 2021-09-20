@@ -42,7 +42,8 @@ namespace Microsoft.EntityFrameworkCore.ValueGeneration
                 IProperty property,
                 IEntityType entityType,
                 Func<IProperty, IEntityType, ValueGenerator> factory
-            ) {
+            )
+            {
                 Property = property;
                 EntityType = entityType;
                 Factory = factory;
@@ -78,7 +79,8 @@ namespace Microsoft.EntityFrameworkCore.ValueGeneration
             IProperty property,
             IEntityType entityType,
             Func<IProperty, IEntityType, ValueGenerator> factory
-        ) {
+        )
+        {
             Check.NotNull(property, nameof(property));
             Check.NotNull(factory, nameof(factory));
 

@@ -41,7 +41,8 @@ namespace Microsoft.AspNetCore.SignalR.Client.FunctionalTests
             IHubProtocol protocol = null,
             ILoggerFactory loggerFactory = null,
             bool withAutomaticReconnect = false
-        ) {
+        )
+        {
             var hubConnectionBuilder = new HubConnectionBuilder();
 
             hubConnectionBuilder.WithUrl(url + path);
@@ -86,7 +87,8 @@ namespace Microsoft.AspNetCore.SignalR.Client.FunctionalTests
             string path,
             HttpTransportType transportType,
             TransferFormat transferFormat
-        ) {
+        )
+        {
             return async endPoint =>
             {
                 var httpEndpoint = (UriEndPoint)endPoint;
@@ -110,7 +112,8 @@ namespace Microsoft.AspNetCore.SignalR.Client.FunctionalTests
             string protocolName,
             HttpTransportType transportType,
             string path
-        ) {
+        )
+        {
             var protocol = HubProtocols[protocolName];
             await using (var server = await StartServer<Startup>())
             {
@@ -223,7 +226,8 @@ namespace Microsoft.AspNetCore.SignalR.Client.FunctionalTests
             string protocolName,
             HttpTransportType transportType,
             string path
-        ) {
+        )
+        {
             var protocol = HubProtocols[protocolName];
             await using (var server = await StartServer<Startup>())
             {
@@ -303,7 +307,8 @@ namespace Microsoft.AspNetCore.SignalR.Client.FunctionalTests
             string protocolName,
             HttpTransportType transportType,
             string path
-        ) {
+        )
+        {
             var protocol = HubProtocols[protocolName];
             await using (var server = await StartServer<Startup>())
             {
@@ -353,7 +358,8 @@ namespace Microsoft.AspNetCore.SignalR.Client.FunctionalTests
             string protocolName,
             HttpTransportType transportType,
             string path
-        ) {
+        )
+        {
             var protocol = HubProtocols[protocolName];
             await using (var server = await StartServer<Startup>())
             {
@@ -404,7 +410,8 @@ namespace Microsoft.AspNetCore.SignalR.Client.FunctionalTests
             string protocolName,
             HttpTransportType transportType,
             string path
-        ) {
+        )
+        {
             var protocol = HubProtocols[protocolName];
             await using (var server = await StartServer<Startup>())
             {
@@ -483,7 +490,8 @@ namespace Microsoft.AspNetCore.SignalR.Client.FunctionalTests
             string protocolName,
             HttpTransportType transportType,
             string path
-        ) {
+        )
+        {
             var protocol = HubProtocols[protocolName];
             await using (var server = await StartServer<Startup>())
             {
@@ -527,7 +535,8 @@ namespace Microsoft.AspNetCore.SignalR.Client.FunctionalTests
             string protocolName,
             HttpTransportType transportType,
             string path
-        ) {
+        )
+        {
             var protocol = HubProtocols[protocolName];
             await using (var server = await StartServer<Startup>())
             {
@@ -583,7 +592,8 @@ namespace Microsoft.AspNetCore.SignalR.Client.FunctionalTests
             string protocolName,
             HttpTransportType transportType,
             string path
-        ) {
+        )
+        {
             var protocol = HubProtocols[protocolName];
             await using (var server = await StartServer<Startup>())
             {
@@ -687,7 +697,8 @@ namespace Microsoft.AspNetCore.SignalR.Client.FunctionalTests
             string protocolName,
             HttpTransportType transportType,
             string path
-        ) {
+        )
+        {
             var protocol = HubProtocols[protocolName];
             await using (var server = await StartServer<Startup>())
             {
@@ -732,7 +743,8 @@ namespace Microsoft.AspNetCore.SignalR.Client.FunctionalTests
             string protocolName,
             HttpTransportType transportType,
             string path
-        ) {
+        )
+        {
             var protocol = HubProtocols[protocolName];
             await using (var server = await StartServer<Startup>())
             {
@@ -784,7 +796,8 @@ namespace Microsoft.AspNetCore.SignalR.Client.FunctionalTests
             string protocolName,
             HttpTransportType transportType,
             string path
-        ) {
+        )
+        {
             var protocol = HubProtocols[protocolName];
             await using (var server = await StartServer<Startup>())
             {
@@ -838,7 +851,8 @@ namespace Microsoft.AspNetCore.SignalR.Client.FunctionalTests
             string protocolName,
             HttpTransportType transportType,
             string path
-        ) {
+        )
+        {
             bool ExpectedErrors(WriteContext writeContext)
             {
                 return writeContext.LoggerName == DefaultHubDispatcherLoggerName
@@ -897,7 +911,8 @@ namespace Microsoft.AspNetCore.SignalR.Client.FunctionalTests
             string protocolName,
             HttpTransportType transportType,
             string path
-        ) {
+        )
+        {
             var protocol = HubProtocols[protocolName];
             await using (var server = await StartServer<Startup>())
             {
@@ -941,7 +956,8 @@ namespace Microsoft.AspNetCore.SignalR.Client.FunctionalTests
             string protocolName,
             HttpTransportType transportType,
             string path
-        ) {
+        )
+        {
             var protocol = HubProtocols[protocolName];
             await using (var server = await StartServer<Startup>())
             {
@@ -998,7 +1014,8 @@ namespace Microsoft.AspNetCore.SignalR.Client.FunctionalTests
             string protocolName,
             HttpTransportType transportType,
             string path
-        ) {
+        )
+        {
             var protocol = HubProtocols[protocolName];
             await using (var server = await StartServer<Startup>())
             {
@@ -1039,7 +1056,8 @@ namespace Microsoft.AspNetCore.SignalR.Client.FunctionalTests
             string protocolName,
             HttpTransportType transportType,
             string path
-        ) {
+        )
+        {
             var protocol = HubProtocols[protocolName];
             await using (var server = await StartServer<Startup>())
             {
@@ -1090,7 +1108,8 @@ namespace Microsoft.AspNetCore.SignalR.Client.FunctionalTests
             string protocolName,
             HttpTransportType transportType,
             string path
-        ) {
+        )
+        {
             var protocol = HubProtocols[protocolName];
             await using (var server = await StartServer<Startup>())
             {
@@ -1151,7 +1170,8 @@ namespace Microsoft.AspNetCore.SignalR.Client.FunctionalTests
             string protocolName,
             HttpTransportType transportType,
             string path
-        ) {
+        )
+        {
             var protocol = HubProtocols[protocolName];
             await using (var server = await StartServer<Startup>())
             {
@@ -1221,7 +1241,8 @@ namespace Microsoft.AspNetCore.SignalR.Client.FunctionalTests
             string protocolName,
             HttpTransportType transportType,
             string path
-        ) {
+        )
+        {
             var protocol = HubProtocols[protocolName];
             await using (var server = await StartServer<Startup>())
             {
@@ -1274,7 +1295,8 @@ namespace Microsoft.AspNetCore.SignalR.Client.FunctionalTests
             string protocolName,
             HttpTransportType transportType,
             string path
-        ) {
+        )
+        {
             var protocol = HubProtocols[protocolName];
             await using (var server = await StartServer<Startup>())
             {
@@ -1331,7 +1353,8 @@ namespace Microsoft.AspNetCore.SignalR.Client.FunctionalTests
             string protocolName,
             HttpTransportType transportType,
             string path
-        ) {
+        )
+        {
             var protocol = HubProtocols[protocolName];
             await using (var server = await StartServer<Startup>())
             {
@@ -1374,7 +1397,8 @@ namespace Microsoft.AspNetCore.SignalR.Client.FunctionalTests
             string protocolName,
             HttpTransportType transportType,
             string path
-        ) {
+        )
+        {
             bool ExpectedErrors(WriteContext writeContext)
             {
                 return writeContext.LoggerName == DefaultHubDispatcherLoggerName
@@ -1424,7 +1448,8 @@ namespace Microsoft.AspNetCore.SignalR.Client.FunctionalTests
             string hubProtocolName,
             HttpTransportType transportType,
             string hubPath
-        ) {
+        )
+        {
             var hubProtocol = HubProtocols[hubProtocolName];
             await using (var server = await StartServer<Startup>())
             {
@@ -1467,7 +1492,8 @@ namespace Microsoft.AspNetCore.SignalR.Client.FunctionalTests
             string hubProtocolName,
             HttpTransportType transportType,
             string hubPath
-        ) {
+        )
+        {
             var hubProtocol = HubProtocols[hubProtocolName];
             await using (var server = await StartServer<Startup>())
             {
@@ -1508,7 +1534,8 @@ namespace Microsoft.AspNetCore.SignalR.Client.FunctionalTests
         [MemberData(nameof(HubProtocolsList))]
         public async Task ServerThrowsHubExceptionOnHubMethodArgumentCountMismatch(
             string hubProtocolName
-        ) {
+        )
+        {
             var hubProtocol = HubProtocols[hubProtocolName];
             await using (var server = await StartServer<Startup>())
             {
@@ -1551,7 +1578,8 @@ namespace Microsoft.AspNetCore.SignalR.Client.FunctionalTests
             string hubProtocolName,
             HttpTransportType transportType,
             string hubPath
-        ) {
+        )
+        {
             var hubProtocol = HubProtocols[hubProtocolName];
             await using (var server = await StartServer<Startup>())
             {
@@ -1594,7 +1622,8 @@ namespace Microsoft.AspNetCore.SignalR.Client.FunctionalTests
             string hubProtocolName,
             HttpTransportType transportType,
             string hubPath
-        ) {
+        )
+        {
             var hubProtocol = HubProtocols[hubProtocolName];
             await using (var server = await StartServer<Startup>())
             {
@@ -1637,7 +1666,8 @@ namespace Microsoft.AspNetCore.SignalR.Client.FunctionalTests
             string hubProtocolName,
             HttpTransportType transportType,
             string hubPath
-        ) {
+        )
+        {
             var hubProtocol = HubProtocols[hubProtocolName];
             await using (var server = await StartServer<Startup>())
             {
@@ -1680,7 +1710,8 @@ namespace Microsoft.AspNetCore.SignalR.Client.FunctionalTests
             string hubProtocolName,
             HttpTransportType transportType,
             string hubPath
-        ) {
+        )
+        {
             var hubProtocol = HubProtocols[hubProtocolName];
             await using (var server = await StartServer<Startup>())
             {
@@ -1723,7 +1754,8 @@ namespace Microsoft.AspNetCore.SignalR.Client.FunctionalTests
             string hubProtocolName,
             HttpTransportType transportType,
             string hubPath
-        ) {
+        )
+        {
             var hubProtocol = HubProtocols[hubProtocolName];
             await using (var server = await StartServer<Startup>())
             {
@@ -1767,7 +1799,8 @@ namespace Microsoft.AspNetCore.SignalR.Client.FunctionalTests
             string hubProtocolName,
             HttpTransportType transportType,
             string hubPath
-        ) {
+        )
+        {
             var hubProtocol = HubProtocols[hubProtocolName];
             await using (var server = await StartServer<Startup>())
             {
@@ -1810,7 +1843,8 @@ namespace Microsoft.AspNetCore.SignalR.Client.FunctionalTests
             string hubProtocolName,
             HttpTransportType transportType,
             string hubPath
-        ) {
+        )
+        {
             var hubProtocol = HubProtocols[hubProtocolName];
             await using (var server = await StartServer<Startup>())
             {
@@ -1875,7 +1909,8 @@ namespace Microsoft.AspNetCore.SignalR.Client.FunctionalTests
                             || write.EventId.Name == "ShutdownWithError";
                     }
                 )
-            ) {
+            )
+            {
                 var connection = CreateHubConnection(
                     server.Url,
                     "/default",
@@ -1954,7 +1989,8 @@ namespace Microsoft.AspNetCore.SignalR.Client.FunctionalTests
                             || write.EventId.Name == "ShutdownWithError";
                     }
                 )
-            ) {
+            )
+            {
                 var connection = CreateHubConnection(
                     server.Url,
                     "/default",
@@ -2043,7 +2079,8 @@ namespace Microsoft.AspNetCore.SignalR.Client.FunctionalTests
         [MemberData(nameof(TransportTypes))]
         public async Task ClientCanUseJwtBearerTokenForAuthentication(
             HttpTransportType transportType
-        ) {
+        )
+        {
             await using (var server = await StartServer<Startup>())
             {
                 async Task<string> AccessTokenProvider()
@@ -2094,7 +2131,8 @@ namespace Microsoft.AspNetCore.SignalR.Client.FunctionalTests
         public async Task ClientWillFailAuthEndPointIfNotAuthorized(
             HttpTransportType transportType,
             string hubPath
-        ) {
+        )
+        {
             bool ExpectedErrors(WriteContext writeContext)
             {
                 return writeContext.Exception is HttpRequestException;
@@ -2127,7 +2165,8 @@ namespace Microsoft.AspNetCore.SignalR.Client.FunctionalTests
         [MemberData(nameof(TransportTypes))]
         public async Task ClientCanUseJwtBearerTokenForAuthenticationWhenRedirected(
             HttpTransportType transportType
-        ) {
+        )
+        {
             await using (var server = await StartServer<Startup>())
             {
                 var hubConnection = new HubConnectionBuilder().WithLoggerFactory(LoggerFactory)
@@ -2786,7 +2825,8 @@ namespace Microsoft.AspNetCore.SignalR.Client.FunctionalTests
             protected override Task<HttpResponseMessage> SendAsync(
                 HttpRequestMessage request,
                 CancellationToken cancellationToken
-            ) {
+            )
+            {
                 if (request.Method == HttpMethod.Get)
                 {
                     ActivePoll = base.SendAsync(request, cancellationToken);
@@ -2807,13 +2847,15 @@ namespace Microsoft.AspNetCore.SignalR.Client.FunctionalTests
                         var transport in TransportTypes()
                             .SelectMany(t => t)
                             .Cast<HttpTransportType>()
-                    ) {
+                    )
+                    {
                         foreach (var hubPath in HubPaths)
                         {
                             if (
                                 !(protocol.Value is MessagePackHubProtocol)
                                 || transport != HttpTransportType.ServerSentEvents
-                            ) {
+                            )
+                            {
                                 yield return new object[] { protocol.Key, transport, hubPath };
                             }
                         }

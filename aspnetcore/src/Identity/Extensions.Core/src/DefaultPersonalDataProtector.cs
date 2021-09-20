@@ -22,7 +22,8 @@ namespace Microsoft.AspNetCore.Identity
         public DefaultPersonalDataProtector(
             ILookupProtectorKeyRing keyRing,
             ILookupProtector protector
-        ) {
+        )
+        {
             _keyRing = keyRing;
             _encryptor = protector;
         }

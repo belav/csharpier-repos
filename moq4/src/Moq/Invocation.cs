@@ -100,7 +100,8 @@ namespace Moq
             else if (
                 this.result != null
                 && !this.method.ReturnType.IsAssignableFrom(this.result.GetType())
-            ) {
+            )
+            {
                 this.result = awaitableFactory.CreateCompleted(this.result);
             }
         }

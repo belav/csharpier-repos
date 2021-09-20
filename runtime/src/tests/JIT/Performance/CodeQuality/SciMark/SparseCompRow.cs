@@ -44,7 +44,8 @@ namespace SciMark2
             int[] col,
             double[] x,
             int NUM_ITERATIONS
-        ) {
+        )
+        {
             int M = row.Length - 1;
 
             for (int reps = 0; reps < NUM_ITERATIONS; reps++)

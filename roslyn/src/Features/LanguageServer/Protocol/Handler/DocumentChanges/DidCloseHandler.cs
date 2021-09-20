@@ -34,7 +34,8 @@ namespace Microsoft.CodeAnalysis.LanguageServer.Handler.DocumentChanges
             LSP.DidCloseTextDocumentParams request,
             RequestContext context,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             // GetTextDocumentIdentifier returns null to avoid creating the solution, so the queue is not able to log the uri.
             context.TraceInformation($"didClose for {request.TextDocument.Uri}");
 

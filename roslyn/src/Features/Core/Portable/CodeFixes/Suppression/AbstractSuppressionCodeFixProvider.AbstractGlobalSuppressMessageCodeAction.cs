@@ -111,7 +111,8 @@ namespace Microsoft.CodeAnalysis.CodeFixes.Suppression
                                             syntaxFacts.IsUsingOrExternOrImport(n)
                                             || Fixer.IsAttributeListWithAssemblyAttributes(n)
                                     )
-                            ) {
+                            )
+                            {
                                 suppressionsDoc = document;
                                 break;
                             }

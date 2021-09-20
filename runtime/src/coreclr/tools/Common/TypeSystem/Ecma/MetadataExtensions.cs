@@ -14,7 +14,8 @@ namespace Internal.TypeSystem.Ecma
             this EcmaType This,
             string attributeNamespace,
             string attributeName
-        ) {
+        )
+        {
             var metadataReader = This.MetadataReader;
 
             var attributeHandle = metadataReader.GetCustomAttributeHandle(
@@ -34,7 +35,8 @@ namespace Internal.TypeSystem.Ecma
             this EcmaMethod This,
             string attributeNamespace,
             string attributeName
-        ) {
+        )
+        {
             var metadataReader = This.MetadataReader;
 
             var attributeHandle = metadataReader.GetCustomAttributeHandle(
@@ -54,7 +56,8 @@ namespace Internal.TypeSystem.Ecma
             this EcmaMethod This,
             string attributeNamespace,
             string attributeName
-        ) {
+        )
+        {
             var metadataReader = This.MetadataReader;
             var attributeHandles = metadataReader.GetMethodDefinition(This.Handle)
                 .GetCustomAttributes();
@@ -67,7 +70,8 @@ namespace Internal.TypeSystem.Ecma
                         attributeNamespace,
                         attributeName
                     )
-                ) {
+                )
+                {
                     yield return metadataReader.GetCustomAttribute(attributeHandle)
                         .DecodeValue(new CustomAttributeTypeProvider(This.Module));
                 }
@@ -78,7 +82,8 @@ namespace Internal.TypeSystem.Ecma
             this EcmaField This,
             string attributeNamespace,
             string attributeName
-        ) {
+        )
+        {
             var metadataReader = This.MetadataReader;
 
             var attributeHandle = metadataReader.GetCustomAttributeHandle(
@@ -98,7 +103,8 @@ namespace Internal.TypeSystem.Ecma
             this EcmaField This,
             string attributeNamespace,
             string attributeName
-        ) {
+        )
+        {
             var metadataReader = This.MetadataReader;
             var attributeHandles = metadataReader.GetFieldDefinition(This.Handle)
                 .GetCustomAttributes();
@@ -111,7 +117,8 @@ namespace Internal.TypeSystem.Ecma
                         attributeNamespace,
                         attributeName
                     )
-                ) {
+                )
+                {
                     yield return metadataReader.GetCustomAttribute(attributeHandle)
                         .DecodeValue(new CustomAttributeTypeProvider(This.Module));
                 }
@@ -122,7 +129,8 @@ namespace Internal.TypeSystem.Ecma
             this EcmaAssembly This,
             string attributeNamespace,
             string attributeName
-        ) {
+        )
+        {
             var metadataReader = This.MetadataReader;
             var attributeHandles = metadataReader.GetAssemblyDefinition().GetCustomAttributes();
             foreach (var attributeHandle in attributeHandles)
@@ -134,7 +142,8 @@ namespace Internal.TypeSystem.Ecma
                         attributeNamespace,
                         attributeName
                     )
-                ) {
+                )
+                {
                     yield return metadataReader.GetCustomAttribute(attributeHandle)
                         .DecodeValue(new CustomAttributeTypeProvider(This));
                 }
@@ -146,7 +155,8 @@ namespace Internal.TypeSystem.Ecma
             CustomAttributeHandleCollection customAttributes,
             string attributeNamespace,
             string attributeName
-        ) {
+        )
+        {
             foreach (var attributeHandle in customAttributes)
             {
                 if (
@@ -156,7 +166,8 @@ namespace Internal.TypeSystem.Ecma
                         attributeNamespace,
                         attributeName
                     )
-                ) {
+                )
+                {
                     return attributeHandle;
                 }
             }
@@ -169,7 +180,8 @@ namespace Internal.TypeSystem.Ecma
             MetadataReader metadataReader,
             string attributeNamespace,
             string attributeName
-        ) {
+        )
+        {
             StringHandle namespaceHandle,
                 nameHandle;
             if (
@@ -190,7 +202,8 @@ namespace Internal.TypeSystem.Ecma
             CustomAttributeHandle attributeHandle,
             out StringHandle namespaceHandle,
             out StringHandle nameHandle
-        ) {
+        )
+        {
             EntityHandle attributeType,
                 attributeCtor;
             if (
@@ -200,7 +213,8 @@ namespace Internal.TypeSystem.Ecma
                     out attributeType,
                     out attributeCtor
                 )
-            ) {
+            )
+            {
                 namespaceHandle = default(StringHandle);
                 nameHandle = default(StringHandle);
                 return false;
@@ -219,7 +233,8 @@ namespace Internal.TypeSystem.Ecma
             CustomAttributeHandle attributeHandle,
             out EntityHandle attributeType,
             out EntityHandle attributeCtor
-        ) {
+        )
+        {
             attributeCtor = metadataReader.GetCustomAttribute(attributeHandle).Constructor;
 
             if (attributeCtor.Kind == HandleKind.MemberReference)
@@ -249,7 +264,8 @@ namespace Internal.TypeSystem.Ecma
             EntityHandle attributeType,
             out StringHandle namespaceHandle,
             out StringHandle nameHandle
-        ) {
+        )
+        {
             namespaceHandle = default(StringHandle);
             nameHandle = default(StringHandle);
 

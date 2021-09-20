@@ -18,7 +18,8 @@ namespace System.Security.Cryptography.Tests
             AsymmetricSignatureDeformatter deformatter,
             HashAlgorithm hashAlgorithm,
             string hashAlgorithmName
-        ) {
+        )
+        {
             formatter.SetHashAlgorithm(hashAlgorithmName);
             deformatter.SetHashAlgorithm(hashAlgorithmName);
 
@@ -32,7 +33,8 @@ namespace System.Security.Cryptography.Tests
             AsymmetricSignatureFormatter formatter,
             AsymmetricSignatureDeformatter deformatter,
             byte[] hash
-        ) {
+        )
+        {
             byte[] signature = formatter.CreateSignature(hash);
             Assert.True(deformatter.VerifySignature(hash, signature));
 
@@ -44,7 +46,8 @@ namespace System.Security.Cryptography.Tests
             AsymmetricSignatureFormatter formatter,
             AsymmetricSignatureDeformatter deformatter,
             HashAlgorithm hashAlgorithm
-        ) {
+        )
+        {
             byte[] signature = formatter.CreateSignature(hashAlgorithm);
             Assert.True(deformatter.VerifySignature(hashAlgorithm, signature));
 

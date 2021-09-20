@@ -23,7 +23,8 @@ namespace System.Web.Http.Filters
         public HttpAuthenticationChallengeContext(
             HttpActionContext actionContext,
             IHttpActionResult result
-        ) {
+        )
+        {
             if (actionContext == null)
             {
                 throw new ArgumentNullException("actionContext");

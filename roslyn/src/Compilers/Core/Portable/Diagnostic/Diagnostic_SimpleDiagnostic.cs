@@ -36,11 +36,13 @@ namespace Microsoft.CodeAnalysis
                 object?[]? messageArgs,
                 ImmutableDictionary<string, string?>? properties,
                 bool isSuppressed
-            ) {
+            )
+            {
                 if (
                     (warningLevel == 0 && severity != DiagnosticSeverity.Error)
                     || (warningLevel != 0 && severity == DiagnosticSeverity.Error)
-                ) {
+                )
+                {
                     throw new ArgumentException(
                         $"{nameof(warningLevel)} ({warningLevel}) and {nameof(severity)} ({severity}) are not compatible.",
                         nameof(warningLevel)
@@ -68,7 +70,8 @@ namespace Microsoft.CodeAnalysis
                 object?[]? messageArgs,
                 ImmutableDictionary<string, string?>? properties,
                 bool isSuppressed = false
-            ) {
+            )
+            {
                 return new SimpleDiagnostic(
                     descriptor,
                     severity,
@@ -97,7 +100,8 @@ namespace Microsoft.CodeAnalysis
                 IEnumerable<string>? customTags,
                 ImmutableDictionary<string, string?>? properties,
                 bool isSuppressed = false
-            ) {
+            )
+            {
                 var descriptor = new DiagnosticDescriptor(
                     id,
                     title,

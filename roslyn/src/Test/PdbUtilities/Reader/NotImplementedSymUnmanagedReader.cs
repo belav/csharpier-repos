@@ -24,7 +24,8 @@ namespace Roslyn.Test.Utilities
             Guid languageVendor,
             Guid documentType,
             out ISymUnmanagedDocument retVal
-        ) {
+        )
+        {
             retVal = null;
             return HResult.E_NOTIMPL;
         }
@@ -39,7 +40,8 @@ namespace Roslyn.Test.Utilities
             ISymUnmanagedDocument pDoc,
             out int version,
             out bool pbCurrent
-        ) {
+        )
+        {
             version = 0;
             pbCurrent = false;
             return HResult.E_NOTIMPL;
@@ -67,7 +69,8 @@ namespace Roslyn.Test.Utilities
             int methodToken,
             int version,
             out ISymUnmanagedMethod retVal
-        ) {
+        )
+        {
             retVal = null;
             return HResult.E_NOTIMPL;
         }
@@ -77,7 +80,8 @@ namespace Roslyn.Test.Utilities
             int line,
             int column,
             out ISymUnmanagedMethod retVal
-        ) {
+        )
+        {
             retVal = null;
             return HResult.E_NOTIMPL;
         }
@@ -89,7 +93,8 @@ namespace Roslyn.Test.Utilities
             int cMethod,
             out int pcMethod,
             ISymUnmanagedMethod[] pRetVal
-        ) {
+        )
+        {
             pcMethod = 0;
             return HResult.E_NOTIMPL;
         }
@@ -99,7 +104,8 @@ namespace Roslyn.Test.Utilities
             int cMethod,
             out int pcMethod,
             ISymUnmanagedMethod[] methods
-        ) {
+        )
+        {
             pcMethod = 0;
             return HResult.E_NOTIMPL;
         }
@@ -114,7 +120,8 @@ namespace Roslyn.Test.Utilities
             int cNameSpaces,
             out int pcNameSpaces,
             ISymUnmanagedNamespace[] namespaces
-        ) {
+        )
+        {
             pcNameSpaces = 0;
             return HResult.E_NOTIMPL;
         }
@@ -125,7 +132,8 @@ namespace Roslyn.Test.Utilities
             int sizeBuffer,
             out int lengthBuffer,
             byte[] buffer
-        ) {
+        )
+        {
             lengthBuffer = 0;
             return HResult.E_NOTIMPL;
         }
@@ -137,7 +145,8 @@ namespace Roslyn.Test.Utilities
             int bufferLength,
             out int count,
             byte[] customDebugInformation
-        ) {
+        )
+        {
             count = 0;
             return HResult.E_NOTIMPL;
         }
@@ -149,7 +158,8 @@ namespace Roslyn.Test.Utilities
             int bufferLength,
             out int count,
             byte[] customDebugInformation
-        ) {
+        )
+        {
             count = 0;
             return HResult.E_NOTIMPL;
         }
@@ -160,7 +170,8 @@ namespace Roslyn.Test.Utilities
             int sizeBuffer,
             out int lengthBuffer,
             byte[] buffer
-        ) {
+        )
+        {
             lengthBuffer = 0;
             return HResult.E_NOTIMPL;
         }
@@ -222,7 +233,8 @@ namespace Roslyn.Test.Utilities
             int version,
             out byte* metadata,
             out int size
-        ) {
+        )
+        {
             metadata = null;
             size = 0;
             return HResult.E_NOTIMPL;

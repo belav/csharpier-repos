@@ -31,7 +31,8 @@ namespace System.Net.Http.Formatting.Parsers
         public FormUrlEncodedParser(
             ICollection<KeyValuePair<string, string>> nameValuePairs,
             long maxMessageSize
-        ) {
+        )
+        {
             // The minimum length which would be an empty buffer
             if (maxMessageSize < MinMessageSize)
             {
@@ -78,7 +79,8 @@ namespace System.Net.Http.Formatting.Parsers
             int bytesReady,
             ref int bytesConsumed,
             bool isFinal
-        ) {
+        )
+        {
             if (buffer == null)
             {
                 throw Error.ArgumentNull("buffer");
@@ -137,7 +139,8 @@ namespace System.Net.Http.Formatting.Parsers
             ref long totalBytesConsumed,
             CurrentNameValuePair currentNameValuePair,
             ICollection<KeyValuePair<string, string>> nameValuePairs
-        ) {
+        )
+        {
             Contract.Assert(
                 (bytesReady - bytesConsumed) >= 0,
                 "ParseNameValuePairs()|(inputBufferLength - bytesParsed) < 0"

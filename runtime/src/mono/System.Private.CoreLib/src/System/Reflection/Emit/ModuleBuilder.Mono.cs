@@ -135,7 +135,8 @@ namespace System.Reflection.Emit
             string name,
             byte[] data,
             FieldAttributes attributes
-        ) {
+        )
+        {
             if (data == null)
                 throw new ArgumentNullException(nameof(data));
 
@@ -154,7 +155,8 @@ namespace System.Reflection.Emit
             string name,
             int size,
             FieldAttributes attributes
-        ) {
+        )
+        {
             return DefineDataImpl(name, size, attributes & ~FieldAttributes.ReservedMask);
         }
 
@@ -231,7 +233,8 @@ namespace System.Reflection.Emit
             MethodAttributes attributes,
             Type? returnType,
             Type[]? parameterTypes
-        ) {
+        )
+        {
             return DefineGlobalMethod(
                 name,
                 attributes,
@@ -247,7 +250,8 @@ namespace System.Reflection.Emit
             CallingConventions callingConvention,
             Type? returnType,
             Type[]? parameterTypes
-        ) {
+        )
+        {
             return DefineGlobalMethod(
                 name,
                 attributes,
@@ -271,7 +275,8 @@ namespace System.Reflection.Emit
             Type[]? parameterTypes,
             Type[][]? requiredParameterTypeCustomModifiers,
             Type[][]? optionalParameterTypeCustomModifiers
-        ) {
+        )
+        {
             if (name == null)
                 throw new ArgumentNullException(nameof(name));
             if ((attributes & MethodAttributes.Static) == 0)
@@ -304,7 +309,8 @@ namespace System.Reflection.Emit
             Type[]? parameterTypes,
             CallingConvention nativeCallConv,
             CharSet nativeCharSet
-        ) {
+        )
+        {
             return DefinePInvokeMethod(
                 name,
                 dllName,
@@ -328,7 +334,8 @@ namespace System.Reflection.Emit
             Type[]? parameterTypes,
             CallingConvention nativeCallConv,
             CharSet nativeCharSet
-        ) {
+        )
+        {
             if (name == null)
                 throw new ArgumentNullException(nameof(name));
             if ((attributes & MethodAttributes.Static) == 0)
@@ -368,7 +375,8 @@ namespace System.Reflection.Emit
             string name,
             TypeAttributes attr,
             [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)] Type? parent
-        ) {
+        )
+        {
             return DefineType(name, attr, parent, null);
         }
 
@@ -403,7 +411,8 @@ namespace System.Reflection.Emit
             Type[]? interfaces,
             PackingSize packingSize,
             int typesize
-        ) {
+        )
+        {
             if (name == null)
                 throw new ArgumentNullException("fullname");
             ITypeIdentifier ident = TypeIdentifiers.FromInternal(name);
@@ -444,7 +453,8 @@ namespace System.Reflection.Emit
             TypeAttributes attr,
             [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)] Type? parent,
             Type[]? interfaces
-        ) {
+        )
+        {
             return DefineType(
                 name,
                 attr,
@@ -460,7 +470,8 @@ namespace System.Reflection.Emit
             TypeAttributes attr,
             [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)] Type? parent,
             int typesize
-        ) {
+        )
+        {
             return DefineType(name, attr, parent, null, PackingSize.Unspecified, typesize);
         }
 
@@ -469,7 +480,8 @@ namespace System.Reflection.Emit
             TypeAttributes attr,
             [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)] Type? parent,
             PackingSize packsize
-        ) {
+        )
+        {
             return DefineType(name, attr, parent, null, packsize, TypeBuilder.UnspecifiedTypeSize);
         }
 
@@ -479,7 +491,8 @@ namespace System.Reflection.Emit
             [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)] Type? parent,
             PackingSize packingSize,
             int typesize
-        ) {
+        )
+        {
             return DefineType(name, attr, parent, null, packingSize, typesize);
         }
 
@@ -489,7 +502,8 @@ namespace System.Reflection.Emit
             CallingConventions callingConvention,
             Type? returnType,
             Type[]? parameterTypes
-        ) {
+        )
+        {
             return new MonoArrayMethod(
                 arrayClass,
                 methodName,
@@ -530,7 +544,8 @@ namespace System.Reflection.Emit
             TypeBuilder[] arr,
             int validElementsInArray,
             ITypeName className
-        ) {
+        )
+        {
             int i;
             for (i = 0; i < validElementsInArray; ++i)
             {
@@ -541,7 +556,8 @@ namespace System.Reflection.Emit
                         true,
                         CultureInfo.InvariantCulture
                     ) == 0
-                ) {
+                )
+                {
                     return arr[i];
                 }
             }
@@ -552,7 +568,8 @@ namespace System.Reflection.Emit
             TypeBuilder[] arr,
             int validElementsInArray,
             ITypeName className
-        ) {
+        )
+        {
             int i;
             for (i = 0; i < validElementsInArray; ++i)
             {
@@ -732,7 +749,8 @@ namespace System.Reflection.Emit
             CallingConventions callingConvention,
             Type? returnType,
             Type[]? parameterTypes
-        ) {
+        )
+        {
             return GetMethodToken(
                 GetArrayMethod(
                     arrayClass,
@@ -1073,7 +1091,8 @@ namespace System.Reflection.Emit
             CallingConventions callConvention,
             Type[]? types,
             ParameterModifier[]? modifiers
-        ) {
+        )
+        {
             if (global_type_created == null)
                 return null;
             if (types == null)
@@ -1093,7 +1112,8 @@ namespace System.Reflection.Emit
             int metadataToken,
             Type[]? genericTypeArguments,
             Type[]? genericMethodArguments
-        ) {
+        )
+        {
             return RuntimeModule.ResolveField(
                 this,
                 _impl,
@@ -1108,7 +1128,8 @@ namespace System.Reflection.Emit
             int metadataToken,
             Type[]? genericTypeArguments,
             Type[]? genericMethodArguments
-        ) {
+        )
+        {
             return RuntimeModule.ResolveMember(
                 this,
                 _impl,
@@ -1122,7 +1143,8 @@ namespace System.Reflection.Emit
             int metadataToken,
             Type[] genericTypeArguments,
             Type[] genericMethodArguments
-        ) {
+        )
+        {
             ResolveTokenError error;
             MemberInfo? m = RuntimeModule.ResolveMemberToken(
                 _impl,
@@ -1151,7 +1173,8 @@ namespace System.Reflection.Emit
             int metadataToken,
             Type[]? genericTypeArguments,
             Type[]? genericMethodArguments
-        ) {
+        )
+        {
             return RuntimeModule.ResolveMethod(
                 this,
                 _impl,
@@ -1178,7 +1201,8 @@ namespace System.Reflection.Emit
             int metadataToken,
             Type[]? genericTypeArguments,
             Type[]? genericMethodArguments
-        ) {
+        )
+        {
             return RuntimeModule.ResolveType(
                 this,
                 _impl,

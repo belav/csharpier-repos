@@ -33,7 +33,8 @@ namespace Castle.Components.DictionaryAdapter
             Func<int, object, object> setAt,
             Action<int> removeAt,
             Action reset
-        ) {
+        )
+        {
             this.addAt = addAt;
             this.addNew = addNew;
             this.setAt = setAt;

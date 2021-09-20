@@ -55,7 +55,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel.FunctionalTests
         public async Task RegisterAddresses_IPv4Port5000Default_Success(
             string addressInput,
             string testUrl
-        ) {
+        )
+        {
             if (!CanBindToEndpoint(IPAddress.Loopback, 5000))
             {
                 return;
@@ -109,7 +110,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel.FunctionalTests
         public async Task RegisterIPEndPoint_DynamicPort_Success(
             IPEndPoint endPoint,
             string testUrl
-        ) {
+        )
+        {
             await RegisterIPEndPoint_Success(endPoint, testUrl);
         }
 
@@ -143,7 +145,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel.FunctionalTests
         public async Task RegisterAddresses_IPv6Port5000And5001Default_Success(
             string addressInput,
             string[] testUrls
-        ) {
+        )
+        {
             if (
                 (
                     !CanBindToEndpoint(IPAddress.Loopback, 5000)
@@ -153,7 +156,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel.FunctionalTests
                     !CanBindToEndpoint(IPAddress.Loopback, 5001)
                     || !CanBindToEndpoint(IPAddress.IPv6Loopback, 5001)
                 )
-            ) {
+            )
+            {
                 return;
             }
 
@@ -167,11 +171,13 @@ namespace Microsoft.AspNetCore.Server.Kestrel.FunctionalTests
         public async Task RegisterAddresses_IPv6Port80_Success(
             string addressInput,
             string[] testUrls
-        ) {
+        )
+        {
             if (
                 !CanBindToEndpoint(IPAddress.Loopback, 80)
                 || !CanBindToEndpoint(IPAddress.IPv6Loopback, 80)
-            ) {
+            )
+            {
                 return;
             }
 
@@ -209,7 +215,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel.FunctionalTests
             string addressInput,
             string[] testUrls,
             int testPort = 0
-        ) {
+        )
+        {
             var hostBuilder = TransportSelector.GetHostBuilder()
                 .ConfigureWebHost(
                     webHostBuilder =>
@@ -240,7 +247,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel.FunctionalTests
                     var testUrl in testUrls.Select(
                         testUrl => $"{testUrl}:{(testPort == 0 ? host.GetPort() : testPort)}"
                     )
-                ) {
+                )
+                {
                     var response = await HttpClientSlim.GetStringAsync(
                         testUrl,
                         validateCertificate: false
@@ -369,7 +377,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel.FunctionalTests
             IPEndPoint endPoint,
             string testUrl,
             int testPort = 0
-        ) {
+        )
+        {
             var hostBuilder = TransportSelector.GetHostBuilder()
                 .ConfigureWebHost(
                     webHostBuilder =>
@@ -386,7 +395,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel.FunctionalTests
                                                     "https",
                                                     StringComparison.Ordinal
                                                 )
-                                            ) {
+                                            )
+                                            {
                                                 listenOptions.UseHttps(
                                                     TestResources.GetTestCertificate()
                                                 );
@@ -481,7 +491,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel.FunctionalTests
                     var testUrl in testUrls.Select(
                         testUrl => $"{testUrl}:{(testPort == 0 ? host.GetPort() : testPort)}"
                     )
-                ) {
+                )
+                {
                     var response = await HttpClientSlim.GetStringAsync(
                         testUrl,
                         validateCertificate: false
@@ -541,7 +552,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel.FunctionalTests
                     var testUrl in testUrls.Select(
                         testUrl => $"{testUrl}:{(testPort == 0 ? host.GetPort() : testPort)}"
                     )
-                ) {
+                )
+                {
                     var response = await HttpClientSlim.GetStringAsync(
                         testUrl,
                         validateCertificate: false
@@ -576,7 +588,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel.FunctionalTests
             if (
                 !CanBindToEndpoint(IPAddress.Loopback, 5000)
                 || !CanBindToEndpoint(IPAddress.IPv6Loopback, 5000)
-            ) {
+            )
+            {
                 return Task.CompletedTask;
             }
 
@@ -592,7 +605,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel.FunctionalTests
             if (
                 !CanBindToEndpoint(IPAddress.Loopback, 5000)
                 || !CanBindToEndpoint(IPAddress.Loopback, 5001)
-            ) {
+            )
+            {
                 return Task.CompletedTask;
             }
 
@@ -612,7 +626,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel.FunctionalTests
                 || !CanBindToEndpoint(IPAddress.IPv6Loopback, 5000)
                 || !CanBindToEndpoint(IPAddress.Loopback, 5001)
                 || !CanBindToEndpoint(IPAddress.IPv6Loopback, 5001)
-            ) {
+            )
+            {
                 return Task.CompletedTask;
             }
 
@@ -631,7 +646,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel.FunctionalTests
         private async Task RegisterDefaultServerAddresses_Success(
             IEnumerable<string> addresses,
             bool mockHttps = false
-        ) {
+        )
+        {
             var hostBuilder = TransportSelector.GetHostBuilder()
                 .ConfigureWebHost(
                     webHostBuilder =>
@@ -708,7 +724,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel.FunctionalTests
                     SocketType.Stream,
                     ProtocolType.Tcp
                 )
-            ) {
+            )
+            {
                 socket.Bind(new IPEndPoint(IPAddress.Loopback, 0));
                 socket.Listen(0);
                 var port = ((IPEndPoint)socket.LocalEndPoint).Port;
@@ -757,7 +774,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel.FunctionalTests
                     SocketType.Stream,
                     ProtocolType.Tcp
                 )
-            ) {
+            )
+            {
                 socket.Bind(new IPEndPoint(IPAddress.IPv6Loopback, 0));
                 socket.Listen(0);
                 var port = ((IPEndPoint)socket.LocalEndPoint).Port;
@@ -1173,7 +1191,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel.FunctionalTests
         public async Task EndpointDefaultsConfig_CanSetProtocolForUrlsConfig(
             string input,
             HttpProtocols expected
-        ) {
+        )
+        {
             KestrelServerOptions capturedOptions = null;
             var hostBuilder = TransportSelector.GetHostBuilder()
                 .ConfigureWebHost(
@@ -1238,7 +1257,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel.FunctionalTests
                         SocketType.Stream,
                         ProtocolType.Tcp
                     )
-                ) {
+                )
+                {
                     // Bind first to IPv6Any to ensure both the IPv4 and IPv6 ports are available.
                     socket.Bind(new IPEndPoint(IPAddress.IPv6Any, 0));
                     socket.Listen(0);
@@ -1281,7 +1301,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel.FunctionalTests
                         if (
                             exception.Message
                             == CoreStrings.FormatEndpointAlreadyInUse(otherAddressString)
-                        ) {
+                        )
+                        {
                             // Don't fail immediately, because it's possible that something else really did bind to the
                             // same port for the other address family between the IPv6Any bind above and now.
                             wrongMessageCount++;
@@ -1543,7 +1564,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel.FunctionalTests
                     SocketType.Stream,
                     ProtocolType.Tcp
                 )
-            ) {
+            )
+            {
                 // Let the OS assign the next available port. Unless we cycle through all ports
                 // on a test run, the OS will always increment the port number when making these calls.
                 // This prevents races in parallel test runs where a test is already bound to
@@ -1564,7 +1586,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel.FunctionalTests
                         SocketType.Stream,
                         ProtocolType.Tcp
                     )
-                ) {
+                )
+                {
                     serverSocket.Bind(endPoint);
                     serverSocket.Listen(0);
 
@@ -1608,7 +1631,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel.FunctionalTests
                         SocketType.Stream,
                         ProtocolType.Tcp
                     )
-                ) {
+                )
+                {
                     socket.Bind(new IPEndPoint(address, port));
                     socket.Listen(0);
                     return true;

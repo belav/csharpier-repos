@@ -25,7 +25,8 @@ namespace System.Security.AccessControl
             int requestedRevision,
             SecurityInfos si,
             out string? resultSddl
-        ) {
+        )
+        {
             int errorCode;
             IntPtr ByteArray;
             uint ByteArraySize = 0;
@@ -38,7 +39,8 @@ namespace System.Security.AccessControl
                     out ByteArray,
                     ref ByteArraySize
                 )
-            ) {
+            )
+            {
                 errorCode = Marshal.GetLastWin32Error();
                 goto Error;
             }
@@ -79,7 +81,8 @@ namespace System.Security.AccessControl
             SafeHandle? handle,
             AccessControlSections accessControlSections,
             out RawSecurityDescriptor? resultSd
-        ) {
+        )
+        {
             resultSd = null;
 
             int errorCode;
@@ -178,13 +181,15 @@ namespace System.Security.AccessControl
                 else if (
                     errorCode == Interop.Errors.ERROR_NOT_ALL_ASSIGNED
                     || errorCode == Interop.Errors.ERROR_PRIVILEGE_NOT_HELD
-                ) {
+                )
+                {
                     throw new PrivilegeNotHeldException(Privilege.Security);
                 }
                 else if (
                     errorCode == Interop.Errors.ERROR_ACCESS_DENIED
                     || errorCode == Interop.Errors.ERROR_CANT_OPEN_ANONYMOUS
-                ) {
+                )
+                {
                     throw new UnauthorizedAccessException();
                 }
 
@@ -249,7 +254,8 @@ namespace System.Security.AccessControl
             SecurityIdentifier? group,
             GenericAcl? sacl,
             GenericAcl? dacl
-        ) {
+        )
+        {
             int errorCode;
             int Length;
             byte[]? OwnerBinary = null,
@@ -351,13 +357,15 @@ namespace System.Security.AccessControl
                 if (
                     errorCode == Interop.Errors.ERROR_NOT_ALL_ASSIGNED
                     || errorCode == Interop.Errors.ERROR_PRIVILEGE_NOT_HELD
-                ) {
+                )
+                {
                     throw new PrivilegeNotHeldException(Privilege.Security);
                 }
                 else if (
                     errorCode == Interop.Errors.ERROR_ACCESS_DENIED
                     || errorCode == Interop.Errors.ERROR_CANT_OPEN_ANONYMOUS
-                ) {
+                )
+                {
                     throw new UnauthorizedAccessException();
                 }
                 else if (errorCode != Interop.Errors.ERROR_SUCCESS)

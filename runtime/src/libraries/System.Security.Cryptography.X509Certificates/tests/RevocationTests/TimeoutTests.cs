@@ -37,7 +37,8 @@ namespace System.Security.Cryptography.X509Certificates.Tests.RevocationTests
                     using (X509Certificate2 rootCert = rootAuthority.CloneIssuerCert())
                     using (
                         X509Certificate2 intermediateCert = intermediateAuthority.CloneIssuerCert()
-                    ) {
+                    )
+                    {
                         TimeSpan delay = TimeSpan.FromSeconds(8);
 
                         X509Chain chain = holder.Chain;
@@ -211,7 +212,8 @@ namespace System.Security.Cryptography.X509Certificates.Tests.RevocationTests
                     using (X509Certificate2 rootCert = rootAuthority.CloneIssuerCert())
                     using (
                         X509Certificate2 intermediateCert = intermediateAuthority.CloneIssuerCert()
-                    ) {
+                    )
+                    {
                         // Delay is more than the 15 second default.
                         TimeSpan delay = TimeSpan.FromSeconds(25);
 
@@ -263,7 +265,8 @@ namespace System.Security.Cryptography.X509Certificates.Tests.RevocationTests
                     using (X509Certificate2 rootCert = rootAuthority.CloneIssuerCert())
                     using (
                         X509Certificate2 intermediateCert = intermediateAuthority.CloneIssuerCert()
-                    ) {
+                    )
+                    {
                         X509Chain chain = holder.Chain;
                         responder.ResponseDelay = TimeSpan.FromSeconds(8);
                         responder.DelayedActions = delayFlags;
@@ -310,7 +313,8 @@ namespace System.Security.Cryptography.X509Certificates.Tests.RevocationTests
                     using (X509Certificate2 rootCert = rootAuthority.CloneIssuerCert())
                     using (
                         X509Certificate2 intermediateCert = intermediateAuthority.CloneIssuerCert()
-                    ) {
+                    )
+                    {
                         TimeSpan delay = TimeSpan.FromSeconds(1);
 
                         X509Chain chain = holder.Chain;

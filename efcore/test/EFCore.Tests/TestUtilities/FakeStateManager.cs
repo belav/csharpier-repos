@@ -39,7 +39,8 @@ namespace Microsoft.EntityFrameworkCore.TestUtilities
         public Task<int> SaveChangesAsync(
             bool acceptAllChangesOnSuccess,
             CancellationToken cancellationToken = new()
-        ) {
+        )
+        {
             SaveChangesAsyncCalled = true;
             return Task.FromResult(1);
         }
@@ -228,7 +229,8 @@ namespace Microsoft.EntityFrameworkCore.TestUtilities
             object[] keyValues,
             bool throwOnNullKey,
             out bool hasNullKey
-        ) {
+        )
+        {
             throw new NotImplementedException();
         }
     }

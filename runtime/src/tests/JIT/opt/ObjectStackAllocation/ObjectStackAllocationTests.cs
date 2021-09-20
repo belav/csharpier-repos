@@ -236,7 +236,8 @@ namespace ObjectStackAllocation
             Test test,
             int expectedResult,
             AllocationKind expectedAllocationsKind
-        ) {
+        )
+        {
             long allocatedBytesBefore = GC.GetAllocatedBytesForCurrentThread();
             int testResult = test();
             long allocatedBytesAfter = GC.GetAllocatedBytesForCurrentThread();
@@ -252,7 +253,8 @@ namespace ObjectStackAllocation
             else if (
                 (expectedAllocationsKind == AllocationKind.Stack)
                 && (allocatedBytesBefore != allocatedBytesAfter)
-            ) {
+            )
+            {
                 Console.WriteLine(
                     $"FAILURE ({methodName}): unexpected allocation of {allocatedBytesAfter - allocatedBytesBefore} bytes"
                 );
@@ -261,7 +263,8 @@ namespace ObjectStackAllocation
             else if (
                 (expectedAllocationsKind == AllocationKind.Heap)
                 && (allocatedBytesBefore == allocatedBytesAfter)
-            ) {
+            )
+            {
                 Console.WriteLine($"FAILURE ({methodName}): unexpected stack allocation");
                 methodResult = -1;
             }

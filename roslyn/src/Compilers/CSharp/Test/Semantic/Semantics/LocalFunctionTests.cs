@@ -24,7 +24,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
         internal static void VerifyDiagnostics(
             string source,
             params DiagnosticDescription[] expected
-        ) {
+        )
+        {
             var comp = CreateCompilationWithMscorlib45AndCSharp(
                 source,
                 options: TestOptions.ReleaseDll,
@@ -1482,7 +1483,8 @@ class C
             string classTypeParams,
             string methodTypeParams,
             string localFunctionTypeParams
-        ) {
+        )
+        {
             var source =
                 $@"
 using System;
@@ -5994,7 +5996,8 @@ class C<T>
                 TypeParameterSyntax typeParameter,
                 ParameterSyntax parameter,
                 string expected
-            ) {
+            )
+            {
                 var symbol = model.GetDeclaredSymbol(typeParameter);
                 Assert.Equal(expected, symbol.ToTestDisplayString());
 

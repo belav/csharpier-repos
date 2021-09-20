@@ -35,10 +35,8 @@ namespace System.Linq.Parallel
         //     child                - the child whose data we will reverse
         //
 
-        internal DefaultIfEmptyQueryOperator(
-            IEnumerable<TSource> child,
-            TSource defaultValue
-        ) : base(child)
+        internal DefaultIfEmptyQueryOperator(IEnumerable<TSource> child, TSource defaultValue)
+            : base(child)
         {
             Debug.Assert(child != null, "child data source cannot be null");
             _defaultValue = defaultValue;
@@ -64,7 +62,8 @@ namespace System.Linq.Parallel
             IPartitionedStreamRecipient<TSource> recipient,
             bool preferStriping,
             QuerySettings settings
-        ) {
+        )
+        {
             int partitionCount = inputStream.PartitionCount;
 
             // Generate the shared data.
@@ -143,7 +142,8 @@ namespace System.Linq.Parallel
                 Shared<int> sharedEmptyCount,
                 CountdownEvent sharedLatch,
                 CancellationToken cancelToken
-            ) {
+            )
+            {
                 Debug.Assert(source != null);
                 Debug.Assert(0 <= partitionIndex && partitionIndex < partitionCount);
                 Debug.Assert(partitionCount > 0);
@@ -166,7 +166,8 @@ namespace System.Linq.Parallel
             internal override bool MoveNext(
                 [MaybeNullWhen(false), AllowNull] ref TSource currentElement,
                 [AllowNull] ref TKey currentKey
-            ) {
+            )
+            {
                 Debug.Assert(_source != null);
 
                 bool moveNextResult = _source.MoveNext(ref currentElement!, ref currentKey);

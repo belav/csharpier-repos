@@ -69,7 +69,8 @@ namespace Microsoft.EntityFrameworkCore.Storage
         /// <param name="dependencies"> Parameter object containing dependencies for this service. </param>
         public TypedRelationalValueBufferFactoryFactory(
             RelationalValueBufferFactoryDependencies dependencies
-        ) {
+        )
+        {
             Check.NotNull(dependencies, nameof(dependencies));
 
             Dependencies = dependencies;
@@ -116,7 +117,8 @@ namespace Microsoft.EntityFrameworkCore.Storage
         /// <returns> The newly created <see cref="IRelationalValueBufferFactoryFactory" />. </returns>
         public virtual IRelationalValueBufferFactory Create(
             IReadOnlyList<TypeMaterializationInfo> types
-        ) {
+        )
+        {
             Check.NotNull(types, nameof(types));
 
             return _cache.GetOrAdd(
@@ -177,7 +179,8 @@ namespace Microsoft.EntityFrameworkCore.Storage
             Exception exception,
             object? value,
             IPropertyBase? property = null
-        ) {
+        )
+        {
             var expectedType = typeof(TValue);
             var actualType = value?.GetType();
 
@@ -229,7 +232,8 @@ namespace Microsoft.EntityFrameworkCore.Storage
             TypeMaterializationInfo materializationInfo,
             bool detailedErrorsEnabled,
             bool box = true
-        ) {
+        )
+        {
             var getMethod = materializationInfo.Mapping.GetDataReaderMethod();
 
 #pragma warning disable CS0612 // Type or member is obsolete
@@ -309,7 +313,8 @@ namespace Microsoft.EntityFrameworkCore.Storage
             if (
                 materializationInfo.IsNullable != false
                 || materializationInfo.IsFromLeftOuterJoin != false
-            ) {
+            )
+            {
 #pragma warning restore CS0612 // Type or member is obsolete
                 valueExpression = Expression.Condition(
                     Expression.Call(dataReaderExpression, _isDbNullMethod, indexExpression),

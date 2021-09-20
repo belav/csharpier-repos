@@ -63,7 +63,8 @@ namespace CoreXml.Test.XLinq
             this T[] source,
             int length,
             bool reduceVariations = true
-        ) {
+        )
+        {
             Debug.Assert(source.Length > length);
             if (reduceVariations && length > 2)
                 length = 2;
@@ -124,7 +125,8 @@ namespace CoreXml.Test.XLinq
         public static IEnumerable<object> Flatten(
             this IEnumerable<object> source,
             List<object> output
-        ) {
+        )
+        {
             foreach (object element in source)
             {
                 if (element is IEnumerable<object>)
@@ -142,8 +144,9 @@ namespace CoreXml.Test.XLinq
         public static IEnumerable<T1> Concat2<T1, T2>(
             this IEnumerable<T1> source,
             IEnumerable<T2> addition
-        ) where T1 : class
-          where T2 : T1
+        )
+            where T1 : class
+            where T2 : T1
         {
             return source.Concat(addition.OfType<T1>());
         }
@@ -175,7 +178,8 @@ namespace CoreXml.Test.XLinq
                                         e1.Current.originalReference,
                                         e2.Current
                                     )
-                                ) {
+                                )
+                                {
                                     TestLog.WriteLine("XText reference comparison: ");
                                     return false;
                                 }
@@ -256,8 +260,9 @@ namespace CoreXml.Test.XLinq
             this IEnumerable<T1> first,
             IEnumerable<T2> second,
             IEqualityComparer<T2> comparer
-        ) where T1 : ExpectedValue
-          where T2 : XAttribute
+        )
+            where T1 : ExpectedValue
+            where T2 : XAttribute
         {
             if (first.IsEmpty() && (second == null || second.IsEmpty()))
                 return true;
@@ -320,7 +325,8 @@ namespace CoreXml.Test.XLinq
         /// <returns></returns>
         public static IEnumerable<ExpectedValue> ProcessNodes(
             this IEnumerable<ExpectedValue> values
-        ) {
+        )
+        {
             IEnumerator<ExpectedValue> e = values.GetEnumerator();
             if (e.MoveNext())
             {
@@ -480,7 +486,8 @@ namespace CoreXml.Test.XLinq
             this IEnumerable<T1> source,
             IEnumerable<T2> target,
             Func<T1, T2, bool> comparer
-        ) {
+        )
+        {
             using (IEnumerator<T1> e1 = source.GetEnumerator())
             using (IEnumerator<T2> e2 = target.GetEnumerator())
             {

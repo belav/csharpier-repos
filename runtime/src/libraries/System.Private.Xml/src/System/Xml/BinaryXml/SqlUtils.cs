@@ -78,7 +78,8 @@ namespace System.Xml
             ref int ciulU, // InOut| # of digits in U
             uint iulD, // In    | D
             out uint iulR // Out    | R
-        ) {
+        )
+        {
             Debug.Assert(rgulU.Length == s_cNumeMax);
 
             uint ulCarry = 0;
@@ -105,7 +106,8 @@ namespace System.Xml
         private static void MpNormalize(
             uint[] rgulU, // In   | Number
             ref int ciulU // InOut| # of digits
-        ) {
+        )
+        {
             while (ciulU > 1 && rgulU[ciulU - 1] == 0)
                 ciulU--;
         }
@@ -433,7 +435,8 @@ namespace System.Xml
             int min,
             int sec,
             int fraction
-        ) {
+        )
+        {
             Write2Dig(sb, hr);
             sb.Append(':');
             Write2Dig(sb, min);
@@ -494,7 +497,8 @@ namespace System.Xml
             out int min,
             out int sec,
             out int ms
-        ) {
+        )
+        {
             if (val < 0)
                 goto Error;
             long date = val / 4; // trim indicator bits
@@ -526,7 +530,8 @@ namespace System.Xml
             out bool negTimeZone,
             out int hr,
             out int min
-        ) {
+        )
+        {
             if (val < 0)
                 goto Error;
             val = val / 4; // trim indicator bits
@@ -556,7 +561,8 @@ namespace System.Xml
             out int min,
             out int sec,
             out int ms
-        ) {
+        )
+        {
             if (val < 0)
                 goto Error;
             val = val / 4; // trim indicator bits
@@ -742,7 +748,8 @@ namespace System.Xml
         public static DateTimeOffset XsdKatmaiDateTimeOffsetToDateTimeOffset(
             byte[] data,
             int offset
-        ) {
+        )
+        {
             // Katmai SQL type "DATETIMEOFFSET"
             long timeTicks = GetKatmaiTimeTicks(data, ref offset);
             long dateTicks = GetKatmaiDateTicks(data, ref offset);

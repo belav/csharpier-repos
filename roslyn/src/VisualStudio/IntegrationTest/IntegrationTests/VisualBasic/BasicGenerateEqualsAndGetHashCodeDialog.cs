@@ -19,9 +19,8 @@ namespace Roslyn.VisualStudio.IntegrationTests.VisualBasic
 
         protected override string LanguageName => LanguageNames.VisualBasic;
 
-        public BasicGenerateEqualsAndGetHashCodeDialog(
-            VisualStudioInstanceFactory instanceFactory
-        ) : base(instanceFactory, nameof(BasicGenerateEqualsAndGetHashCodeDialog)) { }
+        public BasicGenerateEqualsAndGetHashCodeDialog(VisualStudioInstanceFactory instanceFactory)
+            : base(instanceFactory, nameof(BasicGenerateEqualsAndGetHashCodeDialog)) { }
 
         [WpfFact, Trait(Traits.Feature, Traits.Features.CodeActionsGenerateEqualsAndGetHashCode)]
         public void VerifyCodeRefactoringOfferedAndCanceled()

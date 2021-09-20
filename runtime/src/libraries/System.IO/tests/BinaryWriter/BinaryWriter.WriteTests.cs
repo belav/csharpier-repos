@@ -298,7 +298,8 @@ namespace System.IO.Tests
             T[] testElements,
             Action<BinaryWriter, T> write,
             Func<BinaryReader, T> read
-        ) {
+        )
+        {
             using (Stream memStream = CreateStream())
             using (BinaryWriter writer = new BinaryWriter(memStream))
             using (BinaryReader reader = new BinaryReader(memStream))

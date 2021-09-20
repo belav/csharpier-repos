@@ -53,7 +53,8 @@ namespace System.ServiceModel.Syndication.Tests
             IList<SyndicationCategory> categories,
             bool isFixed,
             string scheme
-        ) {
+        )
+        {
             Collection<SyndicationCategory> categoriesCollection =
                 categories == null ? null : new Collection<SyndicationCategory>(categories);
             InlineCategoriesDocument document = CategoriesDocument.Create(

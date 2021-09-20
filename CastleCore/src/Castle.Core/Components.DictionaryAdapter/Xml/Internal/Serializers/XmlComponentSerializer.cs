@@ -37,7 +37,8 @@ namespace Castle.Components.DictionaryAdapter.Xml
             IXmlNode node,
             IDictionaryAdapter parent,
             IXmlAccessor accessor
-        ) {
+        )
+        {
             // TODO: Refactor
             var adapter = new XmlAdapter(node, XmlAdapter.For(parent).References);
             return parent.CreateChildAdapter(accessor.ClrType, adapter);
@@ -47,7 +48,8 @@ namespace Castle.Components.DictionaryAdapter.Xml
             IXmlNode node,
             IDictionaryAdapter parent,
             IXmlAccessor accessor
-        ) {
+        )
+        {
             var adapter = new XmlAdapter(node.Save(), XmlAdapter.For(parent).References);
             return parent.CreateChildAdapter(node.ClrType, adapter);
         }
@@ -58,7 +60,8 @@ namespace Castle.Components.DictionaryAdapter.Xml
             IXmlAccessor accessor,
             object oldValue,
             ref object value
-        ) {
+        )
+        {
             // Require a dictionary adapter
             var source = value as IDictionaryAdapter;
             if (source == null)

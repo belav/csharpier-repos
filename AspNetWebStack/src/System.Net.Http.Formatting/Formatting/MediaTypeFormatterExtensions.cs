@@ -29,7 +29,8 @@ namespace System.Net.Http.Formatting
             string queryStringParameterName,
             string queryStringParameterValue,
             MediaTypeHeaderValue mediaType
-        ) {
+        )
+        {
             if (formatter == null)
             {
                 throw Error.ArgumentNull("formatter");
@@ -59,7 +60,8 @@ namespace System.Net.Http.Formatting
             string queryStringParameterName,
             string queryStringParameterValue,
             string mediaType
-        ) {
+        )
+        {
             if (formatter == null)
             {
                 throw Error.ArgumentNull("formatter");
@@ -96,7 +98,8 @@ namespace System.Net.Http.Formatting
             StringComparison valueComparison,
             bool isValueSubstring,
             MediaTypeHeaderValue mediaType
-        ) {
+        )
+        {
             if (formatter == null)
             {
                 throw Error.ArgumentNull("formatter");
@@ -135,7 +138,8 @@ namespace System.Net.Http.Formatting
             StringComparison valueComparison,
             bool isValueSubstring,
             string mediaType
-        ) {
+        )
+        {
             if (formatter == null)
             {
                 throw Error.ArgumentNull("formatter");

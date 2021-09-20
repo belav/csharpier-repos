@@ -330,7 +330,8 @@ namespace Microsoft.AspNetCore.DataProtection.KeyManagement
             string creationDate = null,
             bool isRevoked = false,
             bool createEncryptorThrows = false
-        ) {
+        )
+        {
             var mockKey = new Mock<IKey>();
             mockKey.Setup(o => o.KeyId).Returns(Guid.NewGuid());
             mockKey.Setup(o => o.CreationDate)
@@ -367,7 +368,8 @@ namespace Microsoft.AspNetCore.DataProtection.KeyManagement
             this IDefaultKeyResolver resolver,
             string now,
             params IKey[] allKeys
-        ) {
+        )
+        {
             return resolver.ResolveDefaultKeyPolicy(
                 DateTimeOffset.ParseExact(now, "u", CultureInfo.InvariantCulture),
                 (IEnumerable<IKey>)allKeys

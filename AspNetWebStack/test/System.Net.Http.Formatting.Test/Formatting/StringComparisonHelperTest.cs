@@ -21,7 +21,8 @@ namespace System.Net.Http.Formatting
             int invalidValue,
             Type enumType,
             bool allowDerivedExceptions = false
-        ) {
+        )
+        {
             Assert.ThrowsArgument(testCode, parameterName, allowDerivedExceptions);
         }
 

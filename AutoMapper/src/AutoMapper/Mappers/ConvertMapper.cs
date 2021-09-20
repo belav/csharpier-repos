@@ -16,7 +16,8 @@ namespace AutoMapper.Internal.Mappers
             MemberMap memberMap,
             Expression sourceExpression,
             Expression destExpression
-        ) {
+        )
+        {
             var convertMethod = typeof(Convert).GetMethod(
                 "To" + destExpression.Type.Name,
                 new[] { sourceExpression.Type }

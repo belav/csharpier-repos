@@ -90,7 +90,8 @@ namespace Benchstone.BenchF
             double ftol,
             int ntol,
             out int iflag
-        ) {
+        )
+        {
             double signfa,
                 prevfw,
                 fa,

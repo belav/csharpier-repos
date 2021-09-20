@@ -158,7 +158,8 @@ namespace Microsoft.CSharp.RuntimeBinder.Semantics
             ACCESS access,
             int cTypeVars,
             int[] signature
-        ) {
+        )
+        {
             this.method = method;
             this.type = type;
             this.name = name;
@@ -207,7 +208,8 @@ namespace Microsoft.CSharp.RuntimeBinder.Semantics
             PREDEFPROP predefProp,
             Name propertyName,
             PREDEFMETH propertyGetter
-        ) {
+        )
+        {
             Debug.Assert(propertyName != null);
             Debug.Assert(propertyGetter >= 0 && propertyGetter < PREDEFMETH.PM_COUNT);
 
@@ -232,7 +234,8 @@ namespace Microsoft.CSharp.RuntimeBinder.Semantics
             int[] signature,
             ref int indexIntoSignatures,
             TypeArray classTyVars
-        ) {
+        )
+        {
             Debug.Assert(signature != null);
 
             MethodSignatureEnum current = (MethodSignatureEnum)signature[indexIntoSignatures];
@@ -284,7 +287,8 @@ namespace Microsoft.CSharp.RuntimeBinder.Semantics
             int[] signature,
             ref int indexIntoSignatures,
             TypeArray classTyVars
-        ) {
+        )
+        {
             Debug.Assert(signature != null);
 
             int count = signature[indexIntoSignatures];
@@ -340,7 +344,8 @@ namespace Microsoft.CSharp.RuntimeBinder.Semantics
             ACCESS methodAccess,
             bool isStatic,
             bool isVirtual
-        ) {
+        )
+        {
             Debug.Assert(signature != null);
             Debug.Assert(cMethodTyVars >= 0);
             Debug.Assert(methodName != null);
@@ -391,12 +396,14 @@ namespace Microsoft.CSharp.RuntimeBinder.Semantics
             bool isVirtual,
             CType returnType,
             TypeArray argumentTypes
-        ) {
+        )
+        {
             for (
                 Symbol sym = SymbolLoader.LookupAggMember(methodName, type, symbmask_t.MASK_ALL);
                 sym != null;
                 sym = sym.LookupNext(symbmask_t.MASK_ALL)
-            ) {
+            )
+            {
                 if (sym is MethodSymbol methsym)
                 {
                     if (
@@ -417,7 +424,8 @@ namespace Microsoft.CSharp.RuntimeBinder.Semantics
                             null,
                             methsym.typeVars
                         )
-                    ) {
+                    )
+                    {
                         return methsym;
                     }
                 }

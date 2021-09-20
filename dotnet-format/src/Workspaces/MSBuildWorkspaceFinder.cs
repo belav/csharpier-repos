@@ -25,7 +25,8 @@ namespace Microsoft.CodeAnalysis.Tools.Workspaces
         public static (bool isSolution, string workspacePath) FindWorkspace(
             string searchDirectory,
             string? workspacePath = null
-        ) {
+        )
+        {
             if (!string.IsNullOrEmpty(workspacePath))
             {
                 if (!Path.IsPathRooted(workspacePath))
@@ -136,7 +137,8 @@ namespace Microsoft.CodeAnalysis.Tools.Workspaces
             string searchBase,
             Func<string, IEnumerable<string>> fileSelector,
             string multipleFilesFoundError
-        ) {
+        )
+        {
             if (!Directory.Exists(searchBase))
             {
                 return null;

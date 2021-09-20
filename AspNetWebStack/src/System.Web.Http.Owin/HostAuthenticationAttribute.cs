@@ -53,7 +53,8 @@ namespace System.Web.Http
         public Task AuthenticateAsync(
             HttpAuthenticationContext context,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             return _innerFilter.AuthenticateAsync(context, cancellationToken);
         }
 
@@ -61,7 +62,8 @@ namespace System.Web.Http
         public Task ChallengeAsync(
             HttpAuthenticationChallengeContext context,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             return _innerFilter.ChallengeAsync(context, cancellationToken);
         }
     }

@@ -34,7 +34,8 @@ namespace System.Net.Sockets.Tests
                     SocketType.Stream,
                     ProtocolType.Tcp
                 )
-            ) {
+            )
+            {
                 AssertExtensions.Throws<ArgumentNullException>(
                     "asyncResult",
                     () => s.EndDisconnect(null)
@@ -77,7 +78,8 @@ namespace System.Net.Sockets.Tests
                     SocketImplementationType.Async,
                     loopback
                 )
-            ) {
+            )
+            {
                 SocketAsyncEventArgs args = new SocketAsyncEventArgs();
                 args.Completed += OnCompleted;
                 args.UserToken = completed;
@@ -90,7 +92,8 @@ namespace System.Net.Sockets.Tests
                         SocketType.Stream,
                         ProtocolType.Tcp
                     )
-                ) {
+                )
+                {
                     if (client.ConnectAsync(args))
                     {
                         completed.WaitOne();
@@ -137,7 +140,8 @@ namespace System.Net.Sockets.Tests
                     SocketImplementationType.Async,
                     loopback
                 )
-            ) {
+            )
+            {
                 SocketAsyncEventArgs args = new SocketAsyncEventArgs();
                 args.Completed += OnCompleted;
                 args.UserToken = completed;
@@ -150,7 +154,8 @@ namespace System.Net.Sockets.Tests
                         SocketType.Stream,
                         ProtocolType.Tcp
                     )
-                ) {
+                )
+                {
                     if (client.ConnectAsync(args))
                     {
                         completed.WaitOne();
@@ -201,7 +206,8 @@ namespace System.Net.Sockets.Tests
                     SocketImplementationType.Async,
                     loopback
                 )
-            ) {
+            )
+            {
                 SocketAsyncEventArgs args = new SocketAsyncEventArgs();
                 args.Completed += OnCompleted;
                 args.UserToken = completed;
@@ -213,7 +219,8 @@ namespace System.Net.Sockets.Tests
                         SocketType.Stream,
                         ProtocolType.Tcp
                     )
-                ) {
+                )
+                {
                     if (client.ConnectAsync(args))
                     {
                         completed.WaitOne();

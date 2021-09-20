@@ -32,7 +32,8 @@ namespace System.Runtime.InteropServices
             string name,
             int initialThreshold,
             int maximumThreshold
-        ) {
+        )
+        {
             var handleCollector = new HandleCollector(name, initialThreshold, maximumThreshold);
             Assert.Equal(0, handleCollector.Count);
             Assert.Equal(name ?? string.Empty, handleCollector.Name);

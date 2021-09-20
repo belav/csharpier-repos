@@ -586,7 +586,8 @@ namespace System.Security.Cryptography.Pkcs.Tests
             using (
                 X509Certificate2 signerCert =
                     Certificates.RSAKeyTransferCapi1.TryGetCertificateWithPrivateKey()
-            ) {
+            )
+            {
                 CmsSigner signer = new CmsSigner(
                     SubjectIdentifierType.IssuerAndSerialNumber,
                     signerCert
@@ -645,7 +646,8 @@ namespace System.Security.Cryptography.Pkcs.Tests
             using (
                 X509Certificate2 signerCert =
                     Certificates.RSA2048SignatureOnly.TryGetCertificateWithPrivateKey()
-            ) {
+            )
+            {
                 CmsSigner signer = new CmsSigner(identifierType, signerCert);
                 firstSigner.ComputeCounterSignature(signer);
             }
@@ -698,7 +700,8 @@ namespace System.Security.Cryptography.Pkcs.Tests
             using (
                 X509Certificate2 cert =
                     Certificates.RSAKeyTransferCapi1.TryGetCertificateWithPrivateKey()
-            ) {
+            )
+            {
                 signerInfo.ComputeCounterSignature(
                     new CmsSigner(SubjectIdentifierType.IssuerAndSerialNumber, cert)
                 );
@@ -732,7 +735,8 @@ namespace System.Security.Cryptography.Pkcs.Tests
 
             using (
                 X509Certificate2 signerCert = Certificates.Dsa1024.TryGetCertificateWithPrivateKey()
-            ) {
+            )
+            {
                 CmsSigner signer = new CmsSigner(
                     SubjectIdentifierType.IssuerAndSerialNumber,
                     signerCert
@@ -798,7 +802,8 @@ namespace System.Security.Cryptography.Pkcs.Tests
         public static void AddCounterSigner_ECDSA(
             SubjectIdentifierType identifierType,
             string digestOid
-        ) {
+        )
+        {
             SignedCms cms = new SignedCms();
             cms.Decode(SignedDocuments.RsaPkcs1OneSignerIssuerAndSerialNumber);
             Assert.Single(cms.Certificates);
@@ -810,7 +815,8 @@ namespace System.Security.Cryptography.Pkcs.Tests
             using (
                 X509Certificate2 signerCert =
                     Certificates.ECDsaP256Win.TryGetCertificateWithPrivateKey()
-            ) {
+            )
+            {
                 CmsSigner signer = new CmsSigner(identifierType, signerCert);
                 signer.IncludeOption = X509IncludeOption.EndCertOnly;
                 signer.DigestAlgorithm = new Oid(digestOid, digestOid);
@@ -910,7 +916,8 @@ namespace System.Security.Cryptography.Pkcs.Tests
             using (
                 X509Certificate2 cert =
                     Certificates.RSAKeyTransferCapi1.TryGetCertificateWithPrivateKey()
-            ) {
+            )
+            {
                 firstSigner.ComputeCounterSignature(
                     new CmsSigner(SubjectIdentifierType.NoSignature, cert)
                     {
@@ -969,7 +976,8 @@ namespace System.Security.Cryptography.Pkcs.Tests
         private static void AddSecondCounterSignature_NoSignature(
             bool withCertificate,
             bool addExtraCert
-        ) {
+        )
+        {
             X509Certificate2Collection certs;
             SignedCms cms = new SignedCms();
             cms.Decode(SignedDocuments.RsaPkcs1OneSignerIssuerAndSerialNumber);
@@ -1081,7 +1089,8 @@ namespace System.Security.Cryptography.Pkcs.Tests
             using (
                 X509Certificate2 signerCert =
                     Certificates.RSAKeyTransferCapi1.TryGetCertificateWithPrivateKey()
-            ) {
+            )
+            {
                 var signer = new CmsSigner(SubjectIdentifierType.IssuerAndSerialNumber, signerCert);
                 signer.Certificates.Add(unrelated1);
                 signer.Certificates.Add(unrelated2);

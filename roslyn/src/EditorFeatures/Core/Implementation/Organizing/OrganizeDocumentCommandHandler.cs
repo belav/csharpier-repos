@@ -58,13 +58,15 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.Organizing
         public bool ExecuteCommand(
             OrganizeDocumentCommandArgs args,
             CommandExecutionContext context
-        ) {
+        )
+        {
             using (
                 context.OperationContext.AddScope(
                     allowCancellation: true,
                     EditorFeaturesResources.Organizing_document
                 )
-            ) {
+            )
+            {
                 var cancellationToken = context.OperationContext.UserCancellationToken;
                 var document =
                     args.SubjectBuffer.CurrentSnapshot.GetFullyLoadedOpenDocumentInCurrentContextWithChanges(
@@ -106,7 +108,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.Organizing
             EditorCommandArgs args,
             Func<IOrganizeImportsService, string> descriptionString,
             bool needsSemantics
-        ) {
+        )
+        {
             if (IsCommandSupported(args, needsSemantics, out var workspace))
             {
                 var organizeImportsService = workspace.Services.GetLanguageServices(
@@ -128,7 +131,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.Organizing
             EditorCommandArgs args,
             bool needsSemantics,
             out Workspace workspace
-        ) {
+        )
+        {
             workspace = null;
             if (args.SubjectBuffer.TryGetWorkspace(out var retrievedWorkspace))
             {
@@ -156,7 +160,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.Organizing
                     allowCancellation: true,
                     EditorFeaturesResources.Organizing_document
                 )
-            ) {
+            )
+            {
                 SortImports(args.SubjectBuffer, context.OperationContext);
             }
 
@@ -166,13 +171,15 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.Organizing
         public bool ExecuteCommand(
             SortAndRemoveUnnecessaryImportsCommandArgs args,
             CommandExecutionContext context
-        ) {
+        )
+        {
             using (
                 context.OperationContext.AddScope(
                     allowCancellation: true,
                     EditorFeaturesResources.Organizing_document
                 )
-            ) {
+            )
+            {
                 this.SortAndRemoveUnusedImports(args.SubjectBuffer, context.OperationContext);
             }
 
@@ -182,7 +189,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.Organizing
         private static void SortImports(
             ITextBuffer subjectBuffer,
             IUIThreadOperationContext operationContext
-        ) {
+        )
+        {
             var cancellationToken = operationContext.UserCancellationToken;
             var document =
                 subjectBuffer.CurrentSnapshot.GetOpenDocumentInCurrentContextWithChanges();
@@ -200,7 +208,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.Organizing
         private void SortAndRemoveUnusedImports(
             ITextBuffer subjectBuffer,
             IUIThreadOperationContext operationContext
-        ) {
+        )
+        {
             var cancellationToken = operationContext.UserCancellationToken;
             var document =
                 subjectBuffer.CurrentSnapshot.GetFullyLoadedOpenDocumentInCurrentContextWithChanges(

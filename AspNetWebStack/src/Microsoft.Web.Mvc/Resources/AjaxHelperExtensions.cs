@@ -23,7 +23,8 @@ namespace Microsoft.Web.Mvc.Resources
             string controllerName,
             object routeValues,
             AjaxOptions ajaxOptions
-        ) {
+        )
+        {
             return ajax.BeginResourceForm(
                 controllerName,
                 routeValues,
@@ -47,7 +48,8 @@ namespace Microsoft.Web.Mvc.Resources
             object routeValues,
             AjaxOptions ajaxOptions,
             ActionType actionType
-        ) {
+        )
+        {
             switch (actionType)
             {
                 case ActionType.GetUpdateForm:
@@ -86,7 +88,8 @@ namespace Microsoft.Web.Mvc.Resources
             string controllerName,
             object routeValues,
             AjaxOptions ajaxOptions
-        ) {
+        )
+        {
             return ajax.ResourceLink(
                 controllerName,
                 controllerName,
@@ -111,7 +114,8 @@ namespace Microsoft.Web.Mvc.Resources
             string linkText,
             object routeValues,
             AjaxOptions ajaxOptions
-        ) {
+        )
+        {
             return ajax.ResourceLink(
                 linkText,
                 controllerName,
@@ -138,7 +142,8 @@ namespace Microsoft.Web.Mvc.Resources
             object routeValues,
             AjaxOptions ajaxOptions,
             ActionType actionType
-        ) {
+        )
+        {
             switch (actionType)
             {
                 case ActionType.GetUpdateForm:

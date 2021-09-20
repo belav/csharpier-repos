@@ -38,7 +38,8 @@ namespace Microsoft.EntityFrameworkCore.Query
         /// <param name="dependencies"> Parameter object containing dependencies for this class. </param>
         public RelationalMethodCallTranslatorProvider(
             RelationalMethodCallTranslatorProviderDependencies dependencies
-        ) {
+        )
+        {
             Check.NotNull(dependencies, nameof(dependencies));
 
             _plugins.AddRange(dependencies.Plugins.SelectMany(p => p.Translators));
@@ -70,7 +71,8 @@ namespace Microsoft.EntityFrameworkCore.Query
             MethodInfo method,
             IReadOnlyList<SqlExpression> arguments,
             IDiagnosticsLogger<DbLoggerCategory.Query> logger
-        ) {
+        )
+        {
             Check.NotNull(model, nameof(model));
             Check.NotNull(method, nameof(method));
             Check.NotNull(arguments, nameof(arguments));

@@ -30,7 +30,8 @@ namespace System.Collections.Tests
         /// </summary>
         protected override IEnumerable<ModifyEnumerable> GetModifyEnumerables(
             ModifyOperation operations
-        ) {
+        )
+        {
             if ((operations & ModifyOperation.Add) == ModifyOperation.Add)
             {
                 yield return (IEnumerable enumerable) =>
@@ -97,7 +98,8 @@ namespace System.Collections.Tests
         [MemberData(nameof(ValidCollectionSizes))]
         public void LinkedList_ICollection_NonGeneric_CopyTo_ExactlyEnoughSpaceInTypeCorrectArray(
             int count
-        ) {
+        )
+        {
             ICollection collection = NonGenericICollectionFactory(count);
             string[] array = new string[count];
             collection.CopyTo(array, 0);

@@ -83,7 +83,8 @@ namespace System.IO.Pipes
             if (
                 inheritability < HandleInheritability.None
                 || inheritability > HandleInheritability.Inheritable
-            ) {
+            )
+            {
                 throw new ArgumentOutOfRangeException(
                     nameof(inheritability),
                     SR.ArgumentOutOfRange_HandleInheritabilityNoneOrInheritable

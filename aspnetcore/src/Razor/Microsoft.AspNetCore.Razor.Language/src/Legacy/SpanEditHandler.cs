@@ -20,7 +20,8 @@ namespace Microsoft.AspNetCore.Razor.Language.Legacy
         public SpanEditHandler(
             Func<string, IEnumerable<Syntax.InternalSyntax.SyntaxToken>> tokenizer,
             AcceptedCharactersInternal accepted
-        ) {
+        )
+        {
             AcceptedCharacters = accepted;
             Tokenizer = tokenizer;
         }
@@ -36,7 +37,8 @@ namespace Microsoft.AspNetCore.Razor.Language.Legacy
 
         public static SpanEditHandler CreateDefault(
             Func<string, IEnumerable<Syntax.InternalSyntax.SyntaxToken>> tokenizer
-        ) {
+        )
+        {
             return new SpanEditHandler(tokenizer);
         }
 
@@ -57,7 +59,8 @@ namespace Microsoft.AspNetCore.Razor.Language.Legacy
             if (
                 (result & PartialParseResultInternal.Accepted)
                 == PartialParseResultInternal.Accepted
-            ) {
+            )
+            {
                 return new EditResult(result, UpdateSpan(target, change));
             }
             return new EditResult(result, target);
@@ -79,7 +82,8 @@ namespace Microsoft.AspNetCore.Razor.Language.Legacy
         protected virtual PartialParseResultInternal CanAcceptChange(
             SyntaxNode target,
             SourceChange change
-        ) {
+        )
+        {
             return PartialParseResultInternal.Rejected;
         }
 

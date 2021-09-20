@@ -29,7 +29,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.LanguageServices
             INamedTypeSymbol anonymousType,
             SemanticModel semanticModel,
             int position
-        ) {
+        )
+        {
             using var _ = ArrayBuilder<SymbolDisplayPart>.GetInstance(out var members);
 
             members.Add(Keyword(SyntaxFacts.GetText(SyntaxKind.NewKeyword)));

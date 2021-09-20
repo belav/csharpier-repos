@@ -68,7 +68,8 @@ namespace MonoTests.Common
             out object state,
             out DateTimeOffset lastWriteTime,
             out long fileSize
-        ) {
+        )
+        {
             if (UseNullState)
                 state = null;
             else
@@ -92,7 +93,8 @@ namespace MonoTests.Common
             out object state,
             out DateTimeOffset lastWriteTime,
             out long fileSize
-        ) {
+        )
+        {
             StartMonitoring(
                 filePath,
                 onChangedCallback,

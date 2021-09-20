@@ -13,7 +13,8 @@ namespace Microsoft.AspNetCore.Mvc.Razor.Compilation
         public DefaultViewCompilerProvider(
             ApplicationPartManager applicationPartManager,
             ILoggerFactory loggerFactory
-        ) {
+        )
+        {
             var feature = new ViewsFeature();
             applicationPartManager.PopulateFeature(feature);
 

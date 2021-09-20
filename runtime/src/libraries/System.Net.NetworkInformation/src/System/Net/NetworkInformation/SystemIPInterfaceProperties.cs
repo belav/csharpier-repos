@@ -29,7 +29,8 @@ namespace System.Net.NetworkInformation
         internal SystemIPInterfaceProperties(
             in Interop.IpHlpApi.FIXED_INFO fixedInfo,
             in Interop.IpHlpApi.IpAdapterAddresses ipAdapterAddresses
-        ) {
+        )
+        {
             _adapterFlags = ipAdapterAddresses.flags;
             _dnsSuffix = ipAdapterAddresses.dnsSuffix;
             _dnsEnabled = fixedInfo.enableDns;

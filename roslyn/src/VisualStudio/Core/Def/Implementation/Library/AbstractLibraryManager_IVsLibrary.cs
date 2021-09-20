@@ -16,7 +16,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Library
             VSCOMPONENTSELECTORDATA[] pcdComponent,
             ref uint pgrfOptions,
             out string pbstrComponentAdded
-        ) {
+        )
+        {
             pbstrComponentAdded = null;
             return VSConstants.E_NOTIMPL;
         }
@@ -51,7 +52,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Library
             uint flags,
             VSOBSEARCHCRITERIA[] pobSrch,
             out IVsObjectList pplist
-        ) {
+        )
+        {
             pplist = null;
             return VSConstants.E_NOTIMPL;
         }

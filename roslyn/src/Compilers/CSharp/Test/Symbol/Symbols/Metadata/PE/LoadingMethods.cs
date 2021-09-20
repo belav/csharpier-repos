@@ -813,7 +813,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.Symbols.Metadata.PE
             NamedTypeSymbol innerClass,
             string methodName,
             Symbol interfaceMethod
-        ) {
+        )
+        {
             var @interface = interfaceMethod.ContainingType;
 
             Assert.Equal(1, innerClass.Arity);
@@ -1140,7 +1141,8 @@ class Override : MetadataModifiers
             SymbolVirtualness expectedVirtualness,
             MethodAttributes flags,
             bool isExplicitOverride
-        ) {
+        )
+        {
             const string ilTemplate =
                 @"
 .class public auto ansi beforefieldinit Base
@@ -1502,7 +1504,8 @@ class Override : MetadataModifiers
                         "Microsoft.FSharp.Control.IDelegateEvent`1"
                     )
                     .GetMembers()
-            ) {
+            )
+            {
                 Assert.False(((MethodSymbol)m).IsVirtual);
                 Assert.True(((MethodSymbol)m).IsAbstract);
                 Assert.False(((MethodSymbol)m).IsOverride);

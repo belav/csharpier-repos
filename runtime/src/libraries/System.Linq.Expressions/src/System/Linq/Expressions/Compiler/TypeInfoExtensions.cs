@@ -12,7 +12,8 @@ namespace System.Linq.Expressions.Compiler
             this DelegateHelpers.TypeInfo info,
             Type retType,
             params Expression[] args
-        ) {
+        )
+        {
             return info.MakeDelegateType(retType, (IList<Expression>)args);
         }
 
@@ -20,7 +21,8 @@ namespace System.Linq.Expressions.Compiler
             this DelegateHelpers.TypeInfo info,
             Type retType,
             IList<Expression> args
-        ) {
+        )
+        {
             // nope, go ahead and create it and spend the
             // cost of creating the array.
             Type[] paramTypes = new Type[args.Count + 2];

@@ -440,7 +440,8 @@ namespace Microsoft.CodeAnalysis.BuildTasks
                         RoslynString.IsNullOrEmpty(platform)
                         || platform.Equals("anycpu", StringComparison.OrdinalIgnoreCase)
                     ) && Prefer32Bit
-                ) {
+                )
+                {
                     platform = "anycpu32bitpreferred";
                 }
                 return platform;
@@ -490,7 +491,8 @@ namespace Microsoft.CodeAnalysis.BuildTasks
             string pathToTool,
             string responseFileCommands,
             string commandLineCommands
-        ) {
+        )
+        {
             if (ProvideCommandLineArgs)
             {
                 CommandLineArgs = GetArguments(commandLineCommands, responseFileCommands)
@@ -516,7 +518,8 @@ namespace Microsoft.CodeAnalysis.BuildTasks
                     !UseSharedCompilation
                     || HasToolBeenOverridden
                     || !BuildServerConnection.IsCompilerServerSupported
-                ) {
+                )
+                {
                     LogCompilationMessage(
                         logger,
                         requestId,
@@ -665,7 +668,8 @@ namespace Microsoft.CodeAnalysis.BuildTasks
             string responseFileCommands,
             string commandLineCommands,
             ICompilerServerLogger logger
-        ) {
+        )
+        {
             if (response is null)
             {
                 LogCompilationMessage(
@@ -772,7 +776,8 @@ namespace Microsoft.CodeAnalysis.BuildTasks
             Guid requestId,
             CompilationKind kind,
             string diagnostic
-        ) {
+        )
+        {
             var category = kind switch
             {
                 CompilationKind.Server => "server",
@@ -852,7 +857,8 @@ namespace Microsoft.CodeAnalysis.BuildTasks
         /// </summary>
         protected internal virtual void AddCommandLineCommands(
             CommandLineBuilderExtension commandLine
-        ) {
+        )
+        {
             commandLine.AppendWhenTrue("/noconfig", _store, nameof(NoConfig));
         }
 
@@ -861,7 +867,8 @@ namespace Microsoft.CodeAnalysis.BuildTasks
         /// </summary>
         protected internal virtual void AddResponseFileCommands(
             CommandLineBuilderExtension commandLine
-        ) {
+        )
+        {
             // If outputAssembly is not specified, then an "/out: <name>" option won't be added to
             // overwrite the one resulting from the OutputAssembly member of the CompilerParameters class.
             // In that case, we should set the outputAssembly member based on the first source file.
@@ -870,7 +877,8 @@ namespace Microsoft.CodeAnalysis.BuildTasks
                 && (Sources != null)
                 && (Sources.Length > 0)
                 && (ResponseFiles == null) // The response file may already have a /out: switch in it, so don't try to be smart here.
-            ) {
+            )
+            {
                 try
                 {
                     OutputAssembly = new TaskItem(
@@ -887,7 +895,8 @@ namespace Microsoft.CodeAnalysis.BuildTasks
                 }
                 else if (
                     string.Compare(TargetType, "module", StringComparison.OrdinalIgnoreCase) == 0
-                ) {
+                )
+                {
                     OutputAssembly.ItemSpec += ".netmodule";
                 }
                 else
@@ -958,7 +967,8 @@ namespace Microsoft.CodeAnalysis.BuildTasks
 
         internal void AddResponseFileCommandsForSwitchesSinceInitialReleaseThatAreNeededByTheHost(
             CommandLineBuilderExtension commandLine
-        ) {
+        )
+        {
             commandLine.AppendPlusOrMinusSwitch("/deterministic", _store, nameof(Deterministic));
             commandLine.AppendPlusOrMinusSwitch("/publicsign", _store, nameof(PublicSign));
             commandLine.AppendSwitchIfNotNull("/runtimemetadataversion:", RuntimeMetadataVersion);
@@ -995,7 +1005,8 @@ namespace Microsoft.CodeAnalysis.BuildTasks
         internal static void AddAnalyzersToCommandLine(
             CommandLineBuilderExtension commandLine,
             ITaskItem[]? analyzers
-        ) {
+        )
+        {
             // If there were no analyzers passed in, don't add any /analyzer: switches
             // on the command-line.
             if (analyzers == null)
@@ -1096,7 +1107,8 @@ namespace Microsoft.CodeAnalysis.BuildTasks
                         "none",
                         StringComparison.OrdinalIgnoreCase
                     ) == 0
-                ) {
+                )
+                {
                     _store[nameof(DebugType)] = null;
                     _store[nameof(EmitDebugInformation)] = false;
                 }
@@ -1163,7 +1175,8 @@ namespace Microsoft.CodeAnalysis.BuildTasks
         protected void CheckHostObjectSupport(
             string parameterName,
             bool resultFromHostObjectSetOperation
-        ) {
+        )
+        {
             if (!resultFromHostObjectSetOperation)
             {
                 Log.LogMessageFromResources(
@@ -1178,7 +1191,8 @@ namespace Microsoft.CodeAnalysis.BuildTasks
         internal void InitializeHostObjectSupportForNewSwitches(
             ITaskHost hostObject,
             ref string param
-        ) {
+        )
+        {
             var compilerOptionsHostObject = hostObject as ICompilerOptionsHostObject;
 
             if (compilerOptionsHostObject != null)
@@ -1252,7 +1266,8 @@ namespace Microsoft.CodeAnalysis.BuildTasks
                     if (
                         !string.Equals(TargetType, "library", StringComparison.OrdinalIgnoreCase)
                         && !string.Equals(TargetType, "module", StringComparison.OrdinalIgnoreCase)
-                    ) {
+                    )
+                    {
                         // We need to compute the path to the default win32 manifest
                         string pathToDefaultManifest =
                             ToolLocationHelper.GetPathToDotNetFrameworkFile(

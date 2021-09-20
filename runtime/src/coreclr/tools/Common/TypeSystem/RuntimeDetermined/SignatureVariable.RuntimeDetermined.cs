@@ -19,7 +19,8 @@ namespace Internal.TypeSystem
         public override TypeDesc GetNonRuntimeDeterminedTypeFromRuntimeDeterminedSubtypeViaSubstitution(
             Instantiation typeInstantiation,
             Instantiation methodInstantiation
-        ) {
+        )
+        {
             Debug.Assert(false);
             return this;
         }

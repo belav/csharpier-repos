@@ -26,7 +26,8 @@ public class Tests
         string className,
         Type[] required_modifiers,
         Type[] optional_modifiers
-    ) {
+    )
+    {
         // Example il (no equivalent C# for modreqs)
         // Note that the modifiers will change for each class
         //
@@ -67,7 +68,8 @@ public class Tests
         string invokeName,
         MethodInfo target,
         Type argument
-    ) {
+    )
+    {
         // Example il (no equivalent C# for modreqs)
         // Note that the modifiers will change as per the callee
         //

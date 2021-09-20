@@ -64,7 +64,8 @@ namespace System.Configuration
             ConfigurationValidatorBase validator,
             ConfigurationPropertyOptions options,
             string description
-        ) {
+        )
+        {
             ConstructorInit(name, type, options, validator, typeConverter, description);
 
             SetDefaultValue(defaultValue);
@@ -230,7 +231,8 @@ namespace System.Configuration
             ConfigurationValidatorBase validator,
             TypeConverter converter,
             string description
-        ) {
+        )
+        {
             if (typeof(ConfigurationSection).IsAssignableFrom(type))
             {
                 throw new ConfigurationErrorsException(
@@ -247,7 +249,8 @@ namespace System.Configuration
             if (
                 ((options & ConfigurationPropertyOptions.IsDefaultCollection) != 0)
                 && string.IsNullOrEmpty(name)
-            ) {
+            )
+            {
                 name = DefaultCollectionPropertyName;
             }
             else
@@ -309,7 +312,8 @@ namespace System.Configuration
         private void InitDefaultValueFromTypeInfo(
             ConfigurationPropertyAttribute configurationProperty,
             DefaultValueAttribute defaultValueAttribute
-        ) {
+        )
+        {
             object defaultValue = configurationProperty.DefaultValue;
 
             // If the ConfigurationPropertyAttribute has no default try the DefaultValueAttribute
@@ -426,7 +430,8 @@ namespace System.Configuration
                     (_converter == null)
                     || !_converter.CanConvertFrom(typeof(string))
                     || !_converter.CanConvertTo(typeof(string))
-                ) {
+                )
+                {
                     // Need to be able to convert to/from string
                     throw new ConfigurationErrorsException(
                         SR.Format(SR.No_converter, Name, Type.Name)

@@ -297,7 +297,8 @@ namespace TypeSystemTests
                     _simpleTypeConstraintType,
                     _doubleSimpleTypeConstraintType
                 }
-            ) {
+            )
+            {
                 instantiatedType = genType.MakeInstantiatedType(_arg1Type);
                 Assert.True(instantiatedType.CheckConstraints());
 

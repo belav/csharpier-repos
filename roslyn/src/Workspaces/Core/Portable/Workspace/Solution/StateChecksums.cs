@@ -21,15 +21,16 @@ namespace Microsoft.CodeAnalysis.Serialization
             Checksum optionsChecksum,
             ProjectChecksumCollection projectChecksums,
             AnalyzerReferenceChecksumCollection analyzerReferenceChecksums
-        ) : this(
-            new object[]
-            {
-                infoChecksum,
-                optionsChecksum,
-                projectChecksums,
-                analyzerReferenceChecksums
-            }
-        ) { }
+        )
+            : this(
+                new object[]
+                {
+                    infoChecksum,
+                    optionsChecksum,
+                    projectChecksums,
+                    analyzerReferenceChecksums
+                }
+            ) { }
 
         public SolutionStateChecksums(object[] children)
             : base(WellKnownSynchronizationKind.SolutionStateChecksums, children) { }
@@ -45,7 +46,8 @@ namespace Microsoft.CodeAnalysis.Serialization
             HashSet<Checksum> searchingChecksumsLeft,
             Dictionary<Checksum, object> result,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             cancellationToken.ThrowIfCancellationRequested();
 
             // verify input
@@ -124,17 +126,18 @@ namespace Microsoft.CodeAnalysis.Serialization
             AnalyzerReferenceChecksumCollection analyzerReferenceChecksums,
             TextDocumentChecksumCollection additionalDocumentChecksums,
             AnalyzerConfigDocumentChecksumCollection analyzerConfigDocumentChecksumCollection
-        ) : this(
-            (object)infoChecksum,
-            compilationOptionsChecksum,
-            parseOptionsChecksum,
-            documentChecksums,
-            projectReferenceChecksums,
-            metadataReferenceChecksums,
-            analyzerReferenceChecksums,
-            additionalDocumentChecksums,
-            analyzerConfigDocumentChecksumCollection
-        ) { }
+        )
+            : this(
+                (object)infoChecksum,
+                compilationOptionsChecksum,
+                parseOptionsChecksum,
+                documentChecksums,
+                projectReferenceChecksums,
+                metadataReferenceChecksums,
+                analyzerReferenceChecksums,
+                additionalDocumentChecksums,
+                analyzerConfigDocumentChecksumCollection
+            ) { }
 
         public ProjectStateChecksums(params object[] children)
             : base(WellKnownSynchronizationKind.ProjectStateChecksums, children) { }
@@ -162,7 +165,8 @@ namespace Microsoft.CodeAnalysis.Serialization
             HashSet<Checksum> searchingChecksumsLeft,
             Dictionary<Checksum, object> result,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             cancellationToken.ThrowIfCancellationRequested();
             // verify input
             Contract.ThrowIfFalse(state.TryGetStateChecksums(out var stateChecksum));
@@ -280,7 +284,8 @@ namespace Microsoft.CodeAnalysis.Serialization
             HashSet<Checksum> searchingChecksumsLeft,
             Dictionary<Checksum, object> result,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             Debug.Assert(
                 state.TryGetStateChecksums(out var stateChecksum) && this == stateChecksum
             );
@@ -336,7 +341,8 @@ namespace Microsoft.CodeAnalysis.Serialization
         public static Checksum GetOrCreate(
             object value,
             ConditionalWeakTable<object, object>.CreateValueCallback checksumCreator
-        ) {
+        )
+        {
             // same key should always return same checksum
             return (Checksum)s_cache.GetValue(value, checksumCreator);
         }

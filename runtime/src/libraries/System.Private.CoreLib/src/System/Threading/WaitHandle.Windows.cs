@@ -14,7 +14,8 @@ namespace System.Threading
             Span<IntPtr> handles,
             bool waitAll,
             int millisecondsTimeout
-        ) {
+        )
+        {
             fixed (IntPtr* pHandles = &MemoryMarshal.GetReference(handles))
             {
                 return WaitForMultipleObjectsIgnoringSyncContext(
@@ -31,7 +32,8 @@ namespace System.Threading
             int numHandles,
             bool waitAll,
             int millisecondsTimeout
-        ) {
+        )
+        {
             Debug.Assert(millisecondsTimeout >= -1);
 
             // Normalize waitAll
@@ -135,7 +137,8 @@ namespace System.Threading
             IntPtr handleToSignal,
             IntPtr handleToWaitOn,
             int millisecondsTimeout
-        ) {
+        )
+        {
             Debug.Assert(millisecondsTimeout >= -1);
 
             int ret = (int)Interop.Kernel32.SignalObjectAndWait(

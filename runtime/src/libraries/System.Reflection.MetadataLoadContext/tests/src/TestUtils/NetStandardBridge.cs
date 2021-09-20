@@ -70,7 +70,8 @@ namespace System.Reflection.Tests
             string name,
             Type[] parameterTypes = null,
             object[] arguments = null
-        ) {
+        )
+        {
             parameterTypes = parameterTypes ?? Type.EmptyTypes;
             arguments = arguments ?? Array.Empty<object>();
             Type implementationType = _this.GetType();

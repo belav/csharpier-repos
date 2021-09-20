@@ -35,7 +35,8 @@ namespace Castle.DynamicProxy.Generators
             MethodEmitter emitter,
             ClassEmitter @class,
             INamingScope namingScope
-        ) {
+        )
+        {
             var targetReference = getTargetReference(@class, MethodToOverride);
             var arguments = ArgumentsUtil.ConvertToArgumentReferenceExpression(
                 MethodToOverride.GetParameters()

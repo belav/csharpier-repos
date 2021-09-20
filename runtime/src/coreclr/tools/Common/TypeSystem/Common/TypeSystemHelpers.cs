@@ -17,14 +17,16 @@ namespace Internal.TypeSystem
         public static InstantiatedType MakeInstantiatedType(
             this MetadataType typeDef,
             Instantiation instantiation
-        ) {
+        )
+        {
             return typeDef.Context.GetInstantiatedType(typeDef, instantiation);
         }
 
         public static InstantiatedType MakeInstantiatedType(
             this MetadataType typeDef,
             params TypeDesc[] genericParameters
-        ) {
+        )
+        {
             return typeDef.Context.GetInstantiatedType(
                 typeDef,
                 new Instantiation(genericParameters)
@@ -34,14 +36,16 @@ namespace Internal.TypeSystem
         public static InstantiatedMethod MakeInstantiatedMethod(
             this MethodDesc methodDef,
             Instantiation instantiation
-        ) {
+        )
+        {
             return methodDef.Context.GetInstantiatedMethod(methodDef, instantiation);
         }
 
         public static InstantiatedMethod MakeInstantiatedMethod(
             this MethodDesc methodDef,
             params TypeDesc[] genericParameters
-        ) {
+        )
+        {
             return methodDef.Context.GetInstantiatedMethod(
                 methodDef,
                 new Instantiation(genericParameters)
@@ -118,7 +122,8 @@ namespace Internal.TypeSystem
         internal static MethodDesc FindMethodOnExactTypeWithMatchingTypicalMethod(
             this TypeDesc type,
             MethodDesc method
-        ) {
+        )
+        {
             MethodDesc methodTypicalDefinition = method.GetTypicalMethodDefinition();
 
             var instantiatedType = type as InstantiatedType;
@@ -156,7 +161,8 @@ namespace Internal.TypeSystem
         public static MethodDesc FindMethodOnTypeWithMatchingTypicalMethod(
             this TypeDesc targetType,
             MethodDesc method
-        ) {
+        )
+        {
             // If method is nongeneric and on a nongeneric type, then it is the matching method
             if (!method.HasInstantiation && !method.OwningType.HasInstantiation)
             {
@@ -201,7 +207,8 @@ namespace Internal.TypeSystem
             TypeDesc interfaceType,
             MethodDesc interfaceMethod,
             out bool forceRuntimeLookup
-        ) {
+        )
+        {
             forceRuntimeLookup = false;
 
             // We can't resolve constraint calls effectively for reference types, and there's
@@ -309,7 +316,8 @@ namespace Internal.TypeSystem
         public static MethodDesc ResolveInterfaceMethodToVirtualMethodOnType(
             this TypeDesc type,
             MethodDesc interfaceMethod
-        ) {
+        )
+        {
             return type.Context.GetVirtualMethodAlgorithmForType(type)
                 .ResolveInterfaceMethodToVirtualMethodOnType(interfaceMethod, type);
         }
@@ -317,7 +325,8 @@ namespace Internal.TypeSystem
         public static MethodDesc ResolveVariantInterfaceMethodToVirtualMethodOnType(
             this TypeDesc type,
             MethodDesc interfaceMethod
-        ) {
+        )
+        {
             return type.Context.GetVirtualMethodAlgorithmForType(type)
                 .ResolveVariantInterfaceMethodToVirtualMethodOnType(interfaceMethod, type);
         }
@@ -328,7 +337,8 @@ namespace Internal.TypeSystem
         public static MethodDesc FindVirtualFunctionTargetMethodOnObjectType(
             this TypeDesc type,
             MethodDesc targetMethod
-        ) {
+        )
+        {
             return type.Context.GetVirtualMethodAlgorithmForType(type)
                 .FindVirtualFunctionTargetMethodOnObjectType(targetMethod, type);
         }
@@ -404,7 +414,8 @@ namespace Internal.TypeSystem
         public static MethodDesc ResolveInterfaceMethodTarget(
             this TypeDesc thisType,
             MethodDesc interfaceMethodToResolve
-        ) {
+        )
+        {
             Debug.Assert(interfaceMethodToResolve.OwningType.IsInterface);
 
             MethodDesc result = null;
@@ -423,7 +434,8 @@ namespace Internal.TypeSystem
         public static bool ContainsSignatureVariables(
             this TypeDesc thisType,
             bool treatGenericParameterLikeSignatureVariable = false
-        ) {
+        )
+        {
             switch (thisType.Category)
             {
                 case TypeFlags.Array:
@@ -489,7 +501,8 @@ namespace Internal.TypeSystem
                     "System.Runtime.CompilerServices",
                     "PreserveBaseOverridesAttribute"
                 )
-            ) {
+            )
+            {
 #if DEBUG
                 // We shouldn't be calling this for non-MethodImpls, so verify that the method being checked is really a MethodImpl
                 MetadataType mdType = method.OwningType as MetadataType;
@@ -522,7 +535,8 @@ namespace Internal.TypeSystem
             if (
                 type.Context.Target.Architecture != TargetArchitecture.ARM
                 && type.Context.Target.Architecture != TargetArchitecture.Wasm32
-            ) {
+            )
+            {
                 return false;
             }
 

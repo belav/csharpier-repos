@@ -23,7 +23,8 @@ namespace Microsoft.AspNetCore.Mvc.ActionConstraints
             HttpContext context,
             ActionDescriptor action,
             IList<ActionConstraintItem> items
-        ) {
+        )
+        {
             if (context == null)
             {
                 throw new ArgumentNullException(nameof(context));

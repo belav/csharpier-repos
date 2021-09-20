@@ -28,7 +28,8 @@ namespace System.Security.Cryptography.Xml.Tests
             XmlDocument doc,
             string elementName,
             SymmetricAlgorithm key
-        ) {
+        )
+        {
             var elementToEncrypt = (XmlElement)doc.GetElementsByTagName(elementName)[0];
 
             var encryptedXml = new EncryptedXml();

@@ -291,7 +291,8 @@ namespace Microsoft.EntityFrameworkCore.Infrastructure
 
         private static FakeSingletonService Can_patch_singleton_service(
             ServiceCollectionMap serviceMap
-        ) {
+        )
+        {
             var serviceProvider = serviceMap.ServiceCollection.BuildServiceProvider();
 
             FakeSingletonService singletonService;

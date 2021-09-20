@@ -19,7 +19,8 @@ namespace Microsoft.AspNetCore.Razor.Language.Components
         protected override void ExecuteCore(
             RazorCodeDocument codeDocument,
             DocumentIntermediateNode documentNode
-        ) {
+        )
+        {
             if (!IsComponentDocument(documentNode))
             {
                 return;
@@ -63,7 +64,8 @@ namespace Microsoft.AspNetCore.Razor.Language.Components
                         !(child is IntermediateToken token)
                         || !token.IsHtml
                         || string.IsNullOrEmpty(token.Content)
-                    ) {
+                    )
+                    {
                         // We only care about Html tokens.
                         continue;
                     }
@@ -90,7 +92,8 @@ namespace Microsoft.AspNetCore.Razor.Language.Components
                         !(child is IntermediateToken token)
                         || !token.IsHtml
                         || string.IsNullOrEmpty(token.Content)
-                    ) {
+                    )
+                    {
                         // We only care about Html tokens.
                         continue;
                     }
@@ -115,7 +118,8 @@ namespace Microsoft.AspNetCore.Razor.Language.Components
                         !(child is IntermediateToken token)
                         || !token.IsHtml
                         || string.IsNullOrEmpty(token.Content)
-                    ) {
+                    )
+                    {
                         // We only care about Html tokens.
                         continue;
                     }
@@ -168,7 +172,8 @@ namespace Microsoft.AspNetCore.Razor.Language.Components
                 int position,
                 out string entity,
                 out string replacement
-            ) {
+            )
+            {
                 // We're at '&'. Check if it is the start of an HTML entity.
                 entity = null;
                 replacement = null;
@@ -215,7 +220,8 @@ namespace Microsoft.AspNetCore.Razor.Language.Components
                                 codePoint,
                                 out replacement
                             )
-                        ) {
+                        )
+                        {
                             // This is a known html entity unicode codepoint.
                             return true;
                         }

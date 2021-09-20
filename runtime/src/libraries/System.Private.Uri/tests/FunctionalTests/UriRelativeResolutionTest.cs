@@ -271,7 +271,8 @@ namespace System.PrivateUri.Tests
             Func<char, bool> filter,
             Func<char, bool> secondFilter = null,
             bool includeSingleChars = true
-        ) {
+        )
+        {
             char[] characters = Enumerable.Range(0, 0xFFFF)
                 .Select(c => (char)c)
                 .Where(filter)
@@ -292,7 +293,8 @@ namespace System.PrivateUri.Tests
             IEnumerable<char> first,
             IEnumerable<char> second,
             bool includeSingleChars = true
-        ) {
+        )
+        {
             var cartesian = from c1 in first from c2 in second select new string(new[] { c1, c2 });
 
             if (includeSingleChars)

@@ -28,7 +28,8 @@ namespace Microsoft.CodeAnalysis.CSharp
         internal ConstantFieldsInProgress(
             SourceFieldSymbol fieldOpt,
             HashSet<SourceFieldSymbolWithSyntaxReference> dependencies
-        ) {
+        )
+        {
             _fieldOpt = fieldOpt;
             _dependencies = dependencies;
         }

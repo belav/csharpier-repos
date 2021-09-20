@@ -734,7 +734,8 @@ namespace System.Tests
                                 args.LoadedAssembly.FullName.Equals(
                                     typeof(AppDomainTests).Assembly.FullName
                                 )
-                            ) {
+                            )
+                            {
                                 AssemblyLoadFlag = true;
                             }
                         };
@@ -1114,7 +1115,8 @@ namespace System.Tests
             string type,
             string returnedFullNameType,
             Type exceptionType
-        ) {
+        )
+        {
             ObjectHandle oh = null;
             object obj = null;
 
@@ -1253,7 +1255,8 @@ namespace System.Tests
             string type,
             string returnedFullNameType,
             Type exceptionType
-        ) {
+        )
+        {
             ObjectHandle oh = null;
             object obj = null;
 
@@ -1396,7 +1399,8 @@ namespace System.Tests
             CultureInfo culture,
             object[] activationAttributes,
             string returnedFullNameType
-        ) {
+        )
+        {
             ObjectHandle oh = AppDomain.CurrentDomain.CreateInstanceFrom(
                 assemblyFile: assemblyFile,
                 typeName: type,
@@ -1546,7 +1550,8 @@ namespace System.Tests
             CultureInfo culture,
             object[] activationAttributes,
             string returnedFullNameType
-        ) {
+        )
+        {
             ObjectHandle oh = AppDomain.CurrentDomain.CreateInstance(
                 assemblyName: assemblyName,
                 typeName: type,

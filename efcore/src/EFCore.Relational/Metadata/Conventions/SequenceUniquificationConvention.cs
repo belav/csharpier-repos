@@ -24,7 +24,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
         public SequenceUniquificationConvention(
             ProviderConventionSetBuilderDependencies dependencies,
             RelationalConventionSetBuilderDependencies relationalDependencies
-        ) {
+        )
+        {
             Dependencies = dependencies;
         }
 
@@ -37,7 +38,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
         public virtual void ProcessModelFinalizing(
             IConventionModelBuilder modelBuilder,
             IConventionContext<IConventionModelBuilder> context
-        ) {
+        )
+        {
             var model = modelBuilder.Metadata;
             var modelSequences = (SortedDictionary<(string Name, string? Schema), ISequence>?)model[
                 RelationalAnnotationNames.Sequences

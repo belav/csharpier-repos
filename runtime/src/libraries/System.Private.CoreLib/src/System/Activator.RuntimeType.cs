@@ -23,7 +23,8 @@ namespace System
             object?[]? args,
             CultureInfo? culture,
             object?[]? activationAttributes
-        ) {
+        )
+        {
             if (type is null)
                 throw new ArgumentNullException(nameof(type));
 
@@ -71,7 +72,8 @@ namespace System
             object?[]? args,
             CultureInfo? culture,
             object?[]? activationAttributes
-        ) {
+        )
+        {
             StackCrawlMark stackMark = StackCrawlMark.LookForMyCaller;
             return CreateInstanceInternal(
                 assemblyName,
@@ -91,7 +93,8 @@ namespace System
             string assemblyName,
             string typeName,
             object?[]? activationAttributes
-        ) {
+        )
+        {
             StackCrawlMark stackMark = StackCrawlMark.LookForMyCaller;
             return CreateInstanceInternal(
                 assemblyName,
@@ -159,7 +162,8 @@ namespace System
             CultureInfo? culture,
             object?[]? activationAttributes,
             ref StackCrawlMark stackMark
-        ) {
+        )
+        {
             Type? type = null;
             Assembly? assembly = null;
             if (assemblyString == null)

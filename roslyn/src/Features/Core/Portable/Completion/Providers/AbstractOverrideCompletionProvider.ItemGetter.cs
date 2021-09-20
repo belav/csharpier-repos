@@ -45,7 +45,8 @@ namespace Microsoft.CodeAnalysis.Completion.Providers
                 SyntaxTree syntaxTree,
                 int startLineNumber,
                 CancellationToken cancellationToken
-            ) {
+            )
+            {
                 _provider = overrideCompletionProvider;
                 _document = document;
                 _position = position;
@@ -60,7 +61,8 @@ namespace Microsoft.CodeAnalysis.Completion.Providers
                 Document document,
                 int position,
                 CancellationToken cancellationToken
-            ) {
+            )
+            {
                 var text = await document.GetTextAsync(cancellationToken).ConfigureAwait(false);
                 var syntaxTree = await document.GetSyntaxTreeAsync(cancellationToken)
                     .ConfigureAwait(false);
@@ -116,7 +118,8 @@ namespace Microsoft.CodeAnalysis.Completion.Providers
                         seenAccessibility,
                         out var overridableMembers
                     )
-                ) {
+                )
+                {
                     return default;
                 }
 
@@ -129,7 +132,8 @@ namespace Microsoft.CodeAnalysis.Completion.Providers
                 SemanticModel semanticModel,
                 SyntaxToken startToken,
                 DeclarationModifiers modifiers
-            ) {
+            )
+            {
                 var position = startToken.SpanStart;
 
                 var displayString = symbol.ToMinimalDisplayString(
@@ -155,7 +159,8 @@ namespace Microsoft.CodeAnalysis.Completion.Providers
                 SyntaxToken startToken,
                 Accessibility seenAccessibility,
                 out ImmutableArray<ISymbol> overridableMembers
-            ) {
+            )
+            {
                 var containingType = semanticModel.GetEnclosingSymbol<INamedTypeSymbol>(
                     startToken.SpanStart,
                     _cancellationToken

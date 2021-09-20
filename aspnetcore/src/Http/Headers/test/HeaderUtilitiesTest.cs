@@ -76,7 +76,8 @@ namespace Microsoft.Net.Http.Headers
             string headerValues,
             string targetValue,
             int expectedValue
-        ) {
+        )
+        {
             TimeSpan? value;
             Assert.True(
                 HeaderUtilities.TryParseSeconds(
@@ -181,7 +182,8 @@ namespace Microsoft.Net.Http.Headers
             string headerValues,
             string targetValue,
             bool contains
-        ) {
+        )
+        {
             Assert.Equal(
                 contains,
                 HeaderUtilities.ContainsCacheDirective(new StringValues(headerValues), targetValue)

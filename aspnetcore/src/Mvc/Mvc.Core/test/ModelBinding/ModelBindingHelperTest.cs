@@ -417,7 +417,8 @@ namespace Microsoft.AspNetCore.Mvc.ModelBinding
         [MemberData(nameof(InvalidExpressionDataSet))]
         public void GetPropertyName_ExpressionsOtherThanMemberAccess_Throws(
             Expression<Func<User, object>> expression
-        ) {
+        )
+        {
             // Arrange Act & Assert
             var ex = Assert.Throws<InvalidOperationException>(
                 () => ModelBindingHelper.GetPropertyName(expression.Body)
@@ -837,7 +838,8 @@ namespace Microsoft.AspNetCore.Mvc.ModelBinding
 
         private static ModelBinderFactory GetModelBinderFactory(
             params IModelBinderProvider[] providers
-        ) {
+        )
+        {
             return TestModelBinderFactory.CreateDefault(providers);
         }
 
@@ -1080,7 +1082,8 @@ namespace Microsoft.AspNetCore.Mvc.ModelBinding
             object input,
             Type enumType,
             object expected
-        ) {
+        )
+        {
             // Arrange
 
             // Act

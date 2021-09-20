@@ -47,7 +47,8 @@ namespace Microsoft.Extensions.FileProviders.Physical
             DirectoryInfoBase directoryInfo,
             string pattern,
             IClock clock
-        ) {
+        )
+        {
             _directoryInfo = directoryInfo;
             Clock = clock;
 

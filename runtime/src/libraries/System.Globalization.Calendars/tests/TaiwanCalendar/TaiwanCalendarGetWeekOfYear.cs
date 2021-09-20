@@ -66,7 +66,8 @@ namespace System.Globalization.Tests
             if (
                 new DateTime(time.Year, 1, 1).DayOfWeek == DayOfWeek.Saturday
                 && DateTime.IsLeapYear(time.Year)
-            ) {
+            )
+            {
                 expected = 54;
             }
             Assert.Equal(
@@ -97,7 +98,8 @@ namespace System.Globalization.Tests
             CalendarWeekRule rule,
             int firstDayOfWeek,
             int fullDays
-        ) {
+        )
+        {
             GregorianCalendar gregorianCalendar = new GregorianCalendar();
             // Make the day of year to be 0-based, so that 1/1 is day 0.
             int dayOfYear = gregorianCalendar.GetDayOfYear(time) - 1;

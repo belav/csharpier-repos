@@ -506,7 +506,8 @@ namespace System.Xml.Xsl.Runtime
         public static XmlQueryNodeSequence CreateOrReuse(
             XmlQueryNodeSequence seq,
             XPathNavigator navigator
-        ) {
+        )
+        {
             if (seq != null)
             {
                 seq.Clear();

@@ -88,7 +88,8 @@ namespace System.Net.Sockets
         }
         public override bool Equals(
             [System.Diagnostics.CodeAnalysis.NotNullWhen(true)] object? comparand
-        ) {
+        )
+        {
             throw null;
         }
         public override int GetHashCode()
@@ -98,13 +99,15 @@ namespace System.Net.Sockets
         public static bool operator ==(
             System.Net.Sockets.IPPacketInformation packetInformation1,
             System.Net.Sockets.IPPacketInformation packetInformation2
-        ) {
+        )
+        {
             throw null;
         }
         public static bool operator !=(
             System.Net.Sockets.IPPacketInformation packetInformation1,
             System.Net.Sockets.IPPacketInformation packetInformation2
-        ) {
+        )
+        {
             throw null;
         }
     }
@@ -234,7 +237,8 @@ namespace System.Net.Sockets
             int count,
             System.AsyncCallback? callback,
             object? state
-        ) {
+        )
+        {
             throw null;
         }
         public override System.IAsyncResult BeginWrite(
@@ -243,7 +247,8 @@ namespace System.Net.Sockets
             int count,
             System.AsyncCallback? callback,
             object? state
-        ) {
+        )
+        {
             throw null;
         }
         public void Close(int timeout) { }
@@ -257,7 +262,8 @@ namespace System.Net.Sockets
         public override void Flush() { }
         public override System.Threading.Tasks.Task FlushAsync(
             System.Threading.CancellationToken cancellationToken
-        ) {
+        )
+        {
             throw null;
         }
         public override int Read(byte[] buffer, int offset, int count)
@@ -273,14 +279,16 @@ namespace System.Net.Sockets
             int offset,
             int count,
             System.Threading.CancellationToken cancellationToken
-        ) {
+        )
+        {
             throw null;
         }
         public override System.Threading.Tasks.ValueTask<int> ReadAsync(
             System.Memory<byte> buffer,
             System.Threading.CancellationToken cancellationToken =
                 default(System.Threading.CancellationToken)
-        ) {
+        )
+        {
             throw null;
         }
         public override int ReadByte()
@@ -299,14 +307,16 @@ namespace System.Net.Sockets
             int offset,
             int count,
             System.Threading.CancellationToken cancellationToken
-        ) {
+        )
+        {
             throw null;
         }
         public override System.Threading.Tasks.ValueTask WriteAsync(
             System.ReadOnlyMemory<byte> buffer,
             System.Threading.CancellationToken cancellationToken =
                 default(System.Threading.CancellationToken)
-        ) {
+        )
+        {
             throw null;
         }
         public override void WriteByte(byte value) { }
@@ -606,7 +616,8 @@ namespace System.Net.Sockets
         }
         public System.Threading.Tasks.Task<System.Net.Sockets.Socket> AcceptAsync(
             System.Net.Sockets.Socket? acceptSocket
-        ) {
+        )
+        {
             throw null;
         }
         public bool AcceptAsync(System.Net.Sockets.SocketAsyncEventArgs e)
@@ -621,7 +632,8 @@ namespace System.Net.Sockets
             int receiveSize,
             System.AsyncCallback? callback,
             object? state
-        ) {
+        )
+        {
             throw null;
         }
         public System.IAsyncResult BeginAccept(
@@ -629,14 +641,16 @@ namespace System.Net.Sockets
             int receiveSize,
             System.AsyncCallback? callback,
             object? state
-        ) {
+        )
+        {
             throw null;
         }
         public System.IAsyncResult BeginConnect(
             System.Net.EndPoint remoteEP,
             System.AsyncCallback? callback,
             object? state
-        ) {
+        )
+        {
             throw null;
         }
         public System.IAsyncResult BeginConnect(
@@ -644,7 +658,8 @@ namespace System.Net.Sockets
             int port,
             System.AsyncCallback? requestCallback,
             object? state
-        ) {
+        )
+        {
             throw null;
         }
         public System.IAsyncResult BeginConnect(
@@ -652,7 +667,8 @@ namespace System.Net.Sockets
             int port,
             System.AsyncCallback? requestCallback,
             object? state
-        ) {
+        )
+        {
             throw null;
         }
         public System.IAsyncResult BeginConnect(
@@ -660,14 +676,16 @@ namespace System.Net.Sockets
             int port,
             System.AsyncCallback? requestCallback,
             object? state
-        ) {
+        )
+        {
             throw null;
         }
         public System.IAsyncResult BeginDisconnect(
             bool reuseSocket,
             System.AsyncCallback? callback,
             object? state
-        ) {
+        )
+        {
             throw null;
         }
         public System.IAsyncResult BeginReceive(
@@ -677,7 +695,8 @@ namespace System.Net.Sockets
             System.Net.Sockets.SocketFlags socketFlags,
             System.AsyncCallback? callback,
             object? state
-        ) {
+        )
+        {
             throw null;
         }
         public System.IAsyncResult? BeginReceive(
@@ -688,7 +707,8 @@ namespace System.Net.Sockets
             out System.Net.Sockets.SocketError errorCode,
             System.AsyncCallback? callback,
             object? state
-        ) {
+        )
+        {
             throw null;
         }
         public System.IAsyncResult BeginReceive(
@@ -696,7 +716,8 @@ namespace System.Net.Sockets
             System.Net.Sockets.SocketFlags socketFlags,
             System.AsyncCallback? callback,
             object? state
-        ) {
+        )
+        {
             throw null;
         }
         public System.IAsyncResult? BeginReceive(
@@ -705,7 +726,8 @@ namespace System.Net.Sockets
             out System.Net.Sockets.SocketError errorCode,
             System.AsyncCallback? callback,
             object? state
-        ) {
+        )
+        {
             throw null;
         }
         public System.IAsyncResult BeginReceiveFrom(
@@ -716,7 +738,8 @@ namespace System.Net.Sockets
             ref System.Net.EndPoint remoteEP,
             System.AsyncCallback? callback,
             object? state
-        ) {
+        )
+        {
             throw null;
         }
         public System.IAsyncResult BeginReceiveMessageFrom(
@@ -727,7 +750,8 @@ namespace System.Net.Sockets
             ref System.Net.EndPoint remoteEP,
             System.AsyncCallback? callback,
             object? state
-        ) {
+        )
+        {
             throw null;
         }
         public System.IAsyncResult BeginSend(
@@ -737,7 +761,8 @@ namespace System.Net.Sockets
             System.Net.Sockets.SocketFlags socketFlags,
             System.AsyncCallback? callback,
             object? state
-        ) {
+        )
+        {
             throw null;
         }
         public System.IAsyncResult? BeginSend(
@@ -748,7 +773,8 @@ namespace System.Net.Sockets
             out System.Net.Sockets.SocketError errorCode,
             System.AsyncCallback? callback,
             object? state
-        ) {
+        )
+        {
             throw null;
         }
         public System.IAsyncResult BeginSend(
@@ -756,7 +782,8 @@ namespace System.Net.Sockets
             System.Net.Sockets.SocketFlags socketFlags,
             System.AsyncCallback? callback,
             object? state
-        ) {
+        )
+        {
             throw null;
         }
         public System.IAsyncResult? BeginSend(
@@ -765,14 +792,16 @@ namespace System.Net.Sockets
             out System.Net.Sockets.SocketError errorCode,
             System.AsyncCallback? callback,
             object? state
-        ) {
+        )
+        {
             throw null;
         }
         public System.IAsyncResult BeginSendFile(
             string? fileName,
             System.AsyncCallback? callback,
             object? state
-        ) {
+        )
+        {
             throw null;
         }
         public System.IAsyncResult BeginSendFile(
@@ -782,7 +811,8 @@ namespace System.Net.Sockets
             System.Net.Sockets.TransmitFileOptions flags,
             System.AsyncCallback? callback,
             object? state
-        ) {
+        )
+        {
             throw null;
         }
         public System.IAsyncResult BeginSendTo(
@@ -793,7 +823,8 @@ namespace System.Net.Sockets
             System.Net.EndPoint remoteEP,
             System.AsyncCallback? callback,
             object? state
-        ) {
+        )
+        {
             throw null;
         }
         public void Bind(System.Net.EndPoint localEP) { }
@@ -811,7 +842,8 @@ namespace System.Net.Sockets
         public System.Threading.Tasks.ValueTask ConnectAsync(
             System.Net.EndPoint remoteEP,
             System.Threading.CancellationToken cancellationToken
-        ) {
+        )
+        {
             throw null;
         }
         public System.Threading.Tasks.Task ConnectAsync(System.Net.IPAddress address, int port)
@@ -822,7 +854,8 @@ namespace System.Net.Sockets
             System.Net.IPAddress address,
             int port,
             System.Threading.CancellationToken cancellationToken
-        ) {
+        )
+        {
             throw null;
         }
         public System.Threading.Tasks.Task ConnectAsync(System.Net.IPAddress[] addresses, int port)
@@ -833,7 +866,8 @@ namespace System.Net.Sockets
             System.Net.IPAddress[] addresses,
             int port,
             System.Threading.CancellationToken cancellationToken
-        ) {
+        )
+        {
             throw null;
         }
         public System.Threading.Tasks.Task ConnectAsync(string host, int port)
@@ -844,7 +878,8 @@ namespace System.Net.Sockets
             string host,
             int port,
             System.Threading.CancellationToken cancellationToken
-        ) {
+        )
+        {
             throw null;
         }
         public bool ConnectAsync(System.Net.Sockets.SocketAsyncEventArgs e)
@@ -855,7 +890,8 @@ namespace System.Net.Sockets
             System.Net.Sockets.SocketType socketType,
             System.Net.Sockets.ProtocolType protocolType,
             System.Net.Sockets.SocketAsyncEventArgs e
-        ) {
+        )
+        {
             throw null;
         }
         public void Disconnect(bool reuseSocket) { }
@@ -873,14 +909,16 @@ namespace System.Net.Sockets
         public System.Net.Sockets.Socket EndAccept(
             out byte[] buffer,
             System.IAsyncResult asyncResult
-        ) {
+        )
+        {
             throw null;
         }
         public System.Net.Sockets.Socket EndAccept(
             out byte[] buffer,
             out int bytesTransferred,
             System.IAsyncResult asyncResult
-        ) {
+        )
+        {
             throw null;
         }
         public System.Net.Sockets.Socket EndAccept(System.IAsyncResult asyncResult)
@@ -896,7 +934,8 @@ namespace System.Net.Sockets
         public int EndReceive(
             System.IAsyncResult asyncResult,
             out System.Net.Sockets.SocketError errorCode
-        ) {
+        )
+        {
             throw null;
         }
         public int EndReceiveFrom(System.IAsyncResult asyncResult, ref System.Net.EndPoint endPoint)
@@ -908,7 +947,8 @@ namespace System.Net.Sockets
             ref System.Net.Sockets.SocketFlags socketFlags,
             ref System.Net.EndPoint endPoint,
             out System.Net.Sockets.IPPacketInformation ipPacketInformation
-        ) {
+        )
+        {
             throw null;
         }
         public int EndSend(System.IAsyncResult asyncResult)
@@ -918,7 +958,8 @@ namespace System.Net.Sockets
         public int EndSend(
             System.IAsyncResult asyncResult,
             out System.Net.Sockets.SocketError errorCode
-        ) {
+        )
+        {
             throw null;
         }
         public void EndSendFile(System.IAsyncResult asyncResult) { }
@@ -931,13 +972,15 @@ namespace System.Net.Sockets
             int optionLevel,
             int optionName,
             System.Span<byte> optionValue
-        ) {
+        )
+        {
             throw null;
         }
         public object? GetSocketOption(
             System.Net.Sockets.SocketOptionLevel optionLevel,
             System.Net.Sockets.SocketOptionName optionName
-        ) {
+        )
+        {
             throw null;
         }
         public void GetSocketOption(
@@ -949,7 +992,8 @@ namespace System.Net.Sockets
             System.Net.Sockets.SocketOptionLevel optionLevel,
             System.Net.Sockets.SocketOptionName optionName,
             int optionLength
-        ) {
+        )
+        {
             throw null;
         }
         public int IOControl(int ioControlCode, byte[]? optionInValue, byte[]? optionOutValue)
@@ -960,7 +1004,8 @@ namespace System.Net.Sockets
             System.Net.Sockets.IOControlCode ioControlCode,
             byte[]? optionInValue,
             byte[]? optionOutValue
-        ) {
+        )
+        {
             throw null;
         }
         public void Listen() { }
@@ -978,7 +1023,8 @@ namespace System.Net.Sockets
             int offset,
             int size,
             System.Net.Sockets.SocketFlags socketFlags
-        ) {
+        )
+        {
             throw null;
         }
         public int Receive(
@@ -987,7 +1033,8 @@ namespace System.Net.Sockets
             int size,
             System.Net.Sockets.SocketFlags socketFlags,
             out System.Net.Sockets.SocketError errorCode
-        ) {
+        )
+        {
             throw null;
         }
         public int Receive(byte[] buffer, int size, System.Net.Sockets.SocketFlags socketFlags)
@@ -1005,14 +1052,16 @@ namespace System.Net.Sockets
         public int Receive(
             System.Collections.Generic.IList<System.ArraySegment<byte>> buffers,
             System.Net.Sockets.SocketFlags socketFlags
-        ) {
+        )
+        {
             throw null;
         }
         public int Receive(
             System.Collections.Generic.IList<System.ArraySegment<byte>> buffers,
             System.Net.Sockets.SocketFlags socketFlags,
             out System.Net.Sockets.SocketError errorCode
-        ) {
+        )
+        {
             throw null;
         }
         public int Receive(System.Span<byte> buffer)
@@ -1027,19 +1076,22 @@ namespace System.Net.Sockets
             System.Span<byte> buffer,
             System.Net.Sockets.SocketFlags socketFlags,
             out System.Net.Sockets.SocketError errorCode
-        ) {
+        )
+        {
             throw null;
         }
         public System.Threading.Tasks.Task<int> ReceiveAsync(
             System.ArraySegment<byte> buffer,
             System.Net.Sockets.SocketFlags socketFlags
-        ) {
+        )
+        {
             throw null;
         }
         public System.Threading.Tasks.Task<int> ReceiveAsync(
             System.Collections.Generic.IList<System.ArraySegment<byte>> buffers,
             System.Net.Sockets.SocketFlags socketFlags
-        ) {
+        )
+        {
             throw null;
         }
         public System.Threading.Tasks.ValueTask<int> ReceiveAsync(
@@ -1047,7 +1099,8 @@ namespace System.Net.Sockets
             System.Net.Sockets.SocketFlags socketFlags,
             System.Threading.CancellationToken cancellationToken =
                 default(System.Threading.CancellationToken)
-        ) {
+        )
+        {
             throw null;
         }
         public bool ReceiveAsync(System.Net.Sockets.SocketAsyncEventArgs e)
@@ -1060,7 +1113,8 @@ namespace System.Net.Sockets
             int size,
             System.Net.Sockets.SocketFlags socketFlags,
             ref System.Net.EndPoint remoteEP
-        ) {
+        )
+        {
             throw null;
         }
         public int ReceiveFrom(
@@ -1068,7 +1122,8 @@ namespace System.Net.Sockets
             int size,
             System.Net.Sockets.SocketFlags socketFlags,
             ref System.Net.EndPoint remoteEP
-        ) {
+        )
+        {
             throw null;
         }
         public int ReceiveFrom(byte[] buffer, ref System.Net.EndPoint remoteEP)
@@ -1079,14 +1134,16 @@ namespace System.Net.Sockets
             byte[] buffer,
             System.Net.Sockets.SocketFlags socketFlags,
             ref System.Net.EndPoint remoteEP
-        ) {
+        )
+        {
             throw null;
         }
         public System.Threading.Tasks.Task<System.Net.Sockets.SocketReceiveFromResult> ReceiveFromAsync(
             System.ArraySegment<byte> buffer,
             System.Net.Sockets.SocketFlags socketFlags,
             System.Net.EndPoint remoteEndPoint
-        ) {
+        )
+        {
             throw null;
         }
         public System.Threading.Tasks.ValueTask<System.Net.Sockets.SocketReceiveFromResult> ReceiveFromAsync(
@@ -1095,7 +1152,8 @@ namespace System.Net.Sockets
             System.Net.EndPoint remoteEndPoint,
             System.Threading.CancellationToken cancellationToken =
                 default(System.Threading.CancellationToken)
-        ) {
+        )
+        {
             throw null;
         }
         public bool ReceiveFromAsync(System.Net.Sockets.SocketAsyncEventArgs e)
@@ -1109,7 +1167,8 @@ namespace System.Net.Sockets
             ref System.Net.Sockets.SocketFlags socketFlags,
             ref System.Net.EndPoint remoteEP,
             out System.Net.Sockets.IPPacketInformation ipPacketInformation
-        ) {
+        )
+        {
             throw null;
         }
         public int ReceiveMessageFrom(
@@ -1117,14 +1176,16 @@ namespace System.Net.Sockets
             ref System.Net.Sockets.SocketFlags socketFlags,
             ref System.Net.EndPoint remoteEP,
             out System.Net.Sockets.IPPacketInformation ipPacketInformation
-        ) {
+        )
+        {
             throw null;
         }
         public System.Threading.Tasks.Task<System.Net.Sockets.SocketReceiveMessageFromResult> ReceiveMessageFromAsync(
             System.ArraySegment<byte> buffer,
             System.Net.Sockets.SocketFlags socketFlags,
             System.Net.EndPoint remoteEndPoint
-        ) {
+        )
+        {
             throw null;
         }
         public System.Threading.Tasks.ValueTask<System.Net.Sockets.SocketReceiveMessageFromResult> ReceiveMessageFromAsync(
@@ -1132,7 +1193,8 @@ namespace System.Net.Sockets
             System.Net.Sockets.SocketFlags socketFlags,
             System.Net.EndPoint remoteEndPoint,
             System.Threading.CancellationToken cancellationToken = default
-        ) {
+        )
+        {
             throw null;
         }
         public bool ReceiveMessageFromAsync(System.Net.Sockets.SocketAsyncEventArgs e)
@@ -1154,7 +1216,8 @@ namespace System.Net.Sockets
             int offset,
             int size,
             System.Net.Sockets.SocketFlags socketFlags
-        ) {
+        )
+        {
             throw null;
         }
         public int Send(
@@ -1163,7 +1226,8 @@ namespace System.Net.Sockets
             int size,
             System.Net.Sockets.SocketFlags socketFlags,
             out System.Net.Sockets.SocketError errorCode
-        ) {
+        )
+        {
             throw null;
         }
         public int Send(byte[] buffer, int size, System.Net.Sockets.SocketFlags socketFlags)
@@ -1181,14 +1245,16 @@ namespace System.Net.Sockets
         public int Send(
             System.Collections.Generic.IList<System.ArraySegment<byte>> buffers,
             System.Net.Sockets.SocketFlags socketFlags
-        ) {
+        )
+        {
             throw null;
         }
         public int Send(
             System.Collections.Generic.IList<System.ArraySegment<byte>> buffers,
             System.Net.Sockets.SocketFlags socketFlags,
             out System.Net.Sockets.SocketError errorCode
-        ) {
+        )
+        {
             throw null;
         }
         public int Send(System.ReadOnlySpan<byte> buffer)
@@ -1198,26 +1264,30 @@ namespace System.Net.Sockets
         public int Send(
             System.ReadOnlySpan<byte> buffer,
             System.Net.Sockets.SocketFlags socketFlags
-        ) {
+        )
+        {
             throw null;
         }
         public int Send(
             System.ReadOnlySpan<byte> buffer,
             System.Net.Sockets.SocketFlags socketFlags,
             out System.Net.Sockets.SocketError errorCode
-        ) {
+        )
+        {
             throw null;
         }
         public System.Threading.Tasks.Task<int> SendAsync(
             System.ArraySegment<byte> buffer,
             System.Net.Sockets.SocketFlags socketFlags
-        ) {
+        )
+        {
             throw null;
         }
         public System.Threading.Tasks.Task<int> SendAsync(
             System.Collections.Generic.IList<System.ArraySegment<byte>> buffers,
             System.Net.Sockets.SocketFlags socketFlags
-        ) {
+        )
+        {
             throw null;
         }
         public System.Threading.Tasks.ValueTask<int> SendAsync(
@@ -1225,7 +1295,8 @@ namespace System.Net.Sockets
             System.Net.Sockets.SocketFlags socketFlags,
             System.Threading.CancellationToken cancellationToken =
                 default(System.Threading.CancellationToken)
-        ) {
+        )
+        {
             throw null;
         }
         public bool SendAsync(System.Net.Sockets.SocketAsyncEventArgs e)
@@ -1255,7 +1326,8 @@ namespace System.Net.Sockets
             int size,
             System.Net.Sockets.SocketFlags socketFlags,
             System.Net.EndPoint remoteEP
-        ) {
+        )
+        {
             throw null;
         }
         public int SendTo(
@@ -1263,7 +1335,8 @@ namespace System.Net.Sockets
             int size,
             System.Net.Sockets.SocketFlags socketFlags,
             System.Net.EndPoint remoteEP
-        ) {
+        )
+        {
             throw null;
         }
         public int SendTo(byte[] buffer, System.Net.EndPoint remoteEP)
@@ -1274,14 +1347,16 @@ namespace System.Net.Sockets
             byte[] buffer,
             System.Net.Sockets.SocketFlags socketFlags,
             System.Net.EndPoint remoteEP
-        ) {
+        )
+        {
             throw null;
         }
         public System.Threading.Tasks.Task<int> SendToAsync(
             System.ArraySegment<byte> buffer,
             System.Net.Sockets.SocketFlags socketFlags,
             System.Net.EndPoint remoteEP
-        ) {
+        )
+        {
             throw null;
         }
         public System.Threading.Tasks.ValueTask<int> SendToAsync(
@@ -1290,7 +1365,8 @@ namespace System.Net.Sockets
             System.Net.EndPoint remoteEP,
             System.Threading.CancellationToken cancellationToken =
                 default(System.Threading.CancellationToken)
-        ) {
+        )
+        {
             throw null;
         }
         public bool SendToAsync(System.Net.Sockets.SocketAsyncEventArgs e)
@@ -1562,7 +1638,8 @@ namespace System.Net.Sockets
         )]
         public static System.Threading.Tasks.Task<System.Net.Sockets.Socket> AcceptAsync(
             this System.Net.Sockets.Socket socket
-        ) {
+        )
+        {
             throw null;
         }
         [System.ComponentModel.EditorBrowsableAttribute(
@@ -1571,7 +1648,8 @@ namespace System.Net.Sockets
         public static System.Threading.Tasks.Task<System.Net.Sockets.Socket> AcceptAsync(
             this System.Net.Sockets.Socket socket,
             System.Net.Sockets.Socket? acceptSocket
-        ) {
+        )
+        {
             throw null;
         }
         [System.ComponentModel.EditorBrowsableAttribute(
@@ -1580,7 +1658,8 @@ namespace System.Net.Sockets
         public static System.Threading.Tasks.Task ConnectAsync(
             this System.Net.Sockets.Socket socket,
             System.Net.EndPoint remoteEP
-        ) {
+        )
+        {
             throw null;
         }
         [System.ComponentModel.EditorBrowsableAttribute(
@@ -1590,7 +1669,8 @@ namespace System.Net.Sockets
             this System.Net.Sockets.Socket socket,
             System.Net.EndPoint remoteEP,
             System.Threading.CancellationToken cancellationToken
-        ) {
+        )
+        {
             throw null;
         }
         [System.ComponentModel.EditorBrowsableAttribute(
@@ -1600,7 +1680,8 @@ namespace System.Net.Sockets
             this System.Net.Sockets.Socket socket,
             System.Net.IPAddress address,
             int port
-        ) {
+        )
+        {
             throw null;
         }
         [System.ComponentModel.EditorBrowsableAttribute(
@@ -1611,7 +1692,8 @@ namespace System.Net.Sockets
             System.Net.IPAddress address,
             int port,
             System.Threading.CancellationToken cancellationToken
-        ) {
+        )
+        {
             throw null;
         }
         [System.ComponentModel.EditorBrowsableAttribute(
@@ -1621,7 +1703,8 @@ namespace System.Net.Sockets
             this System.Net.Sockets.Socket socket,
             System.Net.IPAddress[] addresses,
             int port
-        ) {
+        )
+        {
             throw null;
         }
         [System.ComponentModel.EditorBrowsableAttribute(
@@ -1632,7 +1715,8 @@ namespace System.Net.Sockets
             System.Net.IPAddress[] addresses,
             int port,
             System.Threading.CancellationToken cancellationToken
-        ) {
+        )
+        {
             throw null;
         }
         [System.ComponentModel.EditorBrowsableAttribute(
@@ -1642,7 +1726,8 @@ namespace System.Net.Sockets
             this System.Net.Sockets.Socket socket,
             string host,
             int port
-        ) {
+        )
+        {
             throw null;
         }
         [System.ComponentModel.EditorBrowsableAttribute(
@@ -1653,7 +1738,8 @@ namespace System.Net.Sockets
             string host,
             int port,
             System.Threading.CancellationToken cancellationToken
-        ) {
+        )
+        {
             throw null;
         }
         [System.ComponentModel.EditorBrowsableAttribute(
@@ -1663,7 +1749,8 @@ namespace System.Net.Sockets
             this System.Net.Sockets.Socket socket,
             System.ArraySegment<byte> buffer,
             System.Net.Sockets.SocketFlags socketFlags
-        ) {
+        )
+        {
             throw null;
         }
         [System.ComponentModel.EditorBrowsableAttribute(
@@ -1673,7 +1760,8 @@ namespace System.Net.Sockets
             this System.Net.Sockets.Socket socket,
             System.Collections.Generic.IList<System.ArraySegment<byte>> buffers,
             System.Net.Sockets.SocketFlags socketFlags
-        ) {
+        )
+        {
             throw null;
         }
         [System.ComponentModel.EditorBrowsableAttribute(
@@ -1685,7 +1773,8 @@ namespace System.Net.Sockets
             System.Net.Sockets.SocketFlags socketFlags,
             System.Threading.CancellationToken cancellationToken =
                 default(System.Threading.CancellationToken)
-        ) {
+        )
+        {
             throw null;
         }
         [System.ComponentModel.EditorBrowsableAttribute(
@@ -1696,7 +1785,8 @@ namespace System.Net.Sockets
             System.ArraySegment<byte> buffer,
             System.Net.Sockets.SocketFlags socketFlags,
             System.Net.EndPoint remoteEndPoint
-        ) {
+        )
+        {
             throw null;
         }
         [System.ComponentModel.EditorBrowsableAttribute(
@@ -1707,7 +1797,8 @@ namespace System.Net.Sockets
             System.ArraySegment<byte> buffer,
             System.Net.Sockets.SocketFlags socketFlags,
             System.Net.EndPoint remoteEndPoint
-        ) {
+        )
+        {
             throw null;
         }
         [System.ComponentModel.EditorBrowsableAttribute(
@@ -1717,7 +1808,8 @@ namespace System.Net.Sockets
             this System.Net.Sockets.Socket socket,
             System.ArraySegment<byte> buffer,
             System.Net.Sockets.SocketFlags socketFlags
-        ) {
+        )
+        {
             throw null;
         }
         [System.ComponentModel.EditorBrowsableAttribute(
@@ -1727,7 +1819,8 @@ namespace System.Net.Sockets
             this System.Net.Sockets.Socket socket,
             System.Collections.Generic.IList<System.ArraySegment<byte>> buffers,
             System.Net.Sockets.SocketFlags socketFlags
-        ) {
+        )
+        {
             throw null;
         }
         [System.ComponentModel.EditorBrowsableAttribute(
@@ -1739,7 +1832,8 @@ namespace System.Net.Sockets
             System.Net.Sockets.SocketFlags socketFlags,
             System.Threading.CancellationToken cancellationToken =
                 default(System.Threading.CancellationToken)
-        ) {
+        )
+        {
             throw null;
         }
         [System.ComponentModel.EditorBrowsableAttribute(
@@ -1750,7 +1844,8 @@ namespace System.Net.Sockets
             System.ArraySegment<byte> buffer,
             System.Net.Sockets.SocketFlags socketFlags,
             System.Net.EndPoint remoteEP
-        ) {
+        )
+        {
             throw null;
         }
     }
@@ -1828,7 +1923,8 @@ namespace System.Net.Sockets
             int port,
             System.AsyncCallback? requestCallback,
             object? state
-        ) {
+        )
+        {
             throw null;
         }
         public System.IAsyncResult BeginConnect(
@@ -1836,7 +1932,8 @@ namespace System.Net.Sockets
             int port,
             System.AsyncCallback? requestCallback,
             object? state
-        ) {
+        )
+        {
             throw null;
         }
         public System.IAsyncResult BeginConnect(
@@ -1844,7 +1941,8 @@ namespace System.Net.Sockets
             int port,
             System.AsyncCallback? requestCallback,
             object? state
-        ) {
+        )
+        {
             throw null;
         }
         public void Close() { }
@@ -1872,27 +1970,31 @@ namespace System.Net.Sockets
             System.Net.IPAddress address,
             int port,
             System.Threading.CancellationToken cancellationToken
-        ) {
+        )
+        {
             throw null;
         }
         public System.Threading.Tasks.ValueTask ConnectAsync(
             System.Net.IPAddress[] addresses,
             int port,
             System.Threading.CancellationToken cancellationToken
-        ) {
+        )
+        {
             throw null;
         }
         public System.Threading.Tasks.ValueTask ConnectAsync(
             string host,
             int port,
             System.Threading.CancellationToken cancellationToken
-        ) {
+        )
+        {
             throw null;
         }
         public System.Threading.Tasks.ValueTask ConnectAsync(
             System.Net.IPEndPoint remoteEP,
             System.Threading.CancellationToken cancellationToken
-        ) {
+        )
+        {
             throw null;
         }
         public void Dispose() { }
@@ -1954,7 +2056,8 @@ namespace System.Net.Sockets
         public System.IAsyncResult BeginAcceptTcpClient(
             System.AsyncCallback? callback,
             object? state
-        ) {
+        )
+        {
             throw null;
         }
         public static System.Net.Sockets.TcpListener Create(int port)
@@ -2042,7 +2145,8 @@ namespace System.Net.Sockets
         public System.IAsyncResult BeginReceive(
             System.AsyncCallback? requestCallback,
             object? state
-        ) {
+        )
+        {
             throw null;
         }
         public System.IAsyncResult BeginSend(
@@ -2050,7 +2154,8 @@ namespace System.Net.Sockets
             int bytes,
             System.AsyncCallback? requestCallback,
             object? state
-        ) {
+        )
+        {
             throw null;
         }
         public System.IAsyncResult BeginSend(
@@ -2059,7 +2164,8 @@ namespace System.Net.Sockets
             System.Net.IPEndPoint? endPoint,
             System.AsyncCallback? requestCallback,
             object? state
-        ) {
+        )
+        {
             throw null;
         }
         public System.IAsyncResult BeginSend(
@@ -2069,7 +2175,8 @@ namespace System.Net.Sockets
             int port,
             System.AsyncCallback? requestCallback,
             object? state
-        ) {
+        )
+        {
             throw null;
         }
         public void Close() { }
@@ -2083,7 +2190,8 @@ namespace System.Net.Sockets
         public byte[] EndReceive(
             System.IAsyncResult asyncResult,
             ref System.Net.IPEndPoint? remoteEP
-        ) {
+        )
+        {
             throw null;
         }
         public int EndSend(System.IAsyncResult asyncResult)
@@ -2099,7 +2207,8 @@ namespace System.Net.Sockets
         ) { }
         public byte[] Receive(
             [System.Diagnostics.CodeAnalysis.NotNullAttribute] ref System.Net.IPEndPoint? remoteEP
-        ) {
+        )
+        {
             throw null;
         }
         public System.Threading.Tasks.Task<System.Net.Sockets.UdpReceiveResult> ReceiveAsync()
@@ -2126,7 +2235,8 @@ namespace System.Net.Sockets
             byte[] datagram,
             int bytes,
             System.Net.IPEndPoint? endPoint
-        ) {
+        )
+        {
             throw null;
         }
         public System.Threading.Tasks.Task<int> SendAsync(
@@ -2134,7 +2244,8 @@ namespace System.Net.Sockets
             int bytes,
             string? hostname,
             int port
-        ) {
+        )
+        {
             throw null;
         }
     }
@@ -2169,13 +2280,15 @@ namespace System.Net.Sockets
         public static bool operator ==(
             System.Net.Sockets.UdpReceiveResult left,
             System.Net.Sockets.UdpReceiveResult right
-        ) {
+        )
+        {
             throw null;
         }
         public static bool operator !=(
             System.Net.Sockets.UdpReceiveResult left,
             System.Net.Sockets.UdpReceiveResult right
-        ) {
+        )
+        {
             throw null;
         }
     }

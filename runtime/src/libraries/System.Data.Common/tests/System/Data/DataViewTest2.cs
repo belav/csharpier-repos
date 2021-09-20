@@ -440,7 +440,8 @@ namespace System.Data.Tests
                 if (
                     (int)dt.Rows[i]["ParentId"] == 3
                     && dt.Rows[i]["String1"].ToString() == "3-String1"
-                ) {
+                )
+                {
                     ExpectedResult = i;
                     break;
                 }

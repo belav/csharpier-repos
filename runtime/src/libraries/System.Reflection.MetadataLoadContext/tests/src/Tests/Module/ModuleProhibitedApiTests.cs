@@ -14,7 +14,8 @@ namespace System.Reflection.Tests
                 MetadataLoadContext lc = new MetadataLoadContext(
                     new EmptyCoreMetadataAssemblyResolver()
                 )
-            ) {
+            )
+            {
                 // Storing as ICustomAttributeProvider so we don't accidentally pick up the CustomAttributeExtensions extension methods.
                 ICustomAttributeProvider icp =
                     lc.LoadFromByteArray(TestData.s_SimpleAssemblyImage).ManifestModule;

@@ -21,7 +21,8 @@ namespace Microsoft.CodeAnalysis.ChangeSignature
         public SignatureChange(
             ParameterConfiguration originalConfiguration,
             ParameterConfiguration updatedConfiguration
-        ) {
+        )
+        {
             OriginalConfiguration = originalConfiguration;
             UpdatedConfiguration = updatedConfiguration;
 
@@ -115,7 +116,8 @@ namespace Microsoft.CodeAnalysis.ChangeSignature
         private static bool AnyParametersReordered(
             ImmutableArray<Parameter> originalListOfParameters,
             ImmutableArray<Parameter> updatedListOfParameters
-        ) {
+        )
+        {
             var originalListWithoutRemovedOrAdded = originalListOfParameters.Where(
                     p => updatedListOfParameters.Contains(p)
                 )

@@ -22,7 +22,8 @@ namespace Microsoft.EntityFrameworkCore.Scaffolding.Internal
             ModelCodeGenerationOptions options,
             Action<ScaffoldedModel> assertScaffold,
             Action<IModel> assertModel
-        ) {
+        )
+        {
             var modelBuilder = SqlServerTestHelpers.Instance.CreateConventionBuilder();
             modelBuilder.Model.RemoveAnnotation(CoreAnnotationNames.ProductVersion);
             buildModel(modelBuilder);

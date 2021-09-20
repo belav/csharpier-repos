@@ -22,7 +22,8 @@ namespace Microsoft.EntityFrameworkCore.Query
 
         public override Task Client_member_and_unsupported_string_Equals_in_the_same_query(
             bool async
-        ) {
+        )
+        {
             return AssertTranslationFailedWithDetails(
                 () => base.Client_member_and_unsupported_string_Equals_in_the_same_query(async),
                 CoreStrings.QueryUnableToTranslateMember(nameof(Gear.IsMarcus), nameof(Gear))

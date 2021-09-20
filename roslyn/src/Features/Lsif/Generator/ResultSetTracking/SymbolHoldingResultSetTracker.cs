@@ -35,7 +35,8 @@ namespace Microsoft.CodeAnalysis.LanguageServerIndexFormat.Generator.ResultSetTr
             ILsifJsonWriter lsifJsonWriter,
             Compilation sourceCompilation,
             IdFactory idFactory
-        ) {
+        )
+        {
             _lsifJsonWriter = lsifJsonWriter;
             _sourceCompilation = sourceCompilation;
             _idFactory = idFactory;

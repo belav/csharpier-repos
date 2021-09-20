@@ -115,7 +115,8 @@ internal static partial class Interop
         internal static SafeSharedAsn1OctetStringHandle X509FindExtensionData(
             SafeX509Handle x,
             int extensionNid
-        ) {
+        )
+        {
             CheckValidOpenSslHandle(x);
 
             return SafeInteriorHandle.OpenInteriorHandle(
@@ -154,7 +155,8 @@ internal static partial class Interop
         internal static SafeX509StoreHandle X509ChainNew(
             SafeX509StackHandle systemTrust,
             SafeX509StackHandle userTrust
-        ) {
+        )
+        {
             SafeX509StoreHandle store = CryptoNative_X509ChainNew(systemTrust, userTrust);
 
             if (store.IsInvalid)
@@ -182,7 +184,8 @@ internal static partial class Interop
         internal static void X509StoreSetRevocationFlag(
             SafeX509StoreHandle ctx,
             X509RevocationFlag revocationFlag
-        ) {
+        )
+        {
             if (!CryptoNative_X509StoreSetRevocationFlag(ctx, revocationFlag))
             {
                 throw CreateOpenSslCryptographicException();

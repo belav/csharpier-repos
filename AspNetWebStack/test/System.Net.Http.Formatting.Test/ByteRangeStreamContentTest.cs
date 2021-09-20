@@ -239,7 +239,8 @@ namespace System.Net.Http
             string ranges,
             int innerStreamLength,
             string contentRange
-        ) {
+        )
+        {
             // Arrange
             string data = new String('a', innerStreamLength);
             byte[] bytes = Encoding.UTF8.GetBytes(data);
@@ -268,7 +269,8 @@ namespace System.Net.Http
             int innerStreamLength,
             int expectedBodyparts,
             string[] contentRanges
-        ) {
+        )
+        {
             // Arrange
             string data = new String('a', innerStreamLength);
             byte[] bytes = Encoding.UTF8.GetBytes(data);
@@ -307,7 +309,8 @@ namespace System.Net.Http
             string ranges,
             int innerStreamLength,
             string contentRange
-        ) {
+        )
+        {
             // Arrange
             string data = new String('a', innerStreamLength);
             byte[] bytes = Encoding.UTF8.GetBytes(data);

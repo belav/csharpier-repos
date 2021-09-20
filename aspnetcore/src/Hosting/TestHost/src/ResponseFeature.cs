@@ -157,7 +157,8 @@ namespace Microsoft.AspNetCore.TestHost
             long offset,
             long? count,
             CancellationToken cancellation
-        ) {
+        )
+        {
             return SendFileFallback.SendFileAsync(Stream, path, offset, count, cancellation);
         }
 

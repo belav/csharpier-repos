@@ -162,7 +162,8 @@ namespace Internal.NativeCrypto
         internal static RSAParameters ToRSAParameters(
             this byte[] cspBlob,
             bool includePrivateParameters
-        ) {
+        )
+        {
             try
             {
                 BinaryReader br = new BinaryReader(new MemoryStream(cspBlob));

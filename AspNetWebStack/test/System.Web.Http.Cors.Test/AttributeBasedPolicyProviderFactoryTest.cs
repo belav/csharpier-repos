@@ -30,7 +30,8 @@ namespace System.Web.Http.Cors
             string httpMethod,
             string path,
             Type expectedProviderType
-        ) {
+        )
+        {
             AttributeBasedPolicyProviderFactory providerFactory =
                 new AttributeBasedPolicyProviderFactory();
             HttpRequestMessage request = new HttpRequestMessage(

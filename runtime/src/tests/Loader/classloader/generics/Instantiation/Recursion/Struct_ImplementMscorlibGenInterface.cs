@@ -71,7 +71,8 @@ public struct MyClassIDictionary : IDictionary<MyClassIDictionary, MyClassIDicti
 {
     bool System.Collections.Generic.IDictionary<MyClassIDictionary, MyClassIDictionary>.ContainsKey(
         MyClassIDictionary key
-    ) {
+    )
+    {
         return false;
     }
 
@@ -82,14 +83,16 @@ public struct MyClassIDictionary : IDictionary<MyClassIDictionary, MyClassIDicti
 
     bool System.Collections.Generic.IDictionary<MyClassIDictionary, MyClassIDictionary>.Remove(
         MyClassIDictionary key
-    ) {
+    )
+    {
         return false;
     }
 
     bool System.Collections.Generic.IDictionary<MyClassIDictionary, MyClassIDictionary>.TryGetValue(
         MyClassIDictionary key,
         out MyClassIDictionary value
-    ) {
+    )
+    {
         value = new MyClassIDictionary();
         return false;
     }

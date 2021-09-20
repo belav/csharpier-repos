@@ -44,7 +44,8 @@ namespace System.Web.Mvc
 
         private static IEnumerable<ModelValidationResult> ConvertResults(
             IEnumerable<ValidationResult> results
-        ) {
+        )
+        {
             foreach (ValidationResult result in results)
             {
                 if (result != ValidationResult.Success)

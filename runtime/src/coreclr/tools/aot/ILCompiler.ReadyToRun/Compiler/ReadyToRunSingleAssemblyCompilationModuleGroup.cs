@@ -24,14 +24,15 @@ namespace ILCompiler
             IEnumerable<EcmaModule> compilationModuleSet,
             IEnumerable<ModuleDesc> versionBubbleModuleSet,
             bool compileGenericDependenciesFromVersionBubbleModuleSet
-        ) : base(
-            context,
-            isCompositeBuildMode,
-            isInputBubble,
-            compilationModuleSet,
-            versionBubbleModuleSet,
-            compileGenericDependenciesFromVersionBubbleModuleSet
-        ) { }
+        )
+            : base(
+                context,
+                isCompositeBuildMode,
+                isInputBubble,
+                compilationModuleSet,
+                versionBubbleModuleSet,
+                compileGenericDependenciesFromVersionBubbleModuleSet
+            ) { }
 
         public sealed override bool ContainsMethodBody(MethodDesc method, bool unboxingStub)
         {
@@ -59,7 +60,8 @@ namespace ILCompiler
 
         public sealed override void ApplyProfilerGuidedCompilationRestriction(
             ProfileDataManager profileGuidedCompileRestriction
-        ) {
+        )
+        {
             if (_profileGuidedCompileRestrictionSet)
                 throw new InternalCompilerErrorException(
                     "Called ApplyProfilerGuidedCompilationRestriction twice."

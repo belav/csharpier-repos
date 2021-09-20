@@ -55,7 +55,8 @@ namespace Newtonsoft.Json.Tests.LinqToSql
             Type objectType,
             object existingValue,
             JsonSerializer serializer
-        ) {
+        )
+        {
             JObject o = JObject.Load(reader);
 
             Department department = new Department();

@@ -42,7 +42,8 @@ namespace Microsoft.WebAssembly.Diagnostics
         public bool TryPumpIfCurrentCompleted(
             CancellationToken token,
             [NotNullWhen(true)] out Task? sendTask
-        ) {
+        )
+        {
             sendTask = null;
 
             if (current_send?.IsCompleted == false)

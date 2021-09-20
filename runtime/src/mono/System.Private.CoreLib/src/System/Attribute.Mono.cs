@@ -11,7 +11,8 @@ namespace System
             ICustomAttributeProvider element,
             Type attributeType,
             bool inherit
-        ) {
+        )
+        {
             if (attributeType == null)
                 throw new ArgumentNullException(nameof(attributeType));
             if (

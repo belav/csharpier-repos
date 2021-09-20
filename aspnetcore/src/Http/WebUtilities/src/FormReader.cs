@@ -167,7 +167,8 @@ namespace Microsoft.AspNetCore.WebUtilities
         /// <returns>The next key value pair, or null when the end of the form is reached.</returns>
         public async Task<KeyValuePair<string, string>?> ReadNextPairAsync(
             CancellationToken cancellationToken = new CancellationToken()
-        ) {
+        )
+        {
             await ReadNextPairAsyncImpl(cancellationToken);
             if (ReadSucceeded())
             {
@@ -178,7 +179,8 @@ namespace Microsoft.AspNetCore.WebUtilities
 
         private async Task ReadNextPairAsyncImpl(
             CancellationToken cancellationToken = new CancellationToken()
-        ) {
+        )
+        {
             StartReadNextPair();
             while (!_endOfStream)
             {
@@ -310,7 +312,8 @@ namespace Microsoft.AspNetCore.WebUtilities
         /// <returns>The collection containing the parsed HTTP form body.</returns>
         public async Task<Dictionary<string, StringValues>> ReadFormAsync(
             CancellationToken cancellationToken = new CancellationToken()
-        ) {
+        )
+        {
             var accumulator = new KeyValueAccumulator();
             while (!_endOfStream)
             {

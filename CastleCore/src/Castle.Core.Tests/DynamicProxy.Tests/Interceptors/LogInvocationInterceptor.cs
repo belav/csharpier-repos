@@ -43,7 +43,8 @@ namespace Castle.DynamicProxy.Tests.Interceptors
             else if (
                 invocation.Method.ReturnType.IsValueType
                 && invocation.Method.ReturnType != typeof(void)
-            ) {
+            )
+            {
                 invocation.ReturnValue = Activator.CreateInstance(invocation.Method.ReturnType); // set default return value
             }
         }

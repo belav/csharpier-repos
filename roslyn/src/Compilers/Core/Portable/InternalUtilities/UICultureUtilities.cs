@@ -17,7 +17,8 @@ namespace Roslyn.Utilities
 
         private static bool TryGetCurrentUICultureSetter(
             [NotNullWhen(returnValue: true)] out Action<CultureInfo>? setter
-        ) {
+        )
+        {
             const string cultureInfoTypeName = "System.Globalization.CultureInfo";
             const string cultureInfoTypeNameGlobalization =
                 cultureInfoTypeName
@@ -41,7 +42,8 @@ namespace Roslyn.Utilities
                     || !currentUICultureSetter.IsStatic
                     || currentUICultureSetter.ContainsGenericParameters
                     || currentUICultureSetter.ReturnType != typeof(void)
-                ) {
+                )
+                {
                     setter = null;
                     return false;
                 }
@@ -68,7 +70,8 @@ namespace Roslyn.Utilities
 
         private static bool TryGetCurrentThreadUICultureSetter(
             [NotNullWhen(returnValue: true)] out Action<CultureInfo>? setter
-        ) {
+        )
+        {
             const string threadTypeName = "System.Threading.Thread";
             const string currentThreadName = "CurrentThread";
 
@@ -91,7 +94,8 @@ namespace Roslyn.Utilities
                     || currentThreadGetter.ContainsGenericParameters
                     || currentThreadGetter.ReturnType != type
                     || currentThreadGetter.GetParameters().Length != 0
-                ) {
+                )
+                {
                     setter = null;
                     return false;
                 }
@@ -104,7 +108,8 @@ namespace Roslyn.Utilities
                     || currentUICultureSetter.IsStatic
                     || currentUICultureSetter.ContainsGenericParameters
                     || currentUICultureSetter.ReturnType != typeof(void)
-                ) {
+                )
+                {
                     setter = null;
                     return false;
                 }
@@ -137,7 +142,8 @@ namespace Roslyn.Utilities
             if (
                 !TryGetCurrentUICultureSetter(out s_setCurrentUICulture)
                 && !TryGetCurrentThreadUICultureSetter(out s_setCurrentUICulture)
-            ) {
+            )
+            {
                 s_setCurrentUICulture = null;
             }
         }

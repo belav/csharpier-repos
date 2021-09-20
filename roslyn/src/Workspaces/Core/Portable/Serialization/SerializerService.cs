@@ -77,7 +77,8 @@ namespace Microsoft.CodeAnalysis.Serialization
                     kind,
                     cancellationToken
                 )
-            ) {
+            )
+            {
                 cancellationToken.ThrowIfCancellationRequested();
 
                 if (value is IChecksummedObject checksummedObject)
@@ -127,12 +128,14 @@ namespace Microsoft.CodeAnalysis.Serialization
             ObjectWriter writer,
             SolutionReplicationContext context,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var kind = value.GetWellKnownSynchronizationKind();
 
             using (
                 Logger.LogBlock(FunctionId.Serializer_Serialize, s_logKind, kind, cancellationToken)
-            ) {
+            )
+            {
                 cancellationToken.ThrowIfCancellationRequested();
 
                 if (value is ChecksumWithChildren checksumWithChildren)
@@ -225,7 +228,8 @@ namespace Microsoft.CodeAnalysis.Serialization
             WellKnownSynchronizationKind kind,
             ObjectReader reader,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             using (
                 Logger.LogBlock(
                     FunctionId.Serializer_Deserialize,
@@ -233,7 +237,8 @@ namespace Microsoft.CodeAnalysis.Serialization
                     kind,
                     cancellationToken
                 )
-            ) {
+            )
+            {
                 cancellationToken.ThrowIfCancellationRequested();
 
                 switch (kind)

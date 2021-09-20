@@ -64,7 +64,8 @@ namespace Microsoft.CodeAnalysis
         private Assembly LoadFromPathUncheckedCore(
             string fullPath,
             AssemblyIdentity identity = null
-        ) {
+        )
+        {
             Debug.Assert(PathUtilities.IsAbsolute(fullPath));
 
             // Check if we have already loaded an assembly with the same identity or from the given path.
@@ -81,7 +82,8 @@ namespace Microsoft.CodeAnalysis
                     if (
                         identity != null
                         && _loadedAssembliesByIdentity.TryGetValue(identity, out existingAssembly)
-                    ) {
+                    )
+                    {
                         loadedAssembly = existingAssembly;
                     }
                 }
@@ -152,7 +154,8 @@ namespace Microsoft.CodeAnalysis
                 if (
                     _loadedAssemblyIdentitiesByPath.TryGetValue(fullPath, out var existingIdentity)
                     && existingIdentity != null
-                ) {
+                )
+                {
                     identity = existingIdentity;
                 }
                 else
@@ -180,7 +183,8 @@ namespace Microsoft.CodeAnalysis
                         requestedIdentity,
                         out var existingAssembly
                     )
-                ) {
+                )
+                {
                     return existingAssembly;
                 }
                 // Second, check if an assembly file of the same simple name was registered with the loader:
@@ -189,7 +193,8 @@ namespace Microsoft.CodeAnalysis
                         requestedIdentity.Name,
                         out var pathList
                     )
-                ) {
+                )
+                {
                     return null;
                 }
 

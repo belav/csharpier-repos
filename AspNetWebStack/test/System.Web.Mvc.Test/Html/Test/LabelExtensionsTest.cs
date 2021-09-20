@@ -278,7 +278,8 @@ namespace System.Web.Mvc.Html.Test
         public void LabelWithAnonymousValues_AttributeEncodes_AddedHtmlAttributes(
             string text,
             string expectedText
-        ) {
+        )
+        {
             // Arrange & Act
             var result = html.Label(
                 "PropertyName",
@@ -517,7 +518,8 @@ namespace System.Web.Mvc.Html.Test
         public void LabeForlWithAnonymousValues_AttributeEncodes_AddedHtmlAttributes(
             string text,
             string expectedText
-        ) {
+        )
+        {
             // Arrange
             var dummy = "this is a dummy parameter value";
 

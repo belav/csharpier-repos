@@ -38,7 +38,8 @@ namespace Microsoft.CodeAnalysis.CSharp.MoveToNamespace
         protected override bool IsContainedInNamespaceDeclaration(
             NamespaceDeclarationSyntax namespaceDeclaration,
             int position
-        ) {
+        )
+        {
             var namespaceDeclarationStart = namespaceDeclaration.NamespaceKeyword.SpanStart;
             var namespaceDeclarationEnd = namespaceDeclaration.OpenBraceToken.SpanStart;
 

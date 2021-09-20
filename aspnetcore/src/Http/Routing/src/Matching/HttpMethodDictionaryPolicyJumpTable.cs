@@ -20,7 +20,8 @@ namespace Microsoft.AspNetCore.Routing.Matching
             Dictionary<string, int>? destinations,
             int corsPreflightExitDestination,
             Dictionary<string, int>? corsPreflightDestinations
-        ) {
+        )
+        {
             _exitDestination = exitDestination;
             _destinations = destinations;
             _corsPreflightExitDestination = corsPreflightExitDestination;
@@ -42,7 +43,8 @@ namespace Microsoft.AspNetCore.Routing.Matching
                     httpMethod,
                     out var accessControlRequestMethod
                 )
-            ) {
+            )
+            {
                 return _corsPreflightDestinations!.TryGetValue(
                     accessControlRequestMethod,
                     out destination

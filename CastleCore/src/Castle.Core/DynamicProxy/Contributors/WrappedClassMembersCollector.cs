@@ -29,7 +29,8 @@ namespace Castle.DynamicProxy.Contributors
         public override void CollectMembersToProxy(
             IProxyGenerationHook hook,
             IMembersCollectorSink sink
-        ) {
+        )
+        {
             base.CollectMembersToProxy(hook, sink);
             CollectFields(hook);
             // TODO: perhaps we should also look for nested classes...
@@ -39,7 +40,8 @@ namespace Castle.DynamicProxy.Contributors
             MethodInfo method,
             IProxyGenerationHook hook,
             bool isStandalone
-        ) {
+        )
+        {
             if (ProxyUtil.IsAccessibleMethod(method) == false)
             {
                 return null;

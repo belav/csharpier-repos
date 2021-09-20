@@ -28,7 +28,8 @@ namespace Microsoft.CodeAnalysis.MSBuild.UnitTests
         protected static void AssertFailures(
             MSBuildWorkspace workspace,
             params string[] expectedFailures
-        ) {
+        )
+        {
             AssertEx.Equal(
                 expectedFailures,
                 workspace.Diagnostics.Where(d => d.Kind == WorkspaceDiagnosticKind.Failure)
@@ -39,7 +40,8 @@ namespace Microsoft.CodeAnalysis.MSBuild.UnitTests
         protected async Task AssertCSCompilationOptionsAsync<T>(
             T expected,
             Func<CS.CSharpCompilationOptions, T> actual
-        ) {
+        )
+        {
             var options = await LoadCSharpCompilationOptionsAsync();
             Assert.Equal(expected, actual(options));
         }
@@ -47,7 +49,8 @@ namespace Microsoft.CodeAnalysis.MSBuild.UnitTests
         protected async Task AssertCSParseOptionsAsync<T>(
             T expected,
             Func<CS.CSharpParseOptions, T> actual
-        ) {
+        )
+        {
             var options = await LoadCSharpParseOptionsAsync();
             Assert.Equal(expected, actual(options));
         }
@@ -55,7 +58,8 @@ namespace Microsoft.CodeAnalysis.MSBuild.UnitTests
         protected async Task AssertVBCompilationOptionsAsync<T>(
             T expected,
             Func<VB.VisualBasicCompilationOptions, T> actual
-        ) {
+        )
+        {
             var options = await LoadVisualBasicCompilationOptionsAsync();
             Assert.Equal(expected, actual(options));
         }
@@ -63,7 +67,8 @@ namespace Microsoft.CodeAnalysis.MSBuild.UnitTests
         protected async Task AssertVBParseOptionsAsync<T>(
             T expected,
             Func<VB.VisualBasicParseOptions, T> actual
-        ) {
+        )
+        {
             var options = await LoadVisualBasicParseOptionsAsync();
             Assert.Equal(expected, actual(options));
         }
@@ -176,20 +181,23 @@ namespace Microsoft.CodeAnalysis.MSBuild.UnitTests
 
         protected static MSBuildWorkspace CreateMSBuildWorkspace(
             params (string key, string value)[] additionalProperties
-        ) {
+        )
+        {
             return MSBuildWorkspace.Create(CreateProperties(additionalProperties));
         }
 
         protected static MSBuildWorkspace CreateMSBuildWorkspace(
             HostServices hostServices,
             params (string key, string value)[] additionalProperties
-        ) {
+        )
+        {
             return MSBuildWorkspace.Create(CreateProperties(additionalProperties), hostServices);
         }
 
         private static Dictionary<string, string> CreateProperties(
             (string key, string value)[] additionalProperties
-        ) {
+        )
+        {
             var properties = new Dictionary<string, string>();
 
             foreach (var (k, v) in additionalProperties)

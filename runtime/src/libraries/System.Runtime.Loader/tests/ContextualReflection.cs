@@ -74,7 +74,8 @@ namespace System.Runtime.Loader.Tests
             string typeName,
             Func<AssemblyName, Assembly> assemblyResolver,
             Func<Assembly, string, Boolean, Type> typeResolver
-        ) {
+        )
+        {
             return Type.GetType(typeName, assemblyResolver, typeResolver);
         }
 
@@ -83,7 +84,8 @@ namespace System.Runtime.Loader.Tests
             Func<AssemblyName, Assembly> assemblyResolver,
             Func<Assembly, string, Boolean, Type> typeResolver,
             bool throwOnError
-        ) {
+        )
+        {
             return Type.GetType(typeName, assemblyResolver, typeResolver, throwOnError);
         }
 
@@ -93,7 +95,8 @@ namespace System.Runtime.Loader.Tests
             Func<Assembly, string, Boolean, Type> typeResolver,
             bool throwOnError,
             bool ignoreCase
-        ) {
+        )
+        {
             return Type.GetType(typeName, assemblyResolver, typeResolver, throwOnError, ignoreCase);
         }
 
@@ -112,7 +115,8 @@ namespace System.Runtime.Loader.Tests
             string typeName,
             bool throwOnError,
             bool ignoreCase
-        ) {
+        )
+        {
             return assembly.GetType(typeName, throwOnError, ignoreCase);
         }
 
@@ -125,7 +129,8 @@ namespace System.Runtime.Loader.Tests
             string assemblyName,
             string typeName,
             object[] activationAttributes
-        ) {
+        )
+        {
             return Activator.CreateInstance(assemblyName, typeName, activationAttributes);
         }
 
@@ -138,7 +143,8 @@ namespace System.Runtime.Loader.Tests
             object[] args,
             System.Globalization.CultureInfo culture,
             object[] activationAttributes
-        ) {
+        )
+        {
             return Activator.CreateInstance(
                 assemblyName,
                 typeName,
@@ -659,7 +665,8 @@ namespace System.Runtime.Loader.Tests
             Assembly nullExpected,
             Assembly defaultExpected,
             Assembly isolatedExpected
-        ) {
+        )
+        {
             AssertAssemblyEqual(nullExpected, func());
 
             using (_fixture.defaultAlc.EnterContextualReflection())
@@ -802,7 +809,8 @@ namespace System.Runtime.Loader.Tests
             Assembly nullExpected,
             Assembly defaultExpected,
             Assembly isolatedExpected
-        ) {
+        )
+        {
             AssertAssemblyEqual(nullExpected, func().Assembly);
 
             using (_fixture.defaultAlc.EnterContextualReflection())
@@ -1065,7 +1073,8 @@ namespace System.Runtime.Loader.Tests
             Assembly nullExpected,
             Assembly defaultExpected,
             Assembly isolatedExpected
-        ) {
+        )
+        {
             AssertAssemblyEqual(nullExpected, func().GenericTypeArguments?[0].Assembly);
 
             using (_fixture.defaultAlc.EnterContextualReflection())

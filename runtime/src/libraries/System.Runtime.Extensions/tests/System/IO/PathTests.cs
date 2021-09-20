@@ -576,7 +576,8 @@ namespace System.IO.Tests
             string path,
             string basePath,
             string paramName
-        ) {
+        )
+        {
             Assert.Throws<ArgumentNullException>(paramName, () => Path.GetFullPath(path, basePath));
         }
 
@@ -593,7 +594,8 @@ namespace System.IO.Tests
             string path,
             string basePath,
             string paramName
-        ) {
+        )
+        {
             Assert.Throws<ArgumentException>(paramName, () => Path.GetFullPath(path, basePath));
         }
     }

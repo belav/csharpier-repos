@@ -53,7 +53,8 @@ namespace Microsoft.EntityFrameworkCore.Infrastructure
         public virtual void Validate(
             IModel model,
             IDiagnosticsLogger<DbLoggerCategory.Model.Validation> logger
-        ) {
+        )
+        {
 #pragma warning disable CS0618 // Type or member is obsolete
             ValidateNoShadowEntities(model, logger);
 #pragma warning restore CS0618 // Type or member is obsolete
@@ -84,7 +85,8 @@ namespace Microsoft.EntityFrameworkCore.Infrastructure
         protected virtual void ValidateRelationships(
             IModel model,
             IDiagnosticsLogger<DbLoggerCategory.Model.Validation> logger
-        ) {
+        )
+        {
             Check.NotNull(model, nameof(model));
 
             foreach (var entityType in model.GetEntityTypes())
@@ -95,7 +97,8 @@ namespace Microsoft.EntityFrameworkCore.Infrastructure
                         foreignKey.IsUnique
                         && foreignKey is IConventionForeignKey concreteFk
                         && concreteFk.GetPrincipalEndConfigurationSource() == null
-                    ) {
+                    )
+                    {
                         throw new InvalidOperationException(
                             CoreStrings.AmbiguousOneToOneRelationship(
                                 foreignKey.DeclaringEntityType.DisplayName()
@@ -158,7 +161,8 @@ namespace Microsoft.EntityFrameworkCore.Infrastructure
         protected virtual void ValidatePropertyMapping(
             IModel model,
             IDiagnosticsLogger<DbLoggerCategory.Model.Validation> logger
-        ) {
+        )
+        {
             Check.NotNull(model, nameof(model));
 
             if (!(model is IConventionModel conventionModel))
@@ -235,7 +239,8 @@ namespace Microsoft.EntityFrameworkCore.Infrastructure
                         || targetSequenceType != null
                             && conventionModel.FindIgnoredConfigurationSource(targetSequenceType)
                                 != null
-                    ) {
+                    )
+                    {
                         continue;
                     }
 
@@ -268,7 +273,8 @@ namespace Microsoft.EntityFrameworkCore.Infrastructure
                             || conventionModel.FindEntityType(targetType) != null
                             || targetType.GetRuntimeProperties().Any(p => p.IsCandidateProperty())
                         )
-                    ) {
+                    )
+                    {
                         // ReSharper disable CheckForReferenceEqualityInstead.1
                         // ReSharper disable CheckForReferenceEqualityInstead.3
                         if (
@@ -296,11 +302,13 @@ namespace Microsoft.EntityFrameworkCore.Infrastructure
                                     )
                                 )
                             )
-                        ) {
+                        )
+                        {
                             if (
                                 conventionModel.IsOwned(entityType.ClrType)
                                 && conventionModel.IsOwned(targetType)
-                            ) {
+                            )
+                            {
                                 throw new InvalidOperationException(
                                     CoreStrings.AmbiguousOwnedNavigation(
                                         entityType.DisplayName() + "." + actualProperty.Name,
@@ -333,7 +341,8 @@ namespace Microsoft.EntityFrameworkCore.Infrastructure
                     else if (
                         targetSequenceType == null && propertyType.IsInterface
                         || targetSequenceType?.IsInterface == true
-                    ) {
+                    )
+                    {
                         throw new InvalidOperationException(
                             CoreStrings.InterfacePropertyNotAdded(
                                 entityType.DisplayName(),
@@ -367,7 +376,8 @@ namespace Microsoft.EntityFrameworkCore.Infrastructure
         protected virtual void ValidateIgnoredMembers(
             IModel model,
             IDiagnosticsLogger<DbLoggerCategory.Model.Validation> logger
-        ) {
+        )
+        {
             Check.NotNull(model, nameof(model));
 
             if (!(model is IConventionModel conventionModel))
@@ -382,7 +392,8 @@ namespace Microsoft.EntityFrameworkCore.Infrastructure
                     if (
                         entityType.FindIgnoredConfigurationSource(ignoredMember)
                         != ConfigurationSource.Explicit
-                    ) {
+                    )
+                    {
                         continue;
                     }
 
@@ -476,7 +487,8 @@ namespace Microsoft.EntityFrameworkCore.Infrastructure
         protected virtual void ValidateNoShadowKeys(
             IModel model,
             IDiagnosticsLogger<DbLoggerCategory.Model.Validation> logger
-        ) {
+        )
+        {
             Check.NotNull(model, nameof(model));
 
             foreach (IConventionEntityType entityType in model.GetEntityTypes())
@@ -487,7 +499,8 @@ namespace Microsoft.EntityFrameworkCore.Infrastructure
                         key.Properties.Any(p => p.IsImplicitlyCreated())
                         && ConfigurationSource.Convention.Overrides(key.GetConfigurationSource())
                         && !key.IsPrimaryKey()
-                    ) {
+                    )
+                    {
                         var referencingFk = key.GetReferencingForeignKeys().FirstOrDefault();
 
                         if (referencingFk != null)
@@ -526,7 +539,8 @@ namespace Microsoft.EntityFrameworkCore.Infrastructure
         protected virtual void ValidateNoMutableKeys(
             IModel model,
             IDiagnosticsLogger<DbLoggerCategory.Model.Validation> logger
-        ) {
+        )
+        {
             Check.NotNull(model, nameof(model));
 
             foreach (var entityType in model.GetEntityTypes())
@@ -554,7 +568,8 @@ namespace Microsoft.EntityFrameworkCore.Infrastructure
         protected virtual void ValidateNoCycles(
             IModel model,
             IDiagnosticsLogger<DbLoggerCategory.Model.Validation> logger
-        ) {
+        )
+        {
             Check.NotNull(model, nameof(model));
 
             var graph = new Multigraph<IEntityType, IForeignKey>();
@@ -576,7 +591,8 @@ namespace Microsoft.EntityFrameworkCore.Infrastructure
                             primaryKey.Properties
                         )
                         || foreignKey.PrincipalEntityType.IsAssignableFrom(entityType)
-                    ) {
+                    )
+                    {
                         continue;
                     }
 
@@ -601,7 +617,8 @@ namespace Microsoft.EntityFrameworkCore.Infrastructure
         protected virtual void ValidateNonNullPrimaryKeys(
             IModel model,
             IDiagnosticsLogger<DbLoggerCategory.Model.Validation> logger
-        ) {
+        )
+        {
             Check.NotNull(model, nameof(model));
 
             var entityTypeWithNullPk = model.GetEntityTypes()
@@ -628,7 +645,8 @@ namespace Microsoft.EntityFrameworkCore.Infrastructure
         protected virtual void ValidateClrInheritance(
             IModel model,
             IDiagnosticsLogger<DbLoggerCategory.Model.Validation> logger
-        ) {
+        )
+        {
             Check.NotNull(model, nameof(model));
 
             var validEntityTypes = new HashSet<IEntityType>();
@@ -642,7 +660,8 @@ namespace Microsoft.EntityFrameworkCore.Infrastructure
             IModel model,
             IEntityType entityType,
             HashSet<IEntityType> validEntityTypes
-        ) {
+        )
+        {
             Check.NotNull(model, nameof(model));
             Check.NotNull(entityType, nameof(entityType));
             Check.NotNull(validEntityTypes, nameof(validEntityTypes));
@@ -703,7 +722,8 @@ namespace Microsoft.EntityFrameworkCore.Infrastructure
         protected virtual void ValidateDiscriminatorValues(
             IModel model,
             IDiagnosticsLogger<DbLoggerCategory.Model.Validation> logger
-        ) {
+        )
+        {
             foreach (var rootEntityType in model.GetRootEntityTypes())
             {
                 ValidateDiscriminatorValues(rootEntityType);
@@ -718,7 +738,8 @@ namespace Microsoft.EntityFrameworkCore.Infrastructure
         protected virtual void ValidateInheritanceMapping(
             IModel model,
             IDiagnosticsLogger<DbLoggerCategory.Model.Validation> logger
-        ) {
+        )
+        {
 #pragma warning disable CS0618 // Type or member is obsolete
             ValidateDiscriminatorValues(model, logger);
 #pragma warning restore CS0618 // Type or member is obsolete
@@ -765,7 +786,8 @@ namespace Microsoft.EntityFrameworkCore.Infrastructure
 
                 if (
                     discriminatorValues.TryGetValue(discriminatorValue, out var duplicateEntityType)
-                ) {
+                )
+                {
                     throw new InvalidOperationException(
                         CoreStrings.DuplicateDiscriminatorValue(
                             derivedType.DisplayName(),
@@ -787,7 +809,8 @@ namespace Microsoft.EntityFrameworkCore.Infrastructure
         protected virtual void ValidateChangeTrackingStrategy(
             IModel model,
             IDiagnosticsLogger<DbLoggerCategory.Model.Validation> logger
-        ) {
+        )
+        {
             Check.NotNull(model, nameof(model));
 
             var requireFullNotifications =
@@ -817,7 +840,8 @@ namespace Microsoft.EntityFrameworkCore.Infrastructure
         protected virtual void ValidateOwnership(
             IModel model,
             IDiagnosticsLogger<DbLoggerCategory.Model.Validation> logger
-        ) {
+        )
+        {
             Check.NotNull(model, nameof(model));
 
             foreach (var entityType in model.GetEntityTypes())
@@ -856,7 +880,8 @@ namespace Microsoft.EntityFrameworkCore.Infrastructure
                                     !fk.IsOwnership
                                     && !Contains(fk.DeclaringEntityType.FindOwnership(), fk)
                             )
-                    ) {
+                    )
+                    {
                         throw new InvalidOperationException(
                             CoreStrings.PrincipalOwnedType(
                                 referencingFk.DeclaringEntityType.DisplayName()
@@ -884,7 +909,8 @@ namespace Microsoft.EntityFrameworkCore.Infrastructure
                                     && fk.PrincipalToDependent != null
                                     && !Contains(fk.DeclaringEntityType.FindOwnership(), fk)
                             )
-                    ) {
+                    )
+                    {
                         throw new InvalidOperationException(
                             CoreStrings.InverseToOwnedType(
                                 fk.PrincipalEntityType.DisplayName(),
@@ -917,7 +943,8 @@ namespace Microsoft.EntityFrameworkCore.Infrastructure
         protected virtual void ValidateForeignKeys(
             IModel model,
             IDiagnosticsLogger<DbLoggerCategory.Model.Validation> logger
-        ) {
+        )
+        {
             Check.NotNull(model, nameof(model));
 
             foreach (var entityType in model.GetEntityTypes())
@@ -930,7 +957,8 @@ namespace Microsoft.EntityFrameworkCore.Infrastructure
                         && declaredForeignKey.PrincipalKey.Properties.SequenceEqual(
                             declaredForeignKey.Properties
                         )
-                    ) {
+                    )
+                    {
                         logger.RedundantForeignKeyWarning(declaredForeignKey);
                     }
 
@@ -957,7 +985,8 @@ namespace Microsoft.EntityFrameworkCore.Infrastructure
                                     inheritedKey.DeclaringEntityType,
                                     generatedProperty
                                 )
-                            ) {
+                            )
+                            {
                                 throw new InvalidOperationException(
                                     CoreStrings.ForeignKeyPropertyInKey(
                                         generatedProperty.Name,
@@ -1001,7 +1030,8 @@ namespace Microsoft.EntityFrameworkCore.Infrastructure
         protected virtual void ValidateFieldMapping(
             IModel model,
             IDiagnosticsLogger<DbLoggerCategory.Model.Validation> logger
-        ) {
+        )
+        {
             Check.NotNull(model, nameof(model));
 
             foreach (var entityType in model.GetEntityTypes())
@@ -1020,7 +1050,8 @@ namespace Microsoft.EntityFrameworkCore.Infrastructure
                         var consumedProperty in constructorBinding.ParameterBindings.SelectMany(
                             p => p.ConsumedProperties
                         )
-                    ) {
+                    )
+                    {
                         properties.Remove(consumedProperty);
                     }
                 }
@@ -1034,7 +1065,8 @@ namespace Microsoft.EntityFrameworkCore.Infrastructure
                             memberInfo: out _,
                             errorMessage: out var errorMessage
                         )
-                    ) {
+                    )
+                    {
                         throw new InvalidOperationException(errorMessage);
                     }
 
@@ -1045,7 +1077,8 @@ namespace Microsoft.EntityFrameworkCore.Infrastructure
                             memberInfo: out _,
                             errorMessage: out errorMessage
                         )
-                    ) {
+                    )
+                    {
                         throw new InvalidOperationException(errorMessage);
                     }
 
@@ -1056,7 +1089,8 @@ namespace Microsoft.EntityFrameworkCore.Infrastructure
                             memberInfo: out _,
                             errorMessage: out errorMessage
                         )
-                    ) {
+                    )
+                    {
                         throw new InvalidOperationException(errorMessage);
                     }
                 }
@@ -1071,7 +1105,8 @@ namespace Microsoft.EntityFrameworkCore.Infrastructure
         protected virtual void ValidateTypeMappings(
             IModel model,
             IDiagnosticsLogger<DbLoggerCategory.Model.Validation> logger
-        ) {
+        )
+        {
             Check.NotNull(model, nameof(model));
             Check.NotNull(logger, nameof(logger));
 
@@ -1087,7 +1122,8 @@ namespace Microsoft.EntityFrameworkCore.Infrastructure
                             type != typeof(string)
                             && !(type == typeof(byte[]) && property.IsKey()) // Already special-cased elsewhere
                             && type.TryGetSequenceType() != null
-                        ) {
+                        )
+                        {
                             logger.CollectionWithoutComparer(property);
                         }
                     }
@@ -1108,7 +1144,8 @@ namespace Microsoft.EntityFrameworkCore.Infrastructure
         protected virtual void ValidateQueryFilters(
             IModel model,
             IDiagnosticsLogger<DbLoggerCategory.Model.Validation> logger
-        ) {
+        )
+        {
             Check.NotNull(model, nameof(model));
 
             foreach (var entityType in model.GetEntityTypes())
@@ -1165,7 +1202,8 @@ namespace Microsoft.EntityFrameworkCore.Infrastructure
         protected virtual void ValidateData(
             IModel model,
             IDiagnosticsLogger<DbLoggerCategory.Model.Validation> logger
-        ) {
+        )
+        {
             Check.NotNull(model, nameof(model));
 
             var identityMaps = new Dictionary<IKey, IIdentityMap>();
@@ -1200,7 +1238,8 @@ namespace Microsoft.EntityFrameworkCore.Infrastructure
                                         && !property.ValueGenerated.ForAdd()
                                     ) || property.IsPrimaryKey()
                                 )
-                            ) {
+                            )
+                            {
                                 throw new InvalidOperationException(
                                     CoreStrings.SeedDatumMissingValue(
                                         entityType.DisplayName(),
@@ -1213,7 +1252,8 @@ namespace Microsoft.EntityFrameworkCore.Infrastructure
                             property.RequiresValueGenerator()
                             && property.IsPrimaryKey()
                             && property.ClrType.IsDefaultValue(value)
-                        ) {
+                        )
+                        {
                             if (property.ClrType.IsSignedInteger())
                             {
                                 throw new InvalidOperationException(
@@ -1265,7 +1305,8 @@ namespace Microsoft.EntityFrameworkCore.Infrastructure
                     foreach (
                         var navigation in entityType.GetNavigations()
                             .Concat<INavigationBase>(entityType.GetSkipNavigations())
-                    ) {
+                    )
+                    {
                         if (
                             seedDatum.TryGetValue(navigation.Name, out var value)
                             && (
@@ -1275,7 +1316,8 @@ namespace Microsoft.EntityFrameworkCore.Infrastructure
                                     && collection.Any()
                                 ) || (!navigation.IsCollection && value != null)
                             )
-                        ) {
+                        )
+                        {
                             var foreignKey = navigation is INavigation nav
                                 ? nav.ForeignKey
                                 : ((ISkipNavigation)navigation).ForeignKey;
@@ -1357,7 +1399,8 @@ namespace Microsoft.EntityFrameworkCore.Infrastructure
         protected virtual void LogShadowProperties(
             IModel model,
             IDiagnosticsLogger<DbLoggerCategory.Model.Validation> logger
-        ) {
+        )
+        {
             Check.NotNull(model, nameof(model));
 
             foreach (IConventionEntityType entityType in model.GetEntityTypes())

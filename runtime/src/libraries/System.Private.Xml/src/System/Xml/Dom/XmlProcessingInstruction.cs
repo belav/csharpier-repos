@@ -14,11 +14,8 @@ namespace System.Xml
         private readonly string _target;
         private string _data;
 
-        protected internal XmlProcessingInstruction(
-            string target,
-            string data,
-            XmlDocument doc
-        ) : base(doc)
+        protected internal XmlProcessingInstruction(string target, string data, XmlDocument doc)
+            : base(doc)
         {
             _target = target;
             _data = data;

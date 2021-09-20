@@ -20,7 +20,8 @@ namespace Microsoft.CodeAnalysis.CSharp.EditAndContinue.UnitTests
         internal static void VerifyUnchangedDocument(
             string source,
             ActiveStatementsDescription description
-        ) {
+        )
+        {
             new CSharpEditAndContinueTestHelpers().VerifyUnchangedDocument(
                 ActiveStatementsDescription.ClearTags(source),
                 description.OldStatements,
@@ -32,7 +33,8 @@ namespace Microsoft.CodeAnalysis.CSharp.EditAndContinue.UnitTests
         internal static void VerifyRudeDiagnostics(
             this EditScript<SyntaxNode> editScript,
             params RudeEditDiagnosticDescription[] expectedDiagnostics
-        ) {
+        )
+        {
             VerifyRudeDiagnostics(
                 editScript,
                 ActiveStatementsDescription.Empty,
@@ -44,7 +46,8 @@ namespace Microsoft.CodeAnalysis.CSharp.EditAndContinue.UnitTests
             this EditScript<SyntaxNode> editScript,
             ActiveStatementsDescription description,
             params RudeEditDiagnosticDescription[] expectedDiagnostics
-        ) {
+        )
+        {
             VerifySemanticDiagnostics(editScript, description, expectedDiagnostics);
         }
 
@@ -53,7 +56,8 @@ namespace Microsoft.CodeAnalysis.CSharp.EditAndContinue.UnitTests
             IEnumerable<SourceLineUpdate> expectedLineEdits,
             IEnumerable<string> expectedNodeUpdates,
             params RudeEditDiagnosticDescription[] expectedDiagnostics
-        ) {
+        )
+        {
             new CSharpEditAndContinueTestHelpers().VerifyLineEdits(
                 editScript,
                 expectedLineEdits,
@@ -65,7 +69,8 @@ namespace Microsoft.CodeAnalysis.CSharp.EditAndContinue.UnitTests
         internal static void VerifySemanticDiagnostics(
             this EditScript<SyntaxNode> editScript,
             params RudeEditDiagnosticDescription[] expectedDiagnostics
-        ) {
+        )
+        {
             VerifySemantics(
                 new[] { editScript },
                 new[] { new DocumentAnalysisResultsDescription(diagnostics: expectedDiagnostics) }
@@ -76,7 +81,8 @@ namespace Microsoft.CodeAnalysis.CSharp.EditAndContinue.UnitTests
             this EditScript<SyntaxNode> editScript,
             ActiveStatementsDescription activeStatements,
             params RudeEditDiagnosticDescription[] expectedDiagnostics
-        ) {
+        )
+        {
             VerifySemantics(
                 new[] { editScript },
                 new[]
@@ -93,7 +99,8 @@ namespace Microsoft.CodeAnalysis.CSharp.EditAndContinue.UnitTests
             this EditScript<SyntaxNode> editScript,
             TargetFramework[] targetFrameworks,
             params RudeEditDiagnosticDescription[] expectedDiagnostics
-        ) {
+        )
+        {
             VerifySemantics(
                 new[] { editScript },
                 new[] { new DocumentAnalysisResultsDescription(diagnostics: expectedDiagnostics) },
@@ -105,7 +112,8 @@ namespace Microsoft.CodeAnalysis.CSharp.EditAndContinue.UnitTests
             this EditScript<SyntaxNode> editScript,
             ActiveStatementsDescription activeStatements,
             SemanticEditDescription[] expectedSemanticEdits
-        ) {
+        )
+        {
             VerifySemantics(
                 new[] { editScript },
                 new[]
@@ -121,7 +129,8 @@ namespace Microsoft.CodeAnalysis.CSharp.EditAndContinue.UnitTests
         internal static void VerifySemantics(
             this EditScript<SyntaxNode> editScript,
             params SemanticEditDescription[] expectedSemanticEdits
-        ) {
+        )
+        {
             VerifySemantics(editScript, ActiveStatementsDescription.Empty, expectedSemanticEdits);
         }
 
@@ -129,11 +138,13 @@ namespace Microsoft.CodeAnalysis.CSharp.EditAndContinue.UnitTests
             EditScript<SyntaxNode>[] editScripts,
             DocumentAnalysisResultsDescription[] expected,
             TargetFramework[]? targetFrameworks = null
-        ) {
+        )
+        {
             foreach (
                 var targetFramework in targetFrameworks
                     ?? new[] { TargetFramework.NetStandard20, TargetFramework.NetCoreApp }
-            ) {
+            )
+            {
                 new CSharpEditAndContinueTestHelpers().VerifySemantics(
                     editScripts,
                     targetFramework,

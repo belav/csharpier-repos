@@ -86,7 +86,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             SyntaxList<AttributeListSyntax> indexerNameAttributeLists,
             Location location,
             BindingDiagnosticBag diagnostics
-        ) {
+        )
+        {
             Debug.Assert(!isExpressionBodied || !isAutoProperty);
             Debug.Assert(!isExpressionBodied || !hasInitializer);
 
@@ -257,7 +258,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                                 | TypeCompareKind.IgnoreNullableModifiersForReferenceTypes
                                 | TypeCompareKind.IgnoreDynamic
                         )
-                    ) {
+                    )
+                    {
                         type = type.WithTypeAndModifiers(
                             CustomModifierUtils.CopyTypeCustomModifiers(
                                 overriddenPropertyType.Type,
@@ -322,7 +324,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             bool isStatic,
             Location location,
             BindingDiagnosticBag diagnostics
-        ) {
+        )
+        {
             if (isInterface && !isStatic)
             {
                 diagnostics.Add(
@@ -693,7 +696,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
         internal override void AfterAddingTypeMembersChecks(
             ConversionsBase conversions,
             BindingDiagnosticBag diagnostics
-        ) {
+        )
+        {
 #nullable enable
             bool isExplicitInterfaceImplementation = IsExplicitInterfaceImplementation;
             this.CheckAccessibility(Location, diagnostics, isExplicitInterfaceImplementation);
@@ -777,7 +781,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                     else if (
                         (_getMethod.LocalAccessibility != Accessibility.NotApplicable)
                         && (_setMethod.LocalAccessibility != Accessibility.NotApplicable)
-                    ) {
+                    )
+                    {
                         // Check accessibility is set on at most one accessor.
                         diagnostics.Add(ErrorCode.ERR_DuplicatePropertyAccessMods, Location, this);
                     }
@@ -944,7 +949,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             if (
                 compilation.ShouldEmitNullableAttributes(this)
                 && this.TypeWithAnnotations.NeedsNullableAttribute()
-            ) {
+            )
+            {
                 compilation.EnsureNullableAttributeExists(
                     diagnostics,
                     location,
@@ -965,7 +971,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             Location location,
             BindingDiagnosticBag diagnostics,
             bool isExplicitInterfaceImplementation
-        ) {
+        )
+        {
             var info = ModifierUtils.CheckAccessibility(
                 _modifiers,
                 this,
@@ -982,7 +989,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             Location location,
             bool isIndexer,
             BindingDiagnosticBag diagnostics
-        ) {
+        )
+        {
             bool isExplicitInterfaceImplementationInInterface =
                 isExplicitInterfaceImplementation && ContainingType.IsInterface;
 
@@ -993,7 +1001,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                     || (IsAbstract && !isExplicitInterfaceImplementationInInterface)
                     || IsOverride
                 )
-            ) {
+            )
+            {
                 diagnostics.Add(ErrorCode.ERR_VirtualPrivate, location, this);
             }
             else if (IsStatic && (IsOverride || IsVirtual || IsAbstract))
@@ -1015,7 +1024,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                 IsSealed
                 && !IsOverride
                 && !(IsAbstract && isExplicitInterfaceImplementationInInterface)
-            ) {
+            )
+            {
                 // '{0}' cannot be sealed because it is not an override
                 diagnostics.Add(ErrorCode.ERR_SealedNonOverride, location, this);
             }
@@ -1058,7 +1068,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                 ContainingType.IsSealed
                 && this.DeclaredAccessibility.HasProtected()
                 && !this.IsOverride
-            ) {
+            )
+            {
                 diagnostics.Add(
                     AccessCheck.GetProtectedMemberInSealedTypeError(ContainingType),
                     location,
@@ -1077,14 +1088,16 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
         private void CheckAccessibilityMoreRestrictive(
             SourcePropertyAccessorSymbol accessor,
             BindingDiagnosticBag diagnostics
-        ) {
+        )
+        {
             if (
                 ((object)accessor != null)
                 && !IsAccessibilityMoreRestrictive(
                     this.DeclaredAccessibility,
                     accessor.LocalAccessibility
                 )
-            ) {
+            )
+            {
                 diagnostics.Add(
                     ErrorCode.ERR_InvalidPropertyAccessMod,
                     accessor.Locations[0],
@@ -1101,7 +1114,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
         private static bool IsAccessibilityMoreRestrictive(
             Accessibility property,
             Accessibility accessor
-        ) {
+        )
+        {
             if (accessor == Accessibility.NotApplicable)
             {
                 return true;
@@ -1113,7 +1127,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
         private static void CheckAbstractPropertyAccessorNotPrivate(
             SourcePropertyAccessorSymbol accessor,
             BindingDiagnosticBag diagnostics
-        ) {
+        )
+        {
             if (accessor.LocalAccessibility == Accessibility.Private)
             {
                 diagnostics.Add(
@@ -1128,7 +1143,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             CultureInfo preferredCulture = null,
             bool expandIncludes = false,
             CancellationToken cancellationToken = default(CancellationToken)
-        ) {
+        )
+        {
             ref var lazyDocComment = ref expandIncludes
                 ? ref _lazyExpandedDocComment
                 : ref _lazyDocComment;
@@ -1146,7 +1162,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             MethodSymbol otherAccessor,
             PropertySymbol explicitlyImplementedProperty,
             BindingDiagnosticBag diagnostics
-        ) {
+        )
+        {
             var thisHasAccessor = (object)thisAccessor != null;
             var otherHasAccessor = otherAccessor.IsImplementable();
 
@@ -1296,7 +1313,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                     OneOrMany.Create(AttributeDeclarationSyntaxList),
                     ref _lazyCustomAttributesBag
                 )
-            ) {
+            )
+            {
                 var completed = _state.NotePartComplete(CompletionPart.Attributes);
                 Debug.Assert(completed);
             }
@@ -1346,7 +1364,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             var attributesBag = _lazyCustomAttributesBag;
             if (
                 attributesBag == null || !attributesBag.IsEarlyDecodedWellKnownAttributeDataComputed
-            ) {
+            )
+            {
                 attributesBag = this.GetAttributesBag();
             }
 
@@ -1356,7 +1375,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
         internal override void AddSynthesizedAttributes(
             PEModuleBuilder moduleBuilder,
             ref ArrayBuilder<SynthesizedAttributeData> attributes
-        ) {
+        )
+        {
             base.AddSynthesizedAttributes(moduleBuilder, ref attributes);
 
             var compilation = this.DeclaringCompilation;
@@ -1430,7 +1450,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                 AttributeSyntax,
                 AttributeLocation
             > arguments
-        ) {
+        )
+        {
             CSharpAttributeData boundAttribute;
             ObsoleteAttributeData obsoleteData;
 
@@ -1440,7 +1461,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                     out boundAttribute,
                     out obsoleteData
                 )
-            ) {
+            )
+            {
                 if (obsoleteData != null)
                 {
                     arguments.GetOrCreateData<PropertyEarlyWellKnownAttributeData>().ObsoleteAttributeData =
@@ -1456,7 +1478,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                     arguments.AttributeSyntax,
                     AttributeDescription.IndexerNameAttribute
                 )
-            ) {
+            )
+            {
                 bool hasAnyDiagnostics;
                 boundAttribute = arguments.Binder.GetAttribute(
                     arguments.AttributeSyntax,
@@ -1503,7 +1526,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                 if (
                     lazyCustomAttributesBag != null
                     && lazyCustomAttributesBag.IsEarlyDecodedWellKnownAttributeDataComputed
-                ) {
+                )
+                {
                     return (
                         (PropertyEarlyWellKnownAttributeData)lazyCustomAttributesBag.EarlyDecodedWellKnownAttributeData
                     )?.ObsoleteAttributeData;
@@ -1519,7 +1543,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                 CSharpAttributeData,
                 AttributeLocation
             > arguments
-        ) {
+        )
+        {
             Debug.Assert(arguments.AttributeSyntaxOpt != null);
 
             var diagnostics = (BindingDiagnosticBag)arguments.Diagnostics;
@@ -1544,13 +1569,15 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                     this,
                     AttributeDescription.ExcludeFromCodeCoverageAttribute
                 )
-            ) {
+            )
+            {
                 arguments.GetOrCreateData<PropertyWellKnownAttributeData>().HasExcludeFromCodeCoverageAttribute =
                     true;
             }
             else if (
                 attribute.IsTargetAttribute(this, AttributeDescription.SkipLocalsInitAttribute)
-            ) {
+            )
+            {
                 CSharpAttributeData.DecodeSkipLocalsInitAttribute<PropertyWellKnownAttributeData>(
                     DeclaringCompilation,
                     ref arguments
@@ -1609,7 +1636,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             }
             else if (
                 attribute.IsTargetAttribute(this, AttributeDescription.MemberNotNullWhenAttribute)
-            ) {
+            )
+            {
                 MessageID.IDS_FeatureMemberNotNull.CheckFeatureAvailability(
                     diagnostics,
                     arguments.AttributeSyntaxOpt
@@ -1693,7 +1721,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             BindingDiagnosticBag diagnostics,
             AttributeLocation symbolPart,
             WellKnownAttributeData decodedData
-        ) {
+        )
+        {
             Debug.Assert(!boundAttributes.IsDefault);
             Debug.Assert(!allAttributeSyntaxNodes.IsDefault);
             Debug.Assert(boundAttributes.Length == allAttributeSyntaxNodes.Length);
@@ -1714,7 +1743,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             CSharpAttributeData attribute,
             AttributeSyntax node,
             BindingDiagnosticBag diagnostics
-        ) {
+        )
+        {
             if (!this.IsIndexer || this.IsExplicitInterfaceImplementation)
             {
                 diagnostics.Add(
@@ -1756,7 +1786,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
         internal override void ForceComplete(
             SourceLocation locationOpt,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             while (true)
             {
                 cancellationToken.ThrowIfCancellationRequested();
@@ -1883,7 +1914,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                 this.IsAutoPropertyWithGetAccessor
                 && type.IsRefLikeType
                 && (this.IsStatic || !this.ContainingType.IsRefLikeType)
-            ) {
+            )
+            {
                 diagnostics.Add(ErrorCode.ERR_FieldAutoPropCantBeByRefLike, TypeLocation, type);
             }
         }

@@ -220,7 +220,8 @@ window.mvcClientValidationMetadata.push({0});
         internal static bool GetClientValidationEnabled(
             IDictionary<object, object> scope = null,
             HttpContextBase httpContext = null
-        ) {
+        )
+        {
             return ScopeCache.Get(scope, httpContext).ClientValidationEnabled;
         }
 
@@ -232,21 +233,24 @@ window.mvcClientValidationMetadata.push({0});
         internal static bool GetUnobtrusiveJavaScriptEnabled(
             IDictionary<object, object> scope = null,
             HttpContextBase httpContext = null
-        ) {
+        )
+        {
             return ScopeCache.Get(scope, httpContext).UnobtrusiveJavaScriptEnabled;
         }
 
         internal static string GetValidationSummaryMessageElement(
             IDictionary<object, object> scope = null,
             HttpContextBase httpContext = null
-        ) {
+        )
+        {
             return ScopeCache.Get(scope, httpContext).ValidationSummaryMessageElement;
         }
 
         internal static string GetValidationMessageElement(
             IDictionary<object, object> scope = null,
             HttpContextBase httpContext = null
-        ) {
+        )
+        {
             return ScopeCache.Get(scope, httpContext).ValidationMessageElement;
         }
 
@@ -284,7 +288,8 @@ window.mvcClientValidationMetadata.push({0});
             bool enabled,
             IDictionary<object, object> scope = null,
             HttpContextBase httpContext = null
-        ) {
+        )
+        {
             ScopeCache.Get(scope, httpContext).ClientValidationEnabled = enabled;
         }
 
@@ -292,7 +297,8 @@ window.mvcClientValidationMetadata.push({0});
             bool enabled,
             IDictionary<object, object> scope = null,
             HttpContextBase httpContext = null
-        ) {
+        )
+        {
             ScopeCache.Get(scope, httpContext).UnobtrusiveJavaScriptEnabled = enabled;
         }
 
@@ -300,7 +306,8 @@ window.mvcClientValidationMetadata.push({0});
             string elementName,
             IDictionary<object, object> scope = null,
             HttpContextBase httpContext = null
-        ) {
+        )
+        {
             ScopeCache.Get(scope, httpContext).ValidationSummaryMessageElement = elementName;
         }
 
@@ -308,7 +315,8 @@ window.mvcClientValidationMetadata.push({0});
             string elementName,
             IDictionary<object, object> scope = null,
             HttpContextBase httpContext = null
-        ) {
+        )
+        {
             ScopeCache.Get(scope, httpContext).ValidationMessageElement = elementName;
         }
 
@@ -316,7 +324,8 @@ window.mvcClientValidationMetadata.push({0});
             IDictionary<object, object> scope,
             string name,
             TValue defaultValue = default(TValue)
-        ) {
+        )
+        {
             object result;
             if (scope.TryGetValue(name, out result))
             {
@@ -403,7 +412,8 @@ window.mvcClientValidationMetadata.push({0});
             public static ScopeCache Get(
                 IDictionary<object, object> scope,
                 HttpContextBase httpContext
-            ) {
+            )
+            {
                 if (httpContext == null && Web.HttpContext.Current != null)
                 {
                     httpContext = new HttpContextWrapper(Web.HttpContext.Current);

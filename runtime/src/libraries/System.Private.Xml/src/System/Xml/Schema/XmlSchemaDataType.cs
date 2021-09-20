@@ -47,7 +47,8 @@ namespace System.Xml.Schema
             object value,
             Type targetType,
             IXmlNamespaceResolver namespaceResolver
-        ) {
+        )
+        {
             if (value == null)
             {
                 throw new ArgumentNullException(nameof(value));
@@ -283,7 +284,8 @@ namespace System.Xml.Schema
         internal static XmlSchemaDatatype DeriveByUnion(
             XmlSchemaSimpleType[] types,
             XmlSchemaType schemaType
-        ) {
+        )
+        {
             return DatatypeImplementation.DeriveByUnion(types, schemaType);
         }
 
@@ -291,7 +293,8 @@ namespace System.Xml.Schema
             string uri,
             XmlNameTable nameTable,
             SchemaNames schemaNames
-        ) {
+        )
+        {
             string canonicalUri;
             int offset = 5;
             bool convert = false;
@@ -323,7 +326,8 @@ namespace System.Xml.Schema
             if (
                 Ref.Equal(schemaNames.NsDataTypeAlias, canonicalUri)
                 || Ref.Equal(schemaNames.NsDataTypeOld, canonicalUri)
-            ) {
+            )
+            {
                 canonicalUri = schemaNames.NsDataType;
             }
             else if (Ref.Equal(schemaNames.NsXdrAlias, canonicalUri))

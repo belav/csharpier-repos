@@ -27,7 +27,8 @@ namespace Microsoft.AspNetCore.Mvc.FunctionalTests
 
         public TempDataInCookiesTest(
             MvcTestFixture<BasicWebSite.StartupWithoutEndpointRouting> fixture
-        ) {
+        )
+        {
             var factory =
                 fixture.Factories.FirstOrDefault()
                 ?? fixture.WithWebHostBuilder(
@@ -63,7 +64,8 @@ namespace Microsoft.AspNetCore.Mvc.FunctionalTests
                 tempDataSerializers.Count == 1
                 && tempDataSerializers[0].ImplementationType.FullName
                     == "Microsoft.AspNetCore.Mvc.NewtonsoftJson.BsonTempDataSerializer"
-            ) {
+            )
+            {
                 return;
             }
 
@@ -230,7 +232,8 @@ namespace Microsoft.AspNetCore.Mvc.FunctionalTests
         [InlineData(false)]
         public async Task CookieTempDataProviderCookie_DoesNotSetsSecureAttributeOnCookie(
             bool secureRequest
-        ) {
+        )
+        {
             // Arrange
             var protocol = secureRequest ? "https" : "http";
             var nameValueCollection = new List<KeyValuePair<string, string>>

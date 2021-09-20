@@ -11,7 +11,8 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
         public static INamespaceOrTypeSymbol GenerateRootNamespaceOrType(
             this INamedTypeSymbol namedType,
             string[] containers
-        ) {
+        )
+        {
             INamespaceOrTypeSymbol currentSymbol = namedType;
 
             for (var i = containers.Length - 1; i >= 0; i--)

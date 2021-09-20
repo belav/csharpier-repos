@@ -34,7 +34,8 @@ namespace Microsoft.CodeAnalysis.Editor.CommandHandlers
             if (
                 !(args is InvokeSignatureHelpCommandArgs)
                 && !args.SubjectBuffer.GetFeatureOnOffOption(SignatureHelpOptions.ShowSignatureHelp)
-            ) {
+            )
+            {
                 controller = null;
                 return false;
             }

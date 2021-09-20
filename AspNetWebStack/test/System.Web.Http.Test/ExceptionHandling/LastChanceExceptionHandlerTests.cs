@@ -79,7 +79,8 @@ namespace System.Web.Http.ExceptionHandling
         [InlineData(true)]
         public async Task HandleAsync_IfIsTopLevelCatchBlockAndCanCreateExceptionResult_InitializesResult(
             bool includeDetail
-        ) {
+        )
+        {
             Mock<IExceptionHandler> mock = new Mock<IExceptionHandler>(MockBehavior.Strict);
             IHttpActionResult result = null;
             mock.Setup(
@@ -363,7 +364,8 @@ namespace System.Web.Http.ExceptionHandling
 
         private static LastChanceExceptionHandler CreateProductUnderTest(
             IExceptionHandler innerHandler
-        ) {
+        )
+        {
             return new LastChanceExceptionHandler(innerHandler);
         }
 

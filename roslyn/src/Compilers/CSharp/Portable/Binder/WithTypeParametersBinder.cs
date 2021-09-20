@@ -43,7 +43,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             Binder originalBinder,
             bool diagnose,
             ref CompoundUseSiteInfo<AssemblySymbol> useSiteInfo
-        ) {
+        )
+        {
             Debug.Assert(result.IsClear);
 
             if ((options & LookupMask) != 0)

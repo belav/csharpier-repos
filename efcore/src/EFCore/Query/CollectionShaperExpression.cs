@@ -32,7 +32,8 @@ namespace Microsoft.EntityFrameworkCore.Query
             Expression innerShaper,
             INavigationBase? navigation,
             Type elementType
-        ) {
+        )
+        {
             Check.NotNull(projection, nameof(projection));
             Check.NotNull(innerShaper, nameof(innerShaper));
 
@@ -90,7 +91,8 @@ namespace Microsoft.EntityFrameworkCore.Query
         public virtual CollectionShaperExpression Update(
             Expression projection,
             Expression innerShaper
-        ) {
+        )
+        {
             Check.NotNull(projection, nameof(projection));
             Check.NotNull(innerShaper, nameof(innerShaper));
 

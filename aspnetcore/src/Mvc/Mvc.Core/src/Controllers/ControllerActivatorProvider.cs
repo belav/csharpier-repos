@@ -50,7 +50,8 @@ namespace Microsoft.AspNetCore.Mvc.Controllers
         /// <inheritdoc/>
         public Func<ControllerContext, object> CreateActivator(
             ControllerActionDescriptor descriptor
-        ) {
+        )
+        {
             if (descriptor == null)
             {
                 throw new ArgumentNullException(nameof(descriptor));
@@ -81,7 +82,8 @@ namespace Microsoft.AspNetCore.Mvc.Controllers
         /// <inheritdoc/>
         public Action<ControllerContext, object>? CreateReleaser(
             ControllerActionDescriptor descriptor
-        ) {
+        )
+        {
             if (descriptor == null)
             {
                 throw new ArgumentNullException(nameof(descriptor));
@@ -103,7 +105,8 @@ namespace Microsoft.AspNetCore.Mvc.Controllers
         /// <inheritdoc/>
         public Func<ControllerContext, object, ValueTask>? CreateAsyncReleaser(
             ControllerActionDescriptor descriptor
-        ) {
+        )
+        {
             if (descriptor == null)
             {
                 throw new ArgumentNullException(nameof(descriptor));
@@ -117,7 +120,8 @@ namespace Microsoft.AspNetCore.Mvc.Controllers
             if (
                 typeof(IAsyncDisposable).GetTypeInfo()
                     .IsAssignableFrom(descriptor.ControllerTypeInfo)
-            ) {
+            )
+            {
                 return _disposeAsync;
             }
 

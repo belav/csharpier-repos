@@ -114,7 +114,8 @@ namespace System.Xml.Xsl.Xslt
                 && varType.IsNotRtf
                 && varType.MaybeMany
                 && !varType.IsDod
-            ) {
+            )
+            {
                 var = _f.TypeAssert(var, XmlQueryTypeFactory.NodeSDod);
             }
 
@@ -133,7 +134,8 @@ namespace System.Xml.Xsl.Xslt
             string name,
             IList<QilNode> args,
             IFocus env
-        ) {
+        )
+        {
             Debug.Assert(!args.IsReadOnly, "Writable collection expected");
             if (prefix.Length == 0)
             {
@@ -347,7 +349,8 @@ namespace System.Xml.Xsl.Xslt
             QilName name,
             XmlExtensionFunction scrFunc,
             IList<QilNode> args
-        ) {
+        )
+        {
             XmlQueryType xmlTypeFormalArg;
 
             for (int i = 0; i < args.Count; i++)
@@ -763,7 +766,8 @@ namespace System.Xml.Xsl.Xslt
             QilNode value,
             QilNode formatPicture,
             QilNode? formatName
-        ) {
+        )
+        {
             _f.CheckDouble(value);
             _f.CheckString(formatPicture);
             XmlQualifiedName? resolvedName;

@@ -158,7 +158,8 @@ namespace System.Net.Sockets
         private unsafe void RegisterToCancelPendingIO(
             NativeOverlapped* overlapped,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             Debug.Assert(
                 _singleBufferHandleState == SingleBufferHandleState.InProcess,
                 "An operation must be declared in-flight in order to register to cancel it."
@@ -218,7 +219,8 @@ namespace System.Net.Sockets
             bool success,
             int bytesTransferred,
             NativeOverlapped* overlapped
-        ) {
+        )
+        {
             // Note: We need to dispose of the overlapped iff the operation completed synchronously,
             // and if we do, we must do so before we mark the operation as completed.
 
@@ -274,7 +276,8 @@ namespace System.Net.Sockets
             int bytesTransferred,
             NativeOverlapped* overlapped,
             CancellationToken cancellationToken = default
-        ) {
+        )
+        {
             // Note: We need to dispose of the overlapped iff the operation completed synchronously,
             // and if we do, we must do so before we mark the operation as completed.
 
@@ -336,7 +339,8 @@ namespace System.Net.Sockets
             Socket socket,
             SafeSocketHandle handle,
             SafeSocketHandle acceptHandle
-        ) {
+        )
+        {
             bool userBuffer = _count != 0;
             Debug.Assert(
                 !userBuffer || (!_buffer.Equals(default) && _count >= _acceptAddressBufferCount)
@@ -453,7 +457,8 @@ namespace System.Net.Sockets
         internal unsafe SocketError DoOperationReceiveSingleBuffer(
             SafeSocketHandle handle,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             fixed (byte* bufferPtr = &MemoryMarshal.GetReference(_buffer.Span))
             {
                 NativeOverlapped* overlapped = AllocateNativeOverlapped();
@@ -529,7 +534,8 @@ namespace System.Net.Sockets
         internal unsafe SocketError DoOperationReceiveFrom(
             SafeSocketHandle handle,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             // WSARecvFrom uses a WSABuffer array describing buffers in which to
             // receive data and from which to send data respectively. Single and multiple buffers
             // are handled differently so as to optimize performance for the more common single buffer case.
@@ -545,7 +551,8 @@ namespace System.Net.Sockets
         internal unsafe SocketError DoOperationReceiveFromSingleBuffer(
             SafeSocketHandle handle,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             fixed (byte* bufferPtr = &MemoryMarshal.GetReference(_buffer.Span))
             {
                 NativeOverlapped* overlapped = AllocateNativeOverlapped();
@@ -623,7 +630,8 @@ namespace System.Net.Sockets
             Socket socket,
             SafeSocketHandle handle,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             // WSARecvMsg uses a WSAMsg descriptor.
             // The WSAMsg buffer is a pinned array to avoid complicating the use of Overlapped.
             // WSAMsg contains a pointer to a sockaddr.
@@ -659,7 +667,8 @@ namespace System.Net.Sockets
                     _controlBufferPinned == null
                     || _controlBufferPinned.Length != sizeof(Interop.Winsock.ControlDataIPv6)
                 )
-            ) {
+            )
+            {
                 _controlBufferPinned = GC.AllocateUninitializedArray<byte>(
                     sizeof(Interop.Winsock.ControlDataIPv6),
                     pinned: true
@@ -671,7 +680,8 @@ namespace System.Net.Sockets
                     _controlBufferPinned == null
                     || _controlBufferPinned.Length != sizeof(Interop.Winsock.ControlData)
                 )
-            ) {
+            )
+            {
                 _controlBufferPinned = GC.AllocateUninitializedArray<byte>(
                     sizeof(Interop.Winsock.ControlData),
                     pinned: true
@@ -786,7 +796,8 @@ namespace System.Net.Sockets
         internal unsafe SocketError DoOperationSendSingleBuffer(
             SafeSocketHandle handle,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             fixed (byte* bufferPtr = &MemoryMarshal.GetReference(_buffer.Span))
             {
                 NativeOverlapped* overlapped = AllocateNativeOverlapped();
@@ -895,7 +906,8 @@ namespace System.Net.Sockets
                     + sendPacketsElementsFileStreamCount
                     + sendPacketsElementsBufferCount
                 == 0
-            ) {
+            )
+            {
                 FinishOperationSyncSuccess(0, SocketFlags.None);
                 return SocketError.Success;
             }
@@ -969,7 +981,8 @@ namespace System.Net.Sockets
         internal unsafe SocketError DoOperationSendTo(
             SafeSocketHandle handle,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             // WSASendTo uses a WSABuffer array describing buffers in which to
             // receive data and from which to send data respectively. Single and multiple buffers
             // are handled differently so as to optimize performance for the more common single buffer case.
@@ -986,7 +999,8 @@ namespace System.Net.Sockets
         internal unsafe SocketError DoOperationSendToSingleBuffer(
             SafeSocketHandle handle,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             fixed (byte* bufferPtr = &MemoryMarshal.GetReference(_buffer.Span))
             {
                 NativeOverlapped* overlapped = AllocateNativeOverlapped();
@@ -1082,7 +1096,8 @@ namespace System.Net.Sockets
                     if (
                         _multipleBufferMemoryHandles == null
                         || (_multipleBufferMemoryHandles.Length < bufferCount)
-                    ) {
+                    )
+                    {
                         _multipleBufferMemoryHandles = new MemoryHandle[bufferCount];
                     }
 
@@ -1206,7 +1221,8 @@ namespace System.Net.Sockets
             int sendPacketsElementsFileCount,
             int sendPacketsElementsFileStreamCount,
             int sendPacketsElementsBufferCount
-        ) {
+        )
+        {
             if (_pinState != PinState.None)
             {
                 FreePinHandles();
@@ -1226,7 +1242,8 @@ namespace System.Net.Sockets
             if (
                 _multipleBufferMemoryHandles == null
                 || (_multipleBufferMemoryHandles.Length < sendPacketsElementsBufferCount)
-            ) {
+            )
+            {
                 _multipleBufferMemoryHandles = new MemoryHandle[sendPacketsElementsBufferCount];
             }
 
@@ -1339,7 +1356,8 @@ namespace System.Net.Sockets
 
         private unsafe SocketError FinishOperationAccept(
             Internals.SocketAddress remoteSocketAddress
-        ) {
+        )
+        {
             SocketError socketError;
             IntPtr localAddr;
             int localAddrLength;
@@ -1521,7 +1539,8 @@ namespace System.Net.Sockets
             uint errorCode,
             uint numBytes,
             NativeOverlapped* nativeOverlapped
-        ) {
+        )
+        {
             Debug.Assert(OperatingSystem.IsWindows());
             var saeaBox =
                 (StrongBox<SocketAsyncEventArgs>)(
@@ -1546,7 +1565,8 @@ namespace System.Net.Sockets
             uint errorCode,
             uint numBytes,
             NativeOverlapped* nativeOverlapped
-        ) {
+        )
+        {
             SocketError socketError = (SocketError)errorCode;
             SocketFlags socketFlags = SocketFlags.None;
 

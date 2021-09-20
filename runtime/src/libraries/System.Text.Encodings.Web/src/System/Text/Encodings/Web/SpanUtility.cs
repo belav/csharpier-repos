@@ -102,7 +102,8 @@ namespace System.Text.Encodings.Web
             byte d,
             byte e,
             byte f
-        ) {
+        )
+        {
             if (span.Length >= 6)
             {
                 uint abcd32;
@@ -209,7 +210,8 @@ namespace System.Text.Encodings.Web
             char d,
             char e,
             char f
-        ) {
+        )
+        {
             if (span.Length >= 6)
             {
                 ulong abcd64;
@@ -268,7 +270,8 @@ namespace System.Text.Encodings.Web
             int spanRealLength,
             int requestedOffset,
             int requestedLength
-        ) {
+        )
+        {
             // Logic here is copied from Span<T>.Slice.
             if (IntPtr.Size == 4)
             {
@@ -286,7 +289,8 @@ namespace System.Text.Encodings.Web
                 if (
                     (ulong)(uint)spanRealLength
                     < (ulong)(uint)requestedOffset + (ulong)(uint)requestedLength
-                ) {
+                )
+                {
                     return false;
                 }
             }

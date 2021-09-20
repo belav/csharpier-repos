@@ -140,7 +140,8 @@ namespace JIT.HardwareIntrinsics.X86
                 Byte[] inArray3,
                 Byte[] outArray,
                 int alignment
-            ) {
+            )
+            {
                 int sizeOfinArray1 = inArray1.Length * Unsafe.SizeOf<Byte>();
                 int sizeOfinArray2 = inArray2.Length * Unsafe.SizeOf<Byte>();
                 int sizeOfinArray3 = inArray3.Length * Unsafe.SizeOf<Byte>();
@@ -151,7 +152,8 @@ namespace JIT.HardwareIntrinsics.X86
                     || (alignment * 2) < sizeOfinArray2
                     || (alignment * 2) < sizeOfinArray3
                     || (alignment * 2) < sizeOfoutArray
-                ) {
+                )
+                {
                     throw new ArgumentException("Invalid value of alignment");
                 }
 
@@ -656,7 +658,8 @@ namespace JIT.HardwareIntrinsics.X86
 
             fixed (Vector128<Byte>* pFld1 = &_fld1)fixed (Vector128<Byte>* pFld2 = &_fld2)fixed (
                 Vector128<Byte>* pFld3 = &_fld3
-            ) {
+            )
+            {
                 var result = Sse41.BlendVariable(
                     Sse2.LoadVector128((Byte*)(pFld1)),
                     Sse2.LoadVector128((Byte*)(pFld2)),
@@ -737,7 +740,8 @@ namespace JIT.HardwareIntrinsics.X86
             Vector128<Byte> op3,
             void* result,
             [CallerMemberName] string method = ""
-        ) {
+        )
+        {
             Byte[] inArray1 = new Byte[Op1ElementCount];
             Byte[] inArray2 = new Byte[Op2ElementCount];
             Byte[] inArray3 = new Byte[Op3ElementCount];
@@ -761,7 +765,8 @@ namespace JIT.HardwareIntrinsics.X86
             void* op3,
             void* result,
             [CallerMemberName] string method = ""
-        ) {
+        )
+        {
             Byte[] inArray1 = new Byte[Op1ElementCount];
             Byte[] inArray2 = new Byte[Op2ElementCount];
             Byte[] inArray3 = new Byte[Op3ElementCount];
@@ -797,7 +802,8 @@ namespace JIT.HardwareIntrinsics.X86
             Byte[] thirdOp,
             Byte[] result,
             [CallerMemberName] string method = ""
-        ) {
+        )
+        {
             bool succeeded = true;
 
             if (((thirdOp[0] >> 7) & 1) == 1 ? secondOp[0] != result[0] : firstOp[0] != result[0])
@@ -812,7 +818,8 @@ namespace JIT.HardwareIntrinsics.X86
                         ((thirdOp[i] >> 7) & 1) == 1
                             ? secondOp[i] != result[i]
                             : firstOp[i] != result[i]
-                    ) {
+                    )
+                    {
                         succeeded = false;
                         break;
                     }

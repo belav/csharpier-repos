@@ -23,7 +23,8 @@ namespace Microsoft.VisualStudio.LanguageServices.LiveShare
             object param,
             RequestContext<Solution> requestContext,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var projects = new ArrayBuilder<CustomProtocol.Project>();
             var solution = requestContext.Context;
             foreach (var project in solution.Projects)

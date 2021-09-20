@@ -70,7 +70,8 @@ internal static partial class Interop
             /// </summary>
             public static unsafe FILE_FULL_DIR_INFORMATION* GetNextInfo(
                 FILE_FULL_DIR_INFORMATION* info
-            ) {
+            )
+            {
                 if (info == null)
                     return null;
 

@@ -55,7 +55,8 @@ namespace System.IO.Ports.Tests
         {
             using (
                 var com1 = new SerialPort(TCSupport.LocalMachineSerialInfo.FirstAvailablePortName)
-            ) {
+            )
+            {
                 Debug.WriteLine(
                     "Verifying WriteByte throws InvalidOperationException while in a Break"
                 );
@@ -76,7 +77,8 @@ namespace System.IO.Ports.Tests
             )
             using (
                 var com2 = new SerialPort(TCSupport.LocalMachineSerialInfo.SecondAvailablePortName)
-            ) {
+            )
+            {
                 var rndGen = new Random(-55);
                 var buffer = new byte[numWrites];
 

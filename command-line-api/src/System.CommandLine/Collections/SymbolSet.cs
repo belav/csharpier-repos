@@ -61,7 +61,8 @@ namespace System.CommandLine.Collections
         internal bool IsAnyAliasInUse(
             ISymbol item,
             [MaybeNullWhen(false)] out string aliasAlreadyInUse
-        ) {
+        )
+        {
             EnsureAliasIndexIsCurrent();
 
             if (item is IIdentifierSymbol identifier)

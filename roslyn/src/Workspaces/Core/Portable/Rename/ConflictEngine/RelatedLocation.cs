@@ -46,7 +46,8 @@ namespace Microsoft.CodeAnalysis.Rename.ConflictEngine
             RelatedLocationType type,
             bool isReference = false,
             TextSpan complexifiedTargetSpan = default
-        ) {
+        )
+        {
             ConflictCheckSpan = conflictCheckSpan;
             Type = type;
             IsReference = isReference;

@@ -78,7 +78,8 @@ namespace System.Net.Quic.Implementations.MsQuic
             IPEndPoint localEndPoint,
             IPEndPoint remoteEndPoint,
             SafeMsQuicConnectionHandle handle
-        ) {
+        )
+        {
             _state.Handle = handle;
             _state.Connected = true;
             _localEndPoint = localEndPoint;
@@ -184,7 +185,8 @@ namespace System.Net.Quic.Implementations.MsQuic
         private static uint HandleEventShutdownInitiatedByTransport(
             State state,
             ref ConnectionEvent connectionEvent
-        ) {
+        )
+        {
             if (!state.Connected)
             {
                 Debug.Assert(state.Connection != null);
@@ -205,7 +207,8 @@ namespace System.Net.Quic.Implementations.MsQuic
         private static uint HandleEventShutdownInitiatedByPeer(
             State state,
             ref ConnectionEvent connectionEvent
-        ) {
+        )
+        {
             state.AbortErrorCode = (long)connectionEvent.Data.ShutdownInitiatedByPeer.ErrorCode;
             state.AcceptQueue.Writer.Complete();
             return MsQuicStatusCodes.Success;
@@ -214,7 +217,8 @@ namespace System.Net.Quic.Implementations.MsQuic
         private static uint HandleEventShutdownComplete(
             State state,
             ref ConnectionEvent connectionEvent
-        ) {
+        )
+        {
             state.Connection = null;
 
             state.ShutdownTcs.SetResult(MsQuicStatusCodes.Success);
@@ -241,14 +245,16 @@ namespace System.Net.Quic.Implementations.MsQuic
         private static uint HandleEventStreamsAvailable(
             State state,
             ref ConnectionEvent connectionEvent
-        ) {
+        )
+        {
             return MsQuicStatusCodes.Success;
         }
 
         private static uint HandleEventPeerCertificateReceived(
             State state,
             ref ConnectionEvent connectionEvent
-        ) {
+        )
+        {
             SslPolicyErrors sslPolicyErrors = SslPolicyErrors.None;
             X509Chain? chain = null;
             X509Certificate2? certificate = null;
@@ -268,7 +274,8 @@ namespace System.Net.Quic.Implementations.MsQuic
             if (
                 connectionEvent.Data.PeerCertificateReceived.PlatformCertificateHandle
                 != IntPtr.Zero
-            ) {
+            )
+            {
                 certificate = new X509Certificate2(
                     connectionEvent.Data.PeerCertificateReceived.PlatformCertificateHandle
                 );
@@ -345,7 +352,8 @@ namespace System.Net.Quic.Implementations.MsQuic
 
         internal override async ValueTask<QuicStreamProvider> AcceptStreamAsync(
             CancellationToken cancellationToken = default
-        ) {
+        )
+        {
             ThrowIfDisposed();
 
             MsQuicStream stream;
@@ -491,7 +499,8 @@ namespace System.Net.Quic.Implementations.MsQuic
             IntPtr connection,
             IntPtr context,
             ref ConnectionEvent connectionEvent
-        ) {
+        )
+        {
             var state = (State)GCHandle.FromIntPtr(context).Target!;
             try
             {
@@ -560,7 +569,8 @@ namespace System.Net.Quic.Implementations.MsQuic
         internal override ValueTask CloseAsync(
             long errorCode,
             CancellationToken cancellationToken = default
-        ) {
+        )
+        {
             ThrowIfDisposed();
 
             return ShutdownAsync(QUIC_CONNECTION_SHUTDOWN_FLAGS.NONE, errorCode);

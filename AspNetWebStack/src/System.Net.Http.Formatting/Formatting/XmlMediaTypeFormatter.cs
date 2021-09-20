@@ -279,7 +279,8 @@ namespace System.Net.Http.Formatting
             Stream readStream,
             HttpContent content,
             IFormatterLogger formatterLogger
-        ) {
+        )
+        {
             if (type == null)
             {
                 throw Error.ArgumentNull("type");
@@ -305,7 +306,8 @@ namespace System.Net.Http.Formatting
             Stream readStream,
             HttpContent content,
             IFormatterLogger formatterLogger
-        ) {
+        )
+        {
             HttpContentHeaders contentHeaders = content == null ? null : content.Headers;
 
             // If content length is 0 then return default value for this type
@@ -404,7 +406,8 @@ namespace System.Net.Http.Formatting
             HttpContent content,
             TransportContext transportContext,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             if (type == null)
             {
                 throw Error.ArgumentNull("type");
@@ -483,7 +486,8 @@ namespace System.Net.Http.Formatting
             Type type,
             object value,
             HttpContent content
-        ) {
+        )
+        {
             return GetSerializerForType(type);
         }
 
@@ -496,7 +500,8 @@ namespace System.Net.Http.Formatting
         protected internal virtual XmlWriter CreateXmlWriter(
             Stream writeStream,
             HttpContent content
-        ) {
+        )
+        {
             Encoding effectiveEncoding = SelectCharacterEncoding(
                 content != null ? content.Headers : null
             );
@@ -687,7 +692,8 @@ namespace System.Net.Http.Formatting
         private static void ThrowInvalidSerializerException(
             object serializer,
             string getSerializerMethodName
-        ) {
+        )
+        {
             if (serializer == null)
             {
                 throw Error.InvalidOperation(

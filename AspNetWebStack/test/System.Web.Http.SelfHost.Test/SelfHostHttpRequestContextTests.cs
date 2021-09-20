@@ -277,7 +277,8 @@ namespace System.Web.Http.SelfHost
             bool expected,
             IncludeErrorDetailPolicy policy,
             bool isLocal
-        ) {
+        )
+        {
             // Arrange
             using (RequestContext serviceModelContext = CreateStubServiceModelContext())
             using (HttpConfiguration configuration = CreateConfiguration())
@@ -330,7 +331,8 @@ namespace System.Web.Http.SelfHost
         public void IncludeErrorDetailSet_OverridesPolicy(
             bool expected,
             IncludeErrorDetailPolicy policy
-        ) {
+        )
+        {
             // Arrange
             using (RequestContext serviceModelContext = CreateStubServiceModelContext())
             using (HttpConfiguration configuration = CreateConfiguration())
@@ -699,7 +701,8 @@ namespace System.Web.Http.SelfHost
         [InlineData("/a%20b")]
         public void VirtualPathRootGet_ReturnsUnescapedConfigurationVirtualPathRoot(
             string configurationVirtualPathRoot
-        ) {
+        )
+        {
             // Arrange
             var expectedVirtualPathRoot = "/a b";
             using (var serviceModelContext = CreateStubServiceModelContext())
@@ -830,7 +833,8 @@ namespace System.Web.Http.SelfHost
             RequestContext requestContext,
             HttpConfiguration configuration,
             HttpRequestMessage request
-        ) {
+        )
+        {
             return new SelfHostHttpRequestContext(requestContext, configuration, request);
         }
 

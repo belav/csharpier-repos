@@ -64,7 +64,8 @@ namespace Roslyn.Utilities
         public static void ThrowIfFalse(
             [DoesNotReturnIf(parameterValue: false)] bool condition,
             string message
-        ) {
+        )
+        {
             if (!condition)
             {
                 Fail(message);
@@ -92,7 +93,8 @@ namespace Roslyn.Utilities
         public static void ThrowIfTrue(
             [DoesNotReturnIf(parameterValue: true)] bool condition,
             string message
-        ) {
+        )
+        {
             if (condition)
             {
                 Fail(message);

@@ -15,7 +15,8 @@ namespace Microsoft.AspNetCore.Razor.Language
         protected override bool IsMatch(
             RazorCodeDocument codeDocument,
             DocumentIntermediateNode documentNode
-        ) {
+        )
+        {
             return true;
         }
 
@@ -24,7 +25,8 @@ namespace Microsoft.AspNetCore.Razor.Language
             NamespaceDeclarationIntermediateNode @namespace,
             ClassDeclarationIntermediateNode @class,
             MethodDeclarationIntermediateNode method
-        ) {
+        )
+        {
             var configuration = Engine.Features.OfType<DefaultDocumentClassifierPassFeature>()
                 .FirstOrDefault();
             if (configuration != null)

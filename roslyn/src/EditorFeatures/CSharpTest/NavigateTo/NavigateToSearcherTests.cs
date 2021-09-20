@@ -28,7 +28,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.NavigateTo
             string pattern,
             bool isFullyLoaded,
             INavigateToSearchResult? result
-        ) {
+        )
+        {
             var searchServiceSetup = searchService.Setup(
                 ss =>
                     ss.SearchProjectAsync(
@@ -115,7 +116,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.NavigateTo
         [CombinatorialData]
         public async Task NotFullyLoadedMakesTwoSearchProjectCallIfValueNotReturned(
             bool projectSystemFullyLoaded
-        ) {
+        )
+        {
             using var workspace = TestWorkspace.CreateCSharp("");
 
             var pattern = "irrelevant";
@@ -164,7 +166,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.NavigateTo
         [CombinatorialData]
         public async Task NotFullyLoadedStillReportsAsFullyCompletedIfSecondCallReturnsNothing(
             bool projectIsFullyLoaded
-        ) {
+        )
+        {
             using var workspace = TestWorkspace.CreateCSharp("");
 
             var pattern = "irrelevant";

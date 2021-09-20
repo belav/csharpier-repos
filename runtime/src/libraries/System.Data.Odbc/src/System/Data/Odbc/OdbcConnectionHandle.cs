@@ -193,7 +193,8 @@ namespace System.Data.Odbc
                     if (
                         (ODBC32.RetCode.SUCCESS == retcode)
                         || (ODBC32.RetCode.SUCCESS_WITH_INFO == retcode)
-                    ) {
+                    )
+                    {
                         _handleState = HandleState.Transacted;
                     }
                 }
@@ -261,7 +262,8 @@ namespace System.Data.Odbc
             if (
                 (HandleState.Connected == _handleState)
                 || (HandleState.TransactionInProgress == _handleState)
-            ) {
+            )
+            {
                 retcode = Interop.Odbc.SQLDisconnect(handle);
                 _handleState = HandleState.Allocated;
             }
@@ -276,7 +278,8 @@ namespace System.Data.Odbc
             ODBC32.SQL_ATTR attribute,
             byte[] buffer,
             out int cbActual
-        ) {
+        )
+        {
             ODBC32.RetCode retcode = Interop.Odbc.SQLGetConnectAttrW(
                 this,
                 attribute,
@@ -322,7 +325,8 @@ namespace System.Data.Odbc
             ODBC32.SQL_ATTR attribute,
             IntPtr value,
             int length
-        ) {
+        )
+        {
             ODBC32.RetCode retcode = Interop.Odbc.SQLSetConnectAttrW(
                 this,
                 attribute,
@@ -337,7 +341,8 @@ namespace System.Data.Odbc
             ODBC32.SQL_ATTR attribute,
             string buffer,
             int length
-        ) {
+        )
+        {
             ODBC32.RetCode retcode = Interop.Odbc.SQLSetConnectAttrW(
                 this,
                 attribute,
@@ -351,7 +356,8 @@ namespace System.Data.Odbc
             ODBC32.SQL_ATTR attribute,
             System.Transactions.IDtcTransaction transaction,
             int length
-        ) {
+        )
+        {
             ODBC32.RetCode retcode = Interop.Odbc.SQLSetConnectAttrW(
                 this,
                 attribute,

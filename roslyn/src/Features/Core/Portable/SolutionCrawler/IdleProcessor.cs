@@ -28,7 +28,8 @@ namespace Microsoft.CodeAnalysis.SolutionCrawler
             IAsynchronousOperationListener listener,
             int backOffTimeSpanInMS,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             Listener = listener;
             CancellationToken = cancellationToken;
 
@@ -74,7 +75,8 @@ namespace Microsoft.CodeAnalysis.SolutionCrawler
                             CancellationToken
                         )
                         .ConfigureAwait(false)
-                ) {
+                )
+                {
                     // The delay terminated early to accommodate a blocking operation. Make sure to delay long
                     // enough that low priority (on idle) operations get a chance to be triggered.
                     //

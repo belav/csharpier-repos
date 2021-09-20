@@ -88,7 +88,8 @@ namespace System
         protected Delegate(
             [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)] Type target,
             string method
-        ) {
+        )
+        {
             if (target is null)
                 throw new ArgumentNullException(nameof(target));
 
@@ -113,7 +114,8 @@ namespace System
             object? firstArgument,
             MethodInfo method,
             bool throwOnBindFailure
-        ) {
+        )
+        {
             return CreateDelegate(type, firstArgument, method, throwOnBindFailure, true)!;
         }
 
@@ -121,7 +123,8 @@ namespace System
             Type type,
             MethodInfo method,
             bool throwOnBindFailure
-        ) {
+        )
+        {
             return CreateDelegate(type, null, method, throwOnBindFailure, false);
         }
 
@@ -131,7 +134,8 @@ namespace System
             MethodInfo method,
             bool throwOnBindFailure,
             bool allowClosed
-        ) {
+        )
+        {
             if (type is null)
                 throw new ArgumentNullException(nameof(type));
             if (method is null)
@@ -153,7 +157,8 @@ namespace System
                     allowClosed,
                     out DelegateData? delegate_data
                 )
-            ) {
+            )
+            {
                 if (throwOnBindFailure)
                     throw new ArgumentException(SR.Arg_DlgtTargMeth);
 
@@ -177,7 +182,8 @@ namespace System
             string method,
             bool ignoreCase,
             bool throwOnBindFailure
-        ) {
+        )
+        {
             if (type is null)
                 throw new ArgumentNullException(nameof(type));
             if (target is null)
@@ -214,7 +220,8 @@ namespace System
             string method,
             bool ignoreCase,
             bool throwOnBindFailure
-        ) {
+        )
+        {
             if (type is null)
                 throw new ArgumentNullException(nameof(type));
             if (target is null)
@@ -258,7 +265,8 @@ namespace System
             string method,
             BindingFlags bflags,
             bool ignoreCase
-        ) {
+        )
+        {
             MethodInfo? invoke = GetDelegateInvokeMethod(type);
             if (invoke is null)
                 return null;
@@ -309,7 +317,8 @@ namespace System
             MethodInfo method,
             bool allowClosed,
             out DelegateData? delegateData
-        ) {
+        )
+        {
             MethodInfo? invoke = GetDelegateInvokeMethod(type);
             if (invoke == null || !IsReturnTypeMatch(invoke.ReturnType!, method.ReturnType!))
             {
@@ -517,7 +526,8 @@ namespace System
             Type delArgType,
             Type argType,
             bool boxedThis
-        ) {
+        )
+        {
             bool match;
             if (argType.IsValueType)
                 match =

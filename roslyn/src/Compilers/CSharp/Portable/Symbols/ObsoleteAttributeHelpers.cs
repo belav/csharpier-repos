@@ -31,7 +31,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             EntityHandle token,
             PEModuleSymbol containingModule,
             bool ignoreByRefLikeMarker
-        ) {
+        )
+        {
             if (ReferenceEquals(data, ObsoleteAttributeData.Uninitialized))
             {
                 ObsoleteAttributeData obsoleteAttributeData = GetObsoleteDataFromMetadata(
@@ -55,7 +56,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             EntityHandle token,
             PEModuleSymbol containingModule,
             bool ignoreByRefLikeMarker
-        ) {
+        )
+        {
             var obsoleteAttributeData =
                 containingModule.Module.TryGetDeprecatedOrExperimentalOrObsoleteAttribute(
                     token,
@@ -117,7 +119,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             Symbol symbol,
             Symbol containingMember,
             bool forceComplete = false
-        ) {
+        )
+        {
             switch (symbol.ObsoleteKind)
             {
                 case ObsoleteAttributeKind.None:

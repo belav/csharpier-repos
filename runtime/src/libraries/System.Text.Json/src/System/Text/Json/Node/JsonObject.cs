@@ -34,7 +34,8 @@ namespace System.Text.Json.Node
         public JsonObject(
             IEnumerable<KeyValuePair<string, JsonNode?>> properties,
             JsonNodeOptions? options = null
-        ) {
+        )
+        {
             foreach (KeyValuePair<string, JsonNode?> node in properties)
             {
                 Add(node.Key, node.Value);

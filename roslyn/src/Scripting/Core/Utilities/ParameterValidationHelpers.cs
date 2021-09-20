@@ -17,7 +17,8 @@ namespace Microsoft.CodeAnalysis.Scripting
         internal static ImmutableArray<T> CheckImmutableArray<T>(
             ImmutableArray<T> items,
             string parameterName
-        ) {
+        )
+        {
             if (items.IsDefault)
             {
                 throw new ArgumentNullException(parameterName);
@@ -79,8 +80,9 @@ namespace Microsoft.CodeAnalysis.Scripting
             IEnumerable<T> items,
             string parameterName,
             Func<T, S> selector
-        ) where T : class
-          where S : class
+        )
+            where T : class
+            where S : class
         {
             RequireNonNull(items, parameterName);
             return items.Select(item => (item != null) ? selector(item) : null);

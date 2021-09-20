@@ -223,7 +223,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Http2
                     initiator,
                     GracefulCloseInitiator.None
                 ) == GracefulCloseInitiator.None
-            ) {
+            )
+            {
                 Input.CancelPendingRead();
             }
         }
@@ -284,7 +285,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Http2
                                 _serverSettings.MaxFrameSize,
                                 out var framePayload
                             )
-                        ) {
+                        )
+                        {
                             frameReceived = true;
                             Log.Http2FrameReceived(ConnectionId, _incomingFrame);
 
@@ -506,7 +508,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Http2
             in ReadOnlySequence<byte> buffer,
             out SequencePosition consumed,
             out SequencePosition examined
-        ) {
+        )
+        {
             consumed = buffer.Start;
             examined = buffer.End;
 
@@ -595,7 +598,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Http2
             if (
                 _incomingFrame.DataHasPadding
                 && _incomingFrame.DataPadLength >= _incomingFrame.PayloadLength
-            ) {
+            )
+            {
                 throw new Http2ConnectionErrorException(
                     CoreStrings.FormatHttp2ErrorPaddingTooLong(_incomingFrame.Type),
                     Http2ErrorCode.PROTOCOL_ERROR
@@ -687,7 +691,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Http2
             if (
                 _incomingFrame.HeadersHasPadding
                 && _incomingFrame.HeadersPadLength >= _incomingFrame.PayloadLength - 1
-            ) {
+            )
+            {
                 throw new Http2ConnectionErrorException(
                     CoreStrings.FormatHttp2ErrorPaddingTooLong(_incomingFrame.Type),
                     Http2ErrorCode.PROTOCOL_ERROR
@@ -697,7 +702,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Http2
             if (
                 _incomingFrame.HeadersHasPriority
                 && _incomingFrame.HeadersStreamDependency == _incomingFrame.StreamId
-            ) {
+            )
+            {
                 throw new Http2ConnectionErrorException(
                     CoreStrings.FormatHttp2ErrorStreamSelfDependency(
                         _incomingFrame.Type,
@@ -1168,7 +1174,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Http2
                     !_frameWriter.TryUpdateConnectionWindow(
                         _incomingFrame.WindowUpdateSizeIncrement
                     )
-                ) {
+                )
+                {
                     throw new Http2ConnectionErrorException(
                         CoreStrings.Http2ErrorWindowUpdateSizeInvalid,
                         Http2ErrorCode.FLOW_CONTROL_ERROR
@@ -1327,7 +1334,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Http2
                 if (
                     (_headerFlags & Http2HeadersFrameFlags.END_STREAM)
                     == Http2HeadersFrameFlags.END_STREAM
-                ) {
+                )
+                {
                     _currentHeadersStream.OnEndStreamReceived();
                 }
 
@@ -1335,7 +1343,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Http2
                     !_isMethodConnect
                     && (_parsedPseudoHeaderFields & _mandatoryRequestPseudoHeaderFields)
                         != _mandatoryRequestPseudoHeaderFields
-                ) {
+                )
+                {
                     // All HTTP/2 requests MUST include exactly one valid value for the :method, :scheme, and :path pseudo-header
                     // fields, unless it is a CONNECT request (Section 8.3). An HTTP request that omits mandatory pseudo-header
                     // fields is malformed (Section 8.1.2.6).
@@ -1479,7 +1488,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Http2
                     stream.EndStreamReceived
                     || stream.RstStreamReceived
                     || stream.DrainExpirationTicks < now
-                ) {
+                )
+                {
                     if (stream == _currentHeadersStream)
                     {
                         // The drain expired out while receiving trailers. The most recent incoming frame is either a header or continuation frame for the timed out stream.
@@ -1558,7 +1568,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Http2
                 if (
                     _gracefulCloseInitiator == GracefulCloseInitiator.Server
                     && _clientActiveStreamCount > 0
-                ) {
+                )
+                {
                     _frameWriter.WriteGoAwayAsync(int.MaxValue, Http2ErrorCode.NO_ERROR).Preserve();
                 }
             }
@@ -1624,7 +1635,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Http2
             bool indexedValue,
             ReadOnlySpan<byte> name,
             ReadOnlySpan<byte> value
-        ) {
+        )
+        {
             Debug.Assert(_currentHeadersStream != null);
 
             // https://tools.ietf.org/html/rfc7540#section-6.5.2
@@ -1633,7 +1645,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Http2
             if (
                 _totalParsedHeaderSize
                 > _context.ServiceContext.ServerOptions.Limits.MaxRequestHeadersTotalSize
-            ) {
+            )
+            {
                 throw new Http2ConnectionErrorException(
                     CoreStrings.BadRequest_HeadersExceedMaxTotalSize,
                     Http2ErrorCode.PROTOCOL_ERROR
@@ -1751,7 +1764,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Http2
         private void UpdateHeaderParsingState(
             ReadOnlySpan<byte> value,
             PseudoHeaderFields headerField
-        ) {
+        )
+        {
             // http://httpwg.org/specs/rfc7540.html#rfc.section.8.1.2.1
             /*
                Intermediaries that process HTTP requests or responses (i.e., any
@@ -1868,7 +1882,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Http2
         private static bool IsConnectionSpecificHeaderField(
             ReadOnlySpan<byte> name,
             ReadOnlySpan<byte> value
-        ) {
+        )
+        {
             return name.SequenceEqual(ConnectionBytes)
                 || (name.SequenceEqual(TeBytes) && !value.SequenceEqual(TrailersBytes));
         }
@@ -1909,7 +1924,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Http2
                     if (
                         (readResult.IsCompleted && readResult.Buffer.Length == 0)
                         || readResult.IsCanceled
-                    ) {
+                    )
+                    {
                         // FIN
                         break;
                     }

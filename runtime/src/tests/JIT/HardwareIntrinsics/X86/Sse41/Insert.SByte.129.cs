@@ -411,7 +411,8 @@ namespace JIT.HardwareIntrinsics.X86
             SByte scalarData,
             void* result,
             [CallerMemberName] string method = ""
-        ) {
+        )
+        {
             SByte[] inArray = new SByte[Op1ElementCount];
             SByte[] outArray = new SByte[RetElementCount];
 
@@ -430,7 +431,8 @@ namespace JIT.HardwareIntrinsics.X86
             SByte scalarData,
             void* result,
             [CallerMemberName] string method = ""
-        ) {
+        )
+        {
             SByte[] inArray = new SByte[Op1ElementCount];
             SByte[] outArray = new SByte[RetElementCount];
 
@@ -453,7 +455,8 @@ namespace JIT.HardwareIntrinsics.X86
             SByte scalarData,
             SByte[] result,
             [CallerMemberName] string method = ""
-        ) {
+        )
+        {
             bool succeeded = true;
 
             for (var i = 0; i < RetElementCount; i++)

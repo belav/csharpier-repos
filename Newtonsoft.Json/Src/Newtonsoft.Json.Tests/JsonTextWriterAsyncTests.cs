@@ -333,7 +333,8 @@ namespace Newtonsoft.Json.Tests
                     Indentation = 2,
                     Formatting = Formatting.Indented
                 }
-            ) {
+            )
+            {
                 await jsonWriter.WriteStartObjectAsync();
                 await jsonWriter.WritePropertyNameAsync("prop");
                 await jsonWriter.WriteValueAsync(true);
@@ -1079,7 +1080,8 @@ namespace Newtonsoft.Json.Tests
 
             using (
                 JsonWriter jsonWriter = new JsonTextWriter(sw) { Formatting = Formatting.Indented }
-            ) {
+            )
+            {
                 await jsonWriter.WriteStartArrayAsync();
 
                 await jsonWriter.WriteValueAsync(int.MaxValue);
@@ -1623,7 +1625,8 @@ _____'propertyName': NaN,
             string s,
             char delimiter,
             bool appendDelimiters
-        ) {
+        )
+        {
             // leading delimiter
             if (appendDelimiters)
             {
@@ -2157,7 +2160,8 @@ null//comment
         public override Task WritePropertyNameAsync(
             string name,
             CancellationToken cancellationToken = default(CancellationToken)
-        ) {
+        )
+        {
             return WritePropertyNameAsync(name, true, cancellationToken);
         }
 
@@ -2165,7 +2169,8 @@ null//comment
             string name,
             bool escape,
             CancellationToken cancellationToken = default(CancellationToken)
-        ) {
+        )
+        {
             await SetWriteStateAsync(JsonToken.PropertyName, name, cancellationToken);
 
             if (QuoteName)
@@ -2185,7 +2190,8 @@ null//comment
 
         public override async Task WriteNullAsync(
             CancellationToken cancellationToken = default(CancellationToken)
-        ) {
+        )
+        {
             await SetWriteStateAsync(JsonToken.Null, null, cancellationToken);
 
             await _writer.WriteAsync("NULL!!!");
@@ -2193,7 +2199,8 @@ null//comment
 
         public override async Task WriteStartObjectAsync(
             CancellationToken cancellationToken = default(CancellationToken)
-        ) {
+        )
+        {
             await SetWriteStateAsync(JsonToken.StartObject, null, cancellationToken);
 
             await _writer.WriteAsync("{{{");
@@ -2201,7 +2208,8 @@ null//comment
 
         public override Task WriteEndObjectAsync(
             CancellationToken cancellationToken = default(CancellationToken)
-        ) {
+        )
+        {
             return SetWriteStateAsync(JsonToken.EndObject, null, cancellationToken);
         }
 

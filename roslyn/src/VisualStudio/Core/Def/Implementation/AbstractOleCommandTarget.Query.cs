@@ -17,7 +17,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation
             uint commandCount,
             OLECMD[] prgCmds,
             IntPtr commandText
-        ) {
+        )
+        {
             Contract.ThrowIfFalse(commandCount == 1);
             Contract.ThrowIfFalse(prgCmds.Length == 1);
 
@@ -48,7 +49,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation
             uint commandCount,
             OLECMD[] prgCmds,
             IntPtr commandText
-        ) {
+        )
+        {
             switch ((VSConstants.VSStd14CmdID)prgCmds[0].cmdID)
             {
                 case VSConstants.VSStd14CmdID.SmartBreakLine:

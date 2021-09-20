@@ -15,7 +15,8 @@ namespace CodeGenerator
             string namespaceName,
             string className,
             IEnumerable<(string Name, string Value)> allProperties
-        ) {
+        )
+        {
             var properties = allProperties.Select(
                 (p, index) => new Property { Data = p, Index = index }
             );

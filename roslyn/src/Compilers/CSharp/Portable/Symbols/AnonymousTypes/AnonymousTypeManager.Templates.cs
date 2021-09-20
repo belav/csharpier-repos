@@ -54,7 +54,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                 BitVector byRefs,
                 bool returnsVoid,
                 int generation
-            ) {
+            )
+            {
                 _parameterCount = (ushort)parameterCount;
                 _returnsVoid = returnsVoid;
                 _generation = generation;
@@ -102,7 +103,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             public SynthesizedDelegateValue(
                 AnonymousTypeManager manager,
                 SynthesizedDelegateSymbol @delegate
-            ) {
+            )
+            {
                 Debug.Assert(manager != null && (object)@delegate != null);
                 this.Manager = manager;
                 this.Delegate = @delegate;
@@ -207,7 +209,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             BitVector byRefParameters,
             bool returnsVoid,
             int generation
-        ) {
+        )
+        {
             // parameterCount doesn't include return type
             Debug.Assert(byRefParameters.IsNull || parameterCount == byRefParameters.Capacity);
 
@@ -250,7 +253,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
         /// </summary>
         private NamedTypeSymbol ConstructAnonymousTypeImplementationSymbol(
             AnonymousTypePublicSymbol anonymous
-        ) {
+        )
+        {
             Debug.Assert(ReferenceEquals(this, anonymous.Manager));
 
             CheckSourceLocationSeen(anonymous);
@@ -288,7 +292,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
 
         private AnonymousTypeTemplateSymbol CreatePlaceholderTemplate(
             Microsoft.CodeAnalysis.Emit.AnonymousTypeKey key
-        ) {
+        )
+        {
             var fields = key.Fields.SelectAsArray(
                 f => new AnonymousTypeField(f.Name, Location.None, default)
             );
@@ -304,7 +309,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             MethodCompiler compiler,
             PEModuleBuilder moduleBeingBuilt,
             BindingDiagnosticBag diagnostics
-        ) {
+        )
+        {
             // Ensure all previous anonymous type templates are included so the
             // types are available for subsequent edit and continue generations.
             foreach (var key in moduleBeingBuilt.GetPreviousAnonymousTypes())
@@ -400,7 +406,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
         /// </summary>
         private void GetCreatedAnonymousTypeTemplates(
             ArrayBuilder<AnonymousTypeTemplateSymbol> builder
-        ) {
+        )
+        {
             Debug.Assert(!builder.Any());
             var anonymousTypes = _lazyAnonymousTypeTemplates;
             if (anonymousTypes != null)
@@ -514,7 +521,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
         /// </summary>
         internal static ImmutableArray<MethodSymbol> GetAnonymousTypeHiddenMethods(
             NamedTypeSymbol type
-        ) {
+        )
+        {
             Debug.Assert((object)type != null);
             return ((AnonymousTypeTemplateSymbol)type).SpecialMembers;
         }
@@ -543,7 +551,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                 var member in ((NamedTypeSymbol)translatedType.OriginalDefinition).GetMembers(
                     method.Name
                 )
-            ) {
+            )
+            {
                 if (member.Kind == SymbolKind.Method)
                 {
                     // found a method definition, get a constructed method

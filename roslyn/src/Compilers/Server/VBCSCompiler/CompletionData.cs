@@ -40,7 +40,8 @@ namespace Microsoft.CodeAnalysis.CompilerServer
             CompletionReason reason,
             TimeSpan? newKeepAlive = null,
             bool shutdownRequested = false
-        ) {
+        )
+        {
             Reason = reason;
             NewKeepAlive = newKeepAlive;
             ShutdownRequest = shutdownRequested;

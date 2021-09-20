@@ -53,7 +53,8 @@ namespace Microsoft.CodeAnalysis.Remote
             IAliasSymbol alias,
             Document document,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             return alias == null
               ? null
               : Dehydrate(document.Project.Solution, alias, cancellationToken);
@@ -63,7 +64,8 @@ namespace Microsoft.CodeAnalysis.Remote
             Solution solution,
             ISymbol symbol,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var project = solution.GetOriginatingProject(symbol);
             Contract.ThrowIfNull(
                 project,
@@ -84,7 +86,8 @@ namespace Microsoft.CodeAnalysis.Remote
             Solution solution,
             CancellationToken cancellationToken,
             out SerializableSymbolAndProjectId result
-        ) {
+        )
+        {
             var project = solution.GetOriginatingProject(symbol);
             if (project == null)
             {
@@ -100,7 +103,8 @@ namespace Microsoft.CodeAnalysis.Remote
             Project project,
             CancellationToken cancellationToken,
             out SerializableSymbolAndProjectId result
-        ) {
+        )
+        {
             if (!SymbolKey.CanCreate(symbol, cancellationToken))
             {
                 result = null;
@@ -117,7 +121,8 @@ namespace Microsoft.CodeAnalysis.Remote
         public async Task<ISymbol> TryRehydrateAsync(
             Solution solution,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var projectId = ProjectId;
             var project = solution.GetProject(projectId);
             var compilation = await project.GetCompilationAsync(cancellationToken)
@@ -183,7 +188,8 @@ namespace Microsoft.CodeAnalysis.Remote
             SymbolUsageInfo symbolUsageInfo,
             ImmutableDictionary<string, string> additionalProperties,
             CandidateReason candidateReason
-        ) {
+        )
+        {
             Document = document;
             Alias = alias;
             Location = location;
@@ -196,7 +202,8 @@ namespace Microsoft.CodeAnalysis.Remote
         public static SerializableReferenceLocation Dehydrate(
             ReferenceLocation referenceLocation,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             return new SerializableReferenceLocation(
                 referenceLocation.Document.Id,
                 SerializableSymbolAndProjectId.Dehydrate(
@@ -215,7 +222,8 @@ namespace Microsoft.CodeAnalysis.Remote
         public async Task<ReferenceLocation> RehydrateAsync(
             Solution solution,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var document = solution.GetDocument(this.Document);
             var syntaxTree = await document.GetSyntaxTreeAsync(cancellationToken)
                 .ConfigureAwait(false);
@@ -237,7 +245,8 @@ namespace Microsoft.CodeAnalysis.Remote
         private async Task<IAliasSymbol> RehydrateAliasAsync(
             Solution solution,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             if (Alias == null)
                 return null;
 
@@ -288,7 +297,8 @@ namespace Microsoft.CodeAnalysis.Remote
             Solution solution,
             SymbolGroup group,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             return new SerializableSymbolGroup(
                 new HashSet<SerializableSymbolAndProjectId>(
                     group.Symbols.Select(

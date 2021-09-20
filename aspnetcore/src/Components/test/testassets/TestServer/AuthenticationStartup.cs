@@ -17,7 +17,8 @@ namespace TestServer
         public AuthenticationStartupBase(
             IConfiguration configuration,
             Action<IEndpointRouteBuilder> configureMode
-        ) {
+        )
+        {
             Configuration = configuration;
             _configureMode = configureMode;
         }

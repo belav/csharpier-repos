@@ -119,7 +119,8 @@ namespace Microsoft.AspNetCore.Tests
         public async Task CreateDefaultBuilder_InitializesDependencyInjectionSettingsBasedOnEnv(
             string environment,
             string expected
-        ) {
+        )
+        {
             var applicationName = "DependencyInjectionApp";
             await ExecuteTestApp(
                 applicationName,
@@ -170,7 +171,8 @@ namespace Microsoft.AspNetCore.Tests
                         "http://127.0.0.1:0",
                         context => context.Response.WriteAsync("Hello, World!")
                     )
-                ) {
+                )
+                {
                     var factory = (ILoggerFactory)webHost.Services.GetService(
                         typeof(ILoggerFactory)
                     );
@@ -233,7 +235,8 @@ namespace Microsoft.AspNetCore.Tests
                     deploymentParameters,
                     LoggerFactory
                 )
-            ) {
+            )
+            {
                 var deploymentResult = await deployer.DeployAsync();
                 var response = await RetryHelper.RetryRequest(
                     () => deploymentResult.HttpClient.GetAsync(string.Empty),
@@ -262,7 +265,8 @@ namespace Microsoft.AspNetCore.Tests
         private async Task ExecuteStartOrStartWithTest(
             Func<DeploymentResult, Task<HttpResponseMessage>> getResponse,
             string applicationName
-        ) {
+        )
+        {
             await ExecuteTestApp(
                 applicationName,
                 async (deploymentResult, logger) =>
@@ -293,7 +297,8 @@ namespace Microsoft.AspNetCore.Tests
             Func<DeploymentResult, ILogger, Task> assertAction,
             bool setTestEnvVars = false,
             string environment = "Development"
-        ) {
+        )
+        {
             var deploymentParameters = new DeploymentParameters(
                 Path.Combine(GetTestSitesPath(), applicationName),
                 ServerType.Kestrel,
@@ -313,7 +318,8 @@ namespace Microsoft.AspNetCore.Tests
                     deploymentParameters,
                     LoggerFactory
                 )
-            ) {
+            )
+            {
                 var deploymentResult = await deployer.DeployAsync();
 
                 await assertAction(deploymentResult, Logger);
@@ -323,7 +329,8 @@ namespace Microsoft.AspNetCore.Tests
         private static void SetEnvironmentVariables(
             DeploymentParameters deploymentParameters,
             string environment
-        ) {
+        )
+        {
             deploymentParameters.EnvironmentVariables.Add(
                 new KeyValuePair<string, string>("aspnetcore_environment", environment)
             );

@@ -57,7 +57,8 @@ namespace Microsoft.CodeAnalysis.ExpressionEvaluator
             int count2,
             out int startIndex3,
             out int count3
-        ) {
+        )
+        {
             startIndex3 = Math.Max(startIndex1, startIndex2);
             int endIndex3 = Math.Min(startIndex1 + count1, startIndex2 + count2);
             count3 = Math.Max(endIndex3 - startIndex3, 0);

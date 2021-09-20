@@ -270,7 +270,8 @@ WHERE (c[""Discriminator""] = ""Customer"")"
         [ConditionalTheory(Skip = "Issue#17246")]
         public override async Task Default_if_empty_top_level_followed_by_projecting_constant(
             bool async
-        ) {
+        )
+        {
             await base.Default_if_empty_top_level_followed_by_projecting_constant(async);
 
             AssertSql(
@@ -301,7 +302,8 @@ WHERE ((c[""Discriminator""] = ""Employee"") AND (c[""EmployeeID""] > 0))"
         [ConditionalTheory(Skip = "Issue #17246")]
         public override Task Default_if_empty_top_level_arg_followed_by_projecting_constant(
             bool async
-        ) {
+        )
+        {
             return base.Default_if_empty_top_level_arg_followed_by_projecting_constant(async);
         }
 
@@ -356,7 +358,8 @@ WHERE (c[""Discriminator""] = ""Employee"")"
         [ConditionalTheory(Skip = "Issue #17246")]
         public override async Task Where_query_composition_entity_equality_one_element_SingleOrDefault(
             bool async
-        ) {
+        )
+        {
             await base.Where_query_composition_entity_equality_one_element_SingleOrDefault(async);
 
             AssertSql(
@@ -375,7 +378,8 @@ WHERE (c[""Discriminator""] = ""Employee"")"
         [ConditionalTheory(Skip = "Issue#17246")]
         public override async Task Where_query_composition_entity_equality_one_element_FirstOrDefault(
             bool async
-        ) {
+        )
+        {
             await base.Where_query_composition_entity_equality_one_element_FirstOrDefault(async);
 
             AssertSql(
@@ -394,7 +398,8 @@ WHERE (c[""Discriminator""] = ""Employee"")"
         [ConditionalTheory(Skip = "Issue #17246")]
         public override async Task Where_query_composition_entity_equality_no_elements_SingleOrDefault(
             bool async
-        ) {
+        )
+        {
             await base.Where_query_composition_entity_equality_no_elements_SingleOrDefault(async);
 
             AssertSql(
@@ -413,7 +418,8 @@ WHERE (c[""Discriminator""] = ""Employee"")"
         [ConditionalTheory(Skip = "Issue#17246")]
         public override async Task Where_query_composition_entity_equality_no_elements_FirstOrDefault(
             bool async
-        ) {
+        )
+        {
             await base.Where_query_composition_entity_equality_no_elements_FirstOrDefault(async);
 
             AssertSql(
@@ -432,7 +438,8 @@ WHERE (c[""Discriminator""] = ""Employee"")"
         [ConditionalTheory(Skip = "Issue #17246")]
         public override Task Where_query_composition_entity_equality_multiple_elements_SingleOrDefault(
             bool async
-        ) {
+        )
+        {
             return base.Where_query_composition_entity_equality_multiple_elements_SingleOrDefault(
                 async
             );
@@ -441,14 +448,16 @@ WHERE (c[""Discriminator""] = ""Employee"")"
         [ConditionalTheory(Skip = "Issue #17246")]
         public override Task Where_query_composition_entity_equality_multiple_elements_Single(
             bool async
-        ) {
+        )
+        {
             return base.Where_query_composition_entity_equality_multiple_elements_Single(async);
         }
 
         [ConditionalTheory(Skip = "Issue#17246")]
         public override async Task Where_query_composition_entity_equality_multiple_elements_FirstOrDefault(
             bool async
-        ) {
+        )
+        {
             await base.Where_query_composition_entity_equality_multiple_elements_FirstOrDefault(
                 async
             );
@@ -463,7 +472,8 @@ WHERE (c[""Discriminator""] = ""Employee"")"
         [ConditionalTheory(Skip = "Issue #17246")]
         public override Task Where_query_composition_entity_equality_multiple_elements_First(
             bool async
-        ) {
+        )
+        {
             return base.Where_query_composition_entity_equality_multiple_elements_First(async);
         }
 
@@ -494,7 +504,8 @@ WHERE (c[""Discriminator""] = ""Employee"")"
         [ConditionalTheory(Skip = "Issue #17246")]
         public override async Task Where_query_composition2_FirstOrDefault_with_anonymous(
             bool async
-        ) {
+        )
+        {
             await base.Where_query_composition2_FirstOrDefault_with_anonymous(async);
 
             AssertSql(
@@ -720,7 +731,8 @@ WHERE (c[""Discriminator""] = ""Customer"")"
         [ConditionalTheory(Skip = "Issue #17246")]
         public override async Task Join_Customers_Orders_Skip_Take_followed_by_constant_projection(
             bool async
-        ) {
+        )
+        {
             await base.Join_Customers_Orders_Skip_Take_followed_by_constant_projection(async);
 
             AssertSql(
@@ -733,7 +745,8 @@ WHERE (c[""Discriminator""] = ""Customer"")"
         [ConditionalTheory(Skip = "Issue #17246")]
         public override async Task Join_Customers_Orders_Projection_With_String_Concat_Skip_Take(
             bool async
-        ) {
+        )
+        {
             await base.Join_Customers_Orders_Projection_With_String_Concat_Skip_Take(async);
 
             AssertSql(
@@ -746,7 +759,8 @@ WHERE (c[""Discriminator""] = ""Customer"")"
         [ConditionalTheory(Skip = "Issue #17246")]
         public override async Task Join_Customers_Orders_Orders_Skip_Take_Same_Properties(
             bool async
-        ) {
+        )
+        {
             await base.Join_Customers_Orders_Orders_Skip_Take_Same_Properties(async);
 
             AssertSql(
@@ -2138,7 +2152,8 @@ WHERE (c[""Discriminator""] = ""Customer"")"
         [ConditionalTheory(Skip = "Issue #17246")]
         public override async Task Select_DTO_with_member_init_distinct_in_subquery_translated_to_server(
             bool async
-        ) {
+        )
+        {
             await base.Select_DTO_with_member_init_distinct_in_subquery_translated_to_server(async);
 
             AssertSql(
@@ -2673,7 +2688,8 @@ WHERE (c[""Discriminator""] = ""Customer"")"
         [ConditionalTheory(Skip = "Issue #17246")]
         public override async Task Handle_materialization_properly_when_more_than_two_query_sources_are_involved(
             bool async
-        ) {
+        )
+        {
             await base.Handle_materialization_properly_when_more_than_two_query_sources_are_involved(
                 async
             );
@@ -2712,7 +2728,8 @@ WHERE (c[""Discriminator""] = ""Order"")"
         [ConditionalTheory(Skip = "Issue #17246")]
         public override async Task Subquery_member_pushdown_does_not_change_original_subquery_model(
             bool async
-        ) {
+        )
+        {
             await base.Subquery_member_pushdown_does_not_change_original_subquery_model(async);
 
             AssertSql(
@@ -2839,7 +2856,8 @@ WHERE ((c[""Discriminator""] = ""Order"") AND (c[""OrderDate""] != null))"
 
         public override async Task Select_expression_date_add_milliseconds_above_the_range(
             bool async
-        ) {
+        )
+        {
             await base.Select_expression_date_add_milliseconds_above_the_range(async);
 
             AssertSql(
@@ -2851,7 +2869,8 @@ WHERE ((c[""Discriminator""] = ""Order"") AND (c[""OrderDate""] != null))"
 
         public override async Task Select_expression_date_add_milliseconds_below_the_range(
             bool async
-        ) {
+        )
+        {
             await base.Select_expression_date_add_milliseconds_below_the_range(async);
 
             AssertSql(
@@ -2863,7 +2882,8 @@ WHERE ((c[""Discriminator""] = ""Order"") AND (c[""OrderDate""] != null))"
 
         public override async Task Select_expression_date_add_milliseconds_large_number_divided(
             bool async
-        ) {
+        )
+        {
             await base.Select_expression_date_add_milliseconds_large_number_divided(async);
 
             AssertSql(
@@ -2888,7 +2908,8 @@ ORDER BY c[""OrderID""]"
         [ConditionalTheory(Skip = "Issue #17246")]
         public override async Task Select_expression_references_are_updated_correctly_with_subquery(
             bool async
-        ) {
+        )
+        {
             await base.Select_expression_references_are_updated_correctly_with_subquery(async);
 
             AssertSql(
@@ -3092,7 +3113,8 @@ WHERE (c[""Discriminator""] = ""Customer"")"
         [ConditionalTheory(Skip = "Issue #17246")]
         public override async Task No_orderby_added_for_fully_translated_manually_constructed_LOJ(
             bool async
-        ) {
+        )
+        {
             await base.No_orderby_added_for_fully_translated_manually_constructed_LOJ(async);
 
             AssertSql(
@@ -3104,7 +3126,8 @@ WHERE (c[""Discriminator""] = ""Employee"")"
 
         public override async Task No_orderby_added_for_client_side_GroupJoin_dependent_to_principal_LOJ(
             bool async
-        ) {
+        )
+        {
             await base.No_orderby_added_for_client_side_GroupJoin_dependent_to_principal_LOJ(async);
 
             AssertSql(
@@ -3116,7 +3139,8 @@ WHERE (c[""Discriminator""] = ""Order"")"
 
         public override async Task No_orderby_added_for_client_side_GroupJoin_dependent_to_principal_LOJ_with_additional_join_condition1(
             bool async
-        ) {
+        )
+        {
             await base.No_orderby_added_for_client_side_GroupJoin_dependent_to_principal_LOJ_with_additional_join_condition1(
                 async
             );
@@ -3130,7 +3154,8 @@ WHERE (c[""Discriminator""] = ""Order"")"
 
         public override async Task No_orderby_added_for_client_side_GroupJoin_dependent_to_principal_LOJ_with_additional_join_condition2(
             bool async
-        ) {
+        )
+        {
             await base.No_orderby_added_for_client_side_GroupJoin_dependent_to_principal_LOJ_with_additional_join_condition2(
                 async
             );
@@ -3144,7 +3169,8 @@ WHERE (c[""Discriminator""] = ""Order"")"
 
         public override async Task Orderby_added_for_client_side_GroupJoin_principal_to_dependent_LOJ(
             bool async
-        ) {
+        )
+        {
             await base.Orderby_added_for_client_side_GroupJoin_principal_to_dependent_LOJ(async);
 
             AssertSql(
@@ -3169,7 +3195,8 @@ WHERE (c[""Discriminator""] = ""Order"")"
         [ConditionalTheory(Skip = "Issue #17246")]
         public override async Task Contains_with_subquery_involving_join_binds_to_correct_table(
             bool async
-        ) {
+        )
+        {
             await AssertQuery(
                 async,
                 ss =>
@@ -3196,7 +3223,8 @@ WHERE (c[""Discriminator""] = ""Order"")"
         [ConditionalTheory(Skip = "Issue #17246")]
         public override async Task Complex_query_with_repeated_query_model_compiles_correctly(
             bool async
-        ) {
+        )
+        {
             await base.Complex_query_with_repeated_query_model_compiles_correctly(async);
 
             AssertSql(
@@ -3209,7 +3237,8 @@ WHERE ((c[""Discriminator""] = ""Customer"") AND (c[""CustomerID""] = ""ALFKI"")
         [ConditionalTheory(Skip = "Issue #17246")]
         public override async Task Complex_query_with_repeated_nested_query_model_compiles_correctly(
             bool async
-        ) {
+        )
+        {
             await base.Complex_query_with_repeated_nested_query_model_compiles_correctly(async);
 
             AssertSql(
@@ -3900,7 +3929,8 @@ WHERE ((c[""Discriminator""] = ""Customer"") AND (c[""CustomerID""] = ""ALFKI"")
         [ConditionalTheory(Skip = "Issue #17246")]
         public override async Task Comparing_non_matching_collection_navigations_using_Equals(
             bool async
-        ) {
+        )
+        {
             await AssertQuery(
                 async,
                 ss =>
@@ -3958,7 +3988,8 @@ WHERE (c[""Discriminator""] = ""Customer"")"
         [ConditionalTheory(Skip = "Issue #17246")]
         public override async Task Compare_two_collection_navigations_with_different_query_sources(
             bool async
-        ) {
+        )
+        {
             await base.Compare_two_collection_navigations_with_different_query_sources(async);
 
             AssertSql(
@@ -3983,7 +4014,8 @@ WHERE (c[""Discriminator""] = ""Customer"")"
         [ConditionalTheory(Skip = "Issue #17246")]
         public override async Task Compare_two_collection_navigations_with_different_property_chains(
             bool async
-        ) {
+        )
+        {
             await base.Compare_two_collection_navigations_with_different_property_chains(async);
 
             AssertSql(
@@ -4020,7 +4052,8 @@ WHERE (c[""Discriminator""] = ""Customer"")"
         [ConditionalTheory(Skip = "Issue #17246")]
         public override async Task Complex_nested_query_doesnt_try_binding_to_grandparent_when_parent_returns_complex_result(
             bool async
-        ) {
+        )
+        {
             await base.Complex_nested_query_doesnt_try_binding_to_grandparent_when_parent_returns_complex_result(
                 async
             );
@@ -4035,7 +4068,8 @@ WHERE ((c[""Discriminator""] = ""Customer"") AND (c[""CustomerID""] = ""ALFKI"")
         [ConditionalTheory(Skip = "Issue #17246")]
         public override async Task Complex_nested_query_properly_binds_to_grandparent_when_parent_returns_scalar_result(
             bool async
-        ) {
+        )
+        {
             await AssertQuery(
                 async,
                 ss =>
@@ -4282,7 +4316,8 @@ WHERE (c[""Discriminator""] = ""Customer"")"
         [ConditionalTheory(Skip = "Issue #17314")]
         public override async Task Dependent_to_principal_navigation_equal_to_null_for_subquery(
             bool async
-        ) {
+        )
+        {
             await AssertQuery(
                 async,
                 ss =>
@@ -4471,7 +4506,8 @@ WHERE (c[""Discriminator""] = ""Customer"")"
         [ConditionalTheory(Skip = "Issue #17246")]
         public override Task Select_DTO_with_member_init_distinct_in_subquery_translated_to_server_2(
             bool async
-        ) {
+        )
+        {
             return base.Select_DTO_with_member_init_distinct_in_subquery_translated_to_server_2(
                 async
             );
@@ -4589,7 +4625,8 @@ WHERE (c[""Discriminator""] = ""Customer"")"
         [ConditionalTheory(Skip = "Issue #17246")]
         public override Task Anonymous_projection_skip_take_empty_collection_FirstOrDefault(
             bool async
-        ) {
+        )
+        {
             return base.Anonymous_projection_skip_take_empty_collection_FirstOrDefault(async);
         }
 
@@ -4607,7 +4644,8 @@ ORDER BY c[""OrderID""]"
 
         public override async Task Checked_context_with_case_to_same_nullable_type_does_not_fail(
             bool isAsync
-        ) {
+        )
+        {
             await base.Checked_context_with_case_to_same_nullable_type_does_not_fail(isAsync);
 
             AssertSql(
@@ -4650,7 +4688,8 @@ WHERE ((c[""Discriminator""] = ""Customer"") AND (c[""CustomerID""] IN (""ALFKI"
         [ConditionalTheory(Skip = "Issue #17246")]
         public override Task Perform_identity_resolution_reuses_same_instances_across_joins(
             bool async
-        ) {
+        )
+        {
             return base.Perform_identity_resolution_reuses_same_instances_across_joins(async);
         }
 
@@ -4677,7 +4716,8 @@ WHERE ((c[""Discriminator""] = ""Customer"") AND (c[""CustomerID""] IN (""ALFKI"
         [ConditionalTheory(Skip = "Non embedded collection subquery Issue#17246")]
         public override Task Pending_selector_in_cardinality_reducing_method_is_applied_before_expanding_collection_navigation_member(
             bool async
-        ) {
+        )
+        {
             return base.Pending_selector_in_cardinality_reducing_method_is_applied_before_expanding_collection_navigation_member(
                 async
             );
@@ -4710,7 +4750,8 @@ WHERE ((c[""Discriminator""] = ""Customer"") AND (c[""CustomerID""] IN (""ALFKI"
         [ConditionalTheory(Skip = "DefaultIfEmpty Issue#17246")]
         public override Task DefaultIfEmpty_over_empty_collection_followed_by_projecting_constant(
             bool async
-        ) {
+        )
+        {
             return base.DefaultIfEmpty_over_empty_collection_followed_by_projecting_constant(async);
         }
 
@@ -4734,7 +4775,8 @@ WHERE ((c[""Discriminator""] = ""Customer"") AND (c[""CustomerID""] IN (""ALFKI"
 
         public override Task Using_static_string_Equals_with_StringComparison_throws_informative_error(
             bool async
-        ) {
+        )
+        {
             return AssertTranslationFailedWithDetails(
                 () =>
                     base.Using_static_string_Equals_with_StringComparison_throws_informative_error(
@@ -4746,7 +4788,8 @@ WHERE ((c[""Discriminator""] = ""Customer"") AND (c[""CustomerID""] IN (""ALFKI"
 
         public override Task Using_string_Equals_with_StringComparison_throws_informative_error(
             bool async
-        ) {
+        )
+        {
             return AssertTranslationFailedWithDetails(
                 () =>
                     base.Using_string_Equals_with_StringComparison_throws_informative_error(async),
@@ -4763,7 +4806,8 @@ WHERE ((c[""Discriminator""] = ""Customer"") AND (c[""CustomerID""] IN (""ALFKI"
         [ConditionalTheory(Skip = "Cross collection join Issue#17246")]
         public override Task Correlated_collection_with_distinct_without_default_identifiers_projecting_columns(
             bool async
-        ) {
+        )
+        {
             return base.Correlated_collection_with_distinct_without_default_identifiers_projecting_columns(
                 async
             );
@@ -4772,7 +4816,8 @@ WHERE ((c[""Discriminator""] = ""Customer"") AND (c[""CustomerID""] IN (""ALFKI"
         [ConditionalTheory(Skip = "Cross collection join Issue#17246")]
         public override Task Correlated_collection_with_distinct_without_default_identifiers_projecting_columns_with_navigation(
             bool async
-        ) {
+        )
+        {
             return base.Correlated_collection_with_distinct_without_default_identifiers_projecting_columns_with_navigation(
                 async
             );

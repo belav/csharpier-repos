@@ -31,7 +31,8 @@ namespace HostedInAspNet.Server
             IApplicationBuilder app,
             IWebHostEnvironment env,
             BootResourceRequestLog bootResourceRequestLog
-        ) {
+        )
+        {
             var mapAlternativePathApp = Configuration.GetValue<bool>("UseAlternativeBasePath");
             var mapAllApps = Configuration.GetValue<bool>("MapAllApps");
             app.Use(
@@ -46,7 +47,8 @@ namespace HostedInAspNet.Server
                             "/blazor.boot.json",
                             StringComparison.Ordinal
                         )
-                    ) {
+                    )
+                    {
                         bootResourceRequestLog.AddRequest(context.Request);
                     }
                     return next();

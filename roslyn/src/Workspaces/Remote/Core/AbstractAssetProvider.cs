@@ -30,7 +30,8 @@ namespace Microsoft.CodeAnalysis.Remote
         public async Task<(SolutionInfo, SerializableOptionSet)> CreateSolutionInfoAndOptionsAsync(
             Checksum solutionChecksum,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var solutionChecksums = await GetAssetAsync<SolutionStateChecksums>(
                     solutionChecksum,
                     cancellationToken
@@ -78,7 +79,8 @@ namespace Microsoft.CodeAnalysis.Remote
         public async Task<ProjectInfo> CreateProjectInfoAsync(
             Checksum projectChecksum,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var projectChecksums = await GetAssetAsync<ProjectStateChecksums>(
                     projectChecksum,
                     cancellationToken
@@ -172,7 +174,8 @@ namespace Microsoft.CodeAnalysis.Remote
         public async Task<DocumentInfo> CreateDocumentInfoAsync(
             Checksum documentChecksum,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var documentSnapshot = await GetAssetAsync<DocumentStateChecksums>(
                     documentChecksum,
                     cancellationToken
@@ -215,7 +218,8 @@ namespace Microsoft.CodeAnalysis.Remote
         private async Task<IEnumerable<DocumentInfo>> CreateDocumentInfosAsync(
             ChecksumCollection documentChecksums,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var documentInfos = new List<DocumentInfo>();
 
             foreach (var documentChecksum in documentChecksums)
@@ -233,7 +237,8 @@ namespace Microsoft.CodeAnalysis.Remote
         public async Task<List<T>> CreateCollectionAsync<T>(
             ChecksumCollection checksums,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var assets = new List<T>();
 
             foreach (var checksum in checksums)

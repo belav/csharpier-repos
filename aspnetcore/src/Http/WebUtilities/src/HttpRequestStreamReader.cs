@@ -76,7 +76,8 @@ namespace Microsoft.AspNetCore.WebUtilities
             int bufferSize,
             ArrayPool<byte> bytePool,
             ArrayPool<char> charPool
-        ) {
+        )
+        {
             _stream = stream ?? throw new ArgumentNullException(nameof(stream));
             _encoding = encoding ?? throw new ArgumentNullException(nameof(encoding));
             _bytePool = bytePool ?? throw new ArgumentNullException(nameof(bytePool));
@@ -276,7 +277,8 @@ namespace Microsoft.AspNetCore.WebUtilities
         public override async ValueTask<int> ReadAsync(
             Memory<char> buffer,
             CancellationToken cancellationToken = default
-        ) {
+        )
+        {
             if (_disposed)
             {
                 throw new ObjectDisposedException(nameof(HttpRequestStreamReader));

@@ -119,7 +119,8 @@ namespace Newtonsoft.Json.Utilities
         public static ConstructorInfo? ResolveEnumerableCollectionConstructor(
             Type collectionType,
             Type collectionItemType
-        ) {
+        )
+        {
             Type genericConstructorArgument = typeof(IList<>).MakeGenericType(collectionItemType);
 
             return ResolveEnumerableCollectionConstructor(
@@ -133,7 +134,8 @@ namespace Newtonsoft.Json.Utilities
             Type collectionType,
             Type collectionItemType,
             Type constructorArgumentType
-        ) {
+        )
+        {
             Type genericEnumerable = typeof(IEnumerable<>).MakeGenericType(collectionItemType);
             ConstructorInfo? match = null;
 
@@ -141,7 +143,8 @@ namespace Newtonsoft.Json.Utilities
                 ConstructorInfo constructor in collectionType.GetConstructors(
                     BindingFlags.Public | BindingFlags.Instance
                 )
-            ) {
+            )
+            {
                 IList<ParameterInfo> parameters = constructor.GetParameters();
 
                 if (parameters.Count == 1)
@@ -178,7 +181,8 @@ namespace Newtonsoft.Json.Utilities
             this IList<T> list,
             T value,
             IEqualityComparer<T> comparer
-        ) {
+        )
+        {
             if (list.ContainsValue(value, comparer))
             {
                 return false;
@@ -193,7 +197,8 @@ namespace Newtonsoft.Json.Utilities
             this IEnumerable<TSource> source,
             TSource value,
             IEqualityComparer<TSource> comparer
-        ) {
+        )
+        {
             if (comparer == null)
             {
                 comparer = EqualityComparer<TSource>.Default;
@@ -219,7 +224,8 @@ namespace Newtonsoft.Json.Utilities
             this IList<T> list,
             IEnumerable<T> values,
             IEqualityComparer<T> comparer
-        ) {
+        )
+        {
             bool allAdded = true;
             foreach (T value in values)
             {
@@ -328,7 +334,8 @@ namespace Newtonsoft.Json.Utilities
             IList values,
             Array multidimensionalArray,
             int[] indices
-        ) {
+        )
+        {
             int dimension = indices.Length;
             if (dimension == multidimensionalArray.Rank)
             {

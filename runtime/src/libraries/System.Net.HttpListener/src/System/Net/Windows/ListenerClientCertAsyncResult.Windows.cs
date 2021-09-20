@@ -85,7 +85,8 @@ namespace System.Net
             ListenerClientCertAsyncResult asyncResult,
             uint errorCode,
             uint numBytes
-        ) {
+        )
+        {
             HttpListenerRequest httpListenerRequest = (HttpListenerRequest)asyncResult.AsyncObject!;
             object? result = null;
             try
@@ -117,7 +118,8 @@ namespace System.Net
                             errorCode == Interop.HttpApi.ERROR_SUCCESS
                             && !HttpListener.SkipIOCPCallbackOnSuccess
                         )
-                    ) {
+                    )
+                    {
                         return;
                     }
                 }
@@ -200,7 +202,8 @@ namespace System.Net
             uint errorCode,
             uint numBytes,
             NativeOverlapped* nativeOverlapped
-        ) {
+        )
+        {
             ListenerClientCertAsyncResult asyncResult =
                 (ListenerClientCertAsyncResult)ThreadPoolBoundHandle.GetNativeOverlappedState(
                     nativeOverlapped

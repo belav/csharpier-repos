@@ -40,7 +40,8 @@ namespace Microsoft.AspNetCore.Mvc.TagHelpers
             string src,
             string srcOutput,
             string expectedSrcPrefix
-        ) {
+        )
+        {
             // Arrange
             var allAttributes = new TagHelperAttributeList(
                 new TagHelperAttributeList
@@ -88,7 +89,8 @@ namespace Microsoft.AspNetCore.Mvc.TagHelpers
         )]
         public void HandlesMultipleAttributesSameNameCorrectly(
             TagHelperAttributeList outputAttributes
-        ) {
+        )
+        {
             // Arrange
             var allAttributes = new TagHelperAttributeList(
                 outputAttributes.Concat(
@@ -285,7 +287,8 @@ namespace Microsoft.AspNetCore.Mvc.TagHelpers
         public void RunsWhenRequiredAttributesArePresent(
             TagHelperAttributeList attributes,
             Action<ScriptTagHelper> setProperties
-        ) {
+        )
+        {
             // Arrange
             var context = MakeTagHelperContext(attributes);
             var output = MakeTagHelperOutput("script");
@@ -375,7 +378,8 @@ namespace Microsoft.AspNetCore.Mvc.TagHelpers
         public void RunsWhenRequiredAttributesArePresent_NoSrc(
             TagHelperAttributeList attributes,
             Action<ScriptTagHelper> setProperties
-        ) {
+        )
+        {
             // Arrange
             var context = MakeTagHelperContext(attributes);
             var output = MakeTagHelperOutput("script");
@@ -472,7 +476,8 @@ namespace Microsoft.AspNetCore.Mvc.TagHelpers
         public void DoesNotRunWhenARequiredAttributeIsMissing(
             TagHelperAttributeList attributes,
             Action<ScriptTagHelper> setProperties
-        ) {
+        )
+        {
             // Arrange
             var tagHelperContext = MakeTagHelperContext(attributes);
             var output = MakeTagHelperOutput("script");
@@ -876,7 +881,8 @@ namespace Microsoft.AspNetCore.Mvc.TagHelpers
             IWebHostEnvironment hostingEnvironment = null,
             IUrlHelperFactory urlHelperFactory = null,
             ViewContext viewContext = null
-        ) {
+        )
+        {
             hostingEnvironment = hostingEnvironment ?? MakeHostingEnvironment();
             urlHelperFactory = urlHelperFactory ?? MakeUrlHelperFactory();
             viewContext = viewContext ?? MakeViewContext();
@@ -902,7 +908,8 @@ namespace Microsoft.AspNetCore.Mvc.TagHelpers
         private TagHelperContext MakeTagHelperContext(
             TagHelperAttributeList attributes = null,
             string content = null
-        ) {
+        )
+        {
             attributes = attributes ?? new TagHelperAttributeList();
 
             return new TagHelperContext(
@@ -942,7 +949,8 @@ namespace Microsoft.AspNetCore.Mvc.TagHelpers
         private TagHelperOutput MakeTagHelperOutput(
             string tagName,
             TagHelperAttributeList attributes = null
-        ) {
+        )
+        {
             attributes = attributes ?? new TagHelperAttributeList();
 
             return new TagHelperOutput(

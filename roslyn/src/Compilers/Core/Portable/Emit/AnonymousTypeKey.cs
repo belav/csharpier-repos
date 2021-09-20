@@ -78,7 +78,8 @@ namespace Microsoft.CodeAnalysis.Emit
         internal AnonymousTypeKey(
             ImmutableArray<AnonymousTypeKeyField> fields,
             bool isDelegate = false
-        ) {
+        )
+        {
             this.IsDelegate = isDelegate;
             this.Fields = fields;
         }

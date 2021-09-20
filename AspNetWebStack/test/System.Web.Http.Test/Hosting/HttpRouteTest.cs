@@ -56,7 +56,8 @@ namespace System.Web.Http.Hosting
             string uriTemplate,
             string virtualPathRoot,
             string requestUri
-        ) {
+        )
+        {
             HttpRoute route = new HttpRoute(uriTemplate);
             route.Defaults.Add("controller", "Customer");
             route.Defaults.Add("id", "999");
@@ -84,7 +85,8 @@ namespace System.Web.Http.Hosting
             string uriTemplate,
             string virtualPathRoot,
             string requestUri
-        ) {
+        )
+        {
             HttpRoute route = new HttpRoute(uriTemplate);
             route.Defaults.Add("controller", "Customer");
             route.Defaults.Add("id", "999");

@@ -45,7 +45,8 @@ namespace Microsoft.AspNetCore.DataProtection
             using (
                 var context = services.CreateScope()
                     .ServiceProvider.GetRequiredService<DataProtectionKeyContext>()
-            ) {
+            )
+            {
                 Assert.Equal(1, context.DataProtectionKeys.Count());
                 Assert.Equal(key.FriendlyName, context.DataProtectionKeys.Single()?.FriendlyName);
                 Assert.Equal(key.Xml, context.DataProtectionKeys.Single()?.Xml);

@@ -74,7 +74,8 @@ namespace System.Web.WebPages
                             extension,
                             StringComparison.OrdinalIgnoreCase
                         )
-                    ) {
+                    )
+                    {
                         throw new HttpException(404, null);
                     }
                 }
@@ -99,7 +100,8 @@ namespace System.Web.WebPages
             Func<string, bool> virtualPathExists,
             HttpContextBase context,
             DisplayModeProvider displayModeProvider
-        ) {
+        )
+        {
             for (int i = 0; i < supportedExtensions.Length; i++)
             {
                 string supportedExtension = supportedExtensions[i];
@@ -129,7 +131,8 @@ namespace System.Web.WebPages
                     if (
                         Path.GetFileName(virtualPathDisplayInfo.FilePath)
                             .StartsWith("_", StringComparison.OrdinalIgnoreCase)
-                    ) {
+                    )
+                    {
                         throw new HttpException(
                             404,
                             WebPageResources.WebPageRoute_UnderscoreBlocked
@@ -159,7 +162,8 @@ namespace System.Web.WebPages
             Func<string, bool> virtualPathExists,
             HttpContextBase context,
             DisplayModeProvider displayModes
-        ) {
+        )
+        {
             string currentLevel = String.Empty;
             string currentPathInfo = pathValue;
 
@@ -241,7 +245,8 @@ namespace System.Web.WebPages
             HttpContextBase context,
             DisplayModeProvider displayModes,
             string currentLevel
-        ) {
+        )
+        {
             // If we haven't found anything yet, now try looking for default.* or index.* at the current url
             currentLevel = pathValue;
             string currentLevelDefault;

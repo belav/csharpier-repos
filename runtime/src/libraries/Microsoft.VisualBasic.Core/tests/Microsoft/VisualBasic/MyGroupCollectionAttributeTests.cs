@@ -21,7 +21,8 @@ namespace Microsoft.VisualBasic.Tests
             string createInstanceMethodName,
             string disposeInstanceMethodName,
             string defaultInstanceAlias
-        ) {
+        )
+        {
             var attribute = new MyGroupCollectionAttribute(
                 typeToCollect,
                 createInstanceMethodName,

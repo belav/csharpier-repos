@@ -894,12 +894,14 @@ namespace System.Diagnostics.Eventing.Reader
         }
         public override string FormatDescription(
             System.Collections.Generic.IEnumerable<object> values
-        ) {
+        )
+        {
             throw null;
         }
         public System.Collections.Generic.IList<object> GetPropertyValues(
             System.Diagnostics.Eventing.Reader.EventLogPropertySelector propertySelector
-        ) {
+        )
+        {
             throw null;
         }
         public override string ToXml()
@@ -957,7 +959,8 @@ namespace System.Diagnostics.Eventing.Reader
         public System.Diagnostics.Eventing.Reader.EventLogInformation GetLogInformation(
             string logName,
             System.Diagnostics.Eventing.Reader.PathType pathType
-        ) {
+        )
+        {
             throw null;
         }
         public System.Collections.Generic.IEnumerable<string> GetLogNames()

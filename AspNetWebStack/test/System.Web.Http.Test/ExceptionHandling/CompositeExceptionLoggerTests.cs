@@ -165,7 +165,8 @@ namespace System.Web.Http.ExceptionHandling
 
         private static CompositeExceptionLogger CreateProductUnderTest(
             IEnumerable<IExceptionLogger> loggers
-        ) {
+        )
+        {
             return new CompositeExceptionLogger(loggers);
         }
     }

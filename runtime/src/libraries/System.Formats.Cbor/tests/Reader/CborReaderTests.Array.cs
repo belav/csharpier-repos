@@ -58,7 +58,8 @@ namespace System.Formats.Cbor.Tests
         public static void ReadArray_SimpleValues_HappyPath(
             object[] expectedValues,
             string hexEncoding
-        ) {
+        )
+        {
             byte[] encoding = hexEncoding.HexToByteArray();
             var reader = new CborReader(encoding);
             Helpers.VerifyArray(reader, expectedValues);
@@ -82,7 +83,8 @@ namespace System.Formats.Cbor.Tests
         public static void ReadArray_NestedValues_HappyPath(
             object[] expectedValues,
             string hexEncoding
-        ) {
+        )
+        {
             byte[] encoding = hexEncoding.HexToByteArray();
             var reader = new CborReader(encoding);
             Helpers.VerifyArray(reader, expectedValues);
@@ -136,7 +138,8 @@ namespace System.Formats.Cbor.Tests
         public static void ReadArray_IndefiniteLength_HappyPath(
             object[] expectedValues,
             string hexEncoding
-        ) {
+        )
+        {
             byte[] encoding = hexEncoding.HexToByteArray();
             var reader = new CborReader(encoding);
             Helpers.VerifyArray(reader, expectedValues, expectDefiniteLengthCollections: false);
@@ -155,7 +158,8 @@ namespace System.Formats.Cbor.Tests
         public static void ReadArray_NonCanonicalLengths_SupportedConformanceMode_ShouldSucceed(
             CborConformanceMode mode,
             string hexEncoding
-        ) {
+        )
+        {
             byte[] encoding = hexEncoding.HexToByteArray();
             var reader = new CborReader(encoding, mode);
             int? length = reader.ReadStartArray();
@@ -175,7 +179,8 @@ namespace System.Formats.Cbor.Tests
         public static void ReadArray_NonCanonicalLengths_UnSupportedConformanceMode_ShouldThrowCborContentException(
             CborConformanceMode mode,
             string hexEncoding
-        ) {
+        )
+        {
             byte[] encoding = hexEncoding.HexToByteArray();
             var reader = new CborReader(encoding, mode);
             Assert.Throws<CborContentException>(() => reader.ReadStartArray());
@@ -188,7 +193,8 @@ namespace System.Formats.Cbor.Tests
         public static void ReadArray_IndefiniteLength_SupportedConformanceMode_ShouldSucceed(
             CborConformanceMode mode,
             string hexEncoding
-        ) {
+        )
+        {
             byte[] encoding = hexEncoding.HexToByteArray();
             var reader = new CborReader(encoding, mode);
             int? length = reader.ReadStartArray();
@@ -201,7 +207,8 @@ namespace System.Formats.Cbor.Tests
         public static void ReadArray_IndefiniteLength_UnSupportedConformanceMode_ShouldThrowCborContentException(
             CborConformanceMode mode,
             string hexEncoding
-        ) {
+        )
+        {
             byte[] encoding = hexEncoding.HexToByteArray();
             var reader = new CborReader(encoding, mode);
             Assert.Throws<CborContentException>(() => reader.ReadStartArray());
@@ -215,7 +222,8 @@ namespace System.Formats.Cbor.Tests
         public static void ReadArray_DefiniteLengthExceeded_ShouldThrowInvalidOperationException(
             string hexEncoding,
             int expectedLength
-        ) {
+        )
+        {
             byte[] encoding = hexEncoding.HexToByteArray();
             var reader = new CborReader(encoding);
 
@@ -238,7 +246,8 @@ namespace System.Formats.Cbor.Tests
         public static void ReadArray_DefiniteLengthExceeded_WithNestedData_ShouldThrowInvalidOperationException(
             string hexEncoding,
             int expectedLength
-        ) {
+        )
+        {
             byte[] encoding = hexEncoding.HexToByteArray();
             var reader = new CborReader(encoding);
 
@@ -263,7 +272,8 @@ namespace System.Formats.Cbor.Tests
         public static void ReadArray_IndefiniteLength_MissingBreakByte_ShouldThrowCborContentException(
             string hexEncoding,
             int length
-        ) {
+        )
+        {
             byte[] encoding = hexEncoding.HexToByteArray();
             var reader = new CborReader(encoding);
             reader.ReadStartArray();
@@ -284,7 +294,8 @@ namespace System.Formats.Cbor.Tests
         public static void ReadArray_IndefiniteLength_PrematureEndArrayCall_ShouldThrowInvalidOperationException(
             string hexEncoding,
             int length
-        ) {
+        )
+        {
             byte[] encoding = hexEncoding.HexToByteArray();
             var reader = new CborReader(encoding);
             reader.ReadStartArray();
@@ -304,7 +315,8 @@ namespace System.Formats.Cbor.Tests
         public static void EndReadArray_DefiniteLengthNotMet_ShouldThrowInvalidOperationException(
             string hexEncoding,
             int expectedLength
-        ) {
+        )
+        {
             byte[] encoding = hexEncoding.HexToByteArray();
             var reader = new CborReader(encoding);
 
@@ -327,7 +339,8 @@ namespace System.Formats.Cbor.Tests
         public static void EndReadArray_DefiniteLengthNotMet_WithNestedData_ShouldThrowInvalidOperationException(
             string hexEncoding,
             int expectedLength
-        ) {
+        )
+        {
             byte[] encoding = hexEncoding.HexToByteArray();
             var reader = new CborReader(encoding);
 
@@ -362,7 +375,8 @@ namespace System.Formats.Cbor.Tests
             string hexEncoding,
             int expectedLength,
             int actualLength
-        ) {
+        )
+        {
             byte[] encoding = hexEncoding.HexToByteArray();
             var reader = new CborReader(encoding);
 
@@ -386,7 +400,8 @@ namespace System.Formats.Cbor.Tests
             string hexEncoding,
             int expectedLength,
             int actualLength
-        ) {
+        )
+        {
             byte[] encoding = hexEncoding.HexToByteArray();
             var reader = new CborReader(encoding);
 
@@ -427,7 +442,8 @@ namespace System.Formats.Cbor.Tests
         [InlineData("fb3ff199999999999a")] // 1.1
         public static void ReadStartArray_InvalidType_ShouldThrowInvalidOperationException(
             string hexEncoding
-        ) {
+        )
+        {
             byte[] encoding = hexEncoding.HexToByteArray();
             var reader = new CborReader(encoding);
 
@@ -447,7 +463,8 @@ namespace System.Formats.Cbor.Tests
         [InlineData("9b00000000000000")]
         public static void ReadStartArray_InvalidData_ShouldThrowCborContentException(
             string hexEncoding
-        ) {
+        )
+        {
             byte[] encoding = hexEncoding.HexToByteArray();
             var reader = new CborReader(encoding);
 
@@ -461,7 +478,8 @@ namespace System.Formats.Cbor.Tests
         [InlineData("9b7fffffffffffffff")] // long.MaxValue
         public static void ReadStartArray_BufferTooSmall_ShouldThrowCborContentException(
             string hexEncoding
-        ) {
+        )
+        {
             byte[] encoding = hexEncoding.HexToByteArray();
             var reader = new CborReader(encoding);
 

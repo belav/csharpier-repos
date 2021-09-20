@@ -50,7 +50,7 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.ProjectSystem
             ICommandLineParserService commandLineParserServiceOpt = null
         )
 #pragma warning restore IDE0060 // Remove unused parameter
-          : base(projectTracker.ThreadingContext)
+            : base(projectTracker.ThreadingContext)
         {
             Hierarchy = hierarchy;
             Guid = projectGuid;
@@ -207,7 +207,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.ProjectSystem
             IVisualStudioHostDocument document,
             bool isCurrentContext,
             bool hookupHandlers
-        ) {
+        )
+        {
             var shimDocument = (DocumentProvider.ShimDocument)document;
 
             VisualStudioProject.AddSourceFile(shimDocument.FilePath, shimDocument.SourceCodeKind);

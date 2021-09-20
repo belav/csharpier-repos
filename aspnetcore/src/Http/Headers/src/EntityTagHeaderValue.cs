@@ -61,7 +61,8 @@ namespace Microsoft.Net.Http.Headers
                     HttpRuleParser.GetQuotedStringLength(tag, 0, out var length)
                     != HttpParseResult.Parsed
                 ) || (length != tag.Length)
-            ) {
+            )
+            {
                 // Note that we don't allow 'W/' prefixes for weak ETags in the 'tag' parameter. If the user wants to
                 // add a weak ETag, they can set 'isWeak' to true.
                 throw new FormatException("Invalid ETag name");
@@ -169,7 +170,8 @@ namespace Microsoft.Net.Http.Headers
         public static bool TryParse(
             StringSegment input,
             [NotNullWhen(true)] out EntityTagHeaderValue parsedValue
-        ) {
+        )
+        {
             var index = 0;
             return SingleValueParser.TryParseValue(input, ref index, out parsedValue!);
         }
@@ -203,7 +205,8 @@ namespace Microsoft.Net.Http.Headers
         public static bool TryParseList(
             IList<string>? inputs,
             [NotNullWhen(true)] out IList<EntityTagHeaderValue>? parsedValues
-        ) {
+        )
+        {
             return MultipleValueParser.TryParseValues(inputs, out parsedValues);
         }
 
@@ -216,7 +219,8 @@ namespace Microsoft.Net.Http.Headers
         public static bool TryParseStrictList(
             IList<string>? inputs,
             [NotNullWhen(true)] out IList<EntityTagHeaderValue>? parsedValues
-        ) {
+        )
+        {
             return MultipleValueParser.TryParseStrictValues(inputs, out parsedValues);
         }
 
@@ -224,7 +228,8 @@ namespace Microsoft.Net.Http.Headers
             StringSegment input,
             int startIndex,
             out EntityTagHeaderValue? parsedValue
-        ) {
+        )
+        {
             Contract.Requires(startIndex >= 0);
 
             parsedValue = null;
@@ -266,7 +271,8 @@ namespace Microsoft.Net.Http.Headers
                 if (
                     HttpRuleParser.GetQuotedStringLength(input, current, out tagLength)
                     != HttpParseResult.Parsed
-                ) {
+                )
+                {
                     return 0;
                 }
 

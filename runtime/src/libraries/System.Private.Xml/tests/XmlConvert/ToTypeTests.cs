@@ -1256,7 +1256,8 @@ namespace System.Xml.Tests
             if (
                 TimeZoneInfo.Local.GetUtcOffset(dt).Hours == -8
                 || TimeZoneInfo.Local.GetUtcOffset(dt).Hours == 9
-            ) { // only -08:00 and 09:00 works
+            )
+            { // only -08:00 and 09:00 works
                 expDateTime =
                     (TimeZoneInfo.Local.GetUtcOffset(dt).Hours < 0)
                         ? string.Format(
@@ -1283,7 +1284,8 @@ namespace System.Xml.Tests
             if (
                 TimeZoneInfo.Local.GetUtcOffset(dt).Hours == -8
                 || TimeZoneInfo.Local.GetUtcOffset(dt).Hours == 9
-            ) { // only -08:00 and 09:00 works
+            )
+            { // only -08:00 and 09:00 works
                 expDateTime =
                     (TimeZoneInfo.Local.GetUtcOffset(dt).Hours < 0)
                         ? string.Format(
@@ -1350,7 +1352,8 @@ namespace System.Xml.Tests
             if (
                 TimeZoneInfo.Local.GetUtcOffset(dt).Hours == -8
                 || TimeZoneInfo.Local.GetUtcOffset(dt).Hours == 9
-            ) {
+            )
+            {
                 CError.Equals(dt.Kind, DateTimeKind.Local, "Local expected");
                 expDateTime =
                     (TimeZoneInfo.Local.GetUtcOffset(dt).Hours < 0)
@@ -1459,7 +1462,8 @@ namespace System.Xml.Tests
             if (
                 TimeZoneInfo.Local.GetUtcOffset(dt).Hours == -8
                 || TimeZoneInfo.Local.GetUtcOffset(dt).Hours == 9
-            ) {
+            )
+            {
                 expDateTime =
                     (TimeZoneInfo.Local.GetUtcOffset(dt).Hours < 0)
                         ? "2002-12-30T23:15:55"

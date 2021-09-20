@@ -44,7 +44,8 @@ namespace Microsoft.AspNetCore.Identity.EntityFrameworkCore.InMemory.Test
             bool lockoutEnabled = false,
             DateTimeOffset? lockoutEnd = default(DateTimeOffset?),
             bool useNamePrefixAsUserName = false
-        ) {
+        )
+        {
             return new IdentityUser
             {
                 UserName = useNamePrefixAsUserName
@@ -65,7 +66,8 @@ namespace Microsoft.AspNetCore.Identity.EntityFrameworkCore.InMemory.Test
         protected override IdentityRole CreateTestRole(
             string roleNamePrefix = "",
             bool useRoleNamePrefixAsRoleName = false
-        ) {
+        )
+        {
             var roleName = useRoleNamePrefixAsRoleName
                 ? roleNamePrefix
                 : string.Format(

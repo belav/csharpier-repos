@@ -23,7 +23,8 @@ namespace System.ComponentModel.Composition.Factories
                 Func<ComposablePart> partCreator,
                 Func<IEnumerable<ImportDefinition>> importsCreator,
                 Func<IEnumerable<ExportDefinition>> exportsCreator
-            ) {
+            )
+            {
                 this._metadata = metadata.AsReadOnly();
                 this._partCreator = partCreator;
                 this._importsCreator = importsCreator;

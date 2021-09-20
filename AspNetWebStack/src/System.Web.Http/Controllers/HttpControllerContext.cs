@@ -26,7 +26,8 @@ namespace System.Web.Http.Controllers
             HttpRequestMessage request,
             HttpControllerDescriptor controllerDescriptor,
             IHttpController controller
-        ) {
+        )
+        {
             if (requestContext == null)
             {
                 throw Error.ArgumentNull("requestContext");
@@ -57,7 +58,8 @@ namespace System.Web.Http.Controllers
             HttpConfiguration configuration,
             IHttpRouteData routeData,
             HttpRequestMessage request
-        ) {
+        )
+        {
             if (configuration == null)
             {
                 throw Error.ArgumentNull("configuration");

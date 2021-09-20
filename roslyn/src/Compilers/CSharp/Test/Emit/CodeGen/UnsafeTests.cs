@@ -9547,7 +9547,8 @@ struct S27 { S26 a, b; }
             string operationName,
             string @operator,
             string checkedness
-        ) {
+        )
+        {
             const string mainClassTemplate =
                 @"
 using System;

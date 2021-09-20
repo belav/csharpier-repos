@@ -50,12 +50,14 @@ namespace Microsoft.AspNetCore.Authentication.OAuth.Claims
             JsonElement userData,
             string propertyName,
             string subProperty
-        ) {
+        )
+        {
             if (
                 userData.TryGetProperty(propertyName, out var value)
                 && value.ValueKind == JsonValueKind.Object
                 && value.TryGetProperty(subProperty, out value)
-            ) {
+            )
+            {
                 return value.ToString();
             }
             return null;

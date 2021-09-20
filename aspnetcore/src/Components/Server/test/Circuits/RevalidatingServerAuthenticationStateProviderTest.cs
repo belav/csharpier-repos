@@ -268,9 +268,8 @@ namespace Microsoft.AspNetCore.Components
             private TaskCompletionSource<object> _nextValidateAuthenticationStateAsyncCallSource =
                 new TaskCompletionSource<object>();
 
-            public TestRevalidatingServerAuthenticationStateProvider(
-                TimeSpan revalidationInterval
-            ) : base(NullLoggerFactory.Instance)
+            public TestRevalidatingServerAuthenticationStateProvider(TimeSpan revalidationInterval)
+                : base(NullLoggerFactory.Instance)
             {
                 _revalidationInterval = revalidationInterval;
             }
@@ -288,7 +287,8 @@ namespace Microsoft.AspNetCore.Components
             protected override Task<bool> ValidateAuthenticationStateAsync(
                 AuthenticationState authenticationState,
                 CancellationToken cancellationToken
-            ) {
+            )
+            {
                 RevalidationCallLog.Add((authenticationState, cancellationToken));
                 var result = NextValidationResult;
                 var prevCts = _nextValidateAuthenticationStateAsyncCallSource;

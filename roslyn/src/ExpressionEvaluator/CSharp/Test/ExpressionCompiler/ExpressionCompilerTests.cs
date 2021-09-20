@@ -732,7 +732,8 @@ namespace Microsoft.CodeAnalysis.CSharp.ExpressionEvaluator.UnitTests
         private static void CheckFormatSpecifiers(
             CompileResult result,
             params string[] formatSpecifiers
-        ) {
+        )
+        {
             Assert.NotNull(result.Assembly);
             if (formatSpecifiers.Length == 0)
             {
@@ -1975,7 +1976,8 @@ class C
             string expr,
             DkmClrCompilationResultFlags expectedFlags,
             string expectedError = null
-        ) {
+        )
+        {
             ResultProperties resultProperties;
             string error;
             var testData = new CompilationTestData();
@@ -6599,7 +6601,8 @@ class C
 
             using (
                 var pinnedMetadata = new PinnedBlob(TestResources.ExpressionCompiler.NoValidTables)
-            ) {
+            )
+            {
                 var corruptMetadata = ModuleInstance.Create(
                     pinnedMetadata.Pointer,
                     pinnedMetadata.Size,
@@ -7124,7 +7127,8 @@ public class C
                     peStream2 = new MemoryStream(),
                     pdbStream1 = new MemoryStream(),
                     pdbStream2 = new MemoryStream()
-            ) {
+            )
+            {
                 Assert.True(comp1.Emit(peStream1Unused, pdbStream1).Success);
                 Assert.True(comp2.Emit(peStream2, pdbStream2).Success);
 
@@ -7978,7 +7982,8 @@ public class Test
                         var metadata = ModuleMetadata.CreateFromImage(
                             ImmutableArray.CreateRange(result.Assembly)
                         )
-                    ) {
+                    )
+                    {
                         var reader = metadata.MetadataReader;
                         var typeDef = reader.GetTypeDef(result.TypeName);
                         var methodHandle = reader.GetMethodDefHandle(typeDef, result.MethodName);

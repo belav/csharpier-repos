@@ -77,7 +77,8 @@ namespace System.Linq.Parallel
             IPartitionedStreamRecipient<TOutput> outputRecipient,
             bool preferStriping,
             QuerySettings settings
-        ) {
+        )
+        {
             Debug.Assert(rightStream.PartitionCount == leftStream.PartitionCount);
             int partitionCount = leftStream.PartitionCount;
 
@@ -126,7 +127,8 @@ namespace System.Linq.Parallel
             IPartitionedStreamRecipient<TOutput> outputRecipient,
             int partitionCount,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             if (RightChild.OutputOrdered)
             {
                 PartitionedStream<Pair<TRightInput, TKey>, TRightKey> rePartitionedRightStream =
@@ -208,7 +210,8 @@ namespace System.Linq.Parallel
             IPartitionedStreamRecipient<TOutput> outputRecipient,
             int partitionCount,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             if (RightChild.OutputOrdered && LeftChild.OutputOrdered)
             {
                 PairOutputKeyBuilder<TLeftKey, TRightKey> outputKeyBuilder =
@@ -247,14 +250,16 @@ namespace System.Linq.Parallel
 
         private IComparer<Pair<bool, TRightKey>> CreateComparer<TRightKey>(
             IComparer<TRightKey> comparer
-        ) {
+        )
+        {
             return CreateComparer(Comparer<bool>.Default, comparer);
         }
 
         private IComparer<Pair<TLeftKey, TRightKey>> CreateComparer<TLeftKey, TRightKey>(
             IComparer<TLeftKey> leftKeyComparer,
             IComparer<TRightKey> rightKeyComparer
-        ) {
+        )
+        {
             return new PairComparer<TLeftKey, TRightKey>(leftKeyComparer, rightKeyComparer);
         }
 
@@ -266,7 +271,8 @@ namespace System.Linq.Parallel
             IPartitionedStreamRecipient<TOutput> outputRecipient,
             int partitionCount,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             PartitionedStream<TOutput, TOutputKey> outputStream = new PartitionedStream<
                 TOutput,
                 TOutputKey
@@ -344,7 +350,8 @@ namespace System.Linq.Parallel
         internal GroupJoinHashLookupBuilder(
             QueryOperatorEnumerator<Pair<TElement, THashKey>, TOrderKey> dataSource,
             IEqualityComparer<THashKey>? keyComparer
-        ) {
+        )
+        {
             Debug.Assert(dataSource != null);
 
             _dataSource = dataSource;
@@ -353,7 +360,8 @@ namespace System.Linq.Parallel
 
         public override HashJoinHashLookup<THashKey, IEnumerable<TElement>, int> BuildHashLookup(
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             HashLookup<THashKey, ListChunk<TElement>> lookup = new HashLookup<
                 THashKey,
                 ListChunk<TElement>
@@ -415,7 +423,8 @@ namespace System.Linq.Parallel
 
             protected override Pair<IEnumerable<TElement>, int> CreateValuePair(
                 ListChunk<TElement> baseValue
-            ) {
+            )
+            {
                 return new Pair<IEnumerable<TElement>, int>(baseValue, OrderKey);
             }
         }
@@ -438,7 +447,8 @@ namespace System.Linq.Parallel
             QueryOperatorEnumerator<Pair<TElement, THashKey>, TOrderKey> dataSource,
             IEqualityComparer<THashKey>? keyComparer,
             IComparer<TOrderKey> orderKeyComparer
-        ) {
+        )
+        {
             Debug.Assert(dataSource != null);
 
             _dataSource = dataSource;
@@ -486,7 +496,8 @@ namespace System.Linq.Parallel
             public OrderedGroupJoinBaseHashBuilder(
                 HashLookup<THashKey, GroupKeyData> baseLookup,
                 IComparer<TOrderKey> orderKeyComparer
-            ) {
+            )
+            {
                 Debug.Assert(baseLookup != null);
 
                 _base = baseLookup;
@@ -531,7 +542,8 @@ namespace System.Linq.Parallel
 
             protected override Pair<IEnumerable<TElement>, Pair<bool, TOrderKey>> CreateValuePair(
                 GroupKeyData baseValue
-            ) {
+            )
+            {
                 return new Pair<IEnumerable<TElement>, Pair<bool, TOrderKey>>(
                     baseValue._grouping,
                     Wrap(baseValue._orderKey)
@@ -556,7 +568,8 @@ namespace System.Linq.Parallel
                 TOrderKey orderKey,
                 THashKey hashKey,
                 IComparer<TOrderKey> orderComparer
-            ) {
+            )
+            {
                 _orderKey = orderKey;
                 _grouping = new OrderedGroupByGrouping<THashKey, TOrderKey, TElement>(
                     hashKey,
@@ -586,7 +599,8 @@ namespace System.Linq.Parallel
         public override bool TryGetValue(
             THashKey key,
             ref HashLookupValueList<IEnumerable<TElement>, TOrderKey> value
-        ) {
+        )
+        {
             Pair<IEnumerable<TElement>, TOrderKey> valueList = GetValueList(key);
             value = new HashLookupValueList<IEnumerable<TElement>, TOrderKey>(
                 valueList.First,

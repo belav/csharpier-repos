@@ -40,7 +40,8 @@ namespace DebuggerTests
             int col,
             int len,
             bool roundtrip
-        ) {
+        )
+        {
             string vscode_fn0 =
                 "function(){const e={__proto__:this.__proto__},t=Object.getOwnPropertyNames(this);for(let r=0;r<t.length;++r){const n=t[r],i=n>>>0;if(String(i>>>0)===n&&i>>>0!=4294967295)continue;const a=Object.getOwnPropertyDescriptor(this,n);a&&Object.defineProperty(e,n,a)}return e}";
 
@@ -141,7 +142,8 @@ namespace DebuggerTests
             int line,
             int col,
             int len
-        ) {
+        )
+        {
             var fetch_start_idx = 2;
             var num_elems_fetch = 3;
             string vscode_fn1 =
@@ -243,7 +245,8 @@ namespace DebuggerTests
             int line,
             int col,
             bool roundtrip
-        ) {
+        )
+        {
             var ret_len = 0;
 
             await RunCallFunctionOn(
@@ -336,7 +339,8 @@ namespace DebuggerTests
             int line,
             int col,
             bool roundtrip
-        ) {
+        )
+        {
             var ret_len = 5;
             await RunCallFunctionOn(
                 eval_fn,
@@ -665,7 +669,8 @@ namespace DebuggerTests
             int line,
             int col,
             bool roundtrip
-        ) {
+        )
+        {
             var ret_len = 5;
             await RunCallFunctionOn(
                 eval_fn,
@@ -805,7 +810,8 @@ namespace DebuggerTests
             int line,
             int col,
             bool return_by_val
-        ) {
+        )
+        {
             await SetBreakpoint(bp_loc, line, col);
 
             // callFunctionOn
@@ -906,7 +912,8 @@ namespace DebuggerTests
             int line,
             int col,
             bool? silent
-        ) {
+        )
+        {
             await SetBreakpoint(bp_loc, line, col);
 
             // callFunctionOn
@@ -1207,7 +1214,8 @@ namespace DebuggerTests
             int line,
             int col,
             bool roundtrip
-        ) {
+        )
+        {
             await RunCallFunctionOn(
                 eval_fn,
                 "function() { return this; }",
@@ -1322,7 +1330,8 @@ namespace DebuggerTests
             int line,
             int col,
             bool use_cfo
-        ) {
+        )
+        {
             UseCallFunctionOnBeforeGetProperties = use_cfo;
             await SetBreakpoint(bp_loc, line, col);
 
@@ -1364,7 +1373,8 @@ namespace DebuggerTests
             int line,
             int col,
             bool use_cfo
-        ) {
+        )
+        {
             await SetBreakpoint(bp_loc, line, col);
             UseCallFunctionOnBeforeGetProperties = use_cfo;
 
@@ -1476,7 +1486,8 @@ namespace DebuggerTests
             bool returnByValue = false,
             JArray fn_args = null,
             bool roundtrip = false
-        ) {
+        )
+        {
             await SetBreakpoint(bp_loc, line, col);
 
             // callFunctionOn

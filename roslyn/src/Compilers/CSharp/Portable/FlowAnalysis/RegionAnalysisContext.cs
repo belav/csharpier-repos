@@ -38,7 +38,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             BoundNode boundNode,
             BoundNode firstInRegion,
             BoundNode lastInRegion
-        ) {
+        )
+        {
             this.Compilation = compilation;
             this.Member = member;
             this.BoundNode = boundNode;

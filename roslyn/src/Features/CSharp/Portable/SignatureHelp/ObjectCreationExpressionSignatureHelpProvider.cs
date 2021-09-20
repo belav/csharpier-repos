@@ -41,7 +41,8 @@ namespace Microsoft.CodeAnalysis.CSharp.SignatureHelp
             SignatureHelpTriggerReason triggerReason,
             CancellationToken cancellationToken,
             out BaseObjectCreationExpressionSyntax expression
-        ) {
+        )
+        {
             if (
                 !CommonSignatureHelpUtilities.TryGetSyntax(
                     root,
@@ -53,7 +54,8 @@ namespace Microsoft.CodeAnalysis.CSharp.SignatureHelp
                     cancellationToken,
                     out expression
                 )
-            ) {
+            )
+            {
                 return false;
             }
 
@@ -69,7 +71,8 @@ namespace Microsoft.CodeAnalysis.CSharp.SignatureHelp
         private static bool IsArgumentListToken(
             BaseObjectCreationExpressionSyntax expression,
             SyntaxToken token
-        ) {
+        )
+        {
             return expression.ArgumentList != null
                 && expression.ArgumentList.Span.Contains(token.SpanStart)
                 && token != expression.ArgumentList.CloseParenToken;
@@ -80,7 +83,8 @@ namespace Microsoft.CodeAnalysis.CSharp.SignatureHelp
             int position,
             SignatureHelpTriggerInfo triggerInfo,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var root = await document.GetRequiredSyntaxRootAsync(cancellationToken)
                 .ConfigureAwait(false);
             if (
@@ -92,7 +96,8 @@ namespace Microsoft.CodeAnalysis.CSharp.SignatureHelp
                     cancellationToken,
                     out var objectCreationExpression
                 )
-            ) {
+            )
+            {
                 return null;
             }
 
@@ -104,7 +109,8 @@ namespace Microsoft.CodeAnalysis.CSharp.SignatureHelp
             if (
                 semanticModel.GetTypeInfo(objectCreationExpression, cancellationToken).Type
                 is not INamedTypeSymbol type
-            ) {
+            )
+            {
                 return null;
             }
 
@@ -156,7 +162,8 @@ namespace Microsoft.CodeAnalysis.CSharp.SignatureHelp
             ISyntaxFactsService syntaxFacts,
             TextSpan currentSpan,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             if (
                 TryGetObjectCreationExpression(
                     root,
@@ -168,7 +175,8 @@ namespace Microsoft.CodeAnalysis.CSharp.SignatureHelp
                 )
                 && currentSpan.Start
                     == SignatureHelpUtilities.GetSignatureHelpSpan(expression.ArgumentList!).Start
-            ) {
+            )
+            {
                 return SignatureHelpUtilities.GetSignatureHelpState(
                     expression.ArgumentList!,
                     position

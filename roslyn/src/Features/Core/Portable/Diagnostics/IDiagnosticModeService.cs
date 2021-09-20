@@ -45,7 +45,8 @@ namespace Microsoft.CodeAnalysis.Diagnostics
         public static DiagnosticMode GetDiagnosticMode(
             this Workspace workspace,
             Option2<DiagnosticMode> option
-        ) {
+        )
+        {
             var service = workspace.Services.GetRequiredService<IDiagnosticModeService>();
             return service.GetDiagnosticMode(option);
         }
@@ -53,7 +54,8 @@ namespace Microsoft.CodeAnalysis.Diagnostics
         public static bool IsPullDiagnostics(
             this Workspace workspace,
             Option2<DiagnosticMode> option
-        ) {
+        )
+        {
             var mode = GetDiagnosticMode(workspace, option);
             return mode == DiagnosticMode.Pull;
         }
@@ -61,7 +63,8 @@ namespace Microsoft.CodeAnalysis.Diagnostics
         public static bool IsPushDiagnostics(
             this Workspace workspace,
             Option2<DiagnosticMode> option
-        ) {
+        )
+        {
             var mode = GetDiagnosticMode(workspace, option);
             return mode == DiagnosticMode.Push;
         }

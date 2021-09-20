@@ -54,7 +54,8 @@ namespace System.Threading.Tasks.Tests
         private static void Run(
             bool useRunContinuationsAsynchronously,
             Func<Task, Task> getIntermediateContinuation
-        ) {
+        )
+        {
             Task t = Task.Run(
                 () => // run test off of xunit's thread so as not to be confused by its TaskScheduler or SynchronizationContext
                 {

@@ -27,7 +27,8 @@ namespace Microsoft.AspNetCore.Mvc.ViewFeatures
             IModelMetadataProvider provider,
             IUrlHelperFactory urlHelperFactory,
             MvcViewOptions options
-        ) {
+        )
+        {
             var optionsAccessor = new Mock<IOptions<MvcViewOptions>>();
             optionsAccessor.SetupGet(o => o.Value).Returns(options);
 

@@ -19,7 +19,8 @@ namespace Microsoft.AspNetCore.Routing.Matching
             EndpointDataSource dataSource,
             Lifetime lifetime,
             Func<MatcherBuilder> matcherBuilderFactory
-        ) {
+        )
+        {
             _matcherBuilderFactory = matcherBuilderFactory;
 
             _cache = new DataSourceDependentCache<Matcher>(dataSource, CreateMatcher);
@@ -50,7 +51,8 @@ namespace Microsoft.AspNetCore.Routing.Matching
                     endpoints[i] is RouteEndpoint endpoint
                     && endpoint.Metadata.GetMetadata<ISuppressMatchingMetadata>()?.SuppressMatching
                         != true
-                ) {
+                )
+                {
                     builder.AddEndpoint(endpoint);
                 }
             }

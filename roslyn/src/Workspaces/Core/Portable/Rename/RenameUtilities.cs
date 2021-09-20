@@ -21,7 +21,8 @@ namespace Microsoft.CodeAnalysis.Rename
             SyntaxToken token,
             ISymbol aliasSymbol,
             string replacementText
-        ) {
+        )
+        {
             // If the below Single() assert fails then it means the token has gone through a rename session where
             // it obtained an AliasSyntaxAnnotation and it is going through another rename session. Make sure the token
             // has only one annotation pertaining to the current session or try to extract only the current session annotation
@@ -43,7 +44,8 @@ namespace Microsoft.CodeAnalysis.Rename
             SemanticModel semanticModel,
             Workspace workspace,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var bindableToken = semanticModel.SyntaxTree.GetRoot(cancellationToken)
                 .FindToken(position, findInsideTrivia: true);
             var semanticInfo = semanticModel.GetSemanticInfo(
@@ -88,7 +90,8 @@ namespace Microsoft.CodeAnalysis.Rename
             ISymbol symbol,
             Solution solution,
             IEnumerable<RenameLocation> renameLocations
-        ) {
+        )
+        {
             if (IsSymbolDefinedInsideMethod(symbol))
             {
                 // if the symbol was declared inside of a method, don't check for conflicts in non-renamed documents.
@@ -168,7 +171,8 @@ namespace Microsoft.CodeAnalysis.Rename
             SemanticModel semanticModel,
             SyntaxToken token,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var symbol = semanticFacts.GetDeclaredSymbol(semanticModel, token, cancellationToken);
             if (symbol != null)
             {
@@ -189,7 +193,8 @@ namespace Microsoft.CodeAnalysis.Rename
             if (
                 symbolInfo.CandidateReason == CandidateReason.MemberGroup
                 && symbolInfo.CandidateSymbols.Any()
-            ) {
+            )
+            {
                 // This is a reference from a nameof expression. Allow the rename but set the RenameOverloads option
                 return TokenRenameInfo.CreateMemberGroupTokenInfo(symbolInfo.CandidateSymbols);
             }
@@ -197,7 +202,8 @@ namespace Microsoft.CodeAnalysis.Rename
             if (
                 RenameLocation.ShouldRename(symbolInfo.CandidateReason)
                 && symbolInfo.CandidateSymbols.Length == 1
-            ) {
+            )
+            {
                 // TODO(cyrusn): We're allowing rename here, but we likely should let the user
                 // know that there is an error in the code and that rename results might be
                 // inaccurate.

@@ -16,7 +16,8 @@ namespace Roslyn.Test.Utilities
             int generation,
             MetadataReader previousReader,
             MetadataReader currentReader
-        ) {
+        )
+        {
             var previousModule = previousReader.GetModuleDefinition();
             var currentModule = currentReader.GetModuleDefinition();
 

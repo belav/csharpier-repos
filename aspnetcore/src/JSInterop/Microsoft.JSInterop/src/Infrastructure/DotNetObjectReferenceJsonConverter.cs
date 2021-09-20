@@ -23,7 +23,8 @@ namespace Microsoft.JSInterop.Infrastructure
             ref Utf8JsonReader reader,
             Type typeToConvert,
             JsonSerializerOptions options
-        ) {
+        )
+        {
             long dotNetObjectId = 0;
 
             while (reader.Read() && reader.TokenType != JsonTokenType.EndObject)
@@ -33,7 +34,8 @@ namespace Microsoft.JSInterop.Infrastructure
                     if (
                         dotNetObjectId == 0
                         && reader.ValueTextEquals(DotNetObjectRefKey.EncodedUtf8Bytes)
-                    ) {
+                    )
+                    {
                         reader.Read();
                         dotNetObjectId = reader.GetInt64();
                     }
@@ -61,7 +63,8 @@ namespace Microsoft.JSInterop.Infrastructure
             Utf8JsonWriter writer,
             DotNetObjectReference<TValue> value,
             JsonSerializerOptions options
-        ) {
+        )
+        {
             var objectId = JSRuntime.TrackObjectReference<TValue>(value);
 
             writer.WriteStartObject();

@@ -24,13 +24,15 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
 
         internal static ImmutableArray<TypeWithAnnotations> TypeParametersAsTypeSymbolsWithAnnotations(
             ImmutableArray<TypeParameterSymbol> typeParameters
-        ) {
+        )
+        {
             return typeParameters.SelectAsArray(static (tp) => TypeWithAnnotations.Create(tp));
         }
 
         internal static ImmutableArray<TypeWithAnnotations> TypeParametersAsTypeSymbolsWithIgnoredAnnotations(
             ImmutableArray<TypeParameterSymbol> typeParameters
-        ) {
+        )
+        {
             return typeParameters.SelectAsArray(
                 static (tp) => TypeWithAnnotations.Create(tp, NullableAnnotation.Ignored)
             );
@@ -38,7 +40,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
 
         internal static ImmutableArray<TypeSymbol> AsTypeSymbols(
             ImmutableArray<TypeWithAnnotations> typesOpt
-        ) {
+        )
+        {
             return typesOpt.IsDefault ? default : typesOpt.SelectAsArray(AsTypeSymbol);
         }
 
@@ -69,13 +72,15 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                     mapping,
                     ReferenceEqualityComparer.Instance
                 )
-            ) {
+            )
+        {
             // mapping contents are read-only hereafter
         }
 
         private static SmallDictionary<TypeParameterSymbol, TypeWithAnnotations> ForType(
             NamedTypeSymbol containingType
-        ) {
+        )
+        {
             var substituted = containingType as SubstitutedNamedTypeSymbol;
             return (object)substituted != null
               ? new SmallDictionary<TypeParameterSymbol, TypeWithAnnotations>(
@@ -130,7 +135,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             ImmutableArray<TypeParameterSymbol> oldTypeParameters,
             Symbol newOwner,
             out ImmutableArray<TypeParameterSymbol> newTypeParameters
-        ) {
+        )
+        {
             if (oldTypeParameters.Length == 0)
             {
                 newTypeParameters = ImmutableArray<TypeParameterSymbol>.Empty;
@@ -173,7 +179,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             NamedTypeSymbol oldOwner,
             NamedTypeSymbol newOwner,
             out ImmutableArray<TypeParameterSymbol> newTypeParameters
-        ) {
+        )
+        {
             Debug.Assert(
                 TypeSymbol.Equals(
                     oldOwner.ConstructedFrom,
@@ -192,7 +199,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             MethodSymbol oldOwner,
             Symbol newOwner,
             out ImmutableArray<TypeParameterSymbol> newTypeParameters
-        ) {
+        )
+        {
             Debug.Assert(oldOwner.ConstructedFrom == oldOwner);
             return WithAlphaRename(
                 oldOwner.OriginalDefinition.TypeParameters,
@@ -207,7 +215,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             out ImmutableArray<TypeParameterSymbol> newTypeParameters,
             out ImmutableArray<TypeParameterSymbol> oldTypeParameters,
             MethodSymbol stopAt = null
-        ) {
+        )
+        {
             Debug.Assert(oldOwner.ConstructedFrom == oldOwner);
             Debug.Assert(stopAt == null || stopAt.ConstructedFrom == stopAt);
 
@@ -254,7 +263,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
         private static SmallDictionary<TypeParameterSymbol, TypeWithAnnotations> ConstructMapping(
             ImmutableArray<TypeParameterSymbol> from,
             ImmutableArray<TypeWithAnnotations> to
-        ) {
+        )
+        {
             var mapping = new SmallDictionary<TypeParameterSymbol, TypeWithAnnotations>(
                 ReferenceEqualityComparer.Instance
             );

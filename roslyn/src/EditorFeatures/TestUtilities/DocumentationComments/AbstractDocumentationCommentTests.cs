@@ -36,7 +36,8 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.DocumentationComments
             bool useTabs = false,
             bool autoGenerateXmlDocComments = true,
             string newLine = "\r\n"
-        ) {
+        )
+        {
             Verify(
                 initialMarkup,
                 expectedMarkup,
@@ -72,7 +73,8 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.DocumentationComments
             bool useTabs = false,
             bool autoGenerateXmlDocComments = true,
             Action<TestWorkspace> setOptionsOpt = null
-        ) {
+        )
+        {
             Verify(
                 initialMarkup,
                 expectedMarkup,
@@ -99,7 +101,8 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.DocumentationComments
             string expectedMarkup,
             bool useTabs = false,
             bool autoGenerateXmlDocComments = true
-        ) {
+        )
+        {
             Verify(
                 initialMarkup,
                 expectedMarkup,
@@ -126,7 +129,8 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.DocumentationComments
             string expectedMarkup,
             bool useTabs = false,
             bool autoGenerateXmlDocComments = true
-        ) {
+        )
+        {
             Verify(
                 initialMarkup,
                 expectedMarkup,
@@ -159,7 +163,8 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.DocumentationComments
             string expectedMarkup,
             bool useTabs = false,
             bool autoGenerateXmlDocComments = true
-        ) {
+        )
+        {
             Verify(
                 initialMarkup,
                 expectedMarkup,
@@ -205,7 +210,8 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.DocumentationComments
             Action<TestWorkspace, IWpfTextView, IEditorOperationsFactoryService> execute,
             Action<TestWorkspace> setOptionsOpt = null,
             string newLine = "\r\n"
-        ) {
+        )
+        {
             using (var workspace = CreateTestWorkspace(initialMarkup))
             {
                 var testDocument = workspace.Documents.Single();

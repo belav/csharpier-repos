@@ -34,7 +34,8 @@ namespace Microsoft.AspNetCore.SignalR.Microbenchmarks.Shared
 
         public override ValueTask<ReadResult> ReadAsync(
             CancellationToken cancellationToken = new CancellationToken()
-        ) {
+        )
+        {
             if (ReadResults.Count == 0)
             {
                 return new ValueTask<ReadResult>(new ReadResult(default, false, true));

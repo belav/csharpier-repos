@@ -35,7 +35,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.UnusedReference
                 Solution solution,
                 string projectFilePath,
                 ImmutableArray<ReferenceUpdate> referenceUpdates
-            ) {
+            )
+            {
                 var solutionName = Path.GetFileName(solution.FilePath);
                 var project = solution.Projects.First(
                     project =>
@@ -90,7 +91,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.UnusedReference
                 internal SinkManager(
                     UnusedReferencesDataSource unusedReferencesDataSource,
                     ITableDataSink sink
-                ) {
+                )
+                {
                     UnusedReferencesDataSource = unusedReferencesDataSource;
                     Sink = sink;
 
@@ -117,7 +119,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.UnusedReference
                     string projectName,
                     string language,
                     ReferenceUpdate referenceUpdate
-                ) {
+                )
+                {
                     SolutionName = solutionName;
                     ProjectName = projectName;
                     Language = language;
@@ -163,7 +166,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.UnusedReference
                     if (
                         keyName != UnusedReferencesTableKeyNames.UpdateAction
                         || content is not UpdateAction action
-                    ) {
+                    )
+                    {
                         return false;
                     }
 

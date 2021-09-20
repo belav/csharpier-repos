@@ -82,10 +82,8 @@ namespace System.Collections.Generic
 
         public Dictionary(IDictionary<TKey, TValue> dictionary) : this(dictionary, null) { }
 
-        public Dictionary(
-            IDictionary<TKey, TValue> dictionary,
-            IEqualityComparer<TKey>? comparer
-        ) : this(dictionary != null ? dictionary.Count : 0, comparer)
+        public Dictionary(IDictionary<TKey, TValue> dictionary, IEqualityComparer<TKey>? comparer)
+            : this(dictionary != null ? dictionary.Count : 0, comparer)
         {
             if (dictionary == null)
             {
@@ -232,12 +230,14 @@ namespace System.Collections.Generic
 
         bool ICollection<KeyValuePair<TKey, TValue>>.Contains(
             KeyValuePair<TKey, TValue> keyValuePair
-        ) {
+        )
+        {
             ref TValue value = ref FindValue(keyValuePair.Key);
             if (
                 !Unsafe.IsNullRef(ref value)
                 && EqualityComparer<TValue>.Default.Equals(value, keyValuePair.Value)
-            ) {
+            )
+            {
                 return true;
             }
 
@@ -250,7 +250,8 @@ namespace System.Collections.Generic
             if (
                 !Unsafe.IsNullRef(ref value)
                 && EqualityComparer<TValue>.Default.Equals(value, keyValuePair.Value)
-            ) {
+            )
+            {
                 Remove(keyValuePair.Key);
                 return true;
             }
@@ -298,7 +299,8 @@ namespace System.Collections.Generic
                     if (
                         entries![i].next >= -1
                         && EqualityComparer<TValue>.Default.Equals(entries[i].value, value)
-                    ) {
+                    )
+                    {
                         return true;
                     }
                 }
@@ -413,7 +415,8 @@ namespace System.Collections.Generic
                             if (
                                 entry.hashCode == hashCode
                                 && EqualityComparer<TKey>.Default.Equals(entry.key, key)
-                            ) {
+                            )
+                            {
                                 goto ReturnFound;
                             }
 
@@ -446,7 +449,8 @@ namespace System.Collections.Generic
                             entry = ref entries[i];
                             if (
                                 entry.hashCode == hashCode && defaultComparer.Equals(entry.key, key)
-                            ) {
+                            )
+                            {
                                 goto ReturnFound;
                             }
 
@@ -565,7 +569,8 @@ namespace System.Collections.Generic
                         if (
                             entries[i].hashCode == hashCode
                             && EqualityComparer<TKey>.Default.Equals(entries[i].key, key)
-                        ) {
+                        )
+                        {
                             if (behavior == InsertionBehavior.OverwriteExisting)
                             {
                                 entries[i].value = value;
@@ -609,7 +614,8 @@ namespace System.Collections.Generic
                         if (
                             entries[i].hashCode == hashCode
                             && defaultComparer.Equals(entries[i].key, key)
-                        ) {
+                        )
+                        {
                             if (behavior == InsertionBehavior.OverwriteExisting)
                             {
                                 entries[i].value = value;
@@ -712,7 +718,8 @@ namespace System.Collections.Generic
                 !typeof(TKey).IsValueType
                 && collisionCount > HashHelpers.HashCollisionThreshold
                 && comparer is NonRandomizedStringEqualityComparer
-            ) {
+            )
+            {
                 // If we hit the collision threshold we'll need to switch to the comparer which is using randomized string hashing
                 // i.e. EqualityComparer<string>.Default.
                 Resize(entries.Length, true);
@@ -861,7 +868,8 @@ namespace System.Collections.Generic
                             _comparer?.Equals(entry.key, key)
                             ?? EqualityComparer<TKey>.Default.Equals(entry.key, key)
                         )
-                    ) {
+                    )
+                    {
                         if (last < 0)
                         {
                             bucket = entry.next + 1; // Value in buckets is 1-based
@@ -937,7 +945,8 @@ namespace System.Collections.Generic
                             _comparer?.Equals(entry.key, key)
                             ?? EqualityComparer<TKey>.Default.Equals(entry.key, key)
                         )
-                    ) {
+                    )
+                    {
                         if (last < 0)
                         {
                             bucket = entry.next + 1; // Value in buckets is 1-based

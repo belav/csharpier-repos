@@ -21,7 +21,8 @@ namespace ILCompiler.DependencyAnalysis
             int offset,
             Utf8String name,
             bool includeCompilationUnitPrefix
-        ) {
+        )
+        {
             _object = obj;
             _offset = offset;
             _name = name;

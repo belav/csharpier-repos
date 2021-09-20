@@ -98,7 +98,8 @@ namespace Newtonsoft.Json.Tests.Issues
                 int offset,
                 int count,
                 CancellationToken cancellationToken
-            ) {
+            )
+            {
                 return _innerStream.ReadAsync(buffer, offset, count, cancellationToken);
             }
 
@@ -112,7 +113,8 @@ namespace Newtonsoft.Json.Tests.Issues
                 int offset,
                 int count,
                 CancellationToken cancellationToken
-            ) {
+            )
+            {
                 return _innerStream.WriteAsync(buffer, offset, count, cancellationToken);
             }
 

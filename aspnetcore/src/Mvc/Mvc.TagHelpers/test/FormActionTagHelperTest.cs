@@ -198,7 +198,8 @@ namespace Microsoft.AspNetCore.Mvc.TagHelpers
         public async Task ProcessAsync_CallsActionWithExpectedParameters(
             IDictionary<string, string> routeValues,
             IDictionary<string, object> expectedRouteValues
-        ) {
+        )
+        {
             // Arrange
             var context = new TagHelperContext(
                 tagName: "form-action",
@@ -262,7 +263,8 @@ namespace Microsoft.AspNetCore.Mvc.TagHelpers
         public async Task ProcessAsync_CallsRouteUrlWithExpectedParameters(
             IDictionary<string, string> routeValues,
             IDictionary<string, object> expectedRouteValues
-        ) {
+        )
+        {
             // Arrange
             var context = new TagHelperContext(
                 tagName: "form-action",
@@ -348,7 +350,8 @@ namespace Microsoft.AspNetCore.Mvc.TagHelpers
             string area,
             Dictionary<string, string> routeValues,
             string expectedArea
-        ) {
+        )
+        {
             // Arrange
             var context = new TagHelperContext(
                 tagName: "form-action",
@@ -403,7 +406,8 @@ namespace Microsoft.AspNetCore.Mvc.TagHelpers
             string area,
             Dictionary<string, string> routeValues,
             string expectedArea
-        ) {
+        )
+        {
             // Arrange
             var context = new TagHelperContext(
                 tagName: "form-action",
@@ -526,7 +530,8 @@ namespace Microsoft.AspNetCore.Mvc.TagHelpers
         public async Task ProcessAsync_ThrowsIfFormActionConflictsWithBoundAttributes(
             string tagName,
             string propertyName
-        ) {
+        )
+        {
             // Arrange
             var urlHelperFactory = new Mock<IUrlHelperFactory>().Object;
 
@@ -575,7 +580,8 @@ namespace Microsoft.AspNetCore.Mvc.TagHelpers
         public async Task ProcessAsync_ThrowsIfRouteAndActionOrControllerProvided(
             string tagName,
             string propertyName
-        ) {
+        )
+        {
             // Arrange
             var urlHelperFactory = new Mock<IUrlHelperFactory>().Object;
 

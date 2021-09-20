@@ -747,7 +747,8 @@ namespace System.Text.Tests
             string encodingName,
             byte[] bytes,
             string expected
-        ) {
+        )
+        {
             Encoding encoding = CodePagesEncodingProvider.Instance.GetEncoding(encodingName);
             string encoded = encoding.GetString(bytes, 0, bytes.Length);
             Assert.Equal(expected, encoded);
@@ -795,7 +796,8 @@ namespace System.Text.Tests
             int codePage,
             string webName,
             string queryString
-        ) {
+        )
+        {
             _ = webName;
             Encoding encoding;
 
@@ -846,7 +848,8 @@ namespace System.Text.Tests
             string codepageName,
             byte[] bytes,
             int[] expected
-        ) {
+        )
+        {
             Decoder decoder = CodePagesEncodingProvider.Instance.GetEncoding(codepageName)
                 .GetDecoder();
             char[] buffer = new char[expected.Length];
@@ -855,7 +858,8 @@ namespace System.Text.Tests
                 int byteIndex = 0, charIndex = 0, charCount = 0;
                 byteIndex < bytes.Length;
                 byteIndex++, charIndex += charCount
-            ) {
+            )
+            {
                 charCount = decoder.GetChars(bytes, byteIndex, 1, buffer, charIndex);
             }
 
@@ -868,7 +872,8 @@ namespace System.Text.Tests
             int codePage,
             string webName,
             string queryString
-        ) {
+        )
+        {
             _ = webName;
             _ = queryString;
             var encoding = CodePagesEncodingProvider.Instance.GetEncoding(codePage);

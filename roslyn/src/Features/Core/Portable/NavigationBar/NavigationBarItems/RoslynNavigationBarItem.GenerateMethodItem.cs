@@ -15,12 +15,14 @@ namespace Microsoft.CodeAnalysis.NavigationBar
                 Glyph glyph,
                 SymbolKey destinationTypeSymbolId,
                 SymbolKey methodToReplicateSymbolId
-            ) : base(
-                RoslynNavigationBarItemKind.GenerateMethod,
-                text,
-                glyph,
-                destinationTypeSymbolId
-            ) {
+            )
+                : base(
+                    RoslynNavigationBarItemKind.GenerateMethod,
+                    text,
+                    glyph,
+                    destinationTypeSymbolId
+                )
+            {
                 MethodToReplicateSymbolKey = methodToReplicateSymbolId;
             }
 

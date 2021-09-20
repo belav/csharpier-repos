@@ -38,7 +38,8 @@ namespace Microsoft.AspNetCore.HttpsPolicy
             RequestDelegate next,
             IOptions<HstsOptions> options,
             ILoggerFactory loggerFactory
-        ) {
+        )
+        {
             if (options == null)
             {
                 throw new ArgumentNullException(nameof(options));

@@ -52,7 +52,8 @@ namespace System.Net.Connections.Tests
                 ProtocolType protocolType,
                 EndPoint endPoint,
                 IConnectionProperties options
-            ) {
+            )
+            {
                 Socket socket = new Socket(addressFamily, socketType, protocolType);
 
                 if (options.TryGet(out CustomConnectionOptionsValues vals))

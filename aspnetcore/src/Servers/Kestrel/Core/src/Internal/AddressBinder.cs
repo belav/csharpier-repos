@@ -25,7 +25,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Internal
             IEnumerable<ListenOptions> listenOptions,
             AddressBindContext context,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var strategy = CreateStrategy(
                 listenOptions.ToArray(),
                 context.Addresses.ToArray(),
@@ -44,7 +45,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Internal
             ListenOptions[] listenOptions,
             string[] addresses,
             bool preferAddresses
-        ) {
+        )
+        {
             var hasListenOptions = listenOptions.Length > 0;
             var hasAddresses = addresses.Length > 0;
 
@@ -85,7 +87,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Internal
         protected internal static bool TryCreateIPEndPoint(
             BindingAddress address,
             [NotNullWhen(true)] out IPEndPoint? endpoint
-        ) {
+        )
+        {
             if (!IPAddress.TryParse(address.Host, out var ip))
             {
                 endpoint = null;
@@ -100,7 +103,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Internal
             ListenOptions endpoint,
             AddressBindContext context,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             try
             {
                 await context.CreateBinding(endpoint, cancellationToken).ConfigureAwait(false);
@@ -145,7 +149,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Internal
             }
             else if (
                 string.Equals(parsedAddress.Host, "localhost", StringComparison.OrdinalIgnoreCase)
-            ) {
+            )
+            {
                 // "localhost" for both IPv4 and IPv6 can't be represented as an IPEndPoint.
                 options = new LocalhostListenOptions(parsedAddress.Port);
             }
@@ -172,7 +177,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Internal
             public async Task BindAsync(
                 AddressBindContext context,
                 CancellationToken cancellationToken
-            ) {
+            )
+            {
                 var httpDefault = ParseAddress(Constants.DefaultServerAddress, out _);
                 context.ServerOptions.ApplyEndpointDefaults(httpDefault);
                 await httpDefault.BindAsync(context, cancellationToken).ConfigureAwait(false);
@@ -209,7 +215,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Internal
             public override Task BindAsync(
                 AddressBindContext context,
                 CancellationToken cancellationToken
-            ) {
+            )
+            {
                 var joined = string.Join(", ", _addresses);
                 context.Logger.LogInformation(
                     CoreStrings.OverridingWithPreferHostingUrls,
@@ -236,7 +243,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Internal
             public override Task BindAsync(
                 AddressBindContext context,
                 CancellationToken cancellationToken
-            ) {
+            )
+            {
                 var joined = string.Join(", ", _originalAddresses);
                 context.Logger.LogWarning(CoreStrings.OverridingWithKestrelOptions, joined);
 
@@ -256,7 +264,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Internal
             public virtual async Task BindAsync(
                 AddressBindContext context,
                 CancellationToken cancellationToken
-            ) {
+            )
+            {
                 foreach (var endpoint in _endpoints)
                 {
                     await endpoint.BindAsync(context, cancellationToken).ConfigureAwait(false);
@@ -276,7 +285,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Internal
             public virtual async Task BindAsync(
                 AddressBindContext context,
                 CancellationToken cancellationToken
-            ) {
+            )
+            {
                 foreach (var address in _addresses)
                 {
                     var options = ParseAddress(address, out var https);

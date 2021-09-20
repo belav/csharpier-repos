@@ -235,7 +235,8 @@ namespace Microsoft.EntityFrameworkCore
                 DbConnection connection,
                 ConnectionEventData eventData,
                 InterceptionResult result
-            ) {
+            )
+            {
                 base.ConnectionOpening(connection, eventData, result);
 
                 if (!result.IsSuppressed)
@@ -251,7 +252,8 @@ namespace Microsoft.EntityFrameworkCore
                 ConnectionEventData eventData,
                 InterceptionResult result,
                 CancellationToken cancellationToken = default
-            ) {
+            )
+            {
                 await base.ConnectionOpeningAsync(connection, eventData, result, cancellationToken);
 
                 if (!result.IsSuppressed)
@@ -296,7 +298,8 @@ namespace Microsoft.EntityFrameworkCore
                 DbConnection connection,
                 ConnectionEventData eventData,
                 InterceptionResult result
-            ) {
+            )
+            {
                 Assert.False(eventData.IsAsync);
                 SyncCalled = true;
                 AssertOpening(eventData);
@@ -309,7 +312,8 @@ namespace Microsoft.EntityFrameworkCore
                 ConnectionEventData eventData,
                 InterceptionResult result,
                 CancellationToken cancellationToken = default
-            ) {
+            )
+            {
                 Assert.True(eventData.IsAsync);
                 AsyncCalled = true;
                 AssertOpening(eventData);
@@ -320,7 +324,8 @@ namespace Microsoft.EntityFrameworkCore
             public virtual void ConnectionOpened(
                 DbConnection connection,
                 ConnectionEndEventData eventData
-            ) {
+            )
+            {
                 Assert.False(eventData.IsAsync);
                 SyncCalled = true;
                 AssertOpened(eventData);
@@ -330,7 +335,8 @@ namespace Microsoft.EntityFrameworkCore
                 DbConnection connection,
                 ConnectionEndEventData eventData,
                 CancellationToken cancellationToken = default
-            ) {
+            )
+            {
                 Assert.True(eventData.IsAsync);
                 AsyncCalled = true;
                 AssertOpened(eventData);
@@ -342,7 +348,8 @@ namespace Microsoft.EntityFrameworkCore
                 DbConnection connection,
                 ConnectionEventData eventData,
                 InterceptionResult result
-            ) {
+            )
+            {
                 Assert.False(eventData.IsAsync);
                 SyncCalled = true;
                 AssertClosing(eventData);
@@ -354,7 +361,8 @@ namespace Microsoft.EntityFrameworkCore
                 DbConnection connection,
                 ConnectionEventData eventData,
                 InterceptionResult result
-            ) {
+            )
+            {
                 Assert.True(eventData.IsAsync);
                 AsyncCalled = true;
                 AssertClosing(eventData);
@@ -365,7 +373,8 @@ namespace Microsoft.EntityFrameworkCore
             public virtual void ConnectionClosed(
                 DbConnection connection,
                 ConnectionEndEventData eventData
-            ) {
+            )
+            {
                 Assert.False(eventData.IsAsync);
                 SyncCalled = true;
                 AssertClosed(eventData);
@@ -374,7 +383,8 @@ namespace Microsoft.EntityFrameworkCore
             public virtual Task ConnectionClosedAsync(
                 DbConnection connection,
                 ConnectionEndEventData eventData
-            ) {
+            )
+            {
                 Assert.True(eventData.IsAsync);
                 AsyncCalled = true;
                 AssertClosed(eventData);
@@ -385,7 +395,8 @@ namespace Microsoft.EntityFrameworkCore
             public virtual void ConnectionFailed(
                 DbConnection connection,
                 ConnectionErrorEventData eventData
-            ) {
+            )
+            {
                 Assert.False(eventData.IsAsync);
                 SyncCalled = true;
                 AssertFailed(eventData);
@@ -395,7 +406,8 @@ namespace Microsoft.EntityFrameworkCore
                 DbConnection connection,
                 ConnectionErrorEventData eventData,
                 CancellationToken cancellationToken = default
-            ) {
+            )
+            {
                 Assert.True(eventData.IsAsync);
                 AsyncCalled = true;
                 AssertFailed(eventData);
@@ -461,7 +473,8 @@ namespace Microsoft.EntityFrameworkCore
             DbContext context,
             ConnectionInterceptor interceptor,
             bool async
-        ) {
+        )
+        {
             Assert.Equal(async, interceptor.AsyncCalled);
             Assert.NotEqual(async, interceptor.SyncCalled);
             Assert.NotEqual(interceptor.AsyncCalled, interceptor.SyncCalled);
@@ -477,7 +490,8 @@ namespace Microsoft.EntityFrameworkCore
             DbContext context,
             ConnectionInterceptor interceptor,
             bool async
-        ) {
+        )
+        {
             Assert.Equal(async, interceptor.AsyncCalled);
             Assert.NotEqual(async, interceptor.SyncCalled);
             Assert.NotEqual(interceptor.AsyncCalled, interceptor.SyncCalled);
@@ -493,7 +507,8 @@ namespace Microsoft.EntityFrameworkCore
             DbContext context,
             ConnectionInterceptor interceptor,
             bool async
-        ) {
+        )
+        {
             Assert.Equal(async, interceptor.AsyncCalled);
             Assert.NotEqual(async, interceptor.SyncCalled);
             Assert.NotEqual(interceptor.AsyncCalled, interceptor.SyncCalled);

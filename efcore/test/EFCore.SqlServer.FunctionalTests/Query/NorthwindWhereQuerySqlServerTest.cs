@@ -160,7 +160,8 @@ WHERE [c].[City] = @__city_0"
 
         public override async Task Where_method_call_nullable_type_closure_via_query_cache(
             bool async
-        ) {
+        )
+        {
             await base.Where_method_call_nullable_type_closure_via_query_cache(async);
 
             AssertSql(
@@ -180,7 +181,8 @@ WHERE CAST([e].[ReportsTo] AS bigint) = @__p_0"
 
         public override async Task Where_method_call_nullable_type_reverse_closure_via_query_cache(
             bool async
-        ) {
+        )
+        {
             await base.Where_method_call_nullable_type_reverse_closure_via_query_cache(async);
 
             AssertSql(
@@ -352,7 +354,8 @@ WHERE [c].[City] = @__InstanceFieldValue_0"
 
         public override async Task Where_new_instance_field_access_closure_via_query_cache(
             bool async
-        ) {
+        )
+        {
             await base.Where_new_instance_field_access_closure_via_query_cache(async);
 
             AssertSql(
@@ -395,7 +398,8 @@ WHERE [e].[ReportsTo] IS NULL"
 
         public override async Task Where_simple_closure_via_query_cache_nullable_type_reverse(
             bool async
-        ) {
+        )
+        {
             await base.Where_simple_closure_via_query_cache_nullable_type_reverse(async);
 
             AssertSql(
@@ -563,7 +567,8 @@ WHERE [e].[EmployeeID] = 1"
 
         public override async Task Where_equals_using_object_overload_on_mismatched_types(
             bool async
-        ) {
+        )
+        {
             await base.Where_equals_using_object_overload_on_mismatched_types(async);
 
             AssertSql(
@@ -617,7 +622,8 @@ WHERE 0 = 1"
 
         public override async Task Where_equals_on_mismatched_types_nullable_long_nullable_int(
             bool async
-        ) {
+        )
+        {
             await base.Where_equals_on_mismatched_types_nullable_long_nullable_int(async);
 
             AssertSql(
@@ -1213,7 +1219,8 @@ FROM [Products] AS [p]"
 
         public override async Task Where_negated_boolean_expression_compared_to_another_negated_boolean_expression(
             bool async
-        ) {
+        )
+        {
             await base.Where_negated_boolean_expression_compared_to_another_negated_boolean_expression(
                 async
             );
@@ -1276,7 +1283,8 @@ END <> @__prm_0"
 
         public override async Task Where_bool_member_and_parameter_compared_to_binary_expression_nested(
             bool async
-        ) {
+        )
+        {
             await base.Where_bool_member_and_parameter_compared_to_binary_expression_nested(async);
 
             AssertSql(
@@ -1545,7 +1553,8 @@ WHERE [p].[UnitsInStock] < CAST(20 AS smallint)"
 
         public override async Task Where_ternary_boolean_condition_with_another_condition(
             bool async
-        ) {
+        )
+        {
             await base.Where_ternary_boolean_condition_with_another_condition(async);
 
             AssertSql(
@@ -1559,7 +1568,8 @@ WHERE ([p].[ProductID] < @__productId_0) AND ([p].[UnitsInStock] >= CAST(20 AS s
 
         public override async Task Where_ternary_boolean_condition_with_false_as_result_true(
             bool async
-        ) {
+        )
+        {
             await base.Where_ternary_boolean_condition_with_false_as_result_true(async);
 
             AssertSql(
@@ -1571,7 +1581,8 @@ WHERE [p].[UnitsInStock] >= CAST(20 AS smallint)"
 
         public override async Task Where_ternary_boolean_condition_with_false_as_result_false(
             bool async
-        ) {
+        )
+        {
             await base.Where_ternary_boolean_condition_with_false_as_result_false(async);
 
             AssertSql(
@@ -1653,7 +1664,8 @@ FROM [Customers] AS [c]"
 
         public override async Task Where_compare_tuple_create_constructed_multi_value_equal(
             bool async
-        ) {
+        )
+        {
             await base.Where_compare_tuple_create_constructed_multi_value_equal(async);
 
             AssertSql(
@@ -1664,7 +1676,8 @@ FROM [Customers] AS [c]"
 
         public override async Task Where_compare_tuple_create_constructed_multi_value_not_equal(
             bool async
-        ) {
+        )
+        {
             await base.Where_compare_tuple_create_constructed_multi_value_not_equal(async);
 
             AssertSql(
@@ -1926,7 +1939,8 @@ WHERE [o].[OrderID] = @__ReadOnlyProperty_0"
 
         public override async Task Enclosing_class_const_member_does_not_generate_parameter(
             bool async
-        ) {
+        )
+        {
             await base.Enclosing_class_const_member_does_not_generate_parameter(async);
 
             AssertSql(
@@ -1949,7 +1963,8 @@ WHERE [c].[City] = N'Seattle'"
 
         public override async Task Filter_non_nullable_value_after_FirstOrDefault_on_empty_collection(
             bool async
-        ) {
+        )
+        {
             await base.Filter_non_nullable_value_after_FirstOrDefault_on_empty_collection(async);
 
             AssertSql(
@@ -1986,7 +2001,8 @@ WHERE CAST([o].[OrderID] AS nvarchar(max)) LIKE N'%20%'"
 
         public override async Task Using_same_parameter_twice_in_query_generates_one_sql_parameter(
             bool async
-        ) {
+        )
+        {
             await base.Using_same_parameter_twice_in_query_generates_one_sql_parameter(async);
 
             AssertSql(
@@ -2300,7 +2316,8 @@ WHERE [o].[OrderID] IN (10248, 10249)"
 
         public override async Task Multiple_OrElse_on_same_column_converted_to_in_with_overlap(
             bool async
-        ) {
+        )
+        {
             await base.Multiple_OrElse_on_same_column_converted_to_in_with_overlap(async);
 
             AssertSql(
@@ -2312,7 +2329,8 @@ WHERE [c].[CustomerID] IN (N'ALFKI', N'ANATR', N'ANTON')"
 
         public override async Task Multiple_OrElse_on_same_column_with_null_constant_comparison_converted_to_in(
             bool async
-        ) {
+        )
+        {
             await base.Multiple_OrElse_on_same_column_with_null_constant_comparison_converted_to_in(
                 async
             );
@@ -2326,7 +2344,8 @@ WHERE [c].[Region] IN (N'WA', N'OR', N'BC') OR [c].[Region] IS NULL"
 
         public override async Task Constant_array_Contains_OrElse_comparison_with_constant_gets_combined_to_one_in(
             bool async
-        ) {
+        )
+        {
             await base.Constant_array_Contains_OrElse_comparison_with_constant_gets_combined_to_one_in(
                 async
             );
@@ -2340,7 +2359,8 @@ WHERE [c].[CustomerID] IN (N'ALFKI', N'ANATR', N'ANTON')"
 
         public override async Task Constant_array_Contains_OrElse_comparison_with_constant_gets_combined_to_one_in_with_overlap(
             bool async
-        ) {
+        )
+        {
             await base.Constant_array_Contains_OrElse_comparison_with_constant_gets_combined_to_one_in_with_overlap(
                 async
             );
@@ -2354,7 +2374,8 @@ WHERE [c].[CustomerID] IN (N'ALFKI', N'ANATR', N'ANTON')"
 
         public override async Task Constant_array_Contains_OrElse_another_Contains_gets_combined_to_one_in_with_overlap(
             bool async
-        ) {
+        )
+        {
             await base.Constant_array_Contains_OrElse_another_Contains_gets_combined_to_one_in_with_overlap(
                 async
             );
@@ -2368,7 +2389,8 @@ WHERE [c].[CustomerID] IN (N'ALFKI', N'ANATR', N'ANTON')"
 
         public override async Task Constant_array_Contains_AndAlso_another_Contains_gets_combined_to_one_in_with_overlap(
             bool async
-        ) {
+        )
+        {
             await base.Constant_array_Contains_AndAlso_another_Contains_gets_combined_to_one_in_with_overlap(
                 async
             );
@@ -2382,7 +2404,8 @@ WHERE [c].[CustomerID] NOT IN (N'ALFKI', N'ANATR', N'ANTON')"
 
         public override async Task Multiple_AndAlso_on_same_column_converted_to_in_using_parameters(
             bool async
-        ) {
+        )
+        {
             await base.Multiple_AndAlso_on_same_column_converted_to_in_using_parameters(async);
 
             // issue #21462
@@ -2399,7 +2422,8 @@ WHERE (([c].[CustomerID] <> @__prm1_0) AND ([c].[CustomerID] <> @__prm2_1)) AND 
 
         public override async Task Array_of_parameters_Contains_OrElse_comparison_with_constant_gets_combined_to_one_in(
             bool async
-        ) {
+        )
+        {
             await base.Array_of_parameters_Contains_OrElse_comparison_with_constant_gets_combined_to_one_in(
                 async
             );
@@ -2414,7 +2438,8 @@ WHERE [c].[CustomerID] IN (N'ALFKI', N'ANATR') OR ([c].[CustomerID] = N'ANTON')"
 
         public override async Task Multiple_OrElse_on_same_column_with_null_parameter_comparison_converted_to_in(
             bool async
-        ) {
+        )
+        {
             await base.Multiple_OrElse_on_same_column_with_null_parameter_comparison_converted_to_in(
                 async
             );
@@ -2429,7 +2454,8 @@ WHERE ([c].[Region] IN (N'WA', N'OR') OR [c].[Region] IS NULL) OR ([c].[Region] 
 
         public override async Task Parameter_array_Contains_OrElse_comparison_with_constant(
             bool async
-        ) {
+        )
+        {
             await base.Parameter_array_Contains_OrElse_comparison_with_constant(async);
 
             AssertSql(
@@ -2441,7 +2467,8 @@ WHERE [c].[CustomerID] IN (N'ALFKI', N'ANATR') OR ([c].[CustomerID] = N'ANTON')"
 
         public override async Task Parameter_array_Contains_OrElse_comparison_with_parameter_with_overlap(
             bool async
-        ) {
+        )
+        {
             await base.Parameter_array_Contains_OrElse_comparison_with_parameter_with_overlap(
                 async
             );

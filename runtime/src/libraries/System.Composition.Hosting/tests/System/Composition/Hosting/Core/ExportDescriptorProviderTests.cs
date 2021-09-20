@@ -39,7 +39,8 @@ namespace System.Composition.Hosting.Core.Tests
             public override IEnumerable<ExportDescriptorPromise> GetExportDescriptors(
                 CompositionContract contract,
                 DependencyAccessor descriptorAccessor
-            ) {
+            )
+            {
                 throw new NotImplementedException();
             }
         }

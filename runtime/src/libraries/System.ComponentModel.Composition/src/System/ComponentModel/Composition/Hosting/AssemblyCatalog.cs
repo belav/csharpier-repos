@@ -251,7 +251,8 @@ namespace System.ComponentModel.Composition.Hosting
             string codeBase,
             ReflectionContext reflectionContext,
             ICompositionElement definitionOrigin
-        ) {
+        )
+        {
             Requires.NotNullOrEmpty(codeBase, nameof(codeBase));
             Requires.NotNull(reflectionContext, nameof(reflectionContext));
             Requires.NotNull(definitionOrigin, nameof(definitionOrigin));
@@ -328,7 +329,8 @@ namespace System.ComponentModel.Composition.Hosting
             Assembly assembly,
             ReflectionContext reflectionContext,
             ICompositionElement definitionOrigin
-        ) {
+        )
+        {
             Requires.NotNull(assembly, nameof(assembly));
             Requires.NotNull(reflectionContext, nameof(reflectionContext));
             Requires.NotNull(definitionOrigin, nameof(definitionOrigin));
@@ -433,7 +435,8 @@ namespace System.ComponentModel.Composition.Hosting
         /// </remarks>
         public override IEnumerable<Tuple<ComposablePartDefinition, ExportDefinition>> GetExports(
             ImportDefinition definition
-        ) {
+        )
+        {
             return InnerCatalog.GetExports(definition);
         }
 

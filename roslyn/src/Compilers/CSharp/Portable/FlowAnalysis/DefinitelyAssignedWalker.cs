@@ -37,7 +37,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             BoundNode node,
             BoundNode firstInRegion,
             BoundNode lastInRegion
-        ) {
+        )
+        {
             var walker = new DefinitelyAssignedWalker(
                 compilation,
                 member,
@@ -112,7 +113,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                     && state2opt?.IsAssigned(slot) != false
                     && variableBySlot[slot].Symbol is { } symbol
                     && symbol.Kind != SymbolKind.Field
-                ) {
+                )
+                {
                     definitelyAssigned.Add(symbol);
                 }
             }

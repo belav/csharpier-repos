@@ -74,7 +74,8 @@ namespace Microsoft.VisualStudio.LanguageServices.EditAndContinue
             IManagedHotReloadService hotReloadService,
             IDiagnosticAnalyzerService diagnosticService,
             EditAndContinueDiagnosticUpdateSource diagnosticUpdateSource
-        ) {
+        )
+        {
             _proxy = new RemoteEditAndContinueServiceProxy(workspace);
             _debuggerService = new DebuggerService(hotReloadService);
             _diagnosticService = diagnosticService;
@@ -100,7 +101,8 @@ namespace Microsoft.VisualStudio.LanguageServices.EditAndContinue
 
         public async ValueTask<ManagedHotReloadUpdates> GetUpdatesAsync(
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             try
             {
                 var solution = _proxy.Workspace.CurrentSolution;

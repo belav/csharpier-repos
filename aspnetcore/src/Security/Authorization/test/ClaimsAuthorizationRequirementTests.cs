@@ -14,7 +14,8 @@ namespace Microsoft.AspNetCore.Authorization.Test
         public ClaimsAuthorizationRequirement CreateRequirement(
             string claimType,
             params string[] allowedValues
-        ) {
+        )
+        {
             return new ClaimsAuthorizationRequirement(claimType, allowedValues);
         }
 

@@ -133,7 +133,8 @@ namespace Microsoft.Win32.RegistryTests
             string valueName,
             string envVariableName,
             string expectedVariableValue
-        ) {
+        )
+        {
             // ExpandEnvironmentStrings is converting "C:\Program Files (Arm)" to "C:\Program Files (x86)".
             if (envVariableName == "ProgramFiles" && PlatformDetection.IsArmProcess)
                 return; // see https://github.com/dotnet/runtime/issues/25778

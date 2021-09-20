@@ -68,7 +68,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                     returnTypeWithCustomModifiers,
                     TypeCompareKind.AllIgnoreOptions
                 )
-            ) {
+            )
+            {
                 returnType = returnType.WithTypeAndModifiers(
                     CopyTypeCustomModifiers(
                         returnTypeWithCustomModifiers,
@@ -89,7 +90,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             TypeSymbol sourceType,
             TypeSymbol destinationType,
             AssemblySymbol containingAssembly
-        ) {
+        )
+        {
             Debug.Assert(sourceType.Equals(destinationType, TypeCompareKind.AllIgnoreOptions));
 
             const RefKind refKind = RefKind.None;
@@ -124,7 +126,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                         | TypeCompareKind.IgnoreNullableModifiersForReferenceTypes
                         | TypeCompareKind.IgnoreDynamic
                 )
-            ) {
+            )
+            {
                 // We also preserve tuple names, if present and different
                 ImmutableArray<string> names = CSharpCompilation.TupleNamesEncoder.Encode(
                     destinationType
@@ -173,7 +176,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             ImmutableArray<ParameterSymbol> sourceParameters,
             ImmutableArray<ParameterSymbol> destinationParameters,
             bool alsoCopyParamsModifier
-        ) {
+        )
+        {
             Debug.Assert(!destinationParameters.IsDefault);
             Debug.Assert(destinationParameters.All(p => p is SourceParameterSymbolBase));
             Debug.Assert(sourceParameters.Length == destinationParameters.Length);
@@ -205,7 +209,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                         alsoCopyParamsModifier
                         && (sourceParameter.IsParams != destinationParameter.IsParams)
                     )
-                ) {
+                )
+                {
                     if (builder == null)
                     {
                         builder = ArrayBuilder<ParameterSymbol>.GetInstance();
@@ -246,7 +251,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
 
         internal static bool HasIsExternalInitModifier(
             this ImmutableArray<CustomModifier> modifiers
-        ) {
+        )
+        {
             return modifiers.Any(
                 modifier =>
                     !modifier.IsOptional

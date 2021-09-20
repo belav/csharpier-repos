@@ -223,7 +223,8 @@ namespace Microsoft.CodeAnalysis.UnitTests.Diagnostics
 
             public CustomResourceManager(
                 Dictionary<string, Dictionary<string, string>> resourceSetMap
-            ) {
+            )
+            {
                 _resourceSetMap = new Dictionary<string, CustomResourceSet>();
 
                 foreach (var kvp in resourceSetMap)
@@ -239,7 +240,8 @@ namespace Microsoft.CodeAnalysis.UnitTests.Diagnostics
                 string resourceName,
                 string cultureName,
                 string expectedResourceValue
-            ) {
+            )
+            {
                 var actual = this.GetString(
                     resourceName,
                     CultureInfo.CreateSpecificCulture(cultureName)
@@ -256,7 +258,8 @@ namespace Microsoft.CodeAnalysis.UnitTests.Diagnostics
                 CultureInfo culture,
                 bool createIfNotExists,
                 bool tryParents
-            ) {
+            )
+            {
                 return _resourceSetMap[culture.Name];
             }
 

@@ -36,7 +36,8 @@ namespace Microsoft.CodeAnalysis.UnitTests.Renamer
             DocumentWithInfo[] startDocuments,
             DocumentWithInfo[] endDocuments,
             string[] expectedErrors = null
-        ) {
+        )
+        {
             using var workspace = new AdhocWorkspace();
             var solution = workspace.CurrentSolution;
 
@@ -144,7 +145,8 @@ namespace Microsoft.CodeAnalysis.UnitTests.Renamer
             string documentName = null,
             string documentPath = null,
             string[] expectedErrors = null
-        ) {
+        )
+        {
             var defaultDocumentName = documentName ?? DefaultDocumentName;
             var defaultDocumentPath = documentPath ?? s_defaultDocumentPath;
 
@@ -177,7 +179,8 @@ namespace Microsoft.CodeAnalysis.UnitTests.Renamer
             string newDocumentPath = null,
             string documentName = null,
             string documentPath = null
-        ) {
+        )
+        {
             var defaultDocumentName = documentName ?? DefaultDocumentName;
             var defaultDocumentPath = documentPath ?? s_defaultDocumentPath;
 
@@ -250,7 +253,8 @@ namespace Microsoft.CodeAnalysis.UnitTests.Renamer
             string startText,
             string documentName,
             string newDocumentName
-        ) {
+        )
+        {
             using var workspace = new AdhocWorkspace();
             var solution = workspace.CurrentSolution;
 

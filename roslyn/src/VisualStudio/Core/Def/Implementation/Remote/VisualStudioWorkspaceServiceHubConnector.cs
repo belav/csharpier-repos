@@ -37,7 +37,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Remote
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
         public VisualStudioWorkspaceServiceHubConnector(
             IAsynchronousOperationListenerProvider listenerProvider
-        ) {
+        )
+        {
             _listenerProvider = listenerProvider;
             _disposalCancellationSource = new CancellationTokenSource();
         }

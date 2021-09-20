@@ -75,7 +75,8 @@ namespace System
                 TransitionTime daylightTransitionEnd,
                 TimeSpan baseUtcOffsetDelta,
                 bool noDaylightTransitions
-            ) {
+            )
+            {
                 ValidateAdjustmentRule(
                     dateStart,
                     dateEnd,
@@ -111,7 +112,8 @@ namespace System
                 TransitionTime daylightTransitionStart,
                 TransitionTime daylightTransitionEnd,
                 TimeSpan baseUtcOffsetDelta
-            ) {
+            )
+            {
                 return new AdjustmentRule(
                     dateStart,
                     dateEnd,
@@ -129,7 +131,8 @@ namespace System
                 TimeSpan daylightDelta,
                 TransitionTime daylightTransitionStart,
                 TransitionTime daylightTransitionEnd
-            ) {
+            )
+            {
                 return new AdjustmentRule(
                     dateStart,
                     dateEnd,
@@ -149,7 +152,8 @@ namespace System
                 TransitionTime daylightTransitionEnd,
                 TimeSpan baseUtcOffsetDelta,
                 bool noDaylightTransitions
-            ) {
+            )
+            {
                 AdjustDaylightDeltaToExpectedRange(ref daylightDelta, ref baseUtcOffsetDelta);
                 return new AdjustmentRule(
                     dateStart,
@@ -192,10 +196,12 @@ namespace System
                 TransitionTime daylightTransitionStart,
                 TransitionTime daylightTransitionEnd,
                 bool noDaylightTransitions
-            ) {
+            )
+            {
                 if (
                     dateStart.Kind != DateTimeKind.Unspecified && dateStart.Kind != DateTimeKind.Utc
-                ) {
+                )
+                {
                     throw new ArgumentException(
                         SR.Argument_DateTimeKindMustBeUnspecifiedOrUtc,
                         nameof(dateStart)
@@ -248,7 +254,8 @@ namespace System
                     dateStart != DateTime.MinValue
                     && dateStart.Kind == DateTimeKind.Unspecified
                     && dateStart.TimeOfDay != TimeSpan.Zero
-                ) {
+                )
+                {
                     throw new ArgumentException(
                         SR.Argument_DateTimeHasTimeOfDay,
                         nameof(dateStart)
@@ -259,7 +266,8 @@ namespace System
                     dateEnd != DateTime.MaxValue
                     && dateEnd.Kind == DateTimeKind.Unspecified
                     && dateEnd.TimeOfDay != TimeSpan.Zero
-                ) {
+                )
+                {
                     throw new ArgumentException(SR.Argument_DateTimeHasTimeOfDay, nameof(dateEnd));
                 }
             }
@@ -270,7 +278,8 @@ namespace System
             private static void AdjustDaylightDeltaToExpectedRange(
                 ref TimeSpan daylightDelta,
                 ref TimeSpan baseUtcOffsetDelta
-            ) {
+            )
+            {
                 if (daylightDelta > MaxDaylightDelta)
                 {
                     daylightDelta -= DaylightDeltaAdjustment;

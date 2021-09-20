@@ -150,7 +150,8 @@ namespace Internal.Cryptography.Pal
                                 == 0
                             && pCertContext->pCertInfo->SubjectPublicKeyInfo.Algorithm.Parameters.pbData
                                 == NULL_ASN_TAG
-                        ) {
+                        )
+                        {
                             //
                             // DSS certificates may not have the DSS parameters in the certificate. In this case, we try to build
                             // the certificate chain and propagate the parameters down from the certificate chain.
@@ -185,7 +186,8 @@ namespace Internal.Cryptography.Pal
                             null,
                             ref cbData
                         )
-                    ) {
+                    )
+                    {
                         CERT_CHAIN_PARA chainPara = default;
                         chainPara.cbSize = sizeof(CERT_CHAIN_PARA);
                         if (

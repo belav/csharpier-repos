@@ -25,7 +25,8 @@ namespace System.Text.Json.Serialization.Tests
                 ref Utf8JsonReader reader,
                 Type typeToConvert,
                 JsonSerializerOptions options
-            ) {
+            )
+            {
                 if (reader.TokenType != JsonTokenType.StartObject)
                 {
                     throw new JsonException();
@@ -101,7 +102,8 @@ namespace System.Text.Json.Serialization.Tests
                 Utf8JsonWriter writer,
                 Person value,
                 JsonSerializerOptions options
-            ) {
+            )
+            {
                 writer.WriteStartObject();
 
                 if (value is Customer)
@@ -170,7 +172,8 @@ namespace System.Text.Json.Serialization.Tests
                 ref Utf8JsonReader reader,
                 Type typeToConvert,
                 JsonSerializerOptions options
-            ) {
+            )
+            {
                 throw new NotSupportedException(
                     $"Deserializing not supported. Type={typeToConvert}."
                 );
@@ -180,7 +183,8 @@ namespace System.Text.Json.Serialization.Tests
                 Utf8JsonWriter writer,
                 Person value,
                 JsonSerializerOptions options
-            ) {
+            )
+            {
                 JsonSerializer.Serialize(writer, value, value.GetType(), options);
             }
         }

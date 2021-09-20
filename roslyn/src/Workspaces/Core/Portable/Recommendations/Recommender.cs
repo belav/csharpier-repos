@@ -18,7 +18,8 @@ namespace Microsoft.CodeAnalysis.Recommendations
             Workspace workspace,
             OptionSet? options = null,
             CancellationToken cancellationToken = default
-        ) {
+        )
+        {
             options ??= workspace.Options;
             var languageRecommender = workspace.Services.GetLanguageServices(semanticModel.Language)
                 .GetRequiredService<IRecommendationService>();
@@ -38,7 +39,8 @@ namespace Microsoft.CodeAnalysis.Recommendations
             Workspace workspace,
             OptionSet? options = null,
             CancellationToken cancellationToken = default
-        ) {
+        )
+        {
             return Task.FromResult(
                 GetRecommendedSymbolsAtPosition(
                     semanticModel,

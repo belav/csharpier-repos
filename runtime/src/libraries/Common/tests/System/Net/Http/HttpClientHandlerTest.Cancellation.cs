@@ -31,7 +31,8 @@ namespace System.Net.Http.Functional.Tests
         public async Task PostAsync_CancelDuringRequestContentSend_TaskCanceledQuickly(
             bool chunkedTransfer,
             CancellationMode mode
-        ) {
+        )
+        {
             if (LoopbackServerFactory.Version >= HttpVersion20.Value && chunkedTransfer)
             {
                 // There is no chunked encoding in HTTP/2 and later
@@ -106,7 +107,8 @@ namespace System.Net.Http.Functional.Tests
         public async Task GetAsync_CancelDuringResponseHeadersReceived_TaskCanceledQuickly(
             bool connectionClose,
             CancellationMode mode
-        ) {
+        )
+        {
             if (LoopbackServerFactory.Version >= HttpVersion20.Value && connectionClose)
             {
                 // There is no Connection header in HTTP/2 and later
@@ -183,11 +185,13 @@ namespace System.Net.Http.Functional.Tests
             bool chunkedTransfer,
             bool connectionClose,
             CancellationMode mode
-        ) {
+        )
+        {
             if (
                 LoopbackServerFactory.Version >= HttpVersion20.Value
                 && (chunkedTransfer || connectionClose)
-            ) {
+            )
+            {
                 // There is no chunked encoding or connection header in HTTP/2 and later
                 return;
             }
@@ -268,11 +272,13 @@ namespace System.Net.Http.Functional.Tests
             bool chunkedTransfer,
             bool connectionClose,
             bool readOrCopyToAsync
-        ) {
+        )
+        {
             if (
                 LoopbackServerFactory.Version >= HttpVersion20.Value
                 && (chunkedTransfer || connectionClose)
-            ) {
+            )
+            {
                 // There is no chunked encoding or connection header in HTTP/2 and later
                 return;
             }
@@ -358,7 +364,8 @@ namespace System.Net.Http.Functional.Tests
         public async Task GetAsync_CancelPendingRequests_DoesntCancelReadAsyncOnResponseStream(
             CancellationMode mode,
             bool copyToAsync
-        ) {
+        )
+        {
             if (IsWinHttpHandler && UseVersion >= HttpVersion20.Value)
             {
                 return;
@@ -445,7 +452,8 @@ namespace System.Net.Http.Functional.Tests
                                             buffer.Length
                                         )
                                     ) > 0
-                                ) {
+                                )
+                                {
                                     result.Write(buffer, 0, bytesRead);
                                 }
                             }
@@ -699,7 +707,8 @@ namespace System.Net.Http.Functional.Tests
         public async Task PostAsync_Cancel_CancellationTokenPassedToContent(
             HttpContent content,
             CancellationTokenSource cancellationTokenSource
-        ) {
+        )
+        {
             if (IsWinHttpHandler)
             {
                 return;
@@ -730,7 +739,8 @@ namespace System.Net.Http.Functional.Tests
                                     req,
                                     cancellationTokenSource.Token
                                 )
-                            ) {
+                            )
+                            {
                                 Assert.Equal("Hello World", await resp.Content.ReadAsStringAsync());
                             }
                         }
@@ -771,7 +781,8 @@ namespace System.Net.Http.Functional.Tests
             CancellationMode mode,
             HttpClient client,
             CancellationTokenSource cts
-        ) {
+        )
+        {
             if ((mode & CancellationMode.Token) != 0)
             {
                 cts?.Cancel();

@@ -87,7 +87,8 @@ namespace Microsoft.EntityFrameworkCore
         public static string? GetDefaultDatabaseName(
             this IReadOnlyIndex index,
             in StoreObjectIdentifier storeObject
-        ) {
+        )
+        {
             var columnNames = index.Properties.GetColumnNames(storeObject);
             if (columnNames == null)
             {
@@ -102,14 +103,16 @@ namespace Microsoft.EntityFrameworkCore
                 var i = 0;
                 i < Metadata.Internal.RelationalEntityTypeExtensions.MaxEntityTypesSharingTable;
                 i++
-            ) {
+            )
+            {
                 IReadOnlyIndex? linkedIndex = null;
                 foreach (
                     var otherIndex in rootIndex.DeclaringEntityType.FindRowInternalForeignKeys(
                             storeObject
                         )
                         .SelectMany(fk => fk.PrincipalEntityType.GetIndexes())
-                ) {
+                )
+                {
                     var otherColumnNames = otherIndex.Properties.GetColumnNames(storeObject);
                     if ((otherColumnNames != null) && otherColumnNames.SequenceEqual(columnNames))
                     {
@@ -176,7 +179,8 @@ namespace Microsoft.EntityFrameworkCore
             this IConventionIndex index,
             string? name,
             bool fromDataAnnotation = false
-        ) {
+        )
+        {
             index.SetOrRemoveAnnotation(
                 RelationalAnnotationNames.Name,
                 Check.NullButNotEmpty(name, nameof(name)),
@@ -235,7 +239,8 @@ namespace Microsoft.EntityFrameworkCore
         public static string? GetFilter(
             this IReadOnlyIndex index,
             in StoreObjectIdentifier storeObject
-        ) {
+        )
+        {
             var annotation = index.FindAnnotation(RelationalAnnotationNames.Filter);
             if (annotation != null)
             {
@@ -268,7 +273,8 @@ namespace Microsoft.EntityFrameworkCore
             this IConventionIndex index,
             string? value,
             bool fromDataAnnotation = false
-        ) {
+        )
+        {
             index.SetAnnotation(
                 RelationalAnnotationNames.Filter,
                 Check.NullButNotEmpty(value, nameof(value)),
@@ -312,7 +318,8 @@ namespace Microsoft.EntityFrameworkCore
         public static IReadOnlyIndex? FindSharedObjectRootIndex(
             this IReadOnlyIndex index,
             in StoreObjectIdentifier storeObject
-        ) {
+        )
+        {
             Check.NotNull(index, nameof(index));
 
             var indexName = index.GetDatabaseName(storeObject);
@@ -324,14 +331,16 @@ namespace Microsoft.EntityFrameworkCore
                 var i = 0;
                 i < Metadata.Internal.RelationalEntityTypeExtensions.MaxEntityTypesSharingTable;
                 i++
-            ) {
+            )
+            {
                 IReadOnlyIndex? linkedIndex = null;
                 foreach (
                     var otherIndex in rootIndex.DeclaringEntityType.FindRowInternalForeignKeys(
                             storeObject
                         )
                         .SelectMany(fk => fk.PrincipalEntityType.GetIndexes())
-                ) {
+                )
+                {
                     if (otherIndex.GetDatabaseName(storeObject) == indexName)
                     {
                         linkedIndex = otherIndex;

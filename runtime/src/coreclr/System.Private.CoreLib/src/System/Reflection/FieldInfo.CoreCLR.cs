@@ -28,7 +28,8 @@ namespace System.Reflection
         public static FieldInfo GetFieldFromHandle(
             RuntimeFieldHandle handle,
             RuntimeTypeHandle declaringType
-        ) {
+        )
+        {
             if (handle.IsNullHandle())
                 throw new ArgumentException(SR.Argument_InvalidHandle);
 

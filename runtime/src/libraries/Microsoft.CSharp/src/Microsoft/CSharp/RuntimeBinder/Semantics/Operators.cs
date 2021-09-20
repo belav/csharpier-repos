@@ -411,7 +411,8 @@ namespace Microsoft.CSharp.RuntimeBinder.Semantics
         private bool GetStandardAndLiftedBinopSignatures(
             List<BinOpFullSig> rgbofs,
             BinOpArgInfo info
-        ) {
+        )
+        {
             Debug.Assert(rgbofs != null);
 
             int ibosMinLift = 0;
@@ -674,7 +675,8 @@ namespace Microsoft.CSharp.RuntimeBinder.Semantics
                         info.type1,
                         info.type2
                     ) >= 0
-                ) {
+                )
+                {
                     return -1;
                 }
             }
@@ -793,7 +795,8 @@ namespace Microsoft.CSharp.RuntimeBinder.Semantics
             BinOpFullSig bofs,
             ExpressionKind ek,
             EXPRFLAG flags
-        ) {
+        )
+        {
             if (bofs.pfn == null)
             {
                 throw BadOperatorTypesError(info.arg1, info.arg2);
@@ -839,7 +842,8 @@ namespace Microsoft.CSharp.RuntimeBinder.Semantics
             BinOpFullSig bofs,
             ExpressionKind ek,
             EXPRFLAG flags
-        ) {
+        )
+        {
             Debug.Assert(bofs.Type1() is NullableType || bofs.Type2() is NullableType);
 
             Expr arg1 = info.arg1;
@@ -911,7 +915,8 @@ namespace Microsoft.CSharp.RuntimeBinder.Semantics
             bool bConvertBeforeLift,
             out Expr ppLiftedArgument,
             out Expr ppNonLiftedArgument
-        ) {
+        )
+        {
             Expr pLiftedArgument = mustConvert(pArgument, pParameterType);
             if (pLiftedArgument != pArgument)
             {
@@ -948,7 +953,8 @@ namespace Microsoft.CSharp.RuntimeBinder.Semantics
         {
             if (
                 !info.ValidForDelegate() || !info.type1.IsDelegateType && !info.type2.IsDelegateType
-            ) {
+            )
+            {
                 return false;
             }
 
@@ -1018,7 +1024,8 @@ namespace Microsoft.CSharp.RuntimeBinder.Semantics
             out LiftFlags pgrflt,
             out CType ptypeSig1,
             out CType ptypeSig2
-        ) {
+        )
+        {
             ptypeSig1 = null;
             ptypeSig2 = null;
             Debug.Assert(!(typeDst is NullableType));
@@ -1056,7 +1063,8 @@ namespace Microsoft.CSharp.RuntimeBinder.Semantics
             out LiftFlags pgrflt,
             out CType ptypeSig1,
             out CType ptypeSig2
-        ) {
+        )
+        {
             Debug.Assert(!(typeDst is NullableType));
             ptypeSig1 = null;
             ptypeSig2 = null;
@@ -1278,7 +1286,8 @@ namespace Microsoft.CSharp.RuntimeBinder.Semantics
                     && canConvert(info.arg2, typeDel)
                     && !type1.IsDelegateType
                     && !type2.IsDelegateType
-                ) {
+                )
+                {
                     prgbofs.Add(
                         new BinOpFullSig(
                             typeDel,
@@ -1402,7 +1411,8 @@ namespace Microsoft.CSharp.RuntimeBinder.Semantics
             BinOpFullSig bofs2,
             CType type1,
             CType type2
-        ) {
+        )
+        {
             BetterType bt1;
             BetterType bt2;
 
@@ -1447,7 +1457,8 @@ namespace Microsoft.CSharp.RuntimeBinder.Semantics
         private static (ExpressionKind, UnaOpKind, EXPRFLAG) CalculateExprAndUnaryOpKinds(
             OperatorKind op,
             bool bChecked
-        ) {
+        )
+        {
             ExpressionKind ek;
             UnaOpKind uok;
             EXPRFLAG flags = 0;
@@ -1635,7 +1646,8 @@ namespace Microsoft.CSharp.RuntimeBinder.Semantics
                                     pSignatures[iuofs],
                                     type
                                 ) >= 0
-                            ) {
+                            )
+                            {
                                 throw AmbiguousOperatorError(pArgument, null);
                             }
                         }
@@ -1694,7 +1706,8 @@ namespace Microsoft.CSharp.RuntimeBinder.Semantics
             EXPRFLAG flags,
             List<UnaOpFullSig> pSignatures,
             out Expr ppResult
-        ) {
+        )
+        {
             // We should have already checked argument != null and argument.type != null.
             Debug.Assert(pArgument != null);
             Debug.Assert(pArgument.Type != null);
@@ -1808,7 +1821,8 @@ namespace Microsoft.CSharp.RuntimeBinder.Semantics
             Expr pArgument,
             UnaOpMask unaryOpMask,
             List<UnaOpFullSig> pSignatures
-        ) {
+        )
+        {
             // All callers should already assert this to be the case.
             Debug.Assert(pArgument != null);
             Debug.Assert(pArgument.Type != null);
@@ -1940,7 +1954,8 @@ namespace Microsoft.CSharp.RuntimeBinder.Semantics
             EXPRFLAG flags,
             Expr arg,
             UnaOpFullSig uofs
-        ) {
+        )
+        {
             NullableType type = uofs.GetType() as NullableType;
             Debug.Assert(arg?.Type != null);
             if (arg.Type is NullType)
@@ -2003,7 +2018,8 @@ namespace Microsoft.CSharp.RuntimeBinder.Semantics
             EXPRFLAG flags,
             Expr arg1,
             Expr arg2
-        ) {
+        )
+        {
             Debug.Assert(
                 arg1.Type.IsPredefined
                     && arg2.Type.IsPredefined
@@ -2020,7 +2036,8 @@ namespace Microsoft.CSharp.RuntimeBinder.Semantics
             ExpressionKind ek,
             EXPRFLAG flags,
             Expr arg
-        ) {
+        )
+        {
             Debug.Assert(arg.Type.IsPredefined);
             return binder.BindIntOp(ek, flags, arg, null, arg.Type.PredefinedType);
         }
@@ -2034,7 +2051,8 @@ namespace Microsoft.CSharp.RuntimeBinder.Semantics
             EXPRFLAG _,
             Expr arg1,
             Expr arg2
-        ) {
+        )
+        {
             Debug.Assert(
                 arg1.Type.IsPredefined
                     && arg2.Type.IsPredefined
@@ -2051,7 +2069,8 @@ namespace Microsoft.CSharp.RuntimeBinder.Semantics
             ExpressionKind ek,
             EXPRFLAG _,
             Expr arg
-        ) {
+        )
+        {
             Debug.Assert(arg.Type.IsPredefined);
             return BindFloatOp(ek, arg, null);
         }
@@ -2149,7 +2168,8 @@ namespace Microsoft.CSharp.RuntimeBinder.Semantics
             CType type,
             ConstVal cv,
             CType typeTmp
-        ) {
+        )
+        {
             CType typeOne = type;
             if (typeOne.IsEnumType)
             {
@@ -2172,7 +2192,8 @@ namespace Microsoft.CSharp.RuntimeBinder.Semantics
             EXPRFLAG flags,
             Expr arg,
             UnaOpFullSig uofs
-        ) {
+        )
+        {
             Debug.Assert(ek == ExpressionKind.Add || ek == ExpressionKind.Subtract);
             Debug.Assert(!uofs.isLifted());
 
@@ -2208,7 +2229,8 @@ namespace Microsoft.CSharp.RuntimeBinder.Semantics
             EXPRFLAG flags,
             Expr arg,
             UnaOpFullSig uofs
-        ) {
+        )
+        {
             Debug.Assert(ek == ExpressionKind.Add || ek == ExpressionKind.Subtract);
             Debug.Assert(uofs.isLifted());
 
@@ -2260,7 +2282,8 @@ namespace Microsoft.CSharp.RuntimeBinder.Semantics
             EXPRFLAG flags,
             Expr arg1,
             Expr arg2
-        ) {
+        )
+        {
             Debug.Assert(
                 arg1.Type.IsPredefType(PredefinedType.PT_DECIMAL)
                     && arg2.Type.IsPredefType(PredefinedType.PT_DECIMAL)
@@ -2311,7 +2334,8 @@ namespace Microsoft.CSharp.RuntimeBinder.Semantics
             ExpressionKind ek,
             EXPRFLAG flags,
             Expr arg
-        ) {
+        )
+        {
             Debug.Assert(arg.Type.IsPredefType(PredefinedType.PT_DECIMAL));
             Debug.Assert(ek == ExpressionKind.Negate || ek == ExpressionKind.UnaryPlus);
 
@@ -2340,7 +2364,8 @@ namespace Microsoft.CSharp.RuntimeBinder.Semantics
             EXPRFLAG flags,
             Expr arg1,
             Expr arg2
-        ) {
+        )
+        {
             Debug.Assert(ek == ExpressionKind.Add);
             Debug.Assert(
                 arg1.Type.IsPredefType(PredefinedType.PT_STRING)
@@ -2364,7 +2389,8 @@ namespace Microsoft.CSharp.RuntimeBinder.Semantics
             EXPRFLAG flags,
             Expr arg1,
             Expr arg2
-        ) {
+        )
+        {
             Debug.Assert(ek == ExpressionKind.LeftShirt || ek == ExpressionKind.RightShift);
             Debug.Assert(arg1.Type.IsPredefined);
             Debug.Assert(arg2.Type.IsPredefType(PredefinedType.PT_INT));
@@ -2395,7 +2421,8 @@ namespace Microsoft.CSharp.RuntimeBinder.Semantics
             EXPRFLAG flags,
             Expr arg1,
             Expr arg2
-        ) {
+        )
+        {
             Debug.Assert(arg1 != null);
             Debug.Assert(arg2 != null);
             Debug.Assert(
@@ -2423,7 +2450,8 @@ namespace Microsoft.CSharp.RuntimeBinder.Semantics
             EXPRFLAG flags,
             Expr expr1,
             Expr expr2
-        ) {
+        )
+        {
             Debug.Assert(ek == ExpressionKind.BitwiseAnd || ek == ExpressionKind.BitwiseOr);
             Debug.Assert(
                 expr1.Type.IsPredefType(PredefinedType.PT_BOOL)
@@ -2493,7 +2521,8 @@ namespace Microsoft.CSharp.RuntimeBinder.Semantics
             ExpressionKind ek,
             EXPRFLAG flags,
             Expr arg
-        ) {
+        )
+        {
             Debug.Assert(arg.Type.IsPredefType(PredefinedType.PT_BOOL));
             Debug.Assert(ek == ExpressionKind.LogicalNot);
 
@@ -2528,7 +2557,8 @@ namespace Microsoft.CSharp.RuntimeBinder.Semantics
             EXPRFLAG flags,
             Expr arg1,
             Expr arg2
-        ) {
+        )
+        {
             Debug.Assert(ek == ExpressionKind.Eq || ek == ExpressionKind.NotEq);
             Debug.Assert(
                 arg1.Type.IsPredefType(PredefinedType.PT_STRING)
@@ -2562,7 +2592,8 @@ namespace Microsoft.CSharp.RuntimeBinder.Semantics
             EXPRFLAG flags,
             Expr arg1,
             Expr arg2
-        ) {
+        )
+        {
             Debug.Assert(ek == ExpressionKind.Eq || ek == ExpressionKind.NotEq);
 
             // Must box type variables for the verifier.
@@ -2595,7 +2626,8 @@ namespace Microsoft.CSharp.RuntimeBinder.Semantics
             EXPRFLAG flags,
             Expr arg1,
             Expr arg2
-        ) {
+        )
+        {
             Debug.Assert(
                 ek == ExpressionKind.Add
                     || ek == ExpressionKind.Subtract
@@ -2651,7 +2683,8 @@ namespace Microsoft.CSharp.RuntimeBinder.Semantics
             EXPRFLAG flags,
             Expr arg1,
             Expr arg2
-        ) {
+        )
+        {
             AggregateType typeDst = GetEnumBinOpType(
                 ek,
                 arg1.Type,
@@ -2689,7 +2722,8 @@ namespace Microsoft.CSharp.RuntimeBinder.Semantics
             EXPRFLAG flags,
             Expr arg1,
             Expr arg2
-        ) {
+        )
+        {
             Debug.Assert(ek == ExpressionKind.Add || ek == ExpressionKind.Subtract);
             CType nonNullableType1 = arg1.Type is NullableType arg1NubType
                 ? arg1NubType.UnderlyingType
@@ -2745,7 +2779,8 @@ namespace Microsoft.CSharp.RuntimeBinder.Semantics
             ExpressionKind ek,
             EXPRFLAG flags,
             Expr arg
-        ) {
+        )
+        {
             Debug.Assert(ek == ExpressionKind.BitwiseNot);
             Debug.Assert((ExprCast)arg != null);
             Debug.Assert(((ExprCast)arg).Argument.Type.IsEnumType);
@@ -2854,7 +2889,8 @@ namespace Microsoft.CSharp.RuntimeBinder.Semantics
             Expr op1,
             Expr op2,
             PredefinedType ptOp
-        ) {
+        )
+        {
             //Debug.Assert(kind.isRelational() || kind.isArithmetic() || kind.isBitwise());
             Debug.Assert(
                 ptOp == PredefinedType.PT_INT
@@ -3050,7 +3086,8 @@ namespace Microsoft.CSharp.RuntimeBinder.Semantics
                     pCall.MethWithInst.Meth().Params[1],
                     typeRet
                 )
-            ) {
+            )
+            {
                 throw ErrorHandling.Error(ErrorCode.ERR_BadBoolOp, pCall.MethWithInst);
             }
 
@@ -3101,7 +3138,8 @@ namespace Microsoft.CSharp.RuntimeBinder.Semantics
                 type is AggregateType ats
                 && (ats.IsClassType || ats.IsStructType)
                 && !ats.OwningAggregate.IsSkipUDOps()
-            ) {
+            )
+            {
                 return ats;
             }
 
@@ -3112,7 +3150,8 @@ namespace Microsoft.CSharp.RuntimeBinder.Semantics
             CType type1,
             CType type2,
             AggregateType[] rgats
-        ) {
+        )
+        {
             int cats = 0;
             rgats[0] = GetUserDefinedBinopArgumentType(type1);
             if (rgats[0] != null)
@@ -3137,7 +3176,8 @@ namespace Microsoft.CSharp.RuntimeBinder.Semantics
             MethodSymbol method,
             AggregateType ats,
             TypeArray Params
-        ) {
+        )
+        {
             if (!Params[0].IsNonNullableValueType || !Params[1].IsNonNullableValueType)
             {
                 return false;
@@ -3187,7 +3227,8 @@ namespace Microsoft.CSharp.RuntimeBinder.Semantics
             Expr arg1,
             Expr arg2,
             bool fDontLift
-        ) {
+        )
+        {
             if (!method.isOperator || method.Params.Count != 2)
             {
                 return false;
@@ -3236,7 +3277,8 @@ namespace Microsoft.CSharp.RuntimeBinder.Semantics
             Expr arg1,
             Expr arg2,
             bool fDontLift
-        ) {
+        )
+        {
             Name name = ExpressionKindName(ek);
             Debug.Assert(name != null);
             bool foundSome = false;
@@ -3249,7 +3291,8 @@ namespace Microsoft.CSharp.RuntimeBinder.Semantics
                     ) as MethodSymbol;
                 methCur != null;
                 methCur = methCur.LookupNext(symbmask_t.MASK_MethodSymbol) as MethodSymbol
-            ) {
+            )
+            {
                 if (
                     UserDefinedBinaryOperatorIsApplicable(
                         candidateList,
@@ -3260,7 +3303,8 @@ namespace Microsoft.CSharp.RuntimeBinder.Semantics
                         arg2,
                         fDontLift
                     )
-                ) {
+                )
+                {
                     foundSome = true;
                 }
             }
@@ -3276,12 +3320,14 @@ namespace Microsoft.CSharp.RuntimeBinder.Semantics
             Expr arg2,
             bool fDontLift,
             AggregateType atsStop
-        ) {
+        )
+        {
             for (
                 AggregateType atsCur = type;
                 atsCur != null && atsCur != atsStop;
                 atsCur = atsCur.BaseClass
-            ) {
+            )
+            {
                 if (
                     GetApplicableUserDefinedBinaryOperatorCandidates(
                         candidateList,
@@ -3291,7 +3337,8 @@ namespace Microsoft.CSharp.RuntimeBinder.Semantics
                         arg2,
                         fDontLift
                     )
-                ) {
+                )
+                {
                     return atsCur;
                 }
             }
@@ -3306,7 +3353,8 @@ namespace Microsoft.CSharp.RuntimeBinder.Semantics
             Expr arg2,
             bool fDontLift,
             out MethPropWithInst ppmpwi
-        ) {
+        )
+        {
             List<CandidateFunctionMember> methFirst = new List<CandidateFunctionMember>();
 
             ppmpwi = null;
@@ -3404,7 +3452,8 @@ namespace Microsoft.CSharp.RuntimeBinder.Semantics
             TypeArray Params,
             CType typeRet,
             MethPropWithInst mpwi
-        ) {
+        )
+        {
             arg1 = mustConvert(arg1, Params[0]);
             arg2 = mustConvert(arg2, Params[1]);
             ExprList args = ExprFactory.CreateList(arg1, arg2);
@@ -3427,7 +3476,8 @@ namespace Microsoft.CSharp.RuntimeBinder.Semantics
             Expr arg2,
             TypeArray Params,
             MethPropWithInst mpwi
-        ) {
+        )
+        {
             Expr exprVal1 = arg1;
             Expr exprVal2 = arg2;
             CType typeRet;
@@ -3518,7 +3568,8 @@ namespace Microsoft.CSharp.RuntimeBinder.Semantics
             CType argType1,
             CType argType2,
             out AggregateType ppEnumType
-        ) {
+        )
+        {
             Debug.Assert(argType1.IsEnumType || argType2.IsEnumType);
 
             AggregateType type1 = argType1 as AggregateType;
@@ -3565,7 +3616,8 @@ namespace Microsoft.CSharp.RuntimeBinder.Semantics
             CType RetType,
             Expr arg1,
             Expr arg2
-        ) {
+        )
+        {
             MethodSymbol methSym = PredefinedMembers.GetMethod(predefMeth);
             Debug.Assert(methSym != null);
             ExprBinOp binop = ExprFactory.CreateBinop(ek, RetType, arg1, arg2);
@@ -3584,7 +3636,8 @@ namespace Microsoft.CSharp.RuntimeBinder.Semantics
             PREDEFMETH predefMeth,
             CType pRetType,
             Expr pArg
-        ) {
+        )
+        {
             MethodSymbol methSym = PredefinedMembers.GetMethod(predefMeth);
             Debug.Assert(methSym != null);
             ExprUnaryOp pUnaryOp = ExprFactory.CreateUnaryOp(ek, pRetType, pArg);

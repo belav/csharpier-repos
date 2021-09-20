@@ -109,7 +109,8 @@ namespace System.Net.Http.Tests
         {
             foreach (
                 string casedName in new[] { name, name.ToUpperInvariant(), name.ToLowerInvariant() }
-            ) {
+            )
+            {
                 Validate(casedName, KnownHeaders.TryGetKnownHeader(casedName));
                 Validate(
                     casedName,
@@ -137,7 +138,8 @@ namespace System.Net.Http.Tests
         {
             foreach (
                 string casedName in new[] { name, name.ToUpperInvariant(), name.ToLowerInvariant() }
-            ) {
+            )
+            {
                 Assert.Null(KnownHeaders.TryGetKnownHeader(casedName));
                 Assert.Null(
                     KnownHeaders.TryGetKnownHeader(casedName.Select(c => (byte)c).ToArray())
@@ -227,7 +229,8 @@ namespace System.Net.Http.Tests
                     value.ToUpperInvariant(),
                     value.ToLowerInvariant()
                 }
-            ) {
+            )
+            {
                 Validate(KnownHeaders.TryGetKnownHeader(name), casedValue);
             }
 

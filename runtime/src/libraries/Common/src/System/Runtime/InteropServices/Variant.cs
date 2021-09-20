@@ -353,7 +353,8 @@ namespace System.Runtime.InteropServices
                 || (vt == VarEnum.VT_DISPATCH)
                 || (vt == VarEnum.VT_VARIANT)
                 || (vt == VarEnum.VT_RECORD)
-            ) {
+            )
+            {
                 unsafe
                 {
                     fixed (void* pThis = &this)

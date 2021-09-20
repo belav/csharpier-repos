@@ -27,14 +27,16 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
         public static AssemblySymbol GetReferencedAssemblySymbol(
             this CSharpCompilation compilation,
             MetadataReference reference
-        ) {
+        )
+        {
             return (AssemblySymbol)compilation.GetAssemblyOrModuleSymbol(reference);
         }
 
         public static ModuleSymbol GetReferencedModuleSymbol(
             this CSharpCompilation compilation,
             MetadataReference reference
-        ) {
+        )
+        {
             return (ModuleSymbol)compilation.GetAssemblyOrModuleSymbol(reference);
         }
 
@@ -52,7 +54,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
             this SyntaxTree syntaxTree,
             SyntaxKind kind,
             int occurrence = 1
-        ) {
+        )
+        {
             if (!(occurrence > 0))
             {
                 throw new ArgumentException(
@@ -68,7 +71,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
                     ref occurrence,
                     ref foundNode
                 )
-            ) {
+            )
+            {
                 return foundNode;
             }
             return default(SyntaxNodeOrToken);
@@ -79,7 +83,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
             SyntaxKind kind,
             ref int occurrence,
             ref SyntaxNodeOrToken foundNode
-        ) {
+        )
+        {
             if (node.IsKind(kind))
             {
                 occurrence--;
@@ -120,7 +125,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
         public static bool HasUnresolvedReferencesByComparisonTo(
             this AssemblySymbol @this,
             AssemblySymbol that
-        ) {
+        )
+        {
             var thisRefs = @this.BoundReferences();
             var thatRefs = that.BoundReferences();
 
@@ -138,7 +144,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
         public static bool RepresentsTheSameAssemblyButHasUnresolvedReferencesByComparisonTo(
             this AssemblySymbol @this,
             AssemblySymbol that
-        ) {
+        )
+        {
             var thisPEAssembly =
                 @this as Microsoft.CodeAnalysis.CSharp.Symbols.Metadata.PE.PEAssemblySymbol;
 
@@ -226,7 +233,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
         public static ImmutableArray<Symbol> GetMembers(
             this Compilation compilation,
             string qualifiedName
-        ) {
+        )
+        {
             NamespaceOrTypeSymbol lastContainer;
             var members = GetMembers(
                 ((CSharpCompilation)compilation).GlobalNamespace,
@@ -251,7 +259,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
             NamespaceOrTypeSymbol container,
             string qualifiedName,
             out NamespaceOrTypeSymbol lastContainer
-        ) {
+        )
+        {
             var parts = SplitMemberName(qualifiedName);
 
             lastContainer = container;
@@ -277,7 +286,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
             INamespaceOrTypeSymbol container,
             string qualifiedName,
             out INamespaceOrTypeSymbol lastContainer
-        ) {
+        )
+        {
             var parts = SplitMemberName(qualifiedName);
 
             lastContainer = container;
@@ -377,7 +387,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
         public static INamedTypeSymbol GetTypeMember(
             this INamespaceOrTypeSymbol symbol,
             string name
-        ) {
+        )
+        {
             return symbol.GetTypeMembers(name).Single();
         }
 
@@ -390,7 +401,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
         public static string[] GetFieldNamesAndTypes(
             this ModuleSymbol module,
             string qualifiedTypeName
-        ) {
+        )
+        {
             var type = (NamedTypeSymbol)module.GlobalNamespace.GetMember(qualifiedTypeName);
             return type.GetMembers()
                 .OfType<FieldSymbol>()
@@ -401,7 +413,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
         public static IEnumerable<CSharpAttributeData> GetAttributes(
             this Symbol @this,
             NamedTypeSymbol c
-        ) {
+        )
+        {
             return @this.GetAttributes()
                 .Where(
                     a => TypeSymbol.Equals(a.AttributeClass, c, TypeCompareKind.ConsiderEverything2)
@@ -412,14 +425,16 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
             this Symbol @this,
             string namespaceName,
             string typeName
-        ) {
+        )
+        {
             return @this.GetAttributes().Where(a => a.IsTargetAttribute(namespaceName, typeName));
         }
 
         public static IEnumerable<CSharpAttributeData> GetAttributes(
             this Symbol @this,
             AttributeDescription description
-        ) {
+        )
+        {
             return @this.GetAttributes().Where(a => a.IsTargetAttribute(@this, description));
         }
 
@@ -436,7 +451,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
             this Symbol @this,
             string namespaceName,
             string typeName
-        ) {
+        )
+        {
             return @this.GetAttributes()
                 .Where(a => a.IsTargetAttribute(namespaceName, typeName))
                 .First();
@@ -465,7 +481,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
             int i,
             TypedConstantKind kind,
             T v
-        ) {
+        )
+        {
             var arg = attr.CommonConstructorArguments[i];
             Assert.Equal(kind, arg.Kind);
             Assert.True(IsEqual(arg, v));
@@ -477,7 +494,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
             string name,
             TypedConstantKind kind,
             T v
-        ) {
+        )
+        {
             var namedArg = attr.CommonNamedArguments[i];
             Assert.Equal(namedArg.Key, name);
             var arg = namedArg.Value;
@@ -510,7 +528,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
                     if (
                         typeSym.Kind == SymbolKind.NamedType
                         && ((NamedTypeSymbol)typeSym).IsGenericType
-                    ) {
+                    )
+                    {
                         var s1 = typeSym.ToDisplayString(SymbolDisplayFormat.TestFormat);
                         var s2 = expected.ToString();
                         if ((s1 == s2))
@@ -544,7 +563,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
                     || typeSym.TypeKind == TypeKind.Struct
                     || typeSym.TypeKind == TypeKind.Delegate
                 )
-            ) {
+            )
+            {
                 NamedTypeSymbol namedType = (NamedTypeSymbol)typeSym;
                 // name should be same if it's not generic (NO ByRef in attribute)
                 if ((namedType.Arity == 0))
@@ -696,7 +716,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
         internal static void CheckAccessorModifiers(
             this MethodSymbol accessor,
             Symbol propertyOrEvent
-        ) {
+        )
+        {
             Assert.Equal(propertyOrEvent.DeclaredAccessibility, accessor.DeclaredAccessibility);
             Assert.Equal(propertyOrEvent.IsAbstract, accessor.IsAbstract);
             Assert.Equal(propertyOrEvent.IsOverride, accessor.IsOverride);
@@ -719,7 +740,8 @@ internal static class Extensions
         this CSharpSemanticModel model,
         Microsoft.CodeAnalysis.SyntaxNode declaration,
         CancellationToken cancellationToken = default(CancellationToken)
-    ) {
+    )
+    {
         // NOTE: Do not add types to this condition unless you have verified that there is an overload of SemanticModel.GetDeclaredSymbol
         //       that supports the type you're adding.
         if (
@@ -742,7 +764,8 @@ internal static class Extensions
                 || declaration is UsingDirectiveSyntax
                 || declaration is VariableDeclaratorSyntax
             )
-        ) {
+        )
+        {
             throw new NotSupportedException("This node type is not supported.");
         }
 
@@ -776,7 +799,8 @@ internal static class Extensions
 
     public static ImmutableArray<INamedTypeSymbol> AllEffectiveInterfacesNoUseSiteDiagnostics(
         this ITypeParameterSymbol symbol
-    ) {
+    )
+    {
         return (
             (Microsoft.CodeAnalysis.CSharp.Symbols.PublicModel.TypeParameterSymbol)symbol
         ).UnderlyingTypeParameterSymbol.AllEffectiveInterfacesNoUseSiteDiagnostics.GetPublicSymbols();
@@ -823,7 +847,8 @@ internal static class Extensions
     public static ISymbol GetSpecialTypeMember(
         this Compilation compilation,
         SpecialMember specialMember
-    ) {
+    )
+    {
         return ((CSharpCompilation)compilation).GetSpecialTypeMember(specialMember)
             .GetPublicSymbol();
     }
@@ -831,7 +856,8 @@ internal static class Extensions
     public static INamedTypeSymbol GetWellKnownType(
         this Compilation compilation,
         WellKnownType type
-    ) {
+    )
+    {
         return ((CSharpCompilation)compilation).GetWellKnownType(type).GetPublicSymbol();
     }
 
@@ -870,7 +896,8 @@ internal static class Extensions
         NamedTypeSymbol underlyingType,
         ImmutableArray<string> elementNames = default,
         ImmutableArray<Location> elementLocations = default
-    ) {
+    )
+    {
         return comp.CreateTupleTypeSymbol(
             underlyingType.GetPublicSymbol(),
             elementNames,
@@ -885,7 +912,8 @@ internal static class Extensions
         ImmutableArray<Location> elementLocations = default,
         ImmutableArray<Microsoft.CodeAnalysis.NullableAnnotation> elementNullableAnnotations =
             default
-    ) {
+    )
+    {
         return comp.CreateTupleTypeSymbol(
             elementTypes.GetPublicSymbols(),
             elementNames,
@@ -897,7 +925,8 @@ internal static class Extensions
     public static INamedTypeSymbol Construct(
         this INamedTypeSymbol definition,
         params TypeSymbol[] typeArguments
-    ) {
+    )
+    {
         return definition.Construct(typeArguments.Select(s => s.GetPublicSymbol()).ToArray());
     }
 
@@ -905,7 +934,8 @@ internal static class Extensions
         this CSharpCompilation comp,
         NamespaceSymbol container,
         string name
-    ) {
+    )
+    {
         return comp.CreateErrorNamespaceSymbol(container.GetPublicSymbol(), name);
     }
 
@@ -913,7 +943,8 @@ internal static class Extensions
         this ITypeSymbol first,
         ITypeSymbol second,
         TypeCompareKind typeCompareKind
-    ) {
+    )
+    {
         return first.Equals(
             second,
             new Microsoft.CodeAnalysis.SymbolEqualityComparer(typeCompareKind)
@@ -984,13 +1015,15 @@ internal static class Extensions
 
     public static IEnumerable<Microsoft.CodeAnalysis.NullableAnnotation> TypeArgumentNullableAnnotations(
         this INamedTypeSymbol type
-    ) {
+    )
+    {
         return type.TypeArguments.Select(t => t.NullableAnnotation);
     }
 
     public static IEnumerable<Microsoft.CodeAnalysis.NullableAnnotation> TypeArgumentNullableAnnotations(
         this IMethodSymbol method
-    ) {
+    )
+    {
         return method.TypeArguments.Select(t => t.NullableAnnotation);
     }
 
@@ -1005,7 +1038,8 @@ internal static class Extensions
         TypeSymbol destination,
         ref HashSet<DiagnosticInfo> useSiteDiagnostics,
         bool forCast = false
-    ) {
+    )
+    {
         CompoundUseSiteInfo<AssemblySymbol> useSiteInfo = default;
         Conversion result = conversions.ClassifyConversionFromType(
             source,
@@ -1020,7 +1054,8 @@ internal static class Extensions
     private static void AddDiagnosticInfos(
         ref HashSet<DiagnosticInfo> useSiteDiagnostics,
         CompoundUseSiteInfo<AssemblySymbol> useSiteInfo
-    ) {
+    )
+    {
         if (useSiteInfo.Diagnostics is object)
         {
             if (useSiteDiagnostics is null)
@@ -1040,7 +1075,8 @@ internal static class Extensions
         TypeSymbol destination,
         ref HashSet<DiagnosticInfo> useSiteDiagnostics,
         bool forCast = false
-    ) {
+    )
+    {
         CompoundUseSiteInfo<AssemblySymbol> useSiteInfo = default;
         Conversion result = conversions.ClassifyConversionFromExpression(
             sourceExpression,
@@ -1062,7 +1098,8 @@ internal static class Extensions
         LookupOptions options,
         bool diagnose,
         ref HashSet<DiagnosticInfo> useSiteDiagnostics
-    ) {
+    )
+    {
         CompoundUseSiteInfo<AssemblySymbol> useSiteInfo = default;
         binder.LookupSymbolsSimpleName(
             result,
@@ -1082,7 +1119,8 @@ internal static class Extensions
         CrefSyntax syntax,
         out Symbol ambiguityWinner,
         DiagnosticBag diagnostics
-    ) {
+    )
+    {
         return binder.BindCref(
             syntax,
             out ambiguityWinner,
@@ -1094,7 +1132,8 @@ internal static class Extensions
         this Microsoft.CodeAnalysis.CSharp.Binder binder,
         BlockSyntax node,
         DiagnosticBag diagnostics
-    ) {
+    )
+    {
         return binder.BindEmbeddedBlock(
             node,
             new Microsoft.CodeAnalysis.CSharp.BindingDiagnosticBag(diagnostics)
@@ -1105,7 +1144,8 @@ internal static class Extensions
         this Microsoft.CodeAnalysis.CSharp.Binder binder,
         ExpressionSyntax node,
         DiagnosticBag diagnostics
-    ) {
+    )
+    {
         return binder.BindExpression(
             node,
             new Microsoft.CodeAnalysis.CSharp.BindingDiagnosticBag(diagnostics)
@@ -1115,7 +1155,8 @@ internal static class Extensions
     public static void Verify(
         this ImmutableBindingDiagnostic<AssemblySymbol> actual,
         params Microsoft.CodeAnalysis.Test.Utilities.DiagnosticDescription[] expected
-    ) {
+    )
+    {
         actual.Diagnostics.Verify(expected);
     }
 }

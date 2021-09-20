@@ -61,10 +61,8 @@ namespace System.Web.Razor
             "CA2214:DoNotCallOverridableMethodsInConstructors",
             Justification = "The code path is safe, it is a property setter and not dependent on other state"
         )]
-        public RazorEngineHost(
-            RazorCodeLanguage codeLanguage,
-            Func<ParserBase> markupParserFactory
-        ) : this()
+        public RazorEngineHost(RazorCodeLanguage codeLanguage, Func<ParserBase> markupParserFactory)
+            : this()
         {
             if (codeLanguage == null)
             {
@@ -195,7 +193,8 @@ namespace System.Web.Razor
         /// <returns>Either the same code generator, after modifications, or a different code generator</returns>
         public virtual RazorCodeGenerator DecorateCodeGenerator(
             RazorCodeGenerator incomingCodeGenerator
-        ) {
+        )
+        {
             if (incomingCodeGenerator == null)
             {
                 throw new ArgumentNullException("incomingCodeGenerator");
@@ -231,7 +230,8 @@ namespace System.Web.Razor
             CodeNamespace generatedNamespace,
             CodeTypeDeclaration generatedClass,
             CodeMemberMethod executeMethod
-        ) {
+        )
+        {
             if (codeCompileUnit == null)
             {
                 throw new ArgumentNullException("codeCompileUnit");

@@ -50,7 +50,8 @@ namespace Microsoft.EntityFrameworkCore.Query.Internal
                     binaryTest.NodeType == ExpressionType.Equal
                     || binaryTest.NodeType == ExpressionType.NotEqual
                 )
-            ) {
+            )
+            {
                 var isLeftNullConstant = IsNullConstant(binaryTest.Left);
                 var isRightNullConstant = IsNullConstant(binaryTest.Right);
 
@@ -64,7 +65,8 @@ namespace Microsoft.EntityFrameworkCore.Query.Internal
                         binaryTest.NodeType == ExpressionType.NotEqual
                         && !IsNullConstant(conditionalExpression.IfFalse)
                     )
-                ) {
+                )
+                {
                     return conditionalExpression;
                 }
 
@@ -94,7 +96,8 @@ namespace Microsoft.EntityFrameworkCore.Query.Internal
                     binaryExpression.Left is ConditionalExpression
                     || binaryExpression.Right is ConditionalExpression
                 )
-            ) {
+            )
+            {
                 Expression comparedExpression;
                 if (binaryExpression.Left is ConditionalExpression conditionalExpression)
                 {
@@ -109,7 +112,8 @@ namespace Microsoft.EntityFrameworkCore.Query.Internal
                 if (
                     conditionalExpression.IfFalse.IsNullConstantExpression()
                     && comparedExpression.IsNullConstantExpression()
-                ) {
+                )
+                {
                     return Expression.OrElse(
                         Expression.Not(conditionalExpression.Test),
                         Expression.Equal(conditionalExpression.IfTrue, comparedExpression)
@@ -119,7 +123,8 @@ namespace Microsoft.EntityFrameworkCore.Query.Internal
                 if (
                     conditionalExpression.IfTrue.IsNullConstantExpression()
                     && comparedExpression.IsNullConstantExpression()
-                ) {
+                )
+                {
                     return Expression.OrElse(
                         conditionalExpression.Test,
                         Expression.Equal(conditionalExpression.IfFalse, comparedExpression)
@@ -174,7 +179,8 @@ namespace Microsoft.EntityFrameworkCore.Query.Internal
                         unaryExpression.NodeType == ExpressionType.Convert
                         || unaryExpression.NodeType == ExpressionType.ConvertChecked
                     ) && _nullSafeAccesses.Contains(operand)
-                ) {
+                )
+                {
                     _nullSafeAccesses.Add(unaryExpression);
                 }
 

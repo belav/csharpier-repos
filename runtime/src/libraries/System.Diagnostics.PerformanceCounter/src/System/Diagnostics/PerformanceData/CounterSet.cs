@@ -35,7 +35,8 @@ namespace System.Diagnostics.PerformanceData
             Guid providerGuid,
             Guid counterSetGuid,
             CounterSetInstanceType instanceType
-        ) {
+        )
+        {
             if (!PerfProviderCollection.ValidateCounterSetInstanceType(instanceType))
             {
                 throw new ArgumentException(

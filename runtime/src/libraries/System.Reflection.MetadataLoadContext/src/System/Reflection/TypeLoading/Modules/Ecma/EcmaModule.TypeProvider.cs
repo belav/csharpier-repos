@@ -43,7 +43,8 @@ namespace System.Reflection.TypeLoading.Ecma
         public RoType GetGenericInstantiation(
             RoType genericType,
             ImmutableArray<RoType> typeArguments
-        ) {
+        )
+        {
             if (!(genericType is RoDefinitionType roDefinitionType))
                 throw new BadImageFormatException(); // TypeSpec tried to instantiate a non-definition type as a generic type.
             return roDefinitionType.GetUniqueConstructedGenericType(typeArguments.ToArray());

@@ -41,7 +41,8 @@ namespace Newtonsoft.Json.Tests.TestObjects
             Type objectType,
             object existingValue,
             JsonSerializer serializer
-        ) {
+        )
+        {
             var encodingName = serializer.Deserialize<string>(reader);
             if (encodingName == null)
             {

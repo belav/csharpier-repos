@@ -48,7 +48,8 @@ namespace System.Reflection.Context.Tests
         protected override IEnumerable<object> GetCustomAttributes(
             ParameterInfo parameter,
             IEnumerable<object> declaredAttributes
-        ) {
+        )
+        {
             base.GetCustomAttributes(parameter, declaredAttributes);
 
             if (parameter.Name == "a")
@@ -60,7 +61,8 @@ namespace System.Reflection.Context.Tests
         protected override IEnumerable<object> GetCustomAttributes(
             MemberInfo member,
             IEnumerable<object> declaredAttributes
-        ) {
+        )
+        {
             base.GetCustomAttributes(member, declaredAttributes);
 
             if (member.Name == "GetMessage")

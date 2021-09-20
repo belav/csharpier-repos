@@ -79,7 +79,8 @@ namespace System.Reflection.PortableExecutable
             int dataSize,
             int dataRelativeVirtualAddress,
             int dataPointer
-        ) {
+        )
+        {
             Stamp = stamp;
             MajorVersion = majorVersion;
             MinorVersion = minorVersion;

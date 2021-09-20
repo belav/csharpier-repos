@@ -338,7 +338,8 @@ namespace System.ComponentModel.Composition.Hosting
             object key,
             int parameter,
             bool expectation
-        ) {
+        )
+        {
             Func<int, bool> query;
             if (context.TryGetValue(key, out query))
                 Assert.Equal(expectation, query(parameter));
@@ -348,7 +349,8 @@ namespace System.ComponentModel.Composition.Hosting
             AtomicComposition context,
             object key,
             Func<int, Func<int, bool>, bool> query
-        ) {
+        )
+        {
             Func<int, bool> parentQuery;
             context.TryGetValue(key, out parentQuery);
             Func<int, bool> queryFunction = parameter =>

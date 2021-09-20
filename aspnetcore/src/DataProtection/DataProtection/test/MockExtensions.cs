@@ -22,7 +22,8 @@ namespace Microsoft.AspNetCore.DataProtection
             string typeName,
             string xml,
             IAuthenticatedEncryptorDescriptor descriptor
-        ) {
+        )
+        {
             mockActivator.Setup(
                     o =>
                         o.CreateInstance(
@@ -58,7 +59,8 @@ namespace Microsoft.AspNetCore.DataProtection
             string typeName,
             string expectedInputXml,
             string outputXml
-        ) {
+        )
+        {
             mockActivator.Setup(o => o.CreateInstance(typeof(IXmlDecryptor), typeName))
                 .Returns(
                     () =>

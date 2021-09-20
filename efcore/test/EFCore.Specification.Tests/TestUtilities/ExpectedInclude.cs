@@ -15,7 +15,8 @@ namespace Microsoft.EntityFrameworkCore.TestUtilities
         public ExpectedInclude(
             Expression<Func<TEntity, object>> include,
             string navigationPath = ""
-        ) {
+        )
+        {
             IncludeMember = ((MemberExpression)include.Body).Member;
             NavigationPath = navigationPath;
         }

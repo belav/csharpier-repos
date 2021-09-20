@@ -20,12 +20,14 @@ namespace ILCompiler.DependencyAnalysis.ReadyToRun
             MethodWithToken method,
             MethodWithGCInfo localMethod,
             bool isInstantiatingStub
-        ) : base(
-            factory,
-            factory.MethodImports,
-            ReadyToRunHelper.DelayLoad_MethodCall,
-            factory.MethodSignature(fixupKind, method, isInstantiatingStub)
-        ) {
+        )
+            : base(
+                factory,
+                factory.MethodImports,
+                ReadyToRunHelper.DelayLoad_MethodCall,
+                factory.MethodSignature(fixupKind, method, isInstantiatingStub)
+            )
+        {
             _localMethod = localMethod;
             _method = method;
         }

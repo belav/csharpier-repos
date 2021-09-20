@@ -46,7 +46,8 @@ namespace Newtonsoft.Json.Tests.TestObjects
             PersonReference p1,
             PersonReference p2,
             PersonReference p3
-        ) {
+        )
+        {
             _stringValue = stringValue;
             _intValue = intValue;
             _person1 = p1;
@@ -57,7 +58,8 @@ namespace Newtonsoft.Json.Tests.TestObjects
         protected PreserveReferencesCallbackTestObject(
             SerializationInfo info,
             StreamingContext context
-        ) {
+        )
+        {
             _serializationInfo = info;
         }
 

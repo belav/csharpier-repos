@@ -21,7 +21,8 @@ namespace Microsoft.AspNetCore.Testing
             ITestFrameworkDiscoveryOptions discoveryOptions,
             ITestMethod testMethod,
             IAttributeInfo factAttribute
-        ) {
+        )
+        {
             var skipReason = testMethod.EvaluateSkipConditions();
             return skipReason != null
               ? new SkippedTestCase(

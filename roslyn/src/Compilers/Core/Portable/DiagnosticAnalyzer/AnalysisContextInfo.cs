@@ -72,7 +72,8 @@ namespace Microsoft.CodeAnalysis.Diagnostics
             ISymbol? symbol,
             SourceOrAdditionalFile? file,
             SyntaxNode? node
-        ) {
+        )
+        {
             Debug.Assert(node == null || file?.SourceTree != null);
             Debug.Assert(operation == null || file?.SourceTree != null);
 

@@ -15,7 +15,8 @@ namespace Microsoft.CodeAnalysis.ExpressionEvaluator
     {
         internal static DkmClrCustomTypeInfo GetCustomTypeInfo(
             this IList<CustomAttributeData> attributes
-        ) {
+        )
+        {
             ReadOnlyCollection<byte> dynamicFlags = null;
             ReadOnlyCollection<string> tupleElementNames = null;
             foreach (var attribute in attributes)
@@ -30,7 +31,8 @@ namespace Microsoft.CodeAnalysis.ExpressionEvaluator
                         "System.Runtime.CompilerServices",
                         "TupleElementNamesAttribute"
                     )
-                ) {
+                )
+                {
                     tupleElementNames = GetTupleElementNames(attribute);
                 }
             }
@@ -39,7 +41,8 @@ namespace Microsoft.CodeAnalysis.ExpressionEvaluator
 
         private static ReadOnlyCollection<CustomAttributeTypedArgument> GetAttributeArrayArgumentValue(
             CustomAttributeTypedArgument argument
-        ) {
+        )
+        {
             // Per https://msdn.microsoft.com/en-us/library/system.reflection.customattributetypedargument.argumenttype(v=vs.110).aspx,
             // if ArgumentType indicates an array, then Value will actually be a ReadOnlyCollection.
             return (ReadOnlyCollection<CustomAttributeTypedArgument>)argument.Value;
@@ -78,7 +81,8 @@ namespace Microsoft.CodeAnalysis.ExpressionEvaluator
 
         private static ReadOnlyCollection<string> GetTupleElementNames(
             CustomAttributeData attribute
-        ) {
+        )
+        {
             var arguments = attribute.ConstructorArguments;
             if (arguments.Count == 1)
             {

@@ -13,7 +13,8 @@ namespace Microsoft.AspNetCore.SignalR.Protocol
 
         public DefaultMessagePackHubProtocolWorker(
             MessagePackSerializerOptions messagePackSerializerOptions
-        ) {
+        )
+        {
             _messagePackSerializerOptions = messagePackSerializerOptions;
         }
 
@@ -21,7 +22,8 @@ namespace Microsoft.AspNetCore.SignalR.Protocol
             ref MessagePackReader reader,
             Type type,
             string field
-        ) {
+        )
+        {
             try
             {
                 return MessagePackSerializer.Deserialize(

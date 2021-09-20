@@ -964,7 +964,8 @@ namespace System.DirectoryServices.Protocols
             SEC_WINNT_AUTH_IDENTITY_EX SecAuthIdentity,
             Luid CurrentUserToken,
             ref IntPtr ConnectionToUse
-        ) {
+        )
+        {
             ConnectionToUse = IntPtr.Zero;
             string NewDN = null;
 
@@ -1064,7 +1065,8 @@ namespace System.DirectoryServices.Protocols
             SEC_WINNT_AUTH_IDENTITY_EX SecAuthIdentity,
             Luid currentUser,
             int errorCodeFromBind
-        ) {
+        )
+        {
             if (newConnection != IntPtr.Zero && _callbackRoutine.NotifyNewConnection != null)
             {
                 string newDN = null;
@@ -1096,7 +1098,8 @@ namespace System.DirectoryServices.Protocols
                             reference != null
                             && reference.Target is LdapConnection conn
                             && conn._ldapHandle != null
-                        ) {
+                        )
+                        {
                             // Save this before and object has not been garbage collected yet.
                             tempReferralConnection = conn;
                         }
@@ -1134,7 +1137,8 @@ namespace System.DirectoryServices.Protocols
                             reference != null
                             && reference.IsAlive
                             && null != ((LdapConnection)reference.Target)._ldapHandle
-                        ) {
+                        )
+                        {
                             // Save this before and object has not been garbage collected yet.
                             tempNewConnection = (LdapConnection)reference.Target;
                         }
@@ -1193,11 +1197,13 @@ namespace System.DirectoryServices.Protocols
         private int ProcessDereferenceConnection(
             IntPtr PrimaryConnection,
             IntPtr ConnectionToDereference
-        ) {
+        )
+        {
             if (
                 ConnectionToDereference != IntPtr.Zero
                 && _callbackRoutine.DereferenceConnection != null
-            ) {
+            )
+            {
                 LdapConnection dereferenceConnection = null;
                 WeakReference reference = null;
 
@@ -1280,7 +1286,8 @@ namespace System.DirectoryServices.Protocols
                 ldapConnection != null
                 && ldapConnection._ldapHandle != null
                 && !ldapConnection._ldapHandle.IsInvalid
-            ) {
+            )
+            {
                 ldapConnection._ldapHandle.DangerousAddRef(ref success);
             }
 
@@ -1293,7 +1300,8 @@ namespace System.DirectoryServices.Protocols
                 ldapConnection != null
                 && ldapConnection._ldapHandle != null
                 && !ldapConnection._ldapHandle.IsInvalid
-            ) {
+            )
+            {
                 ldapConnection._ldapHandle.DangerousRelease();
             }
         }

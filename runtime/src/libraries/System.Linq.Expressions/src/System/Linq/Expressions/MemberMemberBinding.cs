@@ -66,7 +66,8 @@ namespace System.Linq.Expressions
         public static MemberMemberBinding MemberBind(
             MemberInfo member,
             params MemberBinding[] bindings
-        ) {
+        )
+        {
             return MemberBind(member, (IEnumerable<MemberBinding>)bindings);
         }
 
@@ -79,7 +80,8 @@ namespace System.Linq.Expressions
         public static MemberMemberBinding MemberBind(
             MemberInfo member,
             IEnumerable<MemberBinding> bindings
-        ) {
+        )
+        {
             ContractUtils.RequiresNotNull(member, nameof(member));
             ContractUtils.RequiresNotNull(bindings, nameof(bindings));
             ReadOnlyCollection<MemberBinding> roBindings = bindings.ToReadOnly();
@@ -103,7 +105,8 @@ namespace System.Linq.Expressions
         public static MemberMemberBinding MemberBind(
             MethodInfo propertyAccessor,
             params MemberBinding[] bindings
-        ) {
+        )
+        {
             return MemberBind(propertyAccessor, (IEnumerable<MemberBinding>)bindings);
         }
 
@@ -121,7 +124,8 @@ namespace System.Linq.Expressions
         public static MemberMemberBinding MemberBind(
             MethodInfo propertyAccessor,
             IEnumerable<MemberBinding> bindings
-        ) {
+        )
+        {
             ContractUtils.RequiresNotNull(propertyAccessor, nameof(propertyAccessor));
             return MemberBind(GetProperty(propertyAccessor, nameof(propertyAccessor)), bindings);
         }
@@ -129,7 +133,8 @@ namespace System.Linq.Expressions
         private static void ValidateGettableFieldOrPropertyMember(
             MemberInfo member,
             out Type memberType
-        ) {
+        )
+        {
             Type? decType = member.DeclaringType;
             if (decType == null)
             {
@@ -161,7 +166,8 @@ namespace System.Linq.Expressions
         private static void ValidateMemberInitArgs(
             Type type,
             ReadOnlyCollection<MemberBinding> bindings
-        ) {
+        )
+        {
             for (int i = 0, n = bindings.Count; i < n; i++)
             {
                 MemberBinding b = bindings[i];

@@ -103,7 +103,8 @@ namespace System.CommandLine.Parsing
             this StringBuilder builder,
             SymbolResult symbolResult,
             ParseResult parseResult
-        ) {
+        )
+        {
             if (parseResult.Errors.Any(e => e.SymbolResult == symbolResult))
             {
                 builder.Append("!");
@@ -206,7 +207,8 @@ namespace System.CommandLine.Parsing
         public static IEnumerable<string?> GetSuggestions(
             this ParseResult parseResult,
             int? position = null
-        ) {
+        )
+        {
             var textToMatch = parseResult.TextToMatch(position);
             var currentSymbolResult = parseResult.SymbolToComplete(position);
             var currentSymbol = currentSymbolResult.Symbol;
@@ -265,7 +267,8 @@ namespace System.CommandLine.Parsing
         internal static SymbolResult SymbolToComplete(
             this ParseResult parseResult,
             int? position = null
-        ) {
+        )
+        {
             var commandResult = parseResult.CommandResult;
 
             var currentSymbol = AllSymbolResultsForCompletion().LastOrDefault();

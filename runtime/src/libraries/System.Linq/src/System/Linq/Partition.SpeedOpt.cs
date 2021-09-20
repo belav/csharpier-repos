@@ -91,7 +91,8 @@ namespace System.Linq
             OrderedEnumerable<TElement> source,
             int minIdxInclusive,
             int maxIdxInclusive
-        ) {
+        )
+        {
             _source = source;
             _minIndexInclusive = minIdxInclusive;
             _maxIndexInclusive = maxIdxInclusive;
@@ -163,7 +164,8 @@ namespace System.Linq
                 IList<TSource> source,
                 int minIndexInclusive,
                 int maxIndexInclusive
-            ) {
+            )
+            {
                 Debug.Assert(source != null);
                 Debug.Assert(minIndexInclusive >= 0);
                 Debug.Assert(minIndexInclusive <= maxIndexInclusive);
@@ -186,7 +188,8 @@ namespace System.Linq
                         (uint)index <= (uint)(_maxIndexInclusive - _minIndexInclusive)
                         && index < _source.Count - _minIndexInclusive
                     )
-                ) {
+                )
+                {
                     _current = _source[_minIndexInclusive + index];
                     ++_state;
                     return true;
@@ -227,7 +230,8 @@ namespace System.Linq
                         (uint)index <= (uint)(_maxIndexInclusive - _minIndexInclusive)
                         && index < _source.Count - _minIndexInclusive
                     )
-                ) {
+                )
+                {
                     found = true;
                     return _source[_minIndexInclusive + index];
                 }
@@ -329,7 +333,8 @@ namespace System.Linq
                 IEnumerable<TSource> source,
                 int minIndexInclusive,
                 int maxIndexInclusive
-            ) {
+            )
+            {
                 Debug.Assert(source != null);
                 Debug.Assert(
                     !(source is IList<TSource>),

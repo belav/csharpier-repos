@@ -32,7 +32,8 @@ namespace Microsoft.EntityFrameworkCore.Query
             Expression queryExpression,
             ProjectionMember projectionMember,
             Type type
-        ) {
+        )
+        {
             Check.NotNull(queryExpression, nameof(queryExpression));
             Check.NotNull(projectionMember, nameof(projectionMember));
             Check.NotNull(type, nameof(type));
@@ -66,7 +67,8 @@ namespace Microsoft.EntityFrameworkCore.Query
         public ProjectionBindingExpression(
             Expression queryExpression,
             IReadOnlyDictionary<IProperty, int> indexMap
-        ) {
+        )
+        {
             Check.NotNull(queryExpression, nameof(queryExpression));
             Check.NotNull(indexMap, nameof(indexMap));
 

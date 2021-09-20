@@ -45,7 +45,8 @@ namespace Microsoft.AspNetCore.Mvc.Razor.RuntimeCompilation
             string filePath,
             string root,
             string fileKind
-        ) {
+        )
+        {
             FileInfo = fileInfo;
             BasePath = basePath;
             FilePath = filePath;
@@ -93,7 +94,8 @@ namespace Microsoft.AspNetCore.Mvc.Razor.RuntimeCompilation
                                 PhysicalPath[_root.Length] == Path.DirectorySeparatorChar
                                 || PhysicalPath[_root.Length] == Path.AltDirectorySeparatorChar
                             )
-                        ) {
+                        )
+                        {
                             _relativePhysicalPath = PhysicalPath.Substring(_root.Length + 1); // Include leading separator
                         }
                     }

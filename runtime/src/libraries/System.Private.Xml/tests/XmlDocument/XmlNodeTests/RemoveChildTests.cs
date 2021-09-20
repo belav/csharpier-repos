@@ -316,7 +316,8 @@ namespace System.Xml.Tests
             string xml,
             InsertType insertType,
             XmlNodeType nodeType
-        ) {
+        )
+        {
             string[] expected = new string[3];
 
             var xmlDocument = new XmlDocument { PreserveWhitespace = true };
@@ -425,7 +426,8 @@ namespace System.Xml.Tests
             XmlNode refChild,
             XmlNode newChild,
             InsertType insertType
-        ) {
+        )
+        {
             switch (insertType)
             {
                 case InsertType.InsertBefore:
@@ -484,7 +486,8 @@ namespace System.Xml.Tests
 
         private static Func<XmlNode, XmlNode, XmlNode, XmlNode> CreateInsertBeforeOrAfter(
             InsertType insertType
-        ) {
+        )
+        {
             switch (insertType)
             {
                 case InsertType.InsertBefore:

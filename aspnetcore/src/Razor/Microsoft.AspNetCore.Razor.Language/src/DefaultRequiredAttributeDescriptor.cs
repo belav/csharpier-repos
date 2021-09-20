@@ -16,7 +16,8 @@ namespace Microsoft.AspNetCore.Razor.Language
             string displayName,
             RazorDiagnostic[] diagnostics,
             Dictionary<string, string> metadata
-        ) {
+        )
+        {
             Name = name;
             NameComparison = nameComparison;
             CaseSensitive = caseSensitive;

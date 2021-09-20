@@ -61,12 +61,14 @@ namespace Microsoft.Extensions.FileSystemGlobbing
         }
         public override Microsoft.Extensions.FileSystemGlobbing.Abstractions.DirectoryInfoBase GetDirectory(
             string path
-        ) {
+        )
+        {
             throw null;
         }
         public override Microsoft.Extensions.FileSystemGlobbing.Abstractions.FileInfoBase GetFile(
             string path
-        ) {
+        )
+        {
             throw null;
         }
     }
@@ -84,7 +86,8 @@ namespace Microsoft.Extensions.FileSystemGlobbing
         }
         public virtual Microsoft.Extensions.FileSystemGlobbing.PatternMatchingResult Execute(
             Microsoft.Extensions.FileSystemGlobbing.Abstractions.DirectoryInfoBase directoryInfo
-        ) {
+        )
+        {
             throw null;
         }
     }
@@ -101,33 +104,38 @@ namespace Microsoft.Extensions.FileSystemGlobbing
         public static System.Collections.Generic.IEnumerable<string> GetResultsInFullPath(
             this Microsoft.Extensions.FileSystemGlobbing.Matcher matcher,
             string directoryPath
-        ) {
+        )
+        {
             throw null;
         }
         public static Microsoft.Extensions.FileSystemGlobbing.PatternMatchingResult Match(
             this Microsoft.Extensions.FileSystemGlobbing.Matcher matcher,
             System.Collections.Generic.IEnumerable<string> files
-        ) {
+        )
+        {
             throw null;
         }
         public static Microsoft.Extensions.FileSystemGlobbing.PatternMatchingResult Match(
             this Microsoft.Extensions.FileSystemGlobbing.Matcher matcher,
             string file
-        ) {
+        )
+        {
             throw null;
         }
         public static Microsoft.Extensions.FileSystemGlobbing.PatternMatchingResult Match(
             this Microsoft.Extensions.FileSystemGlobbing.Matcher matcher,
             string rootDir,
             System.Collections.Generic.IEnumerable<string> files
-        ) {
+        )
+        {
             throw null;
         }
         public static Microsoft.Extensions.FileSystemGlobbing.PatternMatchingResult Match(
             this Microsoft.Extensions.FileSystemGlobbing.Matcher matcher,
             string rootDir,
             string file
-        ) {
+        )
+        {
             throw null;
         }
     }
@@ -187,12 +195,14 @@ namespace Microsoft.Extensions.FileSystemGlobbing.Abstractions
         }
         public override Microsoft.Extensions.FileSystemGlobbing.Abstractions.DirectoryInfoBase GetDirectory(
             string name
-        ) {
+        )
+        {
             throw null;
         }
         public override Microsoft.Extensions.FileSystemGlobbing.Abstractions.FileInfoBase GetFile(
             string name
-        ) {
+        )
+        {
             throw null;
         }
     }
@@ -296,7 +306,8 @@ namespace Microsoft.Extensions.FileSystemGlobbing.Internal
         }
         public static Microsoft.Extensions.FileSystemGlobbing.Internal.PatternTestResult Success(
             string stem
-        ) {
+        )
+        {
             throw null;
         }
     }
@@ -413,7 +424,8 @@ namespace Microsoft.Extensions.FileSystemGlobbing.Internal.PatternContexts
         }
         protected string CalculateStem(
             Microsoft.Extensions.FileSystemGlobbing.Abstractions.FileInfoBase matchedFile
-        ) {
+        )
+        {
             throw null;
         }
         protected bool IsLastSegment()
@@ -425,7 +437,8 @@ namespace Microsoft.Extensions.FileSystemGlobbing.Internal.PatternContexts
         ) { }
         public override Microsoft.Extensions.FileSystemGlobbing.Internal.PatternTestResult Test(
             Microsoft.Extensions.FileSystemGlobbing.Abstractions.FileInfoBase file
-        ) {
+        )
+        {
             throw null;
         }
         protected bool TestMatchingSegment(string value)
@@ -457,7 +470,8 @@ namespace Microsoft.Extensions.FileSystemGlobbing.Internal.PatternContexts
         ) : base(default(Microsoft.Extensions.FileSystemGlobbing.Internal.ILinearPattern)) { }
         public override bool Test(
             Microsoft.Extensions.FileSystemGlobbing.Abstractions.DirectoryInfoBase directory
-        ) {
+        )
+        {
             throw null;
         }
     }
@@ -475,7 +489,8 @@ namespace Microsoft.Extensions.FileSystemGlobbing.Internal.PatternContexts
         ) { }
         public override bool Test(
             Microsoft.Extensions.FileSystemGlobbing.Abstractions.DirectoryInfoBase directory
-        ) {
+        )
+        {
             throw null;
         }
     }
@@ -491,7 +506,8 @@ namespace Microsoft.Extensions.FileSystemGlobbing.Internal.PatternContexts
         }
         protected string CalculateStem(
             Microsoft.Extensions.FileSystemGlobbing.Abstractions.FileInfoBase matchedFile
-        ) {
+        )
+        {
             throw null;
         }
         protected bool IsEndingGroup()
@@ -508,12 +524,14 @@ namespace Microsoft.Extensions.FileSystemGlobbing.Internal.PatternContexts
         ) { }
         public override Microsoft.Extensions.FileSystemGlobbing.Internal.PatternTestResult Test(
             Microsoft.Extensions.FileSystemGlobbing.Abstractions.FileInfoBase file
-        ) {
+        )
+        {
             throw null;
         }
         protected bool TestMatchingGroup(
             Microsoft.Extensions.FileSystemGlobbing.Abstractions.FileSystemInfoBase value
-        ) {
+        )
+        {
             throw null;
         }
         protected bool TestMatchingSegment(string value)
@@ -548,7 +566,8 @@ namespace Microsoft.Extensions.FileSystemGlobbing.Internal.PatternContexts
         ) : base(default(Microsoft.Extensions.FileSystemGlobbing.Internal.IRaggedPattern)) { }
         public override bool Test(
             Microsoft.Extensions.FileSystemGlobbing.Abstractions.DirectoryInfoBase directory
-        ) {
+        )
+        {
             throw null;
         }
     }
@@ -566,7 +585,8 @@ namespace Microsoft.Extensions.FileSystemGlobbing.Internal.PatternContexts
         ) { }
         public override bool Test(
             Microsoft.Extensions.FileSystemGlobbing.Abstractions.DirectoryInfoBase directory
-        ) {
+        )
+        {
             throw null;
         }
     }

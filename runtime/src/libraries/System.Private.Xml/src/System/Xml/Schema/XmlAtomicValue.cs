@@ -137,7 +137,8 @@ namespace System.Xml.Schema
             XmlSchemaType xmlType,
             string value,
             IXmlNamespaceResolver? nsResolver
-        ) {
+        )
+        {
             if (value == null)
                 throw new ArgumentNullException(nameof(value));
             if (xmlType == null)
@@ -150,7 +151,8 @@ namespace System.Xml.Schema
                     _xmlType.TypeCode == XmlTypeCode.QName
                     || _xmlType.TypeCode == XmlTypeCode.Notation
                 )
-            ) {
+            )
+            {
                 string prefix = GetPrefixFromQName(value)!;
                 _nsPrefix = new NamespacePrefixForQName(
                     prefix,
@@ -173,7 +175,8 @@ namespace System.Xml.Schema
             XmlSchemaType xmlType,
             object value,
             IXmlNamespaceResolver? nsResolver
-        ) {
+        )
+        {
             if (value == null)
                 throw new ArgumentNullException(nameof(value));
             if (xmlType == null)
@@ -187,7 +190,8 @@ namespace System.Xml.Schema
                     _xmlType.TypeCode == XmlTypeCode.QName
                     || _xmlType.TypeCode == XmlTypeCode.Notation
                 )
-            ) { //Its a qualifiedName
+            )
+            { //Its a qualifiedName
                 XmlQualifiedName qname = (_objVal as XmlQualifiedName)!;
                 Debug.Assert(qname != null); //string representation is handled in a different overload
                 string ns = qname.Namespace;

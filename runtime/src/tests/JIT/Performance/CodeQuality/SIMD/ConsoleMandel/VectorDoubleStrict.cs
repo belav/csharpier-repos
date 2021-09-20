@@ -33,7 +33,8 @@ namespace Algorithms
             float yminf,
             float ymaxf,
             float stepf
-        ) {
+        )
+        {
             double xmin = (double)xminf;
             double xmax = (double)xmaxf;
             double ymin = (double)yminf;
@@ -61,7 +62,8 @@ namespace Algorithms
                         Vector<double> vx = vxmin;
                         Vector.LessThanOrEqualAny(vx, vxmax);
                         vx += vinc, xp += Vector<double>.Count
-                    ) {
+                    )
+                    {
                         ComplexVecDouble num = new ComplexVecDouble(vx, vy);
                         ComplexVecDouble accum = num;
 
@@ -91,7 +93,8 @@ namespace Algorithms
             float yminf,
             float ymaxf,
             float stepf
-        ) {
+        )
+        {
             double xmin = (double)xminf;
             double xmax = (double)xmaxf;
             double ymin = (double)yminf;
@@ -119,7 +122,8 @@ namespace Algorithms
                         Vector<double> vx = vxmin;
                         Vector.LessThanOrEqualAny(vx, vxmax);
                         vx += vinc, xp += Vector<double>.Count
-                    ) {
+                    )
+                    {
                         Vector<double> accumx = vx;
                         Vector<double> accumy = vy;
 
@@ -153,7 +157,8 @@ namespace Algorithms
             float yminf,
             float ymaxf,
             float stepf
-        ) {
+        )
+        {
             double xmin = (double)xminf;
             double xmax = (double)xmaxf;
             double ymin = (double)yminf;
@@ -173,13 +178,15 @@ namespace Algorithms
                 Vector<double> vy = new Vector<double>(ymin);
                 y <= ymax && !Abort;
                 vy += vstep, y += step, yp++
-            ) {
+            )
+            {
                 int xp = 0;
                 for (
                     Vector<double> vx = vxmin;
                     Vector.LessThanOrEqualAny(vx, vxmax);
                     vx += vinc, xp += Vector<double>.Count
-                ) {
+                )
+                {
                     ComplexVecDouble num = new ComplexVecDouble(vx, vy);
                     ComplexVecDouble accum = num;
 
@@ -208,7 +215,8 @@ namespace Algorithms
             float yminf,
             float ymaxf,
             float stepf
-        ) {
+        )
+        {
             double xmin = (double)xminf;
             double xmax = (double)xmaxf;
             double ymin = (double)yminf;
@@ -228,13 +236,15 @@ namespace Algorithms
                 Vector<double> vy = new Vector<double>(ymin);
                 y <= ymax && !Abort;
                 vy += vstep, y += step, yp++
-            ) {
+            )
+            {
                 int xp = 0;
                 for (
                     Vector<double> vx = vxmin;
                     Vector.LessThanOrEqualAny(vx, vxmax);
                     vx += vinc, xp += Vector<double>.Count
-                ) {
+                )
+                {
                     Vector<double> accumx = vx;
                     Vector<double> accumy = vy;
 

@@ -140,7 +140,8 @@ namespace System.IO
                             Environment.NewLine.Length
                         ) == Environment.NewLine
                     )
-                ) {
+                )
+                {
                     // Check if the match is followed by whitespace, meaning it is not part of a larger word.
                     if (HasFollowingWhitespace(keyIndex, key.Length))
                     {
@@ -200,7 +201,8 @@ namespace System.IO
             long result;
             if (
                 long.TryParse(value, NumberStyles.Integer, CultureInfo.InvariantCulture, out result)
-            ) {
+            )
+            {
                 return result;
             }
             else

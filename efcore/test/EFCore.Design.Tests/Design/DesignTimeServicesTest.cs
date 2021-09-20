@@ -273,7 +273,8 @@ public class UserMigrationsIdGenerator : IMigrationsIdGenerator
             string assemblyCode,
             string startupAssemblyCode = null,
             DbContext context = null
-        ) {
+        )
+        {
             var assembly = Compile(assemblyCode);
             var startupAssembly =
                 startupAssemblyCode == null ? assembly : Compile(startupAssemblyCode);

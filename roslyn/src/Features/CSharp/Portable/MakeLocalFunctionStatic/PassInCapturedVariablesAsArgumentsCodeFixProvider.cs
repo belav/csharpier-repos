@@ -97,7 +97,8 @@ namespace Microsoft.CodeAnalysis.CSharp.MakeLocalFunctionStatic
             ImmutableArray<Diagnostic> diagnostics,
             Func<Document, LocalFunctionStatementSyntax, ImmutableArray<ISymbol>, Task> fixer,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var root = (
                 await document.GetSyntaxRootAsync(cancellationToken).ConfigureAwait(false)
             )!;
@@ -138,7 +139,8 @@ namespace Microsoft.CodeAnalysis.CSharp.MakeLocalFunctionStatic
                         semanticModel,
                         out var captures
                     )
-                ) {
+                )
+                {
                     await fixer(document, localFunction, captures).ConfigureAwait(false);
                 }
             }
@@ -146,13 +148,12 @@ namespace Microsoft.CodeAnalysis.CSharp.MakeLocalFunctionStatic
 
         private class MyCodeAction : CustomCodeActions.DocumentChangeAction
         {
-            public MyCodeAction(
-                Func<CancellationToken, Task<Document>> createChangedDocument
-            ) : base(
-                CSharpCodeFixesResources.Pass_in_captured_variables_as_arguments,
-                createChangedDocument,
-                CSharpCodeFixesResources.Pass_in_captured_variables_as_arguments
-            ) { }
+            public MyCodeAction(Func<CancellationToken, Task<Document>> createChangedDocument)
+                : base(
+                    CSharpCodeFixesResources.Pass_in_captured_variables_as_arguments,
+                    createChangedDocument,
+                    CSharpCodeFixesResources.Pass_in_captured_variables_as_arguments
+                ) { }
         }
     }
 }

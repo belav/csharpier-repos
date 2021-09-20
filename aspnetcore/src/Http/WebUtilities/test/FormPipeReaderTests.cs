@@ -359,7 +359,8 @@ namespace Microsoft.AspNetCore.WebUtilities
         [MemberData(nameof(Encodings))]
         public void TryParseFormValues_MultiSegmentWithArrayPoolAcrossSegmentsWorks(
             Encoding encoding
-        ) {
+        )
+        {
             var readOnlySequence = ReadOnlySequenceFactory.SegmentPerByteFactory.CreateWithContent(
                 encoding.GetBytes("foo=bar&baz=bo" + new string('a', 128))
             );
@@ -380,7 +381,8 @@ namespace Microsoft.AspNetCore.WebUtilities
         [MemberData(nameof(Encodings))]
         public void TryParseFormValues_MultiSegmentSplitAcrossSegmentsWithPlusesWorks(
             Encoding encoding
-        ) {
+        )
+        {
             var readOnlySequence = ReadOnlySequenceFactory.SegmentPerByteFactory.CreateWithContent(
                 encoding.GetBytes("+++=+++&++++=++++&+=")
             );
@@ -623,7 +625,8 @@ namespace Microsoft.AspNetCore.WebUtilities
         [MemberData(nameof(IncompleteFormKeys))]
         public void ParseFormWithIncompleteKeyWhenIsFinalBlockSucceeds(
             ReadOnlySequence<byte> readOnlySequence
-        ) {
+        )
+        {
             KeyValueAccumulator accumulator = default;
 
             var formReader = new FormPipeReader(null!) { KeyLengthLimit = 3 };
@@ -642,7 +645,8 @@ namespace Microsoft.AspNetCore.WebUtilities
         [MemberData(nameof(IncompleteFormValues))]
         public void ParseFormWithIncompleteValueWhenIsFinalBlockSucceeds(
             ReadOnlySequence<byte> readOnlySequence
-        ) {
+        )
+        {
             KeyValueAccumulator accumulator = default;
 
             var formReader = new FormPipeReader(null!) { ValueLengthLimit = 3 };

@@ -163,7 +163,8 @@ namespace System.Xml.Tests
                     null,
                     rs
                 )
-            ) {
+            )
+            {
                 try
                 {
                     while (reader.Read())

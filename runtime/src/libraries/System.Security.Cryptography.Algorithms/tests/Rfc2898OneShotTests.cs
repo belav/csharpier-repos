@@ -340,7 +340,8 @@ namespace System.Security.Cryptography.DeriveBytesTests
             int iterations,
             string passwordHex,
             string saltHex
-        ) {
+        )
+        {
             byte[] password = Convert.FromHexString(passwordHex);
             byte[] salt = Convert.FromHexString(saltHex);
             HashAlgorithmName hashAlgorithmName = new HashAlgorithmName(hashAlgorithm);
@@ -353,7 +354,8 @@ namespace System.Security.Cryptography.DeriveBytesTests
                     iterations,
                     hashAlgorithmName
                 )
-            ) {
+            )
+            {
                 key1 = instanceKdf.GetBytes(length);
             }
 
@@ -384,7 +386,8 @@ namespace System.Security.Cryptography.DeriveBytesTests
             int iterations,
             string password,
             string saltHex
-        ) {
+        )
+        {
             byte[] salt = Convert.FromHexString(saltHex);
             HashAlgorithmName hashAlgorithmName = new HashAlgorithmName(hashAlgorithm);
             byte[] key1;
@@ -396,7 +399,8 @@ namespace System.Security.Cryptography.DeriveBytesTests
                     iterations,
                     hashAlgorithmName
                 )
-            ) {
+            )
+            {
                 key1 = instanceKdf.GetBytes(length);
             }
 
@@ -426,7 +430,8 @@ namespace System.Security.Cryptography.DeriveBytesTests
             string salt,
             int iterations,
             string expectedHex
-        ) {
+        )
+        {
             byte[] expected = expectedHex.HexToByteArray();
             byte[] saltBytes = Encoding.UTF8.GetBytes(salt);
             byte[] actual = Rfc2898DeriveBytes.Pbkdf2(

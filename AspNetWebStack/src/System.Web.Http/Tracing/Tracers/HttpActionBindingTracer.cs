@@ -46,7 +46,8 @@ namespace System.Web.Http.Tracing.Tracers
         public override Task ExecuteBindingAsync(
             Controllers.HttpActionContext actionContext,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             return _traceWriter.TraceBeginEndAsync(
                 actionContext.ControllerContext.Request,
                 TraceCategories.ModelBindingCategory,

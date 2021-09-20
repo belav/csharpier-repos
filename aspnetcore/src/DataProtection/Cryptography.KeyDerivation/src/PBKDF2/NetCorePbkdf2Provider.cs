@@ -20,7 +20,8 @@ namespace Microsoft.AspNetCore.Cryptography.KeyDerivation.PBKDF2
             KeyDerivationPrf prf,
             int iterationCount,
             int numBytesRequested
-        ) {
+        )
+        {
             Debug.Assert(password != null);
             Debug.Assert(salt != null);
             Debug.Assert(iterationCount > 0);

@@ -25,7 +25,8 @@ namespace System.Web.Razor.Test.Tokenizer
 
         protected override Tokenizer<CSharpSymbol, CSharpSymbolType> CreateTokenizer(
             ITextDocument source
-        ) {
+        )
+        {
             return new CSharpTokenizer(source);
         }
 

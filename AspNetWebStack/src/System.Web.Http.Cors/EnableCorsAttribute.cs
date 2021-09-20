@@ -60,7 +60,8 @@ namespace System.Web.Http.Cors
             string headers,
             string methods,
             string exposedHeaders
-        ) {
+        )
+        {
             if (String.IsNullOrEmpty(origins))
             {
                 throw new ArgumentException(SRResources.ArgumentCannotBeNullOrEmpty, "origins");
@@ -160,7 +161,8 @@ namespace System.Web.Http.Cors
         public Task<CorsPolicy> GetCorsPolicyAsync(
             HttpRequestMessage request,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             if (!_originsValidated)
             {
                 ValidateOrigins(_corsPolicy.Origins);
@@ -209,7 +211,8 @@ namespace System.Web.Http.Cors
                     )
                     || !String.IsNullOrEmpty(originUri.Query)
                     || !String.IsNullOrEmpty(originUri.Fragment)
-                ) {
+                )
+                {
                     throw new InvalidOperationException(
                         String.Format(
                             CultureInfo.CurrentCulture,
@@ -224,7 +227,8 @@ namespace System.Web.Http.Cors
         private static void AddCommaSeparatedValuesToCollection(
             string commaSeparatedValues,
             IList<string> collection
-        ) {
+        )
+        {
             string[] values = commaSeparatedValues.Split(',');
             for (int i = 0; i < values.Length; i++)
             {

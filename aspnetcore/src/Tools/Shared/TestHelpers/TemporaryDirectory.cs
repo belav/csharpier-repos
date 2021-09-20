@@ -43,7 +43,8 @@ namespace Microsoft.Extensions.Tools.Internal
         public TemporaryCSharpProject WithCSharpProject(
             string name,
             string sdk = "Microsoft.NET.Sdk"
-        ) {
+        )
+        {
             var project = new TemporaryCSharpProject(name, this, sdk);
             _projects.Add(project);
             return project;
@@ -53,7 +54,8 @@ namespace Microsoft.Extensions.Tools.Internal
             string name,
             out TemporaryCSharpProject project,
             string sdk = "Microsoft.NET.Sdk"
-        ) {
+        )
+        {
             project = WithCSharpProject(name, sdk);
             return project;
         }

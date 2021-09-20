@@ -500,7 +500,8 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.method.genmetho
                     list,
                     string.Empty
                 )
-            ) {
+            )
+            {
                 list2.Add(s);
             }
 
@@ -509,7 +510,8 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.method.genmetho
                 && list2[0] == null
                 && list2[1] == string.Empty
                 && list2[2] == "Test"
-            ) {
+            )
+            {
                 return 0;
             }
             else
@@ -1765,7 +1767,8 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.method.genmetho
                 && list2[0] == null
                 && list2[1] == string.Empty
                 && list2[2] == "Test"
-            ) {
+            )
+            {
                 return 0;
             }
             else

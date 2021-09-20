@@ -18,7 +18,8 @@ namespace System.Data.Common
             public DataRowDbColumn(
                 DataRow readerSchemaRow,
                 DataColumnCollection readerSchemaColumns
-            ) {
+            )
+            {
                 _schemaRow = readerSchemaRow;
                 _schemaColumns = readerSchemaColumns;
                 PopulateFields();
@@ -83,7 +84,8 @@ namespace System.Data.Common
 
         private static ReadOnlyCollection<DbColumn> GetColumnSchemaCompatibility(
             DbDataReader reader
-        ) {
+        )
+        {
             var columnSchema = new List<DbColumn>();
             DataTable? schemaTable = reader.GetSchemaTable();
             if (schemaTable != null)

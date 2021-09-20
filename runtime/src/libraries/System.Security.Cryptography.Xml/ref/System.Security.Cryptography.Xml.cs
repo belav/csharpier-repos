@@ -277,82 +277,95 @@ namespace System.Security.Cryptography.Xml
         public byte[] DecryptData(
             System.Security.Cryptography.Xml.EncryptedData encryptedData,
             System.Security.Cryptography.SymmetricAlgorithm symmetricAlgorithm
-        ) {
+        )
+        {
             throw null;
         }
         public void DecryptDocument() { }
         public virtual byte[] DecryptEncryptedKey(
             System.Security.Cryptography.Xml.EncryptedKey encryptedKey
-        ) {
+        )
+        {
             throw null;
         }
         public static byte[] DecryptKey(
             byte[] keyData,
             System.Security.Cryptography.RSA rsa,
             bool useOAEP
-        ) {
+        )
+        {
             throw null;
         }
         public static byte[] DecryptKey(
             byte[] keyData,
             System.Security.Cryptography.SymmetricAlgorithm symmetricAlgorithm
-        ) {
+        )
+        {
             throw null;
         }
         public System.Security.Cryptography.Xml.EncryptedData Encrypt(
             System.Xml.XmlElement inputElement,
             System.Security.Cryptography.X509Certificates.X509Certificate2 certificate
-        ) {
+        )
+        {
             throw null;
         }
         public System.Security.Cryptography.Xml.EncryptedData Encrypt(
             System.Xml.XmlElement inputElement,
             string keyName
-        ) {
+        )
+        {
             throw null;
         }
         public byte[] EncryptData(
             byte[] plaintext,
             System.Security.Cryptography.SymmetricAlgorithm symmetricAlgorithm
-        ) {
+        )
+        {
             throw null;
         }
         public byte[] EncryptData(
             System.Xml.XmlElement inputElement,
             System.Security.Cryptography.SymmetricAlgorithm symmetricAlgorithm,
             bool content
-        ) {
+        )
+        {
             throw null;
         }
         public static byte[] EncryptKey(
             byte[] keyData,
             System.Security.Cryptography.RSA rsa,
             bool useOAEP
-        ) {
+        )
+        {
             throw null;
         }
         public static byte[] EncryptKey(
             byte[] keyData,
             System.Security.Cryptography.SymmetricAlgorithm symmetricAlgorithm
-        ) {
+        )
+        {
             throw null;
         }
         public virtual byte[] GetDecryptionIV(
             System.Security.Cryptography.Xml.EncryptedData encryptedData,
             string symmetricAlgorithmUri
-        ) {
+        )
+        {
             throw null;
         }
         public virtual System.Security.Cryptography.SymmetricAlgorithm GetDecryptionKey(
             System.Security.Cryptography.Xml.EncryptedData encryptedData,
             string symmetricAlgorithmUri
-        ) {
+        )
+        {
             throw null;
         }
         public virtual System.Xml.XmlElement GetIdElement(
             System.Xml.XmlDocument document,
             string idValue
-        ) {
+        )
+        {
             throw null;
         }
         public void ReplaceData(System.Xml.XmlElement inputElement, byte[] decryptedData) { }
@@ -976,12 +989,14 @@ namespace System.Security.Cryptography.Xml
         public bool CheckSignature(
             System.Security.Cryptography.X509Certificates.X509Certificate2 certificate,
             bool verifySignatureOnly
-        ) {
+        )
+        {
             throw null;
         }
         public bool CheckSignatureReturningKey(
             out System.Security.Cryptography.AsymmetricAlgorithm signingKey
-        ) {
+        )
+        {
             throw null;
         }
         public void ComputeSignature() { }
@@ -989,7 +1004,8 @@ namespace System.Security.Cryptography.Xml
         public virtual System.Xml.XmlElement GetIdElement(
             System.Xml.XmlDocument document,
             string idValue
-        ) {
+        )
+        {
             throw null;
         }
         protected virtual System.Security.Cryptography.AsymmetricAlgorithm GetPublicKey()

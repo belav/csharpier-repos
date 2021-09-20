@@ -176,7 +176,8 @@ namespace Microsoft.AspNetCore.SignalR.Microbenchmarks
                 ref ReadOnlySequence<byte> input,
                 IInvocationBinder binder,
                 out HubMessage message
-            ) {
+            )
+            {
                 throw new NotSupportedException();
             }
 

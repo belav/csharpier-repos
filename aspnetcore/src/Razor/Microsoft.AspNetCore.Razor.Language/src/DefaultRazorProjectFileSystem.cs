@@ -101,7 +101,8 @@ namespace Microsoft.AspNetCore.Razor.Language
             if (
                 !absolutePath.StartsWith(Root, StringComparison.OrdinalIgnoreCase)
                 && !absolutePath.StartsWith("//", StringComparison.OrdinalIgnoreCase)
-            ) {
+            )
+            {
                 // This is not an absolute path. Strip the leading slash if any and combine it with Root.
                 if (path[0] == '/' || path[0] == '\\')
                 {

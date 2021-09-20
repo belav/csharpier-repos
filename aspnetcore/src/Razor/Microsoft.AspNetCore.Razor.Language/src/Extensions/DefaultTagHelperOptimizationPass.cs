@@ -18,7 +18,8 @@ namespace Microsoft.AspNetCore.Razor.Language.Extensions
         protected override void ExecuteCore(
             RazorCodeDocument codeDocument,
             DocumentIntermediateNode documentNode
-        ) {
+        )
+        {
             var @class = documentNode.FindPrimaryClass();
             if (@class == null)
             {
@@ -79,7 +80,8 @@ namespace Microsoft.AspNetCore.Razor.Language.Extensions
             while (
                 i < context.Class.Children.Count
                 && context.Class.Children[i] is FieldDeclarationIntermediateNode
-            ) {
+            )
+            {
                 i++;
             }
 
@@ -127,7 +129,8 @@ namespace Microsoft.AspNetCore.Razor.Language.Extensions
             Context context,
             TagHelperIntermediateNode node,
             TagHelperDescriptor tagHelper
-        ) {
+        )
+        {
             if (!tagHelper.IsDefaultKind())
             {
                 return;
@@ -149,7 +152,8 @@ namespace Microsoft.AspNetCore.Razor.Language.Extensions
             }
             while (
                 i < node.Children.Count && node.Children[i] is DefaultTagHelperBodyIntermediateNode
-            ) {
+            )
+            {
                 i++;
             }
 
@@ -157,7 +161,8 @@ namespace Microsoft.AspNetCore.Razor.Language.Extensions
             while (
                 i < node.Children.Count
                 && node.Children[i] is DefaultTagHelperCreateIntermediateNode
-            ) {
+            )
+            {
                 i++;
             }
 
@@ -179,7 +184,8 @@ namespace Microsoft.AspNetCore.Razor.Language.Extensions
                 if (
                     node.Children[i] is TagHelperPropertyIntermediateNode propertyNode
                     && propertyNode.TagHelper == tagHelper
-                ) {
+                )
+                {
                     // This belongs to the current tag helper, replace it.
                     node.Children[i] = new DefaultTagHelperPropertyIntermediateNode(propertyNode)
                     {
@@ -201,14 +207,16 @@ namespace Microsoft.AspNetCore.Razor.Language.Extensions
             while (
                 i < context.Class.Children.Count
                 && context.Class.Children[i] is DefaultTagHelperRuntimeIntermediateNode
-            ) {
+            )
+            {
                 i++;
             }
 
             while (
                 i < context.Class.Children.Count
                 && context.Class.Children[i] is FieldDeclarationIntermediateNode
-            ) {
+            )
+            {
                 i++;
             }
 

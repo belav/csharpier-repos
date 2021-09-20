@@ -37,19 +37,21 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Options.Style.N
             string languageName,
             bool canBeDeleted,
             INotificationService notificationService
-        ) : this(
-            languageName,
-            CreateDefaultSymbolSpecification(),
-            canBeDeleted,
-            notificationService
-        ) { }
+        )
+            : this(
+                languageName,
+                CreateDefaultSymbolSpecification(),
+                canBeDeleted,
+                notificationService
+            ) { }
 
         public SymbolSpecificationViewModel(
             string languageName,
             SymbolSpecification specification,
             bool canBeDeleted,
             INotificationService notificationService
-        ) {
+        )
+        {
             CanBeDeleted = canBeDeleted;
             _notificationService = notificationService;
             ItemName = specification.Name;
@@ -346,7 +348,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Options.Style.N
                 SymbolKind symbolKind,
                 string name,
                 SymbolSpecification specification
-            ) {
+            )
+            {
                 _symbolKind = symbolKind;
                 Name = name;
                 IsChecked = specification.ApplicableSymbolKindList.Any(
@@ -358,7 +361,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Options.Style.N
                 TypeKind typeKind,
                 string name,
                 SymbolSpecification specification
-            ) {
+            )
+            {
                 _typeKind = typeKind;
                 Name = name;
                 IsChecked = specification.ApplicableSymbolKindList.Any(k => k.TypeKind == typeKind);
@@ -368,7 +372,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Options.Style.N
                 MethodKind methodKind,
                 string name,
                 SymbolSpecification specification
-            ) {
+            )
+            {
                 _methodKind = methodKind;
                 Name = name;
                 IsChecked = specification.ApplicableSymbolKindList.Any(
@@ -407,7 +412,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Options.Style.N
                 Accessibility accessibility,
                 string name,
                 SymbolSpecification specification
-            ) {
+            )
+            {
                 _accessibility = accessibility;
                 Name = name;
 
@@ -434,7 +440,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Options.Style.N
                 DeclarationModifiers modifier,
                 string name,
                 SymbolSpecification specification
-            ) {
+            )
+            {
                 _modifier = modifier;
                 Name = name;
 

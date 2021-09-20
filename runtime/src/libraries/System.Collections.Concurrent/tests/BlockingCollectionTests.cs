@@ -272,7 +272,8 @@ namespace System.Collections.Concurrent.Tests
             int numOfAdds,
             int numOfTakes,
             int boundedCapacity
-        ) {
+        )
+        {
             TestAddTake(numOfAdds, numOfTakes, boundedCapacity);
         }
 
@@ -882,7 +883,8 @@ namespace System.Collections.Concurrent.Tests
             int numOfBlockingCollections,
             int indexOfBlockingCollectionUnderTest,
             int boundedCapacity
-        ) {
+        )
+        {
             BlockingCollection<int> blockingCollection = ConstructBlockingCollection<int>(
                 boundedCapacity
             );
@@ -910,7 +912,8 @@ namespace System.Collections.Concurrent.Tests
             int numOfBlockingCollections,
             int indexOfBlockingCollectionUnderTest,
             int boundedCapacity
-        ) {
+        )
+        {
             TestAddAnyTakeAny(
                 numOfAdds,
                 numOfTakes,
@@ -935,7 +938,8 @@ namespace System.Collections.Concurrent.Tests
             int numOfElementsPerThread,
             int numOfCollections,
             int boundOfCollections
-        ) {
+        )
+        {
             //If numOfThreads is not an even number, make it even.
             if ((numOfThreads % 2) != 0)
             {
@@ -1385,7 +1389,8 @@ namespace System.Collections.Concurrent.Tests
             BlockingCollection<int> blockingCollection,
             BlockingCollection<int>[] blockingCollections,
             int indexOfBlockingCollectionUnderTest
-        ) {
+        )
+        {
             if (blockingCollections != null)
             {
                 //Initialize all other blocking collections to be full so that Adds are done on blockingCollection.
@@ -1430,7 +1435,8 @@ namespace System.Collections.Concurrent.Tests
                     if (
                         indexOfCollectionThatAcceptedTheOperation
                         == indexOfBlockingCollectionUnderTest
-                    ) {
+                    )
+                    {
                         numOfTrueTryAdds++;
                     }
                     else
@@ -1485,7 +1491,8 @@ namespace System.Collections.Concurrent.Tests
                     if (
                         indexOfCollectionThatAcceptedTheOperation
                         == indexOfBlockingCollectionUnderTest
-                    ) {
+                    )
+                    {
                         numOfTrueTryTakes++;
                     }
                     else if (i < expectedNumOfSuccessfulTryTakes)
@@ -1582,7 +1589,8 @@ namespace System.Collections.Concurrent.Tests
             IEnumerable<int> sortedElementsInCollection,
             int start,
             int end
-        ) {
+        )
+        {
             int current = start;
             Assert.All(sortedElementsInCollection, elem => Assert.Equal(current++, elem));
             Assert.Equal(end, current - 1);

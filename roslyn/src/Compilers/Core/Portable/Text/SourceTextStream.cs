@@ -35,7 +35,8 @@ namespace Microsoft.CodeAnalysis.Text
             SourceText source,
             int bufferSize = 2048,
             bool useDefaultEncodingIfNull = false
-        ) {
+        )
+        {
             Debug.Assert(source.Encoding != null || useDefaultEncodingIfNull);
 
             _source = source;

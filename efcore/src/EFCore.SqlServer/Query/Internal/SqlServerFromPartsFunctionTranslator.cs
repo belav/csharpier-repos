@@ -132,7 +132,8 @@ namespace Microsoft.EntityFrameworkCore.SqlServer.Query.Internal
         public SqlServerFromPartsFunctionTranslator(
             ISqlExpressionFactory sqlExpressionFactory,
             IRelationalTypeMappingSource typeMappingSource
-        ) {
+        )
+        {
             _sqlExpressionFactory = sqlExpressionFactory;
             _typeMappingSource = typeMappingSource;
         }
@@ -148,7 +149,8 @@ namespace Microsoft.EntityFrameworkCore.SqlServer.Query.Internal
             MethodInfo method,
             IReadOnlyList<SqlExpression> arguments,
             IDiagnosticsLogger<DbLoggerCategory.Query> logger
-        ) {
+        )
+        {
             Check.NotNull(method, nameof(method));
             Check.NotNull(arguments, nameof(arguments));
             Check.NotNull(logger, nameof(logger));

@@ -217,7 +217,8 @@ namespace System.Collections.Immutable.Tests
 
             foreach (
                 IEqualityComparer<int> comparer in new[] { null, EqualityComparer<int>.Default }
-            ) {
+            )
+            {
                 Assert.True(
                     ImmutableArrayExtensions.SequenceEqual(s_manyElements, s_manyElements, comparer)
                 );

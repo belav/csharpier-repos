@@ -58,7 +58,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Telemetry
             LogMessage logMessage,
             int blockId,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             if (!(logMessage is KeyValueLogMessage kvLogMessage))
             {
                 return;
@@ -78,7 +79,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Telemetry
             int blockId,
             int delta,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             if (!(logMessage is KeyValueLogMessage kvLogMessage))
             {
                 return;
@@ -153,7 +155,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Telemetry
         private static TelemetryEvent CreateTelemetryEvent(
             FunctionId functionId,
             KeyValueLogMessage logMessage
-        ) {
+        )
+        {
             var eventName = functionId.GetEventName();
             return AppendProperties(new TelemetryEvent(eventName), functionId, logMessage);
         }

@@ -42,13 +42,14 @@ namespace Microsoft.Extensions.Localization
             string baseName,
             IResourceNamesCache resourceNamesCache,
             ILogger logger
-        ) : this(
-            resourceManager,
-            new AssemblyWrapper(resourceAssembly),
-            baseName,
-            resourceNamesCache,
-            logger
-        ) { }
+        )
+            : this(
+                resourceManager,
+                new AssemblyWrapper(resourceAssembly),
+                baseName,
+                resourceNamesCache,
+                logger
+            ) { }
 
         /// <summary>
         /// Intended for testing purposes only.
@@ -59,18 +60,19 @@ namespace Microsoft.Extensions.Localization
             string baseName,
             IResourceNamesCache resourceNamesCache,
             ILogger logger
-        ) : this(
-            resourceManager,
-            new ResourceManagerStringProvider(
-                resourceNamesCache,
+        )
+            : this(
                 resourceManager,
-                resourceAssemblyWrapper.Assembly,
-                baseName
-            ),
-            baseName,
-            resourceNamesCache,
-            logger
-        ) { }
+                new ResourceManagerStringProvider(
+                    resourceNamesCache,
+                    resourceManager,
+                    resourceAssemblyWrapper.Assembly,
+                    baseName
+                ),
+                baseName,
+                resourceNamesCache,
+                logger
+            ) { }
 
         /// <summary>
         /// Intended for testing purposes only.
@@ -81,7 +83,8 @@ namespace Microsoft.Extensions.Localization
             string baseName,
             IResourceNamesCache resourceNamesCache,
             ILogger logger
-        ) {
+        )
+        {
             if (resourceManager == null)
             {
                 throw new ArgumentNullException(nameof(resourceManager));
@@ -170,7 +173,8 @@ namespace Microsoft.Extensions.Localization
         protected IEnumerable<LocalizedString> GetAllStrings(
             bool includeParentCultures,
             CultureInfo culture
-        ) {
+        )
+        {
             if (culture == null)
             {
                 throw new ArgumentNullException(nameof(culture));
@@ -230,7 +234,8 @@ namespace Microsoft.Extensions.Localization
 
         private IEnumerable<string> GetResourceNamesFromCultureHierarchy(
             CultureInfo startingCulture
-        ) {
+        )
+        {
             var currentCulture = startingCulture;
             var resourceNames = new HashSet<string>();
 

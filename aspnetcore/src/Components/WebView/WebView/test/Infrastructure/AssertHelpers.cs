@@ -13,7 +13,8 @@ namespace Microsoft.AspNetCore.Components.WebView
             string message,
             int componentId,
             string selector
-        ) {
+        )
+        {
             Assert.True(
                 IpcCommon.TryDeserializeOutgoing(message, out var messageType, out var args)
             );

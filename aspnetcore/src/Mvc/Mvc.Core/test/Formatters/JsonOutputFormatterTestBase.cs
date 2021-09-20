@@ -36,7 +36,8 @@ namespace Microsoft.AspNetCore.Mvc.Formatters
             string mediaType,
             bool isServerDefined,
             string expectedResult
-        ) {
+        )
+        {
             // Arrange
             var formatter = GetOutputFormatter();
 
@@ -86,7 +87,8 @@ namespace Microsoft.AspNetCore.Mvc.Formatters
             string content,
             string encodingAsString,
             bool isDefaultEncoding
-        ) {
+        )
+        {
             // Arrange
             var formatter = GetOutputFormatter();
             var expectedContent = "\"" + content + "\"";
@@ -193,7 +195,8 @@ namespace Microsoft.AspNetCore.Mvc.Formatters
         protected static ActionContext GetActionContext(
             MediaTypeHeaderValue contentType,
             Stream responseStream = null
-        ) {
+        )
+        {
             var httpContext = new DefaultHttpContext();
             httpContext.Request.ContentType = contentType.ToString();
             httpContext.Request.Headers[HeaderNames.AcceptCharset] = contentType.Charset.ToString();
@@ -207,7 +210,8 @@ namespace Microsoft.AspNetCore.Mvc.Formatters
             Type outputType,
             string contentType = "application/xml; charset=utf-8",
             Stream responseStream = null
-        ) {
+        )
+        {
             var mediaTypeHeaderValue = MediaTypeHeaderValue.Parse(contentType);
 
             var actionContext = GetActionContext(mediaTypeHeaderValue, responseStream);
@@ -225,7 +229,8 @@ namespace Microsoft.AspNetCore.Mvc.Formatters
             TextOutputFormatter formatter,
             string encodingAsString,
             bool isDefaultEncoding
-        ) {
+        )
+        {
             Encoding encoding = null;
             if (isDefaultEncoding)
             {

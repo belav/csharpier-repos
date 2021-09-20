@@ -55,7 +55,8 @@ namespace Microsoft.AspNetCore.Diagnostics
         private IOptions<ExceptionHandlerOptions> CreateOptionsAccessor(
             RequestDelegate exceptionHandler = null,
             string exceptionHandlingPath = null
-        ) {
+        )
+        {
             exceptionHandler ??= c => Task.CompletedTask;
             var options = new ExceptionHandlerOptions()
             {
@@ -71,7 +72,8 @@ namespace Microsoft.AspNetCore.Diagnostics
         private ExceptionHandlerMiddleware CreateMiddleware(
             RequestDelegate next,
             IOptions<ExceptionHandlerOptions> options
-        ) {
+        )
+        {
             next ??= c => Task.CompletedTask;
             var listener = new DiagnosticListener("Microsoft.AspNetCore");
 

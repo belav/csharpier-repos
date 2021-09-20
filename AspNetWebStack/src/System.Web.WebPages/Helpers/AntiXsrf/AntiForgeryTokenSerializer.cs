@@ -34,7 +34,8 @@ namespace System.Web.Helpers.AntiXsrf
             {
                 using (
                     MemoryStream stream = new MemoryStream(_cryptoSystem.Unprotect(serializedToken))
-                ) {
+                )
+                {
                     using (BinaryReader reader = new BinaryReader(stream))
                     {
                         AntiForgeryToken token = DeserializeImpl(reader);

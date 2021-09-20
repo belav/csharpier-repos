@@ -30,7 +30,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation
             out string pbstrEditorCaption,
             out Guid pguidCmdUI,
             out int pgrfCDW
-        ) {
+        )
+        {
             if (punkDocDataExisting != IntPtr.Zero)
             {
                 ppunkDocView = IntPtr.Zero;

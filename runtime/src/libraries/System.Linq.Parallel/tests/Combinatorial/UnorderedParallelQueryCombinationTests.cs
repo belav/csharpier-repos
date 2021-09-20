@@ -16,7 +16,8 @@ namespace System.Linq.Parallel.Tests
             IntegerRangeSet seen = new IntegerRangeSet(DefaultStart, DefaultSize);
             foreach (
                 int? i in operation.Item(DefaultStart, DefaultSize, DefaultSource).Cast<int?>()
-            ) {
+            )
+            {
                 Assert.True(i.HasValue);
                 seen.Add(i.Value);
             }
@@ -49,7 +50,8 @@ namespace System.Linq.Parallel.Tests
                         .Concat(
                             right(DefaultStart + DefaultSize / 2, DefaultSize / 2, DefaultSource)
                         )
-                ) {
+                )
+                {
                     seen.Add(i);
                 }
                 seen.AssertComplete();
@@ -88,7 +90,8 @@ namespace System.Linq.Parallel.Tests
             IntegerRangeSet seen = new IntegerRangeSet(DefaultStart, DefaultSize);
             foreach (
                 int i in operation.Item(DefaultStart, DefaultSize, DefaultSource).DefaultIfEmpty()
-            ) {
+            )
+            {
                 seen.Add(i);
             }
             seen.AssertComplete();
@@ -224,7 +227,8 @@ namespace System.Linq.Parallel.Tests
                         DefaultSource
                     )
                     .GroupBy(x => x / GroupFactor)
-            ) {
+            )
+            {
                 seenKey.Add(group.Key);
                 IntegerRangeSet seenElement = new IntegerRangeSet(
                     group.Key * GroupFactor,
@@ -253,7 +257,8 @@ namespace System.Linq.Parallel.Tests
                     )
                     .GroupBy(x => x / GroupFactor)
                     .ToList()
-            ) {
+            )
+            {
                 seenKey.Add(group.Key);
                 IntegerRangeSet seenElement = new IntegerRangeSet(
                     group.Key * GroupFactor,
@@ -281,7 +286,8 @@ namespace System.Linq.Parallel.Tests
                         DefaultSource
                     )
                     .GroupBy(x => x / GroupFactor, y => -y)
-            ) {
+            )
+            {
                 seenKey.Add(group.Key);
                 IntegerRangeSet seenElement = new IntegerRangeSet(
                     1 - Math.Min(DefaultStart + DefaultSize, (group.Key + 1) * GroupFactor),
@@ -298,7 +304,8 @@ namespace System.Linq.Parallel.Tests
         [MemberData(nameof(BinaryOperations))]
         public static void GroupBy_ElementSelector_Unordered_NotPipelined(
             Labeled<Operation> operation
-        ) {
+        )
+        {
             IntegerRangeSet seenKey = new IntegerRangeSet(
                 DefaultStart / GroupFactor,
                 (DefaultSize + (GroupFactor - 1)) / GroupFactor
@@ -311,7 +318,8 @@ namespace System.Linq.Parallel.Tests
                     )
                     .GroupBy(x => x / GroupFactor, y => -y)
                     .ToList()
-            ) {
+            )
+            {
                 seenKey.Add(group.Key);
                 IntegerRangeSet seenElement = new IntegerRangeSet(
                     1 - Math.Min(DefaultStart + DefaultSize, (group.Key + 1) * GroupFactor),
@@ -346,7 +354,8 @@ namespace System.Linq.Parallel.Tests
                             y => y / GroupFactor,
                             (k, g) => new KeyValuePair<int, IEnumerable<int>>(k, g)
                         )
-                ) {
+                )
+                {
                     Assert.True(seenKey.Add(group.Key));
                     IntegerRangeSet seenElement = new IntegerRangeSet(
                         group.Key * GroupFactor,
@@ -385,7 +394,8 @@ namespace System.Linq.Parallel.Tests
                             (k, g) => new KeyValuePair<int, IEnumerable<int>>(k, g)
                         )
                         .ToList()
-                ) {
+                )
+                {
                     Assert.True(seenKey.Add(group.Key));
                     IntegerRangeSet seenElement = new IntegerRangeSet(
                         group.Key * GroupFactor,
@@ -513,7 +523,8 @@ namespace System.Linq.Parallel.Tests
             IntegerRangeSet seen = new IntegerRangeSet(DefaultStart, DefaultSize);
             foreach (
                 int i in operation.Item(DefaultStart, DefaultSize, DefaultSource).OfType<int>()
-            ) {
+            )
+            {
                 seen.Add(i);
             }
             seen.AssertComplete();
@@ -543,7 +554,8 @@ namespace System.Linq.Parallel.Tests
             );
             foreach (
                 int i in operation.Item(DefaultStart, DefaultSize, DefaultSource).Select(x => -x)
-            ) {
+            )
+            {
                 seen.Add(i);
             }
             seen.AssertComplete();
@@ -584,7 +596,8 @@ namespace System.Linq.Parallel.Tests
                             return -x;
                         }
                     )
-            ) {
+            )
+            {
                 seen.Add(i);
             }
             seen.AssertComplete();
@@ -629,7 +642,8 @@ namespace System.Linq.Parallel.Tests
             foreach (
                 int i in operation.Item(0, DefaultSize, DefaultSource)
                     .SelectMany(x => new[] { 0, -1 }.Select(y => y + -DefaultStart - 2 * x))
-            ) {
+            )
+            {
                 seen.Add(i);
             }
             seen.AssertComplete();
@@ -672,7 +686,8 @@ namespace System.Linq.Parallel.Tests
                             return new[] { 0, -1 }.Select(y => y + -DefaultStart - 2 * x);
                         }
                     )
-            ) {
+            )
+            {
                 seen.Add(i);
             }
             seen.AssertComplete();
@@ -717,7 +732,8 @@ namespace System.Linq.Parallel.Tests
             foreach (
                 int i in operation.Item(0, DefaultSize, DefaultSource)
                     .SelectMany(x => new[] { 0, -1 }, (x, y) => y + -DefaultStart - 2 * x)
-            ) {
+            )
+            {
                 seen.Add(i);
             }
             seen.AssertComplete();
@@ -728,7 +744,8 @@ namespace System.Linq.Parallel.Tests
         [MemberData(nameof(BinaryOperations))]
         public static void SelectMany_ResultSelector_Unordered_NotPipelined(
             Labeled<Operation> operation
-        ) {
+        )
+        {
             IntegerRangeSet seen = new IntegerRangeSet(
                 -DefaultStart - DefaultSize * 2 + 1,
                 DefaultSize * 2
@@ -762,7 +779,8 @@ namespace System.Linq.Parallel.Tests
                         },
                         (x, y) => y + -DefaultStart - 2 * x
                     )
-            ) {
+            )
+            {
                 seen.Add(i);
             }
             seen.AssertComplete();
@@ -774,7 +792,8 @@ namespace System.Linq.Parallel.Tests
         [MemberData(nameof(BinaryOperations))]
         public static void SelectMany_Indexed_ResultSelector_Unordered_NotPipelined(
             Labeled<Operation> operation
-        ) {
+        )
+        {
             IntegerRangeSet seen = new IntegerRangeSet(
                 -DefaultStart - DefaultSize * 2 + 1,
                 DefaultSize * 2
@@ -807,7 +826,8 @@ namespace System.Linq.Parallel.Tests
             foreach (
                 int i in operation.Item(DefaultStart, DefaultSize, DefaultSource)
                     .Skip(DefaultSize / 2)
-            ) {
+            )
+            {
                 seen.Add(i);
                 count++;
             }
@@ -844,7 +864,8 @@ namespace System.Linq.Parallel.Tests
             foreach (
                 int i in operation.Item(DefaultStart, DefaultSize, DefaultSource)
                     .Take(DefaultSize / 2)
-            ) {
+            )
+            {
                 seen.Add(i);
                 count++;
             }
@@ -930,7 +951,8 @@ namespace System.Linq.Parallel.Tests
             foreach (
                 int i in operation.Item(DefaultStart, DefaultSize, DefaultSource)
                     .Where(x => x < DefaultStart + DefaultSize / 2)
-            ) {
+            )
+            {
                 seen.Add(i);
             }
             seen.AssertComplete();
@@ -960,7 +982,8 @@ namespace System.Linq.Parallel.Tests
             foreach (
                 int i in operation.Item(DefaultStart, DefaultSize, DefaultSource)
                     .Where((x, index) => x < DefaultStart + DefaultSize / 2)
-            ) {
+            )
+            {
                 seen.Add(i);
             }
             seen.AssertComplete();

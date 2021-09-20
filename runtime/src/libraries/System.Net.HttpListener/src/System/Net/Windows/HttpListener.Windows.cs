@@ -116,7 +116,8 @@ namespace System.Net
             Interop.HttpApi.HTTP_SERVER_PROPERTY property,
             IntPtr info,
             uint infosize
-        ) {
+        )
+        {
             uint statusCode = Interop.HttpApi.ERROR_SUCCESS;
 
             Debug.Assert(_urlGroupId != 0, "SetUrlGroupProperty called with invalid url group id");
@@ -692,7 +693,8 @@ namespace System.Net
         internal static unsafe bool ValidateRequest(
             HttpListenerSession session,
             RequestContextBase requestMemory
-        ) {
+        )
+        {
             // Block potential DOS attacks
             if (requestMemory.RequestBlob->Headers.UnknownHeaderCount > UnknownHeaderLimit)
             {
@@ -727,7 +729,8 @@ namespace System.Net
                 if (
                     statusCode != Interop.HttpApi.ERROR_SUCCESS
                     && statusCode != Interop.HttpApi.ERROR_IO_PENDING
-                ) {
+                )
+                {
                     // someother bad error, return values are:
                     // ERROR_INVALID_HANDLE, ERROR_INSUFFICIENT_BUFFER, ERROR_OPERATION_ABORTED
                     throw new HttpListenerException((int)statusCode);
@@ -759,7 +762,8 @@ namespace System.Net
                     !(asyncResult is ListenerAsyncResult castedAsyncResult)
                     || !(castedAsyncResult.AsyncObject is HttpListenerSession session)
                     || session.Listener != this
-                ) {
+                )
+                {
                     throw new ArgumentException(SR.net_io_invalidasyncresult, nameof(asyncResult));
                 }
                 if (castedAsyncResult.EndCalled)
@@ -792,7 +796,8 @@ namespace System.Net
             HttpListenerSession session,
             RequestContextBase memoryBlob,
             out bool stoleBlob
-        ) {
+        )
+        {
             if (NetEventSource.Log.IsEnabled())
                 NetEventSource.Info(
                     this,
@@ -947,7 +952,8 @@ namespace System.Net
                     authorizationHeader != null
                     && (authenticationScheme & ~AuthenticationSchemes.Anonymous)
                         != AuthenticationSchemes.None
-                ) {
+                )
+                {
                     // Find the end of the scheme name.  Trust that HTTP.SYS parsed out just our header ok.
                     for (index = 0; index < authorizationHeader.Length; index++)
                     {
@@ -956,7 +962,8 @@ namespace System.Net
                             || authorizationHeader[index] == '\t'
                             || authorizationHeader[index] == '\r'
                             || authorizationHeader[index] == '\n'
-                        ) {
+                        )
+                        {
                             break;
                         }
                     }
@@ -975,7 +982,8 @@ namespace System.Net
                                 index,
                                 StringComparison.OrdinalIgnoreCase
                             ) == 0
-                        ) {
+                        )
+                        {
                             headerScheme = AuthenticationSchemes.Negotiate;
                         }
                         else if (
@@ -989,7 +997,8 @@ namespace System.Net
                                 index,
                                 StringComparison.OrdinalIgnoreCase
                             ) == 0
-                        ) {
+                        )
+                        {
                             headerScheme = AuthenticationSchemes.Ntlm;
                         }
                         else if (
@@ -1003,7 +1012,8 @@ namespace System.Net
                                 index,
                                 StringComparison.OrdinalIgnoreCase
                             ) == 0
-                        ) {
+                        )
+                        {
                             headerScheme = AuthenticationSchemes.Basic;
                         }
                         else
@@ -1042,7 +1052,8 @@ namespace System.Net
                     if (
                         (authenticationScheme & AuthenticationSchemes.Anonymous)
                         != AuthenticationSchemes.None
-                    ) {
+                    )
+                    {
                         if (!stoleBlob)
                         {
                             stoleBlob = true;
@@ -1070,7 +1081,8 @@ namespace System.Net
                             && authorizationHeader[index] != '\t'
                             && authorizationHeader[index] != '\r'
                             && authorizationHeader[index] != '\n'
-                        ) {
+                        )
+                        {
                             break;
                         }
                     }
@@ -1165,7 +1177,8 @@ namespace System.Net
                                         && oldContext == null
                                         && bytes != null
                                         && bytes.Length > 0
-                                    ) {
+                                    )
+                                    {
                                         statusCodeNew = new SecurityStatusPal(
                                             SecurityStatusPalErrorCode.InvalidToken
                                         );
@@ -1197,7 +1210,8 @@ namespace System.Net
                                                 isSecureConnection,
                                                 extendedProtectionPolicy
                                             )
-                                        ) {
+                                        )
+                                        {
                                             httpError = HttpStatusCode.Unauthorized;
                                         }
                                         else
@@ -1211,7 +1225,8 @@ namespace System.Net
                                             if (
                                                 statusCodeNew.ErrorCode
                                                 != SecurityStatusPalErrorCode.OK
-                                            ) {
+                                            )
+                                            {
                                                 if (NetEventSource.Log.IsEnabled())
                                                 {
                                                     NetEventSource.Info(
@@ -1254,7 +1269,8 @@ namespace System.Net
                                                     UnsafeConnectionNtlmAuthentication
                                                     && context.ProtocolName
                                                         == NegotiationInfoClass.NTLM
-                                                ) {
+                                                )
+                                                {
                                                     if (NetEventSource.Log.IsEnabled())
                                                     {
                                                         NetEventSource.Info(
@@ -1590,7 +1606,8 @@ namespace System.Net
         private static void FreeContext(
             ref HttpListenerContext? httpContext,
             RequestContextBase memoryBlob
-        ) {
+        )
+        {
             if (httpContext != null)
             {
                 httpContext.Request.DetachBlob(memoryBlob);
@@ -1636,7 +1653,8 @@ namespace System.Net
             ulong connectionId,
             bool isSecureConnection,
             ExtendedProtectionPolicy policy
-        ) {
+        )
+        {
             if (policy.PolicyEnforcement == PolicyEnforcement.Never)
             {
                 if (NetEventSource.Log.IsEnabled())
@@ -1674,7 +1692,8 @@ namespace System.Net
             NTAuthentication context,
             bool isSecureConnection,
             ExtendedProtectionPolicy policy
-        ) {
+        )
+        {
             // Kerberos does SPN check already in ASC
             if (context.IsKerberos)
             {
@@ -1801,14 +1820,16 @@ namespace System.Net
         private static bool ScenarioChecksChannelBinding(
             bool isSecureConnection,
             ProtectionScenario scenario
-        ) {
+        )
+        {
             return (isSecureConnection && scenario == ProtectionScenario.TransportSelected);
         }
 
         private ContextFlagsPal GetContextFlags(
             ExtendedProtectionPolicy policy,
             bool isSecureConnection
-        ) {
+        )
+        {
             ContextFlagsPal result = ContextFlagsPal.Connection;
             if (policy.PolicyEnforcement != PolicyEnforcement.Never)
             {
@@ -1829,7 +1850,8 @@ namespace System.Net
         // This only works for context-destroying errors.
         private HttpStatusCode HttpStatusFromSecurityStatus(
             SecurityStatusPalErrorCode statusErrorCode
-        ) {
+        )
+        {
             if (IsCredentialFailure(statusErrorCode))
             {
                 return HttpStatusCode.Unauthorized;
@@ -1898,7 +1920,8 @@ namespace System.Net
             out NTAuthentication? newContext,
             ExtendedProtectionPolicy policy,
             bool isSecureConnection
-        ) {
+        )
+        {
             if (NetEventSource.Log.IsEnabled())
                 NetEventSource.Info(
                     this,
@@ -1929,7 +1952,8 @@ namespace System.Net
             HttpListenerSession session,
             ulong connectionId,
             ref DisconnectAsyncResult? disconnectResult
-        ) {
+        )
+        {
             Debug.Assert(disconnectResult == null);
 
             try
@@ -1957,7 +1981,8 @@ namespace System.Net
                 if (
                     statusCode == Interop.HttpApi.ERROR_SUCCESS
                     || statusCode == Interop.HttpApi.ERROR_IO_PENDING
-                ) {
+                )
+                {
                     // Need to make sure it's going to get returned before adding it to the hash.  That way it'll be handled
                     // correctly in HandleAuthentication's finally.
                     disconnectResult = result;
@@ -1967,7 +1992,8 @@ namespace System.Net
                 if (
                     statusCode == Interop.HttpApi.ERROR_SUCCESS
                     && HttpListener.SkipIOCPCallbackOnSuccess
-                ) {
+                )
+                {
                     // IO operation completed synchronously - callback won't be called to signal completion.
                     result.IOCompleted(statusCode, 0, result.NativeOverlapped);
                 }
@@ -1989,7 +2015,8 @@ namespace System.Net
             ulong requestId,
             HttpStatusCode httpStatusCode,
             ArrayList? challenges
-        ) {
+        )
+        {
             if (NetEventSource.Log.IsEnabled())
                 NetEventSource.Info(session.Listener, $"RequestId: {requestId}");
             Interop.HttpApi.HTTP_RESPONSE httpResponse = default;
@@ -2150,7 +2177,8 @@ namespace System.Net
         internal static ChannelBinding? GetChannelBindingFromTls(
             HttpListenerSession session,
             ulong connectionId
-        ) {
+        )
+        {
             // +128 since a CBT is usually <128 thus we need to call HRCC just once. If the CBT
             // is >128 we will get ERROR_MORE_DATA and call again
             int size = sizeof(Interop.HttpApi.HTTP_REQUEST_CHANNEL_BIND_STATUS) + 128;
@@ -2305,7 +2333,8 @@ namespace System.Net
                 uint errorCode,
                 uint numBytes,
                 NativeOverlapped* nativeOverlapped
-            ) {
+            )
+            {
                 IOCompleted(this, errorCode, numBytes, nativeOverlapped);
             }
 
@@ -2314,7 +2343,8 @@ namespace System.Net
                 uint errorCode,
                 uint numBytes,
                 NativeOverlapped* nativeOverlapped
-            ) {
+            )
+            {
                 if (NetEventSource.Log.IsEnabled())
                     NetEventSource.Info(null, "_connectionId:" + asyncResult._connectionId);
 
@@ -2331,7 +2361,8 @@ namespace System.Net
                 uint errorCode,
                 uint numBytes,
                 NativeOverlapped* nativeOverlapped
-            ) {
+            )
+            {
                 if (NetEventSource.Log.IsEnabled())
                     NetEventSource.Info(
                         null,
@@ -2374,7 +2405,8 @@ namespace System.Net
                         == AuthenticationTypes.NTLM
                     )
                     && (listener.UnsafeConnectionNtlmAuthentication)
-                ) {
+                )
+                {
                     identity.Dispose();
                 }
 

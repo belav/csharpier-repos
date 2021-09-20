@@ -59,7 +59,8 @@ namespace Microsoft.Extensions.Configuration
         public virtual IEnumerable<string> GetChildKeys(
             IEnumerable<string> earlierKeys,
             string parentPath
-        ) {
+        )
+        {
             var results = new List<string>();
 
             if (parentPath is null)
@@ -79,7 +80,8 @@ namespace Microsoft.Extensions.Configuration
                         kv.Key.Length > parentPath.Length
                         && kv.Key.StartsWith(parentPath, StringComparison.OrdinalIgnoreCase)
                         && kv.Key[parentPath.Length] == ':'
-                    ) {
+                    )
+                    {
                         results.Add(Segment(kv.Key, parentPath.Length + 1));
                     }
                 }

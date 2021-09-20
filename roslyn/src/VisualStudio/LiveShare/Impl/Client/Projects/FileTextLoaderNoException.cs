@@ -26,7 +26,8 @@ namespace Microsoft.VisualStudio.LanguageServices.LiveShare.Client.Projects
             CodeAnalysis.Workspace workspace,
             DocumentId documentId,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             if (!File.Exists(Path))
             {
                 return Task.FromResult(

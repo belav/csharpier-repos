@@ -43,13 +43,15 @@ namespace System.ComponentModel.Composition.ReflectionModel
         internal static bool IsProductConstraintSatisfiedBy(
             ImportDefinition productImportDefinition,
             ExportDefinition exportDefinition
-        ) {
+        )
+        {
             if (
                 exportDefinition.Metadata.TryGetValue(
                     CompositionConstants.ProductDefinitionMetadataName,
                     out object? productValue
                 )
-            ) {
+            )
+            {
                 if (productValue is ExportDefinition productDefinition)
                 {
                     return productImportDefinition.IsConstraintSatisfiedBy(productDefinition);

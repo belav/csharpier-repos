@@ -23,7 +23,8 @@ namespace System.Web.Http.Routing
             HttpConfiguration configuration,
             IInlineConstraintResolver constraintResolver,
             IDirectRouteProvider directRouteProvider
-        ) {
+        )
+        {
             if (configuration == null)
             {
                 throw new ArgumentNullException("configuration");
@@ -80,7 +81,8 @@ namespace System.Web.Http.Routing
         private static void AddGenerationHooksForSubRoutes(
             HttpRouteCollection routeTable,
             IEnumerable<RouteEntry> entries
-        ) {
+        )
+        {
             Contract.Assert(entries != null);
             foreach (RouteEntry entry in entries)
             {
@@ -107,7 +109,8 @@ namespace System.Web.Http.Routing
             HttpConfiguration configuration,
             IInlineConstraintResolver constraintResolver,
             IDirectRouteProvider directRouteProvider
-        ) {
+        )
+        {
             Contract.Assert(configuration != null);
             Contract.Assert(directRouteProvider != null);
 

@@ -32,7 +32,8 @@ namespace Microsoft.CodeAnalysis.ExpressionEvaluator
                 string,
                 ImmutableArray<(AssemblyIdentity, MetadataReference)>
             >? referencesBySimpleName
-        ) {
+        )
+        {
             RoslynDebug.Assert(
                 kind == MakeAssemblyReferencesKind.AllAssemblies || moduleVersionId != Guid.Empty
             );
@@ -70,7 +71,8 @@ namespace Microsoft.CodeAnalysis.ExpressionEvaluator
                                 "System.Private.CoreLib.dll",
                                 StringComparison.OrdinalIgnoreCase
                             )
-                        ) {
+                        )
+                        {
                             // If this assembly declares System.Object, assume it is the corlib.
                             // (Note, it is order dependent which assembly we treat as corlib
                             // if there are multiple assemblies that meet these requirements.
@@ -165,7 +167,8 @@ namespace Microsoft.CodeAnalysis.ExpressionEvaluator
                     if (
                         targetReference == null
                         && reader.GetModuleVersionIdOrThrow() == moduleVersionId
-                    ) {
+                    )
+                    {
                         targetReference = reference;
                     }
                 }
@@ -179,7 +182,8 @@ namespace Microsoft.CodeAnalysis.ExpressionEvaluator
                 if (
                     corLibrary != null
                     && refsBySimpleName.TryGetValue(corLibrary.Name, out var corLibraryReferences)
-                ) {
+                )
+                {
                     referencesBuilder.Add(corLibraryReferences[0].Item2);
                 }
 
@@ -221,7 +225,8 @@ namespace Microsoft.CodeAnalysis.ExpressionEvaluator
                         if (
                             targetModule == null
                             && reader.GetModuleVersionIdOrThrow() == moduleVersionId
-                        ) {
+                        )
+                        {
                             targetModule = metadata;
                         }
 
@@ -235,7 +240,8 @@ namespace Microsoft.CodeAnalysis.ExpressionEvaluator
                                         ExpressionCompilerConstants.IntrinsicAssemblyTypeName
                                     )
                             )
-                        ) {
+                        )
+                        {
                             intrinsicsAssembly = identity;
                         }
                     }
@@ -315,7 +321,8 @@ namespace Microsoft.CodeAnalysis.ExpressionEvaluator
             ArrayBuilder<AssemblyIdentity> identities,
             AssemblyIdentityComparer identityComparer,
             ArrayBuilder<AssemblyIdentity> referencedModules
-        ) {
+        )
+        {
             Debug.Assert(modules.Count == identities.Count);
 
             var referencedIndices = PooledHashSet<int>.GetInstance();
@@ -375,7 +382,8 @@ namespace Microsoft.CodeAnalysis.ExpressionEvaluator
         private static PortableExecutableReference MakeAssemblyReference(
             ModuleMetadata metadata,
             Dictionary<string, ModuleMetadata?>? modulesByName
-        ) {
+        )
+        {
             Debug.Assert(metadata.Module.IsManifestModule);
 
             var builder = ArrayBuilder<ModuleMetadata>.GetInstance();
@@ -450,7 +458,8 @@ namespace Microsoft.CodeAnalysis.ExpressionEvaluator
                 var stream = assembly.GetManifestResourceStream(
                     "Microsoft.CodeAnalysis.ExpressionEvaluator.Resources.WindowsProxy.winmd"
                 )
-            ) {
+            )
+            {
                 var bytes = new byte[stream.Length];
                 using (var memoryStream = new MemoryStream(bytes))
                 {
@@ -462,7 +471,8 @@ namespace Microsoft.CodeAnalysis.ExpressionEvaluator
 
         private static PortableExecutableReference MakeCompileTimeWinMdAssemblyMetadata(
             ArrayBuilder<ModuleMetadata> runtimeModules
-        ) {
+        )
+        {
             var metadata = ModuleMetadata.CreateFromImage(GetWindowsProxyBytes());
             var builder = ArrayBuilder<ModuleMetadata>.GetInstance();
             builder.Add(metadata);
@@ -513,7 +523,8 @@ namespace Microsoft.CodeAnalysis.ExpressionEvaluator
 
         internal static ImmutableArray<string> GetLocalNames(
             this ArrayBuilder<ISymUnmanagedScope> scopes
-        ) {
+        )
+        {
             var builder = ArrayBuilder<string>.GetInstance();
             foreach (var scope in scopes)
             {
@@ -535,7 +546,8 @@ namespace Microsoft.CodeAnalysis.ExpressionEvaluator
         internal static ImmutableArray<int> GetSynthesizedMethods(
             byte[] assembly,
             string methodName
-        ) {
+        )
+        {
             var builder = ArrayBuilder<int>.GetInstance();
             using (var metadata = ModuleMetadata.CreateFromStream(new MemoryStream(assembly)))
             {

@@ -41,7 +41,8 @@ namespace Microsoft.EntityFrameworkCore.Scaffolding.Internal
             IProviderConfigurationCodeGenerator providerConfigurationCodeGenerator,
             IAnnotationCodeGenerator annotationCodeGenerator,
             ICSharpHelper cSharpHelper
-        ) {
+        )
+        {
             Check.NotNull(
                 providerConfigurationCodeGenerator,
                 nameof(providerConfigurationCodeGenerator)
@@ -69,7 +70,8 @@ namespace Microsoft.EntityFrameworkCore.Scaffolding.Internal
             bool useDataAnnotations,
             bool suppressConnectionStringWarning,
             bool suppressOnConfiguring
-        ) {
+        )
+        {
             Check.NotNull(model, nameof(model));
 
             _sb = new IndentedStringBuilder();
@@ -128,7 +130,8 @@ namespace Microsoft.EntityFrameworkCore.Scaffolding.Internal
             bool useDataAnnotations,
             bool suppressConnectionStringWarning,
             bool suppressOnConfiguring
-        ) {
+        )
+        {
             Check.NotNull(model, nameof(model));
             Check.NotNull(contextName, nameof(contextName));
             Check.NotNull(connectionString, nameof(connectionString));
@@ -210,7 +213,8 @@ namespace Microsoft.EntityFrameworkCore.Scaffolding.Internal
         protected virtual void GenerateOnConfiguring(
             string connectionString,
             bool suppressConnectionStringWarning
-        ) {
+        )
+        {
             Check.NotNull(connectionString, nameof(connectionString));
 
             _sb.AppendLine(
@@ -483,7 +487,8 @@ namespace Microsoft.EntityFrameworkCore.Scaffolding.Internal
                             conventionKey.DeclaringEntityType.GetProperties()
                         )
                     )
-                ) {
+                )
+                {
                     return;
                 }
 
@@ -624,7 +629,8 @@ namespace Microsoft.EntityFrameworkCore.Scaffolding.Internal
                     !property.IsNullable
                     && property.ClrType.IsNullableType()
                     && !property.IsPrimaryKey()
-                ) {
+                )
+                {
                     lines.Add($".{nameof(PropertyBuilder.IsRequired)}()");
                 }
 
@@ -689,7 +695,8 @@ namespace Microsoft.EntityFrameworkCore.Scaffolding.Internal
                     is ConfigurationSource valueGeneratedConfigurationSource
                 && valueGeneratedConfigurationSource != ConfigurationSource.Convention
                 && ValueGenerationConvention.GetValueGenerated(property) != valueGenerated
-            ) {
+            )
+            {
                 var methodName = valueGenerated switch
                 {
                     ValueGenerated.OnAdd => nameof(PropertyBuilder.ValueGeneratedOnAdd),
@@ -820,7 +827,8 @@ namespace Microsoft.EntityFrameworkCore.Scaffolding.Internal
             if (
                 !string.IsNullOrEmpty(sequence.Schema)
                 && sequence.Model.GetDefaultSchema() != sequence.Schema
-            ) {
+            )
+            {
                 parameters += $", {_code.Literal(sequence.Schema)}";
             }
 

@@ -58,7 +58,8 @@ namespace Microsoft.CodeAnalysis.SymbolSearch
             IPatchService patchService,
             IDatabaseFactoryService databaseFactoryService,
             Func<Exception, bool> reportAndSwallowException
-        ) {
+        )
+        {
             _delayService = delayService;
             _ioService = ioService;
             _remoteControlService = remoteControlService;
@@ -72,7 +73,8 @@ namespace Microsoft.CodeAnalysis.SymbolSearch
             string name,
             int arity,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             if (!_sourceToDatabase.TryGetValue(source, out var databaseWrapper))
             {
                 // Don't have a database to search.
@@ -113,7 +115,8 @@ namespace Microsoft.CodeAnalysis.SymbolSearch
             string source,
             string assemblyName,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             if (!_sourceToDatabase.TryGetValue(source, out var databaseWrapper))
             {
                 // Don't have a database to search.
@@ -133,7 +136,8 @@ namespace Microsoft.CodeAnalysis.SymbolSearch
                     out var startIndex,
                     out var count
                 )
-            ) {
+            )
+            {
                 for (var i = startIndex; i < (startIndex + count); i++)
                 {
                     cancellationToken.ThrowIfCancellationRequested();
@@ -167,7 +171,8 @@ namespace Microsoft.CodeAnalysis.SymbolSearch
             string name,
             int arity,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             // Our reference assembly data is stored in the nuget.org DB.
             if (!_sourceToDatabase.TryGetValue(NugetOrgSource, out var databaseWrapper))
             {
@@ -251,7 +256,8 @@ namespace Microsoft.CodeAnalysis.SymbolSearch
             if (
                 !TryGetRankingSymbol(symbol, out var rankingSymbol)
                 || !int.TryParse(rankingSymbol.Name.ToString(), out var rank)
-            ) {
+            )
+            {
                 return 0;
             }
 

@@ -44,7 +44,8 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
             IKeyPropagator keyPropagator,
             IDiagnosticsLogger<DbLoggerCategory.ChangeTracking> logger,
             ILoggingOptions loggingOptions
-        ) {
+        )
+        {
             _valueGeneratorSelector = valueGeneratorSelector;
             _keyPropagator = keyPropagator;
             _logger = logger;
@@ -92,7 +93,8 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
                 if (
                     !entry.HasDefaultValue(property)
                     || (!includePrimaryKey && property.IsPrimaryKey())
-                ) {
+                )
+                {
                     continue;
                 }
 
@@ -112,7 +114,8 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
             IProperty property,
             object? generatedValue,
             bool temporary
-        ) {
+        )
+        {
             if (_loggingOptions.IsSensitiveDataLoggingEnabled)
             {
                 _logger.ValueGeneratedSensitive(entry, property, generatedValue, temporary);
@@ -133,7 +136,8 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
             InternalEntityEntry entry,
             bool includePrimaryKey = true,
             CancellationToken cancellationToken = default
-        ) {
+        )
+        {
             var entityEntry = new EntityEntry(entry);
 
             foreach (var property in entry.EntityType.GetValueGeneratingProperties())
@@ -141,7 +145,8 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
                 if (
                     !entry.HasDefaultValue(property)
                     || (!includePrimaryKey && property.IsPrimaryKey())
-                ) {
+                )
+                {
                     continue;
                 }
 
@@ -177,7 +182,8 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
             IProperty property,
             object? generatedValue,
             bool isTemporary
-        ) {
+        )
+        {
             if (generatedValue != null)
             {
                 if (isTemporary)

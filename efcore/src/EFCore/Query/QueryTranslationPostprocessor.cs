@@ -26,7 +26,8 @@ namespace Microsoft.EntityFrameworkCore.Query
         public QueryTranslationPostprocessor(
             QueryTranslationPostprocessorDependencies dependencies,
             QueryCompilationContext queryCompilationContext
-        ) {
+        )
+        {
             Check.NotNull(dependencies, nameof(dependencies));
             Check.NotNull(queryCompilationContext, nameof(queryCompilationContext));
 

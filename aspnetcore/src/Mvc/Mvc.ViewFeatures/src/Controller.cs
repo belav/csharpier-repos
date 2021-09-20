@@ -355,7 +355,8 @@ namespace Microsoft.AspNetCore.Mvc
         public virtual Task OnActionExecutionAsync(
             ActionExecutingContext context,
             ActionExecutionDelegate next
-        ) {
+        )
+        {
             if (context == null)
             {
                 throw new ArgumentNullException(nameof(context));

@@ -54,7 +54,8 @@ namespace Microsoft.CodeAnalysis.Options
             public OptionService(
                 IGlobalOptionService globalOptionService,
                 HostWorkspaceServices workspaceServices
-            ) {
+            )
+            {
                 _globalOptionService = globalOptionService;
 
                 var schedulerProvider =
@@ -79,7 +80,8 @@ namespace Microsoft.CodeAnalysis.Options
             private void OnGlobalOptionServiceOptionChanged(
                 object? sender,
                 OptionChangedEventArgs e
-            ) {
+            )
+            {
                 _taskQueue.ScheduleTask(
                     nameof(OptionService) + "." + nameof(OnGlobalOptionServiceOptionChanged),
                     () =>
@@ -162,7 +164,8 @@ namespace Microsoft.CodeAnalysis.Options
 
             public void RegisterDocumentOptionsProvider(
                 IDocumentOptionsProvider documentOptionsProvider
-            ) {
+            )
+            {
                 if (documentOptionsProvider == null)
                 {
                     throw new ArgumentNullException(nameof(documentOptionsProvider));
@@ -180,7 +183,8 @@ namespace Microsoft.CodeAnalysis.Options
                 Document document,
                 OptionSet optionSet,
                 CancellationToken cancellationToken
-            ) {
+            )
+            {
                 ImmutableArray<IDocumentOptionsProvider> documentOptionsProviders;
 
                 lock (_gate)
@@ -218,17 +222,19 @@ namespace Microsoft.CodeAnalysis.Options
                 public DocumentSpecificOptionSet(
                     List<IDocumentOptions> documentOptions,
                     OptionSet underlyingOptions
-                ) : this(
-                    documentOptions,
-                    underlyingOptions,
-                    ImmutableDictionary<OptionKey, object?>.Empty
-                ) { }
+                )
+                    : this(
+                        documentOptions,
+                        underlyingOptions,
+                        ImmutableDictionary<OptionKey, object?>.Empty
+                    ) { }
 
                 public DocumentSpecificOptionSet(
                     List<IDocumentOptions> documentOptions,
                     OptionSet underlyingOptions,
                     ImmutableDictionary<OptionKey, object?> values
-                ) {
+                )
+                {
                     _documentOptions = documentOptions;
                     _underlyingOptions = underlyingOptions;
                     _values = values;

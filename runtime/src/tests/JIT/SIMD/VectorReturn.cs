@@ -206,7 +206,8 @@ internal partial class VectorTest
             !CheckValue<float>(result.X, 4.0f)
             || !CheckValue<float>(result.Y, 5.0f)
             || !CheckValue<float>(result.Z, 6.0f)
-        ) {
+        )
+        {
             Console.WriteLine("Vector3ReturnTest did not return expected value");
             return Fail;
         }
@@ -224,7 +225,8 @@ internal partial class VectorTest
         if (
             !CheckValue<float>(result_v2.X, expectedResult_v2.X)
             || !CheckValue<float>(result_v2.Y, expectedResult_v2.Y)
-        ) {
+        )
+        {
             Console.WriteLine("Expected result is " + expectedResult_v2.ToString());
             Console.WriteLine("Vector2 test FAILED");
             return Fail;
@@ -237,7 +239,8 @@ internal partial class VectorTest
             !CheckValue<float>(result_v3.X, expectedResult_v3.X)
             || !CheckValue<float>(result_v3.Y, expectedResult_v3.Y)
             || !CheckValue<float>(result_v3.Z, expectedResult_v3.Z)
-        ) {
+        )
+        {
             Console.WriteLine("Expected result is " + expectedResult_v3.ToString());
             Console.WriteLine("Vector3 test FAILED");
             return Fail;
@@ -251,7 +254,8 @@ internal partial class VectorTest
             || !CheckValue<float>(result_v4.Y, expectedResult_v4.Y)
             || !CheckValue<float>(result_v4.Z, expectedResult_v4.Z)
             || !CheckValue<float>(result_v4.W, expectedResult_v4.W)
-        ) {
+        )
+        {
             Console.WriteLine("Expected result is " + expectedResult_v4.ToString());
             Console.WriteLine("Vector4 test FAILED");
             return Fail;

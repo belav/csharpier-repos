@@ -28,7 +28,8 @@ namespace Castle.DynamicProxy.Generators.Emitters.SimpleAST
             Reference reference,
             IExpressionOrStatement ifNull,
             IExpressionOrStatement ifNotNull = null
-        ) {
+        )
+        {
             this.reference = reference ?? throw new ArgumentNullException(nameof(reference));
             this.ifNull = ifNull;
             this.ifNotNull = ifNotNull;
@@ -38,7 +39,8 @@ namespace Castle.DynamicProxy.Generators.Emitters.SimpleAST
             IExpression expression,
             IExpressionOrStatement ifNull,
             IExpressionOrStatement ifNotNull = null
-        ) {
+        )
+        {
             this.expression = expression ?? throw new ArgumentNullException(nameof(expression));
             this.ifNull = ifNull;
             this.ifNotNull = ifNotNull;

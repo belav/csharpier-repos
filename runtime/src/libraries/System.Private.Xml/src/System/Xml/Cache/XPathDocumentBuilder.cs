@@ -67,7 +67,8 @@ namespace MS.Internal.Xml.Cache
             IXmlLineInfo? lineInfo,
             string? baseUri,
             XPathDocument.LoadFlags flags
-        ) {
+        )
+        {
             // Allocate the initial node (for non-namespaces) page, and the initial namespace page
             _nodePageFact.Init(256);
             _nmspPageFact.Init(16);
@@ -91,7 +92,8 @@ namespace MS.Internal.Xml.Cache
             IXmlLineInfo? lineInfo,
             string? baseUri,
             XPathDocument.LoadFlags flags
-        ) {
+        )
+        {
             XPathNode[] page;
             int idx;
 
@@ -238,7 +240,8 @@ namespace MS.Internal.Xml.Cache
             string prefix,
             string localName,
             string namespaceName
-        ) {
+        )
+        {
             WriteEndElement(true);
         }
 
@@ -249,7 +252,8 @@ namespace MS.Internal.Xml.Cache
             string prefix,
             string localName,
             string namespaceName
-        ) {
+        )
+        {
             WriteEndElement(false);
         }
 
@@ -338,7 +342,8 @@ namespace MS.Internal.Xml.Cache
             string? prefix,
             string localName,
             string? namespaceName
-        ) {
+        )
+        {
             Debug.Assert(namespaceName != null);
             Debug.Assert(prefix != null && !prefix.Equals("xmlns"));
             Debug.Assert(
@@ -382,7 +387,8 @@ namespace MS.Internal.Xml.Cache
                 if (
                     _pageSibling[_idxSibling].LocalName == _idAttrName.Name
                     && _pageSibling[_idxSibling].Prefix == _idAttrName.Namespace
-                ) {
+                )
+                {
                     // Then add its value to the idValueMap map
                     Debug.Assert(
                         _idxParent != 0 && _pageParent != null,
@@ -733,7 +739,8 @@ namespace MS.Internal.Xml.Cache
             int idxPrev,
             XPathNode[] pageNext,
             int idxNext
-        ) {
+        )
+        {
             // Set link on previous element
             if (pagePrev != null)
                 pagePrev[idxPrev].SetSimilarElement(_infoTable, pageNext, idxNext);
@@ -751,7 +758,8 @@ namespace MS.Internal.Xml.Cache
             string? namespaceUri,
             XPathNode[]? pageElem,
             int idxElem
-        ) {
+        )
+        {
             XPathNode[] pageNode;
             int idxNode,
                 lineNumOffset,
@@ -798,7 +806,8 @@ namespace MS.Internal.Xml.Cache
             string namespaceUri,
             string prefix,
             string? baseUri
-        ) {
+        )
+        {
             XPathNode[] pageNode;
             int idxNode,
                 lineNumOffset,
@@ -891,7 +900,8 @@ namespace MS.Internal.Xml.Cache
             string namespaceUri,
             string prefix,
             string? baseUri
-        ) {
+        )
+        {
             XPathNode[] pageNew;
             int idxNew;
             Debug.Assert(xptyp != XPathNodeType.Root && xptyp != XPathNodeType.Namespace);

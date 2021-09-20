@@ -20,7 +20,8 @@ namespace Microsoft.AspNet.Facebook.Test.Helpers
             NameValueCollection requestQueryData = null,
             Uri requestUrl = null,
             HttpCookieCollection requestCookies = null
-        ) {
+        )
+        {
             Mock<ControllerContext> controllerContext = new Mock<ControllerContext>();
             controllerContext.Setup(c => c.HttpContext.Response).Returns(new EmptyHttpResponse());
             controllerContext.Setup(c => c.HttpContext.Response.Cookies)
@@ -43,7 +44,8 @@ namespace Microsoft.AspNet.Facebook.Test.Helpers
         public static ActionDescriptor CreateActionDescriptor(
             object[] actionAuthorizeAttributes = null,
             object[] controllerAuthorizeAttributes = null
-        ) {
+        )
+        {
             Mock<ActionDescriptor> actionDescriptor = new Mock<ActionDescriptor>();
             actionDescriptor.Setup(
                     a => a.GetCustomAttributes(typeof(FacebookAuthorizeAttribute), true)
@@ -63,7 +65,8 @@ namespace Microsoft.AspNet.Facebook.Test.Helpers
         public static FacebookConfiguration CreateConfiguration(
             FacebookClient client = null,
             IFacebookPermissionService permissionService = null
-        ) {
+        )
+        {
             FacebookConfiguration config = new FacebookConfiguration();
 
             if (client == null)
@@ -101,7 +104,8 @@ namespace Microsoft.AspNet.Facebook.Test.Helpers
         public static IFacebookPermissionService CreatePermissionService(
             string[] permissionsToReturn,
             PermissionsStatus permissionsStatusToReturn = null
-        ) {
+        )
+        {
             var client = new Mock<IFacebookPermissionService>();
             permissionsStatusToReturn =
                 permissionsStatusToReturn ?? new PermissionsStatus(apiResult: null);

@@ -61,7 +61,8 @@ namespace System.Security.Cryptography
             ReadOnlySpan<byte> source,
             Span<byte> destination,
             out int bytesWritten
-        ) {
+        )
+        {
             if (_disposed)
             {
                 throw new ObjectDisposedException(null);
@@ -136,7 +137,8 @@ namespace System.Security.Cryptography
         public Task<byte[]> ComputeHashAsync(
             Stream inputStream,
             CancellationToken cancellationToken = default
-        ) {
+        )
+        {
             if (inputStream == null)
                 throw new ArgumentNullException(nameof(inputStream));
             if (_disposed)
@@ -148,7 +150,8 @@ namespace System.Security.Cryptography
         private async Task<byte[]> ComputeHashAsyncCore(
             Stream inputStream,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             // Use ArrayPool.Shared instead of CryptoPool because the array is passed out.
             byte[] rented = ArrayPool<byte>.Shared.Rent(4096);
             Memory<byte> buffer = rented;
@@ -160,7 +163,8 @@ namespace System.Security.Cryptography
                     bytesRead = await inputStream.ReadAsync(buffer, cancellationToken)
                         .ConfigureAwait(false)
                 ) > 0
-            ) {
+            )
+            {
                 if (bytesRead > clearLimit)
                 {
                     clearLimit = bytesRead;
@@ -222,7 +226,8 @@ namespace System.Security.Cryptography
             int inputCount,
             byte[]? outputBuffer,
             int outputOffset
-        ) {
+        )
+        {
             ValidateTransformBlock(inputBuffer, inputOffset, inputCount);
 
             // Change the State value
@@ -232,7 +237,8 @@ namespace System.Security.Cryptography
             if (
                 (outputBuffer != null)
                 && ((inputBuffer != outputBuffer) || (inputOffset != outputOffset))
-            ) {
+            )
+            {
                 // We let BlockCopy do the destination array validation
                 Buffer.BlockCopy(inputBuffer, inputOffset, outputBuffer, outputOffset, inputCount);
             }

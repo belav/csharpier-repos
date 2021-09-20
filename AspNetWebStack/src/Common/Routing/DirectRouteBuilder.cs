@@ -53,7 +53,8 @@ namespace System.Web.Mvc.Routing
         public DirectRouteBuilder(
             IReadOnlyCollection<TActionDescriptor> actions,
             bool targetIsAction
-        ) {
+        )
+        {
             if (actions == null)
             {
                 throw new ArgumentNullException("actions");
@@ -238,12 +239,14 @@ namespace System.Web.Mvc.Routing
             {
                 foreach (
                     var contentSegment in parsedRoute.PathSegments.OfType<PathContentSegment>()
-                ) {
+                )
+                {
                     if (contentSegment != null && contentSegment.Subsegments != null)
                     {
                         foreach (
                             var parameterSegment in contentSegment.Subsegments.OfType<PathParameterSubsegment>()
-                        ) {
+                        )
+                        {
                             if (parameterSegment != null)
                             {
                                 if (
@@ -252,7 +255,8 @@ namespace System.Web.Mvc.Routing
                                         "controller",
                                         StringComparison.OrdinalIgnoreCase
                                     )
-                                ) {
+                                )
+                                {
                                     throw Error.InvalidOperation(
                                         TResources.DirectRoute_InvalidParameter_Controller
                                     );
@@ -264,7 +268,8 @@ namespace System.Web.Mvc.Routing
                                         "action",
                                         StringComparison.OrdinalIgnoreCase
                                     )
-                                ) {
+                                )
+                                {
                                     throw Error.InvalidOperation(
                                         TResources.DirectRoute_InvalidParameter_Action
                                     );

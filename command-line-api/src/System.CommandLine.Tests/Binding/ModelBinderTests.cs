@@ -25,7 +25,8 @@ namespace System.CommandLine.Tests.Binding
             Type type,
             string commandLine,
             object expectedValue
-        ) {
+        )
+        {
             var targetType = typeof(ClassWithCtorParameter<>).MakeGenericType(type);
             var binder = new ModelBinder(targetType);
 
@@ -49,7 +50,8 @@ namespace System.CommandLine.Tests.Binding
             Type type,
             string commandLine,
             object expectedValue
-        ) {
+        )
+        {
             var targetType = typeof(ClassWithCtorParameter<>).MakeGenericType(type);
             var binder = new ModelBinder(targetType);
 
@@ -72,7 +74,8 @@ namespace System.CommandLine.Tests.Binding
         public void Command_arguments_are_bound_by_name_to_complex_constructor_parameters(
             Type type,
             string commandLine
-        ) {
+        )
+        {
             var targetType = typeof(ClassWithCtorParameter<>).MakeGenericType(type);
             var binder = new ModelBinder(targetType);
 
@@ -121,7 +124,8 @@ namespace System.CommandLine.Tests.Binding
             Type type,
             string commandLine,
             object expectedValue
-        ) {
+        )
+        {
             var targetType = typeof(ClassWithSetter<>).MakeGenericType(type);
             var binder = new ModelBinder(targetType);
 
@@ -146,7 +150,8 @@ namespace System.CommandLine.Tests.Binding
             Type type,
             string commandLine,
             object expectedValue
-        ) {
+        )
+        {
             var targetType = typeof(ClassWithSetter<>).MakeGenericType(type);
             var binder = new ModelBinder(targetType);
 

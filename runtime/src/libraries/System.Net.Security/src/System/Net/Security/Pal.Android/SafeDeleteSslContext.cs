@@ -188,7 +188,8 @@ namespace System.Net
         private static AsymmetricAlgorithm GetPrivateKeyAlgorithm(
             X509Certificate2 cert,
             out PAL_KeyAlgorithm algorithm
-        ) {
+        )
+        {
             AsymmetricAlgorithm? key = cert.GetRSAPrivateKey();
             if (key != null)
             {
@@ -216,7 +217,8 @@ namespace System.Net
             Interop.AndroidCrypto.SSLWriteCallback writeCallback,
             SafeFreeSslCredentials credential,
             SslAuthenticationOptions authOptions
-        ) {
+        )
+        {
             switch (credential.Policy)
             {
                 case EncryptionPolicy.RequireEncryption:
@@ -268,7 +270,8 @@ namespace System.Net
             if (
                 authOptions.ApplicationProtocols != null
                 && Interop.AndroidCrypto.SSLSupportsApplicationProtocolsConfiguration()
-            ) {
+            )
+            {
                 // Set application protocols if the platform supports it. Otherwise, we will silently ignore the option.
                 Interop.AndroidCrypto.SSLStreamSetApplicationProtocols(
                     handle,

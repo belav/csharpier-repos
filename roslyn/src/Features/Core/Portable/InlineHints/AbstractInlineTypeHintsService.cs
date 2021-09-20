@@ -38,7 +38,8 @@ namespace Microsoft.CodeAnalysis.InlineHints
             Document document,
             TextSpan textSpan,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var options = await document.GetOptionsAsync(cancellationToken).ConfigureAwait(false);
 
             var displayAllOverride = options.GetOption(InlineHintsOptions.DisplayAllOverride);
@@ -119,7 +120,8 @@ namespace Microsoft.CodeAnalysis.InlineHints
             SemanticModel semanticModel,
             int position,
             HashSet<INamedTypeSymbol>? seenSymbols = null
-        ) {
+        )
+        {
             seenSymbols ??= new();
 
             foreach (var part in parts)

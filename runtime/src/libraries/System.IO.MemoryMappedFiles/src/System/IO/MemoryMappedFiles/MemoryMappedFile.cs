@@ -29,7 +29,8 @@ namespace System.IO.MemoryMappedFiles
             SafeMemoryMappedFileHandle handle,
             FileStream fileStream,
             bool leaveOpen
-        ) {
+        )
+        {
             Debug.Assert(handle != null);
             Debug.Assert(!handle.IsClosed);
             Debug.Assert(!handle.IsInvalid);
@@ -61,7 +62,8 @@ namespace System.IO.MemoryMappedFiles
         public static MemoryMappedFile OpenExisting(
             string mapName,
             MemoryMappedFileRights desiredAccessRights
-        ) {
+        )
+        {
             return OpenExisting(mapName, desiredAccessRights, HandleInheritability.None);
         }
 
@@ -70,7 +72,8 @@ namespace System.IO.MemoryMappedFiles
             string mapName,
             MemoryMappedFileRights desiredAccessRights,
             HandleInheritability inheritability
-        ) {
+        )
+        {
             if (mapName == null)
             {
                 throw new ArgumentNullException(nameof(mapName), SR.ArgumentNull_MapName);
@@ -84,7 +87,8 @@ namespace System.IO.MemoryMappedFiles
             if (
                 inheritability < HandleInheritability.None
                 || inheritability > HandleInheritability.Inheritable
-            ) {
+            )
+            {
                 throw new ArgumentOutOfRangeException(nameof(inheritability));
             }
 
@@ -98,7 +102,8 @@ namespace System.IO.MemoryMappedFiles
                         )
                     )
                 ) != 0
-            ) {
+            )
+            {
                 throw new ArgumentOutOfRangeException(nameof(desiredAccessRights));
             }
 
@@ -150,7 +155,8 @@ namespace System.IO.MemoryMappedFiles
             FileMode mode,
             string? mapName,
             long capacity
-        ) {
+        )
+        {
             return CreateFromFile(path, mode, mapName, capacity, MemoryMappedFileAccess.ReadWrite);
         }
 
@@ -160,7 +166,8 @@ namespace System.IO.MemoryMappedFiles
             string? mapName,
             long capacity,
             MemoryMappedFileAccess access
-        ) {
+        )
+        {
             if (path == null)
             {
                 throw new ArgumentNullException(nameof(path));
@@ -182,7 +189,8 @@ namespace System.IO.MemoryMappedFiles
             if (
                 access < MemoryMappedFileAccess.ReadWrite
                 || access > MemoryMappedFileAccess.ReadWriteExecute
-            ) {
+            )
+            {
                 throw new ArgumentOutOfRangeException(nameof(access));
             }
 
@@ -253,7 +261,8 @@ namespace System.IO.MemoryMappedFiles
             MemoryMappedFileAccess access,
             HandleInheritability inheritability,
             bool leaveOpen
-        ) {
+        )
+        {
             if (fileStream == null)
             {
                 throw new ArgumentNullException(nameof(fileStream), SR.ArgumentNull_FileStream);
@@ -280,7 +289,8 @@ namespace System.IO.MemoryMappedFiles
             if (
                 access < MemoryMappedFileAccess.ReadWrite
                 || access > MemoryMappedFileAccess.ReadWriteExecute
-            ) {
+            )
+            {
                 throw new ArgumentOutOfRangeException(nameof(access));
             }
 
@@ -295,7 +305,8 @@ namespace System.IO.MemoryMappedFiles
             if (
                 inheritability < HandleInheritability.None
                 || inheritability > HandleInheritability.Inheritable
-            ) {
+            )
+            {
                 throw new ArgumentOutOfRangeException(nameof(inheritability));
             }
 
@@ -336,7 +347,8 @@ namespace System.IO.MemoryMappedFiles
             string? mapName,
             long capacity,
             MemoryMappedFileAccess access
-        ) {
+        )
+        {
             return CreateNew(
                 mapName,
                 capacity,
@@ -352,7 +364,8 @@ namespace System.IO.MemoryMappedFiles
             MemoryMappedFileAccess access,
             MemoryMappedFileOptions options,
             HandleInheritability inheritability
-        ) {
+        )
+        {
             if (mapName != null && mapName.Length == 0)
             {
                 throw new ArgumentException(SR.Argument_MapNameEmptyString);
@@ -377,7 +390,8 @@ namespace System.IO.MemoryMappedFiles
             if (
                 access < MemoryMappedFileAccess.ReadWrite
                 || access > MemoryMappedFileAccess.ReadWriteExecute
-            ) {
+            )
+            {
                 throw new ArgumentOutOfRangeException(nameof(access));
             }
 
@@ -397,7 +411,8 @@ namespace System.IO.MemoryMappedFiles
             if (
                 inheritability < HandleInheritability.None
                 || inheritability > HandleInheritability.Inheritable
-            ) {
+            )
+            {
                 throw new ArgumentOutOfRangeException(nameof(inheritability));
             }
 
@@ -433,7 +448,8 @@ namespace System.IO.MemoryMappedFiles
             string mapName,
             long capacity,
             MemoryMappedFileAccess access
-        ) {
+        )
+        {
             return CreateOrOpen(
                 mapName,
                 capacity,
@@ -450,7 +466,8 @@ namespace System.IO.MemoryMappedFiles
             MemoryMappedFileAccess access,
             MemoryMappedFileOptions options,
             HandleInheritability inheritability
-        ) {
+        )
+        {
             if (mapName == null)
             {
                 throw new ArgumentNullException(nameof(mapName), SR.ArgumentNull_MapName);
@@ -480,7 +497,8 @@ namespace System.IO.MemoryMappedFiles
             if (
                 access < MemoryMappedFileAccess.ReadWrite
                 || access > MemoryMappedFileAccess.ReadWriteExecute
-            ) {
+            )
+            {
                 throw new ArgumentOutOfRangeException(nameof(access));
             }
 
@@ -492,7 +510,8 @@ namespace System.IO.MemoryMappedFiles
             if (
                 inheritability < HandleInheritability.None
                 || inheritability > HandleInheritability.Inheritable
-            ) {
+            )
+            {
                 throw new ArgumentOutOfRangeException(nameof(inheritability));
             }
 
@@ -524,7 +543,8 @@ namespace System.IO.MemoryMappedFiles
             long offset,
             long size,
             MemoryMappedFileAccess access
-        ) {
+        )
+        {
             if (offset < 0)
             {
                 throw new ArgumentOutOfRangeException(
@@ -544,7 +564,8 @@ namespace System.IO.MemoryMappedFiles
             if (
                 access < MemoryMappedFileAccess.ReadWrite
                 || access > MemoryMappedFileAccess.ReadWriteExecute
-            ) {
+            )
+            {
                 throw new ArgumentOutOfRangeException(nameof(access));
             }
 
@@ -575,7 +596,8 @@ namespace System.IO.MemoryMappedFiles
             long offset,
             long size,
             MemoryMappedFileAccess access
-        ) {
+        )
+        {
             if (offset < 0)
             {
                 throw new ArgumentOutOfRangeException(
@@ -595,7 +617,8 @@ namespace System.IO.MemoryMappedFiles
             if (
                 access < MemoryMappedFileAccess.ReadWrite
                 || access > MemoryMappedFileAccess.ReadWriteExecute
-            ) {
+            )
+            {
                 throw new ArgumentOutOfRangeException(nameof(access));
             }
 

@@ -32,7 +32,8 @@ namespace System.Drawing
             CultureInfo? culture,
             object? value,
             Type destinationType
-        ) {
+        )
+        {
             if (value is Font font)
             {
                 if (destinationType == typeof(string))
@@ -118,7 +119,8 @@ namespace System.Drawing
             ITypeDescriptorContext? context,
             CultureInfo? culture,
             object value
-        ) {
+        )
+        {
             if (!(value is string font))
             {
                 return base.ConvertFrom(context, culture, value);
@@ -307,7 +309,8 @@ namespace System.Drawing
         public override object CreateInstance(
             ITypeDescriptorContext? context,
             IDictionary propertyValues
-        ) {
+        )
+        {
             if (propertyValues == null)
             {
                 throw new ArgumentNullException(nameof(propertyValues));
@@ -407,7 +410,8 @@ namespace System.Drawing
             ITypeDescriptorContext? context,
             object? value,
             Attribute[]? attributes
-        ) {
+        )
+        {
             if (value is not Font)
                 return base.GetProperties(context, value, attributes);
 
@@ -441,7 +445,8 @@ namespace System.Drawing
                 ITypeDescriptorContext? context,
                 CultureInfo? culture,
                 object value
-            ) {
+            )
+            {
                 return value is string strValue
                   ? MatchFontName(strValue, context)
                   : base.ConvertFrom(context, culture, value);
@@ -449,7 +454,8 @@ namespace System.Drawing
 
             public override StandardValuesCollection GetStandardValues(
                 ITypeDescriptorContext? context
-            ) {
+            )
+            {
                 string[] values = new string[_fonts.Length];
                 for (int i = 0; i < _fonts.Length; i++)
                 {
@@ -502,7 +508,8 @@ namespace System.Drawing
 
             public override StandardValuesCollection GetStandardValues(
                 ITypeDescriptorContext? context
-            ) {
+            )
+            {
                 // display graphic unit is not supported.
                 if (Values == null)
                 {

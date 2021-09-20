@@ -245,7 +245,8 @@ namespace Microsoft.AspNetCore.Mvc
         public virtual ObjectResult StatusCode(
             [ActionResultStatusCode] int statusCode,
             [ActionResultObjectValue] object? value
-        ) {
+        )
+        {
             return new ObjectResult(value) { StatusCode = statusCode };
         }
 
@@ -286,7 +287,8 @@ namespace Microsoft.AspNetCore.Mvc
             string content,
             string contentType,
             Encoding contentEncoding
-        ) {
+        )
+        {
             var mediaTypeHeaderValue = MediaTypeHeaderValue.Parse(contentType);
             mediaTypeHeaderValue.Encoding = contentEncoding ?? mediaTypeHeaderValue.Encoding;
             return Content(content, mediaTypeHeaderValue);
@@ -598,7 +600,8 @@ namespace Microsoft.AspNetCore.Mvc
             string? controllerName,
             object? routeValues,
             string? fragment
-        ) {
+        )
+        {
             return new RedirectToActionResult(actionName, controllerName, routeValues, fragment)
             {
                 UrlHelper = Url,
@@ -622,7 +625,8 @@ namespace Microsoft.AspNetCore.Mvc
             string? controllerName = null,
             object? routeValues = null,
             string? fragment = null
-        ) {
+        )
+        {
             return new RedirectToActionResult(
                 actionName: actionName,
                 controllerName: controllerName,
@@ -727,7 +731,8 @@ namespace Microsoft.AspNetCore.Mvc
             string? controllerName,
             object? routeValues,
             string? fragment
-        ) {
+        )
+        {
             return new RedirectToActionResult(
                 actionName,
                 controllerName,
@@ -756,7 +761,8 @@ namespace Microsoft.AspNetCore.Mvc
             string? controllerName = null,
             object? routeValues = null,
             string? fragment = null
-        ) {
+        )
+        {
             return new RedirectToActionResult(
                 actionName: actionName,
                 controllerName: controllerName,
@@ -824,7 +830,8 @@ namespace Microsoft.AspNetCore.Mvc
             string? routeName,
             object? routeValues,
             string? fragment
-        ) {
+        )
+        {
             return new RedirectToRouteResult(routeName, routeValues, fragment) { UrlHelper = Url, };
         }
 
@@ -842,7 +849,8 @@ namespace Microsoft.AspNetCore.Mvc
             string? routeName = null,
             object? routeValues = null,
             string? fragment = null
-        ) {
+        )
+        {
             return new RedirectToRouteResult(
                 routeName: routeName,
                 routeValues: routeValues,
@@ -916,7 +924,8 @@ namespace Microsoft.AspNetCore.Mvc
             string? routeName,
             object? routeValues,
             string? fragment
-        ) {
+        )
+        {
             return new RedirectToRouteResult(
                 routeName,
                 routeValues,
@@ -941,7 +950,8 @@ namespace Microsoft.AspNetCore.Mvc
             string? routeName = null,
             object? routeValues = null,
             string? fragment = null
-        ) {
+        )
+        {
             return new RedirectToRouteResult(
                 routeName: routeName,
                 routeValues: routeValues,
@@ -1126,7 +1136,8 @@ namespace Microsoft.AspNetCore.Mvc
             string? pageHandler = null,
             object? routeValues = null,
             string? fragment = null
-        ) {
+        )
+        {
             if (pageName == null)
             {
                 throw new ArgumentNullException(nameof(pageName));
@@ -1158,7 +1169,8 @@ namespace Microsoft.AspNetCore.Mvc
             string? pageHandler = null,
             object? routeValues = null,
             string? fragment = null
-        ) {
+        )
+        {
             if (pageName == null)
             {
                 throw new ArgumentNullException(nameof(pageName));
@@ -1274,7 +1286,8 @@ namespace Microsoft.AspNetCore.Mvc
             string contentType,
             DateTimeOffset? lastModified,
             EntityTagHeaderValue entityTag
-        ) {
+        )
+        {
             return new FileContentResult(fileContents, contentType)
             {
                 LastModified = lastModified,
@@ -1301,7 +1314,8 @@ namespace Microsoft.AspNetCore.Mvc
             DateTimeOffset? lastModified,
             EntityTagHeaderValue entityTag,
             bool enableRangeProcessing
-        ) {
+        )
+        {
             return new FileContentResult(fileContents, contentType)
             {
                 LastModified = lastModified,
@@ -1329,7 +1343,8 @@ namespace Microsoft.AspNetCore.Mvc
             string? fileDownloadName,
             DateTimeOffset? lastModified,
             EntityTagHeaderValue entityTag
-        ) {
+        )
+        {
             return new FileContentResult(fileContents, contentType)
             {
                 LastModified = lastModified,
@@ -1359,7 +1374,8 @@ namespace Microsoft.AspNetCore.Mvc
             DateTimeOffset? lastModified,
             EntityTagHeaderValue entityTag,
             bool enableRangeProcessing
-        ) {
+        )
+        {
             return new FileContentResult(fileContents, contentType)
             {
                 LastModified = lastModified,
@@ -1480,7 +1496,8 @@ namespace Microsoft.AspNetCore.Mvc
             string contentType,
             DateTimeOffset? lastModified,
             EntityTagHeaderValue entityTag
-        ) {
+        )
+        {
             return new FileStreamResult(fileStream, contentType)
             {
                 LastModified = lastModified,
@@ -1510,7 +1527,8 @@ namespace Microsoft.AspNetCore.Mvc
             DateTimeOffset? lastModified,
             EntityTagHeaderValue entityTag,
             bool enableRangeProcessing
-        ) {
+        )
+        {
             return new FileStreamResult(fileStream, contentType)
             {
                 LastModified = lastModified,
@@ -1541,7 +1559,8 @@ namespace Microsoft.AspNetCore.Mvc
             string? fileDownloadName,
             DateTimeOffset? lastModified,
             EntityTagHeaderValue entityTag
-        ) {
+        )
+        {
             return new FileStreamResult(fileStream, contentType)
             {
                 LastModified = lastModified,
@@ -1574,7 +1593,8 @@ namespace Microsoft.AspNetCore.Mvc
             DateTimeOffset? lastModified,
             EntityTagHeaderValue entityTag,
             bool enableRangeProcessing
-        ) {
+        )
+        {
             return new FileStreamResult(fileStream, contentType)
             {
                 LastModified = lastModified,
@@ -1681,7 +1701,8 @@ namespace Microsoft.AspNetCore.Mvc
             string contentType,
             DateTimeOffset? lastModified,
             EntityTagHeaderValue entityTag
-        ) {
+        )
+        {
             return new VirtualFileResult(virtualPath, contentType)
             {
                 LastModified = lastModified,
@@ -1708,7 +1729,8 @@ namespace Microsoft.AspNetCore.Mvc
             DateTimeOffset? lastModified,
             EntityTagHeaderValue entityTag,
             bool enableRangeProcessing
-        ) {
+        )
+        {
             return new VirtualFileResult(virtualPath, contentType)
             {
                 LastModified = lastModified,
@@ -1736,7 +1758,8 @@ namespace Microsoft.AspNetCore.Mvc
             string? fileDownloadName,
             DateTimeOffset? lastModified,
             EntityTagHeaderValue entityTag
-        ) {
+        )
+        {
             return new VirtualFileResult(virtualPath, contentType)
             {
                 LastModified = lastModified,
@@ -1766,7 +1789,8 @@ namespace Microsoft.AspNetCore.Mvc
             DateTimeOffset? lastModified,
             EntityTagHeaderValue entityTag,
             bool enableRangeProcessing
-        ) {
+        )
+        {
             return new VirtualFileResult(virtualPath, contentType)
             {
                 LastModified = lastModified,
@@ -1876,7 +1900,8 @@ namespace Microsoft.AspNetCore.Mvc
             string contentType,
             DateTimeOffset? lastModified,
             EntityTagHeaderValue entityTag
-        ) {
+        )
+        {
             return new PhysicalFileResult(physicalPath, contentType)
             {
                 LastModified = lastModified,
@@ -1903,7 +1928,8 @@ namespace Microsoft.AspNetCore.Mvc
             DateTimeOffset? lastModified,
             EntityTagHeaderValue entityTag,
             bool enableRangeProcessing
-        ) {
+        )
+        {
             return new PhysicalFileResult(physicalPath, contentType)
             {
                 LastModified = lastModified,
@@ -1931,7 +1957,8 @@ namespace Microsoft.AspNetCore.Mvc
             string? fileDownloadName,
             DateTimeOffset? lastModified,
             EntityTagHeaderValue entityTag
-        ) {
+        )
+        {
             return new PhysicalFileResult(physicalPath, contentType)
             {
                 LastModified = lastModified,
@@ -1961,7 +1988,8 @@ namespace Microsoft.AspNetCore.Mvc
             DateTimeOffset? lastModified,
             EntityTagHeaderValue entityTag,
             bool enableRangeProcessing
-        ) {
+        )
+        {
             return new PhysicalFileResult(physicalPath, contentType)
             {
                 LastModified = lastModified,
@@ -2027,7 +2055,8 @@ namespace Microsoft.AspNetCore.Mvc
         [NonAction]
         public virtual BadRequestObjectResult BadRequest(
             [ActionResultObjectValue] ModelStateDictionary modelState
-        ) {
+        )
+        {
             if (modelState == null)
             {
                 throw new ArgumentNullException(nameof(modelState));
@@ -2062,7 +2091,8 @@ namespace Microsoft.AspNetCore.Mvc
         [NonAction]
         public virtual UnprocessableEntityObjectResult UnprocessableEntity(
             [ActionResultObjectValue] ModelStateDictionary modelState
-        ) {
+        )
+        {
             if (modelState == null)
             {
                 throw new ArgumentNullException(nameof(modelState));
@@ -2113,7 +2143,8 @@ namespace Microsoft.AspNetCore.Mvc
             int? statusCode = null,
             string? title = null,
             string? type = null
-        ) {
+        )
+        {
             ProblemDetails problemDetails;
             if (ProblemDetailsFactory == null)
             {
@@ -2149,7 +2180,8 @@ namespace Microsoft.AspNetCore.Mvc
         [NonAction]
         public virtual ActionResult ValidationProblem(
             [ActionResultObjectValue] ValidationProblemDetails descriptor
-        ) {
+        )
+        {
             if (descriptor == null)
             {
                 throw new ArgumentNullException(nameof(descriptor));
@@ -2197,7 +2229,8 @@ namespace Microsoft.AspNetCore.Mvc
             string? title = null,
             string? type = null,
             [ActionResultObjectValue] ModelStateDictionary? modelStateDictionary = null
-        ) {
+        )
+        {
             modelStateDictionary ??= ModelState;
 
             ValidationProblemDetails? validationProblem;
@@ -3071,7 +3104,8 @@ namespace Microsoft.AspNetCore.Mvc
             object model,
             Type modelType,
             string prefix
-        ) {
+        )
+        {
             if (model == null)
             {
                 throw new ArgumentNullException(nameof(model));
@@ -3121,7 +3155,8 @@ namespace Microsoft.AspNetCore.Mvc
             string prefix,
             IValueProvider valueProvider,
             Func<ModelMetadata, bool> propertyFilter
-        ) {
+        )
+        {
             if (model == null)
             {
                 throw new ArgumentNullException(nameof(model));

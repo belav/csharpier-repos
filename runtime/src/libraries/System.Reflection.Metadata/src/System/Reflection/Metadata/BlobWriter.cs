@@ -485,7 +485,8 @@ namespace System.Reflection.Metadata
             int length,
             bool allowUnpairedSurrogates,
             bool prependSize
-        ) {
+        )
+        {
             fixed (char* strPtr = str)
             {
                 char* charPtr = strPtr + start;

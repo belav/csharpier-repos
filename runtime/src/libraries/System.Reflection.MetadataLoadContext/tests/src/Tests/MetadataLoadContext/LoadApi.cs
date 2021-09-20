@@ -15,7 +15,8 @@ namespace System.Reflection.Tests
                 MetadataLoadContext lc = new MetadataLoadContext(
                     new EmptyCoreMetadataAssemblyResolver()
                 )
-            ) {
+            )
+            {
                 Assembly a = lc.LoadFromByteArray(TestData.s_SimpleAssemblyImage);
                 Assert.NotNull(a);
 
@@ -38,7 +39,8 @@ namespace System.Reflection.Tests
                     MetadataLoadContext lc = new MetadataLoadContext(
                         new EmptyCoreMetadataAssemblyResolver()
                     )
-                ) {
+                )
+                {
                     Assembly a = lc.LoadFromAssemblyPath(tf.Path);
                     Assert.NotNull(a);
 
@@ -60,7 +62,8 @@ namespace System.Reflection.Tests
                 MetadataLoadContext lc = new MetadataLoadContext(
                     new EmptyCoreMetadataAssemblyResolver()
                 )
-            ) {
+            )
+            {
                 Stream peStream = new MemoryStream(TestData.s_SimpleAssemblyImage);
                 Assembly a = lc.LoadFromStream(peStream);
                 Assert.NotNull(a);
@@ -84,7 +87,8 @@ namespace System.Reflection.Tests
                     MetadataLoadContext lc = new MetadataLoadContext(
                         new EmptyCoreMetadataAssemblyResolver()
                     )
-                ) {
+                )
+                {
                     Stream fs = File.OpenRead(tf.Path);
                     Assembly a = lc.LoadFromStream(fs);
                     Assert.NotNull(a);
@@ -107,7 +111,8 @@ namespace System.Reflection.Tests
                 MetadataLoadContext lc = new MetadataLoadContext(
                     new EmptyCoreMetadataAssemblyResolver()
                 )
-            ) {
+            )
+            {
                 Stream peStream = new MemoryStream(TestData.s_SimpleAssemblyImage);
                 peStream.Position = 1;
 
@@ -179,7 +184,8 @@ namespace System.Reflection.Tests
                 MetadataLoadContext lc = new MetadataLoadContext(
                     new EmptyCoreMetadataAssemblyResolver()
                 )
-            ) {
+            )
+            {
                 Assembly a = lc.LoadFromByteArray(TestData.s_SimpleAssemblyImage);
                 Assert.Equal(TestData.s_SimpleAssemblyFullName, a.GetName().FullName);
                 Guid mvid = a.ManifestModule.ModuleVersionId;
@@ -190,7 +196,8 @@ namespace System.Reflection.Tests
                 MetadataLoadContext lc = new MetadataLoadContext(
                     new EmptyCoreMetadataAssemblyResolver()
                 )
-            ) {
+            )
+            {
                 Assembly a = lc.LoadFromByteArray(TestData.s_SimpleAssemblyRecompiledImage);
                 Assert.Equal(TestData.s_SimpleAssemblyFullName, a.GetName().FullName);
                 Guid mvid = a.ManifestModule.ModuleVersionId;
@@ -201,7 +208,8 @@ namespace System.Reflection.Tests
                 MetadataLoadContext lc = new MetadataLoadContext(
                     new EmptyCoreMetadataAssemblyResolver()
                 )
-            ) {
+            )
+            {
                 Assembly a = lc.LoadFromByteArray(TestData.s_SimpleAssemblyImage);
                 Assert.Throws<FileLoadException>(
                     () => lc.LoadFromByteArray(TestData.s_SimpleAssemblyRecompiledImage)
@@ -216,7 +224,8 @@ namespace System.Reflection.Tests
                 MetadataLoadContext lc = new MetadataLoadContext(
                     new EmptyCoreMetadataAssemblyResolver()
                 )
-            ) {
+            )
+            {
                 Assert.Throws<ArgumentNullException>(() => lc.LoadFromAssemblyName((string)null));
             }
         }
@@ -228,7 +237,8 @@ namespace System.Reflection.Tests
                 MetadataLoadContext lc = new MetadataLoadContext(
                     new EmptyCoreMetadataAssemblyResolver()
                 )
-            ) {
+            )
+            {
                 Assert.Throws<ArgumentNullException>(
                     () => lc.LoadFromAssemblyName((AssemblyName)null)
                 );
@@ -242,7 +252,8 @@ namespace System.Reflection.Tests
                 MetadataLoadContext lc = new MetadataLoadContext(
                     new EmptyCoreMetadataAssemblyResolver()
                 )
-            ) {
+            )
+            {
                 Assert.Throws<ArgumentNullException>(() => lc.LoadFromAssemblyPath(null));
             }
         }
@@ -254,7 +265,8 @@ namespace System.Reflection.Tests
                 MetadataLoadContext lc = new MetadataLoadContext(
                     new EmptyCoreMetadataAssemblyResolver()
                 )
-            ) {
+            )
+            {
                 Assert.Throws<ArgumentNullException>(() => lc.LoadFromByteArray(null));
             }
         }
@@ -266,7 +278,8 @@ namespace System.Reflection.Tests
                 MetadataLoadContext lc = new MetadataLoadContext(
                     new EmptyCoreMetadataAssemblyResolver()
                 )
-            ) {
+            )
+            {
                 Assert.Throws<ArgumentNullException>(() => lc.LoadFromStream(null));
             }
         }
@@ -278,7 +291,8 @@ namespace System.Reflection.Tests
                 MetadataLoadContext lc = new MetadataLoadContext(
                     new EmptyCoreMetadataAssemblyResolver()
                 )
-            ) {
+            )
+            {
                 for (int i = 0; i < 100; i++)
                 {
                     Stream s = new MemoryStream(new byte[i]);
@@ -294,7 +308,8 @@ namespace System.Reflection.Tests
                 MetadataLoadContext lc = new MetadataLoadContext(
                     new EmptyCoreMetadataAssemblyResolver()
                 )
-            ) {
+            )
+            {
                 Assert.Throws<FileNotFoundException>(() => lc.LoadFromAssemblyName("NeverSawThis"));
             }
         }

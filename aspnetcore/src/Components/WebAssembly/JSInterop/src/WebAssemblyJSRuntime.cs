@@ -31,7 +31,8 @@ namespace Microsoft.JSInterop.WebAssembly
             string? argsJson,
             JSCallResultType resultType,
             long targetInstanceId
-        ) {
+        )
+        {
             var callInfo = new JSCallInfo
             {
                 FunctionIdentifier = identifier,
@@ -59,7 +60,8 @@ namespace Microsoft.JSInterop.WebAssembly
             string? argsJson,
             JSCallResultType resultType,
             long targetInstanceId
-        ) {
+        )
+        {
             var callInfo = new JSCallInfo
             {
                 FunctionIdentifier = identifier,
@@ -82,7 +84,8 @@ namespace Microsoft.JSInterop.WebAssembly
         protected override void EndInvokeDotNet(
             DotNetInvocationInfo callInfo,
             in DotNetInvocationResult dispatchResult
-        ) {
+        )
+        {
             // For failures, the common case is to call EndInvokeDotNet with the Exception object.
             // For these we'll serialize as something that's useful to receive on the JS side.
             // If the value is not an Exception, we'll just rely on it being directly JSON-serializable.
@@ -111,7 +114,8 @@ namespace Microsoft.JSInterop.WebAssembly
             T1 arg1,
             T2 arg2,
             long targetInstanceId
-        ) {
+        )
+        {
             var resultType = JSCallResultTypeHelper.FromGeneric<TResult>();
 
             var callInfo = new JSCallInfo

@@ -39,7 +39,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.PullMemberUp
         private async Task TestQuickActionNotProvidedAsync(
             string initialMarkup,
             TestParameters parameters = default
-        ) {
+        )
+        {
             using var workspace = CreateWorkspaceFromOptions(initialMarkup, parameters);
             var (actions, _) = await GetCodeActionsAsync(workspace, parameters);
             if (actions.Length == 1)
@@ -1505,7 +1506,8 @@ public class TestClass : VBInterface
             string destinationName = null,
             int index = 0,
             TestParameters parameters = default
-        ) {
+        )
+        {
             var service = new TestPullMemberUpService(selection, destinationName);
 
             return TestInRegularAndScript1Async(

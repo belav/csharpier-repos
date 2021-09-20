@@ -116,7 +116,8 @@ namespace System.Drawing
             Rectangle dstrect,
             Rectangle srcrect,
             GraphicsUnit unit
-        ) {
+        )
+        {
             int state;
 
             int status = Gdip.GdipBeginContainerI(
@@ -135,7 +136,8 @@ namespace System.Drawing
             RectangleF dstrect,
             RectangleF srcrect,
             GraphicsUnit unit
-        ) {
+        )
+        {
             int state;
 
             int status = Gdip.GdipBeginContainer(
@@ -157,7 +159,8 @@ namespace System.Drawing
             int destinationY,
             Size blockRegionSize,
             CopyPixelOperation copyPixelOperation
-        ) {
+        )
+        {
             if (!Enum.IsDefined(typeof(CopyPixelOperation), copyPixelOperation))
                 throw new InvalidEnumArgumentException(
                     string.Format(
@@ -190,7 +193,8 @@ namespace System.Drawing
             int destinationY,
             Size blockRegionSize,
             CopyPixelOperation copyPixelOperation
-        ) {
+        )
+        {
             IntPtr window,
                 image,
                 defvisual,
@@ -450,7 +454,8 @@ namespace System.Drawing
             EnumerateMetafileProc callback,
             IntPtr callbackData,
             ImageAttributes? imageAttr
-        ) {
+        )
+        {
             throw new NotImplementedException();
         }
 
@@ -460,7 +465,8 @@ namespace System.Drawing
             EnumerateMetafileProc callback,
             IntPtr callbackData,
             ImageAttributes? imageAttr
-        ) {
+        )
+        {
             throw new NotImplementedException();
         }
 
@@ -470,7 +476,8 @@ namespace System.Drawing
             EnumerateMetafileProc callback,
             IntPtr callbackData,
             ImageAttributes? imageAttr
-        ) {
+        )
+        {
             throw new NotImplementedException();
         }
 
@@ -480,7 +487,8 @@ namespace System.Drawing
             EnumerateMetafileProc callback,
             IntPtr callbackData,
             ImageAttributes? imageAttr
-        ) {
+        )
+        {
             throw new NotImplementedException();
         }
 
@@ -490,7 +498,8 @@ namespace System.Drawing
             EnumerateMetafileProc callback,
             IntPtr callbackData,
             ImageAttributes? imageAttr
-        ) {
+        )
+        {
             throw new NotImplementedException();
         }
 
@@ -500,7 +509,8 @@ namespace System.Drawing
             EnumerateMetafileProc callback,
             IntPtr callbackData,
             ImageAttributes? imageAttr
-        ) {
+        )
+        {
             throw new NotImplementedException();
         }
 
@@ -512,7 +522,8 @@ namespace System.Drawing
             EnumerateMetafileProc callback,
             IntPtr callbackData,
             ImageAttributes? imageAttr
-        ) {
+        )
+        {
             throw new NotImplementedException();
         }
 
@@ -524,7 +535,8 @@ namespace System.Drawing
             EnumerateMetafileProc callback,
             IntPtr callbackData,
             ImageAttributes? imageAttr
-        ) {
+        )
+        {
             throw new NotImplementedException();
         }
 
@@ -536,7 +548,8 @@ namespace System.Drawing
             EnumerateMetafileProc callback,
             IntPtr callbackData,
             ImageAttributes? imageAttr
-        ) {
+        )
+        {
             throw new NotImplementedException();
         }
 
@@ -548,7 +561,8 @@ namespace System.Drawing
             EnumerateMetafileProc callback,
             IntPtr callbackData,
             ImageAttributes? imageAttr
-        ) {
+        )
+        {
             throw new NotImplementedException();
         }
 
@@ -560,7 +574,8 @@ namespace System.Drawing
             EnumerateMetafileProc callback,
             IntPtr callbackData,
             ImageAttributes? imageAttr
-        ) {
+        )
+        {
             throw new NotImplementedException();
         }
 
@@ -572,7 +587,8 @@ namespace System.Drawing
             EnumerateMetafileProc callback,
             IntPtr callbackData,
             ImageAttributes? imageAttr
-        ) {
+        )
+        {
             throw new NotImplementedException();
         }
 

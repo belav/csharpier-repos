@@ -44,11 +44,13 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.Structure
             IEditorOptionsFactoryService editorOptionsFactoryService,
             IProjectionBufferFactoryService projectionBufferFactoryService,
             IAsynchronousOperationListenerProvider listenerProvider
-        ) : base(
-            threadingContext,
-            listenerProvider.GetListener(FeatureAttribute.Outlining),
-            notificationService
-        ) {
+        )
+            : base(
+                threadingContext,
+                listenerProvider.GetListener(FeatureAttribute.Outlining),
+                notificationService
+            )
+        {
             EditorOptionsFactoryService = editorOptionsFactoryService;
             ProjectionBufferFactoryService = projectionBufferFactoryService;
         }
@@ -56,7 +58,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.Structure
         protected sealed override ITaggerEventSource CreateEventSource(
             ITextView textViewOpt,
             ITextBuffer subjectBuffer
-        ) {
+        )
+        {
             // We listen to the following events:
             // 1) Text changes.  These can obviously affect outlining, so we need to recompute when
             //     we hear about them.
@@ -120,7 +123,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.Structure
             TaggerContext<IStructureTag> context,
             DocumentSnapshotSpan documentSnapshotSpan,
             int? caretPosition
-        ) {
+        )
+        {
             try
             {
                 var document = documentSnapshotSpan.Document;
@@ -161,7 +165,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.Structure
             TaggerContext<IStructureTag> context,
             DocumentSnapshotSpan documentSnapshotSpan,
             int? caretPosition
-        ) {
+        )
+        {
             try
             {
                 var document = documentSnapshotSpan.Document;
@@ -198,7 +203,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.Structure
             SnapshotSpan snapshotSpan,
             BlockStructureService outliningService,
             ImmutableArray<BlockSpan> spans
-        ) {
+        )
+        {
             var snapshot = snapshotSpan.Snapshot;
             spans = GetMultiLineRegions(outliningService, spans, snapshot);
 
@@ -219,7 +225,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.Structure
             BlockStructureService service,
             ImmutableArray<BlockSpan> regions,
             ITextSnapshot snapshot
-        ) {
+        )
+        {
             // Remove any spans that aren't multiline.
             var multiLineRegions = ArrayBuilder<BlockSpan>.GetInstance();
             foreach (var region in regions)

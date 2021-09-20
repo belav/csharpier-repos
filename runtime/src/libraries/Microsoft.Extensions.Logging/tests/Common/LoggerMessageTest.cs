@@ -308,7 +308,8 @@ namespace Microsoft.Extensions.Logging.Test
         [InlineData(6)]
         public void DefineMessage_ThrowsException_WhenExpectedFormatStringParameterCount_NotFound(
             int expectedNamedParameterCount
-        ) {
+        )
+        {
             // Arrange
             var formatString = "Action with name ActionName not found.";
             var expectedMessage =
@@ -405,7 +406,8 @@ namespace Microsoft.Extensions.Logging.Test
         [InlineData(6)]
         public void DefineScope_ThrowsException_WhenExpectedFormatStringParameterCount_NotFound(
             int expectedNamedParameterCount
-        ) {
+        )
+        {
             // Arrange
             var formatString = "Starting request scope for request id RequestId";
             var expectedMessage =
@@ -472,7 +474,8 @@ namespace Microsoft.Extensions.Logging.Test
         public void DefineAndDefineScope_ThrowsException_WhenFormatString_IsNull(
             Delegate method,
             object[] parameters
-        ) {
+        )
+        {
             // Act
             var exception = Assert.Throws<TargetInvocationException>(
                 () => method.DynamicInvoke(parameters)
@@ -613,7 +616,8 @@ namespace Microsoft.Extensions.Logging.Test
         private void AssertLogValues(
             IEnumerable<KeyValuePair<string, object>> expected,
             IEnumerable<KeyValuePair<string, object>> actual
-        ) {
+        )
+        {
             if (expected == null && actual == null)
             {
                 return;

@@ -55,7 +55,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                 int topLevelMethodOrdinal,
                 VariableSlotAllocator slotAllocatorOpt,
                 TypeCompilationState compilationState
-            ) {
+            )
+            {
                 ScopeTree = scopeTree;
                 MethodsConvertedToDelegates = methodsConvertedToDelegates;
                 _topLevelMethod = topLevelMethod;
@@ -73,7 +74,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                 TypeCompilationState compilationState,
                 ArrayBuilder<ClosureDebugInfo> closureDebugInfo,
                 DiagnosticBag diagnostics
-            ) {
+            )
+            {
                 var methodsConvertedToDelegates = PooledHashSet<MethodSymbol>.GetInstance();
                 var scopeTree = ScopeTreeBuilder.Build(
                     node,
@@ -97,7 +99,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                 if (
                     compilationState.Compilation.Options.OptimizationLevel
                     == OptimizationLevel.Release
-                ) {
+                )
+                {
                     // This can affect when a variable is in scope whilst debugging, so only do this in release mode.
                     analysis.MergeEnvironments();
                 }
@@ -353,7 +356,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                                                 closures.Select(c => c.OriginalMethodSymbol)
                                             )
                                         )
-                                    ) {
+                                    )
+                                    {
                                         closures.Add(closure);
                                         addedItem = true;
                                         isStruct &= CanTakeRefParameters(
@@ -443,7 +447,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                     while (
                         currentScope.DeclaredEnvironment is null
                         || currentScope.DeclaredEnvironment.CapturesParent
-                    ) {
+                    )
+                    {
                         currentScope = currentScope.Parent;
 
                         if (currentScope == null)
@@ -454,7 +459,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                         if (
                             currentScope.DeclaredEnvironment is null
                             || currentScope.DeclaredEnvironment.IsStruct
-                        ) {
+                        )
+                        {
                             continue;
                         }
 
@@ -579,7 +585,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             internal DebugId GetClosureId(
                 SyntaxNode syntax,
                 ArrayBuilder<ClosureDebugInfo> closureDebugInfo
-            ) {
+            )
+            {
                 Debug.Assert(syntax != null);
 
                 DebugId closureId;
@@ -587,7 +594,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                 if (
                     _slotAllocatorOpt != null
                     && _slotAllocatorOpt.TryGetPreviousClosure(syntax, out previousClosureId)
-                ) {
+                )
+                {
                     closureId = previousClosureId;
                 }
                 else
@@ -695,7 +703,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             public static (NestedFunction, Scope) GetVisibleNestedFunction(
                 Scope startingScope,
                 MethodSymbol functionSymbol
-            ) {
+            )
+            {
                 var currentScope = startingScope;
                 while (currentScope != null)
                 {
@@ -717,7 +726,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             public static NestedFunction GetNestedFunctionInTree(
                 Scope treeRoot,
                 MethodSymbol functionSymbol
-            ) {
+            )
+            {
                 return helper(treeRoot) ?? throw ExceptionUtilities.Unreachable;
 
                 NestedFunction helper(Scope scope)

@@ -297,7 +297,8 @@ namespace System.Net.Mime
             int count,
             AsyncCallback? callback,
             object? state
-        ) {
+        )
+        {
             ValidateBufferArguments(buffer, offset, count);
 
             WriteAsyncResult result = new WriteAsyncResult(

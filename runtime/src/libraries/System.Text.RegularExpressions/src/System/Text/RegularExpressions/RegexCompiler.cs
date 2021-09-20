@@ -254,7 +254,8 @@ namespace System.Text.RegularExpressions
             AssemblyName assemblyname,
             CustomAttributeBuilder[]? attributes,
             string? resourceFile
-        ) {
+        )
+        {
             var c = new RegexAssemblyCompiler(assemblyname, attributes, resourceFile);
 
             for (int i = 0; i < regexinfos.Length; i++)
@@ -1010,7 +1011,8 @@ namespace System.Text.RegularExpressions
                 int codepos = 0;
                 codepos < _codes.Length;
                 codepos += RegexCode.OpcodeSize(_codes[codepos])
-            ) {
+            )
+            {
                 _goto[codepos] = -1;
                 _labels[codepos] = DefineLabel();
             }
@@ -1032,7 +1034,8 @@ namespace System.Text.RegularExpressions
                 int codepos = 0;
                 codepos < _codes.Length;
                 codepos += RegexCode.OpcodeSize(_codes[codepos])
-            ) {
+            )
+            {
                 MarkLabel(_labels[codepos]);
                 _codepos = codepos;
                 _regexopcode = _codes[codepos];
@@ -1244,7 +1247,8 @@ namespace System.Text.RegularExpressions
                         | RegexPrefixAnalyzer.Bol
                     )
                 ) != 0
-            ) {
+            )
+            {
                 switch (_leadingAnchor)
                 {
                     case RegexPrefixAnalyzer.Beginning:
@@ -1608,7 +1612,8 @@ namespace System.Text.RegularExpressions
                         if (
                             _boyerMoorePrefix.CaseInsensitive
                             && ParticipatesInCaseConversion(_boyerMoorePrefix.Pattern[charindex])
-                        ) {
+                        )
+                        {
                             CallToLower();
                         }
                         Ldc(_boyerMoorePrefix.Pattern[charindex]);
@@ -2201,7 +2206,8 @@ namespace System.Text.RegularExpressions
                                         node.Child(i),
                                         maxDepth - 1
                                     )
-                                ) {
+                                )
+                                {
                                     supported = false;
                                     break;
                                 }
@@ -2250,7 +2256,8 @@ namespace System.Text.RegularExpressions
                                         while (
                                             parent != null
                                             && ((parent.Options & HasCapturesFlag) == 0)
-                                        ) {
+                                        )
+                                        {
                                             parent.Options |= HasCapturesFlag;
                                             parent = parent.Next;
                                         }
@@ -2699,7 +2706,8 @@ namespace System.Text.RegularExpressions
                 RegexNode node,
                 bool emitLengthCheck = true,
                 LocalBuilder? offset = null
-            ) {
+            )
+            {
                 // if ((uint)(textSpanPos + offset) >= textSpan.Length || textSpan[textSpanPos + offset] != ch) goto Done;
                 if (emitLengthCheck)
                 {
@@ -2907,7 +2915,8 @@ namespace System.Text.RegularExpressions
                     !caseInsensitive
                     && // StartsWith(..., XxIgnoreCase) won't necessarily be the same as char-by-char comparison
                     node.Str!.Length > MaxUnrollLength
-                ) {
+                )
+                {
                     // if (!textSpan.Slice(textSpanPos).StartsWith("...") goto doneLabel;
                     Ldloca(textSpanLocal);
                     Ldc(textSpanPos);
@@ -3154,7 +3163,8 @@ namespace System.Text.RegularExpressions
                     node.Type == RegexNode.Notoneloopatomic
                     && maxIterations == int.MaxValue
                     && (!IsCaseInsensitive(node) || !ParticipatesInCaseConversion(node.Ch))
-                ) {
+                )
+                {
                     // For Notoneloopatomic, we're looking for a specific character, as everything until we find
                     // it is consumed by the loop.  If we're unbounded, such as with ".*" and if we're case-sensitive,
                     // we can use the vectorized IndexOf to do the search, rather than open-coding it.  The unbounded
@@ -3197,7 +3207,8 @@ namespace System.Text.RegularExpressions
                     && !IsCaseInsensitive(node)
                     && (numSetChars = RegexCharClass.GetSetChars(node.Str!, setChars)) > 1
                     && RegexCharClass.IsNegated(node.Str!)
-                ) {
+                )
+                {
                     // If the set is negated and contains only 2 or 3 characters (if it contained 1 and was negated, it would
                     // have been reduced to a Notoneloopatomic), we can use an IndexOfAny to find any of the target characters.
                     // As with the notoneloopatomic above, the unbounded constraint is purely for simplicity.
@@ -3246,7 +3257,8 @@ namespace System.Text.RegularExpressions
                     node.Type == RegexNode.Setloopatomic
                     && maxIterations == int.MaxValue
                     && node.Str == RegexCharClass.AnyClass
-                ) {
+                )
+                {
                     // .* was used with RegexOptions.Singleline, which means it'll consume everything.  Just jump to the end.
                     // The unbounded constraint is the same as in the Notoneloopatomic case above, done purely for simplicity.
 
@@ -3591,7 +3603,8 @@ namespace System.Text.RegularExpressions
                         int codepos = 0;
                         codepos < _codes!.Length;
                         codepos += RegexCode.OpcodeSize(_codes[codepos])
-                    ) {
+                    )
+                    {
                         if ((_codes[codepos] & RegexCode.Ci) == RegexCode.Ci)
                         {
                             needsCulture = true;
@@ -4885,7 +4898,8 @@ namespace System.Text.RegularExpressions
                         (Code() == RegexCode.Notoneloop || Code() == RegexCode.Notoneloopatomic)
                         && !IsRightToLeft()
                         && (!IsCaseInsensitive() || !ParticipatesInCaseConversion(Operand(0)))
-                    ) {
+                    )
+                    {
                         // i = runtext.AsSpan(runtextpos, len).IndexOf(ch);
                         Ldloc(_runtextLocal!);
                         Ldloc(_runtextposLocal!);
@@ -4934,7 +4948,8 @@ namespace System.Text.RegularExpressions
                         && !IsCaseInsensitive()
                         && (numSetChars = RegexCharClass.GetSetChars(set!, setChars)) > 1
                         && RegexCharClass.IsNegated(set!)
-                    ) {
+                    )
+                    {
                         // Similarly, if this is a setloop{atomic} and we're left-to-right and case-sensitive,
                         // and if the set contains only 2 or 3 negated chars, we can use the vectorized IndexOfAny
                         // to search for those chars.
@@ -4995,7 +5010,8 @@ namespace System.Text.RegularExpressions
                         (Code() == RegexCode.Setloop || Code() == RegexCode.Setloopatomic)
                         && !IsRightToLeft()
                         && set == RegexCharClass.AnyClass
-                    ) {
+                    )
+                    {
                         // If someone uses .* along with RegexOptions.Singleline, that becomes [anycharacter]*, which means it'll
                         // consume everything.  As such, we can simply update our position to be the last allowed, without
                         // actually checking anything.
@@ -5086,7 +5102,8 @@ namespace System.Text.RegularExpressions
                         Code() != RegexCode.Oneloopatomic
                         && Code() != RegexCode.Notoneloopatomic
                         && Code() != RegexCode.Setloopatomic
-                    ) {
+                    )
+                    {
                         // if (len <= i) goto advance;
                         Ldloc(lenLocal);
                         Ldloc(iLocal);
@@ -5366,7 +5383,8 @@ namespace System.Text.RegularExpressions
                     out char lowInclusive,
                     out char highInclusive
                 )
-            ) {
+            )
+            {
                 if (lowInclusive == highInclusive)
                 {
                     // ch == charClass[3]
@@ -5402,7 +5420,8 @@ namespace System.Text.RegularExpressions
                     out UnicodeCategory category,
                     out bool negated
                 )
-            ) {
+            )
+            {
                 // char.GetUnicodeInfo(ch) == category
                 Call(s_charGetUnicodeInfo);
                 Ldc((int)category);

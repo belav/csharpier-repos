@@ -60,7 +60,8 @@ namespace Microsoft.CodeAnalysis.UseThrowExpression
             ImmutableArray<Diagnostic> diagnostics,
             SyntaxEditor editor,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var generator = editor.Generator;
             var root = editor.OriginalRoot;
 
@@ -90,9 +91,8 @@ namespace Microsoft.CodeAnalysis.UseThrowExpression
 
         private class MyCodeAction : CustomCodeActions.DocumentChangeAction
         {
-            public MyCodeAction(
-                Func<CancellationToken, Task<Document>> createChangedDocument
-            ) : base(AnalyzersResources.Use_throw_expression, createChangedDocument) { }
+            public MyCodeAction(Func<CancellationToken, Task<Document>> createChangedDocument)
+                : base(AnalyzersResources.Use_throw_expression, createChangedDocument) { }
         }
     }
 }

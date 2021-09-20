@@ -19,7 +19,8 @@ namespace Microsoft.JSInterop
                     || typeof(TResult) == typeof(IJSInProcessObjectReference)
                     || typeof(TResult) == typeof(IJSUnmarshalledObjectReference)
                 )
-            ) {
+            )
+            {
                 return JSCallResultType.JSObjectReference;
             }
             else

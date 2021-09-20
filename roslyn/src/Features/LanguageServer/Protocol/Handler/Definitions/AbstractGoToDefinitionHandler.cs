@@ -40,7 +40,8 @@ namespace Microsoft.CodeAnalysis.LanguageServer.Handler
             bool typeOnly,
             RequestContext context,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var locations = ArrayBuilder<LSP.Location>.GetInstance();
 
             var document = context.Document;
@@ -88,7 +89,8 @@ namespace Microsoft.CodeAnalysis.LanguageServer.Handler
                     symbol != null
                     && !symbol.Locations.IsEmpty
                     && symbol.Locations.First().IsInMetadata
-                ) {
+                )
+                {
                     if (!typeOnly || symbol is ITypeSymbol)
                     {
                         var declarationFile =
@@ -168,7 +170,8 @@ namespace Microsoft.CodeAnalysis.LanguageServer.Handler
                 Document document,
                 int position,
                 CancellationToken cancellationToken
-            ) {
+            )
+            {
                 // Try IFindDefinitionService first. Until partners implement this, it could fail to find a service, so fall back if it's null.
                 var findDefinitionService = document.GetLanguageService<IFindDefinitionService>();
                 if (findDefinitionService != null)

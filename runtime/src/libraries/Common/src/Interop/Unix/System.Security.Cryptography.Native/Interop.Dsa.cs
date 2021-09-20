@@ -90,7 +90,8 @@ internal static partial class Interop
             SafeDsaHandle dsa,
             ReadOnlySpan<byte> hash,
             ReadOnlySpan<byte> signature
-        ) {
+        )
+        {
             bool ret = DsaVerify(
                 dsa,
                 ref MemoryMarshal.GetReference(hash),
@@ -117,7 +118,8 @@ internal static partial class Interop
         internal static DSAParameters ExportDsaParameters(
             SafeDsaHandle key,
             bool includePrivateParameters
-        ) {
+        )
+        {
             Debug.Assert(
                 key != null && !key.IsInvalid,
                 "Callers should check the key is invalid and throw an exception with a message"
@@ -158,7 +160,8 @@ internal static partial class Interop
                         out x_bn,
                         out x_cb
                     )
-                ) {
+                )
+                {
                     throw new CryptographicException();
                 }
 

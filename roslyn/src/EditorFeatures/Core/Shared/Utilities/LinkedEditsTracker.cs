@@ -44,7 +44,8 @@ namespace Microsoft.CodeAnalysis.Editor.Shared.Utilities
                     !currentActiveSpans.Contains(
                         newTrackingSpan.GetSpan(_subjectBuffer.CurrentSnapshot)
                     )
-                ) {
+                )
+                {
                     _trackingSpans.Add(newTrackingSpan);
                 }
             }
@@ -70,7 +71,8 @@ namespace Microsoft.CodeAnalysis.Editor.Shared.Utilities
         public bool TryGetTextChanged(
             TextContentChangedEventArgs args,
             [NotNullWhen(true)] out string? replacementText
-        ) {
+        )
+        {
             // make sure I am not called with my own changes
             Contract.ThrowIfTrue(MyOwnChanges(args));
 

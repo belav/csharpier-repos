@@ -19,7 +19,8 @@ namespace Microsoft.CodeAnalysis
             public static ImmutableArray<Location> GetBodyLevelSourceLocations(
                 ISymbol symbol,
                 CancellationToken cancellationToken
-            ) {
+            )
+            {
                 Contract.ThrowIfFalse(IsBodyLevelSymbol(symbol));
                 Contract.ThrowIfTrue(
                     symbol.DeclaringSyntaxReferences.IsEmpty && symbol.Locations.IsEmpty
@@ -91,7 +92,8 @@ namespace Microsoft.CodeAnalysis
                                 localName,
                                 visitor.CancellationToken
                             )
-                        ) {
+                        )
+                        {
                             if (possibleSymbol.symbol.Equals(symbol))
                                 return possibleSymbol.ordinal;
                         }
@@ -105,7 +107,8 @@ namespace Microsoft.CodeAnalysis
                 Compilation compilation,
                 SyntaxTree? syntaxTree,
                 [NotNullWhen(true)] out SemanticModel? semanticModel
-            ) {
+            )
+            {
                 // Ensure that the tree we're looking at is actually in this compilation.  It may not be in the
                 // compilation in the case of work done with a speculative model.
                 if (syntaxTree != null && Contains(compilation.SyntaxTrees, syntaxTree))
@@ -121,7 +124,8 @@ namespace Microsoft.CodeAnalysis
             public static SymbolKeyResolution Resolve(
                 SymbolKeyReader reader,
                 out string? failureReason
-            ) {
+            )
+            {
                 var cancellationToken = reader.CancellationToken;
 
                 var name = reader.ReadString()!;
@@ -168,10 +172,12 @@ namespace Microsoft.CodeAnalysis
                         locations[0].SourceTree,
                         out var semanticModel
                     )
-                ) {
+                )
+                {
                     foreach (
                         var symbol in EnumerateSymbols(semanticModel, kind, name, cancellationToken)
-                    ) {
+                    )
+                    {
                         if (symbol.ordinal == ordinal)
                         {
                             failureReason = null;
@@ -189,7 +195,8 @@ namespace Microsoft.CodeAnalysis
                     int index,
                     out SymbolKeyResolution resolution,
                     out string? reason
-                ) {
+                )
+                {
                     var resolutionOpt = reader.ResolveLocation(loc);
                     if (resolutionOpt == null)
                     {
@@ -228,7 +235,8 @@ namespace Microsoft.CodeAnalysis
                 SymbolKind kind,
                 string localName,
                 CancellationToken cancellationToken
-            ) {
+            )
+            {
                 var ordinal = 0;
                 var root = semanticModel.SyntaxTree.GetRoot(cancellationToken);
 
@@ -239,7 +247,8 @@ namespace Microsoft.CodeAnalysis
                     if (
                         symbol?.Kind == kind
                         && SymbolKey.Equals(semanticModel.Compilation, symbol.Name, localName)
-                    ) {
+                    )
+                    {
                         yield return (symbol, ordinal++);
                     }
                 }

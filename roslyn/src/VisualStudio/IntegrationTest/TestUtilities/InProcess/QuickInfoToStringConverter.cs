@@ -82,7 +82,8 @@ namespace Microsoft.VisualStudio.IntegrationTest.Utilities.InProcess
         private static void BuildStringFromInlineCollection(
             InlineCollection inlines,
             StringBuilder sb
-        ) {
+        )
+        {
             foreach (var inline in inlines)
             {
                 if (inline != null)

@@ -437,7 +437,8 @@ namespace JIT.HardwareIntrinsics.X86
             Vector128<Int16> right,
             void* result,
             [CallerMemberName] string method = ""
-        ) {
+        )
+        {
             Int16[] inArray1 = new Int16[Op1ElementCount];
             Int16[] inArray2 = new Int16[Op2ElementCount];
             Int16[] outArray = new Int16[RetElementCount];
@@ -458,7 +459,8 @@ namespace JIT.HardwareIntrinsics.X86
             void* right,
             void* result,
             [CallerMemberName] string method = ""
-        ) {
+        )
+        {
             Int16[] inArray1 = new Int16[Op1ElementCount];
             Int16[] inArray2 = new Int16[Op2ElementCount];
             Int16[] outArray = new Int16[RetElementCount];
@@ -487,7 +489,8 @@ namespace JIT.HardwareIntrinsics.X86
             Int16[] right,
             Int16[] result,
             [CallerMemberName] string method = ""
-        ) {
+        )
+        {
             bool succeeded = true;
 
             if (result[0] != left[0])

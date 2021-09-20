@@ -67,7 +67,8 @@ namespace Castle.Core.Logging
             string loggerName,
             string message,
             Exception exception
-        ) {
+        )
+        {
             Console.Out.WriteLine("[{0}] '{1}' {2}", loggerLevel, loggerName, message);
 
             if (exception != null)

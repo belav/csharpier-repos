@@ -98,7 +98,8 @@ namespace AutoMapper.Configuration
         public void MapFrom<TSourceMember>(
             IMemberValueResolver<TSource, TDestination, TSourceMember, TMember> valueResolver,
             Expression<Func<TSource, TSourceMember>> sourceMember
-        ) {
+        )
+        {
             var config = new ValueResolverConfiguration(
                 valueResolver,
                 typeof(IMemberValueResolver<TSource, TDestination, TSourceMember, TMember>)
@@ -140,7 +141,8 @@ namespace AutoMapper.Configuration
 
         public void MapFrom<TResult>(
             Func<TSource, TDestination, TMember, ResolutionContext, TResult> mappingFunction
-        ) {
+        )
+        {
             PropertyMapActions.Add(
                 pm =>
                 {
@@ -173,7 +175,8 @@ namespace AutoMapper.Configuration
 
         public void Condition(
             Func<TSource, TDestination, TMember, TMember, ResolutionContext, bool> condition
-        ) {
+        )
+        {
             PropertyMapActions.Add(
                 pm =>
                 {
@@ -394,7 +397,8 @@ namespace AutoMapper.Configuration
             PropertyMap propertyMap,
             Expression<Func<TSource, TSourceMember>> sourceMember = null,
             string sourceMemberName = null
-        ) {
+        )
+        {
             var config = new ValueResolverConfiguration(
                 typeof(TValueConverter),
                 typeof(IValueConverter<TSourceMember, TMember>)
@@ -411,7 +415,8 @@ namespace AutoMapper.Configuration
             IValueConverter<TSourceMember, TMember> valueConverter,
             Expression<Func<TSource, TSourceMember>> sourceMember = null,
             string sourceMemberName = null
-        ) {
+        )
+        {
             var config = new ValueResolverConfiguration(
                 valueConverter,
                 typeof(IValueConverter<TSourceMember, TMember>)

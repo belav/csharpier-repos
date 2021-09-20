@@ -25,20 +25,23 @@ namespace Microsoft.EntityFrameworkCore.Query
 
         public override Task Join_condition_optimizations_applied_correctly_when_anonymous_type_with_multiple_properties(
             bool async
-        ) {
+        )
+        {
             return Task.CompletedTask;
         }
 
         public override Task Join_condition_optimizations_applied_correctly_when_anonymous_type_with_single_property(
             bool async
-        ) {
+        )
+        {
             return Task.CompletedTask;
         }
 
         [ConditionalTheory(Skip = "issue #13560")]
         public override Task Multiple_SelectMany_with_nested_navigations_and_explicit_DefaultIfEmpty_joined_together(
             bool async
-        ) {
+        )
+        {
             return base.Multiple_SelectMany_with_nested_navigations_and_explicit_DefaultIfEmpty_joined_together(
                 async
             );
@@ -47,7 +50,8 @@ namespace Microsoft.EntityFrameworkCore.Query
         [ConditionalTheory(Skip = "issue #13560")]
         public override Task SelectMany_with_nested_navigations_explicit_DefaultIfEmpty_and_additional_joins_outside_of_SelectMany(
             bool async
-        ) {
+        )
+        {
             return base.SelectMany_with_nested_navigations_explicit_DefaultIfEmpty_and_additional_joins_outside_of_SelectMany(
                 async
             );
@@ -56,7 +60,8 @@ namespace Microsoft.EntityFrameworkCore.Query
         [ConditionalTheory(Skip = "issue #13560")]
         public override Task SelectMany_with_nested_navigations_explicit_DefaultIfEmpty_and_additional_joins_outside_of_SelectMany2(
             bool async
-        ) {
+        )
+        {
             return base.SelectMany_with_nested_navigations_explicit_DefaultIfEmpty_and_additional_joins_outside_of_SelectMany2(
                 async
             );
@@ -65,7 +70,8 @@ namespace Microsoft.EntityFrameworkCore.Query
         [ConditionalTheory(Skip = "issue #13560")]
         public override Task SelectMany_with_nested_navigations_and_additional_joins_outside_of_SelectMany(
             bool async
-        ) {
+        )
+        {
             return base.SelectMany_with_nested_navigations_and_additional_joins_outside_of_SelectMany(
                 async
             );
@@ -74,7 +80,8 @@ namespace Microsoft.EntityFrameworkCore.Query
         [ConditionalTheory(Skip = "issue #13560")]
         public override Task Complex_SelectMany_with_nested_navigations_and_explicit_DefaultIfEmpty_with_other_query_operators_composed_on_top(
             bool async
-        ) {
+        )
+        {
             return base.Complex_SelectMany_with_nested_navigations_and_explicit_DefaultIfEmpty_with_other_query_operators_composed_on_top(
                 async
             );
@@ -107,7 +114,8 @@ namespace Microsoft.EntityFrameworkCore.Query
         [ConditionalTheory(Skip = "Issue#16752")]
         public override Task Include_collection_with_multiple_orderbys_complex_repeated_checked(
             bool async
-        ) {
+        )
+        {
             return base.Include_collection_with_multiple_orderbys_complex_repeated_checked(async);
         }
 
@@ -162,7 +170,8 @@ namespace Microsoft.EntityFrameworkCore.Query
         [ConditionalTheory(Skip = "Issue#17803")]
         public override Task Multiple_collection_FirstOrDefault_followed_by_member_access_in_projection(
             bool async
-        ) {
+        )
+        {
             return base.Multiple_collection_FirstOrDefault_followed_by_member_access_in_projection(
                 async
             );
@@ -172,7 +181,8 @@ namespace Microsoft.EntityFrameworkCore.Query
 
         public override Task SelectMany_DefaultIfEmpty_multiple_times_with_joins_projecting_a_collection(
             bool async
-        ) {
+        )
+        {
             // Navigations used are not mapped in shared type.
             return Task.CompletedTask;
         }

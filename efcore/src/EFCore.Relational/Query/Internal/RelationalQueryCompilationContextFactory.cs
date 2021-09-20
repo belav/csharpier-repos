@@ -34,7 +34,8 @@ namespace Microsoft.EntityFrameworkCore.Query.Internal
         public RelationalQueryCompilationContextFactory(
             QueryCompilationContextDependencies dependencies,
             RelationalQueryCompilationContextDependencies relationalDependencies
-        ) {
+        )
+        {
             Check.NotNull(dependencies, nameof(dependencies));
             Check.NotNull(relationalDependencies, nameof(relationalDependencies));
 

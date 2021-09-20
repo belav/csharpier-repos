@@ -85,7 +85,8 @@ namespace Microsoft.CodeAnalysis.Syntax
         public SeparatedSyntaxListBuilder<TNode> AddRange(
             in SeparatedSyntaxList<TNode> nodes,
             int count
-        ) {
+        )
+        {
             CheckExpectedElement();
             SyntaxNodeOrTokenList list = nodes.GetWithSeparators();
             _builder.AddRange(list, this.Count, Math.Min(count << 1, list.Count));
@@ -115,13 +116,15 @@ namespace Microsoft.CodeAnalysis.Syntax
 
         public static implicit operator SyntaxListBuilder(
             in SeparatedSyntaxListBuilder<TNode> builder
-        ) {
+        )
+        {
             return builder._builder;
         }
 
         public static implicit operator SeparatedSyntaxList<TNode>(
             in SeparatedSyntaxListBuilder<TNode> builder
-        ) {
+        )
+        {
             if (builder._builder != null)
             {
                 return builder.ToList();

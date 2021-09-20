@@ -25,7 +25,8 @@ namespace System.Speech.Recognition.SrgsGrammar
                 && matchingMode != SubsetMatchingMode.Subsequence
                 && matchingMode != SubsetMatchingMode.OrderedSubsetContentRequired
                 && matchingMode != SubsetMatchingMode.SubsequenceContentRequired
-            ) {
+            )
+            {
                 throw new ArgumentException(
                     SR.Get(SRID.InvalidSubsetAttribute),
                     nameof(matchingMode)
@@ -51,7 +52,8 @@ namespace System.Speech.Recognition.SrgsGrammar
                     && value != SubsetMatchingMode.Subsequence
                     && value != SubsetMatchingMode.OrderedSubsetContentRequired
                     && value != SubsetMatchingMode.SubsequenceContentRequired
-                ) {
+                )
+                {
                     throw new ArgumentException(SR.Get(SRID.InvalidSubsetAttribute), nameof(value));
                 }
 

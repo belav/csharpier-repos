@@ -101,32 +101,37 @@ namespace System.IO.Pipelines
         public abstract void Complete(System.Exception? exception = null);
         public virtual System.Threading.Tasks.ValueTask CompleteAsync(
             System.Exception? exception = null
-        ) {
+        )
+        {
             throw null;
         }
         public virtual System.Threading.Tasks.Task CopyToAsync(
             System.IO.Pipelines.PipeWriter destination,
             System.Threading.CancellationToken cancellationToken =
                 default(System.Threading.CancellationToken)
-        ) {
+        )
+        {
             throw null;
         }
         public virtual System.Threading.Tasks.Task CopyToAsync(
             System.IO.Stream destination,
             System.Threading.CancellationToken cancellationToken =
                 default(System.Threading.CancellationToken)
-        ) {
+        )
+        {
             throw null;
         }
         public static System.IO.Pipelines.PipeReader Create(
             System.IO.Stream stream,
             System.IO.Pipelines.StreamPipeReaderOptions? readerOptions = null
-        ) {
+        )
+        {
             throw null;
         }
         public static System.IO.Pipelines.PipeReader Create(
             System.Buffers.ReadOnlySequence<byte> sequence
-        ) {
+        )
+        {
             throw null;
         }
         [System.ObsoleteAttribute(
@@ -167,20 +172,23 @@ namespace System.IO.Pipelines
         public abstract void Complete(System.Exception? exception = null);
         public virtual System.Threading.Tasks.ValueTask CompleteAsync(
             System.Exception? exception = null
-        ) {
+        )
+        {
             throw null;
         }
         protected internal virtual System.Threading.Tasks.Task CopyFromAsync(
             System.IO.Stream source,
             System.Threading.CancellationToken cancellationToken =
                 default(System.Threading.CancellationToken)
-        ) {
+        )
+        {
             throw null;
         }
         public static System.IO.Pipelines.PipeWriter Create(
             System.IO.Stream stream,
             System.IO.Pipelines.StreamPipeWriterOptions? writerOptions = null
-        ) {
+        )
+        {
             throw null;
         }
         public abstract System.Threading.Tasks.ValueTask<System.IO.Pipelines.FlushResult> FlushAsync(
@@ -200,7 +208,8 @@ namespace System.IO.Pipelines
             System.ReadOnlyMemory<byte> source,
             System.Threading.CancellationToken cancellationToken =
                 default(System.Threading.CancellationToken)
-        ) {
+        )
+        {
             throw null;
         }
     }
@@ -212,7 +221,8 @@ namespace System.IO.Pipelines
             System.Buffers.ReadOnlySequence<byte> buffer,
             bool isCanceled,
             bool isCompleted
-        ) {
+        )
+        {
             throw null;
         }
         public System.Buffers.ReadOnlySequence<byte> Buffer
@@ -235,7 +245,8 @@ namespace System.IO.Pipelines
             System.IO.Pipelines.PipeWriter destination,
             System.Threading.CancellationToken cancellationToken =
                 default(System.Threading.CancellationToken)
-        ) {
+        )
+        {
             throw null;
         }
     }

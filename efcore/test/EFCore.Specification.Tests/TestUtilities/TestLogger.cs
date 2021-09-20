@@ -36,7 +36,8 @@ namespace Microsoft.EntityFrameworkCore.TestUtilities
             TState state,
             Exception exception,
             Func<TState, Exception, string> formatter
-        ) {
+        )
+        {
             LoggedEvent = eventId;
             LoggedAt = logLevel;
             Assert.Equal(LoggedEvent, eventId);

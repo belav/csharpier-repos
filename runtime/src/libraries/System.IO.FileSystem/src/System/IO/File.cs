@@ -175,7 +175,8 @@ namespace System.IO
             FileMode mode,
             FileAccess access,
             FileShare share
-        ) {
+        )
+        {
             return new FileStream(path, mode, access, share);
         }
 
@@ -375,7 +376,8 @@ namespace System.IO
                     bufferSize: 1,
                     FileOptions.SequentialScan
                 )
-            ) {
+            )
+            {
                 long fileLength = fs.Length;
                 if (fileLength > int.MaxValue)
                 {
@@ -477,7 +479,8 @@ namespace System.IO
                     FileAccess.Write,
                     FileShare.Read
                 )
-            ) {
+            )
+            {
                 fs.Write(bytes, 0, bytes.Length);
             }
         }
@@ -567,7 +570,8 @@ namespace System.IO
             string path,
             IEnumerable<string> contents,
             Encoding encoding
-        ) {
+        )
+        {
             if (path == null)
                 throw new ArgumentNullException(nameof(path));
             if (contents == null)
@@ -638,7 +642,8 @@ namespace System.IO
             string path,
             IEnumerable<string> contents,
             Encoding encoding
-        ) {
+        )
+        {
             if (path == null)
                 throw new ArgumentNullException(nameof(path));
             if (contents == null)
@@ -655,7 +660,8 @@ namespace System.IO
             string sourceFileName,
             string destinationFileName,
             string? destinationBackupFileName
-        ) {
+        )
+        {
             Replace(
                 sourceFileName,
                 destinationFileName,
@@ -669,7 +675,8 @@ namespace System.IO
             string destinationFileName,
             string? destinationBackupFileName,
             bool ignoreMetadataErrors
-        ) {
+        )
+        {
             if (sourceFileName == null)
                 throw new ArgumentNullException(nameof(sourceFileName));
             if (destinationFileName == null)
@@ -784,7 +791,8 @@ namespace System.IO
             string path,
             Encoding encoding,
             CancellationToken cancellationToken = default(CancellationToken)
-        ) {
+        )
+        {
             if (path == null)
                 throw new ArgumentNullException(nameof(path));
             if (encoding == null)
@@ -801,7 +809,8 @@ namespace System.IO
             string path,
             Encoding encoding,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             Debug.Assert(!string.IsNullOrEmpty(path));
             Debug.Assert(encoding != null);
 
@@ -852,7 +861,8 @@ namespace System.IO
             string? contents,
             Encoding encoding,
             CancellationToken cancellationToken = default(CancellationToken)
-        ) {
+        )
+        {
             if (path == null)
                 throw new ArgumentNullException(nameof(path));
             if (encoding == null)
@@ -881,7 +891,8 @@ namespace System.IO
         public static Task<byte[]> ReadAllBytesAsync(
             string path,
             CancellationToken cancellationToken = default(CancellationToken)
-        ) {
+        )
+        {
             if (cancellationToken.IsCancellationRequested)
             {
                 return Task.FromCanceled<byte[]>(cancellationToken);
@@ -928,7 +939,8 @@ namespace System.IO
             FileStream fs,
             int count,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             using (fs)
             {
                 int index = 0;
@@ -960,7 +972,8 @@ namespace System.IO
         private static async Task<byte[]> InternalReadAllBytesUnknownLengthAsync(
             FileStream fs,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             byte[] rentedArray = ArrayPool<byte>.Shared.Rent(512);
             try
             {
@@ -1013,7 +1026,8 @@ namespace System.IO
             string path,
             byte[] bytes,
             CancellationToken cancellationToken = default(CancellationToken)
-        ) {
+        )
+        {
             if (path == null)
                 throw new ArgumentNullException(nameof(path), SR.ArgumentNull_Path);
             if (path.Length == 0)
@@ -1030,7 +1044,8 @@ namespace System.IO
             string path,
             byte[] bytes,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             Debug.Assert(!string.IsNullOrEmpty(path));
             Debug.Assert(bytes != null);
 
@@ -1043,7 +1058,8 @@ namespace System.IO
                     DefaultBufferSize,
                     FileOptions.Asynchronous | FileOptions.SequentialScan
                 )
-            ) {
+            )
+            {
 #if MS_IO_REDIST
                 await fs.WriteAsync(bytes, 0, bytes.Length, cancellationToken)
                     .ConfigureAwait(false);
@@ -1064,7 +1080,8 @@ namespace System.IO
             string path,
             Encoding encoding,
             CancellationToken cancellationToken = default(CancellationToken)
-        ) {
+        )
+        {
             if (path == null)
                 throw new ArgumentNullException(nameof(path));
             if (encoding == null)
@@ -1081,7 +1098,8 @@ namespace System.IO
             string path,
             Encoding encoding,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             Debug.Assert(!string.IsNullOrEmpty(path));
             Debug.Assert(encoding != null);
 
@@ -1111,7 +1129,8 @@ namespace System.IO
             IEnumerable<string> contents,
             Encoding encoding,
             CancellationToken cancellationToken = default(CancellationToken)
-        ) {
+        )
+        {
             if (path == null)
                 throw new ArgumentNullException(nameof(path));
             if (contents == null)
@@ -1134,7 +1153,8 @@ namespace System.IO
             TextWriter writer,
             IEnumerable<string> contents,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             Debug.Assert(writer != null);
             Debug.Assert(contents != null);
 
@@ -1155,7 +1175,8 @@ namespace System.IO
             StreamWriter sw,
             string contents,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             char[]? buffer = null;
             try
             {
@@ -1203,7 +1224,8 @@ namespace System.IO
             string? contents,
             Encoding encoding,
             CancellationToken cancellationToken = default(CancellationToken)
-        ) {
+        )
+        {
             if (path == null)
                 throw new ArgumentNullException(nameof(path));
             if (encoding == null)
@@ -1241,7 +1263,8 @@ namespace System.IO
             IEnumerable<string> contents,
             Encoding encoding,
             CancellationToken cancellationToken = default(CancellationToken)
-        ) {
+        )
+        {
             if (path == null)
                 throw new ArgumentNullException(nameof(path));
             if (contents == null)

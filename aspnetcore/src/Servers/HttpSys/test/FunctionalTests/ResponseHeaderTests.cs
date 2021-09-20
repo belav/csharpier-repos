@@ -29,7 +29,8 @@ namespace Microsoft.AspNetCore.Server.HttpSys
                         return Task.FromResult(0);
                     }
                 )
-            ) {
+            )
+            {
                 HttpResponseMessage response = await SendRequestAsync(address);
                 response.EnsureSuccessStatusCode();
                 Assert.Equal(2, response.Headers.Count());
@@ -56,7 +57,8 @@ namespace Microsoft.AspNetCore.Server.HttpSys
                         return Task.FromResult(0);
                     }
                 )
-            ) {
+            )
+            {
 #pragma warning disable SYSLIB0014 // HttpClient would merge the headers no matter what
                 WebRequest request = WebRequest.Create(address);
 #pragma warning restore SYSLIB0014
@@ -89,7 +91,8 @@ namespace Microsoft.AspNetCore.Server.HttpSys
                         return Task.FromResult(0);
                     }
                 )
-            ) {
+            )
+            {
 #pragma warning disable SYSLIB0014 // HttpClient would merge the headers no matter what
                 WebRequest request = WebRequest.Create(address);
 #pragma warning restore SYSLIB0014
@@ -122,7 +125,8 @@ namespace Microsoft.AspNetCore.Server.HttpSys
                         return Task.FromResult(0);
                     }
                 )
-            ) {
+            )
+            {
 #pragma warning disable SYSLIB0014 // HttpClient would merge the headers no matter what
                 WebRequest request = WebRequest.Create(address);
 #pragma warning restore SYSLIB0014
@@ -151,7 +155,8 @@ namespace Microsoft.AspNetCore.Server.HttpSys
                         return httpContext.Response.Body.FlushAsync(); // Http.Sys adds the Content-Length: header for us if we don't flush
                     }
                 )
-            ) {
+            )
+            {
                 HttpResponseMessage response = await SendRequestAsync(address);
                 response.EnsureSuccessStatusCode();
                 Assert.True(response.Headers.ConnectionClose.Value);
@@ -176,7 +181,8 @@ namespace Microsoft.AspNetCore.Server.HttpSys
                         return Task.FromResult(0);
                     }
                 )
-            ) {
+            )
+            {
                 using (HttpClient client = new HttpClient())
                 {
                     HttpRequestMessage request = new HttpRequestMessage(HttpMethod.Get, address);
@@ -212,7 +218,8 @@ namespace Microsoft.AspNetCore.Server.HttpSys
                         return response.Body.WriteAsync(responseBytes, 0, responseBytes.Length);
                     }
                 )
-            ) {
+            )
+            {
                 using (HttpClient client = new HttpClient())
                 {
                     HttpRequestMessage request = new HttpRequestMessage(HttpMethod.Get, address);
@@ -262,7 +269,8 @@ namespace Microsoft.AspNetCore.Server.HttpSys
                         return Task.FromResult(0);
                     }
                 )
-            ) {
+            )
+            {
                 HttpResponseMessage response = await SendRequestAsync(address);
                 response.EnsureSuccessStatusCode();
                 Assert.Equal(5, response.Headers.Count()); // Date, Server, Chunked
@@ -302,7 +310,8 @@ namespace Microsoft.AspNetCore.Server.HttpSys
                         );
                     }
                 )
-            ) {
+            )
+            {
                 HttpResponseMessage response = await SendRequestAsync(address);
                 response.EnsureSuccessStatusCode();
                 Assert.Equal(5, response.Headers.Count()); // Date, Server, Chunked
@@ -320,7 +329,8 @@ namespace Microsoft.AspNetCore.Server.HttpSys
             string headerName,
             StringValues headerValue,
             StringValues expectedValue
-        ) {
+        )
+        {
             string address;
             using (
                 Utilities.CreateHttpServer(
@@ -332,7 +342,8 @@ namespace Microsoft.AspNetCore.Server.HttpSys
                         return Task.FromResult(0);
                     }
                 )
-            ) {
+            )
+            {
                 HttpResponseMessage response = await SendRequestAsync(address);
                 response.EnsureSuccessStatusCode();
                 var headers = response.Headers;

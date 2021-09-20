@@ -79,7 +79,8 @@ namespace Microsoft.EntityFrameworkCore.Storage
         public override Task<int> SaveChangesAsync(
             IList<IUpdateEntry> entries,
             CancellationToken cancellationToken = default
-        ) {
+        )
+        {
             Check.NotNull(entries, nameof(entries));
 
             return RelationalDependencies.BatchExecutor.ExecuteAsync(

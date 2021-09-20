@@ -60,7 +60,8 @@ namespace System.ServiceModel.Syndication
             string outerNamespace,
             object dataContractExtension,
             XmlObjectSerializer dataContractSerializer
-        ) {
+        )
+        {
             if (dataContractExtension == null)
             {
                 throw new ArgumentNullException(nameof(dataContractExtension));
@@ -107,7 +108,8 @@ namespace System.ServiceModel.Syndication
             int bufferElementIndex,
             string outerName,
             string outerNamespace
-        ) {
+        )
+        {
             _buffer = buffer;
             _bufferElementIndex = bufferElementIndex;
             _outerName = outerName;
@@ -153,7 +155,8 @@ namespace System.ServiceModel.Syndication
             if (
                 _extensionData != null
                 && typeof(TExtension).IsAssignableFrom(_extensionData.GetType())
-            ) {
+            )
+            {
                 return (TExtension)_extensionData;
             }
             using (XmlReader reader = GetReader())
@@ -172,7 +175,8 @@ namespace System.ServiceModel.Syndication
             if (
                 _extensionData != null
                 && typeof(TExtension).IsAssignableFrom(_extensionData.GetType())
-            ) {
+            )
+            {
                 return (TExtension)_extensionData;
             }
             using (XmlReader reader = GetReader())
@@ -226,7 +230,8 @@ namespace System.ServiceModel.Syndication
                 _buffer = new XmlBuffer(int.MaxValue);
                 using (
                     XmlDictionaryWriter writer = _buffer.OpenSection(XmlDictionaryReaderQuotas.Max)
-                ) {
+                )
+                {
                     writer.WriteStartElement(Rss20Constants.ExtensionWrapperTag);
                     WriteTo(writer);
                     writer.WriteEndElement();
@@ -260,7 +265,8 @@ namespace System.ServiceModel.Syndication
                 XmlObjectSerializer dataContractSerializer,
                 string outerName,
                 string outerNamespace
-            ) {
+            )
+            {
                 Debug.Assert(extensionData != null && dataContractSerializer != null, "null check");
                 _dataContractSerializer = dataContractSerializer;
                 _extensionData = extensionData;

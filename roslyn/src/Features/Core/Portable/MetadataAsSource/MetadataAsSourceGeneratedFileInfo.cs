@@ -29,7 +29,8 @@ namespace Microsoft.CodeAnalysis.MetadataAsSource
             Project sourceProject,
             INamedTypeSymbol topLevelNamedType,
             bool allowDecompilation
-        ) {
+        )
+        {
             this.SourceProjectId = sourceProject.Id;
             this.Workspace = sourceProject.Solution.Workspace;
             this.LanguageName = allowDecompilation ? LanguageNames.CSharp : sourceProject.Language;
@@ -69,7 +70,8 @@ namespace Microsoft.CodeAnalysis.MetadataAsSource
         public Tuple<ProjectInfo, DocumentId> GetProjectInfoAndDocumentId(
             Workspace workspace,
             bool loadFileFromDisk
-        ) {
+        )
+        {
             var projectId = ProjectId.CreateNewId();
 
             // Just say it's always a DLL since we probably won't have a Main method

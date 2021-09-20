@@ -63,7 +63,8 @@ namespace Internal.TypeSystem
         public virtual FieldDesc InstantiateSignature(
             Instantiation typeInstantiation,
             Instantiation methodInstantiation
-        ) {
+        )
+        {
             FieldDesc field = this;
 
             TypeDesc owningType = field.OwningType;

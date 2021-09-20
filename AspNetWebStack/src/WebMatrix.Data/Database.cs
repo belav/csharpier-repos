@@ -291,7 +291,8 @@ namespace WebMatrix.Data
         internal static IConnectionConfiguration GetConnectionConfiguration(
             string fileName,
             IDictionary<string, IDbFileHandler> handlers
-        ) {
+        )
+        {
             string extension = Path.GetExtension(fileName);
             IDbFileHandler handler;
             if (handlers.TryGetValue(extension, out handler))
@@ -311,7 +312,8 @@ namespace WebMatrix.Data
         private static Database OpenConnectionStringInternal(
             string providerName,
             string connectionString
-        ) {
+        )
+        {
             return OpenConnectionStringInternal(
                 new DbProviderFactoryWrapper(providerName),
                 connectionString
@@ -329,14 +331,16 @@ namespace WebMatrix.Data
         internal static Database OpenConnectionStringInternal(
             IDbProviderFactory providerFactory,
             string connectionString
-        ) {
+        )
+        {
             return new Database(() => providerFactory.CreateConnection(connectionString));
         }
 
         internal static Database OpenNamedConnection(
             string name,
             IConfigurationManager configurationManager
-        ) {
+        )
+        {
             // Opens a connection using the connection string setting with the specified name
             IConnectionConfiguration configuration = configurationManager.GetConnection(name);
             if (configuration != null)
@@ -363,7 +367,8 @@ namespace WebMatrix.Data
                     DefaultDataProviderAppSetting,
                     out providerName
                 )
-            ) {
+            )
+            {
                 providerName = SqlCeProviderName;
             }
 

@@ -17,7 +17,8 @@ namespace System.Security.Cryptography.Cng.Tests
                     TestData.Key_ECDiffieHellmanP256,
                     CngKeyBlobFormat.GenericPublicBlob
                 )
-            ) {
+            )
+            {
                 SafeNCryptKeyHandle keyHandle1 = key.Handle;
                 SafeNCryptKeyHandle keyHandle2 = key.Handle;
                 Assert.NotSame(keyHandle1, keyHandle2);

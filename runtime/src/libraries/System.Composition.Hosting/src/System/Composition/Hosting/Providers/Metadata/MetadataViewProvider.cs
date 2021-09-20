@@ -84,7 +84,8 @@ namespace System.Composition.Hosting.Providers.Metadata
                                 && prop.SetMethod.IsPublic
                                 && !prop.SetMethod.IsStatic
                         )
-                ) {
+                )
+                {
                     var dva = Expression.Constant(
                         prop.GetCustomAttribute<DefaultValueAttribute>(false),
                         typeof(DefaultValueAttribute)
@@ -116,7 +117,8 @@ namespace System.Composition.Hosting.Providers.Metadata
             IDictionary<string, object> metadata,
             string name,
             DefaultValueAttribute defaultValue
-        ) {
+        )
+        {
             object result;
             if (metadata.TryGetValue(name, out result))
                 return (TValue)result;

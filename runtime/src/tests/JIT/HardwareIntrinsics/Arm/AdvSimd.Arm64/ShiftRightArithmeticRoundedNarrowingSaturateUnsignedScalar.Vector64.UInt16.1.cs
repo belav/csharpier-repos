@@ -130,7 +130,8 @@ namespace JIT.HardwareIntrinsics.Arm
                     (alignment != 16 && alignment != 8)
                     || (alignment * 2) < sizeOfinArray
                     || (alignment * 2) < sizeOfoutArray
-                ) {
+                )
+                {
                     throw new ArgumentException("Invalid value of alignment");
                 }
 
@@ -189,7 +190,8 @@ namespace JIT.HardwareIntrinsics.Arm
 
             public void RunStructFldScenario(
                 ImmUnaryOpTest__ShiftRightArithmeticRoundedNarrowingSaturateUnsignedScalar_Vector64_UInt16_1 testClass
-            ) {
+            )
+            {
                 var result =
                     AdvSimd.Arm64.ShiftRightArithmeticRoundedNarrowingSaturateUnsignedScalar(
                         _fld,
@@ -202,7 +204,8 @@ namespace JIT.HardwareIntrinsics.Arm
 
             public void RunStructFldScenario_Load(
                 ImmUnaryOpTest__ShiftRightArithmeticRoundedNarrowingSaturateUnsignedScalar_Vector64_UInt16_1 testClass
-            ) {
+            )
+            {
                 fixed (Vector64<Int32>* pFld = &_fld)
                 {
                     var result =
@@ -527,7 +530,8 @@ namespace JIT.HardwareIntrinsics.Arm
             Vector64<Int32> firstOp,
             void* result,
             [CallerMemberName] string method = ""
-        ) {
+        )
+        {
             Int32[] inArray = new Int32[Op1ElementCount];
             UInt16[] outArray = new UInt16[RetElementCount];
 
@@ -545,7 +549,8 @@ namespace JIT.HardwareIntrinsics.Arm
             void* firstOp,
             void* result,
             [CallerMemberName] string method = ""
-        ) {
+        )
+        {
             Int32[] inArray = new Int32[Op1ElementCount];
             UInt16[] outArray = new UInt16[RetElementCount];
 
@@ -567,13 +572,15 @@ namespace JIT.HardwareIntrinsics.Arm
             Int32[] firstOp,
             UInt16[] result,
             [CallerMemberName] string method = ""
-        ) {
+        )
+        {
             bool succeeded = true;
 
             if (
                 Helpers.ShiftRightArithmeticRoundedNarrowingSaturateUnsigned(firstOp[0], Imm)
                 != result[0]
-            ) {
+            )
+            {
                 succeeded = false;
             }
             else

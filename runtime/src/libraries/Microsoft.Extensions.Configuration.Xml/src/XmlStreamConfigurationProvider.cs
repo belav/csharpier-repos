@@ -33,7 +33,8 @@ namespace Microsoft.Extensions.Configuration.Xml
         public static IDictionary<string, string> Read(
             Stream stream,
             XmlDocumentDecryptor decryptor
-        ) {
+        )
+        {
             var readerSettings = new XmlReaderSettings()
             {
                 CloseInput = false, // caller will close the stream
@@ -78,7 +79,8 @@ namespace Microsoft.Extensions.Configuration.Xml
                                             element.SiblingName,
                                             out var siblings
                                         )
-                                    ) {
+                                    )
+                                    {
                                         siblings = new List<XmlConfigurationElement>();
                                         parent.ChildrenBySiblingName.Add(
                                             element.SiblingName,
@@ -109,7 +111,8 @@ namespace Microsoft.Extensions.Configuration.Xml
                                                 element.SiblingName,
                                                 StringComparison.OrdinalIgnoreCase
                                             )
-                                        ) {
+                                        )
+                                        {
                                             children.Add(
                                                 element.SiblingName,
                                                 new List<XmlConfigurationElement>
@@ -289,7 +292,8 @@ namespace Microsoft.Extensions.Configuration.Xml
                         NameAttributeKey,
                         StringComparison.OrdinalIgnoreCase
                     )
-                ) {
+                )
+                {
                     // If there is a namespace attached to current attribute
                     if (!string.IsNullOrEmpty(reader.NamespaceURI))
                     {
@@ -310,7 +314,8 @@ namespace Microsoft.Extensions.Configuration.Xml
 
         private static IDictionary<string, string> ProvideConfiguration(
             XmlConfigurationElement root
-        ) {
+        )
+        {
             var configuration = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase);
 
             if (root == null)

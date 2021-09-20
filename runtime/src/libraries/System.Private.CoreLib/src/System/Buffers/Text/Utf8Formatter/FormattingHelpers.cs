@@ -116,7 +116,8 @@ namespace System.Buffers.Text
             uint value,
             Span<byte> buffer,
             int startingIndex = 0
-        ) {
+        )
+        {
             Debug.Assert(value <= 9999);
 
             uint temp = '0' + value;
@@ -143,7 +144,8 @@ namespace System.Buffers.Text
             uint value,
             Span<byte> buffer,
             int startingIndex = 0
-        ) {
+        )
+        {
             Debug.Assert(value <= 99);
 
             uint temp = '0' + value;

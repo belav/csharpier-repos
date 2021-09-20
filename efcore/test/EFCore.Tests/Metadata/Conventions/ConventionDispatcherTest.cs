@@ -48,7 +48,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
             public void ProcessPropertyAdded(
                 IConventionPropertyBuilder propertyBuilder,
                 IConventionContext<IConventionPropertyBuilder> context
-            ) {
+            )
+            {
                 propertyBuilder.Metadata.DeclaringEntityType.AddProperty(
                     "TempProperty" + _count++,
                     typeof(int)
@@ -97,7 +98,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
             public void ProcessModelInitialized(
                 IConventionModelBuilder modelBuilder,
                 IConventionContext<IConventionModelBuilder> context
-            ) {
+            )
+            {
                 Assert.NotNull(modelBuilder.Metadata.Builder);
 
                 Calls++;
@@ -152,7 +154,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
             public void ProcessModelFinalizing(
                 IConventionModelBuilder modelBuilder,
                 IConventionContext<IConventionModelBuilder> context
-            ) {
+            )
+            {
                 Assert.NotNull(modelBuilder.Metadata.Builder);
 
                 Calls++;
@@ -172,7 +175,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
         public void OnModelAnnotationChanged_calls_conventions_in_order(
             bool useBuilder,
             bool useScope
-        ) {
+        )
+        {
             var conventions = new ConventionSet();
 
             var convention1 = new ModelAnnotationChangedConvention(false);
@@ -252,7 +256,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
                 IConventionAnnotation annotation,
                 IConventionAnnotation oldAnnotation,
                 IConventionContext<IConventionAnnotation> context
-            ) {
+            )
+            {
                 Assert.NotNull(propertyBuilder.Metadata.Builder);
 
                 Calls.Add(annotation?.Value);
@@ -328,7 +333,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
             public void ProcessEntityTypeAdded(
                 IConventionEntityTypeBuilder entityTypeBuilder,
                 IConventionContext<IConventionEntityTypeBuilder> context
-            ) {
+            )
+            {
                 Assert.Same(entityTypeBuilder, entityTypeBuilder.Metadata.Builder);
 
                 Calls++;
@@ -417,7 +423,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
                 string name,
                 Type type,
                 IConventionContext<string> context
-            ) {
+            )
+            {
                 Assert.Null(modelBuilder.Metadata.FindEntityType(name));
                 Calls++;
 
@@ -442,7 +449,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
                 IConventionModelBuilder modelBuilder,
                 IConventionEntityType entityType,
                 IConventionContext<IConventionEntityType> context
-            ) {
+            )
+            {
                 Assert.Null(modelBuilder.Metadata.FindEntityType(entityType.Name));
                 Calls++;
 
@@ -461,7 +469,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
         public void OnEntityTypeMemberIgnored_calls_conventions_in_order(
             bool useBuilder,
             bool useScope
-        ) {
+        )
+        {
             var conventions = new ConventionSet();
 
             var convention1 = new EntityTypeMemberIgnoredConvention(terminate: false);
@@ -528,7 +537,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
                 IConventionEntityTypeBuilder entityTypeBuilder,
                 string name,
                 IConventionContext<string> context
-            ) {
+            )
+            {
                 Assert.NotNull(entityTypeBuilder.Metadata.Builder);
 
                 Calls.Add(name);
@@ -635,7 +645,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
                 IConventionEntityType newBaseType,
                 IConventionEntityType oldBaseType,
                 IConventionContext<IConventionEntityType> context
-            ) {
+            )
+            {
                 Assert.NotNull(entityTypeBuilder.Metadata.Builder);
 
                 Calls.Add(entityTypeBuilder.Metadata.BaseType?.ClrType);
@@ -758,7 +769,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
                 IConventionKey newPrimaryKey,
                 IConventionKey previousPrimaryKey,
                 IConventionContext<IConventionKey> context
-            ) {
+            )
+            {
                 Assert.NotNull(entityTypeBuilder.Metadata.Builder);
 
                 Calls.Add(previousPrimaryKey?.Properties.First().Name);
@@ -778,7 +790,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
         public void OnEntityTypeAnnotationChanged_calls_conventions_in_order(
             bool useBuilder,
             bool useScope
-        ) {
+        )
+        {
             var conventions = new ConventionSet();
 
             var convention1 = new EntityTypeAnnotationChangedConvention(terminate: false);
@@ -869,7 +882,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
                 IConventionAnnotation annotation,
                 IConventionAnnotation oldAnnotation,
                 IConventionContext<IConventionAnnotation> context
-            ) {
+            )
+            {
                 Calls.Add(annotation?.Value);
 
                 if (_terminate)
@@ -952,7 +966,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
             public void ProcessForeignKeyAdded(
                 IConventionForeignKeyBuilder relationshipBuilder,
                 IConventionContext<IConventionForeignKeyBuilder> context
-            ) {
+            )
+            {
                 var fk = relationshipBuilder.Metadata;
                 Assert.NotNull(fk.Builder);
 
@@ -1044,7 +1059,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
                 IConventionEntityTypeBuilder entityTypeBuilder,
                 IConventionForeignKey foreignKey,
                 IConventionContext<IConventionForeignKey> context
-            ) {
+            )
+            {
                 Assert.NotNull(entityTypeBuilder.Metadata.Builder);
 
                 Calls.Add(foreignKey.Properties.First().Name);
@@ -1216,7 +1232,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
             public void ProcessForeignKeyPrincipalEndChanged(
                 IConventionForeignKeyBuilder relationshipBuilder,
                 IConventionContext<IConventionForeignKeyBuilder> context
-            ) {
+            )
+            {
                 Assert.NotNull(relationshipBuilder.Metadata.Builder);
 
                 Calls.Add(relationshipBuilder.Metadata.PrincipalEntityType.DisplayName());
@@ -1233,7 +1250,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
         [ConditionalTheory]
         public void OnForeignKeyPropertiesChangedConvention_calls_conventions_in_order(
             bool useScope
-        ) {
+        )
+        {
             var conventions = new ConventionSet();
 
             var convention1 = new ForeignKeyPropertiesChangedConvention(terminate: false);
@@ -1303,7 +1321,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
                 IReadOnlyList<IConventionProperty> oldDependentProperties,
                 IConventionKey oldPrincipalKey,
                 IConventionContext<IReadOnlyList<IConventionProperty>> context
-            ) {
+            )
+            {
                 Assert.NotNull(relationshipBuilder.Metadata.Builder);
                 Assert.NotNull(oldDependentProperties);
                 Assert.NotNull(oldPrincipalKey);
@@ -1345,7 +1364,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
         public void OnForeignKeyUniquenessChanged_calls_conventions_in_order(
             bool useBuilder,
             bool useScope
-        ) {
+        )
+        {
             var conventions = new ConventionSet();
 
             var convention1 = new ForeignKeyUniquenessChangedConvention(terminate: false);
@@ -1441,7 +1461,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
             public void ProcessForeignKeyUniquenessChanged(
                 IConventionForeignKeyBuilder relationshipBuilder,
                 IConventionContext<bool?> context
-            ) {
+            )
+            {
                 Assert.NotNull(relationshipBuilder.Metadata.Builder);
 
                 Calls.Add(relationshipBuilder.Metadata.IsUnique);
@@ -1461,7 +1482,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
         public void OnForeignKeyRequirednessChanged_calls_conventions_in_order(
             bool useBuilder,
             bool useScope
-        ) {
+        )
+        {
             var conventions = new ConventionSet();
 
             var convention1 = new ForeignKeyRequirednessChangedConvention(terminate: false);
@@ -1558,7 +1580,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
             public void ProcessForeignKeyRequirednessChanged(
                 IConventionForeignKeyBuilder relationshipBuilder,
                 IConventionContext<bool?> context
-            ) {
+            )
+            {
                 Assert.NotNull(relationshipBuilder.Metadata.Builder);
 
                 Calls.Add(relationshipBuilder.Metadata.IsRequired);
@@ -1578,7 +1601,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
         public void OnForeignKeyDependentRequirednessChanged_calls_conventions_in_order(
             bool useBuilder,
             bool useScope
-        ) {
+        )
+        {
             var conventions = new ConventionSet();
 
             var convention1 = new ForeignKeyDependentRequirednessChangedConvention(
@@ -1685,7 +1709,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
             public void ProcessForeignKeyDependentRequirednessChanged(
                 IConventionForeignKeyBuilder relationshipBuilder,
                 IConventionContext<bool?> context
-            ) {
+            )
+            {
                 Assert.NotNull(relationshipBuilder.Metadata.Builder);
 
                 Calls.Add(relationshipBuilder.Metadata.IsRequiredDependent);
@@ -1705,7 +1730,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
         public void OnForeignKeyOwnershipChanged_calls_conventions_in_order(
             bool useBuilder,
             bool useScope
-        ) {
+        )
+        {
             var conventions = new ConventionSet();
 
             var convention1 = new ForeignKeyOwnershipChangedConvention(terminate: false);
@@ -1802,7 +1828,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
             public void ProcessForeignKeyOwnershipChanged(
                 IConventionForeignKeyBuilder relationshipBuilder,
                 IConventionContext<bool?> context
-            ) {
+            )
+            {
                 Assert.NotNull(relationshipBuilder.Metadata.Builder);
 
                 Calls.Add(relationshipBuilder.Metadata.IsOwnership);
@@ -1822,7 +1849,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
         public void OnForeignKeyAnnotationChanged_calls_conventions_in_order(
             bool useBuilder,
             bool useScope
-        ) {
+        )
+        {
             var conventions = new ConventionSet();
 
             var convention1 = new ForeignKeyAnnotationChangedConvention(terminate: false);
@@ -1930,7 +1958,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
                 IConventionAnnotation annotation,
                 IConventionAnnotation oldAnnotation,
                 IConventionContext<IConventionAnnotation> context
-            ) {
+            )
+            {
                 Assert.NotNull(relationshipBuilder.Metadata.Builder);
 
                 Calls.Add(annotation?.Value);
@@ -2035,7 +2064,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
             public void ProcessNavigationAdded(
                 IConventionNavigationBuilder navigationBuilder,
                 IConventionContext<IConventionNavigationBuilder> context
-            ) {
+            )
+            {
                 var navigation = navigationBuilder.Metadata;
                 var foreignKey = navigation.ForeignKey;
 
@@ -2067,7 +2097,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
         public void OnNavigationAnnotationChanged_calls_conventions_in_order(
             bool useBuilder,
             bool useScope
-        ) {
+        )
+        {
             var conventions = new ConventionSet();
 
             var convention1 = new NavigationAnnotationChangedConvention(terminate: false);
@@ -2169,7 +2200,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
                 IConventionAnnotation annotation,
                 IConventionAnnotation oldAnnotation,
                 IConventionContext<IConventionAnnotation> context
-            ) {
+            )
+            {
                 Assert.NotNull(relationshipBuilder.Metadata.Builder);
 
                 Calls.Add(annotation?.Value);
@@ -2287,7 +2319,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
                 string navigationName,
                 MemberInfo memberInfo,
                 IConventionContext<string> context
-            ) {
+            )
+            {
                 Assert.NotNull(sourceEntityTypeBuilder.Metadata.Builder);
 
                 Calls.Add(navigationName);
@@ -2371,7 +2404,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
             public void ProcessSkipNavigationAdded(
                 IConventionSkipNavigationBuilder skipNavigationBuilder,
                 IConventionContext<IConventionSkipNavigationBuilder> context
-            ) {
+            )
+            {
                 Assert.True(skipNavigationBuilder.Metadata.IsInModel);
 
                 Calls.Add(skipNavigationBuilder.Metadata.Name);
@@ -2395,7 +2429,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
         public void OnSkipNavigationAnnotationChanged_calls_conventions_in_order(
             bool useBuilder,
             bool useScope
-        ) {
+        )
+        {
             var conventions = new ConventionSet();
 
             var convention1 = new SkipNavigationAnnotationChangedConvention(terminate: false);
@@ -2497,7 +2532,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
                 IConventionAnnotation annotation,
                 IConventionAnnotation oldAnnotation,
                 IConventionContext<IConventionAnnotation> context
-            ) {
+            )
+            {
                 Assert.True(navigationBuilder.Metadata.IsInModel);
 
                 Calls.Add(annotation?.Value);
@@ -2517,7 +2553,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
         public void OnSkipNavigationForeignKeyChanged_calls_conventions_in_order(
             bool useBuilder,
             bool useScope
-        ) {
+        )
+        {
             var conventions = new ConventionSet();
 
             var convention1 = new SkipNavigationForeignKeyChangedConvention(terminate: false);
@@ -2606,7 +2643,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
                 IConventionForeignKey foreignKey,
                 IConventionForeignKey oldForeignKey,
                 IConventionContext<IConventionForeignKey> context
-            ) {
+            )
+            {
                 Assert.True(navigationBuilder.Metadata.IsInModel);
 
                 Calls.Add(foreignKey);
@@ -2631,7 +2669,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
         public void OnSkipNavigationInverseChanged_calls_conventions_in_order(
             bool useBuilder,
             bool useScope
-        ) {
+        )
+        {
             var conventions = new ConventionSet();
 
             var convention1 = new SkipNavigationInverseChangedConvention(terminate: false);
@@ -2728,7 +2767,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
                 IConventionSkipNavigation inverse,
                 IConventionSkipNavigation oldInverse,
                 IConventionContext<IConventionSkipNavigation> context
-            ) {
+            )
+            {
                 Assert.True(skipNavigationBuilder.Metadata.IsInModel);
 
                 Calls.Add(inverse.Name);
@@ -2809,7 +2849,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
                 IConventionEntityTypeBuilder entityTypeBuilder,
                 IConventionSkipNavigation navigation,
                 IConventionContext<IConventionSkipNavigation> context
-            ) {
+            )
+            {
                 Assert.NotNull(entityTypeBuilder.Metadata.Builder);
 
                 Calls.Add(navigation.Name);
@@ -2890,7 +2931,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
             public void ProcessKeyAdded(
                 IConventionKeyBuilder keyBuilder,
                 IConventionContext<IConventionKeyBuilder> context
-            ) {
+            )
+            {
                 Assert.NotNull(keyBuilder.Metadata.Builder);
 
                 Calls.Add(keyBuilder.Metadata.Properties.First().Name);
@@ -2961,7 +3003,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
                 IConventionEntityTypeBuilder entityTypeBuilder,
                 IConventionKey key,
                 IConventionContext<IConventionKey> context
-            ) {
+            )
+            {
                 Assert.NotNull(entityTypeBuilder.Metadata.Builder);
 
                 Calls.Add(key.Properties.First().Name);
@@ -2981,7 +3024,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
         public void OnKeyAnnotationChanged_calls_conventions_in_order(
             bool useBuilder,
             bool useScope
-        ) {
+        )
+        {
             var conventions = new ConventionSet();
 
             var convention1 = new KeyAnnotationChangedConvention(terminate: false);
@@ -3074,7 +3118,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
                 IConventionAnnotation annotation,
                 IConventionAnnotation oldAnnotation,
                 IConventionContext<IConventionAnnotation> context
-            ) {
+            )
+            {
                 Assert.NotNull(keyBuilder.Metadata.Builder);
 
                 Calls.Add(annotation?.Value);
@@ -3151,7 +3196,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
             public void ProcessIndexAdded(
                 IConventionIndexBuilder indexBuilder,
                 IConventionContext<IConventionIndexBuilder> context
-            ) {
+            )
+            {
                 Assert.NotNull(indexBuilder.Metadata.Builder);
 
                 Calls.Add(indexBuilder.Metadata.Properties.First().Name);
@@ -3227,7 +3273,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
                 IConventionEntityTypeBuilder entityTypeBuilder,
                 IConventionIndex index,
                 IConventionContext<IConventionIndex> context
-            ) {
+            )
+            {
                 Assert.NotNull(entityTypeBuilder.Metadata.Builder);
 
                 Calls.Add(index.Properties.First().Name);
@@ -3247,7 +3294,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
         public void OnIndexUniquenessChanged_calls_conventions_in_order(
             bool useBuilder,
             bool useScope
-        ) {
+        )
+        {
             var conventions = new ConventionSet();
 
             var convention1 = new IndexUniquenessChangedConvention(terminate: false);
@@ -3329,7 +3377,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
             public void ProcessIndexUniquenessChanged(
                 IConventionIndexBuilder indexBuilder,
                 IConventionContext<bool?> context
-            ) {
+            )
+            {
                 Assert.NotNull(indexBuilder.Metadata.Builder);
 
                 Calls.Add(indexBuilder.Metadata.IsUnique);
@@ -3349,7 +3398,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
         public void OnIndexAnnotationChanged_calls_conventions_in_order(
             bool useBuilder,
             bool useScope
-        ) {
+        )
+        {
             var conventions = new ConventionSet();
 
             var convention1 = new IndexAnnotationChangedConvention(terminate: false);
@@ -3438,7 +3488,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
                 IConventionAnnotation annotation,
                 IConventionAnnotation oldAnnotation,
                 IConventionContext<IConventionAnnotation> context
-            ) {
+            )
+            {
                 Assert.NotNull(indexBuilder.Metadata.Builder);
 
                 Calls.Add(annotation?.Value);
@@ -3552,7 +3603,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
             public void ProcessPropertyAdded(
                 IConventionPropertyBuilder propertyBuilder,
                 IConventionContext<IConventionPropertyBuilder> context
-            ) {
+            )
+            {
                 Assert.True(propertyBuilder.Metadata.IsInModel);
 
                 Calls.Add(propertyBuilder.Metadata.Name);
@@ -3575,7 +3627,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
         public void OnPropertyNullabilityChanged_calls_conventions_in_order(
             bool useBuilder,
             bool useScope
-        ) {
+        )
+        {
             var conventions = new ConventionSet();
 
             var convention1 = new PropertyNullabilityChangedConvention(false);
@@ -3698,7 +3751,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
             public void ProcessPropertyNullabilityChanged(
                 IConventionPropertyBuilder propertyBuilder,
                 IConventionContext<bool?> context
-            ) {
+            )
+            {
                 Calls.Add(propertyBuilder.Metadata.IsNullable);
 
                 if (_terminate)
@@ -3716,7 +3770,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
         public void OnPropertyFieldChanged_calls_conventions_in_order(
             bool useBuilder,
             bool useScope
-        ) {
+        )
+        {
             var conventions = new ConventionSet();
 
             var convention1 = new PropertyFieldChangedConvention(terminate: false);
@@ -3809,7 +3864,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
                 FieldInfo newFieldInfo,
                 FieldInfo oldFieldInfo,
                 IConventionContext<FieldInfo> context
-            ) {
+            )
+            {
                 Assert.True(propertyBuilder.Metadata.IsInModel);
 
                 Calls.Add(oldFieldInfo?.Name);
@@ -3829,7 +3885,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
         public void OnPropertyAnnotationChanged_calls_conventions_in_order(
             bool useBuilder,
             bool useScope
-        ) {
+        )
+        {
             var conventions = new ConventionSet();
 
             var convention1 = new PropertyAnnotationChangedConvention(false);
@@ -3922,7 +3979,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
                 IConventionAnnotation annotation,
                 IConventionAnnotation oldAnnotation,
                 IConventionContext<IConventionAnnotation> context
-            ) {
+            )
+            {
                 Assert.True(propertyBuilder.Metadata.IsInModel);
 
                 Calls.Add(annotation?.Value);
@@ -3997,7 +4055,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
                 IConventionEntityTypeBuilder entityTypeBuilder,
                 IConventionProperty property,
                 IConventionContext<IConventionProperty> context
-            ) {
+            )
+            {
                 Assert.NotNull(entityTypeBuilder.Metadata.Builder);
 
                 Calls.Add(property);

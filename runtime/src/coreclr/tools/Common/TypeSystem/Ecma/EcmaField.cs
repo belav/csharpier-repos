@@ -149,7 +149,8 @@ namespace Internal.TypeSystem.Ecma
                     if (
                         metadataReader.StringComparer.Equals(nameHandle, "ThreadStaticAttribute")
                         && metadataReader.StringComparer.Equals(namespaceHandle, "System")
-                    ) {
+                    )
+                    {
                         flags |= FieldFlags.ThreadStatic;
                     }
                     else if (
@@ -158,7 +159,8 @@ namespace Internal.TypeSystem.Ecma
                             namespaceHandle,
                             "System.Runtime.CompilerServices"
                         )
-                    ) {
+                    )
+                    {
                         flags |= FieldFlags.Intrinsic;
                     }
                 }

@@ -325,7 +325,8 @@ namespace Microsoft.AspNetCore.Cors.Infrastructure
         [InlineData("OPTIONS")]
         public void EvaluatePolicy_CaseInsensitivePreflightRequest_OriginAllowed_ReturnsOrigin(
             string preflightMethod
-        ) {
+        )
+        {
             // Arrange
             var corsService = GetCorsService();
             var requestContext = GetHttpContext(
@@ -454,7 +455,8 @@ namespace Microsoft.AspNetCore.Cors.Infrastructure
         [InlineData("PUT")]
         public void EvaluatePolicy_CaseInsensitivePreflightRequest_ReturnsAllowedMethods(
             string method
-        ) {
+        )
+        {
             // Arrange
             var corsService = GetCorsService();
             var requestContext = GetHttpContext(
@@ -960,7 +962,8 @@ namespace Microsoft.AspNetCore.Cors.Infrastructure
             string origin = null,
             string accessControlRequestMethod = null,
             string[] accessControlRequestHeaders = null
-        ) {
+        )
+        {
             var context = new DefaultHttpContext();
 
             if (method != null)

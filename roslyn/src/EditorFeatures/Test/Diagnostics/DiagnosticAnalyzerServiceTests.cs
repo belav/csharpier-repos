@@ -222,7 +222,8 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Diagnostics
         [InlineData(false)]
         public async Task TestDisabledByDefaultAnalyzerEnabledWithEditorConfig(
             bool enabledWithEditorconfig
-        ) {
+        )
+        {
             using var workspace = CreateWorkspace();
 
             var analyzerReference = new AnalyzerImageReference(
@@ -338,7 +339,8 @@ dotnet_diagnostic.{DisabledByDefaultAnalyzer.s_compilationRule.Id}.severity = wa
             Func<bool, bool, ImmutableArray<DiagnosticData>, (bool, bool)> resultSetter,
             bool expectedSyntax,
             bool expectedSemantic
-        ) {
+        )
+        {
             Assert.IsType<MockDiagnosticUpdateSourceRegistrationService>(
                 (
                     (IMefHostExportProvider)workspace.Services.HostServices
@@ -784,7 +786,8 @@ dotnet_diagnostic.{NamedTypeAnalyzer.DiagnosticId}.severity = warning
 
         private static AdhocWorkspace CreateWorkspaceWithProjectAndAnalyzer(
             DiagnosticAnalyzer analyzer
-        ) {
+        )
+        {
             var workspace = CreateWorkspace();
             var projectId = ProjectId.CreateNewId();
 
@@ -833,7 +836,8 @@ dotnet_diagnostic.{NamedTypeAnalyzer.DiagnosticId}.severity = warning
             AdhocWorkspace workspace,
             Project project,
             bool expectAnalyzerExecuted
-        ) {
+        )
+        {
             Assert.IsType<MockDiagnosticUpdateSourceRegistrationService>(
                 (
                     (IMefHostExportProvider)workspace.Services.HostServices
@@ -884,7 +888,8 @@ dotnet_diagnostic.{NamedTypeAnalyzer.DiagnosticId}.severity = warning
             bool registerFromInitialize,
             bool testMultiple,
             BackgroundAnalysisScope analysisScope
-        ) {
+        )
+        {
             using var workspace = CreateWorkspace();
             var options = workspace.Options.WithChangedOption(
                 SolutionCrawlerOptions.BackgroundAnalysisScopeOption,
@@ -1009,7 +1014,8 @@ dotnet_diagnostic.{NamedTypeAnalyzer.DiagnosticId}.severity = warning
                     if (
                         analysisScope != BackgroundAnalysisScope.FullSolution
                         && firstAdditionalDocument != additionalDoc
-                    ) {
+                    )
+                    {
                         Assert.Empty(applicableDiagnostics);
                     }
                     else
@@ -1038,7 +1044,8 @@ dotnet_diagnostic.{NamedTypeAnalyzer.DiagnosticId}.severity = warning
             bool includeAnalyzer,
             bool includeSuppressor,
             BackgroundAnalysisScope analysisScope
-        ) {
+        )
+        {
             var analyzers = ArrayBuilder<DiagnosticAnalyzer>.GetInstance();
             if (includeAnalyzer)
             {
@@ -1150,7 +1157,8 @@ dotnet_diagnostic.{NamedTypeAnalyzer.DiagnosticId}.severity = warning
         internal async Task TestRemoveUnnecessaryInlineSuppressionsAnalyzer(
             BackgroundAnalysisScope analysisScope,
             bool testPragma
-        ) {
+        )
+        {
             var analyzers = ImmutableArray.Create<DiagnosticAnalyzer>(
                 new CSharpCompilerDiagnosticAnalyzer(),
                 new NamedTypeAnalyzer(),
@@ -1308,7 +1316,8 @@ class A
         [Theory, CombinatorialData]
         internal async Task TestCancellationDuringDiagnosticComputation_InProc(
             AnalyzerRegisterActionKind actionKind
-        ) {
+        )
+        {
             // This test verifies that we do no attempt to re-use CompilationWithAnalyzers instance in IDE in-proc diagnostic computation in presence of an OperationCanceledException during analysis.
             // Attempting to do so has led to large number of reliability issues and flakiness in diagnostic computation, which we want to avoid.
 
@@ -1427,7 +1436,8 @@ class A
         [WorkItem(49698, "https://github.com/dotnet/roslyn/issues/49698")]
         internal async Task TestOnlyRequiredAnalyzerExecutedDuringDiagnosticComputation(
             bool documentAnalysis
-        ) {
+        )
+        {
             using var workspace = TestWorkspace.CreateCSharp("class A { }");
 
             // Verify that requesting analyzer diagnostics for analyzer1 does not lead to invoking analyzer2.
@@ -1479,7 +1489,8 @@ class A
         [Theory, CombinatorialData]
         internal async Task TestCancellationDuringDiagnosticComputation_OutOfProc(
             AnalyzerRegisterActionKind actionKind
-        ) {
+        )
+        {
             // This test verifies that we do no attempt to re-use CompilationWithAnalyzers instance in IDE OutOfProc diagnostic computation in presence of an OperationCanceledException during analysis.
             // Attempting to do so has led to large number of reliability issues and flakiness in diagnostic computation, which we want to avoid.
             // NOTE: Unfortunately, we cannot perform an end-to-end OutOfProc test, similar to the InProc test above because AnalyzerImageReference is not serializable.
@@ -1680,7 +1691,8 @@ class A
                 Compilation compilation,
                 Action<Diagnostic> reportDiagnostic,
                 CancellationToken cancellationToken
-            ) {
+            )
+            {
                 // Mimic cancellation by throwing an OperationCanceledException in first callback.
                 if (!_cancellationTokenSource.IsCancellationRequested)
                 {
@@ -1727,7 +1739,8 @@ class A
             bool syntax,
             bool semantic,
             ImmutableArray<DiagnosticData> diagnostics
-        ) {
+        )
+        {
             switch (diagnostics.Length)
             {
                 case 0:
@@ -1748,7 +1761,8 @@ class A
             bool syntax,
             bool semantic,
             ImmutableArray<DiagnosticData> diagnostics
-        ) {
+        )
+        {
             syntax |= diagnostics.Any(d => d.Properties["Origin"] == "Syntactic");
             semantic |= diagnostics.Any(d => d.Properties["Origin"] != "Syntactic");
 
@@ -1758,7 +1772,8 @@ class A
         private static async Task RunAllAnalysisAsync(
             IIncrementalAnalyzer analyzer,
             TextDocument textDocument
-        ) {
+        )
+        {
             if (textDocument is Document document)
             {
                 await analyzer.AnalyzeSyntaxAsync(
@@ -2051,7 +2066,8 @@ class A
             public override async Task<ImmutableArray<Diagnostic>> AnalyzeSyntaxAsync(
                 Document document,
                 CancellationToken cancellationToken
-            ) {
+            )
+            {
                 var root = await document.GetSyntaxRootAsync(cancellationToken)
                     .ConfigureAwait(false);
                 return ImmutableArray.Create(Diagnostic.Create(s_syntaxRule, root.GetLocation()));

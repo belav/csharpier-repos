@@ -83,7 +83,8 @@ namespace System.Security.Cryptography.X509Certificates.Asn1
             ref AsnValueReader reader,
             ReadOnlyMemory<byte> rebind,
             out TimeAsn decoded
-        ) {
+        )
+        {
             try
             {
                 DecodeCore(ref reader, rebind, out decoded);
@@ -98,7 +99,8 @@ namespace System.Security.Cryptography.X509Certificates.Asn1
             ref AsnValueReader reader,
             ReadOnlyMemory<byte> rebind,
             out TimeAsn decoded
-        ) {
+        )
+        {
             decoded = default;
             Asn1Tag tag = reader.PeekTag();
 

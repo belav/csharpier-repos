@@ -552,7 +552,8 @@ namespace SoDBench
             ProcessStartInfo processStartInfo,
             int timeoutMilliseconds,
             IDictionary<string, string> environment = null
-        ) {
+        )
+        {
             Console.WriteLine();
             Console.WriteLine(
                 $"{System.Security.Principal.WindowsIdentity.GetCurrent().Name}@{Environment.MachineName} \"{processStartInfo.WorkingDirectory}\""
@@ -684,7 +685,8 @@ namespace SoDBench
                             settings.IgnoreUnknownArguments = true;
                         }
                     )
-                ) {
+                )
+                {
                     SoDBenchOptions options = null;
                     parser.ParseArguments<SoDBenchOptions>(args)
                         .WithParsed(parsed => options = parsed)
@@ -731,7 +733,8 @@ namespace SoDBench
                         options != null
                         && !String.IsNullOrEmpty(options.DotnetExecutable)
                         && !String.IsNullOrEmpty(options.CoreLibariesDirectory)
-                    ) {
+                    )
+                    {
                         throw new ArgumentException(
                             "--dotnet and --corlibs cannot be used together"
                         );

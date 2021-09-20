@@ -26,7 +26,8 @@ namespace System.Runtime.Serialization
             // currently the only way to preserve base, non-public fields is to use All
             [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)]
                 Type type
-        ) {
+        )
+        {
             Debug.Assert(type != null);
 
             if (type.IsInterface)
@@ -108,7 +109,8 @@ namespace System.Runtime.Serialization
                     | DynamicallyAccessedMemberTypes.NonPublicFields
             )]
                 Type type
-        ) {
+        )
+        {
             // Get the list of all fields
             FieldInfo[] fields = type.GetFields(
                 BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance
@@ -120,7 +122,8 @@ namespace System.Runtime.Serialization
                 if (
                     (fields[i].Attributes & FieldAttributes.NotSerialized)
                     == FieldAttributes.NotSerialized
-                ) {
+                )
+                {
                     continue;
                 }
 
@@ -136,7 +139,8 @@ namespace System.Runtime.Serialization
                     if (
                         (fields[i].Attributes & FieldAttributes.NotSerialized)
                         == FieldAttributes.NotSerialized
-                    ) {
+                    )
+                    {
                         continue;
                     }
 
@@ -155,7 +159,8 @@ namespace System.Runtime.Serialization
             Type parentType,
             out Type[]? parentTypes,
             out int parentTypeCount
-        ) {
+        )
+        {
             parentTypes = null;
             parentTypeCount = 0;
 
@@ -176,7 +181,8 @@ namespace System.Runtime.Serialization
                     string t2Name = parentTypes![i].Name;
                     if (
                         t2Name.Length == t1Name.Length && t2Name[0] == t1Name[0] && t1Name == t2Name
-                    ) {
+                    )
+                    {
                         unique = false;
                         break;
                     }
@@ -196,14 +202,16 @@ namespace System.Runtime.Serialization
 
         public static MemberInfo[] GetSerializableMembers(
             [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)] Type type
-        ) {
+        )
+        {
             return GetSerializableMembers(type, new StreamingContext(StreamingContextStates.All));
         }
 
         public static MemberInfo[] GetSerializableMembers(
             [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)] Type type,
             StreamingContext context
-        ) {
+        )
+        {
             if (type == null)
             {
                 throw new ArgumentNullException(nameof(type));
@@ -345,7 +353,8 @@ namespace System.Runtime.Serialization
 
         public static ISerializationSurrogate GetSurrogateForCyclicalReference(
             ISerializationSurrogate innerSurrogate
-        ) {
+        )
+        {
             if (innerSurrogate == null)
             {
                 throw new ArgumentNullException(nameof(innerSurrogate));
@@ -397,7 +406,8 @@ namespace System.Runtime.Serialization
                     typeof(TypeForwardedFromAttribute),
                     false
                 )
-            ) {
+            )
+            {
                 hasTypeForwardedFrom = true;
                 return ((TypeForwardedFromAttribute)first).AssemblyFullName;
             }
@@ -463,7 +473,8 @@ namespace System.Runtime.Serialization
             SerializationInfo info,
             StreamingContext context,
             ISurrogateSelector? selector
-        ) {
+        )
+        {
             return _innerSurrogate.SetObjectData(obj, info, context, selector);
         }
     }

@@ -46,7 +46,8 @@ namespace System.Net.Test.Common
             HttpStatusCode statusCode = HttpStatusCode.OK,
             IList<HttpHeaderData> headers = null,
             string content = ""
-        ) {
+        )
+        {
             HttpRequestData request = await ReadRequestDataAsync().ConfigureAwait(false);
             await SendResponseAsync(statusCode, headers, content).ConfigureAwait(false);
             return request;
@@ -61,7 +62,8 @@ namespace System.Net.Test.Common
 
         public async Task SendSettingsFrameAsync(
             ICollection<(long settingId, long settingValue)> settings
-        ) {
+        )
+        {
             var buffer = new byte[settings.Count * MaximumVarIntBytes * 2];
 
             int bytesWritten = 0;
@@ -218,7 +220,8 @@ namespace System.Net.Test.Common
             IList<HttpHeaderData> headers = null,
             string content = "",
             bool isFinal = true
-        ) {
+        )
+        {
             IEnumerable<HttpHeaderData> newHeaders = headers ?? Enumerable.Empty<HttpHeaderData>();
 
             if (content != null && !newHeaders.Any(x => x.Name == "Content-Length"))
@@ -239,7 +242,8 @@ namespace System.Net.Test.Common
         public async Task SendResponseHeadersAsync(
             HttpStatusCode? statusCode = HttpStatusCode.OK,
             IEnumerable<HttpHeaderData> headers = null
-        ) {
+        )
+        {
             headers ??= Enumerable.Empty<HttpHeaderData>();
 
             // Some tests use Content-Length with a null value to indicate Content-Length should not be set.
@@ -288,7 +292,8 @@ namespace System.Net.Test.Common
 
         private List<(long settingId, long settingValue)> ParseSettingsPayload(
             ReadOnlySpan<byte> settingsPayload
-        ) {
+        )
+        {
             var settings = new List<(long settingId, long settingValue)>();
 
             while (settingsPayload.Length != 0)
@@ -432,7 +437,8 @@ namespace System.Net.Test.Common
             ReadOnlySpan<byte> buffer,
             out long value,
             out int bytesRead
-        ) {
+        )
+        {
             const byte LengthMask = 0xC0;
             const byte LengthOneByte = 0x00;
             const byte LengthTwoByte = 0x40;
@@ -459,7 +465,8 @@ namespace System.Net.Test.Common
                                 buffer,
                                 out ushort serializedShort
                             )
-                        ) {
+                        )
+                        {
                             value = serializedShort - TwoByteSubtract;
                             bytesRead = 2;
                             return true;
@@ -480,7 +487,8 @@ namespace System.Net.Test.Common
                                 buffer,
                                 out ulong serializedLong
                             )
-                        ) {
+                        )
+                        {
                             value = (long)(serializedLong - EightByteSubtract);
                             Debug.Assert(
                                 value >= 0 && value <= VarIntMax,

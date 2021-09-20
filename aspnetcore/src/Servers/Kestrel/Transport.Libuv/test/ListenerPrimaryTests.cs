@@ -294,7 +294,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Transport.Libuv.Tests
             ListenerContext currentListener,
             Task<LibuvConnection> expected = null,
             int connections = 4
-        ) {
+        )
+        {
             for (int i = 0; i < connections; i++)
             {
                 if (currentListener == listenerPrimary)
@@ -320,7 +321,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Transport.Libuv.Tests
             Uri address,
             ListenerContext listenerPrimary,
             ListenerContext listenerSecondary
-        ) {
+        )
+        {
             int maxRetries = 100;
             int retryDelay = 100;
 

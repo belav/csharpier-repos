@@ -330,7 +330,8 @@ namespace Newtonsoft.Json.Utilities
                     value != null
                     || (typeof(T).IsValueType() && !ReflectionUtils.IsNullableType(typeof(T)))
                 )
-            ) {
+            )
+            {
                 return false;
             }
 

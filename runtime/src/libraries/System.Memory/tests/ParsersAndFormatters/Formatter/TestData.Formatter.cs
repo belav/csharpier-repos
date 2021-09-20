@@ -103,7 +103,8 @@ namespace System.Buffers.Text.Tests
         private static IEnumerable<FormatterTestData<T>> CreateFormatterTestData<T>(
             IEnumerable<T> values,
             IEnumerable<SupportedFormat> formats
-        ) {
+        )
+        {
             foreach (T value in values)
             {
                 foreach (SupportedFormat format in formats)

@@ -16,7 +16,8 @@ namespace Microsoft.EntityFrameworkCore.TestUtilities
     {
         public TestRelationalCommandBuilderFactory(
             RelationalCommandBuilderDependencies dependencies
-        ) {
+        )
+        {
             Dependencies = dependencies;
         }
 
@@ -91,7 +92,8 @@ namespace Microsoft.EntityFrameworkCore.TestUtilities
                 RelationalCommandBuilderDependencies dependencies,
                 string commandText,
                 IReadOnlyList<IRelationalParameter> parameters
-            ) {
+            )
+            {
                 _realRelationalCommand = new RelationalCommand(
                     dependencies,
                     commandText,
@@ -122,7 +124,8 @@ namespace Microsoft.EntityFrameworkCore.TestUtilities
             public Task<int> ExecuteNonQueryAsync(
                 RelationalCommandParameterObject parameterObject,
                 CancellationToken cancellationToken = new()
-            ) {
+            )
+            {
                 var connection = parameterObject.Connection;
                 var errorNumber = PreExecution(connection);
 
@@ -157,7 +160,8 @@ namespace Microsoft.EntityFrameworkCore.TestUtilities
             public async Task<object> ExecuteScalarAsync(
                 RelationalCommandParameterObject parameterObject,
                 CancellationToken cancellationToken = new()
-            ) {
+            )
+            {
                 var connection = parameterObject.Connection;
                 var errorNumber = PreExecution(connection);
 
@@ -176,7 +180,8 @@ namespace Microsoft.EntityFrameworkCore.TestUtilities
 
             public RelationalDataReader ExecuteReader(
                 RelationalCommandParameterObject parameterObject
-            ) {
+            )
+            {
                 var connection = parameterObject.Connection;
                 var errorNumber = PreExecution(connection);
 
@@ -194,7 +199,8 @@ namespace Microsoft.EntityFrameworkCore.TestUtilities
             public async Task<RelationalDataReader> ExecuteReaderAsync(
                 RelationalCommandParameterObject parameterObject,
                 CancellationToken cancellationToken = new()
-            ) {
+            )
+            {
                 var connection = parameterObject.Connection;
                 var errorNumber = PreExecution(connection);
 

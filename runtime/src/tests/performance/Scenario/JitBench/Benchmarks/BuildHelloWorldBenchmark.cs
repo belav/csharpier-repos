@@ -15,7 +15,8 @@ namespace JitBench
             string intermediateOutputDir,
             bool useExistingSetup,
             ITestOutputHelper output
-        ) {
+        )
+        {
             using (var setupSection = new IndentedTestOutputHelper("Setup " + Name, output))
             {
                 await SetupHelloWorldProject(
@@ -32,7 +33,8 @@ namespace JitBench
             string intermediateOutputDir,
             bool useExistingSetup,
             ITestOutputHelper output
-        ) {
+        )
+        {
             string helloWorldProjectDir = Path.Combine(intermediateOutputDir, "helloworld");
             //the 'exePath' gets passed as an argument to dotnet.exe
             //in this case it isn't an executable at all, its a CLI command

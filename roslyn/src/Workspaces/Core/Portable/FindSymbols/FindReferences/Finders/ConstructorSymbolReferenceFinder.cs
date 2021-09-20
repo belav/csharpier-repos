@@ -34,7 +34,8 @@ namespace Microsoft.CodeAnalysis.FindSymbols.Finders
             IImmutableSet<Document>? documents,
             FindReferencesSearchOptions options,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var typeName = symbol.ContainingType.Name;
             var documentsWithName = await FindDocumentsAsync(
                     project,
@@ -86,7 +87,8 @@ namespace Microsoft.CodeAnalysis.FindSymbols.Finders
             PredefinedType predefinedType,
             ISyntaxFactsService syntaxFacts,
             SyntaxToken token
-        ) {
+        )
+        {
             return syntaxFacts.TryGetPredefinedType(token, out var actualType)
                 && predefinedType == actualType;
         }
@@ -97,7 +99,8 @@ namespace Microsoft.CodeAnalysis.FindSymbols.Finders
             SemanticModel semanticModel,
             FindReferencesSearchOptions options,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             return FindAllReferencesInDocumentAsync(
                 methodSymbol,
                 document,
@@ -111,7 +114,8 @@ namespace Microsoft.CodeAnalysis.FindSymbols.Finders
             Document document,
             SemanticModel semanticModel,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var findParentNode = GetNamedTypeOrConstructorFindParentNodeFunction(
                 document,
                 methodSymbol
@@ -151,7 +155,8 @@ namespace Microsoft.CodeAnalysis.FindSymbols.Finders
             SemanticModel semanticModel,
             Func<SyntaxToken, SyntaxNode>? findParentNode,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var ordinaryRefs = await FindOrdinaryReferencesAsync(
                     symbol,
                     document,
@@ -196,7 +201,8 @@ namespace Microsoft.CodeAnalysis.FindSymbols.Finders
             SemanticModel semanticModel,
             Func<SyntaxToken, SyntaxNode>? findParentNode,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var name = symbol.ContainingType.Name;
             return FindReferencesInDocumentUsingIdentifierAsync(
                 symbol,
@@ -213,7 +219,8 @@ namespace Microsoft.CodeAnalysis.FindSymbols.Finders
             Document document,
             SemanticModel semanticModel,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var predefinedType = symbol.ContainingType.SpecialType.ToPredefinedType();
             if (predefinedType == PredefinedType.None)
             {
@@ -237,7 +244,8 @@ namespace Microsoft.CodeAnalysis.FindSymbols.Finders
             Document document,
             SemanticModel semanticModel,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var syntaxFacts = document.GetRequiredLanguageService<ISyntaxFactsService>();
             return TryGetNameWithoutAttributeSuffix(
                 symbol.ContainingType.Name,
@@ -261,7 +269,8 @@ namespace Microsoft.CodeAnalysis.FindSymbols.Finders
             Document document,
             SemanticModel semanticModel,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             // Only check `new (...)` calls that supply enough arguments to match all the required parameters for the constructor.
             var minimumArgumentCount = symbol.Parameters.Count(p => !p.IsOptional && !p.IsParams);
             var maximumArgumentCount =
@@ -290,7 +299,8 @@ namespace Microsoft.CodeAnalysis.FindSymbols.Finders
                 ISyntaxFactsService syntaxFacts,
                 ISemanticFactsService semanticFacts,
                 ArrayBuilder<FinderLocation> locations
-            ) {
+            )
+            {
                 if (!syntaxFacts.IsImplicitObjectCreationExpression(node))
                     return;
 

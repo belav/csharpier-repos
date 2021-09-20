@@ -31,7 +31,8 @@ public static class GitHub_23159
     public unsafe static bool BytesOrdinalEqualsStringAndAscii(
         string previousValue,
         Span<byte> newValue
-    ) {
+    )
+    {
         // We just widen the bytes to char for comparision, if either the string or the bytes are not ascii
         // this will result in non-equality, so we don't need to specifically test for non-ascii.
         Debug.Assert(previousValue.Length == newValue.Length);
@@ -52,7 +53,8 @@ public static class GitHub_23159
             // If Vector not-accelerated or remaining less than vector size
             if (
                 !Vector.IsHardwareAccelerated || (byte*)(offset + Vector<byte>.Count) > (byte*)count
-            ) {
+            )
+            {
                 if (IntPtr.Size == 8) // Use Intrinsic switch for branch elimination
                 {
                     // 64-bit: Loop longs by default
@@ -74,7 +76,8 @@ public static class GitHub_23159
                                 != (char)Unsafe.Add(ref bytes, offset + 6)
                             || Unsafe.Add(ref str, offset + 7)
                                 != (char)Unsafe.Add(ref bytes, offset + 7)
-                        ) {
+                        )
+                        {
                             goto NotEqual;
                         }
 
@@ -90,7 +93,8 @@ public static class GitHub_23159
                                 != (char)Unsafe.Add(ref bytes, offset + 2)
                             || Unsafe.Add(ref str, offset + 3)
                                 != (char)Unsafe.Add(ref bytes, offset + 3)
-                        ) {
+                        )
+                        {
                             goto NotEqual;
                         }
 
@@ -110,7 +114,8 @@ public static class GitHub_23159
                                 != (char)Unsafe.Add(ref bytes, offset + 2)
                             || Unsafe.Add(ref str, offset + 3)
                                 != (char)Unsafe.Add(ref bytes, offset + 3)
-                        ) {
+                        )
+                        {
                             goto NotEqual;
                         }
 
@@ -123,7 +128,8 @@ public static class GitHub_23159
                         Unsafe.Add(ref str, offset) != (char)Unsafe.Add(ref bytes, offset)
                         || Unsafe.Add(ref str, offset + 1)
                             != (char)Unsafe.Add(ref bytes, offset + 1)
-                    ) {
+                    )
+                    {
                         goto NotEqual;
                     }
 
@@ -158,7 +164,8 @@ public static class GitHub_23159
                             Vector.Equals(compare1, vector1)
                         )
                     )
-                ) {
+                )
+                {
                     goto NotEqual;
                 }
 

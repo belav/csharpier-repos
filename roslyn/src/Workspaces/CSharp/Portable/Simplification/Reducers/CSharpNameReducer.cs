@@ -36,7 +36,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Simplification
             SemanticModel semanticModel,
             OptionSet optionSet,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             SyntaxNode replacementNode;
 
             if (node.IsKind(SyntaxKind.QualifiedCref, out QualifiedCrefSyntax crefSyntax))
@@ -50,7 +51,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Simplification
                         out _,
                         cancellationToken
                     )
-                ) {
+                )
+                {
                     return node;
                 }
 
@@ -68,7 +70,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Simplification
                         out _,
                         cancellationToken
                     )
-                ) {
+                )
+                {
                     return node;
                 }
 

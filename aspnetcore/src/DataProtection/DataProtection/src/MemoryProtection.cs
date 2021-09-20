@@ -23,7 +23,8 @@ namespace Microsoft.AspNetCore.DataProtection
                     byteCount,
                     CRYPTPROTECTMEMORY_SAME_PROCESS
                 )
-            ) {
+            )
+            {
                 UnsafeNativeMethods.ThrowExceptionForLastCrypt32Error();
             }
         }
@@ -36,7 +37,8 @@ namespace Microsoft.AspNetCore.DataProtection
                     byteCount,
                     CRYPTPROTECTMEMORY_SAME_PROCESS
                 )
-            ) {
+            )
+            {
                 UnsafeNativeMethods.ThrowExceptionForLastCrypt32Error();
             }
         }
@@ -49,7 +51,8 @@ namespace Microsoft.AspNetCore.DataProtection
                     byteCount,
                     CRYPTPROTECTMEMORY_SAME_PROCESS
                 )
-            ) {
+            )
+            {
                 UnsafeNativeMethods.ThrowExceptionForLastCrypt32Error();
             }
         }

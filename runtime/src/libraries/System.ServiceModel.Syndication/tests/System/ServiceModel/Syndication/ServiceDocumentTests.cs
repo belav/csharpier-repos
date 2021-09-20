@@ -114,7 +114,8 @@ namespace System.ServiceModel.Syndication.Tests
             string ns,
             string value,
             string version
-        ) {
+        )
+        {
             var document = new ServiceDocumentSubclass();
             Assert.False(document.TryParseAttributeEntryPoint(name, ns, value, version));
         }

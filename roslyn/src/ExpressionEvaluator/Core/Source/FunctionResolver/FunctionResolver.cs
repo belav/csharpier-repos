@@ -32,7 +32,8 @@ namespace Microsoft.CodeAnalysis.ExpressionEvaluator
         void IDkmRuntimeFunctionResolver.EnableResolution(
             DkmRuntimeFunctionResolutionRequest request,
             DkmWorkList workList
-        ) {
+        )
+        {
             if (request.LineOffset > 0)
             {
                 return;
@@ -45,7 +46,8 @@ namespace Microsoft.CodeAnalysis.ExpressionEvaluator
             DkmModuleInstance moduleInstance,
             DkmWorkList workList,
             DkmEventDescriptorS eventDescriptor
-        ) {
+        )
+        {
             OnModuleLoad(moduleInstance, workList);
         }
 
@@ -53,7 +55,8 @@ namespace Microsoft.CodeAnalysis.ExpressionEvaluator
             DkmModuleInstance moduleInstance,
             DkmWorkList workList,
             DkmEventDescriptor eventDescriptor
-        ) {
+        )
+        {
             // Implementing IDkmModuleInstanceUnloadNotification
             // (with Synchronized="true" in .vsdconfigxml) prevents
             // caller from unloading modules while binding.
@@ -72,7 +75,8 @@ namespace Microsoft.CodeAnalysis.ExpressionEvaluator
             bool isReload,
             DkmWorkList workList,
             DkmEventDescriptor eventDescriptor
-        ) {
+        )
+        {
             OnModuleLoad(moduleInstance, workList);
         }
 
@@ -153,13 +157,15 @@ namespace Microsoft.CodeAnalysis.ExpressionEvaluator
 
         internal sealed override DkmRuntimeFunctionResolutionRequest[] GetRequests(
             DkmProcess process
-        ) {
+        )
+        {
             return process.GetRuntimeFunctionResolutionRequests();
         }
 
         internal sealed override string GetRequestModuleName(
             DkmRuntimeFunctionResolutionRequest request
-        ) {
+        )
+        {
             return request.ModuleName;
         }
 

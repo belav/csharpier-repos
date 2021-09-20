@@ -66,7 +66,8 @@ namespace Microsoft.Cci
             StandaloneSignatureHandle localSignatureHandleOpt,
             ref LocalVariableHandle lastLocalVariableHandle,
             ref LocalConstantHandle lastLocalConstantHandle
-        ) {
+        )
+        {
             if (bodyOpt == null)
             {
                 _debugMetadataOpt.AddMethodDebugInformation(
@@ -508,7 +509,8 @@ namespace Microsoft.Cci
         private ImportScopeHandle GetImportScopeIndex(
             IImportScope scope,
             Dictionary<IImportScope, ImportScopeHandle> scopeIndex
-        ) {
+        )
+        {
             ImportScopeHandle scopeHandle;
             if (scopeIndex.TryGetValue(scope, out scopeHandle))
             {
@@ -642,7 +644,8 @@ namespace Microsoft.Cci
         private static void SerializeTupleElementNames(
             BlobBuilder builder,
             ImmutableArray<string> names
-        ) {
+        )
+        {
             foreach (var name in names)
             {
                 WriteUtf8String(builder, name ?? string.Empty);
@@ -665,7 +668,8 @@ namespace Microsoft.Cci
         private void SerializeAsyncMethodSteppingInfo(
             AsyncMoveNextBodyDebugInfo asyncInfo,
             MethodDefinitionHandle moveNextMethod
-        ) {
+        )
+        {
             Debug.Assert(asyncInfo.ResumeOffsets.Length == asyncInfo.YieldOffsets.Length);
             Debug.Assert(asyncInfo.CatchHandlerOffset >= -1);
 
@@ -692,7 +696,8 @@ namespace Microsoft.Cci
         private void SerializeStateMachineLocalScopes(
             IMethodBody methodBody,
             MethodDefinitionHandle method
-        ) {
+        )
+        {
             var scopes = methodBody.StateMachineHoistedLocalScopes;
             if (scopes.IsDefaultOrEmpty)
             {
@@ -725,7 +730,8 @@ namespace Microsoft.Cci
             ImmutableArray<SequencePoint> sequencePoints,
             Dictionary<DebugSourceDocument, DocumentHandle> documentIndex,
             out DocumentHandle singleDocumentHandle
-        ) {
+        )
+        {
             if (sequencePoints.Length == 0)
             {
                 singleDocumentHandle = default(DocumentHandle);
@@ -810,7 +816,8 @@ namespace Microsoft.Cci
 
         private static DebugSourceDocument TryGetSingleDocument(
             ImmutableArray<SequencePoint> sequencePoints
-        ) {
+        )
+        {
             DebugSourceDocument singleDocument = sequencePoints[0].Document;
             for (int i = 1; i < sequencePoints.Length; i++)
             {
@@ -850,7 +857,8 @@ namespace Microsoft.Cci
         private DocumentHandle GetOrAddDocument(
             DebugSourceDocument document,
             Dictionary<DebugSourceDocument, DocumentHandle> index
-        ) {
+        )
+        {
             if (index.TryGetValue(document, out var documentHandle))
             {
                 return documentHandle;
@@ -862,7 +870,8 @@ namespace Microsoft.Cci
         private DocumentHandle AddDocument(
             DebugSourceDocument document,
             Dictionary<DebugSourceDocument, DocumentHandle> index
-        ) {
+        )
+        {
             DocumentHandle documentHandle;
             DebugSourceInfo info = document.GetSourceInfo();
 
@@ -902,11 +911,13 @@ namespace Microsoft.Cci
         /// </remarks>
         public void AddRemainingDebugDocuments(
             IReadOnlyDictionary<string, DebugSourceDocument> documents
-        ) {
+        )
+        {
             foreach (
                 var kvp in documents.Where(kvp => !_documentIndex.ContainsKey(kvp.Value))
                     .OrderBy(kvp => kvp.Key)
-            ) {
+            )
+            {
                 AddDocument(kvp.Value, _documentIndex);
             }
         }
@@ -918,7 +929,8 @@ namespace Microsoft.Cci
         private void SerializeEncMethodDebugInformation(
             IMethodBody methodBody,
             MethodDefinitionHandle method
-        ) {
+        )
+        {
             var encInfo = GetEncMethodDebugInfo(methodBody);
 
             if (!encInfo.LocalSlots.IsDefaultOrEmpty)
@@ -984,7 +996,8 @@ namespace Microsoft.Cci
         private void EmbedCompilationOptions(
             BlobReader? pdbCompilationOptionsReader,
             CommonPEModuleBuilder module
-        ) {
+        )
+        {
             var builder = new BlobBuilder();
 
             if (pdbCompilationOptionsReader is { } reader)
@@ -1031,7 +1044,8 @@ namespace Microsoft.Cci
                 if (
                     module.CommonCompilation.Options.AssemblyIdentityComparer
                     is DesktopAssemblyIdentityComparer identityComparer
-                ) {
+                )
+                {
                     portabilityPolicy |=
                         identityComparer.PortabilityPolicy.SuppressSilverlightLibraryAssembliesPortability
                             ? 0b1
@@ -1109,7 +1123,8 @@ namespace Microsoft.Cci
                 if (
                     referenceManager.GetMetadataReference(pair.AssemblySymbol)
                     is PortableExecutableReference { FilePath: { } } portableReference
-                ) {
+                )
+                {
                     var fileName = PathUtilities.GetFileName(portableReference.FilePath);
                     var peReader = pair.AssemblySymbol.GetISymbol()
                         is IAssemblySymbol assemblySymbol

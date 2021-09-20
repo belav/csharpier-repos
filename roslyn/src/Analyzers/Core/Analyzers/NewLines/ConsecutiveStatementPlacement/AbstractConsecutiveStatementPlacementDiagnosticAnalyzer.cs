@@ -16,21 +16,21 @@ namespace Microsoft.CodeAnalysis.NewLines.ConsecutiveStatementPlacement
     {
         private readonly ISyntaxFacts _syntaxFacts;
 
-        protected AbstractConsecutiveStatementPlacementDiagnosticAnalyzer(
-            ISyntaxFacts syntaxFacts
-        ) : base(
-            IDEDiagnosticIds.ConsecutiveStatementPlacementDiagnosticId,
-            EnforceOnBuildValues.ConsecutiveStatementPlacement,
-            CodeStyleOptions2.AllowStatementImmediatelyAfterBlock,
-            LanguageNames.CSharp,
-            new LocalizableResourceString(
-                nameof(
-                    AnalyzersResources.Blank_line_required_between_block_and_subsequent_statement
-                ),
-                AnalyzersResources.ResourceManager,
-                typeof(AnalyzersResources)
+        protected AbstractConsecutiveStatementPlacementDiagnosticAnalyzer(ISyntaxFacts syntaxFacts)
+            : base(
+                IDEDiagnosticIds.ConsecutiveStatementPlacementDiagnosticId,
+                EnforceOnBuildValues.ConsecutiveStatementPlacement,
+                CodeStyleOptions2.AllowStatementImmediatelyAfterBlock,
+                LanguageNames.CSharp,
+                new LocalizableResourceString(
+                    nameof(
+                        AnalyzersResources.Blank_line_required_between_block_and_subsequent_statement
+                    ),
+                    AnalyzersResources.ResourceManager,
+                    typeof(AnalyzersResources)
+                )
             )
-        ) {
+        {
             _syntaxFacts = syntaxFacts;
         }
 
@@ -67,7 +67,8 @@ namespace Microsoft.CodeAnalysis.NewLines.ConsecutiveStatementPlacement
             ReportDiagnostic severity,
             SyntaxNode node,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             if (
                 node.ContainsDiagnostics
                 && node.GetDiagnostics().Any(d => d.Severity == DiagnosticSeverity.Error)
@@ -88,7 +89,8 @@ namespace Microsoft.CodeAnalysis.NewLines.ConsecutiveStatementPlacement
             SyntaxTreeAnalysisContext context,
             ReportDiagnostic severity,
             SyntaxNode block
-        ) {
+        )
+        {
             // Don't examine broken blocks.
             var endToken = block.GetLastToken();
             if (endToken.IsMissing)

@@ -21,7 +21,8 @@ namespace Microsoft.AspNetCore.Builder
         public static IServiceCollection AddHostFiltering(
             this IServiceCollection services,
             Action<HostFilteringOptions> configureOptions
-        ) {
+        )
+        {
             if (services == null)
             {
                 throw new ArgumentNullException(nameof(services));

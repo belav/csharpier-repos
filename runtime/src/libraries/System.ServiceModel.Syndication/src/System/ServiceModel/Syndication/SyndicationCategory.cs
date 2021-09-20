@@ -54,7 +54,8 @@ namespace System.ServiceModel.Syndication
             string ns,
             string value,
             string version
-        ) {
+        )
+        {
             return false;
         }
 
@@ -76,7 +77,8 @@ namespace System.ServiceModel.Syndication
         internal void LoadElementExtensions(
             XmlReader readerOverUnparsedExtensions,
             int maxExtensionSize
-        ) {
+        )
+        {
             _extensions.LoadElementExtensions(readerOverUnparsedExtensions, maxExtensionSize);
         }
 

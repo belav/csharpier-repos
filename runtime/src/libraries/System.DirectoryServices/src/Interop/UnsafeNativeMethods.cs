@@ -49,7 +49,8 @@ namespace System.DirectoryServices.Interop
             int flags,
             [In, Out] ref Guid iid,
             [Out, MarshalAs(UnmanagedType.Interface)] out object ppObject
-        ) {
+        )
+        {
             try
             {
                 return IntADsOpenObject(path, userName, password, flags, ref iid, out ppObject);

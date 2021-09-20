@@ -19,7 +19,8 @@ namespace Microsoft.CodeAnalysis.UnitTests
             string commandLine,
             string[] expected,
             bool removeHashComments = false
-        ) {
+        )
+        {
             var actual = CommandLineParser.SplitCommandLineIntoArguments(
                     commandLine,
                     removeHashComments
@@ -58,7 +59,8 @@ namespace Microsoft.CodeAnalysis.UnitTests
             Func<string> messageFormatter,
             bool locSpecific = true,
             params string[] otherSources
-        ) {
+        )
+        {
             CultureInfo saveUICulture = Thread.CurrentThread.CurrentUICulture;
 
             if (locSpecific)

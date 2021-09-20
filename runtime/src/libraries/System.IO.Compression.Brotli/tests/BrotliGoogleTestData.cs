@@ -101,7 +101,8 @@ namespace System.IO.Compression.Tests
                     CompressionMode.Compress,
                     true
                 )
-            ) {
+            )
+            {
                 brotliStream.Write(bytes, 0, bytes.Length);
             }
             memoryStream.Position = 0;
@@ -115,7 +116,8 @@ namespace System.IO.Compression.Tests
             using (MemoryStream decompressed = new MemoryStream())
             using (
                 var decompressor = new BrotliStream(compressed, CompressionMode.Decompress, true)
-            ) {
+            )
+            {
                 decompressor.CopyTo(decompressed);
                 Assert.Equal(expected.Length, decompressed.ToArray().Length);
                 Assert.Equal<byte>(expected, decompressed.ToArray());

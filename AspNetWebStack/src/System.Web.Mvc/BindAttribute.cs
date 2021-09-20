@@ -44,7 +44,8 @@ namespace System.Web.Mvc
             string propertyName,
             ICollection<string> includeProperties,
             ICollection<string> excludeProperties
-        ) {
+        )
+        {
             // We allow a property to be bound if its both in the include list AND not in the exclude list.
             // An empty include list implies all properties are allowed.
             // An empty exclude list implies no properties are disallowed.

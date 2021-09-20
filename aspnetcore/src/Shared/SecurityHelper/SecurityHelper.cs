@@ -23,7 +23,8 @@ namespace Microsoft.Extensions.Internal
         public static ClaimsPrincipal MergeUserPrincipal(
             ClaimsPrincipal? existingPrincipal,
             ClaimsPrincipal? additionalPrincipal
-        ) {
+        )
+        {
             var newPrincipal = new ClaimsPrincipal();
 
             // New principal identities go first

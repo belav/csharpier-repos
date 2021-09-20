@@ -19,7 +19,8 @@ internal static partial class Interop
         internal static unsafe SafeHandle CryptDecodeObjectToMemory(
             CryptDecodeObjectStructType lpszStructType,
             byte[] pbEncoded
-        ) {
+        )
+        {
             fixed (byte* pbEncodedPointer = pbEncoded)
             {
                 return CryptDecodeObjectToMemory(
@@ -34,7 +35,8 @@ internal static partial class Interop
             CryptDecodeObjectStructType lpszStructType,
             IntPtr pbEncoded,
             int cbEncoded
-        ) {
+        )
+        {
             int cbRequired = 0;
 
             if (
@@ -70,7 +72,8 @@ internal static partial class Interop
         internal static unsafe byte[] CryptEncodeObjectToByteArray(
             CryptDecodeObjectStructType lpszStructType,
             void* decoded
-        ) {
+        )
+        {
             int cb = 0;
             if (!CryptEncodeObject(MsgEncodingType.All, lpszStructType, decoded, null, ref cb))
                 throw Marshal.GetLastWin32Error().ToCryptographicException();

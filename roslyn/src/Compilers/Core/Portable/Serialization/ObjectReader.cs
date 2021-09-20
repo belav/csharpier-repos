@@ -91,7 +91,8 @@ namespace Roslyn.Utilities
             Stream stream,
             bool leaveOpen = false,
             CancellationToken cancellationToken = default
-        ) {
+        )
+        {
             if (stream == null)
             {
                 return null;
@@ -115,7 +116,8 @@ namespace Roslyn.Utilities
             Stream stream,
             bool leaveOpen,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var b = stream.ReadByte();
             if (b == -1)
             {
@@ -748,7 +750,8 @@ namespace Roslyn.Utilities
 
         private static Exception DeserializationReadIncorrectNumberOfValuesException(
             string typeName
-        ) {
+        )
+        {
             throw new InvalidOperationException(
                 String.Format(
                     Resources.Deserialization_reader_for_0_read_incorrect_number_of_values,

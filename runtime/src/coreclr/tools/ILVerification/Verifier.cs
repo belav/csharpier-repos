@@ -88,7 +88,8 @@ namespace ILVerify
             PEReader peReader,
             TypeDefinitionHandle typeHandle,
             bool verifyMethods = false
-        ) {
+        )
+        {
             if (peReader == null)
             {
                 throw new ArgumentNullException(nameof(peReader));
@@ -132,7 +133,8 @@ namespace ILVerify
         public IEnumerable<VerificationResult> Verify(
             PEReader peReader,
             MethodDefinitionHandle methodHandle
-        ) {
+        )
+        {
             if (peReader == null)
             {
                 throw new ArgumentNullException(nameof(peReader));
@@ -168,7 +170,8 @@ namespace ILVerify
         private IEnumerable<VerificationResult> VerifyMethods(
             EcmaModule module,
             IEnumerable<MethodDefinitionHandle> methodHandles
-        ) {
+        )
+        {
             foreach (var methodHandle in methodHandles)
             {
                 var method = (EcmaMethod)module.GetMethod(methodHandle);
@@ -189,7 +192,8 @@ namespace ILVerify
             EcmaModule module,
             MethodIL methodIL,
             MethodDefinitionHandle methodHandle
-        ) {
+        )
+        {
             var builder = new ArrayBuilder<VerificationResult>();
             MethodDesc method = methodIL.OwningMethod;
 
@@ -282,7 +286,8 @@ namespace ILVerify
         private IEnumerable<VerificationResult> VerifyType(
             EcmaModule module,
             TypeDefinitionHandle typeHandle
-        ) {
+        )
+        {
             var builder = new ArrayBuilder<VerificationResult>();
 
             try

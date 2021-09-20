@@ -70,7 +70,8 @@ namespace Microsoft.CodeAnalysis.FlowAnalysis
             ImmutableArray<CaptureId> captureIds,
             ITypeSymbol? exceptionType,
             ControlFlowRegion? enclosingRegion
-        ) {
+        )
+        {
             Debug.Assert(firstBlockOrdinal >= 0);
             Debug.Assert(lastBlockOrdinal >= firstBlockOrdinal);
 

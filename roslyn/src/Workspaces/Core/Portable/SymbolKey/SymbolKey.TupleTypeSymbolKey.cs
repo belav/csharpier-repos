@@ -53,7 +53,8 @@ namespace Microsoft.CodeAnalysis
             public static SymbolKeyResolution Resolve(
                 SymbolKeyReader reader,
                 out string? failureReason
-            ) {
+            )
+            {
                 var isError = reader.ReadBoolean();
 
                 return isError
@@ -64,7 +65,8 @@ namespace Microsoft.CodeAnalysis
             private static SymbolKeyResolution ResolveNormalTuple(
                 SymbolKeyReader reader,
                 out string? failureReason
-            ) {
+            )
+            {
                 using var elementNames = reader.ReadStringArray();
                 var elementLocations = ReadElementLocations(
                     reader,
@@ -106,7 +108,8 @@ namespace Microsoft.CodeAnalysis
             private static SymbolKeyResolution ResolveErrorTuple(
                 SymbolKeyReader reader,
                 out string? failureReason
-            ) {
+            )
+            {
                 using var elementNames = reader.ReadStringArray();
                 var elementLocations = ReadElementLocations(
                     reader,
@@ -149,7 +152,8 @@ namespace Microsoft.CodeAnalysis
             private static ImmutableArray<Location> ReadElementLocations(
                 SymbolKeyReader reader,
                 out string? failureReason
-            ) {
+            )
+            {
                 using var elementLocations = reader.ReadLocationArray(out failureReason);
                 if (failureReason != null)
                     return default;

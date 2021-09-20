@@ -63,7 +63,8 @@ namespace Internal.TypeSystem.Interop
                 if (
                     parameterIndex == parameterMetadataArray.Length
                     || i < parameterMetadataArray[parameterIndex].Index
-                ) {
+                )
+                {
                     // if we don't have metadata for the parameter, create a dummy one
                     parameterMetadata = new ParameterMetadata(
                         i,
@@ -125,7 +126,8 @@ namespace Internal.TypeSystem.Interop
         public static bool IsMarshallingRequired(
             MethodSignature methodSig,
             ParameterMetadata[] paramMetadata
-        ) {
+        )
+        {
             for (int i = 0, paramIndex = 0; i < methodSig.Length + 1; i++)
             {
                 ParameterMetadata parameterMetadata =

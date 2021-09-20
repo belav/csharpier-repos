@@ -94,7 +94,8 @@ namespace System.Data.Common
         public virtual Task SaveAsync(
             string savepointName,
             CancellationToken cancellationToken = default
-        ) {
+        )
+        {
             if (cancellationToken.IsCancellationRequested)
             {
                 return Task.FromCanceled(cancellationToken);
@@ -122,7 +123,8 @@ namespace System.Data.Common
         public virtual Task RollbackAsync(
             string savepointName,
             CancellationToken cancellationToken = default
-        ) {
+        )
+        {
             if (cancellationToken.IsCancellationRequested)
             {
                 return Task.FromCanceled(cancellationToken);
@@ -151,7 +153,8 @@ namespace System.Data.Common
         public virtual Task ReleaseAsync(
             string savepointName,
             CancellationToken cancellationToken = default
-        ) {
+        )
+        {
             if (cancellationToken.IsCancellationRequested)
             {
                 return Task.FromCanceled(cancellationToken);

@@ -18,11 +18,13 @@ namespace Microsoft.CodeAnalysis.MetadataAsSource
             public WrappedFieldSymbol(
                 IFieldSymbol fieldSymbol,
                 IDocumentationCommentFormattingService docCommentFormattingService
-            ) : base(
-                fieldSymbol,
-                canImplementImplicitly: false,
-                docCommentFormattingService: docCommentFormattingService
-            ) {
+            )
+                : base(
+                    fieldSymbol,
+                    canImplementImplicitly: false,
+                    docCommentFormattingService: docCommentFormattingService
+                )
+            {
                 _symbol = fieldSymbol;
             }
 

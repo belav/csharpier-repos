@@ -15,7 +15,8 @@ namespace System.Xml.Linq.Tests
             this IEnumerable<T1> source,
             IEnumerable<T2> target,
             Func<T1, T2, bool> comparer
-        ) {
+        )
+        {
             using (IEnumerator<T1> e1 = source.GetEnumerator())
             using (IEnumerator<T2> e2 = target.GetEnumerator())
             {

@@ -1110,7 +1110,8 @@ namespace System.Net.Http
         [InlineData(false)]
         public void IsLocal_ReturnsValueFromContext_WhenBothContextAndPropertyArePresent(
             bool expectedIsLocal
-        ) {
+        )
+        {
             // Arrange
             using (HttpRequestMessage request = CreateRequest())
             {
@@ -1156,7 +1157,8 @@ namespace System.Net.Http
         [InlineData(false)]
         public void ShouldIncludeErrorDetail_ReturnsValueFromContext_WhenOnlyContextIsPresent(
             bool expected
-        ) {
+        )
+        {
             // Arrange
             using (HttpRequestMessage request = CreateRequest())
             {
@@ -1175,7 +1177,8 @@ namespace System.Net.Http
         [InlineData(false)]
         public void ShouldIncludeErrorDetail_ReturnsValueFromProperty_WhenOnlyPropertyIsPresent(
             bool expected
-        ) {
+        )
+        {
             // Arrange
             using (HttpRequestMessage request = CreateRequest())
             {
@@ -1196,7 +1199,8 @@ namespace System.Net.Http
         [InlineData(false)]
         public void ShouldIncludeErrorDetail_ReturnsValueFromContext_WhenBothArePresent(
             bool expected
-        ) {
+        )
+        {
             // Arrange
             using (HttpRequestMessage request = CreateRequest())
             {
@@ -1256,7 +1260,8 @@ namespace System.Net.Http
             bool isLocal,
             bool includeErrorDetail,
             bool expectedResult
-        ) {
+        )
+        {
             // Arrange
             HttpRequestMessage request = CreateRequest();
             HttpConfiguration config = CreateAndAddConfiguration(request);
@@ -1410,7 +1415,8 @@ namespace System.Net.Http
         public void GetQueryNameValuePairs_ReplacesResultWhenUriChangesFromEmpty(
             string firstUri,
             string secondUri
-        ) {
+        )
+        {
             // Arrange
             var request = CreateRequest();
             request.RequestUri = new Uri(firstUri);
@@ -1454,7 +1460,8 @@ namespace System.Net.Http
         public void GetQueryNameValuePairs_ReplacesResultWhenUriChangesToEmpty(
             string firstUri,
             string secondUri
-        ) {
+        )
+        {
             // Arrange
             var request = CreateRequest();
             request.RequestUri = new Uri(firstUri);

@@ -191,7 +191,8 @@ namespace System.Web.Http.Tracing.Tracers
             IHttpController controller,
             string controllerName = "AnyController",
             HttpConfiguration httpConfiguration = null
-        ) {
+        )
+        {
             HttpControllerDescriptor expectedInner = new Mock<HttpControllerDescriptor>().Object;
             expectedInner.ControllerName = controllerName;
             expectedInner.ControllerType = controller.GetType();
@@ -202,7 +203,8 @@ namespace System.Web.Http.Tracing.Tracers
         private static HttpControllerDescriptorTracer GetHttpControllerDescriptorTracer(
             HttpControllerDescriptor controllerDescriptor,
             ITraceWriter traceWriter
-        ) {
+        )
+        {
             if (controllerDescriptor.Configuration == null)
             {
                 controllerDescriptor.Configuration = new HttpConfiguration();
@@ -241,7 +243,8 @@ namespace System.Web.Http.Tracing.Tracers
             public void Initialize(
                 HttpControllerSettings controllerSettings,
                 HttpControllerDescriptor controllerDescriptor
-            ) {
+            )
+            {
                 Initialized(this, EventArgs.Empty);
             }
         }

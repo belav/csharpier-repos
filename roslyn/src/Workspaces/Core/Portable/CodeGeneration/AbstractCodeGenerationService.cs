@@ -25,7 +25,8 @@ namespace Microsoft.CodeAnalysis.CodeGeneration
         protected AbstractCodeGenerationService(
             ISymbolDeclarationService symbolDeclarationService,
             Workspace workspace
-        ) {
+        )
+        {
             _symbolDeclarationService = symbolDeclarationService;
             Workspace = workspace;
         }
@@ -314,8 +315,9 @@ namespace Microsoft.CodeAnalysis.CodeGeneration
 
         protected static void CheckDeclarationNode<TDeclarationNode1, TDeclarationNode2>(
             SyntaxNode destination
-        ) where TDeclarationNode1 : SyntaxNode
-          where TDeclarationNode2 : SyntaxNode
+        )
+            where TDeclarationNode1 : SyntaxNode
+            where TDeclarationNode2 : SyntaxNode
         {
             if (destination == null)
             {
@@ -354,7 +356,8 @@ namespace Microsoft.CodeAnalysis.CodeGeneration
                 !(destination is TDeclarationNode1)
                 && !(destination is TDeclarationNode2)
                 && !(destination is TDeclarationNode3)
-            ) {
+            )
+            {
                 throw new ArgumentException(
                     string.Format(
                         WorkspacesResources.Destination_type_must_be_a_0_1_or_2_but_given_one_is_3,
@@ -384,7 +387,8 @@ namespace Microsoft.CodeAnalysis.CodeGeneration
                 && !(destination is TDeclarationNode2)
                 && !(destination is TDeclarationNode3)
                 && !(destination is TDeclarationNode4)
-            ) {
+            )
+            {
                 throw new ArgumentException(
                     string.Format(
                         WorkspacesResources.Destination_type_must_be_a_0_1_2_or_3_but_given_one_is_4,
@@ -411,7 +415,8 @@ namespace Microsoft.CodeAnalysis.CodeGeneration
             > declarationTransform,
             CodeGenerationOptions? options,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             options ??= CodeGenerationOptions.Default;
 
             var (destinationDeclaration, availableIndices) =
@@ -643,7 +648,8 @@ namespace Microsoft.CodeAnalysis.CodeGeneration
 
         protected static CodeGenerationOptions CreateOptionsForMultipleMembers(
             CodeGenerationOptions options
-        ) {
+        )
+        {
             // For now we ignore the afterThisLocation/beforeThisLocation if we're adding
             // multiple members.  In the future it would be nice to appropriately handle this.
             // The difficulty lies with ensuring that we properly understand the position we're
@@ -659,7 +665,8 @@ namespace Microsoft.CodeAnalysis.CodeGeneration
             IEventSymbol @event,
             CodeGenerationOptions? options,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             return GetEditAsync(
                 solution,
                 destination,
@@ -675,7 +682,8 @@ namespace Microsoft.CodeAnalysis.CodeGeneration
             IFieldSymbol field,
             CodeGenerationOptions? options,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             return GetEditAsync(
                 solution,
                 destination,
@@ -691,7 +699,8 @@ namespace Microsoft.CodeAnalysis.CodeGeneration
             IPropertySymbol property,
             CodeGenerationOptions? options,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             return GetEditAsync(
                 solution,
                 destination,
@@ -707,7 +716,8 @@ namespace Microsoft.CodeAnalysis.CodeGeneration
             INamedTypeSymbol namedType,
             CodeGenerationOptions? options,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             return GetEditAsync(
                 solution,
                 destination,
@@ -723,7 +733,8 @@ namespace Microsoft.CodeAnalysis.CodeGeneration
             INamedTypeSymbol namedType,
             CodeGenerationOptions? options,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             return GetEditAsync(
                 solution,
                 destination,
@@ -739,7 +750,8 @@ namespace Microsoft.CodeAnalysis.CodeGeneration
             INamespaceSymbol @namespace,
             CodeGenerationOptions? options,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             return GetEditAsync(
                 solution,
                 destination,
@@ -755,7 +767,8 @@ namespace Microsoft.CodeAnalysis.CodeGeneration
             IMethodSymbol method,
             CodeGenerationOptions? options,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             return GetEditAsync(
                 solution,
                 destination,
@@ -771,7 +784,8 @@ namespace Microsoft.CodeAnalysis.CodeGeneration
             IEnumerable<ISymbol> members,
             CodeGenerationOptions? options,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             return GetEditAsync(
                 solution,
                 destination,
@@ -787,7 +801,8 @@ namespace Microsoft.CodeAnalysis.CodeGeneration
             INamespaceOrTypeSymbol namespaceOrType,
             CodeGenerationOptions? options,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             if (namespaceOrType == null)
             {
                 throw new ArgumentNullException(nameof(namespaceOrType));
@@ -847,7 +862,8 @@ namespace Microsoft.CodeAnalysis.CodeGeneration
             Func<SyntaxTrivia, bool> isEndOfLineTrivia,
             out int positionOfRemovedNode,
             out IEnumerable<SyntaxTrivia> triviaOfRemovedNode
-        ) {
+        )
+        {
             positionOfRemovedNode = attributeList.FullSpan.Start;
             var leading = attributeList.GetLeadingTrivia();
             var trailing = attributeList.GetTrailingTrivia();
@@ -867,7 +883,8 @@ namespace Microsoft.CodeAnalysis.CodeGeneration
             Func<SyntaxToken, bool> isComma,
             out int positionOfRemovedNode,
             out IEnumerable<SyntaxTrivia> triviaOfRemovedNode
-        ) {
+        )
+        {
             positionOfRemovedNode = attributeToRemove.FullSpan.Start;
             var root = attributeToRemove.SyntaxTree.GetRoot();
             var previousToken = root.FindToken(attributeToRemove.FullSpan.Start - 1);
@@ -900,7 +917,8 @@ namespace Microsoft.CodeAnalysis.CodeGeneration
             ArrayBuilder<SyntaxToken> newModifierTokens,
             SyntaxTokenList modifiersList,
             Func<SyntaxToken, bool> isAccessibilityModifier
-        ) {
+        )
+        {
             using var _ = ArrayBuilder<SyntaxToken>.GetInstance(out var updatedModifiersList);
             var anyAccessModifierSeen = false;
             foreach (var modifier in modifiersList)

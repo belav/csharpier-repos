@@ -730,7 +730,8 @@ namespace System.Xml
                         pDst < pDstEnd
                         && XmlCharType.IsAttributeValueChar((char)(ch = *pSrc))
                         && ch <= 0x7F
-                    ) {
+                    )
+                    {
                         *pDst = (byte)ch;
                         pDst++;
                         pSrc++;
@@ -856,7 +857,8 @@ namespace System.Xml
                         pDst < pDstEnd
                         && XmlCharType.IsAttributeValueChar((char)(ch = *pSrc))
                         && ch <= 0x7F
-                    ) {
+                    )
+                    {
                         *pDst = (byte)ch;
                         pDst++;
                         pSrc++;
@@ -1050,7 +1052,8 @@ namespace System.Xml
 
                     while (
                         pDst < pDstEnd && XmlCharType.IsTextChar((char)(ch = *pSrc)) && ch <= 0x7F
-                    ) {
+                    )
+                    {
                         *pDst = (byte)ch;
                         pDst++;
                         pSrc++;
@@ -1149,8 +1152,7 @@ namespace System.Xml
                 return;
             }
             // write text
-            fixed (char* pSrcBegin = text)
-            fixed (byte* pDstBegin = _bufBytes)
+            fixed (char* pSrcBegin = text)fixed (byte* pDstBegin = _bufBytes)
             {
                 char* pSrc = pSrcBegin;
 
@@ -1172,7 +1174,8 @@ namespace System.Xml
                         && XmlCharType.IsTextChar((char)(ch = *pSrc))
                         && ch != stopChar
                         && ch <= 0x7F
-                    ) {
+                    )
+                    {
                         *pDst = (byte)ch;
                         pDst++;
                         pSrc++;
@@ -1302,8 +1305,7 @@ namespace System.Xml
 
             // write text
 
-            fixed (char* pSrcBegin = text)
-            fixed (byte* pDstBegin = _bufBytes)
+            fixed (char* pSrcBegin = text)fixed (byte* pDstBegin = _bufBytes)
             {
                 char* pSrc = pSrcBegin;
 
@@ -1325,7 +1327,8 @@ namespace System.Xml
                         && XmlCharType.IsAttributeValueChar((char)(ch = *pSrc))
                         && ch != ']'
                         && ch <= 0x7F
-                    ) {
+                    )
+                    {
                         *pDst = (byte)ch;
                         pDst++;
                         pSrc++;
@@ -1459,7 +1462,8 @@ namespace System.Xml
                             LocalAppContextSwitches.DontThrowOnInvalidSurrogatePairs
                             || lowChar <= XmlCharType.SurLowEnd
                         )
-                    ) {
+                    )
+                    {
                         // Calculate Unicode scalar value for easier manipulations (see section 3.7 in Unicode spec)
                         // The scalar value repositions surrogate values to start at 0x10000.
 
@@ -1731,7 +1735,8 @@ namespace System.Xml
             string chars,
             string propertyName,
             bool allowOnlyWhitespace
-        ) {
+        )
+        {
             if (allowOnlyWhitespace)
             {
                 if (!XmlCharType.IsOnlyWhitespace(chars))

@@ -423,7 +423,8 @@ namespace Microsoft.Extensions.FileProviders
         [InlineData("wwwro\0t")]
         public void GetDirectoryContents_ReturnsNotFoundDirectoryContents_ForPathsWithInvalidCharacters(
             string path
-        ) {
+        )
+        {
             // Arrange
             var assembly = new TestAssembly(
                 TestEntry.Directory(

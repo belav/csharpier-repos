@@ -14,7 +14,8 @@ namespace System.Reflection.TypeLoading
         public CustomAttributeArguments(
             IList<CustomAttributeTypedArgument> fixedArguments,
             IList<CustomAttributeNamedArgument> namedArguments
-        ) {
+        )
+        {
             FixedArguments = fixedArguments;
             NamedArguments = namedArguments;
         }

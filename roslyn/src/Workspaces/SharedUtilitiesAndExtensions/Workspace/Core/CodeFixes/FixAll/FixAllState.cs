@@ -34,16 +34,18 @@ namespace Microsoft.CodeAnalysis.CodeFixes
             string? codeActionEquivalenceKey,
             IEnumerable<string> diagnosticIds,
             FixAllContext.DiagnosticProvider fixAllDiagnosticProvider
-        ) : this(
-            fixAllProvider,
-            document,
-            document.Project,
-            codeFixProvider,
-            scope,
-            codeActionEquivalenceKey,
-            diagnosticIds,
-            fixAllDiagnosticProvider
-        ) {
+        )
+            : this(
+                fixAllProvider,
+                document,
+                document.Project,
+                codeFixProvider,
+                scope,
+                codeActionEquivalenceKey,
+                diagnosticIds,
+                fixAllDiagnosticProvider
+            )
+        {
             if (document == null)
             {
                 throw new ArgumentNullException(nameof(document));
@@ -58,16 +60,18 @@ namespace Microsoft.CodeAnalysis.CodeFixes
             string? codeActionEquivalenceKey,
             IEnumerable<string> diagnosticIds,
             FixAllContext.DiagnosticProvider fixAllDiagnosticProvider
-        ) : this(
-            fixAllProvider,
-            null,
-            project,
-            codeFixProvider,
-            scope,
-            codeActionEquivalenceKey,
-            diagnosticIds,
-            fixAllDiagnosticProvider
-        ) {
+        )
+            : this(
+                fixAllProvider,
+                null,
+                project,
+                codeFixProvider,
+                scope,
+                codeActionEquivalenceKey,
+                diagnosticIds,
+                fixAllDiagnosticProvider
+            )
+        {
             if (project == null)
             {
                 throw new ArgumentNullException(nameof(project));
@@ -83,7 +87,8 @@ namespace Microsoft.CodeAnalysis.CodeFixes
             string? codeActionEquivalenceKey,
             IEnumerable<string> diagnosticIds,
             FixAllContext.DiagnosticProvider fixAllDiagnosticProvider
-        ) {
+        )
+        {
             Contract.ThrowIfNull(project);
             if (diagnosticIds == null)
             {
@@ -127,7 +132,8 @@ namespace Microsoft.CodeAnalysis.CodeFixes
             Optional<Project> project = default,
             Optional<FixAllScope> scope = default,
             Optional<string?> codeActionEquivalenceKey = default
-        ) {
+        )
+        {
             var newDocument = document.HasValue ? document.Value : this.Document;
             var newProject = project.HasValue ? project.Value : this.Project;
             var newScope = scope.HasValue ? scope.Value : this.Scope;
@@ -140,7 +146,8 @@ namespace Microsoft.CodeAnalysis.CodeFixes
                 && newProject == this.Project
                 && newScope == this.Scope
                 && newCodeActionEquivalenceKey == this.CodeActionEquivalenceKey
-            ) {
+            )
+            {
                 return this;
             }
 
@@ -163,7 +170,8 @@ namespace Microsoft.CodeAnalysis.CodeFixes
             ImmutableDictionary<Document, ImmutableArray<Diagnostic>> diagnosticsToFix,
             CodeFixProvider codeFixProvider,
             string codeActionEquivalenceKey
-        ) {
+        )
+        {
             var triggerDocument = diagnosticsToFix.First().Key;
             var diagnosticIds = GetDiagnosticsIds(diagnosticsToFix.Values);
             var diagnosticProvider = new FixMultipleDiagnosticProvider(diagnosticsToFix);
@@ -183,7 +191,8 @@ namespace Microsoft.CodeAnalysis.CodeFixes
             ImmutableDictionary<Project, ImmutableArray<Diagnostic>> diagnosticsToFix,
             CodeFixProvider codeFixProvider,
             string codeActionEquivalenceKey
-        ) {
+        )
+        {
             var triggerProject = diagnosticsToFix.First().Key;
             var diagnosticIds = GetDiagnosticsIds(diagnosticsToFix.Values);
             var diagnosticProvider = new FixMultipleDiagnosticProvider(diagnosticsToFix);
@@ -200,7 +209,8 @@ namespace Microsoft.CodeAnalysis.CodeFixes
 
         private static ImmutableHashSet<string> GetDiagnosticsIds(
             IEnumerable<ImmutableArray<Diagnostic>> diagnosticsCollection
-        ) {
+        )
+        {
             var uniqueIds = ImmutableHashSet.CreateBuilder<string>();
             foreach (var diagnostics in diagnosticsCollection)
             {

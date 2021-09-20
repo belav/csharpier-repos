@@ -156,7 +156,8 @@ namespace System.Tests
             short c,
             byte[] d,
             Guid expected
-        ) {
+        )
+        {
             Assert.Equal(expected, new Guid(a, b, c, d));
             Assert.Equal(
                 expected,
@@ -2112,7 +2113,8 @@ namespace System.Tests
             Guid guid,
             string format,
             string expected
-        ) {
+        )
+        {
             _ = expected;
             Assert.False(
                 guid.TryFormat(
@@ -2130,7 +2132,8 @@ namespace System.Tests
             Guid guid,
             string format,
             string expected
-        ) {
+        )
+        {
             _ = expected;
             Assert.False(
                 guid.TryFormat(
@@ -2148,7 +2151,8 @@ namespace System.Tests
             Guid guid,
             string format,
             string expected
-        ) {
+        )
+        {
             char[] chars = new char[guid.ToString(format).Length];
             Assert.True(guid.TryFormat(new Span<char>(chars), out int charsWritten, format));
             Assert.Equal(chars, expected.ToCharArray());

@@ -21,7 +21,8 @@ namespace Microsoft.Diagnostics.Tools.Pgo.TypeRefTypeSystem
             TypeRefTypeSystemType type,
             string name,
             MethodSignature signature
-        ) {
+        )
+        {
             _type = type;
             _name = name;
             _signature = signature;

@@ -24,7 +24,8 @@ namespace System.IO.Ports.Tests
                 SerialPort com = new SerialPort(
                     TCSupport.LocalMachineSerialInfo.FirstAvailablePortName
                 )
-            ) {
+            )
+            {
                 com.Open();
                 Stream serialStream = com.BaseStream;
                 com.Close();
@@ -49,7 +50,8 @@ namespace System.IO.Ports.Tests
                 SerialPort com = new SerialPort(
                     TCSupport.LocalMachineSerialInfo.FirstAvailablePortName
                 )
-            ) {
+            )
+            {
                 com.Open();
                 Stream serialStream = com.BaseStream;
                 com.BaseStream.Close();
@@ -74,7 +76,8 @@ namespace System.IO.Ports.Tests
                 SerialPort com = new SerialPort(
                     TCSupport.LocalMachineSerialInfo.FirstAvailablePortName
                 )
-            ) {
+            )
+            {
                 com.Open();
 
                 Debug.WriteLine("Verifying seek method throws exception after a call to Open()");
@@ -95,7 +98,8 @@ namespace System.IO.Ports.Tests
                 SerialPort com = new SerialPort(
                     TCSupport.LocalMachineSerialInfo.FirstAvailablePortName
                 )
-            ) {
+            )
+            {
                 com.Open();
 
                 Debug.WriteLine(
@@ -118,7 +122,8 @@ namespace System.IO.Ports.Tests
                 SerialPort com = new SerialPort(
                     TCSupport.LocalMachineSerialInfo.FirstAvailablePortName
                 )
-            ) {
+            )
+            {
                 com.Open();
 
                 Debug.WriteLine(
@@ -141,7 +146,8 @@ namespace System.IO.Ports.Tests
                 SerialPort com = new SerialPort(
                     TCSupport.LocalMachineSerialInfo.FirstAvailablePortName
                 )
-            ) {
+            )
+            {
                 com.Open();
 
                 Debug.WriteLine(
@@ -165,7 +171,8 @@ namespace System.IO.Ports.Tests
             long offset,
             int origin,
             Type expectedException
-        ) {
+        )
+        {
             Assert.Throws(expectedException, () => serialStream.Seek(offset, (SeekOrigin)origin));
         }
         #endregion

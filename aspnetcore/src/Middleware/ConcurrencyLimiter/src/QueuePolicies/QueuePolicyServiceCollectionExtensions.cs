@@ -21,7 +21,8 @@ namespace Microsoft.Extensions.DependencyInjection
         public static IServiceCollection AddQueuePolicy(
             this IServiceCollection services,
             Action<QueuePolicyOptions> configure
-        ) {
+        )
+        {
             services.Configure(configure);
             services.AddSingleton<IQueuePolicy, QueuePolicy>();
             return services;
@@ -37,7 +38,8 @@ namespace Microsoft.Extensions.DependencyInjection
         public static IServiceCollection AddStackPolicy(
             this IServiceCollection services,
             Action<QueuePolicyOptions> configure
-        ) {
+        )
+        {
             services.Configure(configure);
             services.AddSingleton<IQueuePolicy, StackPolicy>();
             return services;

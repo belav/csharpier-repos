@@ -47,7 +47,8 @@ namespace System.Text.Json.Serialization.Tests
             int objectHierarchyDepth,
             int maxDepth,
             int expectedPathDepth
-        ) {
+        )
+        {
             int effectiveMaxDepth = maxDepth == 0 ? 64 : maxDepth;
             var rootObj = new TestClassWithCycle("root");
             CreateObjectHierarchy(1, objectHierarchyDepth, rootObj);
@@ -70,7 +71,8 @@ namespace System.Text.Json.Serialization.Tests
             int i,
             int max,
             TestClassWithCycle previous
-        ) {
+        )
+        {
             if (i == max)
             {
                 return null;

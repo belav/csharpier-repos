@@ -49,7 +49,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UseObjectInitializer
                     ExpressionStatementSyntax
                 >
             > matches
-        ) {
+        )
+        {
             return statement.ReplaceNode(
                 objectCreation,
                 GetNewObjectCreation(objectCreation, matches)
@@ -66,7 +67,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UseObjectInitializer
                     ExpressionStatementSyntax
                 >
             > matches
-        ) {
+        )
+        {
             return UseInitializerHelpers.GetNewObjectCreation(
                 objectCreation,
                 CreateExpressions(matches)
@@ -82,7 +84,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UseObjectInitializer
                     ExpressionStatementSyntax
                 >
             > matches
-        ) {
+        )
+        {
             var nodesAndTokens = new List<SyntaxNodeOrToken>();
             for (var i = 0; i < matches.Length; i++)
             {

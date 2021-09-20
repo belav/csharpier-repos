@@ -378,7 +378,8 @@ namespace System.Security.AccessControl.Tests
             string initialRawAclStr,
             string verifierRawAclStr,
             bool removePossible
-        ) {
+        )
+        {
             RawAcl rawAcl = null;
             SystemAcl systemAcl = null;
 
@@ -412,7 +413,8 @@ namespace System.Security.AccessControl.Tests
             InheritanceFlags inheritanceFlags,
             PropagationFlags propagationFlags,
             bool removePossible
-        ) {
+        )
+        {
             bool result = true;
             bool isRemoved = false;
             byte[] sAclBinaryForm = null;
@@ -428,7 +430,8 @@ namespace System.Security.AccessControl.Tests
                 (isRemoved == removePossible)
                 && (systemAcl.Count == rawAcl.Count)
                 && (systemAcl.BinaryLength == rawAcl.BinaryLength)
-            ) {
+            )
+            {
                 sAclBinaryForm = new byte[systemAcl.BinaryLength];
                 rAclBinaryForm = new byte[rawAcl.BinaryLength];
                 systemAcl.GetBinaryForm(sAclBinaryForm, 0);

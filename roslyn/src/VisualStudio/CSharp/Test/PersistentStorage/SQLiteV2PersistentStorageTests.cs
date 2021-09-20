@@ -83,7 +83,8 @@ namespace Microsoft.CodeAnalysis.UnitTests.WorkspaceServices
             public PersistentStorageFaultInjector(
                 Action? onNewConnection = null,
                 Action<Exception>? onFatalError = null
-            ) {
+            )
+            {
                 _onNewConnection = onNewConnection;
                 _onFatalError = onFatalError;
             }

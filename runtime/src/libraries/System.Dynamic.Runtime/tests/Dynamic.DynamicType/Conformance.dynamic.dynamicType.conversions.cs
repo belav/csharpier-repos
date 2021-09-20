@@ -5234,7 +5234,8 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.conversions
                         "ulong",
                         "int"
                     )
-                ) {
+                )
+                {
                     flag = 0;
                 }
             }
@@ -5255,7 +5256,8 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.conversions
                         "int",
                         "MyStruct"
                     )
-                ) {
+                )
+                {
                     flag = 0;
                 }
             }
@@ -5276,7 +5278,8 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.conversions
                         "MyClass",
                         "int"
                     )
-                ) {
+                )
+                {
                     flag = 0;
                 }
             }
@@ -5297,7 +5300,8 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.conversions
                         "MyClass",
                         "int"
                     )
-                ) {
+                )
+                {
                     flag = 0;
                 }
             }
@@ -5318,7 +5322,8 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.conversions
                         "int",
                         "MyStruct"
                     )
-                ) {
+                )
+                {
                     flag = 0;
                 }
             }
@@ -5339,7 +5344,8 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.conversions
                         "ulong",
                         "int"
                     )
-                ) {
+                )
+                {
                     flag = 0;
                 }
             }
@@ -5360,7 +5366,8 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.conversions
                         "int",
                         "ulong"
                     )
-                ) {
+                )
+                {
                     flag = 0;
                 }
             }
@@ -5382,7 +5389,8 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.conversions
                         "ulong",
                         "int"
                     )
-                ) {
+                )
+                {
                     flag = 0;
                 }
             }
@@ -5403,7 +5411,8 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.conversions
                         "Eshort",
                         "int"
                     )
-                ) {
+                )
+                {
                     flag = 0;
                 }
             }
@@ -5647,7 +5656,8 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.conversions
                         "ulong",
                         "long"
                     )
-                ) {
+                )
+                {
                     flag = 0;
                 }
             }
@@ -5668,7 +5678,8 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.conversions
                         "long",
                         "ulong"
                     )
-                ) {
+                )
+                {
                     flag = 0;
                 }
             }
@@ -5689,7 +5700,8 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.conversions
                         "long",
                         "MyStruct"
                     )
-                ) {
+                )
+                {
                     flag = 0;
                 }
             }
@@ -5710,7 +5722,8 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.conversions
                         "MyClass",
                         "long"
                     )
-                ) {
+                )
+                {
                     flag = 0;
                 }
             }
@@ -5731,7 +5744,8 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.conversions
                         "long",
                         "ulong"
                     )
-                ) {
+                )
+                {
                     flag = 0;
                 }
             }
@@ -5752,7 +5766,8 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.conversions
                         "MyClass",
                         "long"
                     )
-                ) {
+                )
+                {
                     flag = 0;
                 }
             }
@@ -5773,7 +5788,8 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.conversions
                         "long",
                         "MyStruct"
                     )
-                ) {
+                )
+                {
                     flag = 0;
                 }
             }
@@ -5794,7 +5810,8 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.conversions
                         "ulong",
                         "long"
                     )
-                ) {
+                )
+                {
                     flag = 0;
                 }
             }
@@ -5815,7 +5832,8 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.conversions
                         "long",
                         "ulong"
                     )
-                ) {
+                )
+                {
                     flag = 0;
                 }
             }
@@ -5837,7 +5855,8 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.conversions
                         "ulong",
                         "long"
                     )
-                ) {
+                )
+                {
                     flag = 0;
                 }
             }
@@ -5858,7 +5877,8 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.conversions
                         "Eulong",
                         "long"
                     )
-                ) {
+                )
+                {
                     flag = 0;
                 }
             }
@@ -5879,7 +5899,8 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.conversions
                         "Eulong",
                         "long"
                     )
-                ) {
+                )
+                {
                     flag = 0;
                 }
             }
@@ -5972,7 +5993,8 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.conversions
                         "MyClass",
                         "uint"
                     )
-                ) {
+                )
+                {
                     flag = 0;
                 }
             }
@@ -5993,7 +6015,8 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.conversions
                         "ulong",
                         "MyStruct"
                     )
-                ) {
+                )
+                {
                     flag = 0;
                 }
             }
@@ -6014,7 +6037,8 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.conversions
                         "MyClass",
                         "byte"
                     )
-                ) {
+                )
+                {
                     flag = 0;
                 }
             }
@@ -6035,7 +6059,8 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.conversions
                         "sbyte",
                         "MyStruct"
                     )
-                ) {
+                )
+                {
                     flag = 0;
                 }
             }
@@ -6056,7 +6081,8 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.conversions
                         "MyClass",
                         "short"
                     )
-                ) {
+                )
+                {
                     flag = 0;
                 }
             }
@@ -6077,7 +6103,8 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.conversions
                         "ushort",
                         "MyStruct"
                     )
-                ) {
+                )
+                {
                     flag = 0;
                 }
             }
@@ -6098,7 +6125,8 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.conversions
                         "MyClass",
                         "float"
                     )
-                ) {
+                )
+                {
                     flag = 0;
                 }
             }
@@ -6119,7 +6147,8 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.conversions
                         "double",
                         "MyStruct"
                     )
-                ) {
+                )
+                {
                     flag = 0;
                 }
             }
@@ -6140,7 +6169,8 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.conversions
                         "MyClass",
                         "decimal"
                     )
-                ) {
+                )
+                {
                     flag = 0;
                 }
             }
@@ -6161,7 +6191,8 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.conversions
                         "bool",
                         "MyStruct"
                     )
-                ) {
+                )
+                {
                     flag = 0;
                 }
             }
@@ -6182,7 +6213,8 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.conversions
                         "MyClass",
                         "char"
                     )
-                ) {
+                )
+                {
                     flag = 0;
                 }
             }
@@ -6203,7 +6235,8 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.conversions
                         "string",
                         "MyStruct"
                     )
-                ) {
+                )
+                {
                     flag = 0;
                 }
             }

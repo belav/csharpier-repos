@@ -19,7 +19,8 @@ namespace Microsoft.CodeAnalysis.ExternalAccess.Pythia.Api
             Solution? solution,
             IReadOnlyList<object?> arguments,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             Contract.ThrowIfFalse(serviceName == "pythia");
             return TryRunRemoteAsync<T>(
                 workspace,
@@ -36,7 +37,8 @@ namespace Microsoft.CodeAnalysis.ExternalAccess.Pythia.Api
             Solution? solution,
             IReadOnlyList<object?> arguments,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var client = await RemoteHostClient.TryGetClientAsync(workspace, cancellationToken)
                 .ConfigureAwait(false);
             if (client == null)

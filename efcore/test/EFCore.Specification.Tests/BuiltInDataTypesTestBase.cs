@@ -664,7 +664,8 @@ namespace Microsoft.EntityFrameworkCore
                 UnwrapNullableType(
                     entityType.FindProperty(nameof(BuiltInDataTypes.Enum64))?.GetProviderClrType()
                 ) == typeof(long)
-            ) {
+            )
+            {
                 var param25 = 1;
                 Assert.Same(
                     entity,
@@ -694,7 +695,8 @@ namespace Microsoft.EntityFrameworkCore
                 UnwrapNullableType(
                     entityType.FindProperty(nameof(BuiltInDataTypes.Enum32))?.GetProviderClrType()
                 ) == typeof(int)
-            ) {
+            )
+            {
                 var param26 = 1;
                 Assert.Same(
                     entity,
@@ -724,7 +726,8 @@ namespace Microsoft.EntityFrameworkCore
                 UnwrapNullableType(
                     entityType.FindProperty(nameof(BuiltInDataTypes.Enum16))?.GetProviderClrType()
                 ) == typeof(short)
-            ) {
+            )
+            {
                 var param27 = 1;
                 Assert.Same(
                     entity,
@@ -754,7 +757,8 @@ namespace Microsoft.EntityFrameworkCore
                 UnwrapNullableType(
                     entityType.FindProperty(nameof(BuiltInDataTypes.Enum8))?.GetProviderClrType()
                 ) == typeof(byte)
-            ) {
+            )
+            {
                 var param28 = 1;
                 Assert.Same(
                     entity,
@@ -992,7 +996,8 @@ namespace Microsoft.EntityFrameworkCore
             if (
                 entityType.FindProperty(nameof(BuiltInNullableDataTypes.TestNullableDateTimeOffset))
                 != null
-            ) {
+            )
+            {
                 DateTimeOffset? param7 = new DateTimeOffset(
                     new DateTime(),
                     TimeSpan.FromHours(-8.0)
@@ -1015,7 +1020,8 @@ namespace Microsoft.EntityFrameworkCore
             if (
                 entityType.FindProperty(nameof(BuiltInNullableDataTypes.TestNullableTimeSpan))
                 != null
-            ) {
+            )
+            {
                 TimeSpan? param8 = new TimeSpan(0, 10, 9, 8, 7);
                 Assert.Same(
                     entity,
@@ -1171,7 +1177,8 @@ namespace Microsoft.EntityFrameworkCore
             if (
                 entityType.FindProperty(nameof(BuiltInNullableDataTypes.TestNullableUnsignedInt16))
                 != null
-            ) {
+            )
+            {
                 ushort? param16 = 1234;
                 Assert.Same(
                     entity,
@@ -1191,7 +1198,8 @@ namespace Microsoft.EntityFrameworkCore
             if (
                 entityType.FindProperty(nameof(BuiltInNullableDataTypes.TestNullableUnsignedInt32))
                 != null
-            ) {
+            )
+            {
                 uint? param17 = 1234565789U;
                 Assert.Same(
                     entity,
@@ -1211,7 +1219,8 @@ namespace Microsoft.EntityFrameworkCore
             if (
                 entityType.FindProperty(nameof(BuiltInNullableDataTypes.TestNullableUnsignedInt64))
                 != null
-            ) {
+            )
+            {
                 ulong? param18 = 1234567890123456789UL;
                 Assert.Same(
                     entity,
@@ -1231,7 +1240,8 @@ namespace Microsoft.EntityFrameworkCore
             if (
                 entityType.FindProperty(nameof(BuiltInNullableDataTypes.TestNullableCharacter))
                 != null
-            ) {
+            )
+            {
                 char? param19 = 'a';
                 Assert.Same(
                     entity,
@@ -1251,7 +1261,8 @@ namespace Microsoft.EntityFrameworkCore
             if (
                 entityType.FindProperty(nameof(BuiltInNullableDataTypes.TestNullableSignedByte))
                 != null
-            ) {
+            )
+            {
                 sbyte? param20 = -128;
                 Assert.Same(
                     entity,
@@ -1344,7 +1355,8 @@ namespace Microsoft.EntityFrameworkCore
                         nameof(BuiltInNullableDataTypes.Enum64)
                     )?.GetProviderClrType()
                 ) == typeof(long)
-            ) {
+            )
+            {
                 int? param25 = 1;
                 Assert.Same(
                     entity,
@@ -1378,7 +1390,8 @@ namespace Microsoft.EntityFrameworkCore
                         nameof(BuiltInNullableDataTypes.Enum32)
                     )?.GetProviderClrType()
                 ) == typeof(int)
-            ) {
+            )
+            {
                 int? param26 = 1;
                 Assert.Same(
                     entity,
@@ -1412,7 +1425,8 @@ namespace Microsoft.EntityFrameworkCore
                         nameof(BuiltInNullableDataTypes.Enum16)
                     )?.GetProviderClrType()
                 ) == typeof(short)
-            ) {
+            )
+            {
                 int? param27 = 1;
                 Assert.Same(
                     entity,
@@ -1446,7 +1460,8 @@ namespace Microsoft.EntityFrameworkCore
                         nameof(BuiltInNullableDataTypes.Enum8)
                     )?.GetProviderClrType()
                 ) == typeof(byte)
-            ) {
+            )
+            {
                 int? param28 = 1;
                 Assert.Same(
                     entity,
@@ -1662,7 +1677,8 @@ namespace Microsoft.EntityFrameworkCore
                     entityType.FindProperty(
                         nameof(BuiltInNullableDataTypes.TestNullableDateTimeOffset)
                     ) != null
-                ) {
+                )
+                {
                     Assert.Same(
                         entity,
                         context.Set<BuiltInNullableDataTypes>()
@@ -1683,7 +1699,8 @@ namespace Microsoft.EntityFrameworkCore
                 if (
                     entityType.FindProperty(nameof(BuiltInNullableDataTypes.TestNullableTimeSpan))
                     != null
-                ) {
+                )
+                {
                     Assert.Same(
                         entity,
                         context.Set<BuiltInNullableDataTypes>()
@@ -1737,7 +1754,8 @@ namespace Microsoft.EntityFrameworkCore
                 if (
                     entityType.FindProperty(nameof(BuiltInNullableDataTypes.TestNullableByte))
                     != null
-                ) {
+                )
+                {
                     Assert.Same(
                         entity,
                         context.Set<BuiltInNullableDataTypes>()
@@ -1786,7 +1804,8 @@ namespace Microsoft.EntityFrameworkCore
                     entityType.FindProperty(
                         nameof(BuiltInNullableDataTypes.TestNullableUnsignedInt16)
                     ) != null
-                ) {
+                )
+                {
                     Assert.Same(
                         entity,
                         context.Set<BuiltInNullableDataTypes>()
@@ -1800,7 +1819,8 @@ namespace Microsoft.EntityFrameworkCore
                     entityType.FindProperty(
                         nameof(BuiltInNullableDataTypes.TestNullableUnsignedInt32)
                     ) != null
-                ) {
+                )
+                {
                     Assert.Same(
                         entity,
                         context.Set<BuiltInNullableDataTypes>()
@@ -1814,7 +1834,8 @@ namespace Microsoft.EntityFrameworkCore
                     entityType.FindProperty(
                         nameof(BuiltInNullableDataTypes.TestNullableUnsignedInt64)
                     ) != null
-                ) {
+                )
+                {
                     Assert.Same(
                         entity,
                         context.Set<BuiltInNullableDataTypes>()
@@ -1831,7 +1852,8 @@ namespace Microsoft.EntityFrameworkCore
                 if (
                     entityType.FindProperty(nameof(BuiltInNullableDataTypes.TestNullableCharacter))
                     != null
-                ) {
+                )
+                {
                     Assert.Same(
                         entity,
                         context.Set<BuiltInNullableDataTypes>()
@@ -1844,7 +1866,8 @@ namespace Microsoft.EntityFrameworkCore
                 if (
                     entityType.FindProperty(nameof(BuiltInNullableDataTypes.TestNullableSignedByte))
                     != null
-                ) {
+                )
+                {
                     Assert.Same(
                         entity,
                         context.Set<BuiltInNullableDataTypes>()
@@ -2065,7 +2088,8 @@ namespace Microsoft.EntityFrameworkCore
                     entityType.FindProperty(
                         nameof(BuiltInNullableDataTypes.TestNullableUnsignedInt16)
                     ) != null
-                ) {
+                )
+                {
                     ushort? param16 = null;
                     Assert.Same(
                         entity,
@@ -2080,7 +2104,8 @@ namespace Microsoft.EntityFrameworkCore
                     entityType.FindProperty(
                         nameof(BuiltInNullableDataTypes.TestNullableUnsignedInt32)
                     ) != null
-                ) {
+                )
+                {
                     uint? param17 = null;
                     Assert.Same(
                         entity,
@@ -2095,7 +2120,8 @@ namespace Microsoft.EntityFrameworkCore
                     entityType.FindProperty(
                         nameof(BuiltInNullableDataTypes.TestNullableUnsignedInt64)
                     ) != null
-                ) {
+                )
+                {
                     ulong? param18 = null;
                     Assert.Same(
                         entity,
@@ -2109,7 +2135,8 @@ namespace Microsoft.EntityFrameworkCore
                 if (
                     entityType.FindProperty(nameof(BuiltInNullableDataTypes.TestNullableCharacter))
                     != null
-                ) {
+                )
+                {
                     char? param19 = null;
                     Assert.Same(
                         entity,
@@ -2123,7 +2150,8 @@ namespace Microsoft.EntityFrameworkCore
                 if (
                     entityType.FindProperty(nameof(BuiltInNullableDataTypes.TestNullableSignedByte))
                     != null
-                ) {
+                )
+                {
                     sbyte? param20 = null;
                     Assert.Same(
                         entity,
@@ -2490,11 +2518,13 @@ namespace Microsoft.EntityFrameworkCore
             IEntityType entityType,
             T expected,
             Expression<Func<T>> actualExpression
-        ) {
+        )
+        {
             if (
                 entityType.FindProperty(((MemberExpression)actualExpression.Body).Member.Name)
                 != null
-            ) {
+            )
+            {
                 var actual = actualExpression.Compile()();
                 var type = UnwrapNullableEnumType(typeof(T));
                 if (IsSignedInteger(type))
@@ -3301,7 +3331,8 @@ namespace Microsoft.EntityFrameworkCore
                             var property in modelBuilder.Entity<BuiltInDataTypes>()
                                 .Metadata.GetProperties()
                                 .Where(p => p.Name != "Id")
-                        ) {
+                        )
+                        {
                             b.Property(property.ClrType, property.Name);
                         }
                     }
@@ -3314,7 +3345,8 @@ namespace Microsoft.EntityFrameworkCore
                             var property in modelBuilder.Entity<BuiltInNullableDataTypes>()
                                 .Metadata.GetProperties()
                                 .Where(p => p.Name != "Id")
-                        ) {
+                        )
+                        {
                             b.Property(property.ClrType, property.Name);
                         }
                     }
@@ -3485,7 +3517,8 @@ namespace Microsoft.EntityFrameworkCore
             {
                 foreach (
                     var property in modelBuilder.Entity<TEntity>().Metadata.GetDeclaredProperties()
-                ) {
+                )
+                {
                     property.IsNullable = false;
                 }
             }

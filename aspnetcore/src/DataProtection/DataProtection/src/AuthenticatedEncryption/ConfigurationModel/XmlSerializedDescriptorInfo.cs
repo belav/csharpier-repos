@@ -23,7 +23,8 @@ namespace Microsoft.AspNetCore.DataProtection.AuthenticatedEncryption.Configurat
         public XmlSerializedDescriptorInfo(
             XElement serializedDescriptorElement,
             Type deserializerType
-        ) {
+        )
+        {
             if (serializedDescriptorElement == null)
             {
                 throw new ArgumentNullException(nameof(serializedDescriptorElement));
@@ -38,7 +39,8 @@ namespace Microsoft.AspNetCore.DataProtection.AuthenticatedEncryption.Configurat
                 !typeof(IAuthenticatedEncryptorDescriptorDeserializer).IsAssignableFrom(
                     deserializerType
                 )
-            ) {
+            )
+            {
                 throw new ArgumentException(
                     Resources.FormatTypeExtensions_BadCast(
                         deserializerType.FullName,

@@ -524,7 +524,8 @@ namespace Microsoft.AspNetCore.Mvc.ModelBinding.Metadata
         public void PropertiesProperty_WithDefaultOrder_OrdersPropertyNamesAsProvided(
             IEnumerable<string> originalNames,
             IEnumerable<string> expectedNames
-        ) {
+        )
+        {
             // Arrange
             var provider = new Mock<IModelMetadataProvider>(MockBehavior.Strict);
             var detailsProvider = new EmptyCompositeMetadataDetailsProvider();
@@ -641,7 +642,8 @@ namespace Microsoft.AspNetCore.Mvc.ModelBinding.Metadata
         public void PropertiesProperty_OrdersPropertyNamesUsingOrder_ThenAsProvided(
             IEnumerable<KeyValuePair<string, int>> originalNamesAndOrders,
             IEnumerable<string> expectedNames
-        ) {
+        )
+        {
             // Arrange
             var provider = new Mock<IModelMetadataProvider>(MockBehavior.Strict);
             var detailsProvider = new EmptyCompositeMetadataDetailsProvider();
@@ -898,7 +900,8 @@ namespace Microsoft.AspNetCore.Mvc.ModelBinding.Metadata
         [MemberData(nameof(ValidationFilterData))]
         public void PropertyValidationFilter_ReflectsFilter_FromValidationMetadata(
             IPropertyValidationFilter value
-        ) {
+        )
+        {
             // Arrange
             var detailsProvider = new EmptyCompositeMetadataDetailsProvider();
             var provider = new DefaultModelMetadataProvider(detailsProvider);
@@ -2084,7 +2087,8 @@ namespace Microsoft.AspNetCore.Mvc.ModelBinding.Metadata
             ModelMetadataIdentity modelIdentity,
             IModelMetadataProvider metadataProvider,
             bool? hasValidators
-        ) {
+        )
+        {
             return new DefaultModelMetadata(
                 metadataProvider,
                 new SetHasValidatorsCompositeMetadataDetailsProvider

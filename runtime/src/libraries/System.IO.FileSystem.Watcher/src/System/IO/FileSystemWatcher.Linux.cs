@@ -292,7 +292,8 @@ namespace System.IO
                 bool includeSubdirectories,
                 NotifyFilters notifyFilters,
                 CancellationToken cancellationToken
-            ) {
+            )
+            {
                 Debug.Assert(watcher != null);
                 Debug.Assert(
                     inotifyHandle != null && !inotifyHandle.IsInvalid && !inotifyHandle.IsClosed
@@ -374,7 +375,8 @@ namespace System.IO
                         (status.Mode & (uint)Interop.Sys.FileTypes.S_IFMT)
                         == Interop.Sys.FileTypes.S_IFLNK
                     )
-                ) {
+                )
+                {
                     return;
                 }
 
@@ -494,7 +496,8 @@ namespace System.IO
             private void RemoveWatchedDirectory(
                 WatchedDirectory directoryEntry,
                 bool removeInotify = true
-            ) {
+            )
+            {
                 Debug.Assert(_includeSubdirectories);
                 lock (SyncObj)
                 {
@@ -514,7 +517,8 @@ namespace System.IO
             private void RemoveWatchedDirectoryUnlocked(
                 WatchedDirectory directoryEntry,
                 bool removeInotify
-            ) {
+            )
+            {
                 // If the directory has children, recursively remove them (see comments on recursion in AddDirectoryWatch).
                 if (directoryEntry.Children != null)
                 {
@@ -587,7 +591,8 @@ namespace System.IO
                     NotifyEvent nextEvent;
                     while (
                         !_cancellationToken.IsCancellationRequested && TryReadEvent(out nextEvent)
-                    ) {
+                    )
+                    {
                         // Try to get the actual watcher from our weak reference.  We maintain a weak reference most of the time
                         // so as to avoid a rooted cycle that would prevent our processing loop from ever ending
                         // if the watcher is dropped by the user without being disposed. If we can't get the watcher,
@@ -626,7 +631,8 @@ namespace System.IO
                                         nextEvent.wd,
                                         out associatedDirectoryEntry
                                     )
-                                ) {
+                                )
+                                {
                                     // The watch descriptor could be missing from our dictionary if it was removed
                                     // due to cancellation, or if we already removed it and this is a related event
                                     // like IN_IGNORED.  In any case, just ignore it... even if for some reason we
@@ -667,7 +673,8 @@ namespace System.IO
                                 (mask & (uint)Interop.Sys.NotifyEvents.IN_MOVED_TO) == 0
                                 || previousEventCookie != nextEvent.cookie
                             )
-                        ) {
+                        )
+                        {
                             // IN_MOVED_FROM without an immediately-following corresponding IN_MOVED_TO.
                             // We have to assume that it was moved outside of our root watch path, which
                             // should be considered a deletion to match Win32 behavior.
@@ -685,7 +692,8 @@ namespace System.IO
                                             child.Name,
                                             StringComparison.Ordinal
                                         )
-                                    ) {
+                                    )
+                                    {
                                         RemoveWatchedDirectory(child);
                                         break;
                                     }
@@ -727,7 +735,8 @@ namespace System.IO
                                 isDir && ((_notifyFilters & NotifyFilters.DirectoryName) == 0)
                                 || (!isDir && ((_notifyFilters & NotifyFilters.FileName) == 0))
                             )
-                        ) {
+                        )
+                        {
                             continue;
                         }
 
@@ -1059,7 +1068,8 @@ namespace System.IO
                         if (
                             c != System.IO.Path.DirectorySeparatorChar
                             && c != System.IO.Path.AltDirectorySeparatorChar
-                        ) {
+                        )
+                        {
                             builder.Append(System.IO.Path.DirectorySeparatorChar);
                         }
                     }

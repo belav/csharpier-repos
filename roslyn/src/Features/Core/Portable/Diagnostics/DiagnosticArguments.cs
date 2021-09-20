@@ -77,7 +77,8 @@ namespace Microsoft.CodeAnalysis.Diagnostics
             AnalysisKind? documentAnalysisKind,
             ProjectId projectId,
             string[] analyzerIds
-        ) {
+        )
+        {
             Debug.Assert(documentId != null || documentSpan == null);
             Debug.Assert(documentId != null || documentAnalysisKind == null);
             Debug.Assert(

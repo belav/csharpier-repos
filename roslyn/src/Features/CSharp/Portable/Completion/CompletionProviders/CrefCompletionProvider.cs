@@ -135,7 +135,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Completion.Providers
             int position,
             OptionSet options,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var tree = await document.GetSyntaxTreeAsync(cancellationToken).ConfigureAwait(false);
             if (!tree.IsEntirelyWithinCrefSyntax(position, cancellationToken))
             {
@@ -204,21 +205,24 @@ namespace Microsoft.CodeAnalysis.CSharp.Completion.Providers
                     SyntaxKind.CrefParameterList,
                     SyntaxKind.CrefBracketedParameterList
                 )
-            ) {
+            )
+            {
                 return false;
             }
 
             if (
                 token.IsKind(SyntaxKind.OpenParenToken)
                 && token.Parent.IsKind(SyntaxKind.CrefParameterList)
-            ) {
+            )
+            {
                 return true;
             }
 
             if (
                 token.IsKind(SyntaxKind.OpenBracketToken)
                 && token.Parent.IsKind(SyntaxKind.CrefBracketedParameterList)
-            ) {
+            )
+            {
                 return true;
             }
 
@@ -242,7 +246,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Completion.Providers
             SyntaxToken token,
             SemanticModel semanticModel,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             if (IsCrefStartContext(token))
             {
                 return GetUnqualifiedSymbols(token, semanticModel, cancellationToken);
@@ -268,7 +273,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Completion.Providers
             SyntaxToken token,
             SemanticModel semanticModel,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var result = ArrayBuilder<ISymbol>.GetInstance();
             result.AddRange(semanticModel.LookupSymbols(token.SpanStart));
 
@@ -287,7 +293,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Completion.Providers
                             if (
                                 (member.IsIndexer() || member.IsUserDefinedOperator())
                                 && member.IsAccessibleWithin(type)
-                            ) {
+                            )
+                            {
                                 result.Add(member);
                             }
                         }
@@ -303,7 +310,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Completion.Providers
             SyntaxToken token,
             SemanticModel semanticModel,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var leftType = semanticModel.GetTypeInfo(parent.Container, cancellationToken).Type;
             var leftSymbol =
                 semanticModel.GetSymbolInfo(parent.Container, cancellationToken).Symbol;
@@ -337,7 +345,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Completion.Providers
             SyntaxToken token,
             int position,
             ImmutableDictionary<string, string> options
-        ) {
+        )
+        {
             var builder = SharedPools.Default<StringBuilder>().Allocate();
             try
             {
@@ -361,7 +370,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Completion.Providers
                             options,
                             out var item
                         )
-                    ) {
+                    )
+                    {
                         yield return item;
                     }
                 }
@@ -381,7 +391,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Completion.Providers
             StringBuilder builder,
             ImmutableDictionary<string, string> options,
             out CompletionItem item
-        ) {
+        )
+        {
             // If the type is a SpecialType, create an additional item using
             // its actual name (as opposed to intrinsic type keyword)
             var typeSymbol = symbol as ITypeSymbol;
@@ -410,7 +421,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Completion.Providers
             int position,
             StringBuilder builder,
             ImmutableDictionary<string, string> options
-        ) {
+        )
+        {
             // For every symbol, we create an item that uses the regular CrefFormat,
             // which uses intrinsic type keywords
             return CreateItem(semanticModel, symbol, token, position, builder, options, CrefFormat);
@@ -424,7 +436,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Completion.Providers
             StringBuilder builder,
             ImmutableDictionary<string, string> options,
             SymbolDisplayFormat unqualifiedCrefFormat
-        ) {
+        )
+        {
             builder.Clear();
             if (symbol is INamespaceOrTypeSymbol && token.IsKind(SyntaxKind.DotToken))
             {
@@ -489,7 +502,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Completion.Providers
             int position,
             StringBuilder builder,
             ImmutableDictionary<string, string> options
-        ) {
+        )
+        {
             var symbolText = builder.ToString();
 
             var insertionText = builder.Replace('<', '{').Replace('>', '}').ToString();
@@ -542,7 +556,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Completion.Providers
             CompletionItem selectedItem,
             char? ch,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             if (!selectedItem.Properties.TryGetValue(InsertionTextProperty, out var insertionText))
             {
                 insertionText = selectedItem.DisplayText;

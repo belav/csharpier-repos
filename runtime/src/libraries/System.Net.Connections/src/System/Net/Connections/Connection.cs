@@ -127,7 +127,8 @@ namespace System.Net.Connections
             IConnectionProperties? properties = null,
             EndPoint? localEndPoint = null,
             EndPoint? remoteEndPoint = null
-        ) {
+        )
+        {
             if (stream == null)
                 throw new ArgumentNullException(nameof(stream));
             return new ConnectionFromStream(
@@ -154,7 +155,8 @@ namespace System.Net.Connections
             IConnectionProperties? properties = null,
             EndPoint? localEndPoint = null,
             EndPoint? remoteEndPoint = null
-        ) {
+        )
+        {
             if (pipe == null)
                 throw new ArgumentNullException(nameof(pipe));
             return new ConnectionFromPipe(
@@ -184,7 +186,8 @@ namespace System.Net.Connections
                 IConnectionProperties? properties,
                 EndPoint? localEndPoint,
                 EndPoint? remoteEndPoint
-            ) {
+            )
+            {
                 _originalStream = stream;
                 _leaveOpen = leaveOpen;
                 _properties = properties;
@@ -198,7 +201,8 @@ namespace System.Net.Connections
             protected override async ValueTask CloseAsyncCore(
                 ConnectionCloseMethod method,
                 CancellationToken cancellationToken
-            ) {
+            )
+            {
                 if (_originalStream == null)
                 {
                     return;
@@ -220,7 +224,8 @@ namespace System.Net.Connections
             bool IConnectionProperties.TryGet(
                 Type propertyKey,
                 [NotNullWhen(true)] out object? property
-            ) {
+            )
+            {
                 property = null;
                 return false;
             }
@@ -244,7 +249,8 @@ namespace System.Net.Connections
                 IConnectionProperties? properties,
                 EndPoint? localEndPoint,
                 EndPoint? remoteEndPoint
-            ) {
+            )
+            {
                 _originalPipe = pipe;
                 _leaveOpen = leaveOpen;
                 _properties = properties;
@@ -258,7 +264,8 @@ namespace System.Net.Connections
             protected override async ValueTask CloseAsyncCore(
                 ConnectionCloseMethod method,
                 CancellationToken cancellationToken
-            ) {
+            )
+            {
                 if (_originalPipe == null)
                 {
                     return;
@@ -313,7 +320,8 @@ namespace System.Net.Connections
             bool IConnectionProperties.TryGet(
                 Type propertyKey,
                 [NotNullWhen(true)] out object? property
-            ) {
+            )
+            {
                 property = null;
                 return false;
             }

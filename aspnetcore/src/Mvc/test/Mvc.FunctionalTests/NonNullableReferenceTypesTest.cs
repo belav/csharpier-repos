@@ -22,7 +22,8 @@ namespace Microsoft.AspNetCore.Mvc.FunctionalTests
     {
         public NonNullableReferenceTypesTest(
             MvcTestFixture<BasicWebSite.StartupWithoutEndpointRouting> fixture
-        ) {
+        )
+        {
             Client = fixture.CreateDefaultClient();
         }
 

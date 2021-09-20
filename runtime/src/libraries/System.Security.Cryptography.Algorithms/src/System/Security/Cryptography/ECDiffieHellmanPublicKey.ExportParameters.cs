@@ -50,7 +50,8 @@ namespace System.Security.Cryptography
         public virtual bool TryExportSubjectPublicKeyInfo(
             Span<byte> destination,
             out int bytesWritten
-        ) {
+        )
+        {
             ECParameters ecParameters = ExportParameters();
             AsnWriter writer = EccKeyFormatHelper.WriteSubjectPublicKeyInfo(ecParameters);
             return writer.TryEncode(destination, out bytesWritten);

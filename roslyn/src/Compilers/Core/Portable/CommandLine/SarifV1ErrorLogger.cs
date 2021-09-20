@@ -109,7 +109,8 @@ namespace Microsoft.CodeAnalysis
                 additionalLocations != null
                 && additionalLocations.Count > 0
                 && additionalLocations.Any(l => HasPath(l))
-            ) {
+            )
+            {
                 _writer.WriteArrayStart("relatedLocations");
 
                 foreach (var additionalLocation in additionalLocations)

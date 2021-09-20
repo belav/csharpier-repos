@@ -10,9 +10,8 @@ namespace Microsoft.EntityFrameworkCore
     public class ManyToManyTrackingProxySqlServerTest
         : ManyToManyTrackingSqlServerTestBase<ManyToManyTrackingProxySqlServerTest.ManyToManyTrackingProxySqlServerFixture>
     {
-        public ManyToManyTrackingProxySqlServerTest(
-            ManyToManyTrackingProxySqlServerFixture fixture
-        ) : base(fixture) { }
+        public ManyToManyTrackingProxySqlServerTest(ManyToManyTrackingProxySqlServerFixture fixture)
+            : base(fixture) { }
 
         public override Task Can_insert_many_to_many_shared_with_payload(bool async)
         {

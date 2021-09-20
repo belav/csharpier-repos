@@ -26,7 +26,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation
             IEnumerable<IIgnorableAssemblyList> ignorableAssemblyLists,
             IBindingRedirectionService bindingRedirectionService = null,
             CancellationToken cancellationToken = default
-        ) {
+        )
+        {
             var analyzerInfos = new List<AnalyzerInfo>();
 
             foreach (var analyzerFilePath in analyzerFilePaths)
@@ -70,7 +71,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation
             List<IIgnorableAssemblyList> ignorableAssemblyLists,
             IBindingRedirectionService bindingRedirectionService,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var builder = ImmutableArray.CreateBuilder<MissingAnalyzerDependency>();
 
             foreach (var analyzerInfo in analyzerInfos)
@@ -89,7 +91,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation
                             ignorableAssemblyList =>
                                 ignorableAssemblyList.Includes(redirectedReference)
                         )
-                    ) {
+                    )
+                    {
                         builder.Add(new MissingAnalyzerDependency(analyzerInfo.Path, reference));
                     }
                 }
@@ -101,7 +104,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation
         private static ImmutableArray<AnalyzerDependencyConflict> FindConflictingAnalyzers(
             List<AnalyzerInfo> analyzerInfos,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var builder = ImmutableArray.CreateBuilder<AnalyzerDependencyConflict>();
 
             foreach (var identityGroup in analyzerInfos.GroupBy(di => di.Identity))
@@ -157,7 +161,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation
 
         private static ImmutableArray<AssemblyIdentity> ReadReferences(
             SystemMetadataReader metadataReader
-        ) {
+        )
+        {
             var builder = ImmutableArray.CreateBuilder<AssemblyIdentity>();
             foreach (var referenceHandle in metadataReader.AssemblyReferences)
             {
@@ -216,7 +221,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation
                 AssemblyIdentity identity,
                 Guid mvid,
                 ImmutableArray<AssemblyIdentity> references
-            ) {
+            )
+            {
                 Path = filePath;
                 Identity = identity;
                 MVID = mvid;

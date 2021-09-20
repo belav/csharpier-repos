@@ -22,14 +22,16 @@ namespace Microsoft.CodeAnalysis.Diagnostics.EngineV2
                 DiagnosticAnalyzer analyzer,
                 (object key, string stateKey) key,
                 out CacheEntry entry
-            ) {
+            )
+            {
                 AssertKey(key);
 
                 entry = default;
                 if (
                     !s_map.TryGetValue(analyzer, out var analyzerMap)
                     || !analyzerMap.TryGetValue(key, out entry)
-                ) {
+                )
+                {
                     return false;
                 }
 
@@ -40,7 +42,8 @@ namespace Microsoft.CodeAnalysis.Diagnostics.EngineV2
                 DiagnosticAnalyzer analyzer,
                 (object key, string stateKey) key,
                 CacheEntry entry
-            ) {
+            )
+            {
                 AssertKey(key);
 
                 // add new cache entry
@@ -58,7 +61,8 @@ namespace Microsoft.CodeAnalysis.Diagnostics.EngineV2
             public static void Remove(
                 DiagnosticAnalyzer analyzer,
                 (object key, string stateKey) key
-            ) {
+            )
+            {
                 AssertKey(key);
                 // remove the entry
                 if (!s_map.TryGetValue(analyzer, out var analyzerMap))

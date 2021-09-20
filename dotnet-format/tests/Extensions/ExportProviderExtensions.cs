@@ -92,7 +92,8 @@ namespace Microsoft.CodeAnalysis.Tools.Tests
             private (Type exportType, Type metadataType, bool isArray) GetContractType(
                 Type contractType,
                 bool importMany
-            ) {
+            )
+            {
                 if (importMany && contractType.BaseType == typeof(Array))
                 {
                     return (contractType.GetElementType(), null, true);
@@ -104,7 +105,8 @@ namespace Microsoft.CodeAnalysis.Tools.Tests
                         contractType.GetGenericTypeDefinition() == typeof(IList<>)
                         || contractType.GetGenericTypeDefinition() == typeof(ICollection<>)
                         || contractType.GetGenericTypeDefinition() == typeof(IEnumerable<>)
-                    ) {
+                    )
+                    {
                         contractType = contractType.GenericTypeArguments[0];
                     }
                 }

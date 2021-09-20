@@ -35,7 +35,8 @@ namespace Castle.Components.DictionaryAdapter
             IDictionary<string, PropertyDescriptor> properties,
             IDictionaryAdapterFactory factory,
             Func<DictionaryAdapterInstance, IDictionaryAdapter> creator
-        ) {
+        )
+        {
             Type = type;
             Implementation = implementation;
             Behaviors = behaviors;
@@ -96,7 +97,8 @@ namespace Castle.Components.DictionaryAdapter
         private static List<T> CollectSharedBehaviors<T>(
             T[] source,
             IDictionaryMetaInitializer[] predicates
-        ) {
+        )
+        {
             var results = null as List<T>;
 
             foreach (var candidate in source)

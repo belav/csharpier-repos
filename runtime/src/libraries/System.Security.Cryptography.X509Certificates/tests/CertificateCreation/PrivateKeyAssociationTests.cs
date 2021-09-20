@@ -85,7 +85,8 @@ namespace System.Security.Cryptography.X509Certificates.Tests.CertificateCreatio
                     RSACryptoServiceProvider stillPersistedKey = new RSACryptoServiceProvider(
                         cspParameters
                     )
-                ) {
+                )
+                {
                     byte[] signature2 = stillPersistedKey.SignData(
                         Array.Empty<byte>(),
                         hashAlgorithm,
@@ -193,7 +194,8 @@ namespace System.Security.Cryptography.X509Certificates.Tests.CertificateCreatio
                     RSACryptoServiceProvider stillPersistedKey = new RSACryptoServiceProvider(
                         cspParameters
                     )
-                ) {
+                )
+                {
                     byte[] signature2 = stillPersistedKey.SignData(
                         Array.Empty<byte>(),
                         hashAlgorithm,

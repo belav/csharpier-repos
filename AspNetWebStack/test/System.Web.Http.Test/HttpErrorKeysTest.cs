@@ -31,7 +31,8 @@ namespace System.Web.Http
         public void HttpErrorKeyProperties_Returns_CorrectKeys(
             Func<string> productUnderTest,
             string expectedResult
-        ) {
+        )
+        {
             // Act
             string actualResult = productUnderTest.Invoke();
 

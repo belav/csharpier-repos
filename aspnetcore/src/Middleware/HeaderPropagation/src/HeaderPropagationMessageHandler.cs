@@ -27,7 +27,8 @@ namespace Microsoft.AspNetCore.HeaderPropagation
         public HeaderPropagationMessageHandler(
             HeaderPropagationMessageHandlerOptions options,
             HeaderPropagationValues values
-        ) {
+        )
+        {
             _options = options ?? throw new ArgumentNullException(nameof(options));
             _values = values ?? throw new ArgumentNullException(nameof(values));
         }
@@ -46,7 +47,8 @@ namespace Microsoft.AspNetCore.HeaderPropagation
         protected override Task<HttpResponseMessage> SendAsync(
             HttpRequestMessage request,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var captured = _values.Headers;
             if (captured == null)
             {
@@ -74,11 +76,13 @@ namespace Microsoft.AspNetCore.HeaderPropagation
                             out var _
                         )
                     )
-                ) {
+                )
+                {
                     if (
                         captured.TryGetValue(entry.CapturedHeaderName, out var stringValues)
                         && !StringValues.IsNullOrEmpty(stringValues)
-                    ) {
+                    )
+                    {
                         if (stringValues.Count == 1)
                         {
                             var value = (string)stringValues;
@@ -87,7 +91,8 @@ namespace Microsoft.AspNetCore.HeaderPropagation
                                     entry.OutboundHeaderName,
                                     value
                                 ) && hasContent
-                            ) {
+                            )
+                            {
                                 request.Content!.Headers.TryAddWithoutValidation(
                                     entry.OutboundHeaderName,
                                     value
@@ -102,7 +107,8 @@ namespace Microsoft.AspNetCore.HeaderPropagation
                                     entry.OutboundHeaderName,
                                     values
                                 ) && hasContent
-                            ) {
+                            )
+                            {
                                 request.Content!.Headers.TryAddWithoutValidation(
                                     entry.OutboundHeaderName,
                                     values

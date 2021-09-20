@@ -19,7 +19,8 @@ namespace R2RDump
             this DebugInfo theThis,
             TextWriter writer,
             DumpOptions dumpOptions
-        ) {
+        )
+        {
             if (theThis.BoundsList.Count > 0)
                 writer.WriteLine("Debug Info");
 
@@ -140,7 +141,8 @@ namespace R2RDump
             this ReadyToRunImportSection.ImportSectionEntry theThis,
             TextWriter writer,
             DumpOptions options
-        ) {
+        )
+        {
             if (!options.Naked)
             {
                 writer.Write($"+{theThis.StartOffset:X4}");
@@ -161,7 +163,8 @@ namespace R2RDump
             this ReadyToRunSection theThis,
             TextWriter writer,
             DumpOptions options
-        ) {
+        )
+        {
             writer.WriteLine(
                 $"Type:  {Enum.GetName(typeof(ReadyToRunSectionType), theThis.Type)} ({theThis.Type:D})"
             );
@@ -176,7 +179,8 @@ namespace R2RDump
             this ReadyToRunMethod theThis,
             TextWriter writer,
             DumpOptions options
-        ) {
+        )
+        {
             writer.WriteLine(theThis.SignatureString);
 
             writer.WriteLine(
@@ -223,7 +227,8 @@ namespace R2RDump
             this RuntimeFunction theThis,
             TextWriter writer,
             DumpOptions options
-        ) {
+        )
+        {
             if (!options.Naked)
             {
                 writer.WriteLine($"Id: {theThis.Id}");
@@ -244,14 +249,16 @@ namespace R2RDump
             if (
                 theThis.UnwindInfo
                 is ILCompiler.Reflection.ReadyToRun.Amd64.UnwindInfo amd64UnwindInfo
-            ) {
+            )
+            {
                 string parsedFlags = "";
                 if (
                     (
                         amd64UnwindInfo.Flags
                         & (int)ILCompiler.Reflection.ReadyToRun.Amd64.UnwindFlags.UNW_FLAG_EHANDLER
                     ) != 0
-                ) {
+                )
+                {
                     parsedFlags += " EHANDLER";
                 }
                 if (
@@ -259,7 +266,8 @@ namespace R2RDump
                         amd64UnwindInfo.Flags
                         & (int)ILCompiler.Reflection.ReadyToRun.Amd64.UnwindFlags.UNW_FLAG_UHANDLER
                     ) != 0
-                ) {
+                )
+                {
                     parsedFlags += " UHANDLER";
                 }
                 if (
@@ -267,7 +275,8 @@ namespace R2RDump
                         amd64UnwindInfo.Flags
                         & (int)ILCompiler.Reflection.ReadyToRun.Amd64.UnwindFlags.UNW_FLAG_CHAININFO
                     ) != 0
-                ) {
+                )
+                {
                     parsedFlags += " CHAININFO";
                 }
                 if (parsedFlags.Length == 0)

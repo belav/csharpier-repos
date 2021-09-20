@@ -39,7 +39,8 @@ namespace System.Diagnostics
                         procs[i].ProcessName,
                         StringComparison.OrdinalIgnoreCase
                     )
-                ) {
+                )
+                {
                     list.Add(procs[i]);
                 }
                 else
@@ -58,7 +59,8 @@ namespace System.Diagnostics
             string userName,
             SecureString password,
             string domain
-        ) {
+        )
+        {
             ProcessStartInfo startInfo = new ProcessStartInfo(fileName);
             startInfo.UserName = userName;
             startInfo.Password = password;
@@ -75,7 +77,8 @@ namespace System.Diagnostics
             string userName,
             SecureString password,
             string domain
-        ) {
+        )
+        {
             ProcessStartInfo startInfo = new ProcessStartInfo(fileName, arguments);
             startInfo.UserName = userName;
             startInfo.Password = password;
@@ -116,7 +119,8 @@ namespace System.Diagnostics
                         | Interop.Advapi32.ProcessOptions.PROCESS_QUERY_LIMITED_INFORMATION,
                     throwIfExited: false
                 )
-            ) {
+            )
+            {
                 // If the process has exited, the handle is invalid.
                 if (handle.IsInvalid)
                     return;
@@ -131,7 +135,8 @@ namespace System.Diagnostics
                         exception.NativeErrorCode == Interop.Errors.ERROR_ACCESS_DENIED
                         && Interop.Kernel32.GetExitCodeProcess(handle, out int localExitCode)
                         && localExitCode != Interop.Kernel32.HandleOptions.STILL_ACTIVE
-                    ) {
+                    )
+                    {
                         return;
                     }
 
@@ -210,7 +215,8 @@ namespace System.Diagnostics
                 using (
                     Interop.Kernel32.ProcessWaitHandle processWaitHandle =
                         new Interop.Kernel32.ProcessWaitHandle(handle)
-                ) {
+                )
+                {
                     return _signaled = processWaitHandle.WaitOne(milliseconds);
                 }
             }
@@ -250,7 +256,8 @@ namespace System.Diagnostics
                         | Interop.Advapi32.ProcessOptions.SYNCHRONIZE,
                     false
                 )
-            ) {
+            )
+            {
                 if (handle.IsInvalid)
                 {
                     _exited = true;
@@ -269,7 +276,8 @@ namespace System.Diagnostics
                     if (
                         Interop.Kernel32.GetExitCodeProcess(handle, out localExitCode)
                         && localExitCode != Interop.Kernel32.HandleOptions.STILL_ACTIVE
-                    ) {
+                    )
+                    {
                         _exitCode = localExitCode;
                         _exited = true;
                     }
@@ -349,7 +357,8 @@ namespace System.Diagnostics
                     SafeProcessHandle handle = GetProcessHandle(
                         Interop.Advapi32.ProcessOptions.PROCESS_QUERY_INFORMATION
                     )
-                ) {
+                )
+                {
                     bool disabled;
                     if (!Interop.Kernel32.GetProcessPriorityBoost(handle, out disabled))
                     {
@@ -364,7 +373,8 @@ namespace System.Diagnostics
                     SafeProcessHandle handle = GetProcessHandle(
                         Interop.Advapi32.ProcessOptions.PROCESS_SET_INFORMATION
                     )
-                ) {
+                )
+                {
                     if (!Interop.Kernel32.SetProcessPriorityBoost(handle, !value))
                         throw new Win32Exception();
                 }
@@ -382,7 +392,8 @@ namespace System.Diagnostics
                     SafeProcessHandle handle = GetProcessHandle(
                         Interop.Advapi32.ProcessOptions.PROCESS_QUERY_INFORMATION
                     )
-                ) {
+                )
+                {
                     int value = Interop.Kernel32.GetPriorityClass(handle);
                     if (value == 0)
                     {
@@ -397,7 +408,8 @@ namespace System.Diagnostics
                     SafeProcessHandle handle = GetProcessHandle(
                         Interop.Advapi32.ProcessOptions.PROCESS_SET_INFORMATION
                     )
-                ) {
+                )
+                {
                     if (!Interop.Kernel32.SetPriorityClass(handle, (int)value))
                         throw new Win32Exception();
                 }
@@ -415,7 +427,8 @@ namespace System.Diagnostics
                     SafeProcessHandle handle = GetProcessHandle(
                         Interop.Advapi32.ProcessOptions.PROCESS_QUERY_INFORMATION
                     )
-                ) {
+                )
+                {
                     IntPtr processAffinity,
                         systemAffinity;
                     if (
@@ -435,7 +448,8 @@ namespace System.Diagnostics
                     SafeProcessHandle handle = GetProcessHandle(
                         Interop.Advapi32.ProcessOptions.PROCESS_SET_INFORMATION
                     )
-                ) {
+                )
+                {
                     if (!Interop.Kernel32.SetProcessAffinityMask(handle, value))
                         throw new Win32Exception();
                 }
@@ -458,7 +472,8 @@ namespace System.Diagnostics
                 SafeProcessHandle handle = GetProcessHandle(
                     Interop.Advapi32.ProcessOptions.PROCESS_QUERY_INFORMATION
                 )
-            ) {
+            )
+            {
                 int ignoredFlags;
                 if (
                     !Interop.Kernel32.GetProcessWorkingSetSizeEx(
@@ -482,13 +497,15 @@ namespace System.Diagnostics
             IntPtr? newMax,
             out IntPtr resultingMin,
             out IntPtr resultingMax
-        ) {
+        )
+        {
             using (
                 SafeProcessHandle handle = GetProcessHandle(
                     Interop.Advapi32.ProcessOptions.PROCESS_QUERY_INFORMATION
                         | Interop.Advapi32.ProcessOptions.PROCESS_SET_QUOTA
                 )
-            ) {
+            )
+            {
                 IntPtr min,
                     max;
                 int ignoredFlags;
@@ -499,7 +516,8 @@ namespace System.Diagnostics
                         out max,
                         out ignoredFlags
                     )
-                ) {
+                )
+                {
                     throw new Win32Exception();
                 }
 
@@ -540,7 +558,8 @@ namespace System.Diagnostics
                         out max,
                         out ignoredFlags
                     )
-                ) {
+                )
+                {
                     throw new Win32Exception();
                 }
 
@@ -590,7 +609,8 @@ namespace System.Diagnostics
                         startInfo.RedirectStandardInput
                         || startInfo.RedirectStandardOutput
                         || startInfo.RedirectStandardError
-                    ) {
+                    )
+                    {
                         if (startInfo.RedirectStandardInput)
                         {
                             CreatePipe(out parentInputPipeHandle, out childInputPipeHandle, true);
@@ -690,7 +710,8 @@ namespace System.Diagnostics
                             char* commandLinePtr = &commandLine.GetPinnableReference(
                                 terminate: true
                             )
-                        ) {
+                        )
+                        {
                             IntPtr passwordPtr =
                                 (startInfo.Password != null)
                                     ? Marshal.SecureStringToGlobalAllocUnicode(startInfo.Password)
@@ -730,7 +751,8 @@ namespace System.Diagnostics
                             char* commandLinePtr = &commandLine.GetPinnableReference(
                                 terminate: true
                             )
-                        ) {
+                        )
+                        {
                             retVal = Interop.Kernel32.CreateProcess(
                                 null, // we don't need this since all the info is in commandLine
                                 commandLinePtr, // pointer to the command line string
@@ -761,7 +783,8 @@ namespace System.Diagnostics
                         if (
                             errorCode == Interop.Errors.ERROR_BAD_EXE_FORMAT
                             || errorCode == Interop.Errors.ERROR_EXE_MACHINE_TYPE_MISMATCH
-                        ) {
+                        )
+                        {
                             throw new Win32Exception(errorCode, SR.InvalidApplication);
                         }
                         throw new Win32Exception(errorCode);
@@ -834,7 +857,8 @@ namespace System.Diagnostics
         private static void BuildCommandLine(
             ProcessStartInfo startInfo,
             ref ValueStringBuilder commandLine
-        ) {
+        )
+        {
             // Construct a StringBuilder with the appropriate command line
             // to pass to CreateProcess.  If the filename isn't already
             // in quotes, we quote it here.  This prevents some security
@@ -866,7 +890,8 @@ namespace System.Diagnostics
                     Interop.Advapi32.ProcessOptions.PROCESS_QUERY_LIMITED_INFORMATION,
                     false
                 )
-            ) {
+            )
+            {
                 if (handle.IsInvalid)
                 {
                     throw new InvalidOperationException(
@@ -883,7 +908,8 @@ namespace System.Diagnostics
                         out processTimes._kernel,
                         out processTimes._user
                     )
-                ) {
+                )
+                {
                     throw new Win32Exception();
                 }
 
@@ -906,7 +932,8 @@ namespace System.Diagnostics
                         Interop.Kernel32.HandleOptions.TOKEN_ADJUST_PRIVILEGES,
                         out hToken
                     )
-                ) {
+                )
+                {
                     throw new Win32Exception();
                 }
 
@@ -916,7 +943,8 @@ namespace System.Diagnostics
                         privilegeName,
                         out Interop.Advapi32.LUID luid
                     )
-                ) {
+                )
+                {
                     throw new Win32Exception();
                 }
 
@@ -962,7 +990,8 @@ namespace System.Diagnostics
                     using (
                         Interop.Kernel32.ProcessWaitHandle waitHandle =
                             new Interop.Kernel32.ProcessWaitHandle(_processHandle!)
-                    ) {
+                    )
+                    {
                         if (waitHandle.WaitOne(0))
                         {
                             throw new InvalidOperationException(
@@ -993,11 +1022,13 @@ namespace System.Diagnostics
                 if (
                     throwIfExited
                     && (access & Interop.Advapi32.ProcessOptions.PROCESS_QUERY_INFORMATION) != 0
-                ) {
+                )
+                {
                     if (
                         Interop.Kernel32.GetExitCodeProcess(handle, out _exitCode)
                         && _exitCode != Interop.Kernel32.HandleOptions.STILL_ACTIVE
-                    ) {
+                    )
+                    {
                         throw new InvalidOperationException(
                             SR.Format(SR.ProcessHasExited, _processId.ToString())
                         );
@@ -1012,7 +1043,8 @@ namespace System.Diagnostics
             out SafeFileHandle hWritePipe,
             ref Interop.Kernel32.SECURITY_ATTRIBUTES lpPipeAttributes,
             int nSize
-        ) {
+        )
+        {
             bool ret = Interop.Kernel32.CreatePipe(
                 out hReadPipe,
                 out hWritePipe,
@@ -1036,7 +1068,8 @@ namespace System.Diagnostics
             out SafeFileHandle parentHandle,
             out SafeFileHandle childHandle,
             bool parentInputs
-        ) {
+        )
+        {
             Interop.Kernel32.SECURITY_ATTRIBUTES securityAttributesParent = default;
             securityAttributesParent.bInheritHandle = Interop.BOOL.TRUE;
 
@@ -1077,7 +1110,8 @@ namespace System.Diagnostics
                         false,
                         Interop.Kernel32.HandleOptions.DUPLICATE_SAME_ACCESS
                     )
-                ) {
+                )
+                {
                     throw new Win32Exception();
                 }
             }

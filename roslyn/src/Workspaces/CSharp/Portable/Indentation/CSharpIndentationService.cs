@@ -46,21 +46,24 @@ namespace Microsoft.CodeAnalysis.CSharp.Indentation
             IOptionService optionService,
             OptionSet optionSet,
             out SyntaxToken token
-        ) {
+        )
+        {
             Contract.ThrowIfNull(formattingRules);
             Contract.ThrowIfNull(root);
 
             token = default;
             if (
                 !optionSet.GetOption(FormattingOptions.AutoFormattingOnReturn, LanguageNames.CSharp)
-            ) {
+            )
+            {
                 return false;
             }
 
             if (
                 optionSet.GetOption(FormattingOptions.SmartIndent, LanguageNames.CSharp)
                 != FormattingOptions.IndentStyle.Smart
-            ) {
+            )
+            {
                 return false;
             }
 
@@ -99,7 +102,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Indentation
             if (
                 lineOperation == null
                 || lineOperation.Option == AdjustNewLinesOption.ForceLinesIfOnSingleLine
-            ) {
+            )
+            {
                 // no indentation operation, nothing to do for smart token formatter
                 return false;
             }
@@ -123,7 +127,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Indentation
                 List<IndentBlockOperation> list,
                 SyntaxNode node,
                 in NextIndentBlockOperationAction nextOperation
-            ) {
+            )
+            {
                 // these nodes should be from syntax tree from ITextSnapshot.
                 Debug.Assert(node.SyntaxTree != null);
                 Debug.Assert(node.SyntaxTree.GetText() != null);
@@ -137,7 +142,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Indentation
                     || node is TypeArgumentListSyntax
                     || node is TypeParameterListSyntax
                     || node.IsKind(SyntaxKind.Interpolation)
-                ) {
+                )
+                {
                     AddIndentBlockOperations(list, node);
                     return;
                 }
@@ -148,7 +154,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Indentation
                     && !IsBracketedArgumentListMissingBrackets(
                         argument as BracketedArgumentListSyntax
                     )
-                ) {
+                )
+                {
                     AddIndentBlockOperations(list, argument);
                     return;
                 }
@@ -158,7 +165,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Indentation
                     node is ConstructorInitializerSyntax constructorInitializer
                     && constructorInitializer.ArgumentList.OpenParenToken.Kind() != SyntaxKind.None
                     && !constructorInitializer.ThisOrBaseKeyword.IsMissing
-                ) {
+                )
+                {
                     var text = node.SyntaxTree.GetText();
 
                     // 3 different cases
@@ -203,7 +211,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Indentation
             private static void ReplaceCaseIndentationRules(
                 List<IndentBlockOperation> list,
                 SyntaxNode node
-            ) {
+            )
+            {
                 if (!(node is SwitchSectionSyntax section) || section.Statements.Count == 0)
                 {
                     return;
@@ -231,7 +240,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Indentation
             private static void AddIndentBlockOperations(
                 List<IndentBlockOperation> list,
                 SyntaxNode node
-            ) {
+            )
+            {
                 RoslynDebug.AssertNotNull(node.Parent);
 
                 // only add indent block operation if the base token is the first token on line

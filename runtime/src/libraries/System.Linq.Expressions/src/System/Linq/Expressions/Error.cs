@@ -81,7 +81,8 @@ namespace System.Linq.Expressions
             object? p0,
             object? p1,
             object? p2
-        ) {
+        )
+        {
             return new InvalidOperationException(
                 Strings.BinderNotCompatibleWithCallSite(p0, p1, p2)
             );
@@ -101,7 +102,8 @@ namespace System.Linq.Expressions
             object? p1,
             object? p2,
             object? p3
-        ) {
+        )
+        {
             return new InvalidCastException(
                 Strings.DynamicObjectResultNotAssignable(p0, p1, p2, p3)
             );
@@ -113,7 +115,8 @@ namespace System.Linq.Expressions
             object? p0,
             object? p1,
             object? p2
-        ) {
+        )
+        {
             return new InvalidCastException(Strings.DynamicBinderResultNotAssignable(p0, p1, p2));
         }
         /// <summary>
@@ -366,7 +369,8 @@ namespace System.Linq.Expressions
             object? p1,
             string? paramName,
             int index
-        ) {
+        )
+        {
             return VariableMustNotBeByRef(p0, p1, GetParamName(paramName, index));
         }
         /// <summary>
@@ -473,7 +477,8 @@ namespace System.Linq.Expressions
         internal static Exception OverloadOperatorTypeDoesNotMatchConversionType(
             object? p0,
             object? p1
-        ) {
+        )
+        {
             return new InvalidOperationException(
                 Strings.OverloadOperatorTypeDoesNotMatchConversionType(p0, p1)
             );
@@ -538,7 +543,8 @@ namespace System.Linq.Expressions
         internal static Exception ArgumentMustBeFieldInfoOrPropertyInfoOrMethod(
             string? paramName,
             int index
-        ) {
+        )
+        {
             return ArgumentMustBeFieldInfoOrPropertyInfoOrMethod(GetParamName(paramName, index));
         }
 
@@ -657,7 +663,8 @@ namespace System.Linq.Expressions
             object? p0,
             object? p1,
             string? paramName
-        ) {
+        )
+        {
             return new ArgumentException(Strings.ArgumentTypeDoesNotMatchMember(p0, p1), paramName);
         }
         /// <summary>
@@ -668,7 +675,8 @@ namespace System.Linq.Expressions
             object? p1,
             string? paramName,
             int index
-        ) {
+        )
+        {
             return ArgumentTypeDoesNotMatchMember(p0, p1, GetParamName(paramName, index));
         }
         /// <summary>
@@ -678,7 +686,8 @@ namespace System.Linq.Expressions
             object? p0,
             object? p1,
             string? paramName
-        ) {
+        )
+        {
             return new ArgumentException(Strings.ArgumentMemberNotDeclOnType(p0, p1), paramName);
         }
         /// <summary>
@@ -689,7 +698,8 @@ namespace System.Linq.Expressions
             object? p1,
             string? paramName,
             int index
-        ) {
+        )
+        {
             return ArgumentMemberNotDeclOnType(p0, p1, GetParamName(paramName, index));
         }
 
@@ -809,7 +819,8 @@ namespace System.Linq.Expressions
             object? p0,
             object? p1,
             string? paramName
-        ) {
+        )
+        {
             return new ArgumentException(Strings.MethodNotPropertyAccessor(p0, p1), paramName);
         }
         /// <summary>
@@ -820,7 +831,8 @@ namespace System.Linq.Expressions
             object? p1,
             string? paramName,
             int index
-        ) {
+        )
+        {
             return MethodNotPropertyAccessor(p0, p1, GetParamName(paramName, index));
         }
         /// <summary>
@@ -837,7 +849,8 @@ namespace System.Linq.Expressions
             object? p0,
             string? paramName,
             int index
-        ) {
+        )
+        {
             return PropertyDoesNotHaveGetter(p0, GetParamName(paramName, index));
         }
         /// <summary>
@@ -869,7 +882,8 @@ namespace System.Linq.Expressions
             object? p1,
             string? paramName,
             int index
-        ) {
+        )
+        {
             return NotAMemberOfType(p0, p1, GetParamName(paramName, index));
         }
 
@@ -895,7 +909,8 @@ namespace System.Linq.Expressions
             object? p0,
             object? p1,
             string? paramName
-        ) {
+        )
+        {
             return new ArgumentException(Strings.PropertyNotDefinedForType(p0, p1), paramName);
         }
         /// <summary>
@@ -905,7 +920,8 @@ namespace System.Linq.Expressions
             object? p0,
             object? p1,
             string? paramName
-        ) {
+        )
+        {
             return new ArgumentException(
                 Strings.InstancePropertyNotDefinedForType(p0, p1),
                 paramName
@@ -917,7 +933,8 @@ namespace System.Linq.Expressions
         internal static Exception InstancePropertyWithoutParameterNotDefinedForType(
             object? p0,
             object? p1
-        ) {
+        )
+        {
             return new ArgumentException(
                 Strings.InstancePropertyWithoutParameterNotDefinedForType(p0, p1)
             );
@@ -930,7 +947,8 @@ namespace System.Linq.Expressions
             object? p1,
             object? p2,
             string? paramName
-        ) {
+        )
+        {
             return new ArgumentException(
                 Strings.InstancePropertyWithSpecifiedParametersNotDefinedForType(p0, p1, p2),
                 paramName
@@ -966,7 +984,8 @@ namespace System.Linq.Expressions
             object? p0,
             object? p1,
             string? paramName
-        ) {
+        )
+        {
             return new ArgumentException(
                 Strings.ElementInitializerMethodNoRefOutParam(p0, p1),
                 paramName
@@ -1274,7 +1293,8 @@ namespace System.Linq.Expressions
         internal static Exception TestValueTypeDoesNotMatchComparisonMethodParameter(
             object? p0,
             object? p1
-        ) {
+        )
+        {
             return new ArgumentException(
                 Strings.TestValueTypeDoesNotMatchComparisonMethodParameter(p0, p1)
             );
@@ -1285,7 +1305,8 @@ namespace System.Linq.Expressions
         internal static Exception SwitchValueTypeDoesNotMatchComparisonMethodParameter(
             object? p0,
             object? p1
-        ) {
+        )
+        {
             return new ArgumentException(
                 Strings.SwitchValueTypeDoesNotMatchComparisonMethodParameter(p0, p1)
             );
@@ -1364,7 +1385,8 @@ namespace System.Linq.Expressions
             object? p0,
             string? paramName,
             int index
-        ) {
+        )
+        {
             return TypeContainsGenericParameters(p0, GetParamName(paramName, index));
         }
 
@@ -1400,7 +1422,8 @@ namespace System.Linq.Expressions
             object? p1,
             object? p2,
             string? paramName
-        ) {
+        )
+        {
             return new ArgumentException(
                 Strings.ExpressionTypeDoesNotMatchMethodParameter(p0, p1, p2),
                 paramName
@@ -1416,7 +1439,8 @@ namespace System.Linq.Expressions
             object? p2,
             string? paramName,
             int index
-        ) {
+        )
+        {
             return ExpressionTypeDoesNotMatchMethodParameter(
                 p0,
                 p1,
@@ -1432,7 +1456,8 @@ namespace System.Linq.Expressions
             object? p0,
             object? p1,
             string? paramName
-        ) {
+        )
+        {
             return new ArgumentException(
                 Strings.ExpressionTypeDoesNotMatchParameter(p0, p1),
                 paramName
@@ -1447,7 +1472,8 @@ namespace System.Linq.Expressions
             object? p1,
             string? paramName,
             int index
-        ) {
+        )
+        {
             return ExpressionTypeDoesNotMatchParameter(p0, p1, GetParamName(paramName, index));
         }
 
@@ -1465,7 +1491,8 @@ namespace System.Linq.Expressions
         internal static Exception IncorrectNumberOfMethodCallArguments(
             object? p0,
             string? paramName
-        ) {
+        )
+        {
             return new ArgumentException(
                 Strings.IncorrectNumberOfMethodCallArguments(p0),
                 paramName
@@ -1479,7 +1506,8 @@ namespace System.Linq.Expressions
             object? p0,
             object? p1,
             string? paramName
-        ) {
+        )
+        {
             return new ArgumentException(
                 Strings.ExpressionTypeDoesNotMatchConstructorParameter(p0, p1),
                 paramName
@@ -1494,7 +1522,8 @@ namespace System.Linq.Expressions
             object? p1,
             string? paramName,
             int index
-        ) {
+        )
+        {
             return ExpressionTypeDoesNotMatchConstructorParameter(
                 p0,
                 p1,

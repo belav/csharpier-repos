@@ -137,7 +137,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.Classification
 
             public IEnumerable<ITagSpan<IClassificationTag>> GetTags(
                 NormalizedSnapshotSpanCollection spans
-            ) {
+            )
+            {
                 this.AssertIsForeground();
 
                 // we never return any tags for GetTags.  This tagger is only for 'Accurate' scenarios.
@@ -147,7 +148,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.Classification
             public IEnumerable<ITagSpan<IClassificationTag>> GetAllTags(
                 NormalizedSnapshotSpanCollection spans,
                 CancellationToken cancellationToken
-            ) {
+            )
+            {
                 this.AssertIsForeground();
                 if (spans.Count == 0)
                 {
@@ -216,7 +218,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.Classification
                 TaggerContext<IClassificationTag> context,
                 DocumentSnapshotSpan documentSpan,
                 ClassificationTypeMap typeMap
-            ) {
+            )
+            {
                 var document = documentSpan.Document;
 
                 var classificationService = document.GetLanguageService<IClassificationService>();

@@ -90,7 +90,8 @@ namespace Microsoft.AspNetCore.Components.WebView
                 public InMemoryDirectoryContents(
                     InMemoryFileProvider inMemoryFileProvider,
                     string subPath
-                ) {
+                )
+                {
                     _inMemoryFileProvider =
                         inMemoryFileProvider
                         ?? throw new ArgumentNullException(nameof(inMemoryFileProvider));

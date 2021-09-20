@@ -37,7 +37,8 @@ namespace Microsoft.Extensions.DependencyModel.Tests
             bool portable = false,
             NuGetFramework target = null,
             string runtime = null
-        ) {
+        )
+        {
             _defaultFramework = NuGetFramework.Parse("net451");
             return new DependencyContextBuilder(_referenceAssembliesPath).Build(
                 compilerOptions,
@@ -465,7 +466,8 @@ namespace Microsoft.Extensions.DependencyModel.Tests
             IEnumerable<LibraryAssetGroup> runtimeAssemblyGroups = null,
             IEnumerable<LibraryAssetGroup> nativeLibraryGroups = null,
             IEnumerable<LibraryResourceAssembly> resourceAssemblies = null
-        ) {
+        )
+        {
             return LibraryExportBuilder.Create(description)
                 .WithCompilationAssemblies(compilationAssemblies)
                 .WithRuntimeAssemblyGroups(runtimeAssemblyGroups)
@@ -482,7 +484,8 @@ namespace Microsoft.Extensions.DependencyModel.Tests
             bool? servicable = null,
             string path = null,
             string hashPath = null
-        ) {
+        )
+        {
             // The LockFilePackageLibrary type in Microsoft.DotNet.ProjectModel currently does not
             // support the "path" property. Therefore, the path property to this method is ignored
             // and calling tests should assert that the value is not plumbed through.
@@ -507,7 +510,8 @@ namespace Microsoft.Extensions.DependencyModel.Tests
             string name = null,
             NuGetVersion version = null,
             IEnumerable<LibraryRange> dependencies = null
-        ) {
+        )
+        {
             return new ProjectDescription(
                 new LibraryRange(
                     name ?? _defaultName,
@@ -525,7 +529,8 @@ namespace Microsoft.Extensions.DependencyModel.Tests
         private LibraryDescription ReferenceAssemblyDescription(
             string name = null,
             NuGetVersion version = null
-        ) {
+        )
+        {
             return new LibraryDescription(
                 new LibraryIdentity(
                     name ?? _defaultName,

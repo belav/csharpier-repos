@@ -14,7 +14,8 @@ namespace Microsoft.Extensions.DependencyInjection.Specification
 
         protected sealed override IServiceProvider CreateServiceProvider(
             IServiceCollection serviceCollection
-        ) {
+        )
+        {
             foreach (var stackFrame in new StackTrace(1).GetFrames().Take(2))
             {
                 if (SkippedTests.Contains(stackFrame.GetMethod().Name))

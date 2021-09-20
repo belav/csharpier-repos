@@ -48,7 +48,8 @@ namespace System.Runtime.Serialization.Json
 
         internal static JsonReadWriteDelegates GetReadWriteDelegatesFromGeneratedAssembly(
             DataContract c
-        ) {
+        )
+        {
             JsonReadWriteDelegates? result = GetGeneratedReadWriteDelegates(c);
             if (result == null)
             {
@@ -64,7 +65,8 @@ namespace System.Runtime.Serialization.Json
 
         internal static JsonReadWriteDelegates? TryGetReadWriteDelegatesFromGeneratedAssembly(
             DataContract c
-        ) {
+        )
+        {
             JsonReadWriteDelegates? result = GetGeneratedReadWriteDelegates(c);
             return result;
         }
@@ -79,7 +81,8 @@ namespace System.Runtime.Serialization.Json
         public object? ReadJsonValue(
             XmlReaderDelegator jsonReader,
             XmlObjectSerializerReadContextComplexJson? context
-        ) {
+        )
+        {
             PushKnownDataContracts(context);
             object? deserializedObject = ReadJsonValueCore(jsonReader, context);
             PopKnownDataContracts(context);
@@ -90,7 +93,8 @@ namespace System.Runtime.Serialization.Json
         public virtual object? ReadJsonValueCore(
             XmlReaderDelegator jsonReader,
             XmlObjectSerializerReadContextComplexJson? context
-        ) {
+        )
+        {
             return TraditionalDataContract.ReadXmlValue(jsonReader, context);
         }
 
@@ -100,7 +104,8 @@ namespace System.Runtime.Serialization.Json
             object obj,
             XmlObjectSerializerWriteContextComplexJson? context,
             RuntimeTypeHandle declaredTypeHandle
-        ) {
+        )
+        {
             PushKnownDataContracts(context);
             WriteJsonValueCore(jsonWriter, obj, context, declaredTypeHandle);
             PopKnownDataContracts(context);
@@ -112,7 +117,8 @@ namespace System.Runtime.Serialization.Json
             object obj,
             XmlObjectSerializerWriteContextComplexJson? context,
             RuntimeTypeHandle declaredTypeHandle
-        ) {
+        )
+        {
             TraditionalDataContract.WriteXmlValue(jsonWriter, obj, context);
         }
 
@@ -127,7 +133,8 @@ namespace System.Runtime.Serialization.Json
             if (
                 reader.MoveToAttribute(JsonGlobals.typeString)
                 && (reader.Value == JsonGlobals.nullString)
-            ) {
+            )
+            {
                 reader.Skip();
                 reader.MoveToElement();
                 return true;
@@ -248,7 +255,8 @@ namespace System.Runtime.Serialization.Json
             private static JsonDataContract CreateJsonDataContract(
                 int id,
                 DataContract traditionalDataContract
-            ) {
+            )
+            {
                 lock (s_createDataContractLock)
                 {
                     JsonDataContract dataContract = s_dataContractCache[id];
@@ -287,7 +295,8 @@ namespace System.Runtime.Serialization.Json
                             traditionalDataContract.IsPrimitive
                             || traditionalDataContract.UnderlyingType
                                 == Globals.TypeOfXmlQualifiedName
-                        ) {
+                        )
+                        {
                             dataContract = new JsonDataContract(traditionalDataContract);
                         }
                         else if (traditionalDataContractType == typeof(ClassDataContract))
@@ -305,7 +314,8 @@ namespace System.Runtime.Serialization.Json
                         else if (
                             (traditionalDataContractType == typeof(GenericParameterDataContract))
                             || (traditionalDataContractType == typeof(SpecialTypeDataContract))
-                        ) {
+                        )
+                        {
                             dataContract = new JsonDataContract(traditionalDataContract);
                         }
                         else if (traditionalDataContractType == typeof(CollectionDataContract))
@@ -345,7 +355,8 @@ namespace System.Runtime.Serialization.Json
                             XmlQualifiedName,
                             DataContract
                         > knownDataContract in _traditionalDataContract.KnownDataContracts
-                    ) {
+                    )
+                    {
                         CollectionDataContract? collectionDataContract =
                             knownDataContract.Value as CollectionDataContract;
                         while (collectionDataContract != null)
@@ -365,7 +376,8 @@ namespace System.Runtime.Serialization.Json
                                 collectionDataContract.ItemType.IsGenericType
                                 && collectionDataContract.ItemType.GetGenericTypeDefinition()
                                     == typeof(KeyValue<, >)
-                            ) {
+                            )
+                            {
                                 DataContract itemDataContract = DataContract.GetDataContract(
                                     Globals.TypeOfKeyValuePair.MakeGenericType(
                                         collectionDataContract.ItemType.GenericTypeArguments

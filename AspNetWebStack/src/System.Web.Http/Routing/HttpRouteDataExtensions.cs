@@ -28,7 +28,8 @@ namespace System.Web.Http.Routing
 
         private static void RemoveOptionalRoutingParameters(
             IDictionary<string, object> routeValueDictionary
-        ) {
+        )
+        {
             Contract.Assert(routeValueDictionary != null);
 
             // Get all keys for which the corresponding value is 'Optional'.

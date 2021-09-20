@@ -14,7 +14,8 @@ namespace WebMatrix.Data
         internal ConnectionConfiguration(
             IDbProviderFactory providerFactory,
             string connectionString
-        ) {
+        )
+        {
             Debug.Assert(
                 !String.IsNullOrEmpty(connectionString),
                 "connectionString should not be null"

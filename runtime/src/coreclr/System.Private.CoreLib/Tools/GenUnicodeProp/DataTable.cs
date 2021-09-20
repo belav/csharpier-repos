@@ -30,7 +30,8 @@ namespace GenUnicodeProp
             int level2bits = 4,
             int level3bits = 4,
             bool cutOff = false
-        ) {
+        )
+        {
             Console.WriteLine();
             (int _, string[] lines) = GenerateTable(
                 level2bits,
@@ -55,7 +56,8 @@ namespace GenUnicodeProp
                 ).AsParallel()
                     .Select(l => (l, res: GenerateTable(l.l2, l.l3, cutOff)))
                     .OrderBy(v => v.res.Total)
-            ) {
+            )
+            {
                 Console.WriteLine($"Stats for {l2}:{l3}");
                 foreach (var line in stats)
                     Console.WriteLine(line);
@@ -70,7 +72,8 @@ namespace GenUnicodeProp
             List<byte> level1Index = null,
             List<ushort> level2Index = null,
             List<byte> level3Data = null
-        ) {
+        )
+        {
             if (name != null)
                 Console.WriteLine(
                     $"Process {20 - level3bits - level2bits}:{level2bits}:{level3bits} table {name}."

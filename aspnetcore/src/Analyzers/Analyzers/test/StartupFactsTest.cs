@@ -24,7 +24,8 @@ namespace Microsoft.AspNetCore.Analyzers
         public async Task IsConfigureServices_FindsConfigureServicesMethod(
             string source,
             string methodName
-        ) {
+        )
+        {
             // Arrange
             var compilation = await CreateCompilationAsync(source);
             var symbols = new StartupSymbols(compilation);
@@ -53,7 +54,8 @@ namespace Microsoft.AspNetCore.Analyzers
         public async Task IsConfigureServices_RejectsNonConfigureServicesMethod(
             string source,
             string methodName
-        ) {
+        )
+        {
             // Arrange
             var compilation = await CreateCompilationAsync(source);
             var symbols = new StartupSymbols(compilation);

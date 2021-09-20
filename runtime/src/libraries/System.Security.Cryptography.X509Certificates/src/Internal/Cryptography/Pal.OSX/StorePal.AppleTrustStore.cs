@@ -39,7 +39,8 @@ namespace Internal.Cryptography.Pal
                 {
                     using (
                         SafeCFArrayHandle certs = Interop.AppleCrypto.StoreEnumerateRoot(_location)
-                    ) {
+                    )
+                    {
                         ReadCollection(certs, dedupedCerts);
                     }
                 }
@@ -49,7 +50,8 @@ namespace Internal.Cryptography.Pal
                         SafeCFArrayHandle certs = Interop.AppleCrypto.StoreEnumerateDisallowed(
                             _location
                         )
-                    ) {
+                    )
+                    {
                         ReadCollection(certs, dedupedCerts);
                     }
                 }
@@ -80,7 +82,8 @@ namespace Internal.Cryptography.Pal
                 StoreName storeName,
                 StoreLocation location,
                 OpenFlags openFlags
-            ) {
+            )
+            {
                 if ((openFlags & OpenFlags.ReadWrite) == OpenFlags.ReadWrite)
                     throw new CryptographicException(SR.Security_AccessDenied);
 

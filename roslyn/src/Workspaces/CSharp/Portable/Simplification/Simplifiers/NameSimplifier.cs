@@ -35,7 +35,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Simplification.Simplifiers
             out TypeSyntax replacementNode,
             out TextSpan issueSpan,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             replacementNode = null;
             issueSpan = default;
 
@@ -131,7 +132,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Simplification.Simplifiers
                             cancellationToken,
                             out var aliasReplacement
                         )
-                    ) {
+                    )
+                    {
                         // get the token text as it appears in source code to preserve e.g. Unicode character escaping
                         var text = aliasReplacement.Name;
                         var syntaxRef = aliasReplacement.DeclaringSyntaxReferences.FirstOrDefault();
@@ -210,7 +212,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Simplification.Simplifiers
                             if (
                                 qualifiedName3.Right.Identifier.ValueText
                                 == identifierToken.ValueText
-                            ) {
+                            )
+                            {
                                 issueSpan = qualifiedName3.Left.Span;
                             }
                         }
@@ -218,7 +221,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Simplification.Simplifiers
                         // first check if this would be a valid reduction
                         if (
                             CanReplaceWithReducedNameInContext(name, replacementNode, semanticModel)
-                        ) {
+                        )
+                        {
                             // in case this alias name ends with "Attribute", we're going to see if we can also
                             // remove that suffix.
                             if (
@@ -228,7 +232,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Simplification.Simplifiers
                                     out var replacementNodeWithoutAttributeSuffix,
                                     out var issueSpanWithoutAttributeSuffix
                                 )
-                            ) {
+                            )
+                            {
                                 if (
                                     CanReplaceWithReducedName(
                                         name,
@@ -236,7 +241,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Simplification.Simplifiers
                                         semanticModel,
                                         cancellationToken
                                     )
-                                ) {
+                                )
+                                {
                                     replacementNode = replacementNode.CopyAnnotationsTo(
                                         replacementNodeWithoutAttributeSuffix
                                     );
@@ -278,7 +284,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Simplification.Simplifiers
                             && !aliasQualifiedName.Name.HasAnnotation(
                                 Simplifier.SpecialTypeAnnotation
                             )
-                        ) {
+                        )
+                        {
                             nameHasNoAlias = true;
                         }
                     }
@@ -303,7 +310,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Simplification.Simplifiers
                         if (
                             !name.Parent.IsKind(SyntaxKind.QualifiedName)
                             && (inDeclarationContext || inMemberAccessContext)
-                        ) {
+                        )
+                        {
                             // See if we can simplify this name (like System.Int32) to a built-in type (like 'int').
                             // If not, we'll still fall through and see if we can convert it to Int32.
 
@@ -329,7 +337,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Simplification.Simplifiers
                                         keywordKind,
                                         codeStyleOptionName
                                     )
-                                ) {
+                                )
+                                {
                                     return true;
                                 }
                             }
@@ -352,7 +361,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Simplification.Simplifiers
                                             keywordKind,
                                             codeStyleOptionName
                                         )
-                                    ) {
+                                    )
+                                    {
                                         return true;
                                     }
                                 }
@@ -366,7 +376,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Simplification.Simplifiers
                         !name.IsVar
                         && symbol.Kind == SymbolKind.NamedType
                         && !name.IsLeftSideOfQualifiedName()
-                    ) {
+                    )
+                    {
                         var type = (INamedTypeSymbol)symbol;
                         if (aliasInfo == null && CanSimplifyNullable(type, name, semanticModel))
                         {
@@ -400,7 +411,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Simplification.Simplifiers
                                     replacementNode,
                                     semanticModel
                                 )
-                            ) {
+                            )
+                            {
                                 return true;
                             }
                         }
@@ -478,14 +490,16 @@ namespace Microsoft.CodeAnalysis.CSharp.Simplification.Simplifiers
             TypeSyntax replacement,
             SemanticModel semanticModel,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             if (!name.InsideCrefReference())
                 return false;
 
             if (
                 name.Parent is QualifiedCrefSyntax qualifiedCrefParent
                 && qualifiedCrefParent.Container == name
-            ) {
+            )
+            {
                 // we have <see cref="A.B.C.D"/> and we're trying to see if we can replace
                 // A.B.C with C.  In this case the parent of A.B.C is A.B.C.D which is a
                 // QualifiedCrefSyntax
@@ -508,7 +522,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Simplification.Simplifiers
                 name.Parent is QualifiedNameSyntax qualifiedParent
                 && qualifiedParent.Left == name
                 && replacement is NameSyntax replacementName
-            ) {
+            )
+            {
                 // we have <see cref="A.B.C.D"/> and we're trying to see if we can replace
                 // A.B with B.  In this case the parent of A.B is A.B.C which is a
                 // QualifiedNameSyntax
@@ -532,7 +547,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Simplification.Simplifiers
             INamedTypeSymbol type,
             NameSyntax name,
             SemanticModel semanticModel
-        ) {
+        )
+        {
             if (!type.IsNullable())
             {
                 return false;
@@ -595,7 +611,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Simplification.Simplifiers
             ref TextSpan issueSpan,
             SyntaxKind keywordKind,
             string codeStyleOptionName
-        ) {
+        )
+        {
             replacementNode = CreatePredefinedTypeSyntax(name, keywordKind);
 
             issueSpan = name.Span; // we want to show the whole name expression as unnecessary
@@ -621,7 +638,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Simplification.Simplifiers
             SyntaxToken identifierToken,
             out TypeSyntax replacementNode,
             out TextSpan issueSpan
-        ) {
+        )
+        {
             issueSpan = default;
             replacementNode = null;
 
@@ -631,7 +649,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Simplification.Simplifiers
                 if (
                     name.Parent.Kind() == SyntaxKind.Attribute
                     || name.IsRightSideOfDotOrColonColon()
-                ) {
+                )
+                {
                     const string AttributeName = "Attribute";
 
                     // an attribute that should keep it (unnecessary "Attribute" suffix should be annotated with a DontSimplifyAnnotation
@@ -644,7 +663,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Simplification.Simplifiers
                         && !identifierToken.HasAnnotation(
                             SimplificationHelpers.DontSimplifyAnnotation
                         )
-                    ) {
+                    )
+                    {
                         // weird. the semantic model is able to bind attribute syntax like "[as()]" although it's not valid code.
                         // so we need another check for keywords manually.
                         var newAttributeName = identifierToken.ValueText.Substring(
@@ -719,7 +739,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Simplification.Simplifiers
             NameSyntax name,
             TypeSyntax reducedName,
             SemanticModel semanticModel
-        ) {
+        )
+        {
             // Check for certain things that would prevent us from reducing this name in this context.
             // For example, you can simplify "using a = System.Int32" to "using a = int" as it's simply
             // not allowed in the C# grammar.
@@ -731,7 +752,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Simplification.Simplifiers
                 || IsNullableTypeInPointerExpression(reducedName)
                 || IsNotNullableReplaceable(name, reducedName)
                 || IsNonReducableQualifiedNameInUsingDirective(semanticModel, name)
-            ) {
+            )
+            {
                 return false;
             }
 
@@ -760,7 +782,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Simplification.Simplifiers
             TypeSyntax reducedName,
             SemanticModel semanticModel,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var speculationAnalyzer = new SpeculationAnalyzer(
                 name,
                 reducedName,
@@ -798,7 +821,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Simplification.Simplifiers
             if (
                 simplifiedNode.Kind() == SyntaxKind.NullableType
                 && simplifiedNode.DescendantNodes().Any(n => n is PointerTypeSyntax)
-            ) {
+            )
+            {
                 return true;
             }
 
@@ -808,7 +832,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Simplification.Simplifiers
         private static bool IsNonNameSyntaxInUsingDirective(
             ExpressionSyntax expression,
             ExpressionSyntax simplifiedNode
-        ) {
+        )
+        {
             return expression.IsParentKind(SyntaxKind.UsingDirective)
                 && !(simplifiedNode is NameSyntax);
         }
@@ -816,7 +841,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Simplification.Simplifiers
         private static bool IsAmbiguousCast(
             ExpressionSyntax expression,
             ExpressionSyntax simplifiedNode
-        ) {
+        )
+        {
             // Can't simplify a type name in a cast expression if it would then cause the cast to be
             // parsed differently.  For example:  (Goo::Bar)+1  is a cast.  But if that simplifies to
             // (Bar)+1  then that's an arithmetic expression.
@@ -826,7 +852,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Simplification.Simplifiers
                     out CastExpressionSyntax castExpression
                 )
                 && castExpression.Type == expression
-            ) {
+            )
+            {
                 var newCastExpression = castExpression.ReplaceNode(
                     castExpression.Type,
                     simplifiedNode
@@ -847,7 +874,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Simplification.Simplifiers
         private static bool IsNonReducableQualifiedNameInUsingDirective(
             SemanticModel model,
             NameSyntax name
-        ) {
+        )
+        {
             // Whereas most of the time we do not want to reduce namespace names, We will
             // make an exception for namespaces with the global:: alias.
             return IsQualifiedNameInUsingDirective(model, name)
@@ -867,7 +895,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Simplification.Simplifiers
                     out UsingDirectiveSyntax usingDirective
                 )
                 && usingDirective.Alias == null
-            ) {
+            )
+            {
                 // We're a qualified name in a using.  We don't want to reduce this name as people like
                 // fully qualified names in usings so they can properly tell what the name is resolving
                 // to.
@@ -907,7 +936,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Simplification.Simplifiers
             NameSyntax name,
             OptionSet optionSet,
             SemanticModel semanticModel
-        ) {
+        )
+        {
             return !name.IsDirectChildOfMemberAccessExpression()
                 && !name.InsideCrefReference()
                 && !InsideNameOfExpression(name, semanticModel)

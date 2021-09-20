@@ -13,7 +13,8 @@ namespace System.Threading
             string? name,
             out bool createdNew,
             MutexSecurity? mutexSecurity
-        ) {
+        )
+        {
             return new Mutex(initiallyOwned, name, out createdNew, mutexSecurity);
         }
 
@@ -26,7 +27,8 @@ namespace System.Threading
             string name,
             MutexRights rights,
             [NotNullWhen(true)] out Mutex result
-        ) {
+        )
+        {
             return Mutex.TryOpenExisting(name, rights, out result);
         }
     }

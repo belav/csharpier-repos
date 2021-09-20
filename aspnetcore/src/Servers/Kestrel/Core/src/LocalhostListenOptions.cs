@@ -33,7 +33,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core
         internal override async Task BindAsync(
             AddressBindContext context,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var exceptions = new List<Exception>();
 
             try

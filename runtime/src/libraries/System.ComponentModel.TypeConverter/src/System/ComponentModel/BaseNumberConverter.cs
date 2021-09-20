@@ -53,7 +53,8 @@ namespace System.ComponentModel
             ITypeDescriptorContext context,
             CultureInfo culture,
             object value
-        ) {
+        )
+        {
             if (value is string text)
             {
                 text = text.Trim();
@@ -70,7 +71,8 @@ namespace System.ComponentModel
                             text.StartsWith("0x", StringComparison.OrdinalIgnoreCase)
                             || text.StartsWith("&h", StringComparison.OrdinalIgnoreCase)
                         )
-                    ) {
+                    )
+                    {
                         return FromString(text.Substring(2), 16);
                     }
                     else
@@ -107,7 +109,8 @@ namespace System.ComponentModel
             CultureInfo culture,
             object value,
             Type destinationType
-        ) {
+        )
+        {
             if (destinationType == null)
             {
                 throw new ArgumentNullException(nameof(destinationType));
@@ -117,7 +120,8 @@ namespace System.ComponentModel
                 destinationType == typeof(string)
                 && value != null
                 && TargetType.IsInstanceOfType(value)
-            ) {
+            )
+            {
                 if (culture == null)
                 {
                     culture = CultureInfo.CurrentCulture;

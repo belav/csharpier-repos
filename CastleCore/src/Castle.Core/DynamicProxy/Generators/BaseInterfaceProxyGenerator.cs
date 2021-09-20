@@ -70,7 +70,8 @@ namespace Castle.DynamicProxy.Generators
             Type proxyTargetType,
             ICollection<Type> targetInterfaces,
             INamingScope namingScope
-        ) {
+        )
+        {
             var contributor = GetProxyTargetContributor(proxyTargetType, namingScope);
             var proxiedInterfaces = targetType.GetAllInterfaces();
             foreach (var @interface in proxiedInterfaces)
@@ -173,7 +174,8 @@ namespace Castle.DynamicProxy.Generators
 
         protected virtual InterfaceProxyWithoutTargetContributor GetContributorForAdditionalInterfaces(
             INamingScope namingScope
-        ) {
+        )
+        {
             return new InterfaceProxyWithoutTargetContributor(
                 namingScope,
                 (c, m) => NullExpression.Instance
@@ -186,7 +188,8 @@ namespace Castle.DynamicProxy.Generators
             Type proxyTargetType,
             out IEnumerable<ITypeContributor> contributors,
             INamingScope namingScope
-        ) {
+        )
+        {
             var contributorsList = new List<ITypeContributor>(capacity: 5);
             var targetInterfaces = proxyTargetType.GetAllInterfaces();
             var typeImplementerMapping = new Dictionary<Type, ITypeContributor>();
@@ -299,7 +302,8 @@ namespace Castle.DynamicProxy.Generators
             Type proxyTargetType,
             out FieldReference interceptorsField,
             IEnumerable<Type> allInterfaces
-        ) {
+        )
+        {
             var baseType = ProxyGenerationOptions.BaseTypeForInterfaceProxy;
 
             emitter = BuildClassEmitter(typeName, baseType, allInterfaces);
@@ -355,7 +359,8 @@ namespace Castle.DynamicProxy.Generators
         private void ThrowInvalidBaseType(
             Type type,
             string doesNotHaveAccessibleParameterlessConstructor
-        ) {
+        )
+        {
             var format =
                 "Type {0} is not valid base type for interface proxy, because {1}. Only a non-sealed class with non-private default constructor can be used as base type for interface proxy. Please use some other valid type.";
             throw new ArgumentException(

@@ -43,7 +43,8 @@ namespace Roslyn.Utilities
             string? baseDirectory,
             IEnumerable<string> searchPaths,
             Func<string, bool> fileExists
-        ) {
+        )
+        {
             Debug.Assert(
                 baseDirectory == null
                     || searchPaths != null
@@ -104,7 +105,8 @@ namespace Roslyn.Utilities
             string? path,
             string? basePath,
             string? baseDirectory
-        ) {
+        )
+        {
             Debug.Assert(baseDirectory == null || PathUtilities.IsAbsolute(baseDirectory));
             return ResolveRelativePath(
                 PathUtilities.GetPathKind(path),
@@ -119,7 +121,8 @@ namespace Roslyn.Utilities
             string? path,
             string? basePath,
             string? baseDirectory
-        ) {
+        )
+        {
             Debug.Assert(PathUtilities.GetPathKind(path) == kind);
 
             switch (kind)
@@ -228,12 +231,14 @@ namespace Roslyn.Utilities
             string path,
             string? basePath,
             string? baseDirectory
-        ) {
+        )
+        {
             // Does this look like a URI at all or does it have any invalid path characters? If so, just use it as is.
             if (
                 path.IndexOf("://", StringComparison.Ordinal) >= 0
                 || path.IndexOfAny(s_invalidPathChars) >= 0
-            ) {
+            )
+            {
                 return null;
             }
 
@@ -360,7 +365,8 @@ namespace Roslyn.Utilities
             Func<string, Stream> factory,
             string path,
             string? paramName = null
-        ) {
+        )
+        {
             try
             {
                 return factory(path);

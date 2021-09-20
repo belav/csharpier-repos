@@ -37,7 +37,8 @@ namespace Microsoft.Extensions.Hosting.IntegrationTesting
                 if (
                     DeploymentParameters.RuntimeFlavor == RuntimeFlavor.Clr
                     && DeploymentParameters.RuntimeArchitecture == RuntimeArchitecture.x86
-                ) {
+                )
+                {
                     // Publish is required to rebuild for the right bitness
                     DeploymentParameters.PublishApplicationBeforeDeployment = true;
                 }
@@ -45,7 +46,8 @@ namespace Microsoft.Extensions.Hosting.IntegrationTesting
                 if (
                     DeploymentParameters.RuntimeFlavor == RuntimeFlavor.CoreClr
                     && DeploymentParameters.ApplicationType == ApplicationType.Standalone
-                ) {
+                )
+                {
                     // Publish is required to get the correct files in the output directory
                     DeploymentParameters.PublishApplicationBeforeDeployment = true;
                 }
@@ -117,7 +119,8 @@ namespace Microsoft.Extensions.Hosting.IntegrationTesting
                 if (
                     DeploymentParameters.RuntimeFlavor == RuntimeFlavor.CoreClr
                     && DeploymentParameters.ApplicationType == ApplicationType.Portable
-                ) {
+                )
+                {
                     executableName = GetDotNetExeForArchitecture();
                     executableArgs = executable;
                 }

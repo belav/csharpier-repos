@@ -142,7 +142,8 @@ namespace System.Drawing.Tests
             string fileName,
             int width,
             int height
-        ) {
+        )
+        {
             var attribute = new ToolboxBitmapAttribute((string)null);
             using (
                 Image image = attribute.GetImage(
@@ -150,7 +151,8 @@ namespace System.Drawing.Tests
                     fileName,
                     large: true
                 )
-            ) {
+            )
+            {
                 Assert.Equal(new Size(32, 32), image.Size);
             }
 
@@ -160,7 +162,8 @@ namespace System.Drawing.Tests
                     fileName,
                     large: false
                 )
-            ) {
+            )
+            {
                 Assert.Equal(new Size(width, height), image.Size);
             }
         }
@@ -184,7 +187,8 @@ namespace System.Drawing.Tests
                     new bitmap_173x183_indexed_8bit(),
                     large: false
                 )
-            ) {
+            )
+            {
                 Assert.Equal(new Size(173, 183), smallImage.Size);
 
                 using (
@@ -192,7 +196,8 @@ namespace System.Drawing.Tests
                         new bitmap_173x183_indexed_8bit(),
                         large: true
                     )
-                ) {
+                )
+                {
                     Assert.Equal(new Size(32, 32), largeImage.Size);
                 }
             }
@@ -210,7 +215,8 @@ namespace System.Drawing.Tests
                     "bitmap_173x183_indexed_8bit",
                     large: true
                 )
-            ) {
+            )
+            {
                 Assert.Equal(new Size(32, 32), image.Size);
             }
 
@@ -220,7 +226,8 @@ namespace System.Drawing.Tests
                     "bitmap_173x183_indexed_8bit",
                     large: false
                 )
-            ) {
+            )
+            {
                 Assert.Equal(new Size(173, 183), image.Size);
             }
         }
@@ -277,7 +284,8 @@ namespace System.Drawing.Tests
             ToolboxBitmapAttribute attribute,
             object other,
             bool expected
-        ) {
+        )
+        {
             Assert.Equal(expected, attribute.Equals(other));
             Assert.Equal(attribute.GetHashCode(), attribute.GetHashCode());
         }

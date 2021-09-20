@@ -39,7 +39,8 @@ namespace System.Web.Http
             string requestUrl,
             HttpStatusCode expectedStatusCode,
             string expectedActionName
-        ) {
+        )
+        {
             HttpConfiguration config = new HttpConfiguration();
             config.Routes.MapHttpRoute("REST", "{controller}");
             HttpServer server = new HttpServer(config);
@@ -94,7 +95,8 @@ namespace System.Web.Http
             string requestUrl,
             HttpStatusCode expectedStatusCode,
             string expectedActionName
-        ) {
+        )
+        {
             HttpConfiguration config = new HttpConfiguration();
             config.Routes.MapHttpRoute("RPC", "{controller}/{action}");
             HttpServer server = new HttpServer(config);
@@ -139,7 +141,8 @@ namespace System.Web.Http
             string requestUrl,
             HttpStatusCode expectedStatusCode,
             string expectedActionName
-        ) {
+        )
+        {
             HttpConfiguration config = new HttpConfiguration();
             config.Routes.MapHttpRoute("Hybrid", "{controller}/{action}", new { action = "" });
             HttpServer server = new HttpServer(config);

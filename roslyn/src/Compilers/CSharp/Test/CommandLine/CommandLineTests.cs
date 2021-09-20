@@ -119,7 +119,8 @@ namespace Microsoft.CodeAnalysis.CSharp.CommandLine.UnitTests
                 string directory,
                 string fileNamePattern,
                 SearchOption searchOption
-            ) {
+            )
+            {
                 var key = directory + "|" + fileNamePattern;
                 if (searchOption == SearchOption.TopDirectoryOnly)
                 {
@@ -140,7 +141,8 @@ namespace Microsoft.CodeAnalysis.CSharp.CommandLine.UnitTests
         private CSharpCommandLineArguments ScriptParse(
             IEnumerable<string> args,
             string baseDirectory
-        ) {
+        )
+        {
             return CSharpCommandLineParser.Script.Parse(args, baseDirectory, SdkDirectory);
         }
 
@@ -149,7 +151,8 @@ namespace Microsoft.CodeAnalysis.CSharp.CommandLine.UnitTests
             string baseDirectory,
             string sdkDirectory = null,
             string additionalReferenceDirectories = null
-        ) {
+        )
+        {
             sdkDirectory = sdkDirectory ?? SdkDirectory;
             var args = CommandLineParser.SplitCommandLineIntoArguments(
                 commandLine,
@@ -249,7 +252,8 @@ public class P {
                     HandleInheritability.None,
                     leaveOpen: true
                 )
-            ) {
+            )
+            {
                 exitCode = cmd.Run(outWriter);
                 Assert.StartsWith(
                     $"error CS0016: Could not write to output file '{xmlPath}' -- ",
@@ -2323,7 +2327,8 @@ class C
         public void LangVersion_CanParseCorrectVersions(
             string value,
             LanguageVersion expectedVersion
-        ) {
+        )
+        {
             var parsedArgs = DefaultParse(
                 new[] { $"/langversion:{value}", "a.cs" },
                 WorkingDirectory
@@ -2351,7 +2356,8 @@ class C
             string formerValue,
             string latterValue,
             LanguageVersion expectedVersion
-        ) {
+        )
+        {
             var parsedArgs = DefaultParse(
                 new[] { $"/langversion:{formerValue}", $"/langversion:{latterValue}", "a.cs" },
                 WorkingDirectory
@@ -2556,7 +2562,8 @@ class C
         public void LanguageVersion_MapSpecifiedToEffectiveVersion(
             LanguageVersion expectedMappedVersion,
             LanguageVersion input
-        ) {
+        )
+        {
             Assert.Equal(expectedMappedVersion, input.MapSpecifiedToEffectiveVersion());
             Assert.True(expectedMappedVersion.IsValid());
 
@@ -2606,7 +2613,8 @@ class C
             string input,
             bool success,
             LanguageVersion expected
-        ) {
+        )
+        {
             Assert.Equal(success, LanguageVersionFacts.TryParse(input, out var version));
             Assert.Equal(expected, version);
 
@@ -3350,7 +3358,8 @@ class C
             string debugSwitch,
             string embedSwitch,
             string[] expectedEmbedded
-        ) {
+        )
+        {
             // embed.cs: large enough to compress, has #line directives
             const string embed_cs =
                 @"///////////////////////////////////////////////////////////////////////////////
@@ -3439,7 +3448,8 @@ print Goodbye, World";
             Dictionary<string, string> expectedEmbeddedMap,
             TempDirectory dir,
             bool isEmbeddedPdb
-        ) {
+        )
+        {
             using (var peReader = new PEReader(File.OpenRead(Path.Combine(dir.Path, "embed.exe"))))
             {
                 var entry = peReader.ReadDebugDirectory()
@@ -3452,7 +3462,8 @@ print Goodbye, World";
                         : MetadataReaderProvider.FromPortablePdbStream(
                               File.OpenRead(Path.Combine(dir.Path, "embed.pdb"))
                           )
-                ) {
+                )
+                {
                     var mdReader = mdProvider.GetMetadataReader();
 
                     foreach (var handle in mdReader.Documents)
@@ -3476,7 +3487,8 @@ print Goodbye, World";
         private static void ValidateEmbeddedSources_Windows(
             Dictionary<string, string> expectedEmbeddedMap,
             TempDirectory dir
-        ) {
+        )
+        {
             ISymUnmanagedReader5 symReader = null;
 
             try
@@ -3514,7 +3526,8 @@ print Goodbye, World";
         private static void ValidateWrittenSources(
             Dictionary<string, Dictionary<string, string>> expectedFilesMap,
             Encoding encoding = null
-        ) {
+        )
+        {
             foreach ((var dirPath, var fileMap) in expectedFilesMap.ToArray())
             {
                 foreach (var file in Directory.GetFiles(dirPath))
@@ -3967,7 +3980,8 @@ class C
             if (
                 currentUICultureName.Length == 0
                 || currentUICultureName.StartsWith("en", StringComparison.OrdinalIgnoreCase)
-            ) {
+            )
+            {
                 Assert.Equal(
                     "Data at the root level is invalid. Line 1, position 1.",
                     (string)err.Arguments[1]
@@ -6071,7 +6085,8 @@ C:\*.cs(100,7): error CS0103: The name 'Goo' does not exist in the current conte
                 var metadata = ModuleMetadata.CreateFromImage(
                     File.ReadAllBytes(Path.Combine(dir.Path, "aa.exe"))
                 )
-            ) {
+            )
+            {
                 var peReader = metadata.Module.GetMetadataReader();
 
                 Assert.True(peReader.IsAssembly);
@@ -7750,7 +7765,8 @@ C:\*.cs(100,7): error CS0103: The name 'Goo' does not exist in the current conte
             int[] expectedCodes,
             ReportDiagnostic[] expectedOptions,
             CSharpCommandLineArguments args
-        ) {
+        )
+        {
             var actualOrdered = args.CompilationOptions.SpecificDiagnosticOptions.OrderBy(
                 entry => entry.Key
             );
@@ -9243,7 +9259,8 @@ public class CS1698_a {}
                 // https://github.com/dotnet/roslyn/issues/28836
                 if (
                     StringComparer.OrdinalIgnoreCase.Equals(Environment.UserDomainName, "WORKGROUP")
-                ) {
+                )
+                {
                     return;
                 }
             }
@@ -10086,7 +10103,8 @@ Copyright (C) Microsoft Corporation. All rights reserved.".Trim(),
             string inputName2,
             string[] commandLineArguments,
             string expectedOutputName
-        ) {
+        )
+        {
             var dir = Temp.CreateDirectory();
 
             var file1 = dir.CreateFile(inputName1);
@@ -10122,7 +10140,8 @@ Copyright (C) Microsoft Corporation. All rights reserved.".Trim(),
                 var metadata = ModuleMetadata.CreateFromImage(
                     File.ReadAllBytes(Path.Combine(dir.Path, expectedOutputName))
                 )
-            ) {
+            )
+            {
                 var peReader = metadata.Module.GetMetadataReader();
 
                 Assert.True(peReader.IsAssembly);
@@ -10952,7 +10971,8 @@ class C
             OutputKind outputKind,
             string explicitManifest,
             string expectedManifest
-        ) {
+        )
+        {
             var dir = Temp.CreateDirectory();
             var sourceFile = dir.CreateFile("Test.cs").WriteAllText(source);
 
@@ -11814,7 +11834,8 @@ class C {} "
                     FileAccess.Read,
                     FileShare.Delete | FileShare.ReadWrite
                 )
-            ) {
+            )
+            {
                 var output = ProcessUtilities.RunAndGetOutput(
                     s_CSharpCompilerExecutable,
                     String.Format(
@@ -13390,7 +13411,8 @@ public class C { }
             int expectedExitCode,
             string compileDiagnostic,
             params DiagnosticDescription[] parseDiagnostics
-        ) {
+        )
+        {
             TestCS2002(
                 commandLineArgs,
                 baseDirectory,
@@ -13406,7 +13428,8 @@ public class C { }
             int expectedExitCode,
             string[] compileDiagnostics,
             params DiagnosticDescription[] parseDiagnostics
-        ) {
+        )
+        {
             var outWriter = new StringWriter(CultureInfo.InvariantCulture);
             var allCommandLineArgs = new[]
             {
@@ -14522,7 +14545,8 @@ public class Program
             bool errorlog = false,
             IEnumerable<ISourceGenerator> generators = null,
             params DiagnosticAnalyzer[] analyzers
-        ) {
+        )
+        {
             var args = new[] { "/nologo", "/preferreduilang:en", "/t:library", sourceFile.Path };
             if (includeCurrentAssemblyAsAnalyzerReference)
             {
@@ -15215,7 +15239,8 @@ public class Program
             int expectedWarningCount = 0,
             int expectedErrorCount = 0,
             bool errorlog = false
-        ) {
+        )
+        {
             var dir = Temp.CreateDirectory();
             var file = dir.CreateFile(name);
             file.WriteAllText(source);
@@ -16627,7 +16652,8 @@ class C {
                 string pdbPath,
                 string pePdbPath,
                 params string[] extraArgs
-            ) {
+            )
+            {
                 var source = @"class Program { static void Main() { } }";
                 var src = dir.CreateFile("a.cs").WriteAllText(source);
                 var defaultArgs = new[]
@@ -17248,7 +17274,8 @@ System.NotImplementedException: 28
                     || fileName.StartsWith("System.")
                     || fileName.StartsWith("Microsoft.")
                         && !fileName.StartsWith("Microsoft.DiaSymReader.Native")
-                ) {
+                )
+                {
                     dir.CopyFile(filePath);
                 }
             }
@@ -17352,7 +17379,8 @@ System.NotImplementedException: 28
                 string value,
                 T expected,
                 Func<CSharpCommandLineArguments, T> getValue
-            ) {
+            )
+            {
                 var args = DefaultParse(new[] { $"/{name}:{value}", "a.cs" }, s_rootPath);
                 Assert.Equal(0, args.Errors.Length);
                 Assert.Equal(expected, getValue(args));
@@ -17367,7 +17395,8 @@ System.NotImplementedException: 28
                 string value,
                 T expected,
                 Func<CSharpCommandLineArguments, T> getValue
-            ) {
+            )
+            {
                 var args = DefaultParse(new[] { $"/{name}:{value}", "a.cs" }, s_rootPath);
                 Assert.Equal(0, args.Errors.Length);
                 Assert.Equal(expected, getValue(args));
@@ -18007,7 +18036,8 @@ class C { }";
         public void TestCategoryBasedBulkAnalyzerDiagnosticConfiguration(
             DiagnosticSeverity defaultSeverity,
             bool errorlog
-        ) {
+        )
+        {
             var analyzer = new NamedTypeAnalyzerWithConfigurableEnabledByDefault(
                 isEnabledByDefault: true,
                 defaultSeverity
@@ -18098,7 +18128,8 @@ dotnet_analyzer_diagnostic.category-{category}.severity = error";
             if (
                 defaultSeverity == DiagnosticSeverity.Hidden
                 || defaultSeverity == DiagnosticSeverity.Info && !errorlog
-            ) {
+            )
+            {
                 // Verify analyzer with Hidden severity OR Info severity + no /errorlog is not executed.
                 analyzer = new NamedTypeAnalyzerWithConfigurableEnabledByDefault(
                     isEnabledByDefault: true,
@@ -18135,7 +18166,8 @@ dotnet_analyzer_diagnostic.category-{category}.severity = none";
         public void TestBulkAnalyzerDiagnosticConfiguration(
             DiagnosticSeverity defaultSeverity,
             bool errorlog
-        ) {
+        )
+        {
             var analyzer = new NamedTypeAnalyzerWithConfigurableEnabledByDefault(
                 isEnabledByDefault: true,
                 defaultSeverity
@@ -18225,7 +18257,8 @@ dotnet_analyzer_diagnostic.severity = error";
             if (
                 defaultSeverity == DiagnosticSeverity.Hidden
                 || defaultSeverity == DiagnosticSeverity.Info && !errorlog
-            ) {
+            )
+            {
                 // Verify analyzer with Hidden severity OR Info severity + no /errorlog is not executed.
                 analyzer = new NamedTypeAnalyzerWithConfigurableEnabledByDefault(
                     isEnabledByDefault: true,
@@ -18262,7 +18295,8 @@ dotnet_analyzer_diagnostic.severity = none";
         public void TestMixedCategoryBasedAndBulkAnalyzerDiagnosticConfiguration(
             DiagnosticSeverity defaultSeverity,
             bool errorlog
-        ) {
+        )
+        {
             var analyzer = new NamedTypeAnalyzerWithConfigurableEnabledByDefault(
                 isEnabledByDefault: true,
                 defaultSeverity
@@ -18340,7 +18374,8 @@ dotnet_analyzer_diagnostic.severity = suggestion";
             ReportDiagnostic expectedDiagnosticSeverity,
             string rulesetText = null,
             bool noWarn = false
-        ) {
+        )
+        {
             var diagnosticId = analyzer.Descriptor.Id;
             var dir = Temp.CreateDirectory();
             var src = dir.CreateFile("test.cs").WriteAllText(@"class C { }");
@@ -18462,7 +18497,8 @@ class C
         [WorkItem(37779, "https://github.com/dotnet/roslyn/issues/37779")]
         public void AnalyzerConfigSeverityEscalationToErrorDoesNotEmit(
             bool analyzerConfigSetToError
-        ) {
+        )
+        {
             var dir = Temp.CreateDirectory();
             var src = dir.CreateFile("temp.cs")
                 .WriteAllText(
@@ -18612,7 +18648,8 @@ class C
             bool isEnabledByDefault,
             bool noWarn,
             bool errorlog
-        ) {
+        )
+        {
             var analyzer = new AnalyzerWithNoLocationDiagnostics(isEnabledByDefault);
             TestAnalyzerConfigRespectedCore(
                 analyzer,
@@ -18631,7 +18668,8 @@ class C
             bool isEnabledByDefault,
             bool noWarn,
             bool errorlog
-        ) {
+        )
+        {
             var analyzer = new NamedTypeAnalyzerWithConfigurableEnabledByDefault(
                 isEnabledByDefault,
                 defaultSeverity: DiagnosticSeverity.Warning
@@ -18651,7 +18689,8 @@ class C
             ReportDiagnostic analyzerConfigSeverity,
             bool noWarn,
             bool errorlog
-        ) {
+        )
+        {
             if (analyzerConfigSeverity == ReportDiagnostic.Default)
             {
                 // "dotnet_diagnostic.ID.severity = default" is not supported.
@@ -18709,7 +18748,8 @@ dotnet_diagnostic.{descriptor.Id}.severity = {analyzerConfigSeverity.ToAnalyzerC
                     || analyzerConfigSeverity == ReportDiagnostic.Warn
                     || (analyzerConfigSeverity == ReportDiagnostic.Info && errorlog)
                 )
-            ) {
+            )
+            {
                 var prefix =
                     analyzerConfigSeverity == ReportDiagnostic.Error
                         ? "error"
@@ -18807,7 +18847,8 @@ generated_code = auto"
         public void TestAnalyzerFilteringBasedOnSeverity(
             DiagnosticSeverity defaultSeverity,
             bool errorlog
-        ) {
+        )
+        {
             // This test verifies that analyzer execution is skipped at build time for the following:
             //   1. Analyzer reporting Hidden diagnostics
             //   2. Analyzer reporting Info diagnostics, when /errorlog is not specified
@@ -18858,7 +18899,8 @@ generated_code = auto"
         public void TestWarnAsErrorMinusDoesNotEnableDisabledByDefaultAnalyzers(
             DiagnosticSeverity defaultSeverity,
             bool isEnabledByDefault
-        ) {
+        )
+        {
             // This test verifies that '/warnaserror-:DiagnosticId' does not affect if analyzers are executed or skipped..
             // Setup the analyzer to always throw an exception on analyzer callbacks for cases where we expect analyzer execution to be skipped:
             //   1. Disabled by default analyzer, i.e. 'isEnabledByDefault == false'.
@@ -18964,7 +19006,8 @@ generated_code = auto"
             DiagnosticSeverity defaultSeverity,
             DiagnosticSeverity? severityInConfigFile,
             DiagnosticSeverity expectedEffectiveSeverity
-        ) {
+        )
+        {
             var analyzer = new NamedTypeAnalyzerWithConfigurableEnabledByDefault(
                 isEnabledByDefault: true,
                 defaultSeverity,
@@ -19072,7 +19115,8 @@ class C
         public void TestSourceGeneratorsWithAnalyzers(
             bool includeCurrentAssemblyAsAnalyzerReference,
             bool skipAnalyzers
-        ) {
+        )
+        {
             var dir = Temp.CreateDirectory();
             var src = dir.CreateFile("temp.cs")
                 .WriteAllText(
@@ -19147,7 +19191,8 @@ class C
             string source1Name,
             string source2,
             string source2Name
-        ) {
+        )
+        {
             var dir = Temp.CreateDirectory();
             var src = dir.CreateFile("temp.cs")
                 .WriteAllText(
@@ -19316,7 +19361,8 @@ class C
             string source1Name,
             string source2,
             string source2Name
-        ) {
+        )
+        {
             var dir = Temp.CreateDirectory();
             var src = dir.CreateFile("temp.cs")
                 .WriteAllText(
@@ -20269,7 +20315,8 @@ dotnet_diagnostic.CS0164.severity = none;
         [WorkItem(43051, "https://github.com/dotnet/roslyn/issues/43051")]
         public void WarnAsErrorIsRespectedForForWarningsConfiguredInRulesetOrGlobalConfig(
             bool useGlobalConfig
-        ) {
+        )
+        {
             var dir = Temp.CreateDirectory();
             var src = dir.CreateFile("temp.cs")
                 .WriteAllText(
@@ -20507,7 +20554,8 @@ dotnet_diagnostic.Warning01.severity = error;
             string additionalArg,
             bool expectError,
             bool expectWarning
-        ) {
+        )
+        {
             var src =
                 @"
 class C
@@ -20607,7 +20655,8 @@ class C
             string additionalArg,
             bool expectError,
             bool expectWarning
-        ) {
+        )
+        {
             var analyzer = new CompilationAnalyzerWithSeverity(
                 DiagnosticSeverity.Warning,
                 configurable: true
@@ -20632,7 +20681,8 @@ class C
             bool expectError,
             bool expectWarning,
             params DiagnosticAnalyzer[] analyzers
-        ) {
+        )
+        {
             Assert.True(!expectError || !expectWarning);
 
             var dir = Temp.CreateDirectory();
@@ -20848,7 +20898,8 @@ public class Generator : ISourceGenerator
 
         public override void CreateAnalyzerWithinCompilation(
             CompilationStartAnalysisContext context
-        ) {
+        )
+        {
             context.RegisterSyntaxNodeAction(AnalyzeNode, SyntaxKind.RegionDirectiveTrivia);
         }
     }
@@ -20876,14 +20927,16 @@ public class Generator : ISourceGenerator
                 (context.Node as PragmaWarningDirectiveTriviaSyntax).DisableOrRestoreKeyword.IsKind(
                     SyntaxKind.RestoreKeyword
                 )
-            ) {
+            )
+            {
                 context.ReportDiagnostic(Diagnostic.Create(Info01, context.Node.GetLocation()));
             }
         }
 
         public override void CreateAnalyzerWithinCompilation(
             CompilationStartAnalysisContext context
-        ) {
+        )
+        {
             context.RegisterSyntaxNodeAction(AnalyzeNode, SyntaxKind.PragmaWarningDirectiveTrivia);
         }
     }
@@ -20907,7 +20960,8 @@ public class Generator : ISourceGenerator
 
         public override void CreateAnalyzerWithinCompilation(
             CompilationStartAnalysisContext context
-        ) {
+        )
+        {
             context.RegisterSymbolAction(
                 (symbolContext) =>
                 {
@@ -20947,7 +21001,8 @@ public class Generator : ISourceGenerator
 
         public override void CreateAnalyzerWithinCompilation(
             CompilationStartAnalysisContext context
-        ) {
+        )
+        {
             context.RegisterSyntaxNodeAction(
                 (nodeContext) =>
                 {
@@ -20955,7 +21010,8 @@ public class Generator : ISourceGenerator
                         (
                             nodeContext.Node as PragmaWarningDirectiveTriviaSyntax
                         ).DisableOrRestoreKeyword.IsKind(SyntaxKind.DisableKeyword)
-                    ) {
+                    )
+                    {
                         nodeContext.ReportDiagnostic(
                             Diagnostic.Create(Error01, nodeContext.Node.GetLocation())
                         );

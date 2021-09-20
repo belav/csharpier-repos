@@ -44,7 +44,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Formatting
             List<IndentBlockOperation> list,
             SyntaxNode node,
             in NextIndentBlockOperationAction nextOperation
-        ) {
+        )
+        {
             nextOperation.Invoke();
 
             AddAlignmentBlockOperation(list, node);
@@ -63,7 +64,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Formatting
         private static void AddTypeParameterConstraintClauseOperation(
             List<IndentBlockOperation> list,
             SyntaxNode node
-        ) {
+        )
+        {
             if (node is TypeParameterConstraintClauseSyntax { Parent: { } declaringNode })
             {
                 var baseToken = declaringNode.GetFirstToken();
@@ -174,7 +176,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Formatting
         private static void AddAlignmentBlockOperation(
             List<IndentBlockOperation> list,
             SyntaxNode node
-        ) {
+        )
+        {
             switch (node)
             {
                 case SimpleLambdaExpressionSyntax simpleLambda:
@@ -243,7 +246,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Formatting
                         {
                             Parent: { } recursivePatternParent
                         }
-                    ) {
+                    )
+                    {
                         var baseTokenForAlignment = recursivePatternParent.GetFirstToken();
                         if (baseTokenForAlignment == propertyPatternClause.OpenBraceToken)
                         {
@@ -270,7 +274,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Formatting
             List<IndentBlockOperation> list,
             SyntaxNode baseNode,
             SyntaxNode body
-        ) {
+        )
+        {
             var option = IndentBlockOption.RelativeToFirstTokenOnBaseTokenLine;
 
             var baseToken = baseNode.GetFirstToken(includeZeroWidth: true);
@@ -296,7 +301,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Formatting
                 || node.IsAnonymousMethodBlock()
                 || node.IsKind(SyntaxKind.PropertyPatternClause)
                 || node.IsKind(SyntaxKind.SwitchExpression)
-            ) {
+            )
+            {
                 AddAlignmentBlockOperationRelativeToFirstTokenOnBaseTokenLine(list, bracePair);
             }
 
@@ -305,7 +311,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Formatting
                 node.IsKind(SyntaxKind.ArrayInitializerExpression)
                 && node.Parent != null
                 && node.Parent.IsKind(SyntaxKind.ArrayCreationExpression)
-            ) {
+            )
+            {
                 AddAlignmentBlockOperationRelativeToFirstTokenOnBaseTokenLine(list, bracePair);
             }
 
@@ -331,7 +338,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Formatting
         private static void AddAlignmentBlockOperationRelativeToFirstTokenOnBaseTokenLine(
             List<IndentBlockOperation> list,
             (SyntaxToken openBrace, SyntaxToken closeBrace) bracePair
-        ) {
+        )
+        {
             var option = IndentBlockOption.RelativeToFirstTokenOnBaseTokenLine;
             SetAlignmentBlockOperation(
                 list,
@@ -345,13 +353,15 @@ namespace Microsoft.CodeAnalysis.CSharp.Formatting
         private static void AddEmbeddedStatementsIndentationOperation(
             List<IndentBlockOperation> list,
             SyntaxNode node
-        ) {
+        )
+        {
             // increase indentation - embedded statement cases
             if (
                 node is IfStatementSyntax ifStatement
                 && ifStatement.Statement != null
                 && !(ifStatement.Statement is BlockSyntax)
-            ) {
+            )
+            {
                 AddEmbeddedStatementsIndentationOperation(list, ifStatement.Statement);
                 return;
             }
@@ -363,7 +373,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Formatting
                         elseClause.Statement is BlockSyntax
                         || elseClause.Statement is IfStatementSyntax
                     )
-                ) {
+                )
+                {
                     AddEmbeddedStatementsIndentationOperation(list, elseClause.Statement);
                 }
 
@@ -374,7 +385,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Formatting
                 node is WhileStatementSyntax whileStatement
                 && whileStatement.Statement != null
                 && !(whileStatement.Statement is BlockSyntax)
-            ) {
+            )
+            {
                 AddEmbeddedStatementsIndentationOperation(list, whileStatement.Statement);
                 return;
             }
@@ -383,7 +395,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Formatting
                 node is ForStatementSyntax forStatement
                 && forStatement.Statement != null
                 && !(forStatement.Statement is BlockSyntax)
-            ) {
+            )
+            {
                 AddEmbeddedStatementsIndentationOperation(list, forStatement.Statement);
                 return;
             }
@@ -392,7 +405,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Formatting
                 node is CommonForEachStatementSyntax foreachStatement
                 && foreachStatement.Statement != null
                 && !(foreachStatement.Statement is BlockSyntax)
-            ) {
+            )
+            {
                 AddEmbeddedStatementsIndentationOperation(list, foreachStatement.Statement);
                 return;
             }
@@ -404,7 +418,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Formatting
                     usingStatement.Statement is BlockSyntax
                     || usingStatement.Statement is UsingStatementSyntax
                 )
-            ) {
+            )
+            {
                 AddEmbeddedStatementsIndentationOperation(list, usingStatement.Statement);
                 return;
             }
@@ -416,7 +431,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Formatting
                     fixedStatement.Statement is BlockSyntax
                     || fixedStatement.Statement is FixedStatementSyntax
                 )
-            ) {
+            )
+            {
                 AddEmbeddedStatementsIndentationOperation(list, fixedStatement.Statement);
                 return;
             }
@@ -425,7 +441,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Formatting
                 node is DoStatementSyntax doStatement
                 && doStatement.Statement != null
                 && !(doStatement.Statement is BlockSyntax)
-            ) {
+            )
+            {
                 AddEmbeddedStatementsIndentationOperation(list, doStatement.Statement);
                 return;
             }
@@ -434,7 +451,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Formatting
                 node is LockStatementSyntax lockStatement
                 && lockStatement.Statement != null
                 && !(lockStatement.Statement is BlockSyntax)
-            ) {
+            )
+            {
                 AddEmbeddedStatementsIndentationOperation(list, lockStatement.Statement);
                 return;
             }
@@ -443,7 +461,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Formatting
         private static void AddEmbeddedStatementsIndentationOperation(
             List<IndentBlockOperation> list,
             StatementSyntax statement
-        ) {
+        )
+        {
             var firstToken = statement.GetFirstToken(includeZeroWidth: true);
             var lastToken = statement.GetLastToken(includeZeroWidth: true);
 
@@ -502,7 +521,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Formatting
             private static T GetOptionOrDefault<T>(
                 AnalyzerConfigOptions? options,
                 Option2<T> option
-            ) {
+            )
+            {
                 if (options is null)
                     return option.DefaultValue;
 

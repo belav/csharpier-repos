@@ -26,7 +26,8 @@ namespace System.Web.Mvc.Html.Test
         public void BooleanTemplate_AttributeEncodes_AddedHtmlAttributes(
             string text,
             string htmlEncodedText
-        ) {
+        )
+        {
             // Arrange
             var expectedResult =
                 "<input attribute=\""
@@ -68,7 +69,8 @@ namespace System.Web.Mvc.Html.Test
             string text,
             bool htmlEncode,
             string expectedResult
-        ) {
+        )
+        {
             // Arrange
             var innerModel = new ObjectTemplateModel
             {
@@ -121,7 +123,8 @@ namespace System.Web.Mvc.Html.Test
         public void CollectionTemplateWrappingObjectTemplate_DoesNotEncodeNullDisplayText_IfNull(
             string text,
             bool htmlEncode
-        ) {
+        )
+        {
             // Arrange
             var model = new[] { (ObjectTemplateModel)null, };
             var viewData = new ViewDataDictionary<ObjectTemplateModel[]>(model);
@@ -167,7 +170,8 @@ namespace System.Web.Mvc.Html.Test
         public void StringTemplate_AttributeEncodes_AddedHtmlAttributes(
             string text,
             string htmlEncodedText
-        ) {
+        )
+        {
             // Arrange
             var expectedResult =
                 "<input attribute=\""

@@ -27,7 +27,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Http
 
         public override ValueTask<ReadResult> ReadAsync(
             CancellationToken cancellationToken = default
-        ) {
+        )
+        {
             ThrowIfReaderCompleted();
             return ReadAsyncInternal(cancellationToken);
         }
@@ -75,7 +76,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Http
 
         public override ValueTask<ReadResult> ReadAsyncInternal(
             CancellationToken cancellationToken = default
-        ) {
+        )
+        {
             ReadResult readResult;
 
             // Ignore the canceled readResult unless it was canceled by the user.
@@ -97,7 +99,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Http
         private async ValueTask<ReadResult> ReadAsyncInternalAwaited(
             ValueTask<ReadResult> readTask,
             CancellationToken cancellationToken = default
-        ) {
+        )
+        {
             var readResult = await readTask;
 
             // Ignore the canceled readResult unless it was canceled by the user.

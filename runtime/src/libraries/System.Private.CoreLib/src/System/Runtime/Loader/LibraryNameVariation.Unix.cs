@@ -19,7 +19,8 @@ namespace System.Runtime.Loader
             string libName,
             bool isRelativePath,
             bool forOSLoader = false
-        ) {
+        )
+        {
             // This is a copy of the logic in DetermineLibNameVariations in dllimport.cpp in CoreCLR
 
             if (!isRelativePath)

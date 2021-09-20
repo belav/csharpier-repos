@@ -54,13 +54,15 @@ namespace Microsoft.AspNetCore.Razor.Language.Intermediate
 
         public virtual void VisitCSharpExpressionAttributeValue(
             CSharpExpressionAttributeValueIntermediateNode node
-        ) {
+        )
+        {
             VisitDefault(node);
         }
 
         public virtual void VisitCSharpCodeAttributeValue(
             CSharpCodeAttributeValueIntermediateNode node
-        ) {
+        )
+        {
             VisitDefault(node);
         }
 
@@ -126,7 +128,8 @@ namespace Microsoft.AspNetCore.Razor.Language.Intermediate
 
         public virtual void VisitTagHelperDirectiveAttribute(
             TagHelperDirectiveAttributeIntermediateNode node
-        ) {
+        )
+        {
             VisitDefault(node);
         }
 
@@ -137,7 +140,8 @@ namespace Microsoft.AspNetCore.Razor.Language.Intermediate
 
         public virtual void VisitTagHelperDirectiveAttributeParameter(
             TagHelperDirectiveAttributeParameterIntermediateNode node
-        ) {
+        )
+        {
             VisitDefault(node);
         }
 
@@ -163,7 +167,8 @@ namespace Microsoft.AspNetCore.Razor.Language.Intermediate
 
         public virtual void VisitComponentTypeInferenceMethod(
             ComponentTypeInferenceMethodIntermediateNode node
-        ) {
+        )
+        {
             VisitDefault(node);
         }
 

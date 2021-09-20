@@ -16,7 +16,8 @@ namespace Microsoft.AspNetCore.Mvc.RazorPages.Infrastructure
             PageActionEndpointDataSourceIdProvider dataSourceIdProvider,
             IActionDescriptorCollectionProvider actions,
             ActionEndpointFactory endpointFactory
-        ) {
+        )
+        {
             _dataSourceIdProvider = dataSourceIdProvider;
             _actions = actions;
             _endpointFactory = endpointFactory;

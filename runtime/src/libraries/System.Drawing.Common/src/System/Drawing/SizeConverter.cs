@@ -60,7 +60,8 @@ namespace System.Drawing
             ITypeDescriptorContext context,
             CultureInfo culture,
             object value
-        ) {
+        )
+        {
             string strValue = value as string;
 
             if (strValue != null)
@@ -122,7 +123,8 @@ namespace System.Drawing
             CultureInfo culture,
             object value,
             Type destinationType
-        ) {
+        )
+        {
             if (destinationType == null)
             {
                 throw new ArgumentNullException(nameof(destinationType));
@@ -178,7 +180,8 @@ namespace System.Drawing
         public override object CreateInstance(
             ITypeDescriptorContext context,
             IDictionary propertyValues
-        ) {
+        )
+        {
             if (propertyValues == null)
             {
                 throw new ArgumentNullException(nameof(propertyValues));
@@ -214,7 +217,8 @@ namespace System.Drawing
             ITypeDescriptorContext context,
             object value,
             Attribute[] attributes
-        ) {
+        )
+        {
             PropertyDescriptorCollection props = TypeDescriptor.GetProperties(
                 typeof(Size),
                 attributes

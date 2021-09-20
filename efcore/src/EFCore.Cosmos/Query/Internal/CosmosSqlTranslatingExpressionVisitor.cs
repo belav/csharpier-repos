@@ -74,7 +74,8 @@ namespace Microsoft.EntityFrameworkCore.Cosmos.Query.Internal
             ISqlExpressionFactory sqlExpressionFactory,
             IMemberTranslatorProvider memberTranslatorProvider,
             IMethodCallTranslatorProvider methodCallTranslatorProvider
-        ) {
+        )
+        {
             _queryCompilationContext = queryCompilationContext;
             _model = queryCompilationContext.Model;
             _sqlExpressionFactory = sqlExpressionFactory;
@@ -212,7 +213,8 @@ namespace Microsoft.EntityFrameworkCore.Cosmos.Query.Internal
                     equalsMethod: false,
                     out var result
                 )
-            ) {
+            )
+            {
                 return result;
             }
 
@@ -244,7 +246,8 @@ namespace Microsoft.EntityFrameworkCore.Cosmos.Query.Internal
                         || convertExpression.NodeType == ExpressionType.ConvertChecked
                     )
                     && expression.Type == typeof(object)
-                ) {
+                )
+                {
                     operand = convertExpression.Operand;
                     return true;
                 }
@@ -314,7 +317,8 @@ namespace Microsoft.EntityFrameworkCore.Cosmos.Query.Internal
                         && result is UnaryExpression outerUnary
                         && outerUnary.Operand.NodeType == ExpressionType.Convert
                         && outerUnary.Operand.Type == typeof(object)
-                    ) {
+                    )
+                    {
                         result = ((UnaryExpression)outerUnary.Operand).Operand;
                     }
 
@@ -416,7 +420,8 @@ namespace Microsoft.EntityFrameworkCore.Cosmos.Query.Internal
             if (
                 methodCallExpression.TryGetEFPropertyArguments(out var source, out var propertyName)
                 || methodCallExpression.TryGetIndexerArguments(_model, out source, out propertyName)
-            ) {
+            )
+            {
                 return TryBindMember(Visit(source), MemberIdentity.Create(propertyName));
             }
 
@@ -428,7 +433,8 @@ namespace Microsoft.EntityFrameworkCore.Cosmos.Query.Internal
                 method.Name == nameof(object.Equals)
                 && methodCallExpression.Object != null
                 && methodCallExpression.Arguments.Count == 1
-            ) {
+            )
+            {
                 var left = Visit(methodCallExpression.Object);
                 var right = Visit(RemoveObjectConvert(methodCallExpression.Arguments[0]));
 
@@ -440,7 +446,8 @@ namespace Microsoft.EntityFrameworkCore.Cosmos.Query.Internal
                         equalsMethod: true,
                         out var result
                     )
-                ) {
+                )
+                {
                     return result;
                 }
 
@@ -458,7 +465,8 @@ namespace Microsoft.EntityFrameworkCore.Cosmos.Query.Internal
                 method.Name == nameof(object.Equals)
                 && methodCallExpression.Object == null
                 && methodCallExpression.Arguments.Count == 2
-            ) {
+            )
+            {
                 var left = Visit(RemoveObjectConvert(methodCallExpression.Arguments[0]));
                 var right = Visit(RemoveObjectConvert(methodCallExpression.Arguments[1]));
 
@@ -470,7 +478,8 @@ namespace Microsoft.EntityFrameworkCore.Cosmos.Query.Internal
                         equalsMethod: true,
                         out var result
                     )
-                ) {
+                )
+                {
                     return result;
                 }
 
@@ -486,7 +495,8 @@ namespace Microsoft.EntityFrameworkCore.Cosmos.Query.Internal
             else if (
                 method.IsGenericMethod
                 && method.GetGenericMethodDefinition().Equals(EnumerableMethods.Contains)
-            ) {
+            )
+            {
                 var enumerable = Visit(methodCallExpression.Arguments[0]);
                 var item = Visit(methodCallExpression.Arguments[1]);
 
@@ -496,7 +506,8 @@ namespace Microsoft.EntityFrameworkCore.Cosmos.Query.Internal
                         item ?? methodCallExpression.Arguments[1],
                         out var result
                     )
-                ) {
+                )
+                {
                     return result;
                 }
 
@@ -520,7 +531,8 @@ namespace Microsoft.EntityFrameworkCore.Cosmos.Query.Internal
                         item ?? methodCallExpression.Arguments[0],
                         out var result
                     )
-                ) {
+                )
+                {
                     return result;
                 }
 
@@ -542,7 +554,8 @@ namespace Microsoft.EntityFrameworkCore.Cosmos.Query.Internal
                         Visit(methodCallExpression.Object),
                         out sqlObject
                     )
-                ) {
+                )
+                {
                     return null;
                 }
 
@@ -572,7 +585,8 @@ namespace Microsoft.EntityFrameworkCore.Cosmos.Query.Internal
                 if (
                     methodCallExpression.Method == _stringEqualsWithStringComparison
                     || methodCallExpression.Method == _stringEqualsWithStringComparisonStatic
-                ) {
+                )
+                {
                     AddTranslationErrorDetails(
                         CoreStrings.QueryUnableToTranslateStringEqualsWithStringComparison
                     );
@@ -654,7 +668,8 @@ namespace Microsoft.EntityFrameworkCore.Cosmos.Query.Internal
                     || unaryExpression.NodeType == ExpressionType.ConvertChecked
                     || unaryExpression.NodeType == ExpressionType.TypeAs
                 )
-            ) {
+            )
+            {
                 return entityReferenceExpression.Convert(unaryExpression.Type);
             }
 
@@ -682,7 +697,8 @@ namespace Microsoft.EntityFrameworkCore.Cosmos.Query.Internal
                         // Object convert needs to be converted to explicit cast when mismatching types
                         // But we let is pass here since we don't have explicit cast mechanism here and in some cases object convert is due to value types
                         || unaryExpression.Type == typeof(object)
-                    ) {
+                    )
+                    {
                         return sqlOperand;
                     }
                     break;
@@ -701,12 +717,14 @@ namespace Microsoft.EntityFrameworkCore.Cosmos.Query.Internal
             if (
                 typeBinaryExpression.NodeType == ExpressionType.TypeIs
                 && innerExpression is EntityReferenceExpression entityReferenceExpression
-            ) {
+            )
+            {
                 var entityType = entityReferenceExpression.EntityType;
                 if (
                     entityType.GetAllBaseTypesInclusive()
                         .Any(et => et.ClrType == typeBinaryExpression.TypeOperand)
-                ) {
+                )
+                {
                     return _sqlExpressionFactory.Constant(true);
                 }
 
@@ -719,7 +737,8 @@ namespace Microsoft.EntityFrameworkCore.Cosmos.Query.Internal
                         MemberIdentity.Create(entityType.GetDiscriminatorPropertyName())
                     )
                         is SqlExpression discriminatorColumn
-                ) {
+                )
+                {
                     var concreteEntityTypes = derivedType.GetConcreteDerivedTypesInclusive()
                         .ToList();
 
@@ -794,7 +813,8 @@ namespace Microsoft.EntityFrameworkCore.Cosmos.Query.Internal
                     unaryExpression.NodeType == ExpressionType.Convert
                     || unaryExpression.NodeType == ExpressionType.ConvertChecked
                 )
-            ) {
+            )
+            {
                 var innerType = unaryExpression.Operand.Type.UnwrapNullableType();
                 if (innerType.IsEnum)
                 {
@@ -816,7 +836,8 @@ namespace Microsoft.EntityFrameworkCore.Cosmos.Query.Internal
                         )
                     )
                     || (convertedType == typeof(double) && (innerType == typeof(float)))
-                ) {
+                )
+                {
                     return TryRemoveImplicitConvert(unaryExpression.Operand);
                 }
             }
@@ -828,7 +849,8 @@ namespace Microsoft.EntityFrameworkCore.Cosmos.Query.Internal
             Expression source,
             Expression item,
             out Expression result
-        ) {
+        )
+        {
             result = null;
 
             if (!(item is EntityReferenceExpression itemEntityReference))
@@ -925,7 +947,8 @@ namespace Microsoft.EntityFrameworkCore.Cosmos.Query.Internal
             Expression right,
             bool equalsMethod,
             out Expression result
-        ) {
+        )
+        {
             var leftEntityReference = left as EntityReferenceExpression;
             var rightEntityReference = right as EntityReferenceExpression;
 
@@ -987,7 +1010,8 @@ namespace Microsoft.EntityFrameworkCore.Cosmos.Query.Internal
                 leftEntityType != null
                 && rightEntityType != null
                 && leftEntityType.GetRootType() != rightEntityType.GetRootType()
-            ) {
+            )
+            {
                 result = _sqlExpressionFactory.Constant(false);
                 return true;
             }
@@ -1077,7 +1101,8 @@ namespace Microsoft.EntityFrameworkCore.Cosmos.Query.Internal
             QueryContext context,
             string baseParameterName,
             IProperty property
-        ) {
+        )
+        {
             var baseParameter = context.ParameterValues[baseParameterName];
             return baseParameter == null
               ? (T)(object)null
@@ -1088,13 +1113,15 @@ namespace Microsoft.EntityFrameworkCore.Cosmos.Query.Internal
             QueryContext context,
             string baseParameterName,
             IProperty property
-        ) {
+        )
+        {
             if (
                 !(
                     context.ParameterValues[baseParameterName]
                     is IEnumerable<TEntity> baseListParameter
                 )
-            ) {
+            )
+            {
                 return null;
             }
 
@@ -1153,7 +1180,8 @@ namespace Microsoft.EntityFrameworkCore.Cosmos.Query.Internal
             Expression original,
             Expression translation,
             out SqlExpression castTranslation
-        ) {
+        )
+        {
             if (original != null && !(translation is SqlExpression))
             {
                 castTranslation = null;
@@ -1206,7 +1234,8 @@ namespace Microsoft.EntityFrameworkCore.Cosmos.Query.Internal
                 if (
                     extensionExpression is SqlExpression sqlExpression
                     && sqlExpression.TypeMapping == null
-                ) {
+                )
+                {
                     throw new InvalidOperationException(
                         CosmosStrings.NullTypeMappingInSqlTree(sqlExpression.Print())
                     );

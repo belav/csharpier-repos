@@ -221,7 +221,8 @@ namespace System.Net.Security
             ExtendedProtectionPolicy? policy,
             ProtectionLevel requiredProtectionLevel,
             TokenImpersonationLevel requiredImpersonationLevel
-        ) {
+        )
+        {
             ValidateCreateContext(
                 DefaultPackage,
                 credential,
@@ -349,7 +350,8 @@ namespace System.Net.Security
             string targetName,
             ProtectionLevel requiredProtectionLevel,
             TokenImpersonationLevel allowedImpersonationLevel
-        ) {
+        )
+        {
             ValidateCreateContext(
                 DefaultPackage,
                 isServer: false,
@@ -416,7 +418,8 @@ namespace System.Net.Security
             string targetName,
             ProtectionLevel requiredProtectionLevel,
             TokenImpersonationLevel allowedImpersonationLevel
-        ) {
+        )
+        {
             ValidateCreateContext(
                 DefaultPackage,
                 isServer: false,
@@ -464,7 +467,8 @@ namespace System.Net.Security
             ExtendedProtectionPolicy? policy,
             ProtectionLevel requiredProtectionLevel,
             TokenImpersonationLevel requiredImpersonationLevel
-        ) {
+        )
+        {
             ValidateCreateContext(
                 DefaultPackage,
                 credential,
@@ -594,7 +598,8 @@ namespace System.Net.Security
             int offset,
             int count,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             ValidateBufferArguments(buffer, offset, count);
 
             ThrowIfFailed(authSuccessCheck: true);
@@ -613,7 +618,8 @@ namespace System.Net.Security
         public override ValueTask<int> ReadAsync(
             Memory<byte> buffer,
             CancellationToken cancellationToken = default
-        ) {
+        )
+        {
             ThrowIfFailed(authSuccessCheck: true);
             if (!CanGetSecureStream)
             {
@@ -724,7 +730,8 @@ namespace System.Net.Security
                 TAdapter adapter,
                 Memory<byte> buffer,
                 bool allowZeroRead
-            ) {
+            )
+            {
                 int read = 0;
 
                 do
@@ -771,7 +778,8 @@ namespace System.Net.Security
             int offset,
             int count,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             ValidateBufferArguments(buffer, offset, count);
 
             ThrowIfFailed(authSuccessCheck: true);
@@ -789,7 +797,8 @@ namespace System.Net.Security
         public override ValueTask WriteAsync(
             ReadOnlyMemory<byte> buffer,
             CancellationToken cancellationToken = default
-        ) {
+        )
+        {
             ThrowIfFailed(authSuccessCheck: true);
             if (!CanGetSecureStream)
             {
@@ -893,7 +902,8 @@ namespace System.Net.Security
             ExtendedProtectionPolicy? policy,
             ProtectionLevel protectionLevel,
             TokenImpersonationLevel impersonationLevel
-        ) {
+        )
+        {
             if (policy != null)
             {
                 // One of these must be set if EP is turned on
@@ -931,7 +941,8 @@ namespace System.Net.Security
             ChannelBinding? channelBinding,
             ProtectionLevel protectionLevel,
             TokenImpersonationLevel impersonationLevel
-        ) {
+        )
+        {
             if (!_canRetryAuthentication)
             {
                 ThrowIfExceptional();
@@ -1001,7 +1012,8 @@ namespace System.Net.Security
                     _extendedProtectionPolicy.PolicyEnforcement != PolicyEnforcement.Never
                     && _extendedProtectionPolicy.ProtectionScenario
                         == ProtectionScenario.TrustedProxy
-                ) {
+                )
+                {
                     flags |= ContextFlagsPal.ProxyBindings;
                 }
             }
@@ -1106,7 +1118,8 @@ namespace System.Net.Security
                 _context.IsKerberos
                 || _extendedProtectionPolicy!.PolicyEnforcement == PolicyEnforcement.Never
                 || _extendedProtectionPolicy.CustomServiceNames == null
-            ) {
+            )
+            {
                 return true;
             }
 

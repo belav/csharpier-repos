@@ -19,19 +19,20 @@ namespace Microsoft.Extensions.DependencyModel
             IEnumerable<ResourceAssembly> resourceAssemblies,
             IEnumerable<Dependency> dependencies,
             bool serviceable
-        ) : this(
-            type,
-            name,
-            version,
-            hash,
-            runtimeAssemblyGroups,
-            nativeLibraryGroups,
-            resourceAssemblies,
-            dependencies,
-            serviceable,
-            path: null,
-            hashPath: null
-        ) { }
+        )
+            : this(
+                type,
+                name,
+                version,
+                hash,
+                runtimeAssemblyGroups,
+                nativeLibraryGroups,
+                resourceAssemblies,
+                dependencies,
+                serviceable,
+                path: null,
+                hashPath: null
+            ) { }
 
         public RuntimeLibrary(
             string type,
@@ -45,20 +46,21 @@ namespace Microsoft.Extensions.DependencyModel
             bool serviceable,
             string path,
             string hashPath
-        ) : this(
-            type,
-            name,
-            version,
-            hash,
-            runtimeAssemblyGroups,
-            nativeLibraryGroups,
-            resourceAssemblies,
-            dependencies,
-            serviceable,
-            path,
-            hashPath,
-            runtimeStoreManifestName: null
-        ) { }
+        )
+            : this(
+                type,
+                name,
+                version,
+                hash,
+                runtimeAssemblyGroups,
+                nativeLibraryGroups,
+                resourceAssemblies,
+                dependencies,
+                serviceable,
+                path,
+                hashPath,
+                runtimeStoreManifestName: null
+            ) { }
 
         /// <summary>
         /// Initializes a new <see cref="RuntimeLibrary"/>.
@@ -97,17 +99,19 @@ namespace Microsoft.Extensions.DependencyModel
             string path,
             string hashPath,
             string runtimeStoreManifestName
-        ) : base(
-            type,
-            name,
-            version,
-            hash,
-            dependencies,
-            serviceable,
-            path,
-            hashPath,
-            runtimeStoreManifestName
-        ) {
+        )
+            : base(
+                type,
+                name,
+                version,
+                hash,
+                dependencies,
+                serviceable,
+                path,
+                hashPath,
+                runtimeStoreManifestName
+            )
+        {
             if (runtimeAssemblyGroups == null)
             {
                 throw new ArgumentNullException(nameof(runtimeAssemblyGroups));

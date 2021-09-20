@@ -330,7 +330,8 @@ namespace System
         public static System.Runtime.Remoting.ObjectHandle? CreateInstance(
             string assemblyName,
             string typeName
-        ) {
+        )
+        {
             throw null;
         }
         public static System.Runtime.Remoting.ObjectHandle? CreateInstance(
@@ -342,14 +343,16 @@ namespace System
             object?[]? args,
             System.Globalization.CultureInfo? culture,
             object?[]? activationAttributes
-        ) {
+        )
+        {
             throw null;
         }
         public static System.Runtime.Remoting.ObjectHandle? CreateInstance(
             string assemblyName,
             string typeName,
             object?[]? activationAttributes
-        ) {
+        )
+        {
             throw null;
         }
         public static object? CreateInstance(
@@ -357,7 +360,8 @@ namespace System
                 System.Diagnostics.CodeAnalysis.DynamicallyAccessedMemberTypes.PublicParameterlessConstructor
             )]
                 System.Type type
-        ) {
+        )
+        {
             throw null;
         }
         public static object? CreateInstance(
@@ -367,7 +371,8 @@ namespace System
             )]
                 System.Type type,
             bool nonPublic
-        ) {
+        )
+        {
             throw null;
         }
         public static object? CreateInstance(
@@ -376,7 +381,8 @@ namespace System
             )]
                 System.Type type,
             params object?[]? args
-        ) {
+        )
+        {
             throw null;
         }
         public static object? CreateInstance(
@@ -386,7 +392,8 @@ namespace System
                 System.Type type,
             object?[]? args,
             object?[]? activationAttributes
-        ) {
+        )
+        {
             throw null;
         }
         public static object? CreateInstance(
@@ -399,7 +406,8 @@ namespace System
             System.Reflection.Binder? binder,
             object?[]? args,
             System.Globalization.CultureInfo? culture
-        ) {
+        )
+        {
             throw null;
         }
         public static object? CreateInstance(
@@ -409,7 +417,8 @@ namespace System
             object?[]? args,
             System.Globalization.CultureInfo? culture,
             object?[]? activationAttributes
-        ) {
+        )
+        {
             throw null;
         }
         [System.Diagnostics.CodeAnalysis.RequiresUnreferencedCodeAttribute(
@@ -418,7 +427,8 @@ namespace System
         public static System.Runtime.Remoting.ObjectHandle? CreateInstanceFrom(
             string assemblyFile,
             string typeName
-        ) {
+        )
+        {
             throw null;
         }
         [System.Diagnostics.CodeAnalysis.RequiresUnreferencedCodeAttribute(
@@ -433,7 +443,8 @@ namespace System
             object?[]? args,
             System.Globalization.CultureInfo? culture,
             object?[]? activationAttributes
-        ) {
+        )
+        {
             throw null;
         }
         [System.Diagnostics.CodeAnalysis.RequiresUnreferencedCodeAttribute(
@@ -443,7 +454,8 @@ namespace System
             string assemblyFile,
             string typeName,
             object?[]? activationAttributes
-        ) {
+        )
+        {
             throw null;
         }
         public static T CreateInstance<
@@ -664,7 +676,8 @@ namespace System
         public System.Runtime.Remoting.ObjectHandle? CreateInstance(
             string assemblyName,
             string typeName
-        ) {
+        )
+        {
             throw null;
         }
         [System.Diagnostics.CodeAnalysis.RequiresUnreferencedCodeAttribute(
@@ -679,7 +692,8 @@ namespace System
             object?[]? args,
             System.Globalization.CultureInfo? culture,
             object?[]? activationAttributes
-        ) {
+        )
+        {
             throw null;
         }
         [System.Diagnostics.CodeAnalysis.RequiresUnreferencedCodeAttribute(
@@ -689,7 +703,8 @@ namespace System
             string assemblyName,
             string typeName,
             object?[]? activationAttributes
-        ) {
+        )
+        {
             throw null;
         }
         [System.Diagnostics.CodeAnalysis.RequiresUnreferencedCodeAttribute(
@@ -711,7 +726,8 @@ namespace System
             object?[]? args,
             System.Globalization.CultureInfo? culture,
             object?[]? activationAttributes
-        ) {
+        )
+        {
             throw null;
         }
         [System.Diagnostics.CodeAnalysis.RequiresUnreferencedCodeAttribute(
@@ -721,7 +737,8 @@ namespace System
             string assemblyName,
             string typeName,
             object?[]? activationAttributes
-        ) {
+        )
+        {
             throw null;
         }
         [System.Diagnostics.CodeAnalysis.RequiresUnreferencedCodeAttribute(
@@ -730,7 +747,8 @@ namespace System
         public System.Runtime.Remoting.ObjectHandle? CreateInstanceFrom(
             string assemblyFile,
             string typeName
-        ) {
+        )
+        {
             throw null;
         }
         [System.Diagnostics.CodeAnalysis.RequiresUnreferencedCodeAttribute(
@@ -745,7 +763,8 @@ namespace System
             object?[]? args,
             System.Globalization.CultureInfo? culture,
             object?[]? activationAttributes
-        ) {
+        )
+        {
             throw null;
         }
         [System.Diagnostics.CodeAnalysis.RequiresUnreferencedCodeAttribute(
@@ -755,7 +774,8 @@ namespace System
             string assemblyFile,
             string typeName,
             object?[]? activationAttributes
-        ) {
+        )
+        {
             throw null;
         }
         [System.Diagnostics.CodeAnalysis.RequiresUnreferencedCodeAttribute(
@@ -777,7 +797,8 @@ namespace System
             object?[]? args,
             System.Globalization.CultureInfo? culture,
             object?[]? activationAttributes
-        ) {
+        )
+        {
             throw null;
         }
         [System.Diagnostics.CodeAnalysis.RequiresUnreferencedCodeAttribute(
@@ -787,7 +808,8 @@ namespace System
             string assemblyFile,
             string typeName,
             object?[]? activationAttributes
-        ) {
+        )
+        {
             throw null;
         }
         [System.Diagnostics.CodeAnalysis.RequiresUnreferencedCodeAttribute(
@@ -812,13 +834,15 @@ namespace System
             string?[]? args,
             byte[]? hashValue,
             System.Configuration.Assemblies.AssemblyHashAlgorithm hashAlgorithm
-        ) {
+        )
+        {
             throw null;
         }
         public int ExecuteAssemblyByName(
             System.Reflection.AssemblyName assemblyName,
             params string?[]? args
-        ) {
+        )
+        {
             throw null;
         }
         public int ExecuteAssemblyByName(string assemblyName)
@@ -975,7 +999,8 @@ namespace System
         }
         public override bool Equals(
             [System.Diagnostics.CodeAnalysis.NotNullWhenAttribute(true)] object? o
-        ) {
+        )
+        {
             throw null;
         }
         public override int GetHashCode()
@@ -1165,7 +1190,8 @@ namespace System
             int length,
             object? value,
             System.Collections.IComparer? comparer
-        ) {
+        )
+        {
             throw null;
         }
         public static int BinarySearch(System.Array array, object? value)
@@ -1176,7 +1202,8 @@ namespace System
             System.Array array,
             object? value,
             System.Collections.IComparer? comparer
-        ) {
+        )
+        {
             throw null;
         }
         public static int BinarySearch<T>(T[] array, int index, int length, T value)
@@ -1189,7 +1216,8 @@ namespace System
             int length,
             T value,
             System.Collections.Generic.IComparer<T>? comparer
-        ) {
+        )
+        {
             throw null;
         }
         public static int BinarySearch<T>(T[] array, T value)
@@ -1200,7 +1228,8 @@ namespace System
             T[] array,
             T value,
             System.Collections.Generic.IComparer<T>? comparer
-        ) {
+        )
+        {
             throw null;
         }
         public static void Clear(System.Array array, int index, int length) { }
@@ -1218,7 +1247,8 @@ namespace System
         public static TOutput[] ConvertAll<TInput, TOutput>(
             TInput[] array,
             System.Converter<TInput, TOutput> converter
-        ) {
+        )
+        {
             throw null;
         }
         public static void Copy(
@@ -1260,7 +1290,8 @@ namespace System
             int length1,
             int length2,
             int length3
-        ) {
+        )
+        {
             throw null;
         }
         public static System.Array CreateInstance(System.Type elementType, params int[] lengths)
@@ -1271,7 +1302,8 @@ namespace System
             System.Type elementType,
             int[] lengths,
             int[] lowerBounds
-        ) {
+        )
+        {
             throw null;
         }
         public static System.Array CreateInstance(System.Type elementType, params long[] lengths)
@@ -1297,7 +1329,8 @@ namespace System
             int startIndex,
             int count,
             System.Predicate<T> match
-        ) {
+        )
+        {
             throw null;
         }
         public static int FindIndex<T>(T[] array, int startIndex, System.Predicate<T> match)
@@ -1313,7 +1346,8 @@ namespace System
             int startIndex,
             int count,
             System.Predicate<T> match
-        ) {
+        )
+        {
             throw null;
         }
         public static int FindLastIndex<T>(T[] array, int startIndex, System.Predicate<T> match)
@@ -1437,7 +1471,8 @@ namespace System
         public static void Resize<T>(
             [System.Diagnostics.CodeAnalysis.NotNullAttribute] ref T[]? array,
             int newSize
-        ) {
+        )
+        {
             throw null;
         }
         public static void Reverse(System.Array array) { }
@@ -1523,18 +1558,21 @@ namespace System
         int System.Collections.IStructuralComparable.CompareTo(
             object? other,
             System.Collections.IComparer comparer
-        ) {
+        )
+        {
             throw null;
         }
         bool System.Collections.IStructuralEquatable.Equals(
             object? other,
             System.Collections.IEqualityComparer comparer
-        ) {
+        )
+        {
             throw null;
         }
         int System.Collections.IStructuralEquatable.GetHashCode(
             System.Collections.IEqualityComparer comparer
-        ) {
+        )
+        {
             throw null;
         }
         public static bool TrueForAll<T>(T[] array, System.Predicate<T> match)
@@ -1604,7 +1642,8 @@ namespace System
         }
         public override bool Equals(
             [System.Diagnostics.CodeAnalysis.NotNullWhenAttribute(true)] object? obj
-        ) {
+        )
+        {
             throw null;
         }
         public System.ArraySegment<T>.Enumerator GetEnumerator()
@@ -1724,59 +1763,68 @@ namespace System
         }
         public override bool Equals(
             [System.Diagnostics.CodeAnalysis.NotNullWhenAttribute(true)] object? obj
-        ) {
+        )
+        {
             throw null;
         }
         public static System.Attribute? GetCustomAttribute(
             System.Reflection.Assembly element,
             System.Type attributeType
-        ) {
+        )
+        {
             throw null;
         }
         public static System.Attribute? GetCustomAttribute(
             System.Reflection.Assembly element,
             System.Type attributeType,
             bool inherit
-        ) {
+        )
+        {
             throw null;
         }
         public static System.Attribute? GetCustomAttribute(
             System.Reflection.MemberInfo element,
             System.Type attributeType
-        ) {
+        )
+        {
             throw null;
         }
         public static System.Attribute? GetCustomAttribute(
             System.Reflection.MemberInfo element,
             System.Type attributeType,
             bool inherit
-        ) {
+        )
+        {
             throw null;
         }
         public static System.Attribute? GetCustomAttribute(
             System.Reflection.Module element,
             System.Type attributeType
-        ) {
+        )
+        {
             throw null;
         }
         public static System.Attribute? GetCustomAttribute(
             System.Reflection.Module element,
             System.Type attributeType,
             bool inherit
-        ) {
+        )
+        {
             throw null;
         }
         public static System.Attribute? GetCustomAttribute(
             System.Reflection.ParameterInfo element,
             System.Type attributeType
-        ) {
+        )
+        {
             throw null;
         }
         public static System.Attribute? GetCustomAttribute(
             System.Reflection.ParameterInfo element,
             System.Type attributeType,
             bool inherit
-        ) {
+        )
+        {
             throw null;
         }
         public static System.Attribute[] GetCustomAttributes(System.Reflection.Assembly element)
@@ -1786,20 +1834,23 @@ namespace System
         public static System.Attribute[] GetCustomAttributes(
             System.Reflection.Assembly element,
             bool inherit
-        ) {
+        )
+        {
             throw null;
         }
         public static System.Attribute[] GetCustomAttributes(
             System.Reflection.Assembly element,
             System.Type attributeType
-        ) {
+        )
+        {
             throw null;
         }
         public static System.Attribute[] GetCustomAttributes(
             System.Reflection.Assembly element,
             System.Type attributeType,
             bool inherit
-        ) {
+        )
+        {
             throw null;
         }
         public static System.Attribute[] GetCustomAttributes(System.Reflection.MemberInfo element)
@@ -1809,20 +1860,23 @@ namespace System
         public static System.Attribute[] GetCustomAttributes(
             System.Reflection.MemberInfo element,
             bool inherit
-        ) {
+        )
+        {
             throw null;
         }
         public static System.Attribute[] GetCustomAttributes(
             System.Reflection.MemberInfo element,
             System.Type attributeType
-        ) {
+        )
+        {
             throw null;
         }
         public static System.Attribute[] GetCustomAttributes(
             System.Reflection.MemberInfo element,
             System.Type attributeType,
             bool inherit
-        ) {
+        )
+        {
             throw null;
         }
         public static System.Attribute[] GetCustomAttributes(System.Reflection.Module element)
@@ -1832,44 +1886,51 @@ namespace System
         public static System.Attribute[] GetCustomAttributes(
             System.Reflection.Module element,
             bool inherit
-        ) {
+        )
+        {
             throw null;
         }
         public static System.Attribute[] GetCustomAttributes(
             System.Reflection.Module element,
             System.Type attributeType
-        ) {
+        )
+        {
             throw null;
         }
         public static System.Attribute[] GetCustomAttributes(
             System.Reflection.Module element,
             System.Type attributeType,
             bool inherit
-        ) {
+        )
+        {
             throw null;
         }
         public static System.Attribute[] GetCustomAttributes(
             System.Reflection.ParameterInfo element
-        ) {
+        )
+        {
             throw null;
         }
         public static System.Attribute[] GetCustomAttributes(
             System.Reflection.ParameterInfo element,
             bool inherit
-        ) {
+        )
+        {
             throw null;
         }
         public static System.Attribute[] GetCustomAttributes(
             System.Reflection.ParameterInfo element,
             System.Type attributeType
-        ) {
+        )
+        {
             throw null;
         }
         public static System.Attribute[] GetCustomAttributes(
             System.Reflection.ParameterInfo element,
             System.Type attributeType,
             bool inherit
-        ) {
+        )
+        {
             throw null;
         }
         public override int GetHashCode()
@@ -1888,20 +1949,23 @@ namespace System
             System.Reflection.Assembly element,
             System.Type attributeType,
             bool inherit
-        ) {
+        )
+        {
             throw null;
         }
         public static bool IsDefined(
             System.Reflection.MemberInfo element,
             System.Type attributeType
-        ) {
+        )
+        {
             throw null;
         }
         public static bool IsDefined(
             System.Reflection.MemberInfo element,
             System.Type attributeType,
             bool inherit
-        ) {
+        )
+        {
             throw null;
         }
         public static bool IsDefined(System.Reflection.Module element, System.Type attributeType)
@@ -1912,20 +1976,23 @@ namespace System
             System.Reflection.Module element,
             System.Type attributeType,
             bool inherit
-        ) {
+        )
+        {
             throw null;
         }
         public static bool IsDefined(
             System.Reflection.ParameterInfo element,
             System.Type attributeType
-        ) {
+        )
+        {
             throw null;
         }
         public static bool IsDefined(
             System.Reflection.ParameterInfo element,
             System.Type attributeType,
             bool inherit
-        ) {
+        )
+        {
             throw null;
         }
         public virtual bool Match(object? obj)
@@ -2262,7 +2329,8 @@ namespace System
         }
         public override System.Boolean Equals(
             [System.Diagnostics.CodeAnalysis.NotNullWhenAttribute(true)] object? obj
-        ) {
+        )
+        {
             throw null;
         }
         public override int GetHashCode()
@@ -2356,13 +2424,15 @@ namespace System
         public static System.Boolean TryParse(
             System.ReadOnlySpan<char> value,
             out System.Boolean result
-        ) {
+        )
+        {
             throw null;
         }
         public static System.Boolean TryParse(
             [System.Diagnostics.CodeAnalysis.NotNullWhenAttribute(true)] string? value,
             out System.Boolean result
-        ) {
+        )
+        {
             throw null;
         }
     }
@@ -2423,7 +2493,8 @@ namespace System
         }
         public override bool Equals(
             [System.Diagnostics.CodeAnalysis.NotNullWhenAttribute(true)] object? obj
-        ) {
+        )
+        {
             throw null;
         }
         public override int GetHashCode()
@@ -2438,7 +2509,8 @@ namespace System
             System.ReadOnlySpan<char> s,
             System.Globalization.NumberStyles style = System.Globalization.NumberStyles.Integer,
             System.IFormatProvider? provider = null
-        ) {
+        )
+        {
             throw null;
         }
         public static System.Byte Parse(string s)
@@ -2453,7 +2525,8 @@ namespace System
             string s,
             System.Globalization.NumberStyles style,
             System.IFormatProvider? provider
-        ) {
+        )
+        {
             throw null;
         }
         public static System.Byte Parse(string s, System.IFormatProvider? provider)
@@ -2541,7 +2614,8 @@ namespace System
             out int charsWritten,
             System.ReadOnlySpan<char> format = default(System.ReadOnlySpan<char>),
             System.IFormatProvider? provider = null
-        ) {
+        )
+        {
             throw null;
         }
         public static bool TryParse(System.ReadOnlySpan<char> s, out System.Byte result)
@@ -2553,13 +2627,15 @@ namespace System
             System.Globalization.NumberStyles style,
             System.IFormatProvider? provider,
             out System.Byte result
-        ) {
+        )
+        {
             throw null;
         }
         public static bool TryParse(
             [System.Diagnostics.CodeAnalysis.NotNullWhenAttribute(true)] string? s,
             out System.Byte result
-        ) {
+        )
+        {
             throw null;
         }
         public static bool TryParse(
@@ -2567,7 +2643,8 @@ namespace System
             System.Globalization.NumberStyles style,
             System.IFormatProvider? provider,
             out System.Byte result
-        ) {
+        )
+        {
             throw null;
         }
     }
@@ -2621,7 +2698,8 @@ namespace System
         }
         public override bool Equals(
             [System.Diagnostics.CodeAnalysis.NotNullWhenAttribute(true)] object? obj
-        ) {
+        )
+        {
             throw null;
         }
         public override int GetHashCode()
@@ -2871,7 +2949,8 @@ namespace System
         public static bool TryParse(
             [System.Diagnostics.CodeAnalysis.NotNullWhenAttribute(true)] string? s,
             out System.Char result
-        ) {
+        )
+        {
             throw null;
         }
         bool System.ISpanFormattable.TryFormat(
@@ -2879,7 +2958,8 @@ namespace System
             out int charsWritten,
             System.ReadOnlySpan<char> format,
             System.IFormatProvider? provider
-        ) {
+        )
+        {
             throw null;
         }
         string System.IFormattable.ToString(string? format, IFormatProvider? formatProvider)
@@ -2959,7 +3039,8 @@ namespace System
             object? value,
             System.Type conversionType,
             System.IFormatProvider? provider
-        ) {
+        )
+        {
             throw null;
         }
         [return: System.Diagnostics.CodeAnalysis.NotNullIfNotNullAttribute("value")]
@@ -2972,7 +3053,8 @@ namespace System
             object? value,
             System.TypeCode typeCode,
             System.IFormatProvider? provider
-        ) {
+        )
+        {
             throw null;
         }
         public static byte[] FromBase64CharArray(char[] inArray, int offset, int length)
@@ -2989,7 +3071,8 @@ namespace System
         }
         public static bool IsDBNull(
             [System.Diagnostics.CodeAnalysis.NotNullWhenAttribute(true)] object? value
-        ) {
+        )
+        {
             throw null;
         }
         public static int ToBase64CharArray(
@@ -2998,7 +3081,8 @@ namespace System
             int length,
             char[] outArray,
             int offsetOut
-        ) {
+        )
+        {
             throw null;
         }
         public static int ToBase64CharArray(
@@ -3008,7 +3092,8 @@ namespace System
             char[] outArray,
             int offsetOut,
             System.Base64FormattingOptions options
-        ) {
+        )
+        {
             throw null;
         }
         public static string ToBase64String(byte[] inArray)
@@ -3028,13 +3113,15 @@ namespace System
             int offset,
             int length,
             System.Base64FormattingOptions options
-        ) {
+        )
+        {
             throw null;
         }
         public static string ToBase64String(
             System.ReadOnlySpan<byte> bytes,
             System.Base64FormattingOptions options = System.Base64FormattingOptions.None
-        ) {
+        )
+        {
             throw null;
         }
         public static bool ToBoolean(bool value)
@@ -3075,13 +3162,15 @@ namespace System
         }
         public static bool ToBoolean(
             [System.Diagnostics.CodeAnalysis.NotNullWhenAttribute(true)] object? value
-        ) {
+        )
+        {
             throw null;
         }
         public static bool ToBoolean(
             [System.Diagnostics.CodeAnalysis.NotNullWhenAttribute(true)] object? value,
             System.IFormatProvider? provider
-        ) {
+        )
+        {
             throw null;
         }
         [System.CLSCompliantAttribute(false)]
@@ -3095,13 +3184,15 @@ namespace System
         }
         public static bool ToBoolean(
             [System.Diagnostics.CodeAnalysis.NotNullWhenAttribute(true)] string? value
-        ) {
+        )
+        {
             throw null;
         }
         public static bool ToBoolean(
             [System.Diagnostics.CodeAnalysis.NotNullWhenAttribute(true)] string? value,
             System.IFormatProvider? provider
-        ) {
+        )
+        {
             throw null;
         }
         [System.CLSCompliantAttribute(false)]
@@ -4377,14 +4468,16 @@ namespace System
             System.ReadOnlySpan<char> chars,
             System.Span<byte> bytes,
             out int bytesWritten
-        ) {
+        )
+        {
             throw null;
         }
         public static bool TryFromBase64String(
             string s,
             System.Span<byte> bytes,
             out int bytesWritten
-        ) {
+        )
+        {
             throw null;
         }
         public static bool TryToBase64Chars(
@@ -4392,7 +4485,8 @@ namespace System
             System.Span<char> chars,
             out int charsWritten,
             System.Base64FormattingOptions options = System.Base64FormattingOptions.None
-        ) {
+        )
+        {
             throw null;
         }
     }
@@ -4519,7 +4613,8 @@ namespace System
             System.ReadOnlySpan<char> s,
             System.IFormatProvider? provider = default,
             System.Globalization.DateTimeStyles style = System.Globalization.DateTimeStyles.None
-        ) {
+        )
+        {
             throw null;
         }
         public static System.DateOnly ParseExact(
@@ -4527,7 +4622,8 @@ namespace System
             System.ReadOnlySpan<char> format,
             System.IFormatProvider? provider = default,
             System.Globalization.DateTimeStyles style = System.Globalization.DateTimeStyles.None
-        ) {
+        )
+        {
             throw null;
         }
         public static System.DateOnly ParseExact(System.ReadOnlySpan<char> s, string[] formats)
@@ -4539,7 +4635,8 @@ namespace System
             string[] formats,
             System.IFormatProvider? provider,
             System.Globalization.DateTimeStyles style = System.Globalization.DateTimeStyles.None
-        ) {
+        )
+        {
             throw null;
         }
         public static System.DateOnly Parse(string s)
@@ -4550,7 +4647,8 @@ namespace System
             string s,
             System.IFormatProvider? provider,
             System.Globalization.DateTimeStyles style = System.Globalization.DateTimeStyles.None
-        ) {
+        )
+        {
             throw null;
         }
         public static System.DateOnly ParseExact(string s, string format)
@@ -4562,7 +4660,8 @@ namespace System
             string format,
             System.IFormatProvider? provider,
             System.Globalization.DateTimeStyles style = System.Globalization.DateTimeStyles.None
-        ) {
+        )
+        {
             throw null;
         }
         public static System.DateOnly ParseExact(string s, string[] formats)
@@ -4574,7 +4673,8 @@ namespace System
             string[] formats,
             System.IFormatProvider? provider,
             System.Globalization.DateTimeStyles style = System.Globalization.DateTimeStyles.None
-        ) {
+        )
+        {
             throw null;
         }
         public static bool TryParse(System.ReadOnlySpan<char> s, out System.DateOnly result)
@@ -4586,14 +4686,16 @@ namespace System
             System.IFormatProvider? provider,
             System.Globalization.DateTimeStyles style,
             out System.DateOnly result
-        ) {
+        )
+        {
             throw null;
         }
         public static bool TryParseExact(
             System.ReadOnlySpan<char> s,
             System.ReadOnlySpan<char> format,
             out System.DateOnly result
-        ) {
+        )
+        {
             throw null;
         }
         public static bool TryParseExact(
@@ -4602,14 +4704,16 @@ namespace System
             System.IFormatProvider? provider,
             System.Globalization.DateTimeStyles style,
             out System.DateOnly result
-        ) {
+        )
+        {
             throw null;
         }
         public static bool TryParseExact(
             System.ReadOnlySpan<char> s,
             string[] formats,
             out System.DateOnly result
-        ) {
+        )
+        {
             throw null;
         }
         public static bool TryParseExact(
@@ -4618,7 +4722,8 @@ namespace System
             System.IFormatProvider? provider,
             System.Globalization.DateTimeStyles style,
             out System.DateOnly result
-        ) {
+        )
+        {
             throw null;
         }
         public static bool TryParse(string s, out System.DateOnly result)
@@ -4630,7 +4735,8 @@ namespace System
             System.IFormatProvider? provider,
             System.Globalization.DateTimeStyles style,
             out System.DateOnly result
-        ) {
+        )
+        {
             throw null;
         }
         public static bool TryParseExact(string s, string format, out System.DateOnly result)
@@ -4643,7 +4749,8 @@ namespace System
             System.IFormatProvider? provider,
             System.Globalization.DateTimeStyles style,
             out System.DateOnly result
-        ) {
+        )
+        {
             throw null;
         }
         public static bool TryParseExact(string s, string[] formats, out System.DateOnly result)
@@ -4656,7 +4763,8 @@ namespace System
             System.IFormatProvider? provider,
             System.Globalization.DateTimeStyles style,
             out System.DateOnly result
-        ) {
+        )
+        {
             throw null;
         }
         public string ToLongDateString()
@@ -4688,7 +4796,8 @@ namespace System
             out int charsWritten,
             System.ReadOnlySpan<char> format = default(System.ReadOnlySpan<char>),
             System.IFormatProvider? provider = null
-        ) {
+        )
+        {
             throw null;
         }
     }
@@ -4724,7 +4833,8 @@ namespace System
             int minute,
             int second,
             System.DateTimeKind kind
-        ) {
+        )
+        {
             throw null;
         }
         public DateTime(
@@ -4735,7 +4845,8 @@ namespace System
             int minute,
             int second,
             System.Globalization.Calendar calendar
-        ) {
+        )
+        {
             throw null;
         }
         public DateTime(
@@ -4746,7 +4857,8 @@ namespace System
             int minute,
             int second,
             int millisecond
-        ) {
+        )
+        {
             throw null;
         }
         public DateTime(
@@ -4758,7 +4870,8 @@ namespace System
             int second,
             int millisecond,
             System.DateTimeKind kind
-        ) {
+        )
+        {
             throw null;
         }
         public DateTime(
@@ -4770,7 +4883,8 @@ namespace System
             int second,
             int millisecond,
             System.Globalization.Calendar calendar
-        ) {
+        )
+        {
             throw null;
         }
         public DateTime(
@@ -4783,7 +4897,8 @@ namespace System
             int millisecond,
             System.Globalization.Calendar calendar,
             System.DateTimeKind kind
-        ) {
+        )
+        {
             throw null;
         }
         public DateTime(long ticks)
@@ -4920,7 +5035,8 @@ namespace System
         }
         public override bool Equals(
             [System.Diagnostics.CodeAnalysis.NotNullWhenAttribute(true)] object? value
-        ) {
+        )
+        {
             throw null;
         }
         public static System.DateTime FromBinary(long dateData)
@@ -5011,7 +5127,8 @@ namespace System
             System.ReadOnlySpan<char> s,
             System.IFormatProvider? provider = null,
             System.Globalization.DateTimeStyles styles = System.Globalization.DateTimeStyles.None
-        ) {
+        )
+        {
             throw null;
         }
         public static System.DateTime Parse(string s)
@@ -5026,7 +5143,8 @@ namespace System
             string s,
             System.IFormatProvider? provider,
             System.Globalization.DateTimeStyles styles
-        ) {
+        )
+        {
             throw null;
         }
         public static System.DateTime ParseExact(
@@ -5034,7 +5152,8 @@ namespace System
             System.ReadOnlySpan<char> format,
             System.IFormatProvider? provider,
             System.Globalization.DateTimeStyles style = System.Globalization.DateTimeStyles.None
-        ) {
+        )
+        {
             throw null;
         }
         public static System.DateTime ParseExact(
@@ -5042,14 +5161,16 @@ namespace System
             string[] formats,
             System.IFormatProvider? provider,
             System.Globalization.DateTimeStyles style = System.Globalization.DateTimeStyles.None
-        ) {
+        )
+        {
             throw null;
         }
         public static System.DateTime ParseExact(
             string s,
             string format,
             System.IFormatProvider? provider
-        ) {
+        )
+        {
             throw null;
         }
         public static System.DateTime ParseExact(
@@ -5057,7 +5178,8 @@ namespace System
             string format,
             System.IFormatProvider? provider,
             System.Globalization.DateTimeStyles style
-        ) {
+        )
+        {
             throw null;
         }
         public static System.DateTime ParseExact(
@@ -5065,7 +5187,8 @@ namespace System
             string[] formats,
             System.IFormatProvider? provider,
             System.Globalization.DateTimeStyles style
-        ) {
+        )
+        {
             throw null;
         }
         public static System.DateTime SpecifyKind(System.DateTime value, System.DateTimeKind kind)
@@ -5205,7 +5328,8 @@ namespace System
             out int charsWritten,
             System.ReadOnlySpan<char> format = default(System.ReadOnlySpan<char>),
             System.IFormatProvider? provider = null
-        ) {
+        )
+        {
             throw null;
         }
         public static bool TryParse(System.ReadOnlySpan<char> s, out System.DateTime result)
@@ -5217,13 +5341,15 @@ namespace System
             System.IFormatProvider? provider,
             System.Globalization.DateTimeStyles styles,
             out System.DateTime result
-        ) {
+        )
+        {
             throw null;
         }
         public static bool TryParse(
             [System.Diagnostics.CodeAnalysis.NotNullWhenAttribute(true)] string? s,
             out System.DateTime result
-        ) {
+        )
+        {
             throw null;
         }
         public static bool TryParse(
@@ -5231,7 +5357,8 @@ namespace System
             System.IFormatProvider? provider,
             System.Globalization.DateTimeStyles styles,
             out System.DateTime result
-        ) {
+        )
+        {
             throw null;
         }
         public static bool TryParseExact(
@@ -5240,7 +5367,8 @@ namespace System
             System.IFormatProvider? provider,
             System.Globalization.DateTimeStyles style,
             out System.DateTime result
-        ) {
+        )
+        {
             throw null;
         }
         public static bool TryParseExact(
@@ -5249,7 +5377,8 @@ namespace System
             System.IFormatProvider? provider,
             System.Globalization.DateTimeStyles style,
             out System.DateTime result
-        ) {
+        )
+        {
             throw null;
         }
         public static bool TryParseExact(
@@ -5258,7 +5387,8 @@ namespace System
             System.IFormatProvider? provider,
             System.Globalization.DateTimeStyles style,
             out System.DateTime result
-        ) {
+        )
+        {
             throw null;
         }
         public static bool TryParseExact(
@@ -5267,7 +5397,8 @@ namespace System
             System.IFormatProvider? provider,
             System.Globalization.DateTimeStyles style,
             out System.DateTime result
-        ) {
+        )
+        {
             throw null;
         }
     }
@@ -5307,7 +5438,8 @@ namespace System
             int millisecond,
             System.Globalization.Calendar calendar,
             System.TimeSpan offset
-        ) {
+        )
+        {
             throw null;
         }
         public DateTimeOffset(
@@ -5319,7 +5451,8 @@ namespace System
             int second,
             int millisecond,
             System.TimeSpan offset
-        ) {
+        )
+        {
             throw null;
         }
         public DateTimeOffset(
@@ -5330,7 +5463,8 @@ namespace System
             int minute,
             int second,
             System.TimeSpan offset
-        ) {
+        )
+        {
             throw null;
         }
         public DateTimeOffset(long ticks, System.TimeSpan offset)
@@ -5467,7 +5601,8 @@ namespace System
         }
         public override bool Equals(
             [System.Diagnostics.CodeAnalysis.NotNullWhenAttribute(true)] object? obj
-        ) {
+        )
+        {
             throw null;
         }
         public bool EqualsExact(System.DateTimeOffset other)
@@ -5493,7 +5628,8 @@ namespace System
         public static System.DateTimeOffset operator +(
             System.DateTimeOffset dateTimeOffset,
             System.TimeSpan timeSpan
-        ) {
+        )
+        {
             throw null;
         }
         public static bool operator ==(System.DateTimeOffset left, System.DateTimeOffset right)
@@ -5527,20 +5663,23 @@ namespace System
         public static System.TimeSpan operator -(
             System.DateTimeOffset left,
             System.DateTimeOffset right
-        ) {
+        )
+        {
             throw null;
         }
         public static System.DateTimeOffset operator -(
             System.DateTimeOffset dateTimeOffset,
             System.TimeSpan timeSpan
-        ) {
+        )
+        {
             throw null;
         }
         public static System.DateTimeOffset Parse(
             System.ReadOnlySpan<char> input,
             System.IFormatProvider? formatProvider = null,
             System.Globalization.DateTimeStyles styles = System.Globalization.DateTimeStyles.None
-        ) {
+        )
+        {
             throw null;
         }
         public static System.DateTimeOffset Parse(string input)
@@ -5550,14 +5689,16 @@ namespace System
         public static System.DateTimeOffset Parse(
             string input,
             System.IFormatProvider? formatProvider
-        ) {
+        )
+        {
             throw null;
         }
         public static System.DateTimeOffset Parse(
             string input,
             System.IFormatProvider? formatProvider,
             System.Globalization.DateTimeStyles styles
-        ) {
+        )
+        {
             throw null;
         }
         public static System.DateTimeOffset ParseExact(
@@ -5565,7 +5706,8 @@ namespace System
             System.ReadOnlySpan<char> format,
             System.IFormatProvider? formatProvider,
             System.Globalization.DateTimeStyles styles = System.Globalization.DateTimeStyles.None
-        ) {
+        )
+        {
             throw null;
         }
         public static System.DateTimeOffset ParseExact(
@@ -5573,14 +5715,16 @@ namespace System
             string[] formats,
             System.IFormatProvider? formatProvider,
             System.Globalization.DateTimeStyles styles = System.Globalization.DateTimeStyles.None
-        ) {
+        )
+        {
             throw null;
         }
         public static System.DateTimeOffset ParseExact(
             string input,
             string format,
             System.IFormatProvider? formatProvider
-        ) {
+        )
+        {
             throw null;
         }
         public static System.DateTimeOffset ParseExact(
@@ -5588,7 +5732,8 @@ namespace System
             string format,
             System.IFormatProvider? formatProvider,
             System.Globalization.DateTimeStyles styles
-        ) {
+        )
+        {
             throw null;
         }
         public static System.DateTimeOffset ParseExact(
@@ -5596,7 +5741,8 @@ namespace System
             string[] formats,
             System.IFormatProvider? formatProvider,
             System.Globalization.DateTimeStyles styles
-        ) {
+        )
+        {
             throw null;
         }
         public System.TimeSpan Subtract(System.DateTimeOffset value)
@@ -5663,13 +5809,15 @@ namespace System
             out int charsWritten,
             System.ReadOnlySpan<char> format = default(System.ReadOnlySpan<char>),
             System.IFormatProvider? formatProvider = null
-        ) {
+        )
+        {
             throw null;
         }
         public static bool TryParse(
             System.ReadOnlySpan<char> input,
             out System.DateTimeOffset result
-        ) {
+        )
+        {
             throw null;
         }
         public static bool TryParse(
@@ -5677,13 +5825,15 @@ namespace System
             System.IFormatProvider? formatProvider,
             System.Globalization.DateTimeStyles styles,
             out System.DateTimeOffset result
-        ) {
+        )
+        {
             throw null;
         }
         public static bool TryParse(
             [System.Diagnostics.CodeAnalysis.NotNullWhenAttribute(true)] string? input,
             out System.DateTimeOffset result
-        ) {
+        )
+        {
             throw null;
         }
         public static bool TryParse(
@@ -5691,7 +5841,8 @@ namespace System
             System.IFormatProvider? formatProvider,
             System.Globalization.DateTimeStyles styles,
             out System.DateTimeOffset result
-        ) {
+        )
+        {
             throw null;
         }
         public static bool TryParseExact(
@@ -5700,7 +5851,8 @@ namespace System
             System.IFormatProvider? formatProvider,
             System.Globalization.DateTimeStyles styles,
             out System.DateTimeOffset result
-        ) {
+        )
+        {
             throw null;
         }
         public static bool TryParseExact(
@@ -5709,7 +5861,8 @@ namespace System
             System.IFormatProvider? formatProvider,
             System.Globalization.DateTimeStyles styles,
             out System.DateTimeOffset result
-        ) {
+        )
+        {
             throw null;
         }
         public static bool TryParseExact(
@@ -5718,7 +5871,8 @@ namespace System
             System.IFormatProvider? formatProvider,
             System.Globalization.DateTimeStyles styles,
             out System.DateTimeOffset result
-        ) {
+        )
+        {
             throw null;
         }
         public static bool TryParseExact(
@@ -5727,7 +5881,8 @@ namespace System
             System.IFormatProvider? formatProvider,
             System.Globalization.DateTimeStyles styles,
             out System.DateTimeOffset result
-        ) {
+        )
+        {
             throw null;
         }
     }
@@ -5946,7 +6101,8 @@ namespace System
         }
         public override bool Equals(
             [System.Diagnostics.CodeAnalysis.NotNullWhenAttribute(true)] object? value
-        ) {
+        )
+        {
             throw null;
         }
         public static System.Decimal Floor(System.Decimal d)
@@ -6141,7 +6297,8 @@ namespace System
             System.ReadOnlySpan<char> s,
             System.Globalization.NumberStyles style = System.Globalization.NumberStyles.Number,
             System.IFormatProvider? provider = null
-        ) {
+        )
+        {
             throw null;
         }
         public static System.Decimal Parse(string s)
@@ -6156,7 +6313,8 @@ namespace System
             string s,
             System.Globalization.NumberStyles style,
             System.IFormatProvider? provider
-        ) {
+        )
+        {
             throw null;
         }
         public static System.Decimal Parse(string s, System.IFormatProvider? provider)
@@ -6179,7 +6337,8 @@ namespace System
             System.Decimal d,
             int decimals,
             System.MidpointRounding mode
-        ) {
+        )
+        {
             throw null;
         }
         public static System.Decimal Round(System.Decimal d, System.MidpointRounding mode)
@@ -6330,14 +6489,16 @@ namespace System
             out int charsWritten,
             System.ReadOnlySpan<char> format = default(System.ReadOnlySpan<char>),
             System.IFormatProvider? provider = null
-        ) {
+        )
+        {
             throw null;
         }
         public static bool TryGetBits(
             System.Decimal d,
             System.Span<int> destination,
             out int valuesWritten
-        ) {
+        )
+        {
             throw null;
         }
         public static bool TryParse(System.ReadOnlySpan<char> s, out System.Decimal result)
@@ -6349,13 +6510,15 @@ namespace System
             System.Globalization.NumberStyles style,
             System.IFormatProvider? provider,
             out System.Decimal result
-        ) {
+        )
+        {
             throw null;
         }
         public static bool TryParse(
             [System.Diagnostics.CodeAnalysis.NotNullWhenAttribute(true)] string? s,
             out System.Decimal result
-        ) {
+        )
+        {
             throw null;
         }
         public static bool TryParse(
@@ -6363,7 +6526,8 @@ namespace System
             System.Globalization.NumberStyles style,
             System.IFormatProvider? provider,
             out System.Decimal result
-        ) {
+        )
+        {
             throw null;
         }
     }
@@ -6412,7 +6576,8 @@ namespace System
             System.Type type,
             object? firstArgument,
             System.Reflection.MethodInfo method
-        ) {
+        )
+        {
             throw null;
         }
         public static System.Delegate? CreateDelegate(
@@ -6420,7 +6585,8 @@ namespace System
             object? firstArgument,
             System.Reflection.MethodInfo method,
             bool throwOnBindFailure
-        ) {
+        )
+        {
             throw null;
         }
         [System.Diagnostics.CodeAnalysis.RequiresUnreferencedCodeAttribute(
@@ -6438,7 +6604,8 @@ namespace System
             object target,
             string method,
             bool ignoreCase
-        ) {
+        )
+        {
             throw null;
         }
         [System.Diagnostics.CodeAnalysis.RequiresUnreferencedCodeAttribute(
@@ -6450,20 +6617,23 @@ namespace System
             string method,
             bool ignoreCase,
             bool throwOnBindFailure
-        ) {
+        )
+        {
             throw null;
         }
         public static System.Delegate CreateDelegate(
             System.Type type,
             System.Reflection.MethodInfo method
-        ) {
+        )
+        {
             throw null;
         }
         public static System.Delegate? CreateDelegate(
             System.Type type,
             System.Reflection.MethodInfo method,
             bool throwOnBindFailure
-        ) {
+        )
+        {
             throw null;
         }
         public static System.Delegate CreateDelegate(
@@ -6473,7 +6643,8 @@ namespace System
             )]
                 System.Type target,
             string method
-        ) {
+        )
+        {
             throw null;
         }
         public static System.Delegate CreateDelegate(
@@ -6484,7 +6655,8 @@ namespace System
                 System.Type target,
             string method,
             bool ignoreCase
-        ) {
+        )
+        {
             throw null;
         }
         public static System.Delegate? CreateDelegate(
@@ -6496,7 +6668,8 @@ namespace System
             string method,
             bool ignoreCase,
             bool throwOnBindFailure
-        ) {
+        )
+        {
             throw null;
         }
         public object? DynamicInvoke(params object?[]? args)
@@ -6509,7 +6682,8 @@ namespace System
         }
         public override bool Equals(
             [System.Diagnostics.CodeAnalysis.NotNullWhenAttribute(true)] object? obj
-        ) {
+        )
+        {
             throw null;
         }
         public override int GetHashCode()
@@ -6587,7 +6761,8 @@ namespace System
         }
         public override bool Equals(
             [System.Diagnostics.CodeAnalysis.NotNullWhenAttribute(true)] object? obj
-        ) {
+        )
+        {
             throw null;
         }
         public override int GetHashCode()
@@ -6664,7 +6839,8 @@ namespace System
                 | System.Globalization.NumberStyles.AllowThousands
                 | System.Globalization.NumberStyles.AllowTrailingWhite,
             System.IFormatProvider? provider = null
-        ) {
+        )
+        {
             throw null;
         }
         public static System.Double Parse(string s)
@@ -6679,7 +6855,8 @@ namespace System
             string s,
             System.Globalization.NumberStyles style,
             System.IFormatProvider? provider
-        ) {
+        )
+        {
             throw null;
         }
         public static System.Double Parse(string s, System.IFormatProvider? provider)
@@ -6767,7 +6944,8 @@ namespace System
             out int charsWritten,
             System.ReadOnlySpan<char> format = default(System.ReadOnlySpan<char>),
             System.IFormatProvider? provider = null
-        ) {
+        )
+        {
             throw null;
         }
         public static bool TryParse(System.ReadOnlySpan<char> s, out System.Double result)
@@ -6779,13 +6957,15 @@ namespace System
             System.Globalization.NumberStyles style,
             System.IFormatProvider? provider,
             out System.Double result
-        ) {
+        )
+        {
             throw null;
         }
         public static bool TryParse(
             [System.Diagnostics.CodeAnalysis.NotNullWhenAttribute(true)] string? s,
             out System.Double result
-        ) {
+        )
+        {
             throw null;
         }
         public static bool TryParse(
@@ -6793,7 +6973,8 @@ namespace System
             System.Globalization.NumberStyles style,
             System.IFormatProvider? provider,
             out System.Double result
-        ) {
+        )
+        {
             throw null;
         }
     }
@@ -6831,7 +7012,8 @@ namespace System
         }
         public override bool Equals(
             [System.Diagnostics.CodeAnalysis.NotNullWhenAttribute(true)] object? obj
-        ) {
+        )
+        {
             throw null;
         }
         public static string Format(System.Type enumType, object value, string format)
@@ -6894,7 +7076,8 @@ namespace System
             System.Type enumType,
             System.ReadOnlySpan<char> value,
             bool ignoreCase
-        ) {
+        )
+        {
             throw null;
         }
         public static object Parse(System.Type enumType, string value)
@@ -7047,14 +7230,16 @@ namespace System
             System.ReadOnlySpan<char> value,
             bool ignoreCase,
             out object? result
-        ) {
+        )
+        {
             throw null;
         }
         public static bool TryParse(
             System.Type enumType,
             System.ReadOnlySpan<char> value,
             out object? result
-        ) {
+        )
+        {
             throw null;
         }
         public static bool TryParse(
@@ -7062,7 +7247,8 @@ namespace System
             string? value,
             bool ignoreCase,
             out object? result
-        ) {
+        )
+        {
             throw null;
         }
         public static bool TryParse(System.Type enumType, string? value, out object? result)
@@ -7224,7 +7410,8 @@ namespace System
         public static string? GetEnvironmentVariable(
             string variable,
             System.EnvironmentVariableTarget target
-        ) {
+        )
+        {
             throw null;
         }
         public static System.Collections.IDictionary GetEnvironmentVariables()
@@ -7233,7 +7420,8 @@ namespace System
         }
         public static System.Collections.IDictionary GetEnvironmentVariables(
             System.EnvironmentVariableTarget target
-        ) {
+        )
+        {
             throw null;
         }
         public static string GetFolderPath(System.Environment.SpecialFolder folder)
@@ -7243,7 +7431,8 @@ namespace System
         public static string GetFolderPath(
             System.Environment.SpecialFolder folder,
             System.Environment.SpecialFolderOption option
-        ) {
+        )
+        {
             throw null;
         }
         public static string[] GetLogicalDrives()
@@ -7798,7 +7987,8 @@ namespace System
             long totalSize,
             long lohSize,
             bool disallowFullBlockingGC
-        ) {
+        )
+        {
             throw null;
         }
         public static System.GCNotificationStatus WaitForFullGCApproach()
@@ -7976,7 +8166,8 @@ namespace System
             byte i,
             byte j,
             byte k
-        ) {
+        )
+        {
             throw null;
         }
         public Guid(int a, short b, short c, byte[] d)
@@ -8004,7 +8195,8 @@ namespace System
             byte i,
             byte j,
             byte k
-        ) {
+        )
+        {
             throw null;
         }
         public int CompareTo(System.Guid value)
@@ -8021,7 +8213,8 @@ namespace System
         }
         public override bool Equals(
             [System.Diagnostics.CodeAnalysis.NotNullWhenAttribute(true)] object? o
-        ) {
+        )
+        {
             throw null;
         }
         public override int GetHashCode()
@@ -8051,7 +8244,8 @@ namespace System
         public static System.Guid ParseExact(
             System.ReadOnlySpan<char> input,
             System.ReadOnlySpan<char> format
-        ) {
+        )
+        {
             throw null;
         }
         public static System.Guid ParseExact(string input, string format)
@@ -8078,7 +8272,8 @@ namespace System
             System.Span<char> destination,
             out int charsWritten,
             System.ReadOnlySpan<char> format = default(System.ReadOnlySpan<char>)
-        ) {
+        )
+        {
             throw null;
         }
         public static bool TryParse(System.ReadOnlySpan<char> input, out System.Guid result)
@@ -8088,21 +8283,24 @@ namespace System
         public static bool TryParse(
             [System.Diagnostics.CodeAnalysis.NotNullWhenAttribute(true)] string? input,
             out System.Guid result
-        ) {
+        )
+        {
             throw null;
         }
         public static bool TryParseExact(
             System.ReadOnlySpan<char> input,
             System.ReadOnlySpan<char> format,
             out System.Guid result
-        ) {
+        )
+        {
             throw null;
         }
         public static bool TryParseExact(
             [System.Diagnostics.CodeAnalysis.NotNullWhenAttribute(true)] string? input,
             [System.Diagnostics.CodeAnalysis.NotNullWhenAttribute(true)] string? format,
             out System.Guid result
-        ) {
+        )
+        {
             throw null;
         }
         public bool TryWriteBytes(System.Span<byte> destination)
@@ -8114,7 +8312,8 @@ namespace System
             out int charsWritten,
             System.ReadOnlySpan<char> format,
             System.IFormatProvider? provider
-        ) {
+        )
+        {
             throw null;
         }
     }
@@ -8163,7 +8362,8 @@ namespace System
         }
         public override bool Equals(
             [System.Diagnostics.CodeAnalysis.NotNullWhenAttribute(true)] object? obj
-        ) {
+        )
+        {
             throw null;
         }
         public override int GetHashCode()
@@ -8252,7 +8452,8 @@ namespace System
                 | System.Globalization.NumberStyles.AllowThousands
                 | System.Globalization.NumberStyles.AllowTrailingWhite,
             System.IFormatProvider? provider = null
-        ) {
+        )
+        {
             throw null;
         }
         public static System.Half Parse(string s)
@@ -8273,7 +8474,8 @@ namespace System
                 | System.Globalization.NumberStyles.AllowThousands
                 | System.Globalization.NumberStyles.AllowTrailingWhite,
             System.IFormatProvider? provider = null
-        ) {
+        )
+        {
             throw null;
         }
         public static System.Half Parse(string s, System.IFormatProvider? provider)
@@ -8301,7 +8503,8 @@ namespace System
             out int charsWritten,
             System.ReadOnlySpan<char> format = default(System.ReadOnlySpan<char>),
             System.IFormatProvider? provider = null
-        ) {
+        )
+        {
             throw null;
         }
         public static bool TryParse(
@@ -8309,7 +8512,8 @@ namespace System
             System.Globalization.NumberStyles style,
             System.IFormatProvider? provider,
             out System.Half result
-        ) {
+        )
+        {
             throw null;
         }
         public static bool TryParse(System.ReadOnlySpan<char> s, out System.Half result)
@@ -8321,13 +8525,15 @@ namespace System
             System.Globalization.NumberStyles style,
             System.IFormatProvider? provider,
             out System.Half result
-        ) {
+        )
+        {
             throw null;
         }
         public static bool TryParse(
             [System.Diagnostics.CodeAnalysis.NotNullWhenAttribute(true)] string? s,
             out System.Half result
-        ) {
+        )
+        {
             throw null;
         }
     }
@@ -8358,7 +8564,8 @@ namespace System
             T3 value3,
             T4 value4,
             T5 value5
-        ) {
+        )
+        {
             throw null;
         }
         public static int Combine<T1, T2, T3, T4, T5, T6>(
@@ -8368,7 +8575,8 @@ namespace System
             T4 value4,
             T5 value5,
             T6 value6
-        ) {
+        )
+        {
             throw null;
         }
         public static int Combine<T1, T2, T3, T4, T5, T6, T7>(
@@ -8379,7 +8587,8 @@ namespace System
             T5 value5,
             T6 value6,
             T7 value7
-        ) {
+        )
+        {
             throw null;
         }
         public static int Combine<T1, T2, T3, T4, T5, T6, T7, T8>(
@@ -8391,7 +8600,8 @@ namespace System
             T6 value6,
             T7 value7,
             T8 value8
-        ) {
+        )
+        {
             throw null;
         }
         [System.ComponentModel.EditorBrowsableAttribute(
@@ -8518,7 +8728,8 @@ namespace System
         }
         public override bool Equals(
             [System.Diagnostics.CodeAnalysis.NotNullWhenAttribute(true)] object? value
-        ) {
+        )
+        {
             throw null;
         }
         public static System.Index FromEnd(int value)
@@ -8591,7 +8802,8 @@ namespace System
         }
         public override bool Equals(
             [System.Diagnostics.CodeAnalysis.NotNullWhenAttribute(true)] object? obj
-        ) {
+        )
+        {
             throw null;
         }
         public override int GetHashCode()
@@ -8606,7 +8818,8 @@ namespace System
             System.ReadOnlySpan<char> s,
             System.Globalization.NumberStyles style = System.Globalization.NumberStyles.Integer,
             System.IFormatProvider? provider = null
-        ) {
+        )
+        {
             throw null;
         }
         public static System.Int16 Parse(string s)
@@ -8621,7 +8834,8 @@ namespace System
             string s,
             System.Globalization.NumberStyles style,
             System.IFormatProvider? provider
-        ) {
+        )
+        {
             throw null;
         }
         public static System.Int16 Parse(string s, System.IFormatProvider? provider)
@@ -8709,7 +8923,8 @@ namespace System
             out int charsWritten,
             System.ReadOnlySpan<char> format = default(System.ReadOnlySpan<char>),
             System.IFormatProvider? provider = null
-        ) {
+        )
+        {
             throw null;
         }
         public static bool TryParse(
@@ -8717,7 +8932,8 @@ namespace System
             System.Globalization.NumberStyles style,
             System.IFormatProvider? provider,
             out System.Int16 result
-        ) {
+        )
+        {
             throw null;
         }
         public static bool TryParse(System.ReadOnlySpan<char> s, out System.Int16 result)
@@ -8729,13 +8945,15 @@ namespace System
             System.Globalization.NumberStyles style,
             System.IFormatProvider? provider,
             out System.Int16 result
-        ) {
+        )
+        {
             throw null;
         }
         public static bool TryParse(
             [System.Diagnostics.CodeAnalysis.NotNullWhenAttribute(true)] string? s,
             out System.Int16 result
-        ) {
+        )
+        {
             throw null;
         }
     }
@@ -8763,7 +8981,8 @@ namespace System
         }
         public override bool Equals(
             [System.Diagnostics.CodeAnalysis.NotNullWhenAttribute(true)] object? obj
-        ) {
+        )
+        {
             throw null;
         }
         public override System.Int32 GetHashCode()
@@ -8778,7 +8997,8 @@ namespace System
             System.ReadOnlySpan<char> s,
             System.Globalization.NumberStyles style = System.Globalization.NumberStyles.Integer,
             System.IFormatProvider? provider = null
-        ) {
+        )
+        {
             throw null;
         }
         public static System.Int32 Parse(string s)
@@ -8793,7 +9013,8 @@ namespace System
             string s,
             System.Globalization.NumberStyles style,
             System.IFormatProvider? provider
-        ) {
+        )
+        {
             throw null;
         }
         public static System.Int32 Parse(string s, System.IFormatProvider? provider)
@@ -8881,7 +9102,8 @@ namespace System
             out System.Int32 charsWritten,
             System.ReadOnlySpan<char> format = default(System.ReadOnlySpan<char>),
             System.IFormatProvider? provider = null
-        ) {
+        )
+        {
             throw null;
         }
         public static bool TryParse(
@@ -8889,7 +9111,8 @@ namespace System
             System.Globalization.NumberStyles style,
             System.IFormatProvider? provider,
             out System.Int32 result
-        ) {
+        )
+        {
             throw null;
         }
         public static bool TryParse(System.ReadOnlySpan<char> s, out System.Int32 result)
@@ -8901,13 +9124,15 @@ namespace System
             System.Globalization.NumberStyles style,
             System.IFormatProvider? provider,
             out System.Int32 result
-        ) {
+        )
+        {
             throw null;
         }
         public static bool TryParse(
             [System.Diagnostics.CodeAnalysis.NotNullWhenAttribute(true)] string? s,
             out System.Int32 result
-        ) {
+        )
+        {
             throw null;
         }
     }
@@ -8935,7 +9160,8 @@ namespace System
         }
         public override bool Equals(
             [System.Diagnostics.CodeAnalysis.NotNullWhenAttribute(true)] object? obj
-        ) {
+        )
+        {
             throw null;
         }
         public override int GetHashCode()
@@ -8950,7 +9176,8 @@ namespace System
             System.ReadOnlySpan<char> s,
             System.Globalization.NumberStyles style = System.Globalization.NumberStyles.Integer,
             System.IFormatProvider? provider = null
-        ) {
+        )
+        {
             throw null;
         }
         public static System.Int64 Parse(string s)
@@ -8965,7 +9192,8 @@ namespace System
             string s,
             System.Globalization.NumberStyles style,
             System.IFormatProvider? provider
-        ) {
+        )
+        {
             throw null;
         }
         public static System.Int64 Parse(string s, System.IFormatProvider? provider)
@@ -9053,7 +9281,8 @@ namespace System
             out int charsWritten,
             System.ReadOnlySpan<char> format = default(System.ReadOnlySpan<char>),
             System.IFormatProvider? provider = null
-        ) {
+        )
+        {
             throw null;
         }
         public static bool TryParse(
@@ -9061,7 +9290,8 @@ namespace System
             System.Globalization.NumberStyles style,
             System.IFormatProvider? provider,
             out System.Int64 result
-        ) {
+        )
+        {
             throw null;
         }
         public static bool TryParse(System.ReadOnlySpan<char> s, out System.Int64 result)
@@ -9073,13 +9303,15 @@ namespace System
             System.Globalization.NumberStyles style,
             System.IFormatProvider? provider,
             out System.Int64 result
-        ) {
+        )
+        {
             throw null;
         }
         public static bool TryParse(
             [System.Diagnostics.CodeAnalysis.NotNullWhenAttribute(true)] string? s,
             out System.Int64 result
-        ) {
+        )
+        {
             throw null;
         }
     }
@@ -9135,7 +9367,8 @@ namespace System
         }
         public override bool Equals(
             [System.Diagnostics.CodeAnalysis.NotNullWhenAttribute(true)] object? obj
-        ) {
+        )
+        {
             throw null;
         }
         public override int GetHashCode()
@@ -9189,7 +9422,8 @@ namespace System
             out int charsWritten,
             System.ReadOnlySpan<char> format = default(System.ReadOnlySpan<char>),
             System.IFormatProvider? provider = null
-        ) {
+        )
+        {
             throw null;
         }
         public static System.IntPtr Parse(string s)
@@ -9204,7 +9438,8 @@ namespace System
             string s,
             System.Globalization.NumberStyles style,
             System.IFormatProvider? provider
-        ) {
+        )
+        {
             throw null;
         }
         public static System.IntPtr Parse(string s, System.IFormatProvider? provider)
@@ -9215,7 +9450,8 @@ namespace System
             System.ReadOnlySpan<char> s,
             System.Globalization.NumberStyles style = System.Globalization.NumberStyles.Integer,
             System.IFormatProvider? provider = null
-        ) {
+        )
+        {
             throw null;
         }
         public static System.IntPtr Subtract(System.IntPtr pointer, int offset)
@@ -9260,13 +9496,15 @@ namespace System
             System.Globalization.NumberStyles style,
             System.IFormatProvider? provider,
             out System.IntPtr result
-        ) {
+        )
+        {
             throw null;
         }
         public static bool TryParse(
             [System.Diagnostics.CodeAnalysis.NotNullWhenAttribute(true)] string? s,
             out System.IntPtr result
-        ) {
+        )
+        {
             throw null;
         }
         public static bool TryParse(System.ReadOnlySpan<char> s, out System.IntPtr result)
@@ -9278,7 +9516,8 @@ namespace System
             System.Globalization.NumberStyles style,
             System.IFormatProvider? provider,
             out System.IntPtr result
-        ) {
+        )
+        {
             throw null;
         }
     }
@@ -10174,7 +10413,8 @@ namespace System
         )]
         public override bool Equals(
             [System.Diagnostics.CodeAnalysis.NotNullWhenAttribute(true)] object? obj
-        ) {
+        )
+        {
             throw null;
         }
         [System.ComponentModel.EditorBrowsableAttribute(
@@ -10310,7 +10550,8 @@ namespace System
         }
         public override bool Equals(
             [System.Diagnostics.CodeAnalysis.NotNullWhenAttribute(true)] object? obj
-        ) {
+        )
+        {
             throw null;
         }
         public override int GetHashCode()
@@ -10345,7 +10586,8 @@ namespace System
             int fieldToken,
             System.RuntimeTypeHandle[]? typeInstantiationContext,
             System.RuntimeTypeHandle[]? methodInstantiationContext
-        ) {
+        )
+        {
             throw null;
         }
         public System.RuntimeMethodHandle ResolveMethodHandle(int methodToken)
@@ -10356,7 +10598,8 @@ namespace System
             int methodToken,
             System.RuntimeTypeHandle[]? typeInstantiationContext,
             System.RuntimeTypeHandle[]? methodInstantiationContext
-        ) {
+        )
+        {
             throw null;
         }
         public System.RuntimeTypeHandle ResolveTypeHandle(int typeToken)
@@ -10367,7 +10610,8 @@ namespace System
             int typeToken,
             System.RuntimeTypeHandle[]? typeInstantiationContext,
             System.RuntimeTypeHandle[]? methodInstantiationContext
-        ) {
+        )
+        {
             throw null;
         }
     }
@@ -10396,7 +10640,8 @@ namespace System
         }
         public sealed override bool Equals(
             [System.Diagnostics.CodeAnalysis.NotNullWhenAttribute(true)] object? obj
-        ) {
+        )
+        {
             throw null;
         }
         public sealed override int GetHashCode()
@@ -10701,7 +10946,8 @@ namespace System
             int minor = 0,
             int build = 0,
             int revision = 0
-        ) {
+        )
+        {
             throw null;
         }
         public static bool IsBrowser()
@@ -10721,7 +10967,8 @@ namespace System
             int minor = 0,
             int build = 0,
             int revision = 0
-        ) {
+        )
+        {
             throw null;
         }
         public static bool IsAndroid()
@@ -10733,7 +10980,8 @@ namespace System
             int minor = 0,
             int build = 0,
             int revision = 0
-        ) {
+        )
+        {
             throw null;
         }
         public static bool IsIOS()
@@ -10785,7 +11033,8 @@ namespace System
             int minor = 0,
             int build = 0,
             int revision = 0
-        ) {
+        )
+        {
             throw null;
         }
     }
@@ -10961,7 +11210,8 @@ namespace System
         }
         public override bool Equals(
             [System.Diagnostics.CodeAnalysis.NotNullWhenAttribute(true)] object? value
-        ) {
+        )
+        {
             throw null;
         }
         public bool Equals(System.Range other)
@@ -11029,7 +11279,8 @@ namespace System
         )]
         public override bool Equals(
             [System.Diagnostics.CodeAnalysis.NotNullWhenAttribute(true)] object? obj
-        ) {
+        )
+        {
             throw null;
         }
         public bool Equals(System.ReadOnlyMemory<T> other)
@@ -11237,13 +11488,15 @@ namespace System
         public static bool operator ==(
             System.RuntimeFieldHandle left,
             System.RuntimeFieldHandle right
-        ) {
+        )
+        {
             throw null;
         }
         public static bool operator !=(
             System.RuntimeFieldHandle left,
             System.RuntimeFieldHandle right
-        ) {
+        )
+        {
             throw null;
         }
     }
@@ -11278,13 +11531,15 @@ namespace System
         public static bool operator ==(
             System.RuntimeMethodHandle left,
             System.RuntimeMethodHandle right
-        ) {
+        )
+        {
             throw null;
         }
         public static bool operator !=(
             System.RuntimeMethodHandle left,
             System.RuntimeMethodHandle right
-        ) {
+        )
+        {
             throw null;
         }
     }
@@ -11354,7 +11609,8 @@ namespace System
         }
         public override bool Equals(
             [System.Diagnostics.CodeAnalysis.NotNullWhenAttribute(true)] object? obj
-        ) {
+        )
+        {
             throw null;
         }
         public bool Equals(System.SByte obj)
@@ -11373,7 +11629,8 @@ namespace System
             System.ReadOnlySpan<char> s,
             System.Globalization.NumberStyles style = System.Globalization.NumberStyles.Integer,
             System.IFormatProvider? provider = null
-        ) {
+        )
+        {
             throw null;
         }
         public static System.SByte Parse(string s)
@@ -11388,7 +11645,8 @@ namespace System
             string s,
             System.Globalization.NumberStyles style,
             System.IFormatProvider? provider
-        ) {
+        )
+        {
             throw null;
         }
         public static System.SByte Parse(string s, System.IFormatProvider? provider)
@@ -11476,7 +11734,8 @@ namespace System
             out int charsWritten,
             System.ReadOnlySpan<char> format = default(System.ReadOnlySpan<char>),
             System.IFormatProvider? provider = null
-        ) {
+        )
+        {
             throw null;
         }
         public static bool TryParse(
@@ -11484,7 +11743,8 @@ namespace System
             System.Globalization.NumberStyles style,
             System.IFormatProvider? provider,
             out System.SByte result
-        ) {
+        )
+        {
             throw null;
         }
         public static bool TryParse(System.ReadOnlySpan<char> s, out System.SByte result)
@@ -11496,13 +11756,15 @@ namespace System
             System.Globalization.NumberStyles style,
             System.IFormatProvider? provider,
             out System.SByte result
-        ) {
+        )
+        {
             throw null;
         }
         public static bool TryParse(
             [System.Diagnostics.CodeAnalysis.NotNullWhenAttribute(true)] string? s,
             out System.SByte result
-        ) {
+        )
+        {
             throw null;
         }
     }
@@ -11541,7 +11803,8 @@ namespace System
         }
         public override bool Equals(
             [System.Diagnostics.CodeAnalysis.NotNullWhenAttribute(true)] object? obj
-        ) {
+        )
+        {
             throw null;
         }
         public bool Equals(System.Single obj)
@@ -11622,7 +11885,8 @@ namespace System
                 | System.Globalization.NumberStyles.AllowThousands
                 | System.Globalization.NumberStyles.AllowTrailingWhite,
             System.IFormatProvider? provider = null
-        ) {
+        )
+        {
             throw null;
         }
         public static System.Single Parse(string s)
@@ -11637,7 +11901,8 @@ namespace System
             string s,
             System.Globalization.NumberStyles style,
             System.IFormatProvider? provider
-        ) {
+        )
+        {
             throw null;
         }
         public static System.Single Parse(string s, System.IFormatProvider? provider)
@@ -11725,7 +11990,8 @@ namespace System
             out int charsWritten,
             System.ReadOnlySpan<char> format = default(System.ReadOnlySpan<char>),
             System.IFormatProvider? provider = null
-        ) {
+        )
+        {
             throw null;
         }
         public static bool TryParse(
@@ -11733,7 +11999,8 @@ namespace System
             System.Globalization.NumberStyles style,
             System.IFormatProvider? provider,
             out System.Single result
-        ) {
+        )
+        {
             throw null;
         }
         public static bool TryParse(System.ReadOnlySpan<char> s, out System.Single result)
@@ -11745,13 +12012,15 @@ namespace System
             System.Globalization.NumberStyles style,
             System.IFormatProvider? provider,
             out System.Single result
-        ) {
+        )
+        {
             throw null;
         }
         public static bool TryParse(
             [System.Diagnostics.CodeAnalysis.NotNullWhenAttribute(true)] string? s,
             out System.Single result
-        ) {
+        )
+        {
             throw null;
         }
     }
@@ -11928,7 +12197,8 @@ namespace System
             System.String? strB,
             int indexB,
             int length
-        ) {
+        )
+        {
             throw null;
         }
         public static int Compare(
@@ -11938,7 +12208,8 @@ namespace System
             int indexB,
             int length,
             bool ignoreCase
-        ) {
+        )
+        {
             throw null;
         }
         public static int Compare(
@@ -11949,7 +12220,8 @@ namespace System
             int length,
             bool ignoreCase,
             System.Globalization.CultureInfo? culture
-        ) {
+        )
+        {
             throw null;
         }
         public static int Compare(
@@ -11960,7 +12232,8 @@ namespace System
             int length,
             System.Globalization.CultureInfo? culture,
             System.Globalization.CompareOptions options
-        ) {
+        )
+        {
             throw null;
         }
         public static int Compare(
@@ -11970,7 +12243,8 @@ namespace System
             int indexB,
             int length,
             System.StringComparison comparisonType
-        ) {
+        )
+        {
             throw null;
         }
         public static int Compare(System.String? strA, System.String? strB)
@@ -11986,7 +12260,8 @@ namespace System
             System.String? strB,
             bool ignoreCase,
             System.Globalization.CultureInfo? culture
-        ) {
+        )
+        {
             throw null;
         }
         public static int Compare(
@@ -11994,14 +12269,16 @@ namespace System
             System.String? strB,
             System.Globalization.CultureInfo? culture,
             System.Globalization.CompareOptions options
-        ) {
+        )
+        {
             throw null;
         }
         public static int Compare(
             System.String? strA,
             System.String? strB,
             System.StringComparison comparisonType
-        ) {
+        )
+        {
             throw null;
         }
         public static int CompareOrdinal(
@@ -12010,7 +12287,8 @@ namespace System
             System.String? strB,
             int indexB,
             int length
-        ) {
+        )
+        {
             throw null;
         }
         public static int CompareOrdinal(System.String? strA, System.String? strB)
@@ -12048,14 +12326,16 @@ namespace System
         public static System.String Concat(
             System.ReadOnlySpan<char> str0,
             System.ReadOnlySpan<char> str1
-        ) {
+        )
+        {
             throw null;
         }
         public static System.String Concat(
             System.ReadOnlySpan<char> str0,
             System.ReadOnlySpan<char> str1,
             System.ReadOnlySpan<char> str2
-        ) {
+        )
+        {
             throw null;
         }
         public static System.String Concat(
@@ -12063,7 +12343,8 @@ namespace System
             System.ReadOnlySpan<char> str1,
             System.ReadOnlySpan<char> str2,
             System.ReadOnlySpan<char> str3
-        ) {
+        )
+        {
             throw null;
         }
         public static System.String Concat(System.String? str0, System.String? str1)
@@ -12074,7 +12355,8 @@ namespace System
             System.String? str0,
             System.String? str1,
             System.String? str2
-        ) {
+        )
+        {
             throw null;
         }
         public static System.String Concat(
@@ -12082,7 +12364,8 @@ namespace System
             System.String? str1,
             System.String? str2,
             System.String? str3
-        ) {
+        )
+        {
             throw null;
         }
         public static System.String Concat(params string?[] values)
@@ -12124,7 +12407,8 @@ namespace System
             int length,
             TState state,
             System.Buffers.SpanAction<char, TState> action
-        ) {
+        )
+        {
             throw null;
         }
         public bool EndsWith(char value)
@@ -12139,7 +12423,8 @@ namespace System
             System.String value,
             bool ignoreCase,
             System.Globalization.CultureInfo? culture
-        ) {
+        )
+        {
             throw null;
         }
         public bool EndsWith(System.String value, System.StringComparison comparisonType)
@@ -12152,12 +12437,14 @@ namespace System
         }
         public override bool Equals(
             [System.Diagnostics.CodeAnalysis.NotNullWhenAttribute(true)] object? obj
-        ) {
+        )
+        {
             throw null;
         }
         public bool Equals(
             [System.Diagnostics.CodeAnalysis.NotNullWhenAttribute(true)] System.String? value
-        ) {
+        )
+        {
             throw null;
         }
         public static bool Equals(System.String? a, System.String? b)
@@ -12168,20 +12455,23 @@ namespace System
             System.String? a,
             System.String? b,
             System.StringComparison comparisonType
-        ) {
+        )
+        {
             throw null;
         }
         public bool Equals(
             [System.Diagnostics.CodeAnalysis.NotNullWhenAttribute(true)] System.String? value,
             System.StringComparison comparisonType
-        ) {
+        )
+        {
             throw null;
         }
         public static System.String Format(
             System.IFormatProvider? provider,
             System.String format,
             object? arg0
-        ) {
+        )
+        {
             throw null;
         }
         public static System.String Format(
@@ -12189,7 +12479,8 @@ namespace System
             System.String format,
             object? arg0,
             object? arg1
-        ) {
+        )
+        {
             throw null;
         }
         public static System.String Format(
@@ -12198,14 +12489,16 @@ namespace System
             object? arg0,
             object? arg1,
             object? arg2
-        ) {
+        )
+        {
             throw null;
         }
         public static System.String Format(
             System.IFormatProvider? provider,
             System.String format,
             params object?[] args
-        ) {
+        )
+        {
             throw null;
         }
         public static System.String Format(System.String format, object? arg0)
@@ -12221,7 +12514,8 @@ namespace System
             object? arg0,
             object? arg1,
             object? arg2
-        ) {
+        )
+        {
             throw null;
         }
         public static System.String Format(System.String format, params object?[] args)
@@ -12243,7 +12537,8 @@ namespace System
         public static int GetHashCode(
             System.ReadOnlySpan<char> value,
             System.StringComparison comparisonType
-        ) {
+        )
+        {
             throw null;
         }
         public int GetHashCode(System.StringComparison comparisonType)
@@ -12294,14 +12589,16 @@ namespace System
             int startIndex,
             int count,
             System.StringComparison comparisonType
-        ) {
+        )
+        {
             throw null;
         }
         public int IndexOf(
             System.String value,
             int startIndex,
             System.StringComparison comparisonType
-        ) {
+        )
+        {
             throw null;
         }
         public int IndexOf(System.String value, System.StringComparison comparisonType)
@@ -12342,12 +12639,14 @@ namespace System
         }
         public static bool IsNullOrEmpty(
             [System.Diagnostics.CodeAnalysis.NotNullWhenAttribute(false)] System.String? value
-        ) {
+        )
+        {
             throw null;
         }
         public static bool IsNullOrWhiteSpace(
             [System.Diagnostics.CodeAnalysis.NotNullWhenAttribute(false)] System.String? value
-        ) {
+        )
+        {
             throw null;
         }
         public static System.String Join(char separator, params object?[] values)
@@ -12365,7 +12664,8 @@ namespace System
         public static System.String Join(
             System.String? separator,
             System.Collections.Generic.IEnumerable<string?> values
-        ) {
+        )
+        {
             throw null;
         }
         public static System.String Join(System.String? separator, params object?[] values)
@@ -12381,19 +12681,22 @@ namespace System
             string?[] value,
             int startIndex,
             int count
-        ) {
+        )
+        {
             throw null;
         }
         public static System.String Join<T>(
             char separator,
             System.Collections.Generic.IEnumerable<T> values
-        ) {
+        )
+        {
             throw null;
         }
         public static System.String Join<T>(
             System.String? separator,
             System.Collections.Generic.IEnumerable<T> values
-        ) {
+        )
+        {
             throw null;
         }
         public int LastIndexOf(char value)
@@ -12425,14 +12728,16 @@ namespace System
             int startIndex,
             int count,
             System.StringComparison comparisonType
-        ) {
+        )
+        {
             throw null;
         }
         public int LastIndexOf(
             System.String value,
             int startIndex,
             System.StringComparison comparisonType
-        ) {
+        )
+        {
             throw null;
         }
         public int LastIndexOf(System.String value, System.StringComparison comparisonType)
@@ -12508,27 +12813,31 @@ namespace System
             System.String? newValue,
             bool ignoreCase,
             System.Globalization.CultureInfo? culture
-        ) {
+        )
+        {
             throw null;
         }
         public System.String Replace(
             System.String oldValue,
             System.String? newValue,
             System.StringComparison comparisonType
-        ) {
+        )
+        {
             throw null;
         }
         public string[] Split(
             char separator,
             int count,
             System.StringSplitOptions options = System.StringSplitOptions.None
-        ) {
+        )
+        {
             throw null;
         }
         public string[] Split(
             char separator,
             System.StringSplitOptions options = System.StringSplitOptions.None
-        ) {
+        )
+        {
             throw null;
         }
         public string[] Split(params char[]? separator)
@@ -12551,13 +12860,15 @@ namespace System
             System.String? separator,
             int count,
             System.StringSplitOptions options = System.StringSplitOptions.None
-        ) {
+        )
+        {
             throw null;
         }
         public string[] Split(
             System.String? separator,
             System.StringSplitOptions options = System.StringSplitOptions.None
-        ) {
+        )
+        {
             throw null;
         }
         public string[] Split(string[]? separator, int count, System.StringSplitOptions options)
@@ -12580,7 +12891,8 @@ namespace System
             System.String value,
             bool ignoreCase,
             System.Globalization.CultureInfo? culture
-        ) {
+        )
+        {
             throw null;
         }
         public bool StartsWith(System.String value, System.StringComparison comparisonType)
@@ -12779,13 +13091,15 @@ namespace System
         public static System.StringComparer Create(
             System.Globalization.CultureInfo culture,
             bool ignoreCase
-        ) {
+        )
+        {
             throw null;
         }
         public static System.StringComparer Create(
             System.Globalization.CultureInfo culture,
             System.Globalization.CompareOptions options
-        ) {
+        )
+        {
             throw null;
         }
         public new bool Equals(object? x, object? y)
@@ -12807,13 +13121,15 @@ namespace System
             [System.Diagnostics.CodeAnalysis.NotNullWhenAttribute(true)]
                 out System.Globalization.CompareInfo? compareInfo,
             out System.Globalization.CompareOptions compareOptions
-        ) {
+        )
+        {
             throw null;
         }
         public static bool IsWellKnownOrdinalComparer(
             System.Collections.Generic.IEqualityComparer<string?>? comparer,
             out bool ignoreCase
-        ) {
+        )
+        {
             throw null;
         }
     }
@@ -12835,7 +13151,8 @@ namespace System
         public static bool IsNormalized(
             this string strInput,
             System.Text.NormalizationForm normalizationForm
-        ) {
+        )
+        {
             throw null;
         }
         public static string Normalize(this string strInput)
@@ -12845,7 +13162,8 @@ namespace System
         public static string Normalize(
             this string strInput,
             System.Text.NormalizationForm normalizationForm
-        ) {
+        )
+        {
             throw null;
         }
     }
@@ -13013,7 +13331,8 @@ namespace System
             System.ReadOnlySpan<char> s,
             System.IFormatProvider? provider = default,
             System.Globalization.DateTimeStyles style = System.Globalization.DateTimeStyles.None
-        ) {
+        )
+        {
             throw null;
         }
         public static System.TimeOnly ParseExact(
@@ -13021,7 +13340,8 @@ namespace System
             System.ReadOnlySpan<char> format,
             System.IFormatProvider? provider = default,
             System.Globalization.DateTimeStyles style = System.Globalization.DateTimeStyles.None
-        ) {
+        )
+        {
             throw null;
         }
         public static System.TimeOnly ParseExact(System.ReadOnlySpan<char> s, string[] formats)
@@ -13033,7 +13353,8 @@ namespace System
             string[] formats,
             System.IFormatProvider? provider,
             System.Globalization.DateTimeStyles style = System.Globalization.DateTimeStyles.None
-        ) {
+        )
+        {
             throw null;
         }
         public static System.TimeOnly Parse(string s)
@@ -13044,7 +13365,8 @@ namespace System
             string s,
             System.IFormatProvider? provider,
             System.Globalization.DateTimeStyles style = System.Globalization.DateTimeStyles.None
-        ) {
+        )
+        {
             throw null;
         }
         public static System.TimeOnly ParseExact(string s, string format)
@@ -13056,7 +13378,8 @@ namespace System
             string format,
             System.IFormatProvider? provider,
             System.Globalization.DateTimeStyles style = System.Globalization.DateTimeStyles.None
-        ) {
+        )
+        {
             throw null;
         }
         public static System.TimeOnly ParseExact(string s, string[] formats)
@@ -13068,7 +13391,8 @@ namespace System
             string[] formats,
             System.IFormatProvider? provider,
             System.Globalization.DateTimeStyles style = System.Globalization.DateTimeStyles.None
-        ) {
+        )
+        {
             throw null;
         }
         public static bool TryParse(System.ReadOnlySpan<char> s, out System.TimeOnly result)
@@ -13080,14 +13404,16 @@ namespace System
             System.IFormatProvider? provider,
             System.Globalization.DateTimeStyles style,
             out System.TimeOnly result
-        ) {
+        )
+        {
             throw null;
         }
         public static bool TryParseExact(
             System.ReadOnlySpan<char> s,
             System.ReadOnlySpan<char> format,
             out System.TimeOnly result
-        ) {
+        )
+        {
             throw null;
         }
         public static bool TryParseExact(
@@ -13096,14 +13422,16 @@ namespace System
             System.IFormatProvider? provider,
             System.Globalization.DateTimeStyles style,
             out System.TimeOnly result
-        ) {
+        )
+        {
             throw null;
         }
         public static bool TryParseExact(
             System.ReadOnlySpan<char> s,
             string[] formats,
             out System.TimeOnly result
-        ) {
+        )
+        {
             throw null;
         }
         public static bool TryParseExact(
@@ -13112,7 +13440,8 @@ namespace System
             System.IFormatProvider? provider,
             System.Globalization.DateTimeStyles style,
             out System.TimeOnly result
-        ) {
+        )
+        {
             throw null;
         }
         public static bool TryParse(string s, out System.TimeOnly result)
@@ -13124,7 +13453,8 @@ namespace System
             System.IFormatProvider? provider,
             System.Globalization.DateTimeStyles style,
             out System.TimeOnly result
-        ) {
+        )
+        {
             throw null;
         }
         public static bool TryParseExact(string s, string format, out System.TimeOnly result)
@@ -13137,7 +13467,8 @@ namespace System
             System.IFormatProvider? provider,
             System.Globalization.DateTimeStyles style,
             out System.TimeOnly result
-        ) {
+        )
+        {
             throw null;
         }
         public static bool TryParseExact(string s, string[] formats, out System.TimeOnly result)
@@ -13150,7 +13481,8 @@ namespace System
             System.IFormatProvider? provider,
             System.Globalization.DateTimeStyles style,
             out System.TimeOnly result
-        ) {
+        )
+        {
             throw null;
         }
         public string ToLongTimeString()
@@ -13182,7 +13514,8 @@ namespace System
             out int charsWritten,
             System.ReadOnlySpan<char> format = default(System.ReadOnlySpan<char>),
             System.IFormatProvider? provider = null
-        ) {
+        )
+        {
             throw null;
         }
     }
@@ -13301,7 +13634,8 @@ namespace System
         }
         public override bool Equals(
             [System.Diagnostics.CodeAnalysis.NotNullWhenAttribute(true)] object? value
-        ) {
+        )
+        {
             throw null;
         }
         public bool Equals(System.TimeSpan obj)
@@ -13407,7 +13741,8 @@ namespace System
         public static System.TimeSpan Parse(
             System.ReadOnlySpan<char> input,
             System.IFormatProvider? formatProvider = null
-        ) {
+        )
+        {
             throw null;
         }
         public static System.TimeSpan Parse(string s)
@@ -13423,7 +13758,8 @@ namespace System
             System.ReadOnlySpan<char> format,
             System.IFormatProvider? formatProvider,
             System.Globalization.TimeSpanStyles styles = System.Globalization.TimeSpanStyles.None
-        ) {
+        )
+        {
             throw null;
         }
         public static System.TimeSpan ParseExact(
@@ -13431,14 +13767,16 @@ namespace System
             string[] formats,
             System.IFormatProvider? formatProvider,
             System.Globalization.TimeSpanStyles styles = System.Globalization.TimeSpanStyles.None
-        ) {
+        )
+        {
             throw null;
         }
         public static System.TimeSpan ParseExact(
             string input,
             string format,
             System.IFormatProvider? formatProvider
-        ) {
+        )
+        {
             throw null;
         }
         public static System.TimeSpan ParseExact(
@@ -13446,14 +13784,16 @@ namespace System
             string format,
             System.IFormatProvider? formatProvider,
             System.Globalization.TimeSpanStyles styles
-        ) {
+        )
+        {
             throw null;
         }
         public static System.TimeSpan ParseExact(
             string input,
             string[] formats,
             System.IFormatProvider? formatProvider
-        ) {
+        )
+        {
             throw null;
         }
         public static System.TimeSpan ParseExact(
@@ -13461,7 +13801,8 @@ namespace System
             string[] formats,
             System.IFormatProvider? formatProvider,
             System.Globalization.TimeSpanStyles styles
-        ) {
+        )
+        {
             throw null;
         }
         public System.TimeSpan Subtract(System.TimeSpan ts)
@@ -13485,14 +13826,16 @@ namespace System
             out int charsWritten,
             System.ReadOnlySpan<char> format = default(System.ReadOnlySpan<char>),
             System.IFormatProvider? formatProvider = null
-        ) {
+        )
+        {
             throw null;
         }
         public static bool TryParse(
             System.ReadOnlySpan<char> input,
             System.IFormatProvider? formatProvider,
             out System.TimeSpan result
-        ) {
+        )
+        {
             throw null;
         }
         public static bool TryParse(System.ReadOnlySpan<char> s, out System.TimeSpan result)
@@ -13503,13 +13846,15 @@ namespace System
             [System.Diagnostics.CodeAnalysis.NotNullWhenAttribute(true)] string? input,
             System.IFormatProvider? formatProvider,
             out System.TimeSpan result
-        ) {
+        )
+        {
             throw null;
         }
         public static bool TryParse(
             [System.Diagnostics.CodeAnalysis.NotNullWhenAttribute(true)] string? s,
             out System.TimeSpan result
-        ) {
+        )
+        {
             throw null;
         }
         public static bool TryParseExact(
@@ -13518,7 +13863,8 @@ namespace System
             System.IFormatProvider? formatProvider,
             System.Globalization.TimeSpanStyles styles,
             out System.TimeSpan result
-        ) {
+        )
+        {
             throw null;
         }
         public static bool TryParseExact(
@@ -13526,7 +13872,8 @@ namespace System
             System.ReadOnlySpan<char> format,
             System.IFormatProvider? formatProvider,
             out System.TimeSpan result
-        ) {
+        )
+        {
             throw null;
         }
         public static bool TryParseExact(
@@ -13535,7 +13882,8 @@ namespace System
             System.IFormatProvider? formatProvider,
             System.Globalization.TimeSpanStyles styles,
             out System.TimeSpan result
-        ) {
+        )
+        {
             throw null;
         }
         public static bool TryParseExact(
@@ -13543,7 +13891,8 @@ namespace System
             [System.Diagnostics.CodeAnalysis.NotNullWhenAttribute(true)] string?[]? formats,
             System.IFormatProvider? formatProvider,
             out System.TimeSpan result
-        ) {
+        )
+        {
             throw null;
         }
         public static bool TryParseExact(
@@ -13552,7 +13901,8 @@ namespace System
             System.IFormatProvider? formatProvider,
             System.Globalization.TimeSpanStyles styles,
             out System.TimeSpan result
-        ) {
+        )
+        {
             throw null;
         }
         public static bool TryParseExact(
@@ -13560,7 +13910,8 @@ namespace System
             [System.Diagnostics.CodeAnalysis.NotNullWhenAttribute(true)] string? format,
             System.IFormatProvider? formatProvider,
             out System.TimeSpan result
-        ) {
+        )
+        {
             throw null;
         }
         public static bool TryParseExact(
@@ -13569,7 +13920,8 @@ namespace System
             System.IFormatProvider? formatProvider,
             System.Globalization.TimeSpanStyles styles,
             out System.TimeSpan result
-        ) {
+        )
+        {
             throw null;
         }
         public static bool TryParseExact(
@@ -13577,7 +13929,8 @@ namespace System
             [System.Diagnostics.CodeAnalysis.NotNullWhenAttribute(true)] string?[]? formats,
             System.IFormatProvider? formatProvider,
             out System.TimeSpan result
-        ) {
+        )
+        {
             throw null;
         }
     }
@@ -13602,7 +13955,8 @@ namespace System
         public static bool IsDaylightSavingTime(
             System.DateTime time,
             System.Globalization.DaylightTime daylightTimes
-        ) {
+        )
+        {
             throw null;
         }
         public virtual System.DateTime ToLocalTime(System.DateTime time)
@@ -13657,45 +14011,52 @@ namespace System
         public static System.DateTime ConvertTime(
             System.DateTime dateTime,
             System.TimeZoneInfo destinationTimeZone
-        ) {
+        )
+        {
             throw null;
         }
         public static System.DateTime ConvertTime(
             System.DateTime dateTime,
             System.TimeZoneInfo sourceTimeZone,
             System.TimeZoneInfo destinationTimeZone
-        ) {
+        )
+        {
             throw null;
         }
         public static System.DateTimeOffset ConvertTime(
             System.DateTimeOffset dateTimeOffset,
             System.TimeZoneInfo destinationTimeZone
-        ) {
+        )
+        {
             throw null;
         }
         public static System.DateTime ConvertTimeBySystemTimeZoneId(
             System.DateTime dateTime,
             string destinationTimeZoneId
-        ) {
+        )
+        {
             throw null;
         }
         public static System.DateTime ConvertTimeBySystemTimeZoneId(
             System.DateTime dateTime,
             string sourceTimeZoneId,
             string destinationTimeZoneId
-        ) {
+        )
+        {
             throw null;
         }
         public static System.DateTimeOffset ConvertTimeBySystemTimeZoneId(
             System.DateTimeOffset dateTimeOffset,
             string destinationTimeZoneId
-        ) {
+        )
+        {
             throw null;
         }
         public static System.DateTime ConvertTimeFromUtc(
             System.DateTime dateTime,
             System.TimeZoneInfo destinationTimeZone
-        ) {
+        )
+        {
             throw null;
         }
         public static System.DateTime ConvertTimeToUtc(System.DateTime dateTime)
@@ -13705,7 +14066,8 @@ namespace System
         public static System.DateTime ConvertTimeToUtc(
             System.DateTime dateTime,
             System.TimeZoneInfo sourceTimeZone
-        ) {
+        )
+        {
             throw null;
         }
         public static System.TimeZoneInfo CreateCustomTimeZone(
@@ -13713,7 +14075,8 @@ namespace System
             System.TimeSpan baseUtcOffset,
             string? displayName,
             string? standardDisplayName
-        ) {
+        )
+        {
             throw null;
         }
         public static System.TimeZoneInfo CreateCustomTimeZone(
@@ -13723,7 +14086,8 @@ namespace System
             string? standardDisplayName,
             string? daylightDisplayName,
             System.TimeZoneInfo.AdjustmentRule[]? adjustmentRules
-        ) {
+        )
+        {
             throw null;
         }
         public static System.TimeZoneInfo CreateCustomTimeZone(
@@ -13734,17 +14098,20 @@ namespace System
             string? daylightDisplayName,
             System.TimeZoneInfo.AdjustmentRule[]? adjustmentRules,
             bool disableDaylightSavingTime
-        ) {
+        )
+        {
             throw null;
         }
         public override bool Equals(
             [System.Diagnostics.CodeAnalysis.NotNullWhenAttribute(true)] object? obj
-        ) {
+        )
+        {
             throw null;
         }
         public bool Equals(
             [System.Diagnostics.CodeAnalysis.NotNullWhenAttribute(true)] System.TimeZoneInfo? other
-        ) {
+        )
+        {
             throw null;
         }
         public static System.TimeZoneInfo FindSystemTimeZoneById(string id)
@@ -13825,20 +14192,23 @@ namespace System
         public static bool TryConvertIanaIdToWindowsId(
             string ianaId,
             [System.Diagnostics.CodeAnalysis.NotNullWhenAttribute(true)] out string? windowsId
-        ) {
+        )
+        {
             throw null;
         }
         public static bool TryConvertWindowsIdToIanaId(
             string windowsId,
             [System.Diagnostics.CodeAnalysis.NotNullWhenAttribute(true)] out string? ianaId
-        ) {
+        )
+        {
             throw null;
         }
         public static bool TryConvertWindowsIdToIanaId(
             string windowsId,
             string? region,
             [System.Diagnostics.CodeAnalysis.NotNullWhenAttribute(true)] out string? ianaId
-        ) {
+        )
+        {
             throw null;
         }
         public sealed partial class AdjustmentRule
@@ -13877,7 +14247,8 @@ namespace System
                 System.TimeSpan daylightDelta,
                 System.TimeZoneInfo.TransitionTime daylightTransitionStart,
                 System.TimeZoneInfo.TransitionTime daylightTransitionEnd
-            ) {
+            )
+            {
                 throw null;
             }
             public static System.TimeZoneInfo.AdjustmentRule CreateAdjustmentRule(
@@ -13887,13 +14258,15 @@ namespace System
                 System.TimeZoneInfo.TransitionTime daylightTransitionStart,
                 System.TimeZoneInfo.TransitionTime daylightTransitionEnd,
                 System.TimeSpan baseUtcOffsetDelta
-            ) {
+            )
+            {
                 throw null;
             }
             public bool Equals(
                 [System.Diagnostics.CodeAnalysis.NotNullWhenAttribute(true)]
                     System.TimeZoneInfo.AdjustmentRule? other
-            ) {
+            )
+            {
                 throw null;
             }
             public override int GetHashCode()
@@ -13942,7 +14315,8 @@ namespace System
                 System.DateTime timeOfDay,
                 int month,
                 int day
-            ) {
+            )
+            {
                 throw null;
             }
             public static System.TimeZoneInfo.TransitionTime CreateFloatingDateRule(
@@ -13950,12 +14324,14 @@ namespace System
                 int month,
                 int week,
                 System.DayOfWeek dayOfWeek
-            ) {
+            )
+            {
                 throw null;
             }
             public override bool Equals(
                 [System.Diagnostics.CodeAnalysis.NotNullWhenAttribute(true)] object? obj
-            ) {
+            )
+            {
                 throw null;
             }
             public bool Equals(System.TimeZoneInfo.TransitionTime other)
@@ -13969,13 +14345,15 @@ namespace System
             public static bool operator ==(
                 System.TimeZoneInfo.TransitionTime t1,
                 System.TimeZoneInfo.TransitionTime t2
-            ) {
+            )
+            {
                 throw null;
             }
             public static bool operator !=(
                 System.TimeZoneInfo.TransitionTime t1,
                 System.TimeZoneInfo.TransitionTime t2
-            ) {
+            )
+            {
                 throw null;
             }
             void System.Runtime.Serialization.IDeserializationCallback.OnDeserialization(
@@ -14016,7 +14394,8 @@ namespace System
             T2 item2,
             T3 item3,
             T4 item4
-        ) {
+        )
+        {
             throw null;
         }
         public static System.Tuple<T1, T2, T3, T4, T5> Create<T1, T2, T3, T4, T5>(
@@ -14025,7 +14404,8 @@ namespace System
             T3 item3,
             T4 item4,
             T5 item5
-        ) {
+        )
+        {
             throw null;
         }
         public static System.Tuple<T1, T2, T3, T4, T5, T6> Create<T1, T2, T3, T4, T5, T6>(
@@ -14035,7 +14415,8 @@ namespace System
             T4 item4,
             T5 item5,
             T6 item6
-        ) {
+        )
+        {
             throw null;
         }
         public static System.Tuple<T1, T2, T3, T4, T5, T6, T7> Create<T1, T2, T3, T4, T5, T6, T7>(
@@ -14046,7 +14427,8 @@ namespace System
             T5 item5,
             T6 item6,
             T7 item7
-        ) {
+        )
+        {
             throw null;
         }
         public static System.Tuple<T1, T2, T3, T4, T5, T6, T7, System.Tuple<T8>> Create<
@@ -14087,7 +14469,8 @@ namespace System
             out T8 item8,
             out T9 item9,
             out T10 item10
-        ) {
+        )
+        {
             throw null;
         }
         [System.ComponentModel.EditorBrowsableAttribute(
@@ -14106,7 +14489,8 @@ namespace System
             out T9 item9,
             out T10 item10,
             out T11 item11
-        ) {
+        )
+        {
             throw null;
         }
         [System.ComponentModel.EditorBrowsableAttribute(
@@ -14135,7 +14519,8 @@ namespace System
             out T10 item10,
             out T11 item11,
             out T12 item12
-        ) {
+        )
+        {
             throw null;
         }
         [System.ComponentModel.EditorBrowsableAttribute(
@@ -14165,7 +14550,8 @@ namespace System
             out T11 item11,
             out T12 item12,
             out T13 item13
-        ) {
+        )
+        {
             throw null;
         }
         [System.ComponentModel.EditorBrowsableAttribute(
@@ -14196,7 +14582,8 @@ namespace System
             out T12 item12,
             out T13 item13,
             out T14 item14
-        ) {
+        )
+        {
             throw null;
         }
         [System.ComponentModel.EditorBrowsableAttribute(
@@ -14244,7 +14631,8 @@ namespace System
             out T13 item13,
             out T14 item14,
             out T15 item15
-        ) {
+        )
+        {
             throw null;
         }
         [System.ComponentModel.EditorBrowsableAttribute(
@@ -14294,7 +14682,8 @@ namespace System
             out T14 item14,
             out T15 item15,
             out T16 item16
-        ) {
+        )
+        {
             throw null;
         }
         [System.ComponentModel.EditorBrowsableAttribute(
@@ -14346,7 +14735,8 @@ namespace System
             out T15 item15,
             out T16 item16,
             out T17 item17
-        ) {
+        )
+        {
             throw null;
         }
         [System.ComponentModel.EditorBrowsableAttribute(
@@ -14400,7 +14790,8 @@ namespace System
             out T16 item16,
             out T17 item17,
             out T18 item18
-        ) {
+        )
+        {
             throw null;
         }
         [System.ComponentModel.EditorBrowsableAttribute(
@@ -14456,7 +14847,8 @@ namespace System
             out T17 item17,
             out T18 item18,
             out T19 item19
-        ) {
+        )
+        {
             throw null;
         }
         [System.ComponentModel.EditorBrowsableAttribute(
@@ -14466,7 +14858,8 @@ namespace System
             this System.Tuple<T1, T2> value,
             out T1 item1,
             out T2 item2
-        ) {
+        )
+        {
             throw null;
         }
         [System.ComponentModel.EditorBrowsableAttribute(
@@ -14533,7 +14926,8 @@ namespace System
             out T18 item18,
             out T19 item19,
             out T20 item20
-        ) {
+        )
+        {
             throw null;
         }
         [System.ComponentModel.EditorBrowsableAttribute(
@@ -14602,7 +14996,8 @@ namespace System
             out T19 item19,
             out T20 item20,
             out T21 item21
-        ) {
+        )
+        {
             throw null;
         }
         [System.ComponentModel.EditorBrowsableAttribute(
@@ -14613,7 +15008,8 @@ namespace System
             out T1 item1,
             out T2 item2,
             out T3 item3
-        ) {
+        )
+        {
             throw null;
         }
         [System.ComponentModel.EditorBrowsableAttribute(
@@ -14625,7 +15021,8 @@ namespace System
             out T2 item2,
             out T3 item3,
             out T4 item4
-        ) {
+        )
+        {
             throw null;
         }
         [System.ComponentModel.EditorBrowsableAttribute(
@@ -14638,7 +15035,8 @@ namespace System
             out T3 item3,
             out T4 item4,
             out T5 item5
-        ) {
+        )
+        {
             throw null;
         }
         [System.ComponentModel.EditorBrowsableAttribute(
@@ -14652,7 +15050,8 @@ namespace System
             out T4 item4,
             out T5 item5,
             out T6 item6
-        ) {
+        )
+        {
             throw null;
         }
         [System.ComponentModel.EditorBrowsableAttribute(
@@ -14667,7 +15066,8 @@ namespace System
             out T5 item5,
             out T6 item6,
             out T7 item7
-        ) {
+        )
+        {
             throw null;
         }
         [System.ComponentModel.EditorBrowsableAttribute(
@@ -14683,7 +15083,8 @@ namespace System
             out T6 item6,
             out T7 item7,
             out T8 item8
-        ) {
+        )
+        {
             throw null;
         }
         [System.ComponentModel.EditorBrowsableAttribute(
@@ -14700,7 +15101,8 @@ namespace System
             out T7 item7,
             out T8 item8,
             out T9 item9
-        ) {
+        )
+        {
             throw null;
         }
         public static System.Tuple<T1> ToTuple<T1>(this System.ValueTuple<T1> value)
@@ -14733,7 +15135,8 @@ namespace System
             System.Tuple<T8, T9, T10, T11>
         > ToTuple<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11>(
             this (T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11) value
-        ) {
+        )
+        {
             throw null;
         }
         public static System.Tuple<
@@ -14747,7 +15150,8 @@ namespace System
             System.Tuple<T8, T9, T10, T11, T12>
         > ToTuple<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12>(
             this (T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12) value
-        ) {
+        )
+        {
             throw null;
         }
         public static System.Tuple<
@@ -14761,7 +15165,8 @@ namespace System
             System.Tuple<T8, T9, T10, T11, T12, T13>
         > ToTuple<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13>(
             this (T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13) value
-        ) {
+        )
+        {
             throw null;
         }
         public static System.Tuple<
@@ -14775,7 +15180,8 @@ namespace System
             System.Tuple<T8, T9, T10, T11, T12, T13, T14>
         > ToTuple<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14>(
             this (T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14) value
-        ) {
+        )
+        {
             throw null;
         }
         public static System.Tuple<
@@ -14789,7 +15195,8 @@ namespace System
             System.Tuple<T8, T9, T10, T11, T12, T13, T14, System.Tuple<T15>>
         > ToTuple<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15>(
             this (T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15) value
-        ) {
+        )
+        {
             throw null;
         }
         public static System.Tuple<
@@ -14803,7 +15210,8 @@ namespace System
             System.Tuple<T8, T9, T10, T11, T12, T13, T14, System.Tuple<T15, T16>>
         > ToTuple<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16>(
             this (T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16) value
-        ) {
+        )
+        {
             throw null;
         }
         public static System.Tuple<
@@ -14817,7 +15225,8 @@ namespace System
             System.Tuple<T8, T9, T10, T11, T12, T13, T14, System.Tuple<T15, T16, T17>>
         > ToTuple<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17>(
             this (T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17) value
-        ) {
+        )
+        {
             throw null;
         }
         public static System.Tuple<
@@ -14831,7 +15240,8 @@ namespace System
             System.Tuple<T8, T9, T10, T11, T12, T13, T14, System.Tuple<T15, T16, T17, T18>>
         > ToTuple<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17, T18>(
             this (T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17, T18) value
-        ) {
+        )
+        {
             throw null;
         }
         public static System.Tuple<
@@ -14865,7 +15275,8 @@ namespace System
             T19
         >(
             this (T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17, T18, T19) value
-        ) {
+        )
+        {
             throw null;
         }
         public static System.Tuple<T1, T2> ToTuple<T1, T2>(this (T1, T2) value)
@@ -14913,7 +15324,8 @@ namespace System
             T20
         >(
             this (T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17, T18, T19, T20) value
-        ) {
+        )
+        {
             throw null;
         }
         public static System.Tuple<
@@ -14958,7 +15370,8 @@ namespace System
             T21
         >(
             this (T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17, T18, T19, T20, T21) value
-        ) {
+        )
+        {
             throw null;
         }
         public static System.Tuple<T1, T2, T3> ToTuple<T1, T2, T3>(this (T1, T2, T3) value)
@@ -14967,22 +15380,26 @@ namespace System
         }
         public static System.Tuple<T1, T2, T3, T4> ToTuple<T1, T2, T3, T4>(
             this (T1, T2, T3, T4) value
-        ) {
+        )
+        {
             throw null;
         }
         public static System.Tuple<T1, T2, T3, T4, T5> ToTuple<T1, T2, T3, T4, T5>(
             this (T1, T2, T3, T4, T5) value
-        ) {
+        )
+        {
             throw null;
         }
         public static System.Tuple<T1, T2, T3, T4, T5, T6> ToTuple<T1, T2, T3, T4, T5, T6>(
             this (T1, T2, T3, T4, T5, T6) value
-        ) {
+        )
+        {
             throw null;
         }
         public static System.Tuple<T1, T2, T3, T4, T5, T6, T7> ToTuple<T1, T2, T3, T4, T5, T6, T7>(
             this (T1, T2, T3, T4, T5, T6, T7) value
-        ) {
+        )
+        {
             throw null;
         }
         public static System.Tuple<T1, T2, T3, T4, T5, T6, T7, System.Tuple<T8>> ToTuple<
@@ -15060,9 +15477,8 @@ namespace System
             T10,
             T11,
             T12
-        >(
-            this System.Tuple<T1, T2, T3, T4, T5, T6, T7, System.Tuple<T8, T9, T10, T11, T12>> value
-        ) {
+        >(this System.Tuple<T1, T2, T3, T4, T5, T6, T7, System.Tuple<T8, T9, T10, T11, T12>> value)
+        {
             throw null;
         }
         public static (T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13) ToValueTuple<
@@ -15090,7 +15506,8 @@ namespace System
                 T7,
                 System.Tuple<T8, T9, T10, T11, T12, T13>
             > value
-        ) {
+        )
+        {
             throw null;
         }
         public static (T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14) ToValueTuple<
@@ -15119,7 +15536,8 @@ namespace System
                 T7,
                 System.Tuple<T8, T9, T10, T11, T12, T13, T14>
             > value
-        ) {
+        )
+        {
             throw null;
         }
         public static (T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15) ToValueTuple<
@@ -15149,7 +15567,8 @@ namespace System
                 T7,
                 System.Tuple<T8, T9, T10, T11, T12, T13, T14, System.Tuple<T15>>
             > value
-        ) {
+        )
+        {
             throw null;
         }
         public static (T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16) ToValueTuple<
@@ -15180,7 +15599,8 @@ namespace System
                 T7,
                 System.Tuple<T8, T9, T10, T11, T12, T13, T14, System.Tuple<T15, T16>>
             > value
-        ) {
+        )
+        {
             throw null;
         }
         public static (T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17) ToValueTuple<
@@ -15212,7 +15632,8 @@ namespace System
                 T7,
                 System.Tuple<T8, T9, T10, T11, T12, T13, T14, System.Tuple<T15, T16, T17>>
             > value
-        ) {
+        )
+        {
             throw null;
         }
         public static (T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17, T18) ToValueTuple<
@@ -15245,7 +15666,8 @@ namespace System
                 T7,
                 System.Tuple<T8, T9, T10, T11, T12, T13, T14, System.Tuple<T15, T16, T17, T18>>
             > value
-        ) {
+        )
+        {
             throw null;
         }
         public static (T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17, T18, T19) ToValueTuple<
@@ -15279,7 +15701,8 @@ namespace System
                 T7,
                 System.Tuple<T8, T9, T10, T11, T12, T13, T14, System.Tuple<T15, T16, T17, T18, T19>>
             > value
-        ) {
+        )
+        {
             throw null;
         }
         public static (T1, T2) ToValueTuple<T1, T2>(this System.Tuple<T1, T2> value)
@@ -15327,7 +15750,8 @@ namespace System
                     System.Tuple<T15, T16, T17, T18, T19, T20>
                 >
             > value
-        ) {
+        )
+        {
             throw null;
         }
         public static (T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17, T18, T19, T20, T21) ToValueTuple<
@@ -15372,7 +15796,8 @@ namespace System
                     System.Tuple<T15, T16, T17, T18, T19, T20, T21>
                 >
             > value
-        ) {
+        )
+        {
             throw null;
         }
         public static (T1, T2, T3) ToValueTuple<T1, T2, T3>(this System.Tuple<T1, T2, T3> value)
@@ -15381,27 +15806,32 @@ namespace System
         }
         public static (T1, T2, T3, T4) ToValueTuple<T1, T2, T3, T4>(
             this System.Tuple<T1, T2, T3, T4> value
-        ) {
+        )
+        {
             throw null;
         }
         public static (T1, T2, T3, T4, T5) ToValueTuple<T1, T2, T3, T4, T5>(
             this System.Tuple<T1, T2, T3, T4, T5> value
-        ) {
+        )
+        {
             throw null;
         }
         public static (T1, T2, T3, T4, T5, T6) ToValueTuple<T1, T2, T3, T4, T5, T6>(
             this System.Tuple<T1, T2, T3, T4, T5, T6> value
-        ) {
+        )
+        {
             throw null;
         }
         public static (T1, T2, T3, T4, T5, T6, T7) ToValueTuple<T1, T2, T3, T4, T5, T6, T7>(
             this System.Tuple<T1, T2, T3, T4, T5, T6, T7> value
-        ) {
+        )
+        {
             throw null;
         }
         public static (T1, T2, T3, T4, T5, T6, T7, T8) ToValueTuple<T1, T2, T3, T4, T5, T6, T7, T8>(
             this System.Tuple<T1, T2, T3, T4, T5, T6, T7, System.Tuple<T8>> value
-        ) {
+        )
+        {
             throw null;
         }
         public static (T1, T2, T3, T4, T5, T6, T7, T8, T9) ToValueTuple<
@@ -15440,7 +15870,8 @@ namespace System
         }
         public override bool Equals(
             [System.Diagnostics.CodeAnalysis.NotNullWhenAttribute(true)] object? obj
-        ) {
+        )
+        {
             throw null;
         }
         public override int GetHashCode()
@@ -15450,18 +15881,21 @@ namespace System
         int System.Collections.IStructuralComparable.CompareTo(
             object? other,
             System.Collections.IComparer comparer
-        ) {
+        )
+        {
             throw null;
         }
         bool System.Collections.IStructuralEquatable.Equals(
             [System.Diagnostics.CodeAnalysis.NotNullWhenAttribute(true)] object? other,
             System.Collections.IEqualityComparer comparer
-        ) {
+        )
+        {
             throw null;
         }
         int System.Collections.IStructuralEquatable.GetHashCode(
             System.Collections.IEqualityComparer comparer
-        ) {
+        )
+        {
             throw null;
         }
         int System.IComparable.CompareTo(object? obj)
@@ -15498,7 +15932,8 @@ namespace System
         }
         public override bool Equals(
             [System.Diagnostics.CodeAnalysis.NotNullWhenAttribute(true)] object? obj
-        ) {
+        )
+        {
             throw null;
         }
         public override int GetHashCode()
@@ -15508,18 +15943,21 @@ namespace System
         int System.Collections.IStructuralComparable.CompareTo(
             object? other,
             System.Collections.IComparer comparer
-        ) {
+        )
+        {
             throw null;
         }
         bool System.Collections.IStructuralEquatable.Equals(
             [System.Diagnostics.CodeAnalysis.NotNullWhenAttribute(true)] object? other,
             System.Collections.IEqualityComparer comparer
-        ) {
+        )
+        {
             throw null;
         }
         int System.Collections.IStructuralEquatable.GetHashCode(
             System.Collections.IEqualityComparer comparer
-        ) {
+        )
+        {
             throw null;
         }
         int System.IComparable.CompareTo(object? obj)
@@ -15560,7 +15998,8 @@ namespace System
         }
         public override bool Equals(
             [System.Diagnostics.CodeAnalysis.NotNullWhenAttribute(true)] object? obj
-        ) {
+        )
+        {
             throw null;
         }
         public override int GetHashCode()
@@ -15570,18 +16009,21 @@ namespace System
         int System.Collections.IStructuralComparable.CompareTo(
             object? other,
             System.Collections.IComparer comparer
-        ) {
+        )
+        {
             throw null;
         }
         bool System.Collections.IStructuralEquatable.Equals(
             [System.Diagnostics.CodeAnalysis.NotNullWhenAttribute(true)] object? other,
             System.Collections.IEqualityComparer comparer
-        ) {
+        )
+        {
             throw null;
         }
         int System.Collections.IStructuralEquatable.GetHashCode(
             System.Collections.IEqualityComparer comparer
-        ) {
+        )
+        {
             throw null;
         }
         int System.IComparable.CompareTo(object? obj)
@@ -15626,7 +16068,8 @@ namespace System
         }
         public override bool Equals(
             [System.Diagnostics.CodeAnalysis.NotNullWhenAttribute(true)] object? obj
-        ) {
+        )
+        {
             throw null;
         }
         public override int GetHashCode()
@@ -15636,18 +16079,21 @@ namespace System
         int System.Collections.IStructuralComparable.CompareTo(
             object? other,
             System.Collections.IComparer comparer
-        ) {
+        )
+        {
             throw null;
         }
         bool System.Collections.IStructuralEquatable.Equals(
             [System.Diagnostics.CodeAnalysis.NotNullWhenAttribute(true)] object? other,
             System.Collections.IEqualityComparer comparer
-        ) {
+        )
+        {
             throw null;
         }
         int System.Collections.IStructuralEquatable.GetHashCode(
             System.Collections.IEqualityComparer comparer
-        ) {
+        )
+        {
             throw null;
         }
         int System.IComparable.CompareTo(object? obj)
@@ -15696,7 +16142,8 @@ namespace System
         }
         public override bool Equals(
             [System.Diagnostics.CodeAnalysis.NotNullWhenAttribute(true)] object? obj
-        ) {
+        )
+        {
             throw null;
         }
         public override int GetHashCode()
@@ -15706,18 +16153,21 @@ namespace System
         int System.Collections.IStructuralComparable.CompareTo(
             object? other,
             System.Collections.IComparer comparer
-        ) {
+        )
+        {
             throw null;
         }
         bool System.Collections.IStructuralEquatable.Equals(
             [System.Diagnostics.CodeAnalysis.NotNullWhenAttribute(true)] object? other,
             System.Collections.IEqualityComparer comparer
-        ) {
+        )
+        {
             throw null;
         }
         int System.Collections.IStructuralEquatable.GetHashCode(
             System.Collections.IEqualityComparer comparer
-        ) {
+        )
+        {
             throw null;
         }
         int System.IComparable.CompareTo(object? obj)
@@ -15770,7 +16220,8 @@ namespace System
         }
         public override bool Equals(
             [System.Diagnostics.CodeAnalysis.NotNullWhenAttribute(true)] object? obj
-        ) {
+        )
+        {
             throw null;
         }
         public override int GetHashCode()
@@ -15780,18 +16231,21 @@ namespace System
         int System.Collections.IStructuralComparable.CompareTo(
             object? other,
             System.Collections.IComparer comparer
-        ) {
+        )
+        {
             throw null;
         }
         bool System.Collections.IStructuralEquatable.Equals(
             [System.Diagnostics.CodeAnalysis.NotNullWhenAttribute(true)] object? other,
             System.Collections.IEqualityComparer comparer
-        ) {
+        )
+        {
             throw null;
         }
         int System.Collections.IStructuralEquatable.GetHashCode(
             System.Collections.IEqualityComparer comparer
-        ) {
+        )
+        {
             throw null;
         }
         int System.IComparable.CompareTo(object? obj)
@@ -15848,7 +16302,8 @@ namespace System
         }
         public override bool Equals(
             [System.Diagnostics.CodeAnalysis.NotNullWhenAttribute(true)] object? obj
-        ) {
+        )
+        {
             throw null;
         }
         public override int GetHashCode()
@@ -15858,18 +16313,21 @@ namespace System
         int System.Collections.IStructuralComparable.CompareTo(
             object? other,
             System.Collections.IComparer comparer
-        ) {
+        )
+        {
             throw null;
         }
         bool System.Collections.IStructuralEquatable.Equals(
             [System.Diagnostics.CodeAnalysis.NotNullWhenAttribute(true)] object? other,
             System.Collections.IEqualityComparer comparer
-        ) {
+        )
+        {
             throw null;
         }
         int System.Collections.IStructuralEquatable.GetHashCode(
             System.Collections.IEqualityComparer comparer
-        ) {
+        )
+        {
             throw null;
         }
         int System.IComparable.CompareTo(object? obj)
@@ -15939,7 +16397,8 @@ namespace System
         }
         public override bool Equals(
             [System.Diagnostics.CodeAnalysis.NotNullWhenAttribute(true)] object? obj
-        ) {
+        )
+        {
             throw null;
         }
         public override int GetHashCode()
@@ -15949,18 +16408,21 @@ namespace System
         int System.Collections.IStructuralComparable.CompareTo(
             object? other,
             System.Collections.IComparer comparer
-        ) {
+        )
+        {
             throw null;
         }
         bool System.Collections.IStructuralEquatable.Equals(
             [System.Diagnostics.CodeAnalysis.NotNullWhenAttribute(true)] object? other,
             System.Collections.IEqualityComparer comparer
-        ) {
+        )
+        {
             throw null;
         }
         int System.Collections.IStructuralEquatable.GetHashCode(
             System.Collections.IEqualityComparer comparer
-        ) {
+        )
+        {
             throw null;
         }
         int System.IComparable.CompareTo(object? obj)
@@ -16244,7 +16706,8 @@ namespace System
         public virtual System.Type[] FindInterfaces(
             System.Reflection.TypeFilter filter,
             object? filterCriteria
-        ) {
+        )
+        {
             throw null;
         }
         [System.Diagnostics.CodeAnalysis.DynamicallyAccessedMembersAttribute(
@@ -16255,7 +16718,8 @@ namespace System
             System.Reflection.BindingFlags bindingAttr,
             System.Reflection.MemberFilter? filter,
             object? filterCriteria
-        ) {
+        )
+        {
             throw null;
         }
         public virtual int GetArrayRank()
@@ -16270,7 +16734,8 @@ namespace System
         public System.Reflection.ConstructorInfo? GetConstructor(
             System.Reflection.BindingFlags bindingAttr,
             System.Type[] types
-        ) {
+        )
+        {
             throw null;
         }
         [System.Diagnostics.CodeAnalysis.DynamicallyAccessedMembersAttribute(
@@ -16283,7 +16748,8 @@ namespace System
             System.Reflection.CallingConventions callConvention,
             System.Type[] types,
             System.Reflection.ParameterModifier[]? modifiers
-        ) {
+        )
+        {
             throw null;
         }
         [System.Diagnostics.CodeAnalysis.DynamicallyAccessedMembersAttribute(
@@ -16295,7 +16761,8 @@ namespace System
             System.Reflection.Binder? binder,
             System.Type[] types,
             System.Reflection.ParameterModifier[]? modifiers
-        ) {
+        )
+        {
             throw null;
         }
         [System.Diagnostics.CodeAnalysis.DynamicallyAccessedMembersAttribute(
@@ -16472,7 +16939,8 @@ namespace System
         public virtual System.Reflection.MemberInfo[] GetMember(
             string name,
             System.Reflection.BindingFlags bindingAttr
-        ) {
+        )
+        {
             throw null;
         }
         [System.Diagnostics.CodeAnalysis.DynamicallyAccessedMembersAttribute(
@@ -16493,7 +16961,8 @@ namespace System
             string name,
             System.Reflection.MemberTypes type,
             System.Reflection.BindingFlags bindingAttr
-        ) {
+        )
+        {
             throw null;
         }
         [System.Diagnostics.CodeAnalysis.DynamicallyAccessedMembersAttribute(
@@ -16544,7 +17013,8 @@ namespace System
             System.Reflection.CallingConventions callConvention,
             System.Type[] types,
             System.Reflection.ParameterModifier[]? modifiers
-        ) {
+        )
+        {
             throw null;
         }
         [System.Diagnostics.CodeAnalysis.DynamicallyAccessedMembersAttribute(
@@ -16558,7 +17028,8 @@ namespace System
             System.Reflection.Binder? binder,
             System.Type[] types,
             System.Reflection.ParameterModifier[]? modifiers
-        ) {
+        )
+        {
             throw null;
         }
         [System.Diagnostics.CodeAnalysis.DynamicallyAccessedMembersAttribute(
@@ -16568,7 +17039,8 @@ namespace System
             string name,
             int genericParameterCount,
             System.Type[] types
-        ) {
+        )
+        {
             throw null;
         }
         [System.Diagnostics.CodeAnalysis.DynamicallyAccessedMembersAttribute(
@@ -16579,7 +17051,8 @@ namespace System
             int genericParameterCount,
             System.Type[] types,
             System.Reflection.ParameterModifier[]? modifiers
-        ) {
+        )
+        {
             throw null;
         }
         [System.Diagnostics.CodeAnalysis.DynamicallyAccessedMembersAttribute(
@@ -16589,7 +17062,8 @@ namespace System
         public System.Reflection.MethodInfo? GetMethod(
             string name,
             System.Reflection.BindingFlags bindingAttr
-        ) {
+        )
+        {
             throw null;
         }
         [System.Diagnostics.CodeAnalysis.DynamicallyAccessedMembersAttribute(
@@ -16600,7 +17074,8 @@ namespace System
             string name,
             System.Reflection.BindingFlags bindingAttr,
             System.Type[] types
-        ) {
+        )
+        {
             throw null;
         }
         [System.Diagnostics.CodeAnalysis.DynamicallyAccessedMembersAttribute(
@@ -16614,7 +17089,8 @@ namespace System
             System.Reflection.CallingConventions callConvention,
             System.Type[] types,
             System.Reflection.ParameterModifier[]? modifiers
-        ) {
+        )
+        {
             throw null;
         }
         [System.Diagnostics.CodeAnalysis.DynamicallyAccessedMembersAttribute(
@@ -16627,7 +17103,8 @@ namespace System
             System.Reflection.Binder? binder,
             System.Type[] types,
             System.Reflection.ParameterModifier[]? modifiers
-        ) {
+        )
+        {
             throw null;
         }
         [System.Diagnostics.CodeAnalysis.DynamicallyAccessedMembersAttribute(
@@ -16644,7 +17121,8 @@ namespace System
             string name,
             System.Type[] types,
             System.Reflection.ParameterModifier[]? modifiers
-        ) {
+        )
+        {
             throw null;
         }
         [System.Diagnostics.CodeAnalysis.DynamicallyAccessedMembersAttribute(
@@ -16659,7 +17137,8 @@ namespace System
             System.Reflection.CallingConventions callConvention,
             System.Type[]? types,
             System.Reflection.ParameterModifier[]? modifiers
-        ) {
+        )
+        {
             throw null;
         }
         [System.Diagnostics.CodeAnalysis.DynamicallyAccessedMembersAttribute(
@@ -16743,7 +17222,8 @@ namespace System
         public System.Reflection.PropertyInfo? GetProperty(
             string name,
             System.Reflection.BindingFlags bindingAttr
-        ) {
+        )
+        {
             throw null;
         }
         [System.Diagnostics.CodeAnalysis.DynamicallyAccessedMembersAttribute(
@@ -16757,7 +17237,8 @@ namespace System
             System.Type? returnType,
             System.Type[] types,
             System.Reflection.ParameterModifier[]? modifiers
-        ) {
+        )
+        {
             throw null;
         }
         [System.Diagnostics.CodeAnalysis.DynamicallyAccessedMembersAttribute(
@@ -16774,7 +17255,8 @@ namespace System
             string name,
             System.Type? returnType,
             System.Type[] types
-        ) {
+        )
+        {
             throw null;
         }
         [System.Diagnostics.CodeAnalysis.DynamicallyAccessedMembersAttribute(
@@ -16785,7 +17267,8 @@ namespace System
             System.Type? returnType,
             System.Type[] types,
             System.Reflection.ParameterModifier[]? modifiers
-        ) {
+        )
+        {
             throw null;
         }
         [System.Diagnostics.CodeAnalysis.DynamicallyAccessedMembersAttribute(
@@ -16842,7 +17325,8 @@ namespace System
                 System.Reflection.Assembly?
             >? assemblyResolver,
             System.Func<System.Reflection.Assembly?, string, bool, System.Type?>? typeResolver
-        ) {
+        )
+        {
             throw null;
         }
         [System.Diagnostics.CodeAnalysis.RequiresUnreferencedCodeAttribute(
@@ -16856,7 +17340,8 @@ namespace System
             >? assemblyResolver,
             System.Func<System.Reflection.Assembly?, string, bool, System.Type?>? typeResolver,
             bool throwOnError
-        ) {
+        )
+        {
             throw null;
         }
         [System.Diagnostics.CodeAnalysis.RequiresUnreferencedCodeAttribute(
@@ -16871,7 +17356,8 @@ namespace System
             System.Func<System.Reflection.Assembly?, string, bool, System.Type?>? typeResolver,
             bool throwOnError,
             bool ignoreCase
-        ) {
+        )
+        {
             throw null;
         }
         public static System.Type[] GetTypeArray(object[] args)
@@ -16906,7 +17392,8 @@ namespace System
             System.Guid clsid,
             string? server,
             bool throwOnError
-        ) {
+        )
+        {
             throw null;
         }
         public static System.Type GetTypeFromHandle(System.RuntimeTypeHandle handle)
@@ -16933,7 +17420,8 @@ namespace System
             string progID,
             string? server,
             bool throwOnError
-        ) {
+        )
+        {
             throw null;
         }
         public static System.RuntimeTypeHandle GetTypeHandle(object o)
@@ -16950,7 +17438,8 @@ namespace System
             System.Reflection.Binder? binder,
             object? target,
             object?[]? args
-        ) {
+        )
+        {
             throw null;
         }
         [System.Diagnostics.CodeAnalysis.DynamicallyAccessedMembersAttribute(
@@ -16963,7 +17452,8 @@ namespace System
             object? target,
             object?[]? args,
             System.Globalization.CultureInfo? culture
-        ) {
+        )
+        {
             throw null;
         }
         [System.Diagnostics.CodeAnalysis.DynamicallyAccessedMembersAttribute(
@@ -16982,12 +17472,14 @@ namespace System
         protected abstract bool IsArrayImpl();
         public virtual bool IsAssignableFrom(
             [System.Diagnostics.CodeAnalysis.NotNullWhenAttribute(true)] System.Type? c
-        ) {
+        )
+        {
             throw null;
         }
         public bool IsAssignableTo(
             [System.Diagnostics.CodeAnalysis.NotNullWhen(true)] System.Type? targetType
-        ) {
+        )
+        {
             throw null;
         }
         protected abstract bool IsByRefImpl();
@@ -17002,12 +17494,14 @@ namespace System
         }
         public virtual bool IsEquivalentTo(
             [System.Diagnostics.CodeAnalysis.NotNullWhenAttribute(true)] System.Type? other
-        ) {
+        )
+        {
             throw null;
         }
         public virtual bool IsInstanceOfType(
             [System.Diagnostics.CodeAnalysis.NotNullWhenAttribute(true)] object? o
-        ) {
+        )
+        {
             throw null;
         }
         protected virtual bool IsMarshalByRefImpl()
@@ -17043,7 +17537,8 @@ namespace System
         public static System.Type MakeGenericSignatureType(
             System.Type genericTypeDefinition,
             params System.Type[] typeArguments
-        ) {
+        )
+        {
             throw null;
         }
         public virtual System.Type MakeGenericType(params System.Type[] typeArguments)
@@ -17066,7 +17561,8 @@ namespace System
             string typeName,
             bool throwIfNotFound,
             bool ignoreCase
-        ) {
+        )
+        {
             throw null;
         }
         public override string ToString()
@@ -17125,7 +17621,8 @@ namespace System
         public static System.TypedReference MakeTypedReference(
             object target,
             System.Reflection.FieldInfo[] flds
-        ) {
+        )
+        {
             throw null;
         }
         public static void SetTypedReference(System.TypedReference target, object? value) { }
@@ -17206,7 +17703,8 @@ namespace System
         }
         public override bool Equals(
             [System.Diagnostics.CodeAnalysis.NotNullWhenAttribute(true)] object? obj
-        ) {
+        )
+        {
             throw null;
         }
         public bool Equals(System.UInt16 obj)
@@ -17225,7 +17723,8 @@ namespace System
             System.ReadOnlySpan<char> s,
             System.Globalization.NumberStyles style = System.Globalization.NumberStyles.Integer,
             System.IFormatProvider? provider = null
-        ) {
+        )
+        {
             throw null;
         }
         public static System.UInt16 Parse(string s)
@@ -17240,7 +17739,8 @@ namespace System
             string s,
             System.Globalization.NumberStyles style,
             System.IFormatProvider? provider
-        ) {
+        )
+        {
             throw null;
         }
         public static System.UInt16 Parse(string s, System.IFormatProvider? provider)
@@ -17328,7 +17828,8 @@ namespace System
             out int charsWritten,
             System.ReadOnlySpan<char> format = default(System.ReadOnlySpan<char>),
             System.IFormatProvider? provider = null
-        ) {
+        )
+        {
             throw null;
         }
         public static bool TryParse(
@@ -17336,7 +17837,8 @@ namespace System
             System.Globalization.NumberStyles style,
             System.IFormatProvider? provider,
             out System.UInt16 result
-        ) {
+        )
+        {
             throw null;
         }
         public static bool TryParse(System.ReadOnlySpan<char> s, out System.UInt16 result)
@@ -17348,13 +17850,15 @@ namespace System
             System.Globalization.NumberStyles style,
             System.IFormatProvider? provider,
             out System.UInt16 result
-        ) {
+        )
+        {
             throw null;
         }
         public static bool TryParse(
             [System.Diagnostics.CodeAnalysis.NotNullWhenAttribute(true)] string? s,
             out System.UInt16 result
-        ) {
+        )
+        {
             throw null;
         }
     }
@@ -17379,7 +17883,8 @@ namespace System
         }
         public override bool Equals(
             [System.Diagnostics.CodeAnalysis.NotNullWhenAttribute(true)] object? obj
-        ) {
+        )
+        {
             throw null;
         }
         public bool Equals(System.UInt32 obj)
@@ -17398,7 +17903,8 @@ namespace System
             System.ReadOnlySpan<char> s,
             System.Globalization.NumberStyles style = System.Globalization.NumberStyles.Integer,
             System.IFormatProvider? provider = null
-        ) {
+        )
+        {
             throw null;
         }
         public static System.UInt32 Parse(string s)
@@ -17413,7 +17919,8 @@ namespace System
             string s,
             System.Globalization.NumberStyles style,
             System.IFormatProvider? provider
-        ) {
+        )
+        {
             throw null;
         }
         public static System.UInt32 Parse(string s, System.IFormatProvider? provider)
@@ -17501,7 +18008,8 @@ namespace System
             out int charsWritten,
             System.ReadOnlySpan<char> format = default(System.ReadOnlySpan<char>),
             System.IFormatProvider? provider = null
-        ) {
+        )
+        {
             throw null;
         }
         public static bool TryParse(
@@ -17509,7 +18017,8 @@ namespace System
             System.Globalization.NumberStyles style,
             System.IFormatProvider? provider,
             out System.UInt32 result
-        ) {
+        )
+        {
             throw null;
         }
         public static bool TryParse(System.ReadOnlySpan<char> s, out System.UInt32 result)
@@ -17521,13 +18030,15 @@ namespace System
             System.Globalization.NumberStyles style,
             System.IFormatProvider? provider,
             out System.UInt32 result
-        ) {
+        )
+        {
             throw null;
         }
         public static bool TryParse(
             [System.Diagnostics.CodeAnalysis.NotNullWhenAttribute(true)] string? s,
             out System.UInt32 result
-        ) {
+        )
+        {
             throw null;
         }
     }
@@ -17552,7 +18063,8 @@ namespace System
         }
         public override bool Equals(
             [System.Diagnostics.CodeAnalysis.NotNullWhenAttribute(true)] object? obj
-        ) {
+        )
+        {
             throw null;
         }
         public bool Equals(System.UInt64 obj)
@@ -17571,7 +18083,8 @@ namespace System
             System.ReadOnlySpan<char> s,
             System.Globalization.NumberStyles style = System.Globalization.NumberStyles.Integer,
             System.IFormatProvider? provider = null
-        ) {
+        )
+        {
             throw null;
         }
         public static System.UInt64 Parse(string s)
@@ -17586,7 +18099,8 @@ namespace System
             string s,
             System.Globalization.NumberStyles style,
             System.IFormatProvider? provider
-        ) {
+        )
+        {
             throw null;
         }
         public static System.UInt64 Parse(string s, System.IFormatProvider? provider)
@@ -17674,7 +18188,8 @@ namespace System
             out int charsWritten,
             System.ReadOnlySpan<char> format = default(System.ReadOnlySpan<char>),
             System.IFormatProvider? provider = null
-        ) {
+        )
+        {
             throw null;
         }
         public static bool TryParse(
@@ -17682,7 +18197,8 @@ namespace System
             System.Globalization.NumberStyles style,
             System.IFormatProvider? provider,
             out System.UInt64 result
-        ) {
+        )
+        {
             throw null;
         }
         public static bool TryParse(System.ReadOnlySpan<char> s, out System.UInt64 result)
@@ -17694,13 +18210,15 @@ namespace System
             System.Globalization.NumberStyles style,
             System.IFormatProvider? provider,
             out System.UInt64 result
-        ) {
+        )
+        {
             throw null;
         }
         public static bool TryParse(
             [System.Diagnostics.CodeAnalysis.NotNullWhenAttribute(true)] string? s,
             out System.UInt64 result
-        ) {
+        )
+        {
             throw null;
         }
     }
@@ -17752,7 +18270,8 @@ namespace System
         }
         public override bool Equals(
             [System.Diagnostics.CodeAnalysis.NotNullWhenAttribute(true)] object? obj
-        ) {
+        )
+        {
             throw null;
         }
         public bool Equals(System.UIntPtr other)
@@ -17808,7 +18327,8 @@ namespace System
             out int charsWritten,
             System.ReadOnlySpan<char> format = default(System.ReadOnlySpan<char>),
             System.IFormatProvider? provider = null
-        ) {
+        )
+        {
             throw null;
         }
         public static System.UIntPtr Parse(string s)
@@ -17823,7 +18343,8 @@ namespace System
             string s,
             System.Globalization.NumberStyles style,
             System.IFormatProvider? provider
-        ) {
+        )
+        {
             throw null;
         }
         public static System.UIntPtr Parse(string s, System.IFormatProvider? provider)
@@ -17834,7 +18355,8 @@ namespace System
             System.ReadOnlySpan<char> s,
             System.Globalization.NumberStyles style = System.Globalization.NumberStyles.Integer,
             System.IFormatProvider? provider = null
-        ) {
+        )
+        {
             throw null;
         }
         public static System.UIntPtr Subtract(System.UIntPtr pointer, int offset)
@@ -17878,13 +18400,15 @@ namespace System
             System.Globalization.NumberStyles style,
             System.IFormatProvider? provider,
             out System.UIntPtr result
-        ) {
+        )
+        {
             throw null;
         }
         public static bool TryParse(
             [System.Diagnostics.CodeAnalysis.NotNullWhenAttribute(true)] string? s,
             out System.UIntPtr result
-        ) {
+        )
+        {
             throw null;
         }
         public static bool TryParse(System.ReadOnlySpan<char> s, out System.UIntPtr result)
@@ -17896,7 +18420,8 @@ namespace System
             System.Globalization.NumberStyles style,
             System.IFormatProvider? provider,
             out System.UIntPtr result
-        ) {
+        )
+        {
             throw null;
         }
     }
@@ -18059,7 +18584,8 @@ namespace System
         }
         public static bool CheckSchemeName(
             [System.Diagnostics.CodeAnalysis.NotNullWhenAttribute(true)] string? schemeName
-        ) {
+        )
+        {
             throw null;
         }
         [System.ObsoleteAttribute(
@@ -18072,12 +18598,14 @@ namespace System
             System.UriComponents partsToCompare,
             System.UriFormat compareFormat,
             System.StringComparison comparisonType
-        ) {
+        )
+        {
             throw null;
         }
         public override bool Equals(
             [System.Diagnostics.CodeAnalysis.NotNullWhenAttribute(true)] object? comparand
-        ) {
+        )
+        {
             throw null;
         }
         [System.ObsoleteAttribute(
@@ -18172,7 +18700,8 @@ namespace System
         public static bool IsWellFormedUriString(
             [System.Diagnostics.CodeAnalysis.NotNullWhenAttribute(true)] string? uriString,
             System.UriKind uriKind
-        ) {
+        )
+        {
             throw null;
         }
         [System.ObsoleteAttribute(
@@ -18210,21 +18739,24 @@ namespace System
             [System.Diagnostics.CodeAnalysis.NotNullWhenAttribute(true)] string? uriString,
             System.UriKind uriKind,
             [System.Diagnostics.CodeAnalysis.NotNullWhenAttribute(true)] out System.Uri? result
-        ) {
+        )
+        {
             throw null;
         }
         public static bool TryCreate(
             System.Uri? baseUri,
             string? relativeUri,
             [System.Diagnostics.CodeAnalysis.NotNullWhenAttribute(true)] out System.Uri? result
-        ) {
+        )
+        {
             throw null;
         }
         public static bool TryCreate(
             System.Uri? baseUri,
             System.Uri? relativeUri,
             [System.Diagnostics.CodeAnalysis.NotNullWhenAttribute(true)] out System.Uri? result
-        ) {
+        )
+        {
             throw null;
         }
         [System.ObsoleteAttribute(
@@ -18302,7 +18834,8 @@ namespace System
         }
         public override bool Equals(
             [System.Diagnostics.CodeAnalysis.NotNullWhenAttribute(true)] object? rparam
-        ) {
+        )
+        {
             throw null;
         }
         public override int GetHashCode()
@@ -18378,13 +18911,15 @@ namespace System
             System.Uri uri,
             System.UriComponents components,
             System.UriFormat format
-        ) {
+        )
+        {
             throw null;
         }
         protected virtual void InitializeAndValidate(
             System.Uri uri,
             out System.UriFormatException? parsingError
-        ) {
+        )
+        {
             throw null;
         }
         protected virtual bool IsBaseOf(System.Uri baseUri, System.Uri relativeUri)
@@ -18413,7 +18948,8 @@ namespace System
             System.Uri baseUri,
             System.Uri? relativeUri,
             out System.UriFormatException? parsingError
-        ) {
+        )
+        {
             throw null;
         }
     }
@@ -18465,7 +19001,8 @@ namespace System
             T2 item2,
             T3 item3,
             T4 item4
-        ) {
+        )
+        {
             throw null;
         }
         public static (T1, T2, T3, T4, T5) Create<T1, T2, T3, T4, T5>(
@@ -18474,7 +19011,8 @@ namespace System
             T3 item3,
             T4 item4,
             T5 item5
-        ) {
+        )
+        {
             throw null;
         }
         public static (T1, T2, T3, T4, T5, T6) Create<T1, T2, T3, T4, T5, T6>(
@@ -18484,7 +19022,8 @@ namespace System
             T4 item4,
             T5 item5,
             T6 item6
-        ) {
+        )
+        {
             throw null;
         }
         public static (T1, T2, T3, T4, T5, T6, T7) Create<T1, T2, T3, T4, T5, T6, T7>(
@@ -18495,7 +19034,8 @@ namespace System
             T5 item5,
             T6 item6,
             T7 item7
-        ) {
+        )
+        {
             throw null;
         }
         public static (T1, T2, T3, T4, T5, T6, T7, T8) Create<T1, T2, T3, T4, T5, T6, T7, T8>(
@@ -18507,12 +19047,14 @@ namespace System
             T6 item6,
             T7 item7,
             T8 item8
-        ) {
+        )
+        {
             throw null;
         }
         public override bool Equals(
             [System.Diagnostics.CodeAnalysis.NotNullWhenAttribute(true)] object? obj
-        ) {
+        )
+        {
             throw null;
         }
         public bool Equals(System.ValueTuple other)
@@ -18526,18 +19068,21 @@ namespace System
         int System.Collections.IStructuralComparable.CompareTo(
             object? other,
             System.Collections.IComparer comparer
-        ) {
+        )
+        {
             throw null;
         }
         bool System.Collections.IStructuralEquatable.Equals(
             object? other,
             System.Collections.IEqualityComparer comparer
-        ) {
+        )
+        {
             throw null;
         }
         int System.Collections.IStructuralEquatable.GetHashCode(
             System.Collections.IEqualityComparer comparer
-        ) {
+        )
+        {
             throw null;
         }
         int System.IComparable.CompareTo(object? other)
@@ -18576,7 +19121,8 @@ namespace System
         }
         public override bool Equals(
             [System.Diagnostics.CodeAnalysis.NotNullWhenAttribute(true)] object? obj
-        ) {
+        )
+        {
             throw null;
         }
         public bool Equals(System.ValueTuple<T1> other)
@@ -18590,18 +19136,21 @@ namespace System
         int System.Collections.IStructuralComparable.CompareTo(
             object? other,
             System.Collections.IComparer comparer
-        ) {
+        )
+        {
             throw null;
         }
         bool System.Collections.IStructuralEquatable.Equals(
             object? other,
             System.Collections.IEqualityComparer comparer
-        ) {
+        )
+        {
             throw null;
         }
         int System.Collections.IStructuralEquatable.GetHashCode(
             System.Collections.IEqualityComparer comparer
-        ) {
+        )
+        {
             throw null;
         }
         int System.IComparable.CompareTo(object? other)
@@ -18641,7 +19190,8 @@ namespace System
         }
         public override bool Equals(
             [System.Diagnostics.CodeAnalysis.NotNullWhenAttribute(true)] object? obj
-        ) {
+        )
+        {
             throw null;
         }
         public bool Equals((T1, T2) other)
@@ -18655,18 +19205,21 @@ namespace System
         int System.Collections.IStructuralComparable.CompareTo(
             object? other,
             System.Collections.IComparer comparer
-        ) {
+        )
+        {
             throw null;
         }
         bool System.Collections.IStructuralEquatable.Equals(
             object? other,
             System.Collections.IEqualityComparer comparer
-        ) {
+        )
+        {
             throw null;
         }
         int System.Collections.IStructuralEquatable.GetHashCode(
             System.Collections.IEqualityComparer comparer
-        ) {
+        )
+        {
             throw null;
         }
         int System.IComparable.CompareTo(object? other)
@@ -18707,7 +19260,8 @@ namespace System
         }
         public override bool Equals(
             [System.Diagnostics.CodeAnalysis.NotNullWhenAttribute(true)] object? obj
-        ) {
+        )
+        {
             throw null;
         }
         public bool Equals((T1, T2, T3) other)
@@ -18721,18 +19275,21 @@ namespace System
         int System.Collections.IStructuralComparable.CompareTo(
             object? other,
             System.Collections.IComparer comparer
-        ) {
+        )
+        {
             throw null;
         }
         bool System.Collections.IStructuralEquatable.Equals(
             object? other,
             System.Collections.IEqualityComparer comparer
-        ) {
+        )
+        {
             throw null;
         }
         int System.Collections.IStructuralEquatable.GetHashCode(
             System.Collections.IEqualityComparer comparer
-        ) {
+        )
+        {
             throw null;
         }
         int System.IComparable.CompareTo(object? other)
@@ -18774,7 +19331,8 @@ namespace System
         }
         public override bool Equals(
             [System.Diagnostics.CodeAnalysis.NotNullWhenAttribute(true)] object? obj
-        ) {
+        )
+        {
             throw null;
         }
         public bool Equals((T1, T2, T3, T4) other)
@@ -18788,18 +19346,21 @@ namespace System
         int System.Collections.IStructuralComparable.CompareTo(
             object? other,
             System.Collections.IComparer comparer
-        ) {
+        )
+        {
             throw null;
         }
         bool System.Collections.IStructuralEquatable.Equals(
             object? other,
             System.Collections.IEqualityComparer comparer
-        ) {
+        )
+        {
             throw null;
         }
         int System.Collections.IStructuralEquatable.GetHashCode(
             System.Collections.IEqualityComparer comparer
-        ) {
+        )
+        {
             throw null;
         }
         int System.IComparable.CompareTo(object? other)
@@ -18842,7 +19403,8 @@ namespace System
         }
         public override bool Equals(
             [System.Diagnostics.CodeAnalysis.NotNullWhenAttribute(true)] object? obj
-        ) {
+        )
+        {
             throw null;
         }
         public bool Equals((T1, T2, T3, T4, T5) other)
@@ -18856,18 +19418,21 @@ namespace System
         int System.Collections.IStructuralComparable.CompareTo(
             object? other,
             System.Collections.IComparer comparer
-        ) {
+        )
+        {
             throw null;
         }
         bool System.Collections.IStructuralEquatable.Equals(
             object? other,
             System.Collections.IEqualityComparer comparer
-        ) {
+        )
+        {
             throw null;
         }
         int System.Collections.IStructuralEquatable.GetHashCode(
             System.Collections.IEqualityComparer comparer
-        ) {
+        )
+        {
             throw null;
         }
         int System.IComparable.CompareTo(object? other)
@@ -18911,7 +19476,8 @@ namespace System
         }
         public override bool Equals(
             [System.Diagnostics.CodeAnalysis.NotNullWhenAttribute(true)] object? obj
-        ) {
+        )
+        {
             throw null;
         }
         public bool Equals((T1, T2, T3, T4, T5, T6) other)
@@ -18925,18 +19491,21 @@ namespace System
         int System.Collections.IStructuralComparable.CompareTo(
             object? other,
             System.Collections.IComparer comparer
-        ) {
+        )
+        {
             throw null;
         }
         bool System.Collections.IStructuralEquatable.Equals(
             object? other,
             System.Collections.IEqualityComparer comparer
-        ) {
+        )
+        {
             throw null;
         }
         int System.Collections.IStructuralEquatable.GetHashCode(
             System.Collections.IEqualityComparer comparer
-        ) {
+        )
+        {
             throw null;
         }
         int System.IComparable.CompareTo(object? other)
@@ -18981,7 +19550,8 @@ namespace System
         }
         public override bool Equals(
             [System.Diagnostics.CodeAnalysis.NotNullWhenAttribute(true)] object? obj
-        ) {
+        )
+        {
             throw null;
         }
         public bool Equals((T1, T2, T3, T4, T5, T6, T7) other)
@@ -18995,18 +19565,21 @@ namespace System
         int System.Collections.IStructuralComparable.CompareTo(
             object? other,
             System.Collections.IComparer comparer
-        ) {
+        )
+        {
             throw null;
         }
         bool System.Collections.IStructuralEquatable.Equals(
             object? other,
             System.Collections.IEqualityComparer comparer
-        ) {
+        )
+        {
             throw null;
         }
         int System.Collections.IStructuralEquatable.GetHashCode(
             System.Collections.IEqualityComparer comparer
-        ) {
+        )
+        {
             throw null;
         }
         int System.IComparable.CompareTo(object? other)
@@ -19043,7 +19616,8 @@ namespace System
             T6 item6,
             T7 item7,
             TRest rest
-        ) {
+        )
+        {
             throw null;
         }
         object? System.Runtime.CompilerServices.ITuple.this[int index]
@@ -19060,7 +19634,8 @@ namespace System
         }
         public override bool Equals(
             [System.Diagnostics.CodeAnalysis.NotNullWhenAttribute(true)] object? obj
-        ) {
+        )
+        {
             throw null;
         }
         public bool Equals(System.ValueTuple<T1, T2, T3, T4, T5, T6, T7, TRest> other)
@@ -19074,18 +19649,21 @@ namespace System
         int System.Collections.IStructuralComparable.CompareTo(
             object? other,
             System.Collections.IComparer comparer
-        ) {
+        )
+        {
             throw null;
         }
         bool System.Collections.IStructuralEquatable.Equals(
             object? other,
             System.Collections.IEqualityComparer comparer
-        ) {
+        )
+        {
             throw null;
         }
         int System.Collections.IStructuralEquatable.GetHashCode(
             System.Collections.IEqualityComparer comparer
-        ) {
+        )
+        {
             throw null;
         }
         int System.IComparable.CompareTo(object? other)
@@ -19102,7 +19680,8 @@ namespace System
         protected ValueType() { }
         public override bool Equals(
             [System.Diagnostics.CodeAnalysis.NotNullWhenAttribute(true)] object? obj
-        ) {
+        )
+        {
             throw null;
         }
         public override int GetHashCode()
@@ -19164,12 +19743,14 @@ namespace System
         }
         public override bool Equals(
             [System.Diagnostics.CodeAnalysis.NotNullWhenAttribute(true)] object? obj
-        ) {
+        )
+        {
             throw null;
         }
         public bool Equals(
             [System.Diagnostics.CodeAnalysis.NotNullWhenAttribute(true)] System.Version? obj
-        ) {
+        )
+        {
             throw null;
         }
         public override int GetHashCode()
@@ -19227,13 +19808,15 @@ namespace System
         public static bool TryParse(
             System.ReadOnlySpan<char> input,
             [System.Diagnostics.CodeAnalysis.NotNullWhenAttribute(true)] out System.Version? result
-        ) {
+        )
+        {
             throw null;
         }
         public static bool TryParse(
             [System.Diagnostics.CodeAnalysis.NotNullWhenAttribute(true)] string? input,
             [System.Diagnostics.CodeAnalysis.NotNullWhenAttribute(true)] out System.Version? result
-        ) {
+        )
+        {
             throw null;
         }
         bool System.ISpanFormattable.TryFormat(
@@ -19241,7 +19824,8 @@ namespace System
             out int charsWritten,
             System.ReadOnlySpan<char> format,
             System.IFormatProvider? provider
-        ) {
+        )
+        {
             throw null;
         }
         string System.IFormattable.ToString(string? format, IFormatProvider? formatProvider)
@@ -19296,7 +19880,8 @@ namespace System
                 System.Diagnostics.CodeAnalysis.NotNullWhenAttribute(true)
             ]
                 out T target
-        ) {
+        )
+        {
             throw null;
         }
     }
@@ -19340,7 +19925,8 @@ namespace System.Buffers
             System.Runtime.InteropServices.GCHandle handle =
                 default(System.Runtime.InteropServices.GCHandle),
             System.Buffers.IPinnable? pinnable = null
-        ) {
+        )
+        {
             throw null;
         }
         [System.CLSCompliantAttribute(false)]
@@ -19474,13 +20060,15 @@ namespace System.CodeDom.Compiler
         public override System.Threading.Tasks.Task WriteAsync(
             ReadOnlyMemory<char> buffer,
             System.Threading.CancellationToken cancellationToken = default
-        ) {
+        )
+        {
             throw null;
         }
         public override System.Threading.Tasks.Task WriteAsync(
             System.Text.StringBuilder? value,
             System.Threading.CancellationToken cancellationToken = default
-        ) {
+        )
+        {
             throw null;
         }
         public override void WriteLine() { }
@@ -19516,7 +20104,8 @@ namespace System.CodeDom.Compiler
             char[] buffer,
             int index,
             int count
-        ) {
+        )
+        {
             throw null;
         }
         public override System.Threading.Tasks.Task WriteLineAsync(string? value)
@@ -19526,13 +20115,15 @@ namespace System.CodeDom.Compiler
         public override System.Threading.Tasks.Task WriteLineAsync(
             ReadOnlyMemory<char> buffer,
             System.Threading.CancellationToken cancellationToken = default
-        ) {
+        )
+        {
             throw null;
         }
         public override System.Threading.Tasks.Task WriteLineAsync(
             System.Text.StringBuilder? value,
             System.Threading.CancellationToken cancellationToken = default
-        ) {
+        )
+        {
             throw null;
         }
     }
@@ -19592,7 +20183,8 @@ namespace System.Collections
             int count,
             object? value,
             System.Collections.IComparer? comparer
-        ) {
+        )
+        {
             throw null;
         }
         public virtual int BinarySearch(object? value)
@@ -20133,7 +20725,8 @@ namespace System.Collections.Generic
         public static System.Collections.Generic.KeyValuePair<TKey, TValue> Create<TKey, TValue>(
             TKey key,
             TValue value
-        ) {
+        )
+        {
             throw null;
         }
     }
@@ -20400,7 +20993,8 @@ namespace System.ComponentModel
         }
         public override bool Equals(
             [System.Diagnostics.CodeAnalysis.NotNullWhenAttribute(true)] object? obj
-        ) {
+        )
+        {
             throw null;
         }
         public override int GetHashCode()
@@ -20431,7 +21025,8 @@ namespace System.ComponentModel
         }
         public override bool Equals(
             [System.Diagnostics.CodeAnalysis.NotNullWhenAttribute(true)] object? obj
-        ) {
+        )
+        {
             throw null;
         }
         public override int GetHashCode()
@@ -21308,7 +21903,8 @@ namespace System.Globalization
             System.DateTime time,
             System.Globalization.CalendarWeekRule rule,
             System.DayOfWeek firstDayOfWeek
-        ) {
+        )
+        {
             throw null;
         }
         public abstract int GetYear(System.DateTime time);
@@ -21339,7 +21935,8 @@ namespace System.Globalization
             int minute,
             int second,
             int millisecond
-        ) {
+        )
+        {
             throw null;
         }
         public abstract System.DateTime ToDateTime(
@@ -21453,7 +22050,8 @@ namespace System.Globalization
             System.ReadOnlySpan<char> string1,
             System.ReadOnlySpan<char> string2,
             System.Globalization.CompareOptions options = System.Globalization.CompareOptions.None
-        ) {
+        )
+        {
             throw null;
         }
         public int Compare(
@@ -21463,7 +22061,8 @@ namespace System.Globalization
             string? string2,
             int offset2,
             int length2
-        ) {
+        )
+        {
             throw null;
         }
         public int Compare(
@@ -21474,7 +22073,8 @@ namespace System.Globalization
             int offset2,
             int length2,
             System.Globalization.CompareOptions options
-        ) {
+        )
+        {
             throw null;
         }
         public int Compare(string? string1, int offset1, string? string2, int offset2)
@@ -21487,7 +22087,8 @@ namespace System.Globalization
             string? string2,
             int offset2,
             System.Globalization.CompareOptions options
-        ) {
+        )
+        {
             throw null;
         }
         public int Compare(string? string1, string? string2)
@@ -21498,12 +22099,14 @@ namespace System.Globalization
             string? string1,
             string? string2,
             System.Globalization.CompareOptions options
-        ) {
+        )
+        {
             throw null;
         }
         public override bool Equals(
             [System.Diagnostics.CodeAnalysis.NotNullWhenAttribute(true)] object? value
-        ) {
+        )
+        {
             throw null;
         }
         public static System.Globalization.CompareInfo GetCompareInfo(int culture)
@@ -21513,7 +22116,8 @@ namespace System.Globalization
         public static System.Globalization.CompareInfo GetCompareInfo(
             int culture,
             System.Reflection.Assembly assembly
-        ) {
+        )
+        {
             throw null;
         }
         public static System.Globalization.CompareInfo GetCompareInfo(string name)
@@ -21523,7 +22127,8 @@ namespace System.Globalization
         public static System.Globalization.CompareInfo GetCompareInfo(
             string name,
             System.Reflection.Assembly assembly
-        ) {
+        )
+        {
             throw null;
         }
         public override int GetHashCode()
@@ -21533,7 +22138,8 @@ namespace System.Globalization
         public int GetHashCode(
             System.ReadOnlySpan<char> source,
             System.Globalization.CompareOptions options
-        ) {
+        )
+        {
             throw null;
         }
         public int GetHashCode(string source, System.Globalization.CompareOptions options)
@@ -21544,7 +22150,8 @@ namespace System.Globalization
             System.ReadOnlySpan<char> source,
             System.Span<byte> destination,
             System.Globalization.CompareOptions options = System.Globalization.CompareOptions.None
-        ) {
+        )
+        {
             throw null;
         }
         public System.Globalization.SortKey GetSortKey(string source)
@@ -21554,20 +22161,23 @@ namespace System.Globalization
         public System.Globalization.SortKey GetSortKey(
             string source,
             System.Globalization.CompareOptions options
-        ) {
+        )
+        {
             throw null;
         }
         public int GetSortKeyLength(
             System.ReadOnlySpan<char> source,
             System.Globalization.CompareOptions options = System.Globalization.CompareOptions.None
-        ) {
+        )
+        {
             throw null;
         }
         public int IndexOf(
             System.ReadOnlySpan<char> source,
             System.ReadOnlySpan<char> value,
             System.Globalization.CompareOptions options = System.Globalization.CompareOptions.None
-        ) {
+        )
+        {
             throw null;
         }
         public int IndexOf(
@@ -21575,14 +22185,16 @@ namespace System.Globalization
             System.ReadOnlySpan<char> value,
             System.Globalization.CompareOptions options,
             out int matchLength
-        ) {
+        )
+        {
             throw null;
         }
         public int IndexOf(
             System.ReadOnlySpan<char> source,
             System.Text.Rune value,
             System.Globalization.CompareOptions options = System.Globalization.CompareOptions.None
-        ) {
+        )
+        {
             throw null;
         }
         public int IndexOf(string source, char value)
@@ -21602,7 +22214,8 @@ namespace System.Globalization
             char value,
             int startIndex,
             System.Globalization.CompareOptions options
-        ) {
+        )
+        {
             throw null;
         }
         public int IndexOf(string source, char value, int startIndex, int count)
@@ -21615,7 +22228,8 @@ namespace System.Globalization
             int startIndex,
             int count,
             System.Globalization.CompareOptions options
-        ) {
+        )
+        {
             throw null;
         }
         public int IndexOf(string source, string value)
@@ -21635,7 +22249,8 @@ namespace System.Globalization
             string value,
             int startIndex,
             System.Globalization.CompareOptions options
-        ) {
+        )
+        {
             throw null;
         }
         public int IndexOf(string source, string value, int startIndex, int count)
@@ -21648,14 +22263,16 @@ namespace System.Globalization
             int startIndex,
             int count,
             System.Globalization.CompareOptions options
-        ) {
+        )
+        {
             throw null;
         }
         public bool IsPrefix(
             System.ReadOnlySpan<char> source,
             System.ReadOnlySpan<char> prefix,
             System.Globalization.CompareOptions options = System.Globalization.CompareOptions.None
-        ) {
+        )
+        {
             throw null;
         }
         public bool IsPrefix(
@@ -21663,7 +22280,8 @@ namespace System.Globalization
             System.ReadOnlySpan<char> prefix,
             System.Globalization.CompareOptions options,
             out int matchLength
-        ) {
+        )
+        {
             throw null;
         }
         public bool IsPrefix(string source, string prefix)
@@ -21674,7 +22292,8 @@ namespace System.Globalization
             string source,
             string prefix,
             System.Globalization.CompareOptions options
-        ) {
+        )
+        {
             throw null;
         }
         public static bool IsSortable(char ch)
@@ -21697,7 +22316,8 @@ namespace System.Globalization
             System.ReadOnlySpan<char> source,
             System.ReadOnlySpan<char> suffix,
             System.Globalization.CompareOptions options = System.Globalization.CompareOptions.None
-        ) {
+        )
+        {
             throw null;
         }
         public bool IsSuffix(
@@ -21705,7 +22325,8 @@ namespace System.Globalization
             System.ReadOnlySpan<char> suffix,
             System.Globalization.CompareOptions options,
             out int matchLength
-        ) {
+        )
+        {
             throw null;
         }
         public bool IsSuffix(string source, string suffix)
@@ -21716,14 +22337,16 @@ namespace System.Globalization
             string source,
             string suffix,
             System.Globalization.CompareOptions options
-        ) {
+        )
+        {
             throw null;
         }
         public int LastIndexOf(
             System.ReadOnlySpan<char> source,
             System.ReadOnlySpan<char> value,
             System.Globalization.CompareOptions options = System.Globalization.CompareOptions.None
-        ) {
+        )
+        {
             throw null;
         }
         public int LastIndexOf(
@@ -21731,14 +22354,16 @@ namespace System.Globalization
             System.ReadOnlySpan<char> value,
             System.Globalization.CompareOptions options,
             out int matchLength
-        ) {
+        )
+        {
             throw null;
         }
         public int LastIndexOf(
             System.ReadOnlySpan<char> source,
             System.Text.Rune value,
             System.Globalization.CompareOptions options = System.Globalization.CompareOptions.None
-        ) {
+        )
+        {
             throw null;
         }
         public int LastIndexOf(string source, char value)
@@ -21749,7 +22374,8 @@ namespace System.Globalization
             string source,
             char value,
             System.Globalization.CompareOptions options
-        ) {
+        )
+        {
             throw null;
         }
         public int LastIndexOf(string source, char value, int startIndex)
@@ -21761,7 +22387,8 @@ namespace System.Globalization
             char value,
             int startIndex,
             System.Globalization.CompareOptions options
-        ) {
+        )
+        {
             throw null;
         }
         public int LastIndexOf(string source, char value, int startIndex, int count)
@@ -21774,7 +22401,8 @@ namespace System.Globalization
             int startIndex,
             int count,
             System.Globalization.CompareOptions options
-        ) {
+        )
+        {
             throw null;
         }
         public int LastIndexOf(string source, string value)
@@ -21785,7 +22413,8 @@ namespace System.Globalization
             string source,
             string value,
             System.Globalization.CompareOptions options
-        ) {
+        )
+        {
             throw null;
         }
         public int LastIndexOf(string source, string value, int startIndex)
@@ -21797,7 +22426,8 @@ namespace System.Globalization
             string value,
             int startIndex,
             System.Globalization.CompareOptions options
-        ) {
+        )
+        {
             throw null;
         }
         public int LastIndexOf(string source, string value, int startIndex, int count)
@@ -21810,7 +22440,8 @@ namespace System.Globalization
             int startIndex,
             int count,
             System.Globalization.CompareOptions options
-        ) {
+        )
+        {
             throw null;
         }
         void System.Runtime.Serialization.IDeserializationCallback.OnDeserialization(
@@ -21965,7 +22596,8 @@ namespace System.Globalization
         }
         public override bool Equals(
             [System.Diagnostics.CodeAnalysis.NotNullWhenAttribute(true)] object? value
-        ) {
+        )
+        {
             throw null;
         }
         public System.Globalization.CultureInfo GetConsoleFallbackUICulture()
@@ -21983,7 +22615,8 @@ namespace System.Globalization
         public static System.Globalization.CultureInfo GetCultureInfo(
             string name,
             bool predefinedOnly
-        ) {
+        )
+        {
             throw null;
         }
         public static System.Globalization.CultureInfo GetCultureInfo(string name, string altName)
@@ -21996,7 +22629,8 @@ namespace System.Globalization
         }
         public static System.Globalization.CultureInfo[] GetCultures(
             System.Globalization.CultureTypes types
-        ) {
+        )
+        {
             throw null;
         }
         public virtual object? GetFormat(System.Type? formatType)
@@ -22256,7 +22890,8 @@ namespace System.Globalization
         }
         public static System.Globalization.DateTimeFormatInfo GetInstance(
             System.IFormatProvider? provider
-        ) {
+        )
+        {
             throw null;
         }
         public string GetMonthName(int month)
@@ -22269,7 +22904,8 @@ namespace System.Globalization
         }
         public static System.Globalization.DateTimeFormatInfo ReadOnly(
             System.Globalization.DateTimeFormatInfo dtfi
-        ) {
+        )
+        {
             throw null;
         }
         public void SetAllDateTimePatterns(string[] patterns, char format) { }
@@ -22399,7 +23035,8 @@ namespace System.Globalization
             int second,
             int millisecond,
             int era
-        ) {
+        )
+        {
             throw null;
         }
         public override int ToFourDigitYear(int year)
@@ -22412,7 +23049,8 @@ namespace System.Globalization
         public static System.StringComparer GetStringComparer(
             this System.Globalization.CompareInfo compareInfo,
             System.Globalization.CompareOptions options
-        ) {
+        )
+        {
             throw null;
         }
     }
@@ -22516,7 +23154,8 @@ namespace System.Globalization
             int second,
             int millisecond,
             int era
-        ) {
+        )
+        {
             throw null;
         }
         public override int ToFourDigitYear(int year)
@@ -22627,7 +23266,8 @@ namespace System.Globalization
             int second,
             int millisecond,
             int era
-        ) {
+        )
+        {
             throw null;
         }
         public override int ToFourDigitYear(int year)
@@ -22738,7 +23378,8 @@ namespace System.Globalization
             int second,
             int millisecond,
             int era
-        ) {
+        )
+        {
             throw null;
         }
         public override int ToFourDigitYear(int year)
@@ -22761,7 +23402,8 @@ namespace System.Globalization
         }
         public override bool Equals(
             [System.Diagnostics.CodeAnalysis.NotNullWhenAttribute(true)] object? obj
-        ) {
+        )
+        {
             throw null;
         }
         public string GetAscii(string unicode)
@@ -22892,7 +23534,8 @@ namespace System.Globalization
             System.DateTime time,
             System.Globalization.CalendarWeekRule rule,
             System.DayOfWeek firstDayOfWeek
-        ) {
+        )
+        {
             throw null;
         }
         public override int GetYear(System.DateTime time)
@@ -22920,7 +23563,8 @@ namespace System.Globalization
             int second,
             int millisecond,
             int era
-        ) {
+        )
+        {
             throw null;
         }
         public override int ToFourDigitYear(int year)
@@ -23047,7 +23691,8 @@ namespace System.Globalization
             int second,
             int millisecond,
             int era
-        ) {
+        )
+        {
             throw null;
         }
         public override int ToFourDigitYear(int year)
@@ -23128,7 +23773,8 @@ namespace System.Globalization
             System.DateTime time,
             System.Globalization.CalendarWeekRule rule,
             System.DayOfWeek firstDayOfWeek
-        ) {
+        )
+        {
             throw null;
         }
         public override int GetYear(System.DateTime time)
@@ -23156,7 +23802,8 @@ namespace System.Globalization
             int second,
             int millisecond,
             int era
-        ) {
+        )
+        {
             throw null;
         }
         public override int ToFourDigitYear(int year)
@@ -23349,12 +23996,14 @@ namespace System.Globalization
         }
         public static System.Globalization.NumberFormatInfo GetInstance(
             System.IFormatProvider? formatProvider
-        ) {
+        )
+        {
             throw null;
         }
         public static System.Globalization.NumberFormatInfo ReadOnly(
             System.Globalization.NumberFormatInfo nfi
-        ) {
+        )
+        {
             throw null;
         }
     }
@@ -23473,7 +24122,8 @@ namespace System.Globalization
             int second,
             int millisecond,
             int era
-        ) {
+        )
+        {
             throw null;
         }
         public override int ToFourDigitYear(int year)
@@ -23543,7 +24193,8 @@ namespace System.Globalization
         }
         public override bool Equals(
             [System.Diagnostics.CodeAnalysis.NotNullWhenAttribute(true)] object? value
-        ) {
+        )
+        {
             throw null;
         }
         public override int GetHashCode()
@@ -23569,12 +24220,14 @@ namespace System.Globalization
         public static int Compare(
             System.Globalization.SortKey sortkey1,
             System.Globalization.SortKey sortkey2
-        ) {
+        )
+        {
             throw null;
         }
         public override bool Equals(
             [System.Diagnostics.CodeAnalysis.NotNullWhenAttribute(true)] object? value
-        ) {
+        )
+        {
             throw null;
         }
         public override int GetHashCode()
@@ -23600,12 +24253,14 @@ namespace System.Globalization
         public bool Equals(
             [System.Diagnostics.CodeAnalysis.NotNullWhenAttribute(true)]
                 System.Globalization.SortVersion? other
-        ) {
+        )
+        {
             throw null;
         }
         public override bool Equals(
             [System.Diagnostics.CodeAnalysis.NotNullWhenAttribute(true)] object? obj
-        ) {
+        )
+        {
             throw null;
         }
         public override int GetHashCode()
@@ -23615,13 +24270,15 @@ namespace System.Globalization
         public static bool operator ==(
             System.Globalization.SortVersion? left,
             System.Globalization.SortVersion? right
-        ) {
+        )
+        {
             throw null;
         }
         public static bool operator !=(
             System.Globalization.SortVersion? left,
             System.Globalization.SortVersion? right
-        ) {
+        )
+        {
             throw null;
         }
     }
@@ -23640,7 +24297,8 @@ namespace System.Globalization
         }
         public override bool Equals(
             [System.Diagnostics.CodeAnalysis.NotNullWhenAttribute(true)] object? value
-        ) {
+        )
+        {
             throw null;
         }
         public override int GetHashCode()
@@ -23669,13 +24327,15 @@ namespace System.Globalization
         }
         public static System.Globalization.TextElementEnumerator GetTextElementEnumerator(
             string str
-        ) {
+        )
+        {
             throw null;
         }
         public static System.Globalization.TextElementEnumerator GetTextElementEnumerator(
             string str,
             int index
-        ) {
+        )
+        {
             throw null;
         }
         public static int[] ParseCombiningCharacters(string str)
@@ -23763,7 +24423,8 @@ namespace System.Globalization
             System.DateTime time,
             System.Globalization.CalendarWeekRule rule,
             System.DayOfWeek firstDayOfWeek
-        ) {
+        )
+        {
             throw null;
         }
         public override int GetYear(System.DateTime time)
@@ -23791,7 +24452,8 @@ namespace System.Globalization
             int second,
             int millisecond,
             int era
-        ) {
+        )
+        {
             throw null;
         }
         public override int ToFourDigitYear(int year)
@@ -23892,7 +24554,8 @@ namespace System.Globalization
         }
         public override bool Equals(
             [System.Diagnostics.CodeAnalysis.NotNullWhenAttribute(true)] object? obj
-        ) {
+        )
+        {
             throw null;
         }
         public override int GetHashCode()
@@ -24004,7 +24667,8 @@ namespace System.Globalization
             System.DateTime time,
             System.Globalization.CalendarWeekRule rule,
             System.DayOfWeek firstDayOfWeek
-        ) {
+        )
+        {
             throw null;
         }
         public override int GetYear(System.DateTime time)
@@ -24032,7 +24696,8 @@ namespace System.Globalization
             int second,
             int millisecond,
             int era
-        ) {
+        )
+        {
             throw null;
         }
         public override int ToFourDigitYear(int year)
@@ -24144,7 +24809,8 @@ namespace System.Globalization
             int second,
             int millisecond,
             int era
-        ) {
+        )
+        {
             throw null;
         }
         public override int ToFourDigitYear(int year)
@@ -24399,7 +25065,8 @@ namespace System.IO
             int count,
             System.AsyncCallback? callback,
             object? state
-        ) {
+        )
+        {
             throw null;
         }
         public override System.IAsyncResult BeginWrite(
@@ -24408,7 +25075,8 @@ namespace System.IO
             int count,
             System.AsyncCallback? callback,
             object? state
-        ) {
+        )
+        {
             throw null;
         }
         public override void CopyTo(System.IO.Stream destination, int bufferSize) { }
@@ -24416,7 +25084,8 @@ namespace System.IO
             System.IO.Stream destination,
             int bufferSize,
             System.Threading.CancellationToken cancellationToken
-        ) {
+        )
+        {
             throw null;
         }
         protected override void Dispose(bool disposing) { }
@@ -24432,7 +25101,8 @@ namespace System.IO
         public override void Flush() { }
         public override System.Threading.Tasks.Task FlushAsync(
             System.Threading.CancellationToken cancellationToken
-        ) {
+        )
+        {
             throw null;
         }
         public override int Read(byte[] buffer, int offset, int count)
@@ -24448,14 +25118,16 @@ namespace System.IO
             int offset,
             int count,
             System.Threading.CancellationToken cancellationToken
-        ) {
+        )
+        {
             throw null;
         }
         public override System.Threading.Tasks.ValueTask<int> ReadAsync(
             System.Memory<byte> buffer,
             System.Threading.CancellationToken cancellationToken =
                 default(System.Threading.CancellationToken)
-        ) {
+        )
+        {
             throw null;
         }
         public override int ReadByte()
@@ -24474,14 +25146,16 @@ namespace System.IO
             int offset,
             int count,
             System.Threading.CancellationToken cancellationToken
-        ) {
+        )
+        {
             throw null;
         }
         public override System.Threading.Tasks.ValueTask WriteAsync(
             System.ReadOnlyMemory<byte> buffer,
             System.Threading.CancellationToken cancellationToken =
                 default(System.Threading.CancellationToken)
-        ) {
+        )
+        {
             throw null;
         }
         public override void WriteByte(byte value) { }
@@ -24752,7 +25426,8 @@ namespace System.IO
             int count,
             System.AsyncCallback? callback,
             object? state
-        ) {
+        )
+        {
             throw null;
         }
         public override System.IAsyncResult BeginWrite(
@@ -24761,14 +25436,16 @@ namespace System.IO
             int count,
             System.AsyncCallback? callback,
             object? state
-        ) {
+        )
+        {
             throw null;
         }
         public override System.Threading.Tasks.Task CopyToAsync(
             System.IO.Stream destination,
             int bufferSize,
             System.Threading.CancellationToken cancellationToken
-        ) {
+        )
+        {
             throw null;
         }
         protected override void Dispose(bool disposing) { }
@@ -24786,7 +25463,8 @@ namespace System.IO
         public virtual void Flush(bool flushToDisk) { }
         public override System.Threading.Tasks.Task FlushAsync(
             System.Threading.CancellationToken cancellationToken
-        ) {
+        )
+        {
             throw null;
         }
         [System.Runtime.Versioning.UnsupportedOSPlatform("macos")]
@@ -24804,14 +25482,16 @@ namespace System.IO
             int offset,
             int count,
             System.Threading.CancellationToken cancellationToken
-        ) {
+        )
+        {
             throw null;
         }
         public override System.Threading.Tasks.ValueTask<int> ReadAsync(
             System.Memory<byte> buffer,
             System.Threading.CancellationToken cancellationToken =
                 default(System.Threading.CancellationToken)
-        ) {
+        )
+        {
             throw null;
         }
         public override int ReadByte()
@@ -24832,14 +25512,16 @@ namespace System.IO
             int offset,
             int count,
             System.Threading.CancellationToken cancellationToken
-        ) {
+        )
+        {
             throw null;
         }
         public override System.Threading.Tasks.ValueTask WriteAsync(
             System.ReadOnlyMemory<byte> buffer,
             System.Threading.CancellationToken cancellationToken =
                 default(System.Threading.CancellationToken)
-        ) {
+        )
+        {
             throw null;
         }
         public override void WriteByte(byte value) { }
@@ -24913,7 +25595,8 @@ namespace System.IO
             int count,
             System.AsyncCallback? callback,
             object? state
-        ) {
+        )
+        {
             throw null;
         }
         public override System.IAsyncResult BeginWrite(
@@ -24922,7 +25605,8 @@ namespace System.IO
             int count,
             System.AsyncCallback? callback,
             object? state
-        ) {
+        )
+        {
             throw null;
         }
         public override void CopyTo(System.IO.Stream destination, int bufferSize) { }
@@ -24930,7 +25614,8 @@ namespace System.IO
             System.IO.Stream destination,
             int bufferSize,
             System.Threading.CancellationToken cancellationToken
-        ) {
+        )
+        {
             throw null;
         }
         protected override void Dispose(bool disposing) { }
@@ -24942,7 +25627,8 @@ namespace System.IO
         public override void Flush() { }
         public override System.Threading.Tasks.Task FlushAsync(
             System.Threading.CancellationToken cancellationToken
-        ) {
+        )
+        {
             throw null;
         }
         public virtual byte[] GetBuffer()
@@ -24962,14 +25648,16 @@ namespace System.IO
             int offset,
             int count,
             System.Threading.CancellationToken cancellationToken
-        ) {
+        )
+        {
             throw null;
         }
         public override System.Threading.Tasks.ValueTask<int> ReadAsync(
             System.Memory<byte> buffer,
             System.Threading.CancellationToken cancellationToken =
                 default(System.Threading.CancellationToken)
-        ) {
+        )
+        {
             throw null;
         }
         public override int ReadByte()
@@ -24996,14 +25684,16 @@ namespace System.IO
             int offset,
             int count,
             System.Threading.CancellationToken cancellationToken
-        ) {
+        )
+        {
             throw null;
         }
         public override System.Threading.Tasks.ValueTask WriteAsync(
             System.ReadOnlyMemory<byte> buffer,
             System.Threading.CancellationToken cancellationToken =
                 default(System.Threading.CancellationToken)
-        ) {
+        )
+        {
             throw null;
         }
         public override void WriteByte(byte value) { }
@@ -25076,7 +25766,8 @@ namespace System.IO
         }
         public static System.ReadOnlySpan<char> GetFileNameWithoutExtension(
             System.ReadOnlySpan<char> path
-        ) {
+        )
+        {
             throw null;
         }
         [return: System.Diagnostics.CodeAnalysis.NotNullIfNotNullAttribute("path")]
@@ -25130,7 +25821,8 @@ namespace System.IO
         }
         public static bool HasExtension(
             [System.Diagnostics.CodeAnalysis.NotNullWhenAttribute(true)] string? path
-        ) {
+        )
+        {
             throw null;
         }
         public static bool IsPathFullyQualified(System.ReadOnlySpan<char> path)
@@ -25147,7 +25839,8 @@ namespace System.IO
         }
         public static bool IsPathRooted(
             [System.Diagnostics.CodeAnalysis.NotNullWhenAttribute(true)] string? path
-        ) {
+        )
+        {
             throw null;
         }
         public static string Join(System.ReadOnlySpan<char> path1, System.ReadOnlySpan<char> path2)
@@ -25158,7 +25851,8 @@ namespace System.IO
             System.ReadOnlySpan<char> path1,
             System.ReadOnlySpan<char> path2,
             System.ReadOnlySpan<char> path3
-        ) {
+        )
+        {
             throw null;
         }
         public static string Join(
@@ -25166,7 +25860,8 @@ namespace System.IO
             System.ReadOnlySpan<char> path2,
             System.ReadOnlySpan<char> path3,
             System.ReadOnlySpan<char> path4
-        ) {
+        )
+        {
             throw null;
         }
         public static string Join(string? path1, string? path2)
@@ -25187,7 +25882,8 @@ namespace System.IO
         }
         public static System.ReadOnlySpan<char> TrimEndingDirectorySeparator(
             System.ReadOnlySpan<char> path
-        ) {
+        )
+        {
             throw null;
         }
         public static string TrimEndingDirectorySeparator(string path)
@@ -25200,7 +25896,8 @@ namespace System.IO
             System.ReadOnlySpan<char> path3,
             System.Span<char> destination,
             out int charsWritten
-        ) {
+        )
+        {
             throw null;
         }
         public static bool TryJoin(
@@ -25208,7 +25905,8 @@ namespace System.IO
             System.ReadOnlySpan<char> path2,
             System.Span<char> destination,
             out int charsWritten
-        ) {
+        )
+        {
             throw null;
         }
     }
@@ -25260,7 +25958,8 @@ namespace System.IO
             int count,
             System.AsyncCallback? callback,
             object? state
-        ) {
+        )
+        {
             throw null;
         }
         public virtual System.IAsyncResult BeginWrite(
@@ -25269,7 +25968,8 @@ namespace System.IO
             int count,
             System.AsyncCallback? callback,
             object? state
-        ) {
+        )
+        {
             throw null;
         }
         public virtual void Close() { }
@@ -25287,13 +25987,15 @@ namespace System.IO
             System.IO.Stream destination,
             int bufferSize,
             System.Threading.CancellationToken cancellationToken
-        ) {
+        )
+        {
             throw null;
         }
         public System.Threading.Tasks.Task CopyToAsync(
             System.IO.Stream destination,
             System.Threading.CancellationToken cancellationToken
-        ) {
+        )
+        {
             throw null;
         }
         [System.ObsoleteAttribute(
@@ -25321,7 +26023,8 @@ namespace System.IO
         }
         public virtual System.Threading.Tasks.Task FlushAsync(
             System.Threading.CancellationToken cancellationToken
-        ) {
+        )
+        {
             throw null;
         }
         [System.ObsoleteAttribute("Do not call or override this method.")]
@@ -25340,14 +26043,16 @@ namespace System.IO
             int offset,
             int count,
             System.Threading.CancellationToken cancellationToken
-        ) {
+        )
+        {
             throw null;
         }
         public virtual System.Threading.Tasks.ValueTask<int> ReadAsync(
             System.Memory<byte> buffer,
             System.Threading.CancellationToken cancellationToken =
                 default(System.Threading.CancellationToken)
-        ) {
+        )
+        {
             throw null;
         }
         public virtual int ReadByte()
@@ -25376,14 +26081,16 @@ namespace System.IO
             int offset,
             int count,
             System.Threading.CancellationToken cancellationToken
-        ) {
+        )
+        {
             throw null;
         }
         public virtual System.Threading.Tasks.ValueTask WriteAsync(
             System.ReadOnlyMemory<byte> buffer,
             System.Threading.CancellationToken cancellationToken =
                 default(System.Threading.CancellationToken)
-        ) {
+        )
+        {
             throw null;
         }
         public virtual void WriteByte(byte value) { }
@@ -25461,14 +26168,16 @@ namespace System.IO
             char[] buffer,
             int index,
             int count
-        ) {
+        )
+        {
             throw null;
         }
         public override System.Threading.Tasks.ValueTask<int> ReadAsync(
             System.Memory<char> buffer,
             System.Threading.CancellationToken cancellationToken =
                 default(System.Threading.CancellationToken)
-        ) {
+        )
+        {
             throw null;
         }
         public override int ReadBlock(char[] buffer, int index, int count)
@@ -25483,14 +26192,16 @@ namespace System.IO
             char[] buffer,
             int index,
             int count
-        ) {
+        )
+        {
             throw null;
         }
         public override System.Threading.Tasks.ValueTask<int> ReadBlockAsync(
             System.Memory<char> buffer,
             System.Threading.CancellationToken cancellationToken =
                 default(System.Threading.CancellationToken)
-        ) {
+        )
+        {
             throw null;
         }
         public override string? ReadLine()
@@ -25573,7 +26284,8 @@ namespace System.IO
             System.ReadOnlyMemory<char> buffer,
             System.Threading.CancellationToken cancellationToken =
                 default(System.Threading.CancellationToken)
-        ) {
+        )
+        {
             throw null;
         }
         public override System.Threading.Tasks.Task WriteAsync(string? value)
@@ -25598,14 +26310,16 @@ namespace System.IO
             char[] buffer,
             int index,
             int count
-        ) {
+        )
+        {
             throw null;
         }
         public override System.Threading.Tasks.Task WriteLineAsync(
             System.ReadOnlyMemory<char> buffer,
             System.Threading.CancellationToken cancellationToken =
                 default(System.Threading.CancellationToken)
-        ) {
+        )
+        {
             throw null;
         }
         public override System.Threading.Tasks.Task WriteLineAsync(string? value)
@@ -25638,14 +26352,16 @@ namespace System.IO
             char[] buffer,
             int index,
             int count
-        ) {
+        )
+        {
             throw null;
         }
         public override System.Threading.Tasks.ValueTask<int> ReadAsync(
             System.Memory<char> buffer,
             System.Threading.CancellationToken cancellationToken =
                 default(System.Threading.CancellationToken)
-        ) {
+        )
+        {
             throw null;
         }
         public override int ReadBlock(System.Span<char> buffer)
@@ -25656,14 +26372,16 @@ namespace System.IO
             char[] buffer,
             int index,
             int count
-        ) {
+        )
+        {
             throw null;
         }
         public override System.Threading.Tasks.ValueTask<int> ReadBlockAsync(
             System.Memory<char> buffer,
             System.Threading.CancellationToken cancellationToken =
                 default(System.Threading.CancellationToken)
-        ) {
+        )
+        {
             throw null;
         }
         public override string? ReadLine()
@@ -25725,7 +26443,8 @@ namespace System.IO
             System.ReadOnlyMemory<char> buffer,
             System.Threading.CancellationToken cancellationToken =
                 default(System.Threading.CancellationToken)
-        ) {
+        )
+        {
             throw null;
         }
         public override System.Threading.Tasks.Task WriteAsync(string? value)
@@ -25736,7 +26455,8 @@ namespace System.IO
             System.Text.StringBuilder? value,
             System.Threading.CancellationToken cancellationToken =
                 default(System.Threading.CancellationToken)
-        ) {
+        )
+        {
             throw null;
         }
         public override void WriteLine(System.ReadOnlySpan<char> buffer) { }
@@ -25749,14 +26469,16 @@ namespace System.IO
             char[] buffer,
             int index,
             int count
-        ) {
+        )
+        {
             throw null;
         }
         public override System.Threading.Tasks.Task WriteLineAsync(
             System.ReadOnlyMemory<char> buffer,
             System.Threading.CancellationToken cancellationToken =
                 default(System.Threading.CancellationToken)
-        ) {
+        )
+        {
             throw null;
         }
         public override System.Threading.Tasks.Task WriteLineAsync(string? value)
@@ -25767,7 +26489,8 @@ namespace System.IO
             System.Text.StringBuilder? value,
             System.Threading.CancellationToken cancellationToken =
                 default(System.Threading.CancellationToken)
-        ) {
+        )
+        {
             throw null;
         }
     }
@@ -25798,14 +26521,16 @@ namespace System.IO
             char[] buffer,
             int index,
             int count
-        ) {
+        )
+        {
             throw null;
         }
         public virtual System.Threading.Tasks.ValueTask<int> ReadAsync(
             System.Memory<char> buffer,
             System.Threading.CancellationToken cancellationToken =
                 default(System.Threading.CancellationToken)
-        ) {
+        )
+        {
             throw null;
         }
         public virtual int ReadBlock(char[] buffer, int index, int count)
@@ -25820,14 +26545,16 @@ namespace System.IO
             char[] buffer,
             int index,
             int count
-        ) {
+        )
+        {
             throw null;
         }
         public virtual System.Threading.Tasks.ValueTask<int> ReadBlockAsync(
             System.Memory<char> buffer,
             System.Threading.CancellationToken cancellationToken =
                 default(System.Threading.CancellationToken)
-        ) {
+        )
+        {
             throw null;
         }
         public virtual string? ReadLine()
@@ -25924,7 +26651,8 @@ namespace System.IO
             System.ReadOnlyMemory<char> buffer,
             System.Threading.CancellationToken cancellationToken =
                 default(System.Threading.CancellationToken)
-        ) {
+        )
+        {
             throw null;
         }
         public virtual System.Threading.Tasks.Task WriteAsync(string? value)
@@ -25935,7 +26663,8 @@ namespace System.IO
             System.Text.StringBuilder? value,
             System.Threading.CancellationToken cancellationToken =
                 default(System.Threading.CancellationToken)
-        ) {
+        )
+        {
             throw null;
         }
         public virtual void WriteLine() { }
@@ -25976,14 +26705,16 @@ namespace System.IO
             char[] buffer,
             int index,
             int count
-        ) {
+        )
+        {
             throw null;
         }
         public virtual System.Threading.Tasks.Task WriteLineAsync(
             System.ReadOnlyMemory<char> buffer,
             System.Threading.CancellationToken cancellationToken =
                 default(System.Threading.CancellationToken)
-        ) {
+        )
+        {
             throw null;
         }
         public virtual System.Threading.Tasks.Task WriteLineAsync(string? value)
@@ -25994,7 +26725,8 @@ namespace System.IO
             System.Text.StringBuilder? value,
             System.Threading.CancellationToken cancellationToken =
                 default(System.Threading.CancellationToken)
-        ) {
+        )
+        {
             throw null;
         }
     }
@@ -26056,7 +26788,8 @@ namespace System.IO
         public override void Flush() { }
         public override System.Threading.Tasks.Task FlushAsync(
             System.Threading.CancellationToken cancellationToken
-        ) {
+        )
+        {
             throw null;
         }
         [System.CLSCompliantAttribute(false)]
@@ -26085,14 +26818,16 @@ namespace System.IO
             int offset,
             int count,
             System.Threading.CancellationToken cancellationToken
-        ) {
+        )
+        {
             throw null;
         }
         public override System.Threading.Tasks.ValueTask<int> ReadAsync(
             System.Memory<byte> buffer,
             System.Threading.CancellationToken cancellationToken =
                 default(System.Threading.CancellationToken)
-        ) {
+        )
+        {
             throw null;
         }
         public override int ReadByte()
@@ -26111,14 +26846,16 @@ namespace System.IO
             int offset,
             int count,
             System.Threading.CancellationToken cancellationToken
-        ) {
+        )
+        {
             throw null;
         }
         public override System.Threading.Tasks.ValueTask WriteAsync(
             System.ReadOnlyMemory<byte> buffer,
             System.Threading.CancellationToken cancellationToken =
                 default(System.Threading.CancellationToken)
-        ) {
+        )
+        {
             throw null;
         }
         public override void WriteByte(byte value) { }
@@ -26390,7 +27127,8 @@ namespace System.Reflection
             object[]? args,
             System.Globalization.CultureInfo? culture,
             object[]? activationAttributes
-        ) {
+        )
+        {
             throw null;
         }
         public static string CreateQualifiedName(string? assemblyName, string? typeName)
@@ -26469,7 +27207,8 @@ namespace System.Reflection
         }
         public virtual System.Reflection.ManifestResourceInfo? GetManifestResourceInfo(
             string resourceName
-        ) {
+        )
+        {
             throw null;
         }
         public virtual string[] GetManifestResourceNames()
@@ -26517,13 +27256,15 @@ namespace System.Reflection
         }
         public virtual System.Reflection.Assembly GetSatelliteAssembly(
             System.Globalization.CultureInfo culture
-        ) {
+        )
+        {
             throw null;
         }
         public virtual System.Reflection.Assembly GetSatelliteAssembly(
             System.Globalization.CultureInfo culture,
             System.Version? version
-        ) {
+        )
+        {
             throw null;
         }
         [System.Diagnostics.CodeAnalysis.RequiresUnreferencedCodeAttribute(
@@ -26601,7 +27342,8 @@ namespace System.Reflection
             string assemblyFile,
             byte[]? hashValue,
             System.Configuration.Assemblies.AssemblyHashAlgorithm hashAlgorithm
-        ) {
+        )
+        {
             throw null;
         }
         [System.Diagnostics.CodeAnalysis.RequiresUnreferencedCodeAttribute(
@@ -26618,7 +27360,8 @@ namespace System.Reflection
             string moduleName,
             byte[]? rawModule,
             byte[]? rawSymbolStore
-        ) {
+        )
+        {
             throw null;
         }
         [System.ObsoleteAttribute(
@@ -26631,13 +27374,15 @@ namespace System.Reflection
         public static bool operator ==(
             System.Reflection.Assembly? left,
             System.Reflection.Assembly? right
-        ) {
+        )
+        {
             throw null;
         }
         public static bool operator !=(
             System.Reflection.Assembly? left,
             System.Reflection.Assembly? right
-        ) {
+        )
+        {
             throw null;
         }
         [System.Diagnostics.CodeAnalysis.RequiresUnreferencedCodeAttribute(
@@ -26928,7 +27673,8 @@ namespace System.Reflection
         public static bool ReferenceMatchesDefinition(
             System.Reflection.AssemblyName? reference,
             System.Reflection.AssemblyName? definition
-        ) {
+        )
+        {
             throw null;
         }
         public void SetPublicKey(byte[]? publicKey) { }
@@ -27110,13 +27856,15 @@ namespace System.Reflection
         public static bool operator ==(
             System.Reflection.ConstructorInfo? left,
             System.Reflection.ConstructorInfo? right
-        ) {
+        )
+        {
             throw null;
         }
         public static bool operator !=(
             System.Reflection.ConstructorInfo? left,
             System.Reflection.ConstructorInfo? right
-        ) {
+        )
+        {
             throw null;
         }
     }
@@ -27145,22 +27893,26 @@ namespace System.Reflection
         }
         public static System.Collections.Generic.IList<System.Reflection.CustomAttributeData> GetCustomAttributes(
             System.Reflection.Assembly target
-        ) {
+        )
+        {
             throw null;
         }
         public static System.Collections.Generic.IList<System.Reflection.CustomAttributeData> GetCustomAttributes(
             System.Reflection.MemberInfo target
-        ) {
+        )
+        {
             throw null;
         }
         public static System.Collections.Generic.IList<System.Reflection.CustomAttributeData> GetCustomAttributes(
             System.Reflection.Module target
-        ) {
+        )
+        {
             throw null;
         }
         public static System.Collections.Generic.IList<System.Reflection.CustomAttributeData> GetCustomAttributes(
             System.Reflection.ParameterInfo target
-        ) {
+        )
+        {
             throw null;
         }
         public override int GetHashCode()
@@ -27177,109 +27929,127 @@ namespace System.Reflection
         public static System.Attribute? GetCustomAttribute(
             this System.Reflection.Assembly element,
             System.Type attributeType
-        ) {
+        )
+        {
             throw null;
         }
         public static System.Attribute? GetCustomAttribute(
             this System.Reflection.MemberInfo element,
             System.Type attributeType
-        ) {
+        )
+        {
             throw null;
         }
         public static System.Attribute? GetCustomAttribute(
             this System.Reflection.MemberInfo element,
             System.Type attributeType,
             bool inherit
-        ) {
+        )
+        {
             throw null;
         }
         public static System.Attribute? GetCustomAttribute(
             this System.Reflection.Module element,
             System.Type attributeType
-        ) {
+        )
+        {
             throw null;
         }
         public static System.Attribute? GetCustomAttribute(
             this System.Reflection.ParameterInfo element,
             System.Type attributeType
-        ) {
+        )
+        {
             throw null;
         }
         public static System.Attribute? GetCustomAttribute(
             this System.Reflection.ParameterInfo element,
             System.Type attributeType,
             bool inherit
-        ) {
+        )
+        {
             throw null;
         }
         public static System.Collections.Generic.IEnumerable<System.Attribute> GetCustomAttributes(
             this System.Reflection.Assembly element
-        ) {
+        )
+        {
             throw null;
         }
         public static System.Collections.Generic.IEnumerable<System.Attribute> GetCustomAttributes(
             this System.Reflection.Assembly element,
             System.Type attributeType
-        ) {
+        )
+        {
             throw null;
         }
         public static System.Collections.Generic.IEnumerable<System.Attribute> GetCustomAttributes(
             this System.Reflection.MemberInfo element
-        ) {
+        )
+        {
             throw null;
         }
         public static System.Collections.Generic.IEnumerable<System.Attribute> GetCustomAttributes(
             this System.Reflection.MemberInfo element,
             bool inherit
-        ) {
+        )
+        {
             throw null;
         }
         public static System.Collections.Generic.IEnumerable<System.Attribute> GetCustomAttributes(
             this System.Reflection.MemberInfo element,
             System.Type attributeType
-        ) {
+        )
+        {
             throw null;
         }
         public static System.Collections.Generic.IEnumerable<System.Attribute> GetCustomAttributes(
             this System.Reflection.MemberInfo element,
             System.Type attributeType,
             bool inherit
-        ) {
+        )
+        {
             throw null;
         }
         public static System.Collections.Generic.IEnumerable<System.Attribute> GetCustomAttributes(
             this System.Reflection.Module element
-        ) {
+        )
+        {
             throw null;
         }
         public static System.Collections.Generic.IEnumerable<System.Attribute> GetCustomAttributes(
             this System.Reflection.Module element,
             System.Type attributeType
-        ) {
+        )
+        {
             throw null;
         }
         public static System.Collections.Generic.IEnumerable<System.Attribute> GetCustomAttributes(
             this System.Reflection.ParameterInfo element
-        ) {
+        )
+        {
             throw null;
         }
         public static System.Collections.Generic.IEnumerable<System.Attribute> GetCustomAttributes(
             this System.Reflection.ParameterInfo element,
             bool inherit
-        ) {
+        )
+        {
             throw null;
         }
         public static System.Collections.Generic.IEnumerable<System.Attribute> GetCustomAttributes(
             this System.Reflection.ParameterInfo element,
             System.Type attributeType
-        ) {
+        )
+        {
             throw null;
         }
         public static System.Collections.Generic.IEnumerable<System.Attribute> GetCustomAttributes(
             this System.Reflection.ParameterInfo element,
             System.Type attributeType,
             bool inherit
-        ) {
+        )
+        {
             throw null;
         }
         public static System.Collections.Generic.IEnumerable<T> GetCustomAttributes<T>(
@@ -27357,39 +28127,45 @@ namespace System.Reflection
         public static bool IsDefined(
             this System.Reflection.Assembly element,
             System.Type attributeType
-        ) {
+        )
+        {
             throw null;
         }
         public static bool IsDefined(
             this System.Reflection.MemberInfo element,
             System.Type attributeType
-        ) {
+        )
+        {
             throw null;
         }
         public static bool IsDefined(
             this System.Reflection.MemberInfo element,
             System.Type attributeType,
             bool inherit
-        ) {
+        )
+        {
             throw null;
         }
         public static bool IsDefined(
             this System.Reflection.Module element,
             System.Type attributeType
-        ) {
+        )
+        {
             throw null;
         }
         public static bool IsDefined(
             this System.Reflection.ParameterInfo element,
             System.Type attributeType
-        ) {
+        )
+        {
             throw null;
         }
         public static bool IsDefined(
             this System.Reflection.ParameterInfo element,
             System.Type attributeType,
             bool inherit
-        ) {
+        )
+        {
             throw null;
         }
     }
@@ -27414,7 +28190,8 @@ namespace System.Reflection
         public CustomAttributeNamedArgument(
             System.Reflection.MemberInfo memberInfo,
             System.Reflection.CustomAttributeTypedArgument typedArgument
-        ) {
+        )
+        {
             throw null;
         }
         public bool IsField
@@ -27444,13 +28221,15 @@ namespace System.Reflection
         public static bool operator ==(
             System.Reflection.CustomAttributeNamedArgument left,
             System.Reflection.CustomAttributeNamedArgument right
-        ) {
+        )
+        {
             throw null;
         }
         public static bool operator !=(
             System.Reflection.CustomAttributeNamedArgument left,
             System.Reflection.CustomAttributeNamedArgument right
-        ) {
+        )
+        {
             throw null;
         }
         public override string ToString()
@@ -27489,13 +28268,15 @@ namespace System.Reflection
         public static bool operator ==(
             System.Reflection.CustomAttributeTypedArgument left,
             System.Reflection.CustomAttributeTypedArgument right
-        ) {
+        )
+        {
             throw null;
         }
         public static bool operator !=(
             System.Reflection.CustomAttributeTypedArgument left,
             System.Reflection.CustomAttributeTypedArgument right
-        ) {
+        )
+        {
             throw null;
         }
         public override string ToString()
@@ -27591,13 +28372,15 @@ namespace System.Reflection
         public static bool operator ==(
             System.Reflection.EventInfo? left,
             System.Reflection.EventInfo? right
-        ) {
+        )
+        {
             throw null;
         }
         public static bool operator !=(
             System.Reflection.EventInfo? left,
             System.Reflection.EventInfo? right
-        ) {
+        )
+        {
             throw null;
         }
         public virtual void RemoveEventHandler(object? target, System.Delegate? handler) { }
@@ -27745,13 +28528,15 @@ namespace System.Reflection
         }
         public static System.Reflection.FieldInfo GetFieldFromHandle(
             System.RuntimeFieldHandle handle
-        ) {
+        )
+        {
             throw null;
         }
         public static System.Reflection.FieldInfo GetFieldFromHandle(
             System.RuntimeFieldHandle handle,
             System.RuntimeTypeHandle declaringType
-        ) {
+        )
+        {
             throw null;
         }
         public override int GetHashCode()
@@ -27779,13 +28564,15 @@ namespace System.Reflection
         public static bool operator ==(
             System.Reflection.FieldInfo? left,
             System.Reflection.FieldInfo? right
-        ) {
+        )
+        {
             throw null;
         }
         public static bool operator !=(
             System.Reflection.FieldInfo? left,
             System.Reflection.FieldInfo? right
-        ) {
+        )
+        {
             throw null;
         }
         public void SetValue(object? obj, object? value) { }
@@ -28050,13 +28837,15 @@ namespace System.Reflection
         public static bool operator ==(
             System.Reflection.MemberInfo? left,
             System.Reflection.MemberInfo? right
-        ) {
+        )
+        {
             throw null;
         }
         public static bool operator !=(
             System.Reflection.MemberInfo? left,
             System.Reflection.MemberInfo? right
-        ) {
+        )
+        {
             throw null;
         }
     }
@@ -28219,13 +29008,15 @@ namespace System.Reflection
         }
         public static System.Reflection.MethodBase? GetMethodFromHandle(
             System.RuntimeMethodHandle handle
-        ) {
+        )
+        {
             throw null;
         }
         public static System.Reflection.MethodBase? GetMethodFromHandle(
             System.RuntimeMethodHandle handle,
             System.RuntimeTypeHandle declaringType
-        ) {
+        )
+        {
             throw null;
         }
         public abstract System.Reflection.MethodImplAttributes GetMethodImplementationFlags();
@@ -28244,13 +29035,15 @@ namespace System.Reflection
         public static bool operator ==(
             System.Reflection.MethodBase? left,
             System.Reflection.MethodBase? right
-        ) {
+        )
+        {
             throw null;
         }
         public static bool operator !=(
             System.Reflection.MethodBase? left,
             System.Reflection.MethodBase? right
-        ) {
+        )
+        {
             throw null;
         }
     }
@@ -28353,19 +29146,22 @@ namespace System.Reflection
         }
         public virtual System.Reflection.MethodInfo MakeGenericMethod(
             params System.Type[] typeArguments
-        ) {
+        )
+        {
             throw null;
         }
         public static bool operator ==(
             System.Reflection.MethodInfo? left,
             System.Reflection.MethodInfo? right
-        ) {
+        )
+        {
             throw null;
         }
         public static bool operator !=(
             System.Reflection.MethodInfo? left,
             System.Reflection.MethodInfo? right
-        ) {
+        )
+        {
             throw null;
         }
     }
@@ -28431,7 +29227,8 @@ namespace System.Reflection
         public virtual System.Type[] FindTypes(
             System.Reflection.TypeFilter? filter,
             object? filterCriteria
-        ) {
+        )
+        {
             throw null;
         }
         public virtual object[] GetCustomAttributes(bool inherit)
@@ -28459,7 +29256,8 @@ namespace System.Reflection
         public virtual System.Reflection.FieldInfo? GetField(
             string name,
             System.Reflection.BindingFlags bindingAttr
-        ) {
+        )
+        {
             throw null;
         }
         [System.Diagnostics.CodeAnalysis.RequiresUnreferencedCodeAttribute(
@@ -28474,7 +29272,8 @@ namespace System.Reflection
         )]
         public virtual System.Reflection.FieldInfo[] GetFields(
             System.Reflection.BindingFlags bindingFlags
-        ) {
+        )
+        {
             throw null;
         }
         public override int GetHashCode()
@@ -28498,7 +29297,8 @@ namespace System.Reflection
             System.Reflection.CallingConventions callConvention,
             System.Type[] types,
             System.Reflection.ParameterModifier[]? modifiers
-        ) {
+        )
+        {
             throw null;
         }
         [System.Diagnostics.CodeAnalysis.RequiresUnreferencedCodeAttribute(
@@ -28518,7 +29318,8 @@ namespace System.Reflection
             System.Reflection.CallingConventions callConvention,
             System.Type[]? types,
             System.Reflection.ParameterModifier[]? modifiers
-        ) {
+        )
+        {
             throw null;
         }
         [System.Diagnostics.CodeAnalysis.RequiresUnreferencedCodeAttribute(
@@ -28533,7 +29334,8 @@ namespace System.Reflection
         )]
         public virtual System.Reflection.MethodInfo[] GetMethods(
             System.Reflection.BindingFlags bindingFlags
-        ) {
+        )
+        {
             throw null;
         }
         public virtual void GetObjectData(
@@ -28543,7 +29345,8 @@ namespace System.Reflection
         public virtual void GetPEKind(
             out System.Reflection.PortableExecutableKinds peKind,
             out System.Reflection.ImageFileMachine machine
-        ) {
+        )
+        {
             throw null;
         }
         [System.Diagnostics.CodeAnalysis.RequiresUnreferencedCodeAttribute(
@@ -28585,13 +29388,15 @@ namespace System.Reflection
         public static bool operator ==(
             System.Reflection.Module? left,
             System.Reflection.Module? right
-        ) {
+        )
+        {
             throw null;
         }
         public static bool operator !=(
             System.Reflection.Module? left,
             System.Reflection.Module? right
-        ) {
+        )
+        {
             throw null;
         }
         [System.Diagnostics.CodeAnalysis.RequiresUnreferencedCodeAttribute(
@@ -28608,7 +29413,8 @@ namespace System.Reflection
             int metadataToken,
             System.Type[]? genericTypeArguments,
             System.Type[]? genericMethodArguments
-        ) {
+        )
+        {
             throw null;
         }
         [System.Diagnostics.CodeAnalysis.RequiresUnreferencedCodeAttribute(
@@ -28625,7 +29431,8 @@ namespace System.Reflection
             int metadataToken,
             System.Type[]? genericTypeArguments,
             System.Type[]? genericMethodArguments
-        ) {
+        )
+        {
             throw null;
         }
         [System.Diagnostics.CodeAnalysis.RequiresUnreferencedCodeAttribute(
@@ -28642,7 +29449,8 @@ namespace System.Reflection
             int metadataToken,
             System.Type[]? genericTypeArguments,
             System.Type[]? genericMethodArguments
-        ) {
+        )
+        {
             throw null;
         }
         [System.Diagnostics.CodeAnalysis.RequiresUnreferencedCodeAttribute(
@@ -28673,7 +29481,8 @@ namespace System.Reflection
             int metadataToken,
             System.Type[]? genericTypeArguments,
             System.Type[]? genericMethodArguments
-        ) {
+        )
+        {
             throw null;
         }
         public override string ToString()
@@ -29012,13 +29821,15 @@ namespace System.Reflection
         public static bool operator ==(
             System.Reflection.PropertyInfo? left,
             System.Reflection.PropertyInfo? right
-        ) {
+        )
+        {
             throw null;
         }
         public static bool operator !=(
             System.Reflection.PropertyInfo? left,
             System.Reflection.PropertyInfo? right
-        ) {
+        )
+        {
             throw null;
         }
         public void SetValue(object? obj, object? value) { }
@@ -29095,7 +29906,8 @@ namespace System.Reflection
         }
         public static System.Reflection.MethodInfo? GetRuntimeBaseDefinition(
             this System.Reflection.MethodInfo method
-        ) {
+        )
+        {
             throw null;
         }
         public static System.Reflection.EventInfo? GetRuntimeEvent(
@@ -29104,7 +29916,8 @@ namespace System.Reflection
             )]
                 this System.Type type,
             string name
-        ) {
+        )
+        {
             throw null;
         }
         public static System.Collections.Generic.IEnumerable<System.Reflection.EventInfo> GetRuntimeEvents(
@@ -29113,7 +29926,8 @@ namespace System.Reflection
                     | System.Diagnostics.CodeAnalysis.DynamicallyAccessedMemberTypes.PublicEvents
             )]
                 this System.Type type
-        ) {
+        )
+        {
             throw null;
         }
         public static System.Reflection.FieldInfo? GetRuntimeField(
@@ -29122,7 +29936,8 @@ namespace System.Reflection
             )]
                 this System.Type type,
             string name
-        ) {
+        )
+        {
             throw null;
         }
         public static System.Collections.Generic.IEnumerable<System.Reflection.FieldInfo> GetRuntimeFields(
@@ -29131,13 +29946,15 @@ namespace System.Reflection
                     | System.Diagnostics.CodeAnalysis.DynamicallyAccessedMemberTypes.PublicFields
             )]
                 this System.Type type
-        ) {
+        )
+        {
             throw null;
         }
         public static System.Reflection.InterfaceMapping GetRuntimeInterfaceMap(
             this System.Reflection.TypeInfo typeInfo,
             System.Type interfaceType
-        ) {
+        )
+        {
             throw null;
         }
         public static System.Reflection.MethodInfo? GetRuntimeMethod(
@@ -29147,7 +29964,8 @@ namespace System.Reflection
                 this System.Type type,
             string name,
             System.Type[] parameters
-        ) {
+        )
+        {
             throw null;
         }
         public static System.Collections.Generic.IEnumerable<System.Reflection.MethodInfo> GetRuntimeMethods(
@@ -29156,7 +29974,8 @@ namespace System.Reflection
                     | System.Diagnostics.CodeAnalysis.DynamicallyAccessedMemberTypes.PublicMethods
             )]
                 this System.Type type
-        ) {
+        )
+        {
             throw null;
         }
         public static System.Collections.Generic.IEnumerable<System.Reflection.PropertyInfo> GetRuntimeProperties(
@@ -29165,7 +29984,8 @@ namespace System.Reflection
                     | System.Diagnostics.CodeAnalysis.DynamicallyAccessedMemberTypes.PublicProperties
             )]
                 this System.Type type
-        ) {
+        )
+        {
             throw null;
         }
         public static System.Reflection.PropertyInfo? GetRuntimeProperty(
@@ -29174,7 +29994,8 @@ namespace System.Reflection
             )]
                 this System.Type type,
             string name
-        ) {
+        )
+        {
             throw null;
         }
     }
@@ -29361,7 +30182,8 @@ namespace System.Reflection
             System.Reflection.CallingConventions callConvention,
             System.Type[] types,
             System.Reflection.ParameterModifier[]? modifiers
-        ) {
+        )
+        {
             throw null;
         }
         [System.Diagnostics.CodeAnalysis.DynamicallyAccessedMembersAttribute(
@@ -29370,7 +30192,8 @@ namespace System.Reflection
         )]
         public override System.Reflection.ConstructorInfo[] GetConstructors(
             System.Reflection.BindingFlags bindingAttr
-        ) {
+        )
+        {
             throw null;
         }
         public override object[] GetCustomAttributes(bool inherit)
@@ -29392,7 +30215,8 @@ namespace System.Reflection
         public override System.Reflection.EventInfo? GetEvent(
             string name,
             System.Reflection.BindingFlags bindingAttr
-        ) {
+        )
+        {
             throw null;
         }
         [System.Diagnostics.CodeAnalysis.DynamicallyAccessedMembersAttribute(
@@ -29408,7 +30232,8 @@ namespace System.Reflection
         )]
         public override System.Reflection.EventInfo[] GetEvents(
             System.Reflection.BindingFlags bindingAttr
-        ) {
+        )
+        {
             throw null;
         }
         [System.Diagnostics.CodeAnalysis.DynamicallyAccessedMembersAttribute(
@@ -29418,7 +30243,8 @@ namespace System.Reflection
         public override System.Reflection.FieldInfo? GetField(
             string name,
             System.Reflection.BindingFlags bindingAttr
-        ) {
+        )
+        {
             throw null;
         }
         [System.Diagnostics.CodeAnalysis.DynamicallyAccessedMembersAttribute(
@@ -29427,7 +30253,8 @@ namespace System.Reflection
         )]
         public override System.Reflection.FieldInfo[] GetFields(
             System.Reflection.BindingFlags bindingAttr
-        ) {
+        )
+        {
             throw null;
         }
         public override System.Type? GetInterface(string name, bool ignoreCase)
@@ -29436,7 +30263,8 @@ namespace System.Reflection
         }
         public override System.Reflection.InterfaceMapping GetInterfaceMap(
             System.Type interfaceType
-        ) {
+        )
+        {
             throw null;
         }
         public override System.Type[] GetInterfaces()
@@ -29461,7 +30289,8 @@ namespace System.Reflection
             string name,
             System.Reflection.MemberTypes type,
             System.Reflection.BindingFlags bindingAttr
-        ) {
+        )
+        {
             throw null;
         }
         [System.Diagnostics.CodeAnalysis.DynamicallyAccessedMembersAttribute(
@@ -29480,7 +30309,8 @@ namespace System.Reflection
         )]
         public override System.Reflection.MemberInfo[] GetMembers(
             System.Reflection.BindingFlags bindingAttr
-        ) {
+        )
+        {
             throw null;
         }
         [System.Diagnostics.CodeAnalysis.DynamicallyAccessedMembersAttribute(
@@ -29494,7 +30324,8 @@ namespace System.Reflection
             System.Reflection.CallingConventions callConvention,
             System.Type[]? types,
             System.Reflection.ParameterModifier[]? modifiers
-        ) {
+        )
+        {
             throw null;
         }
         [System.Diagnostics.CodeAnalysis.DynamicallyAccessedMembersAttribute(
@@ -29503,7 +30334,8 @@ namespace System.Reflection
         )]
         public override System.Reflection.MethodInfo[] GetMethods(
             System.Reflection.BindingFlags bindingAttr
-        ) {
+        )
+        {
             throw null;
         }
         [System.Diagnostics.CodeAnalysis.DynamicallyAccessedMembersAttribute(
@@ -29513,7 +30345,8 @@ namespace System.Reflection
         public override System.Type? GetNestedType(
             string name,
             System.Reflection.BindingFlags bindingAttr
-        ) {
+        )
+        {
             throw null;
         }
         [System.Diagnostics.CodeAnalysis.DynamicallyAccessedMembersAttribute(
@@ -29530,7 +30363,8 @@ namespace System.Reflection
         )]
         public override System.Reflection.PropertyInfo[] GetProperties(
             System.Reflection.BindingFlags bindingAttr
-        ) {
+        )
+        {
             throw null;
         }
         [System.Diagnostics.CodeAnalysis.DynamicallyAccessedMembersAttribute(
@@ -29544,7 +30378,8 @@ namespace System.Reflection
             System.Type? returnType,
             System.Type[]? types,
             System.Reflection.ParameterModifier[]? modifiers
-        ) {
+        )
+        {
             throw null;
         }
         protected override bool HasElementTypeImpl()
@@ -29563,7 +30398,8 @@ namespace System.Reflection
             System.Reflection.ParameterModifier[]? modifiers,
             System.Globalization.CultureInfo? culture,
             string[]? namedParameters
-        ) {
+        )
+        {
             throw null;
         }
         protected override bool IsArrayImpl()
@@ -29573,7 +30409,8 @@ namespace System.Reflection
         public override bool IsAssignableFrom(
             [System.Diagnostics.CodeAnalysis.NotNullWhenAttribute(true)]
                 System.Reflection.TypeInfo? typeInfo
-        ) {
+        )
+        {
             throw null;
         }
         protected override bool IsByRefImpl()
@@ -29702,7 +30539,8 @@ namespace System.Reflection
         )]
         public virtual System.Collections.Generic.IEnumerable<System.Reflection.MethodInfo> GetDeclaredMethods(
             string name
-        ) {
+        )
+        {
             throw null;
         }
         [System.Diagnostics.CodeAnalysis.DynamicallyAccessedMembersAttribute(
@@ -29724,7 +30562,8 @@ namespace System.Reflection
         public virtual bool IsAssignableFrom(
             [System.Diagnostics.CodeAnalysis.NotNullWhenAttribute(true)]
                 System.Reflection.TypeInfo? typeInfo
-        ) {
+        )
+        {
             throw null;
         }
         System.Reflection.TypeInfo System.Reflection.IReflectableType.GetTypeInfo()
@@ -29838,12 +30677,14 @@ namespace System.Resources
                     | System.Diagnostics.CodeAnalysis.DynamicallyAccessedMemberTypes.NonPublicConstructors
             )]
                 System.Type? usingResourceSet
-        ) {
+        )
+        {
             throw null;
         }
         protected static System.Globalization.CultureInfo GetNeutralResourcesLanguage(
             System.Reflection.Assembly a
-        ) {
+        )
+        {
             throw null;
         }
         public virtual object? GetObject(string name)
@@ -29862,7 +30703,8 @@ namespace System.Resources
             System.Globalization.CultureInfo culture,
             bool createIfNotExists,
             bool tryParents
-        ) {
+        )
+        {
             throw null;
         }
         protected static System.Version? GetSatelliteContractVersion(System.Reflection.Assembly a)
@@ -29876,7 +30718,8 @@ namespace System.Resources
         public System.IO.UnmanagedMemoryStream? GetStream(
             string name,
             System.Globalization.CultureInfo? culture
-        ) {
+        )
+        {
             throw null;
         }
         public virtual string? GetString(string name)
@@ -29891,7 +30734,8 @@ namespace System.Resources
             System.Globalization.CultureInfo culture,
             bool createIfNotExists,
             bool tryParents
-        ) {
+        )
+        {
             throw null;
         }
         public virtual void ReleaseAllResources() { }
@@ -29913,7 +30757,8 @@ namespace System.Resources
             string resourceName,
             out string resourceType,
             out byte[] resourceData
-        ) {
+        )
+        {
             throw null;
         }
         System.Collections.IEnumerator System.Collections.IEnumerable.GetEnumerator()
@@ -30075,13 +30920,15 @@ namespace System.Runtime.CompilerServices
         public void AwaitOnCompleted<TAwaiter, TStateMachine>(
             ref TAwaiter awaiter,
             ref TStateMachine stateMachine
-        ) where TAwaiter : System.Runtime.CompilerServices.INotifyCompletion
-          where TStateMachine : System.Runtime.CompilerServices.IAsyncStateMachine { }
+        )
+            where TAwaiter : System.Runtime.CompilerServices.INotifyCompletion
+            where TStateMachine : System.Runtime.CompilerServices.IAsyncStateMachine { }
         public void AwaitUnsafeOnCompleted<TAwaiter, TStateMachine>(
             ref TAwaiter awaiter,
             ref TStateMachine stateMachine
-        ) where TAwaiter : System.Runtime.CompilerServices.ICriticalNotifyCompletion
-          where TStateMachine : System.Runtime.CompilerServices.IAsyncStateMachine { }
+        )
+            where TAwaiter : System.Runtime.CompilerServices.ICriticalNotifyCompletion
+            where TStateMachine : System.Runtime.CompilerServices.IAsyncStateMachine { }
         public void Complete() { }
         public static System.Runtime.CompilerServices.AsyncIteratorMethodBuilder Create()
         {
@@ -30141,13 +30988,15 @@ namespace System.Runtime.CompilerServices
         public void AwaitOnCompleted<TAwaiter, TStateMachine>(
             ref TAwaiter awaiter,
             ref TStateMachine stateMachine
-        ) where TAwaiter : System.Runtime.CompilerServices.INotifyCompletion
-          where TStateMachine : System.Runtime.CompilerServices.IAsyncStateMachine { }
+        )
+            where TAwaiter : System.Runtime.CompilerServices.INotifyCompletion
+            where TStateMachine : System.Runtime.CompilerServices.IAsyncStateMachine { }
         public void AwaitUnsafeOnCompleted<TAwaiter, TStateMachine>(
             ref TAwaiter awaiter,
             ref TStateMachine stateMachine
-        ) where TAwaiter : System.Runtime.CompilerServices.ICriticalNotifyCompletion
-          where TStateMachine : System.Runtime.CompilerServices.IAsyncStateMachine { }
+        )
+            where TAwaiter : System.Runtime.CompilerServices.ICriticalNotifyCompletion
+            where TStateMachine : System.Runtime.CompilerServices.IAsyncStateMachine { }
         public static System.Runtime.CompilerServices.AsyncTaskMethodBuilder Create()
         {
             throw null;
@@ -30171,13 +31020,15 @@ namespace System.Runtime.CompilerServices
         public void AwaitOnCompleted<TAwaiter, TStateMachine>(
             ref TAwaiter awaiter,
             ref TStateMachine stateMachine
-        ) where TAwaiter : System.Runtime.CompilerServices.INotifyCompletion
-          where TStateMachine : System.Runtime.CompilerServices.IAsyncStateMachine { }
+        )
+            where TAwaiter : System.Runtime.CompilerServices.INotifyCompletion
+            where TStateMachine : System.Runtime.CompilerServices.IAsyncStateMachine { }
         public void AwaitUnsafeOnCompleted<TAwaiter, TStateMachine>(
             ref TAwaiter awaiter,
             ref TStateMachine stateMachine
-        ) where TAwaiter : System.Runtime.CompilerServices.ICriticalNotifyCompletion
-          where TStateMachine : System.Runtime.CompilerServices.IAsyncStateMachine { }
+        )
+            where TAwaiter : System.Runtime.CompilerServices.ICriticalNotifyCompletion
+            where TStateMachine : System.Runtime.CompilerServices.IAsyncStateMachine { }
         public static System.Runtime.CompilerServices.AsyncTaskMethodBuilder<TResult> Create()
         {
             throw null;
@@ -30201,13 +31052,15 @@ namespace System.Runtime.CompilerServices
         public void AwaitOnCompleted<TAwaiter, TStateMachine>(
             ref TAwaiter awaiter,
             ref TStateMachine stateMachine
-        ) where TAwaiter : System.Runtime.CompilerServices.INotifyCompletion
-          where TStateMachine : System.Runtime.CompilerServices.IAsyncStateMachine { }
+        )
+            where TAwaiter : System.Runtime.CompilerServices.INotifyCompletion
+            where TStateMachine : System.Runtime.CompilerServices.IAsyncStateMachine { }
         public void AwaitUnsafeOnCompleted<TAwaiter, TStateMachine>(
             ref TAwaiter awaiter,
             ref TStateMachine stateMachine
-        ) where TAwaiter : System.Runtime.CompilerServices.ICriticalNotifyCompletion
-          where TStateMachine : System.Runtime.CompilerServices.IAsyncStateMachine { }
+        )
+            where TAwaiter : System.Runtime.CompilerServices.ICriticalNotifyCompletion
+            where TStateMachine : System.Runtime.CompilerServices.IAsyncStateMachine { }
         public static System.Runtime.CompilerServices.AsyncValueTaskMethodBuilder Create()
         {
             throw null;
@@ -30232,13 +31085,15 @@ namespace System.Runtime.CompilerServices
         public void AwaitOnCompleted<TAwaiter, TStateMachine>(
             ref TAwaiter awaiter,
             ref TStateMachine stateMachine
-        ) where TAwaiter : System.Runtime.CompilerServices.INotifyCompletion
-          where TStateMachine : System.Runtime.CompilerServices.IAsyncStateMachine { }
+        )
+            where TAwaiter : System.Runtime.CompilerServices.INotifyCompletion
+            where TStateMachine : System.Runtime.CompilerServices.IAsyncStateMachine { }
         public void AwaitUnsafeOnCompleted<TAwaiter, TStateMachine>(
             ref TAwaiter awaiter,
             ref TStateMachine stateMachine
-        ) where TAwaiter : System.Runtime.CompilerServices.ICriticalNotifyCompletion
-          where TStateMachine : System.Runtime.CompilerServices.IAsyncStateMachine { }
+        )
+            where TAwaiter : System.Runtime.CompilerServices.ICriticalNotifyCompletion
+            where TStateMachine : System.Runtime.CompilerServices.IAsyncStateMachine { }
         public static System.Runtime.CompilerServices.AsyncValueTaskMethodBuilder<TResult> Create()
         {
             throw null;
@@ -30258,13 +31113,15 @@ namespace System.Runtime.CompilerServices
         public void AwaitOnCompleted<TAwaiter, TStateMachine>(
             ref TAwaiter awaiter,
             ref TStateMachine stateMachine
-        ) where TAwaiter : System.Runtime.CompilerServices.INotifyCompletion
-          where TStateMachine : System.Runtime.CompilerServices.IAsyncStateMachine { }
+        )
+            where TAwaiter : System.Runtime.CompilerServices.INotifyCompletion
+            where TStateMachine : System.Runtime.CompilerServices.IAsyncStateMachine { }
         public void AwaitUnsafeOnCompleted<TAwaiter, TStateMachine>(
             ref TAwaiter awaiter,
             ref TStateMachine stateMachine
-        ) where TAwaiter : System.Runtime.CompilerServices.ICriticalNotifyCompletion
-          where TStateMachine : System.Runtime.CompilerServices.IAsyncStateMachine { }
+        )
+            where TAwaiter : System.Runtime.CompilerServices.ICriticalNotifyCompletion
+            where TStateMachine : System.Runtime.CompilerServices.IAsyncStateMachine { }
         public static System.Runtime.CompilerServices.AsyncVoidMethodBuilder Create()
         {
             throw null;
@@ -30390,7 +31247,8 @@ namespace System.Runtime.CompilerServices
                 TKey,
                 TValue
             >.CreateValueCallback createValueCallback
-        ) {
+        )
+        {
             throw null;
         }
         public bool Remove(TKey key)
@@ -30414,7 +31272,8 @@ namespace System.Runtime.CompilerServices
         public bool TryGetValue(
             TKey key,
             [System.Diagnostics.CodeAnalysis.MaybeNullWhenAttribute(false)] out TValue value
-        ) {
+        )
+        {
             throw null;
         }
         public delegate TValue CreateValueCallback(TKey key);
@@ -30434,7 +31293,8 @@ namespace System.Runtime.CompilerServices
         private readonly int _dummyPrimitive;
         public System.Runtime.CompilerServices.ConfiguredCancelableAsyncEnumerable<T> ConfigureAwait(
             bool continueOnCapturedContext
-        ) {
+        )
+        {
             throw null;
         }
         public System.Runtime.CompilerServices.ConfiguredCancelableAsyncEnumerable<T>.Enumerator GetAsyncEnumerator()
@@ -30443,7 +31303,8 @@ namespace System.Runtime.CompilerServices
         }
         public System.Runtime.CompilerServices.ConfiguredCancelableAsyncEnumerable<T> WithCancellation(
             System.Threading.CancellationToken cancellationToken
-        ) {
+        )
+        {
             throw null;
         }
         public readonly partial struct Enumerator
@@ -30743,21 +31604,24 @@ namespace System.Runtime.CompilerServices
         public static System.Runtime.CompilerServices.InterpolatedStringBuilder Create(
             int literalLength,
             int formattedCount
-        ) {
+        )
+        {
             throw null;
         }
         public static System.Runtime.CompilerServices.InterpolatedStringBuilder Create(
             int literalLength,
             int formattedCount,
             System.IFormatProvider? provider
-        ) {
+        )
+        {
             throw null;
         }
         public static System.Runtime.CompilerServices.InterpolatedStringBuilder Create(
             int literalLength,
             int formattedCount,
             System.Span<char> scratchBuffer
-        ) {
+        )
+        {
             throw null;
         }
         public static System.Runtime.CompilerServices.InterpolatedStringBuilder Create(
@@ -30765,7 +31629,8 @@ namespace System.Runtime.CompilerServices
             int formattedCount,
             System.IFormatProvider? provider,
             System.Span<char> scratchBuffer
-        ) {
+        )
+        {
             throw null;
         }
         public override string ToString()
@@ -30884,13 +31749,15 @@ namespace System.Runtime.CompilerServices
         public void AwaitOnCompleted<TAwaiter, TStateMachine>(
             ref TAwaiter awaiter,
             ref TStateMachine stateMachine
-        ) where TAwaiter : System.Runtime.CompilerServices.INotifyCompletion
-          where TStateMachine : System.Runtime.CompilerServices.IAsyncStateMachine { }
+        )
+            where TAwaiter : System.Runtime.CompilerServices.INotifyCompletion
+            where TStateMachine : System.Runtime.CompilerServices.IAsyncStateMachine { }
         public void AwaitUnsafeOnCompleted<TAwaiter, TStateMachine>(
             ref TAwaiter awaiter,
             ref TStateMachine stateMachine
-        ) where TAwaiter : System.Runtime.CompilerServices.ICriticalNotifyCompletion
-          where TStateMachine : System.Runtime.CompilerServices.IAsyncStateMachine { }
+        )
+            where TAwaiter : System.Runtime.CompilerServices.ICriticalNotifyCompletion
+            where TStateMachine : System.Runtime.CompilerServices.IAsyncStateMachine { }
         public static System.Runtime.CompilerServices.PoolingAsyncValueTaskMethodBuilder Create()
         {
             throw null;
@@ -30915,13 +31782,15 @@ namespace System.Runtime.CompilerServices
         public void AwaitOnCompleted<TAwaiter, TStateMachine>(
             ref TAwaiter awaiter,
             ref TStateMachine stateMachine
-        ) where TAwaiter : System.Runtime.CompilerServices.INotifyCompletion
-          where TStateMachine : System.Runtime.CompilerServices.IAsyncStateMachine { }
+        )
+            where TAwaiter : System.Runtime.CompilerServices.INotifyCompletion
+            where TStateMachine : System.Runtime.CompilerServices.IAsyncStateMachine { }
         public void AwaitUnsafeOnCompleted<TAwaiter, TStateMachine>(
             ref TAwaiter awaiter,
             ref TStateMachine stateMachine
-        ) where TAwaiter : System.Runtime.CompilerServices.ICriticalNotifyCompletion
-          where TStateMachine : System.Runtime.CompilerServices.IAsyncStateMachine { }
+        )
+            where TAwaiter : System.Runtime.CompilerServices.ICriticalNotifyCompletion
+            where TStateMachine : System.Runtime.CompilerServices.IAsyncStateMachine { }
         public static System.Runtime.CompilerServices.PoolingAsyncValueTaskMethodBuilder<TResult> Create()
         {
             throw null;
@@ -31035,7 +31904,8 @@ namespace System.Runtime.CompilerServices
                     | System.Diagnostics.CodeAnalysis.DynamicallyAccessedMemberTypes.PublicConstructors
             )]
                 System.Type type
-        ) {
+        )
+        {
             throw null;
         }
         public static void InitializeArray(
@@ -31400,7 +32270,8 @@ namespace System.Runtime.ExceptionServices
         }
         public static System.Runtime.ExceptionServices.ExceptionDispatchInfo Capture(
             System.Exception source
-        ) {
+        )
+        {
             throw null;
         }
         public static System.Exception SetCurrentStackTrace(System.Exception source)
@@ -31410,7 +32281,8 @@ namespace System.Runtime.ExceptionServices
         public static System.Exception SetRemoteStackTrace(
             System.Exception source,
             string stackTrace
-        ) {
+        )
+        {
             throw null;
         }
         [System.Diagnostics.CodeAnalysis.DoesNotReturnAttribute]
@@ -31535,12 +32407,14 @@ namespace System.Runtime.InteropServices
         public static System.Runtime.InteropServices.GCHandle Alloc(
             object? value,
             System.Runtime.InteropServices.GCHandleType type
-        ) {
+        )
+        {
             throw null;
         }
         public override bool Equals(
             [System.Diagnostics.CodeAnalysis.NotNullWhenAttribute(true)] object? o
-        ) {
+        )
+        {
             throw null;
         }
         public void Free() { }
@@ -31555,7 +32429,8 @@ namespace System.Runtime.InteropServices
         public static bool operator ==(
             System.Runtime.InteropServices.GCHandle a,
             System.Runtime.InteropServices.GCHandle b
-        ) {
+        )
+        {
             throw null;
         }
         public static explicit operator System.Runtime.InteropServices.GCHandle(System.IntPtr value)
@@ -31569,7 +32444,8 @@ namespace System.Runtime.InteropServices
         public static bool operator !=(
             System.Runtime.InteropServices.GCHandle a,
             System.Runtime.InteropServices.GCHandle b
-        ) {
+        )
+        {
             throw null;
         }
         public static System.IntPtr ToIntPtr(System.Runtime.InteropServices.GCHandle value)
@@ -31977,7 +32853,8 @@ namespace System.Runtime.Serialization
         public StreamingContext(
             System.Runtime.Serialization.StreamingContextStates state,
             object? additional
-        ) {
+        )
+        {
             throw null;
         }
         public object? Context
@@ -31990,7 +32867,8 @@ namespace System.Runtime.Serialization
         }
         public override bool Equals(
             [System.Diagnostics.CodeAnalysis.NotNullWhenAttribute(true)] object? obj
-        ) {
+        )
+        {
             throw null;
         }
         public override int GetHashCode()
@@ -32071,13 +32949,15 @@ namespace System.Runtime.Versioning
         }
         public override bool Equals(
             [System.Diagnostics.CodeAnalysis.NotNullWhenAttribute(true)] object? obj
-        ) {
+        )
+        {
             throw null;
         }
         public bool Equals(
             [System.Diagnostics.CodeAnalysis.NotNullWhenAttribute(true)]
                 System.Runtime.Versioning.FrameworkName? other
-        ) {
+        )
+        {
             throw null;
         }
         public override int GetHashCode()
@@ -32087,13 +32967,15 @@ namespace System.Runtime.Versioning
         public static bool operator ==(
             System.Runtime.Versioning.FrameworkName? left,
             System.Runtime.Versioning.FrameworkName? right
-        ) {
+        )
+        {
             throw null;
         }
         public static bool operator !=(
             System.Runtime.Versioning.FrameworkName? left,
             System.Runtime.Versioning.FrameworkName? right
-        ) {
+        )
+        {
             throw null;
         }
         public override string ToString()
@@ -32229,7 +33111,8 @@ namespace System.Runtime.Versioning
             string? name,
             System.Runtime.Versioning.ResourceScope from,
             System.Runtime.Versioning.ResourceScope to
-        ) {
+        )
+        {
             throw null;
         }
         public static string MakeVersionSafeName(
@@ -32237,7 +33120,8 @@ namespace System.Runtime.Versioning
             System.Runtime.Versioning.ResourceScope from,
             System.Runtime.Versioning.ResourceScope to,
             System.Type? type
-        ) {
+        )
+        {
             throw null;
         }
     }
@@ -32329,7 +33213,8 @@ namespace System.Security
         }
         protected virtual System.Security.IPermission? AddPermissionImpl(
             System.Security.IPermission? perm
-        ) {
+        )
+        {
             throw null;
         }
         public void Assert() { }
@@ -32407,7 +33292,8 @@ namespace System.Security
         }
         protected virtual System.Security.IPermission? SetPermissionImpl(
             System.Security.IPermission? perm
-        ) {
+        )
+        {
             throw null;
         }
         void System.Runtime.Serialization.IDeserializationCallback.OnDeserialization(
@@ -32496,7 +33382,8 @@ namespace System.Security
         public bool Equal(
             [System.Diagnostics.CodeAnalysis.NotNullWhenAttribute(true)]
                 System.Security.SecurityElement? other
-        ) {
+        )
+        {
             throw null;
         }
         public static string? Escape(string? str)
@@ -32509,22 +33396,26 @@ namespace System.Security
         }
         public static bool IsValidAttributeName(
             [System.Diagnostics.CodeAnalysis.NotNullWhenAttribute(true)] string? name
-        ) {
+        )
+        {
             throw null;
         }
         public static bool IsValidAttributeValue(
             [System.Diagnostics.CodeAnalysis.NotNullWhenAttribute(true)] string? value
-        ) {
+        )
+        {
             throw null;
         }
         public static bool IsValidTag(
             [System.Diagnostics.CodeAnalysis.NotNullWhenAttribute(true)] string? tag
-        ) {
+        )
+        {
             throw null;
         }
         public static bool IsValidText(
             [System.Diagnostics.CodeAnalysis.NotNullWhenAttribute(true)] string? text
-        ) {
+        )
+        {
             throw null;
         }
         public System.Security.SecurityElement? SearchForChildByTag(string tag)
@@ -32741,9 +33632,8 @@ namespace System.Security.Permissions
     public abstract partial class CodeAccessSecurityAttribute
         : System.Security.Permissions.SecurityAttribute
     {
-        protected CodeAccessSecurityAttribute(
-            System.Security.Permissions.SecurityAction action
-        ) : base(default(System.Security.Permissions.SecurityAction)) { }
+        protected CodeAccessSecurityAttribute(System.Security.Permissions.SecurityAction action)
+            : base(default(System.Security.Permissions.SecurityAction)) { }
     }
     [System.ObsoleteAttribute(
         "Code Access Security is not supported or honored by the runtime.",
@@ -32818,9 +33708,8 @@ namespace System.Security.Permissions
     public sealed partial class SecurityPermissionAttribute
         : System.Security.Permissions.CodeAccessSecurityAttribute
     {
-        public SecurityPermissionAttribute(
-            System.Security.Permissions.SecurityAction action
-        ) : base(default(System.Security.Permissions.SecurityAction)) { }
+        public SecurityPermissionAttribute(System.Security.Permissions.SecurityAction action)
+            : base(default(System.Security.Permissions.SecurityAction)) { }
         public bool Assertion
         {
             get { throw null; }
@@ -32979,7 +33868,8 @@ namespace System.Text
             out int bytesUsed,
             out int charsUsed,
             out bool completed
-        ) {
+        )
+        {
             throw null;
         }
         public virtual void Convert(
@@ -32993,7 +33883,8 @@ namespace System.Text
             out int bytesUsed,
             out int charsUsed,
             out bool completed
-        ) {
+        )
+        {
             throw null;
         }
         public virtual void Convert(
@@ -33003,7 +33894,8 @@ namespace System.Text
             out int bytesUsed,
             out int charsUsed,
             out bool completed
-        ) {
+        )
+        {
             throw null;
         }
         [System.CLSCompliantAttribute(false)]
@@ -33027,7 +33919,8 @@ namespace System.Text
             char* chars,
             int charCount,
             bool flush
-        ) {
+        )
+        {
             throw null;
         }
         public abstract int GetChars(
@@ -33044,14 +33937,16 @@ namespace System.Text
             char[] chars,
             int charIndex,
             bool flush
-        ) {
+        )
+        {
             throw null;
         }
         public virtual int GetChars(
             System.ReadOnlySpan<byte> bytes,
             System.Span<char> chars,
             bool flush
-        ) {
+        )
+        {
             throw null;
         }
         public virtual void Reset() { }
@@ -33069,7 +33964,8 @@ namespace System.Text
         }
         public override bool Equals(
             [System.Diagnostics.CodeAnalysis.NotNullWhenAttribute(true)] object? value
-        ) {
+        )
+        {
             throw null;
         }
         public override int GetHashCode()
@@ -33153,7 +34049,8 @@ namespace System.Text
         }
         public override bool Equals(
             [System.Diagnostics.CodeAnalysis.NotNullWhenAttribute(true)] object? value
-        ) {
+        )
+        {
             throw null;
         }
         public override int GetHashCode()
@@ -33204,7 +34101,8 @@ namespace System.Text
             out int charsUsed,
             out int bytesUsed,
             out bool completed
-        ) {
+        )
+        {
             throw null;
         }
         public virtual void Convert(
@@ -33218,7 +34116,8 @@ namespace System.Text
             out int charsUsed,
             out int bytesUsed,
             out bool completed
-        ) {
+        )
+        {
             throw null;
         }
         public virtual void Convert(
@@ -33228,7 +34127,8 @@ namespace System.Text
             out int charsUsed,
             out int bytesUsed,
             out bool completed
-        ) {
+        )
+        {
             throw null;
         }
         [System.CLSCompliantAttribute(false)]
@@ -33248,7 +34148,8 @@ namespace System.Text
             byte* bytes,
             int byteCount,
             bool flush
-        ) {
+        )
+        {
             throw null;
         }
         public abstract int GetBytes(
@@ -33263,7 +34164,8 @@ namespace System.Text
             System.ReadOnlySpan<char> chars,
             System.Span<byte> bytes,
             bool flush
-        ) {
+        )
+        {
             throw null;
         }
         public virtual void Reset() { }
@@ -33281,7 +34183,8 @@ namespace System.Text
         }
         public override bool Equals(
             [System.Diagnostics.CodeAnalysis.NotNullWhenAttribute(true)] object? value
-        ) {
+        )
+        {
             throw null;
         }
         public override int GetHashCode()
@@ -33381,7 +34284,8 @@ namespace System.Text
         }
         public override bool Equals(
             [System.Diagnostics.CodeAnalysis.NotNullWhenAttribute(true)] object? value
-        ) {
+        )
+        {
             throw null;
         }
         public override int GetHashCode()
@@ -33530,7 +34434,8 @@ namespace System.Text
             System.Text.Encoding srcEncoding,
             System.Text.Encoding dstEncoding,
             byte[] bytes
-        ) {
+        )
+        {
             throw null;
         }
         public static byte[] Convert(
@@ -33539,7 +34444,8 @@ namespace System.Text
             byte[] bytes,
             int index,
             int count
-        ) {
+        )
+        {
             throw null;
         }
         public static System.IO.Stream CreateTranscodingStream(
@@ -33547,12 +34453,14 @@ namespace System.Text
             System.Text.Encoding innerStreamEncoding,
             System.Text.Encoding outerStreamEncoding,
             bool leaveOpen = false
-        ) {
+        )
+        {
             throw null;
         }
         public override bool Equals(
             [System.Diagnostics.CodeAnalysis.NotNullWhenAttribute(true)] object? value
-        ) {
+        )
+        {
             throw null;
         }
         [System.CLSCompliantAttribute(false)]
@@ -33615,7 +34523,8 @@ namespace System.Text
             int charCount,
             byte[] bytes,
             int byteIndex
-        ) {
+        )
+        {
             throw null;
         }
         [System.CLSCompliantAttribute(false)]
@@ -33672,7 +34581,8 @@ namespace System.Text
             int codepage,
             System.Text.EncoderFallback encoderFallback,
             System.Text.DecoderFallback decoderFallback
-        ) {
+        )
+        {
             throw null;
         }
         public static System.Text.Encoding GetEncoding(string name)
@@ -33683,7 +34593,8 @@ namespace System.Text
             string name,
             System.Text.EncoderFallback encoderFallback,
             System.Text.DecoderFallback decoderFallback
-        ) {
+        )
+        {
             throw null;
         }
         public static System.Text.EncodingInfo[] GetEncodings()
@@ -33749,7 +34660,8 @@ namespace System.Text
         }
         public override bool Equals(
             [System.Diagnostics.CodeAnalysis.NotNullWhenAttribute(true)] object? value
-        ) {
+        )
+        {
             throw null;
         }
         public System.Text.Encoding GetEncoding()
@@ -33769,7 +34681,8 @@ namespace System.Text
             int codepage,
             System.Text.EncoderFallback encoderFallback,
             System.Text.DecoderFallback decoderFallback
-        ) {
+        )
+        {
             throw null;
         }
         public abstract System.Text.Encoding? GetEncoding(string name);
@@ -33777,7 +34690,8 @@ namespace System.Text
             string name,
             System.Text.EncoderFallback encoderFallback,
             System.Text.DecoderFallback decoderFallback
-        ) {
+        )
+        {
             throw null;
         }
         public virtual System.Collections.Generic.IEnumerable<System.Text.EncodingInfo> GetEncodings()
@@ -33852,28 +34766,32 @@ namespace System.Text
             System.ReadOnlySpan<char> source,
             out System.Text.Rune result,
             out int charsConsumed
-        ) {
+        )
+        {
             throw null;
         }
         public static System.Buffers.OperationStatus DecodeFromUtf8(
             System.ReadOnlySpan<byte> source,
             out System.Text.Rune result,
             out int bytesConsumed
-        ) {
+        )
+        {
             throw null;
         }
         public static System.Buffers.OperationStatus DecodeLastFromUtf16(
             System.ReadOnlySpan<char> source,
             out System.Text.Rune result,
             out int charsConsumed
-        ) {
+        )
+        {
             throw null;
         }
         public static System.Buffers.OperationStatus DecodeLastFromUtf8(
             System.ReadOnlySpan<byte> source,
             out System.Text.Rune value,
             out int bytesConsumed
-        ) {
+        )
+        {
             throw null;
         }
         public int EncodeToUtf16(System.Span<char> destination)
@@ -33886,7 +34804,8 @@ namespace System.Text
         }
         public override bool Equals(
             [System.Diagnostics.CodeAnalysis.NotNullWhenAttribute(true)] object? obj
-        ) {
+        )
+        {
             throw null;
         }
         public bool Equals(System.Text.Rune other)
@@ -33907,7 +34826,8 @@ namespace System.Text
         }
         public static System.Globalization.UnicodeCategory GetUnicodeCategory(
             System.Text.Rune value
-        ) {
+        )
+        {
             throw null;
         }
         public static bool IsControl(System.Text.Rune value)
@@ -34003,7 +34923,8 @@ namespace System.Text
         public static System.Text.Rune ToLower(
             System.Text.Rune value,
             System.Globalization.CultureInfo culture
-        ) {
+        )
+        {
             throw null;
         }
         public static System.Text.Rune ToLowerInvariant(System.Text.Rune value)
@@ -34017,7 +34938,8 @@ namespace System.Text
         public static System.Text.Rune ToUpper(
             System.Text.Rune value,
             System.Globalization.CultureInfo culture
-        ) {
+        )
+        {
             throw null;
         }
         public static System.Text.Rune ToUpperInvariant(System.Text.Rune value)
@@ -34028,7 +34950,8 @@ namespace System.Text
             char highSurrogate,
             char lowSurrogate,
             out System.Text.Rune result
-        ) {
+        )
+        {
             throw null;
         }
         public static bool TryCreate(char ch, out System.Text.Rune result)
@@ -34065,7 +34988,8 @@ namespace System.Text
             out int charsWritten,
             System.ReadOnlySpan<char> format,
             System.IFormatProvider? provider
-        ) {
+        )
+        {
             throw null;
         }
         string System.IFormattable.ToString(string? format, IFormatProvider? formatProvider)
@@ -34187,7 +35111,8 @@ namespace System.Text
             System.Text.StringBuilder? value,
             int startIndex,
             int count
-        ) {
+        )
+        {
             throw null;
         }
         [System.CLSCompliantAttribute(false)]
@@ -34209,7 +35134,8 @@ namespace System.Text
             System.IFormatProvider? provider,
             string format,
             object? arg0
-        ) {
+        )
+        {
             throw null;
         }
         public System.Text.StringBuilder AppendFormat(
@@ -34217,7 +35143,8 @@ namespace System.Text
             string format,
             object? arg0,
             object? arg1
-        ) {
+        )
+        {
             throw null;
         }
         public System.Text.StringBuilder AppendFormat(
@@ -34226,14 +35153,16 @@ namespace System.Text
             object? arg0,
             object? arg1,
             object? arg2
-        ) {
+        )
+        {
             throw null;
         }
         public System.Text.StringBuilder AppendFormat(
             System.IFormatProvider? provider,
             string format,
             params object?[] args
-        ) {
+        )
+        {
             throw null;
         }
         public System.Text.StringBuilder AppendFormat(string format, object? arg0)
@@ -34249,7 +35178,8 @@ namespace System.Text
             object? arg0,
             object? arg1,
             object? arg2
-        ) {
+        )
+        {
             throw null;
         }
         public System.Text.StringBuilder AppendFormat(string format, params object?[] args)
@@ -34275,13 +35205,15 @@ namespace System.Text
         public System.Text.StringBuilder AppendJoin<T>(
             char separator,
             System.Collections.Generic.IEnumerable<T> values
-        ) {
+        )
+        {
             throw null;
         }
         public System.Text.StringBuilder AppendJoin<T>(
             string? separator,
             System.Collections.Generic.IEnumerable<T> values
-        ) {
+        )
+        {
             throw null;
         }
         public System.Text.StringBuilder AppendLine()
@@ -34309,7 +35241,8 @@ namespace System.Text
         public bool Equals(
             [System.Diagnostics.CodeAnalysis.NotNullWhenAttribute(true)]
                 System.Text.StringBuilder? sb
-        ) {
+        )
+        {
             throw null;
         }
         public System.Text.StringBuilder.ChunkEnumerator GetChunks()
@@ -34337,7 +35270,8 @@ namespace System.Text
             char[]? value,
             int startIndex,
             int charCount
-        ) {
+        )
+        {
             throw null;
         }
         public System.Text.StringBuilder Insert(int index, decimal value)
@@ -34413,7 +35347,8 @@ namespace System.Text
             char newChar,
             int startIndex,
             int count
-        ) {
+        )
+        {
             throw null;
         }
         public System.Text.StringBuilder Replace(string oldValue, string? newValue)
@@ -34425,7 +35360,8 @@ namespace System.Text
             string? newValue,
             int startIndex,
             int count
-        ) {
+        )
+        {
             throw null;
         }
         void System.Runtime.Serialization.ISerializable.GetObjectData(
@@ -34509,7 +35445,8 @@ namespace System.Text.Unicode
             out int bytesWritten,
             bool replaceInvalidSequences = true,
             bool isFinalBlock = true
-        ) {
+        )
+        {
             throw null;
         }
         public static System.Buffers.OperationStatus ToUtf16(
@@ -34519,7 +35456,8 @@ namespace System.Text.Unicode
             out int charsWritten,
             bool replaceInvalidSequences = true,
             bool isFinalBlock = true
-        ) {
+        )
+        {
             throw null;
         }
     }
@@ -34552,7 +35490,8 @@ namespace System.Threading
         }
         public override bool Equals(
             [System.Diagnostics.CodeAnalysis.NotNullWhenAttribute(true)] object? other
-        ) {
+        )
+        {
             throw null;
         }
         public bool Equals(System.Threading.CancellationToken other)
@@ -34566,13 +35505,15 @@ namespace System.Threading
         public static bool operator ==(
             System.Threading.CancellationToken left,
             System.Threading.CancellationToken right
-        ) {
+        )
+        {
             throw null;
         }
         public static bool operator !=(
             System.Threading.CancellationToken left,
             System.Threading.CancellationToken right
-        ) {
+        )
+        {
             throw null;
         }
         public System.Threading.CancellationTokenRegistration Register(System.Action callback)
@@ -34582,39 +35523,45 @@ namespace System.Threading
         public System.Threading.CancellationTokenRegistration Register(
             System.Action callback,
             bool useSynchronizationContext
-        ) {
+        )
+        {
             throw null;
         }
         public System.Threading.CancellationTokenRegistration Register(
             System.Action<object?> callback,
             object? state
-        ) {
+        )
+        {
             throw null;
         }
         public System.Threading.CancellationTokenRegistration Register(
             System.Action<object?, System.Threading.CancellationToken> callback,
             object? state
-        ) {
+        )
+        {
             throw null;
         }
         public System.Threading.CancellationTokenRegistration Register(
             System.Action<object?> callback,
             object? state,
             bool useSynchronizationContext
-        ) {
+        )
+        {
             throw null;
         }
         public void ThrowIfCancellationRequested() { }
         public System.Threading.CancellationTokenRegistration UnsafeRegister(
             System.Action<object?> callback,
             object? state
-        ) {
+        )
+        {
             throw null;
         }
         public System.Threading.CancellationTokenRegistration UnsafeRegister(
             System.Action<object?, System.Threading.CancellationToken> callback,
             object? state
-        ) {
+        )
+        {
             throw null;
         }
     }
@@ -34636,7 +35583,8 @@ namespace System.Threading
         }
         public override bool Equals(
             [System.Diagnostics.CodeAnalysis.NotNullWhenAttribute(true)] object? obj
-        ) {
+        )
+        {
             throw null;
         }
         public bool Equals(System.Threading.CancellationTokenRegistration other)
@@ -34650,13 +35598,15 @@ namespace System.Threading
         public static bool operator ==(
             System.Threading.CancellationTokenRegistration left,
             System.Threading.CancellationTokenRegistration right
-        ) {
+        )
+        {
             throw null;
         }
         public static bool operator !=(
             System.Threading.CancellationTokenRegistration left,
             System.Threading.CancellationTokenRegistration right
-        ) {
+        )
+        {
             throw null;
         }
         public bool Unregister()
@@ -34683,18 +35633,21 @@ namespace System.Threading
         public void CancelAfter(System.TimeSpan delay) { }
         public static System.Threading.CancellationTokenSource CreateLinkedTokenSource(
             System.Threading.CancellationToken token
-        ) {
+        )
+        {
             throw null;
         }
         public static System.Threading.CancellationTokenSource CreateLinkedTokenSource(
             System.Threading.CancellationToken token1,
             System.Threading.CancellationToken token2
-        ) {
+        )
+        {
             throw null;
         }
         public static System.Threading.CancellationTokenSource CreateLinkedTokenSource(
             params System.Threading.CancellationToken[] tokens
-        ) {
+        )
+        {
             throw null;
         }
         public void Dispose() { }
@@ -34801,7 +35754,8 @@ namespace System.Threading
         public static bool SignalAndWait(
             System.Threading.WaitHandle toSignal,
             System.Threading.WaitHandle toWaitOn
-        ) {
+        )
+        {
             throw null;
         }
         public static bool SignalAndWait(
@@ -34809,7 +35763,8 @@ namespace System.Threading
             System.Threading.WaitHandle toWaitOn,
             int millisecondsTimeout,
             bool exitContext
-        ) {
+        )
+        {
             throw null;
         }
         public static bool SignalAndWait(
@@ -34817,7 +35772,8 @@ namespace System.Threading
             System.Threading.WaitHandle toWaitOn,
             System.TimeSpan timeout,
             bool exitContext
-        ) {
+        )
+        {
             throw null;
         }
         public static bool WaitAll(System.Threading.WaitHandle[] waitHandles)
@@ -34827,27 +35783,31 @@ namespace System.Threading
         public static bool WaitAll(
             System.Threading.WaitHandle[] waitHandles,
             int millisecondsTimeout
-        ) {
+        )
+        {
             throw null;
         }
         public static bool WaitAll(
             System.Threading.WaitHandle[] waitHandles,
             int millisecondsTimeout,
             bool exitContext
-        ) {
+        )
+        {
             throw null;
         }
         public static bool WaitAll(
             System.Threading.WaitHandle[] waitHandles,
             System.TimeSpan timeout
-        ) {
+        )
+        {
             throw null;
         }
         public static bool WaitAll(
             System.Threading.WaitHandle[] waitHandles,
             System.TimeSpan timeout,
             bool exitContext
-        ) {
+        )
+        {
             throw null;
         }
         public static int WaitAny(System.Threading.WaitHandle[] waitHandles)
@@ -34857,27 +35817,31 @@ namespace System.Threading
         public static int WaitAny(
             System.Threading.WaitHandle[] waitHandles,
             int millisecondsTimeout
-        ) {
+        )
+        {
             throw null;
         }
         public static int WaitAny(
             System.Threading.WaitHandle[] waitHandles,
             int millisecondsTimeout,
             bool exitContext
-        ) {
+        )
+        {
             throw null;
         }
         public static int WaitAny(
             System.Threading.WaitHandle[] waitHandles,
             System.TimeSpan timeout
-        ) {
+        )
+        {
             throw null;
         }
         public static int WaitAny(
             System.Threading.WaitHandle[] waitHandles,
             System.TimeSpan timeout,
             bool exitContext
-        ) {
+        )
+        {
             throw null;
         }
         public virtual bool WaitOne()
@@ -34905,7 +35869,8 @@ namespace System.Threading
     {
         public static Microsoft.Win32.SafeHandles.SafeWaitHandle GetSafeWaitHandle(
             this System.Threading.WaitHandle waitHandle
-        ) {
+        )
+        {
             throw null;
         }
         public static void SetSafeWaitHandle(
@@ -35032,20 +35997,23 @@ namespace System.Threading.Tasks
         }
         public System.Runtime.CompilerServices.ConfiguredTaskAwaitable ConfigureAwait(
             bool continueOnCapturedContext
-        ) {
+        )
+        {
             throw null;
         }
         public System.Threading.Tasks.Task ContinueWith(
             System.Action<System.Threading.Tasks.Task, object?> continuationAction,
             object? state
-        ) {
+        )
+        {
             throw null;
         }
         public System.Threading.Tasks.Task ContinueWith(
             System.Action<System.Threading.Tasks.Task, object?> continuationAction,
             object? state,
             System.Threading.CancellationToken cancellationToken
-        ) {
+        )
+        {
             throw null;
         }
         public System.Threading.Tasks.Task ContinueWith(
@@ -35054,32 +36022,37 @@ namespace System.Threading.Tasks
             System.Threading.CancellationToken cancellationToken,
             System.Threading.Tasks.TaskContinuationOptions continuationOptions,
             System.Threading.Tasks.TaskScheduler scheduler
-        ) {
+        )
+        {
             throw null;
         }
         public System.Threading.Tasks.Task ContinueWith(
             System.Action<System.Threading.Tasks.Task, object?> continuationAction,
             object? state,
             System.Threading.Tasks.TaskContinuationOptions continuationOptions
-        ) {
+        )
+        {
             throw null;
         }
         public System.Threading.Tasks.Task ContinueWith(
             System.Action<System.Threading.Tasks.Task, object?> continuationAction,
             object? state,
             System.Threading.Tasks.TaskScheduler scheduler
-        ) {
+        )
+        {
             throw null;
         }
         public System.Threading.Tasks.Task ContinueWith(
             System.Action<System.Threading.Tasks.Task> continuationAction
-        ) {
+        )
+        {
             throw null;
         }
         public System.Threading.Tasks.Task ContinueWith(
             System.Action<System.Threading.Tasks.Task> continuationAction,
             System.Threading.CancellationToken cancellationToken
-        ) {
+        )
+        {
             throw null;
         }
         public System.Threading.Tasks.Task ContinueWith(
@@ -35087,32 +36060,37 @@ namespace System.Threading.Tasks
             System.Threading.CancellationToken cancellationToken,
             System.Threading.Tasks.TaskContinuationOptions continuationOptions,
             System.Threading.Tasks.TaskScheduler scheduler
-        ) {
+        )
+        {
             throw null;
         }
         public System.Threading.Tasks.Task ContinueWith(
             System.Action<System.Threading.Tasks.Task> continuationAction,
             System.Threading.Tasks.TaskContinuationOptions continuationOptions
-        ) {
+        )
+        {
             throw null;
         }
         public System.Threading.Tasks.Task ContinueWith(
             System.Action<System.Threading.Tasks.Task> continuationAction,
             System.Threading.Tasks.TaskScheduler scheduler
-        ) {
+        )
+        {
             throw null;
         }
         public System.Threading.Tasks.Task<TResult> ContinueWith<TResult>(
             System.Func<System.Threading.Tasks.Task, object?, TResult> continuationFunction,
             object? state
-        ) {
+        )
+        {
             throw null;
         }
         public System.Threading.Tasks.Task<TResult> ContinueWith<TResult>(
             System.Func<System.Threading.Tasks.Task, object?, TResult> continuationFunction,
             object? state,
             System.Threading.CancellationToken cancellationToken
-        ) {
+        )
+        {
             throw null;
         }
         public System.Threading.Tasks.Task<TResult> ContinueWith<TResult>(
@@ -35121,32 +36099,37 @@ namespace System.Threading.Tasks
             System.Threading.CancellationToken cancellationToken,
             System.Threading.Tasks.TaskContinuationOptions continuationOptions,
             System.Threading.Tasks.TaskScheduler scheduler
-        ) {
+        )
+        {
             throw null;
         }
         public System.Threading.Tasks.Task<TResult> ContinueWith<TResult>(
             System.Func<System.Threading.Tasks.Task, object?, TResult> continuationFunction,
             object? state,
             System.Threading.Tasks.TaskContinuationOptions continuationOptions
-        ) {
+        )
+        {
             throw null;
         }
         public System.Threading.Tasks.Task<TResult> ContinueWith<TResult>(
             System.Func<System.Threading.Tasks.Task, object?, TResult> continuationFunction,
             object? state,
             System.Threading.Tasks.TaskScheduler scheduler
-        ) {
+        )
+        {
             throw null;
         }
         public System.Threading.Tasks.Task<TResult> ContinueWith<TResult>(
             System.Func<System.Threading.Tasks.Task, TResult> continuationFunction
-        ) {
+        )
+        {
             throw null;
         }
         public System.Threading.Tasks.Task<TResult> ContinueWith<TResult>(
             System.Func<System.Threading.Tasks.Task, TResult> continuationFunction,
             System.Threading.CancellationToken cancellationToken
-        ) {
+        )
+        {
             throw null;
         }
         public System.Threading.Tasks.Task<TResult> ContinueWith<TResult>(
@@ -35154,19 +36137,22 @@ namespace System.Threading.Tasks
             System.Threading.CancellationToken cancellationToken,
             System.Threading.Tasks.TaskContinuationOptions continuationOptions,
             System.Threading.Tasks.TaskScheduler scheduler
-        ) {
+        )
+        {
             throw null;
         }
         public System.Threading.Tasks.Task<TResult> ContinueWith<TResult>(
             System.Func<System.Threading.Tasks.Task, TResult> continuationFunction,
             System.Threading.Tasks.TaskContinuationOptions continuationOptions
-        ) {
+        )
+        {
             throw null;
         }
         public System.Threading.Tasks.Task<TResult> ContinueWith<TResult>(
             System.Func<System.Threading.Tasks.Task, TResult> continuationFunction,
             System.Threading.Tasks.TaskScheduler scheduler
-        ) {
+        )
+        {
             throw null;
         }
         public static System.Threading.Tasks.Task Delay(int millisecondsDelay)
@@ -35176,7 +36162,8 @@ namespace System.Threading.Tasks
         public static System.Threading.Tasks.Task Delay(
             int millisecondsDelay,
             System.Threading.CancellationToken cancellationToken
-        ) {
+        )
+        {
             throw null;
         }
         public static System.Threading.Tasks.Task Delay(System.TimeSpan delay)
@@ -35186,19 +36173,22 @@ namespace System.Threading.Tasks
         public static System.Threading.Tasks.Task Delay(
             System.TimeSpan delay,
             System.Threading.CancellationToken cancellationToken
-        ) {
+        )
+        {
             throw null;
         }
         public void Dispose() { }
         protected virtual void Dispose(bool disposing) { }
         public static System.Threading.Tasks.Task FromCanceled(
             System.Threading.CancellationToken cancellationToken
-        ) {
+        )
+        {
             throw null;
         }
         public static System.Threading.Tasks.Task<TResult> FromCanceled<TResult>(
             System.Threading.CancellationToken cancellationToken
-        ) {
+        )
+        {
             throw null;
         }
         public static System.Threading.Tasks.Task FromException(System.Exception exception)
@@ -35207,7 +36197,8 @@ namespace System.Threading.Tasks
         }
         public static System.Threading.Tasks.Task<TResult> FromException<TResult>(
             System.Exception exception
-        ) {
+        )
+        {
             throw null;
         }
         public static System.Threading.Tasks.Task<TResult> FromResult<TResult>(TResult result)
@@ -35225,42 +36216,49 @@ namespace System.Threading.Tasks
         public static System.Threading.Tasks.Task Run(
             System.Action action,
             System.Threading.CancellationToken cancellationToken
-        ) {
+        )
+        {
             throw null;
         }
         public static System.Threading.Tasks.Task Run(
             System.Func<System.Threading.Tasks.Task?> function
-        ) {
+        )
+        {
             throw null;
         }
         public static System.Threading.Tasks.Task Run(
             System.Func<System.Threading.Tasks.Task?> function,
             System.Threading.CancellationToken cancellationToken
-        ) {
+        )
+        {
             throw null;
         }
         public void RunSynchronously() { }
         public void RunSynchronously(System.Threading.Tasks.TaskScheduler scheduler) { }
         public static System.Threading.Tasks.Task<TResult> Run<TResult>(
             System.Func<System.Threading.Tasks.Task<TResult>?> function
-        ) {
+        )
+        {
             throw null;
         }
         public static System.Threading.Tasks.Task<TResult> Run<TResult>(
             System.Func<System.Threading.Tasks.Task<TResult>?> function,
             System.Threading.CancellationToken cancellationToken
-        ) {
+        )
+        {
             throw null;
         }
         public static System.Threading.Tasks.Task<TResult> Run<TResult>(
             System.Func<TResult> function
-        ) {
+        )
+        {
             throw null;
         }
         public static System.Threading.Tasks.Task<TResult> Run<TResult>(
             System.Func<TResult> function,
             System.Threading.CancellationToken cancellationToken
-        ) {
+        )
+        {
             throw null;
         }
         public void Start() { }
@@ -35273,7 +36271,8 @@ namespace System.Threading.Tasks
         public bool Wait(
             int millisecondsTimeout,
             System.Threading.CancellationToken cancellationToken
-        ) {
+        )
+        {
             throw null;
         }
         public void Wait(System.Threading.CancellationToken cancellationToken) { }
@@ -35293,7 +36292,8 @@ namespace System.Threading.Tasks
             System.Threading.Tasks.Task[] tasks,
             int millisecondsTimeout,
             System.Threading.CancellationToken cancellationToken
-        ) {
+        )
+        {
             throw null;
         }
         [System.Runtime.Versioning.UnsupportedOSPlatform("browser")]
@@ -35318,13 +36318,15 @@ namespace System.Threading.Tasks
             System.Threading.Tasks.Task[] tasks,
             int millisecondsTimeout,
             System.Threading.CancellationToken cancellationToken
-        ) {
+        )
+        {
             throw null;
         }
         public static int WaitAny(
             System.Threading.Tasks.Task[] tasks,
             System.Threading.CancellationToken cancellationToken
-        ) {
+        )
+        {
             throw null;
         }
         public static int WaitAny(System.Threading.Tasks.Task[] tasks, System.TimeSpan timeout)
@@ -35342,59 +36344,70 @@ namespace System.Threading.Tasks
         public Task WaitAsync(
             System.TimeSpan timeout,
             System.Threading.CancellationToken cancellationToken
-        ) {
+        )
+        {
             throw null;
         }
         public static System.Threading.Tasks.Task WhenAll(
             System.Collections.Generic.IEnumerable<System.Threading.Tasks.Task> tasks
-        ) {
+        )
+        {
             throw null;
         }
         public static System.Threading.Tasks.Task WhenAll(
             params System.Threading.Tasks.Task[] tasks
-        ) {
+        )
+        {
             throw null;
         }
         public static System.Threading.Tasks.Task<TResult[]> WhenAll<TResult>(
             System.Collections.Generic.IEnumerable<System.Threading.Tasks.Task<TResult>> tasks
-        ) {
+        )
+        {
             throw null;
         }
         public static System.Threading.Tasks.Task<TResult[]> WhenAll<TResult>(
             params System.Threading.Tasks.Task<TResult>[] tasks
-        ) {
+        )
+        {
             throw null;
         }
         public static System.Threading.Tasks.Task<System.Threading.Tasks.Task> WhenAny(
             System.Collections.Generic.IEnumerable<System.Threading.Tasks.Task> tasks
-        ) {
+        )
+        {
             throw null;
         }
         public static System.Threading.Tasks.Task<System.Threading.Tasks.Task> WhenAny(
             System.Threading.Tasks.Task task1,
             System.Threading.Tasks.Task task2
-        ) {
+        )
+        {
             throw null;
         }
         public static System.Threading.Tasks.Task<System.Threading.Tasks.Task> WhenAny(
             params System.Threading.Tasks.Task[] tasks
-        ) {
+        )
+        {
             throw null;
         }
         public static System.Threading.Tasks.Task<System.Threading.Tasks.Task<TResult>> WhenAny<TResult>(
             System.Collections.Generic.IEnumerable<System.Threading.Tasks.Task<TResult>> tasks
-        ) {
+        )
+        {
             throw null;
         }
         public static System.Threading.Tasks.Task<System.Threading.Tasks.Task<TResult>> WhenAny<TResult>(
             System.Threading.Tasks.Task<TResult> task1,
             System.Threading.Tasks.Task<TResult> task2
-        ) {
+        )
+        {
             throw null;
         }
         public static System.Threading.Tasks.Task<System.Threading.Tasks.Task<TResult>> WhenAny<TResult>(
             params System.Threading.Tasks.Task<TResult>[] tasks
-        ) {
+        )
+        {
             throw null;
         }
         public static System.Runtime.CompilerServices.YieldAwaitable Yield()
@@ -35407,19 +36420,22 @@ namespace System.Threading.Tasks
         public static System.Runtime.CompilerServices.ConfiguredAsyncDisposable ConfigureAwait(
             this System.IAsyncDisposable source,
             bool continueOnCapturedContext
-        ) {
+        )
+        {
             throw null;
         }
         public static System.Runtime.CompilerServices.ConfiguredCancelableAsyncEnumerable<T> ConfigureAwait<T>(
             this System.Collections.Generic.IAsyncEnumerable<T> source,
             bool continueOnCapturedContext
-        ) {
+        )
+        {
             throw null;
         }
         public static System.Runtime.CompilerServices.ConfiguredCancelableAsyncEnumerable<T> WithCancellation<T>(
             this System.Collections.Generic.IAsyncEnumerable<T> source,
             System.Threading.CancellationToken cancellationToken
-        ) {
+        )
+        {
             throw null;
         }
     }
@@ -35473,7 +36489,8 @@ namespace System.Threading.Tasks
         }
         public bool TrySetException(
             System.Collections.Generic.IEnumerable<System.Exception> exceptions
-        ) {
+        )
+        {
             throw null;
         }
         public bool TrySetException(System.Exception exception)
@@ -35515,7 +36532,8 @@ namespace System.Threading.Tasks
         }
         public bool TrySetException(
             System.Collections.Generic.IEnumerable<System.Exception> exceptions
-        ) {
+        )
+        {
             throw null;
         }
         public bool TrySetException(System.Exception exception)
@@ -35561,12 +36579,14 @@ namespace System.Threading.Tasks
     {
         public static System.Threading.Tasks.Task Unwrap(
             this System.Threading.Tasks.Task<System.Threading.Tasks.Task> task
-        ) {
+        )
+        {
             throw null;
         }
         public static System.Threading.Tasks.Task<TResult> Unwrap<TResult>(
             this System.Threading.Tasks.Task<System.Threading.Tasks.Task<TResult>> task
-        ) {
+        )
+        {
             throw null;
         }
     }
@@ -35604,14 +36624,16 @@ namespace System.Threading.Tasks
         public System.Threading.Tasks.Task ContinueWhenAll(
             System.Threading.Tasks.Task[] tasks,
             System.Action<System.Threading.Tasks.Task[]> continuationAction
-        ) {
+        )
+        {
             throw null;
         }
         public System.Threading.Tasks.Task ContinueWhenAll(
             System.Threading.Tasks.Task[] tasks,
             System.Action<System.Threading.Tasks.Task[]> continuationAction,
             System.Threading.CancellationToken cancellationToken
-        ) {
+        )
+        {
             throw null;
         }
         public System.Threading.Tasks.Task ContinueWhenAll(
@@ -35620,27 +36642,31 @@ namespace System.Threading.Tasks
             System.Threading.CancellationToken cancellationToken,
             System.Threading.Tasks.TaskContinuationOptions continuationOptions,
             System.Threading.Tasks.TaskScheduler scheduler
-        ) {
+        )
+        {
             throw null;
         }
         public System.Threading.Tasks.Task ContinueWhenAll(
             System.Threading.Tasks.Task[] tasks,
             System.Action<System.Threading.Tasks.Task[]> continuationAction,
             System.Threading.Tasks.TaskContinuationOptions continuationOptions
-        ) {
+        )
+        {
             throw null;
         }
         public System.Threading.Tasks.Task<TResult> ContinueWhenAll<TResult>(
             System.Threading.Tasks.Task[] tasks,
             System.Func<System.Threading.Tasks.Task[], TResult> continuationFunction
-        ) {
+        )
+        {
             throw null;
         }
         public System.Threading.Tasks.Task<TResult> ContinueWhenAll<TResult>(
             System.Threading.Tasks.Task[] tasks,
             System.Func<System.Threading.Tasks.Task[], TResult> continuationFunction,
             System.Threading.CancellationToken cancellationToken
-        ) {
+        )
+        {
             throw null;
         }
         public System.Threading.Tasks.Task<TResult> ContinueWhenAll<TResult>(
@@ -35649,27 +36675,31 @@ namespace System.Threading.Tasks
             System.Threading.CancellationToken cancellationToken,
             System.Threading.Tasks.TaskContinuationOptions continuationOptions,
             System.Threading.Tasks.TaskScheduler scheduler
-        ) {
+        )
+        {
             throw null;
         }
         public System.Threading.Tasks.Task<TResult> ContinueWhenAll<TResult>(
             System.Threading.Tasks.Task[] tasks,
             System.Func<System.Threading.Tasks.Task[], TResult> continuationFunction,
             System.Threading.Tasks.TaskContinuationOptions continuationOptions
-        ) {
+        )
+        {
             throw null;
         }
         public System.Threading.Tasks.Task ContinueWhenAll<TAntecedentResult>(
             System.Threading.Tasks.Task<TAntecedentResult>[] tasks,
             System.Action<System.Threading.Tasks.Task<TAntecedentResult>[]> continuationAction
-        ) {
+        )
+        {
             throw null;
         }
         public System.Threading.Tasks.Task ContinueWhenAll<TAntecedentResult>(
             System.Threading.Tasks.Task<TAntecedentResult>[] tasks,
             System.Action<System.Threading.Tasks.Task<TAntecedentResult>[]> continuationAction,
             System.Threading.CancellationToken cancellationToken
-        ) {
+        )
+        {
             throw null;
         }
         public System.Threading.Tasks.Task ContinueWhenAll<TAntecedentResult>(
@@ -35678,14 +36708,16 @@ namespace System.Threading.Tasks
             System.Threading.CancellationToken cancellationToken,
             System.Threading.Tasks.TaskContinuationOptions continuationOptions,
             System.Threading.Tasks.TaskScheduler scheduler
-        ) {
+        )
+        {
             throw null;
         }
         public System.Threading.Tasks.Task ContinueWhenAll<TAntecedentResult>(
             System.Threading.Tasks.Task<TAntecedentResult>[] tasks,
             System.Action<System.Threading.Tasks.Task<TAntecedentResult>[]> continuationAction,
             System.Threading.Tasks.TaskContinuationOptions continuationOptions
-        ) {
+        )
+        {
             throw null;
         }
         public System.Threading.Tasks.Task<TResult> ContinueWhenAll<TAntecedentResult, TResult>(
@@ -35694,7 +36726,8 @@ namespace System.Threading.Tasks
                 System.Threading.Tasks.Task<TAntecedentResult>[],
                 TResult
             > continuationFunction
-        ) {
+        )
+        {
             throw null;
         }
         public System.Threading.Tasks.Task<TResult> ContinueWhenAll<TAntecedentResult, TResult>(
@@ -35704,7 +36737,8 @@ namespace System.Threading.Tasks
                 TResult
             > continuationFunction,
             System.Threading.CancellationToken cancellationToken
-        ) {
+        )
+        {
             throw null;
         }
         public System.Threading.Tasks.Task<TResult> ContinueWhenAll<TAntecedentResult, TResult>(
@@ -35716,7 +36750,8 @@ namespace System.Threading.Tasks
             System.Threading.CancellationToken cancellationToken,
             System.Threading.Tasks.TaskContinuationOptions continuationOptions,
             System.Threading.Tasks.TaskScheduler scheduler
-        ) {
+        )
+        {
             throw null;
         }
         public System.Threading.Tasks.Task<TResult> ContinueWhenAll<TAntecedentResult, TResult>(
@@ -35726,20 +36761,23 @@ namespace System.Threading.Tasks
                 TResult
             > continuationFunction,
             System.Threading.Tasks.TaskContinuationOptions continuationOptions
-        ) {
+        )
+        {
             throw null;
         }
         public System.Threading.Tasks.Task ContinueWhenAny(
             System.Threading.Tasks.Task[] tasks,
             System.Action<System.Threading.Tasks.Task> continuationAction
-        ) {
+        )
+        {
             throw null;
         }
         public System.Threading.Tasks.Task ContinueWhenAny(
             System.Threading.Tasks.Task[] tasks,
             System.Action<System.Threading.Tasks.Task> continuationAction,
             System.Threading.CancellationToken cancellationToken
-        ) {
+        )
+        {
             throw null;
         }
         public System.Threading.Tasks.Task ContinueWhenAny(
@@ -35748,27 +36786,31 @@ namespace System.Threading.Tasks
             System.Threading.CancellationToken cancellationToken,
             System.Threading.Tasks.TaskContinuationOptions continuationOptions,
             System.Threading.Tasks.TaskScheduler scheduler
-        ) {
+        )
+        {
             throw null;
         }
         public System.Threading.Tasks.Task ContinueWhenAny(
             System.Threading.Tasks.Task[] tasks,
             System.Action<System.Threading.Tasks.Task> continuationAction,
             System.Threading.Tasks.TaskContinuationOptions continuationOptions
-        ) {
+        )
+        {
             throw null;
         }
         public System.Threading.Tasks.Task<TResult> ContinueWhenAny<TResult>(
             System.Threading.Tasks.Task[] tasks,
             System.Func<System.Threading.Tasks.Task, TResult> continuationFunction
-        ) {
+        )
+        {
             throw null;
         }
         public System.Threading.Tasks.Task<TResult> ContinueWhenAny<TResult>(
             System.Threading.Tasks.Task[] tasks,
             System.Func<System.Threading.Tasks.Task, TResult> continuationFunction,
             System.Threading.CancellationToken cancellationToken
-        ) {
+        )
+        {
             throw null;
         }
         public System.Threading.Tasks.Task<TResult> ContinueWhenAny<TResult>(
@@ -35777,27 +36819,31 @@ namespace System.Threading.Tasks
             System.Threading.CancellationToken cancellationToken,
             System.Threading.Tasks.TaskContinuationOptions continuationOptions,
             System.Threading.Tasks.TaskScheduler scheduler
-        ) {
+        )
+        {
             throw null;
         }
         public System.Threading.Tasks.Task<TResult> ContinueWhenAny<TResult>(
             System.Threading.Tasks.Task[] tasks,
             System.Func<System.Threading.Tasks.Task, TResult> continuationFunction,
             System.Threading.Tasks.TaskContinuationOptions continuationOptions
-        ) {
+        )
+        {
             throw null;
         }
         public System.Threading.Tasks.Task ContinueWhenAny<TAntecedentResult>(
             System.Threading.Tasks.Task<TAntecedentResult>[] tasks,
             System.Action<System.Threading.Tasks.Task<TAntecedentResult>> continuationAction
-        ) {
+        )
+        {
             throw null;
         }
         public System.Threading.Tasks.Task ContinueWhenAny<TAntecedentResult>(
             System.Threading.Tasks.Task<TAntecedentResult>[] tasks,
             System.Action<System.Threading.Tasks.Task<TAntecedentResult>> continuationAction,
             System.Threading.CancellationToken cancellationToken
-        ) {
+        )
+        {
             throw null;
         }
         public System.Threading.Tasks.Task ContinueWhenAny<TAntecedentResult>(
@@ -35806,14 +36852,16 @@ namespace System.Threading.Tasks
             System.Threading.CancellationToken cancellationToken,
             System.Threading.Tasks.TaskContinuationOptions continuationOptions,
             System.Threading.Tasks.TaskScheduler scheduler
-        ) {
+        )
+        {
             throw null;
         }
         public System.Threading.Tasks.Task ContinueWhenAny<TAntecedentResult>(
             System.Threading.Tasks.Task<TAntecedentResult>[] tasks,
             System.Action<System.Threading.Tasks.Task<TAntecedentResult>> continuationAction,
             System.Threading.Tasks.TaskContinuationOptions continuationOptions
-        ) {
+        )
+        {
             throw null;
         }
         public System.Threading.Tasks.Task<TResult> ContinueWhenAny<TAntecedentResult, TResult>(
@@ -35822,7 +36870,8 @@ namespace System.Threading.Tasks
                 System.Threading.Tasks.Task<TAntecedentResult>,
                 TResult
             > continuationFunction
-        ) {
+        )
+        {
             throw null;
         }
         public System.Threading.Tasks.Task<TResult> ContinueWhenAny<TAntecedentResult, TResult>(
@@ -35832,7 +36881,8 @@ namespace System.Threading.Tasks
                 TResult
             > continuationFunction,
             System.Threading.CancellationToken cancellationToken
-        ) {
+        )
+        {
             throw null;
         }
         public System.Threading.Tasks.Task<TResult> ContinueWhenAny<TAntecedentResult, TResult>(
@@ -35844,7 +36894,8 @@ namespace System.Threading.Tasks
             System.Threading.CancellationToken cancellationToken,
             System.Threading.Tasks.TaskContinuationOptions continuationOptions,
             System.Threading.Tasks.TaskScheduler scheduler
-        ) {
+        )
+        {
             throw null;
         }
         public System.Threading.Tasks.Task<TResult> ContinueWhenAny<TAntecedentResult, TResult>(
@@ -35854,14 +36905,16 @@ namespace System.Threading.Tasks
                 TResult
             > continuationFunction,
             System.Threading.Tasks.TaskContinuationOptions continuationOptions
-        ) {
+        )
+        {
             throw null;
         }
         public System.Threading.Tasks.Task FromAsync(
             System.Func<System.AsyncCallback, object?, System.IAsyncResult> beginMethod,
             System.Action<System.IAsyncResult> endMethod,
             object? state
-        ) {
+        )
+        {
             throw null;
         }
         public System.Threading.Tasks.Task FromAsync(
@@ -35869,20 +36922,23 @@ namespace System.Threading.Tasks
             System.Action<System.IAsyncResult> endMethod,
             object? state,
             System.Threading.Tasks.TaskCreationOptions creationOptions
-        ) {
+        )
+        {
             throw null;
         }
         public System.Threading.Tasks.Task FromAsync(
             System.IAsyncResult asyncResult,
             System.Action<System.IAsyncResult> endMethod
-        ) {
+        )
+        {
             throw null;
         }
         public System.Threading.Tasks.Task FromAsync(
             System.IAsyncResult asyncResult,
             System.Action<System.IAsyncResult> endMethod,
             System.Threading.Tasks.TaskCreationOptions creationOptions
-        ) {
+        )
+        {
             throw null;
         }
         public System.Threading.Tasks.Task FromAsync(
@@ -35890,14 +36946,16 @@ namespace System.Threading.Tasks
             System.Action<System.IAsyncResult> endMethod,
             System.Threading.Tasks.TaskCreationOptions creationOptions,
             System.Threading.Tasks.TaskScheduler scheduler
-        ) {
+        )
+        {
             throw null;
         }
         public System.Threading.Tasks.Task<TResult> FromAsync<TResult>(
             System.Func<System.AsyncCallback, object?, System.IAsyncResult> beginMethod,
             System.Func<System.IAsyncResult, TResult> endMethod,
             object? state
-        ) {
+        )
+        {
             throw null;
         }
         public System.Threading.Tasks.Task<TResult> FromAsync<TResult>(
@@ -35905,7 +36963,8 @@ namespace System.Threading.Tasks
             System.Func<System.IAsyncResult, TResult> endMethod,
             object? state,
             System.Threading.Tasks.TaskCreationOptions creationOptions
-        ) {
+        )
+        {
             throw null;
         }
         public System.Threading.Tasks.Task FromAsync<TArg1>(
@@ -35913,7 +36972,8 @@ namespace System.Threading.Tasks
             System.Action<System.IAsyncResult> endMethod,
             TArg1 arg1,
             object? state
-        ) {
+        )
+        {
             throw null;
         }
         public System.Threading.Tasks.Task FromAsync<TArg1>(
@@ -35922,20 +36982,23 @@ namespace System.Threading.Tasks
             TArg1 arg1,
             object? state,
             System.Threading.Tasks.TaskCreationOptions creationOptions
-        ) {
+        )
+        {
             throw null;
         }
         public System.Threading.Tasks.Task<TResult> FromAsync<TResult>(
             System.IAsyncResult asyncResult,
             System.Func<System.IAsyncResult, TResult> endMethod
-        ) {
+        )
+        {
             throw null;
         }
         public System.Threading.Tasks.Task<TResult> FromAsync<TResult>(
             System.IAsyncResult asyncResult,
             System.Func<System.IAsyncResult, TResult> endMethod,
             System.Threading.Tasks.TaskCreationOptions creationOptions
-        ) {
+        )
+        {
             throw null;
         }
         public System.Threading.Tasks.Task<TResult> FromAsync<TResult>(
@@ -35943,7 +37006,8 @@ namespace System.Threading.Tasks
             System.Func<System.IAsyncResult, TResult> endMethod,
             System.Threading.Tasks.TaskCreationOptions creationOptions,
             System.Threading.Tasks.TaskScheduler scheduler
-        ) {
+        )
+        {
             throw null;
         }
         public System.Threading.Tasks.Task<TResult> FromAsync<TArg1, TResult>(
@@ -35951,7 +37015,8 @@ namespace System.Threading.Tasks
             System.Func<System.IAsyncResult, TResult> endMethod,
             TArg1 arg1,
             object? state
-        ) {
+        )
+        {
             throw null;
         }
         public System.Threading.Tasks.Task<TResult> FromAsync<TArg1, TResult>(
@@ -35960,7 +37025,8 @@ namespace System.Threading.Tasks
             TArg1 arg1,
             object? state,
             System.Threading.Tasks.TaskCreationOptions creationOptions
-        ) {
+        )
+        {
             throw null;
         }
         public System.Threading.Tasks.Task FromAsync<TArg1, TArg2>(
@@ -35975,7 +37041,8 @@ namespace System.Threading.Tasks
             TArg1 arg1,
             TArg2 arg2,
             object? state
-        ) {
+        )
+        {
             throw null;
         }
         public System.Threading.Tasks.Task FromAsync<TArg1, TArg2>(
@@ -35991,7 +37058,8 @@ namespace System.Threading.Tasks
             TArg2 arg2,
             object? state,
             System.Threading.Tasks.TaskCreationOptions creationOptions
-        ) {
+        )
+        {
             throw null;
         }
         public System.Threading.Tasks.Task<TResult> FromAsync<TArg1, TArg2, TResult>(
@@ -36006,7 +37074,8 @@ namespace System.Threading.Tasks
             TArg1 arg1,
             TArg2 arg2,
             object? state
-        ) {
+        )
+        {
             throw null;
         }
         public System.Threading.Tasks.Task<TResult> FromAsync<TArg1, TArg2, TResult>(
@@ -36022,7 +37091,8 @@ namespace System.Threading.Tasks
             TArg2 arg2,
             object? state,
             System.Threading.Tasks.TaskCreationOptions creationOptions
-        ) {
+        )
+        {
             throw null;
         }
         public System.Threading.Tasks.Task FromAsync<TArg1, TArg2, TArg3>(
@@ -36039,7 +37109,8 @@ namespace System.Threading.Tasks
             TArg2 arg2,
             TArg3 arg3,
             object? state
-        ) {
+        )
+        {
             throw null;
         }
         public System.Threading.Tasks.Task FromAsync<TArg1, TArg2, TArg3>(
@@ -36057,7 +37128,8 @@ namespace System.Threading.Tasks
             TArg3 arg3,
             object? state,
             System.Threading.Tasks.TaskCreationOptions creationOptions
-        ) {
+        )
+        {
             throw null;
         }
         public System.Threading.Tasks.Task<TResult> FromAsync<TArg1, TArg2, TArg3, TResult>(
@@ -36074,7 +37146,8 @@ namespace System.Threading.Tasks
             TArg2 arg2,
             TArg3 arg3,
             object? state
-        ) {
+        )
+        {
             throw null;
         }
         public System.Threading.Tasks.Task<TResult> FromAsync<TArg1, TArg2, TArg3, TResult>(
@@ -36092,7 +37165,8 @@ namespace System.Threading.Tasks
             TArg3 arg3,
             object? state,
             System.Threading.Tasks.TaskCreationOptions creationOptions
-        ) {
+        )
+        {
             throw null;
         }
         public System.Threading.Tasks.Task StartNew(System.Action action)
@@ -36102,7 +37176,8 @@ namespace System.Threading.Tasks
         public System.Threading.Tasks.Task StartNew(
             System.Action action,
             System.Threading.CancellationToken cancellationToken
-        ) {
+        )
+        {
             throw null;
         }
         public System.Threading.Tasks.Task StartNew(
@@ -36110,13 +37185,15 @@ namespace System.Threading.Tasks
             System.Threading.CancellationToken cancellationToken,
             System.Threading.Tasks.TaskCreationOptions creationOptions,
             System.Threading.Tasks.TaskScheduler scheduler
-        ) {
+        )
+        {
             throw null;
         }
         public System.Threading.Tasks.Task StartNew(
             System.Action action,
             System.Threading.Tasks.TaskCreationOptions creationOptions
-        ) {
+        )
+        {
             throw null;
         }
         public System.Threading.Tasks.Task StartNew(System.Action<object?> action, object? state)
@@ -36127,7 +37204,8 @@ namespace System.Threading.Tasks
             System.Action<object?> action,
             object? state,
             System.Threading.CancellationToken cancellationToken
-        ) {
+        )
+        {
             throw null;
         }
         public System.Threading.Tasks.Task StartNew(
@@ -36136,27 +37214,31 @@ namespace System.Threading.Tasks
             System.Threading.CancellationToken cancellationToken,
             System.Threading.Tasks.TaskCreationOptions creationOptions,
             System.Threading.Tasks.TaskScheduler scheduler
-        ) {
+        )
+        {
             throw null;
         }
         public System.Threading.Tasks.Task StartNew(
             System.Action<object?> action,
             object? state,
             System.Threading.Tasks.TaskCreationOptions creationOptions
-        ) {
+        )
+        {
             throw null;
         }
         public System.Threading.Tasks.Task<TResult> StartNew<TResult>(
             System.Func<object?, TResult> function,
             object? state
-        ) {
+        )
+        {
             throw null;
         }
         public System.Threading.Tasks.Task<TResult> StartNew<TResult>(
             System.Func<object?, TResult> function,
             object? state,
             System.Threading.CancellationToken cancellationToken
-        ) {
+        )
+        {
             throw null;
         }
         public System.Threading.Tasks.Task<TResult> StartNew<TResult>(
@@ -36165,14 +37247,16 @@ namespace System.Threading.Tasks
             System.Threading.CancellationToken cancellationToken,
             System.Threading.Tasks.TaskCreationOptions creationOptions,
             System.Threading.Tasks.TaskScheduler scheduler
-        ) {
+        )
+        {
             throw null;
         }
         public System.Threading.Tasks.Task<TResult> StartNew<TResult>(
             System.Func<object?, TResult> function,
             object? state,
             System.Threading.Tasks.TaskCreationOptions creationOptions
-        ) {
+        )
+        {
             throw null;
         }
         public System.Threading.Tasks.Task<TResult> StartNew<TResult>(System.Func<TResult> function)
@@ -36182,7 +37266,8 @@ namespace System.Threading.Tasks
         public System.Threading.Tasks.Task<TResult> StartNew<TResult>(
             System.Func<TResult> function,
             System.Threading.CancellationToken cancellationToken
-        ) {
+        )
+        {
             throw null;
         }
         public System.Threading.Tasks.Task<TResult> StartNew<TResult>(
@@ -36190,13 +37275,15 @@ namespace System.Threading.Tasks
             System.Threading.CancellationToken cancellationToken,
             System.Threading.Tasks.TaskCreationOptions creationOptions,
             System.Threading.Tasks.TaskScheduler scheduler
-        ) {
+        )
+        {
             throw null;
         }
         public System.Threading.Tasks.Task<TResult> StartNew<TResult>(
             System.Func<TResult> function,
             System.Threading.Tasks.TaskCreationOptions creationOptions
-        ) {
+        )
+        {
             throw null;
         }
     }
@@ -36234,14 +37321,16 @@ namespace System.Threading.Tasks
         public System.Threading.Tasks.Task<TResult> ContinueWhenAll(
             System.Threading.Tasks.Task[] tasks,
             System.Func<System.Threading.Tasks.Task[], TResult> continuationFunction
-        ) {
+        )
+        {
             throw null;
         }
         public System.Threading.Tasks.Task<TResult> ContinueWhenAll(
             System.Threading.Tasks.Task[] tasks,
             System.Func<System.Threading.Tasks.Task[], TResult> continuationFunction,
             System.Threading.CancellationToken cancellationToken
-        ) {
+        )
+        {
             throw null;
         }
         public System.Threading.Tasks.Task<TResult> ContinueWhenAll(
@@ -36250,14 +37339,16 @@ namespace System.Threading.Tasks
             System.Threading.CancellationToken cancellationToken,
             System.Threading.Tasks.TaskContinuationOptions continuationOptions,
             System.Threading.Tasks.TaskScheduler scheduler
-        ) {
+        )
+        {
             throw null;
         }
         public System.Threading.Tasks.Task<TResult> ContinueWhenAll(
             System.Threading.Tasks.Task[] tasks,
             System.Func<System.Threading.Tasks.Task[], TResult> continuationFunction,
             System.Threading.Tasks.TaskContinuationOptions continuationOptions
-        ) {
+        )
+        {
             throw null;
         }
         public System.Threading.Tasks.Task<TResult> ContinueWhenAll<TAntecedentResult>(
@@ -36266,7 +37357,8 @@ namespace System.Threading.Tasks
                 System.Threading.Tasks.Task<TAntecedentResult>[],
                 TResult
             > continuationFunction
-        ) {
+        )
+        {
             throw null;
         }
         public System.Threading.Tasks.Task<TResult> ContinueWhenAll<TAntecedentResult>(
@@ -36276,7 +37368,8 @@ namespace System.Threading.Tasks
                 TResult
             > continuationFunction,
             System.Threading.CancellationToken cancellationToken
-        ) {
+        )
+        {
             throw null;
         }
         public System.Threading.Tasks.Task<TResult> ContinueWhenAll<TAntecedentResult>(
@@ -36288,7 +37381,8 @@ namespace System.Threading.Tasks
             System.Threading.CancellationToken cancellationToken,
             System.Threading.Tasks.TaskContinuationOptions continuationOptions,
             System.Threading.Tasks.TaskScheduler scheduler
-        ) {
+        )
+        {
             throw null;
         }
         public System.Threading.Tasks.Task<TResult> ContinueWhenAll<TAntecedentResult>(
@@ -36298,20 +37392,23 @@ namespace System.Threading.Tasks
                 TResult
             > continuationFunction,
             System.Threading.Tasks.TaskContinuationOptions continuationOptions
-        ) {
+        )
+        {
             throw null;
         }
         public System.Threading.Tasks.Task<TResult> ContinueWhenAny(
             System.Threading.Tasks.Task[] tasks,
             System.Func<System.Threading.Tasks.Task, TResult> continuationFunction
-        ) {
+        )
+        {
             throw null;
         }
         public System.Threading.Tasks.Task<TResult> ContinueWhenAny(
             System.Threading.Tasks.Task[] tasks,
             System.Func<System.Threading.Tasks.Task, TResult> continuationFunction,
             System.Threading.CancellationToken cancellationToken
-        ) {
+        )
+        {
             throw null;
         }
         public System.Threading.Tasks.Task<TResult> ContinueWhenAny(
@@ -36320,14 +37417,16 @@ namespace System.Threading.Tasks
             System.Threading.CancellationToken cancellationToken,
             System.Threading.Tasks.TaskContinuationOptions continuationOptions,
             System.Threading.Tasks.TaskScheduler scheduler
-        ) {
+        )
+        {
             throw null;
         }
         public System.Threading.Tasks.Task<TResult> ContinueWhenAny(
             System.Threading.Tasks.Task[] tasks,
             System.Func<System.Threading.Tasks.Task, TResult> continuationFunction,
             System.Threading.Tasks.TaskContinuationOptions continuationOptions
-        ) {
+        )
+        {
             throw null;
         }
         public System.Threading.Tasks.Task<TResult> ContinueWhenAny<TAntecedentResult>(
@@ -36336,7 +37435,8 @@ namespace System.Threading.Tasks
                 System.Threading.Tasks.Task<TAntecedentResult>,
                 TResult
             > continuationFunction
-        ) {
+        )
+        {
             throw null;
         }
         public System.Threading.Tasks.Task<TResult> ContinueWhenAny<TAntecedentResult>(
@@ -36346,7 +37446,8 @@ namespace System.Threading.Tasks
                 TResult
             > continuationFunction,
             System.Threading.CancellationToken cancellationToken
-        ) {
+        )
+        {
             throw null;
         }
         public System.Threading.Tasks.Task<TResult> ContinueWhenAny<TAntecedentResult>(
@@ -36358,7 +37459,8 @@ namespace System.Threading.Tasks
             System.Threading.CancellationToken cancellationToken,
             System.Threading.Tasks.TaskContinuationOptions continuationOptions,
             System.Threading.Tasks.TaskScheduler scheduler
-        ) {
+        )
+        {
             throw null;
         }
         public System.Threading.Tasks.Task<TResult> ContinueWhenAny<TAntecedentResult>(
@@ -36368,14 +37470,16 @@ namespace System.Threading.Tasks
                 TResult
             > continuationFunction,
             System.Threading.Tasks.TaskContinuationOptions continuationOptions
-        ) {
+        )
+        {
             throw null;
         }
         public System.Threading.Tasks.Task<TResult> FromAsync(
             System.Func<System.AsyncCallback, object?, System.IAsyncResult> beginMethod,
             System.Func<System.IAsyncResult, TResult> endMethod,
             object? state
-        ) {
+        )
+        {
             throw null;
         }
         public System.Threading.Tasks.Task<TResult> FromAsync(
@@ -36383,20 +37487,23 @@ namespace System.Threading.Tasks
             System.Func<System.IAsyncResult, TResult> endMethod,
             object? state,
             System.Threading.Tasks.TaskCreationOptions creationOptions
-        ) {
+        )
+        {
             throw null;
         }
         public System.Threading.Tasks.Task<TResult> FromAsync(
             System.IAsyncResult asyncResult,
             System.Func<System.IAsyncResult, TResult> endMethod
-        ) {
+        )
+        {
             throw null;
         }
         public System.Threading.Tasks.Task<TResult> FromAsync(
             System.IAsyncResult asyncResult,
             System.Func<System.IAsyncResult, TResult> endMethod,
             System.Threading.Tasks.TaskCreationOptions creationOptions
-        ) {
+        )
+        {
             throw null;
         }
         public System.Threading.Tasks.Task<TResult> FromAsync(
@@ -36404,7 +37511,8 @@ namespace System.Threading.Tasks
             System.Func<System.IAsyncResult, TResult> endMethod,
             System.Threading.Tasks.TaskCreationOptions creationOptions,
             System.Threading.Tasks.TaskScheduler scheduler
-        ) {
+        )
+        {
             throw null;
         }
         public System.Threading.Tasks.Task<TResult> FromAsync<TArg1>(
@@ -36412,7 +37520,8 @@ namespace System.Threading.Tasks
             System.Func<System.IAsyncResult, TResult> endMethod,
             TArg1 arg1,
             object? state
-        ) {
+        )
+        {
             throw null;
         }
         public System.Threading.Tasks.Task<TResult> FromAsync<TArg1>(
@@ -36421,7 +37530,8 @@ namespace System.Threading.Tasks
             TArg1 arg1,
             object? state,
             System.Threading.Tasks.TaskCreationOptions creationOptions
-        ) {
+        )
+        {
             throw null;
         }
         public System.Threading.Tasks.Task<TResult> FromAsync<TArg1, TArg2>(
@@ -36436,7 +37546,8 @@ namespace System.Threading.Tasks
             TArg1 arg1,
             TArg2 arg2,
             object? state
-        ) {
+        )
+        {
             throw null;
         }
         public System.Threading.Tasks.Task<TResult> FromAsync<TArg1, TArg2>(
@@ -36452,7 +37563,8 @@ namespace System.Threading.Tasks
             TArg2 arg2,
             object? state,
             System.Threading.Tasks.TaskCreationOptions creationOptions
-        ) {
+        )
+        {
             throw null;
         }
         public System.Threading.Tasks.Task<TResult> FromAsync<TArg1, TArg2, TArg3>(
@@ -36469,7 +37581,8 @@ namespace System.Threading.Tasks
             TArg2 arg2,
             TArg3 arg3,
             object? state
-        ) {
+        )
+        {
             throw null;
         }
         public System.Threading.Tasks.Task<TResult> FromAsync<TArg1, TArg2, TArg3>(
@@ -36487,20 +37600,23 @@ namespace System.Threading.Tasks
             TArg3 arg3,
             object? state,
             System.Threading.Tasks.TaskCreationOptions creationOptions
-        ) {
+        )
+        {
             throw null;
         }
         public System.Threading.Tasks.Task<TResult> StartNew(
             System.Func<object?, TResult> function,
             object? state
-        ) {
+        )
+        {
             throw null;
         }
         public System.Threading.Tasks.Task<TResult> StartNew(
             System.Func<object?, TResult> function,
             object? state,
             System.Threading.CancellationToken cancellationToken
-        ) {
+        )
+        {
             throw null;
         }
         public System.Threading.Tasks.Task<TResult> StartNew(
@@ -36509,14 +37625,16 @@ namespace System.Threading.Tasks
             System.Threading.CancellationToken cancellationToken,
             System.Threading.Tasks.TaskCreationOptions creationOptions,
             System.Threading.Tasks.TaskScheduler scheduler
-        ) {
+        )
+        {
             throw null;
         }
         public System.Threading.Tasks.Task<TResult> StartNew(
             System.Func<object?, TResult> function,
             object? state,
             System.Threading.Tasks.TaskCreationOptions creationOptions
-        ) {
+        )
+        {
             throw null;
         }
         public System.Threading.Tasks.Task<TResult> StartNew(System.Func<TResult> function)
@@ -36526,7 +37644,8 @@ namespace System.Threading.Tasks
         public System.Threading.Tasks.Task<TResult> StartNew(
             System.Func<TResult> function,
             System.Threading.CancellationToken cancellationToken
-        ) {
+        )
+        {
             throw null;
         }
         public System.Threading.Tasks.Task<TResult> StartNew(
@@ -36534,13 +37653,15 @@ namespace System.Threading.Tasks
             System.Threading.CancellationToken cancellationToken,
             System.Threading.Tasks.TaskCreationOptions creationOptions,
             System.Threading.Tasks.TaskScheduler scheduler
-        ) {
+        )
+        {
             throw null;
         }
         public System.Threading.Tasks.Task<TResult> StartNew(
             System.Func<TResult> function,
             System.Threading.Tasks.TaskCreationOptions creationOptions
-        ) {
+        )
+        {
             throw null;
         }
     }
@@ -36653,20 +37774,23 @@ namespace System.Threading.Tasks
         }
         public new System.Runtime.CompilerServices.ConfiguredTaskAwaitable<TResult> ConfigureAwait(
             bool continueOnCapturedContext
-        ) {
+        )
+        {
             throw null;
         }
         public System.Threading.Tasks.Task ContinueWith(
             System.Action<System.Threading.Tasks.Task<TResult>, object?> continuationAction,
             object? state
-        ) {
+        )
+        {
             throw null;
         }
         public System.Threading.Tasks.Task ContinueWith(
             System.Action<System.Threading.Tasks.Task<TResult>, object?> continuationAction,
             object? state,
             System.Threading.CancellationToken cancellationToken
-        ) {
+        )
+        {
             throw null;
         }
         public System.Threading.Tasks.Task ContinueWith(
@@ -36675,32 +37799,37 @@ namespace System.Threading.Tasks
             System.Threading.CancellationToken cancellationToken,
             System.Threading.Tasks.TaskContinuationOptions continuationOptions,
             System.Threading.Tasks.TaskScheduler scheduler
-        ) {
+        )
+        {
             throw null;
         }
         public System.Threading.Tasks.Task ContinueWith(
             System.Action<System.Threading.Tasks.Task<TResult>, object?> continuationAction,
             object? state,
             System.Threading.Tasks.TaskContinuationOptions continuationOptions
-        ) {
+        )
+        {
             throw null;
         }
         public System.Threading.Tasks.Task ContinueWith(
             System.Action<System.Threading.Tasks.Task<TResult>, object?> continuationAction,
             object? state,
             System.Threading.Tasks.TaskScheduler scheduler
-        ) {
+        )
+        {
             throw null;
         }
         public System.Threading.Tasks.Task ContinueWith(
             System.Action<System.Threading.Tasks.Task<TResult>> continuationAction
-        ) {
+        )
+        {
             throw null;
         }
         public System.Threading.Tasks.Task ContinueWith(
             System.Action<System.Threading.Tasks.Task<TResult>> continuationAction,
             System.Threading.CancellationToken cancellationToken
-        ) {
+        )
+        {
             throw null;
         }
         public System.Threading.Tasks.Task ContinueWith(
@@ -36708,19 +37837,22 @@ namespace System.Threading.Tasks
             System.Threading.CancellationToken cancellationToken,
             System.Threading.Tasks.TaskContinuationOptions continuationOptions,
             System.Threading.Tasks.TaskScheduler scheduler
-        ) {
+        )
+        {
             throw null;
         }
         public System.Threading.Tasks.Task ContinueWith(
             System.Action<System.Threading.Tasks.Task<TResult>> continuationAction,
             System.Threading.Tasks.TaskContinuationOptions continuationOptions
-        ) {
+        )
+        {
             throw null;
         }
         public System.Threading.Tasks.Task ContinueWith(
             System.Action<System.Threading.Tasks.Task<TResult>> continuationAction,
             System.Threading.Tasks.TaskScheduler scheduler
-        ) {
+        )
+        {
             throw null;
         }
         public System.Threading.Tasks.Task<TNewResult> ContinueWith<TNewResult>(
@@ -36730,7 +37862,8 @@ namespace System.Threading.Tasks
                 TNewResult
             > continuationFunction,
             object? state
-        ) {
+        )
+        {
             throw null;
         }
         public System.Threading.Tasks.Task<TNewResult> ContinueWith<TNewResult>(
@@ -36741,7 +37874,8 @@ namespace System.Threading.Tasks
             > continuationFunction,
             object? state,
             System.Threading.CancellationToken cancellationToken
-        ) {
+        )
+        {
             throw null;
         }
         public System.Threading.Tasks.Task<TNewResult> ContinueWith<TNewResult>(
@@ -36754,7 +37888,8 @@ namespace System.Threading.Tasks
             System.Threading.CancellationToken cancellationToken,
             System.Threading.Tasks.TaskContinuationOptions continuationOptions,
             System.Threading.Tasks.TaskScheduler scheduler
-        ) {
+        )
+        {
             throw null;
         }
         public System.Threading.Tasks.Task<TNewResult> ContinueWith<TNewResult>(
@@ -36765,7 +37900,8 @@ namespace System.Threading.Tasks
             > continuationFunction,
             object? state,
             System.Threading.Tasks.TaskContinuationOptions continuationOptions
-        ) {
+        )
+        {
             throw null;
         }
         public System.Threading.Tasks.Task<TNewResult> ContinueWith<TNewResult>(
@@ -36776,18 +37912,21 @@ namespace System.Threading.Tasks
             > continuationFunction,
             object? state,
             System.Threading.Tasks.TaskScheduler scheduler
-        ) {
+        )
+        {
             throw null;
         }
         public System.Threading.Tasks.Task<TNewResult> ContinueWith<TNewResult>(
             System.Func<System.Threading.Tasks.Task<TResult>, TNewResult> continuationFunction
-        ) {
+        )
+        {
             throw null;
         }
         public System.Threading.Tasks.Task<TNewResult> ContinueWith<TNewResult>(
             System.Func<System.Threading.Tasks.Task<TResult>, TNewResult> continuationFunction,
             System.Threading.CancellationToken cancellationToken
-        ) {
+        )
+        {
             throw null;
         }
         public System.Threading.Tasks.Task<TNewResult> ContinueWith<TNewResult>(
@@ -36795,19 +37934,22 @@ namespace System.Threading.Tasks
             System.Threading.CancellationToken cancellationToken,
             System.Threading.Tasks.TaskContinuationOptions continuationOptions,
             System.Threading.Tasks.TaskScheduler scheduler
-        ) {
+        )
+        {
             throw null;
         }
         public System.Threading.Tasks.Task<TNewResult> ContinueWith<TNewResult>(
             System.Func<System.Threading.Tasks.Task<TResult>, TNewResult> continuationFunction,
             System.Threading.Tasks.TaskContinuationOptions continuationOptions
-        ) {
+        )
+        {
             throw null;
         }
         public System.Threading.Tasks.Task<TNewResult> ContinueWith<TNewResult>(
             System.Func<System.Threading.Tasks.Task<TResult>, TNewResult> continuationFunction,
             System.Threading.Tasks.TaskScheduler scheduler
-        ) {
+        )
+        {
             throw null;
         }
         public new System.Runtime.CompilerServices.TaskAwaiter<TResult> GetAwaiter()
@@ -36820,13 +37962,15 @@ namespace System.Threading.Tasks
         }
         public new System.Threading.Tasks.Task<TResult> WaitAsync(
             System.Threading.CancellationToken cancellationToken
-        ) {
+        )
+        {
             throw null;
         }
         public new System.Threading.Tasks.Task<TResult> WaitAsync(
             System.TimeSpan timeout,
             System.Threading.CancellationToken cancellationToken
-        ) {
+        )
+        {
             throw null;
         }
     }
@@ -36884,12 +38028,14 @@ namespace System.Threading.Tasks
         }
         public System.Runtime.CompilerServices.ConfiguredValueTaskAwaitable ConfigureAwait(
             bool continueOnCapturedContext
-        ) {
+        )
+        {
             throw null;
         }
         public override bool Equals(
             [System.Diagnostics.CodeAnalysis.NotNullWhenAttribute(true)] object? obj
-        ) {
+        )
+        {
             throw null;
         }
         public bool Equals(System.Threading.Tasks.ValueTask other)
@@ -36898,12 +38044,14 @@ namespace System.Threading.Tasks
         }
         public static System.Threading.Tasks.ValueTask FromCanceled(
             System.Threading.CancellationToken cancellationToken
-        ) {
+        )
+        {
             throw null;
         }
         public static System.Threading.Tasks.ValueTask<TResult> FromCanceled<TResult>(
             System.Threading.CancellationToken cancellationToken
-        ) {
+        )
+        {
             throw null;
         }
         public static System.Threading.Tasks.ValueTask FromException(System.Exception exception)
@@ -36912,7 +38060,8 @@ namespace System.Threading.Tasks
         }
         public static System.Threading.Tasks.ValueTask<TResult> FromException<TResult>(
             System.Exception exception
-        ) {
+        )
+        {
             throw null;
         }
         public static System.Threading.Tasks.ValueTask<TResult> FromResult<TResult>(TResult result)
@@ -36930,13 +38079,15 @@ namespace System.Threading.Tasks
         public static bool operator ==(
             System.Threading.Tasks.ValueTask left,
             System.Threading.Tasks.ValueTask right
-        ) {
+        )
+        {
             throw null;
         }
         public static bool operator !=(
             System.Threading.Tasks.ValueTask left,
             System.Threading.Tasks.ValueTask right
-        ) {
+        )
+        {
             throw null;
         }
         public System.Threading.Tasks.ValueTask Preserve()
@@ -36956,7 +38107,8 @@ namespace System.Threading.Tasks
         public ValueTask(
             System.Threading.Tasks.Sources.IValueTaskSource<TResult> source,
             short token
-        ) {
+        )
+        {
             throw null;
         }
         public ValueTask(System.Threading.Tasks.Task<TResult> task)
@@ -36993,12 +38145,14 @@ namespace System.Threading.Tasks
         }
         public System.Runtime.CompilerServices.ConfiguredValueTaskAwaitable<TResult> ConfigureAwait(
             bool continueOnCapturedContext
-        ) {
+        )
+        {
             throw null;
         }
         public override bool Equals(
             [System.Diagnostics.CodeAnalysis.NotNullWhenAttribute(true)] object? obj
-        ) {
+        )
+        {
             throw null;
         }
         public bool Equals(System.Threading.Tasks.ValueTask<TResult> other)
@@ -37016,13 +38170,15 @@ namespace System.Threading.Tasks
         public static bool operator ==(
             System.Threading.Tasks.ValueTask<TResult> left,
             System.Threading.Tasks.ValueTask<TResult> right
-        ) {
+        )
+        {
             throw null;
         }
         public static bool operator !=(
             System.Threading.Tasks.ValueTask<TResult> left,
             System.Threading.Tasks.ValueTask<TResult> right
-        ) {
+        )
+        {
             throw null;
         }
         public System.Threading.Tasks.ValueTask<TResult> Preserve()

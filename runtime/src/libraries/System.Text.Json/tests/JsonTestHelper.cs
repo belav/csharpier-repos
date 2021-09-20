@@ -139,7 +139,8 @@ namespace System.Text.Json
             out int length,
             JsonCommentHandling commentHandling = JsonCommentHandling.Disallow,
             int maxDepth = 64
-        ) {
+        )
+        {
             var state = new JsonReaderState(
                 new JsonReaderOptions { CommentHandling = commentHandling, MaxDepth = maxDepth }
             );
@@ -152,7 +153,8 @@ namespace System.Text.Json
             out int length,
             JsonCommentHandling commentHandling = JsonCommentHandling.Disallow,
             int maxDepth = 64
-        ) {
+        )
+        {
             ReadOnlySequence<byte> sequence = CreateSegments(data);
             var state = new JsonReaderState(
                 new JsonReaderOptions { CommentHandling = commentHandling, MaxDepth = maxDepth }
@@ -189,7 +191,8 @@ namespace System.Text.Json
             byte[] data,
             int firstSplit,
             int secondSplit
-        ) {
+        )
+        {
             Debug.Assert(
                 firstSplit <= data.Length && secondSplit <= data.Length && firstSplit <= secondSplit
             );
@@ -256,7 +259,8 @@ namespace System.Text.Json
         internal static ReadOnlySequence<byte> SegmentInto(
             ReadOnlyMemory<byte> data,
             int segmentCount
-        ) {
+        )
+        {
             if (segmentCount < 2)
                 throw new ArgumentOutOfRangeException(nameof(segmentCount));
 
@@ -292,7 +296,8 @@ namespace System.Text.Json
         public static object ReturnObjectHelper(
             byte[] data,
             JsonCommentHandling commentHandling = JsonCommentHandling.Disallow
-        ) {
+        )
+        {
             var state = new JsonReaderState(
                 options: new JsonReaderOptions { CommentHandling = commentHandling }
             );
@@ -451,7 +456,8 @@ namespace System.Text.Json
                             && tokenType != JsonTokenType.PropertyName
                         )
                         || json.GetString().Length != 0
-                    ) {
+                    )
+                    {
                         // Empty strings could still make this true, i.e. ""
                         Assert.False(json.ValueSequence.IsEmpty);
                     }
@@ -465,7 +471,8 @@ namespace System.Text.Json
                             && tokenType != JsonTokenType.PropertyName
                         )
                         || json.GetString().Length != 0
-                    ) {
+                    )
+                    {
                         // Empty strings could still make this true, i.e. ""
                         Assert.False(json.ValueSpan == default);
                     }
@@ -768,7 +775,8 @@ namespace System.Text.Json
             string expectedValue,
             ArrayBufferWriter<byte> buffer,
             bool skipSpecialRules = false
-        ) {
+        )
+        {
             string value = Encoding.UTF8.GetString(
                 buffer.WrittenSpan
 #if NETFRAMEWORK
@@ -783,7 +791,8 @@ namespace System.Text.Json
             string expectedValue,
             MemoryStream stream,
             bool skipSpecialRules = false
-        ) {
+        )
+        {
             string value = Encoding.UTF8.GetString(stream.ToArray());
 
             AssertContentsAgainstJsonNet(expectedValue, value, skipSpecialRules);
@@ -793,7 +802,8 @@ namespace System.Text.Json
             string expectedValue,
             ArrayBufferWriter<byte> buffer,
             bool skipSpecialRules = false
-        ) {
+        )
+        {
             string value = Encoding.UTF8.GetString(
                 buffer.WrittenSpan
 #if NETFRAMEWORK
@@ -808,7 +818,8 @@ namespace System.Text.Json
             string expectedValue,
             string value,
             bool skipSpecialRules
-        ) {
+        )
+        {
             Assert.Equal(
                 expectedValue.NormalizeToJsonNetFormat(skipSpecialRules),
                 value.NormalizeToJsonNetFormat(skipSpecialRules)
@@ -819,7 +830,8 @@ namespace System.Text.Json
             string expectedValue,
             string value,
             bool skipSpecialRules
-        ) {
+        )
+        {
             Assert.NotEqual(
                 expectedValue.NormalizeToJsonNetFormat(skipSpecialRules),
                 value.NormalizeToJsonNetFormat(skipSpecialRules)

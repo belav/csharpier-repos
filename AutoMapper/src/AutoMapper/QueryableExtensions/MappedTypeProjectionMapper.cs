@@ -21,7 +21,8 @@ namespace AutoMapper.QueryableExtensions.Impl
             in ProjectionRequest request,
             Expression resolvedSource,
             LetPropertyMaps letPropertyMaps
-        ) {
+        )
+        {
             var transformedExpression = configuration.ProjectionBuilder.CreateInnerProjection(
                 request,
                 resolvedSource,
@@ -36,7 +37,8 @@ namespace AutoMapper.QueryableExtensions.Impl
                 memberMap.AllowsNullDestinationValues()
                 && resolvedSource is not ParameterExpression
                 && !resolvedSource.Type.IsCollection()
-            ) {
+            )
+            {
                 transformedExpression = resolvedSource.IfNullElse(
                     Constant(null, transformedExpression.Type),
                     transformedExpression

@@ -339,7 +339,8 @@ namespace System.Net.Sockets
                 SocketAsyncContext context,
                 string message,
                 [CallerMemberName] string? memberName = null
-            ) {
+            )
+            {
                 OutputTrace($"{IdOf(context)}, {IdOf(this)}.{memberName}: {message}");
             }
         }
@@ -962,7 +963,8 @@ namespace System.Net.Sockets
                 TOperation operation,
                 int observedSequenceNumber,
                 CancellationToken cancellationToken = default
-            ) {
+            )
+            {
                 Trace(context, $"Enter");
 
                 if (!context.IsRegistered && !context.TryRegister(out Interop.Error error))
@@ -1063,7 +1065,8 @@ namespace System.Net.Sockets
                     SocketAsyncContext context,
                     TOperation operation,
                     Interop.Error error
-                ) {
+                )
+                {
                     Debug.Assert(error != Interop.Error.SUCCESS);
 
                     // macOS: kevent returns EPIPE when adding pipe fd for which the other end is closed.
@@ -1091,7 +1094,8 @@ namespace System.Net.Sockets
             public AsyncOperation? ProcessSyncEventOrGetAsyncEvent(
                 SocketAsyncContext context,
                 bool skipAsyncEvents = false
-            ) {
+            )
+            {
                 AsyncOperation op;
                 using (Lock())
                 {
@@ -1431,7 +1435,8 @@ namespace System.Net.Sockets
                 SocketAsyncContext context,
                 string message,
                 [CallerMemberName] string? memberName = null
-            ) {
+            )
+            {
                 string queueType =
                     typeof(TOperation) == typeof(ReadOperation)
                         ? "recv"
@@ -1487,7 +1492,8 @@ namespace System.Net.Sockets
                                 out SocketAsyncEngine? engine,
                                 out error
                             )
-                        ) {
+                        )
+                        {
                             Volatile.Write(ref _asyncEngine, engine);
 
                             Trace("Registered");
@@ -1594,7 +1600,8 @@ namespace System.Net.Sockets
                     if (
                         result == OperationQueue<TOperation>.OperationResult.Completed
                         || result == OperationQueue<TOperation>.OperationResult.Cancelled
-                    ) {
+                    )
+                    {
                         break;
                     }
 
@@ -1643,7 +1650,8 @@ namespace System.Net.Sockets
             byte[] socketAddress,
             ref int socketAddressLen,
             out IntPtr acceptedFd
-        ) {
+        )
+        {
             Debug.Assert(socketAddress != null, "Expected non-null socketAddress");
             Debug.Assert(socketAddressLen > 0, $"Unexpected socketAddressLen: {socketAddressLen}");
 
@@ -1658,7 +1666,8 @@ namespace System.Net.Sockets
                     out acceptedFd,
                     out errorCode
                 )
-            ) {
+            )
+            {
                 Debug.Assert(
                     errorCode == SocketError.Success || acceptedFd == (IntPtr)(-1),
                     $"Unexpected values: errorCode={errorCode}, acceptedFd={acceptedFd}"
@@ -1684,7 +1693,8 @@ namespace System.Net.Sockets
             ref int socketAddressLen,
             out IntPtr acceptedFd,
             Action<IntPtr, byte[], int, SocketError> callback
-        ) {
+        )
+        {
             Debug.Assert(socketAddress != null, "Expected non-null socketAddress");
             Debug.Assert(socketAddressLen > 0, $"Unexpected socketAddressLen: {socketAddressLen}");
             Debug.Assert(callback != null, "Expected non-null callback");
@@ -1702,7 +1712,8 @@ namespace System.Net.Sockets
                     out acceptedFd,
                     out errorCode
                 )
-            ) {
+            )
+            {
                 Debug.Assert(
                     errorCode == SocketError.Success || acceptedFd == (IntPtr)(-1),
                     $"Unexpected values: errorCode={errorCode}, acceptedFd={acceptedFd}"
@@ -1745,7 +1756,8 @@ namespace System.Net.Sockets
             if (
                 SocketPal.TryStartConnect(_socket, socketAddress, socketAddressLen, out errorCode)
                 || !ShouldRetrySyncOperation(out errorCode)
-            ) {
+            )
+            {
                 _socket.RegisterConnectResult(errorCode);
                 return errorCode;
             }
@@ -1765,7 +1777,8 @@ namespace System.Net.Sockets
             byte[] socketAddress,
             int socketAddressLen,
             Action<SocketError> callback
-        ) {
+        )
+        {
             Debug.Assert(socketAddress != null, "Expected non-null socketAddress");
             Debug.Assert(socketAddressLen > 0, $"Unexpected socketAddressLen: {socketAddressLen}");
             Debug.Assert(callback != null, "Expected non-null callback");
@@ -1804,7 +1817,8 @@ namespace System.Net.Sockets
             SocketFlags flags,
             int timeout,
             out int bytesReceived
-        ) {
+        )
+        {
             int socketAddressLen = 0;
             return ReceiveFrom(
                 buffer,
@@ -1821,7 +1835,8 @@ namespace System.Net.Sockets
             SocketFlags flags,
             int timeout,
             out int bytesReceived
-        ) {
+        )
+        {
             int socketAddressLen = 0;
             return ReceiveFrom(
                 buffer,
@@ -1840,7 +1855,8 @@ namespace System.Net.Sockets
             out SocketFlags receivedFlags,
             Action<int, byte[]?, int, SocketFlags, SocketError> callback,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             int socketAddressLen = 0;
             return ReceiveFromAsync(
                 buffer,
@@ -1861,7 +1877,8 @@ namespace System.Net.Sockets
             ref int socketAddressLen,
             int timeout,
             out int bytesReceived
-        ) {
+        )
+        {
             Debug.Assert(timeout == -1 || timeout > 0, $"Unexpected timeout: {timeout}");
 
             SocketFlags receivedFlags;
@@ -1881,7 +1898,8 @@ namespace System.Net.Sockets
                         out errorCode
                     ) || !ShouldRetrySyncOperation(out errorCode)
                 )
-            ) {
+            )
+            {
                 flags = receivedFlags;
                 return errorCode;
             }
@@ -1909,7 +1927,8 @@ namespace System.Net.Sockets
             ref int socketAddressLen,
             int timeout,
             out int bytesReceived
-        ) {
+        )
+        {
             SocketFlags receivedFlags;
             SocketError errorCode;
             int observedSequenceNumber;
@@ -1927,7 +1946,8 @@ namespace System.Net.Sockets
                         out errorCode
                     ) || !ShouldRetrySyncOperation(out errorCode)
                 )
-            ) {
+            )
+            {
                 flags = receivedFlags;
                 return errorCode;
             }
@@ -1957,7 +1977,8 @@ namespace System.Net.Sockets
             out int bytesReceived,
             Action<int, byte[]?, int, SocketFlags, SocketError> callback,
             CancellationToken cancellationToken = default
-        ) {
+        )
+        {
             SetHandleNonBlocking();
 
             SocketError errorCode;
@@ -1971,7 +1992,8 @@ namespace System.Net.Sockets
                     out bytesReceived,
                     out errorCode
                 )
-            ) {
+            )
+            {
                 return errorCode;
             }
 
@@ -1990,7 +2012,8 @@ namespace System.Net.Sockets
                     observedSequenceNumber,
                     cancellationToken
                 )
-            ) {
+            )
+            {
                 bytesReceived = operation.BytesTransferred;
                 errorCode = operation.ErrorCode;
 
@@ -2011,7 +2034,8 @@ namespace System.Net.Sockets
             out SocketFlags receivedFlags,
             Action<int, byte[]?, int, SocketFlags, SocketError> callback,
             CancellationToken cancellationToken = default
-        ) {
+        )
+        {
             SetHandleNonBlocking();
 
             SocketError errorCode;
@@ -2028,7 +2052,8 @@ namespace System.Net.Sockets
                     out receivedFlags,
                     out errorCode
                 )
-            ) {
+            )
+            {
                 return errorCode;
             }
 
@@ -2047,7 +2072,8 @@ namespace System.Net.Sockets
                     observedSequenceNumber,
                     cancellationToken
                 )
-            ) {
+            )
+            {
                 receivedFlags = operation.ReceivedFlags;
                 bytesReceived = operation.BytesTransferred;
                 errorCode = operation.ErrorCode;
@@ -2066,7 +2092,8 @@ namespace System.Net.Sockets
             SocketFlags flags,
             int timeout,
             out int bytesReceived
-        ) {
+        )
+        {
             return ReceiveFrom(buffers, ref flags, null, 0, timeout, out bytesReceived);
         }
 
@@ -2076,7 +2103,8 @@ namespace System.Net.Sockets
             out int bytesReceived,
             out SocketFlags receivedFlags,
             Action<int, byte[]?, int, SocketFlags, SocketError> callback
-        ) {
+        )
+        {
             int socketAddressLen = 0;
             return ReceiveFromAsync(
                 buffers,
@@ -2096,7 +2124,8 @@ namespace System.Net.Sockets
             int socketAddressLen,
             int timeout,
             out int bytesReceived
-        ) {
+        )
+        {
             Debug.Assert(timeout == -1 || timeout > 0, $"Unexpected timeout: {timeout}");
 
             SocketFlags receivedFlags;
@@ -2116,7 +2145,8 @@ namespace System.Net.Sockets
                         out errorCode
                     ) || !ShouldRetrySyncOperation(out errorCode)
                 )
-            ) {
+            )
+            {
                 flags = receivedFlags;
                 return errorCode;
             }
@@ -2145,7 +2175,8 @@ namespace System.Net.Sockets
             out int bytesReceived,
             out SocketFlags receivedFlags,
             Action<int, byte[]?, int, SocketFlags, SocketError> callback
-        ) {
+        )
+        {
             SetHandleNonBlocking();
 
             SocketError errorCode;
@@ -2162,7 +2193,8 @@ namespace System.Net.Sockets
                     out receivedFlags,
                     out errorCode
                 )
-            ) {
+            )
+            {
                 // Synchronous success or failure
                 return errorCode;
             }
@@ -2200,7 +2232,8 @@ namespace System.Net.Sockets
             int timeout,
             out IPPacketInformation ipPacketInformation,
             out int bytesReceived
-        ) {
+        )
+        {
             Debug.Assert(timeout == -1 || timeout > 0, $"Unexpected timeout: {timeout}");
 
             SocketFlags receivedFlags;
@@ -2224,7 +2257,8 @@ namespace System.Net.Sockets
                         out errorCode
                     ) || !ShouldRetrySyncOperation(out errorCode)
                 )
-            ) {
+            )
+            {
                 flags = receivedFlags;
                 return errorCode;
             }
@@ -2259,7 +2293,8 @@ namespace System.Net.Sockets
             int timeout,
             out IPPacketInformation ipPacketInformation,
             out int bytesReceived
-        ) {
+        )
+        {
             Debug.Assert(timeout == -1 || timeout > 0, $"Unexpected timeout: {timeout}");
 
             SocketFlags receivedFlags;
@@ -2283,7 +2318,8 @@ namespace System.Net.Sockets
                         out errorCode
                     ) || !ShouldRetrySyncOperation(out errorCode)
                 )
-            ) {
+            )
+            {
                 flags = receivedFlags;
                 return errorCode;
             }
@@ -2324,7 +2360,8 @@ namespace System.Net.Sockets
             out IPPacketInformation ipPacketInformation,
             Action<int, byte[], int, SocketFlags, IPPacketInformation, SocketError> callback,
             CancellationToken cancellationToken = default
-        ) {
+        )
+        {
             SetHandleNonBlocking();
 
             SocketError errorCode;
@@ -2345,7 +2382,8 @@ namespace System.Net.Sockets
                     out ipPacketInformation,
                     out errorCode
                 )
-            ) {
+            )
+            {
                 return errorCode;
             }
 
@@ -2368,7 +2406,8 @@ namespace System.Net.Sockets
                     observedSequenceNumber,
                     cancellationToken
                 )
-            ) {
+            )
+            {
                 socketAddressLen = operation.SocketAddressLen;
                 receivedFlags = operation.ReceivedFlags;
                 ipPacketInformation = operation.IPPacketInformation;
@@ -2396,7 +2435,8 @@ namespace System.Net.Sockets
             SocketFlags flags,
             int timeout,
             out int bytesSent
-        ) {
+        )
+        {
             return SendTo(buffer, offset, count, flags, null, 0, timeout, out bytesSent);
         }
 
@@ -2408,7 +2448,8 @@ namespace System.Net.Sockets
             out int bytesSent,
             Action<int, byte[]?, int, SocketFlags, SocketError> callback,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             int socketAddressLen = 0;
             return SendToAsync(
                 buffer,
@@ -2432,7 +2473,8 @@ namespace System.Net.Sockets
             int socketAddressLen,
             int timeout,
             out int bytesSent
-        ) {
+        )
+        {
             Debug.Assert(timeout == -1 || timeout > 0, $"Unexpected timeout: {timeout}");
 
             bytesSent = 0;
@@ -2453,7 +2495,8 @@ namespace System.Net.Sockets
                         out errorCode
                     ) || !ShouldRetrySyncOperation(out errorCode)
                 )
-            ) {
+            )
+            {
                 return errorCode;
             }
 
@@ -2481,7 +2524,8 @@ namespace System.Net.Sockets
             int socketAddressLen,
             int timeout,
             out int bytesSent
-        ) {
+        )
+        {
             Debug.Assert(timeout == -1 || timeout > 0, $"Unexpected timeout: {timeout}");
 
             bytesSent = 0;
@@ -2507,7 +2551,8 @@ namespace System.Net.Sockets
                         out errorCode
                     ) || !ShouldRetrySyncOperation(out errorCode)
                 )
-            ) {
+            )
+            {
                 return errorCode;
             }
 
@@ -2541,7 +2586,8 @@ namespace System.Net.Sockets
             out int bytesSent,
             Action<int, byte[]?, int, SocketFlags, SocketError> callback,
             CancellationToken cancellationToken = default
-        ) {
+        )
+        {
             SetHandleNonBlocking();
 
             bytesSent = 0;
@@ -2560,7 +2606,8 @@ namespace System.Net.Sockets
                     ref bytesSent,
                     out errorCode
                 )
-            ) {
+            )
+            {
                 return errorCode;
             }
 
@@ -2581,7 +2628,8 @@ namespace System.Net.Sockets
                     observedSequenceNumber,
                     cancellationToken
                 )
-            ) {
+            )
+            {
                 bytesSent = operation.BytesTransferred;
                 errorCode = operation.ErrorCode;
 
@@ -2597,7 +2645,8 @@ namespace System.Net.Sockets
             SocketFlags flags,
             int timeout,
             out int bytesSent
-        ) {
+        )
+        {
             return SendTo(buffers, flags, null, 0, timeout, out bytesSent);
         }
 
@@ -2606,7 +2655,8 @@ namespace System.Net.Sockets
             SocketFlags flags,
             out int bytesSent,
             Action<int, byte[]?, int, SocketFlags, SocketError> callback
-        ) {
+        )
+        {
             int socketAddressLen = 0;
             return SendToAsync(buffers, flags, null, ref socketAddressLen, out bytesSent, callback);
         }
@@ -2618,7 +2668,8 @@ namespace System.Net.Sockets
             int socketAddressLen,
             int timeout,
             out int bytesSent
-        ) {
+        )
+        {
             Debug.Assert(timeout == -1 || timeout > 0, $"Unexpected timeout: {timeout}");
 
             bytesSent = 0;
@@ -2641,7 +2692,8 @@ namespace System.Net.Sockets
                         out errorCode
                     ) || !ShouldRetrySyncOperation(out errorCode)
                 )
-            ) {
+            )
+            {
                 return errorCode;
             }
 
@@ -2669,7 +2721,8 @@ namespace System.Net.Sockets
             ref int socketAddressLen,
             out int bytesSent,
             Action<int, byte[]?, int, SocketFlags, SocketError> callback
-        ) {
+        )
+        {
             SetHandleNonBlocking();
 
             bytesSent = 0;
@@ -2690,7 +2743,8 @@ namespace System.Net.Sockets
                     ref bytesSent,
                     out errorCode
                 )
-            ) {
+            )
+            {
                 return errorCode;
             }
 
@@ -2722,7 +2776,8 @@ namespace System.Net.Sockets
             long count,
             int timeout,
             out long bytesSent
-        ) {
+        )
+        {
             Debug.Assert(timeout == -1 || timeout > 0, $"Unexpected timeout: {timeout}");
 
             bytesSent = 0;
@@ -2740,7 +2795,8 @@ namespace System.Net.Sockets
                         out errorCode
                     ) || !ShouldRetrySyncOperation(out errorCode)
                 )
-            ) {
+            )
+            {
                 return errorCode;
             }
 
@@ -2764,7 +2820,8 @@ namespace System.Net.Sockets
             long count,
             out long bytesSent,
             Action<long, SocketError> callback
-        ) {
+        )
+        {
             SetHandleNonBlocking();
 
             bytesSent = 0;
@@ -2780,7 +2837,8 @@ namespace System.Net.Sockets
                     ref bytesSent,
                     out errorCode
                 )
-            ) {
+            )
+            {
                 return errorCode;
             }
 
@@ -2813,7 +2871,8 @@ namespace System.Net.Sockets
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public Interop.Sys.SocketEvents HandleSyncEventsSpeculatively(
             Interop.Sys.SocketEvents events
-        ) {
+        )
+        {
             if ((events & Interop.Sys.SocketEvents.Error) != 0)
             {
                 // Set the Read and Write flags; the processing for these events
@@ -2827,7 +2886,8 @@ namespace System.Net.Sockets
                 && _receiveQueue.IsNextOperationSynchronous_Speculative
                 && _receiveQueue.ProcessSyncEventOrGetAsyncEvent(this, skipAsyncEvents: true)
                     == null
-            ) {
+            )
+            {
                 events ^= Interop.Sys.SocketEvents.Read;
             }
 
@@ -2835,7 +2895,8 @@ namespace System.Net.Sockets
                 (events & Interop.Sys.SocketEvents.Write) != 0
                 && _sendQueue.IsNextOperationSynchronous_Speculative
                 && _sendQueue.ProcessSyncEventOrGetAsyncEvent(this, skipAsyncEvents: true) == null
-            ) {
+            )
+            {
                 events ^= Interop.Sys.SocketEvents.Write;
             }
 

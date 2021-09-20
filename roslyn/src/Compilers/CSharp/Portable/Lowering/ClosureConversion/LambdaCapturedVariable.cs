@@ -39,7 +39,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             SynthesizedClosureEnvironment frame,
             Symbol captured,
             ref int uniqueId
-        ) {
+        )
+        {
             Debug.Assert(captured is LocalSymbol || captured is ParameterSymbol);
 
             string fieldName = GetCapturedVariableFieldName(captured, ref uniqueId);
@@ -76,7 +77,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                 if (
                     local.SynthesizedKind
                     == SynthesizedLocalKind.ExceptionFilterAwaitHoistedExceptionLocal
-                ) {
+                )
+                {
                     return GeneratedNames.MakeHoistedLocalFieldName(
                         local.SynthesizedKind,
                         uniqueId++
@@ -96,7 +98,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                         local.ScopeDesignatorOpt?.Kind() == SyntaxKind.SwitchSection
                         || local.ScopeDesignatorOpt?.Kind() == SyntaxKind.SwitchExpressionArm
                     )
-                ) {
+                )
+                {
                     // The programmer can use the same identifier for pattern variables in different
                     // sections of a switch statement, but they are all hoisted into
                     // the same frame for the enclosing switch statement and must be given
@@ -116,7 +119,8 @@ namespace Microsoft.CodeAnalysis.CSharp
         private static TypeSymbol GetCapturedVariableFieldType(
             SynthesizedContainer frame,
             Symbol variable
-        ) {
+        )
+        {
             var local = variable as LocalSymbol;
             if ((object)local != null)
             {

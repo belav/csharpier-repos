@@ -34,7 +34,8 @@ namespace Microsoft.CodeAnalysis.Test.Utilities
             string projectFilePath,
             string filePath,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             return Task.FromResult(
                 new DynamicFileInfo(
                     filePath + ".fromdynamicfile",

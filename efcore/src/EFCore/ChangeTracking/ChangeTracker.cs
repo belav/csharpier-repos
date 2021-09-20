@@ -39,7 +39,8 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking
             IChangeDetector changeDetector,
             IModel model,
             IEntityEntryGraphIterator graphIterator
-        ) {
+        )
+        {
             Check.NotNull(context, nameof(context));
             Check.NotNull(stateManager, nameof(stateManager));
             Check.NotNull(changeDetector, nameof(changeDetector));
@@ -314,7 +315,8 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking
             object rootEntity,
             TState? state,
             Func<EntityEntryGraphNode<TState>, bool> callback
-        ) {
+        )
+        {
             Check.NotNull(rootEntity, nameof(rootEntity));
             Check.NotNull(callback, nameof(callback));
 

@@ -38,13 +38,15 @@ namespace Microsoft.CodeAnalysis.CSharp.ConvertTypeOfToNameOf
             SemanticModel model,
             SyntaxNode node,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             if (
                 node is MemberAccessExpressionSyntax
                 {
                     Expression: TypeOfExpressionSyntax typeOfExpression
                 }
-            ) {
+            )
+            {
                 var typeSymbol = model.GetSymbolInfo(typeOfExpression.Type, cancellationToken)
                     .Symbol.GetSymbolType();
                 return typeSymbol?.GenerateTypeSyntax();

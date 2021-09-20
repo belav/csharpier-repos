@@ -44,7 +44,8 @@ namespace System.Net.Http
             NetworkCredential credential,
             HttpRequestMessage request,
             DigestResponse digestResponse
-        ) {
+        )
+        {
             StringBuilder sb = StringBuilderCache.Acquire();
 
             // It is mandatory for servers to implement sha-256 per RFC 7616
@@ -61,7 +62,8 @@ namespace System.Net.Http
                     && !algorithm.Equals(Md5, StringComparison.OrdinalIgnoreCase)
                     && !algorithm.Equals(Sha256Sess, StringComparison.OrdinalIgnoreCase)
                     && !algorithm.Equals(MD5Sess, StringComparison.OrdinalIgnoreCase)
-                ) {
+                )
+                {
                     if (NetEventSource.Log.IsEnabled())
                         NetEventSource.Error(
                             digestResponse,
@@ -349,7 +351,8 @@ namespace System.Net.Http
                     currentIndex < data.Length
                     && data[currentIndex] != '='
                     && !CharIsSpaceOrTab(data[currentIndex])
-                ) {
+                )
+                {
                     currentIndex++;
                 }
 
@@ -383,7 +386,8 @@ namespace System.Net.Http
                 while (
                     currentIndex < data.Length
                     && (CharIsSpaceOrTab(data[currentIndex]) || data[currentIndex] == '=')
-                ) {
+                )
+                {
                     currentIndex++;
                 }
 
@@ -397,7 +401,8 @@ namespace System.Net.Http
                 int currentIndex,
                 bool expectQuotes,
                 out int parsedIndex
-            ) {
+            )
+            {
                 Debug.Assert(currentIndex < data.Length && !CharIsSpaceOrTab(data[currentIndex]));
 
                 // If quoted value, skip first quote.
@@ -421,7 +426,8 @@ namespace System.Net.Http
                         (quotedValue && data[currentIndex] != '"')
                         || (!quotedValue && data[currentIndex] != ',')
                     )
-                ) {
+                )
+                {
                     sb.Append(data[currentIndex]);
                     currentIndex++;
 
@@ -522,7 +528,8 @@ namespace System.Net.Http
             string value,
             bool includeQuotes = true,
             bool includeComma = true
-        ) {
+        )
+        {
             sb.Append(key);
             sb.Append('=');
             if (includeQuotes)

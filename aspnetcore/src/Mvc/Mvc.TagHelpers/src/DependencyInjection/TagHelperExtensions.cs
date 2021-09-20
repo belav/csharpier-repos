@@ -39,7 +39,8 @@ namespace Microsoft.Extensions.DependencyInjection
         public static IMvcBuilder AddCacheTagHelperLimits(
             this IMvcBuilder builder,
             Action<CacheTagHelperOptions> configure
-        ) {
+        )
+        {
             if (builder == null)
             {
                 throw new ArgumentNullException(nameof(builder));
@@ -64,7 +65,8 @@ namespace Microsoft.Extensions.DependencyInjection
         public static IMvcCoreBuilder AddCacheTagHelperLimits(
             this IMvcCoreBuilder builder,
             Action<CacheTagHelperOptions> configure
-        ) {
+        )
+        {
             if (builder == null)
             {
                 throw new ArgumentNullException(nameof(builder));

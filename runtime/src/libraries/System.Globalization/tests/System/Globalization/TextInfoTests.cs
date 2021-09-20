@@ -33,7 +33,8 @@ namespace System.Globalization.Tests
             int macCodePage,
             int oemCodePage,
             bool isRightToLeft
-        ) {
+        )
+        {
             TextInfo ti = CultureInfo.GetCultureInfo(cultureName).TextInfo;
             Assert.Equal(lcid, ti.LCID);
             Assert.Equal(ansiCodePage, ti.ANSICodePage);

@@ -75,7 +75,8 @@ namespace System.IO.Ports.Tests
                 SerialPort com = new SerialPort(
                     TCSupport.LocalMachineSerialInfo.FirstAvailablePortName
                 )
-            ) {
+            )
+            {
                 Debug.WriteLine("Verifying write method throws exception after a call to Cloes()");
                 com.Open();
                 com.Close();
@@ -97,7 +98,8 @@ namespace System.IO.Ports.Tests
                 SerialPort com2 = new SerialPort(
                     TCSupport.LocalMachineSerialInfo.SecondAvailablePortName
                 )
-            ) {
+            )
+            {
                 Random rndGen = new Random(-55);
                 byte[] XOffBuffer = new byte[1];
 
@@ -127,7 +129,8 @@ namespace System.IO.Ports.Tests
                 SerialPort com = new SerialPort(
                     TCSupport.LocalMachineSerialInfo.FirstAvailablePortName
                 )
-            ) {
+            )
+            {
                 Random rndGen = new Random(-55);
 
                 com.WriteTimeout = rndGen.Next(minRandomTimeout, maxRandomTimeout);
@@ -157,7 +160,8 @@ namespace System.IO.Ports.Tests
                 SerialPort com1 = new SerialPort(
                     TCSupport.LocalMachineSerialInfo.FirstAvailablePortName
                 )
-            ) {
+            )
+            {
                 Random rndGen = new Random(-55);
                 AsyncEnableRts asyncEnableRts = new AsyncEnableRts();
                 var t = new Task(asyncEnableRts.EnableRTS);
@@ -197,7 +201,8 @@ namespace System.IO.Ports.Tests
                 SerialPort com = new SerialPort(
                     TCSupport.LocalMachineSerialInfo.FirstAvailablePortName
                 )
-            ) {
+            )
+            {
                 AsyncWriteRndByteArray asyncWriteRndByteArray = new AsyncWriteRndByteArray(
                     com,
                     BYTE_SIZE_BYTES_TO_WRITE
@@ -227,7 +232,8 @@ namespace System.IO.Ports.Tests
                 SerialPort com = new SerialPort(
                     TCSupport.LocalMachineSerialInfo.FirstAvailablePortName
                 )
-            ) {
+            )
+            {
                 AsyncWriteRndByteArray asyncWriteRndByteArray = new AsyncWriteRndByteArray(
                     com,
                     BYTE_SIZE_BYTES_TO_WRITE
@@ -266,7 +272,8 @@ namespace System.IO.Ports.Tests
                 SerialPort com = new SerialPort(
                     TCSupport.LocalMachineSerialInfo.FirstAvailablePortName
                 )
-            ) {
+            )
+            {
                 AsyncWriteRndByteArray asyncWriteRndByteArray = new AsyncWriteRndByteArray(
                     com,
                     BYTE_SIZE_HANDSHAKE
@@ -318,7 +325,8 @@ namespace System.IO.Ports.Tests
                         SerialPort com2 = new SerialPort(
                             TCSupport.LocalMachineSerialInfo.SecondAvailablePortName
                         )
-                    ) {
+                    )
+                    {
                         Random rndGen = new Random(-55);
                         int sleepPeriod = rndGen.Next(minRandomTimeout, maxRandomTimeout / 2);
 
@@ -441,7 +449,8 @@ namespace System.IO.Ports.Tests
                 SerialPort com2 = new SerialPort(
                     TCSupport.LocalMachineSerialInfo.SecondAvailablePortName
                 )
-            ) {
+            )
+            {
                 AsyncWriteRndByteArray asyncWriteRndByteArray = new AsyncWriteRndByteArray(
                     com1,
                     BYTE_SIZE_HANDSHAKE
@@ -464,7 +473,8 @@ namespace System.IO.Ports.Tests
                 if (
                     Handshake.RequestToSend == handshake
                     || Handshake.RequestToSendXOnXOff == handshake
-                ) {
+                )
+                {
                     com2.RtsEnable = false;
                 }
 
@@ -485,7 +495,8 @@ namespace System.IO.Ports.Tests
                         Handshake.RequestToSend == handshake
                         || Handshake.RequestToSendXOnXOff == handshake
                     ) && com1.CtsHolding
-                ) {
+                )
+                {
                     Fail("ERROR!!! Expcted CtsHolding={0} actual {1}", false, com1.CtsHolding);
                 }
 
@@ -493,7 +504,8 @@ namespace System.IO.Ports.Tests
                 if (
                     Handshake.RequestToSend == handshake
                     || Handshake.RequestToSendXOnXOff == handshake
-                ) {
+                )
+                {
                     com2.RtsEnable = true;
                 }
 
@@ -511,7 +523,8 @@ namespace System.IO.Ports.Tests
                         Handshake.RequestToSend == handshake
                         || Handshake.RequestToSendXOnXOff == handshake
                     ) && !com1.CtsHolding
-                ) {
+                )
+                {
                     Fail("ERROR!!! Expcted CtsHolding={0} actual {1}", true, com1.CtsHolding);
                 }
             }

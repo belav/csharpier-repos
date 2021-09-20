@@ -346,7 +346,8 @@ internal class lclfldrem
                 || ((decimal)(i_l_op1 % d_l_op2) != i_l_op1 % m_l_op2)
                 || (i_l_op1 % m_l_op2 != i_l_op1 % i_l_op2)
                 || (i_l_op1 % i_l_op2 != 4)
-            ) {
+            )
+            {
                 Console.WriteLine("testcase 1 failed");
                 passed = false;
             }
@@ -359,7 +360,8 @@ internal class lclfldrem
                 || ((decimal)(i_l_op1 % s_d_s_op2) != i_l_op1 % s_m_s_op2)
                 || (i_l_op1 % s_m_s_op2 != i_l_op1 % s_i_s_op2)
                 || (i_l_op1 % s_i_s_op2 != 4)
-            ) {
+            )
+            {
                 Console.WriteLine("testcase 2 failed");
                 passed = false;
             }
@@ -372,7 +374,8 @@ internal class lclfldrem
                 || ((decimal)(s_i_s_op1 % d_l_op2) != s_i_s_op1 % m_l_op2)
                 || (s_i_s_op1 % m_l_op2 != s_i_s_op1 % i_l_op2)
                 || (s_i_s_op1 % i_l_op2 != 4)
-            ) {
+            )
+            {
                 Console.WriteLine("testcase 3 failed");
                 passed = false;
             }
@@ -385,7 +388,8 @@ internal class lclfldrem
                 || ((decimal)(s_i_s_op1 % s_d_s_op2) != s_i_s_op1 % s_m_s_op2)
                 || (s_i_s_op1 % s_m_s_op2 != s_i_s_op1 % s_i_s_op2)
                 || (s_i_s_op1 % s_i_s_op2 != 4)
-            ) {
+            )
+            {
                 Console.WriteLine("testcase 4 failed");
                 passed = false;
             }
@@ -410,7 +414,8 @@ internal class lclfldrem
                 || ((decimal)(ui_l_op1 % d_l_op2) != ui_l_op1 % m_l_op2)
                 || (ui_l_op1 % m_l_op2 != ui_l_op1 % i_l_op2)
                 || (ui_l_op1 % i_l_op2 != 4)
-            ) {
+            )
+            {
                 Console.WriteLine("testcase 5 failed");
                 passed = false;
             }
@@ -423,7 +428,8 @@ internal class lclfldrem
                 || ((decimal)(ui_l_op1 % s_d_s_op2) != ui_l_op1 % s_m_s_op2)
                 || (ui_l_op1 % s_m_s_op2 != ui_l_op1 % s_i_s_op2)
                 || (ui_l_op1 % s_i_s_op2 != 4)
-            ) {
+            )
+            {
                 Console.WriteLine("testcase 6 failed");
                 passed = false;
             }
@@ -436,7 +442,8 @@ internal class lclfldrem
                 || ((decimal)(s_ui_s_op1 % d_l_op2) != s_ui_s_op1 % m_l_op2)
                 || (s_ui_s_op1 % m_l_op2 != s_ui_s_op1 % i_l_op2)
                 || (s_ui_s_op1 % i_l_op2 != 4)
-            ) {
+            )
+            {
                 Console.WriteLine("testcase 7 failed");
                 passed = false;
             }
@@ -449,7 +456,8 @@ internal class lclfldrem
                 || ((decimal)(s_ui_s_op1 % s_d_s_op2) != s_ui_s_op1 % s_m_s_op2)
                 || (s_ui_s_op1 % s_m_s_op2 != s_ui_s_op1 % s_i_s_op2)
                 || (s_ui_s_op1 % s_i_s_op2 != 4)
-            ) {
+            )
+            {
                 Console.WriteLine("testcase 8 failed");
                 passed = false;
             }
@@ -474,7 +482,8 @@ internal class lclfldrem
                 || ((decimal)(l_l_op1 % d_l_op2) != l_l_op1 % m_l_op2)
                 || (l_l_op1 % m_l_op2 != l_l_op1 % i_l_op2)
                 || (l_l_op1 % i_l_op2 != 4)
-            ) {
+            )
+            {
                 Console.WriteLine("testcase 9 failed");
                 passed = false;
             }
@@ -487,7 +496,8 @@ internal class lclfldrem
                 || ((decimal)(l_l_op1 % s_d_s_op2) != l_l_op1 % s_m_s_op2)
                 || (l_l_op1 % s_m_s_op2 != l_l_op1 % s_i_s_op2)
                 || (l_l_op1 % s_i_s_op2 != 4)
-            ) {
+            )
+            {
                 Console.WriteLine("testcase 10 failed");
                 passed = false;
             }
@@ -500,7 +510,8 @@ internal class lclfldrem
                 || ((decimal)(s_l_s_op1 % d_l_op2) != s_l_s_op1 % m_l_op2)
                 || (s_l_s_op1 % m_l_op2 != s_l_s_op1 % i_l_op2)
                 || (s_l_s_op1 % i_l_op2 != 4)
-            ) {
+            )
+            {
                 Console.WriteLine("testcase 11 failed");
                 passed = false;
             }
@@ -513,7 +524,8 @@ internal class lclfldrem
                 || ((decimal)(s_l_s_op1 % s_d_s_op2) != s_l_s_op1 % s_m_s_op2)
                 || (s_l_s_op1 % s_m_s_op2 != s_l_s_op1 % s_i_s_op2)
                 || (s_l_s_op1 % s_i_s_op2 != 4)
-            ) {
+            )
+            {
                 Console.WriteLine("testcase 12 failed");
                 passed = false;
             }
@@ -538,7 +550,8 @@ internal class lclfldrem
                 || ((decimal)(ul_l_op1 % d_l_op2) != ul_l_op1 % m_l_op2)
                 || (ul_l_op1 % m_l_op2 != ul_l_op1 % (ulong)i_l_op2)
                 || (ul_l_op1 % (ulong)i_l_op2 != 4)
-            ) {
+            )
+            {
                 Console.WriteLine("testcase 13 failed");
                 passed = false;
             }
@@ -551,7 +564,8 @@ internal class lclfldrem
                 || ((decimal)(ul_l_op1 % s_d_s_op2) != ul_l_op1 % s_m_s_op2)
                 || (ul_l_op1 % s_m_s_op2 != ul_l_op1 % (ulong)s_i_s_op2)
                 || (ul_l_op1 % (ulong)s_i_s_op2 != 4)
-            ) {
+            )
+            {
                 Console.WriteLine("testcase 14 failed");
                 passed = false;
             }
@@ -564,7 +578,8 @@ internal class lclfldrem
                 || ((decimal)(s_ul_s_op1 % d_l_op2) != s_ul_s_op1 % m_l_op2)
                 || (s_ul_s_op1 % m_l_op2 != s_ul_s_op1 % (ulong)i_l_op2)
                 || (s_ul_s_op1 % (ulong)i_l_op2 != 4)
-            ) {
+            )
+            {
                 Console.WriteLine("testcase 15 failed");
                 passed = false;
             }
@@ -577,7 +592,8 @@ internal class lclfldrem
                 || ((decimal)(s_ul_s_op1 % s_d_s_op2) != s_ul_s_op1 % s_m_s_op2)
                 || (s_ul_s_op1 % s_m_s_op2 != s_ul_s_op1 % (ulong)s_i_s_op2)
                 || (s_ul_s_op1 % (ulong)s_i_s_op2 != 4)
-            ) {
+            )
+            {
                 Console.WriteLine("testcase 16 failed");
                 passed = false;
             }
@@ -602,7 +618,8 @@ internal class lclfldrem
                 || (f_l_op1 % d_l_op2 != f_l_op1 % (float)m_l_op2)
                 || (f_l_op1 % (float)m_l_op2 != f_l_op1 % i_l_op2)
                 || (f_l_op1 % i_l_op2 != 4)
-            ) {
+            )
+            {
                 Console.WriteLine("testcase 17 failed");
                 passed = false;
             }
@@ -615,7 +632,8 @@ internal class lclfldrem
                 || (f_l_op1 % s_d_s_op2 != f_l_op1 % (float)s_m_s_op2)
                 || (f_l_op1 % (float)s_m_s_op2 != f_l_op1 % s_i_s_op2)
                 || (f_l_op1 % s_i_s_op2 != 4)
-            ) {
+            )
+            {
                 Console.WriteLine("testcase 18 failed");
                 passed = false;
             }
@@ -628,7 +646,8 @@ internal class lclfldrem
                 || (s_f_s_op1 % d_l_op2 != s_f_s_op1 % (float)m_l_op2)
                 || (s_f_s_op1 % (float)m_l_op2 != s_f_s_op1 % i_l_op2)
                 || (s_f_s_op1 % i_l_op2 != 4)
-            ) {
+            )
+            {
                 Console.WriteLine("testcase 19 failed");
                 passed = false;
             }
@@ -641,7 +660,8 @@ internal class lclfldrem
                 || (s_f_s_op1 % s_d_s_op2 != s_f_s_op1 % (float)s_m_s_op2)
                 || (s_f_s_op1 % (float)s_m_s_op2 != s_f_s_op1 % s_i_s_op2)
                 || (s_f_s_op1 % s_i_s_op2 != 4)
-            ) {
+            )
+            {
                 Console.WriteLine("testcase 20 failed");
                 passed = false;
             }
@@ -666,7 +686,8 @@ internal class lclfldrem
                 || (d_l_op1 % d_l_op2 != d_l_op1 % (double)m_l_op2)
                 || (d_l_op1 % (double)m_l_op2 != d_l_op1 % i_l_op2)
                 || (d_l_op1 % i_l_op2 != 4)
-            ) {
+            )
+            {
                 Console.WriteLine("testcase 21 failed");
                 passed = false;
             }
@@ -679,7 +700,8 @@ internal class lclfldrem
                 || (d_l_op1 % s_d_s_op2 != d_l_op1 % (double)s_m_s_op2)
                 || (d_l_op1 % (double)s_m_s_op2 != d_l_op1 % s_i_s_op2)
                 || (d_l_op1 % s_i_s_op2 != 4)
-            ) {
+            )
+            {
                 Console.WriteLine("testcase 22 failed");
                 passed = false;
             }
@@ -692,7 +714,8 @@ internal class lclfldrem
                 || (s_d_s_op1 % d_l_op2 != s_d_s_op1 % (double)m_l_op2)
                 || (s_d_s_op1 % (double)m_l_op2 != s_d_s_op1 % i_l_op2)
                 || (s_d_s_op1 % i_l_op2 != 4)
-            ) {
+            )
+            {
                 Console.WriteLine("testcase 23 failed");
                 passed = false;
             }
@@ -705,7 +728,8 @@ internal class lclfldrem
                 || (s_d_s_op1 % s_d_s_op2 != s_d_s_op1 % (double)s_m_s_op2)
                 || (s_d_s_op1 % (double)s_m_s_op2 != s_d_s_op1 % s_i_s_op2)
                 || (s_d_s_op1 % s_i_s_op2 != 4)
-            ) {
+            )
+            {
                 Console.WriteLine("testcase 24 failed");
                 passed = false;
             }
@@ -730,7 +754,8 @@ internal class lclfldrem
                 || (m_l_op1 % (decimal)d_l_op2 != m_l_op1 % m_l_op2)
                 || (m_l_op1 % m_l_op2 != m_l_op1 % i_l_op2)
                 || (m_l_op1 % i_l_op2 != 4)
-            ) {
+            )
+            {
                 Console.WriteLine("testcase 25 failed");
                 passed = false;
             }
@@ -743,7 +768,8 @@ internal class lclfldrem
                 || (m_l_op1 % (decimal)s_d_s_op2 != m_l_op1 % s_m_s_op2)
                 || (m_l_op1 % s_m_s_op2 != m_l_op1 % s_i_s_op2)
                 || (m_l_op1 % s_i_s_op2 != 4)
-            ) {
+            )
+            {
                 Console.WriteLine("testcase 26 failed");
                 passed = false;
             }
@@ -756,7 +782,8 @@ internal class lclfldrem
                 || (s_m_s_op1 % (decimal)d_l_op2 != s_m_s_op1 % m_l_op2)
                 || (s_m_s_op1 % m_l_op2 != s_m_s_op1 % i_l_op2)
                 || (s_m_s_op1 % i_l_op2 != 4)
-            ) {
+            )
+            {
                 Console.WriteLine("testcase 27 failed");
                 passed = false;
             }
@@ -769,7 +796,8 @@ internal class lclfldrem
                 || (s_m_s_op1 % (decimal)s_d_s_op2 != s_m_s_op1 % s_m_s_op2)
                 || (s_m_s_op1 % s_m_s_op2 != s_m_s_op1 % s_i_s_op2)
                 || (s_m_s_op1 % s_i_s_op2 != 4)
-            ) {
+            )
+            {
                 Console.WriteLine("testcase 28 failed");
                 passed = false;
             }

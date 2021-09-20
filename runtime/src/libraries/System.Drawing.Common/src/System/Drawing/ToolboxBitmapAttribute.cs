@@ -197,7 +197,8 @@ namespace System.Drawing
                     if (
                         ext != null
                         && string.Equals(ext, ".ico", StringComparison.OrdinalIgnoreCase)
-                    ) {
+                    )
+                    {
                         //ico files support both large and small, so we respect the large flag here.
                         using (FileStream reader = File.OpenRead(imageFile!))
                         {
@@ -226,7 +227,8 @@ namespace System.Drawing
             string? bitmapname,
             bool large,
             bool scaled
-        ) {
+        )
+        {
             if (bitmapname == null)
             {
                 return null;
@@ -260,7 +262,8 @@ namespace System.Drawing
             string? bitmapname,
             bool large,
             bool scaled
-        ) {
+        )
+        {
             if (bitmapname == null)
             {
                 return null;
@@ -283,7 +286,8 @@ namespace System.Drawing
             string? imageName,
             bool large,
             bool scaled
-        ) {
+        )
+        {
             Image? img = null;
             try
             {
@@ -316,7 +320,8 @@ namespace System.Drawing
                             ".ico",
                             StringComparison.CurrentCultureIgnoreCase
                         )
-                    ) {
+                    )
+                    {
                         iconname = name;
                     }
                     else if (
@@ -325,7 +330,8 @@ namespace System.Drawing
                             ".bmp",
                             StringComparison.CurrentCultureIgnoreCase
                         )
-                    ) {
+                    )
+                    {
                         bmpname = name;
                     }
                     else

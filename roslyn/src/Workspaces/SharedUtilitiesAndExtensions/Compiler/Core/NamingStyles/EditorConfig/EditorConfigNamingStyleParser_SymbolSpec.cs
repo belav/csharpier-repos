@@ -19,7 +19,8 @@ namespace Microsoft.CodeAnalysis.Diagnostics.Analyzers.NamingStyles
             string namingRuleTitle,
             IReadOnlyDictionary<string, string> conventionsDictionary,
             out SymbolSpecification symbolSpec
-        ) {
+        )
+        {
             symbolSpec = null;
             if (
                 !TryGetSymbolSpecNameForNamingRule(
@@ -27,7 +28,8 @@ namespace Microsoft.CodeAnalysis.Diagnostics.Analyzers.NamingStyles
                     conventionsDictionary,
                     out var symbolSpecName
                 )
-            ) {
+            )
+            {
                 return false;
             }
 
@@ -55,13 +57,15 @@ namespace Microsoft.CodeAnalysis.Diagnostics.Analyzers.NamingStyles
             string namingRuleName,
             IReadOnlyDictionary<string, string> conventionsDictionary,
             out string symbolSpecName
-        ) {
+        )
+        {
             if (
                 conventionsDictionary.TryGetValue(
                     $"dotnet_naming_rule.{namingRuleName}.symbols",
                     out symbolSpecName
                 )
-            ) {
+            )
+            {
                 return symbolSpecName != null;
             }
 
@@ -71,13 +75,15 @@ namespace Microsoft.CodeAnalysis.Diagnostics.Analyzers.NamingStyles
         private static ImmutableArray<SymbolKindOrTypeKind> GetSymbolsApplicableKinds(
             string symbolSpecName,
             IReadOnlyDictionary<string, string> conventionsDictionary
-        ) {
+        )
+        {
             if (
                 conventionsDictionary.TryGetValue(
                     $"dotnet_naming_symbols.{symbolSpecName}.applicable_kinds",
                     out var result
                 )
-            ) {
+            )
+            {
                 return ParseSymbolKindList(result ?? string.Empty);
             }
 
@@ -117,7 +123,8 @@ namespace Microsoft.CodeAnalysis.Diagnostics.Analyzers.NamingStyles
 
         private static ImmutableArray<SymbolKindOrTypeKind> ParseSymbolKindList(
             string symbolSpecApplicableKinds
-        ) {
+        )
+        {
             if (symbolSpecApplicableKinds == null)
             {
                 return ImmutableArray<SymbolKindOrTypeKind>.Empty;
@@ -132,7 +139,8 @@ namespace Microsoft.CodeAnalysis.Diagnostics.Analyzers.NamingStyles
             foreach (
                 var symbolSpecApplicableKind in symbolSpecApplicableKinds.Split(',')
                     .Select(x => x.Trim())
-            ) {
+            )
+            {
                 switch (symbolSpecApplicableKind)
                 {
                     case "class":
@@ -188,13 +196,15 @@ namespace Microsoft.CodeAnalysis.Diagnostics.Analyzers.NamingStyles
         private static ImmutableArray<Accessibility> GetSymbolsApplicableAccessibilities(
             string symbolSpecName,
             IReadOnlyDictionary<string, string> conventionsDictionary
-        ) {
+        )
+        {
             if (
                 conventionsDictionary.TryGetValue(
                     $"dotnet_naming_symbols.{symbolSpecName}.applicable_accessibilities",
                     out var result
                 )
-            ) {
+            )
+            {
                 return ParseAccessibilityKindList(result ?? string.Empty);
             }
 
@@ -214,7 +224,8 @@ namespace Microsoft.CodeAnalysis.Diagnostics.Analyzers.NamingStyles
 
         private static ImmutableArray<Accessibility> ParseAccessibilityKindList(
             string symbolSpecApplicableAccessibilities
-        ) {
+        )
+        {
             if (symbolSpecApplicableAccessibilities == null)
             {
                 return ImmutableArray<Accessibility>.Empty;
@@ -231,7 +242,8 @@ namespace Microsoft.CodeAnalysis.Diagnostics.Analyzers.NamingStyles
                         ','
                     )
                     .Select(x => x.Trim())
-            ) {
+            )
+            {
                 switch (symbolSpecApplicableAccessibility)
                 {
                     case "public":
@@ -268,13 +280,15 @@ namespace Microsoft.CodeAnalysis.Diagnostics.Analyzers.NamingStyles
         private static ImmutableArray<ModifierKind> GetSymbolsRequiredModifiers(
             string symbolSpecName,
             IReadOnlyDictionary<string, string> conventionsDictionary
-        ) {
+        )
+        {
             if (
                 conventionsDictionary.TryGetValue(
                     $"dotnet_naming_symbols.{symbolSpecName}.required_modifiers",
                     out var result
                 )
-            ) {
+            )
+            {
                 return ParseModifiers(result ?? string.Empty);
             }
 
@@ -299,7 +313,8 @@ namespace Microsoft.CodeAnalysis.Diagnostics.Analyzers.NamingStyles
 
         private static ImmutableArray<ModifierKind> ParseModifiers(
             string symbolSpecRequiredModifiers
-        ) {
+        )
+        {
             if (symbolSpecRequiredModifiers == null)
             {
                 return ImmutableArray<ModifierKind>.Empty;
@@ -314,7 +329,8 @@ namespace Microsoft.CodeAnalysis.Diagnostics.Analyzers.NamingStyles
             foreach (
                 var symbolSpecRequiredModifier in symbolSpecRequiredModifiers.Split(',')
                     .Select(x => x.Trim())
-            ) {
+            )
+            {
                 switch (symbolSpecRequiredModifier)
                 {
                     case "abstract":
@@ -443,7 +459,8 @@ namespace Microsoft.CodeAnalysis.Diagnostics.Analyzers.NamingStyles
         public static string ToEditorConfigString(
             this ImmutableArray<Accessibility> accessibilities,
             string languageName
-        ) {
+        )
+        {
             if (accessibilities.IsDefaultOrEmpty)
             {
                 return "";
@@ -452,7 +469,8 @@ namespace Microsoft.CodeAnalysis.Diagnostics.Analyzers.NamingStyles
             if (
                 _allAccessibility.All(accessibilities.Contains)
                 && accessibilities.All(_allAccessibility.Contains)
-            ) {
+            )
+            {
                 return "*";
             }
 
@@ -467,7 +485,8 @@ namespace Microsoft.CodeAnalysis.Diagnostics.Analyzers.NamingStyles
         private static string ToEditorConfigString(
             this Accessibility accessibility,
             string languageName
-        ) {
+        )
+        {
             switch (accessibility)
             {
                 case Accessibility.NotApplicable:
@@ -513,7 +532,8 @@ namespace Microsoft.CodeAnalysis.Diagnostics.Analyzers.NamingStyles
         public static string ToEditorConfigString(
             this ImmutableArray<ModifierKind> modifiers,
             string languageName
-        ) {
+        )
+        {
             if (modifiers.IsDefaultOrEmpty)
             {
                 return "";
@@ -521,7 +541,8 @@ namespace Microsoft.CodeAnalysis.Diagnostics.Analyzers.NamingStyles
 
             if (
                 _allModifierKind.All(modifiers.Contains) && modifiers.All(_allModifierKind.Contains)
-            ) {
+            )
+            {
                 return "*";
             }
 

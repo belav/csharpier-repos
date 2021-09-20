@@ -36,7 +36,8 @@ namespace Microsoft.CodeAnalysis.CSharp.ExpressionEvaluator
             EENamedTypeSymbol container,
             SyntaxNode syntax,
             DiagnosticBag diagnostics
-        ) {
+        )
+        {
             return RewriteLocalInternal(compilation, container, syntax, this);
         }
 
@@ -45,7 +46,8 @@ namespace Microsoft.CodeAnalysis.CSharp.ExpressionEvaluator
             EENamedTypeSymbol container,
             SyntaxNode syntax,
             LocalSymbol local
-        ) {
+        )
+        {
             return RewriteLocalInternal(compilation, container, syntax, local);
         }
 
@@ -54,7 +56,8 @@ namespace Microsoft.CodeAnalysis.CSharp.ExpressionEvaluator
             EENamedTypeSymbol container,
             SyntaxNode syntax,
             LocalSymbol local
-        ) {
+        )
+        {
             return new BoundPseudoVariable(
                 syntax,
                 local,
@@ -75,7 +78,8 @@ namespace Microsoft.CodeAnalysis.CSharp.ExpressionEvaluator
             internal override BoundExpression GetValue(
                 BoundPseudoVariable variable,
                 DiagnosticBag diagnostics
-            ) {
+            )
+            {
                 var method = GetIntrinsicMethod(
                     _compilation,
                     ExpressionCompilerConstants.GetVariableValueMethodName
@@ -132,7 +136,8 @@ namespace Microsoft.CodeAnalysis.CSharp.ExpressionEvaluator
                 MethodSymbol method,
                 SyntaxNode syntax,
                 string name
-            ) {
+            )
+            {
                 var argument = new BoundLiteral(
                     syntax,
                     Microsoft.CodeAnalysis.ConstantValue.Create(name),

@@ -26,7 +26,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Scripting.Hosting
             bool useQuotes,
             bool escapeNonPrintable,
             int numberRadix = NumberRadixDecimal
-        ) {
+        )
+        {
             var options = GetObjectDisplayOptions(
                 useQuotes: useQuotes,
                 escapeNonPrintable: escapeNonPrintable,
@@ -41,7 +42,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Scripting.Hosting
             bool escapeNonPrintable,
             bool includeCodePoints = false,
             int numberRadix = NumberRadixDecimal
-        ) {
+        )
+        {
             var options = GetObjectDisplayOptions(
                 useQuotes: useQuotes,
                 escapeNonPrintable: escapeNonPrintable,
@@ -55,7 +57,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Scripting.Hosting
             sbyte value,
             int numberRadix = NumberRadixDecimal,
             CultureInfo cultureInfo = null
-        ) {
+        )
+        {
             return ObjectDisplay.FormatLiteral(
                 value,
                 GetObjectDisplayOptions(numberRadix: numberRadix),
@@ -67,7 +70,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Scripting.Hosting
             byte value,
             int numberRadix = NumberRadixDecimal,
             CultureInfo cultureInfo = null
-        ) {
+        )
+        {
             return ObjectDisplay.FormatLiteral(
                 value,
                 GetObjectDisplayOptions(numberRadix: numberRadix),
@@ -79,7 +83,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Scripting.Hosting
             short value,
             int numberRadix = NumberRadixDecimal,
             CultureInfo cultureInfo = null
-        ) {
+        )
+        {
             return ObjectDisplay.FormatLiteral(
                 value,
                 GetObjectDisplayOptions(numberRadix: numberRadix),
@@ -91,7 +96,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Scripting.Hosting
             ushort value,
             int numberRadix = NumberRadixDecimal,
             CultureInfo cultureInfo = null
-        ) {
+        )
+        {
             return ObjectDisplay.FormatLiteral(
                 value,
                 GetObjectDisplayOptions(numberRadix: numberRadix),
@@ -103,7 +109,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Scripting.Hosting
             int value,
             int numberRadix = NumberRadixDecimal,
             CultureInfo cultureInfo = null
-        ) {
+        )
+        {
             return ObjectDisplay.FormatLiteral(
                 value,
                 GetObjectDisplayOptions(numberRadix: numberRadix),
@@ -115,7 +122,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Scripting.Hosting
             uint value,
             int numberRadix = NumberRadixDecimal,
             CultureInfo cultureInfo = null
-        ) {
+        )
+        {
             return ObjectDisplay.FormatLiteral(
                 value,
                 GetObjectDisplayOptions(numberRadix: numberRadix),
@@ -127,7 +135,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Scripting.Hosting
             long value,
             int numberRadix = NumberRadixDecimal,
             CultureInfo cultureInfo = null
-        ) {
+        )
+        {
             return ObjectDisplay.FormatLiteral(
                 value,
                 GetObjectDisplayOptions(numberRadix: numberRadix),
@@ -139,7 +148,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Scripting.Hosting
             ulong value,
             int numberRadix = NumberRadixDecimal,
             CultureInfo cultureInfo = null
-        ) {
+        )
+        {
             return ObjectDisplay.FormatLiteral(
                 value,
                 GetObjectDisplayOptions(numberRadix: numberRadix),

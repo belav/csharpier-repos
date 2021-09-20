@@ -46,7 +46,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             Location location,
             FieldSymbol containingFieldOpt,
             SyntaxNode nodeToBind
-        ) {
+        )
+        {
             Debug.Assert(
                 nodeToBind.Kind() == SyntaxKind.VariableDeclarator || nodeToBind is ExpressionSyntax
             );
@@ -149,7 +150,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             CSharpCompilation compilation,
             BindingDiagnosticBag diagnostics,
             TypeWithAnnotations type
-        ) {
+        )
+        {
             var originalType = _lazyType?.Value.DefaultType;
 
             // In the event that we race to set the type of a field, we should
@@ -171,7 +173,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                     new TypeWithAnnotations.Boxed(type),
                     null
                 ) == null
-            ) {
+            )
+            {
                 TypeChecks(type.Type, diagnostics);
 
                 AddDeclarationDiagnostics(diagnostics);
@@ -187,7 +190,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
         internal TypeWithAnnotations SetTypeWithAnnotations(
             TypeWithAnnotations type,
             BindingDiagnosticBag diagnostics
-        ) {
+        )
+        {
             return SetType(DeclaringCompilation, diagnostics, type);
         }
 
@@ -224,13 +228,15 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             protected override void InferFieldType(
                 ConsList<FieldSymbol> fieldsBeingBound,
                 Binder binder
-            ) {
+            )
+            {
                 var nodeToBind = _nodeToBind.GetSyntax();
 
                 if (
                     (object)_containingFieldOpt != null
                     && nodeToBind.Kind() != SyntaxKind.VariableDeclarator
-                ) {
+                )
+                {
                     binder = binder.WithContainingMemberOrLambda(_containingFieldOpt)
                         .WithAdditionalFlags(BinderFlags.FieldInitializer);
                 }

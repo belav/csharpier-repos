@@ -43,7 +43,8 @@ namespace Microsoft.Extensions.DependencyModel.Tests
             bool? serviceable = null,
             string path = null,
             string hashPath = null
-        ) {
+        )
+        {
             return new CompilationLibrary(
                 libraryType ?? DefaultType,
                 packageName ?? DefaultPackageName,

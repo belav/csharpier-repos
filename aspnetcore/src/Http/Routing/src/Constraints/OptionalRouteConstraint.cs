@@ -37,7 +37,8 @@ namespace Microsoft.AspNetCore.Routing.Constraints
             string routeKey,
             RouteValueDictionary values,
             RouteDirection routeDirection
-        ) {
+        )
+        {
             if (routeKey == null)
             {
                 throw new ArgumentNullException(nameof(routeKey));

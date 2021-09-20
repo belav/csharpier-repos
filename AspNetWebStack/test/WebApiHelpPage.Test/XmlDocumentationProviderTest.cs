@@ -108,7 +108,8 @@ namespace WebApiHelpPageWebHost.UnitTest
         public void GetDocumentationForAction(
             HttpActionDescriptor actionDescriptor,
             string expectedString
-        ) {
+        )
+        {
             XmlDocumentationProvider provider = new XmlDocumentationProvider(
                 "WebApiHelpPage.Test.XML"
             );
@@ -166,7 +167,8 @@ namespace WebApiHelpPageWebHost.UnitTest
         public void GetDocumentationForParameters(
             HttpParameterDescriptor parameterDescriptor,
             string expectedString
-        ) {
+        )
+        {
             XmlDocumentationProvider provider = new XmlDocumentationProvider(
                 "WebApiHelpPage.Test.XML"
             );
@@ -199,7 +201,8 @@ namespace WebApiHelpPageWebHost.UnitTest
         public void GetDocumentationForController(
             HttpControllerDescriptor controllerDescriptor,
             string expectedString
-        ) {
+        )
+        {
             XmlDocumentationProvider provider = new XmlDocumentationProvider(
                 "WebApiHelpPage.Test.XML"
             );
@@ -290,7 +293,8 @@ namespace WebApiHelpPageWebHost.UnitTest
         public void GetDocumentationForActionResponse(
             HttpActionDescriptor actionDescriptor,
             string expectedString
-        ) {
+        )
+        {
             XmlDocumentationProvider provider = new XmlDocumentationProvider(
                 "WebApiHelpPage.Test.XML"
             );

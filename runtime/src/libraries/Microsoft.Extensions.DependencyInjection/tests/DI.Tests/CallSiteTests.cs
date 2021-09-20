@@ -100,7 +100,8 @@ namespace Microsoft.Extensions.DependencyInjection.Tests
             ServiceDescriptor[] descriptors,
             Type serviceType,
             Func<object, object, bool> compare
-        ) {
+        )
+        {
             var provider = new DynamicServiceProviderEngine(descriptors);
 
             var callSite = provider.CallSiteFactory.GetCallSite(serviceType, new CallSiteChain());
@@ -154,7 +155,8 @@ namespace Microsoft.Extensions.DependencyInjection.Tests
         [InlineData(ServiceLifetime.Singleton)]
         public void BuildExpressionAddsDisposableCaptureForDisposableServices(
             ServiceLifetime lifetime
-        ) {
+        )
+        {
             IServiceCollection descriptors = new ServiceCollection();
             descriptors.Add(
                 ServiceDescriptor.Describe(typeof(ServiceA), typeof(DisposableServiceA), lifetime)
@@ -189,7 +191,8 @@ namespace Microsoft.Extensions.DependencyInjection.Tests
         [InlineData(ServiceLifetime.Singleton)]
         public void BuildExpressionAddsDisposableCaptureForDisposableFactoryServices(
             ServiceLifetime lifetime
-        ) {
+        )
+        {
             IServiceCollection descriptors = new ServiceCollection();
             descriptors.Add(
                 ServiceDescriptor.Describe(typeof(ServiceA), typeof(DisposableServiceA), lifetime)
@@ -229,7 +232,8 @@ namespace Microsoft.Extensions.DependencyInjection.Tests
         // runtime resolver and there is no sense to eliminating call from there
         public void BuildExpressionElidesDisposableCaptureForNonDisposableServices(
             ServiceLifetime lifetime
-        ) {
+        )
+        {
             IServiceCollection descriptors = new ServiceCollection();
             descriptors.Add(
                 ServiceDescriptor.Describe(typeof(ServiceA), typeof(ServiceA), lifetime)
@@ -268,7 +272,8 @@ namespace Microsoft.Extensions.DependencyInjection.Tests
         // runtime resolver and there is no sense to eliminating call from there
         public void BuildExpressionElidesDisposableCaptureForEnumerableServices(
             ServiceLifetime lifetime
-        ) {
+        )
+        {
             IServiceCollection descriptors = new ServiceCollection();
             descriptors.Add(
                 ServiceDescriptor.Describe(typeof(ServiceA), typeof(ServiceA), lifetime)
@@ -442,7 +447,8 @@ namespace Microsoft.Extensions.DependencyInjection.Tests
         private static Func<ServiceProviderEngineScope, object> CompileCallSite(
             ServiceCallSite callSite,
             ServiceProviderEngine engine
-        ) {
+        )
+        {
             return new ExpressionResolverBuilder(
                 CallSiteRuntimeResolver,
                 engine,

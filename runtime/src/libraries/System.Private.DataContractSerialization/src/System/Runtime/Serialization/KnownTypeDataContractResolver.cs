@@ -25,7 +25,8 @@ namespace System.Runtime.Serialization
             DataContractResolver knownTypeResolver,
             out XmlDictionaryString? typeName,
             out XmlDictionaryString? typeNamespace
-        ) {
+        )
+        {
             if (type == null)
             {
                 typeName = null;
@@ -36,7 +37,8 @@ namespace System.Runtime.Serialization
                 declaredType != null
                 && declaredType.IsInterface
                 && CollectionDataContract.IsCollectionInterface(declaredType)
-            ) {
+            )
+            {
                 typeName = null;
                 typeNamespace = null;
                 return true;
@@ -62,7 +64,8 @@ namespace System.Runtime.Serialization
             string? typeNamespace,
             Type? declaredType,
             DataContractResolver knownTypeResolver
-        ) {
+        )
+        {
             if (typeName == null || typeNamespace == null)
                 return null;
             return _context.ResolveNameFromKnownTypes(

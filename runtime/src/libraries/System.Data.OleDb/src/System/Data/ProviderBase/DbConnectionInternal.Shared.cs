@@ -58,7 +58,8 @@ namespace System.Data.ProviderBase
             ConnectionState state,
             bool hidePassword,
             bool allowSetConnectionString
-        ) {
+        )
+        {
             _allowSetConnectionString = allowSetConnectionString;
             _hidePassword = hidePassword;
             _state = state;
@@ -90,7 +91,8 @@ namespace System.Data.ProviderBase
                         (null != currentEnlistedTransaction)
                         && !currentEnlistedTransaction.Equals(value)
                     )
-                ) {
+                )
+                {
                     // Pay attention to the order here:
                     // 1) defect from any notifications
                     // 2) replace the transaction
@@ -148,13 +150,15 @@ namespace System.Data.ProviderBase
                                 previousTransactionClone,
                                 _enlistedTransaction
                             )
-                        ) {
+                        )
+                        {
                             previousTransactionClone.Dispose();
                         }
                         if (
                             null != valueClone
                             && !object.ReferenceEquals(valueClone, _enlistedTransaction)
-                        ) {
+                        )
+                        {
                             valueClone.Dispose();
                         }
                     }
@@ -418,7 +422,8 @@ namespace System.Data.ProviderBase
             DbConnection outerConnection,
             string collectionName,
             string?[]? restrictions
-        ) {
+        )
+        {
             Debug.Assert(outerConnection != null, "outerConnection may not be null.");
 
             DbMetaDataFactory metaDataFactory = factory.GetMetaDataFactory(poolGroup, this);
@@ -430,7 +435,8 @@ namespace System.Data.ProviderBase
         internal void MakeNonPooledObject(
             object owningObject,
             DbConnectionPoolCounters performanceCounters
-        ) {
+        )
+        {
             // Used by DbConnectionFactory to indicate that this object IS NOT part of
             // a connection pool.
 
@@ -464,7 +470,8 @@ namespace System.Data.ProviderBase
         internal virtual void OpenConnection(
             DbConnection outerConnection,
             DbConnectionFactory connectionFactory
-        ) {
+        )
+        {
             if (!TryOpenConnection(outerConnection, connectionFactory, null, null))
             {
                 throw ADP.InternalError(ADP.InternalErrorCode.SynchronousConnectReturnedPending);
@@ -481,7 +488,8 @@ namespace System.Data.ProviderBase
             DbConnectionFactory connectionFactory,
             TaskCompletionSource<DbConnectionInternal>? retry,
             DbConnectionOptions? userOptions
-        ) {
+        )
+        {
             throw ADP.ConnectionAlreadyOpen(State);
         }
 
@@ -490,7 +498,8 @@ namespace System.Data.ProviderBase
             DbConnectionFactory connectionFactory,
             TaskCompletionSource<DbConnectionInternal>? retry,
             DbConnectionOptions? userOptions
-        ) {
+        )
+        {
             // ?->Connecting: prevent set_ConnectionString during Open
             if (
                 connectionFactory.SetInnerConnectionFrom(
@@ -498,7 +507,8 @@ namespace System.Data.ProviderBase
                     DbConnectionClosedConnecting.SingletonInstance,
                     this
                 )
-            ) {
+            )
+            {
                 DbConnectionInternal? openConnection = null;
                 try
                 {
@@ -511,7 +521,8 @@ namespace System.Data.ProviderBase
                             this,
                             out openConnection
                         )
-                    ) {
+                    )
+                    {
                         return false;
                     }
                 }
@@ -649,7 +660,8 @@ namespace System.Data.ProviderBase
                     if (
                         currentEnlistedTransaction != null
                         && transaction.Equals(currentEnlistedTransaction)
-                    ) {
+                    )
+                    {
                         EnlistedTransaction = null;
 
                         if (IsTxRootWaitingForTxEnd)

@@ -35,7 +35,8 @@ namespace Microsoft.CodeAnalysis
             public static SymbolKeyResolution Resolve(
                 SymbolKeyReader reader,
                 out string? failureReason
-            ) {
+            )
+            {
                 var isAnonymousDelegateType = reader.ReadBoolean();
                 var location = reader.ReadLocation(out var locationFailureReason)!;
 

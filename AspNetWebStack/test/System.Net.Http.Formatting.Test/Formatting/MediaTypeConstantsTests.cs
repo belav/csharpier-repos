@@ -13,7 +13,8 @@ namespace System.Net.Http
             MediaTypeHeaderValue clone1,
             MediaTypeHeaderValue clone2,
             string charset
-        ) {
+        )
+        {
             Assert.NotNull(clone1);
             Assert.NotNull(clone2);
             Assert.NotSame(clone1, clone2);

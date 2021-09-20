@@ -20,7 +20,8 @@ namespace Microsoft.AspNetCore.Mvc.Infrastructure
         public IActionResult GetClientError(
             ActionContext actionContext,
             IClientErrorActionResult clientError
-        ) {
+        )
+        {
             var problemDetails = _problemDetailsFactory.CreateProblemDetails(
                 actionContext.HttpContext,
                 clientError.StatusCode

@@ -20,7 +20,8 @@ namespace Microsoft.EntityFrameworkCore
         /// <returns> The options builder so that further configuration can be chained. </returns>
         public static SqliteDbContextOptionsBuilder UseNetTopologySuite(
             this SqliteDbContextOptionsBuilder optionsBuilder
-        ) {
+        )
+        {
             Check.NotNull(optionsBuilder, nameof(optionsBuilder));
 
             var coreOptionsBuilder =

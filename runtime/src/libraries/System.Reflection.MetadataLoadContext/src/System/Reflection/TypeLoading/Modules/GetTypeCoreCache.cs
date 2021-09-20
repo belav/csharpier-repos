@@ -23,7 +23,8 @@ namespace System.Reflection.TypeLoading
             ReadOnlySpan<byte> name,
             int hashCode,
             [NotNullWhen(true)] out RoDefinitionType? type
-        ) {
+        )
+        {
             return _container.TryGetValue(ns, name, hashCode, out type);
         }
 
@@ -32,7 +33,8 @@ namespace System.Reflection.TypeLoading
             ReadOnlySpan<byte> name,
             int hashCode,
             RoDefinitionType type
-        ) {
+        )
+        {
             if (_container.TryGetValue(ns, name, hashCode, out RoDefinitionType? prior))
                 return prior;
 
@@ -82,7 +84,8 @@ namespace System.Reflection.TypeLoading
                 int[] buckets,
                 Entry[] entries,
                 int nextFreeEntry
-            ) {
+            )
+            {
                 _buckets = buckets;
                 _entries = entries;
                 _nextFreeEntry = nextFreeEntry;
@@ -94,7 +97,8 @@ namespace System.Reflection.TypeLoading
                 ReadOnlySpan<byte> name,
                 int hashCode,
                 [NotNullWhen(true)] out RoDefinitionType? value
-            ) {
+            )
+            {
                 // Lock acquistion NOT required.
 
                 int bucket = ComputeBucket(hashCode, _buckets.Length);

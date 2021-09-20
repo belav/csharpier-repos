@@ -34,7 +34,8 @@ namespace Microsoft.AspNetCore.Identity
             string purpose,
             UserManager<TUser> manager,
             TUser user
-        ) {
+        )
+        {
             if (manager == null)
             {
                 throw new ArgumentNullException(nameof(manager));
@@ -64,7 +65,8 @@ namespace Microsoft.AspNetCore.Identity
             string token,
             UserManager<TUser> manager,
             TUser user
-        ) {
+        )
+        {
             if (manager == null)
             {
                 throw new ArgumentNullException(nameof(manager));
@@ -95,7 +97,8 @@ namespace Microsoft.AspNetCore.Identity
             string purpose,
             UserManager<TUser> manager,
             TUser user
-        ) {
+        )
+        {
             if (manager == null)
             {
                 throw new ArgumentNullException(nameof(manager));

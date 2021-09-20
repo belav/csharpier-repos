@@ -327,7 +327,8 @@ namespace System.Text.RegularExpressions.Tests
             string input,
             RegexOptions options,
             CaptureData[] expected
-        ) {
+        )
+        {
             if (options == RegexOptions.None)
             {
                 Regex regexBasic = new Regex(pattern);

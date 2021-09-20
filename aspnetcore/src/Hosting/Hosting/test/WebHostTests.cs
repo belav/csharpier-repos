@@ -147,7 +147,8 @@ namespace Microsoft.AspNetCore.Hosting
                     .UseFakeServer()
                     .UseStartup("Microsoft.AspNetCore.Hosting.Tests")
                     .Start()
-            ) {
+            )
+            {
                 var server = (FakeServer)host.Services.GetRequiredService<IServer>();
                 Assert.NotNull(host);
                 Assert.Equal(1, server.StartInstances.Count);
@@ -167,7 +168,8 @@ namespace Microsoft.AspNetCore.Hosting
                     .UseFakeServer()
                     .UseStartup("Microsoft.AspNetCore.Hosting.Tests")
                     .Build()
-            ) {
+            )
+            {
                 var lifetime = host.Services.GetRequiredService<IHostApplicationLifetime>();
 #pragma warning disable CS0618 // Type or member is obsolete
                 var lifetime2 =
@@ -233,7 +235,8 @@ namespace Microsoft.AspNetCore.Hosting
                     )
                     .UseStartup("Microsoft.AspNetCore.Hosting.Tests")
                     .Build()
-            ) {
+            )
+            {
                 await host.StartAsync();
 
                 var cts = new CancellationTokenSource();
@@ -279,7 +282,8 @@ namespace Microsoft.AspNetCore.Hosting
                     )
                     .UseStartup("Microsoft.AspNetCore.Hosting.Tests")
                     .Build()
-            ) {
+            )
+            {
                 await host.StartAsync();
 
                 var task = host.StopAsync();
@@ -322,7 +326,8 @@ namespace Microsoft.AspNetCore.Hosting
                     )
                     .UseStartup("Microsoft.AspNetCore.Hosting.Tests")
                     .Build()
-            ) {
+            )
+            {
                 await host.StartAsync();
 
                 var cts = new CancellationTokenSource();
@@ -342,7 +347,8 @@ namespace Microsoft.AspNetCore.Hosting
                     .UseFakeServer()
                     .UseStartup("Microsoft.AspNetCore.Hosting.Tests")
                     .Build()
-            ) {
+            )
+            {
                 var lifetime = host.Services.GetRequiredService<IHostApplicationLifetime>();
                 var applicationStartedEvent = new ManualResetEventSlim(false);
                 var applicationStoppingEvent = new ManualResetEventSlim(false);
@@ -423,7 +429,8 @@ namespace Microsoft.AspNetCore.Hosting
                     )
                     .UseStartup("Microsoft.AspNetCore.Hosting.Tests")
                     .Build()
-            ) {
+            )
+            {
                 await host.StartAsync();
 
                 var singleton = (FakeService)host.Services.GetService<IFakeSingletonService>();
@@ -515,7 +522,8 @@ namespace Microsoft.AspNetCore.Hosting
                         }
                     )
                     .Build()
-            ) {
+            )
+            {
                 await Assert.ThrowsAsync<InvalidOperationException>(() => host.StartAsync());
                 Assert.True(hostedSeviceCalls1[0]);
                 Assert.False(hostedServiceCalls2[0]);
@@ -555,7 +563,8 @@ namespace Microsoft.AspNetCore.Hosting
                         }
                     )
                     .Build()
-            ) {
+            )
+            {
                 var lifetime = host.Services.GetRequiredService<IHostApplicationLifetime>();
                 lifetime.StopApplication();
 
@@ -581,7 +590,8 @@ namespace Microsoft.AspNetCore.Hosting
                         }
                     )
                     .Build()
-            ) {
+            )
+            {
                 var lifetime = host.Services.GetRequiredService<IHostApplicationLifetime>();
                 lifetime.StopApplication();
 
@@ -608,7 +618,8 @@ namespace Microsoft.AspNetCore.Hosting
                         }
                     )
                     .Build()
-            ) {
+            )
+            {
                 var lifetime = host.Services.GetRequiredService<IHostApplicationLifetime>();
                 lifetime.StopApplication();
 
@@ -656,7 +667,8 @@ namespace Microsoft.AspNetCore.Hosting
                         }
                     )
                     .Build()
-            ) {
+            )
+            {
                 var lifetime = host.Services.GetRequiredService<IHostApplicationLifetime>();
 
                 Assert.Equal(0, startedCalls);
@@ -714,7 +726,8 @@ namespace Microsoft.AspNetCore.Hosting
                         }
                     )
                     .Build()
-            ) {
+            )
+            {
                 var lifetime = host.Services.GetRequiredService<IHostApplicationLifetime>();
 
                 Assert.Equal(0, startedCalls);
@@ -746,7 +759,8 @@ namespace Microsoft.AspNetCore.Hosting
                         }
                     )
                     .Build()
-            ) {
+            )
+            {
                 var applicationLifetime = host.Services.GetService<IHostApplicationLifetime>();
 #pragma warning disable CS0618 // Type or member is obsolete
                 var applicationLifetime2 =
@@ -783,7 +797,8 @@ namespace Microsoft.AspNetCore.Hosting
                     .UseStartup("Microsoft.AspNetCore.Hosting.Tests")
                     .UseEnvironment("WithHostingEnvironment")
                     .Build()
-            ) {
+            )
+            {
                 await host.StartAsync();
                 var env = host.Services.GetService<IHostEnvironment>();
 #pragma warning disable CS0618 // Type or member is obsolete
@@ -818,7 +833,8 @@ namespace Microsoft.AspNetCore.Hosting
                     .UseFakeServer()
                     .ConfigureServices(services => services.AddOptions())
                     .Build()
-            ) {
+            )
+            {
                 Assert.NotNull(host.Services.GetRequiredService<IOptions<object>>());
             }
         }
@@ -853,7 +869,8 @@ namespace Microsoft.AspNetCore.Hosting
                         }
                     )
                     .Build()
-            ) {
+            )
+            {
                 host.Start();
                 Assert.Equal(6, configureOrder);
             }
@@ -869,7 +886,8 @@ namespace Microsoft.AspNetCore.Hosting
                 Action verifyConfigureOrder,
                 Action verifyBuildBeforeOrder,
                 Action verifyBuildAfterOrder
-            ) {
+            )
+            {
                 _verifyConfigureOrder = verifyConfigureOrder;
                 _verifyBuildBeforeOrder = verifyBuildBeforeOrder;
                 _verifyBuildAfterOrder = verifyBuildAfterOrder;
@@ -1151,7 +1169,8 @@ namespace Microsoft.AspNetCore.Hosting
                     )
                     .UseStartup("Microsoft.AspNetCore.Hosting.Tests")
                     .Build()
-            ) {
+            )
+            {
                 await host.StopAsync();
             }
 
@@ -1174,7 +1193,8 @@ namespace Microsoft.AspNetCore.Hosting
                     )
                     .UseStartup("Microsoft.AspNetCore.Hosting.Tests")
                     .Build()
-            ) {
+            )
+            {
                 var svc = (TestHostedService)host.Services.GetRequiredService<IHostedService>();
                 await svc.StopAsync(default);
             }
@@ -1364,7 +1384,8 @@ namespace Microsoft.AspNetCore.Hosting
             public Task StartAsync<TContext>(
                 IHttpApplication<TContext> application,
                 CancellationToken cancellationToken
-            ) {
+            )
+            {
                 var startInstance = new StartInstance();
                 StartInstances.Add(startInstance);
                 var context = application.CreateContext(CreateRequestFeatures());
@@ -1478,7 +1499,8 @@ namespace Microsoft.AspNetCore.Hosting
                 TState state,
                 Exception exception,
                 Func<TState, Exception, string> formatter
-            ) {
+            )
+            {
                 var stringified = formatter(state, exception);
             }
 

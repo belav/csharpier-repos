@@ -265,7 +265,8 @@ namespace System.Threading
             if (
                 (state == System.Threading.ApartmentState.Unknown)
                 && (retState == System.Threading.ApartmentState.MTA)
-            ) {
+            )
+            {
                 return true;
             }
 

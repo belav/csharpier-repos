@@ -113,7 +113,8 @@ namespace System.ComponentModel.Composition
             StringBuilder typeName,
             Type type,
             bool formatGenericName
-        ) {
+        )
+        {
             // Writes type with namesapce
             if (!string.IsNullOrEmpty(type.Namespace))
             {
@@ -155,7 +156,8 @@ namespace System.ComponentModel.Composition
             StringBuilder typeName,
             Type type,
             bool formatGenericName
-        ) {
+        )
+        {
             //
             // Writes non-generic type
             //
@@ -186,7 +188,8 @@ namespace System.ComponentModel.Composition
             StringBuilder typeName,
             Type type,
             bool formatGenericName
-        ) {
+        )
+        {
             //
             // Writes array type  e.g <TypeName>[]
             // Note that jagged arrays are stored in reverse order
@@ -206,7 +209,8 @@ namespace System.ComponentModel.Composition
             StringBuilder typeName,
             Type type,
             bool formatGenericName
-        ) {
+        )
+        {
             //
             // Writes pointer type  e.g <TypeName>*
             //
@@ -218,7 +222,8 @@ namespace System.ComponentModel.Composition
             StringBuilder typeName,
             Type type,
             bool formatGenericName
-        ) {
+        )
+        {
             //
             // Writes by ref type e.g <TypeName>&
             //
@@ -246,7 +251,8 @@ namespace System.ComponentModel.Composition
             bool isDefinition,
             Queue<Type> genericTypeArguments,
             bool formatGenericName
-        ) {
+        )
+        {
             //
             // Writes generic type including parent generic types
             // genericTypeArguments contains type arguments obtained from the most nested type
@@ -285,7 +291,8 @@ namespace System.ComponentModel.Composition
             bool isDefinition,
             Queue<Type> genericTypeArguments,
             bool formatGenericName
-        ) {
+        )
+        {
             //
             // Writes generic type name, e.g. generic name and generic arguments
             //
@@ -311,7 +318,8 @@ namespace System.ComponentModel.Composition
             bool isDefinition,
             Queue<Type> genericTypeArguments,
             bool formatGenericName
-        ) {
+        )
+        {
             //
             // Writes type arguments in brackets, e.g. (<contract_name1>, <contract_name2>, ...)
             //
@@ -338,7 +346,8 @@ namespace System.ComponentModel.Composition
             bool isDefinition,
             Type genericTypeArgument,
             bool formatGenericName
-        ) {
+        )
+        {
             if (!isDefinition && !genericTypeArgument.IsGenericParameter)
             {
                 WriteTypeWithNamespace(typeName, genericTypeArgument, formatGenericName);
@@ -359,7 +368,8 @@ namespace System.ComponentModel.Composition
             string customKeyword,
             Type[] types,
             bool formatGenericName
-        ) {
+        )
+        {
             //
             // Writes custom modifiers in the format: customKeyword(<contract_name>,<contract_name>,...)
             //

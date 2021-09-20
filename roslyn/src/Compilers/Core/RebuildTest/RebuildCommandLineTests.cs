@@ -113,7 +113,8 @@ namespace Microsoft.CodeAnalysis.Rebuild.UnitTests
             string peFilePath,
             string? pdbFilePath = null,
             CancellationToken cancellationToken = default
-        ) {
+        )
+        {
             Assert.True(commonCompiler.Arguments.CompilationOptions.Deterministic);
             using var writer = new StringWriter();
             commonCompiler.FileSystem = TestableFileSystem.CreateForMap(FilePathToStreamMap);
@@ -257,7 +258,8 @@ class Library
             void Permutate(
                 CommandInfo commandInfo,
                 params Func<CommandInfo, IEnumerable<CommandInfo>>[] permutations
-            ) {
+            )
+            {
                 IEnumerable<CommandInfo> e = new[] { commandInfo };
                 foreach (var p in permutations)
                 {
@@ -354,7 +356,8 @@ class Library
             string peFilePath,
             string? pdbFilePath,
             string? commandLineSuffix
-        ) {
+        )
+        {
             TestOutputHelper.WriteLine($"Command Line: {commandLine}");
             AddCSharpSourceFiles();
             var args = new List<string>(
@@ -445,7 +448,8 @@ End Module
             void Permutate(
                 CommandInfo commandInfo,
                 params Func<CommandInfo, IEnumerable<CommandInfo>>[] permutations
-            ) {
+            )
+            {
                 IEnumerable<CommandInfo> e = new[] { commandInfo };
                 foreach (var p in permutations)
                 {

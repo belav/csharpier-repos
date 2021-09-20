@@ -24,7 +24,8 @@ namespace Microsoft.CodeAnalysis.CSharp.OrganizeImports
         public async Task<Document> OrganizeImportsAsync(
             Document document,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var root = await document.GetSyntaxRootAsync(cancellationToken).ConfigureAwait(false);
             var options = await document.GetOptionsAsync(cancellationToken).ConfigureAwait(false);
 

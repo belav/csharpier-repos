@@ -55,7 +55,8 @@ namespace Microsoft.CodeAnalysis.ExpressionEvaluator
         internal ResultProviderTestBase(
             DkmInspectionSession inspectionSession,
             DkmInspectionContext defaultInspectionContext
-        ) {
+        )
+        {
             _inspectionSession = inspectionSession;
             DefaultInspectionContext = defaultInspectionContext;
 
@@ -69,7 +70,8 @@ namespace Microsoft.CodeAnalysis.ExpressionEvaluator
             string alias = null,
             DkmEvaluationResultFlags evalFlags = DkmEvaluationResultFlags.None,
             DkmClrValueFlags valueFlags = DkmClrValueFlags.None
-        ) {
+        )
+        {
             if (type == null)
             {
                 type = value.GetType();
@@ -91,7 +93,8 @@ namespace Microsoft.CodeAnalysis.ExpressionEvaluator
             DkmEvaluationResultFlags evalFlags = DkmEvaluationResultFlags.None,
             DkmClrValueFlags valueFlags = DkmClrValueFlags.None,
             ulong nativeComPointer = 0
-        ) {
+        )
+        {
             return new DkmClrValue(
                 value,
                 DkmClrValue.GetHostObjectValue(type.GetLmrType(), value),
@@ -173,7 +176,8 @@ namespace Microsoft.CodeAnalysis.ExpressionEvaluator
             DkmEvaluationFlags flags = DkmEvaluationFlags.None,
             uint radix = 10,
             DkmRuntimeInstance runtimeInstance = null
-        ) {
+        )
+        {
             return CreateDkmInspectionContext(_inspectionSession, flags, radix, runtimeInstance);
         }
 
@@ -182,7 +186,8 @@ namespace Microsoft.CodeAnalysis.ExpressionEvaluator
             DkmEvaluationFlags flags,
             uint radix,
             DkmRuntimeInstance runtimeInstance = null
-        ) {
+        )
+        {
             return new DkmInspectionContext(inspectionSession, flags, radix, runtimeInstance);
         }
 
@@ -191,7 +196,8 @@ namespace Microsoft.CodeAnalysis.ExpressionEvaluator
             DkmClrValue value,
             DkmClrType declaredType = null,
             DkmInspectionContext inspectionContext = null
-        ) {
+        )
+        {
             return FormatResult(
                 name,
                 name,
@@ -208,7 +214,8 @@ namespace Microsoft.CodeAnalysis.ExpressionEvaluator
             DkmClrType declaredType = null,
             DkmClrCustomTypeInfo declaredTypeInfo = null,
             DkmInspectionContext inspectionContext = null
-        ) {
+        )
+        {
             var asyncResult = FormatAsyncResult(
                 name,
                 fullName,
@@ -232,7 +239,8 @@ namespace Microsoft.CodeAnalysis.ExpressionEvaluator
             DkmClrType declaredType = null,
             DkmClrCustomTypeInfo declaredTypeInfo = null,
             DkmInspectionContext inspectionContext = null
-        ) {
+        )
+        {
             DkmEvaluationAsyncResult asyncResult = default(DkmEvaluationAsyncResult);
             var workList = new DkmWorkList();
             value.GetResult(
@@ -252,7 +260,8 @@ namespace Microsoft.CodeAnalysis.ExpressionEvaluator
         internal DkmEvaluationResult[] GetChildren(
             DkmEvaluationResult evalResult,
             DkmInspectionContext inspectionContext = null
-        ) {
+        )
+        {
             DkmEvaluationResultEnumContext enumContext;
             var builder = ArrayBuilder<DkmEvaluationResult>.GetInstance();
 
@@ -294,7 +303,8 @@ namespace Microsoft.CodeAnalysis.ExpressionEvaluator
             int initialRequestSize,
             DkmInspectionContext inspectionContext,
             out DkmEvaluationResultEnumContext enumContext
-        ) {
+        )
+        {
             DkmGetChildrenAsyncResult getChildrenResult = default(DkmGetChildrenAsyncResult);
             var workList = new DkmWorkList();
             evalResult.GetChildren(
@@ -320,7 +330,8 @@ namespace Microsoft.CodeAnalysis.ExpressionEvaluator
             DkmEvaluationResultEnumContext enumContext,
             int startIndex,
             int count
-        ) {
+        )
+        {
             DkmEvaluationEnumAsyncResult getItemsResult = default(DkmEvaluationEnumAsyncResult);
             var workList = new DkmWorkList();
             enumContext.GetItems(
@@ -357,7 +368,8 @@ namespace Microsoft.CodeAnalysis.ExpressionEvaluator
             DkmEvaluationResultAccessType access = UnspecifiedAccessType,
             string editableValue = null,
             DkmCustomUIVisualizerInfo[] customUIVisualizerInfo = null
-        ) {
+        )
+        {
             return DkmSuccessEvaluationResult.Create(
                 null,
                 null,
@@ -385,7 +397,8 @@ namespace Microsoft.CodeAnalysis.ExpressionEvaluator
             string fullName,
             string expression,
             DkmLanguage language
-        ) {
+        )
+        {
             return DkmIntermediateEvaluationResult.Create(
                 InspectionContext: null,
                 StackFrame: null,
@@ -404,7 +417,8 @@ namespace Microsoft.CodeAnalysis.ExpressionEvaluator
             string type = null,
             string fullName = null,
             DkmEvaluationResultFlags flags = DkmEvaluationResultFlags.None
-        ) {
+        )
+        {
             return DkmFailedEvaluationResult.Create(
                 null,
                 null,
@@ -420,7 +434,8 @@ namespace Microsoft.CodeAnalysis.ExpressionEvaluator
         internal static void Verify(
             IReadOnlyList<DkmEvaluationResult> actual,
             params DkmEvaluationResult[] expected
-        ) {
+        )
+        {
             try
             {
                 int n = actual.Count;
@@ -632,7 +647,8 @@ namespace Microsoft.CodeAnalysis.ExpressionEvaluator
             bool IEqualityComparer<DkmCustomUIVisualizerInfo>.Equals(
                 DkmCustomUIVisualizerInfo x,
                 DkmCustomUIVisualizerInfo y
-            ) {
+            )
+            {
                 return x == y
                     || (
                         x != null
@@ -652,7 +668,8 @@ namespace Microsoft.CodeAnalysis.ExpressionEvaluator
 
             int IEqualityComparer<DkmCustomUIVisualizerInfo>.GetHashCode(
                 DkmCustomUIVisualizerInfo obj
-            ) {
+            )
+            {
                 throw new NotImplementedException();
             }
         }

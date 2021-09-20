@@ -36,7 +36,8 @@ namespace System.IO.Ports.Tests
                 SerialPort com = new SerialPort(
                     TCSupport.LocalMachineSerialInfo.FirstAvailablePortName
                 )
-            ) {
+            )
+            {
                 Debug.WriteLine("Verifying setting PortName=COM1 after open has been called");
 
                 VerifyExceptionAfterOpen(
@@ -54,7 +55,8 @@ namespace System.IO.Ports.Tests
                 SerialPort com = new SerialPort(
                     TCSupport.LocalMachineSerialInfo.SecondAvailablePortName
                 )
-            ) {
+            )
+            {
                 Debug.WriteLine("Verifying setting PortName=COM2 after open has been called");
 
                 VerifyExceptionAfterOpen(
@@ -253,7 +255,8 @@ namespace System.IO.Ports.Tests
             ThrowAt throwAt,
             Type expectedExceptionAtOpen,
             Type expectedExceptionAfterOpen
-        ) {
+        )
+        {
             VerifyException(
                 portName,
                 throwAt,
@@ -267,12 +270,14 @@ namespace System.IO.Ports.Tests
             ThrowAt throwAt,
             Type[] expectedExceptionAtOpen,
             Type expectedExceptionAfterOpen
-        ) {
+        )
+        {
             using (
                 SerialPort com = new SerialPort(
                     TCSupport.LocalMachineSerialInfo.FirstAvailablePortName
                 )
-            ) {
+            )
+            {
                 VerifyExceptionAtOpen(com, portName, throwAt, expectedExceptionAtOpen);
 
                 if (com.IsOpen)
@@ -287,7 +292,8 @@ namespace System.IO.Ports.Tests
             string portName,
             ThrowAt throwAt,
             Type expectedException
-        ) {
+        )
+        {
             VerifyExceptionAtOpen(com, portName, throwAt, new[] { expectedException });
         }
 
@@ -296,7 +302,8 @@ namespace System.IO.Ports.Tests
             string portName,
             ThrowAt throwAt,
             Type[] expectedExceptions
-        ) {
+        )
+        {
             string origPortName = com.PortName;
 
             SerialPortProperties serPortProp = new SerialPortProperties();
@@ -378,7 +385,8 @@ namespace System.IO.Ports.Tests
             SerialPort com,
             string portName,
             Type expectedException
-        ) {
+        )
+        {
             SerialPortProperties serPortProp = new SerialPortProperties();
 
             com.Open();

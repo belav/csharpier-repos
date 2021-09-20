@@ -31,7 +31,8 @@ namespace Microsoft.CodeAnalysis.ExtractMethod
                     SyntaxNode root,
                     TextSpan span,
                     CancellationToken cancellationToken
-                ) {
+                )
+                {
                     Contract.ThrowIfNull(semanticModel);
                     Contract.ThrowIfNull(service);
                     Contract.ThrowIfNull(root);
@@ -69,7 +70,8 @@ namespace Microsoft.CodeAnalysis.ExtractMethod
                         || !_service.IsIdentifier(token)
                         || !_span.Contains(token.Span)
                         || _service.IsNameOfNamedArgument(token.Parent)
-                    ) {
+                    )
+                    {
                         return;
                     }
 

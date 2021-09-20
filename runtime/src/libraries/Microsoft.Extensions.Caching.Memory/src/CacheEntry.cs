@@ -256,7 +256,8 @@ namespace Microsoft.Extensions.Caching.Memory
                 if (
                     !parent.AbsoluteExpiration.HasValue
                     || AbsoluteExpiration < parent.AbsoluteExpiration
-                ) {
+                )
+                {
                     parent.AbsoluteExpiration = AbsoluteExpiration;
                 }
             }

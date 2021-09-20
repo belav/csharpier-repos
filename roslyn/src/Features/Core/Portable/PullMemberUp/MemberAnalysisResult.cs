@@ -49,7 +49,8 @@ namespace Microsoft.CodeAnalysis.PullMemberUp
             bool changeOriginalToNonStatic,
             bool makeMemberDeclarationAbstract,
             bool changeDestinationTypeToAbstract
-        ) {
+        )
+        {
             Member = member;
             ChangeOriginalToPublic = changeOriginalToPublic;
             ChangeOriginalToNonStatic = changeOriginalToNonStatic;

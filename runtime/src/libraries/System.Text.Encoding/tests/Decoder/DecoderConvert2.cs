@@ -25,7 +25,8 @@ namespace System.Text.Tests
             int byteCount,
             char[] chars,
             int charIndex
-        ) {
+        )
+        {
             return _decoder.GetChars(bytes, byteIndex, byteCount, chars, charIndex);
         }
 
@@ -569,7 +570,8 @@ namespace System.Text.Tests
             int desiredCharsUsed,
             bool desiredCompleted,
             string errorno
-        ) {
+        )
+        {
             int bytesUsed;
             int charsUsed;
             bool completed;
@@ -606,7 +608,8 @@ namespace System.Text.Tests
             bool desiredCompleted,
             char[] desiredChars,
             string errorno
-        ) {
+        )
+        {
             VerificationHelper(
                 decoder,
                 bytes,

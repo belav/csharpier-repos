@@ -58,7 +58,8 @@ namespace Microsoft.CodeAnalysis.ExtractInterface
             Document document,
             TextSpan span,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var typeAnalysisResult = await AnalyzeTypeAtPositionAsync(
                     document,
                     span.Start,
@@ -77,7 +78,8 @@ namespace Microsoft.CodeAnalysis.ExtractInterface
             int position,
             Action<string, NotificationSeverity> errorHandler,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var typeAnalysisResult = await AnalyzeTypeAtPositionAsync(
                     documentWithTypeToExtractFrom,
                     position,
@@ -104,7 +106,8 @@ namespace Microsoft.CodeAnalysis.ExtractInterface
             int position,
             TypeDiscoveryRule typeDiscoveryRule,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var typeNode = await GetTypeDeclarationAsync(
                     document,
                     position,
@@ -149,7 +152,8 @@ namespace Microsoft.CodeAnalysis.ExtractInterface
         public async Task<ExtractInterfaceResult> ExtractInterfaceFromAnalyzedTypeAsync(
             ExtractInterfaceTypeAnalysisResult refactoringResult,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var containingNamespaceDisplay =
                 refactoringResult.TypeToExtractFrom.ContainingNamespace.IsGlobalNamespace
                     ? string.Empty
@@ -181,7 +185,8 @@ namespace Microsoft.CodeAnalysis.ExtractInterface
             ExtractInterfaceTypeAnalysisResult refactoringResult,
             ExtractInterfaceOptionsResult extractInterfaceOptions,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var solution = refactoringResult.DocumentToExtractFrom.Project.Solution;
 
             var extractedInterfaceSymbol = CodeGenerationSymbolFactory.CreateNamedTypeSymbol(
@@ -240,7 +245,8 @@ namespace Microsoft.CodeAnalysis.ExtractInterface
             ExtractInterfaceTypeAnalysisResult refactoringResult,
             ExtractInterfaceOptionsResult extractInterfaceOptions,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var symbolMapping = await AnnotatedSymbolMapping.CreateAsync(
                     extractInterfaceOptions.IncludedMembers,
                     solution,
@@ -302,7 +308,8 @@ namespace Microsoft.CodeAnalysis.ExtractInterface
             INamedTypeSymbol extractedInterfaceSymbol,
             ExtractInterfaceOptionsResult extractInterfaceOptions,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             // Track all of the symbols we need to modify, which includes the original type declaration being modified
             var symbolMapping = await AnnotatedSymbolMapping.CreateAsync(
                     extractInterfaceOptions.IncludedMembers,
@@ -361,7 +368,8 @@ namespace Microsoft.CodeAnalysis.ExtractInterface
             IEnumerable<ISymbol> extractableMembers,
             string containingNamespace,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var conflictingTypeNames = type.ContainingNamespace.GetAllTypes(cancellationToken)
                 .Select(t => t.Name);
             var candidateInterfaceName =
@@ -397,7 +405,8 @@ namespace Microsoft.CodeAnalysis.ExtractInterface
             Solution unformattedSolution,
             IEnumerable<DocumentId> documentIds,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             // Since code action performs formatting and simplification on a single document,
             // this ensures that anything marked with formatter or simplifier annotations gets
             // correctly handled as long as it it's in the listed documents
@@ -434,7 +443,8 @@ namespace Microsoft.CodeAnalysis.ExtractInterface
             IEnumerable<ISymbol> includedMembers,
             ImmutableDictionary<ISymbol, SyntaxAnnotation> symbolToDeclarationAnnotationMap,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             // If an interface "INewInterface" is extracted from an interface "IExistingInterface",
             // then "INewInterface" is not marked as implementing "IExistingInterface" and its
             // extracted members are also not updated.
@@ -492,7 +502,8 @@ namespace Microsoft.CodeAnalysis.ExtractInterface
 
         private static ImmutableArray<ISymbol> CreateInterfaceMembers(
             IEnumerable<ISymbol> includedMembers
-        ) {
+        )
+        {
             using var _ = ArrayBuilder<ISymbol>.GetInstance(out var interfaceMembers);
 
             foreach (var member in includedMembers)

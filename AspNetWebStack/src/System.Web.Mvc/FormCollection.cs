@@ -37,7 +37,8 @@ namespace System.Web.Mvc
             ControllerBase controller,
             Func<NameValueCollection> validatedValuesThunk,
             Func<NameValueCollection> unvalidatedValuesThunk
-        ) {
+        )
+        {
             Add(
                 controller == null || controller.ValidateRequest
                   ? validatedValuesThunk()
@@ -99,7 +100,8 @@ namespace System.Web.Mvc
                 public object BindModel(
                     ControllerContext controllerContext,
                     ModelBindingContext bindingContext
-                ) {
+                )
+                {
                     if (controllerContext == null)
                     {
                         throw new ArgumentNullException("controllerContext");

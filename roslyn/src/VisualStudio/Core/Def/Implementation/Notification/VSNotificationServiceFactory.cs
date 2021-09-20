@@ -58,7 +58,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Notification
                 string message,
                 string title = null,
                 NotificationSeverity severity = NotificationSeverity.Warning
-            ) {
+            )
+            {
                 if (NotificationCallback != null)
                 {
                     // invoke the callback
@@ -97,7 +98,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Notification
                 string message,
                 string title = null,
                 NotificationSeverity severity = NotificationSeverity.Warning
-            ) {
+            )
+            {
                 _uiShellService.EnableModeless(0);
                 try
                 {

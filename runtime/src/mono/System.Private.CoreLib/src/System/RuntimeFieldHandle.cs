@@ -76,7 +76,8 @@ namespace System
             FieldAttributes fieldAttr,
             RuntimeType? declaringType,
             ref bool domainInitialized
-        ) {
+        )
+        {
             SetValueInternal(field, obj, value);
         }
 

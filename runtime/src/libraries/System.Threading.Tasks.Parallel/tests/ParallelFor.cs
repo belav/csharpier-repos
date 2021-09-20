@@ -402,7 +402,8 @@ namespace System.Threading.Tasks.Tests
             WithParallelOption parallelOption,
             ActionWithState stateOption,
             ActionWithLocal localOption
-        ) {
+        )
+        {
             var parameters = new TestParameters(api, startIndexBase)
             {
                 Count = count,

@@ -63,7 +63,8 @@ namespace System.ServiceProcess
                     && _status.currentState != ServiceControlStatus.STATE_START_PENDING
                     && _status.currentState != ServiceControlStatus.STATE_STOP_PENDING
                     && _status.currentState != ServiceControlStatus.STATE_PAUSE_PENDING
-                ) {
+                )
+                {
                     throw new InvalidOperationException(SR.NotInPendingState);
                 }
 
@@ -507,7 +508,8 @@ namespace System.ServiceProcess
                 if (
                     _status.currentState == ServiceControlStatus.STATE_PAUSED
                     || _status.currentState == ServiceControlStatus.STATE_RUNNING
-                ) {
+                )
+                {
                     fixed (SERVICE_STATUS* pStatus = &_status)
                     {
                         _status.checkPoint = 0;
@@ -692,7 +694,8 @@ namespace System.ServiceProcess
             int eventType,
             IntPtr eventData,
             IntPtr eventContext
-        ) {
+        )
+        {
             switch (command)
             {
                 case ControlOptions.CONTROL_POWEREVENT:
@@ -741,7 +744,8 @@ namespace System.ServiceProcess
                     && _status.currentState != ServiceControlStatus.STATE_START_PENDING
                     && _status.currentState != ServiceControlStatus.STATE_STOP_PENDING
                     && _status.currentState != ServiceControlStatus.STATE_PAUSE_PENDING
-                ) {
+                )
+                {
                     switch (command)
                     {
                         case ControlOptions.CONTROL_CONTINUE:
@@ -775,7 +779,8 @@ namespace System.ServiceProcess
                             if (
                                 _status.currentState == ServiceControlStatus.STATE_PAUSED
                                 || _status.currentState == ServiceControlStatus.STATE_RUNNING
-                            ) {
+                            )
+                            {
                                 _status.currentState = ServiceControlStatus.STATE_STOP_PENDING;
                                 SetServiceStatus(_statusHandle, pStatus);
                                 // Set our copy of the state back to the previous so that the deferred stop routine
@@ -937,7 +942,8 @@ namespace System.ServiceProcess
         private void WriteLogEntry(
             string message,
             EventLogEntryType type = EventLogEntryType.Information
-        ) {
+        )
+        {
             // EventLog failures shouldn't affect the service operation
             try
             {

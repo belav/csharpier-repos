@@ -37,7 +37,8 @@ namespace Microsoft.CodeAnalysis.Operations
             bool isImplicit,
             bool isNullable,
             IMethodSymbol? methodSymbol
-        ) {
+        )
+        {
             _conversionKind =
                 (exists ? ConversionKind.Exists : ConversionKind.None)
                 | (isIdentity ? ConversionKind.IsIdentity : ConversionKind.None)

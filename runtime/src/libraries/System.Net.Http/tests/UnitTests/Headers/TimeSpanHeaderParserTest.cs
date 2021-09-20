@@ -116,7 +116,8 @@ namespace System.Net.Http.Tests
             int startIndex,
             TimeSpan expectedResult,
             int expectedIndex
-        ) {
+        )
+        {
             TimeSpanHeaderParser parser = TimeSpanHeaderParser.Parser;
             object result = 0;
             Assert.True(

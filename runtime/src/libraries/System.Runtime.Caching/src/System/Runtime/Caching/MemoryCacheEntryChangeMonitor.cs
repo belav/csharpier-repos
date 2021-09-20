@@ -91,7 +91,8 @@ namespace System.Runtime.Caching
             MemoryCacheEntry entry,
             ref bool hasChanged,
             ref DateTime utcCreated
-        ) {
+        )
+        {
             if (entry != null)
             {
                 // pass reference to self so the dependency can notify us when it changes
@@ -162,7 +163,8 @@ namespace System.Runtime.Caching
             ReadOnlyCollection<string> keys,
             string regionName,
             MemoryCache cache
-        ) {
+        )
+        {
             Debug.Assert(keys != null && keys.Count > 0, "keys != null && keys.Count > 0");
             _keys = keys;
             _regionName = regionName;

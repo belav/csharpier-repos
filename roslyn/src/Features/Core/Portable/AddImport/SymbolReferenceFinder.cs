@@ -50,7 +50,8 @@ namespace Microsoft.CodeAnalysis.AddImport
                 bool searchReferenceAssemblies,
                 ImmutableArray<PackageSource> packageSources,
                 CancellationToken cancellationToken
-            ) {
+            )
+            {
                 _owner = owner;
                 _document = document;
                 _semanticModel = semanticModel;
@@ -89,7 +90,8 @@ namespace Microsoft.CodeAnalysis.AddImport
                     );
                     containingNamespace != null;
                     containingNamespace = containingNamespace.ContainingNamespace
-                ) {
+                )
+                {
                     set.Add(MapToCompilationNamespaceIfPossible(containingNamespace));
                 }
 
@@ -105,7 +107,8 @@ namespace Microsoft.CodeAnalysis.AddImport
             internal Task<ImmutableArray<SymbolReference>> FindInAllSymbolsInStartingProjectAsync(
                 bool exact,
                 CancellationToken cancellationToken
-            ) {
+            )
+            {
                 var searchScope = new AllSymbolsProjectSearchScope(
                     _owner,
                     _document.Project,
@@ -120,7 +123,8 @@ namespace Microsoft.CodeAnalysis.AddImport
                 Project project,
                 bool exact,
                 CancellationToken cancellationToken
-            ) {
+            )
+            {
                 var searchScope = new SourceSymbolsProjectSearchScope(
                     _owner,
                     projectToAssembly,
@@ -137,7 +141,8 @@ namespace Microsoft.CodeAnalysis.AddImport
                 PortableExecutableReference metadataReference,
                 bool exact,
                 CancellationToken cancellationToken
-            ) {
+            )
+            {
                 var searchScope = new MetadataSymbolsSearchScope(
                     _owner,
                     _document.Project.Solution,
@@ -194,7 +199,8 @@ namespace Microsoft.CodeAnalysis.AddImport
 
             private ImmutableArray<SymbolReference> DeDupeAndSortReferences(
                 ImmutableArray<SymbolReference> allReferences
-            ) {
+            )
+            {
                 return allReferences.Distinct()
                     .Where(NotNull)
                     .Where(NotGlobalNamespace)
@@ -210,7 +216,8 @@ namespace Microsoft.CodeAnalysis.AddImport
                 out bool inAttributeContext,
                 out bool hasIncompleteParentMember,
                 out bool looksGeneric
-            ) {
+            )
+            {
                 // Has to be a simple identifier or generic name.
                 syntaxFacts.GetNameAndArityOfSimpleName(nameNode, out name, out arity);
 
@@ -226,7 +233,8 @@ namespace Microsoft.CodeAnalysis.AddImport
             /// </summary>
             private async Task<ImmutableArray<SymbolReference>> GetReferencesForMatchingTypesAsync(
                 SearchScope searchScope
-            ) {
+            )
+            {
                 searchScope.CancellationToken.ThrowIfCancellationRequested();
                 if (!_owner.CanAddImportForType(_diagnosticId, _node, out var nameNode))
                 {
@@ -249,7 +257,8 @@ namespace Microsoft.CodeAnalysis.AddImport
                         checkForExtensionMethods: false,
                         cancellationToken: searchScope.CancellationToken
                     )
-                ) {
+                )
+                {
                     // If the expression bound, there's nothing to do.
                     return ImmutableArray<SymbolReference>.Empty;
                 }
@@ -326,7 +335,8 @@ namespace Microsoft.CodeAnalysis.AddImport
                 bool inAttributeContext,
                 bool hasIncompleteParentMember,
                 bool looksGeneric
-            ) {
+            )
+            {
                 if (inAttributeContext && !symbol.IsAttribute())
                 {
                     return false;
@@ -365,7 +375,8 @@ namespace Microsoft.CodeAnalysis.AddImport
                             checkForExtensionMethods: false,
                             cancellationToken: searchScope.CancellationToken
                         )
-                    ) {
+                    )
+                    {
                         var symbols = await searchScope.FindDeclarationsAsync(
                                 name,
                                 nameNode,
@@ -404,7 +415,8 @@ namespace Microsoft.CodeAnalysis.AddImport
                         out var nameNode
                     )
                     && nameNode != null
-                ) {
+                )
+                {
                     // We have code like "Color.Black".  "Color" bound to a 'Color Color' property, and
                     // 'Black' did not bind.  We want to find a type called 'Color' that will actually
                     // allow 'Black' to bind.
@@ -412,7 +424,8 @@ namespace Microsoft.CodeAnalysis.AddImport
                     if (
                         syntaxFacts.IsNameOfSimpleMemberAccessExpression(nameNode)
                         || syntaxFacts.IsNameOfMemberBindingExpression(nameNode)
-                    ) {
+                    )
+                    {
                         var expression =
                             syntaxFacts.GetExpressionOfMemberAccessExpression(
                                 nameNode.Parent,
@@ -429,13 +442,15 @@ namespace Microsoft.CodeAnalysis.AddImport
                             if (
                                 symbol?.Kind == SymbolKind.Property
                                 || symbol?.Kind == SymbolKind.Field
-                            ) {
+                            )
+                            {
                                 // Check if we have the 'Color Color' case.
                                 var propertyOrFieldType = symbol.GetSymbolType();
                                 if (
                                     propertyOrFieldType is INamedTypeSymbol propertyType
                                     && Equals(propertyType.Name, symbol.Name)
-                                ) {
+                                )
+                                {
                                     // Try to look up 'Color' as a type.
                                     var symbolResults = await searchScope.FindDeclarationsAsync(
                                             symbol.Name,
@@ -471,7 +486,8 @@ namespace Microsoft.CodeAnalysis.AddImport
             private bool HasAccessibleStaticFieldOrProperty(
                 INamedTypeSymbol namedType,
                 string fieldOrPropertyName
-            ) {
+            )
+            {
                 return namedType.GetMembers(fieldOrPropertyName)
                     .Any(
                         m =>
@@ -499,7 +515,8 @@ namespace Microsoft.CodeAnalysis.AddImport
                         out var nameNode
                     )
                     && nameNode != null
-                ) {
+                )
+                {
                     searchScope.CancellationToken.ThrowIfCancellationRequested();
 
                     // See if the name binds.  If it does, there's nothing further we need to do.
@@ -509,7 +526,8 @@ namespace Microsoft.CodeAnalysis.AddImport
                             checkForExtensionMethods: true,
                             cancellationToken: searchScope.CancellationToken
                         )
-                    ) {
+                    )
+                    {
                         _syntaxFacts.GetNameAndArityOfSimpleName(
                             nameNode,
                             out var name,
@@ -547,7 +565,8 @@ namespace Microsoft.CodeAnalysis.AddImport
                 ImmutableArray<SymbolResult<IMethodSymbol>> methodSymbols,
                 SyntaxNode expression,
                 CancellationToken cancellationToken
-            ) {
+            )
+            {
                 return GetViableExtensionMethodsWorker(methodSymbols)
                     .WhereAsArray(
                         s =>
@@ -564,14 +583,16 @@ namespace Microsoft.CodeAnalysis.AddImport
             private ImmutableArray<SymbolResult<IMethodSymbol>> GetViableExtensionMethods(
                 ImmutableArray<SymbolResult<IMethodSymbol>> methodSymbols,
                 ITypeSymbol typeSymbol
-            ) {
+            )
+            {
                 return GetViableExtensionMethodsWorker(methodSymbols)
                     .WhereAsArray(s => IsViableExtensionMethod(s.Symbol, typeSymbol));
             }
 
             private ImmutableArray<SymbolResult<IMethodSymbol>> GetViableExtensionMethodsWorker(
                 ImmutableArray<SymbolResult<IMethodSymbol>> methodSymbols
-            ) {
+            )
+            {
                 return methodSymbols.WhereAsArray(
                     s =>
                         s.Symbol.IsExtensionMethod
@@ -596,7 +617,8 @@ namespace Microsoft.CodeAnalysis.AddImport
                         _node,
                         out var nameNode
                     )
-                ) {
+                )
+                {
                     return ImmutableArray<SymbolReference>.Empty;
                 }
 
@@ -638,7 +660,8 @@ namespace Microsoft.CodeAnalysis.AddImport
             /// </summary>
             private async Task<ImmutableArray<SymbolReference>> GetReferencesForQueryPatternsAsync(
                 SearchScope searchScope
-            ) {
+            )
+            {
                 searchScope.CancellationToken.ThrowIfCancellationRequested();
 
                 if (_owner.CanAddImportForQuery(_diagnosticId, _node))
@@ -670,7 +693,8 @@ namespace Microsoft.CodeAnalysis.AddImport
             /// </summary>
             private async Task<ImmutableArray<SymbolReference>> GetReferencesForGetAwaiterAsync(
                 SearchScope searchScope
-            ) {
+            )
+            {
                 searchScope.CancellationToken.ThrowIfCancellationRequested();
 
                 if (_owner.CanAddImportForGetAwaiter(_diagnosticId, _syntaxFacts, _node))
@@ -698,7 +722,8 @@ namespace Microsoft.CodeAnalysis.AddImport
             /// </summary>
             private async Task<ImmutableArray<SymbolReference>> GetReferencesForGetEnumeratorAsync(
                 SearchScope searchScope
-            ) {
+            )
+            {
                 searchScope.CancellationToken.ThrowIfCancellationRequested();
 
                 if (_owner.CanAddImportForGetEnumerator(_diagnosticId, _syntaxFacts, _node))
@@ -755,7 +780,8 @@ namespace Microsoft.CodeAnalysis.AddImport
             /// </summary>
             private async Task<ImmutableArray<SymbolReference>> GetReferencesForDeconstructAsync(
                 SearchScope searchScope
-            ) {
+            )
+            {
                 searchScope.CancellationToken.ThrowIfCancellationRequested();
 
                 if (_owner.CanAddImportForDeconstruct(_diagnosticId, _node))
@@ -791,7 +817,8 @@ namespace Microsoft.CodeAnalysis.AddImport
                 string name,
                 ITypeSymbol type,
                 Func<IMethodSymbol, bool> predicate = null
-            ) {
+            )
+            {
                 var symbols = await searchScope.FindDeclarationsAsync(
                         name,
                         nameNode: null,
@@ -825,7 +852,8 @@ namespace Microsoft.CodeAnalysis.AddImport
                 TSimpleNameSyntax nameNode,
                 bool checkForExtensionMethods,
                 CancellationToken cancellationToken
-            ) {
+            )
+            {
                 // See if the name binds to something other then the error type. If it does, there's nothing further we need to do.
                 // For extension methods, however, we will continue to search if there exists any better matched method.
                 cancellationToken.ThrowIfCancellationRequested();
@@ -833,7 +861,8 @@ namespace Microsoft.CodeAnalysis.AddImport
                 if (
                     symbolInfo.CandidateReason == CandidateReason.OverloadResolutionFailure
                     && !checkForExtensionMethods
-                ) {
+                )
+                {
                     return true;
                 }
 
@@ -843,7 +872,8 @@ namespace Microsoft.CodeAnalysis.AddImport
             private ImmutableArray<SymbolReference> GetNamespaceSymbolReferences(
                 SearchScope scope,
                 ImmutableArray<SymbolResult<INamespaceSymbol>> namespaces
-            ) {
+            )
+            {
                 using var _ = ArrayBuilder<SymbolReference>.GetInstance(out var references);
 
                 foreach (var namespaceResult in namespaces)

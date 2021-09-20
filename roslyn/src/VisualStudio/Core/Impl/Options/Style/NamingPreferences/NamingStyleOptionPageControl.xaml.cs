@@ -154,7 +154,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Options.Style
                         )
                         is DataGridRow row
                     )
-                ) {
+                )
+                {
                     CodeStyleMembers.ScrollIntoView(CodeStyleMembers.SelectedItem);
                     row =
                         CodeStyleMembers.ItemContainerGenerator.ContainerFromIndex(

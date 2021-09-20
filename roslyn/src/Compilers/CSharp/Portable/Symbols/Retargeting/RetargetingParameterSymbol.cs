@@ -75,7 +75,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols.Retargeting
 
         internal sealed override IEnumerable<CSharpAttributeData> GetCustomAttributesToEmit(
             PEModuleBuilder moduleBuilder
-        ) {
+        )
+        {
             return this.RetargetingModule.RetargetingTranslator.RetargetAttributes(
                 _underlyingParameter.GetCustomAttributesToEmit(moduleBuilder)
             );

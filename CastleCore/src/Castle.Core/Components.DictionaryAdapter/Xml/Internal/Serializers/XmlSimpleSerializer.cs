@@ -37,7 +37,8 @@ namespace Castle.Components.DictionaryAdapter.Xml
             IXmlNode node,
             IDictionaryAdapter parent,
             IXmlAccessor accessor
-        ) {
+        )
+        {
             return getObject(node.Value);
         }
 
@@ -47,7 +48,8 @@ namespace Castle.Components.DictionaryAdapter.Xml
             IXmlAccessor accessor,
             object oldValue,
             ref object value
-        ) {
+        )
+        {
             node.Value = getString((T)value);
         }
     }

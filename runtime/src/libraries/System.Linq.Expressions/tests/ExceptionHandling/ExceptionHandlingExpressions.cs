@@ -1425,7 +1425,8 @@ namespace System.Linq.Expressions.Tests
             int r,
             int s,
             bool returnBack
-        ) {
+        )
+        {
             return returnBack;
         }
 

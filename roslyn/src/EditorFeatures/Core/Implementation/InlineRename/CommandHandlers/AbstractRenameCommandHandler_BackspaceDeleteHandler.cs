@@ -29,7 +29,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.InlineRename
             BackspaceKeyCommandArgs args,
             Action nextHandler,
             CommandExecutionContext context
-        ) {
+        )
+        {
             HandlePossibleTypingCommand(
                 args,
                 nextHandler,
@@ -48,7 +49,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.InlineRename
             DeleteKeyCommandArgs args,
             Action nextHandler,
             CommandExecutionContext context
-        ) {
+        )
+        {
             HandlePossibleTypingCommand(
                 args,
                 nextHandler,

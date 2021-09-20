@@ -369,7 +369,8 @@ SELECT 1 ELSE SELECT 0"
                 || exception.Number == 4060
                 || exception.Number == 1832
                 || exception.Number == 5120
-            ) {
+            )
+            {
                 ClearPool();
                 return true;
             }

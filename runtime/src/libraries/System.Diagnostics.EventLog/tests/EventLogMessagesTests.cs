@@ -91,7 +91,8 @@ namespace System.Diagnostics.Tests
                             $"*[System/Provider/@Name=\"{log.Source}\"]"
                         )
                     )
-                ) {
+                )
+                {
                     EventRecord evt = reader.ReadEvent();
 
                     string logMessage = evt.FormatDescription();

@@ -41,7 +41,8 @@ namespace Castle.Components.DictionaryAdapter
                 IDictionaryAdapter dictionaryAdapter,
                 PropertyDescriptor property,
                 object state
-            ) {
+            )
+            {
                 var value = dictionaryAdapter.GetProperty(property.PropertyName, true);
                 CollectHashCode(property, GetValueHashCode(value));
             }
@@ -50,7 +51,8 @@ namespace Castle.Components.DictionaryAdapter
                 IDictionaryAdapter dictionaryAdapter,
                 PropertyDescriptor property,
                 object state
-            ) {
+            )
+            {
                 var nested = (IDictionaryAdapter)dictionaryAdapter.GetProperty(
                     property.PropertyName,
                     true
@@ -63,7 +65,8 @@ namespace Castle.Components.DictionaryAdapter
                 PropertyDescriptor property,
                 Type collectionItemType,
                 object state
-            ) {
+            )
+            {
                 var collection = (IEnumerable)dictionaryAdapter.GetProperty(
                     property.PropertyName,
                     true
@@ -166,7 +169,8 @@ namespace Castle.Components.DictionaryAdapter
         void IDictionaryInitializer.Initialize(
             IDictionaryAdapter dictionaryAdapter,
             object[] behaviors
-        ) {
+        )
+        {
             dictionaryAdapter.This.EqualityHashCodeStrategy = this;
         }
     }

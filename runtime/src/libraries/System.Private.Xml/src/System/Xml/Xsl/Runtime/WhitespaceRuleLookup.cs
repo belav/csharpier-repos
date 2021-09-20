@@ -125,11 +125,13 @@ namespace System.Xml.Xsl.Runtime
                 if (
                     wildcardRule.LocalName == null
                     || (object)wildcardRule.LocalName == (object)localName
-                ) {
+                )
+                {
                     if (
                         wildcardRule.NamespaceName == null
                         || (object)wildcardRule.NamespaceName == (object)namespaceName
-                    ) {
+                    )
+                    {
                         // Found wildcard match, so we're done (since wildcards are in priority order)
                         return !wildcardRule.PreserveSpace;
                     }
@@ -151,7 +153,8 @@ namespace System.Xml.Xsl.Runtime
                 string namespaceName,
                 bool preserveSpace,
                 int priority
-            ) {
+            )
+            {
                 Init(localName, namespaceName, preserveSpace, priority);
             }
 
@@ -160,7 +163,8 @@ namespace System.Xml.Xsl.Runtime
                 string namespaceName,
                 bool preserveSpace,
                 int priority
-            ) {
+            )
+            {
                 base.Init(localName, namespaceName, preserveSpace);
                 _priority = priority;
 

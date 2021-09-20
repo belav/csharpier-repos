@@ -48,7 +48,8 @@ namespace System.Security.Cryptography
                         || parameters.Q != null
                         || parameters.DQ != null
                         || parameters.InverseQ != null
-                    ) {
+                    )
+                    {
                         throw new CryptographicException(SR.Cryptography_InvalidRsaParameters);
                     }
                 }
@@ -62,7 +63,8 @@ namespace System.Security.Cryptography
                         || parameters.Q == null
                         || parameters.DQ == null
                         || parameters.InverseQ == null
-                    ) {
+                    )
+                    {
                         throw new CryptographicException(SR.Cryptography_InvalidRsaParameters);
                     }
 
@@ -82,7 +84,8 @@ namespace System.Security.Cryptography
                         || parameters.DP.Length != halfModulusLength
                         || parameters.DQ.Length != halfModulusLength
                         || parameters.InverseQ.Length != halfModulusLength
-                    ) {
+                    )
+                    {
                         throw new CryptographicException(SR.Cryptography_InvalidRsaParameters);
                     }
                 }
@@ -161,7 +164,8 @@ namespace System.Security.Cryptography
                 ReadOnlySpan<byte> passwordBytes,
                 ReadOnlySpan<byte> source,
                 out int bytesRead
-            ) {
+            )
+            {
                 ThrowIfDisposed();
 
                 CngPkcs8.Pkcs8Response response = CngPkcs8.ImportEncryptedPkcs8PrivateKey(
@@ -178,7 +182,8 @@ namespace System.Security.Cryptography
                 ReadOnlySpan<char> password,
                 ReadOnlySpan<byte> source,
                 out int bytesRead
-            ) {
+            )
+            {
                 ThrowIfDisposed();
 
                 CngPkcs8.Pkcs8Response response = CngPkcs8.ImportEncryptedPkcs8PrivateKey(
@@ -206,7 +211,8 @@ namespace System.Security.Cryptography
             public override byte[] ExportEncryptedPkcs8PrivateKey(
                 ReadOnlySpan<byte> passwordBytes,
                 PbeParameters pbeParameters
-            ) {
+            )
+            {
                 if (pbeParameters == null)
                     throw new ArgumentNullException(nameof(pbeParameters));
 
@@ -216,7 +222,8 @@ namespace System.Security.Cryptography
             public override byte[] ExportEncryptedPkcs8PrivateKey(
                 ReadOnlySpan<char> password,
                 PbeParameters pbeParameters
-            ) {
+            )
+            {
                 if (pbeParameters == null)
                 {
                     throw new ArgumentNullException(nameof(pbeParameters));
@@ -241,7 +248,8 @@ namespace System.Security.Cryptography
                 PbeParameters pbeParameters,
                 Span<byte> destination,
                 out int bytesWritten
-            ) {
+            )
+            {
                 if (pbeParameters == null)
                     throw new ArgumentNullException(nameof(pbeParameters));
 
@@ -265,7 +273,8 @@ namespace System.Security.Cryptography
                 PbeParameters pbeParameters,
                 Span<byte> destination,
                 out int bytesWritten
-            ) {
+            )
+            {
                 if (pbeParameters == null)
                     throw new ArgumentNullException(nameof(pbeParameters));
 
@@ -309,7 +318,8 @@ namespace System.Security.Cryptography
                 ref RSAParameters rsaParams,
                 byte[] rsaBlob,
                 bool includePrivateParameters
-            ) {
+            )
+            {
                 //
                 // We now have a buffer laid out as follows:
                 //     BCRYPT_RSAKEY_BLOB   header
@@ -397,13 +407,15 @@ namespace System.Security.Cryptography
             private static void CheckMagicValueOfKey(
                 KeyBlobMagicNumber magic,
                 bool includePrivateParameters
-            ) {
+            )
+            {
                 if (includePrivateParameters)
                 {
                     if (
                         magic != KeyBlobMagicNumber.BCRYPT_RSAPRIVATE_MAGIC
                         && magic != KeyBlobMagicNumber.BCRYPT_RSAFULLPRIVATE_MAGIC
-                    ) {
+                    )
+                    {
                         throw new CryptographicException(SR.Cryptography_NotValidPrivateKey);
                     }
                 }
@@ -415,7 +427,8 @@ namespace System.Security.Cryptography
                         if (
                             magic != KeyBlobMagicNumber.BCRYPT_RSAPRIVATE_MAGIC
                             && magic != KeyBlobMagicNumber.BCRYPT_RSAFULLPRIVATE_MAGIC
-                        ) {
+                        )
+                        {
                             throw new CryptographicException(
                                 SR.Cryptography_NotValidPublicOrPrivateKey
                             );

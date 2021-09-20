@@ -37,7 +37,8 @@ namespace Microsoft.CodeAnalysis.Interactive
             string? initializationScript,
             ImmutableArray<string> metadataReferencePaths,
             ImmutableArray<string> imports
-        ) {
+        )
+        {
             ScriptPath = initializationScript;
             MetadataReferencePaths = metadataReferencePaths;
             Imports = imports;

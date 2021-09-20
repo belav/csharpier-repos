@@ -47,7 +47,8 @@ namespace Microsoft.CodeAnalysis
         private static KeyValuePair<string, XDocument> MakeValue(
             XmlReferenceResolver resolver,
             string resolvedPath
-        ) {
+        )
+        {
             CacheMissCount++;
 
             using (Stream stream = resolver.OpenReadChecked(resolvedPath))
@@ -71,7 +72,8 @@ namespace Microsoft.CodeAnalysis
         private static bool KeyValueEquality(
             string resolvedPath,
             KeyValuePair<string, XDocument> pathAndDocument
-        ) {
+        )
+        {
             return resolvedPath == pathAndDocument.Key;
         }
     }

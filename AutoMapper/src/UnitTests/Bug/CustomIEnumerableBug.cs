@@ -29,7 +29,8 @@ namespace AutoMapper.UnitTests.Bug
             IEnumerable<string> source,
             IEnumerable<Item> destination,
             ResolutionContext context
-        ) {
+        )
+        {
             var result = new List<Item>();
             foreach (string s in source)
                 if (!String.IsNullOrEmpty(s))

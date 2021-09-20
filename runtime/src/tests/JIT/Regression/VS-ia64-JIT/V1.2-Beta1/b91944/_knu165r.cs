@@ -22,7 +22,8 @@ public struct AA
         ref int[,,][,,] param3,
         ulong[,] param4,
         float[][,,] param5
-    ) {
+    )
+    {
         long[,] local1 = (new long[100u, 30u]);
 #pragma warning disable 1718
         while ((param1 != param1))
@@ -72,7 +73,8 @@ public struct AA
                             App.m_uFwd8++;
                             Convert.ToBoolean(local2);
                             App.m_shFwd9 -= ((short)(61))
-                        ) {
+                        )
+                        {
                             float[,] local10 = (new float[16u, 15u]);
                         }
             }

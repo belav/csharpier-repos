@@ -18,10 +18,8 @@ namespace Microsoft.AspNetCore.Server.IIS.FunctionalTests.Utilities
     {
         protected static readonly TimeSpan RetryDelay = TimeSpan.FromMilliseconds(100);
 
-        public IISFunctionalTestBase(
-            PublishedSitesFixture fixture,
-            ITestOutputHelper output = null
-        ) : base(output)
+        public IISFunctionalTestBase(PublishedSitesFixture fixture, ITestOutputHelper output = null)
+            : base(output)
         {
             Fixture = fixture;
             LogFolderPath = Path.Combine(Path.GetTempPath(), Guid.NewGuid().ToString());
@@ -32,7 +30,8 @@ namespace Microsoft.AspNetCore.Server.IIS.FunctionalTests.Utilities
 
         public async Task<IISDeploymentResult> DeployApp(
             HostingModel hostingModel = HostingModel.InProcess
-        ) {
+        )
+        {
             var deploymentParameters = Fixture.GetBaseDeploymentParameters(
                 hostingModel: hostingModel
             );
@@ -58,7 +57,8 @@ namespace Microsoft.AspNetCore.Server.IIS.FunctionalTests.Utilities
         public async Task AssertAppOffline(
             IISDeploymentResult deploymentResult,
             string expectedResponse = "The app is offline."
-        ) {
+        )
+        {
             var response = await deploymentResult.HttpClient.RetryRequestAsync(
                 "HelloWorld",
                 r => r.StatusCode == HttpStatusCode.ServiceUnavailable
@@ -93,14 +93,16 @@ namespace Microsoft.AspNetCore.Server.IIS.FunctionalTests.Utilities
                     "*",
                     SearchOption.AllDirectories
                 )
-            ) {
+            )
+            {
                 // Out of process module dll is allowed to be locked
                 var name = Path.GetFileName(file);
                 if (
                     name == "aspnetcore.dll"
                     || name == "aspnetcorev2.dll"
                     || name == "aspnetcorev2_outofprocess.dll"
-                ) {
+                )
+                {
                     continue;
                 }
                 File.Delete(file);

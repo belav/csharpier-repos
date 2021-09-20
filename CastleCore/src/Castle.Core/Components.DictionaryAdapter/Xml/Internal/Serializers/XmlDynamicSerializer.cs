@@ -29,7 +29,8 @@ namespace Castle.Components.DictionaryAdapter.Xml
             IXmlNode node,
             IDictionaryAdapter parent,
             IXmlAccessor accessor
-        ) {
+        )
+        {
             return node.ClrType == typeof(object)
               ? new object()
               : XmlTypeSerializer.For(node.ClrType).GetValue(node, parent, accessor);
@@ -41,7 +42,8 @@ namespace Castle.Components.DictionaryAdapter.Xml
             IXmlAccessor accessor,
             object oldValue,
             ref object value
-        ) {
+        )
+        {
             if (node.ClrType != typeof(object))
                 XmlTypeSerializer.For(node.ClrType)
                     .SetValue(node, parent, accessor, oldValue, ref value);

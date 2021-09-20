@@ -39,7 +39,8 @@ namespace System.Net.Http.WinHttpHandlerUnitTests
         public void GetProxy_BothAutoDetectAndManualSettingsButFailedAutoDetect_ManualSettingsUsed(
             Uri destination,
             bool bypassProxy
-        ) {
+        )
+        {
             FakeRegistry.WinInetProxySettings.AutoDetect = true;
             FakeRegistry.WinInetProxySettings.Proxy = ManualSettingsProxyHost;
             FakeRegistry.WinInetProxySettings.ProxyBypass = ManualSettingsProxyBypassList;
@@ -72,7 +73,8 @@ namespace System.Net.Http.WinHttpHandlerUnitTests
         public void GetProxy_ManualSettingsOnly_ManualSettingsUsed(
             Uri destination,
             bool bypassProxy
-        ) {
+        )
+        {
             FakeRegistry.WinInetProxySettings.Proxy = ManualSettingsProxyHost;
             FakeRegistry.WinInetProxySettings.ProxyBypass = ManualSettingsProxyBypassList;
 

@@ -28,7 +28,8 @@ namespace System.IO.Ports.Tests
                 SerialPort com = new SerialPort(
                     TCSupport.LocalMachineSerialInfo.FirstAvailablePortName
                 )
-            ) {
+            )
+            {
                 com.Open();
                 Stream serialStream = com.BaseStream;
                 com.Close();
@@ -46,7 +47,8 @@ namespace System.IO.Ports.Tests
                 SerialPort com = new SerialPort(
                     TCSupport.LocalMachineSerialInfo.FirstAvailablePortName
                 )
-            ) {
+            )
+            {
                 com.Open();
                 Stream serialStream = com.BaseStream;
                 com.BaseStream.Close();
@@ -72,7 +74,8 @@ namespace System.IO.Ports.Tests
                 SerialPort com2 = new SerialPort(
                     TCSupport.LocalMachineSerialInfo.SecondAvailablePortName
                 )
-            ) {
+            )
+            {
                 byte[] xmitBytes = new byte[DEFAULT_BUFFER_SIZE];
 
                 Debug.WriteLine("Verifying Flush method after input buffer has been filled");
@@ -103,7 +106,8 @@ namespace System.IO.Ports.Tests
                 SerialPort com2 = new SerialPort(
                     TCSupport.LocalMachineSerialInfo.SecondAvailablePortName
                 )
-            ) {
+            )
+            {
                 byte[] xmitBytes = new byte[DEFAULT_BUFFER_SIZE];
 
                 Debug.WriteLine(
@@ -138,7 +142,8 @@ namespace System.IO.Ports.Tests
                 SerialPort com2 = new SerialPort(
                     TCSupport.LocalMachineSerialInfo.SecondAvailablePortName
                 )
-            ) {
+            )
+            {
                 byte[] xmitBytes = new byte[DEFAULT_BUFFER_SIZE];
 
                 Debug.WriteLine(
@@ -172,7 +177,8 @@ namespace System.IO.Ports.Tests
                 SerialPort com1 = new SerialPort(
                     TCSupport.LocalMachineSerialInfo.FirstAvailablePortName
                 )
-            ) {
+            )
+            {
                 AsyncWriteRndByteArray asyncWriteRndByteArray = new AsyncWriteRndByteArray(
                     com1,
                     DEFAULT_BUFFER_SIZE
@@ -202,7 +208,8 @@ namespace System.IO.Ports.Tests
                 SerialPort com1 = new SerialPort(
                     TCSupport.LocalMachineSerialInfo.FirstAvailablePortName
                 )
-            ) {
+            )
+            {
                 AsyncWriteRndByteArray asyncWriteRndByteArray = new AsyncWriteRndByteArray(
                     com1,
                     DEFAULT_BUFFER_SIZE
@@ -236,7 +243,8 @@ namespace System.IO.Ports.Tests
                 SerialPort com1 = new SerialPort(
                     TCSupport.LocalMachineSerialInfo.FirstAvailablePortName
                 )
-            ) {
+            )
+            {
                 AsyncWriteRndByteArray asyncWriteRndByteArray = new AsyncWriteRndByteArray(
                     com1,
                     DEFAULT_BUFFER_SIZE
@@ -289,7 +297,8 @@ namespace System.IO.Ports.Tests
                 SerialPort com2 = new SerialPort(
                     TCSupport.LocalMachineSerialInfo.SecondAvailablePortName
                 )
-            ) {
+            )
+            {
                 AsyncWriteRndByteArray asyncWriteRndByteArray = new AsyncWriteRndByteArray(
                     com1,
                     DEFAULT_BUFFER_SIZE
@@ -336,7 +345,8 @@ namespace System.IO.Ports.Tests
                 SerialPort com2 = new SerialPort(
                     TCSupport.LocalMachineSerialInfo.SecondAvailablePortName
                 )
-            ) {
+            )
+            {
                 AsyncWriteRndByteArray asyncWriteRndByteArray = new AsyncWriteRndByteArray(
                     com1,
                     DEFAULT_BUFFER_SIZE
@@ -391,7 +401,8 @@ namespace System.IO.Ports.Tests
                 SerialPort com2 = new SerialPort(
                     TCSupport.LocalMachineSerialInfo.SecondAvailablePortName
                 )
-            ) {
+            )
+            {
                 AsyncWriteRndByteArray asyncWriteRndByteArray = new AsyncWriteRndByteArray(
                     com1,
                     DEFAULT_BUFFER_SIZE

@@ -11,7 +11,8 @@ namespace System.Security.Cryptography
     {
         internal CryptographicAttributeObjectEnumerator(
             CryptographicAttributeObjectCollection attributes
-        ) {
+        )
+        {
             _attributes = attributes;
             _current = -1;
         }

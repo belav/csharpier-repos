@@ -283,7 +283,8 @@ namespace Microsoft.EntityFrameworkCore.Query
         [MemberData(nameof(IsAsyncData))]
         public virtual async Task FromSqlRaw_queryable_simple_columns_out_of_order_and_extra_columns(
             bool async
-        ) {
+        )
+        {
             using var context = CreateContext();
             var query = context.Set<Customer>()
                 .FromSqlRaw(
@@ -302,7 +303,8 @@ namespace Microsoft.EntityFrameworkCore.Query
         [MemberData(nameof(IsAsyncData))]
         public virtual async Task FromSqlRaw_queryable_simple_columns_out_of_order_and_not_enough_columns_throws(
             bool async
-        ) {
+        )
+        {
             using var context = CreateContext();
             var query = context.Set<Customer>()
                 .FromSqlRaw(
@@ -345,7 +347,8 @@ namespace Microsoft.EntityFrameworkCore.Query
         [MemberData(nameof(IsAsyncData))]
         public virtual async Task FromSqlRaw_queryable_composed_after_removing_whitespaces(
             bool async
-        ) {
+        )
+        {
             using var context = CreateContext();
             var query = context.Set<Customer>()
                 .FromSqlRaw(
@@ -450,7 +453,8 @@ namespace Microsoft.EntityFrameworkCore.Query
         [MemberData(nameof(IsAsyncData))]
         public virtual async Task FromSqlRaw_queryable_composed_compiled_with_DbParameter(
             bool async
-        ) {
+        )
+        {
             if (async)
             {
                 var query = EF.CompileAsyncQuery(
@@ -499,7 +503,8 @@ namespace Microsoft.EntityFrameworkCore.Query
         [MemberData(nameof(IsAsyncData))]
         public virtual async Task FromSqlRaw_queryable_composed_compiled_with_nameless_DbParameter(
             bool async
-        ) {
+        )
+        {
             if (async)
             {
                 var query = EF.CompileAsyncQuery(
@@ -607,7 +612,8 @@ namespace Microsoft.EntityFrameworkCore.Query
         [MemberData(nameof(IsAsyncData))]
         public virtual async Task FromSqlRaw_queryable_multiple_composed_with_closure_parameters(
             bool async
-        ) {
+        )
+        {
             var startDate = new DateTime(1997, 1, 1);
             var endDate = new DateTime(1998, 1, 1);
 
@@ -635,7 +641,8 @@ namespace Microsoft.EntityFrameworkCore.Query
         [MemberData(nameof(IsAsyncData))]
         public virtual async Task FromSqlRaw_queryable_multiple_composed_with_parameters_and_closure_parameters(
             bool async
-        ) {
+        )
+        {
             var city = "London";
             var startDate = new DateTime(1997, 1, 1);
             var endDate = new DateTime(1998, 1, 1);
@@ -782,7 +789,8 @@ FROM [Customers]"
         [MemberData(nameof(IsAsyncData))]
         public virtual async Task FromSqlInterpolated_queryable_with_parameters_interpolated(
             bool async
-        ) {
+        )
+        {
             var city = "London";
             var contactTitle = "Sales Representative";
 
@@ -805,7 +813,8 @@ FROM [Customers]"
         [MemberData(nameof(IsAsyncData))]
         public virtual async Task FromSqlInterpolated_queryable_with_parameters_inline_interpolated(
             bool async
-        ) {
+        )
+        {
             using var context = CreateContext();
             var query = context.Set<Customer>()
                 .FromSqlInterpolated(
@@ -825,7 +834,8 @@ FROM [Customers]"
         [MemberData(nameof(IsAsyncData))]
         public virtual async Task FromSqlInterpolated_queryable_multiple_composed_with_parameters_and_closure_parameters_interpolated(
             bool async
-        ) {
+        )
+        {
             var city = "London";
             var startDate = new DateTime(1997, 1, 1);
             var endDate = new DateTime(1998, 1, 1);
@@ -904,7 +914,8 @@ FROM [Customers]"
         [MemberData(nameof(IsAsyncData))]
         public virtual async Task<string> FromSqlRaw_queryable_with_parameters_and_closure(
             bool async
-        ) {
+        )
+        {
             var city = "London";
             var contactTitle = "Sales Representative";
 
@@ -930,7 +941,8 @@ FROM [Customers]"
         [MemberData(nameof(IsAsyncData))]
         public virtual async Task FromSqlRaw_queryable_simple_cache_key_includes_query_string(
             bool async
-        ) {
+        )
+        {
             using var context = CreateContext();
             var query = context.Set<Customer>()
                 .FromSqlRaw(
@@ -961,7 +973,8 @@ FROM [Customers]"
         [MemberData(nameof(IsAsyncData))]
         public virtual async Task FromSqlRaw_queryable_with_parameters_cache_key_includes_parameters(
             bool async
-        ) {
+        )
+        {
             var city = "London";
             var contactTitle = "Sales Representative";
             var sql = "SELECT * FROM [Customers] WHERE [City] = {0} AND [ContactTitle] = {1}";
@@ -993,7 +1006,8 @@ FROM [Customers]"
         [MemberData(nameof(IsAsyncData))]
         public virtual async Task FromSqlRaw_queryable_simple_as_no_tracking_not_composed(
             bool async
-        ) {
+        )
+        {
             using var context = CreateContext();
             var query = context.Set<Customer>()
                 .FromSqlRaw(NormalizeDelimitersInRawString("SELECT * FROM [Customers]"))
@@ -1175,7 +1189,8 @@ AND (([UnitsInStock] + [UnitsOnOrder]) < [ReorderLevel])"
         [MemberData(nameof(IsAsyncData))]
         public virtual async Task Include_does_not_close_user_opened_connection_for_empty_result(
             bool async
-        ) {
+        )
+        {
             Fixture.TestStore.CloseConnection();
             using (var context = CreateContext())
             {
@@ -1340,7 +1355,8 @@ AND (([UnitsInStock] + [UnitsOnOrder]) < [ReorderLevel])"
         [MemberData(nameof(IsAsyncData))]
         public virtual async Task FromSqlInterpolated_with_inlined_db_parameter_without_name_prefix(
             bool async
-        ) {
+        )
+        {
             using var context = CreateContext();
             var parameter = CreateDbParameter("somename", "ALFKI");
 
@@ -1556,7 +1572,8 @@ AND (([UnitsInStock] + [UnitsOnOrder]) < [ReorderLevel])"
         [MemberData(nameof(IsAsyncData))]
         public virtual async Task FromSqlRaw_in_subquery_with_positional_dbParameter_without_name(
             bool async
-        ) {
+        )
+        {
             using var context = CreateContext();
             var query = context.Orders.Where(
                 o =>
@@ -1578,7 +1595,8 @@ AND (([UnitsInStock] + [UnitsOnOrder]) < [ReorderLevel])"
         [MemberData(nameof(IsAsyncData))]
         public virtual async Task FromSqlRaw_in_subquery_with_positional_dbParameter_with_name(
             bool async
-        ) {
+        )
+        {
             using var context = CreateContext();
             var query = context.Orders.Where(
                 o =>

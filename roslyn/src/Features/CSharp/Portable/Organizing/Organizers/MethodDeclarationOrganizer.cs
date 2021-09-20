@@ -23,7 +23,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Organizing.Organizers
         protected override MethodDeclarationSyntax Organize(
             MethodDeclarationSyntax syntax,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             return syntax.Update(
                 attributeLists: syntax.AttributeLists,
                 modifiers: ModifiersOrganizer.Organize(syntax.Modifiers),

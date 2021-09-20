@@ -164,7 +164,8 @@ class ClientPInvokeIntNativeTest
                 15,
                 ref int7
             )
-        ) {
+        )
+        {
             failures++;
             Console.WriteLine("InMany_InOutPointer return value is wrong");
         }

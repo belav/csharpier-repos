@@ -35,7 +35,8 @@ namespace Microsoft.Extensions.DependencyInjection.ServiceLookup
         [InlineData(typeof(TypeWithParameterlessPublicConstructor))]
         public void CreateCallSite_CreatesInstanceCallSite_IfTypeHasDefaultOrPublicParameterlessConstructor(
             Type type
-        ) {
+        )
+        {
             // Arrange
             var descriptor = new ServiceDescriptor(type, type, ServiceLifetime.Transient);
             var callSiteFactory = GetCallSiteFactory(descriptor);
@@ -56,7 +57,8 @@ namespace Microsoft.Extensions.DependencyInjection.ServiceLookup
         [InlineData(typeof(TypeWithSupersetConstructors))]
         public void CreateCallSite_CreatesConstructorCallSite_IfTypeHasConstructorWithInjectableParameters(
             Type type
-        ) {
+        )
+        {
             // Arrange
             var descriptor = new ServiceDescriptor(type, type, ServiceLifetime.Transient);
 
@@ -532,7 +534,8 @@ namespace Microsoft.Extensions.DependencyInjection.ServiceLookup
             Type closedServiceType,
             object value,
             Type[] matchingImplementationTypes
-        ) {
+        )
+        {
             // Arrange
             var serviceType = typeof(IFakeOpenGenericService<>);
             var noConstraintImplementationType = typeof(FakeOpenGenericService<>);
@@ -775,7 +778,8 @@ namespace Microsoft.Extensions.DependencyInjection.ServiceLookup
             Type type,
             Func<Type, ServiceCallSite> callSiteFactory,
             Type[] expectedConstructorParameters
-        ) {
+        )
+        {
             // Act
             var callSite = callSiteFactory(type);
 
@@ -845,7 +849,8 @@ namespace Microsoft.Extensions.DependencyInjection.ServiceLookup
         private void CreateCallSite_ConsidersConstructorsWithDefaultValues(
             Func<Type, ServiceCallSite> callSiteFactory,
             Type[] expectedConstructorParameters
-        ) {
+        )
+        {
             // Arrange
             var type = typeof(TypeWithDefaultConstructorParameters);
 
@@ -1043,7 +1048,8 @@ namespace Microsoft.Extensions.DependencyInjection.ServiceLookup
             Type type,
             Func<Type, object> callSiteFactory,
             Type[][] expectedConstructorParameterTypes
-        ) {
+        )
+        {
             // Arrange
             var expectedMessage = string.Join(
                 Environment.NewLine,
@@ -1162,7 +1168,8 @@ namespace Microsoft.Extensions.DependencyInjection.ServiceLookup
         public void CreateCallSite_EnumberableCachedAtLowestLevel(
             ServiceDescriptor[] descriptors,
             object expectedCacheLocation
-        ) {
+        )
+        {
             var factory = GetCallSiteFactory(descriptors);
             var callSite = factory(typeof(IEnumerable<FakeService>));
 
@@ -1182,7 +1189,8 @@ namespace Microsoft.Extensions.DependencyInjection.ServiceLookup
 
         private static Func<Type, ServiceCallSite> GetCallSiteFactory(
             params ServiceDescriptor[] descriptors
-        ) {
+        )
+        {
             var collection = new ServiceCollection();
             foreach (var descriptor in descriptors)
             {

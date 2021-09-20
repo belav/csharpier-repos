@@ -51,7 +51,8 @@ namespace Microsoft.VisualStudio.Debugger.Clr
         public DkmClrType ResolveTypeName(
             string typeName,
             ReadOnlyCollection<DkmClrType> typeArguments
-        ) {
+        )
+        {
             var type = this.Assembly.GetType(typeName);
             if (type == null)
             {

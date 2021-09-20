@@ -28,7 +28,8 @@ namespace System.Net.Http.Headers
             int port,
             TimeSpan maxAge,
             bool persist
-        ) {
+        )
+        {
             AlpnProtocolName = alpnProtocolName;
             Host = host;
             Port = port;

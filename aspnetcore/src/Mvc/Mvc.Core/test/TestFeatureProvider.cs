@@ -27,7 +27,8 @@ namespace Microsoft.AspNetCore.Mvc
                 var type in parts.OfType<IApplicationPartTypeProvider>()
                     .SelectMany(t => t.Types)
                     .Where(_filter)
-            ) {
+            )
+            {
                 feature.Controllers.Add(type);
             }
         }

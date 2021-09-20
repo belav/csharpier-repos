@@ -30,7 +30,8 @@ namespace Microsoft.CodeAnalysis
             public ExistingReferencesResolver(
                 MetadataReferenceResolver resolver,
                 ImmutableArray<MetadataReference> availableReferences
-            ) {
+            )
+            {
                 Debug.Assert(resolver != null);
                 Debug.Assert(availableReferences != null);
 
@@ -53,7 +54,8 @@ namespace Microsoft.CodeAnalysis
                 string reference,
                 string? baseFilePath,
                 MetadataReferenceProperties properties
-            ) {
+            )
+            {
                 var resolvedReferences = _resolver.ResolveReference(
                     reference,
                     baseFilePath,
@@ -69,7 +71,8 @@ namespace Microsoft.CodeAnalysis
                 var peReference = metadataReference as PortableExecutableReference;
                 if (
                     peReference == null || peReference.Properties.Kind != MetadataImageKind.Assembly
-                ) {
+                )
+                {
                     return null;
                 }
 

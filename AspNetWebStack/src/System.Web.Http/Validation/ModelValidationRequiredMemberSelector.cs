@@ -22,7 +22,8 @@ namespace System.Web.Http.Validation
         public ModelValidationRequiredMemberSelector(
             ModelMetadataProvider metadataProvider,
             IEnumerable<ModelValidatorProvider> validatorProviders
-        ) {
+        )
+        {
             if (metadataProvider == null)
             {
                 throw Error.ArgumentNull("metadataProvider");

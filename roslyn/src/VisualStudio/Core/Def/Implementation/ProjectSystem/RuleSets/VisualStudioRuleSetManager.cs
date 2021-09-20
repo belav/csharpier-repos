@@ -24,7 +24,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.ProjectSystem
             FileChangeWatcher fileChangeWatcher,
             IForegroundNotificationService foregroundNotificationService,
             IAsynchronousOperationListener listener
-        ) {
+        )
+        {
             _fileChangeWatcher = fileChangeWatcher;
             _foregroundNotificationService = foregroundNotificationService;
             _listener = listener;
@@ -32,7 +33,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.ProjectSystem
 
         public IReferenceCountedDisposable<ICacheEntry<string, IRuleSetFile>> GetOrCreateRuleSet(
             string ruleSetFileFullPath
-        ) {
+        )
+        {
             var cacheEntry = _ruleSetFileMap.GetOrCreate(
                 ruleSetFileFullPath,
                 static (ruleSetFileFullPath, self) => new RuleSetFile(ruleSetFileFullPath, self),

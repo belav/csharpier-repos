@@ -56,7 +56,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UseImplicitObjectCreation
             ImmutableArray<Diagnostic> diagnostics,
             SyntaxEditor editor,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             // process from inside->out so that outer rewrites see the effects of inner changes.
             foreach (var diagnostic in diagnostics.OrderBy(d => d.Location.SourceSpan.End))
                 FixOne(editor, diagnostic, cancellationToken);
@@ -68,7 +69,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UseImplicitObjectCreation
             SyntaxEditor editor,
             Diagnostic diagnostic,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var node = diagnostic.AdditionalLocations[0].FindNode(
                 getInnermostNodeForTie: true,
                 cancellationToken
@@ -96,13 +98,12 @@ namespace Microsoft.CodeAnalysis.CSharp.UseImplicitObjectCreation
 
         private class MyCodeAction : CustomCodeActions.DocumentChangeAction
         {
-            public MyCodeAction(
-                Func<CancellationToken, Task<Document>> createChangedDocument
-            ) : base(
-                CSharpAnalyzersResources.Use_new,
-                createChangedDocument,
-                CSharpAnalyzersResources.Use_new
-            ) { }
+            public MyCodeAction(Func<CancellationToken, Task<Document>> createChangedDocument)
+                : base(
+                    CSharpAnalyzersResources.Use_new,
+                    createChangedDocument,
+                    CSharpAnalyzersResources.Use_new
+                ) { }
         }
     }
 }

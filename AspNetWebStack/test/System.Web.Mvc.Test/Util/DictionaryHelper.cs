@@ -67,7 +67,8 @@ namespace System.Web.TestUtil
             out TKey excludedKey,
             out TKey[] conflictingKeys,
             out TKey[] nonConflictingKeys
-        ) {
+        )
+        {
             List<TKey> nonConflictingKeyList = new List<TKey>();
             TKey[] newConflictingKeys = null;
 
@@ -139,7 +140,8 @@ namespace System.Web.TestUtil
 
             private IEnumerable<KeyValuePair<TKey, TValue>> MakeKeyValuePairs(
                 bool includeConflictingKeys
-            ) {
+            )
+            {
                 for (int i = 0; i < NonConflictingKeys.Length; i++)
                 {
                     TKey key = NonConflictingKeys[i];
@@ -594,7 +596,8 @@ namespace System.Web.TestUtil
             private void VerifyDictionaryEntriesEqual(
                 Dictionary<TKey, TValue> controlDictionary,
                 IDictionary<TKey, TValue> testDictionary
-            ) {
+            )
+            {
                 Assert.Equal(controlDictionary.Count, testDictionary.Count);
 
                 Dictionary<TKey, TValue> clonedControlDictionary = new Dictionary<TKey, TValue>(

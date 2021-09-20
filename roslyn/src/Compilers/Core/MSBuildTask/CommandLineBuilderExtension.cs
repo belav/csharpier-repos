@@ -24,7 +24,8 @@ namespace Microsoft.CodeAnalysis.BuildTasks
             string switchName,
             PropertyDictionary bag,
             string parameterName
-        ) {
+        )
+        {
             object? obj = bag[parameterName];
             // If the switch isn't set, don't add it to the command line.
             if (obj != null)
@@ -45,7 +46,8 @@ namespace Microsoft.CodeAnalysis.BuildTasks
             string switchName,
             PropertyDictionary bag,
             string parameterName
-        ) {
+        )
+        {
             object? obj = bag[parameterName];
             // If the switch isn't set, don't add it to the command line.
             if (obj != null)
@@ -65,7 +67,8 @@ namespace Microsoft.CodeAnalysis.BuildTasks
             string parameterName,
             string choice1,
             string choice2
-        ) {
+        )
+        {
             object? obj = bag[parameterName];
             // If the switch isn't set, don't add it to the command line.
             if (obj != null)
@@ -82,7 +85,8 @@ namespace Microsoft.CodeAnalysis.BuildTasks
             string switchName,
             PropertyDictionary bag,
             string parameterName
-        ) {
+        )
+        {
             object? obj = bag[parameterName];
             // If the switch isn't set, don't add it to the command line.
             if (obj != null)
@@ -110,7 +114,8 @@ namespace Microsoft.CodeAnalysis.BuildTasks
             string outerSwitchName,
             string innerSwitchName,
             string parameter
-        ) {
+        )
+        {
             string quotedParameter = GetQuotedText(parameter);
             AppendSwitchIfNotNull(outerSwitchName, innerSwitchName + quotedParameter);
         }
@@ -138,7 +143,8 @@ namespace Microsoft.CodeAnalysis.BuildTasks
             string switchName,
             ITaskItem[]? parameters,
             string[] attributes
-        ) {
+        )
+        {
             AppendSwitchIfNotNull(switchName, parameters, attributes, treatAsFlags: null);
         }
 
@@ -151,7 +157,8 @@ namespace Microsoft.CodeAnalysis.BuildTasks
             string? parameter,
             string delimiter,
             params char[] splitOn
-        ) {
+        )
+        {
             if (parameter != null)
             {
                 string[] splits = parameter.Split(
@@ -175,7 +182,8 @@ namespace Microsoft.CodeAnalysis.BuildTasks
         internal static bool IsParameterEmpty(
             [NotNullWhen(false)] string? parameter,
             params char[] splitOn
-        ) {
+        )
+        {
             if (parameter != null)
             {
                 string[] splits = parameter.Split(
@@ -206,7 +214,8 @@ namespace Microsoft.CodeAnalysis.BuildTasks
             ITaskItem[]? parameters,
             string[]? metadataNames,
             bool[]? treatAsFlags // May be null. In this case no metadata are treated as flags.
-        ) {
+        )
+        {
             Debug.Assert(
                 treatAsFlags == null || (metadataNames?.Length == treatAsFlags.Length),
                 "metadataNames and treatAsFlags should have the same length."

@@ -36,7 +36,8 @@ namespace Microsoft.EntityFrameworkCore
                     && pk.Properties.Count
                         == ownership.Properties.Count + (ownership.IsUnique ? 0 : 1)
                     && ownership.Properties.All(fkProperty => pk.Properties.Contains(fkProperty))
-                ) {
+                )
+                {
                     return "";
                 }
             }
@@ -63,7 +64,8 @@ namespace Microsoft.EntityFrameworkCore
             this IConventionProperty property,
             string? name,
             bool fromDataAnnotation = false
-        ) {
+        )
+        {
             property.SetOrRemoveAnnotation(
                 CosmosAnnotationNames.PropertyName,
                 name,

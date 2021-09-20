@@ -191,7 +191,8 @@ namespace System.Drawing.Tests
         {
             using (
                 new ThreadCultureChange(CultureInfo.InvariantCulture, CultureInfo.InvariantCulture)
-            ) {
+            )
+            {
                 Assert.Equal(expected, ColorTranslator.FromHtml(htmlColor));
             }
         }
@@ -213,7 +214,8 @@ namespace System.Drawing.Tests
         {
             using (
                 new ThreadCultureChange(CultureInfo.InvariantCulture, CultureInfo.InvariantCulture)
-            ) {
+            )
+            {
                 Exception exception = AssertExtensions.Throws<ArgumentException, Exception>(
                     () => ColorTranslator.FromHtml(htmlColor)
                 );
@@ -237,7 +239,8 @@ namespace System.Drawing.Tests
         {
             using (
                 new ThreadCultureChange(CultureInfo.InvariantCulture, CultureInfo.InvariantCulture)
-            ) {
+            )
+            {
                 Assert.Throws(exception, () => ColorTranslator.FromHtml(htmlColor));
             }
         }

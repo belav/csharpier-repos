@@ -65,7 +65,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.Editing
             string initialText,
             bool useSymbolAnnotations,
             Func<OptionSet, OptionSet> optionsTransform = null
-        ) {
+        )
+        {
             return TestAsync(
                 initialText,
                 initialText,
@@ -83,7 +84,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.Editing
             bool useSymbolAnnotations,
             Func<OptionSet, OptionSet> optionsTransform = null,
             bool performCheck = true
-        ) {
+        )
+        {
             var doc = await GetDocument(initialText, useSymbolAnnotations);
             OptionSet options = await doc.GetOptionsAsync();
             if (optionsTransform != null)
@@ -356,7 +358,8 @@ class C
         [Theory, MemberData(nameof(TestAllData))]
         public async Task TestImportNotAddedForReferencesInsideNamespaceDeclarations(
             bool useSymbolAnnotations
-        ) {
+        )
+        {
             await TestAsync(
                 @"namespace N
 {
@@ -386,7 +389,8 @@ class C
         [Theory, MemberData(nameof(TestAllData))]
         public async Task TestImportNotAddedForReferencesInsideParentOfNamespaceDeclarations(
             bool useSymbolAnnotations
-        ) {
+        )
+        {
             await TestAsync(
                 @"namespace N
 {
@@ -437,7 +441,8 @@ namespace N.N1
         [Theory, MemberData(nameof(TestAllData))]
         public async Task TestImportNotAddedForReferencesMatchingNestedImports(
             bool useSymbolAnnotations
-        ) {
+        )
+        {
             await TestAsync(
                 @"namespace N
 {
@@ -520,7 +525,8 @@ class C
         [WorkItem(8797, "https://github.com/dotnet/roslyn/issues/8797")]
         public async Task TestBannerTextRemainsAtTopOfDocumentWithoutExistingImports(
             bool useSymbolAnnotations
-        ) {
+        )
+        {
             await TestAsync(
                 @"// --------------------------------------------------------------------------------------------------------------------
 // <copyright file=""File.cs"" company=""MyOrgnaization"">
@@ -561,7 +567,8 @@ class C
         [WorkItem(8797, "https://github.com/dotnet/roslyn/issues/8797")]
         public async Task TestBannerTextRemainsAtTopOfDocumentWithExistingImports(
             bool useSymbolAnnotations
-        ) {
+        )
+        {
             await TestAsync(
                 @"// --------------------------------------------------------------------------------------------------------------------
 // <copyright file=""File.cs"" company=""MyOrgnaization"">
@@ -740,7 +747,8 @@ namespace System
         [Theory, MemberData(nameof(TestAllData))]
         public async Task TestImportAddedToStartOfDocumentIfNoNestedImports(
             bool useSymbolAnnotations
-        ) {
+        )
+        {
             await TestAsync(
                 @"namespace N
 {
@@ -775,7 +783,8 @@ namespace N
         [WorkItem(9228, "https://github.com/dotnet/roslyn/issues/9228")]
         public async Task TestDoNotAddDuplicateImportIfNamespaceIsDefinedInSourceAndExternalAssembly(
             bool useSymbolAnnotations
-        ) {
+        )
+        {
             var externalCode = @"namespace N.M { public class A : System.Attribute { } }";
 
             var code =

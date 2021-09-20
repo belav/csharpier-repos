@@ -30,7 +30,8 @@ namespace Microsoft.CodeAnalysis.GenerateFromMembers
             TextSpan textSpan,
             bool allowPartialSelection,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var syntaxFacts = document.GetLanguageService<ISyntaxFactsService>();
 
             var tree = await document.GetSyntaxTreeAsync(cancellationToken).ConfigureAwait(false);
@@ -107,7 +108,8 @@ namespace Microsoft.CodeAnalysis.GenerateFromMembers
         protected static ImmutableArray<IParameterSymbol> DetermineParameters(
             ImmutableArray<ISymbol> selectedMembers,
             ImmutableArray<NamingRule> rules
-        ) {
+        )
+        {
             using var _ = ArrayBuilder<IParameterSymbol>.GetInstance(out var parameters);
 
             foreach (var symbol in selectedMembers)

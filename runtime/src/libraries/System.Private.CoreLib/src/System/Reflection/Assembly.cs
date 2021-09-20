@@ -200,7 +200,8 @@ namespace System.Reflection
             object[]? args,
             CultureInfo? culture,
             object[]? activationAttributes
-        ) {
+        )
+        {
             Type? t = GetType(typeName, throwOnError: false, ignoreCase: ignoreCase);
             if (t == null)
                 return null;
@@ -518,7 +519,8 @@ namespace System.Reflection
             string assemblyFile,
             byte[]? hashValue,
             AssemblyHashAlgorithm hashAlgorithm
-        ) {
+        )
+        {
             throw new NotSupportedException(SR.NotSupported_AssemblyLoadFromHash);
         }
 
@@ -539,7 +541,8 @@ namespace System.Reflection
             string moduleName,
             byte[]? rawModule,
             byte[]? rawSymbolStore
-        ) {
+        )
+        {
             throw NotImplemented.ByDesign;
         }
 

@@ -219,7 +219,8 @@ namespace System.IO.Ports.Tests
             SerialPort com1,
             SerialPort com2,
             byte[] bytesToWrite
-        ) {
+        )
+        {
             byte[] expectedBytes = new byte[(2 * bytesToWrite.Length)];
 
             BufferData(com1, com2, bytesToWrite);
@@ -259,7 +260,8 @@ namespace System.IO.Ports.Tests
             SerialPort com2,
             byte[] bytesToWrite,
             byte[] expectedBytes
-        ) {
+        )
+        {
             com2.Write(bytesToWrite, 0, bytesToWrite.Length);
             com1.ReadTimeout = 500;
 
@@ -272,7 +274,8 @@ namespace System.IO.Ports.Tests
             SerialPort com1,
             SerialPort com2,
             byte[] expectedBytes
-        ) {
+        )
+        {
             byte[] byteRcvBuffer = new byte[expectedBytes.Length];
             int readInt;
             int i;

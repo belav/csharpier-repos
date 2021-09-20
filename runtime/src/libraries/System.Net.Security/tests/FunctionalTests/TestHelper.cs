@@ -71,7 +71,8 @@ namespace System.Net.Security.Tests
                     SocketType.Stream,
                     ProtocolType.Tcp
                 )
-            ) {
+            )
+            {
                 listener.Bind(new IPEndPoint(IPAddress.Loopback, 0));
                 listener.Listen(1);
 
@@ -103,7 +104,8 @@ namespace System.Net.Security.Tests
                         StoreName.CertificateAuthority,
                         StoreLocation.LocalMachine
                     )
-                ) {
+                )
+                {
                     store.Open(OpenFlags.ReadWrite);
                     foreach (X509Certificate2 cert in store.Certificates)
                     {
@@ -124,7 +126,8 @@ namespace System.Net.Security.Tests
                         StoreName.CertificateAuthority,
                         StoreLocation.CurrentUser
                     )
-                ) {
+                )
+                {
                     store.Open(OpenFlags.ReadWrite);
                     foreach (X509Certificate2 cert in store.Certificates)
                     {
@@ -144,7 +147,8 @@ namespace System.Net.Security.Tests
             [CallerMemberName] string? testName = null,
             bool longChain = false,
             bool serverCertificate = true
-        ) {
+        )
+        {
             const int keySize = 2048;
             if (PlatformDetection.IsWindows && testName != null)
             {
@@ -266,7 +270,8 @@ namespace System.Net.Security.Tests
         internal static string GetTestSNIName(
             string testMethodName,
             params SslProtocols?[] protocols
-        ) {
+        )
+        {
             static string ProtocolToString(SslProtocols? protocol)
             {
                 return (protocol?.ToString() ?? "null").Replace(", ", "-");

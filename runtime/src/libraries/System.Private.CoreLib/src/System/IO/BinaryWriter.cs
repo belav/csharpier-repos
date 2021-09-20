@@ -438,7 +438,8 @@ namespace System.IO
         private void WriteCharsCommonWithoutLengthPrefix(
             ReadOnlySpan<char> chars,
             bool useThisWriteOverride
-        ) {
+        )
+        {
             // If our input is truly enormous, the call to GetMaxByteCount might overflow,
             // which we want to avoid. Theoretically, any Encoding could expand from chars -> bytes
             // at an enormous ratio and cause us problems anyway given small inputs, but this is so

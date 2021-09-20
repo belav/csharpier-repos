@@ -38,7 +38,8 @@ namespace Microsoft.CodeAnalysis.Interactive
             string? initializationFilePath,
             CultureInfo culture,
             InteractiveHostPlatform platform
-        ) {
+        )
+        {
             Contract.ThrowIfNull(hostPath);
 
             HostPath = hostPath;
@@ -52,7 +53,8 @@ namespace Microsoft.CodeAnalysis.Interactive
             string? initializationFileName,
             CultureInfo culture,
             InteractiveHostPlatform platform
-        ) {
+        )
+        {
             var hostSubdirectory = (platform == InteractiveHostPlatform.Core) ? "Core" : "Desktop";
             var hostExecutableFileName =
                 "InteractiveHost"

@@ -46,7 +46,8 @@ namespace System.Xml.Schema
         public CompiledIdentityConstraint(
             XmlSchemaIdentityConstraint constraint,
             XmlNamespaceManager nsmgr
-        ) {
+        )
+        {
             this.name = constraint.QualifiedName;
 
             //public Asttree (string xPath, bool isField, XmlNamespaceManager nsmgr)

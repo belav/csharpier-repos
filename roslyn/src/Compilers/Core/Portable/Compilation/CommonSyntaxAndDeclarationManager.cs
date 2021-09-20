@@ -20,7 +20,8 @@ namespace Microsoft.CodeAnalysis
             SourceReferenceResolver resolver,
             CommonMessageProvider messageProvider,
             bool isSubmission
-        ) {
+        )
+        {
             this.ExternalSyntaxTrees = externalSyntaxTrees;
             this.ScriptClassName = scriptClassName ?? "";
             this.Resolver = resolver;

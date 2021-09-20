@@ -259,7 +259,8 @@ namespace System.Security.Cryptography.Xml
         internal static void LogBeginCanonicalization(
             SignedXml signedXml,
             Transform canonicalizationTransform
-        ) {
+        )
+        {
             Debug.Assert(signedXml != null, "signedXml != null");
             Debug.Assert(canonicalizationTransform != null, "canonicalizationTransform != null");
 
@@ -304,7 +305,8 @@ namespace System.Security.Cryptography.Xml
         internal static void LogBeginCheckSignatureFormat(
             SignedXml signedXml,
             Func<SignedXml, bool> formatValidator
-        ) {
+        )
+        {
             Debug.Assert(signedXml != null, "signedXml != null");
             Debug.Assert(formatValidator != null, "formatValidator != null");
 
@@ -434,7 +436,8 @@ namespace System.Security.Cryptography.Xml
         internal static void LogCanonicalizedOutput(
             SignedXml signedXml,
             Transform canonicalizationTransform
-        ) {
+        )
+        {
             Debug.Assert(signedXml != null, "signedXml != null");
             Debug.Assert(canonicalizationTransform != null, "canonicalizationTransform != null");
 
@@ -444,7 +447,8 @@ namespace System.Security.Cryptography.Xml
                     StreamReader reader = new StreamReader(
                         canonicalizationTransform.GetOutput(typeof(Stream)) as Stream
                     )
-                ) {
+                )
+                {
                     string logMessage = SR.Format(
                         CultureInfo.InvariantCulture,
                         SR.Log_CanonicalizedOutput,
@@ -494,7 +498,8 @@ namespace System.Security.Cryptography.Xml
             SignedXml signedXml,
             string algorithm,
             IEnumerable<string> validAlgorithms
-        ) {
+        )
+        {
             Debug.Assert(signedXml != null, "signedXml != null");
             Debug.Assert(validAlgorithms != null, "validAlgorithms != null");
 
@@ -540,7 +545,8 @@ namespace System.Security.Cryptography.Xml
             string algorithm,
             IEnumerable<string> validC14nAlgorithms,
             IEnumerable<string> validTransformAlgorithms
-        ) {
+        )
+        {
             Debug.Assert(signedXml != null, "signedXml != null");
             Debug.Assert(validC14nAlgorithms != null, "validC14nAlgorithms != null");
             Debug.Assert(validTransformAlgorithms != null, "validTransformAlgorithms != null");
@@ -691,7 +697,8 @@ namespace System.Security.Cryptography.Xml
             SignatureDescription signatureDescription,
             HashAlgorithm hash,
             AsymmetricSignatureFormatter asymmetricSignatureFormatter
-        ) {
+        )
+        {
             Debug.Assert(signedXml != null, "signedXml != null");
             Debug.Assert(signatureDescription != null, "signatureDescription != null");
             Debug.Assert(hash != null, "hash != null");
@@ -849,7 +856,8 @@ namespace System.Security.Cryptography.Xml
             SignedXml signedXml,
             X509Certificate certificate,
             X509KeyUsageExtension keyUsages
-        ) {
+        )
+        {
             Debug.Assert(signedXml != null, "signedXml != null");
             Debug.Assert(certificate != null, "certificate != null");
 
@@ -914,7 +922,8 @@ namespace System.Security.Cryptography.Xml
             Reference reference,
             byte[] actualHash,
             byte[] expectedHash
-        ) {
+        )
+        {
             Debug.Assert(signedXml != null, "signedXml != null");
             Debug.Assert(reference != null, "reference != null");
             Debug.Assert(actualHash != null, "actualHash != null");
@@ -965,7 +974,8 @@ namespace System.Security.Cryptography.Xml
             AsymmetricSignatureDeformatter asymmetricSignatureDeformatter,
             byte[] actualHashValue,
             byte[] signatureValue
-        ) {
+        )
+        {
             Debug.Assert(signedXml != null, "signedXml != null");
             Debug.Assert(signatureDescription != null, "signatureDescription != null");
             Debug.Assert(hashAlgorithm != null, "hashAlgorithm != null");
@@ -1033,7 +1043,8 @@ namespace System.Security.Cryptography.Xml
             KeyedHashAlgorithm mac,
             byte[] actualHashValue,
             byte[] signatureValue
-        ) {
+        )
+        {
             Debug.Assert(signedXml != null, "signedXml != null");
             Debug.Assert(mac != null, "mac != null");
 
@@ -1090,7 +1101,8 @@ namespace System.Security.Cryptography.Xml
             SignedXml signedXml,
             X509Chain chain,
             X509Certificate certificate
-        ) {
+        )
+        {
             Debug.Assert(signedXml != null, "signedXml != null");
             Debug.Assert(certificate != null, "certificate != null");
             Debug.Assert(chain != null, "chain != null");
@@ -1269,7 +1281,8 @@ namespace System.Security.Cryptography.Xml
             TraceEventType eventType,
             SignedXmlDebugEvent eventId,
             string data
-        ) {
+        )
+        {
             Debug.Assert(source != null, "source != null");
             Debug.Assert(!string.IsNullOrEmpty(data), "!string.IsNullOrEmpty(data)");
             Debug.Assert(InformationLoggingEnabled, "InformationLoggingEnabled");

@@ -327,7 +327,8 @@ namespace System.DirectoryServices.Protocols
                 char fmt = format[formatCount];
                 if (
                     fmt == '{' || fmt == '}' || fmt == '[' || fmt == ']' || fmt == 'n' || fmt == 'x'
-                ) {
+                )
+                {
                     error = BerPal.ScanNext(berElement, new string(fmt, 1));
 
                     if (BerPal.IsBerDecodeError(error))
@@ -450,7 +451,8 @@ namespace System.DirectoryServices.Protocols
             SafeBerHandle berElement,
             byte[] tempValue,
             char fmt
-        ) {
+        )
+        {
             int error = 0;
 
             // one byte array, one int arguments
@@ -479,7 +481,8 @@ namespace System.DirectoryServices.Protocols
             SafeBerHandle berElement,
             char fmt,
             ref int error
-        ) {
+        )
+        {
             error = 0;
             IntPtr result = IntPtr.Zero;
             berval binaryValue = new berval();
@@ -518,7 +521,8 @@ namespace System.DirectoryServices.Protocols
             SafeBerHandle berElement,
             byte[][] tempValue,
             char fmt
-        ) {
+        )
+        {
             IntPtr berValArray = IntPtr.Zero;
             IntPtr tempPtr = IntPtr.Zero;
             berval[] managedBervalArray = null;
@@ -598,7 +602,8 @@ namespace System.DirectoryServices.Protocols
             SafeBerHandle berElement,
             char fmt,
             ref int error
-        ) {
+        )
+        {
             error = 0;
             // several berval
             IntPtr ptrResult = IntPtr.Zero;

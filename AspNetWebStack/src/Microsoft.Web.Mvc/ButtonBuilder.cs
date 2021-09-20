@@ -14,7 +14,8 @@ namespace Microsoft.Web.Mvc
             string name,
             string buttonText,
             IDictionary<string, object> htmlAttributes
-        ) {
+        )
+        {
             TagBuilder buttonTag = new TagBuilder("input");
 
             buttonTag.MergeAttribute("type", "submit");
@@ -47,7 +48,8 @@ namespace Microsoft.Web.Mvc
             string name,
             string sourceUrl,
             IDictionary<string, object> htmlAttributes
-        ) {
+        )
+        {
             TagBuilder buttonTag = new TagBuilder("input");
 
             buttonTag.MergeAttribute("type", "image");
@@ -81,7 +83,8 @@ namespace Microsoft.Web.Mvc
             HtmlButtonType type,
             string onClickMethod,
             IDictionary<string, object> htmlAttributes
-        ) {
+        )
+        {
             if (name == null)
             {
                 throw new ArgumentNullException("name");

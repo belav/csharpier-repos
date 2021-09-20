@@ -87,7 +87,8 @@ namespace System.Net.Http
             SafeWinHttpHandle? sessionHandle,
             Uri uri,
             out Interop.WinHttp.WINHTTP_PROXY_INFO proxyInfo
-        ) {
+        )
+        {
             proxyInfo.AccessType = Interop.WinHttp.WINHTTP_ACCESS_TYPE_NO_PROXY;
             proxyInfo.Proxy = IntPtr.Zero;
             proxyInfo.ProxyBypass = IntPtr.Zero;
@@ -155,7 +156,8 @@ namespace System.Net.Http
                         ref autoProxyOptions,
                         out proxyInfo
                     )
-                ) {
+                )
+                {
                     if (NetEventSource.Log.IsEnabled())
                         NetEventSource.Info(this, "Using autoconfig proxy settings");
                     useProxy = true;

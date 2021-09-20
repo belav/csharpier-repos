@@ -82,7 +82,8 @@ namespace System.Net.NetworkInformation
 
         private static UnicastIPAddressInformationCollection GetUnicastAddresses(
             UnixNetworkInterface uni
-        ) {
+        )
+        {
             var collection = new UnicastIPAddressInformationCollection();
             foreach (UnixUnicastIPAddressInformation address in uni.UnicastAddress)
             {
@@ -94,7 +95,8 @@ namespace System.Net.NetworkInformation
 
         private static MulticastIPAddressInformationCollection GetMulticastAddresses(
             UnixNetworkInterface uni
-        ) {
+        )
+        {
             var collection = new MulticastIPAddressInformationCollection();
 
             if (uni.MulticastAddresess != null)

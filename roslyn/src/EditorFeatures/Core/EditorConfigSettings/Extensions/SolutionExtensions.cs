@@ -14,11 +14,13 @@ namespace Microsoft.CodeAnalysis.Editor.EditorConfigSettings.Extensions
         public static ImmutableArray<Project> GetProjectsForPath(
             this Solution solution,
             string givenPath
-        ) {
+        )
+        {
             if (
                 Path.GetDirectoryName(givenPath) is not string givenFolderPath
                 || solution.FilePath is null
-            ) {
+            )
+            {
                 return solution.Projects.ToImmutableArray();
             }
 
@@ -33,7 +35,8 @@ namespace Microsoft.CodeAnalysis.Editor.EditorConfigSettings.Extensions
                 var (projectDirectoryPath, project) in solution.Projects.Select(
                     p => (new DirectoryInfo(p.FilePath).Parent, p)
                 )
-            ) {
+            )
+            {
                 if (ContainsPath(givenFolder, projectDirectoryPath))
                 {
                     builder.Add(project);

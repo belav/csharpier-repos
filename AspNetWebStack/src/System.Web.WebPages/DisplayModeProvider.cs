@@ -50,7 +50,8 @@ namespace System.Web.WebPages
         private int FindFirstAvailableDisplayMode(
             IDisplayMode currentDisplayMode,
             bool requireConsistentDisplayMode
-        ) {
+        )
+        {
             if (requireConsistentDisplayMode && currentDisplayMode != null)
             {
                 int first = _displayModes.IndexOf(currentDisplayMode);
@@ -65,7 +66,8 @@ namespace System.Web.WebPages
         public IEnumerable<IDisplayMode> GetAvailableDisplayModesForContext(
             HttpContextBase httpContext,
             IDisplayMode currentDisplayMode
-        ) {
+        )
+        {
             return GetAvailableDisplayModesForContext(
                 httpContext,
                 currentDisplayMode,
@@ -77,7 +79,8 @@ namespace System.Web.WebPages
             HttpContextBase httpContext,
             IDisplayMode currentDisplayMode,
             bool requireConsistentDisplayMode
-        ) {
+        )
+        {
             int first = FindFirstAvailableDisplayMode(
                 currentDisplayMode,
                 requireConsistentDisplayMode
@@ -102,7 +105,8 @@ namespace System.Web.WebPages
             HttpContextBase httpContext,
             Func<string, bool> virtualPathExists,
             IDisplayMode currentDisplayMode
-        ) {
+        )
+        {
             return GetDisplayInfoForVirtualPath(
                 virtualPath,
                 httpContext,
@@ -118,7 +122,8 @@ namespace System.Web.WebPages
             Func<string, bool> virtualPathExists,
             IDisplayMode currentDisplayMode,
             bool requireConsistentDisplayMode
-        ) {
+        )
+        {
             // Performance sensitive
             int first = FindFirstAvailableDisplayMode(
                 currentDisplayMode,

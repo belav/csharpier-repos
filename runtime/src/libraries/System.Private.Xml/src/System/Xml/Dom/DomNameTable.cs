@@ -31,7 +31,8 @@ namespace System.Xml
             string localName,
             string? ns,
             IXmlSchemaInfo? schemaInfo
-        ) {
+        )
+        {
             if (prefix == null)
             {
                 prefix = string.Empty;
@@ -51,7 +52,8 @@ namespace System.Xml
                     && ((object)e.Prefix == (object)prefix || e.Prefix.Equals(prefix))
                     && ((object)e.NamespaceURI == (object)ns || e.NamespaceURI.Equals(ns))
                     && e.Equals(schemaInfo)
-                ) {
+                )
+                {
                     return e;
                 }
             }
@@ -63,7 +65,8 @@ namespace System.Xml
             string localName,
             string? ns,
             IXmlSchemaInfo? schemaInfo
-        ) {
+        )
+        {
             if (prefix == null)
             {
                 prefix = string.Empty;
@@ -83,7 +86,8 @@ namespace System.Xml
                     && ((object)e.Prefix == (object)prefix || e.Prefix.Equals(prefix))
                     && ((object)e.NamespaceURI == (object)ns || e.NamespaceURI.Equals(ns))
                     && e.Equals(schemaInfo)
-                ) {
+                )
+                {
                     return e;
                 }
             }

@@ -67,7 +67,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             NamespaceSymbol containingNamespace,
             ImmutableArray<NamespaceSymbol> namespacesToMerge,
             string nameOpt = null
-        ) {
+        )
+        {
             // Currently, if we are just merging 1 namespace, we just return the namespace itself.
             // This is by far the most efficient, because it means that we don't create merged
             // namespaces (which have a fair amount of memory overhead) unless there is actual
@@ -93,7 +94,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             NamespaceSymbol containingNamespace,
             ImmutableArray<NamespaceSymbol> namespacesToMerge,
             string nameOpt
-        ) {
+        )
+        {
             _extent = extent;
             _namespacesToMerge = namespacesToMerge;
             _containingNamespace = containingNamespace;
@@ -129,7 +131,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
         internal override void ForceComplete(
             SourceLocation locationOpt,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             foreach (var part in _namespacesToMerge)
             {
                 cancellationToken.ThrowIfCancellationRequested();
@@ -303,7 +306,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             string name,
             int arity,
             LookupOptions options
-        ) {
+        )
+        {
             foreach (NamespaceSymbol namespaceSymbol in _namespacesToMerge)
             {
                 namespaceSymbol.GetExtensionMethods(methods, name, arity, options);

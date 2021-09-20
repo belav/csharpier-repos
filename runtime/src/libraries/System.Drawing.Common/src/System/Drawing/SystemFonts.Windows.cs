@@ -134,7 +134,8 @@ namespace System.Drawing
                         &itfont,
                         0
                     )
-                ) {
+                )
+                {
                     iconTitleFont = GetFontFromData(itfont);
                     iconTitleFont.SetSystemFontName(nameof(IconTitleFont));
                 }

@@ -33,7 +33,8 @@ namespace System.Reflection.PortableExecutable
         /// <exception cref="InvalidOperationException">PE image not available.</exception>
         public MetadataReaderProvider ReadEmbeddedPortablePdbDebugDirectoryData(
             DebugDirectoryEntry entry
-        ) {
+        )
+        {
             if (entry.Type != DebugDirectoryEntryType.EmbeddedPortablePdb)
             {
                 Throw.InvalidArgument(
@@ -88,7 +89,8 @@ namespace System.Reflection.PortableExecutable
         // internal for testing
         internal static unsafe ImmutableArray<byte> DecodeEmbeddedPortablePdbDebugDirectoryData(
             AbstractMemoryBlock block
-        ) {
+        )
+        {
             byte[]? decompressed;
 
             var headerReader = block.GetReader();
@@ -153,7 +155,8 @@ namespace System.Reflection.PortableExecutable
             ref bool openedEmbeddedPdb,
             ref MetadataReaderProvider? provider,
             ref Exception? errorToReport
-        ) {
+        )
+        {
             provider = null;
             MetadataReaderProvider? candidate = null;
 

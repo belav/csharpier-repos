@@ -11,7 +11,8 @@ namespace Microsoft.AspNetCore.Razor.Language.Extensions
         protected override void ExecuteCore(
             RazorCodeDocument codeDocument,
             DocumentIntermediateNode documentNode
-        ) {
+        )
+        {
             var @namespace = documentNode.FindPrimaryNamespace();
             var @class = documentNode.FindPrimaryClass();
             if (@namespace == null || @class == null)
@@ -22,7 +23,8 @@ namespace Microsoft.AspNetCore.Razor.Language.Extensions
             var classIndex = @namespace.Children.IndexOf(@class);
             foreach (
                 var attribute in documentNode.FindDirectiveReferences(AttributeDirective.Directive)
-            ) {
+            )
+            {
                 var token = ((DirectiveIntermediateNode)attribute.Node).Tokens.FirstOrDefault();
                 if (token != null)
                 {

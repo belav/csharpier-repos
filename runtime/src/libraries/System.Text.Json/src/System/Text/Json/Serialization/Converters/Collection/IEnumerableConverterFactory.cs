@@ -29,7 +29,8 @@ namespace System.Text.Json.Serialization.Converters
         public override JsonConverter CreateConverter(
             Type typeToConvert,
             JsonSerializerOptions options
-        ) {
+        )
+        {
             Type converterType;
             Type[] genericArgs;
             Type? elementType = null;
@@ -52,7 +53,8 @@ namespace System.Text.Json.Serialization.Converters
             else if (
                 (actualTypeToConvert = typeToConvert.GetCompatibleGenericBaseClass(typeof(List<>)))
                 != null
-            ) {
+            )
+            {
                 converterType = typeof(ListOfTConverter<, >);
                 elementType = actualTypeToConvert.GetGenericArguments()[0];
             }
@@ -63,7 +65,8 @@ namespace System.Text.Json.Serialization.Converters
                         typeof(Dictionary<, >)
                     )
                 ) != null
-            ) {
+            )
+            {
                 genericArgs = actualTypeToConvert.GetGenericArguments();
                 converterType = typeof(DictionaryOfTKeyTValueConverter<, , >);
                 dictionaryKeyType = genericArgs[0];
@@ -84,7 +87,8 @@ namespace System.Text.Json.Serialization.Converters
                         typeof(IDictionary<, >)
                     )
                 ) != null
-            ) {
+            )
+            {
                 genericArgs = actualTypeToConvert.GetGenericArguments();
                 converterType = typeof(IDictionaryOfTKeyTValueConverter<, , >);
                 dictionaryKeyType = genericArgs[0];
@@ -97,7 +101,8 @@ namespace System.Text.Json.Serialization.Converters
                         typeof(IReadOnlyDictionary<, >)
                     )
                 ) != null
-            ) {
+            )
+            {
                 genericArgs = actualTypeToConvert.GetGenericArguments();
                 converterType = typeof(IReadOnlyDictionaryOfTKeyTValueConverter<, , >);
                 dictionaryKeyType = genericArgs[0];
@@ -113,7 +118,8 @@ namespace System.Text.Json.Serialization.Converters
             else if (
                 (actualTypeToConvert = typeToConvert.GetCompatibleGenericInterface(typeof(IList<>)))
                 != null
-            ) {
+            )
+            {
                 converterType = typeof(IListOfTConverter<, >);
                 elementType = actualTypeToConvert.GetGenericArguments()[0];
             }
@@ -121,7 +127,8 @@ namespace System.Text.Json.Serialization.Converters
             else if (
                 (actualTypeToConvert = typeToConvert.GetCompatibleGenericInterface(typeof(ISet<>)))
                 != null
-            ) {
+            )
+            {
                 converterType = typeof(ISetOfTConverter<, >);
                 elementType = actualTypeToConvert.GetGenericArguments()[0];
             }
@@ -132,7 +139,8 @@ namespace System.Text.Json.Serialization.Converters
                         typeof(ICollection<>)
                     )
                 ) != null
-            ) {
+            )
+            {
                 converterType = typeof(ICollectionOfTConverter<, >);
                 elementType = actualTypeToConvert.GetGenericArguments()[0];
             }
@@ -140,7 +148,8 @@ namespace System.Text.Json.Serialization.Converters
             else if (
                 (actualTypeToConvert = typeToConvert.GetCompatibleGenericBaseClass(typeof(Stack<>)))
                 != null
-            ) {
+            )
+            {
                 converterType = typeof(StackOfTConverter<, >);
                 elementType = actualTypeToConvert.GetGenericArguments()[0];
             }
@@ -148,7 +157,8 @@ namespace System.Text.Json.Serialization.Converters
             else if (
                 (actualTypeToConvert = typeToConvert.GetCompatibleGenericBaseClass(typeof(Queue<>)))
                 != null
-            ) {
+            )
+            {
                 converterType = typeof(QueueOfTConverter<, >);
                 elementType = actualTypeToConvert.GetGenericArguments()[0];
             }
@@ -159,7 +169,8 @@ namespace System.Text.Json.Serialization.Converters
                         typeof(ConcurrentStack<>)
                     )
                 ) != null
-            ) {
+            )
+            {
                 converterType = typeof(ConcurrentStackOfTConverter<, >);
                 elementType = actualTypeToConvert.GetGenericArguments()[0];
             }
@@ -170,7 +181,8 @@ namespace System.Text.Json.Serialization.Converters
                         typeof(ConcurrentQueue<>)
                     )
                 ) != null
-            ) {
+            )
+            {
                 converterType = typeof(ConcurrentQueueOfTConverter<, >);
                 elementType = actualTypeToConvert.GetGenericArguments()[0];
             }
@@ -181,7 +193,8 @@ namespace System.Text.Json.Serialization.Converters
                         typeof(IEnumerable<>)
                     )
                 ) != null
-            ) {
+            )
+            {
                 converterType = typeof(IEnumerableOfTConverter<, >);
                 elementType = actualTypeToConvert.GetGenericArguments()[0];
             }

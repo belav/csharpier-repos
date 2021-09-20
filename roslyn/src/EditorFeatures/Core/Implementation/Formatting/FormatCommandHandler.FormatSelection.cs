@@ -25,7 +25,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.Formatting
         private bool TryExecuteCommand(
             FormatSelectionCommandArgs args,
             CommandExecutionContext context
-        ) {
+        )
+        {
             if (!args.SubjectBuffer.CanApplyChangeDocumentToWorkspace())
             {
                 return false;
@@ -49,7 +50,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.Formatting
                     allowCancellation: true,
                     EditorFeaturesResources.Formatting_currently_selected_text
                 )
-            ) {
+            )
+            {
                 var buffer = args.SubjectBuffer;
 
                 // we only support single selection for now

@@ -22,7 +22,8 @@ internal static partial class Interop
             TokenAccessLevels desiredAccess,
             WinSecurityContext openAs,
             out SafeAccessTokenHandle tokenHandle
-        ) {
+        )
+        {
             bool openAsSelf = true;
             if (openAs == WinSecurityContext.Thread)
                 openAsSelf = false;

@@ -315,7 +315,8 @@ namespace System.Web.Http.ModelBinding
         [PropertyData("TestTraceWriters")]
         public async Task ValuesController_Behavior_Unchanged_By_Tracing(
             ITestTraceWriter traceWriter
-        ) {
+        )
+        {
             HttpConfiguration config = new HttpConfiguration();
             config.Routes.MapHttpRoute(
                 "DefaultApi",
@@ -575,7 +576,8 @@ namespace System.Web.Http.ModelBinding
         private static IList<string> MissingTraces(
             IList<ExpectedTraceRecord> expectedRecords,
             IList<TraceRecord> actualRecords
-        ) {
+        )
+        {
             List<string> missing = new List<string>();
 
             foreach (ExpectedTraceRecord expectedRecord in expectedRecords)
@@ -655,7 +657,8 @@ namespace System.Web.Http.ModelBinding
         private static IList<string> UnexpectedTraces(
             IList<ExpectedTraceRecord> expectedRecords,
             IList<TraceRecord> actualRecords
-        ) {
+        )
+        {
             List<string> unexpected = new List<string>();
 
             foreach (TraceRecord actualRecord in actualRecords)
@@ -672,7 +675,8 @@ namespace System.Web.Http.ModelBinding
                         "Exception thrown while getting types from 'xunit.runner.visualstudio.testadapter, ",
                         StringComparison.Ordinal
                     )
-                ) {
+                )
+                {
                     continue;
                 }
 
@@ -716,7 +720,8 @@ namespace System.Web.Http.ModelBinding
         private static bool ConfirmTracingOrder(
             IList<ExpectedTraceRecord> expectedRecords,
             IList<TraceRecord> actualRecords
-        ) {
+        )
+        {
             int traceBeginPos = 0;
             foreach (ExpectedTraceRecord expectedRecord in expectedRecords)
             {
@@ -754,7 +759,8 @@ namespace System.Web.Http.ModelBinding
                         "Exception thrown while getting types from 'xunit.runner.visualstudio.testadapter, ",
                         StringComparison.Ordinal
                     )
-                ) {
+                )
+                {
                     traceBeginPos++;
                     actualRecord = actualRecords.ElementAtOrDefault(traceBeginPos);
                 }
@@ -784,7 +790,8 @@ namespace System.Web.Http.ModelBinding
             string category,
             string operatorName,
             string operationName
-        ) {
+        )
+        {
             TraceKind = kind;
             Category = category;
             OperatorName = operatorName;

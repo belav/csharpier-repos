@@ -43,7 +43,8 @@ namespace System.Net.WebSockets
         public virtual async ValueTask<ValueWebSocketReceiveResult> ReceiveAsync(
             Memory<byte> buffer,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             if (MemoryMarshal.TryGetArray(buffer, out ArraySegment<byte> arraySegment))
             {
                 WebSocketReceiveResult r = await ReceiveAsync(arraySegment, cancellationToken)
@@ -86,7 +87,8 @@ namespace System.Net.WebSockets
             WebSocketMessageType messageType,
             bool endOfMessage,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             byte[] array = ArrayPool<byte>.Shared.Rent(buffer.Length);
             try
             {
@@ -115,7 +117,8 @@ namespace System.Net.WebSockets
         protected static void ThrowOnInvalidState(
             WebSocketState state,
             params WebSocketState[] validStates
-        ) {
+        )
+        {
             string validStatesText = string.Empty;
 
             if (validStates != null && validStates.Length > 0)
@@ -143,7 +146,8 @@ namespace System.Net.WebSockets
         public static ArraySegment<byte> CreateClientBuffer(
             int receiveBufferSize,
             int sendBufferSize
-        ) {
+        )
+        {
             if (receiveBufferSize <= 0)
             {
                 throw new ArgumentOutOfRangeException(
@@ -187,7 +191,8 @@ namespace System.Net.WebSockets
             bool isServer,
             string? subProtocol,
             TimeSpan keepAliveInterval
-        ) {
+        )
+        {
             if (stream == null)
             {
                 throw new ArgumentNullException(nameof(stream));
@@ -246,7 +251,8 @@ namespace System.Net.WebSockets
             TimeSpan keepAliveInterval,
             bool useZeroMaskingKey,
             ArraySegment<byte> internalBuffer
-        ) {
+        )
+        {
             if (innerStream == null)
             {
                 throw new ArgumentNullException(nameof(innerStream));

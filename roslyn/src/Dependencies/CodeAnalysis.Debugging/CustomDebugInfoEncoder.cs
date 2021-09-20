@@ -113,7 +113,8 @@ namespace Microsoft.CodeAnalysis.Debugging
 
         public void AddStateMachineHoistedLocalScopes(
             ImmutableArray<StateMachineHoistedLocalScope> scopes
-        ) {
+        )
+        {
             if (scopes.IsDefaultOrEmpty)
             {
                 return;
@@ -148,7 +149,8 @@ namespace Microsoft.CodeAnalysis.Debugging
 
         public void AddDynamicLocals(
             IReadOnlyCollection<(string LocalName, byte[] Flags, int Count, int SlotIndex)> dynamicLocals
-        ) {
+        )
+        {
             Debug.Assert(dynamicLocals != null);
 
             AddRecord(
@@ -182,7 +184,8 @@ namespace Microsoft.CodeAnalysis.Debugging
 
         public void AddTupleElementNames(
             IReadOnlyCollection<(string LocalName, int SlotIndex, int ScopeStart, int ScopeEnd, ImmutableArray<string> Names)> tupleLocals
-        ) {
+        )
+        {
             Debug.Assert(tupleLocals != null);
 
             AddRecord(
@@ -230,7 +233,8 @@ namespace Microsoft.CodeAnalysis.Debugging
             CustomDebugInfoKind kind,
             T debugInfo,
             Action<T, BlobBuilder> recordSerializer
-        ) {
+        )
+        {
             var startOffset = Builder.Count;
             Builder.WriteByte(CustomDebugInfoConstants.Version);
             Builder.WriteByte((byte)kind);

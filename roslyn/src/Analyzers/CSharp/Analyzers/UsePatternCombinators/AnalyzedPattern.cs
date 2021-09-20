@@ -97,7 +97,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UsePatternCombinators
                 AnalyzedPattern rightPattern,
                 bool isDisjunctive,
                 SyntaxToken token
-            ) {
+            )
+            {
                 var leftTarget = leftPattern.Target;
                 var rightTarget = rightPattern.Target;
 

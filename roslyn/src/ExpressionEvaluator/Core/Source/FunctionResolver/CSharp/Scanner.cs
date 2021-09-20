@@ -41,7 +41,8 @@ namespace Microsoft.CodeAnalysis.CSharp.ExpressionEvaluator
                 TokenKind kind,
                 string text = null,
                 SyntaxKind keywordKind = SyntaxKind.None
-            ) {
+            )
+            {
                 Kind = kind;
                 Text = text;
                 KeywordKind = keywordKind;
@@ -105,7 +106,8 @@ namespace Microsoft.CodeAnalysis.CSharp.ExpressionEvaluator
                     c == '@'
                     && _offset < length
                     && UnicodeCharacterUtilities.IsIdentifierStartCharacter(_text[_offset])
-                ) {
+                )
+                {
                     _offset++;
                     return ScanIdentifierAfterStartCharacter(verbatim: true);
                 }
@@ -130,7 +132,8 @@ namespace Microsoft.CodeAnalysis.CSharp.ExpressionEvaluator
                 while (
                     (_offset < length)
                     && UnicodeCharacterUtilities.IsIdentifierPartCharacter(_text[_offset])
-                ) {
+                )
+                {
                     _offset++;
                 }
                 var text = _text.Substring(start, _offset - start);

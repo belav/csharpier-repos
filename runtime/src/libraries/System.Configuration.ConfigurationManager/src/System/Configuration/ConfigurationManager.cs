@@ -74,7 +74,8 @@ namespace System.Configuration
         internal static void SetConfigurationSystem(
             IInternalConfigSystem configSystem,
             bool initComplete
-        ) {
+        )
+        {
             lock (s_initLock)
             {
                 // It is an error if the configuration system has already been set.
@@ -202,7 +203,8 @@ namespace System.Configuration
         public static Configuration OpenMappedExeConfiguration(
             ExeConfigurationFileMap fileMap,
             ConfigurationUserLevel userLevel
-        ) {
+        )
+        {
             return OpenExeConfigurationImpl(fileMap, false, userLevel, null);
         }
 
@@ -210,7 +212,8 @@ namespace System.Configuration
             ExeConfigurationFileMap fileMap,
             ConfigurationUserLevel userLevel,
             bool preLoad
-        ) {
+        )
+        {
             return OpenExeConfigurationImpl(fileMap, false, userLevel, null, preLoad);
         }
 
@@ -220,7 +223,8 @@ namespace System.Configuration
             ConfigurationUserLevel userLevel,
             string exePath,
             bool preLoad = false
-        ) {
+        )
+        {
             // exePath must be specified if not running inside ClientConfigurationSystem
             if (
                 !isMachine
@@ -231,7 +235,8 @@ namespace System.Configuration
                         && (((ExeConfigurationFileMap)fileMap).ExeConfigFilename == null)
                     )
                 )
-            ) {
+            )
+            {
                 if (
                     (s_configSystem != null)
                     && (s_configSystem.GetType() != typeof(ClientConfigurationSystem))

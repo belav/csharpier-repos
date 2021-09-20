@@ -21,7 +21,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Organizing.Organizers
         protected override RecordDeclarationSyntax Organize(
             RecordDeclarationSyntax syntax,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             return syntax.Update(
                 syntax.AttributeLists,
                 ModifiersOrganizer.Organize(syntax.Modifiers),

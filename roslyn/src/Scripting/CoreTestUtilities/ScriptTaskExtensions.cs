@@ -17,7 +17,8 @@ namespace Roslyn.Test.Utilities
             string code,
             ScriptOptions options = null,
             CancellationToken cancellationToken = default(CancellationToken)
-        ) {
+        )
+        {
             return await (await task.ConfigureAwait(false)).ContinueWithAsync(
                     code,
                     options,
@@ -31,7 +32,8 @@ namespace Roslyn.Test.Utilities
             string code,
             ScriptOptions options = null,
             CancellationToken cancellationToken = default(CancellationToken)
-        ) {
+        )
+        {
             return await (await task.ConfigureAwait(false)).ContinueWithAsync(
                     code,
                     options,
@@ -45,7 +47,8 @@ namespace Roslyn.Test.Utilities
             string code,
             ScriptOptions options = null,
             CancellationToken cancellationToken = default(CancellationToken)
-        ) {
+        )
+        {
             return await (await task.ConfigureAwait(false)).ContinueWithAsync<T>(
                     code,
                     options,
@@ -59,7 +62,8 @@ namespace Roslyn.Test.Utilities
             string code,
             ScriptOptions options = null,
             CancellationToken cancellationToken = default(CancellationToken)
-        ) {
+        )
+        {
             return await (await task.ConfigureAwait(false)).ContinueWithAsync<T>(
                     code,
                     options,
@@ -73,7 +77,8 @@ namespace Roslyn.Test.Utilities
             string code,
             ScriptOptions options = null,
             CancellationToken cancellationToken = default(CancellationToken)
-        ) {
+        )
+        {
             return await (await task.ConfigureAwait(false)).ContinueWithAsync(
                     code,
                     options,

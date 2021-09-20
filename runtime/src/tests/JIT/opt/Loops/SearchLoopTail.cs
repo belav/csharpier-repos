@@ -169,7 +169,8 @@ namespace N
                 || TrueFalseAnd(inputs)
                 || !FalseTrueOr(inputs)
                 || FalseTrueAnd(inputs)
-            ) {
+            )
+            {
                 return -1;
             }
 

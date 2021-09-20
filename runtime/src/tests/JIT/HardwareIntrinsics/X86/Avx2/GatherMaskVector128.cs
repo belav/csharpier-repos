@@ -59,7 +59,8 @@ namespace IntelHardwareIntrinsicTest
 
                 fixed (int* iptr = intIndexTable)fixed (long* lptr = longIndexTable)fixed (
                     long* l256ptr = vector256longIndexTable
-                ) {
+                )
+                {
                     indexi = Sse2.LoadVector128(iptr);
                     indexl = Sse2.LoadVector128(lptr);
                     indexl256 = Avx.LoadVector256(l256ptr);
@@ -96,7 +97,8 @@ namespace IntelHardwareIntrinsicTest
                         floatSourceTable,
                         new float[4]
                     )
-                ) {
+                )
+                {
                     var vf = Avx2.GatherMaskVector128(
                         sourcef,
                         (float*)(floatTable.inArrayPtr),
@@ -113,7 +115,8 @@ namespace IntelHardwareIntrinsicTest
                                 == BitConverter.SingleToInt32Bits(y),
                             intIndexTable
                         )
-                    ) {
+                    )
+                    {
                         Console.WriteLine("AVX2 GatherMaskVector128 failed on float:");
                         foreach (var item in floatTable.outArray)
                         {
@@ -155,7 +158,8 @@ namespace IntelHardwareIntrinsicTest
                                 == BitConverter.SingleToInt32Bits(y),
                             intIndexTable
                         )
-                    ) {
+                    )
+                    {
                         Console.WriteLine(
                             "AVX2 GatherMaskVector128 failed with reflection on float:"
                         );
@@ -202,7 +206,8 @@ namespace IntelHardwareIntrinsicTest
                                 == BitConverter.SingleToInt32Bits(y),
                             intIndexTable
                         )
-                    ) {
+                    )
+                    {
                         Console.WriteLine(
                             "AVX2 GatherMaskVector128 failed on float with non-const scale (IMM):"
                         );
@@ -240,7 +245,8 @@ namespace IntelHardwareIntrinsicTest
                         doubleSourceTable,
                         new double[2]
                     )
-                ) {
+                )
+                {
                     var vd = Avx2.GatherMaskVector128(
                         sourced,
                         (double*)(doubletTable.inArrayPtr),
@@ -257,7 +263,8 @@ namespace IntelHardwareIntrinsicTest
                                 == BitConverter.DoubleToInt64Bits(y),
                             intIndexTable
                         )
-                    ) {
+                    )
+                    {
                         Console.WriteLine("AVX2 GatherMaskVector128 failed on double:");
                         foreach (var item in doubletTable.outArray)
                         {
@@ -299,7 +306,8 @@ namespace IntelHardwareIntrinsicTest
                                 == BitConverter.DoubleToInt64Bits(y),
                             intIndexTable
                         )
-                    ) {
+                    )
+                    {
                         Console.WriteLine(
                             "AVX2 GatherMaskVector128 failed with reflection on double:"
                         );
@@ -346,7 +354,8 @@ namespace IntelHardwareIntrinsicTest
                                 == BitConverter.DoubleToInt64Bits(y),
                             intIndexTable
                         )
-                    ) {
+                    )
+                    {
                         Console.WriteLine(
                             "AVX2 GatherMaskVector128 failed on double with non-const scale (IMM):"
                         );
@@ -384,7 +393,8 @@ namespace IntelHardwareIntrinsicTest
                         intSourceTable,
                         new int[4]
                     )
-                ) {
+                )
+                {
                     var vf = Avx2.GatherMaskVector128(
                         sourcei,
                         (int*)(intTable.inArrayPtr),
@@ -510,7 +520,8 @@ namespace IntelHardwareIntrinsicTest
                         intSourceTable,
                         new int[4]
                     )
-                ) {
+                )
+                {
                     var vf = Avx2.GatherMaskVector128(
                         sourceui,
                         (uint*)(intTable.inArrayPtr),
@@ -636,7 +647,8 @@ namespace IntelHardwareIntrinsicTest
                         longSourceTable,
                         new long[2]
                     )
-                ) {
+                )
+                {
                     var vf = Avx2.GatherMaskVector128(
                         sourcel,
                         (long*)(longTable.inArrayPtr),
@@ -762,7 +774,8 @@ namespace IntelHardwareIntrinsicTest
                         longSourceTable,
                         new long[2]
                     )
-                ) {
+                )
+                {
                     var vf = Avx2.GatherMaskVector128(
                         sourceul,
                         (ulong*)(longTable.inArrayPtr),
@@ -888,7 +901,8 @@ namespace IntelHardwareIntrinsicTest
                         intSourceTable,
                         new int[4]
                     )
-                ) {
+                )
+                {
                     var vf = Avx2.GatherMaskVector128(
                         sourcei,
                         (int*)(intTable.inArrayPtr),
@@ -1016,7 +1030,8 @@ namespace IntelHardwareIntrinsicTest
                         intSourceTable,
                         new int[4]
                     )
-                ) {
+                )
+                {
                     var vf = Avx2.GatherMaskVector128(
                         sourceui,
                         (uint*)(intTable.inArrayPtr),
@@ -1144,7 +1159,8 @@ namespace IntelHardwareIntrinsicTest
                         longSourceTable,
                         new long[2]
                     )
-                ) {
+                )
+                {
                     var vf = Avx2.GatherMaskVector128(
                         sourcel,
                         (long*)(longTable.inArrayPtr),
@@ -1272,7 +1288,8 @@ namespace IntelHardwareIntrinsicTest
                         longSourceTable,
                         new long[2]
                     )
-                ) {
+                )
+                {
                     var vf = Avx2.GatherMaskVector128(
                         sourceul,
                         (ulong*)(longTable.inArrayPtr),
@@ -1400,7 +1417,8 @@ namespace IntelHardwareIntrinsicTest
                         floatSourceTable,
                         new float[4]
                     )
-                ) {
+                )
+                {
                     var vf = Avx2.GatherMaskVector128(
                         sourcef,
                         (float*)(floatTable.inArrayPtr),
@@ -1417,7 +1435,8 @@ namespace IntelHardwareIntrinsicTest
                                 == BitConverter.SingleToInt32Bits(y),
                             longIndexTable
                         )
-                    ) {
+                    )
+                    {
                         Console.WriteLine(
                             "AVX2 GatherMaskVector128 failed on float with Vector128 long index:"
                         );
@@ -1461,7 +1480,8 @@ namespace IntelHardwareIntrinsicTest
                                 == BitConverter.SingleToInt32Bits(y),
                             longIndexTable
                         )
-                    ) {
+                    )
+                    {
                         Console.WriteLine(
                             "AVX2 GatherMaskVector128 failed with reflection on float with Vector128 long index:"
                         );
@@ -1508,7 +1528,8 @@ namespace IntelHardwareIntrinsicTest
                                 == BitConverter.SingleToInt32Bits(y),
                             longIndexTable
                         )
-                    ) {
+                    )
+                    {
                         Console.WriteLine(
                             "AVX2 GatherMaskVector128 failed on float with non-const scale (IMM) and Vector128 long index:"
                         );
@@ -1546,7 +1567,8 @@ namespace IntelHardwareIntrinsicTest
                         doubleSourceTable,
                         new double[2]
                     )
-                ) {
+                )
+                {
                     var vd = Avx2.GatherMaskVector128(
                         sourced,
                         (double*)(doubletTable.inArrayPtr),
@@ -1563,7 +1585,8 @@ namespace IntelHardwareIntrinsicTest
                                 == BitConverter.DoubleToInt64Bits(y),
                             longIndexTable
                         )
-                    ) {
+                    )
+                    {
                         Console.WriteLine(
                             "AVX2 GatherMaskVector128 failed on double with Vector128 long index:"
                         );
@@ -1607,7 +1630,8 @@ namespace IntelHardwareIntrinsicTest
                                 == BitConverter.DoubleToInt64Bits(y),
                             longIndexTable
                         )
-                    ) {
+                    )
+                    {
                         Console.WriteLine(
                             "AVX2 GatherMaskVector128 failed with reflection on double with Vector128 long index:"
                         );
@@ -1654,7 +1678,8 @@ namespace IntelHardwareIntrinsicTest
                                 == BitConverter.DoubleToInt64Bits(y),
                             longIndexTable
                         )
-                    ) {
+                    )
+                    {
                         Console.WriteLine(
                             "AVX2 GatherMaskVector128 failed on double with non-const scale (IMM) and Vector128 long index:"
                         );
@@ -1692,7 +1717,8 @@ namespace IntelHardwareIntrinsicTest
                         intSourceTable,
                         new int[4]
                     )
-                ) {
+                )
+                {
                     var vf = Avx2.GatherMaskVector128(
                         sourcei,
                         (int*)(intTable.inArrayPtr),
@@ -1820,7 +1846,8 @@ namespace IntelHardwareIntrinsicTest
                         intSourceTable,
                         new int[4]
                     )
-                ) {
+                )
+                {
                     var vf = Avx2.GatherMaskVector128(
                         sourceui,
                         (uint*)(intTable.inArrayPtr),
@@ -1948,7 +1975,8 @@ namespace IntelHardwareIntrinsicTest
                         floatSourceTable,
                         new float[4]
                     )
-                ) {
+                )
+                {
                     var vf = Avx2.GatherMaskVector128(
                         sourcef,
                         (float*)(floatTable.inArrayPtr),
@@ -1965,7 +1993,8 @@ namespace IntelHardwareIntrinsicTest
                                 == BitConverter.SingleToInt32Bits(y),
                             vector256longIndexTable
                         )
-                    ) {
+                    )
+                    {
                         Console.WriteLine(
                             "AVX2 GatherMaskVector128 failed on float with Vector256 long index:"
                         );
@@ -2009,7 +2038,8 @@ namespace IntelHardwareIntrinsicTest
                                 == BitConverter.SingleToInt32Bits(y),
                             vector256longIndexTable
                         )
-                    ) {
+                    )
+                    {
                         Console.WriteLine(
                             "AVX2 GatherMaskVector128 failed with reflection on float with Vector256 long index:"
                         );
@@ -2056,7 +2086,8 @@ namespace IntelHardwareIntrinsicTest
                                 == BitConverter.SingleToInt32Bits(y),
                             vector256longIndexTable
                         )
-                    ) {
+                    )
+                    {
                         Console.WriteLine(
                             "AVX2 GatherMaskVector128 failed on float with non-const scale (IMM) and Vector256 long index:"
                         );
@@ -2121,7 +2152,8 @@ namespace IntelHardwareIntrinsicTest
                     if (
                         (take && !check(inArray[Convert.ToInt32(indexArray[i])], outArray[i]))
                         || (!take && !EqualityComparer<T>.Default.Equals(outArray[i], default(T)))
-                    ) {
+                    )
+                    {
                         return false;
                     }
                 }

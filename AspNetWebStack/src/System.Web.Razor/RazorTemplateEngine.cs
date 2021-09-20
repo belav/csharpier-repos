@@ -89,7 +89,8 @@ namespace System.Web.Razor
         protected internal virtual ParserResults ParseTemplateCore(
             ITextDocument input,
             CancellationToken? cancelToken
-        ) {
+        )
+        {
             // Construct the parser
             RazorParser parser = CreateParser();
             Debug.Assert(parser != null);
@@ -111,7 +112,8 @@ namespace System.Web.Razor
             string className,
             string rootNamespace,
             string sourceFileName
-        ) {
+        )
+        {
             return GenerateCode(input, className, rootNamespace, sourceFileName, null);
         }
 
@@ -147,7 +149,8 @@ namespace System.Web.Razor
             string rootNamespace,
             string sourceFileName,
             CancellationToken? cancelToken
-        ) {
+        )
+        {
             return GenerateCodeCore(
                 input.ToDocument(),
                 className,
@@ -173,7 +176,8 @@ namespace System.Web.Razor
             string className,
             string rootNamespace,
             string sourceFileName
-        ) {
+        )
+        {
             return GenerateCode(input, className, rootNamespace, sourceFileName, null);
         }
 
@@ -188,7 +192,8 @@ namespace System.Web.Razor
             string rootNamespace,
             string sourceFileName,
             CancellationToken? cancelToken
-        ) {
+        )
+        {
             return GenerateCodeCore(
                 new SeekableTextReader(input),
                 className,
@@ -204,7 +209,8 @@ namespace System.Web.Razor
             string rootNamespace,
             string sourceFileName,
             CancellationToken? cancelToken
-        ) {
+        )
+        {
             className = (className ?? Host.DefaultClassName) ?? DefaultClassName;
             rootNamespace = (rootNamespace ?? Host.DefaultNamespace) ?? DefaultNamespace;
 
@@ -244,7 +250,8 @@ namespace System.Web.Razor
             string className,
             string rootNamespace,
             string sourceFileName
-        ) {
+        )
+        {
             return Host.DecorateCodeGenerator(
                 Host.CodeLanguage.CreateCodeGenerator(
                     className,

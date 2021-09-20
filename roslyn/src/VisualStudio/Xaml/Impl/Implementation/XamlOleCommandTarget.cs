@@ -16,10 +16,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Xaml
     /// </summary>
     internal sealed class XamlOleCommandTarget : AbstractOleCommandTarget
     {
-        internal XamlOleCommandTarget(
-            IWpfTextView wpfTextView,
-            IComponentModel componentModel
-        ) : base(wpfTextView, componentModel) { }
+        internal XamlOleCommandTarget(IWpfTextView wpfTextView, IComponentModel componentModel)
+            : base(wpfTextView, componentModel) { }
 
         protected override ITextBuffer? GetSubjectBufferContainingCaret()
         {

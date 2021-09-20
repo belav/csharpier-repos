@@ -231,7 +231,8 @@ namespace System.Runtime.CompilerServices
                             || interfaceMap[1] == toTypeHnd
                             || interfaceMap[2] == toTypeHnd
                             || interfaceMap[3] == toTypeHnd
-                        ) {
+                        )
+                        {
                             goto done;
                         }
 
@@ -425,7 +426,8 @@ namespace System.Runtime.CompilerServices
                         || interfaceMap[1] == toTypeHnd
                         || interfaceMap[2] == toTypeHnd
                         || interfaceMap[3] == toTypeHnd
-                    ) {
+                    )
+                    {
                         goto done;
                     }
 
@@ -625,7 +627,8 @@ namespace System.Runtime.CompilerServices
             ref object? element,
             void* elementType,
             object obj
-        ) {
+        )
+        {
             Debug.Assert(obj != null);
 
             obj = IsInstanceOfAny_NoCacheLookup(elementType, obj);

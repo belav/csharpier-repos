@@ -18,7 +18,8 @@ namespace System.Reflection.Metadata.Tests
 
         internal static IEnumerable<StringHandle> GetReferencedModuleNames(
             this MetadataReader reader
-        ) {
+        )
+        {
             for (int i = 1, n = reader.GetTableRowCount(TableIndex.ModuleRef); i <= n; i++)
             {
                 yield return reader.GetModuleReference(
@@ -30,7 +31,8 @@ namespace System.Reflection.Metadata.Tests
         internal static ClassLayoutRow GetTypeLayout(
             this MetadataReader reader,
             TypeDefinitionHandle typeDef
-        ) {
+        )
+        {
             int rowId = reader.ClassLayoutTable.FindRow(typeDef);
             if (rowId == 0)
             {

@@ -38,7 +38,8 @@ namespace Microsoft.CodeAnalysis.Test.Utilities
                         || f.PropertyName.Contains("Text")
                         || f.PropertyName.Contains("IsMissing")
                     )
-                ) {
+                )
+                {
                     xml.Add(
                         @"<<%= f.PropertyName %> FieldType=<%= f.FieldType.Name %>><%= New XCData(f.Value.ToString) %></>"
                     );
@@ -70,7 +71,8 @@ namespace Microsoft.CodeAnalysis.Test.Utilities
             XElement xml,
             IEnumerable<Diagnostic> errors,
             XmlOptions options
-        ) {
+        )
+        {
             xml.Add(
                 @"<Errors>
                     <%= From e In errors
@@ -92,7 +94,8 @@ namespace Microsoft.CodeAnalysis.Test.Utilities
             this SyntaxNodeOrToken node,
             SyntaxTree syntaxTree,
             XmlOptions options = null
-        ) {
+        )
+        {
             XElement xml = null;
             if (node.IsNode)
             {
@@ -110,7 +113,8 @@ namespace Microsoft.CodeAnalysis.Test.Utilities
             this SyntaxNode node,
             SyntaxTree syntaxTree,
             XmlOptions options = null
-        ) {
+        )
+        {
             if (options == null)
             {
                 options = new XmlOptions();
@@ -163,7 +167,8 @@ namespace Microsoft.CodeAnalysis.Test.Utilities
             this SyntaxToken token,
             SyntaxTree syntaxTree,
             XmlOptions options = null
-        ) {
+        )
+        {
             if (options == null)
             {
                 options = new XmlOptions();
@@ -229,7 +234,8 @@ namespace Microsoft.CodeAnalysis.Test.Utilities
             this SyntaxTrivia trivia,
             SyntaxTree syntaxTree,
             XmlOptions options = null
-        ) {
+        )
+        {
             if (options == null)
             {
                 options = new XmlOptions();

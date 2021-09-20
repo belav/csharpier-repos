@@ -170,7 +170,8 @@ namespace System.Security.Cryptography.Encoding.Tests
         private static void ValidateEnumerator(
             IEnumerator enumerator,
             IList<AsnEncodedData> expected
-        ) {
+        )
+        {
             foreach (AsnEncodedData e in expected)
             {
                 Assert.True(enumerator.MoveNext());

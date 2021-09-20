@@ -43,7 +43,8 @@ namespace Microsoft.CodeAnalysis.Wrapping
             Document document,
             IEnumerable<SyntaxNodeOrToken> nodesAndTokens,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             // For now, don't offer if any item spans multiple lines.  We'll very likely screw up
             // formatting badly.  If this is really important to support, we can put in the effort
             // to properly move multi-line items around (which would involve properly fixing up the

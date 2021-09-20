@@ -43,7 +43,8 @@ namespace System.IO.Pipes
             PipeSecurity? pipeSecurity,
             HandleInheritability inheritability = HandleInheritability.None,
             PipeAccessRights additionalAccessRights = default
-        ) {
+        )
+        {
             return new NamedPipeServerStream(
                 pipeName,
                 direction,

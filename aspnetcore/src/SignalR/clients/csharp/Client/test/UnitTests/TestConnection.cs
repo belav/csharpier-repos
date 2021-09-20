@@ -50,7 +50,8 @@ namespace Microsoft.AspNetCore.SignalR.Client.Tests
             Func<Task> onDispose = null,
             bool autoHandshake = true,
             bool hasInherentKeepAlive = false
-        ) {
+        )
+        {
             _autoHandshake = autoHandshake;
             _onStart = onStart ?? (() => Task.CompletedTask);
             _onDispose = onDispose ?? (() => Task.CompletedTask);

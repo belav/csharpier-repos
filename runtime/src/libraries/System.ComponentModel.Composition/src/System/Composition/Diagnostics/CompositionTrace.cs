@@ -32,7 +32,8 @@ namespace System.Composition.Diagnostics
         internal static void PartDefinitionRejected(
             ComposablePartDefinition definition,
             ChangeRejectedException exception
-        ) {
+        )
+        {
             if (definition == null)
             {
                 throw new ArgumentNullException(nameof(definition));
@@ -58,7 +59,8 @@ namespace System.Composition.Diagnostics
             DirectoryCatalog catalog,
             string fileName,
             Exception exception
-        ) {
+        )
+        {
             if (catalog == null)
             {
                 throw new ArgumentNullException(nameof(catalog));

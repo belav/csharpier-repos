@@ -9,7 +9,8 @@ namespace System.CommandLine.Binding
             IValueDescriptor valueDescriptor,
             BindingContext? bindingContext,
             out object? boundValue
-        ) {
+        )
+        {
             boundValue = bindingContext?.ServiceProvider.GetService(valueDescriptor.ValueType);
             return true;
         }

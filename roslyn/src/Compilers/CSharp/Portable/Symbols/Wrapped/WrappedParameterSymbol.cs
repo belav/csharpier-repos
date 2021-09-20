@@ -76,7 +76,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
         internal override void AddSynthesizedAttributes(
             PEModuleBuilder moduleBuilder,
             ref ArrayBuilder<SynthesizedAttributeData> attributes
-        ) {
+        )
+        {
             _underlyingParameter.AddSynthesizedAttributes(moduleBuilder, ref attributes);
         }
 
@@ -170,7 +171,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             CultureInfo preferredCulture = null,
             bool expandIncludes = false,
             CancellationToken cancellationToken = default
-        ) {
+        )
+        {
             return _underlyingParameter.GetDocumentationCommentXml(
                 preferredCulture,
                 expandIncludes,

@@ -29,7 +29,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Formatting
                 FormattingContext context,
                 bool firstTriviaInTree,
                 TriviaList triviaList
-            ) {
+            )
+            {
                 var analyzer = new CodeShapeAnalyzer(context, firstTriviaInTree, triviaList);
                 return analyzer.ShouldFormat();
             }
@@ -69,7 +70,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Formatting
                         trivia.Kind() == SyntaxKind.RegionDirectiveTrivia
                         || trivia.Kind() == SyntaxKind.EndRegionDirectiveTrivia
                         || SyntaxFacts.IsPreprocessorDirective(trivia.Kind())
-                    ) {
+                    )
+                    {
                         return false;
                     }
                 }
@@ -84,7 +86,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Formatting
                     if (
                         trivia.Kind() == SyntaxKind.SkippedTokensTrivia
                         || trivia.Kind() == SyntaxKind.PreprocessingMessageTrivia
-                    ) {
+                    )
+                    {
                         return true;
                     }
                 }
@@ -96,7 +99,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Formatting
                 FormattingContext context,
                 bool firstTriviaInTree,
                 TriviaList triviaList
-            ) {
+            )
+            {
                 _context = context;
                 _options = context.Options;
                 _triviaList = triviaList;
@@ -197,7 +201,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Formatting
                 if (
                     this.UseIndentation
                     && _indentation != _context.GetBaseIndentation(trivia.SpanStart)
-                ) {
+                )
+                {
                     // comment has wrong indentation
                     return true;
                 }
@@ -210,7 +215,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Formatting
                         _options.GetOption(FormattingOptions2.TabSize),
                         trivia
                     )
-                ) {
+                )
+                {
                     return true;
                 }
 
@@ -222,7 +228,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Formatting
                 if (
                     trivia.Kind() != SyntaxKind.SkippedTokensTrivia
                     && trivia.Kind() != SyntaxKind.PreprocessingMessageTrivia
-                ) {
+                )
+                {
                     return false;
                 }
 
@@ -234,7 +241,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Formatting
                 if (
                     trivia.Kind() != SyntaxKind.RegionDirectiveTrivia
                     && trivia.Kind() != SyntaxKind.EndRegionDirectiveTrivia
-                ) {
+                )
+                {
                     return false;
                 }
 
@@ -280,7 +288,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Formatting
                     trivia.IsElastic()
                     || trivia.Kind() == SyntaxKind.WhitespaceTrivia
                     || trivia.Kind() == SyntaxKind.EndOfLineTrivia
-                ) {
+                )
+                {
                     return false;
                 }
 
@@ -309,7 +318,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Formatting
                         || OnRegion(trivia, index)
                         || OnPreprocessor(trivia, index)
                         || OnDisabledTextTrivia(trivia, index)
-                    ) {
+                    )
+                    {
                         return true;
                     }
                 }
@@ -325,7 +335,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Formatting
                     if (
                         !string.IsNullOrEmpty(triviaString)
                         && SyntaxFacts.IsNewLine(triviaString.Last())
-                    ) {
+                    )
+                    {
                         ResetStateAfterNewLine(index);
                     }
                 }
@@ -337,7 +348,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Formatting
                 int indentation,
                 int tabSize,
                 SyntaxTrivia trivia
-            ) {
+            )
+            {
                 Debug.Assert(trivia.HasStructure);
 
                 var xmlComment = (DocumentationCommentTriviaSyntax)trivia.GetStructure()!;
@@ -365,7 +377,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Formatting
                                     xmlCommentText.Length - 3,
                                     tabSize
                                 ) != indentation
-                            ) {
+                            )
+                            {
                                 return true;
                             }
                             break;

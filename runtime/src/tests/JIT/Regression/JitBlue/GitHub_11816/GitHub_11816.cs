@@ -55,7 +55,8 @@ class GitHub_11816
     static void DoSomeWorkWithAStructAggressiveInlining(
         ref Vector<float> source,
         out Vector<float> result
-    ) {
+    )
+    {
         StructType u;
         u.A = new Vector<float>(2) * source;
         u.B = new Vector<float>(3) * source;

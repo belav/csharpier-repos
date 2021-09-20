@@ -32,7 +32,8 @@ namespace System.Net.Http.Functional.Tests
         [Theory, MemberData(nameof(RemoteServersMemberData))]
         public async Task PostRewindableStreamContentMultipleTimes_StreamContentFullySent(
             Configuration.Http.RemoteServer remoteServer
-        ) {
+        )
+        {
             const string requestBody = "ABC";
 
             using (HttpClient client = CreateHttpClientForRemoteServer(remoteServer))
@@ -66,7 +67,8 @@ namespace System.Net.Http.Functional.Tests
         [Theory, MemberData(nameof(RemoteServersMemberData))]
         public async Task PostNoContentUsingContentLengthSemantics_Success(
             Configuration.Http.RemoteServer remoteServer
-        ) {
+        )
+        {
             await PostHelper(
                 remoteServer,
                 string.Empty,
@@ -80,7 +82,8 @@ namespace System.Net.Http.Functional.Tests
         [Theory, MemberData(nameof(RemoteServersMemberData))]
         public async Task PostEmptyContentUsingContentLengthSemantics_Success(
             Configuration.Http.RemoteServer remoteServer
-        ) {
+        )
+        {
             await PostHelper(
                 remoteServer,
                 string.Empty,
@@ -94,7 +97,8 @@ namespace System.Net.Http.Functional.Tests
         [Theory, MemberData(nameof(RemoteServersMemberData))]
         public async Task PostEmptyContentUsingChunkedEncoding_Success(
             Configuration.Http.RemoteServer remoteServer
-        ) {
+        )
+        {
             await PostHelper(
                 remoteServer,
                 string.Empty,
@@ -108,7 +112,8 @@ namespace System.Net.Http.Functional.Tests
         [Theory, MemberData(nameof(RemoteServersMemberData))]
         public async Task PostEmptyContentUsingConflictingSemantics_Success(
             Configuration.Http.RemoteServer remoteServer
-        ) {
+        )
+        {
             await PostHelper(
                 remoteServer,
                 string.Empty,
@@ -122,7 +127,8 @@ namespace System.Net.Http.Functional.Tests
         [Theory, MemberData(nameof(RemoteServersMemberData))]
         public async Task PostUsingContentLengthSemantics_Success(
             Configuration.Http.RemoteServer remoteServer
-        ) {
+        )
+        {
             await PostHelper(
                 remoteServer,
                 ExpectedContent,
@@ -136,7 +142,8 @@ namespace System.Net.Http.Functional.Tests
         [Theory, MemberData(nameof(RemoteServersMemberData))]
         public async Task PostUsingChunkedEncoding_Success(
             Configuration.Http.RemoteServer remoteServer
-        ) {
+        )
+        {
             await PostHelper(
                 remoteServer,
                 ExpectedContent,
@@ -150,7 +157,8 @@ namespace System.Net.Http.Functional.Tests
         [Theory, MemberData(nameof(RemoteServersMemberData))]
         public async Task PostSyncBlockingContentUsingChunkedEncoding_Success(
             Configuration.Http.RemoteServer remoteServer
-        ) {
+        )
+        {
             await PostHelper(
                 remoteServer,
                 ExpectedContent,
@@ -164,7 +172,8 @@ namespace System.Net.Http.Functional.Tests
         [Theory, MemberData(nameof(RemoteServersMemberData))]
         public async Task PostRepeatedFlushContentUsingChunkedEncoding_Success(
             Configuration.Http.RemoteServer remoteServer
-        ) {
+        )
+        {
             await PostHelper(
                 remoteServer,
                 ExpectedContent,
@@ -178,7 +187,8 @@ namespace System.Net.Http.Functional.Tests
         [Theory, MemberData(nameof(RemoteServersMemberData))]
         public async Task PostUsingUsingConflictingSemantics_UsesChunkedSemantics(
             Configuration.Http.RemoteServer remoteServer
-        ) {
+        )
+        {
             await PostHelper(
                 remoteServer,
                 ExpectedContent,
@@ -192,7 +202,8 @@ namespace System.Net.Http.Functional.Tests
         [Theory, MemberData(nameof(RemoteServersMemberData))]
         public async Task PostUsingNoSpecifiedSemantics_UsesChunkedSemantics(
             Configuration.Http.RemoteServer remoteServer
-        ) {
+        )
+        {
             await PostHelper(
                 remoteServer,
                 ExpectedContent,
@@ -206,7 +217,8 @@ namespace System.Net.Http.Functional.Tests
         {
             foreach (
                 Configuration.Http.RemoteServer remoteServer in Configuration.Http.RemoteServers
-            ) {
+            )
+            {
                 yield return new object[] { remoteServer, 5 * 1024 };
                 yield return new object[] { remoteServer, 63 * 1024 };
                 yield return new object[] { remoteServer, 129 * 1024 };
@@ -219,7 +231,8 @@ namespace System.Net.Http.Functional.Tests
         public async Task PostLargeContentUsingContentLengthSemantics_Success(
             Configuration.Http.RemoteServer remoteServer,
             int contentLength
-        ) {
+        )
+        {
             var rand = new Random(42);
             var sb = new StringBuilder(contentLength);
             for (int i = 0; i < contentLength; i++)
@@ -241,7 +254,8 @@ namespace System.Net.Http.Functional.Tests
         [Theory, MemberData(nameof(RemoteServersMemberData))]
         public async Task PostRewindableContentUsingAuth_NoPreAuthenticate_Success(
             Configuration.Http.RemoteServer remoteServer
-        ) {
+        )
+        {
             if (remoteServer.HttpVersion == new Version(2, 0))
             {
                 // This is occasionally timing out in CI with SocketsHttpHandler and HTTP2, particularly on Linux
@@ -261,7 +275,8 @@ namespace System.Net.Http.Functional.Tests
         [Theory, MemberData(nameof(RemoteServersMemberData))]
         public async Task PostNonRewindableContentUsingAuth_NoPreAuthenticate_ThrowsHttpRequestException(
             Configuration.Http.RemoteServer remoteServer
-        ) {
+        )
+        {
             // Sync API supported only up to HTTP/1.1
             if (!TestAsync && remoteServer.HttpVersion.Major >= 2)
             {
@@ -288,7 +303,8 @@ namespace System.Net.Http.Functional.Tests
         [Theory, MemberData(nameof(RemoteServersMemberData))]
         public async Task PostNonRewindableContentUsingAuth_PreAuthenticate_Success(
             Configuration.Http.RemoteServer remoteServer
-        ) {
+        )
+        {
             // Sync API supported only up to HTTP/1.1
             if (!TestAsync && remoteServer.HttpVersion.Major >= 2)
             {
@@ -312,11 +328,13 @@ namespace System.Net.Http.Functional.Tests
         [Theory, MemberData(nameof(RemoteServersMemberData))]
         public async Task PostAsync_EmptyContent_ContentTypeHeaderNotSent(
             Configuration.Http.RemoteServer remoteServer
-        ) {
+        )
+        {
             using (HttpClient client = CreateHttpClientForRemoteServer(remoteServer))
             using (
                 HttpResponseMessage response = await client.PostAsync(remoteServer.EchoUri, null)
-            ) {
+            )
+            {
                 string responseContent = await response.Content.ReadAsStringAsync();
                 bool sentContentType = TestHelper.JsonMessageContainsKey(
                     responseContent,
@@ -333,7 +351,8 @@ namespace System.Net.Http.Functional.Tests
             HttpContent requestContent,
             bool useContentLengthUpload,
             bool useChunkedEncodingUpload
-        ) {
+        )
+        {
             using (HttpClient client = CreateHttpClientForRemoteServer(remoteServer))
             {
                 if (requestContent != null)
@@ -363,7 +382,8 @@ namespace System.Net.Http.Functional.Tests
                         remoteServer.VerifyUploadUri,
                         requestContent
                     )
-                ) {
+                )
+                {
                     Assert.Equal(HttpStatusCode.OK, response.StatusCode);
                 }
             }
@@ -375,7 +395,8 @@ namespace System.Net.Http.Functional.Tests
             HttpContent requestContent,
             NetworkCredential credential,
             bool preAuthenticate
-        ) {
+        )
+        {
             Uri serverUri = remoteServer.BasicAuthUriForCreds(UserName, Password);
 
             HttpClientHandler handler = CreateHttpClientHandler();

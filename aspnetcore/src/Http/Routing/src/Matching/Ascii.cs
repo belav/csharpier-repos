@@ -18,7 +18,8 @@ namespace Microsoft.AspNetCore.Routing.Matching
             ReadOnlySpan<char> a,
             ReadOnlySpan<char> b,
             int length
-        ) {
+        )
+        {
             // The caller should have checked the length. We enforce that here by THROWING if the
             // lengths are unequal.
             if (a.Length < length || b.Length < length)

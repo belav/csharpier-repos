@@ -43,7 +43,8 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
         public ChangeDetector(
             IDiagnosticsLogger<DbLoggerCategory.ChangeTracking> logger,
             ILoggingOptions loggingOptions
-        ) {
+        )
+        {
             _logger = logger;
             _loggingOptions = loggingOptions;
         }
@@ -74,12 +75,14 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
             InternalEntityEntry entry,
             IPropertyBase propertyBase,
             bool setModified
-        ) {
+        )
+        {
             if (
                 _suspended
                 || entry.EntityState == EntityState.Detached
                 || propertyBase is IServiceProperty
-            ) {
+            )
+            {
                 return;
             }
 
@@ -99,7 +102,8 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
             else if (
                 propertyBase.GetRelationshipIndex() != -1
                 && propertyBase is INavigationBase navigation
-            ) {
+            )
+            {
                 DetectNavigationChange(entry, navigation);
             }
         }
@@ -126,7 +130,8 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
                 _suspended
                 || entry.EntityState == EntityState.Detached
                 || propertyBase is IServiceProperty
-            ) {
+            )
+            {
                 return;
             }
 
@@ -134,7 +139,8 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
             {
                 if (
                     propertyBase is IProperty asProperty && asProperty.GetOriginalValueIndex() != -1
-                ) {
+                )
+                {
                     entry.EnsureOriginalValues();
                 }
 
@@ -209,7 +215,8 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
                     property.GetOriginalValueIndex() >= 0
                     && !entry.IsModified(property)
                     && !entry.IsConceptualNull(property)
-                ) {
+                )
+                {
                     var current = entry[property];
                     var original = entry.GetOriginalValue(property);
 
@@ -266,7 +273,8 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
             IProperty property,
             object? original,
             object? current
-        ) {
+        )
+        {
             if (_loggingOptions.IsSensitiveDataLoggingEnabled)
             {
                 _logger.PropertyChangeDetectedSensitive(entry, property, original, current);
@@ -299,7 +307,8 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
                         snapshotValue
                     )
                 )
-            ) {
+            )
+            {
                 var keys = property.GetContainingKeys();
                 var foreignKeys = property.GetContainingForeignKeys()
                     .Where(fk => fk.DeclaringEntityType.IsAssignableFrom(entry.EntityType));
@@ -332,7 +341,8 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
         private void DetectNavigationChange(
             InternalEntityEntry entry,
             INavigationBase navigationBase
-        ) {
+        )
+        {
             var snapshotValue = entry.GetRelationshipSnapshotValue(navigationBase);
             var currentValue = entry[navigationBase];
             var stateManager = entry.StateManager;

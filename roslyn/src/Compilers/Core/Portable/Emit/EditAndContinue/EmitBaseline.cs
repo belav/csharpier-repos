@@ -84,7 +84,8 @@ namespace Microsoft.CodeAnalysis.Emit
                 IReadOnlyDictionary<AnonymousTypeKey, AnonymousTypeValue> anonymousTypes,
                 object metadataDecoder,
                 ImmutableDictionary<AssemblyIdentity, AssemblyIdentity> assemblyReferenceIdentityMap
-            ) {
+            )
+            {
                 Debug.Assert(anonymousTypes != null);
                 Debug.Assert(metadataDecoder != null);
                 Debug.Assert(assemblyReferenceIdentityMap != null);
@@ -118,7 +119,8 @@ namespace Microsoft.CodeAnalysis.Emit
                 MethodDefinitionHandle,
                 EditAndContinueMethodDebugInformation
             > debugInformationProvider
-        ) {
+        )
+        {
             if (module == null)
             {
                 throw new ArgumentNullException(nameof(module));
@@ -207,7 +209,8 @@ namespace Microsoft.CodeAnalysis.Emit
             > debugInformationProvider,
             Func<MethodDefinitionHandle, StandaloneSignatureHandle> localSignatureProvider,
             bool hasPortableDebugInformation
-        ) {
+        )
+        {
             if (module == null)
             {
                 throw new ArgumentNullException(nameof(module));
@@ -382,7 +385,8 @@ namespace Microsoft.CodeAnalysis.Emit
             IReadOnlyDictionary<int, int> typeToEventMap,
             IReadOnlyDictionary<int, int> typeToPropertyMap,
             IReadOnlyDictionary<MethodImplKey, int> methodImpls
-        ) {
+        )
+        {
             Debug.Assert(module != null);
             Debug.Assert((ordinal == 0) == (encId == default));
             Debug.Assert((ordinal == 0) == (initialBaseline == null));
@@ -475,7 +479,8 @@ namespace Microsoft.CodeAnalysis.Emit
                 EditAndContinueMethodDebugInformation
             > debugInformationProvider,
             Func<MethodDefinitionHandle, StandaloneSignatureHandle> localSignatureProvider
-        ) {
+        )
+        {
             Debug.Assert(_anonymousTypeMap == null || anonymousTypeMap != null);
             Debug.Assert(
                 _anonymousTypeMap == null || anonymousTypeMap.Count >= _anonymousTypeMap.Count
@@ -571,7 +576,8 @@ namespace Microsoft.CodeAnalysis.Emit
         private static ImmutableArray<int> CalculateTableSizes(
             MetadataReader reader,
             ImmutableArray<int> delta
-        ) {
+        )
+        {
             var sizes = new int[MetadataTokens.TableCount];
 
             for (int i = 0; i < sizes.Length; i++)

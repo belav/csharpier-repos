@@ -31,7 +31,8 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
         public NullableClassCurrentProviderValueComparer(
             IPropertyBase property,
             ValueConverter<TModel, TProvider> converter
-        ) {
+        )
+        {
             _property = property;
             _converter = converter.ConvertToProviderExpression.Compile();
             _underlyingComparer = Comparer<TProvider>.Default;

@@ -81,7 +81,8 @@ namespace Microsoft.AspNetCore.Server.IIS.FunctionalTests
 
             using (
                 var connection = new TestConnection(deploymentResult.HttpClient.BaseAddress.Port)
-            ) {
+            )
+            {
                 await connection.Send(
                     "GET /ReadAndFlushEcho HTTP/1.1",
                     "Host: localhost",

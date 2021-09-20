@@ -45,7 +45,8 @@ namespace System.Reflection.PortableExecutable.Tests
         private static unsafe void VerifyStrongNameSignatureDirectory(
             PEReader peReader,
             byte[] expectedSignature
-        ) {
+        )
+        {
             var headers = peReader.PEHeaders;
             int rva = headers.CorHeader.StrongNameSignatureDirectory.RelativeVirtualAddress;
             int size = headers.CorHeader.StrongNameSignatureDirectory.Size;
@@ -73,7 +74,8 @@ namespace System.Reflection.PortableExecutable.Tests
             byte[] privateKeyOpt = null,
             bool publicSigned = false,
             Machine machine = 0
-        ) {
+        )
+        {
             var peHeaderBuilder = new PEHeaderBuilder(
                 imageCharacteristics: entryPointHandle.IsNil
                   ? Characteristics.Dll
@@ -330,7 +332,8 @@ namespace System.Reflection.PortableExecutable.Tests
         private static MethodDefinitionHandle BasicValidationEmit(
             MetadataBuilder metadata,
             BlobBuilder ilBuilder
-        ) {
+        )
+        {
             metadata.AddModule(
                 0,
                 metadata.GetOrAddString("ConsoleApplication.exe"),
@@ -550,7 +553,8 @@ namespace System.Reflection.PortableExecutable.Tests
             MetadataBuilder metadata,
             BlobBuilder ilBuilder,
             out Blob mvidFixup
-        ) {
+        )
+        {
             var mvid = metadata.ReserveGuid();
             mvidFixup = mvid.Content;
 
@@ -754,7 +758,8 @@ namespace System.Reflection.PortableExecutable.Tests
             protected internal override void Serialize(
                 BlobBuilder builder,
                 SectionLocation location
-            ) {
+            )
+            {
                 builder.WriteInt32(0x12345678);
                 builder.WriteInt32(location.PointerToRawData);
                 builder.WriteInt32(location.RelativeVirtualAddress);
@@ -804,7 +809,8 @@ namespace System.Reflection.PortableExecutable.Tests
             protected internal override void Serialize(
                 BlobBuilder builder,
                 SectionLocation location
-            ) {
+            )
+            {
                 throw new NotImplementedException();
             }
         }
@@ -929,7 +935,8 @@ namespace System.Reflection.PortableExecutable.Tests
         private static IEnumerable<string> GetBlobRanges(
             BlobBuilder builder,
             IEnumerable<Blob> blobs
-        ) {
+        )
+        {
             var blobIndex = new Dictionary<byte[], int>();
             int i = 0;
             foreach (var blob in builder.GetBlobs())
@@ -993,7 +1000,8 @@ namespace System.Reflection.PortableExecutable.Tests
         private static bool TestChecksumAndAuthenticodeSignature(
             Stream peStream,
             byte[] privateKeyOpt = null
-        ) {
+        )
+        {
             var peHeaders = new PEHeaders(peStream);
             bool is32bit = peHeaders.PEHeader.Magic == PEMagic.PE32;
             uint expectedChecksum = peHeaders.PEHeader.CheckSum;

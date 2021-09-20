@@ -109,7 +109,8 @@ namespace Tracing.Tests.EventSourceError
                     && _bulkEdgeCount > 50
                     && _bulkRootEdgeCount > 50
                     && _bulkRootStaticVarCount > 50
-                ) {
+                )
+                {
                     return 100;
                 }
 

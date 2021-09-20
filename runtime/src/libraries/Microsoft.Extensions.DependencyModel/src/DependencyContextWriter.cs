@@ -92,7 +92,8 @@ namespace Microsoft.Extensions.DependencyModel
         private void WriteCompilationOptions(
             CompilationOptions compilationOptions,
             Utf8JsonWriter jsonWriter
-        ) {
+        )
+        {
             jsonWriter.WriteStartObject(DependencyContextStrings.CompilationOptionsPropertName);
             if (compilationOptions.Defines?.Any() == true)
             {
@@ -165,7 +166,8 @@ namespace Microsoft.Extensions.DependencyModel
             string name,
             string value,
             Utf8JsonWriter jsonWriter
-        ) {
+        )
+        {
             if (value != null)
             {
                 jsonWriter.WriteString(name, value);
@@ -176,7 +178,8 @@ namespace Microsoft.Extensions.DependencyModel
             string name,
             bool? value,
             Utf8JsonWriter jsonWriter
-        ) {
+        )
+        {
             if (value.HasValue)
             {
                 jsonWriter.WriteBoolean(name, value.Value);
@@ -213,7 +216,8 @@ namespace Microsoft.Extensions.DependencyModel
             string key,
             IReadOnlyList<Library> libraries,
             Utf8JsonWriter jsonWriter
-        ) {
+        )
+        {
             jsonWriter.WriteStartObject(key);
             int count = libraries.Count;
             for (int i = 0; i < count; i++)
@@ -233,7 +237,8 @@ namespace Microsoft.Extensions.DependencyModel
             IReadOnlyList<RuntimeLibrary> runtimeLibraries,
             IReadOnlyList<CompilationLibrary> compilationLibraries,
             Utf8JsonWriter jsonWriter
-        ) {
+        )
+        {
             Dictionary<string, RuntimeLibrary> runtimeLookup = runtimeLibraries.ToDictionary(
                 l => l.Name,
                 StringComparer.OrdinalIgnoreCase
@@ -275,7 +280,8 @@ namespace Microsoft.Extensions.DependencyModel
         private void AddCompilationAssemblies(
             IEnumerable<string> compilationAssemblies,
             Utf8JsonWriter jsonWriter
-        ) {
+        )
+        {
             if (!compilationAssemblies.Any())
             {
                 return;
@@ -301,7 +307,8 @@ namespace Microsoft.Extensions.DependencyModel
         private void AddDependencies(
             IEnumerable<Dependency> dependencies,
             Utf8JsonWriter jsonWriter
-        ) {
+        )
+        {
             if (!dependencies.Any())
             {
                 return;
@@ -318,7 +325,8 @@ namespace Microsoft.Extensions.DependencyModel
         private void AddResourceAssemblies(
             IEnumerable<ResourceAssembly> resourceAssemblies,
             Utf8JsonWriter jsonWriter
-        ) {
+        )
+        {
             if (!resourceAssemblies.Any())
             {
                 return;
@@ -378,7 +386,8 @@ namespace Microsoft.Extensions.DependencyModel
             RuntimeLibrary runtimeLibrary,
             CompilationLibrary compilationLibrary,
             Utf8JsonWriter jsonWriter
-        ) {
+        )
+        {
             jsonWriter.WriteStartObject(key);
 
             var dependencies = new HashSet<Dependency>();
@@ -447,7 +456,8 @@ namespace Microsoft.Extensions.DependencyModel
             IEnumerable<RuntimeAssetGroup> assetGroups,
             bool wroteObjectStart,
             Utf8JsonWriter jsonWriter
-        ) {
+        )
+        {
             IEnumerable<RuntimeAssetGroup> groups = assetGroups.Where(
                 g => !string.IsNullOrEmpty(g.Runtime)
             );
@@ -492,7 +502,8 @@ namespace Microsoft.Extensions.DependencyModel
             string runtime,
             string assetType,
             Utf8JsonWriter jsonWriter
-        ) {
+        )
+        {
             foreach (RuntimeFile asset in assets)
             {
                 jsonWriter.WriteStartObject(NormalizePath(asset.Path));
@@ -524,7 +535,8 @@ namespace Microsoft.Extensions.DependencyModel
             string key,
             IEnumerable<string> assetPaths,
             Utf8JsonWriter jsonWriter
-        ) {
+        )
+        {
             jsonWriter.WriteStartObject(key);
             foreach (string assembly in assetPaths)
             {
@@ -538,7 +550,8 @@ namespace Microsoft.Extensions.DependencyModel
             string key,
             IEnumerable<RuntimeFile> runtimeFiles,
             Utf8JsonWriter jsonWriter
-        ) {
+        )
+        {
             jsonWriter.WriteStartObject(key);
 
             foreach (RuntimeFile runtimeFile in runtimeFiles)

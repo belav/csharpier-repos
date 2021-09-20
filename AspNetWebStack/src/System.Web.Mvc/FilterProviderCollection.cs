@@ -56,7 +56,8 @@ namespace System.Web.Mvc
         public IEnumerable<Filter> GetFilters(
             ControllerContext controllerContext,
             ActionDescriptor actionDescriptor
-        ) {
+        )
+        {
             if (controllerContext == null)
             {
                 throw new ArgumentNullException("controllerContext");

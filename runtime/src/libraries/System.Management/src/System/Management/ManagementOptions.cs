@@ -229,7 +229,8 @@ namespace System.Management
             ManagementNamedValueCollection context,
             TimeSpan timeout,
             int flags
-        ) {
+        )
+        {
             this.flags = flags;
             if (context != null)
                 this.Context = context;
@@ -866,7 +867,8 @@ namespace System.Management
         internal static ObjectGetOptions _Clone(
             ObjectGetOptions options,
             IdentifierChangedEventHandler handler
-        ) {
+        )
+        {
             ObjectGetOptions optionsTmp;
 
             if (options != null)
@@ -1867,7 +1869,8 @@ namespace System.Management
         internal static ConnectionOptions _Clone(
             ConnectionOptions options,
             IdentifierChangedEventHandler handler
-        ) {
+        )
+        {
             ConnectionOptions optionsTmp;
 
             if (options != null)

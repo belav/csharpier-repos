@@ -35,7 +35,8 @@ namespace Microsoft.CodeAnalysis.Editor.GoToDefinition
 
         private static (Document, IGoToDefinitionService) GetDocumentAndService(
             ITextSnapshot snapshot
-        ) {
+        )
+        {
             var document = snapshot.GetOpenDocumentInCurrentContextWithChanges();
             return (document, document?.GetLanguageService<IGoToDefinitionService>());
         }
@@ -60,7 +61,8 @@ namespace Microsoft.CodeAnalysis.Editor.GoToDefinition
                 if (
                     caretPos.HasValue
                     && TryExecuteCommand(document, caretPos.Value, service, context)
-                ) {
+                )
+                {
                     return true;
                 }
             }
@@ -97,7 +99,8 @@ namespace Microsoft.CodeAnalysis.Editor.GoToDefinition
             int caretPosition,
             IGoToDefinitionService goToDefinitionService,
             CommandExecutionContext context
-        ) {
+        )
+        {
             string errorMessage = null;
 
             using (
@@ -105,7 +108,8 @@ namespace Microsoft.CodeAnalysis.Editor.GoToDefinition
                     allowCancellation: true,
                     EditorFeaturesResources.Navigating_to_definition
                 )
-            ) {
+            )
+            {
                 if (
                     goToDefinitionService != null
                     && goToDefinitionService.TryGoToDefinition(
@@ -113,7 +117,8 @@ namespace Microsoft.CodeAnalysis.Editor.GoToDefinition
                         caretPosition,
                         context.OperationContext.UserCancellationToken
                     )
-                ) {
+                )
+                {
                     return true;
                 }
 

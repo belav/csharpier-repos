@@ -52,7 +52,8 @@ namespace T
             String content_type,
             String content_opt,
             long content_length
-        ) {
+        )
+        {
             NetWrite(sock, "HTTP/1.0 " + code + " " + detail + "\r\n");
             NetWrite(sock, "Date: Sat, 12 Jan 2002 01:52:56 GMT\r\n");
             NetWrite(sock, "Server: MIS\r\n");

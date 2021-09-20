@@ -16,7 +16,8 @@ namespace System.Web.Util
             string input,
             out string path,
             out string? queryAndFragment
-        ) {
+        )
+        {
             int queryFragmentSeparatorPos = input.IndexOfAny(s_queryFragmentSeparators);
             if (queryFragmentSeparatorPos != -1)
             {
@@ -39,7 +40,8 @@ namespace System.Web.Util
             [NotNullWhen(true)] out string? schemeAndAuthority,
             [NotNullWhen(true)] out string? path,
             out string? queryAndFragment
-        ) {
+        )
+        {
             // Strip off ?query and #fragment if they exist, since we're not going to look at them
             string inputWithoutQueryFragment;
             ExtractQueryAndFragment(input, out inputWithoutQueryFragment, out queryAndFragment);

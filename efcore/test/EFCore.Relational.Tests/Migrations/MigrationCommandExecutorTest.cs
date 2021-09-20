@@ -65,7 +65,8 @@ namespace Microsoft.EntityFrameworkCore.Migrations
         [InlineData(true)]
         public async Task Executes_migration_commands_with_transaction_suppressed_outside_of_transaction(
             bool async
-        ) {
+        )
+        {
             var fakeConnection = CreateConnection();
             var logger = new FakeRelationalCommandDiagnosticsLogger();
 
@@ -184,7 +185,8 @@ namespace Microsoft.EntityFrameworkCore.Migrations
         [InlineData(true)]
         public async Task Executes_commands_in_order_regardless_of_transaction_suppression(
             bool async
-        ) {
+        )
+        {
             var fakeConnection = CreateConnection();
             var logger = new FakeRelationalCommandDiagnosticsLogger();
 
@@ -299,7 +301,8 @@ namespace Microsoft.EntityFrameworkCore.Migrations
 
         private static IDbContextOptions CreateOptions(
             RelationalOptionsExtension optionsExtension = null
-        ) {
+        )
+        {
             var optionsBuilder = new DbContextOptionsBuilder();
 
             ((IDbContextOptionsBuilderInfrastructure)optionsBuilder).AddOrUpdateExtension(

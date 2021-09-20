@@ -52,7 +52,8 @@ namespace Microsoft.EntityFrameworkCore.TestUtilities.QueryTestGeneration
                     _insideLambda
                     && node?.Type == typeof(string)
                     && node.NodeType != ExpressionType.Parameter
-                ) {
+                )
+                {
                     FoundExpressions.Add(node);
                 }
 

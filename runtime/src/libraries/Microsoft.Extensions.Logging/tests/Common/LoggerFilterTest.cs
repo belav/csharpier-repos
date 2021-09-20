@@ -242,7 +242,8 @@ namespace Microsoft.Extensions.Logging.Test
                                         "Microsoft.Extensions.Logging.Test.TestLoggerProvider",
                                         name
                                     )
-                                ) {
+                                )
+                                {
                                     if (string.Equals("Test", cat))
                                     {
                                         return level >= LogLevel.Information;
@@ -515,7 +516,8 @@ namespace Microsoft.Extensions.Logging.Test
         public void FilterTest(
             LoggerFilterOptions options,
             (string category, LogLevel level, bool expectInProvider1, bool expectInProvider2) message
-        ) {
+        )
+        {
             var testSink1 = new TestSink();
             var testSink2 = new TestSink();
 

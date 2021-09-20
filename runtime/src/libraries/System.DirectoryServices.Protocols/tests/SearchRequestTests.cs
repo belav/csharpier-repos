@@ -41,7 +41,8 @@ namespace System.DirectoryServices.Protocols.Tests
             string ldapFilter,
             SearchScope searchScope,
             string[] attributeList
-        ) {
+        )
+        {
             var request = new SearchRequest(
                 distinguishedName,
                 ldapFilter,

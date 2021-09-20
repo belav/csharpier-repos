@@ -1341,7 +1341,8 @@ namespace System.Xml
             string? oldValue,
             string? newValue,
             XmlNodeChangedAction action
-        ) {
+        )
+        {
             XmlDocument? doc = OwnerDocument;
             if (doc != null)
             {

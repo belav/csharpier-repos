@@ -458,7 +458,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeActions.ConvertIfTo
         public async Task TestIsExpression(
             [CombinatorialValues(LanguageVersion.CSharp8, LanguageVersion.CSharp9)]
                 LanguageVersion languageVersion
-        ) {
+        )
+        {
             var source =
                 @"class C
 {

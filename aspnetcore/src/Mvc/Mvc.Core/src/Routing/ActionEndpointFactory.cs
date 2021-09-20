@@ -27,7 +27,8 @@ namespace Microsoft.AspNetCore.Mvc.Routing
         public ActionEndpointFactory(
             RoutePatternTransformer routePatternTransformer,
             IEnumerable<IRequestDelegateFactory> requestDelegateFactories
-        ) {
+        )
+        {
             if (routePatternTransformer == null)
             {
                 throw new ArgumentNullException(nameof(routePatternTransformer));
@@ -45,7 +46,8 @@ namespace Microsoft.AspNetCore.Mvc.Routing
             IReadOnlyList<ConventionalRouteEntry> routes,
             IReadOnlyList<Action<EndpointBuilder>> conventions,
             bool createInertEndpoints
-        ) {
+        )
+        {
             if (endpoints == null)
             {
                 throw new ArgumentNullException(nameof(endpoints));
@@ -199,7 +201,8 @@ namespace Microsoft.AspNetCore.Mvc.Routing
             HashSet<string> keys,
             ConventionalRouteEntry route,
             IReadOnlyList<Action<EndpointBuilder>> conventions
-        ) {
+        )
+        {
             if (endpoints == null)
             {
                 throw new ArgumentNullException(nameof(endpoints));
@@ -290,7 +293,8 @@ namespace Microsoft.AspNetCore.Mvc.Routing
         > resolvedRequiredValues) ResolveDefaultsAndRequiredValues(
             ActionDescriptor action,
             RoutePattern attributeRoutePattern
-        ) {
+        )
+        {
             RouteValueDictionary? updatedDefaults = null;
             IDictionary<string, string?>? resolvedRequiredValues = null;
 
@@ -359,7 +363,8 @@ namespace Microsoft.AspNetCore.Mvc.Routing
             bool suppressPathMatching,
             IReadOnlyList<Action<EndpointBuilder>> conventions,
             IReadOnlyList<Action<EndpointBuilder>> perRouteConventions
-        ) {
+        )
+        {
             // Add action metadata first so it has a low precedence
             if (action.EndpointMetadata != null)
             {
@@ -390,7 +395,8 @@ namespace Microsoft.AspNetCore.Mvc.Routing
                 && routeNames.Add(routeName)
                 && builder.Metadata.OfType<IEndpointNameMetadata>().LastOrDefault()?.EndpointName
                     == null
-            ) {
+            )
+            {
                 builder.Metadata.Add(new EndpointNameMetadata(routeName));
             }
 
@@ -410,7 +416,8 @@ namespace Microsoft.AspNetCore.Mvc.Routing
                             FilterDescriptorOrderComparer.Comparer
                         )
                         .Select(f => f.Filter)
-                ) {
+                )
+                {
                     builder.Metadata.Add(filter);
                 }
             }
@@ -427,7 +434,8 @@ namespace Microsoft.AspNetCore.Mvc.Routing
                     if (
                         actionConstraint is HttpMethodActionConstraint httpMethodActionConstraint
                         && !builder.Metadata.OfType<HttpMethodMetadata>().Any()
-                    ) {
+                    )
+                    {
                         builder.Metadata.Add(
                             new HttpMethodMetadata(httpMethodActionConstraint.HttpMethods)
                         );
@@ -435,7 +443,8 @@ namespace Microsoft.AspNetCore.Mvc.Routing
                     else if (
                         actionConstraint is ConsumesAttribute consumesAttribute
                         && !builder.Metadata.OfType<ConsumesMetadata>().Any()
-                    ) {
+                    )
+                    {
                         builder.Metadata.Add(
                             new ConsumesMetadata(consumesAttribute.ContentTypes.ToArray())
                         );
@@ -472,7 +481,8 @@ namespace Microsoft.AspNetCore.Mvc.Routing
         private RequestDelegate? CreateRequestDelegate(
             ActionDescriptor action,
             RouteValueDictionary? dataTokens = null
-        ) {
+        )
+        {
             foreach (var factory in _requestDelegateFactories)
             {
                 var requestDelegate = factory.CreateRequestDelegate(action, dataTokens);

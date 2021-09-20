@@ -73,7 +73,8 @@ namespace System.Security.Cryptography
                 HashAlgorithmName hashAlgorithm,
                 byte[]? secretPrepend,
                 byte[]? secretAppend
-            ) {
+            )
+            {
                 if (otherPartyPublicKey == null)
                     throw new ArgumentNullException(nameof(otherPartyPublicKey));
                 if (string.IsNullOrEmpty(hashAlgorithm.Name))
@@ -86,7 +87,8 @@ namespace System.Security.Cryptography
                     SafeNCryptSecretHandle secretAgreement = DeriveSecretAgreementHandle(
                         otherPartyPublicKey
                     )
-                ) {
+                )
+                {
                     return Interop.NCrypt.DeriveKeyMaterialHash(
                         secretAgreement,
                         hashAlgorithm.Name,
@@ -103,7 +105,8 @@ namespace System.Security.Cryptography
                 byte[]? hmacKey,
                 byte[]? secretPrepend,
                 byte[]? secretAppend
-            ) {
+            )
+            {
                 if (otherPartyPublicKey == null)
                     throw new ArgumentNullException(nameof(otherPartyPublicKey));
                 if (string.IsNullOrEmpty(hashAlgorithm.Name))
@@ -116,7 +119,8 @@ namespace System.Security.Cryptography
                     SafeNCryptSecretHandle secretAgreement = DeriveSecretAgreementHandle(
                         otherPartyPublicKey
                     )
-                ) {
+                )
+                {
                     Interop.NCrypt.SecretAgreementFlags flags =
                         hmacKey == null
                             ? Interop.NCrypt.SecretAgreementFlags.UseSecretAsHmacKey
@@ -137,7 +141,8 @@ namespace System.Security.Cryptography
                 ECDiffieHellmanPublicKey otherPartyPublicKey,
                 byte[] prfLabel,
                 byte[] prfSeed
-            ) {
+            )
+            {
                 if (otherPartyPublicKey == null)
                     throw new ArgumentNullException(nameof(otherPartyPublicKey));
                 if (prfLabel == null)
@@ -149,7 +154,8 @@ namespace System.Security.Cryptography
                     SafeNCryptSecretHandle secretAgreement = DeriveSecretAgreementHandle(
                         otherPartyPublicKey
                     )
-                ) {
+                )
+                {
                     return Interop.NCrypt.DeriveKeyMaterialTls(
                         secretAgreement,
                         prfLabel,

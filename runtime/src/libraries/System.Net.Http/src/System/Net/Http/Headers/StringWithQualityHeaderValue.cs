@@ -114,7 +114,8 @@ namespace System.Net.Http.Headers
         public static bool TryParse(
             [NotNullWhen(true)] string? input,
             [NotNullWhen(true)] out StringWithQualityHeaderValue? parsedValue
-        ) {
+        )
+        {
             int index = 0;
             parsedValue = null;
 
@@ -125,7 +126,8 @@ namespace System.Net.Http.Headers
                     ref index,
                     out object? output
                 )
-            ) {
+            )
+            {
                 parsedValue = (StringWithQualityHeaderValue)output!;
                 return true;
             }
@@ -136,7 +138,8 @@ namespace System.Net.Http.Headers
             string? input,
             int startIndex,
             out object? parsedValue
-        ) {
+        )
+        {
             Debug.Assert(startIndex >= 0);
 
             parsedValue = null;
@@ -219,7 +222,8 @@ namespace System.Net.Http.Headers
                     NumberFormatInfo.InvariantInfo,
                     out quality
                 )
-            ) {
+            )
+            {
                 return false;
             }
 

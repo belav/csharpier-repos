@@ -36,7 +36,8 @@ namespace System.Security.Cryptography
             string? description,
             string? useContext,
             string? creationTitle
-        ) {
+        )
+        {
             ProtectionLevel = protectionLevel;
             FriendlyName = friendlyName;
             Description = description;

@@ -109,7 +109,8 @@ namespace System.Web.Helpers
             HttpContextBase httpContext,
             Func<string, byte[]> readAction,
             string filePath
-        ) {
+        )
+        {
             if (String.IsNullOrEmpty(filePath))
             {
                 throw new ArgumentException(
@@ -202,7 +203,8 @@ namespace System.Web.Helpers
         internal static WebImage GetImageFromRequest(
             HttpRequestBase request,
             string postedFileName = null
-        ) {
+        )
+        {
             Debug.Assert(request != null);
             if ((request.Files == null) || (request.Files.Count == 0))
             {
@@ -283,7 +285,8 @@ namespace System.Web.Helpers
             int height,
             bool preserveAspectRatio = true,
             bool preventEnlarge = false
-        ) {
+        )
+        {
             if (width <= 0)
             {
                 throw new ArgumentOutOfRangeException(
@@ -428,7 +431,8 @@ namespace System.Web.Helpers
             string verticalAlign = "Bottom",
             int opacity = 100,
             int padding = 5
-        ) {
+        )
+        {
             if (String.IsNullOrEmpty(text))
             {
                 throw new ArgumentException(
@@ -531,7 +535,8 @@ namespace System.Web.Helpers
             string verticalAlign = "Bottom",
             int opacity = 100,
             int padding = 5
-        ) {
+        )
+        {
             if (watermarkImage == null)
             {
                 throw new ArgumentNullException("watermarkImage");
@@ -623,7 +628,8 @@ namespace System.Web.Helpers
             string verticalAlign = "Bottom",
             int opacity = 100,
             int padding = 5
-        ) {
+        )
+        {
             return AddImageWatermark(
                 new HttpContextWrapper(HttpContext.Current),
                 _defaultReadAction,
@@ -647,7 +653,8 @@ namespace System.Web.Helpers
             string verticalAlign,
             int opacity,
             int padding
-        ) {
+        )
+        {
             return AddImageWatermark(
                 new WebImage(httpContext, readAction, watermarkImageFilePath),
                 width,
@@ -709,7 +716,8 @@ namespace System.Web.Helpers
             string filePath = null,
             string imageFormat = null,
             bool forceCorrectExtension = true
-        ) {
+        )
+        {
             return Save(
                 new HttpContextWrapper(HttpContext.Current),
                 File.WriteAllBytes,
@@ -730,7 +738,8 @@ namespace System.Web.Helpers
             string filePath,
             string imageFormat,
             bool forceWellKnownExtension
-        ) {
+        )
+        {
             filePath = filePath ?? FileName;
             if (String.IsNullOrEmpty(filePath))
             {
@@ -758,7 +767,8 @@ namespace System.Web.Helpers
                 if (
                     !ConversionUtil.TryFromStringToImageFormat(extension, out saveImageFormat)
                     || !saveImageFormat.Equals(requestedImageFormat)
-                ) {
+                )
+                {
                     extension = requestedImageFormat.ToString().ToLowerInvariant();
                     filePath = filePath + "." + extension;
                 }
@@ -781,7 +791,8 @@ namespace System.Web.Helpers
                 {
                     using (
                         Image image = Image.FromStream(stream, useEmbeddedColorManagement: false)
-                    ) {
+                    )
+                    {
                         var rawFormat = image.RawFormat;
                         ImageFormat actualFormat;
                         // RawFormat returns a ImageFormat instance with the same Guid as the predefined types
@@ -834,7 +845,8 @@ namespace System.Web.Helpers
                 !conversionOk
                 || (horizontalAlign == HorizontalAlign.Justify)
                 || (horizontalAlign == HorizontalAlign.NotSet)
-            ) {
+            )
+            {
                 throw new ArgumentException(HelpersResources.WebImage_IncorrectHorizontalAlignment);
             }
             return horizontalAlign;
@@ -951,7 +963,8 @@ namespace System.Web.Helpers
             int width,
             int height,
             bool preserveResolution = true
-        ) {
+        )
+        {
             bool indexed = (
                 image.PixelFormat == PixelFormat.Format1bppIndexed
                 || image.PixelFormat == PixelFormat.Format4bppIndexed
@@ -1056,7 +1069,8 @@ namespace System.Web.Helpers
                 int width,
                 bool preserveAspectRatio,
                 bool preventEnlarge
-            ) {
+            )
+            {
                 Height = height;
                 Width = width;
                 PreserveAspectRatio = preserveAspectRatio;
@@ -1163,7 +1177,8 @@ namespace System.Web.Helpers
                 if (
                     ((Padding * 2) + Width >= image.Width)
                     || ((Padding * 2) + Height >= image.Height)
-                ) {
+                )
+                {
                     // If watermark image + padding is too big we don't make any changes.
                     return image;
                 }
@@ -1240,7 +1255,8 @@ namespace System.Web.Helpers
                         image.Height,
                         preserveResolution: false
                     )
-                ) {
+                )
+                {
                     using (Graphics graphics = Graphics.FromImage(fixedResolutionImage))
                     {
                         fontSize = GetBestFontSize(image, graphics, out textArea);
@@ -1289,7 +1305,8 @@ namespace System.Web.Helpers
                     StringFormat format = new StringFormat(
                         StringFormatFlags.NoClip | StringFormatFlags.MeasureTrailingSpaces
                     )
-                ) {
+                )
+                {
                     for (int fontSize = FontSize; fontSize >= 2; fontSize--)
                     {
                         int numChars = 0,
@@ -1310,7 +1327,8 @@ namespace System.Web.Helpers
                             (numChars >= Text.Length)
                             && (textArea.Width <= layoutArea.Width)
                             && (textArea.Height <= layoutArea.Height)
-                        ) {
+                        )
+                        {
                             // it fits! Exit now
                             return fontSize;
                         }
@@ -1339,7 +1357,8 @@ namespace System.Web.Helpers
                 HorizontalAlign alignX,
                 VerticalAlign alignY,
                 int padding
-            ) {
+            )
+            {
                 HorizontalAlign = alignX;
                 VerticalAlign = alignY;
                 Padding = padding;
@@ -1407,7 +1426,8 @@ namespace System.Web.Helpers
                 Image watermark,
                 Rectangle rect,
                 float alphaScaling
-            ) {
+            )
+            {
                 float[][] scalingMatrix = GetScalingMatrix(alphaScaling);
                 ColorMatrix colorMatrix = new ColorMatrix(scalingMatrix);
 

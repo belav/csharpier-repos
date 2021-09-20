@@ -541,14 +541,16 @@ namespace System.ComponentModel.Design.Tests
                 DesignerOptionCollection parent,
                 string name,
                 object value
-            ) {
+            )
+            {
                 return CreateOptionCollection(parent, name, value);
             }
 
             protected override bool ShowDialog(
                 DesignerOptionCollection options,
                 object optionObject
-            ) {
+            )
+            {
                 ShowDialogValue = optionObject;
                 return true;
             }

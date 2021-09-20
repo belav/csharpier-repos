@@ -17,7 +17,8 @@ namespace Microsoft.AspNetCore.ApiAuthorization.IdentityServer
         public ConfigureIdentityResources(
             IConfiguration configuration,
             ILogger<ConfigureIdentityResources> logger
-        ) {
+        )
+        {
             _configuration = configuration;
             _logger = logger;
         }
@@ -100,7 +101,8 @@ namespace Microsoft.AspNetCore.ApiAuthorization.IdentityServer
                         source,
                         StringComparison.OrdinalIgnoreCase
                     )
-                ) {
+                )
+                {
                     allDefault = false;
                     break;
                 }

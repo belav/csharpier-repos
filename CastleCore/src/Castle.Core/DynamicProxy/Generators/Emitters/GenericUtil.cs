@@ -29,14 +29,16 @@ namespace Castle.DynamicProxy.Generators.Emitters
         public static GenericTypeParameterBuilder[] CopyGenericArguments(
             MethodInfo methodToCopyGenericsFrom,
             TypeBuilder builder
-        ) {
+        )
+        {
             return CopyGenericArguments(methodToCopyGenericsFrom, builder.DefineGenericParameters);
         }
 
         public static GenericTypeParameterBuilder[] CopyGenericArguments(
             MethodInfo methodToCopyGenericsFrom,
             MethodBuilder builder
-        ) {
+        )
+        {
             return CopyGenericArguments(methodToCopyGenericsFrom, builder.DefineGenericParameters);
         }
 
@@ -45,7 +47,8 @@ namespace Castle.DynamicProxy.Generators.Emitters
             MethodInfo methodToCopyGenericsFrom,
             Type[] originalGenericParameters,
             GenericTypeParameterBuilder[] newGenericParameters
-        ) {
+        )
+        {
             if (constraint.IsGenericType)
             {
                 var genericArgumentsOfConstraint = constraint.GetGenericArguments();
@@ -104,7 +107,8 @@ namespace Castle.DynamicProxy.Generators.Emitters
             GenericTypeParameterBuilder[] newGenericParameters,
             Type[] originalGenericArguments,
             Type[] constraints
-        ) {
+        )
+        {
             // HACK: the mono runtime has a strange bug where assigning to the constraints
             //       parameter and returning it throws, so we'll create a new array.
             //       System.ArrayTypeMismatchException : Source array type cannot be assigned to destination array type.
@@ -124,7 +128,8 @@ namespace Castle.DynamicProxy.Generators.Emitters
         private static GenericTypeParameterBuilder[] CopyGenericArguments(
             MethodInfo methodToCopyGenericsFrom,
             ApplyGenArgs genericParameterGenerator
-        ) {
+        )
+        {
             var originalGenericArguments = methodToCopyGenericsFrom.GetGenericArguments();
             if (originalGenericArguments.Length == 0)
             {
@@ -169,7 +174,8 @@ namespace Castle.DynamicProxy.Generators.Emitters
         private static void CopyNonInheritableAttributes(
             GenericTypeParameterBuilder newGenericParameter,
             Type originalGenericArgument
-        ) {
+        )
+        {
             foreach (var attribute in originalGenericArgument.GetNonInheritableAttributes())
             {
                 newGenericParameter.SetCustomAttribute(attribute.Builder);

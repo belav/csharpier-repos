@@ -31,11 +31,13 @@ namespace System.Net.Sockets
             SocketOptionName optionName,
             byte[] optionValueSeconds,
             ref int optionLength
-        ) {
+        )
+        {
             if (
                 optionValueSeconds == null
                 || !BitConverter.TryWriteBytes(optionValueSeconds.AsSpan(), Get(handle, optionName))
-            ) {
+            )
+            {
                 return SocketError.Fault;
             }
 
@@ -50,7 +52,8 @@ namespace System.Net.Sockets
                     handle,
                     out IOControlKeepAlive? ioControlKeepAlive
                 )
-            ) {
+            )
+            {
                 return optionName == SocketOptionName.TcpKeepAliveTime
                   ? MillisecondsToSeconds(ioControlKeepAlive._timeMs)
                   : MillisecondsToSeconds(ioControlKeepAlive._intervalMs);
@@ -65,7 +68,8 @@ namespace System.Net.Sockets
             SafeSocketHandle handle,
             SocketOptionName optionName,
             byte[] optionValueSeconds
-        ) {
+        )
+        {
             if (optionValueSeconds == null || optionValueSeconds.Length < sizeof(int))
             {
                 return SocketError.Fault;
@@ -78,7 +82,8 @@ namespace System.Net.Sockets
             SafeSocketHandle handle,
             SocketOptionName optionName,
             int optionValueSeconds
-        ) {
+        )
+        {
             IOControlKeepAlive ioControlKeepAlive = s_socketKeepAliveTable.GetValue(
                 handle,
                 (SafeSocketHandle handle) => new IOControlKeepAlive()

@@ -82,13 +82,15 @@ namespace System.ComponentModel.Composition.Primitives
             ImportCardinality cardinality,
             bool isRecomposable,
             bool isPrerequisite
-        ) : this(
-            contractName,
-            cardinality,
-            isRecomposable,
-            isPrerequisite,
-            MetadataServices.EmptyMetadata
-        ) {
+        )
+            : this(
+                contractName,
+                cardinality,
+                isRecomposable,
+                isPrerequisite,
+                MetadataServices.EmptyMetadata
+            )
+        {
             Requires.NotNull(constraint, nameof(constraint));
 
             _constraint = constraint;
@@ -114,12 +116,14 @@ namespace System.ComponentModel.Composition.Primitives
             bool isRecomposable,
             bool isPrerequisite,
             IDictionary<string, object?>? metadata
-        ) {
+        )
+        {
             if (
                 (cardinality != ImportCardinality.ExactlyOne)
                 && (cardinality != ImportCardinality.ZeroOrMore)
                 && (cardinality != ImportCardinality.ZeroOrOne)
-            ) {
+            )
+            {
                 throw new ArgumentException(
                     SR.Format(
                         SR.ArgumentOutOfRange_InvalidEnum,

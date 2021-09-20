@@ -50,7 +50,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Formatting.Indentation
             ITextBuffer buffer,
             int indentationLine,
             char ch
-        ) {
+        )
+        {
             await TokenFormatWorkerAsync(workspace, buffer, indentationLine, ch);
 
             return buffer.CurrentSnapshot.GetLineFromLineNumber(indentationLine)
@@ -62,7 +63,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Formatting.Indentation
             ITextBuffer buffer,
             int indentationLine,
             char ch
-        ) {
+        )
+        {
             await TokenFormatWorkerAsync(workspace, buffer, indentationLine, ch);
 
             return buffer.CurrentSnapshot.GetText();
@@ -73,7 +75,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Formatting.Indentation
             ITextBuffer buffer,
             int indentationLine,
             char ch
-        ) {
+        )
+        {
             var document = buffer.CurrentSnapshot.GetRelatedDocumentsWithChanges().First();
             var root = (CompilationUnitSyntax)await document.GetSyntaxRootAsync();
 
@@ -121,7 +124,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Formatting.Indentation
             bool useTabs,
             int? baseIndentation = null,
             TextSpan span = default
-        ) {
+        )
+        {
             // create tree service
             using var workspace = TestWorkspace.CreateCSharp(code, composition: s_composition);
             workspace.TryApplyChanges(

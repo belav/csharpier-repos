@@ -245,7 +245,8 @@ namespace Newtonsoft.Json.Schema
             JsonWriter writer,
             string propertyName,
             IDictionary<string, JsonSchema> properties
-        ) {
+        )
+        {
             if (properties != null)
             {
                 writer.WritePropertyName(propertyName);

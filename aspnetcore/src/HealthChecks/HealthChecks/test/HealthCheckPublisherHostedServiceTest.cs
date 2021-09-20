@@ -656,7 +656,8 @@ namespace Microsoft.Extensions.Diagnostics.HealthChecks
             IHealthCheckPublisher[] publishers,
             Action<HealthCheckPublisherOptions>? configure = null,
             TestSink? sink = null
-        ) {
+        )
+        {
             var serviceCollection = new ServiceCollection();
             serviceCollection.AddOptions();
             serviceCollection.AddLogging();

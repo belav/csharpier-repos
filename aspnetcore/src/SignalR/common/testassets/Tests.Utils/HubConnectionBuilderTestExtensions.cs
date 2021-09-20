@@ -14,7 +14,8 @@ namespace Microsoft.AspNetCore.SignalR.Client
         public static IHubConnectionBuilder WithLoggerFactory(
             this IHubConnectionBuilder hubConnectionBuilder,
             ILoggerFactory loggerFactory
-        ) {
+        )
+        {
             if (loggerFactory == null)
             {
                 throw new ArgumentNullException(nameof(loggerFactory));

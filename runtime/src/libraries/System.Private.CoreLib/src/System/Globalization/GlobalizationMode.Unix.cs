@@ -44,7 +44,8 @@ namespace System.Globalization
         private static void LoadAppLocalIcuCore(
             ReadOnlySpan<char> version,
             ReadOnlySpan<char> suffix
-        ) {
+        )
+        {
 #if TARGET_OSX
             const string extension = ".dylib";
             bool versionAtEnd = false;

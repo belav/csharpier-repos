@@ -38,7 +38,8 @@ namespace Microsoft.CodeAnalysis.CSharp.MakeTypeAbstract
         protected override bool IsValidRefactoringContext(
             SyntaxNode? node,
             [NotNullWhen(true)] out TypeDeclarationSyntax? typeDeclaration
-        ) {
+        )
+        {
             switch (node)
             {
                 case MethodDeclarationSyntax method:
@@ -70,7 +71,8 @@ namespace Microsoft.CodeAnalysis.CSharp.MakeTypeAbstract
                 )
                 && !enclosingType.Modifiers.Any(SyntaxKind.AbstractKeyword)
                 && !enclosingType.Modifiers.Any(SyntaxKind.StaticKeyword)
-            ) {
+            )
+            {
                 typeDeclaration = enclosingType;
                 return true;
             }

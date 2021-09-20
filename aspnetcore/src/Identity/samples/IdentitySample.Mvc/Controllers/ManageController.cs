@@ -25,7 +25,8 @@ namespace IdentitySamples.Controllers
             IEmailSender emailSender,
             ISmsSender smsSender,
             ILoggerFactory loggerFactory
-        ) {
+        )
+        {
             _userManager = userManager;
             _signInManager = signInManager;
             _emailSender = emailSender;

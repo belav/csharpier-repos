@@ -86,7 +86,8 @@ namespace System.Net.Http
             HttpAuthority? origin,
             HttpAuthority authority,
             QuicConnection connection
-        ) {
+        )
+        {
             _pool = pool;
             _origin = origin;
             _authority = authority;
@@ -196,7 +197,8 @@ namespace System.Net.Http
             HttpRequestMessage request,
             bool async,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             Debug.Assert(async);
 
             // Wait for an available stream (based on QUIC MAX_STREAMS) if there isn't one available yet.
@@ -358,7 +360,8 @@ namespace System.Net.Http
                     && _waitingRequests.TryDequeue(
                         out TaskCompletionSourceWithCancellation<bool>? tcs
                     )
-                ) {
+                )
+                {
                     if (tcs.TrySetResult(true))
                     {
                         --_requestStreamsRemaining;
@@ -387,7 +390,8 @@ namespace System.Net.Http
                 if (
                     NetEventSource.Log.IsEnabled()
                     && !ReferenceEquals(firstException, abortException)
-                ) {
+                )
+                {
                     // Lost the race to set the field to another exception, so just trace this one.
                     Trace($"{nameof(abortException)}=={abortException}");
                 }
@@ -683,7 +687,8 @@ namespace System.Net.Http
                                         out unknownStreamType,
                                         out _
                                     )
-                                ) {
+                                )
+                                {
                                     buffer.EnsureAvailableSpace(
                                         VariableLengthIntegerHelper.MaximumEncodedLength
                                     );
@@ -814,7 +819,8 @@ namespace System.Net.Http
                         out payloadLength,
                         out bytesRead
                     )
-                ) {
+                )
+                {
                     buffer.EnsureAvailableSpace(
                         VariableLengthIntegerHelper.MaximumEncodedLength * 2
                     );
@@ -860,7 +866,8 @@ namespace System.Net.Http
                             out settingValue,
                             out bytesRead
                         )
-                    ) {
+                    )
+                    {
                         buffer.EnsureAvailableSpace(
                             VariableLengthIntegerHelper.MaximumEncodedLength * 2
                         );
@@ -919,7 +926,8 @@ namespace System.Net.Http
                         out lastStreamId,
                         out bytesRead
                     )
-                ) {
+                )
+                {
                     buffer.EnsureAvailableSpace(VariableLengthIntegerHelper.MaximumEncodedLength);
                     bytesRead = await stream.ReadAsync(
                             buffer.AvailableMemory,

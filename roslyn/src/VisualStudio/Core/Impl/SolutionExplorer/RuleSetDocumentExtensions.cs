@@ -16,7 +16,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.SolutionExplore
             string analyzerId,
             string ruleId,
             ReportDiagnostic value
-        ) {
+        )
+        {
             var newAction = ConvertReportDiagnosticToAction(value);
 
             var rules = FindOrCreateRulesElement(ruleSet, analyzerId);
@@ -98,7 +99,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.SolutionExplore
         private static XElement FindOrCreateRulesElement(
             XDocument ruleSetDocument,
             string analyzerID
-        ) {
+        )
+        {
             var rulesElement = ruleSetDocument.Root.Elements("Rules")
                 .FirstOrDefault(r => r.Attribute("AnalyzerId").Value.Equals(analyzerID));
 

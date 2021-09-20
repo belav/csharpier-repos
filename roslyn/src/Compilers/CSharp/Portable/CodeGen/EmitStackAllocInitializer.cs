@@ -92,7 +92,8 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeGen
         private ArrayInitializerStyle ShouldEmitBlockInitializerForStackAlloc(
             TypeSymbol elementType,
             ImmutableArray<BoundExpression> inits
-        ) {
+        )
+        {
             if (!_module.SupportsPrivateImplClass)
             {
                 return ArrayInitializerStyle.Element;
@@ -129,7 +130,8 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeGen
             ImmutableArray<BoundExpression> inits,
             ref int initCount,
             ref int constInits
-        ) {
+        )
+        {
             if (inits.Length == 0)
             {
                 return;
@@ -154,7 +156,8 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeGen
             TypeSymbol elementType,
             ImmutableArray<BoundExpression> inits,
             bool includeConstants
-        ) {
+        )
+        {
             int index = 0;
             int elementTypeSizeInBytes = elementType.SpecialType.SizeInBytes();
             foreach (BoundExpression init in inits)
@@ -176,7 +179,8 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeGen
             TypeSymbol elementType,
             int elementTypeSizeInBytes,
             int index
-        ) {
+        )
+        {
             if (index == 0)
             {
                 return;
@@ -206,7 +210,8 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeGen
             BoundExpression init,
             TypeSymbol elementType,
             int elementTypeSizeInBytes
-        ) {
+        )
+        {
             if (elementTypeSizeInBytes == 0)
             {
                 _builder.EmitOpCode(ILOpCode.Sizeof);

@@ -169,7 +169,8 @@ namespace Newtonsoft.Json.Utilities
             int index,
             int count,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             ValidateEncode(buffer, index, count);
 
             if (_leftOverBytesCount > 0)
@@ -204,7 +205,8 @@ namespace Newtonsoft.Json.Utilities
             int index,
             int count,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             return _writer.WriteAsync(chars, index, count, cancellationToken);
         }
 

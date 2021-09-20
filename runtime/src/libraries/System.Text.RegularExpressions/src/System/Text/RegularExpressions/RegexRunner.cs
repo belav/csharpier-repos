@@ -101,7 +101,8 @@ namespace System.Text.RegularExpressions
             int prevlen,
             bool quick,
             TimeSpan timeout
-        ) {
+        )
+        {
             // Handle timeout argument
             _timeout = -1; // (int)Regex.InfiniteMatchTimeout.TotalMilliseconds
             bool ignoreTimeout = _ignoreTimeout = Regex.InfiniteMatchTimeout == timeout;
@@ -245,7 +246,8 @@ namespace System.Text.RegularExpressions
             MatchCallback<TState> callback,
             bool reuseMatchObject,
             TimeSpan timeout
-        ) {
+        )
+        {
             // Handle timeout argument
             _timeout = -1; // (int)Regex.InfiniteMatchTimeout.TotalMilliseconds
             bool ignoreTimeout = _ignoreTimeout = Regex.InfiniteMatchTimeout == timeout;

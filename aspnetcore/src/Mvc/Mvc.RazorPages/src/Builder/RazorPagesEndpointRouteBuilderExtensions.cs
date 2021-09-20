@@ -25,7 +25,8 @@ namespace Microsoft.AspNetCore.Builder
         /// <returns>An <see cref="PageActionEndpointConventionBuilder"/> for endpoints associated with Razor Pages.</returns>
         public static PageActionEndpointConventionBuilder MapRazorPages(
             this IEndpointRouteBuilder endpoints
-        ) {
+        )
+        {
             if (endpoints == null)
             {
                 throw new ArgumentNullException(nameof(endpoints));
@@ -63,7 +64,8 @@ namespace Microsoft.AspNetCore.Builder
         public static IEndpointConventionBuilder MapFallbackToPage(
             this IEndpointRouteBuilder endpoints,
             string page
-        ) {
+        )
+        {
             if (endpoints == null)
             {
                 throw new ArgumentNullException(nameof(endpoints));
@@ -131,7 +133,8 @@ namespace Microsoft.AspNetCore.Builder
             this IEndpointRouteBuilder endpoints,
             string pattern,
             string page
-        ) {
+        )
+        {
             if (endpoints == null)
             {
                 throw new ArgumentNullException(nameof(endpoints));
@@ -201,7 +204,8 @@ namespace Microsoft.AspNetCore.Builder
             this IEndpointRouteBuilder endpoints,
             string page,
             string area
-        ) {
+        )
+        {
             if (endpoints == null)
             {
                 throw new ArgumentNullException(nameof(endpoints));
@@ -271,7 +275,8 @@ namespace Microsoft.AspNetCore.Builder
             string pattern,
             string page,
             string area
-        ) {
+        )
+        {
             if (endpoints == null)
             {
                 throw new ArgumentNullException(nameof(endpoints));
@@ -456,7 +461,8 @@ namespace Microsoft.AspNetCore.Builder
 
         private static PageActionEndpointDataSource GetOrCreateDataSource(
             IEndpointRouteBuilder endpoints
-        ) {
+        )
+        {
             var dataSource = endpoints.DataSources.OfType<PageActionEndpointDataSource>()
                 .FirstOrDefault();
             if (dataSource == null)
@@ -477,7 +483,8 @@ namespace Microsoft.AspNetCore.Builder
         private static void RegisterInCache(
             IServiceProvider serviceProvider,
             PageActionEndpointDataSource dataSource
-        ) {
+        )
+        {
             var cache = serviceProvider.GetRequiredService<DynamicPageEndpointSelectorCache>();
             cache.AddDataSource(dataSource);
         }

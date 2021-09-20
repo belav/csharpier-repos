@@ -90,7 +90,8 @@ namespace System.IO.Tests
                         "*",
                         SearchOption.AllDirectories
                     )
-                ) {
+                )
+                {
                     // DirectoryInfo.Exists should work with or without \\?\ for folders with trailing dots
                     Assert.True(dirInfo.Exists);
 
@@ -105,7 +106,8 @@ namespace System.IO.Tests
                             "*.*",
                             SearchOption.TopDirectoryOnly
                         )
-                    ) {
+                    )
+                    {
                         // FileInfo.Exists should work with or without \\?\ for folders with trailing dots
                         Assert.True(fileInfo.Exists);
 

@@ -20,7 +20,8 @@ namespace Microsoft.CodeAnalysis.ExternalAccess.Razor
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
         public RazorAsynchronousOperationListenerProviderAccessor(
             IAsynchronousOperationListenerProvider implementation
-        ) {
+        )
+        {
             _implementation = implementation;
         }
 

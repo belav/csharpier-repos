@@ -22,7 +22,8 @@ namespace Microsoft.TestCommon
             Func<TEnum, bool> isDefined,
             Action<TEnum, string> validate,
             TEnum undefined
-        ) {
+        )
+        {
             _isDefined = isDefined;
             _validate = validate;
             _undefined = undefined;
@@ -90,7 +91,8 @@ namespace Microsoft.TestCommon
             int invalidValue,
             Type enumType,
             bool allowDerivedExceptions = false
-        ) {
+        )
+        {
             Assert.ThrowsInvalidEnumArgument(
                 testCode,
                 parameterName,

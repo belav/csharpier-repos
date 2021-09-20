@@ -216,7 +216,8 @@ namespace System.Data
             if (
                 _table._fInLoadDiffgram
                 || (_table.DataSet != null && _table.DataSet._fInLoadDiffgram)
-            ) {
+            )
+            {
                 return;
             }
 
@@ -1188,7 +1189,8 @@ namespace System.Data
             DataColumn[] columns,
             DataRowVersion version1,
             DataRowVersion version2
-        ) {
+        )
+        {
             for (int i = 0; i < columns.Length; i++)
             {
                 CheckColumn(columns[i]);
@@ -1253,7 +1255,8 @@ namespace System.Data
                     if (
                         _columns.ColumnsImplementingIChangeTrackingCount
                         != _columns.ColumnsImplementingIRevertibleChangeTrackingCount
-                    ) {
+                    )
+                    {
                         foreach (DataColumn dc in _columns.ColumnsImplementingIChangeTracking)
                         {
                             if (!dc.ImplementsIRevertibleChangeTracking)
@@ -1534,14 +1537,16 @@ namespace System.Data
             DataColumn column,
             DataRowVersion version,
             object valueFromStorage
-        ) {
+        )
+        {
             // ignore deleted rows by adding "newRecord != -1" condition - we do not evaluate computed rows if they are deleted
             if (
                 column.DataExpression != null
                 && !_inChangingEvent
                 && _tempRecord == -1
                 && _newRecord != -1
-            ) {
+            )
+            {
                 // for unchanged rows, check current if original is asked for.
                 // this is because by design, there is only single storage for an unchanged row.
                 if (version == DataRowVersion.Original && _oldRecord == _newRecord)

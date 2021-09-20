@@ -225,11 +225,8 @@ namespace System.Net.Http
 
         public class TestableObjectContent : ObjectContent
         {
-            public TestableObjectContent(
-                Type type,
-                object value,
-                MediaTypeFormatter formatter
-            ) : base(type, value, formatter) { }
+            public TestableObjectContent(Type type, object value, MediaTypeFormatter formatter)
+                : base(type, value, formatter) { }
 
             public bool CallTryComputeLength(out long length)
             {
@@ -265,7 +262,8 @@ namespace System.Net.Http
                 Stream stream,
                 HttpContent content,
                 TransportContext transportContext
-            ) {
+            )
+            {
                 throw new NotImplementedException();
             }
         }

@@ -68,7 +68,8 @@ namespace Microsoft.CodeAnalysis.Formatting
         public static bool ContainsElasticTrivia(
             this SuppressOperation operation,
             TokenStream tokenStream
-        ) {
+        )
+        {
             var startToken = tokenStream.GetTokenData(operation.StartToken);
             var nextToken = startToken.GetNextTokenData();
             var endToken = tokenStream.GetTokenData(operation.EndToken);
@@ -111,7 +112,8 @@ namespace Microsoft.CodeAnalysis.Formatting
             this int desiredIndentation,
             bool useTab,
             int tabSize
-        ) {
+        )
+        {
             var numberOfTabs = 0;
             var numberOfSpaces = Math.Max(0, desiredIndentation);
 
@@ -129,7 +131,8 @@ namespace Microsoft.CodeAnalysis.Formatting
             int desiredIndentation,
             bool useTab,
             int tabSize
-        ) {
+        )
+        {
             var numberOfTabs = 0;
             var numberOfSpaces = Math.Max(0, desiredIndentation);
 
@@ -150,7 +153,8 @@ namespace Microsoft.CodeAnalysis.Formatting
             int tabSize,
             out int lineBreaks,
             out int spaceOrIndentation
-        ) {
+        )
+        {
             // initialize out param
             lineBreaks = text.GetNumberOfLineBreaks();
 
@@ -186,7 +190,8 @@ namespace Microsoft.CodeAnalysis.Formatting
             int indentationDelta,
             bool useTab,
             int tabSize
-        ) {
+        )
+        {
             var isEmptyString = false;
             var builder = StringBuilderPool.Allocate();
 
@@ -227,7 +232,8 @@ namespace Microsoft.CodeAnalysis.Formatting
             bool useTab,
             int tabSize,
             string newLine
-        ) {
+        )
+        {
             var builder = StringBuilderPool.Allocate();
 
             // split xml doc comments into lines
@@ -280,7 +286,8 @@ namespace Microsoft.CodeAnalysis.Formatting
             int indentation,
             int indentationDelta,
             int tabSize
-        ) {
+        )
+        {
             if (forceIndentation)
             {
                 return indentation;
@@ -336,7 +343,8 @@ namespace Microsoft.CodeAnalysis.Formatting
         internal static IEnumerable<TextSpan> GetAnnotatedSpans(
             SyntaxNode node,
             SyntaxAnnotation annotation
-        ) {
+        )
+        {
             foreach (var nodeOrToken in node.GetAnnotatedNodesAndTokens(annotation))
             {
                 var firstToken = nodeOrToken.IsNode
@@ -412,7 +420,8 @@ namespace Microsoft.CodeAnalysis.Formatting
             ISyntaxFacts syntaxFacts,
             SyntaxNode root,
             SyntaxToken indentationAnchor
-        ) {
+        )
+        {
             if (operation.Option.IsOn(IndentBlockOption.AbsolutePosition))
             {
                 // Absolute positioning is absolute
@@ -443,7 +452,8 @@ namespace Microsoft.CodeAnalysis.Formatting
                     operation.BaseToken.SpanStart,
                     out conditionStatement
                 )
-            ) {
+            )
+            {
                 if (conditionStatement.GetFirstToken() == indentationAnchor)
                 {
                     // The node is located within the condition of a conditional block statement (or

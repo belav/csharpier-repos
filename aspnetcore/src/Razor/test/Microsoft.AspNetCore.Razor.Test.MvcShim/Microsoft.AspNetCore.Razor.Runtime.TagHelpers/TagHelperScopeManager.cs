@@ -21,7 +21,8 @@ namespace Microsoft.AspNetCore.Razor.Runtime.TagHelpers
             TagMode tagMode,
             string uniqueId,
             Func<Task> executeChildContentAsync
-        ) {
+        )
+        {
             throw null;
         }
 

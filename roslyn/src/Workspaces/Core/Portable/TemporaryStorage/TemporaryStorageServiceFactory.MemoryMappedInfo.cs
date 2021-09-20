@@ -66,7 +66,8 @@ namespace Microsoft.CodeAnalysis.Host
                 string name,
                 long offset,
                 long size
-            ) {
+            )
+            {
                 _memoryMappedFile = memoryMappedFile;
                 Name = name;
                 Offset = offset;
@@ -171,7 +172,8 @@ namespace Microsoft.CodeAnalysis.Host
             private static T RunWithCompactingGCFallback<TArg, T>(
                 Func<TArg, T> function,
                 TArg argument
-            ) {
+            )
+            {
                 try
                 {
                     return function(argument);
@@ -212,7 +214,8 @@ namespace Microsoft.CodeAnalysis.Host
                 public SharedReadableStream(
                     ReferenceCountedDisposable<MemoryMappedViewAccessor> accessor,
                     long length
-                ) {
+                )
+                {
                     _accessor = accessor;
                     _current = _start =
                         (byte*)_accessor.Target.SafeMemoryMappedViewHandle.DangerousGetHandle()

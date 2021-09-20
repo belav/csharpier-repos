@@ -15,7 +15,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             ITypeSymbol type,
             object constantValue,
             bool preferNumericValueOrExpandedFlagsForEnum = false
-        ) {
+        )
+        {
             if (constantValue != null)
             {
                 AddNonNullConstantValue(
@@ -28,7 +29,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                 type.IsReferenceType
                 || type.TypeKind == TypeKind.Pointer
                 || ITypeSymbolHelpers.IsNullableType(type)
-            ) {
+            )
+            {
                 AddKeyword(SyntaxKind.NullKeyword);
             }
             else
@@ -38,7 +40,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                     !format.MiscellaneousOptions.IncludesOption(
                         SymbolDisplayMiscellaneousOptions.AllowDefaultLiteral
                     )
-                ) {
+                )
+                {
                     AddPunctuation(SyntaxKind.OpenParenToken);
                     type.Accept(this.NotFirstVisitor);
                     AddPunctuation(SyntaxKind.CloseParenToken);
@@ -50,7 +53,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             INamedTypeSymbol namedType,
             SpecialType type,
             object value
-        ) {
+        )
+        {
             AddPunctuation(SyntaxKind.OpenParenToken);
             namedType.Accept(this.NotFirstVisitor);
             AddPunctuation(SyntaxKind.CloseParenToken);

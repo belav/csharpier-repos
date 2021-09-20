@@ -28,7 +28,8 @@ namespace Internal.Cryptography
             int offset,
             int count,
             HashAlgorithmName hashAlgorithm
-        ) {
+        )
+        {
             // The classes that call us are sealed and their base class has checked this already.
             Debug.Assert(data != null);
             Debug.Assert(count >= 0 && count <= data.Length);
@@ -87,7 +88,8 @@ namespace Internal.Cryptography
             Span<byte> destination,
             HashAlgorithmName hashAlgorithm,
             out int bytesWritten
-        ) {
+        )
+        {
             // The classes that call us are sealed and their base class has checked this already.
             Debug.Assert(!string.IsNullOrEmpty(hashAlgorithm.Name));
 

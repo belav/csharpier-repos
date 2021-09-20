@@ -397,7 +397,8 @@ namespace ILCompiler
         private static bool ImplementsEquivalentInterface(
             this TypeDesc type,
             TypeDesc interfaceType
-        ) {
+        )
+        {
             foreach (DefType implementedInterface in type.RuntimeInterfaces)
             {
                 if (implementedInterface == interfaceType)
@@ -448,7 +449,8 @@ namespace ILCompiler
         public static Instantiation GetInstantiationThatMeetsConstraints(
             Instantiation inst,
             bool allowCanon
-        ) {
+        )
+        {
             TypeDesc[] resultArray = new TypeDesc[inst.Length];
             for (int i = 0; i < inst.Length; i++)
             {
@@ -467,7 +469,8 @@ namespace ILCompiler
         private static TypeDesc GetTypeThatMeetsConstraints(
             GenericParameterDesc genericParam,
             bool allowCanon
-        ) {
+        )
+        {
             TypeSystemContext context = genericParam.Context;
 
             // Universal canon is the best option if it's supported
@@ -518,7 +521,8 @@ namespace ILCompiler
         public static bool ContainsSignatureVariables(
             this Instantiation instantiation,
             bool treatGenericParameterLikeSignatureVariable = false
-        ) {
+        )
+        {
             foreach (var arg in instantiation)
             {
                 if (arg.ContainsSignatureVariables(treatGenericParameterLikeSignatureVariable))

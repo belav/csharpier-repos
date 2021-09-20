@@ -68,7 +68,8 @@ namespace System.Web.Razor.Parser
         protected virtual bool IsAtEmbeddedTransition(
             bool allowTemplatesAndComments,
             bool allowTransitions
-        ) {
+        )
+        {
             return false;
         }
 

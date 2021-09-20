@@ -106,7 +106,8 @@ namespace System.Web.Mvc.Html
             DataBoundControlMode mode,
             GetViewNamesDelegate getViewNames,
             GetDefaultActionsDelegate getDefaultActions
-        ) {
+        )
+        {
             Dictionary<string, ActionCacheItem> actionCache = GetActionCache(html);
             Dictionary<string, Func<HtmlHelper, string>> defaultActions = getDefaultActions(mode);
             string modeViewPath = _modeViewPaths[mode];
@@ -118,7 +119,8 @@ namespace System.Web.Mvc.Html
                     viewData.ModelMetadata.TemplateHint,
                     viewData.ModelMetadata.DataTypeName
                 )
-            ) {
+            )
+            {
                 string fullViewName = modeViewPath + "/" + viewName;
                 ActionCacheItem cacheItem;
 
@@ -201,7 +203,8 @@ namespace System.Web.Mvc.Html
 
         internal static Dictionary<string, Func<HtmlHelper, string>> GetDefaultActions(
             DataBoundControlMode mode
-        ) {
+        )
+        {
             return mode == DataBoundControlMode.ReadOnly
               ? _defaultDisplayActions
               : _defaultEditorActions;
@@ -210,7 +213,8 @@ namespace System.Web.Mvc.Html
         internal static IEnumerable<string> GetViewNames(
             ModelMetadata metadata,
             params string[] templateHints
-        ) {
+        )
+        {
             foreach (string templateHint in templateHints.Where(s => !String.IsNullOrEmpty(s)))
             {
                 yield return templateHint;
@@ -281,7 +285,8 @@ namespace System.Web.Mvc.Html
             string htmlFieldName,
             DataBoundControlMode mode,
             object additionalViewData
-        ) {
+        )
+        {
             return MvcHtmlString.Create(
                 Template(
                     html,
@@ -304,7 +309,8 @@ namespace System.Web.Mvc.Html
             DataBoundControlMode mode,
             object additionalViewData,
             TemplateHelperDelegate templateHelper
-        ) {
+        )
+        {
             return templateHelper(
                 html,
                 ModelMetadata.FromStringExpression(expression, html.ViewData),
@@ -322,7 +328,8 @@ namespace System.Web.Mvc.Html
             string htmlFieldName,
             DataBoundControlMode mode,
             object additionalViewData
-        ) {
+        )
+        {
             return MvcHtmlString.Create(
                 TemplateFor(
                     html,
@@ -345,7 +352,8 @@ namespace System.Web.Mvc.Html
             DataBoundControlMode mode,
             object additionalViewData,
             TemplateHelperDelegate templateHelper
-        ) {
+        )
+        {
             return templateHelper(
                 html,
                 ModelMetadata.FromLambdaExpression(expression, html.ViewData),
@@ -363,7 +371,8 @@ namespace System.Web.Mvc.Html
             string templateName,
             DataBoundControlMode mode,
             object additionalViewData
-        ) {
+        )
+        {
             return TemplateHelper(
                 html,
                 metadata,
@@ -383,7 +392,8 @@ namespace System.Web.Mvc.Html
             DataBoundControlMode mode,
             object additionalViewData,
             ExecuteTemplateDelegate executeTemplate
-        ) {
+        )
+        {
             // TODO: Convert Editor into Display if model.IsReadOnly is true? Need to be careful about this because
             // the Model property on the ViewPage/ViewUserControl is get-only, so the type descriptor automatically
             // decorates it with a [ReadOnly] attribute...
@@ -419,7 +429,8 @@ namespace System.Web.Mvc.Html
                 html.ViewDataContainer.ViewData.TemplateInfo.VisitedObjects.Contains(
                     visitedObjectsKey
                 )
-            ) {
+            )
+            {
                 // DDB #224750
                 return String.Empty;
             }
@@ -446,7 +457,8 @@ namespace System.Web.Mvc.Html
                     KeyValuePair<string, object> kvp in TypeHelper.ObjectToDictionary(
                         additionalViewData
                     )
-                ) {
+                )
+                {
                     viewData[kvp.Key] = kvp.Value;
                 }
             }

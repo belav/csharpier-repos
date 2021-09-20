@@ -333,7 +333,8 @@ namespace System.Net.Http
         protected internal override HttpResponseMessage Send(
             HttpRequestMessage request,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             return DiagnosticsHandler.IsEnabled() && _diagnosticsHandler != null
               ? _diagnosticsHandler.Send(request, cancellationToken)
               : _underlyingHandler.Send(request, cancellationToken);
@@ -342,7 +343,8 @@ namespace System.Net.Http
         protected internal override Task<HttpResponseMessage> SendAsync(
             HttpRequestMessage request,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             return DiagnosticsHandler.IsEnabled() && _diagnosticsHandler != null
               ? _diagnosticsHandler.SendAsync(request, cancellationToken)
               : _underlyingHandler.SendAsync(request, cancellationToken);

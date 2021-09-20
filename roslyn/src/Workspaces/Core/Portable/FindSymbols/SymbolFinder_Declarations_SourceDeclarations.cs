@@ -42,13 +42,15 @@ namespace Microsoft.CodeAnalysis.FindSymbols
             bool ignoreCase,
             SymbolFilter filter,
             CancellationToken cancellationToken = default
-        ) {
+        )
+        {
             using (
                 Logger.LogBlock(
                     FunctionId.SymbolFinder_Solution_Name_FindSourceDeclarationsAsync,
                     cancellationToken
                 )
-            ) {
+            )
+            {
                 var declarations =
                     await DeclarationFinder.FindSourceDeclarationsWithNormalQueryAsync(
                             solution,
@@ -88,13 +90,15 @@ namespace Microsoft.CodeAnalysis.FindSymbols
             bool ignoreCase,
             SymbolFilter filter,
             CancellationToken cancellationToken = default
-        ) {
+        )
+        {
             using (
                 Logger.LogBlock(
                     FunctionId.SymbolFinder_Project_Name_FindSourceDeclarationsAsync,
                     cancellationToken
                 )
-            ) {
+            )
+            {
                 var declarations =
                     await DeclarationFinder.FindSourceDeclarationsWithNormalQueryAsync(
                             project,
@@ -142,13 +146,15 @@ namespace Microsoft.CodeAnalysis.FindSymbols
             string pattern,
             SymbolFilter filter,
             CancellationToken cancellationToken = default
-        ) {
+        )
+        {
             using (
                 Logger.LogBlock(
                     FunctionId.SymbolFinder_Solution_Pattern_FindSourceDeclarationsAsync,
                     cancellationToken
                 )
-            ) {
+            )
+            {
                 var declarations = await DeclarationFinder.FindSourceDeclarationsWithPatternAsync(
                         solution,
                         pattern,
@@ -191,13 +197,15 @@ namespace Microsoft.CodeAnalysis.FindSymbols
             string pattern,
             SymbolFilter filter,
             CancellationToken cancellationToken = default
-        ) {
+        )
+        {
             using (
                 Logger.LogBlock(
                     FunctionId.SymbolFinder_Project_Pattern_FindSourceDeclarationsAsync,
                     cancellationToken
                 )
-            ) {
+            )
+            {
                 var declarations = await DeclarationFinder.FindSourceDeclarationsWithPatternAsync(
                         project,
                         pattern,

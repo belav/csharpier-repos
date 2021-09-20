@@ -18,7 +18,8 @@ namespace Microsoft.CodeAnalysis.Editor.GoToBase
             Document document,
             int position,
             IFindUsagesContext context
-        ) {
+        )
+        {
             var cancellationToken = context.CancellationToken;
             var symbolAndProjectOpt =
                 await FindUsagesHelpers.GetRelevantSymbolAndProjectAtPositionAsync(

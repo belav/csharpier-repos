@@ -155,7 +155,8 @@ namespace Microsoft.AspNetCore.Mvc.IntegrationTests
         public async Task BindModelAsync_WithBindProperty_EnforcesBindRequired(
             int? input,
             bool isValid
-        ) {
+        )
+        {
             // Arrange
             var parameterBinder = ModelBindingTestHelper.GetParameterBinder();
             var parameter = new ParameterDescriptor()
@@ -206,7 +207,8 @@ namespace Microsoft.AspNetCore.Mvc.IntegrationTests
         public async Task BindModelAsync_WithBindPageProperty_EnforcesBindRequired(
             int? input,
             bool isValid
-        ) {
+        )
+        {
             // Arrange
             var propertyInfo = typeof(TestPage).GetProperty(nameof(TestPage.BindRequiredProperty));
             var propertyDescriptor = new PageBoundPropertyDescriptor
@@ -292,7 +294,8 @@ namespace Microsoft.AspNetCore.Mvc.IntegrationTests
             string input,
             bool isValid,
             string displayName = null
-        ) {
+        )
+        {
             // Arrange
             var parameterBinder = ModelBindingTestHelper.GetParameterBinder();
             var parameter = new ParameterDescriptor()

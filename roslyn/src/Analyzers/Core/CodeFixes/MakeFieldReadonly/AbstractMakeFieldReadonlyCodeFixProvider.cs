@@ -50,7 +50,8 @@ namespace Microsoft.CodeAnalysis.MakeFieldReadonly
             ImmutableArray<Diagnostic> diagnostics,
             SyntaxEditor editor,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var declarators = new List<TSymbolSyntax>();
             var root = await document.GetSyntaxRootAsync(cancellationToken).ConfigureAwait(false);
             foreach (var diagnostic in diagnostics)
@@ -70,7 +71,8 @@ namespace Microsoft.CodeAnalysis.MakeFieldReadonly
             Document document,
             SyntaxEditor editor,
             List<TSymbolSyntax> declarators
-        ) {
+        )
+        {
             var declaratorsByField = declarators.GroupBy(
                 g => g.FirstAncestorOrSelf<TFieldDeclarationSyntax>()
             );
@@ -121,9 +123,8 @@ namespace Microsoft.CodeAnalysis.MakeFieldReadonly
 
         private class MyCodeAction : CustomCodeActions.DocumentChangeAction
         {
-            public MyCodeAction(
-                Func<CancellationToken, Task<Document>> createChangedDocument
-            ) : base(AnalyzersResources.Add_readonly_modifier, createChangedDocument) { }
+            public MyCodeAction(Func<CancellationToken, Task<Document>> createChangedDocument)
+                : base(AnalyzersResources.Add_readonly_modifier, createChangedDocument) { }
         }
     }
 }

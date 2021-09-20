@@ -137,7 +137,8 @@ namespace Microsoft.AspNetCore.Authentication.JwtBearer
                                 Options.RefreshOnIssuerKeyNotFound
                                 && Options.ConfigurationManager != null
                                 && ex is SecurityTokenSignatureKeyNotFoundException
-                            ) {
+                            )
+                            {
                                 Options.ConfigurationManager.RequestRefresh();
                             }
 
@@ -259,7 +260,8 @@ namespace Microsoft.AspNetCore.Authentication.JwtBearer
                 string.IsNullOrEmpty(eventContext.Error)
                 && string.IsNullOrEmpty(eventContext.ErrorDescription)
                 && string.IsNullOrEmpty(eventContext.ErrorUri)
-            ) {
+            )
+            {
                 Response.Headers.Append(HeaderNames.WWWAuthenticate, Options.Challenge);
             }
             else
@@ -294,7 +296,8 @@ namespace Microsoft.AspNetCore.Authentication.JwtBearer
                     if (
                         !string.IsNullOrEmpty(eventContext.Error)
                         || !string.IsNullOrEmpty(eventContext.ErrorDescription)
-                    ) {
+                    )
+                    {
                         builder.Append(',');
                     }
 

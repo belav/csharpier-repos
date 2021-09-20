@@ -29,7 +29,8 @@ internal static partial class Interop
             int keySizeInBits,
             out SafeSecKeyRefHandle pPublicKey,
             out SafeSecKeyRefHandle pPrivateKey
-        ) {
+        )
+        {
             using (SafeTemporaryKeychainHandle tempKeychain = CreateTemporaryKeychain())
             {
                 SafeSecKeyRefHandle keychainPublic;

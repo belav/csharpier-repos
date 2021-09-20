@@ -28,7 +28,8 @@ namespace System.IO.Ports.Tests
                 SerialPort com2 = new SerialPort(
                     TCSupport.LocalMachineSerialInfo.SecondAvailablePortName
                 )
-            ) {
+            )
+            {
                 ErrorEventHandler errEventHandler = new ErrorEventHandler(com1);
 
                 Debug.WriteLine("Verifying RxOver event");
@@ -74,7 +75,8 @@ namespace System.IO.Ports.Tests
                 SerialPort com2 = new SerialPort(
                     TCSupport.LocalMachineSerialInfo.SecondAvailablePortName
                 )
-            ) {
+            )
+            {
                 ErrorEventHandler errEventHandler = new ErrorEventHandler(com1);
 
                 Debug.WriteLine("Verifying RxParity event");
@@ -120,7 +122,8 @@ namespace System.IO.Ports.Tests
                 SerialPort com2 = new SerialPort(
                     TCSupport.LocalMachineSerialInfo.SecondAvailablePortName
                 )
-            ) {
+            )
+            {
                 ErrorEventHandler errEventHandler = new ErrorEventHandler(com1);
 
                 Debug.WriteLine("Verifying Frame event");

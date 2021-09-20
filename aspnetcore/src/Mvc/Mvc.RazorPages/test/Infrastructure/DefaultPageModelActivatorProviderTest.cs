@@ -110,7 +110,8 @@ namespace Microsoft.AspNetCore.Mvc.RazorPages.Infrastructure
         [InlineData(typeof(object))]
         public void CreateAsyncReleaser_ReturnsNullForModelsThatDoNotImplementDisposable(
             Type pageType
-        ) {
+        )
+        {
             // Arrange
             var context = new PageContext();
             var activator = new DefaultPageModelActivatorProvider();

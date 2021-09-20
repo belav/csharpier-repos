@@ -58,20 +58,22 @@ namespace Microsoft.EntityFrameworkCore.Update
             bool isKey,
             bool isCondition,
             bool sensitiveLoggingEnabled
-        ) : this(
-            Check.NotNull(column, nameof(column)).Name,
-            originalValue: null,
-            value: null,
-            property: property,
-            column.StoreType,
-            typeMapping,
-            isRead: isRead,
-            isWrite: isWrite,
-            isKey: isKey,
-            isCondition: isCondition,
-            sensitiveLoggingEnabled: sensitiveLoggingEnabled,
-            column.IsNullable
-        ) {
+        )
+            : this(
+                Check.NotNull(column, nameof(column)).Name,
+                originalValue: null,
+                value: null,
+                property: property,
+                column.StoreType,
+                typeMapping,
+                isRead: isRead,
+                isWrite: isWrite,
+                isKey: isKey,
+                isCondition: isCondition,
+                sensitiveLoggingEnabled: sensitiveLoggingEnabled,
+                column.IsNullable
+            )
+        {
             Check.NotNull(entry, nameof(entry));
             Check.NotNull(property, nameof(property));
             Check.NotNull(generateParameterName, nameof(generateParameterName));
@@ -104,18 +106,21 @@ namespace Microsoft.EntityFrameworkCore.Update
             bool isCondition,
             bool isConcurrencyToken,
             bool sensitiveLoggingEnabled
-        ) : this(
-            entry,
-            property,
-            Check.NotNull(property, nameof(property)).GetTableColumnMappings().First().Column,
-            generateParameterName,
-            Check.NotNull(property, nameof(property)).GetTableColumnMappings().First().TypeMapping,
-            isRead: isRead,
-            isWrite: isWrite,
-            isKey: isKey,
-            isCondition: isCondition,
-            sensitiveLoggingEnabled: sensitiveLoggingEnabled
-        ) { }
+        )
+            : this(
+                entry,
+                property,
+                Check.NotNull(property, nameof(property)).GetTableColumnMappings().First().Column,
+                generateParameterName,
+                Check.NotNull(property, nameof(property))
+                    .GetTableColumnMappings()
+                    .First().TypeMapping,
+                isRead: isRead,
+                isWrite: isWrite,
+                isKey: isKey,
+                isCondition: isCondition,
+                sensitiveLoggingEnabled: sensitiveLoggingEnabled
+            ) { }
 
         /// <summary>
         ///     Creates a new <see cref="ColumnModification" /> instance.
@@ -145,7 +150,8 @@ namespace Microsoft.EntityFrameworkCore.Update
             bool isCondition,
             bool sensitiveLoggingEnabled,
             bool? isNullable = null
-        ) {
+        )
+        {
             Check.NotNull(columnName, nameof(columnName));
 
             ColumnName = columnName;
@@ -187,7 +193,8 @@ namespace Microsoft.EntityFrameworkCore.Update
             bool isKey,
             bool isCondition,
             bool sensitiveLoggingEnabled
-        ) {
+        )
+        {
             Check.NotNull(columnName, nameof(columnName));
 
             ColumnName = columnName;
@@ -225,18 +232,19 @@ namespace Microsoft.EntityFrameworkCore.Update
             bool isKey,
             bool isCondition,
             bool sensitiveLoggingEnabled
-        ) : this(
-            columnName,
-            originalValue: originalValue,
-            value: value,
-            property: property,
-            columnType: null,
-            isRead: isRead,
-            isWrite: isWrite,
-            isKey: isKey,
-            isCondition: isCondition,
-            sensitiveLoggingEnabled: sensitiveLoggingEnabled
-        ) { }
+        )
+            : this(
+                columnName,
+                originalValue: originalValue,
+                value: value,
+                property: property,
+                columnType: null,
+                isRead: isRead,
+                isWrite: isWrite,
+                isKey: isKey,
+                isCondition: isCondition,
+                sensitiveLoggingEnabled: sensitiveLoggingEnabled
+            ) { }
 
         /// <summary>
         ///     The <see cref="IUpdateEntry" /> that represents the entity that is being modified.
@@ -383,7 +391,8 @@ namespace Microsoft.EntityFrameworkCore.Update
                     Value,
                     modification.Value
                 )
-            ) {
+            )
+            {
                 if (_sensitiveLoggingEnabled)
                 {
                     throw new InvalidOperationException(
@@ -419,12 +428,14 @@ namespace Microsoft.EntityFrameworkCore.Update
                     OriginalValue,
                     modification.OriginalValue
                 )
-            ) {
+            )
+            {
                 if (
                     Entry.EntityState == EntityState.Modified
                     && modification.Entry.EntityState == EntityState.Added
                     && modification.Entry.SharedIdentityEntry == null
-                ) {
+                )
+                {
                     modification.Entry.SetOriginalValue(modification.Property, OriginalValue);
                 }
                 else

@@ -231,7 +231,8 @@ namespace Microsoft.AspNetCore.Mvc.Controllers
 
         private static DefaultControllerFactory CreateControllerFactory(
             IControllerActivator controllerActivator = null
-        ) {
+        )
+        {
             var activatorMock = new Mock<IControllerActivator>();
 
             controllerActivator = controllerActivator ?? activatorMock.Object;

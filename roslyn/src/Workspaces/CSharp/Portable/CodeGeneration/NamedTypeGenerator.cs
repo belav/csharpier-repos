@@ -26,7 +26,8 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeGeneration
             CodeGenerationOptions options,
             IList<bool> availableIndices,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var declaration = GenerateNamedTypeDeclaration(
                 service,
                 namedType,
@@ -46,7 +47,8 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeGeneration
             CodeGenerationOptions options,
             IList<bool> availableIndices,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var declaration = GenerateNamedTypeDeclaration(
                 service,
                 namedType,
@@ -68,7 +70,8 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeGeneration
             CodeGenerationOptions options,
             IList<bool> availableIndices,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var declaration = GenerateNamedTypeDeclaration(
                 service,
                 namedType,
@@ -86,7 +89,8 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeGeneration
             CodeGenerationDestination destination,
             CodeGenerationOptions options,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             options ??= CodeGenerationOptions.Default;
 
             var declaration = GetDeclarationSyntaxWithoutMembers(namedType, destination, options);
@@ -145,7 +149,8 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeGeneration
             RecordDeclarationSyntax recordDeclaration,
             ImmutableArray<ISymbol> members,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             // For a record, add record parameters if we have a primary constructor.
             var primaryConstructor = members.OfType<IMethodSymbol>()
                 .FirstOrDefault(m => CodeGenerationConstructorInfo.GetIsPrimaryConstructor(m));
@@ -205,7 +210,8 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeGeneration
             IList<ISymbol> newMembers,
             CodeGenerationOptions options,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             declaration = RemoveAllMembers(declaration);
             declaration = service.AddMembers(declaration, newMembers, options, cancellationToken);
             return AddFormatterAndCodeGeneratorAnnotationsTo(declaration);
@@ -215,7 +221,8 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeGeneration
             INamedTypeSymbol namedType,
             CodeGenerationDestination destination,
             CodeGenerationOptions options
-        ) {
+        )
+        {
             var reusableDeclarationSyntax =
                 GetReuseableSyntaxNodeForSymbol<MemberDeclarationSyntax>(namedType, options);
             return reusableDeclarationSyntax == null
@@ -244,7 +251,8 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeGeneration
             INamedTypeSymbol namedType,
             CodeGenerationDestination destination,
             CodeGenerationOptions options
-        ) {
+        )
+        {
             if (namedType.TypeKind == TypeKind.Enum)
             {
                 return GenerateEnumDeclaration(namedType, destination, options);
@@ -292,7 +300,8 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeGeneration
             INamedTypeSymbol namedType,
             CodeGenerationDestination destination,
             CodeGenerationOptions options
-        ) {
+        )
+        {
             var invokeMethod = namedType.DelegateInvokeMethod;
             Contract.ThrowIfNull(invokeMethod);
 
@@ -315,7 +324,8 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeGeneration
             INamedTypeSymbol namedType,
             CodeGenerationDestination destination,
             CodeGenerationOptions options
-        ) {
+        )
+        {
             var baseList =
                 namedType.EnumUnderlyingType != null
                 && namedType.EnumUnderlyingType.SpecialType != SpecialType.System_Int32
@@ -340,7 +350,8 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeGeneration
         private static SyntaxList<AttributeListSyntax> GenerateAttributeDeclarations(
             INamedTypeSymbol namedType,
             CodeGenerationOptions options
-        ) {
+        )
+        {
             return AttributeGenerator.GenerateAttributeLists(namedType.GetAttributes(), options);
         }
 
@@ -348,7 +359,8 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeGeneration
             INamedTypeSymbol namedType,
             CodeGenerationDestination destination,
             CodeGenerationOptions options
-        ) {
+        )
+        {
             var tokens = ArrayBuilder<SyntaxToken>.GetInstance();
 
             var defaultAccessibility =
@@ -400,7 +412,8 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeGeneration
         private static TypeParameterListSyntax GenerateTypeParameterList(
             INamedTypeSymbol namedType,
             CodeGenerationOptions options
-        ) {
+        )
+        {
             return TypeParameterGenerator.GenerateTypeParameterList(
                 namedType.TypeParameters,
                 options

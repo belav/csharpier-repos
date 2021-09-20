@@ -64,14 +64,16 @@ namespace System.Runtime.CompilerServices
         public void AwaitOnCompleted<TAwaiter, TStateMachine>(
             ref TAwaiter awaiter,
             ref TStateMachine stateMachine
-        ) where TAwaiter : INotifyCompletion
-          where TStateMachine : IAsyncStateMachine { }
+        )
+            where TAwaiter : INotifyCompletion
+            where TStateMachine : IAsyncStateMachine { }
 
         public void AwaitUnsafeOnCompleted<TAwaiter, TStateMachine>(
             ref TAwaiter awaiter,
             ref TStateMachine stateMachine
-        ) where TAwaiter : ICriticalNotifyCompletion
-          where TStateMachine : IAsyncStateMachine { }
+        )
+            where TAwaiter : ICriticalNotifyCompletion
+            where TStateMachine : IAsyncStateMachine { }
 
         public void SetResult() { }
         public void SetException(Exception exception) { }
@@ -92,14 +94,16 @@ namespace System.Runtime.CompilerServices
         public void AwaitOnCompleted<TAwaiter, TStateMachine>(
             ref TAwaiter awaiter,
             ref TStateMachine stateMachine
-        ) where TAwaiter : INotifyCompletion
-          where TStateMachine : IAsyncStateMachine { }
+        )
+            where TAwaiter : INotifyCompletion
+            where TStateMachine : IAsyncStateMachine { }
 
         public void AwaitUnsafeOnCompleted<TAwaiter, TStateMachine>(
             ref TAwaiter awaiter,
             ref TStateMachine stateMachine
-        ) where TAwaiter : ICriticalNotifyCompletion
-          where TStateMachine : IAsyncStateMachine { }
+        )
+            where TAwaiter : ICriticalNotifyCompletion
+            where TStateMachine : IAsyncStateMachine { }
 
         public Task Task => null;
         public void SetResult() { }
@@ -117,14 +121,16 @@ namespace System.Runtime.CompilerServices
         public void AwaitOnCompleted<TAwaiter, TStateMachine>(
             ref TAwaiter awaiter,
             ref TStateMachine stateMachine
-        ) where TAwaiter : INotifyCompletion
-          where TStateMachine : IAsyncStateMachine { }
+        )
+            where TAwaiter : INotifyCompletion
+            where TStateMachine : IAsyncStateMachine { }
 
         public void AwaitUnsafeOnCompleted<TAwaiter, TStateMachine>(
             ref TAwaiter awaiter,
             ref TStateMachine stateMachine
-        ) where TAwaiter : ICriticalNotifyCompletion
-          where TStateMachine : IAsyncStateMachine { }
+        )
+            where TAwaiter : ICriticalNotifyCompletion
+            where TStateMachine : IAsyncStateMachine { }
 
         public Task<TResult> Task => null;
         public void SetResult(TResult result) { }

@@ -28,7 +28,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.IntelliSense.AsyncComplet
         internal static RoslynTrigger GetRoslynTrigger(
             EditorAsyncCompletionData.CompletionTrigger trigger,
             SnapshotPoint triggerLocation
-        ) {
+        )
+        {
             var completionTriggerKind = GetRoslynTriggerKind(trigger);
             if (completionTriggerKind == CompletionTriggerKind.Deletion)
             {
@@ -37,7 +38,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.IntelliSense.AsyncComplet
                 if (
                     triggerLocation.Position >= 0
                     && triggerLocation.Position < snapshotBeforeEdit.Length
-                ) {
+                )
+                {
                     // If multiple characters were removed (selection), this finds the first character from the left.
                     characterRemoved = snapshotBeforeEdit[triggerLocation.Position];
                 }
@@ -56,7 +58,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.IntelliSense.AsyncComplet
 
         internal static CompletionTriggerKind GetRoslynTriggerKind(
             EditorAsyncCompletionData.CompletionTrigger trigger
-        ) {
+        )
+        {
             switch (trigger.Reason)
             {
                 case EditorAsyncCompletionData.CompletionTriggerReason.InvokeAndCommitIfUnique:
@@ -75,7 +78,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.IntelliSense.AsyncComplet
 
         internal static CompletionFilterReason GetFilterReason(
             EditorAsyncCompletionData.CompletionTrigger trigger
-        ) {
+        )
+        {
             switch (trigger.Reason)
             {
                 case EditorAsyncCompletionData.CompletionTriggerReason.Insertion:
@@ -92,7 +96,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.IntelliSense.AsyncComplet
             RoslynCompletionItem item,
             char ch,
             string textTypedSoFar
-        ) {
+        )
+        {
             // Exclude standard commit character upfront because TextTypedSoFarMatchesItem can miss them on non-Windows platforms.
             if (IsStandardCommitCharacter(ch))
             {
@@ -135,7 +140,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.IntelliSense.AsyncComplet
         internal static bool TextTypedSoFarMatchesItem(
             RoslynCompletionItem item,
             string textTypedSoFar
-        ) {
+        )
+        {
             if (textTypedSoFar.Length > 0)
             {
                 // Note that StartsWith ignores \0 at the end of textTypedSoFar on VS Mac and Mono.

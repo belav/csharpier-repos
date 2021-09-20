@@ -20,7 +20,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Structure
             ref TemporaryArray<BlockSpan> spans,
             BlockStructureOptionProvider optionProvider,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             if (node.Parent is InitializerExpressionSyntax)
             {
                 // We have something like:

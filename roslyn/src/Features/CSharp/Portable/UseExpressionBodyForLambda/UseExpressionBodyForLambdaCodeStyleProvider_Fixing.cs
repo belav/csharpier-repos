@@ -22,7 +22,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UseExpressionBodyForLambda
             Document document,
             Diagnostic diagnostic,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var codeAction = new MyCodeAction(
                 diagnostic.GetMessage(),
                 c => FixWithSyntaxEditorAsync(document, diagnostic, c)
@@ -36,7 +37,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UseExpressionBodyForLambda
             ImmutableArray<Diagnostic> diagnostics,
             SyntaxEditor editor,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var semanticModel = await document.GetSemanticModelAsync(cancellationToken)
                 .ConfigureAwait(false);
             foreach (var diagnostic in diagnostics)
@@ -51,7 +53,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UseExpressionBodyForLambda
             SemanticModel semanticModel,
             Diagnostic diagnostic,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var declarationLocation = diagnostic.AdditionalLocations[0];
             var originalDeclaration = (LambdaExpressionSyntax)declarationLocation.FindNode(
                 getInnermostNodeForTie: true,

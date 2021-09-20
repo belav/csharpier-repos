@@ -57,7 +57,8 @@ namespace Microsoft.EntityFrameworkCore.SqlServer.Query.Internal
             public SqlServerCompiledQueryCacheKey(
                 RelationalCompiledQueryCacheKey relationalCompiledQueryCacheKey,
                 bool multipleActiveResultSetsEnabled
-            ) {
+            )
+            {
                 _relationalCompiledQueryCacheKey = relationalCompiledQueryCacheKey;
                 _multipleActiveResultSetsEnabled = multipleActiveResultSetsEnabled;
             }

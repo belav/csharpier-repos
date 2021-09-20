@@ -20,7 +20,8 @@ namespace System.Net.Mail
             SmtpConnection conn,
             AsyncCallback? callback,
             object? state
-        ) {
+        )
+        {
             MultiAsyncResult multiResult = new MultiAsyncResult(conn, callback, state);
             multiResult.Enter();
             IAsyncResult writeResult = conn.BeginFlush(s_onWrite, multiResult);
@@ -116,7 +117,8 @@ namespace System.Net.Mail
             SmtpConnection conn,
             AsyncCallback? callback,
             object? state
-        ) {
+        )
+        {
             MultiAsyncResult multiResult = new MultiAsyncResult(conn, callback, state);
             multiResult.Enter();
             IAsyncResult writeResult = conn.BeginFlush(s_onWrite, multiResult);
@@ -201,7 +203,8 @@ namespace System.Net.Mail
             string message,
             AsyncCallback? callback,
             object? state
-        ) {
+        )
+        {
             PrepareCommand(conn, type, message);
             return ReadLinesCommand.BeginSend(conn, callback, state);
         }
@@ -211,7 +214,8 @@ namespace System.Net.Mail
             string? message,
             AsyncCallback? callback,
             object? state
-        ) {
+        )
+        {
             PrepareCommand(conn, message);
             return ReadLinesCommand.BeginSend(conn, callback, state);
         }
@@ -267,7 +271,8 @@ namespace System.Net.Mail
             SmtpConnection conn,
             AsyncCallback? callback,
             object? state
-        ) {
+        )
+        {
             PrepareCommand(conn);
             return CheckCommand.BeginSend(conn, callback, state);
         }
@@ -377,7 +382,8 @@ namespace System.Net.Mail
             string domain,
             AsyncCallback? callback,
             object? state
-        ) {
+        )
+        {
             PrepareCommand(conn, domain);
             return ReadLinesCommand.BeginSend(conn, callback, state);
         }
@@ -438,7 +444,8 @@ namespace System.Net.Mail
             string domain,
             AsyncCallback? callback,
             object? state
-        ) {
+        )
+        {
             PrepareCommand(conn, domain);
             return CheckCommand.BeginSend(conn, callback, state);
         }
@@ -500,7 +507,8 @@ namespace System.Net.Mail
             SmtpConnection conn,
             AsyncCallback? callback,
             object? state
-        ) {
+        )
+        {
             PrepareCommand(conn);
             return CheckCommand.BeginSend(conn, callback, state);
         }
@@ -563,7 +571,8 @@ namespace System.Net.Mail
             bool allowUnicode,
             AsyncCallback? callback,
             object? state
-        ) {
+        )
+        {
             PrepareCommand(conn, command, from, allowUnicode);
             return CheckCommand.BeginSend(conn, callback, state);
         }
@@ -603,7 +612,8 @@ namespace System.Net.Mail
             byte[] command,
             MailAddress from,
             bool allowUnicode
-        ) {
+        )
+        {
             if (conn.IsStreamOpen)
             {
                 throw new InvalidOperationException(SR.SmtpDataStreamOpen);
@@ -623,7 +633,8 @@ namespace System.Net.Mail
             byte[] command,
             MailAddress from,
             bool allowUnicode
-        ) {
+        )
+        {
             PrepareCommand(conn, command, from, allowUnicode);
             string response;
             SmtpStatusCode statusCode = CheckCommand.Send(conn, out response);
@@ -638,7 +649,8 @@ namespace System.Net.Mail
             string to,
             AsyncCallback? callback,
             object? state
-        ) {
+        )
+        {
             PrepareCommand(conn, to);
             return CheckCommand.BeginSend(conn, callback, state);
         }

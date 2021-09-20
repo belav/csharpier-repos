@@ -32,7 +32,8 @@ namespace Microsoft.EntityFrameworkCore
             bool async,
             bool ambientTransaction,
             bool useCanConnect
-        ) {
+        )
+        {
             return Returns_false_when_database_does_not_exist_test(
                 async,
                 ambientTransaction,
@@ -51,7 +52,8 @@ namespace Microsoft.EntityFrameworkCore
             bool async,
             bool ambientTransaction,
             bool useCanConnect
-        ) {
+        )
+        {
             return Returns_false_when_database_does_not_exist_test(
                 async,
                 ambientTransaction,
@@ -65,7 +67,8 @@ namespace Microsoft.EntityFrameworkCore
             bool ambientTransaction,
             bool useCanConnect,
             bool file
-        ) {
+        )
+        {
             using var testDatabase = SqlServerTestStore.Create("NonExisting", file);
             using var context = new BloggingContext(testDatabase);
             var creator = GetDatabaseCreator(context);
@@ -104,7 +107,8 @@ namespace Microsoft.EntityFrameworkCore
             bool async,
             bool ambientTransaction,
             bool useCanConnect
-        ) {
+        )
+        {
             return Returns_true_when_database_exists_test(
                 async,
                 ambientTransaction,
@@ -123,7 +127,8 @@ namespace Microsoft.EntityFrameworkCore
             bool async,
             bool ambientTransaction,
             bool useCanConnect
-        ) {
+        )
+        {
             return Returns_true_when_database_exists_test(
                 async,
                 ambientTransaction,
@@ -137,7 +142,8 @@ namespace Microsoft.EntityFrameworkCore
             bool ambientTransaction,
             bool useCanConnect,
             bool file
-        ) {
+        )
+        {
             using var testDatabase = file
                 ? SqlServerTestStore.CreateInitialized("ExistingBloggingFile", useFileName: true)
                 : SqlServerTestStore.GetOrCreateInitialized("ExistingBlogging");
@@ -197,7 +203,8 @@ namespace Microsoft.EntityFrameworkCore
             bool open,
             bool ambientTransaction,
             bool file
-        ) {
+        )
+        {
             using var testDatabase = SqlServerTestStore.CreateInitialized(
                 "EnsureDeleteBlogging" + (file ? "File" : ""),
                 file
@@ -297,7 +304,8 @@ namespace Microsoft.EntityFrameworkCore
         public Task Creates_schema_in_existing_database_with_filename(
             bool async,
             bool ambientTransaction
-        ) {
+        )
+        {
             return Creates_schema_in_existing_database_test(async, ambientTransaction, file: true);
         }
 
@@ -305,7 +313,8 @@ namespace Microsoft.EntityFrameworkCore
             bool async,
             bool ambientTransaction,
             bool file
-        ) {
+        )
+        {
             return TestEnvironment.IsSqlAzure
               ? new TestSqlServerRetryingExecutionStrategy().ExecuteAsync(
                     (true, async, ambientTransaction, file),
@@ -334,7 +343,8 @@ namespace Microsoft.EntityFrameworkCore
         public Task Creates_physical_database_with_filename_and_schema(
             bool async,
             bool ambientTransaction
-        ) {
+        )
+        {
             return Creates_new_physical_database_and_schema_test(
                 async,
                 ambientTransaction,
@@ -346,7 +356,8 @@ namespace Microsoft.EntityFrameworkCore
             bool async,
             bool ambientTransaction,
             bool file
-        ) {
+        )
+        {
             return TestEnvironment.IsSqlAzure
               ? new TestSqlServerRetryingExecutionStrategy().ExecuteAsync(
                     (false, async, ambientTransaction, file),
@@ -357,7 +368,8 @@ namespace Microsoft.EntityFrameworkCore
 
         private static async Task Creates_physical_database_and_schema_test(
             (bool CreateDatabase, bool Async, bool ambientTransaction, bool File) options
-        ) {
+        )
+        {
             var (createDatabase, async, ambientTransaction, file) = options;
             using var testDatabase = SqlServerTestStore.Create(
                 "EnsureCreatedTest" + (file ? "File" : ""),
@@ -451,7 +463,8 @@ namespace Microsoft.EntityFrameworkCore
         private static async Task Noop_when_database_exists_and_has_schema_test(
             bool async,
             bool file
-        ) {
+        )
+        {
             using var testDatabase = SqlServerTestStore.CreateInitialized(
                 "InitializedBlogging" + (file ? "File" : ""),
                 file
@@ -512,7 +525,8 @@ namespace Microsoft.EntityFrameworkCore
         public async Task Returns_false_when_database_exists_but_has_no_tables(
             bool async,
             bool ambientTransaction
-        ) {
+        )
+        {
             using var testDatabase = SqlServerTestStore.GetOrCreateInitialized("Empty");
             var creator = GetDatabaseCreator(testDatabase);
 
@@ -536,7 +550,8 @@ namespace Microsoft.EntityFrameworkCore
         public async Task Returns_true_when_database_exists_and_has_any_tables(
             bool async,
             bool ambientTransaction
-        ) {
+        )
+        {
             using var testDatabase = SqlServerTestStore.GetOrCreate("ExistingTables")
                 .InitializeSqlServer(null, t => new BloggingContext(t), null);
             var creator = GetDatabaseCreator(testDatabase);
@@ -629,7 +644,8 @@ namespace Microsoft.EntityFrameworkCore
         public async Task Creates_schema_in_existing_database_test(
             bool async,
             bool ambientTransaction
-        ) {
+        )
+        {
             using var testDatabase = SqlServerTestStore.GetOrCreateInitialized(
                 "ExistingBlogging" + (async ? "Async" : "")
             );
@@ -764,7 +780,8 @@ namespace Microsoft.EntityFrameworkCore
         public async Task Creates_physical_database_but_not_tables(
             bool async,
             bool ambientTransaction
-        ) {
+        )
+        {
             using var testDatabase = SqlServerTestStore.GetOrCreate("CreateTest");
             var creator = GetDatabaseCreator(testDatabase);
 
@@ -854,13 +871,13 @@ namespace Microsoft.EntityFrameworkCore
         // ReSharper disable once ClassNeverInstantiated.Local
         private class TestSqlServerExecutionStrategyFactory : SqlServerExecutionStrategyFactory
         {
-            public TestSqlServerExecutionStrategyFactory(
-                ExecutionStrategyDependencies dependencies
-            ) : base(dependencies) { }
+            public TestSqlServerExecutionStrategyFactory(ExecutionStrategyDependencies dependencies)
+                : base(dependencies) { }
 
             protected override IExecutionStrategy CreateDefaultStrategy(
                 ExecutionStrategyDependencies dependencies
-            ) {
+            )
+            {
                 return new NonRetryingExecutionStrategy(dependencies);
             }
         }

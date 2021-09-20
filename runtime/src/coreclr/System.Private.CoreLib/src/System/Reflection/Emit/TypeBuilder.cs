@@ -257,7 +257,8 @@ namespace System.Reflection.Emit
             int tkAssociate,
             int tkConstructor,
             byte[]? attr
-        ) {
+        )
+        {
             byte[]? localAttr = null;
 
             if (attr != null)
@@ -417,7 +418,8 @@ namespace System.Reflection.Emit
             int tk,
             Type destType,
             object? value
-        ) {
+        )
+        {
             // This is a helper function that is used by ParameterBuilder, PropertyBuilder,
             // and FieldBuilder to validate a default value and save it in the meta-data.
 
@@ -652,7 +654,8 @@ namespace System.Reflection.Emit
             PackingSize iPackingSize,
             int iTypeSize,
             TypeBuilder? enclosingType
-        ) {
+        )
+        {
             if (fullname == null)
                 throw new ArgumentNullException(nameof(fullname));
 
@@ -761,7 +764,8 @@ namespace System.Reflection.Emit
             byte[]? data,
             int size,
             FieldAttributes attributes
-        ) {
+        )
+        {
             string strValueClassName;
             TypeBuilder? valueClassType;
             FieldBuilder fdBuilder;
@@ -821,7 +825,8 @@ namespace System.Reflection.Emit
                 if (
                     ((attr & TypeAttributes.VisibilityMask) != TypeAttributes.NotPublic)
                     && ((attr & TypeAttributes.VisibilityMask) != TypeAttributes.Public)
-                ) {
+                )
+                {
                     throw new ArgumentException(
                         SR.Argument_BadTypeAttrNestedVisibilityOnNonNestedType
                     );
@@ -833,7 +838,8 @@ namespace System.Reflection.Emit
                 if (
                     ((attr & TypeAttributes.VisibilityMask) == TypeAttributes.NotPublic)
                     || ((attr & TypeAttributes.VisibilityMask) == TypeAttributes.Public)
-                ) {
+                )
+                {
                     throw new ArgumentException(
                         SR.Argument_BadTypeAttrNonNestedVisibilityNestedType
                     );
@@ -845,7 +851,8 @@ namespace System.Reflection.Emit
                 ((attr & TypeAttributes.LayoutMask) != TypeAttributes.AutoLayout)
                 && ((attr & TypeAttributes.LayoutMask) != TypeAttributes.SequentialLayout)
                 && ((attr & TypeAttributes.LayoutMask) != TypeAttributes.ExplicitLayout)
-            ) {
+            )
+            {
                 throw new ArgumentException(SR.Argument_BadTypeAttrInvalidLayout);
             }
 
@@ -986,7 +993,8 @@ namespace System.Reflection.Emit
             ParameterModifier[]? modifiers,
             CultureInfo? culture,
             string[]? namedParameters
-        ) {
+        )
+        {
             if (!IsCreated())
                 throw new NotSupportedException(SR.NotSupported_TypeNotYetCreated);
 
@@ -1027,7 +1035,8 @@ namespace System.Reflection.Emit
             CallingConventions callConvention,
             Type[] types,
             ParameterModifier[]? modifiers
-        ) {
+        )
+        {
             if (!IsCreated())
                 throw new NotSupportedException(SR.NotSupported_TypeNotYetCreated);
 
@@ -1063,7 +1072,8 @@ namespace System.Reflection.Emit
             CallingConventions callConvention,
             Type[]? types,
             ParameterModifier[]? modifiers
-        ) {
+        )
+        {
             if (!IsCreated())
                 throw new NotSupportedException(SR.NotSupported_TypeNotYetCreated);
 
@@ -1175,7 +1185,8 @@ namespace System.Reflection.Emit
             Type? returnType,
             Type[]? types,
             ParameterModifier[]? modifiers
-        ) {
+        )
+        {
             throw new NotSupportedException(SR.NotSupported_DynamicModule);
         }
 
@@ -1220,7 +1231,8 @@ namespace System.Reflection.Emit
             string name,
             MemberTypes type,
             BindingFlags bindingAttr
-        ) {
+        )
+        {
             if (!IsCreated())
                 throw new NotSupportedException(SR.NotSupported_TypeNotYetCreated);
 
@@ -1541,7 +1553,8 @@ namespace System.Reflection.Emit
         public void DefineMethodOverride(
             MethodInfo methodInfoBody,
             MethodInfo methodInfoDeclaration
-        ) {
+        )
+        {
             lock (SyncRoot)
             {
                 DefineMethodOverrideNoLock(methodInfoBody, methodInfoDeclaration);
@@ -1551,7 +1564,8 @@ namespace System.Reflection.Emit
         private void DefineMethodOverrideNoLock(
             MethodInfo methodInfoBody,
             MethodInfo methodInfoDeclaration
-        ) {
+        )
+        {
             if (methodInfoBody == null)
                 throw new ArgumentNullException(nameof(methodInfoBody));
 
@@ -1576,7 +1590,8 @@ namespace System.Reflection.Emit
             MethodAttributes attributes,
             Type? returnType,
             Type[]? parameterTypes
-        ) {
+        )
+        {
             return DefineMethod(
                 name,
                 attributes,
@@ -1595,7 +1610,8 @@ namespace System.Reflection.Emit
             string name,
             MethodAttributes attributes,
             CallingConventions callingConvention
-        ) {
+        )
+        {
             return DefineMethod(name, attributes, callingConvention, null, null);
         }
 
@@ -1605,7 +1621,8 @@ namespace System.Reflection.Emit
             CallingConventions callingConvention,
             Type? returnType,
             Type[]? parameterTypes
-        ) {
+        )
+        {
             return DefineMethod(
                 name,
                 attributes,
@@ -1629,7 +1646,8 @@ namespace System.Reflection.Emit
             Type[]? parameterTypes,
             Type[][]? parameterTypeRequiredCustomModifiers,
             Type[][]? parameterTypeOptionalCustomModifiers
-        ) {
+        )
+        {
             lock (SyncRoot)
             {
                 return DefineMethodNoLock(
@@ -1661,7 +1679,8 @@ namespace System.Reflection.Emit
             Type[]? parameterTypes,
             Type[][]? parameterTypeRequiredCustomModifiers,
             Type[][]? parameterTypeOptionalCustomModifiers
-        ) {
+        )
+        {
             if (name == null)
                 throw new ArgumentNullException(nameof(name));
 
@@ -1727,7 +1746,8 @@ namespace System.Reflection.Emit
                 if (
                     (method.Attributes & MethodAttributes.SpecialName) != 0
                     && method.Name.Equals(ConstructorInfo.ConstructorName)
-                ) {
+                )
+                {
                     m_constructorCount++;
                 }
             }
@@ -1746,7 +1766,8 @@ namespace System.Reflection.Emit
             Type[]? parameterTypes,
             CallingConvention nativeCallConv,
             CharSet nativeCharSet
-        ) {
+        )
+        {
             MethodBuilder method = DefinePInvokeMethodHelper(
                 name,
                 dllName,
@@ -1775,7 +1796,8 @@ namespace System.Reflection.Emit
             Type[]? parameterTypes,
             CallingConvention nativeCallConv,
             CharSet nativeCharSet
-        ) {
+        )
+        {
             MethodBuilder method = DefinePInvokeMethodHelper(
                 name,
                 dllName,
@@ -1808,7 +1830,8 @@ namespace System.Reflection.Emit
             Type[][]? parameterTypeOptionalCustomModifiers,
             CallingConvention nativeCallConv,
             CharSet nativeCharSet
-        ) {
+        )
+        {
             MethodBuilder method = DefinePInvokeMethodHelper(
                 name,
                 dllName,
@@ -1846,7 +1869,8 @@ namespace System.Reflection.Emit
             Type[][]? parameterTypeOptionalCustomModifiers,
             CallingConvention nativeCallConv,
             CharSet nativeCharSet
-        ) {
+        )
+        {
             AssemblyBuilder.CheckContext(returnType);
             AssemblyBuilder.CheckContext(
                 returnTypeRequiredCustomModifiers,
@@ -2091,7 +2115,8 @@ namespace System.Reflection.Emit
             MethodAttributes attributes,
             CallingConventions callingConvention,
             Type[]? parameterTypes
-        ) {
+        )
+        {
             return DefineConstructor(attributes, callingConvention, parameterTypes, null, null);
         }
 
@@ -2101,11 +2126,13 @@ namespace System.Reflection.Emit
             Type[]? parameterTypes,
             Type[][]? requiredCustomModifiers,
             Type[][]? optionalCustomModifiers
-        ) {
+        )
+        {
             if (
                 (m_iAttr & TypeAttributes.Interface) == TypeAttributes.Interface
                 && (attributes & MethodAttributes.Static) != MethodAttributes.Static
-            ) {
+            )
+            {
                 throw new InvalidOperationException(
                     SR.InvalidOperation_ConstructorNotAllowedOnInterface
                 );
@@ -2134,7 +2161,8 @@ namespace System.Reflection.Emit
             Type[]? parameterTypes,
             Type[][]? requiredCustomModifiers,
             Type[][]? optionalCustomModifiers
-        ) {
+        )
+        {
             AssemblyBuilder.CheckContext(parameterTypes);
             AssemblyBuilder.CheckContext(requiredCustomModifiers);
             AssemblyBuilder.CheckContext(optionalCustomModifiers);
@@ -2193,7 +2221,8 @@ namespace System.Reflection.Emit
             TypeAttributes attr,
             [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)] Type? parent,
             Type[]? interfaces
-        ) {
+        )
+        {
             lock (SyncRoot)
             {
                 // Why do we only call CheckContext here? Why don't we call it in the other overloads?
@@ -2215,7 +2244,8 @@ namespace System.Reflection.Emit
             string name,
             TypeAttributes attr,
             [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)] Type? parent
-        ) {
+        )
+        {
             lock (SyncRoot)
             {
                 return DefineNestedTypeNoLock(
@@ -2249,7 +2279,8 @@ namespace System.Reflection.Emit
             TypeAttributes attr,
             [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)] Type? parent,
             int typeSize
-        ) {
+        )
+        {
             lock (SyncRoot)
             {
                 return DefineNestedTypeNoLock(
@@ -2268,7 +2299,8 @@ namespace System.Reflection.Emit
             TypeAttributes attr,
             [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)] Type? parent,
             PackingSize packSize
-        ) {
+        )
+        {
             lock (SyncRoot)
             {
                 return DefineNestedTypeNoLock(
@@ -2288,7 +2320,8 @@ namespace System.Reflection.Emit
             [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)] Type? parent,
             PackingSize packSize,
             int typeSize
-        ) {
+        )
+        {
             lock (SyncRoot)
             {
                 return DefineNestedTypeNoLock(name, attr, parent, null, packSize, typeSize);
@@ -2302,7 +2335,8 @@ namespace System.Reflection.Emit
             Type[]? interfaces,
             PackingSize packSize,
             int typeSize
-        ) {
+        )
+        {
             return new TypeBuilder(
                 name,
                 attr,
@@ -2329,7 +2363,8 @@ namespace System.Reflection.Emit
             Type[]? requiredCustomModifiers,
             Type[]? optionalCustomModifiers,
             FieldAttributes attributes
-        ) {
+        )
+        {
             lock (SyncRoot)
             {
                 return DefineFieldNoLock(
@@ -2348,7 +2383,8 @@ namespace System.Reflection.Emit
             Type[]? requiredCustomModifiers,
             Type[]? optionalCustomModifiers,
             FieldAttributes attributes
-        ) {
+        )
+        {
             ThrowIfCreated();
             AssemblyBuilder.CheckContext(type);
             AssemblyBuilder.CheckContext(requiredCustomModifiers);
@@ -2376,7 +2412,8 @@ namespace System.Reflection.Emit
             string name,
             byte[] data,
             FieldAttributes attributes
-        ) {
+        )
+        {
             lock (SyncRoot)
             {
                 return DefineInitializedDataNoLock(name, data, attributes);
@@ -2387,7 +2424,8 @@ namespace System.Reflection.Emit
             string name,
             byte[] data,
             FieldAttributes attributes
-        ) {
+        )
+        {
             if (data == null)
                 throw new ArgumentNullException(nameof(data));
 
@@ -2402,7 +2440,8 @@ namespace System.Reflection.Emit
             string name,
             int size,
             FieldAttributes attributes
-        ) {
+        )
+        {
             lock (SyncRoot)
             {
                 return DefineUninitializedDataNoLock(name, size, attributes);
@@ -2413,7 +2452,8 @@ namespace System.Reflection.Emit
             string name,
             int size,
             FieldAttributes attributes
-        ) {
+        )
+        {
             // This method will define an uninitialized Data in .sdata.
             // We will create a fake TypeDef to represent the data with size. This TypeDef
             // will be the signature for the Field.
@@ -2428,7 +2468,8 @@ namespace System.Reflection.Emit
             PropertyAttributes attributes,
             Type returnType,
             Type[]? parameterTypes
-        ) {
+        )
+        {
             return DefineProperty(
                 name,
                 attributes,
@@ -2447,7 +2488,8 @@ namespace System.Reflection.Emit
             CallingConventions callingConvention,
             Type returnType,
             Type[]? parameterTypes
-        ) {
+        )
+        {
             return DefineProperty(
                 name,
                 attributes,
@@ -2470,7 +2512,8 @@ namespace System.Reflection.Emit
             Type[]? parameterTypes,
             Type[][]? parameterTypeRequiredCustomModifiers,
             Type[][]? parameterTypeOptionalCustomModifiers
-        ) {
+        )
+        {
             return DefineProperty(
                 name,
                 attributes,
@@ -2494,7 +2537,8 @@ namespace System.Reflection.Emit
             Type[]? parameterTypes,
             Type[][]? parameterTypeRequiredCustomModifiers,
             Type[][]? parameterTypeOptionalCustomModifiers
-        ) {
+        )
+        {
             lock (SyncRoot)
             {
                 return DefinePropertyNoLock(
@@ -2521,7 +2565,8 @@ namespace System.Reflection.Emit
             Type[]? parameterTypes,
             Type[][]? parameterTypeRequiredCustomModifiers,
             Type[][]? parameterTypeOptionalCustomModifiers
-        ) {
+        )
+        {
             if (name == null)
                 throw new ArgumentNullException(nameof(name));
             if (name.Length == 0)
@@ -2591,7 +2636,8 @@ namespace System.Reflection.Emit
             string name,
             EventAttributes attributes,
             Type eventtype
-        ) {
+        )
+        {
             if (name == null)
                 throw new ArgumentNullException(nameof(name));
             if (name.Length == 0)
@@ -2741,7 +2787,8 @@ namespace System.Reflection.Emit
                         (m_iAttr & (TypeAttributes.Abstract | TypeAttributes.Sealed))
                         != (TypeAttributes.Abstract | TypeAttributes.Sealed)
                     )
-                ) {
+                )
+                {
                     DefineDefaultConstructor(MethodAttributes.Public);
                 }
             }
@@ -2771,7 +2818,8 @@ namespace System.Reflection.Emit
                             )
                         ) != MethodImplAttributes.IL
                     ) || ((methodAttrs & MethodAttributes.PinvokeImpl) != (MethodAttributes)0)
-                ) {
+                )
+                {
                     continue;
                 }
 
@@ -2781,7 +2829,8 @@ namespace System.Reflection.Emit
                 if (
                     ((methodAttrs & MethodAttributes.Abstract) != 0)
                     && ((m_iAttr & TypeAttributes.Abstract) == 0)
-                ) {
+                )
+                {
                     throw new InvalidOperationException(
                         SR.InvalidOperation_BadTypeAttributesNotAbstract
                     );
@@ -2843,7 +2892,8 @@ namespace System.Reflection.Emit
                 if (
                     m_module.ContainingAssemblyBuilder._assemblyData._access
                     == AssemblyBuilderAccess.Run
-                ) {
+                )
+                {
                     // if we don't need the data structures to build the method any more
                     // throw them away.
                     meth.ReleaseBakedStructures();
@@ -2887,7 +2937,8 @@ namespace System.Reflection.Emit
 
         public void SetParent(
             [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)] Type? parent
-        ) {
+        )
+        {
             ThrowIfCreated();
 
             if (parent != null)
@@ -2920,7 +2971,8 @@ namespace System.Reflection.Emit
 
         public void AddInterfaceImplementation(
             [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)] Type interfaceType
-        ) {
+        )
+        {
             if (interfaceType == null)
             {
                 throw new ArgumentNullException(nameof(interfaceType));

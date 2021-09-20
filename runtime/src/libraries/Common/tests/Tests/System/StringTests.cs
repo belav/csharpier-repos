@@ -113,7 +113,8 @@ namespace System.Tests
             int startIndex,
             int length,
             string expected
-        ) {
+        )
+        {
             _ = valueArray; // xunit analyzer bug: https://github.com/xunit/xunit/issues/1969
             fixed (char* value = valueArray)
             {
@@ -603,7 +604,8 @@ namespace System.Tests
             int destinationIndex,
             int count,
             char[] expected
-        ) {
+        )
+        {
             char[] dst = new char[expected.Length];
             s.CopyTo(sourceIndex, dst, destinationIndex, count);
             Assert.Equal(expected, dst);
@@ -1619,7 +1621,8 @@ namespace System.Tests
             int length,
             StringComparison comparisonType,
             int expected
-        ) {
+        )
+        {
             bool hasNullInputs = (strA == null || strB == null);
             bool indicesReferToEntireString = (
                 strA != null
@@ -3046,7 +3049,8 @@ namespace System.Tests
             string value,
             StringComparison comparisonType,
             bool expected
-        ) {
+        )
+        {
             if (comparisonType == StringComparison.CurrentCulture)
             {
                 Assert.Equal(expected, s.EndsWith(value));
@@ -3951,7 +3955,8 @@ namespace System.Tests
             object obj,
             StringComparison comparisonType,
             bool expected
-        ) {
+        )
+        {
             string s2 = obj as string;
             if (s1 != null)
             {
@@ -4031,7 +4036,8 @@ namespace System.Tests
         [InlineData(StringComparison.OrdinalIgnoreCase + 1)]
         public static void Equals_InvalidComparisonType_ThrowsArgumentOutOfRangeException(
             StringComparison comparisonType
-        ) {
+        )
+        {
             AssertExtensions.Throws<ArgumentException>(
                 "comparisonType",
                 () => string.Equals("a", "a", comparisonType)
@@ -4227,7 +4233,8 @@ namespace System.Tests
             int startIndex,
             int count,
             int expected
-        ) {
+        )
+        {
             // This is by design. ICU ignores the null characters (i.e. null characters have no weights for the string comparison).
             // For desired behavior, use ordinal comparison instead of linguistic comparison.
             // This is a known difference between NLS and ICU (https://github.com/dotnet/runtime/issues/4673).
@@ -4420,7 +4427,8 @@ namespace System.Tests
             string value,
             int startIndex,
             StringComparison comparison
-        ) {
+        )
+        {
             bool ignoringCase =
                 comparison == StringComparison.OrdinalIgnoreCase
                 || comparison == StringComparison.CurrentCultureIgnoreCase;
@@ -4971,7 +4979,8 @@ namespace System.Tests
             int startIndex,
             int count,
             int expected
-        ) {
+        )
+        {
             if (startIndex + count == s.Length)
             {
                 if (startIndex == 0)
@@ -5012,7 +5021,8 @@ namespace System.Tests
         [InlineData(4)]
         public static void IndexOfAny_InvalidStartIndex_ThrowsArgumentOutOfRangeException(
             int startIndex
-        ) {
+        )
+        {
             AssertExtensions.Throws<ArgumentOutOfRangeException>(
                 "startIndex",
                 null,
@@ -5033,7 +5043,8 @@ namespace System.Tests
         public static void IndexOfAny_InvalidCount_ThrowsArgumentOutOfRangeException(
             int startIndex,
             int count
-        ) {
+        )
+        {
             AssertExtensions.Throws<ArgumentOutOfRangeException>(
                 "count",
                 () => "foo".IndexOfAny(new char[] { 'o' }, startIndex, count)
@@ -5543,7 +5554,8 @@ namespace System.Tests
             int startIndex,
             int count,
             string expected
-        ) {
+        )
+        {
             if (startIndex + count == values.Length && count != 0)
             {
                 Assert.Equal(expected, string.Join(separator, values));
@@ -5609,7 +5621,8 @@ namespace System.Tests
         public static void Join_String_InvalidStartIndexCount_ThrowsArgumentOutOfRangeException(
             int startIndex,
             int count
-        ) {
+        )
+        {
             AssertExtensions.Throws<ArgumentOutOfRangeException>(
                 "startIndex",
                 () => string.Join("$$", new string[] { "Foo" }, startIndex, count)
@@ -5688,7 +5701,8 @@ namespace System.Tests
             int startIndex,
             int count,
             int expected
-        ) {
+        )
+        {
             int startPos = count == 0 ? 0 : startIndex - count + 1;
             ReadOnlySpan<char> span = s.AsSpan(startPos, count);
             int expectedFromSpan = expected - startPos;
@@ -5819,7 +5833,8 @@ namespace System.Tests
             string value,
             int startIndex,
             StringComparison comparison
-        ) {
+        )
+        {
             bool ignoringCase =
                 comparison == StringComparison.OrdinalIgnoreCase
                 || comparison == StringComparison.CurrentCultureIgnoreCase;
@@ -6190,7 +6205,8 @@ namespace System.Tests
             int startIndex,
             int count,
             int expected
-        ) {
+        )
+        {
             if (count == startIndex + 1)
             {
                 if (startIndex == s.Length - 1)
@@ -6688,7 +6704,8 @@ namespace System.Tests
             string s,
             char oldChar,
             char newChar
-        ) {
+        )
+        {
             Assert.Same(s, s.Replace(oldChar, newChar));
         }
 
@@ -6722,7 +6739,8 @@ namespace System.Tests
             string oldValue,
             string newValue,
             string expected
-        ) {
+        )
+        {
             Assert.Equal(expected, s.Replace(oldValue, newValue));
         }
 
@@ -6733,7 +6751,8 @@ namespace System.Tests
             string s,
             string oldValue,
             string newValue
-        ) {
+        )
+        {
             Assert.Same(s, s.Replace(oldValue, newValue));
         }
 
@@ -7008,7 +7027,8 @@ namespace System.Tests
             string value,
             StringComparison comparisonType,
             bool expected
-        ) {
+        )
+        {
             if (comparisonType == StringComparison.CurrentCulture)
             {
                 Assert.Equal(expected, s.StartsWith(value));
@@ -8123,7 +8143,8 @@ namespace System.Tests
 
         private static IEnumerable<object[]> ToUpper_TurkishI_MemberData(
             params KeyValuePair<char, char>[] mappings
-        ) {
+        )
+        {
             foreach (KeyValuePair<char, char> mapping in mappings)
             {
                 yield return new[] { $"{mapping.Key}", $"{mapping.Value}" };
@@ -8281,7 +8302,8 @@ namespace System.Tests
                 trimChars == null
                 || trimChars.Length == 0
                 || (trimChars.Length == 1 && trimChars[0] == ' ')
-            ) {
+            )
+            {
                 Assert.Equal(expected, s.Trim());
                 Assert.Equal(expected, s.AsSpan().Trim().ToString());
             }
@@ -8318,7 +8340,8 @@ namespace System.Tests
                 trimChars == null
                 || trimChars.Length == 0
                 || (trimChars.Length == 1 && trimChars[0] == ' ')
-            ) {
+            )
+            {
                 Assert.Equal(expected, s.TrimEnd());
                 Assert.Equal(expected, s.AsSpan().TrimEnd().ToString());
             }
@@ -8355,7 +8378,8 @@ namespace System.Tests
                 trimChars == null
                 || trimChars.Length == 0
                 || (trimChars.Length == 1 && trimChars[0] == ' ')
-            ) {
+            )
+            {
                 Assert.Equal(expected, s.TrimStart());
                 Assert.Equal(expected, s.AsSpan().TrimStart().ToString());
             }
@@ -9404,7 +9428,8 @@ namespace System.Tests
             string cultureName,
             bool ignoreCase,
             int expected
-        ) {
+        )
+        {
             CultureInfo ci = cultureName != null ? CultureInfo.GetCultureInfo(cultureName) : null;
             CompareOptions ignoreCaseOption = ignoreCase
                 ? CompareOptions.IgnoreCase
@@ -9474,7 +9499,8 @@ namespace System.Tests
             string cultureName,
             bool ignoreCase,
             bool expected
-        ) {
+        )
+        {
             CultureInfo ci = cultureName != null ? CultureInfo.GetCultureInfo(cultureName) : null;
             Assert.Equal(expected, source.StartsWith(start, ignoreCase, ci));
             Assert.Equal(expected, source.EndsWith(end, ignoreCase, ci));
@@ -9492,7 +9518,8 @@ namespace System.Tests
             string value,
             StringComparison comparison,
             bool expectedStartsAndEndsWithResult
-        ) {
+        )
+        {
             Assert.Equal(
                 expectedStartsAndEndsWithResult,
                 string.Empty.StartsWith(value, comparison)

@@ -44,7 +44,8 @@ namespace System.Security.Cryptography.Pkcs.Tests
             ReadOnlyMemory<byte> tokenBytes,
             TimestampTokenTestData testData,
             int? expectedBytesRead
-        ) {
+        )
+        {
             int bytesRead;
             Rfc3161TimestampToken token;
 
@@ -262,7 +263,8 @@ namespace System.Security.Cryptography.Pkcs.Tests
             using (
                 X509Certificate2 cert =
                     Certificates.RSAKeyTransferCapi1.TryGetCertificateWithPrivateKey()
-            ) {
+            )
+            {
                 cms.ComputeSignature(
                     new CmsSigner(SubjectIdentifierType.IssuerAndSerialNumber, cert)
                 );
@@ -289,7 +291,8 @@ namespace System.Security.Cryptography.Pkcs.Tests
         public static void MatchV1(
             X509IncludeOption includeOption,
             SigningCertificateOption v1Option
-        ) {
+        )
+        {
             CustomBuild_CertMatch(
                 Certificates.ValidLookingTsaCert,
                 new DateTimeOffset(2018, 1, 10, 17, 21, 11, 802, TimeSpan.Zero),
@@ -338,7 +341,8 @@ namespace System.Security.Cryptography.Pkcs.Tests
             X509IncludeOption includeOption,
             SigningCertificateOption v1Option,
             SubjectIdentifierType identifierType
-        ) {
+        )
+        {
             CustomBuild_CertMismatch(
                 Certificates.ValidLookingTsaCert,
                 new DateTimeOffset(2018, 1, 10, 17, 21, 11, 802, TimeSpan.Zero),
@@ -374,7 +378,8 @@ namespace System.Security.Cryptography.Pkcs.Tests
             X509IncludeOption includeOption,
             SigningCertificateOption v2Option,
             string hashAlgName
-        ) {
+        )
+        {
             CustomBuild_CertMatch(
                 Certificates.ValidLookingTsaCert,
                 new DateTimeOffset(2018, 1, 10, 17, 21, 11, 802, TimeSpan.Zero),
@@ -464,7 +469,8 @@ namespace System.Security.Cryptography.Pkcs.Tests
             SigningCertificateOption v2Option,
             SubjectIdentifierType identifierType,
             string hashAlgName
-        ) {
+        )
+        {
             CustomBuild_CertMismatch(
                 Certificates.ValidLookingTsaCert,
                 new DateTimeOffset(2018, 1, 10, 17, 21, 11, 802, TimeSpan.Zero),
@@ -580,7 +586,8 @@ namespace System.Security.Cryptography.Pkcs.Tests
             SigningCertificateOption v1Option,
             SigningCertificateOption v2Option,
             string hashAlgName
-        ) {
+        )
+        {
             CustomBuild_CertMatch(
                 Certificates.ValidLookingTsaCert,
                 new DateTimeOffset(2018, 1, 10, 17, 21, 11, 802, TimeSpan.Zero),
@@ -635,7 +642,8 @@ namespace System.Security.Cryptography.Pkcs.Tests
             SigningCertificateOption v2Option,
             SubjectIdentifierType identifierType,
             string hashAlgName
-        ) {
+        )
+        {
             CustomBuild_CertMismatch(
                 Certificates.ValidLookingTsaCert,
                 new DateTimeOffset(2018, 1, 10, 17, 21, 11, 802, TimeSpan.Zero),
@@ -806,7 +814,8 @@ namespace System.Security.Cryptography.Pkcs.Tests
             HashAlgorithmName v2AlgorithmName = default,
             X509IncludeOption includeOption = default,
             SubjectIdentifierType identifierType = SubjectIdentifierType.IssuerAndSerialNumber
-        ) {
+        )
+        {
             byte[] tokenBytes = BuildCustomToken(
                 loader,
                 referenceTime,
@@ -848,7 +857,8 @@ namespace System.Security.Cryptography.Pkcs.Tests
             HashAlgorithmName v2AlgorithmName = default,
             X509IncludeOption includeOption = default,
             SubjectIdentifierType identifierType = SubjectIdentifierType.IssuerAndSerialNumber
-        ) {
+        )
+        {
             byte[] tokenBytes = BuildCustomToken(
                 loader,
                 referenceTime,
@@ -929,7 +939,8 @@ namespace System.Security.Cryptography.Pkcs.Tests
             HashAlgorithmName v2DigestAlg = default,
             X509IncludeOption includeOption = X509IncludeOption.ExcludeRoot,
             SubjectIdentifierType identifierType = SubjectIdentifierType.IssuerAndSerialNumber
-        ) {
+        )
+        {
             long accuracyMicroSeconds = (long)(TimeSpan.FromMinutes(1).TotalMilliseconds * 1000);
 
             byte[] serialNumber = BitConverter.GetBytes(DateTimeOffset.UtcNow.Ticks);
@@ -1114,7 +1125,8 @@ namespace System.Security.Cryptography.Pkcs.Tests
             X509Certificate2 tsaCert,
             bool validName,
             bool validSerial
-        ) {
+        )
+        {
             byte[] issuerNameBytes;
 
             if (validName)
@@ -1185,7 +1197,8 @@ namespace System.Security.Cryptography.Pkcs.Tests
             out bool skipIssuerSerial,
             out bool validName,
             out bool validSerial
-        ) {
+        )
+        {
             Assert.NotEqual(SigningCertificateOption.Omit, option);
 
             validHash = option < SigningCertificateOption.InvalidHashNoName;

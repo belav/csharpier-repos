@@ -184,7 +184,8 @@ namespace Microsoft.AspNetCore.Mvc.IntegrationTests
                 if (
                     allowedBindingSource == null
                     || !allowedBindingSource.CanAcceptDataFrom(BindAddressAttribute.Source)
-                ) {
+                )
+                {
                     // Binding Sources are opt-in. This model either didn't specify one or specified something
                     // incompatible so let other binders run.
                     return Task.CompletedTask;

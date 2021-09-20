@@ -30,7 +30,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
         public TypeParameterDiagnosticInfo(
             TypeParameterSymbol typeParameter,
             UseSiteInfo<AssemblySymbol> useSiteInfo
-        ) {
+        )
+        {
             this.TypeParameter = typeParameter;
             this.UseSiteInfo = useSiteInfo;
         }
@@ -77,7 +78,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             bool inherited,
             CSharpCompilation currentCompilation,
             BindingDiagnosticBag diagnostics
-        ) {
+        )
+        {
             var diagnosticsBuilder = ArrayBuilder<TypeParameterDiagnosticInfo>.GetInstance();
             ArrayBuilder<TypeParameterDiagnosticInfo> useSiteDiagnosticsBuilder = null;
             var bounds = typeParameter.ResolveBounds(
@@ -119,7 +121,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             ArrayBuilder<TypeParameterDiagnosticInfo> diagnosticsBuilder,
             ref ArrayBuilder<TypeParameterDiagnosticInfo> useSiteDiagnosticsBuilder,
             CompoundUseSiteInfo<AssemblySymbol> template
-        ) {
+        )
+        {
             Debug.Assert(
                 currentCompilation == null || typeParameter.IsFromCompilation(currentCompilation)
             );
@@ -165,7 +168,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                                 if (
                                     constraintTypeParameter.ContainingSymbol
                                     == typeParameter.ContainingSymbol
-                                ) {
+                                )
+                                {
                                     // The constraint type parameter is from the same containing type or method.
                                     if (inProgress.ContainsReference(constraintTypeParameter))
                                     {
@@ -210,7 +214,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                                     !inherited
                                     && currentCompilation != null
                                     && constraintTypeParameter.IsFromCompilation(currentCompilation)
-                                ) {
+                                )
+                                {
                                     ErrorCode errorCode;
                                     if (constraintTypeParameter.HasUnmanagedTypeConstraint)
                                     {
@@ -281,7 +286,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                                     if (
                                         underlyingTypeParameter.ContainingSymbol
                                         == typeParameter.ContainingSymbol
-                                    ) {
+                                    )
+                                    {
                                         // The constraint type parameter is from the same containing type or method.
                                         if (inProgress.ContainsReference(underlyingTypeParameter))
                                         {
@@ -361,7 +367,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                                 constraintDeducedBase,
                                 ref useSiteInfo
                             )
-                        ) {
+                        )
+                        {
                             if (
                                 !IsEncompassedBy(
                                     conversions,
@@ -369,7 +376,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                                     deducedBaseType,
                                     ref useSiteInfo
                                 )
-                            ) {
+                            )
+                            {
                                 // "Type parameter '{0}' inherits conflicting constraints '{1}' and '{2}'"
                                 diagnosticsBuilder.Add(
                                     new TypeParameterDiagnosticInfo(
@@ -412,7 +420,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             if (
                 (constraintTypes.Length == 0)
                 && (deducedBaseType.SpecialType == SpecialType.System_Object)
-            ) {
+            )
+            {
                 Debug.Assert(effectiveBaseClass.SpecialType == SpecialType.System_Object);
                 Debug.Assert(interfaces.Length == 0);
                 return null;
@@ -443,7 +452,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             TypeParameterListSyntax typeParameterList,
             SyntaxList<TypeParameterConstraintClauseSyntax> constraintClauses,
             BindingDiagnosticBag diagnostics
-        ) {
+        )
+        {
             if (typeParameters.Length == 0 || constraintClauses.Count == 0)
             {
                 return ImmutableArray<ImmutableArray<TypeWithAnnotations>>.Empty;
@@ -480,7 +490,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             ImmutableArray<TypeParameterSymbol> typeParameters,
             TypeParameterListSyntax typeParameterList,
             SyntaxList<TypeParameterConstraintClauseSyntax> constraintClauses
-        ) {
+        )
+        {
             if (typeParameters.Length == 0)
             {
                 return ImmutableArray<TypeParameterConstraintKind>.Empty;
@@ -533,7 +544,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             Symbol container,
             ImmutableArray<TypeParameterSymbol> typeParameters,
             ImmutableArray<TypeParameterConstraintClause> constraintClauses
-        ) {
+        )
+        {
             int arity = typeParameters.Length;
 
             Debug.Assert(constraintClauses.Length == arity);
@@ -571,7 +583,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                 if (
                     (constraintKind & TypeParameterConstraintKind.AllValueTypeKinds) == 0
                     && isValueTypeMap[typeParameter]
-                ) {
+                )
+                {
                     constraintKind |= TypeParameterConstraintKind.ValueTypeFromConstraintTypes;
                 }
 
@@ -610,14 +623,16 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             TypeParameterSymbol typeParameter,
             TypeParameterBounds bounds,
             ArrayBuilder<TypeParameterDiagnosticInfo> diagnosticsBuilder
-        ) {
+        )
+        {
             var deducedBase = bounds.DeducedBaseType;
             var constraintTypes = bounds.ConstraintTypes;
 
             if (
                 IsValueType(typeParameter, constraintTypes)
                 && IsReferenceType(typeParameter, constraintTypes)
-            ) {
+            )
+            {
                 Debug.Assert(!deducedBase.IsValueType || typeParameter.HasReferenceTypeConstraint);
                 diagnosticsBuilder.Add(
                     GenerateConflictingConstraintsError(
@@ -632,7 +647,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                 && (
                     typeParameter.HasValueTypeConstraint || typeParameter.HasReferenceTypeConstraint
                 )
-            ) {
+            )
+            {
                 diagnosticsBuilder.Add(
                     GenerateConflictingConstraintsError(
                         typeParameter,
@@ -654,7 +670,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             ConversionsBase conversions,
             Location location,
             BindingDiagnosticBag diagnostics
-        ) {
+        )
+        {
             bool includeNullability = compilation.IsFeatureEnabled(
                 MessageID.IDS_FeatureNullableReferenceTypes
             );
@@ -673,7 +690,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             this TypeSymbol type,
             CSharpCompilation compilation,
             ConversionsBase conversions
-        ) {
+        )
+        {
             var diagnostics = new BindingDiagnosticBag(DiagnosticBag.GetInstance());
 
             // Nullability checks can only add warnings here so skip them for this check as we are only
@@ -712,13 +730,16 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                 ConversionsBase conversions,
                 Location location,
                 BindingDiagnosticBag diagnostics
-            ) : this(
-                currentCompilation,
-                conversions,
-                currentCompilation.IsFeatureEnabled(MessageID.IDS_FeatureNullableReferenceTypes),
-                location,
-                diagnostics
-            ) { }
+            )
+                : this(
+                    currentCompilation,
+                    conversions,
+                    currentCompilation.IsFeatureEnabled(
+                        MessageID.IDS_FeatureNullableReferenceTypes
+                    ),
+                    location,
+                    diagnostics
+                ) { }
 
             public CheckConstraintsArgs(
                 CSharpCompilation currentCompilation,
@@ -726,17 +747,18 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                 bool includeNullability,
                 Location location,
                 BindingDiagnosticBag diagnostics
-            ) : this(
-                currentCompilation,
-                conversions,
-                includeNullability,
-                location,
-                diagnostics,
-                template: new CompoundUseSiteInfo<AssemblySymbol>(
+            )
+                : this(
+                    currentCompilation,
+                    conversions,
+                    includeNullability,
+                    location,
                     diagnostics,
-                    currentCompilation.Assembly
-                )
-            ) { }
+                    template: new CompoundUseSiteInfo<AssemblySymbol>(
+                        diagnostics,
+                        currentCompilation.Assembly
+                    )
+                ) { }
 
             public CheckConstraintsArgs(
                 CSharpCompilation currentCompilation,
@@ -745,7 +767,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                 Location location,
                 BindingDiagnosticBag diagnostics,
                 CompoundUseSiteInfo<AssemblySymbol> template
-            ) {
+            )
+            {
                 this.CurrentCompilation = currentCompilation;
                 this.Conversions = conversions;
                 this.IncludeNullability = includeNullability;
@@ -765,7 +788,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                 ConversionsBase conversions,
                 Location location,
                 BindingDiagnosticBag diagnostics
-            ) {
+            )
+            {
                 Args = new CheckConstraintsArgs(
                     currentCompilation,
                     conversions,
@@ -781,7 +805,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                 bool includeNullability,
                 Location location,
                 BindingDiagnosticBag diagnostics
-            ) {
+            )
+            {
                 Args = new CheckConstraintsArgs(
                     currentCompilation,
                     conversions,
@@ -803,7 +828,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
         private static bool CheckConstraintsSingleType(
             TypeSymbol type,
             in CheckConstraintsArgs args
-        ) {
+        )
+        {
             if (type.Kind == SymbolKind.NamedType)
             {
                 ((NamedTypeSymbol)type).CheckConstraints(args);
@@ -826,7 +852,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             SyntaxNode typeSyntax,
             ImmutableArray<Location> elementLocations,
             BindingDiagnosticBag nullabilityDiagnosticsOpt
-        ) {
+        )
+        {
             Debug.Assert(tuple.IsTupleType);
             if (!RequiresChecking(tuple))
             {
@@ -874,7 +901,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                 void populateDiagnosticsAndClear(
                     ArrayBuilder<TypeParameterDiagnosticInfo> builder,
                     BindingDiagnosticBag bag
-                ) {
+                )
+                {
                     if (bag is null)
                     {
                         builder.Clear();
@@ -909,7 +937,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             SyntaxNode typeSyntax,
             SeparatedSyntaxList<TypeSyntax> typeArgumentsSyntax, // may be omitted in synthesized invocations
             ConsList<TypeSymbol> basesBeingResolved
-        ) {
+        )
+        {
             Debug.Assert(
                 typeArgumentsSyntax.Count == 0 /*omitted*/
                     || typeArgumentsSyntax.Count == type.Arity
@@ -1001,7 +1030,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                     args.CurrentCompilation != null
                     && type.IsFromCompilation(args.CurrentCompilation)
                 ) && HasDuplicateInterfaces(type, null)
-            ) {
+            )
+            {
                 result = false;
                 args.Diagnostics.Add(ErrorCode.ERR_BogusType, args.Location, type);
             }
@@ -1015,7 +1045,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
         private static bool HasDuplicateInterfaces(
             NamedTypeSymbol type,
             ConsList<TypeSymbol> basesBeingResolved
-        ) {
+        )
+        {
             // PERF: avoid instantiating all interfaces here
             //       Ex: if class implements just IEnumerable<> and IComparable<> it cannot have conflicting implementations
             var array = type.OriginalDefinition.InterfacesNoUseSiteDiagnostics(basesBeingResolved);
@@ -1100,7 +1131,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             ArrayBuilder<TypeParameterDiagnosticInfo> diagnosticsBuilder,
             ArrayBuilder<TypeParameterDiagnosticInfo> nullabilityDiagnosticsBuilderOpt,
             ref ArrayBuilder<TypeParameterDiagnosticInfo> useSiteDiagnosticsBuilder
-        ) {
+        )
+        {
             return CheckConstraints(
                 type,
                 in args,
@@ -1120,7 +1152,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             ArrayBuilder<TypeParameterDiagnosticInfo> nullabilityDiagnosticsBuilderOpt,
             ref ArrayBuilder<TypeParameterDiagnosticInfo> useSiteDiagnosticsBuilder,
             BitVector skipParameters = default(BitVector)
-        ) {
+        )
+        {
             return CheckConstraints(
                 method,
                 in args,
@@ -1160,7 +1193,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             ref ArrayBuilder<TypeParameterDiagnosticInfo> useSiteDiagnosticsBuilder,
             BitVector skipParameters = default(BitVector),
             HashSet<TypeParameterSymbol> ignoreTypeConstraintsDependentOnTypeParametersOpt = null
-        ) {
+        )
+        {
             Debug.Assert(typeParameters.Length == typeArguments.Length);
             Debug.Assert(typeParameters.Length > 0);
             Debug.Assert(
@@ -1189,7 +1223,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                         ref useSiteDiagnosticsBuilder,
                         ignoreTypeConstraintsDependentOnTypeParametersOpt
                     )
-                ) {
+                )
+                {
                     succeeded = false;
                 }
             }
@@ -1206,12 +1241,14 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             ArrayBuilder<TypeParameterDiagnosticInfo> diagnosticsBuilder,
             ArrayBuilder<TypeParameterDiagnosticInfo> nullabilityDiagnosticsBuilderOpt,
             ref ArrayBuilder<TypeParameterDiagnosticInfo> useSiteDiagnosticsBuilder
-        ) {
+        )
+        {
             if (
                 typeArgument.Type.IsPointerOrFunctionPointer()
                 || typeArgument.IsRestrictedType()
                 || typeArgument.IsVoidType()
-            ) {
+            )
+            {
                 // "The type '{0}' may not be used as a type argument"
                 diagnosticsBuilder.Add(
                     new TypeParameterDiagnosticInfo(
@@ -1279,7 +1316,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                 if (
                     managedKind == ManagedKind.Managed
                     || !typeArgument.Type.IsNonNullableValueType()
-                ) {
+                )
+                {
                     // "The type '{2}' must be a non-nullable value type, along with all fields at any level of nesting, in order to use it as parameter '{1}' in the generic type or method '{0}'"
                     diagnosticsBuilder.Add(
                         new TypeParameterDiagnosticInfo(
@@ -1355,7 +1393,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             ArrayBuilder<TypeParameterDiagnosticInfo> nullabilityDiagnosticsBuilderOpt,
             ref ArrayBuilder<TypeParameterDiagnosticInfo> useSiteDiagnosticsBuilder,
             HashSet<TypeParameterSymbol> ignoreTypeConstraintsDependentOnTypeParametersOpt
-        ) {
+        )
+        {
             Debug.Assert(substitution != null);
 
             // The type parameters must be original definitions of type parameters from the containing symbol.
@@ -1378,7 +1417,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                     nullabilityDiagnosticsBuilderOpt,
                     ref useSiteDiagnosticsBuilder
                 )
-            ) {
+            )
+            {
                 return false;
             }
 
@@ -1424,7 +1464,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             if (
                 typeParameter.HasConstructorConstraint
                 && !SatisfiesConstructorConstraint(typeArgument.Type)
-            ) {
+            )
+            {
                 // "'{2}' must be a non-abstract type with a public parameterless constructor in order to use it as parameter '{1}' in the generic type or method '{0}'"
                 diagnosticsBuilder.Add(
                     new TypeParameterDiagnosticInfo(
@@ -1451,14 +1492,16 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             TypeParameterSymbol typeParameter,
             TypeWithAnnotations typeArgument,
             ArrayBuilder<TypeParameterDiagnosticInfo> nullabilityDiagnosticsBuilderOpt
-        ) {
+        )
+        {
             if (nullabilityDiagnosticsBuilderOpt != null)
             {
                 if (
                     typeParameter.HasNotNullConstraint
                     && typeArgument.GetValueNullableAnnotation().IsAnnotated()
                     && !typeArgument.Type.IsNonNullableValueType()
-                ) {
+                )
+                {
                     nullabilityDiagnosticsBuilderOpt.Add(
                         new TypeParameterDiagnosticInfo(
                             typeParameter,
@@ -1478,7 +1521,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                     typeParameter.HasReferenceTypeConstraint
                     && typeParameter.ReferenceTypeConstraintIsNullable == false
                     && typeArgument.GetValueNullableAnnotation().IsAnnotated()
-                ) {
+                )
+                {
                     nullabilityDiagnosticsBuilderOpt.Add(
                         new TypeParameterDiagnosticInfo(
                             typeParameter,
@@ -1507,7 +1551,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             ref CompoundUseSiteInfo<AssemblySymbol> useSiteInfo,
             TypeWithAnnotations constraintType,
             ref bool hasError
-        ) {
+        )
+        {
             if (
                 SatisfiesConstraintType(
                     args.Conversions.WithNullability(false),
@@ -1515,7 +1560,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                     constraintType,
                     ref useSiteInfo
                 )
-            ) {
+            )
+            {
                 if (nullabilityDiagnosticsBuilderOpt != null)
                 {
                     if (
@@ -1526,7 +1572,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                             ref useSiteInfo
                         )
                         || !constraintTypeAllows(constraintType, getTypeArgumentState(typeArgument))
-                    ) {
+                    )
+                    {
                         nullabilityDiagnosticsBuilderOpt.Add(
                             new TypeParameterDiagnosticInfo(
                                 typeParameter,
@@ -1589,7 +1636,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
 
             static NullableFlowState getTypeArgumentState(
                 in TypeWithAnnotations typeWithAnnotations
-            ) {
+            )
+            {
                 var type = typeWithAnnotations.Type;
                 if (type is null)
                 {
@@ -1634,7 +1682,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             static bool constraintTypeAllows(
                 in TypeWithAnnotations typeWithAnnotations,
                 NullableFlowState state
-            ) {
+            )
+            {
                 if (state == NullableFlowState.NotNull)
                 {
                     return true;
@@ -1670,12 +1719,14 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             CompoundUseSiteInfo<AssemblySymbol> useSiteInfo,
             TypeParameterSymbol typeParameter,
             ref ArrayBuilder<TypeParameterDiagnosticInfo> useSiteDiagnosticsBuilder
-        ) {
+        )
+        {
             if (
                 !(useSiteInfo.AccumulatesDiagnostics && useSiteInfo.HasErrors)
                 && useSiteInfo.AccumulatesDependencies
                 && !useSiteInfo.Dependencies.IsNullOrEmpty()
-            ) {
+            )
+            {
                 ensureUseSiteDiagnosticsBuilder(ref useSiteDiagnosticsBuilder)
                     .Add(
                         new TypeParameterDiagnosticInfo(
@@ -1723,7 +1774,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
 
             static ArrayBuilder<TypeParameterDiagnosticInfo> ensureUseSiteDiagnosticsBuilder(
                 ref ArrayBuilder<TypeParameterDiagnosticInfo> useSiteDiagnosticsBuilder
-            ) {
+            )
+            {
                 return useSiteDiagnosticsBuilder ??=
                     new ArrayBuilder<TypeParameterDiagnosticInfo>();
             }
@@ -1734,7 +1786,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             TypeWithAnnotations typeArgument,
             TypeWithAnnotations constraintType,
             ref CompoundUseSiteInfo<AssemblySymbol> useSiteInfo
-        ) {
+        )
+        {
             if (constraintType.Type.IsErrorType())
             {
                 return false;
@@ -1752,7 +1805,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                     constraintType.Type,
                     ref useSiteInfo
                 )
-            ) {
+            )
+            {
                 return true;
             }
 
@@ -1767,7 +1821,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                     constraintType.Type,
                     ref useSiteInfo
                 )
-            ) {
+            )
+            {
                 return true;
             }
 
@@ -1783,7 +1838,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                         constraintType.Type,
                         ref useSiteInfo
                     )
-                ) {
+                )
+                {
                     return true;
                 }
 
@@ -1793,7 +1849,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                     var typeArgumentConstraint in typeParameter.ConstraintTypesWithDefinitionUseSiteDiagnostics(
                         ref useSiteInfo
                     )
-                ) {
+                )
+                {
                     if (
                         SatisfiesConstraintType(
                             conversions,
@@ -1801,7 +1858,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                             constraintType,
                             ref useSiteInfo
                         )
-                    ) {
+                    )
+                    {
                         return true;
                     }
                 }
@@ -1813,7 +1871,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
         private static bool IsReferenceType(
             TypeParameterSymbol typeParameter,
             ImmutableArray<TypeWithAnnotations> constraintTypes
-        ) {
+        )
+        {
             return typeParameter.HasReferenceTypeConstraint
                 || TypeParameterSymbol.CalculateIsReferenceTypeFromConstraintTypes(constraintTypes);
         }
@@ -1821,7 +1880,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
         private static bool IsValueType(
             TypeParameterSymbol typeParameter,
             ImmutableArray<TypeWithAnnotations> constraintTypes
-        ) {
+        )
+        {
             return typeParameter.HasValueTypeConstraint
                 || TypeParameterSymbol.CalculateIsValueTypeFromConstraintTypes(constraintTypes);
         }
@@ -1830,7 +1890,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             TypeParameterSymbol typeParameter,
             TypeSymbol deducedBase,
             bool classConflict
-        ) {
+        )
+        {
             // "Type parameter '{0}' inherits conflicting constraints '{1}' and '{2}'"
             return new TypeParameterDiagnosticInfo(
                 typeParameter,
@@ -1848,7 +1909,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
         private static void AddInterfaces(
             ArrayBuilder<NamedTypeSymbol> builder,
             ImmutableArray<NamedTypeSymbol> interfaces
-        ) {
+        )
+        {
             foreach (var @interface in interfaces)
             {
                 AddInterface(builder, @interface);
@@ -1858,7 +1920,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
         private static void AddInterface(
             ArrayBuilder<NamedTypeSymbol> builder,
             NamedTypeSymbol @interface
-        ) {
+        )
+        {
             if (!builder.Contains(@interface))
             {
                 builder.Add(@interface);
@@ -1919,7 +1982,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             TypeSymbol a,
             TypeSymbol b,
             ref CompoundUseSiteInfo<AssemblySymbol> useSiteInfo
-        ) {
+        )
+        {
             Debug.Assert(IsValidEncompassedByArgument(a));
             Debug.Assert(IsValidEncompassedByArgument(b));
 
@@ -1994,7 +2058,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             ConversionsBase conversions,
             TypeSymbol effectiveBase,
             TypeSymbol deducedBase
-        ) {
+        )
+        {
             Debug.Assert((object)deducedBase != null);
             Debug.Assert((object)effectiveBase != null);
             var discardedUseSiteInfo = CompoundUseSiteInfo<AssemblySymbol>.Discarded;
@@ -2017,7 +2082,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
         internal static TypeWithAnnotations ConstraintWithMostSignificantNullability(
             TypeWithAnnotations type1,
             TypeWithAnnotations type2
-        ) {
+        )
+        {
             switch (type2.NullableAnnotation)
             {
                 case NullableAnnotation.Annotated:
@@ -2039,7 +2105,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
         internal static bool IsObjectConstraint(
             TypeWithAnnotations type,
             ref TypeWithAnnotations bestObjectConstraint
-        ) {
+        )
+        {
             if (type.SpecialType == SpecialType.System_Object)
             {
                 switch (type.NullableAnnotation)
@@ -2070,7 +2137,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
         internal static bool IsObjectConstraintSignificant(
             bool? isNotNullable,
             TypeWithAnnotations objectConstraint
-        ) {
+        )
+        {
             switch (isNotNullable)
             {
                 case true:

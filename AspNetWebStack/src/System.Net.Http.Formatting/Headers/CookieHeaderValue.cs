@@ -202,7 +202,8 @@ namespace System.Net.Http.Headers
             bool first,
             string name,
             string value
-        ) {
+        )
+        {
             if (first)
             {
                 first = false;

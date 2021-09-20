@@ -454,7 +454,8 @@ namespace Bar
         public async Task TestInvalidFileHeaderWithWrongTextInRegionAsync(
             string startLabel,
             string endLabel
-        ) {
+        )
+        {
             var testCode =
                 $@"#region{startLabel}
 [|//|] Copyright (c) OtherCorp. All rights reserved.

@@ -24,7 +24,8 @@ namespace Microsoft.CodeAnalysis
             HostLanguageServices languageServices,
             SolutionServices solutionServices,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var options = generatedSyntaxTree.Options;
             var filePath = generatedSyntaxTree.FilePath;
 
@@ -92,16 +93,18 @@ namespace Microsoft.CodeAnalysis
             TreeAndVersion treeAndVersion,
             ISourceGenerator sourceGenerator,
             string hintName
-        ) : base(
-            languageServices,
-            solutionServices,
-            documentServiceProvider,
-            attributes,
-            options,
-            sourceText,
-            textSource,
-            new ConstantValueSource<TreeAndVersion>(treeAndVersion)
-        ) {
+        )
+            : base(
+                languageServices,
+                solutionServices,
+                documentServiceProvider,
+                attributes,
+                options,
+                sourceText,
+                textSource,
+                new ConstantValueSource<TreeAndVersion>(treeAndVersion)
+            )
+        {
             SourceGenerator = sourceGenerator;
             HintName = hintName;
         }
@@ -128,7 +131,8 @@ namespace Microsoft.CodeAnalysis
             ValueSource<TextAndVersion> newTextSource,
             PreservationMode mode,
             bool incremental
-        ) {
+        )
+        {
             throw new NotSupportedException(
                 WorkspacesResources.The_contents_of_a_SourceGeneratedDocument_may_not_be_changed
             );
@@ -139,13 +143,15 @@ namespace Microsoft.CodeAnalysis
             SyntaxTree lazySyntaxTree,
             ParseOptions parseOptions,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             if (
                 TryGetText(out var existingText)
                 && Checksum.From(existingText.GetChecksum())
                     == Checksum.From(sourceText.GetChecksum())
                 && SyntaxTree.Options.Equals(parseOptions)
-            ) {
+            )
+            {
                 // We can reuse this instance directly
                 return this;
             }

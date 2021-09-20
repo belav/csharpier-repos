@@ -130,7 +130,8 @@ namespace JIT.HardwareIntrinsics.Arm
                     (alignment != 16 && alignment != 8)
                     || (alignment * 2) < sizeOfinArray
                     || (alignment * 2) < sizeOfoutArray
-                ) {
+                )
+                {
                     throw new ArgumentException("Invalid value of alignment");
                 }
 
@@ -189,7 +190,8 @@ namespace JIT.HardwareIntrinsics.Arm
 
             public void RunStructFldScenario(
                 ImmUnaryOpTest__ShiftRightArithmeticRoundedNarrowingSaturateUnsignedLower_Vector64_UInt32_1 testClass
-            ) {
+            )
+            {
                 var result = AdvSimd.ShiftRightArithmeticRoundedNarrowingSaturateUnsignedLower(
                     _fld,
                     1
@@ -201,7 +203,8 @@ namespace JIT.HardwareIntrinsics.Arm
 
             public void RunStructFldScenario_Load(
                 ImmUnaryOpTest__ShiftRightArithmeticRoundedNarrowingSaturateUnsignedLower_Vector64_UInt32_1 testClass
-            ) {
+            )
+            {
                 fixed (Vector128<Int64>* pFld = &_fld)
                 {
                     var result = AdvSimd.ShiftRightArithmeticRoundedNarrowingSaturateUnsignedLower(
@@ -515,7 +518,8 @@ namespace JIT.HardwareIntrinsics.Arm
             Vector128<Int64> firstOp,
             void* result,
             [CallerMemberName] string method = ""
-        ) {
+        )
+        {
             Int64[] inArray = new Int64[Op1ElementCount];
             UInt32[] outArray = new UInt32[RetElementCount];
 
@@ -533,7 +537,8 @@ namespace JIT.HardwareIntrinsics.Arm
             void* firstOp,
             void* result,
             [CallerMemberName] string method = ""
-        ) {
+        )
+        {
             Int64[] inArray = new Int64[Op1ElementCount];
             UInt32[] outArray = new UInt32[RetElementCount];
 
@@ -555,7 +560,8 @@ namespace JIT.HardwareIntrinsics.Arm
             Int64[] firstOp,
             UInt32[] result,
             [CallerMemberName] string method = ""
-        ) {
+        )
+        {
             bool succeeded = true;
 
             for (var i = 0; i < RetElementCount; i++)
@@ -563,7 +569,8 @@ namespace JIT.HardwareIntrinsics.Arm
                 if (
                     Helpers.ShiftRightArithmeticRoundedNarrowingSaturateUnsigned(firstOp[i], Imm)
                     != result[i]
-                ) {
+                )
+                {
                     succeeded = false;
                     break;
                 }

@@ -22,7 +22,8 @@ namespace Microsoft.AspNetCore.Mvc.Infrastructure
             ref Utf8JsonReader reader,
             Type typeToConvert,
             JsonSerializerOptions options
-        ) {
+        )
+        {
             var problemDetails = new ProblemDetails();
 
             if (reader.TokenType != JsonTokenType.StartObject)
@@ -47,7 +48,8 @@ namespace Microsoft.AspNetCore.Mvc.Infrastructure
             Utf8JsonWriter writer,
             ProblemDetails value,
             JsonSerializerOptions options
-        ) {
+        )
+        {
             writer.WriteStartObject();
             WriteProblemDetails(writer, value, options);
             writer.WriteEndObject();
@@ -57,7 +59,8 @@ namespace Microsoft.AspNetCore.Mvc.Infrastructure
             ref Utf8JsonReader reader,
             ProblemDetails value,
             JsonSerializerOptions options
-        ) {
+        )
+        {
             if (TryReadStringProperty(ref reader, Type, out var propertyValue))
             {
                 value.Type = propertyValue;
@@ -102,7 +105,8 @@ namespace Microsoft.AspNetCore.Mvc.Infrastructure
             ref Utf8JsonReader reader,
             JsonEncodedText propertyName,
             [NotNullWhen(true)] out string? value
-        ) {
+        )
+        {
             if (!reader.ValueTextEquals(propertyName.EncodedUtf8Bytes))
             {
                 value = default;
@@ -118,7 +122,8 @@ namespace Microsoft.AspNetCore.Mvc.Infrastructure
             Utf8JsonWriter writer,
             ProblemDetails value,
             JsonSerializerOptions options
-        ) {
+        )
+        {
             if (value.Type != null)
             {
                 writer.WriteString(Type, value.Type);

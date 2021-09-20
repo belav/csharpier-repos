@@ -89,7 +89,8 @@ namespace Microsoft.Extensions.DependencyModel.Tests
                 FileShare fileShare,
                 int bufferSize,
                 FileOptions fileOptions
-            ) {
+            )
+            {
                 throw new NotImplementedException();
             }
 

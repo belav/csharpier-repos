@@ -21,7 +21,8 @@ namespace Microsoft.AspNetCore.Builder
         public static IServiceCollection AddHsts(
             this IServiceCollection services,
             Action<HstsOptions> configureOptions
-        ) {
+        )
+        {
             if (services == null)
             {
                 throw new ArgumentNullException(nameof(services));

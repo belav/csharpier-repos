@@ -52,7 +52,8 @@ namespace System.Linq.Parallel
             bool isOrdered,
             CancellationState cancellationState,
             int queryId
-        ) {
+        )
+        {
             Debug.Assert(partitions != null);
             Debug.Assert(partitions.PartitionCount > 0);
             Debug.Assert(
@@ -66,7 +67,8 @@ namespace System.Linq.Parallel
                 if (
                     options != ParallelMergeOptions.FullyBuffered
                     && !partitions.OrdinalIndexState.IsWorseThan(OrdinalIndexState.Increasing)
-                ) {
+                )
+                {
                     Debug.Assert(
                         options == ParallelMergeOptions.NotBuffered
                             || options == ParallelMergeOptions.AutoBuffered
@@ -183,7 +185,8 @@ namespace System.Linq.Parallel
             ParallelMergeOptions options,
             IntValueEvent? consumerEvent,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             AsynchronousChannel<TInputOutput>[] channels = new AsynchronousChannel<TInputOutput>[
                 partitionCount
             ];
@@ -236,7 +239,8 @@ namespace System.Linq.Parallel
 
         internal static SynchronousChannel<TInputOutput>[] MakeSynchronousChannels(
             int partitionCount
-        ) {
+        )
+        {
             SynchronousChannel<TInputOutput>[] channels = new SynchronousChannel<TInputOutput>[
                 partitionCount
             ];

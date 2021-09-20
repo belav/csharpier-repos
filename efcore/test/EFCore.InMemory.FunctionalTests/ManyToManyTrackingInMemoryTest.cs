@@ -20,7 +20,8 @@ namespace Microsoft.EntityFrameworkCore
             Action<ManyToManyContext> nestedTestOperation1 = null,
             Action<ManyToManyContext> nestedTestOperation2 = null,
             Action<ManyToManyContext> nestedTestOperation3 = null
-        ) {
+        )
+        {
             base.ExecuteWithStrategyInTransaction(
                 testOperation,
                 nestedTestOperation1,
@@ -36,7 +37,8 @@ namespace Microsoft.EntityFrameworkCore
             Func<ManyToManyContext, Task> nestedTestOperation1 = null,
             Func<ManyToManyContext, Task> nestedTestOperation2 = null,
             Func<ManyToManyContext, Task> nestedTestOperation3 = null
-        ) {
+        )
+        {
             await base.ExecuteWithStrategyInTransactionAsync(
                 testOperation,
                 nestedTestOperation1,

@@ -24,7 +24,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
             string program,
             string typeName = DefaultTypeName,
             string methodName = DefaultMethodName
-        ) {
+        )
+        {
             var compilation = CreateCompilation(program);
             var method = (MethodSymbol)compilation.GlobalNamespace.GetTypeMembers(typeName)
                 .Single()

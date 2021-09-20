@@ -24,7 +24,8 @@ namespace System.IO.Ports.Tests
                 SerialPort com1 = new SerialPort(
                     TCSupport.LocalMachineSerialInfo.FirstAvailablePortName
                 )
-            ) {
+            )
+            {
                 SerialPortProperties serPortProp = new SerialPortProperties();
 
                 Debug.WriteLine("Verifying default BytesToRead");
@@ -52,7 +53,8 @@ namespace System.IO.Ports.Tests
                 SerialPort com2 = new SerialPort(
                     TCSupport.LocalMachineSerialInfo.SecondAvailablePortName
                 )
-            ) {
+            )
+            {
                 SerialPortProperties serPortProp = new SerialPortProperties();
 
                 Debug.WriteLine("Verifying BytesToRead after receiving a random number of bytes");
@@ -134,7 +136,8 @@ namespace System.IO.Ports.Tests
             ReadMethodDelegate readMethod,
             int bufferSize,
             bool sendNewLine
-        ) {
+        )
+        {
             using (
                 SerialPort com1 = new SerialPort(
                     TCSupport.LocalMachineSerialInfo.FirstAvailablePortName
@@ -144,7 +147,8 @@ namespace System.IO.Ports.Tests
                 SerialPort com2 = new SerialPort(
                     TCSupport.LocalMachineSerialInfo.SecondAvailablePortName
                 )
-            ) {
+            )
+            {
                 SerialPortProperties serPortProp = new SerialPortProperties();
                 int numNewLineBytes = 0;
 

@@ -29,7 +29,8 @@ namespace System.DirectoryServices.ActiveDirectory
             DirectoryContext context,
             string bridgeName,
             ActiveDirectoryTransportType transport
-        ) {
+        )
+        {
             ValidateArgument(context, bridgeName, transport);
 
             //  work with copy of the context
@@ -88,7 +89,8 @@ namespace System.DirectoryServices.ActiveDirectory
                     if (
                         Utils.CheckCapability(tmpDE, Capability.ActiveDirectoryApplicationMode)
                         && transport == ActiveDirectoryTransportType.Smtp
-                    ) {
+                    )
+                    {
                         throw new NotSupportedException(SR.NotSupportTransportSMTP);
                     }
                 }
@@ -106,7 +108,8 @@ namespace System.DirectoryServices.ActiveDirectory
             string bridgeName,
             ActiveDirectoryTransportType transport,
             bool existing
-        ) {
+        )
+        {
             this.context = context;
             _name = bridgeName;
             _transport = transport;
@@ -117,7 +120,8 @@ namespace System.DirectoryServices.ActiveDirectory
         public static ActiveDirectorySiteLinkBridge FindByName(
             DirectoryContext context,
             string bridgeName
-        ) {
+        )
+        {
             return FindByName(context, bridgeName, ActiveDirectoryTransportType.Rpc);
         }
 
@@ -125,7 +129,8 @@ namespace System.DirectoryServices.ActiveDirectory
             DirectoryContext context,
             string bridgeName,
             ActiveDirectoryTransportType transport
-        ) {
+        )
+        {
             ValidateArgument(context, bridgeName, transport);
 
             //  work with copy of the context
@@ -211,7 +216,8 @@ namespace System.DirectoryServices.ActiveDirectory
                     if (
                         Utils.CheckCapability(tmpDE, Capability.ActiveDirectoryApplicationMode)
                         && transport == ActiveDirectoryTransportType.Smtp
-                    ) {
+                    )
+                    {
                         throw new NotSupportedException(SR.NotSupportTransportSMTP);
                     }
                     else
@@ -374,7 +380,8 @@ namespace System.DirectoryServices.ActiveDirectory
             DirectoryContext context,
             string bridgeName,
             ActiveDirectoryTransportType transport
-        ) {
+        )
+        {
             // basic validation first
             if (context == null)
                 throw new ArgumentNullException(nameof(context));

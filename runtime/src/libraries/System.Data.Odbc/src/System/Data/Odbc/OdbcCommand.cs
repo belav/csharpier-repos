@@ -541,7 +541,8 @@ namespace System.Data.Odbc
         internal OdbcDataReader ExecuteReaderFromSQLMethod(
             object?[]? methodArguments,
             ODBC32.SQL_API method
-        ) {
+        )
+        {
             return ExecuteReaderObject(
                 CommandBehavior.Default,
                 method.ToString(),
@@ -555,7 +556,8 @@ namespace System.Data.Odbc
             CommandBehavior behavior,
             string method,
             bool needReader
-        ) { // MDAC 68324
+        )
+        { // MDAC 68324
             if ((CommandText == null) || (CommandText.Length == 0))
             {
                 throw (ADP.CommandTextRequired(method));
@@ -576,7 +578,8 @@ namespace System.Data.Odbc
             bool needReader,
             object?[]? methodArguments,
             ODBC32.SQL_API odbcApiMethod
-        ) { // MDAC 68324
+        )
+        { // MDAC 68324
             OdbcDataReader? localReader = null;
             try
             {
@@ -630,7 +633,8 @@ namespace System.Data.Odbc
                         if (
                             !Connection.ProviderInfo.NoSqlSoptSSNoBrowseTable
                             && !Connection.ProviderInfo.NoSqlSoptSSHiddenColumns
-                        ) {
+                        )
+                        {
                             // Need to get the metadata information
 
                             //SQLServer actually requires browse info turned on ahead of time...
@@ -679,7 +683,8 @@ namespace System.Data.Odbc
                 if (
                     localReader.IsBehavior(CommandBehavior.KeyInfo)
                     || localReader.IsBehavior(CommandBehavior.SchemaOnly)
-                ) {
+                )
+                {
                     retcode = stmt.Prepare(CommandText);
 
                     if (ODBC32.RetCode.SUCCESS != retcode)
@@ -731,13 +736,15 @@ namespace System.Data.Odbc
                                 localReader.IsBehavior(CommandBehavior.KeyInfo)
                                 || localReader.IsBehavior(CommandBehavior.SchemaOnly)
                             ) && (CommandType != CommandType.StoredProcedure)
-                        ) {
+                        )
+                        {
                             short cColsAffected;
                             retcode = stmt.NumberOfResultColumns(out cColsAffected);
                             if (
                                 retcode == ODBC32.RetCode.SUCCESS
                                 || retcode == ODBC32.RetCode.SUCCESS_WITH_INFO
-                            ) {
+                            )
+                            {
                                 if (cColsAffected > 0)
                                 {
                                     localReader.GetSchemaTable();
@@ -837,7 +844,8 @@ namespace System.Data.Odbc
                         if (
                             (ODBC32.RetCode.SUCCESS != retcode)
                             && (ODBC32.RetCode.NO_DATA != retcode)
-                        ) {
+                        )
+                        {
                             _connection!.HandleError(stmt, retcode);
                         }
                     } // end SchemaOnly
@@ -953,7 +961,8 @@ namespace System.Data.Odbc
             OdbcStatementHandle stmt,
             ODBC32.SQL_ATTR stmtAttribute,
             IntPtr value
-        ) {
+        )
+        {
             ODBC32.RetCode retcode = stmt.SetStatementAttribute(
                 stmtAttribute,
                 value,

@@ -24,7 +24,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.CodeModel.Colle
             object parent,
             ProjectId projectId,
             INamespaceSymbol namespaceSymbol
-        ) {
+        )
+        {
             var collection = new ExternalNamespaceCollection(
                 state,
                 parent,
@@ -61,7 +62,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.CodeModel.Colle
                         _projectId,
                         _namespaceSymbolId
                     )
-                ) {
+                )
+                {
                     childrenBuilder.Add(child);
                 }
 

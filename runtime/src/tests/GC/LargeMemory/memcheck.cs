@@ -26,7 +26,8 @@ public static class MemCheck
                 (e is IndexOutOfRangeException)
                 || (e is FormatException)
                 || (e is OverflowException)
-            ) {
+            )
+            {
                 throw new Exception("args: uint - number of MB to allocate");
             }
             throw;

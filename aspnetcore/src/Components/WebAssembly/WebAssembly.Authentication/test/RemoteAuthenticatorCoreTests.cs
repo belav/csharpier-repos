@@ -746,7 +746,8 @@ namespace Microsoft.AspNetCore.Components.WebAssembly.Authentication
         [MemberData(nameof(DisplaysRightUIData))]
         public async Task AuthenticationManager_DisplaysRightUI_ForEachStateAsync(
             UIValidator validator
-        ) {
+        )
+        {
             // Arrange
             var renderer = new TestRenderer(new ServiceCollection().BuildServiceProvider());
             var authenticator = new TestRemoteAuthenticatorView();
@@ -770,7 +771,8 @@ namespace Microsoft.AspNetCore.Components.WebAssembly.Authentication
         [MemberData(nameof(DisplaysRightUIData))]
         public async Task AuthenticationManager_DoesNotThrowExceptionOnDisplaysUI_WhenPathsAreMissing(
             UIValidator validator
-        ) {
+        )
+        {
             // Arrange
             var renderer = new TestRenderer(new ServiceCollection().BuildServiceProvider());
             var authenticator = new TestRemoteAuthenticatorView(
@@ -836,7 +838,8 @@ namespace Microsoft.AspNetCore.Components.WebAssembly.Authentication
         public async Task AuthenticationManager_DisplaysRightUI_WhenPathsAreMissing(
             UIValidator validator,
             string methodName
-        ) {
+        )
+        {
             // Arrange
             var renderer = new TestRenderer(new ServiceCollection().BuildServiceProvider());
             var jsRuntime = new TestJsRuntime();
@@ -892,7 +895,8 @@ namespace Microsoft.AspNetCore.Components.WebAssembly.Authentication
         private static (RemoteAuthenticatorViewCore<RemoteAuthenticationState> manager, TestRenderer renderer, TestRemoteAuthenticationService authenticationServiceMock, TestJsRuntime js) CreateAuthenticationManager(
             string currentUri,
             string baseUri = "https://www.example.com/base/"
-        ) {
+        )
+        {
             var renderer = new TestRenderer(new ServiceCollection().BuildServiceProvider());
             var remoteAuthenticator = new RemoteAuthenticatorViewCore<RemoteAuthenticationState>();
             renderer.Attach(remoteAuthenticator);
@@ -958,7 +962,8 @@ namespace Microsoft.AspNetCore.Components.WebAssembly.Authentication
                 string identifier,
                 CancellationToken cancellationToken,
                 object[] args
-            ) {
+            )
+            {
                 LastInvocation = (identifier, args);
                 return default;
             }
@@ -979,7 +984,8 @@ namespace Microsoft.AspNetCore.Components.WebAssembly.Authentication
             public TestRemoteAuthenticatorView(
                 RemoteAuthenticationApplicationPathsOptions applicationPaths,
                 IJSRuntime jsRuntime = default
-            ) {
+            )
+            {
                 ApplicationPaths = applicationPaths;
                 JS = jsRuntime;
             }
@@ -1006,14 +1012,15 @@ namespace Microsoft.AspNetCore.Components.WebAssembly.Authentication
                 IJSRuntime jsRuntime,
                 IOptionsSnapshot<RemoteAuthenticationOptions<OidcProviderOptions>> options,
                 TestNavigationManager navigationManager
-            ) : base(
-                jsRuntime,
-                options,
-                navigationManager,
-                new AccountClaimsPrincipalFactory<RemoteUserAccount>(
-                    Mock.Of<IAccessTokenProviderAccessor>()
-                )
-            ) { }
+            )
+                : base(
+                    jsRuntime,
+                    options,
+                    navigationManager,
+                    new AccountClaimsPrincipalFactory<RemoteUserAccount>(
+                        Mock.Of<IAccessTokenProviderAccessor>()
+                    )
+                ) { }
 
             public Func<
                 RemoteAuthenticationContext<RemoteAuthenticationState>,

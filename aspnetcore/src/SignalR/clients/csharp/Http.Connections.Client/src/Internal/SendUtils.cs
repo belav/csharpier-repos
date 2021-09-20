@@ -21,7 +21,8 @@ namespace Microsoft.AspNetCore.Http.Connections.Client.Internal
             HttpClient httpClient,
             ILogger logger,
             CancellationToken cancellationToken = default
-        ) {
+        )
+        {
             Log.SendStarted(logger);
 
             try
@@ -60,7 +61,8 @@ namespace Microsoft.AspNetCore.Http.Connections.Client.Internal
                                     HttpCompletionOption.ResponseHeadersRead,
                                     cancellationToken
                                 )
-                            ) {
+                            )
+                            {
                                 response.EnsureSuccessStatusCode();
                             }
 

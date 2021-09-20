@@ -49,7 +49,8 @@ namespace System.Security.Cryptography.Pkcs
         internal SubjectIdentifier(
             IssuerAndSerialNumberAsn? issuerAndSerialNumber,
             ReadOnlyMemory<byte>? subjectKeyIdentifier
-        ) {
+        )
+        {
             if (issuerAndSerialNumber.HasValue)
             {
                 ReadOnlySpan<byte> issuerNameSpan = issuerAndSerialNumber.Value.Issuer.Span;

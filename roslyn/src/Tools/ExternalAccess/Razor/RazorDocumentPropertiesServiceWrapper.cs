@@ -11,7 +11,8 @@ namespace Microsoft.CodeAnalysis.ExternalAccess.Razor
     {
         public RazorDocumentPropertiesServiceWrapper(
             IRazorDocumentPropertiesService razorDocumentPropertiesService
-        ) {
+        )
+        {
             DiagnosticsLspClientName = razorDocumentPropertiesService.DiagnosticsLspClientName;
         }
 

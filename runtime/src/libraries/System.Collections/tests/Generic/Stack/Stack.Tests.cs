@@ -34,7 +34,8 @@ namespace System.Collections.Tests
         /// </summary>
         protected override IEnumerable<ModifyEnumerable> GetModifyEnumerables(
             ModifyOperation operations
-        ) {
+        )
+        {
             if ((operations & ModifyOperation.Add) == ModifyOperation.Add)
             {
                 yield return (IEnumerable enumerable) =>

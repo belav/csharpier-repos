@@ -353,7 +353,8 @@ namespace System.Web.Http
                 {
                     Content = new ObjectContent<User>(postedUser, new XmlMediaTypeFormatter())
                 }
-            ) {
+            )
+            {
                 serializedUserAsString = await tempRequest.Content.ReadAsStringAsync();
             }
 
@@ -906,7 +907,8 @@ namespace System.Web.Http
             ApiController controller,
             Exception expectedException,
             Action<HttpConfiguration> configure
-        ) {
+        )
+        {
             // Arrange
             Exception actualException = null;
             IHttpRouteData routeData = new HttpRouteData(new HttpRoute());
@@ -1606,7 +1608,8 @@ namespace System.Web.Http
                 Func<Task<HttpResponseMessage>>,
                 Task<HttpResponseMessage>
             > implementation
-        ) {
+        )
+        {
             Mock<IAuthorizationFilter> filterMock = new Mock<IAuthorizationFilter>();
             filterMock.Setup(
                     f =>
@@ -1628,7 +1631,8 @@ namespace System.Web.Http
                 Func<Task<HttpResponseMessage>>,
                 Task<HttpResponseMessage>
             > implementation
-        ) {
+        )
+        {
             Mock<IActionFilter> filterMock = new Mock<IActionFilter>();
             filterMock.Setup(
                     f =>
@@ -1686,7 +1690,8 @@ namespace System.Web.Http
             HttpConfiguration configuration,
             HttpActionDescriptor action,
             params FilterInfo[] filters
-        ) {
+        )
+        {
             var servicesMock = new Mock<DefaultServices> { CallBase = true };
             var filterProviderMock = new Mock<IFilterProvider>();
             servicesMock.Setup(r => r.GetServices(typeof(IFilterProvider)))

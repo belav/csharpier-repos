@@ -108,33 +108,35 @@ namespace Microsoft.CodeAnalysis.CSharp.Extensions.ContextQuery
             bool isInArgumentList,
             bool isFunctionPointerTypeArgumentContext,
             CancellationToken cancellationToken
-        ) : base(
-            workspace,
-            semanticModel,
-            position,
-            leftToken,
-            targetToken,
-            isTypeContext,
-            isNamespaceContext,
-            isNamespaceDeclarationNameContext,
-            isPreProcessorDirectiveContext,
-            isPreProcessorExpressionContext,
-            isRightOfDotOrArrowOrColonColon,
-            isStatementContext,
-            isAnyExpressionContext,
-            isAttributeNameContext,
-            isEnumTypeMemberAccessContext,
-            isNameOfContext,
-            isInQuery,
-            isInImportsDirective,
-            IsWithinAsyncMethod(),
-            isPossibleTupleContext,
-            isStartPatternContext,
-            isAfterPatternContext,
-            isRightSideOfNumericType,
-            isInArgumentList,
-            cancellationToken
-        ) {
+        )
+            : base(
+                workspace,
+                semanticModel,
+                position,
+                leftToken,
+                targetToken,
+                isTypeContext,
+                isNamespaceContext,
+                isNamespaceDeclarationNameContext,
+                isPreProcessorDirectiveContext,
+                isPreProcessorExpressionContext,
+                isRightOfDotOrArrowOrColonColon,
+                isStatementContext,
+                isAnyExpressionContext,
+                isAttributeNameContext,
+                isEnumTypeMemberAccessContext,
+                isNameOfContext,
+                isInQuery,
+                isInImportsDirective,
+                IsWithinAsyncMethod(),
+                isPossibleTupleContext,
+                isStartPatternContext,
+                isAfterPatternContext,
+                isRightSideOfNumericType,
+                isInArgumentList,
+                cancellationToken
+            )
+        {
             this.ContainingTypeDeclaration = containingTypeDeclaration;
             this.ContainingTypeOrEnumDeclaration = containingTypeOrEnumDeclaration;
             this.IsInNonUserCode = isInNonUserCode;
@@ -181,7 +183,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Extensions.ContextQuery
             SemanticModel semanticModel,
             int position,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var syntaxTree = semanticModel.SyntaxTree;
 
             var isInNonUserCode = syntaxTree.IsInNonUserCode(position, cancellationToken);
@@ -420,7 +423,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Extensions.ContextQuery
             SemanticModel semanticModel,
             int position,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var inferenceService = new CSharpTypeInferenceService();
             _ = inferenceService.InferTypes(semanticModel, position, cancellationToken);
             return CreateContextWorker(
@@ -459,7 +463,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Extensions.ContextQuery
                     canBePartial: false,
                     cancellationToken: cancellationToken
                 )
-            ) {
+            )
+            {
                 return true;
             }
 
@@ -471,7 +476,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Extensions.ContextQuery
             ISet<SyntaxKind>? validTypeDeclarations = null,
             bool canBePartial = false,
             CancellationToken cancellationToken = default
-        ) {
+        )
+        {
             return this.SyntaxTree.IsTypeDeclarationContext(
                 this.Position,
                 this,
@@ -485,7 +491,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Extensions.ContextQuery
         public bool IsMemberAttributeContext(
             ISet<SyntaxKind> validTypeDeclarations,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             // cases:
             //   class C { [ |
             var token = this.TargetToken;
@@ -501,7 +508,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Extensions.ContextQuery
                     canBePartial: false,
                     cancellationToken: cancellationToken
                 )
-            ) {
+            )
+            {
                 return true;
             }
 
@@ -516,7 +524,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Extensions.ContextQuery
                 token.Kind() == SyntaxKind.OpenBracketToken
                 && token.Parent.IsKind(SyntaxKind.AttributeList)
                 && token.Parent.Parent is StatementSyntax
-            ) {
+            )
+            {
                 return true;
             }
 
@@ -528,7 +537,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Extensions.ContextQuery
             ISet<SyntaxKind>? validTypeDeclarations = null,
             bool canBePartial = false,
             CancellationToken cancellationToken = default
-        ) {
+        )
+        {
             return this.SyntaxTree.IsMemberDeclarationContext(
                 this.Position,
                 this,
@@ -584,7 +594,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Extensions.ContextQuery
                 SyntaxTree.IsScript()
                 && targetToken.IsKind(SyntaxKind.IdentifierToken)
                 && targetToken.HasMatchingText(SyntaxKind.AwaitKeyword)
-            ) {
+            )
+            {
                 // The 'await' keyword is parsed as an identifier in C# script
                 return SyntaxTree.IsGlobalStatementContext(
                     targetToken.SpanStart,

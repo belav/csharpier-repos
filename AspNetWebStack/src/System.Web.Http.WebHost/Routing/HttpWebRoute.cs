@@ -62,7 +62,8 @@ namespace System.Web.Http.WebHost.Routing
             string parameterName,
             RouteValueDictionary values,
             RouteDirection routeDirection
-        ) {
+        )
+        {
             // The base class will validate that a constraint is either a string or IRoutingConstraint inside its
             // ProcessConstraint method. We're doing the validation up front here because we also support
             // IHttpRouteConstraint and we want the error message to reflect all three valid possibilities.
@@ -127,7 +128,8 @@ namespace System.Web.Http.WebHost.Routing
         public override VirtualPathData GetVirtualPath(
             RequestContext requestContext,
             RouteValueDictionary values
-        ) {
+        )
+        {
             // Only perform URL generation if the "httproute" key was specified. This allows these
             // routes to be ignored when a regular MVC app tries to generate URLs. Without this special
             // key an HTTP route used for Web API would normally take over almost all the routes in a
@@ -158,13 +160,15 @@ namespace System.Web.Http.WebHost.Routing
 
         private static RouteValueDictionary GetRouteDictionaryWithoutHttpRouteKey(
             IDictionary<string, object> routeValues
-        ) {
+        )
+        {
             var newRouteValues = new RouteValueDictionary();
             foreach (var routeValue in routeValues)
             {
                 if (
                     !String.Equals(routeValue.Key, HttpRouteKey, StringComparison.OrdinalIgnoreCase)
-                ) {
+                )
+                {
                     newRouteValues.Add(routeValue.Key, routeValue.Value);
                 }
             }
@@ -197,7 +201,8 @@ namespace System.Web.Http.WebHost.Routing
             string routeTemplate,
             string name,
             object constraint
-        ) {
+        )
+        {
             if (constraint is IHttpRouteConstraint)
             {
                 return;
@@ -221,7 +226,8 @@ namespace System.Web.Http.WebHost.Routing
         private static Exception CreateInvalidConstraintTypeException(
             string routeTemplate,
             string name
-        ) {
+        )
+        {
             return Error.InvalidOperation(
                 SRResources.Route_ValidationMustBeStringOrCustomConstraint,
                 name,

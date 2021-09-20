@@ -61,7 +61,8 @@ namespace System.Collections.Immutable
                 IEqualityComparer<T> equalityComparer,
                 IEqualityComparer<HashBucket> hashBucketEqualityComparer,
                 int count
-            ) {
+            )
+            {
                 Requires.NotNull(root, nameof(root));
                 Requires.NotNull(equalityComparer, nameof(equalityComparer));
                 Requires.Range(count >= 0, nameof(count));

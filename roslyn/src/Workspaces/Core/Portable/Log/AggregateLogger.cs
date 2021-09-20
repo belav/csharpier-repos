@@ -43,7 +43,8 @@ namespace Microsoft.CodeAnalysis.Internal.Log
             ILogger newLogger,
             ILogger oldLogger,
             Func<ILogger, bool> predicate
-        ) {
+        )
+        {
             if (newLogger == null)
             {
                 return oldLogger;
@@ -134,7 +135,8 @@ namespace Microsoft.CodeAnalysis.Internal.Log
             LogMessage logMessage,
             int uniquePairId,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             for (var i = 0; i < _loggers.Length; i++)
             {
                 var logger = _loggers[i];
@@ -153,7 +155,8 @@ namespace Microsoft.CodeAnalysis.Internal.Log
             int uniquePairId,
             int delta,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             for (var i = 0; i < _loggers.Length; i++)
             {
                 var logger = _loggers[i];

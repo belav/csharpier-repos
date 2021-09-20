@@ -23,7 +23,8 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Extensions
         private static void ApplyOptions(
             this Workspace workspace,
             IEnumerable<(OptionKey key, object value)>? options
-        ) {
+        )
+        {
             if (options != null)
             {
                 var optionSet = workspace.Options;

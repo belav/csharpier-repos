@@ -25,7 +25,8 @@ namespace Internal.Cryptography.Pal.Windows
             AlgorithmIdentifier contentEncryptionAlgorithm,
             X509Certificate2Collection originatorCerts,
             CryptographicAttributeObjectCollection unprotectedAttributes
-        ) {
+        )
+        {
             using (
                 SafeCryptMsgHandle hCryptMsg = EncodeHelpers.CreateCryptMsgHandleToEncode(
                     recipients,
@@ -34,14 +35,16 @@ namespace Internal.Cryptography.Pal.Windows
                     originatorCerts,
                     unprotectedAttributes
                 )
-            ) {
+            )
+            {
                 byte[] encodedContent;
                 if (
                     contentInfo.ContentType.Value!.Equals(
                         Oids.Pkcs7Data,
                         StringComparison.OrdinalIgnoreCase
                     )
-                ) {
+                )
+                {
                     encodedContent = PkcsHelpers.EncodeOctetString(contentInfo.Content);
                 }
                 else
@@ -93,7 +96,8 @@ namespace Internal.Cryptography.Pal.Windows
 
         private static void ReencodeIfUsingIndefiniteLengthEncodingOnOuterStructure(
             ref byte[] encodedContent
-        ) {
+        )
+        {
             try
             {
                 Asn1Tag.Decode(encodedContent, out int tagLength);
@@ -140,7 +144,8 @@ namespace Internal.Cryptography.Pal.Windows
                 AlgorithmIdentifier contentEncryptionAlgorithm,
                 X509Certificate2Collection originatorCerts,
                 CryptographicAttributeObjectCollection unprotectedAttributes
-            ) {
+            )
+            {
                 using (HeapBlockRetainer hb = new HeapBlockRetainer())
                 {
                     // Deep copy the CmsRecipients (and especially their underlying X509Certificate2 objects). This will prevent malicious callers from altering them or disposing them while we're performing
@@ -185,7 +190,8 @@ namespace Internal.Cryptography.Pal.Windows
                 X509Certificate2Collection originatorCerts,
                 CryptographicAttributeObjectCollection unprotectedAttributes,
                 HeapBlockRetainer hb
-            ) {
+            )
+            {
                 CMSG_ENVELOPED_ENCODE_INFO* pEnvelopedEncodeInfo = (CMSG_ENVELOPED_ENCODE_INFO*)(
                     hb.Alloc(sizeof(CMSG_ENVELOPED_ENCODE_INFO))
                 );
@@ -284,7 +290,8 @@ namespace Internal.Cryptography.Pal.Windows
                 CmsRecipient recipient,
                 AlgorithmIdentifier contentEncryptionAlgorithm,
                 HeapBlockRetainer hb
-            ) {
+            )
+            {
                 CMSG_RECIPIENT_ENCODE_INFO recipientEncodeInfo;
                 unsafe
                 {
@@ -324,7 +331,8 @@ namespace Internal.Cryptography.Pal.Windows
             private static unsafe CMSG_KEY_TRANS_RECIPIENT_ENCODE_INFO* EncodeKeyTransRecipientInfo(
                 CmsRecipient recipient,
                 HeapBlockRetainer hb
-            ) {
+            )
+            {
                 // "recipient" is a deep-cloned CmsRecipient object whose lifetime this class controls. Because of this, we can pull out the CERT_CONTEXT* and CERT_INFO* pointers
                 // and embed pointers to them in the memory block we return. Yes, this code is scary.
                 //
@@ -333,7 +341,8 @@ namespace Internal.Cryptography.Pal.Windows
                 using (
                     SafeCertContextHandle hCertContext =
                         recipient.Certificate.CreateCertContextHandle()
-                ) {
+                )
+                {
                     CERT_CONTEXT* pCertContext = hCertContext.DangerousGetCertContext();
                     CERT_INFO* pCertInfo = pCertContext->pCertInfo;
 
@@ -362,7 +371,8 @@ namespace Internal.Cryptography.Pal.Windows
                                     out padding,
                                     out _
                                 )
-                            ) {
+                            )
+                            {
                                 throw ErrorCode.CRYPT_E_UNKNOWN_ALGO.ToCryptographicException();
                             }
                         }
@@ -456,13 +466,15 @@ namespace Internal.Cryptography.Pal.Windows
                 CmsRecipient recipient,
                 AlgorithmIdentifier contentEncryptionAlgorithm,
                 HeapBlockRetainer hb
-            ) {
+            )
+            {
                 // "recipient" is a deep-cloned CmsRecipient object whose lifetime this class controls. Because of this, we can pull out the CERT_CONTEXT* and CERT_INFO* pointers without
                 // bringing in all the SafeCertContextHandle machinery, and embed pointers to them in the memory block we return. Yes, this code is scary.
                 using (
                     SafeCertContextHandle hCertContext =
                         recipient.Certificate.CreateCertContextHandle()
-                ) {
+                )
+                {
                     CERT_CONTEXT* pCertContext = hCertContext.DangerousGetCertContext();
                     CERT_INFO* pCertInfo = pCertContext->pCertInfo;
 
@@ -546,7 +558,8 @@ namespace Internal.Cryptography.Pal.Windows
                 CERT_CONTEXT* pCertContext,
                 CERT_INFO* pCertInfo,
                 HeapBlockRetainer hb
-            ) {
+            )
+            {
                 CERT_ID recipientId = default(CERT_ID);
                 SubjectIdentifierType type = recipient.RecipientIdentifierType;
                 switch (type)
@@ -587,7 +600,8 @@ namespace Internal.Cryptography.Pal.Windows
             private static IntPtr GenerateEncryptionAuxInfoIfNeeded(
                 AlgorithmIdentifier contentEncryptionAlgorithm,
                 HeapBlockRetainer hb
-            ) {
+            )
+            {
                 string algorithmOidValue = contentEncryptionAlgorithm.Oid.Value!;
                 AlgId algId = algorithmOidValue.ToAlgId();
                 if (!(algId == AlgId.CALG_RC2 || algId == AlgId.CALG_RC4))

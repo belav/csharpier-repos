@@ -50,7 +50,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             NullabilityInfo nullability,
             NullabilityInfo convertedNullability,
             Conversion implicitConversion
-        ) {
+        )
+        {
             // When constructing the result for the Caas API, we expose the underlying symbols that
             // may have been hidden under error type, if the error type was immediate. We will
             // expose error types that were constructed, or type parameters of constructed types.

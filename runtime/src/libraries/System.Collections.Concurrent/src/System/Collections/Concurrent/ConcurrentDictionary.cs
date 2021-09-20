@@ -70,7 +70,8 @@ namespace System.Collections.Concurrent
                 !typeof(TValue).IsValueType
                 || typeof(TValue) == typeof(IntPtr)
                 || typeof(TValue) == typeof(UIntPtr)
-            ) {
+            )
+            {
                 return true;
             }
 
@@ -207,7 +208,8 @@ namespace System.Collections.Concurrent
                         acquireLock: false,
                         out _
                     )
-                ) {
+                )
+                {
                     throw new ArgumentException(
                         SR.ConcurrentDictionary_SourceContainsDuplicateKeys
                     );
@@ -241,7 +243,8 @@ namespace System.Collections.Concurrent
             int capacity,
             bool growLockArray,
             IEqualityComparer<TKey>? comparer
-        ) {
+        )
+        {
             if (concurrencyLevel < 1)
             {
                 throw new ArgumentOutOfRangeException(
@@ -396,7 +399,8 @@ namespace System.Collections.Concurrent
             [MaybeNullWhen(false)] out TValue value,
             bool matchValue,
             TValue? oldValue
-        ) {
+        )
+        {
             IEqualityComparer<TKey>? comparer = _comparer;
             int hashcode = comparer is null ? key.GetHashCode() : comparer.GetHashCode(key);
             while (true)
@@ -426,7 +430,8 @@ namespace System.Collections.Concurrent
                                     ? _defaultComparer.Equals(curr._key, key)
                                     : comparer.Equals(curr._key, key)
                             )
-                        ) {
+                        )
+                        {
                             if (matchValue)
                             {
                                 bool valuesMatch = EqualityComparer<TValue>.Default.Equals(
@@ -495,11 +500,13 @@ namespace System.Collections.Concurrent
                         Node? n = Volatile.Read(ref tables.GetBucket(hashcode));
                         n != null;
                         n = n._next
-                    ) {
+                    )
+                    {
                         if (
                             hashcode == n._hashcode
                             && EqualityComparer<TKey>.Default.Equals(n._key, key)
-                        ) {
+                        )
+                        {
                             value = n._value;
                             return true;
                         }
@@ -511,7 +518,8 @@ namespace System.Collections.Concurrent
                         Node? n = Volatile.Read(ref tables.GetBucket(hashcode));
                         n != null;
                         n = n._next
-                    ) {
+                    )
+                    {
                         if (hashcode == n._hashcode && _defaultComparer.Equals(n._key, key))
                         {
                             value = n._value;
@@ -527,7 +535,8 @@ namespace System.Collections.Concurrent
                     Node? n = Volatile.Read(ref tables.GetBucket(hashcode));
                     n != null;
                     n = n._next
-                ) {
+                )
+                {
                     if (hashcode == n._hashcode && comparer.Equals(n._key, key))
                     {
                         value = n._value;
@@ -544,7 +553,8 @@ namespace System.Collections.Concurrent
             TKey key,
             int hashcode,
             [MaybeNullWhen(false)] out TValue value
-        ) {
+        )
+        {
             Debug.Assert(
                 (_comparer is null ? key.GetHashCode() : _comparer.GetHashCode(key)) == hashcode
             );
@@ -563,11 +573,13 @@ namespace System.Collections.Concurrent
                         Node? n = Volatile.Read(ref tables.GetBucket(hashcode));
                         n != null;
                         n = n._next
-                    ) {
+                    )
+                    {
                         if (
                             hashcode == n._hashcode
                             && EqualityComparer<TKey>.Default.Equals(n._key, key)
-                        ) {
+                        )
+                        {
                             value = n._value;
                             return true;
                         }
@@ -579,7 +591,8 @@ namespace System.Collections.Concurrent
                         Node? n = Volatile.Read(ref tables.GetBucket(hashcode));
                         n != null;
                         n = n._next
-                    ) {
+                    )
+                    {
                         if (hashcode == n._hashcode && _defaultComparer.Equals(n._key, key))
                         {
                             value = n._value;
@@ -594,7 +607,8 @@ namespace System.Collections.Concurrent
                     Node? n = Volatile.Read(ref tables.GetBucket(hashcode));
                     n != null;
                     n = n._next
-                ) {
+                )
+                {
                     if (hashcode == n._hashcode && comparer.Equals(n._key, key))
                     {
                         value = n._value;
@@ -653,7 +667,8 @@ namespace System.Collections.Concurrent
             int? nullableHashcode,
             TValue newValue,
             TValue comparisonValue
-        ) {
+        )
+        {
             IEqualityComparer<TKey>? comparer = _comparer;
 
             Debug.Assert(
@@ -695,7 +710,8 @@ namespace System.Collections.Concurrent
                                     ? _defaultComparer.Equals(node._key, key)
                                     : comparer.Equals(node._key, key)
                             )
-                        ) {
+                        )
+                        {
                             if (valueComparer.Equals(node._value, comparisonValue))
                             {
                                 if (s_isValueWriteAtomic)
@@ -787,7 +803,8 @@ namespace System.Collections.Concurrent
         void ICollection<KeyValuePair<TKey, TValue>>.CopyTo(
             KeyValuePair<TKey, TValue>[] array,
             int index
-        ) {
+        )
+        {
             if (array is null)
             {
                 ThrowHelper.ThrowArgumentNullException(nameof(array));
@@ -1017,7 +1034,8 @@ namespace System.Collections.Concurrent
             bool updateIfExists,
             bool acquireLock,
             out TValue resultingValue
-        ) {
+        )
+        {
             IEqualityComparer<TKey>? comparer = _comparer;
 
             Debug.Assert(
@@ -1064,7 +1082,8 @@ namespace System.Collections.Concurrent
                                     ? _defaultComparer.Equals(node._key, key)
                                     : comparer.Equals(node._key, key)
                             )
-                        ) {
+                        )
+                        {
                             // The key was found in the dictionary. If updates are allowed, update the value for that key.
                             // We need to create a new node for the update, in order to support TValue types that cannot
                             // be written atomically, since lock-free reads may be happening concurrently.
@@ -1321,7 +1340,8 @@ namespace System.Collections.Concurrent
             TKey key,
             Func<TKey, TArg, TValue> valueFactory,
             TArg factoryArgument
-        ) {
+        )
+        {
             if (key is null)
             {
                 ThrowHelper.ThrowKeyNullException();
@@ -1412,7 +1432,8 @@ namespace System.Collections.Concurrent
             Func<TKey, TArg, TValue> addValueFactory,
             Func<TKey, TValue, TArg, TValue> updateValueFactory,
             TArg factoryArgument
-        ) {
+        )
+        {
             if (key is null)
             {
                 ThrowHelper.ThrowKeyNullException();
@@ -1454,7 +1475,8 @@ namespace System.Collections.Concurrent
                             acquireLock: true,
                             out TValue resultingValue
                         )
-                    ) {
+                    )
+                    {
                         return resultingValue;
                     }
                 }
@@ -1484,7 +1506,8 @@ namespace System.Collections.Concurrent
             TKey key,
             Func<TKey, TValue> addValueFactory,
             Func<TKey, TValue, TValue> updateValueFactory
-        ) {
+        )
+        {
             if (key is null)
             {
                 ThrowHelper.ThrowKeyNullException();
@@ -1526,7 +1549,8 @@ namespace System.Collections.Concurrent
                             acquireLock: true,
                             out TValue resultingValue
                         )
-                    ) {
+                    )
+                    {
                         return resultingValue;
                     }
                 }
@@ -1554,7 +1578,8 @@ namespace System.Collections.Concurrent
             TKey key,
             TValue addValue,
             Func<TKey, TValue, TValue> updateValueFactory
-        ) {
+        )
+        {
             if (key is null)
             {
                 ThrowHelper.ThrowKeyNullException();
@@ -1591,7 +1616,8 @@ namespace System.Collections.Concurrent
                             acquireLock: true,
                             out TValue resultingValue
                         )
-                    ) {
+                    )
+                    {
                         return resultingValue;
                     }
                 }
@@ -1736,7 +1762,8 @@ namespace System.Collections.Concurrent
         /// cref="ICollection{T}"/>; otherwise, false.</returns>
         bool ICollection<KeyValuePair<TKey, TValue>>.Contains(
             KeyValuePair<TKey, TValue> keyValuePair
-        ) {
+        )
+        {
             if (!TryGetValue(keyValuePair.Key, out TValue? value))
             {
                 return false;

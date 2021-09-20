@@ -45,7 +45,8 @@ namespace AutobahnTestAppHttpListener
             HttpListener listener,
             string wsUrl,
             CancellationToken stopToken
-        ) {
+        )
+        {
             while (!stopToken.IsCancellationRequested)
             {
                 try

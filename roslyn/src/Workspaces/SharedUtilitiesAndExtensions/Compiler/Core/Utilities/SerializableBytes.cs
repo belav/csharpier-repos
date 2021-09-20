@@ -33,7 +33,8 @@ namespace Microsoft.CodeAnalysis
         internal static async Task<PooledStream> CreateReadableStreamAsync(
             Stream stream,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var length = stream.Length;
 
             var chunkCount = (length + ChunkSize - 1) / ChunkSize;
@@ -214,7 +215,8 @@ namespace Microsoft.CodeAnalysis
                 byte[] buffer,
                 int index,
                 int count
-            ) {
+            )
+            {
                 var oldPosition = position;
 
                 while (count > 0 && position < length)

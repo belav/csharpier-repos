@@ -353,7 +353,8 @@ namespace System.Xml
             byte[] localNameBuffer,
             int localNameOffset,
             int localNameLength
-        ) {
+        )
+        {
             if (prefixBuffer == null)
                 throw System.Runtime.Serialization.DiagnosticUtility.ExceptionUtility.ThrowHelperError(
                     new ArgumentNullException(nameof(prefixBuffer))
@@ -469,7 +470,8 @@ namespace System.Xml
                             _inclusivePrefixes[i],
                             StringComparison.Ordinal
                         ) == 0
-                    ) {
+                    )
+                    {
                         return true;
                     }
                 }
@@ -510,7 +512,8 @@ namespace System.Xml
                             _xmlnsAttributes[j].prefixOffset,
                             _xmlnsAttributes[j].prefixLength
                         )
-                    ) {
+                    )
+                    {
                         // Check if the namespace is also equal.
                         if (
                             Equals(
@@ -521,7 +524,8 @@ namespace System.Xml
                                 _xmlnsAttributes[j].nsOffset,
                                 _xmlnsAttributes[j].nsLength
                             )
-                        ) {
+                        )
+                        {
                             // We have found the prefix with the same namespace occur before. See if this has been
                             // referred.
                             if (_xmlnsAttributes[j].referred)
@@ -670,7 +674,8 @@ namespace System.Xml
             byte[] nsBuffer,
             int nsOffset,
             int nsLength
-        ) {
+        )
+        {
             if (prefixBuffer == null)
                 throw System.Runtime.Serialization.DiagnosticUtility.ExceptionUtility.ThrowHelperError(
                     new ArgumentNullException(nameof(prefixBuffer))
@@ -781,7 +786,8 @@ namespace System.Xml
             byte[] localNameBuffer,
             int localNameOffset,
             int localNameLength
-        ) {
+        )
+        {
             if (prefixBuffer == null)
                 throw System.Runtime.Serialization.DiagnosticUtility.ExceptionUtility.ThrowHelperError(
                     new ArgumentNullException(nameof(prefixBuffer))
@@ -1237,7 +1243,8 @@ namespace System.Xml
             int prefixLength,
             out int nsOffset,
             out int nsLength
-        ) {
+        )
+        {
             int xmlnsAttributeMin = _scopes![_depth - 1].xmlnsAttributeCount;
 
             // Lookup the attribute; it has to be there.  The decls are in sorted order
@@ -1252,7 +1259,8 @@ namespace System.Xml
                     _xmlnsAttributes![j].prefixOffset,
                     _xmlnsAttributes[j].prefixLength
                 )
-            ) {
+            )
+            {
                 j--;
             }
 
@@ -1360,7 +1368,8 @@ namespace System.Xml
             byte[] buffer2,
             int offset2,
             int length2
-        ) {
+        )
+        {
             //            Console.WriteLine("Compare: \"{0}\", \"{1}\"", Encoding.UTF8.GetString(sourceBuffer, offset1, length1), Encoding.UTF8.GetString(sourceBuffer, offset2, length2));
 
             int length = Math.Min(length1, length2);
@@ -1386,7 +1395,8 @@ namespace System.Xml
             byte[] buffer2,
             int offset2,
             int length2
-        ) {
+        )
+        {
             //            Console.WriteLine("Equals: \"{0}\", \"{1}\"", Encoding.UTF8.GetString(buffer1, offset1, length1), Encoding.UTF8.GetString(buffer2, offset2, length2));
 
             if (length1 != length2)

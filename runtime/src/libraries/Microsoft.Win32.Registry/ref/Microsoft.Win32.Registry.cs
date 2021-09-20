@@ -66,14 +66,16 @@ namespace Microsoft.Win32
         public Microsoft.Win32.RegistryKey CreateSubKey(
             string subkey,
             Microsoft.Win32.RegistryKeyPermissionCheck permissionCheck
-        ) {
+        )
+        {
             throw null;
         }
         public Microsoft.Win32.RegistryKey CreateSubKey(
             string subkey,
             Microsoft.Win32.RegistryKeyPermissionCheck permissionCheck,
             Microsoft.Win32.RegistryOptions registryOptions
-        ) {
+        )
+        {
             throw null;
         }
         public Microsoft.Win32.RegistryKey CreateSubKey(
@@ -81,14 +83,16 @@ namespace Microsoft.Win32
             Microsoft.Win32.RegistryKeyPermissionCheck permissionCheck,
             Microsoft.Win32.RegistryOptions registryOptions,
             System.Security.AccessControl.RegistrySecurity? registrySecurity
-        ) {
+        )
+        {
             throw null;
         }
         public Microsoft.Win32.RegistryKey CreateSubKey(
             string subkey,
             Microsoft.Win32.RegistryKeyPermissionCheck permissionCheck,
             System.Security.AccessControl.RegistrySecurity? registrySecurity
-        ) {
+        )
+        {
             throw null;
         }
         public Microsoft.Win32.RegistryKey CreateSubKey(string subkey, bool writable)
@@ -99,7 +103,8 @@ namespace Microsoft.Win32
             string subkey,
             bool writable,
             Microsoft.Win32.RegistryOptions options
-        ) {
+        )
+        {
             throw null;
         }
         public void DeleteSubKey(string subkey) { }
@@ -112,13 +117,15 @@ namespace Microsoft.Win32
         public void Flush() { }
         public static Microsoft.Win32.RegistryKey FromHandle(
             Microsoft.Win32.SafeHandles.SafeRegistryHandle handle
-        ) {
+        )
+        {
             throw null;
         }
         public static Microsoft.Win32.RegistryKey FromHandle(
             Microsoft.Win32.SafeHandles.SafeRegistryHandle handle,
             Microsoft.Win32.RegistryView view
-        ) {
+        )
+        {
             throw null;
         }
         public System.Security.AccessControl.RegistrySecurity GetAccessControl()
@@ -127,7 +134,8 @@ namespace Microsoft.Win32
         }
         public System.Security.AccessControl.RegistrySecurity GetAccessControl(
             System.Security.AccessControl.AccessControlSections includeSections
-        ) {
+        )
+        {
             throw null;
         }
         public string[] GetSubKeyNames()
@@ -146,7 +154,8 @@ namespace Microsoft.Win32
             string? name,
             object? defaultValue,
             Microsoft.Win32.RegistryValueOptions options
-        ) {
+        )
+        {
             throw null;
         }
         public Microsoft.Win32.RegistryValueKind GetValueKind(string? name)
@@ -160,20 +169,23 @@ namespace Microsoft.Win32
         public static Microsoft.Win32.RegistryKey OpenBaseKey(
             Microsoft.Win32.RegistryHive hKey,
             Microsoft.Win32.RegistryView view
-        ) {
+        )
+        {
             throw null;
         }
         public static Microsoft.Win32.RegistryKey OpenRemoteBaseKey(
             Microsoft.Win32.RegistryHive hKey,
             string machineName
-        ) {
+        )
+        {
             throw null;
         }
         public static Microsoft.Win32.RegistryKey OpenRemoteBaseKey(
             Microsoft.Win32.RegistryHive hKey,
             string machineName,
             Microsoft.Win32.RegistryView view
-        ) {
+        )
+        {
             throw null;
         }
         public Microsoft.Win32.RegistryKey? OpenSubKey(string name)
@@ -183,14 +195,16 @@ namespace Microsoft.Win32
         public Microsoft.Win32.RegistryKey? OpenSubKey(
             string name,
             Microsoft.Win32.RegistryKeyPermissionCheck permissionCheck
-        ) {
+        )
+        {
             throw null;
         }
         public Microsoft.Win32.RegistryKey? OpenSubKey(
             string name,
             Microsoft.Win32.RegistryKeyPermissionCheck permissionCheck,
             System.Security.AccessControl.RegistryRights rights
-        ) {
+        )
+        {
             throw null;
         }
         public Microsoft.Win32.RegistryKey? OpenSubKey(string name, bool writable)
@@ -200,7 +214,8 @@ namespace Microsoft.Win32
         public Microsoft.Win32.RegistryKey? OpenSubKey(
             string name,
             System.Security.AccessControl.RegistryRights rights
-        ) {
+        )
+        {
             throw null;
         }
         public void SetAccessControl(
@@ -275,54 +290,58 @@ namespace System.Security.AccessControl
             System.Security.Principal.IdentityReference identity,
             System.Security.AccessControl.RegistryRights registryRights,
             System.Security.AccessControl.AccessControlType type
-        ) : base(
-            default(System.Security.Principal.IdentityReference),
-            default(int),
-            default(bool),
-            default(System.Security.AccessControl.InheritanceFlags),
-            default(System.Security.AccessControl.PropagationFlags),
-            default(System.Security.AccessControl.AccessControlType)
-        ) { }
+        )
+            : base(
+                default(System.Security.Principal.IdentityReference),
+                default(int),
+                default(bool),
+                default(System.Security.AccessControl.InheritanceFlags),
+                default(System.Security.AccessControl.PropagationFlags),
+                default(System.Security.AccessControl.AccessControlType)
+            ) { }
         public RegistryAccessRule(
             System.Security.Principal.IdentityReference identity,
             System.Security.AccessControl.RegistryRights registryRights,
             System.Security.AccessControl.InheritanceFlags inheritanceFlags,
             System.Security.AccessControl.PropagationFlags propagationFlags,
             System.Security.AccessControl.AccessControlType type
-        ) : base(
-            default(System.Security.Principal.IdentityReference),
-            default(int),
-            default(bool),
-            default(System.Security.AccessControl.InheritanceFlags),
-            default(System.Security.AccessControl.PropagationFlags),
-            default(System.Security.AccessControl.AccessControlType)
-        ) { }
+        )
+            : base(
+                default(System.Security.Principal.IdentityReference),
+                default(int),
+                default(bool),
+                default(System.Security.AccessControl.InheritanceFlags),
+                default(System.Security.AccessControl.PropagationFlags),
+                default(System.Security.AccessControl.AccessControlType)
+            ) { }
         public RegistryAccessRule(
             string identity,
             System.Security.AccessControl.RegistryRights registryRights,
             System.Security.AccessControl.AccessControlType type
-        ) : base(
-            default(System.Security.Principal.IdentityReference),
-            default(int),
-            default(bool),
-            default(System.Security.AccessControl.InheritanceFlags),
-            default(System.Security.AccessControl.PropagationFlags),
-            default(System.Security.AccessControl.AccessControlType)
-        ) { }
+        )
+            : base(
+                default(System.Security.Principal.IdentityReference),
+                default(int),
+                default(bool),
+                default(System.Security.AccessControl.InheritanceFlags),
+                default(System.Security.AccessControl.PropagationFlags),
+                default(System.Security.AccessControl.AccessControlType)
+            ) { }
         public RegistryAccessRule(
             string identity,
             System.Security.AccessControl.RegistryRights registryRights,
             System.Security.AccessControl.InheritanceFlags inheritanceFlags,
             System.Security.AccessControl.PropagationFlags propagationFlags,
             System.Security.AccessControl.AccessControlType type
-        ) : base(
-            default(System.Security.Principal.IdentityReference),
-            default(int),
-            default(bool),
-            default(System.Security.AccessControl.InheritanceFlags),
-            default(System.Security.AccessControl.PropagationFlags),
-            default(System.Security.AccessControl.AccessControlType)
-        ) { }
+        )
+            : base(
+                default(System.Security.Principal.IdentityReference),
+                default(int),
+                default(bool),
+                default(System.Security.AccessControl.InheritanceFlags),
+                default(System.Security.AccessControl.PropagationFlags),
+                default(System.Security.AccessControl.AccessControlType)
+            ) { }
         public System.Security.AccessControl.RegistryRights RegistryRights
         {
             get { throw null; }
@@ -336,28 +355,30 @@ namespace System.Security.AccessControl
             System.Security.AccessControl.InheritanceFlags inheritanceFlags,
             System.Security.AccessControl.PropagationFlags propagationFlags,
             System.Security.AccessControl.AuditFlags flags
-        ) : base(
-            default(System.Security.Principal.IdentityReference),
-            default(int),
-            default(bool),
-            default(System.Security.AccessControl.InheritanceFlags),
-            default(System.Security.AccessControl.PropagationFlags),
-            default(System.Security.AccessControl.AuditFlags)
-        ) { }
+        )
+            : base(
+                default(System.Security.Principal.IdentityReference),
+                default(int),
+                default(bool),
+                default(System.Security.AccessControl.InheritanceFlags),
+                default(System.Security.AccessControl.PropagationFlags),
+                default(System.Security.AccessControl.AuditFlags)
+            ) { }
         public RegistryAuditRule(
             string identity,
             System.Security.AccessControl.RegistryRights registryRights,
             System.Security.AccessControl.InheritanceFlags inheritanceFlags,
             System.Security.AccessControl.PropagationFlags propagationFlags,
             System.Security.AccessControl.AuditFlags flags
-        ) : base(
-            default(System.Security.Principal.IdentityReference),
-            default(int),
-            default(bool),
-            default(System.Security.AccessControl.InheritanceFlags),
-            default(System.Security.AccessControl.PropagationFlags),
-            default(System.Security.AccessControl.AuditFlags)
-        ) { }
+        )
+            : base(
+                default(System.Security.Principal.IdentityReference),
+                default(int),
+                default(bool),
+                default(System.Security.AccessControl.InheritanceFlags),
+                default(System.Security.AccessControl.PropagationFlags),
+                default(System.Security.AccessControl.AuditFlags)
+            ) { }
         public System.Security.AccessControl.RegistryRights RegistryRights
         {
             get { throw null; }
@@ -405,7 +426,8 @@ namespace System.Security.AccessControl
             System.Security.AccessControl.InheritanceFlags inheritanceFlags,
             System.Security.AccessControl.PropagationFlags propagationFlags,
             System.Security.AccessControl.AccessControlType type
-        ) {
+        )
+        {
             throw null;
         }
         public void AddAccessRule(System.Security.AccessControl.RegistryAccessRule rule) { }
@@ -417,7 +439,8 @@ namespace System.Security.AccessControl
             System.Security.AccessControl.InheritanceFlags inheritanceFlags,
             System.Security.AccessControl.PropagationFlags propagationFlags,
             System.Security.AccessControl.AuditFlags flags
-        ) {
+        )
+        {
             throw null;
         }
         public bool RemoveAccessRule(System.Security.AccessControl.RegistryAccessRule rule)

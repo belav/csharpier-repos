@@ -44,7 +44,8 @@ namespace System.Diagnostics.Tracing
             int dataCount,
             GCHandle* pins,
             int pinCount
-        ) {
+        )
+        {
             this.datasStart = datas;
             this.scratchEnd = scratch + scratchSize;
             this.datasEnd = datas + dataCount;

@@ -16,7 +16,8 @@ namespace Microsoft.AspNetCore.Rewrite.Tests.PatternSegments
         public void IsHttps_AssertCorrectBehaviorWhenProvidedHttpContext(
             string input,
             string expected
-        ) {
+        )
+        {
             // Arrange
             var segement = new IsHttpsModSegment();
             var context = new RewriteContext { HttpContext = new DefaultHttpContext() };

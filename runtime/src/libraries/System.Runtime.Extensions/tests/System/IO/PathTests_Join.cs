@@ -199,7 +199,8 @@ namespace System.IO.Tests
             string path3,
             string path4,
             string expected
-        ) {
+        )
+        {
             Assert.Equal(
                 expected,
                 Path.Join(path1.AsSpan(), path2.AsSpan(), path3.AsSpan(), path4.AsSpan())
@@ -244,7 +245,8 @@ namespace System.IO.Tests
             string path3,
             string path4,
             string expected
-        ) {
+        )
+        {
             Assert.Equal(expected, Path.Join(new string[] { path1, path2, path3, path4 }));
         }
 
@@ -255,7 +257,8 @@ namespace System.IO.Tests
             string path3,
             string path4,
             string fourJoined
-        ) {
+        )
+        {
             Assert.Equal(
                 Path.Join(fourJoined, fourJoined),
                 Path.Join(new string[] { path1, path2, path3, path4, path1, path2, path3, path4 })

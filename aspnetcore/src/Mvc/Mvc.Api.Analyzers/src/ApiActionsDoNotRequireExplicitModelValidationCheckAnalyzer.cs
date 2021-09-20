@@ -31,7 +31,8 @@ namespace Microsoft.AspNetCore.Mvc.Api.Analyzers
                             compilationStartAnalysisContext.Compilation,
                             out var symbolCache
                         )
-                    ) {
+                    )
+                    {
                         // No-op if we can't find types we care about.
                         return;
                     }
@@ -44,7 +45,8 @@ namespace Microsoft.AspNetCore.Mvc.Api.Analyzers
         private void InitializeWorker(
             CompilationStartAnalysisContext context,
             ApiControllerSymbolCache symbolCache
-        ) {
+        )
+        {
             context.RegisterOperationAction(
                 operationAnalysisContext =>
                 {
@@ -122,7 +124,8 @@ namespace Microsoft.AspNetCore.Mvc.Api.Analyzers
                     if (
                         returnValue == null
                         || !symbolCache.IActionResult.IsAssignableFrom(returnValue.Type)
-                    ) {
+                    )
+                    {
                         return;
                     }
 
@@ -161,7 +164,8 @@ namespace Microsoft.AspNetCore.Mvc.Api.Analyzers
         private bool IsModelStateIsValidCheck(
             in ApiControllerSymbolCache symbolCache,
             IOperation condition
-        ) {
+        )
+        {
             switch (condition.Kind)
             {
                 case OperationKind.UnaryOperator:
@@ -214,7 +218,8 @@ namespace Microsoft.AspNetCore.Mvc.Api.Analyzers
             IOperation operation,
             IOperation otherOperation,
             bool expectedConstantValue
-        ) {
+        )
+        {
             if (operation.Kind != OperationKind.Literal)
             {
                 return false;
@@ -225,7 +230,8 @@ namespace Microsoft.AspNetCore.Mvc.Api.Analyzers
                 !constantValue.HasValue
                 || !(constantValue.Value is bool boolConstantValue)
                 || boolConstantValue != expectedConstantValue
-            ) {
+            )
+            {
                 return false;
             }
 
@@ -235,7 +241,8 @@ namespace Microsoft.AspNetCore.Mvc.Api.Analyzers
         private static bool IsModelStateIsValidPropertyAccessor(
             in ApiControllerSymbolCache symbolCache,
             IOperation operation
-        ) {
+        )
+        {
             if (operation.Kind != OperationKind.PropertyReference)
             {
                 return false;
@@ -252,7 +259,8 @@ namespace Microsoft.AspNetCore.Mvc.Api.Analyzers
                     propertyReference.Member.ContainingType,
                     symbolCache.ModelStateDictionary
                 )
-            ) {
+            )
+            {
                 return false;
             }
 

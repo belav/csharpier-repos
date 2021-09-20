@@ -76,7 +76,8 @@ namespace Microsoft.CodeAnalysis.RemoveAsyncModifier
             ImmutableArray<Diagnostic> diagnostics,
             SyntaxEditor editor,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var generator = editor.Generator;
             var semanticModel = await document.GetRequiredSemanticModelAsync(cancellationToken)
                 .ConfigureAwait(false);
@@ -86,7 +87,8 @@ namespace Microsoft.CodeAnalysis.RemoveAsyncModifier
             // For fix all we need to do nested locals or lambdas first, so order the diagnostics by location descending
             foreach (
                 var diagnostic in diagnostics.OrderByDescending(d => d.Location.SourceSpan.Start)
-            ) {
+            )
+            {
                 var token = diagnostic.Location.FindToken(cancellationToken);
                 var node = token.GetAncestor(IsAsyncSupportingFunctionSyntax);
                 if (node == null)
@@ -148,7 +150,8 @@ namespace Microsoft.CodeAnalysis.RemoveAsyncModifier
             ITypeSymbol returnType,
             KnownTypes knownTypes,
             bool needsReturnStatementAdded
-        ) {
+        )
+        {
             node = RemoveAsyncModifier(generator, node);
 
             var expression = generator.GetExpression(node);
@@ -200,7 +203,8 @@ namespace Microsoft.CodeAnalysis.RemoveAsyncModifier
             SyntaxGenerator generator,
             SemanticModel semanticModel,
             SyntaxNode node
-        ) {
+        )
+        {
             var statements = generator.GetStatements(node);
             if (statements.Count > 0)
             {
@@ -224,7 +228,8 @@ namespace Microsoft.CodeAnalysis.RemoveAsyncModifier
             SyntaxNode node,
             ITypeSymbol returnType,
             KnownTypes knownTypes
-        ) {
+        )
+        {
             var editor = new SyntaxEditor(node, generator);
 
             // Look for all return statements, but if we find a new node that can have the async modifier we stop
@@ -269,7 +274,8 @@ namespace Microsoft.CodeAnalysis.RemoveAsyncModifier
             SyntaxGenerator generator,
             ITypeSymbol returnType,
             KnownTypes knownTypes
-        ) {
+        )
+        {
             SyntaxNode invocation;
             if (returnType.OriginalDefinition.Equals(knownTypes._taskType))
             {
@@ -296,7 +302,8 @@ namespace Microsoft.CodeAnalysis.RemoveAsyncModifier
             SyntaxNode expression,
             ITypeSymbol returnType,
             KnownTypes knownTypes
-        ) {
+        )
+        {
             if (returnType.OriginalDefinition.Equals(knownTypes._taskOfTType))
             {
                 var taskTypeExpression = TypeExpressionForStaticMemberAccess(
@@ -321,7 +328,8 @@ namespace Microsoft.CodeAnalysis.RemoveAsyncModifier
         private static SyntaxNode TypeExpressionForStaticMemberAccess(
             SyntaxGenerator generator,
             INamedTypeSymbol typeSymbol
-        ) {
+        )
+        {
             var qualifiedNameSyntaxKind =
                 generator.QualifiedName(
                     generator.IdentifierName("ignored"),
@@ -347,7 +355,8 @@ namespace Microsoft.CodeAnalysis.RemoveAsyncModifier
                 int memberAccessExpressionSyntaxKind,
                 SyntaxNode expression,
                 SyntaxGenerator generator
-            ) {
+            )
+            {
                 if (expression.RawKind == qualifiedNameSyntaxKind)
                 {
                     var left = QualifiedNameToMemberAccess(
@@ -366,13 +375,12 @@ namespace Microsoft.CodeAnalysis.RemoveAsyncModifier
 
         private class MyCodeAction : CodeAction.DocumentChangeAction
         {
-            public MyCodeAction(
-                Func<CancellationToken, Task<Document>> createChangedDocument
-            ) : base(
-                FeaturesResources.Remove_async_modifier,
-                createChangedDocument,
-                FeaturesResources.Remove_async_modifier
-            ) { }
+            public MyCodeAction(Func<CancellationToken, Task<Document>> createChangedDocument)
+                : base(
+                    FeaturesResources.Remove_async_modifier,
+                    createChangedDocument,
+                    FeaturesResources.Remove_async_modifier
+                ) { }
         }
     }
 }

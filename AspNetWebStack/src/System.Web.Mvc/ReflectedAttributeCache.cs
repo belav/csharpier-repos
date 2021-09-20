@@ -48,27 +48,31 @@ namespace System.Web.Mvc
 
         public static ReadOnlyCollection<FilterAttribute> GetMethodFilterAttributes(
             MethodInfo methodInfo
-        ) {
+        )
+        {
             return GetAttributes(_methodFilterAttributeCache, methodInfo);
         }
 
         public static ReadOnlyCollection<ActionMethodSelectorAttribute> GetActionMethodSelectorAttributesCollection(
             MethodInfo methodInfo
-        ) {
+        )
+        {
             return GetAttributes(_actionMethodSelectorAttributeCache, methodInfo);
         }
 
         public static ReadOnlyCollection<ActionNameSelectorAttribute> GetActionNameSelectorAttributes(
             MethodInfo methodInfo
-        ) {
+        )
+        {
             return GetAttributes(_actionNameSelectorAttributeCache, methodInfo);
         }
 
         private static ReadOnlyCollection<TAttribute> GetAttributes<TMemberInfo, TAttribute>(
             ConcurrentDictionary<TMemberInfo, ReadOnlyCollection<TAttribute>> lookup,
             TMemberInfo memberInfo
-        ) where TAttribute : Attribute
-          where TMemberInfo : MemberInfo
+        )
+            where TAttribute : Attribute
+            where TMemberInfo : MemberInfo
         {
             Debug.Assert(memberInfo != null);
             Debug.Assert(lookup != null);

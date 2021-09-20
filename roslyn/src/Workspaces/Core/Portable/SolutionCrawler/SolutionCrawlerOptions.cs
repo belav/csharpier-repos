@@ -49,7 +49,8 @@ namespace Microsoft.CodeAnalysis.SolutionCrawler
         public static BackgroundAnalysisScope GetBackgroundAnalysisScope(
             OptionSet options,
             string language
-        ) {
+        )
+        {
             if (LowMemoryForcedMinimalBackgroundAnalysis)
             {
                 return BackgroundAnalysisScope.Minimal;

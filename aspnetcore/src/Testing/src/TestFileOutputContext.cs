@@ -127,7 +127,8 @@ namespace Microsoft.AspNetCore.Testing
         public static string GetAssemblyBaseDirectory(
             Assembly assembly,
             string baseDirectory = null
-        ) {
+        )
+        {
             var attribute = assembly.GetCustomAttributes()
                 .OfType<TestOutputDirectoryAttribute>()
                 .FirstOrDefault();

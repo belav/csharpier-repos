@@ -206,7 +206,8 @@ namespace System.Threading.Tasks.Tests
         public void NonGeneric_NotCompleted_NotCompleted(
             bool outerCompletesFirst,
             TaskStatus innerStatus
-        ) {
+        )
+        {
             var innerTcs = new TaskCompletionSource();
             Task inner = innerTcs.Task;
 
@@ -259,7 +260,8 @@ namespace System.Threading.Tasks.Tests
         public void Generic_NotCompleted_NotCompleted(
             bool outerCompletesFirst,
             TaskStatus innerStatus
-        ) {
+        )
+        {
             var innerTcs = new TaskCompletionSource<int>();
             Task<int> inner = innerTcs.Task;
 
@@ -312,7 +314,8 @@ namespace System.Threading.Tasks.Tests
         public void NonGeneric_UnsuccessfulOuter(
             bool outerCompletesBeforeUnwrap,
             TaskStatus outerStatus
-        ) {
+        )
+        {
             var outerTcs = new TaskCompletionSource<Task>();
             Task<Task> outer = outerTcs.Task;
 
@@ -365,7 +368,8 @@ namespace System.Threading.Tasks.Tests
         public void Generic_UnsuccessfulOuter(
             bool outerCompletesBeforeUnwrap,
             TaskStatus outerStatus
-        ) {
+        )
+        {
             var outerTcs = new TaskCompletionSource<Task<int>>();
             Task<Task<int>> outer = outerTcs.Task;
 

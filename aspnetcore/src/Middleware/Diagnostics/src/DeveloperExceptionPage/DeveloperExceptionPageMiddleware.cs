@@ -53,7 +53,8 @@ namespace Microsoft.AspNetCore.Diagnostics
             IWebHostEnvironment hostingEnvironment,
             DiagnosticSource diagnosticSource,
             IEnumerable<IDeveloperPageExceptionFilter> filters
-        ) {
+        )
+        {
             if (next == null)
             {
                 throw new ArgumentNullException(nameof(next));
@@ -121,7 +122,8 @@ namespace Microsoft.AspNetCore.Diagnostics
                         _diagnosticSource.IsEnabled(
                             "Microsoft.AspNetCore.Diagnostics.UnhandledException"
                         )
-                    ) {
+                    )
+                    {
                         _diagnosticSource.Write(
                             "Microsoft.AspNetCore.Diagnostics.UnhandledException",
                             new { httpContext = context, exception = ex }
@@ -175,7 +177,8 @@ namespace Microsoft.AspNetCore.Diagnostics
         private Task DisplayCompilationException(
             HttpContext context,
             ICompilationException compilationException
-        ) {
+        )
+        {
             var model = new CompilationErrorPageModel(_options);
 
             var errorPage = new CompilationErrorPage { Model = model };

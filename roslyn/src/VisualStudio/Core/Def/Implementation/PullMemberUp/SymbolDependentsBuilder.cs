@@ -23,7 +23,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.PullMemberUp
             ImmutableArray<ISymbol> membersInType,
             Project project,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             return membersInType.ToImmutableDictionary(
                 member => member,
                 member =>
@@ -56,7 +57,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.PullMemberUp
                 Project project,
                 ISymbol member,
                 CancellationToken cancellationToken
-            ) {
+            )
+            {
                 _project = project;
                 _membersInType = membersInType.ToImmutableHashSet();
                 _dependents = new HashSet<ISymbol>();
@@ -89,7 +91,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.PullMemberUp
                 if (
                     operation is IMemberReferenceOperation memberReferenceOp
                     && _membersInType.Contains(memberReferenceOp.Member)
-                ) {
+                )
+                {
                     _dependents.Add(memberReferenceOp.Member);
                 }
 
@@ -99,7 +102,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.PullMemberUp
                 if (
                     operation is IInvocationOperation methodReferenceOp
                     && _membersInType.Contains(methodReferenceOp.TargetMethod)
-                ) {
+                )
+                {
                     _dependents.Add(methodReferenceOp.TargetMethod);
                 }
 

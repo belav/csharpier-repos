@@ -24,7 +24,8 @@ namespace System.Web.Razor.Test.Tokenizer
 
         protected override Tokenizer<HtmlSymbol, HtmlSymbolType> CreateTokenizer(
             ITextDocument source
-        ) {
+        )
+        {
             return new HtmlTokenizer(source);
         }
 

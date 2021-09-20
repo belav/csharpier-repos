@@ -37,7 +37,8 @@ namespace System.IO.Ports.Tests
                 SerialPort com1 = new SerialPort(
                     TCSupport.LocalMachineSerialInfo.FirstAvailablePortName
                 )
-            ) {
+            )
+            {
                 SerialPortProperties serPortProp = new SerialPortProperties();
 
                 Debug.WriteLine("Verifying default BaudRate");
@@ -124,7 +125,8 @@ namespace System.IO.Ports.Tests
                 SerialPort com = new SerialPort(
                     TCSupport.LocalMachineSerialInfo.FirstAvailablePortName
                 )
-            ) {
+            )
+            {
                 VerifyExceptionAtOpen(com, baudRate, throwAt, expectedException);
 
                 if (com.IsOpen)
@@ -139,7 +141,8 @@ namespace System.IO.Ports.Tests
             int baudRate,
             ThrowAt throwAt,
             Type expectedException
-        ) {
+        )
+        {
             int origBaudRate = com.BaudRate;
             SerialPortProperties serPortProp = new SerialPortProperties();
 
@@ -261,7 +264,8 @@ namespace System.IO.Ports.Tests
                 SerialPort com1 = new SerialPort(
                     TCSupport.LocalMachineSerialInfo.FirstAvailablePortName
                 )
-            ) {
+            )
+            {
                 SerialPortProperties serPortProp = new SerialPortProperties();
 
                 serPortProp.SetAllPropertiesToOpenDefaults();
@@ -285,7 +289,8 @@ namespace System.IO.Ports.Tests
                 SerialPort com1 = new SerialPort(
                     TCSupport.LocalMachineSerialInfo.FirstAvailablePortName
                 )
-            ) {
+            )
+            {
                 SerialPortProperties serPortProp = new SerialPortProperties();
 
                 serPortProp.SetAllPropertiesToOpenDefaults();
@@ -317,7 +322,8 @@ namespace System.IO.Ports.Tests
                 SerialPort com2 = new SerialPort(
                     TCSupport.LocalMachineSerialInfo.SecondAvailablePortName
                 )
-            ) {
+            )
+            {
                 double expectedTime,
                     actualTime,
                     percentageDifference;

@@ -244,7 +244,8 @@ namespace System.Linq.Expressions.Tests
 
         public override void VisitInlineBrTargetInstruction(
             InlineBrTargetInstruction inlineBrTargetInstruction
-        ) {
+        )
+        {
             collector.Process(
                 inlineBrTargetInstruction,
                 formatProvider.Label(inlineBrTargetInstruction.TargetOffset)
@@ -253,7 +254,8 @@ namespace System.Linq.Expressions.Tests
 
         public override void VisitInlineFieldInstruction(
             InlineFieldInstruction inlineFieldInstruction
-        ) {
+        )
+        {
             string field;
             try
             {
@@ -278,7 +280,8 @@ namespace System.Linq.Expressions.Tests
 
         public override void VisitInlineMethodInstruction(
             InlineMethodInstruction inlineMethodInstruction
-        ) {
+        )
+        {
             string method;
             try
             {
@@ -311,7 +314,8 @@ namespace System.Linq.Expressions.Tests
 
         public override void VisitInlineStringInstruction(
             InlineStringInstruction inlineStringInstruction
-        ) {
+        )
+        {
             collector.Process(
                 inlineStringInstruction,
                 formatProvider.EscapedString(inlineStringInstruction.String)
@@ -320,7 +324,8 @@ namespace System.Linq.Expressions.Tests
 
         public override void VisitInlineSwitchInstruction(
             InlineSwitchInstruction inlineSwitchInstruction
-        ) {
+        )
+        {
             collector.Process(
                 inlineSwitchInstruction,
                 formatProvider.MultipleLabels(inlineSwitchInstruction.TargetOffsets)
@@ -383,7 +388,8 @@ namespace System.Linq.Expressions.Tests
 
         public override void VisitShortInlineBrTargetInstruction(
             ShortInlineBrTargetInstruction shortInlineBrTargetInstruction
-        ) {
+        )
+        {
             collector.Process(
                 shortInlineBrTargetInstruction,
                 formatProvider.Label(shortInlineBrTargetInstruction.TargetOffset)
@@ -392,19 +398,22 @@ namespace System.Linq.Expressions.Tests
 
         public override void VisitShortInlineIInstruction(
             ShortInlineIInstruction shortInlineIInstruction
-        ) {
+        )
+        {
             collector.Process(shortInlineIInstruction, shortInlineIInstruction.Value.ToString());
         }
 
         public override void VisitShortInlineRInstruction(
             ShortInlineRInstruction shortInlineRInstruction
-        ) {
+        )
+        {
             collector.Process(shortInlineRInstruction, shortInlineRInstruction.Value.ToString());
         }
 
         public override void VisitShortInlineVarInstruction(
             ShortInlineVarInstruction shortInlineVarInstruction
-        ) {
+        )
+        {
             collector.Process(
                 shortInlineVarInstruction,
                 formatProvider.Argument(shortInlineVarInstruction.Ordinal)
@@ -417,14 +426,13 @@ namespace System.Linq.Expressions.Tests
         public RawILStringVisitor(IILStringCollector collector)
             : this(collector, DefaultFormatProvider.Instance) { }
 
-        public RawILStringVisitor(
-            IILStringCollector collector,
-            IFormatProvider formatProvider
-        ) : base(collector, formatProvider) { }
+        public RawILStringVisitor(IILStringCollector collector, IFormatProvider formatProvider)
+            : base(collector, formatProvider) { }
 
         public override void VisitInlineBrTargetInstruction(
             InlineBrTargetInstruction inlineBrTargetInstruction
-        ) {
+        )
+        {
             collector.Process(
                 inlineBrTargetInstruction,
                 formatProvider.Int32ToHex(inlineBrTargetInstruction.Delta)
@@ -433,7 +441,8 @@ namespace System.Linq.Expressions.Tests
 
         public override void VisitInlineFieldInstruction(
             InlineFieldInstruction inlineFieldInstruction
-        ) {
+        )
+        {
             collector.Process(
                 inlineFieldInstruction,
                 formatProvider.Int32ToHex(inlineFieldInstruction.Token)
@@ -442,7 +451,8 @@ namespace System.Linq.Expressions.Tests
 
         public override void VisitInlineMethodInstruction(
             InlineMethodInstruction inlineMethodInstruction
-        ) {
+        )
+        {
             collector.Process(
                 inlineMethodInstruction,
                 formatProvider.Int32ToHex(inlineMethodInstruction.Token)
@@ -459,7 +469,8 @@ namespace System.Linq.Expressions.Tests
 
         public override void VisitInlineStringInstruction(
             InlineStringInstruction inlineStringInstruction
-        ) {
+        )
+        {
             collector.Process(
                 inlineStringInstruction,
                 formatProvider.Int32ToHex(inlineStringInstruction.Token)
@@ -468,7 +479,8 @@ namespace System.Linq.Expressions.Tests
 
         public override void VisitInlineSwitchInstruction(
             InlineSwitchInstruction inlineSwitchInstruction
-        ) {
+        )
+        {
             collector.Process(inlineSwitchInstruction, "...");
         }
 
@@ -498,7 +510,8 @@ namespace System.Linq.Expressions.Tests
 
         public override void VisitShortInlineBrTargetInstruction(
             ShortInlineBrTargetInstruction shortInlineBrTargetInstruction
-        ) {
+        )
+        {
             collector.Process(
                 shortInlineBrTargetInstruction,
                 formatProvider.Int8ToHex(shortInlineBrTargetInstruction.Delta)
@@ -507,7 +520,8 @@ namespace System.Linq.Expressions.Tests
 
         public override void VisitShortInlineVarInstruction(
             ShortInlineVarInstruction shortInlineVarInstruction
-        ) {
+        )
+        {
             collector.Process(
                 shortInlineVarInstruction,
                 formatProvider.Int8ToHex(shortInlineVarInstruction.Ordinal)
@@ -540,7 +554,8 @@ namespace System.Linq.Expressions.Tests
             }
             else if (
                 type.IsGenericType && !type.IsGenericTypeDefinition && !type.IsGenericParameter /* TODO */
-            ) {
+            )
+            {
                 string args = string.Join(",", type.GetGenericArguments().Select(ToIL));
                 string def = ToIL(type.GetGenericTypeDefinition());
                 return def + "<" + args + ">";

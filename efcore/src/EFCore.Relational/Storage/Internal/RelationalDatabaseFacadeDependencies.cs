@@ -31,7 +31,8 @@ namespace Microsoft.EntityFrameworkCore.Storage.Internal
             IRelationalConnection relationalConnection,
             IRawSqlCommandBuilder rawSqlCommandBuilder,
             ICoreSingletonOptions coreOptions
-        ) {
+        )
+        {
             TransactionManager = transactionManager;
             DatabaseCreator = databaseCreator;
             ExecutionStrategyFactory = executionStrategyFactory;

@@ -24,20 +24,22 @@ namespace Microsoft.EntityFrameworkCore.TestUtilities
             IScaffoldingTypeMapper scaffoldingTypeMapper,
             LoggingDefinitions loggingDefinitions,
             IModelRuntimeInitializer modelRuntimeInitializer
-        ) : base(
-            reporter,
-            candidateNamingService,
-            pluralizer,
-            cSharpUtilities,
-            scaffoldingTypeMapper,
-            loggingDefinitions,
-            modelRuntimeInitializer
-        ) { }
+        )
+            : base(
+                reporter,
+                candidateNamingService,
+                pluralizer,
+                cSharpUtilities,
+                scaffoldingTypeMapper,
+                loggingDefinitions,
+                modelRuntimeInitializer
+            ) { }
 
         public override IModel Create(
             DatabaseModel databaseModel,
             ModelReverseEngineerOptions options
-        ) {
+        )
+        {
             foreach (var sequence in databaseModel.Sequences)
             {
                 sequence.Database = databaseModel;

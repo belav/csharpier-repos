@@ -87,7 +87,8 @@ namespace Microsoft.CodeAnalysis.Editor.Interactive
             ITextSnapshot snapshot,
             Span argumentsSpan,
             Span spanToClassify
-        ) {
+        )
+        {
             var arguments = snapshot.GetText(argumentsSpan);
             var argumentsStart = argumentsSpan.Start;
             foreach (var pos in GetNoConfigPositions(arguments))
@@ -121,7 +122,8 @@ namespace Microsoft.CodeAnalysis.Editor.Interactive
                         index + s_noConfigParameterNameLength == arguments.Length
                         || char.IsWhiteSpace(arguments[index + s_noConfigParameterNameLength])
                     )
-                ) {
+                )
+                {
                     yield return index;
                 }
 
@@ -136,7 +138,8 @@ namespace Microsoft.CodeAnalysis.Editor.Interactive
             string arguments,
             out bool initialize,
             out InteractiveHostPlatform? platform
-        ) {
+        )
+        {
             platform = null;
             initialize = true;
 
@@ -147,7 +150,8 @@ namespace Microsoft.CodeAnalysis.Editor.Interactive
                     new[] { ' ' },
                     StringSplitOptions.RemoveEmptyEntries
                 )
-            ) {
+            )
+            {
                 switch (argument.ToLowerInvariant())
                 {
                     case PlatformDesktop32:

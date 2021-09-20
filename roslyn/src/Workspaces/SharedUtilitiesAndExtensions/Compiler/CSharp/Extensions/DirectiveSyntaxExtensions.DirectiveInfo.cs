@@ -37,7 +37,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Extensions
                     IReadOnlyList<DirectiveTriviaSyntax>
                 > conditionalMap,
                 ISet<Tuple<int, int>> inactiveRegionLines
-            ) {
+            )
+            {
                 this.DirectiveMap = directiveMap;
                 this.ConditionalMap = conditionalMap;
                 this.InactiveRegionLines = inactiveRegionLines;

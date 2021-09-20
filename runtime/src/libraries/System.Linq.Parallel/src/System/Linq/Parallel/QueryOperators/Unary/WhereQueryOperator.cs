@@ -56,7 +56,8 @@ namespace System.Linq.Parallel
             IPartitionedStreamRecipient<TInputOutput> recipient,
             bool preferStriping,
             QuerySettings settings
-        ) {
+        )
+        {
             PartitionedStream<TInputOutput, TKey> outputStream = new PartitionedStream<
                 TInputOutput,
                 TKey
@@ -81,7 +82,8 @@ namespace System.Linq.Parallel
         internal override QueryResults<TInputOutput> Open(
             QuerySettings settings,
             bool preferStriping
-        ) {
+        )
+        {
             // We just open the child operator.
             QueryResults<TInputOutput> childQueryResults = Child.Open(settings, preferStriping);
 
@@ -132,7 +134,8 @@ namespace System.Linq.Parallel
                 QueryOperatorEnumerator<TInputOutput, TKey> source,
                 Func<TInputOutput, bool> predicate,
                 CancellationToken cancellationToken
-            ) {
+            )
+            {
                 Debug.Assert(source != null);
                 Debug.Assert(predicate != null);
 
@@ -148,7 +151,8 @@ namespace System.Linq.Parallel
             internal override bool MoveNext(
                 [MaybeNullWhen(false), AllowNull] ref TInputOutput currentElement,
                 [AllowNull] ref TKey currentKey
-            ) {
+            )
+            {
                 Debug.Assert(_predicate != null, "expected a compiled operator");
 
                 // Iterate through the input until we reach the end of the sequence or find

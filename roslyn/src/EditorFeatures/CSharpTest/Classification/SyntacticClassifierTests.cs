@@ -25,7 +25,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Classification
             TextSpan span,
             ParseOptions options,
             TestHost testHost
-        ) {
+        )
+        {
             using var workspace = CreateWorkspace(code, options, testHost);
             var document = workspace.CurrentSolution.Projects.First().Documents.First();
 
@@ -4644,7 +4645,8 @@ class X<T> where T : unmanaged { }",
         [CombinatorialData]
         public async Task TestUnmanagedConstraint_Type_ExistingInterfaceButOutOfScope(
             TestHost testHost
-        ) {
+        )
+        {
             await TestAsync(
                 @"
 namespace OtherScope
@@ -4746,7 +4748,8 @@ class X
         [CombinatorialData]
         public async Task TestUnmanagedConstraint_Method_ExistingInterfaceButOutOfScope(
             TestHost testHost
-        ) {
+        )
+        {
             await TestAsync(
                 @"
 namespace OtherScope
@@ -4842,7 +4845,8 @@ delegate void D<T>() where T : unmanaged;",
         [CombinatorialData]
         public async Task TestUnmanagedConstraint_Delegate_ExistingInterfaceButOutOfScope(
             TestHost testHost
-        ) {
+        )
+        {
             await TestAsync(
                 @"
 namespace OtherScope
@@ -4964,7 +4968,8 @@ class X
         [CombinatorialData]
         public async Task TestUnmanagedConstraint_LocalFunction_ExistingInterfaceButOutOfScope(
             TestHost testHost
-        ) {
+        )
+        {
             await TestAsync(
                 @"
 namespace OtherScope
@@ -5383,7 +5388,8 @@ class X<T> where T : notnull { }",
         [CombinatorialData]
         public async Task TestNotNullConstraint_Type_ExistingInterfaceButOutOfScope(
             TestHost testHost
-        ) {
+        )
+        {
             await TestAsync(
                 @"
 namespace OtherScope
@@ -5485,7 +5491,8 @@ class X
         [CombinatorialData]
         public async Task TestNotNullConstraint_Method_ExistingInterfaceButOutOfScope(
             TestHost testHost
-        ) {
+        )
+        {
             await TestAsync(
                 @"
 namespace OtherScope
@@ -5581,7 +5588,8 @@ delegate void D<T>() where T : notnull;",
         [CombinatorialData]
         public async Task TestNotNullConstraint_Delegate_ExistingInterfaceButOutOfScope(
             TestHost testHost
-        ) {
+        )
+        {
             await TestAsync(
                 @"
 namespace OtherScope
@@ -5703,7 +5711,8 @@ class X
         [CombinatorialData]
         public async Task TestNotNullConstraint_LocalFunction_ExistingInterfaceButOutOfScope(
             TestHost testHost
-        ) {
+        )
+        {
             await TestAsync(
                 @"
 namespace OtherScope

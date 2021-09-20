@@ -30,7 +30,8 @@ namespace Roslyn.Test.Utilities
 
         internal static IRuntimeEnvironment Create(
             IEnumerable<ModuleData> additionalDependencies = null
-        ) {
+        )
+        {
             return s_lazyFactory.Value.Create(additionalDependencies);
         }
 
@@ -39,7 +40,8 @@ namespace Roslyn.Test.Utilities
             int expectedLength,
             out string output,
             out string errorOutput
-        ) {
+        )
+        {
             using (var runtimeEnvironment = Create())
             {
                 runtimeEnvironment.CaptureOutput(
@@ -73,7 +75,8 @@ namespace Roslyn.Test.Utilities
                         using (
                             var embeddedMetadataProvider =
                                 peReader.ReadEmbeddedPortablePdbDebugDirectoryData(portablePdbEntry)
-                        ) {
+                        )
+                        {
                             var mdReader = embeddedMetadataProvider.GetMetadataReader();
                             pdb = readMetadata(mdReader);
                         }
@@ -112,7 +115,8 @@ namespace Roslyn.Test.Utilities
             HashSet<string> fullNameSet,
             List<ModuleData> dependencies,
             DiagnosticBag diagnostics
-        ) {
+        )
+        {
             // NOTE: specifically don't need to consider previous submissions since they will always be compilations.
             foreach (var metadataReference in compilation.References)
             {
@@ -220,7 +224,8 @@ namespace Roslyn.Test.Utilities
             DiagnosticBag diagnostics,
             CompilationTestData testData,
             EmitOptions emitOptions
-        ) {
+        )
+        {
             // A Compilation can appear multiple times in a dependency graph as both a Compilation and as a MetadataReference
             // value.  Iterate the Compilations eagerly so they are always emitted directly and later references can re-use
             // the value.  This gives better, and consistent, diagnostic information.
@@ -271,7 +276,8 @@ namespace Roslyn.Test.Utilities
             DiagnosticBag diagnostics,
             CompilationTestData testData,
             EmitOptions emitOptions
-        ) {
+        )
+        {
             emitOptions ??= EmitOptions.Default.WithDebugInformationFormat(
                 DebugInformationFormat.Embedded
             );
@@ -336,7 +342,8 @@ namespace Roslyn.Test.Utilities
         public static string DumpAssemblyData(
             IEnumerable<ModuleData> modules,
             out string dumpDirectory
-        ) {
+        )
+        {
             dumpDirectory = null;
 
             var sb = new StringBuilder();

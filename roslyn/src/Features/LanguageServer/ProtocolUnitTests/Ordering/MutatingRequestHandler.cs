@@ -44,7 +44,8 @@ namespace Microsoft.CodeAnalysis.LanguageServer.UnitTests.RequestOrdering
             TestRequest request,
             RequestContext context,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var response = new TestResponse
             {
                 Solution = context.Solution,

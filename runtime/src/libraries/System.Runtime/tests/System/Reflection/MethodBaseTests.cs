@@ -65,7 +65,8 @@ namespace System.Reflection.Tests
             string methodName2,
             BindingFlags bindingFlags2,
             bool expected
-        ) {
+        )
+        {
             MethodBase mb1 = typeof(MethodBaseTests).GetMethod(methodName1, bindingFlags1);
             MethodBase mb2 = typeof(MethodBaseTests).GetMethod(methodName2, bindingFlags2);
             Assert.Equal(expected, mb1 == mb2);

@@ -138,7 +138,8 @@ namespace JIT.HardwareIntrinsics.X86
                     (alignment != 32 && alignment != 16)
                     || (alignment * 2) < sizeOfinArray1
                     || (alignment * 2) < sizeOfinArray2
-                ) {
+                )
+                {
                     throw new ArgumentException("Invalid value of alignment");
                 }
 
@@ -218,7 +219,8 @@ namespace JIT.HardwareIntrinsics.X86
 
             public void RunStructFldScenario_Load(
                 BooleanBinaryOpTest__TestNotZAndNotCByte testClass
-            ) {
+            )
+            {
                 fixed (Vector256<Byte>* pFld1 = &_fld1)fixed (Vector256<Byte>* pFld2 = &_fld2)
                 {
                     var result = Avx.TestNotZAndNotC(
@@ -420,7 +422,8 @@ namespace JIT.HardwareIntrinsics.X86
 
             fixed (Vector256<Byte>* pClsVar1 = &_clsVar1)fixed (
                 Vector256<Byte>* pClsVar2 = &_clsVar2
-            ) {
+            )
+            {
                 var result = Avx.TestNotZAndNotC(
                     Avx.LoadVector256((Byte*)(pClsVar1)),
                     Avx.LoadVector256((Byte*)(pClsVar2))
@@ -578,7 +581,8 @@ namespace JIT.HardwareIntrinsics.X86
             Vector256<Byte> op2,
             bool result,
             [CallerMemberName] string method = ""
-        ) {
+        )
+        {
             Byte[] inArray1 = new Byte[Op1ElementCount];
             Byte[] inArray2 = new Byte[Op2ElementCount];
 
@@ -593,7 +597,8 @@ namespace JIT.HardwareIntrinsics.X86
             void* op2,
             bool result,
             [CallerMemberName] string method = ""
-        ) {
+        )
+        {
             Byte[] inArray1 = new Byte[Op1ElementCount];
             Byte[] inArray2 = new Byte[Op2ElementCount];
 
@@ -616,7 +621,8 @@ namespace JIT.HardwareIntrinsics.X86
             Byte[] right,
             bool result,
             [CallerMemberName] string method = ""
-        ) {
+        )
+        {
             bool succeeded = true;
 
             var expectedResult1 = true;

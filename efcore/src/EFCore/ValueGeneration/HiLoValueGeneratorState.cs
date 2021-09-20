@@ -98,7 +98,8 @@ namespace Microsoft.EntityFrameworkCore.ValueGeneration
         public virtual async ValueTask<TValue> NextAsync<TValue>(
             Func<CancellationToken, Task<long>> getNewLowValue,
             CancellationToken cancellationToken = default
-        ) {
+        )
+        {
             Check.NotNull(getNewLowValue, nameof(getNewLowValue));
 
             var newValue = GetNextValue();

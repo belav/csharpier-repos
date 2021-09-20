@@ -37,7 +37,8 @@ namespace Microsoft.AspNetCore.Components.Web
             int sequence,
             string eventName,
             bool value
-        ) {
+        )
+        {
             builder.AddAttribute(sequence, $"__internal_preventDefault_{eventName}", value);
         }
 
@@ -54,7 +55,8 @@ namespace Microsoft.AspNetCore.Components.Web
             int sequence,
             string eventName,
             bool value
-        ) {
+        )
+        {
             builder.AddAttribute(sequence, $"__internal_stopPropagation_{eventName}", value);
         }
     }

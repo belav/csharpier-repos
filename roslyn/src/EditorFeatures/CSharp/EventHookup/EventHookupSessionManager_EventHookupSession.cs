@@ -115,7 +115,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.EventHookup
                     && document.Project.Solution.Workspace.CanApplyChange(
                         ApplyChangesKind.ChangeDocument
                     )
-                ) {
+                )
+                {
                     var position = textView.GetCaretPoint(subjectBuffer).Value.Position;
                     _trackingPoint = textView.TextSnapshot.CreateTrackingPoint(
                         position,
@@ -181,7 +182,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.EventHookup
                 Document document,
                 int position,
                 CancellationToken cancellationToken
-            ) {
+            )
+            {
                 AssertIsBackground();
 
                 // For test purposes only!
@@ -196,7 +198,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.EventHookup
                         FunctionId.EventHookup_Determine_If_Event_Hookup,
                         cancellationToken
                     )
-                ) {
+                )
+                {
                     var plusEqualsToken = await GetPlusEqualsTokenInsideAddAssignExpressionAsync(
                             document,
                             position,
@@ -245,7 +248,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.EventHookup
                 Document document,
                 int position,
                 CancellationToken cancellationToken
-            ) {
+            )
+            {
                 AssertIsBackground();
                 var syntaxTree = await document.GetSyntaxTreeAsync(cancellationToken)
                     .ConfigureAwait(false);
@@ -268,7 +272,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.EventHookup
                 SemanticModel semanticModel,
                 SyntaxToken plusEqualsToken,
                 CancellationToken cancellationToken
-            ) {
+            )
+            {
                 AssertIsBackground();
                 if (!(plusEqualsToken.Parent is AssignmentExpressionSyntax parentToken))
                 {
@@ -291,7 +296,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.EventHookup
                 SemanticModel semanticModel,
                 ISyntaxFactsService syntaxFactsService,
                 NamingRule namingRule
-            ) {
+            )
+            {
                 AssertIsBackground();
                 var objectPart = GetNameObjectPart(
                     eventSymbol,
@@ -322,7 +328,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.EventHookup
                 SyntaxToken plusEqualsToken,
                 SemanticModel semanticModel,
                 ISyntaxFactsService syntaxFactsService
-            ) {
+            )
+            {
                 AssertIsBackground();
                 var parentToken = plusEqualsToken.Parent as AssignmentExpressionSyntax;
 

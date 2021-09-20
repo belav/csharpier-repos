@@ -44,13 +44,15 @@ namespace Microsoft.CodeAnalysis.Editor
             ITextView textView,
             ConnectionReason reason,
             IReadOnlyCollection<ITextBuffer> subjectBuffers
-        ) {
+        )
+        {
             lock (s_gate)
             {
                 // only add roslyn type to tracking map
                 foreach (
                     var buffer in subjectBuffers.Where(b => IsSupportedContentType(b.ContentType))
-                ) {
+                )
+                {
                     if (!s_map.TryGetValue(buffer, out var set))
                     {
                         set = new HashSet<ITextView>();
@@ -75,7 +77,8 @@ namespace Microsoft.CodeAnalysis.Editor
             ITextView textView,
             ConnectionReason reason,
             IReadOnlyCollection<ITextBuffer> subjectBuffers
-        ) {
+        )
+        {
             lock (s_gate)
             {
                 // we need to check all buffers reported since we will be called after actual changes have happened.
@@ -158,7 +161,8 @@ namespace Microsoft.CodeAnalysis.Editor
                     var buffer in view.BufferGraph.GetTextBuffers(
                         b => IsSupportedContentType(b.ContentType)
                     )
-                ) {
+                )
+                {
                     if (s_map.TryGetValue(buffer, out var set))
                     {
                         Contract.ThrowIfTrue(set.Contains(view));

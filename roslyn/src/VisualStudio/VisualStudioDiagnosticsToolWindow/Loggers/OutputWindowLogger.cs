@@ -55,7 +55,8 @@ namespace Microsoft.CodeAnalysis.Internal.Log
             LogMessage logMessage,
             int uniquePairId,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             OutputPane.WriteLine(
                 string.Format(
                     "[{0}] Start({1}) : {2} - {3}",
@@ -73,7 +74,8 @@ namespace Microsoft.CodeAnalysis.Internal.Log
             int uniquePairId,
             int delta,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var functionString =
                 functionId.ToString()
                 + (cancellationToken.IsCancellationRequested ? " Canceled" : string.Empty);
@@ -177,7 +179,8 @@ namespace Microsoft.CodeAnalysis.Internal.Log
                     && ErrorHandler.Succeeded(
                         outputWindow.GetPane(ref workspacePaneGuid, out var pane)
                     )
-                ) {
+                )
+                {
                     return pane;
                 }
 

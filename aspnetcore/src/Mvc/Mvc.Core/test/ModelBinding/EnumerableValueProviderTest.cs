@@ -361,7 +361,8 @@ namespace Microsoft.AspNetCore.Mvc.ModelBinding
             BindingSource bindingSource,
             Dictionary<string, StringValues> values,
             CultureInfo culture
-        ) {
+        )
+        {
             var provider =
                 GetEnumerableValueProvider(bindingSource, values, culture)
                 as IBindingSourceValueProvider;

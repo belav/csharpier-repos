@@ -56,7 +56,8 @@ namespace System.Linq.Expressions
         public InvocationExpression Update(
             Expression expression,
             IEnumerable<Expression>? arguments
-        ) {
+        )
+        {
             if (expression == Expression && arguments != null)
             {
                 if (ExpressionUtils.SameElements(ref arguments, Arguments))
@@ -560,7 +561,8 @@ namespace System.Linq.Expressions
             Expression expression,
             Expression arg0,
             Expression arg1
-        ) {
+        )
+        {
             // NB: This method is marked as non-public to avoid public API additions at this point.
             ExpressionUtils.RequiresCanRead(expression, nameof(expression));
 
@@ -622,7 +624,8 @@ namespace System.Linq.Expressions
             Expression arg0,
             Expression arg1,
             Expression arg2
-        ) {
+        )
+        {
             // NB: This method is marked as non-public to avoid public API additions at this point.
 
             ExpressionUtils.RequiresCanRead(expression, nameof(expression));
@@ -697,7 +700,8 @@ namespace System.Linq.Expressions
             Expression arg1,
             Expression arg2,
             Expression arg3
-        ) {
+        )
+        {
             // NB: This method is marked as non-public to avoid public API additions at this point.
 
             ExpressionUtils.RequiresCanRead(expression, nameof(expression));
@@ -784,7 +788,8 @@ namespace System.Linq.Expressions
             Expression arg2,
             Expression arg3,
             Expression arg4
-        ) {
+        )
+        {
             // NB: This method is marked as non-public to avoid public API additions at this point.
 
             ExpressionUtils.RequiresCanRead(expression, nameof(expression));
@@ -872,7 +877,8 @@ namespace System.Linq.Expressions
         public static InvocationExpression Invoke(
             Expression expression,
             params Expression[]? arguments
-        ) {
+        )
+        {
             return Invoke(expression, (IEnumerable<Expression>?)arguments);
         }
 
@@ -901,7 +907,8 @@ namespace System.Linq.Expressions
         public static InvocationExpression Invoke(
             Expression expression,
             IEnumerable<Expression>? arguments
-        ) {
+        )
+        {
             IReadOnlyList<Expression> argumentList =
                 arguments as IReadOnlyList<Expression> ?? arguments.ToReadOnly();
 

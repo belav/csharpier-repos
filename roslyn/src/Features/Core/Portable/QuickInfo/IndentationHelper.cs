@@ -28,7 +28,8 @@ namespace Microsoft.CodeAnalysis.QuickInfo
             SourceText text,
             ImmutableArray<ClassifiedSpan> classifiedSpans,
             int tabSize
-        ) {
+        )
+        {
             if (!classifiedSpans.IsDefault && classifiedSpans.Length > 0)
             {
                 // We need to figure out the shortest indentation level of the exposed lines.  We'll
@@ -49,7 +50,8 @@ namespace Microsoft.CodeAnalysis.QuickInfo
                         var lineNumber = startLineNumber;
                         lineNumber <= endLineNumber;
                         lineNumber++
-                    ) {
+                    )
+                    {
                         var line = text.Lines[lineNumber];
                         var lineOffsetOfColumn = line.GetLineOffsetFromColumn(
                             indentationColumn,
@@ -101,7 +103,8 @@ namespace Microsoft.CodeAnalysis.QuickInfo
             SourceText text,
             ImmutableArray<ClassifiedSpan> spans,
             int tabSize
-        ) {
+        )
+        {
             int? indentationColumn = null;
             foreach (var span in spans)
             {
@@ -129,7 +132,8 @@ namespace Microsoft.CodeAnalysis.QuickInfo
                 if (
                     startLineFirstNonWhitespace.HasValue
                     && startLineFirstNonWhitespace.Value < span.TextSpan.Start
-                ) {
+                )
+                {
                     startLineNumber++;
                 }
 

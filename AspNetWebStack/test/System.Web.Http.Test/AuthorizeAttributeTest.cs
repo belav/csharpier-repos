@@ -276,7 +276,8 @@ namespace System.Web.Http
         public void SplitString_SplitsOnCommaAndTrimsWhitespaceAndIgnoresEmptyStrings(
             string input,
             params string[] expectedResult
-        ) {
+        )
+        {
             string[] result = AuthorizeAttribute.SplitString(input);
 
             Assert.Equal(expectedResult, result);

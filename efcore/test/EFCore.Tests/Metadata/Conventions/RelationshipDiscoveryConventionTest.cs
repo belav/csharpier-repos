@@ -1563,7 +1563,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
             string expectedInverseName,
             bool unique,
             bool singleRelationship = true
-        ) {
+        )
+        {
             IReadOnlyForeignKey fk = navigation.ForeignKey;
             Assert.Equal(expectedInverseName, navigation.Inverse?.Name);
             Assert.Equal(unique, fk.IsUnique);
@@ -1599,7 +1600,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
             string expectedInverseName,
             bool unique,
             bool singleRelationship = true
-        ) {
+        )
+        {
             IReadOnlyForeignKey fk = navigation.ForeignKey;
             Assert.Single(fk.DeclaringEntityType.Model.GetEntityTypes());
             Assert.Equal(expectedInverseName, navigation.Inverse?.Name);
@@ -1659,7 +1661,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
 
         private InternalModelBuilder CreateInternalModeBuilder(
             params Action<IConventionEntityTypeBuilder>[] onEntityAdded
-        ) {
+        )
+        {
             var conventions = new ConventionSet();
             if (onEntityAdded != null)
             {
@@ -1681,7 +1684,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
 
         private InternalEntityTypeBuilder CreateInternalEntityBuilder<T>(
             params Action<IConventionEntityTypeBuilder>[] onEntityAdded
-        ) {
+        )
+        {
             var modelBuilder = CreateInternalModeBuilder(onEntityAdded);
             var entityBuilder = modelBuilder.Entity(typeof(T), ConfigurationSource.DataAnnotation);
 
@@ -1700,7 +1704,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
             public void ProcessEntityTypeAdded(
                 IConventionEntityTypeBuilder entityTypeBuilder,
                 IConventionContext<IConventionEntityTypeBuilder> context
-            ) {
+            )
+            {
                 foreach (var action in _onEntityAdded)
                 {
                     action(entityTypeBuilder);
@@ -1851,7 +1856,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
 
             public static void IgnoreCollectionNavigation(
                 IConventionEntityTypeBuilder entityTypeBuilder
-            ) {
+            )
+            {
                 if (entityTypeBuilder.Metadata.ClrType == typeof(MultipleNavigationsSecond))
                 {
                     entityTypeBuilder.Ignore(
@@ -1863,7 +1869,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
 
             public static void IgnoreNonCollectionNavigation(
                 IConventionEntityTypeBuilder entityTypeBuilder
-            ) {
+            )
+            {
                 if (entityTypeBuilder.Metadata.ClrType == typeof(MultipleNavigationsSecond))
                 {
                     entityTypeBuilder.Ignore(
@@ -1884,7 +1891,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
 
             public static void IgnoreDerivedOneNavigation(
                 IConventionEntityTypeBuilder entityTypeBuilder
-            ) {
+            )
+            {
                 if (entityTypeBuilder.Metadata.ClrType == typeof(NavigationsToBaseAndDerived))
                 {
                     entityTypeBuilder.Ignore(nameof(DerivedOne), fromDataAnnotation: true);
@@ -1893,7 +1901,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
 
             public static void IgnoreDerivedTwoNavigation(
                 IConventionEntityTypeBuilder entityTypeBuilder
-            ) {
+            )
+            {
                 if (entityTypeBuilder.Metadata.ClrType == typeof(NavigationsToBaseAndDerived))
                 {
                     entityTypeBuilder.Ignore(nameof(DerivedTwo), fromDataAnnotation: true);
@@ -1930,7 +1939,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
 
             public static void IgnoreDerivedNavigation(
                 IConventionEntityTypeBuilder entityTypeBuilder
-            ) {
+            )
+            {
                 if (entityTypeBuilder.Metadata.ClrType == typeof(DerivedOne))
                 {
                     entityTypeBuilder.Ignore(nameof(DerivedNavigation), fromDataAnnotation: true);
@@ -1944,7 +1954,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
 
             public static void IgnoreDerivedNavigation(
                 IConventionEntityTypeBuilder entityTypeBuilder
-            ) {
+            )
+            {
                 if (entityTypeBuilder.Metadata.ClrType == typeof(DerivedTwo))
                 {
                     entityTypeBuilder.Ignore(nameof(DerivedNavigation), fromDataAnnotation: true);

@@ -23,7 +23,8 @@ namespace FormatterWebSite
         public override async Task<InputFormatterResult> ReadRequestBodyAsync(
             InputFormatterContext context,
             Encoding effectiveEncoding
-        ) {
+        )
+        {
             var request = context.HttpContext.Request;
             using (var reader = new StreamReader(request.Body, effectiveEncoding))
             {

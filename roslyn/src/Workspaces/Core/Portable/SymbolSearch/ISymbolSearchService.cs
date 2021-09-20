@@ -161,7 +161,8 @@ namespace Microsoft.CodeAnalysis.SymbolSearch
             string assemblyName,
             string typeName,
             ImmutableArray<string> containingNamespaceNames
-        ) {
+        )
+        {
             AssemblyName = assemblyName;
             TypeName = typeName;
             ContainingNamespaceNames = containingNamespaceNames;

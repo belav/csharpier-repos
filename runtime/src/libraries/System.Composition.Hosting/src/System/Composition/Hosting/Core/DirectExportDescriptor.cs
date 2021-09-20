@@ -13,7 +13,8 @@ namespace System.Composition.Hosting.Core
         public DirectExportDescriptor(
             CompositeActivator activator,
             IDictionary<string, object> metadata
-        ) {
+        )
+        {
             if (activator == null)
             {
                 throw new ArgumentNullException(nameof(activator));

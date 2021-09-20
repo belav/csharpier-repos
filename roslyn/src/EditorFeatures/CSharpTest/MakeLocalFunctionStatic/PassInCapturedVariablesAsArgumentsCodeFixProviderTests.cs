@@ -19,9 +19,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.MakeLocalFunctionStatic
     public class PassInCapturedVariablesAsArgumentsCodeFixProviderTests
         : AbstractCSharpDiagnosticProviderBasedUserDiagnosticTest
     {
-        public PassInCapturedVariablesAsArgumentsCodeFixProviderTests(
-            ITestOutputHelper logger
-        ) : base(logger) { }
+        public PassInCapturedVariablesAsArgumentsCodeFixProviderTests(ITestOutputHelper logger)
+            : base(logger) { }
 
         internal override (DiagnosticAnalyzer, CodeFixProvider) CreateDiagnosticProviderAndFixer(
             Workspace workspace

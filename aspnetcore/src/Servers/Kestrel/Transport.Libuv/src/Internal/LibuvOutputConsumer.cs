@@ -22,7 +22,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Transport.Libuv.Internal
             UvStreamHandle socket,
             string connectionId,
             ILibuvTrace log
-        ) {
+        )
+        {
             _pipe = pipe;
             _thread = thread;
             _socket = socket;

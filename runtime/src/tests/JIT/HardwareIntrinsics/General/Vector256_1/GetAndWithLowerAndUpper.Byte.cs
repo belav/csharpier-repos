@@ -169,7 +169,8 @@ namespace JIT.HardwareIntrinsics.General
             Vector128<Byte> upperResult,
             Byte[] values,
             [CallerMemberName] string method = ""
-        ) {
+        )
+        {
             Byte[] lowerElements = new Byte[ElementCount / 2];
             Unsafe.WriteUnaligned(ref Unsafe.As<Byte, byte>(ref lowerElements[0]), lowerResult);
 
@@ -184,7 +185,8 @@ namespace JIT.HardwareIntrinsics.General
             Byte[] upperResult,
             Byte[] values,
             [CallerMemberName] string method = ""
-        ) {
+        )
+        {
             bool succeeded = true;
 
             for (int i = 0; i < ElementCount / 2; i++)
@@ -244,7 +246,8 @@ namespace JIT.HardwareIntrinsics.General
             Vector256<Byte> result,
             Byte[] values,
             [CallerMemberName] string method = ""
-        ) {
+        )
+        {
             Byte[] resultElements = new Byte[ElementCount];
             Unsafe.WriteUnaligned(ref Unsafe.As<Byte, byte>(ref resultElements[0]), result);
             ValidateWithResult(resultElements, values, method);
@@ -254,7 +257,8 @@ namespace JIT.HardwareIntrinsics.General
             Byte[] result,
             Byte[] values,
             [CallerMemberName] string method = ""
-        ) {
+        )
+        {
             bool succeeded = true;
 
             for (int i = 0; i < ElementCount / 2; i++)

@@ -34,7 +34,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.IntelliSense.QuickInfo
                 ITextBuffer subjectBuffer,
                 IThreadingContext threadingContext,
                 Lazy<IStreamingFindUsagesPresenter> streamingPresenter
-            ) {
+            )
+            {
                 _subjectBuffer = subjectBuffer;
                 _threadingContext = threadingContext;
                 _streamingPresenter = streamingPresenter;
@@ -43,7 +44,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.IntelliSense.QuickInfo
             public async Task<IntellisenseQuickInfoItem> GetQuickInfoItemAsync(
                 IAsyncQuickInfoSession session,
                 CancellationToken cancellationToken
-            ) {
+            )
+            {
                 var triggerPoint = session.GetTriggerPoint(_subjectBuffer.CurrentSnapshot);
                 if (!triggerPoint.HasValue)
                 {
@@ -70,7 +72,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.IntelliSense.QuickInfo
                             FunctionId.Get_QuickInfo_Async,
                             cancellationToken
                         )
-                    ) {
+                    )
+                    {
                         cancellationToken.ThrowIfCancellationRequested();
 
                         var item = await service.GetQuickInfoAsync(

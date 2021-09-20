@@ -198,7 +198,8 @@ namespace System.Management
                     || minute < 0
                     || second < 0
                     || ticks < 0
-                ) {
+                )
+                {
                     throw new ArgumentOutOfRangeException(nameof(dmtfDate));
                 }
             }

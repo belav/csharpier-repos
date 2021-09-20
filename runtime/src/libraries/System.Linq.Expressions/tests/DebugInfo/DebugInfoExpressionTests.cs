@@ -20,7 +20,8 @@ namespace System.Linq.Expressions.Tests
             int endLine,
             int endColumn,
             bool isClear
-        ) {
+        )
+        {
             SymbolDocumentInfo document = Expression.SymbolDocument("AFile");
             DebugInfoExpression ex = Expression.DebugInfo(
                 document,
@@ -105,7 +106,8 @@ namespace System.Linq.Expressions.Tests
             int endLine,
             int endColumn,
             bool isClear
-        ) {
+        )
+        {
             Assert.Same(document, ex.Document);
             Assert.Equal(startLine, ex.StartLine);
             Assert.Equal(startColumn, ex.StartColumn);

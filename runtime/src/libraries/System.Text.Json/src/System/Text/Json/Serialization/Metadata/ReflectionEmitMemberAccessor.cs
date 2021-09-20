@@ -148,7 +148,8 @@ namespace System.Text.Json.Serialization.Metadata
             Type parameterType2,
             Type parameterType3,
             Type parameterType4
-        ) {
+        )
+        {
             Type? type = constructor.DeclaringType;
 
             Debug.Assert(type != null);
@@ -241,7 +242,8 @@ namespace System.Text.Json.Serialization.Metadata
             Type collectionType,
             Type elementType,
             Type enumerableType
-        ) {
+        )
+        {
             MethodInfo realMethod = collectionType.GetImmutableEnumerableCreateRangeMethod(
                 elementType
             );
@@ -281,7 +283,8 @@ namespace System.Text.Json.Serialization.Metadata
             Type keyType,
             Type valueType,
             Type enumerableType
-        ) {
+        )
+        {
             MethodInfo realMethod = collectionType.GetImmutableDictionaryCreateRangeMethod(
                 keyType,
                 valueType
@@ -314,7 +317,8 @@ namespace System.Text.Json.Serialization.Metadata
         private static DynamicMethod CreatePropertyGetter(
             PropertyInfo propertyInfo,
             Type runtimePropertyType
-        ) {
+        )
+        {
             MethodInfo? realMethod = propertyInfo.GetMethod;
             Debug.Assert(realMethod != null);
 
@@ -365,7 +369,8 @@ namespace System.Text.Json.Serialization.Metadata
         private static DynamicMethod CreatePropertySetter(
             PropertyInfo propertyInfo,
             Type runtimePropertyType
-        ) {
+        )
+        {
             MethodInfo? realMethod = propertyInfo.SetMethod;
             Debug.Assert(realMethod != null);
 

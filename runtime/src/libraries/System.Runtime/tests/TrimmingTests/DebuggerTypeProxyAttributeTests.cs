@@ -25,14 +25,16 @@ class Program
                 currentType.FullName == "Program+MyClass+DebuggerProxy"
                 && currentType.GetProperties().Length == 1
                 && currentType.GetConstructors().Length == 1
-            ) {
+            )
+            {
                 foundDebuggerProxy = true;
             }
             else if (
                 currentType.FullName == "Program+MyClassWithProxyStringProxy"
                 && currentType.GetProperties().Length == 1
                 && currentType.GetConstructors().Length == 1
-            ) {
+            )
+            {
                 foundStringDebuggerProxy = true;
             }
         }

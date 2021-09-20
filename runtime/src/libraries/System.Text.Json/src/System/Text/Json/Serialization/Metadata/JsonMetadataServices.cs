@@ -29,7 +29,8 @@ namespace System.Text.Json.Serialization.Metadata
             JsonNumberHandling numberHandling,
             string propertyName,
             JsonEncodedText jsonPropertyName
-        ) {
+        )
+        {
             if (options == null)
             {
                 throw new ArgumentNullException(nameof(options));

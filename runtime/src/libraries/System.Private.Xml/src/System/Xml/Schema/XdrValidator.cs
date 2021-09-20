@@ -252,7 +252,8 @@ namespace System.Xml.Schema
                     if (
                         Ref.Equal(objectNs, SchemaNames.QnDtDt.Namespace)
                         && Ref.Equal(objectName, SchemaNames.QnDtDt.Name)
-                    ) {
+                    )
+                    {
                         reader.SchemaTypeObject = XmlSchemaDatatype.FromXdrName(reader.Value);
                     }
                 } while (reader.MoveToNextAttribute());
@@ -289,7 +290,8 @@ namespace System.Xml.Schema
                     reader.IsEmptyElement
                     && !context.IsNill
                     && context.ElementDecl.DefaultValueTyped != null
-                ) {
+                )
+                {
                     reader.TypedValueObject = context.ElementDecl.DefaultValueTyped;
                     context.IsNill = true; // reusing IsNill
                 }
@@ -320,7 +322,8 @@ namespace System.Xml.Schema
                             if (
                                 context.ElementDecl != null
                                 && context.ElementDecl.HasRequiredAttribute
-                            ) {
+                            )
+                            {
                                 _attPresence.Add(attnDef.Name, attnDef);
                             }
                             reader.SchemaTypeObject =
@@ -573,7 +576,8 @@ namespace System.Xml.Schema
                     ttype == XmlTokenizedType.ENTITY
                     || ttype == XmlTokenizedType.ID
                     || ttype == XmlTokenizedType.IDREF
-                ) {
+                )
+                {
                     if (dtype.Variety == XmlSchemaDatatypeVariety.List)
                     {
                         string[] ss = (string[])typedValue;
@@ -659,7 +663,8 @@ namespace System.Xml.Schema
             string? baseUri,
             int lineNo,
             int linePos
-        ) {
+        )
+        {
             try
             {
                 XmlSchemaDatatype dtype = attdef.Datatype;

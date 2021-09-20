@@ -65,7 +65,8 @@ namespace Roslyn.Test.Utilities
         private static MetadataReference GetOrCreateMetadataReference(
             ref MetadataReference field,
             Func<MetadataReference> getReference
-        ) {
+        )
+        {
             if (field == null)
             {
                 Interlocked.CompareExchange(ref field, getReference(), null);
@@ -515,7 +516,8 @@ namespace Roslyn.Test.Utilities
             Func<SyntaxNode, bool> syntaxNodePredicate = null,
             bool argumentOrderDoesNotMatter = false,
             bool isSuppressed = false
-        ) {
+        )
+        {
             return TestHelpers.Diagnostic(
                 code,
                 squiggledText,
@@ -535,7 +537,8 @@ namespace Roslyn.Test.Utilities
             Func<SyntaxNode, bool> syntaxNodePredicate = null,
             bool argumentOrderDoesNotMatter = false,
             bool isSuppressed = false
-        ) {
+        )
+        {
             return TestHelpers.Diagnostic(
                 code,
                 squiggledText,

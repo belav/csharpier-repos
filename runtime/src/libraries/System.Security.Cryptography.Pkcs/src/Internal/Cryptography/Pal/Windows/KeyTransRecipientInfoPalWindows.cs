@@ -14,10 +14,8 @@ namespace Internal.Cryptography.Pal.Windows
 {
     internal sealed class KeyTransRecipientInfoPalWindows : KeyTransRecipientInfoPal
     {
-        internal KeyTransRecipientInfoPalWindows(
-            SafeHandle pCmsgCmsRecipientInfoMemory,
-            int index
-        ) : base()
+        internal KeyTransRecipientInfoPalWindows(SafeHandle pCmsgCmsRecipientInfoMemory, int index)
+            : base()
         {
             _pCmsgCmsRecipientInfoMemory = pCmsgCmsRecipientInfoMemory;
             Index = index;

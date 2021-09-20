@@ -209,7 +209,8 @@ namespace Microsoft.AspNetCore.Mvc.TagHelpers
             string filePath,
             bool pathStartsWithAppBase,
             string requestPathBase
-        ) {
+        )
+        {
             // Arrange
             var fileProvider = GetMockFileProvider(filePath, pathStartsWithAppBase);
             var requestPath = GetRequestPathBase(requestPathBase);
@@ -269,7 +270,8 @@ namespace Microsoft.AspNetCore.Mvc.TagHelpers
             string filePath,
             string watchPath,
             string requestPathBase
-        ) {
+        )
+        {
             // Arrange
             var expected = filePath + "?v=f4OxZX_x_FO5LcGBSKHWXfwtSx-j1ncoSt3SABJtkGk";
             var expectedSize = expected.Length * sizeof(char);
@@ -302,7 +304,8 @@ namespace Microsoft.AspNetCore.Mvc.TagHelpers
         private static DefaultFileVersionProvider GetFileVersionProvider(
             IFileProvider fileProvider,
             IMemoryCache memoryCache = null
-        ) {
+        )
+        {
             var hostingEnv = Mock.Of<IWebHostEnvironment>(
                 e => e.WebRootFileProvider == fileProvider
             );
@@ -319,7 +322,8 @@ namespace Microsoft.AspNetCore.Mvc.TagHelpers
             string filePath,
             bool pathStartsWithAppName = false,
             bool fileDoesNotExist = false
-        ) {
+        )
+        {
             var existingMockFile = new Mock<IFileInfo>();
             existingMockFile.SetupGet(f => f.Exists).Returns(true);
             existingMockFile.Setup(m => m.CreateReadStream())

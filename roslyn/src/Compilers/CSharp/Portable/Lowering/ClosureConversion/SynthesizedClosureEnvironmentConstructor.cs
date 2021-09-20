@@ -13,9 +13,8 @@ namespace Microsoft.CodeAnalysis.CSharp
         : SynthesizedInstanceConstructor,
           ISynthesizedMethodBodyImplementationSymbol
     {
-        internal SynthesizedClosureEnvironmentConstructor(
-            SynthesizedClosureEnvironment frame
-        ) : base(frame) { }
+        internal SynthesizedClosureEnvironmentConstructor(SynthesizedClosureEnvironment frame)
+            : base(frame) { }
 
         IMethodSymbolInternal ISynthesizedMethodBodyImplementationSymbol.Method
         {

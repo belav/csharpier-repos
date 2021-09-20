@@ -19,7 +19,8 @@ namespace System.Web.Mvc
             RouteCollection routes,
             string areaName,
             out bool usingAreas
-        ) {
+        )
+        {
             if (areaName == null)
             {
                 areaName = String.Empty;
@@ -57,7 +58,8 @@ namespace System.Web.Mvc
             this RouteCollection routes,
             RequestContext requestContext,
             RouteValueDictionary values
-        ) {
+        )
+        {
             return GetVirtualPathForArea(
                 routes,
                 requestContext,
@@ -72,7 +74,8 @@ namespace System.Web.Mvc
             RequestContext requestContext,
             string name,
             RouteValueDictionary values
-        ) {
+        )
+        {
             bool usingAreas; // don't care about this value
             return GetVirtualPathForArea(routes, requestContext, name, values, out usingAreas);
         }
@@ -83,7 +86,8 @@ namespace System.Web.Mvc
             string name,
             RouteValueDictionary values,
             out bool usingAreas
-        ) {
+        )
+        {
             if (routes == null)
             {
                 throw new ArgumentNullException("routes");
@@ -202,7 +206,8 @@ namespace System.Web.Mvc
             string name,
             string url,
             object defaults
-        ) {
+        )
+        {
             return MapRoute(
                 routes,
                 name,
@@ -224,7 +229,8 @@ namespace System.Web.Mvc
             string url,
             object defaults,
             object constraints
-        ) {
+        )
+        {
             return MapRoute(
                 routes,
                 name,
@@ -246,7 +252,8 @@ namespace System.Web.Mvc
             string name,
             string url,
             string[] namespaces
-        ) {
+        )
+        {
             return MapRoute(
                 routes,
                 name,
@@ -271,7 +278,8 @@ namespace System.Web.Mvc
             string url,
             object defaults,
             string[] namespaces
-        ) {
+        )
+        {
             return MapRoute(
                 routes,
                 name,
@@ -296,7 +304,8 @@ namespace System.Web.Mvc
             object defaults,
             object constraints,
             string[] namespaces
-        ) {
+        )
+        {
             if (routes == null)
             {
                 throw new ArgumentNullException("routes");
@@ -348,7 +357,8 @@ namespace System.Web.Mvc
             public override VirtualPathData GetVirtualPath(
                 RequestContext requestContext,
                 RouteValueDictionary routeValues
-            ) {
+            )
+            {
                 // Never match during route generation. This avoids the scenario where an IgnoreRoute with
                 // fairly relaxed constraints ends up eagerly matching all generated URLs.
                 return null;

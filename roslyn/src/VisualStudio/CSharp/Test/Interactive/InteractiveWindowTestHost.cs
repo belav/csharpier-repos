@@ -19,7 +19,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Interactive
 
         internal InteractiveWindowTestHost(
             IInteractiveWindowFactoryService interactiveWindowFactory
-        ) {
+        )
+        {
             Evaluator = new TestInteractiveEvaluator();
             Window = interactiveWindowFactory.CreateWindow(Evaluator);
             Window.InitializeAsync().Wait();

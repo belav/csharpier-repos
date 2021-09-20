@@ -41,7 +41,8 @@ namespace Microsoft.AspNetCore.Html
             IFormatProvider? formatProvider,
             string format,
             params object[] args
-        ) {
+        )
+        {
             if (format == null)
             {
                 throw new ArgumentNullException(nameof(format));

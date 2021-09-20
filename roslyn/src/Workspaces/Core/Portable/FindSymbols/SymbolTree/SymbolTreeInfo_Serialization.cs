@@ -36,7 +36,8 @@ namespace Microsoft.CodeAnalysis.FindSymbols
             Checksum checksum,
             string filePath,
             ImmutableArray<Node> sortedNodes
-        ) {
+        )
+        {
             var result = TryLoadOrCreateAsync(
                 workspace,
                 solutionKey,
@@ -100,7 +101,8 @@ namespace Microsoft.CodeAnalysis.FindSymbols
                         stream,
                         cancellationToken: cancellationToken
                     )
-                ) {
+                )
+                {
                     if (reader != null)
                     {
                         // We have some previously persisted data.  Attempt to read it back.
@@ -135,7 +137,8 @@ namespace Microsoft.CodeAnalysis.FindSymbols
                 {
                     using (
                         var writer = new ObjectWriter(stream, leaveOpen: true, cancellationToken)
-                    ) {
+                    )
+                    {
                         result.WriteTo(writer);
                     }
 
@@ -234,7 +237,8 @@ namespace Microsoft.CodeAnalysis.FindSymbols
             ObjectReader reader,
             Checksum checksum,
             Func<ImmutableArray<Node>, Task<SpellChecker>> createSpellCheckerTask
-        ) {
+        )
+        {
             try
             {
                 var nodeCount = reader.ReadInt32();
@@ -319,7 +323,8 @@ namespace Microsoft.CodeAnalysis.FindSymbols
             internal static SymbolTreeInfo ReadSymbolTreeInfo(
                 ObjectReader reader,
                 Checksum checksum
-            ) {
+            )
+            {
                 return TryReadSymbolTreeInfo(
                     reader,
                     checksum,

@@ -174,7 +174,8 @@ namespace System.Globalization
                 (cUnits == '\x05d4')
                 && // Hebrew Letter He  (5)
                 (cTens == '\x05d9')
-            ) { // Hebrew Letter Yod (10)
+            )
+            { // Hebrew Letter Yod (10)
                 cUnits = '\x05d5'; // Hebrew Letter Vav (6)
                 cTens = '\x05d8'; // Hebrew Letter Tet (9)
             }
@@ -183,7 +184,8 @@ namespace System.Globalization
                 (cUnits == '\x05d5')
                 && // Hebrew Letter Vav (6)
                 (cTens == '\x05d9')
-            ) { // Hebrew Letter Yod (10)
+            )
+            { // Hebrew Letter Yod (10)
                 cUnits = '\x05d6'; // Hebrew Letter Zayin (7)
                 cTens = '\x05d8'; // Hebrew Letter Tet (9)
             }
@@ -541,7 +543,8 @@ namespace System.Globalization
         internal static HebrewNumberParsingState ParseByChar(
             char ch,
             ref HebrewNumberParsingContext context
-        ) {
+        )
+        {
             Debug.Assert(s_numberPasingState.Length == HebrewTokenCount * ((int)HS.S9_DQ + 1));
 
             HebrewToken token;

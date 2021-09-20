@@ -60,7 +60,8 @@ namespace System.Reflection.Emit
             int pos,
             ParameterAttributes attributes,
             string? strParamName
-        ) {
+        )
+        {
             name = strParamName;
             position = pos;
             attrs = attributes;

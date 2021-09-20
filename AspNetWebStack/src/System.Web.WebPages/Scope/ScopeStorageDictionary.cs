@@ -34,7 +34,8 @@ namespace System.Web.WebPages.Scope
         internal ScopeStorageDictionary(
             IDictionary<object, object> baseScope,
             IDictionary<object, object> backingStore
-        ) {
+        )
+        {
             _baseScope = baseScope;
             _backingStore = backingStore;
         }

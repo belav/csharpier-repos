@@ -70,7 +70,8 @@ namespace System.Net
             this CookieCollection cookieCollection,
             Cookie cookie,
             bool isStrict
-        ) {
+        )
+        {
             s_internalAddFunc ??=
                 (Func<CookieCollection, Cookie, bool, int>)typeof(CookieCollection).GetMethod(
                     "InternalAdd",

@@ -21,7 +21,8 @@ namespace Moq
         public static ISetupSequentialResult<Task<TResult>> ReturnsAsync<TResult>(
             this ISetupSequentialResult<Task<TResult>> setup,
             TResult value
-        ) {
+        )
+        {
             return setup.Returns(() => Task.FromResult(value));
         }
 
@@ -31,7 +32,8 @@ namespace Moq
         public static ISetupSequentialResult<Task<TResult>> ReturnsAsync<TResult>(
             this ISetupSequentialResult<Task<TResult>> setup,
             Func<TResult> valueFunction
-        ) {
+        )
+        {
             return setup.Returns(() => Task.FromResult(valueFunction()));
         }
 
@@ -41,7 +43,8 @@ namespace Moq
         public static ISetupSequentialResult<ValueTask<TResult>> ReturnsAsync<TResult>(
             this ISetupSequentialResult<ValueTask<TResult>> setup,
             TResult value
-        ) {
+        )
+        {
             return setup.Returns(() => new ValueTask<TResult>(value));
         }
 
@@ -51,7 +54,8 @@ namespace Moq
         public static ISetupSequentialResult<ValueTask<TResult>> ReturnsAsync<TResult>(
             this ISetupSequentialResult<ValueTask<TResult>> setup,
             Func<TResult> valueFunction
-        ) {
+        )
+        {
             return setup.Returns(() => new ValueTask<TResult>(valueFunction()));
         }
 
@@ -60,7 +64,8 @@ namespace Moq
 		/// </summary>
         public static ISetupSequentialResult<Task> PassAsync(
             this ISetupSequentialResult<Task> setup
-        ) {
+        )
+        {
             return setup.Returns(() => Task.FromResult(0));
         }
 
@@ -69,7 +74,8 @@ namespace Moq
 		/// </summary>
         public static ISetupSequentialResult<ValueTask> PassAsync(
             this ISetupSequentialResult<ValueTask> setup
-        ) {
+        )
+        {
             return setup.Returns(() => new ValueTask());
         }
 
@@ -79,7 +85,8 @@ namespace Moq
         public static ISetupSequentialResult<Task<TResult>> ThrowsAsync<TResult>(
             this ISetupSequentialResult<Task<TResult>> setup,
             Exception exception
-        ) {
+        )
+        {
             return setup.Returns(
                 () =>
                 {
@@ -96,7 +103,8 @@ namespace Moq
         public static ISetupSequentialResult<ValueTask<TResult>> ThrowsAsync<TResult>(
             this ISetupSequentialResult<ValueTask<TResult>> setup,
             Exception exception
-        ) {
+        )
+        {
             return setup.Returns(
                 () =>
                 {
@@ -113,7 +121,8 @@ namespace Moq
         public static ISetupSequentialResult<Task> ThrowsAsync(
             this ISetupSequentialResult<Task> setup,
             Exception exception
-        ) {
+        )
+        {
             return setup.Returns(
                 () =>
                 {
@@ -130,7 +139,8 @@ namespace Moq
         public static ISetupSequentialResult<ValueTask> ThrowsAsync(
             this ISetupSequentialResult<ValueTask> setup,
             Exception exception
-        ) {
+        )
+        {
             return setup.Returns(
                 () =>
                 {

@@ -62,7 +62,8 @@ namespace System.Web.Http.Tracing
         public static string ActionInvokeToString(
             string actionName,
             IDictionary<string, object> arguments
-        ) {
+        )
+        {
             Contract.Assert(actionName != null);
             Contract.Assert(arguments != null);
 

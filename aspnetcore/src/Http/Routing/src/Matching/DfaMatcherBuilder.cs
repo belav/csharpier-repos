@@ -38,7 +38,8 @@ namespace Microsoft.AspNetCore.Routing.Matching
             ParameterPolicyFactory parameterPolicyFactory,
             EndpointSelector selector,
             IEnumerable<MatcherPolicy> policies
-        ) {
+        )
+        {
             _loggerFactory = loggerFactory;
             _parameterPolicyFactory = parameterPolicyFactory;
             _selector = selector;
@@ -48,7 +49,8 @@ namespace Microsoft.AspNetCore.Routing.Matching
                     "Microsoft.AspNetCore.Routing.UseCorrectCatchAllBehavior",
                     out var enabled
                 )
-            ) {
+            )
+            {
                 UseCorrectCatchAllBehavior = enabled;
             }
             else
@@ -210,7 +212,8 @@ namespace Microsoft.AspNetCore.Routing.Matching
                         }
                         else if (
                             segment.IsSimple && parameterPart != null && parameterPart.IsCatchAll
-                        ) {
+                        )
+                        {
                             // A catch all should traverse all literal nodes as well as parameter nodes
                             // we don't need to create the parameter node here because of ordering
                             // all catchalls will be processed after all parameters.
@@ -251,7 +254,8 @@ namespace Microsoft.AspNetCore.Routing.Matching
                                 parameterPart,
                                 out var requiredValue
                             )
-                        ) {
+                        )
+                        {
                             // If the parameter has a matching required value, replace the parameter with the required value
                             // as a literal. This should use the parameter's transformer (if present)
                             // e.g. Template: Home/{action}, Required values: { action = "Index" }, Result: Home/Index
@@ -261,7 +265,8 @@ namespace Microsoft.AspNetCore.Routing.Matching
                                     parameterPart.Name,
                                     out var parameterPolicyReferences
                                 )
-                            ) {
+                            )
+                            {
                                 for (var k = 0; k < parameterPolicyReferences.Count; k++)
                                 {
                                     var reference = parameterPolicyReferences[k];
@@ -272,7 +277,8 @@ namespace Microsoft.AspNetCore.Routing.Matching
                                     if (
                                         parameterPolicy
                                         is IOutboundParameterTransformer parameterTransformer
-                                    ) {
+                                    )
+                                    {
                                         requiredValue = parameterTransformer.TransformOutbound(
                                             requiredValue
                                         );
@@ -354,7 +360,8 @@ namespace Microsoft.AspNetCore.Routing.Matching
             List<DfaNode> nextParents,
             DfaNode parent,
             string literal
-        ) {
+        )
+        {
             DfaNode next = null;
             if (parent.Literals == null || !parent.Literals.TryGetValue(literal, out next))
             {
@@ -388,7 +395,8 @@ namespace Microsoft.AspNetCore.Routing.Matching
                 lastSegment.IsSimple
                 && lastSegment.Parts[0] is RoutePatternParameterPart parameterPart
                 && parameterPart.IsCatchAll
-            ) {
+            )
+            {
                 return lastSegment;
             }
 
@@ -480,7 +488,8 @@ namespace Microsoft.AspNetCore.Routing.Matching
                 node.Parameters != null
                 && node.CatchAll != null
                 && ReferenceEquals(node.Parameters, node.CatchAll)
-            ) {
+            )
+            {
                 // This node has a single transition to but it should accept zero-width segments
                 // this can happen when a node only has catchall parameters.
                 currentExitDestination = currentDefaultDestination = Transition(node.Parameters);
@@ -574,7 +583,8 @@ namespace Microsoft.AspNetCore.Routing.Matching
             int exitDestination,
             INodeBuilderPolicy nodeBuilder,
             PolicyJumpTableEdge[] policyEntries
-        ) {
+        )
+        {
             if (policyEntries == null)
             {
                 return null;
@@ -660,7 +670,8 @@ namespace Microsoft.AspNetCore.Routing.Matching
                                 parameterPart,
                                 out var requiredValue
                             )
-                        ) {
+                        )
+                        {
                             _slots.Add(
                                 new KeyValuePair<string, object>(parameterPart.Name, requiredValue)
                             );
@@ -769,7 +780,8 @@ namespace Microsoft.AspNetCore.Routing.Matching
                     !parameterPart.IsOptional
                     && !parameterPart.IsCatchAll
                     && parameterPart.Default == null
-                ) {
+                )
+                {
                     return true;
                 }
             }
@@ -815,7 +827,8 @@ namespace Microsoft.AspNetCore.Routing.Matching
                         !nodeBuilder.AppliesToEndpoints(
                             parent.Matches ?? (IReadOnlyList<Endpoint>)Array.Empty<Endpoint>()
                         )
-                    ) {
+                    )
+                    {
                         // This node-builder doesn't care about this node, so add it to the list
                         // to be processed by the next node-builder.
                         nextWork.Add(parent);
@@ -863,7 +876,8 @@ namespace Microsoft.AspNetCore.Routing.Matching
 
         private static (INodeBuilderPolicy[] nodeBuilderPolicies, IEndpointComparerPolicy[] endpointComparerPolicies, IEndpointSelectorPolicy[] endpointSelectorPolicies) ExtractPolicies(
             IEnumerable<MatcherPolicy> policies
-        ) {
+        )
+        {
             var nodeBuilderPolicies = new List<INodeBuilderPolicy>();
             var endpointComparerPolicies = new List<IEndpointComparerPolicy>();
             var endpointSelectorPolicies = new List<IEndpointSelectorPolicy>();
@@ -897,7 +911,8 @@ namespace Microsoft.AspNetCore.Routing.Matching
             RoutePattern routePattern,
             RoutePatternParameterPart parameterPart,
             out object value
-        ) {
+        )
+        {
             if (!routePattern.RequiredValues.TryGetValue(parameterPart.Name, out value))
             {
                 return false;

@@ -38,7 +38,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Syntax
 
         protected override WarningStateMapEntry[] CreateWarningStateMapEntries(
             SyntaxTree syntaxTree
-        ) {
+        )
+        {
             // Accumulate all the pragma warning directives, in source code order
             var directives = ArrayBuilder<DirectiveTriviaSyntax>.GetInstance();
             GetAllPragmaWarningDirectives(syntaxTree, directives);
@@ -54,7 +55,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Syntax
         private static void GetAllPragmaWarningDirectives(
             SyntaxTree syntaxTree,
             ArrayBuilder<DirectiveTriviaSyntax> directiveList
-        ) {
+        )
+        {
             foreach (var d in syntaxTree.GetRoot().GetDirectives())
             {
                 if (!d.IsActive || d.Kind() != SyntaxKind.PragmaWarningDirectiveTrivia)
@@ -77,7 +79,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Syntax
         // This mapping also contains a global warning option, accumulated of all #pragma up to the current line position.
         private static WarningStateMapEntry[] CreatePragmaWarningStateEntries(
             ArrayBuilder<DirectiveTriviaSyntax> directiveList
-        ) {
+        )
+        {
             var entries = new WarningStateMapEntry[directiveList.Count + 1];
             var index = 0;
 

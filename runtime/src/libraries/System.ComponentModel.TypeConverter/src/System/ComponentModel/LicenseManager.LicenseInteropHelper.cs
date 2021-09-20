@@ -89,7 +89,8 @@ namespace System.ComponentModel
                 Type type,
                 out License license,
                 out string licenseKey
-            ) {
+            )
+            {
                 if (context == null)
                 {
                     context = LicenseManager.CurrentContext;
@@ -112,7 +113,8 @@ namespace System.ComponentModel
                 Type type,
                 out bool isDesignTime,
                 out string key
-            ) {
+            )
+            {
                 LicenseContext licContext = LicenseManager.CurrentContext;
                 isDesignTime = licContext.UsageMode == LicenseUsageMode.Designtime;
                 key = null;

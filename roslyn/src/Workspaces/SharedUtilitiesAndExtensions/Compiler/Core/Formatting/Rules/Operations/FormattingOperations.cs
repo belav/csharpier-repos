@@ -89,7 +89,8 @@ namespace Microsoft.CodeAnalysis.Formatting.Rules
             SyntaxToken endToken,
             int indentationDelta,
             IndentBlockOption option
-        ) {
+        )
+        {
             var span =
                 CommonFormattingHelpers.GetSpanIncludingTrailingAndLeadingTriviaOfAdjacentTokens(
                     startToken,
@@ -118,7 +119,8 @@ namespace Microsoft.CodeAnalysis.Formatting.Rules
             SyntaxToken endToken,
             int indentationDelta,
             IndentBlockOption option
-        ) {
+        )
+        {
             var span =
                 CommonFormattingHelpers.GetSpanIncludingTrailingAndLeadingTriviaOfAdjacentTokens(
                     startToken,
@@ -162,7 +164,8 @@ namespace Microsoft.CodeAnalysis.Formatting.Rules
         public static AdjustNewLinesOperation CreateAdjustNewLinesOperation(
             int line,
             AdjustNewLinesOption option
-        ) {
+        )
+        {
             if (line == 0)
             {
                 if (option == AdjustNewLinesOption.PreserveLines)
@@ -195,7 +198,8 @@ namespace Microsoft.CodeAnalysis.Formatting.Rules
         public static AdjustSpacesOperation CreateAdjustSpacesOperation(
             int space,
             AdjustSpacesOption option
-        ) {
+        )
+        {
             if (space == 1 && option == AdjustSpacesOption.DefaultSpacesIfOnSingleLine)
             {
                 return s_defaultOneSpaceIfOnSingleLine;
@@ -223,7 +227,8 @@ namespace Microsoft.CodeAnalysis.Formatting.Rules
             IEnumerable<AbstractFormattingRule> formattingRules,
             SyntaxNode node,
             AnalyzerConfigOptions options
-        ) {
+        )
+        {
             var chainedFormattingRules = new ChainedFormattingRules(formattingRules, options);
 
             var list = new List<SuppressOperation>();
@@ -238,7 +243,8 @@ namespace Microsoft.CodeAnalysis.Formatting.Rules
             IEnumerable<AbstractFormattingRule> formattingRules,
             SyntaxNode node,
             AnalyzerConfigOptions options
-        ) {
+        )
+        {
             var chainedFormattingRules = new ChainedFormattingRules(formattingRules, options);
 
             var list = new List<AnchorIndentationOperation>();
@@ -253,7 +259,8 @@ namespace Microsoft.CodeAnalysis.Formatting.Rules
             IEnumerable<AbstractFormattingRule> formattingRules,
             SyntaxNode node,
             AnalyzerConfigOptions options
-        ) {
+        )
+        {
             var chainedFormattingRules = new ChainedFormattingRules(formattingRules, options);
 
             var list = new List<IndentBlockOperation>();
@@ -268,7 +275,8 @@ namespace Microsoft.CodeAnalysis.Formatting.Rules
             IEnumerable<AbstractFormattingRule> formattingRules,
             SyntaxNode node,
             AnalyzerConfigOptions options
-        ) {
+        )
+        {
             var chainedFormattingRules = new ChainedFormattingRules(formattingRules, options);
 
             var list = new List<AlignTokensOperation>();
@@ -284,7 +292,8 @@ namespace Microsoft.CodeAnalysis.Formatting.Rules
             SyntaxToken previousToken,
             SyntaxToken currentToken,
             AnalyzerConfigOptions options
-        ) {
+        )
+        {
             var chainedFormattingRules = new ChainedFormattingRules(formattingRules, options);
             return chainedFormattingRules.GetAdjustNewLinesOperation(previousToken, currentToken);
         }
@@ -297,7 +306,8 @@ namespace Microsoft.CodeAnalysis.Formatting.Rules
             SyntaxToken previousToken,
             SyntaxToken currentToken,
             AnalyzerConfigOptions options
-        ) {
+        )
+        {
             var chainedFormattingRules = new ChainedFormattingRules(formattingRules, options);
             return chainedFormattingRules.GetAdjustSpacesOperation(previousToken, currentToken);
         }

@@ -35,7 +35,8 @@ namespace Microsoft.EntityFrameworkCore.Migrations.Internal
         public virtual void ExecuteNonQuery(
             IEnumerable<MigrationCommand> migrationCommands,
             IRelationalConnection connection
-        ) {
+        )
+        {
             Check.NotNull(migrationCommands, nameof(migrationCommands));
             Check.NotNull(connection, nameof(connection));
 
@@ -44,7 +45,8 @@ namespace Microsoft.EntityFrameworkCore.Migrations.Internal
                     TransactionScopeOption.Suppress,
                     TransactionScopeAsyncFlowOption.Enabled
                 )
-            ) {
+            )
+            {
                 connection.Open();
 
                 try
@@ -96,7 +98,8 @@ namespace Microsoft.EntityFrameworkCore.Migrations.Internal
             IEnumerable<MigrationCommand> migrationCommands,
             IRelationalConnection connection,
             CancellationToken cancellationToken = default
-        ) {
+        )
+        {
             Check.NotNull(migrationCommands, nameof(migrationCommands));
             Check.NotNull(connection, nameof(connection));
 

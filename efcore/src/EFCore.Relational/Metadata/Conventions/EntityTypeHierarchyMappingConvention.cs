@@ -27,7 +27,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
         public virtual void ProcessModelFinalizing(
             IConventionModelBuilder modelBuilder,
             IConventionContext<IConventionModelBuilder> context
-        ) {
+        )
+        {
             var nonTphRoots = new HashSet<IConventionEntityType>();
 
             foreach (var entityType in modelBuilder.Metadata.GetEntityTypes())
@@ -45,7 +46,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
                         tableName != entityType.BaseType.GetTableName()
                         || schema != entityType.BaseType.GetSchema()
                     )
-                ) {
+                )
+                {
                     var pk = entityType.FindPrimaryKey();
                     if (
                         pk != null
@@ -55,7 +57,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
                                     fk.PrincipalKey.IsPrimaryKey()
                                     && fk.PrincipalEntityType.IsAssignableFrom(entityType)
                             )
-                    ) {
+                    )
+                    {
                         entityType.Builder.HasRelationship(
                             entityType.BaseType,
                             pk.Properties,
@@ -74,7 +77,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
                         viewName != entityType.BaseType.GetViewName()
                         || viewSchema != entityType.BaseType.GetViewSchema()
                     )
-                ) {
+                )
+                {
                     nonTphRoots.Add(entityType.GetRootType());
                 }
             }

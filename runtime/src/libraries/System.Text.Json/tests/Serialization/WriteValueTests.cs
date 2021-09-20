@@ -191,7 +191,8 @@ namespace System.Text.Json.Serialization.Tests
                         stream,
                         new JsonWriterOptions { Indented = false }
                     )
-                ) {
+                )
+                {
                     JsonSerializer.Serialize(writer, input, serializerOptions);
                 }
                 Assert.Equal("[1,2,3]", Encoding.UTF8.GetString(stream.ToArray()));
@@ -204,7 +205,8 @@ namespace System.Text.Json.Serialization.Tests
                         stream,
                         new JsonWriterOptions { Indented = true }
                     )
-                ) {
+                )
+                {
                     JsonSerializer.Serialize(writer, input);
                 }
                 Assert.Equal(
@@ -243,7 +245,8 @@ namespace System.Text.Json.Serialization.Tests
                         stream,
                         new JsonWriterOptions { Encoder = JavaScriptEncoder.Default }
                     )
-                ) {
+                )
+                {
                     JsonSerializer.Serialize(writer, input, serializerOptions);
                 }
                 Assert.Equal(
@@ -262,7 +265,8 @@ namespace System.Text.Json.Serialization.Tests
                             Encoder = JavaScriptEncoder.UnsafeRelaxedJsonEscaping
                         }
                     )
-                ) {
+                )
+                {
                     JsonSerializer.Serialize(writer, input);
                 }
                 Assert.Equal("\"abcd+<>&\"", Encoding.UTF8.GetString(stream.ToArray()));
@@ -290,7 +294,8 @@ namespace System.Text.Json.Serialization.Tests
                         stream,
                         new JsonWriterOptions { SkipValidation = true }
                     )
-                ) {
+                )
+                {
                     writer.WriteStartObject();
                     JsonSerializer.Serialize(writer, input);
                 }
@@ -319,7 +324,8 @@ namespace System.Text.Json.Serialization.Tests
                         stream,
                         new JsonWriterOptions { SkipValidation = true }
                     )
-                ) {
+                )
+                {
                     JsonSerializer.Serialize(writer, input, serializerOptions);
                 }
                 Assert.Equal("[}", Encoding.UTF8.GetString(stream.ToArray()));
@@ -332,7 +338,8 @@ namespace System.Text.Json.Serialization.Tests
                 ref Utf8JsonReader reader,
                 Type typeToConvert,
                 JsonSerializerOptions options
-            ) {
+            )
+            {
                 throw new NotImplementedException();
             }
 
@@ -340,7 +347,8 @@ namespace System.Text.Json.Serialization.Tests
                 Utf8JsonWriter writer,
                 int[] value,
                 JsonSerializerOptions options
-            ) {
+            )
+            {
                 writer.WriteStartArray();
                 writer.WriteEndObject();
             }
@@ -430,7 +438,8 @@ namespace System.Text.Json.Serialization.Tests
                 string expected,
                 JsonSerializerOptions options,
                 JsonWriterOptions writerOptions
-            ) {
+            )
+            {
                 using (var stream = new MemoryStream())
                 {
                     using (var writer = new Utf8JsonWriter(stream, writerOptions))

@@ -55,7 +55,8 @@ namespace System.Diagnostics.CodeAnalysis
             string memberSignature,
             string typeName,
             string assemblyName
-        ) {
+        )
+        {
             MemberSignature = memberSignature;
             TypeName = typeName;
             AssemblyName = assemblyName;
@@ -84,7 +85,8 @@ namespace System.Diagnostics.CodeAnalysis
             DynamicallyAccessedMemberTypes memberTypes,
             string typeName,
             string assemblyName
-        ) {
+        )
+        {
             MemberTypes = memberTypes;
             TypeName = typeName;
             AssemblyName = assemblyName;

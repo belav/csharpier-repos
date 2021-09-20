@@ -56,15 +56,17 @@ namespace Microsoft.CodeAnalysis.CSharp
             BoundNode lastInRegion,
             bool trackRegions,
             bool trackUnassignments
-        ) : base(
-            compilation,
-            member,
-            node,
-            firstInRegion,
-            lastInRegion,
-            trackRegions: trackRegions,
-            nonMonotonicTransferFunction: trackUnassignments
-        ) {
+        )
+            : base(
+                compilation,
+                member,
+                node,
+                firstInRegion,
+                lastInRegion,
+                trackRegions: trackRegions,
+                nonMonotonicTransferFunction: trackUnassignments
+            )
+        {
             _emptyStructTypeCache = emptyStructs;
         }
 
@@ -110,7 +112,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             int containingSlot = 0,
             bool forceSlotEvenIfEmpty = false,
             bool createIfMissing = true
-        ) {
+        )
+        {
             Debug.Assert(containingSlot >= 0);
             Debug.Assert(symbol != null);
 
@@ -179,7 +182,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             ref Symbol symbol,
             int containingSlot,
             bool forceContainingSlotsToExist
-        ) {
+        )
+        {
             if (symbol is TupleElementFieldSymbol fieldSymbol)
             {
                 TypeSymbol containingType = symbol.ContainingType;
@@ -195,7 +199,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                         symbol.ContainingType,
                         TypeCompareKind.ConsiderEverything
                     )
-                ) {
+                )
+                {
                     var restField =
                         containingType.GetMembers(NamedTypeSymbol.ValueTupleRestFieldName)
                             .FirstOrDefault() as FieldSymbol;
@@ -215,7 +220,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                                 new VariableIdentifier(restField, containingSlot),
                                 out containingSlot
                             )
-                        ) {
+                        )
+                        {
                             return -1;
                         }
                     }
@@ -262,7 +268,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                             out BoundExpression? receiver,
                             out Symbol? member
                         )
-                    ) {
+                    )
+                    {
                         Debug.Assert((receiver is null) != member.RequiresInstanceReceiver());
                         return MakeMemberSlot(receiver, member);
                     }

@@ -39,7 +39,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Http3
             MemoryPool<byte> pool,
             Http3Stream stream,
             IKestrelTrace log
-        ) {
+        )
+        {
             _frameWriter = frameWriter;
             _memoryPool = pool;
             _stream = stream;
@@ -127,7 +128,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Http3
             bool autoChunk,
             ReadOnlySpan<byte> data,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             lock (_dataWriterLock)
             {
                 WriteResponseHeaders(
@@ -149,7 +151,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Http3
             bool autoChunk,
             ReadOnlySpan<byte> data,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             throw new NotImplementedException();
         }
 
@@ -268,7 +271,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Http3
         public ValueTask<FlushResult> WriteChunkAsync(
             ReadOnlySpan<byte> data,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             throw new NotImplementedException();
         }
 
@@ -300,7 +304,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Http3
         public ValueTask<FlushResult> WriteDataToPipeAsync(
             ReadOnlySpan<byte> data,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             if (cancellationToken.IsCancellationRequested)
             {
                 return new ValueTask<FlushResult>(
@@ -332,7 +337,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Http3
             HttpResponseHeaders responseHeaders,
             bool autoChunk,
             bool appCompleted
-        ) {
+        )
+        {
             lock (_dataWriterLock)
             {
                 if (_completed)
@@ -344,7 +350,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Http3
                     appCompleted
                     && !_startedWritingDataFrames
                     && (_stream.ResponseTrailers == null || _stream.ResponseTrailers.Count == 0)
-                ) {
+                )
+                {
                     // TODO figure out something to do here.
                 }
 

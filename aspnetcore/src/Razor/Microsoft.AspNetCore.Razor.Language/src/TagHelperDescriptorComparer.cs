@@ -41,7 +41,8 @@ namespace Microsoft.AspNetCore.Razor.Language
                     descriptorY.AssemblyName,
                     StringComparison.Ordinal
                 )
-            ) {
+            )
+            {
                 return false;
             }
 
@@ -62,7 +63,8 @@ namespace Microsoft.AspNetCore.Razor.Language
                     ),
                     BoundAttributeDescriptorComparer.Default
                 )
-            ) {
+            )
+            {
                 return false;
             }
 
@@ -78,7 +80,8 @@ namespace Microsoft.AspNetCore.Razor.Language
                     ),
                     TagMatchingRuleDescriptorComparer.Default
                 )
-            ) {
+            )
+            {
                 return false;
             }
 
@@ -101,7 +104,8 @@ namespace Microsoft.AspNetCore.Razor.Language
                         )
                     )
                 )
-            ) {
+            )
+            {
                 return false;
             }
 
@@ -116,7 +120,8 @@ namespace Microsoft.AspNetCore.Razor.Language
                     descriptorY.Documentation,
                     StringComparison.Ordinal
                 )
-            ) {
+            )
+            {
                 return false;
             }
 
@@ -126,7 +131,8 @@ namespace Microsoft.AspNetCore.Razor.Language
                     descriptorY.DisplayName,
                     StringComparison.Ordinal
                 )
-            ) {
+            )
+            {
                 return false;
             }
 
@@ -136,7 +142,8 @@ namespace Microsoft.AspNetCore.Razor.Language
                     descriptorY.TagOutputHint,
                     StringComparison.Ordinal
                 )
-            ) {
+            )
+            {
                 return false;
             }
 
@@ -153,7 +160,8 @@ namespace Microsoft.AspNetCore.Razor.Language
                     ),
                     descriptorY.Metadata.OrderBy(metadataY => metadataY.Key, StringComparer.Ordinal)
                 )
-            ) {
+            )
+            {
                 return false;
             }
 

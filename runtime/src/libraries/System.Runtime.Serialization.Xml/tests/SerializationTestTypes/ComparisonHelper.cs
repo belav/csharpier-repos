@@ -32,7 +32,8 @@ namespace SerializationTestTypes
             object originalData,
             object deserializedData,
             bool approxComparisonForFloatingPointAnd64BitValues = false
-        ) {
+        )
+        {
             ComparisionType cmpType = ComparisionType.DCS;
             SerializationMechanism att = ComparisonHelper.GetSerializationMechanism(originalData);
             if (att.Equals(SerializationMechanism.POCO))
@@ -59,7 +60,8 @@ namespace SerializationTestTypes
                 && (!hasISerializable)
                 && (!hasIXmlSerializable)
                 && (!hasSerializableAttribute)
-            ) {
+            )
+            {
                 att = SerializationMechanism.POCO;
             }
             else
@@ -73,7 +75,8 @@ namespace SerializationTestTypes
                     data.GetType()
                         .GetCustomAttributes(typeof(CollectionDataContractAttribute), false).Length
                     > 0
-                ) {
+                )
+                {
                     hasDataContractAttribute = true;
                 }
 
@@ -95,7 +98,8 @@ namespace SerializationTestTypes
                 else if (
                     hasDataContractAttribute == false
                     && (hasISerializable == true || hasSerializableAttribute == true)
-                ) {
+                )
+                {
                     att = SerializationMechanism.SerializableAttribute;
                 }
             }
@@ -113,7 +117,8 @@ namespace SerializationTestTypes
             object deserializedData,
             SerializationMechanism containerTypeAttribute,
             ComparisionType cmpType
-        ) {
+        )
+        {
             if (originalData == null) // both are null, comparison succeeded
             {
                 return;
@@ -122,7 +127,8 @@ namespace SerializationTestTypes
             if (
                 originalData.GetType()
                     .Name.Equals(typeof(System.Runtime.Serialization.ExtensionDataObject).Name)
-            ) {
+            )
+            {
                 return;
             }
 
@@ -226,7 +232,8 @@ namespace SerializationTestTypes
             else if (
                 originalDataType.Equals(typeof(XmlElement))
                 || originalDataType.Equals(typeof(XmlNode))
-            ) {
+            )
+            {
                 string originalDataXml = ((XmlNode)originalData).InnerXml;
                 string deserializedDataXml = ((XmlNode)deserializedData).InnerXml;
                 Trace.WriteLine(
@@ -258,7 +265,8 @@ namespace SerializationTestTypes
                 if (
                     (((DBNull)originalData) == DBNull.Value)
                     != (((DBNull)deserializedData) == DBNull.Value)
-                ) {
+                )
+                {
                     throw new Exception(
                         string.Format(
                             "Different instances of DBNull: original={0}, deserialized={1}",
@@ -275,7 +283,8 @@ namespace SerializationTestTypes
                         ((DateTime)originalData).ToUniversalTime()
                             .Equals(((DateTime)deserializedData).ToUniversalTime())
                     )
-                ) {
+                )
+                {
                     throw new Exception(
                         string.Format(
                             "Comparision failed: Original Datetime ticks {0} is not same as deserialized Datetime ticks {1}",
@@ -292,7 +301,8 @@ namespace SerializationTestTypes
                 || (originalDataType.Equals(typeof(Guid)))
                 || (originalDataType.Equals(typeof(decimal)))
                 || (originalDataType.Equals(typeof(DateTimeOffset)))
-            ) {
+            )
+            {
                 if (!originalData.Equals(deserializedData))
                 {
                     throw new Exception(
@@ -534,7 +544,8 @@ namespace SerializationTestTypes
             object deserializedData,
             SerializationMechanism containerTypeAttribute,
             ComparisionType cmpType
-        ) {
+        )
+        {
             BindingFlags flag = BindingFlags.Public | BindingFlags.Instance | BindingFlags.Static;
             //Include private fields for DCS types
             if (cmpType.Equals(ComparisionType.DCS))
@@ -545,7 +556,8 @@ namespace SerializationTestTypes
             foreach (
                 System.Reflection.PropertyInfo property in originalData.GetType()
                     .GetProperties(flag)
-            ) {
+            )
+            {
                 object newData = property.GetValue(originalData, null);
                 SerializationMechanism fieldAttribute = ComparisonHelper.GetSerializationMechanism(
                     newData
@@ -567,7 +579,8 @@ namespace SerializationTestTypes
                                     false
                                 ).Length > 0
                             )
-                        ) {
+                        )
+                        {
                             //Pass attribute of the complex type for furthur evaluation
                             if (IsComplexType(newData))
                             {
@@ -591,13 +604,15 @@ namespace SerializationTestTypes
                     }
                     else if (
                         containerTypeAttribute.Equals(SerializationMechanism.SerializableAttribute)
-                    ) {
+                    )
+                    {
                         if (
                             property.GetCustomAttributes(
                                 typeof(NonSerializedAttribute),
                                 false
                             ).Length == 0
-                        ) {
+                        )
+                        {
                             //Pass attribute of the complex type for furthur evaluation
                             if (IsComplexType(newData))
                             {
@@ -628,7 +643,8 @@ namespace SerializationTestTypes
                             typeof(IgnoreDataMemberAttribute),
                             false
                         ).Length == 0
-                    ) {
+                    )
+                    {
                         //On POCO types, Properties which have both getter and setter will be serialized otherwise ignored
                         if (property.CanRead && property.CanWrite)
                         {
@@ -694,7 +710,8 @@ namespace SerializationTestTypes
                     && (!data.GetType().IsPrimitive)
                     && (!data.GetType().IsEnum)
                 ) || ((data.GetType().IsClass) && (!(data.GetType().Equals(typeof(string)))))
-            ) {
+            )
+            {
                 complexType = true;
             }
             return complexType;
@@ -705,7 +722,8 @@ namespace SerializationTestTypes
             object deserializedData,
             SerializationMechanism containerTypeAttribute,
             ComparisionType cmpType
-        ) {
+        )
+        {
             //Compare fields
             //Non-public members are not serialized for POCO types
             BindingFlags flag = BindingFlags.Public | BindingFlags.Instance | BindingFlags.Static;
@@ -731,7 +749,8 @@ namespace SerializationTestTypes
                                 field.GetCustomAttributes(typeof(EnumMemberAttribute), false).Length
                                 > 0
                             )
-                        ) {
+                        )
+                        {
                             //Pass attribute of the complex type for furthur evaluation
                             if (ComparisonHelper.IsComplexType(newData))
                             {
@@ -755,7 +774,8 @@ namespace SerializationTestTypes
                     }
                     else if (
                         containerTypeAttribute.Equals(SerializationMechanism.SerializableAttribute)
-                    ) {
+                    )
+                    {
                         //Do not compare [NonSerialized] members
                         if (!field.IsNotSerialized)
                         {
@@ -792,7 +812,8 @@ namespace SerializationTestTypes
                                 false
                             ).Length == 0
                         )
-                    ) {
+                    )
+                    {
                         if (ComparisonHelper.IsComplexType(newData))
                         {
                             ComparisonHelper.CompareData(

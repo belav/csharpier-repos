@@ -393,7 +393,8 @@ namespace Microsoft.AspNetCore.Routing.Patterns
             string template,
             string parameter,
             string invalid
-        ) {
+        )
+        {
             // Act and Assert
             ExceptionAssert.Throws<RoutePatternException>(
                 () => RoutePatternParser.Parse(template),
@@ -416,7 +417,8 @@ namespace Microsoft.AspNetCore.Routing.Patterns
         public void Parse_ComplexSegment_OptionalParametersSeparatedByPeriod_Invalid(
             string template,
             string parameter
-        ) {
+        )
+        {
             // Act and Assert
             ExceptionAssert.Throws<RoutePatternException>(
                 () => RoutePatternParser.Parse(template),
@@ -508,7 +510,8 @@ namespace Microsoft.AspNetCore.Routing.Patterns
         public void ParseRouteParameter_ThrowsIf_ParameterContainsSpecialCharacters(
             string template,
             string parameterName
-        ) {
+        )
+        {
             // Arrange
             var expectedMessage =
                 "The route parameter name '"
@@ -787,7 +790,8 @@ namespace Microsoft.AspNetCore.Routing.Patterns
             public bool Equals(
                 RoutePatternParameterPolicyReference x,
                 RoutePatternParameterPolicyReference y
-            ) {
+            )
+            {
                 return x.Content == y.Content && x.ParameterPolicy == y.ParameterPolicy;
             }
 

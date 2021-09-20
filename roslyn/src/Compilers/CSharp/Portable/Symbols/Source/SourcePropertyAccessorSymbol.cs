@@ -33,7 +33,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             AccessorDeclarationSyntax syntax,
             bool isAutoPropertyAccessor,
             BindingDiagnosticBag diagnostics
-        ) {
+        )
+        {
             Debug.Assert(
                 syntax.Kind() == SyntaxKind.GetAccessorDeclaration
                     || syntax.Kind() == SyntaxKind.SetAccessorDeclaration
@@ -72,7 +73,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             DeclarationModifiers propertyModifiers,
             ArrowExpressionClauseSyntax syntax,
             BindingDiagnosticBag diagnostics
-        ) {
+        )
+        {
             bool isNullableAnalysisEnabled =
                 containingType.DeclaringCompilation.IsNullableAnalysisEnabledIn(syntax);
             return new SourcePropertyAccessorSymbol(
@@ -96,7 +98,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             Location location,
             CSharpSyntaxNode syntax,
             BindingDiagnosticBag diagnostics
-        ) {
+        )
+        {
             var methodKind = isGetMethod ? MethodKind.PropertyGet : MethodKind.PropertySet;
             return new SourcePropertyAccessorSymbol(
                 containingType,
@@ -123,7 +126,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             Location location,
             CSharpSyntaxNode syntax,
             BindingDiagnosticBag diagnostics
-        ) {
+        )
+        {
             return new SynthesizedRecordEqualityContractProperty.GetAccessorSymbol(
                 containingType,
                 property,
@@ -537,7 +541,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                 if (
                     LocalDeclaredReadOnly
                     || (_property.HasReadOnlyModifier && IsValidReadOnlyTarget)
-                ) {
+                )
+                {
                     return true;
                 }
 
@@ -599,7 +604,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             Location location,
             BindingDiagnosticBag diagnostics,
             out bool modifierErrors
-        ) {
+        )
+        {
             // No default accessibility. If unset, accessibility
             // will be inherited from the property.
             const DeclarationModifiers defaultAccess = DeclarationModifiers.None;
@@ -645,7 +651,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             bool hasBody,
             bool isAutoPropertyOrExpressionBodied,
             BindingDiagnosticBag diagnostics
-        ) {
+        )
+        {
             // Check accessibility against the accessibility declared on the accessor not the property.
             var localAccessibility = this.LocalAccessibility;
 
@@ -656,7 +663,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                     ContainingType.TypeKind == TypeKind.Class
                     || ContainingType.TypeKind == TypeKind.Submission
                 )
-            ) {
+            )
+            {
                 // '{0}' is abstract but it is contained in non-abstract type '{1}'
                 diagnostics.Add(
                     ErrorCode.ERR_AbstractInConcreteClass,
@@ -678,7 +686,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             }
             else if (
                 ContainingType.IsSealed && localAccessibility.HasProtected() && !this.IsOverride
-            ) {
+            )
+            {
                 diagnostics.Add(
                     AccessCheck.GetProtectedMemberInSealedTypeError(ContainingType),
                     location,
@@ -704,7 +713,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                 LocalDeclaredReadOnly
                 && _isAutoPropertyAccessor
                 && MethodKind == MethodKind.PropertySet
-            ) {
+            )
+            {
                 // Auto-implemented accessor '{0}' cannot be marked 'readonly'.
                 diagnostics.Add(ErrorCode.ERR_AutoSetterCantBeReadOnly, location, this);
             }
@@ -722,7 +732,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             string propertyName,
             bool getNotSet,
             bool isWinMdOutput
-        ) {
+        )
+        {
             var prefix = getNotSet ? "get_" : isWinMdOutput ? "put_" : "set_";
             return prefix + propertyName;
         }
@@ -954,7 +965,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
         internal sealed override void AddSynthesizedReturnTypeAttributes(
             PEModuleBuilder moduleBuilder,
             ref ArrayBuilder<SynthesizedAttributeData> attributes
-        ) {
+        )
+        {
             base.AddSynthesizedReturnTypeAttributes(moduleBuilder, ref attributes);
 
             var annotations = ReturnTypeFlowAnalysisAnnotations;
@@ -977,7 +989,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
         internal sealed override void AddSynthesizedAttributes(
             PEModuleBuilder moduleBuilder,
             ref ArrayBuilder<SynthesizedAttributeData> attributes
-        ) {
+        )
+        {
             base.AddSynthesizedAttributes(moduleBuilder, ref attributes);
 
             if (_isAutoPropertyAccessor)

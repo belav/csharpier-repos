@@ -1145,7 +1145,8 @@ public class B
                         Action<SyntaxNodeAnalysisContext>,
                         ImmutableArray<SyntaxKind>
                     > registerSyntaxNodeAction
-                ) {
+                )
+                {
                     registerSyntaxNodeAction(
                         context =>
                         {
@@ -1478,7 +1479,8 @@ public class B
         [CombinatorialData]
         public void TestReportingDiagnosticWithInvalidLocation(
             AnalyzerWithInvalidDiagnosticLocation.ActionKind actionKind
-        ) {
+        )
+        {
             var source1 = @"class C1 { void M() { int i = 0; i++; } }";
             var source2 = @"class C2 { void M() { int i = 0; i++; } }";
             var compilation = CreateCompilationWithMscorlib45(source1);
@@ -1855,7 +1857,8 @@ class MyClass
             Dictionary<string, ReportDiagnostic> specificOptions = null,
             ReportDiagnostic generalOption = ReportDiagnostic.Default,
             bool isEnabledByDefault = true
-        ) {
+        )
+        {
             specificOptions = specificOptions ?? new Dictionary<string, ReportDiagnostic>();
             var options = new CSharpCompilationOptions(
                 OutputKind.ConsoleApplication,
@@ -2422,7 +2425,8 @@ class TypeInGeneratedFile { }
                         if (
                             nodeContext.ContainingSymbol.Name.StartsWith("Funky")
                             && nodeContext.Compilation.Language == "C#"
-                        ) {
+                        )
+                        {
                             nodeContext.ReportDiagnostic(
                                 CodeAnalysis.Diagnostic.Create(
                                     ExpressionDescriptor,
@@ -2480,7 +2484,8 @@ class C
             AnalyzerOptions analyzerOptions,
             Func<string, bool> isGeneratedFileName,
             GeneratedCodeAnalysisFlags? generatedCodeAnalysisFlagsOpt
-        ) {
+        )
+        {
             var expected = GetExpectedGeneratedCodeAnalyzerDiagnostics(
                 compilation,
                 isGeneratedFileName,
@@ -2499,7 +2504,8 @@ class C
             DiagnosticDescription[] expected,
             GeneratedCodeAnalysisFlags? generatedCodeAnalysisFlagsOpt,
             AnalyzerOptions analyzerOptions = null
-        ) {
+        )
+        {
             var analyzers = new DiagnosticAnalyzer[]
             {
                 new GeneratedCodeAnalyzer(generatedCodeAnalysisFlagsOpt)
@@ -2516,7 +2522,8 @@ class C
             Compilation compilation,
             Func<string, bool> isGeneratedFileName,
             GeneratedCodeAnalysisFlags? generatedCodeAnalysisFlagsOpt
-        ) {
+        )
+        {
             var analyzers = new DiagnosticAnalyzer[]
             {
                 new GeneratedCodeAnalyzer(generatedCodeAnalysisFlagsOpt)
@@ -2615,7 +2622,8 @@ class C
                 if (
                     generatedCodeAnalysisFlagsOpt == null
                     || (generatedCodeAnalysisFlagsOpt & GeneratedCodeAnalysisFlags.Analyze) != 0
-                ) {
+                )
+                {
                     sortedCallbackSymbolNames.Add(string.Format("GeneratedCode{0}", i));
                     sortedCallbackSymbolNames.Add(string.Format("Nested{0}", i));
                     sortedCallbackSymbolNames.Add(string.Format("NonGeneratedCode{0}", i));
@@ -2658,7 +2666,8 @@ class C
             int column,
             GeneratedCodeAnalysisFlags? generatedCodeAnalysisFlagsOpt,
             params string[] arguments
-        ) {
+        )
+        {
             // Always report diagnostics in generated code, unless explicitly suppressed or we are not even analyzing generated code.
             var reportInGeneratedCode =
                 generatedCodeAnalysisFlagsOpt == null
@@ -2685,7 +2694,8 @@ class C
         private static void AddExpectedNonLocalDiagnostic(
             ArrayBuilder<DiagnosticDescription> builder,
             params string[] arguments
-        ) {
+        )
+        {
             AddExpectedDiagnostic(
                 builder,
                 GeneratedCodeAnalyzer.Summary.Id,
@@ -2703,7 +2713,8 @@ class C
             int line,
             int column,
             params string[] arguments
-        ) {
+        )
+        {
             var diagnostic = Diagnostic(diagnosticId, squiggledText)
                 .WithArguments(arguments)
                 .WithLocation(line, column);
@@ -3367,7 +3378,8 @@ public class Class
                 GeneratedCodeAnalysisFlags? generatedCodeAnalysisFlagsOpt,
                 ImmutableArray<SyntaxKind> syntaxKinds,
                 ImmutableArray<OperationKind> operationKinds
-            ) {
+            )
+            {
                 _generatedCodeAnalysisFlagsOpt = generatedCodeAnalysisFlagsOpt;
                 _syntaxKinds = syntaxKinds;
                 _operationKinds = operationKinds;
@@ -3436,7 +3448,8 @@ public class Class
                 IOperation operation,
                 string name,
                 Action<Diagnostic> addDiagnostic
-            ) {
+            )
+            {
                 ReportDiagnosticsCore(
                     addDiagnostic,
                     operation.Syntax.Location,
@@ -3448,7 +3461,8 @@ public class Class
                 Action<Diagnostic> addDiagnostic,
                 Location location,
                 params object[] messageArguments
-            ) {
+            )
+            {
                 // warning diagnostic
                 var diagnostic = CodeAnalysis.Diagnostic.Create(
                     Warning,
@@ -3596,7 +3610,8 @@ internal class C : MyInterface
             static void testFieldReferenceAnalyzer_InAttributes_Core(
                 Compilation compilation,
                 bool doOperationBlockAnalysis
-            ) {
+            )
+            {
                 var analyzers = new DiagnosticAnalyzer[]
                 {
                     new FieldReferenceOperationAnalyzer(doOperationBlockAnalysis)
@@ -3741,7 +3756,8 @@ internal class Derived : Base
         private static void TestFieldReferenceAnalyzer_InConstructorInitializer_Core(
             Compilation compilation,
             bool doOperationBlockAnalysis
-        ) {
+        )
+        {
             var analyzers = new DiagnosticAnalyzer[]
             {
                 new FieldReferenceOperationAnalyzer(doOperationBlockAnalysis)
@@ -3786,7 +3802,8 @@ internal class C
         private static void TestFieldReferenceAnalyzer_InConstructorDestructorExpressionBody_Core(
             Compilation compilation,
             bool doOperationBlockAnalysis
-        ) {
+        )
+        {
             var analyzers = new DiagnosticAnalyzer[]
             {
                 new FieldReferenceOperationAnalyzer(doOperationBlockAnalysis)
@@ -4058,7 +4075,8 @@ Block[B2] - Exit
 
             void verifyFlowGraphs(
                 ImmutableArray<(ControlFlowGraph Graph, ISymbol AssociatedSymbol)> flowGraphs
-            ) {
+            )
+            {
                 for (int i = 0; i < expectedFlowGraphs.Length; i++)
                 {
                     string expectedFlowGraph = expectedFlowGraphs[i];
@@ -4076,14 +4094,16 @@ Block[B2] - Exit
         private static void TestSymbolStartAnalyzerCore(
             SymbolStartAnalyzer analyzer,
             params DiagnosticDescription[] diagnostics
-        ) {
+        )
+        {
             TestSymbolStartAnalyzerCore(new DiagnosticAnalyzer[] { analyzer }, diagnostics);
         }
 
         private static void TestSymbolStartAnalyzerCore(
             DiagnosticAnalyzer[] analyzers,
             params DiagnosticDescription[] diagnostics
-        ) {
+        )
+        {
             var source =
                 @"
 #pragma warning disable CS0219 // unused local
@@ -5384,7 +5404,8 @@ class C
             bool registerFromInitialize,
             bool additionalFilesHaveSamePaths,
             bool firstAdditionalFileHasNullPath
-        ) {
+        )
+        {
             var tree = CSharpSyntaxTree.ParseText(string.Empty);
             var compilation = CreateCompilationWithMscorlib45(new[] { tree });
             compilation.VerifyDiagnostics();
@@ -5503,7 +5524,8 @@ class C
                 ImmutableArray<AdditionalText> additionalFiles,
                 TextSpan diagnosticSpan,
                 bool additionalFilesHaveSamePaths
-            ) {
+            )
+            {
                 foreach (AdditionalFileAnalyzer analyzer in analyzers)
                 {
                     var fileIndex = 0;
@@ -5553,7 +5575,8 @@ class C
                 TextSpan diagnosticSpan,
                 bool additionalFilesHaveSamePaths,
                 bool verifyGetAllDiagnostics = true
-            ) {
+            )
+            {
                 if (verifyGetAllDiagnostics)
                 {
                     verifyDiagnostics(
@@ -5591,13 +5614,15 @@ class C
                     AnalysisResult analysisResult,
                     DiagnosticAnalyzer analyzer,
                     AdditionalText additionalFile
-                ) {
+                )
+                {
                     if (
                         analysisResult.AdditionalFileDiagnostics.TryGetValue(
                             additionalFile,
                             out var diagnosticsMap
                         ) && diagnosticsMap.TryGetValue(analyzer, out var diagnostics)
-                    ) {
+                    )
+                    {
                         return diagnostics;
                     }
 
@@ -5636,7 +5661,8 @@ class C
                 SyntaxTree tree,
                 Compilation compilation,
                 bool ignoreAccessibility = false
-            ) {
+            )
+            {
                 return _cache.GetOrAdd(
                     tree,
                     compilation.CreateSemanticModel(tree, ignoreAccessibility)

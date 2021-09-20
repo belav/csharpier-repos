@@ -19,7 +19,8 @@ namespace Microsoft.AspNetCore.Mvc.Infrastructure
             if (
                 returnType.IsGenericType
                 && returnType.GetGenericTypeDefinition() == typeof(ActionResult<>)
-            ) {
+            )
+            {
                 return returnType.GetGenericArguments()[0];
             }
 

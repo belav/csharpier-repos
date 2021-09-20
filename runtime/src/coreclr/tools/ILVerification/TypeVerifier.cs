@@ -30,7 +30,8 @@ namespace Internal.TypeVerifier
             TypeDefinitionHandle typeDefinitionHandle,
             ILVerifyTypeSystemContext typeSystemContext,
             VerifierOptions verifierOptions
-        ) {
+        )
+        {
             _module = module;
             _typeDefinitionHandle = typeDefinitionHandle;
             _typeSystemContext = typeSystemContext;
@@ -104,7 +105,8 @@ namespace Internal.TypeVerifier
                     // Look for missing method implementation
                     foreach (
                         MethodDesc method in implementedInterface.InterfaceType.GetAllMethods()
-                    ) {
+                    )
+                    {
                         if (!method.IsAbstract)
                         {
                             continue;
@@ -153,7 +155,8 @@ namespace Internal.TypeVerifier
             TypeDesc interfaceTypeDesc,
             EcmaModule module,
             InterfaceImplementation interfaceImplementation
-        ) {
+        )
+        {
             if (_verifierOptions.IncludeMetadataTokensInErrorMessages)
             {
                 return string.Format(

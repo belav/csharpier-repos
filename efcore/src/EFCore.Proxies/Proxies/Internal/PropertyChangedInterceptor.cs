@@ -101,7 +101,8 @@ namespace Microsoft.EntityFrameworkCore.Proxies.Internal
             IInvocation invocation,
             IPropertyBase property,
             IEqualityComparer? comparer
-        ) {
+        )
+        {
             var newValue = invocation.Arguments[^1];
 
             if (_checkEquality)

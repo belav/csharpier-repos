@@ -24,7 +24,8 @@ namespace Microsoft.CodeAnalysis.Structure
             SyntaxTree syntaxTree,
             BlockStructureOptionProvider optionProvider,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             SyntaxTree = syntaxTree;
             OptionProvider = optionProvider;
             CancellationToken = cancellationToken;

@@ -21,7 +21,8 @@ namespace System
 #else
                 SR.Arg_OutOfMemoryException
 #endif
-            ) {
+            )
+        {
             HResult = HResults.COR_E_OUTOFMEMORY;
         }
 

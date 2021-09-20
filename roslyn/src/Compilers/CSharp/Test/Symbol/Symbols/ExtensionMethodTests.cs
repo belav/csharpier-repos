@@ -2830,7 +2830,8 @@ static class S
             string reducedFromDescription,
             string constructedFromDescription,
             string reducedAndConstructedFromDescription
-        ) {
+        )
+        {
             // Create instance form from constructed method.
             var extensionMethod = ReducedExtensionMethodSymbol.Create(
                 method.ConstructIfGeneric(typeArgs)
@@ -3065,7 +3066,8 @@ class Program
             string expectedOutput = null,
             Action<ModuleSymbol> validator = null,
             CSharpCompilationOptions options = null
-        ) {
+        )
+        {
             return CompileAndVerify(
                 source: source,
                 expectedOutput: expectedOutput,

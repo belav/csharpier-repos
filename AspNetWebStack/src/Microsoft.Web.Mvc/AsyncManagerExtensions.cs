@@ -23,7 +23,8 @@ namespace Microsoft.Web.Mvc
             this AsyncManager asyncManager,
             Func<AsyncCallback, IAsyncResult> beginDelegate,
             Action<IAsyncResult> endDelegate
-        ) {
+        )
+        {
             if (asyncManager == null)
             {
                 throw new ArgumentNullException("asyncManager");

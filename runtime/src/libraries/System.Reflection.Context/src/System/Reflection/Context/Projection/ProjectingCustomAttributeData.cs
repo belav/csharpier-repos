@@ -12,10 +12,8 @@ namespace System.Reflection.Context.Projection
     {
         private readonly Projector _projector;
 
-        public ProjectingCustomAttributeData(
-            CustomAttributeData attribute,
-            Projector projector
-        ) : base(attribute)
+        public ProjectingCustomAttributeData(CustomAttributeData attribute, Projector projector)
+            : base(attribute)
         {
             Debug.Assert(null != projector);
 

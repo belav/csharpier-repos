@@ -66,7 +66,8 @@ namespace Newtonsoft.Json.Tests.Documentation
         protected override JsonProperty CreateProperty(
             MemberInfo member,
             MemberSerialization memberSerialization
-        ) {
+        )
+        {
             JsonProperty property = base.CreateProperty(member, memberSerialization);
 
             if (property.DeclaringType == typeof(Employee) && property.PropertyName == "Manager")

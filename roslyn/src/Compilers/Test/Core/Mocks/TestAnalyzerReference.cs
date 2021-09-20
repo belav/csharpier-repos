@@ -18,7 +18,8 @@ namespace Roslyn.Test.Utilities
             string? fullPath = null,
             string? display = null,
             object? id = null
-        ) {
+        )
+        {
             _fullPath = fullPath;
             _display = display;
             _id = id;

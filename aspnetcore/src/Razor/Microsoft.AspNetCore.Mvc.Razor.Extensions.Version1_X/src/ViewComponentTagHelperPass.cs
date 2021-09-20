@@ -16,7 +16,8 @@ namespace Microsoft.AspNetCore.Mvc.Razor.Extensions.Version1_X
         protected override void ExecuteCore(
             RazorCodeDocument codeDocument,
             DocumentIntermediateNode documentNode
-        ) {
+        )
+        {
             var @namespace = documentNode.FindPrimaryNamespace();
             var @class = documentNode.FindPrimaryClass();
             if (@namespace == null || @class == null)
@@ -52,7 +53,8 @@ namespace Microsoft.AspNetCore.Mvc.Razor.Extensions.Version1_X
             Context context,
             TagHelperIntermediateNode node,
             TagHelperDescriptor tagHelper
-        ) {
+        )
+        {
             if (!tagHelper.IsViewComponentKind())
             {
                 return;
@@ -71,7 +73,8 @@ namespace Microsoft.AspNetCore.Mvc.Razor.Extensions.Version1_X
             }
             while (
                 i < node.Children.Count && node.Children[i] is DefaultTagHelperBodyIntermediateNode
-            ) {
+            )
+            {
                 i++;
             }
 
@@ -79,7 +82,8 @@ namespace Microsoft.AspNetCore.Mvc.Razor.Extensions.Version1_X
             while (
                 i < node.Children.Count
                 && node.Children[i] is DefaultTagHelperCreateIntermediateNode
-            ) {
+            )
+            {
                 i++;
             }
 
@@ -100,7 +104,8 @@ namespace Microsoft.AspNetCore.Mvc.Razor.Extensions.Version1_X
                 if (
                     node.Children[i] is TagHelperPropertyIntermediateNode propertyNode
                     && propertyNode.TagHelper == tagHelper
-                ) {
+                )
+                {
                     // This is a set property for this VCTH - we need to replace it with a node
                     // that will use our field and property name.
                     node.Children[i] = new DefaultTagHelperPropertyIntermediateNode(propertyNode)
@@ -123,14 +128,16 @@ namespace Microsoft.AspNetCore.Mvc.Razor.Extensions.Version1_X
             while (
                 i < context.Class.Children.Count
                 && context.Class.Children[i] is DefaultTagHelperRuntimeIntermediateNode
-            ) {
+            )
+            {
                 i++;
             }
 
             while (
                 i < context.Class.Children.Count
                 && context.Class.Children[i] is FieldDeclarationIntermediateNode
-            ) {
+            )
+            {
                 i++;
             }
 
@@ -173,7 +180,8 @@ namespace Microsoft.AspNetCore.Mvc.Razor.Extensions.Version1_X
             public Context(
                 NamespaceDeclarationIntermediateNode @namespace,
                 ClassDeclarationIntermediateNode @class
-            ) {
+            )
+            {
                 Namespace = @namespace;
                 Class = @class;
 

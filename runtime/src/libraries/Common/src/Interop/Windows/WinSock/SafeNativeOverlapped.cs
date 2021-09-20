@@ -24,10 +24,8 @@ namespace System.Net.Sockets
             SetHandle(handle);
         }
 
-        public unsafe SafeNativeOverlapped(
-            SafeSocketHandle socketHandle,
-            NativeOverlapped* handle
-        ) : this((IntPtr)handle)
+        public unsafe SafeNativeOverlapped(SafeSocketHandle socketHandle, NativeOverlapped* handle)
+            : this((IntPtr)handle)
         {
             _socketHandle = socketHandle;
 

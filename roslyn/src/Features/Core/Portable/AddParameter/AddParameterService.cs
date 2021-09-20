@@ -78,7 +78,8 @@ namespace Microsoft.CodeAnalysis.AddParameter
             int? newParameterIndex,
             bool fixAllReferences,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var solution = invocationDocument.Project.Solution;
 
             var referencedSymbols = fixAllReferences
@@ -154,7 +155,8 @@ namespace Microsoft.CodeAnalysis.AddParameter
                     if (
                         method.MethodKind == MethodKind.ReducedExtension
                         && insertionIndex < existingParameters.Count
-                    ) {
+                    )
+                    {
                         insertionIndex++;
                     }
 
@@ -181,7 +183,8 @@ namespace Microsoft.CodeAnalysis.AddParameter
             Document invocationDocument,
             IMethodSymbol method,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var progress = new StreamingProgressCollector();
 
             await SymbolFinder.FindReferencesAsync(
@@ -206,7 +209,8 @@ namespace Microsoft.CodeAnalysis.AddParameter
             RefKind refKind,
             bool isOptional,
             string argumentNameSuggestion
-        ) {
+        )
+        {
             var uniqueName = NameGenerator.EnsureUniqueness(
                 argumentNameSuggestion,
                 method.Parameters.Select(p => p.Name)
@@ -229,7 +233,8 @@ namespace Microsoft.CodeAnalysis.AddParameter
             int insertionIndex,
             SyntaxNode parameterDeclaration,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var sourceText = declaration.SyntaxTree.GetText(cancellationToken);
             var generator = editor.Generator;
 
@@ -363,7 +368,8 @@ namespace Microsoft.CodeAnalysis.AddParameter
             ISyntaxFactsService syntaxFacts,
             SyntaxNode node,
             bool includeLeadingNewLine
-        ) {
+        )
+        {
             using var _ = ArrayBuilder<SyntaxTrivia>.GetInstance(out var triviaList);
             if (includeLeadingNewLine)
             {
@@ -394,7 +400,8 @@ namespace Microsoft.CodeAnalysis.AddParameter
         private static bool ShouldPlaceParametersOnNewLine(
             IReadOnlyList<SyntaxNode> parameters,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             if (parameters.Count <= 1)
             {
                 return false;

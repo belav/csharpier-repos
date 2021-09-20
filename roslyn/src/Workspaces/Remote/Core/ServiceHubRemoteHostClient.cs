@@ -52,7 +52,8 @@ namespace Microsoft.CodeAnalysis.Remote
             HubClient hubClient,
             Stream stream,
             IRemoteServiceCallbackDispatcherProvider callbackDispatcherProvider
-        ) {
+        )
+        {
             _connectionPools = new ConnectionPools(
                 connectionFactory: (serviceName, pool, cancellationToken) =>
                     CreateConnectionImplAsync(
@@ -98,14 +99,16 @@ namespace Microsoft.CodeAnalysis.Remote
             IServiceBroker serviceBroker,
             RemoteServiceCallbackDispatcherRegistry callbackDispatchers,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             using (
                 Logger.LogBlock(
                     FunctionId.ServiceHubRemoteHostClient_CreateAsync,
                     KeyValueLogMessage.NoProperty,
                     cancellationToken
                 )
-            ) {
+            )
+            {
 #pragma warning disable ISB001    // Dispose of proxies
 #pragma warning disable VSTHRD012 // Provide JoinableTaskFactory where allowed
                 var serviceBrokerClient = new ServiceBrokerClient(serviceBroker);
@@ -162,7 +165,8 @@ namespace Microsoft.CodeAnalysis.Remote
             HubClient client,
             RemoteServiceName serviceName,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var is64bit = RemoteHostOptions.IsServiceHubProcess64Bit(services);
             var isServerGC = RemoteHostOptions.IsServiceHubProcessServerGC(services);
 
@@ -254,7 +258,8 @@ namespace Microsoft.CodeAnalysis.Remote
             RemoteServiceName serviceName,
             object? callbackTarget,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             // When callbackTarget is given, we can't share/pool connection since callbackTarget attaches a state to connection.
             // so connection is only valid for that specific callbackTarget. it is up to the caller to keep connection open
             // if he wants to reuse same connection.
@@ -277,7 +282,8 @@ namespace Microsoft.CodeAnalysis.Remote
             object? callbackTarget,
             IPooledConnectionReclamation? poolReclamation,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var serviceStream = await RequestServiceAsync(
                     _services,
                     _hubClient,
@@ -324,7 +330,8 @@ namespace Microsoft.CodeAnalysis.Remote
             Checksum[] checksums,
             string pipeName,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             try
             {
                 using (
@@ -333,7 +340,8 @@ namespace Microsoft.CodeAnalysis.Remote
                         pipeName,
                         cancellationToken
                     )
-                ) {
+                )
+                {
                     await RemoteEndPoint.WriteDataToNamedPipeAsync(
                             pipeName,
                             (scopeId, checksums),
@@ -364,7 +372,8 @@ namespace Microsoft.CodeAnalysis.Remote
         public Task<bool> IsExperimentEnabledAsync(
             string experimentName,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             try
             {
                 return _services.GetRequiredService<IExperimentationService>()

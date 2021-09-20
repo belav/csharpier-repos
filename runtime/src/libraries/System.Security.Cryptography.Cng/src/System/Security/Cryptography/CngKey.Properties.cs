@@ -71,7 +71,8 @@ namespace System.Security.Cryptography
 
                 fixed (
                     byte* pinnedPropertyValue = propertyValue.MapZeroLengthArrayToNonNullPointer()
-                ) {
+                )
+                {
                     ErrorCode errorCode = Interop.NCrypt.NCryptSetProperty(
                         _keyHandle,
                         property.Name,

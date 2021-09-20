@@ -41,7 +41,8 @@ namespace ServerComparison.FunctionalTests
                     variant.Server == ServerType.Nginx ? LogLevel.Trace : LogLevel.Debug, // https://github.com/aspnet/ServerTests/issues/144
                     testName
                 )
-            ) {
+            )
+            {
                 var logger = loggerFactory.CreateLogger("HelloWorld");
 
                 var deploymentParameters = new DeploymentParameters(variant)
@@ -60,7 +61,8 @@ namespace ServerComparison.FunctionalTests
                         deploymentParameters,
                         loggerFactory
                     )
-                ) {
+                )
+                {
                     var deploymentResult = await deployer.DeployAsync();
 
                     // Request to base address and check if various parts of the body are rendered & measure the cold startup time.

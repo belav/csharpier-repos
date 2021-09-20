@@ -463,7 +463,8 @@ namespace System.Threading
             int millisecondsTimeout,
             uint startTime,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             int remainingWaitMilliseconds = Timeout.Infinite;
 
             // Wait on the monitor as long as the count is zero
@@ -754,7 +755,8 @@ namespace System.Threading
             TaskNode asyncWaiter,
             int millisecondsTimeout,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             Debug.Assert(asyncWaiter != null, "Waiter should have been constructed");
             Debug.Assert(Monitor.IsEntered(m_lockObjAndDisposed), "Requires the lock be held");
 
@@ -773,7 +775,8 @@ namespace System.Threading
                                 Task.Delay(millisecondsTimeout, cts.Token)
                             )
                             .ConfigureAwait(false)
-                    ) {
+                    )
+                    {
                         cts.Cancel(); // ensure that the Task.Delay task is cleaned up
                         return true; // successfully acquired
                     }
@@ -792,11 +795,13 @@ namespace System.Threading
                         static s => ((Task)s!).TrySetResult(),
                         cancellationTask
                     )
-                ) {
+                )
+                {
                     if (
                         asyncWaiter
                         == await Task.WhenAny(asyncWaiter, cancellationTask).ConfigureAwait(false)
-                    ) {
+                    )
+                    {
                         return true; // successfully acquired
                     }
                 }

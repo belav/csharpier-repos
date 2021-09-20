@@ -393,7 +393,8 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking
         /// <exception cref="OperationCanceledException"> If the <see cref="CancellationToken"/> is canceled. </exception>
         public virtual async Task<PropertyValues?> GetDatabaseValuesAsync(
             CancellationToken cancellationToken = default
-        ) {
+        )
+        {
             var values = await Finder.GetDatabaseValuesAsync(InternalEntry, cancellationToken)
                 .ConfigureAwait(false);
 

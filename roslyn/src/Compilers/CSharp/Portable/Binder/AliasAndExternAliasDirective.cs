@@ -21,7 +21,8 @@ namespace Microsoft.CodeAnalysis.CSharp
         public AliasAndExternAliasDirective(
             AliasSymbol alias,
             ExternAliasDirectiveSyntax externAliasDirective
-        ) {
+        )
+        {
             this.Alias = alias;
             this.ExternAliasDirective = externAliasDirective;
         }

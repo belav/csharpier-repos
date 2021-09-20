@@ -62,7 +62,8 @@ namespace BasicWebSite
             int id,
             string name,
             string email
-        ) {
+        )
+        {
             return new Contact { ContactId = id, Name = name, Email = email, };
         }
 
@@ -75,14 +76,16 @@ namespace BasicWebSite
         [HttpGet("[action]")]
         public ActionResult<string> ActionWithInferredModelBinderType(
             [ModelBinder(typeof(TestModelBinder))] string foo
-        ) {
+        )
+        {
             return foo;
         }
 
         [HttpGet("[action]")]
         public ActionResult<string> ActionWithInferredModelBinderTypeWithExplicitModelName(
             [ModelBinder(typeof(TestModelBinder), Name = "bar")] string foo
-        ) {
+        )
+        {
             return foo;
         }
 

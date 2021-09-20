@@ -15,7 +15,8 @@ namespace System.Diagnostics.Tests
             string fileTypeDescription,
             string exePath,
             string programId
-        ) {
+        )
+        {
             bool commit = false;
 
             commit |= SetCurrentUserRegistryKey(@"Software\Classes\" + extension, programId);

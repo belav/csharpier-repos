@@ -45,7 +45,8 @@ namespace Microsoft.AspNetCore.Http.Features
         public ResponseCookiesFeature(
             IFeatureCollection features,
             ObjectPool<StringBuilder>? builderPool
-        ) {
+        )
+        {
             _features = features ?? throw new ArgumentNullException(nameof(features));
         }
 

@@ -28,7 +28,8 @@ namespace Microsoft.AspNetCore.Builder
         public static void UseProxyToSpaDevelopmentServer(
             this ISpaBuilder spaBuilder,
             string baseUri
-        ) {
+        )
+        {
             UseProxyToSpaDevelopmentServer(spaBuilder, new Uri(baseUri));
         }
 
@@ -54,7 +55,8 @@ namespace Microsoft.AspNetCore.Builder
         public static void UseProxyToSpaDevelopmentServer(
             this ISpaBuilder spaBuilder,
             Func<Task<Uri>> baseUriTaskFactory
-        ) {
+        )
+        {
             var applicationBuilder = spaBuilder.ApplicationBuilder;
             var applicationStoppingToken = GetStoppingToken(applicationBuilder);
 

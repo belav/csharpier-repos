@@ -19,7 +19,8 @@ namespace Roslyn.Utilities
             IEqualityComparer<string> comparer,
             (string? key, ReportDiagnostic diagnostic) globalOption,
             params (SyntaxTree, (string, ReportDiagnostic)[])[] options
-        ) {
+        )
+        {
             _options = options.ToDictionary(
                 x => x.Item1,
                 x => x.Item2.ToDictionary(x => x.Item1, x => x.Item2, comparer)
@@ -51,7 +52,8 @@ namespace Roslyn.Utilities
 
         public TestSyntaxTreeOptionsProvider(
             params (SyntaxTree, GeneratedKind isGenerated)[] isGenerated
-        ) {
+        )
+        {
             _options = null;
             _isGenerated = isGenerated.ToDictionary(x => x.Item1, x => x.isGenerated);
         }
@@ -69,12 +71,14 @@ namespace Roslyn.Utilities
             string diagnosticId,
             CancellationToken cancellationToken,
             out ReportDiagnostic severity
-        ) {
+        )
+        {
             if (
                 _options != null
                 && _options.TryGetValue(tree, out var diags)
                 && diags.TryGetValue(diagnosticId, out severity)
-            ) {
+            )
+            {
                 return true;
             }
             severity = ReportDiagnostic.Default;
@@ -85,7 +89,8 @@ namespace Roslyn.Utilities
             string diagnosticId,
             CancellationToken cancellationToken,
             out ReportDiagnostic severity
-        ) {
+        )
+        {
             if (_globalOptions is object && _globalOptions.TryGetValue(diagnosticId, out severity))
             {
                 return true;

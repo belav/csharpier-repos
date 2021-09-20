@@ -21,7 +21,8 @@ namespace System.Web.Razor.Test.Parser.PartialParsing
         protected static void RunFullReparseTest(
             TextChange change,
             PartialParseResult additionalFlags = (PartialParseResult)0
-        ) {
+        )
+        {
             // Arrange
             using (TestParserManager manager = CreateParserManager())
             {
@@ -40,7 +41,8 @@ namespace System.Web.Razor.Test.Parser.PartialParsing
             TextChange change,
             Block newTreeRoot,
             PartialParseResult additionalFlags = (PartialParseResult)0
-        ) {
+        )
+        {
             // Arrange
             using (TestParserManager manager = CreateParserManager())
             {

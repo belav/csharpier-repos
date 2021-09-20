@@ -154,7 +154,8 @@ namespace System.Collections.Specialized.Tests
         public void Ctor_Int_NameValueCollection(
             int capacity,
             NameValueCollection nameValueCollection1
-        ) {
+        )
+        {
             NameValueCollection nameValueCollection2 = new NameValueCollection(
                 capacity,
                 nameValueCollection1
@@ -213,7 +214,8 @@ namespace System.Collections.Specialized.Tests
             NameValueCollection nameValueCollection,
             IEqualityComparer equalityComparer,
             int newCount
-        ) {
+        )
+        {
             Assert.Equal(0, nameValueCollection.Count);
             Assert.Equal(0, nameValueCollection.Keys.Count);
             Assert.Equal(0, nameValueCollection.AllKeys.Length);

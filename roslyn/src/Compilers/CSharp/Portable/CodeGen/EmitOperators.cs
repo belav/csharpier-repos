@@ -246,7 +246,8 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeGen
             bool sense,
             bool stopSense,
             bool stopValue
-        ) {
+        )
+        {
             // we generate:
             //
             // gotoif (a == stopSense) fallThrough
@@ -474,7 +475,8 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeGen
             BoundExpression left,
             BoundExpression right,
             bool sense
-        ) {
+        )
+        {
             EmitExpression(left, true);
             EmitExpression(right, true);
             _builder.EmitOpCode(opCode);
@@ -558,7 +560,8 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeGen
         private void EmitConversionToEnumUnderlyingType(
             BoundBinaryOperator expression,
             bool @checked
-        ) {
+        )
+        {
             // If we are doing an enum addition or subtraction and the
             // underlying type is 8 or 16 bits then we will have done the operation in 32
             // bits and we need to convert back down to the smaller bit size

@@ -173,7 +173,8 @@ namespace System.Net
         public static System.Net.ServicePoint FindServicePoint(
             string uriString,
             System.Net.IWebProxy? proxy
-        ) {
+        )
+        {
             throw null;
         }
         [System.ObsoleteAttribute(
@@ -193,7 +194,8 @@ namespace System.Net
         public static System.Net.ServicePoint FindServicePoint(
             System.Uri address,
             System.Net.IWebProxy? proxy
-        ) {
+        )
+        {
             throw null;
         }
         public static void SetTcpKeepAlive(

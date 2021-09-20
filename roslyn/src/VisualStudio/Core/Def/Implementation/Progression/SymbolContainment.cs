@@ -25,7 +25,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Progression
         public static async Task<IEnumerable<SyntaxNode>> GetContainedSyntaxNodesAsync(
             Document document,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var progressionLanguageService =
                 document.GetLanguageService<IProgressionLanguageService>();
             if (progressionLanguageService == null)
@@ -42,7 +43,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Progression
         public static async Task<ImmutableArray<ISymbol>> GetContainedSymbolsAsync(
             Document document,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var syntaxNodes = await GetContainedSyntaxNodesAsync(document, cancellationToken)
                 .ConfigureAwait(false);
             var semanticModel = await document.GetSemanticModelAsync(cancellationToken)
@@ -56,7 +58,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Progression
                 var symbol = semanticModel.GetDeclaredSymbol(syntaxNode, cancellationToken);
                 if (
                     symbol != null && !string.IsNullOrEmpty(symbol.Name) && IsTopLevelSymbol(symbol)
-                ) {
+                )
+                {
                     symbols.Add(symbol);
                 }
             }

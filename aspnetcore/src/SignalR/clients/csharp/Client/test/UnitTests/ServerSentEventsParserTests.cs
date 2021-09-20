@@ -86,7 +86,8 @@ namespace Microsoft.AspNetCore.SignalR.Client.Tests
         public void ParseSSEMessageFailureCases(
             string encodedMessage,
             string expectedExceptionMessage
-        ) {
+        )
+        {
             var buffer = Encoding.UTF8.GetBytes(encodedMessage);
             var readableBuffer = new ReadOnlySequence<byte>(buffer);
             var parser = new ServerSentEventsMessageParser();
@@ -157,7 +158,8 @@ namespace Microsoft.AspNetCore.SignalR.Client.Tests
         public async Task ParseMessageAcrossMultipleReadsSuccess(
             string[] messageParts,
             string expectedMessage
-        ) {
+        )
+        {
             var parser = new ServerSentEventsMessageParser();
             var pipe = new Pipe();
 
@@ -249,7 +251,8 @@ namespace Microsoft.AspNetCore.SignalR.Client.Tests
             string encodedMessagePart1,
             string encodedMessagePart2,
             string expectedMessage
-        ) {
+        )
+        {
             var pipe = new Pipe();
 
             // Read the first part of the message
@@ -338,7 +341,8 @@ namespace Microsoft.AspNetCore.SignalR.Client.Tests
         public void ParseMessagesWithMultipleDataLines(
             string encodedMessage,
             string expectedMessage
-        ) {
+        )
+        {
             var buffer = Encoding.UTF8.GetBytes(encodedMessage);
             var readableBuffer = new ReadOnlySequence<byte>(buffer);
             var parser = new ServerSentEventsMessageParser();

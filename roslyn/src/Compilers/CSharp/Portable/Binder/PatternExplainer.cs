@@ -31,7 +31,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             BoundDecisionDagNode node,
             bool nullPaths,
             out bool requiresFalseWhenClause
-        ) {
+        )
+        {
             // compute the distance from each node to the endpoint.
             var dist = PooledDictionary<
                 BoundDecisionDagNode,
@@ -131,7 +132,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             bool nullPaths,
             out bool requiresFalseWhenClause,
             out bool unnamedEnumValue
-        ) {
+        )
+        {
             unnamedEnumValue = false;
 
             // Compute the path to the node, excluding the node itself.
@@ -212,7 +214,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             Dictionary<BoundDagTemp, ArrayBuilder<BoundDagEvaluation>> evaluationMap,
             bool requireExactType,
             ref bool unnamedEnumValue
-        ) {
+        )
+        {
             var constraints = getArray(constraintMap, input);
             var evaluations = getArray(evaluationMap, input);
 
@@ -227,7 +230,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             static ImmutableArray<T> getArray<T>(
                 Dictionary<BoundDagTemp, ArrayBuilder<T>> map,
                 BoundDagTemp temp
-            ) {
+            )
+            {
                 return map.TryGetValue(temp, out var builder)
                   ? builder.ToImmutable()
                   : ImmutableArray<T>.Empty;
@@ -266,7 +270,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                     && constraints[0] is (BoundDagTypeTest { Type: var constraintType }, true)
                     && evaluations[0] is BoundDagTypeEvaluation { Type: var evaluationType } te
                     && constraintType.Equals(evaluationType, TypeCompareKind.AllIgnoreOptions)
-                ) {
+                )
+                {
                     var typedTemp = new BoundDagTemp(te.Syntax, te.Type, te);
                     return SamplePatternForTemp(
                         typedTemp,
@@ -291,7 +296,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                     && input.Type.IsNullableType()
                     && input.Type.GetNullableUnderlyingType()
                         .Equals(evaluationType, TypeCompareKind.AllIgnoreOptions)
-                ) {
+                )
+                {
                     var typedTemp = new BoundDagTemp(te.Syntax, te.Type, te);
                     var result = SamplePatternForTemp(
                         typedTemp,
@@ -318,7 +324,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                             e is BoundDagFieldEvaluation { Field: var field }
                             && field.IsTupleElement()
                     )
-                ) {
+                )
+                {
                     var elements = input.Type.TupleElements;
                     int cardinality = elements.Length;
                     var subpatterns = new ArrayBuilder<string>(cardinality);
@@ -374,7 +381,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                             }
                     )
                     && ValueSetFactory.ForType(input.Type) is { } fac
-                ) {
+                )
+                {
                     // All we have are numeric constraints. Process them to compute a value not covered.
                     var remainingValues = fac.AllValues;
                     foreach (var constraint in constraints)
@@ -431,7 +439,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                                 _ => false,
                             }
                     )
-                ) {
+                )
+                {
                     return null;
                 }
 
@@ -538,7 +547,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             TypeSymbol type,
             bool requireExactType,
             ref bool unnamedEnumValue
-        ) {
+        )
+        {
             // We would not have been asked to produce an example of a missing pattern if no values are missing
             Debug.Assert(!remainingValues.IsEmpty);
 
@@ -559,7 +569,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                         && field.GetConstantValue(ConstantFieldsInProgress.Empty, false)
                             is ConstantValue constantValue
                         && remainingValues.Any(BinaryOperatorKind.Equal, constantValue)
-                    ) {
+                    )
+                    {
                         return field.ToDisplayString();
                     }
                 }
@@ -613,7 +624,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             ConstantValue value,
             TypeSymbol type,
             bool requireExactType
-        ) {
+        )
+        {
             bool requiresCast =
                 (type.IsEnumType() || requireExactType || type.IsNativeIntegerType)
                 && !(typeHasExactTypeLiteral(type) && !value.IsNull);

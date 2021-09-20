@@ -123,7 +123,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Experimentation
             if (
                 !_experimentationService.IsExperimentEnabled(ExternalFlightName)
                 && !_experimentationService.IsExperimentEnabled(InternalFlightName)
-            ) {
+            )
+            {
                 return;
             }
 
@@ -310,7 +311,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Experimentation
         /// </summary>
         private async ValueTask<ReSharperStatus> IsReSharperRunningAsync(
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             // Quick exit if resharper is either uninstalled or not enabled
             if (!_resharperExtensionInstalledAndEnabled)
             {
@@ -343,7 +345,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Experimentation
                 if (
                     suspendFlag.HasFlag(OLECMDF.OLECMDF_ENABLED)
                     && !suspendFlag.HasFlag(OLECMDF.OLECMDF_INVISIBLE)
-                ) {
+                )
+                {
                     return ReSharperStatus.Enabled;
                 }
 
@@ -351,7 +354,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Experimentation
                 if (
                     resumeFlag.HasFlag(OLECMDF.OLECMDF_ENABLED)
                     && !resumeFlag.HasFlag(OLECMDF.OLECMDF_INVISIBLE)
-                ) {
+                )
+                {
                     return ReSharperStatus.Suspended;
                 }
 
@@ -475,7 +479,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Experimentation
             uint cCmds,
             OLECMD[] prgCmds,
             IntPtr pCmdText
-        ) {
+        )
+        {
             // Technically can be called on any thread, though VS will only ever call it on the UI thread.
             ThisCanBeCalledOnAnyThread();
             // We don't care about query status, only when the command is actually executed
@@ -488,14 +493,16 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Experimentation
             uint nCmdexecopt,
             IntPtr pvaIn,
             IntPtr pvaOut
-        ) {
+        )
+        {
             // Technically can be called on any thread, though VS will only ever call it on the UI thread.
             ThisCanBeCalledOnAnyThread();
             if (
                 pguidCmdGroup == ReSharperCommandGroup
                 && nCmdID >= ResumeId
                 && nCmdID <= ToggleSuspendId
-            ) {
+            )
+            {
                 // Don't delay command processing to update resharper status
                 StartUpdateStateMachine();
             }

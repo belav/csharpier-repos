@@ -171,7 +171,8 @@ namespace System.Web.Mvc.Html.Test
             string text,
             bool htmlEncode,
             string encodedText
-        ) {
+        )
+        {
             // Arrange
             var viewData = new ViewDataDictionary<string>(text);
             viewData.ModelMetadata.HtmlEncode = htmlEncode;

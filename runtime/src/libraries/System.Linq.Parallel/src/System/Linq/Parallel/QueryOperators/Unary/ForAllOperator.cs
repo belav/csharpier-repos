@@ -91,7 +91,8 @@ namespace System.Linq.Parallel
             IPartitionedStreamRecipient<TInput> recipient,
             bool preferStriping,
             QuerySettings settings
-        ) {
+        )
+        {
             int partitionCount = inputStream.PartitionCount;
             PartitionedStream<TInput, int> outputStream = new PartitionedStream<TInput, int>(
                 partitionCount,
@@ -152,7 +153,8 @@ namespace System.Linq.Parallel
                 QueryOperatorEnumerator<TInput, TKey> source,
                 Action<TInput> elementAction,
                 CancellationToken cancellationToken
-            ) {
+            )
+            {
                 Debug.Assert(source != null);
                 Debug.Assert(elementAction != null);
 
@@ -169,7 +171,8 @@ namespace System.Linq.Parallel
             internal override bool MoveNext(
                 [MaybeNullWhen(false), AllowNull] ref TInput currentElement,
                 ref int currentKey
-            ) {
+            )
+            {
                 Debug.Assert(_elementAction != null, "expected a compiled operator");
 
                 // We just scroll through the enumerator and execute the action. Because we execute

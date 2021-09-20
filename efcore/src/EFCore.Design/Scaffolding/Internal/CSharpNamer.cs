@@ -37,7 +37,8 @@ namespace Microsoft.EntityFrameworkCore.Scaffolding.Internal
             Func<T, string> nameGetter,
             ICSharpUtilities cSharpUtilities,
             Func<string, string>? singularizePluralizer
-        ) {
+        )
+        {
             Check.NotNull(nameGetter, nameof(nameGetter));
             Check.NotNull(cSharpUtilities, nameof(cSharpUtilities));
 

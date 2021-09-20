@@ -165,7 +165,8 @@ namespace System.ComponentModel.Composition.ReflectionModel
             MemberTypes memberType,
             MemberInfo[] accessors,
             out string errorMessage
-        ) {
+        )
+        {
             errorMessage = string.Empty;
             if (accessors == null)
             {
@@ -195,7 +196,8 @@ namespace System.ComponentModel.Composition.ReflectionModel
                                     && (accessor.MemberType != MemberTypes.Method)
                             )
                             .Any()
-                    ) {
+                    )
+                    {
                         errorMessage = SR.LazyMemberinfo_InvalidPropertyAccessors_AccessorType;
                         return false;
                     }
@@ -215,7 +217,8 @@ namespace System.ComponentModel.Composition.ReflectionModel
                                     && (accessor.MemberType != MemberTypes.Method)
                             )
                             .Any()
-                    ) {
+                    )
+                    {
                         errorMessage = SR.LazyMemberinfo_InvalidEventAccessors_AccessorType;
                         return false;
                     }
@@ -225,7 +228,8 @@ namespace System.ComponentModel.Composition.ReflectionModel
                     if (
                         (accessors.Length != 1)
                         || ((accessors.Length == 1) && (accessors[0].MemberType != memberType))
-                    ) {
+                    )
+                    {
                         errorMessage = SR.Format(
                             SR.LazyMemberInfo_InvalidAccessorOnSimpleMember,
                             memberType

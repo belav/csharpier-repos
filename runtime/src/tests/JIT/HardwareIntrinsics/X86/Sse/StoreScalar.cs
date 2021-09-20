@@ -26,7 +26,8 @@ namespace IntelHardwareIntrinsicTest
                         new float[4] { 1, -5, 100, 3 },
                         new float[4]
                     )
-                ) {
+                )
+                {
                     var vf = Unsafe.Read<Vector128<float>>(floatTable.inArrayPtr);
                     Sse.StoreScalar((float*)(floatTable.outArrayPtr), vf);
 
@@ -39,7 +40,8 @@ namespace IntelHardwareIntrinsicTest
                                 && BitConverter.SingleToInt32Bits(y[2]) == 0
                                 && BitConverter.SingleToInt32Bits(y[3]) == 0
                         )
-                    ) {
+                    )
+                    {
                         Console.WriteLine("SSE StoreScalar failed on float:");
                         foreach (var item in floatTable.outArray)
                         {

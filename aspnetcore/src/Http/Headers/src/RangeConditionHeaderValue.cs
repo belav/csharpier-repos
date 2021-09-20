@@ -132,7 +132,8 @@ namespace Microsoft.Net.Http.Headers
         public static bool TryParse(
             StringSegment input,
             [NotNullWhen(true)] out RangeConditionHeaderValue? parsedValue
-        ) {
+        )
+        {
             var index = 0;
             return Parser.TryParseValue(input, ref index, out parsedValue!);
         }
@@ -141,7 +142,8 @@ namespace Microsoft.Net.Http.Headers
             StringSegment input,
             int startIndex,
             out RangeConditionHeaderValue? parsedValue
-        ) {
+        )
+        {
             Contract.Requires(startIndex >= 0);
 
             parsedValue = null;
@@ -166,7 +168,8 @@ namespace Microsoft.Net.Http.Headers
             if (
                 (firstChar == '\"')
                 || (((firstChar == 'w') || (firstChar == 'W')) && (secondChar == '/'))
-            ) {
+            )
+            {
                 // trailing whitespaces are removed by GetEntityTagLength()
                 var entityTagLength = EntityTagHeaderValue.GetEntityTagLength(
                     input,

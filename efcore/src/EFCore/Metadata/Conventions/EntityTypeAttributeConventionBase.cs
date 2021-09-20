@@ -23,7 +23,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
         /// <param name="dependencies"> Parameter object containing dependencies for this convention. </param>
         protected EntityTypeAttributeConventionBase(
             ProviderConventionSetBuilderDependencies dependencies
-        ) {
+        )
+        {
             Dependencies = dependencies;
         }
 
@@ -40,7 +41,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
         public virtual void ProcessEntityTypeAdded(
             IConventionEntityTypeBuilder entityTypeBuilder,
             IConventionContext<IConventionEntityTypeBuilder> context
-        ) {
+        )
+        {
             Check.NotNull(entityTypeBuilder, nameof(entityTypeBuilder));
 
             var type = entityTypeBuilder.Metadata.ClrType;

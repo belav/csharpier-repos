@@ -46,7 +46,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Venus
 
         private IList<TextSpanAndCookie> EnumOriginalCodeBlocksWorker(
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var snapshot = this.SubjectBuffer.CurrentSnapshot;
             var document = snapshot.GetOpenDocumentInCurrentContextWithChanges();
             if (document == null)

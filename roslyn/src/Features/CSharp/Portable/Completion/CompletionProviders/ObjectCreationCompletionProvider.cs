@@ -49,7 +49,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Completion.Providers
             SyntaxTree tree,
             int position,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             if (tree != null)
             {
                 if (!tree.IsInNonUserCode(position, cancellationToken))
@@ -88,7 +89,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Completion.Providers
             int position,
             OptionSet options,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var result = await base.GetSymbolsAsync(
                     completionContext,
                     context,
@@ -116,7 +118,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Completion.Providers
         protected override (string displayText, string suffix, string insertionText) GetDisplayAndSuffixAndInsertionText(
             ISymbol symbol,
             CSharpSyntaxContext context
-        ) {
+        )
+        {
             if (symbol is IAliasSymbol)
             {
                 return (symbol.Name, "", symbol.Name);
@@ -185,7 +188,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Completion.Providers
 
         protected override CompletionItemRules GetCompletionItemRules(
             ImmutableArray<(ISymbol symbol, bool preselect)> symbols
-        ) {
+        )
+        {
             var preselect = symbols.Any(t => t.preselect);
             if (!preselect)
                 return s_arrayRules;

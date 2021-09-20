@@ -162,7 +162,8 @@ namespace System.Web.Mvc.Routing
         public static void SetTargetActionDescriptors(
             this Route route,
             ActionDescriptor[] actionDescriptors
-        ) {
+        )
+        {
             if (actionDescriptors == null || actionDescriptors.Length == 0)
             {
                 throw Error.ParameterCannotBeNullOrEmpty("actionDescriptors");
@@ -192,7 +193,8 @@ namespace System.Web.Mvc.Routing
         public static void SetDirectRouteMatches(
             this RouteData routeData,
             IEnumerable<RouteData> matches
-        ) {
+        )
+        {
             if (matches == null || !matches.Any())
             {
                 throw Error.ParameterCannotBeNullOrEmpty("matches");

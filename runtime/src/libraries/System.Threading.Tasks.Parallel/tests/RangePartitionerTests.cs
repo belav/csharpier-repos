@@ -238,7 +238,8 @@ namespace System.Threading.Tasks.Tests
             long from,
             long to,
             long rangeSize
-        ) {
+        )
+        {
             Debug.WriteLine(
                 "    RangePartitionCoverageTest[long]({0},{1},{2})",
                 from,

@@ -11,7 +11,8 @@ namespace Microsoft.Extensions.DependencyInjection.Tests
         public static ServiceProvider BuildServiceProvider(
             this IServiceCollection services,
             ServiceProviderMode mode
-        ) {
+        )
+        {
             if (mode == ServiceProviderMode.Default)
             {
                 return services.BuildServiceProvider();

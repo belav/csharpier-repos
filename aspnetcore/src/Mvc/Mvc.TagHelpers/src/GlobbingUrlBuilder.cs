@@ -43,7 +43,8 @@ namespace Microsoft.AspNetCore.Mvc.TagHelpers
             IFileProvider fileProvider,
             IMemoryCache cache,
             PathString requestPathBase
-        ) {
+        )
+        {
             if (fileProvider == null)
             {
                 throw new ArgumentNullException(nameof(fileProvider));
@@ -93,7 +94,8 @@ namespace Microsoft.AspNetCore.Mvc.TagHelpers
             string staticUrl,
             string includePattern,
             string excludePattern
-        ) {
+        )
+        {
             // Get urls that match the globbing patterns specified
             var globbedUrls = ExpandGlobbedUrl(includePattern, excludePattern);
 
@@ -293,7 +295,8 @@ namespace Microsoft.AspNetCore.Mvc.TagHelpers
             private static bool TryGetNextSegment(
                 ref StringTokenizer.Enumerator enumerator,
                 out StringSegment segment
-            ) {
+            )
+            {
                 while (enumerator.MoveNext())
                 {
                     if (enumerator.Current.HasValue && enumerator.Current.Length > 0)
@@ -323,7 +326,8 @@ namespace Microsoft.AspNetCore.Mvc.TagHelpers
             else if (
                 value.StartsWith("/", StringComparison.Ordinal)
                 || value.StartsWith("\\", StringComparison.Ordinal)
-            ) {
+            )
+            {
                 // Trim the leading slash as the matcher runs from the provided root only anyway
                 value = new StringSegment(value.Buffer, value.Offset + 1, value.Length - 1);
             }

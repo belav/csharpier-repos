@@ -703,7 +703,8 @@ namespace System.Threading.Tasks.Tests
             Tuple<int, int> tuple,
             ParallelLoopState state,
             long index
-        ) {
+        )
+        {
             for (int i = tuple.Item1; i < tuple.Item2; i++)
             {
                 WorkWithIndexAndStop(i, state, index);
@@ -715,7 +716,8 @@ namespace System.Threading.Tasks.Tests
             Tuple<int, int> tuple,
             ParallelLoopState state,
             long index
-        ) {
+        )
+        {
             WorkWithIndexAndStop(tuple, state, index);
         }
 
@@ -724,7 +726,8 @@ namespace System.Threading.Tasks.Tests
             Tuple<int, int> tuple,
             ParallelLoopState state,
             List<int> threadLocalValue
-        ) {
+        )
+        {
             for (int i = tuple.Item1; i < tuple.Item2; i++)
             {
                 WorkWithLocal(i, state, threadLocalValue);
@@ -797,7 +800,8 @@ namespace System.Threading.Tasks.Tests
             Tuple<long, long> tuple,
             ParallelLoopState state,
             List<int> threadLocalValue
-        ) {
+        )
+        {
             for (long i = tuple.Item1; i < tuple.Item2; i++)
             {
                 Work(i);
@@ -818,7 +822,8 @@ namespace System.Threading.Tasks.Tests
             ParallelLoopState state,
             long index,
             List<int> threadLocalValue
-        ) {
+        )
+        {
             for (int i = tuple.Item1; i < tuple.Item2; i++)
             {
                 Work(i);
@@ -840,7 +845,8 @@ namespace System.Threading.Tasks.Tests
             ParallelLoopState state,
             long index,
             List<int> threadLocalValue
-        ) {
+        )
+        {
             for (int i = tuple.Item1; i < tuple.Item2; i++)
             {
                 //index verification - only for enumerable
@@ -859,7 +865,8 @@ namespace System.Threading.Tasks.Tests
             ParallelLoopState state,
             long index,
             List<int> threadLocalValue
-        ) {
+        )
+        {
             Work(i);
             threadLocalValue.Add((int)index);
 
@@ -878,7 +885,8 @@ namespace System.Threading.Tasks.Tests
             ParallelLoopState state,
             long index,
             List<int> threadLocalValue
-        ) {
+        )
+        {
             //index verification - only for enumerable
             if (_parameters.PartitionerType == PartitionerType.IEnumerableOOB)
             {
@@ -1091,7 +1099,8 @@ namespace System.Threading.Tasks.Tests
         public static OrderablePartitioner<T> Create(
             PartitionerType partitionerName,
             IEnumerable<T> dataSource
-        ) {
+        )
+        {
             switch (partitionerName)
             {
                 case PartitionerType.IListBalancedOOB:
@@ -1115,7 +1124,8 @@ namespace System.Threading.Tasks.Tests
             int from,
             int to,
             int chunkSize = -1
-        ) {
+        )
+        {
             switch (partitionerName)
             {
                 case PartitionerType.RangePartitioner:

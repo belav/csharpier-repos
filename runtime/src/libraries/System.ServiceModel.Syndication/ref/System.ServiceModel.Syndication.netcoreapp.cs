@@ -84,7 +84,8 @@ namespace System.ServiceModel.Syndication
         public XmlDateTimeData(
             string dateTimeString,
             System.Xml.XmlQualifiedName elementQualifiedName
-        ) {
+        )
+        {
             throw null;
         }
         public readonly string DateTimeString
@@ -104,7 +105,8 @@ namespace System.ServiceModel.Syndication
             string uriString,
             System.UriKind uriKind,
             System.Xml.XmlQualifiedName elementQualifiedName
-        ) {
+        )
+        {
             throw null;
         }
         public readonly System.Xml.XmlQualifiedName ElementQualifiedName

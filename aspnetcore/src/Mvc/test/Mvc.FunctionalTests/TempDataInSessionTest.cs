@@ -12,7 +12,8 @@ namespace Microsoft.AspNetCore.Mvc.FunctionalTests
     {
         public TempDataInSessionTest(
             MvcTestFixture<BasicWebSite.StartupWithSessionTempDataProvider> fixture
-        ) {
+        )
+        {
             Client = fixture.CreateDefaultClient();
         }
 

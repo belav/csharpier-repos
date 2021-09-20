@@ -27,7 +27,8 @@ namespace System.Xml.Schema
             SchemaNames? schemaNames,
             ValidationEventHandler? eventHandler,
             XmlSchemaCompilationSettings? compilationSettings
-        ) {
+        )
+        {
             Debug.Assert(nameTable != null);
             _nameTable = nameTable;
             _schemaNames = schemaNames;
@@ -72,7 +73,8 @@ namespace System.Xml.Schema
             XmlSchemaObjectTable table,
             XmlQualifiedName qname,
             XmlSchemaObject item
-        ) {
+        )
+        {
             if (qname.Name.Length == 0)
             {
                 return;
@@ -178,7 +180,8 @@ namespace System.Xml.Schema
             XmlSchemaObject existingObject,
             XmlSchemaObject item,
             XmlSchemaObjectTable table
-        ) {
+        )
+        {
             XmlSchemaAttributeGroup attGroup = (item as XmlSchemaAttributeGroup)!;
             XmlSchemaAttributeGroup existingAttGroup = (existingObject as XmlSchemaAttributeGroup)!;
             if (existingAttGroup == attGroup.Redefined)
@@ -200,7 +203,8 @@ namespace System.Xml.Schema
             XmlSchemaObject existingObject,
             XmlSchemaObject item,
             XmlSchemaObjectTable table
-        ) {
+        )
+        {
             XmlSchemaGroup group = (item as XmlSchemaGroup)!;
             XmlSchemaGroup existingGroup = (existingObject as XmlSchemaGroup)!;
             if (existingGroup == group.Redefined)
@@ -222,7 +226,8 @@ namespace System.Xml.Schema
             XmlSchemaObject existingObject,
             XmlSchemaObject item,
             XmlSchemaObjectTable table
-        ) {
+        )
+        {
             XmlSchemaType schemaType = (item as XmlSchemaType)!;
             XmlSchemaType existingType = (existingObject as XmlSchemaType)!;
             if (existingType == schemaType.Redefined)
@@ -255,7 +260,8 @@ namespace System.Xml.Schema
             string? msg1,
             string? msg2,
             XmlSchemaObject source
-        ) {
+        )
+        {
             SendValidationEvent(
                 new XmlSchemaException(code, new string?[] { msg1, msg2 }, source),
                 XmlSeverityType.Error
@@ -267,7 +273,8 @@ namespace System.Xml.Schema
             string?[]? args,
             Exception innerException,
             XmlSchemaObject source
-        ) {
+        )
+        {
             SendValidationEvent(
                 new XmlSchemaException(
                     code,
@@ -289,7 +296,8 @@ namespace System.Xml.Schema
             string? sourceUri,
             int lineNumber,
             int linePosition
-        ) {
+        )
+        {
             SendValidationEvent(
                 new XmlSchemaException(
                     code,
@@ -306,7 +314,8 @@ namespace System.Xml.Schema
             string code,
             XmlSchemaObject source,
             XmlSeverityType severity
-        ) {
+        )
+        {
             SendValidationEvent(new XmlSchemaException(code, source), severity);
         }
 
@@ -320,7 +329,8 @@ namespace System.Xml.Schema
             string? msg,
             XmlSchemaObject source,
             XmlSeverityType severity
-        ) {
+        )
+        {
             SendValidationEvent(new XmlSchemaException(code, msg, source), severity);
         }
 

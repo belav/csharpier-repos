@@ -160,7 +160,8 @@ namespace System.Net.Http.Tests
             string _port,
             string _user,
             string _password
-        ) {
+        )
+        {
             RemoteExecutor.Invoke(
                     (input, host, port, user, password) =>
                     {
@@ -284,7 +285,8 @@ namespace System.Net.Http.Tests
         public void HttpProxy_TryCreate_CaseInsensitiveVariables(
             string proxyEnvVar,
             string noProxyEnvVar
-        ) {
+        )
+        {
             string proxy = "http://foo:PLACEHOLDER@1.1.1.1:3000";
 
             var options = new RemoteInvokeOptions();
@@ -329,7 +331,8 @@ namespace System.Net.Http.Tests
             string proxyEnvVar,
             bool cgi,
             bool expectedProxyUse
-        ) {
+        )
+        {
             string proxy = "http://foo:PLACEHOLDER@1.1.1.1:3000";
 
             var options = new RemoteInvokeOptions();

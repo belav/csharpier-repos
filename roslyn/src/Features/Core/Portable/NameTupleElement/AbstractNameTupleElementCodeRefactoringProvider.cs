@@ -53,7 +53,8 @@ namespace Microsoft.CodeAnalysis.NameTupleElement
             Document document,
             TextSpan span,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             if (document.Project.Solution.Workspace.Kind == WorkspaceKind.MiscellaneousFiles)
             {
                 return default;
@@ -82,7 +83,8 @@ namespace Microsoft.CodeAnalysis.NameTupleElement
                     semanticModel.GetTypeInfo(tuple, cancellationToken).ConvertedType
                     is INamedTypeSymbol tupleType
                 )
-            ) {
+            )
+            {
                 return default;
             }
 
@@ -113,7 +115,8 @@ namespace Microsoft.CodeAnalysis.NameTupleElement
             Document document,
             TextSpan span,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var (root, argument, elementName) = await TryGetArgumentInfoAsync(
                     document,
                     span,

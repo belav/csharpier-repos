@@ -52,7 +52,8 @@ namespace Roslyn.Utilities
                 public bool TryGetValue(
                     TKey key,
                     [MaybeNullWhen(returnValue: false)] out TValue value
-                ) {
+                )
+                {
                     value = default!;
                     return false;
                 }

@@ -125,7 +125,8 @@ namespace Microsoft.EntityFrameworkCore.Infrastructure
             Type serviceType,
             Type implementationType,
             ServiceLifetime lifetime
-        ) {
+        )
+        {
             Check.NotNull(serviceType, nameof(serviceType));
             Check.NotNull(implementationType, nameof(implementationType));
 
@@ -184,8 +185,9 @@ namespace Microsoft.EntityFrameworkCore.Infrastructure
         /// <returns> The map, such that further calls can be chained. </returns>
         public virtual ServiceCollectionMap TryAddTransient<TService, TImplementation>(
             Func<IServiceProvider, TImplementation> factory
-        ) where TService : class
-          where TImplementation : class, TService =>
+        )
+            where TService : class
+            where TImplementation : class, TService =>
             TryAdd(typeof(TService), factory, ServiceLifetime.Transient);
 
         /// <summary>
@@ -198,8 +200,9 @@ namespace Microsoft.EntityFrameworkCore.Infrastructure
         /// <returns> The map, such that further calls can be chained. </returns>
         public virtual ServiceCollectionMap TryAddScoped<TService, TImplementation>(
             Func<IServiceProvider, TImplementation> factory
-        ) where TService : class
-          where TImplementation : class, TService =>
+        )
+            where TService : class
+            where TImplementation : class, TService =>
             TryAdd(typeof(TService), factory, ServiceLifetime.Scoped);
 
         /// <summary>
@@ -212,8 +215,9 @@ namespace Microsoft.EntityFrameworkCore.Infrastructure
         /// <returns> The map, such that further calls can be chained. </returns>
         public virtual ServiceCollectionMap TryAddSingleton<TService, TImplementation>(
             Func<IServiceProvider, TImplementation> factory
-        ) where TService : class
-          where TImplementation : class, TService =>
+        )
+            where TService : class
+            where TImplementation : class, TService =>
             TryAdd(typeof(TService), factory, ServiceLifetime.Singleton);
 
         /// <summary>
@@ -264,7 +268,8 @@ namespace Microsoft.EntityFrameworkCore.Infrastructure
             Type serviceType,
             Func<IServiceProvider, object> factory,
             ServiceLifetime lifetime
-        ) {
+        )
+        {
             Check.NotNull(serviceType, nameof(serviceType));
             Check.NotNull(factory, nameof(factory));
 
@@ -401,7 +406,8 @@ namespace Microsoft.EntityFrameworkCore.Infrastructure
             Type serviceType,
             Type implementationType,
             ServiceLifetime lifetime
-        ) {
+        )
+        {
             Check.NotNull(serviceType, nameof(serviceType));
             Check.NotNull(implementationType, nameof(implementationType));
 
@@ -410,7 +416,8 @@ namespace Microsoft.EntityFrameworkCore.Infrastructure
                 indexes.All(
                     i => TryGetImplementationType(ServiceCollection[i]) != implementationType
                 )
-            ) {
+            )
+            {
                 _map.AddNewDescriptor(
                     indexes,
                     new ServiceDescriptor(serviceType, implementationType, lifetime)
@@ -431,8 +438,9 @@ namespace Microsoft.EntityFrameworkCore.Infrastructure
         /// <returns> The map, such that further calls can be chained. </returns>
         public virtual ServiceCollectionMap TryAddTransientEnumerable<TService, TImplementation>(
             Func<IServiceProvider, TImplementation> factory
-        ) where TService : class
-          where TImplementation : class, TService =>
+        )
+            where TService : class
+            where TImplementation : class, TService =>
             TryAddEnumerable(
                 typeof(TService),
                 typeof(TImplementation),
@@ -451,8 +459,9 @@ namespace Microsoft.EntityFrameworkCore.Infrastructure
         /// <returns> The map, such that further calls can be chained. </returns>
         public virtual ServiceCollectionMap TryAddScopedEnumerable<TService, TImplementation>(
             Func<IServiceProvider, TImplementation> factory
-        ) where TService : class
-          where TImplementation : class, TService =>
+        )
+            where TService : class
+            where TImplementation : class, TService =>
             TryAddEnumerable(
                 typeof(TService),
                 typeof(TImplementation),
@@ -471,8 +480,9 @@ namespace Microsoft.EntityFrameworkCore.Infrastructure
         /// <returns> The map, such that further calls can be chained. </returns>
         public virtual ServiceCollectionMap TryAddSingletonEnumerable<TService, TImplementation>(
             Func<IServiceProvider, TImplementation> factory
-        ) where TService : class
-          where TImplementation : class, TService =>
+        )
+            where TService : class
+            where TImplementation : class, TService =>
             TryAddEnumerable(
                 typeof(TService),
                 typeof(TImplementation),
@@ -495,7 +505,8 @@ namespace Microsoft.EntityFrameworkCore.Infrastructure
             Type implementationType,
             Func<IServiceProvider, object> factory,
             ServiceLifetime lifetime
-        ) {
+        )
+        {
             Check.NotNull(serviceType, nameof(serviceType));
             Check.NotNull(implementationType, nameof(implementationType));
             Check.NotNull(factory, nameof(factory));
@@ -505,7 +516,8 @@ namespace Microsoft.EntityFrameworkCore.Infrastructure
                 indexes.All(
                     i => TryGetImplementationType(ServiceCollection[i]) != implementationType
                 )
-            ) {
+            )
+            {
                 _map.AddNewDescriptor(
                     indexes,
                     new ServiceDescriptor(serviceType, factory, lifetime)
@@ -538,7 +550,8 @@ namespace Microsoft.EntityFrameworkCore.Infrastructure
         public virtual ServiceCollectionMap TryAddSingletonEnumerable(
             Type serviceType,
             object implementation
-        ) {
+        )
+        {
             Check.NotNull(serviceType, nameof(serviceType));
             Check.NotNull(implementation, nameof(implementation));
 
@@ -549,7 +562,8 @@ namespace Microsoft.EntityFrameworkCore.Infrastructure
                 indexes.All(
                     i => TryGetImplementationType(ServiceCollection[i]) != implementationType
                 )
-            ) {
+            )
+            {
                 _map.AddNewDescriptor(indexes, new ServiceDescriptor(serviceType, implementation));
             }
 

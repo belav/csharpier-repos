@@ -14,7 +14,8 @@ namespace Internal.TypeSystem
         public InstantiationContext(
             Instantiation typeInstantiation,
             Instantiation methodInstantiation
-        ) {
+        )
+        {
             TypeInstantiation = typeInstantiation;
             MethodInstantiation = methodInstantiation;
         }
@@ -27,7 +28,8 @@ namespace Internal.TypeSystem
             GenericParameterDesc genericParam,
             InstantiationContext instantiationParamContext,
             TypeDesc instantiationParam
-        ) {
+        )
+        {
             GenericConstraints constraints = genericParam.Constraints;
 
             // Check class constraint
@@ -97,7 +99,8 @@ namespace Internal.TypeSystem
         private static bool CheckGenericSpecialConstraint(
             TypeDesc type,
             GenericConstraints specialConstraint
-        ) {
+        )
+        {
             if (!type.IsGenericParameter)
                 return false;
 
@@ -152,7 +155,8 @@ namespace Internal.TypeSystem
             InstantiationContext typeContext,
             TypeDesc type,
             ref ArrayBuilder<TypeDesc> instantiatedConstraints
-        ) {
+        )
+        {
             if (!type.IsGenericParameter || typeContext == null)
                 return;
 
@@ -190,7 +194,8 @@ namespace Internal.TypeSystem
         private static bool CanCastConstraint(
             ref ArrayBuilder<TypeDesc> instantiatedConstraints,
             TypeDesc instantiatedType
-        ) {
+        )
+        {
             for (int i = 0; i < instantiatedConstraints.Count; ++i)
             {
                 if (instantiatedConstraints[i].CanCastTo(instantiatedType))
@@ -244,7 +249,8 @@ namespace Internal.TypeSystem
         public static bool CheckConstraints(
             this MethodDesc method,
             InstantiationContext context = null
-        ) {
+        )
+        {
             if (!method.OwningType.CheckConstraints(context))
                 return false;
 

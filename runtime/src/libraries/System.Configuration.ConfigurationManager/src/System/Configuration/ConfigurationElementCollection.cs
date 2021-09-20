@@ -107,7 +107,8 @@ namespace System.Configuration
                         CollectionType
                         == ConfigurationElementCollectionType.AddRemoveClearMapAlternate
                     )
-                ) {
+                )
+                {
                     string elementNames = "'" + AddElementName + "'"; // Must have an add
                     if (RemoveElementName.Length != 0)
                         elementNames += ", '" + RemoveElementName + "'";
@@ -268,7 +269,8 @@ namespace System.Configuration
             ConfigurationElement sourceElement,
             ConfigurationElement parentElement,
             ConfigurationSaveMode saveMode
-        ) {
+        )
+        {
             base.Unmerge(sourceElement, parentElement, saveMode);
             if (sourceElement == null)
                 return;
@@ -325,7 +327,8 @@ namespace System.Configuration
             if (
                 (CollectionType == ConfigurationElementCollectionType.AddRemoveClearMap)
                 || (CollectionType == ConfigurationElementCollectionType.AddRemoveClearMapAlternate)
-            ) {
+            )
+            {
                 // When writing out portable configurations the <clear/> tag should be written
                 _collectionCleared = sourceCollection._collectionCleared;
                 EmitClear =
@@ -381,7 +384,8 @@ namespace System.Configuration
                                     CollectionType
                                     == ConfigurationElementCollectionType.AddRemoveClearMapAlternate
                                 ) && (entry.EntryType == EntryType.Added)
-                            ) {
+                            )
+                            {
                                 // this is a special case for deailing with defect number 529517
                                 // this code allow the config to write out the same xml when no remove was
                                 // present during deserialization.
@@ -543,7 +547,8 @@ namespace System.Configuration
                             (entry.EntryType == EntryType.Added)
                             || (entry.EntryType == EntryType.Replaced)
                         )
-                    ) {
+                    )
+                    {
                         // do not add removed items from the parent
                         BaseAdd(elem, true, true); // This version combines dups and throws (unless overridden)
                     }
@@ -641,7 +646,8 @@ namespace System.Configuration
                         CollectionType
                         == ConfigurationElementCollectionType.AddRemoveClearMapAlternate
                     )
-                ) {
+                )
+                {
                     iFoundItem = index;
                     if (entry.EntryType == EntryType.Added)
                     {
@@ -715,7 +721,8 @@ namespace System.Configuration
             ConfigurationElement element,
             bool flagAsReplaced,
             bool ignoreLocks
-        ) {
+        )
+        {
             // Allow the element to initialize itself after its
             // constructor has been run so that it may access
             // virtual methods.
@@ -732,7 +739,8 @@ namespace System.Configuration
                 if (
                     (CollectionType == ConfigurationElementCollectionType.BasicMap)
                     || (CollectionType == ConfigurationElementCollectionType.BasicMapAlternate)
-                ) {
+                )
+                {
                     if (BaseConfigurationRecord.IsReservedAttributeName(ElementName))
                         throw new ArgumentException(
                             SR.Format(SR.Basicmap_item_name_reserved, ElementName)
@@ -753,7 +761,8 @@ namespace System.Configuration
             if (
                 (CollectionType == ConfigurationElementCollectionType.BasicMapAlternate)
                 || (CollectionType == ConfigurationElementCollectionType.AddRemoveClearMapAlternate)
-            ) {
+            )
+            {
                 if (index == -1)
                 {
                     // insert before inherited, but after any removed
@@ -819,7 +828,8 @@ namespace System.Configuration
                         == ConfigurationElementCollectionType.AddRemoveClearMapAlternate
                     )
                 )
-            ) {
+            )
+            {
                 // If it's an AddRemoveClearMap*** collection, turn the index passed into a real internal index
                 int realIndex = 0;
 
@@ -908,11 +918,13 @@ namespace System.Configuration
                                     CollectionType
                                     != ConfigurationElementCollectionType.AddRemoveClearMapAlternate
                                 )
-                            ) {
+                            )
+                            {
                                 if (
                                     CollectionType
                                     == ConfigurationElementCollectionType.BasicMapAlternate
-                                ) {
+                                )
+                                {
                                     if (index >= Count - _inheritedCount)
                                     {
                                         throw new ConfigurationErrorsException(
@@ -955,7 +967,8 @@ namespace System.Configuration
                                     CollectionType
                                     != ConfigurationElementCollectionType.AddRemoveClearMapAlternate
                                 )
-                            ) {
+                            )
+                            {
                                 throw new ConfigurationErrorsException(
                                     SR.Config_base_collection_elements_may_not_be_removed
                                 );
@@ -1097,7 +1110,8 @@ namespace System.Configuration
                     (CollectionType == ConfigurationElementCollectionType.BasicMap)
                     || (CollectionType == ConfigurationElementCollectionType.BasicMapAlternate)
                 ) && (_inheritedCount > 0)
-            ) {
+            )
+            {
                 int removeIndex = 0;
                 if (CollectionType == ConfigurationElementCollectionType.BasicMapAlternate)
                     removeIndex = 0; // Inherited items are at the bottom and cannot be removed
@@ -1190,7 +1204,8 @@ namespace System.Configuration
                             CollectionType
                             != ConfigurationElementCollectionType.AddRemoveClearMapAlternate
                         )
-                    ) {
+                    )
+                    {
                         if (
                             (CollectionType == ConfigurationElementCollectionType.BasicMapAlternate)
                             && (index >= Count - _inheritedCount)
@@ -1247,7 +1262,8 @@ namespace System.Configuration
         protected internal override bool SerializeElement(
             XmlWriter writer,
             bool serializeCollectionKey
-        ) {
+        )
+        {
             ConfigurationElementCollectionType type = CollectionType;
             bool dataToWrite = false;
 
@@ -1256,7 +1272,8 @@ namespace System.Configuration
             if (
                 (type == ConfigurationElementCollectionType.AddRemoveClearMap)
                 || (type == ConfigurationElementCollectionType.AddRemoveClearMapAlternate)
-            ) {
+            )
+            {
                 // it is possible that the collection only has to be cleared and contains
                 // no real elements
                 if (_emitClearTag && (_clearElement.Length != 0))
@@ -1278,7 +1295,8 @@ namespace System.Configuration
                         if (
                             (entry.EntryType == EntryType.Added)
                             || (entry.EntryType == EntryType.Replaced)
-                        ) {
+                        )
+                        {
                             if (!string.IsNullOrEmpty(ElementName))
                             {
                                 if (BaseConfigurationRecord.IsReservedAttributeName(ElementName))
@@ -1304,7 +1322,8 @@ namespace System.Configuration
                                 (entry.EntryType == EntryType.Removed)
                                 || (entry.EntryType == EntryType.Replaced)
                             ) && (entry.Value != null)
-                        ) {
+                        )
+                        {
                             writer?.WriteStartElement(_removeElement);
                             entry.Value.SerializeElement(writer, true);
                             writer?.WriteEndElement();
@@ -1325,11 +1344,13 @@ namespace System.Configuration
         protected override bool OnDeserializeUnrecognizedElement(
             string elementName,
             XmlReader reader
-        ) {
+        )
+        {
             if (
                 (CollectionType == ConfigurationElementCollectionType.AddRemoveClearMap)
                 || (CollectionType == ConfigurationElementCollectionType.AddRemoveClearMapAlternate)
-            ) {
+            )
+            {
                 if (elementName == _addElement)
                 {
                     ConfigurationElement elem = CallCreateNewElement();
@@ -1459,7 +1480,8 @@ namespace System.Configuration
             if (
                 (CollectionType == ConfigurationElementCollectionType.AddRemoveClearMap)
                 || (CollectionType == ConfigurationElementCollectionType.AddRemoveClearMapAlternate)
-            ) {
+            )
+            {
                 return (elementName == AddElementName)
                     || (elementName == RemoveElementName)
                     || (elementName == ClearElementName);

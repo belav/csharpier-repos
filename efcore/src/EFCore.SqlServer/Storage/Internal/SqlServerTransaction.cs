@@ -32,14 +32,15 @@ namespace Microsoft.EntityFrameworkCore.SqlServer.Storage.Internal
             IDiagnosticsLogger<DbLoggerCategory.Database.Transaction> logger,
             bool transactionOwned,
             ISqlGenerationHelper sqlGenerationHelper
-        ) : base(
-            connection,
-            transaction,
-            transactionId,
-            logger,
-            transactionOwned,
-            sqlGenerationHelper
-        ) { }
+        )
+            : base(
+                connection,
+                transaction,
+                transactionId,
+                logger,
+                transactionOwned,
+                sqlGenerationHelper
+            ) { }
 
         /// <inheritdoc />
         public override bool SupportsSavepoints
@@ -49,7 +50,8 @@ namespace Microsoft.EntityFrameworkCore.SqlServer.Storage.Internal
                 if (
                     Connection is ISqlServerConnection sqlServerConnection
                     && sqlServerConnection.IsMultipleActiveResultSetsEnabled
-                ) {
+                )
+                {
                     Logger.SavepointsDisabledBecauseOfMARS();
 
                     return false;

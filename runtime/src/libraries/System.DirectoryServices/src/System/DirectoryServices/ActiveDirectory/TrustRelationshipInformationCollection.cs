@@ -13,7 +13,8 @@ namespace System.DirectoryServices.ActiveDirectory
             DirectoryContext context,
             string? source,
             ArrayList trusts
-        ) {
+        )
+        {
             for (int i = 0; i < trusts.Count; i++)
             {
                 TrustObject obj = (TrustObject)trusts[i]!;

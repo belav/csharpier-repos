@@ -37,7 +37,8 @@ namespace System.IO.Ports.Tests
                 SerialPort com1 = new SerialPort(
                     TCSupport.LocalMachineSerialInfo.FirstAvailablePortName
                 )
-            ) {
+            )
+            {
                 SerialPortProperties serPortProp = new SerialPortProperties();
 
                 Debug.WriteLine("Verifying default DataBits");
@@ -149,7 +150,8 @@ namespace System.IO.Ports.Tests
                 SerialPort com = new SerialPort(
                     TCSupport.LocalMachineSerialInfo.FirstAvailablePortName
                 )
-            ) {
+            )
+            {
                 VerifyExceptionAtOpen(com, dataBits, throwAt, expectedException);
                 if (com.IsOpen)
                     com.Close();
@@ -163,7 +165,8 @@ namespace System.IO.Ports.Tests
             int dataBits,
             ThrowAt throwAt,
             Type expectedException
-        ) {
+        )
+        {
             int origDataBits = com.DataBits;
             SerialPortProperties serPortProp = new SerialPortProperties();
 
@@ -262,7 +265,8 @@ namespace System.IO.Ports.Tests
                 SerialPort com1 = new SerialPort(
                     TCSupport.LocalMachineSerialInfo.FirstAvailablePortName
                 )
-            ) {
+            )
+            {
                 SerialPortProperties serPortProp = new SerialPortProperties();
 
                 serPortProp.SetAllPropertiesToOpenDefaults();
@@ -288,7 +292,8 @@ namespace System.IO.Ports.Tests
                 SerialPort com1 = new SerialPort(
                     TCSupport.LocalMachineSerialInfo.FirstAvailablePortName
                 )
-            ) {
+            )
+            {
                 SerialPortProperties serPortProp = new SerialPortProperties();
 
                 serPortProp.SetAllPropertiesToOpenDefaults();
@@ -319,7 +324,8 @@ namespace System.IO.Ports.Tests
                 SerialPort com2 = new SerialPort(
                     TCSupport.LocalMachineSerialInfo.SecondAvailablePortName
                 )
-            ) {
+            )
+            {
                 double expectedTime,
                     actualTime,
                     percentageDifference;

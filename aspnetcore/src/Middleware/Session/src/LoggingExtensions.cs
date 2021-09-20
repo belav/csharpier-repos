@@ -113,7 +113,8 @@ namespace Microsoft.Extensions.Logging
             string sessionKey,
             string sessionId,
             int count
-        ) {
+        )
+        {
             _sessionLoaded(logger, sessionKey, sessionId, count, null);
         }
 
@@ -122,7 +123,8 @@ namespace Microsoft.Extensions.Logging
             string sessionKey,
             string sessionId,
             int count
-        ) {
+        )
+        {
             _sessionStored(logger, sessionKey, sessionId, count, null);
         }
 
@@ -130,7 +132,8 @@ namespace Microsoft.Extensions.Logging
             this ILogger logger,
             string sessionKey,
             Exception exception
-        ) {
+        )
+        {
             _sessionCacheReadException(logger, sessionKey, exception);
         }
 

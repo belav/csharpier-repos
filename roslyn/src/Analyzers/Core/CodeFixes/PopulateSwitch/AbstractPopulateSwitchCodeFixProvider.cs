@@ -148,7 +148,8 @@ namespace Microsoft.CodeAnalysis.PopulateSwitch
             bool addCases,
             bool addDefaultCase,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             return FixAllAsync(
                 document,
                 ImmutableArray.Create(diagnostic),
@@ -164,7 +165,8 @@ namespace Microsoft.CodeAnalysis.PopulateSwitch
             bool addCases,
             bool addDefaultCase,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             return FixAllWithEditorAsync(
                 document,
                 editor =>
@@ -187,7 +189,8 @@ namespace Microsoft.CodeAnalysis.PopulateSwitch
             bool addCases,
             bool addDefaultCase,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             foreach (var diagnostic in diagnostics)
             {
                 await FixOneDiagnosticAsync(
@@ -211,7 +214,8 @@ namespace Microsoft.CodeAnalysis.PopulateSwitch
             bool addDefaultCase,
             bool onlyOneDiagnostic,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var hasMissingCases = bool.Parse(
                 diagnostic.Properties[PopulateSwitchStatementHelpers.MissingCases]!
             );
@@ -257,7 +261,8 @@ namespace Microsoft.CodeAnalysis.PopulateSwitch
             bool hasMissingDefaultCase,
             TSwitchSyntax switchNode,
             TSwitchOperation switchOperation
-        ) {
+        )
+        {
             var enumType = GetSwitchType(switchOperation);
 
             var generator = editor.Generator;
@@ -295,7 +300,8 @@ namespace Microsoft.CodeAnalysis.PopulateSwitch
             Document document,
             ref SyntaxNode root,
             ref TSwitchSyntax switchNode
-        ) {
+        )
+        {
             // Parsing of the switch may have caused imbalanced braces.  i.e. the switch
             // may have consumed a brace that was intended for a higher level construct.
             // So balance the tree first, then do the switch replacement.
@@ -316,7 +322,8 @@ namespace Microsoft.CodeAnalysis.PopulateSwitch
             ImmutableArray<Diagnostic> diagnostics,
             SyntaxEditor editor,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             // If the user is performing a fix-all, then fix up all the issues we see. i.e.
             // add missing cases and missing 'default' cases for any switches we reported an
             // issue on.

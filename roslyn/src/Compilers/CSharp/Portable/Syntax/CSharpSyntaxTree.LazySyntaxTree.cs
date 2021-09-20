@@ -27,7 +27,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                 CSharpParseOptions options,
                 string path,
                 ImmutableDictionary<string, ReportDiagnostic>? diagnosticOptions
-            ) {
+            )
+            {
                 Debug.Assert(options != null);
 
                 _text = text;
@@ -162,7 +163,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             )]
             public override SyntaxTree WithDiagnosticOptions(
                 ImmutableDictionary<string, ReportDiagnostic> options
-            ) {
+            )
+            {
                 if (options is null)
                 {
                     options = EmptyDiagnosticOptions;

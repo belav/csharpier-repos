@@ -64,7 +64,8 @@ namespace System.Reflection.Emit.Tests
         public void CreateType_InvalidTypeAttributes_Throws(
             TypeAttributes attributes,
             Type exceptionType
-        ) {
+        )
+        {
             Assert.Throws(exceptionType, () => Helpers.DynamicType(attributes));
         }
     }

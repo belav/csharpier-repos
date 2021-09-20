@@ -16,7 +16,8 @@ namespace System.Runtime.Loader.Tests
         public static Assembly GetRefEmitAssembly(
             string assemblyNameStr,
             AssemblyBuilderAccess builderType
-        ) {
+        )
+        {
             var assemblyName = new AssemblyName(assemblyNameStr);
 
             AssemblyBuilder builder = AssemblyBuilder.DefineDynamicAssembly(

@@ -39,7 +39,8 @@ namespace ILCompiler
             ReadyToRunFileLayoutAlgorithm fileAlgorithm,
             ProfileDataManager profileData,
             NodeFactory nodeFactory
-        ) {
+        )
+        {
             _methodLayoutAlgorithm = methodAlgorithm;
             _fileLayoutAlgorithm = fileAlgorithm;
             _profileData = profileData;
@@ -55,7 +56,8 @@ namespace ILCompiler
 
         public ImmutableArray<DependencyNodeCore<NodeFactory>> ApplyProfilerGuidedMethodSort(
             ImmutableArray<DependencyNodeCore<NodeFactory>> nodes
-        ) {
+        )
+        {
             if (_methodLayoutAlgorithm == ReadyToRunMethodLayoutAlgorithm.DefaultSort)
                 return nodes;
 
@@ -214,7 +216,8 @@ namespace ILCompiler
         /// <param name="methodsToPlace">List of methods to place</param>
         private List<MethodWithGCInfo> MethodCallFrequencySort(
             List<MethodWithGCInfo> methodsToPlace
-        ) {
+        )
+        {
             if (_profileData.CallChainProfile == null)
             {
                 return methodsToPlace;
@@ -237,12 +240,14 @@ namespace ILCompiler
                 > methodProfile in _profileData.CallChainProfile.ResolvedProfileData.Where(
                     kvp => methodMap.ContainsKey(kvp.Key)
                 )
-            ) {
+            )
+            {
                 foreach (
                     KeyValuePair<MethodDesc, int> callee in methodProfile.Value.Where(
                         kvp => methodMap.ContainsKey(kvp.Key)
                     )
-                ) {
+                )
+                {
                     callList.Add(
                         new CallerCalleeCount(methodProfile.Key, callee.Key, callee.Value)
                     );
@@ -258,14 +263,16 @@ namespace ILCompiler
                 if (
                     methodMap.TryGetValue(call.Caller, out MethodWithGCInfo callerWithGCInfo)
                     && callerWithGCInfo != null
-                ) {
+                )
+                {
                     outputMethods.Add(callerWithGCInfo);
                     methodMap[call.Caller] = null;
                 }
                 if (
                     methodMap.TryGetValue(call.Callee, out MethodWithGCInfo calleeWithGCInfo)
                     && calleeWithGCInfo != null
-                ) {
+                )
+                {
                     outputMethods.Add(calleeWithGCInfo);
                     methodMap[call.Callee] = null;
                 }

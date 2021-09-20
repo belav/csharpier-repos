@@ -20,7 +20,8 @@ namespace Microsoft.CodeAnalysis.Scripting.Hosting.UnitTests
             bool quoteStringsAndCharacters = true,
             int maximumLineLength = int.MaxValue,
             CultureInfo cultureInfo = null
-        ) {
+        )
+        {
             _quoteStringsAndCharacters = quoteStringsAndCharacters;
             _maximumLineLength = maximumLineLength;
             _cultureInfo = cultureInfo ?? CultureInfo.InvariantCulture;

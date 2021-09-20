@@ -30,7 +30,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Venus
             IVsIntellisenseHost intellisenseHost,
             IOleCommandTarget nextCmdTarget,
             out IVsTextViewFilter textViewFilter
-        ) {
+        )
+        {
             var wpfTextView = GetViewFromIVsIntellisenseHost(intellisenseHost);
 
             if (wpfTextView == null)

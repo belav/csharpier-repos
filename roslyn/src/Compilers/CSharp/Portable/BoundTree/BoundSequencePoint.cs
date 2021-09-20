@@ -13,7 +13,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             TextSpan? part,
             BoundStatement statement,
             bool hasErrors = false
-        ) {
+        )
+        {
             if (part.HasValue)
             {
                 // A bound sequence point is permitted to have a null syntax to make a hidden sequence point.
@@ -31,7 +32,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             BoundStatement? statementOpt,
             bool hasErrors = false,
             bool wasCompilerGenerated = false
-        ) {
+        )
+        {
             // A bound sequence point is permitted to have a null syntax to make a hidden sequence point.
             return new BoundSequencePoint(syntax!, statementOpt, hasErrors)
             {
@@ -42,7 +44,8 @@ namespace Microsoft.CodeAnalysis.CSharp
         public static BoundStatement CreateHidden(
             BoundStatement? statementOpt = null,
             bool hasErrors = false
-        ) {
+        )
+        {
             // A bound sequence point is permitted to have a null syntax to make a hidden sequence point.
             return new BoundSequencePoint(null!, statementOpt, hasErrors)
             {

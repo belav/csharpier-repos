@@ -12,7 +12,8 @@ namespace System.Xml
             TArgument localName,
             TArgument namespaceUri,
             int maxArrayLength
-        ) {
+        )
+        {
             TArray[][]? arrays = null;
             TArray[]? array = null;
             int arrayCount = 0;
@@ -74,7 +75,8 @@ namespace System.Xml
             TArgument localName,
             TArgument namespaceUri,
             XmlDictionaryReader reader
-        ) {
+        )
+        {
             int count;
             if (reader.TryGetArrayLength(out count))
                 count = Math.Min(count, 256);
@@ -136,7 +138,8 @@ namespace System.Xml
             bool[] array,
             int offset,
             int count
-        ) {
+        )
+        {
             return reader.ReadArray(localName, namespaceUri, array, offset, count);
         }
 
@@ -148,7 +151,8 @@ namespace System.Xml
             bool[] array,
             int offset,
             int count
-        ) {
+        )
+        {
             writer.WriteArray(prefix, localName, namespaceUri, array, offset, count);
         }
     }
@@ -166,7 +170,8 @@ namespace System.Xml
             bool[] array,
             int offset,
             int count
-        ) {
+        )
+        {
             return reader.ReadArray(localName, namespaceUri, array, offset, count);
         }
 
@@ -178,7 +183,8 @@ namespace System.Xml
             bool[] array,
             int offset,
             int count
-        ) {
+        )
+        {
             writer.WriteArray(prefix, localName, namespaceUri, array, offset, count);
         }
     }
@@ -195,7 +201,8 @@ namespace System.Xml
             short[] array,
             int offset,
             int count
-        ) {
+        )
+        {
             return reader.ReadArray(localName, namespaceUri, array, offset, count);
         }
 
@@ -207,7 +214,8 @@ namespace System.Xml
             short[] array,
             int offset,
             int count
-        ) {
+        )
+        {
             writer.WriteArray(prefix, localName, namespaceUri, array, offset, count);
         }
     }
@@ -225,7 +233,8 @@ namespace System.Xml
             short[] array,
             int offset,
             int count
-        ) {
+        )
+        {
             return reader.ReadArray(localName, namespaceUri, array, offset, count);
         }
 
@@ -237,7 +246,8 @@ namespace System.Xml
             short[] array,
             int offset,
             int count
-        ) {
+        )
+        {
             writer.WriteArray(prefix, localName, namespaceUri, array, offset, count);
         }
     }
@@ -254,7 +264,8 @@ namespace System.Xml
             int[] array,
             int offset,
             int count
-        ) {
+        )
+        {
             return reader.ReadArray(localName, namespaceUri, array, offset, count);
         }
 
@@ -266,7 +277,8 @@ namespace System.Xml
             int[] array,
             int offset,
             int count
-        ) {
+        )
+        {
             writer.WriteArray(prefix, localName, namespaceUri, array, offset, count);
         }
     }
@@ -284,7 +296,8 @@ namespace System.Xml
             int[] array,
             int offset,
             int count
-        ) {
+        )
+        {
             return reader.ReadArray(localName, namespaceUri, array, offset, count);
         }
 
@@ -296,7 +309,8 @@ namespace System.Xml
             int[] array,
             int offset,
             int count
-        ) {
+        )
+        {
             writer.WriteArray(prefix, localName, namespaceUri, array, offset, count);
         }
     }
@@ -313,7 +327,8 @@ namespace System.Xml
             long[] array,
             int offset,
             int count
-        ) {
+        )
+        {
             return reader.ReadArray(localName, namespaceUri, array, offset, count);
         }
 
@@ -325,7 +340,8 @@ namespace System.Xml
             long[] array,
             int offset,
             int count
-        ) {
+        )
+        {
             writer.WriteArray(prefix, localName, namespaceUri, array, offset, count);
         }
     }
@@ -343,7 +359,8 @@ namespace System.Xml
             long[] array,
             int offset,
             int count
-        ) {
+        )
+        {
             return reader.ReadArray(localName, namespaceUri, array, offset, count);
         }
 
@@ -355,7 +372,8 @@ namespace System.Xml
             long[] array,
             int offset,
             int count
-        ) {
+        )
+        {
             writer.WriteArray(prefix, localName, namespaceUri, array, offset, count);
         }
     }
@@ -372,7 +390,8 @@ namespace System.Xml
             float[] array,
             int offset,
             int count
-        ) {
+        )
+        {
             return reader.ReadArray(localName, namespaceUri, array, offset, count);
         }
 
@@ -384,7 +403,8 @@ namespace System.Xml
             float[] array,
             int offset,
             int count
-        ) {
+        )
+        {
             writer.WriteArray(prefix, localName, namespaceUri, array, offset, count);
         }
     }
@@ -402,7 +422,8 @@ namespace System.Xml
             float[] array,
             int offset,
             int count
-        ) {
+        )
+        {
             return reader.ReadArray(localName, namespaceUri, array, offset, count);
         }
 
@@ -414,7 +435,8 @@ namespace System.Xml
             float[] array,
             int offset,
             int count
-        ) {
+        )
+        {
             writer.WriteArray(prefix, localName, namespaceUri, array, offset, count);
         }
     }
@@ -431,7 +453,8 @@ namespace System.Xml
             double[] array,
             int offset,
             int count
-        ) {
+        )
+        {
             return reader.ReadArray(localName, namespaceUri, array, offset, count);
         }
 
@@ -443,7 +466,8 @@ namespace System.Xml
             double[] array,
             int offset,
             int count
-        ) {
+        )
+        {
             writer.WriteArray(prefix, localName, namespaceUri, array, offset, count);
         }
     }
@@ -461,7 +485,8 @@ namespace System.Xml
             double[] array,
             int offset,
             int count
-        ) {
+        )
+        {
             return reader.ReadArray(localName, namespaceUri, array, offset, count);
         }
 
@@ -473,7 +498,8 @@ namespace System.Xml
             double[] array,
             int offset,
             int count
-        ) {
+        )
+        {
             writer.WriteArray(prefix, localName, namespaceUri, array, offset, count);
         }
     }
@@ -490,7 +516,8 @@ namespace System.Xml
             decimal[] array,
             int offset,
             int count
-        ) {
+        )
+        {
             return reader.ReadArray(localName, namespaceUri, array, offset, count);
         }
 
@@ -502,7 +529,8 @@ namespace System.Xml
             decimal[] array,
             int offset,
             int count
-        ) {
+        )
+        {
             writer.WriteArray(prefix, localName, namespaceUri, array, offset, count);
         }
     }
@@ -520,7 +548,8 @@ namespace System.Xml
             decimal[] array,
             int offset,
             int count
-        ) {
+        )
+        {
             return reader.ReadArray(localName, namespaceUri, array, offset, count);
         }
 
@@ -532,7 +561,8 @@ namespace System.Xml
             decimal[] array,
             int offset,
             int count
-        ) {
+        )
+        {
             writer.WriteArray(prefix, localName, namespaceUri, array, offset, count);
         }
     }
@@ -549,7 +579,8 @@ namespace System.Xml
             DateTime[] array,
             int offset,
             int count
-        ) {
+        )
+        {
             return reader.ReadArray(localName, namespaceUri, array, offset, count);
         }
 
@@ -561,7 +592,8 @@ namespace System.Xml
             DateTime[] array,
             int offset,
             int count
-        ) {
+        )
+        {
             writer.WriteArray(prefix, localName, namespaceUri, array, offset, count);
         }
     }
@@ -579,7 +611,8 @@ namespace System.Xml
             DateTime[] array,
             int offset,
             int count
-        ) {
+        )
+        {
             return reader.ReadArray(localName, namespaceUri, array, offset, count);
         }
 
@@ -591,7 +624,8 @@ namespace System.Xml
             DateTime[] array,
             int offset,
             int count
-        ) {
+        )
+        {
             writer.WriteArray(prefix, localName, namespaceUri, array, offset, count);
         }
     }
@@ -607,7 +641,8 @@ namespace System.Xml
             Guid[] array,
             int offset,
             int count
-        ) {
+        )
+        {
             return reader.ReadArray(localName, namespaceUri, array, offset, count);
         }
 
@@ -619,7 +654,8 @@ namespace System.Xml
             Guid[] array,
             int offset,
             int count
-        ) {
+        )
+        {
             writer.WriteArray(prefix, localName, namespaceUri, array, offset, count);
         }
     }
@@ -637,7 +673,8 @@ namespace System.Xml
             Guid[] array,
             int offset,
             int count
-        ) {
+        )
+        {
             return reader.ReadArray(localName, namespaceUri, array, offset, count);
         }
 
@@ -649,7 +686,8 @@ namespace System.Xml
             Guid[] array,
             int offset,
             int count
-        ) {
+        )
+        {
             writer.WriteArray(prefix, localName, namespaceUri, array, offset, count);
         }
     }
@@ -666,7 +704,8 @@ namespace System.Xml
             TimeSpan[] array,
             int offset,
             int count
-        ) {
+        )
+        {
             return reader.ReadArray(localName, namespaceUri, array, offset, count);
         }
 
@@ -678,7 +717,8 @@ namespace System.Xml
             TimeSpan[] array,
             int offset,
             int count
-        ) {
+        )
+        {
             writer.WriteArray(prefix, localName, namespaceUri, array, offset, count);
         }
     }
@@ -696,7 +736,8 @@ namespace System.Xml
             TimeSpan[] array,
             int offset,
             int count
-        ) {
+        )
+        {
             return reader.ReadArray(localName, namespaceUri, array, offset, count);
         }
 
@@ -708,7 +749,8 @@ namespace System.Xml
             TimeSpan[] array,
             int offset,
             int count
-        ) {
+        )
+        {
             writer.WriteArray(prefix, localName, namespaceUri, array, offset, count);
         }
     }

@@ -241,7 +241,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Builders
         /// <returns> An object that can be used to configure the relationship. </returns>
         public new virtual OwnershipBuilder<TEntity, TDependentEntity> WithOwner(
             string? ownerReference = null
-        ) {
+        )
+        {
             Check.NullButNotEmpty(ownerReference, nameof(ownerReference));
 
             return new OwnershipBuilder<TEntity, TDependentEntity>(
@@ -346,10 +347,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Builders
         public virtual OwnedNavigationBuilder<
             TDependentEntity,
             TNewDependentEntity
-        > OwnsOne<TNewDependentEntity>(
-            string ownedTypeName,
-            string navigationName
-        ) where TNewDependentEntity : class =>
+        > OwnsOne<TNewDependentEntity>(string ownedTypeName, string navigationName)
+            where TNewDependentEntity : class =>
             OwnsOneBuilder<TNewDependentEntity>(
                 new TypeIdentity(
                     Check.NotEmpty(ownedTypeName, nameof(ownedTypeName)),
@@ -743,10 +742,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Builders
         private OwnedNavigationBuilder<
             TDependentEntity,
             TNewDependentEntity
-        > OwnsOneBuilder<TNewDependentEntity>(
-            TypeIdentity ownedType,
-            MemberIdentity navigation
-        ) where TNewDependentEntity : class
+        > OwnsOneBuilder<TNewDependentEntity>(TypeIdentity ownedType, MemberIdentity navigation)
+            where TNewDependentEntity : class
         {
             InternalForeignKeyBuilder relationship;
             using (var batch = DependentEntityType.Model.DelayConventions())
@@ -825,10 +822,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Builders
         public virtual OwnedNavigationBuilder<
             TDependentEntity,
             TNewDependentEntity
-        > OwnsMany<TNewDependentEntity>(
-            string ownedTypeName,
-            string navigationName
-        ) where TNewDependentEntity : class =>
+        > OwnsMany<TNewDependentEntity>(string ownedTypeName, string navigationName)
+            where TNewDependentEntity : class =>
             OwnsManyBuilder<TNewDependentEntity>(
                 new TypeIdentity(
                     Check.NotEmpty(ownedTypeName, nameof(ownedTypeName)),
@@ -1233,10 +1228,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Builders
         private OwnedNavigationBuilder<
             TDependentEntity,
             TNewRelatedEntity
-        > OwnsManyBuilder<TNewRelatedEntity>(
-            TypeIdentity ownedType,
-            MemberIdentity navigation
-        ) where TNewRelatedEntity : class
+        > OwnsManyBuilder<TNewRelatedEntity>(TypeIdentity ownedType, MemberIdentity navigation)
+            where TNewRelatedEntity : class
         {
             InternalForeignKeyBuilder relationship;
             using (var batch = DependentEntityType.Model.DelayConventions())

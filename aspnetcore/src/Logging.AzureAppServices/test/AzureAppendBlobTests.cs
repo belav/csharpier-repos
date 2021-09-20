@@ -257,7 +257,8 @@ namespace Microsoft.Extensions.Logging.AzureAppServices.Test
             protected override async Task<HttpResponseMessage> SendAsync(
                 HttpRequestMessage request,
                 CancellationToken cancellationToken
-            ) {
+            )
+            {
                 return await _callback(request);
             }
         }

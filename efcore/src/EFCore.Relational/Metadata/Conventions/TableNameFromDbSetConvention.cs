@@ -26,7 +26,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
         public TableNameFromDbSetConvention(
             ProviderConventionSetBuilderDependencies dependencies,
             RelationalConventionSetBuilderDependencies relationalDependencies
-        ) {
+        )
+        {
             _sets = new Dictionary<Type, string>();
             List<Type>? ambiguousTypes = null;
             foreach (var set in dependencies.SetFinder.FindSets(dependencies.ContextType))
@@ -74,7 +75,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
             IConventionEntityType? newBaseType,
             IConventionEntityType? oldBaseType,
             IConventionContext<IConventionEntityType> context
-        ) {
+        )
+        {
             var entityType = entityTypeBuilder.Metadata;
 
             if (oldBaseType == null && newBaseType != null)
@@ -86,7 +88,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
                 && newBaseType == null
                 && !entityType.HasSharedClrType
                 && _sets.TryGetValue(entityType.ClrType, out var setName)
-            ) {
+            )
+            {
                 entityTypeBuilder.ToTable(setName);
             }
         }
@@ -99,13 +102,15 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
         public virtual void ProcessEntityTypeAdded(
             IConventionEntityTypeBuilder entityTypeBuilder,
             IConventionContext<IConventionEntityTypeBuilder> context
-        ) {
+        )
+        {
             var entityType = entityTypeBuilder.Metadata;
             if (
                 entityType.BaseType == null
                 && !entityType.HasSharedClrType
                 && _sets.TryGetValue(entityType.ClrType, out var setName)
-            ) {
+            )
+            {
                 entityTypeBuilder.ToTable(setName);
             }
         }
@@ -114,14 +119,16 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
         public virtual void ProcessModelFinalizing(
             IConventionModelBuilder modelBuilder,
             IConventionContext<IConventionModelBuilder> context
-        ) {
+        )
+        {
             foreach (var entityType in modelBuilder.Metadata.GetEntityTypes())
             {
                 if (
                     entityType.GetTableName() != null
                     && entityType.GetViewNameConfigurationSource() != null
                     && _sets.ContainsKey(entityType.ClrType)
-                ) {
+                )
+                {
                     // Undo the convention change if the entity type is mapped to a view
                     entityType.Builder.HasNoAnnotation(RelationalAnnotationNames.TableName);
                 }

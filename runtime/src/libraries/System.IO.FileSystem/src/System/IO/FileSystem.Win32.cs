@@ -55,7 +55,8 @@ namespace System.IO
                             null,
                             0
                         )
-                    ) {
+                    )
+                    {
                         errorCode = Marshal.GetLastWin32Error();
                         throw Win32Marshal.GetExceptionForWin32Error(errorCode, name);
                     }

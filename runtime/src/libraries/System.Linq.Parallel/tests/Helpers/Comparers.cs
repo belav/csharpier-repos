@@ -170,7 +170,8 @@ namespace System.Linq.Parallel.Tests
         public static IEqualityComparer<T> Create<T>(
             Func<T, T, bool> comparer,
             Func<T, int> hashcode
-        ) {
+        )
+        {
             return new DelegatingEqualityComparer<T>(comparer, hashcode);
         }
 

@@ -28,7 +28,8 @@ namespace System.Data.Common
             string rightQuote,
             string property,
             bool ThrowOnEmptyMultipartName
-        ) {
+        )
+        {
             return ParseMultipartIdentifier(
                 name,
                 leftQuote,
@@ -64,7 +65,8 @@ namespace System.Data.Common
             string?[] ary,
             ref int position,
             string property
-        ) {
+        )
+        {
             ++position;
             int limit = ary.Length;
             if (position >= limit)
@@ -88,7 +90,8 @@ namespace System.Data.Common
             bool removequotes,
             string property,
             bool ThrowOnEmptyMultipartName
-        ) {
+        )
+        {
             if (limit <= 0)
             {
                 throw ADP.InvalidMultipartNameToManyParts(property, name, limit);
@@ -98,7 +101,8 @@ namespace System.Data.Common
                 -1 != leftQuote.IndexOf(separator)
                 || -1 != rightQuote.IndexOf(separator)
                 || leftQuote.Length != rightQuote.Length
-            ) {
+            )
+            {
                 throw ADP.InvalidMultipartNameIncorrectUsageOfQuotes(property, name);
             }
 

@@ -314,7 +314,8 @@ namespace Microsoft.AspNetCore.Razor.Runtime.TagHelpers
         [MemberData(nameof(HtmlEncoderData))]
         public async Task GetChildContentAsync_StartsWritingScopeWithGivenEncoder(
             HtmlEncoder encoder
-        ) {
+        )
+        {
             // Arrange
             HtmlEncoder passedEncoder = null;
             var executionContext = new TagHelperExecutionContext(
@@ -472,7 +473,8 @@ namespace Microsoft.AspNetCore.Razor.Runtime.TagHelpers
         [InlineData(false)]
         public async Task GetChildContentAsync_ReturnsNewObjectEveryTimeItIsCalled(
             bool useCachedResult
-        ) {
+        )
+        {
             // Arrange
             var executionContext = new TagHelperExecutionContext(
                 "p",

@@ -40,7 +40,8 @@ namespace Microsoft.CodeAnalysis.Remote
         public GlobalNotificationRemoteDeliveryService(
             HostWorkspaceServices services,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             _services = services;
             _cancellationToken = cancellationToken;
 
@@ -93,7 +94,8 @@ namespace Microsoft.CodeAnalysis.Remote
 
         private async Task<GlobalNotificationState> SendStartNotificationAsync(
             Task<GlobalNotificationState> previousTask
-        ) {
+        )
+        {
             // Can only transition from NotStarted->Started.  If we hear about
             // anything else, do nothing.
             if (previousTask.Result != GlobalNotificationState.NotStarted)
@@ -138,7 +140,8 @@ namespace Microsoft.CodeAnalysis.Remote
         private async Task<GlobalNotificationState> SendStoppedNotificationAsync(
             Task<GlobalNotificationState> previousTask,
             GlobalOperationEventArgs e
-        ) {
+        )
+        {
             // Can only transition from Started->NotStarted.  If we hear about
             // anything else, do nothing.
             if (previousTask.Result != GlobalNotificationState.Started)

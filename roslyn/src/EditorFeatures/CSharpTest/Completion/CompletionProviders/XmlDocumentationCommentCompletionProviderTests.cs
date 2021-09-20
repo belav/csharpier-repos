@@ -56,7 +56,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Completion.CompletionPr
             bool? isComplexTextEdit = null,
             List<CompletionFilter> matchingFilters = null,
             CompletionItemFlags? flags = null
-        ) {
+        )
+        {
             // We don't need to try writing comments in from of items in doc comments.
             await VerifyAtPositionAsync(
                 code,

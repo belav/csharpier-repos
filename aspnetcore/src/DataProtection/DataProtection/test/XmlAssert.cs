@@ -96,7 +96,8 @@ namespace Microsoft.AspNetCore.DataProtection
             private static bool AreEqual(
                 IEnumerable<XAttribute> expected,
                 IEnumerable<XAttribute> actual
-            ) {
+            )
+            {
                 List<XAttribute> orderedExpected = expected.Where(
                         ShouldIncludeAttributeDuringComparison
                     )
@@ -135,7 +136,8 @@ namespace Microsoft.AspNetCore.DataProtection
                 if (
                     node is XText /* includes XCData */
                     || node is XElement
-                ) {
+                )
+                {
                     return true; // relevant
                 }
 

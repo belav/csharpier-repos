@@ -58,7 +58,8 @@ namespace Microsoft.Web.Mvc
         public IEnumerable<ModelClientValidationRule> GetClientValidationRules(
             ModelMetadata metadata,
             ControllerContext context
-        ) {
+        )
+        {
             var rule = new ModelClientValidationRule
             {
                 ValidationType = "accept",

@@ -66,7 +66,8 @@ namespace System.Linq.Expressions.Tests
                     decimal.MinValue,
                     decimal.MaxValue
                 }
-            ) {
+            )
+            {
                 VerifyIdentityDecimal(value, useInterpreter);
             }
         }
@@ -88,7 +89,8 @@ namespace System.Linq.Expressions.Tests
                     },
                     (Action<object>)delegate { }
                 }
-            ) {
+            )
+            {
                 VerifyIdentityDelegate(value, useInterpreter);
             }
         }
@@ -109,7 +111,8 @@ namespace System.Linq.Expressions.Tests
                     double.PositiveInfinity,
                     double.NaN
                 }
-            ) {
+            )
+            {
                 VerifyIdentityDouble(value, useInterpreter);
             }
         }
@@ -128,7 +131,8 @@ namespace System.Linq.Expressions.Tests
         {
             foreach (
                 El value in new El[] { (El)0, El.A, El.B, (El)long.MaxValue, (El)long.MinValue }
-            ) {
+            )
+            {
                 VerifyIdentityEnumLong(value, useInterpreter);
             }
         }
@@ -149,7 +153,8 @@ namespace System.Linq.Expressions.Tests
                     float.PositiveInfinity,
                     float.NaN
                 }
-            ) {
+            )
+            {
                 VerifyIdentityFloat(value, useInterpreter);
             }
         }
@@ -166,7 +171,8 @@ namespace System.Linq.Expressions.Tests
                         return null;
                     }
                 }
-            ) {
+            )
+            {
                 VerifyIdentityFuncOfObject(value, useInterpreter);
             }
         }
@@ -192,7 +198,8 @@ namespace System.Linq.Expressions.Tests
                     new D(0),
                     new D(5)
                 }
-            ) {
+            )
+            {
                 VerifyIdentityIEquatableOfCustom(value, useInterpreter);
             }
         }
@@ -202,7 +209,8 @@ namespace System.Linq.Expressions.Tests
         {
             foreach (
                 IEquatable<D> value in new IEquatable<D>[] { null, new D(), new D(0), new D(5) }
-            ) {
+            )
+            {
                 VerifyIdentityIEquatableOfCustom2(value, useInterpreter);
             }
         }
@@ -360,70 +368,80 @@ namespace System.Linq.Expressions.Tests
         [Theory, ClassData(typeof(CompilationTypes))]
         public static void CheckLambdaIdentityGenericWithStructWithStringAndFieldTest(
             bool useInterpreter
-        ) {
+        )
+        {
             CheckLambdaIdentityGenericHelper<Scs>(useInterpreter);
         }
 
         [Theory, ClassData(typeof(CompilationTypes))]
         public static void CheckLambdaIdentityGenericWithClassRestrictionWithCustomTest(
             bool useInterpreter
-        ) {
+        )
+        {
             CheckLambdaIdentityGenericWithClassRestrictionHelper<C>(useInterpreter);
         }
 
         [Theory, ClassData(typeof(CompilationTypes))]
         public static void CheckLambdaIdentityGenericWithClassRestrictionWithObjectTest(
             bool useInterpreter
-        ) {
+        )
+        {
             CheckLambdaIdentityGenericWithClassRestrictionHelper<object>(useInterpreter);
         }
 
         [Theory, ClassData(typeof(CompilationTypes))]
         public static void CheckLambdaIdentityGenericWithSubClassRestrictionWithCustomTest(
             bool useInterpreter
-        ) {
+        )
+        {
             CheckLambdaIdentityGenericWithSubClassRestrictionHelper<C>(useInterpreter);
         }
 
         [Theory, ClassData(typeof(CompilationTypes))]
         public static void CheckLambdaIdentityGenericWithClassAndNewRestrictionWithCustomTest(
             bool useInterpreter
-        ) {
+        )
+        {
             CheckLambdaIdentityGenericWithClassAndNewRestrictionHelper<C>(useInterpreter);
         }
 
         [Theory, ClassData(typeof(CompilationTypes))]
         public static void CheckLambdaIdentityGenericWithClassAndNewRestrictionWithObjectTest(
             bool useInterpreter
-        ) {
+        )
+        {
             CheckLambdaIdentityGenericWithClassAndNewRestrictionHelper<object>(useInterpreter);
         }
 
         [Theory, ClassData(typeof(CompilationTypes))]
         public static void CheckLambdaIdentityGenericWithSubClassAndNewRestrictionWithCustomTest(
             bool useInterpreter
-        ) {
+        )
+        {
             CheckLambdaIdentityGenericWithSubClassAndNewRestrictionHelper<C>(useInterpreter);
         }
 
         [Theory, ClassData(typeof(CompilationTypes))]
         public static void CheckLambdaIdentityGenericWithStructRestrictionWithEnumTest(
             bool useInterpreter
-        ) {
+        )
+        {
             CheckLambdaIdentityGenericWithStructRestrictionHelper<E>(useInterpreter);
         }
 
         [Theory, ClassData(typeof(CompilationTypes))]
         public static void CheckLambdaIdentityGenericWithStructRestrictionWithStructTest(
             bool useInterpreter
-        ) {
+        )
+        {
             CheckLambdaIdentityGenericWithStructRestrictionHelper<S>(useInterpreter);
         }
 
         [Theory, ClassData(typeof(CompilationTypes))]
         public static void CheckLambdaIdentityGenericWithStructRestrictionWithStructWithStringAndFieldTest(
             bool useInterpreter
-        ) {
+        )
+        {
             CheckLambdaIdentityGenericWithStructRestrictionHelper<Scs>(useInterpreter);
         }
 
@@ -1145,7 +1163,8 @@ namespace System.Linq.Expressions.Tests
         private static void VerifyIdentityIEquatableOfCustom(
             IEquatable<C> value,
             bool useInterpreter
-        ) {
+        )
+        {
             ParameterExpression p = Expression.Parameter(typeof(IEquatable<C>), "p");
 
             // parameter hard coded
@@ -1209,7 +1228,8 @@ namespace System.Linq.Expressions.Tests
         private static void VerifyIdentityIEquatableOfCustom2(
             IEquatable<D> value,
             bool useInterpreter
-        ) {
+        )
+        {
             ParameterExpression p = Expression.Parameter(typeof(IEquatable<D>), "p");
 
             // parameter hard coded

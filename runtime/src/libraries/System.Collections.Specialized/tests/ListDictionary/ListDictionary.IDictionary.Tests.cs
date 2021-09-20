@@ -43,7 +43,8 @@ namespace System.Collections.Specialized.Tests
         [MemberData(nameof(ValidCollectionSizes))]
         public override void ICollection_NonGeneric_CopyTo_IndexLargerThanArrayCount_ThrowsAnyArgumentException(
             int count
-        ) {
+        )
+        {
             ICollection collection = NonGenericICollectionFactory(count);
             object[] array = new object[count];
 

@@ -20,7 +20,8 @@ namespace Microsoft.AspNetCore.Rewrite.PatternSegments
             RewriteContext context,
             BackReferenceCollection? ruleBackReferences,
             BackReferenceCollection? conditionBackReferences
-        ) {
+        )
+        {
             var key = _pattern.Evaluate(context, ruleBackReferences, conditionBackReferences)
                 .ToLowerInvariant();
             return _rewriteMap[key];

@@ -29,7 +29,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.NavigationBar
             Document document,
             ISymbol symbol,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var syntaxTree = await document.GetRequiredSyntaxTreeAsync(cancellationToken)
                 .ConfigureAwait(false);
             var location =

@@ -52,7 +52,8 @@ namespace Microsoft.EntityFrameworkCore.Cosmos.Query.Internal
                 string partitionKeyFromExtension,
                 bool standAloneStateManager,
                 bool concurrencyDetectionEnabled
-            ) {
+            )
+            {
                 _cosmosQueryContext = cosmosQueryContext;
                 _sqlExpressionFactory = sqlExpressionFactory;
                 _querySqlGeneratorFactory = querySqlGeneratorFactory;
@@ -70,7 +71,8 @@ namespace Microsoft.EntityFrameworkCore.Cosmos.Query.Internal
                     partitionKey != null
                     && partitionKeyFromExtension != null
                     && partitionKeyFromExtension != partitionKey
-                ) {
+                )
+                {
                     throw new InvalidOperationException(
                         CosmosStrings.PartitionKeyMismatch(partitionKeyFromExtension, partitionKey)
                     );
@@ -225,7 +227,8 @@ namespace Microsoft.EntityFrameworkCore.Cosmos.Query.Internal
                 public AsyncEnumerator(
                     QueryingEnumerable<T> queryingEnumerable,
                     CancellationToken cancellationToken
-                ) {
+                )
+                {
                     _queryingEnumerable = queryingEnumerable;
                     _cosmosQueryContext = queryingEnumerable._cosmosQueryContext;
                     _shaper = queryingEnumerable._shaper;

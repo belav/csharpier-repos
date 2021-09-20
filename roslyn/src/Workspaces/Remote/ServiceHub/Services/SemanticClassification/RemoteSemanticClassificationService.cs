@@ -24,16 +24,16 @@ namespace Microsoft.CodeAnalysis.Remote
             ) => new RemoteSemanticClassificationService(arguments);
         }
 
-        public RemoteSemanticClassificationService(
-            in ServiceConstructionArguments arguments
-        ) : base(arguments) { }
+        public RemoteSemanticClassificationService(in ServiceConstructionArguments arguments)
+            : base(arguments) { }
 
         public ValueTask<SerializableClassifiedSpans> GetSemanticClassificationsAsync(
             PinnedSolutionInfo solutionInfo,
             DocumentId documentId,
             TextSpan span,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             return RunServiceAsync(
                 async cancellationToken =>
                 {

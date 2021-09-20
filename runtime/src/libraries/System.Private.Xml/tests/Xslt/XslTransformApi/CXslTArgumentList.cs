@@ -712,7 +712,8 @@ namespace System.Xml.Tests
             ReaderType readerType,
             TransformType transformType,
             DocType docType
-        ) {
+        )
+        {
             string expected =
                 @"<?xml version=""1.0"" encoding=""utf-8""?><result>
 		1.Test1
@@ -733,7 +734,8 @@ namespace System.Xml.Tests
             if (
                 (LoadXSL("showParam.xsl", inputType, readerType) == 1)
                 && (Transform_ArgList("fruits.xml", transformType, docType) == 1)
-            ) {
+            )
+            {
                 VerifyResult(expected);
                 return;
             }
@@ -858,7 +860,8 @@ namespace System.Xml.Tests
             ReaderType readerType,
             TransformType transformType,
             DocType docType
-        ) {
+        )
+        {
             string expected =
                 @"<?xml version=""1.0"" encoding=""utf-8""?><result>
 		1.Test1</result>";
@@ -874,7 +877,8 @@ namespace System.Xml.Tests
             if (
                 (LoadXSL("showParamLongName.xsl", inputType, readerType) == 1)
                 && (Transform_ArgList("fruits.xml", transformType, docType) == 1)
-            ) {
+            )
+            {
                 VerifyResult(expected);
                 return;
             }
@@ -999,7 +1003,8 @@ namespace System.Xml.Tests
             ReaderType readerType,
             TransformType transformType,
             DocType docType
-        ) {
+        )
+        {
             string expected =
                 @"<?xml version=""1.0"" encoding=""utf-8""?><result>
 		1.Test7
@@ -1021,7 +1026,8 @@ namespace System.Xml.Tests
             if (
                 (LoadXSL("showParam.xsl", inputType, readerType) == 1)
                 && (Transform_ArgList("fruits.xml", transformType, docType) == 1)
-            ) {
+            )
+            {
                 VerifyResult(expected);
                 return;
             }
@@ -1108,7 +1114,8 @@ namespace System.Xml.Tests
             ReaderType readerType,
             TransformType transformType,
             DocType docType
-        ) {
+        )
+        {
             string expected =
                 @"<?xml version=""1.0"" encoding=""utf-8""?><result>
 		1.No Value Specified
@@ -1129,7 +1136,8 @@ namespace System.Xml.Tests
             if (
                 (LoadXSL("showParam.xsl", inputType, readerType) == 1)
                 && (Transform_ArgList("fruits.xml", transformType, docType) == 1)
-            ) {
+            )
+            {
                 VerifyResult(expected);
                 return;
             }
@@ -1216,7 +1224,8 @@ namespace System.Xml.Tests
             ReaderType readerType,
             TransformType transformType,
             DocType docType
-        ) {
+        )
+        {
             string expected =
                 @"<?xml version=""1.0"" encoding=""utf-8""?><result>
 		1.My Custom Object has a value of 10
@@ -1234,7 +1243,8 @@ namespace System.Xml.Tests
             if (
                 (LoadXSL("showParam.xsl", inputType, readerType) == 1)
                 && (Transform_ArgList("fruits.xml", transformType, docType) == 1)
-            ) {
+            )
+            {
                 VerifyResult(expected);
                 return;
             }
@@ -1342,7 +1352,8 @@ namespace System.Xml.Tests
             ReaderType readerType,
             TransformType transformType,
             DocType docType
-        ) {
+        )
+        {
             string expected =
                 @"<?xml version=""1.0"" encoding=""utf-8""?><result>
 		1.Test1
@@ -1380,7 +1391,8 @@ namespace System.Xml.Tests
             if (
                 (LoadXSL("showParam.xsl", inputType, readerType) == 1)
                 && (Transform_ArgList("fruits.xml", transformType, docType) == 1)
-            ) {
+            )
+            {
                 VerifyResult(expected);
                 return;
             }
@@ -1467,7 +1479,8 @@ namespace System.Xml.Tests
             ReaderType readerType,
             TransformType transformType,
             DocType docType
-        ) {
+        )
+        {
             string expected =
                 @"<?xml version=""1.0"" encoding=""utf-8""?><result>
 		1.Test1
@@ -1505,7 +1518,8 @@ namespace System.Xml.Tests
             if (
                 (LoadXSL("showParam.xsl", inputType, readerType) == 1)
                 && (Transform_ArgList("fruits.xml", transformType, docType) == 1)
-            ) {
+            )
+            {
                 VerifyResult(expected);
                 return;
             }
@@ -1592,7 +1606,8 @@ namespace System.Xml.Tests
             ReaderType readerType,
             TransformType transformType,
             DocType docType
-        ) {
+        )
+        {
             string expected =
                 @"<?xml version=""1.0"" encoding=""utf-8""?><result>
 		1.Test1
@@ -1631,7 +1646,8 @@ namespace System.Xml.Tests
             if (
                 (LoadXSL("showParam.xsl", inputType, readerType) == 1)
                 && (Transform_ArgList("fruits.xml", transformType, docType) == 1)
-            ) {
+            )
+            {
                 VerifyResult(expected);
                 return;
             }
@@ -1736,7 +1752,8 @@ namespace System.Xml.Tests
             ReaderType readerType,
             TransformType transformType,
             DocType docType
-        ) {
+        )
+        {
             string expected =
                 @"<?xml version=""1.0"" encoding=""utf-8""?><result>
 		1.No Value Specified
@@ -1785,7 +1802,8 @@ namespace System.Xml.Tests
             if (
                 (LoadXSL("showParam.xsl", inputType, readerType) == 1)
                 && (Transform_ArgList("fruits.xml", transformType, docType) == 1)
-            ) {
+            )
+            {
                 VerifyResult(expected);
                 return;
             }
@@ -1872,7 +1890,8 @@ namespace System.Xml.Tests
             ReaderType readerType,
             TransformType transformType,
             DocType docType
-        ) {
+        )
+        {
             string expected =
                 @"<?xml version=""1.0"" encoding=""utf-8""?><result>
 		1.Test  
@@ -1929,7 +1948,8 @@ namespace System.Xml.Tests
             if (
                 (LoadXSL("showParam.xsl", inputType, readerType) == 1)
                 && (Transform_ArgList("fruits.xml", transformType, docType) == 1)
-            ) {
+            )
+            {
                 VerifyResult(expected);
                 return;
             }
@@ -2016,7 +2036,8 @@ namespace System.Xml.Tests
             ReaderType readerType,
             TransformType transformType,
             DocType docType
-        ) {
+        )
+        {
             string expected =
                 @"<?xml version=""1.0"" encoding=""utf-8""?><result>
 		1.Test1
@@ -2040,7 +2061,8 @@ namespace System.Xml.Tests
             if (
                 (LoadXSL("showParam.xsl", inputType, readerType) == 1)
                 && (Transform_ArgList("fruits.xml", transformType, docType) == 1)
-            ) {
+            )
+            {
                 VerifyResult(expected);
                 return;
             }
@@ -2127,7 +2149,8 @@ namespace System.Xml.Tests
             ReaderType readerType,
             TransformType transformType,
             DocType docType
-        ) {
+        )
+        {
             string expected =
                 @"<?xml version=""1.0"" encoding=""utf-8""?><result>
 		1.No Value Specified
@@ -2159,7 +2182,8 @@ namespace System.Xml.Tests
             if (
                 (LoadXSL("showParam.xsl", inputType, readerType) == 1)
                 && (Transform_ArgList("fruits.xml", transformType, docType) == 1)
-            ) {
+            )
+            {
                 VerifyResult(expected);
                 return;
             }
@@ -2246,7 +2270,8 @@ namespace System.Xml.Tests
             ReaderType readerType,
             TransformType transformType,
             DocType docType
-        ) {
+        )
+        {
             string expected =
                 @"<?xml version=""1.0"" encoding=""utf-8""?><result xmlns:myObj1=""urn:http://www.w3.org/1999/XSL/Transform"" xmlns:myObj2=""urn:tmp"" xmlns:myObj3=""urn:my-object"" xmlns:myObj4=""urn:MY-OBJECT"">
 		1.Test1
@@ -2285,7 +2310,8 @@ namespace System.Xml.Tests
             if (
                 (LoadXSL("showParamNS.xsl", inputType, readerType) == 1)
                 && (Transform_ArgList("fruits.xml", transformType, docType) == 1)
-            ) {
+            )
+            {
                 VerifyResult(expected);
                 return;
             }
@@ -2381,7 +2407,8 @@ namespace System.Xml.Tests
             ReaderType readerType,
             TransformType transformType,
             DocType docType
-        ) {
+        )
+        {
             string expected1 = @"<?xml version=""1.0"" encoding=""utf-8""?><out>Param: first</out>";
             string expected2 =
                 @"<?xml version=""1.0"" encoding=""utf-8""?><out>Param: second</out>";
@@ -4492,7 +4519,8 @@ namespace System.Xml.Tests
             ReaderType readerType,
             TransformType transformType,
             DocType docType
-        ) {
+        )
+        {
             m_xsltArg = new XsltArgumentList();
             string xslFile = param0.ToString();
             string expected = "<result>" + param1.ToString() + "</result>";
@@ -6564,7 +6592,8 @@ namespace System.Xml.Tests
             ReaderType readerType,
             TransformType transformType,
             DocType docType
-        ) {
+        )
+        {
             string xslFile = param0.ToString();
             string expected = "<result>" + param1.ToString() + "</result>";
 
@@ -7101,7 +7130,8 @@ namespace System.Xml.Tests
             ReaderType readerType,
             TransformType transformType,
             DocType docType
-        ) {
+        )
+        {
             string xslFile = param0.ToString();
             string expected = "<result>" + param1.ToString() + "</result>";
 
@@ -7221,7 +7251,8 @@ namespace System.Xml.Tests
             ReaderType readerType,
             TransformType transformType,
             DocType docType
-        ) {
+        )
+        {
             string expected =
                 @"<?xml version=""1.0"" encoding=""utf-8""?><result xmlns:myObj=""urn:my-object"">
 		1.Test1
@@ -7235,7 +7266,8 @@ namespace System.Xml.Tests
             if (
                 (LoadXSL("myObjectDef.xsl", inputType, readerType) == 1)
                 && (Transform_ArgList("fruits.xml", transformType, docType) == 1)
-            ) {
+            )
+            {
                 VerifyResult(expected);
                 return;
             }
@@ -7354,7 +7386,8 @@ namespace System.Xml.Tests
             ReaderType readerType,
             TransformType transformType,
             DocType docType
-        ) {
+        )
+        {
             string expected =
                 @"<?xml version=""1.0"" encoding=""utf-8""?><result xmlns:myObj=""http://www.miocrosoft.com/this/is/a/very/long/namespace/uri/to/do/the/api/testing/for/xslt/0123456789/0123456789/0123456789/0123456789/0123456789/0123456789/0123456789/0123456789/0123456789/0123456789/0123456789/0123456789/0123456789/0123456789/0123456789/0123456789/0123456789/0123456789/"">
 		1.Test1
@@ -7369,7 +7402,8 @@ namespace System.Xml.Tests
             if (
                 (LoadXSL("myObjectLongNS.xsl", inputType, readerType) == 1)
                 && (Transform_ArgList("fruits.xml", transformType, docType) == 1)
-            ) {
+            )
+            {
                 VerifyResult(expected);
                 return;
             }
@@ -7456,7 +7490,8 @@ namespace System.Xml.Tests
             ReaderType readerType,
             TransformType transformType,
             DocType docType
-        ) {
+        )
+        {
             string expected =
                 @"<?xml version=""1.0"" encoding=""utf-8""?><result>
 
@@ -7559,7 +7594,8 @@ namespace System.Xml.Tests
             if (
                 (LoadXSL("MyObject_DataTypes.xsl", inputType, readerType) == 1)
                 && (Transform_ArgList("fruits.xml", transformType, docType) == 1)
-            ) {
+            )
+            {
                 VerifyResult(expected);
                 return;
             }
@@ -7669,7 +7705,8 @@ namespace System.Xml.Tests
             ReaderType readerType,
             TransformType transformType,
             DocType docType
-        ) {
+        )
+        {
             string expected =
                 @"<?xml version=""1.0"" encoding=""utf-8""?><result xmlns:myObj=""urn:my-object"">
 		1.Test1
@@ -7694,7 +7731,8 @@ namespace System.Xml.Tests
             if (
                 (LoadXSL("myObjectDef.xsl", inputType, readerType) == 1)
                 && (Transform_ArgList("fruits.xml", transformType, docType) == 1)
-            ) {
+            )
+            {
                 VerifyResult(expected);
                 return;
             }
@@ -7802,7 +7840,8 @@ namespace System.Xml.Tests
             ReaderType readerType,
             TransformType transformType,
             DocType docType
-        ) {
+        )
+        {
             string expected =
                 @"<?xml version=""1.0"" encoding=""utf-8""?><result xmlns:myObj=""urn:my-object"">
 
@@ -7816,7 +7855,8 @@ namespace System.Xml.Tests
             if (
                 (LoadXSL("MyObject_Null.xsl", inputType, readerType) == 1)
                 && (Transform_ArgList("fruits.xml", transformType, docType) == 1)
-            ) {
+            )
+            {
                 VerifyResult(expected);
                 return;
             }
@@ -7903,7 +7943,8 @@ namespace System.Xml.Tests
             ReaderType readerType,
             TransformType transformType,
             DocType docType
-        ) {
+        )
+        {
             string expected =
                 @"<?xml version=""1.0"" encoding=""utf-8""?><result xmlns:myObj=""urn:my-object"">
 		1.Test1
@@ -7923,7 +7964,8 @@ namespace System.Xml.Tests
             if (
                 (LoadXSL("myObjectDef.xsl", inputType, readerType) == 1)
                 && (Transform_ArgList("fruits.xml", transformType, docType) == 1)
-            ) {
+            )
+            {
                 VerifyResult(expected);
                 return;
             }
@@ -8010,7 +8052,8 @@ namespace System.Xml.Tests
             ReaderType readerType,
             TransformType transformType,
             DocType docType
-        ) {
+        )
+        {
             int i = 1;
             m_xsltArg = new XsltArgumentList();
 
@@ -8134,7 +8177,8 @@ namespace System.Xml.Tests
             ReaderType readerType,
             TransformType transformType,
             DocType docType
-        ) {
+        )
+        {
             string expected =
                 @"<?xml version=""1.0"" encoding=""utf-8""?><result xmlns:myObj=""urn:my-object"">
 		1.Test1
@@ -8154,7 +8198,8 @@ namespace System.Xml.Tests
             if (
                 (LoadXSL("myObjectDef.xsl", inputType, readerType) == 1)
                 && (Transform_ArgList("fruits.xml", transformType, docType) == 1)
-            ) {
+            )
+            {
                 VerifyResult(expected);
                 return;
             }
@@ -8241,7 +8286,8 @@ namespace System.Xml.Tests
             ReaderType readerType,
             TransformType transformType,
             DocType docType
-        ) {
+        )
+        {
             MyObject obj = new MyObject(15, _output);
             m_xsltArg = new XsltArgumentList();
 
@@ -8338,7 +8384,8 @@ namespace System.Xml.Tests
             ReaderType readerType,
             TransformType transformType,
             DocType docType
-        ) {
+        )
+        {
             MyObject obj = new MyObject(1, _output);
             m_xsltArg = new XsltArgumentList();
 
@@ -8450,7 +8497,8 @@ namespace System.Xml.Tests
             ReaderType readerType,
             TransformType transformType,
             DocType docType
-        ) {
+        )
+        {
             string expected =
                 @"<?xml version=""1.0"" encoding=""utf-8""?><result xmlns:myObj=""urn:my-object"">
 		Here:End
@@ -8463,7 +8511,8 @@ namespace System.Xml.Tests
             if (
                 (LoadXSL("MyObject_ConsoleWrite.xsl", inputType, readerType) == 1)
                 && (Transform_ArgList("fruits.xml", transformType, docType) == 1)
-            ) {
+            )
+            {
                 VerifyResult(expected);
                 return;
             }
@@ -8550,7 +8599,8 @@ namespace System.Xml.Tests
             ReaderType readerType,
             TransformType transformType,
             DocType docType
-        ) {
+        )
+        {
             string expected =
                 @"<?xml version=""1.0"" encoding=""utf-8""?><result xmlns:myObj=""urn:my-object"">
 		Recursive Function Returning the factorial of five:120</result>";
@@ -8562,7 +8612,8 @@ namespace System.Xml.Tests
             if (
                 (LoadXSL("MyObject_Recursion.xsl", inputType, readerType) == 1)
                 && (Transform_ArgList("fruits.xml", transformType, docType) == 1)
-            ) {
+            )
+            {
                 VerifyResult(expected);
                 return;
             }
@@ -8649,7 +8700,8 @@ namespace System.Xml.Tests
             ReaderType readerType,
             TransformType transformType,
             DocType docType
-        ) {
+        )
+        {
             string expected =
                 @"<?xml version=""1.0"" encoding=""utf-8""?><result xmlns:myObj=""urn:my-object"">
 		Overloaded Double: Int Overlaod
@@ -8663,7 +8715,8 @@ namespace System.Xml.Tests
             if (
                 (LoadXSL("MyObject_Overloads.xsl", inputType, readerType) == 1)
                 && (Transform_ArgList("fruits.xml", transformType, docType) == 1)
-            ) {
+            )
+            {
                 VerifyResult(expected);
                 return;
             }
@@ -8750,7 +8803,8 @@ namespace System.Xml.Tests
             ReaderType readerType,
             TransformType transformType,
             DocType docType
-        ) {
+        )
+        {
             string expected =
                 @"<?xml version=""1.0"" encoding=""utf-8""?><result xmlns:myObj=""urn:my-object"">
 		DoNothing Function Test Pass
@@ -8771,7 +8825,8 @@ namespace System.Xml.Tests
             if (
                 (LoadXSL("MyObject_FnExists.xsl", inputType, readerType) == 1)
                 && (Transform_ArgList("fruits.xml", transformType, docType) == 1)
-            ) {
+            )
+            {
                 VerifyResult(expected);
                 return;
             }
@@ -8858,7 +8913,8 @@ namespace System.Xml.Tests
             ReaderType readerType,
             TransformType transformType,
             DocType docType
-        ) {
+        )
+        {
             string expected =
                 @"<?xml version=""1.0"" encoding=""utf-8""?><result xmlns:myObj=""urn:my-object"">
 
@@ -8874,7 +8930,8 @@ namespace System.Xml.Tests
             if (
                 (LoadXSL("MyObject_Arguments.xsl", inputType, readerType) == 1)
                 && (Transform_ArgList("fruits.xml", transformType, docType) == 1)
-            ) {
+            )
+            {
                 VerifyResult(expected);
                 return;
             }
@@ -8961,7 +9018,8 @@ namespace System.Xml.Tests
             ReaderType readerType,
             TransformType transformType,
             DocType docType
-        ) {
+        )
+        {
             string expected =
                 @"<?xml version=""1.0"" encoding=""utf-8""?><result xmlns:myObj=""urn:my-object"">
 		Get A String:Hello world
@@ -8979,7 +9037,8 @@ namespace System.Xml.Tests
             if (
                 (LoadXSL("MyObject_ReturnValidTypes.xsl", inputType, readerType) == 1)
                 && (Transform_ArgList("fruits.xml", transformType, docType) == 1)
-            ) {
+            )
+            {
                 VerifyResult(expected);
                 return;
             }
@@ -9088,7 +9147,8 @@ namespace System.Xml.Tests
             ReaderType readerType,
             TransformType outputType,
             DocType navType
-        ) {
+        )
+        {
             MyObject obj = new MyObject(25, _output);
             m_xsltArg = new XsltArgumentList();
 
@@ -9185,7 +9245,8 @@ namespace System.Xml.Tests
             ReaderType readerType,
             TransformType transformType,
             DocType docType
-        ) {
+        )
+        {
             MyObject obj = new MyObject(26, _output);
             m_xsltArg = new XsltArgumentList();
 
@@ -9284,7 +9345,8 @@ namespace System.Xml.Tests
             ReaderType readerType,
             TransformType transformType,
             DocType docType
-        ) {
+        )
+        {
             string expected =
                 @"<?xml version=""1.0"" encoding=""utf-8""?><result xmlns:myObj=""urn:my-object"">
 		A:27
@@ -9303,7 +9365,8 @@ namespace System.Xml.Tests
             if (
                 (LoadXSL("MyObject_KeepingState.xsl", inputType, readerType) == 1)
                 && (Transform_ArgList("fruits.xml", transformType, docType) == 1)
-            ) {
+            )
+            {
                 VerifyResult(expected);
                 return;
             }
@@ -9390,7 +9453,8 @@ namespace System.Xml.Tests
             ReaderType readerType,
             TransformType transformType,
             DocType docType
-        ) {
+        )
+        {
             string expected =
                 @"<?xml version=""1.0"" encoding=""utf-8""?><result xmlns:myObj=""urn:my-object"">
 
@@ -9408,7 +9472,8 @@ namespace System.Xml.Tests
             if (
                 (LoadXSL("MyObject_KillerStrings.xsl", inputType, readerType) == 1)
                 && (Transform_ArgList("fruits.xml", transformType, docType) == 1)
-            ) {
+            )
+            {
                 VerifyResult(expected);
                 return;
             }
@@ -9495,7 +9560,8 @@ namespace System.Xml.Tests
             ReaderType readerType,
             TransformType transformType,
             DocType docType
-        ) {
+        )
+        {
             MyObject obj = new MyObject(29, _output);
             m_xsltArg = new XsltArgumentList();
 
@@ -9605,7 +9671,8 @@ namespace System.Xml.Tests
             ReaderType readerType,
             TransformType transformType,
             DocType docType
-        ) {
+        )
+        {
             string expected1 =
                 @"<?xml version=""1.0"" encoding=""utf-8""?><out xmlns:id=""id"" xmlns:cap=""capitalizer"">
 			ID: first
@@ -9690,7 +9757,8 @@ namespace System.Xml.Tests
             ReaderType readerType,
             TransformType transformType,
             DocType docType
-        ) {
+        )
+        {
             string expected =
                 @"<?xml version=""1.0"" encoding=""utf-8""?><result>
 		1.Test1
@@ -9723,7 +9791,8 @@ namespace System.Xml.Tests
             if (
                 (LoadXSL("showParam.xsl", inputType, readerType) == 1)
                 && (Transform_ArgList("fruits.xml", transformType, docType) == 1)
-            ) {
+            )
+            {
                 VerifyResult(expected);
                 return;
             }
@@ -9776,7 +9845,8 @@ namespace System.Xml.Tests
             ReaderType readerType,
             TransformType transformType,
             DocType docType
-        ) {
+        )
+        {
             string expected =
                 @"<?xml version=""1.0"" encoding=""utf-8""?><result>
 		1.No Value Specified
@@ -9792,7 +9862,8 @@ namespace System.Xml.Tests
             if (
                 (LoadXSL("showParam.xsl", inputType, readerType) == 1)
                 && (Transform_ArgList("fruits.xml", transformType, docType) == 1)
-            ) {
+            )
+            {
                 VerifyResult(expected);
                 return;
             }
@@ -9831,7 +9902,8 @@ namespace System.Xml.Tests
             ReaderType readerType,
             TransformType transformType,
             DocType docType
-        ) {
+        )
+        {
             string expected =
                 @"<?xml version=""1.0"" encoding=""utf-8""?><result>
 		1.No Value Specified
@@ -9847,7 +9919,8 @@ namespace System.Xml.Tests
             if (
                 (LoadXSL("showParam.xsl", inputType, readerType) == 1)
                 && (Transform_ArgList("fruits.xml", transformType, docType) == 1)
-            ) {
+            )
+            {
                 VerifyResult(expected);
                 return;
             }
@@ -9886,7 +9959,8 @@ namespace System.Xml.Tests
             ReaderType readerType,
             TransformType transformType,
             DocType docType
-        ) {
+        )
+        {
             string expected =
                 @"<?xml version=""1.0"" encoding=""utf-8""?><result>
 		1.No Value Specified
@@ -9902,7 +9976,8 @@ namespace System.Xml.Tests
             if (
                 (LoadXSL("showParam.xsl", inputType, readerType) == 1)
                 && (Transform_ArgList("fruits.xml", transformType, docType) == 1)
-            ) {
+            )
+            {
                 VerifyResult(expected);
                 return;
             }
@@ -9941,7 +10016,8 @@ namespace System.Xml.Tests
             ReaderType readerType,
             TransformType transformType,
             DocType docType
-        ) {
+        )
+        {
             string expected =
                 @"<?xml version=""1.0"" encoding=""utf-8""?><result>
 		1.No Value Specified</result>";
@@ -9954,7 +10030,8 @@ namespace System.Xml.Tests
             if (
                 (LoadXSL("showParamLongName.xsl", inputType, readerType) == 1)
                 && (Transform_ArgList("fruits.xml", transformType, docType) == 1)
-            ) {
+            )
+            {
                 VerifyResult(expected);
                 return;
             }
@@ -10008,7 +10085,8 @@ namespace System.Xml.Tests
             ReaderType readerType,
             TransformType transformType,
             DocType docType
-        ) {
+        )
+        {
             string expected =
                 @"<?xml version=""1.0"" encoding=""utf-8""?><result>
 		1.No Value Specified
@@ -10026,7 +10104,8 @@ namespace System.Xml.Tests
             if (
                 (LoadXSL("showParam.xsl", inputType, readerType) == 1)
                 && (Transform_ArgList("fruits.xml", transformType, docType) == 1)
-            ) {
+            )
+            {
                 VerifyResult(expected);
                 return;
             }
@@ -10065,7 +10144,8 @@ namespace System.Xml.Tests
             ReaderType readerType,
             TransformType transformType,
             DocType docType
-        ) {
+        )
+        {
             string expected =
                 @"<?xml version=""1.0"" encoding=""utf-8""?><result>
 		1.Test1
@@ -10083,7 +10163,8 @@ namespace System.Xml.Tests
             if (
                 (LoadXSL("showParam.xsl", inputType, readerType) == 1)
                 && (Transform_ArgList("fruits.xml", transformType, docType) == 1)
-            ) {
+            )
+            {
                 VerifyResult(expected);
                 return;
             }
@@ -10122,7 +10203,8 @@ namespace System.Xml.Tests
             ReaderType readerType,
             TransformType transformType,
             DocType docType
-        ) {
+        )
+        {
             string expected =
                 @"<?xml version=""1.0"" encoding=""utf-8""?><result>
 		1.No Value Specified
@@ -10140,7 +10222,8 @@ namespace System.Xml.Tests
             if (
                 (LoadXSL("showParam.xsl", inputType, readerType) == 1)
                 && (Transform_ArgList("fruits.xml", transformType, docType) == 1)
-            ) {
+            )
+            {
                 VerifyResult(expected);
                 return;
             }
@@ -10179,7 +10262,8 @@ namespace System.Xml.Tests
             ReaderType readerType,
             TransformType transformType,
             DocType docType
-        ) {
+        )
+        {
             string expected =
                 @"<?xml version=""1.0"" encoding=""utf-8""?><result>
 		1.No Value Specified
@@ -10381,7 +10465,8 @@ namespace System.Xml.Tests
             if (
                 (LoadXSL("showParam.xsl", inputType, readerType) == 1)
                 && (Transform_ArgList("fruits.xml", transformType, docType) == 1)
-            ) {
+            )
+            {
                 VerifyResult(expected);
                 return;
             }
@@ -10420,7 +10505,8 @@ namespace System.Xml.Tests
             ReaderType readerType,
             TransformType transformType,
             DocType docType
-        ) {
+        )
+        {
             string expected =
                 @"<?xml version=""1.0"" encoding=""utf-8""?><result>
 		1.Test1
@@ -10441,7 +10527,8 @@ namespace System.Xml.Tests
             if (
                 (LoadXSL("showParam.xsl", inputType, readerType) == 1)
                 && (Transform_ArgList("fruits.xml", transformType, docType) == 1)
-            ) {
+            )
+            {
                 VerifyResult(expected);
                 return;
             }
@@ -10480,7 +10567,8 @@ namespace System.Xml.Tests
             ReaderType readerType,
             TransformType transformType,
             DocType docType
-        ) {
+        )
+        {
             string expected =
                 @"<?xml version=""1.0"" encoding=""utf-8""?><result>
 		1.Test
@@ -10527,7 +10615,8 @@ namespace System.Xml.Tests
             if (
                 (LoadXSL("showParam.xsl", inputType, readerType) == 1)
                 && (Transform_ArgList("fruits.xml", transformType, docType) == 1)
-            ) {
+            )
+            {
                 VerifyResult(expected);
                 return;
             }
@@ -10566,7 +10655,8 @@ namespace System.Xml.Tests
             ReaderType readerType,
             TransformType transformType,
             DocType docType
-        ) {
+        )
+        {
             string expected =
                 @"<?xml version=""1.0"" encoding=""utf-8""?><result>
 		1.No Value Specified
@@ -10586,7 +10676,8 @@ namespace System.Xml.Tests
             if (
                 (LoadXSL("showParam.xsl", inputType, readerType) == 1)
                 && (Transform_ArgList("fruits.xml", transformType, docType) == 1)
-            ) {
+            )
+            {
                 VerifyResult(expected);
                 return;
             }
@@ -10652,7 +10743,8 @@ namespace System.Xml.Tests
             ReaderType readerType,
             TransformType transformType,
             DocType docType
-        ) {
+        )
+        {
             MyObject obj = new MyObject(1, _output);
             m_xsltArg = new XsltArgumentList();
 
@@ -10722,7 +10814,8 @@ namespace System.Xml.Tests
             ReaderType readerType,
             TransformType transformType,
             DocType docType
-        ) {
+        )
+        {
             string expected =
                 @"<?xml version=""1.0"" encoding=""utf-8""?><result>
 		1.No Value Specified
@@ -10743,7 +10836,8 @@ namespace System.Xml.Tests
             if (
                 (LoadXSL("showParam.xsl", inputType, readerType) == 1)
                 && (Transform_ArgList("fruits.xml", transformType, docType) == 1)
-            ) {
+            )
+            {
                 VerifyResult(expected);
                 return;
             }
@@ -10782,7 +10876,8 @@ namespace System.Xml.Tests
             ReaderType readerType,
             TransformType transformType,
             DocType docType
-        ) {
+        )
+        {
             string expected =
                 @"<?xml version=""1.0"" encoding=""utf-8""?><result xmlns:myObj=""urn:my-object"">
 		1.Test1
@@ -10798,7 +10893,8 @@ namespace System.Xml.Tests
             if (
                 (LoadXSL("myObjectDef.xsl", inputType, readerType) == 1)
                 && (Transform_ArgList("fruits.xml", transformType, docType) == 1)
-            ) {
+            )
+            {
                 VerifyResult(expected);
                 return;
             }
@@ -10837,7 +10933,8 @@ namespace System.Xml.Tests
             ReaderType readerType,
             TransformType transformType,
             DocType docType
-        ) {
+        )
+        {
             m_xsltArg = new XsltArgumentList();
             MyObject obj = new MyObject(5, _output);
 
@@ -10888,7 +10985,8 @@ namespace System.Xml.Tests
             ReaderType readerType,
             TransformType transformType,
             DocType docType
-        ) {
+        )
+        {
             string expected =
                 @"<?xml version=""1.0"" encoding=""utf-8""?><result>
 		1.No Value Specified
@@ -10922,7 +11020,8 @@ namespace System.Xml.Tests
             if (
                 (LoadXSL("showParam.xsl", inputType, readerType) == 1)
                 && (Transform_ArgList("fruits.xml", transformType, docType) == 1)
-            ) {
+            )
+            {
                 VerifyResult(expected);
                 return;
             }
@@ -10961,7 +11060,8 @@ namespace System.Xml.Tests
             ReaderType readerType,
             TransformType transformType,
             DocType docType
-        ) {
+        )
+        {
             string expected =
                 @"<?xml version=""1.0"" encoding=""utf-8""?><result xmlns:myObj=""urn:my-object"">
 		1.Test1
@@ -10981,7 +11081,8 @@ namespace System.Xml.Tests
             if (
                 (LoadXSL("myObjectDef.xsl", inputType, readerType) == 1)
                 && (Transform_ArgList("fruits.xml", transformType, docType) == 1)
-            ) {
+            )
+            {
                 VerifyResult(expected);
                 return;
             }
@@ -11020,7 +11121,8 @@ namespace System.Xml.Tests
             ReaderType readerType,
             TransformType transformType,
             DocType docType
-        ) {
+        )
+        {
             int i = 1;
             m_xsltArg = new XsltArgumentList();
 
@@ -11083,7 +11185,8 @@ namespace System.Xml.Tests
             ReaderType readerType,
             TransformType transformType,
             DocType docType
-        ) {
+        )
+        {
             string expected =
                 @"<?xml version=""1.0"" encoding=""utf-8""?><result>
 		1.No Value Specified
@@ -11102,7 +11205,8 @@ namespace System.Xml.Tests
             if (
                 (LoadXSL("showParam.xsl", inputType, readerType) == 1)
                 && (Transform_ArgList("fruits.xml", transformType, docType) == 1)
-            ) {
+            )
+            {
                 VerifyResult(expected);
                 return;
             }
@@ -11137,7 +11241,8 @@ namespace System.Xml.Tests
             ReaderType readerType,
             TransformType transformType,
             DocType docType
-        ) {
+        )
+        {
             string expected =
                 @"<?xml version=""1.0"" encoding=""utf-8""?><result>
 		1.No Value Specified
@@ -11162,7 +11267,8 @@ namespace System.Xml.Tests
             if (
                 (LoadXSL("showParam.xsl", inputType, readerType) == 1)
                 && (Transform_ArgList("fruits.xml", transformType, docType) == 1)
-            ) {
+            )
+            {
                 VerifyResult(expected);
                 return;
             }
@@ -11183,7 +11289,8 @@ namespace System.Xml.Tests
             ReaderType readerType,
             TransformType transformType,
             DocType docType
-        ) {
+        )
+        {
             string expected =
                 @"<?xml version=""1.0"" encoding=""utf-8""?><result>
 		1.No Value Specified
@@ -11199,7 +11306,8 @@ namespace System.Xml.Tests
             if (
                 (LoadXSL("showParam.xsl", inputType, readerType) == 1)
                 && (Transform_ArgList("fruits.xml", transformType, docType) == 1)
-            ) {
+            )
+            {
                 VerifyResult(expected);
                 return;
             }
@@ -11220,7 +11328,8 @@ namespace System.Xml.Tests
             ReaderType readerType,
             TransformType transformType,
             DocType docType
-        ) {
+        )
+        {
             string expected =
                 @"<?xml version=""1.0"" encoding=""utf-8""?><result>
 		1.No Value Specified
@@ -11245,7 +11354,8 @@ namespace System.Xml.Tests
             if (
                 (LoadXSL("showParam.xsl", inputType, readerType) == 1)
                 && (Transform_ArgList("fruits.xml", transformType, docType) == 1)
-            ) {
+            )
+            {
                 VerifyResult(expected);
                 return;
             }
@@ -11266,7 +11376,8 @@ namespace System.Xml.Tests
             ReaderType readerType,
             TransformType transformType,
             DocType docType
-        ) {
+        )
+        {
             MyObject obj = new MyObject(26, _output);
             m_xsltArg = new XsltArgumentList();
 
@@ -11307,7 +11418,8 @@ namespace System.Xml.Tests
             ReaderType readerType,
             TransformType transformType,
             DocType docType
-        ) {
+        )
+        {
             string expected =
                 @"<?xml version=""1.0"" encoding=""utf-8""?><result>
 		1.No Value Specified
@@ -11350,7 +11462,8 @@ namespace System.Xml.Tests
             if (
                 (LoadXSL("showParam.xsl", inputType, readerType) == 1)
                 && (Transform_ArgList("fruits.xml", transformType, docType) == 1)
-            ) {
+            )
+            {
                 VerifyResult(expected);
                 return;
             }
@@ -11371,7 +11484,8 @@ namespace System.Xml.Tests
             ReaderType readerType,
             TransformType transformType,
             DocType docType
-        ) {
+        )
+        {
             string expected =
                 @"<?xml version=""1.0"" encoding=""utf-8""?><result>
 		1.No Value Specified
@@ -11397,7 +11511,8 @@ namespace System.Xml.Tests
             if (
                 (LoadXSL("showParam.xsl", inputType, readerType) == 1)
                 && (Transform_ArgList("fruits.xml", transformType, docType) == 1)
-            ) {
+            )
+            {
                 VerifyResult(expected);
                 return;
             }
@@ -11418,7 +11533,8 @@ namespace System.Xml.Tests
             ReaderType readerType,
             TransformType transformType,
             DocType docType
-        ) {
+        )
+        {
             string expected =
                 @"<?xml version=""1.0"" encoding=""utf-8""?><result>
 		1.Test1
@@ -11441,7 +11557,8 @@ namespace System.Xml.Tests
             if (
                 (LoadXSL("showParam.xsl", inputType, readerType) == 1)
                 && (Transform_ArgList("fruits.xml", transformType, docType) == 1)
-            ) {
+            )
+            {
                 VerifyResult(expected);
                 return;
             }
@@ -11462,7 +11579,8 @@ namespace System.Xml.Tests
             ReaderType readerType,
             TransformType transformType,
             DocType docType
-        ) {
+        )
+        {
             string expected =
                 @"<?xml version=""1.0"" encoding=""utf-8""?><result>
 		1.No Value Specified

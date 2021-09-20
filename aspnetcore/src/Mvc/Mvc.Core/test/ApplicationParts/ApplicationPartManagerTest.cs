@@ -140,7 +140,8 @@ namespace Microsoft.AspNetCore.Mvc.ApplicationParts
             public void PopulateFeature(
                 IEnumerable<ApplicationPart> parts,
                 ViewComponentsFeature feature
-            ) {
+            )
+            {
                 foreach (var part in parts.OfType<ViewComponentsPart>())
                 {
                     _operation(feature, part.Value);
@@ -160,7 +161,8 @@ namespace Microsoft.AspNetCore.Mvc.ApplicationParts
             public void PopulateFeature(
                 IEnumerable<ApplicationPart> parts,
                 ControllersFeature feature
-            ) {
+            )
+            {
                 foreach (var part in parts.OfType<ControllersPart>())
                 {
                     _operation(feature, part.Value);

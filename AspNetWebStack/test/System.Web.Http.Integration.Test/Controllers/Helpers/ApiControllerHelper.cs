@@ -23,7 +23,8 @@ namespace System.Web.Http
             string requestUrl,
             string routeUrl,
             object routeDefault = null
-        ) {
+        )
+        {
             string baseAddress = "http://localhost/";
             HttpConfiguration config = new HttpConfiguration();
             HttpRoute route =
@@ -57,7 +58,8 @@ namespace System.Web.Http
 
         private static void RemoveOptionalRoutingParameters(
             IDictionary<string, object> routeValueDictionary
-        ) {
+        )
+        {
             // Get all keys for which the corresponding value is 'Optional'.
             // ToArray() necessary so that we don't manipulate the dictionary while enumerating.
             string[] matchingKeys = (

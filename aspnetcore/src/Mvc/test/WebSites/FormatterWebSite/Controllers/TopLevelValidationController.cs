@@ -43,7 +43,8 @@ namespace FormatterWebSite.Controllers
             [StringLength(5)] string optionalStringLengthParam,
             [Range(1, 100), Display(Name = "Some Display Name For Param")]
                 int optionalRangeDisplayNameParam
-        ) {
+        )
+        {
             if (ModelState.IsValid)
             {
                 return Content(

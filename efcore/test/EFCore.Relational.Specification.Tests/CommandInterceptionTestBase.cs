@@ -148,7 +148,8 @@ namespace Microsoft.EntityFrameworkCore
         public virtual async Task<string> Intercept_query_to_suppress_execution(
             bool async,
             bool inject
-        ) {
+        )
+        {
             var (context, interceptor) = CreateContext<SuppressingReaderCommandInterceptor>(inject);
             using (context)
             {
@@ -181,7 +182,8 @@ namespace Microsoft.EntityFrameworkCore
                 DbCommand command,
                 CommandEventData eventData,
                 InterceptionResult<DbDataReader> result
-            ) {
+            )
+            {
                 base.ReaderExecuting(command, eventData, result);
 
                 return InterceptionResult<DbDataReader>.SuppressWithResult(new FakeDbDataReader());
@@ -192,7 +194,8 @@ namespace Microsoft.EntityFrameworkCore
                 CommandEventData eventData,
                 InterceptionResult<DbDataReader> result,
                 CancellationToken cancellationToken = default
-            ) {
+            )
+            {
                 base.ReaderExecutingAsync(command, eventData, result, cancellationToken);
 
                 return new ValueTask<InterceptionResult<DbDataReader>>(
@@ -209,7 +212,8 @@ namespace Microsoft.EntityFrameworkCore
         public virtual async Task Intercept_query_to_suppress_command_creation(
             bool async,
             bool inject
-        ) {
+        )
+        {
             var (context, interceptor) = CreateContext<SuppressingCreateCommandInterceptor>(inject);
             using (context)
             {
@@ -237,7 +241,8 @@ namespace Microsoft.EntityFrameworkCore
             public override InterceptionResult<DbCommand> CommandCreating(
                 CommandCorrelatedEventData eventData,
                 InterceptionResult<DbCommand> result
-            ) {
+            )
+            {
                 base.CommandCreating(eventData, result);
 
                 var wrappedCommand = eventData.Connection.CreateCommand();
@@ -251,7 +256,8 @@ namespace Microsoft.EntityFrameworkCore
                 DbCommand command,
                 CommandEventData eventData,
                 InterceptionResult<DbDataReader> result
-            ) {
+            )
+            {
                 Assert.IsType<WrappingDbCommand>(command);
 
                 return base.ReaderExecuting(command, eventData, result);
@@ -262,7 +268,8 @@ namespace Microsoft.EntityFrameworkCore
                 CommandEventData eventData,
                 InterceptionResult<DbDataReader> result,
                 CancellationToken cancellationToken = default
-            ) {
+            )
+            {
                 Assert.IsType<WrappingDbCommand>(command);
 
                 return base.ReaderExecutingAsync(command, eventData, result, cancellationToken);
@@ -321,7 +328,8 @@ namespace Microsoft.EntityFrameworkCore
                 DbCommand command,
                 CommandEventData eventData,
                 InterceptionResult<object> result
-            ) {
+            )
+            {
                 base.ScalarExecuting(command, eventData, result);
 
                 return InterceptionResult<object>.SuppressWithResult(InterceptedResult);
@@ -332,7 +340,8 @@ namespace Microsoft.EntityFrameworkCore
                 CommandEventData eventData,
                 InterceptionResult<object> result,
                 CancellationToken cancellationToken = default
-            ) {
+            )
+            {
                 base.ScalarExecutingAsync(command, eventData, result, cancellationToken);
 
                 return new ValueTask<InterceptionResult<object>>(
@@ -384,7 +393,8 @@ namespace Microsoft.EntityFrameworkCore
                 DbCommand command,
                 CommandEventData eventData,
                 InterceptionResult<int> result
-            ) {
+            )
+            {
                 base.NonQueryExecuting(command, eventData, result);
 
                 return InterceptionResult<int>.SuppressWithResult(2);
@@ -395,7 +405,8 @@ namespace Microsoft.EntityFrameworkCore
                 CommandEventData eventData,
                 InterceptionResult<int> result,
                 CancellationToken cancellationToken = default
-            ) {
+            )
+            {
                 base.NonQueryExecutingAsync(command, eventData, result, cancellationToken);
 
                 return new ValueTask<InterceptionResult<int>>(
@@ -441,7 +452,8 @@ namespace Microsoft.EntityFrameworkCore
                 DbCommand command,
                 CommandEventData eventData,
                 InterceptionResult<DbDataReader> result
-            ) {
+            )
+            {
                 MutateQuery(command);
 
                 return base.ReaderExecuting(command, eventData, result);
@@ -452,7 +464,8 @@ namespace Microsoft.EntityFrameworkCore
                 CommandEventData eventData,
                 InterceptionResult<DbDataReader> result,
                 CancellationToken cancellationToken = default
-            ) {
+            )
+            {
                 MutateQuery(command);
 
                 return base.ReaderExecutingAsync(command, eventData, result, cancellationToken);
@@ -514,7 +527,8 @@ namespace Microsoft.EntityFrameworkCore
                 DbCommand command,
                 CommandEventData eventData,
                 InterceptionResult<object> result
-            ) {
+            )
+            {
                 command.CommandText = MutatedSql;
 
                 return base.ScalarExecuting(command, eventData, result);
@@ -525,7 +539,8 @@ namespace Microsoft.EntityFrameworkCore
                 CommandEventData eventData,
                 InterceptionResult<object> result,
                 CancellationToken cancellationToken = default
-            ) {
+            )
+            {
                 command.CommandText = MutatedSql;
 
                 return base.ScalarExecutingAsync(command, eventData, result, cancellationToken);
@@ -581,7 +596,8 @@ namespace Microsoft.EntityFrameworkCore
                 DbCommand command,
                 CommandEventData eventData,
                 InterceptionResult<int> result
-            ) {
+            )
+            {
                 command.CommandText = MutatedSql;
 
                 return base.NonQueryExecuting(command, eventData, result);
@@ -592,7 +608,8 @@ namespace Microsoft.EntityFrameworkCore
                 CommandEventData eventData,
                 InterceptionResult<int> result,
                 CancellationToken cancellationToken = default
-            ) {
+            )
+            {
                 command.CommandText = MutatedSql;
 
                 return base.NonQueryExecutingAsync(command, eventData, result, cancellationToken);
@@ -607,7 +624,8 @@ namespace Microsoft.EntityFrameworkCore
         public virtual async Task<string> Intercept_query_to_replace_execution(
             bool async,
             bool inject
-        ) {
+        )
+        {
             var (context, interceptor) = CreateContext<QueryReplacingReaderCommandInterceptor>(
                 inject
             );
@@ -641,7 +659,8 @@ namespace Microsoft.EntityFrameworkCore
                 DbCommand command,
                 CommandEventData eventData,
                 InterceptionResult<DbDataReader> result
-            ) {
+            )
+            {
                 base.ReaderExecuting(command, eventData, result);
 
                 // Note: this DbCommand will not get disposed...can be problematic on some providers
@@ -655,7 +674,8 @@ namespace Microsoft.EntityFrameworkCore
                 CommandEventData eventData,
                 InterceptionResult<DbDataReader> result,
                 CancellationToken cancellationToken = default
-            ) {
+            )
+            {
                 await base.ReaderExecutingAsync(command, eventData, result, cancellationToken);
 
                 // Note: this DbCommand will not get disposed...can be problematic on some providers
@@ -726,7 +746,8 @@ namespace Microsoft.EntityFrameworkCore
                 DbCommand command,
                 CommandEventData eventData,
                 InterceptionResult<object> result
-            ) {
+            )
+            {
                 base.ScalarExecuting(command, eventData, result);
 
                 // Note: this DbCommand will not get disposed...can be problematic on some providers
@@ -740,7 +761,8 @@ namespace Microsoft.EntityFrameworkCore
                 CommandEventData eventData,
                 InterceptionResult<object> result,
                 CancellationToken cancellationToken = default
-            ) {
+            )
+            {
                 await base.ScalarExecutingAsync(command, eventData, result, cancellationToken);
 
                 // Note: this DbCommand will not get disposed...can be problematic on some providers
@@ -795,9 +817,8 @@ namespace Microsoft.EntityFrameworkCore
         {
             private readonly string commandText;
 
-            public QueryReplacingNonQueryCommandInterceptor(
-                CommandInterceptionTestBase testBase
-            ) : base(DbCommandMethod.ExecuteNonQuery)
+            public QueryReplacingNonQueryCommandInterceptor(CommandInterceptionTestBase testBase)
+                : base(DbCommandMethod.ExecuteNonQuery)
             {
                 commandText = testBase.NormalizeDelimitersInRawString(
                     "DELETE FROM [Singularity] WHERE [Id] = 77"
@@ -808,7 +829,8 @@ namespace Microsoft.EntityFrameworkCore
                 DbCommand command,
                 CommandEventData eventData,
                 InterceptionResult<int> result
-            ) {
+            )
+            {
                 base.NonQueryExecuting(command, eventData, result);
 
                 // Note: this DbCommand will not get disposed...can be problematic on some providers
@@ -822,7 +844,8 @@ namespace Microsoft.EntityFrameworkCore
                 CommandEventData eventData,
                 InterceptionResult<int> result,
                 CancellationToken cancellationToken = default
-            ) {
+            )
+            {
                 await base.NonQueryExecutingAsync(command, eventData, result, cancellationToken);
 
                 // Note: this DbCommand will not get disposed...can be problematic on some providers
@@ -887,7 +910,8 @@ namespace Microsoft.EntityFrameworkCore
                 DbCommand command,
                 CommandExecutedEventData eventData,
                 DbDataReader result
-            ) {
+            )
+            {
                 base.ReaderExecuted(command, eventData, result);
 
                 return new CompositeFakeDbDataReader(result, new FakeDbDataReader());
@@ -898,7 +922,8 @@ namespace Microsoft.EntityFrameworkCore
                 CommandExecutedEventData eventData,
                 DbDataReader result,
                 CancellationToken cancellationToken = default
-            ) {
+            )
+            {
                 base.ReaderExecutedAsync(command, eventData, result, cancellationToken);
 
                 return new ValueTask<DbDataReader>(
@@ -1036,7 +1061,8 @@ namespace Microsoft.EntityFrameworkCore
                 DbCommand command,
                 CommandExecutedEventData eventData,
                 object result
-            ) {
+            )
+            {
                 base.ScalarExecuted(command, eventData, result);
 
                 return InterceptedResult;
@@ -1047,7 +1073,8 @@ namespace Microsoft.EntityFrameworkCore
                 CommandExecutedEventData eventData,
                 object result,
                 CancellationToken cancellationToken = default
-            ) {
+            )
+            {
                 base.ScalarExecutedAsync(command, eventData, result, cancellationToken);
 
                 return new ValueTask<object>(InterceptedResult);
@@ -1097,7 +1124,8 @@ namespace Microsoft.EntityFrameworkCore
                 DbCommand command,
                 CommandExecutedEventData eventData,
                 int result
-            ) {
+            )
+            {
                 base.NonQueryExecuted(command, eventData, result);
 
                 return 7;
@@ -1108,7 +1136,8 @@ namespace Microsoft.EntityFrameworkCore
                 CommandExecutedEventData eventData,
                 int result,
                 CancellationToken cancellationToken = default
-            ) {
+            )
+            {
                 await base.NonQueryExecutedAsync(command, eventData, result, cancellationToken);
 
                 return 7;
@@ -1311,7 +1340,8 @@ namespace Microsoft.EntityFrameworkCore
                 DbCommand command,
                 CommandEventData eventData,
                 InterceptionResult<DbDataReader> result
-            ) {
+            )
+            {
                 throw new Exception("Bang!");
             }
 
@@ -1320,7 +1350,8 @@ namespace Microsoft.EntityFrameworkCore
                 CommandEventData eventData,
                 InterceptionResult<DbDataReader> result,
                 CancellationToken cancellationToken = default
-            ) {
+            )
+            {
                 throw new Exception("Bang!");
             }
 
@@ -1328,7 +1359,8 @@ namespace Microsoft.EntityFrameworkCore
                 DbCommand command,
                 CommandEventData eventData,
                 InterceptionResult<object> result
-            ) {
+            )
+            {
                 throw new Exception("Bang!");
             }
 
@@ -1337,7 +1369,8 @@ namespace Microsoft.EntityFrameworkCore
                 CommandEventData eventData,
                 InterceptionResult<object> result,
                 CancellationToken cancellationToken = default
-            ) {
+            )
+            {
                 throw new Exception("Bang!");
             }
 
@@ -1345,7 +1378,8 @@ namespace Microsoft.EntityFrameworkCore
                 DbCommand command,
                 CommandEventData eventData,
                 InterceptionResult<int> result
-            ) {
+            )
+            {
                 throw new Exception("Bang!");
             }
 
@@ -1354,7 +1388,8 @@ namespace Microsoft.EntityFrameworkCore
                 CommandEventData eventData,
                 InterceptionResult<int> result,
                 CancellationToken cancellationToken = default
-            ) {
+            )
+            {
                 throw new Exception("Bang!");
             }
         }
@@ -1364,7 +1399,8 @@ namespace Microsoft.EntityFrameworkCore
         [InlineData(true)]
         public virtual async Task Intercept_query_with_one_app_and_one_injected_interceptor(
             bool async
-        ) {
+        )
+        {
             var appInterceptor = new ResultReplacingReaderCommandInterceptor();
             var injectedInterceptor = new MutatingReaderCommandInterceptor();
             using var context = CreateContext(appInterceptor, injectedInterceptor);
@@ -1381,7 +1417,8 @@ namespace Microsoft.EntityFrameworkCore
             ResultReplacingReaderCommandInterceptor interceptor1,
             MutatingReaderCommandInterceptor interceptor2,
             bool async
-        ) {
+        )
+        {
             var results = async
                 ? await context.Set<Singularity>().ToListAsync()
                 : context.Set<Singularity>().ToList();
@@ -1397,7 +1434,8 @@ namespace Microsoft.EntityFrameworkCore
         [InlineData(true)]
         public virtual async Task Intercept_scalar_with_one_app_and_one_injected_interceptor(
             bool async
-        ) {
+        )
+        {
             using var context = CreateContext(
                 new ResultReplacingScalarCommandInterceptor(),
                 new MutatingScalarCommandInterceptor()
@@ -1408,7 +1446,8 @@ namespace Microsoft.EntityFrameworkCore
         private static async Task TestCompositeScalarInterceptors(
             UniverseContext context,
             bool async
-        ) {
+        )
+        {
             var command = context.GetService<IRelationalCommandBuilderFactory>()
                 .Create()
                 .Append("SELECT 1")
@@ -1437,7 +1476,8 @@ namespace Microsoft.EntityFrameworkCore
         [InlineData(true)]
         public virtual async Task Intercept_non_query_one_app_and_one_injected_interceptor(
             bool async
-        ) {
+        )
+        {
             using var context = CreateContext(
                 new ResultReplacingNonQueryCommandInterceptor(),
                 new MutatingNonQueryCommandInterceptor(this)
@@ -1510,7 +1550,8 @@ namespace Microsoft.EntityFrameworkCore
         [InlineData(true)]
         public virtual async Task Intercept_query_with_explicitly_composed_app_interceptor(
             bool async
-        ) {
+        )
+        {
             using var context = CreateContext(
                 new IInterceptor[]
                 {
@@ -1545,7 +1586,8 @@ namespace Microsoft.EntityFrameworkCore
         [InlineData(true)]
         public virtual async Task Intercept_scalar_with_explicitly_composed_app_interceptor(
             bool async
-        ) {
+        )
+        {
             using var context = CreateContext(
                 new IInterceptor[]
                 {
@@ -1561,7 +1603,8 @@ namespace Microsoft.EntityFrameworkCore
         [InlineData(true)]
         public virtual async Task Intercept_non_query_with_explicitly_composed_app_interceptor(
             bool async
-        ) {
+        )
+        {
             using var context = CreateContext(
                 new IInterceptor[]
                 {
@@ -1720,7 +1763,8 @@ namespace Microsoft.EntityFrameworkCore
             DbContext context,
             CommandInterceptorBase interceptor,
             bool async
-        ) {
+        )
+        {
             Assert.Equal(async, interceptor.AsyncCalled);
             Assert.NotEqual(async, interceptor.SyncCalled);
             Assert.NotEqual(interceptor.AsyncCalled, interceptor.SyncCalled);
@@ -1734,7 +1778,8 @@ namespace Microsoft.EntityFrameworkCore
             DbContext context,
             CommandInterceptorBase interceptor,
             bool async
-        ) {
+        )
+        {
             Assert.Equal(async, interceptor.AsyncCalled);
             Assert.NotEqual(async, interceptor.SyncCalled);
             Assert.NotEqual(interceptor.AsyncCalled, interceptor.SyncCalled);
@@ -1778,7 +1823,8 @@ namespace Microsoft.EntityFrameworkCore
             public virtual InterceptionResult<DbCommand> CommandCreating(
                 CommandCorrelatedEventData eventData,
                 InterceptionResult<DbCommand> result
-            ) {
+            )
+            {
                 AssertCreating(eventData);
 
                 return result;
@@ -1795,7 +1841,8 @@ namespace Microsoft.EntityFrameworkCore
                 DbCommand command,
                 CommandEventData eventData,
                 InterceptionResult<DbDataReader> result
-            ) {
+            )
+            {
                 Assert.False(eventData.IsAsync);
                 SyncCalled = true;
                 AssertExecuting(command, eventData);
@@ -1807,7 +1854,8 @@ namespace Microsoft.EntityFrameworkCore
                 DbCommand command,
                 CommandEventData eventData,
                 InterceptionResult<object> result
-            ) {
+            )
+            {
                 Assert.False(eventData.IsAsync);
                 SyncCalled = true;
                 AssertExecuting(command, eventData);
@@ -1819,7 +1867,8 @@ namespace Microsoft.EntityFrameworkCore
                 DbCommand command,
                 CommandEventData eventData,
                 InterceptionResult<int> result
-            ) {
+            )
+            {
                 Assert.False(eventData.IsAsync);
                 SyncCalled = true;
                 AssertExecuting(command, eventData);
@@ -1832,7 +1881,8 @@ namespace Microsoft.EntityFrameworkCore
                 CommandEventData eventData,
                 InterceptionResult<DbDataReader> result,
                 CancellationToken cancellationToken = default
-            ) {
+            )
+            {
                 Assert.True(eventData.IsAsync);
                 AsyncCalled = true;
                 AssertExecuting(command, eventData);
@@ -1845,7 +1895,8 @@ namespace Microsoft.EntityFrameworkCore
                 CommandEventData eventData,
                 InterceptionResult<object> result,
                 CancellationToken cancellationToken = default
-            ) {
+            )
+            {
                 Assert.True(eventData.IsAsync);
                 AsyncCalled = true;
                 AssertExecuting(command, eventData);
@@ -1858,7 +1909,8 @@ namespace Microsoft.EntityFrameworkCore
                 CommandEventData eventData,
                 InterceptionResult<int> result,
                 CancellationToken cancellationToken = default
-            ) {
+            )
+            {
                 Assert.True(eventData.IsAsync);
                 AsyncCalled = true;
                 AssertExecuting(command, eventData);
@@ -1870,7 +1922,8 @@ namespace Microsoft.EntityFrameworkCore
                 DbCommand command,
                 CommandExecutedEventData eventData,
                 DbDataReader result
-            ) {
+            )
+            {
                 Assert.False(eventData.IsAsync);
                 SyncCalled = true;
                 AssertExecuted(command, eventData);
@@ -1882,7 +1935,8 @@ namespace Microsoft.EntityFrameworkCore
                 DbCommand command,
                 CommandExecutedEventData eventData,
                 object result
-            ) {
+            )
+            {
                 Assert.False(eventData.IsAsync);
                 SyncCalled = true;
                 AssertExecuted(command, eventData);
@@ -1894,7 +1948,8 @@ namespace Microsoft.EntityFrameworkCore
                 DbCommand command,
                 CommandExecutedEventData eventData,
                 int result
-            ) {
+            )
+            {
                 Assert.False(eventData.IsAsync);
                 SyncCalled = true;
                 AssertExecuted(command, eventData);
@@ -1907,7 +1962,8 @@ namespace Microsoft.EntityFrameworkCore
                 CommandExecutedEventData eventData,
                 DbDataReader result,
                 CancellationToken cancellationToken = default
-            ) {
+            )
+            {
                 Assert.True(eventData.IsAsync);
                 AsyncCalled = true;
                 AssertExecuted(command, eventData);
@@ -1920,7 +1976,8 @@ namespace Microsoft.EntityFrameworkCore
                 CommandExecutedEventData eventData,
                 object result,
                 CancellationToken cancellationToken = default
-            ) {
+            )
+            {
                 Assert.True(eventData.IsAsync);
                 AsyncCalled = true;
                 AssertExecuted(command, eventData);
@@ -1933,7 +1990,8 @@ namespace Microsoft.EntityFrameworkCore
                 CommandExecutedEventData eventData,
                 int result,
                 CancellationToken cancellationToken = default
-            ) {
+            )
+            {
                 Assert.True(eventData.IsAsync);
                 AsyncCalled = true;
                 AssertExecuted(command, eventData);
@@ -1952,7 +2010,8 @@ namespace Microsoft.EntityFrameworkCore
                 DbCommand command,
                 CommandErrorEventData eventData,
                 CancellationToken cancellationToken = default
-            ) {
+            )
+            {
                 Assert.True(eventData.IsAsync);
                 AsyncCalled = true;
                 AssertFailed(command, eventData);
@@ -1964,7 +2023,8 @@ namespace Microsoft.EntityFrameworkCore
                 DbCommand command,
                 DataReaderDisposingEventData eventData,
                 InterceptionResult result
-            ) {
+            )
+            {
                 Assert.NotNull(eventData.DataReader);
                 Assert.Same(Context, eventData.Context);
                 Assert.Equal(CommandText, command.CommandText);
@@ -1993,7 +2053,8 @@ namespace Microsoft.EntityFrameworkCore
             protected virtual void AssertExecuted(
                 DbCommand command,
                 CommandExecutedEventData eventData
-            ) {
+            )
+            {
                 Assert.Same(Context, eventData.Context);
                 Assert.Equal(CommandText, command.CommandText);
                 Assert.Equal(CommandId, eventData.CommandId);

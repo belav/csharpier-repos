@@ -41,7 +41,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Completion.CompletionSe
             bool? isComplexTextEdit,
             List<CompletionFilter> matchingFilters,
             CompletionItemFlags? flags = null
-        ) {
+        )
+        {
             return base.VerifyWorkerAsync(
                 code,
                 position,

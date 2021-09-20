@@ -30,7 +30,8 @@ namespace System.Linq.Expressions.Interpreter
             LocalVariables locals,
             InstructionArray instructions,
             DebugInfo[] debugInfos
-        ) {
+        )
+        {
             Name = name;
             LocalCount = locals.LocalCount;
             ClosureVariables = locals.ClosureVariables;

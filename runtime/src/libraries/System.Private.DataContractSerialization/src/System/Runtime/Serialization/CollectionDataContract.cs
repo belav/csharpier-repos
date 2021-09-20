@@ -143,15 +143,17 @@ namespace System.Runtime.Serialization
             Type itemType,
             MethodInfo getEnumeratorMethod,
             string? deserializationExceptionMessage
-        ) : base(
-            new CollectionDataContractCriticalHelper(
-                type,
-                kind,
-                itemType,
-                getEnumeratorMethod,
-                deserializationExceptionMessage
+        )
+            : base(
+                new CollectionDataContractCriticalHelper(
+                    type,
+                    kind,
+                    itemType,
+                    getEnumeratorMethod,
+                    deserializationExceptionMessage
+                )
             )
-        ) {
+        {
             InitCollectionDataContract(GetSharedTypeContract(type));
         }
 
@@ -162,16 +164,18 @@ namespace System.Runtime.Serialization
             MethodInfo getEnumeratorMethod,
             MethodInfo? addMethod,
             ConstructorInfo? constructor
-        ) : base(
-            new CollectionDataContractCriticalHelper(
-                type,
-                kind,
-                itemType,
-                getEnumeratorMethod,
-                addMethod,
-                constructor
+        )
+            : base(
+                new CollectionDataContractCriticalHelper(
+                    type,
+                    kind,
+                    itemType,
+                    getEnumeratorMethod,
+                    addMethod,
+                    constructor
+                )
             )
-        ) {
+        {
             InitCollectionDataContract(GetSharedTypeContract(type));
         }
 
@@ -183,26 +187,30 @@ namespace System.Runtime.Serialization
             MethodInfo? addMethod,
             ConstructorInfo? constructor,
             bool isConstructorCheckRequired
-        ) : base(
-            new CollectionDataContractCriticalHelper(
-                type,
-                kind,
-                itemType,
-                getEnumeratorMethod,
-                addMethod,
-                constructor,
-                isConstructorCheckRequired
+        )
+            : base(
+                new CollectionDataContractCriticalHelper(
+                    type,
+                    kind,
+                    itemType,
+                    getEnumeratorMethod,
+                    addMethod,
+                    constructor,
+                    isConstructorCheckRequired
+                )
             )
-        ) {
+        {
             InitCollectionDataContract(GetSharedTypeContract(type));
         }
 
-        private CollectionDataContract(
-            Type type,
-            string invalidCollectionInSharedContractMessage
-        ) : base(
-            new CollectionDataContractCriticalHelper(type, invalidCollectionInSharedContractMessage)
-        ) {
+        private CollectionDataContract(Type type, string invalidCollectionInSharedContractMessage)
+            : base(
+                new CollectionDataContractCriticalHelper(
+                    type,
+                    invalidCollectionInSharedContractMessage
+                )
+            )
+        {
             InitCollectionDataContract(GetSharedTypeContract(type));
         }
 
@@ -215,7 +223,8 @@ namespace System.Runtime.Serialization
             if (
                 _helper.Kind == CollectionKind.Dictionary
                 || _helper.Kind == CollectionKind.GenericDictionary
-            ) {
+            )
+            {
                 _itemContract = _helper.ItemContract;
             }
             _helper.SharedTypeContract = sharedTypeContract;
@@ -442,7 +451,8 @@ namespace System.Runtime.Serialization
                                     || Kind == CollectionKind.Collection
                                     || Kind == CollectionKind.GenericEnumerable
                                 )
-                            ) {
+                            )
+                            {
                                 throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
                                     new InvalidDataContractException(
                                         SR.Format(
@@ -489,7 +499,8 @@ namespace System.Runtime.Serialization
             XmlWriterDelegator xmlWriter,
             object obj,
             XmlObjectSerializerWriteContext context
-        ) {
+        )
+        {
             _helper.IncrementCollectionCount(xmlWriter, obj, context);
         }
 
@@ -558,7 +569,8 @@ namespace System.Runtime.Serialization
                 CollectionKind kind,
                 Type? itemType,
                 CollectionDataContractAttribute? collectionContractAttribute
-            ) {
+            )
+            {
                 _kind = kind;
                 if (itemType != null)
                 {
@@ -981,7 +993,8 @@ namespace System.Runtime.Serialization
                 XmlWriterDelegator xmlWriter,
                 object obj,
                 XmlObjectSerializerWriteContext context
-            ) {
+            )
+            {
                 if (_incrementCollectionCountDelegate == null)
                 {
                     switch (Kind)
@@ -1147,7 +1160,8 @@ namespace System.Runtime.Serialization
                             Kind == CollectionKind.GenericDictionary
                             || Kind == CollectionKind.GenericCollection
                             || Kind == CollectionKind.GenericEnumerable
-                        ) {
+                        )
+                        {
                             Type[] interfaceTypes = enumeratorType.GetInterfaces();
                             foreach (Type interfaceType in interfaceTypes)
                             {
@@ -1156,7 +1170,8 @@ namespace System.Runtime.Serialization
                                     && interfaceType.GetGenericTypeDefinition()
                                         == Globals.TypeOfIEnumeratorGeneric
                                     && interfaceType.GetGenericArguments()[0] == ItemType
-                                ) {
+                                )
+                                {
                                     ienumeratorInterface = interfaceType;
                                     break;
                                 }
@@ -1253,7 +1268,8 @@ namespace System.Runtime.Serialization
             Type type,
             [NotNullWhen(true)] out Type? itemType,
             bool constructorRequired
-        ) {
+        )
+        {
             if (type.IsArray && DataContract.GetBuiltInDataContract(type) == null)
             {
                 itemType = type.GetElementType()!;
@@ -1273,7 +1289,8 @@ namespace System.Runtime.Serialization
         internal static bool TryCreate(
             Type type,
             [NotNullWhen(true)] out DataContract? dataContract
-        ) {
+        )
+        {
             Type itemType;
             return IsCollectionOrTryCreate(
                 type,
@@ -1288,7 +1305,8 @@ namespace System.Runtime.Serialization
         internal static bool CreateGetOnlyCollectionDataContract(
             Type type,
             [NotNullWhen(true)] out DataContract? dataContract
-        ) {
+        )
+        {
             Type itemType;
             if (type.IsArray)
             {
@@ -1311,7 +1329,8 @@ namespace System.Runtime.Serialization
         internal static bool TryCreateGetOnlyCollectionDataContract(
             Type type,
             [NotNullWhen(true)] out DataContract? dataContract
-        ) {
+        )
+        {
             dataContract = DataContract.GetDataContractFromGeneratedAssembly(type);
             if (dataContract == null)
             {
@@ -1351,7 +1370,8 @@ namespace System.Runtime.Serialization
             string name,
             Type type,
             Type interfaceType
-        ) {
+        )
+        {
             Type? t = type.GetInterfaces().Where(it => it.Equals(interfaceType)).FirstOrDefault();
             return t?.GetMethod(name);
         }
@@ -1367,7 +1387,8 @@ namespace System.Runtime.Serialization
             out DataContract? dataContract,
             out Type itemType,
             bool constructorRequired
-        ) {
+        )
+        {
             dataContract = null;
             itemType = Globals.TypeOfObject;
 
@@ -1466,7 +1487,8 @@ namespace System.Runtime.Serialization
                                 if (
                                     interfaceTypeToCheck == Globals.TypeOfICollectionGeneric
                                     || interfaceTypeToCheck == Globals.TypeOfIListGeneric
-                                ) {
+                                )
+                                {
                                     addMethod = Globals.TypeOfICollectionGeneric.MakeGenericType(
                                             itemType
                                         )
@@ -1595,7 +1617,8 @@ namespace System.Runtime.Serialization
                 kind == CollectionKind.Enumerable
                 || kind == CollectionKind.Collection
                 || kind == CollectionKind.GenericEnumerable
-            ) {
+            )
+            {
                 if (multipleDefinitions)
                     knownInterfaceType = Globals.TypeOfIEnumerable;
                 itemType = knownInterfaceType.IsGenericType
@@ -1762,7 +1785,8 @@ namespace System.Runtime.Serialization
             string message,
             string? param,
             ref DataContract? dataContract
-        ) {
+        )
+        {
             if (hasCollectionDataContract)
             {
                 if (tryCreate)
@@ -1806,7 +1830,8 @@ namespace System.Runtime.Serialization
             string message,
             string? param,
             out string deserializationExceptionMessage
-        ) {
+        )
+        {
             deserializationExceptionMessage = GetInvalidCollectionMessage(
                 message,
                 SR.Format(SR.ReadOnlyCollectionDeserialization, GetClrTypeFullName(type)),
@@ -1818,7 +1843,8 @@ namespace System.Runtime.Serialization
             string message,
             string nestedMessage,
             string? param
-        ) {
+        )
+        {
             return (param == null)
               ? SR.Format(message, nestedMessage)
               : SR.Format(message, nestedMessage, param);
@@ -1829,7 +1855,8 @@ namespace System.Runtime.Serialization
             Type interfaceType,
             ref MethodInfo? addMethod,
             ref MethodInfo? getEnumeratorMethod
-        ) {
+        )
+        {
             Type? t = type.GetInterfaces().Where(it => it.Equals(interfaceType)).FirstOrDefault();
             if (t != null)
             {
@@ -1846,7 +1873,8 @@ namespace System.Runtime.Serialization
             bool addMethodOnInterface,
             out MethodInfo? getEnumeratorMethod,
             out MethodInfo? addMethod
-        ) {
+        )
+        {
             addMethod = getEnumeratorMethod = null;
 
             if (addMethodOnInterface)
@@ -1859,7 +1887,8 @@ namespace System.Runtime.Serialization
                 if (
                     addMethod == null
                     || addMethod.GetParameters()[0].ParameterType != addMethodTypeArray[0]
-                ) {
+                )
+                {
                     FindCollectionMethodsOnInterface(
                         type,
                         interfaceType,
@@ -1915,7 +1944,8 @@ namespace System.Runtime.Serialization
                 if (
                     getEnumeratorMethod == null
                     || !Globals.TypeOfIEnumerator.IsAssignableFrom(getEnumeratorMethod.ReturnType)
-                ) {
+                )
+                {
                     Type? ienumerableInterface = interfaceType.GetInterfaces()
                         .Where(
                             t => t.FullName!.StartsWith("System.Collections.Generic.IEnumerable")
@@ -2111,7 +2141,8 @@ namespace System.Runtime.Serialization
             XmlWriterDelegator xmlWriter,
             object obj,
             XmlObjectSerializerWriteContext? context
-        ) {
+        )
+        {
             Debug.Assert(context != null);
 
             // IsGetOnlyCollection value has already been used to create current collectiondatacontract, value can now be reset.
@@ -2122,7 +2153,8 @@ namespace System.Runtime.Serialization
         public override object? ReadXmlValue(
             XmlReaderDelegator xmlReader,
             XmlObjectSerializerReadContext? context
-        ) {
+        )
+        {
             Debug.Assert(context != null);
 
             xmlReader.Read();

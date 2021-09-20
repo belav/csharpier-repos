@@ -291,7 +291,8 @@ namespace System
                         || value.Equals(Unsafe.Add(ref searchSpace, index + 5))
                         || value.Equals(Unsafe.Add(ref searchSpace, index + 6))
                         || value.Equals(Unsafe.Add(ref searchSpace, index + 7))
-                    ) {
+                    )
+                    {
                         goto Found;
                     }
 
@@ -307,7 +308,8 @@ namespace System
                         || value.Equals(Unsafe.Add(ref searchSpace, index + 1))
                         || value.Equals(Unsafe.Add(ref searchSpace, index + 2))
                         || value.Equals(Unsafe.Add(ref searchSpace, index + 3))
-                    ) {
+                    )
+                    {
                         goto Found;
                     }
 
@@ -545,7 +547,8 @@ namespace System
             if (
                 default(T) != null
                 || ((object)value0 != null && (object)value1 != null && (object)value2 != null)
-            ) {
+            )
+            {
                 while ((length - index) >= 8)
                 {
                     lookUp = Unsafe.Add(ref searchSpace, index);
@@ -614,13 +617,15 @@ namespace System
                             (object?)value0 is null
                             || (object?)value1 is null
                             || (object?)value2 is null
-                        ) {
+                        )
+                        {
                             goto Found;
                         }
                     }
                     else if (
                         lookUp.Equals(value0) || lookUp.Equals(value1) || lookUp.Equals(value2)
-                    ) {
+                    )
+                    {
                         goto Found;
                     }
                 }
@@ -995,13 +1000,15 @@ namespace System
                             (object?)value0 is null
                             || (object?)value1 is null
                             || (object?)value2 is null
-                        ) {
+                        )
+                        {
                             goto Found;
                         }
                     }
                     else if (
                         lookUp.Equals(value0) || lookUp.Equals(value1) || lookUp.Equals(value2)
-                    ) {
+                    )
+                    {
                         goto Found;
                     }
                 }

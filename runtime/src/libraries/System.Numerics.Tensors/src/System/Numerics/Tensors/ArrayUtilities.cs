@@ -98,7 +98,8 @@ namespace System.Numerics.Tensors
             int stridesOffset,
             int[] splitStrides,
             int splitStridesOffset
-        ) {
+        )
+        {
             int newStrideIndex = 0;
             for (int i = 0; i < strides.Length; i++)
             {
@@ -132,7 +133,8 @@ namespace System.Numerics.Tensors
             int[] strides,
             ReadOnlySpan<int> indices,
             int startFromDimension = 0
-        ) {
+        )
+        {
             Debug.Assert(strides.Length == indices.Length);
 
             int index = 0;
@@ -158,7 +160,8 @@ namespace System.Numerics.Tensors
             int index,
             int[] indices,
             int startFromDimension = 0
-        ) {
+        )
+        {
             Debug.Assert(
                 reverseStride ? IsAscending(strides) : IsDescending(strides),
                 "Index decomposition requires ordered strides"
@@ -191,7 +194,8 @@ namespace System.Numerics.Tensors
             int index,
             Span<int> indices,
             int startFromDimension = 0
-        ) {
+        )
+        {
             Debug.Assert(
                 reverseStride ? IsAscending(strides) : IsDescending(strides),
                 "Index decomposition requires ordered strides"
@@ -218,7 +222,8 @@ namespace System.Numerics.Tensors
             int[] sourceStrides,
             bool sourceReverseStride,
             int[] transformStrides
-        ) {
+        )
+        {
             Debug.Assert(index >= 0);
             Debug.Assert(
                 sourceReverseStride ? IsAscending(sourceStrides) : IsDescending(sourceStrides),

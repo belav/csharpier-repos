@@ -54,7 +54,8 @@ namespace System.Web.Mvc.Routing
                 if (
                     (startIndex + 1 == segment.Length)
                     || ((startIndex + 1 < segment.Length) && (segment[startIndex + 1] != '{'))
-                ) {
+                )
+                {
                     // If we found an open brace that is followed by a non-open brace, it's
                     // a parameter delimiter.
                     // It's also a delimiter if the open brace is the last character - though
@@ -371,7 +372,8 @@ namespace System.Web.Mvc.Routing
         private static Exception ValidateUriSegment(
             List<PathSubsegment> pathSubsegments,
             HashSet<string> usedParameterNames
-        ) {
+        )
+        {
             bool segmentContainsCatchAll = false;
 
             Type previousSegmentType = null;

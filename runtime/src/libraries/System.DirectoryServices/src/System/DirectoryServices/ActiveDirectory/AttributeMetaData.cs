@@ -21,7 +21,8 @@ namespace System.DirectoryServices.ActiveDirectory
             bool advanced,
             DirectoryServer server,
             Hashtable table
-        ) {
+        )
+        {
             if (advanced)
             {
                 DS_REPL_ATTR_META_DATA_2 attrMetaData = new DS_REPL_ATTR_META_DATA_2();

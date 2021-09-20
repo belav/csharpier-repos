@@ -22,7 +22,8 @@ namespace Microsoft.CodeAnalysis.CSharp.ExpressionEvaluator
             StringBuilder builder,
             Type typeToDisplayOpt,
             string name
-        ) {
+        )
+        {
             if (typeToDisplayOpt != null)
             {
                 // We're showing the type of a value, so "dynamic" does not apply.
@@ -58,7 +59,8 @@ namespace Microsoft.CodeAnalysis.CSharp.ExpressionEvaluator
             ReadOnlyCollection<int> sizes,
             ReadOnlyCollection<int> lowerBounds,
             ObjectDisplayOptions options
-        ) {
+        )
+        {
             Debug.Assert(lmrType.IsArray);
 
             Type originalLmrType = lmrType;
@@ -130,7 +132,8 @@ namespace Microsoft.CodeAnalysis.CSharp.ExpressionEvaluator
             string argument,
             string type,
             DkmClrCastExpressionOptions options
-        ) {
+        )
+        {
             Debug.Assert(!string.IsNullOrEmpty(argument));
             Debug.Assert(!string.IsNullOrEmpty(type));
 
@@ -177,7 +180,8 @@ namespace Microsoft.CodeAnalysis.CSharp.ExpressionEvaluator
             ulong underlyingValue,
             ObjectDisplayOptions options,
             Type typeToDisplayOpt
-        ) {
+        )
+        {
             var usedFields = ArrayBuilder<EnumField>.GetInstance();
             FillUsedEnumFields(usedFields, fields, underlyingValue);
 
@@ -210,7 +214,8 @@ namespace Microsoft.CodeAnalysis.CSharp.ExpressionEvaluator
             ulong underlyingValue,
             ObjectDisplayOptions options,
             Type typeToDisplayOpt
-        ) {
+        )
+        {
             foreach (var field in fields)
             {
                 // First match wins (deterministic since sorted).

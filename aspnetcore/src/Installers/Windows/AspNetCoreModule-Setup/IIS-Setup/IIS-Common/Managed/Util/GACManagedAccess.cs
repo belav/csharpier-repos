@@ -39,7 +39,8 @@ namespace Microsoft.Web.Utility
                                     assemblyName,
                                     gacAssembly.FullAssemblyName
                                 )
-                            ) {
+                            )
+                            {
                                 assemblyList.Add(gacAssemblyCache.AssemblyPath);
                             }
                         }

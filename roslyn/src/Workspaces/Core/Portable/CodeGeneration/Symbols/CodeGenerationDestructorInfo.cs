@@ -29,7 +29,8 @@ namespace Microsoft.CodeAnalysis.CodeGeneration
             IMethodSymbol destructor,
             string typeName,
             ImmutableArray<SyntaxNode> statements
-        ) {
+        )
+        {
             var info = new CodeGenerationDestructorInfo(typeName, statements);
             s_destructorToInfoMap.Add(destructor, info);
         }

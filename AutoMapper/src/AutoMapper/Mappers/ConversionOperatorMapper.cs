@@ -17,7 +17,8 @@ namespace AutoMapper.Internal.Mappers
                     MemberTypes.Method,
                     TypeExtensions.StaticFlags
                 )
-            ) {
+            )
+            {
                 if (sourceMethod.ReturnType == destinationType)
                 {
                     return sourceMethod;

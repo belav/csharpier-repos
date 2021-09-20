@@ -45,7 +45,8 @@ namespace System.Net
         public Task<HttpListenerWebSocketContext> AcceptWebSocketAsync(
             string? subProtocol,
             TimeSpan keepAliveInterval
-        ) {
+        )
+        {
             return AcceptWebSocketAsync(
                 subProtocol,
                 HttpWebSocket.DefaultReceiveBufferSize,

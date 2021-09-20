@@ -138,7 +138,8 @@ namespace Microsoft.AspNetCore.Mvc.IntegrationTests
         [MemberData(nameof(NullAndEmptyBindingInfo))]
         public async Task BinderTypeOnParameterType_WithData_EmptyPrefix_GetsBound(
             BindingInfo bindingInfo
-        ) {
+        )
+        {
             // Arrange
             var parameterBinder = ModelBindingTestHelper.GetParameterBinder();
             var parameters = typeof(TestController).GetMethod(nameof(TestController.Action))
@@ -193,7 +194,8 @@ namespace Microsoft.AspNetCore.Mvc.IntegrationTests
         [MemberData(nameof(NullAndEmptyBindingInfo))]
         public async Task BinderTypeOnProperty_WithData_EmptyPrefix_GetsBound(
             BindingInfo bindingInfo
-        ) {
+        )
+        {
             // Arrange
             var parameterBinder = ModelBindingTestHelper.GetParameterBinder();
             var parameter = new ParameterDescriptor

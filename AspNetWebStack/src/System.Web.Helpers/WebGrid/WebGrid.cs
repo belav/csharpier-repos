@@ -78,20 +78,22 @@ namespace System.Web.Helpers
             string selectionFieldName = null,
             string sortFieldName = null,
             string sortDirectionFieldName = null
-        ) : this(
-            new HttpContextWrapper(Web.HttpContext.Current),
-            defaultSort: defaultSort,
-            rowsPerPage: rowsPerPage,
-            canPage: canPage,
-            canSort: canSort,
-            ajaxUpdateContainerId: ajaxUpdateContainerId,
-            ajaxUpdateCallback: ajaxUpdateCallback,
-            fieldNamePrefix: fieldNamePrefix,
-            pageFieldName: pageFieldName,
-            selectionFieldName: selectionFieldName,
-            sortFieldName: sortFieldName,
-            sortDirectionFieldName: sortDirectionFieldName
-        ) {
+        )
+            : this(
+                new HttpContextWrapper(Web.HttpContext.Current),
+                defaultSort: defaultSort,
+                rowsPerPage: rowsPerPage,
+                canPage: canPage,
+                canSort: canSort,
+                ajaxUpdateContainerId: ajaxUpdateContainerId,
+                ajaxUpdateCallback: ajaxUpdateCallback,
+                fieldNamePrefix: fieldNamePrefix,
+                pageFieldName: pageFieldName,
+                selectionFieldName: selectionFieldName,
+                sortFieldName: sortFieldName,
+                sortDirectionFieldName: sortDirectionFieldName
+            )
+        {
             if (source != null)
             {
                 Bind(source, columnNames);
@@ -112,7 +114,8 @@ namespace System.Web.Helpers
             string selectionFieldName = null,
             string sortFieldName = null,
             string sortDirectionFieldName = null
-        ) {
+        )
+        {
             Debug.Assert(context != null);
 
             if (rowsPerPage < 1)
@@ -231,7 +234,8 @@ namespace System.Web.Helpers
                         !_canPage
                         || !Int32.TryParse(QueryString[PageFieldName], out page)
                         || (page < 1)
-                    ) {
+                    )
+                    {
                         page = 1;
                     }
 
@@ -346,7 +350,8 @@ namespace System.Web.Helpers
                         (!Int32.TryParse(QueryString[SelectionFieldName], out row))
                         || (row < 1)
                         || (_canPage && (row > RowsPerPage))
-                    ) {
+                    )
+                    {
                         row = 0;
                     }
                     _selectedIndex = row - 1;
@@ -417,7 +422,8 @@ namespace System.Web.Helpers
                                 "DESCENDING",
                                 StringComparison.OrdinalIgnoreCase
                             )
-                        ) {
+                        )
+                        {
                             _sortDirection = SortDirection.Descending;
                         }
                     }
@@ -503,7 +509,8 @@ namespace System.Web.Helpers
             if (
                 type.IsGenericType
                 && enumerableType.IsAssignableFrom(type.GetGenericTypeDefinition())
-            ) {
+            )
+            {
                 return type.GetGenericArguments()[0];
             }
             return null;
@@ -514,7 +521,8 @@ namespace System.Web.Helpers
             IEnumerable<string> columnNames = null,
             bool autoSortAndPage = true,
             int rowCount = -1
-        ) {
+        )
+        {
             if (_dataSourceBound)
             {
                 throw new InvalidOperationException(HelpersResources.WebGrid_DataSourceBound);
@@ -580,7 +588,8 @@ namespace System.Web.Helpers
             Func<dynamic, object> format = null,
             string style = null,
             bool canSort = true
-        ) {
+        )
+        {
             if (String.IsNullOrEmpty(columnName))
             {
                 if (format == null)
@@ -679,7 +688,8 @@ namespace System.Web.Helpers
             string lastText = null,
             int numericLinksCount = 5,
             object htmlAttributes = null
-        ) {
+        )
+        {
             Func<dynamic, object> footer = null;
             if (_canPage && (PageCount > 1))
             {
@@ -797,7 +807,8 @@ namespace System.Web.Helpers
             string nextText = null,
             string lastText = null,
             int numericLinksCount = 5
-        ) {
+        )
+        {
             return Pager(
                 mode,
                 firstText,
@@ -827,7 +838,8 @@ namespace System.Web.Helpers
             string lastText,
             int numericLinksCount,
             bool explicitlyCalled
-        ) {
+        )
+        {
             if (!_canPage)
             {
                 throw new NotSupportedException(
@@ -935,7 +947,8 @@ namespace System.Web.Helpers
             IEnumerable<string> exclusions = null,
             Func<dynamic, object> footer = null,
             object htmlAttributes = null
-        ) {
+        )
+        {
             if (columns == null)
             {
                 columns = GetDefaultColumns(exclusions);
@@ -995,7 +1008,8 @@ namespace System.Web.Helpers
         public WebGrid AddSorter<TElement, TProperty>(
             string columnName,
             Expression<Func<TElement, TProperty>> keySelector
-        ) {
+        )
+        {
             CustomSorters[columnName] = keySelector;
             return this;
         }
@@ -1014,7 +1028,8 @@ namespace System.Web.Helpers
                 && !StringComparer.OrdinalIgnoreCase.Equals(_defaultSort, SortColumn)
                 && !columns.Select(c => c.ColumnName)
                     .Contains(SortColumn, StringComparer.OrdinalIgnoreCase)
-            ) {
+            )
+            {
                 throw new InvalidOperationException(
                     String.Format(
                         CultureInfo.CurrentCulture,
@@ -1159,7 +1174,8 @@ namespace System.Web.Helpers
         private static IEnumerable<string> GetDefaultColumnNames(
             IEnumerable<dynamic> source,
             Type elementType
-        ) {
+        )
+        {
             var dynObj = source.FirstOrDefault() as IDynamicMetaObjectProvider;
             if (dynObj != null)
             {

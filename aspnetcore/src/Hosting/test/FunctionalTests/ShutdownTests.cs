@@ -87,7 +87,8 @@ namespace Microsoft.AspNetCore.Hosting.FunctionalTests
                         if (
                             !string.IsNullOrEmpty(data)
                             && data.StartsWith(StartedMessage, StringComparison.Ordinal)
-                        ) {
+                        )
+                        {
                             startedTcs.TrySetResult();
                             output += data.Substring(StartedMessage.Length) + '\n';
                         }

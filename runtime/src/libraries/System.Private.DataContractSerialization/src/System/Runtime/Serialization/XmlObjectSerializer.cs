@@ -72,7 +72,8 @@ namespace System.Runtime.Serialization
             XmlWriterDelegator writer,
             object? graph,
             DataContractResolver? dataContractResolver
-        ) {
+        )
+        {
             try
             {
                 CheckNull(writer, nameof(writer));
@@ -116,7 +117,8 @@ namespace System.Runtime.Serialization
             XmlWriterDelegator writer,
             object? graph,
             DataContractResolver? dataContractResolver
-        ) {
+        )
+        {
             InternalWriteObject(writer, graph);
         }
 
@@ -237,7 +239,8 @@ namespace System.Runtime.Serialization
             XmlDictionaryString? name,
             XmlDictionaryString? ns,
             bool needsContractNsAtRoot
-        ) {
+        )
+        {
             if (name == null) // root name not set explicitly
             {
                 if (!contract.HasRoot)
@@ -262,7 +265,8 @@ namespace System.Runtime.Serialization
             XmlDictionaryString? name,
             XmlDictionaryString? ns,
             DataContract contract
-        ) {
+        )
+        {
             if (name == null)
                 return false;
 
@@ -291,7 +295,8 @@ namespace System.Runtime.Serialization
         internal static bool IsContractDeclared(
             DataContract contract,
             DataContract declaredContract
-        ) {
+        )
+        {
             return (
                     object.ReferenceEquals(contract.Name, declaredContract.Name)
                     && object.ReferenceEquals(contract.Namespace, declaredContract.Namespace)
@@ -343,7 +348,8 @@ namespace System.Runtime.Serialization
         internal virtual object? InternalReadObject(
             XmlReaderDelegator reader,
             bool verifyObjectName
-        ) {
+        )
+        {
             return ReadObject(reader.UnderlyingReader, verifyObjectName);
         }
 
@@ -351,7 +357,8 @@ namespace System.Runtime.Serialization
             XmlReaderDelegator reader,
             bool verifyObjectName,
             DataContractResolver? dataContractResolver
-        ) {
+        )
+        {
             return InternalReadObject(reader, verifyObjectName);
         }
 
@@ -366,7 +373,8 @@ namespace System.Runtime.Serialization
         internal object? ReadObjectHandleExceptions(
             XmlReaderDelegator reader,
             bool verifyObjectName
-        ) {
+        )
+        {
             return ReadObjectHandleExceptions(reader, verifyObjectName, null);
         }
 
@@ -374,7 +382,8 @@ namespace System.Runtime.Serialization
             XmlReaderDelegator reader,
             bool verifyObjectName,
             DataContractResolver? dataContractResolver
-        ) {
+        )
+        {
             try
             {
                 CheckNull(reader, nameof(reader));
@@ -442,7 +451,8 @@ namespace System.Runtime.Serialization
             DataContract contract,
             XmlDictionaryString? name,
             XmlDictionaryString? ns
-        ) {
+        )
+        {
             reader.MoveToElement();
             if (name != null) // root name set explicitly
             {
@@ -515,7 +525,8 @@ namespace System.Runtime.Serialization
         internal static Exception CreateSerializationExceptionWithReaderDetails(
             string errorMessage,
             XmlReaderDelegator reader
-        ) {
+        )
+        {
             return XmlObjectSerializer.CreateSerializationException(
                 TryAddLineInfo(
                     reader,
@@ -539,14 +550,16 @@ namespace System.Runtime.Serialization
         internal static SerializationException CreateSerializationException(
             string errorMessage,
             Exception? innerException
-        ) {
+        )
+        {
             return new SerializationException(errorMessage, innerException);
         }
         internal static string GetTypeInfoError(
             string errorMessage,
             Type? type,
             Exception innerException
-        ) {
+        )
+        {
             string typeInfo =
                 (type == null)
                     ? string.Empty

@@ -54,7 +54,8 @@ namespace System.CommandLine.Help
             ISymbol symbol,
             Func<string?>? descriptor = null,
             Func<string?>? defaultValue = null
-        ) {
+        )
+        {
             if (symbol is null)
             {
                 throw new ArgumentNullException(nameof(symbol));
@@ -333,7 +334,8 @@ namespace System.CommandLine.Help
             static IEnumerable<(string, string)> ZipWithEmpty(
                 IEnumerable<string> first,
                 IEnumerable<string> second
-            ) {
+            )
+            {
                 using var enum1 = first.GetEnumerator();
                 using var enum2 = second.GetEnumerator();
                 bool hasFirst = false,
@@ -397,7 +399,8 @@ namespace System.CommandLine.Help
             if (
                 Customizations.TryGetValue(symbol, out Customization customization)
                 && customization.GetDescriptor?.Invoke() is { } setDescriptor
-            ) {
+            )
+            {
                 descriptor = setDescriptor;
             }
             else
@@ -471,18 +474,21 @@ namespace System.CommandLine.Help
             IIdentifierSymbol parent,
             IArgument argument,
             bool displayArgumentName
-        ) {
+        )
+        {
             string? defaultValue;
             if (
                 Customizations.TryGetValue(parent, out Customization customization)
                 && customization.GetDefaultValue?.Invoke() is { } parentSetDefaultValue
-            ) {
+            )
+            {
                 defaultValue = parentSetDefaultValue;
             }
             else if (
                 Customizations.TryGetValue(argument, out customization)
                 && customization.GetDefaultValue?.Invoke() is { } setDefaultValue
-            ) {
+            )
+            {
                 defaultValue = setDefaultValue;
             }
             else
@@ -491,7 +497,8 @@ namespace System.CommandLine.Help
                 if (
                     argumentDefaultValue is IEnumerable enumerable
                     && !(argumentDefaultValue is string)
-                ) {
+                )
+                {
                     defaultValue = string.Join("|", enumerable.OfType<object>().ToArray());
                 }
                 else
@@ -512,7 +519,8 @@ namespace System.CommandLine.Help
             if (
                 Customizations.TryGetValue(argument, out Customization customization)
                 && customization.GetDescriptor?.Invoke() is { } setDescriptor
-            ) {
+            )
+            {
                 return setDescriptor;
             }
 

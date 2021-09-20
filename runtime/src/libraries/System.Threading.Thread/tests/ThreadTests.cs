@@ -301,7 +301,8 @@ namespace System.Threading.Threads.Tests
             Func<Thread, ApartmentState> getApartmentState,
             Func<Thread, ApartmentState, int> setApartmentState,
             int setType /* 0 = ApartmentState setter, 1 = SetApartmentState, 2 = TrySetApartmentState */
-        ) {
+        )
+        {
             ThreadTestHelpers.RunTestInBackgroundThread(
                 () =>
                 {
@@ -334,7 +335,8 @@ namespace System.Threading.Threads.Tests
             Func<Thread, ApartmentState> getApartmentState,
             Func<Thread, ApartmentState, int> setApartmentState,
             int setType /* 0 = ApartmentState setter, 1 = SetApartmentState, 2 = TrySetApartmentState */
-        ) {
+        )
+        {
             ApartmentState apartmentStateInThread = ApartmentState.Unknown;
             Thread t = null;
             t = new Thread(() => apartmentStateInThread = getApartmentState(t));
@@ -358,7 +360,8 @@ namespace System.Threading.Threads.Tests
             Func<Thread, ApartmentState> getApartmentState,
             Func<Thread, ApartmentState, int> setApartmentState,
             int setType /* 0 = ApartmentState setter, 1 = SetApartmentState, 2 = TrySetApartmentState */
-        ) {
+        )
+        {
             ApartmentState apartmentStateInThread = ApartmentState.Unknown;
             Thread t = null;
             t = new Thread(() => apartmentStateInThread = getApartmentState(t));
@@ -378,7 +381,8 @@ namespace System.Threading.Threads.Tests
             Func<Thread, ApartmentState> getApartmentState,
             Func<Thread, ApartmentState, int> setApartmentState,
             int setType /* 0 = ApartmentState setter, 1 = SetApartmentState, 2 = TrySetApartmentState */
-        ) {
+        )
+        {
             var t = new Thread(() => { });
             Assert.Equal(ApartmentState.Unknown, getApartmentState(t));
             Assert.Equal(0, setApartmentState(t, ApartmentState.Unknown));

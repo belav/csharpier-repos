@@ -71,7 +71,8 @@ namespace Microsoft.EntityFrameworkCore.Query
             Expression valueBufferExpression,
             bool nullable,
             LambdaExpression? materializationCondition
-        ) {
+        )
+        {
             Check.NotNull(entityType, nameof(entityType));
             Check.NotNull(valueBufferExpression, nameof(valueBufferExpression));
 
@@ -83,7 +84,8 @@ namespace Microsoft.EntityFrameworkCore.Query
                 materializationCondition.Parameters.Count != 1
                 || materializationCondition.Parameters[0].Type != typeof(ValueBuffer)
                 || materializationCondition.ReturnType != typeof(IEntityType)
-            ) {
+            )
+            {
                 throw new InvalidOperationException(
                     CoreStrings.QueryEntityMaterializationConditionWrongShape(
                         entityType.DisplayName()
@@ -131,7 +133,8 @@ namespace Microsoft.EntityFrameworkCore.Query
         protected virtual LambdaExpression GenerateMaterializationCondition(
             IEntityType entityType,
             bool nullable
-        ) {
+        )
+        {
             Check.NotNull(entityType, nameof(EntityType));
 
             var valueBufferParameter = Parameter(typeof(ValueBuffer));

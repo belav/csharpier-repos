@@ -347,7 +347,8 @@ namespace Microsoft.Extensions.Http
             public new Task<HttpResponseMessage> SendAsync(
                 HttpRequestMessage request,
                 CancellationToken cancellationToken
-            ) {
+            )
+            {
                 return base.SendAsync(request, cancellationToken);
             }
 
@@ -355,7 +356,8 @@ namespace Microsoft.Extensions.Http
                 HttpRequestMessage request,
                 Context context,
                 CancellationToken cancellationToken
-            ) {
+            )
+            {
                 Assert.NotNull(OnSendAsync);
                 return OnSendAsync(request, context, cancellationToken);
             }

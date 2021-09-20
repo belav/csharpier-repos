@@ -142,7 +142,8 @@ namespace Microsoft.EntityFrameworkCore.SqlAzure
             long? maxSize,
             string serviceTier,
             string performanceLevel
-        ) {
+        )
+        {
             var storeName =
                 new SqlConnectionStringBuilder(connection.ConnectionString).InitialCatalog;
             await Task.Delay(TimeSpan.FromMinutes(5));

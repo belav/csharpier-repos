@@ -31,7 +31,8 @@ namespace System.ComponentModel
                                 name,
                                 StringComparison.OrdinalIgnoreCase
                             )
-                        ) {
+                        )
+                        {
                             return comp;
                         }
                     }

@@ -85,7 +85,8 @@ namespace System.Net.Mail.Tests
             string host,
             string toString,
             string user
-        ) {
+        )
+        {
             MailAddress addressInstance = new MailAddress(inputAddress);
             Assert.Equal(address, addressInstance.Address);
             Assert.Equal(displayName, addressInstance.DisplayName);
@@ -156,7 +157,8 @@ namespace System.Net.Mail.Tests
         public void TestInvalidAddressInConstructor_AddressDisplayName(
             string invalidAddress,
             string displayName
-        ) {
+        )
+        {
             Assert.Throws<FormatException>(() => new MailAddress(invalidAddress, displayName));
         }
 
@@ -225,7 +227,8 @@ namespace System.Net.Mail.Tests
             string host,
             string toString,
             string user
-        ) {
+        )
+        {
             MailAddress addressInstance = new MailAddress(inputAddress, inputDisplayName);
             Assert.Equal(address, addressInstance.Address);
             Assert.Equal(displayName, addressInstance.DisplayName);
@@ -262,7 +265,8 @@ namespace System.Net.Mail.Tests
             string inputAddress,
             string inputDisplayName,
             string displayName
-        ) {
+        )
+        {
             var ma = new MailAddress(inputAddress, inputDisplayName);
             Assert.Equal(displayName, ma.DisplayName);
         }
@@ -368,7 +372,8 @@ namespace System.Net.Mail.Tests
             string host,
             string toString,
             string user
-        ) {
+        )
+        {
             Assert.True(MailAddress.TryCreate(inputAddress, out MailAddress addressInstance));
             Assert.Equal(address, addressInstance.Address);
             Assert.Equal(displayName, addressInstance.DisplayName);
@@ -387,7 +392,8 @@ namespace System.Net.Mail.Tests
             string host,
             string toString,
             string user
-        ) {
+        )
+        {
             Assert.True(
                 MailAddress.TryCreate(
                     inputAddress,
@@ -416,7 +422,8 @@ namespace System.Net.Mail.Tests
             string inputAddress,
             string inputDisplayName,
             string displayName
-        ) {
+        )
+        {
             Assert.True(
                 MailAddress.TryCreate(
                     inputAddress,

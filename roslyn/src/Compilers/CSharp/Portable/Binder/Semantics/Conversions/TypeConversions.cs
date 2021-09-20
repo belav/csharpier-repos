@@ -49,7 +49,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             BoundMethodGroup source,
             TypeSymbol destination,
             ref CompoundUseSiteInfo<AssemblySymbol> useSiteInfo
-        ) {
+        )
+        {
             // Conversions involving method groups require a Binder.
             throw ExceptionUtilities.Unreachable;
         }
@@ -58,7 +59,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             BoundMethodGroup source,
             FunctionPointerTypeSymbol destination,
             ref CompoundUseSiteInfo<AssemblySymbol> useSiteInfo
-        ) {
+        )
+        {
             // Conversions involving method groups require a Binder.
             throw ExceptionUtilities.Unreachable;
         }
@@ -67,7 +69,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             BoundStackAllocArrayCreation sourceExpression,
             TypeSymbol destination,
             ref CompoundUseSiteInfo<AssemblySymbol> useSiteInfo
-        ) {
+        )
+        {
             // Conversions involving stackalloc expressions require a Binder.
             throw ExceptionUtilities.Unreachable;
         }
@@ -76,7 +79,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             BoundUnconvertedInterpolatedString source,
             TypeSymbol destination,
             ref CompoundUseSiteInfo<AssemblySymbol> useSiteInfo
-        ) {
+        )
+        {
             // Conversions involving interpolated strings require a Binder.
             throw ExceptionUtilities.Unreachable;
         }

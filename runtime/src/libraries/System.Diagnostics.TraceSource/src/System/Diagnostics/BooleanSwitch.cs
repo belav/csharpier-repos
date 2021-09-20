@@ -20,11 +20,8 @@ namespace System.Diagnostics
         public BooleanSwitch(string displayName, string? description)
             : base(displayName, description) { }
 
-        public BooleanSwitch(
-            string displayName,
-            string? description,
-            string defaultSwitchValue
-        ) : base(displayName, description, defaultSwitchValue) { }
+        public BooleanSwitch(string displayName, string? description, string defaultSwitchValue)
+            : base(displayName, description, defaultSwitchValue) { }
 
         /// <devdoc>
         ///    <para>Specifies whether the switch is enabled

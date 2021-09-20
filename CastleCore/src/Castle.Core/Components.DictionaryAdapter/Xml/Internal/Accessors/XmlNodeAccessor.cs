@@ -145,7 +145,8 @@ namespace Castle.Components.DictionaryAdapter.Xml
         protected void ConfigureKnownTypesFromAttributes<T>(
             IEnumerable<T> attributes,
             IXmlBehaviorSemantics<T> semantics
-        ) {
+        )
+        {
             foreach (var attribute in attributes)
             {
                 var clrType = semantics.GetClrType(attribute);

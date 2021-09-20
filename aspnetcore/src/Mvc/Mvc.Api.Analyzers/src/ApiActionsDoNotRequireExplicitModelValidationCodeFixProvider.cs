@@ -37,7 +37,8 @@ namespace Microsoft.AspNetCore.Mvc.Api.Analyzers
             if (
                 diagnostic.Id
                 != ApiDiagnosticDescriptors.API1003_ApiActionsDoNotRequireExplicitModelValidationCheck.Id
-            ) {
+            )
+            {
                 return Task.CompletedTask;
             }
 
@@ -62,7 +63,8 @@ namespace Microsoft.AspNetCore.Mvc.Api.Analyzers
 
             protected override async Task<Document> GetChangedDocumentAsync(
                 CancellationToken cancellationToken
-            ) {
+            )
+            {
                 var rootNode = await _document.GetSyntaxRootAsync(cancellationToken)
                     .ConfigureAwait(false);
                 var editor = await DocumentEditor.CreateAsync(_document, cancellationToken)

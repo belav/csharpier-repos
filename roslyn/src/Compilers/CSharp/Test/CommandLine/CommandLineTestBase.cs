@@ -56,7 +56,8 @@ namespace Microsoft.CodeAnalysis.CSharp.CommandLine.UnitTests
             string baseDirectory,
             string sdkDirectory = null,
             string additionalReferenceDirectories = null
-        ) {
+        )
+        {
             sdkDirectory = sdkDirectory ?? SdkDirectory;
             return CSharpCommandLineParser.Default.Parse(
                 args,
@@ -71,7 +72,8 @@ namespace Microsoft.CodeAnalysis.CSharp.CommandLine.UnitTests
             ImmutableArray<DiagnosticAnalyzer> analyzers = default,
             ImmutableArray<ISourceGenerator> generators = default,
             AnalyzerAssemblyLoader loader = null
-        ) {
+        )
+        {
             return CreateCSharpCompiler(
                 null,
                 WorkingDirectory,
@@ -89,7 +91,8 @@ namespace Microsoft.CodeAnalysis.CSharp.CommandLine.UnitTests
             ImmutableArray<DiagnosticAnalyzer> analyzers = default,
             ImmutableArray<ISourceGenerator> generators = default,
             AnalyzerAssemblyLoader loader = null
-        ) {
+        )
+        {
             var buildPaths = RuntimeUtilities.CreateBuildPaths(
                 workingDirectory,
                 sdkDirectory: SdkDirectory

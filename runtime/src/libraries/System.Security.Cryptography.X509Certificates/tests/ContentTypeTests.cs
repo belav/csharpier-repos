@@ -24,7 +24,8 @@ namespace System.Security.Cryptography.X509Certificates.Tests
             string caseName,
             byte[] blob,
             X509ContentType contentType
-        ) {
+        )
+        {
             _ = caseName;
             X509ContentType blobType = X509Certificate2.GetCertContentType(blob);
             Assert.Equal(contentType, blobType);

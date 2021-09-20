@@ -103,7 +103,8 @@ namespace System.Diagnostics.Eventing.Reader
             string user,
             SecureString password,
             SessionAuthentication logOnType
-        ) {
+        )
+        {
             if (server == null)
                 server = "localhost";
 
@@ -236,7 +237,8 @@ namespace System.Diagnostics.Eventing.Reader
             string query,
             string targetFilePath,
             bool tolerateQueryErrors
-        ) {
+        )
+        {
             if (path == null)
                 throw new ArgumentNullException(nameof(path));
 
@@ -266,7 +268,8 @@ namespace System.Diagnostics.Eventing.Reader
             PathType pathType,
             string query,
             string targetFilePath
-        ) {
+        )
+        {
             this.ExportLogAndMessages(
                 path,
                 pathType,
@@ -284,7 +287,8 @@ namespace System.Diagnostics.Eventing.Reader
             string targetFilePath,
             bool tolerateQueryErrors,
             CultureInfo targetCultureInfo
-        ) {
+        )
+        {
             if (targetCultureInfo == null)
                 targetCultureInfo = CultureInfo.CurrentCulture;
             ExportLog(path, pathType, query, targetFilePath, tolerateQueryErrors);

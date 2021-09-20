@@ -23,7 +23,8 @@ namespace Microsoft.CodeAnalysis.FindSymbols.FindReferences
             ISymbol symbol,
             Solution solution,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var results = ArrayBuilder<ISymbol>.GetInstance();
 
             // This is called for all: class, struct or interface member.
@@ -45,7 +46,8 @@ namespace Microsoft.CodeAnalysis.FindSymbols.FindReferences
                                 cancellationToken
                             )
                             .ConfigureAwait(false)
-                    ) {
+                    )
+                    {
                         results.Add(member);
 
                         // We should add implementations only for overridden members but not for hidden ones.

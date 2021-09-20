@@ -17,7 +17,8 @@ namespace System.Reflection.Tests
                     MetadataLoadContext lc = new MetadataLoadContext(
                         new EmptyCoreMetadataAssemblyResolver()
                     )
-                ) {
+                )
+                {
                     lc.LoadFromAssemblyPath(tf.Path);
                 }
 
@@ -78,7 +79,8 @@ namespace System.Reflection.Tests
                 MetadataLoadContext lc = new MetadataLoadContext(
                     new EmptyCoreMetadataAssemblyResolver()
                 )
-            ) {
+            )
+            {
                 a = lc.LoadFromByteArray(TestData.s_SimpleAssemblyImage);
             }
 

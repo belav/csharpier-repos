@@ -440,7 +440,8 @@ namespace System.Security.Cryptography.EcDiffieHellman.Tests
             string prependBytes,
             string appendBytes,
             string answerBytes
-        ) {
+        )
+        {
             byte[] hmacKey = hmacKeyBytes?.HexToByteArray();
             byte[] prepend = prependBytes?.HexToByteArray();
             byte[] append = appendBytes?.HexToByteArray();

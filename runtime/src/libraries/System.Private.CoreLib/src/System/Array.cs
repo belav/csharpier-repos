@@ -122,7 +122,8 @@ namespace System
             Array destinationArray,
             long destinationIndex,
             long length
-        ) {
+        )
+        {
             int isourceIndex = (int)sourceIndex;
             int idestinationIndex = (int)destinationIndex;
             int ilength = (int)length;
@@ -557,7 +558,8 @@ namespace System
             int length,
             object? value,
             IComparer? comparer
-        ) {
+        )
+        {
             if (array == null)
                 ThrowHelper.ThrowArgumentNullException(ExceptionArgument.array);
             int lb = array.GetLowerBound(0);
@@ -777,7 +779,8 @@ namespace System
             T[] array,
             T value,
             System.Collections.Generic.IComparer<T>? comparer
-        ) {
+        )
+        {
             if (array == null)
                 ThrowHelper.ThrowArgumentNullException(ExceptionArgument.array);
             return BinarySearch<T>(array, 0, array.Length, value, comparer);
@@ -794,7 +797,8 @@ namespace System
             int length,
             T value,
             System.Collections.Generic.IComparer<T>? comparer
-        ) {
+        )
+        {
             if (array == null)
                 ThrowHelper.ThrowArgumentNullException(ExceptionArgument.array);
             if (index < 0)
@@ -811,7 +815,8 @@ namespace System
         public static TOutput[] ConvertAll<TInput, TOutput>(
             TInput[] array,
             Converter<TInput, TOutput> converter
-        ) {
+        )
+        {
             if (array == null)
             {
                 ThrowHelper.ThrowArgumentNullException(ExceptionArgument.array);
@@ -1859,7 +1864,8 @@ namespace System
             int index,
             int length,
             IComparer? comparer
-        ) {
+        )
+        {
             if (keys == null)
                 ThrowHelper.ThrowArgumentNullException(ExceptionArgument.keys);
             if (keys.Rank != 1 || (items != null && items.Rank != 1))
@@ -2013,7 +2019,8 @@ namespace System
             TKey[] keys,
             TValue[]? items,
             System.Collections.Generic.IComparer<TKey>? comparer
-        ) {
+        )
+        {
             if (keys == null)
                 ThrowHelper.ThrowArgumentNullException(ExceptionArgument.keys);
             Sort<TKey, TValue>(keys, items, 0, keys.Length, comparer);
@@ -2024,7 +2031,8 @@ namespace System
             int index,
             int length,
             System.Collections.Generic.IComparer<T>? comparer
-        ) {
+        )
+        {
             if (array == null)
                 ThrowHelper.ThrowArgumentNullException(ExceptionArgument.array);
             if (index < 0)
@@ -2050,7 +2058,8 @@ namespace System
             int index,
             int length,
             System.Collections.Generic.IComparer<TKey>? comparer
-        ) {
+        )
+        {
             if (keys == null)
                 ThrowHelper.ThrowArgumentNullException(ExceptionArgument.keys);
             if (index < 0)
@@ -2533,7 +2542,8 @@ namespace System
                             keys.GetValue(lo + child - 1),
                             keys.GetValue(lo + child)
                         ) < 0
-                    ) {
+                    )
+                    {
                         child++;
                     }
 

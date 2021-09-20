@@ -17,7 +17,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Structure
             ref TemporaryArray<BlockSpan> spans,
             BlockStructureOptionProvider optionProvider,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             CSharpStructureHelpers.CollectCommentBlockSpans(
                 enumDeclaration,
                 ref spans,
@@ -27,7 +28,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Structure
             if (
                 !enumDeclaration.OpenBraceToken.IsMissing
                 && !enumDeclaration.CloseBraceToken.IsMissing
-            ) {
+            )
+            {
                 SyntaxNodeOrToken current = enumDeclaration;
                 var nextSibling = current.GetNextSibling();
 

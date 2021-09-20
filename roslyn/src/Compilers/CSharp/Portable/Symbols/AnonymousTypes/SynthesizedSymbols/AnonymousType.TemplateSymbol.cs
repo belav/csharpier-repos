@@ -69,7 +69,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             internal AnonymousTypeTemplateSymbol(
                 AnonymousTypeManager manager,
                 AnonymousTypeDescriptor typeDescr
-            ) {
+            )
+            {
                 this.Manager = manager;
                 this.TypeDescriptorKey = typeDescr.Key;
                 _smallestLocation = typeDescr.Location;
@@ -200,7 +201,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                             currentSmallestLocation,
                             location
                         ) < 0
-                    ) {
+                    )
+                    {
                         // The template's smallest location do not need to be changed
                         return;
                     }
@@ -214,7 +216,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                             ),
                             currentSmallestLocation
                         )
-                    ) {
+                    )
+                    {
                         // Changed successfully, proceed to updating the fields
                         return;
                     }
@@ -360,7 +363,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
 
             internal override ImmutableArray<NamedTypeSymbol> InterfacesNoUseSiteDiagnostics(
                 ConsList<TypeSymbol> basesBeingResolved
-            ) {
+            )
+            {
                 return ImmutableArray<NamedTypeSymbol>.Empty;
             }
 
@@ -404,13 +408,15 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
 
             internal override NamedTypeSymbol GetDeclaredBaseType(
                 ConsList<TypeSymbol> basesBeingResolved
-            ) {
+            )
+            {
                 return this.Manager.System_Object;
             }
 
             internal override ImmutableArray<NamedTypeSymbol> GetDeclaredInterfaces(
                 ConsList<TypeSymbol> basesBeingResolved
-            ) {
+            )
+            {
                 return ImmutableArray<NamedTypeSymbol>.Empty;
             }
 
@@ -479,7 +485,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             internal override void AddSynthesizedAttributes(
                 PEModuleBuilder moduleBuilder,
                 ref ArrayBuilder<SynthesizedAttributeData> attributes
-            ) {
+            )
+            {
                 base.AddSynthesizedAttributes(moduleBuilder, ref attributes);
 
                 AddSynthesizedAttribute(

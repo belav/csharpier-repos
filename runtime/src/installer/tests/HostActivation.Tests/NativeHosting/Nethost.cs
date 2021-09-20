@@ -34,7 +34,8 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation.NativeHosting
             bool explicitLoad,
             bool useAssemblyPath,
             bool isValid
-        ) {
+        )
+        {
             string dotNetRoot = isValid
                 ? Path.Combine(sharedState.ValidInstallRoot, "dotnet")
                 : sharedState.InvalidInstallRoot;
@@ -81,7 +82,8 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation.NativeHosting
             bool explicitLoad,
             bool useAssemblyPath,
             bool isValid
-        ) {
+        )
+        {
             string dotNetRoot = isValid
                 ? Path.Combine(sharedState.ValidInstallRoot, "dotnet")
                 : sharedState.InvalidInstallRoot;
@@ -137,7 +139,8 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation.NativeHosting
             bool useAssemblyPath,
             bool useRegisteredLocation,
             bool isValid
-        ) {
+        )
+        {
             // Override the registry key for self-registered global installs.
             // If using the registered location, set the install location value to the valid/invalid root.
             // If not using the registered location, do not set the value. When the value does not exist,
@@ -151,7 +154,8 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation.NativeHosting
                 var registeredInstallLocationOverride = new RegisteredInstallLocationOverride(
                     sharedState.NethostPath
                 )
-            ) {
+            )
+            {
                 if (useRegisteredLocation)
                 {
                     registeredInstallLocationOverride.SetInstallLocation(
@@ -204,7 +208,8 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation.NativeHosting
         public void GetHostFxrPath_WithAssemblyPath_AppLocalFxr(
             bool explicitLoad,
             bool useDotNetRoot
-        ) {
+        )
+        {
             string appLocalFxrDir = Path.Combine(sharedState.BaseDirectory, "appLocalFxr");
             Directory.CreateDirectory(appLocalFxrDir);
             string assemblyPath = Path.Combine(appLocalFxrDir, "AppLocalFxr.dll");
@@ -268,7 +273,8 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation.NativeHosting
                 var registeredInstallLocationOverride = new RegisteredInstallLocationOverride(
                     sharedState.NethostPath
                 )
-            ) {
+            )
+            {
                 File.WriteAllText(
                     registeredInstallLocationOverride.PathValueOverride,
                     string.Format(value, installLocation)

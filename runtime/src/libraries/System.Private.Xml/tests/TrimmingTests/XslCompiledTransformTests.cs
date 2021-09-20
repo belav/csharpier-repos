@@ -24,7 +24,8 @@ class Program
     </cd>
 </catalog>"
             )
-        ) {
+        )
+        {
             XPathDocument myXPathDoc = new XPathDocument(text);
             XslCompiledTransform myXslTrans = new XslCompiledTransform();
             string xmlStr =
@@ -64,7 +65,8 @@ class Program
                 if (
                     result.Contains("<td>Empire Burlesque</td>")
                     && result.Contains("<td>Bob Dylan</td>")
-                ) {
+                )
+                {
                     return 100;
                 }
             }

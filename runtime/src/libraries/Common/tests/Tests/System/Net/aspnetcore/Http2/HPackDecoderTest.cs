@@ -723,7 +723,8 @@ namespace System.Net.Http.Unit.Tests.HPack
             byte[] encoded,
             string expectedHeaderName,
             string expectedHeaderValue
-        ) {
+        )
+        {
             TestDecode(
                 encoded,
                 expectedHeaderName,
@@ -744,7 +745,8 @@ namespace System.Net.Http.Unit.Tests.HPack
             byte[] encoded,
             string expectedHeaderName,
             string expectedHeaderValue
-        ) {
+        )
+        {
             TestDecode(
                 encoded,
                 expectedHeaderName,
@@ -767,7 +769,8 @@ namespace System.Net.Http.Unit.Tests.HPack
             string expectedHeaderValue,
             bool expectDynamicTableEntry,
             bool byteAtATime
-        ) {
+        )
+        {
             var (dynamicTable, decoder) = CreateDecoderAndTable();
             var handler = new TestHttpHeadersHandler();
 

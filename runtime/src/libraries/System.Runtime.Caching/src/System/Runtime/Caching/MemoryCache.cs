@@ -60,7 +60,8 @@ namespace System.Runtime.Caching
                 string key,
                 ChangeMonitor expensiveObjectDependency,
                 CacheEntryUpdateCallback callback
-            ) {
+            )
+            {
                 _key = key;
                 _expensiveObjectDependency = expensiveObjectDependency;
                 _updateCallback = callback;
@@ -268,13 +269,15 @@ namespace System.Runtime.Caching
             if (
                 policy.AbsoluteExpiration != ObjectCache.InfiniteAbsoluteExpiration
                 && policy.SlidingExpiration != ObjectCache.NoSlidingExpiration
-            ) {
+            )
+            {
                 throw new ArgumentException(SR.Invalid_expiration_combination, nameof(policy));
             }
             if (
                 policy.SlidingExpiration < ObjectCache.NoSlidingExpiration
                 || s_oneYear < policy.SlidingExpiration
-            ) {
+            )
+            {
                 throw new ArgumentOutOfRangeException(
                     nameof(policy),
                     RH.Format(
@@ -292,7 +295,8 @@ namespace System.Runtime.Caching
             if (
                 policy.Priority != CacheItemPriority.Default
                 && policy.Priority != CacheItemPriority.NotRemovable
-            ) {
+            )
+            {
                 throw new ArgumentOutOfRangeException(
                     nameof(policy),
                     RH.Format(
@@ -481,7 +485,8 @@ namespace System.Runtime.Caching
         public override CacheEntryChangeMonitor CreateCacheEntryChangeMonitor(
             IEnumerable<string> keys,
             string regionName = null
-        ) {
+        )
+        {
             if (regionName != null)
             {
                 throw new NotSupportedException(SR.RegionName_not_supported);
@@ -606,7 +611,8 @@ namespace System.Runtime.Caching
             string key,
             MemoryCacheEntry entry,
             CacheEntryRemovedReason reason
-        ) {
+        )
+        {
             MemoryCacheKey cacheKey = new MemoryCacheKey(key);
             MemoryCacheStore store = GetStore(cacheKey);
             return store.Remove(cacheKey, entry, reason);
@@ -653,7 +659,8 @@ namespace System.Runtime.Caching
             object value,
             DateTimeOffset absoluteExpiration,
             string regionName = null
-        ) {
+        )
+        {
             if (regionName != null)
             {
                 throw new NotSupportedException(SR.RegionName_not_supported);
@@ -677,7 +684,8 @@ namespace System.Runtime.Caching
             object value,
             CacheItemPolicy policy,
             string regionName = null
-        ) {
+        )
+        {
             if (regionName != null)
             {
                 throw new NotSupportedException(SR.RegionName_not_supported);
@@ -701,7 +709,8 @@ namespace System.Runtime.Caching
             object value,
             DateTimeOffset absoluteExpiration,
             string regionName = null
-        ) {
+        )
+        {
             if (regionName != null)
             {
                 throw new NotSupportedException(SR.RegionName_not_supported);
@@ -725,7 +734,8 @@ namespace System.Runtime.Caching
             object value,
             CacheItemPolicy policy,
             string regionName = null
-        ) {
+        )
+        {
             if (regionName != null)
             {
                 throw new NotSupportedException(SR.RegionName_not_supported);
@@ -798,7 +808,8 @@ namespace System.Runtime.Caching
             DateTimeOffset absoluteExpiration,
             TimeSpan slidingExpiration,
             CacheEntryUpdateCallback onUpdateCallback
-        ) {
+        )
+        {
             if (key == null)
             {
                 throw new ArgumentNullException(nameof(key));
@@ -807,7 +818,8 @@ namespace System.Runtime.Caching
                 changeMonitors == null
                 && absoluteExpiration == ObjectCache.InfiniteAbsoluteExpiration
                 && slidingExpiration == ObjectCache.NoSlidingExpiration
-            ) {
+            )
+            {
                 throw new ArgumentException(SR.Invalid_argument_combination);
             }
             if (onUpdateCallback == null)
@@ -922,7 +934,8 @@ namespace System.Runtime.Caching
         public override IDictionary<string, object> GetValues(
             IEnumerable<string> keys,
             string regionName = null
-        ) {
+        )
+        {
             if (regionName != null)
             {
                 throw new NotSupportedException(SR.RegionName_not_supported);

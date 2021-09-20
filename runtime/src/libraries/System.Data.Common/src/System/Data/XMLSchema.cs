@@ -88,7 +88,8 @@ namespace System.Data
             string attrName,
             string attrNS,
             bool defVal
-        ) {
+        )
+        {
             string value = element.GetAttribute(attrName, attrNS);
             if (value == null || value.Length == 0)
             {
@@ -370,13 +371,15 @@ namespace System.Data
                     if (
                         (instance is DataRelation)
                         && (propName.StartsWith(Keywords.MSD_REL_PREFIX, StringComparison.Ordinal))
-                    ) {
+                    )
+                    {
                         propName = propName.Substring(4);
                     }
                     else if (
                         (instance is DataRelation)
                         && (propName.StartsWith(Keywords.MSD_FK_PREFIX, StringComparison.Ordinal))
-                    ) {
+                    )
+                    {
                         continue;
                     }
 
@@ -629,7 +632,8 @@ namespace System.Data
                         Keywords.MSD_ISDATASET, /*default:*/
                         false
                     )
-                ) {
+                )
+                {
                     nCount++;
                 }
             }
@@ -765,7 +769,8 @@ namespace System.Data
                         dc.SimpleType != null
                         && dc.SimpleType.Name != null
                         && dc.SimpleType.Name.Length != 0
-                    ) {
+                    )
+                    {
                         _existingSimpleTypeMap[dc.SimpleType.SimpleTypeQualifiedName!] = dc;
                         //                        existingSimpleTypeMap[dc.SimpleType.SimpleTypeQualifiedName] = dc.SimpleType;
                     }
@@ -883,7 +888,8 @@ namespace System.Data
                         if (
                             childRelations[j].Nested
                             && dt.Namespace == childRelations[j].ChildTable.Namespace
-                        ) {
+                        )
+                        {
                             // take NS from Parent table
                             childRelations[j].ChildTable._tableNamespace = null;
                         }
@@ -965,7 +971,8 @@ namespace System.Data
             DataTable table,
             ArrayList tableChildren,
             bool isBase
-        ) {
+        )
+        {
             XmlSchemaObjectCollection items = GetParticleItems(pt);
 
             if (items == null)
@@ -995,7 +1002,8 @@ namespace System.Data
                                 && el.RefName.Namespace == table.Namespace
                             )
                         ) || (IsTable(el) && el.Name == table.TableName)
-                    ) {
+                    )
+                    {
                         if (FromInference)
                         {
                             child = HandleTable(el);
@@ -1066,7 +1074,8 @@ namespace System.Data
             XmlSchemaObjectCollection attributes,
             DataTable table,
             bool isBase
-        ) {
+        )
+        {
             foreach (XmlSchemaObject so in attributes)
             {
                 if (so is XmlSchemaAttribute)
@@ -1090,7 +1099,8 @@ namespace System.Data
             XmlSchemaAttributeGroup attributeGroup,
             DataTable table,
             bool isBase
-        ) {
+        )
+        {
             foreach (XmlSchemaObject obj in attributeGroup.Attributes)
             {
                 if (obj is XmlSchemaAttribute)
@@ -1108,7 +1118,8 @@ namespace System.Data
                                 attributeGroup.Name,
                                 attributeGroupRef.RefName.Namespace
                             )
-                    ) {
+                    )
+                    {
                         attributeGroupResolved = attributeGroup.RedefinedAttributeGroup;
                     }
                     else
@@ -1129,7 +1140,8 @@ namespace System.Data
             DataTable table,
             ArrayList tableChildren,
             bool isNillable
-        ) {
+        )
+        {
             if (_complexTypes.Contains(ct))
                 throw ExceptionBuilder.CircularComplexType(ct.Name);
             bool isBase = false;
@@ -1389,7 +1401,8 @@ namespace System.Data
             XmlSchemaAnnotated element,
             string attrName,
             string defVal
-        ) {
+        )
+        {
             string value = GetMsdataAttribute(element, attrName);
             if (value == null || value.Length == 0)
             {
@@ -1475,7 +1488,8 @@ namespace System.Data
                     Keywords.MSD_CONSTRAINTONLY, /*default:*/
                     false
                 )
-            ) {
+            )
+            {
                 int iExisting = fKey[0].Table.Constraints.InternalIndexOf(name);
                 if (iExisting > -1)
                 {
@@ -1532,7 +1546,8 @@ namespace System.Data
                         Keywords.MSD_ISNESTED, /*default:*/
                         false
                     )
-                ) {
+                )
+                {
                     relation.Nested = true;
                 }
             }
@@ -1742,7 +1757,8 @@ namespace System.Data
             XmlSchemaElement node,
             XmlSchemaComplexType typeNode,
             bool isRef
-        ) {
+        )
+        {
             DataTable table;
             string typeName = GetInstanceName(node);
             ArrayList tableChildren = new ArrayList();
@@ -1891,7 +1907,8 @@ namespace System.Data
                             if (
                                 _tableChild.DataSet.Tables.InternalIndexOf(_tableChild.TableName)
                                 < -1
-                            ) { // if we have multiple tables with the same name
+                            )
+                            { // if we have multiple tables with the same name
                                 if (GetTableNamespace(keyref) == _tableChild.Namespace)
                                 {
                                     HandleKeyref(keyref);
@@ -2182,7 +2199,8 @@ namespace System.Data
             bool isBase,
             XmlAttribute[] attrs,
             bool isNillable
-        ) {
+        )
+        {
             // disallow multiple simple content columns for the table
             if (FromInference && table.XmlText != null)
             { // backward compatability for inference
@@ -2197,7 +2215,8 @@ namespace System.Data
                 typeNode.QualifiedName.Name != null
                 && typeNode.QualifiedName.Name.Length != 0
                 && typeNode.QualifiedName.Namespace != Keywords.XSDNS
-            ) { // this means UDSimpleType
+            )
+            { // this means UDSimpleType
                 xsdType = new SimpleType(typeNode);
                 strType = typeNode.QualifiedName.ToString(); // use qualifed name
                 type = ParseDataType(typeNode.QualifiedName.ToString());
@@ -2333,7 +2352,8 @@ namespace System.Data
             bool isBase,
             XmlAttribute[] attrs,
             bool isNillable
-        ) {
+        )
+        {
             // for Named Simple type support : We should not recieved anything here other than string.
             // there can not be typed simple content
             // disallow multiple simple content columns for the table
@@ -2473,7 +2493,8 @@ namespace System.Data
                     node.QualifiedName.Name != null
                     && node.QualifiedName.Name.Length != 0
                     && node.QualifiedName.Namespace != Keywords.XSDNS
-                ) {
+                )
+                {
                     // this means UDSimpleType
                     strType = node.QualifiedName.ToString(); // use qualifed name
                     type = ParseDataType(node.QualifiedName.ToString()); // search with QName
@@ -2531,7 +2552,8 @@ namespace System.Data
                                 StringComparison.Ordinal
                             )
                         )
-                    ) {
+                    )
+                    {
                         return; // backward compatability
                     }
                     column = new DataColumn(columnName, type, null, MappingType.Attribute); // this is to fix issue with Exception we used to throw for old inference engine if column
@@ -2653,7 +2675,8 @@ namespace System.Data
                     ((XmlSchemaSimpleType)typeNode).Name != null
                     && ((XmlSchemaSimpleType)typeNode).Name.Length != 0
                     && ((XmlSchemaSimpleType)typeNode).QualifiedName.Namespace != Keywords.XSDNS
-                ) {
+                )
+                {
                     strType = ((XmlSchemaSimpleType)typeNode).QualifiedName.ToString(); // use qualifed name
                     type = ParseDataType(strType);
                 }
@@ -2740,7 +2763,8 @@ namespace System.Data
                                 StringComparison.Ordinal
                             )
                         )
-                    ) {
+                    )
+                    {
                         return; // backward compatability
                     }
                     column = new DataColumn(columnName, type, null, MappingType.Element); // this is to fix issue with Exception we used to throw for old inference engine if column
@@ -2936,14 +2960,16 @@ namespace System.Data
                                 if (
                                     node.ElementSchemaType != null
                                     || !(((XmlSchemaElement)el).SchemaType is XmlSchemaComplexType)
-                                ) {
+                                )
+                                {
                                     isComplexTypeOrValidElementType = true;
                                 }
                                 //                          bool isComplexTypeOrValidElementType = (node.ElementType != null || !(((XmlSchemaElement)el).SchemaType is XmlSchemaComplexType));
                                 if (
                                     (((XmlSchemaElement)el).MaxOccurs != decimal.One)
                                     && (!isComplexTypeOrValidElementType)
-                                ) {
+                                )
+                                {
                                     continue;
                                 }
                             }
@@ -3203,7 +3229,8 @@ namespace System.Data
                 if (
                     _namespacesToIgnore.Contains(NamespaceURI)
                     || (NamespaceURI == Keywords.XML_XMLNS && LocalName != "lang")
-                ) { //try next one
+                )
+                { //try next one
                     return MoveToNextAttribute();
                 }
                 else
@@ -3229,7 +3256,8 @@ namespace System.Data
                     if (
                         _namespacesToIgnore.Contains(NamespaceURI)
                         || (NamespaceURI == Keywords.XML_XMLNS && LocalName != "lang")
-                    ) {
+                    )
+                    {
                         flag = true;
                     }
                 }

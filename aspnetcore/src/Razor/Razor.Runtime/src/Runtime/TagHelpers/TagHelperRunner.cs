@@ -56,7 +56,8 @@ namespace Microsoft.AspNetCore.Razor.Runtime.TagHelpers
                 TagHelperExecutionContext executionContext,
                 int i,
                 int count
-            ) {
+            )
+            {
                 await task;
 
                 var tagHelpers = executionContext.TagHelperList;

@@ -176,7 +176,8 @@ namespace System.Security.Cryptography.Tests
             in ECParameters p1,
             in ECParameters p2,
             bool isEqual = true
-        ) {
+        )
+        {
             if (isEqual)
             {
                 Assert.Equal(p1.D, p2.D);
@@ -210,7 +211,8 @@ namespace System.Security.Cryptography.Tests
                 if (
                     RuntimeInformation.IsOSPlatform(OSPlatform.Windows)
                     || string.IsNullOrEmpty(c1.Oid.Value)
-                ) {
+                )
+                {
                     Assert.Equal(c1.Oid.FriendlyName, c2.Oid.FriendlyName);
                 }
                 else

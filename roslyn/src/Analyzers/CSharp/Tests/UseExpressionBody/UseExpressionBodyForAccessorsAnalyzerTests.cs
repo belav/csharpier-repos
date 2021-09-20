@@ -25,7 +25,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseExpressionBody
             string code,
             string fixedCode,
             LanguageVersion version = LanguageVersion.CSharp8
-        ) {
+        )
+        {
             await new VerifyCS.Test
             {
                 TestCode = code,
@@ -52,7 +53,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseExpressionBody
         private static async Task TestWithUseExpressionBodyIncludingPropertiesAndIndexers(
             string code,
             string fixedCode
-        ) {
+        )
+        {
             await new VerifyCS.Test
             {
                 TestCode = code,
@@ -78,7 +80,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseExpressionBody
         private static async Task TestWithUseBlockBodyIncludingPropertiesAndIndexers(
             string code,
             string fixedCode
-        ) {
+        )
+        {
             await new VerifyCS.Test
             {
                 TestCode = code,

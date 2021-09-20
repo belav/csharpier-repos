@@ -39,7 +39,8 @@ namespace System.Configuration
             string outerMessage,
             Exception e,
             IConfigErrorInfo errorInfo
-        ) {
+        )
+        {
             return errorInfo != null
               ? WrapAsConfigException(outerMessage, e, errorInfo.Filename, errorInfo.LineNumber)
               : WrapAsConfigException(outerMessage, e, null, 0);
@@ -50,7 +51,8 @@ namespace System.Configuration
             Exception e,
             string filename,
             int line
-        ) {
+        )
+        {
             // Preserve ConfigurationErrorsException
             ConfigurationErrorsException ce = e as ConfigurationErrorsException;
             if (ce != null)

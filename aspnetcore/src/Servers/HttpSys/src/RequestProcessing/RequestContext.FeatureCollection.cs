@@ -343,7 +343,8 @@ namespace Microsoft.AspNetCore.Server.HttpSys
 
         async Task<X509Certificate2?> ITlsConnectionFeature.GetClientCertificateAsync(
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             if (IsNotInitialized(Fields.ClientCertificate))
             {
                 var method = Server.Options.ClientCertificateMethod;
@@ -488,7 +489,8 @@ namespace Microsoft.AspNetCore.Server.HttpSys
             long offset,
             long? length,
             CancellationToken cancellation
-        ) {
+        )
+        {
             await OnResponseStart();
             await Response.SendFileAsync(path, offset, length, cancellation);
         }
@@ -683,7 +685,8 @@ namespace Microsoft.AspNetCore.Server.HttpSys
                 response.Headers.ContainsKey(HeaderNames.SetCookie)
                 || response.Headers.ContainsKey(HeaderNames.Vary)
                 || response.Headers.ContainsKey(HeaderNames.Pragma)
-            ) {
+            )
+            {
                 return null;
             }
 
@@ -692,7 +695,8 @@ namespace Microsoft.AspNetCore.Server.HttpSys
             if (
                 CacheControlHeaderValue.TryParse(cacheControlHeader.ToString(), out cacheControl)
                 && cacheControl.Public
-            ) {
+            )
+            {
                 if (cacheControl.SharedMaxAge.HasValue)
                 {
                     return cacheControl.SharedMaxAge;
@@ -708,7 +712,8 @@ namespace Microsoft.AspNetCore.Server.HttpSys
                         response.Headers[HeaderNames.Expires].ToString(),
                         out expirationDate
                     )
-                ) {
+                )
+                {
                     var expiresOffset = expirationDate - DateTimeOffset.UtcNow;
                     if (expiresOffset > TimeSpan.Zero)
                     {

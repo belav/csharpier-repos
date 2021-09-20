@@ -88,7 +88,8 @@ namespace Microsoft.AspNetCore.Mvc.Localization.Test
             string viewPath,
             string executingPath,
             string expectedBaseName
-        ) {
+        )
+        {
             // Arrange
             var hostingEnvironment = new Mock<IWebHostEnvironment>();
             hostingEnvironment.Setup(a => a.ApplicationName).Returns(appName);

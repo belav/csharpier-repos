@@ -14,7 +14,8 @@ namespace System.IO.Pipelines
         public PipeCompletionCallbacks(
             List<PipeCompletionCallback> callbacks,
             ExceptionDispatchInfo? edi
-        ) {
+        )
+        {
             _callbacks = callbacks;
             _exception = edi?.SourceException;
         }

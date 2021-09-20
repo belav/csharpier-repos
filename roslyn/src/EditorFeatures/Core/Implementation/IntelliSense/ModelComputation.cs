@@ -121,7 +121,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.IntelliSense
         public void ChainTaskAndNotifyControllerWhenFinished(
             Func<TModel, TModel> transformModel,
             bool updateController = true
-        ) {
+        )
+        {
             ChainTaskAndNotifyControllerWhenFinished(
                 (m, c) => Task.FromResult(transformModel(m)),
                 updateController
@@ -131,7 +132,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.IntelliSense
         public void ChainTaskAndNotifyControllerWhenFinished(
             Func<TModel, CancellationToken, Task<TModel>> transformModelAsync,
             bool updateController = true
-        ) {
+        )
+        {
             AssertIsForeground();
 
             Contract.ThrowIfTrue(

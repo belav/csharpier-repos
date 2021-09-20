@@ -560,7 +560,8 @@ namespace System
         private static void ValidateSourceAndMetadata(
             string source,
             Action<CSharpCompilation> validate
-        ) {
+        )
+        {
             var comp1 = CreateEmptyCompilation(source);
             validate(comp1);
 
@@ -591,7 +592,8 @@ namespace System
                     special == SpecialType.System_Runtime_CompilerServices_RuntimeFeature
                     || special
                         == SpecialType.System_Runtime_CompilerServices_PreserveBaseOverridesAttribute
-                ) {
+                )
+                {
                     Assert.Equal(SymbolKind.ErrorType, symbol.Kind); // Not available
                 }
                 else
@@ -622,7 +624,8 @@ namespace System
                         == SpecialMember.System_Runtime_CompilerServices_RuntimeFeature__UnmanagedSignatureCallingConvention
                     || special
                         == SpecialMember.System_Runtime_CompilerServices_PreserveBaseOverridesAttribute__ctor
-                ) {
+                )
+                {
                     Assert.Null(symbol); // Not available
                 }
                 else
@@ -939,7 +942,8 @@ namespace System
                     WellKnownType.System_Runtime_GCLatencyMode,
                     WellKnownType.System_IFormatProvider
                 }
-            ) {
+            )
+            {
                 Assert.True(type <= WellKnownType.CSharp7Sentinel);
             }
 

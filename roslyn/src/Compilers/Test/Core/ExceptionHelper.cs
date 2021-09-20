@@ -16,7 +16,8 @@ namespace Roslyn.Test.Utilities
         internal static string GetMessageFromResult(
             IEnumerable<Diagnostic> diagnostics,
             string directory
-        ) {
+        )
+        {
             StringBuilder sb = new StringBuilder();
             sb.AppendLine("Emit Failed, binaries saved to: ");
             sb.AppendLine(directory);
@@ -53,7 +54,8 @@ namespace Roslyn.Test.Utilities
             string expectedOutput,
             string actualOutput,
             string exePath
-        ) {
+        )
+        {
             StringBuilder sb = new StringBuilder();
             sb.AppendLine();
             sb.Append("Execution failed for assembly '");

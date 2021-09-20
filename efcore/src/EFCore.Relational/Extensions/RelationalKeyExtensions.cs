@@ -71,7 +71,8 @@ namespace Microsoft.EntityFrameworkCore
         public static string? GetDefaultName(
             this IReadOnlyKey key,
             in StoreObjectIdentifier storeObject
-        ) {
+        )
+        {
             string? name;
             if (key.IsPrimaryKey())
             {
@@ -82,7 +83,8 @@ namespace Microsoft.EntityFrameworkCore
                     var i = 0;
                     i < Metadata.Internal.RelationalEntityTypeExtensions.MaxEntityTypesSharingTable;
                     i++
-                ) {
+                )
+                {
                     var linkingFk = rootKey!.DeclaringEntityType.FindRowInternalForeignKeys(
                             storeObject
                         )
@@ -118,19 +120,22 @@ namespace Microsoft.EntityFrameworkCore
                     var i = 0;
                     i < Metadata.Internal.RelationalEntityTypeExtensions.MaxEntityTypesSharingTable;
                     i++
-                ) {
+                )
+                {
                     IReadOnlyKey? linkedKey = null;
                     foreach (
                         var otherKey in rootKey.DeclaringEntityType.FindRowInternalForeignKeys(
                                 storeObject
                             )
                             .SelectMany(fk => fk.PrincipalEntityType.GetKeys())
-                    ) {
+                    )
+                    {
                         var otherColumnNames = otherKey.Properties.GetColumnNames(storeObject);
                         if (
                             (otherColumnNames != null)
                             && otherColumnNames.SequenceEqual(columnNames)
-                        ) {
+                        )
+                        {
                             linkedKey = otherKey;
                             break;
                         }
@@ -184,7 +189,8 @@ namespace Microsoft.EntityFrameworkCore
             this IConventionKey key,
             string? name,
             bool fromDataAnnotation = false
-        ) {
+        )
+        {
             key.SetOrRemoveAnnotation(
                 RelationalAnnotationNames.Name,
                 Check.NullButNotEmpty(name, nameof(name)),
@@ -227,7 +233,8 @@ namespace Microsoft.EntityFrameworkCore
         public static IReadOnlyKey? FindSharedObjectRootKey(
             this IReadOnlyKey key,
             in StoreObjectIdentifier storeObject
-        ) {
+        )
+        {
             Check.NotNull(key, nameof(key));
 
             var keyName = key.GetName(storeObject);
@@ -239,14 +246,16 @@ namespace Microsoft.EntityFrameworkCore
                 var i = 0;
                 i < Metadata.Internal.RelationalEntityTypeExtensions.MaxEntityTypesSharingTable;
                 i++
-            ) {
+            )
+            {
                 IReadOnlyKey? linkedKey = null;
                 foreach (
                     var otherKey in rootKey.DeclaringEntityType.FindRowInternalForeignKeys(
                             storeObject
                         )
                         .SelectMany(fk => fk.PrincipalEntityType.GetKeys())
-                ) {
+                )
+                {
                     if (otherKey.GetName(storeObject) == keyName)
                     {
                         linkedKey = otherKey;

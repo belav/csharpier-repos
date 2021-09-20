@@ -70,7 +70,8 @@ namespace Microsoft.AspNetCore.Rewrite.ApacheModRewrite
             string value,
             Fields tokenType,
             ref ChangeCookieAction? action
-        ) {
+        )
+        {
             Debug.Assert(action != null || tokenType == Fields.Name);
 
             switch (tokenType)
@@ -100,7 +101,8 @@ namespace Microsoft.AspNetCore.Rewrite.ApacheModRewrite
                             CultureInfo.InvariantCulture,
                             out minutes
                         )
-                    ) {
+                    )
+                    {
                         throw new FormatException(
                             Resources.FormatError_CouldNotParseInteger(value)
                         );

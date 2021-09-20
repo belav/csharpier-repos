@@ -30,14 +30,15 @@ namespace System.Web.Http.Results
             IContentNegotiator contentNegotiator,
             HttpRequestMessage request,
             IEnumerable<MediaTypeFormatter> formatters
-        ) : this(
-            message,
-            new NegotiatedContentResult<HttpError>.DirectDependencyProvider(
-                contentNegotiator,
-                request,
-                formatters
-            )
-        ) { }
+        )
+            : this(
+                message,
+                new NegotiatedContentResult<HttpError>.DirectDependencyProvider(
+                    contentNegotiator,
+                    request,
+                    formatters
+                )
+            ) { }
 
         /// <summary>Initializes a new instance of the <see cref="BadRequestErrorMessageResult"/> class.</summary>
         /// <param name="message">The user-visible error message.</param>
@@ -51,7 +52,8 @@ namespace System.Web.Http.Results
         private BadRequestErrorMessageResult(
             string message,
             NegotiatedContentResult<HttpError>.IDependencyProvider dependencies
-        ) {
+        )
+        {
             if (message == null)
             {
                 throw new ArgumentNullException("message");

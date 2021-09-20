@@ -77,18 +77,20 @@ namespace Microsoft.CodeAnalysis.CSharp
             VariableSlotAllocator slotAllocatorOpt,
             int nextFreeHoistedLocalSlot,
             BindingDiagnosticBag diagnostics
-        ) : base(
-            F,
-            method,
-            state,
-            hoistedVariables,
-            nonReusableLocalProxies,
-            synthesizedLocalOrdinals,
-            slotAllocatorOpt,
-            nextFreeHoistedLocalSlot,
-            diagnostics,
-            useFinalizerBookkeeping: false
-        ) {
+        )
+            : base(
+                F,
+                method,
+                state,
+                hoistedVariables,
+                nonReusableLocalProxies,
+                synthesizedLocalOrdinals,
+                slotAllocatorOpt,
+                nextFreeHoistedLocalSlot,
+                diagnostics,
+                useFinalizerBookkeeping: false
+            )
+        {
             _method = method;
             _asyncMethodBuilderMemberCollection = asyncMethodBuilderMemberCollection;
             _asyncMethodBuilderField = builder;
@@ -134,7 +136,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                         F.Diagnostics.DiagnosticBag,
                         out slotIndex
                     )
-                ) {
+                )
+                {
                     slotIndex = _nextAwaiterId++;
                 }
 
@@ -260,7 +263,8 @@ namespace Microsoft.CodeAnalysis.CSharp
         protected BoundCatchBlock GenerateExceptionHandling(
             LocalSymbol exceptionLocal,
             ImmutableArray<StateMachineFieldSymbol> hoistedLocals
-        ) {
+        )
+        {
             // catch (Exception ex)
             // {
             //     _state = finishedState;
@@ -302,7 +306,8 @@ namespace Microsoft.CodeAnalysis.CSharp
 
         protected BoundStatement GenerateHoistedLocalsCleanup(
             ImmutableArray<StateMachineFieldSymbol> hoistedLocals
-        ) {
+        )
+        {
             var builder = ArrayBuilder<BoundStatement>.GetInstance();
 
             // Cleanup all hoisted local variables
@@ -395,7 +400,8 @@ namespace Microsoft.CodeAnalysis.CSharp
         private BoundBlock VisitAwaitExpression(
             BoundAwaitExpression node,
             BoundExpression resultPlace
-        ) {
+        )
+        {
             var expression = (BoundExpression)Visit(node.Expression);
             var awaitablePlaceholder = node.AwaitableInfo.AwaitableInstancePlaceholder;
 
@@ -465,7 +471,8 @@ namespace Microsoft.CodeAnalysis.CSharp
 
         public override BoundNode VisitAwaitableValuePlaceholder(
             BoundAwaitableValuePlaceholder node
-        ) {
+        )
+        {
             return _placeholderMap[node];
         }
 
@@ -474,7 +481,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             MethodSymbol methodSymbol = null,
             string methodName = null,
             bool resultsDiscarded = false
-        ) {
+        )
+        {
             if ((object)methodSymbol != null)
             {
                 // non-dynamic:
@@ -503,7 +511,8 @@ namespace Microsoft.CodeAnalysis.CSharp
         private BoundExpression GenerateGetIsCompleted(
             LocalSymbol awaiterTemp,
             MethodSymbol getIsCompletedMethod
-        ) {
+        )
+        {
             if (awaiterTemp.Type.IsDynamic())
             {
                 return _dynamicFactory.MakeDynamicConversion(
@@ -718,7 +727,8 @@ namespace Microsoft.CodeAnalysis.CSharp
         private BoundStatement GenerateAwaitOnCompleted(
             TypeSymbol loweredAwaiterType,
             LocalSymbol awaiterTemp
-        ) {
+        )
+        {
             // this.builder.AwaitOnCompleted<TAwaiter,TSM>(ref $awaiterTemp, ref this)
             //    or
             // this.builder.AwaitOnCompleted<TAwaiter,TSM>(ref $awaiterArrayTemp[0], ref this)
@@ -780,7 +790,8 @@ namespace Microsoft.CodeAnalysis.CSharp
         private static ImmutableArray<LocalSymbol> SingletonOrPair(
             LocalSymbol first,
             LocalSymbol secondOpt
-        ) {
+        )
+        {
             return (secondOpt == null)
               ? ImmutableArray.Create(first)
               : ImmutableArray.Create(first, secondOpt);

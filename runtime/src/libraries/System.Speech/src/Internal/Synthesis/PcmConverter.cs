@@ -32,7 +32,8 @@ namespace System.Speech.Internal.Synthesis
                     && outWavFormat.nSamplesPerSec > 0
                     && outWavFormat.nChannels <= 2
                 )
-            ) {
+            )
+            {
                 throw new FormatException();
             }
 
@@ -48,7 +49,8 @@ namespace System.Speech.Internal.Synthesis
                 outWavFormat.nSamplesPerSec == inWavFormat.nSamplesPerSec
                 && _iOutFormatType == _iInFormatType
                 && outWavFormat.nChannels == inWavFormat.nChannels
-            ) {
+            )
+            {
                 convert = false;
             }
             else
@@ -143,7 +145,8 @@ namespace System.Speech.Internal.Synthesis
             WAVEFORMATEX outWavFormat,
             short[] pnBuff,
             float[] memory
-        ) {
+        )
+        {
             if (inWavFormat.nSamplesPerSec != outWavFormat.nSamplesPerSec)
             {
                 float[] pdBuff = Short2Float(pnBuff);
@@ -256,7 +259,8 @@ namespace System.Speech.Internal.Synthesis
             short[] inSamples,
             out short[] leftSamples,
             out short[] rightSamples
-        ) {
+        )
+        {
             int length = inSamples.Length / 2;
 
             leftSamples = new short[length];

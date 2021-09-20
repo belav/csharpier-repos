@@ -55,7 +55,8 @@ namespace System.Net.Http
             HttpRequestMessage request,
             bool async,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             // HttpClientHandler is responsible to call static DiagnosticsHandler.IsEnabled() before forwarding request here.
             // It will check if propagation is on (because parent Activity exists or there is a listener) or off (forcibly disabled)
             // This code won't be called unless consumer unsubscribes from DiagnosticListener right after the check.
@@ -96,13 +97,15 @@ namespace System.Net.Http
             // There is a listener. Check if listener wants to be notified about HttpClient Activities
             if (
                 diagnosticListener.IsEnabled(DiagnosticsHandlerLoggingStrings.ActivityName, request)
-            ) {
+            )
+            {
                 activity = new Activity(DiagnosticsHandlerLoggingStrings.ActivityName);
 
                 // Only send start event to users who subscribed for it, but start activity anyway
                 if (
                     diagnosticListener.IsEnabled(DiagnosticsHandlerLoggingStrings.ActivityStartName)
-                ) {
+                )
+                {
                     StartActivity(diagnosticListener, activity, new ActivityStartData(request));
                 }
                 else
@@ -115,7 +118,8 @@ namespace System.Net.Http
                 diagnosticListener.IsEnabled(
                     DiagnosticsHandlerLoggingStrings.RequestWriteNameDeprecated
                 )
-            ) {
+            )
+            {
                 long timestamp = Stopwatch.GetTimestamp();
                 loggingRequestId = Guid.NewGuid();
                 Write(
@@ -156,7 +160,8 @@ namespace System.Net.Http
                     diagnosticListener.IsEnabled(
                         DiagnosticsHandlerLoggingStrings.ExceptionEventName
                     )
-                ) {
+                )
+                {
                     // If request was initially instrumented, Activity.Current has all necessary context for logging
                     // Request is passed to provide some context if instrumentation was disabled and to avoid
                     // extensive Activity.Tags usage to tunnel request properties
@@ -191,7 +196,8 @@ namespace System.Net.Http
                     diagnosticListener.IsEnabled(
                         DiagnosticsHandlerLoggingStrings.ResponseWriteNameDeprecated
                     )
-                ) {
+                )
+                {
                     long timestamp = Stopwatch.GetTimestamp();
                     Write(
                         diagnosticListener,
@@ -228,7 +234,8 @@ namespace System.Net.Http
                 HttpResponseMessage? response,
                 HttpRequestMessage request,
                 TaskStatus requestTaskStatus
-            ) {
+            )
+            {
                 Response = response;
                 Request = request;
                 RequestTaskStatus = requestTaskStatus;
@@ -296,7 +303,8 @@ namespace System.Net.Http
                 Guid loggingRequestId,
                 long timestamp,
                 TaskStatus requestTaskStatus
-            ) {
+            )
+            {
                 Response = response;
                 LoggingRequestId = loggingRequestId;
                 Timestamp = timestamp;
@@ -330,7 +338,8 @@ namespace System.Net.Http
                         EnableActivityPropagationAppCtxSettingName,
                         out bool enableActivityPropagation
                     )
-                ) {
+                )
+                {
                     return enableActivityPropagation;
                 }
 
@@ -344,7 +353,8 @@ namespace System.Net.Http
                         envVar.Equals("false", StringComparison.OrdinalIgnoreCase)
                         || envVar.Equals("0")
                     )
-                ) {
+                )
+                {
                     // Suppress Activity propagation.
                     return false;
                 }
@@ -366,7 +376,8 @@ namespace System.Net.Http
                     !request.Headers.Contains(
                         DiagnosticsHandlerLoggingStrings.TraceParentHeaderName
                     )
-                ) {
+                )
+                {
                     request.Headers.TryAddWithoutValidation(
                         DiagnosticsHandlerLoggingStrings.TraceParentHeaderName,
                         currentActivity.Id
@@ -395,7 +406,8 @@ namespace System.Net.Http
             using (
                 IEnumerator<KeyValuePair<string, string?>> e =
                     currentActivity.Baggage.GetEnumerator()
-            ) {
+            )
+            {
                 if (e.MoveNext())
                 {
                     var baggage = new List<string>();

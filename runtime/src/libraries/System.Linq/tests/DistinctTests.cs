@@ -320,7 +320,8 @@ namespace System.Linq.Tests
             Func<TSource, TKey> keySelector,
             IEqualityComparer<TKey>? comparer,
             IEnumerable<TSource> expected
-        ) {
+        )
+        {
             Assert.Equal(expected, source.DistinctBy(keySelector, comparer));
         }
 
@@ -331,7 +332,8 @@ namespace System.Linq.Tests
             Func<TSource, TKey> keySelector,
             IEqualityComparer<TKey>? comparer,
             IEnumerable<TSource> expected
-        ) {
+        )
+        {
             Assert.Equal(expected, source.RunOnce().DistinctBy(keySelector, comparer));
         }
 

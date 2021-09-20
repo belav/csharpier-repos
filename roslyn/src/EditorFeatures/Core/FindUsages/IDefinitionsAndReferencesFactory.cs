@@ -49,7 +49,8 @@ namespace Microsoft.CodeAnalysis.Editor.FindUsages
             Solution solution,
             DefinitionItem definitionItem,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             return null;
         }
     }
@@ -63,7 +64,8 @@ namespace Microsoft.CodeAnalysis.Editor.FindUsages
             this ISymbol definition,
             Solution solution,
             bool includeHiddenLocations
-        ) {
+        )
+        {
             // Because we're passing in 'false' for 'includeClassifiedSpans', this won't ever have
             // to actually do async work.  This is because the only asynchrony is when we are trying
             // to compute the classified spans for the locations of the definition.  So it's totally
@@ -87,7 +89,8 @@ namespace Microsoft.CodeAnalysis.Editor.FindUsages
             bool includeHiddenLocations,
             FindReferencesSearchOptions options,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             return ToDefinitionItemAsync(
                 definition,
                 solution,
@@ -106,7 +109,8 @@ namespace Microsoft.CodeAnalysis.Editor.FindUsages
             bool includeHiddenLocations,
             FindReferencesSearchOptions options,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             // Make a single definition item that knows about all the locations of all the symbols in the group.
             var allLocations = group.Symbols.SelectMany(s => s.Locations).ToImmutableArray();
             return ToDefinitionItemAsync(
@@ -129,7 +133,8 @@ namespace Microsoft.CodeAnalysis.Editor.FindUsages
             bool includeClassifiedSpans,
             FindReferencesSearchOptions options,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             return ToDefinitionItemAsync(
                 definition,
                 definition.Locations,
@@ -151,7 +156,8 @@ namespace Microsoft.CodeAnalysis.Editor.FindUsages
             bool includeClassifiedSpans,
             FindReferencesSearchOptions options,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             // Ensure we're working with the original definition for the symbol. I.e. When we're
             // creating definition items, we want to create them for types like Dictionary<TKey,TValue>
             // not some random instantiation of that type.
@@ -252,7 +258,8 @@ namespace Microsoft.CodeAnalysis.Editor.FindUsages
         private static ImmutableDictionary<string, string> GetProperties(
             ISymbol definition,
             bool isPrimary
-        ) {
+        )
+        {
             var properties = ImmutableDictionary<string, string>.Empty;
 
             if (isPrimary)
@@ -285,7 +292,8 @@ namespace Microsoft.CodeAnalysis.Editor.FindUsages
             DefinitionItem definitionItem,
             bool includeHiddenLocations,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var location = referenceLocation.Location;
 
             Debug.Assert(location.IsInSource);

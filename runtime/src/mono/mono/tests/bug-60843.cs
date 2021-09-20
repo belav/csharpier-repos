@@ -30,7 +30,8 @@ class A : Attribute
         bool b,
         [CallerFilePath] string sourceFile = null,
         [CallerLineNumber] int lineNumber = 0
-    ) {
+    )
+    {
         AssertCount++;
 
         if (!b)

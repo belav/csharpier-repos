@@ -156,7 +156,8 @@ namespace System.Net.NetworkInformation.Tests
             {
                 foreach (
                     UnicastIPAddressInformation unicast in nic.GetIPProperties().UnicastAddresses
-                ) {
+                )
+                {
                     if (unicast.Address.Equals(IPAddress.Loopback))
                     {
                         Assert.Equal<int>(
@@ -191,7 +192,8 @@ namespace System.Net.NetworkInformation.Tests
             {
                 foreach (
                     UnicastIPAddressInformation unicast in nic.GetIPProperties().UnicastAddresses
-                ) {
+                )
+                {
                     if (unicast.Address.Equals(IPAddress.IPv6Loopback))
                     {
                         Assert.Equal<int>(

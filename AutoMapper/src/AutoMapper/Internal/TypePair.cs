@@ -14,7 +14,8 @@ namespace AutoMapper.Internal
             in TypePair requestedTypes,
             in TypePair runtimeTypes,
             MemberMap memberMap = null
-        ) {
+        )
+        {
             RequestedTypes = requestedTypes;
             RuntimeTypes = runtimeTypes;
             MemberMap = memberMap;

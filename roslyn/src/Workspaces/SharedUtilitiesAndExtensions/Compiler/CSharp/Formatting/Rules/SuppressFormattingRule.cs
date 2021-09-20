@@ -21,7 +21,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Formatting
             List<SuppressOperation> list,
             SyntaxNode node,
             in NextSuppressOperationAction nextOperation
-        ) {
+        )
+        {
             nextOperation.Invoke();
 
             AddFormatSuppressOperations(list, node);
@@ -38,7 +39,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Formatting
         private static void AddSpecificNodesSuppressOperations(
             List<SuppressOperation> list,
             SyntaxNode node
-        ) {
+        )
+        {
             if (node is IfStatementSyntax ifStatementNode)
             {
                 AddSuppressWrappingIfOnSingleLineOperation(
@@ -65,7 +67,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Formatting
                     SyntaxKind.RecursivePattern,
                     out RecursivePatternSyntax? recursivePattern
                 )
-            ) {
+            )
+            {
                 var positional = recursivePattern.PositionalPatternClause;
                 var property = recursivePattern.PropertyPatternClause;
                 if (positional != null)
@@ -321,7 +324,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Formatting
                     !tryStatement.TryKeyword.IsMissing
                     && tryStatement.Block != null
                     && !tryStatement.Block.CloseBraceToken.IsMissing
-                ) {
+                )
+                {
                     AddSuppressWrappingIfOnSingleLineOperation(
                         list,
                         tryStatement.TryKeyword,
@@ -337,7 +341,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Formatting
                     !catchClause.CatchKeyword.IsMissing
                     && catchClause.Block != null
                     && !catchClause.Block.CloseBraceToken.IsMissing
-                ) {
+                )
+                {
                     AddSuppressWrappingIfOnSingleLineOperation(
                         list,
                         catchClause.CatchKeyword,
@@ -353,7 +358,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Formatting
                     !finallyClause.FinallyKeyword.IsMissing
                     && finallyClause.Block != null
                     && !finallyClause.Block.CloseBraceToken.IsMissing
-                ) {
+                )
+                {
                     AddSuppressWrappingIfOnSingleLineOperation(
                         list,
                         finallyClause.FinallyKeyword,
@@ -375,10 +381,12 @@ namespace Microsoft.CodeAnalysis.CSharp.Formatting
         private static void AddStatementExceptBlockSuppressOperations(
             List<SuppressOperation> list,
             SyntaxNode node
-        ) {
+        )
+        {
             if (
                 !(node is StatementSyntax statementNode) || statementNode.Kind() == SyntaxKind.Block
-            ) {
+            )
+            {
                 return;
             }
 
@@ -391,7 +399,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Formatting
         private static void AddFormatSuppressOperations(
             List<SuppressOperation> list,
             SyntaxNode node
-        ) {
+        )
+        {
             if (!node.ContainsDirectives)
             {
                 return;
@@ -475,7 +484,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Formatting
         private static bool IsFormatDirective(
             DirectiveTriviaSyntax? trivia,
             SyntaxKind disableOrRestoreKeyword
-        ) {
+        )
+        {
             if (!(trivia is PragmaWarningDirectiveTriviaSyntax pragmaWarningDirectiveTrivia))
             {
                 return false;
@@ -485,7 +495,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Formatting
                 !pragmaWarningDirectiveTrivia.DisableOrRestoreKeyword.IsKind(
                     disableOrRestoreKeyword
                 )
-            ) {
+            )
+            {
                 return false;
             }
 
@@ -503,7 +514,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Formatting
                     || identifierName.Identifier.ValueText.Equals(
                         FormattingDiagnosticIds.FormattingDiagnosticId
                     )
-                ) {
+                )
+                {
                     return true;
                 }
             }
@@ -514,7 +526,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Formatting
         private static void AddInitializerSuppressOperations(
             List<SuppressOperation> list,
             SyntaxNode node
-        ) {
+        )
+        {
             // array or collection initializer case
             if (node.IsInitializerForArrayOrCollectionCreationExpression())
             {
@@ -551,7 +564,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Formatting
             List<SuppressOperation> list,
             SyntaxNode parent,
             IEnumerable<SyntaxNode> items
-        ) {
+        )
+        {
             // make creation node itself to not break into multiple line, if it is on same line
             AddSuppressWrappingIfOnSingleLineOperation(
                 list,

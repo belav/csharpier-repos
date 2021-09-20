@@ -23,7 +23,8 @@ namespace System.Speech.Recognition
             DisplayAttributes displayAttributes,
             TimeSpan audioPosition,
             TimeSpan audioDuration
-        ) {
+        )
+        {
             if (lexicalForm == null)
             {
                 throw new ArgumentNullException(nameof(lexicalForm));

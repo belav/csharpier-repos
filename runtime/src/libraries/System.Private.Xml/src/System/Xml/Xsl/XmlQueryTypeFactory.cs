@@ -340,7 +340,8 @@ namespace System.Xml.Xsl
         private static List<XmlQueryType> PrimeChoice(
             List<XmlQueryType> accumulator,
             IList<XmlQueryType> types
-        ) {
+        )
+        {
             foreach (XmlQueryType sourceItem in types)
             {
                 AddItemToChoice(accumulator, sourceItem);
@@ -646,7 +647,8 @@ namespace System.Xml.Xsl
                 XmlQualifiedNameTest nameTest,
                 XmlSchemaType contentType,
                 bool isNillable
-            ) {
+            )
+            {
                 // If this is a Document, Element, or Attribute,
                 switch (code)
                 {
@@ -700,7 +702,8 @@ namespace System.Xml.Xsl
                 bool isNillable,
                 bool isStrict,
                 bool isNotRtf
-            ) {
+            )
+            {
                 Debug.Assert(nameTest != null, "nameTest cannot be null");
                 Debug.Assert(schemaType != null, "schemaType cannot be null");
                 _code = code;
@@ -1381,7 +1384,8 @@ namespace System.Xml.Xsl
             XmlQualifiedNameTest nameTest,
             XmlSchemaType contentType,
             bool isNillable
-        ) {
+        )
+        {
             return ItemType.Create(
                 s_nodeKindToTypeCode[(int)kind],
                 nameTest,
@@ -1459,7 +1463,8 @@ namespace System.Xml.Xsl
             XmlQualifiedNameTest nameTest,
             XmlSchemaType contentType,
             bool isNillable
-        ) {
+        )
+        {
             return ItemType.Create(code, nameTest, contentType, isNillable);
         }
 
@@ -1505,7 +1510,8 @@ namespace System.Xml.Xsl
             XmlSchemaType contentType,
             bool isNillable,
             XmlQueryCardinality card
-        ) {
+        )
+        {
             return SequenceType.Create(
                 ItemType.Create(code, nameTest, contentType, isNillable),
                 card
@@ -1557,7 +1563,8 @@ namespace System.Xml.Xsl
         private List<XmlQueryType> PrimeIntersect(
             IList<XmlQueryType> left,
             IList<XmlQueryType> right
-        ) {
+        )
+        {
             List<XmlQueryType> list = new List<XmlQueryType>();
 
             foreach (XmlQueryType leftItem in left)
@@ -1611,14 +1618,16 @@ namespace System.Xml.Xsl
                         if (
                             sourceSchemaType == XmlSchemaComplexType.UntypedAnyType
                             || sourceSchemaType == DatatypeImplementation.UntypedAtomicType
-                        ) {
+                        )
+                        {
                             AddItemToChoice(list, UntypedAtomic);
                             card |= XmlQueryCardinality.One;
                         }
                         else if (
                             sourceSchemaType == XmlSchemaComplexType.AnyType
                             || sourceSchemaType == DatatypeImplementation.AnySimpleType
-                        ) {
+                        )
+                        {
                             AddItemToChoice(list, AnyAtomicType);
                             card = XmlQueryCardinality.ZeroOrMore;
                         }
@@ -1936,7 +1945,8 @@ namespace System.Xml.Xsl
                         if (
                             (filter.NodeKinds & (XmlNodeKindFlags.Element | XmlNodeKindFlags.Text))
                             != 0
-                        ) {
+                        )
+                        {
                             Dictionary<XmlQualifiedName, XmlQueryCardinality> allTypes =
                                 new Dictionary<XmlQualifiedName, XmlQueryCardinality>();
                             XmlSchemaType sourceSchemaType = sourceItem.SchemaType;
@@ -2041,7 +2051,8 @@ namespace System.Xml.Xsl
             XmlSchemaObjectTable attributeUses,
             XmlSchemaAnyAttribute attributeWildcard,
             XmlQueryType filter
-        ) {
+        )
+        {
             XmlQueryCardinality card = XmlQueryCardinality.Zero;
             if (attributeWildcard != null)
             {
@@ -2137,7 +2148,8 @@ namespace System.Xml.Xsl
             Dictionary<XmlQualifiedName, XmlQueryCardinality> allTypes,
             XmlSchemaParticle particle,
             XmlQueryType filter
-        ) {
+        )
+        {
             XmlQueryCardinality card = XmlQueryCardinality.None;
             XmlSchemaElement element = particle as XmlSchemaElement;
             if (element != null)
@@ -2189,7 +2201,8 @@ namespace System.Xml.Xsl
             Dictionary<XmlQualifiedName, XmlQueryCardinality> allTypes,
             XmlSchemaType sourceSchemaType,
             XmlQueryType filter
-        ) {
+        )
+        {
             XmlQueryCardinality card = XmlQueryCardinality.None;
             if (sourceSchemaType == XmlSchemaComplexType.UntypedAnyType)
             {
@@ -2209,7 +2222,8 @@ namespace System.Xml.Xsl
                 if (
                     complexType.QualifiedName.IsEmpty
                     || !allTypes.TryGetValue(complexType.QualifiedName, out card)
-                ) {
+                )
+                {
                     allTypes[complexType.QualifiedName] = XmlQueryCardinality.ZeroOrMore; // take care of left recursion
                     card = AddDescendantParticle(
                         list,
@@ -2260,7 +2274,8 @@ namespace System.Xml.Xsl
             List<XmlQueryType> list,
             XmlSchemaParticle particle,
             XmlQueryType filter
-        ) {
+        )
+        {
             XmlQueryCardinality card = XmlQueryCardinality.None;
             XmlSchemaElement element = particle as XmlSchemaElement;
             if (element != null)
@@ -2349,7 +2364,8 @@ namespace System.Xml.Xsl
             List<XmlQueryType> list,
             XmlQueryType source,
             XmlQueryType filter
-        ) {
+        )
+        {
             return AddFilteredPrime(list, source, filter, false);
         }
         private XmlQueryCardinality AddFilteredPrime(
@@ -2357,7 +2373,8 @@ namespace System.Xml.Xsl
             XmlQueryType source,
             XmlQueryType filter,
             bool forseSingle
-        ) {
+        )
+        {
             Debug.Assert(source.IsNode && source.IsSingleton);
             Debug.Assert(filter.IsNode && filter.IsSingleton);
 
@@ -2418,7 +2435,8 @@ namespace System.Xml.Xsl
                         | XmlNodeKindFlags.Attribute
                     )
                 ) != 0
-            ) {
+            )
+            {
                 if (left.TypeCode == XmlTypeCode.Node)
                 {
                     return left;
@@ -2446,7 +2464,8 @@ namespace System.Xml.Xsl
                     (object)nameTest == (object)left.NameTest
                     && type == left.SchemaType
                     && isNillable == left.IsNillable
-                ) {
+                )
+                {
                     // left is a subtype of right return left
                     return left;
                 }
@@ -2454,7 +2473,8 @@ namespace System.Xml.Xsl
                     (object)nameTest == (object)right.NameTest
                     && type == right.SchemaType
                     && isNillable == right.IsNillable
-                ) {
+                )
+                {
                     // right is a subtype of left return right
                     return right;
                 }

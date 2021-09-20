@@ -33,7 +33,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.PDB
             BlobReader compilationOptionsBlobReader,
             string langVersion,
             int sourceFileCount
-        ) {
+        )
+        {
             var pdbOptions = DeterministicBuildCompilationTestHelpers.ParseCompilationOptions(
                 compilationOptionsBlobReader
             );
@@ -69,7 +70,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.PDB
             EmitOptions emitOptions,
             TestMetadataReferenceInfo[] metadataReferences,
             int? debugDocumentsCount = null
-        ) {
+        )
+        {
             var targetFramework = TargetFramework.NetCoreApp;
             var originalCompilation = CreateCompilation(
                 syntaxTrees,
@@ -102,7 +104,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.PDB
 
                 using (
                     var embeddedPdb = peReader.ReadEmbeddedPortablePdbDebugDirectoryData(embedded)
-                ) {
+                )
+                {
                     var pdbReader = embeddedPdb.GetMetadataReader();
                     var metadataReferenceReader =
                         DeterministicBuildCompilationTestHelpers.GetSingleBlob(
@@ -143,7 +146,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.PDB
             CSharpCompilationOptions compilationOptions,
             EmitOptions emitOptions,
             CSharpParseOptions parseOptions
-        ) {
+        )
+        {
             var sourceOne = Parse(
                 @"
 using System;
@@ -228,7 +232,8 @@ public struct StructWithValue
             CSharpCompilationOptions compilationOptions,
             EmitOptions emitOptions,
             CSharpParseOptions parseOptions
-        ) {
+        )
+        {
             var sourceOne = Parse(
                 @"
 using System;
@@ -317,7 +322,8 @@ public struct StructWithValue
             CSharpCompilationOptions compilationOptions,
             EmitOptions emitOptions,
             CSharpParseOptions parseOptions
-        ) {
+        )
+        {
             var sourceOne = Parse(
                 @"
 using System;
@@ -406,7 +412,8 @@ public struct StructWithValue
             {
                 foreach (
                     var emitOptions in DeterministicBuildCompilationTestHelpers.GetEmitOptions()
-                ) {
+                )
+                {
                     foreach (var parseOptions in GetCSharpParseOptions())
                     {
                         yield return new object[] { compilationOptions, emitOptions, parseOptions };

@@ -54,7 +54,8 @@ namespace Microsoft.CodeAnalysis.CSharp
         private static TypeWithAnnotations SubstituteAllTypeParameters(
             AbstractTypeMap? substitution,
             TypeWithAnnotations type
-        ) {
+        )
+        {
             if (substitution != null)
             {
                 TypeWithAnnotations previous;
@@ -73,7 +74,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             TypeSymbol t1,
             TypeSymbol t2,
             ref MutableTypeMap? substitution
-        ) {
+        )
+        {
             return CanUnifyHelper(
                 TypeWithAnnotations.Create(t1),
                 TypeWithAnnotations.Create(t2),
@@ -102,7 +104,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             TypeWithAnnotations t1,
             TypeWithAnnotations t2,
             ref MutableTypeMap? substitution
-        ) {
+        )
+        {
             if (!t1.HasType || !t2.HasType)
             {
                 return t1.IsSameAs(t2);
@@ -117,7 +120,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             if (
                 TypeSymbol.Equals(t1.Type, t2.Type, TypeCompareKind.CLRSignatureCompareOptions)
                 && t1.CustomModifiers.SequenceEqual(t2.CustomModifiers)
-            ) {
+            )
+            {
                 return true;
             }
 
@@ -140,7 +144,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                     if (
                         t2.TypeKind != t1.TypeKind
                         || !t2.CustomModifiers.SequenceEqual(t1.CustomModifiers)
-                    ) {
+                    )
+                    {
                         return false;
                     }
 
@@ -163,7 +168,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                     if (
                         t2.TypeKind != t1.TypeKind
                         || !t2.CustomModifiers.SequenceEqual(t1.CustomModifiers)
-                    ) {
+                    )
+                    {
                         return false;
                     }
 
@@ -182,7 +188,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                     if (
                         t2.TypeKind != t1.TypeKind
                         || !t2.CustomModifiers.SequenceEqual(t1.CustomModifiers)
-                    ) {
+                    )
+                    {
                         return false;
                     }
 
@@ -205,7 +212,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                             nt1.OriginalDefinition,
                             TypeCompareKind.ConsiderEverything
                         )
-                    ) {
+                    )
+                    {
                         return false;
                     }
 
@@ -259,7 +267,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                         && t1.CustomModifiers.SequenceEqual(
                             t2.CustomModifiers.Take(t1.CustomModifiers.Length)
                         )
-                    ) {
+                    )
+                    {
                         AddSubstitution(
                             ref substitution,
                             tp1,
@@ -290,7 +299,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                             && t2.CustomModifiers.SequenceEqual(
                                 t1.CustomModifiers.Take(t2.CustomModifiers.Length)
                             )
-                        ) {
+                        )
+                        {
                             AddSubstitution(
                                 ref substitution,
                                 tp2,
@@ -320,7 +330,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             ref MutableTypeMap? substitution,
             TypeParameterSymbol tp1,
             TypeWithAnnotations t2
-        ) {
+        )
+        {
             if (substitution == null)
             {
                 substitution = new MutableTypeMap();

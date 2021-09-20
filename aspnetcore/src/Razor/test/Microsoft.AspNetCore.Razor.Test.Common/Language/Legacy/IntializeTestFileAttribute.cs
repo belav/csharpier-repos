@@ -14,7 +14,8 @@ namespace Microsoft.AspNetCore.Razor.Language.Legacy
             if (
                 typeof(ParserTestBase).GetTypeInfo()
                     .IsAssignableFrom(methodUnderTest.DeclaringType.GetTypeInfo())
-            ) {
+            )
+            {
                 var typeName = methodUnderTest.DeclaringType.Name;
                 ParserTestBase.FileName =
                     $"TestFiles/ParserTests/{typeName}/{methodUnderTest.Name}";
@@ -25,7 +26,8 @@ namespace Microsoft.AspNetCore.Razor.Language.Legacy
                         typeof(TheoryAttribute),
                         inherit: false
                     ).Length > 0
-                ) {
+                )
+                {
                     ParserTestBase.IsTheory = true;
                 }
             }
@@ -36,7 +38,8 @@ namespace Microsoft.AspNetCore.Razor.Language.Legacy
             if (
                 typeof(ParserTestBase).GetTypeInfo()
                     .IsAssignableFrom(methodUnderTest.DeclaringType.GetTypeInfo())
-            ) {
+            )
+            {
                 ParserTestBase.FileName = null;
                 ParserTestBase.IsTheory = false;
             }

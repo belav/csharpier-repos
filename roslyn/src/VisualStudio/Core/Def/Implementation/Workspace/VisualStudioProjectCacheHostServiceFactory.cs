@@ -35,7 +35,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.Workspaces
 
         private static IWorkspaceService GetMiscProjectCache(
             HostWorkspaceServices workspaceServices
-        ) {
+        )
+        {
             if (workspaceServices.Workspace.Kind != WorkspaceKind.Host)
             {
                 return new ProjectCacheService(workspaceServices.Workspace);
@@ -52,7 +53,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.Workspaces
                 if (
                     e.Kind == WorkspaceChangeKind.SolutionCleared
                     || e.Kind == WorkspaceChangeKind.SolutionRemoved
-                ) {
+                )
+                {
                     projectCacheService.ClearImplicitCache();
                 }
             };
@@ -62,7 +64,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.Workspaces
 
         private static IWorkspaceService GetVisualStudioProjectCache(
             HostWorkspaceServices workspaceServices
-        ) {
+        )
+        {
             // We will finish setting this up in VisualStudioWorkspaceImpl.DeferredInitializationState
             return new ProjectCacheService(workspaceServices.Workspace, ImplicitCacheTimeoutInMS);
         }
@@ -70,7 +73,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.Workspaces
         internal static void ConnectProjectCacheServiceToDocumentTracking(
             HostWorkspaceServices workspaceServices,
             ProjectCacheService projectCacheService
-        ) {
+        )
+        {
             var documentTrackingService = workspaceServices.GetService<IDocumentTrackingService>();
 
             // Subscribe to events so that we can cache items from the active document's project
@@ -92,7 +96,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.Workspaces
                 if (
                     e.Kind == WorkspaceChangeKind.SolutionCleared
                     || e.Kind == WorkspaceChangeKind.SolutionRemoved
-                ) {
+                )
+                {
                     manager.Clear();
                 }
             };
@@ -109,7 +114,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.Workspaces
             public ActiveProjectCacheManager(
                 IDocumentTrackingService documentTrackingService,
                 ProjectCacheService projectCacheService
-            ) {
+            )
+            {
                 _projectCacheService = projectCacheService;
 
                 if (documentTrackingService != null)
@@ -126,7 +132,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.Workspaces
                     if (
                         activeDocument != null
                         && activeDocument.ProjectId != _mostRecentActiveProjectId
-                    ) {
+                    )
+                    {
                         ClearMostRecentCache_NoLock();
                         _mostRecentCache = _projectCacheService.EnableCaching(
                             activeDocument.ProjectId

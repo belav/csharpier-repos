@@ -79,7 +79,8 @@ namespace HtmlGenerationWebSite.Controllers
             [FromServices] ProductsService productService,
             string category,
             [FromBody] List<Product> products
-        ) {
+        )
+        {
             productService.UpdateProducts(category, products);
             return Ok();
         }

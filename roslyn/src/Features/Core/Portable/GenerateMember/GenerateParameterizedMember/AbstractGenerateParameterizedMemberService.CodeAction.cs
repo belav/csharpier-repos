@@ -35,7 +35,8 @@ namespace Microsoft.CodeAnalysis.GenerateMember.GenerateParameterizedMember
                 State state,
                 bool isAbstract,
                 bool generateProperty
-            ) {
+            )
+            {
                 _service = service;
                 _document = document;
                 _state = state;
@@ -71,7 +72,8 @@ namespace Microsoft.CodeAnalysis.GenerateMember.GenerateParameterizedMember
 
             protected override async Task<Document> GetChangedDocumentAsync(
                 CancellationToken cancellationToken
-            ) {
+            )
+            {
                 var syntaxTree = await _document.GetSyntaxTreeAsync(cancellationToken)
                     .ConfigureAwait(false);
                 var syntaxFactory =

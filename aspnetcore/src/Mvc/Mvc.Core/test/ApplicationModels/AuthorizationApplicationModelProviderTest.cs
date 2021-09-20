@@ -228,7 +228,8 @@ namespace Microsoft.AspNetCore.Mvc.ApplicationModels
 
         private ActionModel GetBaseControllerActionModel(
             AuthorizationApplicationModelProvider authorizationApplicationModelProvider
-        ) {
+        )
+        {
             var context = CreateProviderContext(typeof(BaseController));
 
             authorizationApplicationModelProvider.OnProvidersExecuting(context);

@@ -33,7 +33,8 @@ namespace Microsoft.NETCore.Platforms.BuildTasks.Tests
             string[] targetNames,
             IDictionary globalProperties,
             IDictionary targetOutputs
-        ) {
+        )
+        {
             throw new NotImplementedException();
         }
 

@@ -30,7 +30,8 @@ namespace System.Runtime.Serialization
             IDataContractSurrogate dataContractSurrogate,
             ICollection<Type> referencedTypes,
             ICollection<Type> referencedCollectionTypes
-        ) {
+        )
+        {
             _dataContractSurrogate = dataContractSurrogate;
             _referencedTypes = referencedTypes;
             _referencedCollectionTypes = referencedCollectionTypes;
@@ -57,7 +58,8 @@ namespace System.Runtime.Serialization
             {
                 foreach (
                     KeyValuePair<DataContract, object> pair in dataContractSet._processedContracts
-                ) {
+                )
+                {
                     ProcessedContracts.Add(pair.Key, pair.Value);
                 }
             }

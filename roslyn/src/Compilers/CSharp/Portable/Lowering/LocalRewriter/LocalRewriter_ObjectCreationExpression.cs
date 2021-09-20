@@ -15,7 +15,8 @@ namespace Microsoft.CodeAnalysis.CSharp
     {
         public override BoundNode VisitDynamicObjectCreationExpression(
             BoundDynamicObjectCreationExpression node
-        ) {
+        )
+        {
             var loweredArguments = VisitList(node.Arguments);
             var constructorInvocation = _dynamicFactory.MakeDynamicConstructorInvocation(
                     node.Syntax,
@@ -192,7 +193,8 @@ namespace Microsoft.CodeAnalysis.CSharp
         [return: NotNullIfNotNull("initializerExpressionOpt")]
         private BoundObjectInitializerExpressionBase? MakeObjectCreationInitializerForExpressionTree(
             BoundObjectInitializerExpressionBase? initializerExpressionOpt
-        ) {
+        )
+        {
             if (initializerExpressionOpt != null && !initializerExpressionOpt.HasErrors)
             {
                 // We may need to MakeArguments for collection initializer add method call if the method has a param array parameter.
@@ -211,7 +213,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             BoundExpression rewrittenExpression,
             BoundExpression initializerExpression,
             TypeSymbol type
-        ) {
+        )
+        {
             Debug.Assert(!_inExpressionLambda);
             Debug.Assert(initializerExpression != null && !initializerExpression.HasErrors);
 
@@ -304,7 +307,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                     WellKnownMember.System_Activator__CreateInstance_T,
                     out method
                 )
-            ) {
+            )
+            {
                 return new BoundDefaultExpression(syntax, type: typeParameter, hasErrors: true);
             }
 
@@ -332,7 +336,8 @@ namespace Microsoft.CodeAnalysis.CSharp
 
         public override BoundNode VisitNoPiaObjectCreationExpression(
             BoundNoPiaObjectCreationExpression node
-        ) {
+        )
+        {
             // For the NoPIA feature, we need to gather the GUID from the coclass, and
             // generate the following:
             //

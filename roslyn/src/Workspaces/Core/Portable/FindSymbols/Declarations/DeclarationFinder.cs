@@ -24,7 +24,8 @@ namespace Microsoft.CodeAnalysis.FindSymbols
             SymbolFilter filter,
             ArrayBuilder<ISymbol> list,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             Contract.ThrowIfTrue(
                 query.Kind == SearchKind.Custom,
                 "Custom queries are not supported in this API"
@@ -48,7 +49,8 @@ namespace Microsoft.CodeAnalysis.FindSymbols
             Compilation startingCompilation,
             IAssemblySymbol startingAssembly,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             Contract.ThrowIfTrue(
                 query.Kind == SearchKind.Custom,
                 "Custom queries are not supported in this API"
@@ -59,7 +61,8 @@ namespace Microsoft.CodeAnalysis.FindSymbols
                     FunctionId.SymbolFinder_Project_AddDeclarationsAsync,
                     cancellationToken
                 )
-            ) {
+            )
+            {
                 var syntaxFacts = project.LanguageServices.GetService<ISyntaxFactsService>();
 
                 // If this is an exact query, we can speed things up by just calling into the
@@ -111,7 +114,8 @@ namespace Microsoft.CodeAnalysis.FindSymbols
                     startingCompilation != null
                     && startingAssembly != null
                     && !Equals(compilation.Assembly, startingAssembly)
-                ) {
+                )
+                {
                     // Return symbols from skeleton assembly in this case so that symbols have
                     // the same language as startingCompilation.
                     symbolsWithName = symbolsWithName.Select(
@@ -138,7 +142,8 @@ namespace Microsoft.CodeAnalysis.FindSymbols
             SymbolFilter filter,
             ArrayBuilder<ISymbol> list,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             // All entrypoints to this function are Find functions that are only searching
             // for specific strings (i.e. they never do a custom search).
             Contract.ThrowIfTrue(
@@ -151,7 +156,8 @@ namespace Microsoft.CodeAnalysis.FindSymbols
                     FunctionId.SymbolFinder_Assembly_AddDeclarationsAsync,
                     cancellationToken
                 )
-            ) {
+            )
+            {
                 if (referenceOpt != null)
                 {
                     var info = await SymbolTreeInfo.GetInfoForMetadataReferenceAsync(

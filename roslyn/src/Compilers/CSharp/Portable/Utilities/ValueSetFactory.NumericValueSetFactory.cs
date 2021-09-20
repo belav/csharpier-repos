@@ -70,7 +70,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                 BinaryOperatorKind relation,
                 ConstantValue left,
                 ConstantValue right
-            ) {
+            )
+            {
                 var tc = default(TTC);
                 return tc.Related(
                     relation,

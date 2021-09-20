@@ -330,7 +330,8 @@ namespace System.Diagnostics
             int id,
             string? format,
             params object?[]? args
-        ) {
+        )
+        {
             TraceEventCache EventCache = new TraceEventCache();
 
             if (UseGlobalLock)

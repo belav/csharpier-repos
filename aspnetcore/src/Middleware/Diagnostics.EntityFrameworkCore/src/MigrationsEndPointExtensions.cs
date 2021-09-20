@@ -37,7 +37,8 @@ namespace Microsoft.AspNetCore.Builder
         public static IApplicationBuilder UseMigrationsEndPoint(
             this IApplicationBuilder app,
             MigrationsEndPointOptions options
-        ) {
+        )
+        {
             if (app == null)
             {
                 throw new ArgumentNullException(nameof(app));

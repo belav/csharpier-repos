@@ -72,7 +72,8 @@ namespace System.Reflection.Emit
             Binder? binder,
             object?[]? parameters,
             CultureInfo? culture
-        ) {
+        )
+        {
             throw new NotSupportedException();
         }
         public override CallingConventions CallingConvention => m_method.CallingConvention;
@@ -118,7 +119,8 @@ namespace System.Reflection.Emit
         internal static ConstructorInfo GetConstructor(
             ConstructorInfo Constructor,
             TypeBuilderInstantiation type
-        ) {
+        )
+        {
             return new ConstructorOnTypeBuilderInstantiation(Constructor, type);
         }
         #endregion
@@ -132,7 +134,8 @@ namespace System.Reflection.Emit
         internal ConstructorOnTypeBuilderInstantiation(
             ConstructorInfo constructor,
             TypeBuilderInstantiation type
-        ) {
+        )
+        {
             Debug.Assert(
                 constructor is ConstructorBuilder || constructor is RuntimeConstructorInfo
             );
@@ -204,7 +207,8 @@ namespace System.Reflection.Emit
             Binder? binder,
             object?[]? parameters,
             CultureInfo? culture
-        ) {
+        )
+        {
             throw new NotSupportedException();
         }
         public override CallingConventions CallingConvention => m_ctor.CallingConvention;
@@ -224,7 +228,8 @@ namespace System.Reflection.Emit
             Binder? binder,
             object?[]? parameters,
             CultureInfo? culture
-        ) {
+        )
+        {
             throw new InvalidOperationException();
         }
         #endregion
@@ -344,7 +349,8 @@ namespace System.Reflection.Emit
             BindingFlags invokeAttr,
             Binder? binder,
             CultureInfo? culture
-        ) {
+        )
+        {
             throw new InvalidOperationException();
         }
         public override FieldAttributes Attributes => m_field.Attributes;

@@ -254,7 +254,8 @@ namespace System.Threading
         public static object? VolatileRead(
             [System.Diagnostics.CodeAnalysis.NotNullIfNotNullAttribute("address")]
                 ref object? address
-        ) {
+        )
+        {
             throw null;
         }
         [System.CLSCompliantAttribute(false)]

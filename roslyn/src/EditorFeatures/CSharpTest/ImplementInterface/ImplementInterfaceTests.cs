@@ -176,7 +176,8 @@ namespace System.Diagnostics.CodeAnalysis
             string expectedMarkup,
             int index = 0,
             ParseOptions? parseOptions = null
-        ) {
+        )
+        {
             await TestAsync(
                 initialMarkup,
                 expectedMarkup,
@@ -192,7 +193,8 @@ namespace System.Diagnostics.CodeAnalysis
             string expectedMarkup,
             int index = 0,
             ParseOptions? parseOptions = null
-        ) {
+        )
+        {
             await TestAsync(
                 initialMarkup,
                 expectedMarkup,
@@ -208,7 +210,8 @@ namespace System.Diagnostics.CodeAnalysis
             string expectedMarkup,
             int index = 0,
             ParseOptions? parseOptions = null
-        ) {
+        )
+        {
             await TestAsync(
                 initialMarkup,
                 expectedMarkup,
@@ -7169,7 +7172,8 @@ partial class C
             string implementationVisibility,
             string disposeField = "disposedValue",
             string gcPrefix = ""
-        ) {
+        )
+        {
             return $@"    {disposeVisibility}void Dispose(bool disposing)
     {{
         if (!{disposeField})

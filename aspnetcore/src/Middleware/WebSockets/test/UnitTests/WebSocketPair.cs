@@ -15,7 +15,8 @@ namespace Microsoft.AspNetCore.WebSockets.Test
             DuplexStream clientStream,
             WebSocket clientSocket,
             WebSocket serverSocket
-        ) {
+        )
+        {
             ClientStream = clientStream;
             ServerStream = serverStream;
             ClientSocket = clientSocket;

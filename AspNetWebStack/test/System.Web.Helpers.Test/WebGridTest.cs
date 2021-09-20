@@ -924,7 +924,8 @@ namespace System.Web.Helpers.Test
                     prop.Name.Equals("Rows")
                     || prop.Name.Equals("SelectedRow")
                     || prop.Name.Equals("ElementType")
-                ) {
+                )
+                {
                     continue;
                 }
                 prop.GetValue(grid, null);

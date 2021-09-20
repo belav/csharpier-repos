@@ -44,7 +44,8 @@ namespace Microsoft.AspNetCore.Routing
             IOptions<RouteOptions> routeOptions,
             ILogger<DefaultLinkGenerator> logger,
             IServiceProvider serviceProvider
-        ) {
+        )
+        {
             _parameterPolicyFactory = parameterPolicyFactory;
             _binderFactory = binderFactory;
             _logger = logger;
@@ -83,7 +84,8 @@ namespace Microsoft.AspNetCore.Routing
             PathString? pathBase = default,
             FragmentString fragment = default,
             LinkOptions? options = null
-        ) {
+        )
+        {
             if (httpContext == null)
             {
                 throw new ArgumentNullException(nameof(httpContext));
@@ -112,7 +114,8 @@ namespace Microsoft.AspNetCore.Routing
             PathString pathBase = default,
             FragmentString fragment = default,
             LinkOptions? options = null
-        ) {
+        )
+        {
             var endpoints = GetEndpoints(address);
             if (endpoints.Count == 0)
             {
@@ -140,7 +143,8 @@ namespace Microsoft.AspNetCore.Routing
             PathString? pathBase = default,
             FragmentString fragment = default,
             LinkOptions? options = null
-        ) {
+        )
+        {
             if (httpContext == null)
             {
                 throw new ArgumentNullException(nameof(httpContext));
@@ -172,7 +176,8 @@ namespace Microsoft.AspNetCore.Routing
             PathString pathBase = default,
             FragmentString fragment = default,
             LinkOptions? options = null
-        ) {
+        )
+        {
             if (string.IsNullOrEmpty(scheme))
             {
                 throw new ArgumentException("A scheme must be provided.", nameof(scheme));
@@ -230,7 +235,8 @@ namespace Microsoft.AspNetCore.Routing
             PathString pathBase,
             FragmentString fragment,
             LinkOptions? options
-        ) {
+        )
+        {
             for (var i = 0; i < endpoints.Count; i++)
             {
                 var endpoint = endpoints[i];
@@ -243,7 +249,8 @@ namespace Microsoft.AspNetCore.Routing
                         options: options,
                         result: out var result
                     )
-                ) {
+                )
+                {
                     var uri = UriHelper.BuildRelative(
                         pathBase,
                         result.path,
@@ -269,7 +276,8 @@ namespace Microsoft.AspNetCore.Routing
             PathString pathBase,
             FragmentString fragment,
             LinkOptions? options
-        ) {
+        )
+        {
             for (var i = 0; i < endpoints.Count; i++)
             {
                 var endpoint = endpoints[i];
@@ -282,7 +290,8 @@ namespace Microsoft.AspNetCore.Routing
                         options: options,
                         result: out var result
                     )
-                ) {
+                )
+                {
                     var uri = UriHelper.BuildAbsolute(
                         scheme,
                         host,
@@ -317,7 +326,8 @@ namespace Microsoft.AspNetCore.Routing
             RouteValueDictionary? ambientValues,
             LinkOptions? options,
             out (PathString path, QueryString query) result
-        ) {
+        )
+        {
             var templateBinder = GetTemplateBinder(endpoint);
 
             var templateValuesResult = templateBinder.GetValues(ambientValues, values);
@@ -336,7 +346,8 @@ namespace Microsoft.AspNetCore.Routing
                     out var parameterName,
                     out var constraint
                 )
-            ) {
+            )
+            {
                 result = default;
                 Log.TemplateFailedConstraint(
                     _logger,
@@ -355,7 +366,8 @@ namespace Microsoft.AspNetCore.Routing
                     _globalLinkOptions,
                     out result
                 )
-            ) {
+            )
+            {
                 Log.TemplateFailedExpansion(_logger, endpoint, templateValuesResult.AcceptedValues);
                 return false;
             }
@@ -532,7 +544,8 @@ namespace Microsoft.AspNetCore.Routing
                 ILogger logger,
                 object address,
                 IEnumerable<Endpoint> endpoints
-            ) {
+            )
+            {
                 // Checking level again to avoid allocation on the common path
                 if (logger.IsEnabled(LogLevel.Debug))
                 {
@@ -550,7 +563,8 @@ namespace Microsoft.AspNetCore.Routing
                 RouteEndpoint endpoint,
                 PathString path,
                 QueryString query
-            ) {
+            )
+            {
                 _templateSucceeded(
                     logger,
                     endpoint.RoutePattern.RawText,
@@ -566,7 +580,8 @@ namespace Microsoft.AspNetCore.Routing
                 RouteEndpoint endpoint,
                 RouteValueDictionary ambientValues,
                 RouteValueDictionary values
-            ) {
+            )
+            {
                 // Checking level again to avoid allocation on the common path
                 if (logger.IsEnabled(LogLevel.Debug))
                 {
@@ -588,7 +603,8 @@ namespace Microsoft.AspNetCore.Routing
                 string parameterName,
                 IRouteConstraint constraint,
                 RouteValueDictionary values
-            ) {
+            )
+            {
                 // Checking level again to avoid allocation on the common path
                 if (logger.IsEnabled(LogLevel.Debug))
                 {
@@ -608,7 +624,8 @@ namespace Microsoft.AspNetCore.Routing
                 ILogger logger,
                 RouteEndpoint endpoint,
                 RouteValueDictionary values
-            ) {
+            )
+            {
                 // Checking level again to avoid allocation on the common path
                 if (logger.IsEnabled(LogLevel.Debug))
                 {
@@ -626,7 +643,8 @@ namespace Microsoft.AspNetCore.Routing
                 ILogger logger,
                 IEnumerable<Endpoint> endpoints,
                 string uri
-            ) {
+            )
+            {
                 // Checking level again to avoid allocation on the common path
                 if (logger.IsEnabled(LogLevel.Debug))
                 {

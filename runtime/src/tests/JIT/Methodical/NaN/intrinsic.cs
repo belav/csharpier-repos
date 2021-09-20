@@ -42,7 +42,8 @@ namespace JitTest
                 Double.IsNaN(exp) && Double.IsNaN(res)
                 || Double.IsNegativeInfinity(exp) && Double.IsNegativeInfinity(res)
                 || Double.IsPositiveInfinity(exp) && Double.IsPositiveInfinity(res)
-            ) {
+            )
+            {
                 Console.WriteLine("Abs(" + arg.ToString() + ") == " + res.ToString() + "  OK");
 
                 return;
@@ -63,7 +64,8 @@ namespace JitTest
                 Double.IsNaN(exp) && Double.IsNaN(res)
                 || Double.IsNegativeInfinity(exp) && Double.IsNegativeInfinity(res)
                 || Double.IsPositiveInfinity(exp) && Double.IsPositiveInfinity(res)
-            ) {
+            )
+            {
                 Console.WriteLine("Acos(" + arg.ToString() + ") == " + res.ToString() + "  OK");
 
                 return;
@@ -84,7 +86,8 @@ namespace JitTest
                 Double.IsNaN(exp) && Double.IsNaN(res)
                 || Double.IsNegativeInfinity(exp) && Double.IsNegativeInfinity(res)
                 || Double.IsPositiveInfinity(exp) && Double.IsPositiveInfinity(res)
-            ) {
+            )
+            {
                 Console.WriteLine("Asin(" + arg.ToString() + ") == " + res.ToString() + "  OK");
 
                 return;
@@ -105,7 +108,8 @@ namespace JitTest
                 Double.IsNaN(exp) && Double.IsNaN(res)
                 || Double.IsNegativeInfinity(exp) && Double.IsNegativeInfinity(res)
                 || Double.IsPositiveInfinity(exp) && Double.IsPositiveInfinity(res)
-            ) {
+            )
+            {
                 Console.WriteLine("Atan(" + arg.ToString() + ") == " + res.ToString() + "  OK");
 
                 return;
@@ -126,7 +130,8 @@ namespace JitTest
                 Double.IsNaN(exp) && Double.IsNaN(res)
                 || Double.IsNegativeInfinity(exp) && Double.IsNegativeInfinity(res)
                 || Double.IsPositiveInfinity(exp) && Double.IsPositiveInfinity(res)
-            ) {
+            )
+            {
                 Console.WriteLine("Ceiling(" + arg.ToString() + ") == " + res.ToString() + "  OK");
 
                 return;
@@ -147,7 +152,8 @@ namespace JitTest
                 Double.IsNaN(exp) && Double.IsNaN(res)
                 || Double.IsNegativeInfinity(exp) && Double.IsNegativeInfinity(res)
                 || Double.IsPositiveInfinity(exp) && Double.IsPositiveInfinity(res)
-            ) {
+            )
+            {
                 Console.WriteLine("Cos(" + arg.ToString() + ") == " + res.ToString() + "  OK");
 
                 return;
@@ -168,7 +174,8 @@ namespace JitTest
                 Double.IsNaN(exp) && Double.IsNaN(res)
                 || Double.IsNegativeInfinity(exp) && Double.IsNegativeInfinity(res)
                 || Double.IsPositiveInfinity(exp) && Double.IsPositiveInfinity(res)
-            ) {
+            )
+            {
                 Console.WriteLine("Cosh(" + arg.ToString() + ") == " + res.ToString() + "  OK");
 
                 return;
@@ -189,7 +196,8 @@ namespace JitTest
                 Double.IsNaN(exp) && Double.IsNaN(res)
                 || Double.IsNegativeInfinity(exp) && Double.IsNegativeInfinity(res)
                 || Double.IsPositiveInfinity(exp) && Double.IsPositiveInfinity(res)
-            ) {
+            )
+            {
                 Console.WriteLine("Exp(" + arg.ToString() + ") == " + res.ToString() + "  OK");
 
                 return;
@@ -210,7 +218,8 @@ namespace JitTest
                 Double.IsNaN(exp) && Double.IsNaN(res)
                 || Double.IsNegativeInfinity(exp) && Double.IsNegativeInfinity(res)
                 || Double.IsPositiveInfinity(exp) && Double.IsPositiveInfinity(res)
-            ) {
+            )
+            {
                 Console.WriteLine("Floor(" + arg.ToString() + ") == " + res.ToString() + "  OK");
 
                 return;
@@ -231,7 +240,8 @@ namespace JitTest
                 Double.IsNaN(exp) && Double.IsNaN(res)
                 || Double.IsNegativeInfinity(exp) && Double.IsNegativeInfinity(res)
                 || Double.IsPositiveInfinity(exp) && Double.IsPositiveInfinity(res)
-            ) {
+            )
+            {
                 Console.WriteLine("Log(" + arg.ToString() + ") == " + res.ToString() + "  OK");
 
                 return;
@@ -252,7 +262,8 @@ namespace JitTest
                 Double.IsNaN(exp) && Double.IsNaN(res)
                 || Double.IsNegativeInfinity(exp) && Double.IsNegativeInfinity(res)
                 || Double.IsPositiveInfinity(exp) && Double.IsPositiveInfinity(res)
-            ) {
+            )
+            {
                 Console.WriteLine("Log10(" + arg.ToString() + ") == " + res.ToString() + "  OK");
 
                 return;
@@ -273,7 +284,8 @@ namespace JitTest
                 Double.IsNaN(exp) && Double.IsNaN(res)
                 || Double.IsNegativeInfinity(exp) && Double.IsNegativeInfinity(res)
                 || Double.IsPositiveInfinity(exp) && Double.IsPositiveInfinity(res)
-            ) {
+            )
+            {
                 Console.WriteLine("Round(" + arg.ToString() + ") == " + res.ToString() + "  OK");
 
                 return;
@@ -294,7 +306,8 @@ namespace JitTest
                 Double.IsNaN(exp) && Double.IsNaN(res)
                 || Double.IsNegativeInfinity(exp) && Double.IsNegativeInfinity(res)
                 || Double.IsPositiveInfinity(exp) && Double.IsPositiveInfinity(res)
-            ) {
+            )
+            {
                 Console.WriteLine("Sign(" + arg.ToString() + ") == " + res.ToString() + "  OK");
 
                 return;
@@ -315,7 +328,8 @@ namespace JitTest
                 Double.IsNaN(exp) && Double.IsNaN(res)
                 || Double.IsNegativeInfinity(exp) && Double.IsNegativeInfinity(res)
                 || Double.IsPositiveInfinity(exp) && Double.IsPositiveInfinity(res)
-            ) {
+            )
+            {
                 Console.WriteLine("Sin(" + arg.ToString() + ") == " + res.ToString() + "  OK");
 
                 return;
@@ -336,7 +350,8 @@ namespace JitTest
                 Double.IsNaN(exp) && Double.IsNaN(res)
                 || Double.IsNegativeInfinity(exp) && Double.IsNegativeInfinity(res)
                 || Double.IsPositiveInfinity(exp) && Double.IsPositiveInfinity(res)
-            ) {
+            )
+            {
                 Console.WriteLine("Sinh(" + arg.ToString() + ") == " + res.ToString() + "  OK");
 
                 return;
@@ -357,7 +372,8 @@ namespace JitTest
                 Double.IsNaN(exp) && Double.IsNaN(res)
                 || Double.IsNegativeInfinity(exp) && Double.IsNegativeInfinity(res)
                 || Double.IsPositiveInfinity(exp) && Double.IsPositiveInfinity(res)
-            ) {
+            )
+            {
                 Console.WriteLine("Sqrt(" + arg.ToString() + ") == " + res.ToString() + "  OK");
 
                 return;
@@ -378,7 +394,8 @@ namespace JitTest
                 Double.IsNaN(exp) && Double.IsNaN(res)
                 || Double.IsNegativeInfinity(exp) && Double.IsNegativeInfinity(res)
                 || Double.IsPositiveInfinity(exp) && Double.IsPositiveInfinity(res)
-            ) {
+            )
+            {
                 Console.WriteLine("Tan(" + arg.ToString() + ") == " + res.ToString() + "  OK");
 
                 return;
@@ -399,7 +416,8 @@ namespace JitTest
                 Double.IsNaN(exp) && Double.IsNaN(res)
                 || Double.IsNegativeInfinity(exp) && Double.IsNegativeInfinity(res)
                 || Double.IsPositiveInfinity(exp) && Double.IsPositiveInfinity(res)
-            ) {
+            )
+            {
                 Console.WriteLine("Tanh(" + arg.ToString() + ") == " + res.ToString() + "  OK");
 
                 return;
@@ -420,7 +438,8 @@ namespace JitTest
                 Double.IsNaN(exp) && Double.IsNaN(res)
                 || Double.IsNegativeInfinity(exp) && Double.IsNegativeInfinity(res)
                 || Double.IsPositiveInfinity(exp) && Double.IsPositiveInfinity(res)
-            ) {
+            )
+            {
                 Console.WriteLine(
                     "Log2("
                         + arg1.ToString()
@@ -457,7 +476,8 @@ namespace JitTest
                 Double.IsNaN(exp) && Double.IsNaN(res)
                 || Double.IsNegativeInfinity(exp) && Double.IsNegativeInfinity(res)
                 || Double.IsPositiveInfinity(exp) && Double.IsPositiveInfinity(res)
-            ) {
+            )
+            {
                 Console.WriteLine(
                     "Pow("
                         + arg1.ToString()
@@ -494,7 +514,8 @@ namespace JitTest
                 Double.IsNaN(exp) && Double.IsNaN(res)
                 || Double.IsNegativeInfinity(exp) && Double.IsNegativeInfinity(res)
                 || Double.IsPositiveInfinity(exp) && Double.IsPositiveInfinity(res)
-            ) {
+            )
+            {
                 Console.WriteLine(
                     "Atan2("
                         + arg1.ToString()

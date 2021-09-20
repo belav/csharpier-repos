@@ -30,7 +30,8 @@ namespace Microsoft.CodeAnalysis.FlowAnalysis
             ControlFlowGraph controlFlowGraph,
             DataFlowAnalyzer<TBlockAnalysisData> analyzer,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             cancellationToken.ThrowIfCancellationRequested();
 
             var blocks = controlFlowGraph.Blocks;
@@ -86,7 +87,8 @@ namespace Microsoft.CodeAnalysis.FlowAnalysis
             PooledDictionary<ControlFlowRegion, bool> continueDispatchAfterFinally,
             PooledHashSet<ControlFlowRegion> dispatchedExceptionsFromRegions,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var toVisit = new SortedSet<int>();
 
             var firstBlock = blocks[firstBlockOrdinal];
@@ -117,7 +119,8 @@ namespace Microsoft.CodeAnalysis.FlowAnalysis
                         if (
                             unreachableBlock.Ordinal >= firstBlockOrdinal
                             && unreachableBlock.Ordinal <= lastBlockOrdinal
-                        ) {
+                        )
+                        {
                             current = unreachableBlock;
                             break;
                         }
@@ -171,10 +174,12 @@ namespace Microsoft.CodeAnalysis.FlowAnalysis
                     if (
                         current.BranchValue.ConstantValue.HasValue
                         && current.BranchValue.ConstantValue.Value is bool constant
-                    ) {
+                    )
+                    {
                         if (
                             constant == (current.ConditionKind == ControlFlowConditionKind.WhenTrue)
-                        ) {
+                        )
+                        {
                             fallThroughSuccessorIsReachable = false;
                         }
                         else
@@ -209,7 +214,8 @@ namespace Microsoft.CodeAnalysis.FlowAnalysis
                     if (
                         current.EnclosingRegion.Kind == ControlFlowRegionKind.Finally
                         && current.Ordinal == lastBlockOrdinal
-                    ) {
+                    )
+                    {
                         continueDispatchAfterFinally[current.EnclosingRegion] =
                             branch.Semantics != ControlFlowBranchSemantics.Throw
                             && branch.Semantics != ControlFlowBranchSemantics.Rethrow
@@ -239,7 +245,8 @@ namespace Microsoft.CodeAnalysis.FlowAnalysis
                 BasicBlock current,
                 ControlFlowBranch branch,
                 TBlockAnalysisData currentAnalsisData
-            ) {
+            )
+            {
                 if (branch == null)
                 {
                     return;
@@ -274,7 +281,8 @@ namespace Microsoft.CodeAnalysis.FlowAnalysis
                                 branch.Destination.Ordinal,
                                 ref currentAnalsisData
                             )
-                        ) {
+                        )
+                        {
                             var destination = branch.Destination;
                             var currentDestinationData = analyzer.GetCurrentAnalysisData(
                                 destination
@@ -294,7 +302,8 @@ namespace Microsoft.CodeAnalysis.FlowAnalysis
                                     !analyzer.IsEqual(currentDestinationData, mergedAnalysisData)
                                     || !processedBlocks.Contains(destination)
                                 )
-                            ) {
+                            )
+                            {
                                 analyzer.SetCurrentAnalysisData(
                                     destination,
                                     mergedAnalysisData,
@@ -316,7 +325,8 @@ namespace Microsoft.CodeAnalysis.FlowAnalysis
                 ControlFlowRegion region,
                 int destinationOrdinal,
                 ref TBlockAnalysisData currentAnalysisData
-            ) {
+            )
+            {
                 while (!region.ContainsBlock(destinationOrdinal))
                 {
                     Debug.Assert(region.Kind != ControlFlowRegionKind.Root);
@@ -324,7 +334,8 @@ namespace Microsoft.CodeAnalysis.FlowAnalysis
                     if (
                         region.Kind == ControlFlowRegionKind.Try
                         && enclosing.Kind == ControlFlowRegionKind.TryAndFinally
-                    ) {
+                    )
+                    {
                         Debug.Assert(enclosing.NestedRegions[0] == region);
                         Debug.Assert(
                             enclosing.NestedRegions[1].Kind == ControlFlowRegionKind.Finally
@@ -334,7 +345,8 @@ namespace Microsoft.CodeAnalysis.FlowAnalysis
                                 enclosing.NestedRegions[1],
                                 ref currentAnalysisData
                             )
-                        ) {
+                        )
+                        {
                             // The point that continues dispatch is not reachable. Cancel the dispatch.
                             return false;
                         }
@@ -350,7 +362,8 @@ namespace Microsoft.CodeAnalysis.FlowAnalysis
             bool StepThroughSingleFinally(
                 ControlFlowRegion @finally,
                 ref TBlockAnalysisData currentAnalysisData
-            ) {
+            )
+            {
                 Debug.Assert(@finally.Kind == ControlFlowRegionKind.Finally);
                 var previousAnalysisData = analyzer.GetCurrentAnalysisData(
                     blocks[@finally.FirstBlockOrdinal]
@@ -419,7 +432,8 @@ namespace Microsoft.CodeAnalysis.FlowAnalysis
                                         enclosing.NestedRegions[1],
                                         ref currentAnalysisData
                                     )
-                                ) {
+                                )
+                                {
                                     // The point that continues dispatch is not reachable. Cancel the dispatch.
                                     return;
                                 }

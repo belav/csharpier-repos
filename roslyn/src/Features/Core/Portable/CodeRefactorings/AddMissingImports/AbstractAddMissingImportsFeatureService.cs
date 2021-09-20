@@ -34,7 +34,8 @@ namespace Microsoft.CodeAnalysis.AddMissingImports
             Document document,
             TextSpan textSpan,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var analysisResult = await AnalyzeAsync(document, textSpan, cancellationToken)
                 .ConfigureAwait(false);
             return await AddMissingImportsAsync(document, analysisResult, cancellationToken)
@@ -46,7 +47,8 @@ namespace Microsoft.CodeAnalysis.AddMissingImports
             Document document,
             AddMissingImportsAnalysisResult analysisResult,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             if (analysisResult.CanAddMissingImports)
             {
                 // Apply those fixes to the document.
@@ -67,7 +69,8 @@ namespace Microsoft.CodeAnalysis.AddMissingImports
             Document document,
             TextSpan textSpan,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             // Get the diagnostics that indicate a missing import.
             var diagnostics = await GetDiagnosticsAsync(document, textSpan, cancellationToken)
                 .ConfigureAwait(false);
@@ -95,7 +98,8 @@ namespace Microsoft.CodeAnalysis.AddMissingImports
         private static bool DoesNotAddReference(
             AddImportFixData fixData,
             ProjectId currentProjectId
-        ) {
+        )
+        {
             return (
                     fixData.ProjectReferenceToAdd is null
                     || fixData.ProjectReferenceToAdd == currentProjectId
@@ -111,7 +115,8 @@ namespace Microsoft.CodeAnalysis.AddMissingImports
             Document document,
             TextSpan textSpan,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var semanticModel = await document.GetSemanticModelAsync(cancellationToken)
                 .ConfigureAwait(false);
             if (semanticModel is null)
@@ -128,7 +133,8 @@ namespace Microsoft.CodeAnalysis.AddMissingImports
             Document document,
             ImmutableArray<Diagnostic> diagnostics,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var solution = document.Project.Solution;
             var symbolSearchService =
                 solution.Workspace.Services.GetRequiredService<ISymbolSearchService>();
@@ -178,7 +184,8 @@ namespace Microsoft.CodeAnalysis.AddMissingImports
             Document document,
             ImmutableArray<AddImportFixData> fixes,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             if (fixes.IsEmpty)
             {
                 return document;
@@ -264,7 +271,8 @@ namespace Microsoft.CodeAnalysis.AddMissingImports
             Document document,
             IEnumerable<TextSpan> insertSpans,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var languageFormatter = document.GetRequiredLanguageService<ISyntaxFormattingService>();
             var options = await document.GetOptionsAsync(cancellationToken).ConfigureAwait(false);
 
@@ -294,7 +302,8 @@ namespace Microsoft.CodeAnalysis.AddMissingImports
             ISyntaxFormattingService languageFormatter,
             OptionSet optionSet,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var root = await document.GetRequiredSyntaxRootAsync(cancellationToken)
                 .ConfigureAwait(false);
             var text = await document.GetTextAsync(cancellationToken).ConfigureAwait(false);
@@ -340,7 +349,8 @@ namespace Microsoft.CodeAnalysis.AddMissingImports
             ProgressTracker progressTracker,
             IDocumentTextDifferencingService textDiffingService,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             // CodeAction.GetChangedSolutionAsync is only implemented for code actions that can fully compute the new
             // solution without deferred computation or taking a dependency on the main thread. In other cases, the
             // implementation of GetChangedSolutionAsync will throw an exception and the code action application is
@@ -364,7 +374,8 @@ namespace Microsoft.CodeAnalysis.AddMissingImports
             else if (
                 operations.Length == 1
                 && operations[0] is ApplyChangesOperation applyChangesOperation
-            ) {
+            )
+            {
                 newSolution = applyChangesOperation.ChangedSolution;
             }
             else
@@ -401,7 +412,8 @@ namespace Microsoft.CodeAnalysis.AddMissingImports
                 in SyntaxToken previousToken,
                 in SyntaxToken currentToken,
                 in NextGetAdjustNewLinesOperation nextOperation
-            ) {
+            )
+            {
                 // Since we know the general shape of these new import statements, we simply look for where
                 // tokens are not on the same line and force them to only be separated by a single newline.
 

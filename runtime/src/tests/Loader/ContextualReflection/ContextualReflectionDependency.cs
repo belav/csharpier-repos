@@ -31,11 +31,13 @@ namespace ContextualReflectionTest
         static public Assembly ResolvingTestDefault(
             AssemblyLoadContext alc,
             AssemblyName assemblyName
-        ) {
+        )
+        {
             if (
                 assemblyName.Name.Contains("TestDefaultLoad")
                 && (ResolveEvent == ResolveEvents.NoEvent)
-            ) {
+            )
+            {
                 ResolveEvent = ResolveEvents.ExpectedEvent;
             }
             return null;
@@ -44,11 +46,13 @@ namespace ContextualReflectionTest
         static public Assembly ResolvingTestIsolated(
             AssemblyLoadContext alc,
             AssemblyName assemblyName
-        ) {
+        )
+        {
             if (
                 assemblyName.Name.Contains("TestIsolatedLoad")
                 && (ResolveEvent == ResolveEvents.NoEvent)
-            ) {
+            )
+            {
                 ResolveEvent = ResolveEvents.ExpectedEvent;
             }
             return null;

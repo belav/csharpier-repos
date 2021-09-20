@@ -53,7 +53,8 @@ namespace System.Web.Http.WebHost
                 // If the behavior is explicitly disabled, do nothing
                 if (
                     !SuppressFormsAuthRedirectHelper.GetEnabled(WebConfigurationManager.AppSettings)
-                ) {
+                )
+                {
                     return httpContext => { };
                 }
 
@@ -179,7 +180,8 @@ namespace System.Web.Http.WebHost
             HttpRequestMessage httpRequestMessage,
             string headerName,
             string[] headerValues
-        ) {
+        )
+        {
             Contract.Assert(httpRequestMessage != null);
             Contract.Assert(headerName != null);
             Contract.Assert(headerValues != null);
@@ -200,7 +202,8 @@ namespace System.Web.Http.WebHost
             IExceptionLogger exceptionLogger,
             IExceptionHandler exceptionHandler,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             Contract.Assert(httpContextBase != null);
             Contract.Assert(request != null);
 
@@ -219,7 +222,8 @@ namespace System.Web.Http.WebHost
                     exceptionLogger,
                     cancellationToken
                 )
-            ) {
+            )
+            {
                 return;
             }
 
@@ -265,7 +269,8 @@ namespace System.Web.Http.WebHost
         internal static HttpRequestMessage ConvertRequest(
             HttpContextBase httpContextBase,
             IHostBufferPolicySelector policySelector
-        ) {
+        )
+        {
             Contract.Assert(httpContextBase != null);
 
             HttpRequestBase requestBase = httpContextBase.Request;
@@ -301,7 +306,8 @@ namespace System.Web.Http.WebHost
             // Add the OWIN environment, when available (such as when using the OWIN integrated pipeline HTTP module).
             if (
                 httpContextItems != null && httpContextItems.Contains(OwinEnvironmentHttpContextKey)
-            ) {
+            )
+            {
                 request.Properties.Add(
                     OwinEnvironmentKey,
                     httpContextItems[OwinEnvironmentHttpContextKey]
@@ -434,7 +440,8 @@ namespace System.Web.Http.WebHost
         /// <param name="httpContextBase">The HTTP context base.</param>
         internal static void EnsureSuppressFormsAuthenticationRedirect(
             HttpContextBase httpContextBase
-        ) {
+        )
+        {
             Contract.Assert(httpContextBase != null);
 
             // Only if the response is status code is 401
@@ -457,7 +464,8 @@ namespace System.Web.Http.WebHost
             IExceptionLogger exceptionLogger,
             IExceptionHandler exceptionHandler,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             Contract.Assert(httpContextBase != null);
             Contract.Assert(response != null);
             Contract.Assert(request != null);
@@ -500,7 +508,8 @@ namespace System.Web.Http.WebHost
             HttpResponseMessage response,
             IExceptionLogger exceptionLogger,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             Contract.Assert(httpContextBase != null);
             Contract.Assert(httpContextBase.Response != null);
             Contract.Assert(request != null);
@@ -560,7 +569,8 @@ namespace System.Web.Http.WebHost
             IExceptionLogger exceptionLogger,
             IExceptionHandler exceptionHandler,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             Contract.Assert(httpContextBase != null);
             Contract.Assert(httpContextBase.Response != null);
             Contract.Assert(request != null);
@@ -615,7 +625,8 @@ namespace System.Web.Http.WebHost
                     exceptionHandler,
                     cancellationToken
                 )
-            ) {
+            )
+            {
                 exceptionInfo.Throw();
             }
         }
@@ -639,7 +650,8 @@ namespace System.Web.Http.WebHost
             IExceptionLogger exceptionLogger,
             IExceptionHandler exceptionHandler,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             Contract.Assert(httpContextBase != null);
             Contract.Assert(httpContextBase.Response != null);
             Contract.Assert(request != null);
@@ -690,7 +702,8 @@ namespace System.Web.Http.WebHost
                     exceptionLogger,
                     cancellationToken
                 )
-            ) {
+            )
+            {
                 // Don't rethrow the original exception unless explicitly requested to do so. In this case, the
                 // exception handler indicated it wanted to handle the exception; it simply failed create a stable
                 // response to send.
@@ -725,7 +738,8 @@ namespace System.Web.Http.WebHost
             HttpResponseMessage errorResponse,
             CancellationToken cancellationToken,
             IExceptionLogger exceptionLogger
-        ) {
+        )
+        {
             HttpRequestMessage ignoreUnused = request;
 
             try
@@ -778,7 +792,8 @@ namespace System.Web.Http.WebHost
             HttpResponseMessage response,
             IExceptionLogger exceptionLogger,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             Contract.Assert(httpContextBase != null);
             HttpResponseBase httpResponseBase = httpContextBase.Response;
             httpResponseBase.StatusCode = (int)response.StatusCode;
@@ -794,7 +809,8 @@ namespace System.Web.Http.WebHost
                     exceptionLogger,
                     cancellationToken
                 )
-            ) {
+            )
+            {
                 return false;
             }
 
@@ -815,7 +831,8 @@ namespace System.Web.Http.WebHost
             HttpResponseMessage response,
             IExceptionLogger exceptionLogger,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             Contract.Assert(response != null);
             HttpResponseHeaders responseHeaders = response.Headers;
             Contract.Assert(responseHeaders != null);
@@ -925,7 +942,8 @@ namespace System.Web.Http.WebHost
                 if (
                     httpContextBase.Request.ClientCertificate.Certificate != null
                     && httpContextBase.Request.ClientCertificate.Certificate.Length > 0
-                ) {
+                )
+                {
                     result = new X509Certificate2(
                         httpContextBase.Request.ClientCertificate.Certificate
                     );

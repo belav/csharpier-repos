@@ -21,16 +21,17 @@ namespace Microsoft.AspNetCore.Testing
             IMessageBus messageBus,
             ExceptionAggregator aggregator,
             CancellationTokenSource cancellationTokenSource
-        ) : base(
-            testCase,
-            displayName,
-            skipReason,
-            constructorArguments,
-            testMethodArguments,
-            messageBus,
-            aggregator,
-            cancellationTokenSource
-        ) { }
+        )
+            : base(
+                testCase,
+                displayName,
+                skipReason,
+                constructorArguments,
+                testMethodArguments,
+                messageBus,
+                aggregator,
+                cancellationTokenSource
+            ) { }
 
         protected override XunitTestRunner CreateTestRunner(
             ITest test,
@@ -43,7 +44,8 @@ namespace Microsoft.AspNetCore.Testing
             IReadOnlyList<BeforeAfterTestAttribute> beforeAfterAttributes,
             ExceptionAggregator aggregator,
             CancellationTokenSource cancellationTokenSource
-        ) {
+        )
+        {
             return new AspNetTestRunner(
                 test,
                 messageBus,

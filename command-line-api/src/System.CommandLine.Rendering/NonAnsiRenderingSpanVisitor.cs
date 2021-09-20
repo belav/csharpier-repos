@@ -36,7 +36,8 @@ namespace System.CommandLine.Rendering
             if (
                 span.RgbColor == null
                 && _foregroundColorMappings.TryGetValue(span.Name, out var color)
-            ) {
+            )
+            {
                 Terminal.ForegroundColor = color;
             }
             else
@@ -52,7 +53,8 @@ namespace System.CommandLine.Rendering
             if (
                 span.RgbColor == null
                 && _backgroundColorMappings.TryGetValue(span.Name, out var color)
-            ) {
+            )
+            {
                 Terminal.BackgroundColor = color;
             }
             else

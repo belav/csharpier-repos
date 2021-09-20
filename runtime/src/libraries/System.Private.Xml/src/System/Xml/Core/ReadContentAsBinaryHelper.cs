@@ -48,7 +48,8 @@ namespace System.Xml
         internal static ReadContentAsBinaryHelper CreateOrReset(
             ReadContentAsBinaryHelper? helper,
             XmlReader reader
-        ) {
+        )
+        {
             if (helper == null)
             {
                 return new ReadContentAsBinaryHelper(reader);
@@ -426,7 +427,8 @@ namespace System.Xml
                         if (
                             (_valueChunkLength = _reader.ReadValueChunk(_valueChunk!, 0, ChunkSize))
                             == 0
-                        ) {
+                        )
+                        {
                             break;
                         }
                         _valueOffset = 0;

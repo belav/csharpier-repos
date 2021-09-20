@@ -33,7 +33,8 @@ namespace Ignitor
                 Timeout != null
                 && Timeout != System.Threading.Timeout.InfiniteTimeSpan
                 && Timeout != TimeSpan.MaxValue
-            ) {
+            )
+            {
                 Cancellation.CancelAfter(Timeout.Value);
             }
 

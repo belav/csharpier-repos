@@ -21,7 +21,8 @@ namespace Microsoft.AspNetCore.Testing
             MethodInfo methodInfo,
             object[] testMethodArguments,
             ITestOutputHelper testOutputHelper
-        ) {
+        )
+        {
             base.Initialize(context, methodInfo, testMethodArguments, testOutputHelper);
 
             TestSink = new TestSink();

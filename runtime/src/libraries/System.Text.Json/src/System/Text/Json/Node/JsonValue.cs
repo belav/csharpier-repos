@@ -41,7 +41,8 @@ namespace System.Text.Json.Node
                 if (
                     element.ValueKind == JsonValueKind.Object
                     || element.ValueKind == JsonValueKind.Array
-                ) {
+                )
+                {
                     throw new InvalidOperationException(SR.NodeElementCannotBeObjectOrArray);
                 }
             }

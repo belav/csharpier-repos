@@ -19,7 +19,8 @@ namespace Microsoft.CodeAnalysis.ExternalAccess.VSTypeScript
         public override Task<ImmutableArray<Diagnostic>> AnalyzeSyntaxAsync(
             Document document,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var analyzer =
                 document.Project.LanguageServices.GetRequiredService<VSTypeScriptDiagnosticAnalyzerLanguageService>().Implementation;
             if (analyzer == null)
@@ -33,7 +34,8 @@ namespace Microsoft.CodeAnalysis.ExternalAccess.VSTypeScript
         public override Task<ImmutableArray<Diagnostic>> AnalyzeSemanticsAsync(
             Document document,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var analyzer =
                 document.Project.LanguageServices.GetRequiredService<VSTypeScriptDiagnosticAnalyzerLanguageService>().Implementation;
             if (analyzer == null)

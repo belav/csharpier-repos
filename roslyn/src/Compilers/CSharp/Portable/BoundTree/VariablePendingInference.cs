@@ -29,7 +29,8 @@ namespace Microsoft.CodeAnalysis.CSharp
         internal BoundExpression SetInferredTypeWithAnnotations(
             TypeWithAnnotations type,
             BindingDiagnosticBag? diagnosticsOpt
-        ) {
+        )
+        {
             Debug.Assert(type.HasType);
 
             return SetInferredTypeWithAnnotations(type, null, diagnosticsOpt);
@@ -39,7 +40,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             TypeWithAnnotations type,
             Binder? binderOpt,
             BindingDiagnosticBag? diagnosticsOpt
-        ) {
+        )
+        {
             Debug.Assert(binderOpt != null || type.HasType);
             Debug.Assert(
                 this.Syntax.Kind() == SyntaxKind.SingleVariableDesignation

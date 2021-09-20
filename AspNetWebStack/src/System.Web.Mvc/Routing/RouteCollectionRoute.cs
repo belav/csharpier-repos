@@ -47,7 +47,8 @@ namespace System.Web.Mvc.Routing
         public override VirtualPathData GetVirtualPath(
             RequestContext requestContext,
             RouteValueDictionary values
-        ) {
+        )
+        {
             // Link generation is not supported via the RouteCollectionRoute - see LinkGenerationRoute.
             return null;
         }

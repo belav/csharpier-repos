@@ -31,7 +31,8 @@ namespace Microsoft.EntityFrameworkCore.SqlServer.Query.Internal
         /// </summary>
         public SqlServerGeometryCollectionMemberTranslator(
             ISqlExpressionFactory sqlExpressionFactory
-        ) {
+        )
+        {
             _sqlExpressionFactory = sqlExpressionFactory;
         }
 
@@ -46,7 +47,8 @@ namespace Microsoft.EntityFrameworkCore.SqlServer.Query.Internal
             MemberInfo member,
             Type returnType,
             IDiagnosticsLogger<DbLoggerCategory.Query> logger
-        ) {
+        )
+        {
             Check.NotNull(member, nameof(member));
             Check.NotNull(returnType, nameof(returnType));
             Check.NotNull(logger, nameof(logger));

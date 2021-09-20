@@ -17,7 +17,8 @@ namespace System.Configuration
             CultureInfo ci,
             object value,
             Type type
-        ) {
+        )
+        {
             ValidateType(value, typeof(TimeSpan));
 
             return (TimeSpan)value == TimeSpan.MaxValue

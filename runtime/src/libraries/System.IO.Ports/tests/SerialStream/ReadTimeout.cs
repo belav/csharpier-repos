@@ -43,7 +43,8 @@ namespace System.IO.Ports.Tests
                 SerialPort com = new SerialPort(
                     TCSupport.LocalMachineSerialInfo.FirstAvailablePortName
                 )
-            ) {
+            )
+            {
                 com.Open();
                 Stream stream = com.BaseStream;
 
@@ -150,7 +151,8 @@ namespace System.IO.Ports.Tests
                 SerialPort com = new SerialPort(
                     TCSupport.LocalMachineSerialInfo.FirstAvailablePortName
                 )
-            ) {
+            )
+            {
                 com.Open();
                 Stream stream = com.BaseStream;
                 stream.ReadTimeout = 850;
@@ -184,7 +186,8 @@ namespace System.IO.Ports.Tests
         {
             using (
                 var com1 = new SerialPort(TCSupport.LocalMachineSerialInfo.FirstAvailablePortName)
-            ) {
+            )
+            {
                 var t = new Task(WriteToCom1);
 
                 com1.Open();
@@ -227,7 +230,8 @@ namespace System.IO.Ports.Tests
                 SerialPort com = new SerialPort(
                     TCSupport.LocalMachineSerialInfo.FirstAvailablePortName
                 )
-            ) {
+            )
+            {
                 com.Open();
                 Stream stream = com.BaseStream;
                 stream.ReadTimeout = 850;
@@ -248,7 +252,8 @@ namespace System.IO.Ports.Tests
         {
             using (
                 var com1 = new SerialPort(TCSupport.LocalMachineSerialInfo.FirstAvailablePortName)
-            ) {
+            )
+            {
                 var t = new Task(WriteToCom1);
 
                 com1.Open();
@@ -306,7 +311,8 @@ namespace System.IO.Ports.Tests
             )
             using (
                 var com2 = new SerialPort(TCSupport.LocalMachineSerialInfo.SecondAvailablePortName)
-            ) {
+            )
+            {
                 var rcvBytes = new byte[128];
                 int bytesRead;
 
@@ -346,7 +352,8 @@ namespace System.IO.Ports.Tests
             )
             using (
                 var com2 = new SerialPort(TCSupport.LocalMachineSerialInfo.SecondAvailablePortName)
-            ) {
+            )
+            {
                 int byteRead;
 
                 Debug.WriteLine("Verifying 0 ReadTimeout with ReadByte() and one byte available");
@@ -374,7 +381,8 @@ namespace System.IO.Ports.Tests
         {
             using (
                 var com2 = new SerialPort(TCSupport.LocalMachineSerialInfo.SecondAvailablePortName)
-            ) {
+            )
+            {
                 var xmitBuffer = new byte[1];
                 int sleepPeriod = SUCCESSIVE_READTIMEOUT_SOMEDATA / 2;
 
@@ -439,7 +447,8 @@ namespace System.IO.Ports.Tests
             ReadMethodDelegate readMethod,
             SerialPort com1,
             SerialPort com2
-        ) {
+        )
+        {
             var readThread = new ReadDelegateThread(com1.BaseStream, readMethod);
             var t = new Task(readThread.CallRead);
 
@@ -464,7 +473,8 @@ namespace System.IO.Ports.Tests
         {
             using (
                 var com1 = new SerialPort(TCSupport.LocalMachineSerialInfo.FirstAvailablePortName)
-            ) {
+            )
+            {
                 com1.Open();
                 com1.BaseStream.WriteTimeout = 1;
                 com1.BaseStream.ReadTimeout = 1;
@@ -553,7 +563,8 @@ namespace System.IO.Ports.Tests
         {
             using (
                 var com1 = new SerialPort(TCSupport.LocalMachineSerialInfo.FirstAvailablePortName)
-            ) {
+            )
+            {
                 com1.Open();
                 com1.BaseStream.WriteTimeout = 1;
                 com1.BaseStream.ReadTimeout = 1;
@@ -641,12 +652,14 @@ namespace System.IO.Ports.Tests
             int readTimeout,
             Type expectedExceptionAfterOpen,
             Type expectedExceptionAfterClose
-        ) {
+        )
+        {
             using (
                 SerialPort com = new SerialPort(
                     TCSupport.LocalMachineSerialInfo.FirstAvailablePortName
                 )
-            ) {
+            )
+            {
                 com.Open();
                 Stream stream = com.BaseStream;
 

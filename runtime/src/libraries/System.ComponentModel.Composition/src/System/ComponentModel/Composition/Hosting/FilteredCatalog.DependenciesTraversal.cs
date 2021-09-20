@@ -20,7 +20,8 @@ namespace System.ComponentModel.Composition.Hosting
             public DependenciesTraversal(
                 FilteredCatalog catalog,
                 Func<ImportDefinition, bool> importFilter
-            ) {
+            )
+            {
                 if (catalog == null)
                 {
                     throw new ArgumentNullException(nameof(catalog));
@@ -58,7 +59,8 @@ namespace System.ComponentModel.Composition.Hosting
                         contractName,
                         out List<ComposablePartDefinition>? parts
                     )
-                ) {
+                )
+                {
                     parts = new List<ComposablePartDefinition>();
                     _exportersIndex.Add(contractName, parts);
                 }
@@ -68,7 +70,8 @@ namespace System.ComponentModel.Composition.Hosting
             public bool TryTraverse(
                 ComposablePartDefinition part,
                 [NotNullWhen(true)] out IEnumerable<ComposablePartDefinition>? reachableParts
-            ) {
+            )
+            {
                 reachableParts = null;
                 List<ComposablePartDefinition>? reachablePartList = null;
 
@@ -87,14 +90,16 @@ namespace System.ComponentModel.Composition.Hosting
                             {
                                 foreach (
                                     ExportDefinition export in candidateReachablePart.ExportDefinitions
-                                ) {
+                                )
+                                {
                                     if (
                                         import.IsImportDependentOnPart(
                                             candidateReachablePart,
                                             export,
                                             part.IsGeneric() != candidateReachablePart.IsGeneric()
                                         )
-                                    ) {
+                                    )
+                                    {
                                         if (reachablePartList == null)
                                         {
                                             reachablePartList =

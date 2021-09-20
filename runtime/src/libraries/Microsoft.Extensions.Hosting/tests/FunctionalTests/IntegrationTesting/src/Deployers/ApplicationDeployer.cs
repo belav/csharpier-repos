@@ -27,7 +27,8 @@ namespace Microsoft.Extensions.Hosting.IntegrationTesting
         public ApplicationDeployer(
             DeploymentParameters deploymentParameters,
             ILoggerFactory loggerFactory
-        ) {
+        )
+        {
             DeploymentParameters = deploymentParameters;
             LoggerFactory = loggerFactory;
             Logger = LoggerFactory.CreateLogger(GetType().FullName);
@@ -40,7 +41,8 @@ namespace Microsoft.Extensions.Hosting.IntegrationTesting
             if (
                 DeploymentParameters.RuntimeFlavor == RuntimeFlavor.None
                 && !string.IsNullOrEmpty(DeploymentParameters.TargetFramework)
-            ) {
+            )
+            {
                 DeploymentParameters.RuntimeFlavor = GetRuntimeFlavor(
                     DeploymentParameters.TargetFramework
                 );
@@ -167,7 +169,8 @@ namespace Microsoft.Extensions.Hosting.IntegrationTesting
         protected void AddEnvironmentVariablesToProcess(
             ProcessStartInfo startInfo,
             IDictionary<string, string> environmentVariables
-        ) {
+        )
+        {
             var environment = startInfo.Environment;
             ProcessHelpers.SetEnvironmentVariable(
                 environment,

@@ -48,7 +48,8 @@ namespace Microsoft.VisualStudio.Debugger.Clr
             DkmClrAppDomain appDomain,
             Type lmrType,
             DkmClrObjectFavoritesInfo favorites = null
-        ) {
+        )
+        {
             _module = module;
             _appDomain = appDomain;
             _lmrType = lmrType;
@@ -106,7 +107,8 @@ namespace Microsoft.VisualStudio.Debugger.Clr
             object[] args,
             string alias,
             DkmEvaluationResultFlags evalFlags
-        ) {
+        )
+        {
             object value = UnderlyingType.Instantiate(args);
             return new DkmClrValue(
                 value,
@@ -248,7 +250,8 @@ namespace Microsoft.VisualStudio.Debugger.Clr
         private static ReadOnlyCollection<DkmClrDebuggerBrowsableAttribute> GetBrowsableAttributes(
             Type type,
             MemberInfo member
-        ) {
+        )
+        {
             var attributes = ArrayBuilder<DkmClrDebuggerBrowsableAttribute>.GetInstance();
             foreach (var attribute in member.GetCustomAttributesData())
             {
@@ -270,7 +273,8 @@ namespace Microsoft.VisualStudio.Debugger.Clr
 
         private static DkmClrDebuggerBrowsableAttributeState ConvertBrowsableState(
             DebuggerBrowsableState state
-        ) {
+        )
+        {
             switch (state)
             {
                 case DebuggerBrowsableState.Never:
@@ -307,7 +311,8 @@ namespace Microsoft.VisualStudio.Debugger.Clr
 
         private static DkmClrDebuggerVisualizerAttribute[] GetDebuggerVisualizerAttributes(
             System.Type type
-        ) {
+        )
+        {
             var attributesData = type.GetCustomAttributesData()
                 .Where(data => data.AttributeType == typeof(DebuggerVisualizerAttribute));
             if (attributesData.Count() == 0)
@@ -332,14 +337,16 @@ namespace Microsoft.VisualStudio.Debugger.Clr
                             "System.String",
                             System.StringComparison.Ordinal
                         )
-                    ) {
+                    )
+                    {
                         var typeName = (string)typedArg.Value;
                         var assembly = type.Assembly;
                         argValueType = assembly.GetType(typeName);
                     }
                     else if (
                         string.Equals(argumentType, "System.Type", System.StringComparison.Ordinal)
-                    ) {
+                    )
+                    {
                         argValueType = typedArg.Value as System.Type;
                     }
 

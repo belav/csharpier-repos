@@ -25,7 +25,8 @@ namespace System.Runtime.Serialization.Json
             XmlObjectSerializerWriteContextComplexJson context,
             ClassDataContract classContract,
             XmlDictionaryString[]? memberNames
-        ) {
+        )
+        {
             _reflectionClassWriter.ReflectionWriteClass(
                 xmlWriter,
                 obj,
@@ -41,7 +42,8 @@ namespace System.Runtime.Serialization.Json
             object obj,
             XmlObjectSerializerWriteContextComplexJson context,
             CollectionDataContract collectionContract
-        ) {
+        )
+        {
             JsonWriterDelegator? jsonWriter = xmlWriter as JsonWriterDelegator;
             if (jsonWriter == null)
             {
@@ -62,7 +64,8 @@ namespace System.Runtime.Serialization.Json
                         itemType,
                         itemName
                     )
-                ) {
+                )
+                {
                     ReflectionWriteArrayAttribute(jsonWriter);
 
                     Array array = (Array)obj;
@@ -134,7 +137,8 @@ namespace System.Runtime.Serialization.Json
                     if (
                         primitiveContractForType != null
                         && primitiveContractForType.UnderlyingType != Globals.TypeOfObject
-                    ) {
+                    )
+                    {
                         while (enumerator.MoveNext())
                         {
                             object current = enumerator.Current;
@@ -218,7 +222,8 @@ namespace System.Runtime.Serialization.Json
             Type underlyingType,
             Type itemType,
             XmlDictionaryString collectionItemName
-        ) {
+        )
+        {
             PrimitiveDataContract? primitiveContract =
                 PrimitiveDataContract.GetPrimitiveDataContract(itemType);
             if (primitiveContract == null)
@@ -303,7 +308,8 @@ namespace System.Runtime.Serialization.Json
             ClassDataContract derivedMostClassContract,
             int childElementIndex,
             XmlDictionaryString[]? memberNames
-        ) {
+        )
+        {
             Debug.Assert(memberNames != null);
 
             int memberCount =
@@ -344,7 +350,8 @@ namespace System.Runtime.Serialization.Json
                     if (
                         (memberValue == null && defaultValue == null)
                         || (memberValue != null && memberValue.Equals(defaultValue))
-                    ) {
+                    )
+                    {
                         shouldWriteValue = false;
 
                         if (member.IsRequired)
@@ -383,7 +390,8 @@ namespace System.Runtime.Serialization.Json
                             ,
                             primitiveContract
                         )
-                    ) {
+                    )
+                    {
                         // Note: DataContractSerializer has member-conflict logic here to deal with the schema export
                         //       requirement that the same member can't be of two different types.
                         if (requiresNameAttribute)
@@ -431,7 +439,8 @@ namespace System.Runtime.Serialization.Json
         public void ReflectionWriteStartElement(
             XmlWriterDelegator xmlWriter,
             XmlDictionaryString name
-        ) {
+        )
+        {
             xmlWriter.WriteStartElement(name, null);
         }
 

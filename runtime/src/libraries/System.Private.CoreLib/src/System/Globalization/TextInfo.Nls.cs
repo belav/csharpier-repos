@@ -13,7 +13,8 @@ namespace System.Globalization
             char* pResult,
             int pResultLen,
             bool toUpper
-        ) {
+        )
+        {
             Debug.Assert(!GlobalizationMode.Invariant);
             Debug.Assert(GlobalizationMode.UseNls);
             Debug.Assert(pSource != null);

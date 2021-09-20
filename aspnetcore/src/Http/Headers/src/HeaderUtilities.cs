@@ -97,7 +97,8 @@ namespace Microsoft.Net.Http.Headers
             ICollection<T>? x,
             ICollection<T>? y,
             IEqualityComparer<T>? comparer
-        ) {
+        )
+        {
             if (x == null)
             {
                 return (y == null) || (y.Count == 0);
@@ -135,7 +136,8 @@ namespace Microsoft.Net.Http.Headers
                         if (
                             ((comparer == null) && xItem.Equals(yItem))
                             || ((comparer != null) && comparer.Equals(xItem, yItem))
-                        ) {
+                        )
+                        {
                             alreadyFound[i] = true;
                             found = true;
                             break;
@@ -171,7 +173,8 @@ namespace Microsoft.Net.Http.Headers
             int startIndex,
             bool skipEmptyValues,
             out bool separatorFound
-        ) {
+        )
+        {
             Contract.Requires(startIndex <= input.Length); // it's OK if index == value.Length.
 
             separatorFound = false;
@@ -252,7 +255,8 @@ namespace Microsoft.Net.Http.Headers
             StringValues headerValues,
             string targetValue,
             [NotNullWhen(true)] out TimeSpan? value
-        ) {
+        )
+        {
             if (StringValues.IsNullOrEmpty(headerValues) || string.IsNullOrEmpty(targetValue))
             {
                 value = null;
@@ -284,7 +288,8 @@ namespace Microsoft.Net.Http.Headers
                             headerValues[i],
                             out seconds
                         )
-                    ) {
+                    )
+                    {
                         // Token matches target value and seconds were parsed
                         value = TimeSpan.FromSeconds(seconds);
                         return true;
@@ -324,11 +329,13 @@ namespace Microsoft.Net.Http.Headers
         public static bool ContainsCacheDirective(
             StringValues cacheControlDirectives,
             string targetDirectives
-        ) {
+        )
+        {
             if (
                 StringValues.IsNullOrEmpty(cacheControlDirectives)
                 || string.IsNullOrEmpty(targetDirectives)
-            ) {
+            )
+            {
                 return false;
             }
 
@@ -355,7 +362,8 @@ namespace Microsoft.Net.Http.Headers
                             tokenLength,
                             StringComparison.OrdinalIgnoreCase
                         ) == 0
-                    ) {
+                    )
+                    {
                         // Token matches target value
                         return true;
                     }
@@ -384,7 +392,8 @@ namespace Microsoft.Net.Http.Headers
             int startIndex,
             string headerValue,
             out long result
-        ) {
+        )
+        {
             // Trim leading whitespace
             startIndex += HttpRuleParser.GetWhitespaceLength(headerValue, startIndex);
 
@@ -409,7 +418,8 @@ namespace Microsoft.Net.Http.Headers
                     ),
                     out result
                 )
-            ) {
+            )
+            {
                 return true;
             }
 
@@ -486,7 +496,8 @@ namespace Microsoft.Net.Http.Headers
             int startIndex,
             out double quality,
             out int length
-        ) {
+        )
+        {
             quality = 0;
             length = 0;
 
@@ -798,7 +809,8 @@ namespace Microsoft.Net.Http.Headers
 
         private static int CountAndCheckCharactersNeedingBackslashesWhenEncoding(
             StringSegment input
-        ) {
+        )
+        {
             var numberOfCharactersNeedingEscaping = 0;
             for (var i = 0; i < input.Length; i++)
             {

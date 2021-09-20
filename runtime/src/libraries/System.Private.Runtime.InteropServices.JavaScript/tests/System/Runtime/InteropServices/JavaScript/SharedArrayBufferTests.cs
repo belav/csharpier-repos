@@ -123,7 +123,8 @@ namespace System.Runtime.InteropServices.JavaScript.Tests
         [MemberData(nameof(GetTestData), 16)]
         public static void SharedArrayBufferSliceAndDice3_SubsetFromTheBack(
             SharedArrayBuffer buffer
-        ) {
+        )
+        {
             Int32Array sliced = new Int32Array(buffer.Slice(-4));
 
             Assert.Equal(1, sliced.Length);
@@ -134,7 +135,8 @@ namespace System.Runtime.InteropServices.JavaScript.Tests
         [MemberData(nameof(GetTestData), 16)]
         public static void SharedArrayBufferSliceAndDice3_SubsetFromTheBackWithEnd(
             SharedArrayBuffer buffer
-        ) {
+        )
+        {
             Int32Array sliced = new Int32Array(buffer.Slice(-12, -4));
 
             Assert.Equal(2, sliced.Length);

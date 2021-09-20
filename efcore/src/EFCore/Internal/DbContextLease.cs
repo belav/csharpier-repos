@@ -102,7 +102,8 @@ namespace Microsoft.EntityFrameworkCore.Internal
         private bool Release(
             [NotNullWhen(true)] out IDbContextPool? pool,
             [NotNullWhen(true)] out IDbContextPoolable? context
-        ) {
+        )
+        {
             pool = _contextPool;
             context = Context;
             _contextPool = null;

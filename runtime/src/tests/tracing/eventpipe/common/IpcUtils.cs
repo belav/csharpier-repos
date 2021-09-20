@@ -60,7 +60,8 @@ namespace Tracing.Tests.Common
             Func<Task> beforeExecution = null,
             Func<int, Task> duringExecution = null,
             Func<Task> afterExecution = null
-        ) {
+        )
+        {
             bool fSuccess = true;
             using (var process = new Process())
             {

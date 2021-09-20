@@ -27,7 +27,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Options.Style.N
             ObservableCollection<MutableNamingStyle> namingStyles,
             List<NamingStyleOptionPageViewModel.NamingRuleViewModel> namingRules,
             INotificationService notificationService
-        ) {
+        )
+        {
             _notificationService = notificationService;
 
             Items = new ObservableCollection<INamingStylesInfoDialogViewModel>(

@@ -125,7 +125,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             CultureInfo preferredCulture = null,
             bool expandIncludes = false,
             CancellationToken cancellationToken = default(CancellationToken)
-        ) {
+        )
+        {
             return _underlyingTypeParameter.GetDocumentationCommentXml(
                 preferredCulture,
                 expandIncludes,

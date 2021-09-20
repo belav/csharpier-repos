@@ -553,7 +553,8 @@ namespace System.Xml.Tests
                 if (
                     (DataReader.NodeType == XmlNodeType.Element)
                     && (DataReader.LocalName == "check")
-                ) {
+                )
+                {
                     CError.Compare(DataReader.NamespaceURI, "1", "Compare Namespace");
                     CError.Compare(DataReader.Name, "bar:check", "Compare Name");
                     CError.Compare(DataReader.LocalName, "check", "Compare LocalName");
@@ -625,7 +626,8 @@ namespace System.Xml.Tests
                 if (
                     (DataReader.NodeType == XmlNodeType.Element)
                     && (DataReader.LocalName == "check")
-                ) {
+                )
+                {
                     CError.Compare(DataReader.NamespaceURI, "2", "Compare Namespace");
                     CError.Compare(DataReader.Name, "bar:check", "Compare Name");
                     CError.Compare(DataReader.LocalName, "check", "Compare LocalName");
@@ -871,7 +873,8 @@ namespace System.Xml.Tests
                 CError.Compare(DataReader.LookupNamespace("bar"), "1", "Compare LookupNamespace");
                 if (
                     DataReader.Name == "NAMESPACE1" && DataReader.NodeType == XmlNodeType.EndElement
-                ) {
+                )
+                {
                     DataReader.Read();
                     break;
                 }
@@ -937,7 +940,8 @@ namespace System.Xml.Tests
 
                 if (
                     DataReader.Name == "NAMESPACE2" && DataReader.NodeType == XmlNodeType.EndElement
-                ) {
+                )
+                {
                     CError.Compare(
                         DataReader.LookupNamespace("bar"),
                         strValue,
@@ -960,7 +964,8 @@ namespace System.Xml.Tests
             string strF,
             string strG,
             string strH
-        ) {
+        )
+        {
             CError.Compare(
                 DataReader.LookupNamespace(string.Empty),
                 strDef,
@@ -1107,7 +1112,8 @@ namespace System.Xml.Tests
 
                 if (
                     DataReader.Name == "NAMESPACE3" && DataReader.NodeType == XmlNodeType.EndElement
-                ) {
+                )
+                {
                     CompareAllNS(strDef, strA, strB, strC, strD, strE, strF, strG, strH);
                     DataReader.Read();
                     break;
@@ -1859,7 +1865,8 @@ namespace System.Xml.Tests
                         if (
                             DataReader.Name == "XMLSPACE4"
                             && DataReader.NodeType == XmlNodeType.EndElement
-                        ) {
+                        )
+                        {
                             DataReader.Read();
                             break;
                         }
@@ -1904,7 +1911,8 @@ namespace System.Xml.Tests
                 );
                 if (
                     DataReader.Name == "XMLSPACE2A" && DataReader.NodeType == XmlNodeType.EndElement
-                ) {
+                )
+                {
                     DataReader.Read();
                     break;
                 }
@@ -2086,7 +2094,8 @@ namespace System.Xml.Tests
                         if (
                             DataReader.Name == "XMLLANG0"
                             && DataReader.NodeType == XmlNodeType.EndElement
-                        ) {
+                        )
+                        {
                             DataReader.Read();
                             break;
                         }
@@ -2431,7 +2440,8 @@ namespace System.Xml.Tests
             while (
                 DataReader.ReadAttributeValue()
                 && DataReader.NodeType != XmlNodeType.EntityReference
-            ) {
+            )
+            {
                 CError.WriteLine(DataReader.Value);
             }
             bPassed =
@@ -2969,7 +2979,8 @@ namespace System.Xml.Tests
                 if (
                     DataReader.NodeType == XmlNodeType.EntityReference
                     && DataReader.CanResolveEntity
-                ) {
+                )
+                {
                     DataReader.ResolveEntity();
                     DataReader.Read(); // Text
                     CError.Compare(DataReader.BaseURI, uriEnt.ToString(), "ent1 baseuri");

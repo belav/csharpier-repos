@@ -32,7 +32,8 @@ namespace Microsoft.CodeAnalysis.Editor
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
         public EditorLayerExtensionManager(
             [ImportMany] IEnumerable<IExtensionErrorHandler> errorHandlers
-        ) {
+        )
+        {
             _errorHandlers = errorHandlers.ToList();
         }
 
@@ -62,7 +63,8 @@ namespace Microsoft.CodeAnalysis.Editor
                 IErrorReportingService errorReportingService,
                 IErrorLoggerService errorLoggerService,
                 List<IExtensionErrorHandler> errorHandlers
-            ) {
+            )
+            {
                 _optionsService = optionsService;
                 _errorHandlers = errorHandlers;
                 _errorReportingService = errorReportingService;
@@ -75,13 +77,15 @@ namespace Microsoft.CodeAnalysis.Editor
                     provider is CodeFixProvider
                     || provider is FixAllProvider
                     || provider is CodeRefactoringProvider
-                ) {
+                )
+                {
                     if (
                         !IsIgnored(provider)
                         && _optionsService.GetOption(
                             ExtensionManagerOptions.DisableCrashingExtensions
                         )
-                    ) {
+                    )
+                    {
                         base.HandleException(provider, exception);
 
                         _errorReportingService?.ShowGlobalErrorInfo(
@@ -130,7 +134,8 @@ namespace Microsoft.CodeAnalysis.Editor
                 {
                     if (
                         _optionsService.GetOption(ExtensionManagerOptions.DisableCrashingExtensions)
-                    ) {
+                    )
+                    {
                         base.HandleException(provider, exception);
                     }
 

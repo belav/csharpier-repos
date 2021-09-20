@@ -48,7 +48,8 @@ namespace System.Web.Mvc.Routing
         public static DirectRouteCandidate SelectBestCandidate(
             List<DirectRouteCandidate> candidates,
             ControllerContext controllerContext
-        ) {
+        )
+        {
             Debug.Assert(controllerContext != null);
             Debug.Assert(candidates != null);
 
@@ -85,7 +86,8 @@ namespace System.Web.Mvc.Routing
 
         private static AmbiguousMatchException CreateAmbiguiousMatchException(
             List<DirectRouteCandidate> candidates
-        ) {
+        )
+        {
             string ambiguityList = CreateAmbiguousMatchList(candidates);
             string message = String.Format(
                 CultureInfo.CurrentCulture,
@@ -98,7 +100,8 @@ namespace System.Web.Mvc.Routing
 
         protected static string CreateAmbiguousMatchList(
             IEnumerable<DirectRouteCandidate> candidates
-        ) {
+        )
+        {
             StringBuilder exceptionMessageBuilder = new StringBuilder();
             foreach (DirectRouteCandidate candidate in candidates)
             {
@@ -141,7 +144,8 @@ namespace System.Web.Mvc.Routing
         private static List<DirectRouteCandidate> ApplyActionNameFilters(
             List<DirectRouteCandidate> candidates,
             ControllerContext controllerContext
-        ) {
+        )
+        {
             List<DirectRouteCandidate> filtered = new List<DirectRouteCandidate>();
             foreach (DirectRouteCandidate candidate in candidates)
             {
@@ -158,7 +162,8 @@ namespace System.Web.Mvc.Routing
                         candidate.ActionNameSelectors.All(
                             selector => selector(controllerContext, actionName)
                         )
-                    ) {
+                    )
+                    {
                         filtered.Add(candidate);
                     }
                 }
@@ -170,7 +175,8 @@ namespace System.Web.Mvc.Routing
                             candidate.ActionDescriptor.ActionName,
                             StringComparison.OrdinalIgnoreCase
                         )
-                    ) {
+                    )
+                    {
                         filtered.Add(candidate);
                     }
                 }
@@ -187,7 +193,8 @@ namespace System.Web.Mvc.Routing
         private static List<DirectRouteCandidate> ApplyActionSelectors(
             List<DirectRouteCandidate> candidates,
             ControllerContext controllerContext
-        ) {
+        )
+        {
             List<DirectRouteCandidate> matchesWithActionSelectors =
                 new List<DirectRouteCandidate>();
             List<DirectRouteCandidate> matchesWithoutActionSelectors =
@@ -215,7 +222,8 @@ namespace System.Web.Mvc.Routing
 
         private static List<DirectRouteCandidate> FilterByOrder(
             List<DirectRouteCandidate> candidates
-        ) {
+        )
+        {
             if (!candidates.Any())
             {
                 return candidates;
@@ -227,7 +235,8 @@ namespace System.Web.Mvc.Routing
 
         private static List<DirectRouteCandidate> FilterByPrecedence(
             List<DirectRouteCandidate> candidates
-        ) {
+        )
+        {
             if (!candidates.Any())
             {
                 return candidates;

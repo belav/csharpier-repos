@@ -21,7 +21,8 @@ namespace System.IO.Tests
                     bufferSize: 0x1000,
                     FileOptions.None
                 )
-            ) {
+            )
+            {
                 Assert.False(fs.WriteArrayInvoked);
                 Assert.False(fs.ReadArrayInvoked);
 
@@ -48,7 +49,8 @@ namespace System.IO.Tests
                     bufferSize: 0x1000,
                     FileOptions.None
                 )
-            ) {
+            )
+            {
                 Assert.False(fs.WriteAsyncArrayInvoked);
                 Assert.False(fs.ReadAsyncArrayInvoked);
 
@@ -97,7 +99,8 @@ namespace System.IO.Tests
             int offset,
             int count,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             ReadAsyncArrayInvoked = true;
             return base.ReadAsync(buffer, offset, count, cancellationToken);
         }
@@ -107,7 +110,8 @@ namespace System.IO.Tests
             int offset,
             int count,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             WriteAsyncArrayInvoked = true;
             return base.WriteAsync(buffer, offset, count, cancellationToken);
         }

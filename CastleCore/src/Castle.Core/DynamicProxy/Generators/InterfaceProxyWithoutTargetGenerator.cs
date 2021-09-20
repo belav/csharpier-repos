@@ -38,7 +38,8 @@ namespace Castle.DynamicProxy.Generators
         protected override CompositeTypeContributor GetProxyTargetContributor(
             Type proxyTargetType,
             INamingScope namingScope
-        ) {
+        )
+        {
             return new InterfaceProxyWithoutTargetContributor(
                 namingScope,
                 (c, m) => NullExpression.Instance
@@ -66,7 +67,8 @@ namespace Castle.DynamicProxy.Generators
             Type _,
             out IEnumerable<ITypeContributor> contributors,
             INamingScope namingScope
-        ) {
+        )
+        {
             return base.GetTypeImplementerMapping(
                 proxyTargetType: targetType,
                 out contributors,

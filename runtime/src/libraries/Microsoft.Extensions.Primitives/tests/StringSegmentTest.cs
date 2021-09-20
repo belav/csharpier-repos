@@ -118,7 +118,8 @@ namespace Microsoft.Extensions.Primitives
         public void StringSegmentConstructor_OffsetOrLengthOutOfBounds_Throws(
             int offset,
             int length
-        ) {
+        )
+        {
             // Arrange, Act and Assert
             Assert.Throws<ArgumentException>(() => new StringSegment("lengthof9", offset, length));
         }
@@ -217,7 +218,8 @@ namespace Microsoft.Extensions.Primitives
             int length,
             int index,
             char expected
-        ) {
+        )
+        {
             var segment = new StringSegment(value, offset, length);
 
             var result = segment[index];
@@ -234,7 +236,8 @@ namespace Microsoft.Extensions.Primitives
             int offset,
             int length,
             int index
-        ) {
+        )
+        {
             var segment = new StringSegment(value, offset, length);
 
             Assert.Throws<ArgumentOutOfRangeException>(() => segment[index]);
@@ -267,7 +270,8 @@ namespace Microsoft.Extensions.Primitives
             string candidate,
             StringComparison comparison,
             bool expectedResult
-        ) {
+        )
+        {
             // Arrange
             var segment = new StringSegment("Hello, World!", 1, 4);
 
@@ -348,7 +352,8 @@ namespace Microsoft.Extensions.Primitives
             string candidate,
             StringComparison comparison,
             bool expectedResult
-        ) {
+        )
+        {
             // Arrange
             var segment = new StringSegment("Hello, World!", 1, 4);
 
@@ -421,7 +426,8 @@ namespace Microsoft.Extensions.Primitives
             string candidate,
             StringComparison comparison,
             bool expectedResult
-        ) {
+        )
+        {
             // Arrange
             var segment = new StringSegment("Hello, World!", 1, 4);
 
@@ -561,7 +567,8 @@ namespace Microsoft.Extensions.Primitives
         public void GetHashCode_ReturnsSameValueForEqualSubstrings(
             StringSegment segment1,
             StringSegment segment2
-        ) {
+        )
+        {
             // Act
             var hashCode1 = segment1.GetHashCode();
             var hashCode2 = segment2.GetHashCode();
@@ -590,7 +597,8 @@ namespace Microsoft.Extensions.Primitives
         public void GetHashCode_ReturnsDifferentValuesForInequalSubstrings(
             StringSegment segment1,
             StringSegment segment2
-        ) {
+        )
+        {
             // Act
             var hashCode1 = segment1.GetHashCode();
             var hashCode2 = segment2.GetHashCode();
@@ -717,7 +725,8 @@ namespace Microsoft.Extensions.Primitives
             StringSegment candidate,
             StringComparison comparison,
             bool expectedResult
-        ) {
+        )
+        {
             // Arrange
             var segment = new StringSegment("Hello, World!", 1, 4);
 
@@ -935,7 +944,8 @@ namespace Microsoft.Extensions.Primitives
         public void StringSegment_Compare_Lesser(
             StringSegment candidate,
             StringSegmentComparer comparer
-        ) {
+        )
+        {
             // Arrange
             var segment = new StringSegment("ABCDEF", 1, 4);
 
@@ -966,7 +976,8 @@ namespace Microsoft.Extensions.Primitives
         public void StringSegment_Compare_Equal(
             StringSegment candidate,
             StringSegmentComparer comparer
-        ) {
+        )
+        {
             // Arrange
             var segment = new StringSegment("abcdef", 1, 4);
 
@@ -996,7 +1007,8 @@ namespace Microsoft.Extensions.Primitives
         public void StringSegment_Compare_Greater(
             StringSegment candidate,
             StringSegmentComparer comparer
-        ) {
+        )
+        {
             // Arrange
             var segment = new StringSegment("abcdef", 1, 4);
 
@@ -1029,7 +1041,8 @@ namespace Microsoft.Extensions.Primitives
         public void StringSegmentComparerOrdinal_GetHashCode_ReturnsSameValueForEqualSubstrings(
             StringSegment segment1,
             StringSegment segment2
-        ) {
+        )
+        {
             // Arrange
             var comparer = StringSegmentComparer.Ordinal;
 
@@ -1046,7 +1059,8 @@ namespace Microsoft.Extensions.Primitives
         public void StringSegmentComparerOrdinalIgnoreCase_GetHashCode_ReturnsSameValueForEqualSubstrings(
             StringSegment segment1,
             StringSegment segment2
-        ) {
+        )
+        {
             // Arrange
             var comparer = StringSegmentComparer.OrdinalIgnoreCase;
 
@@ -1079,7 +1093,8 @@ namespace Microsoft.Extensions.Primitives
         public void StringSegmentComparerOrdinal_GetHashCode_ReturnsDifferentValuesForInequalSubstrings(
             StringSegment segment1,
             StringSegment segment2
-        ) {
+        )
+        {
             // Arrange
             var comparer = StringSegmentComparer.Ordinal;
 
@@ -1294,7 +1309,8 @@ namespace Microsoft.Extensions.Primitives
             int start,
             int length,
             string expected
-        ) {
+        )
+        {
             // Arrange
             var segment = new StringSegment(value, start, length);
 
@@ -1325,7 +1341,8 @@ namespace Microsoft.Extensions.Primitives
             int start,
             int length,
             string expected
-        ) {
+        )
+        {
             // Arrange
             var segment = new StringSegment(value, start, length);
 
@@ -1356,7 +1373,8 @@ namespace Microsoft.Extensions.Primitives
             int start,
             int length,
             string expected
-        ) {
+        )
+        {
             // Arrange
             var segment = new StringSegment(value, start, length);
 
@@ -1409,7 +1427,8 @@ namespace Microsoft.Extensions.Primitives
             string b,
             StringComparison comparisonType,
             int expectedCompareToSign
-        ) {
+        )
+        {
             // quick sanity check: run the parameters against the normal string functions to ensure our test data is valid
             int returnedSign = string.Compare(a, b, comparisonType);
             Assert.Equal(expectedCompareToSign, Math.Sign(returnedSign));
@@ -1513,7 +1532,8 @@ namespace Microsoft.Extensions.Primitives
             string b,
             StringComparison comparisonType,
             bool expectedResult
-        ) {
+        )
+        {
             // quick sanity check: run the parameters against the normal string functions to ensure our test data is valid
             if (a != null)
             {
@@ -1573,7 +1593,8 @@ namespace Microsoft.Extensions.Primitives
             string b,
             StringComparison comparisonType,
             bool expectedResult
-        ) {
+        )
+        {
             // quick sanity check: run the parameters against the normal string functions to ensure our test data is valid
             if (a != null)
             {

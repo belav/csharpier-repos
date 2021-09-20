@@ -14,7 +14,8 @@ namespace Microsoft.AspNetCore.Razor.Language.Extensions
         protected override void ExecuteCore(
             RazorCodeDocument codeDocument,
             DocumentIntermediateNode documentNode
-        ) {
+        )
+        {
             if (codeDocument == null)
             {
                 throw new ArgumentNullException(nameof(codeDocument));

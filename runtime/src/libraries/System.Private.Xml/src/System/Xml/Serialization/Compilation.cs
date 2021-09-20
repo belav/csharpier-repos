@@ -40,7 +40,8 @@ namespace System.Xml.Serialization
             XmlMapping[] xmlMappings,
             Assembly assembly,
             XmlSerializerImplementation? contract
-        ) {
+        )
+        {
             _assembly = assembly;
             InitAssemblyMethods(xmlMappings);
             _contract = contract;
@@ -52,7 +53,8 @@ namespace System.Xml.Serialization
             Type?[] types,
             string? defaultNamespace,
             string? location
-        ) {
+        )
+        {
             bool containsSoapMapping = false;
             for (int i = 0; i < xmlMappings.Length; i++)
             {
@@ -154,7 +156,8 @@ namespace System.Xml.Serialization
             Type type,
             string? defaultNamespace,
             out XmlSerializerImplementation? contract
-        ) {
+        )
+        {
             Assembly? serializer = null;
             contract = null;
             string? serializerName = null;
@@ -189,7 +192,8 @@ namespace System.Xml.Serialization
                     if (
                         (string.IsNullOrEmpty(serializerPath) || !File.Exists(serializerPath))
                         && !string.IsNullOrEmpty(Assembly.GetEntryAssembly()?.Location)
-                    ) {
+                    )
+                    {
                         serializerPath = Path.Combine(
                             Path.GetDirectoryName(Assembly.GetEntryAssembly()!.Location)!,
                             serializerName + ".dll"
@@ -207,7 +211,8 @@ namespace System.Xml.Serialization
                         e is ThreadAbortException
                         || e is StackOverflowException
                         || e is OutOfMemoryException
-                    ) {
+                    )
+                    {
                         throw;
                     }
                     byte[]? token = name.GetPublicKeyToken();
@@ -262,7 +267,8 @@ namespace System.Xml.Serialization
                 }
                 else if (
                     assemblyAttribute.CodeBase != null && assemblyAttribute.CodeBase.Length > 0
-                ) {
+                )
+                {
                     serializerName = assemblyAttribute.CodeBase;
                     serializer = Assembly.LoadFrom(serializerName);
                 }
@@ -288,7 +294,8 @@ namespace System.Xml.Serialization
             Assembly serializer,
             Type type,
             string? defaultNamespace
-        ) {
+        )
+        {
             if (serializer == null)
                 return false;
             object[] attrs = serializer.GetCustomAttributes(
@@ -336,7 +343,8 @@ namespace System.Xml.Serialization
             Assembly? assembly,
             Hashtable assemblies,
             Stream stream
-        ) {
+        )
+        {
             var compiler = new Compiler();
             try
             {
@@ -524,7 +532,8 @@ namespace System.Xml.Serialization
             XmlMapping[] xmlMappings,
             Type?[]? types,
             string? defaultNamespace
-        ) {
+        )
+        {
             var scopeTable = new Dictionary<TypeScope, XmlMapping>();
             foreach (XmlMapping mapping in xmlMappings)
                 scopeTable[mapping.Scope!] = mapping;
@@ -640,7 +649,8 @@ namespace System.Xml.Serialization
         private static MethodInfo GetMethodFromType(
             [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicMethods)] Type type,
             string methodName
-        ) {
+        )
+        {
             MethodInfo? method = type.GetMethod(methodName);
             if (method != null)
                 return method;
@@ -719,7 +729,8 @@ namespace System.Xml.Serialization
             XmlReader xmlReader,
             XmlDeserializationEvents events,
             string? encodingStyle
-        ) {
+        )
+        {
             XmlSerializationReader? reader = null;
             try
             {
@@ -765,7 +776,8 @@ namespace System.Xml.Serialization
             XmlSerializerNamespaces? namespaces,
             string? encodingStyle,
             string? id
-        ) {
+        )
+        {
             XmlSerializationWriter? writer = null;
             try
             {

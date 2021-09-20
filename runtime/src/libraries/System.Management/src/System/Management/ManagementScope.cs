@@ -575,7 +575,8 @@ namespace System.Management
                 && LoadDelegate(ref ConnectServerWmi_f, hModule, "ConnectServerWmi")
                 && LoadDelegate(ref GetErrorInfo_f, hModule, "GetErrorInfo")
                 && LoadDelegate(ref Initialize_f, hModule, "Initialize")
-            ) {
+            )
+            {
                 // All required delegates were loaded.
                 Initialize_f(CompatSwitches.AllowIManagementObjectQI);
             }
@@ -982,7 +983,8 @@ namespace System.Management
             ManagementPath path,
             IWbemServices wbemServices,
             ConnectionOptions options
-        ) {
+        )
+        {
             if (null != path)
                 this.Path = path;
 
@@ -1007,7 +1009,8 @@ namespace System.Management
         internal static ManagementScope _Clone(
             ManagementScope scope,
             IdentifierChangedEventHandler handler
-        ) {
+        )
+        {
             ManagementScope scopeTmp = new ManagementScope(null, null, null);
 
             // Wire up change handler chain. Use supplied handler, if specified;
@@ -1419,7 +1422,8 @@ namespace System.Management
                         (Environment.OSVersion.Version.Major == 5)
                         && (Environment.OSVersion.Version.Minor >= 1)
                     ) || (Environment.OSVersion.Version.Major >= 6)
-                ) {
+                )
+                {
                     threadParam.options.Flags |=
                         (int)tag_WBEM_CONNECT_OPTIONS.WBEM_FLAG_CONNECT_USE_MAX_WAIT;
                 }
@@ -1455,12 +1459,14 @@ namespace System.Management
         }
         internal SecuredIEnumWbemClassObjectHandler GetSecuredIEnumWbemClassObjectHandler(
             IEnumWbemClassObject pEnumWbemClassObject
-        ) {
+        )
+        {
             return new SecuredIEnumWbemClassObjectHandler(this, pEnumWbemClassObject);
         }
         internal SecuredIWbemServicesHandler GetSecuredIWbemServicesHandler(
             IWbemServices pWbemServiecs
-        ) {
+        )
+        {
             return new SecuredIWbemServicesHandler(this, pWbemServiecs);
         }
     } //ManagementScope
@@ -1472,7 +1478,8 @@ namespace System.Management
         internal SecuredIEnumWbemClassObjectHandler(
             ManagementScope theScope,
             IEnumWbemClassObject pEnumWbemClassObject
-        ) {
+        )
+        {
             this.scope = theScope;
             pEnumWbemClassObjectsecurityHelper = pEnumWbemClassObject;
         }
@@ -1487,7 +1494,8 @@ namespace System.Management
             uint uCount,
             IWbemClassObject_DoNotMarshal[] ppOutParams,
             ref uint puReturned
-        ) {
+        )
+        {
             int status = (int)tag_WBEMSTATUS.WBEM_E_FAILED;
             status = pEnumWbemClassObjectsecurityHelper.Next_(
                 lTimeout,
@@ -1596,7 +1604,8 @@ namespace System.Management
             int lFlags,
             ref IWbemServices ppWorkingNamespace,
             IntPtr ppCallResult
-        ) {
+        )
+        {
             int status = (int)tag_WBEMSTATUS.WBEM_E_NOT_SUPPORTED;
             //This should go through WMINET_utils layer and ppWorkingNamespace should be secured. See implementation of CreateInstanceEnum method.
             return status;
@@ -1620,7 +1629,8 @@ namespace System.Management
             IWbemContext pCtx,
             ref IWbemClassObjectFreeThreaded ppObject,
             IntPtr ppCallResult
-        ) {
+        )
+        {
             int status = (int)tag_WBEMSTATUS.WBEM_E_FAILED;
             status = pWbemServiecsSecurityHelper.GetObject_(
                 strObjectPath,
@@ -1637,7 +1647,8 @@ namespace System.Management
             int lFlags,
             IWbemContext pCtx,
             IWbemObjectSink pResponseHandler
-        ) {
+        )
+        {
             int status = (int)tag_WBEMSTATUS.WBEM_E_FAILED;
             status = pWbemServiecsSecurityHelper.GetObjectAsync_(
                 strObjectPath,
@@ -1652,7 +1663,8 @@ namespace System.Management
             int lFlags,
             IWbemContext pCtx,
             IntPtr ppCallResult
-        ) {
+        )
+        {
             int status = (int)tag_WBEMSTATUS.WBEM_E_FAILED;
             if (null != scope)
             {
@@ -1678,7 +1690,8 @@ namespace System.Management
             int lFlags,
             IWbemContext pCtx,
             IWbemObjectSink pResponseHandler
-        ) {
+        )
+        {
             int status = (int)tag_WBEMSTATUS.WBEM_E_FAILED;
             status = pWbemServiecsSecurityHelper.PutClassAsync_(
                 pObject,
@@ -1693,7 +1706,8 @@ namespace System.Management
             int lFlags,
             IWbemContext pCtx,
             IntPtr ppCallResult
-        ) {
+        )
+        {
             int status = (int)tag_WBEMSTATUS.WBEM_E_FAILED;
             status = pWbemServiecsSecurityHelper.DeleteClass_(strClass, lFlags, pCtx, ppCallResult);
             return status;
@@ -1703,7 +1717,8 @@ namespace System.Management
             int lFlags,
             IWbemContext pCtx,
             IWbemObjectSink pResponseHandler
-        ) {
+        )
+        {
             int status = (int)tag_WBEMSTATUS.WBEM_E_FAILED;
             status = pWbemServiecsSecurityHelper.DeleteClassAsync_(
                 strClass,
@@ -1718,7 +1733,8 @@ namespace System.Management
             int lFlags,
             IWbemContext pCtx,
             ref IEnumWbemClassObject ppEnum
-        ) {
+        )
+        {
             int status = (int)tag_WBEMSTATUS.WBEM_E_FAILED;
             if (null != scope)
             {
@@ -1744,7 +1760,8 @@ namespace System.Management
             int lFlags,
             IWbemContext pCtx,
             IWbemObjectSink pResponseHandler
-        ) {
+        )
+        {
             int status = (int)tag_WBEMSTATUS.WBEM_E_FAILED;
             status = pWbemServiecsSecurityHelper.CreateClassEnumAsync_(
                 strSuperClass,
@@ -1759,7 +1776,8 @@ namespace System.Management
             int lFlags,
             IWbemContext pCtx,
             IntPtr ppCallResult
-        ) {
+        )
+        {
             int status = (int)tag_WBEMSTATUS.WBEM_E_FAILED;
             if (null != scope)
             {
@@ -1785,7 +1803,8 @@ namespace System.Management
             int lFlags,
             IWbemContext pCtx,
             IWbemObjectSink pResponseHandler
-        ) {
+        )
+        {
             int status = (int)tag_WBEMSTATUS.WBEM_E_FAILED;
             status = pWbemServiecsSecurityHelper.PutInstanceAsync_(
                 pInst,
@@ -1800,7 +1819,8 @@ namespace System.Management
             int lFlags,
             IWbemContext pCtx,
             IntPtr ppCallResult
-        ) {
+        )
+        {
             int status = (int)tag_WBEMSTATUS.WBEM_E_FAILED;
             status = pWbemServiecsSecurityHelper.DeleteInstance_(
                 strObjectPath,
@@ -1815,7 +1835,8 @@ namespace System.Management
             int lFlags,
             IWbemContext pCtx,
             IWbemObjectSink pResponseHandler
-        ) {
+        )
+        {
             int status = (int)tag_WBEMSTATUS.WBEM_E_FAILED;
             status = pWbemServiecsSecurityHelper.DeleteInstanceAsync_(
                 strObjectPath,
@@ -1831,7 +1852,8 @@ namespace System.Management
             int lFlags,
             IWbemContext pCtx,
             ref IEnumWbemClassObject ppEnum
-        ) {
+        )
+        {
             int status = (int)tag_WBEMSTATUS.WBEM_E_FAILED;
             if (null != scope)
             {
@@ -1857,7 +1879,8 @@ namespace System.Management
             int lFlags,
             IWbemContext pCtx,
             IWbemObjectSink pResponseHandler
-        ) {
+        )
+        {
             int status = (int)tag_WBEMSTATUS.WBEM_E_FAILED;
             status = pWbemServiecsSecurityHelper.CreateInstanceEnumAsync_(
                 strFilter,
@@ -1873,7 +1896,8 @@ namespace System.Management
             int lFlags,
             IWbemContext pCtx,
             ref IEnumWbemClassObject ppEnum
-        ) {
+        )
+        {
             int status = (int)tag_WBEMSTATUS.WBEM_E_FAILED;
             if (null != scope)
             {
@@ -1901,7 +1925,8 @@ namespace System.Management
             int lFlags,
             IWbemContext pCtx,
             IWbemObjectSink pResponseHandler
-        ) {
+        )
+        {
             int status = (int)tag_WBEMSTATUS.WBEM_E_FAILED;
             status = pWbemServiecsSecurityHelper.ExecQueryAsync_(
                 strQueryLanguage,
@@ -1918,7 +1943,8 @@ namespace System.Management
             int lFlags,
             IWbemContext pCtx,
             ref IEnumWbemClassObject ppEnum
-        ) {
+        )
+        {
             int status = (int)tag_WBEMSTATUS.WBEM_E_FAILED;
             if (null != scope)
             {
@@ -1946,7 +1972,8 @@ namespace System.Management
             int lFlags,
             IWbemContext pCtx,
             IWbemObjectSink pResponseHandler
-        ) {
+        )
+        {
             int status = (int)tag_WBEMSTATUS.WBEM_E_FAILED;
             status = pWbemServiecsSecurityHelper.ExecNotificationQueryAsync_(
                 strQueryLanguage,
@@ -1965,7 +1992,8 @@ namespace System.Management
             IWbemClassObjectFreeThreaded pInParams,
             ref IWbemClassObjectFreeThreaded ppOutParams,
             IntPtr ppCallResult
-        ) {
+        )
+        {
             int status = (int)tag_WBEMSTATUS.WBEM_E_FAILED;
             status = pWbemServiecsSecurityHelper.ExecMethod_(
                 strObjectPath,
@@ -1985,7 +2013,8 @@ namespace System.Management
             IWbemContext pCtx,
             IWbemClassObjectFreeThreaded pInParams,
             IWbemObjectSink pResponseHandler
-        ) {
+        )
+        {
             int status = (int)tag_WBEMSTATUS.WBEM_E_FAILED;
             status = pWbemServiecsSecurityHelper.ExecMethodAsync_(
                 strObjectPath,
@@ -2133,7 +2162,8 @@ namespace System.Management
             CultureInfo culture,
             object value,
             Type destinationType
-        ) {
+        )
+        {
             if (destinationType == null)
             {
                 throw new ArgumentNullException(nameof(destinationType));

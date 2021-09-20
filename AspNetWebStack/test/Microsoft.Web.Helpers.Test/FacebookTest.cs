@@ -325,7 +325,8 @@ namespace Microsoft.Web.Helpers.Test
 
         private static HttpContextBase CreateHttpContext(
             IDictionary<string, string> cookieValues = null
-        ) {
+        )
+        {
             var context = new Mock<HttpContextBase>();
             var httpRequest = new Mock<HttpRequestBase>();
             var cookies = new HttpCookieCollection();

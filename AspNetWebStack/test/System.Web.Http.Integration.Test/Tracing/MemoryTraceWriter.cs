@@ -25,7 +25,8 @@ namespace System.Web.Http.Tracing
             string category,
             TraceLevel level,
             Action<TraceRecord> traceAction
-        ) {
+        )
+        {
             TraceRecord record = new TraceRecord(request, category, level);
             traceAction(record);
             _records.Add(record);

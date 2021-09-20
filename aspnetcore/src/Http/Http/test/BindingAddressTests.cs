@@ -147,7 +147,8 @@ namespace Microsoft.AspNetCore.Http.Tests
             int port,
             string pathBase,
             string toString
-        ) {
+        )
+        {
             var serverAddress = BindingAddress.Parse(url);
 
             Assert.Equal(scheme, serverAddress.Scheme);
@@ -207,7 +208,8 @@ namespace Microsoft.AspNetCore.Http.Tests
             int port,
             string pathBase,
             string toString
-        ) {
+        )
+        {
             var serverAddress = BindingAddress.Parse(url);
 
             Assert.Equal(scheme, serverAddress.Scheme);
@@ -262,7 +264,8 @@ namespace Microsoft.AspNetCore.Http.Tests
             int port,
             string pathBase,
             string toString
-        ) {
+        )
+        {
             var serverAddress = BindingAddress.Parse(url);
 
             Assert.Equal(scheme, serverAddress.Scheme);

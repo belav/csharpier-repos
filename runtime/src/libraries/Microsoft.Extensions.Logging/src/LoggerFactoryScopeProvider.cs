@@ -54,7 +54,8 @@ namespace Microsoft.Extensions.Logging
                     if (
                         (_activityTrackingOption & ActivityTrackingOptions.Tags) != 0
                         && activity.TagObjects.GetEnumerator().MoveNext()
-                    ) {
+                    )
+                    {
                         // As TagObjects is a IEnumerable<KeyValuePair<string, object?>> this can be used directly as a scope.
                         // We do this to safe the allocation of a wrapper object.
                         callback(activity.TagObjects, state);
@@ -82,7 +83,8 @@ namespace Microsoft.Extensions.Logging
         private static ActivityBaggageLogScopeWrapper GetOrCreateActivityBaggageLogScopeWrapper(
             Activity activity,
             IEnumerable<KeyValuePair<string, string?>> items
-        ) {
+        )
+        {
             const string additionalItemsBaggagePropertyKey = "__ActivityBaggageItemsLogScope__";
             var activityBaggageLogScopeWrapper =
                 activity.GetCustomProperty(additionalItemsBaggagePropertyKey)
@@ -150,7 +152,8 @@ namespace Microsoft.Extensions.Logging
             public ActivityLogScope(
                 Activity activity,
                 ActivityTrackingOptions activityTrackingOption
-            ) {
+            )
+            {
                 Debug.Assert(activity != null);
                 Debug.Assert(activityTrackingOption != ActivityTrackingOptions.None);
 

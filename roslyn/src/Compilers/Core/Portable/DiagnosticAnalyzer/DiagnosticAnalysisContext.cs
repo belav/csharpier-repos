@@ -79,7 +79,8 @@ namespace Microsoft.CodeAnalysis.Diagnostics
         public void RegisterSymbolAction(
             Action<SymbolAnalysisContext> action,
             params SymbolKind[] symbolKinds
-        ) {
+        )
+        {
             this.RegisterSymbolAction(action, symbolKinds.AsImmutableOrEmpty());
         }
 
@@ -102,7 +103,8 @@ namespace Microsoft.CodeAnalysis.Diagnostics
         public virtual void RegisterSymbolStartAction(
             Action<SymbolStartAnalysisContext> action,
             SymbolKind symbolKind
-        ) {
+        )
+        {
             throw new NotImplementedException();
         }
 
@@ -138,7 +140,8 @@ namespace Microsoft.CodeAnalysis.Diagnostics
         /// <param name="action">Action to be executed for each non-code document.</param>
         public virtual void RegisterAdditionalFileAction(
             Action<AdditionalFileAnalysisContext> action
-        ) {
+        )
+        {
             throw new NotImplementedException();
         }
 
@@ -179,7 +182,8 @@ namespace Microsoft.CodeAnalysis.Diagnostics
         /// <param name="action">Action to be executed at the start of semantic analysis of an operation block.</param>
         public virtual void RegisterOperationBlockStartAction(
             Action<OperationBlockStartAnalysisContext> action
-        ) {
+        )
+        {
             throw new NotImplementedException();
         }
 
@@ -190,7 +194,8 @@ namespace Microsoft.CodeAnalysis.Diagnostics
         /// <param name="action">Action to be executed for an operation block.</param>
         public virtual void RegisterOperationBlockAction(
             Action<OperationBlockAnalysisContext> action
-        ) {
+        )
+        {
             throw new NotImplementedException();
         }
 
@@ -204,7 +209,8 @@ namespace Microsoft.CodeAnalysis.Diagnostics
         public void RegisterOperationAction(
             Action<OperationAnalysisContext> action,
             params OperationKind[] operationKinds
-        ) {
+        )
+        {
             this.RegisterOperationAction(action, operationKinds.AsImmutableOrEmpty());
         }
 
@@ -218,7 +224,8 @@ namespace Microsoft.CodeAnalysis.Diagnostics
         public virtual void RegisterOperationAction(
             Action<OperationAnalysisContext> action,
             ImmutableArray<OperationKind> operationKinds
-        ) {
+        )
+        {
             throw new NotImplementedException();
         }
 
@@ -261,7 +268,8 @@ namespace Microsoft.CodeAnalysis.Diagnostics
             SourceText text,
             SourceTextValueProvider<TValue> valueProvider,
             [MaybeNullWhen(false)] out TValue value
-        ) {
+        )
+        {
             return TryGetValue(text, valueProvider.CoreValueProvider, out value);
         }
 
@@ -361,7 +369,8 @@ namespace Microsoft.CodeAnalysis.Diagnostics
             Compilation compilation,
             AnalyzerOptions options,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             _compilation = compilation;
             _options = options;
             _cancellationToken = cancellationToken;
@@ -395,7 +404,8 @@ namespace Microsoft.CodeAnalysis.Diagnostics
         public void RegisterSymbolAction(
             Action<SymbolAnalysisContext> action,
             params SymbolKind[] symbolKinds
-        ) {
+        )
+        {
             this.RegisterSymbolAction(action, symbolKinds.AsImmutableOrEmpty());
         }
 
@@ -418,7 +428,8 @@ namespace Microsoft.CodeAnalysis.Diagnostics
         public virtual void RegisterSymbolStartAction(
             Action<SymbolStartAnalysisContext> action,
             SymbolKind symbolKind
-        ) {
+        )
+        {
             throw new NotImplementedException();
         }
 
@@ -448,7 +459,8 @@ namespace Microsoft.CodeAnalysis.Diagnostics
         /// <param name="action">Action to be executed at the start of semantic analysis of an operation block.</param>
         public virtual void RegisterOperationBlockStartAction(
             Action<OperationBlockStartAnalysisContext> action
-        ) {
+        )
+        {
             throw new NotImplementedException();
         }
 
@@ -459,7 +471,8 @@ namespace Microsoft.CodeAnalysis.Diagnostics
         /// <param name="action">Action to be executed for an operation block.</param>
         public virtual void RegisterOperationBlockAction(
             Action<OperationBlockAnalysisContext> action
-        ) {
+        )
+        {
             throw new NotImplementedException();
         }
 
@@ -477,7 +490,8 @@ namespace Microsoft.CodeAnalysis.Diagnostics
         /// <param name="action">Action to be executed for each non-code document.</param>
         public virtual void RegisterAdditionalFileAction(
             Action<AdditionalFileAnalysisContext> action
-        ) {
+        )
+        {
             throw new NotImplementedException();
         }
 
@@ -520,7 +534,8 @@ namespace Microsoft.CodeAnalysis.Diagnostics
         public void RegisterOperationAction(
             Action<OperationAnalysisContext> action,
             params OperationKind[] operationKinds
-        ) {
+        )
+        {
             this.RegisterOperationAction(action, operationKinds.AsImmutableOrEmpty());
         }
 
@@ -534,7 +549,8 @@ namespace Microsoft.CodeAnalysis.Diagnostics
         public virtual void RegisterOperationAction(
             Action<OperationAnalysisContext> action,
             ImmutableArray<OperationKind> operationKinds
-        ) {
+        )
+        {
             throw new NotImplementedException();
         }
 
@@ -552,7 +568,8 @@ namespace Microsoft.CodeAnalysis.Diagnostics
             SourceText text,
             SourceTextValueProvider<TValue> valueProvider,
             [MaybeNullWhen(false)] out TValue value
-        ) {
+        )
+        {
             return TryGetValue(text, valueProvider.CoreValueProvider, out value);
         }
 
@@ -570,7 +587,8 @@ namespace Microsoft.CodeAnalysis.Diagnostics
             SyntaxTree tree,
             SyntaxTreeValueProvider<TValue> valueProvider,
             [MaybeNullWhen(false)] out TValue value
-        ) {
+        )
+        {
             return TryGetValue(tree, valueProvider.CoreValueProvider, out value);
         }
 
@@ -637,14 +655,15 @@ namespace Microsoft.CodeAnalysis.Diagnostics
             Action<Diagnostic> reportDiagnostic,
             Func<Diagnostic, bool> isSupportedDiagnostic,
             CancellationToken cancellationToken
-        ) : this(
-            compilation,
-            options,
-            reportDiagnostic,
-            isSupportedDiagnostic,
-            null,
-            cancellationToken
-        ) { }
+        )
+            : this(
+                compilation,
+                options,
+                reportDiagnostic,
+                isSupportedDiagnostic,
+                null,
+                cancellationToken
+            ) { }
 
         internal CompilationAnalysisContext(
             Compilation compilation,
@@ -653,7 +672,8 @@ namespace Microsoft.CodeAnalysis.Diagnostics
             Func<Diagnostic, bool> isSupportedDiagnostic,
             CompilationAnalysisValueProviderFactory? compilationAnalysisValueProviderFactoryOpt,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             _compilation = compilation;
             _options = options;
             _reportDiagnostic = reportDiagnostic;
@@ -694,7 +714,8 @@ namespace Microsoft.CodeAnalysis.Diagnostics
             SourceText text,
             SourceTextValueProvider<TValue> valueProvider,
             [MaybeNullWhen(false)] out TValue value
-        ) {
+        )
+        {
             return TryGetValue(text, valueProvider.CoreValueProvider, out value);
         }
 
@@ -712,7 +733,8 @@ namespace Microsoft.CodeAnalysis.Diagnostics
             SyntaxTree tree,
             SyntaxTreeValueProvider<TValue> valueProvider,
             [MaybeNullWhen(false)] out TValue value
-        ) {
+        )
+        {
             return TryGetValue(tree, valueProvider.CoreValueProvider, out value);
         }
 
@@ -777,7 +799,8 @@ namespace Microsoft.CodeAnalysis.Diagnostics
             Action<Diagnostic> reportDiagnostic,
             Func<Diagnostic, bool> isSupportedDiagnostic,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             _semanticModel = semanticModel;
             _options = options;
             _reportDiagnostic = reportDiagnostic;
@@ -857,7 +880,8 @@ namespace Microsoft.CodeAnalysis.Diagnostics
             Action<Diagnostic> reportDiagnostic,
             Func<Diagnostic, bool> isSupportedDiagnostic,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             _symbol = symbol;
             _compilation = compilation;
             _options = options;
@@ -915,7 +939,8 @@ namespace Microsoft.CodeAnalysis.Diagnostics
             Compilation compilation,
             AnalyzerOptions options,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             Symbol = symbol;
             Compilation = compilation;
             Options = options;
@@ -1005,7 +1030,8 @@ namespace Microsoft.CodeAnalysis.Diagnostics
         public void RegisterOperationAction(
             Action<OperationAnalysisContext> action,
             params OperationKind[] operationKinds
-        ) {
+        )
+        {
             this.RegisterOperationAction(action, operationKinds.AsImmutableOrEmpty());
         }
 
@@ -1090,7 +1116,8 @@ namespace Microsoft.CodeAnalysis.Diagnostics
             SemanticModel semanticModel,
             AnalyzerOptions options,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             _codeBlock = codeBlock;
             _owningSymbol = owningSymbol;
             _semanticModel = semanticModel;
@@ -1115,7 +1142,8 @@ namespace Microsoft.CodeAnalysis.Diagnostics
         public void RegisterSyntaxNodeAction(
             Action<SyntaxNodeAnalysisContext> action,
             params TLanguageKindEnum[] syntaxKinds
-        ) {
+        )
+        {
             this.RegisterSyntaxNodeAction(action, syntaxKinds.AsImmutableOrEmpty());
         }
 
@@ -1194,7 +1222,8 @@ namespace Microsoft.CodeAnalysis.Diagnostics
             Action<Diagnostic> reportDiagnostic,
             Func<Diagnostic, bool> isSupportedDiagnostic,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             _codeBlock = codeBlock;
             _owningSymbol = owningSymbol;
             _semanticModel = semanticModel;
@@ -1278,7 +1307,8 @@ namespace Microsoft.CodeAnalysis.Diagnostics
             Compilation compilation,
             AnalyzerOptions options,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             _operationBlocks = operationBlocks;
             _owningSymbol = owningSymbol;
             _compilation = compilation;
@@ -1294,7 +1324,8 @@ namespace Microsoft.CodeAnalysis.Diagnostics
             AnalyzerOptions options,
             Func<IOperation, ControlFlowGraph> getControlFlowGraph,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             _operationBlocks = operationBlocks;
             _owningSymbol = owningSymbol;
             _compilation = compilation;
@@ -1322,7 +1353,8 @@ namespace Microsoft.CodeAnalysis.Diagnostics
         public void RegisterOperationAction(
             Action<OperationAnalysisContext> action,
             params OperationKind[] operationKinds
-        ) {
+        )
+        {
             this.RegisterOperationAction(action, operationKinds.AsImmutableOrEmpty());
         }
 
@@ -1416,7 +1448,8 @@ namespace Microsoft.CodeAnalysis.Diagnostics
             Action<Diagnostic> reportDiagnostic,
             Func<Diagnostic, bool> isSupportedDiagnostic,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             _operationBlocks = operationBlocks;
             _owningSymbol = owningSymbol;
             _compilation = compilation;
@@ -1436,7 +1469,8 @@ namespace Microsoft.CodeAnalysis.Diagnostics
             Func<Diagnostic, bool> isSupportedDiagnostic,
             Func<IOperation, ControlFlowGraph> getControlFlowGraph,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             _operationBlocks = operationBlocks;
             _owningSymbol = owningSymbol;
             _compilation = compilation;
@@ -1527,7 +1561,8 @@ namespace Microsoft.CodeAnalysis.Diagnostics
             Action<Diagnostic> reportDiagnostic,
             Func<Diagnostic, bool> isSupportedDiagnostic,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             _tree = tree;
             _options = options;
             _reportDiagnostic = reportDiagnostic;
@@ -1543,7 +1578,8 @@ namespace Microsoft.CodeAnalysis.Diagnostics
             Func<Diagnostic, bool> isSupportedDiagnostic,
             Compilation compilation,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             _tree = tree;
             _options = options;
             _reportDiagnostic = reportDiagnostic;
@@ -1606,7 +1642,8 @@ namespace Microsoft.CodeAnalysis.Diagnostics
             Func<Diagnostic, bool> isSupportedDiagnostic,
             Compilation compilation,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             AdditionalFile = additionalFile;
             Options = options;
             _reportDiagnostic = reportDiagnostic;
@@ -1687,7 +1724,8 @@ namespace Microsoft.CodeAnalysis.Diagnostics
             Action<Diagnostic> reportDiagnostic,
             Func<Diagnostic, bool> isSupportedDiagnostic,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             _node = node;
             _containingSymbol = containingSymbol;
             _semanticModel = semanticModel;
@@ -1704,15 +1742,16 @@ namespace Microsoft.CodeAnalysis.Diagnostics
             Action<Diagnostic> reportDiagnostic,
             Func<Diagnostic, bool> isSupportedDiagnostic,
             CancellationToken cancellationToken
-        ) : this(
-            node,
-            null,
-            semanticModel,
-            options,
-            reportDiagnostic,
-            isSupportedDiagnostic,
-            cancellationToken
-        ) { }
+        )
+            : this(
+                node,
+                null,
+                semanticModel,
+                options,
+                reportDiagnostic,
+                isSupportedDiagnostic,
+                cancellationToken
+            ) { }
 
         /// <summary>
         /// Report a <see cref="Diagnostic"/> about a <see cref="SyntaxNode"/>.
@@ -1780,7 +1819,8 @@ namespace Microsoft.CodeAnalysis.Diagnostics
             Action<Diagnostic> reportDiagnostic,
             Func<Diagnostic, bool> isSupportedDiagnostic,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             _operation = operation;
             _containingSymbol = containingSymbol;
             _compilation = compilation;
@@ -1800,7 +1840,8 @@ namespace Microsoft.CodeAnalysis.Diagnostics
             Func<Diagnostic, bool> isSupportedDiagnostic,
             Func<IOperation, ControlFlowGraph> getControlFlowGraph,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             _operation = operation;
             _containingSymbol = containingSymbol;
             _compilation = compilation;
@@ -1883,7 +1924,8 @@ namespace Microsoft.CodeAnalysis.Diagnostics
             Func<SuppressionDescriptor, bool> isSupportedSuppressionDescriptor,
             Func<SyntaxTree, SemanticModel> getSemanticModel,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             Compilation = compilation;
             Options = options;
             ReportedDiagnostics = reportedDiagnostics;

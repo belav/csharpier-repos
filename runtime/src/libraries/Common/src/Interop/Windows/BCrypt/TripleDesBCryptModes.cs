@@ -59,7 +59,8 @@ namespace Internal.Cryptography
         private static Lazy<SafeAlgorithmHandle> Open3DesAlgorithm(
             string cipherMode,
             int feedback = 0
-        ) {
+        )
+        {
             return new Lazy<SafeAlgorithmHandle>(
                 () =>
                 {

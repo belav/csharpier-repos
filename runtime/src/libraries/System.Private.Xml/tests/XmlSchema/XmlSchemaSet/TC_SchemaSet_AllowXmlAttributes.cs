@@ -275,7 +275,8 @@ namespace System.Xml.Tests
             int expectedWarningCount,
             int expectedErrorCount,
             int expectedSchemaSetCount
-        ) {
+        )
+        {
             Initialize();
             XmlSchemaSet xss = new XmlSchemaSet();
             xss.XmlResolver = new XmlUrlResolver();

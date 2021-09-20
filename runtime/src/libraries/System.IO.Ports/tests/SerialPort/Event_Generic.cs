@@ -33,7 +33,8 @@ namespace System.IO.Ports.Tests
                 SerialPort com2 = new SerialPort(
                     TCSupport.LocalMachineSerialInfo.SecondAvailablePortName
                 )
-            ) {
+            )
+            {
                 PinChangedEventHandler pinChangedEventHandler = new PinChangedEventHandler(
                     com1,
                     false,
@@ -143,7 +144,8 @@ namespace System.IO.Ports.Tests
                                 iterationWaitTime,
                                 numPinChangedEvents + 1
                             )
-                        ) {
+                        )
+                        {
                             // A thread is in PinChangedEvent: verify that it is not in any other handler at the same time
                             if (receivedEventHandler.NumEventsHandled != numReceivedEvents)
                             {
@@ -172,7 +174,8 @@ namespace System.IO.Ports.Tests
                                 iterationWaitTime,
                                 numReceivedEvents + 1
                             )
-                        ) {
+                        )
+                        {
                             // A thread is in ReceivedEvent: verify that it is not in any other handler at the same time
                             if (pinChangedEventHandler.NumEventsHandled != numPinChangedEvents)
                             {
@@ -290,7 +293,8 @@ namespace System.IO.Ports.Tests
                 SerialPort com2 = new SerialPort(
                     TCSupport.LocalMachineSerialInfo.SecondAvailablePortName
                 )
-            ) {
+            )
+            {
                 PinChangedEventHandler pinChangedEventHandler = new PinChangedEventHandler(
                     com1,
                     false,
@@ -343,7 +347,8 @@ namespace System.IO.Ports.Tests
                 SerialPort com2 = new SerialPort(
                     TCSupport.LocalMachineSerialInfo.SecondAvailablePortName
                 )
-            ) {
+            )
+            {
                 ReceivedEventHandler receivedEventHandler = new ReceivedEventHandler(
                     com1,
                     false,
@@ -400,7 +405,8 @@ namespace System.IO.Ports.Tests
                 SerialPort com2 = new SerialPort(
                     TCSupport.LocalMachineSerialInfo.SecondAvailablePortName
                 )
-            ) {
+            )
+            {
                 ErrorEventHandler errorEventHandler = new ErrorEventHandler(com1, false, true);
 
                 Debug.WriteLine(

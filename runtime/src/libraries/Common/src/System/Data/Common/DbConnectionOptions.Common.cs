@@ -121,7 +121,8 @@ namespace System.Data.Common
             if (
                 _hasPasswordKeyword
                 && (forceHidePassword || (hidePassword && !HasPersistablePassword))
-            ) {
+            )
+            {
                 ReplacePasswordPwd(out connectionString, false);
             }
             return connectionString ?? string.Empty;
@@ -234,7 +235,8 @@ namespace System.Data.Common
             bool useOdbcRules,
             out string? keyname,
             out string? keyvalue
-        ) {
+        )
+        {
             int startposition = currentPosition;
 
             buffer.Length = 0;
@@ -563,7 +565,8 @@ namespace System.Data.Common
             string connectionString,
             Dictionary<string, string>? synonyms,
             bool firstKey
-        ) {
+        )
+        {
             var parsetable = new Dictionary<string, string>();
             Regex parser = (firstKey ? s_connectionStringRegexOdbc : s_connectionStringRegex);
 
@@ -636,7 +639,8 @@ namespace System.Data.Common
             Dictionary<string, string>? synonyms,
             bool firstKey,
             Exception? e
-        ) {
+        )
+        {
             try
             {
                 var parsedvalues = SplitConnectionString(connectionString, synonyms, firstKey);
@@ -681,7 +685,8 @@ namespace System.Data.Common
                                     WrongFormatMessagePrefix,
                                     StringComparison.Ordinal
                                 )
-                            ) {
+                            )
+                            {
                                 isEquivalent = true;
                             }
                         }
@@ -714,7 +719,8 @@ namespace System.Data.Common
             bool buildChain,
             Dictionary<string, string>? synonyms,
             bool firstKey
-        ) {
+        )
+        {
             Debug.Assert(null != connectionString, "null connectionstring");
             StringBuilder buffer = new StringBuilder();
             NameValuePair? localKeychain = null,

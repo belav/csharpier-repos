@@ -28,7 +28,8 @@ namespace System.Web.Http.WebHost.Routing
             ExceptionDispatchInfo exceptionInfo,
             IExceptionLogger exceptionLogger,
             IExceptionHandler exceptionHandler
-        ) {
+        )
+        {
             Contract.Assert(exceptionInfo != null);
             Contract.Assert(exceptionLogger != null);
             Contract.Assert(exceptionHandler != null);

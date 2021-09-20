@@ -22,7 +22,8 @@ namespace System.Speech.Internal
         internal AsyncSerializedWorker(
             WaitCallback defaultCallback,
             SynchronizationContext syncContext
-        ) {
+        )
+        {
             _syncContext = syncContext;
             _workerPostCallback = new SendOrPostCallback(WorkerProc);
             Initialize(defaultCallback);

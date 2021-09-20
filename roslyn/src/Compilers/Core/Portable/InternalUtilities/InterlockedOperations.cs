@@ -64,7 +64,8 @@ namespace Roslyn.Utilities
         public static ImmutableArray<T> Initialize<T>(
             ref ImmutableArray<T> target,
             ImmutableArray<T> initializedValue
-        ) {
+        )
+        {
             Debug.Assert(!initializedValue.IsDefault);
             var oldValue = ImmutableInterlocked.InterlockedCompareExchange(
                 ref target,

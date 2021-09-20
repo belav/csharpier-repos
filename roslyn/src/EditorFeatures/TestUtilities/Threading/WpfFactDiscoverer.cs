@@ -43,7 +43,8 @@ namespace Roslyn.Test.Utilities
             ITestMethod testMethod,
             IAttributeInfo theoryAttribute,
             object[] dataRow
-        ) {
+        )
+        {
             var testCase = new WpfTestCase(
                 _diagnosticMessageSink,
                 discoveryOptions.MethodDisplayOrDefault(),
@@ -58,7 +59,8 @@ namespace Roslyn.Test.Utilities
             ITestFrameworkDiscoveryOptions discoveryOptions,
             ITestMethod testMethod,
             IAttributeInfo theoryAttribute
-        ) {
+        )
+        {
             var testCase = new WpfTheoryTestCase(
                 _diagnosticMessageSink,
                 discoveryOptions.MethodDisplayOrDefault(),

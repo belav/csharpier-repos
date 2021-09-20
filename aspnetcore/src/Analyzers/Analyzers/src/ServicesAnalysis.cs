@@ -11,7 +11,8 @@ namespace Microsoft.AspNetCore.Analyzers
         public ServicesAnalysis(
             IMethodSymbol configureServicesMethod,
             ImmutableArray<ServicesItem> services
-        ) {
+        )
+        {
             ConfigureServicesMethod = configureServicesMethod;
             Services = services;
         }

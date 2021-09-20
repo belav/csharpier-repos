@@ -77,7 +77,8 @@ namespace Microsoft.CodeAnalysis.Remote
             PinnedSolutionInfo solutionInfo,
             SolutionAssetCache assetCache,
             IAssetSource assetSource
-        ) {
+        )
+        {
             var serializerService = Services.GetRequiredService<ISerializerService>();
             return new AssetProvider(
                 solutionInfo.ScopeId,
@@ -92,7 +93,8 @@ namespace Microsoft.CodeAnalysis.Remote
             Checksum solutionChecksum,
             int workspaceVersion,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var currentSolution = CurrentSolution;
 
             var currentSolutionChecksum = await currentSolution.State.GetChecksumAsync(
@@ -107,7 +109,8 @@ namespace Microsoft.CodeAnalysis.Remote
             using (
                 await _availableSolutionsGate.DisposableWaitAsync(cancellationToken)
                     .ConfigureAwait(false)
-            ) {
+            )
+            {
                 var solution = await CreateSolution_NoLockAsync(
                         assetProvider,
                         solutionChecksum,
@@ -150,7 +153,8 @@ namespace Microsoft.CodeAnalysis.Remote
             int workspaceVersion,
             Solution baseSolution,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             try
             {
                 var updater = new SolutionCreator(
@@ -201,7 +205,8 @@ namespace Microsoft.CodeAnalysis.Remote
                             options,
                             out var solution
                         )
-                    ) {
+                    )
+                    {
                         return solution;
                     }
                 }
@@ -247,7 +252,8 @@ namespace Microsoft.CodeAnalysis.Remote
             bool fromPrimaryBranch,
             int workspaceVersion,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var availableSolution = TryGetAvailableSolution(solutionChecksum);
             if (availableSolution != null)
             {
@@ -258,7 +264,8 @@ namespace Microsoft.CodeAnalysis.Remote
             using (
                 await _availableSolutionsGate.DisposableWaitAsync(cancellationToken)
                     .ConfigureAwait(false)
-            ) {
+            )
+            {
                 availableSolution = TryGetAvailableSolution(solutionChecksum);
                 if (availableSolution != null)
                 {
@@ -289,7 +296,8 @@ namespace Microsoft.CodeAnalysis.Remote
             int workspaceVersion,
             SerializableOptionSet options,
             [NotNullWhen(true)] out Solution? solution
-        ) {
+        )
+        {
             lock (_currentSolutionGate)
             {
                 if (workspaceVersion <= _currentRemoteWorkspaceVersion)

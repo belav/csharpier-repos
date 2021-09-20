@@ -17,7 +17,8 @@ namespace Microsoft.CodeAnalysis.DesignerAttribute
             INamedTypeSymbol? designerCategoryType,
             Document document,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             // simple case.  If there's no DesignerCategory type in this compilation, then there's
             // definitely no designable types.  Just immediately bail out.
             if (designerCategoryType == null)
@@ -50,7 +51,8 @@ namespace Microsoft.CodeAnalysis.DesignerAttribute
             INamedTypeSymbol classType,
             INamedTypeSymbol designerCategoryType,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             foreach (var type in classType.GetBaseTypesAndThis())
             {
                 cancellationToken.ThrowIfCancellationRequested();
@@ -69,7 +71,8 @@ namespace Microsoft.CodeAnalysis.DesignerAttribute
             ISyntaxFactsService syntaxFacts,
             SyntaxList<SyntaxNode> members,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             foreach (var member in members)
             {
                 cancellationToken.ThrowIfCancellationRequested();
@@ -99,7 +102,8 @@ namespace Microsoft.CodeAnalysis.DesignerAttribute
                 || argument.Type.SpecialType != SpecialType.System_String
                 || argument.IsNull
                 || !(argument.Value is string stringValue)
-            ) {
+            )
+            {
                 return null;
             }
 

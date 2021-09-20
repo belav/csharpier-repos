@@ -23,13 +23,15 @@ namespace System.Security.Cryptography
             Span<byte> ciphertext,
             Span<byte> tag,
             ReadOnlySpan<byte> associatedData = default
-        ) {
+        )
+        {
             // Convert key length to bits.
             using (
                 SafeEvpCipherCtxHandle ctx = Interop.Crypto.EvpCipherCreatePartial(
                     GetCipher(_key.Length * 8)
                 )
-            ) {
+            )
+            {
                 if (ctx.IsInvalid)
                 {
                     throw new CryptographicException();
@@ -80,7 +82,8 @@ namespace System.Security.Cryptography
                             out int ciphertextBytesWritten,
                             plaintext
                         )
-                    ) {
+                    )
+                    {
                         throw new CryptographicException();
                     }
 
@@ -90,7 +93,8 @@ namespace System.Security.Cryptography
                             ciphertextAndTag.Slice(ciphertextBytesWritten),
                             out int bytesWritten
                         )
-                    ) {
+                    )
+                    {
                         throw new CryptographicException();
                     }
 
@@ -126,12 +130,14 @@ namespace System.Security.Cryptography
             ReadOnlySpan<byte> tag,
             Span<byte> plaintext,
             ReadOnlySpan<byte> associatedData
-        ) {
+        )
+        {
             using (
                 SafeEvpCipherCtxHandle ctx = Interop.Crypto.EvpCipherCreatePartial(
                     GetCipher(_key.Length * 8)
                 )
-            ) {
+            )
+            {
                 if (ctx.IsInvalid)
                 {
                     throw new CryptographicException();
@@ -162,7 +168,8 @@ namespace System.Security.Cryptography
                         out int plaintextBytesWritten,
                         ciphertext
                     )
-                ) {
+                )
+                {
                     CryptographicOperations.ZeroMemory(plaintext);
                     throw new CryptographicException();
                 }
@@ -174,7 +181,8 @@ namespace System.Security.Cryptography
                         out int bytesWritten,
                         tag
                     )
-                ) {
+                )
+                {
                     CryptographicOperations.ZeroMemory(plaintext);
                     throw new CryptographicException();
                 }
@@ -187,7 +195,8 @@ namespace System.Security.Cryptography
                         plaintext.Slice(plaintextBytesWritten),
                         out bytesWritten
                     )
-                ) {
+                )
+                {
                     CryptographicOperations.ZeroMemory(plaintext);
                     throw new CryptographicException(SR.Cryptography_AuthTagMismatch);
                 }

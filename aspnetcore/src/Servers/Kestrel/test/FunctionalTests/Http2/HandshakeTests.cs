@@ -144,7 +144,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel.FunctionalTests.Http2
                         );
                     }
                 )
-            ) {
+            )
+            {
                 var result = await Client.GetStringAsync($"https://localhost:{server.Port}/");
                 Assert.Equal("hello world HTTP/2", result);
             }
@@ -189,7 +190,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel.FunctionalTests.Http2
                         );
                     }
                 )
-            ) {
+            )
+            {
                 var result = await Client.GetStringAsync($"https://localhost:{server.Port}/");
                 Assert.Equal("hello world HTTP/2", result);
             }

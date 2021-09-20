@@ -19,17 +19,11 @@ namespace AutoMapper
         public AutoMapperMappingException(string message, Exception innerException)
             : base(message, innerException) => _message = message;
 
-        public AutoMapperMappingException(
-            string message,
-            Exception innerException,
-            TypePair types
-        ) : this(message, innerException) => Types = types;
+        public AutoMapperMappingException(string message, Exception innerException, TypePair types)
+            : this(message, innerException) => Types = types;
 
-        public AutoMapperMappingException(
-            string message,
-            Exception innerException,
-            TypeMap typeMap
-        ) : this(message, innerException, typeMap.Types) => TypeMap = typeMap;
+        public AutoMapperMappingException(string message, Exception innerException, TypeMap typeMap)
+            : this(message, innerException, typeMap.Types) => TypeMap = typeMap;
 
         public AutoMapperMappingException(
             string message,
@@ -51,7 +45,8 @@ namespace AutoMapper
                     Types.HasValue
                     && Types.Value.SourceType != null
                     && Types.Value.DestinationType != null
-                ) {
+                )
+                {
                     message = message + newLine + newLine + "Mapping types:";
                     message +=
                         newLine
@@ -147,7 +142,8 @@ namespace AutoMapper
                 TypeMap typeMap,
                 string[] unmappedPropertyNames,
                 bool canConstruct
-            ) {
+            )
+            {
                 TypeMap = typeMap;
                 UnmappedPropertyNames = unmappedPropertyNames;
                 CanConstruct = canConstruct;

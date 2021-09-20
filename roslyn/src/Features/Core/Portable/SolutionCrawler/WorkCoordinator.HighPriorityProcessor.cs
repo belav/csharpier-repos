@@ -99,7 +99,8 @@ namespace Microsoft.CodeAnalysis.SolutionCrawler
                             !item.InvocationReasons.Contains(
                                 PredefinedInvocationReasons.SyntaxChanged
                             )
-                        ) {
+                        )
+                        {
                             return;
                         }
 
@@ -107,7 +108,8 @@ namespace Microsoft.CodeAnalysis.SolutionCrawler
                         if (
                             _processor._documentTracker == null
                             || _processor._documentTracker.TryGetActiveDocument() != item.DocumentId
-                        ) {
+                        )
+                        {
                             return;
                         }
 
@@ -182,7 +184,8 @@ namespace Microsoft.CodeAnalysis.SolutionCrawler
                     private bool GetNextWorkItem(
                         out WorkItem workItem,
                         out CancellationToken cancellationToken
-                    ) {
+                    )
+                    {
                         // GetNextWorkItem since it can't fail. we still return bool to confirm that this never fail.
                         var documentId = _processor._documentTracker?.TryGetActiveDocument();
                         if (documentId != null)
@@ -193,7 +196,8 @@ namespace Microsoft.CodeAnalysis.SolutionCrawler
                                     out workItem,
                                     out cancellationToken
                                 )
-                            ) {
+                            )
+                            {
                                 return true;
                             }
                         }
@@ -212,7 +216,8 @@ namespace Microsoft.CodeAnalysis.SolutionCrawler
                         ImmutableArray<IIncrementalAnalyzer> analyzers,
                         WorkItem workItem,
                         CancellationToken cancellationToken
-                    ) {
+                    )
+                    {
                         Contract.ThrowIfNull(workItem.DocumentId);
 
                         if (CancellationToken.IsCancellationRequested)
@@ -232,7 +237,8 @@ namespace Microsoft.CodeAnalysis.SolutionCrawler
                                     workItem,
                                     cancellationToken
                                 )
-                            ) {
+                            )
+                            {
                                 var document = solution.GetDocument(documentId);
                                 if (document != null)
                                 {

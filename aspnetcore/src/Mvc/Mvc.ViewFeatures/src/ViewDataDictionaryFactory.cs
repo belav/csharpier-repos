@@ -49,7 +49,8 @@ namespace Microsoft.AspNetCore.Mvc.ViewFeatures
 
         public static Func<ViewDataDictionary, ViewDataDictionary> CreateNestedFactory(
             Type modelType
-        ) {
+        )
+        {
             if (modelType == null)
             {
                 throw new ArgumentNullException(nameof(modelType));

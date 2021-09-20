@@ -220,7 +220,8 @@ namespace Microsoft.AspNetCore.Http.Connections.Tests
         [InlineData(HttpTransportType.ServerSentEvents)]
         public async Task CheckThatThresholdValuesAreEnforcedWithSends(
             HttpTransportType transportType
-        ) {
+        )
+        {
             using (StartVerifiableLog())
             {
                 var manager = CreateConnectionManager(LoggerFactory);
@@ -285,7 +286,8 @@ namespace Microsoft.AspNetCore.Http.Connections.Tests
         [InlineData(HttpTransportType.LongPolling | HttpTransportType.WebSockets)]
         public async Task NegotiateReturnsAvailableTransportsAfterFilteringByOptions(
             HttpTransportType transports
-        ) {
+        )
+        {
             using (StartVerifiableLog())
             {
                 var manager = CreateConnectionManager(LoggerFactory);
@@ -329,7 +331,8 @@ namespace Microsoft.AspNetCore.Http.Connections.Tests
         [InlineData(HttpTransportType.LongPolling)]
         public async Task EndpointsThatAcceptConnectionId404WhenUnknownConnectionIdProvided(
             HttpTransportType transportType
-        ) {
+        )
+        {
             using (StartVerifiableLog())
             {
                 var manager = CreateConnectionManager(LoggerFactory);
@@ -509,7 +512,8 @@ namespace Microsoft.AspNetCore.Http.Connections.Tests
         [InlineData(HttpTransportType.WebSockets)]
         public async Task TransportEndingGracefullyWaitsOnApplication(
             HttpTransportType transportType
-        ) {
+        )
+        {
             using (StartVerifiableLog())
             {
                 var manager = CreateConnectionManager(LoggerFactory);
@@ -747,7 +751,8 @@ namespace Microsoft.AspNetCore.Http.Connections.Tests
                 HttpConnectionContext connection,
                 SemaphoreSlim callerTracker,
                 Task waitTask
-            ) {
+            )
+            {
                 using (var requestBody = new TrackingMemoryStream(callerTracker, waitTask))
                 {
                     var bytes = Encoding.UTF8.GetBytes("Hello World");
@@ -796,7 +801,8 @@ namespace Microsoft.AspNetCore.Http.Connections.Tests
                 Stream destination,
                 int bufferSize,
                 CancellationToken cancellationToken
-            ) {
+            )
+            {
                 // Will return false if all available locks from semaphore are taken
                 if (!_callerTracker.Wait(0))
                 {
@@ -941,7 +947,8 @@ namespace Microsoft.AspNetCore.Http.Connections.Tests
         [InlineData(HttpTransportType.LongPolling)]
         public async Task EndpointsThatRequireConnectionId400WhenNoConnectionIdProvided(
             HttpTransportType transportType
-        ) {
+        )
+        {
             using (StartVerifiableLog())
             {
                 var manager = CreateConnectionManager(LoggerFactory);
@@ -981,7 +988,8 @@ namespace Microsoft.AspNetCore.Http.Connections.Tests
         [InlineData(HttpTransportType.ServerSentEvents)]
         public async Task IOExceptionWhenReadingRequestReturns400Response(
             HttpTransportType transportType
-        ) {
+        )
+        {
             using (StartVerifiableLog())
             {
                 var manager = CreateConnectionManager(LoggerFactory);
@@ -1069,7 +1077,8 @@ namespace Microsoft.AspNetCore.Http.Connections.Tests
         public async Task EndPointThatOnlySupportsLongPollingRejectsOtherTransports(
             HttpTransportType transportType,
             int status
-        ) {
+        )
+        {
             using (StartVerifiableLog())
             {
                 await CheckTransportSupported(
@@ -1088,7 +1097,8 @@ namespace Microsoft.AspNetCore.Http.Connections.Tests
         public async Task EndPointThatOnlySupportsSSERejectsOtherTransports(
             HttpTransportType transportType,
             int status
-        ) {
+        )
+        {
             using (StartVerifiableLog())
             {
                 await CheckTransportSupported(
@@ -1107,7 +1117,8 @@ namespace Microsoft.AspNetCore.Http.Connections.Tests
         public async Task EndPointThatOnlySupportsWebSockesRejectsOtherTransports(
             HttpTransportType transportType,
             int status
-        ) {
+        )
+        {
             using (StartVerifiableLog())
             {
                 await CheckTransportSupported(
@@ -1124,7 +1135,8 @@ namespace Microsoft.AspNetCore.Http.Connections.Tests
         public async Task EndPointThatOnlySupportsWebSocketsAndSSERejectsLongPolling(
             HttpTransportType transportType,
             int status
-        ) {
+        )
+        {
             using (StartVerifiableLog())
             {
                 await CheckTransportSupported(
@@ -1277,7 +1289,8 @@ namespace Microsoft.AspNetCore.Http.Connections.Tests
                 Stream destination,
                 int bufferSize,
                 CancellationToken cancellationToken
-            ) {
+            )
+            {
                 throw new NotImplementedException();
             }
             public override void Flush() { }
@@ -1302,7 +1315,8 @@ namespace Microsoft.AspNetCore.Http.Connections.Tests
                 int offset,
                 int count,
                 CancellationToken cancellationToken
-            ) {
+            )
+            {
                 if (_isSSE)
                 {
                     // SSE does an initial write of :\r\n that we want to ignore in testing
@@ -1315,7 +1329,8 @@ namespace Microsoft.AspNetCore.Http.Connections.Tests
             public override async ValueTask WriteAsync(
                 ReadOnlyMemory<byte> buffer,
                 CancellationToken cancellationToken = default
-            ) {
+            )
+            {
                 if (_isSSE)
                 {
                     // SSE does an initial write of :\r\n that we want to ignore in testing
@@ -1477,7 +1492,8 @@ namespace Microsoft.AspNetCore.Http.Connections.Tests
         [InlineData(HttpTransportType.ServerSentEvents)]
         public async Task RequestToActiveConnectionId409ForStreamingTransports(
             HttpTransportType transportType
-        ) {
+        )
+        {
             using (StartVerifiableLog())
             {
                 var manager = CreateConnectionManager(LoggerFactory);
@@ -1840,7 +1856,8 @@ namespace Microsoft.AspNetCore.Http.Connections.Tests
         public async Task TransferModeSet(
             HttpTransportType transportType,
             TransferFormat? expectedTransferFormats
-        ) {
+        )
+        {
             using (StartVerifiableLog())
             {
                 var manager = CreateConnectionManager(LoggerFactory);
@@ -2018,7 +2035,8 @@ namespace Microsoft.AspNetCore.Http.Connections.Tests
         [InlineData(HttpTransportType.WebSockets)]
         public async Task DeleteEndpointRejectsRequestToTerminateNonLongPollingTransport(
             HttpTransportType transportType
-        ) {
+        )
+        {
             using (StartVerifiableLog())
             {
                 var manager = CreateConnectionManager(LoggerFactory);
@@ -2328,7 +2346,8 @@ namespace Microsoft.AspNetCore.Http.Connections.Tests
                 Stream destination,
                 int bufferSize,
                 CancellationToken cancellationToken
-            ) {
+            )
+            {
                 await _syncPoint.WaitToContinue();
 
                 await base.CopyToAsync(destination, bufferSize, cancellationToken);
@@ -2927,7 +2946,8 @@ namespace Microsoft.AspNetCore.Http.Connections.Tests
             HttpTransportType transportType,
             int status,
             ILoggerFactory loggerFactory
-        ) {
+        )
+        {
             var manager = CreateConnectionManager(loggerFactory);
             var connection = manager.CreateConnection();
             connection.TransportType = transportType;
@@ -2977,7 +2997,8 @@ namespace Microsoft.AspNetCore.Http.Connections.Tests
             HttpConnectionContext connection,
             IServiceCollection serviceCollection,
             string format = null
-        ) {
+        )
+        {
             var context = new DefaultHttpContext();
             context.Features.Set<IHttpResponseFeature>(new ResponseFeature());
             context.Request.Path = path;
@@ -3000,7 +3021,8 @@ namespace Microsoft.AspNetCore.Http.Connections.Tests
             HttpContext context,
             HttpTransportType transportType,
             SyncPoint sync = null
-        ) {
+        )
+        {
             switch (transportType)
             {
                 case HttpTransportType.WebSockets:
@@ -3024,7 +3046,8 @@ namespace Microsoft.AspNetCore.Http.Connections.Tests
         private static HttpConnectionManager CreateConnectionManager(
             ILoggerFactory loggerFactory,
             TimeSpan? disconnectTimeout
-        ) {
+        )
+        {
             var connectionOptions = new ConnectionOptions();
             connectionOptions.DisconnectTimeout = disconnectTimeout;
             return new HttpConnectionManager(

@@ -375,7 +375,8 @@ namespace Microsoft.CSharp.RuntimeBinder.Semantics
             CType typeDest,
             out Expr pexprDest,
             EXPRFLAG exprFlags
-        ) {
+        )
+        {
             Debug.Assert(typeDest != null);
             // If the source is a constant, and cast is really simple (no change in fundamental
             // type, no flags), then create a new constant node with the new type instead of
@@ -399,7 +400,8 @@ namespace Microsoft.CSharp.RuntimeBinder.Semantics
                 && exprFlags == 0
                 && exprSrc.Type.FundamentalType == typeDest.FundamentalType
                 && (!exprSrc.Type.IsPredefType(PredefinedType.PT_STRING) || constant.Val.IsNullRef)
-            ) {
+            )
+            {
                 ExprConstant expr = ExprFactory.CreateConstant(typeDest, constant.Val);
                 pexprDest = expr;
                 return;
@@ -424,7 +426,8 @@ namespace Microsoft.CSharp.RuntimeBinder.Semantics
             Expr pArguments,
             ExprMemberGroup pMemGroup,
             MemLookFlags flags
-        ) {
+        )
+        {
             Debug.Assert(
                 mwi.Sym is MethodSymbol && (!mwi.Meth().isOverride || mwi.Meth().isHideByName)
             );
@@ -440,7 +443,8 @@ namespace Microsoft.CSharp.RuntimeBinder.Semantics
             if (
                 (flags & (MemLookFlags.Ctor | MemLookFlags.NewObj))
                 == (MemLookFlags.Ctor | MemLookFlags.NewObj)
-            ) {
+            )
+            {
                 pReturnType = mwi.Ats;
             }
             else
@@ -510,7 +514,8 @@ namespace Microsoft.CSharp.RuntimeBinder.Semantics
             BindingFlag bindFlags,
             Expr args,
             ExprMemberGroup pMemGroup
-        ) {
+        )
+        {
             Debug.Assert(
                 pwt.Sym is PropertySymbol
                     && pwt.GetType() != null
@@ -532,7 +537,8 @@ namespace Microsoft.CSharp.RuntimeBinder.Semantics
                     || mwtSet.GetType() == mwtGet.GetType()
                     || SymbolLoader.HasBaseConversion(mwtGet.GetType(), mwtSet.GetType())
                 )
-            ) {
+            )
+            {
                 pObject = AdjustMemberObject(mwtGet, pObject);
             }
             else if (mwtSet)
@@ -696,7 +702,8 @@ namespace Microsoft.CSharp.RuntimeBinder.Semantics
                     typeParam.IsNonNullableValueType
                     && TypeManager.SubstType(methCur.RetType, atsCur).IsNonNullableValueType
                     && canConvert(arg, nubParam = TypeManager.GetNullable(typeParam))
-                ) {
+                )
+                {
                     methFirstList.Add(
                         new CandidateFunctionMember(
                             new MethPropWithInst(methCur, atsCur, TypeArray.Empty),
@@ -758,7 +765,8 @@ namespace Microsoft.CSharp.RuntimeBinder.Semantics
             if (
                 !(arg.Type is NullableType)
                 || !canConvert(arg.Type.StripNubs(), typeRaw, CONVERTTYPE.NOUDC)
-            ) {
+            )
+            {
                 // Convert then lift.
                 arg = mustConvert(arg, typeArg);
             }
@@ -810,7 +818,8 @@ namespace Microsoft.CSharp.RuntimeBinder.Semantics
             Expr args,
             int carg,
             NamedArgumentsKind namedArgumentsKind
-        ) {
+        )
+        {
             ArgInfos pargInfo = new ArgInfos { carg = carg };
             FillInArgInfoFromArgList(pargInfo, args);
 
@@ -838,7 +847,8 @@ namespace Microsoft.CSharp.RuntimeBinder.Semantics
             BindingFlag bindFlags,
             ExprMemberGroup grp,
             Expr args
-        ) {
+        )
+        {
             Debug.Assert(
                 grp.SymKind == SYMKIND.SK_MethodSymbol
                     || grp.SymKind == SYMKIND.SK_PropertySymbol
@@ -1092,7 +1102,8 @@ namespace Microsoft.CSharp.RuntimeBinder.Semantics
             PropWithType pwt,
             out MethWithType pmwtGet,
             out MethWithType pmwtSet
-        ) {
+        )
+        {
             PropertySymbol prop = pwt.Prop();
             Debug.Assert(prop != null);
             // Get the accessors.
@@ -1165,7 +1176,8 @@ namespace Microsoft.CSharp.RuntimeBinder.Semantics
             if (
                 typeObj is NullableType nubTypeObj
                 && (typeTmp = nubTypeObj.GetAts()) != swt.GetType()
-            ) {
+            )
+            {
                 typeObj = typeTmp;
             }
 
@@ -1266,7 +1278,8 @@ namespace Microsoft.CSharp.RuntimeBinder.Semantics
             TypeArray pTypeArgs,
             Expr argsPtr,
             out Expr newArgs
-        ) {
+        )
+        {
             Debug.Assert(mp != null);
             Debug.Assert(mp.Params != null);
             newArgs = null;
@@ -1341,7 +1354,8 @@ namespace Microsoft.CSharp.RuntimeBinder.Semantics
                             !canConvert(named.Value, substDestType)
                             && mp.isParamArray
                             && index == mp.Params.Count - 1
-                        ) {
+                        )
+                        {
                             // We have a param array, but we're not at the end yet. This will happen
                             // with named arguments when the user specifies a name for the param array,
                             // and its not an actual array.
@@ -1563,7 +1577,8 @@ namespace Microsoft.CSharp.RuntimeBinder.Semantics
             TypeArray @params,
             int count,
             out TypeArray ppExpandedParams
-        ) {
+        )
+        {
             CType[] prgtype;
             if (count < @params.Count - 1)
             {
@@ -1615,7 +1630,8 @@ namespace Microsoft.CSharp.RuntimeBinder.Semantics
             AggregateType ats,
             bool fSrc,
             bool fDst
-        ) {
+        )
+        {
             foreach (UdConvInfo conv in convTable)
             {
                 if (
@@ -1623,7 +1639,8 @@ namespace Microsoft.CSharp.RuntimeBinder.Semantics
                     && conv.Meth.GetType() == ats
                     && conv.SrcImplicit == fSrc
                     && conv.DstImplicit == fDst
-                ) {
+                )
+                {
                     return true;
                 }
             }

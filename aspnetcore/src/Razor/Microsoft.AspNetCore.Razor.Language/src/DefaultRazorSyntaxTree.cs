@@ -18,7 +18,8 @@ namespace Microsoft.AspNetCore.Razor.Language
             RazorSourceDocument source,
             IReadOnlyList<RazorDiagnostic> diagnostics,
             RazorParserOptions options
-        ) {
+        )
+        {
             Root = root;
             Source = source;
             _diagnostics = diagnostics;

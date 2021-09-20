@@ -25,20 +25,19 @@ namespace Microsoft.EntityFrameworkCore.Query
         /// </summary>
         /// <param name="queryExpression"> The query expression to get results from server. </param>
         /// <param name="shaperExpression"> The shaper expression to create result objects from server results. </param>
-        public ShapedQueryExpression(
-            Expression queryExpression,
-            Expression shaperExpression
-        ) : this(
-            Check.NotNull(queryExpression, nameof(queryExpression)),
-            Check.NotNull(shaperExpression, nameof(shaperExpression)),
-            ResultCardinality.Enumerable
-        ) { }
+        public ShapedQueryExpression(Expression queryExpression, Expression shaperExpression)
+            : this(
+                Check.NotNull(queryExpression, nameof(queryExpression)),
+                Check.NotNull(shaperExpression, nameof(shaperExpression)),
+                ResultCardinality.Enumerable
+            ) { }
 
         private ShapedQueryExpression(
             Expression queryExpression,
             Expression shaperExpression,
             ResultCardinality resultCardinality
-        ) {
+        )
+        {
             QueryExpression = queryExpression;
             ShaperExpression = shaperExpression;
             ResultCardinality = resultCardinality;
@@ -86,7 +85,8 @@ namespace Microsoft.EntityFrameworkCore.Query
         public virtual ShapedQueryExpression Update(
             Expression queryExpression,
             Expression shaperExpression
-        ) {
+        )
+        {
             Check.NotNull(queryExpression, nameof(queryExpression));
             Check.NotNull(shaperExpression, nameof(shaperExpression));
 

@@ -22,7 +22,8 @@ namespace System.IO.Pipes.Tests
                     PipeDirection.Out,
                     server.ClientSafePipeHandle
                 )
-            ) {
+            )
+            {
                 byte[] sent = new byte[] { 123 };
                 byte[] received = new byte[] { 0 };
                 client.Write(sent, 0, 1);
@@ -48,14 +49,16 @@ namespace System.IO.Pipes.Tests
                     serverBase.SafePipeHandle,
                     serverBase.ClientSafePipeHandle
                 )
-            ) {
+            )
+            {
                 Assert.True(server.IsConnected);
                 using (
                     AnonymousPipeClientStream client = new AnonymousPipeClientStream(
                         PipeDirection.In,
                         server.ClientSafePipeHandle
                     )
-                ) {
+                )
+                {
                     Assert.True(server.IsConnected);
                     Assert.True(client.IsConnected);
 
@@ -87,7 +90,8 @@ namespace System.IO.Pipes.Tests
                     PipeDirection.In,
                     clientBase.SafePipeHandle
                 )
-            ) {
+            )
+            {
                 Assert.True(server.IsConnected);
                 Assert.True(client.IsConnected);
 
@@ -114,7 +118,8 @@ namespace System.IO.Pipes.Tests
                     HandleInheritability.None,
                     desiredBufferSize
                 )
-            ) {
+            )
+            {
                 Assert.Equal(desiredBufferSize, server.OutBufferSize);
                 desiredBufferSize = server.OutBufferSize * 2;
                 Assert.True(desiredBufferSize > 0);
@@ -132,7 +137,8 @@ namespace System.IO.Pipes.Tests
                     PipeDirection.In,
                     server.ClientSafePipeHandle
                 )
-            ) {
+            )
+            {
                 Assert.Equal(desiredBufferSize, server.OutBufferSize);
                 Assert.Equal(desiredBufferSize, client.InBufferSize);
             }
@@ -149,7 +155,8 @@ namespace System.IO.Pipes.Tests
                     PipeDirection.Out,
                     server.ClientSafePipeHandle
                 )
-            ) {
+            )
+            {
                 Assert.Equal(desiredBufferSize, server.InBufferSize);
                 Assert.Equal(desiredBufferSize, client.OutBufferSize);
             }
@@ -172,7 +179,8 @@ namespace System.IO.Pipes.Tests
                     PipeDirection.In,
                     server.ClientSafePipeHandle
                 )
-            ) {
+            )
+            {
                 Assert.Throws<PlatformNotSupportedException>(() => server.OutBufferSize);
                 Assert.Throws<PlatformNotSupportedException>(() => client.InBufferSize);
             }
@@ -199,7 +207,8 @@ namespace System.IO.Pipes.Tests
                     PipeDirection.In,
                     server.ClientSafePipeHandle
                 )
-            ) {
+            )
+            {
                 Assert.Equal(desiredBufferSize, server.OutBufferSize);
                 Assert.Equal(desiredBufferSize, client.InBufferSize);
             }
@@ -216,7 +225,8 @@ namespace System.IO.Pipes.Tests
                     PipeDirection.Out,
                     server.ClientSafePipeHandle
                 )
-            ) {
+            )
+            {
                 Assert.Equal(desiredBufferSize, server.InBufferSize);
                 Assert.Equal(0, client.OutBufferSize);
             }
@@ -228,7 +238,8 @@ namespace System.IO.Pipes.Tests
         public void PipeTransmissionMode_Returns_Byte(
             PipeDirection serverDirection,
             PipeDirection clientDirection
-        ) {
+        )
+        {
             using (
                 AnonymousPipeServerStream server = new AnonymousPipeServerStream(serverDirection)
             )
@@ -237,7 +248,8 @@ namespace System.IO.Pipes.Tests
                     clientDirection,
                     server.ClientSafePipeHandle
                 )
-            ) {
+            )
+            {
                 Assert.Equal(PipeTransmissionMode.Byte, server.TransmissionMode);
                 Assert.Equal(PipeTransmissionMode.Byte, client.TransmissionMode);
             }
@@ -249,7 +261,8 @@ namespace System.IO.Pipes.Tests
         public void ReadModeToByte_Accepted(
             PipeDirection serverDirection,
             PipeDirection clientDirection
-        ) {
+        )
+        {
             using (
                 AnonymousPipeServerStream server = new AnonymousPipeServerStream(serverDirection)
             )
@@ -258,7 +271,8 @@ namespace System.IO.Pipes.Tests
                     clientDirection,
                     server.ClientSafePipeHandle
                 )
-            ) {
+            )
+            {
                 server.ReadMode = PipeTransmissionMode.Byte;
                 client.ReadMode = PipeTransmissionMode.Byte;
                 Assert.Equal(PipeTransmissionMode.Byte, server.ReadMode);
@@ -277,7 +291,8 @@ namespace System.IO.Pipes.Tests
                     PipeDirection.In,
                     server.ClientSafePipeHandle
                 )
-            ) {
+            )
+            {
                 Assert.Throws<NotSupportedException>(
                     () => server.ReadMode = PipeTransmissionMode.Message
                 );
@@ -298,7 +313,8 @@ namespace System.IO.Pipes.Tests
                     PipeDirection.In,
                     server.ClientSafePipeHandle
                 )
-            ) {
+            )
+            {
                 Assert.Throws<ArgumentOutOfRangeException>(
                     () => server.ReadMode = (PipeTransmissionMode)999
                 );

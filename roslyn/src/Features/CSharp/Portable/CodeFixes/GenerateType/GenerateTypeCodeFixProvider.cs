@@ -67,7 +67,8 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeFixes.GenerateType
             SyntaxNode node,
             SyntaxToken token,
             Diagnostic diagnostic
-        ) {
+        )
+        {
             switch (node)
             {
                 case QualifiedNameSyntax _:
@@ -88,7 +89,8 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeFixes.GenerateType
             Document document,
             SyntaxNode node,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var service = document.GetRequiredLanguageService<IGenerateTypeService>();
             return service.GenerateTypeAsync(document, node, cancellationToken);
         }

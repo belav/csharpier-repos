@@ -90,7 +90,8 @@ namespace Microsoft.AspNetCore.Http.Features
         [InlineData(false)]
         public async Task ReadFormAsync_SimpleData_ReplacePipeReader_ReturnsParsedFormCollection(
             bool bufferRequest
-        ) {
+        )
+        {
             var formContent = Encoding.UTF8.GetBytes("foo=bar&baz=2");
             var context = new DefaultHttpContext();
             var responseFeature = new FakeResponseFeature();
@@ -241,7 +242,8 @@ namespace Microsoft.AspNetCore.Http.Features
         [InlineData(false)]
         public async Task ReadForm_MultipartWithField_ReturnsParsedFormCollection(
             bool bufferRequest
-        ) {
+        )
+        {
             var formContent = Encoding.UTF8.GetBytes(MultipartFormWithField);
             var context = new DefaultHttpContext();
             var responseFeature = new FakeResponseFeature();
@@ -282,7 +284,8 @@ namespace Microsoft.AspNetCore.Http.Features
         [InlineData(false)]
         public async Task ReadFormAsync_MultipartWithFile_ReturnsParsedFormCollection(
             bool bufferRequest
-        ) {
+        )
+        {
             var formContent = Encoding.UTF8.GetBytes(MultipartFormWithFile);
             var context = new DefaultHttpContext();
             var responseFeature = new FakeResponseFeature();
@@ -337,7 +340,8 @@ namespace Microsoft.AspNetCore.Http.Features
         [InlineData(false)]
         public async Task ReadFormAsync_MultipartWithFileAndQuotedBoundaryString_ReturnsParsedFormCollection(
             bool bufferRequest
-        ) {
+        )
+        {
             var formContent = Encoding.UTF8.GetBytes(MultipartFormWithSpecialCharacters);
             var context = new DefaultHttpContext();
             var responseFeature = new FakeResponseFeature();
@@ -378,7 +382,8 @@ namespace Microsoft.AspNetCore.Http.Features
         [InlineData(false)]
         public async Task ReadFormAsync_MultipartWithEncodedFilename_ReturnsParsedFormCollection(
             bool bufferRequest
-        ) {
+        )
+        {
             var formContent = Encoding.UTF8.GetBytes(MultipartFormWithEncodedFilename);
             var context = new DefaultHttpContext();
             var responseFeature = new FakeResponseFeature();
@@ -433,7 +438,8 @@ namespace Microsoft.AspNetCore.Http.Features
         [InlineData(false)]
         public async Task ReadFormAsync_MultipartWithFieldAndFile_ReturnsParsedFormCollection(
             bool bufferRequest
-        ) {
+        )
+        {
             var formContent = Encoding.UTF8.GetBytes(MultipartFormWithFieldAndFile);
             var context = new DefaultHttpContext();
             var responseFeature = new FakeResponseFeature();
@@ -551,7 +557,8 @@ namespace Microsoft.AspNetCore.Http.Features
         public async Task ReadFormAsync_MultipartWithFieldAndMediumFile_ReturnsParsedFormCollection(
             bool bufferRequest,
             int fileSize
-        ) {
+        )
+        {
             var fileContents = CreateFile(fileSize);
             var formContent = CreateMultipartWithFormAndFile(fileContents);
             var context = new DefaultHttpContext();

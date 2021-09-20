@@ -182,7 +182,8 @@ namespace System.Text.RegularExpressions
             string input,
             int count,
             int startat
-        ) {
+        )
+        {
             if (evaluator is null)
             {
                 ThrowHelper.ThrowArgumentNullException(ExceptionArgument.evaluator);

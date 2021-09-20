@@ -38,7 +38,8 @@ namespace Microsoft.AspNetCore.JsonPatch
         public JsonPatchDocument(
             List<Operation<TModel>> operations,
             IContractResolver contractResolver
-        ) {
+        )
+        {
             Operations = operations ?? throw new ArgumentNullException(nameof(operations));
             ContractResolver =
                 contractResolver ?? throw new ArgumentNullException(nameof(contractResolver));
@@ -55,7 +56,8 @@ namespace Microsoft.AspNetCore.JsonPatch
         public JsonPatchDocument<TModel> Add<TProp>(
             Expression<Func<TModel, TProp>> path,
             TProp value
-        ) {
+        )
+        {
             if (path == null)
             {
                 throw new ArgumentNullException(nameof(path));
@@ -80,7 +82,8 @@ namespace Microsoft.AspNetCore.JsonPatch
             Expression<Func<TModel, IList<TProp>>> path,
             TProp value,
             int position
-        ) {
+        )
+        {
             if (path == null)
             {
                 throw new ArgumentNullException(nameof(path));
@@ -108,7 +111,8 @@ namespace Microsoft.AspNetCore.JsonPatch
         public JsonPatchDocument<TModel> Add<TProp>(
             Expression<Func<TModel, IList<TProp>>> path,
             TProp value
-        ) {
+        )
+        {
             if (path == null)
             {
                 throw new ArgumentNullException(nameof(path));
@@ -149,7 +153,8 @@ namespace Microsoft.AspNetCore.JsonPatch
         public JsonPatchDocument<TModel> Remove<TProp>(
             Expression<Func<TModel, IList<TProp>>> path,
             int position
-        ) {
+        )
+        {
             if (path == null)
             {
                 throw new ArgumentNullException(nameof(path));
@@ -194,7 +199,8 @@ namespace Microsoft.AspNetCore.JsonPatch
         public JsonPatchDocument<TModel> Replace<TProp>(
             Expression<Func<TModel, TProp>> path,
             TProp value
-        ) {
+        )
+        {
             if (path == null)
             {
                 throw new ArgumentNullException(nameof(path));
@@ -219,7 +225,8 @@ namespace Microsoft.AspNetCore.JsonPatch
             Expression<Func<TModel, IList<TProp>>> path,
             TProp value,
             int position
-        ) {
+        )
+        {
             if (path == null)
             {
                 throw new ArgumentNullException(nameof(path));
@@ -247,7 +254,8 @@ namespace Microsoft.AspNetCore.JsonPatch
         public JsonPatchDocument<TModel> Replace<TProp>(
             Expression<Func<TModel, IList<TProp>>> path,
             TProp value
-        ) {
+        )
+        {
             if (path == null)
             {
                 throw new ArgumentNullException(nameof(path));
@@ -270,7 +278,8 @@ namespace Microsoft.AspNetCore.JsonPatch
         public JsonPatchDocument<TModel> Test<TProp>(
             Expression<Func<TModel, TProp>> path,
             TProp value
-        ) {
+        )
+        {
             if (path == null)
             {
                 throw new ArgumentNullException(nameof(path));
@@ -295,7 +304,8 @@ namespace Microsoft.AspNetCore.JsonPatch
             Expression<Func<TModel, IList<TProp>>> path,
             TProp value,
             int position
-        ) {
+        )
+        {
             if (path == null)
             {
                 throw new ArgumentNullException(nameof(path));
@@ -323,7 +333,8 @@ namespace Microsoft.AspNetCore.JsonPatch
         public JsonPatchDocument<TModel> Test<TProp>(
             Expression<Func<TModel, IList<TProp>>> path,
             TProp value
-        ) {
+        )
+        {
             if (path == null)
             {
                 throw new ArgumentNullException(nameof(path));
@@ -346,7 +357,8 @@ namespace Microsoft.AspNetCore.JsonPatch
         public JsonPatchDocument<TModel> Move<TProp>(
             Expression<Func<TModel, TProp>> from,
             Expression<Func<TModel, TProp>> path
-        ) {
+        )
+        {
             if (from == null)
             {
                 throw new ArgumentNullException(nameof(from));
@@ -374,7 +386,8 @@ namespace Microsoft.AspNetCore.JsonPatch
             Expression<Func<TModel, IList<TProp>>> from,
             int positionFrom,
             Expression<Func<TModel, TProp>> path
-        ) {
+        )
+        {
             if (from == null)
             {
                 throw new ArgumentNullException(nameof(from));
@@ -408,7 +421,8 @@ namespace Microsoft.AspNetCore.JsonPatch
             Expression<Func<TModel, TProp>> from,
             Expression<Func<TModel, IList<TProp>>> path,
             int positionTo
-        ) {
+        )
+        {
             if (from == null)
             {
                 throw new ArgumentNullException(nameof(from));
@@ -444,7 +458,8 @@ namespace Microsoft.AspNetCore.JsonPatch
             int positionFrom,
             Expression<Func<TModel, IList<TProp>>> path,
             int positionTo
-        ) {
+        )
+        {
             if (from == null)
             {
                 throw new ArgumentNullException(nameof(from));
@@ -478,7 +493,8 @@ namespace Microsoft.AspNetCore.JsonPatch
             Expression<Func<TModel, IList<TProp>>> from,
             int positionFrom,
             Expression<Func<TModel, IList<TProp>>> path
-        ) {
+        )
+        {
             if (from == null)
             {
                 throw new ArgumentNullException(nameof(from));
@@ -510,7 +526,8 @@ namespace Microsoft.AspNetCore.JsonPatch
         public JsonPatchDocument<TModel> Move<TProp>(
             Expression<Func<TModel, TProp>> from,
             Expression<Func<TModel, IList<TProp>>> path
-        ) {
+        )
+        {
             if (from == null)
             {
                 throw new ArgumentNullException(nameof(from));
@@ -536,7 +553,8 @@ namespace Microsoft.AspNetCore.JsonPatch
         public JsonPatchDocument<TModel> Copy<TProp>(
             Expression<Func<TModel, TProp>> from,
             Expression<Func<TModel, TProp>> path
-        ) {
+        )
+        {
             if (from == null)
             {
                 throw new ArgumentNullException(nameof(from));
@@ -564,7 +582,8 @@ namespace Microsoft.AspNetCore.JsonPatch
             Expression<Func<TModel, IList<TProp>>> from,
             int positionFrom,
             Expression<Func<TModel, TProp>> path
-        ) {
+        )
+        {
             if (from == null)
             {
                 throw new ArgumentNullException(nameof(from));
@@ -598,7 +617,8 @@ namespace Microsoft.AspNetCore.JsonPatch
             Expression<Func<TModel, TProp>> from,
             Expression<Func<TModel, IList<TProp>>> path,
             int positionTo
-        ) {
+        )
+        {
             if (from == null)
             {
                 throw new ArgumentNullException(nameof(from));
@@ -634,7 +654,8 @@ namespace Microsoft.AspNetCore.JsonPatch
             int positionFrom,
             Expression<Func<TModel, IList<TProp>>> path,
             int positionTo
-        ) {
+        )
+        {
             if (from == null)
             {
                 throw new ArgumentNullException(nameof(from));
@@ -668,7 +689,8 @@ namespace Microsoft.AspNetCore.JsonPatch
             Expression<Func<TModel, IList<TProp>>> from,
             int positionFrom,
             Expression<Func<TModel, IList<TProp>>> path
-        ) {
+        )
+        {
             if (from == null)
             {
                 throw new ArgumentNullException(nameof(from));
@@ -700,7 +722,8 @@ namespace Microsoft.AspNetCore.JsonPatch
         public JsonPatchDocument<TModel> Copy<TProp>(
             Expression<Func<TModel, TProp>> from,
             Expression<Func<TModel, IList<TProp>>> path
-        ) {
+        )
+        {
             if (from == null)
             {
                 throw new ArgumentNullException(nameof(from));
@@ -757,7 +780,8 @@ namespace Microsoft.AspNetCore.JsonPatch
             TModel objectToApplyTo,
             IObjectAdapter adapter,
             Action<JsonPatchError> logErrorAction
-        ) {
+        )
+        {
             if (objectToApplyTo == null)
             {
                 throw new ArgumentNullException(nameof(objectToApplyTo));

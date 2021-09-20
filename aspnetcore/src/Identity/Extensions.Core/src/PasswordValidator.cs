@@ -40,7 +40,8 @@ namespace Microsoft.AspNetCore.Identity
             UserManager<TUser> manager,
             TUser user,
             string password
-        ) {
+        )
+        {
             if (password == null)
             {
                 throw new ArgumentNullException(nameof(password));
@@ -74,7 +75,8 @@ namespace Microsoft.AspNetCore.Identity
             if (
                 options.RequiredUniqueChars >= 1
                 && password.Distinct().Count() < options.RequiredUniqueChars
-            ) {
+            )
+            {
                 errors.Add(Describer.PasswordRequiresUniqueChars(options.RequiredUniqueChars));
             }
             return Task.FromResult(

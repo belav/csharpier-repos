@@ -25,7 +25,8 @@ namespace Microsoft.CodeAnalysis.Tools.Reflection
         public static async Task<Document?> RemoveUnnecessaryImportsAsync(
             Document document,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             if (s_removeUnnecessaryImportsAsyncMethod is null)
             {
                 return document;

@@ -43,7 +43,8 @@ namespace Microsoft.EntityFrameworkCore.TestUtilities.QueryTestGeneration
                     properties[i].PropertyType.IsGenericType
                     && properties[i].PropertyType.GetGenericTypeDefinition() == typeof(Nullable<>)
                 )
-            ) {
+            )
+            {
                 var nullablePropertyType = typeof(Nullable<>).MakeGenericType(
                     properties[i].PropertyType
                 );

@@ -29,7 +29,8 @@ namespace Microsoft.CodeAnalysis.GenerateMember.GenerateParameterizedMember
             Compilation compilation,
             ISet<string> availableTypeParameterNames,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var visitor = new DetermineSubstitutionsVisitor(
                 compilation,
                 availableTypeParameterNames,
@@ -54,7 +55,8 @@ namespace Microsoft.CodeAnalysis.GenerateMember.GenerateParameterizedMember
                 ISet<string> availableTypeParameterNames,
                 Project project,
                 CancellationToken cancellationToken
-            ) {
+            )
+            {
                 _compilation = compilation;
                 _availableTypeParameterNames = availableTypeParameterNames;
                 _project = project;
@@ -104,7 +106,8 @@ namespace Microsoft.CodeAnalysis.GenerateMember.GenerateParameterizedMember
 
             private async ValueTask<ITypeSymbol> DetermineCommonDerivedTypeAsync(
                 ITypeParameterSymbol symbol
-            ) {
+            )
+            {
                 if (!symbol.ConstraintTypes.All(t => t is INamedTypeSymbol))
                     return null;
 
@@ -166,7 +169,8 @@ namespace Microsoft.CodeAnalysis.GenerateMember.GenerateParameterizedMember
             private async Task<ISet<INamedTypeSymbol>> GetDerivedAndImplementedTypesAsync(
                 INamedTypeSymbol constraintType,
                 IImmutableSet<Project> projects
-            ) {
+            )
+            {
                 var solution = _project.Solution;
 
                 var symbol = constraintType;

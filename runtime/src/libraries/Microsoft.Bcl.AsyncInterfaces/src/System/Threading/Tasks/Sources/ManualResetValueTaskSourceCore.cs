@@ -120,7 +120,8 @@ namespace System.Threading.Tasks.Sources
             object state,
             short token,
             ValueTaskSourceOnCompletedFlags flags
-        ) {
+        )
+        {
             if (continuation == null)
             {
                 throw new ArgumentNullException(nameof(continuation));
@@ -176,7 +177,8 @@ namespace System.Threading.Tasks.Sources
                         oldContinuation,
                         ManualResetValueTaskSourceCoreShared.s_sentinel
                     )
-                ) {
+                )
+                {
                     throw new InvalidOperationException();
                 }
 
@@ -242,7 +244,8 @@ namespace System.Threading.Tasks.Sources
                     ManualResetValueTaskSourceCoreShared.s_sentinel,
                     null
                 ) != null
-            ) {
+            )
+            {
                 if (_executionContext != null)
                 {
                     ExecutionContext.Run(

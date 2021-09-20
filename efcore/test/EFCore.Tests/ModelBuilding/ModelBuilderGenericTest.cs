@@ -44,7 +44,8 @@ namespace Microsoft.EntityFrameworkCore.ModelBuilding
             public void ProcessEntityTypeAdded(
                 IConventionEntityTypeBuilder entityTypeBuilder,
                 IConventionContext<IConventionEntityTypeBuilder> context
-            ) {
+            )
+            {
                 Applied = true;
             }
         }
@@ -133,7 +134,8 @@ namespace Microsoft.EntityFrameworkCore.ModelBuilding
 
             public override TestModelBuilder Entity<TEntity>(
                 Action<TestEntityTypeBuilder<TEntity>> buildAction
-            ) {
+            )
+            {
                 ModelBuilder.Entity<TEntity>(
                     entityTypeBuilder =>
                         buildAction(new GenericTestEntityTypeBuilder<TEntity>(entityTypeBuilder))
@@ -144,7 +146,8 @@ namespace Microsoft.EntityFrameworkCore.ModelBuilding
             public override TestModelBuilder SharedTypeEntity<TEntity>(
                 string name,
                 Action<TestEntityTypeBuilder<TEntity>> buildAction
-            ) {
+            )
+            {
                 ModelBuilder.SharedTypeEntity<TEntity>(
                     name,
                     entityTypeBuilder =>
@@ -555,7 +558,8 @@ namespace Microsoft.EntityFrameworkCore.ModelBuilding
         {
             public GenericTestDiscriminatorBuilder(
                 DiscriminatorBuilder<TDiscriminator> discriminatorBuilder
-            ) {
+            )
+            {
                 DiscriminatorBuilder = discriminatorBuilder;
             }
 
@@ -593,7 +597,8 @@ namespace Microsoft.EntityFrameworkCore.ModelBuilding
         {
             public GenericTestOwnedEntityTypeBuilder(
                 OwnedEntityTypeBuilder<TEntity> ownedEntityTypeBuilder
-            ) {
+            )
+            {
                 OwnedEntityTypeBuilder = ownedEntityTypeBuilder;
             }
 
@@ -772,7 +777,8 @@ namespace Microsoft.EntityFrameworkCore.ModelBuilding
         {
             public GenericTestNavigationBuilder(
                 NavigationBuilder<TSource, TTarget> navigationBuilder
-            ) {
+            )
+            {
                 NavigationBuilder = navigationBuilder;
             }
 
@@ -813,7 +819,8 @@ namespace Microsoft.EntityFrameworkCore.ModelBuilding
         {
             public GenericTestReferenceNavigationBuilder(
                 ReferenceNavigationBuilder<TEntity, TRelatedEntity> referenceNavigationBuilder
-            ) {
+            )
+            {
                 ReferenceNavigationBuilder = referenceNavigationBuilder;
             }
 
@@ -858,7 +865,8 @@ namespace Microsoft.EntityFrameworkCore.ModelBuilding
         {
             public GenericTestCollectionNavigationBuilder(
                 CollectionNavigationBuilder<TEntity, TRelatedEntity> collectionNavigationBuilder
-            ) {
+            )
+            {
                 CollectionNavigationBuilder = collectionNavigationBuilder;
             }
 
@@ -903,7 +911,8 @@ namespace Microsoft.EntityFrameworkCore.ModelBuilding
         {
             public GenericTestReferenceCollectionBuilder(
                 ReferenceCollectionBuilder<TEntity, TRelatedEntity> referenceCollectionBuilder
-            ) {
+            )
+            {
                 ReferenceCollectionBuilder = referenceCollectionBuilder;
             }
 
@@ -955,7 +964,8 @@ namespace Microsoft.EntityFrameworkCore.ModelBuilding
         {
             public GenericTestReferenceReferenceBuilder(
                 ReferenceReferenceBuilder<TEntity, TRelatedEntity> referenceReferenceBuilder
-            ) {
+            )
+            {
                 ReferenceReferenceBuilder = referenceReferenceBuilder;
             }
 
@@ -1021,7 +1031,8 @@ namespace Microsoft.EntityFrameworkCore.ModelBuilding
         {
             public GenericTestCollectionCollectionBuilder(
                 CollectionCollectionBuilder<TLeftEntity, TRightEntity> collectionCollectionBuilder
-            ) {
+            )
+            {
                 CollectionCollectionBuilder = collectionCollectionBuilder;
             }
 
@@ -1163,7 +1174,8 @@ namespace Microsoft.EntityFrameworkCore.ModelBuilding
         {
             public GenericTestOwnershipBuilder(
                 OwnershipBuilder<TEntity, TDependentEntity> ownershipBuilder
-            ) {
+            )
+            {
                 OwnershipBuilder = ownershipBuilder;
             }
 
@@ -1174,10 +1186,9 @@ namespace Microsoft.EntityFrameworkCore.ModelBuilding
             protected virtual GenericTestOwnershipBuilder<TNewEntity, TNewDependentEntity> Wrap<
                 TNewEntity,
                 TNewDependentEntity
-            >(
-                OwnershipBuilder<TNewEntity, TNewDependentEntity> ownershipBuilder
-            ) where TNewEntity : class
-              where TNewDependentEntity : class => new(ownershipBuilder);
+            >(OwnershipBuilder<TNewEntity, TNewDependentEntity> ownershipBuilder)
+                where TNewEntity : class
+                where TNewDependentEntity : class => new(ownershipBuilder);
 
             public override TestOwnershipBuilder<TEntity, TDependentEntity> HasAnnotation(
                 string annotation,
@@ -1213,7 +1224,8 @@ namespace Microsoft.EntityFrameworkCore.ModelBuilding
         {
             public GenericTestOwnedNavigationBuilder(
                 OwnedNavigationBuilder<TEntity, TDependentEntity> ownedNavigationBuilder
-            ) {
+            )
+            {
                 OwnedNavigationBuilder = ownedNavigationBuilder;
             }
 
@@ -1232,8 +1244,9 @@ namespace Microsoft.EntityFrameworkCore.ModelBuilding
                 TNewDependentEntity
             > Wrap<TNewEntity, TNewDependentEntity>(
                 OwnedNavigationBuilder<TNewEntity, TNewDependentEntity> ownershipBuilder
-            ) where TNewEntity : class
-              where TNewDependentEntity : class => new(ownershipBuilder);
+            )
+                where TNewEntity : class
+                where TNewDependentEntity : class => new(ownershipBuilder);
 
             public override TestOwnedNavigationBuilder<TEntity, TDependentEntity> HasAnnotation(
                 string annotation,

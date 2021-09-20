@@ -19,7 +19,8 @@ namespace Microsoft.CodeAnalysis.ExpressionEvaluator
             string typeName,
             string methodName,
             ReadOnlyCollection<string>? formatSpecifiers
-        ) {
+        )
+        {
             Assembly = assembly;
             TypeName = typeName;
             MethodName = methodName;

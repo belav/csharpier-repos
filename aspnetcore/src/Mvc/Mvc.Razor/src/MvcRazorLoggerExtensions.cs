@@ -177,7 +177,8 @@ namespace Microsoft.AspNetCore.Mvc.Razor
             this ILogger logger,
             string filePath,
             long startTimestamp
-        ) {
+        )
+        {
             // Don't log if logging wasn't enabled at start of request as time will be wildly wrong.
             if (startTimestamp != 0 && logger.IsEnabled(LogLevel.Debug))
             {
@@ -223,7 +224,8 @@ namespace Microsoft.AspNetCore.Mvc.Razor
             this ILogger logger,
             string viewName,
             string? controllerName
-        ) {
+        )
+        {
             _viewLookupCacheMiss(logger, viewName, controllerName, null);
         }
 
@@ -231,7 +233,8 @@ namespace Microsoft.AspNetCore.Mvc.Razor
             this ILogger logger,
             string viewName,
             string? controllerName
-        ) {
+        )
+        {
             _viewLookupCacheHit(logger, viewName, controllerName, null);
         }
 
@@ -243,7 +246,8 @@ namespace Microsoft.AspNetCore.Mvc.Razor
         public static void GeneratedCodeToAssemblyCompilationStart(
             this ILogger logger,
             string filePath
-        ) {
+        )
+        {
             _generatedCodeToAssemblyCompilationStart(logger, filePath, null);
         }
 
@@ -261,7 +265,8 @@ namespace Microsoft.AspNetCore.Mvc.Razor
             this ILogger logger,
             string filePath,
             long startTimestamp
-        ) {
+        )
+        {
             // Don't log if logging wasn't enabled at start of request as time will be wildly wrong.
             if (startTimestamp != 0 && logger.IsEnabled(LogLevel.Debug))
             {

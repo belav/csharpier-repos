@@ -263,7 +263,8 @@ namespace Microsoft.EntityFrameworkCore.Query
         [MemberData(nameof(IsAsyncData))]
         public virtual Task Filtered_include_after_different_filtered_include_same_level_split(
             bool async
-        ) {
+        )
+        {
             return AssertQuery(
                 async,
                 ss =>
@@ -303,7 +304,8 @@ namespace Microsoft.EntityFrameworkCore.Query
         [MemberData(nameof(IsAsyncData))]
         public virtual Task Filtered_include_after_different_filtered_include_different_level_split(
             bool async
-        ) {
+        )
+        {
             return AssertQuery(
                 async,
                 ss =>
@@ -344,7 +346,8 @@ namespace Microsoft.EntityFrameworkCore.Query
         [MemberData(nameof(IsAsyncData))]
         public virtual async Task Filtered_include_different_filter_set_on_same_navigation_twice_split(
             bool async
-        ) {
+        )
+        {
             var message =
                 (
                     await Assert.ThrowsAsync<InvalidOperationException>(
@@ -375,7 +378,8 @@ namespace Microsoft.EntityFrameworkCore.Query
         [MemberData(nameof(IsAsyncData))]
         public virtual async Task Filtered_include_different_filter_set_on_same_navigation_twice_multi_level_split(
             bool async
-        ) {
+        )
+        {
             var message =
                 (
                     await Assert.ThrowsAsync<InvalidOperationException>(
@@ -402,7 +406,8 @@ namespace Microsoft.EntityFrameworkCore.Query
         [MemberData(nameof(IsAsyncData))]
         public virtual Task Filtered_include_same_filter_set_on_same_navigation_twice_split(
             bool async
-        ) {
+        )
+        {
             return AssertQuery(
                 async,
                 ss =>
@@ -437,7 +442,8 @@ namespace Microsoft.EntityFrameworkCore.Query
         [MemberData(nameof(IsAsyncData))]
         public virtual Task Filtered_include_same_filter_set_on_same_navigation_twice_followed_by_ThenIncludes_split(
             bool async
-        ) {
+        )
+        {
             return AssertQuery(
                 async,
                 ss =>
@@ -476,7 +482,8 @@ namespace Microsoft.EntityFrameworkCore.Query
         [MemberData(nameof(IsAsyncData))]
         public virtual Task Filtered_include_multiple_multi_level_includes_with_first_level_using_filter_include_on_one_of_the_chains_only_split(
             bool async
-        ) {
+        )
+        {
             return AssertQuery(
                 async,
                 ss =>
@@ -516,7 +523,8 @@ namespace Microsoft.EntityFrameworkCore.Query
         [MemberData(nameof(IsAsyncData))]
         public virtual Task Filtered_include_and_non_filtered_include_on_same_navigation1_split(
             bool async
-        ) {
+        )
+        {
             return AssertQuery(
                 async,
                 ss =>
@@ -546,7 +554,8 @@ namespace Microsoft.EntityFrameworkCore.Query
         [MemberData(nameof(IsAsyncData))]
         public virtual Task Filtered_include_and_non_filtered_include_on_same_navigation2_split(
             bool async
-        ) {
+        )
+        {
             return AssertQuery(
                 async,
                 ss =>
@@ -576,7 +585,8 @@ namespace Microsoft.EntityFrameworkCore.Query
         [MemberData(nameof(IsAsyncData))]
         public virtual Task Filtered_include_and_non_filtered_include_followed_by_then_include_on_same_navigation_split(
             bool async
-        ) {
+        )
+        {
             return AssertQuery(
                 async,
                 ss =>
@@ -618,7 +628,8 @@ namespace Microsoft.EntityFrameworkCore.Query
         [MemberData(nameof(IsAsyncData))]
         public virtual Task Filtered_include_complex_three_level_with_middle_having_filter1_split(
             bool async
-        ) {
+        )
+        {
             return AssertQuery(
                 async,
                 ss =>
@@ -667,7 +678,8 @@ namespace Microsoft.EntityFrameworkCore.Query
         [MemberData(nameof(IsAsyncData))]
         public virtual Task Filtered_include_complex_three_level_with_middle_having_filter2_split(
             bool async
-        ) {
+        )
+        {
             return AssertQuery(
                 async,
                 ss =>
@@ -754,7 +766,8 @@ namespace Microsoft.EntityFrameworkCore.Query
         [MemberData(nameof(IsAsyncData))]
         public virtual async Task Filtered_include_include_parameter_used_inside_filter_throws_split(
             bool async
-        ) {
+        )
+        {
             await Assert.ThrowsAsync<InvalidOperationException>(
                 () =>
                     AssertQuery(
@@ -834,7 +847,8 @@ namespace Microsoft.EntityFrameworkCore.Query
         [MemberData(nameof(IsAsyncData))]
         public virtual async Task Filtered_include_calling_methods_directly_on_parameter_throws_split(
             bool async
-        ) {
+        )
+        {
             var message =
                 (
                     await Assert.ThrowsAsync<InvalidOperationException>(
@@ -895,7 +909,8 @@ namespace Microsoft.EntityFrameworkCore.Query
         [MemberData(nameof(IsAsyncData))]
         public virtual Task Projecting_collection_with_FirstOrDefault_without_split_works(
             bool async
-        ) {
+        )
+        {
             return AssertFirstOrDefault(
                 async,
                 ss =>
@@ -912,7 +927,8 @@ namespace Microsoft.EntityFrameworkCore.Query
 
         public override Task Complex_query_with_optional_navigations_and_client_side_evaluation(
             bool async
-        ) {
+        )
+        {
             return AssertTranslationFailed(
                 () => base.Complex_query_with_optional_navigations_and_client_side_evaluation(async)
             );

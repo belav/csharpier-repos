@@ -34,7 +34,8 @@ namespace System.Text.Json
             TValue value,
             JsonSerializerOptions? options = null,
             CancellationToken cancellationToken = default
-        ) {
+        )
+        {
             if (utf8Json == null)
                 throw new ArgumentNullException(nameof(utf8Json));
 
@@ -66,7 +67,8 @@ namespace System.Text.Json
             [DynamicallyAccessedMembers(MembersAccessedOnWrite)] Type inputType,
             JsonSerializerOptions? options = null,
             CancellationToken cancellationToken = default
-        ) {
+        )
+        {
             if (utf8Json == null)
             {
                 throw new ArgumentNullException(nameof(utf8Json));
@@ -91,7 +93,8 @@ namespace System.Text.Json
             Type inputType,
             JsonSerializerOptions? options,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             // We flush the Stream when the buffer is >=90% of capacity.
             // This threshold is a compromise between buffer utilization and minimizing cases where the buffer
             // needs to be expanded\doubled because it is not large enough to write the current property or element.

@@ -28,7 +28,8 @@ namespace Internal.TypeSystem
         public static ResolutionFailure GetTypeLoadResolutionFailure(
             string nestedTypeName,
             ModuleDesc module
-        ) {
+        )
+        {
             ResolutionFailure failure = new ResolutionFailure();
             failure._failureType = FailureType.TypeLoadException1;
             failure._name = nestedTypeName;
@@ -40,7 +41,8 @@ namespace Internal.TypeSystem
             string @namespace,
             string name,
             ModuleDesc module
-        ) {
+        )
+        {
             ResolutionFailure failure = new ResolutionFailure();
             failure._failureType = FailureType.TypeLoadException2;
             failure._namespace = @namespace;
@@ -53,7 +55,8 @@ namespace Internal.TypeSystem
             string @namespace,
             string name,
             string moduleName
-        ) {
+        )
+        {
             ResolutionFailure failure = new ResolutionFailure();
             failure._failureType = FailureType.TypeLoadException3;
             failure._namespace = @namespace;
@@ -66,7 +69,8 @@ namespace Internal.TypeSystem
             TypeDesc owningType,
             string methodName,
             MethodSignature signature
-        ) {
+        )
+        {
             ResolutionFailure failure = new ResolutionFailure();
             failure._failureType = FailureType.MissingMethodException1;
             failure._methodSignature = signature;
@@ -78,7 +82,8 @@ namespace Internal.TypeSystem
         public static ResolutionFailure GetMissingFieldFailure(
             TypeDesc owningType,
             string fieldName
-        ) {
+        )
+        {
             ResolutionFailure failure = new ResolutionFailure();
             failure._failureType = FailureType.MissingMethodException1;
             failure._name = fieldName;

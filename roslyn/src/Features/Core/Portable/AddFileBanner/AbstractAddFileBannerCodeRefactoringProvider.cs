@@ -43,7 +43,8 @@ namespace Microsoft.CodeAnalysis.AddFileBanner
                     tree,
                     out var fileHeaderTemplate
                 ) && !string.IsNullOrEmpty(fileHeaderTemplate)
-            ) {
+            )
+            {
                 // If we have a defined file header template, allow the analyzer and code fix to handle it
                 return;
             }
@@ -110,7 +111,8 @@ namespace Microsoft.CodeAnalysis.AddFileBanner
             SyntaxNode root,
             Document siblingDocument,
             ImmutableArray<SyntaxTrivia> banner
-        ) {
+        )
+        {
             banner = UpdateEmbeddedFileNames(siblingDocument, document, banner);
 
             var newRoot = root.WithPrependedLeadingTrivia(new SyntaxTriviaList(banner));
@@ -125,7 +127,8 @@ namespace Microsoft.CodeAnalysis.AddFileBanner
             Document sourceDocument,
             Document destinationDocument,
             ImmutableArray<SyntaxTrivia> banner
-        ) {
+        )
+        {
             var sourceName = IOUtilities.PerformIO(() => Path.GetFileName(sourceDocument.FilePath));
             var destinationName = IOUtilities.PerformIO(
                 () => Path.GetFileName(destinationDocument.FilePath)
@@ -152,7 +155,8 @@ namespace Microsoft.CodeAnalysis.AddFileBanner
             Document document,
             SyntaxNode root,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var syntaxFacts = document.GetRequiredLanguageService<ISyntaxFactsService>();
 
             // If we have a tree already for this document, then just check to see
@@ -177,9 +181,8 @@ namespace Microsoft.CodeAnalysis.AddFileBanner
 
         private class MyCodeAction : CodeAction.DocumentChangeAction
         {
-            public MyCodeAction(
-                Func<CancellationToken, Task<Document>> createChangedDocument
-            ) : base(CodeFixesResources.Add_file_header, createChangedDocument) { }
+            public MyCodeAction(Func<CancellationToken, Task<Document>> createChangedDocument)
+                : base(CodeFixesResources.Add_file_header, createChangedDocument) { }
         }
     }
 }

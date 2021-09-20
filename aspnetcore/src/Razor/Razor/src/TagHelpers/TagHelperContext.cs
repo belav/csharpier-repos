@@ -47,7 +47,8 @@ namespace Microsoft.AspNetCore.Razor.TagHelpers
             TagHelperAttributeList allAttributes,
             IDictionary<object, object> items,
             string uniqueId
-        ) {
+        )
+        {
             if (items == null)
             {
                 throw new ArgumentNullException(nameof(items));

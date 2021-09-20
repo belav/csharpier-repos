@@ -470,7 +470,8 @@ namespace System.Text.Encodings.Web.Tests
             TextEncoder encoder,
             char allowedChar,
             char disallowedChar
-        ) {
+        )
+        {
             Assert.NotNull(encoder);
             _encoder = encoder;
 
@@ -498,7 +499,8 @@ namespace System.Text.Encodings.Web.Tests
 
         protected void _RunGetIndexOfFirstCharacterToEncodeUtf16_BmpExtendedValidCharsOnly(
             char bmpAllowedChar
-        ) {
+        )
+        {
             // Loop from 96 elements all the way down to 0 elements, which tests that we're
             // not overrunning our read buffers.
 
@@ -536,7 +538,8 @@ namespace System.Text.Encodings.Web.Tests
 
         protected void _RunGetIndexOfFirstCharacterToEncodeUtf16_BmpExtendedSomeCharsNeedEscaping(
             char bmpAllowedChar
-        ) {
+        )
+        {
             // Use a 31-element buffer since it will exercise all the different unrolled code paths.
 
             var span = _boundedChars.Span.Slice(0, 31);
@@ -646,7 +649,8 @@ namespace System.Text.Encodings.Web.Tests
 
         protected void _RunGetIndexOfFirstCharacterToEncodeUtf8_BmpExtendedAllValidChars(
             char bmpAllowedChar
-        ) {
+        )
+        {
             Span<byte> allowedCharAsUtf8 = stackalloc byte[3];
             Assert.True(
                 new Rune(bmpAllowedChar).TryEncodeToUtf8(
@@ -684,7 +688,8 @@ namespace System.Text.Encodings.Web.Tests
 
         protected void _RunGetIndexOfFirstCharacterToEncodeUtf8_BmpExtendedSomeCharsNeedEncoding(
             char bmpAllowedChar
-        ) {
+        )
+        {
             Assert.True(bmpAllowedChar >= 0x80, "Must be a non-ASCII char.");
 
             Span<byte> allowedCharAsUtf8 = stackalloc byte[3];

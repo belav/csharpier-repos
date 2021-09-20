@@ -15,7 +15,8 @@ namespace System.Web.Http.ExceptionHandling
         Task IExceptionHandler.HandleAsync(
             ExceptionHandlerContext context,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             if (context == null)
             {
                 throw new ArgumentNullException("context");
@@ -39,7 +40,8 @@ namespace System.Web.Http.ExceptionHandling
         public virtual Task HandleAsync(
             ExceptionHandlerContext context,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             Handle(context);
             return TaskHelpers.Completed();
         }

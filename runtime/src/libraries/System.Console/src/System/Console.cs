@@ -480,7 +480,8 @@ namespace System
             int sourceHeight,
             int targetLeft,
             int targetTop
-        ) {
+        )
+        {
             ConsolePal.MoveBufferArea(
                 sourceLeft,
                 sourceTop,
@@ -505,7 +506,8 @@ namespace System
             char sourceChar,
             ConsoleColor sourceForeColor,
             ConsoleColor sourceBackColor
-        ) {
+        )
+        {
             ConsolePal.MoveBufferArea(
                 sourceLeft,
                 sourceTop,

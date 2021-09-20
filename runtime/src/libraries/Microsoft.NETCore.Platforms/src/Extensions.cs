@@ -19,7 +19,8 @@ namespace Microsoft.NETCore.Platforms.BuildTasks
             this ITaskItem taskItem,
             string metadataName,
             bool defaultValue = false
-        ) {
+        )
+        {
             bool result = false;
             var metadataValue = taskItem.GetMetadata(metadataName);
             if (!bool.TryParse(metadataValue, out result))

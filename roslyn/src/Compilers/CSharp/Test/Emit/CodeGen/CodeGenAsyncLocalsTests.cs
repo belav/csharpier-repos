@@ -33,7 +33,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.CodeGen
             IEnumerable<MetadataReference> references = null,
             CSharpCompilationOptions options = null,
             Verification verify = Verification.Passes
-        ) {
+        )
+        {
             references = (references != null) ? references.Concat(s_asyncRefs) : s_asyncRefs;
             return base.CompileAndVerify(
                 source,

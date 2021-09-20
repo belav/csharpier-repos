@@ -86,7 +86,8 @@ namespace System.IO.Pipes.Tests
             PipeDirection direction,
             HandleInheritability inheritability,
             int bufferSize
-        ) {
+        )
+        {
             CreateAndVerifyAnonymousPipe(
                     GetBasicPipeSecurity(),
                     direction,
@@ -107,12 +108,14 @@ namespace System.IO.Pipes.Tests
         public void Create_CombineRightsAndAccessControl(
             PipeAccessRights rights,
             AccessControlType accessControl
-        ) {
+        )
+        {
             // These are the only two rights that allow creating a pipe when using Allow
             if (
                 accessControl == AccessControlType.Allow
                 && (rights == PipeAccessRights.FullControl || rights == PipeAccessRights.ReadWrite)
-            ) {
+            )
+            {
                 VerifyValidSecurity(rights, accessControl);
             }
             // Any other combination is not authorized
@@ -164,7 +167,8 @@ namespace System.IO.Pipes.Tests
             PipeDirection direction = DefaultPipeDirection,
             HandleInheritability inheritability = DefaultInheritability,
             int bufferSize = DefaultBufferSize
-        ) {
+        )
+        {
             AnonymousPipeServerStream pipe = AnonymousPipeServerStreamAcl.Create(
                 direction,
                 inheritability,

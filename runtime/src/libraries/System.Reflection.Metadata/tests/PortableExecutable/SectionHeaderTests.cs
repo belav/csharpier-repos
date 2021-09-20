@@ -50,7 +50,8 @@ namespace System.Reflection.PortableExecutable.Tests
             ushort numRelocations,
             ushort numLineNumbers,
             SectionCharacteristics characteristics
-        ) {
+        )
+        {
             var stream = new MemoryStream();
             var writer = new BinaryWriter(stream, Encoding.UTF8, leaveOpen: true);
             writer.Write(PadSectionName(name));

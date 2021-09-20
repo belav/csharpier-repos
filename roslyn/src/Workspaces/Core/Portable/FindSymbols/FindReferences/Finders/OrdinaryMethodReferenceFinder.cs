@@ -29,7 +29,8 @@ namespace Microsoft.CodeAnalysis.FindSymbols.Finders
             FindReferencesSearchOptions options,
             FindReferencesCascadeDirection cascadeDirection,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             // If it's a delegate method, then cascade to the type as well.  These guys are
             // practically equivalent for users.
             if (symbol.ContainingType.TypeKind == TypeKind.Delegate)
@@ -78,7 +79,8 @@ namespace Microsoft.CodeAnalysis.FindSymbols.Finders
             IImmutableSet<Document>? documents,
             FindReferencesSearchOptions options,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             // TODO(cyrusn): Handle searching for IDisposable.Dispose (or an implementation
             // thereof).  in that case, we need to look at documents that have a using in them
             // and see if that using binds to this dispose method.  We also need to look at
@@ -146,7 +148,8 @@ namespace Microsoft.CodeAnalysis.FindSymbols.Finders
             SemanticModel semanticModel,
             FindReferencesSearchOptions options,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var nameMatches = await FindReferencesInDocumentUsingSymbolNameAsync(
                     symbol,
                     document,

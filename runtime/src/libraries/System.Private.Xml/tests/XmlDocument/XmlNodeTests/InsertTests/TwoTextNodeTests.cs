@@ -25,7 +25,8 @@ namespace System.Xml.Tests
             XmlDocument xmlDocument,
             InsertType insertType,
             XmlNodeType nodeType
-        ) {
+        )
+        {
             XmlNode parent = xmlDocument.DocumentElement;
             XmlNode refChild =
                 (insertType == InsertType.Prepend) ? parent.FirstChild : parent.LastChild;
@@ -77,7 +78,8 @@ namespace System.Xml.Tests
             XmlNodeType[] nodeTypes,
             InsertType insertType,
             XmlNodeType nodeType
-        ) {
+        )
+        {
             XmlDocument xmlDocument = new XmlDocument { PreserveWhitespace = true };
             var elem = xmlDocument.CreateElement("elem");
 

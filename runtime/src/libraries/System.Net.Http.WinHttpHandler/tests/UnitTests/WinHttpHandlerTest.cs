@@ -698,7 +698,8 @@ namespace System.Net.Http.WinHttpHandlerUnitTests
         public void SslProtocols_SetUsingValidEnums_ExpectedWinHttpHandleSettings(
             SslProtocols specified,
             uint expectedProtocols
-        ) {
+        )
+        {
             var handler = new WinHttpHandler();
 
             SendRequestHelper.Send(
@@ -728,7 +729,8 @@ namespace System.Net.Http.WinHttpHandlerUnitTests
                         HttpResponseMessage response = await client.GetAsync(
                             TestServer.FakeServerEndpoint
                         )
-                    ) {
+                    )
+                    {
                         Assert.Equal(HttpStatusCode.OK, response.StatusCode);
                     }
                 }
@@ -752,7 +754,8 @@ namespace System.Net.Http.WinHttpHandlerUnitTests
                         request,
                         HttpCompletionOption.ResponseHeadersRead
                     )
-                ) {
+                )
+                {
                     Assert.Equal(HttpStatusCode.OK, response.StatusCode);
                     var stream = await response.Content.ReadAsStreamAsync();
                     bytesRead = await stream.ReadAsync(buffer, 0, buffer.Length);
@@ -783,7 +786,8 @@ namespace System.Net.Http.WinHttpHandlerUnitTests
                         request,
                         HttpCompletionOption.ResponseHeadersRead
                     )
-                ) {
+                )
+                {
                     Assert.Equal(HttpStatusCode.OK, response.StatusCode);
                     var stream = await response.Content.ReadAsStreamAsync();
                     do
@@ -855,7 +859,8 @@ namespace System.Net.Http.WinHttpHandlerUnitTests
                         );
                     }
                 )
-            ) {
+            )
+            {
                 await VerifyResponseContent(
                     TestServer.ExpectedResponseBodyBytes,
                     response.Content,
@@ -884,7 +889,8 @@ namespace System.Net.Http.WinHttpHandlerUnitTests
                         );
                     }
                 )
-            ) {
+            )
+            {
                 await VerifyResponseContent(
                     TestServer.ExpectedResponseBodyBytes,
                     response.Content,
@@ -908,7 +914,8 @@ namespace System.Net.Http.WinHttpHandlerUnitTests
                         handler.WindowsProxyUsePolicy = WindowsProxyUsePolicy.UseWinInetProxy;
                     }
                 )
-            ) {
+            )
+            {
                 await VerifyResponseContent(
                     TestServer.ExpectedResponseBodyBytes,
                     response.Content,
@@ -923,7 +930,8 @@ namespace System.Net.Http.WinHttpHandlerUnitTests
         [InlineData(true)]
         public async Task SendAsync_NoWinHttpDecompressionSupport_AutoDecompressionSettingDiffers_ResponseIsNotDecompressed(
             bool responseIsGZip
-        ) {
+        )
+        {
             DecompressionMethods decompressionMethods = responseIsGZip
                 ? DecompressionMethods.Deflate
                 : DecompressionMethods.GZip;
@@ -946,7 +954,8 @@ namespace System.Net.Http.WinHttpHandlerUnitTests
                         );
                     }
                 )
-            ) {
+            )
+            {
                 await VerifyResponseContent(
                     TestServer.CompressBytes(
                         TestServer.ExpectedResponseBodyBytes,
@@ -1313,7 +1322,8 @@ namespace System.Net.Http.WinHttpHandlerUnitTests
             HttpContent responseContent,
             bool responseContentWasOriginallyCompressed,
             bool responseContentWasAutoDecompressed
-        ) {
+        )
+        {
             Nullable<long> contentLength = responseContent.Headers.ContentLength;
             ICollection<string> contentEncoding = responseContent.Headers.ContentEncoding;
 

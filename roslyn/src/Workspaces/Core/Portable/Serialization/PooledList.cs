@@ -16,7 +16,8 @@ namespace Microsoft.CodeAnalysis.Serialization
     {
         public static PooledObject<HashSet<Checksum>> CreateChecksumSet(
             IEnumerable<Checksum> checksums = null
-        ) {
+        )
+        {
             var items = SharedPools.Default<HashSet<Checksum>>().GetPooledObject();
 
             items.Object.UnionWith(checksums ?? SpecializedCollections.EmptyEnumerable<Checksum>());

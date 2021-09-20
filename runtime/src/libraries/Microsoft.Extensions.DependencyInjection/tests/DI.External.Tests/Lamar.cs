@@ -17,7 +17,8 @@ namespace Microsoft.Extensions.DependencyInjection.Specification
 
         protected override IServiceProvider CreateServiceProviderImpl(
             IServiceCollection serviceCollection
-        ) {
+        )
+        {
             return Lamar.Container.BuildAsync(serviceCollection).Result;
         }
     }

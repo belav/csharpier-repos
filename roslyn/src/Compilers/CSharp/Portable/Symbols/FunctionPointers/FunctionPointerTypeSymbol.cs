@@ -179,7 +179,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
 
         protected override ITypeSymbol CreateITypeSymbol(
             CodeAnalysis.NullableAnnotation nullableAnnotation
-        ) {
+        )
+        {
             Debug.Assert(nullableAnnotation != DefaultNullableAnnotation);
             return new PublicModel.FunctionPointerTypeSymbol(this, nullableAnnotation);
         }
@@ -194,7 +195,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             ImmutableArray<byte> transforms,
             ref int position,
             out TypeSymbol result
-        ) {
+        )
+        {
             var newSignature = Signature.ApplyNullableTransforms(
                 defaultTransformFlag,
                 transforms,
@@ -212,7 +214,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             if (
                 fromSignature.DiagnosticInfo?.Code == (int)ErrorCode.ERR_BindToBogus
                 && fromSignature.DiagnosticInfo.Arguments.AsSingleton() == (object)Signature
-            ) {
+            )
+            {
                 return new UseSiteInfo<AssemblySymbol>(
                     new CSDiagnosticInfo(ErrorCode.ERR_BogusType, this)
                 );
@@ -225,7 +228,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             ref DiagnosticInfo? result,
             Symbol owner,
             ref HashSet<TypeSymbol> checkedTypes
-        ) {
+        )
+        {
             return Signature.GetUnificationUseSiteDiagnosticRecursive(
                 ref result,
                 owner,
@@ -250,7 +254,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
 
         internal override TypeSymbol SetNullabilityForReferenceTypes(
             Func<TypeWithAnnotations, TypeWithAnnotations> transform
-        ) {
+        )
+        {
             var substitutedSignature = Signature.SetNullabilityForReferenceTypes(transform);
             if ((object)Signature != substitutedSignature)
             {

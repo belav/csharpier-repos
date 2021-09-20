@@ -101,7 +101,8 @@ namespace System
             object?[]? args,
             CultureInfo? culture,
             object?[]? activationAttributes
-        ) {
+        )
+        {
             Assembly assembly = Assembly.LoadFrom(assemblyFile);
             Type t = assembly.GetType(typeName, throwOnError: true, ignoreCase)!;
 

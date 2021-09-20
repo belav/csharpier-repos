@@ -47,7 +47,8 @@ namespace Microsoft.CodeAnalysis.CSharp.ExpressionEvaluator
             ImmutableArray<LocalSymbol> locals,
             ImmutableSortedSet<int> inScopeHoistedLocalSlots,
             MethodDebugInfo<TypeSymbol, LocalSymbol> methodDebugInfo
-        ) {
+        )
+        {
             RoslynDebug.AssertNotNull(inScopeHoistedLocalSlots);
             RoslynDebug.AssertNotNull(methodDebugInfo);
 
@@ -74,7 +75,8 @@ namespace Microsoft.CodeAnalysis.CSharp.ExpressionEvaluator
             CSharpCompilation compilation,
             Guid moduleVersionId,
             int typeToken
-        ) {
+        )
+        {
             Debug.Assert(MetadataTokens.Handle(typeToken).Kind == HandleKind.TypeDefinition);
 
             var currentType = compilation.GetType(moduleVersionId, typeToken);
@@ -110,7 +112,8 @@ namespace Microsoft.CodeAnalysis.CSharp.ExpressionEvaluator
             int methodVersion,
             uint ilOffset,
             int localSignatureToken
-        ) {
+        )
+        {
             var offset = NormalizeILOffset(ilOffset);
 
             var compilation = metadataBlocks.ToCompilation(
@@ -148,7 +151,8 @@ namespace Microsoft.CodeAnalysis.CSharp.ExpressionEvaluator
             int methodVersion,
             int ilOffset,
             int localSignatureToken
-        ) {
+        )
+        {
             var methodHandle = (MethodDefinitionHandle)MetadataTokens.Handle(methodToken);
             var currentSourceMethod = compilation.GetSourceMethod(moduleVersionId, methodHandle);
             var localSignatureHandle =
@@ -243,7 +247,8 @@ namespace Microsoft.CodeAnalysis.CSharp.ExpressionEvaluator
             ImmutableArray<string> expressions,
             out ImmutableArray<int> methodTokens,
             out ImmutableArray<string> errorMessages
-        ) {
+        )
+        {
             var diagnostics = DiagnosticBag.GetInstance();
             var syntaxNodes = expressions.SelectAsArray(
                 expr => Parse(expr, treatAsExpression: true, diagnostics, out var formatSpecifiers)
@@ -262,7 +267,8 @@ namespace Microsoft.CodeAnalysis.CSharp.ExpressionEvaluator
                         diagnostics,
                         out var moduleBuilder
                     )
-                ) {
+                )
+                {
                     using var stream = new MemoryStream();
 
                     Cci.PeWriter.WritePeToStream(
@@ -326,7 +332,8 @@ namespace Microsoft.CodeAnalysis.CSharp.ExpressionEvaluator
             DiagnosticBag diagnostics,
             out ResultProperties resultProperties,
             CompilationTestData? testData
-        ) {
+        )
+        {
             var syntax = Parse(
                 expr,
                 (compilationFlags & DkmEvaluationFlags.TreatAsExpression) != 0,
@@ -351,7 +358,8 @@ namespace Microsoft.CodeAnalysis.CSharp.ExpressionEvaluator
                     out var moduleBuilder,
                     out var synthesizedMethod
                 )
-            ) {
+            )
+            {
                 resultProperties = default;
                 return null;
             }
@@ -401,7 +409,8 @@ namespace Microsoft.CodeAnalysis.CSharp.ExpressionEvaluator
             bool treatAsExpression,
             DiagnosticBag diagnostics,
             out ReadOnlyCollection<string>? formatSpecifiers
-        ) {
+        )
+        {
             if (!treatAsExpression)
             {
                 // Try to parse as a statement. If that fails, parse as an expression.
@@ -438,7 +447,8 @@ namespace Microsoft.CodeAnalysis.CSharp.ExpressionEvaluator
             DiagnosticBag diagnostics,
             out ResultProperties resultProperties,
             CompilationTestData? testData
-        ) {
+        )
+        {
             var assignment = target.ParseAssignment(expr, diagnostics);
             if (assignment == null)
             {
@@ -458,7 +468,8 @@ namespace Microsoft.CodeAnalysis.CSharp.ExpressionEvaluator
                     out var moduleBuilder,
                     out var synthesizedMethod
                 )
-            ) {
+            )
+            {
                 resultProperties = default;
                 return null;
             }
@@ -513,7 +524,8 @@ namespace Microsoft.CodeAnalysis.CSharp.ExpressionEvaluator
             DiagnosticBag diagnostics,
             out string typeName,
             CompilationTestData? testData
-        ) {
+        )
+        {
             var context = CreateCompilationContext();
             var moduleBuilder = context.CompileGetLocals(
                 TypeName,
@@ -583,7 +595,8 @@ namespace Microsoft.CodeAnalysis.CSharp.ExpressionEvaluator
         internal override ImmutableArray<AssemblyIdentity> GetMissingAssemblyIdentities(
             Diagnostic diagnostic,
             AssemblyIdentity linqLibrary
-        ) {
+        )
+        {
             return GetMissingAssemblyIdentitiesHelper(
                 (ErrorCode)diagnostic.Code,
                 diagnostic.Arguments,
@@ -598,7 +611,8 @@ namespace Microsoft.CodeAnalysis.CSharp.ExpressionEvaluator
             ErrorCode code,
             IReadOnlyList<object?> arguments,
             AssemblyIdentity linqLibrary
-        ) {
+        )
+        {
             RoslynDebug.AssertNotNull(linqLibrary);
 
             switch (code)
@@ -616,7 +630,8 @@ namespace Microsoft.CodeAnalysis.CSharp.ExpressionEvaluator
                         if (
                             identity != null
                             && !identity.Equals(MissingCorLibrarySymbol.Instance.Identity)
-                        ) {
+                        )
+                        {
                             return ImmutableArray.Create(identity);
                         }
                     }
@@ -630,7 +645,8 @@ namespace Microsoft.CodeAnalysis.CSharp.ExpressionEvaluator
                         && containingNamespace.ConstituentNamespaces.Any(
                             n => n.ContainingAssembly.Identity.IsWindowsAssemblyIdentity()
                         )
-                    ) {
+                    )
+                    {
                         // This is just a heuristic, but it has the advantage of being portable, particularly
                         // across different versions of (desktop) windows.
                         var identity = new AssemblyIdentity(

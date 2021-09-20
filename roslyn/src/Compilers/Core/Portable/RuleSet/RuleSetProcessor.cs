@@ -194,7 +194,8 @@ namespace Microsoft.CodeAnalysis
             XElement ruleNode,
             string analyzer,
             string space
-        ) {
+        )
+        {
             string ruleId = ReadNonEmptyAttribute(ruleNode, RuleIdAttributeName);
             ReportDiagnostic action = ReadAction(ruleNode, allowDefault: false);
 

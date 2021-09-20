@@ -33,7 +33,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.EncapsulateField
             IThreadingContext threadingContext,
             ITextBufferUndoManagerProvider undoManager,
             IAsynchronousOperationListenerProvider listenerProvider
-        ) {
+        )
+        {
             _threadingContext = threadingContext;
             _undoManager = undoManager;
             _listener = listenerProvider.GetListener(FeatureAttribute.EncapsulateField);
@@ -42,7 +43,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.EncapsulateField
         public bool ExecuteCommand(
             EncapsulateFieldCommandArgs args,
             CommandExecutionContext context
-        ) {
+        )
+        {
             if (!args.SubjectBuffer.SupportsRefactorings())
             {
                 return false;
@@ -133,7 +135,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.EncapsulateField
                     .TextBufferUndoHistory.CreateTransaction(
                         EditorFeaturesResources.Encapsulate_Field
                     )
-            ) {
+            )
+            {
                 if (!workspace.TryApplyChanges(finalSolution))
                 {
                     undoTransaction.Cancel();

@@ -171,7 +171,8 @@ namespace System.Reflection.TypeLoading
 
         public static AssemblyNameFlags ConvertAssemblyFlagsToAssemblyNameFlags(
             AssemblyFlags assemblyFlags
-        ) {
+        )
+        {
             AssemblyNameFlags assemblyNameFlags = AssemblyNameFlags.None;
 
             if ((assemblyFlags & AssemblyFlags.Retargetable) != 0)
@@ -227,7 +228,8 @@ namespace System.Reflection.TypeLoading
         public static string ToString(
             this IRoMethodBase roMethodBase,
             MethodSig<string> methodSigStrings
-        ) {
+        )
+        {
             TypeContext typeContext = roMethodBase.TypeContext;
 
             StringBuilder sb = new StringBuilder();
@@ -284,7 +286,8 @@ namespace System.Reflection.TypeLoading
             RoAssembly defaultAssembly,
             bool ignoreCase,
             bool throwOnError
-        ) {
+        )
+        {
             if (!name.TypeNameContainsTypeParserMetacharacters())
             {
                 // Fast-path: the type contains none of the parser metacharacters nor the escape character. Just treat as plain old type name.
@@ -312,7 +315,8 @@ namespace System.Reflection.TypeLoading
                 Assembly? assembly,
                 string fullName,
                 bool ignoreCase2
-            ) {
+            )
+            {
                 if (assembly == null)
                     assembly = defaultAssembly;
 

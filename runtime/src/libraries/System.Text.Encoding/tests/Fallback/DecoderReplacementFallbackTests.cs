@@ -122,7 +122,8 @@ namespace System.Text.Tests
             string replacement,
             byte[] bytesUnknown,
             bool expected
-        ) {
+        )
+        {
             DecoderFallbackBuffer buffer = new DecoderReplacementFallback(
                 replacement
             ).CreateFallbackBuffer();
@@ -134,7 +135,8 @@ namespace System.Text.Tests
         [InlineData("\uD800\uDC00")]
         public void CreateFallbackBuffer_MultipleFallback_ThrowsArgumentException(
             string replacement
-        ) {
+        )
+        {
             DecoderFallbackBuffer buffer = new DecoderReplacementFallback(
                 replacement
             ).CreateFallbackBuffer();

@@ -41,12 +41,14 @@ namespace Microsoft.CodeAnalysis.MoveDeclarationNearReference
                 Document document,
                 TLocalDeclarationStatementSyntax statement,
                 CancellationToken cancellationToken
-            ) {
+            )
+            {
                 var state = new State();
                 if (
                     !await state.TryInitializeAsync(service, document, statement, cancellationToken)
                         .ConfigureAwait(false)
-                ) {
+                )
+                {
                     return null;
                 }
 
@@ -58,7 +60,8 @@ namespace Microsoft.CodeAnalysis.MoveDeclarationNearReference
                 Document document,
                 TLocalDeclarationStatementSyntax node,
                 CancellationToken cancellationToken
-            ) {
+            )
+            {
                 var syntaxFacts = document.GetLanguageService<ISyntaxFactsService>();
 
                 DeclarationStatement = node;
@@ -168,7 +171,8 @@ namespace Microsoft.CodeAnalysis.MoveDeclarationNearReference
                     IndexOfDeclarationStatementInInnermostBlock >= 0
                     && IndexOfDeclarationStatementInInnermostBlock
                         < IndexOfFirstStatementAffectedInInnermostBlock
-                ) {
+                )
+                {
                     // Don't want to move a decl with initializer past other decls in order to move it to the first
                     // affected statement.  If we do we can end up in the following situation:
 #if false
@@ -194,7 +198,8 @@ namespace Microsoft.CodeAnalysis.MoveDeclarationNearReference
                             IndexOfDeclarationStatementInInnermostBlock,
                             IndexOfFirstStatementAffectedInInnermostBlock
                         )
-                    ) {
+                    )
+                    {
                         return false;
                     }
                 }
@@ -207,7 +212,8 @@ namespace Microsoft.CodeAnalysis.MoveDeclarationNearReference
                 );
                 if (
                     semanticModel.SyntaxTree.OverlapsHiddenPosition(affectedSpan, cancellationToken)
-                ) {
+                )
+                {
                     return false;
                 }
 
@@ -217,7 +223,8 @@ namespace Microsoft.CodeAnalysis.MoveDeclarationNearReference
             private bool InDeclarationStatementGroup(
                 int originalIndexInBlock,
                 int firstStatementIndexAffectedInBlock
-            ) {
+            )
+            {
                 for (var i = originalIndexInBlock; i < firstStatementIndexAffectedInBlock; i++)
                 {
                     if (!(InnermostBlockStatements[i] is TLocalDeclarationStatementSyntax))

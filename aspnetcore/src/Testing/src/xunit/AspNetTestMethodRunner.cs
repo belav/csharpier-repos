@@ -25,17 +25,19 @@ namespace Microsoft.AspNetCore.Testing
             ExceptionAggregator aggregator,
             CancellationTokenSource cancellationTokenSource,
             object[] constructorArguments
-        ) : base(
-            testMethod,
-            @class,
-            method,
-            testCases,
-            diagnosticMessageSink,
-            messageBus,
-            aggregator,
-            cancellationTokenSource,
-            constructorArguments
-        ) {
+        )
+            : base(
+                testMethod,
+                @class,
+                method,
+                testCases,
+                diagnosticMessageSink,
+                messageBus,
+                aggregator,
+                cancellationTokenSource,
+                constructorArguments
+            )
+        {
             _diagnosticMessageSink = diagnosticMessageSink;
             _constructorArguments = constructorArguments;
         }

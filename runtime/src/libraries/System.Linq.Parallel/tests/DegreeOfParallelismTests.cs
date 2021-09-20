@@ -17,7 +17,8 @@ namespace System.Linq.Parallel.Tests
                     counts.DefaultIfEmpty(Sources.OuterLoopCount),
                     x => degrees.DefaultIfEmpty(x)
                 )
-            ) {
+            )
+            {
                 yield return results;
             }
         }
@@ -75,7 +76,8 @@ namespace System.Linq.Parallel.Tests
             Labeled<ParallelQuery<int>> labeled,
             int count,
             int degree
-        ) {
+        )
+        {
             Assert.Equal(
                 Functions.SumRange(0, count),
                 labeled.Item.WithDegreeOfParallelism(degree).Sum()
@@ -96,7 +98,8 @@ namespace System.Linq.Parallel.Tests
             Labeled<ParallelQuery<int>> labeled,
             int count,
             int degree
-        ) {
+        )
+        {
             using (ThreadPoolHelpers.EnsureMinThreadsAtLeast(degree))
             {
                 var barrier = new Barrier(degree);
@@ -128,7 +131,8 @@ namespace System.Linq.Parallel.Tests
             Labeled<ParallelQuery<int>> labeled,
             int count,
             int degree
-        ) {
+        )
+        {
             using (ThreadPoolHelpers.EnsureMinThreadsAtLeast(degree))
             {
                 int expected = 1 - count;
@@ -136,7 +140,8 @@ namespace System.Linq.Parallel.Tests
                     int result in labeled.Item.WithDegreeOfParallelism(degree)
                         .Select(x => -x)
                         .OrderBy(x => x)
-                ) {
+                )
+                {
                     Assert.Equal(expected++, result);
                 }
             }
@@ -157,7 +162,8 @@ namespace System.Linq.Parallel.Tests
             Labeled<ParallelQuery<int>> labeled,
             int count,
             int degree
-        ) {
+        )
+        {
             using (ThreadPoolHelpers.EnsureMinThreadsAtLeast(degree))
             {
                 Assert.True(
@@ -192,7 +198,8 @@ namespace System.Linq.Parallel.Tests
             Labeled<ParallelQuery<int>> labeled,
             int count,
             int degree
-        ) {
+        )
+        {
             ParallelQuery<int> query = labeled.Item;
             int accumulatorCombineCount = 0;
 
@@ -226,7 +233,8 @@ namespace System.Linq.Parallel.Tests
             Labeled<ParallelQuery<int>> labeled,
             int count,
             int degree
-        ) {
+        )
+        {
             ParallelQuery<int> query = labeled.Item;
             int accumulatorCombineCount = 0;
             int seedFunctionCallCount = 0;
@@ -259,7 +267,8 @@ namespace System.Linq.Parallel.Tests
             Labeled<ParallelQuery<int>> labeled,
             int count,
             int degree
-        ) {
+        )
+        {
             _ = count;
             Assert.Throws<ArgumentOutOfRangeException>(
                 () => labeled.Item.WithDegreeOfParallelism(degree)

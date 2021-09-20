@@ -414,7 +414,8 @@ namespace Microsoft.EntityFrameworkCore
         [InlineData(ServiceLifetime.Transient)]
         public void Can_resolve_from_the_service_provider_in_options_action(
             ServiceLifetime lifetime
-        ) {
+        )
+        {
             var serviceProvider =
                 (IServiceProvider)new ServiceCollection().AddSingleton<SingletonService>()
                     .AddScoped<ScopedService>()

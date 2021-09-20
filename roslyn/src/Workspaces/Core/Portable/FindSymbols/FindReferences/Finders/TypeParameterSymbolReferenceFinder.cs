@@ -20,7 +20,8 @@ namespace Microsoft.CodeAnalysis.FindSymbols.Finders
             IImmutableSet<Document>? documents,
             FindReferencesSearchOptions options,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             // Type parameters are only found in documents that have both their name, and the
             // name of its owning type.  NOTE(cyrusn): We have to check in multiple files because
             // of partial types.  A type parameter can be referenced across all the parts.
@@ -44,7 +45,8 @@ namespace Microsoft.CodeAnalysis.FindSymbols.Finders
             SemanticModel semanticModel,
             FindReferencesSearchOptions options,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             return FindReferencesInDocumentUsingSymbolNameAsync(
                 symbol,
                 document,

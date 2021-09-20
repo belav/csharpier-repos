@@ -42,7 +42,8 @@ namespace Microsoft.CodeAnalysis.CSharp.ReplaceDiscardDeclarationsWithAssignment
             SemanticModel semanticModel,
             Workspace workspace,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var editor = new SyntaxEditor(memberDeclaration, workspace);
             foreach (var child in memberDeclaration.DescendantNodes())
             {
@@ -53,7 +54,8 @@ namespace Microsoft.CodeAnalysis.CSharp.ReplaceDiscardDeclarationsWithAssignment
                             localDeclarationStatement.Declaration.Variables.Any(
                                 IsDiscardDeclaration
                             )
-                        ) {
+                        )
+                        {
                             RemoveDiscardHelper.ProcessDeclarationStatement(
                                 localDeclarationStatement,
                                 editor
@@ -76,7 +78,8 @@ namespace Microsoft.CodeAnalysis.CSharp.ReplaceDiscardDeclarationsWithAssignment
                         if (
                             declarationExpression.Designation
                             is DiscardDesignationSyntax discardSyntax
-                        ) {
+                        )
+                        {
                             // "M(out var _)" => "M(out _)"
                             // "M(out int _)" => "M(out _)"
 
@@ -112,7 +115,8 @@ namespace Microsoft.CodeAnalysis.CSharp.ReplaceDiscardDeclarationsWithAssignment
                                 is DiscardDesignationSyntax discardDesignationSyntax
                             && declarationPattern.Parent
                                 is IsPatternExpressionSyntax isPatternExpression
-                        ) {
+                        )
+                        {
                             // "x is int _" => "x is int"
                             var replacementNode = SyntaxFactory.BinaryExpression(
                                 kind: SyntaxKind.IsExpression,
@@ -146,7 +150,8 @@ namespace Microsoft.CodeAnalysis.CSharp.ReplaceDiscardDeclarationsWithAssignment
             private RemoveDiscardHelper(
                 LocalDeclarationStatementSyntax localDeclarationStatement,
                 SyntaxEditor editor
-            ) {
+            )
+            {
                 _localDeclarationStatement = localDeclarationStatement;
                 _editor = editor;
 
@@ -157,7 +162,8 @@ namespace Microsoft.CodeAnalysis.CSharp.ReplaceDiscardDeclarationsWithAssignment
             public static void ProcessDeclarationStatement(
                 LocalDeclarationStatementSyntax localDeclarationStatement,
                 SyntaxEditor editor
-            ) {
+            )
+            {
                 using var helper = new RemoveDiscardHelper(localDeclarationStatement, editor);
                 helper.ProcessDeclarationStatement();
             }
@@ -229,7 +235,8 @@ namespace Microsoft.CodeAnalysis.CSharp.ReplaceDiscardDeclarationsWithAssignment
                 if (
                     _localDeclarationStatement.Parent is BlockSyntax
                     || _localDeclarationStatement.Parent is SwitchSectionSyntax
-                ) {
+                )
+                {
                     if (_statementsBuilder.Count > 1)
                     {
                         _editor.InsertAfter(_localDeclarationStatement, _statementsBuilder.Skip(1));

@@ -45,7 +45,8 @@ namespace System.Web.Razor.Test.Utils
             SpanKind type,
             string content,
             SourceLocation location
-        ) {
+        )
+        {
             Assert.True(enumerator.MoveNext(), "There is no next token!");
             IsSpan(enumerator.Current, type, content, location);
         }
@@ -57,7 +58,8 @@ namespace System.Web.Razor.Test.Utils
             int actualIndex,
             int lineIndex,
             int charIndex
-        ) {
+        )
+        {
             NextSpanIs(
                 enumerator,
                 type,
@@ -73,7 +75,8 @@ namespace System.Web.Razor.Test.Utils
             int actualIndex,
             int lineIndex,
             int charIndex
-        ) {
+        )
+        {
             IsSpan(tok, type, content, new SourceLocation(actualIndex, lineIndex, charIndex));
         }
 

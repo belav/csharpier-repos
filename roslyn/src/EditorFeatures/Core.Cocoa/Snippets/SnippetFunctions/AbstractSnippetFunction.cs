@@ -19,7 +19,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Snippets
         public AbstractSnippetFunction(
             AbstractSnippetExpansionClient snippetExpansionClient,
             ITextBuffer subjectBuffer
-        ) {
+        )
+        {
             _snippetExpansionClient = snippetExpansionClient;
             _subjectBuffer = subjectBuffer;
         }
@@ -34,7 +35,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Snippets
             CancellationToken cancellationToken,
             out string value,
             out bool hasDefaultValue
-        ) {
+        )
+        {
             value = string.Empty;
             hasDefaultValue = false;
         }
@@ -43,7 +45,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Snippets
             CancellationToken cancellationToken,
             out string value,
             out bool hasCurrentValue
-        ) {
+        )
+        {
             value = string.Empty;
             hasCurrentValue = false;
         }

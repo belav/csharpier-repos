@@ -36,17 +36,19 @@ namespace Microsoft.CodeAnalysis.CodeGeneration
             ImmutableArray<ISymbol> members,
             ImmutableArray<CodeGenerationAbstractNamedTypeSymbol> typeMembers,
             INamedTypeSymbol enumUnderlyingType
-        ) : base(
-            containingAssembly,
-            containingType,
-            attributes,
-            declaredAccessibility,
-            modifiers,
-            name,
-            specialType,
-            nullableAnnotation,
-            typeMembers
-        ) {
+        )
+            : base(
+                containingAssembly,
+                containingType,
+                attributes,
+                declaredAccessibility,
+                modifiers,
+                name,
+                specialType,
+                nullableAnnotation,
+                typeMembers
+            )
+        {
             IsRecord = isRecord;
             TypeKind = typeKind;
             _typeParameters = typeParameters.NullToEmpty();
@@ -60,7 +62,8 @@ namespace Microsoft.CodeAnalysis.CodeGeneration
 
         protected override CodeGenerationTypeSymbol CloneWithNullableAnnotation(
             NullableAnnotation nullableAnnotation
-        ) {
+        )
+        {
             return new CodeGenerationNamedTypeSymbol(
                 this.ContainingAssembly,
                 this.ContainingType,

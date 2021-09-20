@@ -27,7 +27,8 @@ namespace BuildBoss
             string repositoryDirectory,
             string artifactsDirectory,
             string configuration
-        ) {
+        )
+        {
             RepositoryDirectory = repositoryDirectory;
             ArtifactsDirectory = artifactsDirectory;
             Configuration = configuration;
@@ -109,7 +110,8 @@ namespace BuildBoss
         private static HashSet<string> GetManifestFileNames(
             TextWriter textWriter,
             string vsixFullPath
-        ) {
+        )
+        {
             try
             {
                 using (
@@ -117,7 +119,8 @@ namespace BuildBoss
                         File.Open(vsixFullPath, FileMode.Open),
                         ZipArchiveMode.Read
                     )
-                ) {
+                )
+                {
                     var entry = archive.GetEntry("manifest.json");
                     using var stream = entry.Open();
                     using var reader = new StreamReader(

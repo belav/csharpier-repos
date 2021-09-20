@@ -168,7 +168,8 @@ namespace Microsoft.AspNetCore.Routing
             string routeValue,
             string constraintValue,
             bool shouldMatch
-        ) {
+        )
+        {
             // Arrange
             var routeValues = new RouteValueDictionary(new { controller = routeValue });
 

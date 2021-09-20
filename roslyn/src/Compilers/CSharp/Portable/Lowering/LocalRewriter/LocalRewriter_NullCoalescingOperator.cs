@@ -35,7 +35,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             Conversion leftConversion,
             BoundNullCoalescingOperatorResultKind resultKind,
             TypeSymbol? rewrittenResultType
-        ) {
+        )
+        {
             Debug.Assert(rewrittenLeft != null);
             Debug.Assert(rewrittenRight != null);
             Debug.Assert(leftConversion.IsValid);
@@ -126,7 +127,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                 rewrittenLeft.Type.IsReferenceType
                 && leftConversion.IsImplicit
                 && !leftConversion.IsUserDefined
-            ) {
+            )
+            {
                 if (!leftConversion.IsIdentity)
                 {
                     rewrittenLeft = MakeConversionNode(
@@ -156,7 +158,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                         conditionalAccess.WhenNullOpt == null
                         || NullableNeverHasValue(conditionalAccess.WhenNullOpt)
                     )
-                ) {
+                )
+                {
                     var notNullAccess = NullableAlwaysHasValue(conditionalAccess.WhenNotNull);
                     if (notNullAccess != null)
                     {
@@ -170,7 +173,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                         if (
                             whenNullOpt.IsDefaultValue()
                             && whenNullOpt.Type.SpecialType != SpecialType.System_Decimal
-                        ) {
+                        )
+                        {
                             whenNullOpt = null;
                         }
 
@@ -200,7 +204,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                     SpecialMember.System_Nullable_T_GetValueOrDefault,
                     out MethodSymbol getValueOrDefault
                 )
-            ) {
+            )
+            {
                 return BoundCall.Synthesized(
                     rewrittenLeft.Syntax,
                     rewrittenLeft,
@@ -314,7 +319,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                         == (object)_compilation.GetSpecialTypeMember(
                             SpecialMember.System_String__ConcatObjectArray
                         )
-                ) {
+                )
+                {
                     return true;
                 }
             }
@@ -342,7 +348,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             BoundExpression rewrittenLeft,
             Conversion leftConversion,
             TypeSymbol rewrittenResultType
-        ) {
+        )
+        {
             Debug.Assert(rewrittenLeft != null);
             Debug.Assert(rewrittenLeft.Type is { });
             Debug.Assert(rewrittenResultType is { });
@@ -362,7 +369,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                     rewrittenResultType,
                     TypeCompareKind.ConsiderEverything2
                 ) && rewrittenLeftType.IsNullableType()
-            ) {
+            )
+            {
                 TypeSymbol strippedLeftType = rewrittenLeftType.GetNullableUnderlyingType();
                 MethodSymbol getValueOrDefault = UnsafeGetNullableMethod(
                     rewrittenLeft.Syntax,
@@ -380,7 +388,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                         rewrittenResultType,
                         TypeCompareKind.ConsiderEverything2
                     )
-                ) {
+                )
+                {
                     return rewrittenLeft;
                 }
             }

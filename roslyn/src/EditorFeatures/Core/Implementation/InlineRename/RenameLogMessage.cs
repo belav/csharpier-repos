@@ -40,7 +40,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.InlineRename
             bool conflictResolutionFinishedComputing,
             bool previewChanges,
             IList<InlineRenameReplacementKind> replacementKinds
-        ) {
+        )
+        {
             return KeyValueLogMessage.Create(
                 LogType.UserAction,
                 m =>

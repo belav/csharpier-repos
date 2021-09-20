@@ -72,7 +72,8 @@ namespace System.Diagnostics
             long timeStamp,
             long timeStamp100nSec,
             System.Diagnostics.PerformanceCounterType counterType
-        ) {
+        )
+        {
             throw null;
         }
         public CounterSample(
@@ -84,7 +85,8 @@ namespace System.Diagnostics
             long timeStamp100nSec,
             System.Diagnostics.PerformanceCounterType counterType,
             long counterTimeStamp
-        ) {
+        )
+        {
             throw null;
         }
         public long BaseValue
@@ -126,7 +128,8 @@ namespace System.Diagnostics
         public static float Calculate(
             System.Diagnostics.CounterSample counterSample,
             System.Diagnostics.CounterSample nextCounterSample
-        ) {
+        )
+        {
             throw null;
         }
         public bool Equals(System.Diagnostics.CounterSample sample)
@@ -144,13 +147,15 @@ namespace System.Diagnostics
         public static bool operator ==(
             System.Diagnostics.CounterSample a,
             System.Diagnostics.CounterSample b
-        ) {
+        )
+        {
             throw null;
         }
         public static bool operator !=(
             System.Diagnostics.CounterSample a,
             System.Diagnostics.CounterSample b
-        ) {
+        )
+        {
             throw null;
         }
     }
@@ -163,7 +168,8 @@ namespace System.Diagnostics
         public static float ComputeCounterValue(
             System.Diagnostics.CounterSample oldSample,
             System.Diagnostics.CounterSample newSample
-        ) {
+        )
+        {
             throw null;
         }
     }
@@ -378,7 +384,8 @@ namespace System.Diagnostics
             string counterName,
             string categoryName,
             string machineName
-        ) {
+        )
+        {
             throw null;
         }
         [System.ObsoleteAttribute(
@@ -388,7 +395,8 @@ namespace System.Diagnostics
             string categoryName,
             string categoryHelp,
             System.Diagnostics.CounterCreationDataCollection counterData
-        ) {
+        )
+        {
             throw null;
         }
         public static System.Diagnostics.PerformanceCounterCategory Create(
@@ -396,7 +404,8 @@ namespace System.Diagnostics
             string categoryHelp,
             System.Diagnostics.PerformanceCounterCategoryType categoryType,
             System.Diagnostics.CounterCreationDataCollection counterData
-        ) {
+        )
+        {
             throw null;
         }
         public static System.Diagnostics.PerformanceCounterCategory Create(
@@ -405,7 +414,8 @@ namespace System.Diagnostics
             System.Diagnostics.PerformanceCounterCategoryType categoryType,
             string counterName,
             string counterHelp
-        ) {
+        )
+        {
             throw null;
         }
         [System.ObsoleteAttribute(
@@ -416,7 +426,8 @@ namespace System.Diagnostics
             string categoryHelp,
             string counterName,
             string counterHelp
-        ) {
+        )
+        {
             throw null;
         }
         public static void Delete(string categoryName) { }
@@ -434,7 +445,8 @@ namespace System.Diagnostics
         }
         public static System.Diagnostics.PerformanceCounterCategory[] GetCategories(
             string machineName
-        ) {
+        )
+        {
             throw null;
         }
         public System.Diagnostics.PerformanceCounter[] GetCounters()
@@ -461,7 +473,8 @@ namespace System.Diagnostics
             string instanceName,
             string categoryName,
             string machineName
-        ) {
+        )
+        {
             throw null;
         }
         public System.Diagnostics.InstanceDataCollectionCollection ReadCategory()
@@ -499,7 +512,8 @@ namespace System.Diagnostics
             System.IntPtr dataPtr,
             int totalBytes,
             out System.IntPtr res
-        ) {
+        )
+        {
             throw null;
         }
     }
@@ -572,7 +586,8 @@ namespace System.Diagnostics.PerformanceData
         ) { }
         public System.Diagnostics.PerformanceData.CounterSetInstance CreateCounterSetInstance(
             string instanceName
-        ) {
+        )
+        {
             throw null;
         }
         public void Dispose() { }

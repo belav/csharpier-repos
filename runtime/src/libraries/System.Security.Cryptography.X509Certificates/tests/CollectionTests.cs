@@ -615,7 +615,8 @@ namespace System.Security.Cryptography.X509Certificates.Tests
                     TestData.PfxDataPassword,
                     Cert.EphemeralIfPossible
                 )
-            ) {
+            )
+            {
                 using (ImportedCollection ic = Cert.Import(TestData.StoreSavedAsSerializedCerData))
                 {
                     X509Certificate2Collection cc2 = ic.Collection;
@@ -650,7 +651,8 @@ namespace System.Security.Cryptography.X509Certificates.Tests
         [PlatformSpecific(TestPlatforms.Windows)] // StoreSavedAsSerializedStoreData not supported on Unix
         public static void ImportStoreSavedAsSerializedStoreData_Windows(
             X509KeyStorageFlags keyStorageFlags
-        ) {
+        )
+        {
             using (var msCer = new X509Certificate2(TestData.MsCertificate))
             using (
                 var pfxCer = new X509Certificate2(
@@ -735,14 +737,16 @@ namespace System.Security.Cryptography.X509Certificates.Tests
                     TestData.PfxDataPassword,
                     storageFlags
                 )
-            ) {
+            )
+            {
                 using (
                     ImportedCollection ic = Cert.Import(
                         TestFiles.PfxFile,
                         TestData.PfxDataPassword,
                         storageFlags
                     )
-                ) {
+                )
+                {
                     X509Certificate2Collection cc2 = ic.Collection;
                     int count = cc2.Count;
                     Assert.Equal(1, count);
@@ -1083,7 +1087,8 @@ namespace System.Security.Cryptography.X509Certificates.Tests
                     TestData.PfxDataPassword,
                     Cert.EphemeralIfPossible
                 )
-            ) {
+            )
+            {
                 ICollection collection = cert.Extensions;
                 Array array = Array.CreateInstance(
                     typeof(object),
@@ -1104,7 +1109,8 @@ namespace System.Security.Cryptography.X509Certificates.Tests
                     TestData.PfxDataPassword,
                     Cert.EphemeralIfPossible
                 )
-            ) {
+            )
+            {
                 X509CertificateCollection cc = new X509CertificateCollection(
                     new X509Certificate[] { c1, c2 }
                 );
@@ -1127,7 +1133,8 @@ namespace System.Security.Cryptography.X509Certificates.Tests
                     TestData.PfxDataPassword,
                     Cert.EphemeralIfPossible
                 )
-            ) {
+            )
+            {
                 X509CertificateCollection cc = new X509CertificateCollection(
                     new X509Certificate[] { c1, c2 }
                 );
@@ -1631,7 +1638,8 @@ namespace System.Security.Cryptography.X509Certificates.Tests
                     TestData.PfxData,
                     TestData.PfxDataPassword
                 )
-            ) {
+            )
+            {
                 Assert.True(fromPfx.HasPrivateKey, "fromPfx.HasPrivateKey - before");
 
                 byte[] serializedCert = fromPfx.Export(X509ContentType.SerializedCert);
@@ -1773,7 +1781,8 @@ namespace System.Security.Cryptography.X509Certificates.Tests
                     TestData.RsaCertificate,
                     TestData.RsaPkcs1Key
                 )
-            ) {
+            )
+            {
                 string content = Convert.ToBase64String(cert.Export(X509ContentType.Pkcs12));
                 string certContents =
                     $@"
@@ -1809,7 +1818,8 @@ namespace System.Security.Cryptography.X509Certificates.Tests
                     TestData.CreatePfxDataPasswordSecureString(),
                     Cert.EphemeralIfPossible
                 )
-            ) {
+            )
+            {
                 TestExportSingleCert(ct, pfxCer);
             }
         }
@@ -1822,7 +1832,8 @@ namespace System.Security.Cryptography.X509Certificates.Tests
                     TestData.PfxDataPassword,
                     Cert.EphemeralIfPossible
                 )
-            ) {
+            )
+            {
                 TestExportSingleCert(ct, pfxCer);
             }
         }
@@ -1865,7 +1876,8 @@ namespace System.Security.Cryptography.X509Certificates.Tests
                     TestData.PfxDataPassword,
                     Cert.EphemeralIfPossible
                 )
-            ) {
+            )
+            {
                 X509Certificate2Collection cc = new X509Certificate2Collection(
                     new X509Certificate2[] { msCer, pfxCer }
                 );

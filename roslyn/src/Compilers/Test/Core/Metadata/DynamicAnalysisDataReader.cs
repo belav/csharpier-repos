@@ -56,7 +56,8 @@ namespace Microsoft.CodeAnalysis
             int startColumn,
             int endLine,
             int endColumn
-        ) {
+        )
+        {
             DocumentRowId = documentRowId;
             StartLine = startLine;
             StartColumn = startColumn;
@@ -85,7 +86,8 @@ namespace Microsoft.CodeAnalysis
                 || reader.ReadByte() != 'A'
                 || reader.ReadByte() != 'M'
                 || reader.ReadByte() != 'D'
-            ) {
+            )
+            {
                 throw new BadImageFormatException();
             }
 
@@ -161,7 +163,8 @@ namespace Microsoft.CodeAnalysis
         public static DynamicAnalysisDataReader TryCreateFromPE(
             PEReader peReader,
             string resourceName
-        ) {
+        )
+        {
             // TODO: review all range checks, better error messages
 
             var mdReader = peReader.GetMetadataReader();
@@ -173,7 +176,8 @@ namespace Microsoft.CodeAnalysis
                     resource.Implementation.IsNil
                     && resource.Attributes == ManifestResourceAttributes.Private
                     && mdReader.StringComparer.Equals(resource.Name, resourceName)
-                ) {
+                )
+                {
                     offset = resource.Offset;
                 }
             }
@@ -363,7 +367,8 @@ namespace Microsoft.CodeAnalysis
             ref BlobReader reader,
             out int deltaLines,
             out int deltaColumns
-        ) {
+        )
+        {
             deltaLines = reader.ReadCompressedInteger();
             deltaColumns =
                 (deltaLines == 0)

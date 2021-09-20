@@ -17,7 +17,8 @@ namespace System.Threading.Channels
         /// <returns>The created async enumerable.</returns>
         public virtual async IAsyncEnumerable<T> ReadAllAsync(
             [EnumeratorCancellation] CancellationToken cancellationToken = default
-        ) {
+        )
+        {
             while (await WaitToReadAsync(cancellationToken).ConfigureAwait(false))
             {
                 while (TryRead(out T? item))

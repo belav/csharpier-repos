@@ -97,7 +97,8 @@ namespace ClientSample
                 {
                     foreach (
                         var phrase in new[] { "one fish", "two fish", "red fish", "blue fish" }
-                    ) {
+                    )
+                    {
                         await channel.Writer.WriteAsync(phrase);
                     }
                 }

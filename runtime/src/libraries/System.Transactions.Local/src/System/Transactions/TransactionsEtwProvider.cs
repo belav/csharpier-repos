@@ -310,7 +310,8 @@ namespace System.Transactions
             TransactionExceptionType type,
             string? message,
             string? innerExceptionStr
-        ) {
+        )
+        {
             if (IsEnabled(EventLevel.Error, ALL_KEYWORDS))
             {
                 if (traceSource == TraceSourceType.TraceSourceBase)
@@ -333,7 +334,8 @@ namespace System.Transactions
             TransactionExceptionType type,
             string? message,
             string? innerExceptionStr
-        ) {
+        )
+        {
             if (IsEnabled(EventLevel.Error, ALL_KEYWORDS))
             {
                 TransactionExceptionLtm(type.ToString(), message, innerExceptionStr);
@@ -351,7 +353,8 @@ namespace System.Transactions
             string? type,
             string? message,
             string? innerExceptionStr
-        ) {
+        )
+        {
             SetActivityId(string.Empty);
             WriteEvent(TRANSACTION_EXCEPTION_BASE_EVENTID, type, message, innerExceptionStr);
         }
@@ -367,7 +370,8 @@ namespace System.Transactions
             string? type,
             string? message,
             string? innerExceptionStr
-        ) {
+        )
+        {
             SetActivityId(string.Empty);
             WriteEvent(TRANSACTION_EXCEPTION_LTM_EVENTID, type, message, innerExceptionStr);
         }
@@ -397,7 +401,8 @@ namespace System.Transactions
             string? transactionIdentifier,
             string? type,
             string? operation
-        ) {
+        )
+        {
             SetActivityId(string.Empty);
             WriteEvent(
                 TRANSACTION_INVALID_OPERATION_EVENTID,
@@ -527,7 +532,8 @@ namespace System.Transactions
         internal void EnlistmentStatus(
             InternalEnlistment enlistment,
             NotificationCall notificationCall
-        ) {
+        )
+        {
             Debug.Assert(enlistment != null, "Enlistment needed for the ETW event.");
 
             if (IsEnabled(EventLevel.Verbose, ALL_KEYWORDS))
@@ -758,7 +764,8 @@ namespace System.Transactions
             TraceSourceType traceSource,
             object? thisOrContextObject,
             [CallerMemberName] string? methodname = null
-        ) {
+        )
+        {
             if (IsEnabled(EventLevel.Verbose, ALL_KEYWORDS))
             {
                 if (traceSource == TraceSourceType.TraceSourceLtm)
@@ -783,7 +790,8 @@ namespace System.Transactions
         internal void MethodEnter(
             TraceSourceType traceSource,
             [CallerMemberName] string? methodname = null
-        ) {
+        )
+        {
             if (IsEnabled(EventLevel.Verbose, ALL_KEYWORDS))
             {
                 if (traceSource == TraceSourceType.TraceSourceLtm)
@@ -852,7 +860,8 @@ namespace System.Transactions
             TraceSourceType traceSource,
             object? thisOrContextObject,
             [CallerMemberName] string? methodname = null
-        ) {
+        )
+        {
             if (IsEnabled(EventLevel.Verbose, ALL_KEYWORDS))
             {
                 if (traceSource == TraceSourceType.TraceSourceLtm)
@@ -877,7 +886,8 @@ namespace System.Transactions
         internal void MethodExit(
             TraceSourceType traceSource,
             [CallerMemberName] string? methodname = null
-        ) {
+        )
+        {
             if (IsEnabled(EventLevel.Verbose, ALL_KEYWORDS))
             {
                 if (traceSource == TraceSourceType.TraceSourceLtm)
@@ -1081,7 +1091,8 @@ namespace System.Transactions
         internal void TransactionScopeCreated(
             TransactionTraceIdentifier transactionID,
             TransactionScopeResult transactionScopeResult
-        ) {
+        )
+        {
             if (IsEnabled(EventLevel.Informational, ALL_KEYWORDS))
             {
                 TransactionScopeCreated(
@@ -1109,7 +1120,8 @@ namespace System.Transactions
         private void TransactionScopeCreated(
             string transactionID,
             TransactionScopeResult transactionScopeResult
-        ) {
+        )
+        {
             SetActivityId(transactionID);
             WriteEvent(TRANSACTIONSCOPE_CREATED_EVENTID, transactionID, transactionScopeResult);
         }
@@ -1123,7 +1135,8 @@ namespace System.Transactions
         internal void TransactionScopeCurrentChanged(
             TransactionTraceIdentifier currenttransactionID,
             TransactionTraceIdentifier newtransactionID
-        ) {
+        )
+        {
             if (IsEnabled(EventLevel.Warning, ALL_KEYWORDS))
             {
                 string currentId = string.Empty;
@@ -1151,7 +1164,8 @@ namespace System.Transactions
         private void TransactionScopeCurrentChanged(
             string currenttransactionID,
             string newtransactionID
-        ) {
+        )
+        {
             SetActivityId(newtransactionID);
             WriteEvent(
                 TRANSACTIONSCOPE_CURRENT_CHANGED_EVENTID,
@@ -1335,7 +1349,8 @@ namespace System.Transactions
             EnlistmentTraceIdentifier enlistmentID,
             EnlistmentType enlistmentType,
             EnlistmentOptions enlistmentOption
-        ) {
+        )
+        {
             if (IsEnabled(EventLevel.Informational, ALL_KEYWORDS))
             {
                 if (enlistmentID.EnlistmentIdentifier != 0)
@@ -1430,7 +1445,8 @@ namespace System.Transactions
         internal void TransactionPromoted(
             TransactionTraceIdentifier transactionID,
             TransactionTraceIdentifier distributedTxID
-        ) {
+        )
+        {
             if (IsEnabled(EventLevel.Informational, ALL_KEYWORDS))
             {
                 TransactionPromoted(

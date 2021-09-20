@@ -82,7 +82,8 @@ namespace Microsoft.CodeAnalysis.Host.Mef
         private bool TryGetService(
             Type serviceType,
             out Lazy<IWorkspaceService, WorkspaceServiceMetadata> service
-        ) {
+        )
+        {
             if (!_serviceMap.TryGetValue(serviceType, out service))
             {
                 service = ImmutableInterlocked.GetOrAdd(
@@ -105,7 +106,8 @@ namespace Microsoft.CodeAnalysis.Host.Mef
 
         private Lazy<IWorkspaceService, WorkspaceServiceMetadata> PickWorkspaceService(
             IEnumerable<Lazy<IWorkspaceService, WorkspaceServiceMetadata>> services
-        ) {
+        )
+        {
             Lazy<IWorkspaceService, WorkspaceServiceMetadata> service;
 #if !CODE_STYLE
             // test layer overrides all other layers and workspace kind:
@@ -152,7 +154,8 @@ namespace Microsoft.CodeAnalysis.Host.Mef
             string layer,
             IEnumerable<Lazy<IWorkspaceService, WorkspaceServiceMetadata>> services,
             out Lazy<IWorkspaceService, WorkspaceServiceMetadata> service
-        ) {
+        )
+        {
             service = services.SingleOrDefault(lz => lz.Metadata.Layer == layer);
             return service != null;
         }
@@ -215,7 +218,8 @@ namespace Microsoft.CodeAnalysis.Host.Mef
 
         public override IEnumerable<TLanguageService> FindLanguageServices<TLanguageService>(
             MetadataFilter filter
-        ) {
+        )
+        {
             foreach (var language in this.SupportedLanguages)
             {
 #pragma warning disable RS0030 // Do not used banned API 'GetLanguageServices', use 'GetExtendedLanguageServices' instead - allowed in this context.

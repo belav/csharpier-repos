@@ -53,7 +53,8 @@ namespace Microsoft.EntityFrameworkCore.Query
         [EntityFrameworkInternal]
         public RelationalQueryTranslationPostprocessorDependencies(
             ISqlExpressionFactory sqlExpressionFactory
-        ) {
+        )
+        {
             SqlExpressionFactory = sqlExpressionFactory;
             Check.NotNull(sqlExpressionFactory, nameof(sqlExpressionFactory));
         }

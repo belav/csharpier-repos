@@ -21,7 +21,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Microbenchmarks
 
         public override ValueTask<FlushResult> FlushAsync(
             CancellationToken cancellationToken = default
-        ) {
+        )
+        {
             return new ValueTask<FlushResult>(new FlushResult(false, true));
         }
 

@@ -44,7 +44,8 @@ namespace Microsoft.AspNetCore.Mvc.Api.Analyzers
 
         protected override async Task<Document> GetChangedDocumentAsync(
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var nullableContext = await CreateCodeActionContext(cancellationToken)
                 .ConfigureAwait(false);
             if (nullableContext == null)
@@ -86,7 +87,8 @@ namespace Microsoft.AspNetCore.Mvc.Api.Analyzers
                     statusCode >= 400
                     && returnType != null
                     && !SymbolEqualityComparer.Default.Equals(returnType, errorResponseType)
-                ) {
+                )
+                {
                     // If a returnType was discovered and is different from the errorResponseType, use it in the result.
                     attributeSyntax = CreateProducesResponseTypeAttribute(
                         context,
@@ -114,7 +116,8 @@ namespace Microsoft.AspNetCore.Mvc.Api.Analyzers
                         m.IsDefault
                         && SymbolEqualityComparer.Default.Equals(m.AttributeSource, context.Method)
                 )
-            ) {
+            )
+            {
                 // Add a ProducesDefaultResponseTypeAttribute if the method does not already have one.
                 documentEditor.AddAttribute(
                     context.MethodSyntax,
@@ -169,7 +172,8 @@ namespace Microsoft.AspNetCore.Mvc.Api.Analyzers
 
         private async Task<CodeActionContext?> CreateCodeActionContext(
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var root = await _document.GetSyntaxRootAsync(cancellationToken).ConfigureAwait(false);
 
             if (root == null)
@@ -219,7 +223,8 @@ namespace Microsoft.AspNetCore.Mvc.Api.Analyzers
 
         private static Dictionary<int, string> GetStatusCodeConstants(
             INamedTypeSymbol statusCodesType
-        ) {
+        )
+        {
             var statusCodeConstants = new Dictionary<int, string>();
 
             if (statusCodesType != null)
@@ -232,7 +237,8 @@ namespace Microsoft.AspNetCore.Mvc.Api.Analyzers
                         && field.Name.StartsWith("Status", StringComparison.Ordinal)
                         && field.HasConstantValue
                         && field.ConstantValue is int statusCode
-                    ) {
+                    )
+                    {
                         statusCodeConstants[statusCode] = field.Name;
                     }
                 }
@@ -244,7 +250,8 @@ namespace Microsoft.AspNetCore.Mvc.Api.Analyzers
         private ICollection<(int statusCode, ITypeSymbol? typeSymbol)> CalculateStatusCodesToApply(
             in CodeActionContext context,
             IList<DeclaredApiResponseMetadata> declaredResponseMetadata
-        ) {
+        )
+        {
             if (
                 !ActualApiResponseMetadataFactory.TryGetActualResponseMetadata(
                     context.SymbolCache,
@@ -253,7 +260,8 @@ namespace Microsoft.AspNetCore.Mvc.Api.Analyzers
                     context.CancellationToken,
                     out var actualResponseMetadata
                 )
-            ) {
+            )
+            {
                 // If we cannot parse metadata correctly, don't offer fixes.
                 return Array.Empty<(int, ITypeSymbol?)>();
             }
@@ -271,7 +279,8 @@ namespace Microsoft.AspNetCore.Mvc.Api.Analyzers
                         declaredMetadata.AttributeSource,
                         context.Method
                     )
-                ) {
+                )
+                {
                     // A ProducesResponseType attribute is declared on the method for the current status code.
                     continue;
                 }
@@ -292,7 +301,8 @@ namespace Microsoft.AspNetCore.Mvc.Api.Analyzers
             in CodeActionContext context,
             int statusCode,
             out bool addUsingDirective
-        ) {
+        )
+        {
             // [ProducesResponseType(StatusCodes.Status400NotFound)]
             var statusCodeSyntax = CreateStatusCodeSyntax(
                 context,
@@ -313,7 +323,8 @@ namespace Microsoft.AspNetCore.Mvc.Api.Analyzers
             int statusCode,
             ITypeSymbol typeSymbol,
             out bool addUsingDirective
-        ) {
+        )
+        {
             // [ProducesResponseType(typeof(ReturnType), StatusCodes.Status400NotFound)]
             var statusCodeSyntax = CreateStatusCodeSyntax(
                 context,
@@ -342,7 +353,8 @@ namespace Microsoft.AspNetCore.Mvc.Api.Analyzers
             CodeActionContext context,
             int statusCode,
             out bool addUsingDirective
-        ) {
+        )
+        {
             if (context.StatusCodeConstants.TryGetValue(statusCode, out var constantName))
             {
                 addUsingDirective = true;
@@ -378,7 +390,8 @@ namespace Microsoft.AspNetCore.Mvc.Api.Analyzers
                 MethodDeclarationSyntax methodSyntax,
                 Dictionary<int, string> statusCodeConstants,
                 CancellationToken cancellationToken
-            ) {
+            )
+            {
                 SemanticModel = semanticModel;
                 SymbolCache = symbolCache;
                 Method = method;

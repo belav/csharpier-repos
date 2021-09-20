@@ -20,7 +20,8 @@ namespace Microsoft.AspNetCore.Server.IntegrationTesting
         public override async Task<PublishedApplication> Publish(
             DeploymentParameters deploymentParameters,
             ILogger logger
-        ) {
+        )
+        {
             if (ApplicationPath != deploymentParameters.ApplicationPath)
             {
                 throw new InvalidOperationException("ApplicationPath mismatch");

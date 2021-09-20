@@ -17,7 +17,8 @@ namespace Microsoft.Extensions.Http
         public LoggingHttpMessageHandlerBuilderFilter(
             ILoggerFactory loggerFactory,
             IOptionsMonitor<HttpClientFactoryOptions> optionsMonitor
-        ) {
+        )
+        {
             if (loggerFactory == null)
             {
                 throw new ArgumentNullException(nameof(loggerFactory));

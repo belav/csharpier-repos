@@ -16,7 +16,8 @@ namespace System.Runtime.InteropServices.Tests
         public void CallingConvention_Get_ReturnsExpected(
             CallingConvention convention,
             int expected
-        ) {
+        )
+        {
             Assert.Equal(expected, (int)convention);
         }
     }

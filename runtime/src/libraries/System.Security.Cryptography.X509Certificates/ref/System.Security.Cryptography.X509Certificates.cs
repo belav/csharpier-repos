@@ -70,7 +70,8 @@ namespace System.Security.Cryptography.X509Certificates
             System.DateTimeOffset notBefore,
             System.DateTimeOffset notAfter,
             byte[] serialNumber
-        ) {
+        )
+        {
             throw null;
         }
         public System.Security.Cryptography.X509Certificates.X509Certificate2 Create(
@@ -79,7 +80,8 @@ namespace System.Security.Cryptography.X509Certificates
             System.DateTimeOffset notBefore,
             System.DateTimeOffset notAfter,
             System.ReadOnlySpan<byte> serialNumber
-        ) {
+        )
+        {
             throw null;
         }
         public System.Security.Cryptography.X509Certificates.X509Certificate2 Create(
@@ -87,7 +89,8 @@ namespace System.Security.Cryptography.X509Certificates
             System.DateTimeOffset notBefore,
             System.DateTimeOffset notAfter,
             byte[] serialNumber
-        ) {
+        )
+        {
             throw null;
         }
         public System.Security.Cryptography.X509Certificates.X509Certificate2 Create(
@@ -95,13 +98,15 @@ namespace System.Security.Cryptography.X509Certificates
             System.DateTimeOffset notBefore,
             System.DateTimeOffset notAfter,
             System.ReadOnlySpan<byte> serialNumber
-        ) {
+        )
+        {
             throw null;
         }
         public System.Security.Cryptography.X509Certificates.X509Certificate2 CreateSelfSigned(
             System.DateTimeOffset notBefore,
             System.DateTimeOffset notAfter
-        ) {
+        )
+        {
             throw null;
         }
         public byte[] CreateSigningRequest()
@@ -110,7 +115,8 @@ namespace System.Security.Cryptography.X509Certificates
         }
         public byte[] CreateSigningRequest(
             System.Security.Cryptography.X509Certificates.X509SignatureGenerator signatureGenerator
-        ) {
+        )
+        {
             throw null;
         }
     }
@@ -119,17 +125,20 @@ namespace System.Security.Cryptography.X509Certificates
         public static System.Security.Cryptography.X509Certificates.X509Certificate2 CopyWithPrivateKey(
             this System.Security.Cryptography.X509Certificates.X509Certificate2 certificate,
             System.Security.Cryptography.DSA privateKey
-        ) {
+        )
+        {
             throw null;
         }
         public static System.Security.Cryptography.DSA? GetDSAPrivateKey(
             this System.Security.Cryptography.X509Certificates.X509Certificate2 certificate
-        ) {
+        )
+        {
             throw null;
         }
         public static System.Security.Cryptography.DSA? GetDSAPublicKey(
             this System.Security.Cryptography.X509Certificates.X509Certificate2 certificate
-        ) {
+        )
+        {
             throw null;
         }
     }
@@ -138,17 +147,20 @@ namespace System.Security.Cryptography.X509Certificates
         public static System.Security.Cryptography.X509Certificates.X509Certificate2 CopyWithPrivateKey(
             this System.Security.Cryptography.X509Certificates.X509Certificate2 certificate,
             System.Security.Cryptography.ECDsa privateKey
-        ) {
+        )
+        {
             throw null;
         }
         public static System.Security.Cryptography.ECDsa? GetECDsaPrivateKey(
             this System.Security.Cryptography.X509Certificates.X509Certificate2 certificate
-        ) {
+        )
+        {
             throw null;
         }
         public static System.Security.Cryptography.ECDsa? GetECDsaPublicKey(
             this System.Security.Cryptography.X509Certificates.X509Certificate2 certificate
-        ) {
+        )
+        {
             throw null;
         }
     }
@@ -188,7 +200,8 @@ namespace System.Security.Cryptography.X509Certificates
         public static System.Security.Cryptography.X509Certificates.PublicKey CreateFromSubjectPublicKeyInfo(
             System.ReadOnlySpan<byte> source,
             out int bytesRead
-        ) {
+        )
+        {
             throw null;
         }
         public byte[] ExportSubjectPublicKeyInfo()
@@ -198,7 +211,8 @@ namespace System.Security.Cryptography.X509Certificates
         public bool TryExportSubjectPublicKeyInfo(
             System.Span<byte> destination,
             out int bytesWritten
-        ) {
+        )
+        {
             throw null;
         }
     }
@@ -207,17 +221,20 @@ namespace System.Security.Cryptography.X509Certificates
         public static System.Security.Cryptography.X509Certificates.X509Certificate2 CopyWithPrivateKey(
             this System.Security.Cryptography.X509Certificates.X509Certificate2 certificate,
             System.Security.Cryptography.RSA privateKey
-        ) {
+        )
+        {
             throw null;
         }
         public static System.Security.Cryptography.RSA? GetRSAPrivateKey(
             this System.Security.Cryptography.X509Certificates.X509Certificate2 certificate
-        ) {
+        )
+        {
             throw null;
         }
         public static System.Security.Cryptography.RSA? GetRSAPublicKey(
             this System.Security.Cryptography.X509Certificates.X509Certificate2 certificate
-        ) {
+        )
+        {
             throw null;
         }
     }
@@ -247,7 +264,8 @@ namespace System.Security.Cryptography.X509Certificates
         public void AddUserPrincipalName(string upn) { }
         public System.Security.Cryptography.X509Certificates.X509Extension Build(
             bool critical = false
-        ) {
+        )
+        {
             throw null;
         }
     }
@@ -272,7 +290,8 @@ namespace System.Security.Cryptography.X509Certificates
         }
         public string Decode(
             System.Security.Cryptography.X509Certificates.X500DistinguishedNameFlags flag
-        ) {
+        )
+        {
             throw null;
         }
         public override string Format(bool multiLine)
@@ -381,43 +400,50 @@ namespace System.Security.Cryptography.X509Certificates
         }
         public static System.Security.Cryptography.X509Certificates.X509Certificate CreateFromCertFile(
             string filename
-        ) {
+        )
+        {
             throw null;
         }
         public static System.Security.Cryptography.X509Certificates.X509Certificate CreateFromSignedFile(
             string filename
-        ) {
+        )
+        {
             throw null;
         }
         public void Dispose() { }
         protected virtual void Dispose(bool disposing) { }
         public override bool Equals(
             [System.Diagnostics.CodeAnalysis.NotNullWhenAttribute(true)] object? obj
-        ) {
+        )
+        {
             throw null;
         }
         public virtual bool Equals(
             [System.Diagnostics.CodeAnalysis.NotNullWhenAttribute(true)]
                 System.Security.Cryptography.X509Certificates.X509Certificate? other
-        ) {
+        )
+        {
             throw null;
         }
         public virtual byte[] Export(
             System.Security.Cryptography.X509Certificates.X509ContentType contentType
-        ) {
+        )
+        {
             throw null;
         }
         [System.CLSCompliantAttribute(false)]
         public virtual byte[] Export(
             System.Security.Cryptography.X509Certificates.X509ContentType contentType,
             System.Security.SecureString? password
-        ) {
+        )
+        {
             throw null;
         }
         public virtual byte[] Export(
             System.Security.Cryptography.X509Certificates.X509ContentType contentType,
             string? password
-        ) {
+        )
+        {
             throw null;
         }
         protected static string FormatDate(System.DateTime date)
@@ -430,7 +456,8 @@ namespace System.Security.Cryptography.X509Certificates
         }
         public virtual byte[] GetCertHash(
             System.Security.Cryptography.HashAlgorithmName hashAlgorithm
-        ) {
+        )
+        {
             throw null;
         }
         public virtual string GetCertHashString()
@@ -439,7 +466,8 @@ namespace System.Security.Cryptography.X509Certificates
         }
         public virtual string GetCertHashString(
             System.Security.Cryptography.HashAlgorithmName hashAlgorithm
-        ) {
+        )
+        {
             throw null;
         }
         public virtual string GetEffectiveDateString()
@@ -552,7 +580,8 @@ namespace System.Security.Cryptography.X509Certificates
             System.Security.Cryptography.HashAlgorithmName hashAlgorithm,
             System.Span<byte> destination,
             out int bytesWritten
-        ) {
+        )
+        {
             throw null;
         }
     }
@@ -676,53 +705,62 @@ namespace System.Security.Cryptography.X509Certificates
         }
         public System.Security.Cryptography.X509Certificates.X509Certificate2 CopyWithPrivateKey(
             System.Security.Cryptography.ECDiffieHellman privateKey
-        ) {
+        )
+        {
             throw null;
         }
         public static System.Security.Cryptography.X509Certificates.X509Certificate2 CreateFromEncryptedPem(
             System.ReadOnlySpan<char> certPem,
             System.ReadOnlySpan<char> keyPem,
             System.ReadOnlySpan<char> password
-        ) {
+        )
+        {
             throw null;
         }
         public static System.Security.Cryptography.X509Certificates.X509Certificate2 CreateFromEncryptedPemFile(
             string certPemFilePath,
             System.ReadOnlySpan<char> password,
             string? keyPemFilePath = null
-        ) {
+        )
+        {
             throw null;
         }
         public static System.Security.Cryptography.X509Certificates.X509Certificate2 CreateFromPem(
             System.ReadOnlySpan<char> certPem
-        ) {
+        )
+        {
             throw null;
         }
         public static System.Security.Cryptography.X509Certificates.X509Certificate2 CreateFromPem(
             System.ReadOnlySpan<char> certPem,
             System.ReadOnlySpan<char> keyPem
-        ) {
+        )
+        {
             throw null;
         }
         public static System.Security.Cryptography.X509Certificates.X509Certificate2 CreateFromPemFile(
             string certPemFilePath,
             string? keyPemFilePath = null
-        ) {
+        )
+        {
             throw null;
         }
         public static System.Security.Cryptography.X509Certificates.X509ContentType GetCertContentType(
             byte[] rawData
-        ) {
+        )
+        {
             throw null;
         }
         public static System.Security.Cryptography.X509Certificates.X509ContentType GetCertContentType(
             System.ReadOnlySpan<byte> rawData
-        ) {
+        )
+        {
             throw null;
         }
         public static System.Security.Cryptography.X509Certificates.X509ContentType GetCertContentType(
             string fileName
-        ) {
+        )
+        {
             throw null;
         }
         public System.Security.Cryptography.ECDiffieHellman? GetECDiffieHellmanPrivateKey()
@@ -736,7 +774,8 @@ namespace System.Security.Cryptography.X509Certificates
         public string GetNameInfo(
             System.Security.Cryptography.X509Certificates.X509NameType nameType,
             bool forIssuer
-        ) {
+        )
+        {
             throw null;
         }
         public override void Import(byte[] rawData) { }
@@ -807,25 +846,29 @@ namespace System.Security.Cryptography.X509Certificates
         ) { }
         public bool Contains(
             System.Security.Cryptography.X509Certificates.X509Certificate2 certificate
-        ) {
+        )
+        {
             throw null;
         }
         public byte[]? Export(
             System.Security.Cryptography.X509Certificates.X509ContentType contentType
-        ) {
+        )
+        {
             throw null;
         }
         public byte[]? Export(
             System.Security.Cryptography.X509Certificates.X509ContentType contentType,
             string? password
-        ) {
+        )
+        {
             throw null;
         }
         public System.Security.Cryptography.X509Certificates.X509Certificate2Collection Find(
             System.Security.Cryptography.X509Certificates.X509FindType findType,
             object findValue,
             bool validOnly
-        ) {
+        )
+        {
             throw null;
         }
         public new System.Security.Cryptography.X509Certificates.X509Certificate2Enumerator GetEnumerator()
@@ -1007,7 +1050,8 @@ namespace System.Security.Cryptography.X509Certificates
         }
         public bool Build(
             System.Security.Cryptography.X509Certificates.X509Certificate2 certificate
-        ) {
+        )
+        {
             throw null;
         }
         public static System.Security.Cryptography.X509Certificates.X509Chain Create()
@@ -1410,13 +1454,15 @@ namespace System.Security.Cryptography.X509Certificates
         protected abstract System.Security.Cryptography.X509Certificates.PublicKey BuildPublicKey();
         public static System.Security.Cryptography.X509Certificates.X509SignatureGenerator CreateForECDsa(
             System.Security.Cryptography.ECDsa key
-        ) {
+        )
+        {
             throw null;
         }
         public static System.Security.Cryptography.X509Certificates.X509SignatureGenerator CreateForRSA(
             System.Security.Cryptography.RSA key,
             System.Security.Cryptography.RSASignaturePadding signaturePadding
-        ) {
+        )
+        {
             throw null;
         }
         public abstract byte[] GetSignatureAlgorithmIdentifier(

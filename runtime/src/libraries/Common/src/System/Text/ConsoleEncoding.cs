@@ -95,7 +95,8 @@ namespace System.Text
             int charCount,
             byte[] bytes,
             int byteIndex
-        ) {
+        )
+        {
             return _encoding.GetBytes(chars, charIndex, charCount, bytes, byteIndex);
         }
 
@@ -110,7 +111,8 @@ namespace System.Text
             int charCount,
             byte[] bytes,
             int byteIndex
-        ) {
+        )
+        {
             return _encoding.GetBytes(s, charIndex, charCount, bytes, byteIndex);
         }
 
@@ -150,7 +152,8 @@ namespace System.Text
             int byteCount,
             char[] chars,
             int charIndex
-        ) {
+        )
+        {
             return _encoding.GetChars(bytes, byteIndex, byteCount, chars, charIndex);
         }
 

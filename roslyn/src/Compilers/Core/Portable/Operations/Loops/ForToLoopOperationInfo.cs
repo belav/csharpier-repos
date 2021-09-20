@@ -18,7 +18,8 @@ namespace Microsoft.CodeAnalysis.Operations
             IBinaryOperation subtraction,
             IOperation lessThanOrEqual,
             IOperation greaterThanOrEqual
-        ) {
+        )
+        {
             Addition = addition;
             Subtraction = subtraction;
             LessThanOrEqual = lessThanOrEqual;

@@ -31,7 +31,8 @@ namespace Microsoft.AspNetCore.DataProtection.AuthenticatedEncryption.Configurat
         public void CreateAuthenticatedEncryptor_RoundTripsData_CngCbcImplementation(
             EncryptionAlgorithm encryptionAlgorithm,
             ValidationAlgorithm validationAlgorithm
-        ) {
+        )
+        {
             // Parse test input
             int keyLengthInBits = Int32.Parse(
                 Regex.Match(
@@ -81,7 +82,8 @@ namespace Microsoft.AspNetCore.DataProtection.AuthenticatedEncryption.Configurat
         [InlineData(EncryptionAlgorithm.AES_256_GCM)]
         public void CreateAuthenticatedEncryptor_RoundTripsData_CngGcmImplementation(
             EncryptionAlgorithm encryptionAlgorithm
-        ) {
+        )
+        {
             // Parse test input
             int keyLengthInBits = Int32.Parse(
                 Regex.Match(
@@ -128,7 +130,8 @@ namespace Microsoft.AspNetCore.DataProtection.AuthenticatedEncryption.Configurat
         [InlineData(EncryptionAlgorithm.AES_256_GCM)]
         public void CreateAuthenticatedEncryptor_RoundTripsData_AesGcmImplementation(
             EncryptionAlgorithm encryptionAlgorithm
-        ) {
+        )
+        {
             // Parse test input
             int keyLengthInBits = Int32.Parse(
                 Regex.Match(
@@ -209,7 +212,8 @@ namespace Microsoft.AspNetCore.DataProtection.AuthenticatedEncryption.Configurat
             EncryptionAlgorithm encryptionAlgorithm,
             ValidationAlgorithm validationAlgorithm,
             Func<HMAC> validationAlgorithmFactory
-        ) {
+        )
+        {
             // Parse test input
             int keyLengthInBits = Int32.Parse(
                 Regex.Match(
@@ -311,7 +315,8 @@ namespace Microsoft.AspNetCore.DataProtection.AuthenticatedEncryption.Configurat
             EncryptionAlgorithm encryptionAlgorithm,
             ValidationAlgorithm validationAlgorithm,
             ISecret masterKey
-        ) {
+        )
+        {
             return new AuthenticatedEncryptorDescriptor(
                 new AuthenticatedEncryptorConfiguration()
                 {
@@ -324,7 +329,8 @@ namespace Microsoft.AspNetCore.DataProtection.AuthenticatedEncryption.Configurat
 
         private static IAuthenticatedEncryptor CreateEncryptorInstanceFromDescriptor(
             AuthenticatedEncryptorDescriptor descriptor
-        ) {
+        )
+        {
             var encryptorFactory = new AuthenticatedEncryptorFactory(NullLoggerFactory.Instance);
 
             // Dummy key with the specified descriptor.

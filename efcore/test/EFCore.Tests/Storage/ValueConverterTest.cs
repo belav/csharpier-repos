@@ -387,7 +387,8 @@ namespace Microsoft.EntityFrameworkCore.Storage
 #pragma warning restore xUnit1013 // Public method should be marked as test
             ValueConverter<TModel, TProvider> converter,
             params TModel[] values
-        ) {
+        )
+        {
             var convertToProvider = converter.ConvertToProviderExpression.Compile();
             var convertFromProvider = converter.ConvertFromProviderExpression.Compile();
 
@@ -406,7 +407,8 @@ namespace Microsoft.EntityFrameworkCore.Storage
 #pragma warning restore xUnit1013 // Public method should be marked as test
             ValueConverter<TModel, byte[]> converter,
             params TModel[] values
-        ) {
+        )
+        {
             var convertToProvider = converter.ConvertToProviderExpression.Compile();
             var convertFromProvider = converter.ConvertFromProviderExpression.Compile();
 

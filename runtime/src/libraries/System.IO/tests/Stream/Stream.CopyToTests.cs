@@ -107,7 +107,8 @@ namespace System.IO.Tests
         public void IfLengthIsLessThanOrEqualToPositionCopyToShouldStillBeCalledWithAPositiveBufferSize(
             long length,
             long position
-        ) {
+        )
+        {
             // Streams with their Lengths <= their Positions, e.g.
             // new MemoryStream { Position = 3 }.SetLength(1)
             // should still be called CopyTo{Async} on with a
@@ -148,7 +149,8 @@ namespace System.IO.Tests
         public async Task AsyncIfLengthIsLessThanOrEqualToPositionCopyToShouldStillBeCalledWithAPositiveBufferSize(
             long length,
             long position
-        ) {
+        )
+        {
             var baseStream = new DelegateStream(
                 canReadFunc: () => true,
                 canSeekFunc: () => true,
@@ -171,7 +173,8 @@ namespace System.IO.Tests
         public void IfLengthMinusPositionPositiveOverflowsBufferSizeShouldStillBePositive(
             long length,
             long position
-        ) {
+        )
+        {
             // The new implementation of Stream.CopyTo calculates the bytes left
             // in the Stream by calling Length - Position. This can overflow to a
             // negative number, so this tests that if that happens we don't send
@@ -212,7 +215,8 @@ namespace System.IO.Tests
         public async Task AsyncIfLengthMinusPositionPositiveOverflowsBufferSizeShouldStillBePositive(
             long length,
             long position
-        ) {
+        )
+        {
             var baseStream = new DelegateStream(
                 canReadFunc: () => true,
                 canSeekFunc: () => true,
@@ -239,7 +243,8 @@ namespace System.IO.Tests
         public void IfLengthIsGreaterThanPositionAndDoesNotOverflowEverythingShouldGoNormally(
             long length,
             long position
-        ) {
+        )
+        {
             const int ReadLimit = 7;
 
             // Lambda state
@@ -307,7 +312,8 @@ namespace System.IO.Tests
         public async Task AsyncIfLengthIsGreaterThanPositionAndDoesNotOverflowEverythingShouldGoNormally(
             long length,
             long position
-        ) {
+        )
+        {
             const int ReadLimit = 7;
 
             // Lambda state

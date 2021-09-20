@@ -459,7 +459,8 @@ namespace Microsoft.Extensions.Hosting.Tests
             OptionsValidationException e,
             int count = 1,
             params string[] errorsToMatch
-        ) {
+        )
+        {
             Assert.Equal(type, e.OptionsType);
 
             Assert.Equal(count, e.Failures.Count());
@@ -489,7 +490,8 @@ namespace Microsoft.Extensions.Hosting.Tests
             OptionsValidationException e,
             int count = 1,
             params string[] errorsToMatch
-        ) {
+        )
+        {
             ValidateFailure(typeof(TOptions), e, count, errorsToMatch);
         }
     }

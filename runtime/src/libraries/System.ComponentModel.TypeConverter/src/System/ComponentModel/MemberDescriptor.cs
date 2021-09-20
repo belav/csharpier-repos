@@ -221,7 +221,8 @@ namespace System.ComponentModel
                         Attributes[typeof(DisplayNameAttribute)]
                         is DisplayNameAttribute displayNameAttr
                     ) || displayNameAttr.IsDefaultAttribute()
-                ) {
+                )
+                {
                     return _displayName;
                 }
                 return displayNameAttr.DisplayName;
@@ -287,14 +288,16 @@ namespace System.ComponentModel
             if (
                 (mdObj._category == null) != (_category == null)
                 || (_category != null && !mdObj._category.Equals(_category))
-            ) {
+            )
+            {
                 return false;
             }
 
             if (
                 (mdObj._description == null) != (_description == null)
                 || (_description != null && !mdObj._description.Equals(_description))
-            ) {
+            )
+            {
                 return false;
             }
 
@@ -412,7 +415,8 @@ namespace System.ComponentModel
             string name,
             Type[] args,
             Type returnType
-        ) {
+        )
+        {
             return FindMethod(componentClass, name, args, returnType, publicOnly: true);
         }
 
@@ -429,7 +433,8 @@ namespace System.ComponentModel
             Type[] args,
             Type returnType,
             bool publicOnly
-        ) {
+        )
+        {
             if (componentClass == null)
             {
                 throw new ArgumentNullException(nameof(componentClass));

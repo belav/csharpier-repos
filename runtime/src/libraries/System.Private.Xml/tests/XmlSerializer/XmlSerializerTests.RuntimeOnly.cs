@@ -208,7 +208,8 @@ public static partial class XmlSerializerTests
                 decimal.MinValue,
                 decimal.MaxValue
             }
-        ) {
+        )
+        {
             Assert.StrictEqual(
                 SerializeAndDeserialize<decimal>(
                     value,
@@ -368,7 +369,8 @@ public static partial class XmlSerializerTests
     {
         foreach (
             long value in new long[] { (long)-1, (long)0, (long)2, long.MinValue, long.MaxValue }
-        ) {
+        )
+        {
             Assert.StrictEqual(
                 SerializeAndDeserialize<long>(
                     value,
@@ -450,7 +452,8 @@ public static partial class XmlSerializerTests
                 short.MinValue,
                 short.MaxValue
             }
-        ) {
+        )
+        {
             Assert.StrictEqual(
                 SerializeAndDeserialize<short>(
                     value,
@@ -578,7 +581,8 @@ public static partial class XmlSerializerTests
     {
         foreach (
             ushort value in new ushort[] { (ushort)3, (ushort)0, ushort.MinValue, ushort.MaxValue }
-        ) {
+        )
+        {
             Assert.StrictEqual(
                 SerializeAndDeserialize<ushort>(
                     value,
@@ -787,7 +791,8 @@ public static partial class XmlSerializerTests
         XElement x1,
         XElement x2,
         bool checkFirstAttribute = true
-    ) {
+    )
+    {
         Assert.Equal(x1.Value, x2.Value);
         Assert.StrictEqual(x1.Name, x2.Name);
         if (checkFirstAttribute)

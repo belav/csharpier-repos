@@ -36,7 +36,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Simplification.Simplifiers
             out ExpressionSyntax replacementNode,
             out TextSpan issueSpan,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             if (
                 TryReduceExplicitName(
                     expression,
@@ -46,7 +47,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Simplification.Simplifiers
                     optionSet,
                     cancellationToken
                 )
-            ) {
+            )
+            {
                 replacementNode = replacementTypeNode;
                 return true;
             }
@@ -67,7 +69,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Simplification.Simplifiers
             out TextSpan issueSpan,
             OptionSet optionSet,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             replacementNode = null;
             issueSpan = default;
 
@@ -109,7 +112,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Simplification.Simplifiers
             out TextSpan issueSpan,
             OptionSet optionSet,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             replacementNode = null;
             issueSpan = default;
 
@@ -152,7 +156,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Simplification.Simplifiers
                     optionSet,
                     symbol
                 )
-            ) {
+            )
+            {
                 return false;
             }
 
@@ -168,7 +173,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Simplification.Simplifiers
                         cancellationToken,
                         out var aliasReplacement
                     )
-                ) {
+                )
+                {
                     // get the token text as it appears in source code to preserve e.g. unicode character escaping
                     var text = aliasReplacement.Name;
                     var syntaxRef = aliasReplacement.DeclaringSyntaxReferences.FirstOrDefault();
@@ -206,7 +212,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Simplification.Simplifiers
                     if (
                         memberAccess.Name.Identifier.ValueText
                         == ((IdentifierNameSyntax)replacementNode).Identifier.ValueText
-                    ) {
+                    )
+                    {
                         issueSpan = memberAccess.Expression.Span;
                     }
 
@@ -220,7 +227,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Simplification.Simplifiers
                         optionSet,
                         semanticModel
                     )
-                ) {
+                )
+                {
                     if (symbol != null && symbol.IsKind(SymbolKind.NamedType))
                     {
                         var keywordKind = GetPredefinedKeywordKind(
@@ -253,7 +261,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Simplification.Simplifiers
                     SyntaxKind.ThisExpression,
                     SyntaxKind.BaseExpression
                 )
-            ) {
+            )
+            {
                 GetReplacementCandidates(
                     semanticModel,
                     memberAccess,
@@ -268,7 +277,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Simplification.Simplifiers
                         speculativeSymbols,
                         speculativeNamespacesAndTypes
                     )
-                ) {
+                )
+                {
                     return false;
                 }
             }
@@ -291,7 +301,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Simplification.Simplifiers
             ISymbol actualSymbol,
             out ImmutableArray<ISymbol> speculativeSymbols,
             out ImmutableArray<ISymbol> speculativeNamespacesAndTypes
-        ) {
+        )
+        {
             var containsNamespaceOrTypeSymbol = actualSymbol is INamespaceOrTypeSymbol;
             var containsOtherSymbol = !containsNamespaceOrTypeSymbol;
 
@@ -317,7 +328,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Simplification.Simplifiers
             ISymbol actualSymbol,
             ImmutableArray<ISymbol> speculativeSymbols,
             ImmutableArray<ISymbol> speculativeNamespacesAndTypes
-        ) {
+        )
+        {
             if (speculativeSymbols.IsEmpty && speculativeNamespacesAndTypes.IsEmpty)
             {
                 return false;
@@ -367,7 +379,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Simplification.Simplifiers
             out ExpressionSyntax replacementNode,
             out TextSpan issueSpan,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             replacementNode = null;
             issueSpan = default;
 
@@ -382,7 +395,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Simplification.Simplifiers
                             memberAccess,
                             cancellationToken
                         )
-                    ) {
+                    )
+                    {
                         return false;
                     }
 
@@ -394,7 +408,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Simplification.Simplifiers
                             out var newLeft,
                             out issueSpan
                         )
-                    ) {
+                    )
+                    {
                         // replacement node might not be in it's simplest form, so add simplify annotation to it.
                         replacementNode = memberAccess.Update(
                                 newLeft,
@@ -425,7 +440,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Simplification.Simplifiers
                             out var newLeft,
                             out issueSpan
                         )
-                    ) {
+                    )
+                    {
                         // replacement node might not be in it's simplest form, so add simplify annotation to it.
                         replacementNode = qualifiedName.Update(
                                 (NameSyntax)newLeft,
@@ -455,7 +471,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Simplification.Simplifiers
             SemanticModel semanticModel,
             ISymbol symbol,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             if (!IsThisOrTypeOrNamespace(memberAccess, semanticModel))
             {
                 return false;
@@ -470,7 +487,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Simplification.Simplifiers
             if (
                 !speculationAnalyzer.SymbolsForOriginalAndReplacedNodesAreCompatible()
                 || speculationAnalyzer.ReplacementChangesSemantics()
-            ) {
+            )
+            {
                 return false;
             }
 
@@ -485,7 +503,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Simplification.Simplifiers
                     memberAccess,
                     cancellationToken
                 )
-            ) {
+            )
+            {
                 return false;
             }
 
@@ -505,7 +524,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Simplification.Simplifiers
                     && !enclosingNamedType.IsSealed
                     && symbol != null
                     && symbol.IsOverridable()
-                ) {
+                )
+                {
                     return false;
                 }
             }
@@ -528,7 +548,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Simplification.Simplifiers
             SemanticModel semanticModel,
             MemberAccessExpressionSyntax memberAccess,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var ancestorInvocation = memberAccess.FirstAncestorOrSelf<InvocationExpressionSyntax>();
             if (ancestorInvocation?.SpanStart == memberAccess.SpanStart)
             {
@@ -559,7 +580,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Simplification.Simplifiers
         private static bool AccessMethodWithDynamicArgumentInsideStructConstructor(
             MemberAccessExpressionSyntax memberAccess,
             SemanticModel semanticModel
-        ) {
+        )
+        {
             var constructor = memberAccess.Ancestors()
                 .OfType<ConstructorDeclarationSyntax>()
                 .SingleOrDefault();
@@ -580,7 +602,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Simplification.Simplifiers
             SemanticModel semanticModel,
             out ExpressionSyntax replacementNode,
             out TextSpan issueSpan
-        ) {
+        )
+        {
             replacementNode = null;
             issueSpan = default;
 
@@ -596,7 +619,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Simplification.Simplifiers
                     if (
                         rightSymbol != null
                         && (rightSymbol.IsStatic || rightSymbol.Kind == SymbolKind.NamedType)
-                    ) {
+                    )
+                    {
                         // Static member access or nested type member access.
                         var containingType = rightSymbol.ContainingType;
 
@@ -633,7 +657,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Simplification.Simplifiers
                             if (
                                 leftSymbol is INamedTypeSymbol
                                 && containingType.TypeArguments.Length != 0
-                            ) {
+                            )
+                            {
                                 return false;
                             }
 
@@ -655,7 +680,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Simplification.Simplifiers
         private static bool IsThisOrTypeOrNamespace(
             MemberAccessExpressionSyntax memberAccess,
             SemanticModel semanticModel
-        ) {
+        )
+        {
             if (memberAccess.Expression.Kind() == SyntaxKind.ThisExpression)
             {
                 var previousToken = memberAccess.Expression.GetFirstToken().GetPreviousToken();
@@ -672,7 +698,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Simplification.Simplifiers
                     && parenExpr.Expression.Kind() == SyntaxKind.SimpleMemberAccessExpression
                     && symbol != null
                     && symbol.Kind == SymbolKind.Method
-                ) {
+                )
+                {
                     return false;
                 }
 
@@ -699,7 +726,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Simplification.Simplifiers
         private static bool ParserWouldTreatExpressionAsCast(
             ExpressionSyntax reducedNode,
             MemberAccessExpressionSyntax originalNode
-        ) {
+        )
+        {
             SyntaxNode parent = originalNode;
             while (parent != null)
             {
@@ -745,7 +773,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Simplification.Simplifiers
                     SyntaxKind.SimpleMemberAccessExpression,
                     out MemberAccessExpressionSyntax memberAccess
                 )
-            ) {
+            )
+            {
                 return memberAccess.Expression.IsKind(SyntaxKind.IdentifierName)
                     || IsNameOrMemberAccessButNoExpression(memberAccess.Expression);
             }
@@ -757,7 +786,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Simplification.Simplifiers
             ExpressionSyntax originalExpression,
             ExpressionSyntax replacedExpression,
             SemanticModel semanticModel
-        ) {
+        )
+        {
             var speculationAnalyzer = new SpeculationAnalyzer(
                 originalExpression,
                 replacedExpression,

@@ -51,7 +51,8 @@ namespace System.Linq.Expressions.Compiler
                         g != null
                         && (g.Value == null || !Significant(g.Value))
                         && ReferenceLabel(g.Target).CanReturn
-                    ) {
+                    )
+                    {
                         // Since tail call flags are not passed into EmitTryExpression, CanReturn means the goto will be emitted
                         // as Ret. Therefore we can emit the current expression with tail call.
                         tailCallFlag = CompilationFlags.EmitAsTail;
@@ -93,7 +94,8 @@ namespace System.Linq.Expressions.Compiler
             if (
                 HasVariables(node)
                 && (_scope.MergedScopes == null || !_scope.MergedScopes.Contains(node))
-            ) {
+            )
+            {
                 if (!_tree.Scopes.TryGetValue(node, out CompilerScope? scope))
                 {
                     //
@@ -391,7 +393,8 @@ namespace System.Linq.Expressions.Compiler
             if (
                 !CanOptimizeSwitchType(type)
                 || !TypeUtils.AreEquivalent(type, node.Cases[0].TestValues[0].Type)
-            ) {
+            )
+            {
                 return false;
             }
 
@@ -507,7 +510,8 @@ namespace System.Linq.Expressions.Compiler
             Label @default,
             Label end,
             CompilationFlags flags
-        ) {
+        )
+        {
             // Jump to default (to handle the fallthrough case)
             _ilg.Emit(OpCodes.Br, @default);
 
@@ -529,7 +533,8 @@ namespace System.Linq.Expressions.Compiler
                 {
                     if (
                         (flags & CompilationFlags.EmitAsTailCallMask) == CompilationFlags.EmitAsTail
-                    ) {
+                    )
+                    {
                         //The switch case is at the tail of the lambda so
                         //it is safe to emit a Ret.
                         _ilg.Emit(OpCodes.Ret);
@@ -556,7 +561,8 @@ namespace System.Linq.Expressions.Compiler
             List<List<SwitchLabel>> buckets,
             int first,
             int last
-        ) {
+        )
+        {
             while (true)
             {
                 if (first == last)
@@ -667,7 +673,8 @@ namespace System.Linq.Expressions.Compiler
             if (
                 node.Comparison != String_op_Equality_String_String
                 && node.Comparison != String_Equals_String_String
-            ) {
+            )
+            {
                 return false;
             }
 
@@ -810,7 +817,8 @@ namespace System.Linq.Expressions.Compiler
             Expression dictInit,
             ParameterExpression switchValue,
             ParameterExpression switchIndex
-        ) {
+        )
+        {
             return Expression.Call(dictInit, "TryGetValue", null, switchValue, switchIndex);
         }
 

@@ -17,7 +17,8 @@ namespace System.Net
             bool checkCertName,
             bool isServer,
             string? hostName
-        ) {
+        )
+        {
             return CertificateValidation.BuildChainAndVerifyProperties(
                 chain,
                 remoteCertificate,
@@ -37,7 +38,8 @@ namespace System.Net
         internal static X509Certificate2? GetRemoteCertificate(
             SafeDeleteContext? securityContext,
             out X509Certificate2Collection? remoteCertificateStore
-        ) {
+        )
+        {
             if (securityContext == null)
             {
                 remoteCertificateStore = null;
@@ -51,7 +53,8 @@ namespace System.Net
         private static X509Certificate2? GetRemoteCertificate(
             SafeDeleteContext? securityContext,
             X509Certificate2Collection? remoteCertificateStore
-        ) {
+        )
+        {
             bool gotReference = false;
 
             if (securityContext == null)
@@ -78,7 +81,8 @@ namespace System.Net
                             Interop.OpenSsl.GetPeerCertificateChain(
                                 ((SafeDeleteSslContext)securityContext).SslContext
                             )
-                    ) {
+                    )
+                    {
                         if (!chainStack.IsInvalid)
                         {
                             int count = Interop.Crypto.GetX509StackFieldCount(chainStack);
@@ -130,7 +134,8 @@ namespace System.Net
                 SafeSharedX509NameStackHandle names = Interop.Ssl.SslGetClientCAList(
                     ((SafeDeleteSslContext)securityContext).SslContext
                 )
-            ) {
+            )
+            {
                 if (names.IsInvalid)
                 {
                     return Array.Empty<string>();
@@ -152,7 +157,8 @@ namespace System.Net
                             names,
                             i
                         )
-                    ) {
+                    )
+                    {
                         X500DistinguishedName dn = Interop.Crypto.LoadX500Name(nameHandle);
                         clientAuthorityNames[i] = dn.Name;
                     }
@@ -185,7 +191,8 @@ namespace System.Net
         private static int QueryContextRemoteCertificate(
             SafeDeleteContext securityContext,
             out SafeFreeCertContext? remoteCertContext
-        ) {
+        )
+        {
             remoteCertContext = null;
             try
             {

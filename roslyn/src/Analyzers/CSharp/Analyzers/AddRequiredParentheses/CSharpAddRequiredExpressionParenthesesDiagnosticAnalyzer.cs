@@ -61,7 +61,8 @@ namespace Microsoft.CodeAnalysis.CSharp.AddRequiredParentheses
 
         protected override (ExpressionSyntax, SyntaxToken, ExpressionSyntax) GetPartsOfBinaryLike(
             ExpressionSyntax binaryLike
-        ) {
+        )
+        {
             Debug.Assert(IsBinaryLike(binaryLike));
             switch (binaryLike)
             {

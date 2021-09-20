@@ -59,7 +59,8 @@ namespace Microsoft.VisualStudio.LanguageServices.LiveShare.UnitTests
             Solution solution,
             RequestType request,
             string methodName
-        ) {
+        )
+        {
             var requestContext = new RequestContext<Solution>(
                 solution,
                 new MockHostProtocolConverter(),
@@ -74,7 +75,8 @@ namespace Microsoft.VisualStudio.LanguageServices.LiveShare.UnitTests
             RequestType request,
             string methodName,
             Func<Uri, Uri> uriMappingFunc
-        ) {
+        )
+        {
             var requestContext = new RequestContext<Solution>(
                 solution,
                 new MockHostProtocolConverter(uriMappingFunc),

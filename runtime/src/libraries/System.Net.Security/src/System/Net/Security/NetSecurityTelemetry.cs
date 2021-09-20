@@ -187,7 +187,8 @@ namespace System.Net.Security
             bool isServer,
             double elapsedMilliseconds,
             string exceptionMessage
-        ) {
+        )
+        {
             WriteEvent(eventId: 3, isServer, elapsedMilliseconds, exceptionMessage);
         }
 
@@ -196,7 +197,8 @@ namespace System.Net.Security
             bool isServer,
             ValueStopwatch stopwatch,
             string exceptionMessage
-        ) {
+        )
+        {
             Interlocked.Increment(ref _finishedTlsHandshakes);
             Interlocked.Increment(ref _failedTlsHandshakes);
 
@@ -217,7 +219,8 @@ namespace System.Net.Security
             SslProtocols protocol,
             ValueStopwatch stopwatch,
             bool connectionOpen
-        ) {
+        )
+        {
             Interlocked.Increment(ref _finishedTlsHandshakes);
 
             long dummy = 0;

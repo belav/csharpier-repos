@@ -97,7 +97,8 @@ namespace Newtonsoft.Json.Utilities
                 ParseDate(startIndex)
                 && ParseChar(Lzyyyy_MM_dd + startIndex, 'T')
                 && ParseTimeAndZoneAndWhitespace(Lzyyyy_MM_ddT + startIndex)
-            ) {
+            )
+            {
                 return true;
             }
 
@@ -195,7 +196,8 @@ namespace Newtonsoft.Json.Utilities
                 {
                     if (
                         start + 2 < _end && Parse2Digit(start + Lz_, out ZoneHour) && ZoneHour <= 99
-                    ) {
+                    )
+                    {
                         switch (ch)
                         {
                             case '-':
@@ -220,7 +222,8 @@ namespace Newtonsoft.Json.Utilities
                                 start + 1 < _end
                                 && Parse2Digit(start, out ZoneMinute)
                                 && ZoneMinute <= 99
-                            ) {
+                            )
+                            {
                                 start += 2;
                             }
                         }
@@ -230,7 +233,8 @@ namespace Newtonsoft.Json.Utilities
                                 start + 1 < _end
                                 && Parse2Digit(start, out ZoneMinute)
                                 && ZoneMinute <= 99
-                            ) {
+                            )
+                            {
                                 start += 2;
                             }
                         }
@@ -258,7 +262,8 @@ namespace Newtonsoft.Json.Utilities
                     && digit3 < 10
                     && 0 <= digit4
                     && digit4 < 10
-                ) {
+                )
+                {
                     num = (((((digit1 * 10) + digit2) * 10) + digit3) * 10) + digit4;
                     return true;
                 }

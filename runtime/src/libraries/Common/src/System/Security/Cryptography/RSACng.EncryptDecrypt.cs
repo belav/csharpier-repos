@@ -64,7 +64,8 @@ namespace System.Security.Cryptography
                 byte[] data,
                 RSAEncryptionPadding padding,
                 bool encrypt
-            ) {
+            )
+            {
                 if (data == null)
                 {
                     throw new ArgumentNullException(nameof(data));
@@ -85,7 +86,8 @@ namespace System.Security.Cryptography
                     encrypt
                     && padding.Mode == RSAEncryptionPaddingMode.Pkcs1
                     && data.Length > modulusSizeInBytes - Pkcs1PaddingOverhead
-                ) {
+                )
+                {
                     throw new CryptographicException(
                         SR.Format(
                             SR.Cryptography_Encryption_MessageTooLong,
@@ -192,7 +194,8 @@ namespace System.Security.Cryptography
                 RSAEncryptionPadding padding,
                 bool encrypt,
                 out int bytesWritten
-            ) {
+            )
+            {
                 if (padding == null)
                 {
                     throw new ArgumentNullException(nameof(padding));
@@ -209,7 +212,8 @@ namespace System.Security.Cryptography
                     encrypt
                     && padding.Mode == RSAEncryptionPaddingMode.Pkcs1
                     && data.Length > modulusSizeInBytes - Pkcs1PaddingOverhead
-                ) {
+                )
+                {
                     throw new CryptographicException(
                         SR.Format(
                             SR.Cryptography_Encryption_MessageTooLong,
@@ -320,7 +324,8 @@ namespace System.Security.Cryptography
                 AsymmetricPaddingMode paddingMode,
                 void* paddingInfo,
                 bool encrypt
-            ) {
+            )
+            {
                 int estimatedSize = KeySize / 8;
 #if DEBUG
             estimatedSize = 2; // Make sure the NTE_BUFFER_TOO_SMALL scenario gets exercised.
@@ -397,7 +402,8 @@ namespace System.Security.Cryptography
                 void* paddingInfo,
                 bool encrypt,
                 out int bytesWritten
-            ) {
+            )
+            {
                 for (int i = 0; i <= StatusUnsuccessfulRetryCount; i++)
                 {
                     int numBytesNeeded;
@@ -437,7 +443,8 @@ namespace System.Security.Cryptography
                 void* paddingInfo,
                 bool encrypt,
                 out int bytesNeeded
-            ) {
+            )
+            {
                 ErrorCode errorCode = encrypt
                     ? Interop.NCrypt.NCryptEncrypt(
                           key,

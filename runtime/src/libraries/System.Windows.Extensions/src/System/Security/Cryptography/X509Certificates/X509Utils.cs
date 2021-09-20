@@ -12,7 +12,8 @@ namespace System.Security.Cryptography.X509Certificates
 
         internal static SafeCertContextHandle DuplicateCertificateContext(
             X509Certificate2 certificate
-        ) {
+        )
+        {
             SafeCertContextHandle safeCertContext = Interop.Crypt32.CertDuplicateCertificateContext(
                 certificate.Handle
             );
@@ -22,7 +23,8 @@ namespace System.Security.Cryptography.X509Certificates
 
         internal static SafeCertStoreHandle ExportToMemoryStore(
             X509Certificate2Collection collection
-        ) {
+        )
+        {
             SafeCertStoreHandle safeCertStoreHandle = SafeCertStoreHandle.InvalidHandle;
 
             // we always want to use CERT_STORE_ENUM_ARCHIVED_FLAG since we want to preserve the collection in this operation.
@@ -51,7 +53,8 @@ namespace System.Security.Cryptography.X509Certificates
                             Interop.Crypt32.CERT_STORE_ADD_ALWAYS,
                             SafeCertContextHandle.InvalidHandle
                         )
-                    ) {
+                    )
+                    {
                         throw new CryptographicException(Marshal.GetLastWin32Error());
                     }
                 }
@@ -62,7 +65,8 @@ namespace System.Security.Cryptography.X509Certificates
 
         internal static X509Certificate2Collection GetCertificates(
             SafeCertStoreHandle safeCertStoreHandle
-        ) {
+        )
+        {
             X509Certificate2Collection collection = new X509Certificate2Collection();
             IntPtr pEnumContext = Interop.Crypt32.CertEnumCertificatesInStore(
                 safeCertStoreHandle,

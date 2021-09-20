@@ -106,7 +106,8 @@ namespace System.Net.Http.Headers
                 (_code != other._code)
                 || (!string.Equals(_agent, other._agent, StringComparison.OrdinalIgnoreCase))
                 || (!string.Equals(_text, other._text, StringComparison.Ordinal))
-            ) {
+            )
+            {
                 return false;
             }
 
@@ -148,7 +149,8 @@ namespace System.Net.Http.Headers
         public static bool TryParse(
             [NotNullWhen(true)] string? input,
             [NotNullWhen(true)] out WarningHeaderValue? parsedValue
-        ) {
+        )
+        {
             int index = 0;
             parsedValue = null;
 
@@ -159,7 +161,8 @@ namespace System.Net.Http.Headers
                     ref index,
                     out object? output
                 )
-            ) {
+            )
+            {
                 parsedValue = (WarningHeaderValue)output!;
                 return true;
             }
@@ -198,7 +201,8 @@ namespace System.Net.Http.Headers
             if (
                 HttpRuleParser.GetQuotedStringLength(input, current, out textLength)
                 != HttpParseResult.Parsed
-            ) {
+            )
+            {
                 return 0;
             }
 
@@ -225,7 +229,8 @@ namespace System.Net.Http.Headers
             int startIndex,
             ref int current,
             [NotNullWhen(true)] out string? agent
-        ) {
+        )
+        {
             int agentLength = HttpRuleParser.GetHostLength(input, startIndex, true, out agent!);
 
             if (agentLength == 0)
@@ -324,7 +329,8 @@ namespace System.Net.Http.Headers
                         input.AsSpan(dateStartIndex, current - dateStartIndex),
                         out temp
                     )
-                ) {
+                )
+                {
                     return false;
                 }
 

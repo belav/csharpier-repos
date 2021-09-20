@@ -80,7 +80,8 @@ namespace System.Reflection
             bool addVersion,
             bool addPublickey,
             bool defaultToken
-        ) {
+        )
+        {
             _name = RuntimeMarshal.PtrToUtf8String(native->name);
 
             _flags = (AssemblyNameFlags)native->flags;

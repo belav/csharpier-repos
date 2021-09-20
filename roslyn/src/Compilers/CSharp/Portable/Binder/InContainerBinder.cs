@@ -79,10 +79,8 @@ namespace Microsoft.CodeAnalysis.CSharp
         /// <summary>
         /// Creates a binder with given import computation function.
         /// </summary>
-        internal InContainerBinder(
-            Binder next,
-            Func<ConsList<TypeSymbol>, Imports> computeImports
-        ) : base(next)
+        internal InContainerBinder(Binder next, Func<ConsList<TypeSymbol>, Imports> computeImports)
+            : base(next)
         {
             Debug.Assert(computeImports != null);
 
@@ -133,7 +131,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             ref NamespaceOrTypeSymbol qualifierOpt,
             BindingDiagnosticBag diagnostics,
             Location location
-        ) {
+        )
+        {
             var imports = GetImports(basesBeingResolved: null);
             foreach (var typeOrNamespace in imports.Usings)
             {
@@ -237,7 +236,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             out bool failedThroughTypeCheck,
             ref CompoundUseSiteInfo<AssemblySymbol> useSiteInfo,
             ConsList<TypeSymbol> basesBeingResolved
-        ) {
+        )
+        {
             var type = _container as NamedTypeSymbol;
             if ((object)type != null)
             {
@@ -273,7 +273,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             int arity,
             LookupOptions options,
             Binder originalBinder
-        ) {
+        )
+        {
             if (searchUsingsNotNamespace)
             {
                 this.GetImports(basesBeingResolved: null)
@@ -289,7 +290,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                     var submission = this.Compilation;
                     submission != null;
                     submission = submission.PreviousSubmission
-                ) {
+                )
+                {
                     submission.ScriptClass?.GetExtensionMethods(methods, name, arity, options);
                 }
             }
@@ -321,7 +323,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             Binder originalBinder,
             bool diagnose,
             ref CompoundUseSiteInfo<AssemblySymbol> useSiteInfo
-        ) {
+        )
+        {
             Debug.Assert(result.IsClear);
 
             if (IsSubmissionClass)
@@ -363,7 +366,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                     if (
                         arity == 0
                         && imports.IsUsingAlias(name, originalBinder.IsSemanticModelBinder)
-                    ) {
+                    )
+                    {
                         CSDiagnosticInfo diagInfo = new CSDiagnosticInfo(
                             ErrorCode.ERR_ConflictAliasAndMember,
                             name,
@@ -400,7 +404,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             LookupSymbolsInfo result,
             LookupOptions options,
             Binder originalBinder
-        ) {
+        )
+        {
             if (_container != null)
             {
                 this.AddMemberLookupSymbolsInfo(result, _container, options, originalBinder);

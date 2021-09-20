@@ -25,7 +25,8 @@ namespace Microsoft.VisualStudio.LanguageServices.ExternalAccess.VSTypeScript.Ap
         public static bool TryGetContainedDocument(
             DocumentId documentId,
             out VSTypeScriptContainedDocumentWrapper document
-        ) {
+        )
+        {
             // TypeScript only calls this to immediately check if the document is a ContainedDocument. Because of that we can just check for
             // ContainedDocuments
             var containedDocument = ContainedDocument.TryGetContainedDocument(documentId);

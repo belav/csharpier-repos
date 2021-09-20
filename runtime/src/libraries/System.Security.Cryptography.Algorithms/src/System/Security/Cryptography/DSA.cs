@@ -78,7 +78,8 @@ namespace System.Security.Cryptography
             int offset,
             int count,
             HashAlgorithmName hashAlgorithm
-        ) {
+        )
+        {
             throw DerivedClassMustOverride();
         }
 
@@ -121,7 +122,8 @@ namespace System.Security.Cryptography
             byte[] data,
             HashAlgorithmName hashAlgorithm,
             DSASignatureFormat signatureFormat
-        ) {
+        )
+        {
             if (data == null)
                 throw new ArgumentNullException(nameof(data));
             if (string.IsNullOrEmpty(hashAlgorithm.Name))
@@ -137,7 +139,8 @@ namespace System.Security.Cryptography
             int offset,
             int count,
             HashAlgorithmName hashAlgorithm
-        ) {
+        )
+        {
             if (data == null)
                 throw new ArgumentNullException(nameof(data));
             if (offset < 0 || offset > data.Length)
@@ -193,7 +196,8 @@ namespace System.Security.Cryptography
             int count,
             HashAlgorithmName hashAlgorithm,
             DSASignatureFormat signatureFormat
-        ) {
+        )
+        {
             if (data == null)
                 throw new ArgumentNullException(nameof(data));
             if (offset < 0 || offset > data.Length)
@@ -228,7 +232,8 @@ namespace System.Security.Cryptography
             ReadOnlySpan<byte> data,
             HashAlgorithmName hashAlgorithm,
             DSASignatureFormat signatureFormat
-        ) {
+        )
+        {
             Span<byte> signature = stackalloc byte[SignatureStackSize];
 
             if (
@@ -239,7 +244,8 @@ namespace System.Security.Cryptography
                     signatureFormat,
                     out int bytesWritten
                 )
-            ) {
+            )
+            {
                 return signature.Slice(0, bytesWritten).ToArray();
             }
 
@@ -286,7 +292,8 @@ namespace System.Security.Cryptography
             Stream data,
             HashAlgorithmName hashAlgorithm,
             DSASignatureFormat signatureFormat
-        ) {
+        )
+        {
             if (data == null)
                 throw new ArgumentNullException(nameof(data));
             if (string.IsNullOrEmpty(hashAlgorithm.Name))
@@ -313,7 +320,8 @@ namespace System.Security.Cryptography
             Stream data,
             HashAlgorithmName hashAlgorithm,
             DSASignatureFormat signatureFormat
-        ) {
+        )
+        {
             byte[] hash = HashData(data, hashAlgorithm);
             return CreateSignatureCore(hash, signatureFormat);
         }
@@ -334,7 +342,8 @@ namespace System.Security.Cryptography
             int count,
             byte[] signature,
             HashAlgorithmName hashAlgorithm
-        ) {
+        )
+        {
             if (data == null)
                 throw new ArgumentNullException(nameof(data));
             if (offset < 0 || offset > data.Length)
@@ -394,7 +403,8 @@ namespace System.Security.Cryptography
             byte[] signature,
             HashAlgorithmName hashAlgorithm,
             DSASignatureFormat signatureFormat
-        ) {
+        )
+        {
             if (data == null)
                 throw new ArgumentNullException(nameof(data));
             if (offset < 0 || offset > data.Length)
@@ -420,7 +430,8 @@ namespace System.Security.Cryptography
             Stream data,
             byte[] signature,
             HashAlgorithmName hashAlgorithm
-        ) {
+        )
+        {
             if (data == null)
                 throw new ArgumentNullException(nameof(data));
             if (signature == null)
@@ -473,7 +484,8 @@ namespace System.Security.Cryptography
         protected virtual byte[] CreateSignatureCore(
             ReadOnlySpan<byte> hash,
             DSASignatureFormat signatureFormat
-        ) {
+        )
+        {
             Span<byte> signature = stackalloc byte[SignatureStackSize];
 
             if (TryCreateSignatureCore(hash, signature, signatureFormat, out int bytesWritten))
@@ -524,7 +536,8 @@ namespace System.Security.Cryptography
             Span<byte> destination,
             DSASignatureFormat signatureFormat,
             out int bytesWritten
-        ) {
+        )
+        {
             if (!signatureFormat.IsKnownValue())
                 throw DSASignatureFormatHelpers.CreateUnknownValueException(signatureFormat);
 
@@ -554,7 +567,8 @@ namespace System.Security.Cryptography
             Span<byte> destination,
             DSASignatureFormat signatureFormat,
             out int bytesWritten
-        ) {
+        )
+        {
             // This method is expected to be overriden with better implementation
 
             // The only available implementation here is abstract method, use it
@@ -576,7 +590,8 @@ namespace System.Security.Cryptography
             Span<byte> destination,
             HashAlgorithmName hashAlgorithm,
             out int bytesWritten
-        ) {
+        )
+        {
             byte[] hash = HashSpanToArray(data, hashAlgorithm);
             return Helpers.TryCopyToDestination(hash, destination, out bytesWritten);
         }
@@ -586,7 +601,8 @@ namespace System.Security.Cryptography
             Span<byte> destination,
             HashAlgorithmName hashAlgorithm,
             out int bytesWritten
-        ) {
+        )
+        {
             if (string.IsNullOrEmpty(hashAlgorithm.Name))
                 throw HashAlgorithmNameNullOrEmpty();
 
@@ -597,7 +613,8 @@ namespace System.Security.Cryptography
                     destination,
                     out bytesWritten
                 )
-            ) {
+            )
+            {
                 return true;
             }
 
@@ -636,7 +653,8 @@ namespace System.Security.Cryptography
             HashAlgorithmName hashAlgorithm,
             DSASignatureFormat signatureFormat,
             out int bytesWritten
-        ) {
+        )
+        {
             if (string.IsNullOrEmpty(hashAlgorithm.Name))
                 throw HashAlgorithmNameNullOrEmpty();
             if (!signatureFormat.IsKnownValue())
@@ -676,7 +694,8 @@ namespace System.Security.Cryptography
             HashAlgorithmName hashAlgorithm,
             DSASignatureFormat signatureFormat,
             out int bytesWritten
-        ) {
+        )
+        {
             Span<byte> tmp = stackalloc byte[HashBufferStackSize];
             ReadOnlySpan<byte> hash = HashSpanToTmp(data, hashAlgorithm, tmp);
 
@@ -687,7 +706,8 @@ namespace System.Security.Cryptography
             ReadOnlySpan<byte> data,
             ReadOnlySpan<byte> signature,
             HashAlgorithmName hashAlgorithm
-        ) {
+        )
+        {
             if (string.IsNullOrEmpty(hashAlgorithm.Name))
                 throw HashAlgorithmNameNullOrEmpty();
 
@@ -726,7 +746,8 @@ namespace System.Security.Cryptography
             byte[] signature,
             HashAlgorithmName hashAlgorithm,
             DSASignatureFormat signatureFormat
-        ) {
+        )
+        {
             if (data == null)
                 throw new ArgumentNullException(nameof(data));
             if (signature == null)
@@ -766,7 +787,8 @@ namespace System.Security.Cryptography
             byte[] signature,
             HashAlgorithmName hashAlgorithm,
             DSASignatureFormat signatureFormat
-        ) {
+        )
+        {
             if (data == null)
                 throw new ArgumentNullException(nameof(data));
             if (signature == null)
@@ -797,7 +819,8 @@ namespace System.Security.Cryptography
             ReadOnlySpan<byte> signature,
             HashAlgorithmName hashAlgorithm,
             DSASignatureFormat signatureFormat
-        ) {
+        )
+        {
             byte[] hash = HashData(data, hashAlgorithm);
             return VerifySignatureCore(hash, signature, signatureFormat);
         }
@@ -823,7 +846,8 @@ namespace System.Security.Cryptography
             ReadOnlySpan<byte> signature,
             HashAlgorithmName hashAlgorithm,
             DSASignatureFormat signatureFormat
-        ) {
+        )
+        {
             if (string.IsNullOrEmpty(hashAlgorithm.Name))
                 throw HashAlgorithmNameNullOrEmpty();
             if (!signatureFormat.IsKnownValue())
@@ -850,7 +874,8 @@ namespace System.Security.Cryptography
             ReadOnlySpan<byte> signature,
             HashAlgorithmName hashAlgorithm,
             DSASignatureFormat signatureFormat
-        ) {
+        )
+        {
             Span<byte> tmp = stackalloc byte[HashBufferStackSize];
             ReadOnlySpan<byte> hash = HashSpanToTmp(data, hashAlgorithm, tmp);
 
@@ -879,7 +904,8 @@ namespace System.Security.Cryptography
             byte[] rgbHash,
             byte[] rgbSignature,
             DSASignatureFormat signatureFormat
-        ) {
+        )
+        {
             if (rgbHash == null)
                 throw new ArgumentNullException(nameof(rgbHash));
             if (rgbSignature == null)
@@ -914,7 +940,8 @@ namespace System.Security.Cryptography
             ReadOnlySpan<byte> hash,
             ReadOnlySpan<byte> signature,
             DSASignatureFormat signatureFormat
-        ) {
+        )
+        {
             if (!signatureFormat.IsKnownValue())
                 throw DSASignatureFormatHelpers.CreateUnknownValueException(signatureFormat);
 
@@ -937,7 +964,8 @@ namespace System.Security.Cryptography
             ReadOnlySpan<byte> hash,
             ReadOnlySpan<byte> signature,
             DSASignatureFormat signatureFormat
-        ) {
+        )
+        {
             // This method is expected to be overriden with better implementation
 
             byte[]? sig = this.ConvertSignatureToIeeeP1363(signatureFormat, signature);
@@ -958,7 +986,8 @@ namespace System.Security.Cryptography
             ReadOnlySpan<byte> data,
             HashAlgorithmName hashAlgorithm,
             Span<byte> tmp
-        ) {
+        )
+        {
             Debug.Assert(tmp.Length == HashBufferStackSize);
 
             if (TryHashData(data, tmp, hashAlgorithm, out int hashSize))
@@ -1006,7 +1035,8 @@ namespace System.Security.Cryptography
             PbeParameters pbeParameters,
             Span<byte> destination,
             out int bytesWritten
-        ) {
+        )
+        {
             if (pbeParameters == null)
                 throw new ArgumentNullException(nameof(pbeParameters));
 
@@ -1032,7 +1062,8 @@ namespace System.Security.Cryptography
             PbeParameters pbeParameters,
             Span<byte> destination,
             out int bytesWritten
-        ) {
+        )
+        {
             if (pbeParameters == null)
                 throw new ArgumentNullException(nameof(pbeParameters));
 
@@ -1061,7 +1092,8 @@ namespace System.Security.Cryptography
         public override bool TryExportSubjectPublicKeyInfo(
             Span<byte> destination,
             out int bytesWritten
-        ) {
+        )
+        {
             AsnWriter writer = WriteSubjectPublicKeyInfo();
             return writer.TryEncode(destination, out bytesWritten);
         }
@@ -1094,7 +1126,8 @@ namespace System.Security.Cryptography
             ReadOnlySpan<byte> passwordBytes,
             ReadOnlySpan<byte> source,
             out int bytesRead
-        ) {
+        )
+        {
             DSAKeyFormatHelper.ReadEncryptedPkcs8(
                 source,
                 passwordBytes,
@@ -1122,7 +1155,8 @@ namespace System.Security.Cryptography
             ReadOnlySpan<char> password,
             ReadOnlySpan<byte> source,
             out int bytesRead
-        ) {
+        )
+        {
             DSAKeyFormatHelper.ReadEncryptedPkcs8(
                 source,
                 password,
@@ -1149,7 +1183,8 @@ namespace System.Security.Cryptography
         public override unsafe void ImportPkcs8PrivateKey(
             ReadOnlySpan<byte> source,
             out int bytesRead
-        ) {
+        )
+        {
             DSAKeyFormatHelper.ReadPkcs8(source, out int localRead, out DSAParameters key);
 
             fixed (byte* privPin = key.X)
@@ -1171,7 +1206,8 @@ namespace System.Security.Cryptography
         public override void ImportSubjectPublicKeyInfo(
             ReadOnlySpan<byte> source,
             out int bytesRead
-        ) {
+        )
+        {
             DSAKeyFormatHelper.ReadSubjectPublicKeyInfo(
                 source,
                 out int localRead,
@@ -1334,7 +1370,8 @@ namespace System.Security.Cryptography
         public override void ImportFromEncryptedPem(
             ReadOnlySpan<char> input,
             ReadOnlySpan<char> password
-        ) {
+        )
+        {
             PemKeyImportHelpers.ImportEncryptedPem<char>(
                 input,
                 password,
@@ -1410,7 +1447,8 @@ namespace System.Security.Cryptography
         public override void ImportFromEncryptedPem(
             ReadOnlySpan<char> input,
             ReadOnlySpan<byte> passwordBytes
-        ) {
+        )
+        {
             PemKeyImportHelpers.ImportEncryptedPem<byte>(
                 input,
                 passwordBytes,

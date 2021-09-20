@@ -41,7 +41,8 @@ namespace System.Composition.Hosting.Core
             Type contractType,
             string contractName,
             IDictionary<string, object> metadataConstraints
-        ) {
+        )
+        {
             if (contractType == null)
                 throw new ArgumentNullException(nameof(contractType));
             if (metadataConstraints?.Count == 0)
@@ -154,7 +155,8 @@ namespace System.Composition.Hosting.Core
             string constraintName,
             out T constraintValue,
             out CompositionContract remainingContract
-        ) {
+        )
+        {
             if (constraintName == null)
                 throw new ArgumentNullException(nameof(constraintName));
 
@@ -192,7 +194,8 @@ namespace System.Composition.Hosting.Core
         internal static bool ConstraintEqual(
             IDictionary<string, object> first,
             IDictionary<string, object> second
-        ) {
+        )
+        {
             if (first == second)
                 return true;
 
@@ -220,7 +223,8 @@ namespace System.Composition.Hosting.Core
                     if (
                         firstItem.Value is IEnumerable firstEnumerable
                         && !(firstEnumerable is string)
-                    ) {
+                    )
+                    {
                         var secondEnumerable = secondValue as IEnumerable;
                         if (
                             secondEnumerable == null

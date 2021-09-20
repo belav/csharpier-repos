@@ -24,7 +24,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             TypeSymbol operandType,
             TypeSymbol returnType,
             MethodSymbol method = null
-        ) {
+        )
+        {
             this.Kind = kind;
             this.OperandType = operandType;
             this.ReturnType = returnType;

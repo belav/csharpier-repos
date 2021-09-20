@@ -34,7 +34,8 @@ namespace System.Web.Mvc
         internal static string ToDataTypeName(
             this DataTypeAttribute attribute,
             Func<DataTypeAttribute, Boolean> isDataType = null
-        ) {
+        )
+        {
             if (isDataType == null)
             {
                 isDataType = t => t.GetType().Equals(typeof(DataTypeAttribute));
@@ -114,7 +115,8 @@ namespace System.Web.Mvc
                 // This is a workingset size optimization.
                 if (
                     dataTypeValue != DataType.Custom && KnownDataTypeToString(dataTypeValue) == null
-                ) {
+                )
+                {
                     string name = Enum.GetName(typeof(DataType), dataTypeValue);
                     dataTypeToName[dataTypeValue] = name;
                 }

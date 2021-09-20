@@ -42,7 +42,8 @@ namespace Microsoft.CodeAnalysis.Editor
             Document document,
             int position,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var root = await document.GetSyntaxRootAsync(cancellationToken).ConfigureAwait(false);
             var token = root.FindToken(position, findInsideTrivia: true);
 

@@ -34,7 +34,8 @@ namespace IntelHardwareIntrinsicTest
                         new uint[8] { 22, 1, 50, 0, 22, 1, 50, 0 },
                         new ulong[4]
                     )
-                ) {
+                )
+                {
                     var vi1 = Unsafe.Read<Vector256<int>>(intTable.inArray1Ptr);
                     var vi2 = Unsafe.Read<Vector256<int>>(intTable.inArray2Ptr);
                     var vi3 = Avx2.Multiply(vi1, vi2);
@@ -50,7 +51,8 @@ namespace IntelHardwareIntrinsicTest
                         if (
                             intTable.inArray1[i * 2] * intTable.inArray2[i * 2]
                             != intTable.outArray[i]
-                        ) {
+                        )
+                        {
                             Console.WriteLine("AVX2 Multiply failed on int:");
                             foreach (var item in intTable.outArray)
                             {
@@ -66,7 +68,8 @@ namespace IntelHardwareIntrinsicTest
                         if (
                             uintTable.inArray1[i * 2] * uintTable.inArray2[i * 2]
                             != uintTable.outArray[i]
-                        ) {
+                        )
+                        {
                             Console.WriteLine("AVX2 Multiply failed on uint:");
                             foreach (var item in uintTable.outArray)
                             {

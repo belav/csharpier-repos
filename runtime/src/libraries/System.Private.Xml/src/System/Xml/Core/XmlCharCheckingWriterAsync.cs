@@ -22,7 +22,8 @@ namespace System.Xml
             string? pubid,
             string? sysid,
             string? subset
-        ) {
+        )
+        {
             if (_checkNames)
             {
                 ValidateQName(name);
@@ -83,7 +84,8 @@ namespace System.Xml
             string? prefix,
             string localName,
             string? ns
-        ) {
+        )
+        {
             if (_checkNames)
             {
                 if (localName == null || localName.Length == 0)

@@ -24,7 +24,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.Symbols.Source
             Compilation compilation,
             ISymbol symbol,
             int expectedNumber
-        ) {
+        )
+        {
             var declaringReferences = symbol.DeclaringSyntaxReferences;
             Assert.Equal(expectedNumber, declaringReferences.Length);
 
@@ -62,7 +63,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.Symbols.Source
             Compilation compilation,
             ISymbol symbol,
             int expectedNumber
-        ) {
+        )
+        {
             var nodes = CheckDeclaringSyntaxNodes(compilation, symbol, expectedNumber);
 
             var meth = symbol as IMethodSymbol;
@@ -93,7 +95,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.Symbols.Source
             ISymbol symbol,
             int expectedNumber,
             SyntaxKind expectedSyntaxKind
-        ) {
+        )
+        {
             var declaringReferences = symbol.DeclaringSyntaxReferences;
             Assert.Equal(expectedNumber, declaringReferences.Length);
 
@@ -116,7 +119,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.Symbols.Source
                 if (
                     symbol.Kind == SymbolKind.Namespace
                     && ((INamespaceSymbol)symbol).IsGlobalNamespace
-                ) {
+                )
+                {
                     Assert.True(symbol.IsImplicitlyDeclared);
                 }
                 else
@@ -138,7 +142,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.Symbols.Source
             Symbol symbol,
             CSharpCompilation compilation,
             params SyntaxNode[] expectedSyntaxNodes
-        ) {
+        )
+        {
             int expectedNumber = expectedSyntaxNodes.Length;
             var declaringReferences = symbol.DeclaringSyntaxReferences;
             Assert.Equal(expectedNumber, declaringReferences.Length);
@@ -395,7 +400,8 @@ class C1 {
             SemanticModel model,
             ILocalSymbol local,
             AnonymousObjectCreationExpressionSyntax anonObjectCreation
-        ) {
+        )
+        {
             var localType = local.Type;
             Assert.True(localType.IsAnonymousType);
 

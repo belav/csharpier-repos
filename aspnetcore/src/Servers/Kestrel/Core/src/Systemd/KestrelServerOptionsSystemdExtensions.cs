@@ -39,14 +39,16 @@ namespace Microsoft.AspNetCore.Hosting
         public static KestrelServerOptions UseSystemd(
             this KestrelServerOptions options,
             Action<ListenOptions> configure
-        ) {
+        )
+        {
             if (
                 string.Equals(
                     Environment.ProcessId.ToString(CultureInfo.InvariantCulture),
                     Environment.GetEnvironmentVariable(ListenPidEnvVar),
                     StringComparison.Ordinal
                 )
-            ) {
+            )
+            {
                 // This matches sd_listen_fds behavior that requires %LISTEN_FDS% to be present and in range [1;INT_MAX-SD_LISTEN_FDS_START]
                 if (
                     int.TryParse(
@@ -57,12 +59,14 @@ namespace Microsoft.AspNetCore.Hosting
                     )
                     && listenFds > 0
                     && listenFds <= int.MaxValue - SdListenFdsStart
-                ) {
+                )
+                {
                     for (
                         var handle = SdListenFdsStart;
                         handle < SdListenFdsStart + listenFds;
                         ++handle
-                    ) {
+                    )
+                    {
                         options.ListenHandle((ulong)handle, configure);
                     }
                 }

@@ -728,7 +728,8 @@ namespace Microsoft.Extensions.Logging
         private static bool IsLogLevelEnabledCore(
             [NotNullWhen(true)] ILogger? logger,
             LogLevel level
-        ) {
+        )
+        {
             return (logger != null && logger.IsEnabled(level));
         }
 
@@ -736,7 +737,8 @@ namespace Microsoft.Extensions.Logging
             this ILogger logger,
             Guid keyId,
             DateTimeOffset expirationDate
-        ) {
+        )
+        {
             _usingFallbackKeyWithExpirationAsDefaultKey(logger, keyId, expirationDate, null);
         }
 
@@ -749,7 +751,8 @@ namespace Microsoft.Extensions.Logging
             this ILogger logger,
             string hashAlgorithm,
             string? hashAlgorithmProvider
-        ) {
+        )
+        {
             _openingCNGAlgorithmFromProviderWithHMAC(
                 logger,
                 hashAlgorithm,
@@ -762,7 +765,8 @@ namespace Microsoft.Extensions.Logging
             this ILogger logger,
             string encryptionAlgorithm,
             string? encryptionAlgorithmProvider
-        ) {
+        )
+        {
             _openingCNGAlgorithmFromProviderWithChainingModeCBC(
                 logger,
                 encryptionAlgorithm,
@@ -775,14 +779,16 @@ namespace Microsoft.Extensions.Logging
             this ILogger logger,
             Guid keyIdFromPayload,
             string p0
-        ) {
+        )
+        {
             _performingUnprotectOperationToKeyWithPurposes(logger, keyIdFromPayload, p0, null);
         }
 
         public static void KeyWasNotFoundInTheKeyRingUnprotectOperationCannotProceed(
             this ILogger logger,
             Guid keyIdFromPayload
-        ) {
+        )
+        {
             _keyWasNotFoundInTheKeyRingUnprotectOperationCannotProceed(
                 logger,
                 keyIdFromPayload,
@@ -793,7 +799,8 @@ namespace Microsoft.Extensions.Logging
         public static void KeyWasRevokedCallerRequestedUnprotectOperationProceedRegardless(
             this ILogger logger,
             Guid keyIdFromPayload
-        ) {
+        )
+        {
             _keyWasRevokedCallerRequestedUnprotectOperationProceedRegardless(
                 logger,
                 keyIdFromPayload,
@@ -804,7 +811,8 @@ namespace Microsoft.Extensions.Logging
         public static void KeyWasRevokedUnprotectOperationCannotProceed(
             this ILogger logger,
             Guid keyIdFromPayload
-        ) {
+        )
+        {
             _keyWasRevokedUnprotectOperationCannotProceed(logger, keyIdFromPayload, null);
         }
 
@@ -812,7 +820,8 @@ namespace Microsoft.Extensions.Logging
             this ILogger logger,
             string encryptionAlgorithm,
             string? encryptionAlgorithmProvider
-        ) {
+        )
+        {
             _openingCNGAlgorithmFromProviderWithChainingModeGCM(
                 logger,
                 encryptionAlgorithm,
@@ -836,7 +845,8 @@ namespace Microsoft.Extensions.Logging
             Guid keyId,
             string p0,
             Exception exception
-        ) {
+        )
+        {
             _keyIsIneligibleToBeTheDefaultKeyBecauseItsMethodFailed(logger, keyId, p0, exception);
         }
 
@@ -844,7 +854,8 @@ namespace Microsoft.Extensions.Logging
             this ILogger logger,
             Guid keyId,
             DateTimeOffset expirationDate
-        ) {
+        )
+        {
             _consideringKeyWithExpirationDateAsDefaultKey(logger, keyId, expirationDate, null);
         }
 
@@ -856,7 +867,8 @@ namespace Microsoft.Extensions.Logging
         public static void UnknownElementWithNameFoundInKeyringSkipping(
             this ILogger logger,
             XName name
-        ) {
+        )
+        {
             _unknownElementWithNameFoundInKeyringSkipping(logger, name, null);
         }
 
@@ -868,7 +880,8 @@ namespace Microsoft.Extensions.Logging
         public static void TriedToProcessRevocationOfKeyButNoSuchKeyWasFound(
             this ILogger logger,
             Guid revokedKeyId
-        ) {
+        )
+        {
             _triedToProcessRevocationOfKeyButNoSuchKeyWasFound(logger, revokedKeyId, null);
         }
 
@@ -880,7 +893,8 @@ namespace Microsoft.Extensions.Logging
         public static void FoundRevocationOfAllKeysCreatedPriorTo(
             this ILogger logger,
             DateTimeOffset massRevocationDate
-        ) {
+        )
+        {
             _foundRevocationOfAllKeysCreatedPriorTo(logger, massRevocationDate, null);
         }
 
@@ -893,7 +907,8 @@ namespace Microsoft.Extensions.Logging
             this ILogger logger,
             XElement revocationElement,
             Exception exception
-        ) {
+        )
+        {
             _exceptionWhileProcessingRevocationElement(logger, revocationElement, exception);
         }
 
@@ -901,14 +916,16 @@ namespace Microsoft.Extensions.Logging
             this ILogger logger,
             DateTimeOffset revocationDate,
             string? reason
-        ) {
+        )
+        {
             _revokingAllKeysAsOfForReason(logger, revocationDate, reason, null);
         }
 
         public static void KeyCacheExpirationTokenTriggeredByOperation(
             this ILogger logger,
             string opName
-        ) {
+        )
+        {
             _keyCacheExpirationTokenTriggeredByOperation(logger, opName, null);
         }
 
@@ -916,7 +933,8 @@ namespace Microsoft.Extensions.Logging
             this ILogger logger,
             XElement keyElement,
             Exception exception
-        ) {
+        )
+        {
             _anExceptionOccurredWhileProcessingTheKeyElement(logger, keyElement, exception);
         }
 
@@ -924,14 +942,16 @@ namespace Microsoft.Extensions.Logging
             this ILogger logger,
             XElement keyElement,
             Exception exception
-        ) {
+        )
+        {
             _anExceptionOccurredWhileProcessingTheKeyElementDebug(logger, keyElement, exception);
         }
 
         public static void EncryptingToWindowsDPAPIForCurrentUserAccount(
             this ILogger logger,
             string name
-        ) {
+        )
+        {
             _encryptingToWindowsDPAPIForCurrentUserAccount(logger, name, null);
         }
 
@@ -939,7 +959,8 @@ namespace Microsoft.Extensions.Logging
             this ILogger logger,
             string thumbprint,
             Exception exception
-        ) {
+        )
+        {
             _anErrorOccurredWhileEncryptingToX509CertificateWithThumbprint(
                 logger,
                 thumbprint,
@@ -950,7 +971,8 @@ namespace Microsoft.Extensions.Logging
         public static void EncryptingToX509CertificateWithThumbprint(
             this ILogger logger,
             string thumbprint
-        ) {
+        )
+        {
             _encryptingToX509CertificateWithThumbprint(logger, thumbprint, null);
         }
 
@@ -958,7 +980,8 @@ namespace Microsoft.Extensions.Logging
             this ILogger logger,
             string thumbprint,
             Exception exception
-        ) {
+        )
+        {
             _exceptionOccurredWhileTryingToResolveCertificateWithThumbprint(
                 logger,
                 thumbprint,
@@ -970,7 +993,8 @@ namespace Microsoft.Extensions.Logging
             this ILogger logger,
             Guid defaultKeyId,
             string p0
-        ) {
+        )
+        {
             _performingProtectOperationToKeyWithPurposes(logger, defaultKeyId, p0, null);
         }
 
@@ -978,7 +1002,8 @@ namespace Microsoft.Extensions.Logging
             this ILogger logger,
             Guid keyId,
             string assemblyQualifiedName
-        ) {
+        )
+        {
             _descriptorDeserializerTypeForKeyIs(logger, keyId, assemblyQualifiedName, null);
         }
 
@@ -990,14 +1015,16 @@ namespace Microsoft.Extensions.Logging
         public static void NoKeyEscrowSinkFoundNotWritingKeyToEscrow(
             this ILogger logger,
             Guid keyId
-        ) {
+        )
+        {
             _noKeyEscrowSinkFoundNotWritingKeyToEscrow(logger, keyId, null);
         }
 
         public static void NoXMLEncryptorConfiguredKeyMayBePersistedToStorageInUnencryptedForm(
             this ILogger logger,
             Guid keyId
-        ) {
+        )
+        {
             _noXMLEncryptorConfiguredKeyMayBePersistedToStorageInUnencryptedForm(
                 logger,
                 keyId,
@@ -1010,7 +1037,8 @@ namespace Microsoft.Extensions.Logging
             Guid keyId,
             DateTimeOffset revocationDate,
             string? reason
-        ) {
+        )
+        {
             _revokingKeyForReason(logger, keyId, revocationDate, reason, null);
         }
 
@@ -1023,7 +1051,8 @@ namespace Microsoft.Extensions.Logging
             this ILogger logger,
             string friendlyName,
             string newFriendlyName
-        ) {
+        )
+        {
             _nameIsNotSafeFileName(logger, friendlyName, newFriendlyName, null);
         }
 
@@ -1037,7 +1066,8 @@ namespace Microsoft.Extensions.Logging
             this ILogger logger,
             RegistryKey regKey,
             string valueName
-        ) {
+        )
+        {
             if (_readingDataFromRegistryKeyValue != null)
             {
                 _readingDataFromRegistryKeyValue(logger, regKey, valueName, null);
@@ -1048,21 +1078,24 @@ namespace Microsoft.Extensions.Logging
             this ILogger logger,
             string friendlyName,
             string newFriendlyName
-        ) {
+        )
+        {
             _nameIsNotSafeRegistryValueName(logger, friendlyName, newFriendlyName, null);
         }
 
         public static void DecryptingSecretElementUsingWindowsDPAPING(
             this ILogger logger,
             string? protectionDescriptorRule
-        ) {
+        )
+        {
             _decryptingSecretElementUsingWindowsDPAPING(logger, protectionDescriptorRule, null);
         }
 
         public static void EncryptingToWindowsDPAPINGUsingProtectionDescriptorRule(
             this ILogger logger,
             string protectionDescriptorRuleString
-        ) {
+        )
+        {
             _encryptingToWindowsDPAPINGUsingProtectionDescriptorRule(
                 logger,
                 protectionDescriptorRuleString,
@@ -1073,7 +1106,8 @@ namespace Microsoft.Extensions.Logging
         public static void ExceptionOccurredTryingToDecryptElement(
             this ILogger logger,
             Exception exception
-        ) {
+        )
+        {
             _exceptionOccurredTryingToDecryptElement(logger, exception);
         }
 
@@ -1095,14 +1129,16 @@ namespace Microsoft.Extensions.Logging
         public static void ErrorOccurredWhileRefreshingKeyRing(
             this ILogger logger,
             Exception exception
-        ) {
+        )
+        {
             _errorOccurredWhileRefreshingKeyRing(logger, exception);
         }
 
         public static void ErrorOccurredWhileReadingKeyRing(
             this ILogger logger,
             Exception exception
-        ) {
+        )
+        {
             _errorOccurredWhileReadingKeyRing(logger, exception);
         }
 
@@ -1134,7 +1170,8 @@ namespace Microsoft.Extensions.Logging
         public static void ErrorOccurredWhileEncryptingToWindowsDPAPI(
             this ILogger logger,
             Exception exception
-        ) {
+        )
+        {
             _errorOccurredWhileEncryptingToWindowsDPAPI(logger, exception);
         }
 
@@ -1146,13 +1183,15 @@ namespace Microsoft.Extensions.Logging
         public static void ErrorOccurredWhileEncryptingToWindowsDPAPING(
             this ILogger logger,
             Exception exception
-        ) {
+        )
+        {
             _errorOccurredWhileEncryptingToWindowsDPAPING(logger, exception);
         }
 
         public static void PolicyResolutionStatesThatANewKeyShouldBeAddedToTheKeyRing(
             this ILogger logger
-        ) {
+        )
+        {
             _policyResolutionStatesThatANewKeyShouldBeAddedToTheKeyRing(logger, null);
         }
 
@@ -1162,7 +1201,8 @@ namespace Microsoft.Extensions.Logging
             DateTimeOffset creationDate,
             DateTimeOffset activationDate,
             DateTimeOffset expirationDate
-        ) {
+        )
+        {
             _creatingKey(logger, keyId, creationDate, activationDate, expirationDate, null);
         }
 
@@ -1184,7 +1224,8 @@ namespace Microsoft.Extensions.Logging
         public static void UsingProfileAsKeyRepositoryWithDPAPI(
             this ILogger logger,
             string fullName
-        ) {
+        )
+        {
             _usingProfileAsKeyRepositoryWithDPAPI(logger, fullName, null);
         }
 
@@ -1201,14 +1242,16 @@ namespace Microsoft.Extensions.Logging
         public static void KeyRingFailedToLoadOnStartup(
             this ILogger logger,
             Exception innerException
-        ) {
+        )
+        {
             _keyRingFailedToLoadOnStartup(logger, innerException);
         }
 
         public static void UsingEphemeralFileSystemLocationInContainer(
             this ILogger logger,
             string path
-        ) {
+        )
+        {
             _usingEphemeralFileSystemLocationInContainer(logger, path, null);
         }
     }

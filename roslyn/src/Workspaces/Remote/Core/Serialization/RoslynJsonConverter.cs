@@ -134,7 +134,8 @@ namespace Microsoft.CodeAnalysis.Remote
                 JsonWriter writer,
                 TextSpan span,
                 JsonSerializer serializer
-            ) {
+            )
+            {
                 writer.WriteStartObject();
 
                 writer.WritePropertyName(nameof(TextSpan.Start));
@@ -168,7 +169,8 @@ namespace Microsoft.CodeAnalysis.Remote
                 JsonWriter writer,
                 TextChange change,
                 JsonSerializer serializer
-            ) {
+            )
+            {
                 var span = change.Span;
 
                 writer.WriteStartObject();
@@ -215,7 +217,8 @@ namespace Microsoft.CodeAnalysis.Remote
             protected override PinnedSolutionInfo ReadValue(
                 JsonReader reader,
                 JsonSerializer serializer
-            ) {
+            )
+            {
                 Contract.ThrowIfFalse(reader.TokenType == JsonToken.StartObject);
 
                 // all integer is long
@@ -239,7 +242,8 @@ namespace Microsoft.CodeAnalysis.Remote
                 JsonWriter writer,
                 PinnedSolutionInfo scope,
                 JsonSerializer serializer
-            ) {
+            )
+            {
                 writer.WriteStartObject();
 
                 writer.WritePropertyName("scopeId");

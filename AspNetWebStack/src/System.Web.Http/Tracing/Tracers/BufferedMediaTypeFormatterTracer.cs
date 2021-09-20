@@ -68,7 +68,8 @@ namespace System.Web.Http.Tracing.Tracers
             Type type,
             HttpRequestMessage request,
             MediaTypeHeaderValue mediaType
-        ) {
+        )
+        {
             return _innerTracer.GetPerRequestFormatterInstance(type, request, mediaType);
         }
 
@@ -76,7 +77,8 @@ namespace System.Web.Http.Tracing.Tracers
             Type type,
             HttpContentHeaders headers,
             MediaTypeHeaderValue mediaType
-        ) {
+        )
+        {
             _innerTracer.SetDefaultContentHeaders(type, headers, mediaType);
         }
 
@@ -85,7 +87,8 @@ namespace System.Web.Http.Tracing.Tracers
             Stream readStream,
             HttpContent content,
             IFormatterLogger formatterLogger
-        ) {
+        )
+        {
             return ReadFromStreamCore(type, readStream, content, formatterLogger);
         }
 
@@ -95,7 +98,8 @@ namespace System.Web.Http.Tracing.Tracers
             HttpContent content,
             IFormatterLogger formatterLogger,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             return ReadFromStreamCore(type, stream, content, formatterLogger, cancellationToken);
         }
 
@@ -105,7 +109,8 @@ namespace System.Web.Http.Tracing.Tracers
             HttpContent content,
             IFormatterLogger formatterLogger,
             CancellationToken? cancellationToken = null
-        ) {
+        )
+        {
             BufferedMediaTypeFormatter innerFormatter =
                 InnerFormatter as BufferedMediaTypeFormatter;
             HttpContentHeaders contentHeaders = content == null ? null : content.Headers;
@@ -169,7 +174,8 @@ namespace System.Web.Http.Tracing.Tracers
             object value,
             Stream writeStream,
             HttpContent content
-        ) {
+        )
+        {
             WriteToStreamCore(type, value, writeStream, content);
         }
 
@@ -179,7 +185,8 @@ namespace System.Web.Http.Tracing.Tracers
             Stream writeStream,
             HttpContent content,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             WriteToStreamCore(type, value, writeStream, content, cancellationToken);
         }
 
@@ -189,7 +196,8 @@ namespace System.Web.Http.Tracing.Tracers
             Stream writeStream,
             HttpContent content,
             CancellationToken? cancellationToken = null
-        ) {
+        )
+        {
             BufferedMediaTypeFormatter innerFormatter =
                 InnerFormatter as BufferedMediaTypeFormatter;
 

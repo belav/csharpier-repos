@@ -32,7 +32,8 @@ namespace BasicWebSite.Formatters
         public override async Task WriteResponseBodyAsync(
             OutputFormatterWriteContext context,
             Encoding selectedEncoding
-        ) {
+        )
+        {
             var contact = (Contact)context.Object;
 
             var builder = new StringBuilder();

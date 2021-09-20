@@ -11,7 +11,8 @@ namespace System.CommandLine.Binding
             IValueDescriptor valueDescriptor,
             BindingContext? bindingContext,
             out object? boundValue
-        ) {
+        )
+        {
             if (!string.IsNullOrEmpty(valueDescriptor.ValueName))
             {
                 CommandResult? commandResult = bindingContext?.ParseResult.CommandResult;
@@ -26,7 +27,8 @@ namespace System.CommandLine.Binding
 
                     if (
                         commandResult.TryGetValueForArgument(valueDescriptor, out var argumentValue)
-                    ) {
+                    )
+                    {
                         boundValue = argumentValue;
                         return true;
                     }

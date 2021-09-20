@@ -38,7 +38,8 @@ namespace Microsoft.CSharp.RuntimeBinder.ComInterop
             DynamicMetaObject instance,
             out DynamicMetaObject result,
             bool delayInvocation
-        ) {
+        )
+        {
             Requires.NotNull(binder, nameof(binder));
             Requires.NotNull(instance, nameof(instance));
 
@@ -74,7 +75,8 @@ namespace Microsoft.CSharp.RuntimeBinder.ComInterop
             DynamicMetaObject instance,
             DynamicMetaObject value,
             out DynamicMetaObject result
-        ) {
+        )
+        {
             Requires.NotNull(binder, nameof(binder));
             Requires.NotNull(instance, nameof(instance));
             Requires.NotNull(value, nameof(value));
@@ -103,7 +105,8 @@ namespace Microsoft.CSharp.RuntimeBinder.ComInterop
             DynamicMetaObject instance,
             DynamicMetaObject[] args,
             out DynamicMetaObject result
-        ) {
+        )
+        {
             Requires.NotNull(binder, nameof(binder));
             Requires.NotNull(instance, nameof(instance));
             Requires.NotNull(args, nameof(args));
@@ -132,7 +135,8 @@ namespace Microsoft.CSharp.RuntimeBinder.ComInterop
             DynamicMetaObject instance,
             DynamicMetaObject[] args,
             out DynamicMetaObject result
-        ) {
+        )
+        {
             Requires.NotNull(binder, nameof(binder));
             Requires.NotNull(instance, nameof(instance));
             Requires.NotNull(args, nameof(args));
@@ -161,7 +165,8 @@ namespace Microsoft.CSharp.RuntimeBinder.ComInterop
             DynamicMetaObject instance,
             DynamicMetaObject[] args,
             out DynamicMetaObject result
-        ) {
+        )
+        {
             Requires.NotNull(binder, nameof(binder));
             Requires.NotNull(instance, nameof(instance));
             Requires.NotNull(args, nameof(args));
@@ -192,7 +197,8 @@ namespace Microsoft.CSharp.RuntimeBinder.ComInterop
             DynamicMetaObject[] args,
             DynamicMetaObject value,
             out DynamicMetaObject result
-        ) {
+        )
+        {
             Requires.NotNull(binder, nameof(binder));
             Requires.NotNull(instance, nameof(instance));
             Requires.NotNull(args, nameof(args));
@@ -219,7 +225,8 @@ namespace Microsoft.CSharp.RuntimeBinder.ComInterop
             ConvertBinder binder,
             DynamicMetaObject instance,
             out DynamicMetaObject result
-        ) {
+        )
+        {
             Requires.NotNull(binder, nameof(binder));
             Requires.NotNull(instance, nameof(instance));
 
@@ -276,7 +283,8 @@ namespace Microsoft.CSharp.RuntimeBinder.ComInterop
         internal static IList<KeyValuePair<string, object>> GetDynamicDataMembers(
             object value,
             IEnumerable<string> names
-        ) {
+        )
+        {
             Requires.NotNull(value, nameof(value));
             Requires.Condition(IsComObject(value), nameof(value));
 
@@ -333,10 +341,8 @@ namespace Microsoft.CSharp.RuntimeBinder.ComInterop
             private readonly GetMemberBinder _originalBinder;
             internal bool _canReturnCallables;
 
-            internal ComGetMemberBinder(
-                GetMemberBinder originalBinder,
-                bool canReturnCallables
-            ) : base(originalBinder.Name, originalBinder.IgnoreCase)
+            internal ComGetMemberBinder(GetMemberBinder originalBinder, bool canReturnCallables)
+                : base(originalBinder.Name, originalBinder.IgnoreCase)
             {
                 _originalBinder = originalBinder;
                 _canReturnCallables = canReturnCallables;
@@ -345,7 +351,8 @@ namespace Microsoft.CSharp.RuntimeBinder.ComInterop
             public override DynamicMetaObject FallbackGetMember(
                 DynamicMetaObject target,
                 DynamicMetaObject errorSuggestion
-            ) {
+            )
+            {
                 return _originalBinder.FallbackGetMember(target, errorSuggestion);
             }
 

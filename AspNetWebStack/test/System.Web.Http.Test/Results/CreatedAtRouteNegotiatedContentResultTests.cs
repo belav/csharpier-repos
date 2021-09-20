@@ -616,7 +616,8 @@ namespace System.Web.Http.Results
                         expectedInputFormatter,
                         contentNegotiator
                     )
-                ) {
+                )
+                {
                     controller.Configuration = configuration;
                     controller.Request = expectedRequest;
                     controller.Url = urlFactory;
@@ -706,7 +707,8 @@ namespace System.Web.Http.Results
                     CreateFormatter(),
                     CreateDummyContentNegotiator()
                 )
-            ) {
+            )
+            {
                 controller.Configuration = configuration;
 
                 using (HttpRequestMessage request = CreateRequest())
@@ -751,7 +753,8 @@ namespace System.Web.Http.Results
                     CreateFormatter(),
                     CreateDummyContentNegotiator()
                 )
-            ) {
+            )
+            {
                 controller.Configuration = configuration;
                 CreatedAtRouteNegotiatedContentResult<object> result = CreateProductUnderTest(
                     routeName,
@@ -808,7 +811,8 @@ namespace System.Web.Http.Results
                         expectedFormatter,
                         contentNegotiator
                     )
-                ) {
+                )
+                {
                     controller.Configuration = lateConfiguration;
 
                     // Act
@@ -920,7 +924,8 @@ namespace System.Web.Http.Results
                     CreateFormatter(),
                     CreateDummyContentNegotiator()
                 )
-            ) {
+            )
+            {
                 controller.Configuration = configuration;
 
                 CreatedAtRouteNegotiatedContentResult<object> result = CreateProductUnderTest(
@@ -985,7 +990,8 @@ namespace System.Web.Http.Results
                         CreateFormatter(),
                         contentNegotiator
                     )
-                ) {
+                )
+                {
                     controller.Configuration = lateConfiguration;
 
                     // Act
@@ -1080,7 +1086,8 @@ namespace System.Web.Http.Results
                     CreateFormatter(),
                     CreateDummyContentNegotiator()
                 )
-            ) {
+            )
+            {
                 controller.Configuration = configuration;
                 Assert.Null(controller.Request);
 
@@ -1179,7 +1186,8 @@ namespace System.Web.Http.Results
         private static HttpConfiguration CreateConfiguration(
             MediaTypeFormatter formatter,
             IContentNegotiator contentNegotiator
-        ) {
+        )
+        {
             HttpConfiguration configuration = new HttpConfiguration();
             configuration.Formatters.Clear();
             configuration.Formatters.Add(formatter);
@@ -1235,7 +1243,8 @@ namespace System.Web.Http.Results
             IContentNegotiator contentNegotiator,
             HttpRequestMessage request,
             IEnumerable<MediaTypeFormatter> formatters
-        ) {
+        )
+        {
             return new CreatedAtRouteNegotiatedContentResult<object>(
                 routeName,
                 routeValues,
@@ -1252,7 +1261,8 @@ namespace System.Web.Http.Results
             IDictionary<string, object> routeValues,
             object content,
             ApiController controller
-        ) {
+        )
+        {
             return new CreatedAtRouteNegotiatedContentResult<object>(
                 routeName,
                 routeValues,

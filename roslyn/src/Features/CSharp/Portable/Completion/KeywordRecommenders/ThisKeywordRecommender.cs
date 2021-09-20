@@ -21,7 +21,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Completion.KeywordRecommenders
             int position,
             CSharpSyntaxContext context,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             return IsInstanceExpressionOrStatement(context)
                 || IsThisParameterModifierContext(context)
                 || IsConstructorInitializerContext(context);
@@ -48,7 +49,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Completion.KeywordRecommenders
                 token.Kind() == SyntaxKind.ColonToken
                 && token.Parent is ConstructorInitializerSyntax
                 && token.Parent.IsParentKind(SyntaxKind.ConstructorDeclaration)
-            ) {
+            )
+            {
                 var constructor = token.GetAncestor<ConstructorDeclarationSyntax>();
                 if (constructor.Modifiers.Any(SyntaxKind.StaticKeyword))
                 {
@@ -71,16 +73,19 @@ namespace Microsoft.CodeAnalysis.CSharp.Completion.KeywordRecommenders
                     out var parameterIndex,
                     out var previousModifier
                 )
-            ) {
+            )
+            {
                 if (
                     previousModifier == SyntaxKind.None
                     || previousModifier == SyntaxKind.RefKeyword
                     || previousModifier == SyntaxKind.InKeyword
-                ) {
+                )
+                {
                     if (
                         parameterIndex == 0
                         && context.SyntaxTree.IsPossibleExtensionMethodContext(context.LeftToken)
-                    ) {
+                    )
+                    {
                         return true;
                     }
                 }
@@ -92,7 +97,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Completion.KeywordRecommenders
         protected override bool ShouldPreselect(
             CSharpSyntaxContext context,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var outerType = context.SemanticModel.GetEnclosingNamedType(
                 context.Position,
                 cancellationToken

@@ -88,7 +88,8 @@ namespace System.Diagnostics.Tests
                     Console.OpenStandardInput(),
                     Encoding.GetEncoding(inputEncoding)
                 )
-            ) {
+            )
+            {
                 line = inputReader.ReadLine();
             }
 

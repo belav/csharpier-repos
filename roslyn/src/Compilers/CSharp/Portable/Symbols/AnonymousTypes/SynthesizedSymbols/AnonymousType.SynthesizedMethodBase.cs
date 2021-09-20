@@ -161,14 +161,16 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
 
             internal sealed override bool IsMetadataNewSlot(
                 bool ignoreInterfaceImplementationChanges = false
-            ) {
+            )
+            {
                 return false;
             }
 
             internal override void AddSynthesizedAttributes(
                 PEModuleBuilder moduleBuilder,
                 ref ArrayBuilder<SynthesizedAttributeData> attributes
-            ) {
+            )
+            {
                 base.AddSynthesizedAttributes(moduleBuilder, ref attributes);
 
                 AddSynthesizedAttribute(
@@ -229,7 +231,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             protected SyntheticBoundNodeFactory CreateBoundNodeFactory(
                 TypeCompilationState compilationState,
                 BindingDiagnosticBag diagnostics
-            ) {
+            )
+            {
                 var F = new SyntheticBoundNodeFactory(
                     this,
                     this.GetNonNullSyntaxNode(),
@@ -243,7 +246,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             internal sealed override int CalculateLocalSyntaxOffset(
                 int localPosition,
                 SyntaxTree localTree
-            ) {
+            )
+            {
                 throw ExceptionUtilities.Unreachable;
             }
         }

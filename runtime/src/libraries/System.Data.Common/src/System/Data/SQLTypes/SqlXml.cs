@@ -114,7 +114,8 @@ namespace System.Data.SqlTypes
             Stream stream,
             bool closeInput = false,
             bool throwTargetInvocationExceptions = false
-        ) {
+        )
+        {
             // Call the internal delegate
             XmlReaderSettings settingsToUse = closeInput
                 ? s_defaultXmlReaderSettingsCloseInput

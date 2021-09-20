@@ -54,7 +54,8 @@ namespace System.Text.Json.Serialization.Tests
             public override JsonConverter CreateConverter(
                 Type typeToConvert,
                 JsonSerializerOptions options
-            ) {
+            )
+            {
                 Options = options;
                 return new SimpleConverter();
             }
@@ -65,7 +66,8 @@ namespace System.Text.Json.Serialization.Tests
                     ref Utf8JsonReader reader,
                     Type typeToConvert,
                     JsonSerializerOptions options
-                ) {
+                )
+                {
                     throw new NotImplementedException();
                 }
 
@@ -83,7 +85,8 @@ namespace System.Text.Json.Serialization.Tests
                 ref Utf8JsonReader reader,
                 Type typeToConvert,
                 JsonSerializerOptions options
-            ) {
+            )
+            {
                 Assert.Equal(JsonTokenType.StartObject, reader.TokenType);
 
                 bool rc = reader.Read();
@@ -98,7 +101,8 @@ namespace System.Text.Json.Serialization.Tests
                 Utf8JsonWriter writer,
                 Customer value,
                 JsonSerializerOptions options
-            ) {
+            )
+            {
                 throw new NotSupportedException();
             }
         }
@@ -144,7 +148,8 @@ namespace System.Text.Json.Serialization.Tests
                 ref Utf8JsonReader reader,
                 Type typeToConvert,
                 JsonSerializerOptions options
-            ) {
+            )
+            {
                 if (reader.TokenType == JsonTokenType.True)
                 {
                     return true;
@@ -162,7 +167,8 @@ namespace System.Text.Json.Serialization.Tests
                 Utf8JsonWriter writer,
                 object value,
                 JsonSerializerOptions options
-            ) {
+            )
+            {
                 throw new NotImplementedException();
             }
         }

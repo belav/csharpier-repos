@@ -122,12 +122,14 @@ namespace System.Net
             ReadOnlySpan<byte> buffer,
             Span<byte> address,
             out uint scope
-        ) {
+        )
+        {
             uint localScope;
             Interop.Error err;
             fixed (byte* rawAddress = &MemoryMarshal.GetReference(buffer))fixed (
                 byte* ipAddress = &MemoryMarshal.GetReference(address)
-            ) {
+            )
+            {
                 err = Interop.Sys.GetIPv6Address(
                     rawAddress,
                     buffer.Length,
@@ -171,7 +173,8 @@ namespace System.Net
             byte* address,
             int addressLength,
             uint scope
-        ) {
+        )
+        {
             Interop.Error err;
             fixed (byte* rawAddress = buffer)
             {

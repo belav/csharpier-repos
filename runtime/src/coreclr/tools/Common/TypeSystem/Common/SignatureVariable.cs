@@ -63,7 +63,8 @@ namespace Internal.TypeSystem
         public override TypeDesc InstantiateSignature(
             Instantiation typeInstantiation,
             Instantiation methodInstantiation
-        ) {
+        )
+        {
             return typeInstantiation.IsNull ? this : typeInstantiation[Index];
         }
     }
@@ -98,7 +99,8 @@ namespace Internal.TypeSystem
         public override TypeDesc InstantiateSignature(
             Instantiation typeInstantiation,
             Instantiation methodInstantiation
-        ) {
+        )
+        {
             return methodInstantiation.IsNull ? this : methodInstantiation[Index];
         }
     }

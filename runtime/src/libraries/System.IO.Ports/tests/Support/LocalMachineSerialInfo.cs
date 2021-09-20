@@ -18,7 +18,8 @@ namespace Legacy.Support
             string secondAvailablePortName,
             string loopBackPortName,
             bool nullModemPresent
-        ) {
+        )
+        {
             _firstAvailablePortName = firstAvailablePortName;
             _secondAvailablePortName = secondAvailablePortName;
             _loopbackPortName = loopBackPortName;

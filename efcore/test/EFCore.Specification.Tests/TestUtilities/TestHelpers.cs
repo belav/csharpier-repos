@@ -49,7 +49,8 @@ namespace Microsoft.EntityFrameworkCore.TestUtilities
         private static IServiceProvider CreateServiceProvider(
             IServiceCollection customServices,
             Func<IServiceCollection, IServiceCollection> addProviderServices
-        ) {
+        )
+        {
             var services = new ServiceCollection();
             addProviderServices(services);
 
@@ -157,7 +158,8 @@ namespace Microsoft.EntityFrameworkCore.TestUtilities
             ModelBuilder modelBuilder,
             bool designTime = false,
             bool skipValidation = false
-        ) {
+        )
+        {
             var contextServices = CreateContextServices();
 
             var modelRuntimeInitializer =
@@ -182,7 +184,8 @@ namespace Microsoft.EntityFrameworkCore.TestUtilities
         public ModelBuilder CreateConventionBuilder(
             DiagnosticsLogger<DbLoggerCategory.Model> modelLogger,
             DiagnosticsLogger<DbLoggerCategory.Model.Validation> validationLogger
-        ) {
+        )
+        {
             var contextServices = CreateContextServices(
                 new ServiceCollection().AddScoped<IDiagnosticsLogger<DbLoggerCategory.Model>>(
                         _ => modelLogger
@@ -204,7 +207,8 @@ namespace Microsoft.EntityFrameworkCore.TestUtilities
         public ConventionSet CreateConventionalConventionSet(
             DiagnosticsLogger<DbLoggerCategory.Model> modelLogger,
             DiagnosticsLogger<DbLoggerCategory.Model.Validation> validationLogger
-        ) {
+        )
+        {
             var contextServices = CreateContextServices(
                 new ServiceCollection().AddScoped<IDiagnosticsLogger<DbLoggerCategory.Model>>(
                         _ => modelLogger
@@ -257,7 +261,8 @@ namespace Microsoft.EntityFrameworkCore.TestUtilities
             Func<T, object> elementSorter,
             Action<T, T> elementAsserter,
             bool verifyOrdered
-        ) {
+        )
+        {
             Assert.Equal(expected.Count, actual.Count);
 
             if (
@@ -266,7 +271,8 @@ namespace Microsoft.EntityFrameworkCore.TestUtilities
                 && expected.Count > 1 // If there is only 1 element then sorting is not necessary
                 && expected.FirstOrDefault(e => e != null) is T nonNullElement
                 && nonNullElement.GetType().GetInterface(nameof(IComparable)) == null
-            ) {
+            )
+            {
                 if (elementAsserter != null)
                 {
                     throw new InvalidOperationException(

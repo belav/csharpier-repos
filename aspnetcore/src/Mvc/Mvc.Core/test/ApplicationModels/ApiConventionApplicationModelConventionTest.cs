@@ -174,7 +174,8 @@ namespace Microsoft.AspNetCore.Mvc.ApplicationModels
             string actionName,
             object[] actionAttributes = null,
             object[] controllerAttributes = null
-        ) {
+        )
+        {
             actionAttributes = actionAttributes ?? Array.Empty<object>();
             controllerAttributes =
                 controllerAttributes

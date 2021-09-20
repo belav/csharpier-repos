@@ -23,7 +23,8 @@ namespace Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore
             this HttpContext httpContext,
             Type dbcontextType,
             ILogger logger
-        ) {
+        )
+        {
             var context = (DbContext?)httpContext.RequestServices.GetService(dbcontextType);
 
             if (context == null)

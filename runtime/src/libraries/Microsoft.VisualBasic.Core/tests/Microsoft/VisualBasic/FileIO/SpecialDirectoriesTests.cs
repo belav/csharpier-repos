@@ -12,7 +12,8 @@ namespace Microsoft.VisualBasic.FileIO.Tests
         private static void CheckSpecialFolder(
             SpecialFolder folder,
             Func<string> getSpecialDirectory
-        ) {
+        )
+        {
             var path = Environment.GetFolderPath(folder);
             if (string.IsNullOrEmpty(path))
             {

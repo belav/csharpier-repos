@@ -53,7 +53,8 @@ namespace System.Globalization.Tests
             int minute,
             int second,
             int millisecond
-        ) {
+        )
+        {
             GregorianCalendar calendar = new GregorianCalendar();
             DateTime expected = new DateTime(year, month, day, hour, minute, second, millisecond);
             Assert.Equal(

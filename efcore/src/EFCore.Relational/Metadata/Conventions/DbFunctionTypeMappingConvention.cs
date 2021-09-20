@@ -25,7 +25,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
         public DbFunctionTypeMappingConvention(
             ProviderConventionSetBuilderDependencies dependencies,
             RelationalConventionSetBuilderDependencies relationalDependencies
-        ) {
+        )
+        {
             Check.NotNull(dependencies, nameof(dependencies));
             Check.NotNull(relationalDependencies, nameof(relationalDependencies));
 
@@ -37,7 +38,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
         public virtual void ProcessModelFinalizing(
             IConventionModelBuilder modelBuilder,
             IConventionContext<IConventionModelBuilder> context
-        ) {
+        )
+        {
             Check.NotNull(modelBuilder, nameof(modelBuilder));
             Check.NotNull(context, nameof(context));
 

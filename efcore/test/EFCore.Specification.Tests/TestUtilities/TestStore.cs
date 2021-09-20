@@ -29,7 +29,8 @@ namespace Microsoft.EntityFrameworkCore.TestUtilities
             Func<DbContext> createContext,
             Action<DbContext> seed = null,
             Action<DbContext> clean = null
-        ) {
+        )
+        {
             ServiceProvider = serviceProvider;
             if (createContext == null)
             {
@@ -80,7 +81,8 @@ namespace Microsoft.EntityFrameworkCore.TestUtilities
             Func<DbContext> createContext,
             Action<DbContext> seed,
             Action<DbContext> clean
-        ) {
+        )
+        {
             using var context = createContext();
             clean?.Invoke(context);
 

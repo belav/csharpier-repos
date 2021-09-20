@@ -45,7 +45,8 @@ namespace Roslyn.Test.Utilities
 
                 using (
                     var metadata = ModuleMetadata.CreateFromStream(moduleContents, leaveOpen: true)
-                ) {
+                )
+                {
                     var metadataReader = metadata.MetadataReader;
                     var peReader = metadata.Module.PEReaderOpt;
                     var flags = peHeaders.CorHeader.Flags;
@@ -139,7 +140,8 @@ namespace Roslyn.Test.Utilities
                                 HashAlgorithmName.SHA1,
                                 RSASignaturePadding.Pkcs1
                             )
-                        ) {
+                        )
+                        {
                             return false;
                         }
                     }
@@ -160,7 +162,8 @@ namespace Roslyn.Test.Utilities
             Blob checksumBlob,
             int strongNameOffset,
             int strongNameSize
-        ) {
+        )
+        {
             const int SectionHeaderSize = 40;
 
             bool is32bit = peHeaders.PEHeader.Magic == PEMagic.PE32;
@@ -193,7 +196,8 @@ namespace Roslyn.Test.Utilities
                     if (
                         (strongNameOffset + strongNameSize) < sectionOffset
                         || strongNameOffset >= (sectionOffset + sectionSize)
-                    ) {
+                    )
+                    {
                         // No signature overlap, hash the whole section
                         hash.AppendData(buffer, sectionOffset, sectionSize);
                     }
@@ -285,7 +289,8 @@ namespace Roslyn.Test.Utilities
             int peHeadersSize,
             int peHeaderAlignment,
             Blob strongNameSignatureFixup
-        ) {
+        )
+        {
             if (s_getContentToSignMethod == null)
             {
                 Interlocked.CompareExchange(
@@ -372,14 +377,16 @@ namespace Roslyn.Test.Utilities
         public static Dictionary<int, string> GetSequencePointMarkers(
             string pdbXml,
             string source = null
-        ) {
+        )
+        {
             var doc = new XmlDocument() { XmlResolver = null };
             using (
                 var reader = new XmlTextReader(new StringReader(pdbXml))
                 {
                     DtdProcessing = DtdProcessing.Prohibit
                 }
-            ) {
+            )
+            {
                 doc.Load(reader);
             }
 

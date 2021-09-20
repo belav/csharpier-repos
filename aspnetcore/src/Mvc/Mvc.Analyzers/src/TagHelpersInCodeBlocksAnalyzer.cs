@@ -47,7 +47,8 @@ namespace Microsoft.AspNetCore.Mvc.Analyzers
         private void InitializeWorker(
             CompilationStartAnalysisContext context,
             SymbolCache symbolCache
-        ) {
+        )
+        {
             context.RegisterOperationBlockStartAction(
                 startBlockContext =>
                 {
@@ -70,7 +71,8 @@ namespace Microsoft.AspNetCore.Mvc.Analyzers
                                     invocationOperation.TargetMethod,
                                     symbolCache
                                 )
-                            ) {
+                            )
+                            {
                                 return;
                             }
 
@@ -107,7 +109,8 @@ namespace Microsoft.AspNetCore.Mvc.Analyzers
                             if (
                                 !methodSymbol.IsAsync
                                 || !symbolCache.TaskType.IsAssignableFrom(methodSymbol.ReturnType)
-                            ) {
+                            )
+                            {
                                 capturedDiagnosticLocations.Add(parent.Syntax.GetLocation());
                             }
                         },
@@ -136,7 +139,8 @@ namespace Microsoft.AspNetCore.Mvc.Analyzers
                     method,
                     symbolCache.TagHelperRunnerRunAsyncMethodSymbol
                 )
-            ) {
+            )
+            {
                 return false;
             }
 
@@ -168,7 +172,8 @@ namespace Microsoft.AspNetCore.Mvc.Analyzers
             private SymbolCache(
                 IMethodSymbol tagHelperRunnerRunAsyncMethodSymbol,
                 INamedTypeSymbol taskType
-            ) {
+            )
+            {
                 TagHelperRunnerRunAsyncMethodSymbol = tagHelperRunnerRunAsyncMethodSymbol;
                 TaskType = taskType;
             }

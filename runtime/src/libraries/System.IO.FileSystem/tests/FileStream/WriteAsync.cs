@@ -96,7 +96,8 @@ namespace System.IO.Tests
                     TestBuffer.Length * 2,
                     useAsync: true
                 )
-            ) {
+            )
+            {
                 FSAssert.CompletesSynchronously(
                     WriteAsync(fs, new byte[TestBuffer.Length], 0, TestBuffer.Length)
                 );
@@ -154,7 +155,8 @@ namespace System.IO.Tests
                     3,
                     useAsync: true
                 )
-            ) {
+            )
+            {
                 // Fill buffer; should trigger flush of full buffer, no additional I/O
                 await WriteAsync(fs, TestBuffer, 0, 3);
                 Assert.True(fs.Length == 3);
@@ -279,7 +281,8 @@ namespace System.IO.Tests
             int bufferSize,
             int writeSize,
             int numWrites
-        ) {
+        )
+        {
             long totalLength = writeSize * numWrites;
             var expectedData = new byte[totalLength];
             new Random(42).NextBytes(expectedData);
@@ -297,7 +300,8 @@ namespace System.IO.Tests
                     bufferSize,
                     useAsync
                 )
-            ) {
+            )
+            {
                 if (presize)
                 {
                     fs.SetLength(totalLength);
@@ -360,7 +364,8 @@ namespace System.IO.Tests
                     2,
                     useAsync
                 )
-            ) {
+            )
+            {
                 Assert.Equal(TestBuffer[0], await ReadByteAsync(fs));
                 Assert.Equal(TestBuffer[1], await ReadByteAsync(fs));
                 Assert.Equal(TestBuffer[2], await ReadByteAsync(fs));
@@ -405,7 +410,8 @@ namespace System.IO.Tests
 
                 using (
                     var stream = new FileStream(writeFileName, FileMode.Create, FileAccess.Write)
-                ) {
+                )
+                {
                     do
                     {
                         // 20%: random write size

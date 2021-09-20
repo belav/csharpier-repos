@@ -52,7 +52,8 @@ namespace Tests.Integration
             public ExportFactoryImporter(
                 ExportFactory<IId> idCreatorTCtor,
                 ExportFactory<IId, IIdTypeMetadata> idCreatorTMCtor
-            ) {
+            )
+            {
                 this._idCreatorTCtor = idCreatorTCtor;
                 this._idCreatorTMCtor = idCreatorTMCtor;
             }

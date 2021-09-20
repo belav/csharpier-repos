@@ -480,7 +480,8 @@ namespace System.ComponentModel.Composition
             CompositionException exception,
             int rootCauseCount,
             CultureInfo culture
-        ) {
+        )
+        {
             using (StringReader reader = new StringReader(exception.Message))
             {
                 string line = reader.ReadLine();
@@ -590,7 +591,8 @@ namespace System.ComponentModel.Composition
 
         private static CompositionException CreateCompositionException(
             IEnumerable<CompositionError> errors
-        ) {
+        )
+        {
             return CreateCompositionException((string)null, (Exception)null, errors);
         }
 
@@ -607,7 +609,8 @@ namespace System.ComponentModel.Composition
             string message,
             Exception innerException,
             IEnumerable<CompositionError> errors
-        ) {
+        )
+        {
             return new CompositionException(message, innerException, errors);
         }
     }

@@ -84,7 +84,8 @@ namespace Microsoft.CodeAnalysis
         public static ImmutableArray<ISymbol> GetSymbolsForDeclarationId(
             string id,
             Compilation compilation
-        ) {
+        )
+        {
             if (id == null)
             {
                 throw new ArgumentNullException(nameof(id));
@@ -116,7 +117,8 @@ namespace Microsoft.CodeAnalysis
             string id,
             Compilation compilation,
             List<ISymbol> results
-        ) {
+        )
+        {
             if (id == null)
             {
                 throw new ArgumentNullException(nameof(id));
@@ -169,7 +171,8 @@ namespace Microsoft.CodeAnalysis
         public static ImmutableArray<ISymbol> GetSymbolsForReferenceId(
             string id,
             Compilation compilation
-        ) {
+        )
+        {
             if (id == null)
             {
                 throw new ArgumentNullException(nameof(id));
@@ -201,7 +204,8 @@ namespace Microsoft.CodeAnalysis
             string id,
             Compilation compilation,
             List<ISymbol> results
-        ) {
+        )
+        {
             if (id == null)
             {
                 throw new ArgumentNullException(nameof(id));
@@ -383,7 +387,8 @@ namespace Microsoft.CodeAnalysis
                     if (
                         _referenceGenerator == null
                         || _referenceGenerator.TypeParameterContext != typeParameterContext
-                    ) {
+                    )
+                    {
                         _referenceGenerator = new ReferenceGenerator(
                             _builder,
                             typeParameterContext
@@ -668,7 +673,8 @@ namespace Microsoft.CodeAnalysis
                     var scope = _typeParameterContext;
                     scope != null;
                     scope = scope.ContainingSymbol
-                ) {
+                )
+                {
                     if (scope == typeParameterDeclarer)
                     {
                         return true;
@@ -685,7 +691,8 @@ namespace Microsoft.CodeAnalysis
                 string id,
                 Compilation compilation,
                 List<ISymbol> results
-            ) {
+            )
+            {
                 if (id == null)
                 {
                     return false;
@@ -707,7 +714,8 @@ namespace Microsoft.CodeAnalysis
                 string id,
                 Compilation compilation,
                 List<ISymbol> results
-            ) {
+            )
+            {
                 if (id == null)
                 {
                     return false;
@@ -724,7 +732,8 @@ namespace Microsoft.CodeAnalysis
                 ref int index,
                 Compilation compilation,
                 List<ISymbol> results
-            ) {
+            )
+            {
                 var kindChar = PeekNextChar(id, index);
                 SymbolKind kind;
 
@@ -875,7 +884,8 @@ namespace Microsoft.CodeAnalysis
                 ref int index,
                 Compilation compilation,
                 ISymbol? typeParameterContext
-            ) {
+            )
+            {
                 var results = s_symbolListPool.Allocate();
                 try
                 {
@@ -902,7 +912,8 @@ namespace Microsoft.CodeAnalysis
                 Compilation compilation,
                 ISymbol? typeParameterContext,
                 List<ISymbol> results
-            ) {
+            )
+            {
                 var ch = PeekNextChar(id, index);
 
                 // context expression embedded in reference => <context-definition>:<type-parameter>
@@ -1000,7 +1011,8 @@ namespace Microsoft.CodeAnalysis
                 ref int index,
                 ISymbol? typeParameterContext,
                 List<ISymbol> results
-            ) {
+            )
+            {
                 // skip the first `
                 System.Diagnostics.Debug.Assert(PeekNextChar(id, index) == '`');
                 index++;
@@ -1045,7 +1057,8 @@ namespace Microsoft.CodeAnalysis
                 Compilation compilation,
                 ISymbol? typeParameterContext,
                 List<ISymbol> results
-            ) {
+            )
+            {
                 var containers = s_namespaceOrTypeListPool.Allocate();
                 try
                 {
@@ -1071,7 +1084,8 @@ namespace Microsoft.CodeAnalysis
                                     typeParameterContext,
                                     typeArguments
                                 )
-                            ) {
+                            )
+                            {
                                 // if no type arguments are found then the type cannot be identified
                                 continue;
                             }
@@ -1167,7 +1181,8 @@ namespace Microsoft.CodeAnalysis
                 Compilation compilation,
                 ISymbol? typeParameterContext,
                 List<ITypeSymbol> typeArguments
-            ) {
+            )
+            {
                 index++; // skip over {
 
                 while (true)
@@ -1204,7 +1219,8 @@ namespace Microsoft.CodeAnalysis
                 string memberName,
                 int arity,
                 List<ISymbol> results
-            ) {
+            )
+            {
                 for (int i = 0, n = containers.Count; i < n; i++)
                 {
                     GetMatchingTypes(containers[i], memberName, arity, results);
@@ -1216,7 +1232,8 @@ namespace Microsoft.CodeAnalysis
                 string memberName,
                 int arity,
                 List<ISymbol> results
-            ) {
+            )
+            {
                 var members = container.GetMembers(memberName);
 
                 foreach (var symbol in members)
@@ -1236,7 +1253,8 @@ namespace Microsoft.CodeAnalysis
                 List<INamespaceOrTypeSymbol> containers,
                 string memberName,
                 List<ISymbol> results
-            ) {
+            )
+            {
                 for (int i = 0, n = containers.Count; i < n; i++)
                 {
                     GetMatchingNamespaceOrTypes(containers[i], memberName, results);
@@ -1247,7 +1265,8 @@ namespace Microsoft.CodeAnalysis
                 INamespaceOrTypeSymbol container,
                 string memberName,
                 List<ISymbol> results
-            ) {
+            )
+            {
                 var members = container.GetMembers(memberName);
 
                 foreach (var symbol in members)
@@ -1258,7 +1277,8 @@ namespace Microsoft.CodeAnalysis
                             symbol.Kind == SymbolKind.NamedType
                             && ((INamedTypeSymbol)symbol).Arity == 0
                         )
-                    ) {
+                    )
+                    {
                         results.Add(symbol);
                     }
                 }
@@ -1268,7 +1288,8 @@ namespace Microsoft.CodeAnalysis
                 List<INamespaceOrTypeSymbol> containers,
                 string memberName,
                 List<ISymbol> results
-            ) {
+            )
+            {
                 for (int i = 0, n = containers.Count; i < n; i++)
                 {
                     GetMatchingNamespaces(containers[i], memberName, results);
@@ -1279,7 +1300,8 @@ namespace Microsoft.CodeAnalysis
                 INamespaceOrTypeSymbol container,
                 string memberName,
                 List<ISymbol> results
-            ) {
+            )
+            {
                 var members = container.GetMembers(memberName);
 
                 foreach (var symbol in members)
@@ -1299,7 +1321,8 @@ namespace Microsoft.CodeAnalysis
                 int arity,
                 Compilation compilation,
                 List<ISymbol> results
-            ) {
+            )
+            {
                 var parameters = s_parameterListPool.Allocate();
                 try
                 {
@@ -1329,7 +1352,8 @@ namespace Microsoft.CodeAnalysis
                                             methodSymbol,
                                             parameters
                                         )
-                                    ) {
+                                    )
+                                    {
                                         // if the parameters cannot be identified (some error), then the symbol cannot match, try next method symbol
                                         continue;
                                     }
@@ -1358,7 +1382,8 @@ namespace Microsoft.CodeAnalysis
                                             returnType,
                                             SymbolEqualityComparer.CLRSignature
                                         )
-                                    ) {
+                                    )
+                                    {
                                         // return type matches
                                         results.Add(methodSymbol);
                                         endIndex = index;
@@ -1390,7 +1415,8 @@ namespace Microsoft.CodeAnalysis
                 string memberName,
                 Compilation compilation,
                 List<ISymbol> results
-            ) {
+            )
+            {
                 int startIndex = index;
                 int endIndex = index;
 
@@ -1429,7 +1455,8 @@ namespace Microsoft.CodeAnalysis
                                             parameters
                                         )
                                         && AllParametersMatch(propertySymbol.Parameters, parameters)
-                                    ) {
+                                    )
+                                    {
                                         results.Add(propertySymbol);
                                         endIndex = index;
                                     }
@@ -1459,7 +1486,8 @@ namespace Microsoft.CodeAnalysis
                 List<INamespaceOrTypeSymbol> containers,
                 string memberName,
                 List<ISymbol> results
-            ) {
+            )
+            {
                 for (int i = 0, n = containers.Count; i < n; i++)
                 {
                     var members = containers[i].GetMembers(memberName);
@@ -1478,7 +1506,8 @@ namespace Microsoft.CodeAnalysis
                 List<INamespaceOrTypeSymbol> containers,
                 string memberName,
                 List<ISymbol> results
-            ) {
+            )
+            {
                 for (int i = 0, n = containers.Count; i < n; i++)
                 {
                     var members = containers[i].GetMembers(memberName);
@@ -1496,7 +1525,8 @@ namespace Microsoft.CodeAnalysis
             private static bool AllParametersMatch(
                 ImmutableArray<IParameterSymbol> symbolParameters,
                 List<ParameterInfo> expectedParameters
-            ) {
+            )
+            {
                 if (symbolParameters.Length != expectedParameters.Count)
                 {
                     return false;
@@ -1516,7 +1546,8 @@ namespace Microsoft.CodeAnalysis
             private static bool ParameterMatches(
                 IParameterSymbol symbol,
                 ParameterInfo parameterInfo
-            ) {
+            )
+            {
                 // same ref'ness?
                 if ((symbol.RefKind == RefKind.None) == parameterInfo.IsRefOrOut)
                 {
@@ -1532,7 +1563,8 @@ namespace Microsoft.CodeAnalysis
             private static ITypeParameterSymbol GetNthTypeParameter(
                 INamedTypeSymbol typeSymbol,
                 int n
-            ) {
+            )
+            {
                 var containingTypeParameterCount = GetTypeParameterCount(typeSymbol.ContainingType);
                 if (n < containingTypeParameterCount)
                 {
@@ -1576,7 +1608,8 @@ namespace Microsoft.CodeAnalysis
                 Compilation compilation,
                 ISymbol typeParameterContext,
                 List<ParameterInfo> parameters
-            ) {
+            )
+            {
                 System.Diagnostics.Debug.Assert(typeParameterContext != null);
 
                 index++; // skip over '('
@@ -1621,7 +1654,8 @@ namespace Microsoft.CodeAnalysis
                 ref int index,
                 Compilation compilation,
                 ISymbol? typeParameterContext
-            ) {
+            )
+            {
                 bool isRefOrOut = false;
 
                 var type = ParseTypeSymbol(id, ref index, compilation, typeParameterContext);
@@ -1710,8 +1744,9 @@ namespace Microsoft.CodeAnalysis
             private static void CopyTo<TSource, TDestination>(
                 List<TSource> source,
                 List<TDestination> destination
-            ) where TSource : class
-              where TDestination : class
+            )
+                where TSource : class
+                where TDestination : class
             {
                 if (destination.Count + source.Count > destination.Capacity)
                 {

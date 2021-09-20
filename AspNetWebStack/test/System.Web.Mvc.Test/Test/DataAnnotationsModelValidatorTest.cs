@@ -93,7 +93,8 @@ namespace System.Web.Mvc.Test
         public void ValidateSetsMemberNamePropertyOfValidationContextForProperties(
             ModelMetadata metadata,
             string expectedMemberName
-        ) {
+        )
+        {
             // Arrange
             metadata.DisplayName = "Some-random-name";
             ControllerContext context = new ControllerContext();

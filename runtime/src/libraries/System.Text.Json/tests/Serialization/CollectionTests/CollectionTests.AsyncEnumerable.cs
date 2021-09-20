@@ -19,7 +19,8 @@ namespace System.Text.Json.Tests.Serialization
             IEnumerable<TElement> source,
             int delayInterval,
             int bufferSize
-        ) {
+        )
+        {
             JsonSerializerOptions options = new JsonSerializerOptions
             {
                 DefaultBufferSize = bufferSize
@@ -42,7 +43,8 @@ namespace System.Text.Json.Tests.Serialization
             IEnumerable<TElement> source,
             int delayInterval,
             int bufferSize
-        ) {
+        )
+        {
             JsonSerializerOptions options = new JsonSerializerOptions
             {
                 DefaultBufferSize = bufferSize
@@ -65,7 +67,8 @@ namespace System.Text.Json.Tests.Serialization
             IEnumerable<TElement> source,
             int delayInterval,
             int bufferSize
-        ) {
+        )
+        {
             JsonSerializerOptions options = new JsonSerializerOptions
             {
                 DefaultBufferSize = bufferSize
@@ -121,7 +124,8 @@ namespace System.Text.Json.Tests.Serialization
             IEnumerable<TElement> source,
             int delayInterval,
             int bufferSize
-        ) {
+        )
+        {
             JsonSerializerOptions options = new JsonSerializerOptions
             {
                 DefaultBufferSize = bufferSize
@@ -148,7 +152,8 @@ namespace System.Text.Json.Tests.Serialization
             IEnumerable<TElement> source,
             int delayInterval,
             int bufferSize
-        ) {
+        )
+        {
             JsonSerializerOptions options = new JsonSerializerOptions
             {
                 DefaultBufferSize = bufferSize
@@ -334,7 +339,8 @@ namespace System.Text.Json.Tests.Serialization
                 IEnumerable<TElement> source,
                 int delayInterval = 0,
                 TimeSpan? delay = null
-            ) {
+            )
+            {
                 _source = source;
                 _delay = delay ?? TimeSpan.FromMilliseconds(20);
                 _delayInterval = delayInterval;
@@ -342,7 +348,8 @@ namespace System.Text.Json.Tests.Serialization
 
             public IAsyncEnumerator<TElement> GetAsyncEnumerator(
                 CancellationToken cancellationToken = default
-            ) {
+            )
+            {
                 return new MockedAsyncEnumerator(this, cancellationToken);
             }
 
@@ -355,7 +362,8 @@ namespace System.Text.Json.Tests.Serialization
                 public MockedAsyncEnumerator(
                     MockedAsyncEnumerable<TElement> enumerable,
                     CancellationToken token
-                ) {
+                )
+                {
                     _enumerable = enumerable;
                     _innerEnumerator = enumerable.GetAsyncEnumeratorInner(token);
                 }
@@ -372,7 +380,8 @@ namespace System.Text.Json.Tests.Serialization
 
             private async IAsyncEnumerator<TElement> GetAsyncEnumeratorInner(
                 CancellationToken cancellationToken = default
-            ) {
+            )
+            {
                 TotalCreatedEnumerators++;
                 int i = 0;
                 foreach (TElement element in _source)

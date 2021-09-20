@@ -44,7 +44,8 @@ namespace Microsoft.Extensions.DependencyInjection
         public static IServiceCollection AddMemoryCache(
             this IServiceCollection services,
             Action<MemoryCacheOptions> setupAction
-        ) {
+        )
+        {
             if (services == null)
             {
                 throw new ArgumentNullException(nameof(services));
@@ -110,7 +111,8 @@ namespace Microsoft.Extensions.DependencyInjection
         public static IServiceCollection AddDistributedMemoryCache(
             this IServiceCollection services,
             Action<MemoryDistributedCacheOptions> setupAction
-        ) {
+        )
+        {
             if (services == null)
             {
                 throw new ArgumentNullException(nameof(services));

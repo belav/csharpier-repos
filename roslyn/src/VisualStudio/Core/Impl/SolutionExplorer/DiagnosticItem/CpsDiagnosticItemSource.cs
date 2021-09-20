@@ -58,7 +58,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.SolutionExplore
                 e.Kind == WorkspaceChangeKind.SolutionCleared
                 || e.Kind == WorkspaceChangeKind.SolutionReloaded
                 || e.Kind == WorkspaceChangeKind.SolutionRemoved
-            ) {
+            )
+            {
                 Workspace.WorkspaceChanged -= OnWorkspaceChangedLookForAnalyzer;
             }
             else if (e.Kind == WorkspaceChangeKind.SolutionAdded)
@@ -80,7 +81,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.SolutionExplore
                 else if (
                     e.Kind == WorkspaceChangeKind.ProjectAdded
                     || e.Kind == WorkspaceChangeKind.ProjectChanged
-                ) {
+                )
+                {
                     _analyzerReference = TryGetAnalyzerReference(e.NewSolution);
                     if (_analyzerReference != null)
                     {

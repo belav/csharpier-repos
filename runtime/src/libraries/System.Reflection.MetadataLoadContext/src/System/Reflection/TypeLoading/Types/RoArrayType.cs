@@ -53,7 +53,8 @@ namespace System.Reflection.TypeLoading
                     if (
                         ifc is RoDefinitionType roDefinitionType
                         && roDefinitionType.GetGenericParameterCount() == 1
-                    ) {
+                    )
+                    {
                         yield return roDefinitionType.GetUniqueConstructedGenericType(
                             typeArguments
                         );
@@ -80,7 +81,8 @@ namespace System.Reflection.TypeLoading
 
         internal sealed override IEnumerable<ConstructorInfo> GetConstructorsCore(
             NameFilter? filter
-        ) {
+        )
+        {
             if (filter == null || filter.Matches(ConstructorInfo.ConstructorName))
             {
                 int rank = _rank;
@@ -161,7 +163,8 @@ namespace System.Reflection.TypeLoading
         internal sealed override IEnumerable<MethodInfo> GetMethodsCore(
             NameFilter? filter,
             Type reflectedType
-        ) {
+        )
+        {
             int rank = _rank;
 
             int uniquifier = 0;

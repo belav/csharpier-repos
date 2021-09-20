@@ -39,7 +39,8 @@ namespace System.CodeDom.Tests
             CodeExpression testExpression,
             CodeStatement incrementStatement,
             CodeStatement[] statements
-        ) {
+        )
+        {
             var iteration = new CodeIterationStatement(
                 initStatement,
                 testExpression,

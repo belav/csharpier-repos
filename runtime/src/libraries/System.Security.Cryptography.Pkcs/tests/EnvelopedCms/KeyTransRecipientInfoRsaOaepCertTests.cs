@@ -42,7 +42,8 @@ namespace System.Security.Cryptography.Pkcs.EnvelopedCmsTests.Tests
             EnvelopedCms ecms = new EnvelopedCms(contentInfo);
             using (
                 X509Certificate2 cert = Certificates.RsaOaep2048_Sha256Parameters.GetCertificate()
-            ) {
+            )
+            {
                 CmsRecipient cmsRecipient = new CmsRecipient(cert);
                 ecms.Encrypt(cmsRecipient);
             }

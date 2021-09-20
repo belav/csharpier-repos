@@ -22,7 +22,8 @@ namespace System.Web.Http.ApiExplorer
             Type declaredType,
             Type responseType,
             int responseFormattersCount
-        ) {
+        )
+        {
             HttpConfiguration config = new HttpConfiguration();
             config.Routes.MapHttpRoute(
                 "Default",

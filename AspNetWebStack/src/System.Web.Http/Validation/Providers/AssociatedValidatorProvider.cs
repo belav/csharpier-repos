@@ -20,7 +20,8 @@ namespace System.Web.Http.Validation.Providers
         public sealed override IEnumerable<ModelValidator> GetValidators(
             ModelMetadata metadata,
             IEnumerable<ModelValidatorProvider> validatorProviders
-        ) {
+        )
+        {
             if (metadata == null)
             {
                 throw Error.ArgumentNull("metadata");
@@ -47,7 +48,8 @@ namespace System.Web.Http.Validation.Providers
         private IEnumerable<ModelValidator> GetValidatorsForProperty(
             ModelMetadata metadata,
             IEnumerable<ModelValidatorProvider> validatorProviders
-        ) {
+        )
+        {
             ICustomTypeDescriptor typeDescriptor = GetTypeDescriptor(metadata.ContainerType);
             PropertyDescriptor property = typeDescriptor.GetProperties()
                 .Find(metadata.PropertyName, true);
@@ -71,7 +73,8 @@ namespace System.Web.Http.Validation.Providers
         private IEnumerable<ModelValidator> GetValidatorsForType(
             ModelMetadata metadata,
             IEnumerable<ModelValidatorProvider> validatorProviders
-        ) {
+        )
+        {
             return GetValidators(
                 metadata,
                 validatorProviders,

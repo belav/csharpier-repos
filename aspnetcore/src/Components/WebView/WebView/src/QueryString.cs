@@ -298,7 +298,8 @@ namespace Microsoft.AspNetCore.Components.WebView
             string key,
             string? value,
             bool first
-        ) {
+        )
+        {
             builder.Append(first ? "?" : "&");
             builder.Append(UrlEncoder.Default.Encode(key));
             builder.Append("=");

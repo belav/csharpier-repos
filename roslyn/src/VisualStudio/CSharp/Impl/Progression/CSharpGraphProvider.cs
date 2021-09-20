@@ -27,12 +27,13 @@ namespace Microsoft.VisualStudio.LanguageServices.CSharp.Progression
             SVsServiceProvider serviceProvider,
             IProgressionPrimaryWorkspaceProvider workspaceProvider,
             IAsynchronousOperationListenerProvider listenerProvider
-        ) : base(
-            threadingContext,
-            glyphService,
-            serviceProvider,
-            workspaceProvider.PrimaryWorkspace,
-            listenerProvider
-        ) { }
+        )
+            : base(
+                threadingContext,
+                glyphService,
+                serviceProvider,
+                workspaceProvider.PrimaryWorkspace,
+                listenerProvider
+            ) { }
     }
 }

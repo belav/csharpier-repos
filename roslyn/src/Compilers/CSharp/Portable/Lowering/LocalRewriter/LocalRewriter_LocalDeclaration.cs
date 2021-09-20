@@ -28,7 +28,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             LocalSymbol localSymbol,
             BoundExpression? rewrittenInitializer,
             bool hasErrors = false
-        ) {
+        )
+        {
             // A declaration of a local variable without an initializer has no associated IL.
             // Simply remove the declaration from the bound tree. The local symbol will
             // remain in the bound block, so codegen will make a stack frame location for it.
@@ -86,7 +87,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             BoundLocalDeclaration? originalOpt,
             LocalSymbol localSymbol,
             BoundStatement rewrittenLocalDeclaration
-        ) {
+        )
+        {
             // Add sequence points, if necessary.
             if (
                 this.Instrument
@@ -101,7 +103,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                         ).Declaration.Variables.Count == 1
                     )
                 )
-            ) {
+            )
+            {
                 rewrittenLocalDeclaration = _instrumenter.InstrumentLocalInitialization(
                     originalOpt,
                     rewrittenLocalDeclaration
@@ -113,7 +116,8 @@ namespace Microsoft.CodeAnalysis.CSharp
 
         public sealed override BoundNode VisitOutVariablePendingInference(
             OutVariablePendingInference node
-        ) {
+        )
+        {
             throw ExceptionUtilities.Unreachable;
         }
     }

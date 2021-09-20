@@ -39,7 +39,8 @@ namespace System.Net.Mail
             int index,
             out int outIndex,
             bool throwExceptionIfFail
-        ) {
+        )
+        {
             Debug.Assert(
                 0 <= index && index < data.Length,
                 "index was outside the bounds of the string: " + index

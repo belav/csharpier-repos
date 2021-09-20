@@ -11,9 +11,8 @@ namespace Microsoft.EntityFrameworkCore.Query
     public class TPTManyToManyNoTrackingQuerySqliteTest
         : TPTManyToManyNoTrackingQueryRelationalTestBase<TPTManyToManyQuerySqliteFixture>
     {
-        public TPTManyToManyNoTrackingQuerySqliteTest(
-            TPTManyToManyQuerySqliteFixture fixture
-        ) : base(fixture) { }
+        public TPTManyToManyNoTrackingQuerySqliteTest(TPTManyToManyQuerySqliteFixture fixture)
+            : base(fixture) { }
 
         public override async Task Skip_navigation_order_by_single_or_default(bool async) =>
             Assert.Equal(

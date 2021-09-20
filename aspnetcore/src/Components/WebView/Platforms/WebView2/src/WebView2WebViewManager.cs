@@ -92,7 +92,8 @@ namespace Microsoft.AspNetCore.Components.WebView.WebView2
                         out var content,
                         out var headers
                     )
-                ) {
+                )
+                {
                     var headerString = GetHeaderString(headers);
                     eventArgs.Response = environment.CreateWebResourceResponse(
                         content,

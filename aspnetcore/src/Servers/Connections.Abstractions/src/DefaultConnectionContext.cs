@@ -60,11 +60,8 @@ namespace Microsoft.AspNetCore.Connections
         /// <param name="id">The <see cref="ConnectionId"/>.</param>
         /// <param name="transport">The <see cref="Transport"/>.</param>
         /// <param name="application">The <see cref="Application"/>.</param>
-        public DefaultConnectionContext(
-            string id,
-            IDuplexPipe transport,
-            IDuplexPipe application
-        ) : this(id)
+        public DefaultConnectionContext(string id, IDuplexPipe transport, IDuplexPipe application)
+            : this(id)
         {
             Transport = transport;
             Application = application;

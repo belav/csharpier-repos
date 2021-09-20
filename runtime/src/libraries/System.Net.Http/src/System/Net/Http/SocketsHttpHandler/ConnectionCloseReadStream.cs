@@ -36,7 +36,8 @@ namespace System.Net.Http
             public override async ValueTask<int> ReadAsync(
                 Memory<byte> buffer,
                 CancellationToken cancellationToken
-            ) {
+            )
+            {
                 CancellationHelper.ThrowIfCancellationRequested(cancellationToken);
 
                 HttpConnection? connection = _connection;
@@ -101,7 +102,8 @@ namespace System.Net.Http
                 Stream destination,
                 int bufferSize,
                 CancellationToken cancellationToken
-            ) {
+            )
+            {
                 ValidateCopyToArguments(destination, bufferSize);
 
                 if (cancellationToken.IsCancellationRequested)
@@ -135,7 +137,8 @@ namespace System.Net.Http
                 Task copyTask,
                 HttpConnection connection,
                 CancellationToken cancellationToken
-            ) {
+            )
+            {
                 CancellationTokenRegistration ctr = connection.RegisterCancellation(
                     cancellationToken
                 );

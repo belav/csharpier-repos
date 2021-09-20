@@ -142,7 +142,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Syntax.InternalSyntax
                 var current = _directives;
                 current != null && current.Any();
                 current = current.Tail
-            ) {
+            )
+            {
                 switch (current.Head.Kind)
                 {
                     case SyntaxKind.DefineDirectiveTrivia:
@@ -184,7 +185,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Syntax.InternalSyntax
                 var current = _directives;
                 current != null && current.Any();
                 current = current.Tail
-            ) {
+            )
+            {
                 if (current.Head.BranchTaken)
                 {
                     return true;
@@ -327,7 +329,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Syntax.InternalSyntax
 
         private static ConsList<Directive> GetPreviousIfElifElseOrRegion(
             ConsList<Directive> directives
-        ) {
+        )
+        {
             var current = directives;
             while (current != null && current.Any())
             {
@@ -353,7 +356,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Syntax.InternalSyntax
                 current != null
                 && current.Any()
                 && current.Head.Kind != SyntaxKind.RegionDirectiveTrivia
-            ) {
+            )
+            {
                 current = current.Tail;
             }
 
@@ -367,7 +371,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Syntax.InternalSyntax
                 var current = _directives;
                 current != null && current.Any();
                 current = current.Tail
-            ) {
+            )
+            {
                 if (sb.Length > 0)
                 {
                     sb.Insert(0, " | ");
@@ -403,7 +408,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Syntax.InternalSyntax
 
         private static ConsList<Directive> SkipInsignificantDirectives(
             ConsList<Directive> directives
-        ) {
+        )
+        {
             for (; directives != null && directives.Any(); directives = directives.Tail)
             {
                 switch (directives.Head.Kind)

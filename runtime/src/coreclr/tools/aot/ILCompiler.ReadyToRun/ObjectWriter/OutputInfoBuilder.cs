@@ -191,7 +191,8 @@ namespace ILCompiler.PEWriter
                     ISymbolDefinitionNode,
                     MethodWithGCInfo
                 > symbolMethodPair in _methodSymbolMap
-            ) {
+            )
+            {
                 EcmaMethod ecmaMethod =
                     symbolMethodPair.Value.Method.GetTypicalMethodDefinition() as EcmaMethod;
                 if (ecmaMethod != null && emittedMethods.Add(ecmaMethod))

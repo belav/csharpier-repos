@@ -78,7 +78,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Emit
 
         Cci.INamespaceTypeDefinition Cci.ITypeReference.AsNamespaceTypeDefinition(
             EmitContext context
-        ) {
+        )
+        {
             return null;
         }
 

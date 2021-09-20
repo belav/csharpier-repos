@@ -194,7 +194,8 @@ public class C
         public async Task ConvertFromExplicitToAs_ConcreteClassOrInterfaceConstraint(
             string targetTypeKind,
             bool shouldBeFixed
-        ) {
+        )
+        {
             var initialMarkup =
                 @$"
 public {targetTypeKind} Target {{ }}

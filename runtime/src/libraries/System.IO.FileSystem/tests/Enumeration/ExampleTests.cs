@@ -36,7 +36,8 @@ namespace System.IO.Tests.Enumeration
             string directory,
             bool recursive,
             params string[] extensions
-        ) {
+        )
+        {
             return new FileSystemEnumerable<FileInfo>(
                 directory,
                 (ref FileSystemEntry entry) => (FileInfo)entry.ToFileSystemInfo(),

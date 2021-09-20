@@ -292,7 +292,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Tests
 
                 while (
                     (received = await context.Request.Body.ReadAsync(buffer, 0, buffer.Length)) > 0
-                ) {
+                )
+                {
                     data.AddRange(new ArraySegment<byte>(buffer, 0, received));
                 }
 
@@ -306,7 +307,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Tests
 
                 while (
                     (received = await context.Request.Body.ReadAsync(buffer, 0, buffer.Length)) > 0
-                ) {
+                )
+                {
                     await context.Response.Body.WriteAsync(buffer, 0, received);
                 }
             };
@@ -318,7 +320,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Tests
 
                 while (
                     (received = await context.Request.Body.ReadAsync(buffer, 0, buffer.Length)) > 0
-                ) {
+                )
+                {
                     await context.Response.Body.WriteAsync(buffer, 0, received);
                 }
 
@@ -459,7 +462,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Tests
             MethodInfo methodInfo,
             object[] testMethodArguments,
             ITestOutputHelper testOutputHelper
-        ) {
+        )
+        {
             base.Initialize(context, methodInfo, testMethodArguments, testOutputHelper);
 
             _serviceContext = new TestServiceContext(LoggerFactory, _mockKestrelTrace.Object)
@@ -547,7 +551,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Tests
             RequestDelegate application,
             int expectedSettingsCount = 3,
             bool expectedWindowUpdate = true
-        ) {
+        )
+        {
             if (_connection == null)
             {
                 CreateConnection();
@@ -630,7 +635,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Tests
             IEnumerable<KeyValuePair<string, string>> headers,
             bool endStream,
             bool flushFrame = true
-        ) {
+        )
+        {
             var writableBuffer = _pair.Application.Output;
             var tcs = new TaskCompletionSource(TaskCreationOptions.RunContinuationsAsynchronously);
             _runningStreams[streamId] = tcs;
@@ -674,7 +680,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Tests
             IEnumerable<KeyValuePair<string, string>> headers,
             byte padLength,
             bool endStream
-        ) {
+        )
+        {
             var writableBuffer = _pair.Application.Output;
             var tcs = new TaskCompletionSource(TaskCreationOptions.RunContinuationsAsynchronously);
             _runningStreams[streamId] = tcs;
@@ -732,7 +739,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Tests
             byte priority,
             int streamDependency,
             bool endStream
-        ) {
+        )
+        {
             var writableBuffer = _pair.Application.Output;
             var tcs = new TaskCompletionSource(TaskCreationOptions.RunContinuationsAsynchronously);
             _runningStreams[streamId] = tcs;
@@ -791,7 +799,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Tests
             byte priority,
             int streamDependency,
             bool endStream
-        ) {
+        )
+        {
             var writableBuffer = _pair.Application.Output;
             var tcs = new TaskCompletionSource(TaskCreationOptions.RunContinuationsAsynchronously);
             _runningStreams[streamId] = tcs;
@@ -903,7 +912,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Tests
         internal async Task SendSettingsWithInvalidParameterValueAsync(
             Http2SettingsParameter parameter,
             uint value
-        ) {
+        )
+        {
             var writableBuffer = _pair.Application.Output;
             var frame = new Http2Frame();
             frame.PrepareSettings(Http2SettingsFrameFlags.NONE);
@@ -936,7 +946,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Tests
             int streamId,
             Http2HeadersFrameFlags flags,
             Http2HeadersEnumerator headersEnumerator
-        ) {
+        )
+        {
             var outputWriter = _pair.Application.Output;
             var frame = new Http2Frame();
 
@@ -960,7 +971,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Tests
             int streamId,
             Http2HeadersFrameFlags flags,
             IEnumerable<KeyValuePair<string, string>> headers
-        ) {
+        )
+        {
             return SendHeadersAsync(streamId, flags, GetHeadersEnumerator(headers));
         }
 
@@ -968,7 +980,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Tests
             int streamId,
             Http2HeadersFrameFlags flags,
             byte[] headerBlock
-        ) {
+        )
+        {
             var outputWriter = _pair.Application.Output;
             var frame = new Http2Frame();
 
@@ -983,7 +996,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Tests
             int streamId,
             int payloadLength,
             byte padLength
-        ) {
+        )
+        {
             Assert.True(
                 padLength >= payloadLength,
                 $"{nameof(padLength)} must be greater than or equal to {nameof(payloadLength)} to create an invalid frame."
@@ -1026,7 +1040,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Tests
             int streamId,
             Http2ContinuationFrameFlags flags,
             Http2HeadersEnumerator headersEnumerator
-        ) {
+        )
+        {
             var outputWriter = _pair.Application.Output;
             var frame = new Http2Frame();
 
@@ -1050,7 +1065,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Tests
             int streamId,
             Http2ContinuationFrameFlags flags,
             byte[] payload
-        ) {
+        )
+        {
             var outputWriter = _pair.Application.Output;
             var frame = new Http2Frame();
 
@@ -1065,7 +1081,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Tests
             int streamId,
             Http2ContinuationFrameFlags flags,
             IEnumerable<KeyValuePair<string, string>> headers
-        ) {
+        )
+        {
             var outputWriter = _pair.Application.Output;
             var frame = new Http2Frame();
 
@@ -1087,7 +1104,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Tests
 
         internal Http2HeadersEnumerator GetHeadersEnumerator(
             IEnumerable<KeyValuePair<string, string>> headers
-        ) {
+        )
+        {
             var dictionary = headers.GroupBy(g => g.Key)
                 .ToDictionary(
                     g => g.Key,
@@ -1102,7 +1120,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Tests
         internal Task SendEmptyContinuationFrameAsync(
             int streamId,
             Http2ContinuationFrameFlags flags
-        ) {
+        )
+        {
             var outputWriter = _pair.Application.Output;
             var frame = new Http2Frame();
 
@@ -1136,7 +1155,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Tests
             Memory<byte> data,
             bool endStream,
             bool flushFrame = true
-        ) {
+        )
+        {
             var outputWriter = _pair.Application.Output;
             outputWriter.WriteData(streamId, data, endStream);
             if (flushFrame)
@@ -1151,7 +1171,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Tests
             Memory<byte> data,
             byte padLength,
             bool endStream
-        ) {
+        )
+        {
             var outputWriter = _pair.Application.Output;
             var frame = new Http2Frame();
 
@@ -1342,7 +1363,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Tests
 
         internal async Task<Http2FrameWithPayload> ReceiveFrameAsync(
             uint maxFrameSize = Http2PeerSettings.DefaultMaxFrameSize
-        ) {
+        )
+        {
             var frame = new Http2FrameWithPayload();
 
             while (true)
@@ -1364,7 +1386,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Tests
                             maxFrameSize,
                             out var framePayload
                         )
-                    ) {
+                    )
+                    {
                         consumed = examined = framePayload.End;
                         frame.Payload = framePayload.ToArray();
                         return frame;
@@ -1393,7 +1416,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Tests
             int withLength,
             byte withFlags,
             int withStreamId
-        ) {
+        )
+        {
             var frame = await ReceiveFrameAsync((uint)withLength);
 
             Assert.Equal(type, frame.Type);
@@ -1414,7 +1438,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Tests
         protected Task WaitForConnectionStopAsync(
             int expectedLastStreamId,
             bool ignoreNonGoAwayFrames
-        ) {
+        )
+        {
             return WaitForConnectionErrorAsync<Exception>(
                 ignoreNonGoAwayFrames,
                 expectedLastStreamId,
@@ -1427,7 +1452,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Tests
             Http2Frame frame,
             int expectedLastStreamId,
             Http2ErrorCode expectedErrorCode
-        ) {
+        )
+        {
             Assert.Equal(Http2FrameType.GOAWAY, frame.Type);
             Assert.Equal(8, frame.PayloadLength);
             Assert.Equal(0, frame.Flags);
@@ -1490,7 +1516,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Tests
             int expectedStreamId,
             Http2ErrorCode expectedErrorCode,
             string expectedErrorMessage
-        ) {
+        )
+        {
             var frame = await ReceiveFrameAsync();
 
             Assert.Equal(Http2FrameType.RST_STREAM, frame.Type);
@@ -1510,7 +1537,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Tests
 
         protected void VerifyDecodedRequestHeaders(
             IEnumerable<KeyValuePair<string, string>> expectedHeaders
-        ) {
+        )
+        {
             foreach (var header in expectedHeaders)
             {
                 Assert.True(_receivedHeaders.TryGetValue(header.Key, out var value), header.Key);

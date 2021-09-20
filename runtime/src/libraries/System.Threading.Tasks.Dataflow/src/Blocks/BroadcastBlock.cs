@@ -70,7 +70,8 @@ namespace System.Threading.Tasks.Dataflow
         public BroadcastBlock(
             Func<T, T>? cloningFunction,
             DataflowBlockOptions dataflowBlockOptions
-        ) {
+        )
+        {
             // Validate arguments
             if (dataflowBlockOptions == null)
                 throw new ArgumentNullException(nameof(dataflowBlockOptions));
@@ -155,7 +156,8 @@ namespace System.Threading.Tasks.Dataflow
             Exception? exception,
             bool storeExceptionEvenIfAlreadyCompleting,
             bool revertProcessingState = false
-        ) {
+        )
+        {
             Debug.Assert(
                 storeExceptionEvenIfAlreadyCompleting || !revertProcessingState,
                 "Indicating dirty processing state may only come with storeExceptionEvenIfAlreadyCompleting==true."
@@ -168,7 +170,8 @@ namespace System.Threading.Tasks.Dataflow
                 if (
                     exception != null
                     && (!_decliningPermanently || storeExceptionEvenIfAlreadyCompleting)
-                ) {
+                )
+                {
                     _source.AddException(exception);
                 }
 
@@ -218,7 +221,8 @@ namespace System.Threading.Tasks.Dataflow
             T messageValue,
             ISourceBlock<T>? source,
             bool consumeToAccept
-        ) {
+        )
+        {
             // Validate arguments
             if (!messageHeader.IsValid)
                 throw new ArgumentException(
@@ -253,7 +257,8 @@ namespace System.Threading.Tasks.Dataflow
                         && _boundingState.PostponedMessages.Count == 0
                         && _boundingState.TaskForInputProcessing == null
                     )
-                ) {
+                )
+                {
                     // Consume the message from the source if necessary
                     if (consumeToAccept)
                     {
@@ -332,7 +337,8 @@ namespace System.Threading.Tasks.Dataflow
                 && _boundingState.TaskForInputProcessing == null
                 && _boundingState.PostponedMessages.Count > 0
                 && _boundingState.CountIsLessThanBound
-            ) {
+            )
+            {
                 // Create task and store into _taskForInputProcessing prior to scheduling the task
                 // so that _taskForInputProcessing will be visibly set in the task loop.
                 _boundingState.TaskForInputProcessing = new Task(
@@ -496,7 +502,8 @@ namespace System.Threading.Tasks.Dataflow
                 _decliningPermanently
                 && !_completionReserved
                 && (_boundingState == null || _boundingState.TaskForInputProcessing == null)
-            ) {
+            )
+            {
                 _completionReserved = true;
 
                 // If we're in bounding mode and we have any postponed messages, we need to clear them,
@@ -548,7 +555,8 @@ namespace System.Threading.Tasks.Dataflow
             DataflowMessageHeader messageHeader,
             ITargetBlock<T> target,
             out bool messageConsumed
-        ) {
+        )
+        {
             return _source.ConsumeMessage(messageHeader, target, out messageConsumed);
         }
 
@@ -556,7 +564,8 @@ namespace System.Threading.Tasks.Dataflow
         bool ISourceBlock<T>.ReserveMessage(
             DataflowMessageHeader messageHeader,
             ITargetBlock<T> target
-        ) {
+        )
+        {
             return _source.ReserveMessage(messageHeader, target);
         }
 
@@ -564,7 +573,8 @@ namespace System.Threading.Tasks.Dataflow
         void ISourceBlock<T>.ReleaseReservation(
             DataflowMessageHeader messageHeader,
             ITargetBlock<T> target
-        ) {
+        )
+        {
             _source.ReleaseReservation(messageHeader, target);
         }
 
@@ -735,7 +745,8 @@ namespace System.Threading.Tasks.Dataflow
                 Func<TOutput, TOutput>? cloningFunction,
                 DataflowBlockOptions dataflowBlockOptions,
                 Action<int>? itemsRemovedAction
-            ) {
+            )
+            {
                 Debug.Assert(owningSource != null, "Must be associated with a broadcast block.");
                 Debug.Assert(
                     dataflowBlockOptions != null,
@@ -756,7 +767,8 @@ namespace System.Threading.Tasks.Dataflow
             internal bool TryReceive(
                 Predicate<TOutput>? filter,
                 [MaybeNullWhen(false)] out TOutput item
-            ) {
+            )
+            {
                 // Take the lock only long enough to get the message,
                 // synchronizing with other activities on the block.
                 // We don't want to execute the user-provided cloning delegate
@@ -1001,7 +1013,8 @@ namespace System.Threading.Tasks.Dataflow
                 DataflowMessageHeader header,
                 TOutput message,
                 ITargetBlock<TOutput> target
-            ) {
+            )
+            {
                 Common.ContractAssertMonitorStatus(OutgoingLock, held: true);
                 Common.ContractAssertMonitorStatus(ValueLock, held: false);
 
@@ -1122,7 +1135,8 @@ namespace System.Threading.Tasks.Dataflow
                             int counter = 0;
                             counter < maxMessagesPerTask && !CanceledOrFaulted;
                             counter++
-                        ) {
+                        )
+                        {
                             if (!OfferToTargets())
                                 break;
                         }
@@ -1265,7 +1279,8 @@ namespace System.Threading.Tasks.Dataflow
             internal IDisposable LinkTo(
                 ITargetBlock<TOutput> target,
                 DataflowLinkOptions linkOptions
-            ) {
+            )
+            {
                 // Validate arguments
                 if (target == null)
                     throw new ArgumentNullException(nameof(target));
@@ -1301,7 +1316,8 @@ namespace System.Threading.Tasks.Dataflow
                 DataflowMessageHeader messageHeader,
                 ITargetBlock<TOutput> target,
                 out bool messageConsumed
-            ) {
+            )
+            {
                 // Validate arguments
                 if (!messageHeader.IsValid)
                     throw new ArgumentException(
@@ -1348,7 +1364,8 @@ namespace System.Threading.Tasks.Dataflow
             internal bool ReserveMessage(
                 DataflowMessageHeader messageHeader,
                 ITargetBlock<TOutput> target
-            ) {
+            )
+            {
                 // Validate arguments
                 if (!messageHeader.IsValid)
                     throw new ArgumentException(
@@ -1382,7 +1399,8 @@ namespace System.Threading.Tasks.Dataflow
             internal void ReleaseReservation(
                 DataflowMessageHeader messageHeader,
                 ITargetBlock<TOutput> target
-            ) {
+            )
+            {
                 // Validate arguments
                 if (!messageHeader.IsValid)
                     throw new ArgumentException(

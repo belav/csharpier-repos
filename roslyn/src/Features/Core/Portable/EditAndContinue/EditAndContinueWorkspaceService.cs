@@ -90,7 +90,8 @@ namespace Microsoft.CodeAnalysis.EditAndContinue
             IManagedEditAndContinueDebuggerService debuggerService,
             bool captureMatchingDocuments,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var initialDocumentStates = captureMatchingDocuments
                 ? await CommittedSolution.GetMatchingDocumentsAsync(
                           solution,
@@ -134,7 +135,8 @@ namespace Microsoft.CodeAnalysis.EditAndContinue
         internal void RestartEditSession(
             bool inBreakState,
             out ImmutableArray<DocumentId> documentsToReanalyze
-        ) {
+        )
+        {
             var debuggingSession = _debuggingSession;
             Contract.ThrowIfNull(debuggingSession);
 
@@ -161,7 +163,8 @@ namespace Microsoft.CodeAnalysis.EditAndContinue
             Document document,
             DocumentActiveStatementSpanProvider activeStatementSpanProvider,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             try
             {
                 var debuggingSession = _debuggingSession;
@@ -208,7 +211,8 @@ namespace Microsoft.CodeAnalysis.EditAndContinue
                     oldDocumentState == CommittedSolution.DocumentState.OutOfSync
                     || oldDocumentState == CommittedSolution.DocumentState.Indeterminate
                     || oldDocumentState == CommittedSolution.DocumentState.DesignTimeOnly
-                ) {
+                )
+                {
                     // Do not report diagnostics for existing out-of-sync documents or design-time-only documents.
                     return ImmutableArray<Diagnostic>.Empty;
                 }
@@ -293,7 +297,8 @@ namespace Microsoft.CodeAnalysis.EditAndContinue
             SolutionActiveStatementSpanProvider solutionActiveStatementSpanProvider,
             string? sourceFilePath,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             // GetStatusAsync is called outside of edit session when the debugger is determining
             // whether a source file checksum matches the one in PDB.
             // The debugger expects no changes in this case.
@@ -315,7 +320,8 @@ namespace Microsoft.CodeAnalysis.EditAndContinue
             Solution solution,
             SolutionActiveStatementSpanProvider activeStatementSpanProvider,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var debuggingSession = _debuggingSession;
             if (debuggingSession == null)
             {
@@ -368,7 +374,8 @@ namespace Microsoft.CodeAnalysis.EditAndContinue
             Solution solution,
             ImmutableArray<DocumentId> documentIds,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var debuggingSession = _debuggingSession;
             if (debuggingSession == null || !debuggingSession.EditSession.InBreakState)
             {
@@ -392,7 +399,8 @@ namespace Microsoft.CodeAnalysis.EditAndContinue
                         documentId,
                         out var documentBaseActiveStatements
                     )
-                ) {
+                )
+                {
                     var document = await solution.GetDocumentAsync(
                             documentId,
                             includeSourceGenerated: true,
@@ -455,7 +463,8 @@ namespace Microsoft.CodeAnalysis.EditAndContinue
             Document document,
             DocumentActiveStatementSpanProvider activeStatementSpanProvider,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var debuggingSession = _debuggingSession;
             if (debuggingSession == null || !debuggingSession.EditSession.InBreakState)
             {
@@ -502,7 +511,8 @@ namespace Microsoft.CodeAnalysis.EditAndContinue
             SolutionActiveStatementSpanProvider activeStatementSpanProvider,
             ManagedInstructionId instructionId,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             try
             {
                 // It is allowed to call this method before entering or after exiting break mode. In fact, the VS debugger does so.
@@ -526,7 +536,8 @@ namespace Microsoft.CodeAnalysis.EditAndContinue
                         instructionId,
                         out var baseActiveStatement
                     )
-                ) {
+                )
+                {
                     return null;
                 }
 
@@ -595,7 +606,8 @@ namespace Microsoft.CodeAnalysis.EditAndContinue
             Solution solution,
             ManagedInstructionId instructionId,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             try
             {
                 var debuggingSession = _debuggingSession;
@@ -618,7 +630,8 @@ namespace Microsoft.CodeAnalysis.EditAndContinue
                         instructionId,
                         out var baseActiveStatement
                     )
-                ) {
+                )
+                {
                     return null;
                 }
 
@@ -654,7 +667,8 @@ namespace Microsoft.CodeAnalysis.EditAndContinue
             DebuggingSessionTelemetry.Data debugSessionData,
             Action<FunctionId, LogMessage> log,
             Func<int> getNextId
-        ) {
+        )
+        {
             const string SessionId = nameof(SessionId);
             const string EditSessionId = nameof(EditSessionId);
 

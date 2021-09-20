@@ -27,7 +27,8 @@ namespace AutoMapper.Internal.Mappers
             MemberMap memberMap,
             Expression sourceExpression,
             Expression destExpression
-        ) {
+        )
+        {
             var destinationType = destExpression.Type;
             List<SwitchCase> switchCases = null;
             foreach (var memberInfo in destinationType.GetFields(TypeExtensions.StaticFlags))

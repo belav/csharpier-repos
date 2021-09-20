@@ -19,7 +19,8 @@ namespace System.ComponentModel
             PropertyDescriptor extenderProperty,
             Type receiverType,
             IExtenderProvider provider
-        ) {
+        )
+        {
             return new ExtenderProvidedPropertyAttribute
             {
                 ExtenderProperty = extenderProperty,

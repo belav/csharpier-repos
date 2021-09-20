@@ -48,7 +48,8 @@ public class MarshalStructTest
     public delegate bool InnerSequentialByRefCdeclcaller([In, Out] ref InnerSequential argStr);
     private static bool TestMethodForStructInnerSequential_ReversePInvokeByRef_Cdecl(
         ref InnerSequential argstr
-    ) {
+    )
+    {
         Console.WriteLine("ReversePinvoke,By Ref,Cdecl");
         InnerSequential change_is = Helper.NewInnerSequential(77, 77.0F, "changed string");
         //Check the input
@@ -70,7 +71,8 @@ public class MarshalStructTest
     public delegate bool InnerSequentialByRefStdCallcaller([In, Out] ref InnerSequential argStr);
     private static bool TestMethodForStructInnerSequential_ReversePInvokeByRef_StdCall(
         ref InnerSequential argstr
-    ) {
+    )
+    {
         Console.WriteLine("ReversePinvoke,By Ref,StdCall");
         InnerSequential change_is = Helper.NewInnerSequential(77, 77.0F, "changed string");
         //Check the input
@@ -108,7 +110,8 @@ public class MarshalStructTest
     public delegate bool InnerSequentialByValCdeclcaller([In, Out] InnerSequential argStr);
     private static bool TestMethodForStructInnerSequential_ReversePInvokeByVal_Cdecl(
         InnerSequential argstr
-    ) {
+    )
+    {
         Console.WriteLine("ReversePinvoke,By Value,Cdecl");
         InnerSequential change_is = Helper.NewInnerSequential(77, 77.0F, "changed string");
         //Check the input
@@ -130,7 +133,8 @@ public class MarshalStructTest
     public delegate bool InnerSequentialByValStdCallcaller([In, Out] InnerSequential argStr);
     private static bool TestMethodForStructInnerSequential_ReversePInvokeByVal_StdCall(
         InnerSequential argstr
-    ) {
+    )
+    {
         Console.WriteLine("ReversePinvoke,By Value,StdCall");
         InnerSequential change_is = Helper.NewInnerSequential(77, 77.0F, "changed string");
         //Check the input
@@ -174,7 +178,8 @@ public class MarshalStructTest
     );
     private static bool TestMethodForStructInnerArraySequential_ReversePInvokeByRef_Cdecl(
         ref InnerArraySequential argstr
-    ) {
+    )
+    {
         Console.WriteLine("ReversePinvoke,By Ref,Cdecl");
         InnerArraySequential change_is = Helper.NewInnerArraySequential(
             77,
@@ -205,7 +210,8 @@ public class MarshalStructTest
     );
     private static bool TestMethodForStructInnerArraySequential_ReversePInvokeByRef_StdCall(
         ref InnerArraySequential argstr
-    ) {
+    )
+    {
         Console.WriteLine("ReversePinvoke,By Ref,StdCall");
         InnerArraySequential change_is = Helper.NewInnerArraySequential(
             77,
@@ -253,7 +259,8 @@ public class MarshalStructTest
     );
     private static bool TestMethodForStructInnerArraySequential_ReversePInvokeByVal_Cdecl(
         InnerArraySequential argstr
-    ) {
+    )
+    {
         Console.WriteLine("ReversePinvoke,By Value,Cdecl");
         InnerArraySequential change_is = Helper.NewInnerArraySequential(
             77,
@@ -284,7 +291,8 @@ public class MarshalStructTest
     );
     private static bool TestMethodForStructInnerArraySequential_ReversePInvokeByVal_StdCall(
         InnerArraySequential argstr
-    ) {
+    )
+    {
         Console.WriteLine("ReversePinvoke,By Value,StdCall");
         InnerArraySequential change_is = Helper.NewInnerArraySequential(
             77,
@@ -335,7 +343,8 @@ public class MarshalStructTest
     );
     private static bool TestMethodForStructCharSetAnsiSequential_ReversePInvokeByRef_Cdecl(
         ref CharSetAnsiSequential argstr
-    ) {
+    )
+    {
         Console.WriteLine("ReversePinvoke,By Ref,Cdecl");
         CharSetAnsiSequential change_is = Helper.NewCharSetAnsiSequential("change string", 'n');
         //Check the input
@@ -358,7 +367,8 @@ public class MarshalStructTest
     );
     private static bool TestMethodForStructCharSetAnsiSequential_ReversePInvokeByRef_StdCall(
         ref CharSetAnsiSequential argstr
-    ) {
+    )
+    {
         Console.WriteLine("ReversePinvoke,By Ref,StdCall");
         CharSetAnsiSequential change_is = Helper.NewCharSetAnsiSequential("change string", 'n');
         //Check the input
@@ -397,7 +407,8 @@ public class MarshalStructTest
     );
     private static bool TestMethodForStructCharSetAnsiSequential_ReversePInvokeByVal_Cdecl(
         CharSetAnsiSequential argstr
-    ) {
+    )
+    {
         Console.WriteLine("ReversePinvoke,By Value,Cdecl");
         CharSetAnsiSequential change_is = Helper.NewCharSetAnsiSequential("change string", 'n');
         //Check the input
@@ -420,7 +431,8 @@ public class MarshalStructTest
     );
     private static bool TestMethodForStructCharSetAnsiSequential_ReversePInvokeByVal_StdCall(
         CharSetAnsiSequential argstr
-    ) {
+    )
+    {
         Console.WriteLine("ReversePinvoke,By Value,StdCall");
         CharSetAnsiSequential change_is = Helper.NewCharSetAnsiSequential("change string", 'n');
         //Check the input
@@ -463,7 +475,8 @@ public class MarshalStructTest
     );
     private static bool TestMethodForStructCharSetUnicodeSequential_ReversePInvokeByRef_Cdecl(
         ref CharSetUnicodeSequential argstr
-    ) {
+    )
+    {
         Console.WriteLine("ReversePinvoke,By Ref,Cdecl");
         CharSetUnicodeSequential change_is = Helper.NewCharSetUnicodeSequential(
             "change string",
@@ -489,7 +502,8 @@ public class MarshalStructTest
     );
     private static bool TestMethodForStructCharSetUnicodeSequential_ReversePInvokeByRef_StdCall(
         ref CharSetUnicodeSequential argstr
-    ) {
+    )
+    {
         Console.WriteLine("ReversePinvoke,By Ref,StdCall");
         CharSetUnicodeSequential change_is = Helper.NewCharSetUnicodeSequential(
             "change string",
@@ -531,7 +545,8 @@ public class MarshalStructTest
     );
     private static bool TestMethodForStructCharSetUnicodeSequential_ReversePInvokeByVal_Cdecl(
         CharSetUnicodeSequential argstr
-    ) {
+    )
+    {
         Console.WriteLine("ReversePinvoke,By Value,Cdecl");
         CharSetUnicodeSequential change_is = Helper.NewCharSetUnicodeSequential(
             "change string",
@@ -557,7 +572,8 @@ public class MarshalStructTest
     );
     private static bool TestMethodForStructCharSetUnicodeSequential_ReversePInvokeByVal_StdCall(
         CharSetUnicodeSequential argstr
-    ) {
+    )
+    {
         Console.WriteLine("ReversePinvoke,By Value,StdCall");
         CharSetUnicodeSequential change_is = Helper.NewCharSetUnicodeSequential(
             "change string",
@@ -601,7 +617,8 @@ public class MarshalStructTest
     public delegate bool NumberSequentialByRefCdeclcaller([In, Out] ref NumberSequential argStr);
     private static bool TestMethodForStructNumberSequential_ReversePInvokeByRef_Cdecl(
         ref NumberSequential argstr
-    ) {
+    )
+    {
         Console.WriteLine("ReversePinvoke,By Ref,Cdecl");
         NumberSequential change_is = Helper.NewNumberSequential(
             0,
@@ -645,7 +662,8 @@ public class MarshalStructTest
     public delegate bool NumberSequentialByRefStdCallcaller([In, Out] ref NumberSequential argStr);
     private static bool TestMethodForStructNumberSequential_ReversePInvokeByRef_StdCall(
         ref NumberSequential argstr
-    ) {
+    )
+    {
         Console.WriteLine("ReversePinvoke,By Ref,StdCall");
         NumberSequential change_is = Helper.NewNumberSequential(
             0,
@@ -707,7 +725,8 @@ public class MarshalStructTest
     );
     private static NumberSequential TestMethodForStructNumberSequential_ReversePInvokeByVal_Cdecl(
         NumberSequential argstr
-    ) {
+    )
+    {
         Console.WriteLine("ReversePinvoke,By Value,Cdecl");
         NumberSequential change_is = Helper.NewNumberSequential(
             0,
@@ -753,7 +772,8 @@ public class MarshalStructTest
     );
     private static NumberSequential TestMethodForStructNumberSequential_ReversePInvokeByVal_StdCall(
         NumberSequential argstr
-    ) {
+    )
+    {
         Console.WriteLine("ReversePinvoke,By Value,StdCall");
         NumberSequential change_is = Helper.NewNumberSequential(
             0,
@@ -1039,7 +1059,8 @@ public class MarshalStructTest
     );
     private static bool TestMethodForStructStringStructSequentialAnsi_ReversePInvokeByRef_Cdecl(
         ref StringStructSequentialAnsi argstr
-    ) {
+    )
+    {
         Console.WriteLine("ReversePinvoke,By Ref,Cdecl");
         strOne = new String('a', 512);
         strTwo = new String('b', 512);
@@ -1067,7 +1088,8 @@ public class MarshalStructTest
     );
     private static bool TestMethodForStructStringStructSequentialAnsi_ReversePInvokeByRef_StdCall(
         ref StringStructSequentialAnsi argstr
-    ) {
+    )
+    {
         Console.WriteLine("ReversePinvoke,By Ref,StdCall");
         strOne = new String('a', 512);
         strTwo = new String('b', 512);
@@ -1111,7 +1133,8 @@ public class MarshalStructTest
     );
     private static bool TestMethodForStructStringStructSequentialAnsi_ReversePInvokeByVal_Cdecl(
         StringStructSequentialAnsi argstr
-    ) {
+    )
+    {
         Console.WriteLine("ReversePinvoke,By Value,Cdecl");
         strOne = new String('a', 512);
         strTwo = new String('b', 512);
@@ -1139,7 +1162,8 @@ public class MarshalStructTest
     );
     private static bool TestMethodForStructStringStructSequentialAnsi_ReversePInvokeByVal_StdCall(
         StringStructSequentialAnsi argstr
-    ) {
+    )
+    {
         Console.WriteLine("ReversePinvoke,By Value,StdCall");
         strOne = new String('a', 512);
         strTwo = new String('b', 512);
@@ -1187,7 +1211,8 @@ public class MarshalStructTest
     );
     private static bool TestMethodForStructStringStructSequentialUnicode_ReversePInvokeByRef_Cdecl(
         ref StringStructSequentialUnicode argstr
-    ) {
+    )
+    {
         Console.WriteLine("ReversePinvoke,By Ref,Cdecl");
         strOne = new String('a', 256);
         strTwo = new String('b', 256);
@@ -1215,7 +1240,8 @@ public class MarshalStructTest
     );
     private static bool TestMethodForStructStringStructSequentialUnicode_ReversePInvokeByRef_StdCall(
         ref StringStructSequentialUnicode argstr
-    ) {
+    )
+    {
         Console.WriteLine("ReversePinvoke,By Ref,StdCall");
         strOne = new String('a', 256);
         strTwo = new String('b', 256);
@@ -1258,7 +1284,8 @@ public class MarshalStructTest
     );
     private static bool TestMethodForStructStringStructSequentialUnicode_ReversePInvokeByVal_Cdecl(
         StringStructSequentialUnicode argstr
-    ) {
+    )
+    {
         Console.WriteLine("ReversePinvoke,By Value,Cdecl");
         strOne = new String('a', 256);
         strTwo = new String('b', 256);
@@ -1286,7 +1313,8 @@ public class MarshalStructTest
     );
     private static bool TestMethodForStructStringStructSequentialUnicode_ReversePInvokeByVal_StdCall(
         StringStructSequentialUnicode argstr
-    ) {
+    )
+    {
         Console.WriteLine("ReversePinvoke,By Value,StdCall");
         strOne = new String('a', 256);
         strTwo = new String('b', 256);
@@ -1534,7 +1562,8 @@ public class MarshalStructTest
     );
     private static bool TestMethodForStructIncludeOuterIntergerStructSequential_ReversePInvokeByRef_Cdecl(
         ref IncludeOuterIntergerStructSequential argstr
-    ) {
+    )
+    {
         Console.WriteLine("ReversePinvoke,By Ref,Cdecl");
         IncludeOuterIntergerStructSequential changeIncludeOuterIntergerStructSequential =
             Helper.NewIncludeOuterIntergerStructSequential(64, 64);
@@ -1558,7 +1587,8 @@ public class MarshalStructTest
     );
     private static bool TestMethodForStructIncludeOuterIntergerStructSequential_ReversePInvokeByRef_StdCall(
         ref IncludeOuterIntergerStructSequential argstr
-    ) {
+    )
+    {
         Console.WriteLine("ReversePinvoke,By Ref,StdCall");
         IncludeOuterIntergerStructSequential changeIncludeOuterIntergerStructSequential =
             Helper.NewIncludeOuterIntergerStructSequential(64, 64);
@@ -1598,7 +1628,8 @@ public class MarshalStructTest
     );
     private static IncludeOuterIntergerStructSequential TestMethodForStructIncludeOuterIntergerStructSequential_ReversePInvokeByVal_Cdecl(
         IncludeOuterIntergerStructSequential argstr
-    ) {
+    )
+    {
         Console.WriteLine("ReversePinvoke,By Value,Cdecl");
         IncludeOuterIntergerStructSequential changeIncludeOuterIntergerStructSequential =
             Helper.NewIncludeOuterIntergerStructSequential(64, 64);
@@ -1622,7 +1653,8 @@ public class MarshalStructTest
     );
     private static IncludeOuterIntergerStructSequential TestMethodForStructIncludeOuterIntergerStructSequential_ReversePInvokeByVal_StdCall(
         IncludeOuterIntergerStructSequential argstr
-    ) {
+    )
+    {
         Console.WriteLine("ReversePinvoke,By Value,StdCall");
         IncludeOuterIntergerStructSequential changeIncludeOuterIntergerStructSequential =
             Helper.NewIncludeOuterIntergerStructSequential(64, 64);
@@ -1776,7 +1808,8 @@ public class MarshalStructTest
     public delegate bool ComplexStructByRefCdeclcaller([In, Out] ref ComplexStruct argStr);
     private static bool TestMethodForStructComplexStruct_ReversePInvokeByRef_Cdecl(
         ref ComplexStruct cs
-    ) {
+    )
+    {
         Console.WriteLine("ReversePinvoke,By Ref,Cdecl");
         //Check the input
         Assert.AreEqual(9999, cs.i);
@@ -1797,7 +1830,8 @@ public class MarshalStructTest
     public delegate bool ComplexStructByRefStdCallcaller([In, Out] ref ComplexStruct argStr);
     private static bool TestMethodForStructComplexStruct_ReversePInvokeByRef_StdCall(
         ref ComplexStruct cs
-    ) {
+    )
+    {
         Console.WriteLine("ReversePinvoke,By Ref,StdCall");
         //Check the input
         Assert.AreEqual(9999, cs.i);
@@ -1854,7 +1888,8 @@ public class MarshalStructTest
     public delegate bool ComplexStructByValStdCallcaller([In, Out] ComplexStruct argStr);
     private static bool TestMethodForStructComplexStruct_ReversePInvokeByVal_StdCall(
         ComplexStruct cs
-    ) {
+    )
+    {
         Console.WriteLine("Reverse Pinvoke,By Value,StdCall");
         //Check the input
         Assert.AreEqual(9999, cs.i);
@@ -1894,7 +1929,8 @@ public class MarshalStructTest
     public static ByteStruct3Byte TestMethod_DoCallBack_MarshalStructByVal_ByteStruct3Byte_Cdecl(
         ByteStruct3Byte bspe,
         out bool success
-    ) {
+    )
+    {
         Console.WriteLine("Reverse,Pinvoke,By Val,Cdecl");
         ByteStruct3Byte change_bspe = Helper.NewByteStruct3Byte(1, 42, 90);
         Assert.IsTrue(
@@ -1921,7 +1957,8 @@ public class MarshalStructTest
     public static ByteStruct3Byte TestMethod_DoCallBack_MarshalStructByVal_ByteStruct3Byte_StdCall(
         ByteStruct3Byte bspe,
         out bool success
-    ) {
+    )
+    {
         Console.WriteLine("Reverse,Pinvoke,By Val,StdCall");
         ByteStruct3Byte change_bspe = Helper.NewByteStruct3Byte(1, 42, 90);
         Assert.IsTrue(
@@ -1956,7 +1993,8 @@ public class MarshalStructTest
     );
     private static IntergerStructSequential TestMethodForStructIntergerStructSequential_ReversePInvokeByVal_Cdecl(
         IntergerStructSequential argstr
-    ) {
+    )
+    {
         Console.WriteLine("ReversePinvoke,By Value,Cdecl");
         IntergerStructSequential changeIntergerStructSequential =
             Helper.NewIntergerStructSequential(64);
@@ -1979,7 +2017,8 @@ public class MarshalStructTest
     );
     private static IntergerStructSequential TestMethodForStructIntergerStructSequential_ReversePInvokeByVal_StdCall(
         IntergerStructSequential argstr
-    ) {
+    )
+    {
         Console.WriteLine("ReversePinvoke,By Value,StdCall");
         IntergerStructSequential changeIntergerStructSequential =
             Helper.NewIntergerStructSequential(64);
@@ -2739,7 +2778,8 @@ public class MarshalStructTest
         if (
             (RuntimeInformation.ProcessArchitecture != Architecture.X86)
             || !RuntimeInformation.IsOSPlatform(OSPlatform.Windows)
-        ) {
+        )
+        {
             TestMethod_DoCallBack_MarshalStructByVal_Cdecl(StructID.ByteStruct3Byte);
         }
     }
@@ -2766,7 +2806,8 @@ public class MarshalStructTest
         if (
             (RuntimeInformation.ProcessArchitecture != Architecture.X86)
             || !RuntimeInformation.IsOSPlatform(OSPlatform.Windows)
-        ) {
+        )
+        {
             TestMethod_DoCallBack_MarshalStructByVal_StdCall(StructID.ByteStruct3Byte);
         }
     }

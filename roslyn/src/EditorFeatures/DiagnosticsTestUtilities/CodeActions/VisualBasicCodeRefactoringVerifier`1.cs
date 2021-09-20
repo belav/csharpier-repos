@@ -27,7 +27,8 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.CodeActions
             string source,
             DiagnosticResult expected,
             string fixedSource
-        ) {
+        )
+        {
             return VerifyRefactoringAsync(source, new[] { expected }, fixedSource);
         }
 
@@ -36,7 +37,8 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.CodeActions
             string source,
             DiagnosticResult[] expected,
             string fixedSource
-        ) {
+        )
+        {
             var test = new Test { TestCode = source, FixedCode = fixedSource };
 
             test.ExpectedDiagnostics.AddRange(expected);

@@ -21,7 +21,8 @@ namespace System.Net.Http.Handlers
         public static ProgressMessageHandler CreateProgressMessageHandler(
             out MockProgressEventHandler progressEventHandler,
             bool sendProgress
-        ) {
+        )
+        {
             ProgressMessageHandler progressHandler = new ProgressMessageHandler();
             progressEventHandler = new MockProgressEventHandler();
             if (sendProgress)

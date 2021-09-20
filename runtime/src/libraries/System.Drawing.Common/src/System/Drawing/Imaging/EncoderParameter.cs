@@ -152,7 +152,8 @@ namespace System.Drawing.Imaging
             int demoninator1,
             int numerator2,
             int demoninator2
-        ) {
+        )
+        {
             _parameterGuid = encoder.Guid;
 
             _parameterValueType = EncoderParameterValueType.ValueTypeRationalRange;
@@ -280,7 +281,8 @@ namespace System.Drawing.Imaging
             int[] denominator1,
             int[] numerator2,
             int[] denominator2
-        ) {
+        )
+        {
             _parameterGuid = encoder.Guid;
 
             if (
@@ -356,7 +358,8 @@ namespace System.Drawing.Imaging
             int numberValues,
             EncoderParameterValueType type,
             IntPtr value
-        ) {
+        )
+        {
             int size;
 
             switch (type)

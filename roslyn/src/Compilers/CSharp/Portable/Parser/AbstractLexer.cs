@@ -80,7 +80,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Syntax.InternalSyntax
             int width,
             XmlParseErrorCode code,
             params object[] args
-        ) {
+        )
+        {
             this.AddError(this.MakeError(position, width, code, args));
         }
 
@@ -128,7 +129,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Syntax.InternalSyntax
             int width,
             ErrorCode code,
             params object[] args
-        ) {
+        )
+        {
             int offset = GetLexemeOffsetFromPosition(position);
             return new SyntaxDiagnosticInfo(offset, width, code, args);
         }
@@ -138,7 +140,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Syntax.InternalSyntax
             int width,
             XmlParseErrorCode code,
             params object[] args
-        ) {
+        )
+        {
             int offset = GetLexemeOffsetFromPosition(position);
             return new XmlSyntaxDiagnosticInfo(offset, width, code, args);
         }
@@ -168,7 +171,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Syntax.InternalSyntax
         protected static XmlSyntaxDiagnosticInfo MakeError(
             XmlParseErrorCode code,
             params object[] args
-        ) {
+        )
+        {
             return new XmlSyntaxDiagnosticInfo(0, 0, code, args);
         }
     }

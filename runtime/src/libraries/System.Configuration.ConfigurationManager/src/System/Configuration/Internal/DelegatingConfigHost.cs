@@ -39,7 +39,8 @@ namespace System.Configuration.Internal
             out string locationConfigPath,
             IInternalConfigRoot configRoot,
             params object[] hostInitConfigurationParams
-        ) {
+        )
+        {
             Host.InitForConfiguration(
                 ref locationSubPath,
                 out configPath,
@@ -102,7 +103,8 @@ namespace System.Configuration.Internal
             string streamName,
             string templateStreamName,
             ref object writeContext
-        ) {
+        )
+        {
             return Host.OpenStreamForWrite(streamName, templateStreamName, ref writeContext);
         }
 
@@ -111,7 +113,8 @@ namespace System.Configuration.Internal
             string templateStreamName,
             ref object writeContext,
             bool assertPermissions
-        ) {
+        )
+        {
             return Host.OpenStreamForWrite(
                 streamName,
                 templateStreamName,
@@ -130,7 +133,8 @@ namespace System.Configuration.Internal
             bool success,
             object writeContext,
             bool assertPermissions
-        ) {
+        )
+        {
             Host.WriteCompleted(streamName, success, writeContext, assertPermissions);
         }
 
@@ -149,14 +153,16 @@ namespace System.Configuration.Internal
         public virtual object StartMonitoringStreamForChanges(
             string streamName,
             StreamChangeCallback callback
-        ) {
+        )
+        {
             return Host.StartMonitoringStreamForChanges(streamName, callback);
         }
 
         public virtual void StopMonitoringStreamForChanges(
             string streamName,
             StreamChangeCallback callback
-        ) {
+        )
+        {
             Host.StopMonitoringStreamForChanges(streamName, callback);
         }
 
@@ -175,7 +181,8 @@ namespace System.Configuration.Internal
             string configPath,
             ConfigurationAllowDefinition allowDefinition,
             ConfigurationAllowExeDefinition allowExeDefinition
-        ) {
+        )
+        {
             return Host.IsDefinitionAllowed(configPath, allowDefinition, allowExeDefinition);
         }
 
@@ -184,7 +191,8 @@ namespace System.Configuration.Internal
             ConfigurationAllowDefinition allowDefinition,
             ConfigurationAllowExeDefinition allowExeDefinition,
             IConfigErrorInfo errorInfo
-        ) {
+        )
+        {
             Host.VerifyDefinitionAllowed(
                 configPath,
                 allowDefinition,
@@ -196,7 +204,8 @@ namespace System.Configuration.Internal
         public virtual string GetConfigPathFromLocationSubPath(
             string configPath,
             string locationSubPath
-        ) {
+        )
+        {
             return Host.GetConfigPathFromLocationSubPath(configPath, locationSubPath);
         }
 
@@ -229,7 +238,8 @@ namespace System.Configuration.Internal
             string encryptedXml,
             ProtectedConfigurationProvider protectionProvider,
             ProtectedConfigurationSection protectedConfigSection
-        ) {
+        )
+        {
             return Host.DecryptSection(encryptedXml, protectionProvider, protectedConfigSection);
         }
 
@@ -237,7 +247,8 @@ namespace System.Configuration.Internal
             string clearTextXml,
             ProtectedConfigurationProvider protectionProvider,
             ProtectedConfigurationSection protectedConfigSection
-        ) {
+        )
+        {
             return Host.EncryptSection(clearTextXml, protectionProvider, protectedConfigSection);
         }
 
@@ -279,7 +290,8 @@ namespace System.Configuration.Internal
             IInternalConfigRecord configRecord,
             out PermissionSet permissionSet,
             out bool isHostReady
-        ) {
+        )
+        {
             permissionSet = new PermissionSet(null);
             isHostReady = true;
         }

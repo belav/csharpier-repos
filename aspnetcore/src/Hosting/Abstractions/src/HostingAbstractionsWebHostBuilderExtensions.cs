@@ -26,7 +26,8 @@ namespace Microsoft.AspNetCore.Hosting
         public static IWebHostBuilder UseConfiguration(
             this IWebHostBuilder hostBuilder,
             IConfiguration configuration
-        ) {
+        )
+        {
             foreach (var setting in configuration.AsEnumerable(makePathsRelative: true))
             {
                 hostBuilder.UseSetting(setting.Key, setting.Value);
@@ -45,7 +46,8 @@ namespace Microsoft.AspNetCore.Hosting
         public static IWebHostBuilder CaptureStartupErrors(
             this IWebHostBuilder hostBuilder,
             bool captureStartupErrors
-        ) {
+        )
+        {
             return hostBuilder.UseSetting(
                 WebHostDefaults.CaptureStartupErrorsKey,
                 captureStartupErrors ? "true" : "false"
@@ -64,7 +66,8 @@ namespace Microsoft.AspNetCore.Hosting
         public static IWebHostBuilder UseStartup(
             this IWebHostBuilder hostBuilder,
             string startupAssemblyName
-        ) {
+        )
+        {
             if (startupAssemblyName == null)
             {
                 throw new ArgumentNullException(nameof(startupAssemblyName));
@@ -106,7 +109,8 @@ namespace Microsoft.AspNetCore.Hosting
         public static IWebHostBuilder UseEnvironment(
             this IWebHostBuilder hostBuilder,
             string environment
-        ) {
+        )
+        {
             if (environment == null)
             {
                 throw new ArgumentNullException(nameof(environment));
@@ -124,7 +128,8 @@ namespace Microsoft.AspNetCore.Hosting
         public static IWebHostBuilder UseContentRoot(
             this IWebHostBuilder hostBuilder,
             string contentRoot
-        ) {
+        )
+        {
             if (contentRoot == null)
             {
                 throw new ArgumentNullException(nameof(contentRoot));
@@ -158,7 +163,8 @@ namespace Microsoft.AspNetCore.Hosting
         public static IWebHostBuilder UseUrls(
             this IWebHostBuilder hostBuilder,
             params string[] urls
-        ) {
+        )
+        {
             if (urls == null)
             {
                 throw new ArgumentNullException(nameof(urls));
@@ -177,7 +183,8 @@ namespace Microsoft.AspNetCore.Hosting
         public static IWebHostBuilder PreferHostingUrls(
             this IWebHostBuilder hostBuilder,
             bool preferHostingUrls
-        ) {
+        )
+        {
             return hostBuilder.UseSetting(
                 WebHostDefaults.PreferHostingUrlsKey,
                 preferHostingUrls ? "true" : "false"
@@ -193,7 +200,8 @@ namespace Microsoft.AspNetCore.Hosting
         public static IWebHostBuilder SuppressStatusMessages(
             this IWebHostBuilder hostBuilder,
             bool suppressStatusMessages
-        ) {
+        )
+        {
             return hostBuilder.UseSetting(
                 WebHostDefaults.SuppressStatusMessagesKey,
                 suppressStatusMessages ? "true" : "false"
@@ -209,7 +217,8 @@ namespace Microsoft.AspNetCore.Hosting
         public static IWebHostBuilder UseShutdownTimeout(
             this IWebHostBuilder hostBuilder,
             TimeSpan timeout
-        ) {
+        )
+        {
             return hostBuilder.UseSetting(
                 WebHostDefaults.ShutdownTimeoutKey,
                 ((int)timeout.TotalSeconds).ToString(CultureInfo.InvariantCulture)

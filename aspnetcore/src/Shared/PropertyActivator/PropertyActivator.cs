@@ -40,7 +40,8 @@ namespace Microsoft.Extensions.Internal
             Type type,
             Type activateAttributeType,
             Func<PropertyInfo, PropertyActivator<TContext>> createActivateInfo
-        ) {
+        )
+        {
             if (type == null)
             {
                 throw new ArgumentNullException(nameof(type));
@@ -69,7 +70,8 @@ namespace Microsoft.Extensions.Internal
             Type activateAttributeType,
             Func<PropertyInfo, PropertyActivator<TContext>> createActivateInfo,
             bool includeNonPublic
-        ) {
+        )
+        {
             if (type == null)
             {
                 throw new ArgumentNullException(nameof(type));

@@ -82,7 +82,8 @@ namespace System.Buffers
             int startIndexAndFlags,
             object? endSegment,
             int endIndexAndFlags
-        ) {
+        )
+        {
             // Used by SliceImpl to create new ReadOnlySequence
 
             // startSegment and endSegment can be null for default ReadOnlySequence only
@@ -111,7 +112,8 @@ namespace System.Buffers
             int startIndex,
             ReadOnlySequenceSegment<T> endSegment,
             int endIndex
-        ) {
+        )
+        {
             if (
                 startSegment == null
                 || endSegment == null
@@ -176,7 +178,8 @@ namespace System.Buffers
                     out int index,
                     out int length
                 )
-            ) {
+            )
+            {
                 _startObject = manager;
                 _endObject = manager;
                 _startInteger = ReadOnlySequence.MemoryManagerToSequenceStart(index);
@@ -370,7 +373,8 @@ namespace System.Buffers
                     startRange,
                     (ulong)(((ReadOnlySequenceSegment<T>)endObject!).RunningIndex + endIndex)
                 )
-            ) {
+            )
+            {
                 ThrowHelper.ThrowArgumentOutOfRangeException_PositionOutOfRange();
             }
 
@@ -705,7 +709,8 @@ namespace System.Buffers
             ref SequencePosition position,
             out ReadOnlyMemory<T> memory,
             bool advance = true
-        ) {
+        )
+        {
             bool result = TryGetBuffer(position, out memory, out SequencePosition next);
             if (advance)
             {

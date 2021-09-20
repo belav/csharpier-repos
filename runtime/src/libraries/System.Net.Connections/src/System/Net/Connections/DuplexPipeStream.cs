@@ -72,7 +72,8 @@ namespace System.Net.Connections
             int offset,
             int count,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             ValidateBufferArguments(buffer, offset, count);
 
             return ReadAsync(buffer.AsMemory(offset, count), cancellationToken).AsTask();
@@ -81,7 +82,8 @@ namespace System.Net.Connections
         public override async ValueTask<int> ReadAsync(
             Memory<byte> buffer,
             CancellationToken cancellationToken = default
-        ) {
+        )
+        {
             ReadResult result = await _reader.ReadAsync(cancellationToken).ConfigureAwait(false);
 
             if (result.IsCanceled)
@@ -129,7 +131,8 @@ namespace System.Net.Connections
             int count,
             AsyncCallback? callback,
             object? state
-        ) {
+        )
+        {
             return TaskToApm.Begin(ReadAsync(buffer, offset, count), callback, state);
         }
 
@@ -158,7 +161,8 @@ namespace System.Net.Connections
             int offset,
             int count,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             ValidateBufferArguments(buffer, offset, count);
 
             return WriteAsync(buffer.AsMemory(offset, count), cancellationToken).AsTask();
@@ -167,7 +171,8 @@ namespace System.Net.Connections
         public override async ValueTask WriteAsync(
             ReadOnlyMemory<byte> buffer,
             CancellationToken cancellationToken = default
-        ) {
+        )
+        {
             FlushResult r = await _writer.WriteAsync(buffer, cancellationToken)
                 .ConfigureAwait(false);
             if (r.IsCanceled)
@@ -180,7 +185,8 @@ namespace System.Net.Connections
             int count,
             AsyncCallback? callback,
             object? state
-        ) {
+        )
+        {
             return TaskToApm.Begin(WriteAsync(buffer, offset, count), callback, state);
         }
 
@@ -193,7 +199,8 @@ namespace System.Net.Connections
             Stream destination,
             int bufferSize,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             ValidateCopyToArguments(destination, bufferSize);
 
             return _reader.CopyToAsync(destination, cancellationToken);

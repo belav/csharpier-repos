@@ -324,7 +324,8 @@ namespace System.Configuration
                     || string.IsNullOrEmpty(ProductName)
                     || string.IsNullOrEmpty(ProductVersion)
                 )
-            ) {
+            )
+            {
                 if (exeAssembly != null)
                 {
                     MethodInfo entryPoint = exeAssembly.EntryPoint;

@@ -54,7 +54,8 @@ namespace Microsoft.CodeAnalysis.ExternalAccess.Watch.Api
                 ImmutableArray<byte> ilDelta,
                 ImmutableArray<byte> metadataDelta,
                 ImmutableArray<byte> pdbDelta
-            ) {
+            )
+            {
                 ModuleId = moduleId;
                 ILDelta = ilDelta;
                 MetadataDelta = metadataDelta;
@@ -99,7 +100,8 @@ namespace Microsoft.CodeAnalysis.ExternalAccess.Watch.Api
         public async Task<(ImmutableArray<Update> updates, ImmutableArray<Diagnostic> diagnostics)> EmitSolutionUpdateAsync(
             Solution solution,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var results = await _encService.EmitSolutionUpdateAsync(
                     solution,
                     s_solutionActiveStatementSpanProvider,

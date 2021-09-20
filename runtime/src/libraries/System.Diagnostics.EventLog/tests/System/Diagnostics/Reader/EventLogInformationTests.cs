@@ -16,7 +16,8 @@ namespace System.Diagnostics.Tests
         {
             using (
                 var session = usingDefaultCtor ? new EventLogSession() : new EventLogSession(null)
-            ) {
+            )
+            {
                 Assert.Throws<ArgumentNullException>(
                     () => session.GetLogInformation(null, PathType.LogName)
                 );

@@ -70,7 +70,8 @@ namespace System.Data
             bool IsXdr,
             XmlElement topNode,
             bool ignoreSchema
-        ) {
+        )
+        {
             // Initialization
             _dataSet = null;
             _dataTable = datatable;
@@ -143,7 +144,8 @@ namespace System.Data
             // don't consider whitespace
             while (
                 n != null && (n.NodeType == XmlNodeType.Whitespace || !IsTextLikeNode(n.NodeType))
-            ) {
+            )
+            {
                 n = n.NextSibling;
             }
 
@@ -152,7 +154,8 @@ namespace System.Data
                 if (
                     IsTextLikeNode(n.NodeType)
                     && (n.NextSibling == null || !IsTextLikeNode(n.NodeType))
-                ) {
+                )
+                {
                     // don't use string builder if only one text node exists
                     value = n.Value;
                     n = n.NextSibling;
@@ -188,7 +191,8 @@ namespace System.Data
                 if (
                     IsTextLikeNode(n.NodeType)
                     && (n.NextSibling == null || !IsTextLikeNode(n.NodeType))
-                ) {
+                )
+                {
                     // don't use string builder if only one text node exists
                     value = n.Value;
                     n = n.NextSibling;
@@ -439,7 +443,8 @@ namespace System.Data
                                 c.Table == row.Table
                                 && c.ColumnMapping != MappingType.Attribute
                                 && foundColumns[c] == null
-                            ) {
+                            )
+                            {
                                 foundColumns[c] = c;
                                 string text = GetValueForTextOnlyColums(n);
                                 if (
@@ -1003,7 +1008,8 @@ namespace System.Data
                         }
                         else if (
                             _dataReader.LocalName.StartsWith("hidden", StringComparison.Ordinal)
-                        ) {
+                        )
+                        {
                             // Hidden column ?
                             c = collection[
                                 XmlConvert.DecodeName(_dataReader.LocalName.Substring(6))
@@ -1180,7 +1186,8 @@ namespace System.Data
                             c.AllowDBNull
                             && c.ColumnMapping != MappingType.Hidden
                             && !c.AutoIncrement
-                        ) {
+                        )
+                        {
                             foundColumns[i] = DBNull.Value; // Assign DBNull if possible
                             // table.Rows.Add() below will deal
                             // with default values and autoincrement
@@ -1347,7 +1354,8 @@ namespace System.Data
                                         _dataReader.Read()
                                         && entryDepth < _dataReader.Depth
                                         && IsTextLikeNode(_dataReader.NodeType)
-                                    ) {
+                                    )
+                                    {
                                         if (builder == null)
                                         {
                                             builder = new StringBuilder(text);
@@ -1476,7 +1484,8 @@ namespace System.Data
                     (object)_dataReader.LocalName == _XSD_SCHEMA
                     && (object)_dataReader.NamespaceURI == _XSDNS
                 )
-            ) {
+            )
+            {
                 // Found XSD schema
                 if (_ignoreSchema)
                 { // Should ignore it?
@@ -1505,7 +1514,8 @@ namespace System.Data
                     (object)_dataReader.LocalName == _SQL_SYNC
                     && (object)_dataReader.NamespaceURI == _UPDGNS
                 )
-            ) {
+            )
+            {
                 _dataReader.Skip(); // Skip XDR or SQL sync
             }
             else

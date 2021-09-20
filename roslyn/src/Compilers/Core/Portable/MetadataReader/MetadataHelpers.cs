@@ -52,7 +52,8 @@ namespace Microsoft.CodeAnalysis
                 int pointerCount,
                 int[] arrayRanks,
                 string assemblyName
-            ) {
+            )
+            {
                 this.TopLevelType = topLevelType;
                 this.NestedTypes = nestedTypes;
                 this.TypeArguments = typeArguments;
@@ -125,7 +126,8 @@ namespace Microsoft.CodeAnalysis
             internal AssemblyQualifiedTypeName DecodeTypeName(
                 bool isTypeArgument = false,
                 bool isTypeArgumentWithAssemblyName = false
-            ) {
+            )
+            {
                 Debug.Assert(!isTypeArgumentWithAssemblyName || isTypeArgument);
 
                 string topLevelType = null;
@@ -291,7 +293,8 @@ namespace Microsoft.CodeAnalysis
                 bool decodingTopLevelType,
                 ref string topLevelType,
                 ref ArrayBuilder<string> nestedTypesBuilder
-            ) {
+            )
+            {
                 if (decodedTypeName.Length != 0)
                 {
                     if (decodingTopLevelType)
@@ -429,7 +432,8 @@ namespace Microsoft.CodeAnalysis
             private void DecodeArrayShape(
                 StringBuilder typeNameBuilder,
                 ref ArrayBuilder<int> arrayRanksBuilder
-            ) {
+            )
+            {
                 Debug.Assert(Current == '[');
 
                 int start = _offset;
@@ -526,7 +530,8 @@ namespace Microsoft.CodeAnalysis
         private static short InferTypeArityFromMetadataName(
             string emittedTypeName,
             out int suffixStartsAt
-        ) {
+        )
+        {
             Debug.Assert(emittedTypeName != null, "NULL actual name unexpected!!!");
             int emittedTypeNameLength = emittedTypeName.Length;
 
@@ -535,7 +540,8 @@ namespace Microsoft.CodeAnalysis
                 indexOfManglingChar = emittedTypeNameLength;
                 indexOfManglingChar >= 1;
                 indexOfManglingChar--
-            ) {
+            )
+            {
                 if (emittedTypeName[indexOfManglingChar - 1] == GenericTypeNameManglingChar)
                 {
                     break;
@@ -546,7 +552,8 @@ namespace Microsoft.CodeAnalysis
                 indexOfManglingChar < 2
                 || (emittedTypeNameLength - indexOfManglingChar) == 0
                 || emittedTypeNameLength - indexOfManglingChar > MaxStringLengthForParamSize
-            ) {
+            )
+            {
                 suffixStartsAt = -1;
                 return 0;
             }
@@ -568,7 +575,8 @@ namespace Microsoft.CodeAnalysis
                 || arity < 0
                 || arity > short.MaxValue
                 || stringRepresentingArity != arity.ToString()
-            ) {
+            )
+            {
                 suffixStartsAt = -1;
                 return 0;
             }
@@ -580,7 +588,8 @@ namespace Microsoft.CodeAnalysis
         internal static string InferTypeArityAndUnmangleMetadataName(
             string emittedTypeName,
             out short arity
-        ) {
+        )
+        {
             int suffixStartsAt;
             arity = InferTypeArityFromMetadataName(emittedTypeName, out suffixStartsAt);
 
@@ -654,7 +663,8 @@ namespace Microsoft.CodeAnalysis
                         len == 6
                         && start == 0
                         && name.StartsWith(SystemString, StringComparison.Ordinal)
-                    ) {
+                    )
+                    {
                         result.Add(SystemString);
                     }
                     else
@@ -779,7 +789,8 @@ namespace Microsoft.CodeAnalysis
             out IEnumerable<
                 KeyValuePair<string, IEnumerable<IGrouping<string, TypeDefinitionHandle>>>
             > namespaces
-        ) {
+        )
+        {
             Debug.Assert(typesByNS != null);
             Debug.Assert(namespaceNameLength >= 0);
             Debug.Assert(!isGlobalNamespace || namespaceNameLength == 0);
@@ -958,7 +969,8 @@ namespace Microsoft.CodeAnalysis
         private static string ExtractSimpleNameOfChildNamespace(
             int parentNamespaceNameLength,
             string fullName
-        ) {
+        )
+        {
             int index = fullName.IndexOf('.', parentNamespaceNameLength);
 
             if (index < 0)
@@ -1002,7 +1014,8 @@ namespace Microsoft.CodeAnalysis
             CommonMessageProvider messageProvider,
             int code,
             DiagnosticBag diagnostics
-        ) {
+        )
+        {
             string errorArgumentResourceId = GetAssemblyOrModuleNameErrorArgumentResourceName(name);
             if (errorArgumentResourceId != null)
             {
@@ -1021,7 +1034,8 @@ namespace Microsoft.CodeAnalysis
             CommonMessageProvider messageProvider,
             int code,
             ArrayBuilder<Diagnostic> builder
-        ) {
+        )
+        {
             string errorArgumentResourceId = GetAssemblyOrModuleNameErrorArgumentResourceName(name);
             if (errorArgumentResourceId != null)
             {
@@ -1090,7 +1104,8 @@ namespace Microsoft.CodeAnalysis
             string namespaceName,
             string typeName,
             string fullyQualified
-        ) {
+        )
+        {
             // Look for "[namespaceName].[typeName]" exactly
             return fullyQualified.Length == namespaceName.Length + typeName.Length + 1
                 && fullyQualified[namespaceName.Length] == MetadataHelpers.DotDelimiter

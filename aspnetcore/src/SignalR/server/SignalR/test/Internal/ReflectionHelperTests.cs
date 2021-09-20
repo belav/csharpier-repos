@@ -45,7 +45,8 @@ namespace Microsoft.AspNetCore.SignalR.Tests.Internal
         {
             public IAsyncEnumerator<object> GetAsyncEnumerator(
                 CancellationToken cancellationToken = default
-            ) {
+            )
+            {
                 throw new NotImplementedException();
             }
         }
@@ -54,7 +55,8 @@ namespace Microsoft.AspNetCore.SignalR.Tests.Internal
         {
             public IAsyncEnumerator<object> GetAsyncEnumerator(
                 CancellationToken cancellationToken = default
-            ) {
+            )
+            {
                 throw new NotImplementedException();
             }
         }

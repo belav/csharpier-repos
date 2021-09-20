@@ -41,7 +41,8 @@ namespace Microsoft.CodeAnalysis.AddConstructorParametersFromMembers
                 ISymbol containingType,
                 ImmutableArray<IParameterSymbol> missingParameters,
                 bool useSubMenuName
-            ) {
+            )
+            {
                 _document = document;
                 _constructorCandidate = constructorCandidate;
                 _containingType = containingType;
@@ -51,7 +52,8 @@ namespace Microsoft.CodeAnalysis.AddConstructorParametersFromMembers
 
             protected override Task<Document> GetChangedDocumentAsync(
                 CancellationToken cancellationToken
-            ) {
+            )
+            {
                 var workspace = _document.Project.Solution.Workspace;
                 var declarationService = _document.GetLanguageService<ISymbolDeclarationService>();
                 var constructor = declarationService.GetDeclarations(
@@ -82,7 +84,8 @@ namespace Microsoft.CodeAnalysis.AddConstructorParametersFromMembers
 
             private IEnumerable<SyntaxNode> CreateAssignStatements(
                 ConstructorCandidate constructorCandidate
-            ) {
+            )
+            {
                 var factory = _document.GetLanguageService<SyntaxGenerator>();
                 for (var i = 0; i < _missingParameters.Length; ++i)
                 {

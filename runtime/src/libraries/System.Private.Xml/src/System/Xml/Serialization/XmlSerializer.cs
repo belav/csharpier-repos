@@ -288,7 +288,8 @@ namespace System.Xml.Serialization
             XmlRootAttribute? root,
             string? defaultNamespace,
             string? location
-        ) {
+        )
+        {
             if (type == null)
                 throw new ArgumentNullException(nameof(type));
 
@@ -305,7 +306,8 @@ namespace System.Xml.Serialization
             Type[]? extraTypes,
             XmlRootAttribute? root,
             string? defaultNamespace
-        ) {
+        )
+        {
             XmlReflectionImporter importer = new XmlReflectionImporter(overrides, defaultNamespace);
             if (extraTypes != null)
             {
@@ -327,7 +329,8 @@ namespace System.Xml.Serialization
             XmlMapping xmlMapping,
             Type? type,
             string? defaultNamespace
-        ) {
+        )
+        {
             return GenerateTempAssembly(xmlMapping, type, defaultNamespace, null);
         }
 
@@ -337,7 +340,8 @@ namespace System.Xml.Serialization
             Type? type,
             string? defaultNamespace,
             string? location
-        ) {
+        )
+        {
             if (xmlMapping == null)
             {
                 throw new ArgumentNullException(nameof(xmlMapping));
@@ -405,7 +409,8 @@ namespace System.Xml.Serialization
             object? o,
             XmlSerializerNamespaces? namespaces,
             string? encodingStyle
-        ) {
+        )
+        {
             Serialize(xmlWriter, o, namespaces, encodingStyle, null);
         }
 
@@ -416,7 +421,8 @@ namespace System.Xml.Serialization
             XmlSerializerNamespaces? namespaces,
             string? encodingStyle,
             string? id
-        ) {
+        )
+        {
             try
             {
                 if (_primitiveType != null)
@@ -431,7 +437,8 @@ namespace System.Xml.Serialization
                 }
                 else if (
                     ShouldUseReflectionBasedSerialization(_mapping) || _isReflectionBasedSerializer
-                ) {
+                )
+                {
                     SerializeUsingReflection(xmlWriter, o, namespaces, encodingStyle, id);
                 }
                 else if (_tempAssembly == null || _typedSerializer)
@@ -485,7 +492,8 @@ namespace System.Xml.Serialization
             XmlSerializerNamespaces? namespaces,
             string? encodingStyle,
             string? id
-        ) {
+        )
+        {
             XmlMapping mapping = GetMapping();
             var writer = new ReflectionXmlSerializationWriter(
                 mapping,
@@ -551,7 +559,8 @@ namespace System.Xml.Serialization
             XmlReader xmlReader,
             string? encodingStyle,
             XmlDeserializationEvents events
-        ) {
+        )
+        {
             events.sender = this;
             try
             {
@@ -567,7 +576,8 @@ namespace System.Xml.Serialization
                 }
                 else if (
                     ShouldUseReflectionBasedSerialization(_mapping) || _isReflectionBasedSerializer
-                ) {
+                )
+                {
                     return DeserializeUsingReflection(xmlReader, encodingStyle, events);
                 }
                 else if (_tempAssembly == null || _typedSerializer)
@@ -618,7 +628,8 @@ namespace System.Xml.Serialization
             XmlReader xmlReader,
             string? encodingStyle,
             XmlDeserializationEvents events
-        ) {
+        )
+        {
             XmlMapping mapping = GetMapping();
             var reader = new ReflectionXmlSerializationReader(
                 mapping,
@@ -674,7 +685,8 @@ namespace System.Xml.Serialization
             if (
                 (anySoapMapping && ReflectionMethodEnabled)
                 || Mode == SerializationMode.ReflectionOnly
-            ) {
+            )
+            {
                 XmlSerializer[] serializers = GetReflectionBasedSerializers(mappings, type);
                 return serializers;
             }
@@ -736,7 +748,8 @@ namespace System.Xml.Serialization
         private static XmlSerializer[] GetReflectionBasedSerializers(
             XmlMapping[] mappings,
             Type? type
-        ) {
+        )
+        {
             var serializers = new XmlSerializer[mappings.Length];
             for (int i = 0; i < serializers.Length; i++)
             {
@@ -958,7 +971,8 @@ namespace System.Xml.Serialization
             XmlWriter xmlWriter,
             object? o,
             XmlSerializerNamespaces? namespaces
-        ) {
+        )
+        {
             XmlSerializationPrimitiveWriter writer = new XmlSerializationPrimitiveWriter();
             writer.Init(xmlWriter, namespaces, null, null, null);
             switch (_primitiveType!.GetTypeCode())

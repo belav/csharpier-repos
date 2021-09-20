@@ -144,7 +144,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.ProjectSystem.L
                     AdditionalPropertyNames.MaxSupportedLangVersion,
                     out var maxLangVer
                 )
-            ) {
+            )
+            {
                 VisualStudioProject.MaxLangVersion = maxLangVer;
             }
 
@@ -154,7 +155,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.ProjectSystem.L
                     AdditionalPropertyNames.RunAnalyzers,
                     out var runAnayzers
                 )
-            ) {
+            )
+            {
                 VisualStudioProject.RunAnalyzers = runAnayzers;
             }
 
@@ -164,7 +166,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.ProjectSystem.L
                     AdditionalPropertyNames.RunAnalyzersDuringLiveAnalysis,
                     out var runAnayzersDuringLiveAnalysis
                 )
-            ) {
+            )
+            {
                 VisualStudioProject.RunAnalyzersDuringLiveAnalysis = runAnayzersDuringLiveAnalysis;
             }
 
@@ -304,7 +307,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.ProjectSystem.L
                         out var targetFileName
                     )
                 )
-            ) {
+            )
+            {
                 return;
             }
 
@@ -345,7 +349,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.ProjectSystem.L
                         out var targetRefPath
                     )
                 ) && !string.IsNullOrEmpty(targetRefPath)
-            ) {
+            )
+            {
                 VisualStudioProject.OutputRefFilePath = targetRefPath;
             }
             else
@@ -382,12 +387,14 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.ProjectSystem.L
                     (int)VsHierarchyPropID.Parent,
                     out var parentObj
                 ) == VSConstants.S_OK
-            ) {
+            )
+            {
                 var parentID = UnboxVSItemId(parentObj);
                 if (
                     parentID != (uint)VSConstants.VSITEMID.Nil
                     && parentID != (uint)VSConstants.VSITEMID.Root
-                ) {
+                )
+                {
                     return GetFolderNamesForFolder(parentID);
                 }
             }
@@ -436,14 +443,16 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.ProjectSystem.L
             uint folderItemID,
             List<string> names,
             IVsHierarchy hierarchy
-        ) {
+        )
+        {
             if (
                 hierarchy.GetProperty(
                     (uint)folderItemID,
                     (int)VsHierarchyPropID.Name,
                     out var nameObj
                 ) == VSConstants.S_OK
-            ) {
+            )
+            {
                 // For 'Shared' projects, IVSHierarchy returns a hierarchy item with < character in its name (i.e. <SharedProjectName>)
                 // as a child of the root item. There is no such item in the 'visual' hierarchy in solution explorer and no such folder
                 // is present on disk either. Since this is not a real 'folder', we exclude it from the contents of Document.Folders.
@@ -463,12 +472,14 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.ProjectSystem.L
                     (int)VsHierarchyPropID.Parent,
                     out var parentObj
                 ) == VSConstants.S_OK
-            ) {
+            )
+            {
                 var parentID = UnboxVSItemId(parentObj);
                 if (
                     parentID != (uint)VSConstants.VSITEMID.Nil
                     && parentID != (uint)VSConstants.VSITEMID.Root
-                ) {
+                )
+                {
                     ComputeFolderNames(parentID, names, hierarchy);
                 }
             }
@@ -512,7 +523,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.ProjectSystem.L
             IVsHierarchy hierarchy,
             string propertyName,
             out string propertyValue
-        ) {
+        )
+        {
             if (!(hierarchy is IVsBuildPropertyStorage storage))
             {
                 propertyValue = null;
@@ -533,7 +545,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.ProjectSystem.L
             IVsHierarchy hierarchy,
             string propertyName,
             out bool? propertyValue
-        ) {
+        )
+        {
             if (!TryGetPropertyValue(hierarchy, propertyName, out var stringPropertyValue))
             {
                 propertyValue = null;

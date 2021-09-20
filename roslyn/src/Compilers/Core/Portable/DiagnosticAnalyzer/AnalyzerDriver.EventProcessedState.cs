@@ -42,7 +42,8 @@ namespace Microsoft.CodeAnalysis.Diagnostics
 
             public static EventProcessedState CreatePartiallyProcessed(
                 ImmutableArray<DiagnosticAnalyzer> subsetProcessedAnalyzers
-            ) {
+            )
+            {
                 return new EventProcessedState(subsetProcessedAnalyzers);
             }
         }

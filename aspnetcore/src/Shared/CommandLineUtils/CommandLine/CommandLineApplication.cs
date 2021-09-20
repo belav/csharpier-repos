@@ -33,7 +33,8 @@ namespace Microsoft.Extensions.CommandLineUtils
             bool throwOnUnexpectedArg = true,
             bool continueAfterUnexpectedArg = false,
             bool treatUnmatchedOptionsAsArguments = false
-        ) {
+        )
+        {
             _throwOnUnexpectedArg = throwOnUnexpectedArg;
             _continueAfterUnexpectedArg = continueAfterUnexpectedArg;
             _treatUnmatchedOptionsAsArguments = treatUnmatchedOptionsAsArguments;
@@ -82,7 +83,8 @@ namespace Microsoft.Extensions.CommandLineUtils
             string name,
             Action<CommandLineApplication> configuration,
             bool throwOnUnexpectedArg = true
-        ) {
+        )
+        {
             var command = new CommandLineApplication(throwOnUnexpectedArg)
             {
                 Name = name,
@@ -119,7 +121,8 @@ namespace Microsoft.Extensions.CommandLineUtils
             CommandOptionType optionType,
             Action<CommandOption> configuration,
             bool inherited
-        ) {
+        )
+        {
             var option = new CommandOption(template, optionType)
             {
                 Description = description,
@@ -134,7 +137,8 @@ namespace Microsoft.Extensions.CommandLineUtils
             string name,
             string description,
             bool multipleValues = false
-        ) {
+        )
+        {
             return Argument(name, description, _ => { }, multipleValues);
         }
 
@@ -143,7 +147,8 @@ namespace Microsoft.Extensions.CommandLineUtils
             string description,
             Action<CommandArgument> configuration,
             bool multipleValues = false
-        ) {
+        )
+        {
             var lastArg = Arguments.LastOrDefault();
             if (lastArg != null && lastArg.MultipleValues)
             {
@@ -242,7 +247,8 @@ namespace Microsoft.Extensions.CommandLineUtils
                                 string.IsNullOrEmpty(longOptionName)
                                 && !command._throwOnUnexpectedArg
                                 && AllowArgumentSeparator
-                            ) {
+                            )
+                            {
                                 // Skip over the '--' argument separator then consume all remaining arguments. All
                                 // remaining arguments are unconditionally stored for further use.
                                 index++;
@@ -257,7 +263,8 @@ namespace Microsoft.Extensions.CommandLineUtils
                                     argTypeName: "option",
                                     ignoreContinueAfterUnexpectedArg
                                 )
-                            ) {
+                            )
+                            {
                                 continue;
                             }
                             break;
@@ -443,7 +450,8 @@ namespace Microsoft.Extensions.CommandLineUtils
                             index,
                             argTypeName: "command or argument"
                         )
-                    ) {
+                    )
+                    {
                         continue;
                     }
                     break;
@@ -476,7 +484,8 @@ namespace Microsoft.Extensions.CommandLineUtils
             string template,
             string shortFormVersion,
             string longFormVersion = null
-        ) {
+        )
+        {
             if (longFormVersion == null)
             {
                 return VersionOption(template, () => shortFormVersion);
@@ -492,7 +501,8 @@ namespace Microsoft.Extensions.CommandLineUtils
             string template,
             Func<string> shortFormVersionGetter,
             Func<string> longFormVersionGetter = null
-        ) {
+        )
+        {
             // Version option is special because we stop parsing once we see it
             // So we store it separately for further use
             OptionVersion = Option(template, "Show version information", CommandOptionType.NoValue);
@@ -544,7 +554,8 @@ namespace Microsoft.Extensions.CommandLineUtils
             if (
                 commandName == null
                 || string.Equals(Name, commandName, StringComparison.OrdinalIgnoreCase)
-            ) {
+            )
+            {
                 target = this;
             }
             else
@@ -712,7 +723,8 @@ namespace Microsoft.Extensions.CommandLineUtils
             int index,
             string argTypeName,
             bool ignoreContinueAfterUnexpectedArg = false
-        ) {
+        )
+        {
             if (command._throwOnUnexpectedArg)
             {
                 command.ShowHint();

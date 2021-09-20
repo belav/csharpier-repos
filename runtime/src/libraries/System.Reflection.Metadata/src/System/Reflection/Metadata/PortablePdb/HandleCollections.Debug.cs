@@ -363,7 +363,8 @@ namespace System.Reflection.Metadata
                     if (
                         nextRowId > rowCount
                         || _parentMethodRowId != _reader.LocalScopeTable.GetMethod(nextRowId)
-                    ) {
+                    )
+                    {
                         _currentRowId = EnumEnded;
                         return false;
                     }

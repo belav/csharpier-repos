@@ -31,7 +31,8 @@ namespace Microsoft.Extensions.Localization.Internal
             string key,
             string searchedLocation,
             CultureInfo culture
-        ) {
+        )
+        {
             _searchedLocation(logger, key, searchedLocation, culture, null);
         }
     }

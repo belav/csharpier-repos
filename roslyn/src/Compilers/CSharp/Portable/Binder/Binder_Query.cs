@@ -24,7 +24,8 @@ namespace Microsoft.CodeAnalysis.CSharp
         internal BoundExpression BindQuery(
             QueryExpressionSyntax node,
             BindingDiagnosticBag diagnostics
-        ) {
+        )
+        {
             var fromClause = node.FromClause;
             var boundFromExpression = BindLeftOfPotentialColorColorMemberAccess(
                 fromClause.Expression,
@@ -88,7 +89,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                 QueryContinuationSyntax? continuation = node.Body.Continuation;
                 continuation != null;
                 continuation = continuation.Body.Continuation
-            ) {
+            )
+            {
                 // A query expression with a continuation
                 //     from ... into x ...
                 // is translated into
@@ -120,7 +122,8 @@ namespace Microsoft.CodeAnalysis.CSharp
         private BoundExpression BindQueryInternal1(
             QueryTranslationState state,
             BindingDiagnosticBag diagnostics
-        ) {
+        )
+        {
             // If the query is a degenerate one the form "from x in e select x", but in source,
             // then we go ahead and generate the select anyway.  We do this by skipping BindQueryInternal2,
             // whose job it is to (reduce away the whole query and) optimize away degenerate queries.
@@ -145,7 +148,8 @@ namespace Microsoft.CodeAnalysis.CSharp
         private BoundExpression BindQueryInternal2(
             QueryTranslationState state,
             BindingDiagnosticBag diagnostics
-        ) {
+        )
+        {
             // we continue reducing the query until it is reduced away.
             while (true)
             {
@@ -188,7 +192,8 @@ namespace Microsoft.CodeAnalysis.CSharp
         private BoundExpression FinalTranslation(
             QueryTranslationState state,
             BindingDiagnosticBag diagnostics
-        ) {
+        )
+        {
             Debug.Assert(state.clauses.IsEmpty());
             switch (state.selectOrGroup.Kind())
             {
@@ -368,7 +373,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             WhereClauseSyntax where,
             QueryTranslationState state,
             BindingDiagnosticBag diagnostics
-        ) {
+        )
+        {
             // A query expression with a where clause
             //     from x in e
             //     where f
@@ -395,7 +401,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             JoinClauseSyntax join,
             QueryTranslationState state,
             BindingDiagnosticBag diagnostics
-        ) {
+        )
+        {
             var inExpression = BindRValueWithoutTargetType(join.InExpression, diagnostics);
 
             // If the from expression is of the type dynamic we can't infer the types for any lambdas that occur in the query.
@@ -625,7 +632,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             OrderByClauseSyntax orderby,
             QueryTranslationState state,
             BindingDiagnosticBag diagnostics
-        ) {
+        )
+        {
             // A query expression with an orderby clause
             //     from x in e
             //     orderby k1 , k2 , ... , kn
@@ -673,7 +681,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             FromClauseSyntax from,
             QueryTranslationState state,
             BindingDiagnosticBag diagnostics
-        ) {
+        )
+        {
             var x1 = state.rangeVariable;
 
             BoundExpression collectionSelectorLambda;
@@ -815,7 +824,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             RangeVariableSymbol x1,
             RangeVariableSymbol x2,
             bool withDependencies
-        ) {
+        )
+        {
             Debug.Assert(LambdaUtilities.IsQueryPairLambda(node));
 
             LambdaBodyFactory bodyFactory = (
@@ -869,7 +879,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             LetClauseSyntax let,
             QueryTranslationState state,
             BindingDiagnosticBag diagnostics
-        ) {
+        )
+        {
             // A query expression with a let clause
             //     from x in e
             //     let y = f
@@ -985,7 +996,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             ExpressionSyntax expression,
             BoundExpression result,
             BindingDiagnosticBag diagnostics
-        ) {
+        )
+        {
             var locals = this.GetDeclaredLocalsForScope(expression);
             if (locals.Any())
             {
@@ -1014,7 +1026,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             BoundExpression? queryInvocation = null,
             BoundExpression? castInvocation = null,
             BoundExpression? unoptimizedForm = null
-        ) {
+        )
+        {
             if (unoptimizedForm != null && unoptimizedForm.HasAnyErrors && !expression.HasAnyErrors)
                 unoptimizedForm = null;
             return new BoundQueryClause(
@@ -1037,7 +1050,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             BoundExpression field2Value,
             QueryTranslationState state,
             BindingDiagnosticBag diagnostics
-        ) {
+        )
+        {
             if (field1Name == field2Name)
             {
                 // we will generate a diagnostic elsewhere
@@ -1088,7 +1102,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             RangeVariableSymbol parameter,
             ExpressionSyntax expression,
             bool withDependencies
-        ) {
+        )
+        {
             return MakeQueryUnboundLambda(
                 qvm,
                 ImmutableArray.Create(parameter),
@@ -1102,7 +1117,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             ImmutableArray<RangeVariableSymbol> parameters,
             ExpressionSyntax expression,
             bool withDependencies
-        ) {
+        )
+        {
             return MakeQueryUnboundLambda(
                 expression,
                 new QueryUnboundLambdaState(
@@ -1140,7 +1156,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             TypeSyntax castTypeSyntax,
             TypeWithAnnotations castType,
             bool withDependencies
-        ) {
+        )
+        {
             return MakeQueryUnboundLambda(
                 expression,
                 new QueryUnboundLambdaState(
@@ -1187,7 +1204,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             CSharpSyntaxNode node,
             LambdaBodyFactory bodyFactory,
             bool withDependencies
-        ) {
+        )
+        {
             return MakeQueryUnboundLambda(
                 node,
                 new QueryUnboundLambdaState(this, qvm, parameters, bodyFactory),
@@ -1199,7 +1217,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             CSharpSyntaxNode node,
             QueryUnboundLambdaState state,
             bool withDependencies
-        ) {
+        )
+        {
             Debug.Assert(node is ExpressionSyntax || LambdaUtilities.IsQueryPairLambda(node));
             var lambda = new UnboundLambda(node, state, withDependencies, hasErrors: false)
             {
@@ -1215,7 +1234,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             string methodName,
             BoundExpression arg,
             BindingDiagnosticBag diagnostics
-        ) {
+        )
+        {
             return MakeQueryInvocation(
                 node,
                 receiver,
@@ -1233,7 +1253,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             string methodName,
             ImmutableArray<BoundExpression> args,
             BindingDiagnosticBag diagnostics
-        ) {
+        )
+        {
             return MakeQueryInvocation(
                 node,
                 receiver,
@@ -1252,7 +1273,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             TypeSyntax typeArgSyntax,
             TypeWithAnnotations typeArg,
             BindingDiagnosticBag diagnostics
-        ) {
+        )
+        {
             return MakeQueryInvocation(
                 node,
                 receiver,
@@ -1272,7 +1294,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             ImmutableArray<TypeWithAnnotations> typeArgs,
             ImmutableArray<BoundExpression> args,
             BindingDiagnosticBag diagnostics
-        ) {
+        )
+        {
             // clean up the receiver
             var ultimateReceiver = receiver;
             while (ultimateReceiver.Kind == BoundKind.QueryClause)
@@ -1310,7 +1333,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                 else if (
                     ultimateReceiver.Kind == BoundKind.Lambda
                     || ultimateReceiver.Kind == BoundKind.UnboundLambda
-                ) {
+                )
+                {
                     // Could not find an implementation of the query pattern for source type '{0}'.  '{1}' not found.
                     diagnostics.Add(
                         ErrorCode.ERR_QueryNoProvider,
@@ -1431,7 +1455,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                 BoundExpression receiver,
                 BoundExpression originalUltimateReceiver,
                 BoundExpression replacementUltimateReceiver
-            ) {
+            )
+            {
                 if (receiver is BoundQueryClause query)
                 {
                     return query.Update(
@@ -1459,7 +1484,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             NamedTypeSymbol toCreate,
             ImmutableArray<BoundExpression> args,
             BindingDiagnosticBag diagnostics
-        ) {
+        )
+        {
             AnalyzedArguments analyzedArguments = AnalyzedArguments.GetInstance();
             analyzedArguments.Arguments.AddRange(args);
             var result = BindClassCreationExpression(

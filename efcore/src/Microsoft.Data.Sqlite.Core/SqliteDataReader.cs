@@ -35,7 +35,8 @@ namespace Microsoft.Data.Sqlite
             Stopwatch timer,
             IEnumerable<sqlite3_stmt> stmts,
             bool closeConnection
-        ) {
+        )
+        {
             _command = command;
             _timer = timer;
             _stmtEnumerator = stmts.GetEnumerator();
@@ -155,7 +156,8 @@ namespace Microsoft.Data.Sqlite
                         if (
                             _command.CommandTimeout != 0
                             && _timer.ElapsedMilliseconds >= _command.CommandTimeout * 1000L
-                        ) {
+                        )
+                        {
                             break;
                         }
 

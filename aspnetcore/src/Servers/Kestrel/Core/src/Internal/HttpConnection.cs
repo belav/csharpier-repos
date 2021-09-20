@@ -250,7 +250,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Internal
                 && http2Enabled
                 && hasTls
                 && !Http2Id.SequenceEqual(applicationProtocol.Span)
-            ) {
+            )
+            {
                 error = CoreStrings.EndPointHttp2NotNegotiated;
             }
 

@@ -798,7 +798,8 @@ namespace AutoMapper.UnitTests.NullBehavior
                 string source,
                 string dest,
                 ResolutionContext context
-            ) {
+            )
+            {
                 if (source == null)
                     return "jon";
                 return "fail";

@@ -33,7 +33,8 @@ namespace Microsoft.CodeAnalysis.CodeRefactorings.MoveType
                 State state,
                 MoveTypeOperationKind operationKind,
                 string fileName
-            ) {
+            )
+            {
                 _state = state;
                 _service = service;
                 _operationKind = operationKind;
@@ -61,7 +62,8 @@ namespace Microsoft.CodeAnalysis.CodeRefactorings.MoveType
 
             protected override async Task<IEnumerable<CodeActionOperation>> ComputeOperationsAsync(
                 CancellationToken cancellationToken
-            ) {
+            )
+            {
                 var editor = Editor.GetEditor(
                     _operationKind,
                     _service,

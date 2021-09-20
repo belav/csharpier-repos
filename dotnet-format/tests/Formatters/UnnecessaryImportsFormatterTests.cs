@@ -86,7 +86,8 @@ class C
         public async Task WhenIDE0005SeverityLowerThanFixSeverity_AndHasUnusedImports_NoChange(
             string key,
             string severity
-        ) {
+        )
+        {
             var code =
                 @"using System;
 
@@ -117,7 +118,8 @@ class C
         public async Task WhenIDE0005SeverityEqualOrGreaterThanFixSeverity_AndHasUnusedImports_ImportRemoved(
             string key,
             string severity
-        ) {
+        )
+        {
             var testCode =
                 @"using System;
 
@@ -154,7 +156,8 @@ class C
         public async Task WhenIDE0005SeverityEqualOrGreaterThanFixSeverity_AndHasUnusedImports_AndIncludedInDiagnosticsList_ImportRemoved(
             string key,
             string severity
-        ) {
+        )
+        {
             var testCode =
                 @"using System;
 
@@ -192,7 +195,8 @@ class C
         public async Task WhenIDE0005SeverityEqualOrGreaterThanFixSeverity_AndHasUnusedImports_AndNotIncludedInDiagnosticsList_ImportNotRemoved(
             string key,
             string severity
-        ) {
+        )
+        {
             var testCode =
                 @"using System;
 

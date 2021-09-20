@@ -20,7 +20,8 @@ namespace System.Dynamic.Utils
             this Type type,
             string name,
             Type[] types
-        ) {
+        )
+        {
             Debug.Assert(types != null);
             MethodInfo? method = type.GetMethod(
                 name,

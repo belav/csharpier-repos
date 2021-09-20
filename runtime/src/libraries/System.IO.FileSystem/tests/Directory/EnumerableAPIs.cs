@@ -145,7 +145,8 @@ namespace System.IO.Tests
             string dirName,
             string searchPattern,
             SearchOption option
-        ) {
+        )
+        {
             return Directory.EnumerateFileSystemEntries(dirName, searchPattern, option).ToArray();
         }
     }
@@ -173,7 +174,8 @@ namespace System.IO.Tests
             string dirName,
             string searchPattern,
             SearchOption option
-        ) {
+        )
+        {
             return Directory.EnumerateFileSystemEntries(dirName, searchPattern, option).ToArray();
         }
     }
@@ -225,7 +227,8 @@ namespace System.IO.Tests
             string dirName,
             string searchPattern,
             SearchOption option
-        ) {
+        )
+        {
             return Directory.EnumerateDirectories(dirName, searchPattern, option).ToArray();
         }
     }

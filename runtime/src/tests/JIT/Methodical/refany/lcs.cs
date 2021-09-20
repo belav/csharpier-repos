@@ -13,7 +13,8 @@ namespace JitTest
             TypedReference _b,
             /*char[]*/TypedReference _X,
             /*int[]*/TypedReference _ind
-        ) {
+        )
+        {
             int _i = 0;
             for (TypedReference i = __makeref(_i); __refvalue(i, int) < RANK; _i++)
                 if (__refvalue(_ind, int[])[__refvalue(i, int)] == 0)
@@ -47,7 +48,8 @@ namespace JitTest
             /*int[,,,]*/TypedReference _b,
             /*char[][]*/TypedReference _seq,
             /*int[]*/TypedReference _len
-        ) {
+        )
+        {
             int[] ind = new int[RANK];
             for (ind[0] = 1; ind[0] < __refvalue(_len, int[])[0]; ind[0]++)
             {
@@ -63,7 +65,8 @@ namespace JitTest
                                 if (
                                     __refvalue(_seq, char[][])[i][ind[i] - 1]
                                     != __refvalue(_seq, char[][])[i - 1][ind[i - 1] - 1]
-                                ) {
+                                )
+                                {
                                     eqFlag = false;
                                     break;
                                 }

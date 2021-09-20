@@ -14,7 +14,8 @@ namespace Microsoft.CodeAnalysis.Tools.Analyzers
         public AnalyzersAndFixers(
             ImmutableArray<DiagnosticAnalyzer> analyzers,
             ImmutableArray<CodeFixProvider> fixers
-        ) {
+        )
+        {
             Analyzers = analyzers;
             Fixers = fixers;
         }
@@ -22,7 +23,8 @@ namespace Microsoft.CodeAnalysis.Tools.Analyzers
         public void Deconstruct(
             out ImmutableArray<DiagnosticAnalyzer> analyzers,
             out ImmutableArray<CodeFixProvider> fixers
-        ) {
+        )
+        {
             analyzers = Analyzers;
             fixers = Fixers;
         }

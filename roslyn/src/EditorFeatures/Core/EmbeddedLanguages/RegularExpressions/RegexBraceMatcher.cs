@@ -33,7 +33,8 @@ namespace Microsoft.CodeAnalysis.Features.EmbeddedLanguages.RegularExpressions
             Document document,
             int position,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var option = document.Project.Solution.Workspace.Options.GetOption(
                 RegularExpressionsOptions.HighlightRelatedRegexComponentsUnderCursor,
                 document.Project.Language
@@ -187,7 +188,8 @@ namespace Microsoft.CodeAnalysis.Features.EmbeddedLanguages.RegularExpressions
         private static RegexTrivia? TryGetTrivia(
             ImmutableArray<RegexTrivia> triviaList,
             VirtualChar ch
-        ) {
+        )
+        {
             foreach (var trivia in triviaList)
             {
                 if (trivia.VirtualChars.Contains(ch))

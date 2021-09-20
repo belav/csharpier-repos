@@ -345,7 +345,8 @@ class C { }";
                             defaultSeverity == DiagnosticSeverity.Warning
                             && effectiveSeverity == DiagnosticSeverity.Error
                             && configurable
-                        ) {
+                        )
+                        {
                             diagnostic = diagnostic.WithWarningAsError(true);
                             diagnosticNoSuppressor = diagnosticNoSuppressor.WithWarningAsError(
                                 true

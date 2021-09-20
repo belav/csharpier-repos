@@ -127,7 +127,8 @@ namespace Roslyn.Utilities
 
         private IEnumerable<TAnnotation> GetAnnotations(
             IEnumerable<SyntaxAnnotation> realAnnotations
-        ) {
+        )
+        {
             foreach (var ra in realAnnotations)
             {
                 Contract.ThrowIfNull(ra.Data);

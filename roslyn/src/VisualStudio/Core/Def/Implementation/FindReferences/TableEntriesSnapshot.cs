@@ -56,7 +56,8 @@ namespace Microsoft.VisualStudio.LanguageServices.FindUsages
                 string columnName,
                 bool singleColumnView,
                 [NotNullWhen(true)] out FrameworkElement? content
-            ) {
+            )
+            {
                 return this._entries[index].TryCreateColumnContent(columnName, out content);
             }
         }

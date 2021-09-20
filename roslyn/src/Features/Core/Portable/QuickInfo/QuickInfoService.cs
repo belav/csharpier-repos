@@ -28,7 +28,8 @@ namespace Microsoft.CodeAnalysis.QuickInfo
             Document document,
             int position,
             CancellationToken cancellationToken = default
-        ) {
+        )
+        {
             return SpecializedTasks.Null<QuickInfoItem>();
         }
     }

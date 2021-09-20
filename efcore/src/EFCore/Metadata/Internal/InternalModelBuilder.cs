@@ -83,7 +83,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
             in TypeIdentity type,
             ConfigurationSource configurationSource,
             bool? shouldBeOwned
-        ) {
+        )
+        {
             if (IsIgnored(type, configurationSource))
             {
                 return null;
@@ -110,7 +111,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
                             !configurationSource.OverridesStrictly(
                                 entityType.GetConfigurationSource()
                             ) && !entityType.IsOwned()
-                        ) {
+                        )
+                        {
                             return configurationSource == ConfigurationSource.Explicit
                               ? throw new InvalidOperationException(
                                     CoreStrings.ClashingNonSharedType(
@@ -147,7 +149,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
             if (
                 shouldBeOwned == false
                 && (ShouldBeOwnedType(type) || entityType != null && entityType.IsOwned())
-            ) {
+            )
+            {
                 // We always throw as configuring a type as owned always comes from user (through Explicit/DataAnnotation)
                 throw new InvalidOperationException(
                     CoreStrings.ClashingOwnedEntityType(
@@ -162,7 +165,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
                     !entityType.IsOwned()
                     && configurationSource == ConfigurationSource.Explicit
                     && entityType.GetConfigurationSource() == ConfigurationSource.Explicit
-                ) {
+                )
+                {
                     throw new InvalidOperationException(
                         CoreStrings.ClashingNonOwnedEntityType(clrType!.ShortDisplayName())
                     );
@@ -174,7 +178,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
                         !derivedType.IsOwned()
                         && configurationSource == ConfigurationSource.Explicit
                         && derivedType.GetConfigurationSource() == ConfigurationSource.Explicit
-                    ) {
+                    )
+                    {
                         throw new InvalidOperationException(
                             CoreStrings.ClashingNonOwnedDerivedEntityType(
                                 entityType.DisplayName(),
@@ -311,7 +316,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
         public virtual IConventionOwnedEntityTypeBuilder? Owned(
             Type type,
             ConfigurationSource configurationSource
-        ) {
+        )
+        {
             if (IsIgnored(type, configurationSource))
             {
                 return null;
@@ -345,7 +351,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
                         !derivedType.IsOwned()
                         && configurationSource == ConfigurationSource.Explicit
                         && derivedType.GetConfigurationSource() == ConfigurationSource.Explicit
-                    ) {
+                    )
+                    {
                         throw new InvalidOperationException(
                             CoreStrings.ClashingNonOwnedDerivedEntityType(
                                 type.ShortDisplayName(),
@@ -367,7 +374,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
                     if (
                         ownershipCandidates[0].Builder.IsOwnership(true, configurationSource)
                         == null
-                    ) {
+                    )
+                    {
                         return null;
                     }
                 }
@@ -393,7 +401,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
                             null,
                             configurationSource
                         )
-                    ) {
+                    )
+                    {
                         return null;
                     }
                 }
@@ -460,7 +469,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
         private InternalModelBuilder? Ignore(
             in TypeIdentity type,
             ConfigurationSource configurationSource
-        ) {
+        )
+        {
             var name = type.Name;
             var ignoredConfigurationSource = Metadata.FindIgnoredConfigurationSource(name);
             if (ignoredConfigurationSource.HasValue)
@@ -468,7 +478,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
                 if (
                     configurationSource.Overrides(ignoredConfigurationSource)
                     && configurationSource != ignoredConfigurationSource
-                ) {
+                )
+                {
                     Metadata.AddIgnored(name, configurationSource);
                 }
 
@@ -541,14 +552,16 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
                 type.Type != null
                 && Metadata.FindEntityTypes(type.Type)
                     .Any(o => !configurationSource.Overrides(o.GetConfigurationSource()))
-            ) {
+            )
+            {
                 return false;
             }
 
             if (
                 Metadata.FindEntityType(name)?.GetConfigurationSource()
                     .OverridesStrictly(configurationSource) == true
-            ) {
+            )
+            {
                 return false;
             }
 
@@ -564,7 +577,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
         public virtual InternalModelBuilder? HasNoEntityType(
             EntityType entityType,
             ConfigurationSource configurationSource
-        ) {
+        )
+        {
             var entityTypeConfigurationSource = entityType.GetConfigurationSource();
             if (!configurationSource.Overrides(entityTypeConfigurationSource))
             {
@@ -586,7 +600,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
                 foreach (
                     var skipNavigation in entityType.GetDeclaredReferencingSkipNavigations()
                         .ToList()
-                ) {
+                )
+                {
                     var removed = skipNavigation.DeclaringEntityType.Builder.HasNoSkipNavigation(
                         skipNavigation,
                         configurationSource
@@ -598,7 +613,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
                     var skipNavigation in entityType.GetDeclaredForeignKeys()
                         .SelectMany(fk => fk.GetReferencingSkipNavigations())
                         .ToList()
-                ) {
+                )
+                {
                     var removed = skipNavigation.Builder.HasForeignKey(null, configurationSource);
                     Check.DebugAssert(removed != null, "removed is null");
                 }
@@ -630,7 +646,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
         public virtual InternalModelBuilder? HasChangeTrackingStrategy(
             ChangeTrackingStrategy? changeTrackingStrategy,
             ConfigurationSource configurationSource
-        ) {
+        )
+        {
             if (CanSetChangeTrackingStrategy(changeTrackingStrategy, configurationSource))
             {
                 Metadata.SetChangeTrackingStrategy(changeTrackingStrategy, configurationSource);
@@ -663,7 +680,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
         public virtual InternalModelBuilder? UsePropertyAccessMode(
             PropertyAccessMode? propertyAccessMode,
             ConfigurationSource configurationSource
-        ) {
+        )
+        {
             if (CanSetPropertyAccessMode(propertyAccessMode, configurationSource))
             {
                 Metadata.SetPropertyAccessMode(propertyAccessMode, configurationSource);

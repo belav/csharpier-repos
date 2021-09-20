@@ -499,7 +499,8 @@ namespace System.IO
         public void FileInfo_Create_FileSecurity_ForbiddenCombo_FileModeFileSystemSecurity(
             FileMode mode,
             FileSystemRights rights
-        ) {
+        )
+        {
             var security = new FileSecurity();
             var info = new FileInfo("path");
 
@@ -532,7 +533,8 @@ namespace System.IO
             int bufferSize,
             FileOptions options,
             FileSecurity security
-        ) {
+        )
+        {
             if (PlatformDetection.IsNetFramework)
             {
                 FileSystemAclExtensions.Create(
@@ -753,7 +755,8 @@ namespace System.IO
             int bufferSize,
             FileOptions options,
             FileSecurity expectedSecurity
-        ) {
+        )
+        {
             using var tempRootDir = new TempAclDirectory();
             string path = Path.Combine(tempRootDir.Path, "file.txt");
             var fileInfo = new FileInfo(path);
@@ -806,7 +809,8 @@ namespace System.IO
         private void VerifyAccessSecurity(
             CommonObjectSecurity expectedSecurity,
             CommonObjectSecurity actualSecurity
-        ) {
+        )
+        {
             Assert.Equal(typeof(FileSystemRights), expectedSecurity.AccessRightType);
 
             Assert.Equal(typeof(FileSystemRights), actualSecurity.AccessRightType);
@@ -847,7 +851,8 @@ namespace System.IO
         private bool AreAccessRulesEqual(
             FileSystemAccessRule expectedRule,
             FileSystemAccessRule actualRule
-        ) {
+        )
+        {
             return expectedRule.AccessControlType == actualRule.AccessControlType
                 && expectedRule.FileSystemRights == actualRule.FileSystemRights
                 && expectedRule.InheritanceFlags == actualRule.InheritanceFlags

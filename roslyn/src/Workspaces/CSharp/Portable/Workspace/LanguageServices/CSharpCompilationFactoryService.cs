@@ -24,7 +24,8 @@ namespace Microsoft.CodeAnalysis.CSharp
         Compilation ICompilationFactoryService.CreateCompilation(
             string assemblyName,
             CompilationOptions options
-        ) {
+        )
+        {
             return CSharpCompilation.Create(
                 assemblyName,
                 options: (CSharpCompilationOptions)options ?? s_defaultOptions
@@ -35,7 +36,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             string assemblyName,
             CompilationOptions options,
             Type? hostObjectType
-        ) {
+        )
+        {
             return CSharpCompilation.CreateScriptCompilation(
                 assemblyName,
                 options: (CSharpCompilationOptions)options,
@@ -52,7 +54,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             ImmutableArray<ISourceGenerator> generators,
             AnalyzerConfigOptionsProvider optionsProvider,
             ImmutableArray<AdditionalText> additionalTexts
-        ) {
+        )
+        {
             return CSharpGeneratorDriver.Create(
                 generators,
                 additionalTexts,

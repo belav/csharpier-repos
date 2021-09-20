@@ -33,7 +33,8 @@ namespace Microsoft.EntityFrameworkCore.Query.Internal
         public RelationalQueryContextFactory(
             QueryContextDependencies dependencies,
             RelationalQueryContextDependencies relationalDependencies
-        ) {
+        )
+        {
             _dependencies = dependencies;
             _relationalDependencies = relationalDependencies;
         }

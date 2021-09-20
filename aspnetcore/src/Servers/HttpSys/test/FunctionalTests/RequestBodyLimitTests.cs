@@ -39,7 +39,8 @@ namespace Microsoft.AspNetCore.Server.HttpSys
                     },
                     options => options.MaxRequestBodySize = 11
                 )
-            ) {
+            )
+            {
                 var response = await SendRequestAsync(address, "Hello World");
                 Assert.Equal("Hello World", response);
             }
@@ -66,7 +67,8 @@ namespace Microsoft.AspNetCore.Server.HttpSys
                     },
                     options => options.MaxRequestBodySize = 11
                 )
-            ) {
+            )
+            {
                 var response = await SendRequestAsync(address, "Hello World");
                 Assert.Equal("Hello World", response);
             }
@@ -97,7 +99,8 @@ namespace Microsoft.AspNetCore.Server.HttpSys
                     },
                     options => options.MaxRequestBodySize = 11
                 )
-            ) {
+            )
+            {
                 var response = await SendRequestAsync(address, "Hello World");
                 Assert.Equal("Hello World", response);
             }
@@ -126,7 +129,8 @@ namespace Microsoft.AspNetCore.Server.HttpSys
                     },
                     options => options.MaxRequestBodySize = 11
                 )
-            ) {
+            )
+            {
                 var response = await SendRequestAsync(address, "Hello World", chunked: true);
                 Assert.Equal("Hello World", response);
             }
@@ -153,7 +157,8 @@ namespace Microsoft.AspNetCore.Server.HttpSys
                     },
                     options => options.MaxRequestBodySize = 11
                 )
-            ) {
+            )
+            {
                 var response = await SendRequestAsync(address, "Hello World", chunked: true);
                 Assert.Equal("Hello World", response);
             }
@@ -184,7 +189,8 @@ namespace Microsoft.AspNetCore.Server.HttpSys
                     },
                     options => options.MaxRequestBodySize = 11
                 )
-            ) {
+            )
+            {
                 var response = await SendRequestAsync(address, "Hello World", chunked: true);
                 Assert.Equal("Hello World", response);
             }
@@ -226,7 +232,8 @@ namespace Microsoft.AspNetCore.Server.HttpSys
                     },
                     options => options.MaxRequestBodySize = 10
                 )
-            ) {
+            )
+            {
                 var response = await SendRequestAsync(address, "Hello World");
                 Assert.Equal(string.Empty, response);
             }
@@ -272,7 +279,8 @@ namespace Microsoft.AspNetCore.Server.HttpSys
                     },
                     options => options.MaxRequestBodySize = 10
                 )
-            ) {
+            )
+            {
                 var response = await SendRequestAsync(address, "Hello World");
                 Assert.Equal(string.Empty, response);
             }
@@ -326,7 +334,8 @@ namespace Microsoft.AspNetCore.Server.HttpSys
                     },
                     options => options.MaxRequestBodySize = 10
                 )
-            ) {
+            )
+            {
                 var response = await SendRequestAsync(address, "Hello World");
                 Assert.Equal(string.Empty, response);
             }
@@ -368,7 +377,8 @@ namespace Microsoft.AspNetCore.Server.HttpSys
                     },
                     options => options.MaxRequestBodySize = 10
                 )
-            ) {
+            )
+            {
                 var response = await SendRequestAsync(address, "Hello World", chunked: true);
                 Assert.Equal(string.Empty, response);
             }
@@ -407,7 +417,8 @@ namespace Microsoft.AspNetCore.Server.HttpSys
                     },
                     options => options.MaxRequestBodySize = 10
                 )
-            ) {
+            )
+            {
                 var response = await SendRequestAsync(address, "Hello World", chunked: true);
                 Assert.Equal(string.Empty, response);
             }
@@ -448,7 +459,8 @@ namespace Microsoft.AspNetCore.Server.HttpSys
                     },
                     options => options.MaxRequestBodySize = 10
                 )
-            ) {
+            )
+            {
                 var response = await SendRequestAsync(address, "Hello World", chunked: true);
                 Assert.Equal(string.Empty, response);
             }
@@ -486,7 +498,8 @@ namespace Microsoft.AspNetCore.Server.HttpSys
                     },
                     options => options.MaxRequestBodySize = 10
                 )
-            ) {
+            )
+            {
                 string response = await SendRequestAsync(address, content, chunked: true);
                 Assert.Equal(string.Empty, response);
             }
@@ -521,7 +534,8 @@ namespace Microsoft.AspNetCore.Server.HttpSys
                     },
                     options => options.MaxRequestBodySize = 10
                 )
-            ) {
+            )
+            {
                 string response = await SendRequestAsync(address, content, chunked: true);
                 Assert.Equal(string.Empty, response);
             }
@@ -550,7 +564,8 @@ namespace Microsoft.AspNetCore.Server.HttpSys
                     },
                     options => options.MaxRequestBodySize = 11
                 )
-            ) {
+            )
+            {
                 var response = await SendRequestAsync(address, "Hello World!");
                 Assert.Equal("Hello World!", response);
             }
@@ -579,7 +594,8 @@ namespace Microsoft.AspNetCore.Server.HttpSys
                     },
                     options => options.MaxRequestBodySize = 11
                 )
-            ) {
+            )
+            {
                 var response = await SendRequestAsync(address, "Hello World!", chunked: true);
                 Assert.Equal("Hello World!", response);
             }
@@ -594,7 +610,8 @@ namespace Microsoft.AspNetCore.Server.HttpSys
             string uri,
             HttpContent content,
             bool chunked = false
-        ) {
+        )
+        {
             using (HttpClient client = new HttpClient())
             {
                 client.DefaultRequestHeaders.TransferEncodingChunked = chunked;
@@ -616,7 +633,8 @@ namespace Microsoft.AspNetCore.Server.HttpSys
             protected async override Task SerializeToStreamAsync(
                 Stream stream,
                 TransportContext context
-            ) {
+            )
+            {
                 await stream.WriteAsync(new byte[10], 0, 10);
                 await stream.FlushAsync();
                 Assert.True(await Block.WaitAsync(TimeSpan.FromSeconds(10)));

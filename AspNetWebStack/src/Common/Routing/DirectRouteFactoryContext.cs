@@ -181,7 +181,8 @@ namespace System.Web.Mvc.Routing
         public IDirectRouteBuilder CreateBuilder(
             string template,
             IInlineConstraintResolver constraintResolver
-        ) {
+        )
+        {
             DirectRouteBuilder builder = new DirectRouteBuilder(_actions, _targetIsAction);
 
 #if ASPNETWEBAPI

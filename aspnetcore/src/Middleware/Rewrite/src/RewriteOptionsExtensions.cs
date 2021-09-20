@@ -32,7 +32,8 @@ namespace Microsoft.AspNetCore.Rewrite
         public static RewriteOptions Add(
             this RewriteOptions options,
             Action<RewriteContext> applyRule
-        ) {
+        )
+        {
             options.Rules.Add(new DelegateRule(applyRule));
             return options;
         }
@@ -50,7 +51,8 @@ namespace Microsoft.AspNetCore.Rewrite
             string regex,
             string replacement,
             bool skipRemainingRules
-        ) {
+        )
+        {
             options.Rules.Add(new RewriteRule(regex, replacement, skipRemainingRules));
             return options;
         }
@@ -66,7 +68,8 @@ namespace Microsoft.AspNetCore.Rewrite
             this RewriteOptions options,
             string regex,
             string replacement
-        ) {
+        )
+        {
             return AddRedirect(options, regex, replacement, statusCode: StatusCodes.Status302Found);
         }
 
@@ -83,7 +86,8 @@ namespace Microsoft.AspNetCore.Rewrite
             string regex,
             string replacement,
             int statusCode
-        ) {
+        )
+        {
             options.Rules.Add(new RedirectRule(regex, replacement, statusCode));
             return options;
         }
@@ -136,7 +140,8 @@ namespace Microsoft.AspNetCore.Rewrite
             this RewriteOptions options,
             int statusCode,
             int? sslPort
-        ) {
+        )
+        {
             options.Rules.Add(
                 new RedirectToHttpsRule { StatusCode = statusCode, SSLPort = sslPort }
             );
@@ -162,7 +167,8 @@ namespace Microsoft.AspNetCore.Rewrite
         public static RewriteOptions AddRedirectToWwwPermanent(
             this RewriteOptions options,
             params string[] domains
-        ) {
+        )
+        {
             return AddRedirectToWww(
                 options,
                 statusCode: StatusCodes.Status308PermanentRedirect,
@@ -187,7 +193,8 @@ namespace Microsoft.AspNetCore.Rewrite
         public static RewriteOptions AddRedirectToWww(
             this RewriteOptions options,
             params string[] domains
-        ) {
+        )
+        {
             return AddRedirectToWww(
                 options,
                 statusCode: StatusCodes.Status307TemporaryRedirect,
@@ -216,7 +223,8 @@ namespace Microsoft.AspNetCore.Rewrite
             this RewriteOptions options,
             int statusCode,
             params string[] domains
-        ) {
+        )
+        {
             options.Rules.Add(new RedirectToWwwRule(statusCode, domains));
             return options;
         }
@@ -240,7 +248,8 @@ namespace Microsoft.AspNetCore.Rewrite
         public static RewriteOptions AddRedirectToNonWwwPermanent(
             this RewriteOptions options,
             params string[] domains
-        ) {
+        )
+        {
             return AddRedirectToNonWww(
                 options,
                 statusCode: StatusCodes.Status308PermanentRedirect,
@@ -265,7 +274,8 @@ namespace Microsoft.AspNetCore.Rewrite
         public static RewriteOptions AddRedirectToNonWww(
             this RewriteOptions options,
             params string[] domains
-        ) {
+        )
+        {
             return AddRedirectToNonWww(
                 options,
                 statusCode: StatusCodes.Status307TemporaryRedirect,
@@ -281,7 +291,8 @@ namespace Microsoft.AspNetCore.Rewrite
         public static RewriteOptions AddRedirectToNonWww(
             this RewriteOptions options,
             int statusCode
-        ) {
+        )
+        {
             options.Rules.Add(new RedirectToNonWwwRule(statusCode));
             return options;
         }
@@ -296,7 +307,8 @@ namespace Microsoft.AspNetCore.Rewrite
             this RewriteOptions options,
             int statusCode,
             params string[] domains
-        ) {
+        )
+        {
             options.Rules.Add(new RedirectToNonWwwRule(statusCode, domains));
             return options;
         }

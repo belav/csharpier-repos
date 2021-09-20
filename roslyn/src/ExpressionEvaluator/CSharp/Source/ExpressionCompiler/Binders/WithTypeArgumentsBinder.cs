@@ -49,14 +49,16 @@ namespace Microsoft.CodeAnalysis.CSharp.ExpressionEvaluator
             LookupSymbolsInfo result,
             LookupOptions options,
             Binder originalBinder
-        ) {
+        )
+        {
             if (CanConsiderTypeParameters(options))
             {
                 foreach (var parameter in _typeArguments)
                 {
                     if (
                         originalBinder.CanAddLookupSymbolInfo(parameter.Type, options, result, null)
-                    ) {
+                    )
+                    {
                         result.AddSymbol(parameter.Type, parameter.Type.Name, 0);
                     }
                 }

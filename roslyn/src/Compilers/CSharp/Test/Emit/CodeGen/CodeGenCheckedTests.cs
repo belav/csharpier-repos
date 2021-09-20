@@ -3488,7 +3488,8 @@ class Derived2 : Base1
             string toType,
             ConvertMethod expectedMethod,
             string additionalTypes = ""
-        ) {
+        )
+        {
             var source = CheckedConversionInExpressionTree_ImplicitSource(
                 fromType,
                 toType,
@@ -3525,7 +3526,8 @@ class Derived2 : Base1
             string fromType,
             string toType,
             string expectedOutput
-        ) {
+        )
+        {
             var source = CheckedConversionInExpressionTree_ImplicitSource(
                 fromType,
                 toType,
@@ -3542,7 +3544,8 @@ class Derived2 : Base1
             string fromType,
             string toType,
             string additionalTypes
-        ) {
+        )
+        {
             return $@"using System;
 using System.Linq.Expressions;
 {additionalTypes}
@@ -3562,7 +3565,8 @@ class C
             string toType,
             ConvertMethod expectedMethod,
             string additionalTypes = ""
-        ) {
+        )
+        {
             var source = CheckedConversionInExpressionTree_ExplicitSource(
                 fromType,
                 toType,
@@ -3599,7 +3603,8 @@ class C
             string fromType,
             string toType,
             string expectedOutput
-        ) {
+        )
+        {
             var source = CheckedConversionInExpressionTree_ExplicitSource(
                 fromType,
                 toType,
@@ -3616,7 +3621,8 @@ class C
             string fromType,
             string toType,
             string additionalTypes
-        ) {
+        )
+        {
             return $@"using System;
 using System.Linq.Expressions;
 {additionalTypes}
@@ -3633,7 +3639,8 @@ class C
         private static void VerifyConversionInExpressionTreeIL(
             string actualIL,
             ConvertMethod expectedMethod
-        ) {
+        )
+        {
             Assert.Equal(
                 actualIL.Contains(
                     $"System.Linq.Expressions.Expression.Convert(System.Linq.Expressions.Expression, "

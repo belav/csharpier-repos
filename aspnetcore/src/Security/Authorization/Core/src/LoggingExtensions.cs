@@ -31,7 +31,8 @@ namespace Microsoft.Extensions.Logging
         public static void UserAuthorizationFailed(
             this ILogger logger,
             AuthorizationFailure failure
-        ) {
+        )
+        {
             var reason = failure.FailCalled
                 ? "Fail() was explicitly called."
                 : "These requirements were not met:"

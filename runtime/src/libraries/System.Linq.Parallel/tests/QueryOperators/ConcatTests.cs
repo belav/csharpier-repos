@@ -28,7 +28,8 @@ namespace System.Linq.Parallel.Tests
                     (left, right) => left,
                     counts
                 )
-            ) {
+            )
+            {
                 yield return new object[]
                 {
                     ((Labeled<ParallelQuery<int>>)parms[0]).Order(),
@@ -64,7 +65,8 @@ namespace System.Linq.Parallel.Tests
             foreach (
                 int i in UnorderedSources.Default(0, leftCount)
                     .Concat(UnorderedSources.Default(leftCount, rightCount))
-            ) {
+            )
+            {
                 seen.Add(i);
             }
             seen.AssertComplete();
@@ -84,7 +86,8 @@ namespace System.Linq.Parallel.Tests
             int leftCount,
             Labeled<ParallelQuery<int>> right,
             int rightCount
-        ) {
+        )
+        {
             // The ordering of Concat is only guaranteed when both operands are ordered,
             // however the current implementation manages to perform ordering if either operand is ordered _in most cases_.
             // If this test starts failing, consider revising the operators and mention the change in release notes.
@@ -112,7 +115,8 @@ namespace System.Linq.Parallel.Tests
             int leftCount,
             Labeled<ParallelQuery<int>> right,
             int rightCount
-        ) {
+        )
+        {
             Concat(left, leftCount, right, rightCount);
         }
 
@@ -144,7 +148,8 @@ namespace System.Linq.Parallel.Tests
             int leftCount,
             Labeled<ParallelQuery<int>> right,
             int rightCount
-        ) {
+        )
+        {
             // The ordering of Concat is only guaranteed when both operands are ordered,
             // however the current implementation manages to perform ordering if either operand is ordered _in most cases_.
             // If this test starts failing, consider revising the operators and mention the change in release notes.
@@ -169,7 +174,8 @@ namespace System.Linq.Parallel.Tests
             int leftCount,
             Labeled<ParallelQuery<int>> right,
             int rightCount
-        ) {
+        )
+        {
             Concat_NotPipelined(left, leftCount, right, rightCount);
         }
 

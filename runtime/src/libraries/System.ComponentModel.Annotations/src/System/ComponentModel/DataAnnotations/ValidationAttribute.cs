@@ -214,7 +214,8 @@ namespace System.ComponentModel.DataAnnotations
                 if (
                     (resourceNameSet && errorMessageSet)
                     || !(resourceNameSet || errorMessageSet || defaultMessageSet)
-                ) {
+                )
+                {
                     throw new InvalidOperationException(
                         SR.ValidationAttribute_Cannot_Set_ErrorMessage_And_Resource
                     );
@@ -263,7 +264,8 @@ namespace System.ComponentModel.DataAnnotations
                 if (
                     propertyGetter == null
                     || (!propertyGetter.IsAssembly && !propertyGetter.IsPublic)
-                ) {
+                )
+                {
                     // Set the property to null so the exception is thrown as if the property wasn't found
                     property = null;
                 }
@@ -379,7 +381,8 @@ namespace System.ComponentModel.DataAnnotations
         protected virtual ValidationResult? IsValid(
             object? value,
             ValidationContext validationContext
-        ) {
+        )
+        {
             if (_hasBaseIsValid)
             {
                 // this means neither of the IsValid methods has been overridden, throw.
@@ -434,7 +437,8 @@ namespace System.ComponentModel.DataAnnotations
         public ValidationResult? GetValidationResult(
             object? value,
             ValidationContext validationContext
-        ) {
+        )
+        {
             if (validationContext == null)
             {
                 throw new ArgumentNullException(nameof(validationContext));

@@ -42,7 +42,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Http
                     ByteLF,
                     advancePastDelimiter: true
                 )
-            ) {
+            )
+            {
                 ParseRequestLine(handler, requestLine);
                 return true;
             }
@@ -245,7 +246,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Http
                                     ||
                                     // Exclude the CRLF from the headerLine and parse the header name:value pair
                                     !TryTakeSingleHeader(handler, span[..(length - 2)])
-                                ) {
+                                )
+                                {
                                     // Sequence needs to be CRLF and not contain an inner CR not part of terminator.
                                     // Less than min possible headerSpan of 5 bytes a:b\r\n
                                     // Not parsable as a valid name:value header pair.
@@ -309,7 +311,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Http
             if (
                 currentSlice.Slice(reader.Position, lineEndPosition.Value).Length
                 == currentSlice.Length - 1
-            ) {
+            )
+            {
                 // No enough data, so CRLF can't currently be there.
                 // However, we need to check the found char is CR and not LF
 
@@ -344,7 +347,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Http
                 ||
                 // Exclude the CRLF from the headerLine and parse the header name:value pair
                 !TryTakeSingleHeader(handler, headerSpan[..^2])
-            ) {
+            )
+            {
                 // Sequence needs to be CRLF and not contain an inner CR not part of terminator.
                 // Not parsable as a valid name:value header pair.
                 RejectRequestHeader(headerSpan);
@@ -356,7 +360,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Http
         private static bool TryTakeSingleHeader(
             TRequestHandler handler,
             ReadOnlySpan<byte> headerLine
-        ) {
+        )
+        {
             // We are looking for a colon to terminate the header name.
             // However, the header name cannot contain a space or tab so look for all three
             // and see which is found first.

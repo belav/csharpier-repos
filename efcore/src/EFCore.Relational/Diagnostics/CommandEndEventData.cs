@@ -41,19 +41,20 @@ namespace Microsoft.EntityFrameworkCore.Diagnostics
             bool logParameterValues,
             DateTimeOffset startTime,
             TimeSpan duration
-        ) : base(
-            eventDefinition,
-            messageGenerator,
-            connection,
-            command,
-            context,
-            executeMethod,
-            commandId,
-            connectionId,
-            async,
-            logParameterValues,
-            startTime
-        ) => Duration = duration;
+        )
+            : base(
+                eventDefinition,
+                messageGenerator,
+                connection,
+                command,
+                context,
+                executeMethod,
+                commandId,
+                connectionId,
+                async,
+                logParameterValues,
+                startTime
+            ) => Duration = duration;
 
         /// <summary>
         ///     The duration this event.

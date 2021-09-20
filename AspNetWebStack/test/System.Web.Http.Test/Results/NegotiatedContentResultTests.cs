@@ -382,7 +382,8 @@ namespace System.Web.Http.Results
                         expectedInputFormatter,
                         contentNegotiator
                     )
-                ) {
+                )
+                {
                     controller.Configuration = configuration;
                     controller.Request = expectedRequest;
 
@@ -429,7 +430,8 @@ namespace System.Web.Http.Results
                     CreateFormatter(),
                     CreateContentNegotiator()
                 )
-            ) {
+            )
+            {
                 controller.Configuration = configuration;
 
                 using (HttpRequestMessage request = CreateRequest())
@@ -472,7 +474,8 @@ namespace System.Web.Http.Results
                     CreateFormatter(),
                     CreateContentNegotiator()
                 )
-            ) {
+            )
+            {
                 controller.Configuration = configuration;
                 NegotiatedContentResult<object> result = new NegotiatedContentResult<object>(
                     statusCode,
@@ -526,7 +529,8 @@ namespace System.Web.Http.Results
                         expectedFormatter,
                         contentNegotiator
                     )
-                ) {
+                )
+                {
                     controller.Configuration = lateConfiguration;
 
                     // Act
@@ -594,7 +598,8 @@ namespace System.Web.Http.Results
                     CreateFormatter(),
                     CreateContentNegotiator()
                 )
-            ) {
+            )
+            {
                 controller.Configuration = configuration;
 
                 NegotiatedContentResult<object> result = new NegotiatedContentResult<object>(
@@ -656,7 +661,8 @@ namespace System.Web.Http.Results
                         CreateFormatter(),
                         contentNegotiator
                     )
-                ) {
+                )
+                {
                     controller.Configuration = lateConfiguration;
 
                     // Act
@@ -745,7 +751,8 @@ namespace System.Web.Http.Results
                     CreateFormatter(),
                     CreateContentNegotiator()
                 )
-            ) {
+            )
+            {
                 controller.Configuration = configuration;
                 NegotiatedContentResult<object> result = new NegotiatedContentResult<object>(
                     statusCode,
@@ -800,7 +807,8 @@ namespace System.Web.Http.Results
         private static HttpConfiguration CreateConfiguration(
             MediaTypeFormatter formatter,
             IContentNegotiator contentNegotiator
-        ) {
+        )
+        {
             HttpConfiguration configuration = new HttpConfiguration();
             configuration.Formatters.Clear();
             configuration.Formatters.Add(formatter);
@@ -854,7 +862,8 @@ namespace System.Web.Http.Results
                 Type type,
                 HttpRequestMessage request,
                 IEnumerable<MediaTypeFormatter> formatters
-            ) {
+            )
+            {
                 throw new NotImplementedException();
             }
         }

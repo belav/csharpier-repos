@@ -20,7 +20,8 @@ namespace Microsoft.CSharp.RuntimeBinder.Tests
             TSource argument,
             TTarget target,
             ExpectedConversionResult expected
-        ) {
+        )
+        {
             CallSiteBinder binder = Binder.Convert(
                 CSharpBinderFlags.ConvertExplicit,
                 typeof(TTarget),

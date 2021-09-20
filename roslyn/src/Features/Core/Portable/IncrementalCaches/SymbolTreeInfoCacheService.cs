@@ -24,7 +24,8 @@ namespace Microsoft.CodeAnalysis.IncrementalCaches
             public SymbolTreeInfoCacheService(
                 ConcurrentDictionary<ProjectId, SymbolTreeInfo> projectIdToInfo,
                 ConcurrentDictionary<MetadataId, MetadataInfo> metadataIdToInfo
-            ) {
+            )
+            {
                 _projectIdToInfo = projectIdToInfo;
                 _metadataIdToInfo = metadataIdToInfo;
             }
@@ -33,7 +34,8 @@ namespace Microsoft.CodeAnalysis.IncrementalCaches
                 Solution solution,
                 PortableExecutableReference reference,
                 CancellationToken cancellationToken
-            ) {
+            )
+            {
                 var metadataId = SymbolTreeInfo.GetMetadataIdNoThrow(reference);
                 if (metadataId == null)
                     return null;
@@ -48,7 +50,8 @@ namespace Microsoft.CodeAnalysis.IncrementalCaches
                 if (
                     _metadataIdToInfo.TryGetValue(metadataId, out var metadataInfo)
                     && metadataInfo.SymbolTreeInfo.Checksum == checksum
-                ) {
+                )
+                {
                     return metadataInfo.SymbolTreeInfo;
                 }
 
@@ -69,7 +72,8 @@ namespace Microsoft.CodeAnalysis.IncrementalCaches
             public async Task<SymbolTreeInfo> TryGetSourceSymbolTreeInfoAsync(
                 Project project,
                 CancellationToken cancellationToken
-            ) {
+            )
+            {
                 // See if the last value produced matches what the caller is asking for.  If so, return that.
                 var checksum = await SymbolTreeInfo.GetSourceSymbolsChecksumAsync(
                         project,
@@ -79,7 +83,8 @@ namespace Microsoft.CodeAnalysis.IncrementalCaches
                 if (
                     _projectIdToInfo.TryGetValue(project.Id, out var projectInfo)
                     && projectInfo.Checksum == checksum
-                ) {
+                )
+                {
                     return projectInfo;
                 }
 

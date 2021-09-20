@@ -212,7 +212,8 @@ namespace Swaggatherer
                             other.Template.Segments[k].Parts[0].Text,
                             StringComparison.OrdinalIgnoreCase
                         )
-                    ) {
+                    )
+                    {
                         isSame = false;
                         break;
                     }
@@ -224,7 +225,8 @@ namespace Swaggatherer
                             other.Method,
                             StringComparison.OrdinalIgnoreCase
                         )
-                    ) {
+                    )
+                    {
                         isSame = false;
                         break;
                     }

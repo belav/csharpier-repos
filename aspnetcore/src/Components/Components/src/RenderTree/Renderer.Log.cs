@@ -66,7 +66,8 @@ namespace Microsoft.AspNetCore.Components.RenderTree
                 ILogger logger,
                 ComponentState componentState,
                 ComponentState parentComponentState
-            ) {
+            )
+            {
                 if (logger.IsEnabled(LogLevel.Debug)) // This is almost always false, so skip the evaluations
                 {
                     if (parentComponentState == null)
@@ -108,7 +109,8 @@ namespace Microsoft.AspNetCore.Components.RenderTree
             public static void DisposingComponent(
                 ILogger<Renderer> logger,
                 ComponentState componentState
-            ) {
+            )
+            {
                 if (logger.IsEnabled(LogLevel.Debug)) // This is almost always false, so skip the evaluations
                 {
                     _disposingComponent(
@@ -124,7 +126,8 @@ namespace Microsoft.AspNetCore.Components.RenderTree
                 ILogger<Renderer> logger,
                 ulong eventHandlerId,
                 EventArgs eventArgs
-            ) {
+            )
+            {
                 _handlingEvent(logger, eventHandlerId, eventArgs?.GetType().Name ?? "null", null);
             }
         }

@@ -78,7 +78,8 @@ namespace Microsoft.AspNetCore.Components.E2ETest.Tests
 
         private (WebAssemblyComponentMarker, WebAssemblyComponentMarker)[] ReadMarkers(
             string content
-        ) {
+        )
+        {
             content = content.Replace("\r\n", "");
             var matches = Regex.Matches(content, MarkerPattern);
             var markers = matches.Select(

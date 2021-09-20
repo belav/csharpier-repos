@@ -17,7 +17,8 @@ namespace Microsoft.Extensions.Internal
             object? state,
             TimeSpan dueTime,
             TimeSpan period
-        ) {
+        )
+        {
             if (callback == null)
             {
                 throw new ArgumentNullException(nameof(callback));

@@ -182,7 +182,8 @@ namespace Tracing.Tests
         private static int EventActivityIdControl(
             ActivityControlCode controlCode,
             ref Guid activityId
-        ) {
+        )
+        {
             object[] parameters = new object[] { (uint)controlCode, activityId };
 
             int retCode = (int)s_EventActivityIdControl.Invoke(null, parameters);

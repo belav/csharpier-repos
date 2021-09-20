@@ -22,7 +22,8 @@ namespace Microsoft.AspNetCore.Components
         internal ComponentApplicationState(
             IDictionary<string, byte[]> currentState,
             List<OnPersistingCallback> pauseCallbacks
-        ) {
+        )
+        {
             _currentState = currentState;
             _registeredCallbacks = pauseCallbacks;
         }
@@ -142,7 +143,8 @@ namespace Microsoft.AspNetCore.Components
         public void PersistAsJson<[DynamicallyAccessedMembers(JsonSerialized)] TValue>(
             string key,
             TValue instance
-        ) {
+        )
+        {
             if (key is null)
             {
                 throw new ArgumentNullException(nameof(key));
@@ -166,7 +168,8 @@ namespace Microsoft.AspNetCore.Components
         public bool TryTakeAsJson<[DynamicallyAccessedMembers(JsonSerialized)] TValue>(
             string key,
             [MaybeNullWhen(false)] out TValue? instance
-        ) {
+        )
+        {
             if (key is null)
             {
                 throw new ArgumentNullException(nameof(key));

@@ -313,7 +313,8 @@ namespace System.Xml
             byte b4,
             bool notOutOfBand,
             out int preserve
-        ) {
+        )
+        {
             SupportedEncoding e = SupportedEncoding.UTF8; // Default
 
             preserve = 0;
@@ -403,7 +404,8 @@ namespace System.Xml
             int count,
             SupportedEncoding e,
             SupportedEncoding expectedEnc
-        ) {
+        )
+        {
             byte quot = 0;
             int encEq = -1;
             int max = offset + Math.Min(count, BufferLength);
@@ -488,25 +490,29 @@ namespace System.Xml
             if (
                 encCount == s_encodingUTF8.Length
                 && CompareCaseInsensitive(s_encodingUTF8, buffer, encStart)
-            ) {
+            )
+            {
                 declEnc = SupportedEncoding.UTF8;
             }
             else if (
                 encCount == s_encodingUnicodeLE.Length
                 && CompareCaseInsensitive(s_encodingUnicodeLE, buffer, encStart)
-            ) {
+            )
+            {
                 declEnc = SupportedEncoding.UTF16LE;
             }
             else if (
                 encCount == s_encodingUnicodeBE.Length
                 && CompareCaseInsensitive(s_encodingUnicodeBE, buffer, encStart)
-            ) {
+            )
+            {
                 declEnc = SupportedEncoding.UTF16BE;
             }
             else if (
                 encCount == s_encodingUnicode.Length
                 && CompareCaseInsensitive(s_encodingUnicode, buffer, encStart)
-            ) {
+            )
+            {
                 if (e == SupportedEncoding.UTF8)
                     ThrowEncodingMismatch(
                         s_safeUTF8.GetString(buffer, encStart, encCount),
@@ -555,7 +561,8 @@ namespace System.Xml
             int offset,
             int count,
             Encoding? encoding
-        ) {
+        )
+        {
             if (count < 4)
                 throw new XmlException(SR.UnexpectedEndOfFile);
 
@@ -631,7 +638,8 @@ namespace System.Xml
         private static void ThrowExpectedEncodingMismatch(
             SupportedEncoding expEnc,
             SupportedEncoding actualEnc
-        ) {
+        )
+        {
             throw new XmlException(
                 SR.Format(
                     SR.XmlExpectedEncoding,

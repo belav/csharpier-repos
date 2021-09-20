@@ -1242,7 +1242,8 @@ namespace System.Linq.Tests
                     source.Where(s => true),
                     source.Where(s => true).Select(s => s)
                 }
-            ) {
+            )
+            {
                 Assert.Equal(source, equivalent);
                 Assert.Equal(source, equivalent.ToArray());
                 Assert.Equal(source, equivalent.ToList());

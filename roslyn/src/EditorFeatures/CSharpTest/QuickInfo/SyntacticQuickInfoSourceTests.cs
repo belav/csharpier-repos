@@ -282,7 +282,8 @@ if (true)
             TestWorkspace workspace,
             Document document,
             int position
-        ) {
+        )
+        {
             var provider = CreateProvider();
             Assert.Null(
                 await provider.GetQuickInfoAsync(
@@ -297,7 +298,8 @@ if (true)
             int position,
             string expectedContent,
             string expectedDocumentationComment = null
-        ) {
+        )
+        {
             var provider = CreateProvider();
             var info = await provider.GetQuickInfoAsync(
                 new QuickInfoContext(document, position, CancellationToken.None)
@@ -331,7 +333,8 @@ if (true)
             string code,
             string expectedContent,
             string expectedDocumentationComment = null
-        ) {
+        )
+        {
             return TestInClassAsync(
                 @"void M()
 {"
@@ -346,7 +349,8 @@ if (true)
             string code,
             string expectedContent,
             string expectedDocumentationComment = null
-        ) {
+        )
+        {
             return TestAsync(
                 @"class C
 {"
@@ -368,7 +372,8 @@ if (true)
             string expectedContent,
             string expectedDocumentationComment = null,
             CSharpParseOptions parseOptions = null
-        ) {
+        )
+        {
             using var workspace = TestWorkspace.CreateCSharp(code, parseOptions);
             var testDocument = workspace.Documents.Single();
             var position = testDocument.CursorPosition.Value;

@@ -21,7 +21,8 @@ namespace Microsoft.AspNetCore.Razor.Language.Components
         protected override void ExecuteCore(
             RazorCodeDocument codeDocument,
             DocumentIntermediateNode documentNode
-        ) {
+        )
+        {
             if (!IsComponentDocument(documentNode))
             {
                 return;
@@ -43,7 +44,8 @@ namespace Microsoft.AspNetCore.Razor.Language.Components
                     if (
                         !TrySimplifyContent(propertyNode)
                         && node.TagHelpers.Any(t => t.IsComponentTagHelper())
-                    ) {
+                    )
+                    {
                         node.Diagnostics.Add(
                             ComponentDiagnosticFactory.Create_UnsupportedComplexContent(
                                 propertyNode,
@@ -59,7 +61,8 @@ namespace Microsoft.AspNetCore.Razor.Language.Components
                     if (
                         !TrySimplifyContent(htmlNode)
                         && node.TagHelpers.Any(t => t.IsComponentTagHelper())
-                    ) {
+                    )
+                    {
                         node.Diagnostics.Add(
                             ComponentDiagnosticFactory.Create_UnsupportedComplexContent(
                                 htmlNode,
@@ -73,7 +76,8 @@ namespace Microsoft.AspNetCore.Razor.Language.Components
                 else if (
                     node.Children[i]
                     is TagHelperDirectiveAttributeIntermediateNode directiveAttributeNode
-                ) {
+                )
+                {
                     if (!TrySimplifyContent(directiveAttributeNode))
                     {
                         node.Diagnostics.Add(
@@ -95,7 +99,8 @@ namespace Microsoft.AspNetCore.Razor.Language.Components
                 node.Children.Count == 1
                 && node.Children[0] is HtmlAttributeIntermediateNode htmlNode
                 && htmlNode.Children.Count > 1
-            ) {
+            )
+            {
                 // This case can be hit for a 'string' attribute
                 return false;
             }
@@ -103,7 +108,8 @@ namespace Microsoft.AspNetCore.Razor.Language.Components
                 node.Children.Count == 1
                 && node.Children[0] is CSharpExpressionIntermediateNode cSharpNode
                 && cSharpNode.Children.Count > 1
-            ) {
+            )
+            {
                 // This case can be hit when the attribute has an explicit @ inside, which
                 // 'escapes' any special sugar we provide for codegen.
                 //
@@ -115,7 +121,8 @@ namespace Microsoft.AspNetCore.Razor.Language.Components
                     && cSharpNode.Children[2] is IntermediateToken token2
                     && token0.Content == "("
                     && token2.Content == ")"
-                ) {
+                )
+                {
                     cSharpNode.Children.RemoveAt(2);
                     cSharpNode.Children.RemoveAt(0);
 

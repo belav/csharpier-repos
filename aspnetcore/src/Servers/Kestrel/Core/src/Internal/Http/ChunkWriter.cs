@@ -157,7 +157,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Http
         internal static int WriteBeginChunkBytes(
             this ref BufferWriter<PipeWriter> start,
             int dataCount
-        ) {
+        )
+        {
             // 10 bytes is max length + \r\n
             start.Ensure(10);
 

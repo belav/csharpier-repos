@@ -5713,7 +5713,8 @@ class Child: Parent, IM
 
         private void AssertSingleInAttributeRequiredModifier(
             ImmutableArray<CustomModifier> modifiers
-        ) {
+        )
+        {
             var modifier = modifiers.Single();
             var typeName = WellKnownTypes.GetMetadataName(
                 WellKnownType.System_Runtime_InteropServices_InAttribute

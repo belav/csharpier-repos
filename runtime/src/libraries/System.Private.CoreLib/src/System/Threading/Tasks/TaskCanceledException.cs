@@ -70,7 +70,8 @@ namespace System.Threading.Tasks
             : base(
                 SR.TaskCanceledException_ctor_DefaultMessage,
                 task != null ? task.CancellationToken : CancellationToken.None
-            ) {
+            )
+        {
             _canceledTask = task;
         }
 

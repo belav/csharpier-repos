@@ -19,7 +19,8 @@ namespace Microsoft.CodeAnalysis.Editor.Shared.Tagging
         internal static TimeSpan ComputeTimeDelay(
             this TaggerDelay behavior,
             ITextBuffer textBufferOpt
-        ) {
+        )
+        {
             if (TextBufferAssociatedViewService.AnyAssociatedViewHasFocus(textBufferOpt))
             {
                 // TODO : should we remove TaggerBehavior enum all together and put NearImmediateDelay

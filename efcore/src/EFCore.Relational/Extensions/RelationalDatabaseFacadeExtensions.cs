@@ -231,7 +231,8 @@ namespace Microsoft.EntityFrameworkCore
             this DatabaseFacade databaseFacade,
             string sql,
             IEnumerable<object> parameters
-        ) {
+        )
+        {
             Check.NotNull(databaseFacade, nameof(databaseFacade));
             Check.NotNull(sql, nameof(sql));
             Check.NotNull(parameters, nameof(parameters));
@@ -411,7 +412,8 @@ namespace Microsoft.EntityFrameworkCore
             string sql,
             IEnumerable<object> parameters,
             CancellationToken cancellationToken = default
-        ) {
+        )
+        {
             Check.NotNull(databaseFacade, nameof(databaseFacade));
             Check.NotNull(sql, nameof(sql));
             Check.NotNull(parameters, nameof(parameters));
@@ -630,7 +632,8 @@ namespace Microsoft.EntityFrameworkCore
             this DatabaseFacade databaseFacade,
             DbTransaction? transaction,
             Guid transactionId
-        ) {
+        )
+        {
             var transactionManager = GetTransactionManager(databaseFacade);
 
             if (!(transactionManager is IRelationalTransactionManager relationalTransactionManager))
@@ -669,7 +672,8 @@ namespace Microsoft.EntityFrameworkCore
             DbTransaction? transaction,
             Guid transactionId,
             CancellationToken cancellationToken = default
-        ) {
+        )
+        {
             var transactionManager = GetTransactionManager(databaseFacade);
 
             if (!(transactionManager is IRelationalTransactionManager relationalTransactionManager))
@@ -783,7 +787,8 @@ namespace Microsoft.EntityFrameworkCore
 
         private static IRelationalDatabaseFacadeDependencies GetFacadeDependencies(
             DatabaseFacade databaseFacade
-        ) {
+        )
+        {
             var dependencies = ((IDatabaseFacadeDependenciesAccessor)databaseFacade).Dependencies;
 
             if (dependencies is IRelationalDatabaseFacadeDependencies relationalDependencies)
@@ -796,7 +801,8 @@ namespace Microsoft.EntityFrameworkCore
 
         private static TService GetRelationalService<TService>(
             this IInfrastructure<IServiceProvider> databaseFacade
-        ) {
+        )
+        {
             Check.NotNull(databaseFacade, nameof(databaseFacade));
 
             var service = databaseFacade.Instance.GetService<TService>();

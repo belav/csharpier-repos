@@ -65,7 +65,8 @@ namespace Microsoft.AspNet.Facebook.Test
             string challenge,
             string verifyToken,
             HttpStatusCode expectedStatusCode
-        ) {
+        )
+        {
             var userRealTimeController = new UserRealtimeCallbackController(null, verifyToken);
             userRealTimeController.Request = new HttpRequestMessage();
             var subscriptionVerification = new SubscriptionVerification
@@ -87,7 +88,8 @@ namespace Microsoft.AspNet.Facebook.Test
             string contentString,
             string headerValue,
             string appSecret
-        ) {
+        )
+        {
             var userRealTimeController = new UserRealtimeCallbackController(appSecret, null);
             userRealTimeController.Request = new HttpRequestMessage
             {
@@ -107,7 +109,8 @@ namespace Microsoft.AspNet.Facebook.Test
             string contentString,
             string headerValue,
             string AppSecret
-        ) {
+        )
+        {
             var userRealTimeController = new UserRealtimeCallbackController(AppSecret, null);
             userRealTimeController.Request = new HttpRequestMessage
             {

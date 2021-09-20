@@ -171,7 +171,8 @@ namespace System.Threading.Tests
             void VerifyChangeCounts(
                 int expectedAsyncLocal0ChangeCount,
                 int expectedAsyncLocal1ChangeCount
-            ) {
+            )
+            {
                 Assert.Equal(expectedAsyncLocal0ChangeCount, asyncLocal0ChangeCount);
                 Assert.Equal(expectedAsyncLocal1ChangeCount, asyncLocal1ChangeCount);
             }
@@ -557,7 +558,8 @@ namespace System.Threading.Tests
         [MemberData(nameof(GetCounts))]
         public static async Task AddUpdateAndRemoveManyLocals_ReferenceType_NotifyOnChange(
             int count
-        ) {
+        )
+        {
             string valueChangedLog = string.Empty;
             string expectedValueChangedLog = string.Empty;
             string GetValueChangedLogLine(string previousValue, string currentValue) =>
@@ -721,7 +723,8 @@ namespace System.Threading.Tests
                     int innerContextIndex = 0;
                     innerContextIndex < asyncLocals.Length;
                     innerContextIndex++
-                ) {
+                )
+                {
                     // Validate locals are correctly restored Running with another non-Default context from a non-Default context
                     ExecutionContext.Run(
                         capturedContexts[innerContextIndex].CreateCopy(),
@@ -739,7 +742,8 @@ namespace System.Threading.Tests
                 int maunalSets,
                 int automaticUnsets,
                 int automaticSets
-            ) {
+            )
+            {
                 for (int localsIndex = 0; localsIndex < asyncLocals.Length; localsIndex++)
                 {
                     Assert.Equal(

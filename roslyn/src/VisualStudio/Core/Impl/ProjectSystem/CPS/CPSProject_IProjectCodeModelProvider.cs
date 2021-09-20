@@ -34,7 +34,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.ProjectSystem.C
 
             EnvDTE.FileCodeModel ICodeModelInstanceFactory.TryCreateFileCodeModelThroughProjectSystem(
                 string filePath
-            ) {
+            )
+            {
                 var projectItem = GetProjectItem(filePath);
                 if (projectItem == null)
                 {

@@ -165,7 +165,8 @@ namespace System.Net
                 // to scavenge the table looking for entries that have lost their service point and removing them.
                 foreach (
                     KeyValuePair<string, WeakReference<ServicePoint>> entry in s_servicePointTable
-                ) {
+                )
+                {
                     if (!entry.Value.TryGetTarget(out _))
                     {
                         // Remove the entry from the table if both the key/value in the pair match.

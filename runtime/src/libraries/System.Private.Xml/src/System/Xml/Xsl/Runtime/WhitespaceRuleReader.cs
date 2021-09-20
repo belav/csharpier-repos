@@ -41,7 +41,8 @@ namespace System.Xml.Xsl.Runtime
                 if (
                     txtReaderImpl != null
                     && txtReaderImpl.WhitespaceHandling == WhitespaceHandling.None
-                ) {
+                )
+                {
                     return baseReader; // XmlTextReaderImpl that strips all WS
                 }
             }

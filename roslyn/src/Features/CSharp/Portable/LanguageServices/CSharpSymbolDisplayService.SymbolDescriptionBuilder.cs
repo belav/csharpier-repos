@@ -49,13 +49,14 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.LanguageServices
                 Workspace workspace,
                 IAnonymousTypeDisplayService anonymousTypeDisplayService,
                 CancellationToken cancellationToken
-            ) : base(
-                semanticModel,
-                position,
-                workspace,
-                anonymousTypeDisplayService,
-                cancellationToken
-            ) { }
+            )
+                : base(
+                    semanticModel,
+                    position,
+                    workspace,
+                    anonymousTypeDisplayService,
+                    cancellationToken
+                ) { }
 
             protected override void AddDeprecatedPrefix()
             {
@@ -155,7 +156,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.LanguageServices
 
             private async Task<ImmutableArray<SymbolDisplayPart>> GetInitializerSourcePartsAsync(
                 IFieldSymbol symbol
-            ) {
+            )
+            {
                 EqualsValueClauseSyntax initializer = null;
 
                 var variableDeclarator = await GetFirstDeclarationAsync<VariableDeclaratorSyntax>(
@@ -188,7 +190,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.LanguageServices
 
             private async Task<ImmutableArray<SymbolDisplayPart>> GetInitializerSourcePartsAsync(
                 ILocalSymbol symbol
-            ) {
+            )
+            {
                 var syntax = await GetFirstDeclarationAsync<VariableDeclaratorSyntax>(symbol)
                     .ConfigureAwait(false);
                 if (syntax != null)
@@ -202,7 +205,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.LanguageServices
 
             private async Task<ImmutableArray<SymbolDisplayPart>> GetInitializerSourcePartsAsync(
                 IParameterSymbol symbol
-            ) {
+            )
+            {
                 var syntax = await GetFirstDeclarationAsync<ParameterSyntax>(symbol)
                     .ConfigureAwait(false);
                 if (syntax != null)
@@ -231,7 +235,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.LanguageServices
 
             private async Task<ImmutableArray<SymbolDisplayPart>> GetInitializerSourcePartsAsync(
                 EqualsValueClauseSyntax equalsValue
-            ) {
+            )
+            {
                 if (equalsValue != null && equalsValue.Value != null)
                 {
                     var semanticModel = GetSemanticModel(equalsValue.SyntaxTree);
@@ -255,12 +260,14 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.LanguageServices
                 if (
                     symbol is IMethodSymbol method
                     && method.ContainingSymbol.IsKind(SymbolKind.Method)
-                ) {
+                )
+                {
                     var syntax = method.DeclaringSyntaxReferences.FirstOrDefault()?.GetSyntax();
                     if (
                         syntax.IsKind(SyntaxKind.LocalFunctionStatement)
                         || syntax is AnonymousFunctionExpressionSyntax
-                    ) {
+                    )
+                    {
                         AddCaptures(syntax);
                     }
                 }

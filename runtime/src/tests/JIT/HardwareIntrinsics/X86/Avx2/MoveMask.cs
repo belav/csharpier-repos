@@ -59,7 +59,8 @@ namespace IntelHardwareIntrinsicTest
                             255
                         }
                     )
-                ) {
+                )
+                {
                     var vf1 = Unsafe.Read<Vector256<byte>>(byteTable.inArray1Ptr);
                     var res = Avx2.MoveMask(vf1);
 
@@ -109,7 +110,8 @@ namespace IntelHardwareIntrinsicTest
                             -9
                         }
                     )
-                ) {
+                )
+                {
                     var vf1 = Unsafe.Read<Vector256<sbyte>>(sbyteTable.inArray1Ptr);
                     var res = Avx2.MoveMask(vf1);
 

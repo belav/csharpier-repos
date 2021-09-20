@@ -96,7 +96,8 @@ namespace Templates.Test
         public async Task BlazorServerTemplateWorks_IndividualAuth(
             BrowserKind browserKind,
             bool useLocalDB
-        ) {
+        )
+        {
             var project = await CreateBuildPublishAsync(
                 "blazorserverindividual" + browserKind + (useLocalDB ? "uld" : "")
             );

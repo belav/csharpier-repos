@@ -38,7 +38,8 @@ namespace System.Net
             int count,
             AsyncCallback? callback,
             object? state
-        ) {
+        )
+        {
             ReadAsyncResult result = new ReadAsyncResult(this, callback, state);
             result.Read(buffer, offset, count);
             return result;
@@ -74,7 +75,8 @@ namespace System.Net
             int offset,
             int count,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             int read = 0;
             if (_storedOffset >= _storedLength)
             {
@@ -101,7 +103,8 @@ namespace System.Net
             int offset,
             int count,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             int returnValue = await base.ReadAsync(
                     buffer.AsMemory(offset, count),
                     cancellationToken

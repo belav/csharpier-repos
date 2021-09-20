@@ -210,7 +210,8 @@ namespace System.Data.OleDb
                 if (
                     enlistedTransaction.TransactionInformation.Status
                     == SysTx.TransactionStatus.Active
-                ) {
+                )
+                {
                     throw ADP.TransactionPresent();
                 }
             }
@@ -305,7 +306,8 @@ namespace System.Data.OleDb
             }
             else if (
                 ConnectionState.Open == originalState && ConnectionState.Closed == currentState
-            ) {
+            )
+            {
                 OnStateChange(DbConnectionInternal.StateChangeClosed);
             }
             else

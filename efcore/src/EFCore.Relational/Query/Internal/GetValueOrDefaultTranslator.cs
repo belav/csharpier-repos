@@ -42,7 +42,8 @@ namespace Microsoft.EntityFrameworkCore.Query.Internal
             MethodInfo method,
             IReadOnlyList<SqlExpression> arguments,
             IDiagnosticsLogger<DbLoggerCategory.Query> logger
-        ) {
+        )
+        {
             Check.NotNull(method, nameof(method));
             Check.NotNull(arguments, nameof(arguments));
             Check.NotNull(logger, nameof(logger));
@@ -51,7 +52,8 @@ namespace Microsoft.EntityFrameworkCore.Query.Internal
                 method.Name == nameof(Nullable<int>.GetValueOrDefault)
                 && instance != null
                 && method.ReturnType.IsNumeric()
-            ) {
+            )
+            {
                 return _sqlExpressionFactory.Coalesce(
                     instance,
                     arguments.Count == 0

@@ -40,7 +40,8 @@ namespace AutoMapper.Configuration
             TMember sourceMember,
             TMember destinationMember,
             ResolutionContext context
-        ) {
+        )
+        {
             Source = source;
             Destination = destination;
             SourceMember = sourceMember;
@@ -58,7 +59,8 @@ namespace AutoMapper.Configuration
         public PathConfigurationExpression(
             LambdaExpression destinationExpression,
             Stack<Member> chain
-        ) {
+        )
+        {
             _destinationExpression = destinationExpression;
             MemberPath = new MemberPath(chain);
         }
@@ -103,7 +105,8 @@ namespace AutoMapper.Configuration
         internal static IPropertyMapConfiguration Create(
             LambdaExpression destination,
             LambdaExpression source
-        ) {
+        )
+        {
             if (destination == null || !destination.IsMemberPath(out var chain))
             {
                 return null;

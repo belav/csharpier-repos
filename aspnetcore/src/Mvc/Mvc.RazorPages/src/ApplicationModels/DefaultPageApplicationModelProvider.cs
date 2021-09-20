@@ -30,7 +30,8 @@ namespace Microsoft.AspNetCore.Mvc.ApplicationModels
             IModelMetadataProvider modelMetadataProvider,
             IOptions<RazorPagesOptions> razorPagesOptions,
             IPageApplicationModelPartsProvider pageApplicationModelPartsProvider
-        ) {
+        )
+        {
             _modelMetadataProvider = modelMetadataProvider;
             _razorPagesOptions = razorPagesOptions.Value;
             _pageApplicationModelPartsProvider = pageApplicationModelPartsProvider;
@@ -64,7 +65,8 @@ namespace Microsoft.AspNetCore.Mvc.ApplicationModels
         protected virtual PageApplicationModel CreateModel(
             PageActionDescriptor actionDescriptor,
             TypeInfo pageTypeInfo
-        ) {
+        )
+        {
             if (actionDescriptor == null)
             {
                 throw new ArgumentNullException(nameof(actionDescriptor));
@@ -188,14 +190,16 @@ namespace Microsoft.AspNetCore.Mvc.ApplicationModels
             if (
                 typeof(IAsyncPageFilter).IsAssignableFrom(pageModel.HandlerType)
                 || typeof(IPageFilter).IsAssignableFrom(pageModel.HandlerType)
-            ) {
+            )
+            {
                 pageModel.Filters.Add(_pageHandlerPageFilter);
             }
 
             if (
                 typeof(IAsyncResultFilter).IsAssignableFrom(pageModel.HandlerType)
                 || typeof(IResultFilter).IsAssignableFrom(pageModel.HandlerType)
-            ) {
+            )
+            {
                 pageModel.Filters.Add(_pageHandlerResultFilter);
             }
 

@@ -220,7 +220,8 @@ namespace System.Runtime.CompilerServices
             Action continuation,
             bool continueOnCapturedContext,
             bool flowExecutionContext
-        ) {
+        )
+        {
             if (continuation == null)
                 throw new ArgumentNullException(nameof(continuation));
 
@@ -247,7 +248,8 @@ namespace System.Runtime.CompilerServices
             Task task,
             IAsyncStateMachineBox stateMachineBox,
             bool continueOnCapturedContext
-        ) {
+        )
+        {
             Debug.Assert(stateMachineBox != null);
 
             // If TaskWait* ETW events are enabled, trace a beginning event for this await

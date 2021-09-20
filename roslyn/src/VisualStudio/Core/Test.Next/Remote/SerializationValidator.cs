@@ -55,7 +55,8 @@ namespace Microsoft.CodeAnalysis.Remote.UnitTests
             public ChecksumObjectCollection(
                 SerializationValidator validator,
                 ChecksumCollection collection
-            ) {
+            )
+            {
                 Checksum = collection.Checksum;
                 Kind = collection.GetWellKnownSynchronizationKind();
 
@@ -244,7 +245,8 @@ namespace Microsoft.CodeAnalysis.Remote.UnitTests
             Checksum checksum,
             WellKnownSynchronizationKind kind,
             Func<T, WellKnownSynchronizationKind, ISerializerService, SolutionAsset> assetGetter
-        ) {
+        )
+        {
             // re-create asset from object
             var syncObject = (
                 await AssetStorage.GetTestAccessor()
@@ -264,7 +266,8 @@ namespace Microsoft.CodeAnalysis.Remote.UnitTests
         internal async Task VerifySolutionStateSerializationAsync(
             Solution solution,
             Checksum solutionChecksum
-        ) {
+        )
+        {
             var solutionObjectFromSyncObject = await GetValueAsync<SolutionStateChecksums>(
                 solutionChecksum
             );
@@ -276,7 +279,8 @@ namespace Microsoft.CodeAnalysis.Remote.UnitTests
         internal void SolutionStateEqual(
             SolutionStateChecksums solutionObject1,
             SolutionStateChecksums solutionObject2
-        ) {
+        )
+        {
             ChecksumWithChildrenEqual(solutionObject1, solutionObject2);
 
             ProjectStatesEqual(
@@ -288,7 +292,8 @@ namespace Microsoft.CodeAnalysis.Remote.UnitTests
         internal void ProjectStateEqual(
             ProjectStateChecksums projectObjects1,
             ProjectStateChecksums projectObjects2
-        ) {
+        )
+        {
             ChecksumWithChildrenEqual(projectObjects1, projectObjects2);
 
             ChecksumWithChildrenEqual(
@@ -308,7 +313,8 @@ namespace Microsoft.CodeAnalysis.Remote.UnitTests
         internal void ProjectStatesEqual(
             ChecksumObjectCollection<ProjectStateChecksums> projectObjects1,
             ChecksumObjectCollection<ProjectStateChecksums> projectObjects2
-        ) {
+        )
+        {
             SynchronizationObjectEqual(projectObjects1, projectObjects2);
 
             Assert.Equal(projectObjects1.Count, projectObjects2.Count);
@@ -337,7 +343,8 @@ namespace Microsoft.CodeAnalysis.Remote.UnitTests
         internal static void ChecksumWithChildrenEqual(
             ChecksumWithChildren checksums1,
             ChecksumWithChildren checksums2
-        ) {
+        )
+        {
             Assert.Equal(checksums1.Checksum, checksums2.Checksum);
             Assert.Equal(checksums1.Children.Count, checksums2.Children.Count);
 
@@ -365,7 +372,8 @@ namespace Microsoft.CodeAnalysis.Remote.UnitTests
             int expectedMetadataReferenceCount,
             int expectedAnalyzerReferenceCount,
             int expectedAdditionalDocumentCount
-        ) {
+        )
+        {
             await VerifyChecksumInServiceAsync(
                     projectObject.Checksum,
                     projectObject.GetWellKnownSynchronizationKind()
@@ -423,7 +431,8 @@ namespace Microsoft.CodeAnalysis.Remote.UnitTests
             ChecksumCollection checksums,
             int expectedCount,
             WellKnownSynchronizationKind expectedItemKind
-        ) {
+        )
+        {
             await VerifyChecksumInServiceAsync(
                     checksums.Checksum,
                     checksums.GetWellKnownSynchronizationKind()
@@ -441,7 +450,8 @@ namespace Microsoft.CodeAnalysis.Remote.UnitTests
         internal async Task VerifyCollectionInService(
             ChecksumObjectCollection<DocumentStateChecksums> documents,
             int expectedCount
-        ) {
+        )
+        {
             await VerifySynchronizationObjectInServiceAsync(documents).ConfigureAwait(false);
             Assert.Equal(documents.Count, expectedCount);
 
@@ -483,7 +493,8 @@ namespace Microsoft.CodeAnalysis.Remote.UnitTests
         internal async Task VerifyChecksumInServiceAsync(
             Checksum checksum,
             WellKnownSynchronizationKind kind
-        ) {
+        )
+        {
             Assert.NotNull(checksum);
             var otherObject = (
                 await AssetStorage.GetTestAccessor()
@@ -532,7 +543,8 @@ namespace Microsoft.CodeAnalysis.Remote.UnitTests
             WellKnownSynchronizationKind kind1,
             Checksum checksum2,
             WellKnownSynchronizationKind kind2
-        ) {
+        )
+        {
             Assert.Equal(checksum1, checksum2);
             Assert.Equal(kind1, kind2);
         }

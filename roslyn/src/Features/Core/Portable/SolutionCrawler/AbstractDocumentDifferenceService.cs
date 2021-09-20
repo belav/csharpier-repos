@@ -19,7 +19,8 @@ namespace Microsoft.CodeAnalysis.SolutionCrawler
             Document oldDocument,
             Document newDocument,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             try
             {
                 var syntaxFactsService =
@@ -34,7 +35,8 @@ namespace Microsoft.CodeAnalysis.SolutionCrawler
                 if (
                     !oldDocument.TryGetText(out var oldText)
                     || !newDocument.TryGetText(out var newText)
-                ) {
+                )
+                {
                     // no cheap way to determine top level changes. assumes top level has changed
                     return new DocumentDifferenceResult(InvocationReasons.DocumentChanged);
                 }
@@ -43,7 +45,8 @@ namespace Microsoft.CodeAnalysis.SolutionCrawler
                     oldDocument.TryGetSyntaxVersion(out var oldVersion)
                     && newDocument.TryGetSyntaxVersion(out var newVersion)
                     && oldVersion.Equals(newVersion)
-                ) {
+                )
+                {
                     // nothing has changed. don't do anything.
                     // this could happen if a document is opened/closed without any buffer change
                     return null;
@@ -61,7 +64,8 @@ namespace Microsoft.CodeAnalysis.SolutionCrawler
                 if (
                     !oldDocument.TryGetSyntaxRoot(out var oldRoot)
                     || !newDocument.TryGetSyntaxRoot(out var newRoot)
-                ) {
+                )
+                {
                     if (!incrementalParsingCandidate)
                     {
                         // no cheap way to determine top level changes. assumes top level has changed
@@ -84,7 +88,8 @@ namespace Microsoft.CodeAnalysis.SolutionCrawler
                     || !newDocument.TryGetTopLevelChangeTextVersion(
                         out var newTopLevelChangeVersion
                     )
-                ) {
+                )
+                {
                     throw ExceptionUtilities.Unreachable;
                 }
 
@@ -124,7 +129,8 @@ namespace Microsoft.CodeAnalysis.SolutionCrawler
             SyntaxNode oldRoot,
             SyntaxNode newRoot,
             TextChangeRange range
-        ) {
+        )
+        {
             // if either old or new tree contains skipped text, re-analyze whole document
             if (oldRoot.ContainsSkippedText || newRoot.ContainsSkippedText)
             {
@@ -167,7 +173,8 @@ namespace Microsoft.CodeAnalysis.SolutionCrawler
             SyntaxNode oldRoot,
             SyntaxNode newRoot,
             TextChangeRange range
-        ) {
+        )
+        {
             // if either old or new tree contains skipped text, re-analyze whole document
             if (oldRoot.ContainsSkippedText || newRoot.ContainsSkippedText)
             {

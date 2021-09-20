@@ -38,7 +38,8 @@ namespace System.Diagnostics
                         false,
                         processId
                     )
-                ) {
+                )
+                {
                     if (!processHandle.IsInvalid)
                     {
                         return true;
@@ -155,7 +156,8 @@ namespace System.Diagnostics
                     Interop.Advapi32.SeDebugPrivilege,
                     out luid
                 )
-            ) {
+            )
+            {
                 return;
             }
 
@@ -168,7 +170,8 @@ namespace System.Diagnostics
                         Interop.Kernel32.HandleOptions.TOKEN_ADJUST_PRIVILEGES,
                         out tokenHandle
                     )
-                ) {
+                )
+                {
                     return;
                 }
 
@@ -399,7 +402,8 @@ namespace System.Diagnostics
             int processIndex,
             int threadIndex,
             ReadOnlySpan<byte> data
-        ) {
+        )
+        {
             Dictionary<int, ProcessInfo> processInfos = new Dictionary<int, ProcessInfo>();
             List<ThreadInfo> threadInfos = new List<ThreadInfo>();
 
@@ -455,7 +459,8 @@ namespace System.Diagnostics
                         if (
                             processInfo.ProcessId == 0
                             && !instanceName.Equals("Idle", StringComparison.OrdinalIgnoreCase)
-                        ) {
+                        )
+                        {
                             // Sometimes we'll get a process structure that is not completely filled in.
                             // We can catch some of these by looking for non-"idle" processes that have id 0
                             // and ignoring those.
@@ -531,7 +536,8 @@ namespace System.Diagnostics
         private static ThreadInfo GetThreadInfo(
             ReadOnlySpan<byte> instanceData,
             PERF_COUNTER_DEFINITION[] counters
-        ) {
+        )
+        {
             ThreadInfo threadInfo = new ThreadInfo();
             for (int i = 0; i < counters.Length; i++)
             {
@@ -614,7 +620,8 @@ namespace System.Diagnostics
         private static ProcessInfo GetProcessInfo(
             ReadOnlySpan<byte> instanceData,
             PERF_COUNTER_DEFINITION[] counters
-        ) {
+        )
+        {
             ProcessInfo processInfo = new ProcessInfo();
             for (int i = 0; i < counters.Length; i++)
             {

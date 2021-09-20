@@ -49,7 +49,8 @@ namespace Microsoft.CodeAnalysis.Shared.Utilities
         /// </summary>
         public static IMethodSymbol? GetSpecialEditorBrowsableAttributeConstructor(
             Compilation compilation
-        ) {
+        )
+        {
             var editorBrowsableAttributeType = compilation.EditorBrowsableAttributeType();
             var editorBrowsableStateType = compilation.EditorBrowsableStateType();
 
@@ -88,7 +89,8 @@ namespace Microsoft.CodeAnalysis.Shared.Utilities
 
         public static ImmutableArray<IMethodSymbol> GetSpecialTypeLibTypeAttributeConstructors(
             Compilation compilation
-        ) {
+        )
+        {
             return GetSpecialTypeLibAttributeConstructorsWorker(
                 compilation,
                 "System.Runtime.InteropServices.TypeLibTypeAttribute",
@@ -98,7 +100,8 @@ namespace Microsoft.CodeAnalysis.Shared.Utilities
 
         public static ImmutableArray<IMethodSymbol> GetSpecialTypeLibFuncAttributeConstructors(
             Compilation compilation
-        ) {
+        )
+        {
             return GetSpecialTypeLibAttributeConstructorsWorker(
                 compilation,
                 "System.Runtime.InteropServices.TypeLibFuncAttribute",
@@ -108,7 +111,8 @@ namespace Microsoft.CodeAnalysis.Shared.Utilities
 
         public static ImmutableArray<IMethodSymbol> GetSpecialTypeLibVarAttributeConstructors(
             Compilation compilation
-        ) {
+        )
+        {
             return GetSpecialTypeLibAttributeConstructorsWorker(
                 compilation,
                 "System.Runtime.InteropServices.TypeLibVarAttribute",
@@ -127,7 +131,8 @@ namespace Microsoft.CodeAnalysis.Shared.Utilities
             Compilation compilation,
             string attributeMetadataName,
             string flagsMetadataName
-        ) {
+        )
+        {
             var typeLibAttributeType = compilation.GetTypeByMetadataName(attributeMetadataName);
             var typeLibFlagsType = compilation.GetTypeByMetadataName(flagsMetadataName);
             var shortType = compilation.GetSpecialType(SpecialType.System_Int16);

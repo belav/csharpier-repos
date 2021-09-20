@@ -122,7 +122,8 @@ namespace Legacy.Support
                 while (
                     (remaining = (maxMilliseconds - sw.ElapsedMilliseconds)) > 0
                     && NumEventsHandled < totalNumberOfEvents
-                ) {
+                )
+                {
                     Monitor.Wait(_lock, (int)remaining);
                 }
                 Debug.Print(
@@ -147,7 +148,8 @@ namespace Legacy.Support
                         Equals(eventType, _eventTypes[i])
                         && bytesToRead <= _bytesToRead[i]
                         && _sources[i] == _com
-                    ) {
+                    )
+                    {
                         Debug.Print(
                             "Validate - found {0} at {1} {2}",
                             eventType,

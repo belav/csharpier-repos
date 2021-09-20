@@ -116,7 +116,8 @@ namespace Microsoft.EntityFrameworkCore.TestModels.Northwind
             ProductQuery[] productQueries,
             Order[] orders,
             OrderDetail[] orderDetails
-        ) {
+        )
+        {
             Customers = customers;
             CustomerQueries = customerQueries;
             CustomerQueriesWithQueryFilter = customerQueriesWithQueryFilter;

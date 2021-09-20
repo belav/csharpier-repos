@@ -53,7 +53,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata
             string? storeType,
             RelationalTypeMapping? typeMapping = null,
             Func<IReadOnlyList<SqlExpression>, SqlExpression>? translation = null
-        ) {
+        )
+        {
             ModelName = modelName;
             Model = model;
             _returnType = returnType;
@@ -94,7 +95,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata
             bool propagatesNullability,
             string storeType,
             RelationalTypeMapping? typeMapping = null
-        ) {
+        )
+        {
             var slimFunctionParameter = new SlimDbFunctionParameter(
                 this,
                 name,

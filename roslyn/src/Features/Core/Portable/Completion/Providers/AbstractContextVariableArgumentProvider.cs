@@ -34,7 +34,8 @@ namespace Microsoft.CodeAnalysis.Completion
                         context.Parameter.Type,
                         symbol.GetSymbolType()
                     )
-                ) {
+                )
+                {
                     context.DefaultValue = context.Parameter.Name;
                     return Task.CompletedTask;
                 }

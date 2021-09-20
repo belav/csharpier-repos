@@ -18,7 +18,8 @@ namespace System.Speech.Internal
             out string mimeType,
             out Uri baseUri,
             out string localPath
-        ) {
+        )
+        {
             localPath = null;
 
             {

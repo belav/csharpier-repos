@@ -62,7 +62,8 @@ namespace System.Net.Http
         public static void SetConfiguration(
             this HttpRequestMessage request,
             HttpConfiguration configuration
-        ) {
+        )
+        {
             if (request == null)
             {
                 throw Error.ArgumentNull("request");
@@ -102,7 +103,8 @@ namespace System.Net.Http
                     HttpPropertyKeys.DependencyScope,
                     out result
                 )
-            ) {
+            )
+            {
                 IDependencyResolver dependencyResolver =
                     request.GetConfiguration().DependencyResolver;
                 result = dependencyResolver.BeginScope();
@@ -139,7 +141,8 @@ namespace System.Net.Http
         public static void SetRequestContext(
             this HttpRequestMessage request,
             HttpRequestContext context
-        ) {
+        )
+        {
             if (request == null)
             {
                 throw Error.ArgumentNull("request");
@@ -160,7 +163,8 @@ namespace System.Net.Http
         /// <returns>The <see cref="System.Threading.SynchronizationContext"/> or null.</returns>
         public static SynchronizationContext GetSynchronizationContext(
             this HttpRequestMessage request
-        ) {
+        )
+        {
             if (request == null)
             {
                 throw Error.ArgumentNull("request");
@@ -174,7 +178,8 @@ namespace System.Net.Http
         internal static void SetSynchronizationContext(
             this HttpRequestMessage request,
             SynchronizationContext synchronizationContext
-        ) {
+        )
+        {
             if (request == null)
             {
                 throw Error.ArgumentNull("request");
@@ -219,7 +224,8 @@ namespace System.Net.Http
                         HttpPropertyKeys.RetrieveClientCertificateDelegateKey,
                         out retrieveCertificate
                     )
-                ) {
+                )
+                {
                     result = retrieveCertificate(request);
 
                     if (result != null)
@@ -306,7 +312,8 @@ namespace System.Net.Http
         internal static void SetActionDescriptor(
             this HttpRequestMessage request,
             HttpActionDescriptor actionDescriptor
-        ) {
+        )
+        {
             if (request == null)
             {
                 throw Error.ArgumentNull("request");
@@ -340,7 +347,8 @@ namespace System.Net.Http
         public static HttpResponseMessage CreateErrorResponse(
             this HttpRequestMessage request,
             InvalidByteRangeException invalidByteRangeException
-        ) {
+        )
+        {
             if (invalidByteRangeException == null)
             {
                 throw Error.ArgumentNull("invalidByteRangeException");
@@ -372,7 +380,8 @@ namespace System.Net.Http
             this HttpRequestMessage request,
             HttpStatusCode statusCode,
             string message
-        ) {
+        )
+        {
             return request.CreateErrorResponse(statusCode, new HttpError(message));
         }
 
@@ -397,7 +406,8 @@ namespace System.Net.Http
             HttpStatusCode statusCode,
             string message,
             string messageDetail
-        ) {
+        )
+        {
             return request.CreateErrorResponse(
                 statusCode,
                 includeErrorDetail =>
@@ -427,7 +437,8 @@ namespace System.Net.Http
             HttpStatusCode statusCode,
             string message,
             Exception exception
-        ) {
+        )
+        {
             if (request == null)
             {
                 throw Error.ArgumentNull("request");
@@ -457,7 +468,8 @@ namespace System.Net.Http
             this HttpRequestMessage request,
             HttpStatusCode statusCode,
             Exception exception
-        ) {
+        )
+        {
             if (request == null)
             {
                 throw Error.ArgumentNull("request");
@@ -486,7 +498,8 @@ namespace System.Net.Http
             this HttpRequestMessage request,
             HttpStatusCode statusCode,
             ModelStateDictionary modelState
-        ) {
+        )
+        {
             if (request == null)
             {
                 throw Error.ArgumentNull("request");
@@ -515,7 +528,8 @@ namespace System.Net.Http
             this HttpRequestMessage request,
             HttpStatusCode statusCode,
             HttpError error
-        ) {
+        )
+        {
             if (request == null)
             {
                 throw Error.ArgumentNull("request");
@@ -528,7 +542,8 @@ namespace System.Net.Http
             this HttpRequestMessage request,
             HttpStatusCode statusCode,
             Func<bool, HttpError> errorCreator
-        ) {
+        )
+        {
             HttpConfiguration configuration = request.GetConfiguration();
 
             HttpError error = errorCreator(request.ShouldIncludeErrorDetail());
@@ -566,7 +581,8 @@ namespace System.Net.Http
         public static HttpResponseMessage CreateResponse<T>(
             this HttpRequestMessage request,
             T value
-        ) {
+        )
+        {
             return request.CreateResponse<T>(HttpStatusCode.OK, value, configuration: null);
         }
 
@@ -590,7 +606,8 @@ namespace System.Net.Http
             this HttpRequestMessage request,
             HttpStatusCode statusCode,
             T value
-        ) {
+        )
+        {
             return request.CreateResponse<T>(statusCode, value, configuration: null);
         }
 
@@ -614,7 +631,8 @@ namespace System.Net.Http
             HttpStatusCode statusCode,
             T value,
             HttpConfiguration configuration
-        ) {
+        )
+        {
             if (request == null)
             {
                 throw Error.ArgumentNull("request");
@@ -665,7 +683,8 @@ namespace System.Net.Http
             HttpStatusCode statusCode,
             T value,
             string mediaType
-        ) {
+        )
+        {
             return request.CreateResponse(statusCode, value, new MediaTypeHeaderValue(mediaType));
         }
 
@@ -686,7 +705,8 @@ namespace System.Net.Http
             HttpStatusCode statusCode,
             T value,
             MediaTypeHeaderValue mediaType
-        ) {
+        )
+        {
             if (request == null)
             {
                 throw Error.ArgumentNull("request");
@@ -735,7 +755,8 @@ namespace System.Net.Http
             HttpStatusCode statusCode,
             T value,
             MediaTypeFormatter formatter
-        ) {
+        )
+        {
             return request.CreateResponse(statusCode, value, formatter, (MediaTypeHeaderValue)null);
         }
 
@@ -756,7 +777,8 @@ namespace System.Net.Http
             T value,
             MediaTypeFormatter formatter,
             string mediaType
-        ) {
+        )
+        {
             MediaTypeHeaderValue mediaTypeHeader =
                 mediaType != null ? new MediaTypeHeaderValue(mediaType) : null;
             return request.CreateResponse(statusCode, value, formatter, mediaTypeHeader);
@@ -779,7 +801,8 @@ namespace System.Net.Http
             T value,
             MediaTypeFormatter formatter,
             MediaTypeHeaderValue mediaType
-        ) {
+        )
+        {
             if (request == null)
             {
                 throw Error.ArgumentNull("request");
@@ -830,7 +853,8 @@ namespace System.Net.Http
         public static void RegisterForDispose(
             this HttpRequestMessage request,
             IEnumerable<IDisposable> resources
-        ) {
+        )
+        {
             if (request == null)
             {
                 throw Error.ArgumentNull("request");
@@ -875,7 +899,8 @@ namespace System.Net.Http
                     HttpPropertyKeys.DisposableRequestResourcesKey,
                     out resourcesToDispose
                 )
-            ) {
+            )
+            {
                 foreach (IDisposable resource in resourcesToDispose)
                 {
                     try
@@ -911,7 +936,8 @@ namespace System.Net.Http
                     HttpPropertyKeys.RequestCorrelationKey,
                     out correlationId
                 )
-            ) {
+            )
+            {
                 // Check if the Correlation Manager ID is set; otherwise fallback to creating a new GUID
                 correlationId = Trace.CorrelationManager.ActivityId;
                 if (correlationId == Guid.Empty)
@@ -937,7 +963,8 @@ namespace System.Net.Http
         )]
         public static IEnumerable<KeyValuePair<string, string>> GetQueryNameValuePairs(
             this HttpRequestMessage request
-        ) {
+        )
+        {
             if (request == null)
             {
                 throw Error.ArgumentNull("request");
@@ -969,7 +996,8 @@ namespace System.Net.Http
                     cachedQueryString != null
                     && !Object.ReferenceEquals(cachedQueryString, uri.Query ?? String.Empty)
                 )
-            ) {
+            )
+            {
                 FormDataCollection formData = new FormDataCollection(uri);
 
                 // The ToArray call here avoids reparsing the query string, and avoids storing an Enumerator state
@@ -1114,7 +1142,8 @@ namespace System.Net.Http
         /// <returns>A collection of resources registered for dispose.</returns>
         public static IEnumerable<IDisposable> GetResourcesForDisposal(
             this HttpRequestMessage request
-        ) {
+        )
+        {
             if (request == null)
             {
                 throw Error.ArgumentNull("request");
@@ -1125,14 +1154,16 @@ namespace System.Net.Http
 
         private static List<IDisposable> GetRegisteredResourcesForDispose(
             HttpRequestMessage request
-        ) {
+        )
+        {
             List<IDisposable> registeredResourcesForDispose;
             if (
                 !request.Properties.TryGetValue(
                     HttpPropertyKeys.DisposableRequestResourcesKey,
                     out registeredResourcesForDispose
                 )
-            ) {
+            )
+            {
                 registeredResourcesForDispose = new List<IDisposable>();
                 request.Properties[HttpPropertyKeys.DisposableRequestResourcesKey] =
                     registeredResourcesForDispose;

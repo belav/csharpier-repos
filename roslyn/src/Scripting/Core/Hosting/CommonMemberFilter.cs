@@ -23,7 +23,8 @@ namespace Microsoft.CodeAnalysis.Scripting.Hosting
             if (
                 method.DeclaringType?.FullName.StartsWith("Submission#0").ToThreeState()
                 == ThreeState.True
-            ) {
+            )
+            {
                 return true;
             }
 
@@ -50,7 +51,8 @@ namespace Microsoft.CodeAnalysis.Scripting.Hosting
             if (
                 type == typeof(ExceptionDispatchInfo)
                 && method.Name == nameof(ExceptionDispatchInfo.Throw)
-            ) {
+            )
+            {
                 return false;
             }
 
@@ -71,7 +73,8 @@ namespace Microsoft.CodeAnalysis.Scripting.Hosting
                 if (
                     IsGeneratedMemberName(info.Name)
                     || info.GetCustomAttributes<DebuggerHiddenAttribute>()?.Any() == true
-                ) {
+                )
+                {
                     return true;
                 }
 

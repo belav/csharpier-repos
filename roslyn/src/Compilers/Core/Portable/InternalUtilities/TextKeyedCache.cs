@@ -161,7 +161,8 @@ namespace Roslyn.Utilities
                 {
                     if (
                         hash == hashCode && StringTable.TextEquals(e.Text, chars.AsSpan(start, len))
-                    ) {
+                    )
+                    {
                         break;
                     }
 

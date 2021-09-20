@@ -123,7 +123,8 @@ namespace Microsoft.AspNet.Facebook.Client
                 if (
                     genericTypeDefinition == typeof(FacebookConnection<>)
                     || genericTypeDefinition == typeof(FacebookGroupConnection<>)
-                ) {
+                )
+                {
                     Type genericArgumentType = modelType.GetGenericArguments()[0];
                     connectionType = genericArgumentType;
                     return true;

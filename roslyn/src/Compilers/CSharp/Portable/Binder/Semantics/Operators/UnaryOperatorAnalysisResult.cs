@@ -20,7 +20,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             OperatorAnalysisResultKind kind,
             UnaryOperatorSignature signature,
             Conversion conversion
-        ) {
+        )
+        {
             this.Kind = kind;
             this.Signature = signature;
             this.Conversion = conversion;
@@ -39,7 +40,8 @@ namespace Microsoft.CodeAnalysis.CSharp
         public static UnaryOperatorAnalysisResult Applicable(
             UnaryOperatorSignature signature,
             Conversion conversion
-        ) {
+        )
+        {
             return new UnaryOperatorAnalysisResult(
                 OperatorAnalysisResultKind.Applicable,
                 signature,
@@ -50,7 +52,8 @@ namespace Microsoft.CodeAnalysis.CSharp
         public static UnaryOperatorAnalysisResult Inapplicable(
             UnaryOperatorSignature signature,
             Conversion conversion
-        ) {
+        )
+        {
             return new UnaryOperatorAnalysisResult(
                 OperatorAnalysisResultKind.Inapplicable,
                 signature,

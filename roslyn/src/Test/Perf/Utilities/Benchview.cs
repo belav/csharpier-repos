@@ -141,7 +141,8 @@ namespace Roslyn.Test.Performance.Utilities
             string submissionName,
             string branch,
             string measurementJsonPath
-        ) {
+        )
+        {
             RuntimeSettings.Logger.Log("Creating BenchView submission json");
 
             var submissionMetadataPy = Path.Combine(s_scriptDirectory, "submission-metadata.py");

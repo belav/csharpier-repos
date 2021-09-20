@@ -401,7 +401,8 @@ namespace System.Drawing.Tests
             Region region,
             RectangleF[] rectangles,
             RectangleF[] expectedScans
-        ) {
+        )
+        {
             using (region)
             {
                 foreach (RectangleF rect in rectangles)
@@ -517,7 +518,8 @@ namespace System.Drawing.Tests
             Region region,
             RectangleF[] rectangles,
             RectangleF[] expectedScans
-        ) {
+        )
+        {
             using (region)
             {
                 foreach (RectangleF rect in rectangles)
@@ -540,7 +542,8 @@ namespace System.Drawing.Tests
             Region region,
             RectangleF[] rectangles,
             RectangleF[] expectedScans
-        ) {
+        )
+        {
             using (region)
             {
                 foreach (RectangleF rect in rectangles)
@@ -561,7 +564,8 @@ namespace System.Drawing.Tests
             Region region,
             RectangleF[] rectangles,
             RectangleF[] expectedScans
-        ) {
+        )
+        {
             using (region)
             {
                 foreach (RectangleF rect in rectangles)
@@ -965,7 +969,8 @@ namespace System.Drawing.Tests
             Region region,
             RectangleF[] rectangles,
             RectangleF[] expectedScans
-        ) {
+        )
+        {
             using (region)
             {
                 foreach (RectangleF rect in rectangles)
@@ -1049,7 +1054,8 @@ namespace System.Drawing.Tests
             Region region,
             RectangleF[] rectangles,
             RectangleF[] expectedScans
-        ) {
+        )
+        {
             using (region)
             {
                 foreach (RectangleF rect in rectangles)
@@ -1073,7 +1079,8 @@ namespace System.Drawing.Tests
             Region region,
             RectangleF[] rectangles,
             RectangleF[] expectedScans
-        ) {
+        )
+        {
             using (region)
             {
                 foreach (RectangleF rect in rectangles)
@@ -1095,7 +1102,8 @@ namespace System.Drawing.Tests
             Region region,
             RectangleF[] rectangles,
             RectangleF[] expectedScans
-        ) {
+        )
+        {
             using (region)
             {
                 foreach (RectangleF rect in rectangles)
@@ -1431,7 +1439,8 @@ namespace System.Drawing.Tests
             Region region,
             RectangleF[] rectangles,
             RectangleF[] expectedScans
-        ) {
+        )
+        {
             using (region)
             {
                 foreach (RectangleF rect in rectangles)
@@ -1502,7 +1511,8 @@ namespace System.Drawing.Tests
             Region region,
             RectangleF[] rectangles,
             RectangleF[] expectedScans
-        ) {
+        )
+        {
             using (region)
             {
                 foreach (RectangleF rect in rectangles)
@@ -1542,7 +1552,8 @@ namespace System.Drawing.Tests
             Region region,
             RectangleF[] rectangles,
             RectangleF[] expectedScans
-        ) {
+        )
+        {
             using (region)
             {
                 foreach (RectangleF rect in rectangles)
@@ -1581,7 +1592,8 @@ namespace System.Drawing.Tests
             Region region,
             RectangleF[] rectangles,
             RectangleF[] expectedScans
-        ) {
+        )
+        {
             using (region)
             {
                 foreach (RectangleF rect in rectangles)
@@ -1776,7 +1788,8 @@ namespace System.Drawing.Tests
             Region region,
             Rectangle rectangle,
             bool expected
-        ) {
+        )
+        {
             using (region)
             using (var image = new Bitmap(10, 10))
             {
@@ -2308,7 +2321,8 @@ namespace System.Drawing.Tests
             Region region,
             RectangleF[] rectangles,
             RectangleF[] expectedScans
-        ) {
+        )
+        {
             using (region)
             {
                 foreach (RectangleF rect in rectangles)
@@ -2383,7 +2397,8 @@ namespace System.Drawing.Tests
             Region region,
             RectangleF[] rectangles,
             RectangleF[] expectedScans
-        ) {
+        )
+        {
             using (region)
             {
                 foreach (RectangleF rect in rectangles)
@@ -2406,7 +2421,8 @@ namespace System.Drawing.Tests
             Region region,
             RectangleF[] rectangles,
             RectangleF[] expectedScans
-        ) {
+        )
+        {
             using (region)
             {
                 foreach (RectangleF rect in rectangles)
@@ -2427,7 +2443,8 @@ namespace System.Drawing.Tests
             Region region,
             RectangleF[] rectangles,
             RectangleF[] expectedScans
-        ) {
+        )
+        {
             using (region)
             {
                 foreach (RectangleF rect in rectangles)
@@ -2793,7 +2810,8 @@ namespace System.Drawing.Tests
             Region region,
             RectangleF[] rectangles,
             RectangleF[] expectedScans
-        ) {
+        )
+        {
             using (region)
             {
                 foreach (RectangleF rect in rectangles)
@@ -2874,7 +2892,8 @@ namespace System.Drawing.Tests
             Region region,
             RectangleF[] rectangles,
             RectangleF[] expectedScans
-        ) {
+        )
+        {
             using (region)
             {
                 foreach (RectangleF rect in rectangles)
@@ -2898,7 +2917,8 @@ namespace System.Drawing.Tests
             Region region,
             RectangleF[] rectangles,
             RectangleF[] expectedScans
-        ) {
+        )
+        {
             using (region)
             {
                 foreach (RectangleF rect in rectangles)
@@ -2920,7 +2940,8 @@ namespace System.Drawing.Tests
             Region region,
             RectangleF[] rectangles,
             RectangleF[] expectedScans
-        ) {
+        )
+        {
             using (region)
             {
                 foreach (RectangleF rect in rectangles)

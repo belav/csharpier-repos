@@ -188,7 +188,8 @@ namespace System.Net.Http
                 (requestUri != null)
                 && (requestUri.IsAbsoluteUri)
                 && (!HttpUtilities.IsHttpUri(requestUri))
-            ) {
+            )
+            {
                 throw new ArgumentException(HttpUtilities.InvalidUriMessage, nameof(requestUri));
             }
 

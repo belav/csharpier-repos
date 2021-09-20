@@ -10,9 +10,8 @@ namespace Microsoft.AspNetCore.Mvc.Razor.RuntimeCompilation
 {
     internal class CompilationFailedException : Exception, ICompilationException
     {
-        public CompilationFailedException(
-            IEnumerable<CompilationFailure> compilationFailures
-        ) : base(FormatMessage(compilationFailures))
+        public CompilationFailedException(IEnumerable<CompilationFailure> compilationFailures)
+            : base(FormatMessage(compilationFailures))
         {
             if (compilationFailures == null)
             {

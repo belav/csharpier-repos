@@ -69,7 +69,8 @@ namespace Microsoft.CodeAnalysis.ExpressionEvaluator.UnitTests
             var moduleB = new Module(bytesB, name: "B.dll");
             using (
                 var process = new Process(shouldEnable: true, modules: new[] { moduleA, moduleB })
-            ) {
+            )
+            {
                 var requestF = new Request(null, MemberSignatureParser.Parse("F"));
                 var requestG = new Request(null, MemberSignatureParser.Parse("G"));
                 Assert.Equal(0, process.ShouldEnableRequests);
@@ -86,7 +87,8 @@ namespace Microsoft.CodeAnalysis.ExpressionEvaluator.UnitTests
             moduleB = new Module(bytesB, name: "B.dll");
             using (
                 var process = new Process(shouldEnable: false, modules: new[] { moduleA, moduleB })
-            ) {
+            )
+            {
                 var requestF = new Request(null, MemberSignatureParser.Parse("F"));
                 var requestG = new Request(null, MemberSignatureParser.Parse("G"));
                 Assert.Equal(0, process.ShouldEnableRequests);
@@ -104,7 +106,8 @@ namespace Microsoft.CodeAnalysis.ExpressionEvaluator.UnitTests
             moduleB = new Module(bytesB, name: "B.dll");
             using (
                 var process = new Process(shouldEnable: true, modules: new[] { moduleA, moduleB })
-            ) {
+            )
+            {
                 var requestF = new Request("B.dll", MemberSignatureParser.Parse("F"));
                 var requestG = new Request("B.dll", MemberSignatureParser.Parse("G"));
                 Assert.Equal(0, process.ShouldEnableRequests);
@@ -121,7 +124,8 @@ namespace Microsoft.CodeAnalysis.ExpressionEvaluator.UnitTests
             moduleB = new Module(bytesB, name: "B.dll");
             using (
                 var process = new Process(shouldEnable: false, modules: new[] { moduleA, moduleB })
-            ) {
+            )
+            {
                 var requestF = new Request("B.dll", MemberSignatureParser.Parse("F"));
                 var requestG = new Request("B.dll", MemberSignatureParser.Parse("G"));
                 Assert.Equal(0, process.ShouldEnableRequests);
@@ -466,7 +470,8 @@ namespace Microsoft.CodeAnalysis.ExpressionEvaluator.UnitTests
                     new Module(imageA, nameA + ".dll"),
                     new Module(imageB, nameB + ".exe")
                 )
-            ) {
+            )
+            {
                 var signature = MemberSignatureParser.Parse("F");
                 var resolver = Resolver.CSharpResolver;
 
@@ -1615,7 +1620,8 @@ class B
             Resolver resolver,
             string str,
             params string[] expectedSignatures
-        ) {
+        )
+        {
             var signature = MemberSignatureParser.Parse(str);
             Assert.NotNull(signature);
             Resolve(process, resolver, signature, expectedSignatures);

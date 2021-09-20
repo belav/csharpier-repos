@@ -16,7 +16,8 @@ namespace System.Reflection.Tests
                 MetadataLoadContext lc = new MetadataLoadContext(
                     new EmptyCoreMetadataAssemblyResolver()
                 )
-            ) {
+            )
+            {
                 Assembly[] loadedAssemblies = lc.GetAssemblies().ToArray();
                 Assert.Equal(1, loadedAssemblies.Length);
             }
@@ -29,7 +30,8 @@ namespace System.Reflection.Tests
                 MetadataLoadContext lc = new MetadataLoadContext(
                     new EmptyCoreMetadataAssemblyResolver()
                 )
-            ) {
+            )
+            {
                 Assembly[] loadedAssemblies = lc.GetAssemblies().ToArray();
                 Assert.Equal(1, loadedAssemblies.Length);
 

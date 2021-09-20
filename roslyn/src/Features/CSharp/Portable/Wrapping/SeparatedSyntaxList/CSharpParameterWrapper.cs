@@ -38,7 +38,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Wrapping.SeparatedSyntaxList
             int position,
             SyntaxNode declaration,
             BaseParameterListSyntax listSyntax
-        ) {
+        )
+        {
             // CSharpSyntaxGenerator.GetParameterList synthesizes a parameter list for simple-lambdas.
             // In that case, we're not applicable in that list.
             if (declaration.Kind() == SyntaxKind.SimpleLambdaExpression)

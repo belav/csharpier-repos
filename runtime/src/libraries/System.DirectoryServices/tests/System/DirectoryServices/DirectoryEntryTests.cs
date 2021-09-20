@@ -62,7 +62,8 @@ namespace System.DirectoryServices.Tests
             string userName,
             string password,
             AuthenticationTypes authenticationType
-        ) {
+        )
+        {
             var entry = new DirectoryEntry(path, userName, password, authenticationType);
             Assert.Equal(path ?? string.Empty, entry.Path);
             Assert.Equal(userName, entry.Username);
@@ -87,7 +88,8 @@ namespace System.DirectoryServices.Tests
         [InlineData((AuthenticationTypes)int.MinValue)]
         public void AuthenticationType_Set_GetReturnsExpected(
             AuthenticationTypes authenticationType
-        ) {
+        )
+        {
             var entry = new DirectoryEntry { AuthenticationType = authenticationType };
             Assert.Equal(authenticationType, entry.AuthenticationType);
         }

@@ -83,7 +83,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Diagnostics
             SVsTaskStatusCenterService taskStatusCenterService,
             IDiagnosticService diagnosticService,
             VisualStudioWorkspace workspace
-        ) {
+        )
+        {
             _taskCenterService = (IVsTaskStatusCenterService)taskStatusCenterService;
             _options = new TaskHandlerOptions()
             {

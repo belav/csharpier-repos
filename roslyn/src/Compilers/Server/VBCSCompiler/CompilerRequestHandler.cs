@@ -35,7 +35,8 @@ namespace Microsoft.CodeAnalysis.CompilerServer
             string? tempDirectory,
             string? libDirectory,
             string[] arguments
-        ) {
+        )
+        {
             RequestId = requestId;
             Language = language;
             WorkingDirectory = workingDirectory;
@@ -84,7 +85,8 @@ namespace Microsoft.CodeAnalysis.CompilerServer
             string clientDirectory,
             string sdkDirectory,
             ICompilerServerLogger logger
-        ) {
+        )
+        {
             ClientDirectory = clientDirectory;
             SdkDirectory = sdkDirectory;
             Logger = logger;
@@ -94,7 +96,8 @@ namespace Microsoft.CodeAnalysis.CompilerServer
             string baseDirectory,
             ImmutableArray<CommandLineAnalyzerReference> analyzers,
             [NotNullWhen(false)] out List<string>? errorMessages
-        ) {
+        )
+        {
             return AnalyzerConsistencyChecker.Check(
                 baseDirectory,
                 analyzers,
@@ -108,7 +111,8 @@ namespace Microsoft.CodeAnalysis.CompilerServer
             in RunRequest request,
             BuildPaths buildPaths,
             [NotNullWhen(true)] out CommonCompiler? compiler
-        ) {
+        )
+        {
             switch (request.Language)
             {
                 case LanguageNames.CSharp:
@@ -138,7 +142,8 @@ namespace Microsoft.CodeAnalysis.CompilerServer
         public BuildResponse RunCompilation(
             in RunRequest request,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             Logger.Log(
                 $@"
 Run Compilation for {request.RequestId}
@@ -185,7 +190,8 @@ Run Compilation for {request.RequestId}
                     compiler.Arguments.AnalyzerReferences,
                     out List<string>? errorMessages
                 )
-            ) {
+            )
+            {
                 Logger.Log(
                     $"Rejected: {request.RequestId}: for analyer load issues {string.Join(";", errorMessages)}"
                 );

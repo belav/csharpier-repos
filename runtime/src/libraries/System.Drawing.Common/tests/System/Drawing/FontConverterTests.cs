@@ -54,7 +54,8 @@ namespace System.ComponentModel.TypeConverterTests
             float expectedSize,
             GraphicsUnit expectedUnits,
             FontStyle expectedFontStyle
-        ) {
+        )
+        {
             FontConverter converter = new FontConverter();
             Font font = (Font)converter.ConvertFrom(input);
 
@@ -71,7 +72,8 @@ namespace System.ComponentModel.TypeConverterTests
             string input,
             string paramName,
             string netfxParamName
-        ) {
+        )
+        {
             FontConverter converter = new FontConverter();
             AssertExtensions.Throws<ArgumentException>(
                 paramName,

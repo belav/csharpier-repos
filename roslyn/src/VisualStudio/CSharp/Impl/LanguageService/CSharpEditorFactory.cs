@@ -38,7 +38,8 @@ namespace Microsoft.VisualStudio.LanguageServices.CSharp.LanguageService
         protected override async Task<Document> OrganizeUsingsCreatedFromTemplateAsync(
             Document document,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var organizedDocument = await base.OrganizeUsingsCreatedFromTemplateAsync(
                     document,
                     cancellationToken

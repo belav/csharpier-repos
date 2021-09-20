@@ -23,7 +23,8 @@ namespace Microsoft.AspNetCore.Mvc
             ActionDescriptor actionDescriptor,
             HttpContext httpContext,
             RouteData routeData
-        ) {
+        )
+        {
             Debug.Assert(diagnosticListener != null);
             Debug.Assert(actionDescriptor != null);
             Debug.Assert(httpContext != null);
@@ -41,7 +42,8 @@ namespace Microsoft.AspNetCore.Mvc
             ActionDescriptor actionDescriptor,
             HttpContext httpContext,
             RouteData routeData
-        ) {
+        )
+        {
             if (diagnosticListener.IsEnabled(Diagnostics.BeforeActionEventData.EventName))
             {
                 diagnosticListener.Write(
@@ -56,7 +58,8 @@ namespace Microsoft.AspNetCore.Mvc
             ActionDescriptor actionDescriptor,
             HttpContext httpContext,
             RouteData routeData
-        ) {
+        )
+        {
             Debug.Assert(diagnosticListener != null);
             Debug.Assert(actionDescriptor != null);
             Debug.Assert(httpContext != null);
@@ -74,7 +77,8 @@ namespace Microsoft.AspNetCore.Mvc
             ActionDescriptor actionDescriptor,
             HttpContext httpContext,
             RouteData routeData
-        ) {
+        )
+        {
             if (diagnosticListener.IsEnabled(Diagnostics.AfterActionEventData.EventName))
             {
                 diagnosticListener.Write(
@@ -88,7 +92,8 @@ namespace Microsoft.AspNetCore.Mvc
             this DiagnosticListener diagnosticListener,
             AuthorizationFilterContext authorizationContext,
             IAsyncAuthorizationFilter filter
-        ) {
+        )
+        {
             Debug.Assert(diagnosticListener != null);
             Debug.Assert(authorizationContext != null);
             Debug.Assert(filter != null);
@@ -104,12 +109,14 @@ namespace Microsoft.AspNetCore.Mvc
             DiagnosticListener diagnosticListener,
             AuthorizationFilterContext authorizationContext,
             IAsyncAuthorizationFilter filter
-        ) {
+        )
+        {
             if (
                 diagnosticListener.IsEnabled(
                     Diagnostics.BeforeAuthorizationFilterOnAuthorizationEventData.EventName
                 )
-            ) {
+            )
+            {
                 diagnosticListener.Write(
                     Diagnostics.BeforeAuthorizationFilterOnAuthorizationEventData.EventName,
                     new BeforeAuthorizationFilterOnAuthorizationEventData(
@@ -125,7 +132,8 @@ namespace Microsoft.AspNetCore.Mvc
             this DiagnosticListener diagnosticListener,
             AuthorizationFilterContext authorizationContext,
             IAsyncAuthorizationFilter filter
-        ) {
+        )
+        {
             Debug.Assert(diagnosticListener != null);
             Debug.Assert(authorizationContext != null);
             Debug.Assert(filter != null);
@@ -141,12 +149,14 @@ namespace Microsoft.AspNetCore.Mvc
             DiagnosticListener diagnosticListener,
             AuthorizationFilterContext authorizationContext,
             IAsyncAuthorizationFilter filter
-        ) {
+        )
+        {
             if (
                 diagnosticListener.IsEnabled(
                     Diagnostics.AfterAuthorizationFilterOnAuthorizationEventData.EventName
                 )
-            ) {
+            )
+            {
                 diagnosticListener.Write(
                     Diagnostics.AfterAuthorizationFilterOnAuthorizationEventData.EventName,
                     new AfterAuthorizationFilterOnAuthorizationEventData(
@@ -162,7 +172,8 @@ namespace Microsoft.AspNetCore.Mvc
             this DiagnosticListener diagnosticListener,
             AuthorizationFilterContext authorizationContext,
             IAuthorizationFilter filter
-        ) {
+        )
+        {
             Debug.Assert(diagnosticListener != null);
             Debug.Assert(authorizationContext != null);
             Debug.Assert(filter != null);
@@ -178,12 +189,14 @@ namespace Microsoft.AspNetCore.Mvc
             DiagnosticListener diagnosticListener,
             AuthorizationFilterContext authorizationContext,
             IAuthorizationFilter filter
-        ) {
+        )
+        {
             if (
                 diagnosticListener.IsEnabled(
                     Diagnostics.BeforeAuthorizationFilterOnAuthorizationEventData.EventName
                 )
-            ) {
+            )
+            {
                 diagnosticListener.Write(
                     Diagnostics.BeforeAuthorizationFilterOnAuthorizationEventData.EventName,
                     new BeforeAuthorizationFilterOnAuthorizationEventData(
@@ -199,7 +212,8 @@ namespace Microsoft.AspNetCore.Mvc
             this DiagnosticListener diagnosticListener,
             AuthorizationFilterContext authorizationContext,
             IAuthorizationFilter filter
-        ) {
+        )
+        {
             Debug.Assert(diagnosticListener != null);
             Debug.Assert(authorizationContext != null);
             Debug.Assert(filter != null);
@@ -215,12 +229,14 @@ namespace Microsoft.AspNetCore.Mvc
             DiagnosticListener diagnosticListener,
             AuthorizationFilterContext authorizationContext,
             IAuthorizationFilter filter
-        ) {
+        )
+        {
             if (
                 diagnosticListener.IsEnabled(
                     Diagnostics.AfterAuthorizationFilterOnAuthorizationEventData.EventName
                 )
-            ) {
+            )
+            {
                 diagnosticListener.Write(
                     Diagnostics.AfterAuthorizationFilterOnAuthorizationEventData.EventName,
                     new AfterAuthorizationFilterOnAuthorizationEventData(
@@ -236,7 +252,8 @@ namespace Microsoft.AspNetCore.Mvc
             this DiagnosticListener diagnosticListener,
             ResourceExecutingContext resourceExecutingContext,
             IAsyncResourceFilter filter
-        ) {
+        )
+        {
             Debug.Assert(diagnosticListener != null);
             Debug.Assert(resourceExecutingContext != null);
             Debug.Assert(filter != null);
@@ -252,12 +269,14 @@ namespace Microsoft.AspNetCore.Mvc
             DiagnosticListener diagnosticListener,
             ResourceExecutingContext resourceExecutingContext,
             IAsyncResourceFilter filter
-        ) {
+        )
+        {
             if (
                 diagnosticListener.IsEnabled(
                     Diagnostics.BeforeResourceFilterOnResourceExecutionEventData.EventName
                 )
-            ) {
+            )
+            {
                 diagnosticListener.Write(
                     Diagnostics.BeforeResourceFilterOnResourceExecutionEventData.EventName,
                     new BeforeResourceFilterOnResourceExecutionEventData(
@@ -273,7 +292,8 @@ namespace Microsoft.AspNetCore.Mvc
             this DiagnosticListener diagnosticListener,
             ResourceExecutedContext resourceExecutedContext,
             IAsyncResourceFilter filter
-        ) {
+        )
+        {
             Debug.Assert(diagnosticListener != null);
             Debug.Assert(resourceExecutedContext != null);
             Debug.Assert(filter != null);
@@ -289,12 +309,14 @@ namespace Microsoft.AspNetCore.Mvc
             DiagnosticListener diagnosticListener,
             ResourceExecutedContext resourceExecutedContext,
             IAsyncResourceFilter filter
-        ) {
+        )
+        {
             if (
                 diagnosticListener.IsEnabled(
                     Diagnostics.AfterResourceFilterOnResourceExecutionEventData.EventName
                 )
-            ) {
+            )
+            {
                 diagnosticListener.Write(
                     Diagnostics.AfterResourceFilterOnResourceExecutionEventData.EventName,
                     new AfterResourceFilterOnResourceExecutionEventData(
@@ -310,7 +332,8 @@ namespace Microsoft.AspNetCore.Mvc
             this DiagnosticListener diagnosticListener,
             ResourceExecutingContext resourceExecutingContext,
             IResourceFilter filter
-        ) {
+        )
+        {
             Debug.Assert(diagnosticListener != null);
             Debug.Assert(resourceExecutingContext != null);
             Debug.Assert(filter != null);
@@ -326,12 +349,14 @@ namespace Microsoft.AspNetCore.Mvc
             DiagnosticListener diagnosticListener,
             ResourceExecutingContext resourceExecutingContext,
             IResourceFilter filter
-        ) {
+        )
+        {
             if (
                 diagnosticListener.IsEnabled(
                     Diagnostics.BeforeResourceFilterOnResourceExecutingEventData.EventName
                 )
-            ) {
+            )
+            {
                 diagnosticListener.Write(
                     Diagnostics.BeforeResourceFilterOnResourceExecutingEventData.EventName,
                     new BeforeResourceFilterOnResourceExecutingEventData(
@@ -347,7 +372,8 @@ namespace Microsoft.AspNetCore.Mvc
             this DiagnosticListener diagnosticListener,
             ResourceExecutingContext resourceExecutingContext,
             IResourceFilter filter
-        ) {
+        )
+        {
             Debug.Assert(diagnosticListener != null);
             Debug.Assert(resourceExecutingContext != null);
             Debug.Assert(filter != null);
@@ -363,12 +389,14 @@ namespace Microsoft.AspNetCore.Mvc
             DiagnosticListener diagnosticListener,
             ResourceExecutingContext resourceExecutingContext,
             IResourceFilter filter
-        ) {
+        )
+        {
             if (
                 diagnosticListener.IsEnabled(
                     Diagnostics.AfterResourceFilterOnResourceExecutingEventData.EventName
                 )
-            ) {
+            )
+            {
                 diagnosticListener.Write(
                     Diagnostics.AfterResourceFilterOnResourceExecutingEventData.EventName,
                     new AfterResourceFilterOnResourceExecutingEventData(
@@ -384,7 +412,8 @@ namespace Microsoft.AspNetCore.Mvc
             this DiagnosticListener diagnosticListener,
             ResourceExecutedContext resourceExecutedContext,
             IResourceFilter filter
-        ) {
+        )
+        {
             Debug.Assert(diagnosticListener != null);
             Debug.Assert(resourceExecutedContext != null);
             Debug.Assert(filter != null);
@@ -400,12 +429,14 @@ namespace Microsoft.AspNetCore.Mvc
             DiagnosticListener diagnosticListener,
             ResourceExecutedContext resourceExecutedContext,
             IResourceFilter filter
-        ) {
+        )
+        {
             if (
                 diagnosticListener.IsEnabled(
                     Diagnostics.BeforeResourceFilterOnResourceExecutedEventData.EventName
                 )
-            ) {
+            )
+            {
                 diagnosticListener.Write(
                     Diagnostics.BeforeResourceFilterOnResourceExecutedEventData.EventName,
                     new BeforeResourceFilterOnResourceExecutedEventData(
@@ -421,7 +452,8 @@ namespace Microsoft.AspNetCore.Mvc
             this DiagnosticListener diagnosticListener,
             ResourceExecutedContext resourceExecutedContext,
             IResourceFilter filter
-        ) {
+        )
+        {
             Debug.Assert(diagnosticListener != null);
             Debug.Assert(resourceExecutedContext != null);
             Debug.Assert(filter != null);
@@ -437,12 +469,14 @@ namespace Microsoft.AspNetCore.Mvc
             DiagnosticListener diagnosticListener,
             ResourceExecutedContext resourceExecutedContext,
             IResourceFilter filter
-        ) {
+        )
+        {
             if (
                 diagnosticListener.IsEnabled(
                     Diagnostics.AfterResourceFilterOnResourceExecutedEventData.EventName
                 )
-            ) {
+            )
+            {
                 diagnosticListener.Write(
                     Diagnostics.AfterResourceFilterOnResourceExecutedEventData.EventName,
                     new AfterResourceFilterOnResourceExecutedEventData(
@@ -458,7 +492,8 @@ namespace Microsoft.AspNetCore.Mvc
             this DiagnosticListener diagnosticListener,
             ExceptionContext exceptionContext,
             IAsyncExceptionFilter filter
-        ) {
+        )
+        {
             Debug.Assert(diagnosticListener != null);
             Debug.Assert(exceptionContext != null);
             Debug.Assert(filter != null);
@@ -474,10 +509,12 @@ namespace Microsoft.AspNetCore.Mvc
             DiagnosticListener diagnosticListener,
             ExceptionContext exceptionContext,
             IAsyncExceptionFilter filter
-        ) {
+        )
+        {
             if (
                 diagnosticListener.IsEnabled(Diagnostics.BeforeExceptionFilterOnException.EventName)
-            ) {
+            )
+            {
                 diagnosticListener.Write(
                     Diagnostics.BeforeExceptionFilterOnException.EventName,
                     new BeforeExceptionFilterOnException(
@@ -493,7 +530,8 @@ namespace Microsoft.AspNetCore.Mvc
             this DiagnosticListener diagnosticListener,
             ExceptionContext exceptionContext,
             IAsyncExceptionFilter filter
-        ) {
+        )
+        {
             Debug.Assert(diagnosticListener != null);
             Debug.Assert(exceptionContext != null);
             Debug.Assert(filter != null);
@@ -509,12 +547,14 @@ namespace Microsoft.AspNetCore.Mvc
             DiagnosticListener diagnosticListener,
             ExceptionContext exceptionContext,
             IAsyncExceptionFilter filter
-        ) {
+        )
+        {
             if (
                 diagnosticListener.IsEnabled(
                     Diagnostics.AfterExceptionFilterOnExceptionEventData.EventName
                 )
-            ) {
+            )
+            {
                 diagnosticListener.Write(
                     Diagnostics.AfterExceptionFilterOnExceptionEventData.EventName,
                     new AfterExceptionFilterOnExceptionEventData(
@@ -530,7 +570,8 @@ namespace Microsoft.AspNetCore.Mvc
             this DiagnosticListener diagnosticListener,
             ExceptionContext exceptionContext,
             IExceptionFilter filter
-        ) {
+        )
+        {
             Debug.Assert(diagnosticListener != null);
             Debug.Assert(exceptionContext != null);
             Debug.Assert(filter != null);
@@ -546,10 +587,12 @@ namespace Microsoft.AspNetCore.Mvc
             DiagnosticListener diagnosticListener,
             ExceptionContext exceptionContext,
             IExceptionFilter filter
-        ) {
+        )
+        {
             if (
                 diagnosticListener.IsEnabled(Diagnostics.BeforeExceptionFilterOnException.EventName)
-            ) {
+            )
+            {
                 diagnosticListener.Write(
                     Diagnostics.BeforeExceptionFilterOnException.EventName,
                     new BeforeExceptionFilterOnException(
@@ -565,7 +608,8 @@ namespace Microsoft.AspNetCore.Mvc
             this DiagnosticListener diagnosticListener,
             ExceptionContext exceptionContext,
             IExceptionFilter filter
-        ) {
+        )
+        {
             Debug.Assert(diagnosticListener != null);
             Debug.Assert(exceptionContext != null);
             Debug.Assert(filter != null);
@@ -581,12 +625,14 @@ namespace Microsoft.AspNetCore.Mvc
             DiagnosticListener diagnosticListener,
             ExceptionContext exceptionContext,
             IExceptionFilter filter
-        ) {
+        )
+        {
             if (
                 diagnosticListener.IsEnabled(
                     Diagnostics.AfterExceptionFilterOnExceptionEventData.EventName
                 )
-            ) {
+            )
+            {
                 diagnosticListener.Write(
                     Diagnostics.AfterExceptionFilterOnExceptionEventData.EventName,
                     new AfterExceptionFilterOnExceptionEventData(
@@ -602,7 +648,8 @@ namespace Microsoft.AspNetCore.Mvc
             this DiagnosticListener diagnosticListener,
             ActionExecutingContext actionExecutingContext,
             IAsyncActionFilter filter
-        ) {
+        )
+        {
             Debug.Assert(diagnosticListener != null);
             Debug.Assert(actionExecutingContext != null);
             Debug.Assert(filter != null);
@@ -618,12 +665,14 @@ namespace Microsoft.AspNetCore.Mvc
             DiagnosticListener diagnosticListener,
             ActionExecutingContext actionExecutingContext,
             IAsyncActionFilter filter
-        ) {
+        )
+        {
             if (
                 diagnosticListener.IsEnabled(
                     Diagnostics.BeforeActionFilterOnActionExecutionEventData.EventName
                 )
-            ) {
+            )
+            {
                 diagnosticListener.Write(
                     Diagnostics.BeforeActionFilterOnActionExecutionEventData.EventName,
                     new BeforeActionFilterOnActionExecutionEventData(
@@ -639,7 +688,8 @@ namespace Microsoft.AspNetCore.Mvc
             this DiagnosticListener diagnosticListener,
             ActionExecutedContext actionExecutedContext,
             IAsyncActionFilter filter
-        ) {
+        )
+        {
             Debug.Assert(diagnosticListener != null);
             Debug.Assert(actionExecutedContext != null);
             Debug.Assert(filter != null);
@@ -655,12 +705,14 @@ namespace Microsoft.AspNetCore.Mvc
             DiagnosticListener diagnosticListener,
             ActionExecutedContext actionExecutedContext,
             IAsyncActionFilter filter
-        ) {
+        )
+        {
             if (
                 diagnosticListener.IsEnabled(
                     Diagnostics.AfterActionFilterOnActionExecutionEventData.EventName
                 )
-            ) {
+            )
+            {
                 diagnosticListener.Write(
                     Diagnostics.AfterActionFilterOnActionExecutionEventData.EventName,
                     new AfterActionFilterOnActionExecutionEventData(
@@ -676,7 +728,8 @@ namespace Microsoft.AspNetCore.Mvc
             this DiagnosticListener diagnosticListener,
             ActionExecutingContext actionExecutingContext,
             IActionFilter filter
-        ) {
+        )
+        {
             Debug.Assert(diagnosticListener != null);
             Debug.Assert(actionExecutingContext != null);
             Debug.Assert(filter != null);
@@ -692,12 +745,14 @@ namespace Microsoft.AspNetCore.Mvc
             DiagnosticListener diagnosticListener,
             ActionExecutingContext actionExecutingContext,
             IActionFilter filter
-        ) {
+        )
+        {
             if (
                 diagnosticListener.IsEnabled(
                     Diagnostics.BeforeActionFilterOnActionExecutingEventData.EventName
                 )
-            ) {
+            )
+            {
                 diagnosticListener.Write(
                     Diagnostics.BeforeActionFilterOnActionExecutingEventData.EventName,
                     new BeforeActionFilterOnActionExecutingEventData(
@@ -713,7 +768,8 @@ namespace Microsoft.AspNetCore.Mvc
             this DiagnosticListener diagnosticListener,
             ActionExecutingContext actionExecutingContext,
             IActionFilter filter
-        ) {
+        )
+        {
             Debug.Assert(diagnosticListener != null);
             Debug.Assert(actionExecutingContext != null);
             Debug.Assert(filter != null);
@@ -729,12 +785,14 @@ namespace Microsoft.AspNetCore.Mvc
             DiagnosticListener diagnosticListener,
             ActionExecutingContext actionExecutingContext,
             IActionFilter filter
-        ) {
+        )
+        {
             if (
                 diagnosticListener.IsEnabled(
                     Diagnostics.AfterActionFilterOnActionExecutingEventData.EventName
                 )
-            ) {
+            )
+            {
                 diagnosticListener.Write(
                     Diagnostics.AfterActionFilterOnActionExecutingEventData.EventName,
                     new AfterActionFilterOnActionExecutingEventData(
@@ -750,7 +808,8 @@ namespace Microsoft.AspNetCore.Mvc
             this DiagnosticListener diagnosticListener,
             ActionExecutedContext actionExecutedContext,
             IActionFilter filter
-        ) {
+        )
+        {
             Debug.Assert(diagnosticListener != null);
             Debug.Assert(actionExecutedContext != null);
             Debug.Assert(filter != null);
@@ -766,12 +825,14 @@ namespace Microsoft.AspNetCore.Mvc
             DiagnosticListener diagnosticListener,
             ActionExecutedContext actionExecutedContext,
             IActionFilter filter
-        ) {
+        )
+        {
             if (
                 diagnosticListener.IsEnabled(
                     Diagnostics.BeforeActionFilterOnActionExecutedEventData.EventName
                 )
-            ) {
+            )
+            {
                 diagnosticListener.Write(
                     Diagnostics.BeforeActionFilterOnActionExecutedEventData.EventName,
                     new BeforeActionFilterOnActionExecutedEventData(
@@ -787,7 +848,8 @@ namespace Microsoft.AspNetCore.Mvc
             this DiagnosticListener diagnosticListener,
             ActionExecutedContext actionExecutedContext,
             IActionFilter filter
-        ) {
+        )
+        {
             Debug.Assert(diagnosticListener != null);
             Debug.Assert(actionExecutedContext != null);
             Debug.Assert(filter != null);
@@ -803,12 +865,14 @@ namespace Microsoft.AspNetCore.Mvc
             DiagnosticListener diagnosticListener,
             ActionExecutedContext actionExecutedContext,
             IActionFilter filter
-        ) {
+        )
+        {
             if (
                 diagnosticListener.IsEnabled(
                     Diagnostics.AfterActionFilterOnActionExecutedEventData.EventName
                 )
-            ) {
+            )
+            {
                 diagnosticListener.Write(
                     Diagnostics.AfterActionFilterOnActionExecutedEventData.EventName,
                     new AfterActionFilterOnActionExecutedEventData(
@@ -825,7 +889,8 @@ namespace Microsoft.AspNetCore.Mvc
             ActionContext actionContext,
             IReadOnlyDictionary<string, object> actionArguments,
             object controller
-        ) {
+        )
+        {
             Debug.Assert(diagnosticListener != null);
             Debug.Assert(actionContext != null);
             Debug.Assert(actionArguments != null);
@@ -848,7 +913,8 @@ namespace Microsoft.AspNetCore.Mvc
             ActionContext actionContext,
             IReadOnlyDictionary<string, object> actionArguments,
             object controller
-        ) {
+        )
+        {
             // Intellitrace uses this in VS, so we fire the old event with camelCase event names.
             if (diagnosticListener.IsEnabled("Microsoft.AspNetCore.Mvc.BeforeActionMethod"))
             {
@@ -862,7 +928,8 @@ namespace Microsoft.AspNetCore.Mvc
                 diagnosticListener.IsEnabled(
                     Diagnostics.BeforeControllerActionMethodEventData.EventName
                 )
-            ) {
+            )
+            {
                 diagnosticListener.Write(
                     Diagnostics.BeforeControllerActionMethodEventData.EventName,
                     new BeforeControllerActionMethodEventData(
@@ -880,7 +947,8 @@ namespace Microsoft.AspNetCore.Mvc
             IReadOnlyDictionary<string, object> actionArguments,
             object controller,
             IActionResult result
-        ) {
+        )
+        {
             Debug.Assert(diagnosticListener != null);
             Debug.Assert(actionContext != null);
             Debug.Assert(actionArguments != null);
@@ -905,12 +973,14 @@ namespace Microsoft.AspNetCore.Mvc
             IReadOnlyDictionary<string, object> actionArguments,
             object controller,
             IActionResult result
-        ) {
+        )
+        {
             if (
                 diagnosticListener.IsEnabled(
                     Diagnostics.AfterControllerActionMethodEventData.EventName
                 )
-            ) {
+            )
+            {
                 diagnosticListener.Write(
                     Diagnostics.AfterControllerActionMethodEventData.EventName,
                     new AfterControllerActionMethodEventData(
@@ -936,7 +1006,8 @@ namespace Microsoft.AspNetCore.Mvc
             this DiagnosticListener diagnosticListener,
             ResultExecutingContext resultExecutingContext,
             IAsyncResultFilter filter
-        ) {
+        )
+        {
             Debug.Assert(diagnosticListener != null);
             Debug.Assert(resultExecutingContext != null);
             Debug.Assert(filter != null);
@@ -952,12 +1023,14 @@ namespace Microsoft.AspNetCore.Mvc
             DiagnosticListener diagnosticListener,
             ResultExecutingContext resultExecutingContext,
             IAsyncResultFilter filter
-        ) {
+        )
+        {
             if (
                 diagnosticListener.IsEnabled(
                     Diagnostics.BeforeResultFilterOnResultExecutionEventData.EventName
                 )
-            ) {
+            )
+            {
                 diagnosticListener.Write(
                     Diagnostics.BeforeResultFilterOnResultExecutionEventData.EventName,
                     new BeforeResultFilterOnResultExecutionEventData(
@@ -973,7 +1046,8 @@ namespace Microsoft.AspNetCore.Mvc
             this DiagnosticListener diagnosticListener,
             ResultExecutedContext resultExecutedContext,
             IAsyncResultFilter filter
-        ) {
+        )
+        {
             Debug.Assert(diagnosticListener != null);
             Debug.Assert(resultExecutedContext != null);
             Debug.Assert(filter != null);
@@ -989,12 +1063,14 @@ namespace Microsoft.AspNetCore.Mvc
             DiagnosticListener diagnosticListener,
             ResultExecutedContext resultExecutedContext,
             IAsyncResultFilter filter
-        ) {
+        )
+        {
             if (
                 diagnosticListener.IsEnabled(
                     Diagnostics.AfterResultFilterOnResultExecutionEventData.EventName
                 )
-            ) {
+            )
+            {
                 diagnosticListener.Write(
                     Diagnostics.AfterResultFilterOnResultExecutionEventData.EventName,
                     new AfterResultFilterOnResultExecutionEventData(
@@ -1010,7 +1086,8 @@ namespace Microsoft.AspNetCore.Mvc
             this DiagnosticListener diagnosticListener,
             ResultExecutingContext resultExecutingContext,
             IResultFilter filter
-        ) {
+        )
+        {
             Debug.Assert(diagnosticListener != null);
             Debug.Assert(resultExecutingContext != null);
             Debug.Assert(filter != null);
@@ -1026,12 +1103,14 @@ namespace Microsoft.AspNetCore.Mvc
             DiagnosticListener diagnosticListener,
             ResultExecutingContext resultExecutingContext,
             IResultFilter filter
-        ) {
+        )
+        {
             if (
                 diagnosticListener.IsEnabled(
                     Diagnostics.BeforeResultFilterOnResultExecutingEventData.EventName
                 )
-            ) {
+            )
+            {
                 diagnosticListener.Write(
                     Diagnostics.BeforeResultFilterOnResultExecutingEventData.EventName,
                     new BeforeResultFilterOnResultExecutingEventData(
@@ -1047,7 +1126,8 @@ namespace Microsoft.AspNetCore.Mvc
             this DiagnosticListener diagnosticListener,
             ResultExecutingContext resultExecutingContext,
             IResultFilter filter
-        ) {
+        )
+        {
             Debug.Assert(diagnosticListener != null);
             Debug.Assert(resultExecutingContext != null);
             Debug.Assert(filter != null);
@@ -1063,12 +1143,14 @@ namespace Microsoft.AspNetCore.Mvc
             DiagnosticListener diagnosticListener,
             ResultExecutingContext resultExecutingContext,
             IResultFilter filter
-        ) {
+        )
+        {
             if (
                 diagnosticListener.IsEnabled(
                     Diagnostics.AfterResultFilterOnResultExecutingEventData.EventName
                 )
-            ) {
+            )
+            {
                 diagnosticListener.Write(
                     Diagnostics.AfterResultFilterOnResultExecutingEventData.EventName,
                     new AfterResultFilterOnResultExecutingEventData(
@@ -1084,7 +1166,8 @@ namespace Microsoft.AspNetCore.Mvc
             this DiagnosticListener diagnosticListener,
             ResultExecutedContext resultExecutedContext,
             IResultFilter filter
-        ) {
+        )
+        {
             Debug.Assert(diagnosticListener != null);
             Debug.Assert(resultExecutedContext != null);
             Debug.Assert(filter != null);
@@ -1100,12 +1183,14 @@ namespace Microsoft.AspNetCore.Mvc
             DiagnosticListener diagnosticListener,
             ResultExecutedContext resultExecutedContext,
             IResultFilter filter
-        ) {
+        )
+        {
             if (
                 diagnosticListener.IsEnabled(
                     Diagnostics.BeforeResultFilterOnResultExecutedEventData.EventName
                 )
-            ) {
+            )
+            {
                 diagnosticListener.Write(
                     Diagnostics.BeforeResultFilterOnResultExecutedEventData.EventName,
                     new BeforeResultFilterOnResultExecutedEventData(
@@ -1121,7 +1206,8 @@ namespace Microsoft.AspNetCore.Mvc
             this DiagnosticListener diagnosticListener,
             ResultExecutedContext resultExecutedContext,
             IResultFilter filter
-        ) {
+        )
+        {
             Debug.Assert(diagnosticListener != null);
             Debug.Assert(resultExecutedContext != null);
             Debug.Assert(filter != null);
@@ -1137,12 +1223,14 @@ namespace Microsoft.AspNetCore.Mvc
             DiagnosticListener diagnosticListener,
             ResultExecutedContext resultExecutedContext,
             IResultFilter filter
-        ) {
+        )
+        {
             if (
                 diagnosticListener.IsEnabled(
                     Diagnostics.AfterResultFilterOnResultExecutedEventData.EventName
                 )
-            ) {
+            )
+            {
                 diagnosticListener.Write(
                     Diagnostics.AfterResultFilterOnResultExecutedEventData.EventName,
                     new AfterResultFilterOnResultExecutedEventData(
@@ -1158,7 +1246,8 @@ namespace Microsoft.AspNetCore.Mvc
             this DiagnosticListener diagnosticListener,
             ActionContext actionContext,
             IActionResult result
-        ) {
+        )
+        {
             Debug.Assert(diagnosticListener != null);
             Debug.Assert(actionContext != null);
             Debug.Assert(result != null);
@@ -1174,7 +1263,8 @@ namespace Microsoft.AspNetCore.Mvc
             DiagnosticListener diagnosticListener,
             ActionContext actionContext,
             IActionResult result
-        ) {
+        )
+        {
             if (diagnosticListener.IsEnabled(Diagnostics.BeforeActionResultEventData.EventName))
             {
                 diagnosticListener.Write(
@@ -1188,7 +1278,8 @@ namespace Microsoft.AspNetCore.Mvc
             this DiagnosticListener diagnosticListener,
             ActionContext actionContext,
             IActionResult result
-        ) {
+        )
+        {
             Debug.Assert(diagnosticListener != null);
             Debug.Assert(actionContext != null);
             Debug.Assert(result != null);
@@ -1204,7 +1295,8 @@ namespace Microsoft.AspNetCore.Mvc
             DiagnosticListener diagnosticListener,
             ActionContext actionContext,
             IActionResult result
-        ) {
+        )
+        {
             if (diagnosticListener.IsEnabled(Diagnostics.AfterActionResultEventData.EventName))
             {
                 diagnosticListener.Write(

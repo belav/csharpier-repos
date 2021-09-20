@@ -18,7 +18,8 @@ namespace System.ComponentModel.Composition.Factories
             protected override IEnumerable<Export> GetExportsCore(
                 ImportDefinition definition,
                 AtomicComposition context
-            ) {
+            )
+            {
                 throw new NotImplementedException();
             }
         }

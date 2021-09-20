@@ -20,13 +20,15 @@ namespace Microsoft.CodeAnalysis.CSharp.Completion.KeywordRecommenders
             int position,
             CSharpSyntaxContext context,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             if (
                 context.IsMemberAttributeContext(
                     SyntaxKindSet.ClassInterfaceStructRecordTypeDeclarations,
                     cancellationToken
                 )
-            ) {
+            )
+            {
                 return true;
             }
 
@@ -35,11 +37,13 @@ namespace Microsoft.CodeAnalysis.CSharp.Completion.KeywordRecommenders
             if (
                 token.Kind() == SyntaxKind.OpenBracketToken
                 && token.Parent.IsKind(SyntaxKind.AttributeList)
-            ) {
+            )
+            {
                 if (
                     token.GetAncestor<PropertyDeclarationSyntax>() != null
                     || token.GetAncestor<EventDeclarationSyntax>() != null
-                ) {
+                )
+                {
                     return true;
                 }
             }

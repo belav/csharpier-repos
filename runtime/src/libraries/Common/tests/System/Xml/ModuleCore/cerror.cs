@@ -222,7 +222,8 @@ namespace OLEDB.Test.ModuleCore
             object expected1,
             object expected2,
             string message
-        ) {
+        )
+        {
             if (InternalEquals(actual, expected1) || InternalEquals(actual, expected2))
                 return true;
 
@@ -331,7 +332,8 @@ namespace OLEDB.Test.ModuleCore
             string message,
             string details,
             tagERRORLEVEL eErrorLevel
-        ) {
+        )
+        {
             //Obtain the error level
             tagERRORLEVEL rSavedLevel = ErrorLevel;
 

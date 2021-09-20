@@ -185,23 +185,25 @@ namespace Microsoft.Extensions.Logging.AzureAppServices.Test
                 int? maxBatchSize = null,
                 int? maxQueueSize = null,
                 bool includeScopes = false
-            ) : base(
-                new OptionsWrapperMonitor<BatchingLoggerOptions>(
-                    new BatchingLoggerOptions
-                    {
-                        FlushPeriod = interval ?? TimeSpan.FromSeconds(1),
-                        BatchSize = maxBatchSize,
-                        BackgroundQueueSize = maxQueueSize,
-                        IsEnabled = true,
-                        IncludeScopes = includeScopes
-                    }
-                )
-            ) { }
+            )
+                : base(
+                    new OptionsWrapperMonitor<BatchingLoggerOptions>(
+                        new BatchingLoggerOptions
+                        {
+                            FlushPeriod = interval ?? TimeSpan.FromSeconds(1),
+                            BatchSize = maxBatchSize,
+                            BackgroundQueueSize = maxQueueSize,
+                            IsEnabled = true,
+                            IncludeScopes = includeScopes
+                        }
+                    )
+                ) { }
 
             internal override Task WriteMessagesAsync(
                 IEnumerable<LogMessage> messages,
                 CancellationToken token
-            ) {
+            )
+            {
                 Batches.Add(messages.ToArray());
                 return Task.CompletedTask;
             }
@@ -209,7 +211,8 @@ namespace Microsoft.Extensions.Logging.AzureAppServices.Test
             protected override Task IntervalAsync(
                 TimeSpan interval,
                 CancellationToken cancellationToken
-            ) {
+            )
+            {
                 return IntervalControl.IntervalAsync();
             }
         }

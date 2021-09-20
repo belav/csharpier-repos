@@ -29,7 +29,8 @@ namespace Microsoft.AspNetCore.DataProtection.EntityFrameworkCore
         public EntityFrameworkCoreXmlRepository(
             IServiceProvider services,
             ILoggerFactory loggerFactory
-        ) {
+        )
+        {
             if (loggerFactory == null)
             {
                 throw new ArgumentNullException(nameof(loggerFactory));

@@ -38,7 +38,8 @@ namespace System.Runtime.Versioning
             ResourceScope from,
             ResourceScope to,
             Type? type
-        ) {
+        )
+        {
             ResourceScope fromResType = from & ResTypeMask;
             ResourceScope toResType = to & ResTypeMask;
             if (fromResType > toResType)
@@ -107,7 +108,8 @@ namespace System.Runtime.Versioning
         private static SxSRequirements GetRequirements(
             ResourceScope consumeAsScope,
             ResourceScope calleeScope
-        ) {
+        )
+        {
             SxSRequirements requires = SxSRequirements.None;
 
             switch (calleeScope & ResTypeMask)

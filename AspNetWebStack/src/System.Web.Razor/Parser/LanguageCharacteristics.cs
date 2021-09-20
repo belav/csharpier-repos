@@ -98,7 +98,8 @@ namespace System.Web.Razor.Parser
             TSymbol symbol,
             int splitAt,
             TSymbolType leftType
-        ) {
+        )
+        {
             TSymbol left = CreateSymbol(
                 symbol.Start,
                 symbol.Content.Substring(0, splitAt),

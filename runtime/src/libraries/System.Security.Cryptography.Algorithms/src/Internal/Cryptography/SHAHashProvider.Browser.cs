@@ -687,7 +687,8 @@ namespace Internal.Cryptography
                 ulong* expandedBuffer,
                 ulong* state,
                 byte* block
-            ) {
+            )
+            {
                 ulong a,
                     b,
                     c,
@@ -1059,7 +1060,8 @@ namespace Internal.Cryptography
                 ulong* expandedBuffer,
                 ulong* state,
                 byte* block
-            ) {
+            )
+            {
                 ulong a,
                     b,
                     c,

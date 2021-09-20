@@ -82,7 +82,8 @@ namespace System.Web.Mvc.Routing.Constraints
                         CultureInfo.InvariantCulture,
                         out longValue
                     )
-                ) {
+                )
+                {
                     return longValue <= Max;
                 }
             }

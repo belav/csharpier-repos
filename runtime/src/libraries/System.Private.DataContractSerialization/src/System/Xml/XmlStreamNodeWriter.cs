@@ -338,7 +338,8 @@ namespace System.Xml
             int charCount,
             byte[] buffer,
             int offset
-        ) {
+        )
+        {
             char* charsMax = chars + charCount;
             while (chars < charsMax)
             {
@@ -377,7 +378,8 @@ namespace System.Xml
             int charCount,
             byte[] buffer,
             int offset
-        ) {
+        )
+        {
             if (charCount > 0)
             {
                 fixed (byte* _bytes = &buffer[offset])

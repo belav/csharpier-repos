@@ -417,7 +417,8 @@ namespace System.Web.Mvc.Async.Test
                 public override bool IsValidForRequest(
                     ControllerContext controllerContext,
                     MethodInfo methodInfo
-                ) {
+                )
+                {
                     return _match;
                 }
             }

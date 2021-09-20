@@ -44,7 +44,8 @@ namespace Microsoft.CodeAnalysis.TodoComments
         public override Task RemoveDocumentAsync(
             DocumentId documentId,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             // Remove the doc id from what we're tracking to prevent unbounded growth in the set.
 
             // If the doc that is being removed is not in the set of docs we've told the host has todo comments,
@@ -83,7 +84,8 @@ namespace Microsoft.CodeAnalysis.TodoComments
             Document document,
             InvocationReasons reasons,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var todoCommentService = document.GetLanguageService<ITodoCommentService>();
             if (todoCommentService == null)
                 return;

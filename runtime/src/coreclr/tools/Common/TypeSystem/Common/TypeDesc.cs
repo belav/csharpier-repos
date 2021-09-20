@@ -481,7 +481,8 @@ namespace Internal.TypeSystem
             string name,
             MethodSignature signature,
             Instantiation substitution
-        ) {
+        )
+        {
             foreach (var method in GetMethods())
             {
                 if (method.Name == name)
@@ -540,7 +541,8 @@ namespace Internal.TypeSystem
         public virtual TypeDesc InstantiateSignature(
             Instantiation typeInstantiation,
             Instantiation methodInstantiation
-        ) {
+        )
+        {
             return this;
         }
 

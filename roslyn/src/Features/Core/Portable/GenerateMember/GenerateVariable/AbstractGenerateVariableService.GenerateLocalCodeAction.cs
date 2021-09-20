@@ -47,7 +47,8 @@ namespace Microsoft.CodeAnalysis.GenerateMember.GenerateVariable
 
             protected override async Task<Document> GetChangedDocumentAsync(
                 CancellationToken cancellationToken
-            ) {
+            )
+            {
                 var newRoot = await GetNewRootAsync(cancellationToken).ConfigureAwait(false);
                 var newDocument = _document.WithSyntaxRoot(newRoot);
 
@@ -70,7 +71,8 @@ namespace Microsoft.CodeAnalysis.GenerateMember.GenerateVariable
                         cancellationToken,
                         out var newRoot
                     )
-                ) {
+                )
+                {
                     return newRoot;
                 }
 

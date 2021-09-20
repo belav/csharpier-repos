@@ -332,7 +332,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.IncrementalParsing
             NameTypes oldStyle,
             NameTypes newStyle,
             Action<ExpressionSyntax> expressionValidator
-        ) {
+        )
+        {
             MakeIncrementalNameChanges(oldStyle, newStyle, expressionValidator);
             MakeIncrementalNameChanges(
                 oldStyle,
@@ -355,7 +356,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.IncrementalParsing
             Action<ExpressionSyntax> expressionValidator,
             bool topLevel = false,
             CSharpParseOptions options = null
-        ) {
+        )
+        {
             string oldName = GetNameString(oldStyle);
             string newName = GetNameString(newStyle);
 

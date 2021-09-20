@@ -24,7 +24,8 @@ namespace Microsoft.CodeAnalysis.PatternMatching
                 bool contiguous,
                 int matchCount,
                 ArrayBuilder<TextSpan> matchedSpansInReverse
-            ) {
+            )
+            {
                 FromStart = fromStart;
                 Contiguous = contiguous;
                 MatchCount = matchCount;
@@ -55,7 +56,8 @@ namespace Microsoft.CodeAnalysis.PatternMatching
         private static PatternMatchKind GetCamelCaseKind(
             CamelCaseResult result,
             ArrayBuilder<TextSpan> candidateHumps
-        ) {
+        )
+        {
             var toEnd = result.MatchCount == candidateHumps.Count;
             if (result.FromStart)
             {

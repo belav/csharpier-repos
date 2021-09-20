@@ -146,7 +146,8 @@ namespace System.Reflection.Emit
             ParameterModifier[]? modifiers,
             CultureInfo? culture,
             string[]? namedParameters
-        ) {
+        )
+        {
             throw new NotSupportedException(SR.NotSupported_NonReflectedType);
         }
 
@@ -206,7 +207,8 @@ namespace System.Reflection.Emit
             CallingConventions callConvention,
             Type[]? types,
             ParameterModifier[]? modifiers
-        ) {
+        )
+        {
             throw new NotSupportedException(SR.NotSupported_NonReflectedType);
         }
 
@@ -230,7 +232,8 @@ namespace System.Reflection.Emit
             CallingConventions callConvention,
             Type[]? types,
             ParameterModifier[]? modifiers
-        ) {
+        )
+        {
             throw new NotSupportedException(SR.NotSupported_NonReflectedType);
         }
 
@@ -297,7 +300,8 @@ namespace System.Reflection.Emit
             Type? returnType,
             Type[]? types,
             ParameterModifier[]? modifiers
-        ) {
+        )
+        {
             throw new NotSupportedException(SR.NotSupported_NonReflectedType);
         }
 
@@ -333,7 +337,8 @@ namespace System.Reflection.Emit
             string name,
             MemberTypes type,
             BindingFlags bindingAttr
-        ) {
+        )
+        {
             throw new NotSupportedException(SR.NotSupported_NonReflectedType);
         }
 

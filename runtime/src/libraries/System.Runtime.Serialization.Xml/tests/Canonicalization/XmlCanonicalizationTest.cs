@@ -529,7 +529,8 @@ namespace System.Runtime.Serialization.Xml.Canonicalization.Tests
                                     r.LocalName == "xop"
                                     && r.Prefix == "xmlns"
                                     && r.Value == "http://www.w3.org/2004/08/xop/include"
-                                ) {
+                                )
+                                {
                                     // special case: do not need to rewrite the xmlns:xop for MTOM
                                     // skip
                                 }
@@ -614,7 +615,8 @@ namespace System.Runtime.Serialization.Xml.Canonicalization.Tests
             TestMode mode,
             XmlBuffer xmlBuffer,
             string startAt
-        ) {
+        )
+        {
             if (mode == TestMode.FullDocument)
             {
                 return engine.CanonicalizeUsingClrLibrary(xmlBuffer.CreateStream());

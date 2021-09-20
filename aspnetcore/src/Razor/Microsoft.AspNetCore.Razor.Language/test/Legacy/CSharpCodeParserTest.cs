@@ -59,7 +59,8 @@ namespace Microsoft.AspNetCore.Razor.Language.Test.Legacy
             string directiveText,
             SourceLocation directiveLocation,
             object expectedErrors
-        ) {
+        )
+        {
             // Arrange
             var expectedDiagnostics = (IEnumerable<RazorDiagnostic>)expectedErrors;
             var source = TestRazorSourceDocument.Create();
@@ -86,7 +87,8 @@ namespace Microsoft.AspNetCore.Razor.Language.Test.Legacy
         public void ParseAddOrRemoveDirective_CalculatesAssemblyLocationInLookupText(
             string text,
             int assemblyLocation
-        ) {
+        )
+        {
             // Arrange
             var source = TestRazorSourceDocument.Create();
             var options = RazorParserOptions.CreateDefault();
@@ -128,7 +130,8 @@ namespace Microsoft.AspNetCore.Razor.Language.Test.Legacy
         public void ParseAddOrRemoveDirective_CreatesErrorIfInvalidLookupText_DoesNotThrow(
             string directiveText,
             int errorLength
-        ) {
+        )
+        {
             // Arrange
             var source = TestRazorSourceDocument.Create();
             var options = RazorParserOptions.CreateDefault();

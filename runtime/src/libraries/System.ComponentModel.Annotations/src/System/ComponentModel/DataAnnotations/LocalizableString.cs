@@ -133,7 +133,8 @@ namespace System.ComponentModel.DataAnnotations
                         !_resourceType.IsVisible
                         || property == null
                         || property.PropertyType != typeof(string)
-                    ) {
+                    )
+                    {
                         badlyConfigured = true;
                     }
                     else

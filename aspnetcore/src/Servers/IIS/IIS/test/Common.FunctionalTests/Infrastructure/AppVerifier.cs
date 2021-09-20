@@ -48,7 +48,8 @@ namespace Microsoft.AspNetCore.Server.IntegrationTesting
             string fileName,
             string arguments,
             TimeSpan timeout
-        ) {
+        )
+        {
             var startInfo = new ProcessStartInfo
             {
                 FileName = fileName,

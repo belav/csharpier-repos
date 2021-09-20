@@ -73,7 +73,8 @@ namespace System.Diagnostics.TextWriterTraceListenerTests
         public void SingleArgumentConstructorTest(
             XmlWriterTraceListener listener,
             string expectedName
-        ) {
+        )
+        {
             Assert.Equal(expectedName, listener.Name);
         }
 
@@ -154,7 +155,8 @@ namespace System.Diagnostics.TextWriterTraceListenerTests
             while (
                 traceTransferId == Environment.ProcessId
                 || traceTransferId == Environment.CurrentManagedThreadId
-            ) {
+            )
+            {
                 traceTransferId++;
             }
 
@@ -634,7 +636,8 @@ namespace System.Diagnostics.TextWriterTraceListenerTests
             TraceEventType eventType,
             DateTime date,
             TraceEventCache eventCache
-        ) {
+        )
+        {
             // TraceEventCache uses DateTime.UtcNow, whereas XmlWriterTraceListener uses DateTime.Now.
             date = date.ToLocalTime();
 

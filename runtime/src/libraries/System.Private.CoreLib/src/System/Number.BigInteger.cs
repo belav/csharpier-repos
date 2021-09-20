@@ -425,7 +425,8 @@ namespace System
                 ref BigInteger rhs,
                 out BigInteger quo,
                 out BigInteger rem
-            ) {
+            )
+            {
                 // This is modified from the libraries BigIntegerCalculator.DivRem.cs implementation:
                 // https://github.com/dotnet/runtime/blob/main/src/libraries/System.Runtime.Numerics/src/System/Numerics/BigIntegerCalculator.DivRem.cs
 
@@ -735,7 +736,8 @@ namespace System
                 ref BigInteger lhs,
                 ref BigInteger rhs,
                 out BigInteger result
-            ) {
+            )
+            {
                 if (lhs._length <= 1)
                 {
                     Multiply(ref rhs, lhs.ToUInt32(), out result);
@@ -874,7 +876,8 @@ namespace System
                             uint* pBigNumEntry = &s_Pow10BigNumTable[
                                 s_Pow10BigNumTableIndices[index]
                             ]
-                        ) {
+                        )
+                        {
                             ref BigInteger rhs = ref *(BigInteger*)(pBigNumEntry);
                             Multiply(ref lhs, ref rhs, out product);
                         }
@@ -897,7 +900,8 @@ namespace System
                 ref BigInteger lhs,
                 int lhsStartIndex,
                 ref BigInteger rhs
-            ) {
+            )
+            {
                 int lhsLength = lhs._length;
                 int rhsLength = rhs._length;
 
@@ -927,7 +931,8 @@ namespace System
                 uint valLo,
                 uint divHi,
                 uint divLo
-            ) {
+            )
+            {
                 Debug.Assert(q <= 0xFFFFFFFF);
 
                 // We multiply the two most significant limbs of the divisor
@@ -961,7 +966,8 @@ namespace System
                 int lhsStartIndex,
                 ref BigInteger rhs,
                 ulong q
-            ) {
+            )
+            {
                 int lhsLength = lhs._length - lhsStartIndex;
                 int rhsLength = rhs._length;
 

@@ -30,7 +30,8 @@ namespace System.Web.Http.Controllers
         public HttpActionBinding(
             HttpActionDescriptor actionDescriptor,
             HttpParameterBinding[] bindings
-        ) {
+        )
+        {
             ActionDescriptor = actionDescriptor;
             ParameterBindings = bindings;
         }
@@ -76,7 +77,8 @@ namespace System.Web.Http.Controllers
         public virtual Task ExecuteBindingAsync(
             HttpActionContext actionContext,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             if (_parameterBindings.Length == 0)
             {
                 return TaskHelpers.Completed();
@@ -106,7 +108,8 @@ namespace System.Web.Http.Controllers
         private async Task ExecuteBindingAsyncCore(
             HttpActionContext actionContext,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             // Execute all the binders.
             for (int index = 0; index < ParameterBindings.Length; index++)
             {

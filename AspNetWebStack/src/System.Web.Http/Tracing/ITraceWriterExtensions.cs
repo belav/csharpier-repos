@@ -27,7 +27,8 @@ namespace System.Web.Http.Tracing
             string category,
             string messageFormat,
             params object[] messageArguments
-        ) {
+        )
+        {
             Trace(
                 traceWriter,
                 request,
@@ -51,7 +52,8 @@ namespace System.Web.Http.Tracing
             HttpRequestMessage request,
             string category,
             Exception exception
-        ) {
+        )
+        {
             Trace(traceWriter, request, category, TraceLevel.Debug, exception);
         }
 
@@ -72,7 +74,8 @@ namespace System.Web.Http.Tracing
             Exception exception,
             string messageFormat,
             params object[] messageArguments
-        ) {
+        )
+        {
             Trace(
                 traceWriter,
                 request,
@@ -99,7 +102,8 @@ namespace System.Web.Http.Tracing
             string category,
             string messageFormat,
             params object[] messageArguments
-        ) {
+        )
+        {
             Trace(
                 traceWriter,
                 request,
@@ -123,7 +127,8 @@ namespace System.Web.Http.Tracing
             HttpRequestMessage request,
             string category,
             Exception exception
-        ) {
+        )
+        {
             Trace(traceWriter, request, category, TraceLevel.Error, exception);
         }
 
@@ -144,7 +149,8 @@ namespace System.Web.Http.Tracing
             Exception exception,
             string messageFormat,
             params object[] messageArguments
-        ) {
+        )
+        {
             Trace(
                 traceWriter,
                 request,
@@ -171,7 +177,8 @@ namespace System.Web.Http.Tracing
             string category,
             string messageFormat,
             params object[] messageArguments
-        ) {
+        )
+        {
             Trace(
                 traceWriter,
                 request,
@@ -195,7 +202,8 @@ namespace System.Web.Http.Tracing
             HttpRequestMessage request,
             string category,
             Exception exception
-        ) {
+        )
+        {
             Trace(traceWriter, request, category, TraceLevel.Fatal, exception);
         }
 
@@ -216,7 +224,8 @@ namespace System.Web.Http.Tracing
             Exception exception,
             string messageFormat,
             params object[] messageArguments
-        ) {
+        )
+        {
             Trace(
                 traceWriter,
                 request,
@@ -243,7 +252,8 @@ namespace System.Web.Http.Tracing
             string category,
             string messageFormat,
             params object[] messageArguments
-        ) {
+        )
+        {
             Trace(traceWriter, request, category, TraceLevel.Info, messageFormat, messageArguments);
         }
 
@@ -260,7 +270,8 @@ namespace System.Web.Http.Tracing
             HttpRequestMessage request,
             string category,
             Exception exception
-        ) {
+        )
+        {
             Trace(traceWriter, request, category, TraceLevel.Info, exception);
         }
 
@@ -281,7 +292,8 @@ namespace System.Web.Http.Tracing
             Exception exception,
             string messageFormat,
             params object[] messageArguments
-        ) {
+        )
+        {
             Trace(
                 traceWriter,
                 request,
@@ -309,7 +321,8 @@ namespace System.Web.Http.Tracing
             string category,
             TraceLevel level,
             Exception exception
-        ) {
+        )
+        {
             if (traceWriter == null)
             {
                 throw System.Web.Http.Error.ArgumentNull("traceWriter");
@@ -351,7 +364,8 @@ namespace System.Web.Http.Tracing
             Exception exception,
             string messageFormat,
             params object[] messageArguments
-        ) {
+        )
+        {
             if (traceWriter == null)
             {
                 throw System.Web.Http.Error.ArgumentNull("traceWriter");
@@ -400,7 +414,8 @@ namespace System.Web.Http.Tracing
             TraceLevel level,
             string messageFormat,
             params object[] messageArguments
-        ) {
+        )
+        {
             if (traceWriter == null)
             {
                 throw System.Web.Http.Error.ArgumentNull("traceWriter");
@@ -452,7 +467,8 @@ namespace System.Web.Http.Tracing
             Action execute,
             Action<TraceRecord> endTrace,
             Action<TraceRecord> errorTrace
-        ) {
+        )
+        {
             if (traceWriter == null)
             {
                 throw System.Web.Http.Error.ArgumentNull("traceWriter");
@@ -548,7 +564,8 @@ namespace System.Web.Http.Tracing
             Func<Task<TResult>> execute,
             Action<TraceRecord, TResult> endTrace,
             Action<TraceRecord> errorTrace
-        ) {
+        )
+        {
             if (traceWriter == null)
             {
                 throw System.Web.Http.Error.ArgumentNull("traceWriter");
@@ -621,7 +638,8 @@ namespace System.Web.Http.Tracing
             Action<TraceRecord, TResult> endTrace,
             Action<TraceRecord> errorTrace,
             Task<TResult> task
-        ) {
+        )
+        {
             try
             {
                 TResult result = await task;
@@ -707,7 +725,8 @@ namespace System.Web.Http.Tracing
             Func<Task> execute,
             Action<TraceRecord> endTrace,
             Action<TraceRecord> errorTrace
-        ) {
+        )
+        {
             if (traceWriter == null)
             {
                 throw System.Web.Http.Error.ArgumentNull("traceWriter");
@@ -780,7 +799,8 @@ namespace System.Web.Http.Tracing
             Action<TraceRecord> endTrace,
             Action<TraceRecord> errorTrace,
             Task task
-        ) {
+        )
+        {
             try
             {
                 await task;
@@ -850,7 +870,8 @@ namespace System.Web.Http.Tracing
             string category,
             string messageFormat,
             params object[] messageArguments
-        ) {
+        )
+        {
             Trace(traceWriter, request, category, TraceLevel.Warn, messageFormat, messageArguments);
         }
 
@@ -867,7 +888,8 @@ namespace System.Web.Http.Tracing
             HttpRequestMessage request,
             string category,
             Exception exception
-        ) {
+        )
+        {
             Trace(traceWriter, request, category, TraceLevel.Warn, exception);
         }
 
@@ -888,7 +910,8 @@ namespace System.Web.Http.Tracing
             Exception exception,
             string messageFormat,
             params object[] messageArguments
-        ) {
+        )
+        {
             Trace(
                 traceWriter,
                 request,
@@ -908,7 +931,8 @@ namespace System.Web.Http.Tracing
             string operatorName,
             string operationName,
             Action<TraceRecord> errorTrace
-        ) {
+        )
+        {
             TraceLevel traceLevel =
                 TraceWriterExceptionMapper.GetMappedTraceLevel(exception) ?? TraceLevel.Error;
             traceWriter.Trace(

@@ -351,7 +351,8 @@ namespace Microsoft.AspNetCore.Mvc.RazorPages.Infrastructure
             DiagnosticListener diagnosticListener = null,
             HtmlEncoder htmlEncoder = null,
             IModelExpressionProvider modelExpressionProvider = null
-        ) {
+        )
+        {
             return new DefaultPageFactoryProvider(
                 pageActivator ?? CreateActivator(),
                 provider ?? Mock.Of<IModelMetadataProvider>(),

@@ -22,13 +22,15 @@ namespace System.Globalization.Tests
             string statusValue,
             string statusFallbackValue,
             bool validDomainName = true
-        ) : base(
-            entry,
-            fallbackValue,
-            statusValue,
-            statusFallbackValue,
-            IdnaTestResultType.ToUnicode
-        ) {
+        )
+            : base(
+                entry,
+                fallbackValue,
+                statusValue,
+                statusFallbackValue,
+                IdnaTestResultType.ToUnicode
+            )
+        {
             ValidDomainName = validDomainName;
         }
     }

@@ -87,7 +87,8 @@ namespace Microsoft.AspNetCore.Cryptography.KeyDerivation
             int iterationCount,
             int numBytesRequested,
             string expectedValueAsBase64
-        ) {
+        )
+        {
             // Arrange
             byte[] salt = new byte[256];
             for (int i = 0; i < salt.Length; i++)
@@ -227,7 +228,8 @@ namespace Microsoft.AspNetCore.Cryptography.KeyDerivation
             int iterationCount,
             int numBytesRequested,
             string expectedValueAsBase64
-        ) {
+        )
+        {
             // Arrange
             byte[] salt = new byte[256];
             for (int i = 0; i < salt.Length; i++)
@@ -320,7 +322,8 @@ namespace Microsoft.AspNetCore.Cryptography.KeyDerivation
             int iterationCount,
             int numBytesRequested,
             string expectedValueAsBase64
-        ) {
+        )
+        {
             // Arrange
             byte[] salt = new byte[256];
             for (int i = 0; i < salt.Length; i++)
@@ -413,7 +416,8 @@ namespace Microsoft.AspNetCore.Cryptography.KeyDerivation
             int iterationCount,
             int numBytesRequested,
             string expectedValueAsBase64
-        ) {
+        )
+        {
             // Arrange
             byte[] salt = new byte[256];
             for (int i = 0; i < salt.Length; i++)

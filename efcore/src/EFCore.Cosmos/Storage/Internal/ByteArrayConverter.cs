@@ -52,7 +52,8 @@ namespace Microsoft.EntityFrameworkCore.Cosmos.Storage.Internal
             Type objectType,
             object existingValue,
             JsonSerializer serializer
-        ) {
+        )
+        {
             if (reader.TokenType != JsonToken.StartArray)
             {
                 throw new Exception(reader.TokenType.ToString());

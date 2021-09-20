@@ -29,7 +29,8 @@ namespace Microsoft.AspNetCore.Components.Web.Virtualization
         public async ValueTask InitializeAsync(
             ElementReference spacerBefore,
             ElementReference spacerAfter
-        ) {
+        )
+        {
             _selfReference = DotNetObjectReference.Create(this);
             await _jsRuntime.InvokeVoidAsync(
                 $"{JsFunctionsPrefix}.init",
@@ -44,7 +45,8 @@ namespace Microsoft.AspNetCore.Components.Web.Virtualization
             float spacerSize,
             float spacerSeparation,
             float containerSize
-        ) {
+        )
+        {
             _owner.OnBeforeSpacerVisible(spacerSize, spacerSeparation, containerSize);
         }
 
@@ -53,7 +55,8 @@ namespace Microsoft.AspNetCore.Components.Web.Virtualization
             float spacerSize,
             float spacerSeparation,
             float containerSize
-        ) {
+        )
+        {
             _owner.OnAfterSpacerVisible(spacerSize, spacerSeparation, containerSize);
         }
 

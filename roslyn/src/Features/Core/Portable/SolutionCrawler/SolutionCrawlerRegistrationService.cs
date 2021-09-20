@@ -40,7 +40,8 @@ namespace Microsoft.CodeAnalysis.SolutionCrawler
                 Lazy<IIncrementalAnalyzerProvider, IncrementalAnalyzerProviderMetadata>
             > analyzerProviders,
             IAsynchronousOperationListenerProvider listenerProvider
-        ) {
+        )
+        {
             _gate = new object();
 
             _analyzerProviders = analyzerProviders.GroupBy(kv => kv.Metadata.Name)
@@ -119,7 +120,8 @@ namespace Microsoft.CodeAnalysis.SolutionCrawler
         public void AddAnalyzerProvider(
             IIncrementalAnalyzerProvider provider,
             IncrementalAnalyzerProviderMetadata metadata
-        ) {
+        )
+        {
             // now update all existing work coordinator
             lock (_gate)
             {
@@ -148,7 +150,8 @@ namespace Microsoft.CodeAnalysis.SolutionCrawler
                     if (
                         !TryGetProvider(workspace.Kind, lazyProviders, out var picked)
                         || picked != lazyProvider
-                    ) {
+                    )
+                    {
                         // check whether new provider belong to current workspace
                         continue;
                     }
@@ -168,7 +171,8 @@ namespace Microsoft.CodeAnalysis.SolutionCrawler
             IEnumerable<ProjectId>? projectIds,
             IEnumerable<DocumentId>? documentIds,
             bool highPriority
-        ) {
+        )
+        {
             lock (_gate)
             {
                 if (!_documentWorkCoordinatorMap.TryGetValue(workspace, out var coordinator))
@@ -229,7 +233,8 @@ namespace Microsoft.CodeAnalysis.SolutionCrawler
                 IIncrementalAnalyzerProvider,
                 IncrementalAnalyzerProviderMetadata
             >? lazyProvider
-        ) {
+        )
+        {
             // set out param
             lazyProvider = null;
 
@@ -271,7 +276,8 @@ namespace Microsoft.CodeAnalysis.SolutionCrawler
                     Lazy<IIncrementalAnalyzerProvider, IncrementalAnalyzerProviderMetadata>
                 >
             > analyzerProviders
-        ) {
+        )
+        {
 #if DEBUG
             // make sure there is duplicated provider defined for same workspace.
             var set = new HashSet<string>();
@@ -311,7 +317,8 @@ namespace Microsoft.CodeAnalysis.SolutionCrawler
 
             internal TestAccessor(
                 SolutionCrawlerRegistrationService solutionCrawlerRegistrationService
-            ) {
+            )
+            {
                 _solutionCrawlerRegistrationService = solutionCrawlerRegistrationService;
             }
 
@@ -325,7 +332,8 @@ namespace Microsoft.CodeAnalysis.SolutionCrawler
             internal bool TryGetWorkCoordinator(
                 Workspace workspace,
                 [NotNullWhen(true)] out WorkCoordinator? coordinator
-            ) {
+            )
+            {
                 lock (_solutionCrawlerRegistrationService._gate)
                 {
                     return _solutionCrawlerRegistrationService._documentWorkCoordinatorMap.TryGetValue(
@@ -338,7 +346,8 @@ namespace Microsoft.CodeAnalysis.SolutionCrawler
             internal void WaitUntilCompletion(
                 Workspace workspace,
                 ImmutableArray<IIncrementalAnalyzer> workers
-            ) {
+            )
+            {
                 if (TryGetWorkCoordinator(workspace, out var coordinator))
                 {
                     coordinator.GetTestAccessor().WaitUntilCompletion(workers);
@@ -364,7 +373,8 @@ namespace Microsoft.CodeAnalysis.SolutionCrawler
                 int correlationId,
                 Workspace workspace,
                 SolutionCrawlerProgressReporter progressReporter
-            ) {
+            )
+            {
                 CorrelationId = correlationId;
                 Workspace = workspace;
                 ProgressReporter = progressReporter;

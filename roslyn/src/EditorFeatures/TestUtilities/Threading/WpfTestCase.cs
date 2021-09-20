@@ -27,13 +27,14 @@ namespace Roslyn.Test.Utilities
             TestMethodDisplayOptions defaultMethodDisplayOptions,
             ITestMethod testMethod,
             object[] testMethodArguments = null
-        ) : base(
-            diagnosticMessageSink,
-            defaultMethodDisplay,
-            defaultMethodDisplayOptions,
-            testMethod,
-            testMethodArguments
-        ) { }
+        )
+            : base(
+                diagnosticMessageSink,
+                defaultMethodDisplay,
+                defaultMethodDisplayOptions,
+                testMethod,
+                testMethodArguments
+            ) { }
 
         public override Task<RunSummary> RunAsync(
             IMessageSink diagnosticMessageSink,
@@ -41,7 +42,8 @@ namespace Roslyn.Test.Utilities
             object[] constructorArguments,
             ExceptionAggregator aggregator,
             CancellationTokenSource cancellationTokenSource
-        ) {
+        )
+        {
             var runner = new WpfTestCaseRunner(
                 WpfTestSharedData.Instance,
                 this,

@@ -114,7 +114,8 @@ namespace Microsoft.AspNetCore.Components.Forms
                         out var parsedValue,
                         out var validationErrorMessage
                     )
-                ) {
+                )
+                {
                     parsingFailed = false;
                     CurrentValue = parsedValue!;
                 }
@@ -190,7 +191,8 @@ namespace Microsoft.AspNetCore.Components.Forms
                     AdditionalAttributes != null
                     && AdditionalAttributes.TryGetValue("class", out var @class)
                     && !string.IsNullOrEmpty(Convert.ToString(@class, CultureInfo.InvariantCulture))
-                ) {
+                )
+                {
                     return $"{@class} {FieldClass}";
                 }
 
@@ -254,7 +256,8 @@ namespace Microsoft.AspNetCore.Components.Forms
         private void OnValidateStateChanged(
             object? sender,
             ValidationStateChangedEventArgs eventArgs
-        ) {
+        )
+        {
             UpdateAdditionalValidationAttributes();
 
             StateHasChanged();
@@ -309,7 +312,8 @@ namespace Microsoft.AspNetCore.Components.Forms
         private bool ConvertToDictionary(
             IReadOnlyDictionary<string, object>? source,
             out Dictionary<string, object> result
-        ) {
+        )
+        {
             var newDictionaryCreated = true;
             if (source == null)
             {

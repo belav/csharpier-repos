@@ -25,7 +25,8 @@ namespace Microsoft.CodeAnalysis.Text
                 || span.Start >= text.Length
                 || span.End < 0
                 || span.End > text.Length
-            ) {
+            )
+            {
                 throw new ArgumentOutOfRangeException(nameof(span));
             }
 
@@ -83,7 +84,8 @@ namespace Microsoft.CodeAnalysis.Text
             char[] destination,
             int destinationIndex,
             int count
-        ) {
+        )
+        {
             var span = GetCompositeSpan(sourceIndex, count);
             UnderlyingText.CopyTo(span.Start, destination, destinationIndex, span.Length);
         }

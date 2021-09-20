@@ -246,7 +246,8 @@ namespace System.Tests
             string format,
             IFormatProvider provider,
             string expected
-        ) {
+        )
+        {
             // Format is case insensitive
             string upperFormat = format.ToUpperInvariant();
             string lowerFormat = format.ToLowerInvariant();
@@ -394,7 +395,8 @@ namespace System.Tests
             NumberStyles style,
             IFormatProvider provider,
             long expected
-        ) {
+        )
+        {
             long result;
 
             // Default style and provider
@@ -439,7 +441,8 @@ namespace System.Tests
                         !BigInteger.TryParse((string)objs[0], out BigInteger bi)
                         || (bi >= long.MinValue && bi <= long.MaxValue)
                     )
-                ) {
+                )
+                {
                     continue;
                 }
                 yield return objs;
@@ -453,7 +456,8 @@ namespace System.Tests
             NumberStyles style,
             IFormatProvider provider,
             Type exceptionType
-        ) {
+        )
+        {
             long result;
 
             // Default style and provider
@@ -496,7 +500,8 @@ namespace System.Tests
         public static void TryParse_InvalidNumberStyle_ThrowsArgumentException(
             NumberStyles style,
             string paramName
-        ) {
+        )
+        {
             long result = 0;
             AssertExtensions.Throws<ArgumentException>(
                 paramName,
@@ -583,7 +588,8 @@ namespace System.Tests
             NumberStyles style,
             IFormatProvider provider,
             long expected
-        ) {
+        )
+        {
             long result;
 
             // Default style and provider
@@ -606,7 +612,8 @@ namespace System.Tests
             NumberStyles style,
             IFormatProvider provider,
             Type exceptionType
-        ) {
+        )
+        {
             if (value != null)
             {
                 long result;
@@ -632,7 +639,8 @@ namespace System.Tests
             string format,
             IFormatProvider provider,
             string expected
-        ) {
+        )
+        {
             char[] actual;
             int charsWritten;
 

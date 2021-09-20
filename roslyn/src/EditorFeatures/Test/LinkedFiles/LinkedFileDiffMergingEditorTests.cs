@@ -95,7 +95,8 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.LinkedFiles
         {
             public sealed override async Task ComputeRefactoringsAsync(
                 CodeRefactoringContext context
-            ) {
+            )
+            {
                 var document = context.Document;
                 var linkedDocument = document.Project.Solution.Projects.Single(
                         p => p != document.Project

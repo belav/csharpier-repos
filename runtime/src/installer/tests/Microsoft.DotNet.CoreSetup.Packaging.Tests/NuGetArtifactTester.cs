@@ -21,7 +21,8 @@ namespace Microsoft.DotNet.CoreSetup.Packaging.Tests
             RepoDirectoriesProvider dirs,
             string project,
             string id = null
-        ) {
+        )
+        {
             var tester = OpenOrNull(dirs, project, id);
             Assert.NotNull(tester);
             return tester;
@@ -31,7 +32,8 @@ namespace Microsoft.DotNet.CoreSetup.Packaging.Tests
             RepoDirectoriesProvider dirs,
             string project,
             string id = null
-        ) {
+        )
+        {
             id = id ?? project;
 
             string nupkgPath = Path.Combine(
@@ -123,7 +125,8 @@ namespace Microsoft.DotNet.CoreSetup.Packaging.Tests
                 var parts in platformManifestContent.Split('\r', '\n')
                     .Select(line => line.Split("|"))
                     .Where(parts => parts.Length > 1)
-            ) {
+            )
+            {
                 Assert.True(
                     parts[1] == Identity.Id,
                     $"Platform manifest package id column '{parts[1]}' doesn't match "

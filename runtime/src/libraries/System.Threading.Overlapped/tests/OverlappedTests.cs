@@ -202,11 +202,8 @@ public static partial class OverlappedTests
 
     internal static unsafe IOCompletionCallback MyCallback(AsyncHelper helper)
     {
-        IOCompletionCallback del = delegate(
-            uint param1,
-            uint param2,
-            NativeOverlapped* overlapped
-        ) {
+        IOCompletionCallback del = delegate(uint param1, uint param2, NativeOverlapped* overlapped)
+        {
             Overlapped ov = new Overlapped();
             NativeOverlapped* nativeOverlapped2 = ov.Pack(helper.Callback, null);
             ThreadPool.UnsafeQueueNativeOverlapped(nativeOverlapped2);

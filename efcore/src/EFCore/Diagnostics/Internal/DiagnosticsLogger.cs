@@ -38,7 +38,8 @@ namespace Microsoft.EntityFrameworkCore.Diagnostics.Internal
             LoggingDefinitions loggingDefinitions,
             IDbContextLogger contextLogger,
             IInterceptors? interceptors = null
-        ) {
+        )
+        {
             DiagnosticSource = diagnosticSource;
             Definitions = loggingDefinitions;
             DbContextLogger = contextLogger;

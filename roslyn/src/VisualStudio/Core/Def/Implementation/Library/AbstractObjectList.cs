@@ -74,7 +74,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Library
             uint index,
             _VSOBJLISTELEMPROPID propertyId,
             out object pvar
-        ) {
+        )
+        {
             pvar = null;
             return false;
         }
@@ -84,7 +85,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Library
             out IVsHierarchy hierarchy,
             out uint itemid,
             out uint items
-        ) {
+        )
+        {
             hierarchy = null;
             itemid = 0;
             items = 0;
@@ -142,7 +144,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Library
             out IVsHierarchy ppHier,
             out uint pItemid,
             out uint pcItems
-        ) {
+        )
+        {
             if (TryCountSourceItems(index, out ppHier, out pItemid, out pcItems))
             {
                 return VSConstants.S_OK;
@@ -175,7 +178,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Library
             uint index,
             uint grfOptions,
             IVsObjectBrowserDescription3 pobDesc
-        ) {
+        )
+        {
             if (!SupportsDescription)
             {
                 return VSConstants.E_NOTIMPL;
@@ -219,7 +223,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Library
             out Guid pclsidActive,
             out int pnMenuId,
             out IOleCommandTarget ppCmdTrgtActive
-        ) {
+        )
+        {
             if (TryGetContextMenu(index, out pclsidActive, out pnMenuId))
             {
                 ppCmdTrgtActive = this.LibraryManager;
@@ -247,7 +252,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Library
             uint index,
             uint listTypeExcluded,
             out int pfExpandable
-        ) {
+        )
+        {
             pfExpandable = GetExpandable(index, listTypeExcluded) ? 1 : 0;
             return VSConstants.S_OK;
         }
@@ -257,7 +263,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Library
             uint grfFlags,
             VSOBJCLIPFORMAT[] pcfFormat,
             out object pvarFormat
-        ) {
+        )
+        {
             pvarFormat = null;
             return VSConstants.E_NOTIMPL;
         }
@@ -280,7 +287,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Library
             uint flags,
             VSOBSEARCHCRITERIA2[] pobSrch,
             out IVsSimpleObjectList2 ppIVsSimpleObjectList2
-        ) {
+        )
+        {
             ppIVsSimpleObjectList2 = GetList(index, listType, flags, pobSrch);
             return VSConstants.S_OK;
         }
@@ -325,7 +333,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Library
             uint index,
             out string pbstrFilename,
             out uint pulLineNum
-        ) {
+        )
+        {
             pbstrFilename = null;
             pulLineNum = 0;
             return VSConstants.E_NOTIMPL;
@@ -335,7 +344,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Library
             uint index,
             VSTREETEXTOPTIONS tto,
             out string pbstrText
-        ) {
+        )
+        {
             if (index >= GetItemCount())
             {
                 pbstrText = null;
@@ -350,7 +360,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Library
             uint index,
             VSTREETOOLTIPTYPE eTipType,
             out string pbstrText
-        ) {
+        )
+        {
             if (index >= GetItemCount())
             {
                 pbstrText = null;
@@ -436,7 +447,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Library
         int IVsBrowseContainersList.FindContainer(
             VSCOMPONENTSELECTORDATA[] pData,
             out uint pulIndex
-        ) {
+        )
+        {
             pulIndex = 0;
 
             if (!SupportsBrowseContainers)

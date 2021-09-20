@@ -38,7 +38,8 @@ namespace System.Web.Razor.Test.Framework
             ITextDocument input,
             ParserBase codeParser,
             ParserBase markupParser
-        ) {
+        )
+        {
             return new ParserContext(
                 input,
                 codeParser,
@@ -68,7 +69,8 @@ namespace System.Web.Razor.Test.Framework
             string document,
             bool designTimeParser,
             params RazorError[] expectedErrors
-        ) {
+        )
+        {
             ParseBlockTest(document, null, designTimeParser, expectedErrors);
         }
 
@@ -81,7 +83,8 @@ namespace System.Web.Razor.Test.Framework
             string document,
             Block expectedRoot,
             bool designTimeParser
-        ) {
+        )
+        {
             ParseBlockTest(document, expectedRoot, designTimeParser, null);
         }
 
@@ -89,7 +92,8 @@ namespace System.Web.Razor.Test.Framework
             string document,
             Block expectedRoot,
             params RazorError[] expectedErrors
-        ) {
+        )
+        {
             ParseBlockTest(document, expectedRoot, false, expectedErrors);
         }
 
@@ -98,7 +102,8 @@ namespace System.Web.Razor.Test.Framework
             Block expectedRoot,
             bool designTimeParser,
             params RazorError[] expectedErrors
-        ) {
+        )
+        {
             RunParseTest(
                 document,
                 parser => parser.ParseBlock,
@@ -113,7 +118,8 @@ namespace System.Web.Razor.Test.Framework
             BlockType blockType,
             SpanKind spanType,
             AcceptedCharacters acceptedCharacters = AcceptedCharacters.Any
-        ) {
+        )
+        {
             SingleSpanBlockTest(
                 document,
                 blockType,
@@ -129,7 +135,8 @@ namespace System.Web.Razor.Test.Framework
             BlockType blockType,
             SpanKind spanType,
             AcceptedCharacters acceptedCharacters = AcceptedCharacters.Any
-        ) {
+        )
+        {
             SingleSpanBlockTest(
                 document,
                 spanContent,
@@ -145,7 +152,8 @@ namespace System.Web.Razor.Test.Framework
             BlockType blockType,
             SpanKind spanType,
             params RazorError[] expectedError
-        ) {
+        )
+        {
             SingleSpanBlockTest(document, document, blockType, spanType, expectedError);
         }
 
@@ -155,7 +163,8 @@ namespace System.Web.Razor.Test.Framework
             BlockType blockType,
             SpanKind spanType,
             params RazorError[] expectedErrors
-        ) {
+        )
+        {
             SingleSpanBlockTest(
                 document,
                 spanContent,
@@ -172,7 +181,8 @@ namespace System.Web.Razor.Test.Framework
             SpanKind spanType,
             AcceptedCharacters acceptedCharacters,
             params RazorError[] expectedError
-        ) {
+        )
+        {
             SingleSpanBlockTest(
                 document,
                 document,
@@ -190,7 +200,8 @@ namespace System.Web.Razor.Test.Framework
             SpanKind spanType,
             AcceptedCharacters acceptedCharacters,
             params RazorError[] expectedErrors
-        ) {
+        )
+        {
             BlockBuilder builder = new BlockBuilder();
             builder.Type = blockType;
             ParseBlockTest(
@@ -218,7 +229,8 @@ namespace System.Web.Razor.Test.Framework
             string document,
             Block expectedRoot,
             params RazorError[] expectedErrors
-        ) {
+        )
+        {
             ParseDocumentTest(document, expectedRoot, false, expectedErrors);
         }
 
@@ -231,7 +243,8 @@ namespace System.Web.Razor.Test.Framework
             string document,
             Block expectedRoot,
             bool designTimeParser
-        ) {
+        )
+        {
             ParseDocumentTest(document, expectedRoot, designTimeParser, null);
         }
 
@@ -240,7 +253,8 @@ namespace System.Web.Razor.Test.Framework
             Block expectedRoot,
             bool designTimeParser,
             params RazorError[] expectedErrors
-        ) {
+        )
+        {
             RunParseTest(
                 document,
                 parser => parser.ParseDocument,
@@ -281,7 +295,8 @@ namespace System.Web.Razor.Test.Framework
             Func<ParserBase, Action> parserActionSelector,
             bool designTimeParser,
             Func<ParserContext, ParserBase> parserSelector = null
-        ) {
+        )
+        {
             parserSelector = parserSelector ?? (c => c.ActiveParser);
 
             // Create the source
@@ -323,7 +338,8 @@ namespace System.Web.Razor.Test.Framework
             IList<RazorError> expectedErrors,
             bool designTimeParser,
             Func<ParserContext, ParserBase> parserSelector = null
-        ) {
+        )
+        {
             // Create the source
             ParserResults results = RunParse(
                 document,
@@ -371,7 +387,8 @@ namespace System.Web.Razor.Test.Framework
             ParserResults results,
             Block expectedRoot,
             IList<RazorError> expectedErrors
-        ) {
+        )
+        {
             EvaluateParseTree(results.Document, expectedRoot);
             EvaluateRazorErrors(results.ParserErrors, expectedErrors);
         }
@@ -407,7 +424,8 @@ namespace System.Web.Razor.Test.Framework
             ErrorCollector collector,
             SyntaxTreeNode actual,
             SyntaxTreeNode expected
-        ) {
+        )
+        {
             if (actual == null)
             {
                 AddNullActualError(collector, actual, expected);
@@ -446,7 +464,8 @@ namespace System.Web.Razor.Test.Framework
         {
             if (
                 actual.Type != expected.Type || !expected.CodeGenerator.Equals(actual.CodeGenerator)
-            ) {
+            )
+            {
                 AddMismatchError(collector, actual, expected);
             }
             else
@@ -494,7 +513,8 @@ namespace System.Web.Razor.Test.Framework
             ErrorCollector collector,
             SyntaxTreeNode actual,
             SyntaxTreeNode expected
-        ) {
+        )
+        {
             collector.AddError("{0} - FAILED :: Actual: {1}", expected, actual);
         }
 
@@ -502,14 +522,16 @@ namespace System.Web.Razor.Test.Framework
             ErrorCollector collector,
             SyntaxTreeNode actual,
             SyntaxTreeNode expected
-        ) {
+        )
+        {
             collector.AddError("{0} - FAILED :: Actual: << Null >>", expected);
         }
 
         public static void EvaluateRazorErrors(
             IList<RazorError> actualErrors,
             IList<RazorError> expectedErrors
-        ) {
+        )
+        {
             // Evaluate the errors
             if (expectedErrors == null || expectedErrors.Count == 0)
             {
@@ -565,7 +587,8 @@ namespace System.Web.Razor.Test.Framework
             BlockType blockType,
             SpanKind spanType,
             AcceptedCharacters acceptedCharacters = AcceptedCharacters.Any
-        ) {
+        )
+        {
             SpanConstructor span = Factory.Span(spanType, spanContent, spanType == SpanKind.Markup)
                 .Accepts(acceptedCharacters);
             BlockBuilder b = new BlockBuilder() { Type = blockType };

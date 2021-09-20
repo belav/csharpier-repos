@@ -38,7 +38,8 @@ namespace Roslyn.Test.Utilities.CoreClr
             IEnumerable<ResourceDescription> manifestResources,
             EmitOptions emitOptions,
             bool usePdbForDebugging = false
-        ) {
+        )
+        {
             _testData.Methods.Clear();
 
             var diagnostics = DiagnosticBag.GetInstance();
@@ -183,7 +184,8 @@ namespace Roslyn.Test.Utilities.CoreClr
             public SortedSet<string> GetMemberSignaturesFromMetadata(
                 string fullyQualifiedTypeName,
                 string memberName
-            ) {
+            )
+            {
                 return LoadContext.GetMemberSignaturesFromMetadata(
                     fullyQualifiedTypeName,
                     memberName,

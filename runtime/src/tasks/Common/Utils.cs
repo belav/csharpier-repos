@@ -31,7 +31,8 @@ internal static class Utils
         bool silent = true,
         MessageImportance outputMessageImportance = MessageImportance.High,
         MessageImportance debugMessageImportance = MessageImportance.High
-    ) {
+    )
+    {
         LogInfo($"Running: {path} {args}", debugMessageImportance);
         var outputBuilder = new StringBuilder();
         var errorBuilder = new StringBuilder();

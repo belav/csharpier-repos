@@ -41,7 +41,8 @@ namespace System.Composition.Hosting.Tests
             public override IEnumerable<ExportDescriptorPromise> GetExportDescriptors(
                 CompositionContract contract,
                 DependencyAccessor descriptorAccessor
-            ) {
+            )
+            {
                 CalledGetExportDescriptors++;
                 return new[]
                 {
@@ -62,7 +63,8 @@ namespace System.Composition.Hosting.Tests
             public object CompositeActivator(
                 LifetimeContext context,
                 CompositionOperation operation
-            ) {
+            )
+            {
                 CalledCompositeActivator++;
                 return Result;
             }
@@ -521,7 +523,8 @@ namespace System.Composition.Hosting.Tests
         [InlineData(typeof(IncompatibleGenericExportedTypeDerived<>))]
         public void CreateContainer_GenericTypeExport_ThrowsCompositionFailedException(
             Type partType
-        ) {
+        )
+        {
             ContainerConfiguration configuration = new ContainerConfiguration().WithParts(partType);
             Assert.Throws<CompositionFailedException>(() => configuration.CreateContainer());
         }
@@ -537,7 +540,8 @@ namespace System.Composition.Hosting.Tests
         [InlineData(typeof(NonGenericExportedType<int>))]
         public void CreateContainer_NonGenericTypeExportWithGenericPart_ThrowsCompositionFailedException(
             Type partType
-        ) {
+        )
+        {
             ContainerConfiguration configuration = new ContainerConfiguration().WithParts(partType);
             Assert.Throws<CompositionFailedException>(() => configuration.CreateContainer());
         }
@@ -698,7 +702,8 @@ namespace System.Composition.Hosting.Tests
         [MemberData(nameof(DebuggerAttributes_TestData))]
         public void DebuggerAttributes_GetViaReflection_Success(
             ContainerConfiguration configuration
-        ) {
+        )
+        {
             DebuggerAttributeInfo debuggerAttributeInfo =
                 DebuggerAttributes.ValidateDebuggerTypeProxyProperties(configuration);
             foreach (PropertyInfo property in debuggerAttributeInfo.Properties)

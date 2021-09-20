@@ -239,7 +239,8 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
         private static SyntaxNode GetExpressionSemanticBoundary(
             ISyntaxFactsService syntaxFacts,
             SyntaxNode node
-        ) {
+        )
+        {
             // Notes:
             // 1. Syntax which doesn't fall into one of the "safe buckets" will get placed into a
             //    single group keyed off the root of the tree. If more than one such node exists
@@ -258,7 +259,8 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
         private static SyntaxNode GetMethodBodySemanticBoundary(
             ISyntaxFactsService syntaxFacts,
             SyntaxNode node
-        ) {
+        )
+        {
             return node.FirstAncestorOrSelf<SyntaxNode, ISyntaxFactsService>(
                 (n, syntaxFacts) => syntaxFacts.IsMethodBody(n) || n.Parent == null,
                 syntaxFacts

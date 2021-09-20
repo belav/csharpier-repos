@@ -641,7 +641,8 @@ namespace Microsoft.AspNetCore.Routing.Template.Tests
             string template,
             string parameter,
             string invalid
-        ) {
+        )
+        {
             // Act and Assert
             ExceptionAssert.Throws<ArgumentException>(
                 () => TemplateParser.Parse(template),
@@ -665,7 +666,8 @@ namespace Microsoft.AspNetCore.Routing.Template.Tests
         public void Parse_ComplexSegment_OptionalParametersSeparatedByPeriod_Invalid(
             string template,
             string parameter
-        ) {
+        )
+        {
             // Act and Assert
             ExceptionAssert.Throws<ArgumentException>(
                 () => TemplateParser.Parse(template),
@@ -764,7 +766,8 @@ namespace Microsoft.AspNetCore.Routing.Template.Tests
         public void ParseRouteParameter_ThrowsIf_ParameterContainsSpecialCharacters(
             string template,
             string parameterName
-        ) {
+        )
+        {
             // Arrange
             var expectedMessage =
                 "The route parameter name '"
@@ -1025,7 +1028,8 @@ namespace Microsoft.AspNetCore.Routing.Template.Tests
                     || !String.Equals(x.Name, y.Name, StringComparison.Ordinal)
                     || (x.InlineConstraints == null && y.InlineConstraints != null)
                     || (x.InlineConstraints != null && y.InlineConstraints == null)
-                ) {
+                )
+                {
                     return false;
                 }
 
@@ -1050,7 +1054,8 @@ namespace Microsoft.AspNetCore.Routing.Template.Tests
                                     StringComparison.Ordinal
                                 )
                         )
-                    ) {
+                    )
+                    {
                         return false;
                     }
                 }

@@ -87,7 +87,8 @@ namespace Castle.Components.DictionaryAdapter.Xml
             IDictionaryAdapter parent,
             Type type,
             IDictionary dictionary
-        ) {
+        )
+        {
             var adapter = new XmlAdapter(new XmlDocument());
             return parent.CreateChildAdapter(type, adapter, dictionary);
         }
@@ -95,7 +96,8 @@ namespace Castle.Components.DictionaryAdapter.Xml
         void IDictionaryInitializer.Initialize(
             IDictionaryAdapter dictionaryAdapter,
             object[] behaviors
-        ) {
+        )
+        {
             var meta = dictionaryAdapter.Meta;
 
             if (primaryXmlMeta == null)
@@ -111,7 +113,8 @@ namespace Castle.Components.DictionaryAdapter.Xml
         private void InitializePrimary(
             DictionaryAdapterMeta meta,
             IDictionaryAdapter dictionaryAdapter
-        ) {
+        )
+        {
             RequireXmlMeta(meta);
             primaryXmlMeta = meta.GetXmlMeta();
 
@@ -185,7 +188,8 @@ namespace Castle.Components.DictionaryAdapter.Xml
             IDictionaryAdapter source,
             IDictionaryAdapter target,
             ref Func<PropertyDescriptor, bool> selector
-        ) {
+        )
+        {
             if (selector == null)
                 selector = property => HasProperty(property.PropertyName, source);
             return false;
@@ -197,7 +201,8 @@ namespace Castle.Components.DictionaryAdapter.Xml
             object storedValue,
             PropertyDescriptor property,
             bool ifExists
-        ) {
+        )
+        {
             XmlAccessor accessor;
             if (TryGetAccessor(key, property, null != storedValue, out accessor))
             {
@@ -221,7 +226,8 @@ namespace Castle.Components.DictionaryAdapter.Xml
             string key,
             ref object value,
             PropertyDescriptor property
-        ) {
+        )
+        {
             XmlAccessor accessor;
             if (TryGetAccessor(key, property, false, out accessor))
             {
@@ -266,7 +272,8 @@ namespace Castle.Components.DictionaryAdapter.Xml
             PropertyDescriptor property,
             bool requireVolatile,
             out XmlAccessor accessor
-        ) {
+        )
+        {
             accessor = property.HasAccessor()
                 ? property.GetAccessor()
                 : CreateAccessor(key, property);
@@ -314,7 +321,8 @@ namespace Castle.Components.DictionaryAdapter.Xml
             PropertyDescriptor property,
             object behavior,
             ref XmlAccessor accessor
-        ) {
+        )
+        {
             return TryApplyBehavior<XmlElementAttribute, XmlElementBehaviorAccessor>(
                     key,
                     property,
@@ -372,8 +380,9 @@ namespace Castle.Components.DictionaryAdapter.Xml
             object behavior,
             ref XmlAccessor accessor,
             XmlAccessorFactory<TAccessor> factory
-        ) where TBehavior : class
-          where TAccessor : XmlAccessor, IConfigurable<TBehavior>
+        )
+            where TBehavior : class
+            where TAccessor : XmlAccessor, IConfigurable<TBehavior>
         {
             var typedBehavior = behavior as TBehavior;
             if (typedBehavior == null)
@@ -455,7 +464,8 @@ namespace Castle.Components.DictionaryAdapter.Xml
             object value,
             IDictionaryAdapter dictionaryAdapter,
             PropertyDescriptor property
-        ) {
+        )
+        {
             var bindingList = value as IBindingList;
             if (bindingList != null)
                 bindingList.ListChanged += (s, e) =>
@@ -467,7 +477,8 @@ namespace Castle.Components.DictionaryAdapter.Xml
             ListChangedEventArgs args,
             IDictionaryAdapter dictionaryAdapter,
             PropertyDescriptor property
-        ) {
+        )
+        {
             var change = args.ListChangedType;
             var changed =
                 change == ListChangedType.ItemAdded
@@ -485,7 +496,8 @@ namespace Castle.Components.DictionaryAdapter.Xml
         bool IDictionaryReferenceManager.IsReferenceProperty(
             IDictionaryAdapter dictionaryAdapter,
             string propertyName
-        ) {
+        )
+        {
             var xmlAdapter = XmlAdapter.For(dictionaryAdapter, false);
             if (xmlAdapter == null)
                 return false;
@@ -512,7 +524,8 @@ namespace Castle.Components.DictionaryAdapter.Xml
             object keyObject,
             object relatedObject,
             bool isInGraph
-        ) {
+        )
+        {
             references.Add(null, keyObject, relatedObject, isInGraph);
         }
 
@@ -569,7 +582,8 @@ namespace Castle.Components.DictionaryAdapter.Xml
         public static bool IsPropertyDefined(
             string propertyName,
             IDictionaryAdapter dictionaryAdapter
-        ) {
+        )
+        {
             var xmlAdapter = XmlAdapter.For(dictionaryAdapter, true);
             return xmlAdapter != null && xmlAdapter.HasProperty(propertyName, dictionaryAdapter);
         }

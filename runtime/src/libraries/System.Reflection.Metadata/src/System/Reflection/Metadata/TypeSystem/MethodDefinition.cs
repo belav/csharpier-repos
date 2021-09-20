@@ -66,7 +66,8 @@ namespace System.Reflection.Metadata
         public MethodSignature<TType> DecodeSignature<TType, TGenericContext>(
             ISignatureTypeProvider<TType, TGenericContext> provider,
             TGenericContext genericContext
-        ) {
+        )
+        {
             var decoder = new SignatureDecoder<TType, TGenericContext>(
                 provider,
                 _reader,
@@ -171,7 +172,8 @@ namespace System.Reflection.Metadata
             if (
                 (treatment & MethodDefTreatment.KindMask)
                 == MethodDefTreatment.HiddenInterfaceImplementation
-            ) {
+            )
+            {
                 flags = (flags & ~MethodAttributes.MemberAccessMask) | MethodAttributes.Private;
             }
 

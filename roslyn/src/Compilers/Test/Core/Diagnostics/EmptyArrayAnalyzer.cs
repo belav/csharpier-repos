@@ -83,14 +83,16 @@ namespace Microsoft.CodeAnalysis.Test.Utilities
                         arrayCreation.DimensionSizes.Length == 1
                         //// Pointer types can't be generic type arguments.
                         && elementType?.TypeKind != TypeKind.Pointer
-                    ) {
+                    )
+                    {
                         Optional<object> arrayLength =
                             arrayCreation.DimensionSizes[0].ConstantValue;
                         if (
                             arrayLength.HasValue
                             && arrayLength.Value is int
                             && (int)arrayLength.Value == 0
-                        ) {
+                        )
+                        {
                             Report(operationContext, arrayCreation.Syntax);
                         }
                     }

@@ -158,7 +158,8 @@ namespace Microsoft.AspNetCore.Mvc.IntegrationTests
         )]
         public async Task DictionaryModelBinder_BindsDictionaryOfSimpleType_WithExplicitPrefix_Success(
             string queryString
-        ) {
+        )
+        {
             // Arrange
             var parameterBinder = ModelBindingTestHelper.GetParameterBinder();
             var parameter = new ParameterDescriptor()
@@ -201,7 +202,8 @@ namespace Microsoft.AspNetCore.Mvc.IntegrationTests
         )]
         public async Task DictionaryModelBinder_BindsDictionaryOfSimpleType_EmptyPrefix_Success(
             string queryString
-        ) {
+        )
+        {
             // Arrange
             var parameterBinder = ModelBindingTestHelper.GetParameterBinder();
             var parameter = new ParameterDescriptor()
@@ -347,7 +349,8 @@ namespace Microsoft.AspNetCore.Mvc.IntegrationTests
         [MemberData(nameof(ThreeEntryTestData))]
         public async Task DictionaryModelBinder_Binds3EntriesOfSimpleType(
             Action<HttpRequest> updateRequest
-        ) {
+        )
+        {
             // Arrange
             var expectedDictionary = new Dictionary<string, int>
             {
@@ -382,7 +385,8 @@ namespace Microsoft.AspNetCore.Mvc.IntegrationTests
         [MemberData(nameof(ThreeEntryTestData))]
         public async Task DictionaryModelBinder_Binds3EntriesOfSimpleType_WithJQueryQueryString(
             Action<HttpRequest> updateRequest
-        ) {
+        )
+        {
             // Arrange
             var expectedDictionary = new Dictionary<string, int>
             {
@@ -493,7 +497,8 @@ namespace Microsoft.AspNetCore.Mvc.IntegrationTests
         [MemberData(nameof(ComplexType_ImpliedPrefixData))]
         public async Task DictionaryModelBinder_BindsDictionaryOfComplexType_WithImpliedPrefix(
             string queryString
-        ) {
+        )
+        {
             // Arrange
             var parameterBinder = ModelBindingTestHelper.GetParameterBinder();
             var parameter = new ParameterDescriptor()
@@ -536,7 +541,8 @@ namespace Microsoft.AspNetCore.Mvc.IntegrationTests
         [MemberData(nameof(ComplexType_ImpliedPrefixData))]
         public async Task DictionaryModelBinder_BindsDictionaryOfComplexType_WithImpliedPrefixAndJQuery(
             string queryString
-        ) {
+        )
+        {
             // Arrange
             var expectedDictionary = new Dictionary<string, Person>
             {
@@ -581,7 +587,8 @@ namespace Microsoft.AspNetCore.Mvc.IntegrationTests
         [MemberData(nameof(ComplexType_ImpliedPrefixData))]
         public async Task DictionaryModelBinder_BindsDictionaryOfComplexType_WithImpliedPrefixAndJQueryFirst(
             string queryString
-        ) {
+        )
+        {
             // Arrange
             var expectedDictionary = new Dictionary<string, Person>
             {
@@ -626,7 +633,8 @@ namespace Microsoft.AspNetCore.Mvc.IntegrationTests
         [InlineData("?parameter[42][Id]=10")]
         public async Task DictionaryModelBinder_BindsDictionaryOfComplexType_WithImpliedPrefixIntegralKeysAndJQuery(
             string queryString
-        ) {
+        )
+        {
             // Arrange
             var expectedDictionary = new Dictionary<string, Person>
             {
@@ -668,7 +676,8 @@ namespace Microsoft.AspNetCore.Mvc.IntegrationTests
         [InlineData("?parameter[42][Id]=10")]
         public async Task DictionaryModelBinder_BindsDictionaryOfComplexType_WithImpliedPrefixIntegralKeysAndJQueryFirst(
             string queryString
-        ) {
+        )
+        {
             // Arrange
             var expectedDictionary = new Dictionary<string, Person>
             {
@@ -726,7 +735,8 @@ namespace Microsoft.AspNetCore.Mvc.IntegrationTests
         [MemberData(nameof(ComplexType_ExplicitPrefixData))]
         public async Task DictionaryModelBinder_BindsDictionaryOfComplexType_WithExplicitPrefix(
             string queryString
-        ) {
+        )
+        {
             // Arrange
             var parameterBinder = ModelBindingTestHelper.GetParameterBinder();
             var parameter = new ParameterDescriptor()
@@ -767,7 +777,8 @@ namespace Microsoft.AspNetCore.Mvc.IntegrationTests
         [MemberData(nameof(ComplexType_ExplicitPrefixData))]
         public async Task DictionaryModelBinder_BindsDictionaryOfComplexType_WithExplicitPrefixAndJQuery(
             string queryString
-        ) {
+        )
+        {
             // Arrange
             var testContext = ModelBindingTestHelper.GetTestContext(
                 request => request.QueryString = new QueryString(queryString),
@@ -817,7 +828,8 @@ namespace Microsoft.AspNetCore.Mvc.IntegrationTests
         )]
         public async Task DictionaryModelBinder_BindsDictionaryOfComplexType_ImpliedPrefix_FindsValidationErrors(
             string queryString
-        ) {
+        )
+        {
             // Arrange
             var parameterBinder = ModelBindingTestHelper.GetParameterBinder();
             var parameter = new ParameterDescriptor()
@@ -923,7 +935,8 @@ namespace Microsoft.AspNetCore.Mvc.IntegrationTests
         [MemberData(nameof(CollectionType_ImpliedPrefixData))]
         public async Task DictionaryModelBinder_BindsDictionaryOfCollectionType_WithImpliedPrefix(
             string queryString
-        ) {
+        )
+        {
             // Arrange
             var expectedDictionary = new Dictionary<string, string[]>
             {
@@ -959,7 +972,8 @@ namespace Microsoft.AspNetCore.Mvc.IntegrationTests
         [MemberData(nameof(CollectionType_ImpliedPrefixData))]
         public async Task DictionaryModelBinder_BindsDictionaryOfCollectionType_WithImpliedPrefixAndJQuery(
             string queryString
-        ) {
+        )
+        {
             // Arrange
             var expectedDictionary = new Dictionary<string, string[]>
             {
@@ -1000,7 +1014,8 @@ namespace Microsoft.AspNetCore.Mvc.IntegrationTests
         [MemberData(nameof(CollectionType_ImpliedPrefixData))]
         public async Task DictionaryModelBinder_BindsDictionaryOfCollectionType_WithImpliedPrefixAndJQueryFirst(
             string queryString
-        ) {
+        )
+        {
             // Arrange
             var expectedDictionary = new Dictionary<string, string[]>
             {
@@ -1049,7 +1064,8 @@ namespace Microsoft.AspNetCore.Mvc.IntegrationTests
         [InlineData("?parameter[42][0]=10&parameter[42][1]=11")]
         public async Task DictionaryModelBinder_BindsDictionaryOfCollectionType_WithImpliedPrefixIntegralKeysAndJQuery(
             string queryString
-        ) {
+        )
+        {
             // Arrange
             var expectedDictionary = new Dictionary<string, string[]>
             {
@@ -1095,7 +1111,8 @@ namespace Microsoft.AspNetCore.Mvc.IntegrationTests
         [InlineData("?parameter[42][0]=10&parameter[42][1]=11")]
         public async Task DictionaryModelBinder_BindsDictionaryOfCollectionType_WithImpliedPrefixIntegralKeysAndJQueryFirst(
             string queryString
-        ) {
+        )
+        {
             // Arrange
             var expectedDictionary = new Dictionary<string, string[]>
             {
@@ -1212,7 +1229,8 @@ namespace Microsoft.AspNetCore.Mvc.IntegrationTests
             Type parameterType,
             string queryString,
             Type expectedType
-        ) {
+        )
+        {
             // Arrange
             var expectedDictionary = new Dictionary<string, string>
             {
@@ -1580,7 +1598,8 @@ namespace Microsoft.AspNetCore.Mvc.IntegrationTests
 
             bool ICollection<KeyValuePair<string, string>>.Contains(
                 KeyValuePair<string, string> item
-            ) {
+            )
+            {
                 throw new NotImplementedException();
             }
 
@@ -1592,7 +1611,8 @@ namespace Microsoft.AspNetCore.Mvc.IntegrationTests
             void ICollection<KeyValuePair<string, string>>.CopyTo(
                 KeyValuePair<string, string>[] array,
                 int arrayIndex
-            ) {
+            )
+            {
                 throw new NotImplementedException();
             }
 
@@ -1682,7 +1702,8 @@ namespace Microsoft.AspNetCore.Mvc.IntegrationTests
             void ICollection<KeyValuePair<TKey, TValue>>.CopyTo(
                 KeyValuePair<TKey, TValue>[] array,
                 int arrayIndex
-            ) {
+            )
+            {
                 throw new NotImplementedException();
             }
 

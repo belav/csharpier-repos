@@ -686,7 +686,8 @@ namespace System.Resources.Extensions.Tests
                     string,
                     (Type type, Stream stream)
                 > pair in TestData.ActivatorWithoutDrawing
-            ) {
+            )
+            {
                 pair.Value.stream.Seek(0, SeekOrigin.Begin);
                 var expectedValue = Activator.CreateInstance(pair.Value.type, pair.Value.stream);
                 var actualValue = resourceManager.GetObject(pair.Key);
@@ -728,7 +729,8 @@ namespace System.Resources.Extensions.Tests
             using (
                 MemoryStream actualData = new MemoryStream(),
                     expectedData = new MemoryStream()
-            ) {
+            )
+            {
                 TestData.WriteResourcesStream(actualData);
                 resourcesStream.CopyTo(expectedData);
 

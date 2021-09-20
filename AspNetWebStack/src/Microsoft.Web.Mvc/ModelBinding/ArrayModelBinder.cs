@@ -13,7 +13,8 @@ namespace Microsoft.Web.Mvc.ModelBinding
             ControllerContext controllerContext,
             ExtensibleModelBindingContext bindingContext,
             IList<TElement> newCollection
-        ) {
+        )
+        {
             bindingContext.Model = newCollection.ToArray();
             return true;
         }

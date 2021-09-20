@@ -25,7 +25,8 @@ namespace Microsoft.AspNetCore.Server.IntegrationTesting.IIS
         protected override async Task<HttpResponseMessage> SendAsync(
             HttpRequestMessage request,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             HttpResponseMessage response = null;
             for (int i = 0; i < MaxRetries; i++)
             {
@@ -47,7 +48,8 @@ namespace Microsoft.AspNetCore.Server.IntegrationTesting.IIS
                 if (
                     response != null
                     && (response.IsSuccessStatusCode || response.StatusCode != (HttpStatusCode)503)
-                ) {
+                )
+                {
                     break;
                 }
 

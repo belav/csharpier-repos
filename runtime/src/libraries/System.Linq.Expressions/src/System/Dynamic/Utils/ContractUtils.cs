@@ -161,7 +161,8 @@ namespace System.Dynamic.Utils
             int count,
             string offsetName,
             string countName
-        ) {
+        )
+        {
             Debug.Assert(!string.IsNullOrEmpty(offsetName));
             Debug.Assert(!string.IsNullOrEmpty(countName));
             Debug.Assert(array != null);

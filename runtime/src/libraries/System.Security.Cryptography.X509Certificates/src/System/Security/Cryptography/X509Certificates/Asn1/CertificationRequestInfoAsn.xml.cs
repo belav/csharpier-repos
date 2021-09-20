@@ -32,7 +32,8 @@ namespace System.Security.Cryptography.X509Certificates.Asn1
                 if (
                     !Asn1Tag.TryDecode(Subject.Span, out Asn1Tag validateTag, out _)
                     || !validateTag.HasSameClassAndValue(new Asn1Tag((UniversalTagNumber)16))
-                ) {
+                )
+                {
                     throw new CryptographicException();
                 }
             }
@@ -60,7 +61,8 @@ namespace System.Security.Cryptography.X509Certificates.Asn1
         internal static CertificationRequestInfoAsn Decode(
             ReadOnlyMemory<byte> encoded,
             AsnEncodingRules ruleSet
-        ) {
+        )
+        {
             return Decode(Asn1Tag.Sequence, encoded, ruleSet);
         }
 
@@ -68,7 +70,8 @@ namespace System.Security.Cryptography.X509Certificates.Asn1
             Asn1Tag expectedTag,
             ReadOnlyMemory<byte> encoded,
             AsnEncodingRules ruleSet
-        ) {
+        )
+        {
             try
             {
                 AsnValueReader reader = new AsnValueReader(encoded.Span, ruleSet);
@@ -92,7 +95,8 @@ namespace System.Security.Cryptography.X509Certificates.Asn1
             ref AsnValueReader reader,
             ReadOnlyMemory<byte> rebind,
             out CertificationRequestInfoAsn decoded
-        ) {
+        )
+        {
             Decode(ref reader, Asn1Tag.Sequence, rebind, out decoded);
         }
 
@@ -101,7 +105,8 @@ namespace System.Security.Cryptography.X509Certificates.Asn1
             Asn1Tag expectedTag,
             ReadOnlyMemory<byte> rebind,
             out CertificationRequestInfoAsn decoded
-        ) {
+        )
+        {
             try
             {
                 DecodeCore(ref reader, expectedTag, rebind, out decoded);
@@ -117,7 +122,8 @@ namespace System.Security.Cryptography.X509Certificates.Asn1
             Asn1Tag expectedTag,
             ReadOnlyMemory<byte> rebind,
             out CertificationRequestInfoAsn decoded
-        ) {
+        )
+        {
             decoded = default;
             AsnValueReader sequenceReader = reader.ReadSequence(expectedTag);
             AsnValueReader collectionReader;

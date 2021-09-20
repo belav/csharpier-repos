@@ -50,7 +50,8 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
         public virtual InternalEntityEntry? PropagateValue(
             InternalEntityEntry entry,
             IProperty property
-        ) {
+        )
+        {
             Check.DebugAssert(property.IsForeignKey(), $"property {property} is not part of an FK");
 
             var generationProperty = property.FindGenerationProperty();
@@ -89,7 +90,8 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
             InternalEntityEntry entry,
             IProperty property,
             CancellationToken cancellationToken = default
-        ) {
+        )
+        {
             Check.DebugAssert(property.IsForeignKey(), $"property {property} is not part of an FK");
 
             var generationProperty = property.FindGenerationProperty();
@@ -126,7 +128,8 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
             InternalEntityEntry entry,
             IProperty property,
             IProperty? generationProperty
-        ) {
+        )
+        {
             var entityType = entry.EntityType;
             var stateManager = entry.StateManager;
 
@@ -136,7 +139,8 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
                     var propertyIndex = 0;
                     propertyIndex < foreignKey.Properties.Count;
                     propertyIndex++
-                ) {
+                )
+                {
                     if (property == foreignKey.Properties[propertyIndex])
                     {
                         var principal =
@@ -158,7 +162,8 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
                                     entry.Entity,
                                     clear: false
                                 )
-                            ) {
+                            )
+                            {
                                 if (danglerEntry.Item1 == foreignKey.PrincipalToDependent)
                                 {
                                     principalEntry = danglerEntry.Item2;
@@ -179,7 +184,8 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
                                 if (
                                     generationProperty == null
                                     || !principalProperty.ClrType.IsDefaultValue(principalValue)
-                                ) {
+                                )
+                                {
                                     if (principalEntry.HasTemporaryValue(principalProperty))
                                     {
                                         entry.SetTemporaryValue(property, principalValue);

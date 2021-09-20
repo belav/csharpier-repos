@@ -91,7 +91,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             if (
                 this.AttributeClass.IsErrorType()
                 && !(this.AttributeClass is MissingMetadataTypeSymbol)
-            ) {
+            )
+            {
                 // Can't guarantee complete name information.
                 return false;
             }
@@ -118,7 +119,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             NamedTypeSymbol attributeType,
             AttributeSyntax attributeSyntax,
             AttributeDescription description
-        ) {
+        )
+        {
             Debug.Assert(!attributeType.IsErrorType());
 
             int argumentCount =
@@ -289,7 +291,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                         targetSymbol,
                         AttributeDescription.PermissionSetAttribute
                     )
-                ) {
+                )
+                {
                     string? resolvedPathForFixup = DecodePermissionSetAttribute(
                         compilation,
                         arguments.AttributeSyntaxOpt,
@@ -377,7 +380,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                 AttributeLocation
             > arguments,
             string memberName
-        ) {
+        )
+        {
             foreach (Symbol foundMember in type.GetMembers(memberName))
             {
                 if (foundMember.Kind == SymbolKind.Field || foundMember.Kind == SymbolKind.Property)
@@ -445,7 +449,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             AttributeSyntax? nodeOpt,
             out bool hasErrors,
             BindingDiagnosticBag diagnostics
-        ) {
+        )
+        {
             Debug.Assert((object)targetSymbol != null);
             Debug.Assert(
                 targetSymbol.Kind == SymbolKind.Assembly
@@ -474,7 +479,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                         targetSymbol,
                         AttributeDescription.HostProtectionAttribute
                     )
-                ) {
+                )
+                {
                     hasErrors = false;
                     return DeclarativeSecurityAction.LinkDemand;
                 }
@@ -490,7 +496,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                             WellKnownType.System_Security_Permissions_SecurityAction
                         )
                     )
-                ) {
+                )
+                {
                     return DecodeSecurityAction(
                         firstArg,
                         targetSymbol,
@@ -516,7 +523,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             AttributeSyntax? nodeOpt,
             BindingDiagnosticBag diagnostics,
             out bool hasErrors
-        ) {
+        )
+        {
             Debug.Assert((object)targetSymbol != null);
             Debug.Assert(
                 targetSymbol.Kind == SymbolKind.Assembly
@@ -537,7 +545,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                             targetSymbol,
                             AttributeDescription.PrincipalPermissionAttribute
                         )
-                    ) {
+                    )
+                    {
                         // CS7052: SecurityAction value '{0}' is invalid for PrincipalPermission attribute
                         object displayString;
                         Location syntaxLocation = GetSecurityAttributeActionSyntaxLocation(
@@ -600,7 +609,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                 if (
                     targetSymbol.Kind == SymbolKind.NamedType
                     || targetSymbol.Kind == SymbolKind.Method
-                ) {
+                )
+                {
                     // Types and methods cannot take permission requests.
 
                     // CS7051: SecurityAction value '{0}' is invalid for security attributes applied to a type or a method
@@ -650,7 +660,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             AttributeSyntax? nodeOpt,
             TypedConstant typedValue,
             out object displayString
-        ) {
+        )
+        {
             if (nodeOpt == null)
             {
                 displayString = "";
@@ -691,7 +702,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             CSharpCompilation compilation,
             AttributeSyntax? nodeOpt,
             BindingDiagnosticBag diagnostics
-        ) {
+        )
+        {
             Debug.Assert(!this.HasErrors);
 
             string? resolvedFilePath = null;
@@ -708,7 +720,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                 if (
                     namedArg.Key == filePropName
                     && PermissionSetAttributeTypeHasRequiredProperty(attrType, filePropName)
-                ) {
+                )
+                {
                     // resolve file prop path
                     var fileName = (string?)namedArg.Value.ValueInternal;
                     var resolver = compilation.Options.XmlReferenceResolver;
@@ -751,7 +764,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
         private static bool PermissionSetAttributeTypeHasRequiredProperty(
             NamedTypeSymbol permissionSetType,
             string propName
-        ) {
+        )
+        {
             var members = permissionSetType.GetMembers(propName);
             if (members.Length == 1 && members[0].Kind == SymbolKind.Property)
             {
@@ -763,7 +777,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                     && property.GetMemberArity() == 0
                     && (object)property.SetMethod != null
                     && property.SetMethod.DeclaredAccessibility == Accessibility.Public
-                ) {
+                )
+                {
                     return true;
                 }
             }
@@ -774,7 +789,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
         internal void DecodeClassInterfaceAttribute(
             AttributeSyntax? nodeOpt,
             BindingDiagnosticBag diagnostics
-        ) {
+        )
+        {
             Debug.Assert(!this.HasErrors);
 
             TypedConstant ctorArgument = this.CommonConstructorArguments[0];
@@ -811,7 +827,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
         internal void DecodeInterfaceTypeAttribute(
             AttributeSyntax node,
             BindingDiagnosticBag diagnostics
-        ) {
+        )
+        {
             Debug.Assert(!this.HasErrors);
 
             TypedConstant ctorArgument = this.CommonConstructorArguments[0];
@@ -851,7 +868,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
         internal string DecodeGuidAttribute(
             AttributeSyntax? nodeOpt,
             BindingDiagnosticBag diagnostics
-        ) {
+        )
+        {
             Debug.Assert(!this.HasErrors);
 
             var guidString = (string?)this.CommonConstructorArguments[0].ValueInternal;
@@ -887,7 +905,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                         {
                             Type: { SpecialType: SpecialType.System_String }
                         }
-                    ) {
+                    )
+                    {
                         return true;
                     }
                 }
@@ -907,7 +926,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             Symbol target,
             bool isReturnType,
             bool emittingAssemblyAttributesInNetModule
-        ) {
+        )
+        {
             Debug.Assert(
                 target is SourceAssemblySymbol || target.ContainingAssembly is SourceAssemblySymbol
             );
@@ -952,7 +972,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                         )
                         || IsTargetAttribute(target, AttributeDescription.TypeForwardedToAttribute)
                         || IsSecurityAttribute(target.DeclaringCompilation)
-                    ) {
+                    )
+                    {
                         return false;
                     }
                     break;
@@ -970,7 +991,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                         || IsTargetAttribute(target, AttributeDescription.NonSerializedAttribute)
                         || IsTargetAttribute(target, AttributeDescription.FieldOffsetAttribute)
                         || IsTargetAttribute(target, AttributeDescription.MarshalAsAttribute)
-                    ) {
+                    )
+                    {
                         return false;
                     }
                     break;
@@ -995,7 +1017,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                                 AttributeDescription.DynamicSecurityMethodAttribute
                             )
                             || IsSecurityAttribute(target.DeclaringCompilation)
-                        ) {
+                        )
+                        {
                             return false;
                         }
                     }
@@ -1016,7 +1039,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                             AttributeDescription.WindowsRuntimeImportAttribute
                         )
                         || IsSecurityAttribute(target.DeclaringCompilation)
-                    ) {
+                    )
+                    {
                         return false;
                     }
                     break;
@@ -1031,7 +1055,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                         || IsTargetAttribute(target, AttributeDescription.InAttribute)
                         || IsTargetAttribute(target, AttributeDescription.OutAttribute)
                         || IsTargetAttribute(target, AttributeDescription.MarshalAsAttribute)
-                    ) {
+                    )
+                    {
                         return false;
                     }
                     break;
@@ -1044,7 +1069,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                         || IsTargetAttribute(target, AttributeDescription.AllowNullAttribute)
                         || IsTargetAttribute(target, AttributeDescription.MaybeNullAttribute)
                         || IsTargetAttribute(target, AttributeDescription.NotNullAttribute)
-                    ) {
+                    )
+                    {
                         return false;
                     }
                     break;
@@ -1060,7 +1086,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             this ImmutableArray<CSharpAttributeData> attributes,
             Symbol targetSymbol,
             AttributeDescription description
-        ) {
+        )
+        {
             for (int i = 0; i < attributes.Length; i++)
             {
                 if (attributes[i].IsTargetAttribute(targetSymbol, description))
@@ -1076,7 +1103,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             this AttributeData attribute,
             int parameterIndex,
             AttributeSyntax attributeSyntax
-        ) {
+        )
+        {
             Debug.Assert(attribute is SourceAttributeData);
             return ((SourceAttributeData)attribute).GetAttributeArgumentSyntax(
                 parameterIndex,
@@ -1098,7 +1126,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             this AttributeData attribute,
             int parameterIndex,
             AttributeSyntax? attributeSyntaxOpt
-        ) {
+        )
+        {
             if (attributeSyntaxOpt == null)
             {
                 return NoLocation.Singleton;

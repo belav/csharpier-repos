@@ -39,7 +39,8 @@ namespace Microsoft.VisualBasic.CompilerServices.Tests
                 object p4,
                 T p5 = default,
                 int? p6 = 6
-            ) {
+            )
+            {
                 return $"{typeof(T)}, {ToString(p5)}, {ToString(p6)}";
             }
             public object F7<T>(
@@ -50,7 +51,8 @@ namespace Microsoft.VisualBasic.CompilerServices.Tests
                 object p5,
                 T p6 = default,
                 int? p7 = 7
-            ) {
+            )
+            {
                 return $"{typeof(T)}, {ToString(p6)}, {ToString(p7)}";
             }
             public object F8<T>(
@@ -62,7 +64,8 @@ namespace Microsoft.VisualBasic.CompilerServices.Tests
                 object p6,
                 T p7 = default,
                 int? p8 = 8
-            ) {
+            )
+            {
                 return $"{typeof(T)}, {ToString(p7)}, {ToString(p8)}";
             }
             private static string ToString(object obj) => obj?.ToString() ?? "null";
@@ -267,7 +270,8 @@ namespace Microsoft.VisualBasic.CompilerServices.Tests
             object[] arguments,
             Type[] typeArguments,
             string expectedValue
-        ) {
+        )
+        {
             // NewLateBinding.LateCall() corresponds to a call to the member when using late binding:
             //   Dim instance = New OptionalValuesType()
             //   instance.Member(arguments)

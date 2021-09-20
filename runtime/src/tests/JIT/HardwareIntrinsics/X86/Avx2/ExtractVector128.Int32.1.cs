@@ -379,7 +379,8 @@ namespace JIT.HardwareIntrinsics.X86
             Vector256<Int32> firstOp,
             void* result,
             [CallerMemberName] string method = ""
-        ) {
+        )
+        {
             Int32[] inArray = new Int32[Op1ElementCount];
             Int32[] outArray = new Int32[RetElementCount];
 
@@ -397,7 +398,8 @@ namespace JIT.HardwareIntrinsics.X86
             void* firstOp,
             void* result,
             [CallerMemberName] string method = ""
-        ) {
+        )
+        {
             Int32[] inArray = new Int32[Op1ElementCount];
             Int32[] outArray = new Int32[RetElementCount];
 
@@ -419,7 +421,8 @@ namespace JIT.HardwareIntrinsics.X86
             Int32[] firstOp,
             Int32[] result,
             [CallerMemberName] string method = ""
-        ) {
+        )
+        {
             bool succeeded = true;
 
             if (result[0] != firstOp[4])

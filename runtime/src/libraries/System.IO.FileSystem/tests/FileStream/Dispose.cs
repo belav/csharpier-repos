@@ -65,7 +65,8 @@ namespace System.IO.Tests
                         Action<bool> writeDisposeMethod = _ => writeDisposeInvoked = true;
                         using (
                             var fsread = new FileStream(fileName, FileMode.Open, FileAccess.Read)
-                        ) {
+                        )
+                        {
                             Action act = () => // separate method to avoid JIT lifetime-extension issues
                             {
                                 using (
@@ -74,7 +75,8 @@ namespace System.IO.Tests
                                         FileAccess.Write,
                                         writeDisposeMethod
                                     )
-                                ) {
+                                )
+                                {
                                     fswrite.WriteByte(0);
 
                                     // Normal dispose should call Dispose(true). Throws due to FS trying to flush write buffer
@@ -140,7 +142,8 @@ namespace System.IO.Tests
                         };
                         using (
                             var fsread = new FileStream(fileName, FileMode.Open, FileAccess.Read)
-                        ) {
+                        )
+                        {
                             Action act = () => // separate method to avoid JIT lifetime-extension issues
                             {
                                 var fswrite = new MyFileStream(
@@ -254,7 +257,8 @@ namespace System.IO.Tests
                     FileAccess.Read,
                     FileShare.ReadWrite | FileShare.Delete
                 )
-            ) {
+            )
+            {
                 byte[] buffer = new byte[TestBuffer.Length];
                 Assert.Equal(buffer.Length, fs.Length);
                 fs.Read(buffer, 0, buffer.Length);
@@ -294,7 +298,8 @@ namespace System.IO.Tests
                     FileAccess.Read,
                     FileShare.ReadWrite | FileShare.Delete
                 )
-            ) {
+            )
+            {
                 byte[] buffer = new byte[TestBuffer.Length];
                 Assert.Equal(buffer.Length, fsr.Length);
                 fsr.Read(buffer, 0, buffer.Length);

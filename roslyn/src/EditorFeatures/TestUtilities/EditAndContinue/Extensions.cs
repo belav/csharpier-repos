@@ -18,7 +18,8 @@ namespace Microsoft.CodeAnalysis.EditAndContinue.UnitTests
             this IEnumerable<RudeEditDiagnostic> diagnostics,
             SourceText newSource,
             bool includeFirstLines
-        ) {
+        )
+        {
             return diagnostics.Select(
                 d =>
                     new RudeEditDiagnosticDescription(

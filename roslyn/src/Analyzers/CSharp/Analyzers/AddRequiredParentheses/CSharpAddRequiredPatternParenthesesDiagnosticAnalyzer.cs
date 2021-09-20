@@ -37,7 +37,8 @@ namespace Microsoft.CodeAnalysis.CSharp.AddRequiredParentheses
 
         protected override (PatternSyntax, SyntaxToken, PatternSyntax) GetPartsOfBinaryLike(
             BinaryPatternSyntax binaryPattern
-        ) {
+        )
+        {
             Debug.Assert(IsBinaryLike(binaryPattern));
             return (binaryPattern.Left, binaryPattern.OperatorToken, binaryPattern.Right);
         }

@@ -13,7 +13,8 @@ namespace System.ServiceModel.Syndication
         public static bool DefaultRss20DateTimeParser(
             XmlDateTimeData XmlDateTimeData,
             out DateTimeOffset dateTimeOffset
-        ) {
+        )
+        {
             string dateTimeString = XmlDateTimeData.DateTimeString;
 
             // First check if DateTimeOffset default parsing can parse the date
@@ -40,7 +41,8 @@ namespace System.ServiceModel.Syndication
         public static bool DefaultAtom10DateTimeParser(
             XmlDateTimeData XmlDateTimeData,
             out DateTimeOffset dateTimeOffset
-        ) {
+        )
+        {
             return Rfc3339DateTimeParser(XmlDateTimeData.DateTimeString, out dateTimeOffset);
         }
 
@@ -134,7 +136,8 @@ namespace System.ServiceModel.Syndication
                     (isUtc ? DateTimeStyles.AdjustToUniversal : DateTimeStyles.None),
                     out theTime
                 )
-            ) {
+            )
+            {
                 dto = theTime;
                 return true;
             }

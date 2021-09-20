@@ -284,7 +284,8 @@ namespace Microsoft.AspNetCore.Owin
             long offset,
             long? length,
             CancellationToken cancellation
-        ) {
+        )
+        {
             object obj;
             if (Environment.TryGetValue(OwinConstants.SendFiles.SendAsync, out obj))
             {
@@ -316,7 +317,8 @@ namespace Microsoft.AspNetCore.Owin
                         )
                     )
                     && obj != null
-                ) {
+                )
+                {
                     return true;
                 }
                 return false;
@@ -331,7 +333,8 @@ namespace Microsoft.AspNetCore.Owin
 
         async Task<X509Certificate2> ITlsConnectionFeature.GetClientCertificateAsync(
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var loadAsync = Prop<Func<Task>>(OwinConstants.CommonKeys.LoadClientCertAsync);
             if (loadAsync != null)
             {

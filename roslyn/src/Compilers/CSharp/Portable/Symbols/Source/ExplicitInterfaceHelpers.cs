@@ -23,7 +23,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             Binder binder,
             ExplicitInterfaceSpecifierSyntax explicitInterfaceSpecifierOpt,
             string name
-        ) {
+        )
+        {
             TypeSymbol discardedExplicitInterfaceType;
             string discardedAliasOpt;
             string methodName = GetMemberNameAndInterfaceSymbol(
@@ -45,7 +46,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             BindingDiagnosticBag diagnostics,
             out TypeSymbol explicitInterfaceTypeOpt,
             out string aliasQualifierOpt
-        ) {
+        )
+        {
             if (explicitInterfaceSpecifierOpt == null)
             {
                 explicitInterfaceTypeOpt = null;
@@ -69,7 +71,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             string name,
             TypeSymbol explicitInterfaceTypeOpt,
             string aliasQualifierOpt
-        ) {
+        )
+        {
             if ((object)explicitInterfaceTypeOpt == null)
             {
                 return name;
@@ -131,7 +134,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             var builder = ArrayBuilder<T>.GetInstance();
             foreach (
                 var unsubstitutedPropertyImplemented in unsubstitutedExplicitInterfaceImplementations
-            ) {
+            )
+            {
                 var unsubstitutedInterfaceType = unsubstitutedPropertyImplemented.ContainingType;
                 Debug.Assert((object)unsubstitutedInterfaceType != null);
                 var explicitInterfaceType = map.SubstituteNamedType(unsubstitutedInterfaceType);
@@ -144,7 +148,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                     if (
                         candidateMember.OriginalDefinition
                         == unsubstitutedPropertyImplemented.OriginalDefinition
-                    ) {
+                    )
+                    {
                         substitutedMemberImplemented = (T)candidateMember;
                         break;
                     }
@@ -162,7 +167,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             string interfaceMethodName,
             ExplicitInterfaceSpecifierSyntax explicitInterfaceSpecifierSyntax,
             BindingDiagnosticBag diagnostics
-        ) {
+        )
+        {
             return (MethodSymbol)FindExplicitlyImplementedMember(
                 implementingMethod,
                 explicitInterfaceType,
@@ -178,7 +184,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             string interfacePropertyName,
             ExplicitInterfaceSpecifierSyntax explicitInterfaceSpecifierSyntax,
             BindingDiagnosticBag diagnostics
-        ) {
+        )
+        {
             return (PropertySymbol)FindExplicitlyImplementedMember(
                 implementingProperty,
                 explicitInterfaceType,
@@ -194,7 +201,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             string interfaceEventName,
             ExplicitInterfaceSpecifierSyntax explicitInterfaceSpecifierSyntax,
             BindingDiagnosticBag diagnostics
-        ) {
+        )
+        {
             return (EventSymbol)FindExplicitlyImplementedMember(
                 implementingEvent,
                 explicitInterfaceType,
@@ -210,7 +218,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             string interfaceMemberName,
             ExplicitInterfaceSpecifierSyntax explicitInterfaceSpecifierSyntax,
             BindingDiagnosticBag diagnostics
-        ) {
+        )
+        {
             if ((object)explicitInterfaceType == null)
             {
                 return null;
@@ -264,7 +273,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                     explicitInterfaceNamedType,
                     Symbols.SymbolEqualityComparer.ObliviousNullableModifierMatchesAny
                 )
-            ) {
+            )
+            {
                 //we'd like to highlight just the type part of the name
                 var explicitInterfaceSyntax = explicitInterfaceSpecifierSyntax.Name;
                 var location = new SourceLocation(explicitInterfaceSyntax);
@@ -275,7 +285,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                         explicitInterfaceNamedType,
                         Symbols.SymbolEqualityComparer.IgnoringNullable
                     )
-                ) {
+                )
+                {
                     diagnostics.Add(
                         ErrorCode.WRN_NullabilityMismatchInExplicitlyImplementedInterface,
                         location
@@ -311,13 +322,15 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
 
             foreach (
                 Symbol interfaceMember in explicitInterfaceNamedType.GetMembers(interfaceMemberName)
-            ) {
+            )
+            {
                 // At this point, we know that explicitInterfaceNamedType is an interface.
                 // However, metadata interface members can be static - we ignore them, as does Dev10.
                 if (
                     interfaceMember.Kind != implementingMember.Kind
                     || !interfaceMember.IsImplementableInterfaceMember()
-                ) {
+                )
+                {
                     continue;
                 }
 
@@ -326,14 +339,16 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                         implementingMember,
                         interfaceMember
                     )
-                ) {
+                )
+                {
                     foundMatchingMember = true;
                     // Cannot implement accessor directly unless
                     // the accessor is from an indexed property.
                     if (
                         interfaceMember.IsAccessor()
                         && !((MethodSymbol)interfaceMember).IsIndexedPropertyAccessor()
-                    ) {
+                    )
+                    {
                         diagnostics.Add(
                             ErrorCode.ERR_ExplicitMethodImplAccessor,
                             memberLocation,
@@ -396,7 +411,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                         ref useSiteInfo,
                         throughTypeOpt: null
                     )
-                ) {
+                )
+                {
                     diagnostics.Add(ErrorCode.ERR_BadAccess, memberLocation, implementedMember);
                 }
                 else
@@ -426,7 +442,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                                 ref useSiteInfo,
                                 throughTypeOpt: null
                             )
-                        ) {
+                        )
+                        {
                             diagnostics.Add(ErrorCode.ERR_BadAccess, memberLocation, accessor);
                         }
                     }
@@ -442,7 +459,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             this Symbol implementingMember,
             Symbol implementedMember,
             BindingDiagnosticBag diagnostics
-        ) {
+        )
+        {
             if ((object)implementedMember == null)
             {
                 return;
@@ -454,7 +472,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                     implementingMember,
                     implementedMember
                 )
-            ) {
+            )
+            {
                 // it is ok to explicitly implement with no tuple names, for compatibility with C# 6, but otherwise names should match
                 var memberLocation = implementingMember.Locations[0];
                 diagnostics.Add(
@@ -484,7 +503,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             Symbol implementingMember,
             Symbol implementedMember,
             BindingDiagnosticBag diagnostics
-        ) {
+        )
+        {
             if ((object)implementedMember == null)
             {
                 return;
@@ -497,11 +517,13 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                 Symbol collisionCandidateMember in explicitInterfaceType.GetMembers(
                     implementedMember.Name
                 )
-            ) {
+            )
+            {
                 if (
                     collisionCandidateMember.Kind == implementingMember.Kind
                     && implementedMember != collisionCandidateMember
-                ) {
+                )
+                {
                     // NOTE: we are more precise than Dev10 - we will not generate a diagnostic if the return types differ
                     // because that is enough to distinguish them in the runtime.
                     if (
@@ -510,7 +532,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                             implementedMember,
                             collisionCandidateMember
                         )
-                    ) {
+                    )
+                    {
                         bool foundMismatchedRefKind = false;
                         ImmutableArray<ParameterSymbol> implementedMemberParameters =
                             implementedMember.GetParameters();
@@ -522,7 +545,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                             if (
                                 implementedMemberParameters[i].RefKind
                                 != collisionCandidateParameters[i].RefKind
-                            ) {
+                            )
+                            {
                                 foundMismatchedRefKind = true;
                                 break;
                             }
@@ -555,7 +579,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                                 implementedMember,
                                 collisionCandidateMember
                             )
-                        ) {
+                        )
+                        {
                             // NOTE: this is different from the same error code above.  Above, the diagnostic means that
                             // the runtime behavior is ambiguous because the runtime cannot distinguish between two or
                             // more interface members.  This diagnostic means that *C#* cannot distinguish between two

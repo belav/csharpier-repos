@@ -32,7 +32,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             DiagnosticBag diagnostics,
             bool hasTrailingExpression,
             bool originalBodyNested
-        ) {
+        )
+        {
 #if DEBUG
             // We should only see a trailingExpression if we're in a Script initializer.
             Debug.Assert(!hasTrailingExpression || method.IsScriptInitializer);
@@ -46,7 +47,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                 if (
                     (method.IsImplicitlyDeclared && !method.IsScriptInitializer)
                     || Analyze(compilation, method, block, diagnostics)
-                ) {
+                )
+                {
                     block = AppendImplicitReturn(block, method, originalBodyNested);
                 }
             }
@@ -115,7 +117,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             BoundBlock body,
             MethodSymbol method,
             bool originalBodyNested
-        ) {
+        )
+        {
             if (originalBodyNested)
             {
                 var statements = body.Statements;
@@ -168,7 +171,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             MethodSymbol method,
             BoundBlock block,
             DiagnosticBag diagnostics
-        ) {
+        )
+        {
             var result = ControlFlowPass.Analyze(compilation, method, block, diagnostics);
             DefiniteAssignmentPass.Analyze(compilation, method, block, diagnostics);
             return result;

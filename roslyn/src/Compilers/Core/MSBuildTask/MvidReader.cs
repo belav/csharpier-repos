@@ -105,7 +105,8 @@ namespace Microsoft.CodeAnalysis.BuildTasks
                     && name[3] == 'i'
                     && name[4] == 'd'
                     && name[5] == '\0'
-                ) {
+                )
+                {
                     // Section: VirtualSize (4)
                     if (!ReadUInt32(reader, out uint virtualSize) || virtualSize != 16)
                     {

@@ -70,7 +70,8 @@ namespace Newtonsoft.Json.Tests.Issues
                 Type objectType,
                 object existingValue,
                 JsonSerializer serializer
-            ) {
+            )
+            {
                 var token = JToken.Load(reader, _jsonLoadSettings);
 
                 if (token.Type == JTokenType.Object)
@@ -101,7 +102,8 @@ namespace Newtonsoft.Json.Tests.Issues
                 JsonWriter writer,
                 object value,
                 JsonSerializer serializer
-            ) {
+            )
+            {
                 throw new NotSupportedException();
             }
             #endregion

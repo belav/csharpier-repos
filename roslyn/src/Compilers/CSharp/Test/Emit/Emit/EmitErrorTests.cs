@@ -259,7 +259,8 @@ public class B
             string source2,
             CSharpCompilation compilation1,
             params DiagnosticDescription[] expectedDiagnostics
-        ) {
+        )
+        {
             var compilation2 = CreateCompilation(
                 source2,
                 new MetadataReference[] { new CSharpCompilationReference(compilation1) }

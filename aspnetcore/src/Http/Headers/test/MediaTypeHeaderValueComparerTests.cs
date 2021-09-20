@@ -66,7 +66,8 @@ namespace Microsoft.Net.Http.Headers
         public void SortMediaTypeHeaderValuesByQFactor_SortsCorrectly(
             IEnumerable<string> unsorted,
             IEnumerable<string> expectedSorted
-        ) {
+        )
+        {
             var unsortedValues = MediaTypeHeaderValue.ParseList(unsorted.ToList());
             var expectedSortedValues = MediaTypeHeaderValue.ParseList(expectedSorted.ToList());
 

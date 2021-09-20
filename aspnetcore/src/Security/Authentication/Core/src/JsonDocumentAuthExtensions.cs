@@ -21,7 +21,8 @@ namespace Microsoft.AspNetCore.Authentication
             if (
                 element.TryGetProperty(key, out var property)
                 && property.ValueKind != JsonValueKind.Null
-            ) {
+            )
+            {
                 return property.ToString();
             }
 

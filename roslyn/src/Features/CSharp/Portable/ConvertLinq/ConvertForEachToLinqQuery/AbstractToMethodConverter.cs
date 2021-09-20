@@ -62,7 +62,8 @@ namespace Microsoft.CodeAnalysis.CSharp.ConvertLinq.ConvertForEachToLinqQuery
             SyntaxEditor editor,
             bool convertToQuery,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var queryOrLinqInvocationExpression = CreateQueryExpressionOrLinqInvocation(
                 _selectExpression,
                 Enumerable.Empty<SyntaxToken>(),
@@ -93,7 +94,8 @@ namespace Microsoft.CodeAnalysis.CSharp.ConvertLinq.ConvertForEachToLinqQuery
                                 lastDeclaration.Initializer.Value,
                                 cancellationToken
                             )
-                        ) {
+                        )
+                        {
                             Convert(
                                 lastDeclaration.Initializer.Value,
                                 variables.Count == 1 ? (SyntaxNode)previous : lastDeclaration
@@ -124,7 +126,8 @@ namespace Microsoft.CodeAnalysis.CSharp.ConvertLinq.ConvertForEachToLinqQuery
                                 assignmentExpression.Right,
                                 cancellationToken
                             )
-                        ) {
+                        )
+                        {
                             Convert(assignmentExpression.Right, previous);
                             return;
                         }
@@ -145,7 +148,8 @@ namespace Microsoft.CodeAnalysis.CSharp.ConvertLinq.ConvertForEachToLinqQuery
             void Convert(
                 ExpressionSyntax replacingExpression,
                 SyntaxNode nodeToRemoveIfFollowedByReturn
-            ) {
+            )
+            {
                 SyntaxTrivia[] leadingTrivia;
 
                 // Check if expressionAssigning is followed by a return statement.
@@ -166,7 +170,8 @@ namespace Microsoft.CodeAnalysis.CSharp.ConvertLinq.ConvertForEachToLinqQuery
                             cancellationToken
                         ).Symbol
                     )
-                ) {
+                )
+                {
                     // Input:
                     // var list = new List<T>(); or var counter = 0;
                     // foreach(...)
@@ -237,7 +242,8 @@ namespace Microsoft.CodeAnalysis.CSharp.ConvertLinq.ConvertForEachToLinqQuery
                         if (
                             ((ExpressionStatementSyntax)node).Expression
                             is AssignmentExpressionSyntax assignmentExpression
-                        ) {
+                        )
+                        {
                             return SyntaxNodeOrTokenExtensions.GetTrivia(
                                 assignmentExpression.Left,
                                 assignmentExpression.OperatorToken,

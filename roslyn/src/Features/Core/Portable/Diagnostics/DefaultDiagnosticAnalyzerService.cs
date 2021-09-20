@@ -35,7 +35,8 @@ namespace Microsoft.CodeAnalysis.Diagnostics
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
         public DefaultDiagnosticAnalyzerService(
             IDiagnosticUpdateSourceRegistrationService registrationService
-        ) {
+        )
+        {
             _analyzerInfoCache = new DiagnosticAnalyzerInfoCache();
             registrationService.Register(this);
         }
@@ -67,7 +68,8 @@ namespace Microsoft.CodeAnalysis.Diagnostics
             object id,
             bool includeSuppressedDiagnostics = false,
             CancellationToken cancellationToken = default
-        ) {
+        )
+        {
             // pull model not supported
             return new ValueTask<ImmutableArray<DiagnosticData>>(
                 ImmutableArray<DiagnosticData>.Empty
@@ -86,7 +88,8 @@ namespace Microsoft.CodeAnalysis.Diagnostics
             public DefaultDiagnosticIncrementalAnalyzer(
                 DefaultDiagnosticAnalyzerService service,
                 Workspace workspace
-            ) {
+            )
+            {
                 _service = service;
                 _workspace = workspace;
                 _diagnosticAnalyzerRunner = new InProcOrRemoteHostAnalyzerRunner(
@@ -100,7 +103,8 @@ namespace Microsoft.CodeAnalysis.Diagnostics
                     e.Option == InternalRuntimeDiagnosticOptions.Syntax
                     || e.Option == InternalRuntimeDiagnosticOptions.Semantic
                     || e.Option == InternalRuntimeDiagnosticOptions.ScriptSemantic
-                ) {
+                )
+                {
                     return true;
                 }
 
@@ -122,14 +126,16 @@ namespace Microsoft.CodeAnalysis.Diagnostics
             private async Task AnalyzeSyntaxOrNonSourceDocumentAsync(
                 TextDocument textDocument,
                 CancellationToken cancellationToken
-            ) {
+            )
+            {
                 Debug.Assert(textDocument.Project.Solution.Workspace == _workspace);
 
                 // right now, there is no way to observe diagnostics for closed file.
                 if (
                     !_workspace.IsDocumentOpen(textDocument.Id)
                     || !_workspace.Options.GetOption(InternalRuntimeDiagnosticOptions.Syntax)
-                ) {
+                )
+                {
                     return;
                 }
 
@@ -142,7 +148,8 @@ namespace Microsoft.CodeAnalysis.Diagnostics
                 SyntaxNode bodyOpt,
                 InvocationReasons reasons,
                 CancellationToken cancellationToken
-            ) {
+            )
+            {
                 Debug.Assert(document.Project.Solution.Workspace == _workspace);
 
                 if (!IsSemanticAnalysisOn())
@@ -177,7 +184,8 @@ namespace Microsoft.CodeAnalysis.Diagnostics
                 TextDocument document,
                 AnalysisKind kind,
                 CancellationToken cancellationToken
-            ) {
+            )
+            {
                 var diagnosticData = await GetDiagnosticsAsync(document, kind, cancellationToken)
                     .ConfigureAwait(false);
 
@@ -209,7 +217,8 @@ namespace Microsoft.CodeAnalysis.Diagnostics
                 TextDocument document,
                 AnalysisKind kind,
                 CancellationToken cancellationToken
-            ) {
+            )
+            {
                 var loadDiagnostic = await document.State.GetLoadDiagnosticAsync(cancellationToken)
                     .ConfigureAwait(false);
                 if (loadDiagnostic != null)
@@ -260,7 +269,8 @@ namespace Microsoft.CodeAnalysis.Diagnostics
             private static ImmutableArray<DiagnosticAnalyzer> GetAnalyzers(
                 HostDiagnosticAnalyzers hostAnalyzers,
                 Project project
-            ) {
+            )
+            {
                 // C# or VB document that supports compiler
                 var compilerAnalyzer = hostAnalyzers.GetCompilerDiagnosticAnalyzer(
                     project.Language
@@ -279,7 +289,8 @@ namespace Microsoft.CodeAnalysis.Diagnostics
             public Task RemoveDocumentAsync(
                 DocumentId documentId,
                 CancellationToken cancellationToken
-            ) {
+            )
+            {
                 // a file is removed from a solution
                 //
                 // here syntax and semantic indicates type of errors not where it is originated from.
@@ -301,7 +312,8 @@ namespace Microsoft.CodeAnalysis.Diagnostics
             public Task NonSourceDocumentResetAsync(
                 TextDocument textDocument,
                 CancellationToken cancellationToken
-            ) {
+            )
+            {
                 // no closed file diagnostic and file is not opened, remove any existing diagnostics
                 return RemoveDocumentAsync(textDocument.Id, cancellationToken);
             }

@@ -39,7 +39,8 @@ namespace System.DirectoryServices.AccountManagement
             DirectorySearcher primaryGroupMembersSearcher,
             bool recursive,
             ADStoreCtx storeCtx
-        ) {
+        )
+        {
             GlobalDebug.WriteLineIf(
                 GlobalDebug.Info,
                 "ADDNLinkedAttrSet",
@@ -89,7 +90,8 @@ namespace System.DirectoryServices.AccountManagement
             DirectorySearcher primaryGroupMembersSearcher,
             bool recursive,
             ADStoreCtx storeCtx
-        ) {
+        )
+        {
             GlobalDebug.WriteLineIf(
                 GlobalDebug.Info,
                 "ADDNLinkedAttrSet",
@@ -362,7 +364,8 @@ namespace System.DirectoryServices.AccountManagement
                         && (!ADUtils.IsOfObjectClass(currentSR, "user"))
                         && // includes computer as well
                         (!ADUtils.IsOfObjectClass(currentSR, "foreignSecurityPrincipal"))
-                    ) {
+                    )
+                    {
                         // We found a member, but it's not a principal type.  Skip it.
                         GlobalDebug.WriteLineIf(
                             GlobalDebug.Info,
@@ -392,7 +395,8 @@ namespace System.DirectoryServices.AccountManagement
                     }
                     else if (
                         _recursive && ADUtils.IsOfObjectClass(currentSR, "foreignSecurityPrincipal")
-                    ) {
+                    )
+                    {
                         GlobalDebug.WriteLineIf(
                             GlobalDebug.Info,
                             "ADDNLinkedAttrSet",
@@ -404,7 +408,8 @@ namespace System.DirectoryServices.AccountManagement
                             !_usersVisited.ContainsKey(
                                 currentSR.Properties["distinguishedName"][0].ToString()
                             )
-                        ) {
+                        )
+                        {
                             // The FPO might represent a group, in which case we should recursively enumerate its
                             // membership.  So save it off for later processing.
                             _foreignMembersCurrentGroup.Add(currentSR.GetDirectoryEntry());
@@ -431,7 +436,8 @@ namespace System.DirectoryServices.AccountManagement
                             !_usersVisited.ContainsKey(
                                 currentSR.Properties["distinguishedName"][0].ToString()
                             )
-                        ) {
+                        )
+                        {
                             this.current = currentSR;
                             _currentForeignDE = null;
                             _currentForeignPrincipal = null;
@@ -592,7 +598,8 @@ namespace System.DirectoryServices.AccountManagement
                             && (!ADUtils.IsOfObjectClass(memberDE, "user"))
                             && // includes computer as well
                             (!ADUtils.IsOfObjectClass(memberDE, "foreignSecurityPrincipal"))
-                        ) {
+                        )
+                        {
                             // We found a member, but it's not a principal type.  Skip it.
                             GlobalDebug.WriteLineIf(
                                 GlobalDebug.Info,
@@ -626,7 +633,8 @@ namespace System.DirectoryServices.AccountManagement
                         else if (
                             _recursive
                             && ADUtils.IsOfObjectClass(memberDE, "foreignSecurityPrincipal")
-                        ) {
+                        )
+                        {
                             GlobalDebug.WriteLineIf(
                                 GlobalDebug.Info,
                                 "ADDNLinkedAttrSet",
@@ -638,7 +646,8 @@ namespace System.DirectoryServices.AccountManagement
                                 !_usersVisited.ContainsKey(
                                     memberDE.Properties["distinguishedName"][0].ToString()
                                 )
-                            ) {
+                            )
+                            {
                                 // The FPO might represent a group, in which case we should recursively enumerate its
                                 // membership.  So save it off for later processing.
                                 _foreignMembersCurrentGroup.Add(memberDE);
@@ -666,7 +675,8 @@ namespace System.DirectoryServices.AccountManagement
                                 !_usersVisited.ContainsKey(
                                     memberDE.Properties["distinguishedName"][0].ToString()
                                 )
-                            ) {
+                            )
+                            {
                                 this.current = memberDE;
                                 _currentForeignDE = null;
                                 _currentForeignPrincipal = null;
@@ -963,7 +973,8 @@ namespace System.DirectoryServices.AccountManagement
                             _foreignGroups[0].Context.ServerInformation.OsVersion
                                 == DomainControllerMode.Win2k
                             || _foreignGroups[0].GroupScope != GroupScope.Global
-                        ) {
+                        )
+                        {
                             _expansionMode = ExpansionMode.Enum;
                             return ExpandForeignGroupEnumerator();
                         }
@@ -1036,7 +1047,8 @@ namespace System.DirectoryServices.AccountManagement
                         !_usersVisited.ContainsKey(
                             foreignDE.Properties["distinguishedName"][0].ToString()
                         )
-                    ) {
+                    )
+                    {
                         _usersVisited.Add(
                             foreignDE.Properties["distinguishedName"][0].ToString(),
                             true

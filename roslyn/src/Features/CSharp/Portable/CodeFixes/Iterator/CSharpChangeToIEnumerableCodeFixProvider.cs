@@ -55,7 +55,8 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeFixes.Iterator
             Document document,
             Diagnostic diagnostics,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var model = await document.GetSemanticModelAsync(cancellationToken)
                 .ConfigureAwait(false);
             var methodSymbol = model.GetDeclaredSymbol(node, cancellationToken) as IMethodSymbol;
@@ -72,7 +73,8 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeFixes.Iterator
                     out var ienumerableSymbol,
                     out var ienumerableGenericSymbol
                 )
-            ) {
+            )
+            {
                 return null;
             }
 
@@ -153,7 +155,8 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeFixes.Iterator
             SemanticModel model,
             out INamedTypeSymbol ienumerableSymbol,
             out INamedTypeSymbol ienumerableGenericSymbol
-        ) {
+        )
+        {
             ienumerableSymbol = model.Compilation.GetTypeByMetadataName(
                 typeof(IEnumerable).FullName
             );

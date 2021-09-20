@@ -39,7 +39,8 @@ namespace SocialWeather
             if (
                 _formatters.TryGetValue(formatType, out typeFormatters)
                 && typeFormatters.TryGetValue(typeof(T), out typeFormatterType)
-            ) {
+            )
+            {
                 return (IStreamFormatter<T>)_serviceProvider.GetRequiredService(typeFormatterType);
             }
 

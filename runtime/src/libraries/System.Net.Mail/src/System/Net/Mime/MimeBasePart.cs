@@ -37,7 +37,8 @@ namespace System.Net.Mime
             Encoding? encoding,
             bool base64Encoding,
             int headerLength
-        ) {
+        )
+        {
             //no need to encode if it's pure ascii
             if (IsAscii(value, false))
             {
@@ -251,7 +252,8 @@ namespace System.Net.Mime
             AsyncCallback? callback,
             bool allowUnicode,
             object? state
-        ) {
+        )
+        {
             throw new NotImplementedException();
         }
 
@@ -286,11 +288,8 @@ namespace System.Net.Mime
 
         internal sealed class MimePartAsyncResult : LazyAsyncResult
         {
-            internal MimePartAsyncResult(
-                MimeBasePart part,
-                object? state,
-                AsyncCallback? callback
-            ) : base(part, state, callback) { }
+            internal MimePartAsyncResult(MimeBasePart part, object? state, AsyncCallback? callback)
+                : base(part, state, callback) { }
         }
     }
 }

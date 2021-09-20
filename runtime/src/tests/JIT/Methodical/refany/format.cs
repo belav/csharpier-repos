@@ -237,7 +237,8 @@ namespace JitTest
             ref bool b,
             ref DateTime t,
             ref PlatformID pid
-        ) {
+        )
+        {
             Test("{%d}", __makeref(d), "{20}");
             Test("{%u}", __makeref(u), "{21}");
             Test("{%ld}", __makeref(l), "{22}");

@@ -90,7 +90,8 @@ namespace System.Net.WebSockets.Client.Tests
                     default(TimeSpan),
                     proxy
                 )
-            ) {
+            )
+            {
                 var cts = new CancellationTokenSource(TimeOutMilliseconds);
                 Assert.Equal(WebSocketState.Open, cws.State);
 
@@ -217,7 +218,8 @@ namespace System.Net.WebSockets.Client.Tests
         [SkipOnPlatform(TestPlatforms.Browser, "Certificates not supported on browser")]
         public async Task RemoteCertificateValidationCallback_PassedRemoteCertificateInfo(
             bool secure
-        ) {
+        )
+        {
             if (PlatformDetection.IsWindows7)
             {
                 return; // see https://github.com/dotnet/runtime/issues/1491#issuecomment-376392057 for more details
@@ -276,7 +278,8 @@ namespace System.Net.WebSockets.Client.Tests
             using (
                 X509Certificate2 clientCert =
                     Test.Common.Configuration.Certificates.GetClientCertificate()
-            ) {
+            )
+            {
                 await LoopbackServer.CreateClientAndServerAsync(
                     async uri =>
                     {

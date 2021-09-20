@@ -70,7 +70,8 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation.NativeHosting
             bool validPath,
             bool validType,
             bool validMethod
-        ) {
+        )
+        {
             var appProject = sharedState.ApplicationFixture.TestProject;
             var componentProject = sharedState.ComponentWithNoDependenciesFixture.TestProject;
             string[] args =
@@ -132,7 +133,8 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation.NativeHosting
         public void CallDelegateOnComponentContext_MultipleEntryPoints(
             int callCount,
             bool callUnmanaged
-        ) {
+        )
+        {
             var componentProject = sharedState.ComponentWithNoDependenciesFixture.TestProject;
             string[] baseArgs =
             {
@@ -303,7 +305,8 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation.NativeHosting
             string methodName,
             int componentCallCount,
             int returnValue
-        ) {
+        )
+        {
             return assertion.ExecuteComponentEntryPoint(methodName, componentCallCount)
                 .And.HaveStdOutContaining(
                     $"{methodName} delegate result: 0x{returnValue.ToString("x")}"
@@ -314,7 +317,8 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation.NativeHosting
             this CommandResultAssertions assertion,
             string methodName,
             int componentCallCount
-        ) {
+        )
+        {
             var constraint = assertion.ExecuteComponentEntryPoint(methodName, componentCallCount);
             if (RuntimeInformation.IsOSPlatform(OSPlatform.Windows))
             {
@@ -336,7 +340,8 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation.NativeHosting
             this CommandResultAssertions assertion,
             string methodName,
             int componentCallCount
-        ) {
+        )
+        {
             return assertion.HaveStdOutContaining(
                 $"Called {methodName}(0xdeadbeef, 42) - component call count: {componentCallCount}"
             );

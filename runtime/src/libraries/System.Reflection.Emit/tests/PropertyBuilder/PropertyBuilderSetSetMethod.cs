@@ -114,7 +114,8 @@ namespace System.Reflection.Emit.Tests
             Type returnType,
             Type[] paramTypes,
             FieldBuilder field
-        ) {
+        )
+        {
             MethodBuilder method = type.DefineMethod(
                 methodName,
                 methodAttr,

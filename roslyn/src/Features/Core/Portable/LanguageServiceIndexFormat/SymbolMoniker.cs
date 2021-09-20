@@ -30,7 +30,8 @@ namespace Microsoft.CodeAnalysis.LanguageServerIndexFormat
                 || symbol.Kind == SymbolKind.RangeVariable
                 || symbol.Kind == SymbolKind.Label
                 || symbol.Kind == SymbolKind.Alias
-            ) {
+            )
+            {
                 return null;
             }
 

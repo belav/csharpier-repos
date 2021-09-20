@@ -267,7 +267,8 @@ namespace System.Xml.Serialization
             string? elementName,
             string? ns,
             System.Xml.Serialization.XmlReflectionMember[] members
-        ) {
+        )
+        {
             throw null;
         }
         [System.Diagnostics.CodeAnalysis.RequiresUnreferencedCodeAttribute(
@@ -279,7 +280,8 @@ namespace System.Xml.Serialization
             System.Xml.Serialization.XmlReflectionMember[] members,
             bool hasWrapperElement,
             bool writeAccessors
-        ) {
+        )
+        {
             throw null;
         }
         [System.Diagnostics.CodeAnalysis.RequiresUnreferencedCodeAttribute(
@@ -292,7 +294,8 @@ namespace System.Xml.Serialization
             bool hasWrapperElement,
             bool writeAccessors,
             bool validate
-        ) {
+        )
+        {
             throw null;
         }
         [System.Diagnostics.CodeAnalysis.RequiresUnreferencedCodeAttribute(
@@ -306,7 +309,8 @@ namespace System.Xml.Serialization
             bool writeAccessors,
             bool validate,
             System.Xml.Serialization.XmlMappingAccess access
-        ) {
+        )
+        {
             throw null;
         }
         [System.Diagnostics.CodeAnalysis.RequiresUnreferencedCodeAttribute(
@@ -322,7 +326,8 @@ namespace System.Xml.Serialization
         public System.Xml.Serialization.XmlTypeMapping ImportTypeMapping(
             System.Type type,
             string? defaultNamespace
-        ) {
+        )
+        {
             throw null;
         }
         [System.Diagnostics.CodeAnalysis.RequiresUnreferencedCodeAttribute(
@@ -904,7 +909,8 @@ namespace System.Xml.Serialization
             string? ns,
             System.Xml.Serialization.XmlReflectionMember[] members,
             bool hasWrapperElement
-        ) {
+        )
+        {
             throw null;
         }
         [System.Diagnostics.CodeAnalysis.RequiresUnreferencedCodeAttribute(
@@ -916,7 +922,8 @@ namespace System.Xml.Serialization
             System.Xml.Serialization.XmlReflectionMember[] members,
             bool hasWrapperElement,
             bool rpc
-        ) {
+        )
+        {
             throw null;
         }
         [System.Diagnostics.CodeAnalysis.RequiresUnreferencedCodeAttribute(
@@ -929,7 +936,8 @@ namespace System.Xml.Serialization
             bool hasWrapperElement,
             bool rpc,
             bool openModel
-        ) {
+        )
+        {
             throw null;
         }
         [System.Diagnostics.CodeAnalysis.RequiresUnreferencedCodeAttribute(
@@ -943,7 +951,8 @@ namespace System.Xml.Serialization
             bool rpc,
             bool openModel,
             System.Xml.Serialization.XmlMappingAccess access
-        ) {
+        )
+        {
             throw null;
         }
         [System.Diagnostics.CodeAnalysis.RequiresUnreferencedCodeAttribute(
@@ -959,7 +968,8 @@ namespace System.Xml.Serialization
         public System.Xml.Serialization.XmlTypeMapping ImportTypeMapping(
             System.Type type,
             string? defaultNamespace
-        ) {
+        )
+        {
             throw null;
         }
         [System.Diagnostics.CodeAnalysis.RequiresUnreferencedCodeAttribute(
@@ -968,7 +978,8 @@ namespace System.Xml.Serialization
         public System.Xml.Serialization.XmlTypeMapping ImportTypeMapping(
             System.Type type,
             System.Xml.Serialization.XmlRootAttribute? root
-        ) {
+        )
+        {
             throw null;
         }
         [System.Diagnostics.CodeAnalysis.RequiresUnreferencedCodeAttribute(
@@ -978,7 +989,8 @@ namespace System.Xml.Serialization
             System.Type type,
             System.Xml.Serialization.XmlRootAttribute? root,
             string? defaultNamespace
-        ) {
+        )
+        {
             throw null;
         }
         [System.Diagnostics.CodeAnalysis.RequiresUnreferencedCodeAttribute(
@@ -1065,7 +1077,8 @@ namespace System.Xml.Serialization
         ) { }
         public System.Xml.XmlQualifiedName? ExportTypeMapping(
             System.Xml.Serialization.XmlMembersMapping xmlMembersMapping
-        ) {
+        )
+        {
             throw null;
         }
         public void ExportTypeMapping(System.Xml.Serialization.XmlTypeMapping xmlTypeMapping) { }
@@ -1089,7 +1102,8 @@ namespace System.Xml.Serialization
         public System.Xml.Serialization.XmlMembersMapping? ImportAnyType(
             System.Xml.XmlQualifiedName typeName,
             string elementName
-        ) {
+        )
+        {
             throw null;
         }
         [System.Diagnostics.CodeAnalysis.RequiresUnreferencedCodeAttribute(
@@ -1098,7 +1112,8 @@ namespace System.Xml.Serialization
         public System.Xml.Serialization.XmlTypeMapping ImportDerivedTypeMapping(
             System.Xml.XmlQualifiedName name,
             System.Type? baseType
-        ) {
+        )
+        {
             throw null;
         }
         [System.Diagnostics.CodeAnalysis.RequiresUnreferencedCodeAttribute(
@@ -1108,7 +1123,8 @@ namespace System.Xml.Serialization
             System.Xml.XmlQualifiedName name,
             System.Type? baseType,
             bool baseTypeCanBeIndirect
-        ) {
+        )
+        {
             throw null;
         }
         [System.Diagnostics.CodeAnalysis.RequiresUnreferencedCodeAttribute(
@@ -1118,7 +1134,8 @@ namespace System.Xml.Serialization
             string name,
             string? ns,
             System.Xml.Serialization.SoapSchemaMember[] members
-        ) {
+        )
+        {
             throw null;
         }
         [System.Diagnostics.CodeAnalysis.RequiresUnreferencedCodeAttribute(
@@ -1126,7 +1143,8 @@ namespace System.Xml.Serialization
         )]
         public System.Xml.Serialization.XmlMembersMapping ImportMembersMapping(
             System.Xml.XmlQualifiedName name
-        ) {
+        )
+        {
             throw null;
         }
         [System.Diagnostics.CodeAnalysis.RequiresUnreferencedCodeAttribute(
@@ -1134,7 +1152,8 @@ namespace System.Xml.Serialization
         )]
         public System.Xml.Serialization.XmlMembersMapping ImportMembersMapping(
             System.Xml.XmlQualifiedName[] names
-        ) {
+        )
+        {
             throw null;
         }
         [System.Diagnostics.CodeAnalysis.RequiresUnreferencedCodeAttribute(
@@ -1144,7 +1163,8 @@ namespace System.Xml.Serialization
             System.Xml.XmlQualifiedName[] names,
             System.Type? baseType,
             bool baseTypeCanBeIndirect
-        ) {
+        )
+        {
             throw null;
         }
         [System.Diagnostics.CodeAnalysis.RequiresUnreferencedCodeAttribute(
@@ -1152,7 +1172,8 @@ namespace System.Xml.Serialization
         )]
         public System.Xml.Serialization.XmlTypeMapping ImportSchemaType(
             System.Xml.XmlQualifiedName typeName
-        ) {
+        )
+        {
             throw null;
         }
         [System.Diagnostics.CodeAnalysis.RequiresUnreferencedCodeAttribute(
@@ -1161,7 +1182,8 @@ namespace System.Xml.Serialization
         public System.Xml.Serialization.XmlTypeMapping ImportSchemaType(
             System.Xml.XmlQualifiedName typeName,
             System.Type? baseType
-        ) {
+        )
+        {
             throw null;
         }
         [System.Diagnostics.CodeAnalysis.RequiresUnreferencedCodeAttribute(
@@ -1171,7 +1193,8 @@ namespace System.Xml.Serialization
             System.Xml.XmlQualifiedName typeName,
             System.Type? baseType,
             bool baseTypeCanBeIndirect
-        ) {
+        )
+        {
             throw null;
         }
         [System.Diagnostics.CodeAnalysis.RequiresUnreferencedCodeAttribute(
@@ -1179,7 +1202,8 @@ namespace System.Xml.Serialization
         )]
         public System.Xml.Serialization.XmlTypeMapping ImportTypeMapping(
             System.Xml.XmlQualifiedName name
-        ) {
+        )
+        {
             throw null;
         }
     }
@@ -1316,7 +1340,8 @@ namespace System.Xml.Serialization
             string? nsBase,
             string? clrDerived,
             string? clrBase
-        ) {
+        )
+        {
             throw null;
         }
         protected System.Exception CreateCtorHasSecurityException(string typeName)
@@ -1335,14 +1360,16 @@ namespace System.Xml.Serialization
             System.Type type,
             object? value,
             string? id
-        ) {
+        )
+        {
             throw null;
         }
         protected System.Exception CreateMissingIXmlSerializableType(
             string? name,
             string? ns,
             string? clrType
-        ) {
+        )
+        {
             throw null;
         }
         protected System.Exception CreateReadOnlyCollectionException(string name)
@@ -1352,7 +1379,8 @@ namespace System.Xml.Serialization
         protected System.Exception CreateUnknownConstantException(
             string? value,
             System.Type enumType
-        ) {
+        )
+        {
             throw null;
         }
         protected System.Exception CreateUnknownNodeException()
@@ -1413,7 +1441,8 @@ namespace System.Xml.Serialization
         }
         protected bool ReadReference(
             [System.Diagnostics.CodeAnalysis.NotNullWhenAttribute(true)] out string? fixupReference
-        ) {
+        )
+        {
             throw null;
         }
         [System.Diagnostics.CodeAnalysis.RequiresUnreferencedCodeAttribute(
@@ -1442,7 +1471,8 @@ namespace System.Xml.Serialization
             string? ns,
             bool elementCanBeType,
             out string? fixupReference
-        ) {
+        )
+        {
             throw null;
         }
         [System.Diagnostics.CodeAnalysis.RequiresUnreferencedCodeAttribute(
@@ -1452,7 +1482,8 @@ namespace System.Xml.Serialization
             string? name,
             string? ns,
             out string? fixupReference
-        ) {
+        )
+        {
             throw null;
         }
         [System.Diagnostics.CodeAnalysis.RequiresUnreferencedCodeAttribute(
@@ -1464,13 +1495,15 @@ namespace System.Xml.Serialization
         }
         protected System.Xml.Serialization.IXmlSerializable ReadSerializable(
             System.Xml.Serialization.IXmlSerializable serializable
-        ) {
+        )
+        {
             throw null;
         }
         protected System.Xml.Serialization.IXmlSerializable ReadSerializable(
             System.Xml.Serialization.IXmlSerializable serializable,
             bool wrappedAny
-        ) {
+        )
+        {
             throw null;
         }
         [return: System.Diagnostics.CodeAnalysis.NotNullIfNotNullAttribute("value")]
@@ -1509,7 +1542,8 @@ namespace System.Xml.Serialization
             int length,
             System.Type elementType,
             bool isNullable
-        ) {
+        )
+        {
             throw null;
         }
         protected byte[]? ToByteArrayBase64(bool isNull)
@@ -1659,7 +1693,8 @@ namespace System.Xml.Serialization
             string identifier,
             string name,
             string ns
-        ) {
+        )
+        {
             throw null;
         }
         protected System.Exception CreateInvalidAnyTypeException(object o)
@@ -1673,7 +1708,8 @@ namespace System.Xml.Serialization
         protected System.Exception CreateInvalidChoiceIdentifierValueException(
             string type,
             string identifier
-        ) {
+        )
+        {
             throw null;
         }
         protected System.Exception CreateInvalidEnumValueException(object value, string typeName)
@@ -1684,7 +1720,8 @@ namespace System.Xml.Serialization
             string value,
             string elementName,
             string enumValue
-        ) {
+        )
+        {
             throw null;
         }
         protected System.Exception CreateUnknownAnyElementException(string name, string ns)
@@ -1765,7 +1802,8 @@ namespace System.Xml.Serialization
         protected string? FromXmlQualifiedName(
             System.Xml.XmlQualifiedName? xmlQualifiedName,
             bool ignoreEmpty
-        ) {
+        )
+        {
             throw null;
         }
         [System.Diagnostics.CodeAnalysis.RequiresUnreferencedCodeAttribute(
@@ -2103,7 +2141,8 @@ namespace System.Xml.Serialization
             System.Xml.XmlReader xmlReader,
             string? encodingStyle,
             System.Xml.Serialization.XmlDeserializationEvents events
-        ) {
+        )
+        {
             throw null;
         }
         [System.Diagnostics.CodeAnalysis.RequiresUnreferencedCodeAttribute(
@@ -2112,7 +2151,8 @@ namespace System.Xml.Serialization
         public object? Deserialize(
             System.Xml.XmlReader xmlReader,
             System.Xml.Serialization.XmlDeserializationEvents events
-        ) {
+        )
+        {
             throw null;
         }
         [System.Diagnostics.CodeAnalysis.RequiresUnreferencedCodeAttribute(
@@ -2120,7 +2160,8 @@ namespace System.Xml.Serialization
         )]
         public static System.Xml.Serialization.XmlSerializer[] FromMappings(
             System.Xml.Serialization.XmlMapping[]? mappings
-        ) {
+        )
+        {
             throw null;
         }
         [System.Diagnostics.CodeAnalysis.RequiresUnreferencedCodeAttribute(
@@ -2129,7 +2170,8 @@ namespace System.Xml.Serialization
         public static System.Xml.Serialization.XmlSerializer[] FromMappings(
             System.Xml.Serialization.XmlMapping[]? mappings,
             System.Type? type
-        ) {
+        )
+        {
             throw null;
         }
         [System.Diagnostics.CodeAnalysis.RequiresUnreferencedCodeAttribute(
@@ -2146,7 +2188,8 @@ namespace System.Xml.Serialization
         public static string GetXmlSerializerAssemblyName(
             System.Type type,
             string? defaultNamespace
-        ) {
+        )
+        {
             throw null;
         }
         [System.Diagnostics.CodeAnalysis.RequiresUnreferencedCodeAttribute(
@@ -2248,7 +2291,8 @@ namespace System.Xml.Serialization
         public System.Xml.Serialization.XmlSerializer CreateSerializer(
             System.Type type,
             string? defaultNamespace
-        ) {
+        )
+        {
             throw null;
         }
         [System.Diagnostics.CodeAnalysis.RequiresUnreferencedCodeAttribute(
@@ -2257,7 +2301,8 @@ namespace System.Xml.Serialization
         public System.Xml.Serialization.XmlSerializer CreateSerializer(
             System.Type type,
             System.Type[]? extraTypes
-        ) {
+        )
+        {
             throw null;
         }
         [System.Diagnostics.CodeAnalysis.RequiresUnreferencedCodeAttribute(
@@ -2266,7 +2311,8 @@ namespace System.Xml.Serialization
         public System.Xml.Serialization.XmlSerializer CreateSerializer(
             System.Type type,
             System.Xml.Serialization.XmlAttributeOverrides? overrides
-        ) {
+        )
+        {
             throw null;
         }
         [System.Diagnostics.CodeAnalysis.RequiresUnreferencedCodeAttribute(
@@ -2278,7 +2324,8 @@ namespace System.Xml.Serialization
             System.Type[]? extraTypes,
             System.Xml.Serialization.XmlRootAttribute? root,
             string? defaultNamespace
-        ) {
+        )
+        {
             throw null;
         }
         [System.Diagnostics.CodeAnalysis.RequiresUnreferencedCodeAttribute(
@@ -2291,7 +2338,8 @@ namespace System.Xml.Serialization
             System.Xml.Serialization.XmlRootAttribute? root,
             string? defaultNamespace,
             string? location
-        ) {
+        )
+        {
             throw null;
         }
         [System.Diagnostics.CodeAnalysis.RequiresUnreferencedCodeAttribute(
@@ -2300,7 +2348,8 @@ namespace System.Xml.Serialization
         public System.Xml.Serialization.XmlSerializer CreateSerializer(
             System.Type type,
             System.Xml.Serialization.XmlRootAttribute? root
-        ) {
+        )
+        {
             throw null;
         }
         [System.Diagnostics.CodeAnalysis.RequiresUnreferencedCodeAttribute(
@@ -2308,7 +2357,8 @@ namespace System.Xml.Serialization
         )]
         public System.Xml.Serialization.XmlSerializer CreateSerializer(
             System.Xml.Serialization.XmlTypeMapping xmlTypeMapping
-        ) {
+        )
+        {
             throw null;
         }
     }

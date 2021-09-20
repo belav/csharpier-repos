@@ -530,7 +530,8 @@ namespace System.ComponentModel.Composition
             string typeIdentity,
             string[] metadataKeys,
             Type[] metadataTypes
-        ) {
+        )
+        {
             Dictionary<string, Type> requiredMetadata = new Dictionary<string, Type>();
             Assert.Equal(metadataKeys.Length, metadataTypes.Length);
             for (int i = 0; i < metadataKeys.Length; i++)
@@ -566,7 +567,8 @@ namespace System.ComponentModel.Composition
             public DerivedContractBasedImportDefinition(
                 string contractName,
                 IEnumerable<KeyValuePair<string, Type>> requiredMetadata
-            ) {
+            )
+            {
                 _contractName = contractName;
                 _requiredMetadata = requiredMetadata;
             }

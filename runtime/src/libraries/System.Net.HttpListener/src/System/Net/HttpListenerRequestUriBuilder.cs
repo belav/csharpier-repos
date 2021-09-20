@@ -53,7 +53,8 @@ namespace System.Net
             string cookedUriHost,
             string cookedUriPath,
             string cookedUriQuery
-        ) {
+        )
+        {
             Debug.Assert(!string.IsNullOrEmpty(rawUri), "Empty raw URL.");
             Debug.Assert(!string.IsNullOrEmpty(cookedUriScheme), "Empty cooked URL scheme.");
             Debug.Assert(!string.IsNullOrEmpty(cookedUriHost), "Empty cooked URL host.");
@@ -72,7 +73,8 @@ namespace System.Net
             string cookedUriHost,
             string cookedUriPath,
             string cookedUriQuery
-        ) {
+        )
+        {
             HttpListenerRequestUriBuilder builder = new HttpListenerRequestUriBuilder(
                 rawUri,
                 cookedUriScheme,
@@ -262,7 +264,8 @@ namespace System.Net
                             !AppendUnicodeCodePointValuePercentEncoded(
                                 _rawPath.Substring(index + 1, 4)
                             )
-                        ) {
+                        )
+                        {
                             return ParsingResult.InvalidString;
                         }
                         index += 5;
@@ -275,7 +278,8 @@ namespace System.Net
                                 encoding,
                                 _rawPath.Substring(index, 2)
                             )
-                        ) {
+                        )
+                        {
                             return ParsingResult.InvalidString;
                         }
                         index += 2;
@@ -360,7 +364,8 @@ namespace System.Net
         private bool AddPercentEncodedOctetToRawOctetsList(
             Encoding encoding,
             string escapedCharacter
-        ) {
+        )
+        {
             byte encodedValue;
             if (!byte.TryParse(escapedCharacter, NumberStyles.HexNumber, null, out encodedValue))
             {
@@ -440,7 +445,8 @@ namespace System.Net
         private static void AppendOctetsPercentEncoded(
             StringBuilder target,
             IEnumerable<byte> octets
-        ) {
+        )
+        {
             foreach (byte octet in octets)
             {
                 target.Append('%');

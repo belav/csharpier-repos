@@ -192,7 +192,8 @@ namespace Microsoft.Diagnostics.Tools.Pgo.TypeRefTypeSystem
                 TypeDesc ResolveTypeRefForPeInfo(
                     EntityHandle handle,
                     NotFoundBehavior notFoundBehavior
-                ) {
+                )
+                {
                     Debug.Assert(notFoundBehavior == NotFoundBehavior.ReturnNull);
                     TypeRefTypeSystemType type = null;
                     if (handle.Kind == HandleKind.TypeReference)

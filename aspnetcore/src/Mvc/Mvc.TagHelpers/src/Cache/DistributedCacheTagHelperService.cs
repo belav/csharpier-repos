@@ -51,7 +51,8 @@ namespace Microsoft.AspNetCore.Mvc.TagHelpers.Cache
             IDistributedCacheTagHelperFormatter formatter,
             HtmlEncoder HtmlEncoder,
             ILoggerFactory loggerFactory
-        ) {
+        )
+        {
             if (storage == null)
             {
                 throw new ArgumentNullException(nameof(storage));
@@ -84,7 +85,8 @@ namespace Microsoft.AspNetCore.Mvc.TagHelpers.Cache
             TagHelperOutput output,
             CacheTagKey key,
             DistributedCacheEntryOptions options
-        ) {
+        )
+        {
             IHtmlContent content = null;
 
             while (content == null)

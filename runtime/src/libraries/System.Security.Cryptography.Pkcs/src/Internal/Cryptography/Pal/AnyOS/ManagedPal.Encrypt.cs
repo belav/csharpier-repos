@@ -21,7 +21,8 @@ namespace Internal.Cryptography.Pal.AnyOS
             AlgorithmIdentifier contentEncryptionAlgorithm,
             X509Certificate2Collection originatorCerts,
             CryptographicAttributeObjectCollection unprotectedAttributes
-        ) {
+        )
+        {
             byte[] encryptedContent = EncryptContent(
                 contentInfo,
                 contentEncryptionAlgorithm,
@@ -62,7 +63,8 @@ namespace Internal.Cryptography.Pal.AnyOS
             byte[] encryptedContent,
             byte[] cek,
             byte[] parameterBytes
-        ) {
+        )
+        {
             EnvelopedDataAsn envelopedData = new EnvelopedDataAsn
             {
                 EncryptedContentInfo =
@@ -141,7 +143,8 @@ namespace Internal.Cryptography.Pal.AnyOS
                 envelopedData.OriginatorInfo != null
                 || !allRecipientsVersion0
                 || envelopedData.UnprotectedAttributes != null
-            ) {
+            )
+            {
                 envelopedData.Version = 2;
             }
 
@@ -155,7 +158,8 @@ namespace Internal.Cryptography.Pal.AnyOS
             AlgorithmIdentifier contentEncryptionAlgorithm,
             out byte[] cek,
             out byte[] parameterBytes
-        ) {
+        )
+        {
             using (SymmetricAlgorithm alg = OpenAlgorithm(contentEncryptionAlgorithm))
             using (ICryptoTransform encryptor = alg.CreateEncryptor())
             {

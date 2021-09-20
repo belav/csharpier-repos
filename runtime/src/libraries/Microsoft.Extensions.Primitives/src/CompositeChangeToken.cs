@@ -56,7 +56,8 @@ namespace Microsoft.Extensions.Primitives
                 if (
                     _cancellationTokenSource != null
                     && _cancellationTokenSource.Token.IsCancellationRequested
-                ) {
+                )
+                {
                     return true;
                 }
 

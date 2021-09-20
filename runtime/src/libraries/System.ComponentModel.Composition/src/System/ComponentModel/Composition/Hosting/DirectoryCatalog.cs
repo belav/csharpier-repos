@@ -272,7 +272,8 @@ namespace System.ComponentModel.Composition.Hosting
             string path,
             string searchPattern,
             ICompositionElement definitionOrigin
-        ) {
+        )
+        {
             Requires.NotNullOrEmpty(path, nameof(path));
             Requires.NotNullOrEmpty(searchPattern, nameof(searchPattern));
             Requires.NotNull(definitionOrigin, nameof(definitionOrigin));
@@ -324,7 +325,8 @@ namespace System.ComponentModel.Composition.Hosting
             string path,
             string searchPattern,
             ReflectionContext reflectionContext
-        ) {
+        )
+        {
             Requires.NotNullOrEmpty(path, nameof(path));
             Requires.NotNullOrEmpty(searchPattern, nameof(searchPattern));
             Requires.NotNull(reflectionContext, nameof(reflectionContext));
@@ -382,7 +384,8 @@ namespace System.ComponentModel.Composition.Hosting
             string searchPattern,
             ReflectionContext reflectionContext,
             ICompositionElement definitionOrigin
-        ) {
+        )
+        {
             Requires.NotNullOrEmpty(path, nameof(path));
             Requires.NotNullOrEmpty(searchPattern, nameof(searchPattern));
             Requires.NotNull(reflectionContext, nameof(reflectionContext));
@@ -533,7 +536,8 @@ namespace System.ComponentModel.Composition.Hosting
         /// </exception>
         public override IEnumerable<Tuple<ComposablePartDefinition, ExportDefinition>> GetExports(
             ImportDefinition definition
-        ) {
+        )
+        {
             ThrowIfDisposed();
 
             Requires.NotNull(definition, nameof(definition));
@@ -725,7 +729,8 @@ namespace System.ComponentModel.Composition.Hosting
             string[] afterFiles,
             out List<Tuple<string, AssemblyCatalog>> catalogsToAdd,
             out List<Tuple<string, AssemblyCatalog>> catalogsToRemove
-        ) {
+        )
+        {
             catalogsToAdd = new List<Tuple<string, AssemblyCatalog>>();
             catalogsToRemove = new List<Tuple<string, AssemblyCatalog>>();
 

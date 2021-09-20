@@ -259,7 +259,8 @@ namespace System.Net.Mail
             bool allowUnicode,
             AsyncCallback? callback,
             object? state
-        ) {
+        )
+        {
             PrepareHeaders(sendEnvelope, allowUnicode);
             writer.WriteHeaders(Headers, allowUnicode);
 
@@ -538,7 +539,8 @@ namespace System.Net.Mail
                             && MailHeaderInfo.AllowsUnicode(headerName) // EAI
                             && !MailBnfHelper.HasCROrLF(values[j])
                         )
-                    ) {
+                    )
+                    {
                         encodedValue = values[j];
                     }
                     else
@@ -578,7 +580,8 @@ namespace System.Net.Mail
                         headerName,
                         StringComparison.InvariantCultureIgnoreCase
                     )
-                ) {
+                )
+                {
                     return true;
                 }
             }

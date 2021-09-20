@@ -128,7 +128,8 @@ namespace TestLibrary
         public static string FormatHexStringFromUnicodeString(
             string string1,
             bool includeUnicodeCategory
-        ) {
+        )
+        {
             string returnString = "";
             if (null == string1)
             {
@@ -178,7 +179,8 @@ namespace TestLibrary
                     0,
                     out int productType
                 )
-            ) {
+            )
+            {
                 return Kernel32.PRODUCT_UNDEFINED;
             }
 
@@ -428,7 +430,8 @@ namespace TestLibrary
             string[] args,
             Action<AssemblyLoadContext> unloadingCallback,
             out WeakReference alcWeakRef
-        ) {
+        )
+        {
             TestAssemblyLoadContext alc = new TestAssemblyLoadContext();
             if (unloadingCallback != null)
             {
@@ -453,7 +456,8 @@ namespace TestLibrary
             string assemblyPath,
             string[] args,
             Action<AssemblyLoadContext> unloadingCallback = null
-        ) {
+        )
+        {
             WeakReference alcWeakRef;
             int exitCode;
 

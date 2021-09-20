@@ -86,7 +86,8 @@ namespace Microsoft.EntityFrameworkCore.Migrations
             IModelRuntimeInitializer modelRuntimeInitializer,
             IDiagnosticsLogger<DbLoggerCategory.Model> modelLogger,
             IRelationalCommandDiagnosticsLogger commandLogger
-        ) {
+        )
+        {
             Check.NotNull(databaseCreator, nameof(databaseCreator));
             Check.NotNull(rawSqlCommandBuilder, nameof(rawSqlCommandBuilder));
             Check.NotNull(connection, nameof(connection));

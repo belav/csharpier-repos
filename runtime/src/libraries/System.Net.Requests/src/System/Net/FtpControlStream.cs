@@ -114,7 +114,8 @@ namespace System.Net
                     !connection.ServerAddress.Equals(
                         ((IPEndPoint)connection._dataSocket.RemoteEndPoint!).Address
                     )
-                ) {
+                )
+                {
                     connection._dataSocket.Close();
                     throw new WebException(
                         SR.net_ftp_active_address_different,
@@ -246,7 +247,8 @@ namespace System.Net
             ResponseDescription? response,
             bool timeout,
             ref Stream? stream
-        ) {
+        )
+        {
             if (NetEventSource.Log.IsEnabled())
                 NetEventSource.Info(
                     this,
@@ -335,7 +337,8 @@ namespace System.Net
             if (
                 _loginState != FtpLoginState.LoggedIn
                 && entry.Command.IndexOf("PASS", StringComparison.Ordinal) != -1
-            ) {
+            )
+            {
                 // Note the fact that we logged in
                 if (
                     status == FtpStatusCode.NeedLoginAccount
@@ -352,7 +355,8 @@ namespace System.Net
             if (
                 entry.HasFlag(PipelineEntryFlags.CreateDataConnection)
                 && (response.PositiveCompletion || response.PositiveIntermediate)
-            ) {
+            )
+            {
                 bool isSocketReady;
                 PipelineInstruction result = QueueOrCreateDataConection(
                     entry,
@@ -492,7 +496,8 @@ namespace System.Net
             if (
                 response.PositiveIntermediate
                 || (!UsingSecureStream && entry.Command == "AUTH TLS\r\n")
-            ) {
+            )
+            {
                 return PipelineInstruction.Reread;
             }
 
@@ -616,7 +621,8 @@ namespace System.Net
                 _establishedServerDirectory != null
                 && _loginDirectory != null
                 && _establishedServerDirectory != _loginDirectory
-            ) {
+            )
+            {
                 commandList.Add(
                     new PipelineEntry(
                         FormatFtpCommand("CWD", _loginDirectory),
@@ -631,7 +637,8 @@ namespace System.Net
             if (
                 request.MethodInfo.HasFlag(FtpMethodFlags.MustChangeWorkingDirectoryToPath)
                 && requestDirectory.Length > 0
-            ) {
+            )
+            {
                 commandList.Add(
                     new PipelineEntry(
                         FormatFtpCommand("CWD", requestDirectory),
@@ -719,7 +726,8 @@ namespace System.Net
                 if (
                     !string.IsNullOrEmpty(request.RenameTo)
                     && request.RenameTo.StartsWith("/", StringComparison.OrdinalIgnoreCase)
-                ) {
+                )
+                {
                     renameTo = request.RenameTo; // Absolute path
                 }
                 else
@@ -758,7 +766,8 @@ namespace System.Net
             bool timeout,
             ref Stream? stream,
             out bool isSocketReady
-        ) {
+        )
+        {
             isSocketReady = false;
             if (_dataHandshakeStarted)
             {
@@ -850,7 +859,8 @@ namespace System.Net
                         _dataSocket = _dataSocket!.Accept();
                         if (
                             !ServerAddress.Equals(((IPEndPoint)_dataSocket.RemoteEndPoint!).Address)
-                        ) {
+                        )
+                        {
                             _dataSocket.Close();
                             throw new WebException(
                                 SR.net_ftp_active_address_different,
@@ -886,7 +896,8 @@ namespace System.Net
             out string path,
             out string directory,
             out string filename
-        ) {
+        )
+        {
             path = uri.GetComponents(UriComponents.Path, UriFormat.Unescaped);
             int index = path.LastIndexOf('/');
 
@@ -894,7 +905,8 @@ namespace System.Net
                 pathOption == GetPathOption.AssumeFilename
                 && index != -1
                 && index == path.Length - 1
-            ) {
+            )
+            {
                 // Remove last '/' and continue normal processing
                 path = path.Substring(0, path.Length - 1);
                 index = path.LastIndexOf('/');
@@ -1107,7 +1119,8 @@ namespace System.Net
                 if (
                     !baseUri.IsBaseOf(newUri)
                     || baseUri.Segments.Length != newUri.Segments.Length - 1
-                ) {
+                )
+                {
                     throw new FormatException(
                         SR.Format(SR.net_ftp_invalid_response_filename, filename)
                     );
@@ -1139,7 +1152,8 @@ namespace System.Net
                             NumberFormatInfo.InvariantInfo,
                             out result
                         )
-                    ) {
+                    )
+                    {
                         _contentLength = result;
                     }
                 }
@@ -1247,7 +1261,8 @@ namespace System.Net
                 if (
                     ServerAddress.AddressFamily == AddressFamily.InterNetwork
                     || ServerAddress.IsIPv4MappedToIPv6
-                ) {
+                )
+                {
                     return FormatAddress(localEP.Address, localEP.Port);
                 }
                 else if (ServerAddress.AddressFamily == AddressFamily.InterNetworkV6)
@@ -1295,7 +1310,8 @@ namespace System.Net
             if (
                 templateSocket.AddressFamily == AddressFamily.InterNetworkV6
                 && templateSocket.DualMode
-            ) {
+            )
+            {
                 socket.DualMode = true;
             }
 
@@ -1306,7 +1322,8 @@ namespace System.Net
             ResponseDescription response,
             ref int validThrough,
             ref int completeLength
-        ) {
+        )
+        {
             if (NetEventSource.Log.IsEnabled())
                 NetEventSource.Info(this, $"CheckValid({response.StatusBuffer})");
 
@@ -1328,7 +1345,8 @@ namespace System.Net
                         && char.IsDigit(responseString[2])
                         && (responseString[3] == ' ' || responseString[3] == '-')
                     )
-                ) {
+                )
+                {
                     return false;
                 }
                 else

@@ -21,7 +21,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Progression
             Solution solution,
             IGraphContext context,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var graphBuilder = await GraphBuilder.CreateForInputNodesAsync(
                     solution,
                     context.InputNodes,
@@ -93,7 +94,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Progression
                                 if (
                                     path.EndsWith(".cs", StringComparison.OrdinalIgnoreCase)
                                     || path.EndsWith(".vb", StringComparison.OrdinalIgnoreCase)
-                                ) {
+                                )
+                                {
                                     graphBuilder.AddDeferredPropertySet(
                                         node,
                                         DgmlNodeProperties.ContainsChildren,

@@ -29,7 +29,8 @@ namespace Microsoft.VisualStudio.LanguageServices.CSharp.Snippets.SnippetFunctio
             TextSpan updatedTextSpan,
             CancellationToken cancellationToken,
             out string simplifiedTypeName
-        ) {
+        )
+        {
             simplifiedTypeName = string.Empty;
 
             var typeAnnotation = new SyntaxAnnotation();

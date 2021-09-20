@@ -68,7 +68,8 @@ namespace Microsoft.CodeAnalysis.CompilerServer
             ICompilerServerHost compilerServerHost,
             IClientConnectionHost clientConnectionHost,
             IDiagnosticListener? diagnosticListener = null
-        ) {
+        )
+        {
             _compilerServerHost = compilerServerHost;
             _logger = compilerServerHost.Logger;
             _clientConnectionHost = clientConnectionHost;
@@ -85,7 +86,8 @@ namespace Microsoft.CodeAnalysis.CompilerServer
         public void ListenAndDispatchConnections(
             TimeSpan? keepAlive,
             CancellationToken cancellationToken = default
-        ) {
+        )
+        {
             _state = State.Running;
             _keepAlive = keepAlive;
             _keepAliveIsDefault = true;
@@ -268,7 +270,8 @@ namespace Microsoft.CodeAnalysis.CompilerServer
                 && _connectionList.Count == 0
                 && _timeoutTask is null
                 && _keepAlive.HasValue
-            ) {
+            )
+            {
                 Debug.Assert(_listenTask != null);
                 _timeoutTask = Task.Delay(_keepAlive.Value);
             }
@@ -356,7 +359,8 @@ namespace Microsoft.CodeAnalysis.CompilerServer
             Task<IClientConnection> clientStreamTask,
             bool allowCompilationRequests,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var clientHandler = new ClientConnectionHandler(compilerServerHost);
             return await clientHandler.ProcessAsync(
                     clientStreamTask,

@@ -237,7 +237,8 @@ namespace System.Text.Json.Tests
             bool compactData,
             TestCaseType type,
             string jsonString
-        ) {
+        )
+        {
             await ParseJsonAsync(
                 compactData,
                 type,
@@ -253,7 +254,8 @@ namespace System.Text.Json.Tests
             bool compactData,
             TestCaseType type,
             string jsonString
-        ) {
+        )
+        {
             await ParseJsonAsync(
                 compactData,
                 type,
@@ -269,7 +271,8 @@ namespace System.Text.Json.Tests
             bool compactData,
             TestCaseType type,
             string jsonString
-        ) {
+        )
+        {
             await ParseJsonAsync(
                 compactData,
                 type,
@@ -285,7 +288,8 @@ namespace System.Text.Json.Tests
             bool compactData,
             TestCaseType type,
             string jsonString
-        ) {
+        )
+        {
             await ParseJsonAsync(
                 compactData,
                 type,
@@ -301,7 +305,8 @@ namespace System.Text.Json.Tests
             bool compactData,
             TestCaseType type,
             string jsonString
-        ) {
+        )
+        {
             await ParseJsonAsync(
                 compactData,
                 type,
@@ -325,7 +330,8 @@ namespace System.Text.Json.Tests
             bool compactData,
             TestCaseType type,
             string jsonString
-        ) {
+        )
+        {
             await ParseJsonAsync(
                 compactData,
                 type,
@@ -370,7 +376,8 @@ namespace System.Text.Json.Tests
                         data: data
                     )
                 )
-            ) {
+            )
+            {
                 JsonElement root = doc.RootElement;
                 Assert.Equal(JsonValueKind.Number, root.ValueKind);
                 Assert.Equal(11, root.GetInt32());
@@ -404,7 +411,8 @@ namespace System.Text.Json.Tests
                         data: data
                     )
                 )
-            ) {
+            )
+            {
                 JsonElement root = doc.RootElement;
                 Assert.Equal(JsonValueKind.Number, root.ValueKind);
                 Assert.Equal(11, root.GetInt32());
@@ -417,7 +425,8 @@ namespace System.Text.Json.Tests
             bool compactData,
             TestCaseType type,
             string jsonString
-        ) {
+        )
+        {
             await ParseJsonAsync(
                 compactData,
                 type,
@@ -436,7 +445,8 @@ namespace System.Text.Json.Tests
             bool compactData,
             TestCaseType type,
             string jsonString
-        ) {
+        )
+        {
             await ParseJsonAsync(
                 compactData,
                 type,
@@ -452,7 +462,8 @@ namespace System.Text.Json.Tests
             bool compactData,
             TestCaseType type,
             string jsonString
-        ) {
+        )
+        {
             await ParseJsonAsync(
                 compactData,
                 type,
@@ -478,7 +489,8 @@ namespace System.Text.Json.Tests
             bool compactData,
             TestCaseType type,
             string jsonString
-        ) {
+        )
+        {
             await ParseJsonAsync(
                 compactData,
                 type,
@@ -602,7 +614,8 @@ namespace System.Text.Json.Tests
             bool compactData,
             TestCaseType type,
             string jsonString
-        ) {
+        )
+        {
             await ParseJsonAsync(
                 compactData,
                 type,
@@ -618,7 +631,8 @@ namespace System.Text.Json.Tests
             bool compactData,
             TestCaseType type,
             string jsonString
-        ) {
+        )
+        {
             await ParseJsonAsync(
                 compactData,
                 type,
@@ -634,7 +648,8 @@ namespace System.Text.Json.Tests
             string jsonString,
             Func<string, Task<JsonDocument>> stringDocBuilder,
             Func<byte[], Task<JsonDocument>> bytesDocBuilder
-        ) {
+        )
+        {
             // One, but not both, must be null.
             if ((stringDocBuilder == null) == (bytesDocBuilder == null))
                 throw new InvalidOperationException();
@@ -651,7 +666,8 @@ namespace System.Text.Json.Tests
                 JsonDocument doc = await (
                     stringDocBuilder?.Invoke(jsonString) ?? bytesDocBuilder?.Invoke(dataUtf8)
                 )
-            ) {
+            )
+            {
                 Assert.NotNull(doc);
 
                 JsonElement rootElement = doc.RootElement;
@@ -1572,7 +1588,8 @@ namespace System.Text.Json.Tests
         public static void ReadDateTimeAndDateTimeOffset_WithUtcOffset(
             string jsonString,
             string expectedString
-        ) {
+        )
+        {
             byte[] dataUtf8 = Encoding.UTF8.GetBytes(jsonString);
 
             using (JsonDocument doc = JsonDocument.Parse(dataUtf8, default))
@@ -1709,7 +1726,8 @@ namespace System.Text.Json.Tests
             double expectedDouble,
             float expectedFloat,
             decimal expectedDecimal
-        ) {
+        )
+        {
             using (JsonDocument doc = JsonDocument.Parse("    " + str + "  "))
             {
                 JsonElement root = doc.RootElement;
@@ -1885,7 +1903,8 @@ namespace System.Text.Json.Tests
                     "[ 0, 1, 2, 3/*.14159*/           , /* 42, 11, hut, hut, hike! */ 4 ]",
                     options
                 )
-            ) {
+            )
+            {
                 JsonElement root = doc.RootElement;
 
                 Assert.Equal(JsonValueKind.Array, root.ValueKind);
@@ -2373,7 +2392,8 @@ namespace System.Text.Json.Tests
                     okayJson,
                     new JsonDocumentOptions { MaxDepth = OkayCount }
                 )
-            ) {
+            )
+            {
                 JsonElement root = doc.RootElement;
                 Assert.Equal(JsonValueKind.Array, root.ValueKind);
 
@@ -2416,7 +2436,8 @@ namespace System.Text.Json.Tests
                     okayJson,
                     new JsonDocumentOptions { MaxDepth = MaxDepthOverflow }
                 )
-            ) {
+            )
+            {
                 JsonElement root = doc.RootElement;
                 Assert.Equal(JsonValueKind.Array, root.ValueKind);
             }
@@ -2426,7 +2447,8 @@ namespace System.Text.Json.Tests
                     okayJson,
                     new JsonDocumentOptions { MaxDepth = int.MaxValue }
                 )
-            ) {
+            )
+            {
                 JsonElement root = doc.RootElement;
                 Assert.Equal(JsonValueKind.Array, root.ValueKind);
             }
@@ -3286,7 +3308,8 @@ namespace System.Text.Json.Tests
             string valueJson,
             JsonTokenType tokenType,
             int segmentCount
-        ) {
+        )
+        {
             switch (scenario)
             {
                 case ParseReaderScenario.NotStarted:
@@ -3312,7 +3335,8 @@ namespace System.Text.Json.Tests
             string valueJson,
             JsonTokenType tokenType,
             int segmentCount
-        ) {
+        )
+        {
             string json = $"      {valueJson}   5";
             byte[] utf8 = Encoding.UTF8.GetBytes(json);
             JsonReaderState state = default;
@@ -3355,7 +3379,8 @@ namespace System.Text.Json.Tests
             string valueJson,
             JsonTokenType tokenType,
             int segmentCount
-        ) {
+        )
+        {
             // Open-ended value (missing final ])
             string json = $"[ 0, 1, 2, 3, 4, {valueJson}     , 6, 7, 8, 9 ";
             byte[] utf8 = Encoding.UTF8.GetBytes(json);
@@ -3417,7 +3442,8 @@ namespace System.Text.Json.Tests
             string valueJson,
             JsonTokenType tokenType,
             int segmentCount
-        ) {
+        )
+        {
             // Open-ended value
             string json =
                 $"{{ \"this\": [ {{ \"is\": {{ \"the\": {{ \"target\": {valueJson}    , \"capiche\" : [ 6, 7, 8, 9 ] ";
@@ -3729,7 +3755,8 @@ namespace System.Text.Json.Tests
                 if (
                     !Utf8Formatter.TryFormat(i, curDest, out int bytesWritten, format)
                     || bytesWritten != 6
-                ) {
+                )
+                {
                     throw new InvalidOperationException("" + i);
                 }
 
@@ -3817,7 +3844,8 @@ namespace System.Text.Json.Tests
         public static void ValueEquals_DestinationTooSmallComparesEscaping_False(
             string jsonString,
             string other
-        ) {
+        )
+        {
             using (JsonDocument doc = JsonDocument.Parse(jsonString))
             {
                 JsonElement jElement = doc.RootElement;
@@ -3847,7 +3875,8 @@ namespace System.Text.Json.Tests
         public static void ValueEquals_JsonTokenStringType_False(
             string jsonString,
             string otherText
-        ) {
+        )
+        {
             using (JsonDocument doc = JsonDocument.Parse(jsonString))
             {
                 JsonElement jElement = doc.RootElement;
@@ -3919,7 +3948,8 @@ namespace System.Text.Json.Tests
             int segmentCount,
             in JsonReaderState state,
             bool isFinalBlock = false
-        ) {
+        )
+        {
             if (segmentCount == 0)
             {
                 reader = new Utf8JsonReader(data.Span, isFinalBlock, state);

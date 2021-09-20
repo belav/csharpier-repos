@@ -39,7 +39,8 @@ namespace Microsoft.CodeAnalysis.Test.Utilities
                 ImmutableHashSet<Assembly> assemblies,
                 ImmutableHashSet<Type> parts,
                 ImmutableHashSet<Type> excludedPartTypes
-            ) {
+            )
+            {
                 _assemblies = assemblies.OrderBy(
                         (a, b) => string.CompareOrdinal(a.FullName, b.FullName)
                     )
@@ -92,7 +93,8 @@ namespace Microsoft.CodeAnalysis.Test.Utilities
             ImmutableHashSet<Assembly> assemblies,
             ImmutableHashSet<Type> parts,
             ImmutableHashSet<Type> excludedPartTypes
-        ) {
+        )
+        {
             Assemblies = assemblies;
             Parts = parts;
             ExcludedPartTypes = excludedPartTypes;

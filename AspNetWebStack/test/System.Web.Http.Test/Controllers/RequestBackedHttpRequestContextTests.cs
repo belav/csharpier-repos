@@ -263,7 +263,8 @@ namespace System.Web.Http.Controllers
         [InlineData(false)]
         public void IncludeErrorDetailGet_ReturnsIncludeErrorDetailFromProperty_WhenRequestIsPresent(
             bool expected
-        ) {
+        )
+        {
             // Arrange
             using (HttpRequestMessage request = CreateRequest())
             {
@@ -285,7 +286,8 @@ namespace System.Web.Http.Controllers
         [InlineData(false)]
         public void IncludeErrorDetailGet_IgnoresRequest_AfterIncludeErrorDetailSet(
             bool expectedIncludeErrorDetail
-        ) {
+        )
+        {
             // Arrange
             using (HttpRequestMessage request = CreateRequest())
             {
@@ -623,7 +625,8 @@ namespace System.Web.Http.Controllers
                 HttpConfiguration configuration = new HttpConfiguration(
                     new HttpRouteCollection(expectedVirtualPathRoot)
                 )
-            ) {
+            )
+            {
                 HttpRequestContext context = CreateProductUnderTest();
                 context.Configuration = configuration;
 
@@ -641,7 +644,8 @@ namespace System.Web.Http.Controllers
         [InlineData("/a%20b")]
         public void VirtualPathRootGet_ReturnsUnescapedConfigurationVirtualPathRoot(
             string configurationVirtualPathRoot
-        ) {
+        )
+        {
             // Arrange
             var expectedVirtualPathRoot = "/a b";
             using (var routeCollection = new HttpRouteCollection(configurationVirtualPathRoot))
@@ -666,7 +670,8 @@ namespace System.Web.Http.Controllers
                 HttpConfiguration configuration = new HttpConfiguration(
                     new HttpRouteCollection("other")
                 )
-            ) {
+            )
+            {
                 HttpRequestContext context = CreateProductUnderTest();
                 context.Configuration = configuration;
                 string expectedVirtualPathRoot = "/";
@@ -688,7 +693,8 @@ namespace System.Web.Http.Controllers
                 HttpConfiguration configuration = new HttpConfiguration(
                     new HttpRouteCollection("other")
                 )
-            ) {
+            )
+            {
                 HttpRequestContext context = CreateProductUnderTest();
                 context.Configuration = configuration;
                 context.VirtualPathRoot = null;
@@ -728,7 +734,8 @@ namespace System.Web.Http.Controllers
 
         private static RequestBackedHttpRequestContext CreateProductUnderTest(
             HttpRequestMessage request
-        ) {
+        )
+        {
             return new RequestBackedHttpRequestContext(request);
         }
 

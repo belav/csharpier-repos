@@ -24,7 +24,8 @@ namespace System.Diagnostics
             TraceEventType eventType,
             int id,
             string? formatOrMessage
-        ) {
+        )
+        {
             return ShouldTrace(cache, source, eventType, id, formatOrMessage, null, null, null);
         }
 
@@ -35,7 +36,8 @@ namespace System.Diagnostics
             int id,
             string? formatOrMessage,
             object?[]? args
-        ) {
+        )
+        {
             return ShouldTrace(cache, source, eventType, id, formatOrMessage, args, null, null);
         }
 
@@ -47,7 +49,8 @@ namespace System.Diagnostics
             string? formatOrMessage,
             object?[]? args,
             object? data1
-        ) {
+        )
+        {
             return ShouldTrace(cache, source, eventType, id, formatOrMessage, args, data1, null);
         }
     }

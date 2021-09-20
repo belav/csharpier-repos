@@ -207,28 +207,32 @@ namespace Microsoft.AspNetCore.Http.Connections
                                 reader.ValueTextEquals(
                                     AccessTokenPropertyNameBytes.EncodedUtf8Bytes
                                 )
-                            ) {
+                            )
+                            {
                                 accessToken = reader.ReadAsString(AccessTokenPropertyName);
                             }
                             else if (
                                 reader.ValueTextEquals(
                                     ConnectionIdPropertyNameBytes.EncodedUtf8Bytes
                                 )
-                            ) {
+                            )
+                            {
                                 connectionId = reader.ReadAsString(ConnectionIdPropertyName);
                             }
                             else if (
                                 reader.ValueTextEquals(
                                     ConnectionTokenPropertyNameBytes.EncodedUtf8Bytes
                                 )
-                            ) {
+                            )
+                            {
                                 connectionToken = reader.ReadAsString(ConnectionTokenPropertyName);
                             }
                             else if (
                                 reader.ValueTextEquals(
                                     NegotiateVersionPropertyNameBytes.EncodedUtf8Bytes
                                 )
-                            ) {
+                            )
+                            {
                                 version = reader.ReadAsInt32(NegotiateVersionPropertyName)
                                     .GetValueOrDefault();
                             }
@@ -236,7 +240,8 @@ namespace Microsoft.AspNetCore.Http.Connections
                                 reader.ValueTextEquals(
                                     AvailableTransportsPropertyNameBytes.EncodedUtf8Bytes
                                 )
-                            ) {
+                            )
+                            {
                                 reader.CheckRead();
                                 reader.EnsureArrayStart();
 
@@ -257,7 +262,8 @@ namespace Microsoft.AspNetCore.Http.Connections
                             }
                             else if (
                                 reader.ValueTextEquals(ErrorPropertyNameBytes.EncodedUtf8Bytes)
-                            ) {
+                            )
+                            {
                                 error = reader.ReadAsString(ErrorPropertyName);
                             }
                             else if (reader.ValueTextEquals(ProtocolVersionPropertyNameBytes))
@@ -345,7 +351,8 @@ namespace Microsoft.AspNetCore.Http.Connections
                             reader.ValueTextEquals(
                                 TransferFormatsPropertyNameBytes.EncodedUtf8Bytes
                             )
-                        ) {
+                        )
+                        {
                             reader.CheckRead();
                             reader.EnsureArrayStart();
 

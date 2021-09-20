@@ -243,7 +243,8 @@ namespace System.Runtime.Caching
 
             if (
                 Interlocked.CompareExchange(ref _onChangedCallback, onChangedCallback, null) != null
-            ) {
+            )
+            {
                 throw new InvalidOperationException(SR.Method_already_invoked);
             }
 

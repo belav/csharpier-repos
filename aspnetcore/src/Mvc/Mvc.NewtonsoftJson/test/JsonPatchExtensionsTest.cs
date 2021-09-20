@@ -104,7 +104,8 @@ namespace Microsoft.AspNetCore.Mvc
             string from,
             string value,
             string error
-        ) {
+        )
+        {
             // Arrange
             var patch = new JsonPatchDocument<Customer>();
             patch.Operations.Add(new Operation<Customer>(op, path, from, value));

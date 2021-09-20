@@ -134,7 +134,8 @@ namespace JIT.HardwareIntrinsics.Arm
                     || (alignment * 2) < sizeOfinArray1
                     || (alignment * 2) < sizeOfinArray2
                     || (alignment * 2) < sizeOfoutArray
-                ) {
+                )
+                {
                     throw new ArgumentException("Invalid value of alignment");
                 }
 
@@ -213,7 +214,8 @@ namespace JIT.HardwareIntrinsics.Arm
 
             public void RunStructFldScenario(
                 StoreBinaryOpTest__StorePairNonTemporal_Vector64_Int16 testClass
-            ) {
+            )
+            {
                 AdvSimd.Arm64.StorePairNonTemporal(
                     (Int16*)testClass._dataTable.outArrayPtr,
                     _fld1,
@@ -225,7 +227,8 @@ namespace JIT.HardwareIntrinsics.Arm
 
             public void RunStructFldScenario_Load(
                 StoreBinaryOpTest__StorePairNonTemporal_Vector64_Int16 testClass
-            ) {
+            )
+            {
                 fixed (Vector64<Int16>* pFld1 = &_fld1)fixed (Vector64<Int16>* pFld2 = &_fld2)
                 {
                     AdvSimd.Arm64.StorePairNonTemporal(
@@ -402,7 +405,8 @@ namespace JIT.HardwareIntrinsics.Arm
 
             fixed (Vector64<Int16>* pClsVar1 = &_clsVar1)fixed (
                 Vector64<Int16>* pClsVar2 = &_clsVar2
-            ) {
+            )
+            {
                 AdvSimd.Arm64.StorePairNonTemporal(
                     (Int16*)_dataTable.outArrayPtr,
                     AdvSimd.LoadVector64((Int16*)(pClsVar1)),
@@ -562,7 +566,8 @@ namespace JIT.HardwareIntrinsics.Arm
             Vector64<Int16> op2,
             void* result,
             [CallerMemberName] string method = ""
-        ) {
+        )
+        {
             Int16[] inArray1 = new Int16[Op1ElementCount];
             Int16[] inArray2 = new Int16[Op2ElementCount];
             Int16[] outArray = new Int16[RetElementCount];
@@ -583,7 +588,8 @@ namespace JIT.HardwareIntrinsics.Arm
             void* op2,
             void* result,
             [CallerMemberName] string method = ""
-        ) {
+        )
+        {
             Int16[] inArray1 = new Int16[Op1ElementCount];
             Int16[] inArray2 = new Int16[Op2ElementCount];
             Int16[] outArray = new Int16[RetElementCount];
@@ -612,7 +618,8 @@ namespace JIT.HardwareIntrinsics.Arm
             Int16[] secondOp,
             Int16[] result,
             [CallerMemberName] string method = ""
-        ) {
+        )
+        {
             bool succeeded = true;
 
             for (int i = 0; i < RetElementCount; i++)

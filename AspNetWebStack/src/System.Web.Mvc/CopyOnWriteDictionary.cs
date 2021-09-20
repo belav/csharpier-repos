@@ -21,7 +21,8 @@ namespace System.Web.Mvc
         public CopyOnWriteDictionary(
             IDictionary<TKey, TValue> sourceDictionary,
             IEqualityComparer<TKey> comparer
-        ) {
+        )
+        {
             Contract.Assert(sourceDictionary != null);
             Contract.Assert(comparer != null);
 

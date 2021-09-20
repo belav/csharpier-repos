@@ -126,7 +126,8 @@ namespace Newtonsoft.Json
             string path,
             string message,
             Exception? ex
-        ) {
+        )
+        {
             message = JsonPosition.FormatMessage(lineInfo, path, message);
 
             int lineNumber;

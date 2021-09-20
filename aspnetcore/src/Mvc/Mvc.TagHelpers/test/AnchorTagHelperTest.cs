@@ -577,7 +577,8 @@ namespace Microsoft.AspNetCore.Mvc.TagHelpers
         [InlineData("Controller")]
         public async Task ProcessAsync_ThrowsIfRouteAndActionOrControllerProvided(
             string propertyName
-        ) {
+        )
+        {
             // Arrange
             var metadataProvider = new EmptyModelMetadataProvider();
             var htmlGenerator = new TestableHtmlGenerator(metadataProvider);

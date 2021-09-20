@@ -32,7 +32,8 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Semantics
             bool semanticChanges,
             string expressionToAnalyze = null,
             bool isBrokenCode = false
-        ) {
+        )
+        {
             var initialMatch = UnderTestRegex.Match(code);
             Assert.True(initialMatch.Success);
             var initialExpression = initialMatch.Groups["content"].Value;

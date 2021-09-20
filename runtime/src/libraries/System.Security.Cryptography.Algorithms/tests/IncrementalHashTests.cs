@@ -91,7 +91,8 @@ namespace System.Security.Cryptography.Algorithms.Tests
                 IncrementalHash incrementalHash = IncrementalHash.CreateHash(
                     HashAlgorithmName.SHA512
                 )
-            ) {
+            )
+            {
                 AssertExtensions.Throws<ArgumentNullException>(
                     "data",
                     () => incrementalHash.AppendData(null)
@@ -126,7 +127,8 @@ namespace System.Security.Cryptography.Algorithms.Tests
         public static void VerifyIncrementalHash(
             HashAlgorithm referenceAlgorithm,
             HashAlgorithmName hashAlgorithm
-        ) {
+        )
+        {
             using (referenceAlgorithm)
             using (IncrementalHash incrementalHash = IncrementalHash.CreateHash(hashAlgorithm))
             {
@@ -141,14 +143,16 @@ namespace System.Security.Cryptography.Algorithms.Tests
         public static void VerifyIncrementalHMAC(
             HMAC referenceAlgorithm,
             HashAlgorithmName hashAlgorithm
-        ) {
+        )
+        {
             using (referenceAlgorithm)
             using (
                 IncrementalHash incrementalHash = IncrementalHash.CreateHMAC(
                     hashAlgorithm,
                     s_hmacKey
                 )
-            ) {
+            )
+            {
                 referenceAlgorithm.Key = s_hmacKey;
 
                 VerifyIncrementalResult(referenceAlgorithm, incrementalHash);
@@ -161,14 +165,16 @@ namespace System.Security.Cryptography.Algorithms.Tests
         public static void VerifyIncrementalHMAC_SpanKey(
             HMAC referenceAlgorithm,
             HashAlgorithmName hashAlgorithm
-        ) {
+        )
+        {
             using (referenceAlgorithm)
             using (
                 IncrementalHash incrementalHash = IncrementalHash.CreateHMAC(
                     hashAlgorithm,
                     new ReadOnlySpan<byte>(s_hmacKey)
                 )
-            ) {
+            )
+            {
                 referenceAlgorithm.Key = s_hmacKey;
 
                 VerifyIncrementalResult(referenceAlgorithm, incrementalHash);
@@ -178,7 +184,8 @@ namespace System.Security.Cryptography.Algorithms.Tests
         private static void VerifyIncrementalResult(
             HashAlgorithm referenceAlgorithm,
             IncrementalHash incrementalHash
-        ) {
+        )
+        {
             byte[] referenceHash = referenceAlgorithm.ComputeHash(s_inputBytes);
             const int StepA = 13;
             const int StepB = 7;
@@ -216,7 +223,8 @@ namespace System.Security.Cryptography.Algorithms.Tests
         public static void VerifyEmptyHash(
             HashAlgorithm referenceAlgorithm,
             HashAlgorithmName hashAlgorithm
-        ) {
+        )
+        {
             using (referenceAlgorithm)
             using (IncrementalHash incrementalHash = IncrementalHash.CreateHash(hashAlgorithm))
             {
@@ -243,7 +251,8 @@ namespace System.Security.Cryptography.Algorithms.Tests
                     hashAlgorithm,
                     s_hmacKey
                 )
-            ) {
+            )
+            {
                 referenceAlgorithm.Key = s_hmacKey;
 
                 for (int i = 0; i < 10; i++)
@@ -263,7 +272,8 @@ namespace System.Security.Cryptography.Algorithms.Tests
         public static void VerifyTrivialHash(
             HashAlgorithm referenceAlgorithm,
             HashAlgorithmName hashAlgorithm
-        ) {
+        )
+        {
             using (referenceAlgorithm)
             using (IncrementalHash incrementalHash = IncrementalHash.CreateHash(hashAlgorithm))
             {
@@ -280,14 +290,16 @@ namespace System.Security.Cryptography.Algorithms.Tests
         public static void VerifyTrivialHMAC(
             HMAC referenceAlgorithm,
             HashAlgorithmName hashAlgorithm
-        ) {
+        )
+        {
             using (referenceAlgorithm)
             using (
                 IncrementalHash incrementalHash = IncrementalHash.CreateHMAC(
                     hashAlgorithm,
                     s_hmacKey
                 )
-            ) {
+            )
+            {
                 referenceAlgorithm.Key = s_hmacKey;
 
                 byte[] referenceHash = referenceAlgorithm.ComputeHash(Array.Empty<byte>());
@@ -320,7 +332,8 @@ namespace System.Security.Cryptography.Algorithms.Tests
                     HashAlgorithmName.SHA256,
                     s_hmacKey
                 )
-            ) {
+            )
+            {
                 byte[] firstHash = hash.GetHashAndReset();
 
                 hash.AppendData(Array.Empty<byte>());
@@ -351,7 +364,8 @@ namespace System.Security.Cryptography.Algorithms.Tests
                     HashAlgorithmName.SHA256,
                     s_hmacKey
                 )
-            ) {
+            )
+            {
                 byte[] firstHash = hash.GetHashAndReset();
                 byte[] secondHash = hash.GetHashAndReset();
 
@@ -379,7 +393,8 @@ namespace System.Security.Cryptography.Algorithms.Tests
                     HashAlgorithmName.SHA256,
                     s_hmacKey
                 )
-            ) {
+            )
+            {
                 hash.Dispose();
                 Assert.Throws<ObjectDisposedException>(() => hash.AppendData(Array.Empty<byte>()));
                 Assert.Throws<ObjectDisposedException>(() => hash.GetHashAndReset());
@@ -408,7 +423,8 @@ namespace System.Security.Cryptography.Algorithms.Tests
         public static void VerifyIncrementalHash_Span(
             HashAlgorithm referenceAlgorithm,
             HashAlgorithmName hashAlgorithm
-        ) {
+        )
+        {
             using (referenceAlgorithm)
             using (IncrementalHash incrementalHash = IncrementalHash.CreateHash(hashAlgorithm))
             {
@@ -422,14 +438,16 @@ namespace System.Security.Cryptography.Algorithms.Tests
         public static void VerifyIncrementalHMAC_Span(
             HMAC referenceAlgorithm,
             HashAlgorithmName hashAlgorithm
-        ) {
+        )
+        {
             using (referenceAlgorithm)
             using (
                 IncrementalHash incrementalHash = IncrementalHash.CreateHMAC(
                     hashAlgorithm,
                     s_hmacKey
                 )
-            ) {
+            )
+            {
                 referenceAlgorithm.Key = s_hmacKey;
                 VerifyIncrementalResult_Span(referenceAlgorithm, incrementalHash);
             }
@@ -438,7 +456,8 @@ namespace System.Security.Cryptography.Algorithms.Tests
         private static void VerifyIncrementalResult_Span(
             HashAlgorithm referenceAlgorithm,
             IncrementalHash incrementalHash
-        ) {
+        )
+        {
             int referenceHashLength;
             byte[] referenceHash = new byte[1];
             while (
@@ -447,7 +466,8 @@ namespace System.Security.Cryptography.Algorithms.Tests
                     referenceHash,
                     out referenceHashLength
                 )
-            ) {
+            )
+            {
                 referenceHash = new byte[referenceHash.Length * 2];
             }
 
@@ -501,7 +521,8 @@ namespace System.Security.Cryptography.Algorithms.Tests
         public static void VerifyEmptyHash_Span(
             HashAlgorithm referenceAlgorithm,
             HashAlgorithmName hashAlgorithm
-        ) {
+        )
+        {
             using (referenceAlgorithm)
             using (IncrementalHash incrementalHash = IncrementalHash.CreateHash(hashAlgorithm))
             {
@@ -526,14 +547,16 @@ namespace System.Security.Cryptography.Algorithms.Tests
         public static void VerifyEmptyHMAC_Span(
             HMAC referenceAlgorithm,
             HashAlgorithmName hashAlgorithm
-        ) {
+        )
+        {
             using (referenceAlgorithm)
             using (
                 IncrementalHash incrementalHash = IncrementalHash.CreateHMAC(
                     hashAlgorithm,
                     s_hmacKey
                 )
-            ) {
+            )
+            {
                 referenceAlgorithm.Key = s_hmacKey;
 
                 for (int i = 0; i < 10; i++)
@@ -556,7 +579,8 @@ namespace System.Security.Cryptography.Algorithms.Tests
         public static void VerifyTrivialHash_Span(
             HashAlgorithm referenceAlgorithm,
             HashAlgorithmName hashAlgorithm
-        ) {
+        )
+        {
             using (referenceAlgorithm)
             using (IncrementalHash incrementalHash = IncrementalHash.CreateHash(hashAlgorithm))
             {
@@ -576,14 +600,16 @@ namespace System.Security.Cryptography.Algorithms.Tests
         public static void VerifyTrivialHMAC_Span(
             HMAC referenceAlgorithm,
             HashAlgorithmName hashAlgorithm
-        ) {
+        )
+        {
             using (referenceAlgorithm)
             using (
                 IncrementalHash incrementalHash = IncrementalHash.CreateHMAC(
                     hashAlgorithm,
                     s_hmacKey
                 )
-            ) {
+            )
+            {
                 referenceAlgorithm.Key = s_hmacKey;
 
                 byte[] referenceHash = referenceAlgorithm.ComputeHash(Array.Empty<byte>());
@@ -601,7 +627,8 @@ namespace System.Security.Cryptography.Algorithms.Tests
         public static void Dispose_HashAlgorithm_ThrowsException(
             HashAlgorithm referenceAlgorithm,
             HashAlgorithmName hashAlgorithm
-        ) {
+        )
+        {
             referenceAlgorithm.Dispose();
             var incrementalHash = IncrementalHash.CreateHash(hashAlgorithm);
             incrementalHash.Dispose();
@@ -633,7 +660,8 @@ namespace System.Security.Cryptography.Algorithms.Tests
         public static void Dispose_HMAC_ThrowsException(
             HMAC referenceAlgorithm,
             HashAlgorithmName hashAlgorithm
-        ) {
+        )
+        {
             referenceAlgorithm.Dispose();
             var incrementalHash = IncrementalHash.CreateHMAC(hashAlgorithm, s_hmacKey);
             incrementalHash.Dispose();
@@ -664,7 +692,8 @@ namespace System.Security.Cryptography.Algorithms.Tests
         public static void VerifyGetCurrentHash_Digest(
             HashAlgorithm referenceAlgorithm,
             HashAlgorithmName hashAlgorithm
-        ) {
+        )
+        {
             referenceAlgorithm.Dispose();
 
             using (IncrementalHash single = IncrementalHash.CreateHash(hashAlgorithm))
@@ -684,13 +713,15 @@ namespace System.Security.Cryptography.Algorithms.Tests
         public static void VerifyGetCurrentHash_HMAC(
             HMAC referenceAlgorithm,
             HashAlgorithmName hashAlgorithm
-        ) {
+        )
+        {
             referenceAlgorithm.Dispose();
 
             using (IncrementalHash single = IncrementalHash.CreateHMAC(hashAlgorithm, s_hmacKey))
             using (
                 IncrementalHash accumulated = IncrementalHash.CreateHMAC(hashAlgorithm, s_hmacKey)
-            ) {
+            )
+            {
                 VerifyGetCurrentHash(single, accumulated);
             }
         }
@@ -705,11 +736,13 @@ namespace System.Security.Cryptography.Algorithms.Tests
         public static void VerifyBounds_GetCurrentHash_HMAC(
             HMAC referenceAlgorithm,
             HashAlgorithmName hashAlgorithm
-        ) {
+        )
+        {
             using (referenceAlgorithm)
             using (
                 IncrementalHash incremental = IncrementalHash.CreateHMAC(hashAlgorithm, s_hmacKey)
-            ) {
+            )
+            {
                 referenceAlgorithm.Key = s_hmacKey;
                 byte[] comparison = referenceAlgorithm.ComputeHash(Array.Empty<byte>());
 
@@ -730,11 +763,13 @@ namespace System.Security.Cryptography.Algorithms.Tests
         public static void VerifyBounds_GetHashAndReset_HMAC(
             HMAC referenceAlgorithm,
             HashAlgorithmName hashAlgorithm
-        ) {
+        )
+        {
             using (referenceAlgorithm)
             using (
                 IncrementalHash incremental = IncrementalHash.CreateHMAC(hashAlgorithm, s_hmacKey)
-            ) {
+            )
+            {
                 referenceAlgorithm.Key = s_hmacKey;
                 byte[] comparison = referenceAlgorithm.ComputeHash(Array.Empty<byte>());
 
@@ -754,7 +789,8 @@ namespace System.Security.Cryptography.Algorithms.Tests
         public static void VerifyBounds_GetCurrentHash_Hash(
             HashAlgorithm referenceAlgorithm,
             HashAlgorithmName hashAlgorithm
-        ) {
+        )
+        {
             using (referenceAlgorithm)
             using (IncrementalHash incremental = IncrementalHash.CreateHash(hashAlgorithm))
             {
@@ -776,7 +812,8 @@ namespace System.Security.Cryptography.Algorithms.Tests
         public static void VerifyBounds_GetHashAndReset_Hash(
             HashAlgorithm referenceAlgorithm,
             HashAlgorithmName hashAlgorithm
-        ) {
+        )
+        {
             using (referenceAlgorithm)
             using (IncrementalHash incremental = IncrementalHash.CreateHash(hashAlgorithm))
             {
@@ -796,7 +833,8 @@ namespace System.Security.Cryptography.Algorithms.Tests
         private static void VerifyGetCurrentHash(
             IncrementalHash single,
             IncrementalHash accumulated
-        ) {
+        )
+        {
             Span<byte> buf = stackalloc byte[2048];
             Span<byte> fullDigest = stackalloc byte[512 / 8];
             Span<byte> curDigest = stackalloc byte[fullDigest.Length];
@@ -854,7 +892,8 @@ namespace System.Security.Cryptography.Algorithms.Tests
             Func<IncrementalHash, byte[]> oneShot,
             SpanWriter spanWriter,
             TrySpanWriter trySpanWriter
-        ) {
+        )
+        {
             string comparisonHex = comparison.ByteArrayToHex();
             Span<byte> dest = stackalloc byte[512 / 8 + 1];
 

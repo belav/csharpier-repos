@@ -34,7 +34,8 @@ namespace Microsoft.AspNetCore.Rewrite.Tests.IISUrlRewrite
             string variable,
             string expected,
             int uriMatchPart
-        ) {
+        )
+        {
             // Arrange and Act
             var testParserContext = new ParserContext("test");
             var serverVar = ServerVariables.FindServerVariable(
@@ -72,7 +73,8 @@ namespace Microsoft.AspNetCore.Rewrite.Tests.IISUrlRewrite
             string variable,
             string expected,
             int uriMatchPart
-        ) {
+        )
+        {
             // Arrange and Act
             var testParserContext = new ParserContext("test");
             var serverVar = ServerVariables.FindServerVariable(
@@ -134,7 +136,8 @@ namespace Microsoft.AspNetCore.Rewrite.Tests.IISUrlRewrite
             string variable,
             string expected,
             int uriMatchPart
-        ) {
+        )
+        {
             // Arrange and Act
             var testParserContext = new ParserContext("test");
             var serverVar = ServerVariables.FindServerVariable(

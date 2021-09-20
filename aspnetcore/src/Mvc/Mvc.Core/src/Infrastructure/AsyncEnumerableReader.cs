@@ -59,7 +59,8 @@ namespace Microsoft.AspNetCore.Mvc.Infrastructure
         public bool TryGetReader(
             Type type,
             [NotNullWhen(true)] out Func<object, Task<ICollection>>? reader
-        ) {
+        )
+        {
             if (!_asyncEnumerableConverters.TryGetValue(type, out reader))
             {
                 var enumerableType = ClosedGenericMatcher.ExtractGenericInterface(

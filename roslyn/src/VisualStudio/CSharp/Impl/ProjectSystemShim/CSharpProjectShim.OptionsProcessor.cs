@@ -51,7 +51,8 @@ namespace Microsoft.VisualStudio.LanguageServices.CSharp.ProjectSystemShim
             protected override CompilationOptions ComputeCompilationOptionsWithHostValues(
                 CompilationOptions compilationOptions,
                 IRuleSetFile? ruleSetFile
-            ) {
+            )
+            {
                 IDictionary<string, ReportDiagnostic>? ruleSetSpecificDiagnosticOptions;
 
                 // Get options from the ruleset file, if any, first. That way project-specific
@@ -111,19 +112,22 @@ namespace Microsoft.VisualStudio.LanguageServices.CSharp.ProjectSystemShim
                 // Update the specific options based on the specific settings
                 foreach (
                     var diagnosticID in ParseWarningCodes(CompilerOptions.OPTID_WARNASERRORLIST)
-                ) {
+                )
+                {
                     diagnosticOptions[diagnosticID] = ReportDiagnostic.Error;
                 }
 
                 foreach (
                     var diagnosticID in ParseWarningCodes(CompilerOptions.OPTID_WARNNOTASERRORLIST)
-                ) {
+                )
+                {
                     if (
                         ruleSetSpecificDiagnosticOptions.TryGetValue(
                             diagnosticID,
                             out var ruleSetOption
                         )
-                    ) {
+                    )
+                    {
                         diagnosticOptions[diagnosticID] = ruleSetOption;
                     }
                     else
@@ -143,7 +147,8 @@ namespace Microsoft.VisualStudio.LanguageServices.CSharp.ProjectSystemShim
                         ignoreCase: true,
                         result: out Platform platform
                     )
-                ) {
+                )
+                {
                     platform = Platform.AnyCpu;
                 }
 
@@ -152,7 +157,8 @@ namespace Microsoft.VisualStudio.LanguageServices.CSharp.ProjectSystemShim
                         GetStringOption(CompilerOptions.OPTID_WARNINGLEVEL, defaultValue: ""),
                         out var warningLevel
                     )
-                ) {
+                )
+                {
                     warningLevel = 4;
                 }
 
@@ -197,7 +203,8 @@ namespace Microsoft.VisualStudio.LanguageServices.CSharp.ProjectSystemShim
                 foreach (
                     var warning in GetStringOption(compilerOptions, defaultValue: "")
                         .Split(new[] { ' ', ',', ';' }, StringSplitOptions.RemoveEmptyEntries)
-                ) {
+                )
+                {
                     var warningStringID = warning;
                     if (int.TryParse(warning, out var warningId))
                     {
@@ -250,7 +257,8 @@ namespace Microsoft.VisualStudio.LanguageServices.CSharp.ProjectSystemShim
 
             protected override ParseOptions ComputeParseOptionsWithHostValues(
                 ParseOptions parseOptions
-            ) {
+            )
+            {
                 var symbols = GetStringOption(CompilerOptions.OPTID_CCSYMBOLS, defaultValue: "")
                     .Split(new[] { ';' }, StringSplitOptions.RemoveEmptyEntries);
 

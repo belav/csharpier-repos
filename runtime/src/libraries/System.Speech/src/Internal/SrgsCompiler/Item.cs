@@ -45,7 +45,8 @@ namespace System.Speech.Internal.SrgsCompiler
                 && _startArc == _endArc
                 && _endArc.IsEpsilonTransition
                 && !_endArc.IsPropertylessTransition
-            ) {
+            )
+            {
                 XmlParser.ThrowSrgsException((SRID.InvalidTagInAnEmptyItem));
             }
 

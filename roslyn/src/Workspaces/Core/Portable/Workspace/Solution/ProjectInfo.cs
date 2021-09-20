@@ -155,7 +155,8 @@ namespace Microsoft.CodeAnalysis
             IReadOnlyList<DocumentInfo> additionalDocuments,
             IReadOnlyList<DocumentInfo> analyzerConfigDocuments,
             Type? hostObjectType
-        ) {
+        )
+        {
             Attributes = attributes;
             CompilationOptions = compilationOptions;
             ParseOptions = parseOptions;
@@ -189,7 +190,8 @@ namespace Microsoft.CodeAnalysis
             IEnumerable<DocumentInfo>? additionalDocuments,
             bool isSubmission,
             Type? hostObjectType
-        ) {
+        )
+        {
             return Create(
                 id,
                 version,
@@ -232,7 +234,8 @@ namespace Microsoft.CodeAnalysis
             bool isSubmission = false,
             Type? hostObjectType = null,
             string? outputRefFilePath = null
-        ) {
+        )
+        {
             return new ProjectInfo(
                 new ProjectAttributes(
                     id ?? throw new ArgumentNullException(nameof(id)),
@@ -288,7 +291,8 @@ namespace Microsoft.CodeAnalysis
             IReadOnlyList<DocumentInfo>? additionalDocuments = null,
             IReadOnlyList<DocumentInfo>? analyzerConfigDocuments = null,
             Optional<Type?> hostObjectType = default
-        ) {
+        )
+        {
             var newAttributes = attributes ?? Attributes;
             var newCompilationOptions = compilationOptions.HasValue
                 ? compilationOptions.Value
@@ -313,7 +317,8 @@ namespace Microsoft.CodeAnalysis
                 && newAdditionalDocuments == AdditionalDocuments
                 && newAnalyzerConfigDocuments == AnalyzerConfigDocuments
                 && newHostObjectType == HostObjectType
-            ) {
+            )
+            {
                 return this;
             }
 
@@ -556,7 +561,8 @@ namespace Microsoft.CodeAnalysis
                 bool hasAllInformation,
                 bool runAnalyzers,
                 Guid telemetryId
-            ) {
+            )
+            {
                 Id = id;
                 Name = name;
                 Language = language;
@@ -592,7 +598,8 @@ namespace Microsoft.CodeAnalysis
                 Optional<bool> hasAllInformation = default,
                 Optional<bool> runAnalyzers = default,
                 Optional<Guid> telemetryId = default
-            ) {
+            )
+            {
                 var newVersion = version ?? Version;
                 var newName = name ?? Name;
                 var newAssemblyName = assemblyName ?? AssemblyName;
@@ -629,7 +636,8 @@ namespace Microsoft.CodeAnalysis
                     && newHasAllInformation == HasAllInformation
                     && newRunAnalyzers == RunAnalyzers
                     && newTelemetryId == TelemetryId
-                ) {
+                )
+                {
                     return this;
                 }
 

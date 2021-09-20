@@ -61,10 +61,8 @@ namespace System.Data.OleDb
         // un-enlisted during Deactivate.
         private bool _unEnlistDuringDeactivate;
 
-        internal OleDbConnectionInternal(
-            OleDbConnectionString constr,
-            OleDbConnection? connection
-        ) : base()
+        internal OleDbConnectionInternal(OleDbConnectionString constr, OleDbConnection? connection)
+            : base()
         {
             Debug.Assert((null != constr) && !constr.IsEmpty, "empty connectionstring");
             ConnectionString = constr;
@@ -377,7 +375,8 @@ namespace System.Data.OleDb
                 {
                     using (
                         DBPropSet propset = new DBPropSet(idbProperties.Value, propidset, out hr)
-                    ) {
+                    )
+                    {
                         if (hr < 0)
                         {
                             // OLEDB Data Reader masks provider specific errors by raising "Internal Data Provider error 30."
@@ -433,7 +432,8 @@ namespace System.Data.OleDb
                         out literalInfo,
                         out hr
                     )
-                ) {
+                )
+                {
                     // All literals were either invalid or unsupported. The provider allocates memory for *prgLiteralInfo and sets the value of the fSupported element in all of the structures to FALSE. The consumer frees this memory when it no longer needs the information.
                     if (OleDbHResult.DB_E_ERRORSOCCURRED != hr)
                     {
@@ -443,7 +443,8 @@ namespace System.Data.OleDb
                             int i = 0;
                             i < literalCount;
                             ++i, offset += ODB.SizeOf_tagDBLITERALINFO
-                        ) {
+                        )
+                        {
                             Marshal.PtrToStructure((IntPtr)offset, tag);
 
                             DataRow row = table.NewRow();
@@ -571,7 +572,8 @@ namespace System.Data.OleDb
                         out literalInfo,
                         out hr
                     )
-                ) {
+                )
+                {
                     // All literals were either invalid or unsupported. The provider allocates memory for *prgLiteralInfo and sets the value of the fSupported element in all of the structures to FALSE. The consumer frees this memory when it no longer needs the information.
                     if (OleDbHResult.DB_E_ERRORSOCCURRED != hr)
                     {
@@ -579,7 +581,8 @@ namespace System.Data.OleDb
                             (1 == literalCount)
                             && Marshal.ReadInt32(literalInfo, ODB.OffsetOf_tagDBLITERALINFO_it)
                                 == literal
-                        ) {
+                        )
+                        {
                             literalValue = Marshal.PtrToStringUni(
                                 Marshal.ReadIntPtr(literalInfo, 0)
                             );
@@ -627,7 +630,8 @@ namespace System.Data.OleDb
                         out schemaRestrictions,
                         out hr
                     )
-                ) {
+                )
+                {
                     dbSchemaRowset = null;
                     if (hr < 0)
                     { // ignore infomsg
@@ -641,7 +645,8 @@ namespace System.Data.OleDb
                             int i = 0, offset = 0;
                             i < supportedSchemas.Length;
                             ++i, offset += ODB.SizeOf_Guid
-                        ) {
+                        )
+                        {
                             IntPtr ptr = ADP.IntPtrOffset(schemaGuids, i * ODB.SizeOf_Guid);
                             supportedSchemas[i]._schemaRowset = (Guid)Marshal.PtrToStructure(
                                 ptr,
@@ -707,7 +712,8 @@ namespace System.Data.OleDb
                             0,
                             CommandBehavior.Default
                         )
-                    ) {
+                    )
+                    {
                         dataReader.InitializeIRowset(
                             rowset,
                             ChapterHandle.DB_NULL_HCHAPTER,
@@ -921,7 +927,8 @@ namespace System.Data.OleDb
                             idbProperties.Value,
                             propidset
                         )
-                    ) {
+                    )
+                    {
                         properties = infoset.GetValues();
                     }
                 }

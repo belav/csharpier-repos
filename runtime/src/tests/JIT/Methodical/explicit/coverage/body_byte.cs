@@ -1160,7 +1160,8 @@ internal class TestApp
         fixed (
             void* p_init = &AA._init,
                 p_zero = &AA._zero
-        ) {
+        )
+        {
             if (test_7_0(100, p_init, p_zero) != 100)
             {
                 Console.WriteLine("test_7_0() failed.");
@@ -1172,7 +1173,8 @@ internal class TestApp
         fixed (
             void* p_init = &AA._init,
                 p_zero = &AA._zero
-        ) {
+        )
+        {
             if (test_7_1(100, p_init, p_zero) != 100)
             {
                 Console.WriteLine("test_7_1() failed.");
@@ -1184,7 +1186,8 @@ internal class TestApp
         fixed (
             void* p_init = &AA._init,
                 p_zero = &AA._zero
-        ) {
+        )
+        {
             if (test_7_2(100, p_init, p_zero) != 100)
             {
                 Console.WriteLine("test_7_2() failed.");
@@ -1196,7 +1199,8 @@ internal class TestApp
         fixed (
             void* p_init = &AA._init,
                 p_zero = &AA._zero
-        ) {
+        )
+        {
             if (test_7_3(100, p_init, p_zero) != 100)
             {
                 Console.WriteLine("test_7_3() failed.");
@@ -1208,7 +1212,8 @@ internal class TestApp
         fixed (
             void* p_init = &AA._init,
                 p_zero = &AA._zero
-        ) {
+        )
+        {
             if (test_7_4(100, p_init, p_zero) != 100)
             {
                 Console.WriteLine("test_7_4() failed.");
@@ -1220,7 +1225,8 @@ internal class TestApp
         fixed (
             void* p_init = &AA._init,
                 p_zero = &AA._zero
-        ) {
+        )
+        {
             if (test_7_5(100, p_init, p_zero) != 100)
             {
                 Console.WriteLine("test_7_5() failed.");
@@ -1232,7 +1238,8 @@ internal class TestApp
         fixed (
             void* p_init = &AA._init,
                 p_zero = &AA._zero
-        ) {
+        )
+        {
             if (test_7_6(100, p_init, p_zero) != 100)
             {
                 Console.WriteLine("test_7_6() failed.");
@@ -1244,7 +1251,8 @@ internal class TestApp
         fixed (
             void* p_init = &AA._init,
                 p_zero = &AA._zero
-        ) {
+        )
+        {
             if (test_7_7(100, p_init, p_zero) != 100)
             {
                 Console.WriteLine("test_7_7() failed.");
@@ -1256,7 +1264,8 @@ internal class TestApp
         fixed (
             void* p_init = &AA._init,
                 p_zero = &AA._zero
-        ) {
+        )
+        {
             if (test_7_8(100, p_init, p_zero) != 100)
             {
                 Console.WriteLine("test_7_8() failed.");
@@ -1268,7 +1277,8 @@ internal class TestApp
         fixed (
             void* p_init = &AA._init,
                 p_zero = &AA._zero
-        ) {
+        )
+        {
             if (test_7_9(100, p_init, p_zero) != 100)
             {
                 Console.WriteLine("test_7_9() failed.");
@@ -1280,7 +1290,8 @@ internal class TestApp
         fixed (
             void* p_init = &AA._init,
                 p_zero = &AA._zero
-        ) {
+        )
+        {
             if (test_7_10(100, p_init, p_zero) != 100)
             {
                 Console.WriteLine("test_7_10() failed.");
@@ -1292,7 +1303,8 @@ internal class TestApp
         fixed (
             void* p_init = &AA._init,
                 p_zero = &AA._zero
-        ) {
+        )
+        {
             if (test_7_11(100, p_init, p_zero) != 100)
             {
                 Console.WriteLine("test_7_11() failed.");
@@ -1304,7 +1316,8 @@ internal class TestApp
         fixed (
             void* p_init = &AA._init,
                 p_zero = &AA._zero
-        ) {
+        )
+        {
             if (test_7_12(100, p_init, p_zero) != 100)
             {
                 Console.WriteLine("test_7_12() failed.");
@@ -1316,7 +1329,8 @@ internal class TestApp
         fixed (
             void* p_init = &AA._init,
                 p_zero = &AA._zero
-        ) {
+        )
+        {
             if (test_7_13(100, p_init, p_zero) != 100)
             {
                 Console.WriteLine("test_7_13() failed.");
@@ -1328,7 +1342,8 @@ internal class TestApp
         fixed (
             void* p_init = &AA._init,
                 p_zero = &AA._zero
-        ) {
+        )
+        {
             if (test_7_14(100, p_init, p_zero) != 100)
             {
                 Console.WriteLine("test_7_14() failed.");
@@ -1340,7 +1355,8 @@ internal class TestApp
         fixed (
             void* p_init = &AA._init,
                 p_zero = &AA._zero
-        ) {
+        )
+        {
             if (test_7_15(100, p_init, p_zero) != 100)
             {
                 Console.WriteLine("test_7_15() failed.");
@@ -1352,7 +1368,8 @@ internal class TestApp
         fixed (
             void* p_init = &AA._init,
                 p_zero = &AA._zero
-        ) {
+        )
+        {
             if (test_7_16(100, p_init, p_zero) != 100)
             {
                 Console.WriteLine("test_7_16() failed.");
@@ -1364,7 +1381,8 @@ internal class TestApp
         fixed (
             void* p_init = &AA._init,
                 p_zero = &AA._zero
-        ) {
+        )
+        {
             if (test_7_17(100, p_init, p_zero) != 100)
             {
                 Console.WriteLine("test_7_17() failed.");

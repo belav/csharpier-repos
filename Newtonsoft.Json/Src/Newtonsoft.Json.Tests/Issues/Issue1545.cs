@@ -141,7 +141,8 @@ namespace Newtonsoft.Json.Tests.Issues
             Type objectType,
             object existingValue,
             JsonSerializer serializer
-        ) {
+        )
+        {
             if (reader.TokenType == JsonToken.Null)
             {
                 return null;

@@ -119,7 +119,8 @@ namespace RunTests
             string procDumpFilePath,
             int processId,
             string dumpDirectory
-        ) {
+        )
+        {
             Directory.CreateDirectory(dumpDirectory);
             return Process.Start(
                 procDumpFilePath,

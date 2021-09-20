@@ -394,7 +394,8 @@ class RPInvokeTest
         Vector3 v1,
         [MarshalAs(UnmanagedType.LPStr)] string s,
         Vector3 v2
-    ) {
+    )
+    {
         // sum = (1, 2, 3) dot (1, 2, 3) = 14
         float sum0 = Vector3.Dot(v1, v1);
         // sum = (10, 20, 30) dot (10, 20, 30) = 1400
@@ -424,7 +425,8 @@ class RPInvokeTest
         Vector3 v3f32_mem0,
         float f32_mem1,
         float f32_mem2
-    ) {
+    )
+    {
         // sum = (1, 2, 3) dot (1, 2, 3) = 14
         float sum0 = Vector3.Dot(v3f32_xmm0, v3f32_xmm0);
         // sum = (10, 20, 30) dot (10, 20, 30) = 1400
@@ -467,7 +469,8 @@ class RPInvokeTest
         float f32_mem2,
         Vector3 v3f32_mem3,
         float f32_mem4
-    ) {
+    )
+    {
         // sum = (1, 2, 3) dot (1, 2, 3) = 14
         float sum0 = Vector3.Dot(v3f32_xmm0, v3f32_xmm0);
         // sum = (4, 5, 6) dot (4, 5, 6) = 77
@@ -527,7 +530,8 @@ class RPInvokeTest
     static void callBack_RPInvoke_Vector3Array(
         [In, MarshalAs(UnmanagedType.LPArray, SizeParamIndex = 1)] Vector3[] v,
         int size
-    ) {
+    )
+    {
         // sum0 = (2,3,4) dot (2,3,4) = 4 + 9 + 16 = 29
         float sum0 = Vector3.Dot(v[0], v[0]);
         // sum0 = (11,21,31) dot (11,21,31) = 121 + 441 + 961 = 1523

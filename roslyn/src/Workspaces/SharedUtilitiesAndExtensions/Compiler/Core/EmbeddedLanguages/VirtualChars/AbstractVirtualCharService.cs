@@ -26,7 +26,8 @@ namespace Microsoft.CodeAnalysis.EmbeddedLanguages.VirtualChars
             int index,
             int offset,
             out TextSpan span
-        ) {
+        )
+        {
             if (index + 1 < tokenText.Length)
             {
                 var ch = tokenText[index];
@@ -137,7 +138,8 @@ namespace Microsoft.CodeAnalysis.EmbeddedLanguages.VirtualChars
             string startDelimiter,
             string endDelimiter,
             bool escapeBraces
-        ) {
+        )
+        {
             Debug.Assert(!token.ContainsDiagnostics);
 
             if (escapeBraces)
@@ -196,7 +198,8 @@ namespace Microsoft.CodeAnalysis.EmbeddedLanguages.VirtualChars
                 else if (
                     index + 1 < tokenText.Length
                     && Rune.TryCreate(tokenText[index], tokenText[index + 1], out rune)
-                ) {
+                )
+                {
                     // Otherwise, see if we have a surrogate pair (less common, but possible).
                     result.Add(VirtualChar.Create(rune, new TextSpan(offset + index, 2)));
                     index += 2;
@@ -229,7 +232,8 @@ namespace Microsoft.CodeAnalysis.EmbeddedLanguages.VirtualChars
             int startIndexInclusive,
             int endIndexExclusive,
             ArrayBuilder<VirtualChar> result
-        ) {
+        )
+        {
             // Check if we actually needed to create any special virtual chars.
             // if not, we can avoid the entire array allocation and just wrap
             // the text of the token and pass that back.

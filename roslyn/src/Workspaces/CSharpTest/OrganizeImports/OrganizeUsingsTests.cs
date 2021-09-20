@@ -25,7 +25,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Workspaces.UnitTests.OrganizeImports
             string final,
             bool placeSystemNamespaceFirst = false,
             bool separateImportGroups = false
-        ) {
+        )
+        {
             using var workspace = new AdhocWorkspace();
             var project = workspace.CurrentSolution.AddProject(
                 "Project",

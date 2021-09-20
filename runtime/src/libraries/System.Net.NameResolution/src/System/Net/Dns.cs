@@ -139,7 +139,8 @@ namespace System.Net
             string hostNameOrAddress,
             AddressFamily family,
             CancellationToken cancellationToken = default
-        ) {
+        )
+        {
             if (NetEventSource.Log.IsEnabled())
             {
                 Task<IPHostEntry> t = GetHostEntryCoreAsync(
@@ -462,7 +463,8 @@ namespace System.Net
                     address.AddressFamily != AddressFamily.InterNetworkV6
                     || SocketProtocolSupportPal.OSSupportsIPv6
                 )
-            ) {
+            )
+            {
                 try
                 {
                     ipHostEntry = GetHostEntryCore(address, AddressFamily.Unspecified);
@@ -557,7 +559,8 @@ namespace System.Net
             string hostName,
             bool justAddresses,
             AddressFamily addressFamily
-        ) {
+        )
+        {
             ValidateHostName(hostName);
 
             ValueStopwatch stopwatch = NameResolutionTelemetry.Log.BeforeResolution(hostName);
@@ -620,7 +623,8 @@ namespace System.Net
             IPAddress address,
             bool justAddresses,
             AddressFamily addressFamily
-        ) {
+        )
+        {
             // Try to get the data for the host from its address.
             // We need to call getnameinfo first, because getaddrinfo w/ the ipaddress string
             // will only return that address and not the full list.
@@ -732,7 +736,8 @@ namespace System.Net
             bool justAddresses,
             AddressFamily family,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             if (hostName is null)
             {
                 throw new ArgumentNullException(nameof(hostName));
@@ -753,7 +758,8 @@ namespace System.Net
                 if (
                     throwOnIIPAny
                     && (ipAddress.Equals(IPAddress.Any) || ipAddress.Equals(IPAddress.IPv6Any))
-                ) {
+                )
+                {
                     if (NetEventSource.Log.IsEnabled())
                         NetEventSource.Error(hostName, $"Invalid address '{ipAddress}'");
                     throw new ArgumentException(SR.net_invalid_ip_addr, nameof(hostName));
@@ -962,7 +968,8 @@ namespace System.Net
             Func<object, TResult> func,
             object key,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             Task<TResult>? task = null;
 
             lock (s_tasks)

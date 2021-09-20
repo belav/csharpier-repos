@@ -72,7 +72,8 @@ namespace Microsoft.EntityFrameworkCore.Cosmos.Query.Internal
         public virtual CosmosSqlQuery GetSqlQuery(
             SelectExpression selectExpression,
             IReadOnlyDictionary<string, object> parameterValues
-        ) {
+        )
+        {
             _sqlBuilder.Clear();
             _parameterValues = parameterValues;
             _sqlParameters = new List<SqlParameter>();
@@ -90,7 +91,8 @@ namespace Microsoft.EntityFrameworkCore.Cosmos.Query.Internal
         /// </summary>
         protected override Expression VisitEntityProjection(
             EntityProjectionExpression entityProjectionExpression
-        ) {
+        )
+        {
             Check.NotNull(entityProjectionExpression, nameof(entityProjectionExpression));
 
             Visit(entityProjectionExpression.AccessExpression);
@@ -106,7 +108,8 @@ namespace Microsoft.EntityFrameworkCore.Cosmos.Query.Internal
         /// </summary>
         protected override Expression VisitObjectArrayProjection(
             ObjectArrayProjectionExpression objectArrayProjectionExpression
-        ) {
+        )
+        {
             Check.NotNull(objectArrayProjectionExpression, nameof(objectArrayProjectionExpression));
 
             _sqlBuilder.Append(objectArrayProjectionExpression);
@@ -137,7 +140,8 @@ namespace Microsoft.EntityFrameworkCore.Cosmos.Query.Internal
         /// </summary>
         protected override Expression VisitObjectAccess(
             ObjectAccessExpression objectAccessExpression
-        ) {
+        )
+        {
             Check.NotNull(objectAccessExpression, nameof(objectAccessExpression));
 
             _sqlBuilder.Append(objectAccessExpression);
@@ -166,7 +170,8 @@ namespace Microsoft.EntityFrameworkCore.Cosmos.Query.Internal
                 !_useValueProjection
                 && !string.IsNullOrEmpty(projectionExpression.Alias)
                 && projectionExpression.Alias != projectionExpression.Name
-            ) {
+            )
+            {
                 _sqlBuilder.Append(" AS " + projectionExpression.Alias);
             }
 
@@ -181,7 +186,8 @@ namespace Microsoft.EntityFrameworkCore.Cosmos.Query.Internal
         /// </summary>
         protected override Expression VisitRootReference(
             RootReferenceExpression rootReferenceExpression
-        ) {
+        )
+        {
             Check.NotNull(rootReferenceExpression, nameof(rootReferenceExpression));
 
             _sqlBuilder.Append(rootReferenceExpression);
@@ -316,7 +322,8 @@ namespace Microsoft.EntityFrameworkCore.Cosmos.Query.Internal
             if (
                 sqlBinaryExpression.OperatorType == ExpressionType.Add
                 && sqlBinaryExpression.Left.Type == typeof(string)
-            ) {
+            )
+            {
                 op = " || ";
             }
 
@@ -343,7 +350,8 @@ namespace Microsoft.EntityFrameworkCore.Cosmos.Query.Internal
             if (
                 sqlUnaryExpression.OperatorType == ExpressionType.Not
                 && sqlUnaryExpression.Operand.Type == typeof(bool)
-            ) {
+            )
+            {
                 op = "NOT";
             }
 
@@ -360,7 +368,8 @@ namespace Microsoft.EntityFrameworkCore.Cosmos.Query.Internal
             IReadOnlyList<T> items,
             Action<T> generationAction,
             Action<StringBuilder> joinAction = null
-        ) {
+        )
+        {
             joinAction ??= (isb => isb.Append(", "));
 
             for (var i = 0; i < items.Count; i++)
@@ -425,7 +434,8 @@ namespace Microsoft.EntityFrameworkCore.Cosmos.Query.Internal
         /// </summary>
         protected override Expression VisitSqlConditional(
             SqlConditionalExpression sqlConditionalExpression
-        ) {
+        )
+        {
             Check.NotNull(sqlConditionalExpression, nameof(sqlConditionalExpression));
 
             _sqlBuilder.Append("(");
@@ -447,7 +457,8 @@ namespace Microsoft.EntityFrameworkCore.Cosmos.Query.Internal
         /// </summary>
         protected override Expression VisitSqlParameter(
             SqlParameterExpression sqlParameterExpression
-        ) {
+        )
+        {
             Check.NotNull(sqlParameterExpression, nameof(sqlParameterExpression));
 
             var parameterName = $"@{sqlParameterExpression.Name}";

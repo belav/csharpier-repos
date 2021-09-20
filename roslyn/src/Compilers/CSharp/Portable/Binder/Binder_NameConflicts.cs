@@ -14,14 +14,16 @@ namespace Microsoft.CodeAnalysis.CSharp
             Location location,
             string name,
             BindingDiagnosticBag diagnostics
-        ) {
+        )
+        {
             return ValidateNameConflictsInScope(null, location, name, diagnostics);
         }
 
         internal bool ValidateDeclarationNameConflictsInScope(
             Symbol symbol,
             BindingDiagnosticBag diagnostics
-        ) {
+        )
+        {
             Location location = GetLocation(symbol);
             return ValidateNameConflictsInScope(symbol, location, symbol.Name, diagnostics);
         }
@@ -37,7 +39,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             ImmutableArray<ParameterSymbol> parameters,
             bool allowShadowingNames,
             BindingDiagnosticBag diagnostics
-        ) {
+        )
+        {
             PooledHashSet<string>? tpNames = null;
             if (!typeParameters.IsDefaultOrEmpty)
             {
@@ -107,7 +110,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             Location location,
             string name,
             BindingDiagnosticBag diagnostics
-        ) {
+        )
+        {
             if (string.IsNullOrEmpty(name))
             {
                 return false;

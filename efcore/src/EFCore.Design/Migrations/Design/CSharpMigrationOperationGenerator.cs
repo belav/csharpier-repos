@@ -23,7 +23,8 @@ namespace Microsoft.EntityFrameworkCore.Migrations.Design
         /// <param name="dependencies"> The dependencies. </param>
         public CSharpMigrationOperationGenerator(
             CSharpMigrationOperationGeneratorDependencies dependencies
-        ) {
+        )
+        {
             Check.NotNull(dependencies, nameof(dependencies));
 
             Dependencies = dependencies;
@@ -46,7 +47,8 @@ namespace Microsoft.EntityFrameworkCore.Migrations.Design
             string builderName,
             IReadOnlyList<MigrationOperation> operations,
             IndentedStringBuilder builder
-        ) {
+        )
+        {
             Check.NotEmpty(builderName, nameof(builderName));
             Check.NotNull(operations, nameof(operations));
             Check.NotNull(builder, nameof(builder));
@@ -212,7 +214,8 @@ namespace Microsoft.EntityFrameworkCore.Migrations.Design
         protected virtual void Generate(
             AddForeignKeyOperation operation,
             IndentedStringBuilder builder
-        ) {
+        )
+        {
             Check.NotNull(operation, nameof(operation));
             Check.NotNull(builder, nameof(builder));
 
@@ -298,7 +301,8 @@ namespace Microsoft.EntityFrameworkCore.Migrations.Design
         protected virtual void Generate(
             AddPrimaryKeyOperation operation,
             IndentedStringBuilder builder
-        ) {
+        )
+        {
             Check.NotNull(operation, nameof(operation));
             Check.NotNull(builder, nameof(builder));
 
@@ -343,7 +347,8 @@ namespace Microsoft.EntityFrameworkCore.Migrations.Design
         protected virtual void Generate(
             AddUniqueConstraintOperation operation,
             IndentedStringBuilder builder
-        ) {
+        )
+        {
             Check.NotNull(operation, nameof(operation));
             Check.NotNull(builder, nameof(builder));
 
@@ -388,7 +393,8 @@ namespace Microsoft.EntityFrameworkCore.Migrations.Design
         protected virtual void Generate(
             AddCheckConstraintOperation operation,
             IndentedStringBuilder builder
-        ) {
+        )
+        {
             Check.NotNull(operation, nameof(operation));
             Check.NotNull(builder, nameof(builder));
 
@@ -425,7 +431,8 @@ namespace Microsoft.EntityFrameworkCore.Migrations.Design
         protected virtual void Generate(
             AlterColumnOperation operation,
             IndentedStringBuilder builder
-        ) {
+        )
+        {
             Check.NotNull(operation, nameof(operation));
             Check.NotNull(builder, nameof(builder));
 
@@ -644,7 +651,8 @@ namespace Microsoft.EntityFrameworkCore.Migrations.Design
         protected virtual void Generate(
             AlterDatabaseOperation operation,
             IndentedStringBuilder builder
-        ) {
+        )
+        {
             Check.NotNull(operation, nameof(operation));
             Check.NotNull(builder, nameof(builder));
 
@@ -692,7 +700,8 @@ namespace Microsoft.EntityFrameworkCore.Migrations.Design
         protected virtual void Generate(
             AlterSequenceOperation operation,
             IndentedStringBuilder builder
-        ) {
+        )
+        {
             Check.NotNull(operation, nameof(operation));
             Check.NotNull(builder, nameof(builder));
 
@@ -776,7 +785,8 @@ namespace Microsoft.EntityFrameworkCore.Migrations.Design
         protected virtual void Generate(
             AlterTableOperation operation,
             IndentedStringBuilder builder
-        ) {
+        )
+        {
             Check.NotNull(operation, nameof(operation));
             Check.NotNull(builder, nameof(builder));
 
@@ -822,7 +832,8 @@ namespace Microsoft.EntityFrameworkCore.Migrations.Design
         protected virtual void Generate(
             CreateIndexOperation operation,
             IndentedStringBuilder builder
-        ) {
+        )
+        {
             Check.NotNull(operation, nameof(operation));
             Check.NotNull(builder, nameof(builder));
 
@@ -879,7 +890,8 @@ namespace Microsoft.EntityFrameworkCore.Migrations.Design
         protected virtual void Generate(
             EnsureSchemaOperation operation,
             IndentedStringBuilder builder
-        ) {
+        )
+        {
             Check.NotNull(operation, nameof(operation));
             Check.NotNull(builder, nameof(builder));
 
@@ -901,7 +913,8 @@ namespace Microsoft.EntityFrameworkCore.Migrations.Design
         protected virtual void Generate(
             CreateSequenceOperation operation,
             IndentedStringBuilder builder
-        ) {
+        )
+        {
             Check.NotNull(operation, nameof(operation));
             Check.NotNull(builder, nameof(builder));
 
@@ -972,7 +985,8 @@ namespace Microsoft.EntityFrameworkCore.Migrations.Design
         protected virtual void Generate(
             CreateTableOperation operation,
             IndentedStringBuilder builder
-        ) {
+        )
+        {
             Check.NotNull(operation, nameof(operation));
             Check.NotNull(builder, nameof(builder));
 
@@ -1253,7 +1267,8 @@ namespace Microsoft.EntityFrameworkCore.Migrations.Design
         protected virtual void Generate(
             DropColumnOperation operation,
             IndentedStringBuilder builder
-        ) {
+        )
+        {
             Check.NotNull(operation, nameof(operation));
             Check.NotNull(builder, nameof(builder));
 
@@ -1287,7 +1302,8 @@ namespace Microsoft.EntityFrameworkCore.Migrations.Design
         protected virtual void Generate(
             DropForeignKeyOperation operation,
             IndentedStringBuilder builder
-        ) {
+        )
+        {
             Check.NotNull(operation, nameof(operation));
             Check.NotNull(builder, nameof(builder));
 
@@ -1355,7 +1371,8 @@ namespace Microsoft.EntityFrameworkCore.Migrations.Design
         protected virtual void Generate(
             DropPrimaryKeyOperation operation,
             IndentedStringBuilder builder
-        ) {
+        )
+        {
             Check.NotNull(operation, nameof(operation));
             Check.NotNull(builder, nameof(builder));
 
@@ -1389,7 +1406,8 @@ namespace Microsoft.EntityFrameworkCore.Migrations.Design
         protected virtual void Generate(
             DropSchemaOperation operation,
             IndentedStringBuilder builder
-        ) {
+        )
+        {
             Check.NotNull(operation, nameof(operation));
             Check.NotNull(builder, nameof(builder));
 
@@ -1411,7 +1429,8 @@ namespace Microsoft.EntityFrameworkCore.Migrations.Design
         protected virtual void Generate(
             DropSequenceOperation operation,
             IndentedStringBuilder builder
-        ) {
+        )
+        {
             Check.NotNull(operation, nameof(operation));
             Check.NotNull(builder, nameof(builder));
 
@@ -1471,7 +1490,8 @@ namespace Microsoft.EntityFrameworkCore.Migrations.Design
         protected virtual void Generate(
             DropUniqueConstraintOperation operation,
             IndentedStringBuilder builder
-        ) {
+        )
+        {
             Check.NotNull(operation, nameof(operation));
             Check.NotNull(builder, nameof(builder));
 
@@ -1505,7 +1525,8 @@ namespace Microsoft.EntityFrameworkCore.Migrations.Design
         protected virtual void Generate(
             DropCheckConstraintOperation operation,
             IndentedStringBuilder builder
-        ) {
+        )
+        {
             Check.NotNull(operation, nameof(operation));
             Check.NotNull(builder, nameof(builder));
 
@@ -1539,7 +1560,8 @@ namespace Microsoft.EntityFrameworkCore.Migrations.Design
         protected virtual void Generate(
             RenameColumnOperation operation,
             IndentedStringBuilder builder
-        ) {
+        )
+        {
             Check.NotNull(operation, nameof(operation));
             Check.NotNull(builder, nameof(builder));
 
@@ -1576,7 +1598,8 @@ namespace Microsoft.EntityFrameworkCore.Migrations.Design
         protected virtual void Generate(
             RenameIndexOperation operation,
             IndentedStringBuilder builder
-        ) {
+        )
+        {
             Check.NotNull(operation, nameof(operation));
             Check.NotNull(builder, nameof(builder));
 
@@ -1615,7 +1638,8 @@ namespace Microsoft.EntityFrameworkCore.Migrations.Design
         protected virtual void Generate(
             RenameSequenceOperation operation,
             IndentedStringBuilder builder
-        ) {
+        )
+        {
             Check.NotNull(operation, nameof(operation));
             Check.NotNull(builder, nameof(builder));
 
@@ -1660,7 +1684,8 @@ namespace Microsoft.EntityFrameworkCore.Migrations.Design
         protected virtual void Generate(
             RenameTableOperation operation,
             IndentedStringBuilder builder
-        ) {
+        )
+        {
             Check.NotNull(operation, nameof(operation));
             Check.NotNull(builder, nameof(builder));
 
@@ -1705,7 +1730,8 @@ namespace Microsoft.EntityFrameworkCore.Migrations.Design
         protected virtual void Generate(
             RestartSequenceOperation operation,
             IndentedStringBuilder builder
-        ) {
+        )
+        {
             Check.NotNull(operation, nameof(operation));
             Check.NotNull(builder, nameof(builder));
 
@@ -1757,7 +1783,8 @@ namespace Microsoft.EntityFrameworkCore.Migrations.Design
         protected virtual void Generate(
             InsertDataOperation operation,
             IndentedStringBuilder builder
-        ) {
+        )
+        {
             Check.NotNull(operation, nameof(operation));
             Check.NotNull(builder, nameof(builder));
 
@@ -1823,7 +1850,8 @@ namespace Microsoft.EntityFrameworkCore.Migrations.Design
         protected virtual void Generate(
             DeleteDataOperation operation,
             IndentedStringBuilder builder
-        ) {
+        )
+        {
             Check.NotNull(operation, nameof(operation));
             Check.NotNull(builder, nameof(builder));
 
@@ -1906,7 +1934,8 @@ namespace Microsoft.EntityFrameworkCore.Migrations.Design
         protected virtual void Generate(
             UpdateDataOperation operation,
             IndentedStringBuilder builder
-        ) {
+        )
+        {
             Check.NotNull(operation, nameof(operation));
             Check.NotNull(builder, nameof(builder));
 
@@ -2012,7 +2041,8 @@ namespace Microsoft.EntityFrameworkCore.Migrations.Design
         protected virtual void Annotations(
             IEnumerable<Annotation> annotations,
             IndentedStringBuilder builder
-        ) {
+        )
+        {
             Check.NotNull(annotations, nameof(annotations));
             Check.NotNull(builder, nameof(builder));
 
@@ -2041,7 +2071,8 @@ namespace Microsoft.EntityFrameworkCore.Migrations.Design
         protected virtual void OldAnnotations(
             IEnumerable<Annotation> annotations,
             IndentedStringBuilder builder
-        ) {
+        )
+        {
             Check.NotNull(annotations, nameof(annotations));
             Check.NotNull(builder, nameof(builder));
 
@@ -2060,7 +2091,8 @@ namespace Microsoft.EntityFrameworkCore.Migrations.Design
         private static object?[] ToOnedimensionalArray(
             object?[,] values,
             bool firstDimension = false
-        ) {
+        )
+        {
             Check.DebugAssert(
                 values.GetLength(firstDimension ? 1 : 0) == 1,
                 $"Length of dimension {(firstDimension ? 1 : 0)} is not 1."

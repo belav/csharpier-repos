@@ -47,7 +47,8 @@ namespace System.IO.Tests
             using (var file = new TempFile(Path.Combine(testDirectory.Path, "file")))
             using (
                 var watcher = new FileSystemWatcher(testDirectory.Path, Path.GetFileName(file.Path))
-            ) {
+            )
+            {
                 watcher.NotifyFilter = filter;
                 var attributes = File.GetAttributes(file.Path);
 
@@ -77,7 +78,8 @@ namespace System.IO.Tests
             using (var file = new TempFile(Path.Combine(testDirectory.Path, "file")))
             using (
                 var watcher = new FileSystemWatcher(testDirectory.Path, Path.GetFileName(file.Path))
-            ) {
+            )
+            {
                 watcher.NotifyFilter = filter;
                 Action action = () =>
                     File.SetCreationTime(file.Path, DateTime.Now + TimeSpan.FromSeconds(10));
@@ -102,7 +104,8 @@ namespace System.IO.Tests
             using (var dir = new TempDirectory(Path.Combine(testDirectory.Path, "dir")))
             using (
                 var watcher = new FileSystemWatcher(testDirectory.Path, Path.GetFileName(dir.Path))
-            ) {
+            )
+            {
                 string sourcePath = dir.Path;
                 string targetPath = Path.Combine(testDirectory.Path, "targetDir");
                 watcher.NotifyFilter = filter;
@@ -126,7 +129,8 @@ namespace System.IO.Tests
             using (var file = new TempFile(Path.Combine(testDirectory.Path, "file")))
             using (
                 var watcher = new FileSystemWatcher(testDirectory.Path, Path.GetFileName(file.Path))
-            ) {
+            )
+            {
                 watcher.NotifyFilter = filter;
                 Action action = () =>
                     File.SetLastAccessTime(file.Path, DateTime.Now + TimeSpan.FromSeconds(10));
@@ -150,7 +154,8 @@ namespace System.IO.Tests
             using (var file = new TempFile(Path.Combine(testDirectory.Path, "file")))
             using (
                 var watcher = new FileSystemWatcher(testDirectory.Path, Path.GetFileName(file.Path))
-            ) {
+            )
+            {
                 watcher.NotifyFilter = filter;
                 Action action = () =>
                     File.SetLastWriteTime(file.Path, DateTime.Now + TimeSpan.FromSeconds(10));
@@ -174,7 +179,8 @@ namespace System.IO.Tests
             using (var file = new TempFile(Path.Combine(testDirectory.Path, "file")))
             using (
                 var watcher = new FileSystemWatcher(testDirectory.Path, Path.GetFileName(file.Path))
-            ) {
+            )
+            {
                 watcher.NotifyFilter = filter;
                 Action action = () => File.AppendAllText(file.Path, "longText!");
                 Action cleanup = () => File.AppendAllText(file.Path, "short");
@@ -209,7 +215,8 @@ namespace System.IO.Tests
                                 testDirectory.Path,
                                 Path.GetFileName(file.Path)
                             )
-                        ) {
+                        )
+                        {
                             filter |= (NotifyFilters)filter2Arr[0];
                             watcher.NotifyFilter = filter;
                             Action action = () => File.AppendAllText(file.Path, "longText!");
@@ -250,7 +257,8 @@ namespace System.IO.Tests
             using (var file = new TempFile(Path.Combine(testDirectory.Path, "file")))
             using (
                 var watcher = new FileSystemWatcher(testDirectory.Path, Path.GetFileName(file.Path))
-            ) {
+            )
+            {
                 watcher.NotifyFilter = filter;
                 Action action = () =>
                 {
@@ -292,7 +300,8 @@ namespace System.IO.Tests
             using (var dir = new TempDirectory(Path.Combine(testDirectory.Path, "dir")))
             using (
                 var watcher = new FileSystemWatcher(testDirectory.Path, Path.GetFileName(dir.Path))
-            ) {
+            )
+            {
                 NotifyFilters filter = NotifyFilters.LastWrite | NotifyFilters.FileName;
                 watcher.NotifyFilter = filter;
 

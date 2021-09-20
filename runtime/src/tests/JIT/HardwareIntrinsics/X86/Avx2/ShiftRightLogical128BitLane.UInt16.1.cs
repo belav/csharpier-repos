@@ -113,7 +113,8 @@ namespace JIT.HardwareIntrinsics.X86
 
             public void RunStructFldScenario(
                 ImmUnaryOpTest__ShiftRightLogical128BitLaneUInt161 testClass
-            ) {
+            )
+            {
                 var result = Avx2.ShiftRightLogical128BitLane(_fld, 1);
 
                 Unsafe.Write(testClass._dataTable.outArrayPtr, result);
@@ -380,7 +381,8 @@ namespace JIT.HardwareIntrinsics.X86
             Vector256<UInt16> firstOp,
             void* result,
             [CallerMemberName] string method = ""
-        ) {
+        )
+        {
             UInt16[] inArray = new UInt16[Op1ElementCount];
             UInt16[] outArray = new UInt16[RetElementCount];
 
@@ -398,7 +400,8 @@ namespace JIT.HardwareIntrinsics.X86
             void* firstOp,
             void* result,
             [CallerMemberName] string method = ""
-        ) {
+        )
+        {
             UInt16[] inArray = new UInt16[Op1ElementCount];
             UInt16[] outArray = new UInt16[RetElementCount];
 
@@ -420,7 +423,8 @@ namespace JIT.HardwareIntrinsics.X86
             UInt16[] firstOp,
             UInt16[] result,
             [CallerMemberName] string method = ""
-        ) {
+        )
+        {
             bool succeeded = true;
 
             if (result[0] != 2048)

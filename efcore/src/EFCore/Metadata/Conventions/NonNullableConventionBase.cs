@@ -49,7 +49,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
         protected virtual bool IsNonNullableReferenceType(
             IConventionModelBuilder modelBuilder,
             MemberInfo memberInfo
-        ) {
+        )
+        {
             if (memberInfo.GetMemberType().IsValueType)
             {
                 return false;
@@ -85,7 +86,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
                 Attribute.GetCustomAttributes(memberInfo)
                     .FirstOrDefault(a => a.GetType().FullName == NullableAttributeFullName)
                 is Attribute attribute
-            ) {
+            )
+            {
                 var attributeType = attribute.GetType();
 
                 if (attributeType != state.NullableAttrType)
@@ -115,7 +117,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
                             a => a.GetType().FullName == NullableContextAttributeFullName
                         )
                     is Attribute contextAttr
-                ) {
+                )
+                {
                     var attributeType = contextAttr.GetType();
 
                     if (attributeType != state.NullableContextAttrType)
@@ -135,7 +138,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
                             && property.IsIndexerProperty()
                             && type.IsGenericType
                             && type.GetGenericTypeDefinition() == typeof(Dictionary<, >)
-                        ) {
+                        )
+                        {
                             return false;
                         }
 

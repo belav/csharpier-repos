@@ -37,7 +37,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Xaml.LanguageServer.Handler
             FoldingRangeParams request,
             RequestContext context,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var foldingRanges = ArrayBuilder<FoldingRange>.GetInstance();
 
             var document = context.Document;

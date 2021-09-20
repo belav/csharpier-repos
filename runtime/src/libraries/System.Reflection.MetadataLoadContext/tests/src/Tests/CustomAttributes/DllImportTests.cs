@@ -57,7 +57,8 @@ namespace System.Reflection.Tests
         public static void TestMarshalAsPseudoCustomAttribute(
             string fieldName,
             MarshalAsAttribute expected
-        ) {
+        )
+        {
             TypeInfo ecmaType = typeof(MarshalAsHolders).Project().GetTypeInfo();
             FieldInfo ecmaField = ecmaType.GetDeclaredField(fieldName);
             Assert.NotNull(ecmaField);

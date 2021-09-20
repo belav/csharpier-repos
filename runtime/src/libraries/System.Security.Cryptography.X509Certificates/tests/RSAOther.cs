@@ -66,7 +66,8 @@ namespace System.Security.Cryptography.X509Certificates.Tests
             int offset,
             int count,
             HashAlgorithmName hashAlgorithm
-        ) {
+        )
+        {
             using (HashAlgorithm alg = GetHashAlgorithm(hashAlgorithm))
             {
                 return alg.ComputeHash(data, offset, count);

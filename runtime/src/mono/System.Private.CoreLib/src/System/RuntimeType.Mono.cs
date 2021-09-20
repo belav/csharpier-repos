@@ -152,7 +152,8 @@ namespace System
             bool ignoreCase,
             bool reflectionOnly,
             ref StackCrawlMark stackMark
-        ) {
+        )
+        {
             if (typeName == null)
                 throw new ArgumentNullException(nameof(typeName));
 
@@ -198,7 +199,8 @@ namespace System
             bool isPublic,
             bool isInherited,
             bool isStatic
-        ) {
+        )
+        {
             BindingFlags bindingFlags = isPublic ? BindingFlags.Public : BindingFlags.NonPublic;
 
             if (isInherited)
@@ -238,7 +240,8 @@ namespace System
             out bool prefixLookup,
             out bool ignoreCase,
             out MemberListType listType
-        ) {
+        )
+        {
             prefixLookup = false;
             ignoreCase = false;
 
@@ -277,7 +280,8 @@ namespace System
             ref string? name,
             out bool ignoreCase,
             out MemberListType listType
-        ) {
+        )
+        {
             bool prefixLookup;
             FilterHelper(
                 bindingFlags,
@@ -295,7 +299,8 @@ namespace System
             MemberInfo memberInfo,
             string? name,
             bool ignoreCase
-        ) {
+        )
+        {
             Debug.Assert(name != null);
 
             if (ignoreCase)
@@ -321,7 +326,8 @@ namespace System
             bool isStatic,
             string? name,
             bool prefixLookup
-        ) {
+        )
+        {
             #region Preconditions
             Debug.Assert(memberInfo != null);
             Debug.Assert(
@@ -355,7 +361,8 @@ namespace System
             if (
                 memberInfo.MemberType != MemberTypes.TypeInfo
                 && memberInfo.MemberType != MemberTypes.NestedType
-            ) {
+            )
+            {
                 if (isStatic)
                 {
                     if ((bindingFlags & BindingFlags.FlattenHierarchy) == 0 && isInherited)
@@ -423,7 +430,8 @@ namespace System
             string? name,
             bool prefixLookup,
             string? ns
-        ) {
+        )
+        {
             Debug.Assert(type is RuntimeType);
 
             bool isPublic = type.IsNestedPublic || type.IsPublic;
@@ -453,7 +461,8 @@ namespace System
             BindingFlags bindingFlags,
             CallingConventions callConv,
             Type[]? argumentTypes
-        ) {
+        )
+        {
             // Optimization: Pre-Calculate the method binding flags to avoid casting.
             return FilterApplyMethodBase(method, bindingFlags, callConv, argumentTypes);
         }
@@ -463,7 +472,8 @@ namespace System
             BindingFlags bindingFlags,
             CallingConventions callConv,
             Type[]? argumentTypes
-        ) {
+        )
+        {
             // Optimization: Pre-Calculate the method binding flags to avoid casting.
             return FilterApplyMethodBase(constructor, bindingFlags, callConv, argumentTypes);
         }
@@ -475,7 +485,8 @@ namespace System
             BindingFlags bindingFlags,
             CallingConventions callConv,
             Type[]? argumentTypes
-        ) {
+        )
+        {
             Debug.Assert(methodBase != null);
 
             bindingFlags ^= BindingFlags.DeclaredOnly;
@@ -646,7 +657,8 @@ namespace System
             Type[]? types,
             int genericParamCount,
             bool allowPrefixLookup
-        ) {
+        )
+        {
             bool prefixLookup,
                 ignoreCase;
             MemberListType listType;
@@ -679,7 +691,8 @@ namespace System
                 if (
                     FilterApplyMethodInfo(methodInfo, bindingAttr, callConv, types)
                     && (!prefixLookup || FilterApplyPrefixLookup(methodInfo, name, ignoreCase))
-                ) {
+                )
+                {
                     candidates.Add(methodInfo);
                 }
             }
@@ -693,7 +706,8 @@ namespace System
             CallingConventions callConv,
             Type[]? types,
             bool allowPrefixLookup
-        ) {
+        )
+        {
             bool prefixLookup,
                 ignoreCase;
             MemberListType listType;
@@ -722,7 +736,8 @@ namespace System
                 if (
                     FilterApplyConstructorInfo(constructorInfo, bindingAttr, callConv, types)
                     && (!prefixLookup || FilterApplyPrefixLookup(constructorInfo, name, ignoreCase))
-                ) {
+                )
+                {
                     candidates.Add(constructorInfo);
                 }
             }
@@ -735,7 +750,8 @@ namespace System
             BindingFlags bindingAttr,
             Type[]? types,
             bool allowPrefixLookup
-        ) {
+        )
+        {
             bool prefixLookup,
                 ignoreCase;
             MemberListType listType;
@@ -759,7 +775,8 @@ namespace System
                     (bindingAttr & propertyInfo.BindingFlags) == propertyInfo.BindingFlags
                     && (!prefixLookup || FilterApplyPrefixLookup(propertyInfo, name, ignoreCase))
                     && (types == null || (propertyInfo.GetIndexParameters().Length == types.Length))
-                ) {
+                )
+                {
                     candidates.Add(propertyInfo);
                 }
             }
@@ -771,7 +788,8 @@ namespace System
             string? name,
             BindingFlags bindingAttr,
             bool allowPrefixLookup
-        ) {
+        )
+        {
             bool prefixLookup,
                 ignoreCase;
             MemberListType listType;
@@ -794,7 +812,8 @@ namespace System
                 if (
                     (bindingAttr & eventInfo.BindingFlags) == eventInfo.BindingFlags
                     && (!prefixLookup || FilterApplyPrefixLookup(eventInfo, name, ignoreCase))
-                ) {
+                )
+                {
                     candidates.Add(eventInfo);
                 }
             }
@@ -806,7 +825,8 @@ namespace System
             string? name,
             BindingFlags bindingAttr,
             bool allowPrefixLookup
-        ) {
+        )
+        {
             bool prefixLookup,
                 ignoreCase;
             MemberListType listType;
@@ -839,7 +859,8 @@ namespace System
             string? fullname,
             BindingFlags bindingAttr,
             bool allowPrefixLookup
-        ) {
+        )
+        {
             bool prefixLookup,
                 ignoreCase;
             bindingAttr &= ~BindingFlags.Static;
@@ -999,7 +1020,8 @@ namespace System
             CallingConventions callConvention,
             Type[]? types,
             ParameterModifier[]? modifiers
-        ) {
+        )
+        {
             return GetMethodImpl(name, -1, bindingAttr, binder, callConvention, types, modifiers);
         }
 
@@ -1015,7 +1037,8 @@ namespace System
             CallingConventions callConv,
             Type[]? types,
             ParameterModifier[]? modifiers
-        ) {
+        )
+        {
             ListBuilder<MethodInfo> candidates = GetMethodCandidates(
                 name,
                 bindingAttr,
@@ -1069,7 +1092,8 @@ namespace System
             CallingConventions callConvention,
             Type[] types,
             ParameterModifier[]? modifiers
-        ) {
+        )
+        {
             ListBuilder<ConstructorInfo> candidates = GetConstructorCandidates(
                 null,
                 bindingAttr,
@@ -1114,7 +1138,8 @@ namespace System
             Type? returnType,
             Type[]? types,
             ParameterModifier[]? modifiers
-        ) {
+        )
+        {
             if (name == null)
                 throw new ArgumentNullException(nameof(name));
 
@@ -1349,7 +1374,8 @@ namespace System
             string name,
             MemberTypes type,
             BindingFlags bindingAttr
-        ) {
+        )
+        {
             if (name == null)
                 throw new ArgumentNullException(nameof(name));
 
@@ -1613,7 +1639,8 @@ namespace System
             Binder? binder,
             object?[]? args,
             CultureInfo? culture
-        ) {
+        )
+        {
             CreateInstanceCheckThis();
 
             object? server = null;
@@ -1639,7 +1666,8 @@ namespace System
                         && (bindingAttr & BindingFlags.Public) != 0
                         && (bindingAttr & BindingFlags.Instance) != 0
                         && (IsValueType)
-                    ) {
+                    )
+                    {
                         server = CreateInstanceDefaultCtor(publicOnly, wrapExceptions);
                     }
                     else
@@ -1932,7 +1960,8 @@ namespace System
             Binder binder,
             CultureInfo? culture,
             BindingFlags invokeAttr
-        ) {
+        )
+        {
             bool failed = false;
             object? res = TryConvertToType(value, ref failed);
             if (!failed)
@@ -2239,7 +2268,8 @@ namespace System
             )]
                 Type genericType,
             RuntimeType genericArgument
-        ) {
+        )
+        {
             var gt = (RuntimeType)MakeGenericType(genericType, new Type[] { genericArgument });
             RuntimeConstructorInfo? ctor = gt.GetDefaultConstructor();
 
@@ -2265,14 +2295,16 @@ namespace System
             BindingFlags bindingAttr,
             MemberListType listType,
             RuntimeType reflectedType
-        ) {
+        )
+        {
             var refh = new RuntimeTypeHandle(reflectedType);
             using (var namePtr = new Mono.SafeStringMarshal(name))
             using (
                 var h = new Mono.SafeGPtrArrayHandle(
                     GetMethodsByName_native(namePtr.Value, bindingAttr, listType)
                 )
-            ) {
+            )
+            {
                 int n = h.Length;
                 var a = new RuntimeMethodInfo[n];
                 for (int i = 0; i < n; i++)
@@ -2300,7 +2332,8 @@ namespace System
         private RuntimeConstructorInfo[] GetConstructors_internal(
             BindingFlags bindingAttr,
             RuntimeType reflectedType
-        ) {
+        )
+        {
             var refh = new RuntimeTypeHandle(reflectedType);
             using (var h = new Mono.SafeGPtrArrayHandle(GetConstructors_native(bindingAttr)))
             {
@@ -2324,14 +2357,16 @@ namespace System
             BindingFlags bindingAttr,
             MemberListType listType,
             RuntimeType reflectedType
-        ) {
+        )
+        {
             var refh = new RuntimeTypeHandle(reflectedType);
             using (var namePtr = new Mono.SafeStringMarshal(name))
             using (
                 var h = new Mono.SafeGPtrArrayHandle(
                     GetPropertiesByName_native(namePtr.Value, bindingAttr, listType)
                 )
-            ) {
+            )
+            {
                 int n = h.Length;
                 var a = new RuntimePropertyInfo[n];
                 for (int i = 0; i < n; i++)
@@ -2442,14 +2477,16 @@ namespace System
             BindingFlags bindingAttr,
             MemberListType listType,
             RuntimeType reflectedType
-        ) {
+        )
+        {
             var refh = new RuntimeTypeHandle(reflectedType);
             using (var namePtr = new Mono.SafeStringMarshal(name))
             using (
                 var h = new Mono.SafeGPtrArrayHandle(
                     GetFields_native(namePtr.Value, bindingAttr, listType)
                 )
-            ) {
+            )
+            {
                 int n = h.Length;
                 var a = new RuntimeFieldInfo[n];
                 for (int i = 0; i < n; i++)
@@ -2465,7 +2502,8 @@ namespace System
             string? name,
             MemberListType listType,
             RuntimeType reflectedType
-        ) {
+        )
+        {
             var refh = new RuntimeTypeHandle(reflectedType);
             using (var namePtr = new Mono.SafeStringMarshal(name))
             using (var h = new Mono.SafeGPtrArrayHandle(GetEvents_native(namePtr.Value, listType)))
@@ -2495,7 +2533,8 @@ namespace System
             string? displayName,
             BindingFlags bindingAttr,
             MemberListType listType
-        ) {
+        )
+        {
             string? internalName = null;
             if (displayName != null)
                 internalName = displayName;
@@ -2504,7 +2543,8 @@ namespace System
                 var h = new Mono.SafeGPtrArrayHandle(
                     GetNestedTypes_native(namePtr.Value, bindingAttr, listType)
                 )
-            ) {
+            )
+            {
                 int n = h.Length;
                 var a = new RuntimeType[n];
                 for (int i = 0; i < n; i++)

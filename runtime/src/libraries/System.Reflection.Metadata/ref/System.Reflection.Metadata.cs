@@ -89,7 +89,8 @@ namespace System.Reflection.Metadata
             int rank,
             System.Collections.Immutable.ImmutableArray<int> sizes,
             System.Collections.Immutable.ImmutableArray<int> lowerBounds
-        ) {
+        )
+        {
             throw null;
         }
         public System.Collections.Immutable.ImmutableArray<int> LowerBounds
@@ -165,33 +166,39 @@ namespace System.Reflection.Metadata
         public static bool operator ==(
             System.Reflection.Metadata.AssemblyDefinitionHandle left,
             System.Reflection.Metadata.AssemblyDefinitionHandle right
-        ) {
+        )
+        {
             throw null;
         }
         public static explicit operator System.Reflection.Metadata.AssemblyDefinitionHandle(
             System.Reflection.Metadata.EntityHandle handle
-        ) {
+        )
+        {
             throw null;
         }
         public static explicit operator System.Reflection.Metadata.AssemblyDefinitionHandle(
             System.Reflection.Metadata.Handle handle
-        ) {
+        )
+        {
             throw null;
         }
         public static implicit operator System.Reflection.Metadata.EntityHandle(
             System.Reflection.Metadata.AssemblyDefinitionHandle handle
-        ) {
+        )
+        {
             throw null;
         }
         public static implicit operator System.Reflection.Metadata.Handle(
             System.Reflection.Metadata.AssemblyDefinitionHandle handle
-        ) {
+        )
+        {
             throw null;
         }
         public static bool operator !=(
             System.Reflection.Metadata.AssemblyDefinitionHandle left,
             System.Reflection.Metadata.AssemblyDefinitionHandle right
-        ) {
+        )
+        {
             throw null;
         }
     }
@@ -239,33 +246,39 @@ namespace System.Reflection.Metadata
         public static bool operator ==(
             System.Reflection.Metadata.AssemblyFileHandle left,
             System.Reflection.Metadata.AssemblyFileHandle right
-        ) {
+        )
+        {
             throw null;
         }
         public static explicit operator System.Reflection.Metadata.AssemblyFileHandle(
             System.Reflection.Metadata.EntityHandle handle
-        ) {
+        )
+        {
             throw null;
         }
         public static explicit operator System.Reflection.Metadata.AssemblyFileHandle(
             System.Reflection.Metadata.Handle handle
-        ) {
+        )
+        {
             throw null;
         }
         public static implicit operator System.Reflection.Metadata.EntityHandle(
             System.Reflection.Metadata.AssemblyFileHandle handle
-        ) {
+        )
+        {
             throw null;
         }
         public static implicit operator System.Reflection.Metadata.Handle(
             System.Reflection.Metadata.AssemblyFileHandle handle
-        ) {
+        )
+        {
             throw null;
         }
         public static bool operator !=(
             System.Reflection.Metadata.AssemblyFileHandle left,
             System.Reflection.Metadata.AssemblyFileHandle right
-        ) {
+        )
+        {
             throw null;
         }
     }
@@ -369,33 +382,39 @@ namespace System.Reflection.Metadata
         public static bool operator ==(
             System.Reflection.Metadata.AssemblyReferenceHandle left,
             System.Reflection.Metadata.AssemblyReferenceHandle right
-        ) {
+        )
+        {
             throw null;
         }
         public static explicit operator System.Reflection.Metadata.AssemblyReferenceHandle(
             System.Reflection.Metadata.EntityHandle handle
-        ) {
+        )
+        {
             throw null;
         }
         public static explicit operator System.Reflection.Metadata.AssemblyReferenceHandle(
             System.Reflection.Metadata.Handle handle
-        ) {
+        )
+        {
             throw null;
         }
         public static implicit operator System.Reflection.Metadata.EntityHandle(
             System.Reflection.Metadata.AssemblyReferenceHandle handle
-        ) {
+        )
+        {
             throw null;
         }
         public static implicit operator System.Reflection.Metadata.Handle(
             System.Reflection.Metadata.AssemblyReferenceHandle handle
-        ) {
+        )
+        {
             throw null;
         }
         public static bool operator !=(
             System.Reflection.Metadata.AssemblyReferenceHandle left,
             System.Reflection.Metadata.AssemblyReferenceHandle right
-        ) {
+        )
+        {
             throw null;
         }
     }
@@ -515,7 +534,8 @@ namespace System.Reflection.Metadata
         public System.Collections.Immutable.ImmutableArray<byte> ToImmutableArray(
             int start,
             int byteCount
-        ) {
+        )
+        {
             throw null;
         }
         public int TryWriteBytes(System.IO.Stream source, int byteCount)
@@ -641,7 +661,8 @@ namespace System.Reflection.Metadata
         }
         public static System.Reflection.Metadata.BlobContentId FromHash(
             System.Collections.Immutable.ImmutableArray<byte> hashCode
-        ) {
+        )
+        {
             throw null;
         }
         public override int GetHashCode()
@@ -658,13 +679,15 @@ namespace System.Reflection.Metadata
         public static bool operator ==(
             System.Reflection.Metadata.BlobContentId left,
             System.Reflection.Metadata.BlobContentId right
-        ) {
+        )
+        {
             throw null;
         }
         public static bool operator !=(
             System.Reflection.Metadata.BlobContentId left,
             System.Reflection.Metadata.BlobContentId right
-        ) {
+        )
+        {
             throw null;
         }
     }
@@ -691,23 +714,27 @@ namespace System.Reflection.Metadata
         public static bool operator ==(
             System.Reflection.Metadata.BlobHandle left,
             System.Reflection.Metadata.BlobHandle right
-        ) {
+        )
+        {
             throw null;
         }
         public static explicit operator System.Reflection.Metadata.BlobHandle(
             System.Reflection.Metadata.Handle handle
-        ) {
+        )
+        {
             throw null;
         }
         public static implicit operator System.Reflection.Metadata.Handle(
             System.Reflection.Metadata.BlobHandle handle
-        ) {
+        )
+        {
             throw null;
         }
         public static bool operator !=(
             System.Reflection.Metadata.BlobHandle left,
             System.Reflection.Metadata.BlobHandle right
-        ) {
+        )
+        {
             throw null;
         }
     }
@@ -922,7 +949,8 @@ namespace System.Reflection.Metadata
         public System.Collections.Immutable.ImmutableArray<byte> ToImmutableArray(
             int start,
             int byteCount
-        ) {
+        )
+        {
             throw null;
         }
         public void WriteBoolean(bool value) { }
@@ -1008,33 +1036,39 @@ namespace System.Reflection.Metadata
         public static bool operator ==(
             System.Reflection.Metadata.ConstantHandle left,
             System.Reflection.Metadata.ConstantHandle right
-        ) {
+        )
+        {
             throw null;
         }
         public static explicit operator System.Reflection.Metadata.ConstantHandle(
             System.Reflection.Metadata.EntityHandle handle
-        ) {
+        )
+        {
             throw null;
         }
         public static explicit operator System.Reflection.Metadata.ConstantHandle(
             System.Reflection.Metadata.Handle handle
-        ) {
+        )
+        {
             throw null;
         }
         public static implicit operator System.Reflection.Metadata.EntityHandle(
             System.Reflection.Metadata.ConstantHandle handle
-        ) {
+        )
+        {
             throw null;
         }
         public static implicit operator System.Reflection.Metadata.Handle(
             System.Reflection.Metadata.ConstantHandle handle
-        ) {
+        )
+        {
             throw null;
         }
         public static bool operator !=(
             System.Reflection.Metadata.ConstantHandle left,
             System.Reflection.Metadata.ConstantHandle right
-        ) {
+        )
+        {
             throw null;
         }
     }
@@ -1074,7 +1108,8 @@ namespace System.Reflection.Metadata
         }
         public System.Reflection.Metadata.CustomAttributeValue<TType> DecodeValue<TType>(
             System.Reflection.Metadata.ICustomAttributeTypeProvider<TType> provider
-        ) {
+        )
+        {
             throw null;
         }
     }
@@ -1101,33 +1136,39 @@ namespace System.Reflection.Metadata
         public static bool operator ==(
             System.Reflection.Metadata.CustomAttributeHandle left,
             System.Reflection.Metadata.CustomAttributeHandle right
-        ) {
+        )
+        {
             throw null;
         }
         public static explicit operator System.Reflection.Metadata.CustomAttributeHandle(
             System.Reflection.Metadata.EntityHandle handle
-        ) {
+        )
+        {
             throw null;
         }
         public static explicit operator System.Reflection.Metadata.CustomAttributeHandle(
             System.Reflection.Metadata.Handle handle
-        ) {
+        )
+        {
             throw null;
         }
         public static implicit operator System.Reflection.Metadata.EntityHandle(
             System.Reflection.Metadata.CustomAttributeHandle handle
-        ) {
+        )
+        {
             throw null;
         }
         public static implicit operator System.Reflection.Metadata.Handle(
             System.Reflection.Metadata.CustomAttributeHandle handle
-        ) {
+        )
+        {
             throw null;
         }
         public static bool operator !=(
             System.Reflection.Metadata.CustomAttributeHandle left,
             System.Reflection.Metadata.CustomAttributeHandle right
-        ) {
+        )
+        {
             throw null;
         }
     }
@@ -1192,7 +1233,8 @@ namespace System.Reflection.Metadata
             System.Reflection.Metadata.CustomAttributeNamedArgumentKind kind,
             TType type,
             object? value
-        ) {
+        )
+        {
             throw null;
         }
         public System.Reflection.Metadata.CustomAttributeNamedArgumentKind Kind
@@ -1237,7 +1279,8 @@ namespace System.Reflection.Metadata
         public CustomAttributeValue(
             System.Collections.Immutable.ImmutableArray<System.Reflection.Metadata.CustomAttributeTypedArgument<TType>> fixedArguments,
             System.Collections.Immutable.ImmutableArray<System.Reflection.Metadata.CustomAttributeNamedArgument<TType>> namedArguments
-        ) {
+        )
+        {
             throw null;
         }
         public System.Collections.Immutable.ImmutableArray<System.Reflection.Metadata.CustomAttributeTypedArgument<TType>> FixedArguments
@@ -1289,33 +1332,39 @@ namespace System.Reflection.Metadata
         public static bool operator ==(
             System.Reflection.Metadata.CustomDebugInformationHandle left,
             System.Reflection.Metadata.CustomDebugInformationHandle right
-        ) {
+        )
+        {
             throw null;
         }
         public static explicit operator System.Reflection.Metadata.CustomDebugInformationHandle(
             System.Reflection.Metadata.EntityHandle handle
-        ) {
+        )
+        {
             throw null;
         }
         public static explicit operator System.Reflection.Metadata.CustomDebugInformationHandle(
             System.Reflection.Metadata.Handle handle
-        ) {
+        )
+        {
             throw null;
         }
         public static implicit operator System.Reflection.Metadata.EntityHandle(
             System.Reflection.Metadata.CustomDebugInformationHandle handle
-        ) {
+        )
+        {
             throw null;
         }
         public static implicit operator System.Reflection.Metadata.Handle(
             System.Reflection.Metadata.CustomDebugInformationHandle handle
-        ) {
+        )
+        {
             throw null;
         }
         public static bool operator !=(
             System.Reflection.Metadata.CustomDebugInformationHandle left,
             System.Reflection.Metadata.CustomDebugInformationHandle right
-        ) {
+        )
+        {
             throw null;
         }
     }
@@ -1421,33 +1470,39 @@ namespace System.Reflection.Metadata
         public static bool operator ==(
             System.Reflection.Metadata.DeclarativeSecurityAttributeHandle left,
             System.Reflection.Metadata.DeclarativeSecurityAttributeHandle right
-        ) {
+        )
+        {
             throw null;
         }
         public static explicit operator System.Reflection.Metadata.DeclarativeSecurityAttributeHandle(
             System.Reflection.Metadata.EntityHandle handle
-        ) {
+        )
+        {
             throw null;
         }
         public static explicit operator System.Reflection.Metadata.DeclarativeSecurityAttributeHandle(
             System.Reflection.Metadata.Handle handle
-        ) {
+        )
+        {
             throw null;
         }
         public static implicit operator System.Reflection.Metadata.EntityHandle(
             System.Reflection.Metadata.DeclarativeSecurityAttributeHandle handle
-        ) {
+        )
+        {
             throw null;
         }
         public static implicit operator System.Reflection.Metadata.Handle(
             System.Reflection.Metadata.DeclarativeSecurityAttributeHandle handle
-        ) {
+        )
+        {
             throw null;
         }
         public static bool operator !=(
             System.Reflection.Metadata.DeclarativeSecurityAttributeHandle left,
             System.Reflection.Metadata.DeclarativeSecurityAttributeHandle right
-        ) {
+        )
+        {
             throw null;
         }
     }
@@ -1541,33 +1596,39 @@ namespace System.Reflection.Metadata
         public static bool operator ==(
             System.Reflection.Metadata.DocumentHandle left,
             System.Reflection.Metadata.DocumentHandle right
-        ) {
+        )
+        {
             throw null;
         }
         public static explicit operator System.Reflection.Metadata.DocumentHandle(
             System.Reflection.Metadata.EntityHandle handle
-        ) {
+        )
+        {
             throw null;
         }
         public static explicit operator System.Reflection.Metadata.DocumentHandle(
             System.Reflection.Metadata.Handle handle
-        ) {
+        )
+        {
             throw null;
         }
         public static implicit operator System.Reflection.Metadata.EntityHandle(
             System.Reflection.Metadata.DocumentHandle handle
-        ) {
+        )
+        {
             throw null;
         }
         public static implicit operator System.Reflection.Metadata.Handle(
             System.Reflection.Metadata.DocumentHandle handle
-        ) {
+        )
+        {
             throw null;
         }
         public static bool operator !=(
             System.Reflection.Metadata.DocumentHandle left,
             System.Reflection.Metadata.DocumentHandle right
-        ) {
+        )
+        {
             throw null;
         }
     }
@@ -1640,23 +1701,27 @@ namespace System.Reflection.Metadata
         public static bool operator ==(
             System.Reflection.Metadata.DocumentNameBlobHandle left,
             System.Reflection.Metadata.DocumentNameBlobHandle right
-        ) {
+        )
+        {
             throw null;
         }
         public static explicit operator System.Reflection.Metadata.DocumentNameBlobHandle(
             System.Reflection.Metadata.BlobHandle handle
-        ) {
+        )
+        {
             throw null;
         }
         public static implicit operator System.Reflection.Metadata.BlobHandle(
             System.Reflection.Metadata.DocumentNameBlobHandle handle
-        ) {
+        )
+        {
             throw null;
         }
         public static bool operator !=(
             System.Reflection.Metadata.DocumentNameBlobHandle left,
             System.Reflection.Metadata.DocumentNameBlobHandle right
-        ) {
+        )
+        {
             throw null;
         }
     }
@@ -1689,23 +1754,27 @@ namespace System.Reflection.Metadata
         public static bool operator ==(
             System.Reflection.Metadata.EntityHandle left,
             System.Reflection.Metadata.EntityHandle right
-        ) {
+        )
+        {
             throw null;
         }
         public static explicit operator System.Reflection.Metadata.EntityHandle(
             System.Reflection.Metadata.Handle handle
-        ) {
+        )
+        {
             throw null;
         }
         public static implicit operator System.Reflection.Metadata.Handle(
             System.Reflection.Metadata.EntityHandle handle
-        ) {
+        )
+        {
             throw null;
         }
         public static bool operator !=(
             System.Reflection.Metadata.EntityHandle left,
             System.Reflection.Metadata.EntityHandle right
-        ) {
+        )
+        {
             throw null;
         }
     }
@@ -1778,33 +1847,39 @@ namespace System.Reflection.Metadata
         public static bool operator ==(
             System.Reflection.Metadata.EventDefinitionHandle left,
             System.Reflection.Metadata.EventDefinitionHandle right
-        ) {
+        )
+        {
             throw null;
         }
         public static explicit operator System.Reflection.Metadata.EventDefinitionHandle(
             System.Reflection.Metadata.EntityHandle handle
-        ) {
+        )
+        {
             throw null;
         }
         public static explicit operator System.Reflection.Metadata.EventDefinitionHandle(
             System.Reflection.Metadata.Handle handle
-        ) {
+        )
+        {
             throw null;
         }
         public static implicit operator System.Reflection.Metadata.EntityHandle(
             System.Reflection.Metadata.EventDefinitionHandle handle
-        ) {
+        )
+        {
             throw null;
         }
         public static implicit operator System.Reflection.Metadata.Handle(
             System.Reflection.Metadata.EventDefinitionHandle handle
-        ) {
+        )
+        {
             throw null;
         }
         public static bool operator !=(
             System.Reflection.Metadata.EventDefinitionHandle left,
             System.Reflection.Metadata.EventDefinitionHandle right
-        ) {
+        )
+        {
             throw null;
         }
     }
@@ -1949,33 +2024,39 @@ namespace System.Reflection.Metadata
         public static bool operator ==(
             System.Reflection.Metadata.ExportedTypeHandle left,
             System.Reflection.Metadata.ExportedTypeHandle right
-        ) {
+        )
+        {
             throw null;
         }
         public static explicit operator System.Reflection.Metadata.ExportedTypeHandle(
             System.Reflection.Metadata.EntityHandle handle
-        ) {
+        )
+        {
             throw null;
         }
         public static explicit operator System.Reflection.Metadata.ExportedTypeHandle(
             System.Reflection.Metadata.Handle handle
-        ) {
+        )
+        {
             throw null;
         }
         public static implicit operator System.Reflection.Metadata.EntityHandle(
             System.Reflection.Metadata.ExportedTypeHandle handle
-        ) {
+        )
+        {
             throw null;
         }
         public static implicit operator System.Reflection.Metadata.Handle(
             System.Reflection.Metadata.ExportedTypeHandle handle
-        ) {
+        )
+        {
             throw null;
         }
         public static bool operator !=(
             System.Reflection.Metadata.ExportedTypeHandle left,
             System.Reflection.Metadata.ExportedTypeHandle right
-        ) {
+        )
+        {
             throw null;
         }
     }
@@ -2042,7 +2123,8 @@ namespace System.Reflection.Metadata
         public TType DecodeSignature<TType, TGenericContext>(
             System.Reflection.Metadata.ISignatureTypeProvider<TType, TGenericContext> provider,
             TGenericContext genericContext
-        ) {
+        )
+        {
             throw null;
         }
         public System.Reflection.Metadata.CustomAttributeHandleCollection GetCustomAttributes()
@@ -2093,33 +2175,39 @@ namespace System.Reflection.Metadata
         public static bool operator ==(
             System.Reflection.Metadata.FieldDefinitionHandle left,
             System.Reflection.Metadata.FieldDefinitionHandle right
-        ) {
+        )
+        {
             throw null;
         }
         public static explicit operator System.Reflection.Metadata.FieldDefinitionHandle(
             System.Reflection.Metadata.EntityHandle handle
-        ) {
+        )
+        {
             throw null;
         }
         public static explicit operator System.Reflection.Metadata.FieldDefinitionHandle(
             System.Reflection.Metadata.Handle handle
-        ) {
+        )
+        {
             throw null;
         }
         public static implicit operator System.Reflection.Metadata.EntityHandle(
             System.Reflection.Metadata.FieldDefinitionHandle handle
-        ) {
+        )
+        {
             throw null;
         }
         public static implicit operator System.Reflection.Metadata.Handle(
             System.Reflection.Metadata.FieldDefinitionHandle handle
-        ) {
+        )
+        {
             throw null;
         }
         public static bool operator !=(
             System.Reflection.Metadata.FieldDefinitionHandle left,
             System.Reflection.Metadata.FieldDefinitionHandle right
-        ) {
+        )
+        {
             throw null;
         }
     }
@@ -2238,33 +2326,39 @@ namespace System.Reflection.Metadata
         public static bool operator ==(
             System.Reflection.Metadata.GenericParameterConstraintHandle left,
             System.Reflection.Metadata.GenericParameterConstraintHandle right
-        ) {
+        )
+        {
             throw null;
         }
         public static explicit operator System.Reflection.Metadata.GenericParameterConstraintHandle(
             System.Reflection.Metadata.EntityHandle handle
-        ) {
+        )
+        {
             throw null;
         }
         public static explicit operator System.Reflection.Metadata.GenericParameterConstraintHandle(
             System.Reflection.Metadata.Handle handle
-        ) {
+        )
+        {
             throw null;
         }
         public static implicit operator System.Reflection.Metadata.EntityHandle(
             System.Reflection.Metadata.GenericParameterConstraintHandle handle
-        ) {
+        )
+        {
             throw null;
         }
         public static implicit operator System.Reflection.Metadata.Handle(
             System.Reflection.Metadata.GenericParameterConstraintHandle handle
-        ) {
+        )
+        {
             throw null;
         }
         public static bool operator !=(
             System.Reflection.Metadata.GenericParameterConstraintHandle left,
             System.Reflection.Metadata.GenericParameterConstraintHandle right
-        ) {
+        )
+        {
             throw null;
         }
     }
@@ -2340,33 +2434,39 @@ namespace System.Reflection.Metadata
         public static bool operator ==(
             System.Reflection.Metadata.GenericParameterHandle left,
             System.Reflection.Metadata.GenericParameterHandle right
-        ) {
+        )
+        {
             throw null;
         }
         public static explicit operator System.Reflection.Metadata.GenericParameterHandle(
             System.Reflection.Metadata.EntityHandle handle
-        ) {
+        )
+        {
             throw null;
         }
         public static explicit operator System.Reflection.Metadata.GenericParameterHandle(
             System.Reflection.Metadata.Handle handle
-        ) {
+        )
+        {
             throw null;
         }
         public static implicit operator System.Reflection.Metadata.EntityHandle(
             System.Reflection.Metadata.GenericParameterHandle handle
-        ) {
+        )
+        {
             throw null;
         }
         public static implicit operator System.Reflection.Metadata.Handle(
             System.Reflection.Metadata.GenericParameterHandle handle
-        ) {
+        )
+        {
             throw null;
         }
         public static bool operator !=(
             System.Reflection.Metadata.GenericParameterHandle left,
             System.Reflection.Metadata.GenericParameterHandle right
-        ) {
+        )
+        {
             throw null;
         }
     }
@@ -2442,23 +2542,27 @@ namespace System.Reflection.Metadata
         public static bool operator ==(
             System.Reflection.Metadata.GuidHandle left,
             System.Reflection.Metadata.GuidHandle right
-        ) {
+        )
+        {
             throw null;
         }
         public static explicit operator System.Reflection.Metadata.GuidHandle(
             System.Reflection.Metadata.Handle handle
-        ) {
+        )
+        {
             throw null;
         }
         public static implicit operator System.Reflection.Metadata.Handle(
             System.Reflection.Metadata.GuidHandle handle
-        ) {
+        )
+        {
             throw null;
         }
         public static bool operator !=(
             System.Reflection.Metadata.GuidHandle left,
             System.Reflection.Metadata.GuidHandle right
-        ) {
+        )
+        {
             throw null;
         }
     }
@@ -2490,13 +2594,15 @@ namespace System.Reflection.Metadata
         public static bool operator ==(
             System.Reflection.Metadata.Handle left,
             System.Reflection.Metadata.Handle right
-        ) {
+        )
+        {
             throw null;
         }
         public static bool operator !=(
             System.Reflection.Metadata.Handle left,
             System.Reflection.Metadata.Handle right
-        ) {
+        )
+        {
             throw null;
         }
     }
@@ -2514,7 +2620,8 @@ namespace System.Reflection.Metadata
         public int Compare(
             System.Reflection.Metadata.EntityHandle x,
             System.Reflection.Metadata.EntityHandle y
-        ) {
+        )
+        {
             throw null;
         }
         public int Compare(System.Reflection.Metadata.Handle x, System.Reflection.Metadata.Handle y)
@@ -2524,7 +2631,8 @@ namespace System.Reflection.Metadata
         public bool Equals(
             System.Reflection.Metadata.EntityHandle x,
             System.Reflection.Metadata.EntityHandle y
-        ) {
+        )
+        {
             throw null;
         }
         public bool Equals(System.Reflection.Metadata.Handle x, System.Reflection.Metadata.Handle y)
@@ -2829,12 +2937,14 @@ namespace System.Reflection.Metadata
         }
         public static System.Reflection.Metadata.ILOpCode GetLongBranch(
             this System.Reflection.Metadata.ILOpCode opCode
-        ) {
+        )
+        {
             throw null;
         }
         public static System.Reflection.Metadata.ILOpCode GetShortBranch(
             this System.Reflection.Metadata.ILOpCode opCode
-        ) {
+        )
+        {
             throw null;
         }
         public static bool IsBranch(this System.Reflection.Metadata.ILOpCode opCode)
@@ -3009,33 +3119,39 @@ namespace System.Reflection.Metadata
         public static bool operator ==(
             System.Reflection.Metadata.ImportScopeHandle left,
             System.Reflection.Metadata.ImportScopeHandle right
-        ) {
+        )
+        {
             throw null;
         }
         public static explicit operator System.Reflection.Metadata.ImportScopeHandle(
             System.Reflection.Metadata.EntityHandle handle
-        ) {
+        )
+        {
             throw null;
         }
         public static explicit operator System.Reflection.Metadata.ImportScopeHandle(
             System.Reflection.Metadata.Handle handle
-        ) {
+        )
+        {
             throw null;
         }
         public static implicit operator System.Reflection.Metadata.EntityHandle(
             System.Reflection.Metadata.ImportScopeHandle handle
-        ) {
+        )
+        {
             throw null;
         }
         public static implicit operator System.Reflection.Metadata.Handle(
             System.Reflection.Metadata.ImportScopeHandle handle
-        ) {
+        )
+        {
             throw null;
         }
         public static bool operator !=(
             System.Reflection.Metadata.ImportScopeHandle left,
             System.Reflection.Metadata.ImportScopeHandle right
-        ) {
+        )
+        {
             throw null;
         }
     }
@@ -3075,33 +3191,39 @@ namespace System.Reflection.Metadata
         public static bool operator ==(
             System.Reflection.Metadata.InterfaceImplementationHandle left,
             System.Reflection.Metadata.InterfaceImplementationHandle right
-        ) {
+        )
+        {
             throw null;
         }
         public static explicit operator System.Reflection.Metadata.InterfaceImplementationHandle(
             System.Reflection.Metadata.EntityHandle handle
-        ) {
+        )
+        {
             throw null;
         }
         public static explicit operator System.Reflection.Metadata.InterfaceImplementationHandle(
             System.Reflection.Metadata.Handle handle
-        ) {
+        )
+        {
             throw null;
         }
         public static implicit operator System.Reflection.Metadata.EntityHandle(
             System.Reflection.Metadata.InterfaceImplementationHandle handle
-        ) {
+        )
+        {
             throw null;
         }
         public static implicit operator System.Reflection.Metadata.Handle(
             System.Reflection.Metadata.InterfaceImplementationHandle handle
-        ) {
+        )
+        {
             throw null;
         }
         public static bool operator !=(
             System.Reflection.Metadata.InterfaceImplementationHandle left,
             System.Reflection.Metadata.InterfaceImplementationHandle right
-        ) {
+        )
+        {
             throw null;
         }
     }
@@ -3222,33 +3344,39 @@ namespace System.Reflection.Metadata
         public static bool operator ==(
             System.Reflection.Metadata.LocalConstantHandle left,
             System.Reflection.Metadata.LocalConstantHandle right
-        ) {
+        )
+        {
             throw null;
         }
         public static explicit operator System.Reflection.Metadata.LocalConstantHandle(
             System.Reflection.Metadata.EntityHandle handle
-        ) {
+        )
+        {
             throw null;
         }
         public static explicit operator System.Reflection.Metadata.LocalConstantHandle(
             System.Reflection.Metadata.Handle handle
-        ) {
+        )
+        {
             throw null;
         }
         public static implicit operator System.Reflection.Metadata.EntityHandle(
             System.Reflection.Metadata.LocalConstantHandle handle
-        ) {
+        )
+        {
             throw null;
         }
         public static implicit operator System.Reflection.Metadata.Handle(
             System.Reflection.Metadata.LocalConstantHandle handle
-        ) {
+        )
+        {
             throw null;
         }
         public static bool operator !=(
             System.Reflection.Metadata.LocalConstantHandle left,
             System.Reflection.Metadata.LocalConstantHandle right
-        ) {
+        )
+        {
             throw null;
         }
     }
@@ -3358,33 +3486,39 @@ namespace System.Reflection.Metadata
         public static bool operator ==(
             System.Reflection.Metadata.LocalScopeHandle left,
             System.Reflection.Metadata.LocalScopeHandle right
-        ) {
+        )
+        {
             throw null;
         }
         public static explicit operator System.Reflection.Metadata.LocalScopeHandle(
             System.Reflection.Metadata.EntityHandle handle
-        ) {
+        )
+        {
             throw null;
         }
         public static explicit operator System.Reflection.Metadata.LocalScopeHandle(
             System.Reflection.Metadata.Handle handle
-        ) {
+        )
+        {
             throw null;
         }
         public static implicit operator System.Reflection.Metadata.EntityHandle(
             System.Reflection.Metadata.LocalScopeHandle handle
-        ) {
+        )
+        {
             throw null;
         }
         public static implicit operator System.Reflection.Metadata.Handle(
             System.Reflection.Metadata.LocalScopeHandle handle
-        ) {
+        )
+        {
             throw null;
         }
         public static bool operator !=(
             System.Reflection.Metadata.LocalScopeHandle left,
             System.Reflection.Metadata.LocalScopeHandle right
-        ) {
+        )
+        {
             throw null;
         }
     }
@@ -3502,33 +3636,39 @@ namespace System.Reflection.Metadata
         public static bool operator ==(
             System.Reflection.Metadata.LocalVariableHandle left,
             System.Reflection.Metadata.LocalVariableHandle right
-        ) {
+        )
+        {
             throw null;
         }
         public static explicit operator System.Reflection.Metadata.LocalVariableHandle(
             System.Reflection.Metadata.EntityHandle handle
-        ) {
+        )
+        {
             throw null;
         }
         public static explicit operator System.Reflection.Metadata.LocalVariableHandle(
             System.Reflection.Metadata.Handle handle
-        ) {
+        )
+        {
             throw null;
         }
         public static implicit operator System.Reflection.Metadata.EntityHandle(
             System.Reflection.Metadata.LocalVariableHandle handle
-        ) {
+        )
+        {
             throw null;
         }
         public static implicit operator System.Reflection.Metadata.Handle(
             System.Reflection.Metadata.LocalVariableHandle handle
-        ) {
+        )
+        {
             throw null;
         }
         public static bool operator !=(
             System.Reflection.Metadata.LocalVariableHandle left,
             System.Reflection.Metadata.LocalVariableHandle right
-        ) {
+        )
+        {
             throw null;
         }
     }
@@ -3626,33 +3766,39 @@ namespace System.Reflection.Metadata
         public static bool operator ==(
             System.Reflection.Metadata.ManifestResourceHandle left,
             System.Reflection.Metadata.ManifestResourceHandle right
-        ) {
+        )
+        {
             throw null;
         }
         public static explicit operator System.Reflection.Metadata.ManifestResourceHandle(
             System.Reflection.Metadata.EntityHandle handle
-        ) {
+        )
+        {
             throw null;
         }
         public static explicit operator System.Reflection.Metadata.ManifestResourceHandle(
             System.Reflection.Metadata.Handle handle
-        ) {
+        )
+        {
             throw null;
         }
         public static implicit operator System.Reflection.Metadata.EntityHandle(
             System.Reflection.Metadata.ManifestResourceHandle handle
-        ) {
+        )
+        {
             throw null;
         }
         public static implicit operator System.Reflection.Metadata.Handle(
             System.Reflection.Metadata.ManifestResourceHandle handle
-        ) {
+        )
+        {
             throw null;
         }
         public static bool operator !=(
             System.Reflection.Metadata.ManifestResourceHandle left,
             System.Reflection.Metadata.ManifestResourceHandle right
-        ) {
+        )
+        {
             throw null;
         }
     }
@@ -3719,7 +3865,8 @@ namespace System.Reflection.Metadata
         public TType DecodeFieldSignature<TType, TGenericContext>(
             System.Reflection.Metadata.ISignatureTypeProvider<TType, TGenericContext> provider,
             TGenericContext genericContext
-        ) {
+        )
+        {
             throw null;
         }
         public System.Reflection.Metadata.MethodSignature<TType> DecodeMethodSignature<
@@ -3728,7 +3875,8 @@ namespace System.Reflection.Metadata
         >(
             System.Reflection.Metadata.ISignatureTypeProvider<TType, TGenericContext> provider,
             TGenericContext genericContext
-        ) {
+        )
+        {
             throw null;
         }
         public System.Reflection.Metadata.CustomAttributeHandleCollection GetCustomAttributes()
@@ -3763,33 +3911,39 @@ namespace System.Reflection.Metadata
         public static bool operator ==(
             System.Reflection.Metadata.MemberReferenceHandle left,
             System.Reflection.Metadata.MemberReferenceHandle right
-        ) {
+        )
+        {
             throw null;
         }
         public static explicit operator System.Reflection.Metadata.MemberReferenceHandle(
             System.Reflection.Metadata.EntityHandle handle
-        ) {
+        )
+        {
             throw null;
         }
         public static explicit operator System.Reflection.Metadata.MemberReferenceHandle(
             System.Reflection.Metadata.Handle handle
-        ) {
+        )
+        {
             throw null;
         }
         public static implicit operator System.Reflection.Metadata.EntityHandle(
             System.Reflection.Metadata.MemberReferenceHandle handle
-        ) {
+        )
+        {
             throw null;
         }
         public static implicit operator System.Reflection.Metadata.Handle(
             System.Reflection.Metadata.MemberReferenceHandle handle
-        ) {
+        )
+        {
             throw null;
         }
         public static bool operator !=(
             System.Reflection.Metadata.MemberReferenceHandle left,
             System.Reflection.Metadata.MemberReferenceHandle right
-        ) {
+        )
+        {
             throw null;
         }
     }
@@ -3984,12 +4138,14 @@ namespace System.Reflection.Metadata
         }
         public System.Reflection.Metadata.AssemblyFile GetAssemblyFile(
             System.Reflection.Metadata.AssemblyFileHandle handle
-        ) {
+        )
+        {
             throw null;
         }
         public System.Reflection.Metadata.AssemblyReference GetAssemblyReference(
             System.Reflection.Metadata.AssemblyReferenceHandle handle
-        ) {
+        )
+        {
             throw null;
         }
         public byte[] GetBlobBytes(System.Reflection.Metadata.BlobHandle handle)
@@ -3998,77 +4154,92 @@ namespace System.Reflection.Metadata
         }
         public System.Collections.Immutable.ImmutableArray<byte> GetBlobContent(
             System.Reflection.Metadata.BlobHandle handle
-        ) {
+        )
+        {
             throw null;
         }
         public System.Reflection.Metadata.BlobReader GetBlobReader(
             System.Reflection.Metadata.BlobHandle handle
-        ) {
+        )
+        {
             throw null;
         }
         public System.Reflection.Metadata.BlobReader GetBlobReader(
             System.Reflection.Metadata.StringHandle handle
-        ) {
+        )
+        {
             throw null;
         }
         public System.Reflection.Metadata.Constant GetConstant(
             System.Reflection.Metadata.ConstantHandle handle
-        ) {
+        )
+        {
             throw null;
         }
         public System.Reflection.Metadata.CustomAttribute GetCustomAttribute(
             System.Reflection.Metadata.CustomAttributeHandle handle
-        ) {
+        )
+        {
             throw null;
         }
         public System.Reflection.Metadata.CustomAttributeHandleCollection GetCustomAttributes(
             System.Reflection.Metadata.EntityHandle handle
-        ) {
+        )
+        {
             throw null;
         }
         public System.Reflection.Metadata.CustomDebugInformation GetCustomDebugInformation(
             System.Reflection.Metadata.CustomDebugInformationHandle handle
-        ) {
+        )
+        {
             throw null;
         }
         public System.Reflection.Metadata.CustomDebugInformationHandleCollection GetCustomDebugInformation(
             System.Reflection.Metadata.EntityHandle handle
-        ) {
+        )
+        {
             throw null;
         }
         public System.Reflection.Metadata.DeclarativeSecurityAttribute GetDeclarativeSecurityAttribute(
             System.Reflection.Metadata.DeclarativeSecurityAttributeHandle handle
-        ) {
+        )
+        {
             throw null;
         }
         public System.Reflection.Metadata.Document GetDocument(
             System.Reflection.Metadata.DocumentHandle handle
-        ) {
+        )
+        {
             throw null;
         }
         public System.Reflection.Metadata.EventDefinition GetEventDefinition(
             System.Reflection.Metadata.EventDefinitionHandle handle
-        ) {
+        )
+        {
             throw null;
         }
         public System.Reflection.Metadata.ExportedType GetExportedType(
             System.Reflection.Metadata.ExportedTypeHandle handle
-        ) {
+        )
+        {
             throw null;
         }
         public System.Reflection.Metadata.FieldDefinition GetFieldDefinition(
             System.Reflection.Metadata.FieldDefinitionHandle handle
-        ) {
+        )
+        {
             throw null;
         }
         public System.Reflection.Metadata.GenericParameter GetGenericParameter(
             System.Reflection.Metadata.GenericParameterHandle handle
-        ) {
+        )
+        {
             throw null;
         }
         public System.Reflection.Metadata.GenericParameterConstraint GetGenericParameterConstraint(
             System.Reflection.Metadata.GenericParameterConstraintHandle handle
-        ) {
+        )
+        {
             throw null;
         }
         public System.Guid GetGuid(System.Reflection.Metadata.GuidHandle handle)
@@ -4077,72 +4248,86 @@ namespace System.Reflection.Metadata
         }
         public System.Reflection.Metadata.ImportScope GetImportScope(
             System.Reflection.Metadata.ImportScopeHandle handle
-        ) {
+        )
+        {
             throw null;
         }
         public System.Reflection.Metadata.InterfaceImplementation GetInterfaceImplementation(
             System.Reflection.Metadata.InterfaceImplementationHandle handle
-        ) {
+        )
+        {
             throw null;
         }
         public System.Reflection.Metadata.LocalConstant GetLocalConstant(
             System.Reflection.Metadata.LocalConstantHandle handle
-        ) {
+        )
+        {
             throw null;
         }
         public System.Reflection.Metadata.LocalScope GetLocalScope(
             System.Reflection.Metadata.LocalScopeHandle handle
-        ) {
+        )
+        {
             throw null;
         }
         public System.Reflection.Metadata.LocalScopeHandleCollection GetLocalScopes(
             System.Reflection.Metadata.MethodDebugInformationHandle handle
-        ) {
+        )
+        {
             throw null;
         }
         public System.Reflection.Metadata.LocalScopeHandleCollection GetLocalScopes(
             System.Reflection.Metadata.MethodDefinitionHandle handle
-        ) {
+        )
+        {
             throw null;
         }
         public System.Reflection.Metadata.LocalVariable GetLocalVariable(
             System.Reflection.Metadata.LocalVariableHandle handle
-        ) {
+        )
+        {
             throw null;
         }
         public System.Reflection.Metadata.ManifestResource GetManifestResource(
             System.Reflection.Metadata.ManifestResourceHandle handle
-        ) {
+        )
+        {
             throw null;
         }
         public System.Reflection.Metadata.MemberReference GetMemberReference(
             System.Reflection.Metadata.MemberReferenceHandle handle
-        ) {
+        )
+        {
             throw null;
         }
         public System.Reflection.Metadata.MethodDebugInformation GetMethodDebugInformation(
             System.Reflection.Metadata.MethodDebugInformationHandle handle
-        ) {
+        )
+        {
             throw null;
         }
         public System.Reflection.Metadata.MethodDebugInformation GetMethodDebugInformation(
             System.Reflection.Metadata.MethodDefinitionHandle handle
-        ) {
+        )
+        {
             throw null;
         }
         public System.Reflection.Metadata.MethodDefinition GetMethodDefinition(
             System.Reflection.Metadata.MethodDefinitionHandle handle
-        ) {
+        )
+        {
             throw null;
         }
         public System.Reflection.Metadata.MethodImplementation GetMethodImplementation(
             System.Reflection.Metadata.MethodImplementationHandle handle
-        ) {
+        )
+        {
             throw null;
         }
         public System.Reflection.Metadata.MethodSpecification GetMethodSpecification(
             System.Reflection.Metadata.MethodSpecificationHandle handle
-        ) {
+        )
+        {
             throw null;
         }
         public System.Reflection.Metadata.ModuleDefinition GetModuleDefinition()
@@ -4151,12 +4336,14 @@ namespace System.Reflection.Metadata
         }
         public System.Reflection.Metadata.ModuleReference GetModuleReference(
             System.Reflection.Metadata.ModuleReferenceHandle handle
-        ) {
+        )
+        {
             throw null;
         }
         public System.Reflection.Metadata.NamespaceDefinition GetNamespaceDefinition(
             System.Reflection.Metadata.NamespaceDefinitionHandle handle
-        ) {
+        )
+        {
             throw null;
         }
         public System.Reflection.Metadata.NamespaceDefinition GetNamespaceDefinitionRoot()
@@ -4165,17 +4352,20 @@ namespace System.Reflection.Metadata
         }
         public System.Reflection.Metadata.Parameter GetParameter(
             System.Reflection.Metadata.ParameterHandle handle
-        ) {
+        )
+        {
             throw null;
         }
         public System.Reflection.Metadata.PropertyDefinition GetPropertyDefinition(
             System.Reflection.Metadata.PropertyDefinitionHandle handle
-        ) {
+        )
+        {
             throw null;
         }
         public System.Reflection.Metadata.StandaloneSignature GetStandaloneSignature(
             System.Reflection.Metadata.StandaloneSignatureHandle handle
-        ) {
+        )
+        {
             throw null;
         }
         public string GetString(System.Reflection.Metadata.DocumentNameBlobHandle handle)
@@ -4192,17 +4382,20 @@ namespace System.Reflection.Metadata
         }
         public System.Reflection.Metadata.TypeDefinition GetTypeDefinition(
             System.Reflection.Metadata.TypeDefinitionHandle handle
-        ) {
+        )
+        {
             throw null;
         }
         public System.Reflection.Metadata.TypeReference GetTypeReference(
             System.Reflection.Metadata.TypeReferenceHandle handle
-        ) {
+        )
+        {
             throw null;
         }
         public System.Reflection.Metadata.TypeSpecification GetTypeSpecification(
             System.Reflection.Metadata.TypeSpecificationHandle handle
-        ) {
+        )
+        {
             throw null;
         }
         public string GetUserString(System.Reflection.Metadata.UserStringHandle handle)
@@ -4224,12 +4417,14 @@ namespace System.Reflection.Metadata
         public unsafe static System.Reflection.Metadata.MetadataReaderProvider FromMetadataImage(
             byte* start,
             int size
-        ) {
+        )
+        {
             throw null;
         }
         public static System.Reflection.Metadata.MetadataReaderProvider FromMetadataImage(
             System.Collections.Immutable.ImmutableArray<byte> image
-        ) {
+        )
+        {
             throw null;
         }
         public static System.Reflection.Metadata.MetadataReaderProvider FromMetadataStream(
@@ -4237,18 +4432,21 @@ namespace System.Reflection.Metadata
             System.Reflection.Metadata.MetadataStreamOptions options =
                 System.Reflection.Metadata.MetadataStreamOptions.Default,
             int size = 0
-        ) {
+        )
+        {
             throw null;
         }
         public unsafe static System.Reflection.Metadata.MetadataReaderProvider FromPortablePdbImage(
             byte* start,
             int size
-        ) {
+        )
+        {
             throw null;
         }
         public static System.Reflection.Metadata.MetadataReaderProvider FromPortablePdbImage(
             System.Collections.Immutable.ImmutableArray<byte> image
-        ) {
+        )
+        {
             throw null;
         }
         public static System.Reflection.Metadata.MetadataReaderProvider FromPortablePdbStream(
@@ -4256,14 +4454,16 @@ namespace System.Reflection.Metadata
             System.Reflection.Metadata.MetadataStreamOptions options =
                 System.Reflection.Metadata.MetadataStreamOptions.Default,
             int size = 0
-        ) {
+        )
+        {
             throw null;
         }
         public System.Reflection.Metadata.MetadataReader GetMetadataReader(
             System.Reflection.Metadata.MetadataReaderOptions options =
                 System.Reflection.Metadata.MetadataReaderOptions.Default,
             System.Reflection.Metadata.MetadataStringDecoder? utf8Decoder = null
-        ) {
+        )
+        {
             throw null;
         }
     }
@@ -4286,20 +4486,23 @@ namespace System.Reflection.Metadata
             System.Reflection.Metadata.DocumentNameBlobHandle handle,
             string value,
             bool ignoreCase
-        ) {
+        )
+        {
             throw null;
         }
         public bool Equals(
             System.Reflection.Metadata.NamespaceDefinitionHandle handle,
             string value
-        ) {
+        )
+        {
             throw null;
         }
         public bool Equals(
             System.Reflection.Metadata.NamespaceDefinitionHandle handle,
             string value,
             bool ignoreCase
-        ) {
+        )
+        {
             throw null;
         }
         public bool Equals(System.Reflection.Metadata.StringHandle handle, string value)
@@ -4310,7 +4513,8 @@ namespace System.Reflection.Metadata
             System.Reflection.Metadata.StringHandle handle,
             string value,
             bool ignoreCase
-        ) {
+        )
+        {
             throw null;
         }
         public bool StartsWith(System.Reflection.Metadata.StringHandle handle, string value)
@@ -4321,7 +4525,8 @@ namespace System.Reflection.Metadata
             System.Reflection.Metadata.StringHandle handle,
             string value,
             bool ignoreCase
-        ) {
+        )
+        {
             throw null;
         }
     }
@@ -4366,7 +4571,8 @@ namespace System.Reflection.Metadata
         }
         public static System.Reflection.Metadata.MethodBodyBlock Create(
             System.Reflection.Metadata.BlobReader reader
-        ) {
+        )
+        {
             throw null;
         }
         public byte[]? GetILBytes()
@@ -4430,33 +4636,39 @@ namespace System.Reflection.Metadata
         public static bool operator ==(
             System.Reflection.Metadata.MethodDebugInformationHandle left,
             System.Reflection.Metadata.MethodDebugInformationHandle right
-        ) {
+        )
+        {
             throw null;
         }
         public static explicit operator System.Reflection.Metadata.MethodDebugInformationHandle(
             System.Reflection.Metadata.EntityHandle handle
-        ) {
+        )
+        {
             throw null;
         }
         public static explicit operator System.Reflection.Metadata.MethodDebugInformationHandle(
             System.Reflection.Metadata.Handle handle
-        ) {
+        )
+        {
             throw null;
         }
         public static implicit operator System.Reflection.Metadata.EntityHandle(
             System.Reflection.Metadata.MethodDebugInformationHandle handle
-        ) {
+        )
+        {
             throw null;
         }
         public static implicit operator System.Reflection.Metadata.Handle(
             System.Reflection.Metadata.MethodDebugInformationHandle handle
-        ) {
+        )
+        {
             throw null;
         }
         public static bool operator !=(
             System.Reflection.Metadata.MethodDebugInformationHandle left,
             System.Reflection.Metadata.MethodDebugInformationHandle right
-        ) {
+        )
+        {
             throw null;
         }
         public System.Reflection.Metadata.MethodDefinitionHandle ToDefinitionHandle()
@@ -4540,7 +4752,8 @@ namespace System.Reflection.Metadata
         >(
             System.Reflection.Metadata.ISignatureTypeProvider<TType, TGenericContext> provider,
             TGenericContext genericContext
-        ) {
+        )
+        {
             throw null;
         }
         public System.Reflection.Metadata.CustomAttributeHandleCollection GetCustomAttributes()
@@ -4591,33 +4804,39 @@ namespace System.Reflection.Metadata
         public static bool operator ==(
             System.Reflection.Metadata.MethodDefinitionHandle left,
             System.Reflection.Metadata.MethodDefinitionHandle right
-        ) {
+        )
+        {
             throw null;
         }
         public static explicit operator System.Reflection.Metadata.MethodDefinitionHandle(
             System.Reflection.Metadata.EntityHandle handle
-        ) {
+        )
+        {
             throw null;
         }
         public static explicit operator System.Reflection.Metadata.MethodDefinitionHandle(
             System.Reflection.Metadata.Handle handle
-        ) {
+        )
+        {
             throw null;
         }
         public static implicit operator System.Reflection.Metadata.EntityHandle(
             System.Reflection.Metadata.MethodDefinitionHandle handle
-        ) {
+        )
+        {
             throw null;
         }
         public static implicit operator System.Reflection.Metadata.Handle(
             System.Reflection.Metadata.MethodDefinitionHandle handle
-        ) {
+        )
+        {
             throw null;
         }
         public static bool operator !=(
             System.Reflection.Metadata.MethodDefinitionHandle left,
             System.Reflection.Metadata.MethodDefinitionHandle right
-        ) {
+        )
+        {
             throw null;
         }
         public System.Reflection.Metadata.MethodDebugInformationHandle ToDebugInformationHandle()
@@ -4715,33 +4934,39 @@ namespace System.Reflection.Metadata
         public static bool operator ==(
             System.Reflection.Metadata.MethodImplementationHandle left,
             System.Reflection.Metadata.MethodImplementationHandle right
-        ) {
+        )
+        {
             throw null;
         }
         public static explicit operator System.Reflection.Metadata.MethodImplementationHandle(
             System.Reflection.Metadata.EntityHandle handle
-        ) {
+        )
+        {
             throw null;
         }
         public static explicit operator System.Reflection.Metadata.MethodImplementationHandle(
             System.Reflection.Metadata.Handle handle
-        ) {
+        )
+        {
             throw null;
         }
         public static implicit operator System.Reflection.Metadata.EntityHandle(
             System.Reflection.Metadata.MethodImplementationHandle handle
-        ) {
+        )
+        {
             throw null;
         }
         public static implicit operator System.Reflection.Metadata.Handle(
             System.Reflection.Metadata.MethodImplementationHandle handle
-        ) {
+        )
+        {
             throw null;
         }
         public static bool operator !=(
             System.Reflection.Metadata.MethodImplementationHandle left,
             System.Reflection.Metadata.MethodImplementationHandle right
-        ) {
+        )
+        {
             throw null;
         }
     }
@@ -4816,7 +5041,8 @@ namespace System.Reflection.Metadata
             int requiredParameterCount,
             int genericParameterCount,
             System.Collections.Immutable.ImmutableArray<TType> parameterTypes
-        ) {
+        )
+        {
             throw null;
         }
         public int GenericParameterCount
@@ -4858,7 +5084,8 @@ namespace System.Reflection.Metadata
         >(
             System.Reflection.Metadata.ISignatureTypeProvider<TType, TGenericContext> provider,
             TGenericContext genericContext
-        ) {
+        )
+        {
             throw null;
         }
         public System.Reflection.Metadata.CustomAttributeHandleCollection GetCustomAttributes()
@@ -4889,33 +5116,39 @@ namespace System.Reflection.Metadata
         public static bool operator ==(
             System.Reflection.Metadata.MethodSpecificationHandle left,
             System.Reflection.Metadata.MethodSpecificationHandle right
-        ) {
+        )
+        {
             throw null;
         }
         public static explicit operator System.Reflection.Metadata.MethodSpecificationHandle(
             System.Reflection.Metadata.EntityHandle handle
-        ) {
+        )
+        {
             throw null;
         }
         public static explicit operator System.Reflection.Metadata.MethodSpecificationHandle(
             System.Reflection.Metadata.Handle handle
-        ) {
+        )
+        {
             throw null;
         }
         public static implicit operator System.Reflection.Metadata.EntityHandle(
             System.Reflection.Metadata.MethodSpecificationHandle handle
-        ) {
+        )
+        {
             throw null;
         }
         public static implicit operator System.Reflection.Metadata.Handle(
             System.Reflection.Metadata.MethodSpecificationHandle handle
-        ) {
+        )
+        {
             throw null;
         }
         public static bool operator !=(
             System.Reflection.Metadata.MethodSpecificationHandle left,
             System.Reflection.Metadata.MethodSpecificationHandle right
-        ) {
+        )
+        {
             throw null;
         }
     }
@@ -4971,33 +5204,39 @@ namespace System.Reflection.Metadata
         public static bool operator ==(
             System.Reflection.Metadata.ModuleDefinitionHandle left,
             System.Reflection.Metadata.ModuleDefinitionHandle right
-        ) {
+        )
+        {
             throw null;
         }
         public static explicit operator System.Reflection.Metadata.ModuleDefinitionHandle(
             System.Reflection.Metadata.EntityHandle handle
-        ) {
+        )
+        {
             throw null;
         }
         public static explicit operator System.Reflection.Metadata.ModuleDefinitionHandle(
             System.Reflection.Metadata.Handle handle
-        ) {
+        )
+        {
             throw null;
         }
         public static implicit operator System.Reflection.Metadata.EntityHandle(
             System.Reflection.Metadata.ModuleDefinitionHandle handle
-        ) {
+        )
+        {
             throw null;
         }
         public static implicit operator System.Reflection.Metadata.Handle(
             System.Reflection.Metadata.ModuleDefinitionHandle handle
-        ) {
+        )
+        {
             throw null;
         }
         public static bool operator !=(
             System.Reflection.Metadata.ModuleDefinitionHandle left,
             System.Reflection.Metadata.ModuleDefinitionHandle right
-        ) {
+        )
+        {
             throw null;
         }
     }
@@ -5037,33 +5276,39 @@ namespace System.Reflection.Metadata
         public static bool operator ==(
             System.Reflection.Metadata.ModuleReferenceHandle left,
             System.Reflection.Metadata.ModuleReferenceHandle right
-        ) {
+        )
+        {
             throw null;
         }
         public static explicit operator System.Reflection.Metadata.ModuleReferenceHandle(
             System.Reflection.Metadata.EntityHandle handle
-        ) {
+        )
+        {
             throw null;
         }
         public static explicit operator System.Reflection.Metadata.ModuleReferenceHandle(
             System.Reflection.Metadata.Handle handle
-        ) {
+        )
+        {
             throw null;
         }
         public static implicit operator System.Reflection.Metadata.EntityHandle(
             System.Reflection.Metadata.ModuleReferenceHandle handle
-        ) {
+        )
+        {
             throw null;
         }
         public static implicit operator System.Reflection.Metadata.Handle(
             System.Reflection.Metadata.ModuleReferenceHandle handle
-        ) {
+        )
+        {
             throw null;
         }
         public static bool operator !=(
             System.Reflection.Metadata.ModuleReferenceHandle left,
             System.Reflection.Metadata.ModuleReferenceHandle right
-        ) {
+        )
+        {
             throw null;
         }
     }
@@ -5115,23 +5360,27 @@ namespace System.Reflection.Metadata
         public static bool operator ==(
             System.Reflection.Metadata.NamespaceDefinitionHandle left,
             System.Reflection.Metadata.NamespaceDefinitionHandle right
-        ) {
+        )
+        {
             throw null;
         }
         public static explicit operator System.Reflection.Metadata.NamespaceDefinitionHandle(
             System.Reflection.Metadata.Handle handle
-        ) {
+        )
+        {
             throw null;
         }
         public static implicit operator System.Reflection.Metadata.Handle(
             System.Reflection.Metadata.NamespaceDefinitionHandle handle
-        ) {
+        )
+        {
             throw null;
         }
         public static bool operator !=(
             System.Reflection.Metadata.NamespaceDefinitionHandle left,
             System.Reflection.Metadata.NamespaceDefinitionHandle right
-        ) {
+        )
+        {
             throw null;
         }
     }
@@ -5187,33 +5436,39 @@ namespace System.Reflection.Metadata
         public static bool operator ==(
             System.Reflection.Metadata.ParameterHandle left,
             System.Reflection.Metadata.ParameterHandle right
-        ) {
+        )
+        {
             throw null;
         }
         public static explicit operator System.Reflection.Metadata.ParameterHandle(
             System.Reflection.Metadata.EntityHandle handle
-        ) {
+        )
+        {
             throw null;
         }
         public static explicit operator System.Reflection.Metadata.ParameterHandle(
             System.Reflection.Metadata.Handle handle
-        ) {
+        )
+        {
             throw null;
         }
         public static implicit operator System.Reflection.Metadata.EntityHandle(
             System.Reflection.Metadata.ParameterHandle handle
-        ) {
+        )
+        {
             throw null;
         }
         public static implicit operator System.Reflection.Metadata.Handle(
             System.Reflection.Metadata.ParameterHandle handle
-        ) {
+        )
+        {
             throw null;
         }
         public static bool operator !=(
             System.Reflection.Metadata.ParameterHandle left,
             System.Reflection.Metadata.ParameterHandle right
-        ) {
+        )
+        {
             throw null;
         }
     }
@@ -5270,26 +5525,30 @@ namespace System.Reflection.Metadata
     {
         public static System.Reflection.Metadata.MetadataReader GetMetadataReader(
             this System.Reflection.PortableExecutable.PEReader peReader
-        ) {
+        )
+        {
             throw null;
         }
         public static System.Reflection.Metadata.MetadataReader GetMetadataReader(
             this System.Reflection.PortableExecutable.PEReader peReader,
             System.Reflection.Metadata.MetadataReaderOptions options
-        ) {
+        )
+        {
             throw null;
         }
         public static System.Reflection.Metadata.MetadataReader GetMetadataReader(
             this System.Reflection.PortableExecutable.PEReader peReader,
             System.Reflection.Metadata.MetadataReaderOptions options,
             System.Reflection.Metadata.MetadataStringDecoder? utf8Decoder
-        ) {
+        )
+        {
             throw null;
         }
         public static System.Reflection.Metadata.MethodBodyBlock GetMethodBody(
             this System.Reflection.PortableExecutable.PEReader peReader,
             int relativeVirtualAddress
-        ) {
+        )
+        {
             throw null;
         }
     }
@@ -5369,7 +5628,8 @@ namespace System.Reflection.Metadata
         >(
             System.Reflection.Metadata.ISignatureTypeProvider<TType, TGenericContext> provider,
             TGenericContext genericContext
-        ) {
+        )
+        {
             throw null;
         }
         public System.Reflection.Metadata.PropertyAccessors GetAccessors()
@@ -5408,33 +5668,39 @@ namespace System.Reflection.Metadata
         public static bool operator ==(
             System.Reflection.Metadata.PropertyDefinitionHandle left,
             System.Reflection.Metadata.PropertyDefinitionHandle right
-        ) {
+        )
+        {
             throw null;
         }
         public static explicit operator System.Reflection.Metadata.PropertyDefinitionHandle(
             System.Reflection.Metadata.EntityHandle handle
-        ) {
+        )
+        {
             throw null;
         }
         public static explicit operator System.Reflection.Metadata.PropertyDefinitionHandle(
             System.Reflection.Metadata.Handle handle
-        ) {
+        )
+        {
             throw null;
         }
         public static implicit operator System.Reflection.Metadata.EntityHandle(
             System.Reflection.Metadata.PropertyDefinitionHandle handle
-        ) {
+        )
+        {
             throw null;
         }
         public static implicit operator System.Reflection.Metadata.Handle(
             System.Reflection.Metadata.PropertyDefinitionHandle handle
-        ) {
+        )
+        {
             throw null;
         }
         public static bool operator !=(
             System.Reflection.Metadata.PropertyDefinitionHandle left,
             System.Reflection.Metadata.PropertyDefinitionHandle right
-        ) {
+        )
+        {
             throw null;
         }
     }
@@ -5639,7 +5905,8 @@ namespace System.Reflection.Metadata
             System.Reflection.Metadata.SignatureKind kind,
             System.Reflection.Metadata.SignatureCallingConvention convention,
             System.Reflection.Metadata.SignatureAttributes attributes
-        ) {
+        )
+        {
             throw null;
         }
         public System.Reflection.Metadata.SignatureAttributes Attributes
@@ -5685,13 +5952,15 @@ namespace System.Reflection.Metadata
         public static bool operator ==(
             System.Reflection.Metadata.SignatureHeader left,
             System.Reflection.Metadata.SignatureHeader right
-        ) {
+        )
+        {
             throw null;
         }
         public static bool operator !=(
             System.Reflection.Metadata.SignatureHeader left,
             System.Reflection.Metadata.SignatureHeader right
-        ) {
+        )
+        {
             throw null;
         }
         public override string ToString()
@@ -5762,7 +6031,8 @@ namespace System.Reflection.Metadata
         >(
             System.Reflection.Metadata.ISignatureTypeProvider<TType, TGenericContext> provider,
             TGenericContext genericContext
-        ) {
+        )
+        {
             throw null;
         }
         public System.Reflection.Metadata.MethodSignature<TType> DecodeMethodSignature<
@@ -5771,7 +6041,8 @@ namespace System.Reflection.Metadata
         >(
             System.Reflection.Metadata.ISignatureTypeProvider<TType, TGenericContext> provider,
             TGenericContext genericContext
-        ) {
+        )
+        {
             throw null;
         }
         public System.Reflection.Metadata.CustomAttributeHandleCollection GetCustomAttributes()
@@ -5806,33 +6077,39 @@ namespace System.Reflection.Metadata
         public static bool operator ==(
             System.Reflection.Metadata.StandaloneSignatureHandle left,
             System.Reflection.Metadata.StandaloneSignatureHandle right
-        ) {
+        )
+        {
             throw null;
         }
         public static explicit operator System.Reflection.Metadata.StandaloneSignatureHandle(
             System.Reflection.Metadata.EntityHandle handle
-        ) {
+        )
+        {
             throw null;
         }
         public static explicit operator System.Reflection.Metadata.StandaloneSignatureHandle(
             System.Reflection.Metadata.Handle handle
-        ) {
+        )
+        {
             throw null;
         }
         public static implicit operator System.Reflection.Metadata.EntityHandle(
             System.Reflection.Metadata.StandaloneSignatureHandle handle
-        ) {
+        )
+        {
             throw null;
         }
         public static implicit operator System.Reflection.Metadata.Handle(
             System.Reflection.Metadata.StandaloneSignatureHandle handle
-        ) {
+        )
+        {
             throw null;
         }
         public static bool operator !=(
             System.Reflection.Metadata.StandaloneSignatureHandle left,
             System.Reflection.Metadata.StandaloneSignatureHandle right
-        ) {
+        )
+        {
             throw null;
         }
     }
@@ -5864,23 +6141,27 @@ namespace System.Reflection.Metadata
         public static bool operator ==(
             System.Reflection.Metadata.StringHandle left,
             System.Reflection.Metadata.StringHandle right
-        ) {
+        )
+        {
             throw null;
         }
         public static explicit operator System.Reflection.Metadata.StringHandle(
             System.Reflection.Metadata.Handle handle
-        ) {
+        )
+        {
             throw null;
         }
         public static implicit operator System.Reflection.Metadata.Handle(
             System.Reflection.Metadata.StringHandle handle
-        ) {
+        )
+        {
             throw null;
         }
         public static bool operator !=(
             System.Reflection.Metadata.StringHandle left,
             System.Reflection.Metadata.StringHandle right
-        ) {
+        )
+        {
             throw null;
         }
     }
@@ -5984,33 +6265,39 @@ namespace System.Reflection.Metadata
         public static bool operator ==(
             System.Reflection.Metadata.TypeDefinitionHandle left,
             System.Reflection.Metadata.TypeDefinitionHandle right
-        ) {
+        )
+        {
             throw null;
         }
         public static explicit operator System.Reflection.Metadata.TypeDefinitionHandle(
             System.Reflection.Metadata.EntityHandle handle
-        ) {
+        )
+        {
             throw null;
         }
         public static explicit operator System.Reflection.Metadata.TypeDefinitionHandle(
             System.Reflection.Metadata.Handle handle
-        ) {
+        )
+        {
             throw null;
         }
         public static implicit operator System.Reflection.Metadata.EntityHandle(
             System.Reflection.Metadata.TypeDefinitionHandle handle
-        ) {
+        )
+        {
             throw null;
         }
         public static implicit operator System.Reflection.Metadata.Handle(
             System.Reflection.Metadata.TypeDefinitionHandle handle
-        ) {
+        )
+        {
             throw null;
         }
         public static bool operator !=(
             System.Reflection.Metadata.TypeDefinitionHandle left,
             System.Reflection.Metadata.TypeDefinitionHandle right
-        ) {
+        )
+        {
             throw null;
         }
     }
@@ -6118,33 +6405,39 @@ namespace System.Reflection.Metadata
         public static bool operator ==(
             System.Reflection.Metadata.TypeReferenceHandle left,
             System.Reflection.Metadata.TypeReferenceHandle right
-        ) {
+        )
+        {
             throw null;
         }
         public static explicit operator System.Reflection.Metadata.TypeReferenceHandle(
             System.Reflection.Metadata.EntityHandle handle
-        ) {
+        )
+        {
             throw null;
         }
         public static explicit operator System.Reflection.Metadata.TypeReferenceHandle(
             System.Reflection.Metadata.Handle handle
-        ) {
+        )
+        {
             throw null;
         }
         public static implicit operator System.Reflection.Metadata.EntityHandle(
             System.Reflection.Metadata.TypeReferenceHandle handle
-        ) {
+        )
+        {
             throw null;
         }
         public static implicit operator System.Reflection.Metadata.Handle(
             System.Reflection.Metadata.TypeReferenceHandle handle
-        ) {
+        )
+        {
             throw null;
         }
         public static bool operator !=(
             System.Reflection.Metadata.TypeReferenceHandle left,
             System.Reflection.Metadata.TypeReferenceHandle right
-        ) {
+        )
+        {
             throw null;
         }
     }
@@ -6203,7 +6496,8 @@ namespace System.Reflection.Metadata
         public TType DecodeSignature<TType, TGenericContext>(
             System.Reflection.Metadata.ISignatureTypeProvider<TType, TGenericContext> provider,
             TGenericContext genericContext
-        ) {
+        )
+        {
             throw null;
         }
         public System.Reflection.Metadata.CustomAttributeHandleCollection GetCustomAttributes()
@@ -6234,33 +6528,39 @@ namespace System.Reflection.Metadata
         public static bool operator ==(
             System.Reflection.Metadata.TypeSpecificationHandle left,
             System.Reflection.Metadata.TypeSpecificationHandle right
-        ) {
+        )
+        {
             throw null;
         }
         public static explicit operator System.Reflection.Metadata.TypeSpecificationHandle(
             System.Reflection.Metadata.EntityHandle handle
-        ) {
+        )
+        {
             throw null;
         }
         public static explicit operator System.Reflection.Metadata.TypeSpecificationHandle(
             System.Reflection.Metadata.Handle handle
-        ) {
+        )
+        {
             throw null;
         }
         public static implicit operator System.Reflection.Metadata.EntityHandle(
             System.Reflection.Metadata.TypeSpecificationHandle handle
-        ) {
+        )
+        {
             throw null;
         }
         public static implicit operator System.Reflection.Metadata.Handle(
             System.Reflection.Metadata.TypeSpecificationHandle handle
-        ) {
+        )
+        {
             throw null;
         }
         public static bool operator !=(
             System.Reflection.Metadata.TypeSpecificationHandle left,
             System.Reflection.Metadata.TypeSpecificationHandle right
-        ) {
+        )
+        {
             throw null;
         }
     }
@@ -6287,23 +6587,27 @@ namespace System.Reflection.Metadata
         public static bool operator ==(
             System.Reflection.Metadata.UserStringHandle left,
             System.Reflection.Metadata.UserStringHandle right
-        ) {
+        )
+        {
             throw null;
         }
         public static explicit operator System.Reflection.Metadata.UserStringHandle(
             System.Reflection.Metadata.Handle handle
-        ) {
+        )
+        {
             throw null;
         }
         public static implicit operator System.Reflection.Metadata.Handle(
             System.Reflection.Metadata.UserStringHandle handle
-        ) {
+        )
+        {
             throw null;
         }
         public static bool operator !=(
             System.Reflection.Metadata.UserStringHandle left,
             System.Reflection.Metadata.UserStringHandle right
-        ) {
+        )
+        {
             throw null;
         }
     }
@@ -6347,7 +6651,8 @@ namespace System.Reflection.Metadata.Ecma335
         public void CustomAttributeSignature(
             out System.Reflection.Metadata.Ecma335.FixedArgumentsEncoder fixedArguments,
             out System.Reflection.Metadata.Ecma335.CustomAttributeNamedArgumentsEncoder namedArguments
-        ) {
+        )
+        {
             throw null;
         }
         public System.Reflection.Metadata.Ecma335.SignatureTypeEncoder FieldSignature()
@@ -6356,7 +6661,8 @@ namespace System.Reflection.Metadata.Ecma335
         }
         public System.Reflection.Metadata.Ecma335.LocalVariablesEncoder LocalVariableSignature(
             int variableCount
-        ) {
+        )
+        {
             throw null;
         }
         public System.Reflection.Metadata.Ecma335.MethodSignatureEncoder MethodSignature(
@@ -6364,27 +6670,32 @@ namespace System.Reflection.Metadata.Ecma335
                 System.Reflection.Metadata.SignatureCallingConvention.Default,
             int genericParameterCount = 0,
             bool isInstanceMethod = false
-        ) {
+        )
+        {
             throw null;
         }
         public System.Reflection.Metadata.Ecma335.GenericTypeArgumentsEncoder MethodSpecificationSignature(
             int genericArgumentCount
-        ) {
+        )
+        {
             throw null;
         }
         public System.Reflection.Metadata.Ecma335.NamedArgumentsEncoder PermissionSetArguments(
             int argumentCount
-        ) {
+        )
+        {
             throw null;
         }
         public System.Reflection.Metadata.Ecma335.PermissionSetEncoder PermissionSetBlob(
             int attributeCount
-        ) {
+        )
+        {
             throw null;
         }
         public System.Reflection.Metadata.Ecma335.MethodSignatureEncoder PropertySignature(
             bool isInstanceProperty = false
-        ) {
+        )
+        {
             throw null;
         }
         public System.Reflection.Metadata.Ecma335.SignatureTypeEncoder TypeSpecificationSignature()
@@ -6566,7 +6877,8 @@ namespace System.Reflection.Metadata.Ecma335
         public System.Reflection.Metadata.Ecma335.CustomModifiersEncoder AddModifier(
             System.Reflection.Metadata.EntityHandle type,
             bool isOptional
-        ) {
+        )
+        {
             throw null;
         }
     }
@@ -6577,7 +6889,8 @@ namespace System.Reflection.Metadata.Ecma335
         public EditAndContinueLogEntry(
             System.Reflection.Metadata.EntityHandle handle,
             System.Reflection.Metadata.Ecma335.EditAndContinueOperation operation
-        ) {
+        )
+        {
             throw null;
         }
         public System.Reflection.Metadata.EntityHandle Handle
@@ -6631,7 +6944,8 @@ namespace System.Reflection.Metadata.Ecma335
             System.Reflection.Metadata.EntityHandle catchType =
                 default(System.Reflection.Metadata.EntityHandle),
             int filterOffset = 0
-        ) {
+        )
+        {
             throw null;
         }
         public System.Reflection.Metadata.Ecma335.ExceptionRegionEncoder AddCatch(
@@ -6640,7 +6954,8 @@ namespace System.Reflection.Metadata.Ecma335
             int handlerOffset,
             int handlerLength,
             System.Reflection.Metadata.EntityHandle catchType
-        ) {
+        )
+        {
             throw null;
         }
         public System.Reflection.Metadata.Ecma335.ExceptionRegionEncoder AddFault(
@@ -6648,7 +6963,8 @@ namespace System.Reflection.Metadata.Ecma335
             int tryLength,
             int handlerOffset,
             int handlerLength
-        ) {
+        )
+        {
             throw null;
         }
         public System.Reflection.Metadata.Ecma335.ExceptionRegionEncoder AddFilter(
@@ -6657,7 +6973,8 @@ namespace System.Reflection.Metadata.Ecma335
             int handlerOffset,
             int handlerLength,
             int filterOffset
-        ) {
+        )
+        {
             throw null;
         }
         public System.Reflection.Metadata.Ecma335.ExceptionRegionEncoder AddFinally(
@@ -6665,7 +6982,8 @@ namespace System.Reflection.Metadata.Ecma335
             int tryLength,
             int handlerOffset,
             int handlerLength
-        ) {
+        )
+        {
             throw null;
         }
         public static bool IsSmallExceptionRegion(int startOffset, int length)
@@ -6681,7 +6999,8 @@ namespace System.Reflection.Metadata.Ecma335
     {
         public static int GetTypeDefinitionId(
             this System.Reflection.Metadata.ExportedType exportedType
-        ) {
+        )
+        {
             throw null;
         }
     }
@@ -6739,7 +7058,8 @@ namespace System.Reflection.Metadata.Ecma335
         public InstructionEncoder(
             System.Reflection.Metadata.BlobBuilder codeBuilder,
             System.Reflection.Metadata.Ecma335.ControlFlowBuilder? controlFlowBuilder = null
-        ) {
+        )
+        {
             throw null;
         }
         public System.Reflection.Metadata.BlobBuilder CodeBuilder
@@ -6810,13 +7130,15 @@ namespace System.Reflection.Metadata.Ecma335
         public static bool operator ==(
             System.Reflection.Metadata.Ecma335.LabelHandle left,
             System.Reflection.Metadata.Ecma335.LabelHandle right
-        ) {
+        )
+        {
             throw null;
         }
         public static bool operator !=(
             System.Reflection.Metadata.Ecma335.LabelHandle left,
             System.Reflection.Metadata.Ecma335.LabelHandle right
-        ) {
+        )
+        {
             throw null;
         }
     }
@@ -6843,7 +7165,8 @@ namespace System.Reflection.Metadata.Ecma335
         public void TaggedScalar(
             out System.Reflection.Metadata.Ecma335.CustomAttributeElementTypeEncoder type,
             out System.Reflection.Metadata.Ecma335.ScalarEncoder scalar
-        ) {
+        )
+        {
             throw null;
         }
         public void TaggedVector(
@@ -6853,7 +7176,8 @@ namespace System.Reflection.Metadata.Ecma335
         public void TaggedVector(
             out System.Reflection.Metadata.Ecma335.CustomAttributeArrayTypeEncoder arrayType,
             out System.Reflection.Metadata.Ecma335.VectorEncoder vector
-        ) {
+        )
+        {
             throw null;
         }
         public System.Reflection.Metadata.Ecma335.VectorEncoder Vector()
@@ -6914,7 +7238,8 @@ namespace System.Reflection.Metadata.Ecma335
         public System.Reflection.Metadata.Ecma335.SignatureTypeEncoder Type(
             bool isByRef = false,
             bool isPinned = false
-        ) {
+        )
+        {
             throw null;
         }
         public void TypedReference() { }
@@ -6933,7 +7258,8 @@ namespace System.Reflection.Metadata.Ecma335
         public System.Reflection.Metadata.Handle GetGenerationHandle(
             System.Reflection.Metadata.Handle handle,
             out int generation
-        ) {
+        )
+        {
             throw null;
         }
     }
@@ -6952,14 +7278,16 @@ namespace System.Reflection.Metadata.Ecma335
             System.Reflection.Metadata.BlobHandle publicKey,
             System.Reflection.AssemblyFlags flags,
             System.Reflection.AssemblyHashAlgorithm hashAlgorithm
-        ) {
+        )
+        {
             throw null;
         }
         public System.Reflection.Metadata.AssemblyFileHandle AddAssemblyFile(
             System.Reflection.Metadata.StringHandle name,
             System.Reflection.Metadata.BlobHandle hashValue,
             bool containsMetadata
-        ) {
+        )
+        {
             throw null;
         }
         public System.Reflection.Metadata.AssemblyReferenceHandle AddAssemblyReference(
@@ -6969,34 +7297,39 @@ namespace System.Reflection.Metadata.Ecma335
             System.Reflection.Metadata.BlobHandle publicKeyOrToken,
             System.Reflection.AssemblyFlags flags,
             System.Reflection.Metadata.BlobHandle hashValue
-        ) {
+        )
+        {
             throw null;
         }
         public System.Reflection.Metadata.ConstantHandle AddConstant(
             System.Reflection.Metadata.EntityHandle parent,
             object? value
-        ) {
+        )
+        {
             throw null;
         }
         public System.Reflection.Metadata.CustomAttributeHandle AddCustomAttribute(
             System.Reflection.Metadata.EntityHandle parent,
             System.Reflection.Metadata.EntityHandle constructor,
             System.Reflection.Metadata.BlobHandle value
-        ) {
+        )
+        {
             throw null;
         }
         public System.Reflection.Metadata.CustomDebugInformationHandle AddCustomDebugInformation(
             System.Reflection.Metadata.EntityHandle parent,
             System.Reflection.Metadata.GuidHandle kind,
             System.Reflection.Metadata.BlobHandle value
-        ) {
+        )
+        {
             throw null;
         }
         public System.Reflection.Metadata.DeclarativeSecurityAttributeHandle AddDeclarativeSecurityAttribute(
             System.Reflection.Metadata.EntityHandle parent,
             System.Reflection.DeclarativeSecurityAction action,
             System.Reflection.Metadata.BlobHandle permissionSet
-        ) {
+        )
+        {
             throw null;
         }
         public System.Reflection.Metadata.DocumentHandle AddDocument(
@@ -7004,7 +7337,8 @@ namespace System.Reflection.Metadata.Ecma335
             System.Reflection.Metadata.GuidHandle hashAlgorithm,
             System.Reflection.Metadata.BlobHandle hash,
             System.Reflection.Metadata.GuidHandle language
-        ) {
+        )
+        {
             throw null;
         }
         public void AddEncLogEntry(
@@ -7016,7 +7350,8 @@ namespace System.Reflection.Metadata.Ecma335
             System.Reflection.EventAttributes attributes,
             System.Reflection.Metadata.StringHandle name,
             System.Reflection.Metadata.EntityHandle type
-        ) {
+        )
+        {
             throw null;
         }
         public void AddEventMap(
@@ -7029,14 +7364,16 @@ namespace System.Reflection.Metadata.Ecma335
             System.Reflection.Metadata.StringHandle name,
             System.Reflection.Metadata.EntityHandle implementation,
             int typeDefinitionId
-        ) {
+        )
+        {
             throw null;
         }
         public System.Reflection.Metadata.FieldDefinitionHandle AddFieldDefinition(
             System.Reflection.FieldAttributes attributes,
             System.Reflection.Metadata.StringHandle name,
             System.Reflection.Metadata.BlobHandle signature
-        ) {
+        )
+        {
             throw null;
         }
         public void AddFieldLayout(
@@ -7052,31 +7389,36 @@ namespace System.Reflection.Metadata.Ecma335
             System.Reflection.GenericParameterAttributes attributes,
             System.Reflection.Metadata.StringHandle name,
             int index
-        ) {
+        )
+        {
             throw null;
         }
         public System.Reflection.Metadata.GenericParameterConstraintHandle AddGenericParameterConstraint(
             System.Reflection.Metadata.GenericParameterHandle genericParameter,
             System.Reflection.Metadata.EntityHandle constraint
-        ) {
+        )
+        {
             throw null;
         }
         public System.Reflection.Metadata.ImportScopeHandle AddImportScope(
             System.Reflection.Metadata.ImportScopeHandle parentScope,
             System.Reflection.Metadata.BlobHandle imports
-        ) {
+        )
+        {
             throw null;
         }
         public System.Reflection.Metadata.InterfaceImplementationHandle AddInterfaceImplementation(
             System.Reflection.Metadata.TypeDefinitionHandle type,
             System.Reflection.Metadata.EntityHandle implementedInterface
-        ) {
+        )
+        {
             throw null;
         }
         public System.Reflection.Metadata.LocalConstantHandle AddLocalConstant(
             System.Reflection.Metadata.StringHandle name,
             System.Reflection.Metadata.BlobHandle signature
-        ) {
+        )
+        {
             throw null;
         }
         public System.Reflection.Metadata.LocalScopeHandle AddLocalScope(
@@ -7086,14 +7428,16 @@ namespace System.Reflection.Metadata.Ecma335
             System.Reflection.Metadata.LocalConstantHandle constantList,
             int startOffset,
             int length
-        ) {
+        )
+        {
             throw null;
         }
         public System.Reflection.Metadata.LocalVariableHandle AddLocalVariable(
             System.Reflection.Metadata.LocalVariableAttributes attributes,
             int index,
             System.Reflection.Metadata.StringHandle name
-        ) {
+        )
+        {
             throw null;
         }
         public System.Reflection.Metadata.ManifestResourceHandle AddManifestResource(
@@ -7101,7 +7445,8 @@ namespace System.Reflection.Metadata.Ecma335
             System.Reflection.Metadata.StringHandle name,
             System.Reflection.Metadata.EntityHandle implementation,
             uint offset
-        ) {
+        )
+        {
             throw null;
         }
         public void AddMarshallingDescriptor(
@@ -7112,13 +7457,15 @@ namespace System.Reflection.Metadata.Ecma335
             System.Reflection.Metadata.EntityHandle parent,
             System.Reflection.Metadata.StringHandle name,
             System.Reflection.Metadata.BlobHandle signature
-        ) {
+        )
+        {
             throw null;
         }
         public System.Reflection.Metadata.MethodDebugInformationHandle AddMethodDebugInformation(
             System.Reflection.Metadata.DocumentHandle document,
             System.Reflection.Metadata.BlobHandle sequencePoints
-        ) {
+        )
+        {
             throw null;
         }
         public System.Reflection.Metadata.MethodDefinitionHandle AddMethodDefinition(
@@ -7128,14 +7475,16 @@ namespace System.Reflection.Metadata.Ecma335
             System.Reflection.Metadata.BlobHandle signature,
             int bodyOffset,
             System.Reflection.Metadata.ParameterHandle parameterList
-        ) {
+        )
+        {
             throw null;
         }
         public System.Reflection.Metadata.MethodImplementationHandle AddMethodImplementation(
             System.Reflection.Metadata.TypeDefinitionHandle type,
             System.Reflection.Metadata.EntityHandle methodBody,
             System.Reflection.Metadata.EntityHandle methodDeclaration
-        ) {
+        )
+        {
             throw null;
         }
         public void AddMethodImport(
@@ -7152,7 +7501,8 @@ namespace System.Reflection.Metadata.Ecma335
         public System.Reflection.Metadata.MethodSpecificationHandle AddMethodSpecification(
             System.Reflection.Metadata.EntityHandle method,
             System.Reflection.Metadata.BlobHandle instantiation
-        ) {
+        )
+        {
             throw null;
         }
         public System.Reflection.Metadata.ModuleDefinitionHandle AddModule(
@@ -7161,12 +7511,14 @@ namespace System.Reflection.Metadata.Ecma335
             System.Reflection.Metadata.GuidHandle mvid,
             System.Reflection.Metadata.GuidHandle encId,
             System.Reflection.Metadata.GuidHandle encBaseId
-        ) {
+        )
+        {
             throw null;
         }
         public System.Reflection.Metadata.ModuleReferenceHandle AddModuleReference(
             System.Reflection.Metadata.StringHandle moduleName
-        ) {
+        )
+        {
             throw null;
         }
         public void AddNestedType(
@@ -7177,14 +7529,16 @@ namespace System.Reflection.Metadata.Ecma335
             System.Reflection.ParameterAttributes attributes,
             System.Reflection.Metadata.StringHandle name,
             int sequenceNumber
-        ) {
+        )
+        {
             throw null;
         }
         public System.Reflection.Metadata.PropertyDefinitionHandle AddProperty(
             System.Reflection.PropertyAttributes attributes,
             System.Reflection.Metadata.StringHandle name,
             System.Reflection.Metadata.BlobHandle signature
-        ) {
+        )
+        {
             throw null;
         }
         public void AddPropertyMap(
@@ -7193,7 +7547,8 @@ namespace System.Reflection.Metadata.Ecma335
         ) { }
         public System.Reflection.Metadata.StandaloneSignatureHandle AddStandaloneSignature(
             System.Reflection.Metadata.BlobHandle signature
-        ) {
+        )
+        {
             throw null;
         }
         public void AddStateMachineMethod(
@@ -7207,7 +7562,8 @@ namespace System.Reflection.Metadata.Ecma335
             System.Reflection.Metadata.EntityHandle baseType,
             System.Reflection.Metadata.FieldDefinitionHandle fieldList,
             System.Reflection.Metadata.MethodDefinitionHandle methodList
-        ) {
+        )
+        {
             throw null;
         }
         public void AddTypeLayout(
@@ -7219,12 +7575,14 @@ namespace System.Reflection.Metadata.Ecma335
             System.Reflection.Metadata.EntityHandle resolutionScope,
             System.Reflection.Metadata.StringHandle @namespace,
             System.Reflection.Metadata.StringHandle name
-        ) {
+        )
+        {
             throw null;
         }
         public System.Reflection.Metadata.TypeSpecificationHandle AddTypeSpecification(
             System.Reflection.Metadata.BlobHandle signature
-        ) {
+        )
+        {
             throw null;
         }
         public System.Reflection.Metadata.BlobHandle GetOrAddBlob(byte[] value)
@@ -7233,12 +7591,14 @@ namespace System.Reflection.Metadata.Ecma335
         }
         public System.Reflection.Metadata.BlobHandle GetOrAddBlob(
             System.Collections.Immutable.ImmutableArray<byte> value
-        ) {
+        )
+        {
             throw null;
         }
         public System.Reflection.Metadata.BlobHandle GetOrAddBlob(
             System.Reflection.Metadata.BlobBuilder value
-        ) {
+        )
+        {
             throw null;
         }
         public System.Reflection.Metadata.BlobHandle GetOrAddBlobUTF16(string value)
@@ -7248,7 +7608,8 @@ namespace System.Reflection.Metadata.Ecma335
         public System.Reflection.Metadata.BlobHandle GetOrAddBlobUTF8(
             string value,
             bool allowUnpairedSurrogates = true
-        ) {
+        )
+        {
             throw null;
         }
         public System.Reflection.Metadata.BlobHandle GetOrAddConstantBlob(object? value)
@@ -7285,7 +7646,8 @@ namespace System.Reflection.Metadata.Ecma335
         }
         public System.Reflection.Metadata.ReservedBlob<System.Reflection.Metadata.UserStringHandle> ReserveUserString(
             int length
-        ) {
+        )
+        {
             throw null;
         }
         public void SetCapacity(
@@ -7301,77 +7663,90 @@ namespace System.Reflection.Metadata.Ecma335
     {
         public static System.Collections.Generic.IEnumerable<System.Reflection.Metadata.Ecma335.EditAndContinueLogEntry> GetEditAndContinueLogEntries(
             this System.Reflection.Metadata.MetadataReader reader
-        ) {
+        )
+        {
             throw null;
         }
         public static System.Collections.Generic.IEnumerable<System.Reflection.Metadata.EntityHandle> GetEditAndContinueMapEntries(
             this System.Reflection.Metadata.MetadataReader reader
-        ) {
+        )
+        {
             throw null;
         }
         public static int GetHeapMetadataOffset(
             this System.Reflection.Metadata.MetadataReader reader,
             System.Reflection.Metadata.Ecma335.HeapIndex heapIndex
-        ) {
+        )
+        {
             throw null;
         }
         public static int GetHeapSize(
             this System.Reflection.Metadata.MetadataReader reader,
             System.Reflection.Metadata.Ecma335.HeapIndex heapIndex
-        ) {
+        )
+        {
             throw null;
         }
         public static System.Reflection.Metadata.BlobHandle GetNextHandle(
             this System.Reflection.Metadata.MetadataReader reader,
             System.Reflection.Metadata.BlobHandle handle
-        ) {
+        )
+        {
             throw null;
         }
         public static System.Reflection.Metadata.StringHandle GetNextHandle(
             this System.Reflection.Metadata.MetadataReader reader,
             System.Reflection.Metadata.StringHandle handle
-        ) {
+        )
+        {
             throw null;
         }
         public static System.Reflection.Metadata.UserStringHandle GetNextHandle(
             this System.Reflection.Metadata.MetadataReader reader,
             System.Reflection.Metadata.UserStringHandle handle
-        ) {
+        )
+        {
             throw null;
         }
         public static int GetTableMetadataOffset(
             this System.Reflection.Metadata.MetadataReader reader,
             System.Reflection.Metadata.Ecma335.TableIndex tableIndex
-        ) {
+        )
+        {
             throw null;
         }
         public static int GetTableRowCount(
             this System.Reflection.Metadata.MetadataReader reader,
             System.Reflection.Metadata.Ecma335.TableIndex tableIndex
-        ) {
+        )
+        {
             throw null;
         }
         public static int GetTableRowSize(
             this System.Reflection.Metadata.MetadataReader reader,
             System.Reflection.Metadata.Ecma335.TableIndex tableIndex
-        ) {
+        )
+        {
             throw null;
         }
         public static System.Collections.Generic.IEnumerable<System.Reflection.Metadata.TypeDefinitionHandle> GetTypesWithEvents(
             this System.Reflection.Metadata.MetadataReader reader
-        ) {
+        )
+        {
             throw null;
         }
         public static System.Collections.Generic.IEnumerable<System.Reflection.Metadata.TypeDefinitionHandle> GetTypesWithProperties(
             this System.Reflection.Metadata.MetadataReader reader
-        ) {
+        )
+        {
             throw null;
         }
         public static System.Reflection.Metadata.SignatureTypeKind ResolveSignatureTypeKind(
             this System.Reflection.Metadata.MetadataReader reader,
             System.Reflection.Metadata.EntityHandle typeHandle,
             byte rawTypeKind
-        ) {
+        )
+        {
             throw null;
         }
     }
@@ -7426,12 +7801,14 @@ namespace System.Reflection.Metadata.Ecma335
         public static readonly int TableCount;
         public static System.Reflection.Metadata.AssemblyFileHandle AssemblyFileHandle(
             int rowNumber
-        ) {
+        )
+        {
             throw null;
         }
         public static System.Reflection.Metadata.AssemblyReferenceHandle AssemblyReferenceHandle(
             int rowNumber
-        ) {
+        )
+        {
             throw null;
         }
         public static System.Reflection.Metadata.BlobHandle BlobHandle(int offset)
@@ -7444,17 +7821,20 @@ namespace System.Reflection.Metadata.Ecma335
         }
         public static System.Reflection.Metadata.CustomAttributeHandle CustomAttributeHandle(
             int rowNumber
-        ) {
+        )
+        {
             throw null;
         }
         public static System.Reflection.Metadata.CustomDebugInformationHandle CustomDebugInformationHandle(
             int rowNumber
-        ) {
+        )
+        {
             throw null;
         }
         public static System.Reflection.Metadata.DeclarativeSecurityAttributeHandle DeclarativeSecurityAttributeHandle(
             int rowNumber
-        ) {
+        )
+        {
             throw null;
         }
         public static System.Reflection.Metadata.DocumentHandle DocumentHandle(int rowNumber)
@@ -7463,7 +7843,8 @@ namespace System.Reflection.Metadata.Ecma335
         }
         public static System.Reflection.Metadata.DocumentNameBlobHandle DocumentNameBlobHandle(
             int offset
-        ) {
+        )
+        {
             throw null;
         }
         public static System.Reflection.Metadata.EntityHandle EntityHandle(int token)
@@ -7473,32 +7854,38 @@ namespace System.Reflection.Metadata.Ecma335
         public static System.Reflection.Metadata.EntityHandle EntityHandle(
             System.Reflection.Metadata.Ecma335.TableIndex tableIndex,
             int rowNumber
-        ) {
+        )
+        {
             throw null;
         }
         public static System.Reflection.Metadata.EventDefinitionHandle EventDefinitionHandle(
             int rowNumber
-        ) {
+        )
+        {
             throw null;
         }
         public static System.Reflection.Metadata.ExportedTypeHandle ExportedTypeHandle(
             int rowNumber
-        ) {
+        )
+        {
             throw null;
         }
         public static System.Reflection.Metadata.FieldDefinitionHandle FieldDefinitionHandle(
             int rowNumber
-        ) {
+        )
+        {
             throw null;
         }
         public static System.Reflection.Metadata.GenericParameterConstraintHandle GenericParameterConstraintHandle(
             int rowNumber
-        ) {
+        )
+        {
             throw null;
         }
         public static System.Reflection.Metadata.GenericParameterHandle GenericParameterHandle(
             int rowNumber
-        ) {
+        )
+        {
             throw null;
         }
         public static int GetHeapOffset(System.Reflection.Metadata.BlobHandle handle)
@@ -7516,7 +7903,8 @@ namespace System.Reflection.Metadata.Ecma335
         public static int GetHeapOffset(
             this System.Reflection.Metadata.MetadataReader reader,
             System.Reflection.Metadata.Handle handle
-        ) {
+        )
+        {
             throw null;
         }
         public static int GetHeapOffset(System.Reflection.Metadata.StringHandle handle)
@@ -7534,7 +7922,8 @@ namespace System.Reflection.Metadata.Ecma335
         public static int GetRowNumber(
             this System.Reflection.Metadata.MetadataReader reader,
             System.Reflection.Metadata.EntityHandle handle
-        ) {
+        )
+        {
             throw null;
         }
         public static int GetToken(System.Reflection.Metadata.EntityHandle handle)
@@ -7548,13 +7937,15 @@ namespace System.Reflection.Metadata.Ecma335
         public static int GetToken(
             this System.Reflection.Metadata.MetadataReader reader,
             System.Reflection.Metadata.EntityHandle handle
-        ) {
+        )
+        {
             throw null;
         }
         public static int GetToken(
             this System.Reflection.Metadata.MetadataReader reader,
             System.Reflection.Metadata.Handle handle
-        ) {
+        )
+        {
             throw null;
         }
         public static System.Reflection.Metadata.GuidHandle GuidHandle(int offset)
@@ -7568,7 +7959,8 @@ namespace System.Reflection.Metadata.Ecma335
         public static System.Reflection.Metadata.EntityHandle Handle(
             System.Reflection.Metadata.Ecma335.TableIndex tableIndex,
             int rowNumber
-        ) {
+        )
+        {
             throw null;
         }
         public static System.Reflection.Metadata.ImportScopeHandle ImportScopeHandle(int rowNumber)
@@ -7577,12 +7969,14 @@ namespace System.Reflection.Metadata.Ecma335
         }
         public static System.Reflection.Metadata.InterfaceImplementationHandle InterfaceImplementationHandle(
             int rowNumber
-        ) {
+        )
+        {
             throw null;
         }
         public static System.Reflection.Metadata.LocalConstantHandle LocalConstantHandle(
             int rowNumber
-        ) {
+        )
+        {
             throw null;
         }
         public static System.Reflection.Metadata.LocalScopeHandle LocalScopeHandle(int rowNumber)
@@ -7591,42 +7985,50 @@ namespace System.Reflection.Metadata.Ecma335
         }
         public static System.Reflection.Metadata.LocalVariableHandle LocalVariableHandle(
             int rowNumber
-        ) {
+        )
+        {
             throw null;
         }
         public static System.Reflection.Metadata.ManifestResourceHandle ManifestResourceHandle(
             int rowNumber
-        ) {
+        )
+        {
             throw null;
         }
         public static System.Reflection.Metadata.MemberReferenceHandle MemberReferenceHandle(
             int rowNumber
-        ) {
+        )
+        {
             throw null;
         }
         public static System.Reflection.Metadata.MethodDebugInformationHandle MethodDebugInformationHandle(
             int rowNumber
-        ) {
+        )
+        {
             throw null;
         }
         public static System.Reflection.Metadata.MethodDefinitionHandle MethodDefinitionHandle(
             int rowNumber
-        ) {
+        )
+        {
             throw null;
         }
         public static System.Reflection.Metadata.MethodImplementationHandle MethodImplementationHandle(
             int rowNumber
-        ) {
+        )
+        {
             throw null;
         }
         public static System.Reflection.Metadata.MethodSpecificationHandle MethodSpecificationHandle(
             int rowNumber
-        ) {
+        )
+        {
             throw null;
         }
         public static System.Reflection.Metadata.ModuleReferenceHandle ModuleReferenceHandle(
             int rowNumber
-        ) {
+        )
+        {
             throw null;
         }
         public static System.Reflection.Metadata.ParameterHandle ParameterHandle(int rowNumber)
@@ -7635,12 +8037,14 @@ namespace System.Reflection.Metadata.Ecma335
         }
         public static System.Reflection.Metadata.PropertyDefinitionHandle PropertyDefinitionHandle(
             int rowNumber
-        ) {
+        )
+        {
             throw null;
         }
         public static System.Reflection.Metadata.StandaloneSignatureHandle StandaloneSignatureHandle(
             int rowNumber
-        ) {
+        )
+        {
             throw null;
         }
         public static System.Reflection.Metadata.StringHandle StringHandle(int offset)
@@ -7650,28 +8054,33 @@ namespace System.Reflection.Metadata.Ecma335
         public static bool TryGetHeapIndex(
             System.Reflection.Metadata.HandleKind type,
             out System.Reflection.Metadata.Ecma335.HeapIndex index
-        ) {
+        )
+        {
             throw null;
         }
         public static bool TryGetTableIndex(
             System.Reflection.Metadata.HandleKind type,
             out System.Reflection.Metadata.Ecma335.TableIndex index
-        ) {
+        )
+        {
             throw null;
         }
         public static System.Reflection.Metadata.TypeDefinitionHandle TypeDefinitionHandle(
             int rowNumber
-        ) {
+        )
+        {
             throw null;
         }
         public static System.Reflection.Metadata.TypeReferenceHandle TypeReferenceHandle(
             int rowNumber
-        ) {
+        )
+        {
             throw null;
         }
         public static System.Reflection.Metadata.TypeSpecificationHandle TypeSpecificationHandle(
             int rowNumber
-        ) {
+        )
+        {
             throw null;
         }
         public static System.Reflection.Metadata.UserStringHandle UserStringHandle(int offset)
@@ -7704,7 +8113,8 @@ namespace System.Reflection.Metadata.Ecma335
             bool hasSmallExceptionRegions,
             System.Reflection.Metadata.StandaloneSignatureHandle localVariablesSignature,
             System.Reflection.Metadata.Ecma335.MethodBodyAttributes attributes
-        ) {
+        )
+        {
             throw null;
         }
         public System.Reflection.Metadata.Ecma335.MethodBodyStreamEncoder.MethodBody AddMethodBody(
@@ -7717,7 +8127,8 @@ namespace System.Reflection.Metadata.Ecma335
             System.Reflection.Metadata.Ecma335.MethodBodyAttributes attributes =
                 System.Reflection.Metadata.Ecma335.MethodBodyAttributes.InitLocals,
             bool hasDynamicStackAllocation = false
-        ) {
+        )
+        {
             throw null;
         }
         public int AddMethodBody(
@@ -7725,7 +8136,8 @@ namespace System.Reflection.Metadata.Ecma335
             int maxStack,
             System.Reflection.Metadata.StandaloneSignatureHandle localVariablesSignature,
             System.Reflection.Metadata.Ecma335.MethodBodyAttributes attributes
-        ) {
+        )
+        {
             throw null;
         }
         public int AddMethodBody(
@@ -7736,7 +8148,8 @@ namespace System.Reflection.Metadata.Ecma335
             System.Reflection.Metadata.Ecma335.MethodBodyAttributes attributes =
                 System.Reflection.Metadata.Ecma335.MethodBodyAttributes.InitLocals,
             bool hasDynamicStackAllocation = false
-        ) {
+        )
+        {
             throw null;
         }
         public readonly partial struct MethodBody
@@ -7764,7 +8177,8 @@ namespace System.Reflection.Metadata.Ecma335
         public MethodSignatureEncoder(
             System.Reflection.Metadata.BlobBuilder builder,
             bool hasVarArgs
-        ) {
+        )
+        {
             throw null;
         }
         public System.Reflection.Metadata.BlobBuilder Builder
@@ -7784,7 +8198,8 @@ namespace System.Reflection.Metadata.Ecma335
             int parameterCount,
             out System.Reflection.Metadata.Ecma335.ReturnTypeEncoder returnType,
             out System.Reflection.Metadata.Ecma335.ParametersEncoder parameters
-        ) {
+        )
+        {
             throw null;
         }
     }
@@ -7811,7 +8226,8 @@ namespace System.Reflection.Metadata.Ecma335
             out System.Reflection.Metadata.Ecma335.NamedArgumentTypeEncoder type,
             out System.Reflection.Metadata.Ecma335.NameEncoder name,
             out System.Reflection.Metadata.Ecma335.LiteralEncoder literal
-        ) {
+        )
+        {
             throw null;
         }
     }
@@ -7858,7 +8274,8 @@ namespace System.Reflection.Metadata.Ecma335
         public ParametersEncoder(
             System.Reflection.Metadata.BlobBuilder builder,
             bool hasVarArgs = false
-        ) {
+        )
+        {
             throw null;
         }
         public System.Reflection.Metadata.BlobBuilder Builder
@@ -7915,13 +8332,15 @@ namespace System.Reflection.Metadata.Ecma335
         public System.Reflection.Metadata.Ecma335.PermissionSetEncoder AddPermission(
             string typeName,
             System.Collections.Immutable.ImmutableArray<byte> encodedArguments
-        ) {
+        )
+        {
             throw null;
         }
         public System.Reflection.Metadata.Ecma335.PermissionSetEncoder AddPermission(
             string typeName,
             System.Reflection.Metadata.BlobBuilder encodedArguments
-        ) {
+        )
+        {
             throw null;
         }
     }
@@ -7953,7 +8372,8 @@ namespace System.Reflection.Metadata.Ecma335
         }
         public System.Reflection.Metadata.BlobContentId Serialize(
             System.Reflection.Metadata.BlobBuilder builder
-        ) {
+        )
+        {
             throw null;
         }
     }
@@ -8005,7 +8425,8 @@ namespace System.Reflection.Metadata.Ecma335
             System.Reflection.Metadata.ISignatureTypeProvider<TType, TGenericContext> provider,
             System.Reflection.Metadata.MetadataReader metadataReader,
             TGenericContext genericContext
-        ) {
+        )
+        {
             throw null;
         }
         public TType DecodeFieldSignature(ref System.Reflection.Metadata.BlobReader blobReader)
@@ -8014,23 +8435,27 @@ namespace System.Reflection.Metadata.Ecma335
         }
         public System.Collections.Immutable.ImmutableArray<TType> DecodeLocalSignature(
             ref System.Reflection.Metadata.BlobReader blobReader
-        ) {
+        )
+        {
             throw null;
         }
         public System.Reflection.Metadata.MethodSignature<TType> DecodeMethodSignature(
             ref System.Reflection.Metadata.BlobReader blobReader
-        ) {
+        )
+        {
             throw null;
         }
         public System.Collections.Immutable.ImmutableArray<TType> DecodeMethodSpecificationSignature(
             ref System.Reflection.Metadata.BlobReader blobReader
-        ) {
+        )
+        {
             throw null;
         }
         public TType DecodeType(
             ref System.Reflection.Metadata.BlobReader blobReader,
             bool allowTypeSpecifications = false
-        ) {
+        )
+        {
             throw null;
         }
     }
@@ -8053,7 +8478,8 @@ namespace System.Reflection.Metadata.Ecma335
         public void Array(
             out System.Reflection.Metadata.Ecma335.SignatureTypeEncoder elementType,
             out System.Reflection.Metadata.Ecma335.ArrayShapeEncoder arrayShape
-        ) {
+        )
+        {
             throw null;
         }
         public void Boolean() { }
@@ -8070,14 +8496,16 @@ namespace System.Reflection.Metadata.Ecma335
             System.Reflection.Metadata.Ecma335.FunctionPointerAttributes attributes =
                 System.Reflection.Metadata.Ecma335.FunctionPointerAttributes.None,
             int genericParameterCount = 0
-        ) {
+        )
+        {
             throw null;
         }
         public System.Reflection.Metadata.Ecma335.GenericTypeArgumentsEncoder GenericInstantiation(
             System.Reflection.Metadata.EntityHandle genericType,
             int genericArgumentCount,
             bool isValueType
-        ) {
+        )
+        {
             throw null;
         }
         public void GenericMethodTypeParameter(int parameterIndex) { }
@@ -8356,7 +8784,8 @@ namespace System.Reflection.PortableExecutable
             int dataSize,
             int dataRelativeVirtualAddress,
             int dataPointer
-        ) {
+        )
+        {
             throw null;
         }
         public int DataPointer
@@ -8477,13 +8906,14 @@ namespace System.Reflection.PortableExecutable
                 System.Collections.Generic.IEnumerable<System.Reflection.Metadata.Blob>,
                 System.Reflection.Metadata.BlobContentId
             >? deterministicIdProvider = null
-        ) : base(
-            default(System.Reflection.PortableExecutable.PEHeaderBuilder),
-            default(System.Func<
-                System.Collections.Generic.IEnumerable<System.Reflection.Metadata.Blob>,
-                System.Reflection.Metadata.BlobContentId
-            >)
-        ) { }
+        )
+            : base(
+                default(System.Reflection.PortableExecutable.PEHeaderBuilder),
+                default(System.Func<
+                    System.Collections.Generic.IEnumerable<System.Reflection.Metadata.Blob>,
+                    System.Reflection.Metadata.BlobContentId
+                >)
+            ) { }
         protected override System.Collections.Immutable.ImmutableArray<System.Reflection.PortableExecutable.PEBuilder.Section> CreateSections()
         {
             throw null;
@@ -8495,7 +8925,8 @@ namespace System.Reflection.PortableExecutable
         protected override System.Reflection.Metadata.BlobBuilder SerializeSection(
             string name,
             System.Reflection.PortableExecutable.SectionLocation location
-        ) {
+        )
+        {
             throw null;
         }
         public void Sign(
@@ -8551,7 +8982,8 @@ namespace System.Reflection.PortableExecutable
         }
         public System.Reflection.Metadata.BlobContentId Serialize(
             System.Reflection.Metadata.BlobBuilder builder
-        ) {
+        )
+        {
             throw null;
         }
         protected abstract System.Reflection.Metadata.BlobBuilder SerializeSection(
@@ -8565,7 +8997,8 @@ namespace System.Reflection.PortableExecutable
             public Section(
                 string name,
                 System.Reflection.PortableExecutable.SectionCharacteristics characteristics
-            ) {
+            )
+            {
                 throw null;
             }
         }
@@ -9004,7 +9437,8 @@ namespace System.Reflection.PortableExecutable
         public bool TryGetDirectoryOffset(
             System.Reflection.PortableExecutable.DirectoryEntry directory,
             out int offset
-        ) {
+        )
+        {
             throw null;
         }
     }
@@ -9084,7 +9518,8 @@ namespace System.Reflection.PortableExecutable
         }
         public System.Reflection.PortableExecutable.PEMemoryBlock GetSectionData(
             int relativeVirtualAddress
-        ) {
+        )
+        {
             throw null;
         }
         public System.Reflection.PortableExecutable.PEMemoryBlock GetSectionData(string sectionName)
@@ -9093,7 +9528,8 @@ namespace System.Reflection.PortableExecutable
         }
         public System.Reflection.PortableExecutable.CodeViewDebugDirectoryData ReadCodeViewDebugDirectoryData(
             System.Reflection.PortableExecutable.DebugDirectoryEntry entry
-        ) {
+        )
+        {
             throw null;
         }
         public System.Collections.Immutable.ImmutableArray<System.Reflection.PortableExecutable.DebugDirectoryEntry> ReadDebugDirectory()
@@ -9102,12 +9538,14 @@ namespace System.Reflection.PortableExecutable
         }
         public System.Reflection.Metadata.MetadataReaderProvider ReadEmbeddedPortablePdbDebugDirectoryData(
             System.Reflection.PortableExecutable.DebugDirectoryEntry entry
-        ) {
+        )
+        {
             throw null;
         }
         public System.Reflection.PortableExecutable.PdbChecksumDebugDirectoryData ReadPdbChecksumDebugDirectoryData(
             System.Reflection.PortableExecutable.DebugDirectoryEntry entry
-        ) {
+        )
+        {
             throw null;
         }
         public bool TryOpenAssociatedPortablePdb(
@@ -9115,7 +9553,8 @@ namespace System.Reflection.PortableExecutable
             System.Func<string, System.IO.Stream?> pdbFileStreamProvider,
             out System.Reflection.Metadata.MetadataReaderProvider? pdbReaderProvider,
             out string? pdbPath
-        ) {
+        )
+        {
             throw null;
         }
     }

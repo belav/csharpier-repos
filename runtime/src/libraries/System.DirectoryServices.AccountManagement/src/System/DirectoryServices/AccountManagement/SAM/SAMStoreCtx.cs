@@ -176,7 +176,8 @@ namespace System.DirectoryServices.AccountManagement
             string username,
             string password,
             ContextOptions options
-        ) {
+        )
+        {
             Debug.Assert(ctxBase != null);
             GlobalDebug.WriteLineIf(
                 GlobalDebug.Info,
@@ -431,7 +432,8 @@ namespace System.DirectoryServices.AccountManagement
             if (
                 (principalType == typeof(UserPrincipal))
                 || (principalType.IsSubclassOf(typeof(UserPrincipal)))
-            ) {
+            )
+            {
                 de.Properties["userFlags"].Value = SDSUtils.SAM_DefaultUAC;
             }
         }
@@ -551,7 +553,8 @@ namespace System.DirectoryServices.AccountManagement
             AuthenticablePrincipal p,
             string oldPassword,
             string newPassword
-        ) {
+        )
+        {
             Debug.Assert(p.fakePrincipal == false);
 
             Debug.Assert(p is UserPrincipal || p is ComputerPrincipal);
@@ -635,7 +638,8 @@ namespace System.DirectoryServices.AccountManagement
             DateTime dt,
             MatchType matchType,
             Type principalType
-        ) {
+        )
+        {
             throw new NotSupportedException(SR.StoreNotSupportMethod);
         }
 
@@ -643,7 +647,8 @@ namespace System.DirectoryServices.AccountManagement
             DateTime dt,
             MatchType matchType,
             Type principalType
-        ) {
+        )
+        {
             throw new NotSupportedException(SR.StoreNotSupportMethod);
         }
 
@@ -651,7 +656,8 @@ namespace System.DirectoryServices.AccountManagement
             DateTime dt,
             MatchType matchType,
             Type principalType
-        ) {
+        )
+        {
             return FindByDate(
                 FindByDateMatcher.DateProperty.LogonTime,
                 matchType,
@@ -664,7 +670,8 @@ namespace System.DirectoryServices.AccountManagement
             DateTime dt,
             MatchType matchType,
             Type principalType
-        ) {
+        )
+        {
             return FindByDate(
                 FindByDateMatcher.DateProperty.PasswordSetTime,
                 matchType,
@@ -677,7 +684,8 @@ namespace System.DirectoryServices.AccountManagement
             DateTime dt,
             MatchType matchType,
             Type principalType
-        ) {
+        )
+        {
             return FindByDate(
                 FindByDateMatcher.DateProperty.AccountExpirationTime,
                 matchType,
@@ -691,7 +699,8 @@ namespace System.DirectoryServices.AccountManagement
             MatchType matchType,
             DateTime value,
             Type principalType
-        ) {
+        )
+        {
             // We use the same SAMQuery set that we use for query-by-example, but with a different
             // SAMMatcher class to perform the date-range filter.
 
@@ -807,7 +816,8 @@ namespace System.DirectoryServices.AccountManagement
         internal override ResultSet GetGroupsMemberOf(
             Principal foreignPrincipal,
             StoreCtx foreignContext
-        ) {
+        )
+        {
             // If it's a fake principal, we don't need to do any of the lookup to find a local representation.
             // We'll skip straight to GetGroupsMemberOf(Principal), which will lookup the groups to which it belongs via its SID.
             if (foreignPrincipal.fakePrincipal)
@@ -973,7 +983,8 @@ namespace System.DirectoryServices.AccountManagement
             GroupPrincipal g,
             Principal member,
             out string explanationForFailure
-        ) {
+        )
+        {
             // Always true for this type of StoreCtx
             explanationForFailure = null;
             return true;

@@ -74,7 +74,8 @@ namespace CoreXml.Test.XLinq
             SaveOptions so,
             XmlReader originalReader,
             XmlReader filteredReader
-        ) {
+        )
+        {
             if ((so & SaveOptions.OmitDuplicateNamespaces) > 0)
                 CompareNamespaceAware(originalReader, filteredReader);
             else
@@ -336,7 +337,8 @@ namespace CoreXml.Test.XLinq
             string[][] filteredAttrs,
             int attrPosition,
             string message
-        ) {
+        )
+        {
             // MoveToNextAttribute works OK
             bool shouldNAWork = (attrPosition < filteredAttrs.Length - 1);
             var orig = filteredReader.GetSAData();
@@ -390,7 +392,8 @@ namespace CoreXml.Test.XLinq
         private static IEnumerable<string[]> IndexedAtrributeEnumerator(
             XmlReader r,
             bool moveToElement
-        ) {
+        )
+        {
             TestLog.Compare(r.NodeType, XmlNodeType.Element, "Assert for enumerator"); // assert
             int aCount = r.AttributeCount;
             for (int i = 0; i < aCount; i++)
@@ -421,7 +424,8 @@ namespace CoreXml.Test.XLinq
             IEnumerable<string[]> r2,
             NSStack nsTable,
             int depth
-        ) {
+        )
+        {
             IEnumerator<string[]> r1E = r1.GetEnumerator();
             IEnumerator<string[]> r2E = r2.GetEnumerator();
 

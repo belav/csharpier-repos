@@ -135,7 +135,8 @@ namespace System.Linq.Parallel.Tests
                 foreach (
                     KeyValuePair<int, int> entry in UnorderedSources.Default(count)
                         .ToDictionary(x => x, new ModularCongruenceComparer(2))
-                ) {
+                )
+                {
                     seen.Add(entry.Key);
                     Assert.Equal(entry.Key, entry.Value);
                 }
@@ -178,7 +179,8 @@ namespace System.Linq.Parallel.Tests
                 foreach (
                     KeyValuePair<int, int> entry in UnorderedSources.Default(count)
                         .ToDictionary(x => x, y => y, new ModularCongruenceComparer(2))
-                ) {
+                )
+                {
                     seen.Add(entry.Key);
                     Assert.Equal(entry.Key, entry.Value);
                 }
@@ -304,7 +306,8 @@ namespace System.Linq.Parallel.Tests
         public static void ToDictionary_AggregateException(
             Labeled<ParallelQuery<int>> labeled,
             int count
-        ) {
+        )
+        {
             _ = count;
 
             AssertThrows.Wrapped<DeliberateTestException>(

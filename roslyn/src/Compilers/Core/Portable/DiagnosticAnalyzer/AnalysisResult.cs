@@ -34,7 +34,8 @@ namespace Microsoft.CodeAnalysis.Diagnostics
             > localAdditionalFileDiagnostics,
             ImmutableDictionary<DiagnosticAnalyzer, ImmutableArray<Diagnostic>> nonLocalDiagnostics,
             ImmutableDictionary<DiagnosticAnalyzer, AnalyzerTelemetryInfo> analyzerTelemetryInfo
-        ) {
+        )
+        {
             Analyzers = analyzers;
             SyntaxDiagnostics = localSyntaxDiagnostics;
             SemanticDiagnostics = localSemanticDiagnostics;
@@ -123,13 +124,15 @@ namespace Microsoft.CodeAnalysis.Diagnostics
 
         private ImmutableArray<Diagnostic> GetDiagnostics(
             ImmutableHashSet<DiagnosticAnalyzer> excludedAnalyzers
-        ) {
+        )
+        {
             if (
                 SyntaxDiagnostics.Count > 0
                 || SemanticDiagnostics.Count > 0
                 || AdditionalFileDiagnostics.Count > 0
                 || CompilationDiagnostics.Count > 0
-            ) {
+            )
+            {
                 var builder = ImmutableArray.CreateBuilder<Diagnostic>();
                 AddLocalDiagnostics(SyntaxDiagnostics, excludedAnalyzers, builder);
                 AddLocalDiagnostics(SemanticDiagnostics, excludedAnalyzers, builder);
@@ -169,7 +172,8 @@ namespace Microsoft.CodeAnalysis.Diagnostics
             ImmutableDictionary<DiagnosticAnalyzer, ImmutableArray<Diagnostic>> nonLocalDiagnostics,
             ImmutableHashSet<DiagnosticAnalyzer> excludedAnalyzers,
             ImmutableArray<Diagnostic>.Builder builder
-        ) {
+        )
+        {
             foreach (var diagnosticsByAnalyzer in nonLocalDiagnostics)
             {
                 if (excludedAnalyzers.Contains(diagnosticsByAnalyzer.Key))

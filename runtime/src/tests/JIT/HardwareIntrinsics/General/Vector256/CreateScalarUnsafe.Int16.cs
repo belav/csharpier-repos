@@ -71,7 +71,8 @@ namespace JIT.HardwareIntrinsics.General
             Vector256<Int16> result,
             Int16 expectedValue,
             [CallerMemberName] string method = ""
-        ) {
+        )
+        {
             Int16[] resultElements = new Int16[ElementCount];
             Unsafe.WriteUnaligned(ref Unsafe.As<Int16, byte>(ref resultElements[0]), result);
             ValidateResult(resultElements, expectedValue, method);
@@ -81,7 +82,8 @@ namespace JIT.HardwareIntrinsics.General
             Int16[] resultElements,
             Int16 expectedValue,
             [CallerMemberName] string method = ""
-        ) {
+        )
+        {
             bool succeeded = true;
 
             if (resultElements[0] != expectedValue)
@@ -94,7 +96,8 @@ namespace JIT.HardwareIntrinsics.General
                 {
                     if (
                         false /* value is uninitialized */
-                    ) {
+                    )
+                    {
                         succeeded = false;
                         break;
                     }

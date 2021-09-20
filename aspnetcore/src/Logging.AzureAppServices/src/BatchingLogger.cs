@@ -36,7 +36,8 @@ namespace Microsoft.Extensions.Logging.AzureAppServices
             TState state,
             Exception exception,
             Func<TState, Exception, string> formatter
-        ) {
+        )
+        {
             if (!IsEnabled(logLevel))
             {
                 return;
@@ -85,7 +86,8 @@ namespace Microsoft.Extensions.Logging.AzureAppServices
             TState state,
             Exception exception,
             Func<TState, Exception, string> formatter
-        ) {
+        )
+        {
             Log(DateTimeOffset.Now, logLevel, eventId, state, exception, formatter);
         }
     }

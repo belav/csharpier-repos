@@ -37,7 +37,8 @@ namespace System.Buffers
             MemoryPool<byte> pool,
             bool allowLateReturn = false,
             bool rentTracking = false
-        ) {
+        )
+        {
             _pool = pool;
             _allowLateReturn = allowLateReturn;
             _rentTracking = rentTracking;

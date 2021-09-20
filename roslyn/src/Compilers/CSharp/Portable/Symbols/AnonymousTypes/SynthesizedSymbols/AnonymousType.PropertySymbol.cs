@@ -31,27 +31,29 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                 AnonymousTypeField field,
                 TypeWithAnnotations fieldTypeWithAnnotations,
                 int index
-            ) : this(
-                container,
-                field,
-                fieldTypeWithAnnotations,
-                index,
-                ImmutableArray<Location>.Empty,
-                includeBackingField: true
-            ) { }
+            )
+                : this(
+                    container,
+                    field,
+                    fieldTypeWithAnnotations,
+                    index,
+                    ImmutableArray<Location>.Empty,
+                    includeBackingField: true
+                ) { }
 
             internal AnonymousTypePropertySymbol(
                 AnonymousTypePublicSymbol container,
                 AnonymousTypeField field,
                 int index
-            ) : this(
-                container,
-                field,
-                field.TypeWithAnnotations,
-                index,
-                ImmutableArray.Create<Location>(field.Location),
-                includeBackingField: false
-            ) { }
+            )
+                : this(
+                    container,
+                    field,
+                    field.TypeWithAnnotations,
+                    index,
+                    ImmutableArray.Create<Location>(field.Location),
+                    includeBackingField: false
+                ) { }
 
             private AnonymousTypePropertySymbol(
                 NamedTypeSymbol container,
@@ -60,7 +62,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                 int index,
                 ImmutableArray<Location> locations,
                 bool includeBackingField
-            ) {
+            )
+            {
                 Debug.Assert((object)container != null);
                 Debug.Assert((object)field != null);
                 Debug.Assert(fieldTypeWithAnnotations.HasType);

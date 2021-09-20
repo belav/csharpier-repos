@@ -571,7 +571,8 @@ namespace System.IO
         public virtual Task WriteAsync(
             StringBuilder? value,
             CancellationToken cancellationToken = default
-        ) {
+        )
+        {
             return cancellationToken.IsCancellationRequested
               ? Task.FromCanceled(cancellationToken)
               : value == null ? Task.CompletedTask : WriteAsyncCore(value, cancellationToken);
@@ -663,7 +664,8 @@ namespace System.IO
         public virtual Task WriteLineAsync(
             StringBuilder? value,
             CancellationToken cancellationToken = default
-        ) {
+        )
+        {
             return cancellationToken.IsCancellationRequested
               ? Task.FromCanceled(cancellationToken)
               : value == null
@@ -965,7 +967,8 @@ namespace System.IO
             public override Task WriteAsync(
                 StringBuilder? value,
                 CancellationToken cancellationToken = default
-            ) {
+            )
+            {
                 if (cancellationToken.IsCancellationRequested)
                 {
                     return Task.FromCanceled(cancellationToken);
@@ -986,7 +989,8 @@ namespace System.IO
             public override Task WriteAsync(
                 ReadOnlyMemory<char> buffer,
                 CancellationToken cancellationToken = default
-            ) {
+            )
+            {
                 if (cancellationToken.IsCancellationRequested)
                 {
                     return Task.FromCanceled(cancellationToken);
@@ -1000,7 +1004,8 @@ namespace System.IO
             public override Task WriteLineAsync(
                 ReadOnlyMemory<char> buffer,
                 CancellationToken cancellationToken = default
-            ) {
+            )
+            {
                 if (cancellationToken.IsCancellationRequested)
                 {
                     return Task.FromCanceled(cancellationToken);
@@ -1035,7 +1040,8 @@ namespace System.IO
             public override Task WriteLineAsync(
                 StringBuilder? value,
                 CancellationToken cancellationToken = default
-            ) {
+            )
+            {
                 if (cancellationToken.IsCancellationRequested)
                 {
                     return Task.FromCanceled(cancellationToken);

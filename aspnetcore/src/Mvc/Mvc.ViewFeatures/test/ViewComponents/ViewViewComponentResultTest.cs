@@ -603,7 +603,8 @@ namespace Microsoft.AspNetCore.Mvc
         [InlineData("")]
         public void Execute_CallsFindView_WithExpectedPath_WhenViewNameIsNullOrEmpty(
             string viewName
-        ) {
+        )
+        {
             // Arrange
             var shortName = "SomeShortName";
             var viewData = new ViewDataDictionary(new EmptyModelMetadataProvider());
@@ -670,7 +671,8 @@ namespace Microsoft.AspNetCore.Mvc
             IView view,
             ViewDataDictionary viewData,
             object diagnosticListener = null
-        ) {
+        )
+        {
             var diagnosticSource = new DiagnosticListener("Microsoft.AspNetCore");
             if (diagnosticListener == null)
             {

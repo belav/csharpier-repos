@@ -118,7 +118,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                 if (
                     AdaptedNamedTypeSymbol.IsDefinition
                     && (object)AdaptedNamedTypeSymbol.ContainingType == null
-                ) {
+                )
+                {
                     return this;
                 }
 
@@ -128,7 +129,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
 
         Cci.INamespaceTypeDefinition Cci.ITypeReference.AsNamespaceTypeDefinition(
             EmitContext context
-        ) {
+        )
+        {
             PEModuleBuilder moduleBeingBuilt = (PEModuleBuilder)context.Module;
 
             Debug.Assert(this.IsDefinitionOrDistinct());
@@ -137,7 +139,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                 (object)AdaptedNamedTypeSymbol.ContainingType == null
                 && AdaptedNamedTypeSymbol.IsDefinition
                 && AdaptedNamedTypeSymbol.ContainingModule == moduleBeingBuilt.SourceModule
-            ) {
+            )
+            {
                 return this;
             }
 
@@ -166,14 +169,16 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
 
         private Cci.INestedTypeDefinition AsNestedTypeDefinitionImpl(
             PEModuleBuilder moduleBeingBuilt
-        ) {
+        )
+        {
             Debug.Assert(this.IsDefinitionOrDistinct());
 
             if (
                 (object)AdaptedNamedTypeSymbol.ContainingType != null
                 && AdaptedNamedTypeSymbol.IsDefinition
                 && AdaptedNamedTypeSymbol.ContainingModule == moduleBeingBuilt.SourceModule
-            ) {
+            )
+            {
                 return this;
             }
 
@@ -192,7 +197,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                         AdaptedNamedTypeSymbol.Arity == 0
                         || PEModuleBuilder.IsGenericType(AdaptedNamedTypeSymbol.ContainingType)
                     )
-                ) {
+                )
+                {
                     Debug.Assert(
                         (object)AdaptedNamedTypeSymbol.ContainingType != null
                             && PEModuleBuilder.IsGenericType(AdaptedNamedTypeSymbol.ContainingType)
@@ -327,7 +333,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                 // If any accessor should be included, then the event should be included too
                 if (
                     definition.ShouldInclude(context) || !definition.GetAccessors(context).IsEmpty()
-                ) {
+                )
+                {
                     yield return definition;
                 }
             }
@@ -335,7 +342,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
 
         IEnumerable<Cci.MethodImplementation> Cci.ITypeDefinition.GetExplicitImplementationOverrides(
             EmitContext context
-        ) {
+        )
+        {
             CheckDefinitionInvariant();
 
             PEModuleBuilder moduleBeingBuilt = (PEModuleBuilder)context.Module;
@@ -392,7 +400,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                     else if (
                         method.MethodKind == MethodKind.Destructor
                         && AdaptedNamedTypeSymbol.SpecialType != SpecialType.System_Object
-                    ) {
+                    )
+                    {
                         // New in Roslyn: all destructors explicitly override (or are) System.Object.Finalize so that
                         // they are guaranteed to be runtime finalizers.  As a result, it is no longer possible to create
                         // a destructor that will never be invoked by the runtime.
@@ -406,12 +415,14 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                             Symbol objectMember in objectType.GetMembers(
                                 WellKnownMemberNames.DestructorName
                             )
-                        ) {
+                        )
+                        {
                             MethodSymbol objectMethod = objectMember as MethodSymbol;
                             if (
                                 (object)objectMethod != null
                                 && objectMethod.MethodKind == MethodKind.Destructor
-                            ) {
+                            )
+                            {
                                 yield return new Microsoft.Cci.MethodImplementation(
                                     method.GetCciAdapter(),
                                     moduleBeingBuilt.TranslateOverriddenMethodReference(
@@ -522,7 +533,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
 
         IEnumerable<Cci.TypeReferenceWithAttributes> Cci.ITypeDefinition.Interfaces(
             EmitContext context
-        ) {
+        )
+        {
             Debug.Assert(((Cci.ITypeReference)this).AsTypeDefinition(context) != null);
 
             PEModuleBuilder moduleBeingBuilt = (PEModuleBuilder)context.Module;
@@ -574,7 +586,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                     var member in AdaptedNamedTypeSymbol.GetMembers(
                         WellKnownMemberNames.StaticConstructorName
                     )
-                ) {
+                )
+                {
                     if (!member.IsImplicitlyDeclared)
                     {
                         return false;
@@ -685,7 +698,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                 if (
                     (alwaysIncludeConstructors && method.MethodKind == MethodKind.Constructor)
                     || method.GetCciAdapter().ShouldInclude(context)
-                ) {
+                )
+                {
                     yield return method.GetCciAdapter();
                 }
             }
@@ -708,7 +722,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
 
         IEnumerable<Cci.INestedTypeDefinition> Cci.ITypeDefinition.GetNestedTypes(
             EmitContext context
-        ) {
+        )
+        {
             CheckDefinitionInvariant();
 
             foreach (NamedTypeSymbol type in AdaptedNamedTypeSymbol.GetTypeMembers()) // Ordered.
@@ -740,7 +755,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                 // If any accessor should be included, then the property should be included too
                 if (
                     definition.ShouldInclude(context) || !definition.GetAccessors(context).IsEmpty()
-                ) {
+                )
+                {
                     yield return definition;
                 }
             }
@@ -928,7 +944,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
 
         ImmutableArray<Cci.ITypeReference> Cci.IGenericTypeInstanceReference.GetGenericArguments(
             EmitContext context
-        ) {
+        )
+        {
             PEModuleBuilder moduleBeingBuilt = (PEModuleBuilder)context.Module;
             var builder = ArrayBuilder<Microsoft.Cci.ITypeReference>.GetInstance();
             Debug.Assert(((Cci.ITypeReference)this).AsGenericTypeInstanceReference != null);
@@ -959,7 +976,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
 
         Cci.INamedTypeReference Cci.IGenericTypeInstanceReference.GetGenericType(
             EmitContext context
-        ) {
+        )
+        {
             Debug.Assert(((Cci.ITypeReference)this).AsGenericTypeInstanceReference != null);
             return GenericTypeImpl(context);
         }
@@ -977,7 +995,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
 
         Cci.INestedTypeReference Cci.ISpecializedNestedTypeReference.GetUnspecializedVersion(
             EmitContext context
-        ) {
+        )
+        {
             Debug.Assert(((Cci.ITypeReference)this).AsSpecializedNestedTypeReference != null);
             var result = GenericTypeImpl(context).AsNestedTypeReference;
 
@@ -1055,7 +1074,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             NamedTypeSymbol namedType,
             ArrayBuilder<NamedTypeSymbol> builder,
             ref HashSet<NamedTypeSymbol> seen
-        ) {
+        )
+        {
             // It's not clear how important the order of these interfaces is, but Dev10
             // maintains pre-order depth-first/declaration order, so we probably should as well.
             // That's why we're not using InterfacesAndTheirBaseInterfaces - it's an unordered set.

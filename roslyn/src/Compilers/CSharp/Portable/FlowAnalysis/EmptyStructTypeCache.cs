@@ -95,7 +95,8 @@ namespace Microsoft.CodeAnalysis.CSharp
         private bool IsEmptyStructType(
             TypeSymbol type,
             ConsList<NamedTypeSymbol> typesWithMembersOfThisType
-        ) {
+        )
+        {
             var nts = type as NamedTypeSymbol;
             if ((object)nts == null || !IsTrackableStructType(nts))
             {
@@ -119,7 +120,8 @@ namespace Microsoft.CodeAnalysis.CSharp
         private bool CheckStruct(
             ConsList<NamedTypeSymbol> typesWithMembersOfThisType,
             NamedTypeSymbol nts
-        ) {
+        )
+        {
             // Break recursive cycles. If we find a member that contains us, it is considered empty
             if (!typesWithMembersOfThisType.ContainsReference(nts))
             {
@@ -152,7 +154,8 @@ namespace Microsoft.CodeAnalysis.CSharp
         private bool CheckStructInstanceFields(
             ConsList<NamedTypeSymbol> typesWithMembersOfThisType,
             NamedTypeSymbol type
-        ) {
+        )
+        {
             // PERF: we get members of the OriginalDefinition to not create substituted members/types
             //       unless necessary.
             foreach (var member in type.OriginalDefinition.GetMembersUnordered())
@@ -288,7 +291,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                 ;
                 symbol != null && symbol.Kind != SymbolKind.Namespace;
                 symbol = symbol.ContainingSymbol
-            ) {
+            )
+            {
                 switch (symbol.DeclaredAccessibility)
                 {
                     case Accessibility.Internal:

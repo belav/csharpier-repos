@@ -24,7 +24,8 @@ namespace RunTests
             string? testFilter,
             bool includeHtml,
             bool retry
-        ) {
+        )
+        {
             DotnetFilePath = dotnetFilePath;
             ProcDumpInfo = procDumpInfo;
             TestResultsDirectory = testResultsDirectory;
@@ -66,7 +67,8 @@ namespace RunTests
             TimeSpan elapsed,
             string standardOutput,
             string errorOutput
-        ) {
+        )
+        {
             ExitCode = exitCode;
             ResultsFilePath = resultsFilePath;
             HtmlResultsFilePath = htmlResultsFilePath;
@@ -105,7 +107,8 @@ namespace RunTests
             string commandLine,
             ImmutableArray<ProcessResult> processResults = default,
             string? diagnostics = null
-        ) {
+        )
+        {
             AssemblyInfo = assemblyInfo;
             TestResultInfo = testResultInfo;
             CommandLine = commandLine;

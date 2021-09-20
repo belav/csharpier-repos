@@ -82,7 +82,8 @@ namespace System.Security.Cryptography
             Span<byte> destination,
             RSAEncryptionPadding padding,
             out int bytesWritten
-        ) {
+        )
+        {
             if (padding == null)
                 throw new ArgumentNullException(nameof(padding));
             if (data.Length != (KeySize / 8))
@@ -133,7 +134,8 @@ namespace System.Security.Cryptography
             Span<byte> destination,
             RSAEncryptionPadding padding,
             out int bytesWritten
-        ) {
+        )
+        {
             if (padding == null)
                 throw new ArgumentNullException(nameof(padding));
             if (padding != RSAEncryptionPadding.Pkcs1 && padding != RSAEncryptionPadding.OaepSHA1)
@@ -198,7 +200,8 @@ namespace System.Security.Cryptography
             ReadOnlySpan<byte> passwordBytes,
             ReadOnlySpan<byte> source,
             out int bytesRead
-        ) {
+        )
+        {
             _impl.ImportEncryptedPkcs8PrivateKey(passwordBytes, source, out bytesRead);
         }
 
@@ -206,7 +209,8 @@ namespace System.Security.Cryptography
             ReadOnlySpan<char> password,
             ReadOnlySpan<byte> source,
             out int bytesRead
-        ) {
+        )
+        {
             _impl.ImportEncryptedPkcs8PrivateKey(password, source, out bytesRead);
         }
 
@@ -378,7 +382,8 @@ namespace System.Security.Cryptography
             byte[] signature,
             HashAlgorithmName hashAlgorithm,
             RSASignaturePadding padding
-        ) {
+        )
+        {
             if (hash == null)
             {
                 throw new ArgumentNullException(nameof(hash));
@@ -458,7 +463,8 @@ namespace System.Security.Cryptography
                 || keyBlob[10] != 0x41
                 || keyBlob[9] != 0x53
                 || keyBlob[8] != 0x52
-            ) {
+            )
+            {
                 return false;
             }
 

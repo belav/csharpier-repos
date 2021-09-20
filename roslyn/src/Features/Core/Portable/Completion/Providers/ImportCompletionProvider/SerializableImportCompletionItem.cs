@@ -38,7 +38,8 @@ namespace Microsoft.CodeAnalysis.Completion.Providers
             string containingNamespace,
             int additionalOverloadCount,
             bool includedInTargetTypeCompletion
-        ) {
+        )
+        {
             SymbolKeyData = symbolKeyData;
             Arity = arity;
             Name = name;

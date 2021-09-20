@@ -23,7 +23,8 @@ namespace Microsoft.EntityFrameworkCore
         [InlineData(null)]
         public virtual void Optional_one_to_one_relationships_are_one_to_one(
             CascadeTiming? deleteOrphansTiming
-        ) {
+        )
+        {
             ExecuteWithStrategyInTransaction(
                 context =>
                 {
@@ -208,7 +209,8 @@ namespace Microsoft.EntityFrameworkCore
             ChangeMechanism changeMechanism,
             bool useExistingEntities,
             CascadeTiming? deleteOrphansTiming
-        ) {
+        )
+        {
             var new2 = new OptionalSingle2();
             var new2d = new OptionalSingle2Derived();
             var new2dd = new OptionalSingle2MoreDerived();
@@ -411,7 +413,8 @@ namespace Microsoft.EntityFrameworkCore
         public virtual void Sever_optional_one_to_one(
             ChangeMechanism changeMechanism,
             CascadeTiming? deleteOrphansTiming
-        ) {
+        )
+        {
             Root root = null;
             OptionalSingle1 old1 = null;
             OptionalSingle2 old2 = null;
@@ -640,7 +643,8 @@ namespace Microsoft.EntityFrameworkCore
             ChangeMechanism changeMechanism,
             bool useExistingRoot,
             CascadeTiming? deleteOrphansTiming
-        ) {
+        )
+        {
             var newRoot = new Root();
             Root root = null;
             OptionalSingle1 old1 = null;
@@ -730,7 +734,8 @@ namespace Microsoft.EntityFrameworkCore
         public virtual void Optional_one_to_one_are_orphaned(
             CascadeTiming? cascadeDeleteTiming,
             CascadeTiming? deleteOrphansTiming
-        ) {
+        )
+        {
             var removedId = 0;
             var orphanedId = 0;
 
@@ -825,7 +830,8 @@ namespace Microsoft.EntityFrameworkCore
         public virtual void Optional_one_to_one_leaf_can_be_deleted(
             CascadeTiming? cascadeDeleteTiming,
             CascadeTiming? deleteOrphansTiming
-        ) {
+        )
+        {
             var removedId = 0;
 
             ExecuteWithStrategyInTransaction(
@@ -887,7 +893,8 @@ namespace Microsoft.EntityFrameworkCore
         public virtual void Optional_one_to_one_are_orphaned_in_store(
             CascadeTiming? cascadeDeleteTiming,
             CascadeTiming? deleteOrphansTiming
-        ) {
+        )
+        {
             var removedId = 0;
             var orphanedId = 0;
 
@@ -974,7 +981,8 @@ namespace Microsoft.EntityFrameworkCore
         public virtual void Optional_one_to_one_are_orphaned_starting_detached(
             CascadeTiming? cascadeDeleteTiming,
             CascadeTiming? deleteOrphansTiming
-        ) {
+        )
+        {
             var removedId = 0;
             var orphanedId = 0;
             Root root = null;
@@ -1059,7 +1067,8 @@ namespace Microsoft.EntityFrameworkCore
         [InlineData(null)]
         public virtual void Required_one_to_one_relationships_are_one_to_one(
             CascadeTiming? deleteOrphansTiming
-        ) {
+        )
+        {
             ExecuteWithStrategyInTransaction(
                 context =>
                 {
@@ -1138,7 +1147,8 @@ namespace Microsoft.EntityFrameworkCore
         public virtual void Save_required_one_to_one_changed_by_reference(
             ChangeMechanism changeMechanism,
             CascadeTiming? deleteOrphansTiming
-        ) {
+        )
+        {
             // This test is a bit strange because the relationships are PK<->PK, which means
             // that an existing entity has to be deleted and then a new entity created that has
             // the same key as the existing entry. In other words it is a new incarnation of the same
@@ -1401,7 +1411,8 @@ namespace Microsoft.EntityFrameworkCore
             ChangeMechanism changeMechanism,
             bool useExistingEntities,
             CascadeTiming? deleteOrphansTiming
-        ) {
+        )
+        {
             var new2 = new RequiredNonPkSingle2();
             var new2d = new RequiredNonPkSingle2Derived();
             var new2dd = new RequiredNonPkSingle2MoreDerived();
@@ -1568,7 +1579,8 @@ namespace Microsoft.EntityFrameworkCore
                         !Fixture.ForceClientNoAction
                         && !Fixture.NoStoreCascades
                         && deleteOrphansTiming != CascadeTiming.Never
-                    ) {
+                    )
+                    {
                         var loadedRoot = LoadRequiredNonPkGraph(context);
 
                         AssertEntries(entries, context.ChangeTracker.Entries().ToList());
@@ -1619,7 +1631,8 @@ namespace Microsoft.EntityFrameworkCore
         public virtual void Sever_required_one_to_one(
             ChangeMechanism changeMechanism,
             CascadeTiming? deleteOrphansTiming
-        ) {
+        )
+        {
             Root root = null;
             RequiredSingle1 old1 = null;
             RequiredSingle2 old2 = null;
@@ -1726,7 +1739,8 @@ namespace Microsoft.EntityFrameworkCore
         public virtual void Sever_required_non_PK_one_to_one(
             ChangeMechanism changeMechanism,
             CascadeTiming? deleteOrphansTiming
-        ) {
+        )
+        {
             Root root = null;
             RequiredNonPkSingle1 old1 = null;
             RequiredNonPkSingle2 old2 = null;
@@ -1804,7 +1818,8 @@ namespace Microsoft.EntityFrameworkCore
                         !Fixture.ForceClientNoAction
                         && !Fixture.NoStoreCascades
                         && deleteOrphansTiming != CascadeTiming.Never
-                    ) {
+                    )
+                    {
                         var loadedRoot = LoadRequiredNonPkGraph(context);
 
                         AssertKeys(root, loadedRoot);
@@ -1982,7 +1997,8 @@ namespace Microsoft.EntityFrameworkCore
             ChangeMechanism changeMechanism,
             bool useExistingRoot,
             CascadeTiming? deleteOrphansTiming
-        ) {
+        )
+        {
             var newRoot = new Root();
 
             ExecuteWithStrategyInTransaction(
@@ -2202,7 +2218,8 @@ namespace Microsoft.EntityFrameworkCore
             ChangeMechanism changeMechanism,
             bool useExistingRoot,
             CascadeTiming? deleteOrphansTiming
-        ) {
+        )
+        {
             var newRoot = new Root();
             Root root = null;
             RequiredNonPkSingle1 old1 = null;
@@ -2292,7 +2309,8 @@ namespace Microsoft.EntityFrameworkCore
         public virtual void Required_one_to_one_are_cascade_deleted(
             CascadeTiming? cascadeDeleteTiming,
             CascadeTiming? deleteOrphansTiming
-        ) {
+        )
+        {
             var removedId = 0;
             var orphanedId = 0;
 
@@ -2395,7 +2413,8 @@ namespace Microsoft.EntityFrameworkCore
         public virtual void Required_one_to_one_leaf_can_be_deleted(
             CascadeTiming? cascadeDeleteTiming,
             CascadeTiming? deleteOrphansTiming
-        ) {
+        )
+        {
             var removedId = 0;
 
             ExecuteWithStrategyInTransaction(
@@ -2464,7 +2483,8 @@ namespace Microsoft.EntityFrameworkCore
         public virtual void Required_non_PK_one_to_one_are_cascade_deleted(
             CascadeTiming? cascadeDeleteTiming,
             CascadeTiming? deleteOrphansTiming
-        ) {
+        )
+        {
             var removedId = 0;
             var orphanedId = 0;
 
@@ -2565,7 +2585,8 @@ namespace Microsoft.EntityFrameworkCore
         public virtual void Required_non_PK_one_to_one_leaf_can_be_deleted(
             CascadeTiming? cascadeDeleteTiming,
             CascadeTiming? deleteOrphansTiming
-        ) {
+        )
+        {
             var removedId = 0;
 
             ExecuteWithStrategyInTransaction(
@@ -2626,7 +2647,8 @@ namespace Microsoft.EntityFrameworkCore
         public virtual void Required_one_to_one_are_cascade_deleted_in_store(
             CascadeTiming? cascadeDeleteTiming,
             CascadeTiming? deleteOrphansTiming
-        ) {
+        )
+        {
             var removedId = 0;
             var orphanedId = 0;
 
@@ -2706,7 +2728,8 @@ namespace Microsoft.EntityFrameworkCore
         public virtual void Required_non_PK_one_to_one_are_cascade_deleted_in_store(
             CascadeTiming? cascadeDeleteTiming,
             CascadeTiming? deleteOrphansTiming
-        ) {
+        )
+        {
             var removedId = 0;
             var orphanedId = 0;
 
@@ -2799,7 +2822,8 @@ namespace Microsoft.EntityFrameworkCore
         public virtual void Required_one_to_one_are_cascade_deleted_starting_detached(
             CascadeTiming? cascadeDeleteTiming,
             CascadeTiming? deleteOrphansTiming
-        ) {
+        )
+        {
             var removedId = 0;
             var orphanedId = 0;
             Root root = null;
@@ -2904,7 +2928,8 @@ namespace Microsoft.EntityFrameworkCore
         public virtual void Required_non_PK_one_to_one_are_cascade_deleted_starting_detached(
             CascadeTiming? cascadeDeleteTiming,
             CascadeTiming? deleteOrphansTiming
-        ) {
+        )
+        {
             var removedId = 0;
             var orphanedId = 0;
             Root root = null;
@@ -3001,7 +3026,8 @@ namespace Microsoft.EntityFrameworkCore
         public virtual void Required_one_to_one_are_cascade_detached_when_Added(
             CascadeTiming? cascadeDeleteTiming,
             CascadeTiming? deleteOrphansTiming
-        ) {
+        )
+        {
             var removedId = 0;
             var orphanedId = 0;
 
@@ -3119,7 +3145,8 @@ namespace Microsoft.EntityFrameworkCore
         public virtual void Required_non_PK_one_to_one_are_cascade_detached_when_Added(
             CascadeTiming? cascadeDeleteTiming,
             CascadeTiming? deleteOrphansTiming
-        ) {
+        )
+        {
             var removedId = 0;
             var orphanedId = 0;
 

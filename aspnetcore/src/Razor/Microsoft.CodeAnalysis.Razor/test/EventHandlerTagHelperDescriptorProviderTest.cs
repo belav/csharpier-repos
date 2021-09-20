@@ -167,7 +167,8 @@ namespace Test
 
         private static TagHelperDescriptor[] GetEventHandlerTagHelpers(
             TagHelperDescriptorProviderContext context
-        ) {
+        )
+        {
             return ExcludeBuiltInComponents(context)
                 .Where(t => t.IsEventHandlerTagHelper())
                 .ToArray();

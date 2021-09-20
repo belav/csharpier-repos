@@ -27,17 +27,18 @@ namespace Microsoft.EntityFrameworkCore.Storage.ValueConversion.Internal
             ValueConverter converter1,
             ValueConverter converter2,
             ConverterMappingHints? mappingHints = null
-        ) : base(
-            Compose(
-                (Expression<Func<TModel, TMiddle>>)converter1.ConvertToProviderExpression,
-                (Expression<Func<TMiddle, TProvider>>)converter2.ConvertToProviderExpression
-            ),
-            Compose(
-                (Expression<Func<TProvider, TMiddle>>)converter2.ConvertFromProviderExpression,
-                (Expression<Func<TMiddle, TModel>>)converter1.ConvertFromProviderExpression
-            ),
-            mappingHints
-        ) { }
+        )
+            : base(
+                Compose(
+                    (Expression<Func<TModel, TMiddle>>)converter1.ConvertToProviderExpression,
+                    (Expression<Func<TMiddle, TProvider>>)converter2.ConvertToProviderExpression
+                ),
+                Compose(
+                    (Expression<Func<TProvider, TMiddle>>)converter2.ConvertFromProviderExpression,
+                    (Expression<Func<TMiddle, TModel>>)converter1.ConvertFromProviderExpression
+                ),
+                mappingHints
+            ) { }
 
         private static Expression<Func<TIn, TOut>> Compose<TIn, TOut>(
             Expression<Func<TIn, TMiddle>> upper,

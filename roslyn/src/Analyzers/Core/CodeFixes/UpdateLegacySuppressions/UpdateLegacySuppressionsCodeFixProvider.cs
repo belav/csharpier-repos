@@ -51,7 +51,8 @@ namespace Microsoft.CodeAnalysis.UpdateLegacySuppressions
                     ) == true
                     && root.FindNode(diagnostic.Location.SourceSpan, getInnermostNodeForTie: true)
                         != null
-                ) {
+                )
+                {
                     context.RegisterCodeFix(
                         new MyCodeAction(c => FixAsync(context.Document, diagnostic, c)),
                         diagnostic
@@ -65,7 +66,8 @@ namespace Microsoft.CodeAnalysis.UpdateLegacySuppressions
             ImmutableArray<Diagnostic> diagnostics,
             SyntaxEditor editor,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             foreach (var diagnostic in diagnostics)
             {
                 var node = editor.OriginalRoot.FindNode(
@@ -86,13 +88,12 @@ namespace Microsoft.CodeAnalysis.UpdateLegacySuppressions
 
         private class MyCodeAction : CustomCodeActions.DocumentChangeAction
         {
-            public MyCodeAction(
-                Func<CancellationToken, Task<Document>> createChangedDocument
-            ) : base(
-                CodeFixesResources.Update_suppression_format,
-                createChangedDocument,
-                nameof(UpdateLegacySuppressionsCodeFixProvider)
-            ) { }
+            public MyCodeAction(Func<CancellationToken, Task<Document>> createChangedDocument)
+                : base(
+                    CodeFixesResources.Update_suppression_format,
+                    createChangedDocument,
+                    nameof(UpdateLegacySuppressionsCodeFixProvider)
+                ) { }
         }
     }
 }

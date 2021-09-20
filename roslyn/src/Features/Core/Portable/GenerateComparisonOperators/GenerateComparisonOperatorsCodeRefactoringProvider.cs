@@ -74,7 +74,8 @@ namespace Microsoft.CodeAnalysis.GenerateComparisonOperators
                     textSpan.Start,
                     out typeDeclaration
                 )
-            ) {
+            )
+            {
                 return;
             }
 
@@ -170,7 +171,8 @@ namespace Microsoft.CodeAnalysis.GenerateComparisonOperators
         private static IMethodSymbol? TryGetCompareMethodImpl(
             INamedTypeSymbol containingType,
             ITypeSymbol comparableType
-        ) {
+        )
+        {
             foreach (var member in comparableType.GetMembers(nameof(IComparable<int>.CompareTo)))
             {
                 if (member is IMethodSymbol method)
@@ -187,7 +189,8 @@ namespace Microsoft.CodeAnalysis.GenerateComparisonOperators
             SyntaxNode typeDeclaration,
             INamedTypeSymbol comparableType,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var options = await document.GetOptionsAsync(cancellationToken).ConfigureAwait(false);
             var semanticModel = await document.GetRequiredSemanticModelAsync(cancellationToken)
                 .ConfigureAwait(false);
@@ -227,7 +230,8 @@ namespace Microsoft.CodeAnalysis.GenerateComparisonOperators
             SyntaxGenerator generator,
             INamedTypeSymbol comparableType,
             IMethodSymbol compareMethod
-        ) {
+        )
+        {
             var thisExpression = generator.IdentifierName(LeftName);
             var generateCast =
                 compareMethod != null
@@ -245,7 +249,8 @@ namespace Microsoft.CodeAnalysis.GenerateComparisonOperators
             INamedTypeSymbol containingType,
             INamedTypeSymbol comparableType,
             SyntaxNode thisExpression
-        ) {
+        )
+        {
             using var _ = ArrayBuilder<IMethodSymbol>.GetInstance(out var operators);
 
             var boolType = compilation.GetSpecialType(SpecialType.System_Boolean);
@@ -283,7 +288,8 @@ namespace Microsoft.CodeAnalysis.GenerateComparisonOperators
             SyntaxGenerator generator,
             CodeGenerationOperatorKind kind,
             SyntaxNode leftExpression
-        ) {
+        )
+        {
             var zero = generator.LiteralExpression(0);
 
             var compareToCall = generator.InvocationExpression(
@@ -310,7 +316,8 @@ namespace Microsoft.CodeAnalysis.GenerateComparisonOperators
         private static bool HasAllComparisonOperators(
             INamedTypeSymbol containingType,
             ITypeSymbol comparedType
-        ) {
+        )
+        {
             foreach (var op in s_operatorKinds)
             {
                 if (!HasComparisonOperator(containingType, comparedType, op))
@@ -324,7 +331,8 @@ namespace Microsoft.CodeAnalysis.GenerateComparisonOperators
             INamedTypeSymbol containingType,
             ITypeSymbol comparedType,
             CodeGenerationOperatorKind kind
-        ) {
+        )
+        {
             // Look for an `operator <(... c1, ComparedType c2)` member.
             foreach (var member in containingType.GetMembers(GetOperatorName(kind)))
             {
@@ -332,7 +340,8 @@ namespace Microsoft.CodeAnalysis.GenerateComparisonOperators
                     member is IMethodSymbol method
                     && method.Parameters.Length >= 2
                     && comparedType.Equals(method.Parameters[1].Type)
-                ) {
+                )
+                {
                     return true;
                 }
             }

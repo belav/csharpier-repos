@@ -284,7 +284,8 @@ namespace System.Reflection.Tests
                     new CoreMetadataAssemblyResolver(),
                     "mscorlib"
                 )
-            ) {
+            )
+            {
                 Assembly a = lc.LoadFromByteArray(TestData.s_CustomModifiersImage);
                 Type t = a.GetType("N", throwOnError: true);
                 Type reqA = a.GetType("ReqA", throwOnError: true);
@@ -315,7 +316,8 @@ namespace System.Reflection.Tests
                     new CoreMetadataAssemblyResolver(),
                     "mscorlib"
                 )
-            ) {
+            )
+            {
                 Assembly coreAssembly = lc.LoadFromStream(TestUtils.CreateStreamForCoreAssembly());
                 Assembly a = lc.LoadFromByteArray(TestData.s_AssemblyWithMethodBodyImage);
 
@@ -426,7 +428,8 @@ namespace System.Reflection.Tests
                     new CoreMetadataAssemblyResolver(),
                     "mscorlib"
                 )
-            ) {
+            )
+            {
                 Assembly coreAssembly = lc.LoadFromStream(TestUtils.CreateStreamForCoreAssembly());
                 Assembly a = lc.LoadFromByteArray(TestData.s_AssemblyWithEhClausesImage);
 

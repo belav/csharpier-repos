@@ -130,7 +130,8 @@ namespace Microsoft.AspNetCore.Routing.Template.Tests
             RouteValueDictionary defaults,
             RouteValueDictionary values,
             string expected
-        ) {
+        )
+        {
             // Arrange
             var binder = new TemplateBinder(
                 UrlEncoder.Default,
@@ -286,7 +287,8 @@ namespace Microsoft.AspNetCore.Routing.Template.Tests
             RouteValueDictionary ambientValues,
             RouteValueDictionary values,
             string expected
-        ) {
+        )
+        {
             // Arrange
             var binder = new TemplateBinder(
                 UrlEncoder.Default,
@@ -1330,7 +1332,8 @@ namespace Microsoft.AspNetCore.Routing.Template.Tests
             RouteValueDictionary ambientValues,
             RouteValueDictionary values,
             string expected
-        ) {
+        )
+        {
             // Arrange
             var binder = new TemplateBinder(
                 UrlEncoder.Default,
@@ -1392,7 +1395,8 @@ namespace Microsoft.AspNetCore.Routing.Template.Tests
             object ambientValues,
             object values,
             string expected
-        ) {
+        )
+        {
             RunTest(
                 template,
                 new RouteValueDictionary(defaults),

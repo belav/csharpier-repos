@@ -95,7 +95,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.IntelliSense
             object tag,
             string filePath,
             int lineNumber
-        ) {
+        )
+        {
             AssertIsForeground();
             VerifySessionIsActive();
             name = String.IsNullOrEmpty(name) ? _asyncOperationId : $"{_asyncOperationId} - {name}";

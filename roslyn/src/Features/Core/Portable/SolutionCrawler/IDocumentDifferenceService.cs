@@ -16,7 +16,8 @@ namespace Microsoft.CodeAnalysis.SolutionCrawler
         public DocumentDifferenceResult(
             InvocationReasons changeType,
             SyntaxNode? changedMember = null
-        ) {
+        )
+        {
             ChangeType = changeType;
             ChangedMember = changedMember;
         }

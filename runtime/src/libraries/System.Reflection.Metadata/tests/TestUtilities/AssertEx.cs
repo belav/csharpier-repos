@@ -133,7 +133,8 @@ namespace System.Reflection.Metadata.Tests
             T actual,
             string message = null,
             IEqualityComparer<T> comparer = null
-        ) {
+        )
+        {
             if (ReferenceEquals(expected, actual))
             {
                 return;
@@ -155,7 +156,8 @@ namespace System.Reflection.Metadata.Tests
                             ? comparer.Equals(expected, actual)
                             : AssertEqualityComparer<T>.Equals(expected, actual)
                     )
-                ) {
+                )
+                {
                     Fail(
                         "Expected and actual were different.\r\n"
                             + "Expected: "
@@ -175,7 +177,8 @@ namespace System.Reflection.Metadata.Tests
             IEnumerable<T> actual,
             IEqualityComparer<T> comparer = null,
             string message = null
-        ) {
+        )
+        {
             if (actual == null || expected.IsDefault)
             {
                 Assert.True((actual == null) == expected.IsDefault, message);
@@ -192,7 +195,8 @@ namespace System.Reflection.Metadata.Tests
             IEqualityComparer<T> comparer = null,
             string message = null,
             string itemSeparator = null
-        ) {
+        )
+        {
             if (expected == null || actual.IsDefault)
             {
                 Assert.True((expected == null) == actual.IsDefault, message);
@@ -209,7 +213,8 @@ namespace System.Reflection.Metadata.Tests
             IEqualityComparer<T> comparer = null,
             string message = null,
             string itemSeparator = null
-        ) {
+        )
+        {
             Equal(expected, (IEnumerable<T>)actual, comparer, message, itemSeparator);
         }
 
@@ -220,7 +225,8 @@ namespace System.Reflection.Metadata.Tests
             string message = null,
             string itemSeparator = null,
             Func<T, string> itemInspector = null
-        ) {
+        )
+        {
             if (ReferenceEquals(expected, actual))
             {
                 return;
@@ -257,7 +263,8 @@ namespace System.Reflection.Metadata.Tests
             IEnumerable<T> expected,
             IEnumerable<T> actual,
             IEqualityComparer<T> comparer = null
-        ) {
+        )
+        {
             var enumerator1 = expected.GetEnumerator();
             var enumerator2 = actual.GetEnumerator();
 
@@ -285,7 +292,8 @@ namespace System.Reflection.Metadata.Tests
                             ? comparer.Equals(value1, value2)
                             : AssertEqualityComparer<T>.Equals(value1, value2)
                     )
-                ) {
+                )
+                {
                     return false;
                 }
             }
@@ -299,7 +307,8 @@ namespace System.Reflection.Metadata.Tests
             IEqualityComparer<T> comparer = null,
             string message = null,
             string itemSeparator = "\r\n"
-        ) {
+        )
+        {
             var expectedSet = new HashSet<T>(expected, comparer);
             var result = expected.Count() == actual.Count() && expectedSet.SetEquals(actual);
             if (!result)
@@ -374,7 +383,8 @@ namespace System.Reflection.Metadata.Tests
             IEnumerable<T> list,
             string separator = ", ",
             Func<T, string> itemInspector = null
-        ) {
+        )
+        {
             if (itemInspector == null)
             {
                 itemInspector = i => Convert.ToString(i);
@@ -405,7 +415,8 @@ namespace System.Reflection.Metadata.Tests
             bool escapeQuotes = true,
             [CallerFilePath] string expectedValueSourcePath = null,
             [CallerLineNumber] int expectedValueSourceLine = 0
-        ) {
+        )
+        {
             var normalizedExpected = NormalizeWhitespace(expected);
             var normalizedActual = NormalizeWhitespace(actual);
 
@@ -436,7 +447,8 @@ namespace System.Reflection.Metadata.Tests
         public static void AssertContainsToleratingWhitespaceDifferences(
             string expectedSubString,
             string actualString
-        ) {
+        )
+        {
             expectedSubString = NormalizeWhitespace(expectedSubString);
             actualString = NormalizeWhitespace(actualString);
             Assert.Contains(expectedSubString, actualString, StringComparison.Ordinal);
@@ -469,7 +481,8 @@ namespace System.Reflection.Metadata.Tests
             bool escapeQuotes = false,
             string expectedValueSourcePath = null,
             int expectedValueSourceLine = 0
-        ) {
+        )
+        {
             return GetAssertMessage(
                 DiffUtil.Lines(expected),
                 DiffUtil.Lines(actual),
@@ -485,7 +498,8 @@ namespace System.Reflection.Metadata.Tests
             bool escapeQuotes,
             string expectedValueSourcePath = null,
             int expectedValueSourceLine = 0
-        ) {
+        )
+        {
             Func<T, string> itemInspector = escapeQuotes
                 ? new Func<T, string>(t => t.ToString().Replace("\"", "\"\""))
                 : null;
@@ -511,7 +525,8 @@ namespace System.Reflection.Metadata.Tests
             string itemSeparator = null,
             string expectedValueSourcePath = null,
             int expectedValueSourceLine = 0
-        ) {
+        )
+        {
             if (itemInspector == null)
             {
                 if (typeof(T) == typeof(byte))

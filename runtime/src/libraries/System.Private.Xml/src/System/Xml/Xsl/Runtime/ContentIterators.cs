@@ -377,7 +377,8 @@ namespace System.Xml.Xsl.Runtime
                         isContent
                             ? _filter.MoveToContent(_navNext)
                             : _filter.MoveToFollowingSibling(_navNext)
-                    ) {
+                    )
+                    {
                         // Then compare position of current and next nodes
                         _state = IteratorState.HaveCurrentHaveNext;
                         return DocOrderMerge();
@@ -393,7 +394,8 @@ namespace System.Xml.Xsl.Runtime
                         isContent
                             ? !_filter.MoveToNextContent(_navCurrent)
                             : !_filter.MoveToFollowingSibling(_navCurrent)
-                    ) {
+                    )
+                    {
                         if (_navStack.IsEmpty)
                         {
                             if (_state == IteratorState.HaveCurrentNoNext)

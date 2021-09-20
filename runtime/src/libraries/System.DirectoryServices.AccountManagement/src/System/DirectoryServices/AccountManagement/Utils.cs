@@ -112,7 +112,8 @@ namespace System.DirectoryServices.AccountManagement
                         || (secondChar >= 'A' && secondChar <= 'F')
                         || (secondChar >= 'a' && secondChar <= 'f')
                     )
-                ) {
+                )
+                {
                     byte b = byte.Parse(
                         s.Substring(i * 2, 2),
                         NumberStyles.AllowHexSpecifier,
@@ -260,7 +261,8 @@ namespace System.DirectoryServices.AccountManagement
                 && (identAuth.b4 == 0)
                 && (identAuth.b5 == 0)
                 && (identAuth.b6 == 5)
-            ) {
+            )
+            {
                 // No, so it can't be an account or builtin SID.
                 // Probably something like \Everyone or \LOCAL.
                 return SidType.FakeObject;
@@ -395,7 +397,8 @@ namespace System.DirectoryServices.AccountManagement
                         true,
                         ref pTokenHandle
                     )
-                ) {
+                )
+                {
                     if ((error = Marshal.GetLastWin32Error()) == 1008) // ERROR_NO_TOKEN
                     {
                         Debug.Assert(pTokenHandle == IntPtr.Zero);
@@ -407,7 +410,8 @@ namespace System.DirectoryServices.AccountManagement
                                 0x8, // TOKEN_QUERY
                                 ref pTokenHandle
                             )
-                        ) {
+                        )
+                        {
                             int lastError = Marshal.GetLastWin32Error();
                             GlobalDebug.WriteLineIf(
                                 GlobalDebug.Error,
@@ -646,7 +650,8 @@ namespace System.DirectoryServices.AccountManagement
             using (
                 WindowsIdentity currentIdentity =
                     System.Security.Principal.WindowsIdentity.GetCurrent()
-            ) {
+            )
+            {
                 string s = currentIdentity.Name;
                 GlobalDebug.WriteLineIf(GlobalDebug.Info, "Utils", "GetNT4UserName: name is " + s);
                 return s;
@@ -671,7 +676,8 @@ namespace System.DirectoryServices.AccountManagement
             string domainName,
             string siteName,
             int flags
-        ) {
+        )
+        {
             IntPtr domainControllerInfoPtr = IntPtr.Zero;
 
             try
@@ -721,7 +727,8 @@ namespace System.DirectoryServices.AccountManagement
             out string name,
             out string domainName,
             out int accountUsage
-        ) {
+        )
+        {
             int nameLength = 0;
             int domainNameLength = 0;
 
@@ -772,7 +779,8 @@ namespace System.DirectoryServices.AccountManagement
 
                 fixed (char* sbName = new char[nameLength])fixed (
                     char* sbDomainName = new char[domainNameLength]
-                ) {
+                )
+                {
                     f = Interop.Advapi32.LookupAccountSid(
                         serverName,
                         sid,
@@ -816,7 +824,8 @@ namespace System.DirectoryServices.AccountManagement
             string serverName,
             NetCred credentials,
             string authorityName
-        ) {
+        )
+        {
             GlobalDebug.WriteLineIf(
                 GlobalDebug.Info,
                 "Utils",

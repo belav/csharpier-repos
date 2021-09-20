@@ -31,7 +31,8 @@ namespace System.Composition.Hosting.Core
             object site,
             CompositionContract contract,
             bool isPrerequisite
-        ) {
+        )
+        {
             var all = GetPromises(contract).ToArray();
             var result = new CompositionDependency[all.Length];
             for (var i = 0; i < all.Length; ++i)
@@ -50,7 +51,8 @@ namespace System.Composition.Hosting.Core
             object site,
             CompositionContract contract,
             bool isPrerequisite
-        ) {
+        )
+        {
             CompositionDependency result;
             if (!TryResolveOptionalDependency(site, contract, isPrerequisite, out result))
                 return CompositionDependency.Missing(contract, site);
@@ -71,7 +73,8 @@ namespace System.Composition.Hosting.Core
             CompositionContract contract,
             bool isPrerequisite,
             out CompositionDependency dependency
-        ) {
+        )
+        {
             var all = GetPromises(contract).ToArray();
             if (all.Length == 0)
             {

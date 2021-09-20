@@ -61,7 +61,8 @@ namespace Microsoft.CodeAnalysis.CodeRefactorings.SyncNamespace
                 SyntaxNode container,
                 string targetNamespace,
                 string relativeDeclaredNamespace
-            ) {
+            )
+            {
                 Document = document;
                 Container = container;
                 TargetNamespace = targetNamespace;
@@ -77,7 +78,8 @@ namespace Microsoft.CodeAnalysis.CodeRefactorings.SyncNamespace
                 Document document,
                 TextSpan textSpan,
                 CancellationToken cancellationToken
-            ) {
+            )
+            {
                 // User must put cursor on one of the nodes described below to trigger the refactoring.
                 // For each scenario, all requirements must be met. Some of them are checked by `TryGetApplicableInvocationNodeAsync`,
                 // rest by `IChangeNamespaceService.CanChangeNamespaceAsync`.
@@ -195,7 +197,8 @@ namespace Microsoft.CodeAnalysis.CodeRefactorings.SyncNamespace
             private static string GetDefaultNamespace(
                 Document document,
                 ISyntaxFactsService syntaxFacts
-            ) {
+            )
+            {
                 var solution = document.Project.Solution;
                 var linkedIds = document.GetLinkedDocumentIds();
                 var documents = linkedIds.SelectAsArray(id => solution.GetDocument(id))
@@ -213,7 +216,8 @@ namespace Microsoft.CodeAnalysis.CodeRefactorings.SyncNamespace
                 if (
                     defaultNamespaceFromProjects.Count != 1
                     || defaultNamespaceFromProjects.First() == null
-                ) {
+                )
+                {
                     return null;
                 }
 
@@ -252,7 +256,8 @@ namespace Microsoft.CodeAnalysis.CodeRefactorings.SyncNamespace
                 string relativeTo,
                 string @namespace,
                 ISyntaxFactsService syntaxFacts
-            ) {
+            )
+            {
                 Debug.Assert(relativeTo != null && @namespace != null);
 
                 if (syntaxFacts.StringComparer.Equals(@namespace, relativeTo))

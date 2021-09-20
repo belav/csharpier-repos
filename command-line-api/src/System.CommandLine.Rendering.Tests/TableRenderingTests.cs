@@ -31,7 +31,8 @@ namespace System.CommandLine.Rendering.Tests
         [InlineData(OutputMode.NonAnsi)]
         public void A_row_is_written_for_each_item_and_a_header_for_each_column(
             OutputMode outputMode
-        ) {
+        )
+        {
             var options = new[]
             {
                 new Option("-s", "a short option"),

@@ -94,7 +94,8 @@ namespace Microsoft.CodeAnalysis.EditAndContinue
 
             public async ValueTask<ImmutableArray<TextSpan>> GetSpansAsync(
                 CancellationToken cancellationToken
-            ) {
+            )
+            {
                 try
                 {
                     return await _documentProvider(cancellationToken).ConfigureAwait(false);
@@ -121,7 +122,8 @@ namespace Microsoft.CodeAnalysis.EditAndContinue
             public async ValueTask<ImmutableArray<TextSpan>> GetSpansAsync(
                 DocumentId documentId,
                 CancellationToken cancellationToken
-            ) {
+            )
+            {
                 try
                 {
                     return await _solutionProvider(documentId, cancellationToken)
@@ -163,7 +165,8 @@ namespace Microsoft.CodeAnalysis.EditAndContinue
             public async ValueTask<ManagedEditAndContinueAvailability> GetAvailabilityAsync(
                 Guid mvid,
                 CancellationToken cancellationToken
-            ) {
+            )
+            {
                 try
                 {
                     return await _debuggerService.GetAvailabilityAsync(mvid, cancellationToken)
@@ -182,7 +185,8 @@ namespace Microsoft.CodeAnalysis.EditAndContinue
             public async ValueTask PrepareModuleForUpdateAsync(
                 Guid mvid,
                 CancellationToken cancellationToken
-            ) {
+            )
+            {
                 try
                 {
                     await _debuggerService.PrepareModuleForUpdateAsync(mvid, cancellationToken)
@@ -211,7 +215,8 @@ namespace Microsoft.CodeAnalysis.EditAndContinue
             IManagedEditAndContinueDebuggerService debuggerService,
             bool captureMatchingDocuments,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var client = await RemoteHostClient.TryGetClientAsync(Workspace, cancellationToken)
                 .ConfigureAwait(false);
             if (client == null)
@@ -259,7 +264,8 @@ namespace Microsoft.CodeAnalysis.EditAndContinue
         public async ValueTask BreakStateEnteredAsync(
             IDiagnosticAnalyzerService diagnosticService,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             ImmutableArray<DocumentId> documentsToReanalyze;
 
             var client = await RemoteHostClient.TryGetClientAsync(Workspace, cancellationToken)
@@ -293,7 +299,8 @@ namespace Microsoft.CodeAnalysis.EditAndContinue
             EditAndContinueDiagnosticUpdateSource diagnosticUpdateSource,
             IDiagnosticAnalyzerService diagnosticService,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             ImmutableArray<DocumentId> documentsToReanalyze;
 
             var client = await RemoteHostClient.TryGetClientAsync(Workspace, cancellationToken)
@@ -330,7 +337,8 @@ namespace Microsoft.CodeAnalysis.EditAndContinue
             Document document,
             DocumentActiveStatementSpanProvider activeStatementSpanProvider,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var client = await RemoteHostClient.TryGetClientAsync(Workspace, cancellationToken)
                 .ConfigureAwait(false);
             if (client == null)
@@ -385,7 +393,8 @@ namespace Microsoft.CodeAnalysis.EditAndContinue
             SolutionActiveStatementSpanProvider activeStatementSpanProvider,
             string? sourceFilePath,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var client = await RemoteHostClient.TryGetClientAsync(Workspace, cancellationToken)
                 .ConfigureAwait(false);
             if (client == null)
@@ -425,7 +434,8 @@ namespace Microsoft.CodeAnalysis.EditAndContinue
             IDiagnosticAnalyzerService diagnosticService,
             EditAndContinueDiagnosticUpdateSource diagnosticUpdateSource,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             ManagedModuleUpdates moduleUpdates;
             ImmutableArray<DiagnosticData> diagnosticData;
             ImmutableArray<(DocumentId DocumentId, ImmutableArray<RudeEditDiagnostic> Diagnostics)> rudeEdits;
@@ -501,7 +511,8 @@ namespace Microsoft.CodeAnalysis.EditAndContinue
         public async ValueTask CommitSolutionUpdateAsync(
             IDiagnosticAnalyzerService diagnosticService,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             ImmutableArray<DocumentId> documentsToReanalyze;
 
             var client = await RemoteHostClient.TryGetClientAsync(Workspace, cancellationToken)
@@ -554,7 +565,8 @@ namespace Microsoft.CodeAnalysis.EditAndContinue
             SolutionActiveStatementSpanProvider activeStatementSpanProvider,
             ManagedInstructionId instructionId,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var client = await RemoteHostClient.TryGetClientAsync(
                     Workspace.Services,
                     cancellationToken
@@ -598,7 +610,8 @@ namespace Microsoft.CodeAnalysis.EditAndContinue
             Solution solution,
             ManagedInstructionId instructionId,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var client = await RemoteHostClient.TryGetClientAsync(
                     Workspace.Services,
                     cancellationToken
@@ -636,7 +649,8 @@ namespace Microsoft.CodeAnalysis.EditAndContinue
             Solution solution,
             ImmutableArray<DocumentId> documentIds,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var client = await RemoteHostClient.TryGetClientAsync(Workspace, cancellationToken)
                 .ConfigureAwait(false);
             if (client == null)
@@ -672,7 +686,8 @@ namespace Microsoft.CodeAnalysis.EditAndContinue
             Document document,
             DocumentActiveStatementSpanProvider activeStatementSpanProvider,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var client = await RemoteHostClient.TryGetClientAsync(Workspace, cancellationToken)
                 .ConfigureAwait(false);
             if (client == null)
@@ -711,7 +726,8 @@ namespace Microsoft.CodeAnalysis.EditAndContinue
         public async ValueTask OnSourceFileUpdatedAsync(
             Document document,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var client = await RemoteHostClient.TryGetClientAsync(Workspace, cancellationToken)
                 .ConfigureAwait(false);
             if (client == null)

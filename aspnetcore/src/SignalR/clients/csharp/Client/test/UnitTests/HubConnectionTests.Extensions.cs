@@ -283,7 +283,8 @@ namespace Microsoft.AspNetCore.SignalR.Client.Tests
             private async Task InvokeOn(
                 Action<HubConnection, TaskCompletionSource<object[]>> onAction,
                 object[] args
-            ) {
+            )
+            {
                 var connection = new TestConnection();
                 var hubConnection = CreateHubConnection(connection);
                 var handlerTcs = new TaskCompletionSource<object[]>();

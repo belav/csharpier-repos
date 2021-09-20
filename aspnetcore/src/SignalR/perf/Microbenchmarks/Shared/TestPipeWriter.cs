@@ -39,7 +39,8 @@ namespace Microsoft.AspNetCore.SignalR.Microbenchmarks.Shared
 
         public override ValueTask<FlushResult> FlushAsync(
             CancellationToken cancellationToken = new CancellationToken()
-        ) {
+        )
+        {
             if (!ForceAsync)
             {
                 return default;

@@ -16,7 +16,8 @@ namespace Microsoft.CodeAnalysis.Emit
             string name,
             Cci.ITypeReference type,
             SynthesizedLocalKind synthesizedKind
-        ) {
+        )
+        {
             Debug.Assert(name != null);
             Debug.Assert(type != null);
             Debug.Assert(synthesizedKind.IsLongLived());

@@ -37,7 +37,8 @@ namespace System.DirectoryServices
             IntPtr searchHandle,
             string[] propertiesLoaded,
             DirectorySearcher srch
-        ) {
+        )
+        {
             _handle = searchHandle;
             PropertiesLoaded = propertiesLoaded;
             Filter = srch.Filter;
@@ -253,7 +254,8 @@ namespace System.DirectoryServices
                 string? parentUserName,
                 string? parentPassword,
                 AuthenticationTypes parentAuthenticationType
-            ) {
+            )
+            {
                 if (parentUserName != null && parentPassword != null)
                     _parentCredentials = new NetworkCredential(parentUserName, parentPassword);
 
@@ -388,7 +390,8 @@ namespace System.DirectoryServices
                     if (
                         hr == UnsafeNativeMethods.S_ADS_NOMORE_ROWS
                         || hr == UnsafeNativeMethods.SIZE_LIMIT_EXCEEDED
-                    ) {
+                    )
+                    {
                         // need to make sure this is not the case that server actually still has record not returned yet
                         if (hr == UnsafeNativeMethods.S_ADS_NOMORE_ROWS)
                         {

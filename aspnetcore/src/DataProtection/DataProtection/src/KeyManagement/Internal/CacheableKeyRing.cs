@@ -27,7 +27,8 @@ namespace Microsoft.AspNetCore.DataProtection.KeyManagement.Internal
             CancellationToken expirationToken,
             DateTimeOffset expirationTime,
             IKeyRing keyRing
-        ) {
+        )
+        {
             _expirationToken = expirationToken;
             ExpirationTimeUtc = expirationTime.UtcDateTime;
             KeyRing = keyRing;

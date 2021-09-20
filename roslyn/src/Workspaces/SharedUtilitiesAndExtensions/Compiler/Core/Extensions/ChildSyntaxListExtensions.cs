@@ -12,7 +12,8 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
         public static SyntaxNodeOrToken First(
             this ChildSyntaxList childSyntaxList,
             Func<SyntaxNodeOrToken, bool> predicate
-        ) {
+        )
+        {
             foreach (var syntaxNodeOrToken in childSyntaxList)
             {
                 if (predicate(syntaxNodeOrToken))
@@ -26,7 +27,8 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
         public static SyntaxNodeOrToken Last(
             this ChildSyntaxList childSyntaxList,
             Func<SyntaxNodeOrToken, bool> predicate
-        ) {
+        )
+        {
             foreach (var syntaxNodeOrToken in childSyntaxList.Reverse())
             {
                 if (predicate(syntaxNodeOrToken))

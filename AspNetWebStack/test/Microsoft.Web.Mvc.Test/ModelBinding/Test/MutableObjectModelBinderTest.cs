@@ -959,42 +959,48 @@ namespace Microsoft.Web.Mvc.ModelBinding.Test
             public virtual object CreateModelPublic(
                 ControllerContext controllerContext,
                 ExtensibleModelBindingContext bindingContext
-            ) {
+            )
+            {
                 return base.CreateModel(controllerContext, bindingContext);
             }
 
             protected override object CreateModel(
                 ControllerContext controllerContext,
                 ExtensibleModelBindingContext bindingContext
-            ) {
+            )
+            {
                 return CreateModelPublic(controllerContext, bindingContext);
             }
 
             public virtual void EnsureModelPublic(
                 ControllerContext controllerContext,
                 ExtensibleModelBindingContext bindingContext
-            ) {
+            )
+            {
                 base.EnsureModel(controllerContext, bindingContext);
             }
 
             protected override void EnsureModel(
                 ControllerContext controllerContext,
                 ExtensibleModelBindingContext bindingContext
-            ) {
+            )
+            {
                 EnsureModelPublic(controllerContext, bindingContext);
             }
 
             public virtual IEnumerable<ModelMetadata> GetMetadataForPropertiesPublic(
                 ControllerContext controllerContext,
                 ExtensibleModelBindingContext bindingContext
-            ) {
+            )
+            {
                 return base.GetMetadataForProperties(controllerContext, bindingContext);
             }
 
             protected override IEnumerable<ModelMetadata> GetMetadataForProperties(
                 ControllerContext controllerContext,
                 ExtensibleModelBindingContext bindingContext
-            ) {
+            )
+            {
                 return GetMetadataForPropertiesPublic(controllerContext, bindingContext);
             }
 
@@ -1003,7 +1009,8 @@ namespace Microsoft.Web.Mvc.ModelBinding.Test
                 ExtensibleModelBindingContext bindingContext,
                 ModelMetadata propertyMetadata,
                 ComplexModelDtoResult dtoResult
-            ) {
+            )
+            {
                 base.SetProperty(controllerContext, bindingContext, propertyMetadata, dtoResult);
             }
 
@@ -1012,7 +1019,8 @@ namespace Microsoft.Web.Mvc.ModelBinding.Test
                 ExtensibleModelBindingContext bindingContext,
                 ModelMetadata propertyMetadata,
                 ComplexModelDtoResult dtoResult
-            ) {
+            )
+            {
                 SetPropertyPublic(controllerContext, bindingContext, propertyMetadata, dtoResult);
             }
         }

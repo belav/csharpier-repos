@@ -31,7 +31,8 @@ namespace System.Composition.TypedParts.ActivationFeatures
             CompositeActivator activator,
             IDictionary<string, object> partMetadata,
             IEnumerable<CompositionDependency> dependencies
-        ) {
+        )
+        {
             var result = activator;
 
             var partTypeAsType = partType.AsType();
@@ -51,7 +52,8 @@ namespace System.Composition.TypedParts.ActivationFeatures
                     || m.ReturnType != typeof(void)
                     || m.IsGenericMethodDefinition
                     || m.GetParameters().Length != 0
-                ) {
+                )
+                {
                     string message = SR.Format(
                         SR.OnImportsSatisfiedFeature_AttributeError,
                         partType,

@@ -93,7 +93,8 @@ namespace System.Net
         public static bool TryParse(
             ReadOnlySpan<char> s,
             [NotNullWhen(true)] out IPEndPoint? result
-        ) {
+        )
+        {
             int addressLength = s.Length; // If there's no port then send the entire string to the address parser
             int lastColonPos = s.LastIndexOf(':');
 
@@ -125,7 +126,8 @@ namespace System.Net
                         )
                         && port <= MaxPort
                     )
-                ) {
+                )
+                {
                     result = new IPEndPoint(address, (int)port);
                     return true;
                 }

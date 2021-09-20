@@ -439,7 +439,8 @@ namespace System.Threading.Tasks.Dataflow.Tests
                                 DataflowMessageHeader messageHeader,
                                 ITargetBlock<int> target,
                                 out bool messageConsumed
-                            ) {
+                            )
+                            {
                                 messageConsumed = false; // fail consumption of a message already reserved
                                 Assert.Equal(expected: 0, actual: i); // shouldn't get to second source
                                 return 0;
@@ -519,7 +520,8 @@ namespace System.Threading.Tasks.Dataflow.Tests
                     DataflowMessageHeader messageHeader,
                     ITargetBlock<int> target,
                     out bool messageConsumed
-                ) {
+                )
+                {
                     throw new FormatException();
                 }
             };

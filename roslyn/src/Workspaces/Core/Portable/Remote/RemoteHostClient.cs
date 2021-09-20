@@ -34,7 +34,8 @@ namespace Microsoft.CodeAnalysis.Remote
         public static Task<RemoteHostClient?> TryGetClientAsync(
             Project project,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             if (!RemoteSupportedLanguages.IsSupported(project.Language))
             {
                 return SpecializedTasks.Null<RemoteHostClient>();
@@ -51,7 +52,8 @@ namespace Microsoft.CodeAnalysis.Remote
         public static Task<RemoteHostClient?> TryGetClientAsync(
             HostWorkspaceServices services,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var service = services.GetService<IRemoteHostClientProvider>();
             if (service == null)
             {
@@ -209,7 +211,8 @@ namespace Microsoft.CodeAnalysis.Remote
             IReadOnlyList<object?> arguments,
             object? callbackTarget,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             using var connection = await CreateConnectionAsync(
                     serviceName,
                     callbackTarget,
@@ -246,7 +249,8 @@ namespace Microsoft.CodeAnalysis.Remote
             object? callbackTarget,
             Func<Stream, CancellationToken, Task<T>>? dataReader,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             using var connection = await CreateConnectionAsync(
                     serviceName,
                     callbackTarget,

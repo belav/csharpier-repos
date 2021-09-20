@@ -26,7 +26,8 @@ namespace Microsoft.AspNetCore.Razor.Language.Components
         public override void WriteCSharpCode(
             CodeRenderingContext context,
             CSharpCodeIntermediateNode node
-        ) {
+        )
+        {
             if (context == null)
             {
                 throw new ArgumentNullException(nameof(context));
@@ -90,7 +91,8 @@ namespace Microsoft.AspNetCore.Razor.Language.Components
         public override void WriteCSharpExpression(
             CodeRenderingContext context,
             CSharpExpressionIntermediateNode node
-        ) {
+        )
+        {
             if (context == null)
             {
                 throw new ArgumentNullException(nameof(context));
@@ -128,7 +130,8 @@ namespace Microsoft.AspNetCore.Razor.Language.Components
         public override void WriteCSharpExpressionAttributeValue(
             CodeRenderingContext context,
             CSharpExpressionAttributeValueIntermediateNode node
-        ) {
+        )
+        {
             if (context == null)
             {
                 throw new ArgumentNullException(nameof(context));
@@ -159,7 +162,8 @@ namespace Microsoft.AspNetCore.Razor.Language.Components
         public override void WriteMarkupBlock(
             CodeRenderingContext context,
             MarkupBlockIntermediateNode node
-        ) {
+        )
+        {
             if (context == null)
             {
                 throw new ArgumentNullException(nameof(context));
@@ -182,7 +186,8 @@ namespace Microsoft.AspNetCore.Razor.Language.Components
         public override void WriteMarkupElement(
             CodeRenderingContext context,
             MarkupElementIntermediateNode node
-        ) {
+        )
+        {
             if (context == null)
             {
                 throw new ArgumentNullException(nameof(context));
@@ -243,7 +248,8 @@ namespace Microsoft.AspNetCore.Razor.Language.Components
         public override void WriteHtmlAttribute(
             CodeRenderingContext context,
             HtmlAttributeIntermediateNode node
-        ) {
+        )
+        {
             if (context == null)
             {
                 throw new ArgumentNullException(nameof(context));
@@ -280,7 +286,8 @@ namespace Microsoft.AspNetCore.Razor.Language.Components
         public override void WriteHtmlAttributeValue(
             CodeRenderingContext context,
             HtmlAttributeValueIntermediateNode node
-        ) {
+        )
+        {
             if (context == null)
             {
                 throw new ArgumentNullException(nameof(context));
@@ -304,7 +311,8 @@ namespace Microsoft.AspNetCore.Razor.Language.Components
         public override void WriteHtmlContent(
             CodeRenderingContext context,
             HtmlContentIntermediateNode node
-        ) {
+        )
+        {
             if (context == null)
             {
                 throw new ArgumentNullException(nameof(context));
@@ -336,7 +344,8 @@ namespace Microsoft.AspNetCore.Razor.Language.Components
         public override void WriteUsingDirective(
             CodeRenderingContext context,
             UsingDirectiveIntermediateNode node
-        ) {
+        )
+        {
             if (context == null)
             {
                 throw new ArgumentNullException(nameof(context));
@@ -363,7 +372,8 @@ namespace Microsoft.AspNetCore.Razor.Language.Components
         public override void WriteComponent(
             CodeRenderingContext context,
             ComponentIntermediateNode node
-        ) {
+        )
+        {
             if (context == null)
             {
                 throw new ArgumentNullException(nameof(context));
@@ -520,7 +530,8 @@ namespace Microsoft.AspNetCore.Razor.Language.Components
                     foreach (
                         var localToClear in parameters.Select(p => p.Source)
                             .OfType<TypeInferenceCapturedVariable>()
-                    ) {
+                    )
+                    {
                         // Ensure we're not interfering with the GC lifetime of these captured values
                         // We don't need the values any longer (code in closures only uses its types for compile-time inference)
                         context.CodeWriter.Write(localToClear.VariableName);
@@ -534,7 +545,8 @@ namespace Microsoft.AspNetCore.Razor.Language.Components
         private void WriteTypeInferenceMethodParameterInnards(
             CodeRenderingContext context,
             TypeInferenceMethodParameter parameter
-        ) {
+        )
+        {
             switch (parameter.Source)
             {
                 case ComponentAttributeIntermediateNode attribute:
@@ -574,7 +586,8 @@ namespace Microsoft.AspNetCore.Razor.Language.Components
         public override void WriteComponentAttribute(
             CodeRenderingContext context,
             ComponentAttributeIntermediateNode node
-        ) {
+        )
+        {
             if (context == null)
             {
                 throw new ArgumentNullException(nameof(context));
@@ -609,7 +622,8 @@ namespace Microsoft.AspNetCore.Razor.Language.Components
             CodeRenderingContext context,
             ComponentAttributeIntermediateNode node,
             bool canTypeCheck
-        ) {
+        )
+        {
             if (node.AttributeStructure == AttributeStructure.Minimized)
             {
                 // Minimized attributes always map to 'true'
@@ -625,7 +639,8 @@ namespace Microsoft.AspNetCore.Razor.Language.Components
             }
             else if (
                 node.Children.Count == 1 && node.Children[0] is HtmlContentIntermediateNode htmlNode
-            ) {
+            )
+            {
                 // This is how string attributes are lowered by default, a single HTML node with a single HTML token.
                 var content = string.Join(
                     string.Empty,
@@ -640,7 +655,8 @@ namespace Microsoft.AspNetCore.Razor.Language.Components
                 if (
                     (node.BoundAttribute?.IsDelegateProperty() ?? false)
                     || (node.BoundAttribute?.IsChildContentProperty() ?? false)
-                ) {
+                )
+                {
                     if (canTypeCheck)
                     {
                         context.CodeWriter.Write("new ");
@@ -743,7 +759,8 @@ namespace Microsoft.AspNetCore.Razor.Language.Components
         public override void WriteComponentChildContent(
             CodeRenderingContext context,
             ComponentChildContentIntermediateNode node
-        ) {
+        )
+        {
             if (context == null)
             {
                 throw new ArgumentNullException(nameof(context));
@@ -772,7 +789,8 @@ namespace Microsoft.AspNetCore.Razor.Language.Components
         private void WriteComponentChildContentInnards(
             CodeRenderingContext context,
             ComponentChildContentIntermediateNode node
-        ) {
+        )
+        {
             // Writes something like:
             //
             // ((__builder73) => { ... })
@@ -793,7 +811,8 @@ namespace Microsoft.AspNetCore.Razor.Language.Components
         public override void WriteComponentTypeArgument(
             CodeRenderingContext context,
             ComponentTypeArgumentIntermediateNode node
-        ) {
+        )
+        {
             // We can skip type arguments during runtime codegen, they are handled in the
             // type/parameter declarations.
         }
@@ -801,7 +820,8 @@ namespace Microsoft.AspNetCore.Razor.Language.Components
         public override void WriteTemplate(
             CodeRenderingContext context,
             TemplateIntermediateNode node
-        ) {
+        )
+        {
             if (context == null)
             {
                 throw new ArgumentNullException(nameof(context));
@@ -877,7 +897,8 @@ namespace Microsoft.AspNetCore.Razor.Language.Components
             CodeRenderingContext context,
             SplatIntermediateNode node,
             bool canTypeCheck
-        ) {
+        )
+        {
             var tokens = GetCSharpTokens(node);
 
             if (canTypeCheck)
@@ -903,7 +924,8 @@ namespace Microsoft.AspNetCore.Razor.Language.Components
         public override void WriteReferenceCapture(
             CodeRenderingContext context,
             ReferenceCaptureIntermediateNode node
-        ) {
+        )
+        {
             // Looks like:
             //
             // _builder.AddComponentReferenceCapture(2, (__value) = { _field = (MyComponent)__value; });
@@ -927,7 +949,8 @@ namespace Microsoft.AspNetCore.Razor.Language.Components
             CodeRenderingContext context,
             ReferenceCaptureIntermediateNode node,
             bool shouldTypeCheck
-        ) {
+        )
+        {
             // Looks like:
             //
             // (__value) = { _field = (MyComponent)__value; }
@@ -963,7 +986,8 @@ namespace Microsoft.AspNetCore.Razor.Language.Components
             CodeRenderingContext context,
             string key,
             IList<IntermediateToken> value
-        ) {
+        )
+        {
             BeginWriteAttribute(context, key);
 
             if (value.Count > 0)
@@ -986,7 +1010,8 @@ namespace Microsoft.AspNetCore.Razor.Language.Components
             CodeRenderingContext context,
             IntermediateNode nameExpression,
             IList<IntermediateToken> value
-        ) {
+        )
+        {
             BeginWriteAttribute(context, nameExpression);
             if (value.Count > 0)
             {
@@ -1009,7 +1034,8 @@ namespace Microsoft.AspNetCore.Razor.Language.Components
         protected override void BeginWriteAttribute(
             CodeRenderingContext context,
             IntermediateNode nameExpression
-        ) {
+        )
+        {
             context.CodeWriter.WriteStartMethodInvocation(
                 $"{_scopeStack.BuilderVarName}.{ComponentsApi.RenderTreeBuilder.AddAttribute}"
             );
@@ -1045,7 +1071,8 @@ namespace Microsoft.AspNetCore.Razor.Language.Components
         private static void WriteAttributeValue(
             CodeRenderingContext context,
             IList<IntermediateToken> tokens
-        ) {
+        )
+        {
             if (tokens == null)
             {
                 throw new ArgumentNullException(nameof(tokens));

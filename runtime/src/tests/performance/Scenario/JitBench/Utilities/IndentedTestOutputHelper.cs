@@ -25,7 +25,8 @@ namespace JitBench
             string indentText,
             string openingBrace,
             string closingBrace
-        ) {
+        )
+        {
             _output = innerOutput;
             _indentText = indentText;
             _closingBrace = closingBrace;

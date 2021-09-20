@@ -96,7 +96,8 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
 
         public static ImmutableArray<ISymbol> ExplicitOrImplicitInterfaceImplementations(
             this ISymbol symbol
-        ) {
+        )
+        {
             if (
                 symbol.Kind != SymbolKind.Method
                 && symbol.Kind != SymbolKind.Property
@@ -132,12 +133,14 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
 
         public static bool IsImplementableMember(
             [NotNullWhen(returnValue: true)] this ISymbol? symbol
-        ) {
+        )
+        {
             if (
                 symbol != null
                 && symbol.ContainingType != null
                 && symbol.ContainingType.TypeKind == TypeKind.Interface
-            ) {
+            )
+            {
                 if (symbol.Kind == SymbolKind.Event)
                 {
                     return true;
@@ -155,7 +158,8 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
                         methodSymbol.MethodKind == MethodKind.Ordinary
                         || methodSymbol.MethodKind == MethodKind.PropertyGet
                         || methodSymbol.MethodKind == MethodKind.PropertySet
-                    ) {
+                    )
+                    {
                         return true;
                     }
                 }
@@ -210,7 +214,8 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
             [NotNullWhen(returnValue: true)] this ISymbol? symbol,
             SymbolKind kind1,
             SymbolKind kind2
-        ) {
+        )
+        {
             return symbol != null && (symbol.Kind == kind1 || symbol.Kind == kind2);
         }
 
@@ -219,7 +224,8 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
             SymbolKind kind1,
             SymbolKind kind2,
             SymbolKind kind3
-        ) {
+        )
+        {
             return symbol != null
                 && (symbol.Kind == kind1 || symbol.Kind == kind2 || symbol.Kind == kind3);
         }
@@ -227,7 +233,8 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
         public static bool MatchesKind(
             [NotNullWhen(returnValue: true)] this ISymbol? symbol,
             params SymbolKind[] kinds
-        ) {
+        )
+        {
             return symbol != null && kinds.Contains(symbol.Kind);
         }
 
@@ -278,7 +285,8 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
 
         public static bool IsOrdinaryMethodOrLocalFunction(
             [NotNullWhen(returnValue: true)] this ISymbol? symbol
-        ) {
+        )
+        {
             if (!(symbol is IMethodSymbol method))
             {
                 return false;
@@ -427,7 +435,8 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
 
         public static ImmutableArray<ITypeParameterSymbol> GetAllTypeParameters(
             this ISymbol? symbol
-        ) {
+        )
+        {
             var results = ArrayBuilder<ITypeParameterSymbol>.GetInstance();
 
             while (symbol != null)
@@ -473,7 +482,8 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
         /// </summary>
         public static bool RequiresUnsafeModifier(
             [NotNullWhen(returnValue: true)] this ISymbol? member
-        ) {
+        )
+        {
             // TODO(cyrusn): Defer to compiler code to handle this once it can.
             return member?.Accept(new RequiresUnsafeModifierVisitor()) == true;
         }
@@ -482,7 +492,8 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
             this ISymbol? symbol,
             Compilation compilation,
             bool extensionUsedAsInstance = false
-        ) {
+        )
+        {
             if (symbol is ITypeSymbol type)
             {
                 return type;
@@ -491,7 +502,8 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
             if (
                 symbol is IMethodSymbol method
                 && method.Parameters.All(p => p.RefKind == RefKind.None)
-            ) {
+            )
+            {
                 var count = extensionUsedAsInstance
                     ? Math.Max(0, method.Parameters.Length - 1)
                     : method.Parameters.Length;
@@ -548,7 +560,8 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
             ISymbol withinType,
             IAssemblySymbol withinAssembly,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var namespaceOrType = symbol is IAliasSymbol alias
                 ? alias.Target
                 : symbol as INamespaceOrTypeSymbol;
@@ -571,7 +584,8 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
 
         public static IEnumerable<IPropertySymbol> GetValidAnonymousTypeProperties(
             this ISymbol symbol
-        ) {
+        )
+        {
             Contract.ThrowIfFalse(symbol.IsNormalAnonymousType());
             return ((INamedTypeSymbol)symbol).GetMembers()
                 .OfType<IPropertySymbol>()
@@ -581,7 +595,8 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
         public static Accessibility ComputeResultantAccessibility(
             this ISymbol? symbol,
             ITypeSymbol finalDestination
-        ) {
+        )
+        {
             if (symbol == null)
             {
                 return Accessibility.Private;
@@ -673,7 +688,8 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
             [NotNullWhen(returnValue: true)] this ISymbol? symbol,
             SemanticModel semanticModel,
             int position
-        ) {
+        )
+        {
             var methodSymbol = symbol as IMethodSymbol;
             ITypeSymbol? typeSymbol = null;
 
@@ -726,7 +742,8 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
                             && p.Type.SpecialType == SpecialType.System_Boolean
                             && p.GetMethod != null
                     )
-            ) {
+            )
+            {
                 return false;
             }
 
@@ -747,7 +764,8 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
                         && x.Parameters.Length == 1
                         && x.Parameters.First().Type.TypeKind == TypeKind.Delegate
                 )
-            ) {
+            )
+            {
                 return false;
             }
 
@@ -782,7 +800,8 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
                             p.Name == WellKnownMemberNames.CurrentPropertyName
                             && p.GetMethod != null
                     )
-            ) {
+            )
+            {
                 return false;
             }
 
@@ -800,7 +819,8 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
                                 };
                         }
                     )
-            ) {
+            )
+            {
                 return false;
             }
 
@@ -832,7 +852,8 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
                             p.Name == WellKnownMemberNames.CurrentPropertyName
                             && p.GetMethod != null
                     )
-            ) {
+            )
+            {
                 return false;
             }
 
@@ -843,7 +864,8 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
             if (
                 !members.OfType<IMethodSymbol>()
                     .Any(x => x.Name == WellKnownMemberNames.MoveNextAsyncMethodName)
-            ) {
+            )
+            {
                 return false;
             }
 

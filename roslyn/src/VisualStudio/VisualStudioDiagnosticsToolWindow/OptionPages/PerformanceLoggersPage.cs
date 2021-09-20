@@ -30,7 +30,8 @@ namespace Roslyn.VisualStudio.DiagnosticsWindow.OptionsPages
         protected override AbstractOptionPageControl CreateOptionPage(
             IServiceProvider serviceProvider,
             OptionStore optionStore
-        ) {
+        )
+        {
             if (_optionService == null)
             {
                 var componentModel = (IComponentModel)serviceProvider.GetService(
@@ -58,7 +59,8 @@ namespace Roslyn.VisualStudio.DiagnosticsWindow.OptionsPages
             IGlobalOptionService optionService,
             IThreadingContext threadingContext,
             IRemoteHostClientProvider remoteClientProvider
-        ) {
+        )
+        {
             var loggerTypes = GetLoggerTypes(optionService).ToList();
 
             // first set VS options

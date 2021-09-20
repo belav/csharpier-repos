@@ -19,19 +19,21 @@ namespace System.Web.Mvc
             MethodInfo methodInfo,
             string actionName,
             ControllerDescriptor controllerDescriptor
-        ) : this(
-            methodInfo,
-            actionName,
-            controllerDescriptor,
-            true /* validateMethod */
-        ) { }
+        )
+            : this(
+                methodInfo,
+                actionName,
+                controllerDescriptor,
+                true /* validateMethod */
+            ) { }
 
         internal ReflectedActionDescriptor(
             MethodInfo methodInfo,
             string actionName,
             ControllerDescriptor controllerDescriptor,
             bool validateMethod
-        ) {
+        )
+        {
             if (methodInfo == null)
             {
                 throw new ArgumentNullException("methodInfo");
@@ -93,7 +95,8 @@ namespace System.Web.Mvc
         public override object Execute(
             ControllerContext controllerContext,
             IDictionary<string, object> parameters
-        ) {
+        )
+        {
             if (controllerContext == null)
             {
                 throw new ArgumentNullException("controllerContext");
@@ -169,7 +172,8 @@ namespace System.Web.Mvc
             MethodInfo methodInfo,
             string name,
             ControllerDescriptor controllerDescriptor
-        ) {
+        )
+        {
             ReflectedActionDescriptor descriptor = new ReflectedActionDescriptor(
                 methodInfo,
                 name,

@@ -23,7 +23,8 @@ namespace Microsoft.CodeAnalysis.ExpressionEvaluator
             int methodToken,
             int methodVersion,
             ILSpan span
-        ) {
+        )
+        {
             Debug.Assert(moduleVersionId != Guid.Empty);
             Debug.Assert(MetadataTokens.Handle(methodToken).Kind == HandleKind.MethodDefinition);
             Debug.Assert(methodVersion >= 1);
@@ -39,7 +40,8 @@ namespace Microsoft.CodeAnalysis.ExpressionEvaluator
             int methodToken,
             int methodVersion,
             int ilOffset
-        ) {
+        )
+        {
             Debug.Assert(moduleVersionId != Guid.Empty);
             Debug.Assert(MetadataTokens.Handle(methodToken).Kind == HandleKind.MethodDefinition);
             Debug.Assert(methodVersion >= 1);
@@ -72,7 +74,8 @@ namespace Microsoft.CodeAnalysis.ExpressionEvaluator
             int ilOffset,
             ILSpan initialSpan,
             IEnumerable<ILSpan> scopes
-        ) {
+        )
+        {
             Debug.Assert(ilOffset >= 0);
 
             uint _startOffset = initialSpan.StartOffset;

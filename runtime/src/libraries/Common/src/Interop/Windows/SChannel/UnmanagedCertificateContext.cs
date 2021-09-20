@@ -12,7 +12,8 @@ namespace System.Net
     {
         internal static X509Certificate2Collection GetRemoteCertificatesFromStoreContext(
             SafeFreeCertContext certContext
-        ) {
+        )
+        {
             if (certContext.IsInvalid)
             {
                 return new X509Certificate2Collection();

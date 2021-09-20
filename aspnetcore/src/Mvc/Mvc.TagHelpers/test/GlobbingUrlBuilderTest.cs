@@ -258,7 +258,8 @@ namespace Microsoft.AspNetCore.Mvc.TagHelpers
             string staticUrl,
             FileNode dirStructure,
             string[] expectedPaths
-        ) {
+        )
+        {
             // Arrange
             var fileProvider = MakeFileProvider(dirStructure);
             var cache = new MemoryCache(new MemoryCacheOptions());
@@ -550,7 +551,8 @@ namespace Microsoft.AspNetCore.Mvc.TagHelpers
         private static IDirectoryContents MakeDirectoryContents(
             FileNode fileNode,
             Mock<IFileProvider> fileProviderMock
-        ) {
+        )
+        {
             var children = new List<IFileInfo>();
 
             foreach (var node in fileNode.Children)
@@ -605,7 +607,8 @@ namespace Microsoft.AspNetCore.Mvc.TagHelpers
         private static Matcher MakeMatcher(
             List<string> includePatterns,
             List<string> excludePatterns
-        ) {
+        )
+        {
             var matcher = new Mock<Matcher>();
             matcher.Setup(m => m.AddInclude(It.IsAny<string>()))
                 .Returns<string>(

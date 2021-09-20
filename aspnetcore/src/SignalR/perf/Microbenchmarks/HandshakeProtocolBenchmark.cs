@@ -172,7 +172,8 @@ namespace Microsoft.AspNetCore.SignalR.Microbenchmarks
             var message = _responseMessage1;
             if (
                 !HandshakeProtocol.TryParseResponseMessage(ref message, out var deserializedMessage)
-            ) {
+            )
+            {
                 throw new Exception();
             }
         }
@@ -183,7 +184,8 @@ namespace Microsoft.AspNetCore.SignalR.Microbenchmarks
             var message = _responseMessage2;
             if (
                 !HandshakeProtocol.TryParseResponseMessage(ref message, out var deserializedMessage)
-            ) {
+            )
+            {
                 throw new Exception();
             }
         }
@@ -194,7 +196,8 @@ namespace Microsoft.AspNetCore.SignalR.Microbenchmarks
             var message = _responseMessage3;
             if (
                 !HandshakeProtocol.TryParseResponseMessage(ref message, out var deserializedMessage)
-            ) {
+            )
+            {
                 throw new Exception();
             }
         }
@@ -205,7 +208,8 @@ namespace Microsoft.AspNetCore.SignalR.Microbenchmarks
             var message = _responseMessage4;
             if (
                 !HandshakeProtocol.TryParseResponseMessage(ref message, out var deserializedMessage)
-            ) {
+            )
+            {
                 throw new Exception();
             }
         }
@@ -216,7 +220,8 @@ namespace Microsoft.AspNetCore.SignalR.Microbenchmarks
             var message = _responseMessage5;
             if (
                 !HandshakeProtocol.TryParseResponseMessage(ref message, out var deserializedMessage)
-            ) {
+            )
+            {
                 throw new Exception();
             }
         }
@@ -227,7 +232,8 @@ namespace Microsoft.AspNetCore.SignalR.Microbenchmarks
             var message = _responseMessage6;
             if (
                 !HandshakeProtocol.TryParseResponseMessage(ref message, out var deserializedMessage)
-            ) {
+            )
+            {
                 throw new Exception();
             }
         }

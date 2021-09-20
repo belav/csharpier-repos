@@ -36,7 +36,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Tests
             string expectedQueryString,
 #pragma warning restore xUnit1026
             string expectedVersion
-        ) {
+        )
+        {
             var parser = CreateParser(_nullTrace);
             var buffer = new ReadOnlySequence<byte>(Encoding.ASCII.GetBytes(requestLine));
             var requestHandler = new RequestHandler();
@@ -280,7 +281,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Tests
             string expectedHeaderValue1,
             string expectedHeaderName2,
             string expectedHeaderValue2
-        ) {
+        )
+        {
             var expectedHeaderNames =
                 expectedHeaderName2 == null
                     ? new[] { expectedHeaderName1 }
@@ -365,7 +367,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Tests
         public void ParseHeadersThrowsOnInvalidRequestHeaders(
             string rawHeaders,
             string expectedExceptionMessage
-        ) {
+        )
+        {
             var mockTrace = new Mock<IKestrelTrace>();
             mockTrace.Setup(trace => trace.IsEnabled(LogLevel.Information)).Returns(true);
 
@@ -531,7 +534,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Tests
         public void ParseHeadersThrowsOnInvalidRequestHeadersWithGratuitouslySplitBuffers(
             string rawHeaders,
             string expectedExceptionMessage
-        ) {
+        )
+        {
             var mockTrace = new Mock<IKestrelTrace>();
             mockTrace.Setup(trace => trace.IsEnabled(LogLevel.Information)).Returns(true);
 
@@ -589,7 +593,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Tests
             ReadOnlySequence<byte> readableBuffer,
             out SequencePosition consumed,
             out SequencePosition examined
-        ) {
+        )
+        {
             var reader = new SequenceReader<byte>(readableBuffer);
             if (parser.ParseRequestLine(requestHandler, ref reader))
             {
@@ -609,7 +614,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Tests
             string headerName,
             string rawHeaderValue,
             string expectedHeaderValue
-        ) {
+        )
+        {
             var parser = CreateParser(_nullTrace);
             var buffer = new ReadOnlySequence<byte>(
                 Encoding.ASCII.GetBytes($"{headerName}:{rawHeaderValue}\r\n")
@@ -630,7 +636,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Tests
             string rawHeaders,
             IEnumerable<string> expectedHeaderNames,
             IEnumerable<string> expectedHeaderValues
-        ) {
+        )
+        {
             Assert.True(
                 expectedHeaderNames.Count() == expectedHeaderValues.Count(),
                 $"{nameof(expectedHeaderNames)} and {nameof(expectedHeaderValues)} sizes must match"
@@ -704,7 +711,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Tests
                 Span<byte> query,
                 Span<byte> customMethod,
                 bool pathEncoded
-            ) {
+            )
+            {
                 Method =
                     method != HttpMethod.Custom
                         ? HttpUtilities.MethodToString(method)
@@ -720,7 +728,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Tests
                 HttpVersionAndMethod versionAndMethod,
                 TargetOffsetPathLength targetPath,
                 Span<byte> startLine
-            ) {
+            )
+            {
                 var method = versionAndMethod.Method;
                 var version = versionAndMethod.Version;
                 var customMethod = startLine[..versionAndMethod.MethodEnd];

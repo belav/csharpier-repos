@@ -204,7 +204,8 @@ namespace System.CommandLine.Tests
         [InlineData("--flag=\"first value\" --flag2=123")]
         public void When_response_file_parse_as_space_separated_returns_expected_values(
             string input
-        ) {
+        )
+        {
             var responseFile = ResponseFile(input);
 
             var rootCommand = new RootCommand

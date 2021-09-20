@@ -617,7 +617,8 @@ namespace System.Linq.Expressions.Tests
         [ClassData(typeof(CompilationTypes))]
         public static void Left_ReferenceTypeContainsChildTryExpression_Compiles(
             bool useInterpreter
-        ) {
+        )
+        {
             Expression tryExpression = Expression.TryFinally(
                 Expression.Constant(1),
                 Expression.Empty()

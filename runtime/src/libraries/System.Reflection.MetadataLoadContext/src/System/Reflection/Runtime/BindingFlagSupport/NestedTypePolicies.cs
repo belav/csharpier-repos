@@ -27,7 +27,8 @@ namespace System.Reflection.Runtime.BindingFlagSupport
             RuntimeTypeInfo type,
             NameFilter? filter,
             RuntimeTypeInfo reflectedType
-        ) {
+        )
+        {
             Debug.Assert(reflectedType.Equals(type)); // NestedType queries are always performed as if BindingFlags.DeclaredOnly are set so the reflectedType should always be the declaring type.
             return type.GetNestedTypesCore(filter);
         }
@@ -40,7 +41,8 @@ namespace System.Reflection.Runtime.BindingFlagSupport
             out bool isStatic,
             out bool isVirtual,
             out bool isNewSlot
-        ) {
+        )
+        {
             isStatic = true;
             isVirtual = false;
             isNewSlot = false;
@@ -58,7 +60,8 @@ namespace System.Reflection.Runtime.BindingFlagSupport
             Type[] priorMembers,
             int startIndex,
             int endIndex
-        ) {
+        )
+        {
             return false;
         }
 

@@ -30,7 +30,8 @@ namespace Microsoft.CodeAnalysis.GenerateEqualsAndGetHashCodeFromMembers
                 in SyntaxToken previousToken,
                 in SyntaxToken currentToken,
                 in NextGetAdjustNewLinesOperation nextOperation
-            ) {
+            )
+            {
                 if (_syntaxFacts.IsLogicalAndExpression(previousToken.Parent))
                 {
                     return FormattingOperations.CreateAdjustNewLinesOperation(
@@ -54,7 +55,8 @@ namespace Microsoft.CodeAnalysis.GenerateEqualsAndGetHashCodeFromMembers
                 List<IndentBlockOperation> list,
                 SyntaxNode node,
                 in NextIndentBlockOperationAction nextOperation
-            ) {
+            )
+            {
                 if (_syntaxFacts.IsReturnStatement(node))
                 {
                     var expr = _syntaxFacts.GetExpressionOfReturnStatement(node);

@@ -309,7 +309,8 @@ namespace System.Web.Http
             public void Initialize(
                 HttpControllerSettings settings,
                 HttpControllerDescriptor controllerDescriptor
-            ) {
+            )
+            {
                 ControllerType = controllerDescriptor.ControllerType;
             }
         }
@@ -328,7 +329,8 @@ namespace System.Web.Http
             public void Initialize(
                 HttpControllerSettings settings,
                 HttpControllerDescriptor controllerDescriptor
-            ) {
+            )
+            {
                 settings.Services.Replace(
                     typeof(IActionValueBinder),
                     MyBaseController.ActionValueBinderBase
@@ -353,7 +355,8 @@ namespace System.Web.Http
             public void Initialize(
                 HttpControllerSettings settings,
                 HttpControllerDescriptor controllerDescriptor
-            ) {
+            )
+            {
                 // Base runs first, so we should be able to see changes from the base.
                 Assert.Same(
                     MyBaseController.ActionValueBinderBase,
@@ -373,7 +376,8 @@ namespace System.Web.Http
             public void Initialize(
                 HttpControllerSettings settings,
                 HttpControllerDescriptor controllerDescriptor
-            ) {
+            )
+            {
                 // MyConfigDerived1 runs first, so we should be able to see changes from the MyConfigDerived1.
                 Assert.Same(
                     MyDerived1Controller.ActionValueBinderDerived1,
@@ -437,7 +441,8 @@ namespace System.Web.Http
             public void Initialize(
                 HttpControllerSettings settings,
                 HttpControllerDescriptor controllerDescriptor
-            ) {
+            )
+            {
                 // Appends to existing list. Formatter list has copy-on-write semantics.
                 Assert.Single(settings.Formatters); // the one we already set
                 settings.Formatters.Add(MyControllerWithCustomFormatter.CustomFormatter);

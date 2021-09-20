@@ -115,7 +115,8 @@ namespace WebMatrix.WebData
             string userIdColumn,
             string userNameColumn,
             bool autoCreateTables
-        ) {
+        )
+        {
             InitializeDatabaseConnection(
                 connectionStringName,
                 userTableName,
@@ -133,7 +134,8 @@ namespace WebMatrix.WebData
             string userNameColumn,
             bool autoCreateTables,
             SimpleMembershipProviderCasingBehavior casingBehavior
-        ) {
+        )
+        {
             DatabaseConnectionInfo connect = new DatabaseConnectionInfo();
             connect.ConnectionStringName = connectionStringName;
             InitializeProviders(
@@ -153,7 +155,8 @@ namespace WebMatrix.WebData
             string userIdColumn,
             string userNameColumn,
             bool autoCreateTables
-        ) {
+        )
+        {
             InitializeDatabaseConnection(
                 connectionString,
                 providerName,
@@ -173,7 +176,8 @@ namespace WebMatrix.WebData
             string userNameColumn,
             bool autoCreateTables,
             SimpleMembershipProviderCasingBehavior casingBehavior
-        ) {
+        )
+        {
             DatabaseConnectionInfo connect = new DatabaseConnectionInfo();
             connect.ConnectionString = connectionString;
             connect.ProviderName = providerName;
@@ -194,7 +198,8 @@ namespace WebMatrix.WebData
             string userNameColumn,
             bool autoCreateTables,
             SimpleMembershipProviderCasingBehavior casingBehavior
-        ) {
+        )
+        {
             SimpleMembershipProvider simpleMembership =
                 Membership.Provider as SimpleMembershipProvider;
             if (simpleMembership != null)
@@ -235,7 +240,8 @@ namespace WebMatrix.WebData
             string userNameColumn,
             bool createTables,
             SimpleMembershipProviderCasingBehavior casingBehavior
-        ) {
+        )
+        {
             if (simpleMembership.InitializeCalled)
             {
                 throw new InvalidOperationException(
@@ -268,7 +274,8 @@ namespace WebMatrix.WebData
             string userNameColumn,
             bool createTables,
             SimpleMembershipProviderCasingBehavior casingBehavior
-        ) {
+        )
+        {
             if (simpleRoles.InitializeCalled)
             {
                 throw new InvalidOperationException(
@@ -292,7 +299,8 @@ namespace WebMatrix.WebData
         private static SimpleMembershipProvider CreateDefaultSimpleMembershipProvider(
             string name,
             MembershipProvider currentDefault
-        ) {
+        )
+        {
             var membership = new SimpleMembershipProvider(previousProvider: currentDefault);
             NameValueCollection config = new NameValueCollection();
             membership.Initialize(name, config);
@@ -302,7 +310,8 @@ namespace WebMatrix.WebData
         private static SimpleRoleProvider CreateDefaultSimpleRoleProvider(
             string name,
             RoleProvider currentDefault
-        ) {
+        )
+        {
             var roleProvider = new SimpleRoleProvider(previousProvider: currentDefault);
             NameValueCollection config = new NameValueCollection();
             roleProvider.Initialize(name, config);
@@ -347,7 +356,8 @@ namespace WebMatrix.WebData
             string userName,
             string currentPassword,
             string newPassword
-        ) {
+        )
+        {
             VerifyProvider();
             bool success = false;
             try
@@ -389,7 +399,8 @@ namespace WebMatrix.WebData
             string userName,
             string password,
             bool requireConfirmationToken = false
-        ) {
+        )
+        {
             ExtendedMembershipProvider provider = VerifyProvider();
             Debug.Assert(provider != null); // VerifyProvider checks this
 
@@ -406,7 +417,8 @@ namespace WebMatrix.WebData
             string password,
             object propertyValues = null,
             bool requireConfirmationToken = false
-        ) {
+        )
+        {
             ExtendedMembershipProvider provider = VerifyProvider();
             Debug.Assert(provider != null); // VerifyProvider checks this
 
@@ -440,7 +452,8 @@ namespace WebMatrix.WebData
         public static string GeneratePasswordResetToken(
             string userName,
             int tokenExpirationInMinutesFromNow = 1440
-        ) {
+        )
+        {
             ExtendedMembershipProvider provider = VerifyProvider();
             Debug.Assert(provider != null); // VerifyProvider checks this
 
@@ -549,7 +562,8 @@ namespace WebMatrix.WebData
             string userName,
             int allowedPasswordAttempts,
             int intervalInSeconds
-        ) {
+        )
+        {
             VerifyProvider();
             return IsAccountLockedOut(
                 userName,
@@ -562,7 +576,8 @@ namespace WebMatrix.WebData
             string userName,
             int allowedPasswordAttempts,
             TimeSpan interval
-        ) {
+        )
+        {
             ExtendedMembershipProvider provider = VerifyProvider();
             Debug.Assert(provider != null); // VerifyProvider checks this
 
@@ -579,7 +594,8 @@ namespace WebMatrix.WebData
             string userName,
             int allowedPasswordAttempts,
             TimeSpan interval
-        ) {
+        )
+        {
             return (
                 provider.GetUser(userName, false) != null
                 && provider.GetPasswordFailuresSinceLastSuccess(userName) > allowedPasswordAttempts

@@ -133,7 +133,8 @@ namespace Newtonsoft.Json.Serialization
             JsonProperty? member,
             JsonContainerContract? containerContract,
             JsonProperty? containerProperty
-        ) {
+        )
+        {
             if (contract.TypeCode == PrimitiveTypeCode.Bytes)
             {
                 // if type name handling is enabled then wrap the base64 byte string in an object with the type name
@@ -167,7 +168,8 @@ namespace Newtonsoft.Json.Serialization
             JsonProperty? member,
             JsonContainerContract? containerContract,
             JsonProperty? containerProperty
-        ) {
+        )
+        {
             if (value == null)
             {
                 writer.WriteNull();
@@ -296,7 +298,8 @@ namespace Newtonsoft.Json.Serialization
             JsonProperty? property,
             JsonContainerContract? collectionContract,
             JsonProperty? containerProperty
-        ) {
+        )
+        {
             bool? isReference = null;
 
             // value could be coming from a dictionary or array and not have a property
@@ -329,7 +332,8 @@ namespace Newtonsoft.Json.Serialization
             JsonContract? valueContract,
             JsonContainerContract? collectionContract,
             JsonProperty? containerProperty
-        ) {
+        )
+        {
             if (value == null)
             {
                 return false;
@@ -340,7 +344,8 @@ namespace Newtonsoft.Json.Serialization
             if (
                 valueContract.ContractType == JsonContractType.Primitive
                 || valueContract.ContractType == JsonContractType.String
-            ) {
+            )
+            {
                 return false;
             }
 
@@ -381,12 +386,14 @@ namespace Newtonsoft.Json.Serialization
             object? memberValue,
             JsonObjectContract? containerContract,
             JsonProperty property
-        ) {
+        )
+        {
             if (
                 memberValue == null
                 && ResolvedNullValueHandling(containerContract, property)
                     == NullValueHandling.Ignore
-            ) {
+            )
+            {
                 return false;
             }
 
@@ -397,7 +404,8 @@ namespace Newtonsoft.Json.Serialization
                     ),
                     DefaultValueHandling.Ignore
                 ) && MiscellaneousUtils.ValueEquals(memberValue, property.GetResolvedDefaultValue())
-            ) {
+            )
+            {
                 return false;
             }
 
@@ -411,7 +419,8 @@ namespace Newtonsoft.Json.Serialization
             JsonContract? contract,
             JsonContainerContract? containerContract,
             JsonProperty? containerProperty
-        ) {
+        )
+        {
             if (value == null)
             {
                 return true;
@@ -422,7 +431,8 @@ namespace Newtonsoft.Json.Serialization
             if (
                 contract.ContractType == JsonContractType.Primitive
                 || contract.ContractType == JsonContractType.String
-            ) {
+            )
+            {
                 return true;
             }
 
@@ -562,7 +572,8 @@ namespace Newtonsoft.Json.Serialization
             object value,
             Type type,
             [NotNullWhen(true)] out string? s
-        ) {
+        )
+        {
 #if HAVE_TYPE_DESCRIPTOR
             if (JsonTypeReflector.CanTypeDescriptorConvertString(type, out TypeConverter converter))
             {
@@ -648,7 +659,8 @@ namespace Newtonsoft.Json.Serialization
             JsonProperty? member,
             JsonContainerContract? collectionContract,
             JsonProperty? containerProperty
-        ) {
+        )
+        {
             OnSerializing(writer, contract, value);
 
             _serializeStack.Add(value);
@@ -679,7 +691,8 @@ namespace Newtonsoft.Json.Serialization
                             out JsonContract? memberContract,
                             out object? memberValue
                         )
-                    ) {
+                    )
+                    {
                         continue;
                     }
 
@@ -697,7 +710,8 @@ namespace Newtonsoft.Json.Serialization
                             writer.ContainerPath,
                             ex
                         )
-                    ) {
+                    )
+                    {
                         HandleError(writer, initialDepth);
                     }
                     else
@@ -739,7 +753,8 @@ namespace Newtonsoft.Json.Serialization
                                 contract,
                                 member
                             )
-                        ) {
+                        )
+                        {
                             continue;
                         }
 
@@ -765,13 +780,15 @@ namespace Newtonsoft.Json.Serialization
             JsonProperty property,
             [NotNullWhen(true)] out JsonContract? memberContract,
             out object? memberValue
-        ) {
+        )
+        {
             if (
                 !property.Ignored
                 && property.Readable
                 && ShouldSerialize(writer, property, value)
                 && IsSpecified(writer, property, value)
-            ) {
+            )
+            {
                 if (property.PropertyContract == null)
                 {
                     property.PropertyContract = Serializer._contractResolver.ResolveContract(
@@ -795,7 +812,8 @@ namespace Newtonsoft.Json.Serialization
                             contract,
                             member
                         )
-                    ) {
+                    )
+                    {
                         property.WritePropertyName(writer);
                         WriteReference(writer, memberValue!);
                         return false;
@@ -810,7 +828,8 @@ namespace Newtonsoft.Json.Serialization
                             contract,
                             member
                         )
-                    ) {
+                    )
+                    {
                         return false;
                     }
 
@@ -863,7 +882,8 @@ namespace Newtonsoft.Json.Serialization
             JsonProperty? member,
             JsonContainerContract? collectionContract,
             JsonProperty? containerProperty
-        ) {
+        )
+        {
             writer.WriteStartObject();
 
             bool isReference =
@@ -880,7 +900,8 @@ namespace Newtonsoft.Json.Serialization
                     || member.Writable
                     || HasCreatorParameter(collectionContract, member)
                 )
-            ) {
+            )
+            {
                 WriteReferenceIdProperty(writer, contract.UnderlyingType, value);
             }
             if (
@@ -891,7 +912,8 @@ namespace Newtonsoft.Json.Serialization
                     collectionContract,
                     containerProperty
                 )
-            ) {
+            )
+            {
                 WriteTypeProperty(writer, contract.UnderlyingType);
             }
         }
@@ -982,7 +1004,8 @@ namespace Newtonsoft.Json.Serialization
             JsonContract contract,
             JsonContainerContract? collectionContract,
             JsonProperty? containerProperty
-        ) {
+        )
+        {
             if (ShouldWriteReference(value, null, contract, collectionContract, containerProperty))
             {
                 WriteReference(writer, value);
@@ -998,7 +1021,8 @@ namespace Newtonsoft.Json.Serialization
                         collectionContract,
                         containerProperty
                     )
-                ) {
+                )
+                {
                     return;
                 }
 
@@ -1051,7 +1075,8 @@ namespace Newtonsoft.Json.Serialization
             JsonProperty? member,
             JsonContainerContract? collectionContract,
             JsonProperty? containerProperty
-        ) {
+        )
+        {
             object underlyingList = values is IWrappedCollection wrappedCollection
                 ? wrappedCollection.UnderlyingCollection
                 : values;
@@ -1097,7 +1122,8 @@ namespace Newtonsoft.Json.Serialization
                                 contract,
                                 member
                             )
-                        ) {
+                        )
+                        {
                             SerializeValue(writer, value, valueContract, null, contract, member);
                         }
                     }
@@ -1113,7 +1139,8 @@ namespace Newtonsoft.Json.Serialization
                             writer.ContainerPath,
                             ex
                         )
-                    ) {
+                    )
+                    {
                         HandleError(writer, initialDepth);
                     }
                     else
@@ -1146,7 +1173,8 @@ namespace Newtonsoft.Json.Serialization
             JsonProperty? member,
             JsonContainerContract? collectionContract,
             JsonProperty? containerProperty
-        ) {
+        )
+        {
             OnSerializing(writer, contract, values);
 
             _serializeStack.Add(values);
@@ -1186,7 +1214,8 @@ namespace Newtonsoft.Json.Serialization
             JsonProperty? member,
             int initialDepth,
             int[] indices
-        ) {
+        )
+        {
             int dimension = indices.Length;
             int[] newIndices = new int[dimension + 1];
             for (int i = 0; i < dimension; i++)
@@ -1225,7 +1254,8 @@ namespace Newtonsoft.Json.Serialization
                                     contract,
                                     member
                                 )
-                            ) {
+                            )
+                            {
                                 SerializeValue(
                                     writer,
                                     value,
@@ -1272,7 +1302,8 @@ namespace Newtonsoft.Json.Serialization
             JsonProperty? member,
             JsonContainerContract? containerContract,
             JsonProperty? containerProperty
-        ) {
+        )
+        {
             bool isReference =
                 ResolveIsReference(contract, member, containerContract, containerProperty)
                 ?? HasFlag(
@@ -1334,7 +1365,8 @@ namespace Newtonsoft.Json.Serialization
             JsonProperty? member,
             JsonContainerContract? collectionContract,
             JsonProperty? containerProperty
-        ) {
+        )
+        {
             if (!JsonTypeReflector.FullyTrusted)
             {
                 string message =
@@ -1377,7 +1409,8 @@ namespace Newtonsoft.Json.Serialization
                         contract,
                         member
                     )
-                ) {
+                )
+                {
                     writer.WritePropertyName(serializationEntry.Name);
                     WriteReference(writer, serializationEntry.Value);
                 }
@@ -1390,7 +1423,8 @@ namespace Newtonsoft.Json.Serialization
                         contract,
                         member
                     )
-                ) {
+                )
+                {
                     writer.WritePropertyName(serializationEntry.Name);
                     SerializeValue(
                         writer,
@@ -1418,7 +1452,8 @@ namespace Newtonsoft.Json.Serialization
             JsonProperty? member,
             JsonContainerContract? collectionContract,
             JsonProperty? containerProperty
-        ) {
+        )
+        {
             OnSerializing(writer, contract, value);
             _serializeStack.Add(value);
 
@@ -1452,7 +1487,8 @@ namespace Newtonsoft.Json.Serialization
                                 out JsonContract? memberContract,
                                 out object? memberValue
                             )
-                        ) {
+                        )
+                        {
                             continue;
                         }
 
@@ -1477,7 +1513,8 @@ namespace Newtonsoft.Json.Serialization
                                 writer.ContainerPath,
                                 ex
                             )
-                        ) {
+                        )
+                        {
                             HandleError(writer, initialDepth);
                         }
                         else
@@ -1510,7 +1547,8 @@ namespace Newtonsoft.Json.Serialization
                                 contract,
                                 member
                             )
-                        ) {
+                        )
+                        {
                             string resolvedPropertyName =
                                 (contract.PropertyNameResolver != null)
                                     ? contract.PropertyNameResolver(memberName)
@@ -1538,7 +1576,8 @@ namespace Newtonsoft.Json.Serialization
                                 writer.ContainerPath,
                                 ex
                             )
-                        ) {
+                        )
+                        {
                             HandleError(writer, initialDepth);
                         }
                         else
@@ -1572,7 +1611,8 @@ namespace Newtonsoft.Json.Serialization
                         ReflectionUtils.GetDefaultValue(memberValue.GetType())
                     )
                 )
-            ) {
+            )
+            {
                 return false;
             }
 
@@ -1585,7 +1625,8 @@ namespace Newtonsoft.Json.Serialization
             JsonProperty? member,
             JsonContainerContract? containerContract,
             JsonProperty? containerProperty
-        ) {
+        )
+        {
             TypeNameHandling resolvedTypeNameHandling =
                 member?.TypeNameHandling
                 ?? containerProperty?.ItemTypeNameHandling
@@ -1613,7 +1654,8 @@ namespace Newtonsoft.Json.Serialization
                         containerContract.ItemContract == null
                         || contract.NonNullableUnderlyingType
                             != containerContract.ItemContract.CreatedType
-                    ) {
+                    )
+                    {
                         return true;
                     }
                 }
@@ -1640,7 +1682,8 @@ namespace Newtonsoft.Json.Serialization
             JsonProperty? member,
             JsonContainerContract? collectionContract,
             JsonProperty? containerProperty
-        ) {
+        )
+        {
 #pragma warning disable CS8600, CS8602, CS8604
             object underlyingDictionary = values is IWrappedDictionary wrappedDictionary
                 ? wrappedDictionary.UnderlyingDictionary
@@ -1716,7 +1759,8 @@ namespace Newtonsoft.Json.Serialization
                                     contract,
                                     member
                                 )
-                            ) {
+                            )
+                            {
                                 continue;
                             }
 
@@ -1736,7 +1780,8 @@ namespace Newtonsoft.Json.Serialization
                                 writer.ContainerPath,
                                 ex
                             )
-                        ) {
+                        )
+                        {
                             HandleError(writer, initialDepth);
                         }
                         else
@@ -1765,7 +1810,8 @@ namespace Newtonsoft.Json.Serialization
             object name,
             JsonContract contract,
             out bool escape
-        ) {
+        )
+        {
             if (contract.ContractType == JsonContractType.Primitive)
             {
                 JsonPrimitiveContract primitiveContract = (JsonPrimitiveContract)contract;
@@ -1834,7 +1880,8 @@ namespace Newtonsoft.Json.Serialization
                                 null,
                                 out string? enumName
                             )
-                        ) {
+                        )
+                        {
                             return enumName;
                         }
 

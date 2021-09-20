@@ -112,7 +112,8 @@ namespace RunTests
             Options options,
             TimeSpan timeout,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             using var cts = CancellationTokenSource.CreateLinkedTokenSource(cancellationToken);
             var runTask = RunAsync(options, cts.Token);
             var timeoutTask = Task.Delay(options.Timeout.Value, cancellationToken);
@@ -143,7 +144,8 @@ namespace RunTests
         private static async Task<int> RunAsync(
             Options options,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var testExecutor = CreateTestExecutor(options);
             var testRunner = new TestRunner(options, testExecutor);
             var start = DateTime.Now;
@@ -236,12 +238,14 @@ namespace RunTests
         private static async Task HandleTimeout(
             Options options,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             async Task DumpProcess(
                 Process targetProcess,
                 string procDumpExeFilePath,
                 string dumpFilePath
-            ) {
+            )
+            {
                 var name = targetProcess.ProcessName;
 
                 // Our space for saving dump files is limited. Skip dumping for processes that won't contribute
@@ -298,7 +302,8 @@ namespace RunTests
                 foreach (
                     var proc in ProcessUtil.GetProcessTree(Process.GetCurrentProcess())
                         .OrderBy(x => x.ProcessName)
-                ) {
+                )
+                {
                     var dumpDir = procDumpInfo.DumpDirectory;
                     var dumpFilePath = Path.Combine(dumpDir, $"{proc.ProcessName}-{counter}.dmp");
                     await DumpProcess(proc, procDumpInfo.ProcDumpFilePath, dumpFilePath);
@@ -329,7 +334,8 @@ namespace RunTests
                 var assemblyPath in assemblyPaths.OrderByDescending(
                     x => new FileInfo(x.FilePath).Length
                 )
-            ) {
+            )
+            {
                 list.AddRange(
                     scheduler.Schedule(assemblyPath.FilePath)
                         .Select(
@@ -343,7 +349,8 @@ namespace RunTests
 
         private static List<(string FilePath, string TargetFramework)> GetAssemblyFilePaths(
             Options options
-        ) {
+        )
+        {
             var list = new List<(string, string)>();
             var binDirectory = Path.Combine(options.ArtifactsDirectory, "bin");
             foreach (
@@ -352,7 +359,8 @@ namespace RunTests
                     "*",
                     SearchOption.TopDirectoryOnly
                 )
-            ) {
+            )
+            {
                 var name = Path.GetFileName(project);
                 var include = false;
                 foreach (var pattern in options.IncludeFilter)

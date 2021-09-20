@@ -87,7 +87,8 @@ namespace Microsoft.WebAssembly.Diagnostics
             ProcessStartInfo psi,
             HttpContext context,
             Func<string, Task<string>> extract_conn_url
-        ) {
+        )
+        {
             if (!context.WebSockets.IsWebSocketRequest)
             {
                 context.Response.StatusCode = 400;
@@ -160,7 +161,8 @@ namespace Microsoft.WebAssembly.Diagnostics
             IWebHostEnvironment env,
             ILogger<TestHarnessProxy> logger,
             ILoggerFactory loggerFactory
-        ) {
+        )
+        {
             this.Logger = logger;
             this._loggerFactory = loggerFactory;
 

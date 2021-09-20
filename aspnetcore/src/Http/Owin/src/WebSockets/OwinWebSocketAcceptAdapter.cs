@@ -124,7 +124,8 @@ namespace Microsoft.AspNetCore.Owin
                 if (
                     environment.TryGetValue(OwinConstants.WebSocket.Accept, out accept)
                     && accept is WebSocketAccept
-                ) {
+                )
+                {
                     var adapter = new OwinWebSocketAcceptAdapter((WebSocketAccept)accept);
 
                     environment[OwinConstants.WebSocket.AcceptAlt] = new WebSocketAcceptAlt(

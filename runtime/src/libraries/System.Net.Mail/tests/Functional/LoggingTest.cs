@@ -45,7 +45,8 @@ namespace System.Net.Mail.Tests
                                 "Private.InternalDiagnostics.System.Net.Mail",
                                 EventLevel.Verbose
                             )
-                        ) {
+                        )
+                        {
                             var events = new ConcurrentQueue<EventWrittenEventArgs>();
                             listener.RunWithCallback(
                                 events.Enqueue,

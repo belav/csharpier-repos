@@ -12,7 +12,8 @@ namespace System.Linq.Expressions.Tests
         [Theory, ClassData(typeof(CompilationTypes))]
         public static void CheckNonLiftedComparisonLessThanOrEqualNullableByteTest(
             bool useInterpreter
-        ) {
+        )
+        {
             byte?[] values = new byte?[] { null, 0, 1, byte.MaxValue };
             for (int i = 0; i < values.Length; i++)
             {
@@ -30,7 +31,8 @@ namespace System.Linq.Expressions.Tests
         [Theory, ClassData(typeof(CompilationTypes))]
         public static void CheckNonLiftedComparisonLessThanOrEqualNullableCharTest(
             bool useInterpreter
-        ) {
+        )
+        {
             char?[] values = new char?[] { null, '\0', '\b', 'A', '\uffff' };
             for (int i = 0; i < values.Length; i++)
             {
@@ -48,7 +50,8 @@ namespace System.Linq.Expressions.Tests
         [Theory, ClassData(typeof(CompilationTypes))]
         public static void CheckNonLiftedComparisonLessThanOrEqualNullableDecimalTest(
             bool useInterpreter
-        ) {
+        )
+        {
             decimal?[] values = new decimal?[]
             {
                 null,
@@ -74,7 +77,8 @@ namespace System.Linq.Expressions.Tests
         [Theory, ClassData(typeof(CompilationTypes))]
         public static void CheckNonLiftedComparisonLessThanOrEqualNullableDoubleTest(
             bool useInterpreter
-        ) {
+        )
+        {
             double?[] values = new double?[]
             {
                 null,
@@ -104,7 +108,8 @@ namespace System.Linq.Expressions.Tests
         [Theory, ClassData(typeof(CompilationTypes))]
         public static void CheckNonLiftedComparisonLessThanOrEqualNullableFloatTest(
             bool useInterpreter
-        ) {
+        )
+        {
             float?[] values = new float?[]
             {
                 null,
@@ -134,7 +139,8 @@ namespace System.Linq.Expressions.Tests
         [Theory, ClassData(typeof(CompilationTypes))]
         public static void CheckNonLiftedComparisonLessThanOrEqualNullableIntTest(
             bool useInterpreter
-        ) {
+        )
+        {
             int?[] values = new int?[] { null, 0, 1, -1, int.MinValue, int.MaxValue };
             for (int i = 0; i < values.Length; i++)
             {
@@ -152,7 +158,8 @@ namespace System.Linq.Expressions.Tests
         [Theory, ClassData(typeof(CompilationTypes))]
         public static void CheckNonLiftedComparisonLessThanOrEqualNullableLongTest(
             bool useInterpreter
-        ) {
+        )
+        {
             long?[] values = new long?[] { null, 0, 1, -1, long.MinValue, long.MaxValue };
             for (int i = 0; i < values.Length; i++)
             {
@@ -170,7 +177,8 @@ namespace System.Linq.Expressions.Tests
         [Theory, ClassData(typeof(CompilationTypes))]
         public static void CheckNonLiftedComparisonLessThanOrEqualNullableSByteTest(
             bool useInterpreter
-        ) {
+        )
+        {
             sbyte?[] values = new sbyte?[] { null, 0, 1, -1, sbyte.MinValue, sbyte.MaxValue };
             for (int i = 0; i < values.Length; i++)
             {
@@ -188,7 +196,8 @@ namespace System.Linq.Expressions.Tests
         [Theory, ClassData(typeof(CompilationTypes))]
         public static void CheckNonLiftedComparisonLessThanOrEqualNullableShortTest(
             bool useInterpreter
-        ) {
+        )
+        {
             short?[] values = new short?[] { null, 0, 1, -1, short.MinValue, short.MaxValue };
             for (int i = 0; i < values.Length; i++)
             {
@@ -206,7 +215,8 @@ namespace System.Linq.Expressions.Tests
         [Theory, ClassData(typeof(CompilationTypes))]
         public static void CheckNonLiftedComparisonLessThanOrEqualNullableUIntTest(
             bool useInterpreter
-        ) {
+        )
+        {
             uint?[] values = new uint?[] { null, 0, 1, uint.MaxValue };
             for (int i = 0; i < values.Length; i++)
             {
@@ -224,7 +234,8 @@ namespace System.Linq.Expressions.Tests
         [Theory, ClassData(typeof(CompilationTypes))]
         public static void CheckNonLiftedComparisonLessThanOrEqualNullableULongTest(
             bool useInterpreter
-        ) {
+        )
+        {
             ulong?[] values = new ulong?[] { null, 0, 1, ulong.MaxValue };
             for (int i = 0; i < values.Length; i++)
             {
@@ -242,7 +253,8 @@ namespace System.Linq.Expressions.Tests
         [Theory, ClassData(typeof(CompilationTypes))]
         public static void CheckNonLiftedComparisonLessThanOrEqualNullableUShortTest(
             bool useInterpreter
-        ) {
+        )
+        {
             ushort?[] values = new ushort?[] { null, 0, 1, ushort.MaxValue };
             for (int i = 0; i < values.Length; i++)
             {
@@ -265,7 +277,8 @@ namespace System.Linq.Expressions.Tests
             byte? a,
             byte? b,
             bool useInterpreter
-        ) {
+        )
+        {
             Expression<Func<bool>> e = Expression.Lambda<Func<bool>>(
                 Expression.LessThanOrEqual(
                     Expression.Constant(a, typeof(byte?)),
@@ -285,7 +298,8 @@ namespace System.Linq.Expressions.Tests
             char? a,
             char? b,
             bool useInterpreter
-        ) {
+        )
+        {
             Expression<Func<bool>> e = Expression.Lambda<Func<bool>>(
                 Expression.LessThanOrEqual(
                     Expression.Constant(a, typeof(char?)),
@@ -305,7 +319,8 @@ namespace System.Linq.Expressions.Tests
             decimal? a,
             decimal? b,
             bool useInterpreter
-        ) {
+        )
+        {
             Expression<Func<bool>> e = Expression.Lambda<Func<bool>>(
                 Expression.LessThanOrEqual(
                     Expression.Constant(a, typeof(decimal?)),
@@ -325,7 +340,8 @@ namespace System.Linq.Expressions.Tests
             double? a,
             double? b,
             bool useInterpreter
-        ) {
+        )
+        {
             Expression<Func<bool>> e = Expression.Lambda<Func<bool>>(
                 Expression.LessThanOrEqual(
                     Expression.Constant(a, typeof(double?)),
@@ -345,7 +361,8 @@ namespace System.Linq.Expressions.Tests
             float? a,
             float? b,
             bool useInterpreter
-        ) {
+        )
+        {
             Expression<Func<bool>> e = Expression.Lambda<Func<bool>>(
                 Expression.LessThanOrEqual(
                     Expression.Constant(a, typeof(float?)),
@@ -365,7 +382,8 @@ namespace System.Linq.Expressions.Tests
             int? a,
             int? b,
             bool useInterpreter
-        ) {
+        )
+        {
             Expression<Func<bool>> e = Expression.Lambda<Func<bool>>(
                 Expression.LessThanOrEqual(
                     Expression.Constant(a, typeof(int?)),
@@ -385,7 +403,8 @@ namespace System.Linq.Expressions.Tests
             long? a,
             long? b,
             bool useInterpreter
-        ) {
+        )
+        {
             Expression<Func<bool>> e = Expression.Lambda<Func<bool>>(
                 Expression.LessThanOrEqual(
                     Expression.Constant(a, typeof(long?)),
@@ -405,7 +424,8 @@ namespace System.Linq.Expressions.Tests
             sbyte? a,
             sbyte? b,
             bool useInterpreter
-        ) {
+        )
+        {
             Expression<Func<bool>> e = Expression.Lambda<Func<bool>>(
                 Expression.LessThanOrEqual(
                     Expression.Constant(a, typeof(sbyte?)),
@@ -425,7 +445,8 @@ namespace System.Linq.Expressions.Tests
             short? a,
             short? b,
             bool useInterpreter
-        ) {
+        )
+        {
             Expression<Func<bool>> e = Expression.Lambda<Func<bool>>(
                 Expression.LessThanOrEqual(
                     Expression.Constant(a, typeof(short?)),
@@ -445,7 +466,8 @@ namespace System.Linq.Expressions.Tests
             uint? a,
             uint? b,
             bool useInterpreter
-        ) {
+        )
+        {
             Expression<Func<bool>> e = Expression.Lambda<Func<bool>>(
                 Expression.LessThanOrEqual(
                     Expression.Constant(a, typeof(uint?)),
@@ -465,7 +487,8 @@ namespace System.Linq.Expressions.Tests
             ulong? a,
             ulong? b,
             bool useInterpreter
-        ) {
+        )
+        {
             Expression<Func<bool>> e = Expression.Lambda<Func<bool>>(
                 Expression.LessThanOrEqual(
                     Expression.Constant(a, typeof(ulong?)),
@@ -485,7 +508,8 @@ namespace System.Linq.Expressions.Tests
             ushort? a,
             ushort? b,
             bool useInterpreter
-        ) {
+        )
+        {
             Expression<Func<bool>> e = Expression.Lambda<Func<bool>>(
                 Expression.LessThanOrEqual(
                     Expression.Constant(a, typeof(ushort?)),

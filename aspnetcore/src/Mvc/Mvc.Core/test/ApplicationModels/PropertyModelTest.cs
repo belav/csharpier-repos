@@ -54,7 +54,8 @@ namespace Microsoft.AspNetCore.Mvc.ApplicationModels
                 }
                 else if (
                     typeof(IDictionary<object, object>).IsAssignableFrom(property.PropertyType)
-                ) {
+                )
+                {
                     Assert.Equal(value1, value2);
 
                     // Ensure non-default value
@@ -63,7 +64,8 @@ namespace Microsoft.AspNetCore.Mvc.ApplicationModels
                 else if (
                     property.PropertyType.GetTypeInfo().IsValueType
                     || Nullable.GetUnderlyingType(property.PropertyType) != null
-                ) {
+                )
+                {
                     Assert.Equal(value1, value2);
 
                     // Ensure non-default value

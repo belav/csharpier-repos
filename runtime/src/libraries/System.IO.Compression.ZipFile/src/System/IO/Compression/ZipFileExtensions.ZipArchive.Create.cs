@@ -87,7 +87,8 @@ namespace System.IO.Compression
             string sourceFileName,
             string entryName,
             CompressionLevel? compressionLevel
-        ) {
+        )
+        {
             if (destination == null)
                 throw new ArgumentNullException(nameof(destination));
 
@@ -111,7 +112,8 @@ namespace System.IO.Compression
                     bufferSize: 0x1000,
                     useAsync: false
                 )
-            ) {
+            )
+            {
                 ZipArchiveEntry entry = compressionLevel.HasValue
                     ? destination.CreateEntry(entryName, compressionLevel.Value)
                     : destination.CreateEntry(entryName);

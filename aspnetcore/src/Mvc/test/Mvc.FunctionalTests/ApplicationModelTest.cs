@@ -190,7 +190,8 @@ namespace Microsoft.AspNetCore.Mvc.FunctionalTests
         public async Task ApplicationModel_CanDuplicateController_InMultipleAreas(
             string areaName,
             string expectedContent
-        ) {
+        )
+        {
             // Arrange & Act
             var response = await Client.GetAsync(areaName + "/MultipleAreas/Index");
             var content = await response.Content.ReadAsStringAsync();
@@ -206,7 +207,8 @@ namespace Microsoft.AspNetCore.Mvc.FunctionalTests
         public async Task ControllerModel_CanDuplicateActions_RoutesToDifferentNames(
             string actionName,
             string expectedContent
-        ) {
+        )
+        {
             // Arrange & Act
             var response = await Client.GetAsync("ActionModel/" + actionName);
 

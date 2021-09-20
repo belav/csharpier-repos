@@ -129,7 +129,8 @@ namespace JIT.HardwareIntrinsics.Arm
                     (alignment != 16 && alignment != 8)
                     || (alignment * 2) < sizeOfinArray1
                     || (alignment * 2) < sizeOfoutArray
-                ) {
+                )
+                {
                     throw new ArgumentException("Invalid value of alignment");
                 }
 
@@ -527,7 +528,8 @@ namespace JIT.HardwareIntrinsics.Arm
             UInt32 op3,
             void* result,
             [CallerMemberName] string method = ""
-        ) {
+        )
+        {
             UInt32[] inArray1 = new UInt32[Op1ElementCount];
             UInt32[] outArray = new UInt32[RetElementCount];
 
@@ -546,7 +548,8 @@ namespace JIT.HardwareIntrinsics.Arm
             UInt32 op3,
             void* result,
             [CallerMemberName] string method = ""
-        ) {
+        )
+        {
             UInt32[] inArray1 = new UInt32[Op1ElementCount];
             UInt32[] outArray = new UInt32[RetElementCount];
 
@@ -569,7 +572,8 @@ namespace JIT.HardwareIntrinsics.Arm
             UInt32 thirdOp,
             UInt32[] result,
             [CallerMemberName] string method = ""
-        ) {
+        )
+        {
             bool succeeded = true;
 
             for (var i = 0; i < RetElementCount; i++)

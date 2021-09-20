@@ -43,7 +43,8 @@ namespace Microsoft.AspNetCore.Components.Forms
         public Stream OpenReadStream(
             long maxAllowedSize = 512000,
             CancellationToken cancellationToken = default
-        ) {
+        )
+        {
             if (Size > maxAllowedSize)
             {
                 throw new IOException(

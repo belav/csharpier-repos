@@ -17,7 +17,8 @@ namespace System.Speech.AudioFormat
             short bitsPerSample,
             short channelCount,
             byte[] formatSpecificData
-        ) {
+        )
+        {
             if (encodingFormat == 0)
             {
                 throw new ArgumentException(
@@ -84,13 +85,15 @@ namespace System.Speech.AudioFormat
             int averageBytesPerSecond,
             int blockAlign,
             byte[] formatSpecificData
-        ) : this(
-            encodingFormat,
-            samplesPerSecond,
-            (short)bitsPerSample,
-            (short)channelCount,
-            formatSpecificData
-        ) {
+        )
+            : this(
+                encodingFormat,
+                samplesPerSecond,
+                (short)bitsPerSample,
+                (short)channelCount,
+                formatSpecificData
+            )
+        {
             // Don't explicitly check these are sensible values - allow flexibility here as some formats may do unexpected things here.
             if (averageBytesPerSecond <= 0)
             {
@@ -175,7 +178,8 @@ namespace System.Speech.AudioFormat
                     && _channelCount.Equals(refObj._channelCount)
                     && _samplesPerSecond.Equals(refObj._samplesPerSecond)
                 )
-            ) {
+            )
+            {
                 return false;
             }
             if (_formatSpecificData.Length != refObj._formatSpecificData.Length)

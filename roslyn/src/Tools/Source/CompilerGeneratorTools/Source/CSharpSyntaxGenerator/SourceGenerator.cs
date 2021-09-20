@@ -56,7 +56,8 @@ namespace CSharpSyntaxGenerator
             in GeneratorExecutionContext context,
             out AdditionalText? input,
             out SourceText? inputText
-        ) {
+        )
+        {
             input = context.AdditionalFiles.SingleOrDefault(
                 a => Path.GetFileName(a.Path) == "Syntax.xml"
             );
@@ -85,7 +86,8 @@ namespace CSharpSyntaxGenerator
             out ImmutableArray<(string hintName, SourceText sourceText)> sources,
             out ImmutableArray<Diagnostic> diagnostics,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             Tree tree;
             var reader = XmlReader.Create(
                 new SourceTextReader(inputText),

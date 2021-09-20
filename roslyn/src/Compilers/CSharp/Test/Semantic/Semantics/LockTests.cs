@@ -797,7 +797,8 @@ class Test
             Symbol symbol,
             int index = 1,
             bool isSymbolNull = false
-        ) {
+        )
+        {
             var tree = compilation.SyntaxTrees.Single();
             var model = compilation.GetSemanticModel(tree);
 

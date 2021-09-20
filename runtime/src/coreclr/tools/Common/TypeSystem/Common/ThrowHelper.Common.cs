@@ -65,7 +65,8 @@ namespace Internal.TypeSystem
             ExceptionStringID id,
             TypeDesc type,
             string messageArg
-        ) {
+        )
+        {
             ThrowTypeLoadException(id, Format.Type(type), Format.OwningModule(type), messageArg);
         }
 
@@ -123,7 +124,8 @@ namespace Internal.TypeSystem
                 TypeDesc owningType,
                 string methodName,
                 MethodSignature signature
-            ) {
+            )
+            {
                 StringBuilder sb = new StringBuilder();
 
                 if (signature != null)

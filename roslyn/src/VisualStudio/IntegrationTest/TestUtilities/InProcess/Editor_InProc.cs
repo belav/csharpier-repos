@@ -470,7 +470,8 @@ namespace Microsoft.VisualStudio.IntegrationTest.Utilities.InProcess
             ILightBulbBroker broker,
             IWpfTextView view,
             IViewClassifierAggregatorService viewClassifierAggregator
-        ) {
+        )
+        {
             await LightBulbHelper.WaitForLightBulbSessionAsync(broker, view).ConfigureAwait(true);
 
             var bufferType = view.TextBuffer.ContentType.DisplayName;
@@ -500,7 +501,8 @@ namespace Microsoft.VisualStudio.IntegrationTest.Utilities.InProcess
                 if (
                     activeSession.TryGetSuggestedActionSets(out var actionSets)
                     != QuerySuggestedActionCompletionStatus.Completed
-                ) {
+                )
+                {
                     actionSets = Array.Empty<SuggestedActionSet>();
                 }
 
@@ -595,7 +597,8 @@ namespace Microsoft.VisualStudio.IntegrationTest.Utilities.InProcess
             if (
                 (isOpen && dialogAutomationElement == null)
                 || (!isOpen && dialogAutomationElement != null)
-            ) {
+            )
+            {
                 throw new InvalidOperationException(
                     $"Expected the {dialogAutomationId} dialog to be {(isOpen ? "open" : "closed")}, but it is not."
                 );
@@ -649,7 +652,8 @@ namespace Microsoft.VisualStudio.IntegrationTest.Utilities.InProcess
             Func<T, CancellationToken, bool> stoppingCondition,
             TimeSpan delay,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             do
             {
                 cancellationToken.ThrowIfCancellationRequested();
@@ -761,7 +765,8 @@ namespace Microsoft.VisualStudio.IntegrationTest.Utilities.InProcess
             string propertyName,
             string propertyValue,
             string propertyTypeName = null
-        ) {
+        )
+        {
             using (var waitHandle = new ManualResetEvent(false))
             {
                 var designerHost = (IDesignerHost)GetDTE().ActiveWindow.Object;
@@ -836,7 +841,8 @@ namespace Microsoft.VisualStudio.IntegrationTest.Utilities.InProcess
             string buttonName,
             string eventName,
             string eventHandlerName
-        ) {
+        )
+        {
             using (var waitHandle = new ManualResetEvent(false))
             {
                 var designerHost = (IDesignerHost)GetDTE().ActiveWindow.Object;

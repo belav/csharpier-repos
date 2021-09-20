@@ -63,7 +63,8 @@ namespace System.Text.Json.Serialization.Tests
                 ref Utf8JsonReader reader,
                 Type typeToConvert,
                 JsonSerializerOptions options
-            ) {
+            )
+            {
                 if (reader.TokenType != JsonTokenType.StartArray)
                 {
                     throw new JsonException();
@@ -104,7 +105,8 @@ namespace System.Text.Json.Serialization.Tests
                 Utf8JsonWriter writer,
                 List<T> value,
                 JsonSerializerOptions options
-            ) {
+            )
+            {
                 writer.WriteStartArray();
 
                 foreach (T item in value)
@@ -187,7 +189,8 @@ namespace System.Text.Json.Serialization.Tests
                 ref Utf8JsonReader reader,
                 Type typeToConvert,
                 JsonSerializerOptions options
-            ) {
+            )
+            {
                 if (reader.TokenType != JsonTokenType.StartArray)
                 {
                     throw new JsonException();
@@ -213,7 +216,8 @@ namespace System.Text.Json.Serialization.Tests
                 Utf8JsonWriter writer,
                 IList value,
                 JsonSerializerOptions options
-            ) {
+            )
+            {
                 writer.WriteStartArray();
 
                 foreach (int item in value)
@@ -324,7 +328,8 @@ namespace System.Text.Json.Serialization.Tests
                 ref Utf8JsonReader reader,
                 Type typeToConvert,
                 JsonSerializerOptions options
-            ) {
+            )
+            {
                 using (var doc = JsonDocument.ParseValue(ref reader))
                 {
                     return doc.RootElement.EnumerateArray().Select(e => e.ToString()).ToList();
@@ -335,7 +340,8 @@ namespace System.Text.Json.Serialization.Tests
                 Utf8JsonWriter writer,
                 List<string> value,
                 JsonSerializerOptions options
-            ) {
+            )
+            {
                 JsonSerializer.Serialize(writer, value, options);
             }
         }
@@ -349,7 +355,8 @@ namespace System.Text.Json.Serialization.Tests
                 ref Utf8JsonReader reader,
                 Type typeToConvert,
                 JsonSerializerOptions options
-            ) {
+            )
+            {
                 using (var doc = JsonDocument.ParseValue(ref reader))
                 {
                     return doc.RootElement.EnumerateArray().Select(e => e.ToString()).ToArray();
@@ -360,7 +367,8 @@ namespace System.Text.Json.Serialization.Tests
                 Utf8JsonWriter writer,
                 string[] value,
                 JsonSerializerOptions options
-            ) {
+            )
+            {
                 JsonSerializer.Serialize(writer, value, options);
             }
         }
@@ -374,7 +382,8 @@ namespace System.Text.Json.Serialization.Tests
                 ref Utf8JsonReader reader,
                 Type typeToConvert,
                 JsonSerializerOptions options
-            ) {
+            )
+            {
                 var dictionary = new Dictionary<string, string>();
 
                 using (var doc = JsonDocument.ParseValue(ref reader))
@@ -392,7 +401,8 @@ namespace System.Text.Json.Serialization.Tests
                 Utf8JsonWriter writer,
                 Dictionary<string, string> value,
                 JsonSerializerOptions options
-            ) {
+            )
+            {
                 JsonSerializer.Serialize(writer, value, options);
             }
         }

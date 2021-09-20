@@ -32,7 +32,8 @@ namespace Microsoft.CodeAnalysis.CSharp
 
             protected override ArrayBuilder<BoundStatement> BuilderForSection(
                 SyntaxNode whenClauseSyntax
-            ) {
+            )
+            {
                 // We need the section syntax to get the section builder from the map. Unfortunately this is a bit awkward
                 SyntaxNode? sectionSyntax = whenClauseSyntax is SwitchLabelSyntax l
                     ? l.Parent

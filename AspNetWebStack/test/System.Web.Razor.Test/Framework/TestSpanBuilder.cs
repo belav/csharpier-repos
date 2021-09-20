@@ -85,7 +85,8 @@ namespace System.Web.Razor.Test.Framework
             this SpanFactory self,
             string content,
             CSharpSymbolType type
-        ) {
+        )
+        {
             return self.Span(SpanKind.Transition, content, type).Accepts(AcceptedCharacters.None);
         }
 
@@ -99,7 +100,8 @@ namespace System.Web.Razor.Test.Framework
             this SpanFactory self,
             string content,
             VBSymbolType type
-        ) {
+        )
+        {
             return self.Span(SpanKind.Transition, content, type).Accepts(AcceptedCharacters.None);
         }
 
@@ -125,7 +127,8 @@ namespace System.Web.Razor.Test.Framework
             this SpanFactory self,
             string content,
             HtmlSymbolType type
-        ) {
+        )
+        {
             return self.Span(SpanKind.Transition, content, type).Accepts(AcceptedCharacters.None);
         }
 
@@ -138,7 +141,8 @@ namespace System.Web.Razor.Test.Framework
             this SpanFactory self,
             string content,
             CSharpSymbolType type
-        ) {
+        )
+        {
             return self.Span(SpanKind.MetaCode, content, type);
         }
 
@@ -146,7 +150,8 @@ namespace System.Web.Razor.Test.Framework
             this SpanFactory self,
             string content,
             VBSymbolType type
-        ) {
+        )
+        {
             return self.Span(SpanKind.MetaCode, content, type);
         }
 
@@ -159,7 +164,8 @@ namespace System.Web.Razor.Test.Framework
             this SpanFactory self,
             string content,
             HtmlSymbolType type
-        ) {
+        )
+        {
             return self.Span(SpanKind.MetaCode, content, type);
         }
 
@@ -167,7 +173,8 @@ namespace System.Web.Razor.Test.Framework
             this SpanFactory self,
             string content,
             CSharpSymbolType type
-        ) {
+        )
+        {
             return self.Span(SpanKind.Comment, content, type);
         }
 
@@ -175,7 +182,8 @@ namespace System.Web.Razor.Test.Framework
             this SpanFactory self,
             string content,
             VBSymbolType type
-        ) {
+        )
+        {
             return self.Span(SpanKind.Comment, content, type);
         }
 
@@ -183,7 +191,8 @@ namespace System.Web.Razor.Test.Framework
             this SpanFactory self,
             string content,
             HtmlSymbolType type
-        ) {
+        )
+        {
             return self.Span(SpanKind.Comment, content, type);
         }
 
@@ -202,7 +211,8 @@ namespace System.Web.Razor.Test.Framework
         public static SourceLocation GetLocationAndAdvance(
             this SourceLocationTracker self,
             string content
-        ) {
+        )
+        {
             SourceLocation ret = self.CurrentLocation;
             self.UpdateLocation(content);
             return ret;
@@ -272,7 +282,8 @@ namespace System.Web.Razor.Test.Framework
             SpanKind kind,
             string content,
             Func<SourceLocation, ISymbol> ctor
-        ) {
+        )
+        {
             SourceLocation start = LocationTracker.CurrentLocation;
             LocationTracker.UpdateLocation(content);
             return new SpanConstructor(kind, new[] { ctor(start) });
@@ -325,14 +336,16 @@ namespace System.Web.Razor.Test.Framework
         public static SpanConstructor Accepts(
             this SpanConstructor self,
             AcceptedCharacters accepted
-        ) {
+        )
+        {
             return self.With(eh => eh.AcceptedCharacters = accepted);
         }
 
         public static SpanConstructor AutoCompleteWith(
             this SpanConstructor self,
             string autoCompleteString
-        ) {
+        )
+        {
             return AutoCompleteWith(self, autoCompleteString, atEndOfSpan: false);
         }
 
@@ -340,7 +353,8 @@ namespace System.Web.Razor.Test.Framework
             this SpanConstructor self,
             string autoCompleteString,
             bool atEndOfSpan
-        ) {
+        )
+        {
             return self.With(
                 new AutoCompleteEditHandler(SpanConstructor.TestTokenizer)
                 {

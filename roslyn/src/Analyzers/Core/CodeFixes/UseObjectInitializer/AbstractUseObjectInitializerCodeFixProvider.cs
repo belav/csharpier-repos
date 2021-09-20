@@ -60,7 +60,8 @@ namespace Microsoft.CodeAnalysis.UseObjectInitializer
             ImmutableArray<Diagnostic> diagnostics,
             SyntaxEditor editor,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             // Fix-All for this feature is somewhat complicated.  As Object-Initializers
             // could be arbitrarily nested, we have to make sure that any edits we make
             // to one Object-Initializer are seen by any higher ones.  In order to do this
@@ -153,12 +154,11 @@ namespace Microsoft.CodeAnalysis.UseObjectInitializer
 
         private class MyCodeAction : CustomCodeActions.DocumentChangeAction
         {
-            public MyCodeAction(
-                Func<CancellationToken, Task<Document>> createChangedDocument
-            ) : base(
-                AnalyzersResources.Object_initialization_can_be_simplified,
-                createChangedDocument
-            ) { }
+            public MyCodeAction(Func<CancellationToken, Task<Document>> createChangedDocument)
+                : base(
+                    AnalyzersResources.Object_initialization_can_be_simplified,
+                    createChangedDocument
+                ) { }
         }
     }
 }

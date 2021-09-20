@@ -133,7 +133,8 @@ namespace Microsoft.AspNetCore.Mvc.ViewFeatures.Filters
             ITempDataDictionaryFactory factory,
             IList<IFilterMetadata> filters,
             HttpContext httpContext
-        ) {
+        )
+        {
             var tempData = factory.GetTempData(httpContext);
 
             for (var i = 0; i < filters.Count; i++)

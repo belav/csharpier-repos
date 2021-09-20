@@ -24,7 +24,8 @@ namespace System.Collections.Specialized.Tests
         {
             foreach (
                 object[] data in StringCollection_Data().Concat(StringCollection_Duplicates_Data())
-            ) {
+            )
+            {
                 string[] d = (string[])(data[1]);
                 foreach (string element in new[] { ElementNotPresent, null })
                 {
@@ -50,7 +51,8 @@ namespace System.Collections.Specialized.Tests
         {
             foreach (
                 object[] data in StringCollection_Data().Concat(StringCollection_Duplicates_Data())
-            ) {
+            )
+            {
                 string[] d = (string[])(data[1]);
                 if (d.Length > 0)
                 {
@@ -351,7 +353,8 @@ namespace System.Collections.Specialized.Tests
         public static void GetEnumerator_ModifiedCollectionTest(
             StringCollection collection,
             string[] data
-        ) {
+        )
+        {
             StringEnumerator enumerator = collection.GetEnumerator();
             Assert.NotNull(enumerator);
             if (data.Length > 0)
@@ -496,7 +499,8 @@ namespace System.Collections.Specialized.Tests
             string[] data,
             string element,
             int location
-        ) {
+        )
+        {
             collection.Insert(location, element);
             Assert.Equal(data.Length + 1, collection.Count);
             if (element == ElementNotPresent)
@@ -527,7 +531,8 @@ namespace System.Collections.Specialized.Tests
             string[] data,
             string element,
             int location
-        ) {
+        )
+        {
             collection.Insert(location, element);
             Assert.Equal(data.Length + 1, collection.Count);
             if (element == ElementNotPresent)

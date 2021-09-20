@@ -47,7 +47,8 @@ namespace Microsoft.EntityFrameworkCore
 
         protected virtual void LifetimeTest(
             params IDictionary<Type, ServiceCharacteristics>[] serviceDefinitions
-        ) {
+        )
+        {
             var services = AddServices(new ServiceCollection());
 
             foreach (var coreService in serviceDefinitions.SelectMany(e => e))
@@ -72,7 +73,8 @@ namespace Microsoft.EntityFrameworkCore
         protected virtual void AssertServicesSame(
             IServiceCollection services1,
             IServiceCollection services2
-        ) {
+        )
+        {
             var sortedServices1 = services1.OrderBy(s => s.ServiceType.GetHashCode()).ToList();
 
             var sortedServices2 = services2.OrderBy(s => s.ServiceType.GetHashCode()).ToList();

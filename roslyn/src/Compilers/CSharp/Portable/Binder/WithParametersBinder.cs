@@ -20,10 +20,8 @@ namespace Microsoft.CodeAnalysis.CSharp
     {
         private readonly ImmutableArray<ParameterSymbol> _parameters;
 
-        internal WithParametersBinder(
-            ImmutableArray<ParameterSymbol> parameters,
-            Binder next
-        ) : base(next)
+        internal WithParametersBinder(ImmutableArray<ParameterSymbol> parameters, Binder next)
+            : base(next)
         {
             Debug.Assert(!parameters.IsDefaultOrEmpty);
             _parameters = parameters;
@@ -33,7 +31,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             LookupSymbolsInfo result,
             LookupOptions options,
             Binder originalBinder
-        ) {
+        )
+        {
             if (options.CanConsiderLocals())
             {
                 foreach (var parameter in _parameters)
@@ -55,13 +54,15 @@ namespace Microsoft.CodeAnalysis.CSharp
             Binder originalBinder,
             bool diagnose,
             ref CompoundUseSiteInfo<AssemblySymbol> useSiteInfo
-        ) {
+        )
+        {
             if (
                 (
                     options
                     & (LookupOptions.NamespaceAliasesOnly | LookupOptions.MustBeInvocableIfMember)
                 ) != 0
-            ) {
+            )
+            {
                 return;
             }
 

@@ -41,15 +41,16 @@ namespace Microsoft.CodeAnalysis
             SolutionInfo.SolutionAttributes solutionAttributes,
             SerializableOptionSet options,
             IReadOnlyList<AnalyzerReference> analyzerReferences
-        ) : this(
-            new SolutionState(
-                workspace.PrimaryBranchId,
-                new SolutionServices(workspace),
-                solutionAttributes,
-                options,
-                analyzerReferences
-            )
-        ) { }
+        )
+            : this(
+                new SolutionState(
+                    workspace.PrimaryBranchId,
+                    new SolutionServices(workspace),
+                    solutionAttributes,
+                    options,
+                    analyzerReferences
+                )
+            ) { }
 
         internal SolutionState State => _state;
 
@@ -221,7 +222,8 @@ namespace Microsoft.CodeAnalysis
             DocumentId? documentId,
             bool includeSourceGenerated = false,
             CancellationToken cancellationToken = default
-        ) {
+        )
+        {
             var project = GetProject(documentId?.ProjectId);
             if (project == null)
             {
@@ -261,7 +263,8 @@ namespace Microsoft.CodeAnalysis
         public ValueTask<SourceGeneratedDocument?> GetSourceGeneratedDocumentAsync(
             DocumentId documentId,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var project = GetProject(documentId.ProjectId);
 
             if (project == null)
@@ -419,7 +422,8 @@ namespace Microsoft.CodeAnalysis
         public Solution WithProjectCompilationOutputInfo(
             ProjectId projectId,
             in CompilationOutputInfo info
-        ) {
+        )
+        {
             CheckContainsProject(projectId);
 
             var newState = _state.WithProjectCompilationOutputInfo(projectId, info);
@@ -491,7 +495,8 @@ namespace Microsoft.CodeAnalysis
         public Solution WithProjectCompilationOptions(
             ProjectId projectId,
             CompilationOptions options
-        ) {
+        )
+        {
             CheckContainsProject(projectId);
 
             if (options == null)
@@ -578,7 +583,8 @@ namespace Microsoft.CodeAnalysis
         public Solution WithProjectDocumentsOrder(
             ProjectId projectId,
             ImmutableList<DocumentId> documentIds
-        ) {
+        )
+        {
             CheckContainsProject(projectId);
 
             if (documentIds == null)
@@ -626,7 +632,8 @@ namespace Microsoft.CodeAnalysis
         public Solution AddProjectReferences(
             ProjectId projectId,
             IEnumerable<ProjectReference> projectReferences
-        ) {
+        )
+        {
             CheckContainsProject(projectId);
 
             // avoid enumerating multiple times:
@@ -670,7 +677,8 @@ namespace Microsoft.CodeAnalysis
         public Solution RemoveProjectReference(
             ProjectId projectId,
             ProjectReference projectReference
-        ) {
+        )
+        {
             if (projectReference == null)
             {
                 throw new ArgumentNullException(nameof(projectReference));
@@ -703,7 +711,8 @@ namespace Microsoft.CodeAnalysis
         public Solution WithProjectReferences(
             ProjectId projectId,
             IEnumerable<ProjectReference>? projectReferences
-        ) {
+        )
+        {
             CheckContainsProject(projectId);
 
             // avoid enumerating multiple times:
@@ -735,7 +744,8 @@ namespace Microsoft.CodeAnalysis
         public Solution AddMetadataReference(
             ProjectId projectId,
             MetadataReference metadataReference
-        ) {
+        )
+        {
             return AddMetadataReferences(
                 projectId,
                 SpecializedCollections.SingletonEnumerable(
@@ -756,7 +766,8 @@ namespace Microsoft.CodeAnalysis
         public Solution AddMetadataReferences(
             ProjectId projectId,
             IEnumerable<MetadataReference> metadataReferences
-        ) {
+        )
+        {
             CheckContainsProject(projectId);
 
             // avoid enumerating multiple times:
@@ -793,7 +804,8 @@ namespace Microsoft.CodeAnalysis
         public Solution RemoveMetadataReference(
             ProjectId projectId,
             MetadataReference metadataReference
-        ) {
+        )
+        {
             CheckContainsProject(projectId);
 
             if (metadataReference == null)
@@ -823,7 +835,8 @@ namespace Microsoft.CodeAnalysis
         public Solution WithProjectMetadataReferences(
             ProjectId projectId,
             IEnumerable<MetadataReference> metadataReferences
-        ) {
+        )
+        {
             CheckContainsProject(projectId);
 
             var newState = _state.WithProjectMetadataReferences(
@@ -852,7 +865,8 @@ namespace Microsoft.CodeAnalysis
         public Solution AddAnalyzerReference(
             ProjectId projectId,
             AnalyzerReference analyzerReference
-        ) {
+        )
+        {
             return AddAnalyzerReferences(
                 projectId,
                 SpecializedCollections.SingletonEnumerable(
@@ -873,7 +887,8 @@ namespace Microsoft.CodeAnalysis
         public Solution AddAnalyzerReferences(
             ProjectId projectId,
             IEnumerable<AnalyzerReference> analyzerReferences
-        ) {
+        )
+        {
             CheckContainsProject(projectId);
 
             if (analyzerReferences is null)
@@ -915,7 +930,8 @@ namespace Microsoft.CodeAnalysis
         public Solution RemoveAnalyzerReference(
             ProjectId projectId,
             AnalyzerReference analyzerReference
-        ) {
+        )
+        {
             CheckContainsProject(projectId);
 
             if (analyzerReference == null)
@@ -945,7 +961,8 @@ namespace Microsoft.CodeAnalysis
         public Solution WithProjectAnalyzerReferences(
             ProjectId projectId,
             IEnumerable<AnalyzerReference> analyzerReferences
-        ) {
+        )
+        {
             CheckContainsProject(projectId);
 
             var newState = _state.WithProjectAnalyzerReferences(
@@ -1081,7 +1098,8 @@ namespace Microsoft.CodeAnalysis
             IEnumerable<string>? folders = null,
             string? filePath = null,
             bool isGenerated = false
-        ) {
+        )
+        {
             if (documentId == null)
             {
                 throw new ArgumentNullException(nameof(documentId));
@@ -1157,7 +1175,8 @@ namespace Microsoft.CodeAnalysis
             string name,
             TextLoader loader,
             IEnumerable<string>? folders = null
-        ) {
+        )
+        {
             if (documentId == null)
             {
                 throw new ArgumentNullException(nameof(documentId));
@@ -1241,7 +1260,8 @@ namespace Microsoft.CodeAnalysis
             SourceText text,
             IEnumerable<string>? folders = null,
             string? filePath = null
-        ) {
+        )
+        {
             if (documentId == null)
             {
                 throw new ArgumentNullException(nameof(documentId));
@@ -1285,7 +1305,8 @@ namespace Microsoft.CodeAnalysis
             SourceText text,
             IEnumerable<string>? folders = null,
             string? filePath = null
-        ) {
+        )
+        {
             if (documentId == null)
             {
                 throw new ArgumentNullException(nameof(documentId));
@@ -1314,7 +1335,8 @@ namespace Microsoft.CodeAnalysis
             SourceText text,
             IEnumerable<string>? folders,
             string? filePath
-        ) {
+        )
+        {
             var project = _state.GetProjectState(documentId.ProjectId);
 
             if (project is null)
@@ -1515,7 +1537,8 @@ namespace Microsoft.CodeAnalysis
             DocumentId documentId,
             SourceText text,
             PreservationMode mode = PreservationMode.PreserveValue
-        ) {
+        )
+        {
             CheckContainsDocument(documentId);
 
             if (text == null)
@@ -1545,7 +1568,8 @@ namespace Microsoft.CodeAnalysis
             DocumentId documentId,
             SourceText text,
             PreservationMode mode = PreservationMode.PreserveValue
-        ) {
+        )
+        {
             CheckContainsAdditionalDocument(documentId);
 
             if (text == null)
@@ -1575,7 +1599,8 @@ namespace Microsoft.CodeAnalysis
             DocumentId documentId,
             SourceText text,
             PreservationMode mode = PreservationMode.PreserveValue
-        ) {
+        )
+        {
             CheckContainsAnalyzerConfigDocument(documentId);
 
             if (text == null)
@@ -1605,7 +1630,8 @@ namespace Microsoft.CodeAnalysis
             DocumentId documentId,
             TextAndVersion textAndVersion,
             PreservationMode mode = PreservationMode.PreserveValue
-        ) {
+        )
+        {
             CheckContainsDocument(documentId);
 
             if (textAndVersion == null)
@@ -1635,7 +1661,8 @@ namespace Microsoft.CodeAnalysis
             DocumentId documentId,
             TextAndVersion textAndVersion,
             PreservationMode mode = PreservationMode.PreserveValue
-        ) {
+        )
+        {
             CheckContainsAdditionalDocument(documentId);
 
             if (textAndVersion == null)
@@ -1665,7 +1692,8 @@ namespace Microsoft.CodeAnalysis
             DocumentId documentId,
             TextAndVersion textAndVersion,
             PreservationMode mode = PreservationMode.PreserveValue
-        ) {
+        )
+        {
             CheckContainsAnalyzerConfigDocument(documentId);
 
             if (textAndVersion == null)
@@ -1695,7 +1723,8 @@ namespace Microsoft.CodeAnalysis
             DocumentId documentId,
             SyntaxNode root,
             PreservationMode mode = PreservationMode.PreserveValue
-        ) {
+        )
+        {
             CheckContainsDocument(documentId);
 
             if (root == null)
@@ -1724,7 +1753,8 @@ namespace Microsoft.CodeAnalysis
         public Solution WithDocumentSourceCodeKind(
             DocumentId documentId,
             SourceCodeKind sourceCodeKind
-        ) {
+        )
+        {
             CheckContainsDocument(documentId);
 
 #pragma warning disable CS0618 // Interactive is obsolete but this method accepts it for backward compatibility.
@@ -1756,7 +1786,8 @@ namespace Microsoft.CodeAnalysis
             DocumentId documentId,
             TextLoader loader,
             PreservationMode mode
-        ) {
+        )
+        {
             CheckContainsDocument(documentId);
 
             if (loader == null)
@@ -1777,7 +1808,8 @@ namespace Microsoft.CodeAnalysis
             TextLoader loader,
             SourceText? text,
             PreservationMode mode
-        ) {
+        )
+        {
             var newState = _state.UpdateDocumentTextLoader(documentId, loader, text, mode);
 
             // Note: state is currently not reused.
@@ -1795,7 +1827,8 @@ namespace Microsoft.CodeAnalysis
             DocumentId documentId,
             TextLoader loader,
             PreservationMode mode
-        ) {
+        )
+        {
             CheckContainsAdditionalDocument(documentId);
 
             if (loader == null)
@@ -1825,7 +1858,8 @@ namespace Microsoft.CodeAnalysis
             DocumentId documentId,
             TextLoader loader,
             PreservationMode mode
-        ) {
+        )
+        {
             CheckContainsAnalyzerConfigDocument(documentId);
 
             if (loader == null)
@@ -1858,7 +1892,8 @@ namespace Microsoft.CodeAnalysis
         internal Solution WithFrozenPartialCompilationIncludingSpecificDocument(
             DocumentId documentId,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var newState = _state.WithFrozenPartialCompilationIncludingSpecificDocument(
                 documentId,
                 cancellationToken
@@ -1871,7 +1906,8 @@ namespace Microsoft.CodeAnalysis
             SolutionChanges? solutionChanges = null,
             IMergeConflictHandler? mergeConflictHandler = null,
             CancellationToken cancellationToken = default
-        ) {
+        )
+        {
             // we only log sessioninfo for actual changes committed to workspace which should exclude ones from preview
             var session = new LinkedFileDiffMergingSession(
                 oldSolution,
@@ -1943,7 +1979,8 @@ namespace Microsoft.CodeAnalysis
             IEnumerable<DocumentId?> documentIds,
             SourceText text,
             PreservationMode mode = PreservationMode.PreserveValue
-        ) {
+        )
+        {
             if (documentIds == null)
             {
                 throw new ArgumentNullException(nameof(documentIds));
@@ -2143,7 +2180,8 @@ namespace Microsoft.CodeAnalysis
         private void CheckCircularProjectReferences(
             ProjectId projectId,
             IReadOnlyCollection<ProjectReference> projectReferences
-        ) {
+        )
+        {
             foreach (var projectReference in projectReferences)
             {
                 if (projectId == projectReference.ProjectId)
@@ -2176,7 +2214,8 @@ namespace Microsoft.CodeAnalysis
             ProjectId projectId,
             IEnumerable<ProjectReference> projectReferences,
             bool ignoreExistingReferences
-        ) {
+        )
+        {
             var projectState = _state.GetRequiredProjectState(projectId);
 
             var isSubmission = projectState.IsSubmission;

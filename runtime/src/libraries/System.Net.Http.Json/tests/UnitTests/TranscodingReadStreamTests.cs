@@ -27,7 +27,8 @@ namespace System.Net.Http.Json.Functional.Tests
                     new MemoryStream(encoding.GetBytes(input)),
                     encoding
                 )
-            ) {
+            )
+            {
                 var bytes = new byte[4];
 
                 // Act
@@ -55,7 +56,8 @@ namespace System.Net.Http.Json.Functional.Tests
                     new MemoryStream(encoding.GetBytes(input)),
                     encoding
                 )
-            ) {
+            )
+            {
                 byte[] bytes = new byte[3];
                 byte[] expected = Encoding.UTF8.GetBytes(input.Substring(0, bytes.Length));
 
@@ -82,7 +84,8 @@ namespace System.Net.Http.Json.Functional.Tests
                     new MemoryStream(encoding.GetBytes(input)),
                     encoding
                 )
-            ) {
+            )
+            {
                 var bytes = new byte[1024];
                 byte[] expected = Encoding.UTF8.GetBytes(input.Substring(0, bytes.Length));
 
@@ -116,7 +119,8 @@ namespace System.Net.Http.Json.Functional.Tests
                     new MemoryStream(encoding.GetBytes(input)),
                     encoding
                 )
-            ) {
+            )
+            {
                 var bytes = new byte[1];
                 byte[] expected = Encoding.UTF8.GetBytes(input);
 
@@ -144,7 +148,8 @@ namespace System.Net.Http.Json.Functional.Tests
 
         public static TheoryData<string> ReadAsync_WithOverflowBuffer_AtBoundariesData(
             string encoding
-        ) {
+        )
+        {
             int maxCharBufferSize = Encoding.GetEncoding(encoding)
                 .GetMaxCharCount(TranscodingReadStream.MaxByteBufferSize);
 
@@ -164,7 +169,8 @@ namespace System.Net.Http.Json.Functional.Tests
         private static async Task ReadAsync_WithOverflowBufferAtCharBufferBoundaries(
             string input,
             int bufferSize
-        ) {
+        )
+        {
             // Arrange
             // Test ensures that the overflow buffer works correctly
             Encoding encoding = Encoding.Unicode;
@@ -173,7 +179,8 @@ namespace System.Net.Http.Json.Functional.Tests
                     new MemoryStream(encoding.GetBytes(input)),
                     encoding
                 )
-            ) {
+            )
+            {
                 byte[] expected = Encoding.UTF8.GetBytes(input);
 
                 // Act
@@ -303,7 +310,8 @@ namespace System.Net.Http.Json.Functional.Tests
                     stream,
                     sourceEncoding
                 )
-            ) {
+            )
+            {
                 string deserializedMessage = await JsonSerializer.DeserializeAsync<string>(
                     transcodingStream
                 );

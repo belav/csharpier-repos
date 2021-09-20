@@ -250,7 +250,8 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.overloadRes
             string id,
             string actualError,
             params string[] args
-        ) {
+        )
+        {
             // should not happen
             if (null == rm)
                 return false;

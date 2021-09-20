@@ -568,7 +568,8 @@ namespace System.Net.NetworkInformation.Tests
         public void ToStringParseGetAddressBytes_Roundtrips(
             string expectedAddress,
             byte[] inputBytes
-        ) {
+        )
+        {
             _ = expectedAddress;
             Assert.Equal(
                 inputBytes,

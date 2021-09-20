@@ -36,7 +36,8 @@ internal static partial class Interop
             ReadOnlySpan<byte> key,
             ReadOnlySpan<byte> iv,
             EvpCipherDirection direction
-        ) {
+        )
+        {
             if (
                 !EvpCipherSetKeyAndIV(
                     ctx,
@@ -44,7 +45,8 @@ internal static partial class Interop
                     ref MemoryMarshal.GetReference(iv),
                     direction
                 )
-            ) {
+            )
+            {
                 throw CreateOpenSslCryptographicException();
             }
         }
@@ -105,7 +107,8 @@ internal static partial class Interop
             Span<byte> output,
             out int bytesWritten,
             ReadOnlySpan<byte> input
-        ) {
+        )
+        {
             return EvpCipherUpdate(
                 ctx,
                 ref MemoryMarshal.GetReference(output),
@@ -136,7 +139,8 @@ internal static partial class Interop
             SafeEvpCipherCtxHandle ctx,
             Span<byte> output,
             out int bytesWritten
-        ) {
+        )
+        {
             return EvpCipherFinalEx(ctx, ref MemoryMarshal.GetReference(output), out bytesWritten);
         }
 

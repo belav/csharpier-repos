@@ -27,7 +27,8 @@ namespace Microsoft.Extensions.DependencyInjection
         public static IHttpClientBuilder ConfigureHttpClient(
             this IHttpClientBuilder builder,
             Action<HttpClient> configureClient
-        ) {
+        )
+        {
             if (builder == null)
             {
                 throw new ArgumentNullException(nameof(builder));
@@ -59,7 +60,8 @@ namespace Microsoft.Extensions.DependencyInjection
         public static IHttpClientBuilder ConfigureHttpClient(
             this IHttpClientBuilder builder,
             Action<IServiceProvider, HttpClient> configureClient
-        ) {
+        )
+        {
             if (builder == null)
             {
                 throw new ArgumentNullException(nameof(builder));
@@ -101,7 +103,8 @@ namespace Microsoft.Extensions.DependencyInjection
         public static IHttpClientBuilder AddHttpMessageHandler(
             this IHttpClientBuilder builder,
             Func<DelegatingHandler> configureHandler
-        ) {
+        )
+        {
             if (builder == null)
             {
                 throw new ArgumentNullException(nameof(builder));
@@ -143,7 +146,8 @@ namespace Microsoft.Extensions.DependencyInjection
         public static IHttpClientBuilder AddHttpMessageHandler(
             this IHttpClientBuilder builder,
             Func<IServiceProvider, DelegatingHandler> configureHandler
-        ) {
+        )
+        {
             if (builder == null)
             {
                 throw new ArgumentNullException(nameof(builder));
@@ -217,7 +221,8 @@ namespace Microsoft.Extensions.DependencyInjection
         public static IHttpClientBuilder ConfigurePrimaryHttpMessageHandler(
             this IHttpClientBuilder builder,
             Func<HttpMessageHandler> configureHandler
-        ) {
+        )
+        {
             if (builder == null)
             {
                 throw new ArgumentNullException(nameof(builder));
@@ -261,7 +266,8 @@ namespace Microsoft.Extensions.DependencyInjection
         public static IHttpClientBuilder ConfigurePrimaryHttpMessageHandler(
             this IHttpClientBuilder builder,
             Func<IServiceProvider, HttpMessageHandler> configureHandler
-        ) {
+        )
+        {
             if (builder == null)
             {
                 throw new ArgumentNullException(nameof(builder));
@@ -332,7 +338,8 @@ namespace Microsoft.Extensions.DependencyInjection
         public static IHttpClientBuilder ConfigureHttpMessageHandlerBuilder(
             this IHttpClientBuilder builder,
             Action<HttpMessageHandlerBuilder> configureBuilder
-        ) {
+        )
+        {
             if (builder == null)
             {
                 throw new ArgumentNullException(nameof(builder));
@@ -627,7 +634,8 @@ namespace Microsoft.Extensions.DependencyInjection
         public static IHttpClientBuilder RedactLoggedHeaders(
             this IHttpClientBuilder builder,
             Func<string, bool> shouldRedactHeaderValue
-        ) {
+        )
+        {
             if (builder == null)
             {
                 throw new ArgumentNullException(nameof(builder));
@@ -658,7 +666,8 @@ namespace Microsoft.Extensions.DependencyInjection
         public static IHttpClientBuilder RedactLoggedHeaders(
             this IHttpClientBuilder builder,
             IEnumerable<string> redactedLoggedHeaderNames
-        ) {
+        )
+        {
             if (builder == null)
             {
                 throw new ArgumentNullException(nameof(builder));
@@ -712,7 +721,8 @@ namespace Microsoft.Extensions.DependencyInjection
         public static IHttpClientBuilder SetHandlerLifetime(
             this IHttpClientBuilder builder,
             TimeSpan handlerLifetime
-        ) {
+        )
+        {
             if (builder == null)
             {
                 throw new ArgumentNullException(nameof(builder));
@@ -721,7 +731,8 @@ namespace Microsoft.Extensions.DependencyInjection
             if (
                 handlerLifetime != Timeout.InfiniteTimeSpan
                 && handlerLifetime < HttpClientFactoryOptions.MinimumHandlerLifetime
-            ) {
+            )
+            {
                 throw new ArgumentException(
                     SR.HandlerLifetime_InvalidValue,
                     nameof(handlerLifetime)
@@ -741,7 +752,8 @@ namespace Microsoft.Extensions.DependencyInjection
             Type type,
             string name,
             bool validateSingleType
-        ) {
+        )
+        {
             var registry = (HttpClientMappingRegistry)builder.Services.Single(
                 sd => sd.ServiceType == typeof(HttpClientMappingRegistry)
             ).ImplementationInstance;
@@ -756,7 +768,8 @@ namespace Microsoft.Extensions.DependencyInjection
                 &&
                 // Allow registering the same name twice to the same type.
                 type != otherType
-            ) {
+            )
+            {
                 string message =
                     $"The HttpClient factory already has a registered client with the name '{name}', bound to the type '{otherType.FullName}'. "
                     + $"Client names are computed based on the type name without considering the namespace ('{otherType.Name}'). "

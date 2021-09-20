@@ -138,7 +138,8 @@ namespace System.Net.Http.Headers
         public static bool TryParse(
             [NotNullWhen(true)] string? input,
             [NotNullWhen(true)] out MediaTypeHeaderValue? parsedValue
-        ) {
+        )
+        {
             int index = 0;
             parsedValue = null;
 
@@ -149,7 +150,8 @@ namespace System.Net.Http.Headers
                     ref index,
                     out object? output
                 )
-            ) {
+            )
+            {
                 parsedValue = (MediaTypeHeaderValue)output!;
                 return true;
             }
@@ -161,7 +163,8 @@ namespace System.Net.Http.Headers
             int startIndex,
             Func<MediaTypeHeaderValue> mediaTypeCreator,
             out MediaTypeHeaderValue? parsedValue
-        ) {
+        )
+        {
             Debug.Assert(mediaTypeCreator != null);
             Debug.Assert(startIndex >= 0);
 
@@ -222,7 +225,8 @@ namespace System.Net.Http.Headers
             string input,
             int startIndex,
             out string? mediaType
-        ) {
+        )
+        {
             Debug.Assert((input != null) && (input.Length > 0) && (startIndex < input.Length));
 
             // This method just parses the "type/subtype" string, it does not parse parameters.

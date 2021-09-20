@@ -31,7 +31,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Options
             IThreadingContext threadingContext,
             [Import(typeof(SAsyncServiceProvider))] IAsyncServiceProvider serviceProvider,
             IGlobalOptionService optionService
-        ) {
+        )
+        {
             _threadingContext = threadingContext;
             _serviceProvider = serviceProvider;
             _optionService = optionService;
@@ -39,7 +40,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Options
 
         public async ValueTask<IOptionPersister> GetOrCreatePersisterAsync(
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             if (_lazyPersister is not null)
             {
                 return _lazyPersister;

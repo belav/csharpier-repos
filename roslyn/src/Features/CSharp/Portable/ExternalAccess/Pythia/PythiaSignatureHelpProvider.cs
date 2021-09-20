@@ -39,7 +39,8 @@ namespace Microsoft.CodeAnalysis.ExternalAccess.Pythia
             SemanticModel semanticModel,
             SymbolInfo currentSymbol,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var (items, selectedItemIndex) =
                 await _lazyImplementation.Value.GetMethodGroupItemsAndSelectionAsync(
                         accessibleMethods,

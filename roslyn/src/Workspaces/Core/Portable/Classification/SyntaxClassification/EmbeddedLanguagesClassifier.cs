@@ -31,7 +31,8 @@ namespace Microsoft.CodeAnalysis.Classification.Classifiers
             SemanticModel semanticModel,
             ArrayBuilder<ClassifiedSpan> result,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             foreach (var language in _languagesProvider.Languages)
             {
                 var classifier = language.Classifier;

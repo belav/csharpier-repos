@@ -122,7 +122,8 @@ namespace System.Web.Razor.Parser
                             !Context.DesignTimeMode
                             && last.Type == HtmlSymbolType.WhiteSpace
                             && startOfLine
-                        ) {
+                        )
+                        {
                             // Put the whitespace back too
                             startOfLine = false;
                             PutBack(last);

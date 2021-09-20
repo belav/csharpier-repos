@@ -35,7 +35,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                 format.MemberOptions.IncludesOption(SymbolDisplayMemberOptions.IncludeType)
                 && this.isFirstSymbolVisited
                 && !IsEnumMember(symbol)
-            ) {
+            )
+            {
                 VisitFieldType(symbol);
                 AddSpace();
 
@@ -46,7 +47,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                 format.MemberOptions.IncludesOption(
                     SymbolDisplayMemberOptions.IncludeContainingType
                 ) && IncludeNamedType(symbol.ContainingType)
-            ) {
+            )
+            {
                 symbol.ContainingType.Accept(this.NotFirstVisitor);
                 AddPunctuation(SyntaxKind.DotToken);
             }
@@ -72,7 +74,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                 && symbol.IsConst
                 && symbol.HasConstantValue
                 && CanAddConstant(symbol.Type, symbol.ConstantValue)
-            ) {
+            )
+            {
                 AddSpace();
                 AddPunctuation(SyntaxKind.EqualsToken);
                 AddSpace();
@@ -112,7 +115,8 @@ namespace Microsoft.CodeAnalysis.CSharp
         private static bool ShouldMethodDisplayReadOnly(
             IMethodSymbol method,
             IPropertySymbol propertyOpt = null
-        ) {
+        )
+        {
             if (method.ContainingType?.IsReadOnly == true)
             {
                 return false;
@@ -123,7 +127,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                     is SourcePropertyAccessorSymbol sourceAccessor
                 && (propertyOpt as Symbols.PublicModel.PropertySymbol)?.UnderlyingSymbol
                     is SourcePropertySymbolBase sourceProperty
-            ) {
+            )
+            {
                 // only display if the accessor is explicitly readonly
                 return sourceAccessor.LocalDeclaredReadOnly || sourceProperty.HasReadOnlyModifier;
             }
@@ -168,7 +173,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                 format.MemberOptions.IncludesOption(
                     SymbolDisplayMemberOptions.IncludeContainingType
                 ) && IncludeNamedType(symbol.ContainingType)
-            ) {
+            )
+            {
                 symbol.ContainingType.Accept(this.NotFirstVisitor);
                 AddPunctuation(SyntaxKind.DotToken);
             }
@@ -230,7 +236,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                 this.format.MemberOptions.IncludesOption(
                     SymbolDisplayMemberOptions.IncludeParameters
                 ) && symbol.Parameters.Any()
-            ) {
+            )
+            {
                 AddPunctuation(SyntaxKind.OpenBracketToken);
                 AddParametersIfRequired(
                     hasThisParameter: false,
@@ -268,7 +275,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                 format.MemberOptions.IncludesOption(
                     SymbolDisplayMemberOptions.IncludeContainingType
                 ) && IncludeNamedType(symbol.ContainingType)
-            ) {
+            )
+            {
                 symbol.ContainingType.Accept(this.NotFirstVisitor);
                 AddPunctuation(SyntaxKind.DotToken);
             }
@@ -328,18 +336,21 @@ namespace Microsoft.CodeAnalysis.CSharp
             if (
                 symbol.IsExtensionMethod
                 && format.ExtensionMethodStyle != SymbolDisplayExtensionMethodStyle.Default
-            ) {
+            )
+            {
                 if (
                     symbol.MethodKind == MethodKind.ReducedExtension
                     && format.ExtensionMethodStyle == SymbolDisplayExtensionMethodStyle.StaticMethod
-                ) {
+                )
+                {
                     symbol = symbol.GetConstructedReducedFrom();
                 }
                 else if (
                     symbol.MethodKind != MethodKind.ReducedExtension
                     && format.ExtensionMethodStyle
                         == SymbolDisplayExtensionMethodStyle.InstanceMethod
-                ) {
+                )
+                {
                     // If we cannot reduce this to an instance form then display in the static form
                     symbol = symbol.ReduceExtensionMethod(symbol.Parameters.First().Type) ?? symbol;
                 }
@@ -376,7 +387,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                                 format.CompilerInternalOptions.IncludesOption(
                                     SymbolDisplayCompilerInternalOptions.UseMetadataMethodNames
                                 )
-                            ) {
+                            )
+                            {
                                 goto default;
                             }
                             break;
@@ -415,7 +427,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                     format.MemberOptions.IncludesOption(
                         SymbolDisplayMemberOptions.IncludeContainingType
                     )
-                ) {
+                )
+                {
                     ITypeSymbol containingType;
                     bool includeType;
 
@@ -539,7 +552,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                             SymbolDisplayCompilerInternalOptions.UseMetadataMethodNames
                         )
                         || symbol.ContainingType == null
-                    ) {
+                    )
+                    {
                         builder.Add(CreatePart(partKind, symbol, symbol.Name));
                     }
                     else
@@ -568,7 +582,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                         format.CompilerInternalOptions.IncludesOption(
                             SymbolDisplayCompilerInternalOptions.UseMetadataMethodNames
                         )
-                    ) {
+                    )
+                    {
                         builder.Add(
                             CreatePart(
                                 SymbolDisplayPartKind.MethodName,
@@ -610,7 +625,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                         format.CompilerInternalOptions.IncludesOption(
                             SymbolDisplayCompilerInternalOptions.UseMetadataMethodNames
                         )
-                    ) {
+                    )
+                    {
                         builder.Add(
                             CreatePart(
                                 SymbolDisplayPartKind.MethodName,
@@ -677,7 +693,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                     if (
                         symbol.CallingConvention != SignatureCallingConvention.Unmanaged
                         || !conventionTypes.IsEmpty
-                    ) {
+                    )
+                    {
                         AddPunctuation(SyntaxKind.OpenBracketToken);
 
                         switch (symbol.CallingConvention)
@@ -777,7 +794,8 @@ namespace Microsoft.CodeAnalysis.CSharp
 
         private static SymbolDisplayPartKind GetPartKindForConstructorOrDestructor(
             IMethodSymbol symbol
-        ) {
+        )
+        {
             // In the case that symbol.containingType is null (which should never be the case here) we will fallback to the MethodName symbol part
             if (symbol.ContainingType is null)
             {
@@ -798,7 +816,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                 format.GenericsOptions.IncludesOption(
                     SymbolDisplayGenericsOptions.IncludeTypeConstraints
                 )
-            ) {
+            )
+            {
                 AddTypeParameterConstraints(symbol.TypeArguments);
             }
         }
@@ -862,7 +881,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                     && format.ParameterOptions.IncludesOption(
                         SymbolDisplayParameterOptions.IncludeParamsRefOut
                     )
-                ) {
+                )
+                {
                     AddKeyword(SyntaxKind.ParamsKeyword);
                     AddSpace();
                 }
@@ -925,7 +945,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             if (
                 format.MemberOptions.IncludesOption(SymbolDisplayMemberOptions.IncludeModifiers)
                 && !IsEnumMember(symbol)
-            ) {
+            )
+            {
                 if (symbol.IsConst)
                 {
                     AddKeyword(SyntaxKind.ConstKeyword);
@@ -964,7 +985,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                         && !IsLocalFunction(symbol)
                     )
                 )
-            ) {
+            )
+            {
                 var isConst = symbol is IFieldSymbol && ((IFieldSymbol)symbol).IsConst;
                 if (symbol.IsStatic && !isConst)
                 {
@@ -1008,7 +1030,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             bool hasThisParameter,
             bool isVarargs,
             ImmutableArray<IParameterSymbol> parameters
-        ) {
+        )
+        {
             if (format.ParameterOptions == SymbolDisplayParameterOptions.None)
             {
                 return;
@@ -1035,7 +1058,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                             format.ParameterOptions.IncludesOption(
                                 SymbolDisplayParameterOptions.IncludeExtensionThis
                             )
-                        ) {
+                        )
+                        {
                             AddKeyword(SyntaxKind.ThisKeyword);
                             AddSpace();
                         }
@@ -1071,7 +1095,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                 if (
                     !ShouldPropertyDisplayReadOnly(property)
                     && ShouldMethodDisplayReadOnly(method, property)
-                ) {
+                )
+                {
                     AddReadOnlyIfRequired();
                 }
 
@@ -1087,7 +1112,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                 format.MemberOptions.IncludesOption(
                     SymbolDisplayMemberOptions.IncludeExplicitInterface
                 ) && !implementedMembers.IsEmpty
-            ) {
+            )
+            {
                 var implementedMember = implementedMembers[0];
                 Debug.Assert(implementedMember.ContainingType != null);
 
@@ -1104,12 +1130,14 @@ namespace Microsoft.CodeAnalysis.CSharp
             ImmutableArray<CustomModifier> customModifiers,
             bool leadingSpace = false,
             bool trailingSpace = true
-        ) {
+        )
+        {
             if (
                 this.format.CompilerInternalOptions.IncludesOption(
                     SymbolDisplayCompilerInternalOptions.IncludeCustomModifiers
                 ) && !customModifiers.IsEmpty
-            ) {
+            )
+            {
                 bool first = true;
                 foreach (CustomModifier customModifier in customModifiers)
                 {
@@ -1184,7 +1212,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                 format.ParameterOptions.IncludesOption(
                     SymbolDisplayParameterOptions.IncludeParamsRefOut
                 )
-            ) {
+            )
+            {
                 AddParameterRefKind(refKind);
             }
         }

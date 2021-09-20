@@ -43,13 +43,15 @@ namespace Microsoft.CodeAnalysis.Completion.Providers
             HashSet<string> namespaceInScope,
             bool isExpandedCompletion,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             using (
                 Logger.LogBlock(
                     FunctionId.Completion_ExtensionMethodImportCompletionProvider_GetCompletionItemsAsync,
                     cancellationToken
                 )
-            ) {
+            )
+            {
                 var syntaxFacts =
                     completionContext.Document.GetRequiredLanguageService<ISyntaxFactsService>();
                 if (
@@ -59,7 +61,8 @@ namespace Microsoft.CodeAnalysis.Completion.Providers
                         cancellationToken,
                         out var receiverTypeSymbol
                     )
-                ) {
+                )
+                {
                     using var nestedTokenSource = new CancellationTokenSource();
                     using var linkedTokenSource = CancellationTokenSource.CreateLinkedTokenSource(
                         nestedTokenSource.Token,
@@ -99,7 +102,8 @@ namespace Microsoft.CodeAnalysis.Completion.Providers
                                     Task.Delay(timeoutInMilliseconds, linkedTokenSource.Token)
                                 )
                                 .ConfigureAwait(false) != getItemsTask
-                        ) {
+                        )
+                        {
                             nestedTokenSource.Cancel();
                             CompletionProvidersLogger.LogExtensionMethodCompletionTimeoutCount();
                             return;
@@ -146,7 +150,8 @@ namespace Microsoft.CodeAnalysis.Completion.Providers
             ISyntaxFactsService syntaxFacts,
             CancellationToken cancellationToken,
             [NotNullWhen(true)] out ITypeSymbol? receiverTypeSymbol
-        ) {
+        )
+        {
             var parentNode = syntaxContext.TargetToken.Parent;
 
             // Even though implicit access to extension method is allowed, we decide not support it for simplicity
@@ -165,7 +170,8 @@ namespace Microsoft.CodeAnalysis.Completion.Providers
                         syntaxContext.SemanticModel.GetSymbolInfo(expressionNode, cancellationToken)
                             .GetAnySymbol() is ITypeSymbol
                     )
-                ) {
+                )
+                {
                     // The expression we're calling off of needs to have an actual instance type.
                     // We try to be more tolerant to errors here so completion would still be available in certain case of partially typed code.
                     receiverTypeSymbol =

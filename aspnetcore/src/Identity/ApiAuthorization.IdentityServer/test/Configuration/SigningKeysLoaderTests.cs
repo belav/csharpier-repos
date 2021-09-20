@@ -260,7 +260,8 @@ namespace Microsoft.AspNetCore.ApiAuthorization.IdentityServer.Configuration
                                 validOnly: false
                             ).Count > 0
                         )
-                    ) {
+                    )
+                    {
                         store.Add(cert);
                     }
                 }

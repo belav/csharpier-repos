@@ -28,7 +28,8 @@ namespace System.Net.Security.Tests
             X509Certificate certificate,
             X509Chain chain,
             SslPolicyErrors sslPolicyErrors
-        ) {
+        )
+        {
             return true; // allow everything
         }
 
@@ -55,7 +56,8 @@ namespace System.Net.Security.Tests
                         AllowAnyServerCertificate,
                         null
                     )
-                ) {
+                )
+                {
                     await sslStream.AuthenticateAsClientAsync(
                         "localhost",
                         null,
@@ -103,7 +105,8 @@ namespace System.Net.Security.Tests
                         AllowAnyServerCertificate,
                         null
                     )
-                ) {
+                )
+                {
                     await sslStream.AuthenticateAsClientAsync(
                         "localhost",
                         null,
@@ -151,7 +154,8 @@ namespace System.Net.Security.Tests
                         AllowAnyServerCertificate,
                         null
                     )
-                ) {
+                )
+                {
                     await Assert.ThrowsAsync<AuthenticationException>(
                         () =>
                             sslStream.AuthenticateAsClientAsync(

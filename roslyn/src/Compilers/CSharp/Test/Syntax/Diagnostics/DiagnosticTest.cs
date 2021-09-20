@@ -431,7 +431,8 @@ class X
                     ErrorFacts.NullableWarnings.Contains(
                         MessageProvider.Instance.GetIdForErrorCode((int)error)
                     )
-                ) {
+                )
+                {
                     continue;
                 }
 
@@ -3426,7 +3427,8 @@ class Program
             string expectedTo,
             string sourceFrom,
             string sourceTo
-        ) {
+        )
+        {
             var pathmapArg = $"/pathmap:{sourceFrom}={sourceTo}";
             var parsedArgs = CSharpCommandLineParser.Default.Parse(
                 new[] { pathmapArg, "a.cs" },

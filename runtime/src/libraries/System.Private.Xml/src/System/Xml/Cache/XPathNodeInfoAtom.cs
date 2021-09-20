@@ -115,7 +115,8 @@ namespace MS.Internal.Xml.Cache
             XPathDocument doc,
             int lineNumBase,
             int linePosBase
-        ) {
+        )
+        {
             Init(
                 localName,
                 namespaceUri,
@@ -144,7 +145,8 @@ namespace MS.Internal.Xml.Cache
             XPathDocument doc,
             int lineNumBase,
             int linePosBase
-        ) {
+        )
+        {
             Debug.Assert(
                 localName != null && namespaceUri != null && prefix != null && doc != null
             );
@@ -334,7 +336,8 @@ namespace MS.Internal.Xml.Cache
                     && (object?)_baseUri == (object?)other._baseUri
                     && _lineNumBase == other._lineNumBase
                     && _linePosBase == other._linePosBase
-                ) {
+                )
+                {
                     return true;
                 }
             }
@@ -441,7 +444,8 @@ namespace MS.Internal.Xml.Cache
             XPathDocument doc,
             int lineNumBase,
             int linePosBase
-        ) {
+        )
+        {
             XPathNodeInfoAtom info;
 
             // If this.infoCached already exists, then reuse it; else create new InfoAtom

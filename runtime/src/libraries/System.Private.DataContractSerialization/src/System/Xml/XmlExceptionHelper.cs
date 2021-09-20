@@ -27,7 +27,8 @@ namespace System.Xml
             string res,
             string? arg1,
             string? arg2
-        ) {
+        )
+        {
             ThrowXmlException(reader, res, arg1, arg2, null);
         }
 
@@ -38,7 +39,8 @@ namespace System.Xml
             string? arg1,
             string? arg2,
             string? arg3
-        ) {
+        )
+        {
             string s = SR.Format(res, arg1, arg2, arg3);
             IXmlLineInfo? lineInfo = reader as IXmlLineInfo;
             if (lineInfo != null && lineInfo.HasLineInfo())
@@ -125,7 +127,8 @@ namespace System.Xml
             XmlDictionaryReader reader,
             string localName,
             string ns
-        ) {
+        )
+        {
             ThrowXmlException(
                 reader,
                 SR.XmlStartElementLocalNameNsExpected,
@@ -140,7 +143,8 @@ namespace System.Xml
             XmlDictionaryReader reader,
             XmlDictionaryString localName,
             XmlDictionaryString ns
-        ) {
+        )
+        {
             ThrowStartElementExpected(
                 reader,
                 XmlDictionaryString.GetString(localName),
@@ -170,7 +174,8 @@ namespace System.Xml
             XmlDictionaryReader reader,
             string localName,
             string ns
-        ) {
+        )
+        {
             ThrowXmlException(
                 reader,
                 SR.XmlFullStartElementLocalNameNsExpected,
@@ -185,7 +190,8 @@ namespace System.Xml
             XmlDictionaryReader reader,
             XmlDictionaryString localName,
             XmlDictionaryString ns
-        ) {
+        )
+        {
             ThrowFullStartElementExpected(
                 reader,
                 XmlDictionaryString.GetString(localName),
@@ -198,7 +204,8 @@ namespace System.Xml
             XmlDictionaryReader reader,
             string localName,
             string ns
-        ) {
+        )
+        {
             ThrowXmlException(
                 reader,
                 SR.XmlEndElementExpected,
@@ -212,7 +219,8 @@ namespace System.Xml
         public static void ThrowMaxArrayLengthExceeded(
             XmlDictionaryReader reader,
             int maxArrayLength
-        ) {
+        )
+        {
             ThrowXmlException(
                 reader,
                 SR.XmlMaxArrayLengthExceeded,
@@ -224,7 +232,8 @@ namespace System.Xml
         public static void ThrowMaxBytesPerReadExceeded(
             XmlDictionaryReader reader,
             int maxBytesPerRead
-        ) {
+        )
+        {
             ThrowXmlException(
                 reader,
                 SR.XmlMaxBytesPerReadExceeded,
@@ -242,7 +251,8 @@ namespace System.Xml
         public static void ThrowMaxStringContentLengthExceeded(
             XmlDictionaryReader reader,
             int maxStringContentLength
-        ) {
+        )
+        {
             ThrowXmlException(
                 reader,
                 SR.XmlMaxStringContentLengthExceeded,
@@ -299,7 +309,8 @@ namespace System.Xml
             XmlDictionaryReader reader,
             string expected,
             char found
-        ) {
+        )
+        {
             ThrowXmlException(reader, SR.XmlTokenExpected, expected, found.ToString());
         }
 
@@ -308,7 +319,8 @@ namespace System.Xml
             XmlDictionaryReader reader,
             string expected,
             string found
-        ) {
+        )
+        {
             ThrowXmlException(reader, SR.XmlTokenExpected, expected, found);
         }
 
@@ -325,7 +337,8 @@ namespace System.Xml
             string expectedLocalName,
             string foundPrefix,
             string foundLocalName
-        ) {
+        )
+        {
             ThrowXmlException(
                 reader,
                 SR.XmlTagMismatch,
@@ -339,7 +352,8 @@ namespace System.Xml
             XmlDictionaryReader reader,
             string localName,
             string ns
-        ) {
+        )
+        {
             string name;
             if (localName.Length == 0)
                 name = "xmlns";
@@ -355,7 +369,8 @@ namespace System.Xml
             string prefix2,
             string localName,
             string ns
-        ) {
+        )
+        {
             ThrowXmlException(
                 reader,
                 SR.XmlDuplicateAttribute,
@@ -394,7 +409,8 @@ namespace System.Xml
             XmlDictionaryReader reader,
             string value,
             string type
-        ) {
+        )
+        {
             ThrowXmlException(reader, SR.XmlConversionOverflow, value, type);
         }
 
@@ -413,7 +429,8 @@ namespace System.Xml
         public static void ThrowXmlDictionaryStringIDUndefinedStatic(
             XmlDictionaryReader reader,
             int key
-        ) {
+        )
+        {
             ThrowXmlException(
                 reader,
                 SR.XmlDictionaryStringIDUndefinedStatic,
@@ -425,7 +442,8 @@ namespace System.Xml
         public static void ThrowXmlDictionaryStringIDUndefinedSession(
             XmlDictionaryReader reader,
             int key
-        ) {
+        )
+        {
             ThrowXmlException(
                 reader,
                 SR.XmlDictionaryStringIDUndefinedSession,
@@ -451,7 +469,8 @@ namespace System.Xml
             string value,
             string type,
             Exception exception
-        ) {
+        )
+        {
             return new XmlException(SR.Format(SR.XmlInvalidConversion, value, type), exception);
         }
 
@@ -460,7 +479,8 @@ namespace System.Xml
             int offset,
             int count,
             Exception exception
-        ) {
+        )
+        {
             return CreateEncodingException(
                 new System.Text.UTF8Encoding(false, false).GetString(buffer, offset, count),
                 exception

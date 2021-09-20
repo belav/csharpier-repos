@@ -46,7 +46,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Syntax.InternalSyntax
                     else if (
                         SyntaxFacts.IsNewLine(ch)
                         || (ch == SlidingTextWindow.InvalidCharacter && TextWindow.IsReallyAtEnd())
-                    ) {
+                    )
+                    {
                         //String and character literals can contain any Unicode character. They are not limited
                         //to valid UTF-16 characters. So if we get the SlidingTextWindow's sentinel value,
                         //double check that it was not real user-code contents. This will be rare.
@@ -266,7 +267,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Syntax.InternalSyntax
             ref TokenInfo info,
             ref SyntaxDiagnosticInfo error,
             out bool closeQuoteMissing
-        ) {
+        )
+        {
             var subScanner = new InterpolatedStringScanner(this, isVerbatim);
             subScanner.ScanInterpolatedStringLiteralTop(
                 interpolations,
@@ -293,7 +295,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Syntax.InternalSyntax
                 int colonPosition,
                 int closeBracePosition,
                 bool closeBraceMissing
-            ) {
+            )
+            {
                 this.OpenBracePosition = openBracePosition;
                 this.ColonPosition = colonPosition;
                 this.CloseBracePosition = closeBracePosition;
@@ -307,7 +310,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Syntax.InternalSyntax
         /// <param name="interpolatedString"></param>
         internal static SyntaxToken RescanInterpolatedString(
             InterpolatedStringExpressionSyntax interpolatedString
-        ) {
+        )
+        {
             var text = interpolatedString.ToString();
             var kind = SyntaxKind.InterpolatedStringToken;
             // TODO: scan the contents (perhaps using ScanInterpolatedStringLiteralContents) to reconstruct any lexical
@@ -352,7 +356,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Syntax.InternalSyntax
                 ArrayBuilder<Interpolation> interpolations,
                 ref TokenInfo info,
                 out bool closeQuoteMissing
-            ) {
+            )
+            {
                 if (isVerbatim)
                 {
                     Debug.Assert(
@@ -407,7 +412,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Syntax.InternalSyntax
 
             private void ScanInterpolatedStringLiteralContents(
                 ArrayBuilder<Interpolation> interpolations
-            ) {
+            )
+            {
                 while (true)
                 {
                     if (IsAtEnd())
@@ -592,7 +598,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Syntax.InternalSyntax
                 char endingChar,
                 bool isHole,
                 ref int colonPosition
-            ) {
+            )
+            {
                 while (true)
                 {
                     if (IsAtEnd())
@@ -623,7 +630,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Syntax.InternalSyntax
                                 lexer.TextWindow.PeekChar(1) == '"'
                                 || lexer.TextWindow.PeekChar(1) == '@'
                                     && lexer.TextWindow.PeekChar(2) == '"'
-                            ) {
+                            )
+                            {
                                 bool isVerbatimSubstring = lexer.TextWindow.PeekChar(1) == '@';
                                 var interpolations = (ArrayBuilder<Interpolation>)null;
                                 var info = default(TokenInfo);
@@ -695,7 +703,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Syntax.InternalSyntax
                             if (
                                 lexer.TextWindow.PeekChar(1) == '"'
                                 && !RecoveringFromRunawayLexing()
-                            ) {
+                            )
+                            {
                                 // check for verbatim string inside an expression hole.
                                 ScanInterpolatedStringLiteralNestedVerbatimString();
                                 continue;
@@ -703,7 +712,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Syntax.InternalSyntax
                             else if (
                                 lexer.TextWindow.PeekChar(1) == '$'
                                 && lexer.TextWindow.PeekChar(2) == '"'
-                            ) {
+                            )
+                            {
                                 lexer.CheckFeatureAvailability(
                                     MessageID.IDS_FeatureAltInterpolatedVerbatimStrings
                                 );

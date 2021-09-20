@@ -79,7 +79,8 @@ namespace System.Web.Helpers.Claims.Test
             public override IEnumerable<object[]> GetData(
                 MethodInfo methodUnderTest,
                 Type[] parameterTypes
-            ) {
+            )
+            {
                 yield return new object[] { new SubclassedFormsIdentity() };
                 yield return new object[] { new SubclassedGenericIdentity() };
 

@@ -20,7 +20,8 @@ namespace System.ComponentModel
         public InstallerTypeAttribute(
             [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicConstructors)]
                 Type installerType
-        ) {
+        )
+        {
             if (installerType == null)
             {
                 throw new ArgumentNullException(nameof(installerType));
@@ -32,7 +33,8 @@ namespace System.ComponentModel
         public InstallerTypeAttribute(
             [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicConstructors)]
                 string typeName
-        ) {
+        )
+        {
             _typeName = typeName;
         }
 

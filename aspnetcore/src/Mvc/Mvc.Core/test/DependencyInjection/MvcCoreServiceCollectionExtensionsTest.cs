@@ -318,7 +318,8 @@ namespace Microsoft.AspNetCore.Mvc
             IServiceCollection services,
             Type serviceType,
             int expectedServiceRegistrationCount
-        ) {
+        )
+        {
             var serviceDescriptors = services.Where(
                 serviceDescriptor => serviceDescriptor.ServiceType == serviceType
             );
@@ -335,7 +336,8 @@ namespace Microsoft.AspNetCore.Mvc
             IServiceCollection services,
             Type serviceType,
             Type implementationType
-        ) {
+        )
+        {
             var matches = services.Where(
                     sd =>
                         sd.ServiceType == serviceType && sd.ImplementationType == implementationType

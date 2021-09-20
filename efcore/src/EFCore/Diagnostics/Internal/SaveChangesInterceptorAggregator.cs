@@ -31,14 +31,16 @@ namespace Microsoft.EntityFrameworkCore.Diagnostics.Internal
 
             public CompositeSaveChangesInterceptor(
                 IEnumerable<ISaveChangesInterceptor> interceptors
-            ) {
+            )
+            {
                 _interceptors = interceptors.ToArray();
             }
 
             public InterceptionResult<int> SavingChanges(
                 DbContextEventData eventData,
                 InterceptionResult<int> result
-            ) {
+            )
+            {
                 for (var i = 0; i < _interceptors.Length; i++)
                 {
                     result = _interceptors[i].SavingChanges(eventData, result);
@@ -69,7 +71,8 @@ namespace Microsoft.EntityFrameworkCore.Diagnostics.Internal
                 DbContextEventData eventData,
                 InterceptionResult<int> result,
                 CancellationToken cancellationToken = default
-            ) {
+            )
+            {
                 for (var i = 0; i < _interceptors.Length; i++)
                 {
                     result = await _interceptors[i].SavingChangesAsync(
@@ -87,7 +90,8 @@ namespace Microsoft.EntityFrameworkCore.Diagnostics.Internal
                 SaveChangesCompletedEventData eventData,
                 int result,
                 CancellationToken cancellationToken = default
-            ) {
+            )
+            {
                 for (var i = 0; i < _interceptors.Length; i++)
                 {
                     result = await _interceptors[i].SavedChangesAsync(
@@ -104,7 +108,8 @@ namespace Microsoft.EntityFrameworkCore.Diagnostics.Internal
             public async Task SaveChangesFailedAsync(
                 DbContextErrorEventData eventData,
                 CancellationToken cancellationToken = default
-            ) {
+            )
+            {
                 for (var i = 0; i < _interceptors.Length; i++)
                 {
                     await _interceptors[i].SaveChangesFailedAsync(eventData, cancellationToken)

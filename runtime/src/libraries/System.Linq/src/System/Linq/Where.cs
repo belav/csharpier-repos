@@ -12,7 +12,8 @@ namespace System.Linq
         public static IEnumerable<TSource> Where<TSource>(
             this IEnumerable<TSource> source,
             Func<TSource, bool> predicate
-        ) {
+        )
+        {
             if (source == null)
             {
                 ThrowHelper.ThrowArgumentNullException(ExceptionArgument.source);
@@ -46,7 +47,8 @@ namespace System.Linq
         public static IEnumerable<TSource> Where<TSource>(
             this IEnumerable<TSource> source,
             Func<TSource, int, bool> predicate
-        ) {
+        )
+        {
             if (source == null)
             {
                 ThrowHelper.ThrowArgumentNullException(ExceptionArgument.source);
@@ -63,7 +65,8 @@ namespace System.Linq
         private static IEnumerable<TSource> WhereIterator<TSource>(
             IEnumerable<TSource> source,
             Func<TSource, int, bool> predicate
-        ) {
+        )
+        {
             int index = -1;
             foreach (TSource element in source)
             {
@@ -92,7 +95,8 @@ namespace System.Linq
             public WhereEnumerableIterator(
                 IEnumerable<TSource> source,
                 Func<TSource, bool> predicate
-            ) {
+            )
+            {
                 Debug.Assert(source != null);
                 Debug.Assert(predicate != null);
                 _source = source;
@@ -266,7 +270,8 @@ namespace System.Linq
                 TSource[] source,
                 Func<TSource, bool> predicate,
                 Func<TSource, TResult> selector
-            ) {
+            )
+            {
                 Debug.Assert(source != null && source.Length > 0);
                 Debug.Assert(predicate != null);
                 Debug.Assert(selector != null);
@@ -324,7 +329,8 @@ namespace System.Linq
                 List<TSource> source,
                 Func<TSource, bool> predicate,
                 Func<TSource, TResult> selector
-            ) {
+            )
+            {
                 Debug.Assert(source != null);
                 Debug.Assert(predicate != null);
                 Debug.Assert(selector != null);
@@ -389,7 +395,8 @@ namespace System.Linq
                 IEnumerable<TSource> source,
                 Func<TSource, bool> predicate,
                 Func<TSource, TResult> selector
-            ) {
+            )
+            {
                 Debug.Assert(source != null);
                 Debug.Assert(predicate != null);
                 Debug.Assert(selector != null);

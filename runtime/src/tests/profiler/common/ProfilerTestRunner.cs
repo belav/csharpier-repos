@@ -26,7 +26,8 @@ namespace Profiler.Tests
             Guid profilerClsid,
             string profileeArguments = "",
             ProfileeOptions profileeOptions = ProfileeOptions.None
-        ) {
+        )
+        {
             string arguments;
             string program;
             Dictionary<string, string> envVars = new Dictionary<string, string>();

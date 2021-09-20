@@ -14,7 +14,8 @@ internal static partial class Interop
             int cbEncoded,
             void* pvStructInfo,
             ref int pcbStructInfo
-        ) {
+        )
+        {
             return CryptDecodeObject(
                 MsgEncodingType.All,
                 (IntPtr)lpszStructType,

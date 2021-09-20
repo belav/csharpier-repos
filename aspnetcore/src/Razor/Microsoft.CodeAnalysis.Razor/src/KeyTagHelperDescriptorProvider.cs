@@ -44,7 +44,8 @@ namespace Microsoft.CodeAnalysis.Razor
                     targetAssembly,
                     renderTreeBuilderType.ContainingAssembly
                 )
-            ) {
+            )
+            {
                 return;
             }
 

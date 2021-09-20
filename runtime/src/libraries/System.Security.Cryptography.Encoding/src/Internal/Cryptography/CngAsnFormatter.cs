@@ -45,7 +45,8 @@ namespace Internal.Cryptography
                             null,
                             ref cbFormat
                         )
-                    ) {
+                    )
+                    {
                         int charLength = (cbFormat + 1) / 2;
                         Span<char> buffer =
                             charLength <= 256
@@ -65,7 +66,8 @@ namespace Internal.Cryptography
                                     bufferPtr,
                                     ref cbFormat
                                 )
-                            ) {
+                            )
+                            {
                                 return new string(bufferPtr);
                             }
                         }

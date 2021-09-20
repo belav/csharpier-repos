@@ -114,7 +114,8 @@ namespace System.Diagnostics
                         _machineName,
                         _categoryName
                     )
-                ) {
+                )
+                {
                     // If we get MultiInstance, we can be confident it is correct.  If it is single instance, though
                     // we need to check if is a custom category and if the IsMultiInstance value is set in the registry.
                     // If not we return Unknown
@@ -183,7 +184,8 @@ namespace System.Diagnostics
             string counterName,
             string categoryName,
             string machineName
-        ) {
+        )
+        {
             if (counterName == null)
                 throw new ArgumentNullException(nameof(counterName));
 
@@ -216,7 +218,8 @@ namespace System.Diagnostics
             string categoryHelp,
             string counterName,
             string counterHelp
-        ) {
+        )
+        {
             CounterCreationData customData = new CounterCreationData(
                 counterName,
                 counterHelp,
@@ -236,7 +239,8 @@ namespace System.Diagnostics
             PerformanceCounterCategoryType categoryType,
             string counterName,
             string counterHelp
-        ) {
+        )
+        {
             CounterCreationData customData = new CounterCreationData(
                 counterName,
                 counterHelp,
@@ -260,7 +264,8 @@ namespace System.Diagnostics
             string categoryName,
             string categoryHelp,
             CounterCreationDataCollection counterData
-        ) {
+        )
+        {
             return Create(
                 categoryName,
                 categoryHelp,
@@ -274,7 +279,8 @@ namespace System.Diagnostics
             string categoryHelp,
             PerformanceCounterCategoryType categoryType,
             CounterCreationDataCollection counterData
-        ) {
+        )
+        {
             if (
                 categoryType < PerformanceCounterCategoryType.Unknown
                 || categoryType > PerformanceCounterCategoryType.MultiInstance
@@ -430,7 +436,8 @@ namespace System.Diagnostics
                         currentSampleType
                         == Interop.Kernel32.PerformanceCounterOptions.PERF_AVERAGE_TIMER
                     )
-                ) {
+                )
+                {
                     if (counterData.Count <= (i + 1))
                         throw new InvalidOperationException(SR.CounterLayout);
                     else
@@ -500,7 +507,8 @@ namespace System.Diagnostics
                     // Ensure that all counter help strings aren't null or empty
                     if (
                         counterData[i].CounterHelp == null || counterData[i].CounterHelp.Length == 0
-                    ) {
+                    )
+                    {
                         counterData[i].CounterHelp = counterData[i].CounterName;
                     }
                 }
@@ -585,7 +593,8 @@ namespace System.Diagnostics
                     machineName,
                     categoryName
                 )
-            ) {
+            )
+            {
                 if (categorySample._instanceNameTable.Count == 0)
                     return Array.Empty<string>();
 
@@ -700,7 +709,8 @@ namespace System.Diagnostics
                     _machineName,
                     _categoryName
                 )
-            ) {
+            )
+            {
                 return categorySample._instanceNameTable.ContainsKey(instanceName);
             }
         }
@@ -720,7 +730,8 @@ namespace System.Diagnostics
             string instanceName,
             string categoryName,
             string machineName
-        ) {
+        )
+        {
             if (instanceName == null)
                 throw new ArgumentNullException(nameof(instanceName));
 
@@ -760,7 +771,8 @@ namespace System.Diagnostics
                     _machineName,
                     _categoryName
                 )
-            ) {
+            )
+            {
                 return categorySample.ReadCategory();
             }
         }

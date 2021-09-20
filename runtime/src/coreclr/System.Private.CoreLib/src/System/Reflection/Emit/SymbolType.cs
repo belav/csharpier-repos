@@ -88,7 +88,8 @@ namespace System.Reflection.Emit
                     if (
                         (format[curIndex] >= '0' && format[curIndex] <= '9')
                         || format[curIndex] == '-'
-                    ) {
+                    )
+                    {
                         bool isNegative = false;
                         if (format[curIndex] == '-')
                         {
@@ -129,7 +130,8 @@ namespace System.Reflection.Emit
                         if (
                             (format[curIndex] >= '0' && format[curIndex] <= '9')
                             || format[curIndex] == '-'
-                        ) {
+                        )
+                        {
                             bool isNegative = false;
                             iUpperBound = 0;
                             if (format[curIndex] == '-')
@@ -313,7 +315,8 @@ namespace System.Reflection.Emit
             ParameterModifier[]? modifiers,
             CultureInfo? culture,
             string[]? namedParameters
-        ) {
+        )
+        {
             throw new NotSupportedException(SR.NotSupported_NonReflectedType);
         }
 
@@ -396,7 +399,8 @@ namespace System.Reflection.Emit
             CallingConventions callConvention,
             Type[] types,
             ParameterModifier[]? modifiers
-        ) {
+        )
+        {
             throw new NotSupportedException(SR.NotSupported_NonReflectedType);
         }
 
@@ -420,7 +424,8 @@ namespace System.Reflection.Emit
             CallingConventions callConvention,
             Type[]? types,
             ParameterModifier[]? modifiers
-        ) {
+        )
+        {
             throw new NotSupportedException(SR.NotSupported_NonReflectedType);
         }
 
@@ -487,7 +492,8 @@ namespace System.Reflection.Emit
             Type? returnType,
             Type[]? types,
             ParameterModifier[]? modifiers
-        ) {
+        )
+        {
             throw new NotSupportedException(SR.NotSupported_NonReflectedType);
         }
 
@@ -523,7 +529,8 @@ namespace System.Reflection.Emit
             string name,
             MemberTypes type,
             BindingFlags bindingAttr
-        ) {
+        )
+        {
             throw new NotSupportedException(SR.NotSupported_NonReflectedType);
         }
 

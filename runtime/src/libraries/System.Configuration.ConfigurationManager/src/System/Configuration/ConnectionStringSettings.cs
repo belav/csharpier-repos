@@ -46,11 +46,8 @@ namespace System.Configuration
             ConnectionString = connectionString;
         }
 
-        public ConnectionStringSettings(
-            string name,
-            string connectionString,
-            string providerName
-        ) : this()
+        public ConnectionStringSettings(string name, string connectionString, string providerName)
+            : this()
         {
             Name = name;
             ConnectionString = connectionString;

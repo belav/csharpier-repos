@@ -53,7 +53,8 @@ namespace Castle.Components.DictionaryAdapter
             IDictionaryAdapter dictionaryAdapter,
             string key,
             PropertyDescriptor property
-        ) {
+        )
+        {
             return Prefix ?? key + "_";
         }
 
@@ -67,7 +68,8 @@ namespace Castle.Components.DictionaryAdapter
             object storedValue,
             PropertyDescriptor property,
             bool ifExists
-        ) {
+        )
+        {
             if (storedValue == null)
             {
                 var component = dictionaryAdapter.This.ExtendedProperties[property.PropertyName];
@@ -99,7 +101,8 @@ namespace Castle.Components.DictionaryAdapter
             string key,
             ref object value,
             PropertyDescriptor property
-        ) {
+        )
+        {
             dictionaryAdapter.This.ExtendedProperties.Remove(property.PropertyName);
             return false;
         }

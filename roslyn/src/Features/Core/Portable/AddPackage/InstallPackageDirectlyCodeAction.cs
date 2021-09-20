@@ -27,7 +27,8 @@ namespace Microsoft.CodeAnalysis.AddPackage
             string versionOpt,
             bool includePrerelease,
             bool isLocal
-        ) {
+        )
+        {
             Title =
                 versionOpt == null
                     ? FeaturesResources.Find_and_install_latest_version

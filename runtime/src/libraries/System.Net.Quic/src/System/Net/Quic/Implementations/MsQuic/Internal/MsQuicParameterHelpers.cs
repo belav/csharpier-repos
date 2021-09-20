@@ -14,7 +14,8 @@ namespace System.Net.Quic.Implementations.MsQuic.Internal
             SafeHandle nativeObject,
             QUIC_PARAM_LEVEL level,
             uint param
-        ) {
+        )
+        {
             SOCKADDR_INET value;
             uint valueLen = (uint)sizeof(SOCKADDR_INET);
 
@@ -36,7 +37,8 @@ namespace System.Net.Quic.Implementations.MsQuic.Internal
             SafeHandle nativeObject,
             QUIC_PARAM_LEVEL level,
             uint param
-        ) {
+        )
+        {
             ushort value;
             uint valueLen = (uint)sizeof(ushort);
 
@@ -59,7 +61,8 @@ namespace System.Net.Quic.Implementations.MsQuic.Internal
             QUIC_PARAM_LEVEL level,
             uint param,
             ushort value
-        ) {
+        )
+        {
             QuicExceptionHelpers.ThrowIfFailed(
                 api.SetParamDelegate(nativeObject, level, param, sizeof(ushort), (byte*)&value),
                 "Could not set ushort."
@@ -71,7 +74,8 @@ namespace System.Net.Quic.Implementations.MsQuic.Internal
             SafeHandle nativeObject,
             QUIC_PARAM_LEVEL level,
             uint param
-        ) {
+        )
+        {
             ulong value;
             uint valueLen = (uint)sizeof(ulong);
 
@@ -94,7 +98,8 @@ namespace System.Net.Quic.Implementations.MsQuic.Internal
             QUIC_PARAM_LEVEL level,
             uint param,
             ulong value
-        ) {
+        )
+        {
             QuicExceptionHelpers.ThrowIfFailed(
                 api.SetParamDelegate(nativeObject, level, param, sizeof(ulong), (byte*)&value),
                 "Could not set ulong."

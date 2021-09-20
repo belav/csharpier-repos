@@ -46,7 +46,8 @@ internal static partial class Interop
             SafeX509StoreCtxHandle ctx,
             string cachePath,
             int chainDepth
-        ) {
+        )
+        {
             X509VerifyStatusCode response = CryptoNative_X509ChainGetCachedOcspStatus(
                 ctx,
                 cachePath,
@@ -77,7 +78,8 @@ internal static partial class Interop
             SafeOcspResponseHandle resp,
             string cachePath,
             int chainDepth
-        ) {
+        )
+        {
             X509VerifyStatusCode response = CryptoNative_X509ChainVerifyOcsp(
                 ctx,
                 req,
@@ -104,7 +106,8 @@ internal static partial class Interop
         internal static SafeOcspRequestHandle X509ChainBuildOcspRequest(
             SafeX509StoreCtxHandle storeCtx,
             int chainDepth
-        ) {
+        )
+        {
             SafeOcspRequestHandle req = CryptoNative_X509ChainBuildOcspRequest(
                 storeCtx,
                 chainDepth

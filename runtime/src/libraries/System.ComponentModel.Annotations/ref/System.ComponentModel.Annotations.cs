@@ -25,7 +25,8 @@ namespace System.ComponentModel.DataAnnotations
             )]
                 System.Type objectType,
             object instance
-        ) {
+        )
+        {
             throw null;
         }
     }
@@ -92,7 +93,8 @@ namespace System.ComponentModel.DataAnnotations
         protected override System.ComponentModel.DataAnnotations.ValidationResult? IsValid(
             object? value,
             System.ComponentModel.DataAnnotations.ValidationContext validationContext
-        ) {
+        )
+        {
             throw null;
         }
     }
@@ -157,7 +159,8 @@ namespace System.ComponentModel.DataAnnotations
         protected override System.ComponentModel.DataAnnotations.ValidationResult? IsValid(
             object? value,
             System.ComponentModel.DataAnnotations.ValidationContext validationContext
-        ) {
+        )
+        {
             throw null;
         }
     }
@@ -834,7 +837,8 @@ namespace System.ComponentModel.DataAnnotations
         public System.ComponentModel.DataAnnotations.ValidationResult? GetValidationResult(
             object? value,
             System.ComponentModel.DataAnnotations.ValidationContext validationContext
-        ) {
+        )
+        {
             throw null;
         }
         public virtual bool IsValid(object? value)
@@ -844,7 +848,8 @@ namespace System.ComponentModel.DataAnnotations
         protected virtual System.ComponentModel.DataAnnotations.ValidationResult? IsValid(
             object? value,
             System.ComponentModel.DataAnnotations.ValidationContext validationContext
-        ) {
+        )
+        {
             throw null;
         }
         public void Validate(
@@ -968,7 +973,8 @@ namespace System.ComponentModel.DataAnnotations
             object instance,
             System.ComponentModel.DataAnnotations.ValidationContext validationContext,
             System.Collections.Generic.ICollection<System.ComponentModel.DataAnnotations.ValidationResult>? validationResults
-        ) {
+        )
+        {
             throw null;
         }
         [System.Diagnostics.CodeAnalysis.RequiresUnreferencedCodeAttribute(
@@ -979,7 +985,8 @@ namespace System.ComponentModel.DataAnnotations
             System.ComponentModel.DataAnnotations.ValidationContext validationContext,
             System.Collections.Generic.ICollection<System.ComponentModel.DataAnnotations.ValidationResult>? validationResults,
             bool validateAllProperties
-        ) {
+        )
+        {
             throw null;
         }
         [System.Diagnostics.CodeAnalysis.RequiresUnreferencedCodeAttribute(
@@ -989,7 +996,8 @@ namespace System.ComponentModel.DataAnnotations
             object? value,
             System.ComponentModel.DataAnnotations.ValidationContext validationContext,
             System.Collections.Generic.ICollection<System.ComponentModel.DataAnnotations.ValidationResult>? validationResults
-        ) {
+        )
+        {
             throw null;
         }
         public static bool TryValidateValue(
@@ -997,7 +1005,8 @@ namespace System.ComponentModel.DataAnnotations
             System.ComponentModel.DataAnnotations.ValidationContext validationContext,
             System.Collections.Generic.ICollection<System.ComponentModel.DataAnnotations.ValidationResult>? validationResults,
             System.Collections.Generic.IEnumerable<System.ComponentModel.DataAnnotations.ValidationAttribute> validationAttributes
-        ) {
+        )
+        {
             throw null;
         }
         [System.Diagnostics.CodeAnalysis.RequiresUnreferencedCodeAttribute(

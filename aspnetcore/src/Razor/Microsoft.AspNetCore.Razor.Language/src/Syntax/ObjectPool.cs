@@ -93,7 +93,8 @@ namespace Microsoft.AspNetCore.Razor.Language.Syntax
                     !this.disposed
                     && !Environment.HasShutdownStarted
                     && !AppDomain.CurrentDomain.IsFinalizingForUnload()
-                ) {
+                )
+                {
                     string report = string.Format(
                         "Pool detected potential leaking of {0}. \n Location of the leak: \n {1} ",
                         typeof(T).ToString(),

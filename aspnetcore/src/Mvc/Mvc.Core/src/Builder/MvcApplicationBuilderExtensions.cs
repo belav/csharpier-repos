@@ -68,7 +68,8 @@ namespace Microsoft.AspNetCore.Builder
         public static IApplicationBuilder UseMvc(
             this IApplicationBuilder app,
             Action<IRouteBuilder> configureRoutes
-        ) {
+        )
+        {
             if (app == null)
             {
                 throw new ArgumentNullException(nameof(app));

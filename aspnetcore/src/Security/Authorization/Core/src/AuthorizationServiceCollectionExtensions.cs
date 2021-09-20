@@ -74,7 +74,8 @@ namespace Microsoft.Extensions.DependencyInjection
         public static IServiceCollection AddAuthorizationCore(
             this IServiceCollection services,
             Action<AuthorizationOptions> configure
-        ) {
+        )
+        {
             if (services == null)
             {
                 throw new ArgumentNullException(nameof(services));

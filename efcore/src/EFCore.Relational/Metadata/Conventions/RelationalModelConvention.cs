@@ -21,7 +21,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
         public RelationalModelConvention(
             ProviderConventionSetBuilderDependencies dependencies,
             RelationalConventionSetBuilderDependencies relationalDependencies
-        ) {
+        )
+        {
             RelationalDependencies = relationalDependencies;
         }
 

@@ -38,7 +38,8 @@ namespace Microsoft.CodeAnalysis.Remote
         private Func<RoslynNavigateToItem, Task> GetCallback(
             RemoteServiceCallbackId callbackId,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             return async i =>
                 await _callback.InvokeAsync(
                         (callback, c) => callback.OnResultFoundAsync(callbackId, i),
@@ -50,7 +51,8 @@ namespace Microsoft.CodeAnalysis.Remote
         public ValueTask HydrateAsync(
             PinnedSolutionInfo solutionInfo,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             return RunServiceAsync(
                 async cancellationToken =>
                 {
@@ -71,7 +73,8 @@ namespace Microsoft.CodeAnalysis.Remote
             ImmutableArray<string> kinds,
             RemoteServiceCallbackId callbackId,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             return RunServiceAsync(
                 async cancellationToken =>
                 {
@@ -101,7 +104,8 @@ namespace Microsoft.CodeAnalysis.Remote
             ImmutableArray<string> kinds,
             RemoteServiceCallbackId callbackId,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             return RunServiceAsync(
                 async cancellationToken =>
                 {
@@ -135,7 +139,8 @@ namespace Microsoft.CodeAnalysis.Remote
             ImmutableArray<string> kinds,
             RemoteServiceCallbackId callbackId,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             return RunServiceAsync(
                 async cancellationToken =>
                 {

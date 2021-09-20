@@ -63,7 +63,8 @@ namespace System.Net.Http.Functional.Tests
                     out memory,
                     out IMemoryOwner<byte> memoryOwner
                 )
-            ) {
+            )
+            {
                 Assert.Equal(contentLength, content.Headers.ContentLength);
             }
         }
@@ -73,7 +74,8 @@ namespace System.Net.Http.Functional.Tests
         public async Task ReadAsStreamAsync_TrivialMembersHaveExpectedValuesAndBehavior(
             bool useArray,
             bool readStreamAsync
-        ) {
+        )
+        {
             const int ContentLength = 42;
             Memory<byte> memory;
 
@@ -84,7 +86,8 @@ namespace System.Net.Http.Functional.Tests
                     out memory,
                     out IMemoryOwner<byte> memoryOwner
                 )
-            ) {
+            )
+            {
                 using (Stream stream = await content.ReadAsStreamAsync(readStreamAsync))
                 {
                     // property values
@@ -129,7 +132,8 @@ namespace System.Net.Http.Functional.Tests
                     out memory,
                     out IMemoryOwner<byte> memoryOwner
                 )
-            ) {
+            )
+            {
                 using (Stream s = await content.ReadAsStreamAsync(readStreamAsync))
                 {
                     foreach (int pos in new[] { 0, ContentLength / 2, ContentLength - 1 })
@@ -199,7 +203,8 @@ namespace System.Net.Http.Functional.Tests
             int contentLength,
             bool useArray,
             bool readStreamAsync
-        ) {
+        )
+        {
             Memory<byte> memory;
 
             using (
@@ -209,7 +214,8 @@ namespace System.Net.Http.Functional.Tests
                     out memory,
                     out IMemoryOwner<byte> memoryOwner
                 )
-            ) {
+            )
+            {
                 using (Stream stream = await content.ReadAsStreamAsync(readStreamAsync))
                 {
                     for (int i = 0; i < contentLength; i++)
@@ -228,7 +234,8 @@ namespace System.Net.Http.Functional.Tests
         public async Task ReadAsStreamAsync_Read_InvalidArguments(
             bool useArray,
             bool readStreamAsync
-        ) {
+        )
+        {
             const int ContentLength = 42;
             Memory<byte> memory;
 
@@ -239,7 +246,8 @@ namespace System.Net.Http.Functional.Tests
                     out memory,
                     out IMemoryOwner<byte> memoryOwner
                 )
-            ) {
+            )
+            {
                 using (Stream stream = await content.ReadAsStreamAsync(readStreamAsync))
                 {
                     AssertExtensions.Throws<ArgumentNullException>(
@@ -325,7 +333,8 @@ namespace System.Net.Http.Functional.Tests
             int mode,
             bool useArray,
             bool readStreamAsync
-        ) {
+        )
+        {
             const int ContentLength = 1024;
 
             Memory<byte> memory;
@@ -336,7 +345,8 @@ namespace System.Net.Http.Functional.Tests
                     out memory,
                     out IMemoryOwner<byte> memoryOwner
                 )
-            ) {
+            )
+            {
                 var buffer = new byte[3];
 
                 using (Stream stream = await content.ReadAsStreamAsync(readStreamAsync))
@@ -398,7 +408,8 @@ namespace System.Net.Http.Functional.Tests
         public async Task ReadAsStreamAsync_ReadWithCancelableToken_MatchesInput(
             bool useArray,
             bool readStreamAsync
-        ) {
+        )
+        {
             const int ContentLength = 100;
 
             Memory<byte> memory;
@@ -409,7 +420,8 @@ namespace System.Net.Http.Functional.Tests
                     out memory,
                     out IMemoryOwner<byte> memoryOwner
                 )
-            ) {
+            )
+            {
                 var buffer = new byte[1];
                 var cts = new CancellationTokenSource();
                 int bytesRead;
@@ -442,7 +454,8 @@ namespace System.Net.Http.Functional.Tests
         public async Task ReadAsStreamAsync_ReadWithCanceledToken_MatchesInput(
             bool useArray,
             bool readStreamAsync
-        ) {
+        )
+        {
             const int ContentLength = 2;
 
             Memory<byte> memory;
@@ -454,7 +467,8 @@ namespace System.Net.Http.Functional.Tests
                     out memory,
                     out IMemoryOwner<byte> memoryOwner
                 )
-            ) {
+            )
+            {
                 using (Stream stream = await content.ReadAsStreamAsync(readStreamAsync))
                 {
                     await Assert.ThrowsAnyAsync<OperationCanceledException>(
@@ -491,7 +505,8 @@ namespace System.Net.Http.Functional.Tests
                     out memory,
                     out IMemoryOwner<byte> memoryOwner
                 )
-            ) {
+            )
+            {
                 var destination = new MemoryStream();
                 await content.CopyToAsync(destination);
 
@@ -505,7 +520,8 @@ namespace System.Net.Http.Functional.Tests
             int contentLength,
             bool useArray,
             bool readStreamAsync
-        ) {
+        )
+        {
             Memory<byte> memory;
             using (
                 ReadOnlyMemoryContent content = CreateContent(
@@ -514,7 +530,8 @@ namespace System.Net.Http.Functional.Tests
                     out memory,
                     out IMemoryOwner<byte> memoryOwner
                 )
-            ) {
+            )
+            {
                 var destination = new MemoryStream();
                 using (Stream s = await content.ReadAsStreamAsync(readStreamAsync))
                 {
@@ -530,7 +547,8 @@ namespace System.Net.Http.Functional.Tests
         public async Task ReadAsStreamAsync_CopyTo_InvalidArguments(
             bool useArray,
             bool readStreamAsync
-        ) {
+        )
+        {
             const int ContentLength = 42;
             Memory<byte> memory;
             using (
@@ -540,7 +558,8 @@ namespace System.Net.Http.Functional.Tests
                     out memory,
                     out IMemoryOwner<byte> memoryOwner
                 )
-            ) {
+            )
+            {
                 using (Stream s = await content.ReadAsStreamAsync(readStreamAsync))
                 {
                     AssertExtensions.Throws<ArgumentNullException>(
@@ -596,7 +615,8 @@ namespace System.Net.Http.Functional.Tests
             int contentLength,
             bool useArray,
             bool readStreamAsync
-        ) {
+        )
+        {
             Memory<byte> memory;
             using (
                 ReadOnlyMemoryContent content = CreateContent(
@@ -605,7 +625,8 @@ namespace System.Net.Http.Functional.Tests
                     out memory,
                     out IMemoryOwner<byte> memoryOwner
                 )
-            ) {
+            )
+            {
                 var destination = new MemoryStream();
                 using (Stream s = await content.ReadAsStreamAsync(readStreamAsync))
                 {
@@ -621,7 +642,8 @@ namespace System.Net.Http.Functional.Tests
             bool useArray,
             out Memory<byte> memory,
             out IMemoryOwner<byte> memoryOwner
-        ) {
+        )
+        {
             if (useArray)
             {
                 memory = new byte[contentLength];

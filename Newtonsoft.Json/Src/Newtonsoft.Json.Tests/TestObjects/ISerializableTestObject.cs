@@ -56,7 +56,8 @@ namespace Newtonsoft.Json.Tests.TestObjects
             int intValue,
             DateTimeOffset dateTimeOffset,
             Person personValue
-        ) {
+        )
+        {
             _stringValue = stringValue;
             _intValue = intValue;
             _dateTimeOffsetValue = dateTimeOffset;

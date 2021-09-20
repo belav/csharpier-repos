@@ -2667,7 +2667,8 @@ namespace JIT.HardwareIntrinsics.Arm
             bool rounding,
             short op3,
             bool subOp
-        ) {
+        )
+        {
             short product = (short)((short)op1 * (short)op2);
 
             bool dblOvf;
@@ -2746,7 +2747,8 @@ namespace JIT.HardwareIntrinsics.Arm
             sbyte op1,
             sbyte op2,
             sbyte op3
-        ) {
+        )
+        {
             short addend = UnsignedShift((short)op1, (short)(8 * sizeof(sbyte)));
 
             var (val, ovf) = MultiplyDoublingOvf(op2, op3, rounding: true, addend, subOp: false);
@@ -2758,7 +2760,8 @@ namespace JIT.HardwareIntrinsics.Arm
             sbyte op1,
             sbyte op2,
             sbyte op3
-        ) {
+        )
+        {
             short minuend = UnsignedShift((short)op1, (short)(8 * sizeof(sbyte)));
 
             var (val, ovf) = MultiplyDoublingOvf(op2, op3, rounding: true, minuend, subOp: true);
@@ -3181,7 +3184,8 @@ namespace JIT.HardwareIntrinsics.Arm
             bool rounding,
             int op3,
             bool subOp
-        ) {
+        )
+        {
             int product = (int)((int)op1 * (int)op2);
 
             bool dblOvf;
@@ -3260,7 +3264,8 @@ namespace JIT.HardwareIntrinsics.Arm
             short op1,
             short op2,
             short op3
-        ) {
+        )
+        {
             int addend = UnsignedShift((int)op1, (int)(8 * sizeof(short)));
 
             var (val, ovf) = MultiplyDoublingOvf(op2, op3, rounding: true, addend, subOp: false);
@@ -3272,7 +3277,8 @@ namespace JIT.HardwareIntrinsics.Arm
             short op1,
             short op2,
             short op3
-        ) {
+        )
+        {
             int minuend = UnsignedShift((int)op1, (int)(8 * sizeof(short)));
 
             var (val, ovf) = MultiplyDoublingOvf(op2, op3, rounding: true, minuend, subOp: true);
@@ -3686,7 +3692,8 @@ namespace JIT.HardwareIntrinsics.Arm
             bool rounding,
             long op3,
             bool subOp
-        ) {
+        )
+        {
             long product = (long)((long)op1 * (long)op2);
 
             bool dblOvf;
@@ -4069,7 +4076,8 @@ namespace JIT.HardwareIntrinsics.Arm
             sbyte op2,
             bool rounding = false,
             bool saturating = false
-        ) {
+        )
+        {
             int shift = (sbyte)(op2 & 0xFF);
 
             sbyte rndCns = 0;
@@ -4190,7 +4198,8 @@ namespace JIT.HardwareIntrinsics.Arm
             sbyte op2,
             bool rounding = false,
             bool saturating = false
-        ) {
+        )
+        {
             int shift = (sbyte)(op2 & 0xFF);
 
             byte rndCns = 0;
@@ -4374,7 +4383,8 @@ namespace JIT.HardwareIntrinsics.Arm
             short op2,
             bool rounding = false,
             bool saturating = false
-        ) {
+        )
+        {
             int shift = (sbyte)(op2 & 0xFF);
 
             short rndCns = 0;
@@ -4496,7 +4506,8 @@ namespace JIT.HardwareIntrinsics.Arm
             short op2,
             bool rounding = false,
             bool saturating = false
-        ) {
+        )
+        {
             int shift = (sbyte)(op2 & 0xFF);
 
             ushort rndCns = 0;
@@ -4680,7 +4691,8 @@ namespace JIT.HardwareIntrinsics.Arm
             int op2,
             bool rounding = false,
             bool saturating = false
-        ) {
+        )
+        {
             int shift = (sbyte)(op2 & 0xFF);
 
             int rndCns = 0;
@@ -4798,7 +4810,8 @@ namespace JIT.HardwareIntrinsics.Arm
             int op2,
             bool rounding = false,
             bool saturating = false
-        ) {
+        )
+        {
             int shift = (sbyte)(op2 & 0xFF);
 
             uint rndCns = 0;
@@ -4982,7 +4995,8 @@ namespace JIT.HardwareIntrinsics.Arm
             long op2,
             bool rounding = false,
             bool saturating = false
-        ) {
+        )
+        {
             int shift = (sbyte)(op2 & 0xFF);
 
             long rndCns = 0;
@@ -5103,7 +5117,8 @@ namespace JIT.HardwareIntrinsics.Arm
             long op2,
             bool rounding = false,
             bool saturating = false
-        ) {
+        )
+        {
             int shift = (sbyte)(op2 & 0xFF);
 
             ulong rndCns = 0;
@@ -5723,7 +5738,8 @@ namespace JIT.HardwareIntrinsics.Arm
             sbyte[] op1,
             sbyte[] op2,
             int i
-        ) {
+        )
+        {
             if (2 * i + 1 < op1.Length)
             {
                 return pairOp(op1[2 * i], op1[2 * i + 1]);
@@ -5834,7 +5850,8 @@ namespace JIT.HardwareIntrinsics.Arm
             short[] op1,
             short[] op2,
             int i
-        ) {
+        )
+        {
             if (2 * i + 1 < op1.Length)
             {
                 return pairOp(op1[2 * i], op1[2 * i + 1]);
@@ -5893,7 +5910,8 @@ namespace JIT.HardwareIntrinsics.Arm
             ushort[] op1,
             ushort[] op2,
             int i
-        ) {
+        )
+        {
             if (2 * i + 1 < op1.Length)
             {
                 return pairOp(op1[2 * i], op1[2 * i + 1]);
@@ -6107,7 +6125,8 @@ namespace JIT.HardwareIntrinsics.Arm
             ulong[] op1,
             ulong[] op2,
             int i
-        ) {
+        )
+        {
             if (2 * i + 1 < op1.Length)
             {
                 return pairOp(op1[2 * i], op1[2 * i + 1]);
@@ -6166,7 +6185,8 @@ namespace JIT.HardwareIntrinsics.Arm
             float[] op1,
             float[] op2,
             int i
-        ) {
+        )
+        {
             if (2 * i + 1 < op1.Length)
             {
                 return pairOp(op1[2 * i], op1[2 * i + 1]);
@@ -6225,7 +6245,8 @@ namespace JIT.HardwareIntrinsics.Arm
             double[] op1,
             double[] op2,
             int i
-        ) {
+        )
+        {
             if (2 * i + 1 < op1.Length)
             {
                 return pairOp(op1[2 * i], op1[2 * i + 1]);
@@ -6772,7 +6793,8 @@ namespace JIT.HardwareIntrinsics.Arm
             sbyte[] defaultValues,
             sbyte[] indices,
             params sbyte[][] table
-        ) {
+        )
+        {
             sbyte[] fullTable = table.SelectMany(x => x).ToArray();
             int index = indices[i];
 
@@ -6795,7 +6817,8 @@ namespace JIT.HardwareIntrinsics.Arm
             byte[] defaultValues,
             byte[] indices,
             params byte[][] table
-        ) {
+        )
+        {
             byte[] fullTable = table.SelectMany(x => x).ToArray();
             int index = indices[i];
 

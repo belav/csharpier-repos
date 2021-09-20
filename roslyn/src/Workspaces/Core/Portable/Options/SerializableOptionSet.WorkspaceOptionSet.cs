@@ -29,7 +29,8 @@ namespace Microsoft.CodeAnalysis.Options
             private WorkspaceOptionSet(
                 IOptionService service,
                 ImmutableDictionary<OptionKey, object?> values
-            ) {
+            )
+            {
                 OptionService = service;
                 _values = values;
             }

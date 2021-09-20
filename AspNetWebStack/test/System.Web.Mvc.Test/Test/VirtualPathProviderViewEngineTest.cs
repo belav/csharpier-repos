@@ -181,7 +181,8 @@ namespace System.Web.Mvc.Test
         [InlineData("/foo/bar.view")]
         public void FindView_PathViewDoesNotExistAndNoMaster_ReturnsSearchedLocationsResult(
             string path
-        ) {
+        )
+        {
             // Arrange
             SetupFileDoesNotExist(path);
             SetupCacheMiss(CreateCacheBaseKey(Cache.View, path, "", ""));
@@ -199,7 +200,8 @@ namespace System.Web.Mvc.Test
         [InlineData("/foo/bar.unsupported")]
         public void FindView_PathViewNotSupportedAndNoMaster_ReturnsSearchedLocationsResult(
             string path
-        ) {
+        )
+        {
             // Arrange
             SetupCacheMiss(CreateCacheBaseKey(Cache.View, path, "", ""));
 
@@ -1215,7 +1217,8 @@ namespace System.Web.Mvc.Test
             string name,
             string controllerName,
             string area
-        ) {
+        )
+        {
             var r = String.Join(":", prefix, name, controllerName, area) + ":";
             return r;
         }
@@ -1226,7 +1229,8 @@ namespace System.Web.Mvc.Test
             string controller = "controllerName",
             string area = "",
             string displayMode = ""
-        ) {
+        )
+        {
             if (name == null)
             {
                 name = prefix.ToString().ToLowerInvariant() + "Name";
@@ -1388,7 +1392,8 @@ namespace System.Web.Mvc.Test
             protected override IView CreatePartialView(
                 ControllerContext controllerContext,
                 string partialPath
-            ) {
+            )
+            {
                 return new TestView() { ControllerContext = controllerContext, Path = partialPath };
             }
 
@@ -1396,7 +1401,8 @@ namespace System.Web.Mvc.Test
                 ControllerContext controllerContext,
                 string viewPath,
                 string masterPath
-            ) {
+            )
+            {
                 return new TestView()
                 {
                     ControllerContext = controllerContext,
@@ -1410,7 +1416,8 @@ namespace System.Web.Mvc.Test
                 string name,
                 string controllerName,
                 string areaName
-            ) {
+            )
+            {
                 return VirtualPathProviderViewEngineTest.CreateCacheBaseKey(
                     prefix,
                     name,
@@ -1431,7 +1438,8 @@ namespace System.Web.Mvc.Test
             protected override IView CreatePartialView(
                 ControllerContext controllerContext,
                 string partialPath
-            ) {
+            )
+            {
                 throw new NotImplementedException();
             }
 
@@ -1439,7 +1447,8 @@ namespace System.Web.Mvc.Test
                 ControllerContext controllerContext,
                 string viewPath,
                 string masterPath
-            ) {
+            )
+            {
                 throw new NotImplementedException();
             }
         }

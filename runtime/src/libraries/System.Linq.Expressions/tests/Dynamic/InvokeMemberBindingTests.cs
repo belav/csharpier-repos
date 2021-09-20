@@ -24,7 +24,8 @@ namespace System.Dynamic.Tests
                 DynamicMetaObject target,
                 DynamicMetaObject[] args,
                 DynamicMetaObject errorSuggestion
-            ) {
+            )
+            {
                 throw new NotSupportedException();
             }
 
@@ -32,7 +33,8 @@ namespace System.Dynamic.Tests
                 DynamicMetaObject target,
                 DynamicMetaObject[] args,
                 DynamicMetaObject errorSuggestion
-            ) {
+            )
+            {
                 throw new NotSupportedException();
             }
         }
@@ -206,7 +208,8 @@ namespace System.Dynamic.Tests
         private static dynamic GetObjectWithNonIndexerParameterProperty(
             bool hasGetter,
             bool hasSetter
-        ) {
+        )
+        {
             TypeBuilder typeBuild = AssemblyBuilder.DefineDynamicAssembly(
                     new AssemblyName("TestAssembly"),
                     AssemblyBuilderAccess.RunAndCollect

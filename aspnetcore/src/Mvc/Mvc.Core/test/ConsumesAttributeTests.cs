@@ -45,7 +45,8 @@ namespace Microsoft.AspNetCore.Mvc
         public void Constructor_UnparsableContentType_Throws(
             string content,
             string invalidContentType
-        ) {
+        )
+        {
             // Act
             var contentTypes = content.Split(',')
                 .Select(contentType => contentType.Trim())
@@ -166,7 +167,8 @@ namespace Microsoft.AspNetCore.Mvc
         [InlineData(null)]
         public void ActionConstraint_Accept_ForNoMatchingCandidates_SelectsTheFirstCandidate(
             string contentType
-        ) {
+        )
+        {
             // Arrange
             var constraint1 = new ConsumesAttribute("application/json", "text/xml");
             var action1 = new ActionDescriptor()
@@ -207,7 +209,8 @@ namespace Microsoft.AspNetCore.Mvc
         [InlineData(null)]
         public void ActionConstraint_Accept_ForNoRequestType_SelectsTheCandidateWithoutConstraintIfPresent(
             string contentType
-        ) {
+        )
+        {
             // Arrange
             var constraint1 = new ConsumesAttribute("application/json");
             var actionWithConstraint = new ActionDescriptor()
@@ -252,7 +255,8 @@ namespace Microsoft.AspNetCore.Mvc
         [InlineData("invalid/invalid")]
         public void ActionConstraint_Accept_UnrecognizedMediaType_SelectsTheCandidateWithoutConstraintIfPresent(
             string contentType
-        ) {
+        )
+        {
             // Arrange
             var actionWithoutConstraint = new ActionDescriptor();
             var constraint1 = new ConsumesAttribute("application/json");
@@ -296,7 +300,8 @@ namespace Microsoft.AspNetCore.Mvc
         [InlineData(null)]
         public void ActionConstraint_Accept_ForNoRequestType_ReturnsTrueForAllConstraints(
             string contentType
-        ) {
+        )
+        {
             // Arrange
             var constraint1 = new ConsumesAttribute("application/json");
             var actionWithConstraint = new ActionDescriptor()
@@ -339,7 +344,8 @@ namespace Microsoft.AspNetCore.Mvc
         [InlineData("application/custom")]
         public void OnResourceExecuting_ForNoContentTypeMatch_SetsUnsupportedMediaTypeResult(
             string contentType
-        ) {
+        )
+        {
             // Arrange
             var httpContext = new DefaultHttpContext();
             httpContext.Request.ContentType = contentType;
@@ -469,7 +475,8 @@ namespace Microsoft.AspNetCore.Mvc
         private static RouteContext CreateRouteContext(
             string contentType = null,
             object routeValues = null
-        ) {
+        )
+        {
             var httpContext = CreateHttpContext(contentType);
 
             var routeContext = new RouteContext(httpContext);
@@ -486,7 +493,8 @@ namespace Microsoft.AspNetCore.Mvc
         private static HttpContext CreateHttpContext(
             string contentType = null,
             object routeValues = null
-        ) {
+        )
+        {
             var httpContext = new DefaultHttpContext();
             if (contentType != null)
             {

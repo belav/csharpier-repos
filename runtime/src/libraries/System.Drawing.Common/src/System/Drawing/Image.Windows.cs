@@ -22,7 +22,8 @@ namespace System.Drawing
             Stream stream,
             bool useEmbeddedColorManagement,
             bool validateImageData
-        ) {
+        )
+        {
             if (stream == null)
                 throw new ArgumentNullException(nameof(stream));
 
@@ -423,7 +424,8 @@ namespace System.Drawing
             int thumbHeight,
             GetThumbnailImageAbort? callback,
             IntPtr callbackData
-        ) {
+        )
+        {
             IntPtr thumbImage = IntPtr.Zero;
 
             Gdip.CheckStatus(

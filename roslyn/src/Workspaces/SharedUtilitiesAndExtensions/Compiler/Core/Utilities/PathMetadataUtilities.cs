@@ -26,7 +26,8 @@ namespace Microsoft.CodeAnalysis.Shared.Utilities
             IEnumerable<string> folders,
             ISyntaxFacts syntaxFacts,
             string? rootNamespace = null
-        ) {
+        )
+        {
             var parts = folders.SelectMany(folder => folder.Split(NamespaceSeparatorArray))
                 .SelectAsArray(syntaxFacts.EscapeIdentifier);
 
@@ -50,7 +51,8 @@ namespace Microsoft.CodeAnalysis.Shared.Utilities
         public static ImmutableArray<string> BuildFoldersFromNamespace(
             string? @namespace,
             string? rootNamespace = null
-        ) {
+        )
+        {
             if (@namespace is null || @namespace == rootNamespace)
             {
                 return ImmutableArray<string>.Empty;
@@ -59,7 +61,8 @@ namespace Microsoft.CodeAnalysis.Shared.Utilities
             if (
                 rootNamespace is not null
                 && @namespace.StartsWith(rootNamespace + ".", StringComparison.OrdinalIgnoreCase)
-            ) {
+            )
+            {
                 // Add 1 to get rid of the starting "." as well
                 @namespace = @namespace.Substring(rootNamespace.Length + 1);
             }

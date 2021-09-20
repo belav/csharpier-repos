@@ -36,11 +36,13 @@ namespace Microsoft.CodeAnalysis.FlowAnalysis.SymbolUsageAnalysis
             IOperation rootOperation,
             ISymbol owningSymbol,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             AnalysisData analysisData = null;
             using (
                 analysisData = OperationTreeAnalysisData.Create(owningSymbol, AnalyzeLocalFunction)
-            ) {
+            )
+            {
                 var operations = SpecializedCollections.SingletonEnumerable(rootOperation);
                 Walker.AnalyzeOperationsAndUpdateData(
                     owningSymbol,

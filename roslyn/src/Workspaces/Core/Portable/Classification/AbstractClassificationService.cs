@@ -33,7 +33,8 @@ namespace Microsoft.CodeAnalysis.Classification
             TextSpan textSpan,
             List<ClassifiedSpan> result,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var classificationService = document.GetLanguageService<ISyntaxClassificationService>();
             if (classificationService == null)
             {
@@ -103,7 +104,8 @@ namespace Microsoft.CodeAnalysis.Classification
             TextSpan textSpan,
             ArrayBuilder<ClassifiedSpan> result,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var classificationService =
                 document.GetRequiredLanguageService<ISyntaxClassificationService>();
 
@@ -136,7 +138,8 @@ namespace Microsoft.CodeAnalysis.Classification
             TextSpan textSpan,
             List<ClassifiedSpan> result,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var classificationService = document.GetLanguageService<ISyntaxClassificationService>();
             if (classificationService == null)
             {
@@ -179,7 +182,8 @@ namespace Microsoft.CodeAnalysis.Classification
         protected static void AddRange(
             ArrayBuilder<ClassifiedSpan> temp,
             List<ClassifiedSpan> result
-        ) {
+        )
+        {
             foreach (var span in temp)
             {
                 result.Add(span);
@@ -196,7 +200,8 @@ namespace Microsoft.CodeAnalysis.Classification
             Document newDocument,
             TimeSpan timeout,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var classificationService =
                 oldDocument.GetLanguageService<ISyntaxClassificationService>();
             return classificationService == null

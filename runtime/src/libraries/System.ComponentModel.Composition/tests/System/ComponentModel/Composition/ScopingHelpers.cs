@@ -13,14 +13,16 @@ namespace System.ComponentModel.Composition
         public static CompositionScopeDefinition AsScope(
             this ComposablePartCatalog catalog,
             params CompositionScopeDefinition[] children
-        ) {
+        )
+        {
             return new CompositionScopeDefinition(catalog, children);
         }
 
         public static CompositionScopeDefinition AsScopeWithPublicSurface<T>(
             this ComposablePartCatalog catalog,
             params CompositionScopeDefinition[] children
-        ) {
+        )
+        {
             IEnumerable<ExportDefinition> definitions = catalog.Parts.SelectMany(
                 (p) =>
                     p.ExportDefinitions.Where(

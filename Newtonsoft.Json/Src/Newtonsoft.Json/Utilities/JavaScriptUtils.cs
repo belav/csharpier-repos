@@ -63,7 +63,8 @@ namespace Newtonsoft.Json.Utilities
             IArrayPool<char>? bufferPool,
             int size,
             char[]? buffer
-        ) {
+        )
+        {
             if (bufferPool == null)
             {
                 return new char[size];
@@ -113,7 +114,8 @@ namespace Newtonsoft.Json.Utilities
         public static bool[] GetCharEscapeFlags(
             StringEscapeHandling stringEscapeHandling,
             char quoteChar
-        ) {
+        )
+        {
             if (stringEscapeHandling == StringEscapeHandling.EscapeHtml)
             {
                 return HtmlCharEscapeFlags;
@@ -155,7 +157,8 @@ namespace Newtonsoft.Json.Utilities
             StringEscapeHandling stringEscapeHandling,
             IArrayPool<char>? bufferPool,
             ref char[]? writeBuffer
-        ) {
+        )
+        {
             // leading delimiter
             if (appendDelimiters)
             {
@@ -232,17 +235,20 @@ namespace Newtonsoft.Json.Utilities
                                 if (
                                     c < charEscapeFlags.Length
                                     || stringEscapeHandling == StringEscapeHandling.EscapeNonAscii
-                                ) {
+                                )
+                                {
                                     if (
                                         c == '\''
                                         && stringEscapeHandling != StringEscapeHandling.EscapeHtml
-                                    ) {
+                                    )
+                                    {
                                         escapedValue = @"\'";
                                     }
                                     else if (
                                         c == '"'
                                         && stringEscapeHandling != StringEscapeHandling.EscapeHtml
-                                    ) {
+                                    )
+                                    {
                                         escapedValue = @"\""";
                                     }
                                     else
@@ -250,7 +256,8 @@ namespace Newtonsoft.Json.Utilities
                                         if (
                                             writeBuffer == null
                                             || writeBuffer.Length < UnicodeTextLength
-                                        ) {
+                                        )
+                                        {
                                             writeBuffer = BufferUtils.EnsureBufferSize(
                                                 bufferPool,
                                                 UnicodeTextLength,
@@ -360,7 +367,8 @@ namespace Newtonsoft.Json.Utilities
             char delimiter,
             bool appendDelimiters,
             StringEscapeHandling stringEscapeHandling
-        ) {
+        )
+        {
             bool[] charEscapeFlags = GetCharEscapeFlags(stringEscapeHandling, delimiter);
 
             using (StringWriter w = StringUtils.CreateStringWriter(value?.Length ?? 16))
@@ -384,7 +392,8 @@ namespace Newtonsoft.Json.Utilities
             string s,
             bool[] charEscapeFlags,
             StringEscapeHandling stringEscapeHandling
-        ) {
+        )
+        {
             for (int i = 0; i != s.Length; i++)
             {
                 char c = s[i];
@@ -426,7 +435,8 @@ namespace Newtonsoft.Json.Utilities
             JsonTextWriter client,
             char[] writeBuffer,
             CancellationToken cancellationToken = default
-        ) {
+        )
+        {
             if (cancellationToken.IsCancellationRequested)
             {
                 return cancellationToken.FromCanceled();
@@ -471,7 +481,8 @@ namespace Newtonsoft.Json.Utilities
             JsonTextWriter client,
             char[] writeBuffer,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             Task task = writer.WriteAsync(delimiter, cancellationToken);
             if (!task.IsCompletedSucessfully())
             {
@@ -518,7 +529,8 @@ namespace Newtonsoft.Json.Utilities
             JsonTextWriter client,
             char[] writeBuffer,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             await task.ConfigureAwait(false);
 
             if (!StringUtils.IsNullOrEmpty(s))
@@ -543,7 +555,8 @@ namespace Newtonsoft.Json.Utilities
             TextWriter writer,
             char c,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             await task.ConfigureAwait(false);
             await writer.WriteAsync(c, cancellationToken).ConfigureAwait(false);
         }
@@ -556,7 +569,8 @@ namespace Newtonsoft.Json.Utilities
             JsonTextWriter client,
             char[] writeBuffer,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             int i = FirstCharToEscape(s, charEscapeFlags, stringEscapeHandling);
             return i == -1
               ? writer.WriteAsync(s, cancellationToken)
@@ -581,7 +595,8 @@ namespace Newtonsoft.Json.Utilities
             JsonTextWriter client,
             char[] writeBuffer,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             if (writeBuffer == null || writeBuffer.Length < lastWritePosition)
             {
                 writeBuffer = client.EnsureWriteBuffer(lastWritePosition, UnicodeTextLength);
@@ -642,15 +657,18 @@ namespace Newtonsoft.Json.Utilities
                         if (
                             c < charEscapeFlags.Length
                             || stringEscapeHandling == StringEscapeHandling.EscapeNonAscii
-                        ) {
+                        )
+                        {
                             if (
                                 c == '\'' && stringEscapeHandling != StringEscapeHandling.EscapeHtml
-                            ) {
+                            )
+                            {
                                 escapedValue = @"\'";
                             }
                             else if (
                                 c == '"' && stringEscapeHandling != StringEscapeHandling.EscapeHtml
-                            ) {
+                            )
+                            {
                                 escapedValue = @"\""";
                             }
                             else
@@ -724,7 +742,8 @@ namespace Newtonsoft.Json.Utilities
             JsonReader reader,
             out DateTime dateTime,
             [NotNullWhen(false)] out string? errorMessage
-        ) {
+        )
+        {
             dateTime = default;
             errorMessage = null;
 
@@ -791,7 +810,8 @@ namespace Newtonsoft.Json.Utilities
             JsonReader reader,
             out long? integer,
             [NotNullWhen(false)] out string? errorMessage
-        ) {
+        )
+        {
             integer = null;
             errorMessage = null;
 

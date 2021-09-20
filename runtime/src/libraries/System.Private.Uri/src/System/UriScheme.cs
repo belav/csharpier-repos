@@ -96,7 +96,8 @@ namespace System
             Uri baseUri,
             Uri? relativeUri,
             out UriFormatException? parsingError
-        ) {
+        )
+        {
             if (baseUri.UserDrivenParsing)
                 throw new InvalidOperationException(
                     SR.Format(SR.net_uri_UserDrivenParsing, this.GetType())

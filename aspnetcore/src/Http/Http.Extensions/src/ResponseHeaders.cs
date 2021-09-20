@@ -129,7 +129,8 @@ namespace Microsoft.AspNetCore.Http.Headers
                         UriKind.RelativeOrAbsolute,
                         out var uri
                     )
-                ) {
+                )
+                {
                     return uri;
                 }
                 return null;

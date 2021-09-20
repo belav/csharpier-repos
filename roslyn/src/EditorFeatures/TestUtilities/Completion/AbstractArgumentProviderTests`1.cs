@@ -46,7 +46,8 @@ namespace Microsoft.CodeAnalysis.Test.Utilities.Completion
             string markup,
             string? expectedDefaultValue,
             string? previousDefaultValue = null
-        ) {
+        )
+        {
             using var workspaceFixture = GetOrCreateWorkspaceFixture();
 
             var workspace = workspaceFixture.Target.GetWorkspace(markup, ExportProvider);

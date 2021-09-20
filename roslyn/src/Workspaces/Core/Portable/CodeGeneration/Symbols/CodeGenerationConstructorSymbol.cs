@@ -17,19 +17,20 @@ namespace Microsoft.CodeAnalysis.CodeGeneration
             Accessibility accessibility,
             DeclarationModifiers modifiers,
             ImmutableArray<IParameterSymbol> parameters
-        ) : base(
-            containingType,
-            attributes,
-            accessibility,
-            modifiers,
-            returnType: null,
-            refKind: RefKind.None,
-            explicitInterfaceImplementations: default,
-            name: string.Empty,
-            typeParameters: ImmutableArray<ITypeParameterSymbol>.Empty,
-            parameters: parameters,
-            returnTypeAttributes: ImmutableArray<AttributeData>.Empty
-        ) { }
+        )
+            : base(
+                containingType,
+                attributes,
+                accessibility,
+                modifiers,
+                returnType: null,
+                refKind: RefKind.None,
+                explicitInterfaceImplementations: default,
+                name: string.Empty,
+                typeParameters: ImmutableArray<ITypeParameterSymbol>.Empty,
+                parameters: parameters,
+                returnTypeAttributes: ImmutableArray<AttributeData>.Empty
+            ) { }
 
         public override MethodKind MethodKind => MethodKind.Constructor;
 

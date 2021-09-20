@@ -41,7 +41,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
             IConventionAnnotation? annotation,
             IConventionAnnotation? oldAnnotation,
             IConventionContext<IConventionAnnotation> context
-        ) {
+        )
+        {
             if (name == SqlServerAnnotationNames.ValueGenerationStrategy)
             {
                 propertyBuilder.ValueGenerated(GetValueGenerated(propertyBuilder.Metadata));

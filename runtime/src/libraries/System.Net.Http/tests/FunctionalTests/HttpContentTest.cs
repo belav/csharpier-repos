@@ -213,7 +213,8 @@ namespace System.Net.Http.Functional.Tests
         [InlineData(false)]
         public async Task ReadAsStreamAsync_GetFromUnbufferedContent_CreateContentReadStreamCalledOnce(
             bool readStreamAsync
-        ) {
+        )
+        {
             var content = new MockContent(MockOptions.CanCalculateLength);
 
             // Call multiple times: CreateContentReadStreamAsync() should be called only once.
@@ -260,7 +261,8 @@ namespace System.Net.Http.Functional.Tests
         [InlineData(false)]
         public async Task ReadAsStreamAsync_GetFromBufferedContent_CreateContentReadStreamCalled(
             bool readStreamAsync
-        ) {
+        )
+        {
             var content = new MockContent(MockOptions.CanCalculateLength);
             await content.LoadIntoBufferAsync();
 
@@ -309,7 +311,8 @@ namespace System.Net.Http.Functional.Tests
         [InlineData(false)]
         public async Task ReadAsStreamAsync_FirstGetFromUnbufferedContentThenGetFromBufferedContent_SameStream(
             bool readStreamAsync
-        ) {
+        )
+        {
             var content = new MockContent(MockOptions.CanCalculateLength);
 
             Stream before = await content.ReadAsStreamAsync(readStreamAsync);
@@ -333,7 +336,8 @@ namespace System.Net.Http.Functional.Tests
         [InlineData(false)]
         public async Task ReadAsStreamAsync_UseBaseImplementation_ContentGetsBufferedThenMemoryStreamReturned(
             bool readStreamAsync
-        ) {
+        )
+        {
             var content = new MockContent(MockOptions.DontOverrideCreateContentReadStream);
             Stream stream = await content.ReadAsStreamAsync(readStreamAsync);
 
@@ -366,7 +370,8 @@ namespace System.Net.Http.Functional.Tests
         [InlineData(false)]
         public async Task LoadIntoBufferAsync_CallOnMockContentWithCalculatedContentLength_CopyToAsyncMemoryStreamCalled(
             bool readStreamAsync
-        ) {
+        )
+        {
             var content = new MockContent(MockOptions.CanCalculateLength);
             Assert.NotNull(content.Headers.ContentLength);
             await content.LoadIntoBufferAsync();
@@ -381,7 +386,8 @@ namespace System.Net.Http.Functional.Tests
         [InlineData(false)]
         public async Task LoadIntoBufferAsync_CallOnMockContentWithNullContentLength_CopyToAsyncMemoryStreamCalled(
             bool readStreamAsync
-        ) {
+        )
+        {
             var content = new MockContent();
             Assert.Null(content.Headers.ContentLength);
             await content.LoadIntoBufferAsync();
@@ -398,7 +404,8 @@ namespace System.Net.Http.Functional.Tests
         [InlineData(false)]
         public async Task LoadIntoBufferAsync_CallOnMockContentWithLessLengthThanContentLengthHeader_BufferedStreamLengthMatchesActualLengthNotContentLengthHeaderValue(
             bool readStreamAsync
-        ) {
+        )
+        {
             byte[] data = Encoding.UTF8.GetBytes("16 bytes of data");
             var content = new MockContent(data);
             content.Headers.ContentLength = 32; // Set the Content-Length header to a value > actual data length.
@@ -418,7 +425,8 @@ namespace System.Net.Http.Functional.Tests
         [InlineData(false)]
         public async Task LoadIntoBufferAsync_CallMultipleTimesWithCalculatedContentLength_CopyToAsyncMemoryStreamCalledOnce(
             bool readStreamAsync
-        ) {
+        )
+        {
             var content = new MockContent(MockOptions.CanCalculateLength);
             await content.LoadIntoBufferAsync();
             await content.LoadIntoBufferAsync();
@@ -433,7 +441,8 @@ namespace System.Net.Http.Functional.Tests
         [InlineData(false)]
         public async Task LoadIntoBufferAsync_CallMultipleTimesWithNullContentLength_CopyToAsyncMemoryStreamCalledOnce(
             bool readStreamAsync
-        ) {
+        )
+        {
             var content = new MockContent();
             await content.LoadIntoBufferAsync();
             await content.LoadIntoBufferAsync();
@@ -525,7 +534,8 @@ namespace System.Net.Http.Functional.Tests
         [InlineData(false)]
         public async Task Dispose_GetReadStreamThenDispose_ReadStreamGetsDisposed(
             bool readStreamAsync
-        ) {
+        )
+        {
             var content = new MockContent();
             MockMemoryStream s = (MockMemoryStream)await content.ReadAsStreamAsync(readStreamAsync);
             Assert.Equal(1, content.CreateContentReadStreamCount);
@@ -571,7 +581,8 @@ namespace System.Net.Http.Functional.Tests
         [InlineData("\"\"")]
         public async Task ReadAsStringAsync_SetInvalidCharset_ThrowsInvalidOperationException(
             string charset
-        ) {
+        )
+        {
             string sourceString = "some string";
             byte[] contentBytes = Encoding.UTF8.GetBytes(sourceString);
 
@@ -623,7 +634,8 @@ namespace System.Net.Http.Functional.Tests
         [InlineData("invalid\"")]
         public async Task ReadAsStringAsync_SetInvalidContentTypeHeader_DefaultCharsetUsed(
             string charset
-        ) {
+        )
+        {
             // Assorted latin letters with diaeresis
             string sourceString = "\u00C4\u00E4\u00FC\u00DC";
 
@@ -961,7 +973,8 @@ namespace System.Net.Http.Functional.Tests
         [ActiveIssue("https://github.com/dotnet/runtime/issues/39187", TestPlatforms.Browser)]
         public async Task ReadAsStreamAsync_Unbuffered_IgnoresCancellationToken(
             bool readStreamAsync
-        ) {
+        )
+        {
             string content = Guid.NewGuid().ToString();
 
             await LoopbackServer.CreateClientAndServerAsync(
@@ -1134,7 +1147,8 @@ namespace System.Net.Http.Functional.Tests
                 Stream stream,
                 TransportContext context,
                 CancellationToken cancellationToken
-            ) {
+            )
+            {
                 SerializeToStreamAsyncCount++;
 
                 if (cancellationToken.IsCancellationRequested)
@@ -1182,7 +1196,8 @@ namespace System.Net.Http.Functional.Tests
 
             protected override Task<Stream> CreateContentReadStreamAsync(
                 CancellationToken cancellationToken
-            ) {
+            )
+            {
                 CreateContentReadStreamCount++;
 
                 if ((_options & MockOptions.DontOverrideCreateContentReadStream) != 0)

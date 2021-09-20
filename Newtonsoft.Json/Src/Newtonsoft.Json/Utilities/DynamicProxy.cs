@@ -41,7 +41,8 @@ namespace Newtonsoft.Json.Utilities
             BinaryOperationBinder binder,
             object arg,
             out object? result
-        ) {
+        )
+        {
             result = null;
             return false;
         }
@@ -57,7 +58,8 @@ namespace Newtonsoft.Json.Utilities
             CreateInstanceBinder binder,
             object[] args,
             out object? result
-        ) {
+        )
+        {
             result = null;
             return false;
         }
@@ -77,7 +79,8 @@ namespace Newtonsoft.Json.Utilities
             GetIndexBinder binder,
             object[] indexes,
             out object? result
-        ) {
+        )
+        {
             result = null;
             return false;
         }
@@ -93,7 +96,8 @@ namespace Newtonsoft.Json.Utilities
             InvokeBinder binder,
             object[] args,
             out object? result
-        ) {
+        )
+        {
             result = null;
             return false;
         }
@@ -103,7 +107,8 @@ namespace Newtonsoft.Json.Utilities
             InvokeMemberBinder binder,
             object[] args,
             out object? result
-        ) {
+        )
+        {
             result = null;
             return false;
         }
@@ -113,7 +118,8 @@ namespace Newtonsoft.Json.Utilities
             SetIndexBinder binder,
             object[] indexes,
             object value
-        ) {
+        )
+        {
             return false;
         }
 
@@ -126,7 +132,8 @@ namespace Newtonsoft.Json.Utilities
             T instance,
             UnaryOperationBinder binder,
             out object? result
-        ) {
+        )
+        {
             result = null;
             return false;
         }

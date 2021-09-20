@@ -23,7 +23,8 @@ namespace System.DirectoryServices.Protocols.Tests
             string attributeName,
             string matchingRule,
             bool reverseOrder
-        ) {
+        )
+        {
             var sortKey = new SortKey(attributeName, matchingRule, reverseOrder);
             Assert.Equal(attributeName, sortKey.AttributeName);
             Assert.Equal(matchingRule, sortKey.MatchingRule);

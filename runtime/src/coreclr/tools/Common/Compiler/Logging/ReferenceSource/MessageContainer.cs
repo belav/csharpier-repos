@@ -52,7 +52,8 @@ namespace Mono.Linker
             int code,
             string subcategory = MessageSubCategory.None,
             MessageOrigin? origin = null
-        ) {
+        )
+        {
             if (!(code >= 1000 && code <= 2000))
                 throw new ArgumentOutOfRangeException(
                     nameof(code),
@@ -76,7 +77,8 @@ namespace Mono.Linker
             int code,
             string subcategory = MessageSubCategory.None,
             MessageOrigin? origin = null
-        ) {
+        )
+        {
 #if DEBUG
             Debug.Assert(
                 Assembly.GetCallingAssembly() != typeof(MessageContainer).Assembly,
@@ -112,7 +114,8 @@ namespace Mono.Linker
             MessageOrigin origin,
             WarnVersion version,
             string subcategory = MessageSubCategory.None
-        ) {
+        )
+        {
             if (!(code > 2000 && code <= 6000))
                 throw new ArgumentOutOfRangeException(
                     nameof(code),
@@ -141,7 +144,8 @@ namespace Mono.Linker
             MessageOrigin origin,
             WarnVersion version,
             string subcategory = MessageSubCategory.None
-        ) {
+        )
+        {
 #if DEBUG
             Debug.Assert(
                 Assembly.GetCallingAssembly() != typeof(MessageContainer).Assembly,
@@ -165,7 +169,8 @@ namespace Mono.Linker
             MessageOrigin origin,
             WarnVersion version,
             string subcategory = MessageSubCategory.None
-        ) {
+        )
+        {
             if (!(version >= WarnVersion.ILLink0 && version <= WarnVersion.Latest))
                 throw new ArgumentException(
                     $"The provided warning version '{version}' is invalid."
@@ -215,7 +220,8 @@ namespace Mono.Linker
             int? code,
             string subcategory = MessageSubCategory.None,
             MessageOrigin? origin = null
-        ) {
+        )
+        {
             Code = code;
             Category = category;
             Origin = origin;

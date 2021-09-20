@@ -29,7 +29,8 @@ internal static partial class Interop
         int pageProtection,
         long maximumSize,
         string? name
-    ) {
+    )
+    {
         // split the long into two ints
         int capacityHigh,
             capacityLow;
@@ -51,7 +52,8 @@ internal static partial class Interop
         int pageProtection,
         long maximumSize,
         string? name
-    ) {
+    )
+    {
         // split the long into two ints
         int capacityHigh,
             capacityLow;
@@ -72,7 +74,8 @@ internal static partial class Interop
         int desiredAccess,
         long fileOffset,
         UIntPtr numberOfBytesToMap
-    ) {
+    )
+    {
         // split the long into two ints
         int offsetHigh,
             offsetLow;
@@ -91,7 +94,8 @@ internal static partial class Interop
         int desiredAccess,
         bool inheritHandle,
         string name
-    ) {
+    )
+    {
         return Interop.Kernel32.OpenFileMapping(desiredAccess, inheritHandle, name);
     }
 
@@ -100,7 +104,8 @@ internal static partial class Interop
         UIntPtr size,
         int allocationType,
         int protection
-    ) {
+    )
+    {
         return Interop.Kernel32.VirtualAlloc(baseAddress, size, allocationType, protection);
     }
 

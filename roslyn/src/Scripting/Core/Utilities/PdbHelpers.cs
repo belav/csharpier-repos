@@ -16,7 +16,8 @@ namespace Microsoft.CodeAnalysis.Scripting
             // for CoreCLR & Mono, use PortablePdb
             if (
                 CoreClrShim.AssemblyLoadContext.Type != null || Type.GetType("Mono.Runtime") != null
-            ) {
+            )
+            {
                 return DebugInformationFormat.PortablePdb;
             }
 

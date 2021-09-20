@@ -28,7 +28,8 @@ namespace Microsoft.AspNetCore.Mvc.ModelBinding.Validation
         public IReadOnlyList<IClientModelValidator> GetValidators(
             ModelMetadata metadata,
             IClientModelValidatorProvider validatorProvider
-        ) {
+        )
+        {
             if (
                 metadata.MetadataKind == ModelMetadataKind.Property
                 && metadata.ContainerMetadata?.BoundConstructor != null
@@ -36,7 +37,8 @@ namespace Microsoft.AspNetCore.Mvc.ModelBinding.Validation
                     metadata,
                     out var parameter
                 )
-            ) {
+            )
+            {
                 // "metadata" typically points to properties. When working with record types, we want to read validation details from the
                 // constructor parameter instead. So let's switch it out.
                 metadata = parameter;
@@ -86,7 +88,8 @@ namespace Microsoft.AspNetCore.Mvc.ModelBinding.Validation
             CacheEntry entry,
             ModelMetadata metadata,
             IClientModelValidatorProvider validationProvider
-        ) {
+        )
+        {
             if (entry.Validators != null)
             {
                 return entry.Validators;
@@ -117,7 +120,8 @@ namespace Microsoft.AspNetCore.Mvc.ModelBinding.Validation
             IClientModelValidatorProvider validatorProvider,
             ModelMetadata metadata,
             List<ClientValidatorItem> items
-        ) {
+        )
+        {
             var context = new ClientValidatorProviderContext(metadata, items);
 
             validatorProvider.CreateValidators(context);
@@ -125,7 +129,8 @@ namespace Microsoft.AspNetCore.Mvc.ModelBinding.Validation
 
         private IReadOnlyList<IClientModelValidator> ExtractValidators(
             List<ClientValidatorItem> items
-        ) {
+        )
+        {
             var count = 0;
             for (var i = 0; i < items.Count; i++)
             {

@@ -16,7 +16,8 @@ namespace System.Text.Json.Serialization.Converters
             in TValue value,
             JsonSerializerOptions options,
             ref ReadStack state
-        ) {
+        )
+        {
             ((Dictionary<TKey, TValue>)state.Current.ReturnValue!)[key] = value;
         }
 
@@ -39,7 +40,8 @@ namespace System.Text.Json.Serialization.Converters
             TCollection value,
             JsonSerializerOptions options,
             ref WriteStack state
-        ) {
+        )
+        {
             IEnumerator<KeyValuePair<TKey, TValue>> enumerator;
             if (state.Current.CollectionEnumerator == null)
             {

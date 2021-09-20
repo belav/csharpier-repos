@@ -91,7 +91,8 @@ namespace System.Net
                             CultureInfo.InvariantCulture,
                             out portValue
                         )
-                    ) {
+                    )
+                    {
                         return inputServiceName;
                     }
 
@@ -121,7 +122,8 @@ namespace System.Net
                     UriKind.Absolute,
                     out constructedUri
                 )
-            ) {
+            )
+            {
                 return inputServiceName;
             }
 
@@ -265,7 +267,8 @@ namespace System.Net
                     j < uriPrefix.Length
                     && uriPrefix[j] != '/'
                     && (uriPrefix[j] != ':' || inSquareBrackets)
-                ) {
+                )
+                {
                     if (uriPrefix[j] == '[')
                     {
                         if (inSquareBrackets)
@@ -311,7 +314,8 @@ namespace System.Net
                 string.Equals(hostname, "*", StringComparison.OrdinalIgnoreCase)
                 || string.Equals(hostname, "+", StringComparison.OrdinalIgnoreCase)
                 || IPAddress.TryParse(hostname, out ipAddress)
-            ) {
+            )
+            {
                 // for a wildcard, register the machine name.  If the caller doesn't have DNS permission
                 // or the query fails for some reason, don't add an SPN.
                 try

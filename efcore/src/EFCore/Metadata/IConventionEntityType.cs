@@ -961,7 +961,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata
             Type propertyType,
             bool setTypeConfigurationSource = true,
             bool fromDataAnnotation = false
-        ) {
+        )
+        {
             var indexerPropertyInfo = FindIndexerPropertyInfo();
             if (indexerPropertyInfo == null)
             {

@@ -357,7 +357,8 @@ namespace System.Resources
             int dataPos,
             bool isString,
             out ResourceLocator locator
-        ) {
+        )
+        {
             object? value;
             ResourceTypeCode typeCode;
 

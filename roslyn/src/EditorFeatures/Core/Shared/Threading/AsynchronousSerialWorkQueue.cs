@@ -90,7 +90,8 @@ namespace Microsoft.CodeAnalysis.Editor.Shared.Threading
             string name,
             int afterDelay,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             Contract.ThrowIfNull(action);
 
             var asyncToken = _asyncListener.BeginAsyncOperation(name);
@@ -128,7 +129,8 @@ namespace Microsoft.CodeAnalysis.Editor.Shared.Threading
             Func<CancellationToken, Task> taskGeneratingFunctionAsync,
             string name,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             EnqueueBackgroundTask(
                 taskGeneratingFunctionAsync,
                 name,
@@ -142,7 +144,8 @@ namespace Microsoft.CodeAnalysis.Editor.Shared.Threading
             string name,
             int afterDelay,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             Contract.ThrowIfNull(taskGeneratingFunctionAsync);
 
             var asyncToken = _asyncListener.BeginAsyncOperation(name);

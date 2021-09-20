@@ -28,7 +28,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UseExpressionBodyForLambda
             TextSpan span,
             ExpressionBodyPreference option,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             if (option == ExpressionBodyPreference.Never)
             {
                 // the user wants block-bodies (and the analyzer will be trying to enforce that). So
@@ -113,7 +114,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UseExpressionBodyForLambda
             Document document,
             TextSpan span,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             // If the analyzer is inactive, then we want to offer refactorings in any viable
             // direction.  So we want to offer to convert expression-bodies to block-bodies, and
             // vice-versa if applicable.
@@ -142,7 +144,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UseExpressionBodyForLambda
             TextSpan span,
             ExpressionBodyPreference option,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var lambdaNode = await document.TryGetRelevantNodeAsync<LambdaExpressionSyntax>(
                     span,
                     cancellationToken
@@ -187,7 +190,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UseExpressionBodyForLambda
             SyntaxNode root,
             LambdaExpressionSyntax declaration,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var semanticModel = await document.GetSemanticModelAsync(cancellationToken)
                 .ConfigureAwait(false);
 

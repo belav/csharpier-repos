@@ -68,7 +68,8 @@ namespace Microsoft.CodeAnalysis.AddImport
 
             private async Task<Solution> GetUpdatedSolutionAsync(
                 CancellationToken cancellationToken
-            ) {
+            )
+            {
                 var newDocument = await GetUpdatedDocumentAsync(cancellationToken)
                     .ConfigureAwait(false);
                 var newRoot = await newDocument.GetSyntaxRootAsync(cancellationToken)
@@ -92,7 +93,8 @@ namespace Microsoft.CodeAnalysis.AddImport
             /// </summary>
             protected override async Task<IEnumerable<CodeActionOperation>> ComputeOperationsAsync(
                 CancellationToken cancellationToken
-            ) {
+            )
+            {
                 var updatedDocument = await GetUpdatedDocumentAsync(cancellationToken)
                     .ConfigureAwait(false);
 
@@ -124,7 +126,8 @@ namespace Microsoft.CodeAnalysis.AddImport
                 SourceText oldText,
                 SourceText newText,
                 InstallPackageDirectlyCodeActionOperation item2
-            ) {
+            )
+            {
                 _changedDocumentId = changedDocumentId;
                 _oldText = oldText;
                 _newText = newText;
@@ -138,7 +141,8 @@ namespace Microsoft.CodeAnalysis.AddImport
                 Workspace workspace,
                 IProgressTracker progressTracker,
                 CancellationToken cancellationToken
-            ) {
+            )
+            {
                 var newSolution = workspace.CurrentSolution.WithDocumentText(
                     _changedDocumentId,
                     _newText
@@ -153,7 +157,8 @@ namespace Microsoft.CodeAnalysis.AddImport
                             progressTracker,
                             cancellationToken
                         )
-                    ) {
+                    )
+                    {
                         return true;
                     }
 

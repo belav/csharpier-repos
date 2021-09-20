@@ -74,7 +74,8 @@ namespace Microsoft.Extensions.Logging
             this ILogger logger,
             string actualPurpose,
             string expectedPurpose
-        ) {
+        )
+        {
             _purposeNotEquals(logger, actualPurpose, expectedPurpose, null);
         }
 

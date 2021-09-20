@@ -10,14 +10,16 @@ namespace System.Runtime.CompilerServices.Tests
         public static string IntParamMethod(
             int val,
             [CallerArgumentExpression("val")] string expr = null
-        ) {
+        )
+        {
             return expr;
         }
 
         [Theory, InlineData("testParamName"), InlineData(""), InlineData(null)]
         public static void ArgumentToCallerArgumentExpressionSetsParameterNameProperty(
             string paramName
-        ) {
+        )
+        {
             var attr = new CallerArgumentExpressionAttribute(paramName);
 
             Assert.Equal(paramName, attr.ParameterName);
@@ -37,7 +39,8 @@ namespace System.Runtime.CompilerServices.Tests
         private static string IntParamMethodPassthrough(
             int val,
             [CallerArgumentExpression("val")] string expr = null
-        ) {
+        )
+        {
             return IntParamMethod(val, expr);
         }
 
@@ -52,7 +55,8 @@ namespace System.Runtime.CompilerServices.Tests
         private static string InvalidParameterNameMethod(
             int val,
             [CallerArgumentExpression("notVal")] string expr = null
-        ) {
+        )
+        {
             return expr;
         }
 
@@ -67,7 +71,8 @@ namespace System.Runtime.CompilerServices.Tests
         private static string NullParameterNameMethod(
             int val,
             [CallerArgumentExpression(null)] string expr = null
-        ) {
+        )
+        {
             return expr;
         }
 
@@ -89,7 +94,8 @@ namespace System.Runtime.CompilerServices.Tests
         private static string OverloadedMethod(
             int val,
             [CallerArgumentExpression(null)] string expr = null
-        ) {
+        )
+        {
             return expr;
         }
 
@@ -175,14 +181,16 @@ namespace System.Runtime.CompilerServices.Tests
         private static string OptionalParamMethod(
             string val = StringConst + " string literal",
             [CallerArgumentExpression("val")] string expr = null
-        ) {
+        )
+        {
             return expr;
         }
 
         private static string CompilerSuppliedParamMethod(
             [CallerFilePath] string val = "no file",
             [CallerArgumentExpression("val")] string expr = null
-        ) {
+        )
+        {
             return expr;
         }
 
@@ -198,7 +206,8 @@ namespace System.Runtime.CompilerServices.Tests
         private static string ExtensionMethod(
             this int val,
             [CallerArgumentExpression("val")] string expr = null
-        ) {
+        )
+        {
             return expr;
         }
 

@@ -33,7 +33,8 @@ namespace System.ComponentModel.Composition.ReflectionModel
             IReflectionPartCreationInfo originalPartCreationInfo,
             ReflectionComposablePartDefinition originalPart,
             Type[] specialization
-        ) {
+        )
+        {
             if (originalPartCreationInfo == null)
             {
                 throw new ArgumentNullException(nameof(originalPartCreationInfo));
@@ -93,7 +94,8 @@ namespace System.ComponentModel.Composition.ReflectionModel
                             .GetConstructors(
                                 BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance
                             )
-                    ) {
+                    )
+                    {
                         if (constructor.MetadataToken == genericConstuctor.MetadataToken)
                         {
                             result = constructor;
@@ -201,7 +203,8 @@ namespace System.ComponentModel.Composition.ReflectionModel
 
         private Dictionary<LazyMemberInfo, MemberInfo[]> BuildMembersTable(
             List<LazyMemberInfo> members
-        ) {
+        )
+        {
             if (members == null)
             {
                 throw new ArgumentNullException(nameof(members));
@@ -276,7 +279,8 @@ namespace System.ComponentModel.Composition.ReflectionModel
         [return: NotNullIfNotNull("parameters")]
         private Dictionary<Lazy<ParameterInfo>, ParameterInfo>? BuildParametersTable(
             List<Lazy<ParameterInfo>>? parameters
-        ) {
+        )
+        {
             if (parameters != null)
             {
                 Dictionary<Lazy<ParameterInfo>, ParameterInfo> parametersTable = new Dictionary<
@@ -302,7 +306,8 @@ namespace System.ComponentModel.Composition.ReflectionModel
         private List<ImportDefinition> PopulateImports(
             List<LazyMemberInfo> members,
             List<Lazy<ParameterInfo>> parameters
-        ) {
+        )
+        {
             List<ImportDefinition> imports = new List<ImportDefinition>();
 
             foreach (ImportDefinition originalImport in _originalPartCreationInfo.GetImports())
@@ -325,7 +330,8 @@ namespace System.ComponentModel.Composition.ReflectionModel
             ReflectionImportDefinition reflectionImport,
             List<LazyMemberInfo> members,
             List<Lazy<ParameterInfo>> parameters
-        ) {
+        )
+        {
             bool isExportFactory = false;
             ContractBasedImportDefinition productImport = reflectionImport;
 
@@ -457,7 +463,8 @@ namespace System.ComponentModel.Composition.ReflectionModel
         public ExportDefinition TranslateExpot(
             ReflectionMemberExportDefinition reflectionExport,
             List<LazyMemberInfo> members
-        ) {
+        )
+        {
             ExportDefinition? export = null;
             LazyMemberInfo lazyMember = reflectionExport.ExportingLazyMember;
             var capturedLazyMember = lazyMember;
@@ -520,7 +527,8 @@ namespace System.ComponentModel.Composition.ReflectionModel
 
         private IDictionary<string, object?> TranslateImportMetadata(
             ContractBasedImportDefinition originalImport
-        ) {
+        )
+        {
             int[]? importParametersOrder = originalImport.Metadata.GetValue<int[]>(
                 CompositionConstants.GenericImportParametersOrderMetadataName
             );
@@ -552,7 +560,8 @@ namespace System.ComponentModel.Composition.ReflectionModel
 
         private IDictionary<string, object?> TranslateExportMetadata(
             ReflectionMemberExportDefinition originalExport
-        ) {
+        )
+        {
             Dictionary<string, object?> metadata = new Dictionary<string, object?>(
                 originalExport.Metadata,
                 StringComparers.MetadataKeyNames
@@ -651,7 +660,8 @@ namespace System.ComponentModel.Composition.ReflectionModel
         public static bool CanSpecialize(
             IDictionary<string, object?> partMetadata,
             Type[] specialization
-        ) {
+        )
+        {
             int partArity = partMetadata.GetValue<int>(
                 CompositionConstants.GenericPartArityMetadataName
             );
@@ -678,14 +688,16 @@ namespace System.ComponentModel.Composition.ReflectionModel
             if (
                 (genericParameterConstraints != null)
                 && (genericParameterConstraints.Length != partArity)
-            ) {
+            )
+            {
                 return false;
             }
 
             if (
                 (genericParameterAttributes != null)
                 && (genericParameterAttributes.Length != partArity)
-            ) {
+            )
+            {
                 return false;
             }
 
@@ -699,7 +711,8 @@ namespace System.ComponentModel.Composition.ReflectionModel
                         ),
                         genericParameterAttributes![i]
                     )
-                ) {
+                )
+                {
                     return false;
                 }
             }

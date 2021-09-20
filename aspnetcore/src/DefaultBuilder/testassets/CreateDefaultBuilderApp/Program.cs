@@ -36,7 +36,8 @@ namespace CreateDefaultBuilderApp
                                                 "KestrelEndPointSettingName"
                                             ]
                                         )
-                                    ) {
+                                    )
+                                    {
                                         responseMessage = "Default Kestrel configuration not read.";
                                     }
                                 }
@@ -69,7 +70,8 @@ namespace CreateDefaultBuilderApp
                     context.HostingEnvironment.ContentRootPath,
                     StringComparison.Ordinal
                 )
-            ) {
+            )
+            {
                 return $"ContentRootPath incorrect. Expected: {contentRoot} Actual: {context.HostingEnvironment.ContentRootPath}";
             }
 
@@ -80,7 +82,8 @@ namespace CreateDefaultBuilderApp
                     context.Configuration["settingsKey"],
                     StringComparison.Ordinal
                 )
-            ) {
+            )
+            {
                 return $"appsettings.json not loaded into Configuration.";
             }
 
@@ -91,7 +94,8 @@ namespace CreateDefaultBuilderApp
                     context.Configuration["devSettingsKey"],
                     StringComparison.Ordinal
                 )
-            ) {
+            )
+            {
                 return $"appsettings.{context.HostingEnvironment.EnvironmentName}.json not loaded into Configuration.";
             }
 
@@ -104,7 +108,8 @@ namespace CreateDefaultBuilderApp
                     context.Configuration["envKey"],
                     StringComparison.Ordinal
                 )
-            ) {
+            )
+            {
                 return $"Environment variables not loaded into Configuration.";
             }
 
@@ -115,7 +120,8 @@ namespace CreateDefaultBuilderApp
                     context.Configuration["cliKey"],
                     StringComparison.Ordinal
                 )
-            ) {
+            )
+            {
                 return $"Command line arguments not loaded into Configuration.";
             }
 

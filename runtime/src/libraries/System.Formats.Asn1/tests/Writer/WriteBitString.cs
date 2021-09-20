@@ -39,7 +39,8 @@ namespace System.Formats.Asn1.Tests.Writer
             int length,
             int unusedBitCount,
             string hexStart
-        ) {
+        )
+        {
             string payloadHex = new string('0', 2 * length);
             string expectedHex = hexStart + payloadHex;
             byte[] data = new byte[length];
@@ -58,7 +59,8 @@ namespace System.Formats.Asn1.Tests.Writer
             int unusedBitCount,
             string hexStart,
             string hexStart2
-        ) {
+        )
+        {
             string payload1Hex = new string('8', 999 * 2);
             string payload2Hex = new string('8', (length - 999) * 2);
             string expectedHex = hexStart + payload1Hex + hexStart2 + payload2Hex + "0000";
@@ -94,7 +96,8 @@ namespace System.Formats.Asn1.Tests.Writer
             AsnEncodingRules ruleSet,
             int payloadLength,
             bool expectConstructed
-        ) {
+        )
+        {
             byte[] data = new byte[payloadLength];
 
             Asn1Tag[] tagsToTry =
@@ -175,7 +178,8 @@ namespace System.Formats.Asn1.Tests.Writer
             int unusedBitCount,
             string inputHex,
             bool expectThrow
-        ) {
+        )
+        {
             byte[] inputBytes = inputHex.HexToByteArray();
 
             AsnWriter writer = new AsnWriter(ruleSet);
@@ -306,7 +310,8 @@ namespace System.Formats.Asn1.Tests.Writer
             TagClass tagClass,
             int tagValue,
             string expectedHex
-        ) {
+        )
+        {
             AsnWriter writer = new AsnWriter(ruleSet);
 
             if (tagClass == TagClass.Universal)

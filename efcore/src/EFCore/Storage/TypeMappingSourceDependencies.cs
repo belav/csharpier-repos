@@ -57,7 +57,8 @@ namespace Microsoft.EntityFrameworkCore.Storage
         public TypeMappingSourceDependencies(
             IValueConverterSelector valueConverterSelector,
             IEnumerable<ITypeMappingSourcePlugin> plugins
-        ) {
+        )
+        {
             Check.NotNull(valueConverterSelector, nameof(valueConverterSelector));
             Check.NotNull(plugins, nameof(plugins));
 

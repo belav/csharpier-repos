@@ -241,7 +241,8 @@ namespace Internal.Cryptography.Pal
         private void VerifyAndDecrypt(
             ReadOnlySpan<char> password,
             ReadOnlyMemory<byte> authSafeContents
-        ) {
+        )
+        {
             Debug.Assert(_pfxAsn.MacData.HasValue);
             ReadOnlySpan<byte> authSafeSpan = authSafeContents.Span;
 
@@ -413,7 +414,8 @@ namespace Internal.Cryptography.Pal
             ref int certBagIdx,
             ref SafeBagAsn[] keyBags,
             ref int keyBagIdx
-        ) {
+        )
+        {
             for (int i = 0; i < _safeContentsValues!.Length; i++)
             {
                 string contentType = _safeContentsValues[i].ContentType;
@@ -455,7 +457,8 @@ namespace Internal.Cryptography.Pal
             int keyBagIdx,
             AsymmetricAlgorithm[] keys,
             RentedSubjectPublicKeyInfo[] publicKeyInfos
-        ) {
+        )
+        {
             byte[]? spkiBuf = null;
 
             for (int i = keyBagIdx - 1; i >= 0; i--)
@@ -517,14 +520,16 @@ namespace Internal.Cryptography.Pal
             RentedSubjectPublicKeyInfo[] publicKeyInfos,
             AsymmetricAlgorithm?[] keys,
             int keyBagIdx
-        ) {
+        )
+        {
             for (certBagIdx--; certBagIdx >= 0; certBagIdx--)
             {
                 int matchingKeyIdx = -1;
 
                 foreach (
                     AttributeAsn attr in certBagAttrs[certBagIdx] ?? Array.Empty<AttributeAsn>()
-                ) {
+                )
+                {
                     if (attr.AttrType == Oids.LocalKeyId && attr.AttrValues.Length > 0)
                     {
                         matchingKeyIdx = FindMatchingKey(
@@ -561,7 +566,8 @@ namespace Internal.Cryptography.Pal
                                 keyValue,
                                 ref publicKeyInfos[i].Value
                             )
-                        ) {
+                        )
+                        {
                             matchingKeyIdx = i;
                             break;
                         }
@@ -586,7 +592,8 @@ namespace Internal.Cryptography.Pal
             byte[] keyParams,
             byte[] keyValue,
             ref SubjectPublicKeyInfoAsn publicKeyInfo
-        ) {
+        )
+        {
             if (!publicKeyInfo.SubjectPublicKey.Span.SequenceEqual(keyValue))
             {
                 return false;
@@ -639,12 +646,14 @@ namespace Internal.Cryptography.Pal
             SafeBagAsn[] keyBags,
             int keyBagCount,
             ReadOnlySpan<byte> localKeyId
-        ) {
+        )
+        {
             for (int i = 0; i < keyBagCount; i++)
             {
                 foreach (
                     AttributeAsn attr in keyBags[i].BagAttributes ?? Array.Empty<AttributeAsn>()
-                ) {
+                )
+                {
                     if (attr.AttrType == Oids.LocalKeyId && attr.AttrValues.Length > 0)
                     {
                         ReadOnlyMemory<byte> curKeyId = Helpers.DecodeOctetStringAsMemory(
@@ -666,7 +675,8 @@ namespace Internal.Cryptography.Pal
         private static void DecryptSafeContents(
             ReadOnlySpan<char> password,
             ref ContentInfoAsn safeContentsAsn
-        ) {
+        )
+        {
             EncryptedDataAsn encryptedData = EncryptedDataAsn.Decode(
                 safeContentsAsn.Content,
                 AsnEncodingRules.BER
@@ -726,7 +736,8 @@ namespace Internal.Cryptography.Pal
             ref int certBagIdx,
             ref SafeBagAsn[] keyBags,
             ref int keyBagIdx
-        ) {
+        )
+        {
             ReadOnlyMemory<byte> contentData = safeContentsAsn.Content;
 
             if (safeContentsAsn.ContentType == Oids.Pkcs7Data)
@@ -759,7 +770,8 @@ namespace Internal.Cryptography.Pal
                     }
                     else if (
                         bag.BagId == Oids.Pkcs12KeyBag || bag.BagId == Oids.Pkcs12ShroudedKeyBag
-                    ) {
+                    )
+                    {
                         GrowIfNeeded(ref keyBags, keyBagIdx);
                         keyBags[keyBagIdx] = bag;
                         keyBagIdx++;

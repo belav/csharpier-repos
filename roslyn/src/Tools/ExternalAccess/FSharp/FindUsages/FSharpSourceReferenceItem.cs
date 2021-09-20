@@ -12,14 +12,16 @@ namespace Microsoft.CodeAnalysis.ExternalAccess.FSharp.FindUsages
 
         private FSharpSourceReferenceItem(
             Microsoft.CodeAnalysis.FindUsages.SourceReferenceItem roslynDefinitionItem
-        ) {
+        )
+        {
             _roslynSourceReferenceItem = roslynDefinitionItem;
         }
 
         public FSharpSourceReferenceItem(
             FSharpDefinitionItem definition,
             FSharpDocumentSpan sourceSpan
-        ) {
+        )
+        {
             _roslynSourceReferenceItem = new Microsoft.CodeAnalysis.FindUsages.SourceReferenceItem(
                 definition.RoslynDefinitionItem,
                 sourceSpan.ToRoslynDocumentSpan()

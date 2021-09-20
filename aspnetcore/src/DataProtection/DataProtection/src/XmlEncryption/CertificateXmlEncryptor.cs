@@ -48,10 +48,8 @@ namespace Microsoft.AspNetCore.DataProtection.XmlEncryption
         /// Creates a <see cref="CertificateXmlEncryptor"/> given an <see cref="X509Certificate2"/> instance
         /// and an <see cref="IServiceProvider"/>.
         /// </summary>
-        public CertificateXmlEncryptor(
-            X509Certificate2 certificate,
-            ILoggerFactory loggerFactory
-        ) : this(loggerFactory, encryptor: null)
+        public CertificateXmlEncryptor(X509Certificate2 certificate, ILoggerFactory loggerFactory)
+            : this(loggerFactory, encryptor: null)
         {
             if (certificate == null)
             {
@@ -64,7 +62,8 @@ namespace Microsoft.AspNetCore.DataProtection.XmlEncryption
         internal CertificateXmlEncryptor(
             ILoggerFactory loggerFactory,
             IInternalCertificateXmlEncryptor? encryptor
-        ) {
+        )
+        {
             _encryptor = encryptor ?? this;
             _logger = loggerFactory.CreateLogger<CertificateXmlEncryptor>();
             _certFactory = default!; // Set by calling ctors
@@ -117,7 +116,8 @@ namespace Microsoft.AspNetCore.DataProtection.XmlEncryption
         private Func<X509Certificate2> CreateCertFactory(
             string thumbprint,
             ICertificateResolver resolver
-        ) {
+        )
+        {
             return () =>
             {
                 try
@@ -141,7 +141,8 @@ namespace Microsoft.AspNetCore.DataProtection.XmlEncryption
         EncryptedData IInternalCertificateXmlEncryptor.PerformEncryption(
             EncryptedXml encryptedXml,
             XmlElement elementToEncrypt
-        ) {
+        )
+        {
             var cert =
                 _certFactory() ?? CryptoUtil.Fail<X509Certificate2>("Cert factory returned null.");
 

@@ -42,13 +42,15 @@ namespace Microsoft.CodeAnalysis.CSharp.Emit
 
         Cci.IAssemblyReference Cci.IModuleReference.GetContainingAssembly(
             CodeAnalysis.Emit.EmitContext context
-        ) {
+        )
+        {
             return this;
         }
 
         IEnumerable<Cci.ICustomAttribute> Cci.IReference.GetAttributes(
             CodeAnalysis.Emit.EmitContext context
-        ) {
+        )
+        {
             return SpecializedCollections.EmptyEnumerable<Cci.ICustomAttribute>();
         }
 

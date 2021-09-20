@@ -3017,7 +3017,8 @@ class C : Interface
                     OutputKind.DynamicallyLinkedLibrary,
                     OutputKind.WindowsRuntimeMetadata
                 }
-            ) {
+            )
+            {
                 var comp = CreateEmptyCompilation(
                     source,
                     WinRtRefs.Concat(new[] { ilRef }),
@@ -3096,7 +3097,8 @@ class OverrideAndImplIncorrectly : ReversedBase, Interface
                     OutputKind.DynamicallyLinkedLibrary,
                     OutputKind.WindowsRuntimeMetadata
                 }
-            ) {
+            )
+            {
                 var comp = CreateEmptyCompilation(
                     source,
                     WinRtRefs.Concat(new[] { interfaceILRef, baseILRef }),
@@ -3197,7 +3199,8 @@ class C : Interface
                     OutputKind.DynamicallyLinkedLibrary,
                     OutputKind.WindowsRuntimeMetadata
                 }
-            ) {
+            )
+            {
                 var comp = CreateEmptyCompilation(
                     source,
                     WinRtRefs.Concat(new[] { ilRef }),
@@ -3447,7 +3450,8 @@ class C
                     OutputKind.DynamicallyLinkedLibrary,
                     OutputKind.WindowsRuntimeMetadata
                 }
-            ) {
+            )
+            {
                 var comp = CreateEmptyCompilation(
                     source,
                     WinRtRefs,
@@ -3816,7 +3820,8 @@ namespace System.Runtime.InteropServices.WindowsRuntime
         private static void VerifyNormalEventShape(
             EventSymbol @event,
             CSharpCompilation compilation
-        ) {
+        )
+        {
             Assert.False(@event.IsWindowsRuntimeEvent);
 
             var eventType = @event.Type;

@@ -25,7 +25,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Emit
 
         Cci.INestedTypeReference Cci.ISpecializedNestedTypeReference.GetUnspecializedVersion(
             EmitContext context
-        ) {
+        )
+        {
             Debug.Assert(UnderlyingNamedType.OriginalDefinition.IsDefinition);
             var result =
                 ((PEModuleBuilder)context.Module).Translate(

@@ -52,7 +52,8 @@ namespace System.Net.Http.Headers
         public static bool TryParse(
             [NotNullWhen(true)] string? input,
             [NotNullWhen(true)] out TransferCodingHeaderValue? parsedValue
-        ) {
+        )
+        {
             int index = 0;
             parsedValue = null;
 
@@ -63,7 +64,8 @@ namespace System.Net.Http.Headers
                     ref index,
                     out object? output
                 )
-            ) {
+            )
+            {
                 parsedValue = (TransferCodingHeaderValue)output!;
                 return true;
             }
@@ -75,7 +77,8 @@ namespace System.Net.Http.Headers
             int startIndex,
             Func<TransferCodingHeaderValue> transferCodingCreator,
             out TransferCodingHeaderValue? parsedValue
-        ) {
+        )
+        {
             Debug.Assert(transferCodingCreator != null);
             Debug.Assert(startIndex >= 0);
 

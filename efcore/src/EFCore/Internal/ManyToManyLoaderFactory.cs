@@ -36,8 +36,9 @@ namespace Microsoft.EntityFrameworkCore.Internal
         [UsedImplicitly]
         private static ICollectionLoader CreateManyToMany<TEntity, TTargetEntity>(
             ISkipNavigation skipNavigation
-        ) where TEntity : class
-          where TTargetEntity : class =>
+        )
+            where TEntity : class
+            where TTargetEntity : class =>
             new ManyToManyLoader<TEntity, TTargetEntity>(skipNavigation);
     }
 }

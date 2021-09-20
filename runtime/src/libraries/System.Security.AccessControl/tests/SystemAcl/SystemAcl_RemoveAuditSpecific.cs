@@ -218,7 +218,8 @@ namespace System.Security.AccessControl.Tests
             int propagationFlags,
             string initialRawAclStr,
             string verifierRawAclStr
-        ) {
+        )
+        {
             RawAcl rawAcl = null;
             SystemAcl systemAcl = null;
 
@@ -250,7 +251,8 @@ namespace System.Security.AccessControl.Tests
             int accessMask,
             InheritanceFlags inheritanceFlags,
             PropagationFlags propagationFlags
-        ) {
+        )
+        {
             bool result = true;
             byte[] sAclBinaryForm = null;
             byte[] rAclBinaryForm = null;

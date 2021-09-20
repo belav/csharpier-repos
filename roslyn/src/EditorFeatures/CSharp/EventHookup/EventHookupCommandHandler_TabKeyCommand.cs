@@ -36,7 +36,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.EventHookup
             TabKeyCommandArgs args,
             Action nextHandler,
             CommandExecutionContext context
-        ) {
+        )
+        {
             AssertIsForeground();
             if (!args.SubjectBuffer.GetFeatureOnOffOption(InternalFeatureOnOffOptions.EventHookup))
             {
@@ -72,7 +73,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.EventHookup
             ITextBuffer subjectBuffer,
             Action nextHandler,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             AssertIsForeground();
 
             // For test purposes only!
@@ -93,7 +95,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.EventHookup
             if (
                 EventHookupSessionManager.CurrentSession.GetEventNameTask.Status
                 == TaskStatus.RanToCompletion
-            ) {
+            )
+            {
                 eventHandlerMethodName =
                     EventHookupSessionManager.CurrentSession.GetEventNameTask.WaitAndGetResult(
                         cancellationToken
@@ -103,7 +106,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.EventHookup
             if (
                 eventHandlerMethodName == null
                 || EventHookupSessionManager.CurrentSession.TextView != textView
-            ) {
+            )
+            {
                 nextHandler();
                 EventHookupSessionManager.CancelAndDismissExistingSessions();
                 return;
@@ -126,7 +130,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.EventHookup
             string eventHandlerMethodName,
             Action nextHandler,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             AssertIsForeground();
 
             using (Logger.LogBlock(FunctionId.EventHookup_Generate_Handler, cancellationToken))
@@ -180,7 +185,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.EventHookup
             int position,
             out int plusEqualTokenEndPosition,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             AssertIsForeground();
 
             // Mark the += token with an annotation so we can find it after formatting
@@ -240,7 +246,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.EventHookup
             int position,
             SyntaxAnnotation plusEqualsTokenAnnotation,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             // First find the event hookup to determine if we are in a static context.
             var root = document.GetSyntaxRootSynchronously(cancellationToken);
             var plusEqualsToken = root.FindTokenOnLeftOfPosition(position);
@@ -284,7 +291,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.EventHookup
             string eventHandlerMethodName,
             SyntaxAnnotation plusEqualsTokenAnnotation,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var root = document.Root as SyntaxNode;
             var eventHookupExpression = root.GetAnnotatedNodesAndTokens(plusEqualsTokenAnnotation)
                 .Single()
@@ -320,7 +328,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.EventHookup
             string eventHandlerMethodName,
             AssignmentExpressionSyntax eventHookupExpression,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var semanticModel = semanticDocument.SemanticModel as SemanticModel;
             var symbolInfo = semanticModel.GetSymbolInfo(
                 eventHookupExpression.Left,
@@ -377,7 +386,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.EventHookup
             ITextView textView,
             int plusEqualTokenEndPosition,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             AssertIsForeground();
 
             if (_inlineRenameService.ActiveSession == null)

@@ -90,10 +90,12 @@ namespace Microsoft.VisualStudio.LanguageServices.LiveShare.Client
             IDiagnosticService diagnosticService,
             ITableManagerProvider tableManagerProvider,
             IThreadingContext threadingContext
-        ) : base(
-            VisualStudioMefHostServices.Create(exportProvider),
-            WorkspaceKind.CloudEnvironmentClientWorkspace
-        ) {
+        )
+            : base(
+                VisualStudioMefHostServices.Create(exportProvider),
+                WorkspaceKind.CloudEnvironmentClientWorkspace
+            )
+        {
             _serviceProvider = serviceProvider;
 
             _remoteDiagnosticListTable = new RemoteDiagnosticListTable(
@@ -133,7 +135,8 @@ namespace Microsoft.VisualStudio.LanguageServices.LiveShare.Client
         void IRunningDocumentTableEventListener.OnRefreshDocumentContext(
             string moniker,
             IVsHierarchy hierarchy
-        ) {
+        )
+        {
             // Handled by Add/Remove
         }
 
@@ -141,7 +144,8 @@ namespace Microsoft.VisualStudio.LanguageServices.LiveShare.Client
             string newMoniker,
             string oldMoniker,
             ITextBuffer textBuffer
-        ) {
+        )
+        {
             // Handled by Add/Remove.
         }
 
@@ -199,14 +203,16 @@ namespace Microsoft.VisualStudio.LanguageServices.LiveShare.Client
             using (
                 await s_RemotePathsGate.DisposableWaitAsync(CancellationToken.None)
                     .ConfigureAwait(false)
-            ) {
+            )
+            {
                 if (
                     IsRemoteSession
                     && (
                         !_remoteWorkspaceRootPaths.Equals(remoteRootPaths)
                         || !_registeredExternalPaths.Equals(externalPaths)
                     )
-                ) {
+                )
+                {
                     _remoteWorkspaceRootPaths = remoteRootPaths;
                     _registeredExternalPaths = externalPaths;
                     await RefreshAllFilesAsync().ConfigureAwait(false);
@@ -216,7 +222,8 @@ namespace Microsoft.VisualStudio.LanguageServices.LiveShare.Client
 
         private static async Task<(ImmutableHashSet<string> remoteRootPaths, ImmutableHashSet<string> externalPaths)> GetLocalPathsOfRemoteRootsAsync(
             CollaborationSession session
-        ) {
+        )
+        {
             var roots = await session.ListRootsAsync(CancellationToken.None).ConfigureAwait(false);
             var localPathsOfRemoteRoots = roots.Select(
                     root => session.ConvertSharedUriToLocalPath(root)
@@ -352,7 +359,8 @@ namespace Microsoft.VisualStudio.LanguageServices.LiveShare.Client
         public async Task<DocumentSpan?> GetDocumentSpanFromLocationAsync(
             LSP.Location location,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var document = GetOrAddDocument(location.Uri.LocalPath);
             if (document == null)
             {
@@ -483,7 +491,8 @@ namespace Microsoft.VisualStudio.LanguageServices.LiveShare.Client
                         )
                     )
                     && frame != null
-                ) {
+                )
+                {
                     if (activate)
                     {
                         frame.Show();
@@ -499,7 +508,8 @@ namespace Microsoft.VisualStudio.LanguageServices.LiveShare.Client
                             doc.FilePath,
                             out var buffer
                         )
-                    ) {
+                    )
+                    {
                         NotifyOnDocumentOpened(doc.FilePath, buffer);
                     }
                 }
@@ -587,7 +597,8 @@ namespace Microsoft.VisualStudio.LanguageServices.LiveShare.Client
                             needsSave: true,
                             needsUndoDisabled: false
                         )
-                    ) {
+                    )
+                    {
                         UpdateText(invisibleEditor.TextBuffer, text);
                     }
                 }
@@ -602,7 +613,8 @@ namespace Microsoft.VisualStudio.LanguageServices.LiveShare.Client
                     reiteratedVersionNumber: null,
                     editTag: null
                 )
-            ) {
+            )
+            {
                 var oldSnapshot = textBuffer.CurrentSnapshot;
                 var oldText = oldSnapshot.AsText();
                 var changes = text.GetTextChanges(oldText);

@@ -36,7 +36,8 @@ namespace Microsoft.CodeAnalysis.CompilerServer
             Task<IClientConnection> clientConnectionTask,
             bool allowCompilationRequests = true,
             CancellationToken cancellationToken = default
-        ) {
+        )
+        {
             try
             {
                 return await ProcessCore().ConfigureAwait(false);
@@ -60,7 +61,8 @@ namespace Microsoft.CodeAnalysis.CompilerServer
                         BuildProtocolConstants.GetCommitHash(),
                         StringComparison.OrdinalIgnoreCase
                     )
-                ) {
+                )
+                {
                     return await WriteBuildResponseAsync(
                             clientConnection,
                             request.RequestId,
@@ -74,7 +76,8 @@ namespace Microsoft.CodeAnalysis.CompilerServer
                 if (
                     request.Arguments.Count == 1
                     && request.Arguments[0].ArgumentId == BuildProtocolConstants.ArgumentId.Shutdown
-                ) {
+                )
+                {
                     return await WriteBuildResponseAsync(
                             clientConnection,
                             request.RequestId,
@@ -127,7 +130,8 @@ namespace Microsoft.CodeAnalysis.CompilerServer
             BuildResponse response,
             CompletionData completionData,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var message = response switch
             {
                 RejectedBuildResponse r
@@ -144,7 +148,8 @@ namespace Microsoft.CodeAnalysis.CompilerServer
             IClientConnection clientConnection,
             BuildRequest request,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             // Need to wait for the compilation and client disconnection in parallel. If the client
             // suddenly disconnects we need to cancel the compilation that is occurring. It could be the
             // client hit Ctrl-C due to a run away analyzer.
@@ -218,7 +223,8 @@ namespace Microsoft.CodeAnalysis.CompilerServer
                 ICompilerServerHost compilerServerHost,
                 BuildRequest buildRequest,
                 CancellationToken cancellationToken
-            ) {
+            )
+            {
                 Func<BuildResponse> func = () =>
                 {
                     var request = BuildProtocolUtil.GetRunRequest(buildRequest);

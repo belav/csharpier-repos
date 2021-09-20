@@ -47,7 +47,8 @@ namespace Microsoft.AspNetCore.DataProtection.Managed
             int symmetricAlgorithmKeySizeInBytes,
             Func<KeyedHashAlgorithm> validationAlgorithmFactory,
             IManagedGenRandom? genRandom = null
-        ) {
+        )
+        {
             _genRandom = genRandom ?? ManagedGenRandomImpl.Instance;
             _keyDerivationKey = keyDerivationKey;
 
@@ -140,7 +141,8 @@ namespace Microsoft.AspNetCore.DataProtection.Managed
                         ).AsStandaloneArray(),
                         rgbIV: new byte[_symmetricAlgorithmBlockSizeInBytes]
                     )
-                ) {
+                )
+                {
                     var ciphertext = cryptoTransform.TransformFinalBlock(EMPTY_ARRAY, 0, 0);
                     CryptoUtil.Assert(
                         ciphertext != null
@@ -162,7 +164,8 @@ namespace Microsoft.AspNetCore.DataProtection.Managed
                         _validationAlgorithmSubkeyLengthInBytes
                     ).AsStandaloneArray()
                 )
-            ) {
+            )
+            {
                 var digest = hashAlg.ComputeHash(EMPTY_ARRAY);
                 CryptoUtil.Assert(
                     digest != null && digest.Length == _validationAlgorithmDigestLengthInBytes,
@@ -200,7 +203,8 @@ namespace Microsoft.AspNetCore.DataProtection.Managed
         public byte[] Decrypt(
             ArraySegment<byte> protectedPayload,
             ArraySegment<byte> additionalAuthenticatedData
-        ) {
+        )
+        {
             protectedPayload.Validate();
             additionalAuthenticatedData.Validate();
 
@@ -212,7 +216,8 @@ namespace Microsoft.AspNetCore.DataProtection.Managed
                     + _symmetricAlgorithmBlockSizeInBytes
                     + _validationAlgorithmDigestLengthInBytes
                 )
-            ) {
+            )
+            {
                 throw Error.CryptCommon_PayloadInvalid();
             }
 
@@ -256,7 +261,8 @@ namespace Microsoft.AspNetCore.DataProtection.Managed
                     byte* __unused__2 = decryptionSubkey
                 )fixed (byte* __unused__3 = validationSubkey)fixed (
                     byte* __unused__4 = derivedKeysBuffer
-                ) {
+                )
+                {
                     try
                     {
                         _keyDerivationKey.WriteSecretIntoBuffer(
@@ -316,7 +322,8 @@ namespace Microsoft.AspNetCore.DataProtection.Managed
                                 macOffset,
                                 eofOffset - macOffset
                             )
-                        ) {
+                        )
+                        {
                             throw Error.CryptCommon_PayloadInvalid(); // integrity check failure
                         }
 
@@ -328,7 +335,8 @@ namespace Microsoft.AspNetCore.DataProtection.Managed
                                 decryptionSubkey,
                                 iv
                             )
-                        ) {
+                        )
+                        {
                             var outputStream = new MemoryStream();
                             using (
                                 var cryptoStream = new CryptoStream(
@@ -336,7 +344,8 @@ namespace Microsoft.AspNetCore.DataProtection.Managed
                                     cryptoTransform,
                                     CryptoStreamMode.Write
                                 )
-                            ) {
+                            )
+                            {
                                 cryptoStream.Write(
                                     protectedPayload.Array!,
                                     ciphertextOffset,
@@ -375,7 +384,8 @@ namespace Microsoft.AspNetCore.DataProtection.Managed
         public byte[] Encrypt(
             ArraySegment<byte> plaintext,
             ArraySegment<byte> additionalAuthenticatedData
-        ) {
+        )
+        {
             plaintext.Validate();
             additionalAuthenticatedData.Validate();
 
@@ -410,7 +420,8 @@ namespace Microsoft.AspNetCore.DataProtection.Managed
                     byte* __unused__2 = encryptionSubkey
                 )fixed (byte* __unused__3 = validationSubkey)fixed (
                     byte* __unused__4 = derivedKeysBuffer
-                ) {
+                )
+                {
                     try
                     {
                         _keyDerivationKey.WriteSecretIntoBuffer(
@@ -455,7 +466,8 @@ namespace Microsoft.AspNetCore.DataProtection.Managed
                                 cryptoTransform,
                                 CryptoStreamMode.Write
                             )
-                        ) {
+                        )
+                        {
                             cryptoStream.Write(plaintext.Array!, plaintext.Offset, plaintext.Count);
                             cryptoStream.FlushFinalBlock();
 
@@ -469,7 +481,8 @@ namespace Microsoft.AspNetCore.DataProtection.Managed
                                 var validationAlgorithm = CreateValidationAlgorithm(
                                     validationSubkey
                                 )
-                            ) {
+                            )
+                            {
                                 // As an optimization, avoid duplicating the underlying buffer
                                 var underlyingBuffer = outputStream.GetBuffer();
 

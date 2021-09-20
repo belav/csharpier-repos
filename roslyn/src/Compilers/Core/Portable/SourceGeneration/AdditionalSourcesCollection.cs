@@ -54,7 +54,8 @@ namespace Microsoft.CodeAnalysis
                     && c != ']'
                     && c != '{'
                     && c != '}'
-                ) {
+                )
+                {
                     throw new ArgumentException(
                         string.Format(CodeAnalysisResources.HintNameInvalidChar, c, i),
                         nameof(hintName)

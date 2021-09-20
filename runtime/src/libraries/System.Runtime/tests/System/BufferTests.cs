@@ -191,7 +191,8 @@ namespace System.Tests
             int destinationLength,
             int destinationIndexOffset,
             long sourceBytesToCopy
-        ) {
+        )
+        {
             var sourceArray = new byte[sourceLength];
             for (int i = 0; i < sourceArray.Length; i++)
             {
@@ -206,7 +207,8 @@ namespace System.Tests
             fixed (
                 byte* sourceBase = sourceArray,
                     destinationBase = destinationArray
-            ) {
+            )
+            {
                 Buffer.MemoryCopy(
                     sourceBase + sourceIndexOffset,
                     destinationBase + destinationIndexOffset,
@@ -230,7 +232,8 @@ namespace System.Tests
                 long i = destinationIndexOffset + sourceBytesToCopy;
                 i < destinationArray.Length;
                 i++
-            ) {
+            )
+            {
                 Assert.Equal(unchecked((byte)(i * 2)), destinationArray[i]);
             }
         }
@@ -242,7 +245,8 @@ namespace System.Tests
             int sourceLength,
             int destinationIndexOffset,
             int sourceBytesToCopy
-        ) {
+        )
+        {
             var array = new int[sourceLength];
             for (int i = 0; i < array.Length; i++)
             {
@@ -278,7 +282,8 @@ namespace System.Tests
                     fixed (
                         int* sourceBase = sourceArray,
                             destinationBase = destinationArray
-                    ) {
+                    )
+                    {
                         Buffer.MemoryCopy(sourceBase, destinationBase, 5000 * 4, 20000 * 4); // Source bytes to copy > destination size in bytes
                     }
                 }
@@ -291,7 +296,8 @@ namespace System.Tests
                     fixed (
                         int* sourceBase = sourceArray,
                             destinationBase = destinationArray
-                    ) {
+                    )
+                    {
                         Buffer.MemoryCopy(
                             sourceBase,
                             destinationBase,

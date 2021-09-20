@@ -39,7 +39,8 @@ namespace Internal.Cryptography
         internal static Lazy<SafeAlgorithmHandle> OpenAesAlgorithm(
             string cipherMode,
             int feedback = 0
-        ) {
+        )
+        {
             return new Lazy<SafeAlgorithmHandle>(
                 () =>
                 {

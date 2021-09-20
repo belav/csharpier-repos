@@ -50,7 +50,8 @@ namespace Microsoft.CodeAnalysis.CSharp.ConvertBetweenRegularAndVerbatimString
             IVirtualCharService charService,
             StringBuilder sb,
             LiteralExpressionSyntax stringExpression
-        ) {
+        )
+        {
             sb.Append('@');
             sb.Append(DoubleQuote);
             AddVerbatimStringText(charService, sb, stringExpression.Token);
@@ -63,7 +64,8 @@ namespace Microsoft.CodeAnalysis.CSharp.ConvertBetweenRegularAndVerbatimString
             IVirtualCharService charService,
             StringBuilder sb,
             LiteralExpressionSyntax stringExpression
-        ) {
+        )
+        {
             sb.Append(DoubleQuote);
             AddRegularStringText(charService, sb, stringExpression.Token);
             sb.Append(DoubleQuote);

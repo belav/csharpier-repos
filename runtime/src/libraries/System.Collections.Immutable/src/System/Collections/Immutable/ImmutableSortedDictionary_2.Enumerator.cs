@@ -137,7 +137,8 @@ namespace System.Collections.Immutable
                 if (
                     _stack != null
                     && _stack.TryUse(ref this, out Stack<RefAsValueType<Node>>? stack)
-                ) {
+                )
+                {
                     stack.ClearFastWhenEmpty();
                     s_enumeratingStacks.TryAdd(this, _stack!);
                 }

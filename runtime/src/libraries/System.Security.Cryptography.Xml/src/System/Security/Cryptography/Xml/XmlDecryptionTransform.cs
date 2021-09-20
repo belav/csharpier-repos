@@ -100,7 +100,8 @@ namespace System.Security.Cryptography.Xml
                     if (
                         elem.LocalName == "Except"
                         && elem.NamespaceURI == XmlDecryptionTransformNamespaceUrl
-                    ) {
+                    )
+                    {
                         // the Uri is required
                         string uri = Utils.GetAttribute(
                             elem,
@@ -243,7 +244,8 @@ namespace System.Security.Cryptography.Xml
                     encryptedDataElement != null
                     && encryptedDataElement.LocalName == "EncryptedData"
                     && encryptedDataElement.NamespaceURI == EncryptedXml.XmlEncNamespaceUrl
-                ) {
+                )
+                {
                     XmlNode sibling = encryptedDataElement.NextSibling;
                     XmlNode parent = encryptedDataElement.ParentNode;
                     if (ProcessEncryptedDataItem(encryptedDataElement))

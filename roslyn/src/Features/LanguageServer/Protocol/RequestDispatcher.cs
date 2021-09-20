@@ -29,7 +29,8 @@ namespace Microsoft.CodeAnalysis.LanguageServer
                 Lazy<AbstractRequestHandlerProvider, RequestHandlerProviderMetadataView>
             > requestHandlerProviders,
             string? languageName = null
-        ) {
+        )
+        {
             _requestHandlers = CreateMethodToHandlerMap(
                 requestHandlerProviders.Where(rh => rh.Metadata.LanguageName == languageName)
             );
@@ -39,7 +40,8 @@ namespace Microsoft.CodeAnalysis.LanguageServer
             IEnumerable<
                 Lazy<AbstractRequestHandlerProvider, RequestHandlerProviderMetadataView>
             > requestHandlerProviders
-        ) {
+        )
+        {
             var requestHandlerDictionary = ImmutableDictionary.CreateBuilder<
                 string,
                 Lazy<IRequestHandler>

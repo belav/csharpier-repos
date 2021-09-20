@@ -51,7 +51,8 @@ namespace Microsoft.AspNetCore.Mvc.Razor.Extensions.Version1_X
             protected override void ExecuteCore(
                 RazorCodeDocument codeDocument,
                 DocumentIntermediateNode documentNode
-            ) {
+            )
+            {
                 var visitor = new Visitor();
                 visitor.Visit(documentNode);
                 var modelType = ModelDirective.GetModelType(documentNode);

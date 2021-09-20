@@ -187,7 +187,8 @@ Actual: {2}";
             string httpHeaderVerb,
             string httpFormVerb,
             string httpQueryStringVerb
-        ) {
+        )
+        {
             Mock<ControllerContext> mockControllerContext = new Mock<ControllerContext>();
             mockControllerContext.Setup(c => c.HttpContext.Request.HttpMethod)
                 .Returns(httpRequestVerb);
@@ -226,7 +227,8 @@ Actual: {2}";
 
         private static IEnumerable<ICollection<T>> EnumerableToCombinations<T>(
             IEnumerable<T> elements
-        ) {
+        )
+        {
             List<T> allElements = elements.ToList();
 
             int maxCount = 1 << allElements.Count;

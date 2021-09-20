@@ -20,7 +20,8 @@ namespace System.Net.WebSockets
             WebSocketState currentState,
             bool isDisposed,
             WebSocketState[] validStates
-        ) {
+        )
+        {
             string validStatesText = string.Empty;
 
             if (validStates != null && validStates.Length > 0)
@@ -100,11 +101,13 @@ namespace System.Net.WebSockets
         internal static void ValidateCloseStatus(
             WebSocketCloseStatus closeStatus,
             string? statusDescription
-        ) {
+        )
+        {
             if (
                 closeStatus == WebSocketCloseStatus.Empty
                 && !string.IsNullOrEmpty(statusDescription)
-            ) {
+            )
+            {
                 throw new ArgumentException(
                     SR.Format(
                         SR.net_WebSockets_ReasonNotNull,
@@ -124,7 +127,8 @@ namespace System.Net.WebSockets
                 )
                 || closeStatusCode == CloseStatusCodeAbort
                 || closeStatusCode == CloseStatusCodeFailedTLSHandshake
-            ) {
+            )
+            {
                 // CloseStatus 1006 means Aborted - this will never appear on the wire and is reflected by calling WebSocket.Abort
                 throw new ArgumentException(
                     SR.Format(SR.net_WebSockets_InvalidCloseStatusCode, closeStatusCode),
@@ -154,7 +158,8 @@ namespace System.Net.WebSockets
         internal static void ValidateArraySegment(
             ArraySegment<byte> arraySegment,
             string parameterName
-        ) {
+        )
+        {
             Debug.Assert(
                 !string.IsNullOrEmpty(parameterName),
                 "'parameterName' MUST NOT be NULL or string.Empty"
@@ -173,7 +178,8 @@ namespace System.Net.WebSockets
             if (
                 arraySegment.Count < 0
                 || arraySegment.Count > (arraySegment.Array.Length - arraySegment.Offset)
-            ) {
+            )
+            {
                 throw new ArgumentOutOfRangeException(
                     parameterName + "." + nameof(arraySegment.Count)
                 );

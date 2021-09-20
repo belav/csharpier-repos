@@ -23,7 +23,8 @@ namespace System.Runtime.Loader
             IntPtr thisHandlePtr,
             bool representsTPALoadContext,
             bool isCollectible
-        ) {
+        )
+        {
             return InternalInitializeNativeALC(
                 thisHandlePtr,
                 representsTPALoadContext,
@@ -61,7 +62,8 @@ namespace System.Runtime.Loader
                 fixed (
                     byte* ptrAssembly = arrAssembly,
                         ptrSymbols = arrSymbols
-                ) {
+                )
+                {
                     return InternalLoadFromStream(
                         NativeALC,
                         new IntPtr(ptrAssembly),
@@ -167,7 +169,8 @@ namespace System.Runtime.Loader
         private static Assembly? MonoResolveUsingResolveSatelliteAssembly(
             IntPtr gchALC,
             string assemblyName
-        ) {
+        )
+        {
             AssemblyLoadContext context;
             // This check exists because the function can be called early in startup, before the default ALC is initialized
             if (gchALC == IntPtr.Zero)
@@ -179,7 +182,8 @@ namespace System.Runtime.Loader
 
         private static AssemblyLoadContext GetAssemblyLoadContext(
             IntPtr gchManagedAssemblyLoadContext
-        ) {
+        )
+        {
             AssemblyLoadContext context;
             // This check exists because the function can be called early in startup, before the default ALC is initialized
             if (gchManagedAssemblyLoadContext == IntPtr.Zero)
@@ -195,7 +199,8 @@ namespace System.Runtime.Loader
             string unmanagedDllName,
             IntPtr gchManagedAssemblyLoadContext,
             ref IntPtr dll
-        ) {
+        )
+        {
             AssemblyLoadContext context = GetAssemblyLoadContext(gchManagedAssemblyLoadContext);
             dll = context.LoadUnmanagedDll(unmanagedDllName);
         }
@@ -205,7 +210,8 @@ namespace System.Runtime.Loader
             Assembly assembly,
             IntPtr gchManagedAssemblyLoadContext,
             ref IntPtr dll
-        ) {
+        )
+        {
             AssemblyLoadContext context = GetAssemblyLoadContext(gchManagedAssemblyLoadContext);
             dll = context.GetResolvedUnmanagedDll(assembly, unmanagedDllName);
         }

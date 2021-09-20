@@ -403,7 +403,8 @@ namespace Microsoft.AspNetCore.Components.WebAssembly.Authentication
             if (
                 !string.IsNullOrWhiteSpace(fromQuery)
                 && !fromQuery.StartsWith(Navigation.BaseUri, StringComparison.Ordinal)
-            ) {
+            )
+            {
                 // This is an extra check to prevent open redirects.
                 throw new InvalidOperationException(
                     "Invalid return url. The return url needs to have the same origin as the current page."

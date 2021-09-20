@@ -157,7 +157,8 @@ namespace System.Reflection.Runtime.BindingFlagSupport
                 (t1.IsArray && t2.IsArray)
                 || (t1.IsByRef && t2.IsByRef)
                 || (t1.IsPointer && t2.IsPointer)
-            ) {
+            )
+            {
                 if (t1.IsSZArray() != t2.IsSZArray())
                     return false;
 

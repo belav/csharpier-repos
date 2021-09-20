@@ -136,7 +136,8 @@ namespace WebApiHelpPageWebHost.UnitTest.Controllers
                 ITypeDescriptorContext context,
                 CultureInfo culture,
                 object value
-            ) {
+            )
+            {
                 if (value is string)
                 {
                     string[] v = ((string)value).Split(new char[] { ',' });
@@ -150,7 +151,8 @@ namespace WebApiHelpPageWebHost.UnitTest.Controllers
                 CultureInfo culture,
                 object value,
                 Type destinationType
-            ) {
+            )
+            {
                 if (destinationType == typeof(string))
                 {
                     return ((Point)value).X + "," + ((Point)value).Y;

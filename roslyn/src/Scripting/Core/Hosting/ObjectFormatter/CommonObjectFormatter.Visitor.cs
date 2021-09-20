@@ -53,7 +53,8 @@ namespace Microsoft.CodeAnalysis.Scripting.Hosting
                 CommonPrimitiveFormatterOptions primitiveOptions,
                 CommonTypeNameFormatterOptions typeNameOptions,
                 MemberDisplayFormat memberDisplayFormat
-            ) {
+            )
+            {
                 _formatter = formatter;
                 _builderOptions = builderOptions;
                 _primitiveOptions = primitiveOptions;
@@ -96,7 +97,8 @@ namespace Microsoft.CodeAnalysis.Scripting.Hosting
                 object obj,
                 bool isRoot,
                 out string debuggerDisplayName
-            ) {
+            )
+            {
                 // TODO (https://github.com/dotnet/roslyn/issues/6689): remove this
                 if (!isRoot && _memberDisplayFormat == MemberDisplayFormat.SeparateLines)
                 {
@@ -130,7 +132,8 @@ namespace Microsoft.CodeAnalysis.Scripting.Hosting
                 if (
                     typeInfo.IsGenericType
                     && typeInfo.GetGenericTypeDefinition() == typeof(KeyValuePair<, >)
-                ) {
+                )
+                {
                     if (isRoot)
                     {
                         result.Append(
@@ -258,7 +261,8 @@ namespace Microsoft.CodeAnalysis.Scripting.Hosting
                 object proxy,
                 bool includeNonPublic,
                 bool inlineMembers
-            ) {
+            )
+            {
                 // TODO (tomat): we should not use recursion
                 RuntimeHelpers.EnsureSufficientExecutionStack();
 
@@ -327,7 +331,8 @@ namespace Microsoft.CodeAnalysis.Scripting.Hosting
                 TypeInfo preProxyTypeInfo,
                 bool includeNonPublic,
                 bool inline
-            ) {
+            )
+            {
                 int lengthLimit = result.Remaining;
                 if (lengthLimit < 0)
                 {
@@ -367,7 +372,8 @@ namespace Microsoft.CodeAnalysis.Scripting.Hosting
             private static bool UseCollectionFormat(
                 IEnumerable<FormattedMember> members,
                 TypeInfo originalType
-            ) {
+            )
+            {
                 return typeof(IEnumerable).GetTypeInfo().IsAssignableFrom(originalType)
                     && members.All(member => member.Index >= 0);
             }
@@ -380,7 +386,8 @@ namespace Microsoft.CodeAnalysis.Scripting.Hosting
                 object obj,
                 bool includeNonPublic,
                 ref int lengthLimit
-            ) {
+            )
+            {
                 Debug.Assert(obj != null);
 
                 var members = new List<MemberInfo>();
@@ -451,7 +458,8 @@ namespace Microsoft.CodeAnalysis.Scripting.Hosting
                                 || field.IsFamily
                                 || field.IsFamilyOrAssembly
                             )
-                        ) {
+                        )
+                        {
                             continue;
                         }
                     }
@@ -484,7 +492,8 @@ namespace Microsoft.CodeAnalysis.Scripting.Hosting
                                     )
                                 )
                             )
-                        ) {
+                        )
+                        {
                             continue;
                         }
 
@@ -522,7 +531,8 @@ namespace Microsoft.CodeAnalysis.Scripting.Hosting
                                 new FormattedMember(-1, member.Name, memberValueBuilder.ToString()),
                                 ref lengthLimit
                             )
-                        ) {
+                        )
+                        {
                             return;
                         }
                         continue;
@@ -563,7 +573,8 @@ namespace Microsoft.CodeAnalysis.Scripting.Hosting
                                             new FormattedMember(i, name, valueBuilder.ToString()),
                                             ref lengthLimit
                                         )
-                                    ) {
+                                    )
+                                    {
                                         return;
                                     }
 
@@ -576,7 +587,8 @@ namespace Microsoft.CodeAnalysis.Scripting.Hosting
                                     _primitiveOptions
                                 ) == null
                                 && VisitedObjects.Add(value)
-                            ) {
+                            )
+                            {
                                 FormatObjectMembersRecursive(
                                     result,
                                     value,
@@ -618,7 +630,8 @@ namespace Microsoft.CodeAnalysis.Scripting.Hosting
                                 new FormattedMember(-1, name, valueBuilder.ToString()),
                                 ref lengthLimit
                             )
-                        ) {
+                        )
+                        {
                             return;
                         }
                     }
@@ -629,7 +642,8 @@ namespace Microsoft.CodeAnalysis.Scripting.Hosting
                 List<FormattedMember> members,
                 FormattedMember member,
                 ref int remainingLength
-            ) {
+            )
+            {
                 // Add this item even if we exceed the limit - its prefix might be appended to the result.
                 members.Add(member);
 
@@ -828,7 +842,8 @@ namespace Microsoft.CodeAnalysis.Scripting.Hosting
                 Builder result,
                 Array array,
                 bool inline
-            ) {
+            )
+            {
                 Debug.Assert(array.Rank > 1);
 
                 if (array.Length == 0)
@@ -1017,7 +1032,8 @@ namespace Microsoft.CodeAnalysis.Scripting.Hosting
                                         out callableOnly
                                     )
                                 ) == null
-                            ) {
+                            )
+                            {
                                 // the expression isn't properly formatted
                                 result.Append(format, i - 1, format.Length - i + 1);
                                 break;

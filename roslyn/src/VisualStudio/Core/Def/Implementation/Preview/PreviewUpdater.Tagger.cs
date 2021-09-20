@@ -41,7 +41,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Preview
 
             public IEnumerable<ITagSpan<HighlightTag>> GetTags(
                 NormalizedSnapshotSpanCollection spans
-            ) {
+            )
+            {
                 var lines = _textBuffer.CurrentSnapshot.Lines.Where(
                     line => line.Extent.OverlapsWith(_span)
                 );

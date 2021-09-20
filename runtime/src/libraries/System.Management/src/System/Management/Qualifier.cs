@@ -59,7 +59,8 @@ namespace System.Management
             string propName,
             string qualName,
             QualifierType type
-        ) {
+        )
+        {
             this.parent = parent;
             this.propertyOrMethodName = propName;
             this.qualifierName = qualName;

@@ -21,7 +21,8 @@ namespace Microsoft.CodeAnalysis.Diagnostics
             ImmutableArray<DiagnosticAnalyzer> analyzers,
             AnalyzerOptions? options = null,
             CancellationToken cancellationToken = default
-        ) {
+        )
+        {
             return new CompilationWithAnalyzers(compilation, analyzers, options, cancellationToken);
         }
 
@@ -35,7 +36,8 @@ namespace Microsoft.CodeAnalysis.Diagnostics
             this Compilation compilation,
             ImmutableArray<DiagnosticAnalyzer> analyzers,
             CompilationWithAnalyzersOptions analysisOptions
-        ) {
+        )
+        {
             return new CompilationWithAnalyzers(compilation, analyzers, analysisOptions);
         }
     }

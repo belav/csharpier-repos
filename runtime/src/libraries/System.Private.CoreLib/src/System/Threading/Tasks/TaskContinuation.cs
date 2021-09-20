@@ -17,15 +17,17 @@ namespace System.Threading.Tasks
             object? state,
             TaskCreationOptions creationOptions,
             InternalTaskOptions internalOptions
-        ) : base(
-            action,
-            state,
-            Task.InternalCurrentIfAttached(creationOptions),
-            default,
-            creationOptions,
-            internalOptions,
-            null
-        ) {
+        )
+            : base(
+                action,
+                state,
+                Task.InternalCurrentIfAttached(creationOptions),
+                default,
+                creationOptions,
+                internalOptions,
+                null
+            )
+        {
             Debug.Assert(
                 action is Action<Task> || action is Action<Task, object?>,
                 "Invalid delegate type in ContinuationTaskFromTask"
@@ -78,15 +80,17 @@ namespace System.Threading.Tasks
             object? state,
             TaskCreationOptions creationOptions,
             InternalTaskOptions internalOptions
-        ) : base(
-            function,
-            state,
-            Task.InternalCurrentIfAttached(creationOptions),
-            default,
-            creationOptions,
-            internalOptions,
-            null
-        ) {
+        )
+            : base(
+                function,
+                state,
+                Task.InternalCurrentIfAttached(creationOptions),
+                default,
+                creationOptions,
+                internalOptions,
+                null
+            )
+        {
             Debug.Assert(
                 function is Func<Task, TResult> || function is Func<Task, object?, TResult>,
                 "Invalid delegate type in ContinuationResultTaskFromTask"
@@ -139,15 +143,17 @@ namespace System.Threading.Tasks
             object? state,
             TaskCreationOptions creationOptions,
             InternalTaskOptions internalOptions
-        ) : base(
-            action,
-            state,
-            Task.InternalCurrentIfAttached(creationOptions),
-            default,
-            creationOptions,
-            internalOptions,
-            null
-        ) {
+        )
+            : base(
+                action,
+                state,
+                Task.InternalCurrentIfAttached(creationOptions),
+                default,
+                creationOptions,
+                internalOptions,
+                null
+            )
+        {
             Debug.Assert(
                 action is Action<Task<TAntecedentResult>>
                     || action is Action<Task<TAntecedentResult>, object?>,
@@ -202,15 +208,17 @@ namespace System.Threading.Tasks
             object? state,
             TaskCreationOptions creationOptions,
             InternalTaskOptions internalOptions
-        ) : base(
-            function,
-            state,
-            Task.InternalCurrentIfAttached(creationOptions),
-            default,
-            creationOptions,
-            internalOptions,
-            null
-        ) {
+        )
+            : base(
+                function,
+                state,
+                Task.InternalCurrentIfAttached(creationOptions),
+                default,
+                creationOptions,
+                internalOptions,
+                null
+            )
+        {
             Debug.Assert(
                 function is Func<Task<TAntecedentResult>, TResult>
                     || function is Func<Task<TAntecedentResult>, object?, TResult>,
@@ -336,7 +344,8 @@ namespace System.Threading.Tasks
             Task task,
             TaskContinuationOptions options,
             TaskScheduler scheduler
-        ) {
+        )
+        {
             Debug.Assert(task != null, "TaskContinuation ctor: task is null");
             Debug.Assert(scheduler != null, "TaskContinuation ctor: scheduler is null");
             m_task = task;

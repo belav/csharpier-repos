@@ -21,7 +21,8 @@ namespace System.IO.Ports.Tests
             )
             using (
                 var com2 = new SerialPort(TCSupport.LocalMachineSerialInfo.SecondAvailablePortName)
-            ) {
+            )
+            {
                 Debug.WriteLine(
                     "Verifying EndRead method throws exception after a call to Cloes()"
                 );
@@ -52,7 +53,8 @@ namespace System.IO.Ports.Tests
             )
             using (
                 var com2 = new SerialPort(TCSupport.LocalMachineSerialInfo.SecondAvailablePortName)
-            ) {
+            )
+            {
                 Debug.WriteLine(
                     "Verifying EndRead method throws exception after a call to BaseStream.Close()"
                 );
@@ -82,7 +84,8 @@ namespace System.IO.Ports.Tests
                 SerialPort com = new SerialPort(
                     TCSupport.LocalMachineSerialInfo.FirstAvailablePortName
                 )
-            ) {
+            )
+            {
                 Debug.WriteLine("Verifying EndRead with null asyncResult");
 
                 com.Open();
@@ -98,7 +101,8 @@ namespace System.IO.Ports.Tests
             )
             using (
                 var com2 = new SerialPort(TCSupport.LocalMachineSerialInfo.SecondAvailablePortName)
-            ) {
+            )
+            {
                 int endReadReturnValue;
                 int numBytesToRead1 = 8,
                     numBytesToRead2 = 16,
@@ -139,7 +143,8 @@ namespace System.IO.Ports.Tests
                 if (
                     numBytesToRead1
                     != (endReadReturnValue = com1.BaseStream.EndRead(readAsyncResult1))
-                ) {
+                )
+                {
                     Fail(
                         "ERROR!!! Expected EndRead to return={0} actual={1} for first read",
                         numBytesToRead1,
@@ -150,7 +155,8 @@ namespace System.IO.Ports.Tests
                 if (
                     numBytesToRead2
                     != (endReadReturnValue = com1.BaseStream.EndRead(readAsyncResult2))
-                ) {
+                )
+                {
                     Fail(
                         "ERROR!!! Expected EndRead to return={0} actual={1} for second read",
                         numBytesToRead2,
@@ -161,7 +167,8 @@ namespace System.IO.Ports.Tests
                 if (
                     numBytesToRead3
                     != (endReadReturnValue = com1.BaseStream.EndRead(readAsyncResult3))
-                ) {
+                )
+                {
                     Fail(
                         "ERROR!!! Expected EndRead to return={0} actual={1} for third read",
                         numBytesToRead3,
@@ -181,7 +188,8 @@ namespace System.IO.Ports.Tests
             )
             using (
                 var com2 = new SerialPort(TCSupport.LocalMachineSerialInfo.SecondAvailablePortName)
-            ) {
+            )
+            {
                 int endReadReturnValue;
                 int numBytesToRead1 = 8,
                     numBytesToRead2 = 16,
@@ -224,7 +232,8 @@ namespace System.IO.Ports.Tests
                 if (
                     numBytesToRead2
                     != (endReadReturnValue = com1.BaseStream.EndRead(readAsyncResult2))
-                ) {
+                )
+                {
                     Fail(
                         "ERROR!!! Expected EndRead to return={0} actual={1} for second read",
                         numBytesToRead2,
@@ -235,7 +244,8 @@ namespace System.IO.Ports.Tests
                 if (
                     numBytesToRead3
                     != (endReadReturnValue = com1.BaseStream.EndRead(readAsyncResult3))
-                ) {
+                )
+                {
                     Fail(
                         "ERROR!!! Expected EndRead to return={0} actual={1} for third read",
                         numBytesToRead3,
@@ -246,7 +256,8 @@ namespace System.IO.Ports.Tests
                 if (
                     numBytesToRead1
                     != (endReadReturnValue = com1.BaseStream.EndRead(readAsyncResult1))
-                ) {
+                )
+                {
                     Fail(
                         "ERROR!!! Expected EndRead to return={0} actual={1} for first read",
                         numBytesToRead1,
@@ -265,7 +276,8 @@ namespace System.IO.Ports.Tests
             Stream serialStream,
             IAsyncResult asyncResult,
             Type expectedException
-        ) {
+        )
+        {
             if (expectedException == null)
             {
                 serialStream.EndRead(asyncResult);

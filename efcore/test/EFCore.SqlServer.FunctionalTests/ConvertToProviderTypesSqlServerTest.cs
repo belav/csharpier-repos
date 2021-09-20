@@ -12,9 +12,8 @@ namespace Microsoft.EntityFrameworkCore
     public class ConvertToProviderTypesSqlServerTest
         : ConvertToProviderTypesTestBase<ConvertToProviderTypesSqlServerTest.ConvertToProviderTypesSqlServerFixture>
     {
-        public ConvertToProviderTypesSqlServerTest(
-            ConvertToProviderTypesSqlServerFixture fixture
-        ) : base(fixture) { }
+        public ConvertToProviderTypesSqlServerTest(ConvertToProviderTypesSqlServerFixture fixture)
+            : base(fixture) { }
 
         [ConditionalFact]
         public virtual void Columns_have_expected_data_types()

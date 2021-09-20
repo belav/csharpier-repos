@@ -16,7 +16,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
         public static void CheckParents(
             SyntaxNodeOrToken nodeOrToken,
             SyntaxTree expectedSyntaxTree
-        ) {
+        )
+        {
             Assert.Equal(expectedSyntaxTree, nodeOrToken.SyntaxTree);
 
             var span = nodeOrToken.Span;

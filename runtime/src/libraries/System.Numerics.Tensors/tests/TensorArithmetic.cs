@@ -146,7 +146,8 @@ namespace System.Numerics.Tensors
             int[] leftAxes,
             int[] rightAxes,
             Tensor<bool> result
-        ) {
+        )
+        {
             throw new NotSupportedException();
         }
         public void Decrement(Tensor<bool> tensor, Tensor<bool> result)
@@ -292,7 +293,8 @@ namespace System.Numerics.Tensors
             if (
                 (result.IsReversedStride == left.IsReversedStride)
                 && (result.IsReversedStride == right.IsReversedStride)
-            ) {
+            )
+            {
                 for (int i = 0; i < resultSpan.Length; i++)
                 {
                     resultSpan[i] = (bool)(leftSpan[i] & rightSpan[i]);
@@ -377,7 +379,8 @@ namespace System.Numerics.Tensors
             int[] leftAxes,
             int[] rightAxes,
             DenseTensor<bool> result
-        ) {
+        )
+        {
             throw new NotSupportedException();
         }
         public void Decrement(DenseTensor<bool> tensor, DenseTensor<bool> result)
@@ -388,7 +391,8 @@ namespace System.Numerics.Tensors
             DenseTensor<bool> left,
             DenseTensor<bool> right,
             DenseTensor<bool> result
-        ) {
+        )
+        {
             throw new NotSupportedException();
         }
         public void Divide(DenseTensor<bool> tensor, bool scalar, DenseTensor<bool> result)
@@ -399,14 +403,16 @@ namespace System.Numerics.Tensors
             DenseTensor<bool> left,
             DenseTensor<bool> right,
             DenseTensor<bool> result
-        ) {
+        )
+        {
             var resultSpan = result.Buffer.Span;
             var leftSpan = left.Buffer.Span;
             var rightSpan = right.Buffer.Span;
             if (
                 (result.IsReversedStride == left.IsReversedStride)
                 && (result.IsReversedStride == right.IsReversedStride)
-            ) {
+            )
+            {
                 for (int i = 0; i < resultSpan.Length; i++)
                 {
                     resultSpan[i] = leftSpan[i] == rightSpan[i];
@@ -451,14 +457,16 @@ namespace System.Numerics.Tensors
             DenseTensor<bool> left,
             DenseTensor<bool> right,
             DenseTensor<bool> result
-        ) {
+        )
+        {
             throw new NotSupportedException();
         }
         public void GreaterThanOrEqual(
             DenseTensor<bool> left,
             DenseTensor<bool> right,
             DenseTensor<bool> result
-        ) {
+        )
+        {
             throw new NotSupportedException();
         }
         public void Increment(DenseTensor<bool> tensor, DenseTensor<bool> result)
@@ -473,21 +481,24 @@ namespace System.Numerics.Tensors
             DenseTensor<bool> left,
             DenseTensor<bool> right,
             DenseTensor<bool> result
-        ) {
+        )
+        {
             throw new NotSupportedException();
         }
         public void LessThanOrEqual(
             DenseTensor<bool> left,
             DenseTensor<bool> right,
             DenseTensor<bool> result
-        ) {
+        )
+        {
             throw new NotSupportedException();
         }
         public void Modulo(
             DenseTensor<bool> left,
             DenseTensor<bool> right,
             DenseTensor<bool> result
-        ) {
+        )
+        {
             throw new NotSupportedException();
         }
         public void Modulo(DenseTensor<bool> tensor, bool scalar, DenseTensor<bool> result)
@@ -498,7 +509,8 @@ namespace System.Numerics.Tensors
             DenseTensor<bool> left,
             DenseTensor<bool> right,
             DenseTensor<bool> result
-        ) {
+        )
+        {
             throw new NotSupportedException();
         }
         public void Multiply(DenseTensor<bool> tensor, bool scalar, DenseTensor<bool> result)
@@ -509,14 +521,16 @@ namespace System.Numerics.Tensors
             DenseTensor<bool> left,
             DenseTensor<bool> right,
             DenseTensor<bool> result
-        ) {
+        )
+        {
             var resultSpan = result.Buffer.Span;
             var leftSpan = left.Buffer.Span;
             var rightSpan = right.Buffer.Span;
             if (
                 (result.IsReversedStride == left.IsReversedStride)
                 && (result.IsReversedStride == right.IsReversedStride)
-            ) {
+            )
+            {
                 for (int i = 0; i < resultSpan.Length; i++)
                 {
                     resultSpan[i] = leftSpan[i] != rightSpan[i];
@@ -565,7 +579,8 @@ namespace System.Numerics.Tensors
             if (
                 (result.IsReversedStride == left.IsReversedStride)
                 && (result.IsReversedStride == right.IsReversedStride)
-            ) {
+            )
+            {
                 for (int i = 0; i < resultSpan.Length; i++)
                 {
                     resultSpan[i] = (bool)(leftSpan[i] | rightSpan[i]);
@@ -652,7 +667,8 @@ namespace System.Numerics.Tensors
             DenseTensor<bool> left,
             DenseTensor<bool> right,
             DenseTensor<bool> result
-        ) {
+        )
+        {
             throw new NotSupportedException();
         }
         public void Subtract(DenseTensor<bool> tensor, bool scalar, DenseTensor<bool> result)
@@ -675,7 +691,8 @@ namespace System.Numerics.Tensors
             if (
                 (result.IsReversedStride == left.IsReversedStride)
                 && (result.IsReversedStride == right.IsReversedStride)
-            ) {
+            )
+            {
                 for (int i = 0; i < resultSpan.Length; i++)
                 {
                     resultSpan[i] = (bool)(leftSpan[i] ^ rightSpan[i]);
@@ -802,7 +819,8 @@ namespace System.Numerics.Tensors
             int[] leftAxes,
             int[] rightAxes,
             Tensor<byte> result
-        ) {
+        )
+        {
             var leftIndices = new int[left.Rank];
             var rightIndices = new int[right.Rank];
             var resultIndices = new int[result.Rank];
@@ -1136,7 +1154,8 @@ namespace System.Numerics.Tensors
             if (
                 (result.IsReversedStride == left.IsReversedStride)
                 && (result.IsReversedStride == right.IsReversedStride)
-            ) {
+            )
+            {
                 for (int i = 0; i < resultSpan.Length; i++)
                 {
                     resultSpan[i] = (byte)(leftSpan[i] + rightSpan[i]);
@@ -1223,7 +1242,8 @@ namespace System.Numerics.Tensors
             if (
                 (result.IsReversedStride == left.IsReversedStride)
                 && (result.IsReversedStride == right.IsReversedStride)
-            ) {
+            )
+            {
                 for (int i = 0; i < resultSpan.Length; i++)
                 {
                     resultSpan[i] = (byte)(leftSpan[i] & rightSpan[i]);
@@ -1308,7 +1328,8 @@ namespace System.Numerics.Tensors
             int[] leftAxes,
             int[] rightAxes,
             DenseTensor<byte> result
-        ) {
+        )
+        {
             var summingDimensions = new int[leftAxes.Length];
             for (int i = 0; i < leftAxes.Length; i++)
             {
@@ -1408,14 +1429,16 @@ namespace System.Numerics.Tensors
             DenseTensor<byte> left,
             DenseTensor<byte> right,
             DenseTensor<byte> result
-        ) {
+        )
+        {
             var resultSpan = result.Buffer.Span;
             var leftSpan = left.Buffer.Span;
             var rightSpan = right.Buffer.Span;
             if (
                 (result.IsReversedStride == left.IsReversedStride)
                 && (result.IsReversedStride == right.IsReversedStride)
-            ) {
+            )
+            {
                 for (int i = 0; i < resultSpan.Length; i++)
                 {
                     resultSpan[i] = (byte)(leftSpan[i] / rightSpan[i]);
@@ -1498,14 +1521,16 @@ namespace System.Numerics.Tensors
             DenseTensor<byte> left,
             DenseTensor<byte> right,
             DenseTensor<bool> result
-        ) {
+        )
+        {
             var resultSpan = result.Buffer.Span;
             var leftSpan = left.Buffer.Span;
             var rightSpan = right.Buffer.Span;
             if (
                 (result.IsReversedStride == left.IsReversedStride)
                 && (result.IsReversedStride == right.IsReversedStride)
-            ) {
+            )
+            {
                 for (int i = 0; i < resultSpan.Length; i++)
                 {
                     resultSpan[i] = leftSpan[i] == rightSpan[i];
@@ -1550,14 +1575,16 @@ namespace System.Numerics.Tensors
             DenseTensor<byte> left,
             DenseTensor<byte> right,
             DenseTensor<bool> result
-        ) {
+        )
+        {
             var resultSpan = result.Buffer.Span;
             var leftSpan = left.Buffer.Span;
             var rightSpan = right.Buffer.Span;
             if (
                 (result.IsReversedStride == left.IsReversedStride)
                 && (result.IsReversedStride == right.IsReversedStride)
-            ) {
+            )
+            {
                 for (int i = 0; i < resultSpan.Length; i++)
                 {
                     resultSpan[i] = leftSpan[i] > rightSpan[i];
@@ -1602,14 +1629,16 @@ namespace System.Numerics.Tensors
             DenseTensor<byte> left,
             DenseTensor<byte> right,
             DenseTensor<bool> result
-        ) {
+        )
+        {
             var resultSpan = result.Buffer.Span;
             var leftSpan = left.Buffer.Span;
             var rightSpan = right.Buffer.Span;
             if (
                 (result.IsReversedStride == left.IsReversedStride)
                 && (result.IsReversedStride == right.IsReversedStride)
-            ) {
+            )
+            {
                 for (int i = 0; i < resultSpan.Length; i++)
                 {
                     resultSpan[i] = leftSpan[i] >= rightSpan[i];
@@ -1700,14 +1729,16 @@ namespace System.Numerics.Tensors
             DenseTensor<byte> left,
             DenseTensor<byte> right,
             DenseTensor<bool> result
-        ) {
+        )
+        {
             var resultSpan = result.Buffer.Span;
             var leftSpan = left.Buffer.Span;
             var rightSpan = right.Buffer.Span;
             if (
                 (result.IsReversedStride == left.IsReversedStride)
                 && (result.IsReversedStride == right.IsReversedStride)
-            ) {
+            )
+            {
                 for (int i = 0; i < resultSpan.Length; i++)
                 {
                     resultSpan[i] = leftSpan[i] < rightSpan[i];
@@ -1752,14 +1783,16 @@ namespace System.Numerics.Tensors
             DenseTensor<byte> left,
             DenseTensor<byte> right,
             DenseTensor<bool> result
-        ) {
+        )
+        {
             var resultSpan = result.Buffer.Span;
             var leftSpan = left.Buffer.Span;
             var rightSpan = right.Buffer.Span;
             if (
                 (result.IsReversedStride == left.IsReversedStride)
                 && (result.IsReversedStride == right.IsReversedStride)
-            ) {
+            )
+            {
                 for (int i = 0; i < resultSpan.Length; i++)
                 {
                     resultSpan[i] = leftSpan[i] <= rightSpan[i];
@@ -1804,14 +1837,16 @@ namespace System.Numerics.Tensors
             DenseTensor<byte> left,
             DenseTensor<byte> right,
             DenseTensor<byte> result
-        ) {
+        )
+        {
             var resultSpan = result.Buffer.Span;
             var leftSpan = left.Buffer.Span;
             var rightSpan = right.Buffer.Span;
             if (
                 (result.IsReversedStride == left.IsReversedStride)
                 && (result.IsReversedStride == right.IsReversedStride)
-            ) {
+            )
+            {
                 for (int i = 0; i < resultSpan.Length; i++)
                 {
                     resultSpan[i] = (byte)(leftSpan[i] % rightSpan[i]);
@@ -1894,14 +1929,16 @@ namespace System.Numerics.Tensors
             DenseTensor<byte> left,
             DenseTensor<byte> right,
             DenseTensor<byte> result
-        ) {
+        )
+        {
             var resultSpan = result.Buffer.Span;
             var leftSpan = left.Buffer.Span;
             var rightSpan = right.Buffer.Span;
             if (
                 (result.IsReversedStride == left.IsReversedStride)
                 && (result.IsReversedStride == right.IsReversedStride)
-            ) {
+            )
+            {
                 for (int i = 0; i < resultSpan.Length; i++)
                 {
                     resultSpan[i] = (byte)(leftSpan[i] * rightSpan[i]);
@@ -1984,14 +2021,16 @@ namespace System.Numerics.Tensors
             DenseTensor<byte> left,
             DenseTensor<byte> right,
             DenseTensor<bool> result
-        ) {
+        )
+        {
             var resultSpan = result.Buffer.Span;
             var leftSpan = left.Buffer.Span;
             var rightSpan = right.Buffer.Span;
             if (
                 (result.IsReversedStride == left.IsReversedStride)
                 && (result.IsReversedStride == right.IsReversedStride)
-            ) {
+            )
+            {
                 for (int i = 0; i < resultSpan.Length; i++)
                 {
                     resultSpan[i] = leftSpan[i] != rightSpan[i];
@@ -2040,7 +2079,8 @@ namespace System.Numerics.Tensors
             if (
                 (result.IsReversedStride == left.IsReversedStride)
                 && (result.IsReversedStride == right.IsReversedStride)
-            ) {
+            )
+            {
                 for (int i = 0; i < resultSpan.Length; i++)
                 {
                     resultSpan[i] = (byte)(leftSpan[i] | rightSpan[i]);
@@ -2161,14 +2201,16 @@ namespace System.Numerics.Tensors
             DenseTensor<byte> left,
             DenseTensor<byte> right,
             DenseTensor<byte> result
-        ) {
+        )
+        {
             var resultSpan = result.Buffer.Span;
             var leftSpan = left.Buffer.Span;
             var rightSpan = right.Buffer.Span;
             if (
                 (result.IsReversedStride == left.IsReversedStride)
                 && (result.IsReversedStride == right.IsReversedStride)
-            ) {
+            )
+            {
                 for (int i = 0; i < resultSpan.Length; i++)
                 {
                     resultSpan[i] = (byte)(leftSpan[i] - rightSpan[i]);
@@ -2331,7 +2373,8 @@ namespace System.Numerics.Tensors
             if (
                 (result.IsReversedStride == left.IsReversedStride)
                 && (result.IsReversedStride == right.IsReversedStride)
-            ) {
+            )
+            {
                 for (int i = 0; i < resultSpan.Length; i++)
                 {
                     resultSpan[i] = (byte)(leftSpan[i] ^ rightSpan[i]);
@@ -2458,7 +2501,8 @@ namespace System.Numerics.Tensors
             int[] leftAxes,
             int[] rightAxes,
             Tensor<char> result
-        ) {
+        )
+        {
             var leftIndices = new int[left.Rank];
             var rightIndices = new int[right.Rank];
             var resultIndices = new int[result.Rank];
@@ -2792,7 +2836,8 @@ namespace System.Numerics.Tensors
             if (
                 (result.IsReversedStride == left.IsReversedStride)
                 && (result.IsReversedStride == right.IsReversedStride)
-            ) {
+            )
+            {
                 for (int i = 0; i < resultSpan.Length; i++)
                 {
                     resultSpan[i] = (char)(leftSpan[i] + rightSpan[i]);
@@ -2879,7 +2924,8 @@ namespace System.Numerics.Tensors
             if (
                 (result.IsReversedStride == left.IsReversedStride)
                 && (result.IsReversedStride == right.IsReversedStride)
-            ) {
+            )
+            {
                 for (int i = 0; i < resultSpan.Length; i++)
                 {
                     resultSpan[i] = (char)(leftSpan[i] & rightSpan[i]);
@@ -2964,7 +3010,8 @@ namespace System.Numerics.Tensors
             int[] leftAxes,
             int[] rightAxes,
             DenseTensor<char> result
-        ) {
+        )
+        {
             var summingDimensions = new int[leftAxes.Length];
             for (int i = 0; i < leftAxes.Length; i++)
             {
@@ -3064,14 +3111,16 @@ namespace System.Numerics.Tensors
             DenseTensor<char> left,
             DenseTensor<char> right,
             DenseTensor<char> result
-        ) {
+        )
+        {
             var resultSpan = result.Buffer.Span;
             var leftSpan = left.Buffer.Span;
             var rightSpan = right.Buffer.Span;
             if (
                 (result.IsReversedStride == left.IsReversedStride)
                 && (result.IsReversedStride == right.IsReversedStride)
-            ) {
+            )
+            {
                 for (int i = 0; i < resultSpan.Length; i++)
                 {
                     resultSpan[i] = (char)(leftSpan[i] / rightSpan[i]);
@@ -3154,14 +3203,16 @@ namespace System.Numerics.Tensors
             DenseTensor<char> left,
             DenseTensor<char> right,
             DenseTensor<bool> result
-        ) {
+        )
+        {
             var resultSpan = result.Buffer.Span;
             var leftSpan = left.Buffer.Span;
             var rightSpan = right.Buffer.Span;
             if (
                 (result.IsReversedStride == left.IsReversedStride)
                 && (result.IsReversedStride == right.IsReversedStride)
-            ) {
+            )
+            {
                 for (int i = 0; i < resultSpan.Length; i++)
                 {
                     resultSpan[i] = leftSpan[i] == rightSpan[i];
@@ -3206,14 +3257,16 @@ namespace System.Numerics.Tensors
             DenseTensor<char> left,
             DenseTensor<char> right,
             DenseTensor<bool> result
-        ) {
+        )
+        {
             var resultSpan = result.Buffer.Span;
             var leftSpan = left.Buffer.Span;
             var rightSpan = right.Buffer.Span;
             if (
                 (result.IsReversedStride == left.IsReversedStride)
                 && (result.IsReversedStride == right.IsReversedStride)
-            ) {
+            )
+            {
                 for (int i = 0; i < resultSpan.Length; i++)
                 {
                     resultSpan[i] = leftSpan[i] > rightSpan[i];
@@ -3258,14 +3311,16 @@ namespace System.Numerics.Tensors
             DenseTensor<char> left,
             DenseTensor<char> right,
             DenseTensor<bool> result
-        ) {
+        )
+        {
             var resultSpan = result.Buffer.Span;
             var leftSpan = left.Buffer.Span;
             var rightSpan = right.Buffer.Span;
             if (
                 (result.IsReversedStride == left.IsReversedStride)
                 && (result.IsReversedStride == right.IsReversedStride)
-            ) {
+            )
+            {
                 for (int i = 0; i < resultSpan.Length; i++)
                 {
                     resultSpan[i] = leftSpan[i] >= rightSpan[i];
@@ -3356,14 +3411,16 @@ namespace System.Numerics.Tensors
             DenseTensor<char> left,
             DenseTensor<char> right,
             DenseTensor<bool> result
-        ) {
+        )
+        {
             var resultSpan = result.Buffer.Span;
             var leftSpan = left.Buffer.Span;
             var rightSpan = right.Buffer.Span;
             if (
                 (result.IsReversedStride == left.IsReversedStride)
                 && (result.IsReversedStride == right.IsReversedStride)
-            ) {
+            )
+            {
                 for (int i = 0; i < resultSpan.Length; i++)
                 {
                     resultSpan[i] = leftSpan[i] < rightSpan[i];
@@ -3408,14 +3465,16 @@ namespace System.Numerics.Tensors
             DenseTensor<char> left,
             DenseTensor<char> right,
             DenseTensor<bool> result
-        ) {
+        )
+        {
             var resultSpan = result.Buffer.Span;
             var leftSpan = left.Buffer.Span;
             var rightSpan = right.Buffer.Span;
             if (
                 (result.IsReversedStride == left.IsReversedStride)
                 && (result.IsReversedStride == right.IsReversedStride)
-            ) {
+            )
+            {
                 for (int i = 0; i < resultSpan.Length; i++)
                 {
                     resultSpan[i] = leftSpan[i] <= rightSpan[i];
@@ -3460,14 +3519,16 @@ namespace System.Numerics.Tensors
             DenseTensor<char> left,
             DenseTensor<char> right,
             DenseTensor<char> result
-        ) {
+        )
+        {
             var resultSpan = result.Buffer.Span;
             var leftSpan = left.Buffer.Span;
             var rightSpan = right.Buffer.Span;
             if (
                 (result.IsReversedStride == left.IsReversedStride)
                 && (result.IsReversedStride == right.IsReversedStride)
-            ) {
+            )
+            {
                 for (int i = 0; i < resultSpan.Length; i++)
                 {
                     resultSpan[i] = (char)(leftSpan[i] % rightSpan[i]);
@@ -3550,14 +3611,16 @@ namespace System.Numerics.Tensors
             DenseTensor<char> left,
             DenseTensor<char> right,
             DenseTensor<char> result
-        ) {
+        )
+        {
             var resultSpan = result.Buffer.Span;
             var leftSpan = left.Buffer.Span;
             var rightSpan = right.Buffer.Span;
             if (
                 (result.IsReversedStride == left.IsReversedStride)
                 && (result.IsReversedStride == right.IsReversedStride)
-            ) {
+            )
+            {
                 for (int i = 0; i < resultSpan.Length; i++)
                 {
                     resultSpan[i] = (char)(leftSpan[i] * rightSpan[i]);
@@ -3640,14 +3703,16 @@ namespace System.Numerics.Tensors
             DenseTensor<char> left,
             DenseTensor<char> right,
             DenseTensor<bool> result
-        ) {
+        )
+        {
             var resultSpan = result.Buffer.Span;
             var leftSpan = left.Buffer.Span;
             var rightSpan = right.Buffer.Span;
             if (
                 (result.IsReversedStride == left.IsReversedStride)
                 && (result.IsReversedStride == right.IsReversedStride)
-            ) {
+            )
+            {
                 for (int i = 0; i < resultSpan.Length; i++)
                 {
                     resultSpan[i] = leftSpan[i] != rightSpan[i];
@@ -3696,7 +3761,8 @@ namespace System.Numerics.Tensors
             if (
                 (result.IsReversedStride == left.IsReversedStride)
                 && (result.IsReversedStride == right.IsReversedStride)
-            ) {
+            )
+            {
                 for (int i = 0; i < resultSpan.Length; i++)
                 {
                     resultSpan[i] = (char)(leftSpan[i] | rightSpan[i]);
@@ -3817,14 +3883,16 @@ namespace System.Numerics.Tensors
             DenseTensor<char> left,
             DenseTensor<char> right,
             DenseTensor<char> result
-        ) {
+        )
+        {
             var resultSpan = result.Buffer.Span;
             var leftSpan = left.Buffer.Span;
             var rightSpan = right.Buffer.Span;
             if (
                 (result.IsReversedStride == left.IsReversedStride)
                 && (result.IsReversedStride == right.IsReversedStride)
-            ) {
+            )
+            {
                 for (int i = 0; i < resultSpan.Length; i++)
                 {
                     resultSpan[i] = (char)(leftSpan[i] - rightSpan[i]);
@@ -3987,7 +4055,8 @@ namespace System.Numerics.Tensors
             if (
                 (result.IsReversedStride == left.IsReversedStride)
                 && (result.IsReversedStride == right.IsReversedStride)
-            ) {
+            )
+            {
                 for (int i = 0; i < resultSpan.Length; i++)
                 {
                     resultSpan[i] = (char)(leftSpan[i] ^ rightSpan[i]);
@@ -4104,7 +4173,8 @@ namespace System.Numerics.Tensors
             int[] leftAxes,
             int[] rightAxes,
             Tensor<decimal> result
-        ) {
+        )
+        {
             var leftIndices = new int[left.Rank];
             var rightIndices = new int[right.Rank];
             var resultIndices = new int[result.Rank];
@@ -4262,7 +4332,8 @@ namespace System.Numerics.Tensors
             Tensor<decimal> left,
             Tensor<decimal> right,
             Tensor<bool> result
-        ) {
+        )
+        {
             Span<int> indices = new Span<int>(new int[result.Rank]);
             for (int i = 0; i < result.Length; i++)
             {
@@ -4296,7 +4367,8 @@ namespace System.Numerics.Tensors
             Tensor<decimal> left,
             Tensor<decimal> right,
             Tensor<bool> result
-        ) {
+        )
+        {
             Span<int> indices = new Span<int>(new int[result.Rank]);
             for (int i = 0; i < result.Length; i++)
             {
@@ -4410,14 +4482,16 @@ namespace System.Numerics.Tensors
             DenseTensor<decimal> left,
             DenseTensor<decimal> right,
             DenseTensor<decimal> result
-        ) {
+        )
+        {
             var resultSpan = result.Buffer.Span;
             var leftSpan = left.Buffer.Span;
             var rightSpan = right.Buffer.Span;
             if (
                 (result.IsReversedStride == left.IsReversedStride)
                 && (result.IsReversedStride == right.IsReversedStride)
-            ) {
+            )
+            {
                 for (int i = 0; i < resultSpan.Length; i++)
                 {
                     resultSpan[i] = (decimal)(leftSpan[i] + rightSpan[i]);
@@ -4500,7 +4574,8 @@ namespace System.Numerics.Tensors
             DenseTensor<decimal> left,
             DenseTensor<decimal> right,
             DenseTensor<decimal> result
-        ) {
+        )
+        {
             throw new NotSupportedException();
         }
         public void And(DenseTensor<decimal> tensor, decimal scalar, DenseTensor<decimal> result)
@@ -4513,7 +4588,8 @@ namespace System.Numerics.Tensors
             int[] leftAxes,
             int[] rightAxes,
             DenseTensor<decimal> result
-        ) {
+        )
+        {
             var summingDimensions = new int[leftAxes.Length];
             for (int i = 0; i < leftAxes.Length; i++)
             {
@@ -4613,14 +4689,16 @@ namespace System.Numerics.Tensors
             DenseTensor<decimal> left,
             DenseTensor<decimal> right,
             DenseTensor<decimal> result
-        ) {
+        )
+        {
             var resultSpan = result.Buffer.Span;
             var leftSpan = left.Buffer.Span;
             var rightSpan = right.Buffer.Span;
             if (
                 (result.IsReversedStride == left.IsReversedStride)
                 && (result.IsReversedStride == right.IsReversedStride)
-            ) {
+            )
+            {
                 for (int i = 0; i < resultSpan.Length; i++)
                 {
                     resultSpan[i] = (decimal)(leftSpan[i] / rightSpan[i]);
@@ -4703,14 +4781,16 @@ namespace System.Numerics.Tensors
             DenseTensor<decimal> left,
             DenseTensor<decimal> right,
             DenseTensor<bool> result
-        ) {
+        )
+        {
             var resultSpan = result.Buffer.Span;
             var leftSpan = left.Buffer.Span;
             var rightSpan = right.Buffer.Span;
             if (
                 (result.IsReversedStride == left.IsReversedStride)
                 && (result.IsReversedStride == right.IsReversedStride)
-            ) {
+            )
+            {
                 for (int i = 0; i < resultSpan.Length; i++)
                 {
                     resultSpan[i] = leftSpan[i] == rightSpan[i];
@@ -4755,14 +4835,16 @@ namespace System.Numerics.Tensors
             DenseTensor<decimal> left,
             DenseTensor<decimal> right,
             DenseTensor<bool> result
-        ) {
+        )
+        {
             var resultSpan = result.Buffer.Span;
             var leftSpan = left.Buffer.Span;
             var rightSpan = right.Buffer.Span;
             if (
                 (result.IsReversedStride == left.IsReversedStride)
                 && (result.IsReversedStride == right.IsReversedStride)
-            ) {
+            )
+            {
                 for (int i = 0; i < resultSpan.Length; i++)
                 {
                     resultSpan[i] = leftSpan[i] > rightSpan[i];
@@ -4807,14 +4889,16 @@ namespace System.Numerics.Tensors
             DenseTensor<decimal> left,
             DenseTensor<decimal> right,
             DenseTensor<bool> result
-        ) {
+        )
+        {
             var resultSpan = result.Buffer.Span;
             var leftSpan = left.Buffer.Span;
             var rightSpan = right.Buffer.Span;
             if (
                 (result.IsReversedStride == left.IsReversedStride)
                 && (result.IsReversedStride == right.IsReversedStride)
-            ) {
+            )
+            {
                 for (int i = 0; i < resultSpan.Length; i++)
                 {
                     resultSpan[i] = leftSpan[i] >= rightSpan[i];
@@ -4871,14 +4955,16 @@ namespace System.Numerics.Tensors
             DenseTensor<decimal> left,
             DenseTensor<decimal> right,
             DenseTensor<bool> result
-        ) {
+        )
+        {
             var resultSpan = result.Buffer.Span;
             var leftSpan = left.Buffer.Span;
             var rightSpan = right.Buffer.Span;
             if (
                 (result.IsReversedStride == left.IsReversedStride)
                 && (result.IsReversedStride == right.IsReversedStride)
-            ) {
+            )
+            {
                 for (int i = 0; i < resultSpan.Length; i++)
                 {
                     resultSpan[i] = leftSpan[i] < rightSpan[i];
@@ -4923,14 +5009,16 @@ namespace System.Numerics.Tensors
             DenseTensor<decimal> left,
             DenseTensor<decimal> right,
             DenseTensor<bool> result
-        ) {
+        )
+        {
             var resultSpan = result.Buffer.Span;
             var leftSpan = left.Buffer.Span;
             var rightSpan = right.Buffer.Span;
             if (
                 (result.IsReversedStride == left.IsReversedStride)
                 && (result.IsReversedStride == right.IsReversedStride)
-            ) {
+            )
+            {
                 for (int i = 0; i < resultSpan.Length; i++)
                 {
                     resultSpan[i] = leftSpan[i] <= rightSpan[i];
@@ -4975,14 +5063,16 @@ namespace System.Numerics.Tensors
             DenseTensor<decimal> left,
             DenseTensor<decimal> right,
             DenseTensor<decimal> result
-        ) {
+        )
+        {
             var resultSpan = result.Buffer.Span;
             var leftSpan = left.Buffer.Span;
             var rightSpan = right.Buffer.Span;
             if (
                 (result.IsReversedStride == left.IsReversedStride)
                 && (result.IsReversedStride == right.IsReversedStride)
-            ) {
+            )
+            {
                 for (int i = 0; i < resultSpan.Length; i++)
                 {
                     resultSpan[i] = (decimal)(leftSpan[i] % rightSpan[i]);
@@ -5065,14 +5155,16 @@ namespace System.Numerics.Tensors
             DenseTensor<decimal> left,
             DenseTensor<decimal> right,
             DenseTensor<decimal> result
-        ) {
+        )
+        {
             var resultSpan = result.Buffer.Span;
             var leftSpan = left.Buffer.Span;
             var rightSpan = right.Buffer.Span;
             if (
                 (result.IsReversedStride == left.IsReversedStride)
                 && (result.IsReversedStride == right.IsReversedStride)
-            ) {
+            )
+            {
                 for (int i = 0; i < resultSpan.Length; i++)
                 {
                     resultSpan[i] = (decimal)(leftSpan[i] * rightSpan[i]);
@@ -5117,7 +5209,8 @@ namespace System.Numerics.Tensors
             DenseTensor<decimal> tensor,
             decimal scalar,
             DenseTensor<decimal> result
-        ) {
+        )
+        {
             var resultSpan = result.Buffer.Span;
             var tensorSpan = tensor.Buffer.Span;
             if (result.IsReversedStride == tensor.IsReversedStride)
@@ -5158,14 +5251,16 @@ namespace System.Numerics.Tensors
             DenseTensor<decimal> left,
             DenseTensor<decimal> right,
             DenseTensor<bool> result
-        ) {
+        )
+        {
             var resultSpan = result.Buffer.Span;
             var leftSpan = left.Buffer.Span;
             var rightSpan = right.Buffer.Span;
             if (
                 (result.IsReversedStride == left.IsReversedStride)
                 && (result.IsReversedStride == right.IsReversedStride)
-            ) {
+            )
+            {
                 for (int i = 0; i < resultSpan.Length; i++)
                 {
                     resultSpan[i] = leftSpan[i] != rightSpan[i];
@@ -5210,7 +5305,8 @@ namespace System.Numerics.Tensors
             DenseTensor<decimal> left,
             DenseTensor<decimal> right,
             DenseTensor<decimal> result
-        ) {
+        )
+        {
             throw new NotSupportedException();
         }
         public void Or(DenseTensor<decimal> tensor, decimal scalar, DenseTensor<decimal> result)
@@ -5225,14 +5321,16 @@ namespace System.Numerics.Tensors
             DenseTensor<decimal> left,
             DenseTensor<decimal> right,
             DenseTensor<decimal> result
-        ) {
+        )
+        {
             var resultSpan = result.Buffer.Span;
             var leftSpan = left.Buffer.Span;
             var rightSpan = right.Buffer.Span;
             if (
                 (result.IsReversedStride == left.IsReversedStride)
                 && (result.IsReversedStride == right.IsReversedStride)
-            ) {
+            )
+            {
                 for (int i = 0; i < resultSpan.Length; i++)
                 {
                     resultSpan[i] = (decimal)(leftSpan[i] - rightSpan[i]);
@@ -5277,7 +5375,8 @@ namespace System.Numerics.Tensors
             DenseTensor<decimal> tensor,
             decimal scalar,
             DenseTensor<decimal> result
-        ) {
+        )
+        {
             var resultSpan = result.Buffer.Span;
             var tensorSpan = tensor.Buffer.Span;
             if (result.IsReversedStride == tensor.IsReversedStride)
@@ -5394,7 +5493,8 @@ namespace System.Numerics.Tensors
             DenseTensor<decimal> left,
             DenseTensor<decimal> right,
             DenseTensor<decimal> result
-        ) {
+        )
+        {
             throw new NotSupportedException();
         }
         public void Xor(DenseTensor<decimal> tensor, decimal scalar, DenseTensor<decimal> result)
@@ -5439,7 +5539,8 @@ namespace System.Numerics.Tensors
             int[] leftAxes,
             int[] rightAxes,
             Tensor<double> result
-        ) {
+        )
+        {
             var leftIndices = new int[left.Rank];
             var rightIndices = new int[right.Rank];
             var resultIndices = new int[result.Rank];
@@ -5597,7 +5698,8 @@ namespace System.Numerics.Tensors
             Tensor<double> left,
             Tensor<double> right,
             Tensor<bool> result
-        ) {
+        )
+        {
             Span<int> indices = new Span<int>(new int[result.Rank]);
             for (int i = 0; i < result.Length; i++)
             {
@@ -5742,14 +5844,16 @@ namespace System.Numerics.Tensors
             DenseTensor<double> left,
             DenseTensor<double> right,
             DenseTensor<double> result
-        ) {
+        )
+        {
             var resultSpan = result.Buffer.Span;
             var leftSpan = left.Buffer.Span;
             var rightSpan = right.Buffer.Span;
             if (
                 (result.IsReversedStride == left.IsReversedStride)
                 && (result.IsReversedStride == right.IsReversedStride)
-            ) {
+            )
+            {
                 for (int i = 0; i < resultSpan.Length; i++)
                 {
                     resultSpan[i] = (double)(leftSpan[i] + rightSpan[i]);
@@ -5832,7 +5936,8 @@ namespace System.Numerics.Tensors
             DenseTensor<double> left,
             DenseTensor<double> right,
             DenseTensor<double> result
-        ) {
+        )
+        {
             throw new NotSupportedException();
         }
         public void And(DenseTensor<double> tensor, double scalar, DenseTensor<double> result)
@@ -5845,7 +5950,8 @@ namespace System.Numerics.Tensors
             int[] leftAxes,
             int[] rightAxes,
             DenseTensor<double> result
-        ) {
+        )
+        {
             var summingDimensions = new int[leftAxes.Length];
             for (int i = 0; i < leftAxes.Length; i++)
             {
@@ -5945,14 +6051,16 @@ namespace System.Numerics.Tensors
             DenseTensor<double> left,
             DenseTensor<double> right,
             DenseTensor<double> result
-        ) {
+        )
+        {
             var resultSpan = result.Buffer.Span;
             var leftSpan = left.Buffer.Span;
             var rightSpan = right.Buffer.Span;
             if (
                 (result.IsReversedStride == left.IsReversedStride)
                 && (result.IsReversedStride == right.IsReversedStride)
-            ) {
+            )
+            {
                 for (int i = 0; i < resultSpan.Length; i++)
                 {
                     resultSpan[i] = (double)(leftSpan[i] / rightSpan[i]);
@@ -6035,14 +6143,16 @@ namespace System.Numerics.Tensors
             DenseTensor<double> left,
             DenseTensor<double> right,
             DenseTensor<bool> result
-        ) {
+        )
+        {
             var resultSpan = result.Buffer.Span;
             var leftSpan = left.Buffer.Span;
             var rightSpan = right.Buffer.Span;
             if (
                 (result.IsReversedStride == left.IsReversedStride)
                 && (result.IsReversedStride == right.IsReversedStride)
-            ) {
+            )
+            {
                 for (int i = 0; i < resultSpan.Length; i++)
                 {
                     resultSpan[i] = leftSpan[i] == rightSpan[i];
@@ -6087,14 +6197,16 @@ namespace System.Numerics.Tensors
             DenseTensor<double> left,
             DenseTensor<double> right,
             DenseTensor<bool> result
-        ) {
+        )
+        {
             var resultSpan = result.Buffer.Span;
             var leftSpan = left.Buffer.Span;
             var rightSpan = right.Buffer.Span;
             if (
                 (result.IsReversedStride == left.IsReversedStride)
                 && (result.IsReversedStride == right.IsReversedStride)
-            ) {
+            )
+            {
                 for (int i = 0; i < resultSpan.Length; i++)
                 {
                     resultSpan[i] = leftSpan[i] > rightSpan[i];
@@ -6139,14 +6251,16 @@ namespace System.Numerics.Tensors
             DenseTensor<double> left,
             DenseTensor<double> right,
             DenseTensor<bool> result
-        ) {
+        )
+        {
             var resultSpan = result.Buffer.Span;
             var leftSpan = left.Buffer.Span;
             var rightSpan = right.Buffer.Span;
             if (
                 (result.IsReversedStride == left.IsReversedStride)
                 && (result.IsReversedStride == right.IsReversedStride)
-            ) {
+            )
+            {
                 for (int i = 0; i < resultSpan.Length; i++)
                 {
                     resultSpan[i] = leftSpan[i] >= rightSpan[i];
@@ -6203,14 +6317,16 @@ namespace System.Numerics.Tensors
             DenseTensor<double> left,
             DenseTensor<double> right,
             DenseTensor<bool> result
-        ) {
+        )
+        {
             var resultSpan = result.Buffer.Span;
             var leftSpan = left.Buffer.Span;
             var rightSpan = right.Buffer.Span;
             if (
                 (result.IsReversedStride == left.IsReversedStride)
                 && (result.IsReversedStride == right.IsReversedStride)
-            ) {
+            )
+            {
                 for (int i = 0; i < resultSpan.Length; i++)
                 {
                     resultSpan[i] = leftSpan[i] < rightSpan[i];
@@ -6255,14 +6371,16 @@ namespace System.Numerics.Tensors
             DenseTensor<double> left,
             DenseTensor<double> right,
             DenseTensor<bool> result
-        ) {
+        )
+        {
             var resultSpan = result.Buffer.Span;
             var leftSpan = left.Buffer.Span;
             var rightSpan = right.Buffer.Span;
             if (
                 (result.IsReversedStride == left.IsReversedStride)
                 && (result.IsReversedStride == right.IsReversedStride)
-            ) {
+            )
+            {
                 for (int i = 0; i < resultSpan.Length; i++)
                 {
                     resultSpan[i] = leftSpan[i] <= rightSpan[i];
@@ -6307,14 +6425,16 @@ namespace System.Numerics.Tensors
             DenseTensor<double> left,
             DenseTensor<double> right,
             DenseTensor<double> result
-        ) {
+        )
+        {
             var resultSpan = result.Buffer.Span;
             var leftSpan = left.Buffer.Span;
             var rightSpan = right.Buffer.Span;
             if (
                 (result.IsReversedStride == left.IsReversedStride)
                 && (result.IsReversedStride == right.IsReversedStride)
-            ) {
+            )
+            {
                 for (int i = 0; i < resultSpan.Length; i++)
                 {
                     resultSpan[i] = (double)(leftSpan[i] % rightSpan[i]);
@@ -6397,14 +6517,16 @@ namespace System.Numerics.Tensors
             DenseTensor<double> left,
             DenseTensor<double> right,
             DenseTensor<double> result
-        ) {
+        )
+        {
             var resultSpan = result.Buffer.Span;
             var leftSpan = left.Buffer.Span;
             var rightSpan = right.Buffer.Span;
             if (
                 (result.IsReversedStride == left.IsReversedStride)
                 && (result.IsReversedStride == right.IsReversedStride)
-            ) {
+            )
+            {
                 for (int i = 0; i < resultSpan.Length; i++)
                 {
                     resultSpan[i] = (double)(leftSpan[i] * rightSpan[i]);
@@ -6487,14 +6609,16 @@ namespace System.Numerics.Tensors
             DenseTensor<double> left,
             DenseTensor<double> right,
             DenseTensor<bool> result
-        ) {
+        )
+        {
             var resultSpan = result.Buffer.Span;
             var leftSpan = left.Buffer.Span;
             var rightSpan = right.Buffer.Span;
             if (
                 (result.IsReversedStride == left.IsReversedStride)
                 && (result.IsReversedStride == right.IsReversedStride)
-            ) {
+            )
+            {
                 for (int i = 0; i < resultSpan.Length; i++)
                 {
                     resultSpan[i] = leftSpan[i] != rightSpan[i];
@@ -6539,7 +6663,8 @@ namespace System.Numerics.Tensors
             DenseTensor<double> left,
             DenseTensor<double> right,
             DenseTensor<double> result
-        ) {
+        )
+        {
             throw new NotSupportedException();
         }
         public void Or(DenseTensor<double> tensor, double scalar, DenseTensor<double> result)
@@ -6554,14 +6679,16 @@ namespace System.Numerics.Tensors
             DenseTensor<double> left,
             DenseTensor<double> right,
             DenseTensor<double> result
-        ) {
+        )
+        {
             var resultSpan = result.Buffer.Span;
             var leftSpan = left.Buffer.Span;
             var rightSpan = right.Buffer.Span;
             if (
                 (result.IsReversedStride == left.IsReversedStride)
                 && (result.IsReversedStride == right.IsReversedStride)
-            ) {
+            )
+            {
                 for (int i = 0; i < resultSpan.Length; i++)
                 {
                     resultSpan[i] = (double)(leftSpan[i] - rightSpan[i]);
@@ -6720,7 +6847,8 @@ namespace System.Numerics.Tensors
             DenseTensor<double> left,
             DenseTensor<double> right,
             DenseTensor<double> result
-        ) {
+        )
+        {
             throw new NotSupportedException();
         }
         public void Xor(DenseTensor<double> tensor, double scalar, DenseTensor<double> result)
@@ -6765,7 +6893,8 @@ namespace System.Numerics.Tensors
             int[] leftAxes,
             int[] rightAxes,
             Tensor<float> result
-        ) {
+        )
+        {
             var leftIndices = new int[left.Rank];
             var rightIndices = new int[right.Rank];
             var resultIndices = new int[result.Rank];
@@ -7065,14 +7194,16 @@ namespace System.Numerics.Tensors
             DenseTensor<float> left,
             DenseTensor<float> right,
             DenseTensor<float> result
-        ) {
+        )
+        {
             var resultSpan = result.Buffer.Span;
             var leftSpan = left.Buffer.Span;
             var rightSpan = right.Buffer.Span;
             if (
                 (result.IsReversedStride == left.IsReversedStride)
                 && (result.IsReversedStride == right.IsReversedStride)
-            ) {
+            )
+            {
                 for (int i = 0; i < resultSpan.Length; i++)
                 {
                     resultSpan[i] = (float)(leftSpan[i] + rightSpan[i]);
@@ -7155,7 +7286,8 @@ namespace System.Numerics.Tensors
             DenseTensor<float> left,
             DenseTensor<float> right,
             DenseTensor<float> result
-        ) {
+        )
+        {
             throw new NotSupportedException();
         }
         public void And(DenseTensor<float> tensor, float scalar, DenseTensor<float> result)
@@ -7168,7 +7300,8 @@ namespace System.Numerics.Tensors
             int[] leftAxes,
             int[] rightAxes,
             DenseTensor<float> result
-        ) {
+        )
+        {
             var summingDimensions = new int[leftAxes.Length];
             for (int i = 0; i < leftAxes.Length; i++)
             {
@@ -7268,14 +7401,16 @@ namespace System.Numerics.Tensors
             DenseTensor<float> left,
             DenseTensor<float> right,
             DenseTensor<float> result
-        ) {
+        )
+        {
             var resultSpan = result.Buffer.Span;
             var leftSpan = left.Buffer.Span;
             var rightSpan = right.Buffer.Span;
             if (
                 (result.IsReversedStride == left.IsReversedStride)
                 && (result.IsReversedStride == right.IsReversedStride)
-            ) {
+            )
+            {
                 for (int i = 0; i < resultSpan.Length; i++)
                 {
                     resultSpan[i] = (float)(leftSpan[i] / rightSpan[i]);
@@ -7358,14 +7493,16 @@ namespace System.Numerics.Tensors
             DenseTensor<float> left,
             DenseTensor<float> right,
             DenseTensor<bool> result
-        ) {
+        )
+        {
             var resultSpan = result.Buffer.Span;
             var leftSpan = left.Buffer.Span;
             var rightSpan = right.Buffer.Span;
             if (
                 (result.IsReversedStride == left.IsReversedStride)
                 && (result.IsReversedStride == right.IsReversedStride)
-            ) {
+            )
+            {
                 for (int i = 0; i < resultSpan.Length; i++)
                 {
                     resultSpan[i] = leftSpan[i] == rightSpan[i];
@@ -7410,14 +7547,16 @@ namespace System.Numerics.Tensors
             DenseTensor<float> left,
             DenseTensor<float> right,
             DenseTensor<bool> result
-        ) {
+        )
+        {
             var resultSpan = result.Buffer.Span;
             var leftSpan = left.Buffer.Span;
             var rightSpan = right.Buffer.Span;
             if (
                 (result.IsReversedStride == left.IsReversedStride)
                 && (result.IsReversedStride == right.IsReversedStride)
-            ) {
+            )
+            {
                 for (int i = 0; i < resultSpan.Length; i++)
                 {
                     resultSpan[i] = leftSpan[i] > rightSpan[i];
@@ -7462,14 +7601,16 @@ namespace System.Numerics.Tensors
             DenseTensor<float> left,
             DenseTensor<float> right,
             DenseTensor<bool> result
-        ) {
+        )
+        {
             var resultSpan = result.Buffer.Span;
             var leftSpan = left.Buffer.Span;
             var rightSpan = right.Buffer.Span;
             if (
                 (result.IsReversedStride == left.IsReversedStride)
                 && (result.IsReversedStride == right.IsReversedStride)
-            ) {
+            )
+            {
                 for (int i = 0; i < resultSpan.Length; i++)
                 {
                     resultSpan[i] = leftSpan[i] >= rightSpan[i];
@@ -7526,14 +7667,16 @@ namespace System.Numerics.Tensors
             DenseTensor<float> left,
             DenseTensor<float> right,
             DenseTensor<bool> result
-        ) {
+        )
+        {
             var resultSpan = result.Buffer.Span;
             var leftSpan = left.Buffer.Span;
             var rightSpan = right.Buffer.Span;
             if (
                 (result.IsReversedStride == left.IsReversedStride)
                 && (result.IsReversedStride == right.IsReversedStride)
-            ) {
+            )
+            {
                 for (int i = 0; i < resultSpan.Length; i++)
                 {
                     resultSpan[i] = leftSpan[i] < rightSpan[i];
@@ -7578,14 +7721,16 @@ namespace System.Numerics.Tensors
             DenseTensor<float> left,
             DenseTensor<float> right,
             DenseTensor<bool> result
-        ) {
+        )
+        {
             var resultSpan = result.Buffer.Span;
             var leftSpan = left.Buffer.Span;
             var rightSpan = right.Buffer.Span;
             if (
                 (result.IsReversedStride == left.IsReversedStride)
                 && (result.IsReversedStride == right.IsReversedStride)
-            ) {
+            )
+            {
                 for (int i = 0; i < resultSpan.Length; i++)
                 {
                     resultSpan[i] = leftSpan[i] <= rightSpan[i];
@@ -7630,14 +7775,16 @@ namespace System.Numerics.Tensors
             DenseTensor<float> left,
             DenseTensor<float> right,
             DenseTensor<float> result
-        ) {
+        )
+        {
             var resultSpan = result.Buffer.Span;
             var leftSpan = left.Buffer.Span;
             var rightSpan = right.Buffer.Span;
             if (
                 (result.IsReversedStride == left.IsReversedStride)
                 && (result.IsReversedStride == right.IsReversedStride)
-            ) {
+            )
+            {
                 for (int i = 0; i < resultSpan.Length; i++)
                 {
                     resultSpan[i] = (float)(leftSpan[i] % rightSpan[i]);
@@ -7720,14 +7867,16 @@ namespace System.Numerics.Tensors
             DenseTensor<float> left,
             DenseTensor<float> right,
             DenseTensor<float> result
-        ) {
+        )
+        {
             var resultSpan = result.Buffer.Span;
             var leftSpan = left.Buffer.Span;
             var rightSpan = right.Buffer.Span;
             if (
                 (result.IsReversedStride == left.IsReversedStride)
                 && (result.IsReversedStride == right.IsReversedStride)
-            ) {
+            )
+            {
                 for (int i = 0; i < resultSpan.Length; i++)
                 {
                     resultSpan[i] = (float)(leftSpan[i] * rightSpan[i]);
@@ -7810,14 +7959,16 @@ namespace System.Numerics.Tensors
             DenseTensor<float> left,
             DenseTensor<float> right,
             DenseTensor<bool> result
-        ) {
+        )
+        {
             var resultSpan = result.Buffer.Span;
             var leftSpan = left.Buffer.Span;
             var rightSpan = right.Buffer.Span;
             if (
                 (result.IsReversedStride == left.IsReversedStride)
                 && (result.IsReversedStride == right.IsReversedStride)
-            ) {
+            )
+            {
                 for (int i = 0; i < resultSpan.Length; i++)
                 {
                     resultSpan[i] = leftSpan[i] != rightSpan[i];
@@ -7874,14 +8025,16 @@ namespace System.Numerics.Tensors
             DenseTensor<float> left,
             DenseTensor<float> right,
             DenseTensor<float> result
-        ) {
+        )
+        {
             var resultSpan = result.Buffer.Span;
             var leftSpan = left.Buffer.Span;
             var rightSpan = right.Buffer.Span;
             if (
                 (result.IsReversedStride == left.IsReversedStride)
                 && (result.IsReversedStride == right.IsReversedStride)
-            ) {
+            )
+            {
                 for (int i = 0; i < resultSpan.Length; i++)
                 {
                     resultSpan[i] = (float)(leftSpan[i] - rightSpan[i]);
@@ -8040,7 +8193,8 @@ namespace System.Numerics.Tensors
             DenseTensor<float> left,
             DenseTensor<float> right,
             DenseTensor<float> result
-        ) {
+        )
+        {
             throw new NotSupportedException();
         }
         public void Xor(DenseTensor<float> tensor, float scalar, DenseTensor<float> result)
@@ -8095,7 +8249,8 @@ namespace System.Numerics.Tensors
             int[] leftAxes,
             int[] rightAxes,
             Tensor<int> result
-        ) {
+        )
+        {
             var leftIndices = new int[left.Rank];
             var rightIndices = new int[right.Rank];
             var resultIndices = new int[result.Rank];
@@ -8429,7 +8584,8 @@ namespace System.Numerics.Tensors
             if (
                 (result.IsReversedStride == left.IsReversedStride)
                 && (result.IsReversedStride == right.IsReversedStride)
-            ) {
+            )
+            {
                 for (int i = 0; i < resultSpan.Length; i++)
                 {
                     resultSpan[i] = (int)(leftSpan[i] + rightSpan[i]);
@@ -8516,7 +8672,8 @@ namespace System.Numerics.Tensors
             if (
                 (result.IsReversedStride == left.IsReversedStride)
                 && (result.IsReversedStride == right.IsReversedStride)
-            ) {
+            )
+            {
                 for (int i = 0; i < resultSpan.Length; i++)
                 {
                     resultSpan[i] = (int)(leftSpan[i] & rightSpan[i]);
@@ -8601,7 +8758,8 @@ namespace System.Numerics.Tensors
             int[] leftAxes,
             int[] rightAxes,
             DenseTensor<int> result
-        ) {
+        )
+        {
             var summingDimensions = new int[leftAxes.Length];
             for (int i = 0; i < leftAxes.Length; i++)
             {
@@ -8705,7 +8863,8 @@ namespace System.Numerics.Tensors
             if (
                 (result.IsReversedStride == left.IsReversedStride)
                 && (result.IsReversedStride == right.IsReversedStride)
-            ) {
+            )
+            {
                 for (int i = 0; i < resultSpan.Length; i++)
                 {
                     resultSpan[i] = (int)(leftSpan[i] / rightSpan[i]);
@@ -8792,7 +8951,8 @@ namespace System.Numerics.Tensors
             if (
                 (result.IsReversedStride == left.IsReversedStride)
                 && (result.IsReversedStride == right.IsReversedStride)
-            ) {
+            )
+            {
                 for (int i = 0; i < resultSpan.Length; i++)
                 {
                     resultSpan[i] = leftSpan[i] == rightSpan[i];
@@ -8837,14 +8997,16 @@ namespace System.Numerics.Tensors
             DenseTensor<int> left,
             DenseTensor<int> right,
             DenseTensor<bool> result
-        ) {
+        )
+        {
             var resultSpan = result.Buffer.Span;
             var leftSpan = left.Buffer.Span;
             var rightSpan = right.Buffer.Span;
             if (
                 (result.IsReversedStride == left.IsReversedStride)
                 && (result.IsReversedStride == right.IsReversedStride)
-            ) {
+            )
+            {
                 for (int i = 0; i < resultSpan.Length; i++)
                 {
                     resultSpan[i] = leftSpan[i] > rightSpan[i];
@@ -8889,14 +9051,16 @@ namespace System.Numerics.Tensors
             DenseTensor<int> left,
             DenseTensor<int> right,
             DenseTensor<bool> result
-        ) {
+        )
+        {
             var resultSpan = result.Buffer.Span;
             var leftSpan = left.Buffer.Span;
             var rightSpan = right.Buffer.Span;
             if (
                 (result.IsReversedStride == left.IsReversedStride)
                 && (result.IsReversedStride == right.IsReversedStride)
-            ) {
+            )
+            {
                 for (int i = 0; i < resultSpan.Length; i++)
                 {
                     resultSpan[i] = leftSpan[i] >= rightSpan[i];
@@ -8987,14 +9151,16 @@ namespace System.Numerics.Tensors
             DenseTensor<int> left,
             DenseTensor<int> right,
             DenseTensor<bool> result
-        ) {
+        )
+        {
             var resultSpan = result.Buffer.Span;
             var leftSpan = left.Buffer.Span;
             var rightSpan = right.Buffer.Span;
             if (
                 (result.IsReversedStride == left.IsReversedStride)
                 && (result.IsReversedStride == right.IsReversedStride)
-            ) {
+            )
+            {
                 for (int i = 0; i < resultSpan.Length; i++)
                 {
                     resultSpan[i] = leftSpan[i] < rightSpan[i];
@@ -9039,14 +9205,16 @@ namespace System.Numerics.Tensors
             DenseTensor<int> left,
             DenseTensor<int> right,
             DenseTensor<bool> result
-        ) {
+        )
+        {
             var resultSpan = result.Buffer.Span;
             var leftSpan = left.Buffer.Span;
             var rightSpan = right.Buffer.Span;
             if (
                 (result.IsReversedStride == left.IsReversedStride)
                 && (result.IsReversedStride == right.IsReversedStride)
-            ) {
+            )
+            {
                 for (int i = 0; i < resultSpan.Length; i++)
                 {
                     resultSpan[i] = leftSpan[i] <= rightSpan[i];
@@ -9095,7 +9263,8 @@ namespace System.Numerics.Tensors
             if (
                 (result.IsReversedStride == left.IsReversedStride)
                 && (result.IsReversedStride == right.IsReversedStride)
-            ) {
+            )
+            {
                 for (int i = 0; i < resultSpan.Length; i++)
                 {
                     resultSpan[i] = (int)(leftSpan[i] % rightSpan[i]);
@@ -9182,7 +9351,8 @@ namespace System.Numerics.Tensors
             if (
                 (result.IsReversedStride == left.IsReversedStride)
                 && (result.IsReversedStride == right.IsReversedStride)
-            ) {
+            )
+            {
                 for (int i = 0; i < resultSpan.Length; i++)
                 {
                     resultSpan[i] = (int)(leftSpan[i] * rightSpan[i]);
@@ -9265,14 +9435,16 @@ namespace System.Numerics.Tensors
             DenseTensor<int> left,
             DenseTensor<int> right,
             DenseTensor<bool> result
-        ) {
+        )
+        {
             var resultSpan = result.Buffer.Span;
             var leftSpan = left.Buffer.Span;
             var rightSpan = right.Buffer.Span;
             if (
                 (result.IsReversedStride == left.IsReversedStride)
                 && (result.IsReversedStride == right.IsReversedStride)
-            ) {
+            )
+            {
                 for (int i = 0; i < resultSpan.Length; i++)
                 {
                     resultSpan[i] = leftSpan[i] != rightSpan[i];
@@ -9321,7 +9493,8 @@ namespace System.Numerics.Tensors
             if (
                 (result.IsReversedStride == left.IsReversedStride)
                 && (result.IsReversedStride == right.IsReversedStride)
-            ) {
+            )
+            {
                 for (int i = 0; i < resultSpan.Length; i++)
                 {
                     resultSpan[i] = (int)(leftSpan[i] | rightSpan[i]);
@@ -9446,7 +9619,8 @@ namespace System.Numerics.Tensors
             if (
                 (result.IsReversedStride == left.IsReversedStride)
                 && (result.IsReversedStride == right.IsReversedStride)
-            ) {
+            )
+            {
                 for (int i = 0; i < resultSpan.Length; i++)
                 {
                     resultSpan[i] = (int)(leftSpan[i] - rightSpan[i]);
@@ -9609,7 +9783,8 @@ namespace System.Numerics.Tensors
             if (
                 (result.IsReversedStride == left.IsReversedStride)
                 && (result.IsReversedStride == right.IsReversedStride)
-            ) {
+            )
+            {
                 for (int i = 0; i < resultSpan.Length; i++)
                 {
                     resultSpan[i] = (int)(leftSpan[i] ^ rightSpan[i]);
@@ -9736,7 +9911,8 @@ namespace System.Numerics.Tensors
             int[] leftAxes,
             int[] rightAxes,
             Tensor<long> result
-        ) {
+        )
+        {
             var leftIndices = new int[left.Rank];
             var rightIndices = new int[right.Rank];
             var resultIndices = new int[result.Rank];
@@ -10070,7 +10246,8 @@ namespace System.Numerics.Tensors
             if (
                 (result.IsReversedStride == left.IsReversedStride)
                 && (result.IsReversedStride == right.IsReversedStride)
-            ) {
+            )
+            {
                 for (int i = 0; i < resultSpan.Length; i++)
                 {
                     resultSpan[i] = (long)(leftSpan[i] + rightSpan[i]);
@@ -10157,7 +10334,8 @@ namespace System.Numerics.Tensors
             if (
                 (result.IsReversedStride == left.IsReversedStride)
                 && (result.IsReversedStride == right.IsReversedStride)
-            ) {
+            )
+            {
                 for (int i = 0; i < resultSpan.Length; i++)
                 {
                     resultSpan[i] = (long)(leftSpan[i] & rightSpan[i]);
@@ -10242,7 +10420,8 @@ namespace System.Numerics.Tensors
             int[] leftAxes,
             int[] rightAxes,
             DenseTensor<long> result
-        ) {
+        )
+        {
             var summingDimensions = new int[leftAxes.Length];
             for (int i = 0; i < leftAxes.Length; i++)
             {
@@ -10342,14 +10521,16 @@ namespace System.Numerics.Tensors
             DenseTensor<long> left,
             DenseTensor<long> right,
             DenseTensor<long> result
-        ) {
+        )
+        {
             var resultSpan = result.Buffer.Span;
             var leftSpan = left.Buffer.Span;
             var rightSpan = right.Buffer.Span;
             if (
                 (result.IsReversedStride == left.IsReversedStride)
                 && (result.IsReversedStride == right.IsReversedStride)
-            ) {
+            )
+            {
                 for (int i = 0; i < resultSpan.Length; i++)
                 {
                     resultSpan[i] = (long)(leftSpan[i] / rightSpan[i]);
@@ -10432,14 +10613,16 @@ namespace System.Numerics.Tensors
             DenseTensor<long> left,
             DenseTensor<long> right,
             DenseTensor<bool> result
-        ) {
+        )
+        {
             var resultSpan = result.Buffer.Span;
             var leftSpan = left.Buffer.Span;
             var rightSpan = right.Buffer.Span;
             if (
                 (result.IsReversedStride == left.IsReversedStride)
                 && (result.IsReversedStride == right.IsReversedStride)
-            ) {
+            )
+            {
                 for (int i = 0; i < resultSpan.Length; i++)
                 {
                     resultSpan[i] = leftSpan[i] == rightSpan[i];
@@ -10484,14 +10667,16 @@ namespace System.Numerics.Tensors
             DenseTensor<long> left,
             DenseTensor<long> right,
             DenseTensor<bool> result
-        ) {
+        )
+        {
             var resultSpan = result.Buffer.Span;
             var leftSpan = left.Buffer.Span;
             var rightSpan = right.Buffer.Span;
             if (
                 (result.IsReversedStride == left.IsReversedStride)
                 && (result.IsReversedStride == right.IsReversedStride)
-            ) {
+            )
+            {
                 for (int i = 0; i < resultSpan.Length; i++)
                 {
                     resultSpan[i] = leftSpan[i] > rightSpan[i];
@@ -10536,14 +10721,16 @@ namespace System.Numerics.Tensors
             DenseTensor<long> left,
             DenseTensor<long> right,
             DenseTensor<bool> result
-        ) {
+        )
+        {
             var resultSpan = result.Buffer.Span;
             var leftSpan = left.Buffer.Span;
             var rightSpan = right.Buffer.Span;
             if (
                 (result.IsReversedStride == left.IsReversedStride)
                 && (result.IsReversedStride == right.IsReversedStride)
-            ) {
+            )
+            {
                 for (int i = 0; i < resultSpan.Length; i++)
                 {
                     resultSpan[i] = leftSpan[i] >= rightSpan[i];
@@ -10634,14 +10821,16 @@ namespace System.Numerics.Tensors
             DenseTensor<long> left,
             DenseTensor<long> right,
             DenseTensor<bool> result
-        ) {
+        )
+        {
             var resultSpan = result.Buffer.Span;
             var leftSpan = left.Buffer.Span;
             var rightSpan = right.Buffer.Span;
             if (
                 (result.IsReversedStride == left.IsReversedStride)
                 && (result.IsReversedStride == right.IsReversedStride)
-            ) {
+            )
+            {
                 for (int i = 0; i < resultSpan.Length; i++)
                 {
                     resultSpan[i] = leftSpan[i] < rightSpan[i];
@@ -10686,14 +10875,16 @@ namespace System.Numerics.Tensors
             DenseTensor<long> left,
             DenseTensor<long> right,
             DenseTensor<bool> result
-        ) {
+        )
+        {
             var resultSpan = result.Buffer.Span;
             var leftSpan = left.Buffer.Span;
             var rightSpan = right.Buffer.Span;
             if (
                 (result.IsReversedStride == left.IsReversedStride)
                 && (result.IsReversedStride == right.IsReversedStride)
-            ) {
+            )
+            {
                 for (int i = 0; i < resultSpan.Length; i++)
                 {
                     resultSpan[i] = leftSpan[i] <= rightSpan[i];
@@ -10738,14 +10929,16 @@ namespace System.Numerics.Tensors
             DenseTensor<long> left,
             DenseTensor<long> right,
             DenseTensor<long> result
-        ) {
+        )
+        {
             var resultSpan = result.Buffer.Span;
             var leftSpan = left.Buffer.Span;
             var rightSpan = right.Buffer.Span;
             if (
                 (result.IsReversedStride == left.IsReversedStride)
                 && (result.IsReversedStride == right.IsReversedStride)
-            ) {
+            )
+            {
                 for (int i = 0; i < resultSpan.Length; i++)
                 {
                     resultSpan[i] = (long)(leftSpan[i] % rightSpan[i]);
@@ -10828,14 +11021,16 @@ namespace System.Numerics.Tensors
             DenseTensor<long> left,
             DenseTensor<long> right,
             DenseTensor<long> result
-        ) {
+        )
+        {
             var resultSpan = result.Buffer.Span;
             var leftSpan = left.Buffer.Span;
             var rightSpan = right.Buffer.Span;
             if (
                 (result.IsReversedStride == left.IsReversedStride)
                 && (result.IsReversedStride == right.IsReversedStride)
-            ) {
+            )
+            {
                 for (int i = 0; i < resultSpan.Length; i++)
                 {
                     resultSpan[i] = (long)(leftSpan[i] * rightSpan[i]);
@@ -10918,14 +11113,16 @@ namespace System.Numerics.Tensors
             DenseTensor<long> left,
             DenseTensor<long> right,
             DenseTensor<bool> result
-        ) {
+        )
+        {
             var resultSpan = result.Buffer.Span;
             var leftSpan = left.Buffer.Span;
             var rightSpan = right.Buffer.Span;
             if (
                 (result.IsReversedStride == left.IsReversedStride)
                 && (result.IsReversedStride == right.IsReversedStride)
-            ) {
+            )
+            {
                 for (int i = 0; i < resultSpan.Length; i++)
                 {
                     resultSpan[i] = leftSpan[i] != rightSpan[i];
@@ -10974,7 +11171,8 @@ namespace System.Numerics.Tensors
             if (
                 (result.IsReversedStride == left.IsReversedStride)
                 && (result.IsReversedStride == right.IsReversedStride)
-            ) {
+            )
+            {
                 for (int i = 0; i < resultSpan.Length; i++)
                 {
                     resultSpan[i] = (long)(leftSpan[i] | rightSpan[i]);
@@ -11095,14 +11293,16 @@ namespace System.Numerics.Tensors
             DenseTensor<long> left,
             DenseTensor<long> right,
             DenseTensor<long> result
-        ) {
+        )
+        {
             var resultSpan = result.Buffer.Span;
             var leftSpan = left.Buffer.Span;
             var rightSpan = right.Buffer.Span;
             if (
                 (result.IsReversedStride == left.IsReversedStride)
                 && (result.IsReversedStride == right.IsReversedStride)
-            ) {
+            )
+            {
                 for (int i = 0; i < resultSpan.Length; i++)
                 {
                     resultSpan[i] = (long)(leftSpan[i] - rightSpan[i]);
@@ -11265,7 +11465,8 @@ namespace System.Numerics.Tensors
             if (
                 (result.IsReversedStride == left.IsReversedStride)
                 && (result.IsReversedStride == right.IsReversedStride)
-            ) {
+            )
+            {
                 for (int i = 0; i < resultSpan.Length; i++)
                 {
                     resultSpan[i] = (long)(leftSpan[i] ^ rightSpan[i]);
@@ -11392,7 +11593,8 @@ namespace System.Numerics.Tensors
             int[] leftAxes,
             int[] rightAxes,
             Tensor<sbyte> result
-        ) {
+        )
+        {
             var leftIndices = new int[left.Rank];
             var rightIndices = new int[right.Rank];
             var resultIndices = new int[result.Rank];
@@ -11722,14 +11924,16 @@ namespace System.Numerics.Tensors
             DenseTensor<sbyte> left,
             DenseTensor<sbyte> right,
             DenseTensor<sbyte> result
-        ) {
+        )
+        {
             var resultSpan = result.Buffer.Span;
             var leftSpan = left.Buffer.Span;
             var rightSpan = right.Buffer.Span;
             if (
                 (result.IsReversedStride == left.IsReversedStride)
                 && (result.IsReversedStride == right.IsReversedStride)
-            ) {
+            )
+            {
                 for (int i = 0; i < resultSpan.Length; i++)
                 {
                     resultSpan[i] = (sbyte)(leftSpan[i] + rightSpan[i]);
@@ -11812,14 +12016,16 @@ namespace System.Numerics.Tensors
             DenseTensor<sbyte> left,
             DenseTensor<sbyte> right,
             DenseTensor<sbyte> result
-        ) {
+        )
+        {
             var resultSpan = result.Buffer.Span;
             var leftSpan = left.Buffer.Span;
             var rightSpan = right.Buffer.Span;
             if (
                 (result.IsReversedStride == left.IsReversedStride)
                 && (result.IsReversedStride == right.IsReversedStride)
-            ) {
+            )
+            {
                 for (int i = 0; i < resultSpan.Length; i++)
                 {
                     resultSpan[i] = (sbyte)(leftSpan[i] & rightSpan[i]);
@@ -11904,7 +12110,8 @@ namespace System.Numerics.Tensors
             int[] leftAxes,
             int[] rightAxes,
             DenseTensor<sbyte> result
-        ) {
+        )
+        {
             var summingDimensions = new int[leftAxes.Length];
             for (int i = 0; i < leftAxes.Length; i++)
             {
@@ -12004,14 +12211,16 @@ namespace System.Numerics.Tensors
             DenseTensor<sbyte> left,
             DenseTensor<sbyte> right,
             DenseTensor<sbyte> result
-        ) {
+        )
+        {
             var resultSpan = result.Buffer.Span;
             var leftSpan = left.Buffer.Span;
             var rightSpan = right.Buffer.Span;
             if (
                 (result.IsReversedStride == left.IsReversedStride)
                 && (result.IsReversedStride == right.IsReversedStride)
-            ) {
+            )
+            {
                 for (int i = 0; i < resultSpan.Length; i++)
                 {
                     resultSpan[i] = (sbyte)(leftSpan[i] / rightSpan[i]);
@@ -12094,14 +12303,16 @@ namespace System.Numerics.Tensors
             DenseTensor<sbyte> left,
             DenseTensor<sbyte> right,
             DenseTensor<bool> result
-        ) {
+        )
+        {
             var resultSpan = result.Buffer.Span;
             var leftSpan = left.Buffer.Span;
             var rightSpan = right.Buffer.Span;
             if (
                 (result.IsReversedStride == left.IsReversedStride)
                 && (result.IsReversedStride == right.IsReversedStride)
-            ) {
+            )
+            {
                 for (int i = 0; i < resultSpan.Length; i++)
                 {
                     resultSpan[i] = leftSpan[i] == rightSpan[i];
@@ -12146,14 +12357,16 @@ namespace System.Numerics.Tensors
             DenseTensor<sbyte> left,
             DenseTensor<sbyte> right,
             DenseTensor<bool> result
-        ) {
+        )
+        {
             var resultSpan = result.Buffer.Span;
             var leftSpan = left.Buffer.Span;
             var rightSpan = right.Buffer.Span;
             if (
                 (result.IsReversedStride == left.IsReversedStride)
                 && (result.IsReversedStride == right.IsReversedStride)
-            ) {
+            )
+            {
                 for (int i = 0; i < resultSpan.Length; i++)
                 {
                     resultSpan[i] = leftSpan[i] > rightSpan[i];
@@ -12198,14 +12411,16 @@ namespace System.Numerics.Tensors
             DenseTensor<sbyte> left,
             DenseTensor<sbyte> right,
             DenseTensor<bool> result
-        ) {
+        )
+        {
             var resultSpan = result.Buffer.Span;
             var leftSpan = left.Buffer.Span;
             var rightSpan = right.Buffer.Span;
             if (
                 (result.IsReversedStride == left.IsReversedStride)
                 && (result.IsReversedStride == right.IsReversedStride)
-            ) {
+            )
+            {
                 for (int i = 0; i < resultSpan.Length; i++)
                 {
                     resultSpan[i] = leftSpan[i] >= rightSpan[i];
@@ -12296,14 +12511,16 @@ namespace System.Numerics.Tensors
             DenseTensor<sbyte> left,
             DenseTensor<sbyte> right,
             DenseTensor<bool> result
-        ) {
+        )
+        {
             var resultSpan = result.Buffer.Span;
             var leftSpan = left.Buffer.Span;
             var rightSpan = right.Buffer.Span;
             if (
                 (result.IsReversedStride == left.IsReversedStride)
                 && (result.IsReversedStride == right.IsReversedStride)
-            ) {
+            )
+            {
                 for (int i = 0; i < resultSpan.Length; i++)
                 {
                     resultSpan[i] = leftSpan[i] < rightSpan[i];
@@ -12348,14 +12565,16 @@ namespace System.Numerics.Tensors
             DenseTensor<sbyte> left,
             DenseTensor<sbyte> right,
             DenseTensor<bool> result
-        ) {
+        )
+        {
             var resultSpan = result.Buffer.Span;
             var leftSpan = left.Buffer.Span;
             var rightSpan = right.Buffer.Span;
             if (
                 (result.IsReversedStride == left.IsReversedStride)
                 && (result.IsReversedStride == right.IsReversedStride)
-            ) {
+            )
+            {
                 for (int i = 0; i < resultSpan.Length; i++)
                 {
                     resultSpan[i] = leftSpan[i] <= rightSpan[i];
@@ -12400,14 +12619,16 @@ namespace System.Numerics.Tensors
             DenseTensor<sbyte> left,
             DenseTensor<sbyte> right,
             DenseTensor<sbyte> result
-        ) {
+        )
+        {
             var resultSpan = result.Buffer.Span;
             var leftSpan = left.Buffer.Span;
             var rightSpan = right.Buffer.Span;
             if (
                 (result.IsReversedStride == left.IsReversedStride)
                 && (result.IsReversedStride == right.IsReversedStride)
-            ) {
+            )
+            {
                 for (int i = 0; i < resultSpan.Length; i++)
                 {
                     resultSpan[i] = (sbyte)(leftSpan[i] % rightSpan[i]);
@@ -12490,14 +12711,16 @@ namespace System.Numerics.Tensors
             DenseTensor<sbyte> left,
             DenseTensor<sbyte> right,
             DenseTensor<sbyte> result
-        ) {
+        )
+        {
             var resultSpan = result.Buffer.Span;
             var leftSpan = left.Buffer.Span;
             var rightSpan = right.Buffer.Span;
             if (
                 (result.IsReversedStride == left.IsReversedStride)
                 && (result.IsReversedStride == right.IsReversedStride)
-            ) {
+            )
+            {
                 for (int i = 0; i < resultSpan.Length; i++)
                 {
                     resultSpan[i] = (sbyte)(leftSpan[i] * rightSpan[i]);
@@ -12580,14 +12803,16 @@ namespace System.Numerics.Tensors
             DenseTensor<sbyte> left,
             DenseTensor<sbyte> right,
             DenseTensor<bool> result
-        ) {
+        )
+        {
             var resultSpan = result.Buffer.Span;
             var leftSpan = left.Buffer.Span;
             var rightSpan = right.Buffer.Span;
             if (
                 (result.IsReversedStride == left.IsReversedStride)
                 && (result.IsReversedStride == right.IsReversedStride)
-            ) {
+            )
+            {
                 for (int i = 0; i < resultSpan.Length; i++)
                 {
                     resultSpan[i] = leftSpan[i] != rightSpan[i];
@@ -12636,7 +12861,8 @@ namespace System.Numerics.Tensors
             if (
                 (result.IsReversedStride == left.IsReversedStride)
                 && (result.IsReversedStride == right.IsReversedStride)
-            ) {
+            )
+            {
                 for (int i = 0; i < resultSpan.Length; i++)
                 {
                     resultSpan[i] = (sbyte)(leftSpan[i] | rightSpan[i]);
@@ -12757,14 +12983,16 @@ namespace System.Numerics.Tensors
             DenseTensor<sbyte> left,
             DenseTensor<sbyte> right,
             DenseTensor<sbyte> result
-        ) {
+        )
+        {
             var resultSpan = result.Buffer.Span;
             var leftSpan = left.Buffer.Span;
             var rightSpan = right.Buffer.Span;
             if (
                 (result.IsReversedStride == left.IsReversedStride)
                 && (result.IsReversedStride == right.IsReversedStride)
-            ) {
+            )
+            {
                 for (int i = 0; i < resultSpan.Length; i++)
                 {
                     resultSpan[i] = (sbyte)(leftSpan[i] - rightSpan[i]);
@@ -12923,14 +13151,16 @@ namespace System.Numerics.Tensors
             DenseTensor<sbyte> left,
             DenseTensor<sbyte> right,
             DenseTensor<sbyte> result
-        ) {
+        )
+        {
             var resultSpan = result.Buffer.Span;
             var leftSpan = left.Buffer.Span;
             var rightSpan = right.Buffer.Span;
             if (
                 (result.IsReversedStride == left.IsReversedStride)
                 && (result.IsReversedStride == right.IsReversedStride)
-            ) {
+            )
+            {
                 for (int i = 0; i < resultSpan.Length; i++)
                 {
                     resultSpan[i] = (sbyte)(leftSpan[i] ^ rightSpan[i]);
@@ -13057,7 +13287,8 @@ namespace System.Numerics.Tensors
             int[] leftAxes,
             int[] rightAxes,
             Tensor<short> result
-        ) {
+        )
+        {
             var leftIndices = new int[left.Rank];
             var rightIndices = new int[right.Rank];
             var resultIndices = new int[result.Rank];
@@ -13387,14 +13618,16 @@ namespace System.Numerics.Tensors
             DenseTensor<short> left,
             DenseTensor<short> right,
             DenseTensor<short> result
-        ) {
+        )
+        {
             var resultSpan = result.Buffer.Span;
             var leftSpan = left.Buffer.Span;
             var rightSpan = right.Buffer.Span;
             if (
                 (result.IsReversedStride == left.IsReversedStride)
                 && (result.IsReversedStride == right.IsReversedStride)
-            ) {
+            )
+            {
                 for (int i = 0; i < resultSpan.Length; i++)
                 {
                     resultSpan[i] = (short)(leftSpan[i] + rightSpan[i]);
@@ -13477,14 +13710,16 @@ namespace System.Numerics.Tensors
             DenseTensor<short> left,
             DenseTensor<short> right,
             DenseTensor<short> result
-        ) {
+        )
+        {
             var resultSpan = result.Buffer.Span;
             var leftSpan = left.Buffer.Span;
             var rightSpan = right.Buffer.Span;
             if (
                 (result.IsReversedStride == left.IsReversedStride)
                 && (result.IsReversedStride == right.IsReversedStride)
-            ) {
+            )
+            {
                 for (int i = 0; i < resultSpan.Length; i++)
                 {
                     resultSpan[i] = (short)(leftSpan[i] & rightSpan[i]);
@@ -13569,7 +13804,8 @@ namespace System.Numerics.Tensors
             int[] leftAxes,
             int[] rightAxes,
             DenseTensor<short> result
-        ) {
+        )
+        {
             var summingDimensions = new int[leftAxes.Length];
             for (int i = 0; i < leftAxes.Length; i++)
             {
@@ -13669,14 +13905,16 @@ namespace System.Numerics.Tensors
             DenseTensor<short> left,
             DenseTensor<short> right,
             DenseTensor<short> result
-        ) {
+        )
+        {
             var resultSpan = result.Buffer.Span;
             var leftSpan = left.Buffer.Span;
             var rightSpan = right.Buffer.Span;
             if (
                 (result.IsReversedStride == left.IsReversedStride)
                 && (result.IsReversedStride == right.IsReversedStride)
-            ) {
+            )
+            {
                 for (int i = 0; i < resultSpan.Length; i++)
                 {
                     resultSpan[i] = (short)(leftSpan[i] / rightSpan[i]);
@@ -13759,14 +13997,16 @@ namespace System.Numerics.Tensors
             DenseTensor<short> left,
             DenseTensor<short> right,
             DenseTensor<bool> result
-        ) {
+        )
+        {
             var resultSpan = result.Buffer.Span;
             var leftSpan = left.Buffer.Span;
             var rightSpan = right.Buffer.Span;
             if (
                 (result.IsReversedStride == left.IsReversedStride)
                 && (result.IsReversedStride == right.IsReversedStride)
-            ) {
+            )
+            {
                 for (int i = 0; i < resultSpan.Length; i++)
                 {
                     resultSpan[i] = leftSpan[i] == rightSpan[i];
@@ -13811,14 +14051,16 @@ namespace System.Numerics.Tensors
             DenseTensor<short> left,
             DenseTensor<short> right,
             DenseTensor<bool> result
-        ) {
+        )
+        {
             var resultSpan = result.Buffer.Span;
             var leftSpan = left.Buffer.Span;
             var rightSpan = right.Buffer.Span;
             if (
                 (result.IsReversedStride == left.IsReversedStride)
                 && (result.IsReversedStride == right.IsReversedStride)
-            ) {
+            )
+            {
                 for (int i = 0; i < resultSpan.Length; i++)
                 {
                     resultSpan[i] = leftSpan[i] > rightSpan[i];
@@ -13863,14 +14105,16 @@ namespace System.Numerics.Tensors
             DenseTensor<short> left,
             DenseTensor<short> right,
             DenseTensor<bool> result
-        ) {
+        )
+        {
             var resultSpan = result.Buffer.Span;
             var leftSpan = left.Buffer.Span;
             var rightSpan = right.Buffer.Span;
             if (
                 (result.IsReversedStride == left.IsReversedStride)
                 && (result.IsReversedStride == right.IsReversedStride)
-            ) {
+            )
+            {
                 for (int i = 0; i < resultSpan.Length; i++)
                 {
                     resultSpan[i] = leftSpan[i] >= rightSpan[i];
@@ -13961,14 +14205,16 @@ namespace System.Numerics.Tensors
             DenseTensor<short> left,
             DenseTensor<short> right,
             DenseTensor<bool> result
-        ) {
+        )
+        {
             var resultSpan = result.Buffer.Span;
             var leftSpan = left.Buffer.Span;
             var rightSpan = right.Buffer.Span;
             if (
                 (result.IsReversedStride == left.IsReversedStride)
                 && (result.IsReversedStride == right.IsReversedStride)
-            ) {
+            )
+            {
                 for (int i = 0; i < resultSpan.Length; i++)
                 {
                     resultSpan[i] = leftSpan[i] < rightSpan[i];
@@ -14013,14 +14259,16 @@ namespace System.Numerics.Tensors
             DenseTensor<short> left,
             DenseTensor<short> right,
             DenseTensor<bool> result
-        ) {
+        )
+        {
             var resultSpan = result.Buffer.Span;
             var leftSpan = left.Buffer.Span;
             var rightSpan = right.Buffer.Span;
             if (
                 (result.IsReversedStride == left.IsReversedStride)
                 && (result.IsReversedStride == right.IsReversedStride)
-            ) {
+            )
+            {
                 for (int i = 0; i < resultSpan.Length; i++)
                 {
                     resultSpan[i] = leftSpan[i] <= rightSpan[i];
@@ -14065,14 +14313,16 @@ namespace System.Numerics.Tensors
             DenseTensor<short> left,
             DenseTensor<short> right,
             DenseTensor<short> result
-        ) {
+        )
+        {
             var resultSpan = result.Buffer.Span;
             var leftSpan = left.Buffer.Span;
             var rightSpan = right.Buffer.Span;
             if (
                 (result.IsReversedStride == left.IsReversedStride)
                 && (result.IsReversedStride == right.IsReversedStride)
-            ) {
+            )
+            {
                 for (int i = 0; i < resultSpan.Length; i++)
                 {
                     resultSpan[i] = (short)(leftSpan[i] % rightSpan[i]);
@@ -14155,14 +14405,16 @@ namespace System.Numerics.Tensors
             DenseTensor<short> left,
             DenseTensor<short> right,
             DenseTensor<short> result
-        ) {
+        )
+        {
             var resultSpan = result.Buffer.Span;
             var leftSpan = left.Buffer.Span;
             var rightSpan = right.Buffer.Span;
             if (
                 (result.IsReversedStride == left.IsReversedStride)
                 && (result.IsReversedStride == right.IsReversedStride)
-            ) {
+            )
+            {
                 for (int i = 0; i < resultSpan.Length; i++)
                 {
                     resultSpan[i] = (short)(leftSpan[i] * rightSpan[i]);
@@ -14245,14 +14497,16 @@ namespace System.Numerics.Tensors
             DenseTensor<short> left,
             DenseTensor<short> right,
             DenseTensor<bool> result
-        ) {
+        )
+        {
             var resultSpan = result.Buffer.Span;
             var leftSpan = left.Buffer.Span;
             var rightSpan = right.Buffer.Span;
             if (
                 (result.IsReversedStride == left.IsReversedStride)
                 && (result.IsReversedStride == right.IsReversedStride)
-            ) {
+            )
+            {
                 for (int i = 0; i < resultSpan.Length; i++)
                 {
                     resultSpan[i] = leftSpan[i] != rightSpan[i];
@@ -14301,7 +14555,8 @@ namespace System.Numerics.Tensors
             if (
                 (result.IsReversedStride == left.IsReversedStride)
                 && (result.IsReversedStride == right.IsReversedStride)
-            ) {
+            )
+            {
                 for (int i = 0; i < resultSpan.Length; i++)
                 {
                     resultSpan[i] = (short)(leftSpan[i] | rightSpan[i]);
@@ -14422,14 +14677,16 @@ namespace System.Numerics.Tensors
             DenseTensor<short> left,
             DenseTensor<short> right,
             DenseTensor<short> result
-        ) {
+        )
+        {
             var resultSpan = result.Buffer.Span;
             var leftSpan = left.Buffer.Span;
             var rightSpan = right.Buffer.Span;
             if (
                 (result.IsReversedStride == left.IsReversedStride)
                 && (result.IsReversedStride == right.IsReversedStride)
-            ) {
+            )
+            {
                 for (int i = 0; i < resultSpan.Length; i++)
                 {
                     resultSpan[i] = (short)(leftSpan[i] - rightSpan[i]);
@@ -14588,14 +14845,16 @@ namespace System.Numerics.Tensors
             DenseTensor<short> left,
             DenseTensor<short> right,
             DenseTensor<short> result
-        ) {
+        )
+        {
             var resultSpan = result.Buffer.Span;
             var leftSpan = left.Buffer.Span;
             var rightSpan = right.Buffer.Span;
             if (
                 (result.IsReversedStride == left.IsReversedStride)
                 && (result.IsReversedStride == right.IsReversedStride)
-            ) {
+            )
+            {
                 for (int i = 0; i < resultSpan.Length; i++)
                 {
                     resultSpan[i] = (short)(leftSpan[i] ^ rightSpan[i]);
@@ -14722,7 +14981,8 @@ namespace System.Numerics.Tensors
             int[] leftAxes,
             int[] rightAxes,
             Tensor<uint> result
-        ) {
+        )
+        {
             var leftIndices = new int[left.Rank];
             var rightIndices = new int[right.Rank];
             var resultIndices = new int[result.Rank];
@@ -15051,7 +15311,8 @@ namespace System.Numerics.Tensors
             if (
                 (result.IsReversedStride == left.IsReversedStride)
                 && (result.IsReversedStride == right.IsReversedStride)
-            ) {
+            )
+            {
                 for (int i = 0; i < resultSpan.Length; i++)
                 {
                     resultSpan[i] = (uint)(leftSpan[i] + rightSpan[i]);
@@ -15138,7 +15399,8 @@ namespace System.Numerics.Tensors
             if (
                 (result.IsReversedStride == left.IsReversedStride)
                 && (result.IsReversedStride == right.IsReversedStride)
-            ) {
+            )
+            {
                 for (int i = 0; i < resultSpan.Length; i++)
                 {
                     resultSpan[i] = (uint)(leftSpan[i] & rightSpan[i]);
@@ -15223,7 +15485,8 @@ namespace System.Numerics.Tensors
             int[] leftAxes,
             int[] rightAxes,
             DenseTensor<uint> result
-        ) {
+        )
+        {
             var summingDimensions = new int[leftAxes.Length];
             for (int i = 0; i < leftAxes.Length; i++)
             {
@@ -15323,14 +15586,16 @@ namespace System.Numerics.Tensors
             DenseTensor<uint> left,
             DenseTensor<uint> right,
             DenseTensor<uint> result
-        ) {
+        )
+        {
             var resultSpan = result.Buffer.Span;
             var leftSpan = left.Buffer.Span;
             var rightSpan = right.Buffer.Span;
             if (
                 (result.IsReversedStride == left.IsReversedStride)
                 && (result.IsReversedStride == right.IsReversedStride)
-            ) {
+            )
+            {
                 for (int i = 0; i < resultSpan.Length; i++)
                 {
                     resultSpan[i] = (uint)(leftSpan[i] / rightSpan[i]);
@@ -15413,14 +15678,16 @@ namespace System.Numerics.Tensors
             DenseTensor<uint> left,
             DenseTensor<uint> right,
             DenseTensor<bool> result
-        ) {
+        )
+        {
             var resultSpan = result.Buffer.Span;
             var leftSpan = left.Buffer.Span;
             var rightSpan = right.Buffer.Span;
             if (
                 (result.IsReversedStride == left.IsReversedStride)
                 && (result.IsReversedStride == right.IsReversedStride)
-            ) {
+            )
+            {
                 for (int i = 0; i < resultSpan.Length; i++)
                 {
                     resultSpan[i] = leftSpan[i] == rightSpan[i];
@@ -15465,14 +15732,16 @@ namespace System.Numerics.Tensors
             DenseTensor<uint> left,
             DenseTensor<uint> right,
             DenseTensor<bool> result
-        ) {
+        )
+        {
             var resultSpan = result.Buffer.Span;
             var leftSpan = left.Buffer.Span;
             var rightSpan = right.Buffer.Span;
             if (
                 (result.IsReversedStride == left.IsReversedStride)
                 && (result.IsReversedStride == right.IsReversedStride)
-            ) {
+            )
+            {
                 for (int i = 0; i < resultSpan.Length; i++)
                 {
                     resultSpan[i] = leftSpan[i] > rightSpan[i];
@@ -15517,14 +15786,16 @@ namespace System.Numerics.Tensors
             DenseTensor<uint> left,
             DenseTensor<uint> right,
             DenseTensor<bool> result
-        ) {
+        )
+        {
             var resultSpan = result.Buffer.Span;
             var leftSpan = left.Buffer.Span;
             var rightSpan = right.Buffer.Span;
             if (
                 (result.IsReversedStride == left.IsReversedStride)
                 && (result.IsReversedStride == right.IsReversedStride)
-            ) {
+            )
+            {
                 for (int i = 0; i < resultSpan.Length; i++)
                 {
                     resultSpan[i] = leftSpan[i] >= rightSpan[i];
@@ -15615,14 +15886,16 @@ namespace System.Numerics.Tensors
             DenseTensor<uint> left,
             DenseTensor<uint> right,
             DenseTensor<bool> result
-        ) {
+        )
+        {
             var resultSpan = result.Buffer.Span;
             var leftSpan = left.Buffer.Span;
             var rightSpan = right.Buffer.Span;
             if (
                 (result.IsReversedStride == left.IsReversedStride)
                 && (result.IsReversedStride == right.IsReversedStride)
-            ) {
+            )
+            {
                 for (int i = 0; i < resultSpan.Length; i++)
                 {
                     resultSpan[i] = leftSpan[i] < rightSpan[i];
@@ -15667,14 +15940,16 @@ namespace System.Numerics.Tensors
             DenseTensor<uint> left,
             DenseTensor<uint> right,
             DenseTensor<bool> result
-        ) {
+        )
+        {
             var resultSpan = result.Buffer.Span;
             var leftSpan = left.Buffer.Span;
             var rightSpan = right.Buffer.Span;
             if (
                 (result.IsReversedStride == left.IsReversedStride)
                 && (result.IsReversedStride == right.IsReversedStride)
-            ) {
+            )
+            {
                 for (int i = 0; i < resultSpan.Length; i++)
                 {
                     resultSpan[i] = leftSpan[i] <= rightSpan[i];
@@ -15719,14 +15994,16 @@ namespace System.Numerics.Tensors
             DenseTensor<uint> left,
             DenseTensor<uint> right,
             DenseTensor<uint> result
-        ) {
+        )
+        {
             var resultSpan = result.Buffer.Span;
             var leftSpan = left.Buffer.Span;
             var rightSpan = right.Buffer.Span;
             if (
                 (result.IsReversedStride == left.IsReversedStride)
                 && (result.IsReversedStride == right.IsReversedStride)
-            ) {
+            )
+            {
                 for (int i = 0; i < resultSpan.Length; i++)
                 {
                     resultSpan[i] = (uint)(leftSpan[i] % rightSpan[i]);
@@ -15809,14 +16086,16 @@ namespace System.Numerics.Tensors
             DenseTensor<uint> left,
             DenseTensor<uint> right,
             DenseTensor<uint> result
-        ) {
+        )
+        {
             var resultSpan = result.Buffer.Span;
             var leftSpan = left.Buffer.Span;
             var rightSpan = right.Buffer.Span;
             if (
                 (result.IsReversedStride == left.IsReversedStride)
                 && (result.IsReversedStride == right.IsReversedStride)
-            ) {
+            )
+            {
                 for (int i = 0; i < resultSpan.Length; i++)
                 {
                     resultSpan[i] = (uint)(leftSpan[i] * rightSpan[i]);
@@ -15899,14 +16178,16 @@ namespace System.Numerics.Tensors
             DenseTensor<uint> left,
             DenseTensor<uint> right,
             DenseTensor<bool> result
-        ) {
+        )
+        {
             var resultSpan = result.Buffer.Span;
             var leftSpan = left.Buffer.Span;
             var rightSpan = right.Buffer.Span;
             if (
                 (result.IsReversedStride == left.IsReversedStride)
                 && (result.IsReversedStride == right.IsReversedStride)
-            ) {
+            )
+            {
                 for (int i = 0; i < resultSpan.Length; i++)
                 {
                     resultSpan[i] = leftSpan[i] != rightSpan[i];
@@ -15955,7 +16236,8 @@ namespace System.Numerics.Tensors
             if (
                 (result.IsReversedStride == left.IsReversedStride)
                 && (result.IsReversedStride == right.IsReversedStride)
-            ) {
+            )
+            {
                 for (int i = 0; i < resultSpan.Length; i++)
                 {
                     resultSpan[i] = (uint)(leftSpan[i] | rightSpan[i]);
@@ -16076,14 +16358,16 @@ namespace System.Numerics.Tensors
             DenseTensor<uint> left,
             DenseTensor<uint> right,
             DenseTensor<uint> result
-        ) {
+        )
+        {
             var resultSpan = result.Buffer.Span;
             var leftSpan = left.Buffer.Span;
             var rightSpan = right.Buffer.Span;
             if (
                 (result.IsReversedStride == left.IsReversedStride)
                 && (result.IsReversedStride == right.IsReversedStride)
-            ) {
+            )
+            {
                 for (int i = 0; i < resultSpan.Length; i++)
                 {
                     resultSpan[i] = (uint)(leftSpan[i] - rightSpan[i]);
@@ -16212,7 +16496,8 @@ namespace System.Numerics.Tensors
             if (
                 (result.IsReversedStride == left.IsReversedStride)
                 && (result.IsReversedStride == right.IsReversedStride)
-            ) {
+            )
+            {
                 for (int i = 0; i < resultSpan.Length; i++)
                 {
                     resultSpan[i] = (uint)(leftSpan[i] ^ rightSpan[i]);
@@ -16339,7 +16624,8 @@ namespace System.Numerics.Tensors
             int[] leftAxes,
             int[] rightAxes,
             Tensor<ulong> result
-        ) {
+        )
+        {
             var leftIndices = new int[left.Rank];
             var rightIndices = new int[right.Rank];
             var resultIndices = new int[result.Rank];
@@ -16664,14 +16950,16 @@ namespace System.Numerics.Tensors
             DenseTensor<ulong> left,
             DenseTensor<ulong> right,
             DenseTensor<ulong> result
-        ) {
+        )
+        {
             var resultSpan = result.Buffer.Span;
             var leftSpan = left.Buffer.Span;
             var rightSpan = right.Buffer.Span;
             if (
                 (result.IsReversedStride == left.IsReversedStride)
                 && (result.IsReversedStride == right.IsReversedStride)
-            ) {
+            )
+            {
                 for (int i = 0; i < resultSpan.Length; i++)
                 {
                     resultSpan[i] = (ulong)(leftSpan[i] + rightSpan[i]);
@@ -16754,14 +17042,16 @@ namespace System.Numerics.Tensors
             DenseTensor<ulong> left,
             DenseTensor<ulong> right,
             DenseTensor<ulong> result
-        ) {
+        )
+        {
             var resultSpan = result.Buffer.Span;
             var leftSpan = left.Buffer.Span;
             var rightSpan = right.Buffer.Span;
             if (
                 (result.IsReversedStride == left.IsReversedStride)
                 && (result.IsReversedStride == right.IsReversedStride)
-            ) {
+            )
+            {
                 for (int i = 0; i < resultSpan.Length; i++)
                 {
                     resultSpan[i] = (ulong)(leftSpan[i] & rightSpan[i]);
@@ -16846,7 +17136,8 @@ namespace System.Numerics.Tensors
             int[] leftAxes,
             int[] rightAxes,
             DenseTensor<ulong> result
-        ) {
+        )
+        {
             var summingDimensions = new int[leftAxes.Length];
             for (int i = 0; i < leftAxes.Length; i++)
             {
@@ -16946,14 +17237,16 @@ namespace System.Numerics.Tensors
             DenseTensor<ulong> left,
             DenseTensor<ulong> right,
             DenseTensor<ulong> result
-        ) {
+        )
+        {
             var resultSpan = result.Buffer.Span;
             var leftSpan = left.Buffer.Span;
             var rightSpan = right.Buffer.Span;
             if (
                 (result.IsReversedStride == left.IsReversedStride)
                 && (result.IsReversedStride == right.IsReversedStride)
-            ) {
+            )
+            {
                 for (int i = 0; i < resultSpan.Length; i++)
                 {
                     resultSpan[i] = (ulong)(leftSpan[i] / rightSpan[i]);
@@ -17036,14 +17329,16 @@ namespace System.Numerics.Tensors
             DenseTensor<ulong> left,
             DenseTensor<ulong> right,
             DenseTensor<bool> result
-        ) {
+        )
+        {
             var resultSpan = result.Buffer.Span;
             var leftSpan = left.Buffer.Span;
             var rightSpan = right.Buffer.Span;
             if (
                 (result.IsReversedStride == left.IsReversedStride)
                 && (result.IsReversedStride == right.IsReversedStride)
-            ) {
+            )
+            {
                 for (int i = 0; i < resultSpan.Length; i++)
                 {
                     resultSpan[i] = leftSpan[i] == rightSpan[i];
@@ -17088,14 +17383,16 @@ namespace System.Numerics.Tensors
             DenseTensor<ulong> left,
             DenseTensor<ulong> right,
             DenseTensor<bool> result
-        ) {
+        )
+        {
             var resultSpan = result.Buffer.Span;
             var leftSpan = left.Buffer.Span;
             var rightSpan = right.Buffer.Span;
             if (
                 (result.IsReversedStride == left.IsReversedStride)
                 && (result.IsReversedStride == right.IsReversedStride)
-            ) {
+            )
+            {
                 for (int i = 0; i < resultSpan.Length; i++)
                 {
                     resultSpan[i] = leftSpan[i] > rightSpan[i];
@@ -17140,14 +17437,16 @@ namespace System.Numerics.Tensors
             DenseTensor<ulong> left,
             DenseTensor<ulong> right,
             DenseTensor<bool> result
-        ) {
+        )
+        {
             var resultSpan = result.Buffer.Span;
             var leftSpan = left.Buffer.Span;
             var rightSpan = right.Buffer.Span;
             if (
                 (result.IsReversedStride == left.IsReversedStride)
                 && (result.IsReversedStride == right.IsReversedStride)
-            ) {
+            )
+            {
                 for (int i = 0; i < resultSpan.Length; i++)
                 {
                     resultSpan[i] = leftSpan[i] >= rightSpan[i];
@@ -17238,14 +17537,16 @@ namespace System.Numerics.Tensors
             DenseTensor<ulong> left,
             DenseTensor<ulong> right,
             DenseTensor<bool> result
-        ) {
+        )
+        {
             var resultSpan = result.Buffer.Span;
             var leftSpan = left.Buffer.Span;
             var rightSpan = right.Buffer.Span;
             if (
                 (result.IsReversedStride == left.IsReversedStride)
                 && (result.IsReversedStride == right.IsReversedStride)
-            ) {
+            )
+            {
                 for (int i = 0; i < resultSpan.Length; i++)
                 {
                     resultSpan[i] = leftSpan[i] < rightSpan[i];
@@ -17290,14 +17591,16 @@ namespace System.Numerics.Tensors
             DenseTensor<ulong> left,
             DenseTensor<ulong> right,
             DenseTensor<bool> result
-        ) {
+        )
+        {
             var resultSpan = result.Buffer.Span;
             var leftSpan = left.Buffer.Span;
             var rightSpan = right.Buffer.Span;
             if (
                 (result.IsReversedStride == left.IsReversedStride)
                 && (result.IsReversedStride == right.IsReversedStride)
-            ) {
+            )
+            {
                 for (int i = 0; i < resultSpan.Length; i++)
                 {
                     resultSpan[i] = leftSpan[i] <= rightSpan[i];
@@ -17342,14 +17645,16 @@ namespace System.Numerics.Tensors
             DenseTensor<ulong> left,
             DenseTensor<ulong> right,
             DenseTensor<ulong> result
-        ) {
+        )
+        {
             var resultSpan = result.Buffer.Span;
             var leftSpan = left.Buffer.Span;
             var rightSpan = right.Buffer.Span;
             if (
                 (result.IsReversedStride == left.IsReversedStride)
                 && (result.IsReversedStride == right.IsReversedStride)
-            ) {
+            )
+            {
                 for (int i = 0; i < resultSpan.Length; i++)
                 {
                     resultSpan[i] = (ulong)(leftSpan[i] % rightSpan[i]);
@@ -17432,14 +17737,16 @@ namespace System.Numerics.Tensors
             DenseTensor<ulong> left,
             DenseTensor<ulong> right,
             DenseTensor<ulong> result
-        ) {
+        )
+        {
             var resultSpan = result.Buffer.Span;
             var leftSpan = left.Buffer.Span;
             var rightSpan = right.Buffer.Span;
             if (
                 (result.IsReversedStride == left.IsReversedStride)
                 && (result.IsReversedStride == right.IsReversedStride)
-            ) {
+            )
+            {
                 for (int i = 0; i < resultSpan.Length; i++)
                 {
                     resultSpan[i] = (ulong)(leftSpan[i] * rightSpan[i]);
@@ -17522,14 +17829,16 @@ namespace System.Numerics.Tensors
             DenseTensor<ulong> left,
             DenseTensor<ulong> right,
             DenseTensor<bool> result
-        ) {
+        )
+        {
             var resultSpan = result.Buffer.Span;
             var leftSpan = left.Buffer.Span;
             var rightSpan = right.Buffer.Span;
             if (
                 (result.IsReversedStride == left.IsReversedStride)
                 && (result.IsReversedStride == right.IsReversedStride)
-            ) {
+            )
+            {
                 for (int i = 0; i < resultSpan.Length; i++)
                 {
                     resultSpan[i] = leftSpan[i] != rightSpan[i];
@@ -17578,7 +17887,8 @@ namespace System.Numerics.Tensors
             if (
                 (result.IsReversedStride == left.IsReversedStride)
                 && (result.IsReversedStride == right.IsReversedStride)
-            ) {
+            )
+            {
                 for (int i = 0; i < resultSpan.Length; i++)
                 {
                     resultSpan[i] = (ulong)(leftSpan[i] | rightSpan[i]);
@@ -17699,14 +18009,16 @@ namespace System.Numerics.Tensors
             DenseTensor<ulong> left,
             DenseTensor<ulong> right,
             DenseTensor<ulong> result
-        ) {
+        )
+        {
             var resultSpan = result.Buffer.Span;
             var leftSpan = left.Buffer.Span;
             var rightSpan = right.Buffer.Span;
             if (
                 (result.IsReversedStride == left.IsReversedStride)
                 && (result.IsReversedStride == right.IsReversedStride)
-            ) {
+            )
+            {
                 for (int i = 0; i < resultSpan.Length; i++)
                 {
                     resultSpan[i] = (ulong)(leftSpan[i] - rightSpan[i]);
@@ -17831,14 +18143,16 @@ namespace System.Numerics.Tensors
             DenseTensor<ulong> left,
             DenseTensor<ulong> right,
             DenseTensor<ulong> result
-        ) {
+        )
+        {
             var resultSpan = result.Buffer.Span;
             var leftSpan = left.Buffer.Span;
             var rightSpan = right.Buffer.Span;
             if (
                 (result.IsReversedStride == left.IsReversedStride)
                 && (result.IsReversedStride == right.IsReversedStride)
-            ) {
+            )
+            {
                 for (int i = 0; i < resultSpan.Length; i++)
                 {
                     resultSpan[i] = (ulong)(leftSpan[i] ^ rightSpan[i]);
@@ -17965,7 +18279,8 @@ namespace System.Numerics.Tensors
             int[] leftAxes,
             int[] rightAxes,
             Tensor<ushort> result
-        ) {
+        )
+        {
             var leftIndices = new int[left.Rank];
             var rightIndices = new int[right.Rank];
             var resultIndices = new int[result.Rank];
@@ -18123,7 +18438,8 @@ namespace System.Numerics.Tensors
             Tensor<ushort> left,
             Tensor<ushort> right,
             Tensor<bool> result
-        ) {
+        )
+        {
             Span<int> indices = new Span<int>(new int[result.Rank]);
             for (int i = 0; i < result.Length; i++)
             {
@@ -18293,14 +18609,16 @@ namespace System.Numerics.Tensors
             DenseTensor<ushort> left,
             DenseTensor<ushort> right,
             DenseTensor<ushort> result
-        ) {
+        )
+        {
             var resultSpan = result.Buffer.Span;
             var leftSpan = left.Buffer.Span;
             var rightSpan = right.Buffer.Span;
             if (
                 (result.IsReversedStride == left.IsReversedStride)
                 && (result.IsReversedStride == right.IsReversedStride)
-            ) {
+            )
+            {
                 for (int i = 0; i < resultSpan.Length; i++)
                 {
                     resultSpan[i] = (ushort)(leftSpan[i] + rightSpan[i]);
@@ -18383,14 +18701,16 @@ namespace System.Numerics.Tensors
             DenseTensor<ushort> left,
             DenseTensor<ushort> right,
             DenseTensor<ushort> result
-        ) {
+        )
+        {
             var resultSpan = result.Buffer.Span;
             var leftSpan = left.Buffer.Span;
             var rightSpan = right.Buffer.Span;
             if (
                 (result.IsReversedStride == left.IsReversedStride)
                 && (result.IsReversedStride == right.IsReversedStride)
-            ) {
+            )
+            {
                 for (int i = 0; i < resultSpan.Length; i++)
                 {
                     resultSpan[i] = (ushort)(leftSpan[i] & rightSpan[i]);
@@ -18475,7 +18795,8 @@ namespace System.Numerics.Tensors
             int[] leftAxes,
             int[] rightAxes,
             DenseTensor<ushort> result
-        ) {
+        )
+        {
             var summingDimensions = new int[leftAxes.Length];
             for (int i = 0; i < leftAxes.Length; i++)
             {
@@ -18575,14 +18896,16 @@ namespace System.Numerics.Tensors
             DenseTensor<ushort> left,
             DenseTensor<ushort> right,
             DenseTensor<ushort> result
-        ) {
+        )
+        {
             var resultSpan = result.Buffer.Span;
             var leftSpan = left.Buffer.Span;
             var rightSpan = right.Buffer.Span;
             if (
                 (result.IsReversedStride == left.IsReversedStride)
                 && (result.IsReversedStride == right.IsReversedStride)
-            ) {
+            )
+            {
                 for (int i = 0; i < resultSpan.Length; i++)
                 {
                     resultSpan[i] = (ushort)(leftSpan[i] / rightSpan[i]);
@@ -18665,14 +18988,16 @@ namespace System.Numerics.Tensors
             DenseTensor<ushort> left,
             DenseTensor<ushort> right,
             DenseTensor<bool> result
-        ) {
+        )
+        {
             var resultSpan = result.Buffer.Span;
             var leftSpan = left.Buffer.Span;
             var rightSpan = right.Buffer.Span;
             if (
                 (result.IsReversedStride == left.IsReversedStride)
                 && (result.IsReversedStride == right.IsReversedStride)
-            ) {
+            )
+            {
                 for (int i = 0; i < resultSpan.Length; i++)
                 {
                     resultSpan[i] = leftSpan[i] == rightSpan[i];
@@ -18717,14 +19042,16 @@ namespace System.Numerics.Tensors
             DenseTensor<ushort> left,
             DenseTensor<ushort> right,
             DenseTensor<bool> result
-        ) {
+        )
+        {
             var resultSpan = result.Buffer.Span;
             var leftSpan = left.Buffer.Span;
             var rightSpan = right.Buffer.Span;
             if (
                 (result.IsReversedStride == left.IsReversedStride)
                 && (result.IsReversedStride == right.IsReversedStride)
-            ) {
+            )
+            {
                 for (int i = 0; i < resultSpan.Length; i++)
                 {
                     resultSpan[i] = leftSpan[i] > rightSpan[i];
@@ -18769,14 +19096,16 @@ namespace System.Numerics.Tensors
             DenseTensor<ushort> left,
             DenseTensor<ushort> right,
             DenseTensor<bool> result
-        ) {
+        )
+        {
             var resultSpan = result.Buffer.Span;
             var leftSpan = left.Buffer.Span;
             var rightSpan = right.Buffer.Span;
             if (
                 (result.IsReversedStride == left.IsReversedStride)
                 && (result.IsReversedStride == right.IsReversedStride)
-            ) {
+            )
+            {
                 for (int i = 0; i < resultSpan.Length; i++)
                 {
                     resultSpan[i] = leftSpan[i] >= rightSpan[i];
@@ -18867,14 +19196,16 @@ namespace System.Numerics.Tensors
             DenseTensor<ushort> left,
             DenseTensor<ushort> right,
             DenseTensor<bool> result
-        ) {
+        )
+        {
             var resultSpan = result.Buffer.Span;
             var leftSpan = left.Buffer.Span;
             var rightSpan = right.Buffer.Span;
             if (
                 (result.IsReversedStride == left.IsReversedStride)
                 && (result.IsReversedStride == right.IsReversedStride)
-            ) {
+            )
+            {
                 for (int i = 0; i < resultSpan.Length; i++)
                 {
                     resultSpan[i] = leftSpan[i] < rightSpan[i];
@@ -18919,14 +19250,16 @@ namespace System.Numerics.Tensors
             DenseTensor<ushort> left,
             DenseTensor<ushort> right,
             DenseTensor<bool> result
-        ) {
+        )
+        {
             var resultSpan = result.Buffer.Span;
             var leftSpan = left.Buffer.Span;
             var rightSpan = right.Buffer.Span;
             if (
                 (result.IsReversedStride == left.IsReversedStride)
                 && (result.IsReversedStride == right.IsReversedStride)
-            ) {
+            )
+            {
                 for (int i = 0; i < resultSpan.Length; i++)
                 {
                     resultSpan[i] = leftSpan[i] <= rightSpan[i];
@@ -18971,14 +19304,16 @@ namespace System.Numerics.Tensors
             DenseTensor<ushort> left,
             DenseTensor<ushort> right,
             DenseTensor<ushort> result
-        ) {
+        )
+        {
             var resultSpan = result.Buffer.Span;
             var leftSpan = left.Buffer.Span;
             var rightSpan = right.Buffer.Span;
             if (
                 (result.IsReversedStride == left.IsReversedStride)
                 && (result.IsReversedStride == right.IsReversedStride)
-            ) {
+            )
+            {
                 for (int i = 0; i < resultSpan.Length; i++)
                 {
                     resultSpan[i] = (ushort)(leftSpan[i] % rightSpan[i]);
@@ -19061,14 +19396,16 @@ namespace System.Numerics.Tensors
             DenseTensor<ushort> left,
             DenseTensor<ushort> right,
             DenseTensor<ushort> result
-        ) {
+        )
+        {
             var resultSpan = result.Buffer.Span;
             var leftSpan = left.Buffer.Span;
             var rightSpan = right.Buffer.Span;
             if (
                 (result.IsReversedStride == left.IsReversedStride)
                 && (result.IsReversedStride == right.IsReversedStride)
-            ) {
+            )
+            {
                 for (int i = 0; i < resultSpan.Length; i++)
                 {
                     resultSpan[i] = (ushort)(leftSpan[i] * rightSpan[i]);
@@ -19151,14 +19488,16 @@ namespace System.Numerics.Tensors
             DenseTensor<ushort> left,
             DenseTensor<ushort> right,
             DenseTensor<bool> result
-        ) {
+        )
+        {
             var resultSpan = result.Buffer.Span;
             var leftSpan = left.Buffer.Span;
             var rightSpan = right.Buffer.Span;
             if (
                 (result.IsReversedStride == left.IsReversedStride)
                 && (result.IsReversedStride == right.IsReversedStride)
-            ) {
+            )
+            {
                 for (int i = 0; i < resultSpan.Length; i++)
                 {
                     resultSpan[i] = leftSpan[i] != rightSpan[i];
@@ -19203,14 +19542,16 @@ namespace System.Numerics.Tensors
             DenseTensor<ushort> left,
             DenseTensor<ushort> right,
             DenseTensor<ushort> result
-        ) {
+        )
+        {
             var resultSpan = result.Buffer.Span;
             var leftSpan = left.Buffer.Span;
             var rightSpan = right.Buffer.Span;
             if (
                 (result.IsReversedStride == left.IsReversedStride)
                 && (result.IsReversedStride == right.IsReversedStride)
-            ) {
+            )
+            {
                 for (int i = 0; i < resultSpan.Length; i++)
                 {
                     resultSpan[i] = (ushort)(leftSpan[i] | rightSpan[i]);
@@ -19331,14 +19672,16 @@ namespace System.Numerics.Tensors
             DenseTensor<ushort> left,
             DenseTensor<ushort> right,
             DenseTensor<ushort> result
-        ) {
+        )
+        {
             var resultSpan = result.Buffer.Span;
             var leftSpan = left.Buffer.Span;
             var rightSpan = right.Buffer.Span;
             if (
                 (result.IsReversedStride == left.IsReversedStride)
                 && (result.IsReversedStride == right.IsReversedStride)
-            ) {
+            )
+            {
                 for (int i = 0; i < resultSpan.Length; i++)
                 {
                     resultSpan[i] = (ushort)(leftSpan[i] - rightSpan[i]);
@@ -19463,14 +19806,16 @@ namespace System.Numerics.Tensors
             DenseTensor<ushort> left,
             DenseTensor<ushort> right,
             DenseTensor<ushort> result
-        ) {
+        )
+        {
             var resultSpan = result.Buffer.Span;
             var leftSpan = left.Buffer.Span;
             var rightSpan = right.Buffer.Span;
             if (
                 (result.IsReversedStride == left.IsReversedStride)
                 && (result.IsReversedStride == right.IsReversedStride)
-            ) {
+            )
+            {
                 for (int i = 0; i < resultSpan.Length; i++)
                 {
                     resultSpan[i] = (ushort)(leftSpan[i] ^ rightSpan[i]);

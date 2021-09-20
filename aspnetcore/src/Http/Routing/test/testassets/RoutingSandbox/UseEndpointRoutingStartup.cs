@@ -58,7 +58,8 @@ namespace RoutingSandbox
                                         e => e.RoutePattern.RawText,
                                         StringComparer.OrdinalIgnoreCase
                                     )
-                            ) {
+                            )
+                            {
                                 sb.AppendLine($"- {endpoint.RoutePattern.RawText}");
                                 foreach (var metadata in endpoint.Metadata)
                                 {
@@ -95,7 +96,8 @@ namespace RoutingSandbox
                                         1024,
                                         leaveOpen: true
                                     )
-                                ) {
+                                )
+                                {
                                     var graphWriter =
                                         httpContext.RequestServices.GetRequiredService<DfaGraphWriter>();
                                     var dataSource =

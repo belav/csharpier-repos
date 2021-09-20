@@ -57,7 +57,8 @@ namespace Microsoft.AspNetCore.Builder.Extensions
                     out matchedPath,
                     out remainingPath
                 )
-            ) {
+            )
+            {
                 var originalPath = context.Request.Path;
                 var originalPathBase = context.Request.PathBase;
                 context.Request.Path = remainingPath;

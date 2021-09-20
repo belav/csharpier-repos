@@ -103,7 +103,8 @@ namespace System.Security.Cryptography
         /// </summary>
         public SafeNCryptSecretHandle DeriveSecretAgreementHandle(
             ECDiffieHellmanPublicKey otherPartyPublicKey
-        ) {
+        )
+        {
             if (otherPartyPublicKey == null)
                 throw new ArgumentNullException(nameof(otherPartyPublicKey));
 

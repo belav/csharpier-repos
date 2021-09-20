@@ -33,7 +33,8 @@ namespace Microsoft.TestCommon
             Type genericBaseType,
             Type genericParameterType,
             params Type[] parameterTypes
-        ) {
+        )
+        {
             Assert.NotNull(genericBaseType);
             Assert.True(genericBaseType.IsGenericTypeDefinition);
             Assert.NotNull(genericParameterType);
@@ -65,7 +66,8 @@ namespace Microsoft.TestCommon
             Type genericBaseType,
             Type[] genericParameterTypes,
             params Type[] parameterTypes
-        ) {
+        )
+        {
             Assert.NotNull(genericBaseType);
             Assert.True(genericBaseType.IsGenericTypeDefinition);
             Assert.NotNull(genericParameterTypes);
@@ -96,7 +98,8 @@ namespace Microsoft.TestCommon
             Type genericParameterType,
             Type[] parameterTypes,
             object[] parameterValues
-        ) {
+        )
+        {
             ConstructorInfo ctor = GetConstructor(
                 genericBaseType,
                 genericParameterType,
@@ -120,7 +123,8 @@ namespace Microsoft.TestCommon
             Type[] genericParameterTypes,
             Type[] parameterTypes,
             object[] parameterValues
-        ) {
+        )
+        {
             ConstructorInfo ctor = GetConstructor(
                 genericBaseType,
                 genericParameterTypes,
@@ -142,7 +146,8 @@ namespace Microsoft.TestCommon
             Type genericBaseType,
             Type genericParameterType,
             params object[] parameterValues
-        ) {
+        )
+        {
             Assert.NotNull(genericBaseType);
             Assert.True(genericBaseType.IsGenericTypeDefinition);
             Assert.NotNull(genericParameterType);
@@ -172,7 +177,8 @@ namespace Microsoft.TestCommon
             Type genericBaseType,
             Type[] genericParameterTypes,
             params object[] parameterValues
-        ) {
+        )
+        {
             Assert.NotNull(genericBaseType);
             Assert.True(genericBaseType.IsGenericTypeDefinition);
             Assert.NotNull(genericParameterTypes);
@@ -204,7 +210,8 @@ namespace Microsoft.TestCommon
             Type genericParameterType,
             Type[] parameterTypes,
             object[] parameterValues
-        ) {
+        )
+        {
             ConstructorInfo ctor = GetConstructor(
                 genericBaseType,
                 genericParameterType,
@@ -229,7 +236,8 @@ namespace Microsoft.TestCommon
             Type[] genericParameterTypes,
             Type[] parameterTypes,
             object[] parameterValues
-        ) {
+        )
+        {
             ConstructorInfo ctor = GetConstructor(
                 genericBaseType,
                 genericParameterTypes,
@@ -253,7 +261,8 @@ namespace Microsoft.TestCommon
             Type genericBaseType,
             Type genericParameterType,
             params object[] parameterValues
-        ) {
+        )
+        {
             Assert.NotNull(genericBaseType);
             Assert.True(genericBaseType.IsGenericTypeDefinition);
             Assert.NotNull(genericParameterType);
@@ -285,7 +294,8 @@ namespace Microsoft.TestCommon
             Type genericBaseType,
             Type[] genericParameterTypes,
             params object[] parameterValues
-        ) {
+        )
+        {
             Assert.NotNull(genericBaseType);
             Assert.True(genericBaseType.IsGenericTypeDefinition);
             Assert.NotNull(genericParameterTypes);
@@ -332,7 +342,8 @@ namespace Microsoft.TestCommon
             string methodName,
             Type[] parameterTypes,
             object[] parameterValues
-        ) {
+        )
+        {
             Assert.NotNull(instance);
             Assert.NotNull(parameterTypes);
             Assert.NotNull(parameterValues);
@@ -355,7 +366,8 @@ namespace Microsoft.TestCommon
             string methodName,
             Type[] parameterTypes,
             object[] parameterValues
-        ) {
+        )
+        {
             Assert.NotNull(type);
             Assert.NotNull(parameterTypes);
             Assert.NotNull(parameterValues);
@@ -379,7 +391,8 @@ namespace Microsoft.TestCommon
             string methodName,
             Type genericParameterType,
             Type[] parameterTypes
-        ) {
+        )
+        {
             Assert.NotNull(type);
             Assert.NotNull(parameterTypes);
             Assert.NotNull(genericParameterType);
@@ -414,7 +427,8 @@ namespace Microsoft.TestCommon
             Type genericParameterType,
             Type[] parameterTypes,
             object[] parameterValues
-        ) {
+        )
+        {
             MethodInfo methodInfo = CreateGenericMethod(
                 type,
                 methodName,
@@ -440,7 +454,8 @@ namespace Microsoft.TestCommon
             Type genericParameterType,
             Type[] parameterTypes,
             object[] parameterValues
-        ) {
+        )
+        {
             Assert.NotNull(instance);
             MethodInfo methodInfo = CreateGenericMethod(
                 instance.GetType(),
@@ -468,7 +483,8 @@ namespace Microsoft.TestCommon
             Type genericParameterType,
             Type[] parameterTypes,
             object[] parameterValues
-        ) {
+        )
+        {
             return (T)InvokeGenericMethod(
                 instance,
                 methodName,
@@ -489,7 +505,8 @@ namespace Microsoft.TestCommon
             object instance,
             string methodName,
             params object[] parameterValues
-        ) {
+        )
+        {
             Assert.NotNull(instance);
             MethodInfo methodInfo = FindMethod(instance.GetType(), methodName, parameterValues);
             Assert.NotNull(methodInfo);
@@ -524,7 +541,8 @@ namespace Microsoft.TestCommon
             string methodName,
             Type genericParameterType,
             params object[] parameterValues
-        ) {
+        )
+        {
             Assert.NotNull(instance);
             Assert.NotNull(genericParameterType);
             MethodInfo methodInfo = FindMethod(instance.GetType(), methodName, parameterValues);
@@ -547,7 +565,8 @@ namespace Microsoft.TestCommon
             string methodName,
             Type genericParameterType,
             params object[] parameterValues
-        ) {
+        )
+        {
             Assert.NotNull(type);
             Assert.NotNull(genericParameterType);
             MethodInfo methodInfo = FindMethod(type, methodName, parameterValues);
@@ -574,7 +593,8 @@ namespace Microsoft.TestCommon
         private static bool AreAssignableFrom(
             Type[] parameterTypes,
             params object[] parameterValues
-        ) {
+        )
+        {
             Assert.NotNull(parameterTypes);
             Assert.NotNull(parameterValues);
             if (parameterTypes.Length != parameterValues.Length)
@@ -596,7 +616,8 @@ namespace Microsoft.TestCommon
         private static bool AreAssignableFrom(
             ParameterInfo[] parameterInfos,
             params Type[] parameterTypes
-        ) {
+        )
+        {
             Assert.NotNull(parameterInfos);
             Assert.NotNull(parameterTypes);
             Type[] parameterInfoTypes = parameterInfos.Select<ParameterInfo, Type>(
@@ -628,7 +649,8 @@ namespace Microsoft.TestCommon
         private static bool AreAssignableFrom(
             ParameterInfo[] parameterInfos,
             params object[] parameterValues
-        ) {
+        )
+        {
             Assert.NotNull(parameterInfos);
             Assert.NotNull(parameterValues);
             Type[] parameterTypes = parameterInfos.Select<ParameterInfo, Type>(
@@ -650,7 +672,8 @@ namespace Microsoft.TestCommon
             Type type,
             string methodName,
             params object[] parameterValues
-        ) {
+        )
+        {
             Assert.NotNull(type);
             Assert.False(String.IsNullOrWhiteSpace(methodName));
             Assert.NotNull(parameterValues);

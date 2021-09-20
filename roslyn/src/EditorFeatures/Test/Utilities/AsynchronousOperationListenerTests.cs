@@ -371,7 +371,8 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Utilities
         private static void Wait(
             AsynchronousOperationListener listener,
             ManualResetEventSlim signal
-        ) {
+        )
+        {
             // Note: WaitTask will return immediately if there is no outstanding work.  Due to
             // threadpool scheduling, we may get here before that other thread has started to run.
             // That's why each task set's a signal to say that it has begun and we first wait for
@@ -388,7 +389,8 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Utilities
             AsynchronousOperationListener listener,
             ManualResetEventSlim signal1,
             ManualResetEventSlim signal2
-        ) {
+        )
+        {
             // Note: WaitTask will return immediately if there is no outstanding work.  Due to
             // threadpool scheduling, we may get here before that other thread has started to run.
             // That's why each task set's a signal to say that it has begun and we first wait for

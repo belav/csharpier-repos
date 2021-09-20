@@ -38,7 +38,8 @@ namespace Castle.Components.DictionaryAdapter.Xml
             IXmlNode node,
             IDictionaryAdapter parent,
             IXmlAccessor accessor
-        ) {
+        )
+        {
             return GetValueCore(node, parent, accessor);
         }
 
@@ -46,7 +47,8 @@ namespace Castle.Components.DictionaryAdapter.Xml
             IXmlNode node,
             IDictionaryAdapter parent,
             IXmlAccessor accessor
-        ) {
+        )
+        {
             return GetValueCore(node.Save(), parent, accessor);
         }
 
@@ -64,7 +66,8 @@ namespace Castle.Components.DictionaryAdapter.Xml
             IXmlAccessor accessor,
             object oldValue,
             ref object value
-        ) {
+        )
+        {
             var current = value as IXmlNodeSource;
             if (current != null && current.Node.PositionEquals(node))
                 return;

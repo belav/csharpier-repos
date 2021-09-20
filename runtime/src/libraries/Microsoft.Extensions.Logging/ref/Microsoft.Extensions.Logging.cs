@@ -10,13 +10,15 @@ namespace Microsoft.Extensions.DependencyInjection
     {
         public static Microsoft.Extensions.DependencyInjection.IServiceCollection AddLogging(
             this Microsoft.Extensions.DependencyInjection.IServiceCollection services
-        ) {
+        )
+        {
             throw null;
         }
         public static Microsoft.Extensions.DependencyInjection.IServiceCollection AddLogging(
             this Microsoft.Extensions.DependencyInjection.IServiceCollection services,
             System.Action<Microsoft.Extensions.Logging.ILoggingBuilder> configure
-        ) {
+        )
+        {
             throw null;
         }
     }
@@ -40,65 +42,75 @@ namespace Microsoft.Extensions.Logging
         public static Microsoft.Extensions.Logging.ILoggingBuilder AddFilter(
             this Microsoft.Extensions.Logging.ILoggingBuilder builder,
             System.Func<Microsoft.Extensions.Logging.LogLevel, bool> levelFilter
-        ) {
+        )
+        {
             throw null;
         }
         public static Microsoft.Extensions.Logging.ILoggingBuilder AddFilter(
             this Microsoft.Extensions.Logging.ILoggingBuilder builder,
             System.Func<string, Microsoft.Extensions.Logging.LogLevel, bool> categoryLevelFilter
-        ) {
+        )
+        {
             throw null;
         }
         public static Microsoft.Extensions.Logging.ILoggingBuilder AddFilter(
             this Microsoft.Extensions.Logging.ILoggingBuilder builder,
             System.Func<string, string, Microsoft.Extensions.Logging.LogLevel, bool> filter
-        ) {
+        )
+        {
             throw null;
         }
         public static Microsoft.Extensions.Logging.ILoggingBuilder AddFilter(
             this Microsoft.Extensions.Logging.ILoggingBuilder builder,
             string category,
             Microsoft.Extensions.Logging.LogLevel level
-        ) {
+        )
+        {
             throw null;
         }
         public static Microsoft.Extensions.Logging.ILoggingBuilder AddFilter(
             this Microsoft.Extensions.Logging.ILoggingBuilder builder,
             string category,
             System.Func<Microsoft.Extensions.Logging.LogLevel, bool> levelFilter
-        ) {
+        )
+        {
             throw null;
         }
         public static Microsoft.Extensions.Logging.LoggerFilterOptions AddFilter(
             this Microsoft.Extensions.Logging.LoggerFilterOptions builder,
             System.Func<Microsoft.Extensions.Logging.LogLevel, bool> levelFilter
-        ) {
+        )
+        {
             throw null;
         }
         public static Microsoft.Extensions.Logging.LoggerFilterOptions AddFilter(
             this Microsoft.Extensions.Logging.LoggerFilterOptions builder,
             System.Func<string, Microsoft.Extensions.Logging.LogLevel, bool> categoryLevelFilter
-        ) {
+        )
+        {
             throw null;
         }
         public static Microsoft.Extensions.Logging.LoggerFilterOptions AddFilter(
             this Microsoft.Extensions.Logging.LoggerFilterOptions builder,
             System.Func<string, string, Microsoft.Extensions.Logging.LogLevel, bool> filter
-        ) {
+        )
+        {
             throw null;
         }
         public static Microsoft.Extensions.Logging.LoggerFilterOptions AddFilter(
             this Microsoft.Extensions.Logging.LoggerFilterOptions builder,
             string category,
             Microsoft.Extensions.Logging.LogLevel level
-        ) {
+        )
+        {
             throw null;
         }
         public static Microsoft.Extensions.Logging.LoggerFilterOptions AddFilter(
             this Microsoft.Extensions.Logging.LoggerFilterOptions builder,
             string category,
             System.Func<Microsoft.Extensions.Logging.LogLevel, bool> levelFilter
-        ) {
+        )
+        {
             throw null;
         }
         public static Microsoft.Extensions.Logging.ILoggingBuilder AddFilter<T>(
@@ -195,7 +207,8 @@ namespace Microsoft.Extensions.Logging
         }
         public static Microsoft.Extensions.Logging.ILoggerFactory Create(
             System.Action<Microsoft.Extensions.Logging.ILoggingBuilder> configure
-        ) {
+        )
+        {
             throw null;
         }
         public Microsoft.Extensions.Logging.ILogger CreateLogger(string categoryName)
@@ -290,24 +303,28 @@ namespace Microsoft.Extensions.Logging
         public static Microsoft.Extensions.Logging.ILoggingBuilder AddProvider(
             this Microsoft.Extensions.Logging.ILoggingBuilder builder,
             Microsoft.Extensions.Logging.ILoggerProvider provider
-        ) {
+        )
+        {
             throw null;
         }
         public static Microsoft.Extensions.Logging.ILoggingBuilder ClearProviders(
             this Microsoft.Extensions.Logging.ILoggingBuilder builder
-        ) {
+        )
+        {
             throw null;
         }
         public static Microsoft.Extensions.Logging.ILoggingBuilder Configure(
             this Microsoft.Extensions.Logging.ILoggingBuilder builder,
             System.Action<Microsoft.Extensions.Logging.LoggerFactoryOptions> action
-        ) {
+        )
+        {
             throw null;
         }
         public static Microsoft.Extensions.Logging.ILoggingBuilder SetMinimumLevel(
             this Microsoft.Extensions.Logging.ILoggingBuilder builder,
             Microsoft.Extensions.Logging.LogLevel level
-        ) {
+        )
+        {
             throw null;
         }
     }

@@ -124,7 +124,8 @@ namespace Microsoft.CodeAnalysis.UnitTests
             int length,
             int newlineLength,
             string lineText
-        ) {
+        )
+        {
             var textLine = text.Lines[lineNumber];
 
             Assert.Equal(start, textLine.Start);

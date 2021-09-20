@@ -70,7 +70,8 @@ namespace Microsoft.CodeAnalysis.CSharp.InitializeParameter
             bool returnsVoid,
             SyntaxNode statementToAddAfterOpt,
             StatementSyntax statement
-        ) {
+        )
+        {
             var body = GetBody(functionDeclaration);
 
             if (IsExpressionBody(body))
@@ -86,7 +87,8 @@ namespace Microsoft.CodeAnalysis.CSharp.InitializeParameter
                         !returnsVoid,
                         out var convertedStatement
                     )
-                ) {
+                )
+                {
                     return;
                 }
 
@@ -157,7 +159,8 @@ namespace Microsoft.CodeAnalysis.CSharp.InitializeParameter
             SyntaxToken semicolonToken,
             bool createReturnStatementForExpression,
             out StatementSyntax statement
-        ) {
+        )
+        {
             Debug.Assert(IsExpressionBody(body));
 
             switch (body)

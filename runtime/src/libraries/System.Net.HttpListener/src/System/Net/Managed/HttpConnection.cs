@@ -76,7 +76,8 @@ namespace System.Net
             HttpEndPointListener epl,
             bool secure,
             X509Certificate cert
-        ) {
+        )
+        {
             _socket = sock;
             _epl = epl;
             _secure = secure;

@@ -124,7 +124,8 @@ namespace Castle.DynamicProxy.Generators
             if (
                 ProxyUtil.IsInternal(methodInfo)
                 && ProxyUtil.AreInternalsVisibleToDynamicProxy(methodInfo.DeclaringType.Assembly)
-            ) {
+            )
+            {
                 attributes |= MethodAttributes.Assembly;
             }
             if (methodInfo.IsFamilyAndAssembly)

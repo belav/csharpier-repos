@@ -150,7 +150,8 @@ namespace System.Web.WebPages.Administration
         internal static bool SaveTemporaryPassword(
             string password,
             Func<Stream> getPasswordFileStream
-        ) {
+        )
+        {
             Stream stream = null;
             try
             {
@@ -218,7 +219,8 @@ namespace System.Web.WebPages.Administration
             StartPage page,
             VirtualPathProvider vpp,
             Func<string, string> makeAppRelative
-        ) {
+        )
+        {
             if (!IsAuthenticated(page.Request))
             {
                 if (HasAdminPassword(vpp))
@@ -248,7 +250,8 @@ namespace System.Web.WebPages.Administration
             StartPage page,
             string virtualPath,
             Func<string, string> makeAppRelative
-        ) {
+        )
+        {
             // Make sure we get the virtual path
             virtualPath = SiteAdmin.GetVirtualPath(virtualPath);
 

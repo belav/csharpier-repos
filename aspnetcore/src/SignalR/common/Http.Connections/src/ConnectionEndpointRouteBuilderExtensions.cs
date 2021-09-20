@@ -102,7 +102,8 @@ namespace Microsoft.AspNetCore.Builder
             string pattern,
             HttpConnectionDispatcherOptions options,
             Action<IConnectionBuilder> configure
-        ) {
+        )
+        {
             var dispatcher =
                 endpoints.ServiceProvider.GetRequiredService<HttpConnectionDispatcher>();
 
@@ -160,7 +161,8 @@ namespace Microsoft.AspNetCore.Builder
 
             public CompositeEndpointConventionBuilder(
                 List<IEndpointConventionBuilder> endpointConventionBuilders
-            ) {
+            )
+            {
                 _endpointConventionBuilders = endpointConventionBuilders;
             }
 

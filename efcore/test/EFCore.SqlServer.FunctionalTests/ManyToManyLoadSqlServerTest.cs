@@ -21,7 +21,8 @@ namespace Microsoft.EntityFrameworkCore
             EntityState state,
             QueryTrackingBehavior queryTrackingBehavior,
             bool async
-        ) {
+        )
+        {
             await base.Load_collection(state, queryTrackingBehavior, async);
 
             AssertSql(
@@ -72,7 +73,8 @@ ORDER BY [e].[Id], [t].[EntityOneId], [t].[EntityTwoId], [t].[Id], [t0].[EntityO
 
         public override async Task Load_collection_using_Query_with_Include_for_same_collection(
             bool async
-        ) {
+        )
+        {
             await base.Load_collection_using_Query_with_Include_for_same_collection(async);
 
             AssertSql(
@@ -164,7 +166,8 @@ ORDER BY [e].[Id], [t].[EntityOneId], [t].[EntityTwoId], [t].[Id], [t0].[EntityO
 
         public override async Task Load_collection_using_Query_with_filtered_Include_and_projection(
             bool async
-        ) {
+        )
+        {
             await base.Load_collection_using_Query_with_filtered_Include_and_projection(async);
 
             AssertSql(

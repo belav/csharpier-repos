@@ -23,7 +23,8 @@ namespace Microsoft.CodeAnalysis.ExpressionEvaluator
             TypeAndCustomInfo declaredTypeAndInfo,
             DkmClrValue value,
             int cardinality
-        ) {
+        )
+        {
             if (value.IsNull)
             {
                 // No expansion.
@@ -61,7 +62,8 @@ namespace Microsoft.CodeAnalysis.ExpressionEvaluator
             int count,
             bool visitAll,
             ref int index
-        ) {
+        )
+        {
             var fields = GetFields();
             var defaultView = fields.DefaultView;
 
@@ -112,7 +114,8 @@ namespace Microsoft.CodeAnalysis.ExpressionEvaluator
             Field field,
             EvalResultDataItem parent,
             int cardinality
-        ) {
+        )
+        {
             var fullNameProvider = resultProvider.FullNameProvider;
             var parentFullName = parent.ChildFullNamePrefix;
             if (parentFullName != null)
@@ -221,7 +224,8 @@ namespace Microsoft.CodeAnalysis.ExpressionEvaluator
             Field field,
             string parentFullName,
             out string fullName
-        ) {
+        )
+        {
             var parent = field.Parent;
             if (parent != null)
             {
@@ -266,7 +270,8 @@ namespace Microsoft.CodeAnalysis.ExpressionEvaluator
                 string name,
                 Field parent,
                 bool isRest
-            ) {
+            )
+            {
                 Debug.Assert(declaringTypeAndInfo.ClrType != null);
                 Debug.Assert(fieldTypeAndInfo.ClrType != null);
                 Debug.Assert(fieldInfo != null);
@@ -311,7 +316,8 @@ namespace Microsoft.CodeAnalysis.ExpressionEvaluator
             TypeAndCustomInfo declaringTypeAndInfo,
             int cardinality,
             bool useRawView
-        ) {
+        )
+        {
             Debug.Assert(declaringTypeAndInfo.Type.GetTupleCardinalityIfAny() == cardinality);
 
             var appDomain = declaringTypeAndInfo.ClrType.AppDomain;
@@ -421,7 +427,8 @@ namespace Microsoft.CodeAnalysis.ExpressionEvaluator
             DkmClrAppDomain appDomain,
             FieldInfo field,
             CustomTypeInfoTypeArgumentMap customTypeInfoMap
-        ) {
+        )
+        {
             var declaringTypeDef = field.DeclaringType.GetGenericTypeDefinition();
             var fieldDef = declaringTypeDef.GetTupleField(field.Name);
             var fieldType = DkmClrType.Create(appDomain, field.FieldType);
@@ -437,7 +444,8 @@ namespace Microsoft.CodeAnalysis.ExpressionEvaluator
             DkmInspectionContext inspectionContext,
             EvalResultDataItem parent,
             DkmClrValue value
-        ) {
+        )
+        {
             var displayName = Resources.RawView;
             var displayValue = value.GetValueString(
                 inspectionContext,

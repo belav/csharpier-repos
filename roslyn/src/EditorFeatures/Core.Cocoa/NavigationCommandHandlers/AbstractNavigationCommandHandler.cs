@@ -26,7 +26,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.NavigationCommandHandlers
 
         internal AbstractNavigationCommandHandler(
             IEnumerable<Lazy<IStreamingFindUsagesPresenter>> streamingPresenters
-        ) {
+        )
+        {
             Contract.ThrowIfNull(streamingPresenters);
             _streamingPresenters = streamingPresenters;
         }

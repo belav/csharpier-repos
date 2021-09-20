@@ -103,7 +103,8 @@ namespace Microsoft.AspNetCore.Mvc
             long? end,
             string expectedString,
             long contentLength
-        ) {
+        )
+        {
             // Arrange
             var contentType = "text/plain";
             var lastModified = new DateTimeOffset();
@@ -320,7 +321,8 @@ namespace Microsoft.AspNetCore.Mvc
         [InlineData("bytes = 1-4, 5-11")]
         public async Task WriteFileAsync_PreconditionStateUnspecified_RangeRequestIgnored(
             string rangeString
-        ) {
+        )
+        {
             // Arrange
             var contentType = "text/plain";
             var lastModified = new DateTimeOffset();
@@ -367,7 +369,8 @@ namespace Microsoft.AspNetCore.Mvc
         [InlineData("bytes = -0")]
         public async Task WriteFileAsync_PreconditionStateUnspecified_RangeRequestedNotSatisfiable(
             string rangeString
-        ) {
+        )
+        {
             // Arrange
             var contentType = "text/plain";
             var lastModified = new DateTimeOffset();

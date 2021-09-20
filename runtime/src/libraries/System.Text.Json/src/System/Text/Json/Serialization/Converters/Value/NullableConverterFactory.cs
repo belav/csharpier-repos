@@ -17,7 +17,8 @@ namespace System.Text.Json.Serialization.Converters
         public override JsonConverter CreateConverter(
             Type typeToConvert,
             JsonSerializerOptions options
-        ) {
+        )
+        {
             Debug.Assert(typeToConvert.GetGenericArguments().Length > 0);
 
             Type valueTypeToConvert = typeToConvert.GetGenericArguments()[0];
@@ -37,7 +38,8 @@ namespace System.Text.Json.Serialization.Converters
         public static JsonConverter CreateValueConverter(
             Type valueTypeToConvert,
             JsonConverter valueConverter
-        ) {
+        )
+        {
             return (JsonConverter)Activator.CreateInstance(
                 GetNullableConverterType(valueTypeToConvert),
                 BindingFlags.Instance | BindingFlags.Public,

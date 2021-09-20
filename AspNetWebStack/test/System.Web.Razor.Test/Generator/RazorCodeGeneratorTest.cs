@@ -41,7 +41,8 @@ namespace System.Web.Razor.Test.Generator
             TestSpan[] spans = null,
             TabTest tabTest = TabTest.Both,
             Action<RazorEngineHost> hostConfig = null
-        ) {
+        )
+        {
             bool testRun = false;
 
             if ((tabTest & TabTest.Tabs) == TabTest.Tabs)
@@ -96,7 +97,8 @@ namespace System.Web.Razor.Test.Generator
             TestSpan[] spans,
             bool withTabs,
             Action<RazorEngineHost> hostConfig
-        ) {
+        )
+        {
             // Load the test files
             if (baselineName == null)
             {

@@ -675,7 +675,8 @@ namespace System.Text.RegularExpressions.Tests
                     RegexOptions.Singleline,
                     RegexOptions.Multiline
                 }
-            ) {
+            )
+            {
                 yield return new object[] { @".*", "abc", lineOption, 1, 2, true, "bc" };
                 yield return new object[] { @".*c", "abc", lineOption, 1, 2, true, "bc" };
                 yield return new object[] { @"b.*", "abc", lineOption, 1, 2, true, "bc" };
@@ -2102,7 +2103,8 @@ namespace System.Text.RegularExpressions.Tests
                     RegexOptions.RightToLeft,
                     RegexOptions.IgnoreCase | RegexOptions.CultureInvariant
                 }
-            ) {
+            )
+            {
                 yield return new object[]
                 {
                     "\u05D0\u05D1\u05D2\u05D3(\u05D4\u05D5|\u05D6\u05D7|\u05D8)",
@@ -2292,7 +2294,8 @@ namespace System.Text.RegularExpressions.Tests
             int length,
             bool expectedSuccess,
             string expectedValue
-        ) {
+        )
+        {
             Match(pattern, input, options, beginning, length, expectedSuccess, expectedValue);
         }
 
@@ -2312,7 +2315,8 @@ namespace System.Text.RegularExpressions.Tests
             int length,
             bool expectedSuccess,
             string expectedValue
-        ) {
+        )
+        {
             Regex r;
 
             bool isDefaultStart = RegexHelpers.IsDefaultStart(input, options, beginning);
@@ -2501,7 +2505,8 @@ namespace System.Text.RegularExpressions.Tests
                         if (
                             (RegexOptions)int.Parse(optionsString, CultureInfo.InvariantCulture)
                             == RegexOptions.None
-                        ) {
+                        )
+                        {
                             Assert.Throws<RegexMatchTimeoutException>(
                                 () => new Regex(Pattern).Match(input)
                             );
@@ -3036,7 +3041,8 @@ namespace System.Text.RegularExpressions.Tests
             int beginning,
             int length,
             CaptureData[] expected
-        ) {
+        )
+        {
             Regex r;
 
             bool isDefaultStart = RegexHelpers.IsDefaultStart(input, options, beginning);
@@ -3106,7 +3112,8 @@ namespace System.Text.RegularExpressions.Tests
                     RegexOptions.Singleline,
                     RegexOptions.Multiline
                 }
-            ) {
+            )
+            {
                 // Anchors
                 yield return new object[] { @"^.*", "abc", options, 0, true, true };
                 yield return new object[] { @"^.*", "abc", options, 1, false, true };
@@ -3134,7 +3141,8 @@ namespace System.Text.RegularExpressions.Tests
             int startat,
             bool expectedSuccessStartAt,
             bool expectedSuccessBeginning
-        ) {
+        )
+        {
             var r = new Regex(pattern, options);
 
             Assert.Equal(expectedSuccessStartAt, r.IsMatch(input, startat));
@@ -3405,7 +3413,8 @@ namespace System.Text.RegularExpressions.Tests
             string regex,
             string input,
             bool expected
-        ) {
+        )
+        {
             Assert.Equal(expected, Regex.IsMatch(input, regex, RegexOptions.None));
             Assert.Equal(expected, Regex.IsMatch(input, regex, RegexOptions.Compiled));
         }

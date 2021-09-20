@@ -69,7 +69,8 @@ namespace System.Net.WebSockets.Client.Tests
                         CultureInfo.InvariantCulture,
                         CultureInfo.InvariantCulture
                     )
-                ) {
+                )
+                {
                     exception = await Assert.ThrowsAsync<InvalidOperationException>(
                         () =>
                             cws.CloseOutputAsync(
@@ -124,7 +125,8 @@ namespace System.Net.WebSockets.Client.Tests
                         CultureInfo.InvariantCulture,
                         CultureInfo.InvariantCulture
                     )
-                ) {
+                )
+                {
                     exception = await Assert.ThrowsAsync<InvalidOperationException>(
                         () => cws.ReceiveAsync(segment, ct)
                     );
@@ -173,7 +175,8 @@ namespace System.Net.WebSockets.Client.Tests
                         CultureInfo.InvariantCulture,
                         CultureInfo.InvariantCulture
                     )
-                ) {
+                )
+                {
                     exception = await Assert.ThrowsAsync<InvalidOperationException>(
                         () => cws.SendAsync(segment, WebSocketMessageType.Text, false, ct)
                     );

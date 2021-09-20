@@ -38,7 +38,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessaryParent
             string expected,
             bool offeredWhenRequireForClarityIsEnabled,
             int index = 0
-        ) {
+        )
+        {
             await TestInRegularAndScriptAsync(
                 initial,
                 expected,

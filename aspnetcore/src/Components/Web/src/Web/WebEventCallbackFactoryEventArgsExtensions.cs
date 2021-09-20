@@ -26,7 +26,8 @@ namespace Microsoft.AspNetCore.Components.Web
             this EventCallbackFactory factory,
             object receiver,
             Action<ClipboardEventArgs> callback
-        ) {
+        )
+        {
             if (factory == null)
             {
                 throw new ArgumentNullException(nameof(factory));
@@ -50,7 +51,8 @@ namespace Microsoft.AspNetCore.Components.Web
             this EventCallbackFactory factory,
             object receiver,
             Func<ClipboardEventArgs, Task> callback
-        ) {
+        )
+        {
             if (factory == null)
             {
                 throw new ArgumentNullException(nameof(factory));
@@ -74,7 +76,8 @@ namespace Microsoft.AspNetCore.Components.Web
             this EventCallbackFactory factory,
             object receiver,
             Action<DragEventArgs> callback
-        ) {
+        )
+        {
             if (factory == null)
             {
                 throw new ArgumentNullException(nameof(factory));
@@ -98,7 +101,8 @@ namespace Microsoft.AspNetCore.Components.Web
             this EventCallbackFactory factory,
             object receiver,
             Func<DragEventArgs, Task> callback
-        ) {
+        )
+        {
             if (factory == null)
             {
                 throw new ArgumentNullException(nameof(factory));
@@ -122,7 +126,8 @@ namespace Microsoft.AspNetCore.Components.Web
             this EventCallbackFactory factory,
             object receiver,
             Action<ErrorEventArgs> callback
-        ) {
+        )
+        {
             if (factory == null)
             {
                 throw new ArgumentNullException(nameof(factory));
@@ -146,7 +151,8 @@ namespace Microsoft.AspNetCore.Components.Web
             this EventCallbackFactory factory,
             object receiver,
             Func<ErrorEventArgs, Task> callback
-        ) {
+        )
+        {
             if (factory == null)
             {
                 throw new ArgumentNullException(nameof(factory));
@@ -170,7 +176,8 @@ namespace Microsoft.AspNetCore.Components.Web
             this EventCallbackFactory factory,
             object receiver,
             Action<FocusEventArgs> callback
-        ) {
+        )
+        {
             if (factory == null)
             {
                 throw new ArgumentNullException(nameof(factory));
@@ -194,7 +201,8 @@ namespace Microsoft.AspNetCore.Components.Web
             this EventCallbackFactory factory,
             object receiver,
             Func<FocusEventArgs, Task> callback
-        ) {
+        )
+        {
             if (factory == null)
             {
                 throw new ArgumentNullException(nameof(factory));
@@ -218,7 +226,8 @@ namespace Microsoft.AspNetCore.Components.Web
             this EventCallbackFactory factory,
             object receiver,
             Action<KeyboardEventArgs> callback
-        ) {
+        )
+        {
             if (factory == null)
             {
                 throw new ArgumentNullException(nameof(factory));
@@ -242,7 +251,8 @@ namespace Microsoft.AspNetCore.Components.Web
             this EventCallbackFactory factory,
             object receiver,
             Func<KeyboardEventArgs, Task> callback
-        ) {
+        )
+        {
             if (factory == null)
             {
                 throw new ArgumentNullException(nameof(factory));
@@ -266,7 +276,8 @@ namespace Microsoft.AspNetCore.Components.Web
             this EventCallbackFactory factory,
             object receiver,
             Action<MouseEventArgs> callback
-        ) {
+        )
+        {
             if (factory == null)
             {
                 throw new ArgumentNullException(nameof(factory));
@@ -290,7 +301,8 @@ namespace Microsoft.AspNetCore.Components.Web
             this EventCallbackFactory factory,
             object receiver,
             Func<MouseEventArgs, Task> callback
-        ) {
+        )
+        {
             if (factory == null)
             {
                 throw new ArgumentNullException(nameof(factory));
@@ -313,7 +325,8 @@ namespace Microsoft.AspNetCore.Components.Web
             this EventCallbackFactory factory,
             object receiver,
             Action<PointerEventArgs> callback
-        ) {
+        )
+        {
             if (factory == null)
             {
                 throw new ArgumentNullException(nameof(factory));
@@ -337,7 +350,8 @@ namespace Microsoft.AspNetCore.Components.Web
             this EventCallbackFactory factory,
             object receiver,
             Func<PointerEventArgs, Task> callback
-        ) {
+        )
+        {
             if (factory == null)
             {
                 throw new ArgumentNullException(nameof(factory));
@@ -361,7 +375,8 @@ namespace Microsoft.AspNetCore.Components.Web
             this EventCallbackFactory factory,
             object receiver,
             Action<ProgressEventArgs> callback
-        ) {
+        )
+        {
             if (factory == null)
             {
                 throw new ArgumentNullException(nameof(factory));
@@ -385,7 +400,8 @@ namespace Microsoft.AspNetCore.Components.Web
             this EventCallbackFactory factory,
             object receiver,
             Func<ProgressEventArgs, Task> callback
-        ) {
+        )
+        {
             if (factory == null)
             {
                 throw new ArgumentNullException(nameof(factory));
@@ -409,7 +425,8 @@ namespace Microsoft.AspNetCore.Components.Web
             this EventCallbackFactory factory,
             object receiver,
             Action<TouchEventArgs> callback
-        ) {
+        )
+        {
             if (factory == null)
             {
                 throw new ArgumentNullException(nameof(factory));
@@ -433,7 +450,8 @@ namespace Microsoft.AspNetCore.Components.Web
             this EventCallbackFactory factory,
             object receiver,
             Func<TouchEventArgs, Task> callback
-        ) {
+        )
+        {
             if (factory == null)
             {
                 throw new ArgumentNullException(nameof(factory));
@@ -457,7 +475,8 @@ namespace Microsoft.AspNetCore.Components.Web
             this EventCallbackFactory factory,
             object receiver,
             Action<WheelEventArgs> callback
-        ) {
+        )
+        {
             if (factory == null)
             {
                 throw new ArgumentNullException(nameof(factory));
@@ -481,7 +500,8 @@ namespace Microsoft.AspNetCore.Components.Web
             this EventCallbackFactory factory,
             object receiver,
             Func<WheelEventArgs, Task> callback
-        ) {
+        )
+        {
             if (factory == null)
             {
                 throw new ArgumentNullException(nameof(factory));

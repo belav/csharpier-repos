@@ -32,12 +32,14 @@ namespace System.DirectoryServices.Protocols
             NetworkCredential tempCredential,
             SEC_WINNT_AUTH_IDENTITY_EX cred,
             BindMethod method
-        ) {
+        )
+        {
             int error;
             if (
                 tempCredential == null
                 && (AuthType == AuthType.External || AuthType == AuthType.Kerberos)
-            ) {
+            )
+            {
                 error = BindSasl();
             }
             else

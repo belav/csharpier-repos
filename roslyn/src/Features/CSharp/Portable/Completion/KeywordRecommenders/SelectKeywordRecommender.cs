@@ -18,7 +18,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Completion.KeywordRecommenders
             int position,
             CSharpSyntaxContext context,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var token = context.TargetToken;
 
             // for orderby, ascending is the default so select should be available in the orderby direction context

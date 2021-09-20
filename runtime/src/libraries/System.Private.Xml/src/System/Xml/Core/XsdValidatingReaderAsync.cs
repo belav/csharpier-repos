@@ -96,7 +96,8 @@ namespace System.Xml
         public override async Task<object> ReadContentAsAsync(
             Type returnType,
             IXmlNamespaceResolver? namespaceResolver
-        ) {
+        )
+        {
             if (!CanReadContentAs(this.NodeType))
             {
                 throw CreateReadContentAsException(nameof(ReadContentAs));
@@ -120,7 +121,8 @@ namespace System.Xml
                     if (
                         returnType == typeof(DateTimeOffset)
                         && xmlType.Datatype is Datatype_dateTimeBase
-                    ) {
+                    )
+                    {
                         typedValue = originalStringValue;
                     }
 
@@ -234,7 +236,8 @@ namespace System.Xml
         public override async Task<object> ReadElementContentAsAsync(
             Type returnType,
             IXmlNamespaceResolver namespaceResolver
-        ) {
+        )
+        {
             if (this.NodeType != XmlNodeType.Element)
             {
                 throw CreateReadElementContentAsException(nameof(ReadElementContentAs));
@@ -259,7 +262,8 @@ namespace System.Xml
                     if (
                         returnType == typeof(DateTimeOffset)
                         && xmlType.Datatype is Datatype_dateTimeBase
-                    ) {
+                    )
+                    {
                         typedValue = originalStringValue;
                     }
 
@@ -448,7 +452,8 @@ namespace System.Xml
                     if (
                         (_xmlSchemaInfo.IsUnionType || _xmlSchemaInfo.IsDefault)
                         && _coreReader is XsdCachingReader
-                    ) {
+                    )
+                    {
                         callSkipToEndElem = false;
                     }
 
@@ -473,7 +478,8 @@ namespace System.Xml
             byte[] buffer,
             int index,
             int count
-        ) {
+        )
+        {
             if (ReadState != ReadState.Interactive)
             {
                 return 0;
@@ -507,7 +513,8 @@ namespace System.Xml
             byte[] buffer,
             int index,
             int count
-        ) {
+        )
+        {
             if (ReadState != ReadState.Interactive)
             {
                 return 0;
@@ -541,7 +548,8 @@ namespace System.Xml
             byte[] buffer,
             int index,
             int count
-        ) {
+        )
+        {
             if (ReadState != ReadState.Interactive)
             {
                 return 0;
@@ -579,7 +587,8 @@ namespace System.Xml
             byte[] buffer,
             int index,
             int count
-        ) {
+        )
+        {
             if (ReadState != ReadState.Interactive)
             {
                 return 0;
@@ -667,7 +676,8 @@ namespace System.Xml
                 _processInlineSchema
                 && IsXSDRoot(_coreReader.LocalName, _coreReader.NamespaceURI)
                 && _coreReader.Depth > 0
-            ) {
+            )
+            {
                 _xmlSchemaInfo.Clear();
                 _attributeCount = _coreReaderAttributeCount = _coreReader.AttributeCount;
                 if (!_coreReader.IsEmptyElement)
@@ -838,7 +848,8 @@ namespace System.Xml
 
         private async Task<(string, object)> InternalReadContentAsObjectTupleAsync(
             bool unwrapTypedValue
-        ) {
+        )
+        {
             string originalStringValue;
 
             XmlNodeType nodeType = this.NodeType;
@@ -931,7 +942,8 @@ namespace System.Xml
 
         private async Task<(XmlSchemaType, object)> InternalReadElementContentAsObjectAsync(
             bool unwrapTypedValue
-        ) {
+        )
+        {
             var content = await InternalReadElementContentAsObjectTupleAsync(unwrapTypedValue)
                 .ConfigureAwait(false);
 
@@ -940,7 +952,8 @@ namespace System.Xml
 
         private async Task<(XmlSchemaType, string, object)> InternalReadElementContentAsObjectTupleAsync(
             bool unwrapTypedValue
-        ) {
+        )
+        {
             XmlSchemaType? xmlType = null;
             string originalString;
 

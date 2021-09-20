@@ -24,7 +24,8 @@ namespace Microsoft.CodeAnalysis.Shared.Utilities
             List<ProjectId> invalidProjects,
             IEnumerable<ProjectId> candidateProjects,
             Workspace workspace
-        ) {
+        )
+        {
             InvalidProjects = invalidProjects;
             CandidateProjects = candidateProjects;
             Workspace = workspace;

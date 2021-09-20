@@ -85,7 +85,8 @@ namespace Microsoft.CodeAnalysis.CodeFixes
             int correlationId,
             bool completed,
             bool timedOut = false
-        ) {
+        )
+        {
             Contract.ThrowIfTrue(completed && timedOut);
 
             string value;
@@ -118,7 +119,8 @@ namespace Microsoft.CodeAnalysis.CodeFixes
             int? correlationId,
             bool applied,
             bool allChangesApplied = true
-        ) {
+        )
+        {
             string value;
             if (applied)
             {
@@ -152,7 +154,8 @@ namespace Microsoft.CodeAnalysis.CodeFixes
                 Document,
                 ImmutableArray<Diagnostic>
             > documentsAndDiagnosticsToFixMap
-        ) {
+        )
+        {
             Logger.Log(
                 FunctionId.CodeFixes_FixAllOccurrencesComputation_Document_Diagnostics,
                 KeyValueLogMessage.Create(
@@ -171,7 +174,8 @@ namespace Microsoft.CodeAnalysis.CodeFixes
         public static void LogDiagnosticsStats(
             int correlationId,
             ImmutableDictionary<Project, ImmutableArray<Diagnostic>> projectsAndDiagnosticsToFixMap
-        ) {
+        )
+        {
             Logger.Log(
                 FunctionId.CodeFixes_FixAllOccurrencesComputation_Project_Diagnostics,
                 KeyValueLogMessage.Create(

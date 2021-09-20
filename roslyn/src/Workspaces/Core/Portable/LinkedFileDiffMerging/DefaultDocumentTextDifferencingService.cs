@@ -42,7 +42,8 @@ namespace Microsoft.CodeAnalysis
             Document newDocument,
             TextDifferenceTypes preferredDifferenceType,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var changes = await newDocument.GetTextChangesAsync(oldDocument, cancellationToken)
                 .ConfigureAwait(false);
             return changes.ToImmutableArray();

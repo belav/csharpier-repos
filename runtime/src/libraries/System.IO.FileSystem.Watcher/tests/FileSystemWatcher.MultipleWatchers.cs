@@ -294,7 +294,8 @@ namespace System.IO.Tests
                     testDirectory.Path,
                     Path.GetFileName(otherFile.Path)
                 )
-            ) {
+            )
+            {
                 AutoResetEvent autoResetEvent1 =
                     WatchChanged(
                         watcher1,
@@ -429,7 +430,8 @@ namespace System.IO.Tests
                     testDirectory.Path,
                     Path.GetFileName(file.Path)
                 )
-            ) {
+            )
+            {
                 string filePath = file.Path;
                 string filePathRenamed = file.Path + "_renamed";
 

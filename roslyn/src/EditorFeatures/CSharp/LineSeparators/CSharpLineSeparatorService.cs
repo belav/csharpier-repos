@@ -34,7 +34,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.LineSeparator
             Document document,
             TextSpan textSpan,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var tree = await document.GetSyntaxTreeAsync(cancellationToken).ConfigureAwait(false);
             var node = await tree.GetRootAsync(cancellationToken).ConfigureAwait(false);
             var spans = new List<TextSpan>();
@@ -137,7 +138,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.LineSeparator
                         methodDecl.Body.OpenBraceToken.IsMissing
                         || methodDecl.Body.CloseBraceToken.IsMissing
                     )
-                ) {
+                )
+                {
                     return true;
                 }
             }
@@ -175,7 +177,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.LineSeparator
                         constructorDecl.Body.OpenBraceToken.IsMissing
                         || constructorDecl.Body.CloseBraceToken.IsMissing
                     )
-                ) {
+                )
+                {
                     return true;
                 }
             }
@@ -193,7 +196,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.LineSeparator
                         destructorDecl.Body.OpenBraceToken.IsMissing
                         || destructorDecl.Body.CloseBraceToken.IsMissing
                     )
-                ) {
+                )
+                {
                     return true;
                 }
             }
@@ -211,7 +215,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.LineSeparator
                         operatorDecl.Body.OpenBraceToken.IsMissing
                         || operatorDecl.Body.CloseBraceToken.IsMissing
                     )
-                ) {
+                )
+                {
                     return true;
                 }
             }
@@ -229,7 +234,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.LineSeparator
                         conversionDecl.Body.OpenBraceToken.IsMissing
                         || conversionDecl.Body.CloseBraceToken.IsMissing
                     )
-                ) {
+                )
+                {
                     return true;
                 }
             }
@@ -255,7 +261,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.LineSeparator
                 || IsBadDestructor(node)
                 || IsBadOperator(node)
                 || IsBadConversionOperator(node)
-            ) {
+            )
+            {
                 return true;
             }
 
@@ -266,7 +273,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.LineSeparator
             SyntaxList<UsingDirectiveSyntax> usings,
             List<TextSpan> spans,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             Contract.ThrowIfNull(spans);
 
             if (usings.Any())
@@ -341,7 +349,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.LineSeparator
             SyntaxNode node,
             List<TextSpan> spans,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             if (IsBadNode(node))
             {
                 return;
@@ -359,7 +368,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.LineSeparator
             SyntaxTree syntaxTree,
             TextSpan textSpan,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             // A span is a legal location for a line separator if the following line
             // contains only whitespace or the span is the last line in the buffer.
 
@@ -373,7 +383,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.LineSeparator
                 string.IsNullOrWhiteSpace(
                     syntaxTree.GetText(cancellationToken).Lines[line + 1].ToString()
                 )
-            ) {
+            )
+            {
                 return true;
             }
 

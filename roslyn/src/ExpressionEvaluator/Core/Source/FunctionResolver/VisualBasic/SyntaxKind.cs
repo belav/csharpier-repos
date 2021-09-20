@@ -39,7 +39,8 @@ namespace Microsoft.CodeAnalysis.VisualBasic.ExpressionEvaluator
 
         private static ImmutableDictionary<string, SyntaxKind> GetKeywordKinds(
             StringComparer comparer
-        ) {
+        )
+        {
             var builder = ImmutableDictionary.CreateBuilder<string, SyntaxKind>(comparer);
             builder.Add("of", SyntaxKind.OfKeyword);
             builder.Add("byval", SyntaxKind.ByValKeyword);

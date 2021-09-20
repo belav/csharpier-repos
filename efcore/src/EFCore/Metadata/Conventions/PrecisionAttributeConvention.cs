@@ -16,9 +16,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
         ///     Creates a new instance of <see cref="PrecisionAttributeConvention" />.
         /// </summary>
         /// <param name="dependencies"> Parameter object containing dependencies for this convention. </param>
-        public PrecisionAttributeConvention(
-            ProviderConventionSetBuilderDependencies dependencies
-        ) : base(dependencies) { }
+        public PrecisionAttributeConvention(ProviderConventionSetBuilderDependencies dependencies)
+            : base(dependencies) { }
 
         /// <summary>
         ///     Called after a property is added to the entity type with an attribute on the associated CLR property or field.
@@ -32,7 +31,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
             PrecisionAttribute attribute,
             MemberInfo clrMember,
             IConventionContext context
-        ) {
+        )
+        {
             propertyBuilder.HasPrecision(attribute.Precision, fromDataAnnotation: true);
 
             if (attribute.Scale.HasValue)

@@ -52,7 +52,8 @@ namespace Microsoft.AspNetCore.Mvc.Routing
                     action?.ActionConstraints
                         is IList<IActionConstraintMetadata> { Count: > 0 } constraints
                     && HasSignificantActionConstraint(constraints)
-                ) {
+                )
+                {
                     // We need to check for some specific action constraint implementations.
                     // We've implemented consumes, and HTTP method support inside endpoint routing, so
                     // we don't need to run an 'action constraint phase' if those are the only constraints.
@@ -114,7 +115,8 @@ namespace Microsoft.AspNetCore.Mvc.Routing
         private IReadOnlyList<(int index, ActionSelectorCandidate candidate)>? EvaluateActionConstraints(
             HttpContext httpContext,
             CandidateSet candidateSet
-        ) {
+        )
+        {
             var items = new List<(int index, ActionSelectorCandidate candidate)>();
 
             // We want to execute a group at a time (based on score) so keep track of the score that we've seen.
@@ -184,7 +186,8 @@ namespace Microsoft.AspNetCore.Mvc.Routing
             CandidateSet candidateSet,
             IReadOnlyList<(int index, ActionSelectorCandidate candidate)> items,
             int? startingOrder
-        ) {
+        )
+        {
             // Find the next group of constraints to process. This will be the lowest value of
             // order that is higher than startingOrder.
             int? order = null;
@@ -202,7 +205,8 @@ namespace Microsoft.AspNetCore.Mvc.Routing
                         if (
                             (startingOrder == null || constraint.Order > startingOrder)
                             && (order == null || constraint.Order < order)
-                        ) {
+                        )
+                        {
                             order = constraint.Order;
                         }
                     }

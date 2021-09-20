@@ -29,7 +29,8 @@ namespace System.Buffers.Text.Tests
             string formatString,
             char expectedSymbol,
             byte expectedPrecision
-        ) {
+        )
+        {
             StandardFormat format = StandardFormat.Parse(formatString);
             Assert.Equal(expectedSymbol, format.Symbol);
             Assert.Equal(expectedPrecision, format.Precision);
@@ -45,7 +46,8 @@ namespace System.Buffers.Text.Tests
             string formatString,
             char expectedSymbol,
             byte expectedPrecision
-        ) {
+        )
+        {
             ReadOnlySpan<char> span = formatString.AsSpan();
             StandardFormat format = StandardFormat.Parse(span);
             Assert.Equal(expectedSymbol, format.Symbol);
@@ -76,7 +78,8 @@ namespace System.Buffers.Text.Tests
             char expectedSymbol,
             byte expectedPrecision,
             bool expectedResult
-        ) {
+        )
+        {
             bool result = StandardFormat.TryParse(formatString, out StandardFormat format);
             Assert.Equal(expectedSymbol, format.Symbol);
             Assert.Equal(expectedPrecision, format.Precision);
@@ -99,7 +102,8 @@ namespace System.Buffers.Text.Tests
             StandardFormat f1,
             StandardFormat f2,
             bool expectedToBeEqual
-        ) {
+        )
+        {
             {
                 bool actual = f1.Equals(f2);
                 Assert.Equal(expectedToBeEqual, actual);
@@ -112,7 +116,8 @@ namespace System.Buffers.Text.Tests
             StandardFormat f1,
             StandardFormat f2,
             bool expectedToBeEqual
-        ) {
+        )
+        {
             object boxedf2 = f2;
             bool actual = f1.Equals(boxedf2);
             Assert.Equal(expectedToBeEqual, actual);
@@ -124,7 +129,8 @@ namespace System.Buffers.Text.Tests
             StandardFormat f1,
             StandardFormat f2,
             bool expectedToBeEqual
-        ) {
+        )
+        {
             {
                 bool actual = f1 == f2;
                 Assert.Equal(expectedToBeEqual, actual);
@@ -137,7 +143,8 @@ namespace System.Buffers.Text.Tests
             StandardFormat f1,
             StandardFormat f2,
             bool expectedToBeEqual
-        ) {
+        )
+        {
             {
                 bool actual = f1 != f2;
                 Assert.NotEqual(expectedToBeEqual, actual);
@@ -150,7 +157,8 @@ namespace System.Buffers.Text.Tests
             StandardFormat f1,
             StandardFormat f2,
             bool expectedToBeEqual
-        ) {
+        )
+        {
             if (expectedToBeEqual)
             {
                 int h1 = f1.GetHashCode();
@@ -165,7 +173,8 @@ namespace System.Buffers.Text.Tests
             StandardFormat f1,
             StandardFormat f2,
             bool expectedToBeEqual
-        ) {
+        )
+        {
             _ = f2;
             _ = expectedToBeEqual;
             object boxedf1 = f1;

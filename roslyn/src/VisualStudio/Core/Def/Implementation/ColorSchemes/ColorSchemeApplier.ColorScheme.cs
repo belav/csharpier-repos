@@ -69,7 +69,8 @@ namespace Microsoft.VisualStudio.LanguageServices.ColorSchemes
                 uint? background,
                 __VSCOLORTYPE foregroundType,
                 uint? foreground
-            ) {
+            )
+            {
                 Name = name;
 
                 Debug.Assert(backgroundType == __VSCOLORTYPE.CT_INVALID || background.HasValue);

@@ -42,7 +42,8 @@ namespace Castle.Components.DictionaryAdapter.Xml
         void IDictionaryMetaInitializer.Initialize(
             IDictionaryAdapterFactory factory,
             DictionaryAdapterMeta meta
-        ) {
+        )
+        {
             meta.SetXmlMeta(new XmlMetadata(meta, reservedNamespaceUris));
         }
 

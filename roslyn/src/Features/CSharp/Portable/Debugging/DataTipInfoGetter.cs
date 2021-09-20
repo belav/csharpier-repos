@@ -23,7 +23,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Debugging
             Document document,
             int position,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             try
             {
                 var root = await document.GetSyntaxRootAsync(cancellationToken)
@@ -82,7 +83,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Debugging
                         SyntaxKind.InvocationExpression,
                         out InvocationExpressionSyntax invocation
                     )
-                ) {
+                )
+                {
                     expression = invocation.Expression;
                 }
 

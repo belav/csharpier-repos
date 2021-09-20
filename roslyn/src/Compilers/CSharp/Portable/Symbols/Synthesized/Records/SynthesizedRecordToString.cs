@@ -38,7 +38,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
 
         protected override (TypeWithAnnotations ReturnType, ImmutableArray<ParameterSymbol> Parameters, bool IsVararg, ImmutableArray<TypeParameterConstraintClause> DeclaredConstraintsForOverrideOrImplementation) MakeParametersAndBindReturnType(
             BindingDiagnosticBag diagnostics
-        ) {
+        )
+        {
             var compilation = DeclaringCompilation;
             var location = ReturnTypeLocation;
             return (
@@ -61,7 +62,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
         internal override void GenerateMethodBody(
             TypeCompilationState compilationState,
             BindingDiagnosticBag diagnostics
-        ) {
+        )
+        {
             var F = new SyntheticBoundNodeFactory(
                 this,
                 this.SyntaxNode,
@@ -121,7 +123,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                 SyntheticBoundNodeFactory F,
                 BoundLocal builder,
                 string value
-            ) {
+            )
+            {
                 return F.ExpressionStatement(
                     F.Call(
                         receiver: builder,

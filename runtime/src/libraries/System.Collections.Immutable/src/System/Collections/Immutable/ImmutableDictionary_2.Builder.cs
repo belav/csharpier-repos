@@ -657,7 +657,8 @@ namespace System.Collections.Immutable
             void ICollection<KeyValuePair<TKey, TValue>>.CopyTo(
                 KeyValuePair<TKey, TValue>[] array,
                 int arrayIndex
-            ) {
+            )
+            {
                 Requires.NotNull(array, nameof(array));
 
                 foreach (var item in this)
@@ -753,7 +754,8 @@ namespace System.Collections.Immutable
         /// <param name="map">The collection to display in the debugger</param>
         public ImmutableDictionaryBuilderDebuggerProxy(
             ImmutableDictionary<TKey, TValue>.Builder map
-        ) {
+        )
+        {
             Requires.NotNull(map, nameof(map));
             _map = map;
         }

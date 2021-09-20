@@ -1091,7 +1091,8 @@ namespace System.Xml
             string? prefix,
             string? localName,
             string? namespaceName
-        ) {
+        )
+        {
             try
             {
                 // check local name
@@ -1284,7 +1285,8 @@ namespace System.Xml
                             if (
                                 value == XmlReservedNs.NsXmlNs
                                 || (value == XmlReservedNs.NsXml && _curDeclPrefix != "xml")
-                            ) {
+                            )
+                            {
                                 throw new ArgumentException(SR.Xml_CanNotBindToReservedNamespace);
                             }
 
@@ -1420,7 +1422,8 @@ namespace System.Xml
                 if (
                     name.Length == 3
                     && string.Equals(name, "xml", StringComparison.OrdinalIgnoreCase)
-                ) {
+                )
+                {
                     if (_currentState != State.Start)
                     {
                         throw new ArgumentException(
@@ -2237,7 +2240,8 @@ namespace System.Xml
                 if (
                     (ns == XmlReservedNs.NsXml && prefix != "xml")
                     || (ns == XmlReservedNs.NsXmlNs && prefix != "xmlns")
-                ) {
+                )
+                {
                     throw new ArgumentException(SR.Format(SR.Xml_NamespaceDeclXmlXmlns, prefix));
                 }
 
@@ -2328,7 +2332,8 @@ namespace System.Xml
             if (
                 (ns == XmlReservedNs.NsXml && prefix != "xml")
                 || (ns == XmlReservedNs.NsXmlNs && prefix != "xmlns")
-            ) {
+            )
+            {
                 throw new ArgumentException(SR.Format(SR.Xml_NamespaceDeclXmlXmlns, prefix));
             }
             if (prefix.Length > 0 && prefix[0] == 'x')

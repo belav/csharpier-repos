@@ -22,14 +22,16 @@ namespace Microsoft.CodeAnalysis.Tools.Analyzers
             string diagnosticId,
             ILogger logger,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             try
             {
                 var fixAllProvider = codeFix.GetFixAllProvider();
                 if (
                     fixAllProvider?.GetSupportedFixAllScopes()?.Contains(FixAllScope.Solution)
                     != true
-                ) {
+                )
+                {
                     logger.LogWarning(
                         Resources.Unable_to_fix_0_Code_fix_1_doesnt_support_Fix_All_in_Solution,
                         diagnosticId,
@@ -134,14 +136,16 @@ namespace Microsoft.CodeAnalysis.Tools.Analyzers
             public override Task<IEnumerable<Diagnostic>> GetAllDiagnosticsAsync(
                 Project project,
                 CancellationToken cancellationToken
-            ) {
+            )
+            {
                 return GetProjectDiagnosticsAsync(project, cancellationToken);
             }
 
             public override async Task<IEnumerable<Diagnostic>> GetDocumentDiagnosticsAsync(
                 Document document,
                 CancellationToken cancellationToken
-            ) {
+            )
+            {
                 var projectDiagnostics = await GetProjectDiagnosticsAsync(
                     document.Project,
                     cancellationToken
@@ -155,7 +159,8 @@ namespace Microsoft.CodeAnalysis.Tools.Analyzers
             public override Task<IEnumerable<Diagnostic>> GetProjectDiagnosticsAsync(
                 Project project,
                 CancellationToken cancellationToken
-            ) {
+            )
+            {
                 return _diagnosticsByProject.ContainsKey(project)
                   ? Task.FromResult<IEnumerable<Diagnostic>>(_diagnosticsByProject[project])
                   : EmptyDignosticResult;

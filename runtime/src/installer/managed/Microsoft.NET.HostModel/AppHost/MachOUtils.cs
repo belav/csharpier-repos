@@ -212,7 +212,8 @@ namespace Microsoft.NET.HostModel.AppHost
                     HandleInheritability.None,
                     leaveOpen: true
                 )
-            ) {
+            )
+            {
                 using (var accessor = mappedFile.CreateViewAccessor())
                 {
                     byte* file = null;

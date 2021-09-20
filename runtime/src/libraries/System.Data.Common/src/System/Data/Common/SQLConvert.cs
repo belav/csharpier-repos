@@ -342,7 +342,8 @@ namespace System.Data.Common
         public static DateTimeOffset ConvertStringToDateTimeOffset(
             string value,
             IFormatProvider formatProvider
-        ) {
+        )
+        {
             return DateTimeOffset.Parse(value, formatProvider);
         }
         // this should not be called for XmlSerialization
@@ -350,7 +351,8 @@ namespace System.Data.Common
             object value,
             Type type,
             IFormatProvider formatProvider
-        ) {
+        )
+        {
             if (type == typeof(System.Numerics.BigInteger))
             {
                 if ((DBNull.Value == value) || (null == value))
@@ -377,7 +379,8 @@ namespace System.Data.Common
             StorageType stype,
             Type type,
             IFormatProvider formatProvider
-        ) {
+        )
+        {
             switch (stype)
             { // if destination is SQL type
                 case StorageType.SqlBinary:

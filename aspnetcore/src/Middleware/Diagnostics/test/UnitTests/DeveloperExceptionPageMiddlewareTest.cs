@@ -409,7 +409,8 @@ namespace Microsoft.AspNetCore.Diagnostics
         [MemberData(nameof(CompilationExceptionData))]
         public async Task NullInfoInCompilationException_ShouldNotThrowExceptionGeneratingExceptionPage(
             List<CompilationFailure> failures
-        ) {
+        )
+        {
             // Arrange
             DiagnosticListener diagnosticListener = null;
             using var host = new HostBuilder().ConfigureWebHost(

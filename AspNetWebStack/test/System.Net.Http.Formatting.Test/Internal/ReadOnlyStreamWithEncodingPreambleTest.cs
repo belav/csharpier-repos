@@ -44,7 +44,8 @@ namespace System.Net.Http.Internal
                 using (
                     ReadOnlyStreamWithEncodingPreamble wrapperStream =
                         new ReadOnlyStreamWithEncodingPreamble(inputStream, encoding)
-                ) {
+                )
+                {
                     // Act
                     int totalRead = 0;
                     byte[] readBuffer = new byte[expectedBytes.Length];
@@ -75,7 +76,8 @@ namespace System.Net.Http.Internal
             public override IEnumerable<object[]> GetData(
                 MethodInfo methodUnderTest,
                 Type[] parameterTypes
-            ) {
+            )
+            {
                 return new MatrixTheoryDataSet<Encoding, bool>(
                     new[]
                     {

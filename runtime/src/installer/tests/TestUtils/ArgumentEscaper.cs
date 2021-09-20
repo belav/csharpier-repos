@@ -34,7 +34,8 @@ namespace Microsoft.DotNet.Cli.Build.Framework
         /// <returns></returns>
         public static string EscapeAndConcatenateArgArrayForCmdProcessStart(
             IEnumerable<string> args
-        ) {
+        )
+        {
             return string.Join(" ", EscapeArgArrayForCmd(args));
         }
 
@@ -190,7 +191,8 @@ namespace Microsoft.DotNet.Cli.Build.Framework
             if (
                 argument.StartsWith("\"", StringComparison.Ordinal)
                 && argument.EndsWith("\"", StringComparison.Ordinal)
-            ) {
+            )
+            {
                 return false;
             }
 

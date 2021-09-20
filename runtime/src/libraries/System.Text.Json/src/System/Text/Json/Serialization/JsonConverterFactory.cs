@@ -59,7 +59,8 @@ namespace System.Text.Json.Serialization
         internal JsonConverter GetConverterInternal(
             Type typeToConvert,
             JsonSerializerOptions options
-        ) {
+        )
+        {
             Debug.Assert(CanConvert(typeToConvert));
 
             JsonConverter? converter = CreateConverter(typeToConvert, options);
@@ -84,7 +85,8 @@ namespace System.Text.Json.Serialization
             ref Utf8JsonReader reader,
             JsonSerializerOptions options,
             ref ReadStack state
-        ) {
+        )
+        {
             Debug.Fail("We should never get here.");
 
             throw new InvalidOperationException();
@@ -95,7 +97,8 @@ namespace System.Text.Json.Serialization
             JsonSerializerOptions options,
             ref ReadStack state,
             out object? value
-        ) {
+        )
+        {
             Debug.Fail("We should never get here.");
 
             throw new InvalidOperationException();
@@ -106,7 +109,8 @@ namespace System.Text.Json.Serialization
             object? value,
             JsonSerializerOptions options,
             ref WriteStack state
-        ) {
+        )
+        {
             Debug.Fail("We should never get here.");
 
             throw new InvalidOperationException();
@@ -119,7 +123,8 @@ namespace System.Text.Json.Serialization
             object? value,
             JsonSerializerOptions options,
             ref WriteStack state
-        ) {
+        )
+        {
             Debug.Fail("We should never get here.");
 
             throw new InvalidOperationException();
@@ -130,7 +135,8 @@ namespace System.Text.Json.Serialization
             object value,
             JsonSerializerOptions options,
             ref WriteStack state
-        ) {
+        )
+        {
             Debug.Fail("We should never get here.");
 
             throw new InvalidOperationException();

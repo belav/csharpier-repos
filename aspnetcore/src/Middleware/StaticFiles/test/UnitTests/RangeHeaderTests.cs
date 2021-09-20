@@ -353,7 +353,8 @@ namespace Microsoft.AspNetCore.StaticFiles
             string expectedRange,
             int length,
             string expectedData
-        ) {
+        )
+        {
             using var host = await StaticFilesTestServer.Create(app => app.UseFileServer());
             using var server = host.GetTestServer();
             var req = new HttpRequestMessage(
@@ -384,7 +385,8 @@ namespace Microsoft.AspNetCore.StaticFiles
             string expectedRange,
             int length,
             string expectedData
-        ) {
+        )
+        {
             using var host = await StaticFilesTestServer.Create(app => app.UseFileServer());
             using var server = host.GetTestServer();
             var req = new HttpRequestMessage(
@@ -412,7 +414,8 @@ namespace Microsoft.AspNetCore.StaticFiles
         [InlineData("0-2")]
         public async Task SingleValidRangeShouldServeRequestedRangeNotSatisfiableEmptyFile(
             string range
-        ) {
+        )
+        {
             using var host = await StaticFilesTestServer.Create(app => app.UseFileServer());
             using var server = host.GetTestServer();
             var req = new HttpRequestMessage(

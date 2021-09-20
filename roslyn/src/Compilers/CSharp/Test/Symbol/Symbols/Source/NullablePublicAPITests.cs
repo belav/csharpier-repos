@@ -651,7 +651,8 @@ public static class Ext
                 static void assertNullability(
                     IMethodSymbol[] methods,
                     params PublicNullableAnnotation[] expectedAnnotations
-                ) {
+                )
+                {
                     var actualAnnotations = methods.Select(
                         m =>
                         {
@@ -1323,7 +1324,8 @@ class C
             Func<T, PublicNullableAnnotation> nullabilityFunc,
             bool testMetadata,
             params PublicNullableAnnotation[] expectedNullabilities
-        ) {
+        )
+        {
             var comp1 = CreateCompilation(source, options: WithNullableEnable());
             comp1.VerifyDiagnostics(nullableEnabledErrors);
             verifyCompilation(comp1);
@@ -2459,7 +2461,8 @@ class C
             static void verifySymbolInfo(
                 IMethodSymbol methodSymbol,
                 PublicNullableAnnotation expectedAnnotation
-            ) {
+            )
+            {
                 Assert.Equal(
                     expectedAnnotation,
                     methodSymbol.TypeArgumentNullableAnnotations.Single()
@@ -2520,7 +2523,8 @@ class C
             static void verifySymbolInfo(
                 IMethodSymbol methodSymbol,
                 PublicNullableAnnotation expectedAnnotation
-            ) {
+            )
+            {
                 Assert.Equal(
                     expectedAnnotation,
                     methodSymbol.TypeArgumentNullableAnnotations.Single()
@@ -2650,7 +2654,8 @@ class C
             void assertAnnotation(
                 VariableDeclaratorSyntax variable,
                 PublicNullableAnnotation expectedAnnotation
-            ) {
+            )
+            {
                 var symbol = (ILocalSymbol)model.GetDeclaredSymbol(variable);
                 Assert.Equal(expectedAnnotation, symbol.NullableAnnotation);
                 Assert.Equal(expectedAnnotation, symbol.Type.NullableAnnotation);
@@ -2734,7 +2739,8 @@ class C
                     AssignmentExpressionSyntax variable,
                     PublicNullableAnnotation expectedAnnotation1,
                     PublicNullableAnnotation expectedAnnotation2
-                ) {
+                )
+                {
                     var symbols = variable.DescendantNodes()
                         .OfType<SingleVariableDesignationSyntax>()
                         .Select(s => model.GetDeclaredSymbol(s))
@@ -2801,7 +2807,8 @@ class C
                 AssignmentExpressionSyntax variable,
                 PublicNullableAnnotation expectedAnnotation1,
                 PublicNullableAnnotation expectedAnnotation2
-            ) {
+            )
+            {
                 var symbols = variable.DescendantNodes()
                     .OfType<SingleVariableDesignationSyntax>()
                     .Select(s => model.GetDeclaredSymbol(s))
@@ -2928,7 +2935,8 @@ class C : IDisposable, IAsyncDisposable
             void assertAnnotation(
                 VariableDeclaratorSyntax variable,
                 PublicNullableAnnotation expectedAnnotation
-            ) {
+            )
+            {
                 var symbol = (ILocalSymbol)model.GetDeclaredSymbol(variable);
                 Assert.Equal(expectedAnnotation, symbol.NullableAnnotation);
                 Assert.Equal(expectedAnnotation, symbol.Type.NullableAnnotation);
@@ -3015,7 +3023,8 @@ class C
             void assertAnnotation(
                 VariableDeclaratorSyntax variable,
                 PublicNullableAnnotation expectedAnnotation
-            ) {
+            )
+            {
                 var symbol = (ILocalSymbol)model.GetDeclaredSymbol(variable);
                 Assert.Equal(expectedAnnotation, symbol.NullableAnnotation);
                 Assert.Equal(expectedAnnotation, symbol.Type.NullableAnnotation);
@@ -3052,7 +3061,8 @@ class C
             void assertAnnotation(
                 SingleVariableDesignationSyntax variable,
                 PublicNullableAnnotation expectedAnnotation
-            ) {
+            )
+            {
                 var symbol = (ILocalSymbol)model.GetDeclaredSymbol(variable);
                 Assert.Equal(expectedAnnotation, symbol.NullableAnnotation);
                 Assert.Equal(expectedAnnotation, symbol.Type.NullableAnnotation);
@@ -3105,7 +3115,8 @@ class C
             void assertAnnotation(
                 SingleVariableDesignationSyntax variable,
                 PublicNullableAnnotation expectedAnnotation
-            ) {
+            )
+            {
                 var symbol = (ILocalSymbol)model.GetDeclaredSymbol(variable);
                 Assert.Equal(expectedAnnotation, symbol.NullableAnnotation);
                 Assert.Equal(expectedAnnotation, symbol.Type.NullableAnnotation);
@@ -3152,7 +3163,8 @@ class C
             void assertAnnotation(
                 SingleVariableDesignationSyntax variable,
                 PublicNullableAnnotation expectedAnnotation
-            ) {
+            )
+            {
                 var symbol = (ILocalSymbol)model.GetDeclaredSymbol(variable);
                 Assert.Equal(expectedAnnotation, symbol.NullableAnnotation);
                 Assert.Equal(expectedAnnotation, symbol.Type.NullableAnnotation);
@@ -3198,7 +3210,8 @@ class C
             void assertAnnotation(
                 VariableDeclaratorSyntax variable,
                 PublicNullableAnnotation expectedAnnotation
-            ) {
+            )
+            {
                 var symbol = (ILocalSymbol)model.GetDeclaredSymbol(variable);
                 Assert.Equal(expectedAnnotation, symbol.NullableAnnotation);
                 Assert.Equal(expectedAnnotation, symbol.Type.NullableAnnotation);
@@ -3298,7 +3311,8 @@ class C
             void assertAnnotation(
                 ForEachStatementSyntax variable,
                 PublicNullableAnnotation expectedAnnotation
-            ) {
+            )
+            {
                 var symbol = model.GetDeclaredSymbol(variable);
                 Assert.Equal(expectedAnnotation, symbol.NullableAnnotation);
                 Assert.Equal(expectedAnnotation, symbol.Type.NullableAnnotation);
@@ -3351,7 +3365,8 @@ class C
             void assertAnnotation(
                 SingleVariableDesignationSyntax variable,
                 PublicNullableAnnotation expectedAnnotation
-            ) {
+            )
+            {
                 var symbol = (ILocalSymbol)model.GetDeclaredSymbol(variable);
                 Assert.Equal(expectedAnnotation, symbol.NullableAnnotation);
                 Assert.Equal(expectedAnnotation, symbol.Type.NullableAnnotation);
@@ -3890,7 +3905,8 @@ class C : IEnumerable
             void verifyAnnotation(
                 ExpressionSyntax expr,
                 PublicNullableAnnotation expectedAnnotation
-            ) {
+            )
+            {
                 var symbolInfo = model.GetCollectionInitializerSymbolInfo(expr);
                 Assert.Equal(
                     expectedAnnotation,
@@ -3955,7 +3971,8 @@ static class CExt
             void verifyAnnotation(
                 ExpressionSyntax expr,
                 PublicNullableAnnotation expectedAnnotation
-            ) {
+            )
+            {
                 var symbolInfo = model.GetCollectionInitializerSymbolInfo(expr);
                 Assert.Equal(
                     expectedAnnotation,
@@ -4020,7 +4037,8 @@ static class CExt
             void verifyAnnotation(
                 ExpressionSyntax expr,
                 PublicNullableAnnotation expectedAnnotation
-            ) {
+            )
+            {
                 var symbolInfo = model.GetCollectionInitializerSymbolInfo(expr);
                 Assert.Equal(
                     PublicNullableAnnotation.NotAnnotated,
@@ -4174,7 +4192,8 @@ static class CExt
                 ExpressionSyntax expr,
                 PublicNullableAnnotation annotation1,
                 PublicNullableAnnotation annotation2
-            ) {
+            )
+            {
                 var symbolInfo = model.GetCollectionInitializerSymbolInfo(expr);
                 var methodSymbol = ((IMethodSymbol)symbolInfo.Symbol);
                 Assert.Equal(annotation1, methodSymbol.TypeArgumentNullableAnnotations[0]);
@@ -4323,7 +4342,8 @@ static class CExt
                 Span<ElementAccessExpressionSyntax> indexers,
                 PublicNullableAnnotation firstAnnotation,
                 PublicNullableAnnotation secondAnnotation
-            ) {
+            )
+            {
                 var propertySymbol = (IPropertySymbol)model.GetSymbolInfo(indexers[0]).Symbol;
                 verifyIndexer(propertySymbol);
                 propertySymbol = (IPropertySymbol)model.GetSymbolInfo(indexers[1]).Symbol;
@@ -4386,7 +4406,8 @@ class C<T>
             void verifyAnnotation(
                 Span<ElementAccessExpressionSyntax> indexers,
                 PublicNullableAnnotation annotation
-            ) {
+            )
+            {
                 var propertySymbol = (IPropertySymbol)model.GetSymbolInfo(indexers[0]).Symbol;
                 verifyIndexer(propertySymbol);
                 propertySymbol = (IPropertySymbol)model.GetSymbolInfo(indexers[1]).Symbol;
@@ -4443,7 +4464,8 @@ class C<T>
             void verifyAnnotation(
                 ElementAccessExpressionSyntax indexer,
                 PublicNullableAnnotation annotation
-            ) {
+            )
+            {
                 var propertySymbol = (IMethodSymbol)model.GetSymbolInfo(indexer).Symbol;
                 Assert.NotNull(propertySymbol);
                 var spanType = (INamedTypeSymbol)propertySymbol.ReturnType;
@@ -4502,7 +4524,8 @@ class Program
                 PrefixUnaryExpressionSyntax syntax,
                 PublicNullableAnnotation annotation,
                 string expected
-            ) {
+            )
+            {
                 var method = (IMethodSymbol)model.GetSymbolInfo(syntax).Symbol;
                 Assert.Equal(expected, method.ToTestDisplayString(includeNonNullable: true));
                 Assert.Equal(annotation, method.ContainingType.TypeArgumentNullableAnnotations[0]);
@@ -4563,7 +4586,8 @@ class Program
                 BinaryExpressionSyntax syntax,
                 PublicNullableAnnotation annotation,
                 string expected
-            ) {
+            )
+            {
                 var method = (IMethodSymbol)model.GetSymbolInfo(syntax).Symbol;
                 Assert.Equal(expected, method.ToTestDisplayString(includeNonNullable: true));
                 Assert.Equal(annotation, method.ContainingType.TypeArgumentNullableAnnotations[0]);
@@ -5106,7 +5130,8 @@ class C
             foreach (
                 var singleVarDesignation in lambda.DescendantNodes()
                     .OfType<SingleVariableDesignationSyntax>()
-            ) {
+            )
+            {
                 assertParent(singleVarDesignation);
             }
 
@@ -5784,7 +5809,8 @@ class B2 : A<int?>
                 DefaultExpressionSyntax expr,
                 PublicNullableAnnotation expectedAnnotation,
                 PublicNullableFlowState expectedState
-            ) {
+            )
+            {
                 var info = model.GetTypeInfoAndVerifyIOperation(expr).Nullability;
                 Assert.Equal(expectedAnnotation, info.Annotation);
                 Assert.Equal(expectedState, info.FlowState);

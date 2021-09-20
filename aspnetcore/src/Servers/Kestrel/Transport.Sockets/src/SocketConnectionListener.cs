@@ -31,7 +31,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Transport.Sockets
             EndPoint endpoint,
             SocketTransportOptions options,
             ISocketsTrace trace
-        ) {
+        )
+        {
             EndPoint = endpoint;
             _trace = trace;
             _options = options;
@@ -195,7 +196,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Transport.Sockets
 
         public async ValueTask<ConnectionContext?> AcceptAsync(
             CancellationToken cancellationToken = default
-        ) {
+        )
+        {
             while (true)
             {
                 try

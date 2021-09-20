@@ -63,16 +63,15 @@ namespace System.Security.Cryptography.Pkcs
         // CertCreateSelfSignedCertificate on a split Windows/netstandard implementation.
         public CmsSigner(CspParameters parameters) => throw new PlatformNotSupportedException();
 
-        public CmsSigner(
-            SubjectIdentifierType signerIdentifierType,
-            X509Certificate2? certificate
-        ) : this(signerIdentifierType, certificate, null) { }
+        public CmsSigner(SubjectIdentifierType signerIdentifierType, X509Certificate2? certificate)
+            : this(signerIdentifierType, certificate, null) { }
 
         public CmsSigner(
             SubjectIdentifierType signerIdentifierType,
             X509Certificate2? certificate,
             AsymmetricAlgorithm? privateKey
-        ) {
+        )
+        {
             switch (signerIdentifierType)
             {
                 case SubjectIdentifierType.Unknown:
@@ -125,7 +124,8 @@ namespace System.Security.Cryptography.Pkcs
             string? contentTypeOid,
             bool silent,
             out X509Certificate2Collection chainCerts
-        ) {
+        )
+        {
             HashAlgorithmName hashAlgorithmName = PkcsHelpers.GetDigestAlgorithm(DigestAlgorithm);
             IncrementalHash hasher = IncrementalHash.CreateHash(hashAlgorithmName);
 
@@ -317,7 +317,8 @@ namespace System.Security.Cryptography.Pkcs
                             && IncludeOption == X509IncludeOption.ExcludeRoot
                             && cert.SubjectName.RawData.AsSpan()
                                 .SequenceEqual(cert.IssuerName.RawData)
-                        ) {
+                        )
+                        {
                             break;
                         }
 
@@ -332,7 +333,8 @@ namespace System.Security.Cryptography.Pkcs
 
         internal static List<AttributeAsn> BuildAttributes(
             CryptographicAttributeObjectCollection? attributes
-        ) {
+        )
+        {
             List<AttributeAsn> signedAttrs = new List<AttributeAsn>();
 
             if (attributes == null || attributes.Count == 0)

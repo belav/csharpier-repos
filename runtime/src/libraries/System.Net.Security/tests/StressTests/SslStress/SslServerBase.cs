@@ -50,7 +50,8 @@ namespace SslStress
         protected virtual async Task<SslStream> EstablishSslStream(
             Stream networkStream,
             CancellationToken token
-        ) {
+        )
+        {
             var sslStream = new SslStream(networkStream, leaveInnerStreamOpen: false);
             var serverOptions = new SslServerAuthenticationOptions
             {

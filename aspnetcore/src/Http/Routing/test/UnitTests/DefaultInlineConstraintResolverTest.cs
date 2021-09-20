@@ -364,7 +364,8 @@ namespace Microsoft.AspNetCore.Routing.Tests
                 string routeKey,
                 RouteValueDictionary values,
                 RouteDirection routeDirection
-            ) {
+            )
+            {
                 return true;
             }
         }
@@ -383,7 +384,8 @@ namespace Microsoft.AspNetCore.Routing.Tests
                 string routeKey,
                 RouteValueDictionary values,
                 RouteDirection routeDirection
-            ) {
+            )
+            {
                 return true;
             }
         }

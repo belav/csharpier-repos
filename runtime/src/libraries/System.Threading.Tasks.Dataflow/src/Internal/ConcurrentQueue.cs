@@ -316,7 +316,8 @@ namespace System.Threading.Tasks.Dataflow.Internal.Collections
             out Segment tail,
             out int headLow,
             out int tailHigh
-        ) {
+        )
+        {
             head = _head;
             tail = _tail;
             headLow = head.Low;
@@ -334,7 +335,8 @@ namespace System.Threading.Tasks.Dataflow.Internal.Collections
                 || tailHigh != tail.High
                 //if head jumps ahead of tail because of concurrent grow and dequeue, retry
                 || head._index > tail._index
-            ) {
+            )
+            {
                 spin.SpinOnce();
                 head = _head;
                 tail = _tail;

@@ -34,7 +34,8 @@ namespace Microsoft.VisualStudio.IntegrationTest.Utilities.OutOfProcess
                 bool ensureExpectedItemsAreOrdered = false,
                 FixAllScope? fixAllScope = null,
                 bool blockUntilComplete = true
-            ) {
+            )
+            {
                 using var cancellationTokenSource = new CancellationTokenSource(
                     Helper.HangMitigatingTimeout
                 );
@@ -71,7 +72,8 @@ namespace Microsoft.VisualStudio.IntegrationTest.Utilities.OutOfProcess
                 bool ensureExpectedItemsAreOrdered = false,
                 FixAllScope? fixAllScope = null,
                 bool blockUntilComplete = true
-            ) {
+            )
+            {
                 _textViewWindow.ShowLightBulb();
                 _textViewWindow.WaitForLightBulbSession();
 

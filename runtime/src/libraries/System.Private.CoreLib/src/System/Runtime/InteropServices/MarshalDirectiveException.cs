@@ -35,9 +35,7 @@ namespace System.Runtime.InteropServices
             HResult = HResults.COR_E_MARSHALDIRECTIVE;
         }
 
-        protected MarshalDirectiveException(
-            SerializationInfo info,
-            StreamingContext context
-        ) : base(info, context) { }
+        protected MarshalDirectiveException(SerializationInfo info, StreamingContext context)
+            : base(info, context) { }
     }
 }

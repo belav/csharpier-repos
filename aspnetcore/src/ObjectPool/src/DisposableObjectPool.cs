@@ -49,7 +49,8 @@ namespace Microsoft.Extensions.ObjectPool
                 if (
                     _firstItem == null
                     && Interlocked.CompareExchange(ref _firstItem, obj, null) == null
-                ) {
+                )
+                {
                     returnedTooPool = true;
                 }
                 else

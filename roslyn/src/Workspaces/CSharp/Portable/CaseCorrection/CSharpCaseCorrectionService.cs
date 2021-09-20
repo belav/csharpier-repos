@@ -27,7 +27,8 @@ namespace Microsoft.CodeAnalysis.CSharp.CaseCorrection
             Workspace workspace,
             ConcurrentDictionary<SyntaxToken, SyntaxToken> replacements,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             // C# doesn't support case correction since we are a case sensitive language.
             return;
         }

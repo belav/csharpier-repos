@@ -181,7 +181,8 @@ namespace Microsoft.EntityFrameworkCore
             ChangeMechanism changeMechanism,
             bool useExistingEntities,
             CascadeTiming? deleteOrphansTiming
-        ) {
+        )
+        {
             var new1 = new OptionalAk1 { AlternateId = Guid.NewGuid() };
             var new1d = new OptionalAk1Derived { AlternateId = Guid.NewGuid() };
             var new1dd = new OptionalAk1MoreDerived { AlternateId = Guid.NewGuid() };
@@ -509,7 +510,8 @@ namespace Microsoft.EntityFrameworkCore
             ChangeMechanism changeMechanism,
             bool useExistingEntities,
             CascadeTiming? deleteOrphansTiming
-        ) {
+        )
+        {
             var newRoot = new Root { AlternateId = Guid.NewGuid() };
             var new1 = new RequiredAk1 { AlternateId = Guid.NewGuid(), Parent = newRoot };
             var new1d = new RequiredAk1Derived { AlternateId = Guid.NewGuid(), Parent = newRoot };
@@ -748,7 +750,8 @@ namespace Microsoft.EntityFrameworkCore
         public virtual void Save_removed_optional_many_to_one_dependents_with_alternate_key(
             ChangeMechanism changeMechanism,
             CascadeTiming? deleteOrphansTiming
-        ) {
+        )
+        {
             Root root = null;
             ExecuteWithStrategyInTransaction(
                 context =>
@@ -849,7 +852,8 @@ namespace Microsoft.EntityFrameworkCore
         public virtual void Save_removed_required_many_to_one_dependents_with_alternate_key(
             ChangeMechanism changeMechanism,
             CascadeTiming? deleteOrphansTiming
-        ) {
+        )
+        {
             Root root = null;
             RequiredAk2 removed2 = null;
             RequiredComposite2 removed2c = null;
@@ -943,7 +947,8 @@ namespace Microsoft.EntityFrameworkCore
                         !Fixture.ForceClientNoAction
                         && !Fixture.NoStoreCascades
                         && deleteOrphansTiming != CascadeTiming.Never
-                    ) {
+                    )
+                    {
                         var loadedRoot = LoadRequiredAkGraph(context);
 
                         AssertKeys(root, loadedRoot);
@@ -982,7 +987,8 @@ namespace Microsoft.EntityFrameworkCore
         public virtual void Optional_many_to_one_dependents_with_alternate_key_are_orphaned(
             CascadeTiming? cascadeDeleteTiming,
             CascadeTiming? deleteOrphansTiming
-        ) {
+        )
+        {
             var removedId = 0;
             List<int> orphanedIds = null;
 
@@ -1092,7 +1098,8 @@ namespace Microsoft.EntityFrameworkCore
         public virtual void Required_many_to_one_dependents_with_alternate_key_are_cascade_deleted(
             CascadeTiming? cascadeDeleteTiming,
             CascadeTiming? deleteOrphansTiming
-        ) {
+        )
+        {
             var removedId = 0;
             List<int> orphanedIds = null;
             List<int> orphanedIdCs = null;
@@ -1235,7 +1242,8 @@ namespace Microsoft.EntityFrameworkCore
         public virtual void Required_many_to_one_dependents_with_alternate_key_are_cascade_deleted_in_store(
             CascadeTiming? cascadeDeleteTiming,
             CascadeTiming? deleteOrphansTiming
-        ) {
+        )
+        {
             var removedId = 0;
             List<int> orphanedIds = null;
             List<int> orphanedIdCs = null;
@@ -1339,7 +1347,8 @@ namespace Microsoft.EntityFrameworkCore
         public virtual void Optional_many_to_one_dependents_with_alternate_key_are_orphaned_in_store(
             CascadeTiming? cascadeDeleteTiming,
             CascadeTiming? deleteOrphansTiming
-        ) {
+        )
+        {
             var removedId = 0;
             List<int> orphanedIds = null;
             List<int> orphanedIdCs = null;
@@ -1378,7 +1387,8 @@ namespace Microsoft.EntityFrameworkCore
                         var toOrphan in context.Set<OptionalComposite2>()
                             .Where(e => orphanedIdCs.Contains(e.Id))
                             .ToList()
-                    ) {
+                    )
+                    {
                         toOrphan.ParentId = null;
                     }
 
@@ -1463,7 +1473,8 @@ namespace Microsoft.EntityFrameworkCore
         public virtual void Optional_many_to_one_dependents_with_alternate_key_are_orphaned_starting_detached(
             CascadeTiming? cascadeDeleteTiming,
             CascadeTiming? deleteOrphansTiming
-        ) {
+        )
+        {
             var removedId = 0;
             List<int> orphanedIds = null;
             List<int> orphanedIdCs = null;
@@ -1583,7 +1594,8 @@ namespace Microsoft.EntityFrameworkCore
         public virtual void Required_many_to_one_dependents_with_alternate_key_are_cascade_deleted_starting_detached(
             CascadeTiming? cascadeDeleteTiming,
             CascadeTiming? deleteOrphansTiming
-        ) {
+        )
+        {
             var removedId = 0;
             List<int> orphanedIds = null;
             List<int> orphanedIdCs = null;
@@ -1706,7 +1718,8 @@ namespace Microsoft.EntityFrameworkCore
         public virtual void Required_many_to_one_dependents_with_alternate_key_are_cascade_detached_when_Added(
             CascadeTiming? cascadeDeleteTiming,
             CascadeTiming? deleteOrphansTiming
-        ) {
+        )
+        {
             var removedId = 0;
             List<int> orphanedIds = null;
             List<int> orphanedIdCs = null;
@@ -1779,7 +1792,8 @@ namespace Microsoft.EntityFrameworkCore
                             cascadeDeleteTiming == CascadeTiming.Immediate
                             || cascadeDeleteTiming == null
                         ) && !Fixture.ForceClientNoAction
-                    ) {
+                    )
+                    {
                         Assert.Equal(EntityState.Detached, context.Entry(added).State);
                         Assert.Equal(EntityState.Detached, context.Entry(addedC).State);
                         Assert.True(

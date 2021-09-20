@@ -1589,7 +1589,8 @@ namespace System.Xml.Xsl.Runtime
             XPathNodeType nodeType,
             string tagName,
             int prefixMappingsIndex
-        ) {
+        )
+        {
             string prefix,
                 localName,
                 ns;
@@ -1682,7 +1683,8 @@ namespace System.Xml.Xsl.Runtime
             string localName,
             string ns,
             XPathNodeType nodeType
-        ) {
+        )
+        {
             if (
                 !ValidateNames.ValidateName(
                     prefix,
@@ -1691,7 +1693,8 @@ namespace System.Xml.Xsl.Runtime
                     nodeType,
                     ValidateNames.Flags.AllExceptNCNames
                 )
-            ) {
+            )
+            {
                 // Name parts are not valid as is.  Try to re-map the prefix.
                 prefix =
                     (ns.Length != 0)

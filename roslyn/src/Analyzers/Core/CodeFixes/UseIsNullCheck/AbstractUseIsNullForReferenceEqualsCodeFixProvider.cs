@@ -60,7 +60,8 @@ namespace Microsoft.CodeAnalysis.UseIsNullCheck
             ImmutableArray<Diagnostic> diagnostics,
             SyntaxEditor editor,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var syntaxFacts = document.GetLanguageService<ISyntaxFactsService>();
 
             // Order in reverse so we process inner diagnostics before outer diagnostics.
@@ -68,7 +69,8 @@ namespace Microsoft.CodeAnalysis.UseIsNullCheck
             // not there once their parent has been replaced.
             foreach (
                 var diagnostic in diagnostics.OrderByDescending(d => d.Location.SourceSpan.Start)
-            ) {
+            )
+            {
                 if (!IsSupportedDiagnostic(diagnostic))
                 {
                     continue;

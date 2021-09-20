@@ -59,16 +59,18 @@ namespace Microsoft.CodeAnalysis.Editor.ReferenceHighlighting
             IThreadingContext threadingContext,
             IForegroundNotificationService notificationService,
             IAsynchronousOperationListenerProvider listenerProvider
-        ) : base(
-            threadingContext,
-            listenerProvider.GetListener(FeatureAttribute.ReferenceHighlighting),
-            notificationService
-        ) { }
+        )
+            : base(
+                threadingContext,
+                listenerProvider.GetListener(FeatureAttribute.ReferenceHighlighting),
+                notificationService
+            ) { }
 
         protected override ITaggerEventSource CreateEventSource(
             ITextView textView,
             ITextBuffer subjectBuffer
-        ) {
+        )
+        {
             // Note: we don't listen for OnTextChanged.  Text changes to this buffer will get
             // reported by OnSemanticChanged.
             return TaggerEventSources.Compose(
@@ -89,7 +91,8 @@ namespace Microsoft.CodeAnalysis.Editor.ReferenceHighlighting
         protected override SnapshotPoint? GetCaretPoint(
             ITextView textViewOpt,
             ITextBuffer subjectBuffer
-        ) {
+        )
+        {
             // With no selection we just use the caret position as expected
             if (textViewOpt.Selection.IsEmpty)
             {
@@ -113,7 +116,8 @@ namespace Microsoft.CodeAnalysis.Editor.ReferenceHighlighting
         protected override IEnumerable<SnapshotSpan> GetSpansToTag(
             ITextView textViewOpt,
             ITextBuffer subjectBuffer
-        ) {
+        )
+        {
             // Note: this may return no snapshot spans.  We have to be resilient to that
             // when processing the TaggerContext<>.SpansToTag below.
             return textViewOpt.BufferGraph.GetTextBuffers(
@@ -140,7 +144,8 @@ namespace Microsoft.CodeAnalysis.Editor.ReferenceHighlighting
                     caretPosition.Snapshot.AsText().Container,
                     out var workspace
                 )
-            ) {
+            )
+            {
                 return Task.CompletedTask;
             }
 
@@ -160,7 +165,8 @@ namespace Microsoft.CodeAnalysis.Editor.ReferenceHighlighting
                     FeatureOnOffOptions.ReferenceHighlighting,
                     document.Project.Language
                 )
-            ) {
+            )
+            {
                 return Task.CompletedTask;
             }
 
@@ -185,7 +191,8 @@ namespace Microsoft.CodeAnalysis.Editor.ReferenceHighlighting
             TaggerContext<NavigableHighlightTag> context,
             SnapshotPoint position,
             Document document
-        ) {
+        )
+        {
             var cancellationToken = context.CancellationToken;
 
             var solution = document.Project.Solution;
@@ -195,7 +202,8 @@ namespace Microsoft.CodeAnalysis.Editor.ReferenceHighlighting
                     FunctionId.Tagger_ReferenceHighlighting_TagProducer_ProduceTags,
                     cancellationToken
                 )
-            ) {
+            )
+            {
                 if (document != null)
                 {
                     var service = document.GetLanguageService<IDocumentHighlightsService>();
@@ -229,7 +237,8 @@ namespace Microsoft.CodeAnalysis.Editor.ReferenceHighlighting
         private static async Task AddTagSpansAsync(
             TaggerContext<NavigableHighlightTag> context,
             DocumentHighlights documentHighlights
-        ) {
+        )
+        {
             var cancellationToken = context.CancellationToken;
             var document = documentHighlights.Document;
 

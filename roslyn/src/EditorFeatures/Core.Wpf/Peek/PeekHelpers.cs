@@ -19,7 +19,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.Peek
             LinePositionSpan identifierLocation,
             LinePositionSpan entityOfInterestSpan,
             IPeekResultFactory peekResultFactory
-        ) {
+        )
+        {
             var fileName = Path.GetFileName(filePath);
             var label = string.Format(
                 "{0} - ({1}, {2})",
@@ -52,7 +53,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.Peek
             PeekResultDisplayInfo displayInfo,
             IPeekResultFactory peekResultFactory,
             bool isReadOnly
-        ) {
+        )
+        {
             return peekResultFactory.Create(
                 displayInfo,
                 filePath: filePath,
@@ -71,7 +73,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.Peek
             Workspace workspace,
             Location identifierLocation,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             // This is called on a background thread, but since we don't have proper asynchrony we must block
             var root = identifierLocation.SourceTree.GetRoot(cancellationToken);
             var node = root.FindToken(identifierLocation.SourceSpan.Start).Parent;

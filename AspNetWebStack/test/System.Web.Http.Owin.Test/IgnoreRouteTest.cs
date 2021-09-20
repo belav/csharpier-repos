@@ -150,7 +150,8 @@ namespace System.Web.Http.Owin
         private static HttpMessageHandlerAdapter CreateProductUnderTest(
             OwinMiddleware next,
             HttpMessageHandler messageHandler
-        ) {
+        )
+        {
             return new HttpMessageHandlerAdapter(
                 next: next,
                 options: new HttpMessageHandlerOptions
@@ -181,13 +182,15 @@ namespace System.Web.Http.Owin
                 string parameterName,
                 IDictionary<string, object> values,
                 HttpRouteDirection routeDirection
-            ) {
+            )
+            {
                 long id;
                 if (
                     values.ContainsKey("id")
                     && Int64.TryParse(values["id"].ToString(), out id)
                     && (id == 10)
-                ) {
+                )
+                {
                     return true;
                 }
 

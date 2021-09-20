@@ -20,7 +20,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.CodeGen
         private CompilationVerifier CompileAndVerifyWithIndexAndRange(
             string s,
             string expectedOutput = null
-        ) {
+        )
+        {
             var comp = CreateCompilationWithIndexAndRange(
                 new[] { s, TestSources.GetSubArray, },
                 expectedOutput is null ? TestOptions.ReleaseDll : TestOptions.ReleaseExe
@@ -30,7 +31,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.CodeGen
 
         private static (SemanticModel model, List<ElementAccessExpressionSyntax> accesses) GetModelAndAccesses(
             CSharpCompilation comp
-        ) {
+        )
+        {
             var syntaxTree = comp.SyntaxTrees[0];
             var root = syntaxTree.GetRoot();
             var model = comp.GetSemanticModel(syntaxTree);
@@ -42,7 +44,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.CodeGen
             IMethodSymbol symbol,
             string methodName,
             string containingTypeName
-        ) {
+        )
+        {
             Assert.NotNull(symbol);
             Assert.Equal(methodName, symbol.Name);
             Assert.Equal(2, symbol.Parameters.Length);

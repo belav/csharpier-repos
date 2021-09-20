@@ -31,7 +31,8 @@ namespace Microsoft.AspNetCore.Components.E2ETest.ServerExecutionTests
         public void UpdatesAuthenticationStateWhenReconnecting(
             string usernameBefore,
             string usernameAfter
-        ) {
+        )
+        {
             // Establish state before disconnection
             SignInAs(usernameBefore, usernameBefore == null ? null : "TestRole");
             var appElement = MountAndNavigateToAuthTest(AuthorizeViewCases);

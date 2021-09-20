@@ -65,7 +65,8 @@ namespace System.Drawing.Printing
 
                 foreach (
                     KeyValuePair<string, SysPrn.Printer> key in EnsurePrintersInitialized().Item2
-                ) {
+                )
+                {
                     list.Add(key.Key);
                 }
 
@@ -330,7 +331,8 @@ namespace System.Drawing.Printing
             out string? defsize,
             NameValueCollection paper_sources,
             out string? defsource
-        ) {
+        )
+        {
             CUPS_OPTIONS cups_options;
             string? option_name,
                 option_value;
@@ -401,7 +403,8 @@ namespace System.Drawing.Printing
             string option_name,
             NameValueCollection list,
             out string? defoption
-        ) {
+        )
+        {
             IntPtr ptr = IntPtr.Zero;
             PPD_OPTION ppd_option;
             PPD_CHOICE choice;
@@ -504,7 +507,8 @@ namespace System.Drawing.Printing
             PrinterSettings settings,
             string? def_size,
             NameValueCollection paper_names
-        ) {
+        )
+        {
             IntPtr ptr;
             string real_name;
             PPD_FILE ppd;
@@ -544,7 +548,8 @@ namespace System.Drawing.Printing
             PrinterSettings settings,
             string? def_source,
             NameValueCollection paper_sources
-        ) {
+        )
+        {
             PaperSourceKind kind;
             PaperSource? defsource = null;
             foreach (string? source in paper_sources)
@@ -588,7 +593,8 @@ namespace System.Drawing.Printing
             string printer,
             PrinterSettings settings,
             IntPtr ppd_handle
-        ) {
+        )
+        {
             if (settings.printer_resolutions == null)
                 settings.printer_resolutions = new PrinterSettings.PrinterResolutionCollection(
                     Array.Empty<PrinterResolution>()
@@ -649,7 +655,8 @@ namespace System.Drawing.Printing
                                 if (
                                     printer.is_default == 1
                                     || string.IsNullOrEmpty(defaultPrinterName)
-                                ) {
+                                )
+                                {
                                     defaultPrinterName = name;
                                 }
 
@@ -710,7 +717,8 @@ namespace System.Drawing.Printing
             ref string type,
             ref string status,
             ref string comment
-        ) {
+        )
+        {
             int count = 0,
                 state = -1;
             bool found = false;
@@ -876,7 +884,8 @@ namespace System.Drawing.Printing
             PrinterSettings printer_settings,
             PageSettings page_settings,
             out IntPtr options
-        ) {
+        )
+        {
             options = IntPtr.Zero;
 
             PaperSize size = page_settings.PaperSize;
@@ -972,7 +981,8 @@ namespace System.Drawing.Printing
         internal static IntPtr CreateGraphicsContext(
             PrinterSettings settings,
             PageSettings default_page_settings
-        ) {
+        )
+        {
             IntPtr graphics = IntPtr.Zero;
             string? name;
             if (!settings.PrintToFile)
@@ -1169,7 +1179,8 @@ namespace System.Drawing.Printing
             ref string type,
             ref string status,
             ref string comment
-        ) {
+        )
+        {
             PrintingServices.GetPrintDialogInfo(
                 printer,
                 ref port,

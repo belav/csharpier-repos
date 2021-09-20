@@ -45,7 +45,8 @@ namespace Microsoft.AspNetCore.Components
             RenderTreeFrame[] frames,
             int ownerIndex,
             IReadOnlyList<CascadingParameterState> cascadingParameters
-        ) {
+        )
+        {
             _lifetime = lifetime;
             _frames = frames;
             _ownerIndex = ownerIndex;
@@ -79,7 +80,8 @@ namespace Microsoft.AspNetCore.Components
         public bool TryGetValue<TValue>(
             string parameterName,
             [MaybeNullWhen(false)] out TValue result
-        ) {
+        )
+        {
             foreach (var entry in this)
             {
                 if (string.Equals(entry.Name, parameterName))
@@ -206,7 +208,8 @@ namespace Microsoft.AspNetCore.Components
                                 newFrame.AttributeNameField,
                                 StringComparison.Ordinal
                             )
-                        ) {
+                        )
+                        {
                             return false; // Different names
                         }
 
@@ -301,7 +304,8 @@ namespace Microsoft.AspNetCore.Components
                 RenderTreeFrame[] frames,
                 int ownerIndex,
                 IReadOnlyList<CascadingParameterState> cascadingParameters
-            ) {
+            )
+            {
                 _directParamsEnumerator = new RenderTreeFrameParameterEnumerator(
                     frames,
                     ownerIndex
@@ -399,7 +403,8 @@ namespace Microsoft.AspNetCore.Components
 
             public CascadingParameterEnumerator(
                 IReadOnlyList<CascadingParameterState> cascadingParameters
-            ) {
+            )
+            {
                 _cascadingParameters = cascadingParameters;
                 _currentIndex = -1;
                 _current = default;

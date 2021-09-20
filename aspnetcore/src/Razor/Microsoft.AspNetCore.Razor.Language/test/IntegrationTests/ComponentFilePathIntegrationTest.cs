@@ -35,7 +35,8 @@ namespace Microsoft.AspNetCore.Razor.Language.IntegrationTests
             string relativePath,
             string expectedNamespace,
             string expectedClassName
-        ) {
+        )
+        {
             // Arrange
             relativePath = relativePath.Replace('\\', Path.DirectorySeparatorChar);
 

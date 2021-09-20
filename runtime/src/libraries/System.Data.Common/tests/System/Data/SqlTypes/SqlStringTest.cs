@@ -78,7 +78,8 @@ namespace System.Data.Tests.SqlTypes
             string value,
             CultureInfo culture,
             SqlString sqlString
-        ) {
+        )
+        {
             Assert.Same(value, sqlString.Value);
             Assert.False(sqlString.IsNull);
             Assert.Equal(

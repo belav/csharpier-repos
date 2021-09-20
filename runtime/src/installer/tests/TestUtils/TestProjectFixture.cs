@@ -31,7 +31,8 @@ namespace Microsoft.DotNet.CoreSetup.Test
             RepoDirectoriesProvider repoDirectoriesProvider,
             string framework = null,
             string assemblyName = null
-        ) {
+        )
+        {
             ValidateRequiredDirectories(repoDirectoriesProvider);
 
             RepoDirProvider = repoDirectoriesProvider;
@@ -142,7 +143,8 @@ namespace Microsoft.DotNet.CoreSetup.Test
             string framework = null,
             string outputDirectory = null,
             bool restore = false
-        ) {
+        )
+        {
             dotnet = dotnet ?? SdkDotnet;
             outputDirectory = outputDirectory ?? TestProject.OutputDirectory;
             TestProject.OutputDirectory = outputDirectory;
@@ -197,7 +199,8 @@ namespace Microsoft.DotNet.CoreSetup.Test
             string framework = null,
             string manifest = null,
             string outputDirectory = null
-        ) {
+        )
+        {
             dotnet = dotnet ?? SdkDotnet;
             outputDirectory = outputDirectory ?? TestProject.OutputDirectory;
             framework = framework ?? Framework;
@@ -264,7 +267,8 @@ namespace Microsoft.DotNet.CoreSetup.Test
             bool singleFile = false,
             bool restore = false,
             params string[] extraArgs
-        ) {
+        )
+        {
             dotnet = dotnet ?? SdkDotnet;
             outputDirectory = outputDirectory ?? TestProject.OutputDirectory;
             TestProject.OutputDirectory = outputDirectory;
@@ -332,7 +336,8 @@ namespace Microsoft.DotNet.CoreSetup.Test
         public TestProjectFixture RestoreProject(
             string[] fallbackSources,
             string extraMSBuildProperties = null
-        ) {
+        )
+        {
             var restoreArgs = new List<string>();
             foreach (var fallbackSource in fallbackSources)
             {

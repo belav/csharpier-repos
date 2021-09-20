@@ -38,7 +38,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols.Retargeting
         public RetargetingNamespaceSymbol(
             RetargetingModuleSymbol retargetingModule,
             NamespaceSymbol underlyingNamespace
-        ) {
+        )
+        {
             Debug.Assert((object)retargetingModule != null);
             Debug.Assert((object)underlyingNamespace != null);
             Debug.Assert(!(underlyingNamespace is RetargetingNamespaceSymbol));
@@ -77,7 +78,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols.Retargeting
                 if (
                     s.Kind == SymbolKind.NamedType
                     && ((NamedTypeSymbol)s).IsExplicitDefinitionOfNoPiaLocalType
-                ) {
+                )
+                {
                     continue;
                 }
 
@@ -109,7 +111,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols.Retargeting
 
         private ImmutableArray<NamedTypeSymbol> RetargetTypeMembers(
             ImmutableArray<NamedTypeSymbol> underlyingMembers
-        ) {
+        )
+        {
             var builder = ArrayBuilder<NamedTypeSymbol>.GetInstance(underlyingMembers.Length);
 
             foreach (NamedTypeSymbol t in underlyingMembers)
@@ -184,7 +187,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols.Retargeting
             CultureInfo preferredCulture = null,
             bool expandIncludes = false,
             CancellationToken cancellationToken = default(CancellationToken)
-        ) {
+        )
+        {
             return _underlyingNamespace.GetDocumentationCommentXml(
                 preferredCulture,
                 expandIncludes,
@@ -220,7 +224,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols.Retargeting
             string nameOpt,
             int arity,
             LookupOptions options
-        ) {
+        )
+        {
             var underlyingMethods = ArrayBuilder<MethodSymbol>.GetInstance();
             _underlyingNamespace.GetExtensionMethods(underlyingMethods, nameOpt, arity, options);
             foreach (var underlyingMethod in underlyingMethods)

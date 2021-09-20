@@ -57,7 +57,8 @@ namespace Microsoft.AspNetCore.Builder
             this IApplicationBuilder app,
             [DynamicallyAccessedMembers(MiddlewareAccessibility)] Type middleware,
             params object?[] args
-        ) {
+        )
+        {
             if (typeof(IMiddleware).IsAssignableFrom(middleware))
             {
                 // IMiddleware doesn't support passing args directly since it's
@@ -128,7 +129,8 @@ namespace Microsoft.AspNetCore.Builder
                     var parameters = methodInfo.GetParameters();
                     if (
                         parameters.Length == 0 || parameters[0].ParameterType != typeof(HttpContext)
-                    ) {
+                    )
+                    {
                         throw new InvalidOperationException(
                             Resources.FormatException_UseMiddlewareNoParameters(
                                 InvokeMethodName,
@@ -178,7 +180,8 @@ namespace Microsoft.AspNetCore.Builder
             IApplicationBuilder app,
             [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicConstructors)]
                 Type middlewareType
-        ) {
+        )
+        {
             return app.Use(
                 next =>
                 {
@@ -227,7 +230,8 @@ namespace Microsoft.AspNetCore.Builder
         private static Func<T, HttpContext, IServiceProvider, Task> Compile<T>(
             MethodInfo methodInfo,
             ParameterInfo[] parameters
-        ) {
+        )
+        {
             // If we call something like
             //
             // public class Middleware

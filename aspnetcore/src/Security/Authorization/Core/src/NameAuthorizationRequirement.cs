@@ -42,7 +42,8 @@ namespace Microsoft.AspNetCore.Authorization.Infrastructure
         protected override Task HandleRequirementAsync(
             AuthorizationHandlerContext context,
             NameAuthorizationRequirement requirement
-        ) {
+        )
+        {
             if (context.User != null)
             {
                 if (
@@ -54,7 +55,8 @@ namespace Microsoft.AspNetCore.Authorization.Infrastructure
                                 StringComparison.Ordinal
                             )
                     )
-                ) {
+                )
+                {
                     context.Succeed(requirement);
                 }
             }

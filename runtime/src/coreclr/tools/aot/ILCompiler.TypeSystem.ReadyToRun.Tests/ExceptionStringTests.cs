@@ -17,7 +17,8 @@ namespace TypeSystemTests
         {
             foreach (
                 var exceptionId in (ExceptionStringID[])Enum.GetValues(typeof(ExceptionStringID))
-            ) {
+            )
+            {
                 Assert.NotNull(TypeSystemException.GetFormatString(exceptionId));
             }
         }

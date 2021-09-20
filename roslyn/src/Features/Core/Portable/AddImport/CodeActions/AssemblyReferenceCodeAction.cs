@@ -16,10 +16,8 @@ namespace Microsoft.CodeAnalysis.AddImport
     {
         private class AssemblyReferenceCodeAction : AddImportCodeAction
         {
-            public AssemblyReferenceCodeAction(
-                Document originalDocument,
-                AddImportFixData fixData
-            ) : base(originalDocument, fixData)
+            public AssemblyReferenceCodeAction(Document originalDocument, AddImportFixData fixData)
+                : base(originalDocument, fixData)
             {
                 Contract.ThrowIfFalse(fixData.Kind == AddImportFixKind.ReferenceAssemblySymbol);
             }
@@ -35,7 +33,8 @@ namespace Microsoft.CodeAnalysis.AddImport
             private async Task<IEnumerable<CodeActionOperation>> ComputeOperationsAsync(
                 bool isPreview,
                 CancellationToken cancellationToken
-            ) {
+            )
+            {
                 var newDocument = await GetUpdatedDocumentAsync(cancellationToken)
                     .ConfigureAwait(false);
                 var newProject = newDocument.Project;
@@ -72,7 +71,8 @@ namespace Microsoft.CodeAnalysis.AddImport
                     string assemblyReferenceAssemblyName,
                     string assemblyReferenceFullyQualifiedTypeName,
                     Project newProject
-                ) {
+                )
+                {
                     _assemblyReferenceAssemblyName = assemblyReferenceAssemblyName;
                     _assemblyReferenceFullyQualifiedTypeName =
                         assemblyReferenceFullyQualifiedTypeName;
@@ -94,7 +94,8 @@ namespace Microsoft.CodeAnalysis.AddImport
                     Workspace workspace,
                     IProgressTracker progressTracker,
                     CancellationToken cancellationToken
-                ) {
+                )
+                {
                     var operation = GetApplyChangesOperation(workspace);
                     if (operation is null)
                         return false;

@@ -133,7 +133,8 @@ namespace JIT.HardwareIntrinsics.Arm
                     || (alignment * 2) < sizeOfinArray1
                     || (alignment * 2) < sizeOfinArray2
                     || (alignment * 2) < sizeOfoutArray
-                ) {
+                )
+                {
                     throw new ArgumentException("Invalid value of alignment");
                 }
 
@@ -212,7 +213,8 @@ namespace JIT.HardwareIntrinsics.Arm
 
             public void RunStructFldScenario(
                 SimpleBinaryOpTest__AbsoluteDifferenceWideningLower_Vector64_SByte testClass
-            ) {
+            )
+            {
                 var result = AdvSimd.AbsoluteDifferenceWideningLower(_fld1, _fld2);
 
                 Unsafe.Write(testClass._dataTable.outArrayPtr, result);
@@ -221,7 +223,8 @@ namespace JIT.HardwareIntrinsics.Arm
 
             public void RunStructFldScenario_Load(
                 SimpleBinaryOpTest__AbsoluteDifferenceWideningLower_Vector64_SByte testClass
-            ) {
+            )
+            {
                 fixed (Vector64<SByte>* pFld1 = &_fld1)fixed (Vector64<SByte>* pFld2 = &_fld2)
                 {
                     var result = AdvSimd.AbsoluteDifferenceWideningLower(
@@ -404,7 +407,8 @@ namespace JIT.HardwareIntrinsics.Arm
 
             fixed (Vector64<SByte>* pClsVar1 = &_clsVar1)fixed (
                 Vector64<SByte>* pClsVar2 = &_clsVar2
-            ) {
+            )
+            {
                 var result = AdvSimd.AbsoluteDifferenceWideningLower(
                     AdvSimd.LoadVector64((SByte*)(pClsVar1)),
                     AdvSimd.LoadVector64((SByte*)(pClsVar2))
@@ -561,7 +565,8 @@ namespace JIT.HardwareIntrinsics.Arm
             Vector64<SByte> op2,
             void* result,
             [CallerMemberName] string method = ""
-        ) {
+        )
+        {
             SByte[] inArray1 = new SByte[Op1ElementCount];
             SByte[] inArray2 = new SByte[Op2ElementCount];
             UInt16[] outArray = new UInt16[RetElementCount];
@@ -582,7 +587,8 @@ namespace JIT.HardwareIntrinsics.Arm
             void* op2,
             void* result,
             [CallerMemberName] string method = ""
-        ) {
+        )
+        {
             SByte[] inArray1 = new SByte[Op1ElementCount];
             SByte[] inArray2 = new SByte[Op2ElementCount];
             UInt16[] outArray = new UInt16[RetElementCount];
@@ -611,7 +617,8 @@ namespace JIT.HardwareIntrinsics.Arm
             SByte[] right,
             UInt16[] result,
             [CallerMemberName] string method = ""
-        ) {
+        )
+        {
             bool succeeded = true;
 
             for (var i = 0; i < RetElementCount; i++)

@@ -206,7 +206,8 @@ namespace Microsoft.Test.ModuleCore
             object expected1,
             object expected2,
             string message
-        ) {
+        )
+        {
             if (InternalEquals(actual, expected1) || InternalEquals(actual, expected2))
                 return true;
 
@@ -301,7 +302,8 @@ namespace Microsoft.Test.ModuleCore
             string stack,
             string filename,
             int lineno
-        ) {
+        )
+        {
             //Log the error
             if (Internal != null)
             {

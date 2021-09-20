@@ -6377,7 +6377,8 @@ class Class
                 IOperation variableDeclaration,
                 Compilation compilation,
                 SyntaxNode syntaxNode
-            ) {
+            )
+            {
                 var finalSyntax = GetAndInvokeSyntaxSelector(syntaxNode);
                 var semanticModel = compilation.GetSemanticModel(finalSyntax.SyntaxTree);
                 var typeInfo = semanticModel.GetTypeInfo(finalSyntax);

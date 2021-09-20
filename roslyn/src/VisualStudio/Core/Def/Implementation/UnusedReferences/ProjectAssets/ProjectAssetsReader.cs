@@ -22,7 +22,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.UnusedReference
         public static ImmutableArray<ReferenceInfo> ReadReferences(
             ImmutableArray<ReferenceInfo> projectReferences,
             string projectAssetsFilePath
-        ) {
+        )
+        {
             if (!File.Exists(projectAssetsFilePath))
             {
                 return ImmutableArray<ReferenceInfo>.Empty;
@@ -81,7 +82,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.UnusedReference
             ProjectAssetsFile projectAssets,
             ReferenceInfo referenceInfo,
             ImmutableHashSet<string> autoReferences
-        ) {
+        )
+        {
             var referenceName =
                 referenceInfo.ReferenceType == ReferenceType.Project
                     ? Path.GetFileNameWithoutExtension(referenceInfo.ItemSpecification)
@@ -99,7 +101,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.UnusedReference
             ProjectAssetsFile projectAssets,
             string referenceName,
             bool treatAsUsed
-        ) {
+        )
+        {
             var dependencyNames = new HashSet<string>();
             var compilationAssemblies = ImmutableArray.CreateBuilder<string>();
             var referenceType = ReferenceType.Unknown;

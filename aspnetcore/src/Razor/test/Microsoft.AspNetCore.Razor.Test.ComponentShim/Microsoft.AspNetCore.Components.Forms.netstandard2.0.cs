@@ -41,12 +41,14 @@ namespace Microsoft.AspNetCore.Components.Forms
         }
         public System.Collections.Generic.IEnumerable<string> GetValidationMessages(
             Microsoft.AspNetCore.Components.Forms.FieldIdentifier fieldIdentifier
-        ) {
+        )
+        {
             throw null;
         }
         public System.Collections.Generic.IEnumerable<string> GetValidationMessages(
             System.Linq.Expressions.Expression<System.Func<object>> accessor
-        ) {
+        )
+        {
             throw null;
         }
         public bool IsModified()
@@ -55,7 +57,8 @@ namespace Microsoft.AspNetCore.Components.Forms
         }
         public bool IsModified(
             in Microsoft.AspNetCore.Components.Forms.FieldIdentifier fieldIdentifier
-        ) {
+        )
+        {
             throw null;
         }
         public bool IsModified(System.Linq.Expressions.Expression<System.Func<object>> accessor)
@@ -79,7 +82,8 @@ namespace Microsoft.AspNetCore.Components.Forms
     {
         public static Microsoft.AspNetCore.Components.Forms.EditContext AddDataAnnotationsValidation(
             this Microsoft.AspNetCore.Components.Forms.EditContext editContext
-        ) {
+        )
+        {
             throw null;
         }
     }
@@ -117,7 +121,8 @@ namespace Microsoft.AspNetCore.Components.Forms
         }
         public static Microsoft.AspNetCore.Components.Forms.FieldIdentifier Create<TField>(
             System.Linq.Expressions.Expression<System.Func<TField>> accessor
-        ) {
+        )
+        {
             throw null;
         }
         public bool Equals(Microsoft.AspNetCore.Components.Forms.FieldIdentifier otherIdentifier)

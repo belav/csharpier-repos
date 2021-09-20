@@ -25,7 +25,8 @@ namespace Microsoft.CodeAnalysis.InlineHints
             TextSpan span,
             bool leadingSpace = false,
             bool trailingSpace = false
-        ) {
+        )
+        {
             Type = type;
             Span = span;
             Prefix = CreateSpaceSymbolPartArray(leadingSpace);
@@ -41,7 +42,8 @@ namespace Microsoft.CodeAnalysis.InlineHints
             out TextSpan span,
             out ImmutableArray<SymbolDisplayPart> prefix,
             out ImmutableArray<SymbolDisplayPart> suffix
-        ) {
+        )
+        {
             type = Type;
             span = Span;
             prefix = Prefix;

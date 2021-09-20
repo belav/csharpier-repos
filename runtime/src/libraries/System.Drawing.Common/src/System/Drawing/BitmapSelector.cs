@@ -109,7 +109,8 @@ namespace System.Drawing
                     assembly,
                     typeof(BitmapSuffixInSatelliteAssemblyAttribute)
                 )
-            ) {
+            )
+            {
                 return true;
             }
 
@@ -129,7 +130,8 @@ namespace System.Drawing
                     assembly,
                     typeof(BitmapSuffixInSameAssemblyAttribute)
                 )
-            ) {
+            )
+            {
                 return true;
             }
 

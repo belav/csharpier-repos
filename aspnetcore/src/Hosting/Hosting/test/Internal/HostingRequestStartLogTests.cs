@@ -21,7 +21,8 @@ namespace Microsoft.AspNetCore.Hosting.Tests
         public void InvalidHttpContext_DoesNotThrowOnAccessingProperties(
             string input,
             string expected
-        ) {
+        )
+        {
             var mockRequest = new Mock<HttpRequest>();
             mockRequest.Setup(request => request.Protocol).Returns("GET");
             mockRequest.Setup(request => request.Method).Returns("1.1");

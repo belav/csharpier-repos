@@ -28,9 +28,7 @@ namespace System.Runtime
             HResult = HResults.COR_E_AMBIGUOUSIMPLEMENTATION;
         }
 
-        private AmbiguousImplementationException(
-            SerializationInfo info,
-            StreamingContext context
-        ) : base(info, context) { }
+        private AmbiguousImplementationException(SerializationInfo info, StreamingContext context)
+            : base(info, context) { }
     }
 }

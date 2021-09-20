@@ -20,7 +20,8 @@ namespace System.Reflection.Metadata
             BlobHandle alias = default(BlobHandle),
             AssemblyReferenceHandle assembly = default(AssemblyReferenceHandle),
             Handle typeOrNamespace = default(Handle)
-        ) {
+        )
+        {
             Debug.Assert(
                 typeOrNamespace.IsNil
                     || typeOrNamespace.Kind == HandleKind.Blob

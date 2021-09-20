@@ -208,7 +208,8 @@ namespace System.Web.Razor.Test.Parser
             public override void ParseSection(
                 Tuple<string, string> nestingSequences,
                 bool caseSensitive = true
-            ) {
+            )
+            {
                 using (Context.StartBlock(BlockType.Markup)) { }
             }
 
@@ -226,7 +227,8 @@ namespace System.Web.Razor.Test.Parser
                 SpanBuilder span,
                 Razor.Text.SourceLocation start,
                 string content
-            ) {
+            )
+            {
                 throw new NotImplementedException();
             }
         }

@@ -126,7 +126,8 @@ namespace System.Xml.Xsl
             string? sourceUri,
             int lineNumber,
             int linePosition
-        ) {
+        )
+        {
             try
             {
                 string message = FormatMessage(res, args);
@@ -187,18 +188,19 @@ namespace System.Xml.Xsl
             string sourceUri,
             int lineNumber,
             int linePosition
-        ) : base(
-            lineNumber != 0 ? SR.Xslt_CompileError : SR.Xslt_CompileError2,
-            new string[]
-            {
+        )
+            : base(
+                lineNumber != 0 ? SR.Xslt_CompileError : SR.Xslt_CompileError2,
+                new string[]
+                {
+                    sourceUri,
+                    lineNumber.ToString(CultureInfo.InvariantCulture),
+                    linePosition.ToString(CultureInfo.InvariantCulture)
+                },
                 sourceUri,
-                lineNumber.ToString(CultureInfo.InvariantCulture),
-                linePosition.ToString(CultureInfo.InvariantCulture)
-            },
-            sourceUri,
-            lineNumber,
-            linePosition,
-            inner
-        ) { }
+                lineNumber,
+                linePosition,
+                inner
+            ) { }
     }
 }

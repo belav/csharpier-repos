@@ -132,7 +132,8 @@ namespace ILCompiler
         public ReadyToRunCodegenCompilationBuilder FileLayoutAlgorithms(
             ReadyToRunMethodLayoutAlgorithm r2rMethodLayoutAlgorithm,
             ReadyToRunFileLayoutAlgorithm r2rFileLayoutAlgorithm
-        ) {
+        )
+        {
             _r2rMethodLayoutAlgorithm = r2rMethodLayoutAlgorithm;
             _r2rFileLayoutAlgorithm = r2rFileLayoutAlgorithm;
             return this;
@@ -161,7 +162,8 @@ namespace ILCompiler
             bool generatePerfMapFile,
             string perfMapPath,
             Guid? inputModuleMvid
-        ) {
+        )
+        {
             _generatePerfMapFile = generatePerfMapFile;
             _perfMapPath = perfMapPath;
             _perfMapMvid = inputModuleMvid;
@@ -182,14 +184,16 @@ namespace ILCompiler
 
         public ReadyToRunCodegenCompilationBuilder UsePrintReproInstructions(
             Func<MethodDesc, string> printReproInstructions
-        ) {
+        )
+        {
             _printReproInstructions = printReproInstructions;
             return this;
         }
 
         public ReadyToRunCodegenCompilationBuilder UseInstructionSetSupport(
             InstructionSetSupport instructionSetSupport
-        ) {
+        )
+        {
             _instructionSetSupport = instructionSetSupport;
             return this;
         }
@@ -202,14 +206,16 @@ namespace ILCompiler
 
         public ReadyToRunCodegenCompilationBuilder UseCustomPESectionAlignment(
             int customPESectionAlignment
-        ) {
+        )
+        {
             _customPESectionAlignment = customPESectionAlignment;
             return this;
         }
 
         public ReadyToRunCodegenCompilationBuilder UseVerifyTypeAndFieldLayout(
             bool verifyTypeAndFieldLayout
-        ) {
+        )
+        {
             _verifyTypeAndFieldLayout = verifyTypeAndFieldLayout;
             return this;
         }

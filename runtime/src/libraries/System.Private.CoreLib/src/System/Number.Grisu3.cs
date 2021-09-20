@@ -325,7 +325,8 @@ namespace System
                 double value,
                 int requestedDigits,
                 ref NumberBuffer number
-            ) {
+            )
+            {
                 double v = double.IsNegative(value) ? -value : value;
 
                 Debug.Assert(v > 0);
@@ -432,7 +433,8 @@ namespace System
                 float value,
                 int requestedDigits,
                 ref NumberBuffer number
-            ) {
+            )
+            {
                 float v = float.IsNegative(value) ? -value : value;
 
                 Debug.Assert(v > 0);
@@ -492,7 +494,8 @@ namespace System
                 Span<byte> buffer,
                 out int length,
                 out int decimalExponent
-            ) {
+            )
+            {
                 Debug.Assert(requestedDigits > 0);
 
                 int tenMkMinimalBinaryExponent =
@@ -558,7 +561,8 @@ namespace System
                 Span<byte> buffer,
                 out int length,
                 out int decimalExponent
-            ) {
+            )
+            {
                 // boundaryMinus and boundaryPlus are the boundaries between v and its closest floating-point neighbors.
                 // Any number strictly between boundaryMinus and boundaryPlus will round to v when converted to a double.
                 // Grisu3 will never output representations that lie exactly on a boundary.
@@ -631,7 +635,8 @@ namespace System
                 uint number,
                 int numberBits,
                 out int exponentPlusOne
-            ) {
+            )
+            {
                 // Inspired by the method for finding an integer log base 10 from here:
                 // http://graphics.stanford.edu/~seander/bithacks.html#IntegerLog10
 
@@ -682,7 +687,8 @@ namespace System
                 Span<byte> buffer,
                 out int length,
                 out int kappa
-            ) {
+            )
+            {
                 Debug.Assert(MinimalTargetExponent <= w.e);
                 Debug.Assert(w.e <= MaximalTargetExponent);
                 Debug.Assert(MinimalTargetExponent >= -60);
@@ -716,7 +722,8 @@ namespace System
                         (requestedDigits >= 11)
                         || (integrals < s_SmallPowersOfTen[requestedDigits - 1])
                     )
-                ) {
+                )
+                {
                     Debug.Assert(buffer[0] == '\0');
                     length = 0;
                     kappa = 0;
@@ -866,7 +873,8 @@ namespace System
                 Span<byte> buffer,
                 out int length,
                 out int kappa
-            ) {
+            )
+            {
                 Debug.Assert(low.e == w.e);
                 Debug.Assert(w.e == high.e);
 
@@ -1009,7 +1017,8 @@ namespace System
                 int minExponent,
                 int maxExponent,
                 out int decimalExponent
-            ) {
+            )
+            {
                 Debug.Assert(
                     s_CachedPowersSignificand.Length == s_CachedPowersBinaryExponent.Length
                 );
@@ -1052,7 +1061,8 @@ namespace System
                 ulong tenKappa,
                 ulong unit,
                 ref int kappa
-            ) {
+            )
+            {
                 Debug.Assert(rest < tenKappa);
 
                 // The following tests are done in a specific order to avoid overflows.
@@ -1079,7 +1089,8 @@ namespace System
                 if (
                     (rest > unit)
                     && (tenKappa <= (rest - unit) || ((tenKappa - (rest - unit)) <= (rest - unit)))
-                ) {
+                )
+                {
                     // Increment the last digit recursively until we find a non '9' digit.
                     buffer[length - 1]++;
 
@@ -1134,7 +1145,8 @@ namespace System
                 ulong rest,
                 ulong tenKappa,
                 ulong unit
-            ) {
+            )
+            {
                 ulong smallDistance = distanceTooHighW - unit;
                 ulong bigDistance = distanceTooHighW + unit;
 
@@ -1217,7 +1229,8 @@ namespace System
                         ((rest + tenKappa) < smallDistance)
                         || ((smallDistance - rest) >= (rest + tenKappa - smallDistance))
                     )
-                ) {
+                )
+                {
                     buffer[length - 1]--;
                     rest += tenKappa;
                 }
@@ -1232,7 +1245,8 @@ namespace System
                         ((rest + tenKappa) < bigDistance)
                         || ((bigDistance - rest) > (rest + tenKappa - bigDistance))
                     )
-                ) {
+                )
+                {
                     return false;
                 }
 

@@ -22,7 +22,8 @@ namespace Microsoft.CodeAnalysis.Features.EmbeddedLanguages.DateAndTime
                 string fullDescription,
                 CompletionChange change,
                 bool isDefault
-            ) {
+            )
+            {
                 DisplayText = displayText;
                 InlineDescription = inlineDescription;
                 FullDescription = fullDescription;

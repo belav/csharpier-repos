@@ -54,7 +54,8 @@ namespace Newtonsoft.Json.Tests.Converters
                 JsonWriter writer,
                 string value,
                 JsonSerializer serializer
-            ) {
+            )
+            {
                 writer.WriteValue(value);
             }
 
@@ -64,7 +65,8 @@ namespace Newtonsoft.Json.Tests.Converters
                 string existingValue,
                 bool hasExistingValue,
                 JsonSerializer serializer
-            ) {
+            )
+            {
                 return (string)reader.Value + existingValue;
             }
         }

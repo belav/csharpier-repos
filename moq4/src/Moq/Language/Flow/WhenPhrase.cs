@@ -31,7 +31,8 @@ namespace Moq.Language.Flow
 
         public ISetupGetter<T, TProperty> SetupGet<TProperty>(
             Expression<Func<T, TProperty>> expression
-        ) {
+        )
+        {
             var setup = Mock.SetupGet(mock, expression, this.condition);
             return new NonVoidSetupPhrase<T, TProperty>(setup);
         }

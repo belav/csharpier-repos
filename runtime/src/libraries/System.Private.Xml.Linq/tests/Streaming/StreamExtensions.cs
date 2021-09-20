@@ -257,7 +257,8 @@ namespace System.Xml.Linq
             TextReader textReader,
             XName rootName,
             params XName[] streamNames
-        ) {
+        )
+        {
             return LoadStream(
                 XmlReader.Create(textReader, GetXmlReaderSettings()),
                 rootName,
@@ -269,7 +270,8 @@ namespace System.Xml.Linq
             XmlReader reader,
             XName rootName,
             params XName[] streamNames
-        ) {
+        )
+        {
             if (reader == null)
                 throw new ArgumentNullException(nameof(reader));
             if (rootName == null)

@@ -684,7 +684,8 @@ namespace System.Xml.Schema
                         || include.Compositor == Compositor.Redefine
                     )
                     && externalSchema == null
-                ) {
+                )
+                {
                     SendValidationEvent(SR.Sch_MissRequiredAttribute, "schemaLocation", include);
                 }
 
@@ -945,7 +946,8 @@ namespace System.Xml.Schema
 
             foreach (
                 XmlSchemaAttributeGroup? attributeGroup in includedSchema.AttributeGroups.Values
-            ) {
+            )
+            {
                 AddToTable(schema.AttributeGroups, attributeGroup!.QualifiedName, attributeGroup);
             }
 
@@ -1010,7 +1012,8 @@ namespace System.Xml.Schema
                                 parentSchema != originalSchema
                                 && !includesOfRedefine.Contains(parentSchema)
                             )
-                        ) {
+                        )
+                        {
                             SendValidationEvent(
                                 SR.Sch_ComponentRedefineNotFound,
                                 "<group>",
@@ -1053,7 +1056,8 @@ namespace System.Xml.Schema
                                 parentSchema != originalSchema
                                 && !includesOfRedefine.Contains(parentSchema)
                             )
-                        ) {
+                        )
+                        {
                             SendValidationEvent(
                                 SR.Sch_ComponentRedefineNotFound,
                                 "<attributeGroup>",
@@ -1094,7 +1098,8 @@ namespace System.Xml.Schema
                                 parentSchema != originalSchema
                                 && !includesOfRedefine.Contains(parentSchema)
                             )
-                        ) {
+                        )
+                        {
                             SendValidationEvent(
                                 SR.Sch_ComponentRedefineNotFound,
                                 "<complexType>",
@@ -1139,7 +1144,8 @@ namespace System.Xml.Schema
                                 parentSchema != originalSchema
                                 && !includesOfRedefine.Contains(parentSchema)
                             )
-                        ) {
+                        )
+                        {
                             SendValidationEvent(
                                 SR.Sch_ComponentRedefineNotFound,
                                 "<simpleType>",
@@ -1175,7 +1181,8 @@ namespace System.Xml.Schema
                 if (
                     external.Compositor == Compositor.Include
                     || external.Compositor == Compositor.Redefine
-                ) {
+                )
+                {
                     if (external.Schema != null)
                     {
                         GetIncludedSet(external.Schema, includesList);
@@ -1247,7 +1254,8 @@ namespace System.Xml.Schema
             XmlSchemaObjectCollection items,
             XmlQualifiedName name,
             XmlSchemaGroup? redefined
-        ) {
+        )
+        {
             int count = 0;
             for (int i = 0; i < items.Count; ++i)
             {
@@ -1434,7 +1442,8 @@ namespace System.Xml.Schema
                     || attribute.Form != XmlSchemaForm.None /*||
                     attribute.DefaultValue != null ||
                     attribute.FixedValue != null*/
-                ) {
+                )
+                {
                     SendValidationEvent(SR.Sch_InvalidAttributeRef, attribute);
                 }
                 attribute.SetQualifiedName(attribute.RefName);
@@ -1463,7 +1472,8 @@ namespace System.Xml.Schema
                 attribute.DefaultValue != null
                 && attribute.Use != XmlSchemaUse.Optional
                 && attribute.Use != XmlSchemaUse.None
-            ) {
+            )
+            {
                 SendValidationEvent(SR.Sch_OptionalDefaultAttribute, attribute);
             }
             if (attribute.Name == _xmlns)
@@ -1604,7 +1614,8 @@ namespace System.Xml.Schema
                     || element.Form != XmlSchemaForm.None
                     || element.FixedValue != null
                     || element.HasNillableAttribute
-                ) {
+                )
+                {
                     SendValidationEvent(SR.Sch_InvalidElementRef, element);
                 }
                 if (element.DefaultValue != null && element.FixedValue != null)
@@ -2351,7 +2362,8 @@ namespace System.Xml.Schema
             XmlSchemaObjectCollection attributes,
             XmlSchemaAnyAttribute? anyAttribute,
             XmlSchemaObject parent
-        ) {
+        )
+        {
             for (int i = 0; i < attributes.Count; ++i)
             {
                 SetParent(attributes[i], parent);
@@ -2466,7 +2478,8 @@ namespace System.Xml.Schema
             XmlSchemaObject xso,
             string attributeName,
             XmlQualifiedName value
-        ) {
+        )
+        {
             try
             {
                 value.Verify();

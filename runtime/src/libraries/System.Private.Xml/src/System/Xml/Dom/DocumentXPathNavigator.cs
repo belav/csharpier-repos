@@ -326,7 +326,8 @@ namespace System.Xml
             if (
                 !CheckAttributePosition(attribute, out attributes, _attributeIndex)
                 && !ResetAttributePosition(attribute, attributes, out _attributeIndex)
-            ) {
+            )
+            {
                 return false;
             }
             for (int i = _attributeIndex + 1; i < attributes.Count; i++)
@@ -502,7 +503,8 @@ namespace System.Xml
         private static bool MoveToFirstNamespaceLocal(
             XmlAttributeCollection attributes,
             ref int index
-        ) {
+        )
+        {
             Debug.Assert(attributes != null);
             for (int i = attributes.Count - 1; i >= 0; i--)
             {
@@ -519,7 +521,8 @@ namespace System.Xml
         private static bool MoveToFirstNamespaceGlobal(
             ref XmlAttributeCollection attributes,
             ref int index
-        ) {
+        )
+        {
             if (MoveToFirstNamespaceLocal(attributes, ref index))
             {
                 return true;
@@ -553,7 +556,8 @@ namespace System.Xml
             if (
                 !CheckAttributePosition(attribute, out attributes, index)
                 && !ResetAttributePosition(attribute, attributes, out index)
-            ) {
+            )
+            {
                 return false;
             }
             Debug.Assert(_namespaceParent != null);
@@ -628,7 +632,8 @@ namespace System.Xml
         private static bool MoveToNextNamespaceLocal(
             XmlAttributeCollection attributes,
             ref int index
-        ) {
+        )
+        {
             Debug.Assert(attributes != null);
             Debug.Assert(0 <= index && index < attributes.Count);
             for (int i = index - 1; i >= 0; i--)
@@ -646,7 +651,8 @@ namespace System.Xml
         private static bool MoveToNextNamespaceGlobal(
             ref XmlAttributeCollection attributes,
             ref int index
-        ) {
+        )
+        {
             if (MoveToNextNamespaceLocal(attributes, ref index))
             {
                 return true;
@@ -909,7 +915,8 @@ namespace System.Xml
                         child.NodeType == XmlNodeType.Element
                         && child.LocalName == localName
                         && child.NamespaceURI == namespaceUri
-                    ) {
+                    )
+                    {
                         _source = child;
                         return true;
                     }
@@ -951,7 +958,8 @@ namespace System.Xml
             string localName,
             string namespaceUri,
             XPathNavigator? end
-        ) {
+        )
+        {
             XmlNode? pastFollowing = null;
             if (end is DocumentXPathNavigator that)
             {
@@ -1124,7 +1132,8 @@ namespace System.Xml
                     sibling.NodeType == XmlNodeType.Element
                     && sibling.LocalName == localName
                     && sibling.NamespaceURI == namespaceUri
-                ) {
+                )
+                {
                     _source = sibling;
                     return true;
                 }
@@ -1231,7 +1240,8 @@ namespace System.Xml
         public override bool CheckValidity(
             XmlSchemaSet schemas,
             ValidationEventHandler validationEventHandler
-        ) {
+        )
+        {
             XmlDocument? ownerDocument;
 
             if (_source.NodeType == XmlNodeType.Document)
@@ -1445,7 +1455,8 @@ namespace System.Xml
             string localName,
             string namespaceURI,
             bool matchSelf
-        ) {
+        )
+        {
             string? nsAtom = _document.NameTable.Get(namespaceURI);
             if (nsAtom == null || _source.NodeType == XmlNodeType.Attribute)
                 return new DocumentXPathNodeIterator_Empty(this);
@@ -1804,7 +1815,8 @@ namespace System.Xml
             if (
                 !CheckAttributePosition(attribute, out attributes, index)
                 && !ResetAttributePosition(attribute, attributes, out index)
-            ) {
+            )
+            {
                 throw new InvalidOperationException(SR.Xpn_MissingParent);
             }
             if (attribute.IsReadOnly)
@@ -1897,7 +1909,8 @@ namespace System.Xml
             XmlAttribute attribute,
             [NotNullWhen(true)] XmlAttributeCollection? attributes,
             out int index
-        ) {
+        )
+        {
             if (attributes != null)
             {
                 for (int i = 0; i < attributes.Count; i++)
@@ -1917,7 +1930,8 @@ namespace System.Xml
             XmlAttribute attribute,
             [NotNullWhen(true)] out XmlAttributeCollection? attributes,
             int index
-        ) {
+        )
+        {
             XmlElement? element = attribute.OwnerElement;
             if (element != null)
             {
@@ -2250,7 +2264,8 @@ namespace System.Xml
         }
         internal DocumentXPathNodeIterator_ElemDescendants(
             DocumentXPathNodeIterator_ElemDescendants other
-        ) {
+        )
+        {
             _nav = (DocumentXPathNavigator)(other._nav.Clone());
             _level = other._level;
             _position = other._position;
@@ -2337,9 +2352,8 @@ namespace System.Xml
     internal sealed class DocumentXPathNodeIterator_AllElemChildren_AndSelf
         : DocumentXPathNodeIterator_AllElemChildren
     {
-        internal DocumentXPathNodeIterator_AllElemChildren_AndSelf(
-            DocumentXPathNavigator nav
-        ) : base(nav) { }
+        internal DocumentXPathNodeIterator_AllElemChildren_AndSelf(DocumentXPathNavigator nav)
+            : base(nav) { }
         internal DocumentXPathNodeIterator_AllElemChildren_AndSelf(
             DocumentXPathNodeIterator_AllElemChildren_AndSelf other
         ) : base(other) { }

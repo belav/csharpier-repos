@@ -35,7 +35,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Structure
             ref TemporaryArray<BlockSpan> spans,
             BlockStructureOptionProvider optionProvider,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var match = regionDirective.GetMatchingDirective(cancellationToken);
             if (match != null)
             {

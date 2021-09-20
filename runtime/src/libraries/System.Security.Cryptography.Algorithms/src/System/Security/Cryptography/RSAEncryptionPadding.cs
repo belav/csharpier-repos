@@ -75,7 +75,8 @@ namespace System.Security.Cryptography
         private RSAEncryptionPadding(
             RSAEncryptionPaddingMode mode,
             HashAlgorithmName oaepHashAlgorithm
-        ) {
+        )
+        {
             _mode = mode;
             _oaepHashAlgorithm = oaepHashAlgorithm;
         }

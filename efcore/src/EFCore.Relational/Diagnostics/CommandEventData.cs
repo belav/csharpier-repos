@@ -39,17 +39,19 @@ namespace Microsoft.EntityFrameworkCore.Diagnostics
             bool async,
             bool logParameterValues,
             DateTimeOffset startTime
-        ) : base(
-            eventDefinition,
-            messageGenerator,
-            connection,
-            context,
-            executeMethod,
-            commandId,
-            connectionId,
-            async,
-            startTime
-        ) {
+        )
+            : base(
+                eventDefinition,
+                messageGenerator,
+                connection,
+                context,
+                executeMethod,
+                commandId,
+                connectionId,
+                async,
+                startTime
+            )
+        {
             Command = command;
             LogParameterValues = logParameterValues;
         }

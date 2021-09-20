@@ -35,7 +35,8 @@ namespace Microsoft.CodeAnalysis.PatternMatching
                 ArrayBuilder<TextSpan> candidateHumps,
                 TextChunk patternChunk,
                 TextInfo textInfo
-            ) {
+            )
+            {
                 _includeMatchedSpans = includeMatchedSpans;
                 _candidate = candidate;
                 _candidateHumps = candidateHumps;
@@ -85,7 +86,8 @@ namespace Microsoft.CodeAnalysis.PatternMatching
                 int patternIndex,
                 int candidateHumpIndex,
                 bool? contiguous
-            ) {
+            )
+            {
                 if (patternIndex == _patternText.Length)
                 {
                     // We hit the end.  So we were able to match against this candidate.
@@ -109,7 +111,8 @@ namespace Microsoft.CodeAnalysis.PatternMatching
                     int humpIndex = candidateHumpIndex, n = _candidateHumps.Count;
                     humpIndex < n;
                     humpIndex++
-                ) {
+                )
+                {
                     // If we've been contiguous, but we jumped past a hump, then we're no longer contiguous.
                     if (contiguous.HasValue && contiguous.Value)
                     {
@@ -152,7 +155,8 @@ namespace Microsoft.CodeAnalysis.PatternMatching
                                 ref bestResult,
                                 matchSpanToAdd: null
                             )
-                        ) {
+                        )
+                        {
                             // We found the best result so far.  We can stop immediately.
                             break;
                         }
@@ -176,7 +180,8 @@ namespace Microsoft.CodeAnalysis.PatternMatching
                 int patternIndex,
                 int humpIndex,
                 bool contiguous
-            ) {
+            )
+            {
                 var bestResult = (CamelCaseResult?)null;
 
                 var candidateHump = _candidateHumps[humpIndex];
@@ -189,7 +194,8 @@ namespace Microsoft.CodeAnalysis.PatternMatching
                     var possibleHumpMatchLength = 1;
                     possibleHumpMatchLength <= maxHumpMatchLength;
                     possibleHumpMatchLength++
-                ) {
+                )
+                {
                     if (
                         !LowercaseSubstringsMatch(
                             _candidate,
@@ -198,7 +204,8 @@ namespace Microsoft.CodeAnalysis.PatternMatching
                             patternIndex,
                             possibleHumpMatchLength
                         )
-                    ) {
+                    )
+                    {
                         // Stop trying to consume once the pattern contents no longer matches
                         // against the current candidate hump.
                         break;
@@ -251,7 +258,8 @@ namespace Microsoft.CodeAnalysis.PatternMatching
                 CamelCaseResult result,
                 ref CamelCaseResult? bestResult,
                 TextSpan? matchSpanToAdd
-            ) {
+            )
+            {
                 if (matchSpanToAdd != null)
                 {
                     result = result.WithAddedMatchedSpan(matchSpanToAdd.Value);
@@ -296,7 +304,8 @@ namespace Microsoft.CodeAnalysis.PatternMatching
                 string s2,
                 int start2,
                 int length
-            ) {
+            )
+            {
                 var textInfo = _textInfo;
                 for (var i = 0; i < length; i++)
                 {

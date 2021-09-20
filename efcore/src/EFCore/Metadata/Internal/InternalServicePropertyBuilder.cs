@@ -73,7 +73,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
         public virtual InternalServicePropertyBuilder? HasParameterBinding(
             ServiceParameterBinding? parameterBinding,
             ConfigurationSource configurationSource
-        ) {
+        )
+        {
             if (CanSetParameterBinding(parameterBinding, configurationSource))
             {
                 Metadata.SetParameterBinding(parameterBinding, configurationSource);
@@ -104,7 +105,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
         /// </summary>
         public virtual InternalServicePropertyBuilder? Attach(
             InternalEntityTypeBuilder entityTypeBuilder
-        ) {
+        )
+        {
             var newPropertyBuilder = entityTypeBuilder.ServiceProperty(
                 Metadata.GetIdentifyingMemberInfo()!,
                 Metadata.GetConfigurationSource()
@@ -133,7 +135,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
                     Metadata.FieldInfo,
                     oldFieldInfoConfigurationSource
                 )
-            ) {
+            )
+            {
                 newPropertyBuilder.HasField(
                     Metadata.FieldInfo,
                     oldFieldInfoConfigurationSource.Value

@@ -105,7 +105,8 @@ namespace System.Net.Http.Functional.Tests
         [InlineData(false)]
         public async Task ReadAsStreamAsync_Call_MemoryStreamWrappingByteArrayReturned(
             bool readStreamAsync
-        ) {
+        )
+        {
             var contentData = new byte[10];
             var content = new MockByteArrayContent(contentData, 5, 3);
 

@@ -101,7 +101,8 @@ namespace System.CommandLine.Tests.Utility
             MethodInfo methodInfo,
             string[] args,
             ProcessStartInfo psi
-        ) {
+        )
+        {
             Type declaringType = methodInfo.DeclaringType;
             string className = declaringType.FullName;
             string methodName = methodInfo.Name;

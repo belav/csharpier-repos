@@ -21,7 +21,8 @@ namespace Microsoft.Web.Mvc.ModelBinding
         public object BindModel(
             ControllerContext controllerContext,
             ModelBindingContext bindingContext
-        ) {
+        )
+        {
             CheckPropertyFilter(bindingContext);
             ExtensibleModelBindingContext newBindingContext = CreateNewBindingContext(
                 bindingContext,
@@ -37,7 +38,8 @@ namespace Microsoft.Web.Mvc.ModelBinding
                 && !String.IsNullOrEmpty(bindingContext.ModelName)
                 && bindingContext.FallbackToEmptyPrefix
                 && bindingContext.ModelMetadata.IsComplexType
-            ) {
+            )
+            {
                 // fallback to empty prefix?
                 newBindingContext = CreateNewBindingContext(
                     bindingContext,
@@ -69,7 +71,8 @@ namespace Microsoft.Web.Mvc.ModelBinding
                 bindingContext.ModelType.GetProperties()
                     .Select(p => p.Name)
                     .Any(name => !bindingContext.PropertyFilter(name))
-            ) {
+            )
+            {
                 throw new InvalidOperationException(
                     MvcResources.ExtensibleModelBinderAdapter_PropertyFilterMustNotBeSet
                 );
@@ -79,7 +82,8 @@ namespace Microsoft.Web.Mvc.ModelBinding
         private ExtensibleModelBindingContext CreateNewBindingContext(
             ModelBindingContext oldBindingContext,
             string modelName
-        ) {
+        )
+        {
             ExtensibleModelBindingContext newBindingContext = new ExtensibleModelBindingContext
             {
                 ModelBinderProviders = Providers,

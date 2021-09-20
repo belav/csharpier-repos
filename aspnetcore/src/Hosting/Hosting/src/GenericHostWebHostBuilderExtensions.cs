@@ -18,7 +18,8 @@ namespace Microsoft.Extensions.Hosting
         public static IHostBuilder ConfigureWebHost(
             this IHostBuilder builder,
             Action<IWebHostBuilder> configure
-        ) {
+        )
+        {
             if (configure is null)
             {
                 throw new ArgumentNullException(nameof(configure));
@@ -34,7 +35,8 @@ namespace Microsoft.Extensions.Hosting
             this IHostBuilder builder,
             Action<IWebHostBuilder> configure,
             Action<WebHostBuilderOptions> configureWebHostBuilder
-        ) {
+        )
+        {
             if (configure is null)
             {
                 throw new ArgumentNullException(nameof(configure));

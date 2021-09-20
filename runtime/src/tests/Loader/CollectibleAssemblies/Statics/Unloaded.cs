@@ -52,7 +52,8 @@ public class StaticTest : IStaticTest
         int valD,
         out int valTargetE,
         int valE
-    ) {
+    )
+    {
         valTargetA = valA;
         valTargetB = valB;
         valTargetC = valC;
@@ -98,7 +99,8 @@ public class StaticTest : IStaticTest
         object valD,
         out object valTargetE,
         object valE
-    ) {
+    )
+    {
         valTargetA = valA;
         valTargetB = valB;
         valTargetC = valC;
@@ -129,7 +131,8 @@ public class StaticTest : IStaticTest
         out object val3,
         out object val4,
         out object val5
-    ) {
+    )
+    {
         val1 = StaticTest4.ThreadStaticValue;
         val2 = StaticTest4.StaticValue;
         val3 = StaticTest5.StaticValue;

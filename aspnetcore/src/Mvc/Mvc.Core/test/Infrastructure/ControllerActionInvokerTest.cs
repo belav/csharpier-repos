@@ -1580,7 +1580,8 @@ namespace Microsoft.AspNetCore.Mvc.Infrastructure
         public async Task InvokeAction_WithNullActionResultThrows(
             string methodName,
             Type resultType
-        ) {
+        )
+        {
             // Arrange
             IActionResult result = null;
 
@@ -1892,7 +1893,8 @@ namespace Microsoft.AspNetCore.Mvc.Infrastructure
             Exception exception = null,
             IActionResult result = null,
             IList<IValueProviderFactory> valueProviderFactories = null
-        ) {
+        )
+        {
             var actionDescriptor = new ControllerActionDescriptor()
             {
                 ControllerTypeInfo = typeof(TestController).GetTypeInfo(),
@@ -1941,7 +1943,8 @@ namespace Microsoft.AspNetCore.Mvc.Infrastructure
             IFilterMetadata[] filters,
             string methodName,
             IDictionary<string, object> arguments
-        ) {
+        )
+        {
             var actionDescriptor = new ControllerActionDescriptor()
             {
                 ControllerTypeInfo = typeof(TestController).GetTypeInfo(),
@@ -1979,7 +1982,8 @@ namespace Microsoft.AspNetCore.Mvc.Infrastructure
             RouteData routeData = null,
             ILogger logger = null,
             object diagnosticListener = null
-        ) {
+        )
+        {
             Assert.NotNull(actionDescriptor.MethodInfo);
 
             if (arguments == null)
@@ -2125,7 +2129,8 @@ namespace Microsoft.AspNetCore.Mvc.Infrastructure
 
             public async Task<object> AsyncActionMethodReturningActionResultWithTaskOfObjectAsReturnType(
                 int value = 5
-            ) {
+            )
+            {
                 return await Task.FromResult(new TestActionResult { Value = value });
             }
 
@@ -2226,7 +2231,8 @@ namespace Microsoft.AspNetCore.Mvc.Infrastructure
 
             public string EchoWithDefaultValueAndAttribute(
                 [DefaultValue("hello")] string input = "world"
-            ) {
+            )
+            {
                 return input;
             }
 
@@ -2271,7 +2277,8 @@ namespace Microsoft.AspNetCore.Mvc.Infrastructure
 
         private static ObjectMethodExecutor CreateExecutor(
             ControllerActionDescriptor actionDescriptor
-        ) {
+        )
+        {
             return ObjectMethodExecutor.Create(
                 actionDescriptor.MethodInfo,
                 actionDescriptor.ControllerTypeInfo,

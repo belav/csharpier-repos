@@ -33,7 +33,8 @@ namespace Microsoft.CodeAnalysis.ExternalAccess.Razor
             Document document,
             IEnumerable<TextSpan> spans,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var razorSpans = await _razorSpanMappingService.MapSpansAsync(
                     document,
                     spans,

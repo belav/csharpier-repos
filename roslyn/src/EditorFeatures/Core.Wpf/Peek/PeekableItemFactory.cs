@@ -36,7 +36,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.Peek
             Project project,
             IPeekResultFactory peekResultFactory,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             if (symbol == null)
             {
                 throw new ArgumentNullException(nameof(symbol));
@@ -89,7 +90,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.Peek
                     out var lineNumber,
                     out var charOffset
                 )
-            ) {
+            )
+            {
                 var position = new LinePosition(lineNumber, charOffset);
                 results.Add(
                     new ExternalFilePeekableItem(
@@ -109,7 +111,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.Peek
                     if (
                         firstLocation.IsInSource
                         || _metadataAsSourceFileService.IsNavigableMetadataSymbol(symbol)
-                    ) {
+                    )
+                    {
                         results.Add(
                             new DefinitionPeekableItem(
                                 solution.Workspace,

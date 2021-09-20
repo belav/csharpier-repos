@@ -27,7 +27,8 @@ namespace ILCompiler.Win32Resources
                 ref ObjectDataBuilder builder,
                 ushort namedEntries,
                 ushort idEntries
-            ) {
+            )
+            {
                 builder.EmitUInt(0); // Characteristics
                 builder.EmitUInt(0); // TimeDateStamp
                 builder.EmitUShort(4); // MajorVersion
@@ -56,7 +57,8 @@ namespace ILCompiler.Win32Resources
                 ref ObjectDataBuilder dataBuilder,
                 string name,
                 IDictionary<string, List<ObjectDataBuilder.Reservation>> nameTable
-            ) {
+            )
+            {
                 List<ObjectDataBuilder.Reservation> relatedNameReferences;
                 if (!nameTable.TryGetValue(name, out relatedNameReferences))
                 {
@@ -70,7 +72,8 @@ namespace ILCompiler.Win32Resources
             public static ObjectDataBuilder.Reservation Write(
                 ref ObjectDataBuilder dataBuilder,
                 ushort id
-            ) {
+            )
+            {
                 dataBuilder.EmitInt(id);
                 return dataBuilder.ReserveInt();
             }
@@ -95,7 +98,8 @@ namespace ILCompiler.Win32Resources
                 ISymbolNode node,
                 int offsetFromSymbol,
                 int sizeOfData
-            ) {
+            )
+            {
                 dataBuilder.EmitReloc(node, RelocType.IMAGE_REL_BASED_ADDR32NB, offsetFromSymbol);
                 dataBuilder.EmitInt(sizeOfData);
                 dataBuilder.EmitInt(1252); // CODEPAGE = DEFAULT_CODEPAGE

@@ -328,7 +328,8 @@ namespace System.Collections.Immutable
         public ImmutableList<T> RemoveRange(
             IEnumerable<T> items,
             IEqualityComparer<T>? equalityComparer
-        ) {
+        )
+        {
             Requires.NotNull(items, nameof(items));
 
             // Some optimizations may apply if we're an empty list.
@@ -399,7 +400,8 @@ namespace System.Collections.Immutable
             T oldValue,
             T newValue,
             IEqualityComparer<T>? equalityComparer
-        ) {
+        )
+        {
             int index = this.IndexOf(oldValue, equalityComparer);
             if (index < 0)
             {
@@ -1142,7 +1144,8 @@ namespace System.Collections.Immutable
         private static bool TryCastToImmutableList(
             IEnumerable<T> sequence,
             [NotNullWhen(true)] out ImmutableList<T>? other
-        ) {
+        )
+        {
             other = sequence as ImmutableList<T>;
             if (other != null)
             {

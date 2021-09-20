@@ -83,7 +83,8 @@ namespace Microsoft.CodeAnalysis.CSharp
         internal override BoundStatement BindUsingStatementParts(
             BindingDiagnosticBag diagnostics,
             Binder originalBinder
-        ) {
+        )
+        {
             ExpressionSyntax expressionSyntax = TargetExpressionSyntax;
             VariableDeclarationSyntax declarationSyntax = _syntax.Declaration;
             bool hasAwait = _syntax.AwaitKeyword.Kind() != default;
@@ -110,7 +111,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             Binder originalBinder,
             UsingStatementBinder? usingBinderOpt,
             BindingDiagnosticBag diagnostics
-        ) {
+        )
+        {
             bool isUsingDeclaration = syntax.Kind() == SyntaxKind.LocalDeclarationStatement;
             bool isExpression =
                 !isUsingDeclaration && syntax.Kind() != SyntaxKind.VariableDeclaration;
@@ -262,7 +264,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                 out Conversion iDisposableConversion,
                 out MethodArgumentInfo? patternDisposeInfo,
                 out TypeSymbol? awaitableType
-            ) {
+            )
+            {
                 CompoundUseSiteInfo<AssemblySymbol> useSiteInfo =
                     originalBinder.GetNewCompoundUseSiteInfo(diagnostics);
                 iDisposableConversion = classifyConversion(
@@ -394,7 +397,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                 bool fromExpression,
                 TypeSymbol targetInterface,
                 ref CompoundUseSiteInfo<AssemblySymbol> useSiteInfo
-            ) {
+            )
+            {
                 return fromExpression
                   ? originalBinder.Conversions.ClassifyImplicitConversionFromExpression(
                         expressionOpt,
@@ -420,7 +424,8 @@ namespace Microsoft.CodeAnalysis.CSharp
 
         internal override ImmutableArray<LocalSymbol> GetDeclaredLocalsForScope(
             SyntaxNode scopeDesignator
-        ) {
+        )
+        {
             if (_syntax == scopeDesignator)
             {
                 return this.Locals;
@@ -431,7 +436,8 @@ namespace Microsoft.CodeAnalysis.CSharp
 
         internal override ImmutableArray<LocalFunctionSymbol> GetDeclaredLocalFunctionsForScope(
             CSharpSyntaxNode scopeDesignator
-        ) {
+        )
+        {
             throw ExceptionUtilities.Unreachable;
         }
 

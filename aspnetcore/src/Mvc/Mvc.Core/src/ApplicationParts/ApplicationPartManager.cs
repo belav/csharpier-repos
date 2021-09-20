@@ -46,7 +46,8 @@ namespace Microsoft.AspNetCore.Mvc.ApplicationParts
 
             foreach (
                 var provider in FeatureProviders.OfType<IApplicationFeatureProvider<TFeature>>()
-            ) {
+            )
+            {
                 provider.PopulateFeature(ApplicationParts, feature);
             }
         }

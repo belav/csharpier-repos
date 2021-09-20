@@ -36,7 +36,8 @@ namespace Microsoft.CodeAnalysis.CSharp
         private TupleBinaryOperatorInfo(
             TypeSymbol? leftConvertedTypeOpt,
             TypeSymbol? rightConvertedTypeOpt
-        ) {
+        )
+        {
             LeftConvertedTypeOpt = leftConvertedTypeOpt;
             RightConvertedTypeOpt = rightConvertedTypeOpt;
         }

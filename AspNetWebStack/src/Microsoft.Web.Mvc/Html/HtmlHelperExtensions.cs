@@ -49,7 +49,8 @@ namespace Microsoft.Web.Mvc.Html
             string actionName,
             string controllerName = null,
             object routeValues = null
-        ) {
+        )
+        {
             return ChildActionExtensions.Action(
                 htmlHelper,
                 actionName,
@@ -68,7 +69,8 @@ namespace Microsoft.Web.Mvc.Html
             string actionName,
             string controllerName = null,
             object routeValues = null
-        ) {
+        )
+        {
             ChildActionExtensions.RenderAction(
                 htmlHelper,
                 actionName,
@@ -89,7 +91,8 @@ namespace Microsoft.Web.Mvc.Html
             string expression,
             string templateName = null,
             string htmlFieldName = null
-        ) {
+        )
+        {
             return DisplayExtensions.Display(htmlHelper, expression, templateName, htmlFieldName);
         }
 
@@ -108,7 +111,8 @@ namespace Microsoft.Web.Mvc.Html
             Expression<Func<TModel, TValue>> expression,
             string templateName = null,
             string htmlFieldName = null
-        ) {
+        )
+        {
             return DisplayExtensions.DisplayFor(
                 htmlHelper,
                 expression,
@@ -126,7 +130,8 @@ namespace Microsoft.Web.Mvc.Html
             this HtmlHelper htmlHelper,
             string templateName = null,
             string htmlFieldName = null
-        ) {
+        )
+        {
             return DisplayExtensions.DisplayForModel(htmlHelper, templateName, htmlFieldName);
         }
 
@@ -145,7 +150,8 @@ namespace Microsoft.Web.Mvc.Html
         public static MvcHtmlString DisplayTextFor<TModel, TResult>(
             this HtmlHelper<TModel> htmlHelper,
             Expression<Func<TModel, TResult>> expression
-        ) {
+        )
+        {
             return DisplayTextExtensions.DisplayTextFor(htmlHelper, expression);
         }
 
@@ -161,7 +167,8 @@ namespace Microsoft.Web.Mvc.Html
             string expression,
             string templateName = null,
             string htmlFieldName = null
-        ) {
+        )
+        {
             return EditorExtensions.Editor(htmlHelper, expression, templateName, htmlFieldName);
         }
 
@@ -180,7 +187,8 @@ namespace Microsoft.Web.Mvc.Html
             Expression<Func<TModel, TValue>> expression,
             string templateName = null,
             string htmlFieldName = null
-        ) {
+        )
+        {
             return EditorExtensions.EditorFor(htmlHelper, expression, templateName, htmlFieldName);
         }
 
@@ -193,7 +201,8 @@ namespace Microsoft.Web.Mvc.Html
             this HtmlHelper htmlHelper,
             string templateName = null,
             string htmlFieldName = null
-        ) {
+        )
+        {
             return EditorExtensions.EditorForModel(htmlHelper, templateName, htmlFieldName);
         }
 
@@ -220,7 +229,8 @@ namespace Microsoft.Web.Mvc.Html
             string name = null,
             string style = null,
             string title = null
-        ) {
+        )
+        {
             return htmlHelper.BeginForm(
                 actionName,
                 controllerName,
@@ -261,7 +271,8 @@ namespace Microsoft.Web.Mvc.Html
             string name = null,
             string style = null,
             string title = null
-        ) {
+        )
+        {
             return htmlHelper.BeginRouteForm(
                 routeName,
                 routeValues ?? new RouteValueDictionary(routeValues),
@@ -308,7 +319,8 @@ namespace Microsoft.Web.Mvc.Html
             string style = null,
             int? tabIndex = null,
             string title = null
-        ) {
+        )
+        {
             var htmlAttributes = InputAttributes(
                 cssClass,
                 dir,
@@ -352,7 +364,8 @@ namespace Microsoft.Web.Mvc.Html
             string style = null,
             int? tabIndex = null,
             string title = null
-        ) {
+        )
+        {
             return htmlHelper.CheckBoxFor(
                 expression,
                 InputAttributes(
@@ -383,7 +396,8 @@ namespace Microsoft.Web.Mvc.Html
             string cssClass = null,
             string id = null,
             string style = null
-        ) {
+        )
+        {
             return htmlHelper.Hidden(name, value, Attributes(cssClass, id, style));
         }
 
@@ -403,7 +417,8 @@ namespace Microsoft.Web.Mvc.Html
             string cssClass = null,
             string id = null,
             string style = null
-        ) {
+        )
+        {
             return htmlHelper.HiddenFor(expression, Attributes(cssClass, id, style));
         }
 
@@ -427,7 +442,8 @@ namespace Microsoft.Web.Mvc.Html
             string style = null,
             int? tabIndex = null,
             string title = null
-        ) {
+        )
+        {
             return htmlHelper.Password(
                 name,
                 value,
@@ -471,7 +487,8 @@ namespace Microsoft.Web.Mvc.Html
             string style = null,
             int? tabIndex = null,
             string title = null
-        ) {
+        )
+        {
             return htmlHelper.PasswordFor(
                 expression,
                 InputAttributes(
@@ -511,7 +528,8 @@ namespace Microsoft.Web.Mvc.Html
             string style = null,
             int? tabIndex = null,
             string title = null
-        ) {
+        )
+        {
             var htmlAttributes = InputAttributes(
                 cssClass,
                 dir,
@@ -556,7 +574,8 @@ namespace Microsoft.Web.Mvc.Html
             string style = null,
             int? tabIndex = null,
             string title = null
-        ) {
+        )
+        {
             return htmlHelper.RadioButtonFor(
                 expression,
                 value,
@@ -596,7 +615,8 @@ namespace Microsoft.Web.Mvc.Html
             string style = null,
             int? tabIndex = null,
             string title = null
-        ) {
+        )
+        {
             return htmlHelper.TextBox(
                 name,
                 value,
@@ -640,7 +660,8 @@ namespace Microsoft.Web.Mvc.Html
             string style = null,
             int? tabIndex = null,
             string title = null
-        ) {
+        )
+        {
             return htmlHelper.TextBoxFor(
                 expression,
                 InputAttributes(
@@ -674,7 +695,8 @@ namespace Microsoft.Web.Mvc.Html
         public static MvcHtmlString LabelFor<TModel, TValue>(
             this HtmlHelper<TModel> htmlHelper,
             Expression<Func<TModel, TValue>> expression
-        ) {
+        )
+        {
             return LabelExtensions.LabelFor(htmlHelper, expression);
         }
 
@@ -714,7 +736,8 @@ namespace Microsoft.Web.Mvc.Html
             string style = null,
             string target = null,
             string title = null
-        ) {
+        )
+        {
             return htmlHelper.ActionLink(
                 linkText,
                 actionName,
@@ -771,7 +794,8 @@ namespace Microsoft.Web.Mvc.Html
             string style = null,
             string target = null,
             string title = null
-        ) {
+        )
+        {
             return htmlHelper.RouteLink(
                 linkText,
                 routeName,
@@ -811,7 +835,8 @@ namespace Microsoft.Web.Mvc.Html
             string partialViewName,
             object model = null,
             ViewDataDictionary viewData = null
-        ) {
+        )
+        {
             return PartialExtensions.Partial(
                 htmlHelper,
                 partialViewName,
@@ -832,7 +857,8 @@ namespace Microsoft.Web.Mvc.Html
             string partialViewName,
             object model = null,
             ViewDataDictionary viewData = null
-        ) {
+        )
+        {
             RenderPartialExtensions.RenderPartial(
                 htmlHelper,
                 partialViewName,
@@ -862,7 +888,8 @@ namespace Microsoft.Web.Mvc.Html
             string style = null,
             int? tabIndex = null,
             string title = null
-        ) {
+        )
+        {
             return htmlHelper.DropDownList(
                 name,
                 selectList,
@@ -895,7 +922,8 @@ namespace Microsoft.Web.Mvc.Html
             string style = null,
             int? tabIndex = null,
             string title = null
-        ) {
+        )
+        {
             return htmlHelper.DropDownListFor(
                 expression,
                 selectList,
@@ -922,7 +950,8 @@ namespace Microsoft.Web.Mvc.Html
             string style = null,
             int? tabIndex = null,
             string title = null
-        ) {
+        )
+        {
             return htmlHelper.ListBox(
                 name,
                 selectList,
@@ -953,7 +982,8 @@ namespace Microsoft.Web.Mvc.Html
             string style = null,
             int? tabIndex = null,
             string title = null
-        ) {
+        )
+        {
             return htmlHelper.ListBoxFor(
                 expression,
                 selectList,
@@ -984,7 +1014,8 @@ namespace Microsoft.Web.Mvc.Html
             string style = null,
             int? tabIndex = null,
             string title = null
-        ) {
+        )
+        {
             return htmlHelper.TextArea(
                 name,
                 value,
@@ -1030,7 +1061,8 @@ namespace Microsoft.Web.Mvc.Html
             string style = null,
             int? tabIndex = null,
             string title = null
-        ) {
+        )
+        {
             return htmlHelper.TextAreaFor(
                 expression,
                 TextAreaAttributes(
@@ -1065,7 +1097,8 @@ namespace Microsoft.Web.Mvc.Html
         public static void ValidateFor<TModel, TProperty>(
             this HtmlHelper<TModel> htmlHelper,
             Expression<Func<TModel, TProperty>> expression
-        ) {
+        )
+        {
             ValidationExtensions.ValidateFor(htmlHelper, expression);
         }
 
@@ -1090,7 +1123,8 @@ namespace Microsoft.Web.Mvc.Html
             string lang = null,
             string style = null,
             string title = null
-        ) {
+        )
+        {
             return htmlHelper.ValidationMessage(
                 modelName,
                 validationMessage,
@@ -1118,7 +1152,8 @@ namespace Microsoft.Web.Mvc.Html
             string lang = null,
             string style = null,
             string title = null
-        ) {
+        )
+        {
             return htmlHelper.ValidationMessageFor(
                 expression,
                 validationMessage,
@@ -1141,7 +1176,8 @@ namespace Microsoft.Web.Mvc.Html
             string lang = null,
             string style = null,
             string title = null
-        ) {
+        )
+        {
             return htmlHelper.ValidationSummary(
                 excludePropertyErrors,
                 message,
@@ -1155,7 +1191,8 @@ namespace Microsoft.Web.Mvc.Html
             this IDictionary<string, object> dictionary,
             string key,
             bool value
-        ) {
+        )
+        {
             if (value)
             {
                 dictionary[key] = key;
@@ -1166,7 +1203,8 @@ namespace Microsoft.Web.Mvc.Html
             this IDictionary<string, object> dictionary,
             string key,
             object value
-        ) {
+        )
+        {
             if (value != null)
             {
                 dictionary[key] = value;
@@ -1177,7 +1215,8 @@ namespace Microsoft.Web.Mvc.Html
             string cssClass,
             string id,
             string style
-        ) {
+        )
+        {
             var htmlAttributes = new RouteValueDictionary();
 
             htmlAttributes.AddOptional("class", cssClass);
@@ -1203,7 +1242,8 @@ namespace Microsoft.Web.Mvc.Html
             string style,
             string target,
             string title
-        ) {
+        )
+        {
             var htmlAttributes = Attributes(cssClass, id, style);
 
             htmlAttributes.AddOptional("accesskey", accessKey);
@@ -1233,7 +1273,8 @@ namespace Microsoft.Web.Mvc.Html
             string name,
             string style,
             string title
-        ) {
+        )
+        {
             var htmlAttributes = Attributes(cssClass, id, style);
 
             htmlAttributes.AddOptional("accept", accept);
@@ -1259,7 +1300,8 @@ namespace Microsoft.Web.Mvc.Html
             string style,
             int? tabIndex,
             string title
-        ) {
+        )
+        {
             var htmlAttributes = Attributes(cssClass, id, style);
 
             htmlAttributes.AddOptional("dir", dir);
@@ -1284,7 +1326,8 @@ namespace Microsoft.Web.Mvc.Html
             string style,
             int? tabIndex,
             string title
-        ) {
+        )
+        {
             var htmlAttributes = Attributes(cssClass, id, style);
 
             htmlAttributes.AddOptional("dir", dir);
@@ -1304,7 +1347,8 @@ namespace Microsoft.Web.Mvc.Html
             string lang,
             string style,
             string title
-        ) {
+        )
+        {
             var htmlAttributes = Attributes(cssClass, id, style);
 
             htmlAttributes.AddOptional("dir", dir);
@@ -1327,7 +1371,8 @@ namespace Microsoft.Web.Mvc.Html
             string style,
             int? tabIndex,
             string title
-        ) {
+        )
+        {
             var htmlAttributes = Attributes(cssClass, id, style);
 
             htmlAttributes.AddOptional("accesskey", accessKey);

@@ -71,7 +71,8 @@ namespace Microsoft.CodeAnalysis.SimplifyInterpolation
             ImmutableArray<Diagnostic> diagnostics,
             SyntaxEditor editor,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var semanticModel = await document.GetRequiredSemanticModelAsync(cancellationToken)
                 .ConfigureAwait(false);
             var generator = editor.Generator;
@@ -88,7 +89,8 @@ namespace Microsoft.CodeAnalysis.SimplifyInterpolation
                     interpolation?.Syntax is TInterpolationSyntax interpolationSyntax
                     && interpolationSyntax.Parent
                         is TInterpolatedStringExpressionSyntax interpolatedString
-                ) {
+                )
+                {
                     Helpers.UnwrapInterpolation<
                         TInterpolationSyntax,
                         TExpressionSyntax,
@@ -134,7 +136,8 @@ namespace Microsoft.CodeAnalysis.SimplifyInterpolation
             TExpressionSyntax unwrapped,
             TExpressionSyntax? alignment,
             string? formatString
-        ) {
+        )
+        {
             var result = WithExpression(interpolation, unwrapped);
             if (alignment != null)
             {
@@ -159,13 +162,12 @@ namespace Microsoft.CodeAnalysis.SimplifyInterpolation
 
         private class MyCodeAction : CustomCodeActions.DocumentChangeAction
         {
-            public MyCodeAction(
-                Func<CancellationToken, Task<Document>> createChangedDocument
-            ) : base(
-                AnalyzersResources.Simplify_interpolation,
-                createChangedDocument,
-                AnalyzersResources.Simplify_interpolation
-            ) { }
+            public MyCodeAction(Func<CancellationToken, Task<Document>> createChangedDocument)
+                : base(
+                    AnalyzersResources.Simplify_interpolation,
+                    createChangedDocument,
+                    AnalyzersResources.Simplify_interpolation
+                ) { }
         }
     }
 }

@@ -99,7 +99,8 @@ namespace Microsoft.EntityFrameworkCore.Storage
             Type mappingType,
             Type type,
             params object[] additionalArgs
-        ) {
+        )
+        {
             var mapping = (RelationalTypeMapping)Activator.CreateInstance(
                 mappingType,
                 BindingFlags.Instance | BindingFlags.NonPublic | BindingFlags.CreateInstance,
@@ -164,7 +165,8 @@ namespace Microsoft.EntityFrameworkCore.Storage
             Type mappingType,
             Type type,
             params object[] additionalArgs
-        ) {
+        )
+        {
             var mapping = (RelationalTypeMapping)Activator.CreateInstance(
                 mappingType,
                 BindingFlags.Instance | BindingFlags.NonPublic | BindingFlags.CreateInstance,
@@ -237,7 +239,8 @@ namespace Microsoft.EntityFrameworkCore.Storage
                 bool unicode = false,
                 bool fixedLength = false,
                 StoreTypePostfix storeTypePostfix = StoreTypePostfix.PrecisionAndScale
-            ) {
+            )
+            {
                 return new RelationalTypeMappingParameters(
                     new CoreTypeMappingParameters(
                         type,
@@ -373,7 +376,8 @@ namespace Microsoft.EntityFrameworkCore.Storage
             RelationalTypeMapping typeMapping,
             object value,
             string literalValue
-        ) {
+        )
+        {
             Assert.Equal(literalValue, typeMapping.GenerateSqlLiteral(value));
         }
 

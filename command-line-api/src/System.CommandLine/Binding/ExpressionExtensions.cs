@@ -7,7 +7,8 @@ namespace System.CommandLine.Binding
     {
         internal static (Type memberType, string memberName) MemberTypeAndName<T, TValue>(
             this Expression<Func<T, TValue>> expression
-        ) {
+        )
+        {
             if (expression is null)
             {
                 throw new ArgumentNullException(nameof(expression));
@@ -22,7 +23,8 @@ namespace System.CommandLine.Binding
             if (
                 expression.Body is UnaryExpression unaryExpression
                 && unaryExpression.Operand is MemberExpression operandMemberExpression
-            ) {
+            )
+            {
                 return TypeAndName(operandMemberExpression);
             }
 
@@ -30,7 +32,8 @@ namespace System.CommandLine.Binding
 
             static (Type memberType, string memberName) TypeAndName(
                 MemberExpression memberExpression
-            ) {
+            )
+            {
                 return (memberExpression.Member.ReturnType(), memberExpression.Member.Name);
             }
         }

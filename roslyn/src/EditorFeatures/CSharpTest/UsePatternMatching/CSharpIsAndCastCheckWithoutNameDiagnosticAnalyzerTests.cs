@@ -19,9 +19,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UsePatternMatching
     public partial class CSharpIsAndCastCheckWithoutNameDiagnosticAnalyzerTests
         : AbstractCSharpDiagnosticProviderBasedUserDiagnosticTest
     {
-        public CSharpIsAndCastCheckWithoutNameDiagnosticAnalyzerTests(
-            ITestOutputHelper logger
-        ) : base(logger) { }
+        public CSharpIsAndCastCheckWithoutNameDiagnosticAnalyzerTests(ITestOutputHelper logger)
+            : base(logger) { }
 
         internal override (DiagnosticAnalyzer, CodeFixProvider) CreateDiagnosticProviderAndFixer(
             Workspace workspace

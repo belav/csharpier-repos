@@ -34,7 +34,8 @@ namespace Microsoft.CodeAnalysis.LanguageServer.Handler
             LSP.TextDocumentPositionParams request,
             RequestContext context,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var locations = ArrayBuilder<LSP.Location>.GetInstance();
 
             var document = context.Document;

@@ -44,7 +44,8 @@ namespace System.CodeDom.Tests
         public void Ctor_CodeStatementArray_CodeCatchClauseArray(
             CodeStatement[] tryStatements,
             CodeCatchClause[] catchClauses
-        ) {
+        )
+        {
             var tryCatchFinally = new CodeTryCatchFinallyStatement(tryStatements, catchClauses);
             Assert.Equal(tryStatements, tryCatchFinally.TryStatements.Cast<CodeStatement>());
             Assert.Equal(catchClauses, tryCatchFinally.CatchClauses.Cast<CodeCatchClause>());
@@ -93,7 +94,8 @@ namespace System.CodeDom.Tests
             CodeStatement[] tryStatements,
             CodeCatchClause[] catchClauses,
             CodeStatement[] finallyStatements
-        ) {
+        )
+        {
             var tryCatchFinally = new CodeTryCatchFinallyStatement(
                 tryStatements,
                 catchClauses,

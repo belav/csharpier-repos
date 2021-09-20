@@ -15,7 +15,8 @@ namespace Microsoft.Extensions.SecretManager.Tools.Internal
             CommandLineApplication command,
             CommandLineOptions options,
             IConsole console
-        ) {
+        )
+        {
             command.Description = "Sets the user secret to the specified value";
             command.ExtendedHelpText =
                 @"

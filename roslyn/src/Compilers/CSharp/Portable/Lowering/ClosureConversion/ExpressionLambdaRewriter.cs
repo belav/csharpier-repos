@@ -118,7 +118,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             SyntaxNode node,
             int recursionDepth,
             BindingDiagnosticBag diagnostics
-        ) {
+        )
+        {
             _bound = new SyntheticBoundNodeFactory(
                 null,
                 compilationState.Type,
@@ -144,7 +145,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             TypeMap typeMap,
             int recursionDepth,
             BindingDiagnosticBag diagnostics
-        ) {
+        )
+        {
             try
             {
                 var r = new ExpressionLambdaRewriter(
@@ -160,7 +162,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                         result.Type,
                         TypeCompareKind.IgnoreNullableModifiersForReferenceTypes
                     )
-                ) {
+                )
+                {
                     diagnostics.Add(
                         ErrorCode.ERR_MissingPredefinedMember,
                         node.Syntax.Location,
@@ -462,7 +465,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             out bool isChecked,
             out bool isLifted,
             out bool requiresLifted
-        ) {
+        )
+        {
             isChecked = opKind.IsChecked();
             isLifted = opKind.IsLifted();
             requiresLifted = opKind.IsComparison();
@@ -512,7 +516,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             TypeSymbol type,
             BoundExpression left,
             BoundExpression right
-        ) {
+        )
+        {
             bool isChecked,
                 isLifted,
                 requiresLifted;
@@ -593,7 +598,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                     && conversion.ConversionKind.IsImplicitConversion()
                     && conversion.ConversionKind != ConversionKind.NullLiteral
                     && conversion.Type.StrippedType().IsEnumType()
-                ) {
+                )
+                {
                     operand = conversion.Operand;
                 }
             }
@@ -605,7 +611,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             BoundExpression operand,
             TypeSymbol promotedType,
             bool isChecked
-        ) {
+        )
+        {
             var literal = operand as BoundLiteral;
             if (literal != null)
             {
@@ -631,7 +638,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             string opName,
             BoundExpression loweredLeft,
             BoundExpression loweredRight
-        ) {
+        )
+        {
             return ((object)methodOpt == null)
               ? ExprFactory(opName, loweredLeft, loweredRight)
               : requiresLifted
@@ -697,7 +705,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             BoundExpression expr,
             TypeSymbol oldType,
             TypeSymbol newType
-        ) {
+        )
+        {
             var useSiteInfo = new CompoundUseSiteInfo<AssemblySymbol>(
                 Diagnostics,
                 _bound.Compilation.Assembly
@@ -904,7 +913,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             TypeSymbol newType,
             bool isChecked,
             bool isExplicit
-        ) {
+        )
+        {
             return (
                 TypeSymbol.Equals(oldType, newType, TypeCompareKind.ConsiderEverything2)
                 && !isExplicit
@@ -923,7 +933,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             MethodSymbol method,
             TypeSymbol delegateType,
             bool requiresInstanceReceiver
-        ) {
+        )
+        {
             var nullObject = _bound.Null(_objectType);
             receiver = requiresInstanceReceiver
                 ? nullObject
@@ -966,7 +977,8 @@ namespace Microsoft.CodeAnalysis.CSharp
 
         private BoundExpression VisitDelegateCreationExpression(
             BoundDelegateCreationExpression node
-        ) {
+        )
+        {
             if (node.Argument.Kind == BoundKind.MethodGroup)
             {
                 throw ExceptionUtilities.UnexpectedValue(BoundKind.MethodGroup);
@@ -1004,7 +1016,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                 (object)operand.Type == null
                 && operand.ConstantValue != null
                 && operand.ConstantValue.IsNull
-            ) {
+            )
+            {
                 operand = _bound.Null(_objectType);
             }
 
@@ -1090,7 +1103,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             Conversion conversion,
             TypeSymbol fromType,
             TypeSymbol toType
-        ) {
+        )
+        {
             string parameterName = "p";
             ParameterSymbol lambdaParameter = _bound.SynthesizedParameter(fromType, parameterName);
             var param = _bound.SynthesizedLocal(ParameterExpressionType);
@@ -1253,7 +1267,8 @@ namespace Microsoft.CodeAnalysis.CSharp
         private BoundExpression VisitObjectCreationContinued(
             BoundExpression creation,
             BoundExpression initializerExpressionOpt
-        ) {
+        )
+        {
             var result = creation;
             if (initializerExpressionOpt == null)
                 return result;
@@ -1272,7 +1287,8 @@ namespace Microsoft.CodeAnalysis.CSharp
 
         private BoundExpression VisitObjectCreationExpressionInternal(
             BoundObjectCreationExpression node
-        ) {
+        )
+        {
             if (node.ConstantValue != null)
             {
                 // typically a decimal constant.
@@ -1283,7 +1299,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                 (object)node.Constructor == null
                 || (node.Arguments.Length == 0 && !node.Type.IsStructType())
                 || node.Constructor.IsDefaultValueTypeConstructor()
-            ) {
+            )
+            {
                 return ExprFactory("New", _bound.Typeof(node.Type));
             }
 
@@ -1325,7 +1342,8 @@ namespace Microsoft.CodeAnalysis.CSharp
 
         private static BoundExpression VisitPointerIndirectionOperator(
             BoundPointerIndirectionOperator node
-        ) {
+        )
+        {
             // error should have been reported earlier
             // Diagnostics.Add(ErrorCode.ERR_ExpressionTreeContainsPointerOp, node.Syntax.Location);
             return new BoundBadExpression(
@@ -1371,7 +1389,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             if (
                 node.ReceiverOpt?.Type.IsTypeParameter() == true
                 && !node.ReceiverOpt.Type.IsReferenceType
-            ) {
+            )
+            {
                 receiver = this.Convert(receiver, getMethod.ReceiverType, isChecked: false);
             }
 
@@ -1423,7 +1442,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             if (
                 node.OperatorKind.OperandTypes() == UnaryOperatorKind.Enum
                 && (opKind & UnaryOperatorKind.Lifted) != 0
-            ) {
+            )
+            {
                 Debug.Assert((object)node.MethodOpt == null);
                 var promotedType = PromotedType(arg.Type.StrippedType().GetEnumUnderlyingType());
                 promotedType = _nullableType.Construct(promotedType);
@@ -1448,7 +1468,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             string name,
             ImmutableArray<TypeSymbol> typeArgs,
             params BoundExpression[] arguments
-        ) {
+        )
+        {
             return _bound.StaticCall(
                 _ignoreAccessibility ? BinderFlags.IgnoreAccessibility : BinderFlags.None,
                 ExpressionType,

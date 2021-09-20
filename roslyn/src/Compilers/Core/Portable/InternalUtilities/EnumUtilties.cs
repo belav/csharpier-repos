@@ -19,7 +19,8 @@ namespace Roslyn.Utilities
         internal static ulong ConvertEnumUnderlyingTypeToUInt64(
             object value,
             SpecialType specialType
-        ) {
+        )
+        {
             RoslynDebug.Assert(value != null);
             Debug.Assert(value.GetType().GetTypeInfo().IsPrimitive);
             unchecked

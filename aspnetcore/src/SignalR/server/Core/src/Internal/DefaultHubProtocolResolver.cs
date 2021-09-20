@@ -21,7 +21,8 @@ namespace Microsoft.AspNetCore.SignalR.Internal
         public DefaultHubProtocolResolver(
             IEnumerable<IHubProtocol> availableProtocols,
             ILogger<DefaultHubProtocolResolver> logger
-        ) {
+        )
+        {
             _logger = logger ?? NullLogger<DefaultHubProtocolResolver>.Instance;
             _availableProtocols = new Dictionary<string, IHubProtocol>(
                 StringComparer.OrdinalIgnoreCase
@@ -38,7 +39,8 @@ namespace Microsoft.AspNetCore.SignalR.Internal
         public virtual IHubProtocol? GetProtocol(
             string protocolName,
             IReadOnlyList<string>? supportedProtocols
-        ) {
+        )
+        {
             protocolName = protocolName ?? throw new ArgumentNullException(nameof(protocolName));
 
             if (
@@ -47,7 +49,8 @@ namespace Microsoft.AspNetCore.SignalR.Internal
                     supportedProtocols == null
                     || supportedProtocols.Contains(protocolName, StringComparer.OrdinalIgnoreCase)
                 )
-            ) {
+            )
+            {
                 Log.FoundImplementationForProtocol(_logger, protocolName);
                 return protocol;
             }
@@ -85,7 +88,8 @@ namespace Microsoft.AspNetCore.SignalR.Internal
                 ILogger logger,
                 string protocolName,
                 Type implementationType
-            ) {
+            )
+            {
                 _registeredSignalRProtocol(logger, protocolName, implementationType, null);
             }
 

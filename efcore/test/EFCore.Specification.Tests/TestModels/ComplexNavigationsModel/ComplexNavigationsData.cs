@@ -273,7 +273,8 @@ namespace Microsoft.EntityFrameworkCore.TestModels.ComplexNavigationsModel
             IReadOnlyList<InheritanceBase2> ib2s,
             IReadOnlyList<InheritanceLeaf1> il1s,
             IReadOnlyList<InheritanceLeaf2> il2s
-        ) {
+        )
+        {
             ib2s[0].Reference = ib1s[0];
             ib2s[0].Collection = new List<InheritanceBase1> { ib1s[1], ib1s[2] };
 
@@ -314,7 +315,8 @@ namespace Microsoft.EntityFrameworkCore.TestModels.ComplexNavigationsModel
         private static void WireUpInheritancePart2(
             IReadOnlyList<InheritanceBase2> ib2s,
             IReadOnlyList<InheritanceLeaf2> il2s
-        ) {
+        )
+        {
             il2s[0].BaseCollection = new List<InheritanceBase2> { ib2s[0] };
         }
 
@@ -324,7 +326,8 @@ namespace Microsoft.EntityFrameworkCore.TestModels.ComplexNavigationsModel
             IReadOnlyList<Level3> l3s,
             IReadOnlyList<Level4> l4s,
             bool tableSplitting
-        ) {
+        )
+        {
             l1s[0].OneToOne_Required_PK1 = l2s[0];
             l1s[1].OneToOne_Required_PK1 = l2s[1];
             l1s[2].OneToOne_Required_PK1 = l2s[2];
@@ -567,7 +570,8 @@ namespace Microsoft.EntityFrameworkCore.TestModels.ComplexNavigationsModel
             IReadOnlyList<Level3> l3s,
             IReadOnlyList<Level4> l4s,
             bool tableSplitting
-        ) {
+        )
+        {
             l2s[0].OneToOne_Required_PK_Inverse2 = l1s[0];
             l2s[1].OneToOne_Required_PK_Inverse2 = l1s[1];
             l2s[2].OneToOne_Required_PK_Inverse2 = l1s[2];
@@ -853,7 +857,8 @@ namespace Microsoft.EntityFrameworkCore.TestModels.ComplexNavigationsModel
             IReadOnlyList<Level3> l3s,
             IReadOnlyList<Level4> l4s,
             bool tableSplitting
-        ) {
+        )
+        {
             l1s[0].OneToOne_Optional_PK1 = l2s[0];
             l1s[2].OneToOne_Optional_PK1 = l2s[2];
             l1s[4].OneToOne_Optional_PK1 = l2s[4];
@@ -960,7 +965,8 @@ namespace Microsoft.EntityFrameworkCore.TestModels.ComplexNavigationsModel
             IReadOnlyList<Level3> l3s,
             IReadOnlyList<Level4> l4s,
             bool tableSplitting
-        ) {
+        )
+        {
             l2s[0].OneToOne_Optional_PK_Inverse2 = l1s[0];
             l2s[2].OneToOne_Optional_PK_Inverse2 = l1s[2];
             l2s[4].OneToOne_Optional_PK_Inverse2 = l1s[4];

@@ -36,7 +36,8 @@ namespace Microsoft.CodeAnalysis.Diagnostics
         public AnalyzerOptions(
             ImmutableArray<AdditionalText> additionalFiles,
             AnalyzerConfigOptionsProvider optionsProvider
-        ) {
+        )
+        {
             if (optionsProvider is null)
             {
                 throw new ArgumentNullException(nameof(optionsProvider));

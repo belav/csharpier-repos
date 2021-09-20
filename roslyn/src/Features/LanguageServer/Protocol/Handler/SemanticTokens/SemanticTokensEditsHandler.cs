@@ -39,7 +39,8 @@ namespace Microsoft.CodeAnalysis.LanguageServer.Handler.SemanticTokens
 
         public TextDocumentIdentifier? GetTextDocumentIdentifier(
             LSP.SemanticTokensEditsParams request
-        ) {
+        )
+        {
             Contract.ThrowIfNull(request.TextDocument);
             return request.TextDocument;
         }
@@ -48,7 +49,8 @@ namespace Microsoft.CodeAnalysis.LanguageServer.Handler.SemanticTokens
             LSP.SemanticTokensEditsParams request,
             RequestContext context,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             Contract.ThrowIfNull(request.TextDocument, "TextDocument is null.");
             Contract.ThrowIfNull(request.PreviousResultId, "previousResultId is null.");
             Contract.ThrowIfNull(context.Document, "Document is null.");
@@ -107,7 +109,8 @@ namespace Microsoft.CodeAnalysis.LanguageServer.Handler.SemanticTokens
         private static LSP.SemanticTokensEdit[] ComputeSemanticTokensEdits(
             int[] oldSemanticTokens,
             int[] newSemanticTokens
-        ) {
+        )
+        {
             if (oldSemanticTokens.SequenceEqual(newSemanticTokens))
             {
                 return Array.Empty<SemanticTokensEdit>();
@@ -136,7 +139,8 @@ namespace Microsoft.CodeAnalysis.LanguageServer.Handler.SemanticTokens
         private static SemanticTokensEdit[] ConvertToSemanticTokenEdits(
             SemanticToken[] newGroupedSemanticTokens,
             IEnumerable<SequenceEdit> edits
-        ) {
+        )
+        {
             // Our goal is to minimize the number of edits we return to LSP. It's possible an index
             // may have both an insertion and deletion, in which case we can combine the two into a
             // single update. We use the dictionary below to keep track of whether an index contains
@@ -190,7 +194,8 @@ namespace Microsoft.CodeAnalysis.LanguageServer.Handler.SemanticTokens
         private static SemanticTokensEdit[] CombineEditsIfPossible(
             SemanticToken[] newGroupedSemanticTokens,
             Dictionary<int, SemanticTokenEditKind> indexToEditKinds
-        ) {
+        )
+        {
             // This method combines the edits into the minimal possible edits (for the most part).
             // For example, if an index contains both an insertion and deletion, we combine the two
             // edits into one.
@@ -220,7 +225,8 @@ namespace Microsoft.CodeAnalysis.LanguageServer.Handler.SemanticTokens
                 var currentEditIndex = 0;
                 currentEditIndex < editIndices.Length;
                 currentEditIndex++
-            ) {
+            )
+            {
                 var currentTokenIndex = editIndices[currentEditIndex];
                 var initialEditKind = indexToEditKinds[currentTokenIndex];
                 var editStartPosition = currentTokenIndex * 5;
@@ -273,7 +279,8 @@ namespace Microsoft.CodeAnalysis.LanguageServer.Handler.SemanticTokens
                 int[] editIndices,
                 int startEditIndex,
                 int editStartPosition
-            ) {
+            )
+            {
                 var _ = ArrayBuilder<int>.GetInstance(out var tokensToInsert);
 
                 // For simplicitly, we only allow an "update" (i.e. a dual insertion/deletion) to be
@@ -310,7 +317,8 @@ namespace Microsoft.CodeAnalysis.LanguageServer.Handler.SemanticTokens
                 int[] editIndices,
                 int startEditIndex,
                 int editStartPosition
-            ) {
+            )
+            {
                 var _ = ArrayBuilder<int>.GetInstance(out var tokensToInsert);
 
                 // An insert can only be combined with other inserts that directly follow it.
@@ -344,7 +352,8 @@ namespace Microsoft.CodeAnalysis.LanguageServer.Handler.SemanticTokens
                 int[] editIndices,
                 int startEditIndex,
                 int editStartPosition
-            ) {
+            )
+            {
                 // A deletion can only be combined with other deletions that directly follow it.
                 var endEditNumber = GetCombinedEditEndIndex(
                     SemanticTokenEditKind.Delete,
@@ -370,7 +379,8 @@ namespace Microsoft.CodeAnalysis.LanguageServer.Handler.SemanticTokens
                 Dictionary<int, SemanticTokenEditKind> indexToEditKinds,
                 int[] editIndices,
                 int currentEditIndex
-            ) {
+            )
+            {
                 // To continue combining edits, we need to ensure:
                 // 1) There is an edit following the current edit.
                 // 2) The current and next edits involve tokens that are located right next to
@@ -380,7 +390,8 @@ namespace Microsoft.CodeAnalysis.LanguageServer.Handler.SemanticTokens
                     currentEditIndex + 1 < editIndices.Length
                     && indexToEditKinds[editIndices[currentEditIndex + 1]] == editKind
                     && editIndices[currentEditIndex + 1] == editIndices[currentEditIndex] + 1
-                ) {
+                )
+                {
                     currentEditIndex++;
                 }
 
@@ -464,7 +475,8 @@ namespace Microsoft.CodeAnalysis.LanguageServer.Handler.SemanticTokens
                 int length,
                 int tokenType,
                 int tokenModifiers
-            ) {
+            )
+            {
                 _deltaLine = deltaLine;
                 _deltaStartCharacter = deltaStartCharacter;
                 _length = length;

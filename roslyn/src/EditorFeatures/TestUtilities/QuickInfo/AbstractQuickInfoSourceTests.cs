@@ -31,7 +31,8 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.QuickInfo
             string code,
             string expectedContent,
             string expectedDocumentationComment = null
-        ) {
+        )
+        {
             await TestInMethodAsync(code, expectedContent, expectedDocumentationComment);
             await TestInScriptAsync(code, expectedContent, expectedDocumentationComment);
         }

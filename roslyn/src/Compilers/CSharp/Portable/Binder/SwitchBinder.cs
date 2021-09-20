@@ -98,7 +98,8 @@ namespace Microsoft.CodeAnalysis.CSharp
 
         private static Dictionary<object, SourceLabelSymbol> BuildLabelsByValue(
             ImmutableArray<LabelSymbol> labels
-        ) {
+        )
+        {
             Debug.Assert(labels.Length > 0);
 
             var map = new Dictionary<object, SourceLabelSymbol>(
@@ -208,7 +209,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             Binder sectionBinder,
             ArrayBuilder<LabelSymbol> labels,
             BindingDiagnosticBag tempDiagnosticBag
-        ) {
+        )
+        {
             // add switch case/default labels
             foreach (var labelSyntax in labelsSyntax)
             {
@@ -275,7 +277,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             out ConstantValue constantValueOpt,
             BindingDiagnosticBag diagnostics,
             bool isGotoCaseExpr = false
-        ) {
+        )
+        {
             bool hasErrors = false;
             if (isGotoCaseExpr)
             {
@@ -348,7 +351,8 @@ namespace Microsoft.CodeAnalysis.CSharp
         protected SourceLabelSymbol FindMatchingSwitchCaseLabel(
             ConstantValue constantValue,
             CSharpSyntaxNode labelSyntax
-        ) {
+        )
+        {
             // SwitchLabelsMap: Dictionary for the switch case/default labels.
             // Case labels with a non-null constant value are indexed on their ConstantValue.
             // Invalid case labels (with null constant value) are indexed on the label syntax.
@@ -394,7 +398,8 @@ namespace Microsoft.CodeAnalysis.CSharp
 
         internal override ImmutableArray<LocalSymbol> GetDeclaredLocalsForScope(
             SyntaxNode scopeDesignator
-        ) {
+        )
+        {
             if (SwitchSyntax == scopeDesignator)
             {
                 return this.Locals;
@@ -405,7 +410,8 @@ namespace Microsoft.CodeAnalysis.CSharp
 
         internal override ImmutableArray<LocalFunctionSymbol> GetDeclaredLocalFunctionsForScope(
             CSharpSyntaxNode scopeDesignator
-        ) {
+        )
+        {
             if (SwitchSyntax == scopeDesignator)
             {
                 return this.LocalFunctions;
@@ -578,7 +584,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             GotoStatementSyntax node,
             Binder gotoBinder,
             BindingDiagnosticBag diagnostics
-        ) {
+        )
+        {
             Debug.Assert(
                 node.Kind() == SyntaxKind.GotoCaseStatement
                     || node.Kind() == SyntaxKind.GotoDefaultStatement

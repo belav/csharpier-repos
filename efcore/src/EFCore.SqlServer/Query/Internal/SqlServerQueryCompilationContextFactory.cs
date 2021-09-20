@@ -38,7 +38,8 @@ namespace Microsoft.EntityFrameworkCore.SqlServer.Query.Internal
             QueryCompilationContextDependencies dependencies,
             RelationalQueryCompilationContextDependencies relationalDependencies,
             ISqlServerConnection sqlServerConnection
-        ) {
+        )
+        {
             Check.NotNull(dependencies, nameof(dependencies));
             Check.NotNull(relationalDependencies, nameof(relationalDependencies));
 

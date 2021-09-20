@@ -10,7 +10,8 @@ namespace Microsoft.AspNetCore.Razor.Language
         public static BoundAttributeDescriptorBuilder Name(
             this BoundAttributeDescriptorBuilder builder,
             string name
-        ) {
+        )
+        {
             if (builder == null)
             {
                 throw new ArgumentNullException(nameof(builder));
@@ -24,7 +25,8 @@ namespace Microsoft.AspNetCore.Razor.Language
         public static BoundAttributeDescriptorBuilder TypeName(
             this BoundAttributeDescriptorBuilder builder,
             string typeName
-        ) {
+        )
+        {
             if (builder == null)
             {
                 throw new ArgumentNullException(nameof(builder));
@@ -38,7 +40,8 @@ namespace Microsoft.AspNetCore.Razor.Language
         public static BoundAttributeDescriptorBuilder PropertyName(
             this BoundAttributeDescriptorBuilder builder,
             string propertyName
-        ) {
+        )
+        {
             if (builder == null)
             {
                 throw new ArgumentNullException(nameof(builder));
@@ -52,7 +55,8 @@ namespace Microsoft.AspNetCore.Razor.Language
         public static BoundAttributeDescriptorBuilder DisplayName(
             this BoundAttributeDescriptorBuilder builder,
             string displayName
-        ) {
+        )
+        {
             if (builder == null)
             {
                 throw new ArgumentNullException(nameof(builder));
@@ -65,7 +69,8 @@ namespace Microsoft.AspNetCore.Razor.Language
 
         public static BoundAttributeDescriptorBuilder AsEnum(
             this BoundAttributeDescriptorBuilder builder
-        ) {
+        )
+        {
             if (builder == null)
             {
                 throw new ArgumentNullException(nameof(builder));
@@ -80,7 +85,8 @@ namespace Microsoft.AspNetCore.Razor.Language
             this BoundAttributeDescriptorBuilder builder,
             string attributeNamePrefix,
             string valueTypeName
-        ) {
+        )
+        {
             if (builder == null)
             {
                 throw new ArgumentNullException(nameof(builder));
@@ -96,7 +102,8 @@ namespace Microsoft.AspNetCore.Razor.Language
         public static BoundAttributeDescriptorBuilder Documentation(
             this BoundAttributeDescriptorBuilder builder,
             string documentation
-        ) {
+        )
+        {
             if (builder == null)
             {
                 throw new ArgumentNullException(nameof(builder));
@@ -111,7 +118,8 @@ namespace Microsoft.AspNetCore.Razor.Language
             this BoundAttributeDescriptorBuilder builder,
             string key,
             string value
-        ) {
+        )
+        {
             if (builder == null)
             {
                 throw new ArgumentNullException(nameof(builder));
@@ -125,7 +133,8 @@ namespace Microsoft.AspNetCore.Razor.Language
         public static BoundAttributeDescriptorBuilder AddDiagnostic(
             this BoundAttributeDescriptorBuilder builder,
             RazorDiagnostic diagnostic
-        ) {
+        )
+        {
             if (builder == null)
             {
                 throw new ArgumentNullException(nameof(builder));

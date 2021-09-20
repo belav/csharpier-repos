@@ -68,7 +68,8 @@ namespace Microsoft.EntityFrameworkCore.Storage
             object value1,
             object value2,
             int? hashCode
-        ) {
+        )
+        {
             return CompareTest(type, value1, value2, hashCode);
         }
 
@@ -85,7 +86,8 @@ namespace Microsoft.EntityFrameworkCore.Storage
             object value2,
             int? hashCode,
             bool toNullable
-        ) {
+        )
+        {
             var comparer = (ValueComparer)Activator.CreateInstance(
                 typeof(ValueComparer<>).MakeGenericType(type),
                 new object[] { false }

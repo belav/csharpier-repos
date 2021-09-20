@@ -39,7 +39,8 @@ namespace Microsoft.CodeAnalysis.ExpressionEvaluator
             bool includeCompilerGenerated,
             bool supportsFavorites,
             DkmClrObjectFavoritesInfo favoritesInfo
-        ) {
+        )
+        {
             Debug.Assert(!type.IsInterface);
 
             var memberLocation = DeclarationInfo.FromSubTypeOfDeclaredType;
@@ -118,7 +119,8 @@ namespace Microsoft.CodeAnalysis.ExpressionEvaluator
                         !isProxyType
                         || browsableState == null
                         || !browsableState.ContainsKey(memberName)
-                    ) {
+                    )
+                    {
                         if (!predicate(member))
                         {
                             continue;
@@ -163,7 +165,8 @@ namespace Microsoft.CodeAnalysis.ExpressionEvaluator
                     if (
                         !memberNameAlreadySeen
                         || previousDeclaration.IsSet(DeclarationInfo.RequiresExplicitCast)
-                    ) {
+                    )
+                    {
                         DkmClrDebuggerBrowsableAttributeState? browsableStateValue = null;
                         if (browsableState != null)
                         {
@@ -182,7 +185,8 @@ namespace Microsoft.CodeAnalysis.ExpressionEvaluator
                         }
                         else if (
                             previousDeclaration.IsSet(DeclarationInfo.FromSubTypeOfDeclaredType)
-                        ) {
+                        )
+                        {
                             // If the immediately preceding member (less derived) was
                             // declared on a sub-type of the declared type, then we'll
                             // ignore the casting bit.  Accessing a member through the
@@ -220,7 +224,8 @@ namespace Microsoft.CodeAnalysis.ExpressionEvaluator
 
         private static DeclarationInfo AccessingBaseMemberWithSameNameRequiresExplicitCast(
             this MemberInfo member
-        ) {
+        )
+        {
             switch (member.MemberType)
             {
                 case MemberTypes.Field:
@@ -236,7 +241,8 @@ namespace Microsoft.CodeAnalysis.ExpressionEvaluator
                                 == MethodAttributes.NewSlot
                             )
                         )
-                    ) {
+                    )
+                    {
                         return DeclarationInfo.RequiresExplicitCast;
                     }
                     return DeclarationInfo.None;
@@ -424,7 +430,8 @@ namespace Microsoft.CodeAnalysis.ExpressionEvaluator
             this DkmClrValue value,
             string name,
             DkmInspectionContext inspectionContext
-        ) {
+        )
+        {
             return value.GetMemberValue(
                 name,
                 (int)MemberTypes.Field,
@@ -437,7 +444,8 @@ namespace Microsoft.CodeAnalysis.ExpressionEvaluator
             this DkmClrValue value,
             string name,
             DkmInspectionContext inspectionContext
-        ) {
+        )
+        {
             return value.GetMemberValue(
                 name,
                 (int)MemberTypes.Property,
@@ -450,7 +458,8 @@ namespace Microsoft.CodeAnalysis.ExpressionEvaluator
             this DkmClrValue value,
             Type nullableTypeArg,
             DkmInspectionContext inspectionContext
-        ) {
+        )
+        {
             var valueType = value.Type.GetLmrType();
             if (valueType.Equals(nullableTypeArg))
             {
@@ -462,7 +471,8 @@ namespace Microsoft.CodeAnalysis.ExpressionEvaluator
         internal static DkmClrValue GetNullableValue(
             this DkmClrValue value,
             DkmInspectionContext inspectionContext
-        ) {
+        )
+        {
             Debug.Assert(value.Type.GetLmrType().IsNullable());
 
             var hasValue = value.GetFieldValue(
@@ -492,7 +502,8 @@ namespace Microsoft.CodeAnalysis.ExpressionEvaluator
                 type.IsGenericType
                 && AreNamesEqual(type.Namespace, "System")
                 && type.Name.StartsWith(TupleTypeNamePrefix, StringComparison.Ordinal)
-            ) {
+            )
+            {
                 var typeArguments = type.GetGenericArguments();
                 int n = typeArguments.Length;
                 if ((n > 0) && (n <= TupleFieldRestPosition))
@@ -550,7 +561,8 @@ namespace Microsoft.CodeAnalysis.ExpressionEvaluator
             int cardinality,
             ArrayBuilder<string> values,
             DkmInspectionContext inspectionContext
-        ) {
+        )
+        {
             while (true)
             {
                 var type = tuple.Type.GetLmrType();
@@ -585,7 +597,8 @@ namespace Microsoft.CodeAnalysis.ExpressionEvaluator
             this Type underlyingType,
             DkmClrAppDomain appDomain,
             out DkmClrType type
-        ) {
+        )
+        {
             Debug.Assert(
                 (underlyingType.BaseType != null)
                     || underlyingType.IsPointer
@@ -672,7 +685,8 @@ namespace Microsoft.CodeAnalysis.ExpressionEvaluator
         internal static bool TryGetDebuggerDisplayInfo(
             this DkmClrValue value,
             out DebuggerDisplayInfo displayInfo
-        ) {
+        )
+        {
             displayInfo = null;
 
             // The native EE does not consider DebuggerDisplayAttribute
@@ -707,7 +721,8 @@ namespace Microsoft.CodeAnalysis.ExpressionEvaluator
         /// </summary>
         internal static DkmCustomUIVisualizerInfo[] GetDebuggerCustomUIVisualizerInfo(
             this DkmClrType type
-        ) {
+        )
+        {
             var builder = ArrayBuilder<DkmCustomUIVisualizerInfo>.GetInstance();
 
             var appDomain = type.AppDomain;
@@ -945,7 +960,8 @@ namespace Microsoft.CodeAnalysis.ExpressionEvaluator
                     member.Name,
                     MemberBindingFlags
                 )
-            ) {
+            )
+            {
                 var memberType = candidate.MemberType;
                 if (memberType != member.MemberType)
                     continue;

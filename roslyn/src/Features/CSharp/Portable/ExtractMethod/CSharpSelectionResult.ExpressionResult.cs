@@ -29,16 +29,17 @@ namespace Microsoft.CodeAnalysis.CSharp.ExtractMethod
                 SemanticDocument document,
                 SyntaxAnnotation firstTokenAnnotation,
                 SyntaxAnnotation lastTokenAnnotation
-            ) : base(
-                status,
-                originalSpan,
-                finalSpan,
-                options,
-                selectionInExpression,
-                document,
-                firstTokenAnnotation,
-                lastTokenAnnotation
-            ) { }
+            )
+                : base(
+                    status,
+                    originalSpan,
+                    finalSpan,
+                    options,
+                    selectionInExpression,
+                    document,
+                    firstTokenAnnotation,
+                    lastTokenAnnotation
+                ) { }
 
             public override bool ContainingScopeHasAsyncKeyword() => false;
 
@@ -102,7 +103,8 @@ namespace Microsoft.CodeAnalysis.CSharp.ExtractMethod
             private static ITypeSymbol? GetRegularExpressionType(
                 SemanticModel semanticModel,
                 ExpressionSyntax node
-            ) {
+            )
+            {
                 // regular case. always use ConvertedType to get implicit conversion right.
                 var expression = node.GetUnparenthesizedExpression();
 
@@ -126,7 +128,8 @@ namespace Microsoft.CodeAnalysis.CSharp.ExtractMethod
                         conv,
                         semanticModel.Compilation.CoClassType()
                     )
-                ) {
+                )
+                {
                     return info.GetConvertedTypeWithAnnotatedNullability();
                 }
 
@@ -140,7 +143,8 @@ namespace Microsoft.CodeAnalysis.CSharp.ExtractMethod
                 if (
                     info.Type?.SpecialType == SpecialType.System_String
                     && info.ConvertedType?.IsFormattableStringOrIFormattable() == true
-                ) {
+                )
+                {
                     return info.GetConvertedTypeWithAnnotatedNullability();
                 }
 
@@ -155,12 +159,14 @@ namespace Microsoft.CodeAnalysis.CSharp.ExtractMethod
             TypeInfo info,
             Conversion conversion,
             ISymbol? coclassSymbol
-        ) {
+        )
+        {
             if (
                 !conversion.IsImplicit
                 || info.ConvertedType == null
                 || info.ConvertedType.TypeKind != TypeKind.Interface
-            ) {
+            )
+            {
                 return false;
             }
 

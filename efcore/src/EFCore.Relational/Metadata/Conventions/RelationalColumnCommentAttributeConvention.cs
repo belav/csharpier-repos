@@ -35,7 +35,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
             CommentAttribute attribute,
             MemberInfo clrMember,
             IConventionContext context
-        ) {
+        )
+        {
             if (!string.IsNullOrWhiteSpace(attribute.Comment))
             {
                 propertyBuilder.HasComment(attribute.Comment, fromDataAnnotation: true);

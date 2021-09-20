@@ -52,7 +52,8 @@ namespace Microsoft.AspNetCore.Session
                 _hashCode.HasValue
                 && otherKey._hashCode.HasValue
                 && _hashCode.Value != otherKey._hashCode.Value
-            ) {
+            )
+            {
                 return false;
             }
             for (int i = 0; i < KeyBytes.Length; i++)

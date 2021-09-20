@@ -36,7 +36,8 @@ namespace Microsoft.AspNetCore.Authorization.Policy
         public virtual async Task<AuthenticateResult> AuthenticateAsync(
             AuthorizationPolicy policy,
             HttpContext context
-        ) {
+        )
+        {
             if (policy.AuthenticationSchemes != null && policy.AuthenticationSchemes.Count > 0)
             {
                 ClaimsPrincipal? newPrincipal = null;
@@ -92,7 +93,8 @@ namespace Microsoft.AspNetCore.Authorization.Policy
             AuthenticateResult authenticationResult,
             HttpContext context,
             object? resource
-        ) {
+        )
+        {
             if (policy == null)
             {
                 throw new ArgumentNullException(nameof(policy));

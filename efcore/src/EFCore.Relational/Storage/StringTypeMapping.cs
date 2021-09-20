@@ -29,16 +29,17 @@ namespace Microsoft.EntityFrameworkCore.Storage
             DbType? dbType = null,
             bool unicode = false,
             int? size = null
-        ) : base(
-            new RelationalTypeMappingParameters(
-                new CoreTypeMappingParameters(typeof(string)),
-                storeType,
-                StoreTypePostfix.None,
-                dbType,
-                unicode,
-                size
-            )
-        ) { }
+        )
+            : base(
+                new RelationalTypeMappingParameters(
+                    new CoreTypeMappingParameters(typeof(string)),
+                    storeType,
+                    StoreTypePostfix.None,
+                    dbType,
+                    unicode,
+                    size
+                )
+            ) { }
 
         /// <summary>
         ///     Initializes a new instance of the <see cref="StringTypeMapping" /> class.

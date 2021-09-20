@@ -29,10 +29,8 @@ namespace Microsoft.AspNetCore.Components.WebAssembly.Rendering
         /// </summary>
         /// <param name="serviceProvider">The <see cref="IServiceProvider"/> to use when initializing components.</param>
         /// <param name="loggerFactory">The <see cref="ILoggerFactory"/>.</param>
-        public WebAssemblyRenderer(
-            IServiceProvider serviceProvider,
-            ILoggerFactory loggerFactory
-        ) : base(serviceProvider, loggerFactory)
+        public WebAssemblyRenderer(IServiceProvider serviceProvider, ILoggerFactory loggerFactory)
+            : base(serviceProvider, loggerFactory)
         {
             // The WebAssembly renderer registers and unregisters itself with the static registry
             _webAssemblyRendererId = RendererRegistry.Add(this);
@@ -77,7 +75,8 @@ namespace Microsoft.AspNetCore.Components.WebAssembly.Rendering
             [DynamicallyAccessedMembers(Component)] Type componentType,
             string domElementSelector,
             ParameterView parameters
-        ) {
+        )
+        {
             var component = InstantiateComponent(componentType);
             var componentId = AssignRootComponentId(component);
 
@@ -153,7 +152,8 @@ namespace Microsoft.AspNetCore.Components.WebAssembly.Rendering
             ulong eventHandlerId,
             EventFieldInfo? eventFieldInfo,
             EventArgs eventArgs
-        ) {
+        )
+        {
             // Be sure we only run one event handler at once. Although they couldn't run
             // simultaneously anyway (there's only one thread), they could run nested on
             // the stack if somehow one event handler triggers another event synchronously.
@@ -234,7 +234,8 @@ namespace Microsoft.AspNetCore.Components.WebAssembly.Rendering
                 ulong eventHandlerId,
                 EventFieldInfo? eventFieldInfo,
                 EventArgs eventArgs
-            ) {
+            )
+            {
                 EventHandlerId = eventHandlerId;
                 EventFieldInfo = eventFieldInfo;
                 EventArgs = eventArgs;
@@ -275,7 +276,8 @@ namespace Microsoft.AspNetCore.Components.WebAssembly.Rendering
             public static void UnhandledExceptionRenderingComponent(
                 ILogger logger,
                 Exception exception
-            ) {
+            )
+            {
                 _unhandledExceptionRenderingComponent(logger, exception.Message, exception);
             }
         }

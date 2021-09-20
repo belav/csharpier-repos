@@ -50,13 +50,14 @@ namespace Microsoft.CodeAnalysis.CSharp
             DocumentationMode documentationMode = DocumentationMode.Parse,
             SourceCodeKind kind = SourceCodeKind.Regular,
             IEnumerable<string>? preprocessorSymbols = null
-        ) : this(
-            languageVersion,
-            documentationMode,
-            kind,
-            preprocessorSymbols.ToImmutableArrayOrEmpty(),
-            ImmutableDictionary<string, string>.Empty
-        ) { }
+        )
+            : this(
+                languageVersion,
+                documentationMode,
+                kind,
+                preprocessorSymbols.ToImmutableArrayOrEmpty(),
+                ImmutableDictionary<string, string>.Empty
+            ) { }
 
         internal CSharpParseOptions(
             LanguageVersion languageVersion,
@@ -152,13 +153,15 @@ namespace Microsoft.CodeAnalysis.CSharp
 
         protected override ParseOptions CommonWithDocumentationMode(
             DocumentationMode documentationMode
-        ) {
+        )
+        {
             return WithDocumentationMode(documentationMode);
         }
 
         protected override ParseOptions CommonWithFeatures(
             IEnumerable<KeyValuePair<string, string>>? features
-        ) {
+        )
+        {
             return WithFeatures(features);
         }
 
@@ -167,7 +170,8 @@ namespace Microsoft.CodeAnalysis.CSharp
         /// </summary>
         public new CSharpParseOptions WithFeatures(
             IEnumerable<KeyValuePair<string, string>>? features
-        ) {
+        )
+        {
             ImmutableDictionary<string, string> dictionary =
                 features?.ToImmutableDictionary(StringComparer.OrdinalIgnoreCase)
                 ?? ImmutableDictionary<string, string>.Empty;

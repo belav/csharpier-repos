@@ -27,7 +27,8 @@ namespace Microsoft.Extensions.FileProviders.Physical.Tests
             FileAttributes attributes,
             ExclusionFilters filters,
             bool excluded
-        ) {
+        )
+        {
             var fileInfo = new FileInfo(Path.Combine(_fileSystem.RootPath, filename));
             _fileSystem.CreateFile(fileInfo);
             fileInfo.Attributes = attributes;
@@ -45,7 +46,8 @@ namespace Microsoft.Extensions.FileProviders.Physical.Tests
             FileAttributes attributes,
             ExclusionFilters filters,
             bool excluded
-        ) {
+        )
+        {
             var dirInfo = new DirectoryInfo(Path.Combine(_fileSystem.RootPath, dirname));
             dirInfo.Create();
             dirInfo.Attributes = attributes;

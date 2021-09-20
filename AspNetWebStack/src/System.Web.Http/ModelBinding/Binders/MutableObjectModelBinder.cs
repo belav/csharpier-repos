@@ -37,7 +37,8 @@ namespace System.Web.Http.ModelBinding.Binders
         public virtual bool BindModel(
             HttpActionContext actionContext,
             ModelBindingContext bindingContext
-        ) {
+        )
+        {
             ModelBindingHelper.ValidateBindingContext(bindingContext);
 
             if (!bindingContext.ValueProvider.ContainsPrefix(bindingContext.ModelName))
@@ -109,7 +110,8 @@ namespace System.Web.Http.ModelBinding.Binders
             HttpActionContext actionContext,
             ModelBindingContext bindingContext,
             IEnumerable<ModelMetadata> propertyMetadatas
-        ) {
+        )
+        {
             ModelMetadataProvider metadataProvider =
                 MetadataProvider ?? actionContext.GetMetadataProvider();
 
@@ -134,7 +136,8 @@ namespace System.Web.Http.ModelBinding.Binders
         protected virtual object CreateModel(
             HttpActionContext actionContext,
             ModelBindingContext bindingContext
-        ) {
+        )
+        {
             // If the Activator throws an exception, we want to propagate it back up the call stack, since the application
             // developer should know that this was an invalid type to try to bind to.
             return Activator.CreateInstance(bindingContext.ModelType);
@@ -144,7 +147,8 @@ namespace System.Web.Http.ModelBinding.Binders
         internal static EventHandler<ModelValidatedEventArgs> CreateNullCheckFailedHandler(
             ModelMetadata modelMetadata,
             object incomingValue
-        ) {
+        )
+        {
             return (sender, e) =>
             {
                 ModelValidationNode validationNode = (ModelValidationNode)sender;
@@ -168,7 +172,8 @@ namespace System.Web.Http.ModelBinding.Binders
         protected virtual void EnsureModel(
             HttpActionContext actionContext,
             ModelBindingContext bindingContext
-        ) {
+        )
+        {
             if (bindingContext.Model == null)
             {
                 bindingContext.ModelMetadata.Model = CreateModel(actionContext, bindingContext);
@@ -178,7 +183,8 @@ namespace System.Web.Http.ModelBinding.Binders
         protected virtual IEnumerable<ModelMetadata> GetMetadataForProperties(
             HttpActionContext actionContext,
             ModelBindingContext bindingContext
-        ) {
+        )
+        {
             // keep a set of the required properties so that we can cross-reference bound properties later
             HashSet<string> requiredProperties;
             Dictionary<string, ModelValidator> requiredValidators;
@@ -212,7 +218,8 @@ namespace System.Web.Http.ModelBinding.Binders
             out HashSet<string> requiredProperties,
             out Dictionary<string, ModelValidator> requiredValidators,
             out HashSet<string> skipProperties
-        ) {
+        )
+        {
             requiredProperties = new HashSet<string>(StringComparer.OrdinalIgnoreCase);
             requiredValidators = new Dictionary<string, ModelValidator>(
                 StringComparer.OrdinalIgnoreCase
@@ -265,7 +272,8 @@ namespace System.Web.Http.ModelBinding.Binders
             HttpActionContext actionContext,
             ModelBindingContext bindingContext,
             ComplexModelDto dto
-        ) {
+        )
+        {
             HashSet<string> requiredProperties;
             Dictionary<string, ModelValidator> requiredValidators;
             HashSet<string> skipProperties;
@@ -346,7 +354,8 @@ namespace System.Web.Http.ModelBinding.Binders
             ModelMetadata propertyMetadata,
             ComplexModelDtoResult dtoResult,
             ModelValidator requiredValidator
-        ) {
+        )
+        {
             PropertyDescriptor propertyDescriptor = TypeDescriptorHelper.Get(
                     bindingContext.ModelType
                 )
@@ -416,7 +425,8 @@ namespace System.Web.Http.ModelBinding.Binders
             ModelBindingContext bindingContext,
             ModelMetadata propertyMetadata,
             string modelStateKey
-        ) {
+        )
+        {
             bool addedError = false;
             if (validator != null)
             {
@@ -425,7 +435,8 @@ namespace System.Web.Http.ModelBinding.Binders
                         propertyMetadata,
                         bindingContext.Model
                     )
-                ) {
+                )
+                {
                     bindingContext.ModelState.AddModelError(
                         modelStateKey,
                         validationResult.Message

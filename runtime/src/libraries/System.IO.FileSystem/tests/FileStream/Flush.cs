@@ -94,7 +94,8 @@ namespace System.IO.Tests
                     FileShare.ReadWrite,
                     2
                 )
-            ) {
+            )
+            {
                 Assert.Equal(TestBuffer[0], fs.ReadByte());
                 Flush(fs, flushToDisk);
             }
@@ -125,7 +126,8 @@ namespace System.IO.Tests
                     FileAccess.Read,
                     FileShare.ReadWrite
                 )
-            ) {
+            )
+            {
                 fs.Write(TestBuffer, 0, TestBuffer.Length);
                 Assert.Equal(TestBuffer.Length, fs.Length);
 
@@ -150,7 +152,8 @@ namespace System.IO.Tests
                     GetTestFilePath(),
                     FileMode.Create
                 )
-            ) {
+            )
+            {
                 fs.Flush();
                 Assert.True(fs.LastFlushArg.HasValue);
                 Assert.False(fs.LastFlushArg.Value);
@@ -165,7 +168,8 @@ namespace System.IO.Tests
                     GetTestFilePath(),
                     FileMode.Create
                 )
-            ) {
+            )
+            {
                 GC.KeepAlive(fs.SafeFileHandle); // this should call Flush, which should call StoreFlushArgFileStream.Flush(false)
 
                 Assert.True(fs.LastFlushArg.HasValue);

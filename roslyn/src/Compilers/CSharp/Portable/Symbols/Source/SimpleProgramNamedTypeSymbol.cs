@@ -38,7 +38,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
 
         internal static SynthesizedSimpleProgramEntryPointSymbol? GetSimpleProgramEntryPoint(
             CSharpCompilation compilation
-        ) {
+        )
+        {
             return (SynthesizedSimpleProgramEntryPointSymbol?)GetSimpleProgramNamedTypeSymbol(
                 compilation
             )?.GetMembersAndInitializers().NonTypeMembers[0];
@@ -46,7 +47,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
 
         private static SimpleProgramNamedTypeSymbol? GetSimpleProgramNamedTypeSymbol(
             CSharpCompilation compilation
-        ) {
+        )
+        {
             return compilation.SourceModule.GlobalNamespace.GetTypeMembers(
                     WellKnownMemberNames.TopLevelStatementsEntryPointTypeName
                 )
@@ -58,7 +60,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             CSharpCompilation compilation,
             CompilationUnitSyntax compilationUnit,
             bool fallbackToMainEntryPoint
-        ) {
+        )
+        {
             var type = GetSimpleProgramNamedTypeSymbol(compilation);
 
             if (type is null)
@@ -73,7 +76,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                 if (
                     entryPoint.SyntaxTree == compilationUnit.SyntaxTree
                     && entryPoint.SyntaxNode == compilationUnit
-                ) {
+                )
+                {
                     return entryPoint;
                 }
             }
@@ -120,19 +124,22 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
 
         internal override NamedTypeSymbol GetDeclaredBaseType(
             ConsList<TypeSymbol> basesBeingResolved
-        ) {
+        )
+        {
             return BaseTypeNoUseSiteDiagnostics;
         }
 
         internal override ImmutableArray<NamedTypeSymbol> InterfacesNoUseSiteDiagnostics(
             ConsList<TypeSymbol> basesBeingResolved
-        ) {
+        )
+        {
             return ImmutableArray<NamedTypeSymbol>.Empty;
         }
 
         internal override ImmutableArray<NamedTypeSymbol> GetDeclaredInterfaces(
             ConsList<TypeSymbol> basesBeingResolved
-        ) {
+        )
+        {
             return ImmutableArray<NamedTypeSymbol>.Empty;
         }
 
@@ -225,7 +232,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
 
         protected override MembersAndInitializers BuildMembersAndInitializers(
             BindingDiagnosticBag diagnostics
-        ) {
+        )
+        {
             bool reportAnError = false;
             foreach (var singleDecl in declaration.Declarations)
             {
@@ -273,7 +281,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             SyntaxTree tree,
             TextSpan? definedWithinSpan,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             foreach (var member in GetMembersAndInitializers().NonTypeMembers)
             {
                 cancellationToken.ThrowIfCancellationRequested();
@@ -290,7 +299,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
         internal override void AddSynthesizedAttributes(
             PEModuleBuilder moduleBuilder,
             ref ArrayBuilder<SynthesizedAttributeData> attributes
-        ) {
+        )
+        {
             base.AddSynthesizedAttributes(moduleBuilder, ref attributes);
 
             AddSynthesizedAttribute(

@@ -9,9 +9,8 @@ namespace Microsoft.EntityFrameworkCore
     public class ConcurrencyDetectorEnabledInMemoryTest
         : ConcurrencyDetectorEnabledTestBase<ConcurrencyDetectorEnabledInMemoryTest.ConcurrencyDetectorInMemoryFixture>
     {
-        public ConcurrencyDetectorEnabledInMemoryTest(
-            ConcurrencyDetectorInMemoryFixture fixture
-        ) : base(fixture) { }
+        public ConcurrencyDetectorEnabledInMemoryTest(ConcurrencyDetectorInMemoryFixture fixture)
+            : base(fixture) { }
 
         public class ConcurrencyDetectorInMemoryFixture : ConcurrencyDetectorFixtureBase
         {

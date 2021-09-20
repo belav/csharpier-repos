@@ -19,10 +19,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Emit.NoPia
 {
     internal sealed class EmbeddedMethod : EmbeddedTypesManager.CommonEmbeddedMethod
     {
-        public EmbeddedMethod(
-            EmbeddedType containingType,
-            MethodSymbolAdapter underlyingMethod
-        ) : base(containingType, underlyingMethod) { }
+        public EmbeddedMethod(EmbeddedType containingType, MethodSymbolAdapter underlyingMethod)
+            : base(containingType, underlyingMethod) { }
 
         internal override EmbeddedTypesManager TypeManager
         {
@@ -31,7 +29,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Emit.NoPia
 
         protected override IEnumerable<CSharpAttributeData> GetCustomAttributesToEmit(
             PEModuleBuilder moduleBuilder
-        ) {
+        )
+        {
             return UnderlyingMethod.AdaptedSymbol.GetCustomAttributesToEmit(moduleBuilder);
         }
 
@@ -116,7 +115,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Emit.NoPia
 
         protected override System.Reflection.MethodImplAttributes GetImplementationAttributes(
             EmitContext context
-        ) {
+        )
+        {
             return UnderlyingMethod.AdaptedMethodSymbol.ImplementationAttributes;
         }
 

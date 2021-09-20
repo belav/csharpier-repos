@@ -43,7 +43,8 @@ namespace System.Speech.Recognition.SrgsGrammar
             string pronunciation,
             string display,
             float reqConfidence
-        ) {
+        )
+        {
             SrgsToken token = new(content);
             if (!string.IsNullOrEmpty(pronunciation))
             {
@@ -53,7 +54,8 @@ namespace System.Speech.Recognition.SrgsGrammar
                     int iCurPron = 0, iDeliminator = 0;
                     iCurPron < sPron.Length;
                     iCurPron = iDeliminator + 1
-                ) {
+                )
+                {
                     // Find semi-colon delimiter and replace with null
                     iDeliminator = pronunciation.IndexOfAny(s_pronSeparator, iCurPron);
                     if (iDeliminator == -1)
@@ -105,7 +107,8 @@ namespace System.Speech.Recognition.SrgsGrammar
             int maxRepeat,
             float repeatProbability,
             float weight
-        ) {
+        )
+        {
             SrgsItem item = new();
             if (minRepeat != 1 || maxRepeat != 1)
             {
@@ -126,7 +129,8 @@ namespace System.Speech.Recognition.SrgsGrammar
             Uri srgsUri,
             string semanticKey,
             string parameters
-        ) {
+        )
+        {
             return new SrgsRuleRef(semanticKey, parameters, srgsUri);
         }
 
@@ -182,7 +186,8 @@ namespace System.Speech.Recognition.SrgsGrammar
             string code,
             string filename,
             int line
-        ) {
+        )
+        {
             return code;
         }
 

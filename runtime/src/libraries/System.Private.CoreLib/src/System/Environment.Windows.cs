@@ -24,7 +24,8 @@ namespace System
                             ref builder.GetPinnableReference()
                         )
                     ) > builder.Capacity
-                ) {
+                )
+                {
                     builder.EnsureCapacity((int)length);
                 }
 
@@ -84,7 +85,8 @@ namespace System
                         (uint)builder.Capacity
                     )
                 ) > builder.Capacity
-            ) {
+            )
+            {
                 builder.EnsureCapacity((int)length);
             }
 
@@ -120,7 +122,8 @@ namespace System
                         (uint)builder.Capacity
                     )
                 ) >= builder.Capacity
-            ) {
+            )
+            {
                 builder.EnsureCapacity((int)length);
             }
 
@@ -165,7 +168,8 @@ namespace System
                             (uint)builder.Capacity
                         )
                     ) > builder.Capacity
-                ) {
+                )
+                {
                     builder.EnsureCapacity((int)length);
                 }
 
@@ -195,7 +199,8 @@ namespace System
                             (uint)sizeof(Interop.User32.USEROBJECTFLAGS),
                             ref dummy
                         )
-                    ) {
+                    )
+                    {
                         return ((flags.dwFlags & Interop.User32.WSF_VISIBLE) != 0);
                     }
                 }
@@ -219,7 +224,8 @@ namespace System
                         ref memoryCounters,
                         memoryCounters.cb
                     )
-                ) {
+                )
+                {
                     return 0;
                 }
                 return (long)memoryCounters.WorkingSetSize;

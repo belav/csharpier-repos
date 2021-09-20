@@ -368,7 +368,8 @@ namespace Microsoft.CodeAnalysis
         /// <exception cref="ArgumentNullException"><paramref name="metadataResolver"/> is null.</exception>
         public IEnumerable<MetadataReference> ResolveMetadataReferences(
             MetadataReferenceResolver metadataResolver
-        ) {
+        )
+        {
             if (metadataResolver == null)
             {
                 throw new ArgumentNullException(nameof(metadataResolver));
@@ -394,7 +395,8 @@ namespace Microsoft.CodeAnalysis
             MetadataReferenceResolver metadataResolver,
             List<DiagnosticInfo>? diagnosticsOpt,
             CommonMessageProvider? messageProviderOpt
-        ) {
+        )
+        {
             RoslynDebug.Assert(metadataResolver != null);
 
             var resolved = new List<MetadataReference>();
@@ -413,7 +415,8 @@ namespace Microsoft.CodeAnalysis
             List<DiagnosticInfo>? diagnosticsOpt,
             CommonMessageProvider? messageProviderOpt,
             List<MetadataReference> resolved
-        ) {
+        )
+        {
             bool result = true;
 
             foreach (CommandLineReference cmdReference in MetadataReferences)
@@ -452,7 +455,8 @@ namespace Microsoft.CodeAnalysis
             MetadataReferenceResolver metadataResolver,
             List<DiagnosticInfo>? diagnosticsOpt,
             CommonMessageProvider? messageProviderOpt
-        ) {
+        )
+        {
             RoslynDebug.Assert(metadataResolver != null);
             Debug.Assert((diagnosticsOpt == null) == (messageProviderOpt == null));
 
@@ -506,7 +510,8 @@ namespace Microsoft.CodeAnalysis
         /// <returns>Yields resolved <see cref="AnalyzerFileReference"/> or <see cref="UnresolvedAnalyzerReference"/>.</returns>
         public IEnumerable<AnalyzerReference> ResolveAnalyzerReferences(
             IAnalyzerAssemblyLoader analyzerLoader
-        ) {
+        )
+        {
             foreach (CommandLineAnalyzerReference cmdLineReference in AnalyzerReferences)
             {
                 yield return ResolveAnalyzerReference(cmdLineReference, analyzerLoader)
@@ -524,7 +529,8 @@ namespace Microsoft.CodeAnalysis
             bool skipAnalyzers,
             out ImmutableArray<DiagnosticAnalyzer> analyzers,
             out ImmutableArray<ISourceGenerator> generators
-        ) {
+        )
+        {
             var analyzerBuilder = ImmutableArray.CreateBuilder<DiagnosticAnalyzer>();
             var generatorBuilder = ImmutableArray.CreateBuilder<ISourceGenerator>();
 
@@ -626,7 +632,8 @@ namespace Microsoft.CodeAnalysis
         private AnalyzerFileReference? ResolveAnalyzerReference(
             CommandLineAnalyzerReference reference,
             IAnalyzerAssemblyLoader analyzerLoader
-        ) {
+        )
+        {
             string? resolvedPath = FileUtilities.ResolveRelativePath(
                 reference.FilePath,
                 basePath: null,

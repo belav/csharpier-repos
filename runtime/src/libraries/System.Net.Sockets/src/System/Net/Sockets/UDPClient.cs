@@ -269,7 +269,8 @@ namespace System.Net.Sockets
             IPEndPoint? endPoint,
             AsyncCallback? requestCallback,
             object? state
-        ) {
+        )
+        {
             ValidateDatagram(datagram, bytes, endPoint);
 
             if (endPoint is null)
@@ -759,7 +760,8 @@ namespace System.Net.Sockets
                             if (
                                 address.AddressFamily == AddressFamily.InterNetwork
                                 && ipv4Socket != null
-                            ) {
+                            )
+                            {
                                 ipv4Socket.Connect(address, port);
                                 _clientSocket = ipv4Socket;
                                 if (ipv6Socket != null)
@@ -956,7 +958,8 @@ namespace System.Net.Sockets
                 ;
                 i < addresses.Length && !IsAddressFamilyCompatible(addresses[i].AddressFamily);
                 i++
-            ) {
+            )
+            {
                 ; // just count the addresses
             }
 

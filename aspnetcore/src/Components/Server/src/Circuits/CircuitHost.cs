@@ -43,7 +43,8 @@ namespace Microsoft.AspNetCore.Components.Server.Circuits
             RemoteJSRuntime jsRuntime,
             CircuitHandler[] circuitHandlers,
             ILogger logger
-        ) {
+        )
+        {
             CircuitId = circuitId;
             if (CircuitId.Secret is null)
             {
@@ -91,7 +92,8 @@ namespace Microsoft.AspNetCore.Components.Server.Circuits
         public Task InitializeAsync(
             ProtectedPrerenderComponentApplicationStore store,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             Log.InitializationStarted(_logger);
 
             return Renderer.Dispatcher.InvokeAsync(
@@ -393,7 +395,8 @@ namespace Microsoft.AspNetCore.Components.Server.Circuits
             string methodIdentifier,
             long dotNetObjectId,
             string argsJson
-        ) {
+        )
+        {
             AssertInitialized();
             AssertNotDisposed();
 
@@ -671,7 +674,8 @@ namespace Microsoft.AspNetCore.Components.Server.Circuits
         private async void SynchronizationContext_UnhandledException(
             object sender,
             UnhandledExceptionEventArgs e
-        ) {
+        )
+        {
             await ReportUnhandledException((Exception)e.ExceptionObject);
             UnhandledException?.Invoke(this, e);
         }
@@ -686,7 +690,8 @@ namespace Microsoft.AspNetCore.Components.Server.Circuits
         private string GetClientErrorMessage(
             Exception exception,
             string additionalInformation = null
-        ) {
+        )
+        {
             if (_options.DetailedErrors)
             {
                 return exception.ToString();
@@ -705,7 +710,8 @@ namespace Microsoft.AspNetCore.Components.Server.Circuits
             IClientProxy client,
             string error,
             Exception exception = null
-        ) {
+        )
+        {
             if (!Client.Connected)
             {
                 Log.UnhandledExceptionClientDisconnected(_logger, CircuitId, exception);
@@ -1161,7 +1167,8 @@ namespace Microsoft.AspNetCore.Components.Server.Circuits
                 CircuitHandler handler,
                 string handlerMethod,
                 Exception exception
-            ) {
+            )
+            {
                 _circuitHandlerFailed(
                     logger,
                     handler.GetType(),
@@ -1204,7 +1211,8 @@ namespace Microsoft.AspNetCore.Components.Server.Circuits
                 string assemblyName,
                 string methodIdentifier,
                 long dotNetObjectId
-            ) {
+            )
+            {
                 if (assemblyName != null)
                 {
                     _beginInvokeDotNetStatic(logger, methodIdentifier, assemblyName, callId, null);
@@ -1228,7 +1236,8 @@ namespace Microsoft.AspNetCore.Components.Server.Circuits
                 string methodIdentifier,
                 long dotNetObjectId,
                 Exception exception
-            ) {
+            )
+            {
                 if (assemblyName != null)
                 {
                     _beginInvokeDotNetStaticFailed(

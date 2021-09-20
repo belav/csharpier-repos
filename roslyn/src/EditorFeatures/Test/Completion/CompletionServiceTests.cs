@@ -92,7 +92,8 @@ class Test {
                 int caretPosition,
                 CompletionTrigger trigger,
                 OptionSet options
-            ) {
+            )
+            {
                 return trigger.Kind switch
                 {
                     CompletionTriggerKind.Invoke => true,
@@ -122,7 +123,8 @@ class Test {
                 Document document,
                 TextSpan startSpan,
                 CancellationToken cancellationToken
-            ) {
+            )
+            {
                 var result = startSpan;
                 var syntaxFacts = document.GetLanguageService<ISyntaxFactsService>();
                 var root = await document.GetSyntaxRootAsync(cancellationToken)
@@ -130,7 +132,8 @@ class Test {
                 var token = root.FindToken(result.Start);
                 if (
                     syntaxFacts.IsStringLiteral(token) || syntaxFacts.IsVerbatimStringLiteral(token)
-                ) {
+                )
+                {
                     var text = root.GetText();
 
                     // Expand selection in both directions until a double quote or any line break character is reached

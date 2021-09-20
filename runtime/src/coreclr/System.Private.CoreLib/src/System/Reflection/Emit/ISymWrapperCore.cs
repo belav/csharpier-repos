@@ -176,7 +176,8 @@ namespace System.Reflection.Emit
                 Guid language,
                 Guid languageVendor,
                 Guid documentType
-            ) {
+            )
+            {
                 int hr = m_vtable.DefineDocument(
                     m_pWriter,
                     url,
@@ -230,7 +231,8 @@ namespace System.Reflection.Emit
                 int[] columns,
                 int[] endLines,
                 int[] endColumns
-            ) {
+            )
+            {
                 int spCount = 0;
                 if (offsets != null)
                 {
@@ -262,7 +264,8 @@ namespace System.Reflection.Emit
                     || (columns != null && columns.Length != spCount)
                     || (endLines != null && endLines.Length != spCount)
                     || (endColumns != null && endColumns.Length != spCount)
-                ) {
+                )
+                {
                     throw new ArgumentException();
                 }
 
@@ -327,7 +330,8 @@ namespace System.Reflection.Emit
                 int addr3,
                 int startOffset,
                 int endOffset
-            ) {
+            )
+            {
                 int hr = m_vtable.DefineLocalVariable(
                     m_pWriter,
                     name,

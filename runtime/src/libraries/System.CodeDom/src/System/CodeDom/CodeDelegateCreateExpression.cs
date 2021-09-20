@@ -14,7 +14,8 @@ namespace System.CodeDom
             CodeTypeReference delegateType,
             CodeExpression targetObject,
             string methodName
-        ) {
+        )
+        {
             _delegateType = delegateType;
             TargetObject = targetObject;
             _methodName = methodName;

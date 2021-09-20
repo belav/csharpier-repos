@@ -37,7 +37,8 @@ namespace Microsoft.CodeAnalysis.MSBuild
             ProjectLoadOperation operation,
             string? targetFramework,
             TimeSpan elapsedTime
-        ) {
+        )
+        {
             FilePath = filePath;
             Operation = operation;
             TargetFramework = targetFramework;

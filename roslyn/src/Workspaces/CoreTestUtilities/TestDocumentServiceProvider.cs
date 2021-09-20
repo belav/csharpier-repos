@@ -17,7 +17,8 @@ namespace Microsoft.CodeAnalysis.Test.Utilities
             bool canApplyChange = true,
             bool supportDiagnostics = true,
             bool supportsMappingImportDirectives = false
-        ) {
+        )
+        {
             DocumentOperationService = new TestDocumentOperationService()
             {
                 CanApplyChange = canApplyChange,
@@ -66,7 +67,8 @@ namespace Microsoft.CodeAnalysis.Test.Utilities
                 Document document,
                 IEnumerable<TextSpan> spans,
                 CancellationToken cancellationToken
-            ) {
+            )
+            {
                 return Task.FromResult(ImmutableArray<MappedSpanResult>.Empty);
             }
         }

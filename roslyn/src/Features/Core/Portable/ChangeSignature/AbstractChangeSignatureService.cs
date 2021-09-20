@@ -104,7 +104,8 @@ namespace Microsoft.CodeAnalysis.ChangeSignature
             Document document,
             TextSpan span,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var context = await GetChangeSignatureContextAsync(
                     document,
                     span.Start,
@@ -127,7 +128,8 @@ namespace Microsoft.CodeAnalysis.ChangeSignature
             int position,
             bool restrictToDeclarations,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var (symbol, selectedIndex) = await GetInvocationSymbolAsync(
                     document,
                     position,
@@ -161,7 +163,8 @@ namespace Microsoft.CodeAnalysis.ChangeSignature
                     && containingType != null
                     && containingType.IsDelegateType()
                     && containingType.DelegateInvokeMethod != null
-                ) {
+                )
+                {
                     symbol = containingType.DelegateInvokeMethod;
                 }
             }
@@ -244,7 +247,8 @@ namespace Microsoft.CodeAnalysis.ChangeSignature
             ChangeSignatureAnalyzedContext context,
             ChangeSignatureOptionsResult? options,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             return context switch
             {
                 ChangeSignatureAnalysisSucceededContext changeSignatureAnalyzedSucceedContext
@@ -266,7 +270,8 @@ namespace Microsoft.CodeAnalysis.ChangeSignature
                 ChangeSignatureAnalysisSucceededContext context,
                 ChangeSignatureOptionsResult? options,
                 CancellationToken cancellationToken
-            ) {
+            )
+            {
                 if (options == null)
                 {
                     return new ChangeSignatureResult(succeeded: false);
@@ -292,7 +297,8 @@ namespace Microsoft.CodeAnalysis.ChangeSignature
         /// <returns>Returns <c>null</c> if the operation is cancelled.</returns>
         internal static ChangeSignatureOptionsResult? GetChangeSignatureOptions(
             ChangeSignatureAnalyzedContext context
-        ) {
+        )
+        {
             if (context is not ChangeSignatureAnalysisSucceededContext succeededContext)
             {
                 return null;
@@ -315,7 +321,8 @@ namespace Microsoft.CodeAnalysis.ChangeSignature
             ISymbol symbol,
             Solution solution,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             using (Logger.LogBlock(FunctionId.FindReference_ChangeSignature, cancellationToken))
             {
                 var streamingProgress = new StreamingProgressCollector();
@@ -342,7 +349,8 @@ namespace Microsoft.CodeAnalysis.ChangeSignature
             ChangeSignatureAnalysisSucceededContext context,
             ChangeSignatureOptionsResult options,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var telemetryTimer = Stopwatch.StartNew();
 
             var currentSolution = context.Solution;
@@ -375,7 +383,8 @@ namespace Microsoft.CodeAnalysis.ChangeSignature
                         methodSymbol.MethodKind == MethodKind.PropertyGet
                         || methodSymbol.MethodKind == MethodKind.PropertySet
                     )
-                ) {
+                )
+                {
                     continue;
                 }
 
@@ -406,7 +415,8 @@ namespace Microsoft.CodeAnalysis.ChangeSignature
                     if (
                         eventSymbol.Type is INamedTypeSymbol type
                         && type.DelegateInvokeMethod != null
-                    ) {
+                    )
+                    {
                         symbolWithSemanticParameters = type.DelegateInvokeMethod;
                     }
                     else
@@ -426,7 +436,8 @@ namespace Microsoft.CodeAnalysis.ChangeSignature
                         methodSymbol.Name == WellKnownMemberNames.DelegateBeginInvokeName
                         && methodSymbol.ContainingType != null
                         && methodSymbol.ContainingType.IsDelegateType()
-                    ) {
+                    )
+                    {
                         includeDefinitionLocations = false;
                     }
 
@@ -450,7 +461,8 @@ namespace Microsoft.CodeAnalysis.ChangeSignature
                                 out var nodeToUpdate,
                                 out var documentId
                             )
-                        ) {
+                        )
+                        {
                             continue;
                         }
 
@@ -487,7 +499,8 @@ namespace Microsoft.CodeAnalysis.ChangeSignature
                             out var nodeToUpdate2,
                             out var documentId2
                         )
-                    ) {
+                    )
+                    {
                         continue;
                     }
 
@@ -609,12 +622,14 @@ namespace Microsoft.CodeAnalysis.ChangeSignature
             SyntaxNode nodeToUpdate,
             Dictionary<SyntaxNode, ISymbol> definitionToUse,
             ISymbol symbolWithSemanticParameters
-        ) {
+        )
+        {
             nodesToUpdate[documentId].Add(nodeToUpdate);
             if (
                 definitionToUse.TryGetValue(nodeToUpdate, out var sym)
                 && sym != symbolWithSemanticParameters
-            ) {
+            )
+            {
                 Debug.Assert(
                     false,
                     "Change Signature: Attempted to modify node twice with different semantic parameters."
@@ -629,7 +644,8 @@ namespace Microsoft.CodeAnalysis.ChangeSignature
             Solution solution,
             out SyntaxNode nodeToUpdate,
             out DocumentId documentId
-        ) {
+        )
+        {
             var tree = location.SourceTree;
             documentId = solution.GetDocumentId(tree);
             var document = solution.GetDocument(documentId);
@@ -651,7 +667,8 @@ namespace Microsoft.CodeAnalysis.ChangeSignature
             ImmutableArray<IUnifiedArgumentSyntax> arguments,
             SignatureChange updatedSignature,
             bool isReducedExtensionMethod = false
-        ) {
+        )
+        {
             // 1. Determine which parameters are permutable
             var declarationParameters = declarationSymbol.GetParameters();
             var declarationParametersToPermute = GetParametersToPermute(
@@ -763,7 +780,8 @@ namespace Microsoft.CodeAnalysis.ChangeSignature
                     !arguments[i].IsNamed
                     && removedParams
                     && i >= updatedSignature.UpdatedConfiguration.ToListOfParameters().Length
-                ) {
+                )
+                {
                     break;
                 }
 
@@ -771,7 +789,8 @@ namespace Microsoft.CodeAnalysis.ChangeSignature
                     !arguments[i].IsNamed
                     || updatedSignature.UpdatedConfiguration.ToListOfParameters()
                         .Any(p => p.Name == arguments[i].GetName())
-                ) {
+                )
+                {
                     newArguments.Add(arguments[i]);
                 }
             }
@@ -787,11 +806,13 @@ namespace Microsoft.CodeAnalysis.ChangeSignature
         private static SignatureChange UpdateSignatureChangeToIncludeExtraParametersFromTheDeclarationSymbol(
             ISymbol declarationSymbol,
             SignatureChange updatedSignature
-        ) {
+        )
+        {
             if (
                 declarationSymbol.GetParameters().Length
                 > updatedSignature.OriginalConfiguration.ToListOfParameters().Length
-            ) {
+            )
+            {
                 var originalConfigurationParameters =
                     updatedSignature.OriginalConfiguration.ToListOfParameters();
                 var updatedConfigurationParameters =
@@ -830,7 +851,8 @@ namespace Microsoft.CodeAnalysis.ChangeSignature
             ImmutableArray<IUnifiedArgumentSyntax> arguments,
             ImmutableArray<IParameterSymbol> originalParameters,
             bool isReducedExtensionMethod
-        ) {
+        )
+        {
             var position = -1 + (isReducedExtensionMethod ? 1 : 0);
             var parametersToPermute = ArrayBuilder<IParameterSymbol>.GetInstance();
 
@@ -1004,7 +1026,8 @@ namespace Microsoft.CodeAnalysis.ChangeSignature
             Document document,
             int position,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var fullList = ArrayBuilder<SyntaxNode>.GetInstance();
             var separators = ArrayBuilder<SyntaxToken>.GetInstance();
 
@@ -1022,7 +1045,8 @@ namespace Microsoft.CodeAnalysis.ChangeSignature
                 if (
                     updatedParameters[i] != signaturePermutation.UpdatedConfiguration.ThisParameter
                     || !isReducedExtensionMethod
-                ) {
+                )
+                {
                     if (updatedParameters[i] is AddedParameter addedParameter)
                     {
                         // Omitting an argument only works in some languages, depending on whether
@@ -1094,7 +1118,8 @@ namespace Microsoft.CodeAnalysis.ChangeSignature
                         if (
                             indexInListOfPreexistingArguments == parameters.Length - 1
                             && parameters[indexInListOfPreexistingArguments].IsParams
-                        ) {
+                        )
+                        {
                             // Handling params array
                             if (seenOmitted)
                             {
@@ -1138,7 +1163,8 @@ namespace Microsoft.CodeAnalysis.ChangeSignature
                                 SyntaxFacts.IsNamedArgument(
                                     newArguments[indexInListOfPreexistingArguments]
                                 )
-                            ) {
+                            )
+                            {
                                 seenNamedArguments = true;
                             }
 
@@ -1198,7 +1224,8 @@ namespace Microsoft.CodeAnalysis.ChangeSignature
             int position,
             AddedParameter addedParameter,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             if (addedParameter.CallSiteKind != CallSiteKind.Inferred || !addedParameter.TypeBinds)
             {
                 return null;
@@ -1247,7 +1274,8 @@ namespace Microsoft.CodeAnalysis.ChangeSignature
                         symbolType,
                         addedParameter.Type
                     ).IsImplicit
-                ) {
+                )
+                {
                     return Generator.IdentifierName(symbol.Name);
                 }
             }
@@ -1259,7 +1287,8 @@ namespace Microsoft.CodeAnalysis.ChangeSignature
             Document document,
             SyntaxNode node,
             ImmutableArray<SyntaxNode> permutedParamNodes
-        ) {
+        )
+        {
             var updatedLeadingTrivia = ImmutableArray.CreateBuilder<SyntaxTrivia>();
             var index = 0;
             SyntaxTrivia lastWhiteSpaceTrivia = default;
@@ -1362,11 +1391,13 @@ namespace Microsoft.CodeAnalysis.ChangeSignature
             SemanticModel semanticModel,
             SyntaxNode lastArgumentExpression,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             if (
                 symbol is IMethodSymbol methodSymbol
                 && methodSymbol.Parameters.LastOrDefault()?.IsParams == true
-            ) {
+            )
+            {
                 if (argumentCount > methodSymbol.Parameters.Length)
                 {
                     return true;

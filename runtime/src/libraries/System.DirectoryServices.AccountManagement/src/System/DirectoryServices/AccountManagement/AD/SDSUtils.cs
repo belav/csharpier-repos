@@ -18,7 +18,8 @@ namespace System.DirectoryServices.AccountManagement
             SearchResult sr,
             PrincipalContext owningContext,
             Type principalType
-        ) {
+        )
+        {
             Principal p;
 
             // Construct an appropriate Principal object.
@@ -47,7 +48,8 @@ namespace System.DirectoryServices.AccountManagement
                 null == principalType
                 || typeof(AuthenticablePrincipal) == principalType
                 || typeof(Principal) == principalType
-            ) {
+            )
+            {
                 if (SDSUtils.IsOfObjectClass(sr, "computer"))
                 {
                     p = ComputerPrincipal.MakeComputer(owningContext);
@@ -83,7 +85,8 @@ namespace System.DirectoryServices.AccountManagement
             DirectoryEntry de,
             PrincipalContext owningContext,
             Type principalType
-        ) {
+        )
+        {
             Principal p;
 
             // Construct an appropriate Principal object.
@@ -109,7 +112,8 @@ namespace System.DirectoryServices.AccountManagement
                 null == principalType
                 || typeof(AuthenticablePrincipal) == principalType
                 || typeof(Principal) == principalType
-            ) {
+            )
+            {
                 if (SDSUtils.IsOfObjectClass(de, "computer"))
                 {
                     p = ComputerPrincipal.MakeComputer(owningContext);
@@ -187,7 +191,8 @@ namespace System.DirectoryServices.AccountManagement
             DirectoryEntry deToMove,
             DirectoryEntry newParent,
             string newName
-        ) {
+        )
+        {
             if (newName != null)
                 deToMove.MoveTo(newParent, newName);
             else
@@ -216,7 +221,8 @@ namespace System.DirectoryServices.AccountManagement
             NetCred credentials,
             AuthenticationTypes authTypes,
             bool needToSetPassword
-        ) {
+        )
+        {
             GlobalDebug.WriteLineIf(GlobalDebug.Info, "SDSUtils", "Entering InsertPrincipal");
 
             Debug.Assert(storeCtx != null);
@@ -228,7 +234,8 @@ namespace System.DirectoryServices.AccountManagement
                 && (!(p is GroupPrincipal))
                 && (!(p is AuthenticablePrincipal))
                 && (!(p is ComputerPrincipal))
-            ) {
+            )
+            {
                 // It's not a type of Principal that we support
                 GlobalDebug.WriteLineIf(
                     GlobalDebug.Warn,
@@ -306,7 +313,8 @@ namespace System.DirectoryServices.AccountManagement
             GroupMembershipUpdater updateGroupMembership,
             NetCred credentials,
             AuthenticationTypes authTypes
-        ) {
+        )
+        {
             GlobalDebug.WriteLineIf(
                 GlobalDebug.Info,
                 "SDSUtils",
@@ -377,7 +385,8 @@ namespace System.DirectoryServices.AccountManagement
                     if (
                         ((System.Runtime.InteropServices.COMException)e.InnerException).ErrorCode
                         == unchecked((int)ExceptionHelper.ERROR_HRESULT_CONSTRAINT_VIOLATION)
-                    ) {
+                    )
+                    {
                         // We have a special case of constraint violation here.  We know this is a password failure to convert to this
                         // specialized type instead of the generic InvalidOperationException
                         throw (
@@ -408,7 +417,8 @@ namespace System.DirectoryServices.AccountManagement
             DirectoryEntry de,
             string oldPassword,
             string newPassword
-        ) {
+        )
+        {
             Debug.Assert(newPassword != null); // but it could be an empty string
             Debug.Assert(oldPassword != null); // but it could be an empty string
 
@@ -431,7 +441,8 @@ namespace System.DirectoryServices.AccountManagement
                     if (
                         ((System.Runtime.InteropServices.COMException)e.InnerException).ErrorCode
                         == unchecked((int)ExceptionHelper.ERROR_HRESULT_CONSTRAINT_VIOLATION)
-                    ) {
+                    )
+                    {
                         // We have a special case of constraint violation here.  We know this is a password failure to convert to this
                         // specialized type instead of the generic InvalidOperationException
                         throw (
@@ -462,7 +473,8 @@ namespace System.DirectoryServices.AccountManagement
             string path,
             NetCred credentials,
             AuthenticationTypes authTypes
-        ) {
+        )
+        {
             DirectoryEntry de = new DirectoryEntry(
                 path,
                 credentials != null ? credentials.UserName : null,
@@ -482,7 +494,8 @@ namespace System.DirectoryServices.AccountManagement
         internal static DirectoryEntry BuildDirectoryEntry(
             NetCred credentials,
             AuthenticationTypes authTypes
-        ) {
+        )
+        {
             DirectoryEntry de = new DirectoryEntry();
 
             de.Username = credentials != null ? credentials.UserName : null;
@@ -504,7 +517,8 @@ namespace System.DirectoryServices.AccountManagement
             T value,
             NetCred credentials,
             AuthenticationTypes authTypes
-        ) {
+        )
+        {
             Debug.Assert(attribute != null && attribute.Length > 0);
 
             // Ideally, we'd just like to set the property in the principal's DirectoryEntry and write
@@ -544,7 +558,8 @@ namespace System.DirectoryServices.AccountManagement
             int value,
             NetCred credentials,
             AuthenticationTypes authTypes
-        ) {
+        )
+        {
             GlobalDebug.WriteLineIf(
                 GlobalDebug.Info,
                 "SDSUtils",
@@ -605,10 +620,12 @@ namespace System.DirectoryServices.AccountManagement
             string suggestedProperty,
             Principal p,
             string propertyName
-        ) {
+        )
+        {
             if (
                 properties[suggestedProperty].Count != 0 && properties[suggestedProperty][0] != null
-            ) {
+            )
+            {
                 // We're intended to handle single-valued scalar properties
                 Debug.Assert(properties[suggestedProperty].Count == 1);
                 Debug.Assert(properties[suggestedProperty][0] is T);
@@ -622,7 +639,8 @@ namespace System.DirectoryServices.AccountManagement
             string suggestedProperty,
             Principal p,
             string propertyName
-        ) {
+        )
+        {
             dSPropertyValueCollection values = properties[suggestedProperty];
 
             List<T> list = new List<T>();
@@ -700,7 +718,8 @@ namespace System.DirectoryServices.AccountManagement
             Principal p,
             string propertyName,
             bool testCantChangePassword
-        ) {
+        )
+        {
             Debug.Assert(
                 (
                     !testCantChangePassword
@@ -757,7 +776,8 @@ namespace System.DirectoryServices.AccountManagement
             string propertyName,
             DirectoryEntry de,
             string suggestedProperty
-        ) {
+        )
+        {
             PrincipalValueCollection<string> trackingList =
                 (PrincipalValueCollection<string>)p.GetValueForProperty(propertyName);
 
@@ -807,7 +827,8 @@ namespace System.DirectoryServices.AccountManagement
             string suggestedProperty,
             bool isSAM,
             bool isUnpersisted
-        ) {
+        )
+        {
             Debug.Assert(
                 (
                     !isSAM
@@ -981,7 +1002,8 @@ namespace System.DirectoryServices.AccountManagement
                         "DC=",
                         StringComparison.OrdinalIgnoreCase
                     )
-                ) {
+                )
+                {
                     sb.Append(component, 3, component.Length - 3);
                     sb.Append('.');
                 }

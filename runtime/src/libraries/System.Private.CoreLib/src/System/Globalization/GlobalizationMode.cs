@@ -31,7 +31,8 @@ namespace System.Globalization
             string switchName,
             string envVariable,
             [NotNullWhen(true)] out string? value
-        ) {
+        )
+        {
             value = AppContext.GetData(switchName) as string;
             if (string.IsNullOrEmpty(value))
             {
@@ -86,7 +87,8 @@ namespace System.Globalization
                     DllImportSearchPath.ApplicationDirectory | DllImportSearchPath.System32,
                     out IntPtr lib
                 ) && failOnLoadFailure
-            ) {
+            )
+            {
                 Environment.FailFast($"Failed to load app-local ICU: {library}");
             }
 

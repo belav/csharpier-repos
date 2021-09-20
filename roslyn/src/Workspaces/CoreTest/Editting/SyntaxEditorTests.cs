@@ -204,7 +204,8 @@ public class C
 
         private void TestReplaceWithTrackingCore(
             Action<SyntaxNode, SyntaxNode, SyntaxEditor> replaceNodeWithTracking
-        ) {
+        )
+        {
             var code =
                 @"
 public class C
@@ -404,7 +405,8 @@ public class C
 
         private void TestInsertAfterWithTrackingCore(
             Action<SyntaxNode, SyntaxNode, SyntaxEditor> insertAfterWithTracking
-        ) {
+        )
+        {
             var code =
                 @"
 public class C
@@ -476,7 +478,8 @@ public class C
 
         private void TestInsertBeforeWithTrackingCore(
             Action<SyntaxNode, SyntaxNode, SyntaxEditor> insertBeforeWithTracking
-        ) {
+        )
+        {
             var code =
                 @"
 public class C

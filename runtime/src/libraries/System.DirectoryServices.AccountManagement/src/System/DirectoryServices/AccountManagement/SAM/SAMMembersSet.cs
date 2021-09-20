@@ -21,7 +21,8 @@ namespace System.DirectoryServices.AccountManagement
             bool recursive,
             SAMStoreCtx storeCtx,
             DirectoryEntry ctxBase
-        ) {
+        )
+        {
             GlobalDebug.WriteLineIf(
                 GlobalDebug.Info,
                 "SAMMembersSet",

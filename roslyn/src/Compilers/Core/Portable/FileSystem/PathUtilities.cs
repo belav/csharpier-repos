@@ -332,7 +332,8 @@ namespace Roslyn.Utilities
                     path.Length >= 2
                     && path[1] == VolumeSeparatorChar
                     && (path.Length <= 2 || !IsDirectorySeparator(path[2]))
-                ) {
+                )
+                {
                     return PathKind.RelativeToDriveDirectory;
                 }
             }
@@ -410,7 +411,8 @@ namespace Roslyn.Utilities
         public static string? CombinePossiblyRelativeAndRelativePaths(
             string? root,
             string? relativePath
-        ) {
+        )
+        {
             if (RoslynString.IsNullOrEmpty(root))
             {
                 return null;
@@ -705,7 +707,8 @@ namespace Roslyn.Utilities
         public static string NormalizePathPrefix(
             string filePath,
             ImmutableArray<KeyValuePair<string, string>> pathMap
-        ) {
+        )
+        {
             if (pathMap.IsDefaultOrEmpty)
             {
                 return filePath;

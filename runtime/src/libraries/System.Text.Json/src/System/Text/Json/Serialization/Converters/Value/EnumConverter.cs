@@ -43,7 +43,8 @@ namespace System.Text.Json.Serialization.Converters
             EnumConverterOptions converterOptions,
             JsonNamingPolicy? namingPolicy,
             JsonSerializerOptions serializerOptions
-        ) {
+        )
+        {
             _converterOptions = converterOptions;
             _namingPolicy = namingPolicy;
             _nameCache = new ConcurrentDictionary<ulong, JsonEncodedText>();
@@ -78,7 +79,8 @@ namespace System.Text.Json.Serialization.Converters
             ref Utf8JsonReader reader,
             Type typeToConvert,
             JsonSerializerOptions options
-        ) {
+        )
+        {
             JsonTokenType token = reader.TokenType;
 
             if (token == JsonTokenType.String)
@@ -95,7 +97,8 @@ namespace System.Text.Json.Serialization.Converters
             if (
                 token != JsonTokenType.Number
                 || !_converterOptions.HasFlag(EnumConverterOptions.AllowNumbers)
-            ) {
+            )
+            {
                 ThrowHelper.ThrowJsonException();
                 return default;
             }
@@ -326,7 +329,8 @@ namespace System.Text.Json.Serialization.Converters
             if (
                 !Enum.TryParse(enumString, out T value)
                 && !Enum.TryParse(enumString, ignoreCase: true, out value)
-            ) {
+            )
+            {
                 ThrowHelper.ThrowJsonException();
             }
 
@@ -338,7 +342,8 @@ namespace System.Text.Json.Serialization.Converters
             T value,
             JsonSerializerOptions options,
             ref WriteStack state
-        ) {
+        )
+        {
             // An EnumConverter that invokes this method
             // can only be created by JsonSerializerOptions.GetDictionaryKeyConverter
             // hence no naming policy is expected.

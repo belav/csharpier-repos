@@ -788,7 +788,8 @@ internal class Program
         T3 c,
         T4 d,
         IGenInterface<T1, T2> igen
-    ) {
+    )
+    {
         IL.Push(igen);
         IL.Push(new S32());
         IL.Push(a);
@@ -826,7 +827,8 @@ internal class Program
         int c,
         object d,
         IGenInterface<string, object> igen
-    ) {
+    )
+    {
         IL.Push(igen);
         IL.Push(new S32());
         IL.Push(a);
@@ -848,7 +850,8 @@ internal class Program
         string a,
         object b,
         IGenInterface<string, object> igen
-    ) {
+    )
+    {
         IL.Push(igen);
         IL.Push(new S32());
         IL.Push(a);
@@ -946,7 +949,8 @@ internal class Program
         int r,
         Span<int> d,
         int result
-    ) {
+    )
+    {
         if (a == d.Length)
             return result;
         else
@@ -1225,7 +1229,8 @@ class Instance
         object g,
         int h,
         ref int interior
-    ) {
+    )
+    {
         IL.Push(this);
 
         IL.Push(a);

@@ -77,7 +77,8 @@ namespace ComWrappersTests
                 object obj,
                 CreateComInterfaceFlags flags,
                 out int count
-            ) {
+            )
+            {
                 count = 0;
                 return null;
             }
@@ -102,7 +103,8 @@ namespace ComWrappersTests
             WeakReference<WeakReferenceableWrapper> wr,
             bool expectedIsAlive,
             TestComWrappers sourceWrappers = null
-        ) {
+        )
+        {
             WeakReferenceableWrapper target;
             bool isAlive = wr.TryGetTarget(out target);
             Assert.AreEqual(expectedIsAlive, isAlive);
@@ -113,7 +115,8 @@ namespace ComWrappersTests
 
         private static (WeakReference<WeakReferenceableWrapper>, IntPtr) GetWeakReference(
             TestComWrappers cw
-        ) {
+        )
+        {
             IntPtr objRaw = WeakReferenceNative.CreateWeakReferencableObject();
             var obj = (WeakReferenceableWrapper)cw.GetOrCreateObjectForComInstance(
                 objRaw,
@@ -127,7 +130,8 @@ namespace ComWrappersTests
         private static IntPtr SetWeakReferenceTarget(
             WeakReference<WeakReferenceableWrapper> wr,
             TestComWrappers cw
-        ) {
+        )
+        {
             IntPtr objRaw = WeakReferenceNative.CreateWeakReferencableObject();
             var obj = (WeakReferenceableWrapper)cw.GetOrCreateObjectForComInstance(
                 objRaw,

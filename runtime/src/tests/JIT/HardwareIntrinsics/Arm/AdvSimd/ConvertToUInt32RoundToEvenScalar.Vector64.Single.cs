@@ -129,7 +129,8 @@ namespace JIT.HardwareIntrinsics.Arm
                     (alignment != 16 && alignment != 8)
                     || (alignment * 2) < sizeOfinArray1
                     || (alignment * 2) < sizeOfoutArray
-                ) {
+                )
+                {
                     throw new ArgumentException("Invalid value of alignment");
                 }
 
@@ -188,7 +189,8 @@ namespace JIT.HardwareIntrinsics.Arm
 
             public void RunStructFldScenario(
                 SimpleUnaryOpTest__ConvertToUInt32RoundToEvenScalar_Vector64_Single testClass
-            ) {
+            )
+            {
                 var result = AdvSimd.ConvertToUInt32RoundToEvenScalar(_fld1);
 
                 Unsafe.Write(testClass._dataTable.outArrayPtr, result);
@@ -197,7 +199,8 @@ namespace JIT.HardwareIntrinsics.Arm
 
             public void RunStructFldScenario_Load(
                 SimpleUnaryOpTest__ConvertToUInt32RoundToEvenScalar_Vector64_Single testClass
-            ) {
+            )
+            {
                 fixed (Vector64<Single>* pFld1 = &_fld1)
                 {
                     var result = AdvSimd.ConvertToUInt32RoundToEvenScalar(
@@ -486,7 +489,8 @@ namespace JIT.HardwareIntrinsics.Arm
             Vector64<Single> op1,
             void* result,
             [CallerMemberName] string method = ""
-        ) {
+        )
+        {
             Single[] inArray1 = new Single[Op1ElementCount];
             UInt32[] outArray = new UInt32[RetElementCount];
 
@@ -523,7 +527,8 @@ namespace JIT.HardwareIntrinsics.Arm
             Single[] firstOp,
             UInt32[] result,
             [CallerMemberName] string method = ""
-        ) {
+        )
+        {
             bool succeeded = true;
 
             if (Helpers.ConvertToUInt32RoundToEven(firstOp[0]) != result[0])

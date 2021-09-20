@@ -74,7 +74,8 @@ namespace Dynamo
             if (
                 !Int32.TryParse(args[0], out numElements)
                 || !Int32.TryParse(args[1], out numDynamics)
-            ) {
+            )
+            {
                 Usage();
                 return 1;
             }

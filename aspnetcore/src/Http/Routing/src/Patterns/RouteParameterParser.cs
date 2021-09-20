@@ -102,7 +102,8 @@ namespace Microsoft.AspNetCore.Routing.Patterns
             string text,
             int currentIndex,
             int endIndex
-        ) {
+        )
+        {
             var constraints = new ArrayBuilder<RoutePatternParameterPolicyReference>(0);
             var state = ParseState.Start;
             var startIndex = currentIndex;
@@ -297,7 +298,8 @@ namespace Microsoft.AspNetCore.Routing.Patterns
             public ParameterPolicyParseResults(
                 int currentIndex,
                 RoutePatternParameterPolicyReference[] parameterPolicies
-            ) {
+            )
+            {
                 CurrentIndex = currentIndex;
                 ParameterPolicies = parameterPolicies;
             }

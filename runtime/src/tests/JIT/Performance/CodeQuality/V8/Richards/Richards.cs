@@ -364,7 +364,8 @@ namespace V8.Richards
             int priority,
             Packet queue,
             Task task
-        ) {
+        )
+        {
             this.link = link;
             this.id = id;
             this.priority = priority;

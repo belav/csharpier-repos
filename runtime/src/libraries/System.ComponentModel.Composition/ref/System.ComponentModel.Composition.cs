@@ -19,19 +19,22 @@ namespace System.ComponentModel.Composition
             this System.ComponentModel.Composition.Hosting.CompositionBatch batch,
             string contractName,
             T exportedValue
-        ) {
+        )
+        {
             throw null;
         }
         public static System.ComponentModel.Composition.Primitives.ComposablePart AddExportedValue<T>(
             this System.ComponentModel.Composition.Hosting.CompositionBatch batch,
             T exportedValue
-        ) {
+        )
+        {
             throw null;
         }
         public static System.ComponentModel.Composition.Primitives.ComposablePart AddPart(
             this System.ComponentModel.Composition.Hosting.CompositionBatch batch,
             object attributedPart
-        ) {
+        )
+        {
             throw null;
         }
         public static void ComposeExportedValue<T>(
@@ -50,42 +53,49 @@ namespace System.ComponentModel.Composition
         public static System.ComponentModel.Composition.Primitives.ComposablePart CreatePart(
             System.ComponentModel.Composition.Primitives.ComposablePartDefinition partDefinition,
             object attributedPart
-        ) {
+        )
+        {
             throw null;
         }
         public static System.ComponentModel.Composition.Primitives.ComposablePart CreatePart(
             object attributedPart
-        ) {
+        )
+        {
             throw null;
         }
         public static System.ComponentModel.Composition.Primitives.ComposablePart CreatePart(
             object attributedPart,
             System.Reflection.ReflectionContext reflectionContext
-        ) {
+        )
+        {
             throw null;
         }
         public static System.ComponentModel.Composition.Primitives.ComposablePartDefinition CreatePartDefinition(
             System.Type type,
             System.ComponentModel.Composition.Primitives.ICompositionElement? origin
-        ) {
+        )
+        {
             throw null;
         }
         public static System.ComponentModel.Composition.Primitives.ComposablePartDefinition CreatePartDefinition(
             System.Type type,
             System.ComponentModel.Composition.Primitives.ICompositionElement? origin,
             bool ensureIsDiscoverable
-        ) {
+        )
+        {
             throw null;
         }
         public static bool Exports(
             this System.ComponentModel.Composition.Primitives.ComposablePartDefinition part,
             System.Type contractType
-        ) {
+        )
+        {
             throw null;
         }
         public static bool Exports<T>(
             this System.ComponentModel.Composition.Primitives.ComposablePartDefinition part
-        ) {
+        )
+        {
             throw null;
         }
         public static string GetContractName(System.Type type)
@@ -94,7 +104,8 @@ namespace System.ComponentModel.Composition
         }
         public static TMetadataView GetMetadataView<TMetadataView>(
             System.Collections.Generic.IDictionary<string, object?> metadata
-        ) {
+        )
+        {
             throw null;
         }
         public static string GetTypeIdentity(System.Reflection.MethodInfo method)
@@ -108,38 +119,44 @@ namespace System.ComponentModel.Composition
         public static bool Imports(
             this System.ComponentModel.Composition.Primitives.ComposablePartDefinition part,
             System.Type contractType
-        ) {
+        )
+        {
             throw null;
         }
         public static bool Imports(
             this System.ComponentModel.Composition.Primitives.ComposablePartDefinition part,
             System.Type contractType,
             System.ComponentModel.Composition.Primitives.ImportCardinality importCardinality
-        ) {
+        )
+        {
             throw null;
         }
         public static bool Imports<T>(
             this System.ComponentModel.Composition.Primitives.ComposablePartDefinition part
-        ) {
+        )
+        {
             throw null;
         }
         public static bool Imports<T>(
             this System.ComponentModel.Composition.Primitives.ComposablePartDefinition part,
             System.ComponentModel.Composition.Primitives.ImportCardinality importCardinality
-        ) {
+        )
+        {
             throw null;
         }
         public static System.ComponentModel.Composition.Primitives.ComposablePart SatisfyImportsOnce(
             this System.ComponentModel.Composition.ICompositionService compositionService,
             object attributedPart
-        ) {
+        )
+        {
             throw null;
         }
         public static System.ComponentModel.Composition.Primitives.ComposablePart SatisfyImportsOnce(
             this System.ComponentModel.Composition.ICompositionService compositionService,
             object attributedPart,
             System.Reflection.ReflectionContext reflectionContext
-        ) {
+        )
+        {
             throw null;
         }
     }
@@ -545,9 +562,8 @@ namespace System.ComponentModel.Composition.Hosting
         public override System.Collections.Generic.IEnumerable<System.Tuple<
                 System.ComponentModel.Composition.Primitives.ComposablePartDefinition,
                 System.ComponentModel.Composition.Primitives.ExportDefinition
-            >> GetExports(
-            System.ComponentModel.Composition.Primitives.ImportDefinition definition
-        ) {
+            >> GetExports(System.ComponentModel.Composition.Primitives.ImportDefinition definition)
+        {
             throw null;
         }
         protected virtual void OnChanged(
@@ -576,7 +592,8 @@ namespace System.ComponentModel.Composition.Hosting
         protected override System.Collections.Generic.IEnumerable<System.ComponentModel.Composition.Primitives.Export> GetExportsCore(
             System.ComponentModel.Composition.Primitives.ImportDefinition definition,
             System.ComponentModel.Composition.Hosting.AtomicComposition? atomicComposition
-        ) {
+        )
+        {
             throw null;
         }
     }
@@ -609,9 +626,8 @@ namespace System.ComponentModel.Composition.Hosting
         public override System.Collections.Generic.IEnumerable<System.Tuple<
                 System.ComponentModel.Composition.Primitives.ComposablePartDefinition,
                 System.ComponentModel.Composition.Primitives.ExportDefinition
-            >> GetExports(
-            System.ComponentModel.Composition.Primitives.ImportDefinition definition
-        ) {
+            >> GetExports(System.ComponentModel.Composition.Primitives.ImportDefinition definition)
+        {
             throw null;
         }
         public override string ToString()
@@ -671,9 +687,8 @@ namespace System.ComponentModel.Composition.Hosting
         public override System.Collections.Generic.IEnumerable<System.Tuple<
                 System.ComponentModel.Composition.Primitives.ComposablePartDefinition,
                 System.ComponentModel.Composition.Primitives.ExportDefinition
-            >> GetExports(
-            System.ComponentModel.Composition.Primitives.ImportDefinition definition
-        ) {
+            >> GetExports(System.ComponentModel.Composition.Primitives.ImportDefinition definition)
+        {
             throw null;
         }
         public override string ToString()
@@ -697,13 +712,15 @@ namespace System.ComponentModel.Composition.Hosting
             object key,
             bool localAtomicCompositionOnly,
             [System.Diagnostics.CodeAnalysis.MaybeNullWhenAttribute(false)] out T value
-        ) {
+        )
+        {
             throw null;
         }
         public bool TryGetValue<T>(
             object key,
             [System.Diagnostics.CodeAnalysis.MaybeNullWhenAttribute(false)] out T value
-        ) {
+        )
+        {
             throw null;
         }
     }
@@ -737,7 +754,8 @@ namespace System.ComponentModel.Composition.Hosting
         protected override System.Collections.Generic.IEnumerable<System.ComponentModel.Composition.Primitives.Export> GetExportsCore(
             System.ComponentModel.Composition.Primitives.ImportDefinition definition,
             System.ComponentModel.Composition.Hosting.AtomicComposition? atomicComposition
-        ) {
+        )
+        {
             throw null;
         }
     }
@@ -745,7 +763,8 @@ namespace System.ComponentModel.Composition.Hosting
     {
         public static System.ComponentModel.Composition.Hosting.CompositionService CreateCompositionService(
             this System.ComponentModel.Composition.Primitives.ComposablePartCatalog composablePartCatalog
-        ) {
+        )
+        {
             throw null;
         }
     }
@@ -790,7 +809,8 @@ namespace System.ComponentModel.Composition.Hosting
         protected override System.Collections.Generic.IEnumerable<System.ComponentModel.Composition.Primitives.Export>? GetExportsCore(
             System.ComponentModel.Composition.Primitives.ImportDefinition definition,
             System.ComponentModel.Composition.Hosting.AtomicComposition? atomicComposition
-        ) {
+        )
+        {
             throw null;
         }
     }
@@ -811,7 +831,8 @@ namespace System.ComponentModel.Composition.Hosting
         }
         public System.ComponentModel.Composition.Primitives.ComposablePart AddExport(
             System.ComponentModel.Composition.Primitives.Export export
-        ) {
+        )
+        {
             throw null;
         }
         public void AddPart(System.ComponentModel.Composition.Primitives.ComposablePart part) { }
@@ -872,7 +893,8 @@ namespace System.ComponentModel.Composition.Hosting
         protected override System.Collections.Generic.IEnumerable<System.ComponentModel.Composition.Primitives.Export>? GetExportsCore(
             System.ComponentModel.Composition.Primitives.ImportDefinition definition,
             System.ComponentModel.Composition.Hosting.AtomicComposition? atomicComposition
-        ) {
+        )
+        {
             throw null;
         }
         public void ReleaseExport(System.ComponentModel.Composition.Primitives.Export export) { }
@@ -938,9 +960,8 @@ namespace System.ComponentModel.Composition.Hosting
         public override System.Collections.Generic.IEnumerable<System.Tuple<
                 System.ComponentModel.Composition.Primitives.ComposablePartDefinition,
                 System.ComponentModel.Composition.Primitives.ExportDefinition
-            >> GetExports(
-            System.ComponentModel.Composition.Primitives.ImportDefinition definition
-        ) {
+            >> GetExports(System.ComponentModel.Composition.Primitives.ImportDefinition definition)
+        {
             throw null;
         }
         protected virtual void OnChanged(
@@ -1036,9 +1057,8 @@ namespace System.ComponentModel.Composition.Hosting
         public override System.Collections.Generic.IEnumerable<System.Tuple<
                 System.ComponentModel.Composition.Primitives.ComposablePartDefinition,
                 System.ComponentModel.Composition.Primitives.ExportDefinition
-            >> GetExports(
-            System.ComponentModel.Composition.Primitives.ImportDefinition definition
-        ) {
+            >> GetExports(System.ComponentModel.Composition.Primitives.ImportDefinition definition)
+        {
             throw null;
         }
         protected virtual void OnChanged(
@@ -1092,20 +1112,23 @@ namespace System.ComponentModel.Composition.Hosting
         }
         public System.Collections.Generic.IEnumerable<System.ComponentModel.Composition.Primitives.Export> GetExports(
             System.ComponentModel.Composition.Primitives.ImportDefinition definition
-        ) {
+        )
+        {
             throw null;
         }
         public System.Collections.Generic.IEnumerable<System.ComponentModel.Composition.Primitives.Export> GetExports(
             System.ComponentModel.Composition.Primitives.ImportDefinition definition,
             System.ComponentModel.Composition.Hosting.AtomicComposition? atomicComposition
-        ) {
+        )
+        {
             throw null;
         }
         public System.Collections.Generic.IEnumerable<System.Lazy<object, object>> GetExports(
             System.Type type,
             System.Type? metadataViewType,
             string? contractName
-        ) {
+        )
+        {
             throw null;
         }
         protected abstract System.Collections.Generic.IEnumerable<System.ComponentModel.Composition.Primitives.Export>? GetExportsCore(
@@ -1118,7 +1141,8 @@ namespace System.ComponentModel.Composition.Hosting
         }
         public System.Collections.Generic.IEnumerable<System.Lazy<T>> GetExports<T>(
             string? contractName
-        ) {
+        )
+        {
             throw null;
         }
         public System.Collections.Generic.IEnumerable<System.Lazy<T, TMetadataView>> GetExports<
@@ -1161,7 +1185,8 @@ namespace System.ComponentModel.Composition.Hosting
             System.ComponentModel.Composition.Primitives.ImportDefinition definition,
             System.ComponentModel.Composition.Hosting.AtomicComposition? atomicComposition,
             out System.Collections.Generic.IEnumerable<System.ComponentModel.Composition.Primitives.Export>? exports
-        ) {
+        )
+        {
             throw null;
         }
     }
@@ -1222,9 +1247,8 @@ namespace System.ComponentModel.Composition.Hosting
         public override System.Collections.Generic.IEnumerable<System.Tuple<
                 System.ComponentModel.Composition.Primitives.ComposablePartDefinition,
                 System.ComponentModel.Composition.Primitives.ExportDefinition
-            >> GetExports(
-            System.ComponentModel.Composition.Primitives.ImportDefinition definition
-        ) {
+            >> GetExports(System.ComponentModel.Composition.Primitives.ImportDefinition definition)
+        {
             throw null;
         }
         public System.ComponentModel.Composition.Hosting.FilteredCatalog IncludeDependencies()
@@ -1236,7 +1260,8 @@ namespace System.ComponentModel.Composition.Hosting
                 System.ComponentModel.Composition.Primitives.ImportDefinition,
                 bool
             > importFilter
-        ) {
+        )
+        {
             throw null;
         }
         public System.ComponentModel.Composition.Hosting.FilteredCatalog IncludeDependents()
@@ -1248,7 +1273,8 @@ namespace System.ComponentModel.Composition.Hosting
                 System.ComponentModel.Composition.Primitives.ImportDefinition,
                 bool
             > importFilter
-        ) {
+        )
+        {
             throw null;
         }
         protected virtual void OnChanged(
@@ -1299,20 +1325,23 @@ namespace System.ComponentModel.Composition.Hosting
         public static bool ContainsPartMetadataWithKey(
             this System.ComponentModel.Composition.Primitives.ComposablePartDefinition part,
             string key
-        ) {
+        )
+        {
             throw null;
         }
         public static bool ContainsPartMetadata<T>(
             this System.ComponentModel.Composition.Primitives.ComposablePartDefinition part,
             string key,
             T value
-        ) {
+        )
+        {
             throw null;
         }
         public static bool Exports(
             this System.ComponentModel.Composition.Primitives.ComposablePartDefinition part,
             string contractName
-        ) {
+        )
+        {
             throw null;
         }
         public static System.ComponentModel.Composition.Hosting.FilteredCatalog Filter(
@@ -1321,20 +1350,23 @@ namespace System.ComponentModel.Composition.Hosting
                 System.ComponentModel.Composition.Primitives.ComposablePartDefinition,
                 bool
             > filter
-        ) {
+        )
+        {
             throw null;
         }
         public static bool Imports(
             this System.ComponentModel.Composition.Primitives.ComposablePartDefinition part,
             string contractName
-        ) {
+        )
+        {
             throw null;
         }
         public static bool Imports(
             this System.ComponentModel.Composition.Primitives.ComposablePartDefinition part,
             string contractName,
             System.ComponentModel.Composition.Primitives.ImportCardinality importCardinality
-        ) {
+        )
+        {
             throw null;
         }
     }
@@ -1418,9 +1450,8 @@ namespace System.ComponentModel.Composition.Primitives
         public virtual System.Collections.Generic.IEnumerable<System.Tuple<
                 System.ComponentModel.Composition.Primitives.ComposablePartDefinition,
                 System.ComponentModel.Composition.Primitives.ExportDefinition
-            >> GetExports(
-            System.ComponentModel.Composition.Primitives.ImportDefinition definition
-        ) {
+            >> GetExports(System.ComponentModel.Composition.Primitives.ImportDefinition definition)
+        {
             throw null;
         }
         System.Collections.IEnumerator System.Collections.IEnumerable.GetEnumerator()
@@ -1519,7 +1550,8 @@ namespace System.ComponentModel.Composition.Primitives
         }
         public override bool IsConstraintSatisfiedBy(
             System.ComponentModel.Composition.Primitives.ExportDefinition exportDefinition
-        ) {
+        )
+        {
             throw null;
         }
         public override string ToString()
@@ -1650,7 +1682,8 @@ namespace System.ComponentModel.Composition.Primitives
         }
         public virtual bool IsConstraintSatisfiedBy(
             System.ComponentModel.Composition.Primitives.ExportDefinition exportDefinition
-        ) {
+        )
+        {
             throw null;
         }
         public override string ToString()
@@ -1672,13 +1705,15 @@ namespace System.ComponentModel.Composition.ReflectionModel
         public LazyMemberInfo(
             System.Reflection.MemberTypes memberType,
             System.Func<System.Reflection.MemberInfo[]> accessorsCreator
-        ) {
+        )
+        {
             throw null;
         }
         public LazyMemberInfo(
             System.Reflection.MemberTypes memberType,
             params System.Reflection.MemberInfo[] accessors
-        ) {
+        )
+        {
             throw null;
         }
         public System.Reflection.MemberTypes MemberType
@@ -1700,13 +1735,15 @@ namespace System.ComponentModel.Composition.ReflectionModel
         public static bool operator ==(
             System.ComponentModel.Composition.ReflectionModel.LazyMemberInfo left,
             System.ComponentModel.Composition.ReflectionModel.LazyMemberInfo right
-        ) {
+        )
+        {
             throw null;
         }
         public static bool operator !=(
             System.ComponentModel.Composition.ReflectionModel.LazyMemberInfo left,
             System.ComponentModel.Composition.ReflectionModel.LazyMemberInfo right
-        ) {
+        )
+        {
             throw null;
         }
     }
@@ -1717,7 +1754,8 @@ namespace System.ComponentModel.Composition.ReflectionModel
             string contractName,
             System.Lazy<System.Collections.Generic.IDictionary<string, object?>> metadata,
             System.ComponentModel.Composition.Primitives.ICompositionElement? origin
-        ) {
+        )
+        {
             throw null;
         }
         public static System.ComponentModel.Composition.Primitives.ContractBasedImportDefinition CreateImportDefinition(
@@ -1735,7 +1773,8 @@ namespace System.ComponentModel.Composition.ReflectionModel
             System.Collections.Generic.IDictionary<string, object?> metadata,
             bool isExportFactory,
             System.ComponentModel.Composition.Primitives.ICompositionElement? origin
-        ) {
+        )
+        {
             throw null;
         }
         public static System.ComponentModel.Composition.Primitives.ContractBasedImportDefinition CreateImportDefinition(
@@ -1752,7 +1791,8 @@ namespace System.ComponentModel.Composition.ReflectionModel
             System.Collections.Generic.IDictionary<string, object?> metadata,
             bool isExportFactory,
             System.ComponentModel.Composition.Primitives.ICompositionElement? origin
-        ) {
+        )
+        {
             throw null;
         }
         public static System.ComponentModel.Composition.Primitives.ContractBasedImportDefinition CreateImportDefinition(
@@ -1767,7 +1807,8 @@ namespace System.ComponentModel.Composition.ReflectionModel
             bool isRecomposable,
             System.ComponentModel.Composition.CreationPolicy requiredCreationPolicy,
             System.ComponentModel.Composition.Primitives.ICompositionElement? origin
-        ) {
+        )
+        {
             throw null;
         }
         public static System.ComponentModel.Composition.Primitives.ContractBasedImportDefinition CreateImportDefinition(
@@ -1783,7 +1824,8 @@ namespace System.ComponentModel.Composition.ReflectionModel
             System.Collections.Generic.IDictionary<string, object?> metadata,
             bool isExportFactory,
             System.ComponentModel.Composition.Primitives.ICompositionElement? origin
-        ) {
+        )
+        {
             throw null;
         }
         public static System.ComponentModel.Composition.Primitives.ContractBasedImportDefinition CreateImportDefinition(
@@ -1797,7 +1839,8 @@ namespace System.ComponentModel.Composition.ReflectionModel
             System.ComponentModel.Composition.Primitives.ImportCardinality cardinality,
             System.ComponentModel.Composition.CreationPolicy requiredCreationPolicy,
             System.ComponentModel.Composition.Primitives.ICompositionElement? origin
-        ) {
+        )
+        {
             throw null;
         }
         public static System.ComponentModel.Composition.Primitives.ComposablePartDefinition CreatePartDefinition(
@@ -1807,47 +1850,56 @@ namespace System.ComponentModel.Composition.ReflectionModel
             System.Lazy<System.Collections.Generic.IEnumerable<System.ComponentModel.Composition.Primitives.ExportDefinition>>? exports,
             System.Lazy<System.Collections.Generic.IDictionary<string, object?>>? metadata,
             System.ComponentModel.Composition.Primitives.ICompositionElement? origin
-        ) {
+        )
+        {
             throw null;
         }
         public static System.ComponentModel.Composition.Primitives.ContractBasedImportDefinition GetExportFactoryProductImportDefinition(
             System.ComponentModel.Composition.Primitives.ImportDefinition importDefinition
-        ) {
+        )
+        {
             throw null;
         }
         public static System.ComponentModel.Composition.ReflectionModel.LazyMemberInfo GetExportingMember(
             System.ComponentModel.Composition.Primitives.ExportDefinition exportDefinition
-        ) {
+        )
+        {
             throw null;
         }
         public static System.ComponentModel.Composition.ReflectionModel.LazyMemberInfo GetImportingMember(
             System.ComponentModel.Composition.Primitives.ImportDefinition importDefinition
-        ) {
+        )
+        {
             throw null;
         }
         public static System.Lazy<System.Reflection.ParameterInfo> GetImportingParameter(
             System.ComponentModel.Composition.Primitives.ImportDefinition importDefinition
-        ) {
+        )
+        {
             throw null;
         }
         public static System.Lazy<System.Type> GetPartType(
             System.ComponentModel.Composition.Primitives.ComposablePartDefinition partDefinition
-        ) {
+        )
+        {
             throw null;
         }
         public static bool IsDisposalRequired(
             System.ComponentModel.Composition.Primitives.ComposablePartDefinition partDefinition
-        ) {
+        )
+        {
             throw null;
         }
         public static bool IsExportFactoryImportDefinition(
             System.ComponentModel.Composition.Primitives.ImportDefinition importDefinition
-        ) {
+        )
+        {
             throw null;
         }
         public static bool IsImportingParameter(
             System.ComponentModel.Composition.Primitives.ImportDefinition importDefinition
-        ) {
+        )
+        {
             throw null;
         }
         public static bool TryMakeGenericPartDefinition(
@@ -1855,7 +1907,8 @@ namespace System.ComponentModel.Composition.ReflectionModel
             System.Collections.Generic.IEnumerable<System.Type> genericParameters,
             [System.Diagnostics.CodeAnalysis.NotNullWhenAttribute(true)]
                 out System.ComponentModel.Composition.Primitives.ComposablePartDefinition? specialization
-        ) {
+        )
+        {
             throw null;
         }
     }

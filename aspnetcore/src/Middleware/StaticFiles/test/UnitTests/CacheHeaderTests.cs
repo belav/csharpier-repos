@@ -147,7 +147,8 @@ namespace Microsoft.AspNetCore.StaticFiles
         [MemberData(nameof(UnsupportedMethods))]
         public async Task IfNoneMatchShouldBeIgnoredForNonTwoHundredAnd304Responses(
             HttpMethod method
-        ) {
+        )
+        {
             using var host = await StaticFilesTestServer.Create(app => app.UseFileServer());
             using var server = host.GetTestServer();
             HttpResponseMessage resp1 = await server.CreateClient()
@@ -317,7 +318,8 @@ namespace Microsoft.AspNetCore.StaticFiles
         [MemberData(nameof(SupportedMethods))]
         public async Task IfModifiedSinceDateGreaterThanLastModifiedShouldReturn304(
             HttpMethod method
-        ) {
+        )
+        {
             using var host = await StaticFilesTestServer.Create(app => app.UseFileServer());
             using var server = host.GetTestServer();
 
@@ -409,7 +411,8 @@ namespace Microsoft.AspNetCore.StaticFiles
         [MemberData(nameof(SupportedMethods))]
         public async Task IfUnmodifiedSinceDateLessThanLastModifiedShouldReturn412(
             HttpMethod method
-        ) {
+        )
+        {
             using var host = await StaticFilesTestServer.Create(app => app.UseFileServer());
             using var server = host.GetTestServer();
 

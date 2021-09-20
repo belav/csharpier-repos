@@ -48,7 +48,8 @@ namespace Newtonsoft.Json.Tests.TestObjects
             Type objectType,
             object existingValue,
             JsonSerializer serializer
-        ) {
+        )
+        {
             JToken j = JArray.Load(reader);
 
             string converter = (string)j[0];

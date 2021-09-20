@@ -24,7 +24,8 @@ namespace Microsoft.EntityFrameworkCore
         public static PropertyBuilder HasColumnName(
             this PropertyBuilder propertyBuilder,
             string? name
-        ) {
+        )
+        {
             Check.NotNull(propertyBuilder, nameof(propertyBuilder));
             Check.NullButNotEmpty(name, nameof(name));
 
@@ -59,7 +60,8 @@ namespace Microsoft.EntityFrameworkCore
             this IConventionPropertyBuilder propertyBuilder,
             string? name,
             bool fromDataAnnotation = false
-        ) {
+        )
+        {
             if (!propertyBuilder.CanSetColumnName(name, fromDataAnnotation))
             {
                 return null;
@@ -85,7 +87,8 @@ namespace Microsoft.EntityFrameworkCore
             string? name,
             in StoreObjectIdentifier storeObject,
             bool fromDataAnnotation = false
-        ) {
+        )
+        {
             if (!propertyBuilder.CanSetColumnName(name, storeObject, fromDataAnnotation))
             {
                 return null;
@@ -126,7 +129,8 @@ namespace Microsoft.EntityFrameworkCore
             string? name,
             in StoreObjectIdentifier storeObject,
             bool fromDataAnnotation = false
-        ) {
+        )
+        {
             var overrides = (RelationalPropertyOverrides?)RelationalPropertyOverrides.Find(
                 propertyBuilder.Metadata,
                 storeObject
@@ -150,7 +154,8 @@ namespace Microsoft.EntityFrameworkCore
         public static PropertyBuilder HasColumnType(
             this PropertyBuilder propertyBuilder,
             string? typeName
-        ) {
+        )
+        {
             Check.NotNull(propertyBuilder, nameof(propertyBuilder));
             Check.NullButNotEmpty(typeName, nameof(typeName));
 
@@ -187,7 +192,8 @@ namespace Microsoft.EntityFrameworkCore
             this IConventionPropertyBuilder propertyBuilder,
             string? typeName,
             bool fromDataAnnotation = false
-        ) {
+        )
+        {
             if (!propertyBuilder.CanSetColumnType(typeName, fromDataAnnotation))
             {
                 return null;
@@ -224,7 +230,8 @@ namespace Microsoft.EntityFrameworkCore
         public static PropertyBuilder IsFixedLength(
             this PropertyBuilder propertyBuilder,
             bool fixedLength = true
-        ) {
+        )
+        {
             Check.NotNull(propertyBuilder, nameof(propertyBuilder));
 
             propertyBuilder.Metadata.SetIsFixedLength(fixedLength);
@@ -262,7 +269,8 @@ namespace Microsoft.EntityFrameworkCore
             this IConventionPropertyBuilder propertyBuilder,
             bool? fixedLength,
             bool fromDataAnnotation = false
-        ) {
+        )
+        {
             if (!propertyBuilder.CanSetIsFixedLength(fixedLength, fromDataAnnotation))
             {
                 return null;
@@ -321,7 +329,8 @@ namespace Microsoft.EntityFrameworkCore
         public static PropertyBuilder HasDefaultValueSql(
             this PropertyBuilder propertyBuilder,
             string? sql
-        ) {
+        )
+        {
             Check.NotNull(propertyBuilder, nameof(propertyBuilder));
             Check.NullButNotEmpty(sql, nameof(sql));
 
@@ -374,7 +383,8 @@ namespace Microsoft.EntityFrameworkCore
             this IConventionPropertyBuilder propertyBuilder,
             string? sql,
             bool fromDataAnnotation = false
-        ) {
+        )
+        {
             if (!propertyBuilder.CanSetDefaultValueSql(sql, fromDataAnnotation))
             {
                 return null;
@@ -449,7 +459,8 @@ namespace Microsoft.EntityFrameworkCore
             this PropertyBuilder propertyBuilder,
             string? sql,
             bool? stored
-        ) {
+        )
+        {
             Check.NotNull(propertyBuilder, nameof(propertyBuilder));
             Check.NullButNotEmpty(sql, nameof(sql));
 
@@ -529,7 +540,8 @@ namespace Microsoft.EntityFrameworkCore
             this IConventionPropertyBuilder propertyBuilder,
             string? sql,
             bool fromDataAnnotation = false
-        ) {
+        )
+        {
             if (!propertyBuilder.CanSetComputedColumnSql(sql, fromDataAnnotation))
             {
                 return null;
@@ -556,7 +568,8 @@ namespace Microsoft.EntityFrameworkCore
             this IConventionPropertyBuilder propertyBuilder,
             bool? stored,
             bool fromDataAnnotation = false
-        ) {
+        )
+        {
             if (!propertyBuilder.CanSetIsStoredComputedColumn(stored, fromDataAnnotation))
             {
                 return null;
@@ -638,7 +651,8 @@ namespace Microsoft.EntityFrameworkCore
         public static PropertyBuilder HasDefaultValue(
             this PropertyBuilder propertyBuilder,
             object? value
-        ) {
+        )
+        {
             Check.NotNull(propertyBuilder, nameof(propertyBuilder));
 
             propertyBuilder.Metadata.SetDefaultValue(value);
@@ -691,7 +705,8 @@ namespace Microsoft.EntityFrameworkCore
             this IConventionPropertyBuilder propertyBuilder,
             object? value,
             bool fromDataAnnotation = false
-        ) {
+        )
+        {
             if (!propertyBuilder.CanSetDefaultValue(value, fromDataAnnotation))
             {
                 return null;
@@ -728,7 +743,8 @@ namespace Microsoft.EntityFrameworkCore
         public static PropertyBuilder HasComment(
             this PropertyBuilder propertyBuilder,
             string? comment
-        ) {
+        )
+        {
             Check.NotNull(propertyBuilder, nameof(propertyBuilder));
 
             propertyBuilder.Metadata.SetComment(comment);
@@ -762,7 +778,8 @@ namespace Microsoft.EntityFrameworkCore
             this IConventionPropertyBuilder propertyBuilder,
             string? comment,
             bool fromDataAnnotation = false
-        ) {
+        )
+        {
             if (!propertyBuilder.CanSetComment(comment, fromDataAnnotation))
             {
                 return null;
@@ -800,7 +817,8 @@ namespace Microsoft.EntityFrameworkCore
         public static PropertyBuilder UseCollation(
             this PropertyBuilder propertyBuilder,
             string? collation
-        ) {
+        )
+        {
             Check.NotNull(propertyBuilder, nameof(propertyBuilder));
             Check.NullButNotEmpty(collation, nameof(collation));
 
@@ -836,7 +854,8 @@ namespace Microsoft.EntityFrameworkCore
             this IConventionPropertyBuilder propertyBuilder,
             string? collation,
             bool fromDataAnnotation = false
-        ) {
+        )
+        {
             if (propertyBuilder.CanSetCollation(collation, fromDataAnnotation))
             {
                 propertyBuilder.Metadata.SetCollation(collation, fromDataAnnotation);
@@ -858,7 +877,8 @@ namespace Microsoft.EntityFrameworkCore
             this IConventionPropertyBuilder propertyBuilder,
             string? collation,
             bool fromDataAnnotation = false
-        ) {
+        )
+        {
             Check.NotNull(propertyBuilder, nameof(propertyBuilder));
 
             return propertyBuilder.CanSetAnnotation(

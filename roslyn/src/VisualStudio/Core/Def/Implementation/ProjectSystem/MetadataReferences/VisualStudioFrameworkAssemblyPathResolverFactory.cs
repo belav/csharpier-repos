@@ -32,7 +32,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.ProjectSystem
         public VisualStudioFrameworkAssemblyPathResolverFactory(
             IThreadingContext threadingContext,
             SVsServiceProvider serviceProvider
-        ) {
+        )
+        {
             _threadingContext = threadingContext;
             _serviceProvider = serviceProvider;
         }
@@ -65,7 +66,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.ProjectSystem
                 ProjectId projectId,
                 string assemblyName,
                 string? fullyQualifiedTypeName
-            ) {
+            )
+            {
                 AssertIsForeground();
 
                 var assembly = ResolveAssembly(projectId, assemblyName);
@@ -77,7 +79,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.ProjectSystem
                     if (
                         Uri.TryCreate(assembly.CodeBase, UriKind.RelativeOrAbsolute, out var uri)
                         && this.CanResolveType(assembly, fullyQualifiedTypeName)
-                    ) {
+                    )
+                    {
                         return uri.LocalPath;
                     }
                 }
@@ -134,7 +137,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.ProjectSystem
                         out string? targetMoniker
                     )
                     || targetMoniker == null
-                ) {
+                )
+                {
                     return null;
                 }
 
@@ -156,7 +160,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.ProjectSystem
                             ".NETCore"
                         )
                         && frameworkName.Version >= new Version(major: 5, minor: 0)
-                    ) {
+                    )
+                    {
                         return null;
                     }
                 }

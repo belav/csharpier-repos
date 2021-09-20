@@ -30,7 +30,8 @@ internal static partial class Interop
             ref SocketFlags socketFlags,
             NativeOverlapped* overlapped,
             IntPtr completionRoutine
-        ) {
+        )
+        {
             Debug.Assert(!buffers.IsEmpty);
             fixed (WSABuffer* buffersPtr = &MemoryMarshal.GetReference(buffers))
             {

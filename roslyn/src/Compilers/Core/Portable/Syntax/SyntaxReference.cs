@@ -37,7 +37,8 @@ namespace Microsoft.CodeAnalysis
         /// <returns>The original referenced syntax node.</returns>
         public virtual Task<SyntaxNode> GetSyntaxAsync(
             CancellationToken cancellationToken = default
-        ) {
+        )
+        {
             return Task.FromResult(this.GetSyntax(cancellationToken));
         }
 

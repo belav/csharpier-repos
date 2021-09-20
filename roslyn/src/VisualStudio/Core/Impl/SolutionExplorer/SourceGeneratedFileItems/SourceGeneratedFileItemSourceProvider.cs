@@ -31,7 +31,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.SolutionExplore
             VisualStudioWorkspace workspace,
             IAsynchronousOperationListenerProvider asyncListenerProvider,
             IThreadingContext threadingContext
-        ) {
+        )
+        {
             _workspace = workspace;
             _asyncListener = asyncListenerProvider.GetListener(FeatureAttribute.SourceGenerators);
             _threadingContext = threadingContext;
@@ -40,7 +41,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.SolutionExplore
         protected override IAttachedCollectionSource? CreateCollectionSource(
             SourceGeneratorItem item,
             string relationshipName
-        ) {
+        )
+        {
             if (relationshipName == KnownRelationships.Contains)
             {
                 return new SourceGeneratedFileItemSource(

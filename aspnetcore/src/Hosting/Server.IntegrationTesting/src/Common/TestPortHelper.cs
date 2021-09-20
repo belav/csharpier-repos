@@ -28,7 +28,8 @@ namespace Microsoft.AspNetCore.Server.IntegrationTesting.Common
                     SocketType.Stream,
                     ProtocolType.Tcp
                 )
-            ) {
+            )
+            {
                 socket.Bind(new IPEndPoint(IPAddress.Loopback, 0));
                 return ((IPEndPoint)socket.LocalEndPoint).Port;
             }
@@ -46,7 +47,8 @@ namespace Microsoft.AspNetCore.Server.IntegrationTesting.Common
                     SocketType.Stream,
                     ProtocolType.Tcp
                 )
-            ) {
+            )
+            {
                 while (true)
                 {
                     try

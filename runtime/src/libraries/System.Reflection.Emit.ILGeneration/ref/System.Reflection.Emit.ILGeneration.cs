@@ -56,7 +56,8 @@ namespace System.Reflection.Emit
         public virtual System.Reflection.Emit.LocalBuilder DeclareLocal(
             System.Type localType,
             bool pinned
-        ) {
+        )
+        {
             throw null;
         }
         public virtual System.Reflection.Emit.Label DefineLabel()
@@ -152,13 +153,15 @@ namespace System.Reflection.Emit
         public static bool operator ==(
             System.Reflection.Emit.Label a,
             System.Reflection.Emit.Label b
-        ) {
+        )
+        {
             throw null;
         }
         public static bool operator !=(
             System.Reflection.Emit.Label a,
             System.Reflection.Emit.Label b
-        ) {
+        )
+        {
             throw null;
         }
     }
@@ -236,7 +239,8 @@ namespace System.Reflection.Emit
         }
         public static System.Reflection.Emit.SignatureHelper GetFieldSigHelper(
             System.Reflection.Module? mod
-        ) {
+        )
+        {
             throw null;
         }
         public override int GetHashCode()
@@ -249,27 +253,31 @@ namespace System.Reflection.Emit
         }
         public static System.Reflection.Emit.SignatureHelper GetLocalVarSigHelper(
             System.Reflection.Module? mod
-        ) {
+        )
+        {
             throw null;
         }
         public static System.Reflection.Emit.SignatureHelper GetMethodSigHelper(
             System.Reflection.CallingConventions callingConvention,
             System.Type? returnType
-        ) {
+        )
+        {
             throw null;
         }
         public static System.Reflection.Emit.SignatureHelper GetMethodSigHelper(
             System.Reflection.Module? mod,
             System.Reflection.CallingConventions callingConvention,
             System.Type? returnType
-        ) {
+        )
+        {
             throw null;
         }
         public static System.Reflection.Emit.SignatureHelper GetMethodSigHelper(
             System.Reflection.Module? mod,
             System.Type? returnType,
             System.Type[]? parameterTypes
-        ) {
+        )
+        {
             throw null;
         }
         public static System.Reflection.Emit.SignatureHelper GetPropertySigHelper(
@@ -281,14 +289,16 @@ namespace System.Reflection.Emit
             System.Type[]? parameterTypes,
             System.Type[][]? requiredParameterTypeCustomModifiers,
             System.Type[][]? optionalParameterTypeCustomModifiers
-        ) {
+        )
+        {
             throw null;
         }
         public static System.Reflection.Emit.SignatureHelper GetPropertySigHelper(
             System.Reflection.Module? mod,
             System.Type? returnType,
             System.Type[]? parameterTypes
-        ) {
+        )
+        {
             throw null;
         }
         public static System.Reflection.Emit.SignatureHelper GetPropertySigHelper(
@@ -299,7 +309,8 @@ namespace System.Reflection.Emit
             System.Type[]? parameterTypes,
             System.Type[][]? requiredParameterTypeCustomModifiers,
             System.Type[][]? optionalParameterTypeCustomModifiers
-        ) {
+        )
+        {
             throw null;
         }
         public byte[] GetSignature()

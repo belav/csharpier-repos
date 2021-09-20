@@ -45,7 +45,8 @@ namespace Microsoft.Extensions.Logging.Test
             SourceLevels first,
             SourceLevels second,
             bool expected
-        ) {
+        )
+        {
             // Arrange
             var firstSwitch = new SourceSwitch("FirstSwitch", "First Test Switch");
             firstSwitch.Level = first;
@@ -69,7 +70,8 @@ namespace Microsoft.Extensions.Logging.Test
         [InlineData(false)]
         public static void Log_Shoud_Add_Exception_To_Message_Whether_Formatter_Is_Null_Or_Not(
             bool shouldFormatterBeNull
-        ) {
+        )
+        {
             // Arrange
             Mock<TraceListener> traceListener = new Mock<TraceListener>();
             SourceSwitch sourceSwitch = new SourceSwitch("TestSwitch") { Level = SourceLevels.All };

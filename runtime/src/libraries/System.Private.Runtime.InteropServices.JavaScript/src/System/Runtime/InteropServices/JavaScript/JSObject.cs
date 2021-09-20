@@ -133,7 +133,8 @@ namespace System.Runtime.InteropServices.JavaScript
             object value,
             bool createIfNotExists = true,
             bool hasOwnProperty = false
-        ) {
+        )
+        {
             object setPropResult = Interop.Runtime.SetObjectProperty(
                 JSHandle,
                 name,

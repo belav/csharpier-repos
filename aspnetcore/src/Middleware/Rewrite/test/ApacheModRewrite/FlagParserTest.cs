@@ -56,7 +56,8 @@ namespace Microsoft.AspNetCore.Rewrite.Tests.ModRewrite
         public void FlagParser_AssertFormatErrorWhenFlagsArePoorlyConstructed(
             string input,
             string expected
-        ) {
+        )
+        {
             var ex = Assert.Throws<FormatException>(() => new FlagParser().Parse(input));
             Assert.Equal(expected, ex.Message);
         }
@@ -83,7 +84,8 @@ namespace Microsoft.AspNetCore.Rewrite.Tests.ModRewrite
         public bool DictionaryContentsEqual<TKey, TValue>(
             IDictionary<TKey, TValue> dictionary,
             IDictionary<TKey, TValue> other
-        ) {
+        )
+        {
             return (other ?? new Dictionary<TKey, TValue>()).OrderBy(kvp => kvp.Key)
                 .SequenceEqual(
                     (dictionary ?? new Dictionary<TKey, TValue>()).OrderBy(kvp => kvp.Key)

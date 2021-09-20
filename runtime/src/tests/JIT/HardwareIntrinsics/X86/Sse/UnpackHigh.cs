@@ -27,7 +27,8 @@ namespace IntelHardwareIntrinsicTest
                         new float[4] { 22, -1, -50, 0 },
                         new float[4]
                     )
-                ) {
+                )
+                {
                     var vf1 = Unsafe.Read<Vector128<float>>(floatTable.inArray1Ptr);
                     var vf2 = Unsafe.Read<Vector128<float>>(floatTable.inArray2Ptr);
                     var vf3 = Sse.UnpackHigh(vf1, vf2);
@@ -38,7 +39,8 @@ namespace IntelHardwareIntrinsicTest
                             (x, y, z) =>
                                 (z[0] == x[2]) && (z[1] == y[2]) && (z[2] == x[3]) && (z[3] == y[3])
                         )
-                    ) {
+                    )
+                    {
                         Console.WriteLine("SSE UnpackHigh failed on float:");
                         foreach (var item in floatTable.outArray)
                         {

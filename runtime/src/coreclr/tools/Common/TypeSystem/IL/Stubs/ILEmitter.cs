@@ -500,7 +500,8 @@ namespace Internal.IL.Stubs
             if (
                 _sequencePoints.Count > 0
                 && _sequencePoints[_sequencePoints.Count - 1].Offset == _length
-            ) {
+            )
+            {
                 _sequencePoints[_sequencePoints.Count - 1] = new ILSequencePoint(
                     _length,
                     document,
@@ -574,7 +575,8 @@ namespace Internal.IL.Stubs
             Object[] tokens,
             ILExceptionRegion[] exceptionRegions = null,
             MethodDebugInformation debugInfo = null
-        ) {
+        )
+        {
             _ilBytes = ilBytes;
             _locals = locals;
             _tokens = tokens;
@@ -780,14 +782,16 @@ namespace Internal.IL.Stubs
                     int codeStreamIndex = 0;
                     codeStreamIndex < _codeStreams.Count;
                     codeStreamIndex++
-                ) {
+                )
+                {
                     ILCodeStream ilCodeStream = _codeStreams[codeStreamIndex];
 
                     for (
                         int sequencePointIndex = 0;
                         sequencePointIndex < ilCodeStream._sequencePoints.Count;
                         sequencePointIndex++
-                    ) {
+                    )
+                    {
                         ILSequencePoint sequencePoint = ilCodeStream._sequencePoints[
                             sequencePointIndex
                         ];

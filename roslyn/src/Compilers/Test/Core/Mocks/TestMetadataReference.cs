@@ -48,7 +48,8 @@ namespace Roslyn.Test.Utilities
 
         protected override PortableExecutableReference WithPropertiesImpl(
             MetadataReferenceProperties properties
-        ) {
+        )
+        {
             throw new NotImplementedException();
         }
     }
@@ -85,7 +86,8 @@ namespace Roslyn.Test.Utilities
 
         protected override PortableExecutableReference WithPropertiesImpl(
             MetadataReferenceProperties properties
-        ) {
+        )
+        {
             throw new NotImplementedException();
         }
     }

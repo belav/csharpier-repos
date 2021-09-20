@@ -173,7 +173,8 @@ namespace Newtonsoft.Json.Converters
             Type namingStrategyType,
             object[] namingStrategyParameters,
             bool allowIntegerValues
-        ) {
+        )
+        {
             ValidationUtils.ArgumentNotNull(namingStrategyType, nameof(namingStrategyType));
 
             NamingStrategy = JsonTypeReflector.CreateNamingStrategyInstance(
@@ -236,7 +237,8 @@ namespace Newtonsoft.Json.Converters
             Type objectType,
             object? existingValue,
             JsonSerializer serializer
-        ) {
+        )
+        {
             if (reader.TokenType == JsonToken.Null)
             {
                 if (!ReflectionUtils.IsNullableType(objectType))

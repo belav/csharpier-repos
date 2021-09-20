@@ -25,7 +25,8 @@ namespace Roslyn.Utilities
             TKey key,
             Func<TKey, TArg, TValue> valueCreator,
             TArg arg
-        ) {
+        )
+        {
             lock (_gate)
             {
                 ReferenceCountedDisposable<Entry>? disposable = null;
@@ -75,7 +76,8 @@ namespace Roslyn.Utilities
                 ReferenceCountedDisposableCache<TKey, TValue> cache,
                 TKey key,
                 TValue value
-            ) {
+            )
+            {
                 _cache = cache;
                 Key = key;
                 Value = value;

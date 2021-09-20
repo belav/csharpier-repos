@@ -18,7 +18,8 @@ namespace Microsoft.AspNetCore.Mvc.FunctionalTests
     {
         public RespectBrowserAcceptHeaderTests(
             MvcTestFixture<FormatterWebSite.StartupWithRespectBrowserAcceptHeader> fixture
-        ) {
+        )
+        {
             var factory =
                 fixture.Factories.FirstOrDefault()
                 ?? fixture.WithWebHostBuilder(ConfigureWebHostBuilder);

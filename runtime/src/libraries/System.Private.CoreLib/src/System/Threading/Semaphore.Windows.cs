@@ -25,7 +25,8 @@ namespace System.Threading
             int maximumCount,
             string? name,
             out bool createdNew
-        ) {
+        )
+        {
             Debug.Assert(initialCount >= 0);
             Debug.Assert(maximumCount >= 1);
             Debug.Assert(initialCount <= maximumCount);

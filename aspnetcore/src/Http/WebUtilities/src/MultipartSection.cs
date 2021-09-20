@@ -38,7 +38,8 @@ namespace Microsoft.AspNetCore.WebUtilities
                 if (
                     Headers != null
                     && Headers.TryGetValue(HeaderNames.ContentDisposition, out var values)
-                ) {
+                )
+                {
                     return values;
                 }
                 return null;

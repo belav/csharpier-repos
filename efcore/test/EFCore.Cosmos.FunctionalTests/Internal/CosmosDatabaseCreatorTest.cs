@@ -44,7 +44,8 @@ namespace Microsoft.EntityFrameworkCore.Cosmos.Storage.Internal
         [MemberData(nameof(IsAsyncData))]
         public async Task EnsureCreated_returns_true_when_database_exists_but_collections_do_not(
             bool async
-        ) {
+        )
+        {
             await using var testDatabase = CosmosTestStore.Create("EnsureCreatedTest");
             try
             {
@@ -67,7 +68,8 @@ namespace Microsoft.EntityFrameworkCore.Cosmos.Storage.Internal
         [MemberData(nameof(IsAsyncData))]
         public async Task EnsureCreated_returns_false_when_database_and_collections_exist(
             bool async
-        ) {
+        )
+        {
             await using var testDatabase = CosmosTestStore.Create("EnsureCreatedReady");
             testDatabase.Initialize(
                 testDatabase.ServiceProvider,

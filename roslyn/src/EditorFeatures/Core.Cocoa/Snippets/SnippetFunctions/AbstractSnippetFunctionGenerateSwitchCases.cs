@@ -61,14 +61,16 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Snippets.Snippe
             CancellationToken cancellationToken,
             out string value,
             out bool hasCurrentValue
-        ) {
+        )
+        {
             // If the switch expression is invalid, still show the default case
             value = DefaultCase;
             hasCurrentValue = true;
             if (
                 !TryGetEnumTypeSymbol(cancellationToken, out var typeSymbol)
                 || typeSymbol.TypeKind != TypeKind.Enum
-            ) {
+            )
+            {
                 return;
             }
 
@@ -85,7 +87,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Snippets.Snippe
                     cancellationToken,
                     out simplifiedTypeName
                 )
-            ) {
+            )
+            {
                 return;
             }
 
@@ -104,7 +107,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Snippets.Snippe
             string firstEnumMemberName,
             CancellationToken cancellationToken,
             out string simplifiedTypeName
-        ) {
+        )
+        {
             simplifiedTypeName = string.Empty;
             if (!TryGetDocument(out var document))
             {
@@ -122,7 +126,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Snippets.Snippe
                     surfaceBufferFieldSpan,
                     out var subjectBufferFieldSpan
                 )
-            ) {
+            )
+            {
                 return false;
             }
 

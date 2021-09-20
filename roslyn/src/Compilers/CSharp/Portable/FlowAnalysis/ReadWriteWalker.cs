@@ -33,7 +33,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             out IEnumerable<Symbol> capturedInside,
             out IEnumerable<Symbol> capturedOutside,
             out IEnumerable<MethodSymbol> usedLocalFunctions
-        ) {
+        )
+        {
             var walker = new ReadWriteWalker(
                 compilation,
                 member,
@@ -88,14 +89,15 @@ namespace Microsoft.CodeAnalysis.CSharp
             BoundNode firstInRegion,
             BoundNode lastInRegion,
             HashSet<PrefixUnaryExpressionSyntax> unassignedVariableAddressOfSyntaxes
-        ) : base(
-            compilation,
-            member,
-            node,
-            firstInRegion,
-            lastInRegion,
-            unassignedVariableAddressOfSyntaxes: unassignedVariableAddressOfSyntaxes
-        ) { }
+        )
+            : base(
+                compilation,
+                member,
+                node,
+                firstInRegion,
+                lastInRegion,
+                unassignedVariableAddressOfSyntaxes: unassignedVariableAddressOfSyntaxes
+            ) { }
 
         protected override void EnterRegion()
         {
@@ -103,7 +105,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                 var m = this.CurrentSymbol as MethodSymbol;
                 (object)m != null;
                 m = m.ContainingSymbol as MethodSymbol
-            ) {
+            )
+            {
                 foreach (var p in m.Parameters)
                 {
                     if (p.RefKind != RefKind.None)
@@ -128,7 +131,8 @@ namespace Microsoft.CodeAnalysis.CSharp
         protected override void NoteRead(
             Symbol variable,
             ParameterSymbol rangeVariableUnderlyingParameter = null
-        ) {
+        )
+        {
             if ((object)variable == null)
                 return;
             if (variable.Kind != SymbolKind.Field)
@@ -148,7 +152,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             BoundExpression expr,
             FieldSymbol fieldSymbol,
             SyntaxNode node
-        ) {
+        )
+        {
             base.CheckAssigned(expr, fieldSymbol, node);
             if (!IsInside && node.Span.Contains(RegionSpan) && (expr.Kind == BoundKind.FieldAccess))
             {
@@ -220,7 +225,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                 case BoundKind.FieldAccess:
                     if (
                         receiver.Type.IsStructType() && receiverSyntax.Span.OverlapsWith(RegionSpan)
-                    ) {
+                    )
+                    {
                         NoteReceiverReadOrWritten(receiver as BoundFieldAccess, readOrWritten);
                     }
                     break;
@@ -233,7 +239,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             bool isRef,
             bool written,
             bool read
-        ) {
+        )
+        {
             switch (node.Kind)
             {
                 case BoundKind.RangeVariable:
@@ -263,7 +270,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                             !IsInside
                             && node.Syntax != null
                             && node.Syntax.Span.Contains(RegionSpan)
-                        ) {
+                        )
+                        {
                             NoteReceiverWritten(fieldAccess);
                         }
                     }

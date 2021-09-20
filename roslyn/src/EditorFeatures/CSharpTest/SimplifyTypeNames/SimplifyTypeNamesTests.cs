@@ -4824,7 +4824,8 @@ class Base
         [InlineData("UInt64")]
         public async Task TestGlobalAliasSimplifiesInUsingAliasDirectiveWithinNamespace(
             string typeName
-        ) {
+        )
+        {
             await TestInRegularAndScriptAsync(
                 $@"using System;
 namespace N
@@ -4846,7 +4847,8 @@ namespace N
         [InlineData("Float64")]
         public async Task TestGlobalAliasSimplifiesInUsingAliasDirectiveWithinNamespace_UnboundName(
             string typeName
-        ) {
+        )
+        {
             await TestInRegularAndScriptAsync(
                 $@"using System;
 namespace N

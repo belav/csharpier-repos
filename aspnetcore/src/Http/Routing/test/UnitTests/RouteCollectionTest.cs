@@ -73,7 +73,8 @@ namespace Microsoft.AspNetCore.Routing
             string expectedUrl,
             bool lowercaseUrls,
             bool appendTrailingSlash
-        ) {
+        )
+        {
             // Arrange
             var target = new Mock<IRouter>(MockBehavior.Strict);
             target.Setup(e => e.GetVirtualPath(It.IsAny<VirtualPathContext>()))
@@ -105,7 +106,8 @@ namespace Microsoft.AspNetCore.Routing
             string returnUrl,
             string lowercaseUrl,
             bool lowercaseUrls
-        ) {
+        )
+        {
             // Arrange
             var target = new Mock<IRouter>(MockBehavior.Strict);
             target.Setup(e => e.GetVirtualPath(It.IsAny<VirtualPathContext>()))
@@ -189,7 +191,8 @@ namespace Microsoft.AspNetCore.Routing
             bool lowercaseUrls,
             bool lowercaseQueryStrings,
             bool appendTrailingSlash
-        ) {
+        )
+        {
             // Arrange
             var target = new Mock<IRouter>(MockBehavior.Strict);
             target.Setup(e => e.GetVirtualPath(It.IsAny<VirtualPathContext>()))
@@ -219,7 +222,8 @@ namespace Microsoft.AspNetCore.Routing
         public void GetVirtualPath_ReturnsDataTokens(
             RouteValueDictionary dataTokens,
             string routerName
-        ) {
+        )
+        {
             // Arrange
             var virtualPath = "/TestVirtualPath";
 
@@ -336,7 +340,8 @@ namespace Microsoft.AspNetCore.Routing
         public void NamedRouteTests_GetNamedRoute_ReturnsValue(
             bool lowercaseUrls,
             string expectedUrl
-        ) {
+        )
+        {
             // Arrange
             var routeCollection = GetNestedRouteCollection(
                 new string[] { "Route1", "Route2", "RouteName", "Route3" }
@@ -515,7 +520,8 @@ namespace Microsoft.AspNetCore.Routing
             RouteValueDictionary values,
             string expectedUrl,
             bool lowercaseUrls
-        ) {
+        )
+        {
             // Arrange
             var routeCollection = new RouteCollection();
             var route = CreateTemplateRoute(template);
@@ -572,7 +578,8 @@ namespace Microsoft.AspNetCore.Routing
             RouteValueDictionary routeValues,
             string expectedUrl,
             string expectedRouteToMatch
-        ) {
+        )
+        {
             // Arrange
             var routeCollection = new RouteCollection();
             foreach (var route in routes)
@@ -641,7 +648,8 @@ namespace Microsoft.AspNetCore.Routing
 
         private static RouteCollection GetRouteCollectionWithNamedRoutes(
             IEnumerable<string> routeNames
-        ) {
+        )
+        {
             var routes = new RouteCollection();
             foreach (var routeName in routeNames)
             {
@@ -686,7 +694,8 @@ namespace Microsoft.AspNetCore.Routing
             string name,
             bool accept = false,
             string matchValue = null
-        ) {
+        )
+        {
             if (matchValue == null)
             {
                 matchValue = name;
@@ -714,7 +723,8 @@ namespace Microsoft.AspNetCore.Routing
             string routerName = null,
             RouteValueDictionary dataTokens = null,
             IInlineConstraintResolver constraintResolver = null
-        ) {
+        )
+        {
             var target = new Mock<IRouter>(MockBehavior.Strict);
             target.Setup(e => e.GetVirtualPath(It.IsAny<VirtualPathContext>()))
                 .Returns<VirtualPathContext>(rc => null);
@@ -739,7 +749,8 @@ namespace Microsoft.AspNetCore.Routing
             string routeName = null,
             ILoggerFactory loggerFactory = null,
             Action<RouteOptions> options = null
-        ) {
+        )
+        {
             if (loggerFactory == null)
             {
                 loggerFactory = NullLoggerFactory.Instance;
@@ -766,7 +777,8 @@ namespace Microsoft.AspNetCore.Routing
             RouteValueDictionary values,
             Action<RouteOptions> options = null,
             string routeName = null
-        ) {
+        )
+        {
             var services = new ServiceCollection();
             services.AddSingleton<ILoggerFactory>(NullLoggerFactory.Instance);
             services.AddOptions();
@@ -793,7 +805,8 @@ namespace Microsoft.AspNetCore.Routing
             string requestPath,
             ILoggerFactory loggerFactory = null,
             RouteOptions options = null
-        ) {
+        )
+        {
             if (loggerFactory == null)
             {
                 loggerFactory = NullLoggerFactory.Instance;
@@ -824,7 +837,8 @@ namespace Microsoft.AspNetCore.Routing
             bool accept = true,
             bool match = false,
             string matchValue = "value"
-        ) {
+        )
+        {
             var target = new Mock<IRouter>(MockBehavior.Strict);
             target.Setup(e => e.GetVirtualPath(It.IsAny<VirtualPathContext>()))
                 .Returns(accept || match ? new VirtualPathData(target.Object, matchValue) : null)
@@ -842,7 +856,8 @@ namespace Microsoft.AspNetCore.Routing
             bool lowerCaseUrls = false,
             bool appendTrailingSlash = false,
             bool lowercaseQueryStrings = false
-        ) {
+        )
+        {
             return (options) =>
             {
                 options.LowercaseUrls = lowerCaseUrls;

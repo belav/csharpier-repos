@@ -54,7 +54,8 @@ namespace Microsoft.EntityFrameworkCore.Query.Internal
             ICurrentDbContext currentContext,
             IEvaluatableExpressionFilter evaluatableExpressionFilter,
             IModel model
-        ) {
+        )
+        {
             Check.NotNull(queryContextFactory, nameof(queryContextFactory));
             Check.NotNull(compiledQueryCache, nameof(compiledQueryCache));
             Check.NotNull(compiledQueryCacheKeyGenerator, nameof(compiledQueryCacheKeyGenerator));
@@ -138,7 +139,8 @@ namespace Microsoft.EntityFrameworkCore.Query.Internal
         public virtual TResult ExecuteAsync<TResult>(
             Expression query,
             CancellationToken cancellationToken = default
-        ) {
+        )
+        {
             Check.NotNull(query, nameof(query));
 
             var queryContext = _queryContextFactory.Create();
@@ -163,7 +165,8 @@ namespace Microsoft.EntityFrameworkCore.Query.Internal
         /// </summary>
         public virtual Func<QueryContext, TResult> CreateCompiledAsyncQuery<TResult>(
             Expression query
-        ) {
+        )
+        {
             Check.NotNull(query, nameof(query));
 
             query = ExtractParameters(
@@ -188,7 +191,8 @@ namespace Microsoft.EntityFrameworkCore.Query.Internal
             IDiagnosticsLogger<DbLoggerCategory.Query> logger,
             bool parameterize = true,
             bool generateContextAccessors = false
-        ) {
+        )
+        {
             var visitor = new ParameterExtractingExpressionVisitor(
                 _evaluatableExpressionFilter,
                 parameterValues,

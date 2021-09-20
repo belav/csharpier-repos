@@ -48,7 +48,8 @@ namespace System.Linq
         public static int Count<TSource>(
             this IEnumerable<TSource> source,
             Func<TSource, bool> predicate
-        ) {
+        )
+        {
             if (source == null)
             {
                 ThrowHelper.ThrowArgumentNullException(ExceptionArgument.source);
@@ -97,7 +98,8 @@ namespace System.Linq
         public static bool TryGetNonEnumeratedCount<TSource>(
             this IEnumerable<TSource> source,
             out int count
-        ) {
+        )
+        {
             if (source == null)
             {
                 ThrowHelper.ThrowArgumentNullException(ExceptionArgument.source);
@@ -154,7 +156,8 @@ namespace System.Linq
         public static long LongCount<TSource>(
             this IEnumerable<TSource> source,
             Func<TSource, bool> predicate
-        ) {
+        )
+        {
             if (source == null)
             {
                 ThrowHelper.ThrowArgumentNullException(ExceptionArgument.source);

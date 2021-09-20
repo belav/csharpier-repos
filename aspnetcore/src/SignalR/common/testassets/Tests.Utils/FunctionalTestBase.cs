@@ -20,7 +20,8 @@ namespace Microsoft.AspNetCore.SignalR.Tests
 
         private Func<WriteContext, bool> ResolveExpectedErrorsFilter(
             Func<WriteContext, bool> expectedErrorsFilter
-        ) {
+        )
+        {
             if (expectedErrorsFilter == null)
             {
                 return _globalExpectedErrorsFilter;

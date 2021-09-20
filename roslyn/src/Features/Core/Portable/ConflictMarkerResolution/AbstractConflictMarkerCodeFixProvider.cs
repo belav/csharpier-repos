@@ -30,7 +30,8 @@ namespace Microsoft.CodeAnalysis.ConflictMarkerResolution
         protected AbstractResolveConflictMarkerCodeFixProvider(
             ISyntaxKinds syntaxKinds,
             string diagnosticId
-        ) {
+        )
+        {
             FixableDiagnosticIds = ImmutableArray.Create(diagnosticId);
             _syntaxKinds = syntaxKinds;
         }
@@ -69,7 +70,8 @@ namespace Microsoft.CodeAnalysis.ConflictMarkerResolution
             out TextLine startLine,
             out TextLine middleLine,
             out TextLine endLine
-        ) {
+        )
+        {
             startLine = default;
             middleLine = default;
             endLine = default;
@@ -107,7 +109,8 @@ namespace Microsoft.CodeAnalysis.ConflictMarkerResolution
                 if (
                     startTrivia.RawKind == _syntaxKinds.ConflictMarkerTrivia
                     || middleTrivia.RawKind == _syntaxKinds.ConflictMarkerTrivia
-                ) {
+                )
+                {
                     return false;
                 }
             }
@@ -121,7 +124,8 @@ namespace Microsoft.CodeAnalysis.ConflictMarkerResolution
             out TextLine startLine,
             out TextLine middleLine,
             out TextLine endLine
-        ) {
+        )
+        {
             startLine = default;
             middleLine = default;
             endLine = default;
@@ -168,7 +172,8 @@ namespace Microsoft.CodeAnalysis.ConflictMarkerResolution
             TextLine startLine,
             char ch,
             out TextLine foundLine
-        ) {
+        )
+        {
             var text = startLine.Text!;
             var lines = text.Lines;
             for (var i = startLine.LineNumber - 1; i >= 0; i--)
@@ -211,7 +216,8 @@ namespace Microsoft.CodeAnalysis.ConflictMarkerResolution
             TextLine startLine,
             TextLine middleLine,
             TextLine endLine
-        ) {
+        )
+        {
             var document = context.Document;
 
             var topText = startLine.ToString()[s_mergeConflictLength..].Trim();
@@ -261,7 +267,8 @@ namespace Microsoft.CodeAnalysis.ConflictMarkerResolution
             int endPos,
             Action<SourceText, ArrayBuilder<TextChange>, int, int, int> addEdits,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var text = await document.GetTextAsync(cancellationToken).ConfigureAwait(false);
 
             using var _ = ArrayBuilder<TextChange>.GetInstance(out var edits);
@@ -277,7 +284,8 @@ namespace Microsoft.CodeAnalysis.ConflictMarkerResolution
             int startPos,
             int equalsPos,
             int endPos
-        ) {
+        )
+        {
             // Delete the line containing <<<<<<<
             var startEnd = GetEndIncludingLineBreak(text, startPos);
             edits.Add(new TextChange(TextSpan.FromBounds(startPos, startEnd), ""));
@@ -293,7 +301,8 @@ namespace Microsoft.CodeAnalysis.ConflictMarkerResolution
             int startPos,
             int equalsPos,
             int endPos
-        ) {
+        )
+        {
             // Remove the chunk of text (inclusive) from <<<<<<< through =======
             var equalsEnd = GetEndIncludingLineBreak(text, equalsPos);
             edits.Add(new TextChange(TextSpan.FromBounds(startPos, equalsEnd), ""));
@@ -309,7 +318,8 @@ namespace Microsoft.CodeAnalysis.ConflictMarkerResolution
             int startPos,
             int equalsPos,
             int endPos
-        ) {
+        )
+        {
             // Delete the line containing <<<<<<<
             var startEnd = GetEndIncludingLineBreak(text, startPos);
             edits.Add(new TextChange(TextSpan.FromBounds(startPos, startEnd), ""));
@@ -356,7 +366,8 @@ namespace Microsoft.CodeAnalysis.ConflictMarkerResolution
             ImmutableArray<Diagnostic> diagnostics,
             string? equivalenceKey,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             Debug.Assert(
                 equivalenceKey == TakeTopEquivalenceKey
                     || equivalenceKey == TakeBottomEquivalenceKey

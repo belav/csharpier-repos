@@ -12,7 +12,8 @@ namespace Microsoft.AspNetCore.Razor.Language.CodeGeneration
             string suppressUniqueIds = "test",
             RazorSourceDocument source = null,
             IntermediateNodeWriter nodeWriter = null
-        ) {
+        )
+        {
             var codeWriter = new CodeWriter();
             var documentNode = new DocumentIntermediateNode();
             var options = RazorCodeGenerationOptions.CreateDesignTimeDefault();
@@ -55,7 +56,8 @@ namespace Microsoft.AspNetCore.Razor.Language.CodeGeneration
             string suppressUniqueIds = "test",
             RazorSourceDocument source = null,
             IntermediateNodeWriter nodeWriter = null
-        ) {
+        )
+        {
             var codeWriter = new CodeWriter();
             var documentNode = new DocumentIntermediateNode();
             var options = RazorCodeGenerationOptions.CreateDefault();

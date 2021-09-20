@@ -22,7 +22,8 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeGeneration
             IMethodSymbol method,
             CodeGenerationOptions options,
             IList<bool> availableIndices
-        ) {
+        )
+        {
             var methodDeclaration = GenerateConversionDeclaration(
                 method,
                 options,
@@ -44,7 +45,8 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeGeneration
             IMethodSymbol method,
             CodeGenerationOptions options,
             ParseOptions parseOptions
-        ) {
+        )
+        {
             var declaration = GenerateConversionDeclarationWorker(method, options, parseOptions);
             return AddFormatterAndCodeGeneratorAnnotationsTo(
                 AddAnnotationsTo(
@@ -58,7 +60,8 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeGeneration
             IMethodSymbol method,
             CodeGenerationOptions options,
             ParseOptions parseOptions
-        ) {
+        )
+        {
             var hasNoBody = !options.GenerateMethodBodies || method.IsExtern;
 
             var reusableSyntax =
@@ -105,7 +108,8 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeGeneration
             CodeGenerationOptions options,
             ConversionOperatorDeclarationSyntax declaration,
             ParseOptions parseOptions
-        ) {
+        )
+        {
             if (declaration.ExpressionBody == null)
             {
                 var expressionBodyPreference =
@@ -121,7 +125,8 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeGeneration
                         out var expressionBody,
                         out var semicolonToken
                     )
-                ) {
+                )
+                {
                     return declaration.WithBody(null)
                         .WithExpressionBody(expressionBody)
                         .WithSemicolonToken(semicolonToken);

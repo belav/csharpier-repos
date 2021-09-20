@@ -93,7 +93,8 @@ namespace Microsoft.EntityFrameworkCore.Cosmos.Storage.Internal
                         !entriesSaved.Contains(root)
                         && rootEntriesToSave.Add(root)
                         && root.EntityState == EntityState.Unchanged
-                    ) {
+                    )
+                    {
 #pragma warning disable EF1001 // Internal EF Core API usage.
                         // #16707
                         ((InternalEntityEntry)root).SetEntityState(EntityState.Modified);
@@ -137,7 +138,8 @@ namespace Microsoft.EntityFrameworkCore.Cosmos.Storage.Internal
         public override async Task<int> SaveChangesAsync(
             IList<IUpdateEntry> entries,
             CancellationToken cancellationToken = default
-        ) {
+        )
+        {
             var rowsAffected = 0;
             var entriesSaved = new HashSet<IUpdateEntry>();
             var rootEntriesToSave = new HashSet<IUpdateEntry>();
@@ -157,7 +159,8 @@ namespace Microsoft.EntityFrameworkCore.Cosmos.Storage.Internal
                         !entriesSaved.Contains(root)
                         && rootEntriesToSave.Add(root)
                         && root.EntityState == EntityState.Unchanged
-                    ) {
+                    )
+                    {
 #pragma warning disable EF1001 // Internal EF Core API usage.
                         // #16707
                         ((InternalEntityEntry)root).SetEntityState(EntityState.Modified);
@@ -185,7 +188,8 @@ namespace Microsoft.EntityFrameworkCore.Cosmos.Storage.Internal
                 if (
                     !entriesSaved.Contains(rootEntry)
                     && await SaveAsync(rootEntry, cancellationToken).ConfigureAwait(false)
-                ) {
+                )
+                {
                     rowsAffected++;
                 }
             }

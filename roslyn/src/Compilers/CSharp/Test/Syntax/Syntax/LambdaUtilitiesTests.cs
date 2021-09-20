@@ -20,7 +20,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
             string markedExpression,
             bool isLambdaBody,
             bool isReducedLambdaBody = false
-        ) {
+        )
+        {
             string markedSource =
                 @"
 using System;

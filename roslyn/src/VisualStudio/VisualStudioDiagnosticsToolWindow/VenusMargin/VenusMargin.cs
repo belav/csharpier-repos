@@ -45,7 +45,8 @@ namespace Roslyn.Hosting.Diagnostics.VenusMargin
         private void OnProjectionBufferSourceBuffersChanged(
             object sender,
             ProjectionSourceBuffersChangedEventArgs e
-        ) {
+        )
+        {
             foreach (var b in e.RemovedBuffers)
             {
                 _viewModel.SourceBuffers.Remove(b);
@@ -62,7 +63,8 @@ namespace Roslyn.Hosting.Diagnostics.VenusMargin
         private void OnProjectionBufferSourceSpansChanged(
             object sender,
             ProjectionSourceSpansChangedEventArgs e
-        ) {
+        )
+        {
             UpdateSourceSpans();
         }
 

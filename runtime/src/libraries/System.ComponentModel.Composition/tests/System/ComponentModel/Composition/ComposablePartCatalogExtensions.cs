@@ -14,14 +14,16 @@ namespace System.ComponentModel.Composition
         public static IEnumerable<Tuple<ComposablePartDefinition, ExportDefinition>> GetExports(
             this ComposablePartCatalog catalog,
             Expression<Func<ExportDefinition, bool>> constraint
-        ) {
+        )
+        {
             var import = ImportDefinitionFactory.Create(constraint);
             return catalog.GetExports(import);
         }
 
         public static Tuple<ComposablePartDefinition, ExportDefinition>[] GetExports<T>(
             this ComposablePartCatalog catalog
-        ) {
+        )
+        {
             return catalog.GetExports(
                     ImportDefinitionFactory.Create(typeof(T), ImportCardinality.ZeroOrMore)
                 )
@@ -30,7 +32,8 @@ namespace System.ComponentModel.Composition
 
         public static Tuple<ComposablePartDefinition, ExportDefinition> GetExport<T>(
             this ComposablePartCatalog catalog
-        ) {
+        )
+        {
             return catalog.GetExports(
                     ImportDefinitionFactory.Create(typeof(T), ImportCardinality.ExactlyOne)
                 )

@@ -11,7 +11,8 @@ namespace Microsoft.Web.Mvc.ModelBinding
         public override IExtensibleModelBinder GetBinder(
             ControllerContext controllerContext,
             ExtensibleModelBindingContext bindingContext
-        ) {
+        )
+        {
             ModelBinderUtil.ValidateBindingContext(bindingContext);
 
             string keyFieldName = ModelBinderUtil.CreatePropertyModelName(
@@ -26,7 +27,8 @@ namespace Microsoft.Web.Mvc.ModelBinding
             if (
                 bindingContext.ValueProvider.ContainsPrefix(keyFieldName)
                 && bindingContext.ValueProvider.ContainsPrefix(valueFieldName)
-            ) {
+            )
+            {
                 return ModelBinderUtil.GetPossibleBinderInstance(
                     bindingContext.ModelType,
                     typeof(KeyValuePair<

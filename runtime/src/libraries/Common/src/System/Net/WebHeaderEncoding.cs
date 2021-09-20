@@ -68,7 +68,8 @@ namespace System.Net
             int charCount,
             byte[] bytes,
             int byteIndex
-        ) {
+        )
+        {
             if (myString.Length == 0)
             {
                 return;

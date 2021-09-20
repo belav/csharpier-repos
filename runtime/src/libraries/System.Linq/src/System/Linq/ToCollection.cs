@@ -206,7 +206,8 @@ namespace System.Linq
         public static HashSet<TSource> ToHashSet<TSource>(
             this IEnumerable<TSource> source,
             IEqualityComparer<TSource>? comparer
-        ) {
+        )
+        {
             if (source == null)
             {
                 ThrowHelper.ThrowArgumentNullException(ExceptionArgument.source);

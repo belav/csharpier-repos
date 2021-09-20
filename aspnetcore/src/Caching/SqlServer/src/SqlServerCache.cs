@@ -60,7 +60,8 @@ namespace Microsoft.Extensions.Caching.SqlServer
                 cacheOptions.ExpiredItemsDeletionInterval.HasValue
                 && cacheOptions.ExpiredItemsDeletionInterval.Value
                     < MinimumExpiredItemsDeletionInterval
-            ) {
+            )
+            {
                 throw new ArgumentException(
                     $"{nameof(SqlServerCacheOptions.ExpiredItemsDeletionInterval)} cannot be less than the minimum "
                         + $"value of {MinimumExpiredItemsDeletionInterval.TotalMinutes} minutes."
@@ -123,7 +124,8 @@ namespace Microsoft.Extensions.Caching.SqlServer
         public async Task<byte[]> GetAsync(
             string key,
             CancellationToken token = default(CancellationToken)
-        ) {
+        )
+        {
             if (key == null)
             {
                 throw new ArgumentNullException(nameof(key));
@@ -155,7 +157,8 @@ namespace Microsoft.Extensions.Caching.SqlServer
         public async Task RefreshAsync(
             string key,
             CancellationToken token = default(CancellationToken)
-        ) {
+        )
+        {
             if (key == null)
             {
                 throw new ArgumentNullException(nameof(key));
@@ -185,7 +188,8 @@ namespace Microsoft.Extensions.Caching.SqlServer
         public async Task RemoveAsync(
             string key,
             CancellationToken token = default(CancellationToken)
-        ) {
+        )
+        {
             if (key == null)
             {
                 throw new ArgumentNullException(nameof(key));
@@ -229,7 +233,8 @@ namespace Microsoft.Extensions.Caching.SqlServer
             byte[] value,
             DistributedCacheEntryOptions options,
             CancellationToken token = default(CancellationToken)
-        ) {
+        )
+        {
             if (key == null)
             {
                 throw new ArgumentNullException(nameof(key));
@@ -280,7 +285,8 @@ namespace Microsoft.Extensions.Caching.SqlServer
                 !options.AbsoluteExpiration.HasValue
                 && !options.AbsoluteExpirationRelativeToNow.HasValue
                 && !options.SlidingExpiration.HasValue
-            ) {
+            )
+            {
                 options = new DistributedCacheEntryOptions()
                 {
                     SlidingExpiration = _defaultSlidingExpiration

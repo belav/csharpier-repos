@@ -23,7 +23,8 @@ namespace Microsoft.Extensions.Logging.Generators
                 Compilation compilation,
                 Action<Diagnostic> reportDiagnostic,
                 CancellationToken cancellationToken
-            ) {
+            )
+            {
                 _compilation = compilation;
                 _cancellationToken = cancellationToken;
                 _reportDiagnostic = reportDiagnostic;
@@ -34,7 +35,8 @@ namespace Microsoft.Extensions.Logging.Generators
             /// </summary>
             public IReadOnlyList<LoggerClass> GetLogClasses(
                 IEnumerable<ClassDeclarationSyntax> classes
-            ) {
+            )
+            {
                 const string LoggerMessageAttribute =
                     "Microsoft.Extensions.Logging.LoggerMessageAttribute";
 
@@ -136,7 +138,8 @@ namespace Microsoft.Extensions.Logging.Generators
                                             attrCtorSymbol.ContainingType,
                                             SymbolEqualityComparer.Default
                                         )
-                                    ) {
+                                    )
+                                    {
                                         // badly formed attribute definition, or not the right attribute
                                         continue;
                                     }
@@ -178,7 +181,8 @@ namespace Microsoft.Extensions.Logging.Generators
                                         if (
                                             sm.GetTypeInfo(method.ReturnType!).Type!.SpecialType
                                             != SpecialType.System_Void
-                                        ) {
+                                        )
+                                        {
                                             // logging methods must return void
                                             Diag(
                                                 DiagnosticDescriptors.LoggingMethodMustReturnVoid,
@@ -272,7 +276,8 @@ namespace Microsoft.Extensions.Logging.Generators
                                                 "ERR:",
                                                 StringComparison.OrdinalIgnoreCase
                                             )
-                                        ) {
+                                        )
+                                        {
                                             Diag(
                                                 DiagnosticDescriptors.RedundantQualifierInMessage,
                                                 ma.GetLocation(),
@@ -285,7 +290,8 @@ namespace Microsoft.Extensions.Logging.Generators
                                         bool foundLogLevel = level != null;
                                         foreach (
                                             ParameterSyntax p in method.ParameterList.Parameters
-                                        ) {
+                                        )
+                                        {
                                             string paramName = p.Identifier.ToString();
                                             if (string.IsNullOrWhiteSpace(paramName))
                                             {
@@ -343,7 +349,8 @@ namespace Microsoft.Extensions.Logging.Generators
 
                                             if (
                                                 lp.IsLogger && lm.TemplateMap.ContainsKey(paramName)
-                                            ) {
+                                            )
+                                            {
                                                 Diag(
                                                     DiagnosticDescriptors.ShouldntMentionLoggerInMessage,
                                                     p.Identifier.GetLocation(),
@@ -353,7 +360,8 @@ namespace Microsoft.Extensions.Logging.Generators
                                             else if (
                                                 lp.IsException
                                                 && lm.TemplateMap.ContainsKey(paramName)
-                                            ) {
+                                            )
+                                            {
                                                 Diag(
                                                     DiagnosticDescriptors.ShouldntMentionExceptionInMessage,
                                                     p.Identifier.GetLocation(),
@@ -363,7 +371,8 @@ namespace Microsoft.Extensions.Logging.Generators
                                             else if (
                                                 lp.IsLogLevel
                                                 && lm.TemplateMap.ContainsKey(paramName)
-                                            ) {
+                                            )
+                                            {
                                                 Diag(
                                                     DiagnosticDescriptors.ShouldntMentionLogLevelInMessage,
                                                     p.Identifier.GetLocation(),
@@ -374,7 +383,8 @@ namespace Microsoft.Extensions.Logging.Generators
                                                 lp.IsLogLevel
                                                 && level != null
                                                 && !lm.TemplateMap.ContainsKey(paramName)
-                                            ) {
+                                            )
+                                            {
                                                 Diag(
                                                     DiagnosticDescriptors.ArgumentHasNoCorrespondingTemplate,
                                                     p.Identifier.GetLocation(),
@@ -384,7 +394,8 @@ namespace Microsoft.Extensions.Logging.Generators
                                             else if (
                                                 lp.IsTemplateParameter
                                                 && !lm.TemplateMap.ContainsKey(paramName)
-                                            ) {
+                                            )
+                                            {
                                                 Diag(
                                                     DiagnosticDescriptors.ArgumentHasNoCorrespondingTemplate,
                                                     p.Identifier.GetLocation(),
@@ -469,7 +480,8 @@ namespace Microsoft.Extensions.Logging.Generators
 
                                             foreach (
                                                 KeyValuePair<string, string> t in lm.TemplateMap
-                                            ) {
+                                            )
+                                            {
                                                 bool found = false;
                                                 foreach (LoggerParameter p in lm.AllParameters)
                                                 {
@@ -478,7 +490,8 @@ namespace Microsoft.Extensions.Logging.Generators
                                                             p.Name,
                                                             StringComparison.OrdinalIgnoreCase
                                                         )
-                                                    ) {
+                                                    )
+                                                    {
                                                         found = true;
                                                         break;
                                                     }
@@ -559,7 +572,8 @@ namespace Microsoft.Extensions.Logging.Generators
                 SemanticModel sm,
                 TypeDeclarationSyntax classDec,
                 ITypeSymbol loggerSymbol
-            ) {
+            )
+            {
                 string? loggerField = null;
 
                 foreach (MemberDeclarationSyntax m in classDec.Members)
@@ -593,7 +607,8 @@ namespace Microsoft.Extensions.Logging.Generators
             private (int eventId, int? level, string? message, string? eventName) ExtractAttributeValues(
                 AttributeArgumentListSyntax args,
                 SemanticModel sm
-            ) {
+            )
+            {
                 // two constructor arg shapes:
                 //
                 //   (eventId, level, message)
@@ -703,7 +718,8 @@ namespace Microsoft.Extensions.Logging.Generators
                 DiagnosticDescriptor desc,
                 Location? location,
                 params object?[]? messageArgs
-            ) {
+            )
+            {
                 _reportDiagnostic(Diagnostic.Create(desc, location, messageArgs));
             }
 
@@ -722,7 +738,8 @@ namespace Microsoft.Extensions.Logging.Generators
                 string? message,
                 IDictionary<string, string> templateMap,
                 IList<string> templateList
-            ) {
+            )
+            {
                 if (string.IsNullOrEmpty(message))
                 {
                     return;
@@ -766,7 +783,8 @@ namespace Microsoft.Extensions.Logging.Generators
                 char brace,
                 int startIndex,
                 int endIndex
-            ) {
+            )
+            {
                 // Example: {{prefix{{{Argument}}}suffix}}.
                 int braceIndex = endIndex;
                 int scanIndex = startIndex;
@@ -818,7 +836,8 @@ namespace Microsoft.Extensions.Logging.Generators
                 char[] chars,
                 int startIndex,
                 int endIndex
-            ) {
+            )
+            {
                 int findIndex = message.IndexOfAny(chars, startIndex, endIndex - startIndex);
                 return findIndex == -1 ? endIndex : findIndex;
             }

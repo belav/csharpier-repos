@@ -30,7 +30,8 @@ internal class test
         int a23,
         int a24,
         int a25
-    ) {
+    )
+    {
         int sum =
             a1
             + a2
@@ -87,7 +88,8 @@ internal class test
         int a23,
         int a24,
         int a25
-    ) {
+    )
+    {
         Console.WriteLine(a1);
         Console.WriteLine(a2);
         Console.WriteLine(a3);

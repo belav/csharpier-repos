@@ -23,7 +23,8 @@ namespace Microsoft.CodeAnalysis
         public static bool TryGetWorkspace(
             SourceTextContainer textContainer,
             [NotNullWhen(true)] out Workspace? workspace
-        ) {
+        )
+        {
             if (textContainer == null)
             {
                 throw new ArgumentNullException(nameof(textContainer));
@@ -87,7 +88,8 @@ namespace Microsoft.CodeAnalysis
         /// </summary>
         public static WorkspaceRegistration GetWorkspaceRegistration(
             SourceTextContainer? textContainer
-        ) {
+        )
+        {
             if (textContainer == null)
             {
                 throw new ArgumentNullException(nameof(textContainer));

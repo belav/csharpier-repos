@@ -53,7 +53,8 @@ namespace Microsoft.CodeAnalysis.CSharp.NewLines.ConsecutiveBracePlacement
             SyntaxTreeAnalysisContext context,
             ReportDiagnostic severity,
             ArrayBuilder<SyntaxNode> stack
-        ) {
+        )
+        {
             var tree = context.Tree;
             var cancellationToken = context.CancellationToken;
 
@@ -90,7 +91,8 @@ namespace Microsoft.CodeAnalysis.CSharp.NewLines.ConsecutiveBracePlacement
             ReportDiagnostic severity,
             SourceText text,
             SyntaxToken token
-        ) {
+        )
+        {
             if (!HasExcessBlankLinesAfter(text, token, out var secondBrace, out _))
                 return;
 
@@ -110,7 +112,8 @@ namespace Microsoft.CodeAnalysis.CSharp.NewLines.ConsecutiveBracePlacement
             SyntaxToken token,
             out SyntaxToken secondBrace,
             out SyntaxTrivia endOfLineTrivia
-        ) {
+        )
+        {
             secondBrace = default;
             endOfLineTrivia = default;
             if (!token.IsKind(SyntaxKind.CloseBraceToken))

@@ -18,10 +18,11 @@ namespace Microsoft.CodeAnalysis.CodeFixes.Configuration.ConfigureCodeStyle
             public TopLevelConfigureCodeStyleOptionCodeAction(
                 Diagnostic diagnostic,
                 ImmutableArray<CodeAction> nestedActions
-            ) : base(
-                nestedActions,
-                string.Format(FeaturesResources.Configure_0_code_style, diagnostic.Id)
-            ) { }
+            )
+                : base(
+                    nestedActions,
+                    string.Format(FeaturesResources.Configure_0_code_style, diagnostic.Id)
+                ) { }
 
             public TopLevelConfigureCodeStyleOptionCodeAction(
                 string optionName,

@@ -113,7 +113,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Infrastructure.PipeW
 
         public override ValueTask<FlushResult> FlushAsync(
             CancellationToken cancellationToken = default
-        ) {
+        )
+        {
             if (_currentFlushTcs != null)
             {
                 return new ValueTask<FlushResult>(_currentFlushTcs.Task);
@@ -151,7 +152,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Infrastructure.PipeW
         private async Task FlushAsyncAwaited(
             ValueTask<FlushResult> flushTask,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             try
             {
                 // This while (true) does look scary, but the real continuation condition is at the start of the loop

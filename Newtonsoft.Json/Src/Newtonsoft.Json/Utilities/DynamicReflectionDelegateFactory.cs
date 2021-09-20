@@ -46,7 +46,8 @@ namespace Newtonsoft.Json.Utilities
             Type? returnType,
             Type[] parameterTypes,
             Type owner
-        ) {
+        )
+        {
             DynamicMethod dynamicMethod = !owner.IsInterface()
                 ? new DynamicMethod(name, returnType, parameterTypes, owner, true)
                 : new DynamicMethod(name, returnType, parameterTypes, owner.Module, true);
@@ -92,7 +93,8 @@ namespace Newtonsoft.Json.Utilities
             MethodBase method,
             ILGenerator generator,
             int argsIndex
-        ) {
+        )
+        {
             ParameterInfo[] args = method.GetParameters();
 
             Label argsOk = generator.DefineLabel();
@@ -289,7 +291,8 @@ namespace Newtonsoft.Json.Utilities
             Type type,
             ILGenerator generator,
             Type delegateType
-        ) {
+        )
+        {
             if (type.IsValueType())
             {
                 generator.DeclareLocal(type);
@@ -457,7 +460,8 @@ namespace Newtonsoft.Json.Utilities
         internal static void GenerateCreateSetPropertyIL(
             PropertyInfo propertyInfo,
             ILGenerator generator
-        ) {
+        )
+        {
             MethodInfo setMethod = propertyInfo.GetSetMethod(true);
             if (!setMethod.IsStatic)
             {

@@ -98,7 +98,8 @@ namespace Microsoft.EntityFrameworkCore.InMemory.Infrastructure.Internal
         /// </summary>
         public virtual InMemoryOptionsExtension WithNullabilityCheckEnabled(
             bool nullabilityCheckEnabled
-        ) {
+        )
+        {
             var clone = Clone();
 
             clone._nullabilityCheckEnabled = nullabilityCheckEnabled;

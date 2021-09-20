@@ -180,7 +180,8 @@ namespace Microsoft.CodeAnalysis.LanguageServer.UnitTests.CodeActions
             TestLspServer testLspServer,
             VSCodeAction unresolvedCodeAction,
             LSP.ClientCapabilities clientCapabilities = null
-        ) {
+        )
+        {
             var result = await testLspServer.ExecuteRequestAsync<
                 LSP.VSCodeAction,
                 LSP.VSCodeAction

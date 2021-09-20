@@ -619,7 +619,8 @@ namespace Castle.Components.DictionaryAdapter.Xml.Tests
 
             private static IDictionaryReferenceManager GetReferenceManager(
                 IDictionaryAdapter dictionaryAdapter
-            ) {
+            )
+            {
                 return dictionaryAdapter.This.Initializers.OfType<IDictionaryReferenceManager>()
                     .Single();
             }

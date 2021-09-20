@@ -49,7 +49,8 @@ namespace Microsoft.EntityFrameworkCore.Migrations.Design
             ICSharpHelper csharpHelper,
             ICSharpMigrationOperationGenerator csharpMigrationOperationGenerator,
             ICSharpSnapshotGenerator csharpSnapshotGenerator
-        ) {
+        )
+        {
             CSharpHelper = csharpHelper;
             CSharpMigrationOperationGenerator = csharpMigrationOperationGenerator;
             CSharpSnapshotGenerator = csharpSnapshotGenerator;

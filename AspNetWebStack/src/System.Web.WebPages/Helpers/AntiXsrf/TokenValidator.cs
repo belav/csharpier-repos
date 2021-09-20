@@ -33,7 +33,8 @@ namespace System.Web.Helpers.AntiXsrf
             HttpContextBase httpContext,
             IIdentity identity,
             AntiForgeryToken cookieToken
-        ) {
+        )
+        {
             Contract.Assert(IsCookieTokenValid(cookieToken));
 
             AntiForgeryToken formToken = new AntiForgeryToken()
@@ -73,7 +74,8 @@ namespace System.Web.Helpers.AntiXsrf
                 && String.IsNullOrEmpty(formToken.Username)
                 && formToken.ClaimUid == null
                 && String.IsNullOrEmpty(formToken.AdditionalData)
-            ) {
+            )
+            {
                 // Application says user is authenticated, but we have no identifier for the user.
                 throw new InvalidOperationException(
                     String.Format(
@@ -97,7 +99,8 @@ namespace System.Web.Helpers.AntiXsrf
             IIdentity identity,
             AntiForgeryToken sessionToken,
             AntiForgeryToken fieldToken
-        ) {
+        )
+        {
             // Were the tokens even present at all?
             if (sessionToken == null)
             {
@@ -152,7 +155,8 @@ namespace System.Web.Helpers.AntiXsrf
                       ? StringComparison.Ordinal
                       : StringComparison.OrdinalIgnoreCase
                 )
-            ) {
+            )
+            {
                 throw HttpAntiForgeryException.CreateUsernameMismatchException(
                     fieldToken.Username,
                     currentUsername
@@ -170,7 +174,8 @@ namespace System.Web.Helpers.AntiXsrf
                     httpContext,
                     fieldToken.AdditionalData
                 )
-            ) {
+            )
+            {
                 throw HttpAntiForgeryException.CreateAdditionalDataCheckFailedException();
             }
         }

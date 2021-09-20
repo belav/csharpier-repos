@@ -153,7 +153,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Extensions
         public static bool TryGetNameParts(
             this ExpressionSyntax expression,
             out IList<string> parts
-        ) {
+        )
+        {
             var partsList = new List<string>();
             if (!TryGetNameParts(expression, partsList))
             {
@@ -172,7 +173,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Extensions
                     SyntaxKind.SimpleMemberAccessExpression,
                     out MemberAccessExpressionSyntax memberAccess
                 )
-            ) {
+            )
+            {
                 if (!TryGetNameParts(memberAccess.Expression, parts))
                 {
                     return false;
@@ -182,7 +184,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Extensions
             }
             else if (
                 expression.IsKind(SyntaxKind.QualifiedName, out QualifiedNameSyntax qualifiedName)
-            ) {
+            )
+            {
                 if (!TryGetNameParts(qualifiedName.Left, parts))
                 {
                     return false;
@@ -227,7 +230,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Extensions
                 if (
                     attributeArgument.NameEquals == null
                     || expression != attributeArgument.NameEquals.Name
-                ) {
+                )
+                {
                     return true;
                 }
             }
@@ -392,7 +396,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Extensions
 
         public static bool IsOperandOfIncrementOrDecrementExpression(
             this ExpressionSyntax expression
-        ) {
+        )
+        {
             if (expression != null)
             {
                 switch (expression.Parent.Kind())
@@ -415,12 +420,14 @@ namespace Microsoft.CodeAnalysis.CSharp.Extensions
             this ExpressionSyntax expression,
             SemanticModel semanticModel,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var invocation = expression?.GetAncestor<InvocationExpressionSyntax>();
             if (
                 invocation?.Expression is IdentifierNameSyntax name
                 && name.Identifier.Text == SyntaxFacts.GetText(SyntaxKind.NameOfKeyword)
-            ) {
+            )
+            {
                 return semanticModel.GetMemberGroup(name, cancellationToken).IsDefaultOrEmpty;
             }
 
@@ -448,7 +455,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Extensions
             this ExpressionSyntax expression,
             SemanticModel semanticModel,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             // An RValue can't be written into.
             // i.e. you can't replace "a" in "a = b" with "Goo() = b".
             return expression != null
@@ -460,7 +468,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Extensions
             this ExpressionSyntax expression,
             SemanticModel semanticModel,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             if (expression.IsKind(SyntaxKind.StackAllocArrayCreationExpression))
             {
                 // Stack alloc is very interesting.  While it appears to be an expression, it is only
@@ -474,7 +483,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Extensions
                 || expression.IsKind(SyntaxKind.CollectionInitializerExpression)
                 || expression.IsKind(SyntaxKind.ObjectInitializerExpression)
                 || expression.IsKind(SyntaxKind.ComplexElementInitializerExpression)
-            ) {
+            )
+            {
                 return false;
             }
 
@@ -482,7 +492,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Extensions
             if (
                 expression is LiteralExpressionSyntax
                 && !expression.IsParentKind(SyntaxKind.UnaryMinusExpression)
-            ) {
+            )
+            {
                 return true;
             }
 
@@ -495,7 +506,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Extensions
                 !(expression is ObjectCreationExpressionSyntax)
                 && !(expression is AnonymousObjectCreationExpressionSyntax)
                 && !expression.IsLeftSideOfAssignExpression()
-            ) {
+            )
+            {
                 var symbolInfo = semanticModel.GetSymbolInfo(expression, cancellationToken);
                 if (!symbolInfo.GetBestOrAllSymbols().All(CanReplace))
                 {
@@ -526,7 +538,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Extensions
                     if (
                         expression.IsKind(SyntaxKind.IdentifierName)
                         || expression is MemberAccessExpressionSyntax
-                    ) {
+                    )
+                    {
                         // If it looks like a method then we don't allow it to be replaced if it is a
                         // method (or if it doesn't bind).
 
@@ -602,7 +615,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Extensions
                         expression is LiteralExpressionSyntax
                         && expression.IsParentKind(SyntaxKind.UnaryMinusExpression)
                     )
-                ) {
+                )
+                {
                     return true;
                 }
             }
@@ -624,7 +638,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Extensions
                 )
                 && topExpression != null
                 && fromClause.Type == topExpression
-            ) {
+            )
+            {
                 return false;
             }
 
@@ -636,7 +651,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Extensions
                 || expression.Parent is QueryClauseSyntax
                 || expression.Parent is SelectOrGroupClauseSyntax
                 || expression.Parent is CheckedExpressionSyntax
-            ) {
+            )
+            {
                 return true;
             }
 
@@ -649,7 +665,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Extensions
                     m => m.Expression == expression
                 )
                 || expression.CheckParent<CastExpressionSyntax>(c => c.Expression == expression)
-            ) {
+            )
+            {
                 return true;
             }
 
@@ -659,7 +676,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Extensions
                     expression.IsParentKind(SyntaxKind.NameEquals)
                     && expression.Parent.IsParentKind(SyntaxKind.AttributeArgument)
                 ) || expression.IsLeftSideOfAnyAssignExpression()
-            ) {
+            )
+            {
                 return true;
             }
 
@@ -670,7 +688,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Extensions
             this ExpressionSyntax expression,
             SemanticModel semanticModel,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             // Check for the Color Color case.
             //
             // color color: if you bind "A" and you get a symbol and the type of that symbol is
@@ -694,7 +713,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Extensions
                         if (
                             speculativeSymbolInfo.CandidateReason
                             != CandidateReason.NotATypeOrNamespace
-                        ) {
+                        )
+                        {
                             var staticType = speculativeSymbolInfo.GetAnySymbol().GetSymbolType();
 
                             return SymbolEquivalenceComparer.Instance.Equals(
@@ -753,7 +773,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Extensions
             if (
                 node is AliasQualifiedNameSyntax aliasQualifiedName
                 && aliasQualifiedName.Name != null
-            ) {
+            )
+            {
                 return aliasQualifiedName.Name;
             }
 
@@ -921,7 +942,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Extensions
             SyntaxToken? semicolonTokenOpt,
             bool createReturnStatementForExpression,
             out StatementSyntax statement
-        ) {
+        )
+        {
             // It's tricky to convert an arrow expression with directives over to a block.
             // We'd need to find and remove the directives *after* the arrow expression and
             // move them accordingly.  So, for now, we just disallow this.
@@ -946,13 +968,15 @@ namespace Microsoft.CodeAnalysis.CSharp.Extensions
             ExpressionSyntax expression,
             SyntaxToken semicolonToken,
             bool createReturnStatementForExpression
-        ) {
+        )
+        {
             if (
                 expression.IsKind(
                     SyntaxKind.ThrowExpression,
                     out ThrowExpressionSyntax throwExpression
                 )
-            ) {
+            )
+            {
                 return SyntaxFactory.ThrowStatement(
                     throwExpression.ThrowKeyword,
                     throwExpression.Expression,

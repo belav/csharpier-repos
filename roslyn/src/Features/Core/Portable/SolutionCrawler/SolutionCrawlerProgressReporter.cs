@@ -76,7 +76,8 @@ namespace Microsoft.CodeAnalysis.SolutionCrawler
                     start
                         ? (Interlocked.Increment(ref referenceCount) == 1)
                         : (Interlocked.Decrement(ref referenceCount) == 0)
-                ) {
+                )
+                {
                     var progressData = new ProgressData(status, pendingItemCount: null);
                     OnProgressChanged(progressData);
                 }

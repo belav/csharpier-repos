@@ -39,7 +39,8 @@ namespace Microsoft.CodeAnalysis.Diagnostics.Analyzers.NamingStyles
             ImmutableArray<SymbolKindOrTypeKind> symbolKindList,
             ImmutableArray<Accessibility> accessibilityList = default,
             ImmutableArray<ModifierKind> modifiers = default
-        ) {
+        )
+        {
             ID = id ?? Guid.NewGuid();
             Name = symbolSpecName;
             ApplicableSymbolKindList = symbolKindList.IsDefault
@@ -109,7 +110,8 @@ namespace Microsoft.CodeAnalysis.Diagnostics.Analyzers.NamingStyles
             SymbolKindOrTypeKind kind,
             DeclarationModifiers modifiers,
             Accessibility? accessibility
-        ) {
+        )
+        {
             if (!ApplicableSymbolKindList.Any(k => k.Equals(kind)))
             {
                 return false;
@@ -131,7 +133,8 @@ namespace Microsoft.CodeAnalysis.Diagnostics.Analyzers.NamingStyles
 
         private static DeclarationModifiers CollapseModifiers(
             ImmutableArray<ModifierKind> requiredModifierList
-        ) {
+        )
+        {
             if (requiredModifierList == default)
             {
                 return new DeclarationModifiers();
@@ -329,7 +332,8 @@ namespace Microsoft.CodeAnalysis.Diagnostics.Analyzers.NamingStyles
 
         private static ImmutableArray<SymbolKindOrTypeKind> GetSymbolKindListFromXElement(
             XElement symbolKindListElement
-        ) {
+        )
+        {
             var applicableSymbolKindList = ArrayBuilder<SymbolKindOrTypeKind>.GetInstance();
             foreach (var symbolKindElement in symbolKindListElement.Elements(nameof(SymbolKind)))
             {
@@ -357,11 +361,13 @@ namespace Microsoft.CodeAnalysis.Diagnostics.Analyzers.NamingStyles
 
         private static ImmutableArray<Accessibility> GetAccessibilityListFromXElement(
             XElement accessibilityListElement
-        ) {
+        )
+        {
             var applicableAccessibilityList = ArrayBuilder<Accessibility>.GetInstance();
             foreach (
                 var accessibilityElement in accessibilityListElement.Elements("AccessibilityKind")
-            ) {
+            )
+            {
                 applicableAccessibilityList.Add(
                     AccessibilityExtensions.FromXElement(accessibilityElement)
                 );
@@ -372,7 +378,8 @@ namespace Microsoft.CodeAnalysis.Diagnostics.Analyzers.NamingStyles
 
         private static ImmutableArray<ModifierKind> GetModifierListFromXElement(
             XElement modifierListElement
-        ) {
+        )
+        {
             var result = ArrayBuilder<ModifierKind>.GetInstance();
             foreach (var modifierElement in modifierListElement.Elements(nameof(ModifierKind)))
             {
@@ -588,14 +595,16 @@ namespace Microsoft.CodeAnalysis.Diagnostics.Analyzers.NamingStyles
                 if (
                     (Modifier.IsAbstract && symbol.IsAbstract)
                     || (Modifier.IsStatic && symbol.IsStatic)
-                ) {
+                )
+                {
                     return true;
                 }
 
                 var kind = symbol.Kind;
                 if (
                     Modifier.IsAsync && kind == SymbolKind.Method && ((IMethodSymbol)symbol).IsAsync
-                ) {
+                )
+                {
                     return true;
                 }
 
@@ -612,7 +621,8 @@ namespace Microsoft.CodeAnalysis.Diagnostics.Analyzers.NamingStyles
                     if (
                         (kind == SymbolKind.Field && ((IFieldSymbol)symbol).IsConst)
                         || (kind == SymbolKind.Local && ((ILocalSymbol)symbol).IsConst)
-                    ) {
+                    )
+                    {
                         return true;
                     }
                 }

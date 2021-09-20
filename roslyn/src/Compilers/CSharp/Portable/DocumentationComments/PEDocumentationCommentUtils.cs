@@ -22,7 +22,8 @@ namespace Microsoft.CodeAnalysis.CSharp.DocumentationComments
             CultureInfo preferredCulture,
             CancellationToken cancellationToken,
             ref Tuple<CultureInfo, string> lazyDocComment
-        ) {
+        )
+        {
             // Have we cached anything?
             if (lazyDocComment == null)
             {

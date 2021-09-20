@@ -29,7 +29,8 @@ namespace Microsoft.Win32.RegistryTests
             TestRegistryKey.CreateSubKey(name);
             using (
                 var rk = Registry.CurrentUser.OpenSubKey(name: TestRegistryKeyName, writable: false)
-            ) {
+            )
+            {
                 Assert.Throws<UnauthorizedAccessException>(() => rk.CreateSubKey(name));
                 Assert.Throws<UnauthorizedAccessException>(() => rk.SetValue(name, "String"));
                 Assert.Throws<UnauthorizedAccessException>(() => rk.DeleteValue(name));

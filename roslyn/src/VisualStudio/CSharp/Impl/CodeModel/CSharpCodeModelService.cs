@@ -42,14 +42,15 @@ namespace Microsoft.VisualStudio.LanguageServices.CSharp.CodeModel
             IEditorOptionsFactoryService editorOptionsFactoryService,
             IEnumerable<IRefactorNotifyService> refactorNotifyServices,
             IThreadingContext threadingContext
-        ) : base(
-            languageServiceProvider,
-            editorOptionsFactoryService,
-            refactorNotifyServices,
-            BlankLineInGeneratedMethodFormattingRule.Instance,
-            EndRegionFormattingRule.Instance,
-            threadingContext
-        ) { }
+        )
+            : base(
+                languageServiceProvider,
+                editorOptionsFactoryService,
+                refactorNotifyServices,
+                BlankLineInGeneratedMethodFormattingRule.Instance,
+                EndRegionFormattingRule.Instance,
+                threadingContext
+            ) { }
 
         private static readonly SymbolDisplayFormat s_codeTypeRefAsFullNameFormat =
             new(
@@ -237,7 +238,8 @@ namespace Microsoft.VisualStudio.LanguageServices.CSharp.CodeModel
                     if (
                         scope == EnvDTE.vsCMElement.vsCMElementImportStmt
                         && ((UsingDirectiveSyntax)node).Name != null
-                    ) {
+                    )
+                    {
                         return true;
                     }
                     break;
@@ -279,7 +281,8 @@ namespace Microsoft.VisualStudio.LanguageServices.CSharp.CodeModel
 
         private static IEnumerable<SyntaxNode> GetAttributeNodes(
             SyntaxList<AttributeListSyntax> attributeDeclarationList
-        ) {
+        )
+        {
             foreach (var attributeDeclaration in attributeDeclarationList)
             {
                 foreach (var attribute in attributeDeclaration.Attributes)
@@ -374,7 +377,8 @@ namespace Microsoft.VisualStudio.LanguageServices.CSharp.CodeModel
 
         private static IEnumerable<MemberDeclarationSyntax> GetChildMemberNodes(
             SyntaxNode container
-        ) {
+        )
+        {
             if (container is CompilationUnitSyntax compilationUnit)
             {
                 foreach (var member in compilationUnit.Members)
@@ -437,7 +441,8 @@ namespace Microsoft.VisualStudio.LanguageServices.CSharp.CodeModel
             bool recursive,
             bool logicalFields,
             bool onlySupportedNodes
-        ) {
+        )
+        {
             if (!IsContainerNode(container))
             {
                 yield break;
@@ -485,7 +490,8 @@ namespace Microsoft.VisualStudio.LanguageServices.CSharp.CodeModel
                             logicalFields: logicalFields,
                             onlySupportedNodes: onlySupportedNodes
                         )
-                    ) {
+                    )
+                    {
                         yield return innerMember;
                     }
                 }
@@ -509,7 +515,8 @@ namespace Microsoft.VisualStudio.LanguageServices.CSharp.CodeModel
             CodeModelState state,
             FileCodeModel fileCodeModel,
             SyntaxNode node
-        ) {
+        )
+        {
             // Attributes, attribute arguments, parameters, imports directives, and
             // accessor functions do not have their own node keys. Rather, they are
             // based off their parents node keys and other data.
@@ -667,7 +674,8 @@ namespace Microsoft.VisualStudio.LanguageServices.CSharp.CodeModel
             CodeModelState state,
             FileCodeModel fileCodeModel,
             SyntaxNode node
-        ) {
+        )
+        {
             switch (node.Kind())
             {
                 case SyntaxKind.NamespaceDeclaration:
@@ -786,7 +794,8 @@ namespace Microsoft.VisualStudio.LanguageServices.CSharp.CodeModel
             CodeModelState state,
             ProjectId projectId,
             object type
-        ) {
+        )
+        {
             var project = state.Workspace.CurrentSolution.GetProject(projectId);
             if (project == null)
             {
@@ -852,7 +861,8 @@ namespace Microsoft.VisualStudio.LanguageServices.CSharp.CodeModel
             }
             else if (
                 typeSymbol.TypeKind == TypeKind.Dynamic || typeSymbol.TypeKind == TypeKind.Unknown
-            ) {
+            )
+            {
                 return EnvDTE.vsCMTypeRef.vsCMTypeRefOther;
             }
             else
@@ -905,7 +915,8 @@ namespace Microsoft.VisualStudio.LanguageServices.CSharp.CodeModel
                 || typeSymbol.TypeKind == TypeKind.Enum
                 || typeSymbol.TypeKind == TypeKind.Struct
                 || typeSymbol.TypeKind == TypeKind.Delegate
-            ) {
+            )
+            {
                 return EnvDTE.vsCMTypeRef.vsCMTypeRefCodeType;
             }
 
@@ -1011,7 +1022,8 @@ namespace Microsoft.VisualStudio.LanguageServices.CSharp.CodeModel
             if (
                 kind == SyntaxKind.OperatorDeclaration
                 || kind == SyntaxKind.ConversionOperatorDeclaration
-            ) {
+            )
+            {
                 throw Exceptions.ThrowEFail();
             }
 
@@ -1137,7 +1149,8 @@ namespace Microsoft.VisualStudio.LanguageServices.CSharp.CodeModel
             string name,
             int position,
             SemanticModel semanticModel
-        ) {
+        )
+        {
             var typeName = SyntaxFactory.ParseTypeName(name);
             if (typeName is PredefinedTypeSyntax predefinedTypeNode)
             {
@@ -1146,7 +1159,8 @@ namespace Microsoft.VisualStudio.LanguageServices.CSharp.CodeModel
                         predefinedTypeNode.Keyword,
                         out var predefinedType
                     )
-                ) {
+                )
+                {
                     var specialType = predefinedType.ToSpecialType();
                     return semanticModel.Compilation.GetSpecialType(specialType)
                         .GetEscapedFullName();
@@ -1174,7 +1188,8 @@ namespace Microsoft.VisualStudio.LanguageServices.CSharp.CodeModel
                     || methodSymbol.MethodKind == MethodKind.EventAdd
                     || methodSymbol.MethodKind == MethodKind.EventRemove
                     || methodSymbol.MethodKind == MethodKind.EventRaise
-                ) {
+                )
+                {
                     return false;
                 }
             }
@@ -1238,7 +1253,8 @@ namespace Microsoft.VisualStudio.LanguageServices.CSharp.CodeModel
             else if (
                 modifiers.Any(t => t.Kind() == SyntaxKind.ProtectedKeyword)
                 && modifiers.Any(t => t.Kind() == SyntaxKind.InternalKeyword)
-            ) {
+            )
+            {
                 return EnvDTE.vsCMAccess.vsCMAccessProjectOrProtected;
             }
             else if (modifiers.Any(t => t.Kind() == SyntaxKind.InternalKeyword))
@@ -1288,13 +1304,15 @@ namespace Microsoft.VisualStudio.LanguageServices.CSharp.CodeModel
                 node is BaseFieldDeclarationSyntax
                 || node is BaseMethodDeclarationSyntax
                 || node is BasePropertyDeclarationSyntax
-            ) {
+            )
+            {
                 // Members of interfaces and enums are public, while all other
                 // members are private.
                 if (
                     node.HasAncestor<InterfaceDeclarationSyntax>()
                     || node.HasAncestor<EnumDeclarationSyntax>()
-                ) {
+                )
+                {
                     return EnvDTE.vsCMAccess.vsCMAccessPublic;
                 }
                 else
@@ -1335,11 +1353,13 @@ namespace Microsoft.VisualStudio.LanguageServices.CSharp.CodeModel
             if (
                 member.Parent.Kind() == SyntaxKind.InterfaceDeclaration
                 || member.Parent.Kind() == SyntaxKind.EnumDeclaration
-            ) {
+            )
+            {
                 if (
                     newAccess == EnvDTE.vsCMAccess.vsCMAccessDefault
                     || newAccess == EnvDTE.vsCMAccess.vsCMAccessPublic
-                ) {
+                )
+                {
                     return member;
                 }
                 else
@@ -1357,7 +1377,8 @@ namespace Microsoft.VisualStudio.LanguageServices.CSharp.CodeModel
                         || newAccess == EnvDTE.vsCMAccess.vsCMAccessProtected
                         || newAccess == EnvDTE.vsCMAccess.vsCMAccessProjectOrProtected
                     )
-                ) {
+                )
+                {
                     throw Exceptions.ThrowEInvalidArg();
                 }
             }
@@ -1410,7 +1431,8 @@ namespace Microsoft.VisualStudio.LanguageServices.CSharp.CodeModel
                 else if (
                     trivia.Kind() != SyntaxKind.WhitespaceTrivia
                     && trivia.Kind() != SyntaxKind.EndOfLineTrivia
-                ) {
+                )
+                {
                     break;
                 }
             }
@@ -1465,7 +1487,8 @@ namespace Microsoft.VisualStudio.LanguageServices.CSharp.CodeModel
                         new[] { '\r', '\n' },
                         StringSplitOptions.RemoveEmptyEntries
                     )
-                ) {
+                )
+                {
                     builder.Append("// ");
                     builder.Append(line);
                     builder.Append(newLine);
@@ -1494,7 +1517,8 @@ namespace Microsoft.VisualStudio.LanguageServices.CSharp.CodeModel
                 if (
                     firstIndex < leadingTriviaList.Count
                     && leadingTriviaList[firstIndex].Kind() == SyntaxKind.EndOfLineTrivia
-                ) {
+                )
+                {
                     leadingTriviaList.RemoveAt(firstIndex);
                 }
 
@@ -1514,7 +1538,8 @@ namespace Microsoft.VisualStudio.LanguageServices.CSharp.CodeModel
 
         private static DocumentationCommentTriviaSyntax GetDocCommentNode(
             MemberDeclarationSyntax memberDeclaration
-        ) {
+        )
+        {
             var docCommentTrivia = memberDeclaration.GetLeadingTrivia()
                 .Reverse()
                 .FirstOrDefault(t => t.IsDocComment());
@@ -1598,7 +1623,8 @@ namespace Microsoft.VisualStudio.LanguageServices.CSharp.CodeModel
             if (
                 !(xmlDocument.FirstNode is XElement docElement)
                 || docElement.Name.ToString().ToLower() != "doc"
-            ) {
+            )
+            {
                 throw Exceptions.ThrowEInvalidArg();
             }
 
@@ -1612,7 +1638,8 @@ namespace Microsoft.VisualStudio.LanguageServices.CSharp.CodeModel
                 foreach (
                     var line in child.ToString()
                         .Split(new[] { '\r', '\n' }, StringSplitOptions.RemoveEmptyEntries)
-                ) {
+                )
+                {
                     builder.Append("/// ");
                     builder.Append(line);
                     builder.Append(newLine);
@@ -1669,7 +1696,8 @@ namespace Microsoft.VisualStudio.LanguageServices.CSharp.CodeModel
         public override bool TryGetAutoPropertyExpressionBody(
             SyntaxNode parentNode,
             out SyntaxNode accessorNode
-        ) {
+        )
+        {
             accessorNode = (parentNode as PropertyDeclarationSyntax)?.ExpressionBody;
             return accessorNode != null;
         }
@@ -1712,7 +1740,8 @@ namespace Microsoft.VisualStudio.LanguageServices.CSharp.CodeModel
             SyntaxNode parentNode,
             MethodKind kind,
             out SyntaxNode accessorNode
-        ) {
+        )
+        {
             Debug.Assert(parentNode is BasePropertyDeclarationSyntax);
 
             var basePropertyDeclaration = (BasePropertyDeclarationSyntax)parentNode;
@@ -1738,7 +1767,8 @@ namespace Microsoft.VisualStudio.LanguageServices.CSharp.CodeModel
             SyntaxNode parentNode,
             string name,
             out SyntaxNode parameterNode
-        ) {
+        )
+        {
             foreach (ParameterSyntax parameter in GetParameterNodes(parentNode))
             {
                 if (parameter.Identifier.ToString() == name)
@@ -1756,7 +1786,8 @@ namespace Microsoft.VisualStudio.LanguageServices.CSharp.CodeModel
             SyntaxNode parentNode,
             string dottedName,
             out SyntaxNode importNode
-        ) {
+        )
+        {
             foreach (UsingDirectiveSyntax usingDirective in GetImportNodes(parentNode))
             {
                 if (usingDirective.Name.ToString() == dottedName)
@@ -1775,7 +1806,8 @@ namespace Microsoft.VisualStudio.LanguageServices.CSharp.CodeModel
             string name,
             int ordinal,
             out SyntaxNode optionNode
-        ) {
+        )
+        {
             // Only VB has Option statements
             throw new NotSupportedException();
         }
@@ -1785,7 +1817,8 @@ namespace Microsoft.VisualStudio.LanguageServices.CSharp.CodeModel
             string name,
             int ordinal,
             out SyntaxNode inheritsNode
-        ) {
+        )
+        {
             // Only VB has Inherits statements
             throw new NotSupportedException();
         }
@@ -1795,7 +1828,8 @@ namespace Microsoft.VisualStudio.LanguageServices.CSharp.CodeModel
             string name,
             int ordinal,
             out SyntaxNode implementsNode
-        ) {
+        )
+        {
             // Only VB has Implements statements
             throw new NotSupportedException();
         }
@@ -1805,7 +1839,8 @@ namespace Microsoft.VisualStudio.LanguageServices.CSharp.CodeModel
             string name,
             int ordinal,
             out SyntaxNode attributeNode
-        ) {
+        )
+        {
             var count = -1;
             foreach (AttributeSyntax attribute in GetAttributeNodes(parentNode))
             {
@@ -1828,7 +1863,8 @@ namespace Microsoft.VisualStudio.LanguageServices.CSharp.CodeModel
             SyntaxNode attributeNode,
             int index,
             out SyntaxNode attributeArgumentNode
-        ) {
+        )
+        {
             Debug.Assert(attributeNode is AttributeSyntax);
 
             var attribute = (AttributeSyntax)attributeNode;
@@ -1847,7 +1883,8 @@ namespace Microsoft.VisualStudio.LanguageServices.CSharp.CodeModel
             SyntaxNode optionNode,
             out string name,
             out int ordinal
-        ) {
+        )
+        {
             // Only VB supports Option statements
             throw new NotSupportedException();
         }
@@ -1857,7 +1894,8 @@ namespace Microsoft.VisualStudio.LanguageServices.CSharp.CodeModel
             SyntaxNode inheritsNode,
             out string namespaceName,
             out int ordinal
-        ) {
+        )
+        {
             // Only VB supports Inherits statements
             throw new NotSupportedException();
         }
@@ -1867,7 +1905,8 @@ namespace Microsoft.VisualStudio.LanguageServices.CSharp.CodeModel
             SyntaxNode implementsNode,
             out string namespaceName,
             out int ordinal
-        ) {
+        )
+        {
             // Only VB supports Implements statements
             throw new NotSupportedException();
         }
@@ -1877,7 +1916,8 @@ namespace Microsoft.VisualStudio.LanguageServices.CSharp.CodeModel
             SyntaxNode attributeNode,
             out string name,
             out int ordinal
-        ) {
+        )
+        {
             Debug.Assert(attributeNode is AttributeSyntax);
 
             name = ((AttributeSyntax)attributeNode).Name.ToString();
@@ -1901,7 +1941,8 @@ namespace Microsoft.VisualStudio.LanguageServices.CSharp.CodeModel
             SyntaxNode attributeArgumentNode,
             out SyntaxNode attributeNode,
             out int index
-        ) {
+        )
+        {
             Debug.Assert(attributeArgumentNode is AttributeArgumentSyntax);
 
             var argument = (AttributeArgumentSyntax)attributeArgumentNode;
@@ -2011,7 +2052,8 @@ namespace Microsoft.VisualStudio.LanguageServices.CSharp.CodeModel
             string name,
             string value,
             string target = null
-        ) {
+        )
+        {
             var specifier =
                 target != null
                     ? SyntaxFactory.AttributeTargetSpecifier(
@@ -2103,7 +2145,8 @@ namespace Microsoft.VisualStudio.LanguageServices.CSharp.CodeModel
             SyntaxNode importNode,
             out SyntaxNode namespaceNode,
             out string name
-        ) {
+        )
+        {
             if (importNode is UsingDirectiveSyntax usingDirective)
             {
                 namespaceNode =
@@ -2165,7 +2208,8 @@ namespace Microsoft.VisualStudio.LanguageServices.CSharp.CodeModel
         public override SyntaxNode SetParameterKind(
             SyntaxNode node,
             EnvDTE80.vsCMParameterKind kind
-        ) {
+        )
+        {
             if (!(node is ParameterSyntax parameter))
             {
                 throw Exceptions.ThrowEFail();
@@ -2204,7 +2248,8 @@ namespace Microsoft.VisualStudio.LanguageServices.CSharp.CodeModel
                     if (
                         parameterList.Parameters.LastOrDefault() == parameter
                         && parameter.Type is ArrayTypeSyntax
-                    ) {
+                    )
+                    {
                         newModifiers = SyntaxFactory.TokenList(
                             SyntaxFactory.Token(SyntaxKind.ParamsKeyword)
                         );
@@ -2224,7 +2269,8 @@ namespace Microsoft.VisualStudio.LanguageServices.CSharp.CodeModel
         public override EnvDTE80.vsCMParameterKind UpdateParameterKind(
             EnvDTE80.vsCMParameterKind parameterKind,
             PARAMETER_PASSING_MODE passingMode
-        ) {
+        )
+        {
             var updatedParameterKind = parameterKind;
 
             switch (passingMode)
@@ -2255,7 +2301,8 @@ namespace Microsoft.VisualStudio.LanguageServices.CSharp.CodeModel
             SyntaxNode containerNode,
             EnvDTE.vsCMFunction kind,
             string name
-        ) {
+        )
+        {
             if (kind == EnvDTE.vsCMFunction.vsCMFunctionSub)
             {
                 return EnvDTE.vsCMFunction.vsCMFunctionFunction;
@@ -2269,7 +2316,8 @@ namespace Microsoft.VisualStudio.LanguageServices.CSharp.CodeModel
             if (
                 kind == EnvDTE.vsCMFunction.vsCMFunctionConstructor
                 || kind == EnvDTE.vsCMFunction.vsCMFunctionDestructor
-            ) {
+            )
+            {
                 if (containerNode is InterfaceDeclarationSyntax)
                 {
                     throw Exceptions.ThrowEFail();
@@ -2341,7 +2389,8 @@ namespace Microsoft.VisualStudio.LanguageServices.CSharp.CodeModel
         public override EnvDTE80.vsCMClassKind GetClassKind(
             SyntaxNode typeNode,
             INamedTypeSymbol typeSymbol
-        ) {
+        )
+        {
             Debug.Assert(typeNode is ClassDeclarationSyntax);
 
             var type = (ClassDeclarationSyntax)typeNode;
@@ -2406,7 +2455,8 @@ namespace Microsoft.VisualStudio.LanguageServices.CSharp.CodeModel
         public override SyntaxNode SetConstKind(
             SyntaxNode variableNode,
             EnvDTE80.vsCMConstKind kind
-        ) {
+        )
+        {
             Debug.Assert(
                 variableNode is FieldDeclarationSyntax
                     || variableNode is EnumMemberDeclarationSyntax
@@ -2417,7 +2467,8 @@ namespace Microsoft.VisualStudio.LanguageServices.CSharp.CodeModel
                 if (
                     kind != EnvDTE80.vsCMConstKind.vsCMConstKindConst
                     && kind != EnvDTE80.vsCMConstKind.vsCMConstKindReadOnly
-                ) {
+                )
+                {
                     throw Exceptions.ThrowEInvalidArg();
                 }
 
@@ -2444,7 +2495,8 @@ namespace Microsoft.VisualStudio.LanguageServices.CSharp.CodeModel
         public override EnvDTE80.vsCMDataTypeKind GetDataTypeKind(
             SyntaxNode typeNode,
             INamedTypeSymbol symbol
-        ) {
+        )
+        {
             Debug.Assert(typeNode is BaseTypeDeclarationSyntax);
 
             var type = (BaseTypeDeclarationSyntax)typeNode;
@@ -2458,7 +2510,8 @@ namespace Microsoft.VisualStudio.LanguageServices.CSharp.CodeModel
         public override SyntaxNode SetDataTypeKind(
             SyntaxNode typeNode,
             EnvDTE80.vsCMDataTypeKind kind
-        ) {
+        )
+        {
             Debug.Assert(typeNode is BaseTypeDeclarationSyntax);
 
             var type = (BaseTypeDeclarationSyntax)typeNode;
@@ -2511,7 +2564,8 @@ namespace Microsoft.VisualStudio.LanguageServices.CSharp.CodeModel
         public override EnvDTE80.vsCMInheritanceKind GetInheritanceKind(
             SyntaxNode typeNode,
             INamedTypeSymbol typeSymbol
-        ) {
+        )
+        {
             Debug.Assert(typeNode is ClassDeclarationSyntax);
 
             var type = (ClassDeclarationSyntax)typeNode;
@@ -2618,7 +2672,8 @@ namespace Microsoft.VisualStudio.LanguageServices.CSharp.CodeModel
                     if (
                         member is BasePropertyDeclarationSyntax property
                         && property.AccessorList != null
-                    ) {
+                    )
+                    {
                         var updatedAccessors = new List<AccessorDeclarationSyntax>();
                         foreach (var accessor in property.AccessorList.Accessors)
                         {
@@ -2631,7 +2686,8 @@ namespace Microsoft.VisualStudio.LanguageServices.CSharp.CodeModel
                                         SyntaxKind.ReturnStatement
                                     )
                                 )
-                            ) {
+                            )
+                            {
                                 // Leave this accessor as is
                                 updatedAccessors.Add(accessor);
                                 continue;
@@ -2679,7 +2735,8 @@ namespace Microsoft.VisualStudio.LanguageServices.CSharp.CodeModel
                     if (
                         member is BasePropertyDeclarationSyntax property
                         && property.AccessorList != null
-                    ) {
+                    )
+                    {
                         var updatedAccessors = new List<AccessorDeclarationSyntax>();
                         foreach (var accessor in property.AccessorList.Accessors)
                         {
@@ -2715,7 +2772,8 @@ namespace Microsoft.VisualStudio.LanguageServices.CSharp.CodeModel
         public override SyntaxNode SetInheritanceKind(
             SyntaxNode typeNode,
             EnvDTE80.vsCMInheritanceKind kind
-        ) {
+        )
+        {
             Debug.Assert(typeNode is ClassDeclarationSyntax);
 
             if (!(typeNode is MemberDeclarationSyntax member))
@@ -2765,14 +2823,16 @@ namespace Microsoft.VisualStudio.LanguageServices.CSharp.CodeModel
             if (
                 (flags & ModifierFlags.Abstract) != 0
                 || containingType?.Kind() == SyntaxKind.InterfaceDeclaration
-            ) {
+            )
+            {
                 result |= EnvDTE80.vsCMOverrideKind.vsCMOverrideKindAbstract;
             }
 
             if (
                 (flags & ModifierFlags.Virtual) != 0
                 || containingType?.Kind() == SyntaxKind.InterfaceDeclaration
-            ) {
+            )
+            {
                 result |= EnvDTE80.vsCMOverrideKind.vsCMOverrideKindVirtual;
             }
 
@@ -2797,7 +2857,8 @@ namespace Microsoft.VisualStudio.LanguageServices.CSharp.CodeModel
         public override SyntaxNode SetOverrideKind(
             SyntaxNode memberNode,
             EnvDTE80.vsCMOverrideKind kind
-        ) {
+        )
+        {
             Debug.Assert(
                 memberNode is BaseMethodDeclarationSyntax
                     || memberNode is BasePropertyDeclarationSyntax
@@ -2831,7 +2892,8 @@ namespace Microsoft.VisualStudio.LanguageServices.CSharp.CodeModel
                             | EnvDTE80.vsCMOverrideKind.vsCMOverrideKindSealed
                         )
                     ) != 0
-                ) {
+                )
+                {
                     throw Exceptions.ThrowEInvalidArg();
                 }
                 else if (
@@ -2842,7 +2904,8 @@ namespace Microsoft.VisualStudio.LanguageServices.CSharp.CodeModel
                             | EnvDTE80.vsCMOverrideKind.vsCMOverrideKindVirtual
                         )
                     ) != 0
-                ) {
+                )
+                {
                     // Switch these flags off
                     kind &= ~(
                         EnvDTE80.vsCMOverrideKind.vsCMOverrideKindAbstract
@@ -3385,7 +3448,8 @@ namespace Microsoft.VisualStudio.LanguageServices.CSharp.CodeModel
         protected override Accessibility GetDefaultAccessibility(
             SymbolKind targetSymbolKind,
             CodeGenerationDestination destination
-        ) {
+        )
+        {
             switch (targetSymbolKind)
             {
                 case SymbolKind.Field:
@@ -3416,7 +3480,8 @@ namespace Microsoft.VisualStudio.LanguageServices.CSharp.CodeModel
             string partialName,
             SemanticModel semanticModel,
             int position
-        ) {
+        )
+        {
             var parsedTypeName = SyntaxFactory.ParseTypeName(partialName);
 
             return semanticModel.GetSpeculativeTypeInfo(
@@ -3429,7 +3494,8 @@ namespace Microsoft.VisualStudio.LanguageServices.CSharp.CodeModel
         public override ITypeSymbol GetTypeSymbolFromFullName(
             string fullName,
             Compilation compilation
-        ) {
+        )
+        {
             ITypeSymbol typeSymbol = compilation.GetTypeByMetadataName(fullName);
 
             if (typeSymbol == null)
@@ -3486,7 +3552,8 @@ namespace Microsoft.VisualStudio.LanguageServices.CSharp.CodeModel
         protected override int GetAttributeIndexInContainer(
             SyntaxNode containerNode,
             Func<SyntaxNode, bool> predicate
-        ) {
+        )
+        {
             var attributes = GetAttributeNodes(containerNode).ToArray();
 
             var index = 0;
@@ -3524,7 +3591,8 @@ namespace Microsoft.VisualStudio.LanguageServices.CSharp.CodeModel
         protected override int GetAttributeArgumentIndexInContainer(
             SyntaxNode containerNode,
             Func<SyntaxNode, bool> predicate
-        ) {
+        )
+        {
             var attributeArguments = GetAttributeArgumentNodes(containerNode).ToArray();
 
             for (var index = 0; index < attributeArguments.Length; index++)
@@ -3541,7 +3609,8 @@ namespace Microsoft.VisualStudio.LanguageServices.CSharp.CodeModel
         protected override int GetImportIndexInContainer(
             SyntaxNode containerNode,
             Func<SyntaxNode, bool> predicate
-        ) {
+        )
+        {
             var imports = GetImportNodes(containerNode).ToArray();
 
             for (var index = 0; index < imports.Length; index++)
@@ -3558,7 +3627,8 @@ namespace Microsoft.VisualStudio.LanguageServices.CSharp.CodeModel
         protected override int GetParameterIndexInContainer(
             SyntaxNode containerNode,
             Func<SyntaxNode, bool> predicate
-        ) {
+        )
+        {
             var parameters = GetParameterNodes(containerNode).ToArray();
 
             for (var index = 0; index < parameters.Length; index++)
@@ -3575,7 +3645,8 @@ namespace Microsoft.VisualStudio.LanguageServices.CSharp.CodeModel
         protected override int GetMemberIndexInContainer(
             SyntaxNode containerNode,
             Func<SyntaxNode, bool> predicate
-        ) {
+        )
+        {
             var members = GetLogicalMemberNodes(containerNode).ToArray();
 
             var index = 0;
@@ -3591,7 +3662,8 @@ namespace Microsoft.VisualStudio.LanguageServices.CSharp.CodeModel
                             SyntaxKind.VariableDeclarator,
                             out VariableDeclaratorSyntax variableDeclarator
                         )
-                    ) {
+                    )
+                    {
                         var variableDeclaration = (VariableDeclarationSyntax)member.Parent;
                         var indexOfDeclaratorInField = variableDeclaration.Variables.IndexOf(
                             variableDeclarator
@@ -3656,7 +3728,8 @@ namespace Microsoft.VisualStudio.LanguageServices.CSharp.CodeModel
             int index,
             SyntaxNode member,
             SyntaxNode container
-        ) {
+        )
+        {
             if (container is CompilationUnitSyntax compilationUnit)
             {
                 var newMembers = compilationUnit.Members.Insert(
@@ -3780,7 +3853,8 @@ namespace Microsoft.VisualStudio.LanguageServices.CSharp.CodeModel
             int index,
             SyntaxNode member,
             SyntaxNode container
-        ) {
+        )
+        {
             var newContainer = InsertMemberNodeIntoContainerCore(index, member, container);
 
             newContainer = EnsureAfterEndRegion(index, newContainer);
@@ -3792,7 +3866,8 @@ namespace Microsoft.VisualStudio.LanguageServices.CSharp.CodeModel
             int index,
             SyntaxNode attributeArgument,
             SyntaxNode container
-        ) {
+        )
+        {
             if (container is AttributeSyntax attribute)
             {
                 var argumentList = attribute.ArgumentList;
@@ -3826,7 +3901,8 @@ namespace Microsoft.VisualStudio.LanguageServices.CSharp.CodeModel
             int index,
             SyntaxNode list,
             SyntaxNode container
-        ) {
+        )
+        {
             // If the attribute list is being inserted at the first index and the container is not the compilation unit, copy leading trivia
             // to the list that is being inserted.
             if (index == 0 && !(container is CompilationUnitSyntax))
@@ -3990,7 +4066,8 @@ namespace Microsoft.VisualStudio.LanguageServices.CSharp.CodeModel
             }
             else if (
                 container is VariableDeclaratorSyntax || container is VariableDeclarationSyntax
-            ) {
+            )
+            {
                 return InsertAttributeListIntoContainer(index, list, container.Parent);
             }
 
@@ -4001,7 +4078,8 @@ namespace Microsoft.VisualStudio.LanguageServices.CSharp.CodeModel
             int index,
             SyntaxNode importNode,
             SyntaxNode container
-        ) {
+        )
+        {
             var import = (UsingDirectiveSyntax)importNode;
 
             if (container is CompilationUnitSyntax compilationUnit)
@@ -4017,7 +4095,8 @@ namespace Microsoft.VisualStudio.LanguageServices.CSharp.CodeModel
             int index,
             SyntaxNode parameter,
             SyntaxNode container
-        ) {
+        )
+        {
             if (container is BaseMethodDeclarationSyntax method)
             {
                 var parameterList = method.ParameterList.Parameters.Insert(
@@ -4101,7 +4180,8 @@ namespace Microsoft.VisualStudio.LanguageServices.CSharp.CodeModel
             if (
                 (modifierFlags & ModifierFlags.Abstract) != 0
                 || (modifierFlags & ModifierFlags.Extern) != 0
-            ) {
+            )
+            {
                 return false;
             }
 
@@ -4147,14 +4227,16 @@ namespace Microsoft.VisualStudio.LanguageServices.CSharp.CodeModel
                     SyntaxKind.ClassDeclaration,
                     out ClassDeclarationSyntax classDecl
                 ) || !classDecl.Modifiers.Any(SyntaxKind.StaticKeyword)
-            ) {
+            )
+            {
                 return false;
             }
 
             if (
                 methodDeclaration.ParameterList == null
                 || methodDeclaration.ParameterList.Parameters.Count == 0
-            ) {
+            )
+            {
                 return false;
             }
 
@@ -4176,7 +4258,8 @@ namespace Microsoft.VisualStudio.LanguageServices.CSharp.CodeModel
                 || node.Kind() != SyntaxKind.MethodDeclaration
                 || symbol == null
                 || symbol.Kind != SymbolKind.Method
-            ) {
+            )
+            {
                 throw Exceptions.ThrowEUnexpected();
             }
 
@@ -4219,7 +4302,8 @@ namespace Microsoft.VisualStudio.LanguageServices.CSharp.CodeModel
                 || node.Kind() != SyntaxKind.PropertyDeclaration
                 || symbol == null
                 || symbol.Kind != SymbolKind.Property
-            ) {
+            )
+            {
                 throw Exceptions.ThrowEUnexpected();
             }
 
@@ -4267,7 +4351,8 @@ namespace Microsoft.VisualStudio.LanguageServices.CSharp.CodeModel
             ITypeSymbol typeSymbol,
             SemanticModel semanticModel,
             int insertionIndex
-        ) {
+        )
+        {
             var position = typeDeclaration.SpanStart;
             var identifier = typeDeclaration.Identifier;
             if (identifier.HasTrailingTrivia)
@@ -4318,7 +4403,8 @@ namespace Microsoft.VisualStudio.LanguageServices.CSharp.CodeModel
             ITypeSymbol typeSymbol,
             SemanticModel semanticModel,
             int? position
-        ) {
+        )
+        {
             if (!node.IsKind(SyntaxKind.ClassDeclaration, SyntaxKind.InterfaceDeclaration))
             {
                 throw Exceptions.ThrowEFail();
@@ -4353,7 +4439,8 @@ namespace Microsoft.VisualStudio.LanguageServices.CSharp.CodeModel
             SyntaxNode node,
             ITypeSymbol typeSymbol,
             SemanticModel semanticModel
-        ) {
+        )
+        {
             if (!node.IsKind(SyntaxKind.ClassDeclaration, SyntaxKind.InterfaceDeclaration))
             {
                 throw Exceptions.ThrowEFail();
@@ -4415,7 +4502,8 @@ namespace Microsoft.VisualStudio.LanguageServices.CSharp.CodeModel
             ITypeSymbol typeSymbol,
             SemanticModel semanticModel,
             int? position
-        ) {
+        )
+        {
             if (!node.IsKind(SyntaxKind.ClassDeclaration, SyntaxKind.StructDeclaration))
             {
                 throw Exceptions.ThrowEFail();
@@ -4423,7 +4511,8 @@ namespace Microsoft.VisualStudio.LanguageServices.CSharp.CodeModel
 
             if (
                 typeSymbol.Kind != SymbolKind.NamedType || typeSymbol.TypeKind != TypeKind.Interface
-            ) {
+            )
+            {
                 throw Exceptions.ThrowEInvalidArg();
             }
 
@@ -4452,7 +4541,8 @@ namespace Microsoft.VisualStudio.LanguageServices.CSharp.CodeModel
             SyntaxNode node,
             ITypeSymbol typeSymbol,
             SemanticModel semanticModel
-        ) {
+        )
+        {
             if (!node.IsKind(SyntaxKind.ClassDeclaration, SyntaxKind.StructDeclaration))
             {
                 throw Exceptions.ThrowEFail();

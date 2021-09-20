@@ -11,7 +11,8 @@ namespace Ignitor
             string argsJson,
             int resultType,
             long targetInstanceId
-        ) {
+        )
+        {
             AsyncHandle = asyncHandle;
             Identifier = identifier;
             ArgsJson = argsJson;

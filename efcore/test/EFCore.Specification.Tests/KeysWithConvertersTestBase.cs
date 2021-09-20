@@ -78,7 +78,8 @@ namespace Microsoft.EntityFrameworkCore
                 DbContext context,
                 out IntStructKeyPrincipal[] principals,
                 out IntStructKeyOptionalDependent[] dependents
-            ) {
+            )
+            {
                 var two = 2;
                 var three = new IntStructKey { Id = 3 };
 
@@ -156,7 +157,8 @@ namespace Microsoft.EntityFrameworkCore
                 IntStructKeyOptionalDependent[] dependents,
                 (int, int[])[] expectedPrincipalToDependents,
                 (int, int?)[] expectedDependentToPrincipals
-            ) {
+            )
+            {
                 ValidateOptional(
                     principals,
                     dependents,
@@ -232,7 +234,8 @@ namespace Microsoft.EntityFrameworkCore
                 DbContext context,
                 out ComparableIntStructKeyPrincipal[] principals,
                 out ComparableIntStructKeyOptionalDependent[] dependents
-            ) {
+            )
+            {
                 var two = 2;
                 var three = new ComparableIntStructKey { Id = 3 };
 
@@ -312,7 +315,8 @@ namespace Microsoft.EntityFrameworkCore
                 ComparableIntStructKeyOptionalDependent[] dependents,
                 (int, int[])[] expectedPrincipalToDependents,
                 (int, int?)[] expectedDependentToPrincipals
-            ) {
+            )
+            {
                 ValidateOptional(
                     principals,
                     dependents,
@@ -388,7 +392,8 @@ namespace Microsoft.EntityFrameworkCore
                 DbContext context,
                 out GenericComparableIntStructKeyPrincipal[] principals,
                 out GenericComparableIntStructKeyOptionalDependent[] dependents
-            ) {
+            )
+            {
                 var two = 2;
                 var three = new GenericComparableIntStructKey { Id = 3 };
 
@@ -472,7 +477,8 @@ namespace Microsoft.EntityFrameworkCore
                 GenericComparableIntStructKeyOptionalDependent[] dependents,
                 (int, int[])[] expectedPrincipalToDependents,
                 (int, int?)[] expectedDependentToPrincipals
-            ) {
+            )
+            {
                 ValidateOptional(
                     principals,
                     dependents,
@@ -545,7 +551,8 @@ namespace Microsoft.EntityFrameworkCore
                 DbContext context,
                 out IntStructKeyPrincipal[] principals,
                 out IntStructKeyRequiredDependent[] dependents
-            ) {
+            )
+            {
                 var twelve = 12;
                 var thirteen = new IntStructKey { Id = 13 };
 
@@ -624,7 +631,8 @@ namespace Microsoft.EntityFrameworkCore
                 IntStructKeyRequiredDependent[] dependents,
                 (int, int[])[] expectedPrincipalToDependents,
                 (int, int)[] expectedDependentToPrincipals
-            ) {
+            )
+            {
                 ValidateRequired(
                     principals,
                     dependents,
@@ -700,7 +708,8 @@ namespace Microsoft.EntityFrameworkCore
                 DbContext context,
                 out ComparableIntStructKeyPrincipal[] principals,
                 out ComparableIntStructKeyRequiredDependent[] dependents
-            ) {
+            )
+            {
                 var twelve = 12;
                 var thirteen = new ComparableIntStructKey { Id = 13 };
 
@@ -784,7 +793,8 @@ namespace Microsoft.EntityFrameworkCore
                 ComparableIntStructKeyRequiredDependent[] dependents,
                 (int, int[])[] expectedPrincipalToDependents,
                 (int, int)[] expectedDependentToPrincipals
-            ) {
+            )
+            {
                 ValidateRequired(
                     principals,
                     dependents,
@@ -860,7 +870,8 @@ namespace Microsoft.EntityFrameworkCore
                 DbContext context,
                 out GenericComparableIntStructKeyPrincipal[] principals,
                 out GenericComparableIntStructKeyRequiredDependent[] dependents
-            ) {
+            )
+            {
                 var twelve = 12;
                 var thirteen = new GenericComparableIntStructKey { Id = 13 };
 
@@ -950,7 +961,8 @@ namespace Microsoft.EntityFrameworkCore
                 GenericComparableIntStructKeyRequiredDependent[] dependents,
                 (int, int[])[] expectedPrincipalToDependents,
                 (int, int)[] expectedDependentToPrincipals
-            ) {
+            )
+            {
                 ValidateRequired(
                     principals,
                     dependents,
@@ -1023,7 +1035,8 @@ namespace Microsoft.EntityFrameworkCore
                 DbContext context,
                 out IntClassKeyPrincipal[] principals,
                 out IntClassKeyOptionalDependent[] dependents
-            ) {
+            )
+            {
                 var two = 2;
                 var three = new IntClassKey { Id = 3 };
 
@@ -1092,7 +1105,8 @@ namespace Microsoft.EntityFrameworkCore
                 IntClassKeyOptionalDependent[] dependents,
                 (int, int[])[] expectedPrincipalToDependents,
                 (int, int?)[] expectedDependentToPrincipals
-            ) {
+            )
+            {
                 ValidateOptional(
                     principals,
                     dependents,
@@ -1168,7 +1182,8 @@ namespace Microsoft.EntityFrameworkCore
                 DbContext context,
                 out ComparableIntClassKeyPrincipal[] principals,
                 out ComparableIntClassKeyOptionalDependent[] dependents
-            ) {
+            )
+            {
                 var two = 2;
                 var three = new ComparableIntClassKey { Id = 3 };
 
@@ -1246,7 +1261,8 @@ namespace Microsoft.EntityFrameworkCore
                 ComparableIntClassKeyOptionalDependent[] dependents,
                 (int, int[])[] expectedPrincipalToDependents,
                 (int, int?)[] expectedDependentToPrincipals
-            ) {
+            )
+            {
                 ValidateOptional(
                     principals,
                     dependents,
@@ -1319,7 +1335,8 @@ namespace Microsoft.EntityFrameworkCore
                 DbContext context,
                 out BytesStructKeyPrincipal[] principals,
                 out BytesStructKeyOptionalDependent[] dependents
-            ) {
+            )
+            {
                 var two = new byte[] { 2, 2 };
                 var three = new BytesStructKey { Id = new byte[] { 3, 3, 3 } };
 
@@ -1403,7 +1420,8 @@ namespace Microsoft.EntityFrameworkCore
                 BytesStructKeyOptionalDependent[] dependents,
                 (int, int[])[] expectedPrincipalToDependents,
                 (int, int?)[] expectedDependentToPrincipals
-            ) {
+            )
+            {
                 ValidateOptionalBytes(
                     principals,
                     dependents,
@@ -1479,7 +1497,8 @@ namespace Microsoft.EntityFrameworkCore
                 DbContext context,
                 out StructuralComparableBytesStructKeyPrincipal[] principals,
                 out StructuralComparableBytesStructKeyOptionalDependent[] dependents
-            ) {
+            )
+            {
                 var two = new byte[] { 2, 2 };
                 var three = new StructuralComparableBytesStructKey { Id = new byte[] { 3, 3, 3 } };
 
@@ -1604,7 +1623,8 @@ namespace Microsoft.EntityFrameworkCore
                 StructuralComparableBytesStructKeyOptionalDependent[] dependents,
                 (int, int[])[] expectedPrincipalToDependents,
                 (int, int?)[] expectedDependentToPrincipals
-            ) {
+            )
+            {
                 ValidateOptionalBytes(
                     principals,
                     dependents,
@@ -1680,7 +1700,8 @@ namespace Microsoft.EntityFrameworkCore
                 DbContext context,
                 out ComparableBytesStructKeyPrincipal[] principals,
                 out ComparableBytesStructKeyOptionalDependent[] dependents
-            ) {
+            )
+            {
                 var two = new byte[] { 2, 2 };
                 var three = new ComparableBytesStructKey { Id = new byte[] { 3, 3, 3 } };
 
@@ -1780,7 +1801,8 @@ namespace Microsoft.EntityFrameworkCore
                 ComparableBytesStructKeyOptionalDependent[] dependents,
                 (int, int[])[] expectedPrincipalToDependents,
                 (int, int?)[] expectedDependentToPrincipals
-            ) {
+            )
+            {
                 ValidateOptionalBytes(
                     principals,
                     dependents,
@@ -1856,7 +1878,8 @@ namespace Microsoft.EntityFrameworkCore
                 DbContext context,
                 out GenericComparableBytesStructKeyPrincipal[] principals,
                 out GenericComparableBytesStructKeyOptionalDependent[] dependents
-            ) {
+            )
+            {
                 var two = new byte[] { 2, 2 };
                 var three = new GenericComparableBytesStructKey { Id = new byte[] { 3, 3, 3 } };
 
@@ -1963,7 +1986,8 @@ namespace Microsoft.EntityFrameworkCore
                 GenericComparableBytesStructKeyOptionalDependent[] dependents,
                 (int, int[])[] expectedPrincipalToDependents,
                 (int, int?)[] expectedDependentToPrincipals
-            ) {
+            )
+            {
                 ValidateOptionalBytes(
                     principals,
                     dependents,
@@ -2036,7 +2060,8 @@ namespace Microsoft.EntityFrameworkCore
                 DbContext context,
                 out BytesStructKeyPrincipal[] principals,
                 out BytesStructKeyRequiredDependent[] dependents
-            ) {
+            )
+            {
                 var twelve = new byte[] { 12, 12 };
                 var thirteen = new BytesStructKey { Id = new byte[] { 13, 13, 13 } };
 
@@ -2125,7 +2150,8 @@ namespace Microsoft.EntityFrameworkCore
                 BytesStructKeyRequiredDependent[] dependents,
                 (int, int[])[] expectedPrincipalToDependents,
                 (int, int)[] expectedDependentToPrincipals
-            ) {
+            )
+            {
                 ValidateRequiredBytes(
                     principals,
                     dependents,
@@ -2201,7 +2227,8 @@ namespace Microsoft.EntityFrameworkCore
                 DbContext context,
                 out ComparableBytesStructKeyPrincipal[] principals,
                 out ComparableBytesStructKeyRequiredDependent[] dependents
-            ) {
+            )
+            {
                 var twelve = new byte[] { 12, 12 };
                 var thirteen = new ComparableBytesStructKey { Id = new byte[] { 13, 13, 13 } };
 
@@ -2306,7 +2333,8 @@ namespace Microsoft.EntityFrameworkCore
                 ComparableBytesStructKeyRequiredDependent[] dependents,
                 (int, int[])[] expectedPrincipalToDependents,
                 (int, int)[] expectedDependentToPrincipals
-            ) {
+            )
+            {
                 ValidateRequiredBytes(
                     principals,
                     dependents,
@@ -2382,7 +2410,8 @@ namespace Microsoft.EntityFrameworkCore
                 DbContext context,
                 out StructuralComparableBytesStructKeyPrincipal[] principals,
                 out StructuralComparableBytesStructKeyRequiredDependent[] dependents
-            ) {
+            )
+            {
                 var twelve = new byte[] { 12, 12 };
                 var thirteen = new StructuralComparableBytesStructKey
                 {
@@ -2516,7 +2545,8 @@ namespace Microsoft.EntityFrameworkCore
                 StructuralComparableBytesStructKeyRequiredDependent[] dependents,
                 (int, int[])[] expectedPrincipalToDependents,
                 (int, int)[] expectedDependentToPrincipals
-            ) {
+            )
+            {
                 ValidateRequiredBytes(
                     principals,
                     dependents,
@@ -2592,7 +2622,8 @@ namespace Microsoft.EntityFrameworkCore
                 DbContext context,
                 out GenericComparableBytesStructKeyPrincipal[] principals,
                 out GenericComparableBytesStructKeyRequiredDependent[] dependents
-            ) {
+            )
+            {
                 var twelve = new byte[] { 12, 12 };
                 var thirteen = new GenericComparableBytesStructKey
                 {
@@ -2711,7 +2742,8 @@ namespace Microsoft.EntityFrameworkCore
                 GenericComparableBytesStructKeyRequiredDependent[] dependents,
                 (int, int[])[] expectedPrincipalToDependents,
                 (int, int)[] expectedDependentToPrincipals
-            ) {
+            )
+            {
                 ValidateRequiredBytes(
                     principals,
                     dependents,
@@ -2788,7 +2820,8 @@ namespace Microsoft.EntityFrameworkCore
             IList<(int, int?)> expectedDependentToPrincipals,
             Func<IIntPrincipal, IList<IIntOptionalDependent>> getDependents,
             Func<IIntOptionalDependent, IIntPrincipal> getPrincipal
-        ) {
+        )
+        {
             Assert.Equal(4, principals.Count);
             for (var i = 0; i < 4; i++)
             {
@@ -2848,7 +2881,8 @@ namespace Microsoft.EntityFrameworkCore
             IList<(int, int)> expectedDependentToPrincipals,
             Func<IIntPrincipal, IList<IIntRequiredDependent>> getDependents,
             Func<IIntRequiredDependent, IIntPrincipal> getPrincipal
-        ) {
+        )
+        {
             Assert.Equal(4, principals.Count);
             for (var i = 0; i < 4; i++)
             {
@@ -2996,7 +3030,8 @@ namespace Microsoft.EntityFrameworkCore
             IList<(int, int?)> expectedDependentToPrincipals,
             Func<IBytesPrincipal, IList<IBytesOptionalDependent>> getDependents,
             Func<IBytesOptionalDependent, IBytesPrincipal> getPrincipal
-        ) {
+        )
+        {
             Assert.Equal(4, principals.Count);
             Assert.Equal(new byte[] { 1 }, principals[0].BackingId);
             Assert.Equal(new byte[] { 2, 2 }, principals[1].BackingId);
@@ -3058,7 +3093,8 @@ namespace Microsoft.EntityFrameworkCore
             IList<(int, int)> expectedDependentToPrincipals,
             Func<IBytesPrincipal, IList<IBytesRequiredDependent>> getDependents,
             Func<IBytesRequiredDependent, IBytesPrincipal> getPrincipal
-        ) {
+        )
+        {
             Assert.Equal(4, principals.Count);
             Assert.Equal(new byte[] { 11 }, principals[0].BackingId);
             Assert.Equal(new byte[] { 12, 12 }, principals[1].BackingId);

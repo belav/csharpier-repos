@@ -2504,7 +2504,8 @@ record C(int X)
         private static SemanticModel GetModelAndKeyPositions(
             string markedText,
             out int[] keyPositions
-        ) {
+        )
+        {
             ArrayBuilder<int> keyPositionBuilder = ArrayBuilder<int>.GetInstance();
             StringBuilder textBuilder = new StringBuilder();
 
@@ -2548,7 +2549,8 @@ record C(int X)
             int keyPositionNum,
             int position,
             IEnumerable<string> expectedSymbols
-        ) {
+        )
+        {
             var actualSymbols = model.LookupSymbols(position)
                 .Select(SymbolExtensions.ToTestDisplayString)
                 .ToArray();

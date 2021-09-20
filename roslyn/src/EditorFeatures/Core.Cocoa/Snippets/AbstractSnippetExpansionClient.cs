@@ -137,7 +137,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Snippets
                         TextView.TextBuffer,
                         out var endSpanInSurfaceBuffer
                     )
-                ) {
+                )
+                {
                     return;
                 }
 
@@ -216,7 +217,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Snippets
                     string.Format("{0}end{0}", delimiter),
                     StringComparison.OrdinalIgnoreCase
                 ) != -1
-            ) {
+            )
+            {
                 return false;
             }
 
@@ -323,7 +325,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Snippets
         public virtual bool TryInsertExpansion(
             int startPositionInSubjectBuffer,
             int endPositionInSubjectBuffer
-        ) {
+        )
+        {
             var textViewModel = TextView.TextViewModel;
             if (textViewModel == null)
             {
@@ -343,7 +346,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Snippets
                     textViewModel.DataBuffer,
                     out var dataBufferSpan
                 )
-            ) {
+            )
+            {
                 return false;
             }
 
@@ -413,12 +417,14 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Snippets
             XElement xmlFunctionNode,
             [NotNullWhen(returnValue: true)] out string? snippetFunctionName,
             [NotNullWhen(returnValue: true)] out string? param
-        ) {
+        )
+        {
             if (
                 xmlFunctionNode.Value.IndexOf('(') == -1
                 || xmlFunctionNode.Value.IndexOf(')') == -1
                 || xmlFunctionNode.Value.IndexOf(')') < xmlFunctionNode.Value.IndexOf('(')
-            ) {
+            )
+            {
                 snippetFunctionName = null;
                 param = null;
                 return false;
@@ -439,7 +445,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Snippets
         internal bool TryGetSubjectBufferSpan(
             SnapshotSpan snapshotSpan,
             out SnapshotSpan subjectBufferSpan
-        ) {
+        )
+        {
             var subjectBufferSpanCollection = TextView.BufferGraph.MapDownToBuffer(
                 snapshotSpan,
                 SpanTrackingMode.EdgeExclusive,
@@ -461,7 +468,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Snippets
             SnapshotSpan snapshotSpan,
             ITextBuffer targetBuffer,
             out SnapshotSpan span
-        ) {
+        )
+        {
             var spanCollection = TextView.BufferGraph.MapUpToBuffer(
                 snapshotSpan,
                 SpanTrackingMode.EdgeExclusive,

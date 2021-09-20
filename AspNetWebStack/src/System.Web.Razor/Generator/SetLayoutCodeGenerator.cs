@@ -20,7 +20,8 @@ namespace System.Web.Razor.Generator
             if (
                 !context.Host.DesignTimeMode
                 && !String.IsNullOrEmpty(context.Host.GeneratedClassContext.LayoutPropertyName)
-            ) {
+            )
+            {
                 context.TargetMethod.Statements.Add(
                     new CodeAssignStatement(
                         new CodePropertyReferenceExpression(

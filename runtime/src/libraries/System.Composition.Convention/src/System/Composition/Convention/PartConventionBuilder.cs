@@ -131,7 +131,8 @@ namespace System.Composition.Convention
         /// <returns>A part builder allowing further configuration of the part.</returns>
         public PartConventionBuilder SelectConstructor(
             Func<IEnumerable<ConstructorInfo>, ConstructorInfo> constructorSelector
-        ) {
+        )
+        {
             _constructorFilter =
                 constructorSelector ?? throw new ArgumentNullException(nameof(constructorSelector));
             return this;
@@ -146,7 +147,8 @@ namespace System.Composition.Convention
         public PartConventionBuilder SelectConstructor(
             Func<IEnumerable<ConstructorInfo>, ConstructorInfo> constructorSelector,
             Action<ParameterInfo, ImportConventionBuilder> importConfiguration
-        ) {
+        )
+        {
             _configureConstuctorImports =
                 importConfiguration ?? throw new ArgumentNullException(nameof(importConfiguration));
             SelectConstructor(constructorSelector);
@@ -186,7 +188,8 @@ namespace System.Composition.Convention
         public PartConventionBuilder ExportInterfaces(
             Predicate<Type> interfaceFilter,
             Action<Type, ExportConventionBuilder> exportConfiguration
-        ) {
+        )
+        {
             if (interfaceFilter == null)
             {
                 throw new ArgumentNullException(nameof(interfaceFilter));
@@ -203,7 +206,8 @@ namespace System.Composition.Convention
         private PartConventionBuilder ExportInterfacesImpl(
             Predicate<Type> interfaceFilter,
             Action<Type, ExportConventionBuilder> exportConfiguration
-        ) {
+        )
+        {
             _interfaceExports.Add(Tuple.Create(interfaceFilter, exportConfiguration));
             return this;
         }
@@ -232,7 +236,8 @@ namespace System.Composition.Convention
         public PartConventionBuilder ExportProperties(
             Predicate<PropertyInfo> propertyFilter,
             Action<PropertyInfo, ExportConventionBuilder> exportConfiguration
-        ) {
+        )
+        {
             if (propertyFilter == null)
             {
                 throw new ArgumentNullException(nameof(propertyFilter));
@@ -249,7 +254,8 @@ namespace System.Composition.Convention
         private PartConventionBuilder ExportPropertiesImpl(
             Predicate<PropertyInfo> propertyFilter,
             Action<PropertyInfo, ExportConventionBuilder> exportConfiguration
-        ) {
+        )
+        {
             _propertyExports.Add(Tuple.Create(propertyFilter, exportConfiguration, default(Type)));
             return this;
         }
@@ -280,7 +286,8 @@ namespace System.Composition.Convention
         public PartConventionBuilder ExportProperties<T>(
             Predicate<PropertyInfo> propertyFilter,
             Action<PropertyInfo, ExportConventionBuilder> exportConfiguration
-        ) {
+        )
+        {
             if (propertyFilter == null)
             {
                 throw new ArgumentNullException(nameof(propertyFilter));
@@ -297,7 +304,8 @@ namespace System.Composition.Convention
         private PartConventionBuilder ExportPropertiesImpl<T>(
             Predicate<PropertyInfo> propertyFilter,
             Action<PropertyInfo, ExportConventionBuilder> exportConfiguration
-        ) {
+        )
+        {
             _propertyExports.Add(Tuple.Create(propertyFilter, exportConfiguration, typeof(T)));
             return this;
         }
@@ -326,7 +334,8 @@ namespace System.Composition.Convention
         public PartConventionBuilder ImportProperties(
             Predicate<PropertyInfo> propertyFilter,
             Action<PropertyInfo, ImportConventionBuilder> importConfiguration
-        ) {
+        )
+        {
             if (propertyFilter == null)
             {
                 throw new ArgumentNullException(nameof(propertyFilter));
@@ -343,7 +352,8 @@ namespace System.Composition.Convention
         private PartConventionBuilder ImportPropertiesImpl(
             Predicate<PropertyInfo> propertyFilter,
             Action<PropertyInfo, ImportConventionBuilder> importConfiguration
-        ) {
+        )
+        {
             _propertyImports.Add(Tuple.Create(propertyFilter, importConfiguration));
             return this;
         }
@@ -374,7 +384,8 @@ namespace System.Composition.Convention
         public PartConventionBuilder ImportProperties<T>(
             Predicate<PropertyInfo> propertyFilter,
             Action<PropertyInfo, ImportConventionBuilder> importConfiguration
-        ) {
+        )
+        {
             if (propertyFilter == null)
             {
                 throw new ArgumentNullException(nameof(propertyFilter));
@@ -391,7 +402,8 @@ namespace System.Composition.Convention
         private PartConventionBuilder ImportPropertiesImpl<T>(
             Predicate<PropertyInfo> propertyFilter,
             Action<PropertyInfo, ImportConventionBuilder> importConfiguration
-        ) {
+        )
+        {
             Predicate<PropertyInfo> typedFilter = pi =>
                 pi.PropertyType.Equals(typeof(T)) && (propertyFilter == null || propertyFilter(pi));
             _propertyImports.Add(Tuple.Create(typedFilter, importConfiguration));
@@ -481,7 +493,8 @@ namespace System.Composition.Convention
         public PartConventionBuilder AddPartMetadata(
             string name,
             Func<Type, object> getValueFromPartType
-        ) {
+        )
+        {
             if (name == null)
             {
                 throw new ArgumentNullException(nameof(name));
@@ -523,7 +536,8 @@ namespace System.Composition.Convention
                         attrType != s_exportAttributeType
                         && attrType.GetTypeInfo()
                             .IsDefined(typeof(MetadataAttributeAttribute), true)
-                    ) {
+                    )
+                    {
                         return true;
                     }
                 }
@@ -645,11 +659,13 @@ namespace System.Composition.Convention
                                     Predicate<Type>,
                                     Action<Type, ExportConventionBuilder>
                                 > exportSpecification in _interfaceExports
-                            ) {
+                            )
+                            {
                                 if (
                                     exportSpecification.Item1 != null
                                     && exportSpecification.Item1(iface)
-                                ) {
+                                )
+                                {
                                     ExportConventionBuilder exportBuilder =
                                         new ExportConventionBuilder();
                                     exportBuilder.AsContractType(iface);
@@ -667,7 +683,8 @@ namespace System.Composition.Convention
         internal bool BuildConstructorAttributes(
             Type type,
             ref List<Tuple<object, List<Attribute>>> configuredMembers
-        ) {
+        )
+        {
             IEnumerable<ConstructorInfo> constructors = type.GetTypeInfo().DeclaredConstructors;
 
             // First see if any of these constructors have the ImportingConstructorAttribute if so then we are already done
@@ -719,7 +736,8 @@ namespace System.Composition.Convention
         internal static void BuildDefaultConstructorAttributes(
             Type type,
             ref List<Tuple<object, List<Attribute>>> configuredMembers
-        ) {
+        )
+        {
             IEnumerable<ConstructorInfo> constructors = type.GetTypeInfo().DeclaredConstructors;
 
             foreach (ConstructorInfo constructorInfo in FindLongestConstructors(constructors))
@@ -732,7 +750,8 @@ namespace System.Composition.Convention
             ConstructorInfo constructorInfo,
             ref List<Tuple<object, List<Attribute>>> configuredMembers,
             Action<ParameterInfo, ImportConventionBuilder> configureConstuctorImports
-        ) {
+        )
+        {
             if (configuredMembers == null)
             {
                 configuredMembers = new List<Tuple<object, List<Attribute>>>();
@@ -775,7 +794,8 @@ namespace System.Composition.Convention
         internal void BuildOnImportsSatisfiedNotification(
             Type type,
             ref List<Tuple<object, List<Attribute>>> configuredMembers
-        ) {
+        )
+        {
             //Add OnImportsSatisfiedAttribute where specified
             if (_methodImportsSatisfiedNotifications != null)
             {
@@ -785,7 +805,8 @@ namespace System.Composition.Convention
                     if (
                         mi.ReturnParameter.ParameterType == typeof(void)
                         && mi.GetParameters().Length == 0
-                    ) {
+                    )
+                    {
                         MethodInfo underlyingMi = mi.DeclaringType.GetRuntimeMethod(
                             mi.Name,
                             _emptyTypeArray
@@ -796,7 +817,8 @@ namespace System.Composition.Convention
                             bool isConfigured = false;
                             foreach (
                                 Predicate<MethodInfo> notification in _methodImportsSatisfiedNotifications
-                            ) {
+                            )
+                            {
                                 if (notification(underlyingMi))
                                 {
                                     if (!checkedIfConfigured)
@@ -850,7 +872,8 @@ namespace System.Composition.Convention
         internal void BuildPropertyAttributes(
             Type type,
             ref List<Tuple<object, List<Attribute>>> configuredMembers
-        ) {
+        )
+        {
             if (_propertyImports.Any() || _propertyExports.Any())
             {
                 foreach (PropertyInfo pi in type.GetRuntimeProperties())
@@ -868,7 +891,8 @@ namespace System.Composition.Convention
                             Predicate<PropertyInfo>,
                             Action<PropertyInfo, ImportConventionBuilder>
                         > importSpecification in _propertyImports
-                    ) {
+                    )
+                    {
                         if (underlyingPi == null)
                         {
                             underlyingPi = pi.DeclaringType.GetRuntimeProperty(pi.Name);
@@ -876,7 +900,8 @@ namespace System.Composition.Convention
                         if (
                             importSpecification.Item1 != null
                             && importSpecification.Item1(underlyingPi)
-                        ) {
+                        )
+                        {
                             var importBuilder = new ImportConventionBuilder();
 
                             importSpecification.Item2?.Invoke(pi, importBuilder);
@@ -924,7 +949,8 @@ namespace System.Composition.Convention
                             Action<PropertyInfo, ExportConventionBuilder>,
                             Type
                         > exportSpecification in _propertyExports
-                    ) {
+                    )
+                    {
                         if (underlyingPi == null)
                         {
                             underlyingPi = pi.DeclaringType.GetRuntimeProperty(pi.Name);
@@ -933,7 +959,8 @@ namespace System.Composition.Convention
                         if (
                             exportSpecification.Item1 != null
                             && exportSpecification.Item1(underlyingPi)
-                        ) {
+                        )
+                        {
                             var exportBuilder = new ExportConventionBuilder();
 
                             if (exportSpecification.Item3 != null)
@@ -983,7 +1010,8 @@ namespace System.Composition.Convention
 
         private static IEnumerable<ConstructorInfo> FindLongestConstructors(
             IEnumerable<ConstructorInfo> constructors
-        ) {
+        )
+        {
             ConstructorInfo longestConstructor = null;
             int argumentsCount = 0;
             int constructorsFound = 0;

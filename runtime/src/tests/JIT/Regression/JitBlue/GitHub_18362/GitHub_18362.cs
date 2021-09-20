@@ -40,7 +40,8 @@ static class GitHub_18362
         double real,
         double imaginary,
         [CallerLineNumber] int lineNumber = 0
-    ) {
+    )
+    {
         if (!real.Equals(complex.Real) && !IsDiffTolerable(complex.Real, real))
         {
             Console.WriteLine(
@@ -68,7 +69,8 @@ static class GitHub_18362
         double magnitude,
         double phase,
         [CallerLineNumber] int lineNumber = 0
-    ) {
+    )
+    {
         // The magnitude (m) of a complex number (z = x + yi) is the absolute value - |z| = sqrt(x^2 + y^2)
         // Verification is done using the square of the magnitude since m^2 = x^2 + y^2
         double expectedMagnitudeSquared = magnitude * magnitude;
@@ -77,7 +79,8 @@ static class GitHub_18362
         if (
             !expectedMagnitudeSquared.Equals(actualMagnitudeSquared)
             && !IsDiffTolerable(actualMagnitudeSquared, expectedMagnitudeSquared)
-        ) {
+        )
+        {
             Console.WriteLine(
                 "Failure at line {0}. Expected magnitude squared: {1}. Actual magnitude squared: {2}",
                 lineNumber,

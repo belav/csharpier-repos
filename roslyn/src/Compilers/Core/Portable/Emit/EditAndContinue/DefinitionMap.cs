@@ -26,7 +26,8 @@ namespace Microsoft.CodeAnalysis.Emit
             public MappedMethod(
                 IMethodSymbolInternal previousMethod,
                 Func<SyntaxNode, SyntaxNode?>? syntaxMap
-            ) {
+            )
+            {
                 PreviousMethod = previousMethod;
                 SyntaxMap = syntaxMap;
             }
@@ -45,7 +46,8 @@ namespace Microsoft.CodeAnalysis.Emit
 
         private IReadOnlyDictionary<IMethodSymbolInternal, MappedMethod> GetMappedMethods(
             IEnumerable<SemanticEdit> edits
-        ) {
+        )
+        {
             var mappedMethods = new Dictionary<IMethodSymbolInternal, MappedMethod>();
             foreach (var edit in edits)
             {
@@ -75,7 +77,8 @@ namespace Microsoft.CodeAnalysis.Emit
                         GetISymbolInternalOrNull(edit.NewSymbol) is IMethodSymbolInternal newMethod
                         && GetISymbolInternalOrNull(edit.OldSymbol)
                             is IMethodSymbolInternal oldMethod
-                    ) {
+                    )
+                    {
                         mappedMethods.Add(newMethod, new MappedMethod(oldMethod, edit.SyntaxMap));
                     }
                 }
@@ -138,7 +141,8 @@ namespace Microsoft.CodeAnalysis.Emit
             EmitBaseline baseline,
             Cci.IMethodDefinition def,
             out MethodDefinitionHandle handle
-        ) {
+        )
+        {
             if (this.TryGetMethodHandle(def, out handle))
             {
                 return true;
@@ -148,7 +152,8 @@ namespace Microsoft.CodeAnalysis.Emit
             if (
                 mappedDef != null
                 && baseline.MethodsAdded.TryGetValue(mappedDef, out int methodIndex)
-            ) {
+            )
+            {
                 handle = MetadataTokens.MethodDefinitionHandle(methodIndex);
                 return true;
             }
@@ -159,7 +164,8 @@ namespace Microsoft.CodeAnalysis.Emit
 
         protected static IReadOnlyDictionary<SyntaxNode, int> CreateDeclaratorToSyntaxOrdinalMap(
             ImmutableArray<SyntaxNode> declarators
-        ) {
+        )
+        {
             var declaratorToIndex = new Dictionary<SyntaxNode, int>();
             for (int i = 0; i < declarators.Length; i++)
             {
@@ -189,7 +195,8 @@ namespace Microsoft.CodeAnalysis.Emit
             IMethodSymbolInternal method,
             IMethodSymbolInternal topLevelMethod,
             DiagnosticBag diagnostics
-        ) {
+        )
+        {
             // Top-level methods are always included in the semantic edit list. Lambda methods are not.
             if (!mappedMethods.TryGetValue(topLevelMethod, out var mappedMethod))
             {
@@ -205,7 +212,8 @@ namespace Microsoft.CodeAnalysis.Emit
                     (Cci.IMethodDefinition)method.GetCciAdapter(),
                     out var previousHandle
                 )
-            ) {
+            )
+            {
                 // Unrecognized method. Must have been added in the current compilation.
                 return null;
             }
@@ -230,7 +238,8 @@ namespace Microsoft.CodeAnalysis.Emit
                     methodIndex,
                     out var addedOrChangedMethod
                 )
-            ) {
+            )
+            {
                 methodId = addedOrChangedMethod.MethodId;
 
                 MakeLambdaAndClosureMaps(
@@ -343,7 +352,8 @@ namespace Microsoft.CodeAnalysis.Emit
                             compilation.CommonGetWellKnownTypeMember(
                                 WellKnownMember.System_Runtime_CompilerServices_AsyncStateMachineAttribute__ctor
                             ) == null
-                        ) {
+                        )
+                        {
                             ReportMissingStateMachineAttribute(
                                 diagnostics,
                                 method,
@@ -358,7 +368,8 @@ namespace Microsoft.CodeAnalysis.Emit
                             compilation.CommonGetWellKnownTypeMember(
                                 WellKnownMember.System_Runtime_CompilerServices_IteratorStateMachineAttribute__ctor
                             ) == null
-                        ) {
+                        )
+                        {
                             ReportMissingStateMachineAttribute(
                                 diagnostics,
                                 method,
@@ -420,7 +431,8 @@ namespace Microsoft.CodeAnalysis.Emit
             DiagnosticBag diagnostics,
             IMethodSymbolInternal method,
             string stateMachineAttributeFullName
-        ) {
+        )
+        {
             diagnostics.Add(
                 MessageProvider.CreateDiagnostic(
                     MessageProvider.ERR_EncUpdateFailedMissingAttribute,
@@ -436,7 +448,8 @@ namespace Microsoft.CodeAnalysis.Emit
             ImmutableArray<ClosureDebugInfo> closureDebugInfo,
             out IReadOnlyDictionary<int, KeyValuePair<DebugId, int>> lambdaMap,
             out IReadOnlyDictionary<int, DebugId> closureMap
-        ) {
+        )
+        {
             var lambdas = new Dictionary<int, KeyValuePair<DebugId, int>>(lambdaDebugInfo.Length);
             var closures = new Dictionary<int, DebugId>(closureDebugInfo.Length);
 
@@ -464,7 +477,8 @@ namespace Microsoft.CodeAnalysis.Emit
             ImmutableArray<Cci.ITypeReference?> hoistedAwaiters,
             out IReadOnlyDictionary<EncHoistedLocalInfo, int> hoistedLocalMap,
             out IReadOnlyDictionary<Cci.ITypeReference, int> awaiterMap
-        ) {
+        )
+        {
             var hoistedLocals = new Dictionary<EncHoistedLocalInfo, int>();
             var awaiters = new Dictionary<Cci.ITypeReference, int>(
                 Cci.SymbolEquivalentEqualityComparer.Instance

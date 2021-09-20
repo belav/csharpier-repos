@@ -691,7 +691,8 @@ class Program
             string markup,
             int baseIndentation,
             int expectedIndentation
-        ) {
+        )
+        {
             await AssertSmartTokenFormatterOpenBraceWithBaseIndentationAsync(
                     markup,
                     baseIndentation,
@@ -713,7 +714,8 @@ class Program
             int baseIndentation,
             int expectedIndentation,
             bool useTabs
-        ) {
+        )
+        {
             MarkupTestFile.GetPositionAndSpan(
                 markup,
                 out var code,
@@ -737,7 +739,8 @@ class Program
             int expectedSpace,
             int? baseIndentation = null,
             TextSpan span = default
-        ) {
+        )
+        {
             await AssertSmartTokenFormatterOpenBraceAsync(
                     code,
                     indentationLine,
@@ -765,7 +768,8 @@ class Program
             bool useTabs,
             int? baseIndentation,
             TextSpan span
-        ) {
+        )
+        {
             var actualIndentation = await GetSmartTokenFormatterIndentationAsync(
                 code,
                 indentationLine,
@@ -781,7 +785,8 @@ class Program
             string expected,
             string code,
             int indentationLine
-        ) {
+        )
+        {
             await AssertSmartTokenFormatterOpenBraceAsync(
                     expected,
                     code,
@@ -803,7 +808,8 @@ class Program
             string code,
             int indentationLine,
             bool useTabs
-        ) {
+        )
+        {
             // create tree service
             using var workspace = TestWorkspace.CreateCSharp(code);
 
@@ -827,7 +833,8 @@ class Program
             string markup,
             int baseIndentation,
             int expectedIndentation
-        ) {
+        )
+        {
             await AssertSmartTokenFormatterCloseBraceWithBaseIndentation(
                     markup,
                     baseIndentation,
@@ -849,7 +856,8 @@ class Program
             int baseIndentation,
             int expectedIndentation,
             bool useTabs
-        ) {
+        )
+        {
             MarkupTestFile.GetPositionAndSpan(
                 markup,
                 out var code,
@@ -873,7 +881,8 @@ class Program
             int expectedSpace,
             int? baseIndentation = null,
             TextSpan span = default
-        ) {
+        )
+        {
             await AssertSmartTokenFormatterCloseBraceAsync(
                     code,
                     indentationLine,
@@ -901,7 +910,8 @@ class Program
             bool useTabs,
             int? baseIndentation,
             TextSpan span
-        ) {
+        )
+        {
             var actualIndentation = await GetSmartTokenFormatterIndentationAsync(
                 code,
                 indentationLine,
@@ -916,7 +926,8 @@ class Program
         private static async Task ExpectException_SmartTokenFormatterCloseBraceAsync(
             string code,
             int indentationLine
-        ) {
+        )
+        {
             await ExpectException_SmartTokenFormatterCloseBraceAsync(
                     code,
                     indentationLine,
@@ -935,7 +946,8 @@ class Program
             string code,
             int indentationLine,
             bool useTabs
-        ) {
+        )
+        {
             Assert.NotNull(
                 await Record.ExceptionAsync(
                     () =>

@@ -292,7 +292,8 @@ namespace Microsoft.AspNetCore.Components.WebAssembly.Server.Tests
         private static IWebHostEnvironment CreateWebHostEnvironment(
             bool gzipExists = true,
             bool brotliExists = true
-        ) {
+        )
+        {
             var gzMock = new Mock<IFileInfo>();
             gzMock.Setup(m => m.Exists).Returns(gzipExists);
             var brMock = new Mock<IFileInfo>();

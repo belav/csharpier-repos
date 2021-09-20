@@ -43,7 +43,8 @@ namespace System.Drawing
             ITypeDescriptorContext context,
             CultureInfo culture,
             object value
-        ) {
+        )
+        {
             if (value is string strValue)
             {
                 return ColorConverterCommon.ConvertFromString(
@@ -60,7 +61,8 @@ namespace System.Drawing
             CultureInfo culture,
             object value,
             Type destinationType
-        ) {
+        )
+        {
             if (destinationType == null)
             {
                 throw new ArgumentNullException(nameof(destinationType));

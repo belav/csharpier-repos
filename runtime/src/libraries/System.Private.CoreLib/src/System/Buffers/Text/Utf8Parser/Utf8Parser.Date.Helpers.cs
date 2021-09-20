@@ -16,7 +16,8 @@ namespace System.Buffers.Text
             int offsetHours,
             int offsetMinutes,
             out DateTimeOffset value
-        ) {
+        )
+        {
             if (((uint)offsetHours) > Utf8Constants.DateTimeMaxUtcOffsetHours)
             {
                 value = default;
@@ -75,7 +76,8 @@ namespace System.Buffers.Text
             int offsetHours,
             int offsetMinutes,
             out DateTimeOffset value
-        ) {
+        )
+        {
             if (
                 !TryCreateDateTime(
                     year: year,
@@ -88,7 +90,8 @@ namespace System.Buffers.Text
                     kind: DateTimeKind.Unspecified,
                     out DateTime dateTime
                 )
-            ) {
+            )
+            {
                 value = default;
                 return false;
             }
@@ -101,7 +104,8 @@ namespace System.Buffers.Text
                     offsetMinutes: offsetMinutes,
                     out value
                 )
-            ) {
+            )
+            {
                 value = default;
                 return false;
             }
@@ -121,7 +125,8 @@ namespace System.Buffers.Text
             int second,
             int fraction,
             out DateTimeOffset value
-        ) {
+        )
+        {
             if (
                 !TryCreateDateTime(
                     year: year,
@@ -134,7 +139,8 @@ namespace System.Buffers.Text
                     DateTimeKind.Local,
                     out DateTime dateTime
                 )
-            ) {
+            )
+            {
                 value = default;
                 return false;
             }
@@ -168,7 +174,8 @@ namespace System.Buffers.Text
             int fraction,
             DateTimeKind kind,
             out DateTime value
-        ) {
+        )
+        {
             if (year == 0)
             {
                 value = default;

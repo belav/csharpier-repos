@@ -49,7 +49,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.Formatting
         public FormatCommandHandler(
             ITextUndoHistoryRegistry undoHistoryRegistry,
             IEditorOperationsFactoryService editorOperationsFactoryService
-        ) {
+        )
+        {
             _undoHistoryRegistry = undoHistoryRegistry;
             _editorOperationsFactoryService = editorOperationsFactoryService;
         }
@@ -59,7 +60,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.Formatting
             Document document,
             TextSpan? selectionOpt,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var formattingService = document.GetRequiredLanguageService<IEditorFormattingService>();
 
             using (
@@ -77,7 +79,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.Formatting
                     textView,
                     EditorFeaturesResources.Formatting
                 )
-            ) {
+            )
+            {
                 var changes = formattingService.GetFormattingChangesAsync(
                         document,
                         selectionOpt,
@@ -100,7 +103,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.Formatting
             IList<TextChange> changes,
             TextSpan? selectionOpt,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             if (selectionOpt.HasValue)
             {
                 var ruleFactory =
@@ -134,7 +138,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.Formatting
             EditorCommandArgs args,
             Action nextHandler,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             // run next handler first so that editor has chance to put the return into the buffer first.
             nextHandler();
             if (cancellationToken.IsCancellationRequested)
@@ -157,7 +162,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.Formatting
         private void ExecuteReturnOrTypeCommandWorker(
             EditorCommandArgs args,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var textView = args.TextView;
             var subjectBuffer = args.SubjectBuffer;
             if (!CanExecuteCommand(subjectBuffer))
@@ -233,7 +239,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.Formatting
                     textView,
                     EditorFeaturesResources.Automatic_Formatting
                 )
-            ) {
+            )
+            {
                 transaction.MergePolicy = AutomaticCodeChangeMergePolicy.Instance;
                 document.Project.Solution.Workspace.ApplyTextChanges(
                     document.Id,

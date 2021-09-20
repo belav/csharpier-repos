@@ -29,7 +29,8 @@ namespace Microsoft.CodeAnalysis.Formatting
             TreeData treeInfo,
             TokenStream tokenStream,
             TextSpan formattedSpan
-        ) {
+        )
+        {
             this.TreeInfo = treeInfo;
             this.TokenStream = tokenStream;
             this.FormattedSpan = formattedSpan;
@@ -81,7 +82,8 @@ namespace Microsoft.CodeAnalysis.Formatting
             SyntaxToken token1,
             SyntaxToken token2,
             TriviaData data
-        ) {
+        )
+        {
             var span = TextSpan.FromBounds(
                 token1.RawKind == 0 ? this.TreeInfo.StartPosition : token1.Span.End,
                 token2.RawKind == 0 ? this.TreeInfo.EndPosition : token2.SpanStart

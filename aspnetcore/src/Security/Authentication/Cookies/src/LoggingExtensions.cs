@@ -27,14 +27,16 @@ namespace Microsoft.Extensions.Logging
         public static void AuthenticationSchemeSignedIn(
             this ILogger logger,
             string authenticationScheme
-        ) {
+        )
+        {
             _authenticationSchemeSignedIn(logger, authenticationScheme, null);
         }
 
         public static void AuthenticationSchemeSignedOut(
             this ILogger logger,
             string authenticationScheme
-        ) {
+        )
+        {
             _authenticationSchemeSignedOut(logger, authenticationScheme, null);
         }
     }

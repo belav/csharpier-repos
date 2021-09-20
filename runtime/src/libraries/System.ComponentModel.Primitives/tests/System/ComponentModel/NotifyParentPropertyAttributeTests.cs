@@ -49,7 +49,8 @@ namespace System.ComponentModel.Tests
             NotifyParentPropertyAttribute attribute,
             object other,
             bool expected
-        ) {
+        )
+        {
             Assert.Equal(expected, attribute.Equals(other));
             if (other is NotifyParentPropertyAttribute)
             {
@@ -69,7 +70,8 @@ namespace System.ComponentModel.Tests
         public void DefaultProperties_GetNotifyParent_ReturnsExpected(
             NotifyParentPropertyAttribute attribute,
             bool expectedNotifyParent
-        ) {
+        )
+        {
             Assert.Equal(expectedNotifyParent, attribute.NotifyParent);
             Assert.Equal(!expectedNotifyParent, attribute.IsDefaultAttribute());
         }

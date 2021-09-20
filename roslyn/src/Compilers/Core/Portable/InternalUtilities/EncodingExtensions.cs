@@ -39,7 +39,8 @@ namespace Roslyn.Utilities
             this Encoding encoding,
             long length,
             out int maxCharCount
-        ) {
+        )
+        {
             maxCharCount = 0;
 
             if (length <= int.MaxValue)

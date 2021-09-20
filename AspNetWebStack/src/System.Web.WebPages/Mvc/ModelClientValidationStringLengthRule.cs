@@ -14,7 +14,8 @@ namespace System.Web.Mvc
             string errorMessage,
             int minimumLength,
             int maximumLength
-        ) {
+        )
+        {
             ErrorMessage = errorMessage;
             ValidationType = "length";
 

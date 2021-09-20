@@ -15,7 +15,8 @@ namespace Microsoft.AspNetCore.Razor.Language
             RazorEngine engine,
             RazorProjectFileSystem fileSystem,
             IReadOnlyList<IRazorProjectEngineFeature> projectFeatures
-        ) {
+        )
+        {
             if (configuration == null)
             {
                 throw new ArgumentNullException(nameof(configuration));
@@ -73,7 +74,8 @@ namespace Microsoft.AspNetCore.Razor.Language
             RazorProjectItem projectItem,
             Action<RazorParserOptionsBuilder> configureParser,
             Action<RazorCodeGenerationOptionsBuilder> configureCodeGeneration
-        ) {
+        )
+        {
             if (projectItem == null)
             {
                 throw new ArgumentNullException(nameof(projectItem));
@@ -108,7 +110,8 @@ namespace Microsoft.AspNetCore.Razor.Language
             Action<RazorParserOptionsBuilder> configureParser = null,
             Action<RazorCodeGenerationOptionsBuilder> configureCodeGeneration = null,
             string cssScope = null
-        ) {
+        )
+        {
             if (sourceDocument == null)
             {
                 throw new ArgumentNullException(nameof(sourceDocument));
@@ -159,7 +162,8 @@ namespace Microsoft.AspNetCore.Razor.Language
 
         protected override RazorCodeDocument CreateCodeDocumentDesignTimeCore(
             RazorProjectItem projectItem
-        ) {
+        )
+        {
             if (projectItem == null)
             {
                 throw new ArgumentNullException(nameof(projectItem));
@@ -176,7 +180,8 @@ namespace Microsoft.AspNetCore.Razor.Language
             RazorProjectItem projectItem,
             Action<RazorParserOptionsBuilder> configureParser,
             Action<RazorCodeGenerationOptionsBuilder> configureCodeGeneration
-        ) {
+        )
+        {
             if (projectItem == null)
             {
                 throw new ArgumentNullException(nameof(projectItem));
@@ -212,7 +217,8 @@ namespace Microsoft.AspNetCore.Razor.Language
             IReadOnlyList<TagHelperDescriptor> tagHelpers,
             Action<RazorParserOptionsBuilder> configureParser,
             Action<RazorCodeGenerationOptionsBuilder> configureCodeGeneration
-        ) {
+        )
+        {
             if (sourceDocument == null)
             {
                 throw new ArgumentNullException(nameof(sourceDocument));
@@ -259,7 +265,8 @@ namespace Microsoft.AspNetCore.Razor.Language
             string fileKind,
             IReadOnlyList<RazorSourceDocument> importSources,
             IReadOnlyList<TagHelperDescriptor> tagHelpers
-        ) {
+        )
+        {
             if (source == null)
             {
                 throw new ArgumentNullException(nameof(source));
@@ -302,7 +309,8 @@ namespace Microsoft.AspNetCore.Razor.Language
             string fileKind,
             IReadOnlyList<RazorSourceDocument> importSources,
             IReadOnlyList<TagHelperDescriptor> tagHelpers
-        ) {
+        )
+        {
             if (source == null)
             {
                 throw new ArgumentNullException(nameof(source));
@@ -329,7 +337,8 @@ namespace Microsoft.AspNetCore.Razor.Language
             string fileKind,
             IReadOnlyList<RazorSourceDocument> importSources,
             IReadOnlyList<TagHelperDescriptor> tagHelpers
-        ) {
+        )
+        {
             if (source == null)
             {
                 throw new ArgumentNullException(nameof(source));
@@ -384,7 +393,8 @@ namespace Microsoft.AspNetCore.Razor.Language
 
         private void ConfigureDesignTimeCodeGenerationOptions(
             RazorCodeGenerationOptionsBuilder builder
-        ) {
+        )
+        {
             builder.SetDesignTime(true);
             builder.SuppressChecksum = true;
             builder.SuppressMetadataAttributes = true;
@@ -394,7 +404,8 @@ namespace Microsoft.AspNetCore.Razor.Language
         internal static IReadOnlyList<RazorSourceDocument> GetImportSourceDocuments(
             IReadOnlyList<RazorProjectItem> importItems,
             bool suppressExceptions = false
-        ) {
+        )
+        {
             var imports = new List<RazorSourceDocument>();
             for (var i = 0; i < importItems.Count; i++)
             {

@@ -57,14 +57,15 @@ namespace Microsoft.CodeAnalysis.CSharp.Utilities
             CancellationToken cancellationToken,
             bool skipVerificationForReplacedNode = false,
             bool failOnOverloadResolutionFailuresInOriginalCode = false
-        ) : base(
-            expression,
-            newExpression,
-            semanticModel,
-            cancellationToken,
-            skipVerificationForReplacedNode,
-            failOnOverloadResolutionFailuresInOriginalCode
-        ) { }
+        )
+            : base(
+                expression,
+                newExpression,
+                semanticModel,
+                cancellationToken,
+                skipVerificationForReplacedNode,
+                failOnOverloadResolutionFailuresInOriginalCode
+            ) { }
 
         protected override SyntaxNode GetSemanticRootForSpeculation(ExpressionSyntax expression)
         {
@@ -92,7 +93,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Utilities
         protected override void ValidateSpeculativeSemanticModel(
             SemanticModel speculativeSemanticModel,
             SyntaxNode nodeToSpeculate
-        ) {
+        )
+        {
             Debug.Assert(
                 speculativeSemanticModel != null
                     || nodeToSpeculate is ExpressionSyntax
@@ -117,7 +119,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Utilities
             SyntaxNode originalNode,
             SyntaxNode nodeToSpeculate,
             SemanticModel semanticModel
-        ) {
+        )
+        {
             var position = originalNode.SpanStart;
             var isInNamespaceOrTypeContext = SyntaxFacts.IsInNamespaceOrTypeContext(
                 originalNode as ExpressionSyntax
@@ -135,7 +138,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Utilities
             SemanticModel semanticModel,
             int position,
             bool isInNamespaceOrTypeContext
-        ) {
+        )
+        {
             if (semanticModel.IsSpeculativeSemanticModel)
             {
                 // Chaining speculative model not supported, speculate off the original model.
@@ -226,7 +230,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Utilities
         public bool ReplacementChangesSemanticsOfUnchangedLambda(
             ExpressionSyntax originalLambda,
             ExpressionSyntax replacedLambda
-        ) {
+        )
+        {
             originalLambda = originalLambda.WalkDownParentheses();
             replacedLambda = replacedLambda.WalkDownParentheses();
 
@@ -282,7 +287,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Utilities
                             originalSimpleLambda.Parameter,
                             replacedSimpleLambda.Parameter
                         )
-                    ) {
+                    )
+                    {
                         return false;
                     }
 
@@ -320,7 +326,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Utilities
         private bool HaveSameParameterType(
             ParameterSyntax originalParam,
             ParameterSyntax replacedParam
-        ) {
+        )
+        {
             var originalParamType =
                 this.OriginalSemanticModel.GetDeclaredSymbol(originalParam).Type;
             var replacedParamType =
@@ -332,7 +339,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Utilities
             IEnumerable<IdentifierNameSyntax> originalIdentifierNodes,
             IEnumerable<IdentifierNameSyntax> replacedIdentifierNodes,
             SyntaxNode originalRoot
-        ) {
+        )
+        {
             Debug.Assert(originalIdentifierNodes.Any());
             Debug.Assert(originalIdentifierNodes.Count() == replacedIdentifierNodes.Count());
 
@@ -349,7 +357,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Utilities
                         originalRoot,
                         skipVerificationForCurrentNode: true
                     )
-                ) {
+                )
+                {
                     return true;
                 }
             }
@@ -362,7 +371,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Utilities
             SyntaxNode currentReplacedNode,
             SyntaxNode previousOriginalNode,
             SyntaxNode previousReplacedNode
-        ) {
+        )
+        {
             Debug.Assert(
                 previousOriginalNode == null || previousOriginalNode.Parent == currentOriginalNode
             );
@@ -413,7 +423,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Utilities
             else if (
                 currentOriginalNode is SelectOrGroupClauseSyntax
                 || currentOriginalNode is OrderingSyntax
-            ) {
+            )
+            {
                 return !SymbolsAreCompatible(currentOriginalNode, currentReplacedNode);
             }
             else if (currentOriginalNode is QueryClauseSyntax queryClause)
@@ -447,7 +458,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Utilities
                         originalDeclarator.Initializer.Value,
                         newDeclarator.Initializer.Value
                     )
-                ) {
+                )
+                {
                     return true;
                 }
 
@@ -458,7 +470,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Utilities
                     SyntaxKind.ConditionalExpression,
                     out ConditionalExpressionSyntax originalExpression
                 )
-            ) {
+            )
+            {
                 var newExpression = (ConditionalExpressionSyntax)currentReplacedNode;
 
                 if (originalExpression.Condition != previousOriginalNode)
@@ -504,7 +517,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Utilities
                             newExpression,
                             this.CancellationToken
                         ).IsConditionalExpression
-                    ) {
+                    )
+                    {
                         newExpressionType = newExpressionTypeInfo.ConvertedType;
                     }
 
@@ -537,7 +551,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Utilities
                             (ExpressionSyntax)previousOriginalNode,
                             (ExpressionSyntax)previousReplacedNode
                         )
-                    ) {
+                    )
+                    {
                         return true;
                     }
 
@@ -552,7 +567,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Utilities
                     SyntaxKind.CaseSwitchLabel,
                     out CaseSwitchLabelSyntax originalCaseSwitchLabel
                 )
-            ) {
+            )
+            {
                 var newCaseSwitchLabel = (CaseSwitchLabelSyntax)currentReplacedNode;
 
                 // If case label is changing, then need to check if the semantics will change for the switch expression.
@@ -600,7 +616,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Utilities
                     out SwitchStatementSyntax originalSwitchStatement
                 )
                 && originalSwitchStatement.Expression == previousOriginalNode
-            ) {
+            )
+            {
                 // Switch statement's expression changed, verify that the conversions from switch case labels to new switch
                 // expression type are not broken.
 
@@ -635,7 +652,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Utilities
                             originalSwitchLabel.Value,
                             newSwitchLabel.Value
                         )
-                    ) {
+                    )
+                    {
                         return true;
                     }
                 }
@@ -646,7 +664,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Utilities
                     out SwitchExpressionSyntax originalSwitchExpression
                 )
                 && originalSwitchExpression.GoverningExpression == previousOriginalNode
-            ) {
+            )
+            {
                 var replacedSwitchExpression = (SwitchExpressionSyntax)currentReplacedNode;
 
                 // Switch expression's expression changed.  Ensure it's the same type as before. If not, inference of
@@ -669,7 +688,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Utilities
                     SyntaxKind.IfStatement,
                     out IfStatementSyntax originalIfStatement
                 )
-            ) {
+            )
+            {
                 var newIfStatement = (IfStatementSyntax)currentReplacedNode;
 
                 if (originalIfStatement.Condition == previousOriginalNode)
@@ -677,7 +697,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Utilities
                     // If condition changed, verify that original and replaced expression types are compatible.
                     if (
                         !TypesAreCompatible(originalIfStatement.Condition, newIfStatement.Condition)
-                    ) {
+                    )
+                    {
                         return true;
                     }
                 }
@@ -708,7 +729,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Utilities
             else if (
                 currentOriginalNode
                 is AnonymousObjectMemberDeclaratorSyntax originalAnonymousObjectMemberDeclarator
-            ) {
+            )
+            {
                 var replacedAnonymousObjectMemberDeclarator =
                     (AnonymousObjectMemberDeclaratorSyntax)currentReplacedNode;
                 return ReplacementBreaksAnonymousObjectMemberDeclarator(
@@ -737,7 +759,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Utilities
             TypeInfo newExpressionTypeInfo,
             ExpressionSyntax previousOriginalNode,
             ExpressionSyntax previousReplacedNode
-        ) {
+        )
+        {
             // If the resultant types are different and it is boxing to the converted type then semantics could be changing.
             if (!Equals(originalExpressionTypeInfo.Type, newExpressionTypeInfo.Type))
             {
@@ -754,7 +777,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Utilities
                 if (
                     originalConvertedTypeConversion.IsBoxing
                     && newExpressionConvertedTypeConversion.IsBoxing
-                ) {
+                )
+                {
                     return true;
                 }
             }
@@ -765,7 +789,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Utilities
         private bool ReplacementBreaksAnonymousObjectMemberDeclarator(
             AnonymousObjectMemberDeclaratorSyntax originalAnonymousObjectMemberDeclarator,
             AnonymousObjectMemberDeclaratorSyntax replacedAnonymousObjectMemberDeclarator
-        ) {
+        )
+        {
             var originalExpressionType =
                 this.OriginalSemanticModel.GetTypeInfo(
                     originalAnonymousObjectMemberDeclarator.Expression,
@@ -782,7 +807,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Utilities
         private bool ReplacementBreaksConstructorInitializer(
             ConstructorInitializerSyntax ctorInitializer,
             ConstructorInitializerSyntax newCtorInitializer
-        ) {
+        )
+        {
             var originalSymbol =
                 this.OriginalSemanticModel.GetSymbolInfo(ctorInitializer, CancellationToken).Symbol;
             var newSymbol =
@@ -796,7 +822,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Utilities
         private bool ReplacementBreaksCollectionInitializerAddMethod(
             ExpressionSyntax originalInitializer,
             ExpressionSyntax newInitializer
-        ) {
+        )
+        {
             var originalSymbol =
                 this.OriginalSemanticModel.GetCollectionInitializerSymbolInfo(
                     originalInitializer,
@@ -907,13 +934,15 @@ namespace Microsoft.CodeAnalysis.CSharp.Utilities
         private bool ReplacementBreaksBinaryExpression(
             BinaryExpressionSyntax binaryExpression,
             BinaryExpressionSyntax newBinaryExpression
-        ) {
+        )
+        {
             if (
                 (
                     binaryExpression.IsKind(SyntaxKind.AsExpression)
                     || binaryExpression.IsKind(SyntaxKind.IsExpression)
                 ) && ReplacementBreaksIsOrAsExpression(binaryExpression, newBinaryExpression)
-            ) {
+            )
+            {
                 return true;
             }
 
@@ -925,7 +954,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Utilities
         private bool ReplacementBreaksConditionalAccessExpression(
             ConditionalAccessExpressionSyntax conditionalAccessExpression,
             ConditionalAccessExpressionSyntax newConditionalAccessExpression
-        ) {
+        )
+        {
             return !SymbolsAreCompatible(
                     conditionalAccessExpression,
                     newConditionalAccessExpression
@@ -944,13 +974,15 @@ namespace Microsoft.CodeAnalysis.CSharp.Utilities
         private bool ReplacementBreaksIsOrAsExpression(
             BinaryExpressionSyntax originalIsOrAsExpression,
             BinaryExpressionSyntax newIsOrAsExpression
-        ) {
+        )
+        {
             // Special case: Lambda expressions and anonymous delegates cannot appear
             // on the left-side of an 'is' or 'as' cast. We can handle this case syntactically.
             if (
                 !originalIsOrAsExpression.Left.WalkDownParentheses().IsAnyLambdaOrAnonymousMethod()
                 && newIsOrAsExpression.Left.WalkDownParentheses().IsAnyLambdaOrAnonymousMethod()
-            ) {
+            )
+            {
                 return true;
             }
 
@@ -982,7 +1014,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Utilities
         private bool ReplacementBreaksAssignmentExpression(
             AssignmentExpressionSyntax assignmentExpression,
             AssignmentExpressionSyntax newAssignmentExpression
-        ) {
+        )
+        {
             if (
                 assignmentExpression.IsCompoundAssignExpression()
                 && assignmentExpression.Kind() != SyntaxKind.LeftShiftAssignmentExpression
@@ -993,7 +1026,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Utilities
                     newAssignmentExpression.Left,
                     newAssignmentExpression.Right
                 )
-            ) {
+            )
+            {
                 return true;
             }
 
@@ -1005,7 +1039,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Utilities
         private bool ReplacementBreaksQueryClause(
             QueryClauseSyntax originalClause,
             QueryClauseSyntax newClause
-        ) {
+        )
+        {
             // Ensure QueryClauseInfos are compatible.
             var originalClauseInfo = this.OriginalSemanticModel.GetQueryClauseInfo(
                 originalClause,
@@ -1026,7 +1061,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Utilities
         protected override bool ReplacementIntroducesErrorType(
             ExpressionSyntax originalExpression,
             ExpressionSyntax newExpression
-        ) {
+        )
+        {
             // The base implementation will see that the type of the new expression may potentially change to null,
             // because the expression has no type but can be converted to a conditional expression type. In that case,
             // we don't want to consider the null type to be an error type.
@@ -1036,7 +1072,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Utilities
                 && this.SpeculativeSemanticModel.GetConversion(
                     newExpression
                 ).IsConditionalExpression
-            ) {
+            )
+            {
                 return false;
             }
 
@@ -1048,14 +1085,16 @@ namespace Microsoft.CodeAnalysis.CSharp.Utilities
             ExpressionSyntax originalExpression,
             SemanticModel newModel,
             ExpressionSyntax newExpression
-        ) {
+        )
+        {
             var originalConversion = originalModel.GetConversion(originalExpression);
             var newConversion = newModel.GetConversion(newExpression);
 
             if (
                 originalExpression.IsKind(SyntaxKind.ConditionalExpression)
                 && newExpression.IsKind(SyntaxKind.ConditionalExpression)
-            ) {
+            )
+            {
                 if (newConversion.IsConditionalExpression)
                 {
                     // If we went from a non-conditional-conversion to a conditional-conversion (i.e. by removing a
@@ -1087,7 +1126,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Utilities
             ITypeSymbol originalTargetType,
             ExpressionSyntax newExpression,
             ITypeSymbol newTargetType
-        ) {
+        )
+        {
             this.GetConversions(
                 originalExpression,
                 originalTargetType,
@@ -1108,11 +1148,13 @@ namespace Microsoft.CodeAnalysis.CSharp.Utilities
         private bool ConversionsAreCompatible(
             Conversion originalConversion,
             Conversion newConversion
-        ) {
+        )
+        {
             if (
                 originalConversion.Exists != newConversion.Exists
                 || (!originalConversion.IsExplicit && newConversion.IsExplicit)
-            ) {
+            )
+            {
                 return false;
             }
 
@@ -1128,7 +1170,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Utilities
                 originalIsUserDefined
                 || originalConversion.MethodSymbol != null
                 || newConversion.MethodSymbol != null
-            ) {
+            )
+            {
                 return SymbolsAreCompatible(
                     originalConversion.MethodSymbol,
                     newConversion.MethodSymbol
@@ -1143,7 +1186,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Utilities
             CommonForEachStatementSyntax originalForEach,
             SemanticModel newModel,
             CommonForEachStatementSyntax newForEach
-        ) {
+        )
+        {
             var originalInfo = originalModel.GetForEachStatementInfo(originalForEach);
             var newInfo = newModel.GetForEachStatementInfo(newForEach);
             return ConversionsAreCompatible(
@@ -1161,7 +1205,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Utilities
             CommonForEachStatementSyntax forEach,
             out IMethodSymbol getEnumeratorMethod,
             out ITypeSymbol elementType
-        ) {
+        )
+        {
             var info = model.GetForEachStatementInfo(forEach);
             getEnumeratorMethod = info.GetEnumeratorMethod;
             elementType = info.ElementType;

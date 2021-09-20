@@ -123,7 +123,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Http
             ITimeoutControl timeoutControl,
             IHttpMinResponseDataRateFeature minResponseDataRateFeature,
             IHttpOutputAborter outputAborter
-        ) {
+        )
+        {
             // Allow appending more data to the PipeWriter when a flush is pending.
             _pipeWriter = new ConcurrentPipeWriter(pipeWriter, memoryPool, _contextLock);
             _connectionId = connectionId;
@@ -139,7 +140,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Http
         public Task WriteDataAsync(
             ReadOnlySpan<byte> buffer,
             CancellationToken cancellationToken = default
-        ) {
+        )
+        {
             if (cancellationToken.IsCancellationRequested)
             {
                 return Task.FromCanceled(cancellationToken);
@@ -151,7 +153,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Http
         public ValueTask<FlushResult> WriteDataToPipeAsync(
             ReadOnlySpan<byte> buffer,
             CancellationToken cancellationToken = default
-        ) {
+        )
+        {
             if (cancellationToken.IsCancellationRequested)
             {
                 return new ValueTask<FlushResult>(
@@ -225,7 +228,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Http
             static ValueTask<FlushResult> FlushAsyncChunked(
                 Http1OutputProducer producer,
                 CancellationToken token
-            ) {
+            )
+            {
                 // Local function so in the common-path the stack space for BufferWriter isn't reserved and cleared when it isn't used.
 
                 Debug.Assert(!producer._pipeWriterCompleted);
@@ -333,7 +337,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Http
                             - _currentMemoryPrefixBytes
                             - EndChunkLength
                             - bytes
-                    ) {
+                    )
+                    {
                         throw new ArgumentOutOfRangeException("Can't advance past buffer size.");
                     }
                     _advancedBytesForChunk += bytes;
@@ -354,7 +359,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Http
         public ValueTask<FlushResult> WriteChunkAsync(
             ReadOnlySpan<byte> buffer,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             lock (_contextLock)
             {
                 ThrowIfSuffixSent();
@@ -380,7 +386,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Http
         private void CommitChunkInternal(
             ref BufferWriter<PipeWriter> writer,
             ReadOnlySpan<byte> buffer
-        ) {
+        )
+        {
             if (_advancedBytesForChunk > 0)
             {
                 WriteCurrentChunkMemoryToPipeWriter(ref writer);
@@ -402,7 +409,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Http
             HttpResponseHeaders responseHeaders,
             bool autoChunk,
             bool appComplete
-        ) {
+        )
+        {
             lock (_contextLock)
             {
                 ThrowIfSuffixSent();
@@ -430,7 +438,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Http
             string? reasonPhrase,
             HttpResponseHeaders responseHeaders,
             bool autoChunk
-        ) {
+        )
+        {
             writer.Write(HttpVersion11Bytes);
             var statusBytes = ReasonPhrases.ToStatusBytes(statusCode, reasonPhrase);
             writer.Write(statusBytes);
@@ -568,7 +577,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Http
             bool autoChunk,
             ReadOnlySpan<byte> buffer,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             lock (_contextLock)
             {
                 ThrowIfSuffixSent();
@@ -600,7 +610,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Http
             bool autoChunk,
             ReadOnlySpan<byte> buffer,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             lock (_contextLock)
             {
                 ThrowIfSuffixSent();
@@ -644,7 +655,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Http
         private ValueTask<FlushResult> WriteAsync(
             ReadOnlySpan<byte> buffer,
             CancellationToken cancellationToken = default
-        ) {
+        )
+        {
             lock (_contextLock)
             {
                 ThrowIfSuffixSent();
@@ -663,7 +675,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Http
             ref BufferWriter<PipeWriter> writer,
             ReadOnlySpan<byte> buffer,
             CancellationToken cancellationToken = default
-        ) {
+        )
+        {
             if (_autoChunk)
             {
                 if (_advancedBytesForChunk > 0)
@@ -715,7 +728,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Http
                         - EndChunkLength
                         - sizeHint
                 && _advancedBytesForChunk > 0
-            ) {
+            )
+            {
                 sizeHint += MaxBeginChunkLength + EndChunkLength;
                 var writer = new BufferWriter<PipeWriter>(_pipeWriter);
                 WriteCurrentChunkMemoryToPipeWriter(ref writer);

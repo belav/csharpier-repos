@@ -106,7 +106,8 @@ namespace System.Runtime.Serialization.Json
         public override object? ReadJsonValueCore(
             XmlReaderDelegator jsonReader,
             XmlObjectSerializerReadContextComplexJson? context
-        ) {
+        )
+        {
             jsonReader.Read();
             object o = JsonFormatReaderDelegate(
                 jsonReader,
@@ -124,7 +125,8 @@ namespace System.Runtime.Serialization.Json
             object obj,
             XmlObjectSerializerWriteContextComplexJson? context,
             RuntimeTypeHandle declaredTypeHandle
-        ) {
+        )
+        {
             Debug.Assert(context != null);
             jsonWriter.WriteAttributeString(
                 null,
@@ -150,9 +152,8 @@ namespace System.Runtime.Serialization.Json
             private readonly string _typeName;
 
             [RequiresUnreferencedCode(DataContractJsonSerializer.SerializerTrimmerWarning)]
-            public JsonClassDataContractCriticalHelper(
-                ClassDataContract traditionalDataContract
-            ) : base(traditionalDataContract)
+            public JsonClassDataContractCriticalHelper(ClassDataContract traditionalDataContract)
+                : base(traditionalDataContract)
             {
                 _typeName = string.IsNullOrEmpty(traditionalDataContract.Namespace.Value)
                     ? traditionalDataContract.Name.Value
@@ -204,7 +205,8 @@ namespace System.Runtime.Serialization.Json
                             memberTable.ContainsKey(
                                 _traditionalClassDataContract.MemberNames[i].Value
                             )
-                        ) {
+                        )
+                        {
                             throw new SerializationException(
                                 SR.Format(
                                     SR.JsonDuplicateMemberNames,

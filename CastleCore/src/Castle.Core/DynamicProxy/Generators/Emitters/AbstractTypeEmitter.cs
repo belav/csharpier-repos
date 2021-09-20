@@ -179,7 +179,8 @@ namespace Castle.DynamicProxy.Generators.Emitters
             MethodAttributes attrs,
             Type returnType,
             params Type[] argumentTypes
-        ) {
+        )
+        {
             var member = new MethodEmitter(
                 this,
                 name,
@@ -195,7 +196,8 @@ namespace Castle.DynamicProxy.Generators.Emitters
             string name,
             Type returnType,
             params Type[] parameterTypes
-        ) {
+        )
+        {
             return CreateMethod(name, defaultAttributes, returnType, parameterTypes);
         }
 
@@ -208,7 +210,8 @@ namespace Castle.DynamicProxy.Generators.Emitters
             string name,
             MethodAttributes attributes,
             MethodInfo methodToUseAsATemplate
-        ) {
+        )
+        {
             var method = new MethodEmitter(this, name, attributes, methodToUseAsATemplate);
             methods.Add(method);
             return method;
@@ -219,7 +222,8 @@ namespace Castle.DynamicProxy.Generators.Emitters
             PropertyAttributes attributes,
             Type propertyType,
             Type[] arguments
-        ) {
+        )
+        {
             var propEmitter = new PropertyEmitter(this, name, attributes, propertyType, arguments);
             properties.Add(propEmitter);
             return propEmitter;
@@ -365,7 +369,8 @@ namespace Castle.DynamicProxy.Generators.Emitters
 
         public void SetGenericTypeParameters(
             GenericTypeParameterBuilder[] genericTypeParameterBuilders
-        ) {
+        )
+        {
             genericTypeParams = genericTypeParameterBuilders;
         }
 

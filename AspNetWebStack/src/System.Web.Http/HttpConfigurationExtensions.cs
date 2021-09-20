@@ -27,7 +27,8 @@ namespace System.Web.Http
             this HttpConfiguration configuration,
             Type type,
             IModelBinder binder
-        ) {
+        )
+        {
             if (configuration == null)
             {
                 throw Error.ArgumentNull("configuration");
@@ -93,7 +94,8 @@ namespace System.Web.Http
         public static void MapHttpAttributeRoutes(
             this HttpConfiguration configuration,
             IInlineConstraintResolver constraintResolver
-        ) {
+        )
+        {
             if (configuration == null)
             {
                 throw new ArgumentNullException("configuration");
@@ -123,7 +125,8 @@ namespace System.Web.Http
         public static void MapHttpAttributeRoutes(
             this HttpConfiguration configuration,
             IDirectRouteProvider directRouteProvider
-        ) {
+        )
+        {
             if (configuration == null)
             {
                 throw new ArgumentNullException("configuration");
@@ -157,7 +160,8 @@ namespace System.Web.Http
             this HttpConfiguration configuration,
             IInlineConstraintResolver constraintResolver,
             IDirectRouteProvider directRouteProvider
-        ) {
+        )
+        {
             if (configuration == null)
             {
                 throw new ArgumentNullException("configuration");
@@ -186,7 +190,8 @@ namespace System.Web.Http
         // Public APIs can get similar functionality by querying the IHttpRoute for IReadOnlyCollection<IHttpRoute>.
         internal static IReadOnlyCollection<IHttpRoute> GetAttributeRoutes(
             this HttpConfiguration configuration
-        ) {
+        )
+        {
             configuration.EnsureInitialized();
 
             HttpRouteCollection routes = configuration.Routes;

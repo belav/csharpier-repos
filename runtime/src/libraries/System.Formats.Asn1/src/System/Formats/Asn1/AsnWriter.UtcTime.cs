@@ -105,7 +105,8 @@ namespace System.Formats.Asn1
                 || !Utf8Formatter.TryFormat(hour, baseSpan.Slice(6, 2), out _, format)
                 || !Utf8Formatter.TryFormat(minute, baseSpan.Slice(8, 2), out _, format)
                 || !Utf8Formatter.TryFormat(second, baseSpan.Slice(10, 2), out _, format)
-            ) {
+            )
+            {
                 Debug.Fail($"Utf8Formatter.TryFormat failed to build components of {normalized:O}");
                 throw new InvalidOperationException();
             }

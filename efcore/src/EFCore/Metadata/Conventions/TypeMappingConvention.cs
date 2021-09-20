@@ -32,11 +32,13 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
         public virtual void ProcessModelFinalizing(
             IConventionModelBuilder modelBuilder,
             IConventionContext<IConventionModelBuilder> context
-        ) {
+        )
+        {
             foreach (
                 var property in modelBuilder.Metadata.GetEntityTypes()
                     .SelectMany(e => e.GetDeclaredProperties())
-            ) {
+            )
+            {
                 property.Builder.HasTypeMapping(
                     Dependencies.TypeMappingSource.FindMapping((IProperty)property)
                 );

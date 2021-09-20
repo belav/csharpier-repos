@@ -77,7 +77,8 @@ namespace Microsoft.Extensions.FileProviders.Physical
             FileSystemWatcher fileSystemWatcher,
             bool pollForChanges,
             ExclusionFilters filters
-        ) {
+        )
+        {
             if (fileSystemWatcher == null && !pollForChanges)
             {
                 throw new ArgumentNullException(
@@ -300,7 +301,8 @@ namespace Microsoft.Extensions.FileProviders.Physical
                             "*",
                             SearchOption.AllDirectories
                         )
-                    ) {
+                    )
+                    {
                         // Calculated previous path of this moved item.
                         string oldLocation = Path.Combine(
                             e.OldFullPath,
@@ -383,12 +385,14 @@ namespace Microsoft.Extensions.FileProviders.Physical
                     string,
                     ChangeTokenInfo
                 > wildCardEntry in _wildcardTokenLookup
-            ) {
+            )
+            {
                 PatternMatchingResult matchResult = wildCardEntry.Value.Matcher.Match(path);
                 if (
                     matchResult.HasMatches
                     && _wildcardTokenLookup.TryRemove(wildCardEntry.Key, out matchInfo)
-                ) {
+                )
+                {
                     CancelToken(matchInfo);
                     matched = true;
                 }
@@ -410,7 +414,8 @@ namespace Microsoft.Extensions.FileProviders.Physical
                         _filePathTokenLookup.IsEmpty
                         && _wildcardTokenLookup.IsEmpty
                         && _fileWatcher.EnableRaisingEvents
-                    ) {
+                    )
+                    {
                         // Perf: Turn off the file monitoring if no files to monitor.
                         _fileWatcher.EnableRaisingEvents = false;
                     }
@@ -427,7 +432,8 @@ namespace Microsoft.Extensions.FileProviders.Physical
                     if (
                         (!_filePathTokenLookup.IsEmpty || !_wildcardTokenLookup.IsEmpty)
                         && !_fileWatcher.EnableRaisingEvents
-                    ) {
+                    )
+                    {
                         // Perf: Turn off the file monitoring if no files to monitor.
                         _fileWatcher.EnableRaisingEvents = true;
                     }
@@ -473,7 +479,8 @@ namespace Microsoft.Extensions.FileProviders.Physical
                     IPollingChangeToken,
                     IPollingChangeToken
                 > item in changeTokens
-            ) {
+            )
+            {
                 IPollingChangeToken token = item.Key;
 
                 if (!token.HasChanged)
@@ -507,7 +514,8 @@ namespace Microsoft.Extensions.FileProviders.Physical
                 CancellationTokenSource tokenSource,
                 CancellationChangeToken changeToken,
                 Matcher matcher
-            ) {
+            )
+            {
                 TokenSource = tokenSource;
                 ChangeToken = changeToken;
                 Matcher = matcher;

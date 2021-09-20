@@ -29,7 +29,8 @@ namespace Microsoft.AspNetCore.SignalR
             Hub hub,
             MethodInfo hubMethod,
             IReadOnlyList<object?> hubMethodArguments
-        ) {
+        )
+        {
             Hub = hub;
             ServiceProvider = serviceProvider;
             HubMethod = hubMethod;

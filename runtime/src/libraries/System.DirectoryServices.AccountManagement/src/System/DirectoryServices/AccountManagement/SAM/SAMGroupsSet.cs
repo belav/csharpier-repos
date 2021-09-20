@@ -18,7 +18,8 @@ namespace System.DirectoryServices.AccountManagement
             UnsafeNativeMethods.IADsMembers iADsMembers,
             SAMStoreCtx storeCtx,
             DirectoryEntry ctxBase
-        ) {
+        )
+        {
             GlobalDebug.WriteLineIf(
                 GlobalDebug.Info,
                 "SAMGroupsSet",

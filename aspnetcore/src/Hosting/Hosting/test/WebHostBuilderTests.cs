@@ -53,7 +53,8 @@ namespace Microsoft.AspNetCore.Hosting
             var server = new TestServer();
             using (
                 var host = builder.UseServer(server).UseStartup("MissingStartupAssembly").Build()
-            ) {
+            )
+            {
                 await host.StartAsync();
                 await AssertResponseContains(server.RequestDelegate, "MissingStartupAssembly");
             }
@@ -188,7 +189,8 @@ namespace Microsoft.AspNetCore.Hosting
         [MemberData(nameof(DefaultWebHostBuildersWithConfig))]
         public async Task IHostApplicationLifetimeRegisteredEvenWhenStartupCtorThrows_Fallback(
             IWebHostBuilder builder
-        ) {
+        )
+        {
             var server = new TestServer();
             var host = builder.UseServer(server).UseStartup<StartupCtorThrows>().Build();
             using (host)
@@ -340,7 +342,8 @@ namespace Microsoft.AspNetCore.Hosting
         [MemberData(nameof(DefaultWebHostBuildersWithConfig))]
         public async Task MultipleStartupAssembliesSpecifiedOnlyAddAssemblyOnce(
             IWebHostBuilder builder
-        ) {
+        )
+        {
             var provider = new TestLoggerProvider();
             var assemblyName = "RandomName";
             var data = new Dictionary<string, string>
@@ -672,7 +675,8 @@ namespace Microsoft.AspNetCore.Hosting
                     .UseServer(new TestServer())
                     .UseStartup("Microsoft.AspNetCore.Hosting.Tests")
                     .Build()
-            ) {
+            )
+            {
                 Assert.Equal(
                     expected,
                     host.Services.GetService<IHostEnvironment>().EnvironmentName
@@ -725,7 +729,8 @@ namespace Microsoft.AspNetCore.Hosting
                     .UseServer(new TestServer())
                     .UseStartup("Microsoft.AspNetCore.Hosting.Tests")
                     .Build()
-            ) {
+            )
+            {
                 Assert.Equal("/", host.Services.GetService<IHostEnvironment>().ContentRootPath);
                 Assert.Equal("/", host.Services.GetService<IWebHostEnvironment>().ContentRootPath);
 #pragma warning disable CS0618 // Type or member is obsolete
@@ -750,7 +755,8 @@ namespace Microsoft.AspNetCore.Hosting
                     .UseServer(new TestServer())
                     .UseStartup("Microsoft.AspNetCore.Hosting.Tests")
                     .Build()
-            ) {
+            )
+            {
                 var basePath = host.Services.GetRequiredService<IHostEnvironment>().ContentRootPath;
 #pragma warning disable CS0618 // Type or member is obsolete
                 var basePath2 =
@@ -773,7 +779,8 @@ namespace Microsoft.AspNetCore.Hosting
                 var host = builder.UseServer(new TestServer())
                     .UseStartup("Microsoft.AspNetCore.Hosting.Tests")
                     .Build()
-            ) {
+            )
+            {
                 var appBase = AppContext.BaseDirectory;
                 Assert.Equal(appBase, host.Services.GetService<IHostEnvironment>().ContentRootPath);
 #pragma warning disable CS0618 // Type or member is obsolete
@@ -810,7 +817,8 @@ namespace Microsoft.AspNetCore.Hosting
                 var host = builder.UseServer(new TestServer())
                     .UseStartup(typeof(Startup).Assembly.GetName().Name)
                     .Build()
-            ) {
+            )
+            {
                 var hostingEnv = host.Services.GetService<IHostEnvironment>();
 #pragma warning disable CS0618 // Type or member is obsolete
                 var hostingEnv2 =
@@ -829,7 +837,8 @@ namespace Microsoft.AspNetCore.Hosting
                 var host = builder.UseServer(new TestServer())
                     .UseStartup<StartupNoServicesNoInterface>()
                     .Build()
-            ) {
+            )
+            {
                 var hostingEnv = host.Services.GetService<IHostEnvironment>();
 #pragma warning disable CS0618 // Type or member is obsolete
                 var hostingEnv2 =
@@ -885,7 +894,8 @@ namespace Microsoft.AspNetCore.Hosting
                 var host = builder.UseServer(new TestServer())
                     .UseStartup(context => new DelegatingStartup(s => { }, app => { }))
                     .Build()
-            ) {
+            )
+            {
                 var hostingEnv = host.Services.GetService<IHostEnvironment>();
 
                 // Should be the assembly containing this test, because that's where the delegate comes from
@@ -915,7 +925,8 @@ namespace Microsoft.AspNetCore.Hosting
                 var host = builder.UseServer(new TestServer())
                     .Configure(StaticConfigureMethod)
                     .Build()
-            ) {
+            )
+            {
                 var hostingEnv = host.Services.GetService<IHostEnvironment>();
                 Assert.Equal("Microsoft.AspNetCore.Hosting.Tests", hostingEnv.ApplicationName);
             }
@@ -955,7 +966,8 @@ namespace Microsoft.AspNetCore.Hosting
                         context => new DelegatingStartupWithIStartup(ConfigureServices, Configure)
                     )
                     .Build()
-            ) {
+            )
+            {
                 await host.StartAsync();
                 await AssertResponseContains(server.RequestDelegate, "Configure");
             }
@@ -965,7 +977,8 @@ namespace Microsoft.AspNetCore.Hosting
         [MemberData(nameof(DefaultWebHostBuildersWithConfig))]
         public void Build_DoesNotOverrideILoggerFactorySetByConfigureServices(
             IWebHostBuilder builder
-        ) {
+        )
+        {
             var factory = new DisposableLoggerFactory();
             var server = new TestServer();
 
@@ -976,7 +989,8 @@ namespace Microsoft.AspNetCore.Hosting
                     )
                     .UseStartup<StartupWithILoggerFactory>()
                     .Build()
-            ) {
+            )
+            {
                 var factoryFromHost = host.Services.GetService<ILoggerFactory>();
                 Assert.Equal(factory, factoryFromHost);
             }
@@ -1005,7 +1019,8 @@ namespace Microsoft.AspNetCore.Hosting
         [MemberData(nameof(DefaultWebHostBuildersWithConfig))]
         public void Build_RunsDeduplicatedHostingStartupAssembliesIfSpecified(
             IWebHostBuilder builder
-        ) {
+        )
+        {
             var fullName = typeof(TestStartupAssembly1.TestHostingStartup1).Assembly.FullName;
             var name = typeof(TestStartupAssembly1.TestHostingStartup1).Assembly.GetName().Name;
 
@@ -1286,7 +1301,8 @@ namespace Microsoft.AspNetCore.Hosting
         [MemberData(nameof(DefaultWebHostBuildersWithConfig))]
         public void Build_DoesRunHostingStartupFromPrimaryAssemblyEvenIfNotSpecified(
             IWebHostBuilder builder
-        ) {
+        )
+        {
             builder = builder.Configure(app => { }).UseServer(new TestServer());
 
             using (builder.Build())
@@ -1313,7 +1329,8 @@ namespace Microsoft.AspNetCore.Hosting
         [MemberData(nameof(DefaultWebHostBuildersWithConfig))]
         public void Build_DoesntThrowIfUnloadableAssemblyNameInHostingStartupAssemblies(
             IWebHostBuilder builder
-        ) {
+        )
+        {
             builder = builder.CaptureStartupErrors(false)
                 .UseSetting(WebHostDefaults.HostingStartupAssembliesKey, "SomeBogusName")
                 .Configure(app => { })
@@ -1329,7 +1346,8 @@ namespace Microsoft.AspNetCore.Hosting
         [MemberData(nameof(DefaultWebHostBuildersWithConfig))]
         public async Task Build_DoesNotThrowIfUnloadableAssemblyNameInHostingStartupAssembliesAndCaptureStartupErrorsTrue(
             IWebHostBuilder builder
-        ) {
+        )
+        {
             var provider = new TestLoggerProvider();
             builder = builder.ConfigureLogging(
                     (_, factory) =>
@@ -1522,7 +1540,8 @@ namespace Microsoft.AspNetCore.Hosting
         [MemberData(nameof(DefaultWebHostBuilders))]
         public async Task ThrowingFromHostedServiceStopsOtherHostedServicesFromRunningStartAsync(
             IWebHostBuilder builder
-        ) {
+        )
+        {
             builder.Configure(app => { })
                 .ConfigureServices(
                     services =>
@@ -1575,7 +1594,8 @@ namespace Microsoft.AspNetCore.Hosting
         private WebHostOptions CreateWebHostOptions(
             IConfiguration configuration,
             string applicationNameFallback = null
-        ) {
+        )
+        {
             return new WebHostOptions(
                 configuration,
                 applicationNameFallback: applicationNameFallback
@@ -1623,7 +1643,8 @@ namespace Microsoft.AspNetCore.Hosting
             public Task StartAsync<TContext>(
                 IHttpApplication<TContext> application,
                 CancellationToken cancellationToken
-            ) {
+            )
+            {
                 Assert.Equal(1, Ordering.Order);
                 Ordering.Order++;
                 return Task.CompletedTask;
@@ -1742,7 +1763,8 @@ namespace Microsoft.AspNetCore.Hosting
             public Task StartAsync<TContext>(
                 IHttpApplication<TContext> application,
                 CancellationToken cancellationToken
-            ) {
+            )
+            {
                 RequestDelegate = async ctx =>
                 {
                     var httpContext = application.CreateContext(ctx.Features);
@@ -1898,7 +1920,8 @@ namespace Microsoft.AspNetCore.Hosting
             public DelegatingStartupWithIStartup(
                 Func<IServiceCollection, IServiceProvider> configureServices,
                 Action<IApplicationBuilder> configure
-            ) {
+            )
+            {
                 _configureServices = configureServices;
                 _configure = configure;
             }
@@ -1917,7 +1940,8 @@ namespace Microsoft.AspNetCore.Hosting
             public DelegatingStartup(
                 Action<IServiceCollection> configureServices,
                 Action<IApplicationBuilder> configure
-            ) {
+            )
+            {
                 _configureServices = configureServices;
                 _configure = configure;
             }

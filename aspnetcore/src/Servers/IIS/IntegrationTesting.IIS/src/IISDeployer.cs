@@ -34,10 +34,8 @@ namespace Microsoft.AspNetCore.Server.IntegrationTesting.IIS
 
         public Process HostProcess { get; set; }
 
-        public IISDeployer(
-            DeploymentParameters deploymentParameters,
-            ILoggerFactory loggerFactory
-        ) : base(new IISDeploymentParameters(deploymentParameters), loggerFactory) { }
+        public IISDeployer(DeploymentParameters deploymentParameters, ILoggerFactory loggerFactory)
+            : base(new IISDeploymentParameters(deploymentParameters), loggerFactory) { }
 
         public IISDeployer(
             IISDeploymentParameters deploymentParameters,
@@ -91,7 +89,8 @@ namespace Microsoft.AspNetCore.Server.IntegrationTesting.IIS
                     IISDeploymentParameters.EnvironmentVariables.ContainsKey(
                         DetailedErrorsEnvironmentVariable
                     )
-                ) {
+                )
+                {
                     IISDeploymentParameters.WebConfigBasedEnvironmentVariables[
                         DetailedErrorsEnvironmentVariable
                     ] = IISDeploymentParameters.EnvironmentVariables[
@@ -106,7 +105,8 @@ namespace Microsoft.AspNetCore.Server.IntegrationTesting.IIS
                 if (
                     !IISDeploymentParameters.HandlerSettings.ContainsKey("debugLevel")
                     && !IISDeploymentParameters.HandlerSettings.ContainsKey("debugFile")
-                ) {
+                )
+                {
                     _debugLogFile = Path.GetTempFileName();
                     IISDeploymentParameters.HandlerSettings["debugLevel"] = "file";
                     IISDeploymentParameters.HandlerSettings["debugFile"] = _debugLogFile;
@@ -157,7 +157,8 @@ namespace Microsoft.AspNetCore.Server.IntegrationTesting.IIS
                         "dotnet",
                         StringComparison.Ordinal
                     ) == true
-                ) {
+                )
+                {
                     aspNetCore.SetAttributeValue(
                         "processPath",
                         DotNetCommands.GetDotNetExecutable(DeploymentParameters.RuntimeArchitecture)
@@ -191,7 +192,8 @@ namespace Microsoft.AspNetCore.Server.IntegrationTesting.IIS
                     DeploymentParameters.EnvironmentVariables.ContainsKey(
                         "ASPNETCORE_MODULE_DEBUG_FILE"
                     )
-                ) {
+                )
+                {
                     debugLogLocations.Add(
                         DeploymentParameters.EnvironmentVariables["ASPNETCORE_MODULE_DEBUG_FILE"]
                     );
@@ -263,7 +265,8 @@ namespace Microsoft.AspNetCore.Server.IntegrationTesting.IIS
             if (
                 serviceController.Status != ServiceControllerStatus.Running
                 && serviceController.Status != ServiceControllerStatus.StartPending
-            ) {
+            )
+            {
                 Logger.LogInformation("Starting W3SVC");
 
                 serviceController.Start();
@@ -288,7 +291,8 @@ namespace Microsoft.AspNetCore.Server.IntegrationTesting.IIS
                     if (
                         appPool.State != ObjectState.Started
                         && appPool.State != ObjectState.Starting
-                    ) {
+                    )
+                    {
                         var state = appPool.Start();
                         Logger.LogInformation($"Starting pool, state: {state.ToString()}");
                     }
@@ -434,7 +438,8 @@ namespace Microsoft.AspNetCore.Server.IntegrationTesting.IIS
                         if (
                             appPool.State != ObjectState.Stopped
                             && appPool.State != ObjectState.Stopping
-                        ) {
+                        )
+                        {
                             var state = appPool.Stop();
                             Logger.LogInformation($"Stopping pool, state: {state.ToString()}");
                         }
@@ -453,7 +458,8 @@ namespace Microsoft.AspNetCore.Server.IntegrationTesting.IIS
                                         wp.State == WorkerProcessState.Running
                                         || wp.State == WorkerProcessState.Stopping
                                 )
-                            ) {
+                            )
+                            {
                                 throw new InvalidOperationException(
                                     "WorkerProcess not stopped yet"
                                 );

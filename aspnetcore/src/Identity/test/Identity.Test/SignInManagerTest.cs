@@ -229,7 +229,8 @@ namespace Microsoft.AspNetCore.Identity.Test
             ILogger logger = null,
             IdentityOptions identityOptions = null,
             IAuthenticationSchemeProvider schemeProvider = null
-        ) {
+        )
+        {
             var contextAccessor = new Mock<IHttpContextAccessor>();
             contextAccessor.Setup(a => a.HttpContext).Returns(context);
             var roleManager = MockHelpers.MockRoleManager<PocoRole>();
@@ -359,7 +360,8 @@ namespace Microsoft.AspNetCore.Identity.Test
         public async Task CheckPasswordOnlyResetLockoutWhenTfaNotEnabledOrRemembered(
             bool tfaEnabled,
             bool tfaRemembered
-        ) {
+        )
+        {
             // Setup
             var user = new PocoUser { UserName = "Foo" };
             var manager = SetupUserManager(user);
@@ -589,7 +591,8 @@ namespace Microsoft.AspNetCore.Identity.Test
                 string token,
                 UserManager<PocoUser> manager,
                 PocoUser user
-            ) {
+            )
+            {
                 return Task.FromResult(true);
             }
         }
@@ -603,7 +606,8 @@ namespace Microsoft.AspNetCore.Identity.Test
             string providerName,
             bool isPersistent,
             bool rememberClient
-        ) {
+        )
+        {
             // Setup
             var user = new PocoUser { UserName = "Foo" };
             const string code = "3123";
@@ -817,7 +821,8 @@ namespace Microsoft.AspNetCore.Identity.Test
             bool isPersistent,
 #pragma warning restore xUnit1026
             bool externalLogin
-        ) {
+        )
+        {
             // Setup
             var user = new PocoUser { UserName = "Foo" };
             var context = new DefaultHttpContext();
@@ -890,7 +895,8 @@ namespace Microsoft.AspNetCore.Identity.Test
             bool supportsLockout,
             bool externalLogin,
             bool rememberClient
-        ) {
+        )
+        {
             // Setup
             var user = new PocoUser { UserName = "Foo" };
             var manager = SetupUserManager(user);
@@ -1343,7 +1349,8 @@ namespace Microsoft.AspNetCore.Identity.Test
             bool? isPersistent = null,
             string loginProvider = null,
             string amr = null
-        ) {
+        )
+        {
             auth.Setup(
                     a =>
                         a.SignInAsync(

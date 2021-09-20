@@ -60,7 +60,8 @@ namespace BasicWebSite
             public RequestBodySizeCheckingStream(
                 Stream innerStream,
                 IHttpMaxRequestBodySizeFeature maxRequestBodySizeFeature
-            ) {
+            )
+            {
                 _innerStream = innerStream;
                 _maxRequestBodySizeFeature = maxRequestBodySizeFeature;
             }
@@ -89,7 +90,8 @@ namespace BasicWebSite
                     _maxRequestBodySizeFeature.MaxRequestBodySize != null
                     && _innerStream.CanSeek
                     && _innerStream.Length > _maxRequestBodySizeFeature.MaxRequestBodySize
-                ) {
+                )
+                {
                     throw new InvalidOperationException(
                         "Request content size is greater than the limit size"
                     );
@@ -101,7 +103,8 @@ namespace BasicWebSite
                 if (
                     _maxRequestBodySizeFeature.MaxRequestBodySize != null
                     && _totalRead > _maxRequestBodySizeFeature.MaxRequestBodySize
-                ) {
+                )
+                {
                     throw new InvalidOperationException(
                         "Request content size is greater than the limit size"
                     );
@@ -114,12 +117,14 @@ namespace BasicWebSite
                 int offset,
                 int count,
                 CancellationToken cancellationToken
-            ) {
+            )
+            {
                 if (
                     _maxRequestBodySizeFeature.MaxRequestBodySize != null
                     && _innerStream.CanSeek
                     && _innerStream.Length > _maxRequestBodySizeFeature.MaxRequestBodySize
-                ) {
+                )
+                {
                     throw new InvalidOperationException(
                         "Request content size is greater than the limit size"
                     );
@@ -131,7 +136,8 @@ namespace BasicWebSite
                 if (
                     _maxRequestBodySizeFeature.MaxRequestBodySize != null
                     && _totalRead > _maxRequestBodySizeFeature.MaxRequestBodySize
-                ) {
+                )
+                {
                     throw new InvalidOperationException(
                         "Request content size is greater than the limit size"
                     );

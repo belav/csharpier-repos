@@ -48,7 +48,8 @@ namespace Microsoft.CodeAnalysis.SimplifyThisOrMe
                     typeof(WorkspacesResources)
                 ),
                 isUnnecessary: true
-            ) {
+            )
+        {
             var syntaxKinds = GetSyntaxFacts().SyntaxKinds;
             _kindsOfInterest = ImmutableArray.Create(
                 syntaxKinds.Convert<TLanguageKindEnum>(syntaxKinds.SimpleMemberAccessExpression)
@@ -98,7 +99,8 @@ namespace Microsoft.CodeAnalysis.SimplifyThisOrMe
                     out var issueSpan,
                     cancellationToken
                 )
-            ) {
+            )
+            {
                 return;
             }
 

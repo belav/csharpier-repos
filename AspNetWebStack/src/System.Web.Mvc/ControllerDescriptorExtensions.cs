@@ -15,7 +15,8 @@ namespace System.Web.Mvc
         public static string GetAreaName(
             this ControllerDescriptor controllerDescriptor,
             RouteAreaAttribute area
-        ) {
+        )
+        {
             if (area == null)
             {
                 return null;

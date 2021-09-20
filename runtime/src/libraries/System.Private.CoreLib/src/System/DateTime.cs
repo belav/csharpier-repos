@@ -267,7 +267,8 @@ namespace System
             int minute,
             int second,
             DateTimeKind kind
-        ) {
+        )
+        {
             if ((uint)kind > (uint)DateTimeKind.Local)
                 ThrowInvalidKind();
 
@@ -295,7 +296,8 @@ namespace System
             int minute,
             int second,
             Calendar calendar
-        ) {
+        )
+        {
             if (calendar == null)
                 throw new ArgumentNullException(nameof(calendar));
 
@@ -322,7 +324,8 @@ namespace System
             int minute,
             int second,
             int millisecond
-        ) {
+        )
+        {
             if ((uint)millisecond >= MillisPerSecond)
                 ThrowMillisecondOutOfRange();
 
@@ -350,7 +353,8 @@ namespace System
             int second,
             int millisecond,
             DateTimeKind kind
-        ) {
+        )
+        {
             if ((uint)millisecond >= MillisPerSecond)
                 ThrowMillisecondOutOfRange();
             if ((uint)kind > (uint)DateTimeKind.Local)
@@ -383,7 +387,8 @@ namespace System
             int second,
             int millisecond,
             Calendar calendar
-        ) {
+        )
+        {
             if (calendar == null)
                 throw new ArgumentNullException(nameof(calendar));
 
@@ -410,7 +415,8 @@ namespace System
             int millisecond,
             Calendar calendar,
             DateTimeKind kind
-        ) {
+        )
+        {
             if (calendar == null)
                 throw new ArgumentNullException(nameof(calendar));
             if ((uint)millisecond >= MillisPerSecond)
@@ -1321,7 +1327,8 @@ namespace System
             ReadOnlySpan<char> s,
             IFormatProvider? provider = null,
             DateTimeStyles styles = DateTimeStyles.None
-        ) {
+        )
+        {
             DateTimeFormatInfo.ValidateStyles(styles, styles: true);
             return DateTimeParse.Parse(s, DateTimeFormatInfo.GetInstance(provider), styles);
         }
@@ -1353,7 +1360,8 @@ namespace System
             string format,
             IFormatProvider? provider,
             DateTimeStyles style
-        ) {
+        )
+        {
             DateTimeFormatInfo.ValidateStyles(style);
             if (s == null)
                 ThrowHelper.ThrowArgumentNullException(ExceptionArgument.s);
@@ -1372,7 +1380,8 @@ namespace System
             ReadOnlySpan<char> format,
             IFormatProvider? provider,
             DateTimeStyles style = DateTimeStyles.None
-        ) {
+        )
+        {
             DateTimeFormatInfo.ValidateStyles(style);
             return DateTimeParse.ParseExact(
                 s,
@@ -1387,7 +1396,8 @@ namespace System
             string[] formats,
             IFormatProvider? provider,
             DateTimeStyles style
-        ) {
+        )
+        {
             DateTimeFormatInfo.ValidateStyles(style);
             if (s == null)
                 ThrowHelper.ThrowArgumentNullException(ExceptionArgument.s);
@@ -1404,7 +1414,8 @@ namespace System
             string[] formats,
             IFormatProvider? provider,
             DateTimeStyles style = DateTimeStyles.None
-        ) {
+        )
+        {
             DateTimeFormatInfo.ValidateStyles(style);
             return DateTimeParse.ParseExactMultiple(
                 s,
@@ -1589,7 +1600,8 @@ namespace System
             IFormatProvider? provider,
             DateTimeStyles styles,
             out DateTime result
-        ) {
+        )
+        {
             DateTimeFormatInfo.ValidateStyles(styles, styles: true);
 
             if (s == null)
@@ -1611,7 +1623,8 @@ namespace System
             IFormatProvider? provider,
             DateTimeStyles styles,
             out DateTime result
-        ) {
+        )
+        {
             DateTimeFormatInfo.ValidateStyles(styles, styles: true);
             return DateTimeParse.TryParse(
                 s,
@@ -1627,7 +1640,8 @@ namespace System
             IFormatProvider? provider,
             DateTimeStyles style,
             out DateTime result
-        ) {
+        )
+        {
             DateTimeFormatInfo.ValidateStyles(style);
 
             if (s == null || format == null)
@@ -1651,7 +1665,8 @@ namespace System
             IFormatProvider? provider,
             DateTimeStyles style,
             out DateTime result
-        ) {
+        )
+        {
             DateTimeFormatInfo.ValidateStyles(style);
             return DateTimeParse.TryParseExact(
                 s,
@@ -1668,7 +1683,8 @@ namespace System
             IFormatProvider? provider,
             DateTimeStyles style,
             out DateTime result
-        ) {
+        )
+        {
             DateTimeFormatInfo.ValidateStyles(style);
 
             if (s == null)
@@ -1692,7 +1708,8 @@ namespace System
             IFormatProvider? provider,
             DateTimeStyles style,
             out DateTime result
-        ) {
+        )
+        {
             DateTimeFormatInfo.ValidateStyles(style);
             return DateTimeParse.TryParseExactMultiple(
                 s,
@@ -1814,7 +1831,8 @@ namespace System
             int second,
             int millisecond,
             out DateTime result
-        ) {
+        )
+        {
             result = default;
             if (year < 1 || year > 9999 || month < 1 || month > 12 || day < 1)
             {
@@ -1850,7 +1868,8 @@ namespace System
                     minute,
                     DateTimeKind.Unspecified
                 )
-            ) {
+            )
+            {
                 // if we have leap second (second = 60) then we'll need to check if it is valid time.
                 // if it is valid, then we adjust the second to 59 so DateTime will consider this second is last second
                 // of this minute.

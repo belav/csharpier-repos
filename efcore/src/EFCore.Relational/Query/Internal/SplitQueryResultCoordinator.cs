@@ -60,7 +60,8 @@ namespace Microsoft.EntityFrameworkCore.Query.Internal
         public virtual void SetDataReader(
             int collectionId,
             RelationalDataReader relationalDataReader
-        ) {
+        )
+        {
             while (DataReaders.Count <= collectionId)
             {
                 DataReaders.Add(null);
@@ -78,7 +79,8 @@ namespace Microsoft.EntityFrameworkCore.Query.Internal
         public virtual void SetSplitQueryCollectionContext(
             int collectionId,
             SplitQueryCollectionContext splitQueryCollectionContext
-        ) {
+        )
+        {
             while (Collections.Count <= collectionId)
             {
                 Collections.Add(null);

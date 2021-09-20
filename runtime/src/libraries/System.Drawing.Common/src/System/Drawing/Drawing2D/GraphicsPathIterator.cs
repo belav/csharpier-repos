@@ -234,7 +234,8 @@ namespace System.Drawing.Drawing2D
             ref byte[] types,
             int startIndex,
             int endIndex
-        ) {
+        )
+        {
             if ((points.Length != types.Length) || (endIndex - startIndex + 1 > points.Length))
                 throw Gdip.StatusException(Gdip.InvalidParameter);
 

@@ -25,7 +25,8 @@ namespace System
             Array dst,
             int dstOffset,
             int count
-        ) {
+        )
+        {
             if (src == null)
                 throw new ArgumentNullException(nameof(src));
             if (dst == null)
@@ -140,7 +141,8 @@ namespace System
             void* destination,
             long destinationSizeInBytes,
             long sourceBytesToCopy
-        ) {
+        )
+        {
             if (sourceBytesToCopy > destinationSizeInBytes)
             {
                 ThrowHelper.ThrowArgumentOutOfRangeException(ExceptionArgument.sourceBytesToCopy);
@@ -158,7 +160,8 @@ namespace System
             void* destination,
             ulong destinationSizeInBytes,
             ulong sourceBytesToCopy
-        ) {
+        )
+        {
             if (sourceBytesToCopy > destinationSizeInBytes)
             {
                 ThrowHelper.ThrowArgumentOutOfRangeException(ExceptionArgument.sourceBytesToCopy);
@@ -173,7 +176,8 @@ namespace System
             if (
                 ((nuint)(nint)Unsafe.ByteOffset(ref src, ref dest) < len)
                 || ((nuint)(nint)Unsafe.ByteOffset(ref dest, ref src) < len)
-            ) {
+            )
+            {
                 goto BuffersOverlap;
             }
 

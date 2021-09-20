@@ -184,7 +184,8 @@ namespace System.Buffers.Text.Tests
             string expectedText,
             int expectedConsumed,
             int expectedWritten
-        ) {
+        )
+        {
             Span<byte> source = new byte[numBytes];
             for (int i = 0; i < numBytes; i++)
             {
@@ -452,7 +453,8 @@ namespace System.Buffers.Text.Tests
                 int numberOfBytesToTest = 0;
                 numberOfBytesToTest <= numberOfBytes;
                 numberOfBytesToTest++
-            ) {
+            )
+            {
                 var expectedText = Convert.ToBase64String(
                     testBytes.Slice(0, numberOfBytesToTest).ToArray()
                 );
@@ -479,7 +481,8 @@ namespace System.Buffers.Text.Tests
                 int numberOfBytesToTest = 1;
                 numberOfBytesToTest <= testBytes.Length;
                 numberOfBytesToTest++
-            ) {
+            )
+            {
                 Assert.Equal(
                     OperationStatus.DestinationTooSmall,
                     Base64.EncodeToUtf8InPlace(testBytes, numberOfBytesToTest, out int bytesWritten)

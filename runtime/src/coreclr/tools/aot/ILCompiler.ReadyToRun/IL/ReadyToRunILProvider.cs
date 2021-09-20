@@ -18,7 +18,8 @@ namespace Internal.IL
                 method.Instantiation.Length == 1
                 && method.Signature.Length == 0
                 && method.Name == "CreateInstance"
-            ) {
+            )
+            {
                 TypeDesc type = method.Instantiation[0];
                 if (type.IsValueType && type.GetParameterlessConstructor() == null)
                 {
@@ -48,7 +49,8 @@ namespace Internal.IL
             if (
                 mdType.Name == "RuntimeHelpers"
                 && mdType.Namespace == "System.Runtime.CompilerServices"
-            ) {
+            )
+            {
                 return RuntimeHelpersIntrinsics.EmitIL(method);
             }
 
@@ -60,7 +62,8 @@ namespace Internal.IL
             if (
                 mdType.Name == "MemoryMarshal"
                 && mdType.Namespace == "System.Runtime.InteropServices"
-            ) {
+            )
+            {
                 return MemoryMarshalIntrinsics.EmitIL(method);
             }
 
@@ -91,7 +94,8 @@ namespace Internal.IL
             if (
                 mdType.Name == "RuntimeHelpers"
                 && mdType.Namespace == "System.Runtime.CompilerServices"
-            ) {
+            )
+            {
                 return RuntimeHelpersIntrinsics.EmitIL(method);
             }
 

@@ -162,7 +162,8 @@ namespace System.Buffers.Text.Tests
             out T value,
             out int bytesConsumed,
             char format
-        ) {
+        )
+        {
             if (typeof(T) == typeof(bool))
             {
                 bool success = Utf8Parser.TryParse(text, out bool v, out bytesConsumed, format);
@@ -289,7 +290,8 @@ namespace System.Buffers.Text.Tests
             out object value,
             out int bytesConsumed,
             char format
-        ) {
+        )
+        {
             if (type == typeof(bool))
             {
                 bool success = Utf8Parser.TryParse(text, out bool v, out bytesConsumed, format);

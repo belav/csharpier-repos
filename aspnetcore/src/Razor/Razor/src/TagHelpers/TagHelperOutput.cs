@@ -44,7 +44,8 @@ namespace Microsoft.AspNetCore.Razor.TagHelpers
             string tagName,
             TagHelperAttributeList attributes,
             Func<bool, HtmlEncoder, Task<TagHelperContent>> getChildContentAsync
-        ) {
+        )
+        {
             if (getChildContentAsync == null)
             {
                 throw new ArgumentNullException(nameof(getChildContentAsync));
@@ -284,7 +285,8 @@ namespace Microsoft.AspNetCore.Razor.TagHelpers
         public Task<TagHelperContent> GetChildContentAsync(
             bool useCachedResult,
             HtmlEncoder encoder
-        ) {
+        )
+        {
             return _getChildContentAsync(useCachedResult, encoder);
         }
 

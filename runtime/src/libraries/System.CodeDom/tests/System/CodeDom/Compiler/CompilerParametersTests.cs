@@ -104,7 +104,8 @@ namespace System.CodeDom.Compiler.Tests
             string[] assemblyNames,
             string outputName,
             bool includeDebugInformation
-        ) {
+        )
+        {
             var parameters = new CompilerParameters(
                 assemblyNames,
                 outputName,

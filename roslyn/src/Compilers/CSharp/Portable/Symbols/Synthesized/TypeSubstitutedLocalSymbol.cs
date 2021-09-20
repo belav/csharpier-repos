@@ -20,7 +20,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             LocalSymbol originalVariable,
             TypeWithAnnotations type,
             Symbol containingSymbol
-        ) {
+        )
+        {
             Debug.Assert(originalVariable != null);
             Debug.Assert(type.HasType);
             Debug.Assert(containingSymbol != null);
@@ -116,20 +117,23 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             SyntaxNode node,
             LocalSymbol inProgress,
             BindingDiagnosticBag diagnostics
-        ) {
+        )
+        {
             return _originalVariable.GetConstantValue(node, inProgress, diagnostics);
         }
 
         internal override ImmutableBindingDiagnostic<AssemblySymbol> GetConstantValueDiagnostics(
             BoundExpression boundInitValue
-        ) {
+        )
+        {
             return _originalVariable.GetConstantValueDiagnostics(boundInitValue);
         }
 
         internal override LocalSymbol WithSynthesizedLocalKindAndSyntax(
             SynthesizedLocalKind kind,
             SyntaxNode syntax
-        ) {
+        )
+        {
             var origSynthesized = (SynthesizedLocal)_originalVariable;
             return new TypeSubstitutedLocalSymbol(
                 origSynthesized.WithSynthesizedLocalKindAndSyntax(kind, syntax),

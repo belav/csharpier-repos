@@ -154,7 +154,8 @@ namespace System.DirectoryServices.ActiveDirectory
                             dsNameResultItem.status
                                 == NativeMethods.DS_NAME_ERROR_NO_SYNTACTICAL_MAPPING
                             || dsNameResultItem.name == null
-                        ) {
+                        )
+                        {
                             throw new ArgumentException(
                                 SR.InvalidDNFormat,
                                 nameof(distinguishedName)
@@ -168,7 +169,8 @@ namespace System.DirectoryServices.ActiveDirectory
 
                         if (
                             (dsNameResultItem.name.Length - 1) == dsNameResultItem.name.IndexOf('/')
-                        ) {
+                        )
+                        {
                             dnsName = dsNameResultItem.name.Substring(
                                 0,
                                 dsNameResultItem.name.Length - 1
@@ -425,7 +427,8 @@ namespace System.DirectoryServices.ActiveDirectory
                                 ntdsdsa.Length
                             ) == 0
                         )
-                    ) {
+                    )
+                    {
                         // ntdsa object
                         ldapPort = (int)PropertyManager.GetSearchResultPropertyValue(
                             res,
@@ -534,7 +537,8 @@ namespace System.DirectoryServices.ActiveDirectory
                                 ntdsdsa.Length
                             ) == 0
                         )
-                    ) {
+                    )
+                    {
                         // ntdsa object
                         ldapPort = (int)PropertyManager.GetSearchResultPropertyValue(
                             res,
@@ -760,7 +764,8 @@ namespace System.DirectoryServices.ActiveDirectory
             string? name,
             DirectoryContextType contextType,
             DirectoryContext? context
-        ) {
+        )
+        {
             return new DirectoryContext(contextType, name, context);
         }
 
@@ -768,7 +773,8 @@ namespace System.DirectoryServices.ActiveDirectory
             DirectoryContext context,
             out string? username,
             out string? domain
-        ) {
+        )
+        {
             if ((context.UserName != null) && (context.UserName.Length > 0))
             {
                 string tmpUsername = context.UserName;
@@ -794,7 +800,8 @@ namespace System.DirectoryServices.ActiveDirectory
         internal static IntPtr GetAuthIdentity(
             DirectoryContext context,
             LoadLibrarySafeHandle libHandle
-        ) {
+        )
+        {
             IntPtr authIdentity;
             int result = 0;
 
@@ -862,7 +869,8 @@ namespace System.DirectoryServices.ActiveDirectory
             string? domainName,
             IntPtr authIdentity,
             LoadLibrarySafeHandle libHandle
-        ) {
+        )
+        {
             int result = 0;
             IntPtr handle;
 
@@ -924,14 +932,16 @@ namespace System.DirectoryServices.ActiveDirectory
                         string supportedCapability in rootDSE.Properties[
                             PropertyManager.SupportedCapabilities
                         ]
-                    ) {
+                    )
+                    {
                         if (
                             string.Equals(
                                 supportedCapability,
                                 SupportedCapability.ADOid,
                                 StringComparison.OrdinalIgnoreCase
                             )
-                        ) {
+                        )
+                        {
                             result = true;
                             break;
                         }
@@ -943,14 +953,16 @@ namespace System.DirectoryServices.ActiveDirectory
                         string supportedCapability in rootDSE.Properties[
                             PropertyManager.SupportedCapabilities
                         ]
-                    ) {
+                    )
+                    {
                         if (
                             string.Equals(
                                 supportedCapability,
                                 SupportedCapability.ADAMOid,
                                 StringComparison.OrdinalIgnoreCase
                             )
-                        ) {
+                        )
+                        {
                             result = true;
                             break;
                         }
@@ -962,7 +974,8 @@ namespace System.DirectoryServices.ActiveDirectory
                         string supportedCapability in rootDSE.Properties[
                             PropertyManager.SupportedCapabilities
                         ]
-                    ) {
+                    )
+                    {
                         if (
                             string.Equals(
                                 supportedCapability,
@@ -974,7 +987,8 @@ namespace System.DirectoryServices.ActiveDirectory
                                 SupportedCapability.ADOid,
                                 StringComparison.OrdinalIgnoreCase
                             )
-                        ) {
+                        )
+                        {
                             result = true;
                             break;
                         }
@@ -988,7 +1002,8 @@ namespace System.DirectoryServices.ActiveDirectory
             DirectoryContext context,
             DirectoryEntry partitionsEntry,
             string partitionName
-        ) {
+        )
+        {
             // search for the crossRef that matches this one and
 
             // build the filter
@@ -1077,7 +1092,8 @@ namespace System.DirectoryServices.ActiveDirectory
         internal static string GetDNFromTransportType(
             ActiveDirectoryTransportType transport,
             DirectoryContext context
-        ) {
+        )
+        {
             string sitesDN = DirectoryEntryManager.ExpandWellKnownDN(
                 context,
                 WellKnownDN.SitesContainer
@@ -1098,7 +1114,8 @@ namespace System.DirectoryServices.ActiveDirectory
             string? serverObjectDN,
             Guid invocationID,
             DirectoryServer server
-        ) {
+        )
+        {
             string? originatingServerName = null;
 
             if (serverObjectDN == null)
@@ -1303,7 +1320,8 @@ namespace System.DirectoryServices.ActiveDirectory
             bool isForest,
             bool needPdc,
             string? source
-        ) {
+        )
+        {
             string? serverName = null;
             PrivateLocatorFlags flag = PrivateLocatorFlags.DirectoryServicesRequired;
 
@@ -1433,7 +1451,8 @@ namespace System.DirectoryServices.ActiveDirectory
             string? filter,
             ArrayList propertiesToLoad,
             SearchScope searchScope
-        ) {
+        )
+        {
             return GetValuesWithRangeRetrieval(
                 searchRootEntry,
                 filter,
@@ -1454,7 +1473,8 @@ namespace System.DirectoryServices.ActiveDirectory
             ArrayList propertiesWithRangeRetrieval,
             ArrayList propertiesWithoutRangeRetrieval,
             SearchScope searchScope
-        ) {
+        )
+        {
             ADSearcher searcher = new ADSearcher(
                 searchRootEntry,
                 filter,
@@ -1534,7 +1554,8 @@ namespace System.DirectoryServices.ActiveDirectory
                         if (
                             !propertyNamesWithRangeInfo.Contains(propertyName)
                             && !propertyNamesWithoutRangeInfo.Contains(propertyName)
-                        ) {
+                        )
+                        {
                             // we're not interested in this property (could be adspath), so just skip
                             continue;
                         }
@@ -1565,7 +1586,8 @@ namespace System.DirectoryServices.ActiveDirectory
                                         propertyToLoad.Length
                                     ) != 0
                                 )
-                            ) {
+                            )
+                            {
                                 propertiesStillToLoad.Add(propertyName);
                                 rangeStart += res.Properties[propertyNameWithRangeInfo].Count;
                             }
@@ -1592,7 +1614,8 @@ namespace System.DirectoryServices.ActiveDirectory
             bool isDefaultNC,
             bool isADAM,
             bool isGC
-        ) {
+        )
+        {
             ArrayList ntdsaNames = new ArrayList();
             ArrayList dnsNames = new ArrayList();
 
@@ -2041,7 +2064,8 @@ namespace System.DirectoryServices.ActiveDirectory
                                         objectCategoryValue.Length
                                     ) == 0
                                 )
-                            ) {
+                            )
+                            {
                                 //
                                 // ntdsa objects (return only those servers which have the partition fully instantiated)
                                 //
@@ -2064,7 +2088,8 @@ namespace System.DirectoryServices.ActiveDirectory
                                                 roObjectCategoryValue.Length
                                             ) == 0
                                         )
-                                    ) {
+                                    )
+                                    {
                                         //for read-only NCs, msDS-HasInstantiatedNCs will be populated ONLY on each RODC and it will NOT be
                                         //replicated to other DCs. So it can't be used, provided we connect to each RODC and verify it which is not
                                         //really required as msDS-NC-RO-Replica-Locations should provide the correct information.
@@ -2106,7 +2131,8 @@ namespace System.DirectoryServices.ActiveDirectory
                                                         PropertyManager.MsDSHasInstantiatedNCs.Length
                                                     ) == 0
                                                 )
-                                            ) {
+                                            )
+                                            {
                                                 propertyName = property;
                                                 break;
                                             }
@@ -2145,7 +2171,8 @@ namespace System.DirectoryServices.ActiveDirectory
                                                     partitionName.Length
                                                 ) == 0
                                             )
-                                        ) {
+                                        )
+                                        {
                                             // found the entry that corresponds to this partition so even if we didn't get all the values of the
                                             // multivalues attribute we can stop here.
                                             foundPartitionEntry = true;
@@ -2159,7 +2186,8 @@ namespace System.DirectoryServices.ActiveDirectory
                                                     1,
                                                     StringComparison.OrdinalIgnoreCase
                                                 ) == 0
-                                            ) {
+                                            )
+                                            {
                                                 // this server has the partition fully instantiated
                                                 ntdsaNames.Add(ntdsaName);
                                                 if (isADAM)
@@ -2194,7 +2222,8 @@ namespace System.DirectoryServices.ActiveDirectory
                                                 ) != 0
                                             )
                                         )
-                                    ) {
+                                    )
+                                    {
                                         needToContinueRangeRetrieval = true;
                                         ntdsaNamesForRangeRetrieval.Add(ntdsaName);
                                         rangeStart = valueCount;
@@ -2326,7 +2355,8 @@ namespace System.DirectoryServices.ActiveDirectory
                                                     PropertyManager.MsDSHasInstantiatedNCs.Length,
                                                     StringComparison.OrdinalIgnoreCase
                                                 ) == 0
-                                            ) {
+                                            )
+                                            {
                                                 propertyName = property;
                                                 break;
                                             }
@@ -2365,7 +2395,8 @@ namespace System.DirectoryServices.ActiveDirectory
                                                     partitionName.Length
                                                 ) == 0
                                             )
-                                        ) {
+                                        )
+                                        {
                                             foundPartitionEntry = true;
 
                                             if (
@@ -2377,7 +2408,8 @@ namespace System.DirectoryServices.ActiveDirectory
                                                     1,
                                                     StringComparison.OrdinalIgnoreCase
                                                 ) == 0
-                                            ) {
+                                            )
+                                            {
                                                 ntdsaNames.Add(ntdsaName);
                                                 if (isADAM)
                                                 {
@@ -2411,7 +2443,8 @@ namespace System.DirectoryServices.ActiveDirectory
                                                 ) != 0
                                             )
                                         )
-                                    ) {
+                                    )
+                                    {
                                         needToContinueRangeRetrieval = true;
                                         ntdsaNamesForRangeRetrieval.Add(ntdsaName);
                                         rangeStart += valueCount;
@@ -2641,7 +2674,8 @@ namespace System.DirectoryServices.ActiveDirectory
             string s2,
             int offset2,
             int length2
-        ) {
+        )
+        {
             if (s1 == null)
             {
                 throw new ArgumentNullException(nameof(s1));
@@ -2661,7 +2695,8 @@ namespace System.DirectoryServices.ActiveDirectory
             int offset2,
             int length2,
             uint compareFlags
-        ) {
+        )
+        {
             if (s1 == null)
             {
                 throw new ArgumentNullException(nameof(s1));
@@ -2685,7 +2720,8 @@ namespace System.DirectoryServices.ActiveDirectory
         internal static string SplitServerNameAndPortNumber(
             string serverName,
             out string? portNumber
-        ) {
+        )
+        {
             portNumber = null;
 
             int lastColon = serverName.LastIndexOf(':');
@@ -2841,7 +2877,8 @@ namespace System.DirectoryServices.ActiveDirectory
                         true,
                         ref pTokenHandle
                     )
-                ) {
+                )
+                {
                     if ((error = Marshal.GetLastWin32Error()) == 1008) // ERROR_NO_TOKEN
                     {
                         Debug.Assert(pTokenHandle == IntPtr.Zero);
@@ -2853,7 +2890,8 @@ namespace System.DirectoryServices.ActiveDirectory
                                 0x8, // TOKEN_QUERY
                                 ref pTokenHandle
                             )
-                        ) {
+                        )
+                        {
                             int lastError = Marshal.GetLastWin32Error();
                             throw new InvalidOperationException(
                                 SR.Format(SR.UnableToOpenToken, lastError)
@@ -3101,7 +3139,8 @@ namespace System.DirectoryServices.ActiveDirectory
                 && (identAuth.b4 == 0)
                 && (identAuth.b5 == 0)
                 && (identAuth.b6 == 5)
-            ) {
+            )
+            {
                 // No, so it can't be an account or builtin SID.
                 // Probably something like \Everyone or \LOCAL.
                 return SidType.FakeObject;

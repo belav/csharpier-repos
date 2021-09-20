@@ -29,7 +29,8 @@ namespace Microsoft.Extensions.DependencyInjection.ServiceLookup
         protected override ILEmitCallSiteAnalysisResult VisitConstructor(
             ConstructorCallSite constructorCallSite,
             object argument
-        ) {
+        )
+        {
             var result = new ILEmitCallSiteAnalysisResult(ConstructorILSize);
             foreach (ServiceCallSite callSite in constructorCallSite.ParameterCallSites)
             {
@@ -46,7 +47,8 @@ namespace Microsoft.Extensions.DependencyInjection.ServiceLookup
         protected override ILEmitCallSiteAnalysisResult VisitScopeCache(
             ServiceCallSite scopedCallSite,
             object argument
-        ) {
+        )
+        {
             return new ILEmitCallSiteAnalysisResult(ScopedILSize, hasScope: true).Add(
                 VisitCallSiteMain(scopedCallSite, argument)
             );
@@ -70,7 +72,8 @@ namespace Microsoft.Extensions.DependencyInjection.ServiceLookup
         protected override ILEmitCallSiteAnalysisResult VisitIEnumerable(
             IEnumerableCallSite enumerableCallSite,
             object argument
-        ) {
+        )
+        {
             var result = new ILEmitCallSiteAnalysisResult(ConstructorILSize);
             foreach (ServiceCallSite callSite in enumerableCallSite.ServiceCallSites)
             {

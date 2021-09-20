@@ -639,7 +639,8 @@ namespace Microsoft.AspNetCore.Mvc.Rendering
         public void CheckBoxForWithNonNullContainer_UsesPropertyValue(
             bool value,
             string expectedChecked
-        ) {
+        )
+        {
             // Arrange
             var requiredMessage = ValidationAttributeUtil.GetRequiredErrorMessage("Property1");
             // Mono issue - https://github.com/aspnet/External/issues/19
@@ -712,7 +713,8 @@ namespace Microsoft.AspNetCore.Mvc.Rendering
         public void CheckBoxFor_UsesModelStateAttemptedValue(
             string attemptedValue,
             string expectedChecked
-        ) {
+        )
+        {
             // Arrange
             var requiredMessage = ValidationAttributeUtil.GetRequiredErrorMessage("Property1");
             var expected =

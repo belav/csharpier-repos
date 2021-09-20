@@ -66,7 +66,8 @@ namespace System.Speech.Synthesis
             VoiceAge age,
             int voiceAlternate,
             CultureInfo culture
-        ) {
+        )
+        {
             Helpers.ThrowIfNull(culture, nameof(culture));
 
             if (voiceAlternate < 0)
@@ -241,7 +242,8 @@ namespace System.Speech.Synthesis
         public void SetOutputToAudioStream(
             Stream audioDestination,
             SpeechAudioFormatInfo formatInfo
-        ) {
+        )
+        {
             Helpers.ThrowIfNull(audioDestination, nameof(audioDestination));
             Helpers.ThrowIfNull(formatInfo, nameof(formatInfo));
 
@@ -528,7 +530,8 @@ namespace System.Speech.Synthesis
             SpeechAudioFormatInfo formatInfo,
             bool headerInfo,
             bool closeStreamOnExit
-        ) {
+        )
+        {
             SetOutputToNull();
             _outputStream = stream;
             _closeStreamOnExit = closeStreamOnExit;

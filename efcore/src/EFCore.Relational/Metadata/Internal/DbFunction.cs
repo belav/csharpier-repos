@@ -60,13 +60,15 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
             MethodInfo methodInfo,
             IMutableModel model,
             ConfigurationSource configurationSource
-        ) : this(
-            methodInfo.Name,
-            methodInfo.ReturnType,
-            methodInfo.GetParameters().Select(pi => (pi.Name!, pi.ParameterType)),
-            model,
-            configurationSource
-        ) {
+        )
+            : this(
+                methodInfo.Name,
+                methodInfo.ReturnType,
+                methodInfo.GetParameters().Select(pi => (pi.Name!, pi.ParameterType)),
+                model,
+                configurationSource
+            )
+        {
             if (methodInfo.IsGenericMethod)
             {
                 throw new ArgumentException(
@@ -77,7 +79,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
             if (
                 !methodInfo.IsStatic
                 && !typeof(DbContext).IsAssignableFrom(methodInfo.DeclaringType)
-            ) {
+            )
+            {
                 // ReSharper disable once AssignNullToNotNullAttribute
                 throw new ArgumentException(
                     RelationalStrings.DbFunctionInvalidInstanceType(
@@ -104,7 +107,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
             IEnumerable<(string Name, Type Type)>? parameters,
             IMutableModel model,
             ConfigurationSource configurationSource
-        ) {
+        )
+        {
             Check.NotEmpty(name, nameof(name));
 
             if (returnType == null || returnType == typeof(void))
@@ -246,7 +250,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
             IMutableModel model,
             MethodInfo methodInfo,
             ConfigurationSource configurationSource
-        ) {
+        )
+        {
             var function = new DbFunction(methodInfo, model, configurationSource);
 
             GetOrCreateFunctions(model).Add(function.ModelName, function);
@@ -264,7 +269,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
             string name,
             Type returnType,
             ConfigurationSource configurationSource
-        ) {
+        )
+        {
             var function = new DbFunction(name, returnType, null, model, configurationSource);
 
             GetOrCreateFunctions(model).Add(name, function);
@@ -292,7 +298,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
             if (
                 model[RelationalAnnotationNames.DbFunctions]
                 is SortedDictionary<string, IDbFunction> functions
-            ) {
+            )
+            {
                 var name = GetFunctionName(methodInfo, methodInfo.GetParameters());
                 if (functions.TryGetValue(name, out var function))
                 {
@@ -319,7 +326,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
                 model[RelationalAnnotationNames.DbFunctions]
                     is SortedDictionary<string, IDbFunction> functions
                 && functions.TryGetValue(name, out var function)
-            ) {
+            )
+            {
                 functions.Remove(name);
                 ((DbFunction)function).SetRemovedFromModel();
             }
@@ -542,7 +550,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
         public virtual string? SetStoreType(
             string? storeType,
             ConfigurationSource configurationSource
-        ) {
+        )
+        {
             EnsureMutable();
 
             _storeType = storeType;
@@ -600,7 +609,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
         public virtual RelationalTypeMapping? SetTypeMapping(
             RelationalTypeMapping? typeMapping,
             ConfigurationSource configurationSource
-        ) {
+        )
+        {
             _typeMapping = typeMapping;
 
             _typeMappingConfigurationSource =
@@ -641,7 +651,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
         public virtual Func<IReadOnlyList<SqlExpression>, SqlExpression>? SetTranslation(
             Func<IReadOnlyList<SqlExpression>, SqlExpression>? translation,
             ConfigurationSource configurationSource
-        ) {
+        )
+        {
             EnsureMutable();
 
             if (translation != null && (!IsScalar || IsAggregate))

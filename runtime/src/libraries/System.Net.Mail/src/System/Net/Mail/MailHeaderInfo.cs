@@ -23,7 +23,8 @@ namespace System.Net.Mail
                 bool isSingleton,
                 bool isUserSettable,
                 bool allowsUnicode
-            ) {
+            )
+            {
                 ID = id;
                 NormalizedName = name;
                 IsSingleton = isSingleton;

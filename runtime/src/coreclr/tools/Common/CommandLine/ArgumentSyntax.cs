@@ -32,7 +32,8 @@ namespace Internal.CommandLine
         public static ArgumentSyntax Parse(
             IEnumerable<string> arguments,
             Action<ArgumentSyntax> defineAction
-        ) {
+        )
+        {
             if (arguments == null)
                 throw new ArgumentNullException("arguments");
 
@@ -149,7 +150,8 @@ namespace Internal.CommandLine
             T defaultValue,
             Func<string, T> valueConverter,
             bool isRequired
-        ) {
+        )
+        {
             if (string.IsNullOrEmpty(name))
                 throw new ArgumentException(Strings.NameMissing, "name");
 
@@ -174,7 +176,8 @@ namespace Internal.CommandLine
                         out T value,
                         out bool specified
                     )
-                ) {
+                )
+                {
                     option.SetValue(value);
                 }
                 else if (specified)
@@ -196,7 +199,8 @@ namespace Internal.CommandLine
             IReadOnlyList<T> defaultValue,
             Func<string, T> valueConverter,
             bool isRequired
-        ) {
+        )
+        {
             if (string.IsNullOrEmpty(name))
                 throw new ArgumentException(Strings.NameMissing, "name");
 
@@ -221,7 +225,8 @@ namespace Internal.CommandLine
                         out IReadOnlyList<T> value,
                         out bool specified
                     )
-                ) {
+                )
+                {
                     optionList.SetValue(value);
                 }
                 else if (specified)
@@ -242,7 +247,8 @@ namespace Internal.CommandLine
             string name,
             T defaultValue,
             Func<string, T> valueConverter
-        ) {
+        )
+        {
             if (string.IsNullOrEmpty(name))
                 throw new ArgumentException(Strings.NameMissing, "name");
 
@@ -259,7 +265,8 @@ namespace Internal.CommandLine
                 DefinedParameters.Any(
                     p => string.Equals(name, p.Name, StringComparison.OrdinalIgnoreCase)
                 )
-            ) {
+            )
+            {
                 var message = string.Format(Strings.ParameterAlreadyDefinedFmt, name);
                 throw new InvalidOperationException(message);
             }
@@ -293,7 +300,8 @@ namespace Internal.CommandLine
             string name,
             IReadOnlyList<T> defaultValue,
             Func<string, T> valueConverter
-        ) {
+        )
+        {
             if (string.IsNullOrEmpty(name))
                 throw new ArgumentException(Strings.NameMissing, "name");
 

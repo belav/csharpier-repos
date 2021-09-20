@@ -42,13 +42,14 @@ namespace Microsoft.CodeAnalysis.CodeRefactorings
             TextSpan span,
             Action<CodeAction> registerRefactoring,
             CancellationToken cancellationToken
-        ) : this(
-            document,
-            span,
-            (action, textSpan) => registerRefactoring(action),
-            isBlocking: false,
-            cancellationToken
-        ) { }
+        )
+            : this(
+                document,
+                span,
+                (action, textSpan) => registerRefactoring(action),
+                isBlocking: false,
+                cancellationToken
+            ) { }
 
         /// <summary>
         /// Creates a code refactoring context to be passed into <see cref="CodeRefactoringProvider.ComputeRefactoringsAsync(CodeRefactoringContext)"/> method.
@@ -59,7 +60,8 @@ namespace Microsoft.CodeAnalysis.CodeRefactorings
             Action<CodeAction, TextSpan?> registerRefactoring,
             bool isBlocking,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             // NOTE/TODO: Don't make this overload public & obsolete the `Action<CodeAction> registerRefactoring`
             // overload to stop leaking the Lambda implementation detail.
             Document = document ?? throw new ArgumentNullException(nameof(document));
@@ -103,7 +105,8 @@ namespace Microsoft.CodeAnalysis.CodeRefactorings
             out Document document,
             out TextSpan span,
             out CancellationToken cancellationToken
-        ) {
+        )
+        {
             document = Document;
             span = Span;
             cancellationToken = CancellationToken;

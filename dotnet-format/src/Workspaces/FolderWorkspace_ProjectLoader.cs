@@ -18,7 +18,8 @@ namespace Microsoft.CodeAnalysis.Tools.Workspaces
                 string folderPath,
                 ImmutableArray<string> filePaths,
                 ImmutableArray<string> editorConfigPaths
-            ) {
+            )
+            {
                 var projectFilePaths = ImmutableArray.CreateBuilder<string>(filePaths.Length);
                 for (var index = 0; index < filePaths.Length; index++)
                 {
@@ -49,7 +50,8 @@ namespace Microsoft.CodeAnalysis.Tools.Workspaces
                 static IEnumerable<DocumentInfo> LoadDocuments(
                     ProjectId projectId,
                     ImmutableArray<string> filePaths
-                ) {
+                )
+                {
                     var documents = new DocumentInfo[filePaths.Length];
                     for (var index = 0; index < filePaths.Length; index++)
                     {

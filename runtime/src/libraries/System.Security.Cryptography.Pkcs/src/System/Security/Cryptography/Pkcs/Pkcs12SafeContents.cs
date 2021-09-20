@@ -116,7 +116,8 @@ namespace System.Security.Cryptography.Pkcs
             AsymmetricAlgorithm key,
             byte[]? passwordBytes,
             PbeParameters pbeParameters
-        ) {
+        )
+        {
             return AddShroudedKey(
                 key,
                 // Allows null
@@ -129,7 +130,8 @@ namespace System.Security.Cryptography.Pkcs
             AsymmetricAlgorithm key,
             ReadOnlySpan<byte> passwordBytes,
             PbeParameters pbeParameters
-        ) {
+        )
+        {
             if (key == null)
                 throw new ArgumentNullException(nameof(key));
             if (IsReadOnly)
@@ -148,7 +150,8 @@ namespace System.Security.Cryptography.Pkcs
             AsymmetricAlgorithm key,
             string? password,
             PbeParameters pbeParameters
-        ) {
+        )
+        {
             return AddShroudedKey(
                 key,
                 // This extension method invoke allows null.
@@ -161,7 +164,8 @@ namespace System.Security.Cryptography.Pkcs
             AsymmetricAlgorithm key,
             ReadOnlySpan<char> password,
             PbeParameters pbeParameters
-        ) {
+        )
+        {
             if (key == null)
                 throw new ArgumentNullException(nameof(key));
             if (IsReadOnly)
@@ -369,7 +373,8 @@ namespace System.Security.Cryptography.Pkcs
             ReadOnlySpan<char> password,
             ReadOnlySpan<byte> passwordBytes,
             PbeParameters pbeParameters
-        ) {
+        )
+        {
             Debug.Assert(pbeParameters != null);
             Debug.Assert(pbeParameters.IterationCount >= 1);
 
@@ -458,7 +463,8 @@ namespace System.Security.Cryptography.Pkcs
             if (
                 ConfidentialityMode == Pkcs12ConfidentialityMode.Password
                 || ConfidentialityMode == Pkcs12ConfidentialityMode.PublicKey
-            ) {
+            )
+            {
                 writer = new AsnWriter(AsnEncodingRules.BER);
                 writer.WriteEncodedValueForCrypto(_encrypted.Span);
                 return writer;

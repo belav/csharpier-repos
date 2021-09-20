@@ -61,7 +61,8 @@ namespace System.Reflection.Emit
             string eventName,
             EventAttributes eventAttrs,
             Type eventType
-        ) {
+        )
+        {
             name = eventName;
             attrs = eventAttrs;
             type = eventType;

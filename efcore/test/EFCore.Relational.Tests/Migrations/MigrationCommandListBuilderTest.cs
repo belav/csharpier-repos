@@ -18,7 +18,8 @@ namespace Microsoft.EntityFrameworkCore.Migrations
         [InlineData(true)]
         public void MigrationCommandListBuilder_groups_multiple_statements_into_one_batch(
             bool suppressTransaction
-        ) {
+        )
+        {
             var commandListBuilder = CreateBuilder();
             commandListBuilder.AppendLine("Statement1");
             commandListBuilder.AppendLine("Statement2");
@@ -46,7 +47,8 @@ Statement3
         [InlineData(true)]
         public void MigrationCommandListBuilder_correctly_produces_multiple_batches(
             bool suppressTransaction
-        ) {
+        )
+        {
             var commandListBuilder = CreateBuilder();
             commandListBuilder.AppendLine("Statement1");
             commandListBuilder.EndCommand(suppressTransaction);

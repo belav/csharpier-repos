@@ -16,7 +16,8 @@ namespace System.Security.Cryptography.Primitives.Tests
             int plaintextSize,
             int expectedCiphertextSize,
             int alignmentSizeInBits
-        ) {
+        )
+        {
             AnySizeAlgorithm alg = new AnySizeAlgorithm { BlockSize = alignmentSizeInBits };
             int ciphertextSizeCbc = alg.GetCiphertextLengthCbc(plaintextSize, mode);
             int ciphertextSizeEcb = alg.GetCiphertextLengthEcb(plaintextSize, mode);
@@ -31,7 +32,8 @@ namespace System.Security.Cryptography.Primitives.Tests
             int plaintextSize,
             int expectedCiphertextSize,
             int alignmentSizeInBits
-        ) {
+        )
+        {
             AnySizeAlgorithm alg = new AnySizeAlgorithm();
             int ciphertextSizeCfb = alg.GetCiphertextLengthCfb(
                 plaintextSize,

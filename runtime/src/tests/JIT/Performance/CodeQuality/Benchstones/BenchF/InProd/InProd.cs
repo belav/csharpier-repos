@@ -91,7 +91,8 @@ namespace Benchstone.BenchF
             double[][] b,
             int row,
             int col
-        ) {
+        )
+        {
             result = 0.0;
             for (int i = 1; i < RowSize; i++)
             {

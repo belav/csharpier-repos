@@ -122,7 +122,8 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.operate.compoun
                         "Base2",
                         "TestClass"
                     )
-                ) {
+                )
+                {
                     flag++;
                 }
             }
@@ -142,7 +143,8 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.operate.compoun
                         "Base2",
                         "TestClass"
                     )
-                ) {
+                )
+                {
                     flag++;
                 }
             }
@@ -160,7 +162,8 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.operate.compoun
                         "Base2",
                         "TestClass"
                     )
-                ) {
+                )
+                {
                     flag++;
                 }
             }
@@ -281,7 +284,8 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.operate.compoun
                         "Base2",
                         "TestStruct"
                     )
-                ) {
+                )
+                {
                     flag++;
                 }
             }
@@ -300,7 +304,8 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.operate.compoun
                         "Base2",
                         "TestStruct"
                     )
-                ) {
+                )
+                {
                     flag++;
                 }
             }
@@ -320,7 +325,8 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.operate.compoun
                         "Base2",
                         "TestStruct"
                     )
-                ) {
+                )
+                {
                     flag++;
                 }
             }
@@ -338,7 +344,8 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.operate.compoun
                         "Base2",
                         "TestStruct"
                     )
-                ) {
+                )
+                {
                     flag++;
                 }
             }

@@ -47,12 +47,14 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.TaskList
             ProjectId projectId,
             string errorCodePrefix,
             IServiceProvider serviceProvider
-        ) : this(
-            projectId,
-            errorCodePrefix,
-            LanguageNames.FSharp,
-            (VisualStudioWorkspaceImpl)serviceProvider.GetMefService<VisualStudioWorkspace>()
-        ) {
+        )
+            : this(
+                projectId,
+                errorCodePrefix,
+                LanguageNames.FSharp,
+                (VisualStudioWorkspaceImpl)serviceProvider.GetMefService<VisualStudioWorkspace>()
+            )
+        {
             ThreadHelper.ThrowIfNotOnUIThread();
             _workspace.SubscribeExternalErrorDiagnosticUpdateSourceToSolutionBuildEvents();
         }
@@ -62,7 +64,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.TaskList
             string errorCodePrefix,
             string language,
             VisualStudioWorkspaceImpl workspace
-        ) {
+        )
+        {
             Debug.Assert(projectId != null);
             Debug.Assert(errorCodePrefix != null);
             Debug.Assert(workspace != null);
@@ -232,7 +235,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.TaskList
             int iLine,
             int iColumn,
             string bstrFileName
-        ) {
+        )
+        {
             ReportError2(
                 bstrErrorMessage,
                 bstrErrorId,
@@ -256,7 +260,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.TaskList
             int iEndLine,
             int iEndColumn,
             string bstrFileName
-        ) {
+        )
+        {
             // first we check whether given error is something we can take care.
             if (!CanHandle(bstrErrorId))
             {
@@ -269,7 +274,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.TaskList
                 && (
                     (iEndLine < iStartLine) || (iEndLine == iStartLine && iEndColumn < iStartColumn)
                 )
-            ) {
+            )
+            {
                 throw new ArgumentException(
                     ServicesVSResources.End_position_must_be_start_position
                 );
@@ -350,7 +356,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.TaskList
             int originalStartColumn,
             int originalEndLine,
             int originalEndColumn
-        ) {
+        )
+        {
             return new DiagnosticData(
                 id: errorId,
                 category: WellKnownDiagnosticTags.Build,
@@ -392,7 +399,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.TaskList
                 if (
                     prefix.Equals("CS", StringComparison.OrdinalIgnoreCase)
                     || prefix.Equals("BC", StringComparison.OrdinalIgnoreCase)
-                ) {
+                )
+                {
                     var suffix = errorId.Substring(2);
                     return int.TryParse(suffix, out _);
                 }

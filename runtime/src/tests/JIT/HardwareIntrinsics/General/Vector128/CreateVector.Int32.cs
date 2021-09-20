@@ -82,7 +82,8 @@ namespace JIT.HardwareIntrinsics.General
             Int32 expectedLowerValue,
             Int32 expectedUpperValue,
             [CallerMemberName] string method = ""
-        ) {
+        )
+        {
             Int32[] resultElements = new Int32[ElementCount];
             Unsafe.WriteUnaligned(ref Unsafe.As<Int32, byte>(ref resultElements[0]), result);
             ValidateResult(resultElements, expectedLowerValue, expectedUpperValue, method);
@@ -93,7 +94,8 @@ namespace JIT.HardwareIntrinsics.General
             Int32 expectedLowerValue,
             Int32 expectedUpperValue,
             [CallerMemberName] string method = ""
-        ) {
+        )
+        {
             bool succeeded = true;
 
             for (var i = 0; i < ElementCount / 2; i++)

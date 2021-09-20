@@ -17,7 +17,8 @@ namespace Internal.ReadyToRunConstants
         public static ReadyToRunInstructionSet? R2RInstructionSet(
             this InstructionSet instructionSet,
             TargetArchitecture architecture
-        ) {
+        )
+        {
             switch (architecture)
             {
                 case TargetArchitecture.ARM64:

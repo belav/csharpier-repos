@@ -67,7 +67,8 @@ namespace Microsoft.AspNetCore.Mvc.Routing
                     segment.Length == 0
                     || segment.Equals(ParentDirectoryToken, StringComparison.Ordinal)
                     || segment.Equals(CurrentDirectoryToken, StringComparison.Ordinal)
-                ) {
+                )
+                {
                     requiresResolution = true;
                     break;
                 }

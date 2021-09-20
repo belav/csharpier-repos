@@ -117,7 +117,8 @@ namespace System.Net.Http.Tests
             int startIndex,
             int expectedResult,
             int expectedIndex
-        ) {
+        )
+        {
             Int32NumberHeaderParser parser = Int32NumberHeaderParser.Parser;
             object result = 0;
             Assert.True(

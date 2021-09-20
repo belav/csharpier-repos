@@ -450,7 +450,8 @@ namespace JIT.HardwareIntrinsics.X86
             Vector128<Double> right,
             void* result,
             [CallerMemberName] string method = ""
-        ) {
+        )
+        {
             Double[] inArray1 = new Double[Op1ElementCount];
             Double[] inArray2 = new Double[Op2ElementCount];
             Double[] outArray = new Double[RetElementCount];
@@ -471,7 +472,8 @@ namespace JIT.HardwareIntrinsics.X86
             void* right,
             void* result,
             [CallerMemberName] string method = ""
-        ) {
+        )
+        {
             Double[] inArray1 = new Double[Op1ElementCount];
             Double[] inArray2 = new Double[Op2ElementCount];
             Double[] outArray = new Double[RetElementCount];
@@ -500,12 +502,14 @@ namespace JIT.HardwareIntrinsics.X86
             Double[] right,
             Double[] result,
             [CallerMemberName] string method = ""
-        ) {
+        )
+        {
             bool succeeded = true;
 
             if (
                 BitConverter.DoubleToInt64Bits(result[0]) != BitConverter.DoubleToInt64Bits(left[0])
-            ) {
+            )
+            {
                 succeeded = false;
             }
             else
@@ -519,7 +523,8 @@ namespace JIT.HardwareIntrinsics.X86
                                 ? BitConverter.DoubleToInt64Bits(left[i])
                                 : BitConverter.DoubleToInt64Bits(right[i - 2])
                         )
-                    ) {
+                    )
+                    {
                         succeeded = false;
                         break;
                     }

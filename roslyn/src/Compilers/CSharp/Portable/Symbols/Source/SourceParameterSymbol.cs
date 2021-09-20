@@ -38,7 +38,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             bool isExtensionMethodThis,
             bool addRefReadOnlyModifier,
             BindingDiagnosticBag declarationDiagnostics
-        ) {
+        )
+        {
             Debug.Assert(!(owner is LambdaSymbol)); // therefore we don't need to deal with discard parameters
 
             var name = identifier.ValueText;
@@ -86,7 +87,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                 && (syntax.Default == null)
                 && (syntax.AttributeLists.Count == 0)
                 && !owner.IsPartialMethod()
-            ) {
+            )
+            {
                 return new SourceSimpleParameterSymbol(
                     owner,
                     parameterType,
@@ -138,7 +140,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             ImmutableArray<CustomModifier> newCustomModifiers,
             ImmutableArray<CustomModifier> newRefCustomModifiers,
             bool newIsParams
-        ) {
+        )
+        {
             return WithCustomModifiersAndParamsCore(
                 newType,
                 newCustomModifiers,
@@ -152,7 +155,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             ImmutableArray<CustomModifier> newCustomModifiers,
             ImmutableArray<CustomModifier> newRefCustomModifiers,
             bool newIsParams
-        ) {
+        )
+        {
             newType = CustomModifierUtils.CopyTypeCustomModifiers(
                 newType,
                 this.Type,
@@ -207,7 +211,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
         internal override void ForceComplete(
             SourceLocation locationOpt,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             state.DefaultForceComplete(this, cancellationToken);
         }
 

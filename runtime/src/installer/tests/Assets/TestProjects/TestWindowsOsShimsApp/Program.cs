@@ -157,7 +157,8 @@ namespace TestWindowsOsShimsApp
                     TypeMask.VER_MAJORVERSION | TypeMask.VER_MINORVERSION,
                     conditionMask
                 )
-            ) {
+            )
+            {
                 return true;
             }
             else

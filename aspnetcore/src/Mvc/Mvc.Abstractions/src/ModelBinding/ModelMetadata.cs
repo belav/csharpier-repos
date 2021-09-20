@@ -134,7 +134,8 @@ namespace Microsoft.AspNetCore.Mvc.ModelBinding
                                     )
                                     && p.ModelType == metadata.ModelType
                             )
-                        ) {
+                        )
+                        {
                             boundProperties.Add(metadata);
                         }
                     }

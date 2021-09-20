@@ -72,7 +72,8 @@ namespace System.IO
             int offset,
             int count,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             if (cancellationToken.IsCancellationRequested)
             {
                 return Task.FromCanceled(cancellationToken);
@@ -85,7 +86,8 @@ namespace System.IO
         public override ValueTask WriteAsync(
             ReadOnlyMemory<byte> buffer,
             CancellationToken cancellationToken = default
-        ) {
+        )
+        {
             if (cancellationToken.IsCancellationRequested)
             {
                 return ValueTask.FromCanceled(cancellationToken);

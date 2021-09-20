@@ -18,7 +18,8 @@ namespace Microsoft.CodeAnalysis.CompilerServer.UnitTests
         internal TestableCompilerServerHost(
             Func<RunRequest, CancellationToken, BuildResponse> runCompilation = null,
             ICompilerServerLogger logger = null
-        ) {
+        )
+        {
             RunCompilation = runCompilation;
             Logger = logger ?? EmptyCompilerServerLogger.Instance;
         }
@@ -26,7 +27,8 @@ namespace Microsoft.CodeAnalysis.CompilerServer.UnitTests
         BuildResponse ICompilerServerHost.RunCompilation(
             in RunRequest request,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             return RunCompilation(request, cancellationToken);
         }
     }

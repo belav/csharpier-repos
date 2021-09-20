@@ -104,7 +104,8 @@ namespace Microsoft.Extensions.DependencyInjection.ServiceLookup
             CallSiteRuntimeResolver runtimeResolver,
             IServiceScopeFactory serviceScopeFactory,
             ServiceProviderEngineScope rootScope
-        ) {
+        )
+        {
             if (runtimeResolver == null)
             {
                 throw new ArgumentNullException(nameof(runtimeResolver));
@@ -163,7 +164,8 @@ namespace Microsoft.Extensions.DependencyInjection.ServiceLookup
 
         private Expression<Func<ServiceProviderEngineScope, object>> BuildExpression(
             ServiceCallSite callSite
-        ) {
+        )
+        {
             if (callSite.Cache.Location == CallSiteResultCacheLocation.Scope)
             {
                 return Expression.Lambda<Func<ServiceProviderEngineScope, object>>(
@@ -190,28 +192,32 @@ namespace Microsoft.Extensions.DependencyInjection.ServiceLookup
         protected override Expression VisitRootCache(
             ServiceCallSite singletonCallSite,
             object context
-        ) {
+        )
+        {
             return Expression.Constant(_runtimeResolver.Resolve(singletonCallSite, _rootScope));
         }
 
         protected override Expression VisitConstant(
             ConstantCallSite constantCallSite,
             object context
-        ) {
+        )
+        {
             return Expression.Constant(constantCallSite.DefaultValue);
         }
 
         protected override Expression VisitServiceProvider(
             ServiceProviderCallSite serviceProviderCallSite,
             object context
-        ) {
+        )
+        {
             return ScopeParameter;
         }
 
         protected override Expression VisitServiceScopeFactory(
             ServiceScopeFactoryCallSite serviceScopeFactoryCallSite,
             object context
-        ) {
+        )
+        {
             return Expression.Constant(_serviceScopeFactory);
         }
 
@@ -260,7 +266,8 @@ namespace Microsoft.Extensions.DependencyInjection.ServiceLookup
             ServiceCallSite callSite,
             ParameterExpression scope,
             Expression service
-        ) {
+        )
+        {
             if (!callSite.CaptureDisposable)
             {
                 return service;
@@ -295,12 +302,14 @@ namespace Microsoft.Extensions.DependencyInjection.ServiceLookup
             Expression expression,
             Type type,
             bool forceValueTypeConversion = false
-        ) {
+        )
+        {
             // Don't convert if the expression is already assignable
             if (
                 type.IsAssignableFrom(expression.Type)
                 && (!expression.Type.IsValueType || !forceValueTypeConversion)
-            ) {
+            )
+            {
                 return expression;
             }
 

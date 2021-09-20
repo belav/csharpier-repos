@@ -33,7 +33,8 @@ namespace BlazorServerWeb_CSharp.Areas.Identity
         protected override async Task<bool> ValidateAuthenticationStateAsync(
             AuthenticationState authenticationState,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             // Get the user manager from a new scope to ensure it fetches fresh data
             var scope = _scopeFactory.CreateScope();
             try
@@ -58,7 +59,8 @@ namespace BlazorServerWeb_CSharp.Areas.Identity
         private async Task<bool> ValidateSecurityStampAsync(
             UserManager<TUser> userManager,
             ClaimsPrincipal principal
-        ) {
+        )
+        {
             var user = await userManager.GetUserAsync(principal);
             if (user == null)
             {

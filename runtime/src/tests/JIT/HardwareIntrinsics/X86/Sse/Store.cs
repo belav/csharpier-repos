@@ -26,7 +26,8 @@ namespace IntelHardwareIntrinsicTest
                         new float[4] { 1, -5, 100, 0 },
                         new float[4]
                     )
-                ) {
+                )
+                {
                     var vf = Unsafe.Read<Vector128<float>>(floatTable.inArrayPtr);
                     Sse.Store((float*)(floatTable.outArrayPtr), vf);
 
@@ -36,7 +37,8 @@ namespace IntelHardwareIntrinsicTest
                                 BitConverter.SingleToInt32Bits(x)
                                 == BitConverter.SingleToInt32Bits(y)
                         )
-                    ) {
+                    )
+                    {
                         Console.WriteLine("SSE Store failed on float:");
                         foreach (var item in floatTable.outArray)
                         {

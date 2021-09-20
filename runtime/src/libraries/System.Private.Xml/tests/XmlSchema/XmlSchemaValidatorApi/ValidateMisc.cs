@@ -41,7 +41,8 @@ namespace System.Xml.Tests
             int expCountGT,
             int expCountGE,
             int expCountGA
-        ) {
+        )
+        {
             Initialize();
             string xsd = Path.Combine(path, testDir, testFile);
 
@@ -116,7 +117,8 @@ namespace System.Xml.Tests
             int expCountGT,
             int expCountGE,
             int expCountGA
-        ) {
+        )
+        {
             Initialize();
             string xsd = Path.Combine(path, testDir, testFile + ".xsd");
             string xml = Path.Combine(path, testDir, testFile + ".xml");
@@ -205,7 +207,8 @@ namespace System.Xml.Tests
             int expCountGA,
             int expCountGER,
             int expCountGERC
-        ) {
+        )
+        {
             Initialize();
             string xsd = Path.Combine(path, testDir, testFile);
 
@@ -325,7 +328,8 @@ namespace System.Xml.Tests
             int expCountGA,
             int expCountGER,
             int expCountGERC
-        ) {
+        )
+        {
             Initialize();
             string xsd = Path.Combine(path, testDir, testFile + ".xsd");
             string xml = Path.Combine(path, testDir, testFile + ".xml");
@@ -583,7 +587,8 @@ namespace System.Xml.Tests
             int expCount,
             int expCountGT,
             int expCountGE
-        ) {
+        )
+        {
             string xsd = Path.Combine(path, testDir, testFile);
 
             XmlSchemaSet ss = new XmlSchemaSet();
@@ -630,7 +635,8 @@ namespace System.Xml.Tests
             string testFile,
             int expCountGT,
             int expCountGE
-        ) {
+        )
+        {
             string xsd = Path.Combine(path, testDir, testFile);
 
             XmlSchemaSet ss = new XmlSchemaSet();
@@ -1005,7 +1011,8 @@ namespace System.Xml.Tests
 
             using (
                 XmlWriter w = XmlWriter.Create(Path.Combine(testDirectory, "commonstructure.xsd"))
-            ) {
+            )
+            {
                 using (XmlReader r = XmlReader.Create(new StringReader(commonxsd)))
                 {
                     w.WriteNode(r, true);
@@ -1074,7 +1081,8 @@ namespace System.Xml.Tests
 
             using (
                 XmlWriter w = XmlWriter.Create(Path.Combine(testDirectory, "commonstructure1.xsd"))
-            ) {
+            )
+            {
                 using (XmlReader r = XmlReader.Create(new StringReader(commonxsd1)))
                 {
                     w.WriteNode(r, true);
@@ -1082,7 +1090,8 @@ namespace System.Xml.Tests
             }
             using (
                 XmlWriter w = XmlWriter.Create(Path.Combine(testDirectory, "commonstructure2.xsd"))
-            ) {
+            )
+            {
                 using (XmlReader r = XmlReader.Create(new StringReader(commonxsd2)))
                 {
                     w.WriteNode(r, true);
@@ -1358,7 +1367,8 @@ namespace System.Xml.Tests
                     new StringReader("<validationTest>test_test</validationTest>"),
                     rs
                 )
-            ) {
+            )
+            {
                 while (r.Read())
                     ;
             }

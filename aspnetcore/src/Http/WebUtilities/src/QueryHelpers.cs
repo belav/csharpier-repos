@@ -79,7 +79,8 @@ namespace Microsoft.AspNetCore.WebUtilities
         public static string AddQueryString(
             string uri,
             IEnumerable<KeyValuePair<string, StringValues>> queryString
-        ) {
+        )
+        {
             if (uri == null)
             {
                 throw new ArgumentNullException(nameof(uri));
@@ -110,7 +111,8 @@ namespace Microsoft.AspNetCore.WebUtilities
         public static string AddQueryString(
             string uri,
             IEnumerable<KeyValuePair<string, string?>> queryString
-        ) {
+        )
+        {
             if (uri == null)
             {
                 throw new ArgumentNullException(nameof(uri));

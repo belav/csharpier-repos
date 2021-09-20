@@ -22,7 +22,8 @@ namespace Microsoft.CodeAnalysis.ChangeSignature
             int positionForTypeBinding,
             ISymbol symbol,
             ParameterConfiguration parameterConfiguration
-        ) {
+        )
+        {
             Document = document;
             Symbol = symbol;
             ParameterConfiguration = parameterConfiguration;

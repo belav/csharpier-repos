@@ -520,7 +520,8 @@ namespace System.Collections.Immutable
             void ICollection<KeyValuePair<TKey, TValue>>.CopyTo(
                 KeyValuePair<TKey, TValue>[] array,
                 int arrayIndex
-            ) {
+            )
+            {
                 this.Root.CopyTo(array, arrayIndex, this.Count);
             }
 
@@ -688,7 +689,8 @@ namespace System.Collections.Immutable
         /// <param name="map">The collection to display in the debugger</param>
         public ImmutableSortedDictionaryBuilderDebuggerProxy(
             ImmutableSortedDictionary<TKey, TValue>.Builder map
-        ) {
+        )
+        {
             Requires.NotNull(map, nameof(map));
             _map = map;
         }

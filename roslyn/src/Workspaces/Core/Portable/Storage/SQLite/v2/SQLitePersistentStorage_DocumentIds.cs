@@ -26,7 +26,8 @@ namespace Microsoft.CodeAnalysis.SQLite.v2
             DocumentKey documentKey,
             string name,
             out long dataId
-        ) {
+        )
+        {
             dataId = 0;
 
             var documentId = TryGetDocumentId(connection, documentKey);

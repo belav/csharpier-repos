@@ -444,7 +444,8 @@ namespace System.Configuration
             MgmtConfigurationRecord configRecord,
             FactoryRecord factoryRecord,
             SectionRecord sectionRecord
-        ) {
+        )
+        {
             SetRuntimeConfigurationInformation(configRecord, factoryRecord, sectionRecord);
             _configRecord = configRecord;
         }
@@ -453,7 +454,8 @@ namespace System.Configuration
             BaseConfigurationRecord configRecord,
             FactoryRecord factoryRecord,
             SectionRecord sectionRecord
-        ) {
+        )
+        {
             _flags[FlagAttached] = true;
 
             // factory info

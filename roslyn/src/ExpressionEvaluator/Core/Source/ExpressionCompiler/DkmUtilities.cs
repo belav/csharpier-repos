@@ -32,7 +32,8 @@ namespace Microsoft.CodeAnalysis.ExpressionEvaluator
         private static IEnumerable<DkmClrModuleInstance> GetModulesInAppDomain(
             this DkmClrRuntimeInstance runtime,
             DkmClrAppDomain appDomain
-        ) {
+        )
+        {
             if (appDomain.IsUnloaded)
             {
                 return SpecializedCollections.EmptyEnumerable<DkmClrModuleInstance>();
@@ -58,7 +59,8 @@ namespace Microsoft.CodeAnalysis.ExpressionEvaluator
             this DkmClrRuntimeInstance runtime,
             DkmClrAppDomain appDomain,
             ImmutableArray<MetadataBlock> previousMetadataBlocks
-        ) {
+        )
+        {
             // Add a dummy data item to the appdomain to add it to the disposal queue when the debugged process is shutting down.
             // This should prevent from attempts to use the Metadata pointer for dead debugged processes.
             if (appDomain.GetDataItem<AppDomainLifetimeDataItem>() == null)
@@ -104,7 +106,8 @@ namespace Microsoft.CodeAnalysis.ExpressionEvaluator
         internal static ImmutableArray<MetadataBlock> GetMetadataBlocks(
             GetMetadataBytesPtrFunction getMetaDataBytesPtrFunction,
             ImmutableArray<AssemblyIdentity> missingAssemblyIdentities
-        ) {
+        )
+        {
             ArrayBuilder<MetadataBlock>? builder = null;
             foreach (var missingAssemblyIdentity in missingAssemblyIdentities)
             {
@@ -134,13 +137,15 @@ namespace Microsoft.CodeAnalysis.ExpressionEvaluator
 
         internal static ImmutableArray<AssemblyReaders> MakeAssemblyReaders(
             this DkmClrInstructionAddress instructionAddress
-        ) {
+        )
+        {
             var builder = ArrayBuilder<AssemblyReaders>.GetInstance();
             foreach (
                 DkmClrModuleInstance module in instructionAddress.RuntimeInstance.GetModulesInAppDomain(
                     instructionAddress.ModuleInstance.AppDomain
                 )
-            ) {
+            )
+            {
                 var symReader = module.GetSymReader();
                 if (symReader == null)
                 {
@@ -182,7 +187,8 @@ namespace Microsoft.CodeAnalysis.ExpressionEvaluator
             int index,
             IntPtr ptr,
             uint size
-        ) {
+        )
+        {
             if (!previousMetadataBlocks.IsDefault && index < previousMetadataBlocks.Length)
             {
                 var previousBlock = previousMetadataBlocks[index];
@@ -213,7 +219,8 @@ namespace Microsoft.CodeAnalysis.ExpressionEvaluator
             DkmCompilerId languageId,
             ResultProperties resultProperties,
             DkmClrRuntimeInstance runtimeInstance
-        ) {
+        )
+        {
             if (compResult == null)
             {
                 return null;
@@ -246,7 +253,8 @@ namespace Microsoft.CodeAnalysis.ExpressionEvaluator
         internal static DkmClrCustomTypeInfo? ToCustomTypeInfo(
             this ReadOnlyCollection<byte>? payload,
             Guid payloadTypeId
-        ) {
+        )
+        {
             return (payload == null) ? null : DkmClrCustomTypeInfo.Create(payloadTypeId, payload);
         }
 
@@ -311,7 +319,8 @@ namespace Microsoft.CodeAnalysis.ExpressionEvaluator
 
         private static DkmEvaluationResultAccessType GetResultAccessType(
             Accessibility accessibility
-        ) {
+        )
+        {
             switch (accessibility)
             {
                 case Accessibility.Public:

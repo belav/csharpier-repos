@@ -57,7 +57,8 @@ namespace System.IO
                         0x1000,
                         FileOptions.DeleteOnClose
                     )
-                ) {
+                )
+                {
                     string lowerCased = pathWithUpperCase.ToLowerInvariant();
                     return !File.Exists(lowerCased);
                 }

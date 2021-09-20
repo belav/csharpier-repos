@@ -37,17 +37,18 @@ namespace Microsoft.EntityFrameworkCore.SqlServer.Storage.Internal
             ValueComparer? comparer = null,
             SqlDbType? sqlDbType = null,
             StoreTypePostfix? storeTypePostfix = null
-        ) : this(
-            new RelationalTypeMappingParameters(
-                new CoreTypeMappingParameters(typeof(byte[]), null, comparer),
-                storeType ?? (fixedLength ? "binary" : "varbinary"),
-                storeTypePostfix ?? StoreTypePostfix.Size,
-                System.Data.DbType.Binary,
-                size: size,
-                fixedLength: fixedLength
-            ),
-            sqlDbType
-        ) { }
+        )
+            : this(
+                new RelationalTypeMappingParameters(
+                    new CoreTypeMappingParameters(typeof(byte[]), null, comparer),
+                    storeType ?? (fixedLength ? "binary" : "varbinary"),
+                    storeTypePostfix ?? StoreTypePostfix.Size,
+                    System.Data.DbType.Binary,
+                    size: size,
+                    fixedLength: fixedLength
+                ),
+                sqlDbType
+            ) { }
 
         /// <summary>
         ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to

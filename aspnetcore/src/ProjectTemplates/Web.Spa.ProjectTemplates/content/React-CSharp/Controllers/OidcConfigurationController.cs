@@ -11,7 +11,8 @@ namespace Company.WebApplication1.Controllers
         public OidcConfigurationController(
             IClientRequestParametersProvider clientRequestParametersProvider,
             ILogger<OidcConfigurationController> logger
-        ) {
+        )
+        {
             ClientRequestParametersProvider = clientRequestParametersProvider;
             _logger = logger;
         }

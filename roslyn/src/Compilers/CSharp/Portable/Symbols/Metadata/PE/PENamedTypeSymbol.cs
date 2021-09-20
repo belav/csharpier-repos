@@ -180,7 +180,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols.Metadata.PE
             PENamespaceSymbol containingNamespace,
             TypeDefinitionHandle handle,
             string emittedNamespaceName
-        ) {
+        )
+        {
             GenericParameterHandleCollection genericParameterHandles;
             ushort arity;
             BadImageFormatException mrEx = null;
@@ -229,7 +230,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols.Metadata.PE
             out GenericParameterHandleCollection genericParameterHandles,
             out ushort arity,
             out BadImageFormatException mrEx
-        ) {
+        )
+        {
             try
             {
                 genericParameterHandles = moduleSymbol.Module.GetTypeDefGenericParamsOrThrow(
@@ -250,7 +252,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols.Metadata.PE
             PEModuleSymbol moduleSymbol,
             PENamedTypeSymbol containingType,
             TypeDefinitionHandle handle
-        ) {
+        )
+        {
             GenericParameterHandleCollection genericParameterHandles;
             ushort metadataArity;
             BadImageFormatException mrEx = null;
@@ -314,7 +317,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols.Metadata.PE
             string emittedNamespaceName,
             ushort arity,
             out bool mangleName
-        ) {
+        )
+        {
             Debug.Assert(!handle.IsNil);
             Debug.Assert((object)container != null);
             Debug.Assert(arity == 0 || this is PENamedTypeSymbolGeneric);
@@ -457,7 +461,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols.Metadata.PE
 
         internal override ImmutableArray<NamedTypeSymbol> InterfacesNoUseSiteDiagnostics(
             ConsList<TypeSymbol> basesBeingResolved = null
-        ) {
+        )
+        {
             if (_lazyInterfaces.IsDefault)
             {
                 ImmutableInterlocked.InterlockedCompareExchange(
@@ -477,7 +482,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols.Metadata.PE
 
         internal override NamedTypeSymbol GetDeclaredBaseType(
             ConsList<TypeSymbol> basesBeingResolved
-        ) {
+        )
+        {
             return GetDeclaredBaseType(skipTransformsIfNecessary: false);
         }
 
@@ -533,7 +539,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols.Metadata.PE
 
         internal override ImmutableArray<NamedTypeSymbol> GetDeclaredInterfaces(
             ConsList<TypeSymbol> basesBeingResolved
-        ) {
+        )
+        {
             if (_lazyDeclaredInterfaces.IsDefault)
             {
                 ImmutableInterlocked.InterlockedCompareExchange(
@@ -758,7 +765,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols.Metadata.PE
 
         internal override IEnumerable<CSharpAttributeData> GetCustomAttributesToEmit(
             PEModuleBuilder moduleBuilder
-        ) {
+        )
+        {
             return GetAttributes();
         }
 
@@ -938,7 +946,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols.Metadata.PE
                                 fieldFlags,
                                 moduleSymbol.ImportOptions
                             )
-                        ) {
+                        )
+                        {
                             builder.Add(new PEFieldSymbol(moduleSymbol, this, fieldDef));
                         }
                     }
@@ -960,7 +969,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols.Metadata.PE
                 if (
                     instanceIndex < uncommon.lazyInstanceEnumFields.Length
                     && uncommon.lazyInstanceEnumFields[instanceIndex].Handle == fieldDef
-                ) {
+                )
+                {
                     yield return uncommon.lazyInstanceEnumFields[instanceIndex];
                     instanceIndex++;
                     continue;
@@ -969,7 +979,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols.Metadata.PE
                 if (
                     staticIndex < staticFields.Length
                     && staticFields[staticIndex].Kind == SymbolKind.Field
-                ) {
+                )
+                {
                     var field = (PEFieldSymbol)staticFields[staticIndex];
 
                     if (field.Handle == fieldDef)
@@ -1055,7 +1066,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols.Metadata.PE
                 {
                     foreach (
                         var handle in this.ContainingPEModule.Module.GetFieldsOfTypeOrThrow(_handle)
-                    ) {
+                    )
+                    {
                         FieldSymbol field;
                         if (handleToFieldMap.TryGetValue(handle, out field))
                         {
@@ -1248,7 +1260,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols.Metadata.PE
                             if (
                                 type.SpecialType.IsValidEnumUnderlyingType()
                                 && !customModifiers.AnyRequired()
-                            ) {
+                            )
+                            {
                                 if ((object)underlyingType == null)
                                 {
                                     underlyingType = (NamedTypeSymbol)type;
@@ -1336,7 +1349,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols.Metadata.PE
                                     fieldFlags,
                                     moduleSymbol.ImportOptions
                                 )
-                            ) {
+                            )
+                            {
                                 var field = new PEFieldSymbol(moduleSymbol, this, fieldDef);
                                 members.Add(field);
                             }
@@ -1467,7 +1481,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols.Metadata.PE
                         ref _lazyMembersInDeclarationOrder,
                         membersInDeclarationOrder
                     )
-                ) {
+                )
+                {
                     members.Free();
                     members = null;
                 }
@@ -1836,7 +1851,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols.Metadata.PE
         private static ExtendedErrorTypeSymbol CyclicInheritanceError(
             PENamedTypeSymbol type,
             TypeSymbol declaredBase
-        ) {
+        )
+        {
             var info = new CSDiagnosticInfo(ErrorCode.ERR_ImportedCircularBase, declaredBase, type);
             return new ExtendedErrorTypeSymbol(
                 declaredBase,
@@ -1883,7 +1899,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols.Metadata.PE
             CultureInfo preferredCulture = null,
             bool expandIncludes = false,
             CancellationToken cancellationToken = default(CancellationToken)
-        ) {
+        )
+        {
             return PEDocumentationCommentUtils.GetDocumentationComment(
                 this,
                 ContainingPEModule,
@@ -1920,7 +1937,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols.Metadata.PE
 
         private MultiDictionary<string, PEFieldSymbol> CreateFields(
             ArrayBuilder<PEFieldSymbol> fieldMembers
-        ) {
+        )
+        {
             var privateFieldNameToSymbols = new MultiDictionary<string, PEFieldSymbol>();
 
             var moduleSymbol = this.ContainingPEModule;
@@ -1964,7 +1982,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols.Metadata.PE
                                 )
                                 || module.ShouldImportField(fieldRid, moduleSymbol.ImportOptions)
                             )
-                        ) {
+                        )
+                        {
                             continue;
                         }
                     }
@@ -1991,7 +2010,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols.Metadata.PE
 
         private PooledDictionary<MethodDefinitionHandle, PEMethodSymbol> CreateMethods(
             ArrayBuilder<Symbol> members
-        ) {
+        )
+        {
             var moduleSymbol = this.ContainingPEModule;
             var module = moduleSymbol.Module;
             var map = PooledDictionary<MethodDefinitionHandle, PEMethodSymbol>.GetInstance();
@@ -2009,7 +2029,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols.Metadata.PE
                     if (
                         isOrdinaryEmbeddableStruct
                         || module.ShouldImportMethod(methodHandle, moduleSymbol.ImportOptions)
-                    ) {
+                    )
+                    {
                         var method = new PEMethodSymbol(moduleSymbol, this, methodHandle);
                         members.Add(method);
                         map.Add(methodHandle, method);
@@ -2024,7 +2045,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols.Metadata.PE
         private void CreateProperties(
             Dictionary<MethodDefinitionHandle, PEMethodSymbol> methodHandleToSymbol,
             ArrayBuilder<Symbol> members
-        ) {
+        )
+        {
             var moduleSymbol = this.ContainingPEModule;
             var module = moduleSymbol.Module;
 
@@ -2070,7 +2092,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols.Metadata.PE
             MultiDictionary<string, PEFieldSymbol> privateFieldNameToSymbols,
             Dictionary<MethodDefinitionHandle, PEMethodSymbol> methodHandleToSymbol,
             ArrayBuilder<Symbol> members
-        ) {
+        )
+        {
             var moduleSymbol = this.ContainingPEModule;
             var module = moduleSymbol.Module;
 
@@ -2120,7 +2143,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols.Metadata.PE
             PEModule module,
             Dictionary<MethodDefinitionHandle, PEMethodSymbol> methodHandleToSymbol,
             MethodDefinitionHandle methodDef
-        ) {
+        )
+        {
             if (methodDef.IsNil)
             {
                 return null;
@@ -2137,13 +2161,15 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols.Metadata.PE
 
         private static Dictionary<string, ImmutableArray<Symbol>> GroupByName(
             ArrayBuilder<Symbol> symbols
-        ) {
+        )
+        {
             return symbols.ToDictionary(s => s.Name, StringOrdinalComparer.Instance);
         }
 
         private static Dictionary<string, ImmutableArray<PENamedTypeSymbol>> GroupByName(
             ArrayBuilder<PENamedTypeSymbol> symbols
-        ) {
+        )
+        {
             if (symbols.Count == 0)
             {
                 return s_emptyNestedTypes;
@@ -2186,7 +2212,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols.Metadata.PE
                     if (
                         @base?.SpecialType == SpecialType.None
                         && @base.ContainingAssembly?.IsMissing == true
-                    ) {
+                    )
+                    {
                         var missingType = @base as MissingMetadataTypeSymbol.TopLevel;
                         if ((object)missingType != null && missingType.Arity == 0)
                         {
@@ -2375,7 +2402,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols.Metadata.PE
                         uncommon.lazyComImportCoClassType,
                         ErrorTypeSymbol.UnknownResultType
                     )
-                ) {
+                )
+                {
                     var type = this.ContainingPEModule.TryDecodeAttributeWithTypeArgument(
                         this.Handle,
                         AttributeDescription.CoClassAttribute
@@ -2758,7 +2786,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols.Metadata.PE
                             nestedTypeParameter,
                             nestedTypeMap
                         )
-                    ) {
+                    )
+                    {
                         return false;
                     }
                 }

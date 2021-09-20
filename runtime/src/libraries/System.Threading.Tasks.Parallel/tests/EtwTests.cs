@@ -24,7 +24,8 @@ namespace System.Threading.Tasks.Tests
                                 eventSourceName,
                                 EventLevel.Verbose
                             )
-                        ) {
+                        )
+                        {
                             var events = new ConcurrentQueue<int>();
                             listener.RunWithCallback(
                                 ev => events.Enqueue(ev.EventId),

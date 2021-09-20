@@ -120,7 +120,8 @@ namespace B
             int endLine,
             int endColumn,
             TextSpan span
-        ) {
+        )
+        {
             using var workspace = new TestWorkspace(
                 composition: EditorTestCompositions.EditorFeatures
             );

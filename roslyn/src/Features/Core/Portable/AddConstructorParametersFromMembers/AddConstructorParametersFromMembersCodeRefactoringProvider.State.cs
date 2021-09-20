@@ -26,12 +26,14 @@ namespace Microsoft.CodeAnalysis.AddConstructorParametersFromMembers
                 ImmutableArray<ISymbol> selectedMembers,
                 Document document,
                 CancellationToken cancellationToken
-            ) {
+            )
+            {
                 var state = new State();
                 if (
                     !await state.TryInitializeAsync(selectedMembers, document, cancellationToken)
                         .ConfigureAwait(false)
-                ) {
+                )
+                {
                     return null;
                 }
 
@@ -42,7 +44,8 @@ namespace Microsoft.CodeAnalysis.AddConstructorParametersFromMembers
                 ImmutableArray<ISymbol> selectedMembers,
                 Document document,
                 CancellationToken cancellationToken
-            ) {
+            )
+            {
                 ContainingType = selectedMembers[0].ContainingType;
 
                 var rules = await document.GetNamingRulesAsync(cancellationToken)
@@ -54,7 +57,8 @@ namespace Microsoft.CodeAnalysis.AddConstructorParametersFromMembers
                     || ContainingType == null
                     || ContainingType.TypeKind == TypeKind.Interface
                     || parametersForSelectedMembers.IsEmpty
-                ) {
+                )
+                {
                     return false;
                 }
 
@@ -87,7 +91,8 @@ namespace Microsoft.CodeAnalysis.AddConstructorParametersFromMembers
                 Document document,
                 ImmutableArray<IParameterSymbol> parametersForSelectedMembers,
                 CancellationToken cancellationToken
-            ) {
+            )
+            {
                 using var _ = ArrayBuilder<ConstructorCandidate>.GetInstance(
                     out var applicableConstructors
                 );
@@ -102,7 +107,8 @@ namespace Microsoft.CodeAnalysis.AddConstructorParametersFromMembers
                                 cancellationToken
                             )
                             .ConfigureAwait(false)
-                    ) {
+                    )
+                    {
                         applicableConstructors.Add(
                             CreateConstructorCandidate(
                                 parametersForSelectedMembers,
@@ -121,7 +127,8 @@ namespace Microsoft.CodeAnalysis.AddConstructorParametersFromMembers
                 Document document,
                 ImmutableArray<string> parameterNamesForSelectedMembers,
                 CancellationToken cancellationToken
-            ) {
+            )
+            {
                 var constructorParams = constructor.Parameters;
 
                 if (constructorParams.Length == 2)
@@ -158,7 +165,8 @@ namespace Microsoft.CodeAnalysis.AddConstructorParametersFromMembers
                 ImmutableArray<IParameterSymbol> parametersForSelectedMembers,
                 ImmutableArray<ISymbol> selectedMembers,
                 IMethodSymbol constructor
-            ) {
+            )
+            {
                 using var _0 = ArrayBuilder<IParameterSymbol>.GetInstance(
                     out var missingParametersBuilder
                 );

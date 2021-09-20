@@ -24,18 +24,20 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             SourceMemberContainerTypeSymbol containingType,
             int memberOffset,
             BindingDiagnosticBag diagnostics
-        ) : base(
-            containingType,
-            WellKnownMemberNames.CloneMethodName,
-            hasBody: !containingType.IsAbstract,
-            memberOffset,
-            diagnostics
-        ) { }
+        )
+            : base(
+                containingType,
+                WellKnownMemberNames.CloneMethodName,
+                hasBody: !containingType.IsAbstract,
+                memberOffset,
+                diagnostics
+            ) { }
 
         protected override DeclarationModifiers MakeDeclarationModifiers(
             DeclarationModifiers allowedModifiers,
             BindingDiagnosticBag diagnostics
-        ) {
+        )
+        {
             DeclarationModifiers result = DeclarationModifiers.Public;
 
             if (VirtualCloneInBase() is object)
@@ -66,7 +68,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                 if (
                     (modifiers & DeclarationModifiers.AccessibilityMask)
                     != DeclarationModifiers.Public
-                ) {
+                )
+                {
                     return false;
                 }
 
@@ -106,7 +109,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
 
         protected override (TypeWithAnnotations ReturnType, ImmutableArray<ParameterSymbol> Parameters, bool IsVararg, ImmutableArray<TypeParameterConstraintClause> DeclaredConstraintsForOverrideOrImplementation) MakeParametersAndBindReturnType(
             BindingDiagnosticBag diagnostics
-        ) {
+        )
+        {
             return (
                 ReturnType: VirtualCloneInBase() is { } baseClone
                   ? baseClone.ReturnTypeWithAnnotations
@@ -123,7 +127,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
         internal override void GenerateMethodBody(
             TypeCompilationState compilationState,
             BindingDiagnosticBag diagnostics
-        ) {
+        )
+        {
             Debug.Assert(!IsAbstract);
 
             var F = new SyntheticBoundNodeFactory(
@@ -152,7 +157,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                             ContainingType,
                             TypeCompareKind.AllIgnoreOptions
                         )
-                    ) {
+                    )
+                    {
                         F.CloseMethod(F.Return(F.New(ctor, F.This())));
                         return;
                     }
@@ -170,11 +176,13 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
         internal static MethodSymbol? FindValidCloneMethod(
             TypeSymbol containingType,
             ref CompoundUseSiteInfo<AssemblySymbol> useSiteInfo
-        ) {
+        )
+        {
             if (
                 containingType.IsObjectType()
                 || containingType is not NamedTypeSymbol containingNamedType
-            ) {
+            )
+            {
                 return null;
             }
 
@@ -198,7 +206,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                         ParameterCount: 0,
                         Arity: 0
                     } method
-                ) {
+                )
+                {
                     if (candidate is object)
                     {
                         // An ambiguity case, can come from metadata, treat as an error for simplicity.
@@ -222,7 +231,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                     TypeCompareKind.AllIgnoreOptions,
                     ref useSiteInfo
                 )
-            ) {
+            )
+            {
                 return null;
             }
 

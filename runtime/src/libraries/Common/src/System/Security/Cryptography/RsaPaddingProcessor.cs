@@ -133,7 +133,8 @@ namespace System.Security.Cryptography
             HashAlgorithmName hashAlgorithmName,
             int hLen,
             ReadOnlyMemory<byte> digestInfoPrefix
-        ) {
+        )
+        {
             _hashAlgorithmName = hashAlgorithmName;
             _hLen = hLen;
             _digestInfoPrefix = digestInfoPrefix;
@@ -361,7 +362,8 @@ namespace System.Security.Cryptography
             ReadOnlySpan<byte> source,
             Span<byte> destination,
             out int bytesWritten
-        ) {
+        )
+        {
             // https://tools.ietf.org/html/rfc3447#section-7.1.2
             using (IncrementalHash hasher = IncrementalHash.CreateHash(_hashAlgorithmName))
             {

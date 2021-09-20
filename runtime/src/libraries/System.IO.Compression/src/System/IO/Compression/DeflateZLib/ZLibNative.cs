@@ -269,7 +269,8 @@ namespace System.IO.Compression
                 int windowBits,
                 int memLevel,
                 CompressionStrategy strategy
-            ) {
+            )
+            {
                 EnsureNotDisposed();
                 EnsureState(State.NotInitialized);
 
@@ -344,7 +345,8 @@ namespace System.IO.Compression
             int windowBits,
             int memLevel,
             CompressionStrategy strategy
-        ) {
+        )
+        {
             zLibStreamHandle = new ZLibStreamHandle();
             return zLibStreamHandle.DeflateInit2_(level, windowBits, memLevel, strategy);
         }
@@ -352,7 +354,8 @@ namespace System.IO.Compression
         public static ErrorCode CreateZLibStreamForInflate(
             out ZLibStreamHandle zLibStreamHandle,
             int windowBits
-        ) {
+        )
+        {
             zLibStreamHandle = new ZLibStreamHandle();
             return zLibStreamHandle.InflateInit2_(windowBits);
         }

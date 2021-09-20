@@ -287,7 +287,8 @@ namespace System.Web.Razor.Test.Parser
         private ParserContext SetupTestContext(
             string document,
             Action<TextReader> positioningAction
-        ) {
+        )
+        {
             var codeParser = new CSharpCodeParser();
             var markupParser = new HtmlMarkupParser();
             return SetupTestContext(
@@ -305,7 +306,8 @@ namespace System.Web.Razor.Test.Parser
             ParserBase codeParser,
             ParserBase markupParser,
             ParserBase activeParser
-        ) {
+        )
+        {
             ParserContext context = new ParserContext(
                 new SeekableTextReader(new StringReader(document)),
                 codeParser,

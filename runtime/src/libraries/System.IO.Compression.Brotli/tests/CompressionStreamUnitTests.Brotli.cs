@@ -460,7 +460,8 @@ namespace System.IO.Compression
         public static void Roundtrip_WriteByte_ReadByte_Success(
             int totalLength,
             CompressionLevel level
-        ) {
+        )
+        {
             byte[] correctUncompressedBytes = Enumerable.Range(0, totalLength)
                 .Select(i => (byte)i)
                 .ToArray();
@@ -542,7 +543,8 @@ namespace System.IO.Compression
         private static MemoryStream Compress_Stream(
             ReadOnlySpan<byte> input,
             CompressionLevel compressionLevel
-        ) {
+        )
+        {
             using (var inputStream = new MemoryStream(input.ToArray()))
             {
                 var outputStream = new MemoryStream();

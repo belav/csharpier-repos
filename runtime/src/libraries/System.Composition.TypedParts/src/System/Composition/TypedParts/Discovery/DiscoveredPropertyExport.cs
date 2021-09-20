@@ -56,7 +56,8 @@ namespace System.Composition.TypedParts.Discovery
         public override DiscoveredExport CloseGenericExport(
             TypeInfo closedPartType,
             Type[] genericArguments
-        ) {
+        )
+        {
             var closedContractType = Contract.ContractType.MakeGenericType(genericArguments);
             var newContract = Contract.ChangeType(closedContractType);
             var property = closedPartType.AsType().GetRuntimeProperty(_property.Name);

@@ -89,7 +89,8 @@ namespace Microsoft.CodeAnalysis.Test.Utilities
 
         public override void VisitVariableDeclarationGroup(
             IVariableDeclarationGroupOperation operation
-        ) {
+        )
+        {
             Assert.Equal(OperationKind.VariableDeclarationGroup, operation.Kind);
             AssertEx.Equal(operation.Declarations, operation.Children);
         }
@@ -528,7 +529,8 @@ namespace Microsoft.CodeAnalysis.Test.Utilities
             // as their receivers
             if (
                 operation.TargetMethod.IsStatic && operation.Instance is IInstanceReferenceOperation
-            ) {
+            )
+            {
                 Assert.False(
                     operation.Instance.IsImplicit,
                     $"Implicit {nameof(IInstanceReferenceOperation)} on {operation.Syntax}"
@@ -575,7 +577,8 @@ namespace Microsoft.CodeAnalysis.Test.Utilities
 
         internal override void VisitPointerIndirectionReference(
             IPointerIndirectionReferenceOperation operation
-        ) {
+        )
+        {
             Assert.Equal(OperationKind.None, operation.Kind);
             Assert.Same(operation.Pointer, operation.Children.Single());
         }
@@ -610,7 +613,8 @@ namespace Microsoft.CodeAnalysis.Test.Utilities
         private void VisitMemberReference(
             IMemberReferenceOperation operation,
             IEnumerable<IOperation> additionalChildren
-        ) {
+        )
+        {
             Assert.NotNull(operation.Member);
 
             IEnumerable<IOperation> children;
@@ -693,7 +697,8 @@ namespace Microsoft.CodeAnalysis.Test.Utilities
 
         public override void VisitConditionalAccessInstance(
             IConditionalAccessInstanceOperation operation
-        ) {
+        )
+        {
             Assert.Equal(OperationKind.ConditionalAccessInstance, operation.Kind);
             Assert.Empty(operation.Children);
         }
@@ -938,7 +943,8 @@ namespace Microsoft.CodeAnalysis.Test.Utilities
 
         public override void VisitAnonymousObjectCreation(
             IAnonymousObjectCreationOperation operation
-        ) {
+        )
+        {
             Assert.Equal(OperationKind.AnonymousObjectCreation, operation.Kind);
             AssertEx.Equal(operation.Initializers, operation.Children);
             foreach (var initializer in operation.Initializers)
@@ -987,7 +993,8 @@ namespace Microsoft.CodeAnalysis.Test.Utilities
 
         public override void VisitObjectOrCollectionInitializer(
             IObjectOrCollectionInitializerOperation operation
-        ) {
+        )
+        {
             Assert.Equal(OperationKind.ObjectOrCollectionInitializer, operation.Kind);
             AssertEx.Equal(operation.Initializers, operation.Children);
         }
@@ -1167,7 +1174,8 @@ namespace Microsoft.CodeAnalysis.Test.Utilities
 
         public override void VisitTypeParameterObjectCreation(
             ITypeParameterObjectCreationOperation operation
-        ) {
+        )
+        {
             Assert.Equal(OperationKind.TypeParameterObjectCreation, operation.Kind);
             if (operation.Initializer == null)
             {
@@ -1309,7 +1317,8 @@ namespace Microsoft.CodeAnalysis.Test.Utilities
                 ||
                 // in `var (x, y)`, the syntax here is the designation `x`.
                 operation.Syntax.IsKind(CSharp.SyntaxKind.SingleVariableDesignation)
-            ) {
+            )
+            {
                 Assert.True(operation.MatchesNull);
                 Assert.Null(operation.MatchedType);
             }
@@ -1467,7 +1476,8 @@ namespace Microsoft.CodeAnalysis.Test.Utilities
 
         public override void VisitDeconstructionAssignment(
             IDeconstructionAssignmentOperation operation
-        ) {
+        )
+        {
             Assert.Equal(OperationKind.DeconstructionAssignment, operation.Kind);
             VisitAssignment(operation);
         }
@@ -1599,7 +1609,8 @@ namespace Microsoft.CodeAnalysis.Test.Utilities
                     if (
                         !operation.Value.ConstantValue.HasValue
                         || operation.Value.ConstantValue.Value != null
-                    ) {
+                    )
+                    {
                         Assert.NotNull(operation.Value.Type);
                     }
                     break;
@@ -1629,7 +1640,8 @@ namespace Microsoft.CodeAnalysis.Test.Utilities
 
         public override void VisitStaticLocalInitializationSemaphore(
             IStaticLocalInitializationSemaphoreOperation operation
-        ) {
+        )
+        {
             Assert.Equal(OperationKind.StaticLocalInitializationSemaphore, operation.Kind);
             Assert.True(operation.IsImplicit);
             Assert.Empty(operation.Children);

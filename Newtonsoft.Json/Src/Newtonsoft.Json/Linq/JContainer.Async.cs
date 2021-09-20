@@ -40,7 +40,8 @@ namespace Newtonsoft.Json.Linq
             JsonReader reader,
             JsonLoadSettings? options,
             CancellationToken cancellationToken = default
-        ) {
+        )
+        {
             ValidationUtils.ArgumentNotNull(reader, nameof(reader));
             int startDepth = reader.Depth;
 
@@ -73,7 +74,8 @@ namespace Newtonsoft.Json.Linq
             JsonReader reader,
             JsonLoadSettings? settings,
             CancellationToken cancellationToken = default
-        ) {
+        )
+        {
             IJsonLineInfo? lineInfo = reader as IJsonLineInfo;
 
             JContainer? parent = this;

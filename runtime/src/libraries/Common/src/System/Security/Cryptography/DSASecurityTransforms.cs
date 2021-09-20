@@ -43,7 +43,8 @@ namespace System.Security.Cryptography
                 internal DSASecurityTransforms(
                     SafeSecKeyRefHandle publicKey,
                     SafeSecKeyRefHandle privateKey
-                ) {
+                )
+                {
                     SetKey(SecKeyPair.PublicPrivatePair(publicKey, privateKey));
                 }
 
@@ -200,7 +201,8 @@ namespace System.Security.Cryptography
                     ReadOnlySpan<byte> passwordBytes,
                     ReadOnlySpan<byte> source,
                     out int bytesRead
-                ) {
+                )
+                {
                     ThrowIfDisposed();
                     base.ImportEncryptedPkcs8PrivateKey(passwordBytes, source, out bytesRead);
                 }
@@ -209,7 +211,8 @@ namespace System.Security.Cryptography
                     ReadOnlySpan<char> password,
                     ReadOnlySpan<byte> source,
                     out int bytesRead
-                ) {
+                )
+                {
                     ThrowIfDisposed();
                     base.ImportEncryptedPkcs8PrivateKey(password, source, out bytesRead);
                 }
@@ -278,7 +281,8 @@ namespace System.Security.Cryptography
                 public override unsafe void ImportSubjectPublicKeyInfo(
                     ReadOnlySpan<byte> source,
                     out int bytesRead
-                ) {
+                )
+                {
                     ThrowIfDisposed();
 
                     fixed (byte* ptr = &MemoryMarshal.GetReference(source))
@@ -288,7 +292,8 @@ namespace System.Security.Cryptography
                                 ptr,
                                 source.Length
                             )
-                        ) {
+                        )
+                        {
                             // Validate the DER value and get the number of bytes.
                             DSAKeyFormatHelper.ReadSubjectPublicKeyInfo(
                                 manager.Memory,
@@ -346,7 +351,8 @@ namespace System.Security.Cryptography
                 public override bool VerifySignature(
                     ReadOnlySpan<byte> hash,
                     ReadOnlySpan<byte> signature
-                ) {
+                )
+                {
                     byte[] derFormatSignature = AsymmetricAlgorithmHelpers.ConvertIeee1363ToDer(
                         signature
                     );
@@ -363,7 +369,8 @@ namespace System.Security.Cryptography
                     int offset,
                     int count,
                     HashAlgorithmName hashAlgorithm
-                ) {
+                )
+                {
                     if (hashAlgorithm != HashAlgorithmName.SHA1)
                     {
                         // Matching DSACryptoServiceProvider's "I only understand SHA-1/FIPS 186-2" exception

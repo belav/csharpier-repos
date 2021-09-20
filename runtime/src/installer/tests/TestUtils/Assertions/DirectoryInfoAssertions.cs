@@ -66,7 +66,8 @@ namespace Microsoft.DotNet.CoreSetup.Test
 
         public AndConstraint<DirectoryInfoAssertions> NotHaveFiles(
             IEnumerable<string> expectedFiles
-        ) {
+        )
+        {
             foreach (var expectedFile in expectedFiles)
             {
                 NotHaveFile(expectedFile);
@@ -105,7 +106,8 @@ namespace Microsoft.DotNet.CoreSetup.Test
 
         public AndConstraint<DirectoryInfoAssertions> OnlyHaveFiles(
             IEnumerable<string> expectedFiles
-        ) {
+        )
+        {
             var actualFiles = _dirInfo.EnumerateFiles("*", SearchOption.TopDirectoryOnly)
                 .Select(f => f.Name);
             var missingFiles = Enumerable.Except(expectedFiles, actualFiles);

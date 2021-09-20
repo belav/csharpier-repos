@@ -25,7 +25,8 @@ namespace Internal.Cryptography.Pal
             ReadOnlySpan<byte> rawData,
             SafePasswordHandle password,
             X509KeyStorageFlags keyStorageFlags
-        ) {
+        )
+        {
             return OpenSslX509CertificateReader.FromBlob(rawData, password, keyStorageFlags);
         }
 
@@ -33,7 +34,8 @@ namespace Internal.Cryptography.Pal
             string fileName,
             SafePasswordHandle password,
             X509KeyStorageFlags keyStorageFlags
-        ) {
+        )
+        {
             return OpenSslX509CertificateReader.FromFile(fileName, password, keyStorageFlags);
         }
     }

@@ -25,7 +25,8 @@ namespace Microsoft.CodeAnalysis.Shared.Utilities
                 SymbolEquivalenceComparer symbolEquivalenceComparer,
                 bool compareMethodTypeParametersByIndex,
                 bool objectAndDynamicCompareEqually
-            ) {
+            )
+            {
                 _symbolEquivalenceComparer = symbolEquivalenceComparer;
                 _compareMethodTypeParametersByIndex = compareMethodTypeParametersByIndex;
                 _objectAndDynamicCompareEqually = objectAndDynamicCompareEqually;
@@ -51,7 +52,8 @@ namespace Microsoft.CodeAnalysis.Shared.Utilities
                 if (
                     x.Kind == SymbolKind.DynamicType
                     || (_objectAndDynamicCompareEqually && IsObjectType(x))
-                ) {
+                )
+                {
                     return Hash.Combine(typeof(IDynamicTypeSymbol), currentHash);
                 }
 
@@ -319,14 +321,16 @@ namespace Microsoft.CodeAnalysis.Shared.Utilities
                 if (
                     x.TypeParameterKind == TypeParameterKind.Method
                     && _compareMethodTypeParametersByIndex
-                ) {
+                )
+                {
                     return currentHash;
                 }
 
                 if (
                     x.TypeParameterKind == TypeParameterKind.Type
                     && x.ContainingType.IsAnonymousType
-                ) {
+                )
+                {
                     // Anonymous type type parameters compare by index as well to prevent
                     // recursion.
                     return currentHash;

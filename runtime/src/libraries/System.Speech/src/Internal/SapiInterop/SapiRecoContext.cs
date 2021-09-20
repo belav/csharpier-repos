@@ -72,7 +72,8 @@ namespace System.Speech.Internal.SapiInterop
             SPAUDIOOPTIONS options,
             IntPtr audioFormatId,
             IntPtr waveFormatEx
-        ) {
+        )
+        {
             _proxy.Invoke2(
                 delegate
                 {
@@ -114,7 +115,8 @@ namespace System.Speech.Internal.SapiInterop
         internal EventNotify CreateEventNotify(
             AsyncSerializedWorker asyncWorker,
             bool supportsSapi53
-        ) {
+        )
+        {
             return (EventNotify)_proxy.Invoke(
                 delegate
                 {

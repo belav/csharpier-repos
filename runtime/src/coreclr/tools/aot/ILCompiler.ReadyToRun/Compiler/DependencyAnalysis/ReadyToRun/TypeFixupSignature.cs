@@ -50,7 +50,8 @@ namespace ILCompiler.DependencyAnalysis.ReadyToRun
                 if (
                     (_fixupKind == ReadyToRunFixupKind.Check_TypeLayout)
                     || (_fixupKind == ReadyToRunFixupKind.Verify_TypeLayout)
-                ) {
+                )
+                {
                     EncodeTypeLayout(dataBuilder, _typeDesc);
                 }
             }
@@ -159,7 +160,8 @@ namespace ILCompiler.DependencyAnalysis.ReadyToRun
                 _typeDesc.HasInstantiation
                 && !_typeDesc.IsGenericDefinition
                 && (factory.CompilationCurrentPhase == 0)
-            ) {
+            )
+            {
                 dependencies.Add(
                     factory.AllMethodsOnType(_typeDesc),
                     "Methods on generic type instantiation"

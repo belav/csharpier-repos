@@ -43,14 +43,16 @@ namespace Microsoft.CodeAnalysis.CSharp.RemoveUnnecessaryImports
             Document document,
             Func<SyntaxNode, bool> predicate,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             predicate ??= Functions<SyntaxNode>.True;
             using (
                 Logger.LogBlock(
                     FunctionId.Refactoring_RemoveUnnecessaryImports_CSharp,
                     cancellationToken
                 )
-            ) {
+            )
+            {
                 var unnecessaryImports = await GetCommonUnnecessaryImportsOfAllContextAsync(
                         document,
                         predicate,
@@ -62,7 +64,8 @@ namespace Microsoft.CodeAnalysis.CSharp.RemoveUnnecessaryImports
                     || unnecessaryImports.Any(
                         import => import.OverlapsHiddenPosition(cancellationToken)
                     )
-                ) {
+                )
+                {
                     return document;
                 }
 
@@ -88,7 +91,8 @@ namespace Microsoft.CodeAnalysis.CSharp.RemoveUnnecessaryImports
             Document document,
             CompilationUnitSyntax newRoot,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var spans = new List<TextSpan>();
             AddFormattingSpans(newRoot, spans, cancellationToken);
             var options = await document.GetOptionsAsync(cancellationToken).ConfigureAwait(false);
@@ -105,7 +109,8 @@ namespace Microsoft.CodeAnalysis.CSharp.RemoveUnnecessaryImports
             CompilationUnitSyntax compilationUnit,
             List<TextSpan> spans,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             cancellationToken.ThrowIfCancellationRequested();
             spans.Add(
                 TextSpan.FromBounds(0, GetEndPosition(compilationUnit, compilationUnit.Members))
@@ -121,7 +126,8 @@ namespace Microsoft.CodeAnalysis.CSharp.RemoveUnnecessaryImports
             NamespaceDeclarationSyntax namespaceMember,
             List<TextSpan> spans,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             cancellationToken.ThrowIfCancellationRequested();
             spans.Add(
                 TextSpan.FromBounds(

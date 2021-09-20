@@ -28,7 +28,8 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.MetadataAsSource
             string docCommentXmlFragment,
             string expectedCSharp,
             string expectedVB
-        ) {
+        )
+        {
             var docComment = DocumentationComment.FromXmlFragment(docCommentXmlFragment);
 
             var csharpFormattedComment = string.Join(

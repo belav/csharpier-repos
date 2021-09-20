@@ -24,7 +24,8 @@ namespace Microsoft.AspNetCore.Razor.Language.Extensions
         protected override void ExecuteCore(
             RazorCodeDocument codeDocument,
             DocumentIntermediateNode documentNode
-        ) {
+        )
+        {
             if (documentNode.Options == null || documentNode.Options.SuppressMetadataAttributes)
             {
                 // Metadata attributes are turned off (or options not populated), nothing to do.
@@ -37,7 +38,8 @@ namespace Microsoft.AspNetCore.Razor.Language.Extensions
                     ComponentDocumentClassifierPass.ComponentDocumentKind,
                     StringComparison.Ordinal
                 )
-            ) {
+            )
+            {
                 // Metadata attributes are not used for components.
                 return;
             }
@@ -143,7 +145,8 @@ namespace Microsoft.AspNetCore.Razor.Language.Extensions
                     || checksum.Length == 0
                     || checksumAlgorithm == null
                     || identifier == null
-                ) {
+                )
+                {
                     // It's ok to skip an import if we don't have all of the required information.
                     continue;
                 }

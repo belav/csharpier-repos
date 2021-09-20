@@ -272,7 +272,8 @@ namespace Microsoft.AspNetCore.Mvc.TagHelpers
             if (
                 mode == Mode.GlobbedSrc
                 || mode == Mode.Fallback && !string.IsNullOrEmpty(SrcInclude)
-            ) {
+            )
+            {
                 BuildGlobbedScriptTags(output.Attributes, builder);
                 if (string.IsNullOrEmpty(Src))
                 {
@@ -296,7 +297,8 @@ namespace Microsoft.AspNetCore.Mvc.TagHelpers
         private void BuildGlobbedScriptTags(
             TagHelperAttributeList attributes,
             TagHelperContent builder
-        ) {
+        )
+        {
             EnsureGlobbingUrlBuilder();
 
             // Build a <script> tag for each matched src as well as the original one in the source file
@@ -352,7 +354,8 @@ namespace Microsoft.AspNetCore.Mvc.TagHelpers
                                 SrcAttributeName,
                                 StringComparison.OrdinalIgnoreCase
                             )
-                        ) {
+                        )
+                        {
                             if (
                                 SuppressFallbackIntegrity
                                 && string.Equals(
@@ -360,7 +363,8 @@ namespace Microsoft.AspNetCore.Mvc.TagHelpers
                                     attribute.Name,
                                     StringComparison.OrdinalIgnoreCase
                                 )
-                            ) {
+                            )
+                            {
                                 continue;
                             }
 
@@ -420,7 +424,8 @@ namespace Microsoft.AspNetCore.Mvc.TagHelpers
             string srcValue,
             HtmlAttributeValueStyle valueStyle,
             IHtmlContentBuilder builder
-        ) {
+        )
+        {
             srcValue = GetVersionedSrc(srcValue);
 
             builder.AppendHtml(" ");
@@ -433,7 +438,8 @@ namespace Microsoft.AspNetCore.Mvc.TagHelpers
             string srcValue,
             HtmlAttributeValueStyle valueStyle,
             TextWriter writer
-        ) {
+        )
+        {
             srcValue = GetVersionedSrc(srcValue);
 
             writer.Write(' ');
@@ -466,7 +472,8 @@ namespace Microsoft.AspNetCore.Mvc.TagHelpers
             string src,
             TagHelperAttributeList attributes,
             TagHelperContent builder
-        ) {
+        )
+        {
             builder.AppendHtml("<script");
 
             var addSrc = true;

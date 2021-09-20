@@ -607,7 +607,8 @@ namespace System.IO.Ports.Tests
             int numBytesRead,
             int numNewLines,
             ReadDataFromEnum readDataFrom
-        ) {
+        )
+        {
             using (SerialPort com1 = TCSupport.InitFirstSerialPort())
             using (SerialPort com2 = TCSupport.InitSecondSerialPort(com1))
             {
@@ -689,7 +690,8 @@ namespace System.IO.Ports.Tests
             SerialPort com2,
             string strToWrite,
             string newLine
-        ) {
+        )
+        {
             VerifyReadLine(com1, com2, strToWrite, newLine);
         }
 
@@ -698,7 +700,8 @@ namespace System.IO.Ports.Tests
             SerialPort com2,
             string strToWrite,
             string newLine
-        ) {
+        )
+        {
             BufferData(com1, com2, strToWrite);
             PerformReadOnCom1FromCom2(com1, com2, strToWrite, newLine);
         }
@@ -708,7 +711,8 @@ namespace System.IO.Ports.Tests
             SerialPort com2,
             string strToWrite,
             string newLine
-        ) {
+        )
+        {
             BufferData(com1, com2, strToWrite);
             VerifyReadLine(com1, com2, strToWrite, strToWrite + strToWrite, newLine);
         }
@@ -739,7 +743,8 @@ namespace System.IO.Ports.Tests
             SerialPort com2,
             string strToWrite,
             string newLine
-        ) {
+        )
+        {
             VerifyReadLine(com1, com2, strToWrite, strToWrite, newLine);
         }
 
@@ -749,7 +754,8 @@ namespace System.IO.Ports.Tests
             string strToWrite,
             string expectedString,
             string newLine
-        ) {
+        )
+        {
             char[] charsToWrite = strToWrite.ToCharArray();
             byte[] bytesToWrite = com1.Encoding.GetBytes(charsToWrite);
 
@@ -765,7 +771,8 @@ namespace System.IO.Ports.Tests
             SerialPort com2,
             string strToWrite,
             string newLine
-        ) {
+        )
+        {
             var strBldrRead = new StringBuilder();
             int newLineStringLength = newLine.Length;
             int numNewLineChars = newLine.ToCharArray().Length;

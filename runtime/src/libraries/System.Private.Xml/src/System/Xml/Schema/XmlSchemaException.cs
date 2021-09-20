@@ -91,15 +91,16 @@ namespace System.Xml.Schema
             Exception? innerException,
             int lineNumber,
             int linePosition
-        ) : this(
-            (message == null ? SR.Sch_DefaultException : SR.Xml_UserException),
-            new string?[] { message },
-            innerException,
-            null,
-            lineNumber,
-            linePosition,
-            null
-        ) { }
+        )
+            : this(
+                (message == null ? SR.Sch_DefaultException : SR.Xml_UserException),
+                new string?[] { message },
+                innerException,
+                null,
+                lineNumber,
+                linePosition,
+                null
+            ) { }
 
         internal XmlSchemaException(string? res, string?[]? args)
             : this(res, args, null, null, 0, 0, null) { }

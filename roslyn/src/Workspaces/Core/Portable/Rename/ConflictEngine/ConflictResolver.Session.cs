@@ -58,7 +58,8 @@ namespace Microsoft.CodeAnalysis.Rename.ConflictEngine
                 string replacementText,
                 ImmutableHashSet<ISymbol>? nonConflictSymbols,
                 CancellationToken cancellationToken
-            ) {
+            )
+            {
                 _renameLocationSet = renameLocationSet;
                 _renameSymbolDeclarationLocation = renameSymbolDeclarationLocation;
                 _originalText = renameLocationSet.Symbol.Name;
@@ -134,7 +135,8 @@ namespace Microsoft.CodeAnalysis.Rename.ConflictEngine
                     var intermediateSolution = conflictResolution.OldSolution;
                     foreach (
                         var documentsByProject in documentsGroupedByTopologicallySortedProjectId
-                    ) {
+                    )
+                    {
                         var documentIdsThatGetsAnnotatedAndRenamed = new HashSet<DocumentId>(
                             documentsByProject
                         );
@@ -142,7 +144,8 @@ namespace Microsoft.CodeAnalysis.Rename.ConflictEngine
                             baseSolution.Services.CacheService?.EnableCaching(
                                 documentsByProject.Key
                             )
-                        ) {
+                        )
+                        {
                             // Rename is going to be in 5 phases.
                             // 1st phase - Does a simple token replacement
                             // If the 1st phase results in conflict then we perform then:
@@ -369,7 +372,8 @@ namespace Microsoft.CodeAnalysis.Rename.ConflictEngine
             private async Task DebugVerifyNoErrorsAsync(
                 MutableConflictResolution conflictResolution,
                 IEnumerable<DocumentId> documents
-            ) {
+            )
+            {
                 var documentIdErrorStateLookup = new Dictionary<DocumentId, bool>();
 
                 // we only check for the documentIds we add annotations to, which is a subset of the ones we're going
@@ -398,7 +402,8 @@ namespace Microsoft.CodeAnalysis.Rename.ConflictEngine
                     && conflictResolution.RelatedLocations.All(
                         loc => (loc.Type & RelatedLocationType.UnresolvableConflict) == 0
                     )
-                ) {
+                )
+                {
                     foreach (var documentId in documents)
                     {
                         // only check documents that had no errors before rename (we might have
@@ -428,7 +433,8 @@ namespace Microsoft.CodeAnalysis.Rename.ConflictEngine
                 IEnumerable<DocumentId> allDocumentIdsInProject,
                 ProjectId projectId,
                 MutableConflictResolution conflictResolution
-            ) {
+            )
+            {
                 try
                 {
                     _documentOfRenameSymbolHasBeenRenamed |=
@@ -463,7 +469,8 @@ namespace Microsoft.CodeAnalysis.Rename.ConflictEngine
                                     syntax,
                                     annotation
                                 ) in nodesOrTokensWithConflictCheckAnnotations
-                            ) {
+                            )
+                            {
                                 if (annotation.IsRenameLocation)
                                 {
                                     conflictResolution.AddRelatedLocation(
@@ -526,7 +533,8 @@ namespace Microsoft.CodeAnalysis.Rename.ConflictEngine
 
                         foreach (
                             var (syntax, annotation) in nodesOrTokensWithConflictCheckAnnotations
-                        ) {
+                        )
+                        {
                             var tokenOrNode = syntax;
                             var conflictAnnotation = annotation;
                             reverseMappedLocations[tokenOrNode.GetLocation()!] =
@@ -602,7 +610,8 @@ namespace Microsoft.CodeAnalysis.Rename.ConflictEngine
                                         && complexifiedLocationSpanForThisDocument.Contains(
                                             originalLocation
                                         )
-                                    ) {
+                                    )
+                                    {
                                         conflictResolution.AddRelatedLocation(
                                             new RelatedLocation(
                                                 originalLocation,
@@ -653,7 +662,8 @@ namespace Microsoft.CodeAnalysis.Rename.ConflictEngine
                             var unprocessedDocumentIdWithPotentialDeclarationConflicts in allDocumentIdsInProject.Where(
                                 d => !documentIdsForConflictResolution.Contains(d)
                             )
-                        ) {
+                        )
+                        {
                             var newDocument =
                                 conflictResolution.CurrentSolution.GetRequiredDocument(
                                     unprocessedDocumentIdWithPotentialDeclarationConflicts
@@ -677,7 +687,8 @@ namespace Microsoft.CodeAnalysis.Rename.ConflictEngine
                                     syntax,
                                     annotation
                                 ) in nodesOrTokensWithConflictCheckAnnotations
-                            ) {
+                            )
+                            {
                                 var tokenOrNode = syntax;
                                 var conflictAnnotation = annotation;
                                 reverseMappedLocations[tokenOrNode.GetLocation()!] =
@@ -710,7 +721,8 @@ namespace Microsoft.CodeAnalysis.Rename.ConflictEngine
 
             private async Task<ImmutableHashSet<ISymbol>?> GetNonConflictSymbolsAsync(
                 Project currentProject
-            ) {
+            )
+            {
                 if (_nonConflictSymbols == null)
                     return null;
 
@@ -729,7 +741,8 @@ namespace Microsoft.CodeAnalysis.Rename.ConflictEngine
             private bool IsConflictFreeChange(
                 ImmutableArray<ISymbol> symbols,
                 ImmutableHashSet<ISymbol>? nonConflictSymbols
-            ) {
+            )
+            {
                 if (_nonConflictSymbols != null)
                 {
                     RoslynDebug.Assert(nonConflictSymbols != null);
@@ -751,7 +764,8 @@ namespace Microsoft.CodeAnalysis.Rename.ConflictEngine
             /// </summary>
             private IEnumerable<(SyntaxNodeOrToken syntax, RenameActionAnnotation annotation)> GetNodesOrTokensToCheckForConflicts(
                 SyntaxNode syntaxRoot
-            ) {
+            )
+            {
                 return syntaxRoot.DescendantNodesAndTokens(descendIntoTrivia: true)
                     .Where(s => _renameAnnotations.HasAnnotations<RenameActionAnnotation>(s))
                     .Select(
@@ -769,7 +783,8 @@ namespace Microsoft.CodeAnalysis.Rename.ConflictEngine
                 ISymbol renamedSymbolInNewSolution,
                 RenameActionAnnotation conflictAnnotation,
                 ImmutableArray<ISymbol> newReferencedSymbols
-            ) {
+            )
+            {
                 try
                 {
                     bool hasConflict;
@@ -808,7 +823,8 @@ namespace Microsoft.CodeAnalysis.Rename.ConflictEngine
                                 var originalReference in conflictAnnotation.RenameDeclarationLocationReferences.Where(
                                     loc => loc.IsSourceLocation
                                 )
-                            ) {
+                            )
+                            {
                                 var adjustedStartPosition =
                                     conflictResolution.GetAdjustedTokenStartingPosition(
                                         originalReference.TextSpan.Start,
@@ -818,7 +834,8 @@ namespace Microsoft.CodeAnalysis.Rename.ConflictEngine
                                     newLocations.Any(
                                         loc => loc.SourceSpan.Start == adjustedStartPosition
                                     )
-                                ) {
+                                )
+                                {
                                     hasConflict = false;
                                     break;
                                 }
@@ -830,19 +847,22 @@ namespace Microsoft.CodeAnalysis.Rename.ConflictEngine
                         && conflictAnnotation.IsOriginalTextLocation
                         && conflictAnnotation.RenameDeclarationLocationReferences.Length > 1
                         && newReferencedSymbols.Length == 1
-                    ) {
+                    )
+                    {
                         // an ambiguous situation was resolved through rename in non reference locations
                         hasConflict = false;
                     }
                     else if (
                         newReferencedSymbols.Length
                         != conflictAnnotation.RenameDeclarationLocationReferences.Length
-                    ) {
+                    )
+                    {
                         // Don't show conflicts for errors in the old solution that now bind in the new solution.
                         if (
                             newReferencedSymbols.Length != 0
                             && conflictAnnotation.RenameDeclarationLocationReferences.Length == 0
-                        ) {
+                        )
+                        {
                             hasConflict = false;
                         }
                         else
@@ -860,7 +880,8 @@ namespace Microsoft.CodeAnalysis.Rename.ConflictEngine
                                 conflictAnnotation.RenameDeclarationLocationReferences[
                                     symbolIndex
                                 ].SymbolLocationsCount != symbol.Locations.Length
-                            ) {
+                            )
+                            {
                                 hasConflict = true;
                                 break;
                             }
@@ -877,7 +898,8 @@ namespace Microsoft.CodeAnalysis.Rename.ConflictEngine
                                 && conflictAnnotation.RenameDeclarationLocationReferences[
                                     symbolIndex
                                 ].IsSourceLocation
-                            ) {
+                            )
+                            {
                                 // location was in source before, but not after rename
                                 if (!newLocation.IsInSource)
                                 {
@@ -904,7 +926,8 @@ namespace Microsoft.CodeAnalysis.Rename.ConflictEngine
                                     conflictAnnotation.RenameDeclarationLocationReferences[
                                         symbolIndex
                                     ].IsOverriddenFromMetadata
-                                ) {
+                                )
+                                {
                                     var overridingSymbol =
                                         await SymbolFinder.FindSymbolAtPositionAsync(
                                                 solution.GetDocument(newLocation.SourceTree),
@@ -915,7 +938,8 @@ namespace Microsoft.CodeAnalysis.Rename.ConflictEngine
                                     if (
                                         overridingSymbol != null
                                         && !Equals(renamedSymbolInNewSolution, overridingSymbol)
-                                    ) {
+                                    )
+                                    {
                                         if (!overridingSymbol.IsOverride)
                                         {
                                             hasConflict = true;
@@ -930,7 +954,8 @@ namespace Microsoft.CodeAnalysis.Rename.ConflictEngine
                                                 || !overriddenSymbol.Locations.All(
                                                     loc => loc.IsInMetadata
                                                 )
-                                            ) {
+                                            )
+                                            {
                                                 hasConflict = true;
                                                 break;
                                             }
@@ -956,7 +981,8 @@ namespace Microsoft.CodeAnalysis.Rename.ConflictEngine
                                         _originalText,
                                         _replacementText
                                     )
-                                ) {
+                                )
+                                {
                                     hasConflict = true;
                                     break;
                                 }
@@ -979,7 +1005,8 @@ namespace Microsoft.CodeAnalysis.Rename.ConflictEngine
                 SemanticModel newDocumentSemanticModel,
                 RenameActionAnnotation conflictAnnotation,
                 SyntaxNodeOrToken tokenOrNode
-            ) {
+            )
+            {
                 var newReferencedSymbols = RenameUtilities.GetSymbolsTouchingPosition(
                     tokenOrNode.Span.Start,
                     newDocumentSemanticModel,
@@ -1015,7 +1042,8 @@ namespace Microsoft.CodeAnalysis.Rename.ConflictEngine
 
             private async Task<ISymbol> GetRenamedSymbolInCurrentSolutionAsync(
                 MutableConflictResolution conflictResolution
-            ) {
+            )
+            {
                 try
                 {
                     // get the renamed symbol in complexified new solution
@@ -1079,7 +1107,8 @@ namespace Microsoft.CodeAnalysis.Rename.ConflictEngine
                                 d => d.Project.Language
                             )
                             .Distinct()
-                    ) {
+                    )
+                    {
                         solution.Workspace.Services.GetLanguageServices(language)
                             .GetService<IRenameRewriterLanguageService>()?.TryAddPossibleNameConflicts(
                             symbol,
@@ -1099,7 +1128,8 @@ namespace Microsoft.CodeAnalysis.Rename.ConflictEngine
 
             private async Task AddDocumentsWithPotentialConflictsAsync(
                 IEnumerable<Document> documents
-            ) {
+            )
+            {
                 try
                 {
                     foreach (var document in documents)
@@ -1150,7 +1180,8 @@ namespace Microsoft.CodeAnalysis.Rename.ConflictEngine
                 ISet<RenameLocation> renameLocations,
                 RenamedSpansTracker renameSpansTracker,
                 bool replacementTextValid
-            ) {
+            )
+            {
                 try
                 {
                     foreach (var documentId in documentIdsToRename.ToList())
@@ -1249,7 +1280,8 @@ namespace Microsoft.CodeAnalysis.Rename.ConflictEngine
             private static bool ShouldIncludeLocation(
                 ISet<RenameLocation> renameLocations,
                 RenameLocation location
-            ) {
+            )
+            {
                 if (location.IsRenameInStringOrComment)
                 {
                     return false;
@@ -1274,7 +1306,8 @@ namespace Microsoft.CodeAnalysis.Rename.ConflictEngine
             private static ImmutableSortedSet<TextSpan>? GetSubSpansToRenameInStringAndCommentTextSpans(
                 TextSpan containingLocationForStringOrComment,
                 IEnumerable<RenameLocation> locationsToRename
-            ) {
+            )
+            {
                 var builder = ImmutableSortedSet.CreateBuilder<TextSpan>();
                 foreach (var renameLocation in locationsToRename)
                 {
@@ -1282,7 +1315,8 @@ namespace Microsoft.CodeAnalysis.Rename.ConflictEngine
                         !containingLocationForStringOrComment.Contains(
                             renameLocation.Location.SourceSpan
                         )
-                    ) {
+                    )
+                    {
                         // We found a location outside the 'containingLocationForStringOrComment',
                         // which is likely in trivia.
                         // Bail out from computing specific sub-spans and let the rename rewriter

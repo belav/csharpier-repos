@@ -87,7 +87,8 @@ namespace System.CommandLine.Parsing
                     argument.Arity.MaximumNumberOfValues
                 )
                     is FailedArgumentConversionResult failedResult
-            ) {
+            )
+            {
                 return failedResult;
             }
 

@@ -19,7 +19,8 @@ namespace Microsoft.CodeAnalysis.CodeActions
                 string title,
                 string? equivalenceKey = null,
                 IEnumerable<string>? customTags = null
-            ) {
+            )
+            {
                 Title = title;
                 EquivalenceKey = equivalenceKey;
 

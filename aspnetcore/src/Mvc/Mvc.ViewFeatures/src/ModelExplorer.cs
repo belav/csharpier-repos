@@ -31,7 +31,8 @@ namespace Microsoft.AspNetCore.Mvc.ViewFeatures
             IModelMetadataProvider metadataProvider,
             ModelMetadata metadata,
             object model
-        ) {
+        )
+        {
             if (metadataProvider == null)
             {
                 throw new ArgumentNullException(nameof(metadataProvider));
@@ -59,7 +60,8 @@ namespace Microsoft.AspNetCore.Mvc.ViewFeatures
             ModelExplorer container,
             ModelMetadata metadata,
             Func<object, object> modelAccessor
-        ) {
+        )
+        {
             if (metadataProvider == null)
             {
                 throw new ArgumentNullException(nameof(metadataProvider));
@@ -93,7 +95,8 @@ namespace Microsoft.AspNetCore.Mvc.ViewFeatures
             ModelExplorer container,
             ModelMetadata metadata,
             object model
-        ) {
+        )
+        {
             if (metadataProvider == null)
             {
                 throw new ArgumentNullException(nameof(metadataProvider));
@@ -222,7 +225,8 @@ namespace Microsoft.AspNetCore.Mvc.ViewFeatures
                                     propertyHelpers[j].Property.Name,
                                     StringComparison.Ordinal
                                 )
-                            ) {
+                            )
+                            {
                                 propertyHelper = propertyHelpers[j];
                                 break;
                             }
@@ -412,7 +416,8 @@ namespace Microsoft.AspNetCore.Mvc.ViewFeatures
         public ModelExplorer GetExplorerForExpression(
             Type modelType,
             Func<object, object> modelAccessor
-        ) {
+        )
+        {
             if (modelType == null)
             {
                 throw new ArgumentNullException(nameof(modelType));
@@ -442,7 +447,8 @@ namespace Microsoft.AspNetCore.Mvc.ViewFeatures
         public ModelExplorer GetExplorerForExpression(
             ModelMetadata metadata,
             Func<object, object> modelAccessor
-        ) {
+        )
+        {
             if (metadata == null)
             {
                 throw new ArgumentNullException(nameof(metadata));
@@ -467,7 +473,8 @@ namespace Microsoft.AspNetCore.Mvc.ViewFeatures
         private ModelExplorer CreateExplorerForProperty(
             ModelMetadata propertyMetadata,
             PropertyHelper propertyHelper
-        ) {
+        )
+        {
             if (propertyHelper == null)
             {
                 return new ModelExplorer(

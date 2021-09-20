@@ -66,7 +66,8 @@ namespace Microsoft.AspNetCore.Owin
                 if (
                     environment.TryGetValue(OwinConstants.WebSocket.AcceptAlt, out accept)
                     && accept is WebSocketAcceptAlt
-                ) {
+                )
+                {
                     var adapter = new WebSocketAcceptAdapter(
                         environment,
                         (WebSocketAcceptAlt)accept
@@ -79,7 +80,8 @@ namespace Microsoft.AspNetCore.Owin
                     if (
                         (int)environment[OwinConstants.ResponseStatusCode] == 101
                         && adapter._callback != null
-                    ) {
+                    )
+                    {
                         WebSocketAcceptContext acceptContext = null;
                         object obj;
                         if (
@@ -88,7 +90,8 @@ namespace Microsoft.AspNetCore.Owin
                                 typeof(WebSocketAcceptContext).FullName,
                                 out obj
                             )
-                        ) {
+                        )
+                        {
                             acceptContext = obj as WebSocketAcceptContext;
                         }
                         else if (adapter._options != null)

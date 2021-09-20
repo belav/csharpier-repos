@@ -109,7 +109,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.MisplacedUsingDirective
             string expectedMarkup,
             CodeStyleOption2<AddImportPlacement> preferredPlacementOption,
             bool placeSystemNamespaceFirst
-        ) {
+        )
+        {
             var options = new OptionsCollection(GetLanguage())
             {
                 {
@@ -171,7 +172,8 @@ namespace TestNamespace
         [InlineData(DelegateDefinition)]
         public Task WhenPreserve_UsingsInCompilationUnitWithTypeDefinition_ValidUsingStatements(
             string typeDefinition
-        ) {
+        )
+        {
             var testCode =
                 $@"[|using System;|]
 
@@ -255,7 +257,8 @@ namespace TestNamespace
         [InlineData(DelegateDefinition)]
         public Task WhenOutsidePreferred_UsingsInCompilationUnitWithMember_ValidUsingStatements(
             string typeDefinition
-        ) {
+        )
+        {
             var testCode =
                 $@"[|using System;|]
 
@@ -782,7 +785,8 @@ namespace B
         [InlineData(DelegateDefinition)]
         public Task WhenInsidePreferred_UsingsInCompilationUnitWithTypeDefinition_ValidUsingStatements(
             string typeDefinition
-        ) {
+        )
+        {
             var testCode =
                 $@"[|using System;|]
 

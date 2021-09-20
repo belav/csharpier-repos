@@ -69,7 +69,7 @@ namespace Microsoft.AspNetCore.DataProtection.KeyManagement
             IActivator activator
         )
 #pragma warning restore PUB0001 // Pubternal type IActivator in public API
-          : this(keyManagementOptions, activator, NullLoggerFactory.Instance) { }
+            : this(keyManagementOptions, activator, NullLoggerFactory.Instance) { }
 
         /// <summary>
         /// Creates an <see cref="XmlKeyManager"/>.
@@ -84,19 +84,20 @@ namespace Microsoft.AspNetCore.DataProtection.KeyManagement
             ILoggerFactory loggerFactory
         )
 #pragma warning restore PUB0001 // Pubternal type IActivator in public API
-          : this(
-            keyManagementOptions,
-            activator,
-            loggerFactory,
-            DefaultKeyStorageDirectories.Instance
-        ) { }
+            : this(
+                keyManagementOptions,
+                activator,
+                loggerFactory,
+                DefaultKeyStorageDirectories.Instance
+            ) { }
 
         internal XmlKeyManager(
             IOptions<KeyManagementOptions> keyManagementOptions,
             IActivator activator,
             ILoggerFactory loggerFactory,
             IDefaultKeyStorageDirectories keyStorageDirectories
-        ) {
+        )
+        {
             _loggerFactory =
                 loggerFactory ?? throw new ArgumentNullException(nameof(loggerFactory));
             _logger = _loggerFactory.CreateLogger<XmlKeyManager>();
@@ -219,7 +220,8 @@ namespace Microsoft.AspNetCore.DataProtection.KeyManagement
                         if (
                             !mostRecentMassRevocationDate.HasValue
                             || mostRecentMassRevocationDate < thisMassRevocationDate
-                        ) {
+                        )
+                        {
                             mostRecentMassRevocationDate = thisMassRevocationDate;
                         }
                     }
@@ -402,7 +404,8 @@ namespace Microsoft.AspNetCore.DataProtection.KeyManagement
         private void TriggerAndResetCacheExpirationToken(
             [CallerMemberName] string? opName = null,
             bool suppressLogging = false
-        ) {
+        )
+        {
             if (!suppressLogging)
             {
                 _logger.KeyCacheExpirationTokenTriggeredByOperation(opName!);
@@ -433,7 +436,8 @@ namespace Microsoft.AspNetCore.DataProtection.KeyManagement
             DateTimeOffset creationDate,
             DateTimeOffset activationDate,
             DateTimeOffset expirationDate
-        ) {
+        )
+        {
             // <key id="{guid}" version="1">
             //   <creationDate>...</creationDate>
             //   <activationDate>...</activationDate>
@@ -512,7 +516,8 @@ namespace Microsoft.AspNetCore.DataProtection.KeyManagement
 
         IAuthenticatedEncryptorDescriptor IInternalXmlKeyManager.DeserializeDescriptorFromKeyElement(
             XElement keyElement
-        ) {
+        )
+        {
             try
             {
                 // Figure out who will be deserializing this
@@ -549,7 +554,8 @@ namespace Microsoft.AspNetCore.DataProtection.KeyManagement
             Guid keyId,
             DateTimeOffset revocationDate,
             string? reason
-        ) {
+        )
+        {
             // <revocation version="1">
             //   <revocationDate>...</revocationDate>
             //   <key id="{guid}" />

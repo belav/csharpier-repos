@@ -152,7 +152,8 @@ namespace System.ComponentModel.Composition.Registration.Tests
             out List<Tuple<object, List<Attribute>>> configuredMembers,
             out IEnumerable<Attribute> typeAtts,
             Type targetType
-        ) {
+        )
+        {
             configuredMembers = new List<Tuple<object, List<Attribute>>>();
             typeAtts = builder.BuildTypeAttributes(targetType);
             builder.BuildConstructorAttributes(targetType, ref configuredMembers);

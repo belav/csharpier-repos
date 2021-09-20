@@ -62,7 +62,8 @@ namespace System.Reflection.Tests
             ConstructorInfo constructorInfo1,
             ConstructorInfo constructorInfo2,
             bool expected
-        ) {
+        )
+        {
             Assert.Equal(expected, constructorInfo1.Equals(constructorInfo2));
             Assert.NotEqual(expected, constructorInfo1 != constructorInfo2);
         }

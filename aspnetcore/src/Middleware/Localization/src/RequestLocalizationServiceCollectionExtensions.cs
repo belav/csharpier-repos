@@ -20,7 +20,8 @@ namespace Microsoft.Extensions.DependencyInjection
         public static IServiceCollection AddRequestLocalization(
             this IServiceCollection services,
             Action<RequestLocalizationOptions> configureOptions
-        ) {
+        )
+        {
             if (services == null)
             {
                 throw new ArgumentNullException(nameof(services));

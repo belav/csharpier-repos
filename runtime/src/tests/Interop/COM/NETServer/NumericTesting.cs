@@ -202,7 +202,8 @@ public class NumericTesting : Server.Contract.INumericTesting
         int i9,
         int i10,
         int i11
-    ) {
+    )
+    {
         return i1 + i2 + i3 + i4 + i5 + i6 + i7 + i8 + i9 + i10 + i11;
     }
 
@@ -219,7 +220,8 @@ public class NumericTesting : Server.Contract.INumericTesting
         int i10,
         int i11,
         int i12
-    ) {
+    )
+    {
         return i1 + i2 + i3 + i4 + i5 + i6 + i7 + i8 + i9 + i10 + i11 + i12;
     }
 }

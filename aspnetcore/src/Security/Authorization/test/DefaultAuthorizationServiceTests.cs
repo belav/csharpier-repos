@@ -18,7 +18,8 @@ namespace Microsoft.AspNetCore.Authorization.Test
     {
         private IAuthorizationService BuildAuthorizationService(
             Action<IServiceCollection> setupServices = null
-        ) {
+        )
+        {
             var services = new ServiceCollection();
             services.AddAuthorizationCore();
             services.AddLogging();
@@ -188,7 +189,8 @@ namespace Microsoft.AspNetCore.Authorization.Test
         [InlineData(false)]
         public async Task Authorize_ShouldInvokeAllHandlersDependingOnSetting(
             bool invokeAllHandlers
-        ) {
+        )
+        {
             // Arrange
             var handler1 = new FailHandler();
             var handler2 = new FailHandler();
@@ -790,7 +792,8 @@ namespace Microsoft.AspNetCore.Authorization.Test
             protected override Task HandleRequirementAsync(
                 AuthorizationHandlerContext context,
                 CustomRequirement requirement
-            ) {
+            )
+            {
                 Invoked = true;
                 context.Succeed(requirement);
                 return Task.FromResult(0);
@@ -866,7 +869,8 @@ namespace Microsoft.AspNetCore.Authorization.Test
             protected override Task HandleRequirementAsync(
                 AuthorizationHandlerContext context,
                 PassThroughRequirement requirement
-            ) {
+            )
+            {
                 if (Succeed)
                 {
                     context.Succeed(requirement);
@@ -1029,7 +1033,8 @@ namespace Microsoft.AspNetCore.Authorization.Test
         {
             public ExpenseReportAuthorizationHandler(
                 IEnumerable<OperationAuthorizationRequirement> authorized
-            ) {
+            )
+            {
                 _allowed = authorized;
             }
 
@@ -1039,7 +1044,8 @@ namespace Microsoft.AspNetCore.Authorization.Test
                 AuthorizationHandlerContext context,
                 OperationAuthorizationRequirement requirement,
                 ExpenseReport resource
-            ) {
+            )
+            {
                 if (_allowed.Contains(requirement))
                 {
                     context.Succeed(requirement);
@@ -1053,7 +1059,8 @@ namespace Microsoft.AspNetCore.Authorization.Test
             protected override Task HandleRequirementAsync(
                 AuthorizationHandlerContext context,
                 OperationAuthorizationRequirement requirement
-            ) {
+            )
+            {
                 if (context.User.HasClaim("SuperUser", "yes"))
                 {
                     context.Succeed(requirement);
@@ -1101,7 +1108,8 @@ namespace Microsoft.AspNetCore.Authorization.Test
                 AuthorizationHandlerContext context,
                 OperationAuthorizationRequirement requirement,
                 string resource
-            ) {
+            )
+            {
                 throw new NotImplementedException();
             }
         }
@@ -1112,7 +1120,8 @@ namespace Microsoft.AspNetCore.Authorization.Test
                 AuthorizationHandlerContext context,
                 OperationAuthorizationRequirement requirement,
                 int id
-            ) {
+            )
+            {
                 if (id % 2 == 0)
                 {
                     context.Succeed(requirement);
@@ -1410,7 +1419,8 @@ namespace Microsoft.AspNetCore.Authorization.Test
                 IEnumerable<IAuthorizationRequirement> requirements,
                 ClaimsPrincipal user,
                 object resource
-            ) {
+            )
+            {
                 return new BadContext();
             }
         }
@@ -1449,7 +1459,8 @@ namespace Microsoft.AspNetCore.Authorization.Test
         {
             public Task<IEnumerable<IAuthorizationHandler>> GetHandlersAsync(
                 AuthorizationHandlerContext context
-            ) {
+            )
+            {
                 return Task.FromResult<IEnumerable<IAuthorizationHandler>>(
                     new IAuthorizationHandler[1] { new FailHandler() }
                 );
@@ -1497,7 +1508,8 @@ namespace Microsoft.AspNetCore.Authorization.Test
                     Exception,
                     Func<object, Exception, string>
                 > assertion
-            ) {
+            )
+            {
                 _assertion = assertion;
             }
 
@@ -1517,7 +1529,8 @@ namespace Microsoft.AspNetCore.Authorization.Test
                 TState state,
                 Exception exception,
                 Func<TState, Exception, string> formatter
-            ) {
+            )
+            {
                 _assertion(
                     logLevel,
                     eventId,
@@ -1539,7 +1552,8 @@ namespace Microsoft.AspNetCore.Authorization.Test
                 object state,
                 Exception exception,
                 Func<object, Exception, string> formatter
-            ) {
+            )
+            {
                 Assert.Equal(LogLevel.Information, level);
                 Assert.Equal(2, eventId.Id);
                 Assert.Equal("UserAuthorizationFailed", eventId.Name);
@@ -1593,7 +1607,8 @@ namespace Microsoft.AspNetCore.Authorization.Test
                 object state,
                 Exception exception,
                 Func<object, Exception, string> formatter
-            ) {
+            )
+            {
                 Assert.Equal(LogLevel.Information, level);
                 Assert.Equal(2, eventId.Id);
                 Assert.Equal("UserAuthorizationFailed", eventId.Name);

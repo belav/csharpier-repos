@@ -38,7 +38,8 @@ namespace ILCompiler.Reflection.ReadyToRun
             string owningType,
             EntityHandle methodHandle,
             string[] instanceArgs
-        ) {
+        )
+        {
             ComponentReader = componentReader;
             EntityHandle owningTypeHandle;
             DisassemblingGenericContext genericContext = new DisassemblingGenericContext(

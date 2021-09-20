@@ -38,7 +38,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             int missingParameter = -1,
             bool hasAnyRefOmittedArgument = false,
             ImmutableArray<TypeParameterDiagnosticInfo> constraintFailureDiagnosticsOpt = default
-        ) {
+        )
+        {
             this.Kind = kind;
             this.BadArgumentsOpt = badArgumentsOpt;
             this.ArgsToParamsOpt = argsToParamsOpt;
@@ -148,7 +149,8 @@ namespace Microsoft.CodeAnalysis.CSharp
 
         public static MemberAnalysisResult ArgumentParameterMismatch(
             ArgumentAnalysisResult argAnalysis
-        ) {
+        )
+        {
             switch (argAnalysis.Kind)
             {
                 case ArgumentAnalysisResultKind.NoCorrespondingParameter:
@@ -230,7 +232,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             ImmutableArray<int> argsToParamsOpt,
             ImmutableArray<int> badArguments,
             ImmutableArray<Conversion> conversions
-        ) {
+        )
+        {
             Debug.Assert(conversions.Length != 0);
             Debug.Assert(badArguments.Length != 0);
             return new MemberAnalysisResult(
@@ -265,7 +268,8 @@ namespace Microsoft.CodeAnalysis.CSharp
 
         public static MemberAnalysisResult ConstructedParameterFailedConstraintsCheck(
             int parameterPosition
-        ) {
+        )
+        {
             return new MemberAnalysisResult(
                 MemberResolutionKind.ConstructedParameterFailedConstraintCheck,
                 missingParameter: parameterPosition
@@ -291,7 +295,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             ImmutableArray<int> argsToParamsOpt,
             ImmutableArray<Conversion> conversions,
             bool hasAnyRefOmittedArgument
-        ) {
+        )
+        {
             return new MemberAnalysisResult(
                 MemberResolutionKind.ApplicableInNormalForm,
                 default(ImmutableArray<int>),
@@ -305,7 +310,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             ImmutableArray<int> argsToParamsOpt,
             ImmutableArray<Conversion> conversions,
             bool hasAnyRefOmittedArgument
-        ) {
+        )
+        {
             return new MemberAnalysisResult(
                 MemberResolutionKind.ApplicableInExpandedForm,
                 default(ImmutableArray<int>),
@@ -327,7 +333,8 @@ namespace Microsoft.CodeAnalysis.CSharp
 
         internal static MemberAnalysisResult ConstraintFailure(
             ImmutableArray<TypeParameterDiagnosticInfo> constraintFailureDiagnostics
-        ) {
+        )
+        {
             return new MemberAnalysisResult(
                 MemberResolutionKind.ConstraintFailure,
                 constraintFailureDiagnosticsOpt: constraintFailureDiagnostics

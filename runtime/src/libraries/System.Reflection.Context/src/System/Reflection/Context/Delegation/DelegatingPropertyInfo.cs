@@ -94,7 +94,8 @@ namespace System.Reflection.Context.Delegation
             Binder binder,
             object[] index,
             CultureInfo culture
-        ) {
+        )
+        {
             return UnderlyingProperty.GetValue(obj, invokeAttr, binder, index, culture);
         }
 
@@ -110,7 +111,8 @@ namespace System.Reflection.Context.Delegation
             Binder binder,
             object[] index,
             CultureInfo culture
-        ) {
+        )
+        {
             UnderlyingProperty.SetValue(obj, value, invokeAttr, binder, index, culture);
         }
 

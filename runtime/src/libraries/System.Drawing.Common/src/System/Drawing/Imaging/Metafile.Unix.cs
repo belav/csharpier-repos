@@ -177,33 +177,25 @@ namespace System.Drawing.Imaging
                 description
             ) { }
 
-        public Metafile(
-            Stream stream,
-            IntPtr referenceHdc,
-            EmfType type,
-            string? description
-        ) : this(
-            stream,
-            referenceHdc,
-            default(RectangleF),
-            MetafileFrameUnit.GdiCompatible,
-            type,
-            description
-        ) { }
+        public Metafile(Stream stream, IntPtr referenceHdc, EmfType type, string? description)
+            : this(
+                stream,
+                referenceHdc,
+                default(RectangleF),
+                MetafileFrameUnit.GdiCompatible,
+                type,
+                description
+            ) { }
 
-        public Metafile(
-            string fileName,
-            IntPtr referenceHdc,
-            EmfType type,
-            string? description
-        ) : this(
-            fileName,
-            referenceHdc,
-            default(RectangleF),
-            MetafileFrameUnit.GdiCompatible,
-            type,
-            description
-        ) { }
+        public Metafile(string fileName, IntPtr referenceHdc, EmfType type, string? description)
+            : this(
+                fileName,
+                referenceHdc,
+                default(RectangleF),
+                MetafileFrameUnit.GdiCompatible,
+                type,
+                description
+            ) { }
 
         public Metafile(
             IntPtr referenceHdc,
@@ -211,7 +203,8 @@ namespace System.Drawing.Imaging
             MetafileFrameUnit frameUnit,
             EmfType type,
             string? desc
-        ) {
+        )
+        {
             int status = Gdip.GdipRecordMetafileI(
                 referenceHdc,
                 type,
@@ -230,7 +223,8 @@ namespace System.Drawing.Imaging
             MetafileFrameUnit frameUnit,
             EmfType type,
             string? description
-        ) {
+        )
+        {
             if (stream == null)
                 throw new NullReferenceException(nameof(stream));
 
@@ -265,7 +259,8 @@ namespace System.Drawing.Imaging
             MetafileFrameUnit frameUnit,
             EmfType type,
             string? description
-        ) {
+        )
+        {
             if (stream == null)
                 throw new NullReferenceException(nameof(stream));
 
@@ -300,7 +295,8 @@ namespace System.Drawing.Imaging
             MetafileFrameUnit frameUnit,
             EmfType type,
             string? description
-        ) {
+        )
+        {
             // Called in order to emulate exception behavior from .NET Framework related to invalid file paths.
             Path.GetFullPath(fileName);
 
@@ -426,7 +422,8 @@ namespace System.Drawing.Imaging
         public static MetafileHeader GetMetafileHeader(
             IntPtr hmetafile,
             WmfPlaceableFileHeader wmfHeader
-        ) {
+        )
+        {
             IntPtr header = Marshal.AllocHGlobal(Marshal.SizeOf(typeof(MetafileHeader)));
             try
             {

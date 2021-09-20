@@ -18,7 +18,8 @@ namespace System.CommandLine.Suggestions
         public IEnumerable<string> GetSuggestions(
             ParseResult? parseResult = null,
             string? textToMatch = null
-        ) {
+        )
+        {
             return _suggest(parseResult, textToMatch);
         }
     }

@@ -31,7 +31,8 @@ namespace Microsoft.CodeAnalysis.ExpressionEvaluator
             int[] dynamicFlagStartIndices,
             ReadOnlyCollection<string> tupleElementNames,
             int[] tupleElementNameStartIndices
-        ) {
+        )
+        {
             Debug.Assert(typeDefinition != null);
             Debug.Assert((dynamicFlags != null) == (dynamicFlagStartIndices != null));
             Debug.Assert((tupleElementNames != null) == (tupleElementNameStartIndices != null));
@@ -106,7 +107,8 @@ namespace Microsoft.CodeAnalysis.ExpressionEvaluator
         internal DkmClrCustomTypeInfo SubstituteCustomTypeInfo(
             Type type,
             DkmClrCustomTypeInfo customInfo
-        ) {
+        )
+        {
             if (_typeDefinition == null)
             {
                 return customInfo;
@@ -132,7 +134,8 @@ namespace Microsoft.CodeAnalysis.ExpressionEvaluator
         private ReadOnlyCollection<byte> SubstituteDynamicFlags(
             Type type,
             ReadOnlyCollection<byte> dynamicFlagsOpt
-        ) {
+        )
+        {
             var builder = ArrayBuilder<bool>.GetInstance();
             int f = 0;
 
@@ -164,7 +167,8 @@ namespace Microsoft.CodeAnalysis.ExpressionEvaluator
         private ReadOnlyCollection<string> SubstituteTupleElementNames(
             Type type,
             ReadOnlyCollection<string> tupleElementNamesOpt
-        ) {
+        )
+        {
             var builder = ArrayBuilder<string>.GetInstance();
             int i = 0;
 
@@ -230,7 +234,8 @@ namespace Microsoft.CodeAnalysis.ExpressionEvaluator
             int[] startIndices,
             Map<T, U> map,
             ArrayBuilder<U> builder
-        ) {
+        )
+        {
             Debug.Assert(type.IsGenericParameter);
             if (startIndices == null)
             {
@@ -252,7 +257,8 @@ namespace Microsoft.CodeAnalysis.ExpressionEvaluator
             int end,
             Map<T, U> map,
             ArrayBuilder<U> builder
-        ) {
+        )
+        {
             for (int i = start; i < end; i++)
             {
                 builder.Add(map(collection, i));

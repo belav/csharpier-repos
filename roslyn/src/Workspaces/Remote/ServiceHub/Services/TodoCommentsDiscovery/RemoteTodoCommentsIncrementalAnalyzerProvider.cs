@@ -22,7 +22,8 @@ namespace Microsoft.CodeAnalysis.Remote
         public RemoteTodoCommentsIncrementalAnalyzerProvider(
             RemoteCallback<IRemoteTodoCommentsDiscoveryService.ICallback> callback,
             RemoteServiceCallbackId callbackId
-        ) {
+        )
+        {
             _callback = callback;
             _callbackId = callbackId;
         }

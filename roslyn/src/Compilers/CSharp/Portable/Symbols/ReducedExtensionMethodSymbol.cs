@@ -38,7 +38,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             MethodSymbol method,
             TypeSymbol receiverType,
             CSharpCompilation compilation
-        ) {
+        )
+        {
             Debug.Assert(
                 method.IsExtensionMethod && method.MethodKind != MethodKind.ReducedExtension
             );
@@ -130,7 +131,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             TypeSymbol thisType,
             CSharpCompilation compilation,
             ref CompoundUseSiteInfo<AssemblySymbol> useSiteInfo
-        ) {
+        )
+        {
             Debug.Assert(method.IsExtensionMethod);
             Debug.Assert((object)thisType != null);
 
@@ -296,7 +298,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
 
         public override TypeSymbol GetTypeInferredDuringReduction(
             TypeParameterSymbol reducedFromTypeParameter
-        ) {
+        )
+        {
             if ((object)reducedFromTypeParameter == null)
             {
                 throw new System.ArgumentNullException();
@@ -413,7 +416,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             CultureInfo preferredCulture = null,
             bool expandIncludes = false,
             CancellationToken cancellationToken = default(CancellationToken)
-        ) {
+        )
+        {
             return _reducedFrom.GetDocumentationCommentXml(
                 preferredCulture,
                 expandIncludes,
@@ -468,13 +472,15 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
 
         internal sealed override bool IsMetadataNewSlot(
             bool ignoreInterfaceImplementationChanges = false
-        ) {
+        )
+        {
             return false;
         }
 
         internal sealed override bool IsMetadataVirtual(
             bool ignoreInterfaceImplementationChanges = false
-        ) {
+        )
+        {
             return false;
         }
 

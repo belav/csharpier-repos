@@ -36,7 +36,8 @@ namespace Microsoft.CodeAnalysis.Editor.NavigableSymbols
             IWaitIndicator waitIndicator,
             IThreadingContext threadingContext,
             IStreamingFindUsagesPresenter streamingPresenter
-        ) {
+        )
+        {
             _waitIndicator = waitIndicator;
             _threadingContext = threadingContext;
             _streamingPresenter = streamingPresenter;
@@ -45,7 +46,8 @@ namespace Microsoft.CodeAnalysis.Editor.NavigableSymbols
         public INavigableSymbolSource TryCreateNavigableSymbolSource(
             ITextView textView,
             ITextBuffer buffer
-        ) {
+        )
+        {
             return textView.GetOrCreatePerSubjectBufferProperty(
                 buffer,
                 s_key,

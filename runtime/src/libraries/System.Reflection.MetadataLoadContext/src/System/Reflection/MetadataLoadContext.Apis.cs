@@ -106,7 +106,8 @@ namespace System.Reflection
         public MetadataLoadContext(
             MetadataAssemblyResolver resolver,
             string? coreAssemblyName = null
-        ) {
+        )
+        {
             if (resolver == null)
                 throw new ArgumentNullException(nameof(resolver));
 

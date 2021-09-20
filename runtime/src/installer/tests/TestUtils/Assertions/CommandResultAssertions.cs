@@ -88,7 +88,8 @@ namespace Microsoft.DotNet.CoreSetup.Test
         public AndConstraint<CommandResultAssertions> HaveStdOutMatching(
             string pattern,
             RegexOptions options = RegexOptions.None
-        ) {
+        )
+        {
             Execute.Assertion.ForCondition(Regex.Match(Result.StdOut, pattern, options).Success)
                 .FailWith(
                     "Matching the command output failed. Pattern: {0}{1}",
@@ -130,7 +131,8 @@ namespace Microsoft.DotNet.CoreSetup.Test
         public AndConstraint<CommandResultAssertions> HaveStdErrMatching(
             string pattern,
             RegexOptions options = RegexOptions.None
-        ) {
+        )
+        {
             Execute.Assertion.ForCondition(Regex.Match(Result.StdErr, pattern, options).Success)
                 .FailWith(
                     "Matching the command error output failed. Pattern: {0}{1}",
@@ -212,7 +214,8 @@ namespace Microsoft.DotNet.CoreSetup.Test
         public AndConstraint<CommandResultAssertions> HaveSkippedProjectCompilation(
             string skippedProject,
             string frameworkFullName
-        ) {
+        )
+        {
             Result.StdOut.Should()
                 .Contain(
                     "Project {0} ({1}) was previously compiled. Skipping compilation.",
@@ -226,7 +229,8 @@ namespace Microsoft.DotNet.CoreSetup.Test
         public AndConstraint<CommandResultAssertions> HaveCompiledProject(
             string compiledProject,
             string frameworkFullName
-        ) {
+        )
+        {
             Result.StdOut.Should()
                 .Contain($"Project {0} ({1}) will be compiled", compiledProject, frameworkFullName);
 

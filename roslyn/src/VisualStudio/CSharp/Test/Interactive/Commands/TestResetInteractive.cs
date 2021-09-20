@@ -72,7 +72,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Interactive.Commands
             out ImmutableArray<string> projectNamespaces,
             out string projectDirectory,
             out InteractiveHostPlatform? platform
-        ) {
+        )
+        {
             references = References;
             referenceSearchPaths = ReferenceSearchPaths;
             sourceSearchPaths = SourceSearchPaths;
@@ -90,7 +91,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Interactive.Commands
         protected override Task<IEnumerable<string>> GetNamespacesToImportAsync(
             IEnumerable<string> namespacesToImport,
             IInteractiveWindow interactiveWindow
-        ) {
+        )
+        {
             return Task.FromResult((IEnumerable<string>)NamespacesToImport);
         }
     }

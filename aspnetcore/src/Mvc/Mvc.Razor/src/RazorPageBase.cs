@@ -157,7 +157,8 @@ namespace Microsoft.AspNetCore.Mvc.Razor
             string attributeName,
             string tagHelperTypeName,
             string propertyName
-        ) {
+        )
+        {
             return Resources.FormatRazorPage_InvalidTagHelperIndexerAssignment(
                 attributeName,
                 tagHelperTypeName,
@@ -487,7 +488,8 @@ namespace Microsoft.AspNetCore.Mvc.Razor
             string suffix,
             int suffixOffset,
             int attributeValuesCount
-        ) {
+        )
+        {
             if (prefix == null)
             {
                 throw new ArgumentNullException(nameof(prefix));
@@ -531,7 +533,8 @@ namespace Microsoft.AspNetCore.Mvc.Razor
             int valueOffset,
             int valueLength,
             bool isLiteral
-        ) {
+        )
+        {
             if (_attributeInfo.AttributeValuesCount == 1)
             {
                 if (IsBoolFalseOrNullValue(prefix, value))
@@ -592,7 +595,8 @@ namespace Microsoft.AspNetCore.Mvc.Razor
             string attributeName,
             int attributeValuesCount,
             HtmlAttributeValueStyle attributeValueStyle
-        ) {
+        )
+        {
             _tagHelperAttributeInfo = new TagHelperAttributeInfo(
                 executionContext,
                 attributeName,
@@ -617,7 +621,8 @@ namespace Microsoft.AspNetCore.Mvc.Razor
             int valueOffset,
             int valueLength,
             bool isLiteral
-        ) {
+        )
+        {
             Debug.Assert(_tagHelperAttributeInfo.ExecutionContext != null);
             if (_tagHelperAttributeInfo.AttributeValuesCount == 1)
             {
@@ -808,7 +813,8 @@ namespace Microsoft.AspNetCore.Mvc.Razor
                 string suffix,
                 int suffixOffset,
                 int attributeValuesCount
-            ) {
+            )
+            {
                 Name = name;
                 Prefix = prefix;
                 PrefixOffset = prefixOffset;
@@ -841,7 +847,8 @@ namespace Microsoft.AspNetCore.Mvc.Razor
                 string name,
                 int attributeValuesCount,
                 HtmlAttributeValueStyle attributeValueStyle
-            ) {
+            )
+            {
                 ExecutionContext = tagHelperExecutionContext;
                 Name = name;
                 AttributeValuesCount = attributeValuesCount;

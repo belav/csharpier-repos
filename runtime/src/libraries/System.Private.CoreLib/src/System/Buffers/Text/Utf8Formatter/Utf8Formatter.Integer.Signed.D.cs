@@ -16,7 +16,8 @@ namespace System.Buffers.Text
             byte precision,
             Span<byte> destination,
             out int bytesWritten
-        ) {
+        )
+        {
             bool insertNegationSign = false;
             if (value < 0)
             {

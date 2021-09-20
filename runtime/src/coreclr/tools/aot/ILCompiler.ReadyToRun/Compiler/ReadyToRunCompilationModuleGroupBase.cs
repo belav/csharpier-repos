@@ -41,7 +41,8 @@ namespace ILCompiler
             IEnumerable<EcmaModule> compilationModuleSet,
             IEnumerable<ModuleDesc> versionBubbleModuleSet,
             bool compileGenericDependenciesFromVersionBubbleModuleSet
-        ) {
+        )
+        {
             _compilationModuleSet = new HashSet<EcmaModule>(compilationModuleSet);
             _isCompositeBuildMode = isCompositeBuildMode;
             _isInputBubble = isInputBubble;
@@ -120,7 +121,8 @@ namespace ILCompiler
                         module,
                         out CompilationUnitIndex compilationUnit
                     )
-                ) {
+                )
+                {
                     compilationUnit = _nextCompilationUnit;
                     _nextCompilationUnit = (CompilationUnitIndex)(((int)_nextCompilationUnit) + 1);
                     _moduleCompilationUnits.Add(module, compilationUnit);
@@ -154,7 +156,8 @@ namespace ILCompiler
             public CompilationUnitSet(
                 ReadyToRunCompilationModuleGroupBase compilationGroup,
                 ModuleDesc module
-            ) {
+            )
+            {
                 CompilationUnitIndex compilationIndex =
                     compilationGroup.ModuleToCompilationUnitIndex(module);
                 _bits = new BitArray(((int)compilationIndex) + 1);
@@ -188,7 +191,8 @@ namespace ILCompiler
             public void UnionWith(
                 ReadyToRunCompilationModuleGroupBase compilationGroup,
                 CompilationUnitSet other
-            ) {
+            )
+            {
                 if (other._bits == null)
                     return;
 
@@ -257,7 +261,8 @@ namespace ILCompiler
                 || type.IsPointer
                 || type.IsFunctionPointer
                 || type.IsCanonicalDefinitionType(CanonicalFormKind.Any)
-            ) {
+            )
+            {
                 return default(CompilationUnitSet);
             }
 
@@ -297,14 +302,16 @@ namespace ILCompiler
         public override bool NeedsAlignmentBetweenBaseTypeAndDerived(
             MetadataType baseType,
             MetadataType derivedType
-        ) {
+        )
+        {
             if (baseType.IsObject)
                 return false;
 
             if (
                 !ModuleMatchesCompilationUnitIndex(derivedType.Module, baseType.Module)
                 || TypeLayoutCompilationUnits(baseType).HasMultipleCompilationUnits
-            ) {
+            )
+            {
                 return true;
             }
 
@@ -380,7 +387,8 @@ namespace ILCompiler
         public sealed override bool TryGetModuleTokenForExternalType(
             TypeDesc type,
             out ModuleToken token
-        ) {
+        )
+        {
             Debug.Assert(!VersionsWithType(type));
 
             if (_typeRefsInCompilationModuleSet == null)
@@ -438,7 +446,8 @@ namespace ILCompiler
         private bool ComputeInstantiationVersionsWithCode(
             Instantiation inst,
             TypeSystemEntity entityWithInstantiation
-        ) {
+        )
+        {
             for (int iInstantiation = 0; iInstantiation < inst.Length; iInstantiation++)
             {
                 TypeDesc instType = inst[iInstantiation];
@@ -484,7 +493,8 @@ namespace ILCompiler
             static bool ComputeInstantiationTypeVersionsWithCode(
                 ReadyToRunCompilationModuleGroupBase compilationGroup,
                 TypeDesc type
-            ) {
+            )
+            {
                 if (type == type.Context.CanonType)
                     return true;
 

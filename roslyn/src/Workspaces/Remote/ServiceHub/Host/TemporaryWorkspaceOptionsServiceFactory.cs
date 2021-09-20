@@ -32,7 +32,8 @@ namespace Microsoft.CodeAnalysis.Remote
         public TemporaryWorkspaceOptionsServiceFactory(
             [Import(AllowDefault = true)] IWorkspaceThreadingService? workspaceThreadingService,
             [ImportMany] IEnumerable<Lazy<IOptionProvider, LanguageMetadata>> optionProviders
-        ) {
+        )
+        {
             _workspaceThreadingService = workspaceThreadingService;
             _providers = optionProviders.ToImmutableArray();
         }

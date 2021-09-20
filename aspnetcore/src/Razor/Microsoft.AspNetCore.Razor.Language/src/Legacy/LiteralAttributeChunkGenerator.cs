@@ -11,7 +11,8 @@ namespace Microsoft.AspNetCore.Razor.Language.Legacy
         public LiteralAttributeChunkGenerator(
             LocationTagged<string> prefix,
             LocationTagged<string> value
-        ) {
+        )
+        {
             Prefix = prefix;
             Value = value;
         }

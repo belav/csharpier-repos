@@ -80,7 +80,8 @@ namespace System.Xml.Xsl.Runtime
             double val,
             char firstChar,
             int totalChars
-        ) {
+        )
+        {
             Debug.Assert(1 <= val && val <= MaxAlphabeticValue);
             Debug.Assert(Math.Pow(totalChars, MaxAlphabeticLength) >= MaxAlphabeticValue);
 

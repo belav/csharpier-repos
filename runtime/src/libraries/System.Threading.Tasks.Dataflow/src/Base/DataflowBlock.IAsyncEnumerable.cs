@@ -17,7 +17,8 @@ namespace System.Threading.Tasks.Dataflow
         public static IAsyncEnumerable<TOutput> ReceiveAllAsync<TOutput>(
             this IReceivableSourceBlock<TOutput> source,
             CancellationToken cancellationToken = default
-        ) {
+        )
+        {
             if (source == null)
             {
                 throw new ArgumentNullException(nameof(source));
@@ -28,7 +29,8 @@ namespace System.Threading.Tasks.Dataflow
             static async IAsyncEnumerable<TOutput> ReceiveAllAsyncCore(
                 IReceivableSourceBlock<TOutput> source,
                 [EnumeratorCancellation] CancellationToken cancellationToken
-            ) {
+            )
+            {
                 while (await source.OutputAvailableAsync(cancellationToken).ConfigureAwait(false))
                 {
                     while (source.TryReceive(out TOutput? item))

@@ -30,7 +30,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.KeywordHighlighting
             IfStatementSyntax ifStatement,
             List<TextSpan> highlights,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             if (ifStatement.Parent.Kind() != SyntaxKind.ElseClause)
             {
                 ComputeSpans(ifStatement, highlights);

@@ -27,7 +27,8 @@ namespace System.Text.Unicode
         private static int GetLengthOfFirstExtendedGraphemeCluster<T>(
             ReadOnlySpan<T> input,
             DecodeFirstRune<T> decoder
-        ) {
+        )
+        {
             // Algorithm given at https://www.unicode.org/reports/tr29/#Grapheme_Cluster_Boundary_Rules.
 
             Processor<T> processor = new Processor<T>(input, decoder);
@@ -49,7 +50,8 @@ namespace System.Text.Unicode
                     processor.CurrentType == GraphemeClusterBreakType.Control
                     || processor.CurrentType == GraphemeClusterBreakType.CR
                     || processor.CurrentType == GraphemeClusterBreakType.LF
-                ) {
+                )
+                {
                     goto Return;
                 }
             }
@@ -174,7 +176,8 @@ namespace System.Text.Unicode
                 processor.CurrentType == GraphemeClusterBreakType.Extend
                 || processor.CurrentType == GraphemeClusterBreakType.ZWJ
                 || processor.CurrentType == GraphemeClusterBreakType.SpacingMark
-            ) {
+            )
+            {
                 processor.MoveNext();
             }
 

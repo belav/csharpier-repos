@@ -105,7 +105,8 @@ namespace System.Speech.Internal.SapiInterop
             SPLOADOPTIONS options,
             string sharingUri,
             string baseUri
-        ) {
+        )
+        {
             SpRecoGrammar2.LoadCmdFromMemory2(grammar, options, sharingUri, baseUri);
         }
 

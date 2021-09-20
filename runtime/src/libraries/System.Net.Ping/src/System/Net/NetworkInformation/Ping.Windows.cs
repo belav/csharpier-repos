@@ -36,7 +36,8 @@ namespace System.Net.NetworkInformation
             byte[] buffer,
             int timeout,
             PingOptions? options
-        ) {
+        )
+        {
             // Since isAsync == false, DoSendPingCore will execute synchronously and return a completed
             // Task - so no blocking here
             return DoSendPingCore(address, buffer, timeout, options, isAsync: false)
@@ -49,7 +50,8 @@ namespace System.Net.NetworkInformation
             byte[] buffer,
             int timeout,
             PingOptions? options
-        ) {
+        )
+        {
             // Since isAsync == true, DoSendPingCore will execute asynchronously and return an active Task
             return DoSendPingCore(address, buffer, timeout, options, isAsync: true);
         }
@@ -62,7 +64,8 @@ namespace System.Net.NetworkInformation
             int timeout,
             PingOptions? options,
             bool isAsync
-        ) {
+        )
+        {
             TaskCompletionSource<PingReply>? tcs = null;
             if (isAsync)
             {
@@ -195,7 +198,8 @@ namespace System.Net.NetworkInformation
             int timeout,
             PingOptions? options,
             bool isAsync
-        ) {
+        )
+        {
             Interop.IpHlpApi.IPOptions ipOptions = new Interop.IpHlpApi.IPOptions(options);
             if (!_ipv6)
             {
@@ -380,7 +384,8 @@ namespace System.Net.NetworkInformation
 
         private static PingReply CreatePingReplyFromIcmpEchoReply(
             Interop.IpHlpApi.IcmpEchoReply reply
-        ) {
+        )
+        {
             const int DontFragmentFlag = 2;
 
             IPAddress address = new IPAddress(reply.address);
@@ -415,7 +420,8 @@ namespace System.Net.NetworkInformation
             Interop.IpHlpApi.Icmp6EchoReply reply,
             IntPtr dataPtr,
             int sendSize
-        ) {
+        )
+        {
             IPAddress address = new IPAddress(reply.Address.Address, reply.Address.ScopeID);
             IPStatus ipStatus = GetStatusFromCode((int)reply.Status);
 

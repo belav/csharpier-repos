@@ -42,7 +42,8 @@ namespace Microsoft.CodeAnalysis.CSharp.BraceCompletion
             int position,
             Document document,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             // check what parser thinks about the newly typed "<" and only proceed if parser thinks it is "<" of
             // type argument or parameter list
             if (
@@ -53,7 +54,8 @@ namespace Microsoft.CodeAnalysis.CSharp.BraceCompletion
                 )
                 && !await PossibleTypeArgumentAsync(document, token, cancellationToken)
                     .ConfigureAwait(false)
-            ) {
+            )
+            {
                 return false;
             }
 
@@ -64,13 +66,15 @@ namespace Microsoft.CodeAnalysis.CSharp.BraceCompletion
             Document document,
             SyntaxToken token,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             // type argument can be easily ambiguous with normal < operations
             if (
                 !(token.Parent is BinaryExpressionSyntax node)
                 || node.Kind() != SyntaxKind.LessThanExpression
                 || node.OperatorToken != token
-            ) {
+            )
+            {
                 return false;
             }
 

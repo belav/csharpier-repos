@@ -67,13 +67,15 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
 
         internal override void SetLinkedReferencedAssemblies(
             ImmutableArray<AssemblySymbol> assemblies
-        ) {
+        )
+        {
             throw new NotImplementedException();
         }
 
         internal override void SetNoPiaResolutionAssemblies(
             ImmutableArray<AssemblySymbol> assemblies
-        ) {
+        )
+        {
             throw new NotImplementedException();
         }
 
@@ -84,7 +86,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
 
         internal override IEnumerable<ImmutableArray<byte>> GetInternalsVisibleToPublicKeys(
             string simpleName
-        ) {
+        )
+        {
             throw new NotImplementedException();
         }
 
@@ -106,7 +109,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
         internal override NamedTypeSymbol TryLookupForwardedMetadataTypeWithCycleDetection(
             ref MetadataTypeName emittedName,
             ConsList<AssemblySymbol> visitedAssemblies
-        ) {
+        )
+        {
             return null;
         }
 

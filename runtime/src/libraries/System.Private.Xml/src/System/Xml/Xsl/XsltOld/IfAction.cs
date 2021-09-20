@@ -86,7 +86,8 @@ namespace System.Xml.Xsl.XsltOld
                     if (
                         _type == ConditionType.ConditionWhen
                         || _type == ConditionType.ConditionOtherwise
-                    ) {
+                    )
+                    {
                         Debug.Assert(frame.Container != null);
                         frame.Exit();
                     }

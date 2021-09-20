@@ -32,7 +32,8 @@ namespace System.Web.Http.Owin
         protected override async Task<HttpResponseMessage> SendAsync(
             HttpRequestMessage request,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             if (request == null)
             {
                 throw new ArgumentNullException("request");
@@ -58,7 +59,8 @@ namespace System.Web.Http.Owin
         private static IPrincipal SetCurrentPrincipal(
             HttpRequestMessage request,
             IPrincipal principal
-        ) {
+        )
+        {
             Contract.Assert(request != null);
 
             HttpRequestContext requestContext = request.GetRequestContext();
@@ -108,7 +110,8 @@ namespace System.Web.Http.Owin
             else if (
                 currentChallenge.AuthenticationTypes == null
                 || currentChallenge.AuthenticationTypes.Length == 0
-            ) {
+            )
+            {
                 authenticationManager.AuthenticationResponseChallenge =
                     new AuthenticationResponseChallenge(
                         suppressAuthenticationTypes,

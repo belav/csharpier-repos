@@ -12,7 +12,8 @@ namespace System.Net.Sockets.Tests
         {
             using (
                 var s = new Socket(AddressFamily.InterNetwork, SocketType.Dgram, ProtocolType.Udp)
-            ) {
+            )
+            {
                 Assert.NotEqual((IntPtr)(-1), s.Handle);
             }
         }
@@ -22,7 +23,8 @@ namespace System.Net.Sockets.Tests
         {
             using (
                 var s = new Socket(AddressFamily.InterNetwork, SocketType.Dgram, ProtocolType.Udp)
-            ) {
+            )
+            {
                 Assert.NotEqual(IntPtr.Zero, s.Handle);
             }
         }

@@ -58,7 +58,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                 BinaryOperatorKind relation,
                 ConstantValue left,
                 ConstantValue right
-            ) {
+            )
+            {
                 var tc = default(UIntTC);
                 return tc.Related(
                     relation,

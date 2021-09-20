@@ -177,7 +177,8 @@ namespace System.Text
             byte* bytes,
             int byteCount,
             bool flush
-        ) {
+        )
+        {
             // Validate input parameters
             if (bytes == null || chars == null)
                 throw new ArgumentNullException(
@@ -225,7 +226,8 @@ namespace System.Text
         {
             fixed (char* charsPtr = &MemoryMarshal.GetNonNullPinnableReference(chars))fixed (
                 byte* bytesPtr = &MemoryMarshal.GetNonNullPinnableReference(bytes)
-            ) {
+            )
+            {
                 return GetBytes(charsPtr, chars.Length, bytesPtr, bytes.Length, flush);
             }
         }
@@ -254,7 +256,8 @@ namespace System.Text
             out int charsUsed,
             out int bytesUsed,
             out bool completed
-        ) {
+        )
+        {
             // Validate parameters
             if (chars == null || bytes == null)
                 throw new ArgumentNullException(
@@ -329,7 +332,8 @@ namespace System.Text
             out int charsUsed,
             out int bytesUsed,
             out bool completed
-        ) {
+        )
+        {
             // Validate input parameters
             if (bytes == null || chars == null)
                 throw new ArgumentNullException(
@@ -374,10 +378,12 @@ namespace System.Text
             out int charsUsed,
             out int bytesUsed,
             out bool completed
-        ) {
+        )
+        {
             fixed (char* charsPtr = &MemoryMarshal.GetNonNullPinnableReference(chars))fixed (
                 byte* bytesPtr = &MemoryMarshal.GetNonNullPinnableReference(bytes)
-            ) {
+            )
+            {
                 Convert(
                     charsPtr,
                     chars.Length,

@@ -21,7 +21,8 @@ namespace Microsoft.CodeAnalysis.CSharp
         private BoundExpression BindAnonymousObjectCreation(
             AnonymousObjectCreationExpressionSyntax node,
             BindingDiagnosticBag diagnostics
-        ) {
+        )
+        {
             //  prepare
             var initializers = node.Initializers;
             int fieldCount = initializers.Count;
@@ -235,7 +236,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             CSharpSyntaxNode errorSyntax,
             BindingDiagnosticBag diagnostics,
             ref bool hasError
-        ) {
+        )
+        {
             object? errorArg = null;
             TypeSymbol? expressionType = expression.Type;
 

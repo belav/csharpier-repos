@@ -79,7 +79,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnusedParametersA
             string initialMarkup,
             string expectedMarkup,
             ParseOptions parseOptions = null
-        ) {
+        )
+        {
             foreach (var options in new[] { PreferDiscard, PreferUnusedLocal })
             {
                 await TestInRegularAndScriptAsync(
@@ -94,7 +95,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnusedParametersA
         protected async Task TestMissingInRegularAndScriptWithAllOptionsAsync(
             string initialMarkup,
             ParseOptions parseOptions = null
-        ) {
+        )
+        {
             foreach (var options in new[] { PreferDiscard, PreferUnusedLocal })
             {
                 await TestMissingInRegularAndScriptAsync(

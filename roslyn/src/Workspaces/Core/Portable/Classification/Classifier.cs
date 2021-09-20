@@ -21,7 +21,8 @@ namespace Microsoft.CodeAnalysis.Classification
             Document document,
             TextSpan textSpan,
             CancellationToken cancellationToken = default
-        ) {
+        )
+        {
             var semanticModel = await document.GetRequiredSemanticModelAsync(cancellationToken)
                 .ConfigureAwait(false);
             return GetClassifiedSpans(
@@ -45,7 +46,8 @@ namespace Microsoft.CodeAnalysis.Classification
             TextSpan textSpan,
             Workspace workspace,
             CancellationToken cancellationToken = default
-        ) {
+        )
+        {
             var service = workspace.Services.GetLanguageServices(semanticModel.Language)
                 .GetRequiredService<ISyntaxClassificationService>();
 
@@ -106,7 +108,8 @@ namespace Microsoft.CodeAnalysis.Classification
             TextSpan textSpan,
             Workspace workspace,
             CancellationToken cancellationToken = default
-        ) {
+        )
+        {
             var classifiedSpans = GetClassifiedSpans(
                 semanticModel,
                 textSpan,
@@ -123,7 +126,8 @@ namespace Microsoft.CodeAnalysis.Classification
             SourceText sourceText,
             int startPosition,
             IEnumerable<ClassifiedSpan> classifiedSpans
-        ) {
+        )
+        {
             var parts = ArrayBuilder<SymbolDisplayPart>.GetInstance();
 
             foreach (var span in classifiedSpans)

@@ -131,7 +131,8 @@ namespace Ignitor
             if (
                 NextDotNetInteropCompletionReceived != null
                 && !NextDotNetInteropCompletionReceived.Disposed
-            ) {
+            )
+            {
                 throw new InvalidOperationException("Invalid state previous task not completed");
             }
 
@@ -196,7 +197,8 @@ namespace Ignitor
         public async Task<CapturedRenderBatch?> ExpectRenderBatch(
             Func<Task> action,
             TimeSpan? timeout = null
-        ) {
+        )
+        {
             var task = WaitForRenderBatch(timeout);
             await action();
             return await task;
@@ -205,7 +207,8 @@ namespace Ignitor
         public async Task<CapturedJSInteropCall?> ExpectJSInterop(
             Func<Task> action,
             TimeSpan? timeout = null
-        ) {
+        )
+        {
             var task = WaitForJSInterop(timeout);
             await action();
             return await task;
@@ -235,7 +238,8 @@ namespace Ignitor
         public async Task<(string? error, Exception? exception)> ExpectCircuitErrorAndDisconnect(
             Func<Task> action,
             TimeSpan? timeout = null
-        ) {
+        )
+        {
             string? error = default;
 
             // NOTE: timeout is used for each operation individually.
@@ -374,7 +378,8 @@ namespace Ignitor
             Uri uri,
             bool connectAutomatically = true,
             Action<HubConnectionBuilder, Uri>? configure = null
-        ) {
+        )
+        {
             var builder = new HubConnectionBuilder();
             builder.Services.TryAddEnumerable(
                 ServiceDescriptor.Singleton<IHubProtocol, IgnitorMessagePackHubProtocol>()
@@ -460,7 +465,8 @@ namespace Ignitor
             string argsJson,
             int resultType,
             long targetInstanceId
-        ) {
+        )
+        {
             var call = new CapturedJSInteropCall(
                 asyncHandle,
                 identifier,
@@ -557,7 +563,8 @@ namespace Ignitor
             string methodIdentifier,
             object dotNetObjectId,
             string argsJson
-        ) {
+        )
+        {
             await ExpectDotNetInterop(
                 () =>
                     HubConnection.InvokeAsync(

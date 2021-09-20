@@ -38,7 +38,8 @@ namespace Microsoft.CodeAnalysis.SolutionCrawler
         public void AddAnalyzerProvider(
             IIncrementalAnalyzerProvider provider,
             IncrementalAnalyzerProviderMetadata metadata
-        ) {
+        )
+        {
             // base implementation do nothing.
         }
     }

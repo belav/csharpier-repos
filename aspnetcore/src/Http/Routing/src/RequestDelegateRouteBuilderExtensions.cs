@@ -27,7 +27,8 @@ namespace Microsoft.AspNetCore.Routing
             this IRouteBuilder builder,
             string template,
             RequestDelegate handler
-        ) {
+        )
+        {
             var route = new Route(
                 new RouteHandler(handler),
                 template,
@@ -53,7 +54,8 @@ namespace Microsoft.AspNetCore.Routing
             this IRouteBuilder builder,
             string template,
             Action<IApplicationBuilder> action
-        ) {
+        )
+        {
             var nested = builder.ApplicationBuilder.New();
             action(nested);
             return builder.MapRoute(template, nested.Build());
@@ -71,7 +73,8 @@ namespace Microsoft.AspNetCore.Routing
             this IRouteBuilder builder,
             string template,
             RequestDelegate handler
-        ) {
+        )
+        {
             return builder.MapVerb("DELETE", template, handler);
         }
 
@@ -87,7 +90,8 @@ namespace Microsoft.AspNetCore.Routing
             this IRouteBuilder builder,
             string template,
             Action<IApplicationBuilder> action
-        ) {
+        )
+        {
             return builder.MapMiddlewareVerb("DELETE", template, action);
         }
 
@@ -103,7 +107,8 @@ namespace Microsoft.AspNetCore.Routing
             this IRouteBuilder builder,
             string template,
             Func<HttpRequest, HttpResponse, RouteData, Task> handler
-        ) {
+        )
+        {
             return builder.MapVerb("DELETE", template, handler);
         }
 
@@ -119,7 +124,8 @@ namespace Microsoft.AspNetCore.Routing
             this IRouteBuilder builder,
             string template,
             RequestDelegate handler
-        ) {
+        )
+        {
             return builder.MapVerb("GET", template, handler);
         }
 
@@ -135,7 +141,8 @@ namespace Microsoft.AspNetCore.Routing
             this IRouteBuilder builder,
             string template,
             Action<IApplicationBuilder> action
-        ) {
+        )
+        {
             return builder.MapMiddlewareVerb("GET", template, action);
         }
 
@@ -151,7 +158,8 @@ namespace Microsoft.AspNetCore.Routing
             this IRouteBuilder builder,
             string template,
             Func<HttpRequest, HttpResponse, RouteData, Task> handler
-        ) {
+        )
+        {
             return builder.MapVerb("GET", template, handler);
         }
 
@@ -167,7 +175,8 @@ namespace Microsoft.AspNetCore.Routing
             this IRouteBuilder builder,
             string template,
             RequestDelegate handler
-        ) {
+        )
+        {
             return builder.MapVerb("POST", template, handler);
         }
 
@@ -183,7 +192,8 @@ namespace Microsoft.AspNetCore.Routing
             this IRouteBuilder builder,
             string template,
             Action<IApplicationBuilder> action
-        ) {
+        )
+        {
             return builder.MapMiddlewareVerb("POST", template, action);
         }
 
@@ -199,7 +209,8 @@ namespace Microsoft.AspNetCore.Routing
             this IRouteBuilder builder,
             string template,
             Func<HttpRequest, HttpResponse, RouteData, Task> handler
-        ) {
+        )
+        {
             return builder.MapVerb("POST", template, handler);
         }
 
@@ -215,7 +226,8 @@ namespace Microsoft.AspNetCore.Routing
             this IRouteBuilder builder,
             string template,
             RequestDelegate handler
-        ) {
+        )
+        {
             return builder.MapVerb("PUT", template, handler);
         }
 
@@ -231,7 +243,8 @@ namespace Microsoft.AspNetCore.Routing
             this IRouteBuilder builder,
             string template,
             Action<IApplicationBuilder> action
-        ) {
+        )
+        {
             return builder.MapMiddlewareVerb("PUT", template, action);
         }
 
@@ -247,7 +260,8 @@ namespace Microsoft.AspNetCore.Routing
             this IRouteBuilder builder,
             string template,
             Func<HttpRequest, HttpResponse, RouteData, Task> handler
-        ) {
+        )
+        {
             return builder.MapVerb("PUT", template, handler);
         }
 
@@ -265,7 +279,8 @@ namespace Microsoft.AspNetCore.Routing
             string verb,
             string template,
             Func<HttpRequest, HttpResponse, RouteData, Task> handler
-        ) {
+        )
+        {
             RequestDelegate requestDelegate = (httpContext) =>
             {
                 return handler(
@@ -292,7 +307,8 @@ namespace Microsoft.AspNetCore.Routing
             string verb,
             string template,
             RequestDelegate handler
-        ) {
+        )
+        {
             var route = new Route(
                 new RouteHandler(handler),
                 template,
@@ -322,7 +338,8 @@ namespace Microsoft.AspNetCore.Routing
             string verb,
             string template,
             Action<IApplicationBuilder> action
-        ) {
+        )
+        {
             var nested = builder.ApplicationBuilder.New();
             action(nested);
             return builder.MapVerb(verb, template, nested.Build());

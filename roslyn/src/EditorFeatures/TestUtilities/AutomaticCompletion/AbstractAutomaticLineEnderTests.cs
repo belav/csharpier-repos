@@ -34,7 +34,8 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.AutomaticCompletion
             string markupCode,
             bool completionActive = false,
             bool assertNextHandlerInvoked = false
-        ) {
+        )
+        {
             TestFileMarkupParser.GetPositionsAndSpans(
                 markupCode,
                 out var code,

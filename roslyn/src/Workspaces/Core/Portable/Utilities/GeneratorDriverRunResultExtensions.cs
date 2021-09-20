@@ -13,7 +13,8 @@ namespace Microsoft.CodeAnalysis.Utilities
             SyntaxTree tree,
             [NotNullWhen(true)] out ISourceGenerator? generator,
             [NotNullWhen(true)] out string? generatedSourceHintName
-        ) {
+        )
+        {
             if (generatorRunResult != null)
             {
                 foreach (var generatorResult in generatorRunResult.Results)

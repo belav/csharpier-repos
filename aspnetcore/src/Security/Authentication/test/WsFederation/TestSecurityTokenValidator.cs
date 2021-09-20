@@ -21,7 +21,8 @@ namespace Microsoft.AspNetCore.Authentication.WsFederation
             string securityToken,
             TokenValidationParameters validationParameters,
             out SecurityToken validatedToken
-        ) {
+        )
+        {
             if (!string.IsNullOrEmpty(securityToken) && securityToken.Contains("ThisIsAValidToken"))
             {
                 validatedToken = new TestSecurityToken();

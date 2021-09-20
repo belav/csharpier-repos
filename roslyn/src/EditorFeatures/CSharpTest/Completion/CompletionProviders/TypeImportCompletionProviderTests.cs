@@ -238,7 +238,8 @@ namespace Foo
         public async Task Show_TopLevel_MutipleOverrides_NoImport_InProject(
             string typeKind,
             int glyph
-        ) {
+        )
+        {
             var file1 =
                 $@"
 namespace Foo
@@ -462,7 +463,8 @@ namespace Baz
         [Theory, Trait(Traits.Feature, Traits.Features.Completion)]
         public async Task TopLevel_OverloadsWithMixedAccessibility_Internal_NoImport_InReference1(
             bool isProjectReference
-        ) {
+        )
+        {
             var file1 =
                 $@"
 namespace Foo
@@ -509,7 +511,8 @@ namespace Baz
         [Theory, Trait(Traits.Feature, Traits.Features.Completion)]
         public async Task DoNotShow_TopLevel_OverloadsWithMixedAccessibility_Internal_WithImport_InReference1(
             bool isProjectReference
-        ) {
+        )
+        {
             var file1 =
                 $@"
 namespace Foo
@@ -556,7 +559,8 @@ namespace Baz
         [Theory, Trait(Traits.Feature, Traits.Features.Completion)]
         public async Task TopLevel_OverloadsWithMixedAccessibility_InternalWithIVT_NoImport_InReference1(
             bool isProjectReference
-        ) {
+        )
+        {
             var file1 =
                 $@"     
 [assembly: System.Runtime.CompilerServices.InternalsVisibleTo(""Project1"")]
@@ -605,7 +609,8 @@ namespace Baz
         [Theory, Trait(Traits.Feature, Traits.Features.Completion)]
         public async Task DoNotShow_TopLevel_OverloadsWithMixedAccessibility_InternalWithIVT_WithImport_InReference1(
             bool isProjectReference
-        ) {
+        )
+        {
             var file1 =
                 $@"     
 [assembly: System.Runtime.CompilerServices.InternalsVisibleTo(""Project1"")]
@@ -649,7 +654,8 @@ namespace Baz
         [Theory, Trait(Traits.Feature, Traits.Features.Completion)]
         public async Task TopLevel_OverloadsWithMixedAccessibility_Internal_NoImport_InReference2(
             bool isProjectReference
-        ) {
+        )
+        {
             var file1 =
                 $@"
 namespace Foo
@@ -699,7 +705,8 @@ namespace Baz
         [Theory, Trait(Traits.Feature, Traits.Features.Completion)]
         public async Task DoNotShow_TopLevel_OverloadsWithMixedAccessibility_Internal_SameNamespace_InReference2(
             bool isProjectReference
-        ) {
+        )
+        {
             var file1 =
                 $@"
 namespace Foo
@@ -743,7 +750,8 @@ namespace Foo.Baz
         [Theory, Trait(Traits.Feature, Traits.Features.Completion)]
         public async Task TopLevel_OverloadsWithMixedAccessibility_InternalWithIVT_NoImport_InReference2(
             bool isProjectReference
-        ) {
+        )
+        {
             var file1 =
                 $@"   
 [assembly: System.Runtime.CompilerServices.InternalsVisibleTo(""Project1"")]
@@ -795,7 +803,8 @@ namespace Baz
         [Theory, Trait(Traits.Feature, Traits.Features.Completion)]
         public async Task Show_TopLevel_Internal_WithIVT_NoImport_InReference(
             bool isProjectReference
-        ) {
+        )
+        {
             var file1 =
                 $@"
 [assembly: System.Runtime.CompilerServices.InternalsVisibleTo(""Project1"")]
@@ -1806,7 +1815,8 @@ namespace Test
         [WorkItem(35540, "https://github.com/dotnet/roslyn/issues/35540")]
         public async Task CommitAttributeTypeWithoutSuffixInAttributeNameContext(
             SourceCodeKind kind
-        ) {
+        )
+        {
             // attribute suffix isn't capitalized
             var file1 =
                 @"
@@ -1891,7 +1901,8 @@ namespace Test
         [WorkItem(35540, "https://github.com/dotnet/roslyn/issues/35540")]
         public async Task CommitAttributeTypeWithoutSuffixInNonAttributeNameContext(
             SourceCodeKind kind
-        ) {
+        )
+        {
             // attribute suffix isn't capitalized
             var file1 =
                 @"
@@ -1979,7 +1990,8 @@ namespace Test
         [WorkItem(37038, "https://github.com/dotnet/roslyn/issues/37038")]
         public async Task CommitTypeInUsingStaticContextShouldUseFullyQualifiedName(
             SourceCodeKind kind
-        ) {
+        )
+        {
             var file1 =
                 @"
 namespace Foo
@@ -2010,7 +2022,8 @@ using static Foo.MyClass$$";
         [WorkItem(37038, "https://github.com/dotnet/roslyn/issues/37038")]
         public async Task CommitGenericTypeParameterInUsingAliasContextShouldUseFullyQualifiedName(
             SourceCodeKind kind
-        ) {
+        )
+        {
             var file1 =
                 @"
 namespace Foo
@@ -2041,7 +2054,8 @@ using CollectionOfStringBuilders = System.Collections.Generic.List<Foo.MyClass$$
         [WorkItem(37038, "https://github.com/dotnet/roslyn/issues/37038")]
         public async Task CommitGenericTypeParameterInUsingAliasContextShouldUseFullyQualifiedName2(
             SourceCodeKind kind
-        ) {
+        )
+        {
             var file1 =
                 @"
 namespace Foo.Bar
@@ -2126,7 +2140,8 @@ namespace Baz
         private static void AssertRelativeOrder(
             List<string> expectedTypesInRelativeOrder,
             ImmutableArray<CompletionItem> allCompletionItems
-        ) {
+        )
+        {
             var hashset = new HashSet<string>(expectedTypesInRelativeOrder);
             var actualTypesInRelativeOrder = allCompletionItems.Where(
                     item => hashset.Contains(item.DisplayText)
@@ -2264,7 +2279,8 @@ namespace Foo
         public async Task TestBrowsableAdvancedFromReferences(
             bool isProjectReference,
             bool hideAdvancedMembers
-        ) {
+        )
+        {
             HideAdvancedMembers = hideAdvancedMembers;
 
             var srcDoc =
@@ -2331,7 +2347,8 @@ namespace Foo
         [InlineData(';')]
         public async Task TestCommitWithCustomizedCommitCharForParameterlessConstructor(
             char commitChar
-        ) {
+        )
+        {
             var markup =
                 @"
 namespace AA
@@ -2387,7 +2404,8 @@ namespace BB
         [InlineData(';')]
         public async Task TestCommitWithCustomizedCommitCharUnderNonObjectCreationContext(
             char commitChar
-        ) {
+        )
+        {
             var markup =
                 @"
 namespace AA

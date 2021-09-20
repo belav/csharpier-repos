@@ -147,11 +147,8 @@ namespace Microsoft.AspNetCore.SignalR.Protocol
         /// <param name="invocationId">The invocation ID.</param>
         /// <param name="target">The target method name.</param>
         /// <param name="arguments">The target method arguments.</param>
-        public StreamInvocationMessage(
-            string invocationId,
-            string target,
-            object?[] arguments
-        ) : base(invocationId, target, arguments) { }
+        public StreamInvocationMessage(string invocationId, string target, object?[] arguments)
+            : base(invocationId, target, arguments) { }
 
         /// <summary>
         /// Initializes a new instance of the <see cref="StreamInvocationMessage"/> class.

@@ -32,17 +32,19 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Venus
             SourceCodeKind sourceCodeKind,
             IFormattingRule vbHelperFormattingRule,
             Workspace workspace
-        ) : base(
-            bufferCoordinator,
-            componentModel,
-            project.VisualStudioProject,
-            hierarchy,
-            itemid,
-            project.ProjectTracker,
-            project.Id,
-            languageService.LanguageServiceId,
-            vbHelperFormattingRule: null
-        ) {
+        )
+            : base(
+                bufferCoordinator,
+                componentModel,
+                project.VisualStudioProject,
+                hierarchy,
+                itemid,
+                project.ProjectTracker,
+                project.Id,
+                languageService.LanguageServiceId,
+                vbHelperFormattingRule: null
+            )
+        {
             Contract.ThrowIfTrue(vbHelperFormattingRule != null);
         }
 
@@ -56,17 +58,19 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Venus
             TLanguageService languageService,
             SourceCodeKind sourceCodeKind,
             IFormattingRule vbHelperFormattingRule
-        ) : base(
-            bufferCoordinator,
-            componentModel,
-            project.VisualStudioProject,
-            hierarchy,
-            itemid,
-            projectTrackerOpt: null,
-            project.VisualStudioProject.Id,
-            languageService.LanguageServiceId,
-            vbHelperFormattingRule: null
-        ) {
+        )
+            : base(
+                bufferCoordinator,
+                componentModel,
+                project.VisualStudioProject,
+                hierarchy,
+                itemid,
+                projectTrackerOpt: null,
+                project.VisualStudioProject.Id,
+                languageService.LanguageServiceId,
+                vbHelperFormattingRule: null
+            )
+        {
             Contract.ThrowIfTrue(vbHelperFormattingRule != null);
         }
     }

@@ -115,7 +115,8 @@ namespace Castle.Components.DictionaryAdapter.Xml.Tests
             IXmlKnownTypeMap knownTypes,
             IXmlNamespaceSource namespaces,
             CursorFlags flags
-        ) {
+        )
+        {
             throw new NotImplementedException();
         }
 
@@ -129,7 +130,8 @@ namespace Castle.Components.DictionaryAdapter.Xml.Tests
             IXmlIncludedTypeMap includedTypes,
             IXmlNamespaceSource namespaces,
             CursorFlags flags
-        ) {
+        )
+        {
             throw new NotImplementedException();
         }
 

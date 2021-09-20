@@ -43,7 +43,8 @@ namespace ILCompiler
             Dictionary<MethodDesc, int> callWeights,
             uint scenarioMask,
             PgoSchemaElem[] schemaData
-        ) {
+        )
+        {
             if (method == null)
                 throw new ArgumentNullException("method");
 
@@ -74,7 +75,8 @@ namespace ILCompiler
             ref bool partialNgen,
             Dictionary<MethodDesc, MethodProfileData> mergedProfileData,
             ProfileData profileData
-        ) {
+        )
+        {
             if (profileData.PartialNGen)
                 partialNgen = true;
 

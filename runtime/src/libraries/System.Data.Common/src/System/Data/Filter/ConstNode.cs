@@ -14,12 +14,8 @@ namespace System.Data
         internal ConstNode(DataTable? table, ValueType type, object constant)
             : this(table, type, constant, true) { }
 
-        internal ConstNode(
-            DataTable? table,
-            ValueType type,
-            object constant,
-            bool fParseQuotes
-        ) : base(table)
+        internal ConstNode(DataTable? table, ValueType type, object constant, bool fParseQuotes)
+            : base(table)
         {
             switch (type)
             {
@@ -130,7 +126,8 @@ namespace System.Data
                             NumberFormatInfo.InvariantInfo,
                             out r12
                         )
-                    ) {
+                    )
+                    {
                         return r12;
                     }
 
@@ -142,7 +139,8 @@ namespace System.Data
                             NumberFormatInfo.InvariantInfo,
                             out r8
                         )
-                    ) {
+                    )
+                    {
                         return r8;
                     }
                 }
@@ -216,7 +214,8 @@ namespace System.Data
                             NumberFormatInfo.InvariantInfo,
                             out i4
                         )
-                    ) {
+                    )
+                    {
                         return i4;
                     }
                     long i8;
@@ -227,7 +226,8 @@ namespace System.Data
                             NumberFormatInfo.InvariantInfo,
                             out i8
                         )
-                    ) {
+                    )
+                    {
                         return i8;
                     }
                     double r8;
@@ -238,7 +238,8 @@ namespace System.Data
                             NumberFormatInfo.InvariantInfo,
                             out r8
                         )
-                    ) {
+                    )
+                    {
                         return r8;
                     }
                 }

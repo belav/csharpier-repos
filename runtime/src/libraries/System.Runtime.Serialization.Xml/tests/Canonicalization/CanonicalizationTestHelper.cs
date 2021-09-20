@@ -24,7 +24,8 @@ namespace System.Runtime.Serialization.Xml.Canonicalization.Tests
             XmlDictionaryReaderQuotas quotas,
             IXmlDictionary dictionary,
             OnXmlDictionaryReaderClose onClose
-        ) {
+        )
+        {
             XmlReader result = null;
             switch (rwType)
             {
@@ -120,7 +121,8 @@ namespace System.Runtime.Serialization.Xml.Canonicalization.Tests
             XmlDictionaryReaderQuotas quotas,
             IXmlDictionary dictionary,
             OnXmlDictionaryReaderClose onClose
-        ) {
+        )
+        {
             XmlReader result = null;
             switch (rwType)
             {
@@ -182,7 +184,8 @@ namespace System.Runtime.Serialization.Xml.Canonicalization.Tests
             Encoding encoding,
             XmlDictionaryReaderQuotas quotas,
             IXmlDictionary dictionary
-        ) {
+        )
+        {
             return CreateXmlReader(rwType, buffer, encoding, quotas, dictionary, null);
         }
 
@@ -192,7 +195,8 @@ namespace System.Runtime.Serialization.Xml.Canonicalization.Tests
             Encoding encoding,
             XmlDictionaryReaderQuotas quotas,
             IXmlDictionary dictionary
-        ) {
+        )
+        {
             return CreateXmlReader(rwType, stream, encoding, quotas, dictionary, null);
         }
 
@@ -201,7 +205,8 @@ namespace System.Runtime.Serialization.Xml.Canonicalization.Tests
             byte[] buffer,
             Encoding encoding,
             XmlDictionaryReaderQuotas quotas
-        ) {
+        )
+        {
             return CreateXmlReader(rwType, buffer, encoding, quotas, null);
         }
 
@@ -210,7 +215,8 @@ namespace System.Runtime.Serialization.Xml.Canonicalization.Tests
             Stream stream,
             Encoding encoding,
             XmlDictionaryReaderQuotas quotas
-        ) {
+        )
+        {
             return CreateXmlReader(rwType, stream, encoding, quotas, null);
         }
 
@@ -218,7 +224,8 @@ namespace System.Runtime.Serialization.Xml.Canonicalization.Tests
             ReaderWriterType rwType,
             byte[] buffer,
             Encoding encoding
-        ) {
+        )
+        {
             return CreateXmlReader(rwType, buffer, encoding, XmlDictionaryReaderQuotas.Max);
         }
 
@@ -226,7 +233,8 @@ namespace System.Runtime.Serialization.Xml.Canonicalization.Tests
             ReaderWriterType rwType,
             Stream stream,
             Encoding encoding
-        ) {
+        )
+        {
             return CreateXmlReader(rwType, stream, encoding, XmlDictionaryReaderQuotas.Max);
         }
 
@@ -234,7 +242,8 @@ namespace System.Runtime.Serialization.Xml.Canonicalization.Tests
             ReaderWriterType rwType,
             Stream stream,
             Encoding encoding
-        ) {
+        )
+        {
             return CreateXmlWriter(rwType, stream, encoding, null);
         }
 
@@ -243,7 +252,8 @@ namespace System.Runtime.Serialization.Xml.Canonicalization.Tests
             Stream stream,
             Encoding encoding,
             IXmlDictionary dictionary
-        ) {
+        )
+        {
             XmlWriter result = null;
             switch (rwType)
             {

@@ -25,7 +25,8 @@ namespace Microsoft.CodeAnalysis.ExternalAccess.UnitTesting
         public UnitTestingSolutionCrawlerServiceAccessor(
             ISolutionCrawlerRegistrationService registrationService,
             ISolutionCrawlerService solutionCrawlerService
-        ) {
+        )
+        {
             _registrationService = registrationService;
             _solutionCrawlerService = solutionCrawlerService;
         }
@@ -33,7 +34,8 @@ namespace Microsoft.CodeAnalysis.ExternalAccess.UnitTesting
         public void AddAnalyzerProvider(
             IUnitTestingIncrementalAnalyzerProviderImplementation provider,
             UnitTestingIncrementalAnalyzerProviderMetadataWrapper metadata
-        ) {
+        )
+        {
             if (_analyzerProvider != null)
             {
                 // NOTE: We expect the analyzer to be a singleton, therefore this method should be called just once.
@@ -52,7 +54,8 @@ namespace Microsoft.CodeAnalysis.ExternalAccess.UnitTesting
             IEnumerable<ProjectId> projectIds = null,
             IEnumerable<DocumentId> documentIds = null,
             bool highPriority = false
-        ) {
+        )
+        {
             // NOTE: this method must be called after AddAnalyzerProvider was called previously.
             if (_analyzerProvider == null)
             {

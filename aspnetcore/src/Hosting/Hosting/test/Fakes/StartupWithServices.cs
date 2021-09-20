@@ -17,7 +17,8 @@ namespace Microsoft.AspNetCore.Hosting.Fakes
         public void Configure(
             IApplicationBuilder builder,
             IFakeStartupCallback fakeStartupCallback2
-        ) {
+        )
+        {
             _fakeStartupCallback.ConfigurationMethodCalled(this);
             fakeStartupCallback2.ConfigurationMethodCalled(this);
         }

@@ -201,14 +201,16 @@ namespace System.Collections.Concurrent.Tests
         [InlineData(33)]
         public static void IterativelyAddOnOneThreadThenTakeOnAnother_OrderMaintained(
             int initialCount
-        ) {
+        )
+        {
             var bag = new ConcurrentBag<int>(Enumerable.Range(0, initialCount));
 
             const int Iterations = 100;
             using (
                 AutoResetEvent itemConsumed = new AutoResetEvent(false),
                     itemProduced = new AutoResetEvent(false)
-            ) {
+            )
+            {
                 Task t = Task.Run(
                     () =>
                     {
@@ -281,7 +283,8 @@ namespace System.Collections.Concurrent.Tests
         [InlineData(10)]
         public static void ToArray_AddTakeDifferentThreads_ExpectedResultsAfterAddsAndTakes(
             int initialCount
-        ) {
+        )
+        {
             var bag = new ConcurrentBag<int>(Enumerable.Range(0, initialCount));
             int items = 20 + initialCount;
 
@@ -350,7 +353,8 @@ namespace System.Collections.Concurrent.Tests
         public static void Clear_AddItemsToThisAndOtherThreads_EmptyAfterClear(
             bool addToLocalThread,
             int otherThreads
-        ) {
+        )
+        {
             var bag = new ConcurrentBag<int>();
 
             const int ItemsPerThread = 100;

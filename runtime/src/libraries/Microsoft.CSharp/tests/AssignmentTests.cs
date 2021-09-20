@@ -143,7 +143,8 @@ namespace Microsoft.CSharp.RuntimeBinder.Tests
             object rhs,
             bool overflow,
             bool invalidCast
-        ) {
+        )
+        {
             CallSite<Func<CallSite, object, object, object>> callSite = CallSite<
                 Func<CallSite, object, object, object>
             >.Create(
@@ -178,7 +179,8 @@ namespace Microsoft.CSharp.RuntimeBinder.Tests
             object rhs,
             bool overflow,
             bool invalidCast
-        ) {
+        )
+        {
             // Not used by this test
             _ = overflow;
 
@@ -212,7 +214,8 @@ namespace Microsoft.CSharp.RuntimeBinder.Tests
             object rhs,
             bool overflow,
             bool invalidCast
-        ) {
+        )
+        {
             CallSite<Func<CallSite, object, object, object>> callSite = CallSite<
                 Func<CallSite, object, object, object>
             >.Create(
@@ -248,7 +251,8 @@ namespace Microsoft.CSharp.RuntimeBinder.Tests
             object rhs,
             bool overflow,
             bool invalidCast
-        ) {
+        )
+        {
             // Not used by this test
             _ = overflow;
 

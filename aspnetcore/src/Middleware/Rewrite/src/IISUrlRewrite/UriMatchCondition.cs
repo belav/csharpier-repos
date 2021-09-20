@@ -18,16 +18,18 @@ namespace Microsoft.AspNetCore.Rewrite.IISUrlRewrite
             UriMatchPart uriMatchPart,
             bool ignoreCase,
             bool negate
-        ) : base(
-            CreatePattern(inputParser, input, uriMatchPart),
-            CreateRegexMatch(pattern, ignoreCase, negate)
-        ) { }
+        )
+            : base(
+                CreatePattern(inputParser, input, uriMatchPart),
+                CreateRegexMatch(pattern, ignoreCase, negate)
+            ) { }
 
         private static Pattern CreatePattern(
             InputParser inputParser,
             string input,
             UriMatchPart uriMatchPart
-        ) {
+        )
+        {
             return inputParser.ParseInputString(input, uriMatchPart);
         }
 

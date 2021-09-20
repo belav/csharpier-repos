@@ -47,7 +47,8 @@ namespace Newtonsoft.Json.Tests.Documentation.Samples.Serializer
                 JsonWriter writer,
                 Version value,
                 JsonSerializer serializer
-            ) {
+            )
+            {
                 writer.WriteValue(value.ToString());
             }
 
@@ -57,7 +58,8 @@ namespace Newtonsoft.Json.Tests.Documentation.Samples.Serializer
                 Version existingValue,
                 bool hasExistingValue,
                 JsonSerializer serializer
-            ) {
+            )
+            {
                 string s = (string)reader.Value;
 
                 return new Version(s);

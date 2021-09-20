@@ -32,7 +32,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                     (NullabilityInfo Info, TypeSymbol? Type)
                 > analyzedNullabilityMap,
                 SnapshotManager? snapshotManager
-            ) {
+            )
+            {
                 _analyzedNullabilityMap = analyzedNullabilityMap;
                 _snapshotManager = snapshotManager;
             }
@@ -49,7 +50,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                 > analyzedNullabilityMap,
                 SnapshotManager? snapshotManagerOpt,
                 BoundNode node
-            ) {
+            )
+            {
                 var verifier = new DebugVerifier(analyzedNullabilityMap, snapshotManagerOpt);
                 verifier.Visit(node);
                 snapshotManagerOpt?.VerifyUpdatedSymbols();
@@ -64,7 +66,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             private void VerifyExpression(
                 BoundExpression expression,
                 bool overrideSkippedExpression = false
-            ) {
+            )
+            {
                 if (overrideSkippedExpression || !s_skippedExpressions.Contains(expression.Kind))
                 {
                     Debug.Assert(
@@ -77,7 +80,8 @@ namespace Microsoft.CodeAnalysis.CSharp
 
             protected override BoundExpression? VisitExpressionWithoutStackGuard(
                 BoundExpression node
-            ) {
+            )
+            {
                 VerifyExpression(node);
                 return (BoundExpression)base.Visit(node);
             }
@@ -100,7 +104,8 @@ namespace Microsoft.CodeAnalysis.CSharp
 
             public override BoundNode? VisitDeconstructionAssignmentOperator(
                 BoundDeconstructionAssignmentOperator node
-            ) {
+            )
+            {
                 // https://github.com/dotnet/roslyn/issues/35010: handle
                 return null;
             }
@@ -172,7 +177,8 @@ namespace Microsoft.CodeAnalysis.CSharp
 
             public override BoundNode? VisitDynamicCollectionElementInitializer(
                 BoundDynamicCollectionElementInitializer node
-            ) {
+            )
+            {
                 // https://github.com/dotnet/roslyn/issues/33441 dynamic collection initializers aren't being handled correctly
                 VerifyExpression(node, overrideSkippedExpression: true);
                 return null;
@@ -201,7 +207,8 @@ namespace Microsoft.CodeAnalysis.CSharp
 
             public override BoundNode? VisitUserDefinedConditionalLogicalOperator(
                 BoundUserDefinedConditionalLogicalOperator node
-            ) {
+            )
+            {
                 VisitBinaryOperatorChildren(node);
                 return null;
             }
@@ -255,7 +262,8 @@ namespace Microsoft.CodeAnalysis.CSharp
 
             public override BoundNode? VisitNoPiaObjectCreationExpression(
                 BoundNoPiaObjectCreationExpression node
-            ) {
+            )
+            {
                 // We're not handling nopia object creations correctly
                 // https://github.com/dotnet/roslyn/issues/45082
                 if (node.InitializerExpressionOpt is object)
@@ -270,7 +278,8 @@ namespace Microsoft.CodeAnalysis.CSharp
 
             public override BoundNode? VisitUnconvertedObjectCreationExpression(
                 BoundUnconvertedObjectCreationExpression node
-            ) {
+            )
+            {
                 // These nodes are only involved in return type inference for unbound lambdas. We don't analyze their subnodes, and no
                 // info is exposed to consumers.
                 return null;

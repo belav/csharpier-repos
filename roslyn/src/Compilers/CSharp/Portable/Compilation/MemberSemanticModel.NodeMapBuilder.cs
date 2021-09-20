@@ -24,7 +24,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                 OrderPreservingMultiDictionary<SyntaxNode, BoundNode> map,
                 SyntaxTree tree,
                 SyntaxNode thisSyntaxNodeOnly
-            ) {
+            )
+            {
                 _map = map;
                 _tree = tree;
                 _thisSyntaxNodeOnly = thisSyntaxNodeOnly;
@@ -46,7 +47,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                 Dictionary<SyntaxNode, ImmutableArray<BoundNode>> map,
                 SyntaxTree tree,
                 SyntaxNode node = null
-            ) {
+            )
+            {
                 Debug.Assert(
                     node == null || root == null || !(root.Syntax is StatementSyntax),
                     "individually added nodes are not supposed to be statements."
@@ -109,7 +111,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                                 if (
                                     existing[i].Kind == BoundKind.TypeExpression
                                     && added[i].Kind == BoundKind.TypeOrValueExpression
-                                ) {
+                                )
+                                {
                                     Debug.Assert(
                                         TypeSymbol.Equals(
                                             ((BoundTypeExpression)existing[i]).Type,
@@ -126,7 +129,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                                 else if (
                                     existing[i].Kind == BoundKind.TypeOrValueExpression
                                     && added[i].Kind == BoundKind.TypeExpression
-                                ) {
+                                )
+                                {
                                     Debug.Assert(
                                         TypeSymbol.Equals(
                                             ((BoundTypeOrValueExpression)existing[i]).Type,

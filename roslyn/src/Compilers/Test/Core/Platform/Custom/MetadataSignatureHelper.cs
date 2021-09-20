@@ -42,7 +42,8 @@ namespace Roslyn.Test.Utilities
             Type type,
             StringBuilder sb,
             bool showGenericConstraints = false
-        ) {
+        )
+        {
             if (showGenericConstraints && type.IsGenericParameter)
             {
                 var typeInfo = type.GetTypeInfo();
@@ -85,7 +86,8 @@ namespace Roslyn.Test.Utilities
             object value,
             StringBuilder sb,
             bool includeAssignmentOperator = true
-        ) {
+        )
+        {
             if (value != null)
             {
                 if (includeAssignmentOperator)
@@ -107,7 +109,8 @@ namespace Roslyn.Test.Utilities
         private static void AppendCustomAttributeData(
             CustomAttributeData attribute,
             StringBuilder sb
-        ) {
+        )
+        {
             sb.Append("[");
             AppendType(attribute.Constructor.DeclaringType, sb);
             sb.Append("(");
@@ -136,7 +139,8 @@ namespace Roslyn.Test.Utilities
                     && attribute.AttributeType != typeof(InAttribute)
                     && attribute.AttributeType != typeof(OutAttribute)
                     && attribute.AttributeType != typeof(MarshalAsAttribute)
-                ) {
+                )
+                {
                     AppendCustomAttributeData(attribute, sb);
                     sb.Append(" ");
                 }
@@ -180,7 +184,8 @@ namespace Roslyn.Test.Utilities
             StringBuilder sb,
             ParameterAttributes attributes,
             bool all = true
-        ) {
+        )
+        {
             List<string> list = new List<string>();
 
             if ((attributes & ParameterAttributes.Optional) != 0)
@@ -206,7 +211,8 @@ namespace Roslyn.Test.Utilities
             StringBuilder sb,
             PropertyAttributes attributes,
             bool all = true
-        ) {
+        )
+        {
             List<string> list = new List<string>();
 
             if ((attributes & PropertyAttributes.SpecialName) != 0)
@@ -228,7 +234,8 @@ namespace Roslyn.Test.Utilities
             StringBuilder sb,
             EventAttributes attributes,
             bool all = true
-        ) {
+        )
+        {
             List<string> list = new List<string>();
 
             if ((attributes & EventAttributes.SpecialName) != 0)
@@ -244,7 +251,8 @@ namespace Roslyn.Test.Utilities
             StringBuilder sb,
             FieldAttributes attributes,
             bool all = true
-        ) {
+        )
+        {
             string visibility;
             switch (attributes & FieldAttributes.FieldAccessMask)
             {
@@ -307,7 +315,8 @@ namespace Roslyn.Test.Utilities
             StringBuilder sb,
             MethodAttributes attributes,
             bool all = true
-        ) {
+        )
+        {
             string visibility;
             switch (attributes & MethodAttributes.MemberAccessMask)
             {
@@ -374,7 +383,8 @@ namespace Roslyn.Test.Utilities
         public static StringBuilder AppendMethodImplAttributes(
             StringBuilder sb,
             MethodImplAttributes attributes
-        ) {
+        )
+        {
             string codeType;
             switch (attributes & MethodImplAttributes.CodeTypeMask)
             {
@@ -424,7 +434,8 @@ namespace Roslyn.Test.Utilities
         public static StringBuilder AppendTypeAttributes(
             StringBuilder sb,
             TypeAttributes attributes
-        ) {
+        )
+        {
             string visibility;
             switch (attributes & TypeAttributes.VisibilityMask)
             {
@@ -773,7 +784,8 @@ namespace Roslyn.Test.Utilities
         public static IEnumerable<string> GetMemberSignatures(
             System.Reflection.Assembly assembly,
             string fullyQualifiedTypeName
-        ) {
+        )
+        {
             var candidates = new List<string>();
             var sb = new StringBuilder();
             var type = assembly.GetType(fullyQualifiedTypeName);
@@ -782,14 +794,16 @@ namespace Roslyn.Test.Utilities
                 foreach (
                     var constructor in type.GetConstructors(BINDING_FLAGS)
                         .OrderBy((member) => member.Name)
-                ) {
+                )
+                {
                     AppendConstructorInfo(constructor, sb);
                     candidates.Add(sb.ToString());
                     sb.Clear();
                 }
                 foreach (
                     var method in type.GetMethods(BINDING_FLAGS).OrderBy((member) => member.Name)
-                ) {
+                )
+                {
                     AppendMethodInfo(method, sb);
                     candidates.Add(sb.ToString());
                     sb.Clear();
@@ -797,21 +811,24 @@ namespace Roslyn.Test.Utilities
                 foreach (
                     var property in type.GetProperties(BINDING_FLAGS)
                         .OrderBy((member) => member.Name)
-                ) {
+                )
+                {
                     AppendPropertyInfo(property, sb);
                     candidates.Add(sb.ToString());
                     sb.Clear();
                 }
                 foreach (
                     var @event in type.GetEvents(BINDING_FLAGS).OrderBy((member) => member.Name)
-                ) {
+                )
+                {
                     AppendEventInfo(@event, sb);
                     candidates.Add(sb.ToString());
                     sb.Clear();
                 }
                 foreach (
                     var field in type.GetFields(BINDING_FLAGS).OrderBy((member) => member.Name)
-                ) {
+                )
+                {
                     AppendFieldInfo(field, sb);
                     candidates.Add(sb.ToString());
                     sb.Clear();
@@ -824,7 +841,8 @@ namespace Roslyn.Test.Utilities
             System.Reflection.Assembly assembly,
             string fullyQualifiedTypeName,
             string memberName
-        ) {
+        )
+        {
             IEnumerable<string> retVal = null;
             if (string.IsNullOrWhiteSpace(memberName))
             {

@@ -13,9 +13,8 @@ namespace Microsoft.Extensions.DependencyInjection
                 System.Diagnostics.CodeAnalysis.DynamicallyAccessedMemberTypes.PublicConstructors
             )]
                 THostedService
-        >(
-            this Microsoft.Extensions.DependencyInjection.IServiceCollection services
-        ) where THostedService : class, Microsoft.Extensions.Hosting.IHostedService
+        >(this Microsoft.Extensions.DependencyInjection.IServiceCollection services)
+            where THostedService : class, Microsoft.Extensions.Hosting.IHostedService
         {
             throw null;
         }
@@ -45,12 +44,14 @@ namespace Microsoft.Extensions.Hosting
         );
         public virtual System.Threading.Tasks.Task StartAsync(
             System.Threading.CancellationToken cancellationToken
-        ) {
+        )
+        {
             throw null;
         }
         public virtual System.Threading.Tasks.Task StopAsync(
             System.Threading.CancellationToken cancellationToken
-        ) {
+        )
+        {
             throw null;
         }
     }
@@ -99,23 +100,27 @@ namespace Microsoft.Extensions.Hosting
     {
         public static bool IsDevelopment(
             this Microsoft.Extensions.Hosting.IHostEnvironment hostEnvironment
-        ) {
+        )
+        {
             throw null;
         }
         public static bool IsEnvironment(
             this Microsoft.Extensions.Hosting.IHostEnvironment hostEnvironment,
             string environmentName
-        ) {
+        )
+        {
             throw null;
         }
         public static bool IsProduction(
             this Microsoft.Extensions.Hosting.IHostEnvironment hostEnvironment
-        ) {
+        )
+        {
             throw null;
         }
         public static bool IsStaging(
             this Microsoft.Extensions.Hosting.IHostEnvironment hostEnvironment
-        ) {
+        )
+        {
             throw null;
         }
     }
@@ -123,14 +128,16 @@ namespace Microsoft.Extensions.Hosting
     {
         public static Microsoft.Extensions.Hosting.IHost Start(
             this Microsoft.Extensions.Hosting.IHostBuilder hostBuilder
-        ) {
+        )
+        {
             throw null;
         }
         public static System.Threading.Tasks.Task<Microsoft.Extensions.Hosting.IHost> StartAsync(
             this Microsoft.Extensions.Hosting.IHostBuilder hostBuilder,
             System.Threading.CancellationToken cancellationToken =
                 default(System.Threading.CancellationToken)
-        ) {
+        )
+        {
             throw null;
         }
     }
@@ -140,21 +147,24 @@ namespace Microsoft.Extensions.Hosting
         public static System.Threading.Tasks.Task RunAsync(
             this Microsoft.Extensions.Hosting.IHost host,
             System.Threading.CancellationToken token = default(System.Threading.CancellationToken)
-        ) {
+        )
+        {
             throw null;
         }
         public static void Start(this Microsoft.Extensions.Hosting.IHost host) { }
         public static System.Threading.Tasks.Task StopAsync(
             this Microsoft.Extensions.Hosting.IHost host,
             System.TimeSpan timeout
-        ) {
+        )
+        {
             throw null;
         }
         public static void WaitForShutdown(this Microsoft.Extensions.Hosting.IHost host) { }
         public static System.Threading.Tasks.Task WaitForShutdownAsync(
             this Microsoft.Extensions.Hosting.IHost host,
             System.Threading.CancellationToken token = default(System.Threading.CancellationToken)
-        ) {
+        )
+        {
             throw null;
         }
     }
@@ -162,23 +172,27 @@ namespace Microsoft.Extensions.Hosting
     {
         public static bool IsDevelopment(
             this Microsoft.Extensions.Hosting.IHostingEnvironment hostingEnvironment
-        ) {
+        )
+        {
             throw null;
         }
         public static bool IsEnvironment(
             this Microsoft.Extensions.Hosting.IHostingEnvironment hostingEnvironment,
             string environmentName
-        ) {
+        )
+        {
             throw null;
         }
         public static bool IsProduction(
             this Microsoft.Extensions.Hosting.IHostingEnvironment hostingEnvironment
-        ) {
+        )
+        {
             throw null;
         }
         public static bool IsStaging(
             this Microsoft.Extensions.Hosting.IHostingEnvironment hostingEnvironment
-        ) {
+        )
+        {
             throw null;
         }
     }

@@ -69,7 +69,8 @@ namespace System.Runtime.CompilerServices
         internal static void SetException(
             Exception exception,
             [NotNull] ref StateMachineBox? boxFieldRef
-        ) {
+        )
+        {
             if (exception is null)
             {
                 ThrowHelper.ThrowArgumentNullException(ExceptionArgument.exception);
@@ -110,16 +111,18 @@ namespace System.Runtime.CompilerServices
         public void AwaitOnCompleted<TAwaiter, TStateMachine>(
             ref TAwaiter awaiter,
             ref TStateMachine stateMachine
-        ) where TAwaiter : INotifyCompletion
-          where TStateMachine : IAsyncStateMachine =>
+        )
+            where TAwaiter : INotifyCompletion
+            where TStateMachine : IAsyncStateMachine =>
             AwaitOnCompleted(ref awaiter, ref stateMachine, ref m_task);
 
         internal static void AwaitOnCompleted<TAwaiter, TStateMachine>(
             ref TAwaiter awaiter,
             ref TStateMachine stateMachine,
             ref StateMachineBox? box
-        ) where TAwaiter : INotifyCompletion
-          where TStateMachine : IAsyncStateMachine
+        )
+            where TAwaiter : INotifyCompletion
+            where TStateMachine : IAsyncStateMachine
         {
             try
             {
@@ -140,8 +143,9 @@ namespace System.Runtime.CompilerServices
         public void AwaitUnsafeOnCompleted<TAwaiter, TStateMachine>(
             ref TAwaiter awaiter,
             ref TStateMachine stateMachine
-        ) where TAwaiter : ICriticalNotifyCompletion
-          where TStateMachine : IAsyncStateMachine =>
+        )
+            where TAwaiter : ICriticalNotifyCompletion
+            where TStateMachine : IAsyncStateMachine =>
             AwaitUnsafeOnCompleted(ref awaiter, ref stateMachine, ref m_task);
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
@@ -149,8 +153,9 @@ namespace System.Runtime.CompilerServices
             ref TAwaiter awaiter,
             ref TStateMachine stateMachine,
             [NotNull] ref StateMachineBox? boxRef
-        ) where TAwaiter : ICriticalNotifyCompletion
-          where TStateMachine : IAsyncStateMachine
+        )
+            where TAwaiter : ICriticalNotifyCompletion
+            where TStateMachine : IAsyncStateMachine
         {
             IAsyncStateMachineBox box = GetStateMachineBox(ref stateMachine, ref boxRef);
             AsyncTaskMethodBuilder<VoidTaskResult>.AwaitUnsafeOnCompleted(ref awaiter, box);
@@ -338,7 +343,8 @@ namespace System.Runtime.CompilerServices
                     s_cache is not null
                     && // hot read just to see if there's any point paying for the interlocked
                     Interlocked.Exchange(ref s_cacheLock, 1) == 0
-                ) {
+                )
+                {
                     // If there are any instances cached, take one from the cache stack and use it.
                     box = s_cache;
                     if (box is not null)
@@ -407,7 +413,8 @@ namespace System.Runtime.CompilerServices
                 {
                     if (
                         s_cacheSize < PoolingAsyncValueTaskMethodBuilder.s_valueTaskPoolingCacheSize
-                    ) {
+                    )
+                    {
                         // Push the box onto the cache stack for subsequent reuse.
                         _next = s_cache;
                         s_cache = this;

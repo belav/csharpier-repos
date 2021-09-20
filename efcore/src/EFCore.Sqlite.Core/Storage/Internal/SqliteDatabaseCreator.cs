@@ -83,7 +83,8 @@ namespace Microsoft.EntityFrameworkCore.Sqlite.Storage.Internal
             if (
                 connectionOptions.DataSource.Equals(":memory:", StringComparison.OrdinalIgnoreCase)
                 || connectionOptions.Mode == SqliteOpenMode.Memory
-            ) {
+            )
+            {
                 return true;
             }
 

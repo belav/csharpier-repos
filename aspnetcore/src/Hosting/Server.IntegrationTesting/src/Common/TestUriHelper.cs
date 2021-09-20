@@ -26,7 +26,8 @@ namespace Microsoft.AspNetCore.Server.IntegrationTesting.Common
             string scheme,
             string hint,
             bool statusMessagesEnabled
-        ) {
+        )
+        {
             if (string.IsNullOrEmpty(hint))
             {
                 if (serverType == ServerType.Kestrel && statusMessagesEnabled)

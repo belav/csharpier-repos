@@ -22,7 +22,8 @@ namespace Microsoft.VisualStudio.IntegrationTest.Utilities
         internal VisualStudioInstanceContext(
             VisualStudioInstance instance,
             VisualStudioInstanceFactory instanceFactory
-        ) {
+        )
+        {
             Instance = instance;
             _instanceFactory = instanceFactory;
         }

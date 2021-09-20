@@ -1919,7 +1919,8 @@ namespace Microsoft.EntityFrameworkCore.Migrations
             Action<ModelBuilder> buildSourceAction,
             Action<ModelBuilder> buildTargetAction,
             Action<DatabaseModel> asserter
-        ) {
+        )
+        {
             var context = CreateContext();
             var modelDiffer = context.GetService<IMigrationsModelDiffer>();
             var modelRuntimeInitializer = context.GetService<IModelRuntimeInitializer>();
@@ -1954,7 +1955,8 @@ namespace Microsoft.EntityFrameworkCore.Migrations
 
         protected DiagnosticsLogger<DbLoggerCategory.Model.Validation> CreateValidationLogger(
             bool sensitiveDataLoggingEnabled = false
-        ) {
+        )
+        {
             var options = new LoggingOptions();
             options.Initialize(
                 new DbContextOptionsBuilder().EnableSensitiveDataLogging(
@@ -1980,7 +1982,8 @@ namespace Microsoft.EntityFrameworkCore.Migrations
             Action<ModelBuilder> buildSourceAction,
             IReadOnlyList<MigrationOperation> operations,
             Action<DatabaseModel> asserter
-        ) {
+        )
+        {
             var sourceModelBuilder = CreateConventionlessModelBuilder();
             buildSourceAction(sourceModelBuilder);
             if (sourceModelBuilder.Model.GetProductVersion() is null)
@@ -2004,7 +2007,8 @@ namespace Microsoft.EntityFrameworkCore.Migrations
             IModel targetModel,
             IReadOnlyList<MigrationOperation> operations,
             Action<DatabaseModel> asserter
-        ) {
+        )
+        {
             var context = CreateContext();
             var serviceProvider = ((IInfrastructure<IServiceProvider>)context).Instance;
             var migrationsSqlGenerator =

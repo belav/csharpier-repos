@@ -458,7 +458,8 @@ namespace JIT.HardwareIntrinsics.Arm
             Vector128<SByte> op1,
             SByte result,
             [CallerMemberName] string method = ""
-        ) {
+        )
+        {
             SByte[] inArray1 = new SByte[Op1ElementCount];
 
             Unsafe.WriteUnaligned(ref Unsafe.As<SByte, byte>(ref inArray1[0]), op1);
@@ -483,7 +484,8 @@ namespace JIT.HardwareIntrinsics.Arm
             SByte[] firstOp,
             SByte result,
             [CallerMemberName] string method = ""
-        ) {
+        )
+        {
             bool succeeded = true;
 
             if (firstOp[ElementIndex] != result)

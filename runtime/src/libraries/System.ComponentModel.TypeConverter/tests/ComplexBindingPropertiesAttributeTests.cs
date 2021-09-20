@@ -106,7 +106,8 @@ namespace System.ComponentModel.Tests
             ComplexBindingPropertiesAttribute attribute,
             object other,
             bool expected
-        ) {
+        )
+        {
             Assert.Equal(expected, attribute.Equals(other));
         }
 

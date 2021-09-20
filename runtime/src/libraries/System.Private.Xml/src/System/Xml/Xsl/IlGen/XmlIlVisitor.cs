@@ -741,7 +741,8 @@ namespace System.Xml.Xsl.IlGen
             BranchingContext brctxt,
             Label lblBranch,
             Label lblOnFalse
-        ) {
+        )
+        {
             switch (brctxt)
             {
                 case BranchingContext.OnTrue:
@@ -1077,7 +1078,8 @@ namespace System.Xml.Xsl.IlGen
             QilNode ndBranch,
             Type itemStorageType,
             LocalBuilder? locResult
-        ) {
+        )
+        {
             if (locResult == null)
             {
                 Debug.Assert(ndBranch.XmlType!.IsSingleton, "Conditional must produce a singleton");
@@ -1421,7 +1423,8 @@ namespace System.Xml.Xsl.IlGen
             MethodInfo methCreate,
             MethodInfo methNext,
             MethodInfo methCurrent
-        ) {
+        )
+        {
             LocalBuilder locIter,
                 locNav;
             Label lblNext,
@@ -1558,7 +1561,8 @@ namespace System.Xml.Xsl.IlGen
             XmlILStorageMethods methods,
             MethodInfo methAgg,
             MethodInfo methResult
-        ) {
+        )
+        {
             Label lblOnEnd = _helper.DefineLabel();
             Type typAgg = methAgg.DeclaringType!;
             LocalBuilder locAgg;
@@ -1694,7 +1698,8 @@ namespace System.Xml.Xsl.IlGen
             if (
                 delimiter.NodeType == QilNodeType.LiteralString
                 && ((string)(QilLiteral)delimiter).Length == 0
-            ) {
+            )
+            {
                 delimiter = null;
             }
 
@@ -3734,7 +3739,8 @@ namespace System.Xml.Xsl.IlGen
                 !ndTypeAssert.Source.XmlType!.IsSingleton
                 && ndTypeAssert.XmlType!.IsSingleton
                 && !_iterCurr.HasLabelNext
-            ) {
+            )
+            {
                 // This case occurs when a non-singleton expression is treated as cardinality One.
                 // The trouble is that the expression will branch to an end label when it's done iterating, so
                 // an end label must be provided.  But there is no next label in the current iteration context,
@@ -3842,7 +3848,8 @@ namespace System.Xml.Xsl.IlGen
             QilTargetType ndIsType,
             XmlQueryType typDerived,
             XmlQueryType typBase
-        ) {
+        )
+        {
             XmlNodeKindFlags kinds;
             bool allowKinds = true;
             XPathNodeType kindsRuntime;
@@ -4356,20 +4363,23 @@ namespace System.Xml.Xsl.IlGen
                     }
                     else if (
                         clrTypeFormalArg == XmlILMethods.StorageMethods[typeof(XPathItem)].IListType
-                    ) {
+                    )
+                    {
                         // Formal type is IList<XPathItem>
                         NestedVisitEnsureStack(ndActualArg, typeof(XPathItem), true);
                     }
                     else if (
                         (ndActualArg.XmlType.IsSingleton && clrTypeFormalArg == itemType)
                         || ndActualArg.XmlType.TypeCode == XmlTypeCode.None
-                    ) {
+                    )
+                    {
                         // Formal type is T
                         NestedVisitEnsureStack(ndActualArg, clrTypeFormalArg, false);
                     }
                     else if (
                         ndActualArg.XmlType.IsSingleton && clrTypeFormalArg == typeof(XPathItem)
-                    ) {
+                    )
+                    {
                         // Formal type is XPathItem
                         NestedVisitEnsureStack(ndActualArg, typeof(XPathItem), false);
                     }
@@ -4388,7 +4398,8 @@ namespace System.Xml.Xsl.IlGen
                     if (
                         xmlTypeFormalArg.TypeCode == XmlTypeCode.Item
                         || !clrTypeFormalArg.IsAssignableFrom(clrTypeActualArg)
-                    ) {
+                    )
+                    {
                         // (clrTypeFormalArg) runtime.ChangeTypeXsltArgument(xmlTypeFormalArg, (object) value, clrTypeFormalArg);
                         _helper.LoadQueryRuntime();
                         _helper.LoadInteger(_helper.StaticData.DeclareXmlType(xmlTypeFormalArg));
@@ -4561,7 +4572,8 @@ namespace System.Xml.Xsl.IlGen
             XmlQueryType typSrc,
             XmlQueryType typDst,
             out MethodInfo? meth
-        ) {
+        )
+        {
             meth = null;
 
             // Note, Ref.Equals is OK to use here, since we will always fall back to Item or Item* in the
@@ -4629,7 +4641,8 @@ namespace System.Xml.Xsl.IlGen
             else if (
                 (object)typDst == (object)TypeFactory.NodeSDod
                 || (object)typDst == (object)TypeFactory.NodeNotRtfS
-            ) {
+            )
+            {
                 if ((object)typSrc == (object)TypeFactory.Item)
                     meth = XmlILMethods.ItemToNodes;
                 else if ((object)typSrc == (object)TypeFactory.ItemS)
@@ -4683,7 +4696,8 @@ namespace System.Xml.Xsl.IlGen
             MethodInfo methCreate,
             MethodInfo methNext,
             MethodInfo methCurrent
-        ) {
+        )
+        {
             // Iterator iter;
             LocalBuilder locIter = _helper.DeclareLocal(iterName, iterType);
 
@@ -4716,7 +4730,8 @@ namespace System.Xml.Xsl.IlGen
             QilName? ndName,
             TriState orSelf,
             QilNode? ndEnd
-        ) {
+        )
+        {
             // Iterator iter;
             LocalBuilder locIter = _helper.DeclareLocal(iterName, iterType);
 
@@ -4760,7 +4775,8 @@ namespace System.Xml.Xsl.IlGen
             XmlNodeKindFlags kinds,
             QilName? ndName,
             TriState orSelf
-        ) {
+        )
+        {
             // Iterator iter;
             LocalBuilder locIter = _helper.DeclareLocal(iterName, iterType);
             Label lblOnEndNested;
@@ -4807,7 +4823,8 @@ namespace System.Xml.Xsl.IlGen
             LocalBuilder locIter,
             MethodInfo methNext,
             MethodInfo methCurrent
-        ) {
+        )
+        {
             Label lblNext;
 
             // LabelNext:
@@ -4847,7 +4864,8 @@ namespace System.Xml.Xsl.IlGen
             MethodInfo methNext,
             MethodInfo methCurrent,
             Type itemStorageType
-        ) {
+        )
+        {
             Label lblCall;
 
             // Define labels that will be used
@@ -4911,7 +4929,8 @@ namespace System.Xml.Xsl.IlGen
             QilNode ndName,
             bool isStart,
             bool callChk
-        ) {
+        )
+        {
             QilName ndLiteralName;
             string prefix,
                 localName,
@@ -4966,7 +4985,8 @@ namespace System.Xml.Xsl.IlGen
                             nodeType,
                             ValidateNames.Flags.CheckPrefixMapping
                         )
-                    ) {
+                    )
+                    {
                         // Then construct a new prefix at run-time
                         if (isStart)
                         {
@@ -5795,7 +5815,8 @@ namespace System.Xml.Xsl.IlGen
                 if (
                     _iterCurr.Storage.ItemStorageType == typeof(XPathNavigator)
                     || itemStorageType == typeof(XPathNavigator)
-                ) {
+                )
+                {
                     _iterCurr.EnsureItemStorageType(nd.XmlType!, itemStorageType);
                     return;
                 }

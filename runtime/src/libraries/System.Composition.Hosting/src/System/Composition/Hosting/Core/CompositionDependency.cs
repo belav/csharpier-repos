@@ -42,7 +42,8 @@ namespace System.Composition.Hosting.Core
             ExportDescriptorPromise target,
             bool isPrerequisite,
             object site
-        ) {
+        )
+        {
             if (contract == null)
             {
                 throw new ArgumentNullException(nameof(contract));
@@ -95,7 +96,8 @@ namespace System.Composition.Hosting.Core
             CompositionContract contract,
             IEnumerable<ExportDescriptorPromise> targets,
             object site
-        ) {
+        )
+        {
             if (contract == null)
             {
                 throw new ArgumentNullException(nameof(contract));
@@ -119,7 +121,8 @@ namespace System.Composition.Hosting.Core
             ExportDescriptorPromise target,
             bool isPrerequisite,
             object site
-        ) {
+        )
+        {
             _target = target;
             _isPrerequisite = isPrerequisite;
             _site = site;
@@ -136,7 +139,8 @@ namespace System.Composition.Hosting.Core
             CompositionContract contract,
             IEnumerable<ExportDescriptorPromise> targets,
             object site
-        ) {
+        )
+        {
             _oversuppliedTargets = targets.ToArray();
             _site = site;
             _contract = contract;

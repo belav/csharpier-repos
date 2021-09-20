@@ -43,7 +43,8 @@ namespace Microsoft.AspNetCore.Mvc.ModelBinding
         /// </returns>
         public static async Task<CompositeValueProvider> CreateAsync(
             ControllerContext controllerContext
-        ) {
+        )
+        {
             if (controllerContext == null)
             {
                 throw new ArgumentNullException(nameof(controllerContext));
@@ -67,7 +68,8 @@ namespace Microsoft.AspNetCore.Mvc.ModelBinding
         public static async Task<CompositeValueProvider> CreateAsync(
             ActionContext actionContext,
             IList<IValueProviderFactory> factories
-        ) {
+        )
+        {
             var valueProviderFactoryContext = new ValueProviderFactoryContext(actionContext);
 
             for (var i = 0; i < factories.Count; i++)
@@ -82,7 +84,8 @@ namespace Microsoft.AspNetCore.Mvc.ModelBinding
         internal static async ValueTask<(bool success, CompositeValueProvider? valueProvider)> TryCreateAsync(
             ActionContext actionContext,
             IList<IValueProviderFactory> factories
-        ) {
+        )
+        {
             try
             {
                 var valueProvider = await CreateAsync(actionContext, factories);

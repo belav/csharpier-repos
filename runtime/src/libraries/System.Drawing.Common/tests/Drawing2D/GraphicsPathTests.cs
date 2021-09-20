@@ -117,7 +117,8 @@ namespace System.Drawing.Drawing2D.Tests
         public void Ctor_PointsTypesLengthMismatch_ThrowsArgumentException(
             int pointsLength,
             int typesLength
-        ) {
+        )
+        {
             AssertExtensions.Throws<ArgumentException>(
                 null,
                 () => new GraphicsPath(new Point[pointsLength], new byte[typesLength])
@@ -166,7 +167,8 @@ namespace System.Drawing.Drawing2D.Tests
         [InlineData(FillMode.Winding + 1)]
         public void GraphicsPath_InvalidFillMode_ThrowsInvalidEnumArgumentException(
             FillMode fillMode
-        ) {
+        )
+        {
             using (GraphicsPath gp = new GraphicsPath())
             {
                 Assert.ThrowsAny<ArgumentException>(() => gp.FillMode = fillMode);
@@ -2447,7 +2449,8 @@ namespace System.Drawing.Drawing2D.Tests
             Rectangle rectangle,
             float penWidth,
             RectangleF expectedBounds
-        ) {
+        )
+        {
             using (GraphicsPath gp = new GraphicsPath())
             using (Pen pen = new Pen(Color.Aqua, 0))
             using (Matrix matrix = new Matrix())

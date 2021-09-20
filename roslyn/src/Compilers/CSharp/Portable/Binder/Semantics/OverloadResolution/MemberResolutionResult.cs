@@ -23,7 +23,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             TMember member,
             TMember leastOverriddenMember,
             MemberAnalysisResult result
-        ) {
+        )
+        {
             _member = member;
             _leastOverriddenMember = leastOverriddenMember;
             _result = result;

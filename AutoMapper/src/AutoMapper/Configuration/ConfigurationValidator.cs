@@ -17,7 +17,8 @@ namespace AutoMapper.Configuration
         public ConfigurationValidator(
             IGlobalConfiguration config,
             IGlobalConfigurationExpression expression
-        ) {
+        )
+        {
             _validators = expression.GetValidators();
             _config = config;
             _expression = expression;
@@ -119,13 +120,15 @@ namespace AutoMapper.Configuration
             TypePair types,
             TypeMap typeMap,
             MemberMap memberMap
-        ) {
+        )
+        {
             if (typeMap == null)
             {
                 if (
                     types.SourceType.ContainsGenericParameters
                     || types.DestinationType.ContainsGenericParameters
-                ) {
+                )
+                {
                     return;
                 }
                 typeMap = _config.ResolveTypeMap(types.SourceType, types.DestinationType);
@@ -177,7 +180,8 @@ namespace AutoMapper.Configuration
                     memberMap.Ignored
                     || memberMap.ValueConverterConfig != null
                     || memberMap.ValueResolverConfig != null
-                ) {
+                )
+                {
                     continue;
                 }
                 var sourceType = memberMap.SourceType;
@@ -203,11 +207,8 @@ namespace AutoMapper.Configuration
         public readonly TypeMap TypeMap { get; }
         public readonly TypePair Types { get; }
 
-        public ValidationContext(
-            TypePair types,
-            MemberMap memberMap,
-            IObjectMapper objectMapper
-        ) : this(types, memberMap, objectMapper, null) { }
+        public ValidationContext(TypePair types, MemberMap memberMap, IObjectMapper objectMapper)
+            : this(types, memberMap, objectMapper, null) { }
 
         public ValidationContext(TypePair types, MemberMap memberMap, TypeMap typeMap)
             : this(types, memberMap, null, typeMap) { }
@@ -217,7 +218,8 @@ namespace AutoMapper.Configuration
             MemberMap memberMap,
             IObjectMapper objectMapper,
             TypeMap typeMap
-        ) {
+        )
+        {
             ObjectMapper = objectMapper;
             TypeMap = typeMap;
             Types = types;

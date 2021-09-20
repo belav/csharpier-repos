@@ -19,7 +19,8 @@ namespace System.StubHelpers
             bool fBestFit,
             bool fThrowOnUnmappableChar,
             out int cbLength
-        ) {
+        )
+        {
             byte[] buffer = new byte[checked((str.Length + 1) * Marshal.SystemMaxDBCSCharSize)];
             fixed (byte* bufferPtr = &buffer[0])
             {
@@ -38,7 +39,8 @@ namespace System.StubHelpers
             char managedChar,
             bool fBestFit,
             bool fThrowOnUnmappableChar
-        ) {
+        )
+        {
             int cbAllocLength = (1 + 1) * Marshal.SystemMaxDBCSCharSize;
             byte* bufferPtr = stackalloc byte[cbAllocLength];
 
@@ -71,7 +73,8 @@ namespace System.StubHelpers
             int flags,
             string strManaged,
             IntPtr pNativeBuffer
-        ) {
+        )
+        {
             if (null == strManaged)
             {
                 return IntPtr.Zero;
@@ -170,7 +173,8 @@ namespace System.StubHelpers
             string strManaged,
             IntPtr pNativeBuffer,
             int length
-        ) {
+        )
+        {
             if (strManaged == null)
             {
                 if (length > 0)
@@ -243,7 +247,8 @@ namespace System.StubHelpers
             int flags,
             string strManaged,
             IntPtr pNativeBuffer
-        ) {
+        )
+        {
             if (null == strManaged)
             {
                 return IntPtr.Zero;
@@ -299,7 +304,8 @@ namespace System.StubHelpers
             StringBuilder sb,
             IntPtr pNativeBuffer,
             int flags
-        ) {
+        )
+        {
             if (null == sb)
             {
                 return IntPtr.Zero;
@@ -451,7 +457,8 @@ namespace System.StubHelpers
             bool fBestFit,
             bool fThrowOnUnmappableChar,
             ref int cch
-        ) {
+        )
+        {
             if (null == strManaged)
             {
                 return IntPtr.Zero;
@@ -583,7 +590,8 @@ namespace System.StubHelpers
             string? strManaged,
             IntPtr nativeHome,
             int length
-        ) {
+        )
+        {
             ReadOnlySpan<char> managed = strManaged;
             Span<char> native = new Span<char>((char*)nativeHome, length);
 
@@ -613,7 +621,8 @@ namespace System.StubHelpers
         internal static unsafe IntPtr ConvertSafeHandleToNative(
             SafeHandle? handle,
             ref CleanupWorkListElement? cleanupWorkList
-        ) {
+        )
+        {
             if (Unsafe.IsNullRef(ref cleanupWorkList))
             {
                 throw new InvalidOperationException(SR.Interop_Marshal_SafeHandle_InvalidOperation);
@@ -1210,7 +1219,8 @@ namespace System.StubHelpers
                 else if (
                     pManagedHome.GetType().IsLayoutSequential
                     || pManagedHome.GetType().IsExplicitLayout
-                ) {
+                )
+                {
                     // layout (LPStruct)
                     pNativeHome = ConvertLayoutToNative(pManagedHome, dwFlags);
                 }
@@ -1349,7 +1359,8 @@ namespace System.StubHelpers
         public static void AddToCleanupList(
             ref CleanupWorkListElement? list,
             CleanupWorkListElement newElement
-        ) {
+        )
+        {
             if (list == null)
             {
                 list = newElement;
@@ -1432,7 +1443,8 @@ namespace System.StubHelpers
         internal static IntPtr AddToCleanupList(
             ref CleanupWorkListElement? pCleanupWorkList,
             SafeHandle handle
-        ) {
+        )
+        {
             SafeHandleCleanupWorkListElement element = new SafeHandleCleanupWorkListElement(handle);
             CleanupWorkListElement.AddToCleanupList(ref pCleanupWorkList, element);
             return element.AddRef();
@@ -1441,7 +1453,8 @@ namespace System.StubHelpers
         internal static void KeepAliveViaCleanupList(
             ref CleanupWorkListElement? pCleanupWorkList,
             object obj
-        ) {
+        )
+        {
             KeepAliveCleanupWorkListElement element = new KeepAliveCleanupWorkListElement(obj);
             CleanupWorkListElement.AddToCleanupList(ref pCleanupWorkList, element);
         }

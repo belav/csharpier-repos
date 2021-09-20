@@ -86,7 +86,8 @@ namespace Castle.Core.Logging
             string loggerName,
             string message,
             Exception exception
-        ) {
+        )
+        {
             if (exception == null)
             {
                 traceSource.TraceEvent(MapTraceEventType(loggerLevel), 0, message);
@@ -165,7 +166,8 @@ namespace Castle.Core.Logging
                 source.Listeners.Count == 1
                 && source.Listeners[0] is DefaultTraceListener
                 && source.Listeners[0].Name == "Default"
-            ) {
+            )
+            {
                 return false;
             }
             return true;

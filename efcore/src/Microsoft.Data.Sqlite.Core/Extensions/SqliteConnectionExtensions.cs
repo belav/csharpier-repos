@@ -11,7 +11,8 @@ namespace Microsoft.Data.Sqlite
             this SqliteConnection connection,
             string commandText,
             params SqliteParameter[] parameters
-        ) {
+        )
+        {
             using var command = connection.CreateCommand();
             command.CommandText = commandText;
             command.Parameters.AddRange(parameters);
@@ -29,7 +30,8 @@ namespace Microsoft.Data.Sqlite
             this SqliteConnection connection,
             string commandText,
             params SqliteParameter[] parameters
-        ) {
+        )
+        {
             using var command = connection.CreateCommand();
             command.CommandText = commandText;
             command.Parameters.AddRange(parameters);

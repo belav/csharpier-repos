@@ -112,7 +112,8 @@ namespace System.Tests
             Lazy<T, TMetadata> lazy,
             T expectedValue,
             TMetadata expectedMetadata
-        ) {
+        )
+        {
             // Accessing metadata doesn't create the value
             Assert.False(lazy.IsValueCreated);
             Assert.Equal(expectedMetadata, lazy.Metadata);

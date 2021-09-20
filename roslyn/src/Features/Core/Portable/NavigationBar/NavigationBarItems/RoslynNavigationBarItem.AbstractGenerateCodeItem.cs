@@ -19,16 +19,18 @@ namespace Microsoft.CodeAnalysis.NavigationBar
                 string text,
                 Glyph glyph,
                 SymbolKey destinationTypeSymbolKey
-            ) : base(
-                kind,
-                text,
-                glyph,
-                bolded: false,
-                grayed: false,
-                indent: 0,
-                childItems: default,
-                ImmutableArray<TextSpan>.Empty
-            ) {
+            )
+                : base(
+                    kind,
+                    text,
+                    glyph,
+                    bolded: false,
+                    grayed: false,
+                    indent: 0,
+                    childItems: default,
+                    ImmutableArray<TextSpan>.Empty
+                )
+            {
                 DestinationTypeSymbolKey = destinationTypeSymbolKey;
             }
         }

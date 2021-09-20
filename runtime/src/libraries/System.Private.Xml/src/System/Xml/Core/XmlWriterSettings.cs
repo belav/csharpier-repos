@@ -716,7 +716,8 @@ namespace System.Xml
                 if (
                     _newLineHandling == NewLineHandling.Replace
                     && baseWriterSettings.NewLineHandling == NewLineHandling.None
-                ) {
+                )
+                {
                     replaceNewLines = true;
                     needWrap = true;
                 }
@@ -745,7 +746,8 @@ namespace System.Xml
             if (
                 this.IsQuerySpecific
                 && (baseWriterSettings == null || !baseWriterSettings.IsQuerySpecific)
-            ) {
+            )
+            {
                 // Create QueryOutputWriterV1 if CData sections or DocType need to be tracked
                 writer = new QueryOutputWriterV1(writer, this);
             }

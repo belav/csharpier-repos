@@ -30,7 +30,8 @@ namespace System.Net
         // it is valid for validators to be null.  this means that no validation should be performed
         internal TrackingValidationObjectDictionary(
             Dictionary<string, ValidateAndParseValue> validators
-        ) {
+        )
+        {
             IsChanged = false;
             _validators = validators;
         }

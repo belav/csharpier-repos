@@ -58,7 +58,8 @@ namespace Microsoft.CodeAnalysis.ReplacePropertyWithMethods
         protected static SyntaxNode GetFieldReference(
             SyntaxGenerator generator,
             IFieldSymbol propertyBackingField
-        ) {
+        )
+        {
             var memberName = generator.IdentifierName(propertyBackingField.Name);
             if (propertyBackingField.IsStatic)
             {
@@ -82,7 +83,8 @@ namespace Microsoft.CodeAnalysis.ReplacePropertyWithMethods
             string desiredGetMethodName,
             string desiredSetMethodName,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var semanticModel = await document.GetRequiredSemanticModelAsync(cancellationToken)
                 .ConfigureAwait(false);
             var semanticFacts = document.GetRequiredLanguageService<ISemanticFactsService>();
@@ -150,7 +152,8 @@ namespace Microsoft.CodeAnalysis.ReplacePropertyWithMethods
                 string desiredGetMethodName,
                 string desiredSetMethodName,
                 CancellationToken cancellationToken
-            ) {
+            )
+            {
                 _service = service;
                 _semanticModel = semanticModel;
                 _syntaxFacts = syntaxFacts;
@@ -168,7 +171,8 @@ namespace Microsoft.CodeAnalysis.ReplacePropertyWithMethods
                 if (
                     _syntaxFacts.IsNameOfSimpleMemberAccessExpression(_expression)
                     || _syntaxFacts.IsNameOfMemberBindingExpression(_expression)
-                ) {
+                )
+                {
                     _expression = (TExpressionSyntax)_expression.Parent!;
                 }
 
@@ -287,7 +291,8 @@ namespace Microsoft.CodeAnalysis.ReplacePropertyWithMethods
                         _expression,
                         _cancellationToken
                     )
-                ) {
+                )
+                {
                     // Code wasn't legal (you can't reference a property in an out/ref position in C#).
                     // Just replace this with a simple GetCall, but mark it so it's clear there's an error.
                     ReplaceRead(
@@ -369,7 +374,8 @@ namespace Microsoft.CodeAnalysis.ReplacePropertyWithMethods
                 GetWriteValue getWriteValue,
                 bool keepTrivia,
                 string? conflictMessage
-            ) {
+            )
+            {
                 Contract.ThrowIfNull(_expression.Parent, $"Parent of {_expression} is null.");
 
                 // Call this overload so we can see this node after already replacing any
@@ -444,7 +450,8 @@ namespace Microsoft.CodeAnalysis.ReplacePropertyWithMethods
                 TExpressionSyntax writeValue,
                 bool keepTrivia,
                 string? conflictMessage
-            ) {
+            )
+            {
                 if (ShouldWriteToBackingField())
                 {
                     var newIdentifierToken = AddConflictAnnotation(
@@ -474,7 +481,8 @@ namespace Microsoft.CodeAnalysis.ReplacePropertyWithMethods
             private TExpressionSyntax GetGetInvocationExpression(
                 bool keepTrivia,
                 string? conflictMessage
-            ) {
+            )
+            {
                 return GetInvocationExpression(
                     _desiredGetMethodName,
                     argument: null,
@@ -488,7 +496,8 @@ namespace Microsoft.CodeAnalysis.ReplacePropertyWithMethods
                 SyntaxNode? argument,
                 bool keepTrivia,
                 string? conflictMessage
-            ) {
+            )
+            {
                 var newIdentifier = AddConflictAnnotation(
                     Generator.Identifier(desiredName),
                     conflictMessage
@@ -525,7 +534,8 @@ namespace Microsoft.CodeAnalysis.ReplacePropertyWithMethods
                 TExpressionSyntax writeValue,
                 bool keepTrivia,
                 string? conflictMessage
-            ) {
+            )
+            {
                 return GetInvocationExpression(
                     _desiredSetMethodName,
                     argument: Generator.Argument(writeValue),
@@ -540,7 +550,8 @@ namespace Microsoft.CodeAnalysis.ReplacePropertyWithMethods
             private static TIdentifierNameSyntax AddConflictAnnotation(
                 TIdentifierNameSyntax name,
                 string conflictMessage
-            ) {
+            )
+            {
                 return name.ReplaceToken(
                     name.GetFirstToken(),
                     AddConflictAnnotation(name.GetFirstToken(), conflictMessage)
@@ -550,7 +561,8 @@ namespace Microsoft.CodeAnalysis.ReplacePropertyWithMethods
             private static SyntaxToken AddConflictAnnotation(
                 SyntaxToken token,
                 string? conflictMessage
-            ) {
+            )
+            {
                 if (conflictMessage != null)
                 {
                     token = token.WithAdditionalAnnotations(
@@ -573,7 +585,8 @@ namespace Microsoft.CodeAnalysis.ReplacePropertyWithMethods
                     GetWriteValue getWriteValue,
                     bool keepTrivia,
                     string? conflictMessage
-                ) {
+                )
+                {
                     Replacer = replacer;
                     GetWriteValue = getWriteValue;
                     KeepTrivia = keepTrivia;

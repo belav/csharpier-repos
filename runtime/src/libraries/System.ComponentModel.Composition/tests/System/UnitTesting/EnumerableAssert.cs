@@ -51,7 +51,8 @@ namespace System.UnitTesting
         public static void AreEqual<TKey, TValue>(
             IDictionary<TKey, TValue> expected,
             IDictionary<TKey, TValue> actual
-        ) {
+        )
+        {
             Assert.Equal(expected.Count, actual.Count);
 
             foreach (KeyValuePair<TKey, TValue> kvp in expected)
@@ -66,7 +67,8 @@ namespace System.UnitTesting
                 if (
                     (firstValue is IDictionary<TKey, TValue>)
                     && (secondValue is IDictionary<TKey, TValue>)
-                ) {
+                )
+                {
                     AreEqual(
                         (IDictionary<TKey, TValue>)firstValue,
                         (IDictionary<TKey, TValue>)secondValue

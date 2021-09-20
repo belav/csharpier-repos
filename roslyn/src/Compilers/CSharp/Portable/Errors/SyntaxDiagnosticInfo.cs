@@ -23,12 +23,8 @@ namespace Microsoft.CodeAnalysis.CSharp
         internal readonly int Offset;
         internal readonly int Width;
 
-        internal SyntaxDiagnosticInfo(
-            int offset,
-            int width,
-            ErrorCode code,
-            params object[] args
-        ) : base(CSharp.MessageProvider.Instance, (int)code, args)
+        internal SyntaxDiagnosticInfo(int offset, int width, ErrorCode code, params object[] args)
+            : base(CSharp.MessageProvider.Instance, (int)code, args)
         {
             Debug.Assert(width >= 0);
             this.Offset = offset;

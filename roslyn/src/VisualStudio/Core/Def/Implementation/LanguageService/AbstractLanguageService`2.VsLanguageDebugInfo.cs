@@ -39,7 +39,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.LanguageService
                 TLanguageService languageService,
                 HostLanguageServices languageServiceProvider,
                 IWaitIndicator waitIndicator
-            ) {
+            )
+            {
                 Contract.ThrowIfNull(languageService);
                 Contract.ThrowIfNull(languageServiceProvider);
 
@@ -59,7 +60,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.LanguageService
                 int iLine,
                 int iCol,
                 out Guid pguidLanguageID
-            ) {
+            )
+            {
                 pguidLanguageID = _languageId;
                 return VSConstants.S_OK;
             }
@@ -68,7 +70,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.LanguageService
                 string pszName,
                 out string? pbstrMkDoc,
                 out VsTextSpan pspanLocation
-            ) {
+            )
+            {
                 pbstrMkDoc = null;
                 pspanLocation = default;
                 return VSConstants.E_NOTIMPL;
@@ -80,13 +83,15 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.LanguageService
                 int iCol,
                 out string? pbstrName,
                 out int piLineOffset
-            ) {
+            )
+            {
                 using (
                     Logger.LogBlock(
                         FunctionId.Debugging_VsLanguageDebugInfo_GetNameOfLocation,
                         CancellationToken.None
                     )
-                ) {
+                )
+                {
                     string? name = null;
                     var lineOffset = 0;
 
@@ -161,14 +166,16 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.LanguageService
                 int iCol,
                 int cLines,
                 out IVsEnumBSTR? ppEnum
-            ) {
+            )
+            {
                 // NOTE(cyrusn): cLines is ignored.  This is to match existing dev10 behavior.
                 using (
                     Logger.LogBlock(
                         FunctionId.Debugging_VsLanguageDebugInfo_GetProximityExpressions,
                         CancellationToken.None
                     )
-                ) {
+                )
+                {
                     VsEnumBSTR? enumBSTR = null;
 
                     if (_proximityExpressionsService != null)
@@ -231,7 +238,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.LanguageService
                         FunctionId.Debugging_VsLanguageDebugInfo_ResolveName,
                         CancellationToken.None
                     )
-                ) {
+                )
+                {
                     // In VS, this method frequently get's called with an empty string to test if the language service
                     // supports this method (some language services, like F#, implement IVsLanguageDebugInfo but don't
                     // implement this method).  In that scenario, there's no sense doing work, so we'll just return
@@ -285,7 +293,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.LanguageService
                 BreakpointResolutionResult breakpoint,
                 Solution solution,
                 CancellationToken cancellationToken
-            ) {
+            )
+            {
                 var document = breakpoint.Document;
                 var filePath = _languageService.Workspace.GetFilePath(document.Id);
                 var text = document.GetTextSynchronously(cancellationToken);
@@ -298,7 +307,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.LanguageService
                         document.Id,
                         out var mappedSpan
                     )
-                ) {
+                )
+                {
                     mappedSpan = span;
                 }
 
@@ -310,13 +320,15 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.LanguageService
                 int iLine,
                 int iCol,
                 VsTextSpan[] pCodeSpan
-            ) {
+            )
+            {
                 using (
                     Logger.LogBlock(
                         FunctionId.Debugging_VsLanguageDebugInfo_ValidateBreakpointLocation,
                         CancellationToken.None
                     )
-                ) {
+                )
+                {
                     var result = VSConstants.E_NOTIMPL;
                     _waitIndicator.Wait(
                         title: ServicesVSResources.Debugger,
@@ -344,7 +356,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.LanguageService
                 int iCol,
                 VsTextSpan[] pCodeSpan,
                 CancellationToken cancellationToken
-            ) {
+            )
+            {
                 if (_breakpointService == null)
                 {
                     return VSConstants.E_FAIL;
@@ -396,7 +409,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.LanguageService
                                 if (
                                     tree.GetDiagnostics(cancellationToken)
                                         .Any(d => d.Severity == DiagnosticSeverity.Error)
-                                ) {
+                                )
+                                {
                                     // Keep the span as is.
                                     return VSConstants.S_OK;
                                 }

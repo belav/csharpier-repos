@@ -84,7 +84,8 @@ namespace System.Transactions
             TransactionScope? currentScope,
             ContextData contextData,
             out Transaction? contextTransaction
-        ) {
+        )
+        {
             Transaction? current = null;
             contextTransaction = null;
 
@@ -140,7 +141,8 @@ namespace System.Transactions
             out Transaction? current,
             out TransactionScope? currentScope,
             out Transaction? contextTransaction
-        ) {
+        )
+        {
             current = null;
             currentScope = null;
             contextTransaction = null;
@@ -200,7 +202,8 @@ namespace System.Transactions
                 if (
                     InteropMode(ContextData.TLSCurrentData.CurrentScope)
                     != EnterpriseServicesInteropOption.None
-                ) {
+                )
+                {
                     if (etwLog.IsEnabled())
                     {
                         etwLog.InvalidOperation("Transaction", "Transaction.set_Current");
@@ -502,7 +505,8 @@ namespace System.Transactions
             Guid resourceManagerIdentifier,
             IEnlistmentNotification enlistmentNotification,
             EnlistmentOptions enlistmentOptions
-        ) {
+        )
+        {
             TransactionsEtwProvider etwLog = TransactionsEtwProvider.Log;
             if (etwLog.IsEnabled())
             {
@@ -530,7 +534,8 @@ namespace System.Transactions
             if (
                 enlistmentOptions != EnlistmentOptions.None
                 && enlistmentOptions != EnlistmentOptions.EnlistDuringPrepareRequired
-            ) {
+            )
+            {
                 throw new ArgumentOutOfRangeException(nameof(enlistmentOptions));
             }
 
@@ -565,7 +570,8 @@ namespace System.Transactions
             Guid resourceManagerIdentifier,
             ISinglePhaseNotification singlePhaseNotification,
             EnlistmentOptions enlistmentOptions
-        ) {
+        )
+        {
             TransactionsEtwProvider etwLog = TransactionsEtwProvider.Log;
             if (etwLog.IsEnabled())
             {
@@ -593,7 +599,8 @@ namespace System.Transactions
             if (
                 enlistmentOptions != EnlistmentOptions.None
                 && enlistmentOptions != EnlistmentOptions.EnlistDuringPrepareRequired
-            ) {
+            )
+            {
                 throw new ArgumentOutOfRangeException(nameof(enlistmentOptions));
             }
 
@@ -678,7 +685,8 @@ namespace System.Transactions
         public Enlistment EnlistVolatile(
             IEnlistmentNotification enlistmentNotification,
             EnlistmentOptions enlistmentOptions
-        ) {
+        )
+        {
             TransactionsEtwProvider etwLog = TransactionsEtwProvider.Log;
             if (etwLog.IsEnabled())
             {
@@ -698,7 +706,8 @@ namespace System.Transactions
             if (
                 enlistmentOptions != EnlistmentOptions.None
                 && enlistmentOptions != EnlistmentOptions.EnlistDuringPrepareRequired
-            ) {
+            )
+            {
                 throw new ArgumentOutOfRangeException(nameof(enlistmentOptions));
             }
 
@@ -730,7 +739,8 @@ namespace System.Transactions
         public Enlistment EnlistVolatile(
             ISinglePhaseNotification singlePhaseNotification,
             EnlistmentOptions enlistmentOptions
-        ) {
+        )
+        {
             TransactionsEtwProvider etwLog = TransactionsEtwProvider.Log;
             if (etwLog.IsEnabled())
             {
@@ -750,7 +760,8 @@ namespace System.Transactions
             if (
                 enlistmentOptions != EnlistmentOptions.None
                 && enlistmentOptions != EnlistmentOptions.EnlistDuringPrepareRequired
-            ) {
+            )
+            {
                 throw new ArgumentOutOfRangeException(nameof(enlistmentOptions));
             }
 
@@ -832,7 +843,8 @@ namespace System.Transactions
             if (
                 cloneOption != DependentCloneOption.BlockCommitUntilComplete
                 && cloneOption != DependentCloneOption.RollbackIfNotComplete
-            ) {
+            )
+            {
                 throw new ArgumentOutOfRangeException(nameof(cloneOption));
             }
 
@@ -932,7 +944,8 @@ namespace System.Transactions
             if (
                 Interlocked.Exchange(ref _disposed, Transaction._disposedTrueValue)
                 == Transaction._disposedTrueValue
-            ) {
+            )
+            {
                 return;
             }
 
@@ -954,7 +967,8 @@ namespace System.Transactions
         void ISerializable.GetObjectData(
             SerializationInfo serializationInfo,
             StreamingContext context
-        ) {
+        )
+        {
             //TransactionsEtwProvider etwLog = TransactionsEtwProvider.Log;
             //if (etwLog.IsEnabled())
             //{
@@ -1004,7 +1018,8 @@ namespace System.Transactions
         // We apparently didn't spell Promotable like FXCop thinks it should be spelled.
         public bool EnlistPromotableSinglePhase(
             IPromotableSinglePhaseNotification promotableSinglePhaseNotification
-        ) {
+        )
+        {
             return EnlistPromotableSinglePhase(
                 promotableSinglePhaseNotification,
                 TransactionInterop.PromoterTypeDtc
@@ -1035,7 +1050,8 @@ namespace System.Transactions
         public bool EnlistPromotableSinglePhase(
             IPromotableSinglePhaseNotification promotableSinglePhaseNotification,
             Guid promoterType
-        ) {
+        )
+        {
             TransactionsEtwProvider etwLog = TransactionsEtwProvider.Log;
             if (etwLog.IsEnabled())
             {
@@ -1088,7 +1104,8 @@ namespace System.Transactions
             IPromotableSinglePhaseNotification promotableNotification,
             ISinglePhaseNotification enlistmentNotification,
             EnlistmentOptions enlistmentOptions
-        ) {
+        )
+        {
             TransactionsEtwProvider etwLog = TransactionsEtwProvider.Log;
             if (etwLog.IsEnabled())
             {
@@ -1121,7 +1138,8 @@ namespace System.Transactions
             if (
                 enlistmentOptions != EnlistmentOptions.None
                 && enlistmentOptions != EnlistmentOptions.EnlistDuringPrepareRequired
-            ) {
+            )
+            {
                 throw new ArgumentOutOfRangeException(nameof(enlistmentOptions));
             }
 
@@ -1154,7 +1172,8 @@ namespace System.Transactions
         public void SetDistributedTransactionIdentifier(
             IPromotableSinglePhaseNotification promotableNotification,
             Guid distributedTransactionIdentifier
-        ) {
+        )
+        {
             TransactionsEtwProvider etwLog = TransactionsEtwProvider.Log;
             if (etwLog.IsEnabled())
             {
@@ -1362,7 +1381,8 @@ namespace System.Transactions
                     currentData.CurrentScope == null
                     && currentData.CurrentTransaction == null
                     && defaultLookup != TxLookup.DefaultCallContext
-                ) {
+                )
+                {
                     // Clear Call Context Data
                     CallContextCurrentData.ClearCurrentData(null, true);
                     return TLSCurrentData;

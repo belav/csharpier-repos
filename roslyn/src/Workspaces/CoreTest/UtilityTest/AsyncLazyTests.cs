@@ -46,7 +46,8 @@ namespace Microsoft.CodeAnalysis.UnitTests
 
         private static void SynchronousContinuationsDoNotRunWithinGetValueCallCore(
             TaskStatus expectedTaskStatus
-        ) {
+        )
+        {
             var synchronousComputationStartedEvent = new ManualResetEvent(initialState: false);
             var synchronousComputationShouldCompleteEvent = new ManualResetEvent(
                 initialState: false
@@ -187,7 +188,8 @@ namespace Microsoft.CodeAnalysis.UnitTests
         private static void GetValueOrGetValueAsyncThrowsCorrectExceptionDuringCancellation(
             Action<AsyncLazy<object>, CancellationToken> doGetValue,
             bool includeSynchronousComputation
-        ) {
+        )
+        {
             // A call to GetValue/GetValueAsync with a token that is cancelled should throw an OperationCancelledException, but it's
             // important to make sure the correct token is cancelled. It should be cancelled with the token passed
             // to GetValue, not the cancellation that was thrown by the computation function

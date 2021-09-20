@@ -68,7 +68,8 @@ namespace Microsoft.AspNetCore.Components.Analyzers
             Document document,
             SyntaxNode root,
             PropertyDeclarationSyntax declarationNode
-        ) {
+        )
+        {
             var updatedDeclarationNode = HandlePropertyDeclaration(declarationNode);
             var newSyntaxRoot = root.ReplaceNode(declarationNode, updatedDeclarationNode);
             return Task.FromResult(document.WithSyntaxRoot(newSyntaxRoot));
@@ -93,7 +94,8 @@ namespace Microsoft.AspNetCore.Components.Analyzers
                     ||
                     // We also remove public in case the user has written something totally backwards such as private public protected Foo
                     modifier.IsKind(SyntaxKind.PublicKeyword)
-                ) {
+                )
+                {
                     newModifiers = newModifiers.Remove(modifier);
                 }
             }

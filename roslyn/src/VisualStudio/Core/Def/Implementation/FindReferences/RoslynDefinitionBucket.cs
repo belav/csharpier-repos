@@ -41,12 +41,14 @@ namespace Microsoft.VisualStudio.LanguageServices.FindUsages
                 StreamingFindUsagesPresenter presenter,
                 AbstractTableDataSourceFindUsagesContext context,
                 DefinitionItem definitionItem
-            ) : base(
-                name,
-                sourceTypeIdentifier: context.SourceTypeIdentifier,
-                identifier: context.Identifier,
-                expandedByDefault: expandedByDefault
-            ) {
+            )
+                : base(
+                    name,
+                    sourceTypeIdentifier: context.SourceTypeIdentifier,
+                    identifier: context.Identifier,
+                    expandedByDefault: expandedByDefault
+                )
+            {
                 _presenter = presenter;
                 DefinitionItem = definitionItem;
             }
@@ -56,7 +58,8 @@ namespace Microsoft.VisualStudio.LanguageServices.FindUsages
                 AbstractTableDataSourceFindUsagesContext context,
                 DefinitionItem definitionItem,
                 bool expandedByDefault
-            ) {
+            )
+            {
                 var isPrimary = definitionItem.Properties.ContainsKey(DefinitionItem.Primary);
 
                 // Sort the primary item above everything else.
@@ -96,7 +99,8 @@ namespace Microsoft.VisualStudio.LanguageServices.FindUsages
                 if (
                     TryGetValue(StandardTableKeyNames.Text, out var contentValue)
                     && contentValue is string textContent
-                ) {
+                )
+                {
                     content = textContent;
                     return true;
                 }
@@ -138,7 +142,8 @@ namespace Microsoft.VisualStudio.LanguageServices.FindUsages
             public DocumentSpanEntry GetOrAddEntry(
                 DocumentSpan documentSpan,
                 DocumentSpanEntry entry
-            ) {
+            )
+            {
                 var key = (documentSpan.Document.FilePath, documentSpan.SourceSpan);
                 lock (_locationToEntry)
                 {

@@ -1883,7 +1883,8 @@ class MyClass
             [CombinatorialValues("[|_goo|]", "[|_goo|] = 0")] string firstField,
             [CombinatorialValues("[|_bar|]", "[|_bar|] = 2")] string secondField,
             [CombinatorialValues(0, 1)] int diagnosticIndex
-        ) {
+        )
+        {
             var source =
                 $@"class MyClass
 {{

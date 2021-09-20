@@ -28,7 +28,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Completion.KeywordRecommenders
             SyntaxKind keywordKind,
             bool isValidInPreprocessorContext = false,
             bool shouldFormatOnCommit = false
-        ) {
+        )
+        {
             KeywordKind = keywordKind;
             _isValidInPreprocessorContext = isValidInPreprocessorContext;
 
@@ -58,7 +59,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Completion.KeywordRecommenders
             int position,
             CSharpSyntaxContext context,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var syntaxKind = RecommendKeyword(position, context, cancellationToken);
             if (!syntaxKind.HasValue)
                 return ImmutableArray<RecommendedKeyword>.Empty;
@@ -77,7 +79,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Completion.KeywordRecommenders
             int position,
             CSharpSyntaxContext context,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             // NOTE: The collector ensures that we're not in "NonUserCode" like comments, strings, inactive code
             // for perf reasons.
             if (!_isValidInPreprocessorContext && context.IsPreProcessorDirectiveContext)

@@ -24,14 +24,16 @@ namespace Microsoft.AspNetCore.Components
         public CascadingParameterState(
             string localValueName,
             ICascadingValueComponent valueSupplier
-        ) {
+        )
+        {
             LocalValueName = localValueName;
             ValueSupplier = valueSupplier;
         }
 
         public static IReadOnlyList<CascadingParameterState> FindCascadingParameters(
             ComponentState componentState
-        ) {
+        )
+        {
             var componentType = componentState.Component.GetType();
             var infos = GetReflectedCascadingParameterInfos(componentType);
 
@@ -69,13 +71,15 @@ namespace Microsoft.AspNetCore.Components
         private static ICascadingValueComponent? GetMatchingCascadingValueSupplier(
             in ReflectedCascadingParameterInfo info,
             ComponentState componentState
-        ) {
+        )
+        {
             do
             {
                 if (
                     componentState.Component is ICascadingValueComponent candidateSupplier
                     && candidateSupplier.CanSupplyValue(info.ValueType, info.SupplierValueName)
-                ) {
+                )
+                {
                     return candidateSupplier;
                 }
 
@@ -92,7 +96,8 @@ namespace Microsoft.AspNetCore.Components
                     | DynamicallyAccessedMemberTypes.NonPublicProperties
             )]
                 Type componentType
-        ) {
+        )
+        {
             if (!_cachedInfos.TryGetValue(componentType, out var infos))
             {
                 infos = CreateReflectedCascadingParameterInfos(componentType);
@@ -108,7 +113,8 @@ namespace Microsoft.AspNetCore.Components
                     | DynamicallyAccessedMemberTypes.NonPublicProperties
             )]
                 Type componentType
-        ) {
+        )
+        {
             List<ReflectedCascadingParameterInfo>? result = null;
             var candidateProps = ComponentProperties.GetCandidateBindableProperties(componentType);
             foreach (var prop in candidateProps)
@@ -144,7 +150,8 @@ namespace Microsoft.AspNetCore.Components
                 string consumerValueName,
                 Type valueType,
                 string? supplierValueName
-            ) {
+            )
+            {
                 ConsumerValueName = consumerValueName;
                 SupplierValueName = supplierValueName;
                 ValueType = valueType;

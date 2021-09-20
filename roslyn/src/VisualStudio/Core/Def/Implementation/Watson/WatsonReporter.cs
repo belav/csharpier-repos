@@ -221,7 +221,8 @@ namespace Microsoft.CodeAnalysis.ErrorReporting
                             && !name.Contains("-CodeLens")
                             && !name.Contains("-ManagedLanguage.IDE.RemoteHostClient")
                             && !name.Contains("-hub")
-                        ) {
+                        )
+                        {
                             continue;
                         }
 

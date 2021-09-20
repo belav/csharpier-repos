@@ -4449,7 +4449,8 @@ class C
 toad";
             foreach (
                 var compilationOptions in new[] { TestOptions.ReleaseExe, TestOptions.DebugExe }
-            ) {
+            )
+            {
                 var compilation = CreateCompilation(source, options: compilationOptions);
                 compilation.VerifyDiagnostics();
                 var compVerifier = CompileAndVerify(compilation, expectedOutput: expectedOutput);

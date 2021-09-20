@@ -1010,7 +1010,8 @@ namespace System.Globalization
             out int yg,
             out int mg,
             out int dg
-        ) {
+        )
+        {
             Debug.Assert(
                 (HijriYear >= MinCalendarYear) && (HijriYear <= MaxCalendarYear),
                 "Hijri year is out of range."
@@ -1096,7 +1097,8 @@ namespace System.Globalization
             out int HijriYear,
             out int HijriMonth,
             out int HijriDay
-        ) {
+        )
+        {
             Debug.Assert(
                 (time.Ticks >= s_minDate.Ticks) && (time.Ticks <= s_maxDate.Ticks),
                 "Gregorian date is out of range."
@@ -1250,7 +1252,8 @@ namespace System.Globalization
             if (
                 (s_hijriYearInfo[year - MinCalendarYear].HijriMonthsLengthFlags & (1 << month - 1))
                 == 0
-            ) {
+            )
+            {
                 return 29;
             }
             else
@@ -1358,7 +1361,8 @@ namespace System.Globalization
             int second,
             int millisecond,
             int era
-        ) {
+        )
+        {
             if (day >= 1 && day <= 29)
             {
                 CheckYearMonthRange(year, month, era);

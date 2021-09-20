@@ -16,7 +16,8 @@ namespace Microsoft.AspNetCore.Mvc.FunctionalTests
         public static async Task<IHtmlDocument> GetHtmlDocumentAsync(
             this HttpClient client,
             string requestUri
-        ) {
+        )
+        {
             var response = await client.GetAsync(requestUri);
             await AssertStatusCodeAsync(response, HttpStatusCode.OK);
 
@@ -25,7 +26,8 @@ namespace Microsoft.AspNetCore.Mvc.FunctionalTests
 
         public static async Task<IHtmlDocument> GetHtmlDocumentAsync(
             this HttpResponseMessage response
-        ) {
+        )
+        {
             var content = await response.Content.ReadAsStringAsync();
             var parser = new HtmlParser();
             var document = parser.Parse(content);
@@ -42,7 +44,8 @@ namespace Microsoft.AspNetCore.Mvc.FunctionalTests
         public static async Task<HttpResponseMessage> AssertStatusCodeAsync(
             this HttpResponseMessage response,
             HttpStatusCode expectedStatusCode
-        ) {
+        )
+        {
             if (response.StatusCode == expectedStatusCode)
             {
                 return response;

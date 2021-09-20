@@ -38,7 +38,8 @@ namespace Microsoft.AspNetCore.Authentication.Facebook
         protected override void RegisterAuth(
             AuthenticationBuilder services,
             Action<FacebookOptions> configure
-        ) {
+        )
+        {
             services.AddFacebook(
                 o =>
                 {
@@ -424,7 +425,8 @@ namespace Microsoft.AspNetCore.Authentication.Facebook
                                                 UriComponents.SchemeAndServer | UriComponents.Path,
                                                 UriFormat.UriEscaped
                                             ) == FacebookDefaults.TokenEndpoint
-                                        ) {
+                                        )
+                                        {
                                             var res = new HttpResponseMessage(HttpStatusCode.OK);
                                             var graphResponse =
                                                 "{ \"access_token\": \"TestAuthToken\" }";
@@ -443,7 +445,8 @@ namespace Microsoft.AspNetCore.Authentication.Facebook
                                                 UriComponents.SchemeAndServer | UriComponents.Path,
                                                 UriFormat.UriEscaped
                                             )
-                                        ) {
+                                        )
+                                        {
                                             finalUserInfoEndpoint = req.RequestUri.ToString();
                                             var res = new HttpResponseMessage(HttpStatusCode.OK);
                                             var graphResponse =
@@ -486,7 +489,8 @@ namespace Microsoft.AspNetCore.Authentication.Facebook
             Action<IApplicationBuilder> configure,
             Action<IServiceCollection> configureServices,
             Func<HttpContext, Task<bool>> handler
-        ) {
+        )
+        {
             var host = new HostBuilder().ConfigureWebHost(
                     builder =>
                         builder.UseTestServer()

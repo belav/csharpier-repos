@@ -102,7 +102,8 @@ namespace System.Runtime.Caching
             out object state,
             out DateTimeOffset lastWriteTime,
             out long fileSize
-        ) {
+        )
+        {
             if (filePath == null)
             {
                 throw new ArgumentNullException(nameof(filePath));

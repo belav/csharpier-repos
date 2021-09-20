@@ -57,18 +57,21 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.Highlighting
             IHighlightingService highlightingService,
             IForegroundNotificationService notificationService,
             IAsynchronousOperationListenerProvider listenerProvider
-        ) : base(
-            threadingContext,
-            listenerProvider.GetListener(FeatureAttribute.KeywordHighlighting),
-            notificationService
-        ) {
+        )
+            : base(
+                threadingContext,
+                listenerProvider.GetListener(FeatureAttribute.KeywordHighlighting),
+                notificationService
+            )
+        {
             _highlightingService = highlightingService;
         }
 
         protected override ITaggerEventSource CreateEventSource(
             ITextView textView,
             ITextBuffer subjectBuffer
-        ) {
+        )
+        {
             return TaggerEventSources.Compose(
                 TaggerEventSources.OnTextChanged(subjectBuffer, TaggerDelay.OnIdle),
                 TaggerEventSources.OnCaretPositionChanged(
@@ -84,7 +87,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.Highlighting
             TaggerContext<KeywordHighlightTag> context,
             DocumentSnapshotSpan documentSnapshotSpan,
             int? caretPosition
-        ) {
+        )
+        {
             var cancellationToken = context.CancellationToken;
             var document = documentSnapshotSpan.Document;
 

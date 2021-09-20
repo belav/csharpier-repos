@@ -28,7 +28,8 @@ namespace Internal.Cryptography.Pal.Windows
             out AlgorithmIdentifier contentEncryptionAlgorithm,
             out X509Certificate2Collection originatorCerts,
             out CryptographicAttributeObjectCollection unprotectedAttributes
-        ) {
+        )
+        {
             return DecryptorPalWindows.Decode(
                 encodedMessage,
                 out version,
@@ -50,7 +51,8 @@ namespace Internal.Cryptography.Pal.Windows
                     IntPtr.Zero,
                     IntPtr.Zero
                 )
-            ) {
+            )
+            {
                 if (hCryptMsg == null || hCryptMsg.IsInvalid)
                     throw Marshal.GetLastWin32Error().ToCryptographicException();
 
@@ -194,7 +196,8 @@ namespace Internal.Cryptography.Pal.Windows
                             handle.DangerousGetHandle(),
                             handle
                         )
-                    ) {
+                    )
+                    {
                         CngKeyHandleOpenOptions options = CngKeyHandleOpenOptions.None;
                         byte clrIsEphemeral = 0;
                         Interop.NCrypt.ErrorCode errorCode = Interop.NCrypt.NCryptGetByteProperty(
@@ -207,7 +210,8 @@ namespace Internal.Cryptography.Pal.Windows
                         if (
                             errorCode == Interop.NCrypt.ErrorCode.ERROR_SUCCESS
                             && clrIsEphemeral == 1
-                        ) {
+                        )
+                        {
                             options |= CngKeyHandleOpenOptions.EphemeralKey;
                         }
 
@@ -258,7 +262,8 @@ namespace Internal.Cryptography.Pal.Windows
             bool preferNCrypt,
             out CryptKeySpec keySpec,
             out Exception? exception
-        ) {
+        )
+        {
             CryptAcquireCertificatePrivateKeyFlags flags =
                 CryptAcquireCertificatePrivateKeyFlags.CRYPT_ACQUIRE_USE_PROV_INFO_FLAG
                 | CryptAcquireCertificatePrivateKeyFlags.CRYPT_ACQUIRE_COMPARE_KEY_FLAG;
@@ -292,7 +297,8 @@ namespace Internal.Cryptography.Pal.Windows
                         out hKey,
                         ref cbSize
                     )
-                ) {
+                )
+                {
                     exception = null;
                     keySpec = CryptKeySpec.CERT_NCRYPT_KEY_SPEC;
                     return new SafeProvOrNCryptKeyHandleUwp(hKey, hCertContext);
@@ -307,7 +313,8 @@ namespace Internal.Cryptography.Pal.Windows
                         out keySpec,
                         out mustFree
                     )
-                ) {
+                )
+                {
                     exception = Marshal.GetHRForLastWin32Error().ToCryptographicException();
                     return null;
                 }

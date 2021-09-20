@@ -38,7 +38,8 @@ namespace System.Xml.Schema
             public FacetsCompiler(
                 DatatypeImplementation baseDatatype,
                 RestrictionFacets restriction
-            ) {
+            )
+            {
                 _firstPattern = true;
                 _regStr = null;
                 _pattern_facet = null;
@@ -81,7 +82,8 @@ namespace System.Xml.Schema
                             _datatype.Restriction!.Length,
                             _derivedRestriction.Length
                         )
-                    ) {
+                    )
+                    {
                         throw new XmlSchemaException(SR.Sch_FacetBaseFixed, facet);
                     }
                 }
@@ -136,7 +138,8 @@ namespace System.Xml.Schema
                             _datatype.Restriction!.MinLength,
                             _derivedRestriction.MinLength
                         )
-                    ) {
+                    )
+                    {
                         throw new XmlSchemaException(SR.Sch_FacetBaseFixed, facet);
                     }
                 }
@@ -182,7 +185,8 @@ namespace System.Xml.Schema
                             _datatype.Restriction!.MaxLength,
                             _derivedRestriction.MaxLength
                         )
-                    ) {
+                    )
+                    {
                         throw new XmlSchemaException(SR.Sch_FacetBaseFixed, facet);
                     }
                 }
@@ -226,7 +230,8 @@ namespace System.Xml.Schema
                 XmlSchemaFacet facet,
                 IXmlNamespaceResolver nsmgr,
                 XmlNameTable nameTable
-            ) {
+            )
+            {
                 CheckProhibitedFlag(
                     facet,
                     RestrictionFlags.Enumeration,
@@ -279,7 +284,8 @@ namespace System.Xml.Schema
                             _datatype.Restriction!.WhiteSpace,
                             _derivedRestriction.WhiteSpace
                         )
-                    ) {
+                    )
+                    {
                         throw new XmlSchemaException(SR.Sch_FacetBaseFixed, facet);
                     }
                 }
@@ -299,13 +305,15 @@ namespace System.Xml.Schema
                         _derivedRestriction.WhiteSpace == XmlSchemaWhiteSpace.Replace
                         || _derivedRestriction.WhiteSpace == XmlSchemaWhiteSpace.Preserve
                     )
-                ) {
+                )
+                {
                     throw new XmlSchemaException(SR.Sch_WhiteSpaceRestriction1, facet);
                 }
                 if (
                     baseWhitespace == XmlSchemaWhiteSpace.Replace
                     && _derivedRestriction.WhiteSpace == XmlSchemaWhiteSpace.Preserve
-                ) {
+                )
+                {
                     throw new XmlSchemaException(SR.Sch_WhiteSpaceRestriction2, facet);
                 }
                 SetFlag(facet, RestrictionFlags.WhiteSpace);
@@ -334,7 +342,8 @@ namespace System.Xml.Schema
                             _datatype.Restriction!.MaxInclusive!,
                             _derivedRestriction.MaxInclusive
                         )
-                    ) {
+                    )
+                    {
                         throw new XmlSchemaException(SR.Sch_FacetBaseFixed, facet);
                     }
                 }
@@ -365,7 +374,8 @@ namespace System.Xml.Schema
                             _datatype.Restriction!.MaxExclusive!,
                             _derivedRestriction.MaxExclusive
                         )
-                    ) {
+                    )
+                    {
                         throw new XmlSchemaException(SR.Sch_FacetBaseFixed, facet);
                     }
                 }
@@ -396,7 +406,8 @@ namespace System.Xml.Schema
                             _datatype.Restriction!.MinInclusive!,
                             _derivedRestriction.MinInclusive
                         )
-                    ) {
+                    )
+                    {
                         throw new XmlSchemaException(SR.Sch_FacetBaseFixed, facet);
                     }
                 }
@@ -427,7 +438,8 @@ namespace System.Xml.Schema
                             _datatype.Restriction!.MinExclusive!,
                             _derivedRestriction.MinExclusive
                         )
-                    ) {
+                    )
+                    {
                         throw new XmlSchemaException(SR.Sch_FacetBaseFixed, facet);
                     }
                 }
@@ -494,7 +506,8 @@ namespace System.Xml.Schema
                 if (
                     (_derivedRestriction.FractionDigits != 0)
                     && (_datatype.TypeCode != XmlTypeCode.Decimal)
-                ) {
+                )
+                {
                     throw new XmlSchemaException(
                         SR.Sch_FractionDigitsFacetInvalid,
                         SR.Sch_FractionDigitsNotOnDecimal,
@@ -684,13 +697,15 @@ namespace System.Xml.Schema
                 if (
                     (_derivedRestriction.Flags & RestrictionFlags.MaxInclusive) != 0
                     && (_derivedRestriction.Flags & RestrictionFlags.MaxExclusive) != 0
-                ) {
+                )
+                {
                     throw new XmlSchemaException(SR.Sch_MaxInclusiveExclusive, string.Empty);
                 }
                 if (
                     (_derivedRestriction.Flags & RestrictionFlags.MinInclusive) != 0
                     && (_derivedRestriction.Flags & RestrictionFlags.MinExclusive) != 0
-                ) {
+                )
+                {
                     throw new XmlSchemaException(SR.Sch_MinInclusiveExclusive, string.Empty);
                 }
                 if (
@@ -699,7 +714,8 @@ namespace System.Xml.Schema
                         _derivedRestriction.Flags
                         & (RestrictionFlags.MinLength | RestrictionFlags.MaxLength)
                     ) != 0
-                ) {
+                )
+                {
                     throw new XmlSchemaException(SR.Sch_LengthAndMinMax, string.Empty);
                 }
 
@@ -709,7 +725,8 @@ namespace System.Xml.Schema
                 if (
                     (_derivedRestriction.Flags & RestrictionFlags.MinLength) != 0
                     && (_derivedRestriction.Flags & RestrictionFlags.MaxLength) != 0
-                ) {
+                )
+                {
                     if (_derivedRestriction.MinLength > _derivedRestriction.MaxLength)
                     {
                         throw new XmlSchemaException(SR.Sch_MinLengthGtMaxLength, string.Empty);
@@ -719,13 +736,15 @@ namespace System.Xml.Schema
                 if (
                     (_derivedRestriction.Flags & RestrictionFlags.MinInclusive) != 0
                     && (_derivedRestriction.Flags & RestrictionFlags.MaxInclusive) != 0
-                ) {
+                )
+                {
                     if (
                         _datatype.Compare(
                             _derivedRestriction.MinInclusive!,
                             _derivedRestriction.MaxInclusive!
                         ) > 0
-                    ) {
+                    )
+                    {
                         throw new XmlSchemaException(
                             SR.Sch_MinInclusiveGtMaxInclusive,
                             string.Empty
@@ -735,13 +754,15 @@ namespace System.Xml.Schema
                 if (
                     (_derivedRestriction.Flags & RestrictionFlags.MinInclusive) != 0
                     && (_derivedRestriction.Flags & RestrictionFlags.MaxExclusive) != 0
-                ) {
+                )
+                {
                     if (
                         _datatype.Compare(
                             _derivedRestriction.MinInclusive!,
                             _derivedRestriction.MaxExclusive!
                         ) > 0
-                    ) {
+                    )
+                    {
                         throw new XmlSchemaException(
                             SR.Sch_MinInclusiveGtMaxExclusive,
                             string.Empty
@@ -751,13 +772,15 @@ namespace System.Xml.Schema
                 if (
                     (_derivedRestriction.Flags & RestrictionFlags.MinExclusive) != 0
                     && (_derivedRestriction.Flags & RestrictionFlags.MaxExclusive) != 0
-                ) {
+                )
+                {
                     if (
                         _datatype.Compare(
                             _derivedRestriction.MinExclusive!,
                             _derivedRestriction.MaxExclusive!
                         ) > 0
-                    ) {
+                    )
+                    {
                         throw new XmlSchemaException(
                             SR.Sch_MinExclusiveGtMaxExclusive,
                             string.Empty
@@ -767,13 +790,15 @@ namespace System.Xml.Schema
                 if (
                     (_derivedRestriction.Flags & RestrictionFlags.MinExclusive) != 0
                     && (_derivedRestriction.Flags & RestrictionFlags.MaxInclusive) != 0
-                ) {
+                )
+                {
                     if (
                         _datatype.Compare(
                             _derivedRestriction.MinExclusive!,
                             _derivedRestriction.MaxInclusive!
                         ) > 0
-                    ) {
+                    )
+                    {
                         throw new XmlSchemaException(
                             SR.Sch_MinExclusiveGtMaxInclusive,
                             string.Empty
@@ -785,7 +810,8 @@ namespace System.Xml.Schema
                         _derivedRestriction.Flags
                         & (RestrictionFlags.TotalDigits | RestrictionFlags.FractionDigits)
                     ) == (RestrictionFlags.TotalDigits | RestrictionFlags.FractionDigits)
-                ) {
+                )
+                {
                     if (_derivedRestriction.FractionDigits > _derivedRestriction.TotalDigits)
                     {
                         throw new XmlSchemaException(
@@ -803,21 +829,24 @@ namespace System.Xml.Schema
                 if (
                     (_derivedRestriction.Flags & RestrictionFlags.Length) == 0
                     && (_baseFlags & RestrictionFlags.Length) != 0
-                ) {
+                )
+                {
                     _derivedRestriction.Length = baseRestriction.Length;
                     SetFlag(RestrictionFlags.Length);
                 }
                 if (
                     (_derivedRestriction.Flags & RestrictionFlags.MinLength) == 0
                     && (_baseFlags & RestrictionFlags.MinLength) != 0
-                ) {
+                )
+                {
                     _derivedRestriction.MinLength = baseRestriction.MinLength;
                     SetFlag(RestrictionFlags.MinLength);
                 }
                 if (
                     (_derivedRestriction.Flags & RestrictionFlags.MaxLength) == 0
                     && (_baseFlags & RestrictionFlags.MaxLength) != 0
-                ) {
+                )
+                {
                     _derivedRestriction.MaxLength = baseRestriction.MaxLength;
                     SetFlag(RestrictionFlags.MaxLength);
                 }
@@ -847,49 +876,56 @@ namespace System.Xml.Schema
                 if (
                     (_derivedRestriction.Flags & RestrictionFlags.WhiteSpace) == 0
                     && (_baseFlags & RestrictionFlags.WhiteSpace) != 0
-                ) {
+                )
+                {
                     _derivedRestriction.WhiteSpace = baseRestriction.WhiteSpace;
                     SetFlag(RestrictionFlags.WhiteSpace);
                 }
                 if (
                     (_derivedRestriction.Flags & RestrictionFlags.MaxInclusive) == 0
                     && (_baseFlags & RestrictionFlags.MaxInclusive) != 0
-                ) {
+                )
+                {
                     _derivedRestriction.MaxInclusive = baseRestriction.MaxInclusive;
                     SetFlag(RestrictionFlags.MaxInclusive);
                 }
                 if (
                     (_derivedRestriction.Flags & RestrictionFlags.MaxExclusive) == 0
                     && (_baseFlags & RestrictionFlags.MaxExclusive) != 0
-                ) {
+                )
+                {
                     _derivedRestriction.MaxExclusive = baseRestriction.MaxExclusive;
                     SetFlag(RestrictionFlags.MaxExclusive);
                 }
                 if (
                     (_derivedRestriction.Flags & RestrictionFlags.MinInclusive) == 0
                     && (_baseFlags & RestrictionFlags.MinInclusive) != 0
-                ) {
+                )
+                {
                     _derivedRestriction.MinInclusive = baseRestriction.MinInclusive;
                     SetFlag(RestrictionFlags.MinInclusive);
                 }
                 if (
                     (_derivedRestriction.Flags & RestrictionFlags.MinExclusive) == 0
                     && (_baseFlags & RestrictionFlags.MinExclusive) != 0
-                ) {
+                )
+                {
                     _derivedRestriction.MinExclusive = baseRestriction.MinExclusive;
                     SetFlag(RestrictionFlags.MinExclusive);
                 }
                 if (
                     (_derivedRestriction.Flags & RestrictionFlags.TotalDigits) == 0
                     && (_baseFlags & RestrictionFlags.TotalDigits) != 0
-                ) {
+                )
+                {
                     _derivedRestriction.TotalDigits = baseRestriction.TotalDigits;
                     SetFlag(RestrictionFlags.TotalDigits);
                 }
                 if (
                     (_derivedRestriction.Flags & RestrictionFlags.FractionDigits) == 0
                     && (_baseFlags & RestrictionFlags.FractionDigits) != 0
-                ) {
+                )
+                {
                     _derivedRestriction.FractionDigits = baseRestriction.FractionDigits;
                     SetFlag(RestrictionFlags.FractionDigits);
                 }
@@ -901,7 +937,8 @@ namespace System.Xml.Schema
                 string code,
                 IXmlNamespaceResolver? nsmgr,
                 XmlNameTable? nameTable
-            ) {
+            )
+            {
                 object? typedValue;
                 Exception? ex = datatype.TryParseValue(
                     facet.Value!,
@@ -1002,7 +1039,8 @@ namespace System.Xml.Schema
                 XmlSchemaFacet facet,
                 RestrictionFlags flag,
                 string errorCode
-            ) {
+            )
+            {
                 if ((_validRestrictionFlags & flag) == 0)
                 {
                     throw new XmlSchemaException(errorCode, _datatype.TypeCodeString, facet);
@@ -1039,7 +1077,8 @@ namespace System.Xml.Schema
         internal virtual Exception? CheckLexicalFacets(
             ref string parseString,
             XmlSchemaDatatype datatype
-        ) {
+        )
+        {
             CheckWhitespaceFacets(ref parseString, datatype);
             return CheckPatternFacets(datatype.Restriction, parseString);
         }
@@ -1090,7 +1129,8 @@ namespace System.Xml.Schema
         internal virtual Exception? CheckValueFacets(
             XmlQualifiedName value,
             XmlSchemaDatatype datatype
-        ) {
+        )
+        {
             return null;
         }
 
@@ -1117,7 +1157,8 @@ namespace System.Xml.Schema
                     else if (
                         restriction != null
                         && (restriction.Flags & RestrictionFlags.WhiteSpace) != 0
-                    ) { //Restriction has whitespace facet specified
+                    )
+                    { //Restriction has whitespace facet specified
                         if (restriction.WhiteSpace == XmlSchemaWhiteSpace.Replace)
                         {
                             s = XmlComplianceUtil.CDataNormalize(s);
@@ -1154,7 +1195,8 @@ namespace System.Xml.Schema
             object value,
             ArrayList enumeration,
             XmlSchemaDatatype datatype
-        ) {
+        )
+        {
             return false;
         }
 
@@ -1163,7 +1205,8 @@ namespace System.Xml.Schema
             DatatypeImplementation datatype,
             XmlSchemaObjectCollection facets,
             XmlNameTable nameTable
-        ) {
+        )
+        {
             //Datatype is the type on which this method is called
             RestrictionFacets derivedRestriction = new RestrictionFacets();
             FacetsCompiler facetCompiler = new FacetsCompiler(datatype, derivedRestriction);
@@ -1374,7 +1417,8 @@ namespace System.Xml.Schema
             object value,
             ArrayList enumeration,
             XmlSchemaDatatype datatype
-        ) {
+        )
+        {
             return MatchEnumeration(
                 datatype.ValueConverter.ToDecimal(value),
                 enumeration,
@@ -1386,7 +1430,8 @@ namespace System.Xml.Schema
             decimal value,
             ArrayList enumeration,
             XmlValueConverter valueConverter
-        ) {
+        )
+        {
             for (int i = 0; i < enumeration.Count; ++i)
             {
                 if (value == valueConverter.ToDecimal(enumeration[i]!))
@@ -1402,7 +1447,8 @@ namespace System.Xml.Schema
             int fractionDigits,
             bool checkTotal,
             bool checkFraction
-        ) {
+        )
+        {
             decimal maxValue = FacetsChecker.Power(10, totalDigits) - 1; //(decimal)Math.Pow(10, totalDigits) - 1 ;
             int powerCnt = 0;
             if (value < 0)
@@ -1502,7 +1548,8 @@ namespace System.Xml.Schema
             object value,
             ArrayList enumeration,
             XmlSchemaDatatype datatype
-        ) {
+        )
+        {
             return MatchEnumeration(
                 datatype.ValueConverter.ToDouble(value),
                 enumeration,
@@ -1513,7 +1560,8 @@ namespace System.Xml.Schema
             double value,
             ArrayList enumeration,
             XmlValueConverter valueConverter
-        ) {
+        )
+        {
             for (int i = 0; i < enumeration.Count; ++i)
             {
                 if (value == valueConverter.ToDouble(enumeration[i]!))
@@ -1597,7 +1645,8 @@ namespace System.Xml.Schema
             object value,
             ArrayList enumeration,
             XmlSchemaDatatype datatype
-        ) {
+        )
+        {
             return MatchEnumeration((TimeSpan)value, enumeration);
         }
 
@@ -1686,7 +1735,8 @@ namespace System.Xml.Schema
             object value,
             ArrayList enumeration,
             XmlSchemaDatatype datatype
-        ) {
+        )
+        {
             return MatchEnumeration(
                 datatype.ValueConverter.ToDateTime(value),
                 enumeration,
@@ -1698,7 +1748,8 @@ namespace System.Xml.Schema
             DateTime value,
             ArrayList enumeration,
             XmlSchemaDatatype datatype
-        ) {
+        )
+        {
             for (int i = 0; i < enumeration.Count; ++i)
             {
                 if (datatype.Compare(value, (DateTime)enumeration[i]!) == 0)
@@ -1742,7 +1793,8 @@ namespace System.Xml.Schema
             string value,
             XmlSchemaDatatype datatype,
             bool verifyUri
-        ) {
+        )
+        {
             //Length, MinLength, MaxLength
             int length = value.Length;
             RestrictionFacets? restriction = datatype.Restriction;
@@ -1800,7 +1852,8 @@ namespace System.Xml.Schema
             object value,
             ArrayList enumeration,
             XmlSchemaDatatype datatype
-        ) {
+        )
+        {
             return MatchEnumeration(datatype.ValueConverter.ToString(value), enumeration, datatype);
         }
 
@@ -1808,7 +1861,8 @@ namespace System.Xml.Schema
             string value,
             ArrayList enumeration,
             XmlSchemaDatatype datatype
-        ) {
+        )
+        {
             if (datatype.TypeCode == XmlTypeCode.AnyUri)
             {
                 for (int i = 0; i < enumeration.Count; ++i)
@@ -1901,7 +1955,8 @@ namespace System.Xml.Schema
         internal override Exception? CheckValueFacets(
             XmlQualifiedName value,
             XmlSchemaDatatype datatype
-        ) {
+        )
+        {
             RestrictionFacets? restriction = datatype.Restriction;
             RestrictionFlags flags = restriction != null ? restriction.Flags : 0;
             if (flags != 0)
@@ -1955,7 +2010,8 @@ namespace System.Xml.Schema
             object value,
             ArrayList enumeration,
             XmlSchemaDatatype datatype
-        ) {
+        )
+        {
             return MatchEnumeration(
                 (XmlQualifiedName)datatype.ValueConverter.ChangeType(
                     value,
@@ -2042,7 +2098,8 @@ namespace System.Xml.Schema
             object value,
             ArrayList enumeration,
             XmlSchemaDatatype datatype
-        ) {
+        )
+        {
             return MatchEnumeration((byte[])value, enumeration, datatype);
         }
 
@@ -2050,7 +2107,8 @@ namespace System.Xml.Schema
             byte[] value,
             ArrayList enumeration,
             XmlSchemaDatatype datatype
-        ) {
+        )
+        {
             for (int i = 0; i < enumeration.Count; ++i)
             {
                 if (datatype.Compare(value, (byte[])enumeration[i]!) == 0)
@@ -2082,7 +2140,8 @@ namespace System.Xml.Schema
                         | RestrictionFlags.MaxLength
                     )
                 ) != 0
-            ) {
+            )
+            {
                 int length = values.Length;
                 if ((flags & RestrictionFlags.Length) != 0)
                 {
@@ -2128,7 +2187,8 @@ namespace System.Xml.Schema
             object value,
             ArrayList enumeration,
             XmlSchemaDatatype datatype
-        ) {
+        )
+        {
             for (int i = 0; i < enumeration.Count; ++i)
             {
                 if (datatype.Compare(value, enumeration[i]!) == 0)
@@ -2162,7 +2222,8 @@ namespace System.Xml.Schema
             object value,
             ArrayList enumeration,
             XmlSchemaDatatype datatype
-        ) {
+        )
+        {
             for (int i = 0; i < enumeration.Count; ++i)
             {
                 if (datatype.Compare(value, enumeration[i]!) == 0)

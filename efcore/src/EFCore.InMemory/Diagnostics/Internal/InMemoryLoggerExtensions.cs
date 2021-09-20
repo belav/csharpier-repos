@@ -24,7 +24,8 @@ namespace Microsoft.EntityFrameworkCore.InMemory.Internal
         /// </summary>
         public static void TransactionIgnoredWarning(
             this IDiagnosticsLogger<DbLoggerCategory.Database.Transaction> diagnostics
-        ) {
+        )
+        {
             var definition = InMemoryResources.LogTransactionsNotSupported(diagnostics);
 
             if (diagnostics.ShouldLog(definition))
@@ -38,7 +39,8 @@ namespace Microsoft.EntityFrameworkCore.InMemory.Internal
                     out var diagnosticSourceEnabled,
                     out var simpleLogEnabled
                 )
-            ) {
+            )
+            {
                 var eventData = new EventData(
                     definition,
                     (d, _) => ((EventDefinition)d).GenerateMessage()
@@ -63,7 +65,8 @@ namespace Microsoft.EntityFrameworkCore.InMemory.Internal
             this IDiagnosticsLogger<DbLoggerCategory.Update> diagnostics,
             IEnumerable<IUpdateEntry> entries,
             int rowsAffected
-        ) {
+        )
+        {
             var definition = InMemoryResources.LogSavedChanges(diagnostics);
 
             if (diagnostics.ShouldLog(definition))
@@ -77,7 +80,8 @@ namespace Microsoft.EntityFrameworkCore.InMemory.Internal
                     out var diagnosticSourceEnabled,
                     out var simpleLogEnabled
                 )
-            ) {
+            )
+            {
                 var eventData = new SaveChangesEventData(
                     definition,
                     ChangesSaved,

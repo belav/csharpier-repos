@@ -108,13 +108,14 @@ namespace System.Linq.Parallel
             int chunkSize,
             CancellationToken cancellationToken,
             IntValueEvent? consumerEvent
-        ) : this(
-            index,
-            Scheduling.DEFAULT_BOUNDED_BUFFER_CAPACITY,
-            chunkSize,
-            cancellationToken,
-            consumerEvent
-        ) { }
+        )
+            : this(
+                index,
+                Scheduling.DEFAULT_BOUNDED_BUFFER_CAPACITY,
+                chunkSize,
+                cancellationToken,
+                consumerEvent
+            ) { }
 
         internal AsynchronousChannel(
             int index,
@@ -122,7 +123,8 @@ namespace System.Linq.Parallel
             int chunkSize,
             CancellationToken cancellationToken,
             IntValueEvent? consumerEvent
-        ) {
+        )
+        {
             if (chunkSize == 0)
                 chunkSize = Scheduling.GetDefaultChunkSize<T>();
 

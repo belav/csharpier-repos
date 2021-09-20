@@ -93,7 +93,8 @@ namespace Microsoft.AspNetCore.Mvc.Formatters
         public void ParseAcceptHeader_GracefullyRecoversFromInvalidMediaTypeValues_AndReturnsValidMediaTypes(
             string[] acceptHeader,
             string[] expected
-        ) {
+        )
+        {
             // Arrange
             var expectedMediaTypes = expected.Select(
                     e => new MediaTypeSegmentWithQuality(new StringSegment(e), 1.0)

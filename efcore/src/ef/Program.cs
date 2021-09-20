@@ -35,7 +35,8 @@ namespace Microsoft.EntityFrameworkCore.Tools
                         wrappedException?.Type
                         == "Microsoft.EntityFrameworkCore.Design.OperationException"
                     )
-                ) {
+                )
+                {
                     Reporter.WriteVerbose(ex.ToString());
                 }
                 else

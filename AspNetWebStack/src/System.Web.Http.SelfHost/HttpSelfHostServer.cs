@@ -190,7 +190,8 @@ namespace System.Web.Http.SelfHost
         private async void ProcessRequestContext(
             ChannelContext channelContext,
             RequestContext requestContext
-        ) {
+        )
+        {
             Contract.Assert(channelContext != null);
             Contract.Assert(requestContext != null);
 
@@ -202,7 +203,8 @@ namespace System.Web.Http.SelfHost
         private async Task<HttpResponseMessage> SendAsync(
             ChannelContext channelContext,
             RequestContext requestContext
-        ) {
+        )
+        {
             HttpRequestMessage request = null;
             try
             {
@@ -285,7 +287,8 @@ namespace System.Web.Http.SelfHost
                     RemoteEndpointMessageProperty.Name,
                     out remoteEndpointProperty
                 )
-            ) {
+            )
+            {
                 IPAddress remoteAddress;
                 if (IPAddress.TryParse(remoteEndpointProperty.Address, out remoteAddress))
                 {
@@ -327,11 +330,13 @@ namespace System.Web.Http.SelfHost
                 property != null
                 && property.ServiceSecurityContext != null
                 && property.ServiceSecurityContext.AuthorizationContext != null
-            ) {
+            )
+            {
                 X509CertificateClaimSet certClaimSet = null;
                 foreach (
                     ClaimSet claimSet in property.ServiceSecurityContext.AuthorizationContext.ClaimSets
-                ) {
+                )
+                {
                     certClaimSet = claimSet as X509CertificateClaimSet;
 
                     if (certClaimSet != null)
@@ -354,7 +359,8 @@ namespace System.Web.Http.SelfHost
         private static void FaultTask(
             TaskCompletionSource<bool> taskCompletionSource,
             Exception exception
-        ) {
+        )
+        {
             Contract.Assert(taskCompletionSource != null);
             taskCompletionSource.TrySetException(exception);
         }
@@ -508,7 +514,8 @@ namespace System.Web.Http.SelfHost
         private static IAsyncResult BeginTryAcceptChannel(
             HttpSelfHostServer server,
             AsyncCallback callback
-        ) {
+        )
+        {
             Contract.Assert(server != null);
             Contract.Assert(server._listener != null);
             Contract.Assert(callback != null);
@@ -729,7 +736,8 @@ namespace System.Web.Http.SelfHost
         private static IAsyncResult BeginTryReceiveRequestContext(
             ChannelContext channelContext,
             AsyncCallback callback
-        ) {
+        )
+        {
             Contract.Assert(channelContext != null);
             Contract.Assert(callback != null);
 
@@ -771,7 +779,8 @@ namespace System.Web.Http.SelfHost
         private static bool EndTryReceiveRequestContext(
             IAsyncResult result,
             out System.ServiceModel.Channels.RequestContext requestContext
-        ) {
+        )
+        {
             Contract.Assert(result != null);
 
             CompletedAsyncResult<bool> handlerResult = result as CompletedAsyncResult<bool>;
@@ -1150,7 +1159,8 @@ namespace System.Web.Http.SelfHost
                 ChannelContext channelContext,
                 RequestContext requestContext,
                 Message reply
-            ) {
+            )
+            {
                 Contract.Assert(channelContext != null);
                 Contract.Assert(requestContext != null);
                 Contract.Assert(reply != null);

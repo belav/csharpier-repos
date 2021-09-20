@@ -95,7 +95,8 @@ namespace System.Net.Http.Functional.Tests
             Uri proxyUri,
             string identity,
             bool expected
-        ) {
+        )
+        {
             Assembly assembly = typeof(HttpClientHandler).Assembly;
             Type connectionKindType = assembly.GetTypes()
                 .Where(t => t.Name == "HttpConnectionKind")

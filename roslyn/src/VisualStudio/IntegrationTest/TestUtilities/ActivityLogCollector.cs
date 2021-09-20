@@ -26,7 +26,8 @@ namespace Microsoft.VisualStudio.IntegrationTest.Utilities
                     vsAppDataDirectory,
                     $"{Settings.Default.VsProductVersion}*{Settings.Default.VsRootSuffix}"
                 )
-            ) {
+            )
+            {
                 var activityLog = Path.Combine(folder, "ActivityLog.xml");
                 if (File.Exists(activityLog))
                 {

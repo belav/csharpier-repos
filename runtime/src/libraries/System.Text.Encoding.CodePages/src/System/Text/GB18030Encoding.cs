@@ -226,7 +226,8 @@ namespace System.Text
             byte* bytes,
             int byteCount,
             EncoderNLS? encoder
-        ) {
+        )
+        {
             // Just need to ASSERT, this is called by something else internal that checked parameters already
             // We'll allow null bytes as a count
             //            Debug.Assert(bytes != null, "[GB18030Encoding.GetBytes]bytes is null");
@@ -442,7 +443,8 @@ namespace System.Text
             char* chars,
             int charCount,
             DecoderNLS? baseDecoder
-        ) {
+        )
+        {
             // Just need to ASSERT, this is called by something else internal that checked parameters already
             // We'll allow null chars as a count
             Debug.Assert(bytes != null, "[GB18030Encoding.GetChars]bytes is null");
@@ -562,7 +564,8 @@ namespace System.Text
                         IsGBFourByteTrailing(byte2)
                         && IsGBLeadByte(byte3)
                         && IsGBFourByteTrailing(byte4)
-                    ) {
+                    )
+                    {
                         //
                         // Four-byte GB18030
                         //
@@ -581,7 +584,8 @@ namespace System.Text
                         else if (
                             sFourBytesOffset >= GBSurrogateOffset
                             && sFourBytesOffset <= GBLastSurrogateOffset
-                        ) {
+                        )
+                        {
                             //
                             // This will be converted to a surrogate pair, need another char
                             //
@@ -693,7 +697,8 @@ namespace System.Text
                                     else if (
                                         sFourBytesOffset >= GBSurrogateOffset
                                         && sFourBytesOffset <= GBLastSurrogateOffset
-                                    ) {
+                                    )
+                                    {
                                         //
                                         // This will be converted to a surrogate pair, need another char
                                         //

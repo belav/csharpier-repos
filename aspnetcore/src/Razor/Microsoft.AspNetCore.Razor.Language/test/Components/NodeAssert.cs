@@ -13,7 +13,8 @@ namespace Microsoft.AspNetCore.Razor.Language.Components
             IntermediateNode node,
             string attributeName,
             string attributeValue
-        ) {
+        )
+        {
             Assert.NotNull(node);
 
             var attributeNode = Assert.IsType<HtmlAttributeIntermediateNode>(node);
@@ -41,7 +42,8 @@ namespace Microsoft.AspNetCore.Razor.Language.Components
             IntermediateNodeCollection nodes,
             string attributeName,
             string attributeValue
-        ) {
+        )
+        {
             Assert.NotNull(nodes);
             return Attribute(Assert.Single(nodes), attributeName, attributeValue);
         }
@@ -50,7 +52,8 @@ namespace Microsoft.AspNetCore.Razor.Language.Components
             IntermediateNode node,
             string content,
             bool trim = true
-        ) {
+        )
+        {
             Assert.NotNull(node);
 
             var contentNode = Assert.IsType<HtmlContentIntermediateNode>(node);
@@ -71,7 +74,8 @@ namespace Microsoft.AspNetCore.Razor.Language.Components
             IntermediateNodeCollection nodes,
             string content,
             bool trim = true
-        ) {
+        )
+        {
             Assert.NotNull(nodes);
             return Content(Assert.Single(nodes), content, trim);
         }
@@ -80,7 +84,8 @@ namespace Microsoft.AspNetCore.Razor.Language.Components
             IntermediateNode node,
             string attributeName,
             string attributeValue
-        ) {
+        )
+        {
             Assert.NotNull(node);
 
             var attributeNode = Assert.IsType<HtmlAttributeIntermediateNode>(node);
@@ -108,7 +113,8 @@ namespace Microsoft.AspNetCore.Razor.Language.Components
             IntermediateNodeCollection nodes,
             string attributeName,
             string attributeValue
-        ) {
+        )
+        {
             Assert.NotNull(nodes);
             return Attribute(Assert.Single(nodes), attributeName, attributeValue);
         }
@@ -125,7 +131,8 @@ namespace Microsoft.AspNetCore.Razor.Language.Components
         public static MarkupElementIntermediateNode Element(
             IntermediateNodeCollection nodes,
             string tagName
-        ) {
+        )
+        {
             Assert.NotNull(nodes);
             return Element(Assert.Single(nodes), tagName);
         }

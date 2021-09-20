@@ -395,7 +395,8 @@ namespace Microsoft.AspNetCore.Mvc.Razor.RuntimeCompilation
             string message,
             SourceLocation sourceLocation,
             int length
-        ) {
+        )
+        {
             var diagnosticDescriptor = new RazorDiagnosticDescriptor(
                 "test-id",
                 () => message,
@@ -421,7 +422,8 @@ namespace Microsoft.AspNetCore.Mvc.Razor.RuntimeCompilation
         private static RazorCodeDocument GetCodeDocument(
             TestRazorProjectItem projectItem,
             TestRazorProjectItem imports = null
-        ) {
+        )
+        {
             var sourceDocument = RazorSourceDocument.ReadFrom(projectItem);
             var fileSystem = new VirtualRazorProjectFileSystem();
             fileSystem.Add(projectItem);

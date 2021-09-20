@@ -391,7 +391,8 @@ namespace Microsoft.VisualStudio.LanguageServices.CSharp.CodeModel.MethodXml
                     SemanticModel.GetSymbolInfo(objectCreationExpression.Type).Symbol
                     is ITypeSymbol type
                 )
-            ) {
+            )
+            {
                 return false;
             }
 
@@ -584,7 +585,8 @@ namespace Microsoft.VisualStudio.LanguageServices.CSharp.CodeModel.MethodXml
 
         private bool TryGenerateArrayElementAccess(
             ElementAccessExpressionSyntax elementAccessExpression
-        ) {
+        )
+        {
             using (ArrayElementAccessTag())
             {
                 if (!TryGenerateExpression(elementAccessExpression.Expression))
@@ -615,7 +617,8 @@ namespace Microsoft.VisualStudio.LanguageServices.CSharp.CodeModel.MethodXml
         public static string Generate(
             MethodDeclarationSyntax methodDeclaration,
             SemanticModel semanticModel
-        ) {
+        )
+        {
             var symbol = semanticModel.GetDeclaredSymbol(methodDeclaration);
             var builder = new MethodXmlBuilder(symbol, semanticModel);
 

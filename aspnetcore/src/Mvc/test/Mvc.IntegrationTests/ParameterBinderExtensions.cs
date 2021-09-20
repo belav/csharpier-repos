@@ -19,7 +19,8 @@ namespace Microsoft.AspNetCore.Mvc.IntegrationTests
             this ParameterBinder parameterBinder,
             ParameterDescriptor parameter,
             ControllerContext context
-        ) {
+        )
+        {
             var optionsAccessor = context.HttpContext.RequestServices.GetService<
                 IOptions<MvcOptions>
             >();
@@ -47,7 +48,8 @@ namespace Microsoft.AspNetCore.Mvc.IntegrationTests
             if (
                 modelMetadataProvider is ModelMetadataProvider modelMetadataProviderBase
                 && parameterInfo != null
-            ) {
+            )
+            {
                 metadata = modelMetadataProviderBase.GetMetadataForParameter(parameterInfo);
             }
             else
@@ -69,7 +71,8 @@ namespace Microsoft.AspNetCore.Mvc.IntegrationTests
             ControllerContext context,
             IModelMetadataProvider modelMetadataProvider,
             ModelMetadata modelMetadata
-        ) {
+        )
+        {
             var valueProvider = await CompositeValueProvider.CreateAsync(context);
             var modelBinderFactory = ModelBindingTestHelper.GetModelBinderFactory(
                 modelMetadataProvider,

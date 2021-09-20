@@ -18,7 +18,8 @@ namespace System.Reflection.TypeLoading
             CallingConventions callConvention,
             Type[]? types,
             ParameterModifier[]? modifiers
-        ) {
+        )
+        {
             Debug.Assert(types != null);
 
             QueryResult<ConstructorInfo> queryResult = Query<ConstructorInfo>(bindingAttr);
@@ -72,7 +73,8 @@ namespace System.Reflection.TypeLoading
             CallingConventions callConvention,
             Type[]? types,
             ParameterModifier[]? modifiers
-        ) {
+        )
+        {
             return GetMethodImplCommon(
                 name,
                 GenericParameterCountAny,
@@ -92,7 +94,8 @@ namespace System.Reflection.TypeLoading
             CallingConventions callConvention,
             Type[]? types,
             ParameterModifier[]? modifiers
-        ) {
+        )
+        {
             return GetMethodImplCommon(
                 name,
                 genericParameterCount,
@@ -112,7 +115,8 @@ namespace System.Reflection.TypeLoading
             CallingConventions callConvention,
             Type[]? types,
             ParameterModifier[]? modifiers
-        ) {
+        )
+        {
             Debug.Assert(name != null);
 
             // GetMethodImpl() is a funnel for two groups of api. We can distinguish by comparing "types" to null.
@@ -172,7 +176,8 @@ namespace System.Reflection.TypeLoading
             Type? returnType,
             Type[]? types,
             ParameterModifier[]? modifiers
-        ) {
+        )
+        {
             Debug.Assert(name != null);
 
             // GetPropertyImpl() is a funnel for two groups of api. We can distinguish by comparing "types" to null.

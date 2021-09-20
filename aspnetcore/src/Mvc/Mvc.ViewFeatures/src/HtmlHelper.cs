@@ -70,7 +70,8 @@ namespace Microsoft.AspNetCore.Mvc.ViewFeatures
             IViewBufferScope bufferScope,
             HtmlEncoder htmlEncoder,
             UrlEncoder urlEncoder
-        ) {
+        )
+        {
             if (htmlGenerator == null)
             {
                 throw new ArgumentNullException(nameof(htmlGenerator));
@@ -184,7 +185,8 @@ namespace Microsoft.AspNetCore.Mvc.ViewFeatures
         /// </remarks>
         public static IDictionary<string, object> AnonymousObjectToHtmlAttributes(
             object htmlAttributes
-        ) {
+        )
+        {
             if (htmlAttributes is IDictionary<string, object> dictionary)
             {
                 return new Dictionary<string, object>(dictionary, StringComparer.OrdinalIgnoreCase);
@@ -198,7 +200,8 @@ namespace Microsoft.AspNetCore.Mvc.ViewFeatures
                     var helper in HtmlAttributePropertyHelper.GetProperties(
                         htmlAttributes.GetType()
                     )
-                ) {
+                )
+                {
                     dictionary[helper.Name] = helper.GetValue(htmlAttributes);
                 }
             }
@@ -230,7 +233,8 @@ namespace Microsoft.AspNetCore.Mvc.ViewFeatures
             string fragment,
             object routeValues,
             object htmlAttributes
-        ) {
+        )
+        {
             if (linkText == null)
             {
                 throw new ArgumentNullException(nameof(linkText));
@@ -270,7 +274,8 @@ namespace Microsoft.AspNetCore.Mvc.ViewFeatures
             FormMethod method,
             bool? antiforgery,
             object htmlAttributes
-        ) {
+        )
+        {
             // Push the new FormContext; MvcForm.GenerateEndForm() does the corresponding pop.
             _viewContext.FormContext = new FormContext { CanRenderAtEndOfForm = true };
 
@@ -291,7 +296,8 @@ namespace Microsoft.AspNetCore.Mvc.ViewFeatures
             FormMethod method,
             bool? antiforgery,
             object htmlAttributes
-        ) {
+        )
+        {
             // Push the new FormContext; MvcForm.GenerateEndForm() does the corresponding pop.
             _viewContext.FormContext = new FormContext { CanRenderAtEndOfForm = true };
 
@@ -355,7 +361,8 @@ namespace Microsoft.AspNetCore.Mvc.ViewFeatures
             string templateName,
             string htmlFieldName,
             object additionalViewData
-        ) {
+        )
+        {
             var metadata = ExpressionMetadataProvider.FromStringExpression(
                 expression,
                 ViewData,
@@ -398,7 +405,8 @@ namespace Microsoft.AspNetCore.Mvc.ViewFeatures
             IEnumerable<SelectListItem> selectList,
             string optionLabel,
             object htmlAttributes
-        ) {
+        )
+        {
             return GenerateDropDown(
                 modelExplorer: null,
                 expression: expression,
@@ -414,7 +422,8 @@ namespace Microsoft.AspNetCore.Mvc.ViewFeatures
             string templateName,
             string htmlFieldName,
             object additionalViewData
-        ) {
+        )
+        {
             var modelExplorer = ExpressionMetadataProvider.FromStringExpression(
                 expression,
                 ViewData,
@@ -503,7 +512,8 @@ namespace Microsoft.AspNetCore.Mvc.ViewFeatures
             string expression,
             IEnumerable<SelectListItem> selectList,
             object htmlAttributes
-        ) {
+        )
+        {
             return GenerateListBox(
                 modelExplorer: null,
                 expression: expression,
@@ -523,7 +533,8 @@ namespace Microsoft.AspNetCore.Mvc.ViewFeatures
             string partialViewName,
             object model,
             ViewDataDictionary viewData
-        ) {
+        )
+        {
             if (partialViewName == null)
             {
                 throw new ArgumentNullException(nameof(partialViewName));
@@ -546,7 +557,8 @@ namespace Microsoft.AspNetCore.Mvc.ViewFeatures
             string partialViewName,
             object model,
             ViewDataDictionary viewData
-        ) {
+        )
+        {
             if (partialViewName == null)
             {
                 throw new ArgumentNullException(nameof(partialViewName));
@@ -568,7 +580,8 @@ namespace Microsoft.AspNetCore.Mvc.ViewFeatures
             string htmlFieldName,
             string templateName,
             object additionalViewData
-        ) {
+        )
+        {
             var templateBuilder = new TemplateBuilder(
                 _viewEngine,
                 _bufferScope,
@@ -597,7 +610,8 @@ namespace Microsoft.AspNetCore.Mvc.ViewFeatures
             object model,
             ViewDataDictionary viewData,
             TextWriter writer
-        ) {
+        )
+        {
             if (partialViewName == null)
             {
                 throw new ArgumentNullException(nameof(partialViewName));
@@ -669,7 +683,8 @@ namespace Microsoft.AspNetCore.Mvc.ViewFeatures
             object value,
             bool? isChecked,
             object htmlAttributes
-        ) {
+        )
+        {
             return GenerateRadioButton(
                 modelExplorer: null,
                 expression: expression,
@@ -700,7 +715,8 @@ namespace Microsoft.AspNetCore.Mvc.ViewFeatures
             string fragment,
             object routeValues,
             object htmlAttributes
-        ) {
+        )
+        {
             if (linkText == null)
             {
                 throw new ArgumentNullException(nameof(linkText));
@@ -730,7 +746,8 @@ namespace Microsoft.AspNetCore.Mvc.ViewFeatures
             string message,
             object htmlAttributes,
             string tag
-        ) {
+        )
+        {
             return GenerateValidationMessage(
                 modelExplorer: null,
                 expression: expression,
@@ -746,7 +763,8 @@ namespace Microsoft.AspNetCore.Mvc.ViewFeatures
             string message,
             object htmlAttributes,
             string tag
-        ) {
+        )
+        {
             return GenerateValidationSummary(excludePropertyErrors, message, htmlAttributes, tag);
         }
 
@@ -775,7 +793,8 @@ namespace Microsoft.AspNetCore.Mvc.ViewFeatures
             int rows,
             int columns,
             object htmlAttributes
-        ) {
+        )
+        {
             var modelExplorer = ExpressionMetadataProvider.FromStringExpression(
                 expression,
                 ViewData,
@@ -806,7 +825,8 @@ namespace Microsoft.AspNetCore.Mvc.ViewFeatures
             object value,
             string format,
             object htmlAttributes
-        ) {
+        )
+        {
             return GenerateTextBox(
                 modelExplorer: null,
                 expression: expression,
@@ -848,7 +868,8 @@ namespace Microsoft.AspNetCore.Mvc.ViewFeatures
             string expression,
             bool? isChecked,
             object htmlAttributes
-        ) {
+        )
+        {
             var checkbox = _htmlGenerator.GenerateCheckBox(
                 ViewContext,
                 modelExplorer,
@@ -880,7 +901,8 @@ namespace Microsoft.AspNetCore.Mvc.ViewFeatures
             if (
                 !hiddenForCheckbox.Attributes.ContainsKey("name")
                 && checkbox.Attributes.TryGetValue("name", out var name)
-            ) {
+            )
+            {
                 // The checkbox and hidden elements should have the same name attribute value. Attributes will match
                 // if both are present because both have a generated value. Reach here in the special case where user
                 // provided a non-empty fallback name.
@@ -890,7 +912,8 @@ namespace Microsoft.AspNetCore.Mvc.ViewFeatures
             if (
                 ViewContext.CheckBoxHiddenInputRenderMode == CheckBoxHiddenInputRenderMode.EndOfForm
                 && ViewContext.FormContext.CanRenderAtEndOfForm
-            ) {
+            )
+            {
                 ViewContext.FormContext.EndOfFormContent.Add(hiddenForCheckbox);
                 return checkbox;
             }
@@ -962,7 +985,8 @@ namespace Microsoft.AspNetCore.Mvc.ViewFeatures
             IEnumerable<SelectListItem> selectList,
             string optionLabel,
             object htmlAttributes
-        ) {
+        )
+        {
             var tagBuilder = _htmlGenerator.GenerateSelect(
                 ViewContext,
                 modelExplorer,
@@ -993,7 +1017,8 @@ namespace Microsoft.AspNetCore.Mvc.ViewFeatures
             string htmlFieldName,
             string templateName,
             object additionalViewData
-        ) {
+        )
+        {
             var templateBuilder = new TemplateBuilder(
                 _viewEngine,
                 _bufferScope,
@@ -1045,7 +1070,8 @@ namespace Microsoft.AspNetCore.Mvc.ViewFeatures
             FormMethod method,
             bool? antiforgery,
             object htmlAttributes
-        ) {
+        )
+        {
             var tagBuilder = _htmlGenerator.GenerateForm(
                 ViewContext,
                 actionName,
@@ -1105,7 +1131,8 @@ namespace Microsoft.AspNetCore.Mvc.ViewFeatures
             FormMethod method,
             bool? antiforgery,
             object htmlAttributes
-        ) {
+        )
+        {
             var tagBuilder = _htmlGenerator.GenerateRouteForm(
                 ViewContext,
                 routeName,
@@ -1148,7 +1175,8 @@ namespace Microsoft.AspNetCore.Mvc.ViewFeatures
             object value,
             bool useViewData,
             object htmlAttributes
-        ) {
+        )
+        {
             var tagBuilder = _htmlGenerator.GenerateHidden(
                 ViewContext,
                 modelExplorer,
@@ -1193,7 +1221,8 @@ namespace Microsoft.AspNetCore.Mvc.ViewFeatures
             string expression,
             string labelText,
             object htmlAttributes
-        ) {
+        )
+        {
             if (modelExplorer == null)
             {
                 throw new ArgumentNullException(nameof(modelExplorer));
@@ -1225,7 +1254,8 @@ namespace Microsoft.AspNetCore.Mvc.ViewFeatures
                     tagBuilder.Attributes.Count == 1
                     && tagBuilder.Attributes.TryGetValue("for", out var forAttribute)
                     && string.IsNullOrEmpty(forAttribute)
-                ) {
+                )
+                {
                     // Element has no content and only an empty (therefore useless) "for" attribute.
                     return HtmlString.Empty;
                 }
@@ -1250,7 +1280,8 @@ namespace Microsoft.AspNetCore.Mvc.ViewFeatures
             string expression,
             IEnumerable<SelectListItem> selectList,
             object htmlAttributes
-        ) {
+        )
+        {
             var tagBuilder = _htmlGenerator.GenerateSelect(
                 ViewContext,
                 modelExplorer,
@@ -1295,7 +1326,8 @@ namespace Microsoft.AspNetCore.Mvc.ViewFeatures
             string expression,
             object value,
             object htmlAttributes
-        ) {
+        )
+        {
             var tagBuilder = _htmlGenerator.GeneratePassword(
                 ViewContext,
                 modelExplorer,
@@ -1329,7 +1361,8 @@ namespace Microsoft.AspNetCore.Mvc.ViewFeatures
             object value,
             bool? isChecked,
             object htmlAttributes
-        ) {
+        )
+        {
             var tagBuilder = _htmlGenerator.GenerateRadioButton(
                 ViewContext,
                 modelExplorer,
@@ -1364,7 +1397,8 @@ namespace Microsoft.AspNetCore.Mvc.ViewFeatures
             int rows,
             int columns,
             object htmlAttributes
-        ) {
+        )
+        {
             var tagBuilder = _htmlGenerator.GenerateTextArea(
                 ViewContext,
                 modelExplorer,
@@ -1399,7 +1433,8 @@ namespace Microsoft.AspNetCore.Mvc.ViewFeatures
             object value,
             string format,
             object htmlAttributes
-        ) {
+        )
+        {
             var tagBuilder = _htmlGenerator.GenerateTextBox(
                 ViewContext,
                 modelExplorer,
@@ -1434,7 +1469,8 @@ namespace Microsoft.AspNetCore.Mvc.ViewFeatures
             string message,
             string tag,
             object htmlAttributes
-        ) {
+        )
+        {
             var tagBuilder = _htmlGenerator.GenerateValidationMessage(
                 ViewContext,
                 modelExplorer,
@@ -1467,7 +1503,8 @@ namespace Microsoft.AspNetCore.Mvc.ViewFeatures
             string message,
             object htmlAttributes,
             string tag
-        ) {
+        )
+        {
             var tagBuilder = _htmlGenerator.GenerateValidationSummary(
                 ViewContext,
                 excludePropertyErrors,
@@ -1496,7 +1533,8 @@ namespace Microsoft.AspNetCore.Mvc.ViewFeatures
             object value,
             string format,
             bool useViewData
-        ) {
+        )
+        {
             var fullName = NameAndIdProvider.GetFullHtmlFieldName(ViewContext, expression);
             var attemptedValue = (string)DefaultHtmlGenerator.GetModelStateValue(
                 ViewContext,

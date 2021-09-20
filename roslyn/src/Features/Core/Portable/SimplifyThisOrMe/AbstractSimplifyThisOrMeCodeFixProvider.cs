@@ -54,7 +54,8 @@ namespace Microsoft.CodeAnalysis.SimplifyThisOrMe
             ImmutableArray<Diagnostic> diagnostics,
             SyntaxEditor editor,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var root = await document.GetSyntaxRootAsync(cancellationToken).ConfigureAwait(false);
             var documentOptions = await document.GetOptionsAsync(cancellationToken)
                 .ConfigureAwait(false);

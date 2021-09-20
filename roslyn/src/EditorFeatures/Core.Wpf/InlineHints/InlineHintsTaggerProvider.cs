@@ -45,7 +45,8 @@ namespace Microsoft.CodeAnalysis.Editor.InlineHints
             IToolTipService toolTipService,
             ClassificationTypeMap typeMap,
             Lazy<IStreamingFindUsagesPresenter> streamingFindUsagesPresenter
-        ) {
+        )
+        {
             _viewTagAggregatorFactoryService = viewTagAggregatorFactoryService;
             this.ClassificationFormatMapService = classificationFormatMapService;
             this.ClassificationTypeRegistryService = classificationTypeRegistryService;

@@ -106,7 +106,8 @@ namespace System.Data.Common
         internal static ArgumentOutOfRangeException ArgumentOutOfRange(
             string message,
             string parameterName
-        ) {
+        )
+        {
             ArgumentOutOfRangeException e = new ArgumentOutOfRangeException(parameterName, message);
             TraceExceptionAsReturnValue(e);
             return e;
@@ -188,7 +189,8 @@ namespace System.Data.Common
         internal static ArgumentException InvalidMultipartNameIncorrectUsageOfQuotes(
             string property,
             string value
-        ) {
+        )
+        {
             ArgumentException e = new ArgumentException(
                 SR.GetString(SR.ADP_InvalidMultipartNameQuoteUsage, SR.GetString(property), value)
             );
@@ -200,7 +202,8 @@ namespace System.Data.Common
             string property,
             string value,
             int limit
-        ) {
+        )
+        {
             ArgumentException e = new ArgumentException(
                 SR.GetString(
                     SR.ADP_InvalidMultipartNameToManyParts,
@@ -348,7 +351,8 @@ namespace System.Data.Common
         // IDataParameter.Direction
         internal static ArgumentOutOfRangeException InvalidParameterDirection(
             ParameterDirection value
-        ) {
+        )
+        {
 #if DEBUG
             switch (value)
             {
@@ -415,7 +419,8 @@ namespace System.Data.Common
             Type fromType,
             Type toType,
             Exception innerException
-        ) {
+        )
+        {
             return ADP.Argument(
                 SR.GetString(SR.SqlConvert_ConvertFailed, fromType.FullName!, toType.FullName!),
                 innerException
@@ -493,7 +498,8 @@ namespace System.Data.Common
         internal static ArgumentException CollectionRemoveInvalidObject(
             Type itemType,
             ICollection collection
-        ) {
+        )
+        {
             return Argument(
                 SR.GetString(
                     SR.ADP_CollectionRemoveInvalidObject,
@@ -506,7 +512,8 @@ namespace System.Data.Common
             string parameter,
             Type collection,
             Type itemType
-        ) {
+        )
+        {
             return ArgumentNull(
                 parameter,
                 SR.GetString(SR.ADP_CollectionNullValue, collection.Name, itemType.Name)
@@ -516,7 +523,8 @@ namespace System.Data.Common
             int index,
             Type collection,
             int count
-        ) {
+        )
+        {
             return IndexOutOfRange(
                 SR.GetString(
                     SR.ADP_CollectionIndexInt32,
@@ -531,7 +539,8 @@ namespace System.Data.Common
             string propertyName,
             string propertyValue,
             Type collection
-        ) {
+        )
+        {
             return IndexOutOfRange(
                 SR.GetString(
                     SR.ADP_CollectionIndexString,
@@ -546,7 +555,8 @@ namespace System.Data.Common
             Type collection,
             Type itemType,
             object invalidValue
-        ) {
+        )
+        {
             return InvalidCast(
                 SR.GetString(
                     SR.ADP_CollectionInvalidType,
@@ -559,7 +569,8 @@ namespace System.Data.Common
         internal static ArgumentException ParametersIsNotParent(
             Type parameterType,
             ICollection collection
-        ) {
+        )
+        {
             return Argument(
                 SR.GetString(
                     SR.ADP_CollectionIsNotParent,
@@ -571,7 +582,8 @@ namespace System.Data.Common
         internal static ArgumentException ParametersIsParent(
             Type parameterType,
             ICollection collection
-        ) {
+        )
+        {
             return Argument(
                 SR.GetString(
                     SR.ADP_CollectionIsNotParent,
@@ -605,7 +617,8 @@ namespace System.Data.Common
         internal static InvalidOperationException OpenConnectionRequired(
             string method,
             ConnectionState state
-        ) {
+        )
+        {
             return InvalidOperation(
                 SR.GetString(SR.ADP_OpenConnectionRequired, method, ADP.ConnectionStateMsg(state))
             );
@@ -804,7 +817,8 @@ namespace System.Data.Common
         internal static Exception InternalError(
             InternalErrorCode internalError,
             Exception innerException
-        ) {
+        )
+        {
             return InvalidOperation(
                 SR.GetString(SR.ADP_InternalProviderError, (int)internalError),
                 innerException
@@ -830,7 +844,8 @@ namespace System.Data.Common
             int maxLen,
             long srcOffset,
             string parameterName
-        ) {
+        )
+        {
             return ArgumentOutOfRange(
                 SR.GetString(
                     SR.ADP_InvalidSourceBufferIndex,
@@ -844,7 +859,8 @@ namespace System.Data.Common
             int maxLen,
             int dstOffset,
             string parameterName
-        ) {
+        )
+        {
             return ArgumentOutOfRange(
                 SR.GetString(
                     SR.ADP_InvalidDestinationBufferIndex,
@@ -906,7 +922,8 @@ namespace System.Data.Common
             object value,
             Type destType,
             Exception inner
-        ) {
+        )
+        {
             Debug.Assert(null != value, "null value on conversion failure");
             Debug.Assert(null != inner, "null inner on conversion failure");
 
@@ -946,14 +963,16 @@ namespace System.Data.Common
         internal static Exception ParametersMappingIndex(
             int index,
             IDataParameterCollection collection
-        ) {
+        )
+        {
             return CollectionIndexInt32(index, collection.GetType(), collection.Count);
         }
         internal static Exception ParametersSourceIndex(
             string parameterName,
             IDataParameterCollection collection,
             Type parameterType
-        ) {
+        )
+        {
             return CollectionIndexString(
                 parameterType,
                 ADP.ParameterName,
@@ -965,14 +984,16 @@ namespace System.Data.Common
             string parameter,
             IDataParameterCollection collection,
             Type parameterType
-        ) {
+        )
+        {
             return CollectionNullValue(parameter, collection.GetType(), parameterType);
         }
         internal static Exception InvalidParameterType(
             IDataParameterCollection collection,
             Type parameterType,
             object invalidValue
-        ) {
+        )
+        {
             return CollectionInvalidType(collection.GetType(), parameterType, invalidValue);
         }
 
@@ -1018,7 +1039,8 @@ namespace System.Data.Common
             string collectionName,
             string restrictionName,
             string restrictionValue
-        ) {
+        )
+        {
             return ADP.Argument(
                 SR.GetString(
                     SR.MDF_InvalidRestrictionValue,
@@ -1233,7 +1255,8 @@ namespace System.Data.Common
             string quotePrefix,
             string quoteSuffix,
             string unQuotedString
-        ) {
+        )
+        {
             StringBuilder resultString = new StringBuilder();
             if (ADP.IsEmpty(quotePrefix) == false)
             {
@@ -1257,7 +1280,8 @@ namespace System.Data.Common
         internal static void EscapeSpecialCharacters(
             string unescapedString,
             StringBuilder escapedString
-        ) {
+        )
+        {
             // note special characters list is from character escapes
             // in the MSDN regular expression language elements documentation
             // added ] since escaping it seems necessary
@@ -1430,7 +1454,8 @@ namespace System.Data.Common
             // include MDAC 2.51 that ships with Win2k
             if (
                 (major < 2) || ((major == 2) && ((minor < 60) || ((minor == 60) && (build < 6526))))
-            ) {
+            )
+            {
                 if (ifodbcelseoledb)
                 {
                     throw ADP.DataAdapter(SR.GetString(SR.Odbc_MDACWrongVersion, version));
@@ -1449,7 +1474,8 @@ namespace System.Data.Common
             string? quoteSuffix,
             string? quotedString,
             out string? unquotedString
-        ) {
+        )
+        {
             int prefixLength;
             if (quotePrefix == null)
             {

@@ -61,7 +61,8 @@ namespace System.Globalization.Tests
         [InlineData(DayOfWeek.Saturday + 1)]
         public void GetDayName_InvalidDayOfWeek_ThrowsArgumentOutOfRangeException(
             DayOfWeek dayofweek
-        ) {
+        )
+        {
             var format = new DateTimeFormatInfo();
             AssertExtensions.Throws<ArgumentOutOfRangeException>(
                 "dayofweek",

@@ -35,7 +35,8 @@ namespace System.Net.Security
             ReadOnlySpan<byte> inputBuffer,
             ref byte[]? outputBuffer,
             SslAuthenticationOptions sslAuthenticationOptions
-        ) {
+        )
+        {
             return HandshakeInternal(
                 credential,
                 ref context,
@@ -52,7 +53,8 @@ namespace System.Net.Security
             ReadOnlySpan<byte> inputBuffer,
             ref byte[]? outputBuffer,
             SslAuthenticationOptions sslAuthenticationOptions
-        ) {
+        )
+        {
             return HandshakeInternal(
                 credential,
                 ref context,
@@ -67,7 +69,8 @@ namespace System.Net.Security
             SslProtocols protocols,
             EncryptionPolicy policy,
             bool isServer
-        ) {
+        )
+        {
             return new SafeFreeSslCredentials(certificateContext, protocols, policy);
         }
 
@@ -88,7 +91,8 @@ namespace System.Net.Security
             int trailerSize,
             ref byte[] output,
             out int resultSize
-        ) {
+        )
+        {
             resultSize = 0;
 
             Debug.Assert(
@@ -163,7 +167,8 @@ namespace System.Net.Security
             byte[] buffer,
             ref int offset,
             ref int count
-        ) {
+        )
+        {
             try
             {
                 SafeDeleteSslContext sslContext = (SafeDeleteSslContext)securityContext;
@@ -222,7 +227,8 @@ namespace System.Net.Security
         public static ChannelBinding? QueryContextChannelBinding(
             SafeDeleteContext securityContext,
             ChannelBindingKind attribute
-        ) {
+        )
+        {
             switch (attribute)
             {
                 case ChannelBindingKind.Endpoint:
@@ -239,14 +245,16 @@ namespace System.Net.Security
         public static void QueryContextStreamSizes(
             SafeDeleteContext? securityContext,
             out StreamSizes streamSizes
-        ) {
+        )
+        {
             streamSizes = StreamSizes.Default;
         }
 
         public static void QueryContextConnectionInfo(
             SafeDeleteContext securityContext,
             out SslConnectionInfo connectionInfo
-        ) {
+        )
+        {
             connectionInfo = new SslConnectionInfo(
                 ((SafeDeleteSslContext)securityContext).SslContext
             );
@@ -258,7 +266,8 @@ namespace System.Net.Security
             ReadOnlySpan<byte> inputBuffer,
             ref byte[]? outputBuffer,
             SslAuthenticationOptions sslAuthenticationOptions
-        ) {
+        )
+        {
             Debug.Assert(!credential.IsInvalid);
 
             try
@@ -276,7 +285,8 @@ namespace System.Net.Security
                     if (
                         !string.IsNullOrEmpty(sslAuthenticationOptions.TargetHost)
                         && !sslAuthenticationOptions.IsServer
-                    ) {
+                    )
+                    {
                         Interop.AppleCrypto.SslSetTargetName(
                             sslContext.SslContext,
                             sslAuthenticationOptions.TargetHost
@@ -286,7 +296,8 @@ namespace System.Net.Security
                     if (
                         sslAuthenticationOptions.IsServer
                         && sslAuthenticationOptions.RemoteCertRequired
-                    ) {
+                    )
+                    {
                         Interop.AppleCrypto.SslSetAcceptClientCert(sslContext.SslContext);
                     }
                 }
@@ -343,7 +354,8 @@ namespace System.Net.Security
             SafeDeleteContext? securityContext,
             TlsAlertType alertType,
             TlsAlertMessage alertMessage
-        ) {
+        )
+        {
             // There doesn't seem to be an exposed API for writing an alert,
             // the API seems to assume that all alerts are generated internally by
             // SSLHandshake.
@@ -353,7 +365,8 @@ namespace System.Net.Security
         public static SecurityStatusPal ApplyShutdownToken(
             ref SafeFreeCredentials? credentialsHandle,
             SafeDeleteContext securityContext
-        ) {
+        )
+        {
             SafeDeleteSslContext sslContext = ((SafeDeleteSslContext)securityContext);
             SafeSslHandle sslHandle = sslContext.SslContext;
 

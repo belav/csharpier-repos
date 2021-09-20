@@ -138,7 +138,8 @@ namespace Microsoft.AspNetCore.Http.Connections.Tests
             string accessToken,
             int version,
             string connectionToken
-        ) {
+        )
+        {
             var responseData = Encoding.UTF8.GetBytes(json);
             var response = NegotiateProtocol.ParseResponse(responseData);
 
@@ -185,7 +186,8 @@ namespace Microsoft.AspNetCore.Http.Connections.Tests
         public void ParsingNegotiateResponseMessageThrowsForInvalid(
             string payload,
             string expectedMessage
-        ) {
+        )
+        {
             var responseData = Encoding.UTF8.GetBytes(payload);
 
             var exception = Assert.Throws<InvalidDataException>(

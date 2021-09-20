@@ -296,7 +296,8 @@ namespace System.Collections.Concurrent
                             && tail == _tail
                             && headHead == Volatile.Read(ref head._headAndTail.Head)
                             && headTail == Volatile.Read(ref head._headAndTail.Tail)
-                        ) {
+                        )
+                        {
                             return GetCount(head, headHead, headTail);
                         }
                     }
@@ -313,7 +314,8 @@ namespace System.Collections.Concurrent
                             && headTail == Volatile.Read(ref head._headAndTail.Tail)
                             && tailHead == Volatile.Read(ref tail._headAndTail.Head)
                             && tailTail == Volatile.Read(ref tail._headAndTail.Tail)
-                        ) {
+                        )
+                        {
                             return GetCount(head, headHead, headTail)
                                 + GetCount(tail, tailHead, tailTail);
                         }
@@ -339,7 +341,8 @@ namespace System.Collections.Concurrent
                                     && headTail == Volatile.Read(ref head._headAndTail.Tail)
                                     && tailHead == Volatile.Read(ref tail._headAndTail.Head)
                                     && tailTail == Volatile.Read(ref tail._headAndTail.Tail)
-                                ) {
+                                )
+                                {
                                     // We got stable values for the head and tail segments, so we can just compute the sizes
                                     // based on those and add them. Note that this and the below additions to count may overflow: previous
                                     // implementations allowed that, so we don't check, either, and it is theoretically possible for the
@@ -358,7 +361,8 @@ namespace System.Collections.Concurrent
                                         ConcurrentQueueSegment<T> s = head._nextSegment!;
                                         s != tail;
                                         s = s._nextSegment!
-                                    ) {
+                                    )
+                                    {
                                         Debug.Assert(
                                             s._frozenForEnqueues,
                                             "Internal segment must be frozen as there's a following segment."
@@ -397,7 +401,8 @@ namespace System.Collections.Concurrent
             int headHead,
             ConcurrentQueueSegment<T> tail,
             int tailTail
-        ) {
+        )
+        {
             // All of the segments should have been both frozen for enqueues and preserved for observation.
             // Validate that here for head and tail; we'll validate it for intermediate segments later.
             Debug.Assert(head._preservedForObservation);
@@ -439,7 +444,8 @@ namespace System.Collections.Concurrent
                     ConcurrentQueueSegment<T> s = head._nextSegment!;
                     s != tail;
                     s = s._nextSegment!
-                ) {
+                )
+                {
                     Debug.Assert(s._preservedForObservation);
                     Debug.Assert(s._frozenForEnqueues);
                     count += s._headAndTail.Tail - s.FreezeOffset;
@@ -544,7 +550,8 @@ namespace System.Collections.Concurrent
             out int headHead,
             out ConcurrentQueueSegment<T> tail,
             out int tailTail
-        ) {
+        )
+        {
             lock (_crossSegmentLock) // _head and _tail may only change while the lock is held.
             {
                 // Snap the head and tail
@@ -586,12 +593,14 @@ namespace System.Collections.Concurrent
             if (
                 (segment._slots[i].SequenceNumber & segment._slotsMask)
                 != expectedSequenceNumberAndMask
-            ) {
+            )
+            {
                 SpinWait spinner = default;
                 while (
                     (Volatile.Read(ref segment._slots[i].SequenceNumber) & segment._slotsMask)
                     != expectedSequenceNumberAndMask
-                ) {
+                )
+                {
                     spinner.SpinOnce();
                 }
             }
@@ -605,7 +614,8 @@ namespace System.Collections.Concurrent
             int headHead,
             ConcurrentQueueSegment<T> tail,
             int tailTail
-        ) {
+        )
+        {
             Debug.Assert(head._preservedForObservation);
             Debug.Assert(head._frozenForEnqueues);
             Debug.Assert(tail._preservedForObservation);
@@ -646,7 +656,8 @@ namespace System.Collections.Concurrent
                     ConcurrentQueueSegment<T> s = head._nextSegment!;
                     s != tail;
                     s = s._nextSegment!
-                ) {
+                )
+                {
                     Debug.Assert(
                         s._preservedForObservation,
                         "Would have had to been preserved as a segment part of enumeration"

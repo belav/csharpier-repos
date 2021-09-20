@@ -14,10 +14,8 @@ namespace Microsoft.AspNetCore.Mvc.DataAnnotations
         private readonly string _max;
         private readonly string _min;
 
-        public RangeAttributeAdapter(
-            RangeAttribute attribute,
-            IStringLocalizer? stringLocalizer
-        ) : base(attribute, stringLocalizer)
+        public RangeAttributeAdapter(RangeAttribute attribute, IStringLocalizer? stringLocalizer)
+            : base(attribute, stringLocalizer)
         {
             // This will trigger the conversion of Attribute.Minimum and Attribute.Maximum.
             // This is needed, because the attribute is stateful and will convert from a string like

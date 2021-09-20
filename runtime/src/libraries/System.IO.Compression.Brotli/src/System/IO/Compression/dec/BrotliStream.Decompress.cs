@@ -84,7 +84,8 @@ namespace System.IO.Compression
                                 )
                             ) > 0
                         )
-                    ) {
+                    )
+                    {
                         _bufferCount += numRead;
                         if (_bufferCount > _buffer.Length)
                         {
@@ -176,7 +177,8 @@ namespace System.IO.Compression
             int offset,
             int count,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             ValidateBufferArguments(buffer, offset, count);
             return ReadAsync(new Memory<byte>(buffer, offset, count), cancellationToken).AsTask();
         }
@@ -191,7 +193,8 @@ namespace System.IO.Compression
         public override ValueTask<int> ReadAsync(
             Memory<byte> buffer,
             CancellationToken cancellationToken = default(CancellationToken)
-        ) {
+        )
+        {
             if (_mode != CompressionMode.Decompress)
                 throw new InvalidOperationException(SR.BrotliStream_Compress_UnsupportedOperation);
             EnsureNoActiveAsyncOperation();
@@ -207,7 +210,8 @@ namespace System.IO.Compression
         private async ValueTask<int> FinishReadAsyncMemory(
             Memory<byte> buffer,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             AsyncOperationStarting();
             try
             {
@@ -241,7 +245,8 @@ namespace System.IO.Compression
                                         .ConfigureAwait(false)
                                 ) > 0
                             )
-                        ) {
+                        )
+                        {
                             _bufferCount += numRead;
                             if (_bufferCount > _buffer.Length)
                             {

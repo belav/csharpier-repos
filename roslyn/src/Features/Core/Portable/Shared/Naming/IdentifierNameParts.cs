@@ -27,7 +27,8 @@ namespace Microsoft.CodeAnalysis.Shared.Naming
         public static IdentifierNameParts CreateIdentifierNameParts(
             ISymbol symbol,
             ImmutableArray<NamingRule> rules
-        ) {
+        )
+        {
             var baseName = RemovePrefixesAndSuffixes(symbol, rules, symbol.Name);
 
             var parts = StringBreaker.GetWordParts(baseName);
@@ -40,7 +41,8 @@ namespace Microsoft.CodeAnalysis.Shared.Naming
             ISymbol symbol,
             ImmutableArray<NamingRule> rules,
             string baseName
-        ) {
+        )
+        {
             var newBaseName = baseName;
 
             foreach (var rule in rules)

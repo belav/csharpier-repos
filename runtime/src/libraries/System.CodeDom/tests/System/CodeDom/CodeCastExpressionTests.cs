@@ -32,7 +32,8 @@ namespace System.CodeDom.Tests
         public void Ctor_CodeTypeReference_CodeExpression(
             CodeTypeReference type,
             CodeExpression expression
-        ) {
+        )
+        {
             CodeExpression[] initializers = new CodeExpression[0];
             var cast = new CodeCastExpression(type, expression);
             Assert.Equal((type ?? new CodeTypeReference("")).BaseType, cast.TargetType.BaseType);
@@ -52,7 +53,8 @@ namespace System.CodeDom.Tests
             string type,
             CodeExpression expression,
             string expectedBaseType
-        ) {
+        )
+        {
             var cast = new CodeCastExpression(type, expression);
             Assert.Equal(expectedBaseType, cast.TargetType.BaseType);
             Assert.Equal(expression, cast.Expression);
@@ -81,7 +83,8 @@ namespace System.CodeDom.Tests
             Type type,
             CodeExpression expression,
             string expectedBaseType
-        ) {
+        )
+        {
             var cast = new CodeCastExpression(type, expression);
             Assert.Equal(expectedBaseType, cast.TargetType.BaseType);
             Assert.Equal(expression, cast.Expression);

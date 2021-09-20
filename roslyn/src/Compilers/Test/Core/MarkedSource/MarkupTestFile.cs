@@ -56,7 +56,8 @@ namespace Roslyn.Test.Utilities
             out string output,
             out int? position,
             out IDictionary<string, ArrayBuilder<TextSpan>> spans
-        ) {
+        )
+        {
             position = null;
             var tempSpans = new Dictionary<string, ArrayBuilder<TextSpan>>();
 
@@ -96,7 +97,8 @@ namespace Roslyn.Test.Utilities
                     orderedMatches.Count >= 2
                     && (spanStartStack.Count > 0 || namedSpanStartStack.Count > 0)
                     && matches[0].matchIndex == matches[1].matchIndex - 1
-                ) {
+                )
+                {
                     // We have a slight ambiguity with cases like these:
                     //
                     // [|]    [|}
@@ -115,7 +117,8 @@ namespace Roslyn.Test.Utilities
                             && matches[1].name == NamedSpanEndString
                             && !namedSpanStartStack.IsEmpty()
                         )
-                    ) {
+                    )
+                    {
                         orderedMatches.RemoveAt(0);
                     }
                 }
@@ -230,7 +233,8 @@ namespace Roslyn.Test.Utilities
             Stack<(int matchIndex, string name)> spanStartStack,
             IDictionary<string, ArrayBuilder<TextSpan>> spans,
             int finalIndex
-        ) {
+        )
+        {
             var (matchIndex, name) = spanStartStack.Pop();
 
             var span = TextSpan.FromBounds(matchIndex, finalIndex);
@@ -242,7 +246,8 @@ namespace Roslyn.Test.Utilities
             string value,
             int currentIndex,
             List<(int, string)> matches
-        ) {
+        )
+        {
             var index = input.IndexOf(value, currentIndex, StringComparison.Ordinal);
             if (index >= 0)
             {
@@ -255,7 +260,8 @@ namespace Roslyn.Test.Utilities
             out string output,
             out int? cursorPositionOpt,
             out ImmutableArray<TextSpan> spans
-        ) {
+        )
+        {
             Parse(input, out output, out cursorPositionOpt, out var dictionary);
 
             var builder = GetOrAdd(
@@ -272,7 +278,8 @@ namespace Roslyn.Test.Utilities
             out string output,
             out int? cursorPositionOpt,
             out IDictionary<string, ImmutableArray<TextSpan>> spans
-        ) {
+        )
+        {
             Parse(input, out output, out cursorPositionOpt, out var dictionary);
             spans = dictionary.ToDictionary(kvp => kvp.Key, kvp => kvp.Value.ToImmutableAndFree());
         }
@@ -288,7 +295,8 @@ namespace Roslyn.Test.Utilities
             out string output,
             out int cursorPosition,
             out ImmutableArray<TextSpan> spans
-        ) {
+        )
+        {
             GetPositionAndSpans(input, out output, out int? pos, out spans);
             cursorPosition = pos.Value;
         }
@@ -309,7 +317,8 @@ namespace Roslyn.Test.Utilities
             out string output,
             out int? cursorPosition,
             out TextSpan? textSpan
-        ) {
+        )
+        {
             GetPositionAndSpans(
                 input,
                 out output,
@@ -324,7 +333,8 @@ namespace Roslyn.Test.Utilities
             out string output,
             out int cursorPosition,
             out TextSpan textSpan
-        ) {
+        )
+        {
             GetPositionAndSpans(input, out output, out cursorPosition, out var spans);
             textSpan = spans.Single();
         }
@@ -333,7 +343,8 @@ namespace Roslyn.Test.Utilities
             string input,
             out string output,
             out ImmutableArray<TextSpan> spans
-        ) {
+        )
+        {
             GetPositionAndSpans(input, out output, out int? pos, out spans);
         }
 

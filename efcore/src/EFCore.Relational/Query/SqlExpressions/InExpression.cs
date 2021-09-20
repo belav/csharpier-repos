@@ -34,13 +34,14 @@ namespace Microsoft.EntityFrameworkCore.Query.SqlExpressions
             bool negated,
             SelectExpression subquery,
             RelationalTypeMapping? typeMapping
-        ) : this(
-            Check.NotNull(item, nameof(item)),
-            null,
-            Check.NotNull(subquery, nameof(subquery)),
-            negated,
-            typeMapping
-        ) { }
+        )
+            : this(
+                Check.NotNull(item, nameof(item)),
+                null,
+                Check.NotNull(subquery, nameof(subquery)),
+                negated,
+                typeMapping
+            ) { }
 
         /// <summary>
         ///     Creates a new instance of the <see cref="InExpression" /> class which represents a <paramref name="item" /> IN values expression.
@@ -55,13 +56,14 @@ namespace Microsoft.EntityFrameworkCore.Query.SqlExpressions
             bool negated,
             SqlExpression values,
             RelationalTypeMapping? typeMapping
-        ) : this(
-            Check.NotNull(item, nameof(item)),
-            Check.NotNull(values, nameof(values)),
-            null,
-            negated,
-            typeMapping
-        ) { }
+        )
+            : this(
+                Check.NotNull(item, nameof(item)),
+                Check.NotNull(values, nameof(values)),
+                null,
+                negated,
+                typeMapping
+            ) { }
 
         /// <summary>
         ///     Creates a new instance of the <see cref="InExpression" /> class which represents a <paramref name="item" /> IN subquery expression.
@@ -75,13 +77,14 @@ namespace Microsoft.EntityFrameworkCore.Query.SqlExpressions
             SelectExpression subquery,
             bool negated,
             RelationalTypeMapping? typeMapping
-        ) : this(
-            Check.NotNull(item, nameof(item)),
-            null,
-            Check.NotNull(subquery, nameof(subquery)),
-            negated,
-            typeMapping
-        ) { }
+        )
+            : this(
+                Check.NotNull(item, nameof(item)),
+                null,
+                Check.NotNull(subquery, nameof(subquery)),
+                negated,
+                typeMapping
+            ) { }
 
         /// <summary>
         ///     Creates a new instance of the <see cref="InExpression" /> class which represents a <paramref name="item" /> IN values expression.
@@ -95,13 +98,14 @@ namespace Microsoft.EntityFrameworkCore.Query.SqlExpressions
             SqlExpression values,
             bool negated,
             RelationalTypeMapping? typeMapping
-        ) : this(
-            Check.NotNull(item, nameof(item)),
-            Check.NotNull(values, nameof(values)),
-            null,
-            negated,
-            typeMapping
-        ) { }
+        )
+            : this(
+                Check.NotNull(item, nameof(item)),
+                Check.NotNull(values, nameof(values)),
+                null,
+                negated,
+                typeMapping
+            ) { }
 
         private InExpression(
             SqlExpression item,
@@ -168,7 +172,8 @@ namespace Microsoft.EntityFrameworkCore.Query.SqlExpressions
             SqlExpression item,
             SqlExpression? values,
             SelectExpression? subquery
-        ) {
+        )
+        {
             Check.NotNull(item, nameof(item));
 
             if (values != null && subquery != null)
@@ -202,7 +207,8 @@ namespace Microsoft.EntityFrameworkCore.Query.SqlExpressions
             else if (
                 Values is SqlConstantExpression constantValuesExpression
                 && constantValuesExpression.Value is IEnumerable constantValues
-            ) {
+            )
+            {
                 var first = true;
                 foreach (var item in constantValues)
                 {

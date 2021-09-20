@@ -138,7 +138,8 @@ namespace System.Threading.Tasks.Dataflow.Tests
                             new ExecutionDataflowBlockOptions { BoundedCapacity = bounded ? 1 : -1 }
                         )
                     }
-                ) {
+                )
+                {
                     Assert.True(
                         tb.Post(0),
                         "Expected non-completed TransformBlock to accept Post'd message"
@@ -170,7 +171,8 @@ namespace System.Threading.Tasks.Dataflow.Tests
                         new TransformBlock<int, int>(i => i),
                         new TransformBlock<int, int>(i => Task.Run(() => i))
                     }
-                ) {
+                )
+                {
                     var values = new int[Messages];
                     var targets = new ActionBlock<int>[Messages];
                     for (int i = 0; i < Messages; i++)
@@ -205,7 +207,8 @@ namespace System.Threading.Tasks.Dataflow.Tests
                         new TransformBlock<int, int>(i => i * 2),
                         new TransformBlock<int, int>(i => Task.Run(() => i * 2))
                     }
-                ) {
+                )
+                {
                     tb.PostRange(0, 5);
 
                     for (int i = 0; i < 5; i++)
@@ -321,7 +324,8 @@ namespace System.Threading.Tasks.Dataflow.Tests
                         new TransformBlock<int, int>(i => i, options),
                         new TransformBlock<int, int>(i => Task.Run(() => i), options)
                     }
-                ) {
+                )
+                {
                     var sendAsync = new Task<bool>[boundedCapacity + Excess];
                     for (int i = 0; i < boundedCapacity + Excess; i++)
                     {

@@ -221,7 +221,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Tests
 
             public override ValueTask<ReadResult> ReadAsync(
                 CancellationToken cancellationToken = default
-            ) {
+            )
+            {
                 throw new NotImplementedException();
             }
 

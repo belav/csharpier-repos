@@ -70,7 +70,8 @@ namespace Microsoft.AspNetCore.Mvc.Formatters
         [InlineData("multipart/mixed; boundary=gc0p4Jq0M2Yt08j34c0p; undefined=ignored")]
         public void MultipartFormatter_CanRead_ReturnsTrueForSupportedMediaTypes(
             string requestContentType
-        ) {
+        )
+        {
             // Arrange
             var formatter = new MultipartFormatter();
             var httpContext = new DefaultHttpContext();
@@ -103,7 +104,8 @@ namespace Microsoft.AspNetCore.Mvc.Formatters
         [InlineData("text/html")]
         public void MultipartFormatter_CanRead_ReturnsFalseForUnsupportedMediaTypes(
             string requestContentType
-        ) {
+        )
+        {
             // Arrange
             var formatter = new MultipartFormatter();
             var httpContext = new DefaultHttpContext();
@@ -139,7 +141,8 @@ namespace Microsoft.AspNetCore.Mvc.Formatters
         [InlineData("multipart/mixed; boundary=gc0p4Jq0M2Yt08j34c0p; undefined=ignored")]
         public void MultipartMixedFormatter_CanRead_ReturnsTrueForSupportedMediaTypes(
             string requestContentType
-        ) {
+        )
+        {
             // Arrange
             var formatter = new MultipartMixedFormatter();
             var httpContext = new DefaultHttpContext();
@@ -172,7 +175,8 @@ namespace Microsoft.AspNetCore.Mvc.Formatters
         [InlineData("text/html")]
         public void MultipartMixedFormatter_CanRead_ReturnsFalseForUnsupportedMediaTypes(
             string requestContentType
-        ) {
+        )
+        {
             // Arrange
             var formatter = new MultipartMixedFormatter();
             var httpContext = new DefaultHttpContext();
@@ -215,7 +219,8 @@ namespace Microsoft.AspNetCore.Mvc.Formatters
         [InlineData("application/mathml+xml; undefined=ignored")]
         public void MathMLFormatter_CanRead_ReturnsTrueForSupportedMediaTypes(
             string requestContentType
-        ) {
+        )
+        {
             // Arrange
             var formatter = new MathMLFormatter();
             var httpContext = new DefaultHttpContext();
@@ -247,7 +252,8 @@ namespace Microsoft.AspNetCore.Mvc.Formatters
         [InlineData("text/html")]
         public void MathMLFormatter_CanRead_ReturnsFalseForUnsupportedMediaTypes(
             string requestContentType
-        ) {
+        )
+        {
             // Arrange
             var formatter = new MathMLFormatter();
             var httpContext = new DefaultHttpContext();
@@ -287,7 +293,8 @@ namespace Microsoft.AspNetCore.Mvc.Formatters
         [InlineData("application/mathml+xml; test=value")]
         public void XMLFormatter_CanRead_ReturnsTrueForSupportedMediaTypes(
             string requestContentType
-        ) {
+        )
+        {
             // Arrange
             var formatter = new XmlFormatter();
             var httpContext = new DefaultHttpContext();
@@ -318,7 +325,8 @@ namespace Microsoft.AspNetCore.Mvc.Formatters
         [InlineData("text/html")]
         public void XMLFormatter_CanRead_ReturnsFalseForUnsupportedMediaTypes(
             string requestContentType
-        ) {
+        )
+        {
             // Arrange
             var formatter = new XmlFormatter();
             var httpContext = new DefaultHttpContext();
@@ -449,7 +457,8 @@ namespace Microsoft.AspNetCore.Mvc.Formatters
         public async Task ReadAsync_WithEmptyRequest_ReturnsNoValueResultWhenExpected(
             bool allowEmptyInputValue,
             bool expectedIsModelSet
-        ) {
+        )
+        {
             // Arrange
             var formatter = new TestFormatter();
             var context = new InputFormatterContext(
@@ -475,7 +484,8 @@ namespace Microsoft.AspNetCore.Mvc.Formatters
         {
             public override Task<InputFormatterResult> ReadRequestBodyAsync(
                 InputFormatterContext context
-            ) {
+            )
+            {
                 throw new NotImplementedException();
             }
         }
@@ -491,7 +501,8 @@ namespace Microsoft.AspNetCore.Mvc.Formatters
 
             public override Task<InputFormatterResult> ReadRequestBodyAsync(
                 InputFormatterContext context
-            ) {
+            )
+            {
                 throw new NotImplementedException();
             }
         }

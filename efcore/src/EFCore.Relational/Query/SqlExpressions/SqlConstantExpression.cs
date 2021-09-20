@@ -30,10 +30,13 @@ namespace Microsoft.EntityFrameworkCore.Query.SqlExpressions
         public SqlConstantExpression(
             ConstantExpression constantExpression,
             RelationalTypeMapping? typeMapping
-        ) : base(
-            Check.NotNull(constantExpression, nameof(constantExpression)).Type.UnwrapNullableType(),
-            typeMapping
-        ) {
+        )
+            : base(
+                Check.NotNull(constantExpression, nameof(constantExpression))
+                    .Type.UnwrapNullableType(),
+                typeMapping
+            )
+        {
             _constantExpression = constantExpression;
         }
 

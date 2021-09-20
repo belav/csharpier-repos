@@ -15,7 +15,8 @@ namespace System.CommandLine.Suggest
             string exeFileName,
             string suggestionTargetArguments,
             TimeSpan timeout
-        ) {
+        )
+        {
             if (string.IsNullOrWhiteSpace(exeFileName))
             {
                 throw new ArgumentException(

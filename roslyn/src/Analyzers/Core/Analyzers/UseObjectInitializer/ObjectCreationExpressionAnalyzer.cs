@@ -73,7 +73,8 @@ namespace Microsoft.CodeAnalysis.UseObjectInitializer
             ISyntaxFacts syntaxFacts,
             TObjectCreationExpressionSyntax objectCreationExpression,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var analyzer = s_pool.Allocate();
             analyzer.Initialize(
                 semanticModel,
@@ -102,7 +103,8 @@ namespace Microsoft.CodeAnalysis.UseObjectInitializer
                     TAssignmentStatementSyntax
                 >
             > matches
-        ) {
+        )
+        {
             var containingBlock = _containingStatement.Parent;
             var foundStatement = false;
 
@@ -237,7 +239,8 @@ namespace Microsoft.CodeAnalysis.UseObjectInitializer
             INamedTypeSymbol classOrStructType,
             ISymbol member,
             out ISymbol typeMember
-        ) {
+        )
+        {
             if (member != null && member.ContainingType.IsInterfaceType())
             {
                 typeMember = classOrStructType?.FindImplementationForInterfaceMember(member);
@@ -279,7 +282,8 @@ namespace Microsoft.CodeAnalysis.UseObjectInitializer
                     if (
                         expression != null
                         && expression.SpanStart < _objectCreationExpression.SpanStart
-                    ) {
+                    )
+                    {
                         return true;
                     }
                 }
@@ -310,7 +314,8 @@ namespace Microsoft.CodeAnalysis.UseObjectInitializer
             TMemberAccessExpressionSyntax memberAccessExpression,
             TExpressionSyntax initializer,
             string memberName
-        ) {
+        )
+        {
             Statement = statement;
             MemberAccessExpression = memberAccessExpression;
             Initializer = initializer;

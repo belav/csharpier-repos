@@ -22,7 +22,8 @@ namespace Microsoft.AspNetCore.SignalR.Tests
             ConnectionContext connection,
             IHubProtocol protocol = null,
             string userIdentifier = null
-        ) {
+        )
+        {
             var contextOptions = new HubConnectionContextOptions()
             {
                 KeepAliveInterval = TimeSpan.FromSeconds(15),
@@ -61,7 +62,8 @@ namespace Microsoft.AspNetCore.SignalR.Tests
             public override ValueTask WriteAsync(
                 HubMessage message,
                 CancellationToken cancellationToken = default
-            ) {
+            )
+            {
                 throw new Exception();
             }
         }

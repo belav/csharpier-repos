@@ -15,7 +15,8 @@ namespace Microsoft.AspNetCore.Identity.FunctionalTests
     {
         public NoIdentityAddedTests(
             ServerFactory<NoIdentityStartup, IdentityDbContext> serverFactory
-        ) {
+        )
+        {
             ServerFactory = serverFactory;
         }
 
@@ -25,7 +26,8 @@ namespace Microsoft.AspNetCore.Identity.FunctionalTests
         [MemberData(nameof(IdentityEndpoints))]
         public async Task QueryingIdentityEndpointsReturnsNotFoundWhenIdentityIsNotPresent(
             string endpoint
-        ) {
+        )
+        {
             // Arrange
             void ConfigureTestServices(IServiceCollection services)
             {

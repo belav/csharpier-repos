@@ -19,7 +19,8 @@ namespace System.Diagnostics.CodeAnalysis.Tests
             string messageId,
             string scope,
             string target
-        ) {
+        )
+        {
             var usma = new UnconditionalSuppressMessageAttribute(category, id)
             {
                 Justification = justification,

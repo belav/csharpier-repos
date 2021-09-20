@@ -227,7 +227,8 @@ namespace System.Xml.Xsl.XsltOld
                 || parameter is bool
                 || parameter is double
                 || parameter is string
-            ) {
+            )
+            {
                 // doing nothing
             }
             else if (
@@ -239,7 +240,8 @@ namespace System.Xml.Xsl.XsltOld
                 || parameter is ulong
                 || parameter is float
                 || parameter is decimal
-            ) {
+            )
+            {
                 parameter = XmlConvert.ToXPathDouble(parameter);
             }
             else
@@ -343,7 +345,8 @@ namespace System.Xml.Xsl.XsltOld
             List<TheQuery> queryStore,
             RootAction rootAction,
             IXsltDebugger? debugger
-        ) {
+        )
+        {
             _stylesheet = stylesheet;
             _queryStore = queryStore;
             _rootAction = rootAction;
@@ -526,7 +529,8 @@ namespace System.Xml.Xsl.XsltOld
             XPathNodeIterator? nodeSet,
             XmlQualifiedName? mode,
             Stylesheet? importsOf
-        ) {
+        )
+        {
             Debug.Assert(_templateLookup != null);
             _templateLookup.Initialize(mode, importsOf);
             PushActionFrame(_templateLookup, nodeSet);
@@ -775,7 +779,8 @@ namespace System.Xml.Xsl.XsltOld
             string? name,
             string? nspace,
             bool empty
-        ) {
+        )
+        {
             return BeginEvent(nodeType, prefix, name, nspace, empty, null, true);
         }
 
@@ -787,7 +792,8 @@ namespace System.Xml.Xsl.XsltOld
             bool empty,
             object? htmlProps,
             bool search
-        ) {
+        )
+        {
             Debug.Assert(_xsm != null);
 
             int stateOutlook = _xsm.BeginOutlook(nodeType);

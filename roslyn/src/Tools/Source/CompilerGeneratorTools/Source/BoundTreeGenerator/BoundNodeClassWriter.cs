@@ -420,7 +420,8 @@ namespace BoundTreeGenerator
             TreeType node,
             bool isPublic,
             bool hasErrorsIsOptional
-        ) {
+        )
+        {
             switch (_targetLang)
             {
                 case TargetLanguage.CSharp:
@@ -832,7 +833,8 @@ namespace BoundTreeGenerator
                 if (
                     FieldsIncludingOverrides(type).SingleOrDefault(f => f.Name == fieldName) is
                     { } field
-                ) {
+                )
+                {
                     return field;
                 }
             }
@@ -920,7 +922,8 @@ namespace BoundTreeGenerator
                     && (f.Null.ToUpperInvariant() is ("ALLOW" or "ALWAYS"))
                     && !f.Type.EndsWith('?')
                     && !IsValueType(f.Type)
-                ) {
+                )
+                {
                     throw new ArgumentException(
                         $"Field '{fieldName}' on node '{node.Name}' should have a nullable type, since it isn't a value type and it is marked null=allow or null=always"
                     );
@@ -1103,7 +1106,8 @@ namespace BoundTreeGenerator
                         ? FieldsIncludingOverrides(node)
                         : Fields(node)
                 )
-            ) {
+            )
+            {
                 WriteField(node, field);
             }
             if (node is Node)
@@ -1498,7 +1502,8 @@ namespace BoundTreeGenerator
                                         IsImmutableArray(field.Type, out _)
                                         && FieldNullHandling(node, field.Name)
                                             == NullHandling.Disallow
-                                    ) {
+                                    )
+                                    {
                                         Write(
                                             "new TreeDumperNode(\"{0}\", null, from x in node.{1} select Visit(x, null))",
                                             ToCamelCase(field.Name),
@@ -1808,7 +1813,8 @@ namespace BoundTreeGenerator
                                     symbolIsPotentiallyUpdated(f)
                                     || immutableArrayIsPotentiallyUpdated(f)
                             )
-                        ) {
+                        )
+                        {
                             continue;
                         }
 
@@ -1919,7 +1925,8 @@ namespace BoundTreeGenerator
                                     else if (
                                         symbolIsPotentiallyUpdated(field)
                                         || immutableArrayIsPotentiallyUpdated(field)
-                                    ) {
+                                    )
+                                    {
                                         return $"{ToCamelCase(field.Name)}";
                                     }
                                     else

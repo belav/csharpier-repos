@@ -202,7 +202,8 @@ namespace System.IO.Compression
             int offset,
             int count,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             CheckDeflateStream();
             return _deflateStream.ReadAsync(buffer, offset, count, cancellationToken);
         }
@@ -210,7 +211,8 @@ namespace System.IO.Compression
         public override ValueTask<int> ReadAsync(
             Memory<byte> buffer,
             CancellationToken cancellationToken = default(CancellationToken)
-        ) {
+        )
+        {
             if (GetType() != typeof(GZipStream))
             {
                 // GZipStream is not sealed, and a derived type may have overridden ReadAsync(byte[], int, int) prior
@@ -230,7 +232,8 @@ namespace System.IO.Compression
             int offset,
             int count,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             CheckDeflateStream();
             return _deflateStream.WriteAsync(buffer, offset, count, cancellationToken);
         }
@@ -238,7 +241,8 @@ namespace System.IO.Compression
         public override ValueTask WriteAsync(
             ReadOnlyMemory<byte> buffer,
             CancellationToken cancellationToken = default(CancellationToken)
-        ) {
+        )
+        {
             if (GetType() != typeof(GZipStream))
             {
                 // GZipStream is not sealed, and a derived type may have overridden WriteAsync(byte[], int, int) prior
@@ -263,7 +267,8 @@ namespace System.IO.Compression
             Stream destination,
             int bufferSize,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             CheckDeflateStream();
             return _deflateStream.CopyToAsync(destination, bufferSize, cancellationToken);
         }

@@ -42,7 +42,8 @@ namespace Microsoft.CodeAnalysis
             string s,
             bool allowWildcard,
             out Version version
-        ) {
+        )
+        {
             return TryParse(
                 s,
                 allowWildcard: allowWildcard,
@@ -71,7 +72,8 @@ namespace Microsoft.CodeAnalysis
             ushort maxValue,
             bool allowPartialParse,
             out Version version
-        ) {
+        )
+        {
             Debug.Assert(!allowWildcard || maxValue < ushort.MaxValue);
 
             if (string.IsNullOrWhiteSpace(s))
@@ -105,7 +107,8 @@ namespace Microsoft.CodeAnalysis
                         out values[i]
                     )
                     || values[i] > maxValue
-                ) {
+                )
+                {
                     if (!allowPartialParse)
                     {
                         version = AssemblyIdentity.NullVersion;
@@ -182,7 +185,8 @@ namespace Microsoft.CodeAnalysis
                     CultureInfo.InvariantCulture,
                     out number
                 )
-            ) {
+            )
+            {
                 //The old compiler would take the 16 least significant bits and use their value as the output
                 //so we'll do that too.
                 value = (ushort)(number % 65536);
@@ -201,7 +205,8 @@ namespace Microsoft.CodeAnalysis
         public static Version? GenerateVersionFromPatternAndCurrentTime(
             DateTime time,
             Version pattern
-        ) {
+        )
+        {
             if (pattern == null || pattern.Revision != ushort.MaxValue)
             {
                 return pattern;

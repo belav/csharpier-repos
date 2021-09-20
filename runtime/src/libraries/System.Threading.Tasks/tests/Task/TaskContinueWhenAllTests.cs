@@ -1671,7 +1671,8 @@ namespace System.Threading.Tasks.Tests
             int largeSize,
             out Task<int>[] aSmall,
             out Task<int>[] aLarge
-        ) {
+        )
+        {
             aLarge = new Task<int>[largeSize];
             aSmall = new Task<int>[smallSize];
             for (int i = 0; i < largeSize; i++)
@@ -1700,7 +1701,8 @@ namespace System.Threading.Tasks.Tests
             int largeSize,
             out Task[] aSmall,
             out Task[] aLarge
-        ) {
+        )
+        {
             aLarge = new Task[largeSize];
             aSmall = new Task[smallSize];
             for (int i = 0; i < largeSize; i++)

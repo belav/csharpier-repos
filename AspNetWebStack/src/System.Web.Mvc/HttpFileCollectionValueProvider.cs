@@ -18,7 +18,8 @@ namespace System.Web.Mvc
 
         private static Dictionary<string, HttpPostedFileBase[]> GetHttpPostedFileDictionary(
             ControllerContext controllerContext
-        ) {
+        )
+        {
             HttpFileCollectionBase files = controllerContext.HttpContext.Request.Files;
 
             // fast-track common case of no files

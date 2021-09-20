@@ -35,7 +35,8 @@ namespace Microsoft.CodeAnalysis.Differencing
             IEnumerable<SyntaxNode>? oldRootChildren,
             IEnumerable<SyntaxNode>? newRootChildren,
             bool compareStatementSyntax
-        ) {
+        )
+        {
             _compareStatementSyntax = compareStatementSyntax;
 
             _oldRoot = oldRoot;
@@ -66,7 +67,8 @@ namespace Microsoft.CodeAnalysis.Differencing
         protected internal override bool TryGetParent(
             SyntaxNode node,
             [NotNullWhen(true)] out SyntaxNode? parent
-        ) {
+        )
+        {
             if (node == _oldRoot || node == _newRoot)
             {
                 parent = null;
@@ -162,7 +164,8 @@ namespace Microsoft.CodeAnalysis.Differencing
                     descendIntoChildren: child => ShouldEnumerateChildren(child),
                     descendIntoTrivia: false
                 )
-            ) {
+            )
+            {
                 var descendantNode = descendant.AsNode();
                 if (descendantNode != null && HasLabel(descendantNode))
                 {

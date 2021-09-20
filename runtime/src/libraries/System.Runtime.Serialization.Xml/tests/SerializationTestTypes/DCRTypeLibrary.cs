@@ -775,7 +775,8 @@ namespace SerializationTestTypes
         public static Dictionary<DataContract, List<RefData>> GetReferenceCounts(
             object data,
             ref Dictionary<DataContract, List<RefData>> nonRefdValues
-        ) {
+        )
+        {
             Dictionary<DataContract, List<RefData>> alreadyRefdValues = new Dictionary<
                 DataContract,
                 List<RefData>
@@ -793,7 +794,8 @@ namespace SerializationTestTypes
         public static bool IsEqual(
             Dictionary<DataContract, List<RefData>> alreadyRefdValues1,
             Dictionary<DataContract, List<RefData>> alreadyRefdValues2
-        ) {
+        )
+        {
             if (alreadyRefdValues1.Count != alreadyRefdValues2.Count)
                 return false;
             foreach (KeyValuePair<DataContract, List<RefData>> kp in alreadyRefdValues1)
@@ -832,7 +834,8 @@ namespace SerializationTestTypes
             DataContract dataContract,
             ref Dictionary<DataContract, List<RefData>> alreadyRefdValues,
             ref Dictionary<DataContract, List<RefData>> nonRefdValues
-        ) {
+        )
+        {
             RefData refData = new RefData(data);
             FindRefUpdateRef(refData, dataContract, ref alreadyRefdValues, ref nonRefdValues);
             if (s_refStack.Contains(refData))
@@ -853,7 +856,8 @@ namespace SerializationTestTypes
             DataContract dataContract,
             ref Dictionary<DataContract, List<RefData>> alreadyRefdValues,
             ref Dictionary<DataContract, List<RefData>> nonRefdValues
-        ) {
+        )
+        {
             if (dataContract.IsReference)
             {
                 if (alreadyRefdValues.ContainsKey(dataContract))
@@ -904,7 +908,8 @@ namespace SerializationTestTypes
             DataContract dataContract,
             ref Dictionary<DataContract, List<RefData>> alreadyRefdValues,
             ref Dictionary<DataContract, List<RefData>> nonRefdValues
-        ) {
+        )
+        {
             if (dataContract is ClassDataContract)
             {
                 ClassDataContract classContract = dataContract as ClassDataContract;
@@ -968,7 +973,8 @@ namespace SerializationTestTypes
             DataContract dataContract,
             ref Dictionary<DataContract, List<RefData>> alreadyRefdValues,
             ref Dictionary<DataContract, List<RefData>> nonRefdValues
-        ) {
+        )
+        {
             CollectionDataContract collectionContract = dataContract as CollectionDataContract;
             if (!collectionContract.IsDictionary)
             {

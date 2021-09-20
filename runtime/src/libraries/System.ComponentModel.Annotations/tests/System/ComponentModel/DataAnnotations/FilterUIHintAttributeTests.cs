@@ -56,7 +56,8 @@ namespace System.ComponentModel.DataAnnotations.Tests
             string presentationLayer,
             object[] controlParameters,
             IDictionary<string, object> expectedControlParameters
-        ) {
+        )
+        {
             if (controlParameters == null || controlParameters.Length == 0)
             {
                 if (presentationLayer == null)
@@ -96,7 +97,8 @@ namespace System.ComponentModel.DataAnnotations.Tests
             string filterUIHint,
             string presentationLayer,
             IDictionary<string, object> controlParameters
-        ) {
+        )
+        {
             Assert.Equal(filterUIHint, attribute.FilterUIHint);
             Assert.Equal(presentationLayer, attribute.PresentationLayer);
             Assert.Equal(controlParameters, attribute.ControlParameters);
@@ -112,7 +114,8 @@ namespace System.ComponentModel.DataAnnotations.Tests
         [InlineData(new object[] { new object[] { "abc", 1, "abc", 2 } })]
         public void InvalidControlParameters_Get_ThrowsInvalidOperationException(
             object[] controlParameters
-        ) {
+        )
+        {
             FilterUIHintAttribute attribute = new FilterUIHintAttribute(
                 "FilterUIHint",
                 "PresentationLayer",

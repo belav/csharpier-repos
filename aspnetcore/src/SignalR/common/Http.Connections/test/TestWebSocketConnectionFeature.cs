@@ -71,7 +71,8 @@ namespace Microsoft.AspNetCore.Http.Connections.Tests
                 ChannelReader<WebSocketMessage> input,
                 ChannelWriter<WebSocketMessage> output,
                 SyncPoint sync = null
-            ) {
+            )
+            {
                 _input = input;
                 _output = output;
                 _sync = sync;
@@ -102,7 +103,8 @@ namespace Microsoft.AspNetCore.Http.Connections.Tests
                 WebSocketCloseStatus closeStatus,
                 string statusDescription,
                 CancellationToken cancellationToken
-            ) {
+            )
+            {
                 await SendMessageAsync(
                     new WebSocketMessage
                     {
@@ -122,7 +124,8 @@ namespace Microsoft.AspNetCore.Http.Connections.Tests
                 WebSocketCloseStatus closeStatus,
                 string statusDescription,
                 CancellationToken cancellationToken
-            ) {
+            )
+            {
                 await SendMessageAsync(
                     new WebSocketMessage
                     {
@@ -147,7 +150,8 @@ namespace Microsoft.AspNetCore.Http.Connections.Tests
             public override async Task<WebSocketReceiveResult> ReceiveAsync(
                 ArraySegment<byte> buffer,
                 CancellationToken cancellationToken
-            ) {
+            )
+            {
                 try
                 {
                     if (_internalBuffer.Buffer == null || _internalBuffer.Buffer.Length == 0)
@@ -239,7 +243,8 @@ namespace Microsoft.AspNetCore.Http.Connections.Tests
                 WebSocketMessageType messageType,
                 bool endOfMessage,
                 CancellationToken cancellationToken
-            ) {
+            )
+            {
                 if (_sync != null)
                 {
                     await _sync.WaitToContinue();
@@ -303,7 +308,8 @@ namespace Microsoft.AspNetCore.Http.Connections.Tests
             private async Task SendMessageAsync(
                 WebSocketMessage webSocketMessage,
                 CancellationToken cancellationToken
-            ) {
+            )
+            {
                 while (await _output.WaitToWriteAsync(cancellationToken))
                 {
                     if (_output.TryWrite(webSocketMessage))
@@ -322,7 +328,8 @@ namespace Microsoft.AspNetCore.Http.Connections.Tests
             public WebSocketConnectionSummary(
                 IList<WebSocketMessage> received,
                 WebSocketReceiveResult closeResult
-            ) {
+            )
+            {
                 Received = received;
                 CloseResult = closeResult;
             }

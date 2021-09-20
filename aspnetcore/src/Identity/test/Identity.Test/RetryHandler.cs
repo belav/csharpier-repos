@@ -30,7 +30,8 @@ namespace Microsoft.AspNetCore.Identity.Test
         protected override async Task<HttpResponseMessage> SendAsync(
             HttpRequestMessage request,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             HttpResponseMessage result = null;
             var url = request.RequestUri;
             var method = request.Method;

@@ -15,7 +15,8 @@ namespace Microsoft.CodeAnalysis.CSharp
     {
         public static NullableAnnotation GetNullableAnnotation(
             ArrayBuilder<TypeWithAnnotations> types
-        ) {
+        )
+        {
 #if DEBUG
             var example = types.FirstOrDefault(t => t.HasType);
 #endif
@@ -55,7 +56,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             ImmutableArray<BoundExpression> exprs,
             ConversionsBase conversions,
             ref CompoundUseSiteInfo<AssemblySymbol> useSiteInfo
-        ) {
+        )
+        {
             // SPEC:    7.5.2.14 Finding the best common type of a set of expressions
             // SPEC:    In some cases, a common type needs to be inferred for a set of expressions. In particular, the element types of implicitly typed arrays and
             // SPEC:    the return types of anonymous functions with block bodies are found in this way.
@@ -104,7 +106,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             ConversionsBase conversions,
             out bool hadMultipleCandidates,
             ref CompoundUseSiteInfo<AssemblySymbol> useSiteInfo
-        ) {
+        )
+        {
             // SPEC:    The second and third operands, x and y, of the ?: operator control the type of the conditional expression.
             // SPEC:    •	If x has type X and y has type Y then
             // SPEC:        o	If an implicit conversion (§6.1) exists from X to Y, but not from Y to X, then Y is the type of the conditional expression.
@@ -134,7 +137,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                             type1,
                             ref useSiteInfo
                         ).Exists
-                    ) {
+                    )
+                    {
                         candidateTypes.Add(type1);
                     }
                 }
@@ -155,7 +159,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                             type2,
                             ref useSiteInfo
                         ).Exists
-                    ) {
+                    )
+                    {
                         candidateTypes.Add(type2);
                     }
                 }
@@ -175,7 +180,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             ArrayBuilder<TypeSymbol> types,
             ConversionsBase conversions,
             ref CompoundUseSiteInfo<AssemblySymbol> useSiteInfo
-        ) {
+        )
+        {
             // This code assumes that the types in the list are unique.
 
             // This code answers the famous Mike Montwill interview question: Can you find the
@@ -245,7 +251,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             TypeSymbol? type2,
             ConversionsBase conversions,
             ref CompoundUseSiteInfo<AssemblySymbol> useSiteInfo
-        ) {
+        )
+        {
             // Anything is better than an error sym.
             if (type1.IsErrorType())
             {
@@ -279,7 +286,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                         TypeCompareKind.IgnoreDynamicAndTupleNames
                             | TypeCompareKind.IgnoreNullableModifiersForReferenceTypes
                     )
-                ) {
+                )
+                {
                     return type1.MergeEquivalentTypes(type2, VarianceKind.Out);
                 }
 

@@ -129,7 +129,8 @@ namespace System.IO.MemoryMappedFiles.Tests
         public void ValidAccessLevelCombinations(
             MemoryMappedFileAccess mapAccess,
             MemoryMappedFileAccess viewAccess
-        ) {
+        )
+        {
             const int Capacity = 4096;
             AssertExtensions.ThrowsIf<IOException>(
                 PlatformDetection.IsInAppContainer
@@ -148,7 +149,8 @@ namespace System.IO.MemoryMappedFiles.Tests
                         )
                         using (
                             MemoryMappedViewStream s = mmf.CreateViewStream(0, Capacity, viewAccess)
-                        ) {
+                        )
+                        {
                             ValidateMemoryMappedViewStream(s, Capacity, viewAccess);
                         }
                     }
@@ -160,7 +162,8 @@ namespace System.IO.MemoryMappedFiles.Tests
                                 viewAccess == MemoryMappedFileAccess.ReadExecute
                                 || viewAccess == MemoryMappedFileAccess.ReadWriteExecute
                             )
-                        ) {
+                        )
+                        {
                             // Containers and OSX with SIP enabled do not have execute permissions by default.
                             throw new SkipTestException("Insufficient execute permission.");
                         }
@@ -184,7 +187,8 @@ namespace System.IO.MemoryMappedFiles.Tests
         public void InvalidAccessLevelsCombinations(
             MemoryMappedFileAccess mapAccess,
             MemoryMappedFileAccess viewAccess
-        ) {
+        )
+        {
             const int Capacity = 4096;
             using (MemoryMappedFile mmf = MemoryMappedFile.CreateNew(null, Capacity, mapAccess))
             {
@@ -202,7 +206,8 @@ namespace System.IO.MemoryMappedFiles.Tests
         public void InvalidAccessLevels_ReadWriteExecute_NonUwp(
             MemoryMappedFileAccess mapAccess,
             MemoryMappedFileAccess viewAccess
-        ) {
+        )
+        {
             const int Capacity = 4096;
             using (MemoryMappedFile mmf = MemoryMappedFile.CreateNew(null, Capacity, mapAccess))
             {
@@ -361,7 +366,8 @@ namespace System.IO.MemoryMappedFiles.Tests
                             MapLength,
                             MemoryMappedFileAccess.ReadWrite
                         )
-                    ) {
+                    )
+                    {
                         Assert.Equal(0, s.ReadByte());
                         s.Position = 0;
                         s.WriteByte(42);
@@ -375,7 +381,8 @@ namespace System.IO.MemoryMappedFiles.Tests
                             MapLength,
                             MemoryMappedFileAccess.CopyOnWrite
                         )
-                    ) {
+                    )
+                    {
                         Assert.Equal(42, s.ReadByte());
                         s.Position = 0;
                         s.WriteByte(84);
@@ -390,7 +397,8 @@ namespace System.IO.MemoryMappedFiles.Tests
                             MapLength,
                             MemoryMappedFileAccess.Read
                         )
-                    ) {
+                    )
+                    {
                         s.Position = 0;
                         Assert.Equal(42, s.ReadByte());
                     }
@@ -445,7 +453,8 @@ namespace System.IO.MemoryMappedFiles.Tests
         private static void CreateWeakMmfAndMmvs(
             out WeakReference<MemoryMappedFile> mmfWeak,
             out WeakReference<MemoryMappedViewStream> mmvsWeak
-        ) {
+        )
+        {
             MemoryMappedFile mmf = MemoryMappedFile.CreateNew(null, 4096);
             MemoryMappedViewStream s = mmf.CreateViewStream();
 

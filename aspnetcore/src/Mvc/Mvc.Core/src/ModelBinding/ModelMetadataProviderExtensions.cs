@@ -25,7 +25,8 @@ namespace Microsoft.AspNetCore.Mvc.ModelBinding
             this IModelMetadataProvider provider,
             Type containerType,
             string propertyName
-        ) {
+        )
+        {
             if (provider == null)
             {
                 throw new ArgumentNullException(nameof(provider));

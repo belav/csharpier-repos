@@ -35,7 +35,8 @@ namespace System.Security.Cryptography.X509Certificates
         public static X509SignatureGenerator CreateForRSA(
             RSA key,
             RSASignaturePadding signaturePadding
-        ) {
+        )
+        {
             if (key == null)
                 throw new ArgumentNullException(nameof(key));
             if (signaturePadding == null)

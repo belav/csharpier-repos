@@ -14,7 +14,8 @@ namespace Microsoft.AspNetCore.Mvc.RazorPages.Infrastructure
     {
         public static PageHandlerExecutorDelegate CreateExecutor(
             HandlerMethodDescriptor handlerDescriptor
-        ) {
+        )
+        {
             if (handlerDescriptor == null)
             {
                 throw new ArgumentNullException(nameof(handlerDescriptor));
@@ -52,7 +53,8 @@ namespace Microsoft.AspNetCore.Mvc.RazorPages.Infrastructure
                 if (
                     taskType != null
                     && typeof(IActionResult).IsAssignableFrom(taskType.GenericTypeArguments[0])
-                ) {
+                )
+                {
                     return new GenericTaskHandlerMethod(parameters, method);
                 }
             }
@@ -67,7 +69,8 @@ namespace Microsoft.AspNetCore.Mvc.RazorPages.Infrastructure
             protected static Expression[] Unpack(
                 Expression arguments,
                 HandlerParameterDescriptor[] parameters
-            ) {
+            )
+            {
                 var unpackExpressions = new Expression[parameters.Length];
                 for (var i = 0; i < parameters.Length; i++)
                 {
@@ -174,10 +177,8 @@ namespace Microsoft.AspNetCore.Mvc.RazorPages.Infrastructure
         {
             private readonly Action<object, object[]> _thunk;
 
-            public VoidHandlerMethod(
-                HandlerParameterDescriptor[] parameters,
-                MethodInfo method
-            ) : base(parameters)
+            public VoidHandlerMethod(HandlerParameterDescriptor[] parameters, MethodInfo method)
+                : base(parameters)
             {
                 var receiver = Expression.Parameter(typeof(object), "receiver");
                 var arguments = Expression.Parameter(typeof(object[]), "arguments");

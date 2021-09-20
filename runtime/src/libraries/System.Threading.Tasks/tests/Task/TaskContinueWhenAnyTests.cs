@@ -287,7 +287,8 @@ namespace System.Threading.Tasks.Tests
                                         else if (
                                             ((AggregateException)ex).InnerException.GetType()
                                             != typeof(TaskCanceledException)
-                                        ) {
+                                        )
+                                        {
                                             ex = ((AggregateException)ex).InnerException;
                                             Assert.True(
                                                 false,
@@ -353,7 +354,8 @@ namespace System.Threading.Tasks.Tests
             Task[] antecedents,
             bool FutureFactory,
             bool continuationIsFuture
-        ) {
+        )
+        {
             bool antecedentsAreFutures = (antecedents as Task<int>[]) != null;
 
             Debug.WriteLine(

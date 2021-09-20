@@ -235,7 +235,8 @@ namespace System
             NumberStyles style,
             IFormatProvider? provider,
             out UIntPtr result
-        ) {
+        )
+        {
             Unsafe.SkipInit(out result);
             return nuint_t.TryParse(
                 s,
@@ -256,7 +257,8 @@ namespace System
             NumberStyles style,
             IFormatProvider? provider,
             out UIntPtr result
-        ) {
+        )
+        {
             Unsafe.SkipInit(out result);
             return nuint_t.TryParse(
                 s,

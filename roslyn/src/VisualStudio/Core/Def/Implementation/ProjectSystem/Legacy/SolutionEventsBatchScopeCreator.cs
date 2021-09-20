@@ -126,7 +126,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.ProjectSystem.L
                 ErrorHandler.Succeeded(
                     solution.AdviseSolutionEvents(new SolutionEventsEventSink(this), out _)
                 )
-            ) {
+            )
+            {
                 _isSubscribedToSolutionEvents = true;
             }
 
@@ -142,7 +143,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.ProjectSystem.L
                         out var fullyLoadedContextCookie
                     )
                 )
-            ) {
+            )
+            {
                 if (
                     ErrorHandler.Succeeded(
                         shellMonitorSelection.IsCmdUIContextActive(
@@ -151,7 +153,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.ProjectSystem.L
                         )
                     )
                     && fActive != 0
-                ) {
+                )
+                {
                     _solutionLoaded = true;
                 }
             }
@@ -177,7 +180,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.ProjectSystem.L
                         out var runningDocumentTableEventsCookie
                     )
                 )
-            ) {
+            )
+            {
                 _runningDocumentTableEventsCookie = runningDocumentTableEventsCookie;
             }
         }
@@ -281,7 +285,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.ProjectSystem.L
 
             int IVsSolutionLoadEvents.OnQueryBackgroundLoadProjectBatch(
                 out bool pfShouldDelayLoadToNextIdle
-            ) {
+            )
+            {
                 pfShouldDelayLoadToNextIdle = false;
                 return VSConstants.E_NOTIMPL;
             }
@@ -302,7 +307,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.ProjectSystem.L
             public RunningDocumentTableEventSink(
                 SolutionEventsBatchScopeCreator scopeCreator,
                 IVsRunningDocumentTable runningDocumentTable
-            ) {
+            )
+            {
                 _scopeCreator = scopeCreator;
                 _runningDocumentTable = (IVsRunningDocumentTable4)runningDocumentTable;
             }
@@ -312,7 +318,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.ProjectSystem.L
                 uint dwRDTLockType,
                 uint dwReadLocksRemaining,
                 uint dwEditLocksRemaining
-            ) {
+            )
+            {
                 _runningDocumentTable.GetDocumentHierarchyItem(docCookie, out var hierarchy, out _);
 
                 // Some document is being opened in this project; we need to ensure the project is fully updated so any requests

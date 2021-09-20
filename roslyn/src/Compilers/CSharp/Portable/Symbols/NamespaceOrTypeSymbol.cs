@@ -187,7 +187,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             int arity,
             SyntaxKind kind,
             CSharpSyntaxNode syntax
-        ) {
+        )
+        {
             TypeKind typeKind = kind.ToDeclarationKind().ToTypeKind();
 
             foreach (var member in GetTypeMembers(name, arity))
@@ -203,7 +204,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                                 loc.IsInSource
                                 && loc.SourceTree == syntax.SyntaxTree
                                 && syntax.Span.Contains(loc.SourceSpan)
-                            ) {
+                            )
+                            {
                                 return memberT;
                             }
                         }
@@ -264,7 +266,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                 if (
                     emittedTypeName.ForcedArity == -1
                     || emittedTypeName.ForcedArity == emittedTypeName.InferredArity
-                ) {
+                )
+                {
                     // Let's handle mangling case first.
                     namespaceOrTypeMembers = scope.GetTypeMembers(
                         emittedTypeName.UnmangledTypeName
@@ -368,7 +371,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
         /// </remarks>
         internal IEnumerable<NamespaceOrTypeSymbol>? GetNamespaceOrTypeByQualifiedName(
             IEnumerable<string> qualifiedName
-        ) {
+        )
+        {
             NamespaceOrTypeSymbol namespaceOrType = this;
             IEnumerable<NamespaceOrTypeSymbol>? symbols = null;
             foreach (string name in qualifiedName)

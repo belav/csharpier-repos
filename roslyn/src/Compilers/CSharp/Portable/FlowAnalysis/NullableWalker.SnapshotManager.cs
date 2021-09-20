@@ -43,7 +43,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                 ImmutableArray<SharedWalkerState> walkerSharedStates,
                 ImmutableArray<(int position, Snapshot snapshot)> incrementalSnapshots,
                 ImmutableDictionary<(BoundNode?, Symbol), Symbol> updatedSymbolsMap
-            ) {
+            )
+            {
                 _walkerSharedStates = walkerSharedStates;
                 _incrementalSnapshots = incrementalSnapshots;
                 _updatedSymbolsMap = updatedSymbolsMap;
@@ -92,7 +93,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                 BoundNode node,
                 Symbol symbol,
                 [NotNullWhen(true)] out Symbol? updatedSymbol
-            ) {
+            )
+            {
                 return _updatedSymbolsMap.TryGetValue((node, symbol), out updatedSymbol);
             }
 
@@ -283,7 +285,8 @@ Now {updatedSymbol.ToDisplayString(SymbolDisplayFormat.FullyQualifiedFormat)}"
                     BoundNode node,
                     Symbol originalSymbol,
                     Symbol updatedSymbol
-                ) {
+                )
+                {
 #if DEBUG
                     Debug.Assert(AreCloseEnough(originalSymbol, updatedSymbol));
 #endif

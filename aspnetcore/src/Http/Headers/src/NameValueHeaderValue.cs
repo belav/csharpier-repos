@@ -218,7 +218,8 @@ namespace Microsoft.Net.Http.Headers
         public static bool TryParse(
             StringSegment input,
             [NotNullWhen(true)] out NameValueHeaderValue? parsedValue
-        ) {
+        )
+        {
             var index = 0;
             return SingleValueParser.TryParseValue(input, ref index, out parsedValue!);
         }
@@ -252,7 +253,8 @@ namespace Microsoft.Net.Http.Headers
         public static bool TryParseList(
             IList<string>? input,
             [NotNullWhen(true)] out IList<NameValueHeaderValue>? parsedValues
-        ) {
+        )
+        {
             return MultipleValueParser.TryParseValues(input, out parsedValues);
         }
 
@@ -265,7 +267,8 @@ namespace Microsoft.Net.Http.Headers
         public static bool TryParseStrictList(
             IList<string>? input,
             [NotNullWhen(true)] out IList<NameValueHeaderValue>? parsedValues
-        ) {
+        )
+        {
             return MultipleValueParser.TryParseStrictValues(input, out parsedValues);
         }
 
@@ -284,7 +287,8 @@ namespace Microsoft.Net.Http.Headers
             char separator,
             bool leadingSeparator,
             StringBuilder destination
-        ) {
+        )
+        {
             Contract.Assert(destination != null);
 
             if ((values == null) || (values.Count == 0))
@@ -312,7 +316,8 @@ namespace Microsoft.Net.Http.Headers
             IList<NameValueHeaderValue>? values,
             char separator,
             bool leadingSeparator
-        ) {
+        )
+        {
             if ((values == null) || (values.Count == 0))
             {
                 return null;
@@ -344,7 +349,8 @@ namespace Microsoft.Net.Http.Headers
             StringSegment input,
             int startIndex,
             out NameValueHeaderValue? parsedValue
-        ) {
+        )
+        {
             Contract.Requires(startIndex >= 0);
 
             parsedValue = null;
@@ -400,7 +406,8 @@ namespace Microsoft.Net.Http.Headers
             int startIndex,
             char delimiter,
             IList<NameValueHeaderValue> nameValueCollection
-        ) {
+        )
+        {
             Contract.Requires(startIndex >= 0);
 
             if ((StringSegment.IsNullOrEmpty(input)) || (startIndex >= input.Length))
@@ -444,7 +451,8 @@ namespace Microsoft.Net.Http.Headers
         public static NameValueHeaderValue? Find(
             IList<NameValueHeaderValue>? values,
             StringSegment name
-        ) {
+        )
+        {
             Contract.Requires(name.Length > 0);
 
             if ((values == null) || (values.Count == 0))
@@ -478,7 +486,8 @@ namespace Microsoft.Net.Http.Headers
                 if (
                     HttpRuleParser.GetQuotedStringLength(input, startIndex, out valueLength)
                     != HttpParseResult.Parsed
-                ) {
+                )
+                {
                     // We have an invalid value. Reset the name and return.
                     return 0;
                 }

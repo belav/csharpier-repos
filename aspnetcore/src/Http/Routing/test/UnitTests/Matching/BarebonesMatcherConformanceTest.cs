@@ -38,7 +38,8 @@ namespace Microsoft.AspNetCore.Routing.Matching
             string path,
             string[] keys,
             string[] values
-        ) {
+        )
+        {
             GC.KeepAlive(new object[] { template, path, keys, values });
             return Task.CompletedTask;
         }

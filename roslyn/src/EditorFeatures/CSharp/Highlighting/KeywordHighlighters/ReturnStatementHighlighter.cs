@@ -29,7 +29,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.KeywordHighlighting.KeywordHighli
             ReturnStatementSyntax returnStatement,
             List<TextSpan> spans,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var parent = returnStatement.GetAncestorsOrThis<SyntaxNode>()
                 .FirstOrDefault(n => n.IsReturnableConstruct());
 

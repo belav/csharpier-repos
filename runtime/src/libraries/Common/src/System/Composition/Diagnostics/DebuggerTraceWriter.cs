@@ -31,7 +31,8 @@ namespace System.Composition.Diagnostics
             CompositionTraceId traceId,
             string format,
             params object[] arguments
-        ) {
+        )
+        {
             WriteEvent(TraceEventType.Information, traceId, format, arguments);
         }
 
@@ -39,7 +40,8 @@ namespace System.Composition.Diagnostics
             CompositionTraceId traceId,
             string format,
             params object[] arguments
-        ) {
+        )
+        {
             WriteEvent(TraceEventType.Warning, traceId, format, arguments);
         }
 
@@ -47,7 +49,8 @@ namespace System.Composition.Diagnostics
             CompositionTraceId traceId,
             string format,
             params object[] arguments
-        ) {
+        )
+        {
             WriteEvent(TraceEventType.Error, traceId, format, arguments);
         }
 
@@ -56,7 +59,8 @@ namespace System.Composition.Diagnostics
             CompositionTraceId traceId,
             string format,
             params object[] arguments
-        ) {
+        )
+        {
             if (!Debugger.IsLogging())
             {
                 return;
@@ -71,7 +75,8 @@ namespace System.Composition.Diagnostics
             CompositionTraceId traceId,
             string format,
             params object[] arguments
-        ) {
+        )
+        {
             StringBuilder messageBuilder = new StringBuilder();
 
             // Format taken from TraceListener.TraceEvent in .NET Framework

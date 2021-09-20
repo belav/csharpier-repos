@@ -104,7 +104,8 @@ namespace System.Net
         private static SafeSslHandle CreateSslContext(
             SafeFreeSslCredentials credential,
             bool isServer
-        ) {
+        )
+        {
             switch (credential.Policy)
             {
                 case EncryptionPolicy.RequireEncryption:
@@ -297,7 +298,8 @@ namespace System.Net
         private static void SetCertificate(
             SafeSslHandle sslContext,
             SslStreamCertificateContext context
-        ) {
+        )
+        {
             Debug.Assert(sslContext != null, "sslContext != null");
 
             IntPtr[] ptrs = new IntPtr[context!.IntermediateCertificates!.Length + 1];

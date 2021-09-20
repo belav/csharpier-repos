@@ -46,7 +46,8 @@ namespace System.Diagnostics.Eventing.Reader
             EventLogQuery eventQuery,
             EventBookmark bookmark,
             bool readExistingEvents
-        ) {
+        )
+        {
             if (eventQuery == null)
             {
                 throw new ArgumentNullException(nameof(eventQuery));

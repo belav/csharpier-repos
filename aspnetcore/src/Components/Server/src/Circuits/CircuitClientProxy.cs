@@ -42,7 +42,8 @@ namespace Microsoft.AspNetCore.Components.Server.Circuits
             string method,
             object[] args,
             CancellationToken cancellationToken = default
-        ) {
+        )
+        {
             if (Client == null)
             {
                 throw new InvalidOperationException(

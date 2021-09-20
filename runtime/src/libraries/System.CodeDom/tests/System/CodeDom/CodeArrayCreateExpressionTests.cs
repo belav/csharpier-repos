@@ -179,7 +179,8 @@ namespace System.CodeDom.Tests
                     null,
                     new CodePrimitiveExpression("Value")
                 }
-            ) {
+            )
+            {
                 var arrayCreate = new CodeArrayCreateExpression(type, sizeExpression);
                 Assert.Equal(expectedBaseType, arrayCreate.CreateType.BaseType);
                 Assert.Empty(arrayCreate.Initializers);
@@ -198,7 +199,8 @@ namespace System.CodeDom.Tests
                     null,
                     new CodePrimitiveExpression("Value")
                 }
-            ) {
+            )
+            {
                 var arrayCreate = new CodeArrayCreateExpression(type, sizeExpression);
                 Assert.Equal(expectedBaseType, arrayCreate.CreateType.BaseType);
                 Assert.Empty(arrayCreate.Initializers);
@@ -217,7 +219,8 @@ namespace System.CodeDom.Tests
                     null,
                     new CodePrimitiveExpression("Value")
                 }
-            ) {
+            )
+            {
                 var arrayCreate = new CodeArrayCreateExpression(type, sizeExpression);
                 Assert.Equal(
                     (type ?? new CodeTypeReference("")).BaseType,

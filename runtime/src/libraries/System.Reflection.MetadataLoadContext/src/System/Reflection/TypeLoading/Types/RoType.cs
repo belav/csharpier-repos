@@ -385,7 +385,8 @@ namespace System.Reflection.TypeLoading
             CallingConventions callConvention,
             Type[]? types,
             ParameterModifier[]? modifiers
-        ) {
+        )
+        {
             return GetMethodImpl(name, bindingAttr, binder, callConvention, types, modifiers);
         }
 

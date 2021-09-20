@@ -252,7 +252,8 @@ namespace System.IO.Pipelines
         /// <inheritdoc />
         public override ValueTask<FlushResult> FlushAsync(
             CancellationToken cancellationToken = default
-        ) {
+        )
+        {
             if (_bytesBuffered == 0)
             {
                 return new ValueTask<FlushResult>(
@@ -270,7 +271,8 @@ namespace System.IO.Pipelines
         public override ValueTask<FlushResult> WriteAsync(
             ReadOnlyMemory<byte> source,
             CancellationToken cancellationToken = default
-        ) {
+        )
+        {
             return FlushAsyncInternal(writeToStream: true, data: source, cancellationToken);
         }
 
@@ -283,7 +285,8 @@ namespace System.IO.Pipelines
             bool writeToStream,
             ReadOnlyMemory<byte> data,
             CancellationToken cancellationToken = default
-        ) {
+        )
+        {
             // Write all completed segments and whatever remains in the current segment
             // and flush the result.
             CancellationTokenRegistration reg = default;
@@ -362,7 +365,8 @@ namespace System.IO.Pipelines
                     if (
                         localToken.IsCancellationRequested
                         && !cancellationToken.IsCancellationRequested
-                    ) {
+                    )
+                    {
                         // Catch cancellation and translate it into setting isCanceled = true
                         return new FlushResult(isCanceled: true, isCompleted: false);
                     }

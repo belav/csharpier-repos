@@ -44,7 +44,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Formatting
             in SyntaxToken previousToken,
             in SyntaxToken currentToken,
             in NextGetAdjustNewLinesOperation nextOperation
-        ) {
+        )
+        {
             ////////////////////////////////////////////////////
             // brace related operations
             // * { or * }
@@ -75,7 +76,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Formatting
             if (
                 previousToken.Kind() == SyntaxKind.CloseBraceToken
                 && currentToken.Kind() == SyntaxKind.WhileKeyword
-            ) {
+            )
+            {
                 return CreateAdjustNewLinesOperation(0, AdjustNewLinesOption.PreserveLines);
             }
 
@@ -158,7 +160,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Formatting
             if (
                 previousToken.Kind() == SyntaxKind.ElseKeyword
                 && currentToken.Kind() != SyntaxKind.IfKeyword
-            ) {
+            )
+            {
                 return CreateAdjustNewLinesOperation(1, AdjustNewLinesOption.PreserveLines);
             }
 
@@ -178,14 +181,16 @@ namespace Microsoft.CodeAnalysis.CSharp.Formatting
             if (
                 previousToken.Kind() == SyntaxKind.CloseParenToken
                 && previousToken.Parent.IsEmbeddedStatementOwnerWithCloseParen()
-            ) {
+            )
+            {
                 return CreateAdjustNewLinesOperation(1, AdjustNewLinesOption.PreserveLines);
             }
 
             if (
                 previousToken.Kind() == SyntaxKind.DoKeyword
                 && previousToken.Parent.IsKind(SyntaxKind.DoStatement)
-            ) {
+            )
+            {
                 return CreateAdjustNewLinesOperation(1, AdjustNewLinesOption.PreserveLines);
             }
 
@@ -203,7 +208,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Formatting
                     || currentToken.Kind() == SyntaxKind.DefaultKeyword
                     || currentToken.Kind() == SyntaxKind.ElseKeyword
                 )
-            ) {
+            )
+            {
                 return CreateAdjustNewLinesOperation(1, AdjustNewLinesOption.PreserveLines);
             }
 
@@ -218,14 +224,16 @@ namespace Microsoft.CodeAnalysis.CSharp.Formatting
             if (
                 previousToken.Kind() == SyntaxKind.CloseBracketToken
                 && previousToken.Parent is AttributeListSyntax
-            ) {
+            )
+            {
                 var attributeOwner = previousToken.Parent?.Parent;
 
                 if (
                     attributeOwner is CompilationUnitSyntax
                     || attributeOwner is MemberDeclarationSyntax
                     || attributeOwner is AccessorDeclarationSyntax
-                ) {
+                )
+                {
                     return CreateAdjustNewLinesOperation(1, AdjustNewLinesOption.PreserveLines);
                 }
 
@@ -238,7 +246,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Formatting
         private AdjustNewLinesOperation AdjustNewLinesAfterSemicolonToken(
             SyntaxToken previousToken,
             SyntaxToken currentToken
-        ) {
+        )
+        {
             // between anything that isn't a using directive, we don't touch newlines after a semicolon
             if (!(previousToken.Parent is UsingDirectiveSyntax previousUsing))
                 return CreateAdjustNewLinesOperation(0, AdjustNewLinesOption.PreserveLines);
@@ -250,14 +259,16 @@ namespace Microsoft.CodeAnalysis.CSharp.Formatting
                 _options.SeparateImportDirectiveGroups
                 && currentToken.Parent is UsingDirectiveSyntax currentUsing
                 && UsingsAndExternAliasesOrganizer.NeedsGrouping(previousUsing, currentUsing)
-            ) {
+            )
+            {
                 RoslynDebug.AssertNotNull(currentUsing.Parent);
 
                 var usings = GetUsings(currentUsing.Parent);
                 if (
                     usings.IsSorted(UsingsAndExternAliasesDirectiveComparer.SystemFirstInstance)
                     || usings.IsSorted(UsingsAndExternAliasesDirectiveComparer.NormalInstance)
-                ) {
+                )
+                {
                     // Force at least one blank line here.
                     return CreateAdjustNewLinesOperation(2, AdjustNewLinesOption.PreserveLines);
                 }
@@ -280,7 +291,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Formatting
             in SyntaxToken previousToken,
             in SyntaxToken currentToken,
             in NextGetAdjustSpacesOperation nextOperation
-        ) {
+        )
+        {
             //////////////////////////////////////////////////////
             // ";" related operations
             if (currentToken.Kind() == SyntaxKind.SemicolonToken)
@@ -298,7 +310,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Formatting
                 if (
                     previousToken.Kind() == SyntaxKind.CloseParenToken
                     && previousToken.Parent.IsEmbeddedStatementOwnerWithCloseParen()
-                ) {
+                )
+                {
                     return CreateAdjustSpacesOperation(
                         1,
                         AdjustSpacesOption.ForceSpacesIfOnSingleLine
@@ -315,7 +328,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Formatting
                 || previousToken.Kind() == SyntaxKind.OmittedTypeArgumentToken
                 || currentToken.Kind() == SyntaxKind.OmittedArraySizeExpressionToken
                 || currentToken.Kind() == SyntaxKind.OmittedTypeArgumentToken
-            ) {
+            )
+            {
                 return CreateAdjustSpacesOperation(0, AdjustSpacesOption.ForceSpacesIfOnSingleLine);
             }
 
@@ -323,7 +337,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Formatting
                 previousToken.IsKind(SyntaxKind.CloseBracketToken)
                 && previousToken.Parent.IsKind(SyntaxKind.AttributeList)
                 && previousToken.Parent.IsParentKind(SyntaxKind.Parameter)
-            ) {
+            )
+            {
                 if (currentToken.IsKind(SyntaxKind.OpenBracketToken))
                 {
                     // multiple attribute on parameter stick together
@@ -349,7 +364,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Formatting
             if (
                 currentToken.Kind() == SyntaxKind.OpenParenToken
                 && previousToken.Kind() == SyntaxKind.ThisKeyword
-            ) {
+            )
+            {
                 return CreateAdjustSpacesOperation(1, AdjustSpacesOption.ForceSpacesIfOnSingleLine);
             }
 
@@ -361,7 +377,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Formatting
                     SyntaxKind.ObjectCreationExpression,
                     SyntaxKind.ArrayCreationExpression
                 )
-            ) {
+            )
+            {
                 return CreateAdjustSpacesOperation(1, AdjustSpacesOption.ForceSpacesIfOnSingleLine);
             }
 
@@ -376,7 +393,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Formatting
                     || previousToken.Kind() == SyntaxKind.NewKeyword
                     || previousToken.IsGenericGreaterThanToken()
                     || currentToken.IsParenInArgumentList()
-                ) {
+                )
+                {
                     return CreateAdjustSpacesOperation(
                         0,
                         AdjustSpacesOption.ForceSpacesIfOnSingleLine
@@ -396,7 +414,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Formatting
                 previousToken.Kind() == SyntaxKind.CommaToken
                 && currentToken.Kind() == SyntaxKind.OpenBracketToken
                 && currentToken.Parent is AttributeListSyntax
-            ) {
+            )
+            {
                 return CreateAdjustSpacesOperation(1, AdjustSpacesOption.ForceSpacesIfOnSingleLine);
             }
 
@@ -404,7 +423,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Formatting
             if (
                 previousToken.Kind() == SyntaxKind.CloseBracketToken
                 && previousToken.Parent is AttributeListSyntax
-            ) {
+            )
+            {
                 // preserving dev10 behavior, in dev10 we didn't touch space after attribute
                 return CreateAdjustSpacesOperation(0, AdjustSpacesOption.PreserveSpaces);
             }
@@ -431,11 +451,13 @@ namespace Microsoft.CodeAnalysis.CSharp.Formatting
             if (
                 currentToken.IsKind(SyntaxKind.OpenBracketToken)
                 && !previousToken.IsOpenBraceOrCommaOfObjectInitializer()
-            ) {
+            )
+            {
                 if (
                     previousToken.IsOpenBraceOfAccessorList()
                     || previousToken.IsLastTokenOfNode<AccessorDeclarationSyntax>()
-                ) {
+                )
+                {
                     return CreateAdjustSpacesOperation(
                         1,
                         AdjustSpacesOption.ForceSpacesIfOnSingleLine
@@ -465,7 +487,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Formatting
                         SyntaxKind.NameColon,
                         SyntaxKind.SwitchExpressionArm
                     )
-                ) {
+                )
+                {
                     return CreateAdjustSpacesOperation(
                         0,
                         AdjustSpacesOption.ForceSpacesIfOnSingleLine
@@ -477,7 +500,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Formatting
             if (
                 previousToken.Parent is CastExpressionSyntax
                 && previousToken.Kind() == SyntaxKind.CloseParenToken
-            ) {
+            )
+            {
                 return CreateAdjustSpacesOperation(0, AdjustSpacesOption.ForceSpacesIfOnSingleLine);
             }
 
@@ -488,7 +512,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Formatting
                     SyntaxKind.TypeParameterList,
                     SyntaxKind.FunctionPointerType
                 )
-            ) {
+            )
+            {
                 // generic name < *
                 if (previousToken.Kind() == SyntaxKind.LessThanToken)
                 {
@@ -502,7 +527,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Formatting
                 if (
                     previousToken.Kind() == SyntaxKind.GreaterThanToken
                     && currentToken.Kind() == SyntaxKind.GreaterThanToken
-                ) {
+                )
+                {
                     return CreateAdjustSpacesOperation(
                         0,
                         AdjustSpacesOption.ForceSpacesIfOnSingleLine
@@ -520,7 +546,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Formatting
                     SyntaxKind.TypeArgumentList,
                     SyntaxKind.TypeParameterList
                 )
-            ) {
+            )
+            {
                 return CreateAdjustSpacesOperation(0, AdjustSpacesOption.ForceSpacesIfOnSingleLine);
             }
 
@@ -531,7 +558,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Formatting
                     || previousToken.Kind() == SyntaxKind.MinusMinusToken
                 )
                 && previousToken.Parent is PrefixUnaryExpressionSyntax
-            ) {
+            )
+            {
                 return CreateAdjustSpacesOperation(0, AdjustSpacesOption.ForceSpacesIfOnSingleLine);
             }
 
@@ -542,7 +570,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Formatting
                     || currentToken.Kind() == SyntaxKind.MinusMinusToken
                 )
                 && currentToken.Parent is PostfixUnaryExpressionSyntax
-            ) {
+            )
+            {
                 return CreateAdjustSpacesOperation(0, AdjustSpacesOption.ForceSpacesIfOnSingleLine);
             }
 
@@ -550,7 +579,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Formatting
             if (
                 currentToken.IsKind(SyntaxKind.QuestionToken)
                 && currentToken.Parent.IsKind(SyntaxKind.ConditionalAccessExpression)
-            ) {
+            )
+            {
                 return CreateAdjustSpacesOperation(0, AdjustSpacesOption.ForceSpacesIfOnSingleLine);
             }
 
@@ -558,7 +588,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Formatting
             if (
                 currentToken.Kind() == SyntaxKind.QuestionToken
                 && currentToken.Parent.IsKind(SyntaxKind.NullableType, SyntaxKind.ClassConstraint)
-            ) {
+            )
+            {
                 return CreateAdjustSpacesOperation(0, AdjustSpacesOption.ForceSpacesIfOnSingleLine);
             }
 
@@ -566,7 +597,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Formatting
             if (
                 currentToken.IsKind(SyntaxKind.QuestionToken)
                 && previousToken.Parent?.IsParentKind(SyntaxKind.ArrayType) == true
-            ) {
+            )
+            {
                 return CreateAdjustSpacesOperation(0, AdjustSpacesOption.ForceSpaces);
             }
 
@@ -574,7 +606,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Formatting
             if (
                 currentToken.Kind() == SyntaxKind.ExclamationToken
                 && currentToken.Parent.IsKind(SyntaxKind.SuppressNullableWarningExpression)
-            ) {
+            )
+            {
                 return CreateAdjustSpacesOperation(0, AdjustSpacesOption.ForceSpacesIfOnSingleLine);
             }
 
@@ -582,7 +615,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Formatting
             if (
                 currentToken.Kind() == SyntaxKind.AsteriskToken
                 && currentToken.Parent is PointerTypeSyntax
-            ) {
+            )
+            {
                 return CreateAdjustSpacesOperation(0, AdjustSpacesOption.ForceSpacesIfOnSingleLine);
             }
 
@@ -590,7 +624,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Formatting
             if (
                 previousToken.Kind() == SyntaxKind.AsteriskToken
                 && previousToken.Parent is PrefixUnaryExpressionSyntax
-            ) {
+            )
+            {
                 return CreateAdjustSpacesOperation(0, AdjustSpacesOption.ForceSpacesIfOnSingleLine);
             }
 
@@ -626,7 +661,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Formatting
                 previousToken.IsPlusOrMinusExpression()
                 && currentToken.IsPlusOrMinusExpression()
                 && previousToken.Kind() != currentToken.Kind()
-            ) {
+            )
+            {
                 return CreateAdjustSpacesOperation(0, AdjustSpacesOption.ForceSpacesIfOnSingleLine);
             }
 
@@ -634,7 +670,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Formatting
             if (
                 previousToken.Kind() == SyntaxKind.ExclamationToken
                 && !previousToken.Parent.IsKind(SyntaxKind.SuppressNullableWarningExpression)
-            ) {
+            )
+            {
                 return CreateAdjustSpacesOperation(0, AdjustSpacesOption.ForceSpacesIfOnSingleLine);
             }
 
@@ -645,7 +682,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Formatting
                     previousToken.Parent is PrefixUnaryExpressionSyntax
                     || previousToken.Parent is DestructorDeclarationSyntax
                 )
-            ) {
+            )
+            {
                 return CreateAdjustSpacesOperation(0, AdjustSpacesOption.ForceSpacesIfOnSingleLine);
             }
 
@@ -653,7 +691,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Formatting
             if (
                 previousToken.Kind() == SyntaxKind.AmpersandToken
                 && previousToken.Parent is PrefixUnaryExpressionSyntax
-            ) {
+            )
+            {
                 return CreateAdjustSpacesOperation(0, AdjustSpacesOption.ForceSpacesIfOnSingleLine);
             }
 
@@ -661,7 +700,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Formatting
             if (
                 previousToken.Kind() == SyntaxKind.ColonColonToken
                 || currentToken.Kind() == SyntaxKind.ColonColonToken
-            ) {
+            )
+            {
                 return CreateAdjustSpacesOperation(0, AdjustSpacesOption.ForceSpacesIfOnSingleLine);
             }
 
@@ -689,7 +729,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Formatting
             private static T GetOptionOrDefault<T>(
                 AnalyzerConfigOptions? options,
                 PerLanguageOption2<T> option
-            ) {
+            )
+            {
                 if (options is null)
                     return option.DefaultValue;
 

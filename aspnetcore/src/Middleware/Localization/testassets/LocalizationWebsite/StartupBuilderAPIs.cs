@@ -22,7 +22,8 @@ namespace LocalizationWebsite
             IApplicationBuilder app,
             ILoggerFactory loggerFactory,
             IStringLocalizer<Customer> customerStringLocalizer
-        ) {
+        )
+        {
             var supportedCultures = new[] { "en-US", "fr-FR" };
             app.UseRequestLocalization(
                 options =>

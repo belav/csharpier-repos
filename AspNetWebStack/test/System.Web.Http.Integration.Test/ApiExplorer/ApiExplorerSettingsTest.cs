@@ -26,7 +26,8 @@ namespace System.Web.Http.ApiExplorer
         public void HiddenController_DoesNotShowUpOnDescription(
             Type controllerType,
             List<object> expectedResults
-        ) {
+        )
+        {
             HttpConfiguration config = new HttpConfiguration();
             config.Routes.MapHttpRoute(
                 "Default",
@@ -67,7 +68,8 @@ namespace System.Web.Http.ApiExplorer
         public void HiddenAction_DoesNotShowUpOnDescription(
             Type controllerType,
             List<object> expectedResults
-        ) {
+        )
+        {
             HttpConfiguration config = new HttpConfiguration();
             config.Routes.MapHttpRoute(
                 "Default",

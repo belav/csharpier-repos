@@ -16,7 +16,8 @@ namespace System.Text.Json
             Span<byte> buffer,
             DateTime value,
             out int bytesWritten
-        ) {
+        )
+        {
             Span<byte> tempSpan = stackalloc byte[JsonConstants.MaximumFormatDateTimeOffsetLength];
             bool result = Utf8Formatter.TryFormat(
                 value,
@@ -33,7 +34,8 @@ namespace System.Text.Json
             Span<byte> buffer,
             DateTimeOffset value,
             out int bytesWritten
-        ) {
+        )
+        {
             Span<byte> tempSpan = stackalloc byte[JsonConstants.MaximumFormatDateTimeOffsetLength];
             bool result = Utf8Formatter.TryFormat(
                 value,

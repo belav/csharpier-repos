@@ -22,7 +22,8 @@ namespace Microsoft.CodeAnalysis.Completion
             protected override bool SupportsLanguage(
                 ExportCompletionProviderAttribute exportAttribute,
                 string language
-            ) {
+            )
+            {
                 return exportAttribute.Language == null
                     || exportAttribute.Language.Length == 0
                     || exportAttribute.Language.Contains(language);
@@ -31,7 +32,8 @@ namespace Microsoft.CodeAnalysis.Completion
             protected override bool TryGetExtensionsFromReference(
                 AnalyzerReference reference,
                 out ImmutableArray<CompletionProvider> extensions
-            ) {
+            )
+            {
                 // check whether the analyzer reference knows how to return completion providers directly.
                 if (reference is ICompletionProviderFactory completionProviderFactory)
                 {

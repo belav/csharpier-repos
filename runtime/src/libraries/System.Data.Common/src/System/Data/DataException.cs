@@ -62,10 +62,8 @@ namespace System.Data
     )]
     public class DeletedRowInaccessibleException : DataException
     {
-        protected DeletedRowInaccessibleException(
-            SerializationInfo info,
-            StreamingContext context
-        ) : base(info, context) { }
+        protected DeletedRowInaccessibleException(SerializationInfo info, StreamingContext context)
+            : base(info, context) { }
 
         /// <summary>
         /// Initializes a new instance of the <see cref='System.Data.DeletedRowInaccessibleException'/> class.
@@ -123,10 +121,8 @@ namespace System.Data
     )]
     public class InRowChangingEventException : DataException
     {
-        protected InRowChangingEventException(
-            SerializationInfo info,
-            StreamingContext context
-        ) : base(info, context) { }
+        protected InRowChangingEventException(SerializationInfo info, StreamingContext context)
+            : base(info, context) { }
 
         public InRowChangingEventException() : base(SR.DataSet_DefaultInRowChangingEventException)
         {
@@ -151,10 +147,8 @@ namespace System.Data
     )]
     public class InvalidConstraintException : DataException
     {
-        protected InvalidConstraintException(
-            SerializationInfo info,
-            StreamingContext context
-        ) : base(info, context) { }
+        protected InvalidConstraintException(SerializationInfo info, StreamingContext context)
+            : base(info, context) { }
 
         public InvalidConstraintException() : base(SR.DataSet_DefaultInvalidConstraintException)
         {
@@ -179,10 +173,8 @@ namespace System.Data
     )]
     public class MissingPrimaryKeyException : DataException
     {
-        protected MissingPrimaryKeyException(
-            SerializationInfo info,
-            StreamingContext context
-        ) : base(info, context) { }
+        protected MissingPrimaryKeyException(SerializationInfo info, StreamingContext context)
+            : base(info, context) { }
 
         public MissingPrimaryKeyException() : base(SR.DataSet_DefaultMissingPrimaryKeyException)
         {

@@ -20,7 +20,8 @@ namespace Microsoft.AspNetCore.Mvc.Razor.Extensions.Version2_X.IntegrationTests
             : base(
                 generateBaselines: null,
                 projectDirectoryHint: "Microsoft.AspNetCore.Mvc.Razor.Extensions.Version2_X"
-            ) {
+            )
+        {
             Configuration = RazorConfiguration.Create(
                 RazorLanguageVersion.Version_2_0,
                 "MVC-2.1",
@@ -93,7 +94,8 @@ namespace Microsoft.AspNetCore.Mvc.Razor.Extensions.Version2_X.IntegrationTests
             string typeName,
             string assemblyName,
             IEnumerable<Action<BoundAttributeDescriptorBuilder>> attributes = null
-        ) {
+        )
+        {
             var builder = TagHelperDescriptorBuilder.Create(typeName, assemblyName);
             builder.TypeName(typeName);
 

@@ -39,7 +39,8 @@ namespace Microsoft.CodeAnalysis.FindSymbols
             Checksum? checksum,
             StringTable stringTable,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             try
             {
                 var persistentStorageService =
@@ -80,7 +81,8 @@ namespace Microsoft.CodeAnalysis.FindSymbols
         public static async Task<Checksum> GetChecksumAsync(
             Document document,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             // Since we build the SyntaxTreeIndex from a SyntaxTree, we need our checksum to change
             // any time the SyntaxTree could have changed.  Right now, that can only happen if the
             // text of the document changes, or the ParseOptions change.  So we get the checksums
@@ -147,7 +149,8 @@ namespace Microsoft.CodeAnalysis.FindSymbols
             Document document,
             Checksum checksum,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var solution = document.Project.Solution;
             var persistentStorageService =
                 (IChecksummedPersistentStorageService)solution.Workspace.Services.GetRequiredService<IPersistentStorageService>();
@@ -197,7 +200,8 @@ namespace Microsoft.CodeAnalysis.FindSymbols
             StringTable stringTable,
             ObjectReader reader,
             Checksum? checksum
-        ) {
+        )
+        {
             var literalInfo = LiteralInfo.TryReadFrom(reader);
             var identifierInfo = IdentifierInfo.TryReadFrom(reader);
             var contextInfo = ContextInfo.TryReadFrom(reader);
@@ -210,7 +214,8 @@ namespace Microsoft.CodeAnalysis.FindSymbols
                 || contextInfo == null
                 || declarationInfo == null
                 || extensionMethodInfo == null
-            ) {
+            )
+            {
                 return null;
             }
 

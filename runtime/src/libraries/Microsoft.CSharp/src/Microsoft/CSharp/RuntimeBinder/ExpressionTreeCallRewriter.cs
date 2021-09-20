@@ -323,7 +323,8 @@ namespace Microsoft.CSharp.RuntimeBinder
             if (
                 pm == PREDEFMETH.PM_EXPRESSION_CONVERT_USER_DEFINED
                 || pm == PREDEFMETH.PM_EXPRESSION_CONVERTCHECKED_USER_DEFINED
-            ) {
+            )
+            {
                 // If we have a user defined conversion, then we'll have the object
                 // as the first element, and another list as a second element. This list
                 // contains a TYPEOF as the first element, and the METHODINFO for the call

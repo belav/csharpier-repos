@@ -23,7 +23,8 @@ namespace System.Runtime.Serialization
             XmlSchemaSet schemas,
             XmlQualifiedName typeQName,
             out XmlSchema? outSchema
-        ) {
+        )
+        {
             outSchema = null;
             ICollection currentSchemas = schemas.Schemas();
             string ns = typeQName.Namespace;
@@ -49,7 +50,8 @@ namespace System.Runtime.Serialization
             XmlSchemaSet schemas,
             XmlQualifiedName elementQName,
             out XmlSchema? outSchema
-        ) {
+        )
+        {
             outSchema = null;
             ICollection currentSchemas = schemas.Schemas();
             string ns = elementQName.Namespace;
@@ -84,7 +86,8 @@ namespace System.Runtime.Serialization
                 if (
                     (schema.TargetNamespace == null && ns.Length == 0)
                     || ns.Equals(schema.TargetNamespace)
-                ) {
+                )
+                {
                     return schema;
                 }
             }

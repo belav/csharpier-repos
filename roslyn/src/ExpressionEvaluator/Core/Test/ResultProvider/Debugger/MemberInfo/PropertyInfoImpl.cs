@@ -133,7 +133,8 @@ namespace Microsoft.CodeAnalysis.ExpressionEvaluator
             Binder binder,
             object[] index,
             CultureInfo culture
-        ) {
+        )
+        {
             Debug.Assert(binder == null, "NYI");
             Debug.Assert(index == null, "NYI");
             Debug.Assert(culture == null, "NYI");
@@ -158,7 +159,8 @@ namespace Microsoft.CodeAnalysis.ExpressionEvaluator
             Binder binder,
             object[] index,
             CultureInfo culture
-        ) {
+        )
+        {
             throw new NotImplementedException();
         }
 

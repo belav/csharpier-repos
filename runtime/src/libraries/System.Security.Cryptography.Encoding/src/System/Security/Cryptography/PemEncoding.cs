@@ -133,7 +133,8 @@ namespace System.Security.Cryptography
                 // have at least one white space character after it.
                 if (
                     pemEndIndex < pemData.Length - 1 && !IsWhiteSpaceCharacter(pemData[pemEndIndex])
-                ) {
+                )
+                {
                     goto NextAfterLabel;
                 }
 
@@ -146,7 +147,8 @@ namespace System.Security.Cryptography
                         out int base64end,
                         out int decodedSize
                     )
-                ) {
+                )
+                {
                     goto NextAfterLabel;
                 }
 
@@ -188,7 +190,8 @@ namespace System.Security.Cryptography
             this ReadOnlySpan<char> str,
             ReadOnlySpan<char> value,
             int startPosition
-        ) {
+        )
+        {
             Debug.Assert(startPosition <= str.Length);
             int index = str.Slice(startPosition).IndexOf(value);
             return index == -1 ? -1 : index + startPosition;
@@ -244,7 +247,8 @@ namespace System.Security.Cryptography
             out int base64Start,
             out int base64End,
             out int base64DecodedSize
-        ) {
+        )
+        {
             base64Start = 0;
             base64End = str.Length;
 
@@ -450,7 +454,8 @@ namespace System.Security.Cryptography
             ReadOnlySpan<byte> data,
             Span<char> destination,
             out int charsWritten
-        ) {
+        )
+        {
             static int Write(ReadOnlySpan<char> str, Span<char> dest, int offset)
             {
                 str.CopyTo(dest.Slice(offset));

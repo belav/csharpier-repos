@@ -43,7 +43,8 @@ namespace Microsoft.EntityFrameworkCore.Query
             Expression innerShaper,
             INavigationBase? navigation,
             Type elementType
-        ) {
+        )
+        {
             Check.NotNull(parentIdentifier, nameof(parentIdentifier));
             Check.NotNull(childIdentifier, nameof(childIdentifier));
             Check.NotEmpty(identifierValueComparers, nameof(identifierValueComparers));
@@ -134,7 +135,8 @@ namespace Microsoft.EntityFrameworkCore.Query
             Expression childIdentifier,
             SelectExpression selectExpression,
             Expression innerShaper
-        ) {
+        )
+        {
             Check.NotNull(parentIdentifier, nameof(parentIdentifier));
             Check.NotNull(childIdentifier, nameof(childIdentifier));
             Check.NotNull(selectExpression, nameof(selectExpression));

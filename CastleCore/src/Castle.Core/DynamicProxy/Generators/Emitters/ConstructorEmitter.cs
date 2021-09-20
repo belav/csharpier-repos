@@ -29,7 +29,8 @@ namespace Castle.DynamicProxy.Generators.Emitters
         protected internal ConstructorEmitter(
             AbstractTypeEmitter maintype,
             ConstructorBuilder builder
-        ) {
+        )
+        {
             this.maintype = maintype;
             this.builder = builder;
             codeBuilder = new CodeBuilder();
@@ -38,7 +39,8 @@ namespace Castle.DynamicProxy.Generators.Emitters
         internal ConstructorEmitter(
             AbstractTypeEmitter maintype,
             params ArgumentReference[] arguments
-        ) {
+        )
+        {
             this.maintype = maintype;
 
             var args = ArgumentsUtil.InitializeAndConvert(arguments);

@@ -250,7 +250,8 @@ namespace Microsoft.AspNetCore.Mvc.ViewEngines
         [InlineData(true)]
         public void GetView_ReturnsNotFoundResult_WhenExactlyOneViewEngineIsRegisteredWhichReturnsNotFoundResult(
             bool isMainPage
-        ) {
+        )
+        {
             // Arrange
             var viewName = "test-view.cshtml";
             var expectedViewName = "~/" + viewName;
@@ -274,7 +275,8 @@ namespace Microsoft.AspNetCore.Mvc.ViewEngines
         [InlineData(true)]
         public void GetView_ReturnsView_WhenExactlyOneViewEngineIsRegisteredWhichReturnsAFoundResult(
             bool isMainPage
-        ) {
+        )
+        {
             // Arrange
             var viewName = "test-view.cshtml";
             var expectedViewName = "~/" + viewName;
@@ -575,7 +577,8 @@ namespace Microsoft.AspNetCore.Mvc.ViewEngines
                 ActionContext context,
                 string viewName,
                 bool isMainPage
-            ) {
+            )
+            {
                 throw new NotImplementedException();
             }
 
@@ -583,7 +586,8 @@ namespace Microsoft.AspNetCore.Mvc.ViewEngines
                 string executingFilePath,
                 string viewPath,
                 bool isMainPage
-            ) {
+            )
+            {
                 throw new NotImplementedException();
             }
         }

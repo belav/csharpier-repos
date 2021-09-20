@@ -82,7 +82,8 @@ namespace Microsoft.Web.Mvc.Resources
                     context.HttpContext.Response.OutputStream,
                     settings
                 )
-            ) {
+            )
+            {
                 this.Document.GetFormatter().WriteTo(writer);
                 writer.Flush();
             }

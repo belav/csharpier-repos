@@ -36,7 +36,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
         protected override IClrPropertyGetter CreateGeneric<TEntity, TValue, TNonNullableEnumValue>(
             MemberInfo memberInfo,
             IPropertyBase? propertyBase
-        ) {
+        )
+        {
             var entityParameter = Expression.Parameter(typeof(TEntity), "entity");
 
             Expression readExpression;

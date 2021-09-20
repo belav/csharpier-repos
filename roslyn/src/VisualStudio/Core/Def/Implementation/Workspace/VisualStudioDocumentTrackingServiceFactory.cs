@@ -38,7 +38,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation
             public VisualStudioDocumentTrackingService(
                 VisualStudioActiveDocumentTracker activeDocumentTracker,
                 Workspace workspace
-            ) {
+            )
+            {
                 _activeDocumentTracker = activeDocumentTracker;
                 _workspace = workspace;
             }

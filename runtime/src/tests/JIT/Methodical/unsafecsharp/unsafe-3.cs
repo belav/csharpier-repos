@@ -493,7 +493,8 @@ internal class TestApp
                 1,
                 1
             ) != 100
-        ) {
+        )
+        {
             Console.WriteLine("test_206() failed.");
             return 306;
         }

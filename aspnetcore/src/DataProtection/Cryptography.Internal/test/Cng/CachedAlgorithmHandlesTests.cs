@@ -133,7 +133,8 @@ namespace Microsoft.AspNetCore.Cryptography.Cng
             uint expectedBlockSizeInBytes,
             uint expectedDigestSizeInBytes,
             string expectedDigest
-        ) {
+        )
+        {
             // Getter must return the same instance of the cached handle
             var algorithmHandle = getter();
             var algorithmHandleSecondAttempt = getter();
@@ -169,7 +170,8 @@ namespace Microsoft.AspNetCore.Cryptography.Cng
             uint expectedBlockSizeInBytes,
             uint expectedDigestSizeInBytes,
             string expectedDigest
-        ) {
+        )
+        {
             // Getter must return the same instance of the cached handle
             var algorithmHandle = getter();
             var algorithmHandleSecondAttempt = getter();

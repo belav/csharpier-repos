@@ -13,7 +13,8 @@ namespace Microsoft.CodeAnalysis.CSharp.SignatureHelp
             IMethodSymbol method,
             SemanticModel semanticModel,
             int position
-        ) {
+        )
+        {
             var result = new List<SymbolDisplayPart>();
 
             var awaitable = method.GetOriginalUnreducedDefinition()
@@ -78,7 +79,8 @@ namespace Microsoft.CodeAnalysis.CSharp.SignatureHelp
             IMethodSymbol method,
             SemanticModel semanticModel,
             int position
-        ) {
+        )
+        {
             var result = new List<SymbolDisplayPart>
             {
                 Punctuation(SyntaxKind.GreaterThanToken),

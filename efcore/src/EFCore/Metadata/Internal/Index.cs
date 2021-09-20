@@ -41,7 +41,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
             IReadOnlyList<Property> properties,
             EntityType declaringEntityType,
             ConfigurationSource configurationSource
-        ) {
+        )
+        {
             Check.NotEmpty(properties, nameof(properties));
             Check.HasNoNulls(properties, nameof(properties));
             Check.NotNull(declaringEntityType, nameof(declaringEntityType));

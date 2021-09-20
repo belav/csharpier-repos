@@ -23,7 +23,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.InlineRename
             TypeCharCommandArgs args,
             Action nextHandler,
             CommandExecutionContext context
-        ) {
+        )
+        {
             HandlePossibleTypingCommand(
                 args,
                 nextHandler,
@@ -46,7 +47,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.InlineRename
                         || syntaxFactsService.IsIdentifierStartCharacter(args.TypedChar)
                         || syntaxFactsService.IsIdentifierPartCharacter(args.TypedChar)
                         || syntaxFactsService.IsStartOfUnicodeEscapeSequence(args.TypedChar)
-                    ) {
+                    )
+                    {
                         nextHandler();
                     }
                 }

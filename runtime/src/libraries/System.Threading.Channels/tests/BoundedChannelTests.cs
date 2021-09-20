@@ -370,7 +370,8 @@ namespace System.Threading.Channels.Tests
         [MemberData(nameof(ChannelDropModes))]
         public async Task DroppedDelegateIsNull_AsyncWrites(
             BoundedChannelFullMode boundedChannelFullMode
-        ) {
+        )
+        {
             Channel<int> c = Channel.CreateBounded<int>(
                 new BoundedChannelOptions(1) { FullMode = boundedChannelFullMode },
                 itemDropped: null
@@ -384,7 +385,8 @@ namespace System.Threading.Channels.Tests
         [MemberData(nameof(ChannelDropModes))]
         public void DroppedDelegateCalledOnChannelFull_SyncWrites(
             BoundedChannelFullMode boundedChannelFullMode
-        ) {
+        )
+        {
             var droppedItems = new HashSet<int>();
 
             void AddDroppedItem(int itemDropped)
@@ -422,7 +424,8 @@ namespace System.Threading.Channels.Tests
         [MemberData(nameof(ChannelDropModes))]
         public void DroppedDelegateCalledAfterLockReleased_SyncWrites(
             BoundedChannelFullMode boundedChannelFullMode
-        ) {
+        )
+        {
             Channel<int> c = null;
             bool dropDelegateCalled = false;
 
@@ -467,7 +470,8 @@ namespace System.Threading.Channels.Tests
         [MemberData(nameof(ChannelDropModes))]
         public async Task DroppedDelegateCalledAfterLockReleased_AsyncWrites(
             BoundedChannelFullMode boundedChannelFullMode
-        ) {
+        )
+        {
             Channel<int> c = null;
             bool dropDelegateCalled = false;
 
@@ -509,7 +513,8 @@ namespace System.Threading.Channels.Tests
         [MemberData(nameof(ChannelDropModes))]
         public async Task DroppedDelegateCalledOnChannelFull_AsyncWrites(
             BoundedChannelFullMode boundedChannelFullMode
-        ) {
+        )
+        {
             var droppedItems = new HashSet<int>();
 
             void AddDroppedItem(int itemDropped)
@@ -588,7 +593,8 @@ namespace System.Threading.Channels.Tests
         [InlineData(10000)]
         public void SingleProducerConsumer_ConcurrentReadWrite_WithBufferedCapacity_Success(
             int bufferedCapacity
-        ) {
+        )
+        {
             var c = Channel.CreateBounded<int>(bufferedCapacity);
 
             const int NumItems = 10000;
@@ -623,7 +629,8 @@ namespace System.Threading.Channels.Tests
         [InlineData(10000)]
         public void ManyProducerConsumer_ConcurrentReadWrite_WithBufferedCapacity_Success(
             int bufferedCapacity
-        ) {
+        )
+        {
             var c = Channel.CreateBounded<int>(bufferedCapacity);
 
             const int NumWriters = 10;
@@ -706,7 +713,8 @@ namespace System.Threading.Channels.Tests
             bool allowSynchronousContinuations,
             bool cancelable,
             bool waitToReadAsync
-        ) {
+        )
+        {
             var c = Channel.CreateBounded<int>(
                 new BoundedChannelOptions(1)
                 {
@@ -745,7 +753,8 @@ namespace System.Threading.Channels.Tests
         [InlineData(true)]
         public void AllowSynchronousContinuations_CompletionTask_ContinuationsInvokedAccordingToSetting(
             bool allowSynchronousContinuations
-        ) {
+        )
+        {
             if (!allowSynchronousContinuations && !PlatformDetection.IsThreadingSupported)
             {
                 throw new SkipTestException(nameof(PlatformDetection.IsThreadingSupported));

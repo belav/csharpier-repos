@@ -43,7 +43,8 @@ namespace System.Web.Mvc.Async.Test
                 IDictionary<string, object> parameters,
                 AsyncCallback callback,
                 object state
-            ) {
+            )
+            {
                 throw new NotImplementedException();
             }
 

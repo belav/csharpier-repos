@@ -24,17 +24,19 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Internal
             IDuplexPipe transport,
             ConnectionContext streamContext,
             Http3PeerSettings settings
-        ) : base(
-            connectionId,
-            protocols,
-            connectionContext,
-            serviceContext,
-            connectionFeatures,
-            memoryPool,
-            localEndPoint,
-            remoteEndPoint,
-            transport
-        ) {
+        )
+            : base(
+                connectionId,
+                protocols,
+                connectionContext,
+                serviceContext,
+                connectionFeatures,
+                memoryPool,
+                localEndPoint,
+                remoteEndPoint,
+                transport
+            )
+        {
             StreamContext = streamContext;
             ServerSettings = settings;
         }

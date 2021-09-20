@@ -34,7 +34,8 @@ namespace System.Net.Sockets.Tests
                     SocketType.Stream,
                     ProtocolType.Tcp
                 )
-            ) {
+            )
+            {
                 Assert.Throws<SocketException>(
                     () => client.IOControl(IOControlCode.DataToRead, null, null)
                 );
@@ -65,7 +66,8 @@ namespace System.Net.Sockets.Tests
                         SocketType.Stream,
                         ProtocolType.Tcp
                     )
-                ) {
+                )
+                {
                     listener.Bind(new IPEndPoint(IPAddress.Loopback, 0));
                     listener.Listen(1);
 
@@ -99,7 +101,8 @@ namespace System.Net.Sockets.Tests
                     SocketType.Stream,
                     ProtocolType.Tcp
                 )
-            ) {
+            )
+            {
                 Assert.Throws<SocketException>(
                     () => client.IOControl(IOControlCode.OobDataRead, null, null)
                 );
@@ -117,7 +120,8 @@ namespace System.Net.Sockets.Tests
                         SocketType.Stream,
                         ProtocolType.Tcp
                     )
-                ) {
+                )
+                {
                     listener.Bind(new IPEndPoint(IPAddress.Loopback, 0));
                     listener.Listen(1);
 
@@ -194,7 +198,8 @@ namespace System.Net.Sockets.Tests
                     SocketType.Stream,
                     ProtocolType.Tcp
                 )
-            ) {
+            )
+            {
                 Assert.Throws<SocketException>(
                     () => client.IOControl(IOControlCode.OobDataRead, null, null)
                 );
@@ -212,7 +217,8 @@ namespace System.Net.Sockets.Tests
                         SocketType.Stream,
                         ProtocolType.Tcp
                     )
-                ) {
+                )
+                {
                     listener.Bind(new IPEndPoint(IPAddress.Loopback, 0));
                     listener.Listen(1);
 
@@ -285,7 +291,8 @@ namespace System.Net.Sockets.Tests
                     SocketType.Stream,
                     ProtocolType.Tcp
                 )
-            ) {
+            )
+            {
                 Assert.Throws<InvalidOperationException>(
                     () => client.IOControl(unchecked((int)IOControlCode.NonBlockingIO), null, null)
                 );
@@ -305,7 +312,8 @@ namespace System.Net.Sockets.Tests
                     SocketType.Stream,
                     ProtocolType.Tcp
                 )
-            ) {
+            )
+            {
                 foreach (IOControlCode code in Enum.GetValues(typeof(IOControlCode)))
                 {
                     switch (code)

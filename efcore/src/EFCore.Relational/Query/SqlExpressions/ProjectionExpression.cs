@@ -74,7 +74,8 @@ namespace Microsoft.EntityFrameworkCore.Query.SqlExpressions
             if (
                 Alias != string.Empty
                 && !(Expression is ColumnExpression column && column.Name == Alias)
-            ) {
+            )
+            {
                 expressionPrinter.Append(" AS " + Alias);
             }
         }

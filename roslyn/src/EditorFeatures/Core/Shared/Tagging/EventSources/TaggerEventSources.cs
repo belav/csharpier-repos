@@ -48,7 +48,8 @@ namespace Microsoft.CodeAnalysis.Editor.Shared.Tagging
             ITextBuffer subjectBuffer,
             TaggerDelay delay,
             IAsynchronousOperationListener listener
-        ) {
+        )
+        {
             return new WorkspaceChangedEventSource(subjectBuffer, delay, listener);
         }
 
@@ -65,7 +66,8 @@ namespace Microsoft.CodeAnalysis.Editor.Shared.Tagging
         public static ITaggerEventSource OnReadOnlyRegionsChanged(
             ITextBuffer subjectBuffer,
             TaggerDelay delay
-        ) {
+        )
+        {
             Contract.ThrowIfNull(subjectBuffer);
 
             return new ReadOnlyRegionsChangedEventSource(subjectBuffer, delay);
@@ -75,7 +77,8 @@ namespace Microsoft.CodeAnalysis.Editor.Shared.Tagging
             ITextBuffer subjectBuffer,
             IOption option,
             TaggerDelay delay
-        ) {
+        )
+        {
             return new OptionChangedEventSource(subjectBuffer, option, delay);
         }
 
@@ -83,14 +86,16 @@ namespace Microsoft.CodeAnalysis.Editor.Shared.Tagging
             ITextBuffer subjectBuffer,
             IDiagnosticService service,
             TaggerDelay delay
-        ) {
+        )
+        {
             return new DiagnosticsChangedEventSource(subjectBuffer, service, delay);
         }
 
         public static ITaggerEventSource OnParseOptionChanged(
             ITextBuffer subjectBuffer,
             TaggerDelay delay
-        ) {
+        )
+        {
             return new ParseOptionChangedEventSource(subjectBuffer, delay);
         }
 

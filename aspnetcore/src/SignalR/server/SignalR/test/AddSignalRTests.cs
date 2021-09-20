@@ -297,7 +297,8 @@ namespace Microsoft.AspNetCore.SignalR.Tests
         public IHubProtocol GetProtocol(
             string protocolName,
             IReadOnlyList<string> supportedProtocols
-        ) {
+        )
+        {
             throw new System.NotImplementedException();
         }
     }
@@ -337,7 +338,8 @@ namespace Microsoft.AspNetCore.SignalR.Tests
             string connectionId,
             string groupName,
             CancellationToken cancellationToken = default
-        ) {
+        )
+        {
             throw new System.NotImplementedException();
         }
 
@@ -355,7 +357,8 @@ namespace Microsoft.AspNetCore.SignalR.Tests
             string connectionId,
             string groupName,
             CancellationToken cancellationToken = default
-        ) {
+        )
+        {
             throw new System.NotImplementedException();
         }
 
@@ -363,7 +366,8 @@ namespace Microsoft.AspNetCore.SignalR.Tests
             string methodName,
             object[] args,
             CancellationToken cancellationToken = default
-        ) {
+        )
+        {
             throw new System.NotImplementedException();
         }
 
@@ -372,7 +376,8 @@ namespace Microsoft.AspNetCore.SignalR.Tests
             object[] args,
             IReadOnlyList<string> excludedConnectionIds,
             CancellationToken cancellationToken = default
-        ) {
+        )
+        {
             throw new System.NotImplementedException();
         }
 
@@ -381,7 +386,8 @@ namespace Microsoft.AspNetCore.SignalR.Tests
             string methodName,
             object[] args,
             CancellationToken cancellationToken = default
-        ) {
+        )
+        {
             throw new System.NotImplementedException();
         }
 
@@ -390,7 +396,8 @@ namespace Microsoft.AspNetCore.SignalR.Tests
             string methodName,
             object[] args,
             CancellationToken cancellationToken = default
-        ) {
+        )
+        {
             throw new System.NotImplementedException();
         }
 
@@ -399,7 +406,8 @@ namespace Microsoft.AspNetCore.SignalR.Tests
             string methodName,
             object[] args,
             CancellationToken cancellationToken = default
-        ) {
+        )
+        {
             throw new System.NotImplementedException();
         }
 
@@ -409,7 +417,8 @@ namespace Microsoft.AspNetCore.SignalR.Tests
             object[] args,
             IReadOnlyList<string> excludedConnectionIds,
             CancellationToken cancellationToken = default
-        ) {
+        )
+        {
             throw new System.NotImplementedException();
         }
 
@@ -418,7 +427,8 @@ namespace Microsoft.AspNetCore.SignalR.Tests
             string methodName,
             object[] args,
             CancellationToken cancellationToken = default
-        ) {
+        )
+        {
             throw new System.NotImplementedException();
         }
 
@@ -427,7 +437,8 @@ namespace Microsoft.AspNetCore.SignalR.Tests
             string methodName,
             object[] args,
             CancellationToken cancellationToken = default
-        ) {
+        )
+        {
             throw new System.NotImplementedException();
         }
 
@@ -436,7 +447,8 @@ namespace Microsoft.AspNetCore.SignalR.Tests
             string methodName,
             object[] args,
             CancellationToken cancellationToken = default
-        ) {
+        )
+        {
             throw new System.NotImplementedException();
         }
     }
@@ -464,7 +476,8 @@ namespace Microsoft.AspNetCore.SignalR.Tests
             ref ReadOnlySequence<byte> input,
             IInvocationBinder binder,
             out HubMessage message
-        ) {
+        )
+        {
             throw new NotImplementedException();
         }
 
@@ -479,7 +492,8 @@ namespace Microsoft.AspNetCore.SignalR.Tests
         public ValueTask<object> InvokeMethodAsync(
             HubInvocationContext invocationContext,
             Func<HubInvocationContext, ValueTask<object>> next
-        ) {
+        )
+        {
             throw new NotImplementedException();
         }
     }

@@ -38,7 +38,8 @@ namespace System.Security.Cryptography
             ref ParseState state,
             string name,
             int sizeHint = -1
-        ) {
+        )
+        {
             string? value = state.GetValue(name);
 
             if (value == null)
@@ -130,7 +131,8 @@ namespace System.Security.Cryptography
             string name,
             ReadOnlySpan<byte> value,
             StringBuilder builder
-        ) {
+        )
+        {
             Debug.Assert(name.Length > 0);
             Debug.Assert(value.Length > 0);
             Debug.Assert(builder != null);
@@ -159,7 +161,8 @@ namespace System.Security.Cryptography
                         base64,
                         out int written
                     )
-                ) {
+                )
+                {
                     Debug.Fail(
                         $"Convert.TryToBase64Chars failed with {localLength} bytes to {StackChars} chars"
                     );

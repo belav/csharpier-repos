@@ -60,7 +60,8 @@ namespace Microsoft.AspNetCore.Mvc.FunctionalTests
             string requestContentType,
             string jsonInput,
             int expectedSampleIntValue
-        ) {
+        )
+        {
             // Arrange
             var content = new StringContent(jsonInput, Encoding.UTF8, requestContentType);
 
@@ -260,7 +261,8 @@ namespace Microsoft.AspNetCore.Mvc.FunctionalTests
             string requestContentType,
             string jsonInput,
             int expectedSampleIntValue
-        ) {
+        )
+        {
             // Arrange
             var content = new StringContent(jsonInput, Encoding.UTF8, requestContentType);
             var request = new HttpRequestMessage(

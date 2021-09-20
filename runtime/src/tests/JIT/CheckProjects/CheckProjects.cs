@@ -229,7 +229,8 @@ internal class ScanProjectFiles
                             newOptimizeVal,
                             StringComparison.InvariantCultureIgnoreCase
                         )
-                    ) {
+                    )
+                    {
                         optimizeOddness = "MultipleConflictValues";
                     }
 
@@ -271,7 +272,8 @@ internal class ScanProjectFiles
                             || debugVal.Equals("none", StringComparison.OrdinalIgnoreCase)
                             || debugVal.Equals("blank", StringComparison.OrdinalIgnoreCase)
                             || debugVal.Equals("embedded", StringComparison.OrdinalIgnoreCase)
-                        ) {
+                        )
+                        {
                             suffixNote = "SuffixRelOk";
                         }
                         else
@@ -538,7 +540,8 @@ internal class ScanProjectFiles
                     expectedOptimizeValue,
                     StringComparison.InvariantCultureIgnoreCase
                 )
-            ) {
+            )
+            {
                 return true;
             }
         }

@@ -14,7 +14,8 @@ namespace System.CommandLine
         internal static IEnumerable<T> FlattenBreadthFirst<T>(
             this IEnumerable<T> source,
             Func<T, IEnumerable<T>> children
-        ) {
+        )
+        {
             var queue = new Queue<T>();
 
             foreach (var item in source)

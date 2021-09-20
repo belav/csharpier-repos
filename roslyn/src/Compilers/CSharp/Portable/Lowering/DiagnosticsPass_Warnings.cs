@@ -22,7 +22,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             ImmutableArray<RefKind> argumentRefKindsOpt,
             ImmutableArray<BoundExpression> arguments,
             Symbol method
-        ) {
+        )
+        {
             if (!argumentRefKindsOpt.IsDefault)
             {
                 Debug.Assert(arguments.Length == argumentRefKindsOpt.Length);
@@ -64,7 +65,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             if (
                 fieldSymbol.IsVolatile
                 && ((object)consumerOpt == null || !IsInterlockedAPI(consumerOpt))
-            ) {
+            )
+            {
                 Error(ErrorCode.WRN_VolatileByRef, fieldAccess, fieldSymbol);
             }
 
@@ -94,7 +96,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             if (
                 IsNonAgileFieldAccess(fieldAccess, _compilation)
                 && !fieldSymbol.Type.IsReferenceType
-            ) {
+            )
+            {
                 Error(ErrorCode.WRN_CallOnNonAgileField, fieldAccess, fieldSymbol);
             }
         }
@@ -113,7 +116,8 @@ namespace Microsoft.CodeAnalysis.CSharp
         internal static bool IsNonAgileFieldAccess(
             BoundFieldAccess fieldAccess,
             CSharpCompilation compilation
-        ) {
+        )
+        {
             // Warn if taking the address of a non-static field with a receiver other than this (possibly cast)
             // and a type that descends from System.MarshalByRefObject.
             if (IsInstanceFieldAccessWithNonThisReceiver(fieldAccess))
@@ -133,7 +137,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                             marshalByRefType,
                             TypeCompareKind.ConsiderEverything
                         )
-                    ) {
+                    )
+                    {
                         return true;
                     }
 
@@ -275,7 +280,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             MethodSymbol method,
             ImmutableArray<BoundExpression> arguments,
             ImmutableArray<RefKind> argumentRefKindsOpt
-        ) {
+        )
+        {
             if (
                 method.ParameterCount != arguments.Length
                 || (object)method.ContainingType == null
@@ -318,7 +324,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                 !node.Operator.Kind.IsDynamic()
                 && !node.LeftConversion.IsIdentity
                 && node.LeftConversion.Exists
-            ) {
+            )
+            {
                 // Need to represent the implicit conversion as a node in order to be able to produce correct diagnostics.
                 left = new BoundConversion(
                     left.Syntax,
@@ -358,7 +365,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                 node.Left.ConstantValue != null
                 && node.Right.ConstantValue == null
                 && node.Right.Kind == BoundKind.Conversion
-            ) {
+            )
+            {
                 CheckVacuousComparisons(node, node.Left.ConstantValue, node.Right);
             }
 
@@ -366,21 +374,24 @@ namespace Microsoft.CodeAnalysis.CSharp
                 node.Right.ConstantValue != null
                 && node.Left.ConstantValue == null
                 && node.Left.Kind == BoundKind.Conversion
-            ) {
+            )
+            {
                 CheckVacuousComparisons(node, node.Right.ConstantValue, node.Left);
             }
 
             if (
                 node.OperatorKind == BinaryOperatorKind.ObjectEqual
                 || node.OperatorKind == BinaryOperatorKind.ObjectNotEqual
-            ) {
+            )
+            {
                 TypeSymbol t;
                 if (
                     node.Left.Type.SpecialType == SpecialType.System_Object
                     && !IsExplicitCast(node.Left)
                     && !(node.Left.ConstantValue != null && node.Left.ConstantValue.IsNull)
                     && ConvertedHasEqual(node.OperatorKind, node.Right, out t)
-                ) {
+                )
+                {
                     // Possible unintended reference comparison; to get a value comparison, cast the left hand side to type '{0}'
                     _diagnostics.Add(ErrorCode.WRN_BadRefCompareLeft, node.Syntax.Location, t);
                 }
@@ -389,7 +400,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                     && !IsExplicitCast(node.Right)
                     && !(node.Right.ConstantValue != null && node.Right.ConstantValue.IsNull)
                     && ConvertedHasEqual(node.OperatorKind, node.Left, out t)
-                ) {
+                )
+                {
                     // Possible unintended reference comparison; to get a value comparison, cast the right hand side to type '{0}'
                     _diagnostics.Add(ErrorCode.WRN_BadRefCompareRight, node.Syntax.Location, t);
                 }
@@ -407,7 +419,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             BinaryOperatorKind oldOperatorKind,
             BoundNode node,
             out TypeSymbol type
-        ) {
+        )
+        {
             type = null;
             if (node.Kind != BoundKind.Conversion)
                 return false;
@@ -444,7 +457,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                             t,
                             TypeCompareKind.ConsiderEverything2
                         )
-                    ) {
+                    )
+                    {
                         type = t;
                         return true;
                     }
@@ -469,7 +483,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             BoundBinaryOperator tree,
             ConstantValue constantValue,
             BoundNode operand
-        ) {
+        )
+        {
             Debug.Assert(tree != null);
             Debug.Assert(constantValue != null);
             Debug.Assert(operand != null);
@@ -511,11 +526,13 @@ namespace Microsoft.CodeAnalysis.CSharp
                 BoundConversion conversion = operand as BoundConversion;
                 conversion != null;
                 conversion = conversion.Operand as BoundConversion
-            ) {
+            )
+            {
                 if (
                     conversion.ConversionKind != ConversionKind.ImplicitNumeric
                     && conversion.ConversionKind != ConversionKind.ImplicitConstant
-                ) {
+                )
+                {
                     return;
                 }
 
@@ -528,7 +545,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                 if (
                     !conversion.Operand.Type.SpecialType.IsIntegralType()
                     || !conversion.Type.SpecialType.IsIntegralType()
-                ) {
+                )
+                {
                     return;
                 }
 
@@ -538,7 +556,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                         constantValue,
                         out _
                     )
-                ) {
+                )
+                {
                     Error(ErrorCode.WRN_VacuousIntegralComp, tree, conversion.Operand.Type);
                     return;
                 }
@@ -550,7 +569,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             BinaryOperatorKind operatorKind,
             BoundExpression leftOperand,
             BoundExpression rightOperand
-        ) {
+        )
+        {
             // We wish to give a warning for situations where an unexpected sign extension wipes
             // out some bits. For example:
             //
@@ -948,7 +968,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                     }
                     else if (
                         node.Left.NullableNeverHasValue() && node.Right.NullableAlwaysHasValue()
-                    ) {
+                    )
+                    {
                         Error(
                             node.OperatorKind.IsUserDefined()
                               ? ErrorCode.WRN_NubExprIsConstBool2
@@ -981,7 +1002,8 @@ namespace Microsoft.CodeAnalysis.CSharp
 
         private void CheckLiftedUserDefinedConditionalLogicalOperator(
             BoundUserDefinedConditionalLogicalOperator node
-        ) {
+        )
+        {
             // CS0458: The result of the expression is always 'null' of type '{0}'
             if (node.Right.NullableNeverHasValue() || node.Left.NullableNeverHasValue())
             {
@@ -1009,7 +1031,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                 if (
                     conv.ConversionKind == ConversionKind.ExplicitNullable
                     || conv.ConversionKind == ConversionKind.ImplicitNullable
-                ) {
+                )
+                {
                     type = GetTypeForLiftedComparisonWarning(conv.Operand);
                 }
             }
@@ -1030,7 +1053,8 @@ namespace Microsoft.CodeAnalysis.CSharp
         private void CheckForDeconstructionAssignmentToSelf(
             BoundTupleExpression leftTuple,
             BoundExpression right
-        ) {
+        )
+        {
             while (right.Kind == BoundKind.Conversion)
             {
                 var conversion = (BoundConversion)right;
@@ -1049,7 +1073,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             if (
                 right.Kind != BoundKind.ConvertedTupleLiteral
                 && right.Kind != BoundKind.TupleLiteral
-            ) {
+            )
+            {
                 return;
             }
 

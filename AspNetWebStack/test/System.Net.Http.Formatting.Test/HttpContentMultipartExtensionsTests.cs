@@ -73,7 +73,8 @@ namespace System.Net.Http
             string boundary,
             string partContentType,
             params string[] bodyEntity
-        ) {
+        )
+        {
             List<string> entities = new List<string>();
             int cnt = 0;
             foreach (var body in bodyEntity)
@@ -166,7 +167,8 @@ namespace System.Net.Http
             bool isMultipart,
             string subtype,
             bool hasSubtype
-        ) {
+        )
+        {
             StringContent content = new StringContent(String.Empty);
             content.Headers.ContentType = MediaTypeHeaderValue.Parse(mediaType);
 
@@ -205,7 +207,8 @@ namespace System.Net.Http
         public async Task ReadAsMultipartAsync_DetectsNonMultipartContent(
             string mediaType,
             bool isMultipart
-        ) {
+        )
+        {
             StringContent content = new StringContent(String.Empty);
             content.Headers.ContentType = MediaTypeHeaderValue.Parse(mediaType);
             if (!isMultipart)
@@ -366,7 +369,8 @@ namespace System.Net.Http
         public async Task ReadAsMultipartAsync_SingleShortBodyPart(
             string boundary,
             string singleShortBody
-        ) {
+        )
+        {
             HttpContent content = CreateContent(boundary, singleShortBody);
 
             MultipartMemoryStreamProvider result = await content.ReadAsMultipartAsync();
@@ -404,7 +408,8 @@ namespace System.Net.Http
         public async Task ReadAsMultipartAsync_MultipleShortBodyParts(
             string boundary,
             string[] multipleShortBodies
-        ) {
+        )
+        {
             HttpContent content = CreateContent(boundary, multipleShortBodies);
             MultipartMemoryStreamProvider result = await content.ReadAsMultipartAsync();
             Assert.Equal(multipleShortBodies.Length, result.Contents.Count);
@@ -429,7 +434,8 @@ namespace System.Net.Http
         public async Task ReadAsMultipartAsync_SingleLongBodyPart(
             string boundary,
             string singleLongBody
-        ) {
+        )
+        {
             HttpContent content = CreateContent(boundary, singleLongBody);
 
             MultipartMemoryStreamProvider result = await content.ReadAsMultipartAsync();
@@ -448,7 +454,8 @@ namespace System.Net.Http
         public async Task ReadAsMultipartAsync_MultipleLongBodyParts(
             string boundary,
             string[] multipleLongBodies
-        ) {
+        )
+        {
             HttpContent content = CreateContent(boundary, multipleLongBodies);
             MultipartMemoryStreamProvider result = await content.ReadAsMultipartAsync(
                 new MultipartMemoryStreamProvider(),
@@ -558,7 +565,8 @@ namespace System.Net.Http
                 int offset,
                 int count,
                 CancellationToken cancellationToken
-            ) {
+            )
+            {
                 throw new IOException(ExceptionAsyncStreamMessage);
             }
 
@@ -569,7 +577,8 @@ namespace System.Net.Http
                 int count,
                 AsyncCallback callback,
                 object state
-            ) {
+            )
+            {
                 throw new IOException(ExceptionAsyncStreamMessage);
             }
 #endif
@@ -587,7 +596,8 @@ namespace System.Net.Http
                 int offset,
                 int count,
                 CancellationToken cancellationToken
-            ) {
+            )
+            {
                 throw new IOException(ExceptionAsyncStreamMessage);
             }
 
@@ -598,7 +608,8 @@ namespace System.Net.Http
                 int count,
                 AsyncCallback callback,
                 object state
-            ) {
+            )
+            {
                 throw new IOException(ExceptionAsyncStreamMessage);
             }
 #endif

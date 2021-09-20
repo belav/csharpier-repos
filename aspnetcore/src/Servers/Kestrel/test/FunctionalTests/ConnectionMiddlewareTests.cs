@@ -26,7 +26,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel.FunctionalTests
 
             await using (
                 var server = new TestServer(TestApp.EchoApp, serviceContext, listenOptions)
-            ) {
+            )
+            {
                 using (var connection = server.CreateConnection())
                 {
                     // Will throw because the exception in the connection adapter will close the connection.
@@ -76,7 +77,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel.FunctionalTests
 
             await using (
                 var server = new TestServer(TestApp.EmptyApp, serviceContext, listenOptions)
-            ) {
+            )
+            {
                 using (var connection = server.CreateConnection())
                 {
                     await connection.WaitForConnectionClose();
@@ -126,7 +128,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel.FunctionalTests
 
                 public override ValueTask<ReadResult> ReadAsync(
                     CancellationToken cancellationToken = default
-                ) {
+                )
+                {
                     throw new NotImplementedException();
                 }
 
@@ -162,7 +165,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel.FunctionalTests
 
                 public override ValueTask<FlushResult> FlushAsync(
                     CancellationToken cancellationToken = default
-                ) {
+                )
+                {
                     throw new NotImplementedException();
                 }
 

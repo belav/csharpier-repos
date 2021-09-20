@@ -109,7 +109,8 @@ class C
                 using (
                     var embeddedMetadataProvider =
                         peReader.ReadEmbeddedPortablePdbDebugDirectoryData(embeddedEntry)
-                ) {
+                )
+                {
                     var pdbReader = embeddedMetadataProvider.GetMetadataReader();
 
                     var actualBlob = (

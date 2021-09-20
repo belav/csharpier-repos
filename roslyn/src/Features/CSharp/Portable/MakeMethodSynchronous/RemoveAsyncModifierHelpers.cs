@@ -14,7 +14,8 @@ namespace Microsoft.CodeAnalysis.CSharp.MakeMethodSynchronous
         internal static SyntaxNode WithoutAsyncModifier(
             MethodDeclarationSyntax method,
             TypeSyntax returnType
-        ) {
+        )
+        {
             var newModifiers = RemoveAsyncModifier(method.Modifiers, ref returnType);
             return method.WithReturnType(returnType).WithModifiers(newModifiers);
         }
@@ -22,7 +23,8 @@ namespace Microsoft.CodeAnalysis.CSharp.MakeMethodSynchronous
         internal static SyntaxNode WithoutAsyncModifier(
             LocalFunctionStatementSyntax localFunction,
             TypeSyntax returnType
-        ) {
+        )
+        {
             var newModifiers = RemoveAsyncModifier(localFunction.Modifiers, ref returnType);
             return localFunction.WithReturnType(returnType).WithModifiers(newModifiers);
         }
@@ -44,7 +46,8 @@ namespace Microsoft.CodeAnalysis.CSharp.MakeMethodSynchronous
         private static SyntaxTokenList RemoveAsyncModifier(
             SyntaxTokenList modifiers,
             ref TypeSyntax newReturnType
-        ) {
+        )
+        {
             var asyncTokenIndex = modifiers.IndexOf(SyntaxKind.AsyncKeyword);
             SyntaxTokenList newModifiers;
             if (asyncTokenIndex == 0)

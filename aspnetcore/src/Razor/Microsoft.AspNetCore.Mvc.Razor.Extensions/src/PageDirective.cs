@@ -50,7 +50,8 @@ namespace Microsoft.AspNetCore.Mvc.Razor.Extensions
         public static bool TryGetPageDirective(
             DocumentIntermediateNode documentNode,
             out PageDirective pageDirective
-        ) {
+        )
+        {
             var visitor = new Visitor();
             for (var i = 0; i < documentNode.Children.Count; i++)
             {

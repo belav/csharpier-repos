@@ -18,7 +18,8 @@ namespace Microsoft.CodeAnalysis.Editor.GoToBase
             ISymbol symbol,
             Solution solution,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             if (
                 symbol is INamedTypeSymbol namedTypeSymbol
                 && (
@@ -26,7 +27,8 @@ namespace Microsoft.CodeAnalysis.Editor.GoToBase
                     || namedTypeSymbol.TypeKind == TypeKind.Interface
                     || namedTypeSymbol.TypeKind == TypeKind.Struct
                 )
-            ) {
+            )
+            {
                 return ValueTaskFactory.FromResult(
                     BaseTypeFinder.FindBaseTypesAndInterfaces(namedTypeSymbol)
                 );
@@ -36,7 +38,8 @@ namespace Microsoft.CodeAnalysis.Editor.GoToBase
                 symbol.Kind == SymbolKind.Property
                 || symbol.Kind == SymbolKind.Method
                 || symbol.Kind == SymbolKind.Event
-            ) {
+            )
+            {
                 return BaseTypeFinder.FindOverriddenAndImplementedMembersAsync(
                     symbol,
                     solution,

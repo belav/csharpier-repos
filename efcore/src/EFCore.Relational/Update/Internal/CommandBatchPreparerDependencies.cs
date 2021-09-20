@@ -68,7 +68,8 @@ namespace Microsoft.EntityFrameworkCore.Update.Internal
             ILoggingOptions loggingOptions,
             IDiagnosticsLogger<DbLoggerCategory.Update> updateLogger,
             IDbContextOptions options
-        ) {
+        )
+        {
             ModificationCommandBatchFactory = modificationCommandBatchFactory;
             ParameterNameGeneratorFactory = parameterNameGeneratorFactory;
             ModificationCommandComparer = modificationCommandComparer;

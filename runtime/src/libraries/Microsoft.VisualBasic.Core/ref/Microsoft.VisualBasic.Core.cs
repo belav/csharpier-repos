@@ -569,7 +569,8 @@ namespace Microsoft.VisualBasic
             Microsoft.VisualBasic.DateInterval Interval,
             double Number,
             System.DateTime DateValue
-        ) {
+        )
+        {
             throw null;
         }
         public static System.DateTime DateAdd(string Interval, double Number, object? DateValue)
@@ -584,7 +585,8 @@ namespace Microsoft.VisualBasic
                 Microsoft.VisualBasic.FirstDayOfWeek.Sunday,
             Microsoft.VisualBasic.FirstWeekOfYear WeekOfYear =
                 Microsoft.VisualBasic.FirstWeekOfYear.Jan1
-        ) {
+        )
+        {
             throw null;
         }
         public static long DateDiff(
@@ -595,7 +597,8 @@ namespace Microsoft.VisualBasic
                 Microsoft.VisualBasic.FirstDayOfWeek.Sunday,
             Microsoft.VisualBasic.FirstWeekOfYear WeekOfYear =
                 Microsoft.VisualBasic.FirstWeekOfYear.Jan1
-        ) {
+        )
+        {
             throw null;
         }
         public static int DatePart(
@@ -605,7 +608,8 @@ namespace Microsoft.VisualBasic
                 Microsoft.VisualBasic.FirstDayOfWeek.Sunday,
             Microsoft.VisualBasic.FirstWeekOfYear FirstWeekOfYearValue =
                 Microsoft.VisualBasic.FirstWeekOfYear.Jan1
-        ) {
+        )
+        {
             throw null;
         }
         public static int DatePart(
@@ -615,7 +619,8 @@ namespace Microsoft.VisualBasic
                 Microsoft.VisualBasic.FirstDayOfWeek.Sunday,
             Microsoft.VisualBasic.FirstWeekOfYear WeekOfYear =
                 Microsoft.VisualBasic.FirstWeekOfYear.Jan1
-        ) {
+        )
+        {
             throw null;
         }
         public static System.DateTime DateSerial(int Year, int Month, int Day)
@@ -662,7 +667,8 @@ namespace Microsoft.VisualBasic
             System.DateTime DateValue,
             Microsoft.VisualBasic.FirstDayOfWeek DayOfWeek =
                 Microsoft.VisualBasic.FirstDayOfWeek.Sunday
-        ) {
+        )
+        {
             throw null;
         }
         public static string WeekdayName(
@@ -670,7 +676,8 @@ namespace Microsoft.VisualBasic
             bool Abbreviate = false,
             Microsoft.VisualBasic.FirstDayOfWeek FirstDayOfWeekValue =
                 Microsoft.VisualBasic.FirstDayOfWeek.System
-        ) {
+        )
+        {
             throw null;
         }
         public static int Year(System.DateTime DateValue)
@@ -791,7 +798,8 @@ namespace Microsoft.VisualBasic
             string PathName,
             Microsoft.VisualBasic.FileAttribute Attributes =
                 Microsoft.VisualBasic.FileAttribute.Normal
-        ) {
+        )
+        {
             throw null;
         }
         public static bool EOF(int FileNumber)
@@ -1006,7 +1014,8 @@ namespace Microsoft.VisualBasic
             double Life,
             double Period,
             double Factor = 2
-        ) {
+        )
+        {
             throw null;
         }
         public static double FV(
@@ -1015,7 +1024,8 @@ namespace Microsoft.VisualBasic
             double Pmt,
             double PV = 0,
             Microsoft.VisualBasic.DueDate Due = Microsoft.VisualBasic.DueDate.EndOfPeriod
-        ) {
+        )
+        {
             throw null;
         }
         public static double IPmt(
@@ -1025,7 +1035,8 @@ namespace Microsoft.VisualBasic
             double PV,
             double FV = 0,
             Microsoft.VisualBasic.DueDate Due = Microsoft.VisualBasic.DueDate.EndOfPeriod
-        ) {
+        )
+        {
             throw null;
         }
         public static double IRR(ref double[] ValueArray, double Guess = 0.1)
@@ -1042,7 +1053,8 @@ namespace Microsoft.VisualBasic
             double PV,
             double FV = 0,
             Microsoft.VisualBasic.DueDate Due = Microsoft.VisualBasic.DueDate.EndOfPeriod
-        ) {
+        )
+        {
             throw null;
         }
         public static double NPV(double Rate, ref double[] ValueArray)
@@ -1055,7 +1067,8 @@ namespace Microsoft.VisualBasic
             double PV,
             double FV = 0,
             Microsoft.VisualBasic.DueDate Due = Microsoft.VisualBasic.DueDate.EndOfPeriod
-        ) {
+        )
+        {
             throw null;
         }
         public static double PPmt(
@@ -1065,7 +1078,8 @@ namespace Microsoft.VisualBasic
             double PV,
             double FV = 0,
             Microsoft.VisualBasic.DueDate Due = Microsoft.VisualBasic.DueDate.EndOfPeriod
-        ) {
+        )
+        {
             throw null;
         }
         public static double PV(
@@ -1074,7 +1088,8 @@ namespace Microsoft.VisualBasic
             double Pmt,
             double FV = 0,
             Microsoft.VisualBasic.DueDate Due = Microsoft.VisualBasic.DueDate.EndOfPeriod
-        ) {
+        )
+        {
             throw null;
         }
         public static double Rate(
@@ -1084,7 +1099,8 @@ namespace Microsoft.VisualBasic
             double FV = 0,
             Microsoft.VisualBasic.DueDate Due = Microsoft.VisualBasic.DueDate.EndOfPeriod,
             double Guess = 0.1
-        ) {
+        )
+        {
             throw null;
         }
         public static double SLN(double Cost, double Salvage, double Life)
@@ -1212,7 +1228,8 @@ namespace Microsoft.VisualBasic
             string ProcName,
             Microsoft.VisualBasic.CallType UseCallType,
             params object?[] Args
-        ) {
+        )
+        {
             throw null;
         }
         public static object? Choose(double Index, params object?[] Choice)
@@ -1258,7 +1275,8 @@ namespace Microsoft.VisualBasic
             string Section,
             string Key,
             string? Default = ""
-        ) {
+        )
+        {
             throw null;
         }
         public static object? IIf(bool Expression, object? TruePart, object? FalsePart)
@@ -1271,14 +1289,16 @@ namespace Microsoft.VisualBasic
             string DefaultResponse = "",
             int XPos = -1,
             int YPos = -1
-        ) {
+        )
+        {
             throw null;
         }
         public static MsgBoxResult MsgBox(
             object Prompt,
             MsgBoxStyle Buttons = MsgBoxStyle.ApplicationModal,
             object? Title = null
-        ) {
+        )
+        {
             throw null;
         }
         public static string Partition(long Number, long Start, long Stop, long Interval)
@@ -1297,7 +1317,8 @@ namespace Microsoft.VisualBasic
             AppWinStyle Style = AppWinStyle.MinimizedFocus,
             bool Wait = false,
             int Timeout = -1
-        ) {
+        )
+        {
             throw null;
         }
         public static object? Switch(params object?[]? VarExpr)
@@ -1436,7 +1457,8 @@ namespace Microsoft.VisualBasic
             [Microsoft.VisualBasic.CompilerServices.OptionCompareAttribute]
                 Microsoft.VisualBasic.CompareMethod Compare =
                 Microsoft.VisualBasic.CompareMethod.Binary
-        ) {
+        )
+        {
             throw null;
         }
         public static string[]? Filter(
@@ -1446,7 +1468,8 @@ namespace Microsoft.VisualBasic
             [Microsoft.VisualBasic.CompilerServices.OptionCompareAttribute]
                 Microsoft.VisualBasic.CompareMethod Compare =
                 Microsoft.VisualBasic.CompareMethod.Binary
-        ) {
+        )
+        {
             throw null;
         }
         public static string Format(object? Expression, string? Style = "")
@@ -1461,14 +1484,16 @@ namespace Microsoft.VisualBasic
             Microsoft.VisualBasic.TriState UseParensForNegativeNumbers =
                 Microsoft.VisualBasic.TriState.UseDefault,
             Microsoft.VisualBasic.TriState GroupDigits = Microsoft.VisualBasic.TriState.UseDefault
-        ) {
+        )
+        {
             throw null;
         }
         public static string FormatDateTime(
             System.DateTime Expression,
             Microsoft.VisualBasic.DateFormat NamedFormat =
                 Microsoft.VisualBasic.DateFormat.GeneralDate
-        ) {
+        )
+        {
             throw null;
         }
         public static string FormatNumber(
@@ -1479,7 +1504,8 @@ namespace Microsoft.VisualBasic
             Microsoft.VisualBasic.TriState UseParensForNegativeNumbers =
                 Microsoft.VisualBasic.TriState.UseDefault,
             Microsoft.VisualBasic.TriState GroupDigits = Microsoft.VisualBasic.TriState.UseDefault
-        ) {
+        )
+        {
             throw null;
         }
         public static string FormatPercent(
@@ -1490,7 +1516,8 @@ namespace Microsoft.VisualBasic
             Microsoft.VisualBasic.TriState UseParensForNegativeNumbers =
                 Microsoft.VisualBasic.TriState.UseDefault,
             Microsoft.VisualBasic.TriState GroupDigits = Microsoft.VisualBasic.TriState.UseDefault
-        ) {
+        )
+        {
             throw null;
         }
         public static char GetChar(string str, int Index)
@@ -1504,7 +1531,8 @@ namespace Microsoft.VisualBasic
             [Microsoft.VisualBasic.CompilerServices.OptionCompareAttribute]
                 Microsoft.VisualBasic.CompareMethod Compare =
                 Microsoft.VisualBasic.CompareMethod.Binary
-        ) {
+        )
+        {
             throw null;
         }
         public static int InStr(
@@ -1513,7 +1541,8 @@ namespace Microsoft.VisualBasic
             [Microsoft.VisualBasic.CompilerServices.OptionCompareAttribute]
                 Microsoft.VisualBasic.CompareMethod Compare =
                 Microsoft.VisualBasic.CompareMethod.Binary
-        ) {
+        )
+        {
             throw null;
         }
         public static int InStrRev(
@@ -1523,7 +1552,8 @@ namespace Microsoft.VisualBasic
             [Microsoft.VisualBasic.CompilerServices.OptionCompareAttribute]
                 Microsoft.VisualBasic.CompareMethod Compare =
                 Microsoft.VisualBasic.CompareMethod.Binary
-        ) {
+        )
+        {
             throw null;
         }
         public static string? Join(object?[] SourceArray, string? Delimiter = " ")
@@ -1640,7 +1670,8 @@ namespace Microsoft.VisualBasic
             [Microsoft.VisualBasic.CompilerServices.OptionCompareAttribute]
                 Microsoft.VisualBasic.CompareMethod Compare =
                 Microsoft.VisualBasic.CompareMethod.Binary
-        ) {
+        )
+        {
             throw null;
         }
         public static string Right(string? str, int Length)
@@ -1666,7 +1697,8 @@ namespace Microsoft.VisualBasic
             [Microsoft.VisualBasic.CompilerServices.OptionCompareAttribute]
                 Microsoft.VisualBasic.CompareMethod Compare =
                 Microsoft.VisualBasic.CompareMethod.Binary
-        ) {
+        )
+        {
             throw null;
         }
         public static int StrComp(
@@ -1675,7 +1707,8 @@ namespace Microsoft.VisualBasic
             [Microsoft.VisualBasic.CompilerServices.OptionCompareAttribute]
                 Microsoft.VisualBasic.CompareMethod Compare =
                 Microsoft.VisualBasic.CompareMethod.Binary
-        ) {
+        )
+        {
             throw null;
         }
         [System.Runtime.Versioning.SupportedOSPlatformAttribute("windows")]
@@ -1683,7 +1716,8 @@ namespace Microsoft.VisualBasic
             string? str,
             Microsoft.VisualBasic.VbStrConv Conversion,
             int LocaleID = 0
-        ) {
+        )
+        {
             throw null;
         }
         public static string StrDup(int Number, char Character)
@@ -1889,7 +1923,8 @@ namespace Microsoft.VisualBasic.CompilerServices
         public static object FallbackUserDefinedConversion(
             object Expression,
             System.Type TargetType
-        ) {
+        )
+        {
             throw null;
         }
         public static string FromCharAndCount(char Value, int Count)
@@ -2034,7 +2069,8 @@ namespace Microsoft.VisualBasic.CompilerServices
         public static string ToString(
             decimal Value,
             System.Globalization.NumberFormatInfo? NumberFormat
-        ) {
+        )
+        {
             throw null;
         }
         public static string ToString(double Value)
@@ -2044,7 +2080,8 @@ namespace Microsoft.VisualBasic.CompilerServices
         public static string ToString(
             double Value,
             System.Globalization.NumberFormatInfo? NumberFormat
-        ) {
+        )
+        {
             throw null;
         }
         public static string ToString(short Value)
@@ -2070,7 +2107,8 @@ namespace Microsoft.VisualBasic.CompilerServices
         public static string ToString(
             float Value,
             System.Globalization.NumberFormatInfo? NumberFormat
-        ) {
+        )
+        {
             throw null;
         }
         [System.CLSCompliantAttribute(false)]
@@ -2131,7 +2169,8 @@ namespace Microsoft.VisualBasic.CompilerServices
         public static System.DateTime FromString(
             string? Value,
             System.Globalization.CultureInfo? culture
-        ) {
+        )
+        {
             throw null;
         }
     }
@@ -2152,7 +2191,8 @@ namespace Microsoft.VisualBasic.CompilerServices
         public static decimal FromObject(
             object? Value,
             System.Globalization.NumberFormatInfo? NumberFormat
-        ) {
+        )
+        {
             throw null;
         }
         public static decimal FromString(string? Value)
@@ -2162,13 +2202,15 @@ namespace Microsoft.VisualBasic.CompilerServices
         public static decimal FromString(
             string? Value,
             System.Globalization.NumberFormatInfo? NumberFormat
-        ) {
+        )
+        {
             throw null;
         }
         public static decimal Parse(
             string Value,
             System.Globalization.NumberFormatInfo? NumberFormat
-        ) {
+        )
+        {
             throw null;
         }
     }
@@ -2197,7 +2239,8 @@ namespace Microsoft.VisualBasic.CompilerServices
         public static double FromObject(
             object? Value,
             System.Globalization.NumberFormatInfo? NumberFormat
-        ) {
+        )
+        {
             throw null;
         }
         public static double FromString(string? Value)
@@ -2207,7 +2250,8 @@ namespace Microsoft.VisualBasic.CompilerServices
         public static double FromString(
             string? Value,
             System.Globalization.NumberFormatInfo? NumberFormat
-        ) {
+        )
+        {
             throw null;
         }
         public static double Parse(string Value)
@@ -2217,7 +2261,8 @@ namespace Microsoft.VisualBasic.CompilerServices
         public static double Parse(
             string Value,
             System.Globalization.NumberFormatInfo? NumberFormat
-        ) {
+        )
+        {
             throw null;
         }
     }
@@ -2268,7 +2313,8 @@ namespace Microsoft.VisualBasic.CompilerServices
             object?[]? args,
             string?[]? paramnames,
             bool[]? CopyBack
-        ) {
+        )
+        {
             throw null;
         }
         [System.Diagnostics.DebuggerHiddenAttribute]
@@ -2320,14 +2366,16 @@ namespace Microsoft.VisualBasic.CompilerServices
             object? Source,
             object? Pattern,
             Microsoft.VisualBasic.CompareMethod CompareOption
-        ) {
+        )
+        {
             throw null;
         }
         public static bool LikeString(
             string? Source,
             string? Pattern,
             Microsoft.VisualBasic.CompareMethod CompareOption
-        ) {
+        )
+        {
             throw null;
         }
     }
@@ -2362,7 +2410,8 @@ namespace Microsoft.VisualBasic.CompilerServices
             object[] Arguments,
             string[] ArgumentNames,
             bool IgnoreReturn
-        ) {
+        )
+        {
             throw null;
         }
         [System.ComponentModel.EditorBrowsableAttribute(
@@ -2374,7 +2423,8 @@ namespace Microsoft.VisualBasic.CompilerServices
             string MemberName,
             object[] Arguments,
             string[] ArgumentNames
-        ) {
+        )
+        {
             throw null;
         }
         [System.ComponentModel.EditorBrowsableAttribute(
@@ -2406,7 +2456,8 @@ namespace Microsoft.VisualBasic.CompilerServices
             object[] Arguments,
             string[] ArgumentNames,
             bool ReportErrors
-        ) {
+        )
+        {
             throw null;
         }
         [System.ComponentModel.EditorBrowsableAttribute(
@@ -2418,7 +2469,8 @@ namespace Microsoft.VisualBasic.CompilerServices
             object[] Arguments,
             string[] ArgumentNames,
             bool ReportErrors
-        ) {
+        )
+        {
             throw null;
         }
         [System.ComponentModel.EditorBrowsableAttribute(
@@ -2446,7 +2498,8 @@ namespace Microsoft.VisualBasic.CompilerServices
             System.Type?[]? TypeArguments,
             bool[]? CopyBack,
             bool IgnoreReturn
-        ) {
+        )
+        {
             throw null;
         }
         [System.ComponentModel.EditorBrowsableAttribute(
@@ -2457,7 +2510,8 @@ namespace Microsoft.VisualBasic.CompilerServices
             object?[]? Arguments,
             string?[]? ArgumentNames,
             bool ReportErrors
-        ) {
+        )
+        {
             throw null;
         }
         public static object? LateGet(
@@ -2468,7 +2522,8 @@ namespace Microsoft.VisualBasic.CompilerServices
             string?[]? ArgumentNames,
             System.Type?[]? TypeArguments,
             bool[]? CopyBack
-        ) {
+        )
+        {
             throw null;
         }
         [System.ComponentModel.EditorBrowsableAttribute(
@@ -2479,14 +2534,16 @@ namespace Microsoft.VisualBasic.CompilerServices
             object?[]? Arguments,
             string?[]? ArgumentNames,
             bool ReportErrors
-        ) {
+        )
+        {
             throw null;
         }
         public static object? LateIndexGet(
             object Instance,
             object?[]? Arguments,
             string?[]? ArgumentNames
-        ) {
+        )
+        {
             throw null;
         }
         public static void LateIndexSet(
@@ -2551,7 +2608,8 @@ namespace Microsoft.VisualBasic.CompilerServices
                 object StepValue,
                 ref object LoopForResult,
                 ref object CounterResult
-            ) {
+            )
+            {
                 throw null;
             }
             public static bool ForNextCheckDec(decimal count, decimal limit, decimal StepValue)
@@ -2562,7 +2620,8 @@ namespace Microsoft.VisualBasic.CompilerServices
                 object Counter,
                 object LoopObj,
                 ref object CounterResult
-            ) {
+            )
+            {
                 throw null;
             }
             public static bool ForNextCheckR4(float count, float limit, float StepValue)
@@ -2613,7 +2672,8 @@ namespace Microsoft.VisualBasic.CompilerServices
             object? vLeft,
             object? vRight,
             Microsoft.VisualBasic.CompareMethod CompareOption
-        ) {
+        )
+        {
             throw null;
         }
         public static object ModObj(object? o1, object? o2)
@@ -2691,7 +2751,8 @@ namespace Microsoft.VisualBasic.CompilerServices
             object? Left,
             object? Right,
             bool TextCompare
-        ) {
+        )
+        {
             throw null;
         }
         public static object? CompareObjectLess(object? Left, object? Right, bool TextCompare)
@@ -2718,42 +2779,48 @@ namespace Microsoft.VisualBasic.CompilerServices
             object? Left,
             object? Right,
             bool TextCompare
-        ) {
+        )
+        {
             throw null;
         }
         public static bool ConditionalCompareObjectGreater(
             object? Left,
             object? Right,
             bool TextCompare
-        ) {
+        )
+        {
             throw null;
         }
         public static bool ConditionalCompareObjectGreaterEqual(
             object? Left,
             object? Right,
             bool TextCompare
-        ) {
+        )
+        {
             throw null;
         }
         public static bool ConditionalCompareObjectLess(
             object? Left,
             object? Right,
             bool TextCompare
-        ) {
+        )
+        {
             throw null;
         }
         public static bool ConditionalCompareObjectLessEqual(
             object? Left,
             object? Right,
             bool TextCompare
-        ) {
+        )
+        {
             throw null;
         }
         public static bool ConditionalCompareObjectNotEqual(
             object? Left,
             object? Right,
             bool TextCompare
-        ) {
+        )
+        {
             throw null;
         }
         public static object? DivideObject(object? Left, object? Right)
@@ -2881,7 +2948,8 @@ namespace Microsoft.VisualBasic.CompilerServices
         public static float FromObject(
             object? Value,
             System.Globalization.NumberFormatInfo? NumberFormat
-        ) {
+        )
+        {
             throw null;
         }
         public static float FromString(string? Value)
@@ -2891,7 +2959,8 @@ namespace Microsoft.VisualBasic.CompilerServices
         public static float FromString(
             string? Value,
             System.Globalization.NumberFormatInfo? NumberFormat
-        ) {
+        )
+        {
             throw null;
         }
     }
@@ -2944,7 +3013,8 @@ namespace Microsoft.VisualBasic.CompilerServices
         public static string FromDecimal(
             decimal Value,
             System.Globalization.NumberFormatInfo? NumberFormat
-        ) {
+        )
+        {
             throw null;
         }
         public static string FromDouble(double Value)
@@ -2954,7 +3024,8 @@ namespace Microsoft.VisualBasic.CompilerServices
         public static string FromDouble(
             double Value,
             System.Globalization.NumberFormatInfo? NumberFormat
-        ) {
+        )
+        {
             throw null;
         }
         public static string FromInteger(int Value)
@@ -2981,7 +3052,8 @@ namespace Microsoft.VisualBasic.CompilerServices
         public static string FromSingle(
             float Value,
             System.Globalization.NumberFormatInfo? NumberFormat
-        ) {
+        )
+        {
             throw null;
         }
         public static void MidStmtStr(
@@ -2998,7 +3070,8 @@ namespace Microsoft.VisualBasic.CompilerServices
             string? Source,
             string? Pattern,
             Microsoft.VisualBasic.CompareMethod CompareOption
-        ) {
+        )
+        {
             throw null;
         }
         public static bool StrLikeBinary(string? Source, string? Pattern)
@@ -3036,7 +3109,8 @@ namespace Microsoft.VisualBasic.CompilerServices
             string MethodName,
             Microsoft.VisualBasic.CallType UseCallType,
             params object?[]? Arguments
-        ) {
+        )
+        {
             throw null;
         }
         public static bool IsNumeric(object? Expression)
@@ -3163,7 +3237,8 @@ namespace Microsoft.VisualBasic.FileIO
             string containsText,
             bool ignoreCase,
             Microsoft.VisualBasic.FileIO.SearchOption searchType
-        ) {
+        )
+        {
             throw null;
         }
         public static System.Collections.ObjectModel.ReadOnlyCollection<string> FindInFiles(
@@ -3172,19 +3247,22 @@ namespace Microsoft.VisualBasic.FileIO
             bool ignoreCase,
             Microsoft.VisualBasic.FileIO.SearchOption searchType,
             params string[] fileWildcards
-        ) {
+        )
+        {
             throw null;
         }
         public static System.Collections.ObjectModel.ReadOnlyCollection<string> GetDirectories(
             string directory
-        ) {
+        )
+        {
             throw null;
         }
         public static System.Collections.ObjectModel.ReadOnlyCollection<string> GetDirectories(
             string directory,
             Microsoft.VisualBasic.FileIO.SearchOption searchType,
             params string[] wildcards
-        ) {
+        )
+        {
             throw null;
         }
         public static System.IO.DirectoryInfo GetDirectoryInfo(string directory)
@@ -3201,14 +3279,16 @@ namespace Microsoft.VisualBasic.FileIO
         }
         public static System.Collections.ObjectModel.ReadOnlyCollection<string> GetFiles(
             string directory
-        ) {
+        )
+        {
             throw null;
         }
         public static System.Collections.ObjectModel.ReadOnlyCollection<string> GetFiles(
             string directory,
             Microsoft.VisualBasic.FileIO.SearchOption searchType,
             params string[] wildcards
-        ) {
+        )
+        {
             throw null;
         }
         public static string GetName(string path)
@@ -3267,13 +3347,15 @@ namespace Microsoft.VisualBasic.FileIO
         public static Microsoft.VisualBasic.FileIO.TextFieldParser OpenTextFieldParser(
             string file,
             params int[] fieldWidths
-        ) {
+        )
+        {
             throw null;
         }
         public static Microsoft.VisualBasic.FileIO.TextFieldParser OpenTextFieldParser(
             string file,
             params string[] delimiters
-        ) {
+        )
+        {
             throw null;
         }
         public static System.IO.StreamReader OpenTextFileReader(string file)
@@ -3283,7 +3365,8 @@ namespace Microsoft.VisualBasic.FileIO
         public static System.IO.StreamReader OpenTextFileReader(
             string file,
             System.Text.Encoding encoding
-        ) {
+        )
+        {
             throw null;
         }
         public static System.IO.StreamWriter OpenTextFileWriter(string file, bool append)
@@ -3294,7 +3377,8 @@ namespace Microsoft.VisualBasic.FileIO
             string file,
             bool append,
             System.Text.Encoding encoding
-        ) {
+        )
+        {
             throw null;
         }
         public static byte[] ReadAllBytes(string file)

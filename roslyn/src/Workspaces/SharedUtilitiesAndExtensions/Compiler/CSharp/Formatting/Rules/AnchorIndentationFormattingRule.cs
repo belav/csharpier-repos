@@ -16,13 +16,15 @@ namespace Microsoft.CodeAnalysis.CSharp.Formatting
             List<AnchorIndentationOperation> list,
             SyntaxNode node,
             in NextAnchorIndentationOperationAction nextOperation
-        ) {
+        )
+        {
             nextOperation.Invoke();
 
             if (
                 node.IsKind(SyntaxKind.SimpleLambdaExpression)
                 || node.IsKind(SyntaxKind.ParenthesizedLambdaExpression)
-            ) {
+            )
+            {
                 AddAnchorIndentationOperation(list, node);
                 return;
             }

@@ -180,7 +180,8 @@ namespace Microsoft.Extensions.Localization
         [InlineData(false)]
         public void ResourceManagerStringLocalizer_GetAllStrings_ReturnsExpectedValue(
             bool includeParentCultures
-        ) {
+        )
+        {
             // Arrange
             var baseName = "test";
             var resourceNamesCache = new ResourceNamesCache();
@@ -217,7 +218,8 @@ namespace Microsoft.Extensions.Localization
         [InlineData(false)]
         public void ResourceManagerStringLocalizer_GetAllStrings_MissingResourceThrows(
             bool includeParentCultures
-        ) {
+        )
+        {
             // Arrange
             var resourceNamesCache = new ResourceNamesCache();
             var baseName = "testington";
@@ -307,7 +309,8 @@ namespace Microsoft.Extensions.Localization
                 CultureInfo culture,
                 bool createIfNotExists,
                 bool tryParents
-            ) {
+            )
+            {
                 var resourceStream = _assemblyWrapper.GetManifestResourceStream(BaseName);
 
                 return resourceStream != null ? new ResourceSet(resourceStream) : null;

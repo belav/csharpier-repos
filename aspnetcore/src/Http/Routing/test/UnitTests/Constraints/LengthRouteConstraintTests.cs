@@ -17,7 +17,8 @@ namespace Microsoft.AspNetCore.Routing.Tests
             int length,
             string parameterValue,
             bool expected
-        ) {
+        )
+        {
             // Arrange
             var constraint = new LengthRouteConstraint(length);
 
@@ -39,7 +40,8 @@ namespace Microsoft.AspNetCore.Routing.Tests
             int max,
             string parameterValue,
             bool expected
-        ) {
+        )
+        {
             // Arrange
             var constraint = new LengthRouteConstraint(min, max);
 

@@ -96,7 +96,8 @@ namespace Microsoft.AspNetCore.E2ETesting
                 if (
                     !string.IsNullOrEmpty(userProfileDirectory)
                     && Directory.Exists(userProfileDirectory)
-                ) {
+                )
+                {
                     var attemptCount = 0;
                     while (true)
                     {
@@ -128,7 +129,8 @@ namespace Microsoft.AspNetCore.E2ETesting
         public Task<(IWebDriver, ILogs)> GetOrCreateBrowserAsync(
             ITestOutputHelper output,
             string isolationContext = ""
-        ) {
+        )
+        {
             Func<string, ITestOutputHelper, Task<(IWebDriver, ILogs)>> createBrowserFunc;
             if (E2ETestOptions.Instance.SauceTest)
             {
@@ -155,7 +157,8 @@ namespace Microsoft.AspNetCore.E2ETesting
         private async Task<(IWebDriver browser, ILogs log)> CreateBrowserAsync(
             string context,
             ITestOutputHelper output
-        ) {
+        )
+        {
             var opts = new ChromeOptions();
 
             // Force language to english for tests
@@ -168,7 +171,8 @@ namespace Microsoft.AspNetCore.E2ETesting
                     "true",
                     StringComparison.OrdinalIgnoreCase
                 )
-            ) {
+            )
+            {
                 opts.AddArgument("--headless");
             }
 
@@ -259,7 +263,8 @@ namespace Microsoft.AspNetCore.E2ETesting
         private async Task<(IWebDriver browser, ILogs log)> CreateSauceBrowserAsync(
             string context,
             ITestOutputHelper output
-        ) {
+        )
+        {
             var sauce = E2ETestOptions.Instance.Sauce;
 
             if (
@@ -270,7 +275,8 @@ namespace Microsoft.AspNetCore.E2ETesting
                 || string.IsNullOrEmpty(sauce.TunnelIdentifier)
                 || string.IsNullOrEmpty(sauce.PlatformName)
                 || string.IsNullOrEmpty(sauce.BrowserName)
-            ) {
+            )
+            {
                 throw new InvalidOperationException(
                     "Required SauceLabs environment variables not set."
                 );

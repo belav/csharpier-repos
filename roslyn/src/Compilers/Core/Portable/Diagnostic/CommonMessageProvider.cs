@@ -150,7 +150,8 @@ namespace Microsoft.CodeAnalysis
         public DiagnosticInfo? FilterDiagnosticInfo(
             DiagnosticInfo diagnosticInfo,
             CompilationOptions options
-        ) {
+        )
+        {
             var report = this.GetDiagnosticReport(diagnosticInfo, options);
             switch (report)
             {
@@ -282,7 +283,8 @@ namespace Microsoft.CodeAnalysis
             Exception e,
             string filePath,
             DiagnosticBag diagnostics
-        ) {
+        )
+        {
             diagnostics.Add(
                 CreateDiagnostic(ERR_OutputWriteFailed, Location.None, filePath, e.Message)
             );
@@ -300,7 +302,8 @@ namespace Microsoft.CodeAnalysis
             SyntaxNode attributeSyntax,
             int parameterIndex,
             AttributeData attribute
-        ) {
+        )
+        {
             if (diagnostics.DiagnosticBag is DiagnosticBag diagnosticBag)
             {
                 ReportInvalidAttributeArgument(
@@ -326,7 +329,8 @@ namespace Microsoft.CodeAnalysis
             int namedArgumentIndex,
             ITypeSymbol attributeClass,
             string parameterName
-        ) {
+        )
+        {
             if (diagnostics.DiagnosticBag is DiagnosticBag diagnosticBag)
             {
                 ReportInvalidNamedArgument(
@@ -349,7 +353,8 @@ namespace Microsoft.CodeAnalysis
             BindingDiagnosticBag diagnostics,
             SyntaxNode attributeSyntax,
             int namedArgumentIndex
-        ) {
+        )
+        {
             if (diagnostics.DiagnosticBag is DiagnosticBag diagnosticBag)
             {
                 ReportParameterNotValidForType(diagnosticBag, attributeSyntax, namedArgumentIndex);
@@ -370,7 +375,8 @@ namespace Microsoft.CodeAnalysis
             int parameterIndex,
             string unmanagedTypeName,
             AttributeData attribute
-        ) {
+        )
+        {
             if (diagnostics.DiagnosticBag is DiagnosticBag diagnosticBag)
             {
                 ReportMarshalUnmanagedTypeNotValidForFields(
@@ -397,7 +403,8 @@ namespace Microsoft.CodeAnalysis
             int parameterIndex,
             string unmanagedTypeName,
             AttributeData attribute
-        ) {
+        )
+        {
             if (diagnostics.DiagnosticBag is DiagnosticBag diagnosticBag)
             {
                 ReportMarshalUnmanagedTypeOnlyValidForFields(
@@ -420,7 +427,8 @@ namespace Microsoft.CodeAnalysis
             BindingDiagnosticBag diagnostics,
             SyntaxNode attributeSyntax,
             string parameterName
-        ) {
+        )
+        {
             if (diagnostics.DiagnosticBag is DiagnosticBag diagnosticBag)
             {
                 ReportAttributeParameterRequired(diagnosticBag, attributeSyntax, parameterName);
@@ -439,7 +447,8 @@ namespace Microsoft.CodeAnalysis
             SyntaxNode attributeSyntax,
             string parameterName1,
             string parameterName2
-        ) {
+        )
+        {
             if (diagnostics.DiagnosticBag is DiagnosticBag diagnosticBag)
             {
                 ReportAttributeParameterRequired(

@@ -83,7 +83,8 @@ namespace Moq.Linq
             if (
                 node.Method.DeclaringType == typeof(Queryable)
                 && queryableMethods.Contains(node.Method.Name)
-            ) {
+            )
+            {
                 this.stackIndex++;
                 var result = base.VisitMethodCall(node);
                 this.stackIndex--;
@@ -189,7 +190,8 @@ namespace Moq.Linq
                     node.Expression is ParameterExpression pe
                     && pe.Type.IsDefined(typeof(CompilerGeneratedAttribute))
                     && pe.Type.Name.Contains("f__AnonymousType")
-                ) {
+                )
+                {
                     // In LINQ query expressions with more than one `from` clause such as:
                     //
                     //   from a in Mocks.Of<A>()

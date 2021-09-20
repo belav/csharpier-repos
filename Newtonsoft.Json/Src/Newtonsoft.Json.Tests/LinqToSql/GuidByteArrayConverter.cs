@@ -45,7 +45,8 @@ namespace Newtonsoft.Json.Tests.LinqToSql
             Type objectType,
             object existingValue,
             JsonSerializer serializer
-        ) {
+        )
+        {
             string encodedData = (string)reader.Value;
             byte[] data = Convert.FromBase64String(encodedData);
             return new Guid(data);

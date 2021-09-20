@@ -20,7 +20,8 @@ namespace Microsoft.CodeAnalysis.Completion
         protected override CompletionItem GetBetterItem(
             CompletionItem item,
             CompletionItem existingItem
-        ) {
+        )
+        {
             // We've constructed the export order of completion providers so
             // that snippets are exported after everything else. That way,
             // when we choose a single item per display text, snippet
@@ -44,7 +45,8 @@ namespace Microsoft.CodeAnalysis.Completion
             ImmutableHashSet<string> roles,
             OptionSet options,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             return GetCompletionsWithAvailabilityOfExpandedItemsAsync(
                 document,
                 caretPosition,
@@ -65,7 +67,8 @@ namespace Microsoft.CodeAnalysis.Completion
             Document document,
             ImmutableArray<(CompletionItem, PatternMatch?)> itemsWithPatternMatch,
             string filterText
-        ) {
+        )
+        {
             var helper = CompletionHelper.GetHelper(document);
             return CompletionService.FilterItems(helper, itemsWithPatternMatch);
         }

@@ -24,12 +24,8 @@ namespace MS.Internal.Xml.XPath
         private XPathNavigator? _lastNode;
 #endif
 
-        public CacheChildrenQuery(
-            Query qyInput,
-            string name,
-            string prefix,
-            XPathNodeType type
-        ) : base(qyInput, name, prefix, type)
+        public CacheChildrenQuery(Query qyInput, string name, string prefix, XPathNodeType type)
+            : base(qyInput, name, prefix, type)
         {
             _elementStk = new StackNav();
             _positionStk = new StackInt();

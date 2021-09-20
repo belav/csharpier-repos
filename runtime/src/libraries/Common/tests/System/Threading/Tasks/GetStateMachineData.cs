@@ -38,7 +38,8 @@ namespace System.Threading.Tasks
                 StringBuilder sb,
                 HashSet<object> seen,
                 int indentLevel
-            ) {
+            )
+            {
                 string indent = string.Concat(Enumerable.Repeat("    ", indentLevel));
 
                 // If we were handed a null object (which should only happen from recursion),
@@ -103,7 +104,8 @@ namespace System.Threading.Tasks
                                         | BindingFlags.Public
                                         | BindingFlags.NonPublic
                                 )
-                        ) {
+                        )
+                        {
                             if (possibleTask.GetValue(fiValue) is Task awaitedTask)
                             {
                                 Describe(awaitedTask, sb, seen, indentLevel + 1);

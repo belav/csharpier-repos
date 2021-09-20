@@ -268,7 +268,8 @@ namespace System
                     if (
                         (ulong)desiredStartIndex + (ulong)(uint)desiredLength
                         > (ulong)(uint)lengthOfUnderlyingSpan
-                    ) {
+                    )
+                    {
                         ThrowHelper.ThrowArgumentOutOfRangeException();
                     }
 #else
@@ -276,7 +277,8 @@ namespace System
                         (uint)desiredStartIndex > (uint)lengthOfUnderlyingSpan
                         || (uint)desiredLength
                             > (uint)lengthOfUnderlyingSpan - (uint)desiredStartIndex
-                    ) {
+                    )
+                    {
                         ThrowHelper.ThrowArgumentOutOfRangeException();
                     }
 #endif

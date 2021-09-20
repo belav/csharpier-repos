@@ -24,7 +24,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
         public RelationalDbFunctionAttributeConvention(
             ProviderConventionSetBuilderDependencies dependencies,
             RelationalConventionSetBuilderDependencies relationalDependencies
-        ) {
+        )
+        {
             Dependencies = dependencies;
         }
 
@@ -41,7 +42,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
         public virtual void ProcessModelInitialized(
             IConventionModelBuilder modelBuilder,
             IConventionContext<IConventionModelBuilder> context
-        ) {
+        )
+        {
             var contextType = Dependencies.ContextType;
             while (contextType != null && contextType != typeof(DbContext))
             {
@@ -67,7 +69,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
         public virtual void ProcessModelFinalizing(
             IConventionModelBuilder modelBuilder,
             IConventionContext<IConventionModelBuilder> context
-        ) {
+        )
+        {
             foreach (var function in modelBuilder.Metadata.GetDbFunctions())
             {
                 ProcessDbFunctionAdded(function.Builder, context);
@@ -82,7 +85,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
         protected virtual void ProcessDbFunctionAdded(
             IConventionDbFunctionBuilder dbFunctionBuilder,
             IConventionContext context
-        ) {
+        )
+        {
             var methodInfo = dbFunctionBuilder.Metadata.MethodInfo;
             var dbFunctionAttribute = methodInfo?.GetCustomAttributes<DbFunctionAttribute>()
                 .SingleOrDefault();

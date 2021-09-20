@@ -49,7 +49,8 @@ namespace System.Runtime.Intrinsics.X86
         public static Vector128<long> CompareGreaterThan(
             Vector128<long> left,
             Vector128<long> right
-        ) {
+        )
+        {
             throw new PlatformNotSupportedException();
         }
 

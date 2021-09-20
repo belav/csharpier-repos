@@ -15,7 +15,8 @@ namespace System.Linq.Tests
             IEnumerable<K> keys,
             IEnumerable<T> elements,
             System.Linq.ILookup<K, T> lookup
-        ) {
+        )
+        {
             Assert.NotNull(lookup);
             Assert.NotNull(keys);
             Assert.NotNull(elements);

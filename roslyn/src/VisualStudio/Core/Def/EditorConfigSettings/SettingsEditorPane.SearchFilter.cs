@@ -68,7 +68,8 @@ namespace Microsoft.VisualStudio.LanguageServices.EditorConfigSettings
                             searchToken,
                             cachedColumnValues
                         )
-                    ) {
+                    )
+                    {
                         return false;
                     }
                 }
@@ -80,7 +81,8 @@ namespace Microsoft.VisualStudio.LanguageServices.EditorConfigSettings
                 ITableEntryHandle entry,
                 IVsSearchToken searchToken,
                 string[] cachedColumnValues
-            ) {
+            )
+            {
                 // Check details content for any matches
                 if (cachedColumnValues[0] == null)
                 {

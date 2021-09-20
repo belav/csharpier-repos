@@ -52,10 +52,8 @@ namespace Microsoft.CodeAnalysis.CSharp
         {
             private readonly BoundExpression _receiverExpression;
 
-            internal BinderWithConditionalReceiver(
-                Binder next,
-                BoundExpression receiverExpression
-            ) : base(next)
+            internal BinderWithConditionalReceiver(Binder next, BoundExpression receiverExpression)
+                : base(next)
             {
                 Debug.Assert(receiverExpression != null);
 
@@ -91,7 +89,8 @@ namespace Microsoft.CodeAnalysis.CSharp
         internal Binder WithAdditionalFlagsAndContainingMemberOrLambda(
             BinderFlags flags,
             Symbol containing
-        ) {
+        )
+        {
             Debug.Assert((object)containing != null);
             return new BinderWithContainingMemberOrLambda(this, this.Flags | flags, containing);
         }

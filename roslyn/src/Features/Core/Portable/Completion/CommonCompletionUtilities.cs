@@ -29,7 +29,8 @@ namespace Microsoft.CodeAnalysis.Completion
             int position,
             Func<char, bool> isWordStartCharacter,
             Func<char, bool> isWordCharacter
-        ) {
+        )
+        {
             return GetWordSpan(
                 text,
                 position,
@@ -45,7 +46,8 @@ namespace Microsoft.CodeAnalysis.Completion
             Func<char, bool> isWordStartCharacter,
             Func<char, bool> isWordCharacter,
             bool alwaysExtendEndSpan = false
-        ) {
+        )
+        {
             var start = position;
             while (start > 0 && isWordStartCharacter(text[start - 1]))
             {
@@ -75,7 +77,8 @@ namespace Microsoft.CodeAnalysis.Completion
             int characterPosition,
             Func<char, bool> isWordStartCharacter,
             Func<char, bool> isWordCharacter
-        ) {
+        )
+        {
             var ch = text[characterPosition];
             if (!isWordStartCharacter(ch))
             {
@@ -102,7 +105,8 @@ namespace Microsoft.CodeAnalysis.Completion
             SemanticModel semanticModel,
             int position,
             ISymbol symbol
-        ) {
+        )
+        {
             return CreateDescriptionFactory(workspace, semanticModel, position, new[] { symbol });
         }
 
@@ -111,7 +115,8 @@ namespace Microsoft.CodeAnalysis.Completion
             SemanticModel semanticModel,
             int position,
             IReadOnlyList<ISymbol> symbols
-        ) {
+        )
+        {
             return c =>
                 CreateDescriptionAsync(
                     workspace,
@@ -129,7 +134,8 @@ namespace Microsoft.CodeAnalysis.Completion
             int position,
             IReadOnlyList<ISymbol> symbols,
             SupportedPlatformData supportedPlatforms
-        ) {
+        )
+        {
             return c =>
                 CreateDescriptionAsync(
                     workspace,
@@ -149,7 +155,8 @@ namespace Microsoft.CodeAnalysis.Completion
             int overloadCount,
             SupportedPlatformData supportedPlatforms,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var symbolDisplayService = workspace.Services.GetLanguageServices(
                     semanticModel.Language
                 )
@@ -238,7 +245,8 @@ namespace Microsoft.CodeAnalysis.Completion
             IReadOnlyList<ISymbol> symbols,
             SupportedPlatformData supportedPlatforms,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             // Lets try to find the first non-obsolete symbol (overload) and fall-back
             // to the first symbol if all are obsolete.
             var symbol = symbols.FirstOrDefault(s => !s.IsObsolete()) ?? symbols[0];
@@ -258,7 +266,8 @@ namespace Microsoft.CodeAnalysis.Completion
             List<TaggedText> textContentBuilder,
             int overloadCount,
             bool isGeneric
-        ) {
+        )
+        {
             var text = isGeneric
                 ? overloadCount == 1
                     ? FeaturesResources.generic_overload
@@ -275,7 +284,8 @@ namespace Microsoft.CodeAnalysis.Completion
             int position,
             IDocumentationCommentFormattingService formatter,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var documentation = symbol.GetDocumentationParts(
                 semanticModel,
                 position,
@@ -294,7 +304,8 @@ namespace Microsoft.CodeAnalysis.Completion
             SourceText text,
             int characterPosition,
             string value
-        ) {
+        )
+        {
             // The character position starts at the last character of 'value'.  So if 'value' has
             // length 1, then we don't want to move, if it has length 2 we want to move back one,
             // etc.
@@ -320,7 +331,8 @@ namespace Microsoft.CodeAnalysis.Completion
             ISymbol symbol,
             SyntaxContext context,
             out string name
-        ) {
+        )
+        {
             var isAttributeNameContext = context.IsAttributeNameContext;
             var syntaxFacts = context.GetLanguageService<ISyntaxFactsService>();
 
@@ -334,7 +346,8 @@ namespace Microsoft.CodeAnalysis.Completion
             if (
                 !symbol.Name.TryGetWithoutAttributeSuffix(syntaxFacts.IsCaseSensitive, out name)
                 || !symbol.IsAttribute()
-            ) {
+            )
+            {
                 return false;
             }
 

@@ -32,7 +32,8 @@ namespace Microsoft.AspNetCore.DataProtection.KeyManagement
             ILogger? logger,
             string[]? originalPurposes,
             string newPurpose
-        ) {
+        )
+        {
             Debug.Assert(keyRingProvider != null);
 
             Purposes = ConcatPurposes(originalPurposes, newPurpose);
@@ -84,7 +85,8 @@ namespace Microsoft.AspNetCore.DataProtection.KeyManagement
             bool ignoreRevocationErrors,
             out bool requiresMigration,
             out bool wasRevoked
-        ) {
+        )
+        {
             // argument & state checking
             if (protectedData == null)
             {
@@ -220,7 +222,8 @@ namespace Microsoft.AspNetCore.DataProtection.KeyManagement
             byte[] protectedData,
             bool allowOperationsOnRevokedKeys,
             out UnprotectStatus status
-        ) {
+        )
+        {
             Debug.Assert(protectedData != null);
 
             try
@@ -230,7 +233,8 @@ namespace Microsoft.AspNetCore.DataProtection.KeyManagement
                     protectedData.Length
                     < sizeof(uint) /* magic header */
                         + sizeof(Guid) /* key id */
-                ) {
+                )
+                {
                     // payload must contain at least the magic header and key id
                     throw Error.ProtectionProvider_BadMagicHeader();
                 }
@@ -277,7 +281,8 @@ namespace Microsoft.AspNetCore.DataProtection.KeyManagement
                     if (
                         _keyRingProvider is KeyRingProvider provider
                         && provider.InAutoRefreshWindow()
-                    ) {
+                    )
+                    {
                         currentKeyRing = provider.RefreshCurrentKeyRing();
                         requestedEncryptor = currentKeyRing.GetAuthenticatedEncryptorByKeyId(
                             keyIdFromPayload,

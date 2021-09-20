@@ -140,7 +140,8 @@ namespace JIT.HardwareIntrinsics.X86
                 Int32[] inArray3,
                 Int32[] outArray,
                 int alignment
-            ) {
+            )
+            {
                 int sizeOfinArray1 = inArray1.Length * Unsafe.SizeOf<Int32>();
                 int sizeOfinArray2 = inArray2.Length * Unsafe.SizeOf<Int32>();
                 int sizeOfinArray3 = inArray3.Length * Unsafe.SizeOf<Int32>();
@@ -151,7 +152,8 @@ namespace JIT.HardwareIntrinsics.X86
                     || (alignment * 2) < sizeOfinArray2
                     || (alignment * 2) < sizeOfinArray3
                     || (alignment * 2) < sizeOfoutArray
-                ) {
+                )
+                {
                     throw new ArgumentException("Invalid value of alignment");
                 }
 
@@ -656,7 +658,8 @@ namespace JIT.HardwareIntrinsics.X86
 
             fixed (Vector128<Int32>* pFld1 = &_fld1)fixed (Vector128<Int32>* pFld2 = &_fld2)fixed (
                 Vector128<Int32>* pFld3 = &_fld3
-            ) {
+            )
+            {
                 var result = Sse41.BlendVariable(
                     Sse2.LoadVector128((Int32*)(pFld1)),
                     Sse2.LoadVector128((Int32*)(pFld2)),
@@ -737,7 +740,8 @@ namespace JIT.HardwareIntrinsics.X86
             Vector128<Int32> op3,
             void* result,
             [CallerMemberName] string method = ""
-        ) {
+        )
+        {
             Int32[] inArray1 = new Int32[Op1ElementCount];
             Int32[] inArray2 = new Int32[Op2ElementCount];
             Int32[] inArray3 = new Int32[Op3ElementCount];
@@ -761,7 +765,8 @@ namespace JIT.HardwareIntrinsics.X86
             void* op3,
             void* result,
             [CallerMemberName] string method = ""
-        ) {
+        )
+        {
             Int32[] inArray1 = new Int32[Op1ElementCount];
             Int32[] inArray2 = new Int32[Op2ElementCount];
             Int32[] inArray3 = new Int32[Op3ElementCount];
@@ -797,7 +802,8 @@ namespace JIT.HardwareIntrinsics.X86
             Int32[] thirdOp,
             Int32[] result,
             [CallerMemberName] string method = ""
-        ) {
+        )
+        {
             bool succeeded = true;
 
             if ((thirdOp[0] != 0) ? secondOp[0] != result[0] : firstOp[0] != result[0])

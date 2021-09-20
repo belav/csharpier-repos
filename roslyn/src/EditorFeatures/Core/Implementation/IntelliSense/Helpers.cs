@@ -25,7 +25,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.IntelliSense
             Document document,
             IThreadingContext threadingContext,
             Lazy<IStreamingFindUsagesPresenter> streamingPresenter
-        ) {
+        )
+        {
             var index = 0;
             return BuildInteractiveTextElements(
                 taggedTexts,
@@ -42,7 +43,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.IntelliSense
             Document document,
             IThreadingContext? threadingContext,
             Lazy<IStreamingFindUsagesPresenter>? streamingPresenter
-        ) {
+        )
+        {
             // This method produces a sequence of zero or more paragraphs
             var paragraphs = new List<object>();
 
@@ -156,14 +158,16 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.IntelliSense
                         part.NavigationTarget is object
                         && streamingPresenter != null
                         && threadingContext != null
-                    ) {
+                    )
+                    {
                         if (
                             Uri.TryCreate(
                                 part.NavigationTarget,
                                 UriKind.Absolute,
                                 out var absoluteUri
                             )
-                        ) {
+                        )
+                        {
                             var target = new QuickInfoHyperLink(
                                 document.Project.Solution.Workspace,
                                 absoluteUri
@@ -241,7 +245,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.IntelliSense
             DocumentId documentId,
             IThreadingContext threadingContext,
             IStreamingFindUsagesPresenter streamingPresenter
-        ) {
+        )
+        {
             var solution = workspace.CurrentSolution;
             SymbolKeyResolution resolvedSymbolKey;
             try

@@ -259,7 +259,8 @@ class A<T> where T : class
                         var metadata = ModuleMetadata.CreateFromImage(
                             ImmutableArray.CreateRange(result.Assembly)
                         )
-                    ) {
+                    )
+                    {
                         var reader = metadata.MetadataReader;
                         var typeDef = reader.GetTypeDef(result.TypeName);
                         reader.CheckTypeParameters(typeDef.GetGenericParameters(), "T", "U");

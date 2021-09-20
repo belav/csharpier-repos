@@ -54,15 +54,16 @@ namespace Microsoft.AspNetCore.Server.IISIntegration
             string pairingToken,
             IAuthenticationSchemeProvider authentication,
             IHostApplicationLifetime applicationLifetime
-        ) : this(
-            next,
-            loggerFactory,
-            options,
-            pairingToken,
-            isWebsocketsSupported: true,
-            authentication,
-            applicationLifetime
-        ) { }
+        )
+            : this(
+                next,
+                loggerFactory,
+                options,
+                pairingToken,
+                isWebsocketsSupported: true,
+                authentication,
+                applicationLifetime
+            ) { }
 
         /// <summary>
         /// The middleware that enables IIS Out-Of-Process to work.
@@ -82,7 +83,8 @@ namespace Microsoft.AspNetCore.Server.IISIntegration
             bool isWebsocketsSupported,
             IAuthenticationSchemeProvider authentication,
             IHostApplicationLifetime applicationLifetime
-        ) {
+        )
+        {
             if (next == null)
             {
                 throw new ArgumentNullException(nameof(next));
@@ -137,7 +139,8 @@ namespace Microsoft.AspNetCore.Server.IISIntegration
                     httpContext.Request.Headers[MSAspNetCoreToken],
                     StringComparison.Ordinal
                 )
-            ) {
+            )
+            {
                 _logger.LogError(
                     $"'{MSAspNetCoreToken}' does not match the expected pairing token '{_pairingToken}', request rejected."
                 );
@@ -154,7 +157,8 @@ namespace Microsoft.AspNetCore.Server.IISIntegration
                     httpContext.Request.Headers[MSAspNetCoreEvent],
                     StringComparison.OrdinalIgnoreCase
                 )
-            ) {
+            )
+            {
                 // Execute shutdown task on background thread without waiting for completion
                 var shutdownTask = Task.Run(() => _applicationLifetime.StopApplication());
                 httpContext.Response.StatusCode = StatusCodes.Status202Accepted;
@@ -168,7 +172,8 @@ namespace Microsoft.AspNetCore.Server.IISIntegration
                     httpContext.Request.Method,
                     StringComparison.OrdinalIgnoreCase
                 )
-            ) {
+            )
+            {
                 // The Visual Studio debugger tooling sends a DEBUG request to make IIS & AspNetCoreModule launch the process
                 // so the debugger can attach. Filter out this request from the app.
                 return;
@@ -230,7 +235,8 @@ namespace Microsoft.AspNetCore.Server.IISIntegration
                     CultureInfo.InvariantCulture,
                     out var hexHandle
                 )
-            ) {
+            )
+            {
                 // Always create the identity if the handle exists, we need to dispose it so it does not leak.
                 var handle = new IntPtr(hexHandle);
                 var winIdentity = new WindowsIdentity(handle, IISDefaults.AuthenticationScheme);

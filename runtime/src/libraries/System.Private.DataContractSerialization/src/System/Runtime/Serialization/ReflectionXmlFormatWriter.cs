@@ -20,7 +20,8 @@ namespace System.Runtime.Serialization
             object obj,
             XmlObjectSerializerWriteContext context,
             ClassDataContract classContract
-        ) {
+        )
+        {
             _reflectionClassWriter.ReflectionWriteClass(
                 xmlWriter,
                 obj,
@@ -35,7 +36,8 @@ namespace System.Runtime.Serialization
             object obj,
             XmlObjectSerializerWriteContext context,
             CollectionDataContract collectionDataContract
-        ) {
+        )
+        {
             XmlDictionaryString ns = collectionDataContract.Namespace;
             XmlDictionaryString itemName = collectionDataContract.CollectionItemName;
 
@@ -57,7 +59,8 @@ namespace System.Runtime.Serialization
                         itemName,
                         ns
                     )
-                ) {
+                )
+                {
                     Array array = (Array)obj;
                     PrimitiveDataContract? primitiveContract =
                         PrimitiveDataContract.GetPrimitiveDataContract(itemType);
@@ -96,7 +99,8 @@ namespace System.Runtime.Serialization
                 if (
                     primitiveContractForType != null
                     && primitiveContractForType.UnderlyingType != Globals.TypeOfObject
-                ) {
+                )
+                {
                     while (enumerator.MoveNext())
                     {
                         object current = enumerator.Current;
@@ -161,7 +165,8 @@ namespace System.Runtime.Serialization
             Type itemType,
             XmlDictionaryString collectionItemName,
             XmlDictionaryString itemNamespace
-        ) {
+        )
+        {
             PrimitiveDataContract? primitiveContract =
                 PrimitiveDataContract.GetPrimitiveDataContract(itemType);
             if (primitiveContract == null)
@@ -212,7 +217,8 @@ namespace System.Runtime.Serialization
             ClassDataContract derivedMostClassContract,
             int childElementIndex,
             XmlDictionaryString[]? emptyStringArray
-        ) {
+        )
+        {
             int memberCount =
                 (classContract.BaseContract == null)
                     ? 0
@@ -253,7 +259,8 @@ namespace System.Runtime.Serialization
                     if (
                         (memberValue == null && defaultValue == null)
                         || (memberValue != null && memberValue.Equals(defaultValue))
-                    ) {
+                    )
+                    {
                         shouldWriteValue = false;
 
                         if (member.IsRequired)
@@ -293,7 +300,8 @@ namespace System.Runtime.Serialization
                             ns,
                             primitiveContract
                         )
-                    ) {
+                    )
+                    {
                         ReflectionWriteStartElement(
                             xmlWriter,
                             memberType,
@@ -341,7 +349,8 @@ namespace System.Runtime.Serialization
             string namespaceLocal,
             string nameLocal,
             int nameIndex
-        ) {
+        )
+        {
             bool needsPrefix = NeedsPrefix(type, ns);
 
             if (needsPrefix)
@@ -369,7 +378,8 @@ namespace System.Runtime.Serialization
             DataMember member,
             ClassDataContract classContract,
             ClassDataContract derivedMostClassContract
-        ) {
+        )
+        {
             // Check for conflict with base type members
             if (CheckIfConflictingMembersHaveDifferentTypes(member))
                 return true;

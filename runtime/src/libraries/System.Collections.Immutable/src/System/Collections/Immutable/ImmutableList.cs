@@ -58,7 +58,8 @@ namespace System.Collections.Immutable
         /// <returns>An immutable list.</returns>
         public static ImmutableList<TSource> ToImmutableList<TSource>(
             this IEnumerable<TSource> source
-        ) {
+        )
+        {
             var existingList = source as ImmutableList<TSource>;
             if (existingList != null)
             {
@@ -75,7 +76,8 @@ namespace System.Collections.Immutable
         /// <returns>An immutable list.</returns>
         public static ImmutableList<TSource> ToImmutableList<TSource>(
             this ImmutableList<TSource>.Builder builder
-        ) {
+        )
+        {
             Requires.NotNull(builder, nameof(builder));
 
             return builder.ToImmutable();
@@ -93,7 +95,8 @@ namespace System.Collections.Immutable
             this IImmutableList<T> list,
             T oldValue,
             T newValue
-        ) {
+        )
+        {
             Requires.NotNull(list, nameof(list));
             return list.Replace(oldValue, newValue, EqualityComparer<T>.Default);
         }
@@ -121,7 +124,8 @@ namespace System.Collections.Immutable
         public static IImmutableList<T> RemoveRange<T>(
             this IImmutableList<T> list,
             IEnumerable<T> items
-        ) {
+        )
+        {
             Requires.NotNull(list, nameof(list));
             return list.RemoveRange(items, EqualityComparer<T>.Default);
         }
@@ -165,7 +169,8 @@ namespace System.Collections.Immutable
             this IImmutableList<T> list,
             T item,
             IEqualityComparer<T>? equalityComparer
-        ) {
+        )
+        {
             Requires.NotNull(list, nameof(list));
             return list.IndexOf(item, 0, list.Count, equalityComparer);
         }
@@ -272,7 +277,8 @@ namespace System.Collections.Immutable
             this IImmutableList<T> list,
             T item,
             IEqualityComparer<T>? equalityComparer
-        ) {
+        )
+        {
             Requires.NotNull(list, nameof(list));
 
             if (list.Count == 0)
@@ -340,7 +346,8 @@ namespace System.Collections.Immutable
             T item,
             int startIndex,
             int count
-        ) {
+        )
+        {
             Requires.NotNull(list, nameof(list));
             return list.LastIndexOf(item, startIndex, count, EqualityComparer<T>.Default);
         }

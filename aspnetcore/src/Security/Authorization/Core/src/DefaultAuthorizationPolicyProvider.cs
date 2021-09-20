@@ -41,7 +41,8 @@ namespace Microsoft.AspNetCore.Authorization
             if (
                 _cachedDefaultPolicy == null
                 || _cachedDefaultPolicy.Result != _options.DefaultPolicy
-            ) {
+            )
+            {
                 _cachedDefaultPolicy = Task.FromResult(_options.DefaultPolicy);
             }
 
@@ -57,7 +58,8 @@ namespace Microsoft.AspNetCore.Authorization
             if (
                 _cachedFallbackPolicy == null
                 || _cachedFallbackPolicy.Result != _options.FallbackPolicy
-            ) {
+            )
+            {
                 _cachedFallbackPolicy = Task.FromResult(_options.FallbackPolicy);
             }
 

@@ -114,7 +114,8 @@ namespace Microsoft.EntityFrameworkCore.TestUtilities
                 TState state,
                 Exception exception,
                 Func<TState, Exception, string> formatter
-            ) {
+            )
+            {
                 lock (_sync) // Guard against tests with explicit concurrency
                 {
                     var message = formatter(state, exception)?.Trim();
@@ -128,7 +129,8 @@ namespace Microsoft.EntityFrameworkCore.TestUtilities
                 string message,
                 TState state,
                 Exception exception
-            ) {
+            )
+            {
                 if (message != null)
                 {
                     if (_cancellationTokenSource != null)

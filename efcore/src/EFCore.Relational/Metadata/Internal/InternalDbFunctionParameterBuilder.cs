@@ -42,7 +42,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Builders.Internal
         public virtual IConventionDbFunctionParameterBuilder? HasStoreType(
             string? storeType,
             ConfigurationSource configurationSource
-        ) {
+        )
+        {
             if (CanSetStoreType(storeType, configurationSource))
             {
                 Metadata.SetStoreType(storeType, configurationSource);
@@ -74,7 +75,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Builders.Internal
         public virtual IConventionDbFunctionParameterBuilder? HasTypeMapping(
             RelationalTypeMapping? typeMapping,
             ConfigurationSource configurationSource
-        ) {
+        )
+        {
             if (CanSetTypeMapping(typeMapping, configurationSource))
             {
                 Metadata.SetTypeMapping(typeMapping, configurationSource);
@@ -106,7 +108,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Builders.Internal
         public virtual IConventionDbFunctionParameterBuilder? PropagatesNullability(
             bool propagatesNullability,
             ConfigurationSource configurationSource
-        ) {
+        )
+        {
             if (CanSetPropagatesNullability(propagatesNullability, configurationSource))
             {
                 Metadata.SetPropagatesNullability(propagatesNullability, configurationSource);

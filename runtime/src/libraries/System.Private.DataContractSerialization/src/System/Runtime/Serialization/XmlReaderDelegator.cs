@@ -836,7 +836,8 @@ namespace System.Runtime.Serialization
         private void CheckExpectedArrayLength(
             XmlObjectSerializerReadContext context,
             int arrayLength
-        ) {
+        )
+        {
             context.IncrementItemCount(arrayLength);
         }
 
@@ -850,7 +851,8 @@ namespace System.Runtime.Serialization
             int actualLength,
             XmlDictionaryString itemName,
             XmlDictionaryString itemNamespace
-        ) {
+        )
+        {
             if (expectedLength != actualLength)
                 throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
                     XmlObjectSerializer.CreateSerializationException(
@@ -870,7 +872,8 @@ namespace System.Runtime.Serialization
             XmlDictionaryString itemNamespace,
             int arrayLength,
             [NotNullWhen(true)] out bool[]? array
-        ) {
+        )
+        {
             if (dictionaryReader == null)
             {
                 array = null;
@@ -893,7 +896,8 @@ namespace System.Runtime.Serialization
                             arrayLength - offset
                         )
                     ) > 0
-                ) {
+                )
+                {
                     offset += read;
                 }
                 CheckActualArrayLength(arrayLength, offset, itemName, itemNamespace);
@@ -917,7 +921,8 @@ namespace System.Runtime.Serialization
             XmlDictionaryString itemNamespace,
             int arrayLength,
             [NotNullWhen(true)] out DateTime[]? array
-        ) {
+        )
+        {
             if (dictionaryReader == null)
             {
                 array = null;
@@ -940,7 +945,8 @@ namespace System.Runtime.Serialization
                             arrayLength - offset
                         )
                     ) > 0
-                ) {
+                )
+                {
                     offset += read;
                 }
                 CheckActualArrayLength(arrayLength, offset, itemName, itemNamespace);
@@ -964,7 +970,8 @@ namespace System.Runtime.Serialization
             XmlDictionaryString itemNamespace,
             int arrayLength,
             [NotNullWhen(true)] out decimal[]? array
-        ) {
+        )
+        {
             if (dictionaryReader == null)
             {
                 array = null;
@@ -987,7 +994,8 @@ namespace System.Runtime.Serialization
                             arrayLength - offset
                         )
                     ) > 0
-                ) {
+                )
+                {
                     offset += read;
                 }
                 CheckActualArrayLength(arrayLength, offset, itemName, itemNamespace);
@@ -1011,7 +1019,8 @@ namespace System.Runtime.Serialization
             XmlDictionaryString itemNamespace,
             int arrayLength,
             [NotNullWhen(true)] out int[]? array
-        ) {
+        )
+        {
             if (dictionaryReader == null)
             {
                 array = null;
@@ -1034,7 +1043,8 @@ namespace System.Runtime.Serialization
                             arrayLength - offset
                         )
                     ) > 0
-                ) {
+                )
+                {
                     offset += read;
                 }
                 CheckActualArrayLength(arrayLength, offset, itemName, itemNamespace);
@@ -1058,7 +1068,8 @@ namespace System.Runtime.Serialization
             XmlDictionaryString itemNamespace,
             int arrayLength,
             [NotNullWhen(true)] out long[]? array
-        ) {
+        )
+        {
             if (dictionaryReader == null)
             {
                 array = null;
@@ -1081,7 +1092,8 @@ namespace System.Runtime.Serialization
                             arrayLength - offset
                         )
                     ) > 0
-                ) {
+                )
+                {
                     offset += read;
                 }
                 CheckActualArrayLength(arrayLength, offset, itemName, itemNamespace);
@@ -1105,7 +1117,8 @@ namespace System.Runtime.Serialization
             XmlDictionaryString itemNamespace,
             int arrayLength,
             [NotNullWhen(true)] out float[]? array
-        ) {
+        )
+        {
             if (dictionaryReader == null)
             {
                 array = null;
@@ -1128,7 +1141,8 @@ namespace System.Runtime.Serialization
                             arrayLength - offset
                         )
                     ) > 0
-                ) {
+                )
+                {
                     offset += read;
                 }
                 CheckActualArrayLength(arrayLength, offset, itemName, itemNamespace);
@@ -1152,7 +1166,8 @@ namespace System.Runtime.Serialization
             XmlDictionaryString itemNamespace,
             int arrayLength,
             [NotNullWhen(true)] out double[]? array
-        ) {
+        )
+        {
             if (dictionaryReader == null)
             {
                 array = null;
@@ -1175,7 +1190,8 @@ namespace System.Runtime.Serialization
                             arrayLength - offset
                         )
                     ) > 0
-                ) {
+                )
+                {
                     offset += read;
                 }
                 CheckActualArrayLength(arrayLength, offset, itemName, itemNamespace);

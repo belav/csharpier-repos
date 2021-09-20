@@ -17,7 +17,8 @@ namespace Microsoft.VisualBasic.Tests
             double number,
             DateTime dateValue,
             DateTime expected
-        ) {
+        )
+        {
             Assert.Equal(expected, DateAndTime.DateAdd(interval, number, dateValue));
         }
 
@@ -27,7 +28,8 @@ namespace Microsoft.VisualBasic.Tests
             DateInterval interval,
             double number,
             DateTime dateValue
-        ) {
+        )
+        {
             Assert.Throws<ArgumentOutOfRangeException>(
                 () => DateAndTime.DateAdd(interval, number, dateValue)
             );
@@ -396,7 +398,8 @@ namespace Microsoft.VisualBasic.Tests
             double number,
             object dateValue,
             DateTime expected
-        ) {
+        )
+        {
             Assert.Equal(expected, DateAndTime.DateAdd(interval, number, dateValue));
         }
 
@@ -406,7 +409,8 @@ namespace Microsoft.VisualBasic.Tests
             string interval,
             double number,
             object dateValue
-        ) {
+        )
+        {
             Assert.Throws<ArgumentOutOfRangeException>(
                 () => DateAndTime.DateAdd(interval, number, dateValue)
             );
@@ -619,7 +623,8 @@ namespace Microsoft.VisualBasic.Tests
             DateTime dateTime1,
             DateTime dateTime2,
             long expected
-        ) {
+        )
+        {
             Assert.Equal(expected, DateAndTime.DateDiff(interval, dateTime1, dateTime2));
         }
 
@@ -675,7 +680,8 @@ namespace Microsoft.VisualBasic.Tests
             object dateTime1,
             object dateTime2,
             long expected
-        ) {
+        )
+        {
             Assert.Equal(expected, DateAndTime.DateDiff(interval, dateTime1, dateTime2));
         }
 

@@ -23,7 +23,8 @@ namespace Microsoft.AspNetCore.Mvc.Razor.RuntimeCompilation
             RazorProjectFileSystem razorFileSystem,
             IOptions<RazorPagesOptions> pagesOptionsAccessor,
             ILoggerFactory loggerFactory
-        ) {
+        )
+        {
             _razorFileSystem = razorFileSystem;
             _pagesOptions = pagesOptionsAccessor.Value;
             _logger = loggerFactory.CreateLogger<RazorProjectPageRouteModelProvider>();
@@ -61,7 +62,8 @@ namespace Microsoft.AspNetCore.Mvc.Razor.RuntimeCompilation
                                 StringComparison.OrdinalIgnoreCase
                             )
                     )
-                ) {
+                )
+                {
                     // A route for this file was already registered either by the CompiledPageRouteModel or as an area route.
                     // by this provider. Skip registering an additional entry.
 
@@ -98,7 +100,8 @@ namespace Microsoft.AspNetCore.Mvc.Razor.RuntimeCompilation
                                 StringComparison.OrdinalIgnoreCase
                             )
                     )
-                ) {
+                )
+                {
                     // A route for this file was already registered either by the CompiledPageRouteModel.
                     // Skip registering an additional entry.
                     continue;

@@ -16,7 +16,8 @@ namespace Roslyn.Test.Utilities
             this IAsynchronousOperationListenerProvider provider,
             Workspace? workspace,
             params string[] featureNames
-        ) {
+        )
+        {
             await ((AsynchronousOperationListenerProvider)provider).WaitAllAsync(
                     workspace,
                     featureNames

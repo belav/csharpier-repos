@@ -16,7 +16,8 @@ namespace System.Buffers.Text
             long value,
             Span<byte> destination,
             out int bytesWritten
-        ) {
+        )
+        {
             if ((ulong)value < 10)
             {
                 return TryFormatUInt32SingleDigit((uint)value, destination, out bytesWritten);
@@ -37,7 +38,8 @@ namespace System.Buffers.Text
                     if (
                         value <= (long)Utf8Constants.BillionMaxUIntValue
                         && value >= -(long)Utf8Constants.BillionMaxUIntValue
-                    ) {
+                    )
+                    {
                         return value < 0
                           ? TryFormatInt64MoreThanNegativeBillionMaxUInt(
                                 -value,
@@ -73,7 +75,8 @@ namespace System.Buffers.Text
             int value,
             Span<byte> destination,
             out int bytesWritten
-        ) {
+        )
+        {
             if (value < 0)
             {
                 value = -value;
@@ -100,7 +103,8 @@ namespace System.Buffers.Text
             long value,
             Span<byte> destination,
             out int bytesWritten
-        ) {
+        )
+        {
             if (value < 0)
             {
                 value = -value;
@@ -127,7 +131,8 @@ namespace System.Buffers.Text
             long value,
             Span<byte> destination,
             out int bytesWritten
-        ) {
+        )
+        {
             uint overNineDigits = (uint)(value / Utf8Constants.Billion);
             uint lastNineDigits = (uint)(value - (overNineDigits * Utf8Constants.Billion));
 
@@ -158,7 +163,8 @@ namespace System.Buffers.Text
             long value,
             Span<byte> destination,
             out int bytesWritten
-        ) {
+        )
+        {
             // value can still be negative if value == long.MinValue
             // Therefore, cast to ulong, since (ulong)value actually equals abs(long.MinValue)
             ulong overNineDigits = (ulong)value / Utf8Constants.Billion;

@@ -1031,7 +1031,8 @@ namespace System.Linq.Expressions.Tests
                     decimal.MinValue,
                     decimal.MaxValue
                 }
-            ) {
+            )
+            {
                 VerifyDecimalToByte(value, useInterpreter);
             }
         }
@@ -1048,7 +1049,8 @@ namespace System.Linq.Expressions.Tests
                     decimal.MinValue,
                     decimal.MaxValue
                 }
-            ) {
+            )
+            {
                 VerifyDecimalToNullableByte(value, useInterpreter);
             }
         }
@@ -1065,7 +1067,8 @@ namespace System.Linq.Expressions.Tests
                     decimal.MinValue,
                     decimal.MaxValue
                 }
-            ) {
+            )
+            {
                 VerifyDecimalToChar(value, useInterpreter);
             }
         }
@@ -1082,7 +1085,8 @@ namespace System.Linq.Expressions.Tests
                     decimal.MinValue,
                     decimal.MaxValue
                 }
-            ) {
+            )
+            {
                 VerifyDecimalToNullableChar(value, useInterpreter);
             }
         }
@@ -1099,7 +1103,8 @@ namespace System.Linq.Expressions.Tests
                     decimal.MinValue,
                     decimal.MaxValue
                 }
-            ) {
+            )
+            {
                 VerifyDecimalToDecimal(value, useInterpreter);
             }
         }
@@ -1116,7 +1121,8 @@ namespace System.Linq.Expressions.Tests
                     decimal.MinValue,
                     decimal.MaxValue
                 }
-            ) {
+            )
+            {
                 VerifyDecimalToNullableDecimal(value, useInterpreter);
             }
         }
@@ -1133,7 +1139,8 @@ namespace System.Linq.Expressions.Tests
                     decimal.MinValue,
                     decimal.MaxValue
                 }
-            ) {
+            )
+            {
                 VerifyDecimalToDouble(value, useInterpreter);
             }
         }
@@ -1150,7 +1157,8 @@ namespace System.Linq.Expressions.Tests
                     decimal.MinValue,
                     decimal.MaxValue
                 }
-            ) {
+            )
+            {
                 VerifyDecimalToNullableDouble(value, useInterpreter);
             }
         }
@@ -1167,7 +1175,8 @@ namespace System.Linq.Expressions.Tests
                     decimal.MinValue,
                     decimal.MaxValue
                 }
-            ) {
+            )
+            {
                 VerifyDecimalToFloat(value, useInterpreter);
             }
         }
@@ -1184,7 +1193,8 @@ namespace System.Linq.Expressions.Tests
                     decimal.MinValue,
                     decimal.MaxValue
                 }
-            ) {
+            )
+            {
                 VerifyDecimalToNullableFloat(value, useInterpreter);
             }
         }
@@ -1201,7 +1211,8 @@ namespace System.Linq.Expressions.Tests
                     decimal.MinValue,
                     decimal.MaxValue
                 }
-            ) {
+            )
+            {
                 VerifyDecimalToInt(value, useInterpreter);
             }
         }
@@ -1218,7 +1229,8 @@ namespace System.Linq.Expressions.Tests
                     decimal.MinValue,
                     decimal.MaxValue
                 }
-            ) {
+            )
+            {
                 VerifyDecimalToNullableInt(value, useInterpreter);
             }
         }
@@ -1235,7 +1247,8 @@ namespace System.Linq.Expressions.Tests
                     decimal.MinValue,
                     decimal.MaxValue
                 }
-            ) {
+            )
+            {
                 VerifyDecimalToLong(value, useInterpreter);
             }
         }
@@ -1252,7 +1265,8 @@ namespace System.Linq.Expressions.Tests
                     decimal.MinValue,
                     decimal.MaxValue
                 }
-            ) {
+            )
+            {
                 VerifyDecimalToNullableLong(value, useInterpreter);
             }
         }
@@ -1269,7 +1283,8 @@ namespace System.Linq.Expressions.Tests
                     decimal.MinValue,
                     decimal.MaxValue
                 }
-            ) {
+            )
+            {
                 VerifyDecimalToSByte(value, useInterpreter);
             }
         }
@@ -1286,7 +1301,8 @@ namespace System.Linq.Expressions.Tests
                     decimal.MinValue,
                     decimal.MaxValue
                 }
-            ) {
+            )
+            {
                 VerifyDecimalToNullableSByte(value, useInterpreter);
             }
         }
@@ -1303,7 +1319,8 @@ namespace System.Linq.Expressions.Tests
                     decimal.MinValue,
                     decimal.MaxValue
                 }
-            ) {
+            )
+            {
                 VerifyDecimalToShort(value, useInterpreter);
             }
         }
@@ -1320,7 +1337,8 @@ namespace System.Linq.Expressions.Tests
                     decimal.MinValue,
                     decimal.MaxValue
                 }
-            ) {
+            )
+            {
                 VerifyDecimalToNullableShort(value, useInterpreter);
             }
         }
@@ -1337,7 +1355,8 @@ namespace System.Linq.Expressions.Tests
                     decimal.MinValue,
                     decimal.MaxValue
                 }
-            ) {
+            )
+            {
                 VerifyDecimalToUInt(value, useInterpreter);
             }
         }
@@ -1354,7 +1373,8 @@ namespace System.Linq.Expressions.Tests
                     decimal.MinValue,
                     decimal.MaxValue
                 }
-            ) {
+            )
+            {
                 VerifyDecimalToNullableUInt(value, useInterpreter);
             }
         }
@@ -1371,7 +1391,8 @@ namespace System.Linq.Expressions.Tests
                     decimal.MinValue,
                     decimal.MaxValue
                 }
-            ) {
+            )
+            {
                 VerifyDecimalToULong(value, useInterpreter);
             }
         }
@@ -1388,7 +1409,8 @@ namespace System.Linq.Expressions.Tests
                     decimal.MinValue,
                     decimal.MaxValue
                 }
-            ) {
+            )
+            {
                 VerifyDecimalToNullableULong(value, useInterpreter);
             }
         }
@@ -1405,7 +1427,8 @@ namespace System.Linq.Expressions.Tests
                     decimal.MinValue,
                     decimal.MaxValue
                 }
-            ) {
+            )
+            {
                 VerifyDecimalToUShort(value, useInterpreter);
             }
         }
@@ -1422,7 +1445,8 @@ namespace System.Linq.Expressions.Tests
                     decimal.MinValue,
                     decimal.MaxValue
                 }
-            ) {
+            )
+            {
                 VerifyDecimalToNullableUShort(value, useInterpreter);
             }
         }
@@ -1440,7 +1464,8 @@ namespace System.Linq.Expressions.Tests
                     decimal.MinValue,
                     decimal.MaxValue
                 }
-            ) {
+            )
+            {
                 VerifyNullableDecimalToByte(value, useInterpreter);
             }
         }
@@ -1458,7 +1483,8 @@ namespace System.Linq.Expressions.Tests
                     decimal.MinValue,
                     decimal.MaxValue
                 }
-            ) {
+            )
+            {
                 VerifyNullableDecimalToNullableByte(value, useInterpreter);
             }
         }
@@ -1476,7 +1502,8 @@ namespace System.Linq.Expressions.Tests
                     decimal.MinValue,
                     decimal.MaxValue
                 }
-            ) {
+            )
+            {
                 VerifyNullableDecimalToChar(value, useInterpreter);
             }
         }
@@ -1494,7 +1521,8 @@ namespace System.Linq.Expressions.Tests
                     decimal.MinValue,
                     decimal.MaxValue
                 }
-            ) {
+            )
+            {
                 VerifyNullableDecimalToNullableChar(value, useInterpreter);
             }
         }
@@ -1512,7 +1540,8 @@ namespace System.Linq.Expressions.Tests
                     decimal.MinValue,
                     decimal.MaxValue
                 }
-            ) {
+            )
+            {
                 VerifyNullableDecimalToDecimal(value, useInterpreter);
             }
         }
@@ -1530,7 +1559,8 @@ namespace System.Linq.Expressions.Tests
                     decimal.MinValue,
                     decimal.MaxValue
                 }
-            ) {
+            )
+            {
                 VerifyNullableDecimalToNullableDecimal(value, useInterpreter);
             }
         }
@@ -1548,7 +1578,8 @@ namespace System.Linq.Expressions.Tests
                     decimal.MinValue,
                     decimal.MaxValue
                 }
-            ) {
+            )
+            {
                 VerifyNullableDecimalToDouble(value, useInterpreter);
             }
         }
@@ -1566,7 +1597,8 @@ namespace System.Linq.Expressions.Tests
                     decimal.MinValue,
                     decimal.MaxValue
                 }
-            ) {
+            )
+            {
                 VerifyNullableDecimalToNullableDouble(value, useInterpreter);
             }
         }
@@ -1584,7 +1616,8 @@ namespace System.Linq.Expressions.Tests
                     decimal.MinValue,
                     decimal.MaxValue
                 }
-            ) {
+            )
+            {
                 VerifyNullableDecimalToFloat(value, useInterpreter);
             }
         }
@@ -1602,7 +1635,8 @@ namespace System.Linq.Expressions.Tests
                     decimal.MinValue,
                     decimal.MaxValue
                 }
-            ) {
+            )
+            {
                 VerifyNullableDecimalToNullableFloat(value, useInterpreter);
             }
         }
@@ -1620,7 +1654,8 @@ namespace System.Linq.Expressions.Tests
                     decimal.MinValue,
                     decimal.MaxValue
                 }
-            ) {
+            )
+            {
                 VerifyNullableDecimalToInt(value, useInterpreter);
             }
         }
@@ -1638,7 +1673,8 @@ namespace System.Linq.Expressions.Tests
                     decimal.MinValue,
                     decimal.MaxValue
                 }
-            ) {
+            )
+            {
                 VerifyNullableDecimalToNullableInt(value, useInterpreter);
             }
         }
@@ -1656,7 +1692,8 @@ namespace System.Linq.Expressions.Tests
                     decimal.MinValue,
                     decimal.MaxValue
                 }
-            ) {
+            )
+            {
                 VerifyNullableDecimalToLong(value, useInterpreter);
             }
         }
@@ -1674,7 +1711,8 @@ namespace System.Linq.Expressions.Tests
                     decimal.MinValue,
                     decimal.MaxValue
                 }
-            ) {
+            )
+            {
                 VerifyNullableDecimalToNullableLong(value, useInterpreter);
             }
         }
@@ -1692,7 +1730,8 @@ namespace System.Linq.Expressions.Tests
                     decimal.MinValue,
                     decimal.MaxValue
                 }
-            ) {
+            )
+            {
                 VerifyNullableDecimalToSByte(value, useInterpreter);
             }
         }
@@ -1710,7 +1749,8 @@ namespace System.Linq.Expressions.Tests
                     decimal.MinValue,
                     decimal.MaxValue
                 }
-            ) {
+            )
+            {
                 VerifyNullableDecimalToNullableSByte(value, useInterpreter);
             }
         }
@@ -1728,7 +1768,8 @@ namespace System.Linq.Expressions.Tests
                     decimal.MinValue,
                     decimal.MaxValue
                 }
-            ) {
+            )
+            {
                 VerifyNullableDecimalToShort(value, useInterpreter);
             }
         }
@@ -1746,7 +1787,8 @@ namespace System.Linq.Expressions.Tests
                     decimal.MinValue,
                     decimal.MaxValue
                 }
-            ) {
+            )
+            {
                 VerifyNullableDecimalToNullableShort(value, useInterpreter);
             }
         }
@@ -1764,7 +1806,8 @@ namespace System.Linq.Expressions.Tests
                     decimal.MinValue,
                     decimal.MaxValue
                 }
-            ) {
+            )
+            {
                 VerifyNullableDecimalToUInt(value, useInterpreter);
             }
         }
@@ -1782,7 +1825,8 @@ namespace System.Linq.Expressions.Tests
                     decimal.MinValue,
                     decimal.MaxValue
                 }
-            ) {
+            )
+            {
                 VerifyNullableDecimalToNullableUInt(value, useInterpreter);
             }
         }
@@ -1800,7 +1844,8 @@ namespace System.Linq.Expressions.Tests
                     decimal.MinValue,
                     decimal.MaxValue
                 }
-            ) {
+            )
+            {
                 VerifyNullableDecimalToULong(value, useInterpreter);
             }
         }
@@ -1818,7 +1863,8 @@ namespace System.Linq.Expressions.Tests
                     decimal.MinValue,
                     decimal.MaxValue
                 }
-            ) {
+            )
+            {
                 VerifyNullableDecimalToNullableULong(value, useInterpreter);
             }
         }
@@ -1836,7 +1882,8 @@ namespace System.Linq.Expressions.Tests
                     decimal.MinValue,
                     decimal.MaxValue
                 }
-            ) {
+            )
+            {
                 VerifyNullableDecimalToUShort(value, useInterpreter);
             }
         }
@@ -1854,7 +1901,8 @@ namespace System.Linq.Expressions.Tests
                     decimal.MinValue,
                     decimal.MaxValue
                 }
-            ) {
+            )
+            {
                 VerifyNullableDecimalToNullableUShort(value, useInterpreter);
             }
         }
@@ -1875,7 +1923,8 @@ namespace System.Linq.Expressions.Tests
                     double.PositiveInfinity,
                     double.NaN
                 }
-            ) {
+            )
+            {
                 VerifyDoubleToByte(value, useInterpreter);
             }
         }
@@ -1896,7 +1945,8 @@ namespace System.Linq.Expressions.Tests
                     double.PositiveInfinity,
                     double.NaN
                 }
-            ) {
+            )
+            {
                 VerifyDoubleToNullableByte(value, useInterpreter);
             }
         }
@@ -1917,7 +1967,8 @@ namespace System.Linq.Expressions.Tests
                     double.PositiveInfinity,
                     double.NaN
                 }
-            ) {
+            )
+            {
                 VerifyDoubleToChar(value, useInterpreter);
             }
         }
@@ -1938,7 +1989,8 @@ namespace System.Linq.Expressions.Tests
                     double.PositiveInfinity,
                     double.NaN
                 }
-            ) {
+            )
+            {
                 VerifyDoubleToNullableChar(value, useInterpreter);
             }
         }
@@ -1959,7 +2011,8 @@ namespace System.Linq.Expressions.Tests
                     double.PositiveInfinity,
                     double.NaN
                 }
-            ) {
+            )
+            {
                 VerifyDoubleToDecimal(value, useInterpreter);
             }
         }
@@ -1980,7 +2033,8 @@ namespace System.Linq.Expressions.Tests
                     double.PositiveInfinity,
                     double.NaN
                 }
-            ) {
+            )
+            {
                 VerifyDoubleToNullableDecimal(value, useInterpreter);
             }
         }
@@ -2001,7 +2055,8 @@ namespace System.Linq.Expressions.Tests
                     double.PositiveInfinity,
                     double.NaN
                 }
-            ) {
+            )
+            {
                 VerifyDoubleToDouble(value, useInterpreter);
             }
         }
@@ -2022,7 +2077,8 @@ namespace System.Linq.Expressions.Tests
                     double.PositiveInfinity,
                     double.NaN
                 }
-            ) {
+            )
+            {
                 VerifyDoubleToNullableDouble(value, useInterpreter);
             }
         }
@@ -2043,7 +2099,8 @@ namespace System.Linq.Expressions.Tests
                     double.PositiveInfinity,
                     double.NaN
                 }
-            ) {
+            )
+            {
                 VerifyDoubleToEnum(value, useInterpreter);
             }
         }
@@ -2064,7 +2121,8 @@ namespace System.Linq.Expressions.Tests
                     double.PositiveInfinity,
                     double.NaN
                 }
-            ) {
+            )
+            {
                 VerifyDoubleToNullableEnum(value, useInterpreter);
             }
         }
@@ -2085,7 +2143,8 @@ namespace System.Linq.Expressions.Tests
                     double.PositiveInfinity,
                     double.NaN
                 }
-            ) {
+            )
+            {
                 VerifyDoubleToEnumLong(value, useInterpreter);
             }
         }
@@ -2106,7 +2165,8 @@ namespace System.Linq.Expressions.Tests
                     double.PositiveInfinity,
                     double.NaN
                 }
-            ) {
+            )
+            {
                 VerifyDoubleToNullableEnumLong(value, useInterpreter);
             }
         }
@@ -2127,7 +2187,8 @@ namespace System.Linq.Expressions.Tests
                     double.PositiveInfinity,
                     double.NaN
                 }
-            ) {
+            )
+            {
                 VerifyDoubleToFloat(value, useInterpreter);
             }
         }
@@ -2148,7 +2209,8 @@ namespace System.Linq.Expressions.Tests
                     double.PositiveInfinity,
                     double.NaN
                 }
-            ) {
+            )
+            {
                 VerifyDoubleToNullableFloat(value, useInterpreter);
             }
         }
@@ -2169,7 +2231,8 @@ namespace System.Linq.Expressions.Tests
                     double.PositiveInfinity,
                     double.NaN
                 }
-            ) {
+            )
+            {
                 VerifyDoubleToInt(value, useInterpreter);
             }
         }
@@ -2190,7 +2253,8 @@ namespace System.Linq.Expressions.Tests
                     double.PositiveInfinity,
                     double.NaN
                 }
-            ) {
+            )
+            {
                 VerifyDoubleToNullableInt(value, useInterpreter);
             }
         }
@@ -2211,7 +2275,8 @@ namespace System.Linq.Expressions.Tests
                     double.PositiveInfinity,
                     double.NaN
                 }
-            ) {
+            )
+            {
                 VerifyDoubleToLong(value, useInterpreter);
             }
         }
@@ -2232,7 +2297,8 @@ namespace System.Linq.Expressions.Tests
                     double.PositiveInfinity,
                     double.NaN
                 }
-            ) {
+            )
+            {
                 VerifyDoubleToNullableLong(value, useInterpreter);
             }
         }
@@ -2253,7 +2319,8 @@ namespace System.Linq.Expressions.Tests
                     double.PositiveInfinity,
                     double.NaN
                 }
-            ) {
+            )
+            {
                 VerifyDoubleToSByte(value, useInterpreter);
             }
         }
@@ -2274,7 +2341,8 @@ namespace System.Linq.Expressions.Tests
                     double.PositiveInfinity,
                     double.NaN
                 }
-            ) {
+            )
+            {
                 VerifyDoubleToNullableSByte(value, useInterpreter);
             }
         }
@@ -2295,7 +2363,8 @@ namespace System.Linq.Expressions.Tests
                     double.PositiveInfinity,
                     double.NaN
                 }
-            ) {
+            )
+            {
                 VerifyDoubleToShort(value, useInterpreter);
             }
         }
@@ -2316,7 +2385,8 @@ namespace System.Linq.Expressions.Tests
                     double.PositiveInfinity,
                     double.NaN
                 }
-            ) {
+            )
+            {
                 VerifyDoubleToNullableShort(value, useInterpreter);
             }
         }
@@ -2338,7 +2408,8 @@ namespace System.Linq.Expressions.Tests
                     double.PositiveInfinity,
                     double.NaN
                 }
-            ) {
+            )
+            {
                 VerifyDoubleToUInt(value, useInterpreter);
             }
         }
@@ -2360,7 +2431,8 @@ namespace System.Linq.Expressions.Tests
                     double.PositiveInfinity,
                     double.NaN
                 }
-            ) {
+            )
+            {
                 VerifyDoubleToNullableUInt(value, useInterpreter);
             }
         }
@@ -2381,7 +2453,8 @@ namespace System.Linq.Expressions.Tests
                     double.PositiveInfinity,
                     double.NaN
                 }
-            ) {
+            )
+            {
                 VerifyDoubleToULong(value, useInterpreter);
             }
         }
@@ -2403,7 +2476,8 @@ namespace System.Linq.Expressions.Tests
                     double.PositiveInfinity,
                     double.NaN
                 }
-            ) {
+            )
+            {
                 VerifyDoubleToNullableULong(value, useInterpreter);
             }
         }
@@ -2424,7 +2498,8 @@ namespace System.Linq.Expressions.Tests
                     double.PositiveInfinity,
                     double.NaN
                 }
-            ) {
+            )
+            {
                 VerifyDoubleToUShort(value, useInterpreter);
             }
         }
@@ -2445,7 +2520,8 @@ namespace System.Linq.Expressions.Tests
                     double.PositiveInfinity,
                     double.NaN
                 }
-            ) {
+            )
+            {
                 VerifyDoubleToNullableUShort(value, useInterpreter);
             }
         }
@@ -2467,7 +2543,8 @@ namespace System.Linq.Expressions.Tests
                     double.PositiveInfinity,
                     double.NaN
                 }
-            ) {
+            )
+            {
                 VerifyNullableDoubleToByte(value, useInterpreter);
             }
         }
@@ -2489,7 +2566,8 @@ namespace System.Linq.Expressions.Tests
                     double.PositiveInfinity,
                     double.NaN
                 }
-            ) {
+            )
+            {
                 VerifyNullableDoubleToNullableByte(value, useInterpreter);
             }
         }
@@ -2511,7 +2589,8 @@ namespace System.Linq.Expressions.Tests
                     double.PositiveInfinity,
                     double.NaN
                 }
-            ) {
+            )
+            {
                 VerifyNullableDoubleToChar(value, useInterpreter);
             }
         }
@@ -2533,7 +2612,8 @@ namespace System.Linq.Expressions.Tests
                     double.PositiveInfinity,
                     double.NaN
                 }
-            ) {
+            )
+            {
                 VerifyNullableDoubleToNullableChar(value, useInterpreter);
             }
         }
@@ -2555,7 +2635,8 @@ namespace System.Linq.Expressions.Tests
                     double.PositiveInfinity,
                     double.NaN
                 }
-            ) {
+            )
+            {
                 VerifyNullableDoubleToDecimal(value, useInterpreter);
             }
         }
@@ -2577,7 +2658,8 @@ namespace System.Linq.Expressions.Tests
                     double.PositiveInfinity,
                     double.NaN
                 }
-            ) {
+            )
+            {
                 VerifyNullableDoubleToNullableDecimal(value, useInterpreter);
             }
         }
@@ -2599,7 +2681,8 @@ namespace System.Linq.Expressions.Tests
                     double.PositiveInfinity,
                     double.NaN
                 }
-            ) {
+            )
+            {
                 VerifyNullableDoubleToDouble(value, useInterpreter);
             }
         }
@@ -2621,7 +2704,8 @@ namespace System.Linq.Expressions.Tests
                     double.PositiveInfinity,
                     double.NaN
                 }
-            ) {
+            )
+            {
                 VerifyNullableDoubleToNullableDouble(value, useInterpreter);
             }
         }
@@ -2643,7 +2727,8 @@ namespace System.Linq.Expressions.Tests
                     double.PositiveInfinity,
                     double.NaN
                 }
-            ) {
+            )
+            {
                 VerifyNullableDoubleToEnum(value, useInterpreter);
             }
         }
@@ -2665,7 +2750,8 @@ namespace System.Linq.Expressions.Tests
                     double.PositiveInfinity,
                     double.NaN
                 }
-            ) {
+            )
+            {
                 VerifyNullableDoubleToNullableEnum(value, useInterpreter);
             }
         }
@@ -2687,7 +2773,8 @@ namespace System.Linq.Expressions.Tests
                     double.PositiveInfinity,
                     double.NaN
                 }
-            ) {
+            )
+            {
                 VerifyNullableDoubleToEnumLong(value, useInterpreter);
             }
         }
@@ -2709,7 +2796,8 @@ namespace System.Linq.Expressions.Tests
                     double.PositiveInfinity,
                     double.NaN
                 }
-            ) {
+            )
+            {
                 VerifyNullableDoubleToNullableEnumLong(value, useInterpreter);
             }
         }
@@ -2731,7 +2819,8 @@ namespace System.Linq.Expressions.Tests
                     double.PositiveInfinity,
                     double.NaN
                 }
-            ) {
+            )
+            {
                 VerifyNullableDoubleToFloat(value, useInterpreter);
             }
         }
@@ -2753,7 +2842,8 @@ namespace System.Linq.Expressions.Tests
                     double.PositiveInfinity,
                     double.NaN
                 }
-            ) {
+            )
+            {
                 VerifyNullableDoubleToNullableFloat(value, useInterpreter);
             }
         }
@@ -2775,7 +2865,8 @@ namespace System.Linq.Expressions.Tests
                     double.PositiveInfinity,
                     double.NaN
                 }
-            ) {
+            )
+            {
                 VerifyNullableDoubleToInt(value, useInterpreter);
             }
         }
@@ -2797,7 +2888,8 @@ namespace System.Linq.Expressions.Tests
                     double.PositiveInfinity,
                     double.NaN
                 }
-            ) {
+            )
+            {
                 VerifyNullableDoubleToNullableInt(value, useInterpreter);
             }
         }
@@ -2819,7 +2911,8 @@ namespace System.Linq.Expressions.Tests
                     double.PositiveInfinity,
                     double.NaN
                 }
-            ) {
+            )
+            {
                 VerifyNullableDoubleToLong(value, useInterpreter);
             }
         }
@@ -2841,7 +2934,8 @@ namespace System.Linq.Expressions.Tests
                     double.PositiveInfinity,
                     double.NaN
                 }
-            ) {
+            )
+            {
                 VerifyNullableDoubleToNullableLong(value, useInterpreter);
             }
         }
@@ -2863,7 +2957,8 @@ namespace System.Linq.Expressions.Tests
                     double.PositiveInfinity,
                     double.NaN
                 }
-            ) {
+            )
+            {
                 VerifyNullableDoubleToSByte(value, useInterpreter);
             }
         }
@@ -2885,7 +2980,8 @@ namespace System.Linq.Expressions.Tests
                     double.PositiveInfinity,
                     double.NaN
                 }
-            ) {
+            )
+            {
                 VerifyNullableDoubleToNullableSByte(value, useInterpreter);
             }
         }
@@ -2907,7 +3003,8 @@ namespace System.Linq.Expressions.Tests
                     double.PositiveInfinity,
                     double.NaN
                 }
-            ) {
+            )
+            {
                 VerifyNullableDoubleToShort(value, useInterpreter);
             }
         }
@@ -2929,7 +3026,8 @@ namespace System.Linq.Expressions.Tests
                     double.PositiveInfinity,
                     double.NaN
                 }
-            ) {
+            )
+            {
                 VerifyNullableDoubleToNullableShort(value, useInterpreter);
             }
         }
@@ -2952,7 +3050,8 @@ namespace System.Linq.Expressions.Tests
                     double.PositiveInfinity,
                     double.NaN
                 }
-            ) {
+            )
+            {
                 VerifyNullableDoubleToUInt(value, useInterpreter);
             }
         }
@@ -2975,7 +3074,8 @@ namespace System.Linq.Expressions.Tests
                     double.PositiveInfinity,
                     double.NaN
                 }
-            ) {
+            )
+            {
                 VerifyNullableDoubleToNullableUInt(value, useInterpreter);
             }
         }
@@ -2997,7 +3097,8 @@ namespace System.Linq.Expressions.Tests
                     double.PositiveInfinity,
                     double.NaN
                 }
-            ) {
+            )
+            {
                 VerifyNullableDoubleToULong(value, useInterpreter);
             }
         }
@@ -3020,7 +3121,8 @@ namespace System.Linq.Expressions.Tests
                     double.PositiveInfinity,
                     double.NaN
                 }
-            ) {
+            )
+            {
                 VerifyNullableDoubleToNullableULong(value, useInterpreter);
             }
         }
@@ -3042,7 +3144,8 @@ namespace System.Linq.Expressions.Tests
                     double.PositiveInfinity,
                     double.NaN
                 }
-            ) {
+            )
+            {
                 VerifyNullableDoubleToUShort(value, useInterpreter);
             }
         }
@@ -3064,7 +3167,8 @@ namespace System.Linq.Expressions.Tests
                     double.PositiveInfinity,
                     double.NaN
                 }
-            ) {
+            )
+            {
                 VerifyNullableDoubleToNullableUShort(value, useInterpreter);
             }
         }
@@ -3308,7 +3412,8 @@ namespace System.Linq.Expressions.Tests
         {
             foreach (
                 E? value in new E?[] { null, (E)0, E.A, E.B, (E)int.MaxValue, (E)int.MinValue }
-            ) {
+            )
+            {
                 VerifyNullableEnumToByte(value, useInterpreter);
             }
         }
@@ -3318,7 +3423,8 @@ namespace System.Linq.Expressions.Tests
         {
             foreach (
                 E? value in new E?[] { null, (E)0, E.A, E.B, (E)int.MaxValue, (E)int.MinValue }
-            ) {
+            )
+            {
                 VerifyNullableEnumToNullableByte(value, useInterpreter);
             }
         }
@@ -3328,7 +3434,8 @@ namespace System.Linq.Expressions.Tests
         {
             foreach (
                 E? value in new E?[] { null, (E)0, E.A, E.B, (E)int.MaxValue, (E)int.MinValue }
-            ) {
+            )
+            {
                 VerifyNullableEnumToChar(value, useInterpreter);
             }
         }
@@ -3338,7 +3445,8 @@ namespace System.Linq.Expressions.Tests
         {
             foreach (
                 E? value in new E?[] { null, (E)0, E.A, E.B, (E)int.MaxValue, (E)int.MinValue }
-            ) {
+            )
+            {
                 VerifyNullableEnumToNullableChar(value, useInterpreter);
             }
         }
@@ -3348,7 +3456,8 @@ namespace System.Linq.Expressions.Tests
         {
             foreach (
                 E? value in new E?[] { null, (E)0, E.A, E.B, (E)int.MaxValue, (E)int.MinValue }
-            ) {
+            )
+            {
                 VerifyNullableEnumToDouble(value, useInterpreter);
             }
         }
@@ -3358,7 +3467,8 @@ namespace System.Linq.Expressions.Tests
         {
             foreach (
                 E? value in new E?[] { null, (E)0, E.A, E.B, (E)int.MaxValue, (E)int.MinValue }
-            ) {
+            )
+            {
                 VerifyNullableEnumToNullableDouble(value, useInterpreter);
             }
         }
@@ -3368,7 +3478,8 @@ namespace System.Linq.Expressions.Tests
         {
             foreach (
                 E? value in new E?[] { null, (E)0, E.A, E.B, (E)int.MaxValue, (E)int.MinValue }
-            ) {
+            )
+            {
                 VerifyNullableEnumToEnum(value, useInterpreter);
             }
         }
@@ -3378,7 +3489,8 @@ namespace System.Linq.Expressions.Tests
         {
             foreach (
                 E? value in new E?[] { null, (E)0, E.A, E.B, (E)int.MaxValue, (E)int.MinValue }
-            ) {
+            )
+            {
                 VerifyNullableEnumToNullableEnum(value, useInterpreter);
             }
         }
@@ -3388,7 +3500,8 @@ namespace System.Linq.Expressions.Tests
         {
             foreach (
                 E? value in new E?[] { null, (E)0, E.A, E.B, (E)int.MaxValue, (E)int.MinValue }
-            ) {
+            )
+            {
                 VerifyNullableEnumToEnumLong(value, useInterpreter);
             }
         }
@@ -3398,7 +3511,8 @@ namespace System.Linq.Expressions.Tests
         {
             foreach (
                 E? value in new E?[] { null, (E)0, E.A, E.B, (E)int.MaxValue, (E)int.MinValue }
-            ) {
+            )
+            {
                 VerifyNullableEnumToNullableEnumLong(value, useInterpreter);
             }
         }
@@ -3408,7 +3522,8 @@ namespace System.Linq.Expressions.Tests
         {
             foreach (
                 E? value in new E?[] { null, (E)0, E.A, E.B, (E)int.MaxValue, (E)int.MinValue }
-            ) {
+            )
+            {
                 VerifyNullableEnumToFloat(value, useInterpreter);
             }
         }
@@ -3418,7 +3533,8 @@ namespace System.Linq.Expressions.Tests
         {
             foreach (
                 E? value in new E?[] { null, (E)0, E.A, E.B, (E)int.MaxValue, (E)int.MinValue }
-            ) {
+            )
+            {
                 VerifyNullableEnumToNullableFloat(value, useInterpreter);
             }
         }
@@ -3428,7 +3544,8 @@ namespace System.Linq.Expressions.Tests
         {
             foreach (
                 E? value in new E?[] { null, (E)0, E.A, E.B, (E)int.MaxValue, (E)int.MinValue }
-            ) {
+            )
+            {
                 VerifyNullableEnumToInt(value, useInterpreter);
             }
         }
@@ -3438,7 +3555,8 @@ namespace System.Linq.Expressions.Tests
         {
             foreach (
                 E? value in new E?[] { null, (E)0, E.A, E.B, (E)int.MaxValue, (E)int.MinValue }
-            ) {
+            )
+            {
                 VerifyNullableEnumToNullableInt(value, useInterpreter);
             }
         }
@@ -3448,7 +3566,8 @@ namespace System.Linq.Expressions.Tests
         {
             foreach (
                 E? value in new E?[] { null, (E)0, E.A, E.B, (E)int.MaxValue, (E)int.MinValue }
-            ) {
+            )
+            {
                 VerifyNullableEnumToLong(value, useInterpreter);
             }
         }
@@ -3458,7 +3577,8 @@ namespace System.Linq.Expressions.Tests
         {
             foreach (
                 E? value in new E?[] { null, (E)0, E.A, E.B, (E)int.MaxValue, (E)int.MinValue }
-            ) {
+            )
+            {
                 VerifyNullableEnumToNullableLong(value, useInterpreter);
             }
         }
@@ -3468,7 +3588,8 @@ namespace System.Linq.Expressions.Tests
         {
             foreach (
                 E? value in new E?[] { null, (E)0, E.A, E.B, (E)int.MaxValue, (E)int.MinValue }
-            ) {
+            )
+            {
                 VerifyNullableEnumToSByte(value, useInterpreter);
             }
         }
@@ -3478,7 +3599,8 @@ namespace System.Linq.Expressions.Tests
         {
             foreach (
                 E? value in new E?[] { null, (E)0, E.A, E.B, (E)int.MaxValue, (E)int.MinValue }
-            ) {
+            )
+            {
                 VerifyNullableEnumToNullableSByte(value, useInterpreter);
             }
         }
@@ -3488,7 +3610,8 @@ namespace System.Linq.Expressions.Tests
         {
             foreach (
                 E? value in new E?[] { null, (E)0, E.A, E.B, (E)int.MaxValue, (E)int.MinValue }
-            ) {
+            )
+            {
                 VerifyNullableEnumToShort(value, useInterpreter);
             }
         }
@@ -3498,7 +3621,8 @@ namespace System.Linq.Expressions.Tests
         {
             foreach (
                 E? value in new E?[] { null, (E)0, E.A, E.B, (E)int.MaxValue, (E)int.MinValue }
-            ) {
+            )
+            {
                 VerifyNullableEnumToNullableShort(value, useInterpreter);
             }
         }
@@ -3508,7 +3632,8 @@ namespace System.Linq.Expressions.Tests
         {
             foreach (
                 E? value in new E?[] { null, (E)0, E.A, E.B, (E)int.MaxValue, (E)int.MinValue }
-            ) {
+            )
+            {
                 VerifyNullableEnumToUInt(value, useInterpreter);
             }
         }
@@ -3518,7 +3643,8 @@ namespace System.Linq.Expressions.Tests
         {
             foreach (
                 E? value in new E?[] { null, (E)0, E.A, E.B, (E)int.MaxValue, (E)int.MinValue }
-            ) {
+            )
+            {
                 VerifyNullableEnumToNullableUInt(value, useInterpreter);
             }
         }
@@ -3528,7 +3654,8 @@ namespace System.Linq.Expressions.Tests
         {
             foreach (
                 E? value in new E?[] { null, (E)0, E.A, E.B, (E)int.MaxValue, (E)int.MinValue }
-            ) {
+            )
+            {
                 VerifyNullableEnumToULong(value, useInterpreter);
             }
         }
@@ -3538,7 +3665,8 @@ namespace System.Linq.Expressions.Tests
         {
             foreach (
                 E? value in new E?[] { null, (E)0, E.A, E.B, (E)int.MaxValue, (E)int.MinValue }
-            ) {
+            )
+            {
                 VerifyNullableEnumToNullableULong(value, useInterpreter);
             }
         }
@@ -3548,7 +3676,8 @@ namespace System.Linq.Expressions.Tests
         {
             foreach (
                 E? value in new E?[] { null, (E)0, E.A, E.B, (E)int.MaxValue, (E)int.MinValue }
-            ) {
+            )
+            {
                 VerifyNullableEnumToUShort(value, useInterpreter);
             }
         }
@@ -3558,7 +3687,8 @@ namespace System.Linq.Expressions.Tests
         {
             foreach (
                 E? value in new E?[] { null, (E)0, E.A, E.B, (E)int.MaxValue, (E)int.MinValue }
-            ) {
+            )
+            {
                 VerifyNullableEnumToNullableUShort(value, useInterpreter);
             }
         }
@@ -3568,7 +3698,8 @@ namespace System.Linq.Expressions.Tests
         {
             foreach (
                 El value in new El[] { (El)0, El.A, El.B, (El)long.MaxValue, (El)long.MinValue }
-            ) {
+            )
+            {
                 VerifyEnumLongToByte(value, useInterpreter);
             }
         }
@@ -3578,7 +3709,8 @@ namespace System.Linq.Expressions.Tests
         {
             foreach (
                 El value in new El[] { (El)0, El.A, El.B, (El)long.MaxValue, (El)long.MinValue }
-            ) {
+            )
+            {
                 VerifyEnumLongToNullableByte(value, useInterpreter);
             }
         }
@@ -3588,7 +3720,8 @@ namespace System.Linq.Expressions.Tests
         {
             foreach (
                 El value in new El[] { (El)0, El.A, El.B, (El)long.MaxValue, (El)long.MinValue }
-            ) {
+            )
+            {
                 VerifyEnumLongToChar(value, useInterpreter);
             }
         }
@@ -3598,7 +3731,8 @@ namespace System.Linq.Expressions.Tests
         {
             foreach (
                 El value in new El[] { (El)0, El.A, El.B, (El)long.MaxValue, (El)long.MinValue }
-            ) {
+            )
+            {
                 VerifyEnumLongToNullableChar(value, useInterpreter);
             }
         }
@@ -3608,7 +3742,8 @@ namespace System.Linq.Expressions.Tests
         {
             foreach (
                 El value in new El[] { (El)0, El.A, El.B, (El)long.MaxValue, (El)long.MinValue }
-            ) {
+            )
+            {
                 VerifyEnumLongToDouble(value, useInterpreter);
             }
         }
@@ -3618,7 +3753,8 @@ namespace System.Linq.Expressions.Tests
         {
             foreach (
                 El value in new El[] { (El)0, El.A, El.B, (El)long.MaxValue, (El)long.MinValue }
-            ) {
+            )
+            {
                 VerifyEnumLongToNullableDouble(value, useInterpreter);
             }
         }
@@ -3628,7 +3764,8 @@ namespace System.Linq.Expressions.Tests
         {
             foreach (
                 El value in new El[] { (El)0, El.A, El.B, (El)long.MaxValue, (El)long.MinValue }
-            ) {
+            )
+            {
                 VerifyEnumLongToEnum(value, useInterpreter);
             }
         }
@@ -3638,7 +3775,8 @@ namespace System.Linq.Expressions.Tests
         {
             foreach (
                 El value in new El[] { (El)0, El.A, El.B, (El)long.MaxValue, (El)long.MinValue }
-            ) {
+            )
+            {
                 VerifyEnumLongToNullableEnum(value, useInterpreter);
             }
         }
@@ -3648,7 +3786,8 @@ namespace System.Linq.Expressions.Tests
         {
             foreach (
                 El value in new El[] { (El)0, El.A, El.B, (El)long.MaxValue, (El)long.MinValue }
-            ) {
+            )
+            {
                 VerifyEnumLongToEnumLong(value, useInterpreter);
             }
         }
@@ -3658,7 +3797,8 @@ namespace System.Linq.Expressions.Tests
         {
             foreach (
                 El value in new El[] { (El)0, El.A, El.B, (El)long.MaxValue, (El)long.MinValue }
-            ) {
+            )
+            {
                 VerifyEnumLongToNullableEnumLong(value, useInterpreter);
             }
         }
@@ -3668,7 +3808,8 @@ namespace System.Linq.Expressions.Tests
         {
             foreach (
                 El value in new El[] { (El)0, El.A, El.B, (El)long.MaxValue, (El)long.MinValue }
-            ) {
+            )
+            {
                 VerifyEnumLongToFloat(value, useInterpreter);
             }
         }
@@ -3678,7 +3819,8 @@ namespace System.Linq.Expressions.Tests
         {
             foreach (
                 El value in new El[] { (El)0, El.A, El.B, (El)long.MaxValue, (El)long.MinValue }
-            ) {
+            )
+            {
                 VerifyEnumLongToNullableFloat(value, useInterpreter);
             }
         }
@@ -3688,7 +3830,8 @@ namespace System.Linq.Expressions.Tests
         {
             foreach (
                 El value in new El[] { (El)0, El.A, El.B, (El)long.MaxValue, (El)long.MinValue }
-            ) {
+            )
+            {
                 VerifyEnumLongToInt(value, useInterpreter);
             }
         }
@@ -3698,7 +3841,8 @@ namespace System.Linq.Expressions.Tests
         {
             foreach (
                 El value in new El[] { (El)0, El.A, El.B, (El)long.MaxValue, (El)long.MinValue }
-            ) {
+            )
+            {
                 VerifyEnumLongToNullableInt(value, useInterpreter);
             }
         }
@@ -3708,7 +3852,8 @@ namespace System.Linq.Expressions.Tests
         {
             foreach (
                 El value in new El[] { (El)0, El.A, El.B, (El)long.MaxValue, (El)long.MinValue }
-            ) {
+            )
+            {
                 VerifyEnumLongToLong(value, useInterpreter);
             }
         }
@@ -3718,7 +3863,8 @@ namespace System.Linq.Expressions.Tests
         {
             foreach (
                 El value in new El[] { (El)0, El.A, El.B, (El)long.MaxValue, (El)long.MinValue }
-            ) {
+            )
+            {
                 VerifyEnumLongToNullableLong(value, useInterpreter);
             }
         }
@@ -3728,7 +3874,8 @@ namespace System.Linq.Expressions.Tests
         {
             foreach (
                 El value in new El[] { (El)0, El.A, El.B, (El)long.MaxValue, (El)long.MinValue }
-            ) {
+            )
+            {
                 VerifyEnumLongToSByte(value, useInterpreter);
             }
         }
@@ -3738,7 +3885,8 @@ namespace System.Linq.Expressions.Tests
         {
             foreach (
                 El value in new El[] { (El)0, El.A, El.B, (El)long.MaxValue, (El)long.MinValue }
-            ) {
+            )
+            {
                 VerifyEnumLongToNullableSByte(value, useInterpreter);
             }
         }
@@ -3748,7 +3896,8 @@ namespace System.Linq.Expressions.Tests
         {
             foreach (
                 El value in new El[] { (El)0, El.A, El.B, (El)long.MaxValue, (El)long.MinValue }
-            ) {
+            )
+            {
                 VerifyEnumLongToShort(value, useInterpreter);
             }
         }
@@ -3758,7 +3907,8 @@ namespace System.Linq.Expressions.Tests
         {
             foreach (
                 El value in new El[] { (El)0, El.A, El.B, (El)long.MaxValue, (El)long.MinValue }
-            ) {
+            )
+            {
                 VerifyEnumLongToNullableShort(value, useInterpreter);
             }
         }
@@ -3768,7 +3918,8 @@ namespace System.Linq.Expressions.Tests
         {
             foreach (
                 El value in new El[] { (El)0, El.A, El.B, (El)long.MaxValue, (El)long.MinValue }
-            ) {
+            )
+            {
                 VerifyEnumLongToUInt(value, useInterpreter);
             }
         }
@@ -3778,7 +3929,8 @@ namespace System.Linq.Expressions.Tests
         {
             foreach (
                 El value in new El[] { (El)0, El.A, El.B, (El)long.MaxValue, (El)long.MinValue }
-            ) {
+            )
+            {
                 VerifyEnumLongToNullableUInt(value, useInterpreter);
             }
         }
@@ -3788,7 +3940,8 @@ namespace System.Linq.Expressions.Tests
         {
             foreach (
                 El value in new El[] { (El)0, El.A, El.B, (El)long.MaxValue, (El)long.MinValue }
-            ) {
+            )
+            {
                 VerifyEnumLongToULong(value, useInterpreter);
             }
         }
@@ -3798,7 +3951,8 @@ namespace System.Linq.Expressions.Tests
         {
             foreach (
                 El value in new El[] { (El)0, El.A, El.B, (El)long.MaxValue, (El)long.MinValue }
-            ) {
+            )
+            {
                 VerifyEnumLongToNullableULong(value, useInterpreter);
             }
         }
@@ -3808,7 +3962,8 @@ namespace System.Linq.Expressions.Tests
         {
             foreach (
                 El value in new El[] { (El)0, El.A, El.B, (El)long.MaxValue, (El)long.MinValue }
-            ) {
+            )
+            {
                 VerifyEnumLongToUShort(value, useInterpreter);
             }
         }
@@ -3818,7 +3973,8 @@ namespace System.Linq.Expressions.Tests
         {
             foreach (
                 El value in new El[] { (El)0, El.A, El.B, (El)long.MaxValue, (El)long.MinValue }
-            ) {
+            )
+            {
                 VerifyEnumLongToNullableUShort(value, useInterpreter);
             }
         }
@@ -3836,7 +3992,8 @@ namespace System.Linq.Expressions.Tests
                     (El)long.MaxValue,
                     (El)long.MinValue
                 }
-            ) {
+            )
+            {
                 VerifyNullableEnumLongToByte(value, useInterpreter);
             }
         }
@@ -3854,7 +4011,8 @@ namespace System.Linq.Expressions.Tests
                     (El)long.MaxValue,
                     (El)long.MinValue
                 }
-            ) {
+            )
+            {
                 VerifyNullableEnumLongToNullableByte(value, useInterpreter);
             }
         }
@@ -3872,7 +4030,8 @@ namespace System.Linq.Expressions.Tests
                     (El)long.MaxValue,
                     (El)long.MinValue
                 }
-            ) {
+            )
+            {
                 VerifyNullableEnumLongToChar(value, useInterpreter);
             }
         }
@@ -3890,7 +4049,8 @@ namespace System.Linq.Expressions.Tests
                     (El)long.MaxValue,
                     (El)long.MinValue
                 }
-            ) {
+            )
+            {
                 VerifyNullableEnumLongToNullableChar(value, useInterpreter);
             }
         }
@@ -3908,7 +4068,8 @@ namespace System.Linq.Expressions.Tests
                     (El)long.MaxValue,
                     (El)long.MinValue
                 }
-            ) {
+            )
+            {
                 VerifyNullableEnumLongToDouble(value, useInterpreter);
             }
         }
@@ -3926,7 +4087,8 @@ namespace System.Linq.Expressions.Tests
                     (El)long.MaxValue,
                     (El)long.MinValue
                 }
-            ) {
+            )
+            {
                 VerifyNullableEnumLongToNullableDouble(value, useInterpreter);
             }
         }
@@ -3944,7 +4106,8 @@ namespace System.Linq.Expressions.Tests
                     (El)long.MaxValue,
                     (El)long.MinValue
                 }
-            ) {
+            )
+            {
                 VerifyNullableEnumLongToEnum(value, useInterpreter);
             }
         }
@@ -3962,7 +4125,8 @@ namespace System.Linq.Expressions.Tests
                     (El)long.MaxValue,
                     (El)long.MinValue
                 }
-            ) {
+            )
+            {
                 VerifyNullableEnumLongToNullableEnum(value, useInterpreter);
             }
         }
@@ -3980,7 +4144,8 @@ namespace System.Linq.Expressions.Tests
                     (El)long.MaxValue,
                     (El)long.MinValue
                 }
-            ) {
+            )
+            {
                 VerifyNullableEnumLongToEnumLong(value, useInterpreter);
             }
         }
@@ -3998,7 +4163,8 @@ namespace System.Linq.Expressions.Tests
                     (El)long.MaxValue,
                     (El)long.MinValue
                 }
-            ) {
+            )
+            {
                 VerifyNullableEnumLongToNullableEnumLong(value, useInterpreter);
             }
         }
@@ -4016,7 +4182,8 @@ namespace System.Linq.Expressions.Tests
                     (El)long.MaxValue,
                     (El)long.MinValue
                 }
-            ) {
+            )
+            {
                 VerifyNullableEnumLongToFloat(value, useInterpreter);
             }
         }
@@ -4034,7 +4201,8 @@ namespace System.Linq.Expressions.Tests
                     (El)long.MaxValue,
                     (El)long.MinValue
                 }
-            ) {
+            )
+            {
                 VerifyNullableEnumLongToNullableFloat(value, useInterpreter);
             }
         }
@@ -4052,7 +4220,8 @@ namespace System.Linq.Expressions.Tests
                     (El)long.MaxValue,
                     (El)long.MinValue
                 }
-            ) {
+            )
+            {
                 VerifyNullableEnumLongToInt(value, useInterpreter);
             }
         }
@@ -4070,7 +4239,8 @@ namespace System.Linq.Expressions.Tests
                     (El)long.MaxValue,
                     (El)long.MinValue
                 }
-            ) {
+            )
+            {
                 VerifyNullableEnumLongToNullableInt(value, useInterpreter);
             }
         }
@@ -4088,7 +4258,8 @@ namespace System.Linq.Expressions.Tests
                     (El)long.MaxValue,
                     (El)long.MinValue
                 }
-            ) {
+            )
+            {
                 VerifyNullableEnumLongToLong(value, useInterpreter);
             }
         }
@@ -4106,7 +4277,8 @@ namespace System.Linq.Expressions.Tests
                     (El)long.MaxValue,
                     (El)long.MinValue
                 }
-            ) {
+            )
+            {
                 VerifyNullableEnumLongToNullableLong(value, useInterpreter);
             }
         }
@@ -4124,7 +4296,8 @@ namespace System.Linq.Expressions.Tests
                     (El)long.MaxValue,
                     (El)long.MinValue
                 }
-            ) {
+            )
+            {
                 VerifyNullableEnumLongToSByte(value, useInterpreter);
             }
         }
@@ -4142,7 +4315,8 @@ namespace System.Linq.Expressions.Tests
                     (El)long.MaxValue,
                     (El)long.MinValue
                 }
-            ) {
+            )
+            {
                 VerifyNullableEnumLongToNullableSByte(value, useInterpreter);
             }
         }
@@ -4160,7 +4334,8 @@ namespace System.Linq.Expressions.Tests
                     (El)long.MaxValue,
                     (El)long.MinValue
                 }
-            ) {
+            )
+            {
                 VerifyNullableEnumLongToShort(value, useInterpreter);
             }
         }
@@ -4178,7 +4353,8 @@ namespace System.Linq.Expressions.Tests
                     (El)long.MaxValue,
                     (El)long.MinValue
                 }
-            ) {
+            )
+            {
                 VerifyNullableEnumLongToNullableShort(value, useInterpreter);
             }
         }
@@ -4196,7 +4372,8 @@ namespace System.Linq.Expressions.Tests
                     (El)long.MaxValue,
                     (El)long.MinValue
                 }
-            ) {
+            )
+            {
                 VerifyNullableEnumLongToUInt(value, useInterpreter);
             }
         }
@@ -4214,7 +4391,8 @@ namespace System.Linq.Expressions.Tests
                     (El)long.MaxValue,
                     (El)long.MinValue
                 }
-            ) {
+            )
+            {
                 VerifyNullableEnumLongToNullableUInt(value, useInterpreter);
             }
         }
@@ -4232,7 +4410,8 @@ namespace System.Linq.Expressions.Tests
                     (El)long.MaxValue,
                     (El)long.MinValue
                 }
-            ) {
+            )
+            {
                 VerifyNullableEnumLongToULong(value, useInterpreter);
             }
         }
@@ -4250,7 +4429,8 @@ namespace System.Linq.Expressions.Tests
                     (El)long.MaxValue,
                     (El)long.MinValue
                 }
-            ) {
+            )
+            {
                 VerifyNullableEnumLongToNullableULong(value, useInterpreter);
             }
         }
@@ -4268,7 +4448,8 @@ namespace System.Linq.Expressions.Tests
                     (El)long.MaxValue,
                     (El)long.MinValue
                 }
-            ) {
+            )
+            {
                 VerifyNullableEnumLongToUShort(value, useInterpreter);
             }
         }
@@ -4286,7 +4467,8 @@ namespace System.Linq.Expressions.Tests
                     (El)long.MaxValue,
                     (El)long.MinValue
                 }
-            ) {
+            )
+            {
                 VerifyNullableEnumLongToNullableUShort(value, useInterpreter);
             }
         }
@@ -4307,7 +4489,8 @@ namespace System.Linq.Expressions.Tests
                     float.PositiveInfinity,
                     float.NaN
                 }
-            ) {
+            )
+            {
                 VerifyFloatToByte(value, useInterpreter);
             }
         }
@@ -4328,7 +4511,8 @@ namespace System.Linq.Expressions.Tests
                     float.PositiveInfinity,
                     float.NaN
                 }
-            ) {
+            )
+            {
                 VerifyFloatToNullableByte(value, useInterpreter);
             }
         }
@@ -4349,7 +4533,8 @@ namespace System.Linq.Expressions.Tests
                     float.PositiveInfinity,
                     float.NaN
                 }
-            ) {
+            )
+            {
                 VerifyFloatToChar(value, useInterpreter);
             }
         }
@@ -4370,7 +4555,8 @@ namespace System.Linq.Expressions.Tests
                     float.PositiveInfinity,
                     float.NaN
                 }
-            ) {
+            )
+            {
                 VerifyFloatToNullableChar(value, useInterpreter);
             }
         }
@@ -4391,7 +4577,8 @@ namespace System.Linq.Expressions.Tests
                     float.PositiveInfinity,
                     float.NaN
                 }
-            ) {
+            )
+            {
                 VerifyFloatToDecimal(value, useInterpreter);
             }
         }
@@ -4412,7 +4599,8 @@ namespace System.Linq.Expressions.Tests
                     float.PositiveInfinity,
                     float.NaN
                 }
-            ) {
+            )
+            {
                 VerifyFloatToNullableDecimal(value, useInterpreter);
             }
         }
@@ -4433,7 +4621,8 @@ namespace System.Linq.Expressions.Tests
                     float.PositiveInfinity,
                     float.NaN
                 }
-            ) {
+            )
+            {
                 VerifyFloatToDouble(value, useInterpreter);
             }
         }
@@ -4454,7 +4643,8 @@ namespace System.Linq.Expressions.Tests
                     float.PositiveInfinity,
                     float.NaN
                 }
-            ) {
+            )
+            {
                 VerifyFloatToNullableDouble(value, useInterpreter);
             }
         }
@@ -4475,7 +4665,8 @@ namespace System.Linq.Expressions.Tests
                     float.PositiveInfinity,
                     float.NaN
                 }
-            ) {
+            )
+            {
                 VerifyFloatToEnum(value, useInterpreter);
             }
         }
@@ -4496,7 +4687,8 @@ namespace System.Linq.Expressions.Tests
                     float.PositiveInfinity,
                     float.NaN
                 }
-            ) {
+            )
+            {
                 VerifyFloatToNullableEnum(value, useInterpreter);
             }
         }
@@ -4517,7 +4709,8 @@ namespace System.Linq.Expressions.Tests
                     float.PositiveInfinity,
                     float.NaN
                 }
-            ) {
+            )
+            {
                 VerifyFloatToEnumLong(value, useInterpreter);
             }
         }
@@ -4538,7 +4731,8 @@ namespace System.Linq.Expressions.Tests
                     float.PositiveInfinity,
                     float.NaN
                 }
-            ) {
+            )
+            {
                 VerifyFloatToNullableEnumLong(value, useInterpreter);
             }
         }
@@ -4559,7 +4753,8 @@ namespace System.Linq.Expressions.Tests
                     float.PositiveInfinity,
                     float.NaN
                 }
-            ) {
+            )
+            {
                 VerifyFloatToFloat(value, useInterpreter);
             }
         }
@@ -4580,7 +4775,8 @@ namespace System.Linq.Expressions.Tests
                     float.PositiveInfinity,
                     float.NaN
                 }
-            ) {
+            )
+            {
                 VerifyFloatToNullableFloat(value, useInterpreter);
             }
         }
@@ -4601,7 +4797,8 @@ namespace System.Linq.Expressions.Tests
                     float.PositiveInfinity,
                     float.NaN
                 }
-            ) {
+            )
+            {
                 VerifyFloatToInt(value, useInterpreter);
             }
         }
@@ -4622,7 +4819,8 @@ namespace System.Linq.Expressions.Tests
                     float.PositiveInfinity,
                     float.NaN
                 }
-            ) {
+            )
+            {
                 VerifyFloatToNullableInt(value, useInterpreter);
             }
         }
@@ -4643,7 +4841,8 @@ namespace System.Linq.Expressions.Tests
                     float.PositiveInfinity,
                     float.NaN
                 }
-            ) {
+            )
+            {
                 VerifyFloatToLong(value, useInterpreter);
             }
         }
@@ -4664,7 +4863,8 @@ namespace System.Linq.Expressions.Tests
                     float.PositiveInfinity,
                     float.NaN
                 }
-            ) {
+            )
+            {
                 VerifyFloatToNullableLong(value, useInterpreter);
             }
         }
@@ -4685,7 +4885,8 @@ namespace System.Linq.Expressions.Tests
                     float.PositiveInfinity,
                     float.NaN
                 }
-            ) {
+            )
+            {
                 VerifyFloatToSByte(value, useInterpreter);
             }
         }
@@ -4706,7 +4907,8 @@ namespace System.Linq.Expressions.Tests
                     float.PositiveInfinity,
                     float.NaN
                 }
-            ) {
+            )
+            {
                 VerifyFloatToNullableSByte(value, useInterpreter);
             }
         }
@@ -4727,7 +4929,8 @@ namespace System.Linq.Expressions.Tests
                     float.PositiveInfinity,
                     float.NaN
                 }
-            ) {
+            )
+            {
                 VerifyFloatToShort(value, useInterpreter);
             }
         }
@@ -4748,7 +4951,8 @@ namespace System.Linq.Expressions.Tests
                     float.PositiveInfinity,
                     float.NaN
                 }
-            ) {
+            )
+            {
                 VerifyFloatToNullableShort(value, useInterpreter);
             }
         }
@@ -4770,7 +4974,8 @@ namespace System.Linq.Expressions.Tests
                     float.PositiveInfinity,
                     float.NaN
                 }
-            ) {
+            )
+            {
                 VerifyFloatToUInt(value, useInterpreter);
             }
         }
@@ -4792,7 +4997,8 @@ namespace System.Linq.Expressions.Tests
                     float.PositiveInfinity,
                     float.NaN
                 }
-            ) {
+            )
+            {
                 VerifyFloatToNullableUInt(value, useInterpreter);
             }
         }
@@ -4813,7 +5019,8 @@ namespace System.Linq.Expressions.Tests
                     float.PositiveInfinity,
                     float.NaN
                 }
-            ) {
+            )
+            {
                 VerifyFloatToULong(value, useInterpreter);
             }
         }
@@ -4835,7 +5042,8 @@ namespace System.Linq.Expressions.Tests
                     float.PositiveInfinity,
                     float.NaN
                 }
-            ) {
+            )
+            {
                 VerifyFloatToNullableULong(value, useInterpreter);
             }
         }
@@ -4856,7 +5064,8 @@ namespace System.Linq.Expressions.Tests
                     float.PositiveInfinity,
                     float.NaN
                 }
-            ) {
+            )
+            {
                 VerifyFloatToUShort(value, useInterpreter);
             }
         }
@@ -4877,7 +5086,8 @@ namespace System.Linq.Expressions.Tests
                     float.PositiveInfinity,
                     float.NaN
                 }
-            ) {
+            )
+            {
                 VerifyFloatToNullableUShort(value, useInterpreter);
             }
         }
@@ -4899,7 +5109,8 @@ namespace System.Linq.Expressions.Tests
                     float.PositiveInfinity,
                     float.NaN
                 }
-            ) {
+            )
+            {
                 VerifyNullableFloatToByte(value, useInterpreter);
             }
         }
@@ -4921,7 +5132,8 @@ namespace System.Linq.Expressions.Tests
                     float.PositiveInfinity,
                     float.NaN
                 }
-            ) {
+            )
+            {
                 VerifyNullableFloatToNullableByte(value, useInterpreter);
             }
         }
@@ -4943,7 +5155,8 @@ namespace System.Linq.Expressions.Tests
                     float.PositiveInfinity,
                     float.NaN
                 }
-            ) {
+            )
+            {
                 VerifyNullableFloatToChar(value, useInterpreter);
             }
         }
@@ -4965,7 +5178,8 @@ namespace System.Linq.Expressions.Tests
                     float.PositiveInfinity,
                     float.NaN
                 }
-            ) {
+            )
+            {
                 VerifyNullableFloatToNullableChar(value, useInterpreter);
             }
         }
@@ -4987,7 +5201,8 @@ namespace System.Linq.Expressions.Tests
                     float.PositiveInfinity,
                     float.NaN
                 }
-            ) {
+            )
+            {
                 VerifyNullableFloatToDecimal(value, useInterpreter);
             }
         }
@@ -5009,7 +5224,8 @@ namespace System.Linq.Expressions.Tests
                     float.PositiveInfinity,
                     float.NaN
                 }
-            ) {
+            )
+            {
                 VerifyNullableFloatToNullableDecimal(value, useInterpreter);
             }
         }
@@ -5031,7 +5247,8 @@ namespace System.Linq.Expressions.Tests
                     float.PositiveInfinity,
                     float.NaN
                 }
-            ) {
+            )
+            {
                 VerifyNullableFloatToDouble(value, useInterpreter);
             }
         }
@@ -5053,7 +5270,8 @@ namespace System.Linq.Expressions.Tests
                     float.PositiveInfinity,
                     float.NaN
                 }
-            ) {
+            )
+            {
                 VerifyNullableFloatToNullableDouble(value, useInterpreter);
             }
         }
@@ -5075,7 +5293,8 @@ namespace System.Linq.Expressions.Tests
                     float.PositiveInfinity,
                     float.NaN
                 }
-            ) {
+            )
+            {
                 VerifyNullableFloatToEnum(value, useInterpreter);
             }
         }
@@ -5097,7 +5316,8 @@ namespace System.Linq.Expressions.Tests
                     float.PositiveInfinity,
                     float.NaN
                 }
-            ) {
+            )
+            {
                 VerifyNullableFloatToNullableEnum(value, useInterpreter);
             }
         }
@@ -5119,7 +5339,8 @@ namespace System.Linq.Expressions.Tests
                     float.PositiveInfinity,
                     float.NaN
                 }
-            ) {
+            )
+            {
                 VerifyNullableFloatToEnumLong(value, useInterpreter);
             }
         }
@@ -5141,7 +5362,8 @@ namespace System.Linq.Expressions.Tests
                     float.PositiveInfinity,
                     float.NaN
                 }
-            ) {
+            )
+            {
                 VerifyNullableFloatToNullableEnumLong(value, useInterpreter);
             }
         }
@@ -5163,7 +5385,8 @@ namespace System.Linq.Expressions.Tests
                     float.PositiveInfinity,
                     float.NaN
                 }
-            ) {
+            )
+            {
                 VerifyNullableFloatToFloat(value, useInterpreter);
             }
         }
@@ -5185,7 +5408,8 @@ namespace System.Linq.Expressions.Tests
                     float.PositiveInfinity,
                     float.NaN
                 }
-            ) {
+            )
+            {
                 VerifyNullableFloatToNullableFloat(value, useInterpreter);
             }
         }
@@ -5207,7 +5431,8 @@ namespace System.Linq.Expressions.Tests
                     float.PositiveInfinity,
                     float.NaN
                 }
-            ) {
+            )
+            {
                 VerifyNullableFloatToInt(value, useInterpreter);
             }
         }
@@ -5229,7 +5454,8 @@ namespace System.Linq.Expressions.Tests
                     float.PositiveInfinity,
                     float.NaN
                 }
-            ) {
+            )
+            {
                 VerifyNullableFloatToNullableInt(value, useInterpreter);
             }
         }
@@ -5251,7 +5477,8 @@ namespace System.Linq.Expressions.Tests
                     float.PositiveInfinity,
                     float.NaN
                 }
-            ) {
+            )
+            {
                 VerifyNullableFloatToLong(value, useInterpreter);
             }
         }
@@ -5273,7 +5500,8 @@ namespace System.Linq.Expressions.Tests
                     float.PositiveInfinity,
                     float.NaN
                 }
-            ) {
+            )
+            {
                 VerifyNullableFloatToNullableLong(value, useInterpreter);
             }
         }
@@ -5295,7 +5523,8 @@ namespace System.Linq.Expressions.Tests
                     float.PositiveInfinity,
                     float.NaN
                 }
-            ) {
+            )
+            {
                 VerifyNullableFloatToSByte(value, useInterpreter);
             }
         }
@@ -5317,7 +5546,8 @@ namespace System.Linq.Expressions.Tests
                     float.PositiveInfinity,
                     float.NaN
                 }
-            ) {
+            )
+            {
                 VerifyNullableFloatToNullableSByte(value, useInterpreter);
             }
         }
@@ -5339,7 +5569,8 @@ namespace System.Linq.Expressions.Tests
                     float.PositiveInfinity,
                     float.NaN
                 }
-            ) {
+            )
+            {
                 VerifyNullableFloatToShort(value, useInterpreter);
             }
         }
@@ -5361,7 +5592,8 @@ namespace System.Linq.Expressions.Tests
                     float.PositiveInfinity,
                     float.NaN
                 }
-            ) {
+            )
+            {
                 VerifyNullableFloatToNullableShort(value, useInterpreter);
             }
         }
@@ -5384,7 +5616,8 @@ namespace System.Linq.Expressions.Tests
                     float.PositiveInfinity,
                     float.NaN
                 }
-            ) {
+            )
+            {
                 VerifyNullableFloatToUInt(value, useInterpreter);
             }
         }
@@ -5407,7 +5640,8 @@ namespace System.Linq.Expressions.Tests
                     float.PositiveInfinity,
                     float.NaN
                 }
-            ) {
+            )
+            {
                 VerifyNullableFloatToNullableUInt(value, useInterpreter);
             }
         }
@@ -5429,7 +5663,8 @@ namespace System.Linq.Expressions.Tests
                     float.PositiveInfinity,
                     float.NaN
                 }
-            ) {
+            )
+            {
                 VerifyNullableFloatToULong(value, useInterpreter);
             }
         }
@@ -5452,7 +5687,8 @@ namespace System.Linq.Expressions.Tests
                     float.PositiveInfinity,
                     float.NaN
                 }
-            ) {
+            )
+            {
                 VerifyNullableFloatToNullableULong(value, useInterpreter);
             }
         }
@@ -5474,7 +5710,8 @@ namespace System.Linq.Expressions.Tests
                     float.PositiveInfinity,
                     float.NaN
                 }
-            ) {
+            )
+            {
                 VerifyNullableFloatToUShort(value, useInterpreter);
             }
         }
@@ -5496,7 +5733,8 @@ namespace System.Linq.Expressions.Tests
                     float.PositiveInfinity,
                     float.NaN
                 }
-            ) {
+            )
+            {
                 VerifyNullableFloatToNullableUShort(value, useInterpreter);
             }
         }
@@ -6766,7 +7004,8 @@ namespace System.Linq.Expressions.Tests
         {
             foreach (
                 sbyte? value in new sbyte?[] { null, 0, 1, -1, sbyte.MinValue, sbyte.MaxValue }
-            ) {
+            )
+            {
                 VerifyNullableSByteToByte(value, useInterpreter);
             }
         }
@@ -6776,7 +7015,8 @@ namespace System.Linq.Expressions.Tests
         {
             foreach (
                 sbyte? value in new sbyte?[] { null, 0, 1, -1, sbyte.MinValue, sbyte.MaxValue }
-            ) {
+            )
+            {
                 VerifyNullableSByteToNullableByte(value, useInterpreter);
             }
         }
@@ -6786,7 +7026,8 @@ namespace System.Linq.Expressions.Tests
         {
             foreach (
                 sbyte? value in new sbyte?[] { null, 0, 1, -1, sbyte.MinValue, sbyte.MaxValue }
-            ) {
+            )
+            {
                 VerifyNullableSByteToChar(value, useInterpreter);
             }
         }
@@ -6796,7 +7037,8 @@ namespace System.Linq.Expressions.Tests
         {
             foreach (
                 sbyte? value in new sbyte?[] { null, 0, 1, -1, sbyte.MinValue, sbyte.MaxValue }
-            ) {
+            )
+            {
                 VerifyNullableSByteToNullableChar(value, useInterpreter);
             }
         }
@@ -6806,7 +7048,8 @@ namespace System.Linq.Expressions.Tests
         {
             foreach (
                 sbyte? value in new sbyte?[] { null, 0, 1, -1, sbyte.MinValue, sbyte.MaxValue }
-            ) {
+            )
+            {
                 VerifyNullableSByteToDecimal(value, useInterpreter);
             }
         }
@@ -6816,7 +7059,8 @@ namespace System.Linq.Expressions.Tests
         {
             foreach (
                 sbyte? value in new sbyte?[] { null, 0, 1, -1, sbyte.MinValue, sbyte.MaxValue }
-            ) {
+            )
+            {
                 VerifyNullableSByteToNullableDecimal(value, useInterpreter);
             }
         }
@@ -6826,7 +7070,8 @@ namespace System.Linq.Expressions.Tests
         {
             foreach (
                 sbyte? value in new sbyte?[] { null, 0, 1, -1, sbyte.MinValue, sbyte.MaxValue }
-            ) {
+            )
+            {
                 VerifyNullableSByteToDouble(value, useInterpreter);
             }
         }
@@ -6836,7 +7081,8 @@ namespace System.Linq.Expressions.Tests
         {
             foreach (
                 sbyte? value in new sbyte?[] { null, 0, 1, -1, sbyte.MinValue, sbyte.MaxValue }
-            ) {
+            )
+            {
                 VerifyNullableSByteToNullableDouble(value, useInterpreter);
             }
         }
@@ -6846,7 +7092,8 @@ namespace System.Linq.Expressions.Tests
         {
             foreach (
                 sbyte? value in new sbyte?[] { null, 0, 1, -1, sbyte.MinValue, sbyte.MaxValue }
-            ) {
+            )
+            {
                 VerifyNullableSByteToEnum(value, useInterpreter);
             }
         }
@@ -6856,7 +7103,8 @@ namespace System.Linq.Expressions.Tests
         {
             foreach (
                 sbyte? value in new sbyte?[] { null, 0, 1, -1, sbyte.MinValue, sbyte.MaxValue }
-            ) {
+            )
+            {
                 VerifyNullableSByteToNullableEnum(value, useInterpreter);
             }
         }
@@ -6866,7 +7114,8 @@ namespace System.Linq.Expressions.Tests
         {
             foreach (
                 sbyte? value in new sbyte?[] { null, 0, 1, -1, sbyte.MinValue, sbyte.MaxValue }
-            ) {
+            )
+            {
                 VerifyNullableSByteToEnumLong(value, useInterpreter);
             }
         }
@@ -6876,7 +7125,8 @@ namespace System.Linq.Expressions.Tests
         {
             foreach (
                 sbyte? value in new sbyte?[] { null, 0, 1, -1, sbyte.MinValue, sbyte.MaxValue }
-            ) {
+            )
+            {
                 VerifyNullableSByteToNullableEnumLong(value, useInterpreter);
             }
         }
@@ -6886,7 +7136,8 @@ namespace System.Linq.Expressions.Tests
         {
             foreach (
                 sbyte? value in new sbyte?[] { null, 0, 1, -1, sbyte.MinValue, sbyte.MaxValue }
-            ) {
+            )
+            {
                 VerifyNullableSByteToFloat(value, useInterpreter);
             }
         }
@@ -6896,7 +7147,8 @@ namespace System.Linq.Expressions.Tests
         {
             foreach (
                 sbyte? value in new sbyte?[] { null, 0, 1, -1, sbyte.MinValue, sbyte.MaxValue }
-            ) {
+            )
+            {
                 VerifyNullableSByteToNullableFloat(value, useInterpreter);
             }
         }
@@ -6906,7 +7158,8 @@ namespace System.Linq.Expressions.Tests
         {
             foreach (
                 sbyte? value in new sbyte?[] { null, 0, 1, -1, sbyte.MinValue, sbyte.MaxValue }
-            ) {
+            )
+            {
                 VerifyNullableSByteToInt(value, useInterpreter);
             }
         }
@@ -6916,7 +7169,8 @@ namespace System.Linq.Expressions.Tests
         {
             foreach (
                 sbyte? value in new sbyte?[] { null, 0, 1, -1, sbyte.MinValue, sbyte.MaxValue }
-            ) {
+            )
+            {
                 VerifyNullableSByteToNullableInt(value, useInterpreter);
             }
         }
@@ -6926,7 +7180,8 @@ namespace System.Linq.Expressions.Tests
         {
             foreach (
                 sbyte? value in new sbyte?[] { null, 0, 1, -1, sbyte.MinValue, sbyte.MaxValue }
-            ) {
+            )
+            {
                 VerifyNullableSByteToLong(value, useInterpreter);
             }
         }
@@ -6936,7 +7191,8 @@ namespace System.Linq.Expressions.Tests
         {
             foreach (
                 sbyte? value in new sbyte?[] { null, 0, 1, -1, sbyte.MinValue, sbyte.MaxValue }
-            ) {
+            )
+            {
                 VerifyNullableSByteToNullableLong(value, useInterpreter);
             }
         }
@@ -6946,7 +7202,8 @@ namespace System.Linq.Expressions.Tests
         {
             foreach (
                 sbyte? value in new sbyte?[] { null, 0, 1, -1, sbyte.MinValue, sbyte.MaxValue }
-            ) {
+            )
+            {
                 VerifyNullableSByteToSByte(value, useInterpreter);
             }
         }
@@ -6956,7 +7213,8 @@ namespace System.Linq.Expressions.Tests
         {
             foreach (
                 sbyte? value in new sbyte?[] { null, 0, 1, -1, sbyte.MinValue, sbyte.MaxValue }
-            ) {
+            )
+            {
                 VerifyNullableSByteToNullableSByte(value, useInterpreter);
             }
         }
@@ -6966,7 +7224,8 @@ namespace System.Linq.Expressions.Tests
         {
             foreach (
                 sbyte? value in new sbyte?[] { null, 0, 1, -1, sbyte.MinValue, sbyte.MaxValue }
-            ) {
+            )
+            {
                 VerifyNullableSByteToShort(value, useInterpreter);
             }
         }
@@ -6976,7 +7235,8 @@ namespace System.Linq.Expressions.Tests
         {
             foreach (
                 sbyte? value in new sbyte?[] { null, 0, 1, -1, sbyte.MinValue, sbyte.MaxValue }
-            ) {
+            )
+            {
                 VerifyNullableSByteToNullableShort(value, useInterpreter);
             }
         }
@@ -6986,7 +7246,8 @@ namespace System.Linq.Expressions.Tests
         {
             foreach (
                 sbyte? value in new sbyte?[] { null, 0, 1, -1, sbyte.MinValue, sbyte.MaxValue }
-            ) {
+            )
+            {
                 VerifyNullableSByteToUInt(value, useInterpreter);
             }
         }
@@ -6996,7 +7257,8 @@ namespace System.Linq.Expressions.Tests
         {
             foreach (
                 sbyte? value in new sbyte?[] { null, 0, 1, -1, sbyte.MinValue, sbyte.MaxValue }
-            ) {
+            )
+            {
                 VerifyNullableSByteToNullableUInt(value, useInterpreter);
             }
         }
@@ -7006,7 +7268,8 @@ namespace System.Linq.Expressions.Tests
         {
             foreach (
                 sbyte? value in new sbyte?[] { null, 0, 1, -1, sbyte.MinValue, sbyte.MaxValue }
-            ) {
+            )
+            {
                 VerifyNullableSByteToULong(value, useInterpreter);
             }
         }
@@ -7016,7 +7279,8 @@ namespace System.Linq.Expressions.Tests
         {
             foreach (
                 sbyte? value in new sbyte?[] { null, 0, 1, -1, sbyte.MinValue, sbyte.MaxValue }
-            ) {
+            )
+            {
                 VerifyNullableSByteToNullableULong(value, useInterpreter);
             }
         }
@@ -7026,7 +7290,8 @@ namespace System.Linq.Expressions.Tests
         {
             foreach (
                 sbyte? value in new sbyte?[] { null, 0, 1, -1, sbyte.MinValue, sbyte.MaxValue }
-            ) {
+            )
+            {
                 VerifyNullableSByteToUShort(value, useInterpreter);
             }
         }
@@ -7036,7 +7301,8 @@ namespace System.Linq.Expressions.Tests
         {
             foreach (
                 sbyte? value in new sbyte?[] { null, 0, 1, -1, sbyte.MinValue, sbyte.MaxValue }
-            ) {
+            )
+            {
                 VerifyNullableSByteToNullableUShort(value, useInterpreter);
             }
         }
@@ -7298,7 +7564,8 @@ namespace System.Linq.Expressions.Tests
         {
             foreach (
                 short? value in new short?[] { null, 0, 1, -1, short.MinValue, short.MaxValue }
-            ) {
+            )
+            {
                 VerifyNullableShortToByte(value, useInterpreter);
             }
         }
@@ -7308,7 +7575,8 @@ namespace System.Linq.Expressions.Tests
         {
             foreach (
                 short? value in new short?[] { null, 0, 1, -1, short.MinValue, short.MaxValue }
-            ) {
+            )
+            {
                 VerifyNullableShortToNullableByte(value, useInterpreter);
             }
         }
@@ -7318,7 +7586,8 @@ namespace System.Linq.Expressions.Tests
         {
             foreach (
                 short? value in new short?[] { null, 0, 1, -1, short.MinValue, short.MaxValue }
-            ) {
+            )
+            {
                 VerifyNullableShortToChar(value, useInterpreter);
             }
         }
@@ -7328,7 +7597,8 @@ namespace System.Linq.Expressions.Tests
         {
             foreach (
                 short? value in new short?[] { null, 0, 1, -1, short.MinValue, short.MaxValue }
-            ) {
+            )
+            {
                 VerifyNullableShortToNullableChar(value, useInterpreter);
             }
         }
@@ -7338,7 +7608,8 @@ namespace System.Linq.Expressions.Tests
         {
             foreach (
                 short? value in new short?[] { null, 0, 1, -1, short.MinValue, short.MaxValue }
-            ) {
+            )
+            {
                 VerifyNullableShortToDecimal(value, useInterpreter);
             }
         }
@@ -7348,7 +7619,8 @@ namespace System.Linq.Expressions.Tests
         {
             foreach (
                 short? value in new short?[] { null, 0, 1, -1, short.MinValue, short.MaxValue }
-            ) {
+            )
+            {
                 VerifyNullableShortToNullableDecimal(value, useInterpreter);
             }
         }
@@ -7358,7 +7630,8 @@ namespace System.Linq.Expressions.Tests
         {
             foreach (
                 short? value in new short?[] { null, 0, 1, -1, short.MinValue, short.MaxValue }
-            ) {
+            )
+            {
                 VerifyNullableShortToDouble(value, useInterpreter);
             }
         }
@@ -7368,7 +7641,8 @@ namespace System.Linq.Expressions.Tests
         {
             foreach (
                 short? value in new short?[] { null, 0, 1, -1, short.MinValue, short.MaxValue }
-            ) {
+            )
+            {
                 VerifyNullableShortToNullableDouble(value, useInterpreter);
             }
         }
@@ -7378,7 +7652,8 @@ namespace System.Linq.Expressions.Tests
         {
             foreach (
                 short? value in new short?[] { null, 0, 1, -1, short.MinValue, short.MaxValue }
-            ) {
+            )
+            {
                 VerifyNullableShortToEnum(value, useInterpreter);
             }
         }
@@ -7388,7 +7663,8 @@ namespace System.Linq.Expressions.Tests
         {
             foreach (
                 short? value in new short?[] { null, 0, 1, -1, short.MinValue, short.MaxValue }
-            ) {
+            )
+            {
                 VerifyNullableShortToNullableEnum(value, useInterpreter);
             }
         }
@@ -7398,7 +7674,8 @@ namespace System.Linq.Expressions.Tests
         {
             foreach (
                 short? value in new short?[] { null, 0, 1, -1, short.MinValue, short.MaxValue }
-            ) {
+            )
+            {
                 VerifyNullableShortToEnumLong(value, useInterpreter);
             }
         }
@@ -7408,7 +7685,8 @@ namespace System.Linq.Expressions.Tests
         {
             foreach (
                 short? value in new short?[] { null, 0, 1, -1, short.MinValue, short.MaxValue }
-            ) {
+            )
+            {
                 VerifyNullableShortToNullableEnumLong(value, useInterpreter);
             }
         }
@@ -7418,7 +7696,8 @@ namespace System.Linq.Expressions.Tests
         {
             foreach (
                 short? value in new short?[] { null, 0, 1, -1, short.MinValue, short.MaxValue }
-            ) {
+            )
+            {
                 VerifyNullableShortToFloat(value, useInterpreter);
             }
         }
@@ -7428,7 +7707,8 @@ namespace System.Linq.Expressions.Tests
         {
             foreach (
                 short? value in new short?[] { null, 0, 1, -1, short.MinValue, short.MaxValue }
-            ) {
+            )
+            {
                 VerifyNullableShortToNullableFloat(value, useInterpreter);
             }
         }
@@ -7438,7 +7718,8 @@ namespace System.Linq.Expressions.Tests
         {
             foreach (
                 short? value in new short?[] { null, 0, 1, -1, short.MinValue, short.MaxValue }
-            ) {
+            )
+            {
                 VerifyNullableShortToInt(value, useInterpreter);
             }
         }
@@ -7448,7 +7729,8 @@ namespace System.Linq.Expressions.Tests
         {
             foreach (
                 short? value in new short?[] { null, 0, 1, -1, short.MinValue, short.MaxValue }
-            ) {
+            )
+            {
                 VerifyNullableShortToNullableInt(value, useInterpreter);
             }
         }
@@ -7458,7 +7740,8 @@ namespace System.Linq.Expressions.Tests
         {
             foreach (
                 short? value in new short?[] { null, 0, 1, -1, short.MinValue, short.MaxValue }
-            ) {
+            )
+            {
                 VerifyNullableShortToLong(value, useInterpreter);
             }
         }
@@ -7468,7 +7751,8 @@ namespace System.Linq.Expressions.Tests
         {
             foreach (
                 short? value in new short?[] { null, 0, 1, -1, short.MinValue, short.MaxValue }
-            ) {
+            )
+            {
                 VerifyNullableShortToNullableLong(value, useInterpreter);
             }
         }
@@ -7478,7 +7762,8 @@ namespace System.Linq.Expressions.Tests
         {
             foreach (
                 short? value in new short?[] { null, 0, 1, -1, short.MinValue, short.MaxValue }
-            ) {
+            )
+            {
                 VerifyNullableShortToSByte(value, useInterpreter);
             }
         }
@@ -7488,7 +7773,8 @@ namespace System.Linq.Expressions.Tests
         {
             foreach (
                 short? value in new short?[] { null, 0, 1, -1, short.MinValue, short.MaxValue }
-            ) {
+            )
+            {
                 VerifyNullableShortToNullableSByte(value, useInterpreter);
             }
         }
@@ -7498,7 +7784,8 @@ namespace System.Linq.Expressions.Tests
         {
             foreach (
                 short? value in new short?[] { null, 0, 1, -1, short.MinValue, short.MaxValue }
-            ) {
+            )
+            {
                 VerifyNullableShortToShort(value, useInterpreter);
             }
         }
@@ -7508,7 +7795,8 @@ namespace System.Linq.Expressions.Tests
         {
             foreach (
                 short? value in new short?[] { null, 0, 1, -1, short.MinValue, short.MaxValue }
-            ) {
+            )
+            {
                 VerifyNullableShortToNullableShort(value, useInterpreter);
             }
         }
@@ -7518,7 +7806,8 @@ namespace System.Linq.Expressions.Tests
         {
             foreach (
                 short? value in new short?[] { null, 0, 1, -1, short.MinValue, short.MaxValue }
-            ) {
+            )
+            {
                 VerifyNullableShortToUInt(value, useInterpreter);
             }
         }
@@ -7528,7 +7817,8 @@ namespace System.Linq.Expressions.Tests
         {
             foreach (
                 short? value in new short?[] { null, 0, 1, -1, short.MinValue, short.MaxValue }
-            ) {
+            )
+            {
                 VerifyNullableShortToNullableUInt(value, useInterpreter);
             }
         }
@@ -7538,7 +7828,8 @@ namespace System.Linq.Expressions.Tests
         {
             foreach (
                 short? value in new short?[] { null, 0, 1, -1, short.MinValue, short.MaxValue }
-            ) {
+            )
+            {
                 VerifyNullableShortToULong(value, useInterpreter);
             }
         }
@@ -7548,7 +7839,8 @@ namespace System.Linq.Expressions.Tests
         {
             foreach (
                 short? value in new short?[] { null, 0, 1, -1, short.MinValue, short.MaxValue }
-            ) {
+            )
+            {
                 VerifyNullableShortToNullableULong(value, useInterpreter);
             }
         }
@@ -7558,7 +7850,8 @@ namespace System.Linq.Expressions.Tests
         {
             foreach (
                 short? value in new short?[] { null, 0, 1, -1, short.MinValue, short.MaxValue }
-            ) {
+            )
+            {
                 VerifyNullableShortToUShort(value, useInterpreter);
             }
         }
@@ -7568,7 +7861,8 @@ namespace System.Linq.Expressions.Tests
         {
             foreach (
                 short? value in new short?[] { null, 0, 1, -1, short.MinValue, short.MaxValue }
-            ) {
+            )
+            {
                 VerifyNullableShortToNullableUShort(value, useInterpreter);
             }
         }
@@ -10982,7 +11276,8 @@ namespace System.Linq.Expressions.Tests
         private static void VerifyNullableDecimalToNullableDecimal(
             decimal? value,
             bool useInterpreter
-        ) {
+        )
+        {
             Expression<Func<decimal?>> e = Expression.Lambda<Func<decimal?>>(
                 Expression.Convert(Expression.Constant(value, typeof(decimal?)), typeof(decimal?)),
                 Enumerable.Empty<ParameterExpression>()
@@ -11009,7 +11304,8 @@ namespace System.Linq.Expressions.Tests
         private static void VerifyNullableDecimalToNullableDouble(
             decimal? value,
             bool useInterpreter
-        ) {
+        )
+        {
             Expression<Func<double?>> e = Expression.Lambda<Func<double?>>(
                 Expression.Convert(Expression.Constant(value, typeof(decimal?)), typeof(double?)),
                 Enumerable.Empty<ParameterExpression>()
@@ -11036,7 +11332,8 @@ namespace System.Linq.Expressions.Tests
         private static void VerifyNullableDecimalToNullableFloat(
             decimal? value,
             bool useInterpreter
-        ) {
+        )
+        {
             Expression<Func<float?>> e = Expression.Lambda<Func<float?>>(
                 Expression.Convert(Expression.Constant(value, typeof(decimal?)), typeof(float?)),
                 Enumerable.Empty<ParameterExpression>()
@@ -11174,7 +11471,8 @@ namespace System.Linq.Expressions.Tests
         private static void VerifyNullableDecimalToNullableSByte(
             decimal? value,
             bool useInterpreter
-        ) {
+        )
+        {
             Expression<Func<sbyte?>> e = Expression.Lambda<Func<sbyte?>>(
                 Expression.Convert(Expression.Constant(value, typeof(decimal?)), typeof(sbyte?)),
                 Enumerable.Empty<ParameterExpression>()
@@ -11225,7 +11523,8 @@ namespace System.Linq.Expressions.Tests
         private static void VerifyNullableDecimalToNullableShort(
             decimal? value,
             bool useInterpreter
-        ) {
+        )
+        {
             Expression<Func<short?>> e = Expression.Lambda<Func<short?>>(
                 Expression.Convert(Expression.Constant(value, typeof(decimal?)), typeof(short?)),
                 Enumerable.Empty<ParameterExpression>()
@@ -11325,7 +11624,8 @@ namespace System.Linq.Expressions.Tests
         private static void VerifyNullableDecimalToNullableULong(
             decimal? value,
             bool useInterpreter
-        ) {
+        )
+        {
             Expression<Func<ulong?>> e = Expression.Lambda<Func<ulong?>>(
                 Expression.Convert(Expression.Constant(value, typeof(decimal?)), typeof(ulong?)),
                 Enumerable.Empty<ParameterExpression>()
@@ -11376,7 +11676,8 @@ namespace System.Linq.Expressions.Tests
         private static void VerifyNullableDecimalToNullableUShort(
             decimal? value,
             bool useInterpreter
-        ) {
+        )
+        {
             Expression<Func<ushort?>> e = Expression.Lambda<Func<ushort?>>(
                 Expression.Convert(Expression.Constant(value, typeof(decimal?)), typeof(ushort?)),
                 Enumerable.Empty<ParameterExpression>()
@@ -11807,7 +12108,8 @@ namespace System.Linq.Expressions.Tests
         private static void VerifyNullableDoubleToNullableDecimal(
             double? value,
             bool useInterpreter
-        ) {
+        )
+        {
             Expression<Func<decimal?>> e = Expression.Lambda<Func<decimal?>>(
                 Expression.Convert(Expression.Constant(value, typeof(double?)), typeof(decimal?)),
                 Enumerable.Empty<ParameterExpression>()
@@ -11895,7 +12197,8 @@ namespace System.Linq.Expressions.Tests
         private static void VerifyNullableDoubleToNullableEnumLong(
             double? value,
             bool useInterpreter
-        ) {
+        )
+        {
             Expression<Func<El?>> e = Expression.Lambda<Func<El?>>(
                 Expression.Convert(Expression.Constant(value, typeof(double?)), typeof(El?)),
                 Enumerable.Empty<ParameterExpression>()
@@ -18354,7 +18657,8 @@ namespace System.Linq.Expressions.Tests
         private static void VerifyNullableUShortToNullableDecimal(
             ushort? value,
             bool useInterpreter
-        ) {
+        )
+        {
             Expression<Func<decimal?>> e = Expression.Lambda<Func<decimal?>>(
                 Expression.Convert(Expression.Constant(value, typeof(ushort?)), typeof(decimal?)),
                 Enumerable.Empty<ParameterExpression>()
@@ -18431,7 +18735,8 @@ namespace System.Linq.Expressions.Tests
         private static void VerifyNullableUShortToNullableEnumLong(
             ushort? value,
             bool useInterpreter
-        ) {
+        )
+        {
             Expression<Func<El?>> e = Expression.Lambda<Func<El?>>(
                 Expression.Convert(Expression.Constant(value, typeof(ushort?)), typeof(El?)),
                 Enumerable.Empty<ParameterExpression>()
@@ -18818,7 +19123,8 @@ namespace System.Linq.Expressions.Tests
         [Theory, ClassData(typeof(CompilationTypes))]
         public static void ImplicitHalfLiftedOverloadedConversionExplicitlySetMethod(
             bool useInterpreter
-        ) {
+        )
+        {
             List<MethodInfo> opMethods = typeof(ImplicitHalfLiftedOverloaded).GetMethods()
                 .Where(m => m.Name == "op_Implicit")
                 .ToList();

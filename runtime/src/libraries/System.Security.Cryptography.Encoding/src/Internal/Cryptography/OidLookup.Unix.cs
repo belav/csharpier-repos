@@ -19,7 +19,8 @@ namespace Internal.Cryptography
             string oid,
             OidGroup oidGroup,
             bool fallBackToAllGroups
-        ) {
+        )
+        {
             IntPtr friendlyNamePtr = IntPtr.Zero;
             int result = Interop.Crypto.LookupFriendlyNameByOid(oid, ref friendlyNamePtr);
 
@@ -48,7 +49,8 @@ namespace Internal.Cryptography
             string friendlyName,
             OidGroup oidGroup,
             bool fallBackToAllGroups
-        ) {
+        )
+        {
             IntPtr sharedObject = Interop.Crypto.GetObjectDefinitionByName(friendlyName);
 
             if (sharedObject == IntPtr.Zero)

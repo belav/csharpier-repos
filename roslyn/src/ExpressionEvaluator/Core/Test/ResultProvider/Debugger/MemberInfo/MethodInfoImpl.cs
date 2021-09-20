@@ -129,7 +129,8 @@ namespace Microsoft.CodeAnalysis.ExpressionEvaluator
             Binder binder,
             object[] parameters,
             CultureInfo culture
-        ) {
+        )
+        {
             throw new NotImplementedException();
         }
 

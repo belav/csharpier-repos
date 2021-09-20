@@ -38,7 +38,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             FieldSymbol disposeModeField,
             MethodSymbol setResultMethod,
             MethodSymbol setExceptionMethod
-        ) {
+        )
+        {
             PromiseOfValueOrEndField = promiseOfValueOrEndField;
             CombinedTokensField = combinedTokensField;
             CurrentField = currentField;

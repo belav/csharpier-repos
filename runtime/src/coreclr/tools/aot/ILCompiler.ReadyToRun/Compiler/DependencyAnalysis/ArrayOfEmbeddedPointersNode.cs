@@ -73,7 +73,8 @@ namespace ILCompiler.DependencyAnalysis
             public int Compare(
                 EmbeddedPointerIndirectionNode<TTarget> x,
                 EmbeddedPointerIndirectionNode<TTarget> y
-            ) {
+            )
+            {
                 return _innerComparer.Compare(x.Target, y.Target);
             }
         }
@@ -104,7 +105,8 @@ namespace ILCompiler.DependencyAnalysis
 
             public override IEnumerable<DependencyListEntry> GetStaticDependencies(
                 NodeFactory factory
-            ) {
+            )
+            {
                 return new[]
                 {
                     new DependencyListEntry(Target, "reloc"),

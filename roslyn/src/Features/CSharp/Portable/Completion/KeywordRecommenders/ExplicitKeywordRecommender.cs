@@ -28,7 +28,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Completion.KeywordRecommenders
             int position,
             CSharpSyntaxContext context,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             if (
                 context.IsMemberDeclarationContext(
                     validModifiers: s_validMemberModifiers,
@@ -36,7 +37,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Completion.KeywordRecommenders
                     canBePartial: false,
                     cancellationToken: cancellationToken
                 )
-            ) {
+            )
+            {
                 // operators must be both public and static
                 var modifiers = context.PrecedingModifiers;
 

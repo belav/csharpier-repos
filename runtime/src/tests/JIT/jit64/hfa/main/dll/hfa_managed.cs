@@ -914,7 +914,8 @@ namespace HFATest
             double v7,
             float v8,
             HFA01 hfa
-        ) {
+        )
+        {
             return (float)v1
                 + (float)v2
                 + (float)v3
@@ -941,7 +942,8 @@ namespace HFATest
             double v7,
             float v8,
             HFA02 hfa
-        ) {
+        )
+        {
             return (float)v1
                 + (float)v2
                 + (float)v3
@@ -975,7 +977,8 @@ namespace HFATest
             double v7,
             float v8,
             HFA03 hfa
-        ) {
+        )
+        {
             return (float)v1
                 + (float)v2
                 + (float)v3
@@ -1010,7 +1013,8 @@ namespace HFATest
             double v7,
             float v8,
             HFA05 hfa
-        ) {
+        )
+        {
             return (float)v1
                 + (float)v2
                 + (float)v3
@@ -1047,7 +1051,8 @@ namespace HFATest
             double v7,
             float v8,
             HFA08 hfa
-        ) {
+        )
+        {
             return (float)v1
                 + (float)v2
                 + (float)v3
@@ -1087,7 +1092,8 @@ namespace HFATest
             double v7,
             float v8,
             HFA11 hfa
-        ) {
+        )
+        {
             return (float)v1
                 + (float)v2
                 + (float)v3
@@ -1130,7 +1136,8 @@ namespace HFATest
             double v7,
             float v8,
             HFA19 hfa
-        ) {
+        )
+        {
             return (float)v1
                 + (float)v2
                 + (float)v3
@@ -1190,7 +1197,8 @@ namespace HFATest
             double v12,
             float v13,
             HFA01 hfa
-        ) {
+        )
+        {
             return (float)v1
                 + (float)v2
                 + (float)v3
@@ -1227,7 +1235,8 @@ namespace HFATest
             double v12,
             float v13,
             HFA02 hfa
-        ) {
+        )
+        {
             return (float)v1
                 + (float)v2
                 + (float)v3
@@ -1271,7 +1280,8 @@ namespace HFATest
             double v12,
             float v13,
             HFA03 hfa
-        ) {
+        )
+        {
             return (float)v1
                 + (float)v2
                 + (float)v3
@@ -1316,7 +1326,8 @@ namespace HFATest
             double v12,
             float v13,
             HFA05 hfa
-        ) {
+        )
+        {
             return (float)v1
                 + (float)v2
                 + (float)v3
@@ -1363,7 +1374,8 @@ namespace HFATest
             double v12,
             float v13,
             HFA08 hfa
-        ) {
+        )
+        {
             return (float)v1
                 + (float)v2
                 + (float)v3
@@ -1413,7 +1425,8 @@ namespace HFATest
             double v12,
             float v13,
             HFA11 hfa
-        ) {
+        )
+        {
             return (float)v1
                 + (float)v2
                 + (float)v3
@@ -1466,7 +1479,8 @@ namespace HFATest
             double v12,
             float v13,
             HFA19 hfa
-        ) {
+        )
+        {
             return (float)v1
                 + (float)v2
                 + (float)v3
@@ -1775,7 +1789,8 @@ namespace HFATest
             HFA01 hfa6,
             HFA01 hfa7,
             HFA01 hfa8
-        ) {
+        )
+        {
             return (
                     (Average3_HFA01(hfa1, hfa2, hfa3) * 3)
                     + (Average5_HFA01(hfa4, hfa5, hfa6, hfa7, hfa8) * 5)
@@ -1796,7 +1811,8 @@ namespace HFATest
             HFA02 hfa6,
             HFA02 hfa7,
             HFA02 hfa8
-        ) {
+        )
+        {
             return (
                     (Average3_HFA02(hfa1, hfa2, hfa3) * 3)
                     + (Average5_HFA02(hfa4, hfa5, hfa6, hfa7, hfa8) * 5)
@@ -1817,7 +1833,8 @@ namespace HFATest
             HFA03 hfa6,
             HFA03 hfa7,
             HFA03 hfa8
-        ) {
+        )
+        {
             return (
                     (Average3_HFA03(hfa1, hfa2, hfa3) * 3)
                     + (Average5_HFA03(hfa4, hfa5, hfa6, hfa7, hfa8) * 5)
@@ -1838,7 +1855,8 @@ namespace HFATest
             HFA05 hfa6,
             HFA05 hfa7,
             HFA05 hfa8
-        ) {
+        )
+        {
             return (
                     (Average3_HFA05(hfa1, hfa2, hfa3) * 3)
                     + (Average5_HFA05(hfa4, hfa5, hfa6, hfa7, hfa8) * 5)
@@ -1859,7 +1877,8 @@ namespace HFATest
             HFA08 hfa6,
             HFA08 hfa7,
             HFA08 hfa8
-        ) {
+        )
+        {
             return (
                     (Average3_HFA08(hfa1, hfa2, hfa3) * 3)
                     + (Average5_HFA08(hfa4, hfa5, hfa6, hfa7, hfa8) * 5)
@@ -1880,7 +1899,8 @@ namespace HFATest
             HFA11 hfa6,
             HFA11 hfa7,
             HFA11 hfa8
-        ) {
+        )
+        {
             return (
                     (Average3_HFA11(hfa1, hfa2, hfa3) * 3)
                     + (Average5_HFA11(hfa4, hfa5, hfa6, hfa7, hfa8) * 5)
@@ -1901,7 +1921,8 @@ namespace HFATest
             HFA19 hfa6,
             HFA19 hfa7,
             HFA19 hfa8
-        ) {
+        )
+        {
             return (
                     (Average3_HFA19(hfa1, hfa2, hfa3) * 3)
                     + (Average5_HFA19(hfa4, hfa5, hfa6, hfa7, hfa8) * 5)
@@ -1929,7 +1950,8 @@ namespace HFATest
             HFA01 hfa9,
             HFA01 hfa10,
             HFA01 hfa11
-        ) {
+        )
+        {
             return (
                     (Average3_HFA01(hfa1, hfa2, hfa3) * 3)
                     + (Average8_HFA01(hfa4, hfa5, hfa6, hfa7, hfa8, hfa9, hfa10, hfa11) * 8)
@@ -1953,7 +1975,8 @@ namespace HFATest
             HFA02 hfa9,
             HFA02 hfa10,
             HFA02 hfa11
-        ) {
+        )
+        {
             return (
                     (Average3_HFA02(hfa1, hfa2, hfa3) * 3)
                     + (Average8_HFA02(hfa4, hfa5, hfa6, hfa7, hfa8, hfa9, hfa10, hfa11) * 8)
@@ -1977,7 +2000,8 @@ namespace HFATest
             HFA03 hfa9,
             HFA03 hfa10,
             HFA03 hfa11
-        ) {
+        )
+        {
             return (
                     (Average3_HFA03(hfa1, hfa2, hfa3) * 3)
                     + (Average8_HFA03(hfa4, hfa5, hfa6, hfa7, hfa8, hfa9, hfa10, hfa11) * 8)
@@ -2001,7 +2025,8 @@ namespace HFATest
             HFA05 hfa9,
             HFA05 hfa10,
             HFA05 hfa11
-        ) {
+        )
+        {
             return (
                     (Average3_HFA05(hfa1, hfa2, hfa3) * 3)
                     + (Average8_HFA05(hfa4, hfa5, hfa6, hfa7, hfa8, hfa9, hfa10, hfa11) * 8)
@@ -2025,7 +2050,8 @@ namespace HFATest
             HFA08 hfa9,
             HFA08 hfa10,
             HFA08 hfa11
-        ) {
+        )
+        {
             return (
                     (Average3_HFA08(hfa1, hfa2, hfa3) * 3)
                     + (Average8_HFA08(hfa4, hfa5, hfa6, hfa7, hfa8, hfa9, hfa10, hfa11) * 8)
@@ -2049,7 +2075,8 @@ namespace HFATest
             HFA11 hfa9,
             HFA11 hfa10,
             HFA11 hfa11
-        ) {
+        )
+        {
             return (
                     (Average3_HFA11(hfa1, hfa2, hfa3) * 3)
                     + (Average8_HFA11(hfa4, hfa5, hfa6, hfa7, hfa8, hfa9, hfa10, hfa11) * 8)
@@ -2073,7 +2100,8 @@ namespace HFATest
             HFA19 hfa9,
             HFA19 hfa10,
             HFA19 hfa11
-        ) {
+        )
+        {
             return (
                     (Average3_HFA19(hfa1, hfa2, hfa3) * 3)
                     + (Average8_HFA19(hfa4, hfa5, hfa6, hfa7, hfa8, hfa9, hfa10, hfa11) * 8)
@@ -2109,7 +2137,8 @@ namespace HFATest
             HFA01 hfa17,
             HFA01 hfa18,
             HFA01 hfa19
-        ) {
+        )
+        {
             return (
                     (Average8_HFA01(hfa1, hfa2, hfa3, hfa4, hfa5, hfa6, hfa7, hfa8) * 8)
                     + (
@@ -2155,7 +2184,8 @@ namespace HFATest
             HFA02 hfa17,
             HFA02 hfa18,
             HFA02 hfa19
-        ) {
+        )
+        {
             return (
                     (Average8_HFA02(hfa1, hfa2, hfa3, hfa4, hfa5, hfa6, hfa7, hfa8) * 8)
                     + (
@@ -2201,7 +2231,8 @@ namespace HFATest
             HFA03 hfa17,
             HFA03 hfa18,
             HFA03 hfa19
-        ) {
+        )
+        {
             return (
                     (Average8_HFA03(hfa1, hfa2, hfa3, hfa4, hfa5, hfa6, hfa7, hfa8) * 8)
                     + (
@@ -2247,7 +2278,8 @@ namespace HFATest
             HFA05 hfa17,
             HFA05 hfa18,
             HFA05 hfa19
-        ) {
+        )
+        {
             return (
                     (Average8_HFA05(hfa1, hfa2, hfa3, hfa4, hfa5, hfa6, hfa7, hfa8) * 8)
                     + (
@@ -2293,7 +2325,8 @@ namespace HFATest
             HFA08 hfa17,
             HFA08 hfa18,
             HFA08 hfa19
-        ) {
+        )
+        {
             return (
                     (Average8_HFA08(hfa1, hfa2, hfa3, hfa4, hfa5, hfa6, hfa7, hfa8) * 8)
                     + (
@@ -2339,7 +2372,8 @@ namespace HFATest
             HFA11 hfa17,
             HFA11 hfa18,
             HFA11 hfa19
-        ) {
+        )
+        {
             return (
                     (Average8_HFA11(hfa1, hfa2, hfa3, hfa4, hfa5, hfa6, hfa7, hfa8) * 8)
                     + (
@@ -2385,7 +2419,8 @@ namespace HFATest
             HFA19 hfa17,
             HFA19 hfa18,
             HFA19 hfa19
-        ) {
+        )
+        {
             return (
                     (Average8_HFA19(hfa1, hfa2, hfa3, hfa4, hfa5, hfa6, hfa7, hfa8) * 8)
                     + (
@@ -2431,7 +2466,8 @@ namespace HFATest
             HFA01 hfa6,
             float v8,
             HFA01 hfa7
-        ) {
+        )
+        {
             return (
                     Sum_HFA01(hfa1)
                     + Sum_HFA01(hfa2)
@@ -2472,7 +2508,8 @@ namespace HFATest
             HFA02 hfa6,
             float v8,
             HFA02 hfa7
-        ) {
+        )
+        {
             return (
                     Sum_HFA02(hfa1)
                     + Sum_HFA02(hfa2)
@@ -2513,7 +2550,8 @@ namespace HFATest
             HFA03 hfa6,
             float v8,
             HFA03 hfa7
-        ) {
+        )
+        {
             return (
                     Sum_HFA03(hfa1)
                     + Sum_HFA03(hfa2)
@@ -2554,7 +2592,8 @@ namespace HFATest
             HFA05 hfa6,
             float v8,
             HFA05 hfa7
-        ) {
+        )
+        {
             return (
                     Sum_HFA05(hfa1)
                     + Sum_HFA05(hfa2)
@@ -2595,7 +2634,8 @@ namespace HFATest
             HFA08 hfa6,
             float v8,
             HFA08 hfa7
-        ) {
+        )
+        {
             return (
                     Sum_HFA08(hfa1)
                     + Sum_HFA08(hfa2)
@@ -2636,7 +2676,8 @@ namespace HFATest
             HFA11 hfa6,
             float v8,
             HFA11 hfa7
-        ) {
+        )
+        {
             return (
                     Sum_HFA11(hfa1)
                     + Sum_HFA11(hfa2)
@@ -2677,7 +2718,8 @@ namespace HFATest
             HFA19 hfa6,
             float v8,
             HFA19 hfa7
-        ) {
+        )
+        {
             return (
                     Sum_HFA19(hfa1)
                     + Sum_HFA19(hfa2)
@@ -2718,7 +2760,8 @@ namespace HFATest
             HFA11 hfa6,
             float v8,
             HFA01 hfa7
-        ) {
+        )
+        {
             return (
                     Sum_HFA03(hfa1)
                     + Sum_HFA02(hfa2)
@@ -2765,7 +2808,8 @@ namespace HFATest
             float v10,
             HFA01 hfa6,
             HFA01 hfa7
-        ) {
+        )
+        {
             return (
                     Sum_HFA01(hfa1)
                     + Sum_HFA01(hfa2)
@@ -2810,7 +2854,8 @@ namespace HFATest
             float v10,
             HFA02 hfa6,
             HFA02 hfa7
-        ) {
+        )
+        {
             return (
                     Sum_HFA02(hfa1)
                     + Sum_HFA02(hfa2)
@@ -2855,7 +2900,8 @@ namespace HFATest
             float v10,
             HFA03 hfa6,
             HFA03 hfa7
-        ) {
+        )
+        {
             return (
                     Sum_HFA03(hfa1)
                     + Sum_HFA03(hfa2)
@@ -2900,7 +2946,8 @@ namespace HFATest
             float v10,
             HFA05 hfa6,
             HFA05 hfa7
-        ) {
+        )
+        {
             return (
                     Sum_HFA05(hfa1)
                     + Sum_HFA05(hfa2)
@@ -2945,7 +2992,8 @@ namespace HFATest
             float v10,
             HFA08 hfa6,
             HFA08 hfa7
-        ) {
+        )
+        {
             return (
                     Sum_HFA08(hfa1)
                     + Sum_HFA08(hfa2)
@@ -2990,7 +3038,8 @@ namespace HFATest
             float v10,
             HFA11 hfa6,
             HFA11 hfa7
-        ) {
+        )
+        {
             return (
                     Sum_HFA11(hfa1)
                     + Sum_HFA11(hfa2)
@@ -3035,7 +3084,8 @@ namespace HFATest
             float v10,
             HFA19 hfa6,
             HFA19 hfa7
-        ) {
+        )
+        {
             return (
                     Sum_HFA19(hfa1)
                     + Sum_HFA19(hfa2)
@@ -3080,7 +3130,8 @@ namespace HFATest
             float v10,
             HFA08 hfa6,
             HFA02 hfa7
-        ) {
+        )
+        {
             return (
                     Sum_HFA01(hfa1)
                     + Sum_HFA05(hfa2)
@@ -3129,7 +3180,8 @@ namespace HFATest
             HFA01 hfa6,
             float v10,
             HFA01 hfa7
-        ) {
+        )
+        {
             return (
                     Sum_HFA01(hfa1)
                     + Sum_HFA01(hfa2)
@@ -3174,7 +3226,8 @@ namespace HFATest
             HFA02 hfa6,
             float v10,
             HFA02 hfa7
-        ) {
+        )
+        {
             return (
                     Sum_HFA02(hfa1)
                     + Sum_HFA02(hfa2)
@@ -3219,7 +3272,8 @@ namespace HFATest
             HFA03 hfa6,
             float v10,
             HFA03 hfa7
-        ) {
+        )
+        {
             return (
                     Sum_HFA03(hfa1)
                     + Sum_HFA03(hfa2)
@@ -3264,7 +3318,8 @@ namespace HFATest
             HFA05 hfa6,
             float v10,
             HFA05 hfa7
-        ) {
+        )
+        {
             return (
                     Sum_HFA05(hfa1)
                     + Sum_HFA05(hfa2)
@@ -3309,7 +3364,8 @@ namespace HFATest
             HFA08 hfa6,
             float v10,
             HFA08 hfa7
-        ) {
+        )
+        {
             return (
                     Sum_HFA08(hfa1)
                     + Sum_HFA08(hfa2)
@@ -3354,7 +3410,8 @@ namespace HFATest
             HFA11 hfa6,
             float v10,
             HFA11 hfa7
-        ) {
+        )
+        {
             return (
                     Sum_HFA11(hfa1)
                     + Sum_HFA11(hfa2)
@@ -3399,7 +3456,8 @@ namespace HFATest
             HFA19 hfa6,
             float v10,
             HFA19 hfa7
-        ) {
+        )
+        {
             return (
                     Sum_HFA19(hfa1)
                     + Sum_HFA19(hfa2)
@@ -3444,7 +3502,8 @@ namespace HFATest
             HFA02 hfa6,
             float v10,
             HFA05 hfa7
-        ) {
+        )
+        {
             return (
                     Sum_HFA08(hfa1)
                     + Sum_HFA19(hfa2)

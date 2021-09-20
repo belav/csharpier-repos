@@ -18,7 +18,8 @@ namespace Internal.Cryptography
             int feedbackSize,
             int paddingSize,
             bool encrypting
-        ) {
+        )
+        {
             // The algorithm pointer is a static pointer, so not having any cleanup code is correct.
             IntPtr algorithm = IntPtr.Zero;
 

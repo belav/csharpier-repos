@@ -30,7 +30,8 @@ namespace Microsoft.CodeAnalysis.UnitTests.Diagnostics
             Workspace workspace,
             Project project,
             bool includeSuppressedDiagnostics = false
-        ) {
+        )
+        {
             Assert.IsType<MockDiagnosticUpdateSourceRegistrationService>(
                 (
                     (IMefHostExportProvider)workspace.Services.HostServices
@@ -51,7 +52,8 @@ namespace Microsoft.CodeAnalysis.UnitTests.Diagnostics
             TextSpan? filterSpan,
             bool getDocumentDiagnostics,
             bool getProjectDiagnostics
-        ) {
+        )
+        {
             var documentDiagnostics = SpecializedCollections.EmptyEnumerable<Diagnostic>();
             var projectDiagnostics = SpecializedCollections.EmptyEnumerable<Diagnostic>();
 

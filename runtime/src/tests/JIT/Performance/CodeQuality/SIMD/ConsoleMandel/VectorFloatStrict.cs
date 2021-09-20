@@ -33,7 +33,8 @@ namespace Algorithms
             float ymin,
             float ymax,
             float step
-        ) {
+        )
+        {
             Vector<float> vmax_iters = new Vector<float>((float)max_iters);
             Vector<float> vlimit = new Vector<float>(limit);
             Vector<float> vstep = new Vector<float>(step);
@@ -55,7 +56,8 @@ namespace Algorithms
                         Vector<float> vx = vxmin;
                         Vector.LessThanOrEqualAny(vx, vxmax);
                         vx += vinc, xp += Vector<float>.Count
-                    ) {
+                    )
+                    {
                         ComplexVecFloat num = new ComplexVecFloat(vx, vy);
                         ComplexVecFloat accum = num;
 
@@ -85,7 +87,8 @@ namespace Algorithms
             float ymin,
             float ymax,
             float step
-        ) {
+        )
+        {
             Vector<float> vmax_iters = new Vector<float>((float)max_iters);
             Vector<float> vlimit = new Vector<float>(limit);
             Vector<float> vstep = new Vector<float>(step);
@@ -107,7 +110,8 @@ namespace Algorithms
                         Vector<float> vx = vxmin;
                         Vector.LessThanOrEqualAny(vx, vxmax);
                         vx += vinc, xp += Vector<float>.Count
-                    ) {
+                    )
+                    {
                         Vector<float> accumx = vx;
                         Vector<float> accumy = vy;
 
@@ -141,7 +145,8 @@ namespace Algorithms
             float ymin,
             float ymax,
             float step
-        ) {
+        )
+        {
             Vector<float> vmax_iters = new Vector<float>((float)max_iters);
             Vector<float> vlimit = new Vector<float>(limit);
             Vector<float> vstep = new Vector<float>(step);
@@ -155,13 +160,15 @@ namespace Algorithms
                 Vector<float> vy = new Vector<float>(ymin);
                 y <= ymax && !Abort;
                 vy += vstep, y += step, yp++
-            ) {
+            )
+            {
                 int xp = 0;
                 for (
                     Vector<float> vx = vxmin;
                     Vector.LessThanOrEqualAny(vx, vxmax);
                     vx += vinc, xp += Vector<float>.Count
-                ) {
+                )
+                {
                     ComplexVecFloat num = new ComplexVecFloat(vx, vy);
                     ComplexVecFloat accum = num;
 
@@ -190,7 +197,8 @@ namespace Algorithms
             float ymin,
             float ymax,
             float step
-        ) {
+        )
+        {
             Vector<float> vmax_iters = new Vector<float>(max_iters);
             Vector<float> vlimit = new Vector<float>(limit);
             Vector<float> vstep = new Vector<float>(step);
@@ -204,13 +212,15 @@ namespace Algorithms
                 Vector<float> vy = new Vector<float>(ymin);
                 y <= ymax && !Abort;
                 vy += vstep, y += step, yp++
-            ) {
+            )
+            {
                 int xp = 0;
                 for (
                     Vector<float> vx = vxmin;
                     Vector.LessThanOrEqualAny(vx, vxmax);
                     vx += vinc, xp += Vector<float>.Count
-                ) {
+                )
+                {
                     Vector<float> accumx = vx;
                     Vector<float> accumy = vy;
 

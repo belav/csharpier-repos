@@ -19,7 +19,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Http
         public HttpRequestStream(
             IHttpBodyControlFeature bodyControl,
             HttpRequestPipeReader pipeReader
-        ) {
+        )
+        {
             _bodyControl = bodyControl;
             _pipeReader = pipeReader;
         }
@@ -47,7 +48,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Http
         public override ValueTask<int> ReadAsync(
             Memory<byte> destination,
             CancellationToken cancellationToken = default
-        ) {
+        )
+        {
             return ReadAsyncWrapper(destination, cancellationToken);
         }
 
@@ -56,7 +58,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Http
             int offset,
             int count,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             return ReadAsyncWrapper(new Memory<byte>(buffer, offset, count), cancellationToken)
                 .AsTask();
         }
@@ -104,7 +107,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Http
             int count,
             AsyncCallback? callback,
             object? state
-        ) {
+        )
+        {
             return TaskToApm.Begin(ReadAsync(buffer, offset, count), callback, state);
         }
 
@@ -117,7 +121,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Http
         private ValueTask<int> ReadAsyncWrapper(
             Memory<byte> destination,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             try
             {
                 return ReadAsyncInternal(destination, cancellationToken);
@@ -131,7 +136,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Http
         private async ValueTask<int> ReadAsyncInternal(
             Memory<byte> destination,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             while (true)
             {
                 var result = await _pipeReader.ReadAsync(cancellationToken);
@@ -176,7 +182,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Http
             Stream destination,
             int bufferSize,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             if (destination == null)
             {
                 throw new ArgumentNullException(nameof(destination));

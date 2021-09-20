@@ -45,7 +45,8 @@ namespace Microsoft.EntityFrameworkCore.Cosmos.Storage.Internal
                     bufferSize: 1024,
                     leaveOpen: true
                 )
-            ) {
+            )
+            {
                 using var jsonTextWriter = new JsonTextWriter(streamWriter);
                 jsonTextWriter.Formatting = Formatting.None;
                 GetSerializer().Serialize(jsonTextWriter, input);

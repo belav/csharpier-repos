@@ -39,7 +39,8 @@ namespace Microsoft.JSInterop.Implementation
         public ValueTask<TValue> InvokeAsync<[DynamicallyAccessedMembers(JsonSerialized)] TValue>(
             string identifier,
             object?[]? args
-        ) {
+        )
+        {
             ThrowIfDisposed();
 
             return _jsRuntime.InvokeAsync<TValue>(Id, identifier, args);
@@ -50,7 +51,8 @@ namespace Microsoft.JSInterop.Implementation
             string identifier,
             CancellationToken cancellationToken,
             object?[]? args
-        ) {
+        )
+        {
             ThrowIfDisposed();
 
             return _jsRuntime.InvokeAsync<TValue>(Id, identifier, cancellationToken, args);

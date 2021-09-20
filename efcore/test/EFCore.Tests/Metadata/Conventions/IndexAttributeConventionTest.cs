@@ -108,7 +108,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
         [ConditionalTheory]
         public void IndexAttribute_properties_cannot_include_whitespace(
             Type entityTypeWithInvalidIndex
-        ) {
+        )
+        {
             var modelBuilder = InMemoryTestHelpers.Instance.CreateConventionBuilder();
 
             Assert.Equal(

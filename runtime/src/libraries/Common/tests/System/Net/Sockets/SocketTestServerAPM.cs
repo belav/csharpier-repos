@@ -27,7 +27,8 @@ namespace System.Net.Sockets.Tests
             int numConnections,
             int receiveBufferSize,
             EndPoint localEndPoint
-        ) {
+        )
+        {
             _log = VerboseTestLogging.GetInstance();
             _receiveBufferSize = receiveBufferSize;
 
@@ -66,7 +67,8 @@ namespace System.Net.Sockets.Tests
                     _disposed
                     || e.SocketErrorCode == SocketError.OperationAborted
                     || e.SocketErrorCode == SocketError.Interrupted
-                ) {
+                )
+                {
                     return;
                 }
 
@@ -102,7 +104,8 @@ namespace System.Net.Sockets.Tests
                     _disposed
                     || e.SocketErrorCode == SocketError.OperationAborted
                     || e.SocketErrorCode == SocketError.Interrupted
-                ) {
+                )
+                {
                     return;
                 }
 

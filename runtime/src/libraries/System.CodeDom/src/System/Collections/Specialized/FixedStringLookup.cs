@@ -79,7 +79,8 @@ namespace System.Collections.Specialized
             int pos,
             ref int min,
             ref int max
-        ) {
+        )
+        {
             int index = min;
             while (min < max)
             {

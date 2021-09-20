@@ -177,7 +177,8 @@ namespace System.Web.Http.ApiExplorer
             string routeTemplate,
             string expectedQueryString,
             string methodName
-        ) {
+        )
+        {
             // Arrange
             HttpConfiguration config = new HttpConfiguration();
             config.Routes.MapHttpRoute(

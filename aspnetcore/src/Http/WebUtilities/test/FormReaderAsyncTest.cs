@@ -11,7 +11,8 @@ namespace Microsoft.AspNetCore.WebUtilities
     {
         protected override async Task<Dictionary<string, StringValues>> ReadFormAsync(
             FormReader reader
-        ) {
+        )
+        {
             return await reader.ReadFormAsync();
         }
 

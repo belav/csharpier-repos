@@ -39,7 +39,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.Formatting
                     allowCancellation: true,
                     EditorFeaturesResources.Formatting_document
                 )
-            ) {
+            )
+            {
                 Format(
                     args.TextView,
                     document,

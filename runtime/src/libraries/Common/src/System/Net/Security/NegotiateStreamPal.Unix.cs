@@ -44,7 +44,8 @@ namespace System.Net.Security
             SafeGssContextHandle? context,
             bool encrypt,
             ReadOnlySpan<byte> buffer
-        ) {
+        )
+        {
             Interop.NetSecurityNative.GssBuffer encryptedBuffer = default;
             try
             {
@@ -75,7 +76,8 @@ namespace System.Net.Security
             byte[] buffer,
             int offset,
             int count
-        ) {
+        )
+        {
             Debug.Assert(
                 (buffer != null) && (buffer.Length > 0),
                 "Invalid input buffer passed to Decrypt"
@@ -127,7 +129,8 @@ namespace System.Net.Security
             out byte[]? outputBuffer,
             out uint outFlags,
             out bool isNtlmUsed
-        ) {
+        )
+        {
             outputBuffer = null;
             outFlags = 0;
 
@@ -193,7 +196,8 @@ namespace System.Net.Security
                 if (
                     (status != Interop.NetSecurityNative.Status.GSS_S_COMPLETE)
                     && (status != Interop.NetSecurityNative.Status.GSS_S_CONTINUE_NEEDED)
-                ) {
+                )
+                {
                     if (newContext)
                     {
                         context.Dispose();
@@ -220,7 +224,8 @@ namespace System.Net.Security
             out byte[] outputBuffer,
             out uint outFlags,
             out bool isNtlmUsed
-        ) {
+        )
+        {
             Debug.Assert(credential != null);
 
             bool newContext = false;
@@ -251,7 +256,8 @@ namespace System.Net.Security
                 if (
                     (status != Interop.NetSecurityNative.Status.GSS_S_COMPLETE)
                     && (status != Interop.NetSecurityNative.Status.GSS_S_CONTINUE_NEEDED)
-                ) {
+                )
+                {
                     if (newContext)
                     {
                         context.Dispose();
@@ -319,7 +325,8 @@ namespace System.Net.Security
             byte[]? incomingBlob,
             ref byte[]? resultBuffer,
             ref ContextFlagsPal outFlags
-        ) {
+        )
+        {
             bool isNtlmOnly = credential.IsNtlmOnly;
 
             if (context == null)
@@ -415,7 +422,8 @@ namespace System.Net.Security
             ChannelBinding? channelBinding,
             ref byte[]? resultBlob,
             ref ContextFlagsPal contextFlags
-        ) {
+        )
+        {
             SafeFreeNegoCredentials negoCredentialsHandle =
                 (SafeFreeNegoCredentials)credentialsHandle;
 
@@ -460,7 +468,8 @@ namespace System.Net.Security
             ChannelBinding? channelBinding,
             ref byte[] resultBlob,
             ref ContextFlagsPal contextFlags
-        ) {
+        )
+        {
             if (securityContext == null)
             {
                 securityContext = new SafeDeleteNegoContext(
@@ -542,7 +551,8 @@ namespace System.Net.Security
         // https://www.gnu.org/software/gss/reference/gss.pdf (page 25)
         private static SecurityStatusPalErrorCode GetErrorCode(
             Interop.NetSecurityNative.GssApiException exception
-        ) {
+        )
+        {
             switch (exception.MajorStatus)
             {
                 case Interop.NetSecurityNative.Status.GSS_S_NO_CRED:
@@ -610,7 +620,8 @@ namespace System.Net.Security
             string package,
             bool isServer,
             NetworkCredential credential
-        ) {
+        )
+        {
             bool isEmptyCredential =
                 string.IsNullOrWhiteSpace(credential.UserName)
                 || string.IsNullOrWhiteSpace(credential.Password);
@@ -645,7 +656,8 @@ namespace System.Net.Security
         internal static SecurityStatusPal CompleteAuthToken(
             ref SafeDeleteContext? securityContext,
             byte[]? incomingBlob
-        ) {
+        )
+        {
             return new SecurityStatusPal(SecurityStatusPalErrorCode.OK);
         }
 
@@ -656,7 +668,8 @@ namespace System.Net.Security
             bool isNtlm,
             [NotNull] ref byte[]? output,
             uint sequenceNumber
-        ) {
+        )
+        {
             SafeDeleteNegoContext gssContext = (SafeDeleteNegoContext)securityContext;
             byte[] tempOutput = GssWrap(gssContext.GssContext, isConfidential, buffer);
 
@@ -685,7 +698,8 @@ namespace System.Net.Security
             bool isNtlm,
             out int newOffset,
             uint sequenceNumber
-        ) {
+        )
+        {
             if (offset < 0 || offset > (buffer == null ? 0 : buffer.Length))
             {
                 Debug.Fail("Argument 'offset' out of range");
@@ -712,7 +726,8 @@ namespace System.Net.Security
             byte[] buffer,
             int offset,
             int count
-        ) {
+        )
+        {
             if (offset < 0 || offset > (buffer == null ? 0 : buffer.Length))
             {
                 Debug.Fail("Argument 'offset' out of range");
@@ -739,7 +754,8 @@ namespace System.Net.Security
             int offset,
             int count,
             [AllowNull] ref byte[] output
-        ) {
+        )
+        {
             SafeDeleteNegoContext gssContext = (SafeDeleteNegoContext)securityContext;
             byte[] tempOutput = GssWrap(
                 gssContext.GssContext,

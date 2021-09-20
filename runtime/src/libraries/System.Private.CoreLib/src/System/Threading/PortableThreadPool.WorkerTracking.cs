@@ -55,7 +55,8 @@ namespace System.Threading
                 if (
                     countsBeforeUpdate == counts
                     || countsBeforeUpdate.HighWatermark == countsBeforeUpdate.Current
-                ) {
+                )
+                {
                     return countsBeforeUpdate.HighWatermark;
                 }
 
@@ -115,7 +116,8 @@ namespace System.Threading
             public CountsOfThreadsProcessingUserCallbacks InterlockedCompareExchange(
                 CountsOfThreadsProcessingUserCallbacks newCounts,
                 CountsOfThreadsProcessingUserCallbacks oldCounts
-            ) {
+            )
+            {
                 return new CountsOfThreadsProcessingUserCallbacks(
                     Interlocked.CompareExchange(ref _data, newCounts._data, oldCounts._data)
                 );

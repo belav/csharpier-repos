@@ -1009,7 +1009,8 @@ namespace System.Collections.Immutable.Tests
         protected override List<T> SortTestHelper<T>(
             ImmutableList<T> list,
             Comparison<T> comparison
-        ) {
+        )
+        {
             return list.Sort(comparison).ToList();
         }
 
@@ -1023,7 +1024,8 @@ namespace System.Collections.Immutable.Tests
             int index,
             int count,
             IComparer<T> comparer
-        ) {
+        )
+        {
             return list.Sort(index, count, comparer).ToList();
         }
 

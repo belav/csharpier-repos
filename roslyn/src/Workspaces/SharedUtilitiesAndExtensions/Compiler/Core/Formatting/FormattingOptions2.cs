@@ -25,7 +25,8 @@ namespace Microsoft.CodeAnalysis.Formatting
             string name,
             T defaultValue,
             params OptionStorageLocation2[] storageLocations
-        ) {
+        )
+        {
             var option = new PerLanguageOption2<T>(
                 nameof(FormattingOptions),
                 group,
@@ -42,7 +43,8 @@ namespace Microsoft.CodeAnalysis.Formatting
             string name,
             T defaultValue,
             params OptionStorageLocation2[] storageLocations
-        ) {
+        )
+        {
             var option = new Option2<T>(
                 nameof(FormattingOptions),
                 group,

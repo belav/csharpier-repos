@@ -89,7 +89,8 @@ namespace System.Linq.Parallel.Tests
             Labeled<ParallelQuery<int>> labeled,
             int count,
             int position
-        ) {
+        )
+        {
             ElementAt(labeled, count, position);
         }
 
@@ -99,7 +100,8 @@ namespace System.Linq.Parallel.Tests
             Labeled<ParallelQuery<int>> labeled,
             int count,
             int position
-        ) {
+        )
+        {
             _ = count;
             ParallelQuery<int> query = labeled.Item;
             Assert.Throws<ArgumentOutOfRangeException>(() => query.ElementAt(position));
@@ -118,7 +120,8 @@ namespace System.Linq.Parallel.Tests
             Labeled<ParallelQuery<int>> labeled,
             int count,
             int position
-        ) {
+        )
+        {
             ElementAt_OutOfRange(labeled, count, position);
         }
 
@@ -129,7 +132,8 @@ namespace System.Linq.Parallel.Tests
             Labeled<ParallelQuery<int>> labeled,
             int count,
             int position
-        ) {
+        )
+        {
             // For unordered collections, which element is chosen isn't actually guaranteed, but an effect of the implementation.
             // If this test starts failing it should be split, and possibly mentioned in release notes.
             _ = count;
@@ -157,7 +161,8 @@ namespace System.Linq.Parallel.Tests
             Labeled<ParallelQuery<int>> labeled,
             int count,
             int position
-        ) {
+        )
+        {
             ElementAtOrDefault(labeled, count, position);
         }
 
@@ -167,7 +172,8 @@ namespace System.Linq.Parallel.Tests
             Labeled<ParallelQuery<int>> labeled,
             int count,
             int position
-        ) {
+        )
+        {
             _ = count;
             ParallelQuery<int> query = labeled.Item;
             Assert.Equal(default, query.ElementAtOrDefault(position));
@@ -186,7 +192,8 @@ namespace System.Linq.Parallel.Tests
             Labeled<ParallelQuery<int>> labeled,
             int count,
             int position
-        ) {
+        )
+        {
             ElementAtOrDefault_OutOfRange(labeled, count, position);
         }
 

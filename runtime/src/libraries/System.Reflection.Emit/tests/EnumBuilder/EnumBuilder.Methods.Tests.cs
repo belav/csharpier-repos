@@ -142,7 +142,8 @@ namespace System.Reflection.Emit.Tests
         public void DefineLiteral_InvalidLiteralValue_ThrowsArgumentException(
             Type underlyingType,
             object literalValue
-        ) {
+        )
+        {
             EnumBuilder enumBuilder = Helpers.DynamicEnum(TypeAttributes.Public, underlyingType);
             AssertExtensions.Throws<ArgumentException>(
                 null,
@@ -167,7 +168,8 @@ namespace System.Reflection.Emit.Tests
             Type underlyingType,
             object literalValue,
             bool useCreateTypeInfo
-        ) {
+        )
+        {
             EnumBuilder enumBuilder = Helpers.DynamicEnum(TypeAttributes.Public, underlyingType);
             FieldBuilder literal = enumBuilder.DefineLiteral("LiteralName", literalValue);
             if (useCreateTypeInfo)

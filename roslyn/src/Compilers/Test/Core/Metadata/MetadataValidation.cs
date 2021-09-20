@@ -27,7 +27,8 @@ namespace Roslyn.Test.Utilities
         internal static string GetAttributeName(
             MetadataReader metadataReader,
             CustomAttributeHandle customAttribute
-        ) {
+        )
+        {
             var ctorHandle = metadataReader.GetCustomAttribute(customAttribute).Constructor;
             if (ctorHandle.Kind == HandleKind.MemberReference) // MemberRef
             {
@@ -46,7 +47,8 @@ namespace Roslyn.Test.Utilities
         internal static CustomAttributeHandle FindCustomAttribute(
             MetadataReader metadataReader,
             string attributeClassName
-        ) {
+        )
+        {
             foreach (var caHandle in metadataReader.CustomAttributes)
             {
                 if (
@@ -55,7 +57,8 @@ namespace Roslyn.Test.Utilities
                         attributeClassName,
                         StringComparison.Ordinal
                     )
-                ) {
+                )
+                {
                     return caHandle;
                 }
             }
@@ -70,7 +73,8 @@ namespace Roslyn.Test.Utilities
             PEAssembly assembly,
             Func<string, PEAssembly, byte[]> getExpectedBlob,
             bool isField = true
-        ) {
+        )
+        {
             var metadataReader = assembly.GetMetadataReader();
 
             // no custom attributes should be emitted on parameters, fields or methods:

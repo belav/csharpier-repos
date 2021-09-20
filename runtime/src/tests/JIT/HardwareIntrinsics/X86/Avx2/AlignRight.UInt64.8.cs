@@ -450,7 +450,8 @@ namespace JIT.HardwareIntrinsics.X86
             Vector256<UInt64> right,
             void* result,
             [CallerMemberName] string method = ""
-        ) {
+        )
+        {
             UInt64[] inArray1 = new UInt64[Op1ElementCount];
             UInt64[] inArray2 = new UInt64[Op2ElementCount];
             UInt64[] outArray = new UInt64[RetElementCount];
@@ -471,7 +472,8 @@ namespace JIT.HardwareIntrinsics.X86
             void* right,
             void* result,
             [CallerMemberName] string method = ""
-        ) {
+        )
+        {
             UInt64[] inArray1 = new UInt64[Op1ElementCount];
             UInt64[] inArray2 = new UInt64[Op2ElementCount];
             UInt64[] outArray = new UInt64[RetElementCount];
@@ -500,7 +502,8 @@ namespace JIT.HardwareIntrinsics.X86
             UInt64[] right,
             UInt64[] result,
             [CallerMemberName] string method = ""
-        ) {
+        )
+        {
             bool succeeded = true;
 
             if (result[0] != right[1])
@@ -518,7 +521,8 @@ namespace JIT.HardwareIntrinsics.X86
                                 ? (i == 1 ? left[0] : right[i + 1])
                                 : (i == 3 ? left[2] : right[i + 1])
                         )
-                    ) {
+                    )
+                    {
                         succeeded = false;
                         break;
                     }

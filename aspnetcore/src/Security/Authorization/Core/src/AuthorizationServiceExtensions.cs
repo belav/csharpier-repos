@@ -29,7 +29,8 @@ namespace Microsoft.AspNetCore.Authorization
             ClaimsPrincipal user,
             object resource,
             IAuthorizationRequirement requirement
-        ) {
+        )
+        {
             if (service == null)
             {
                 throw new ArgumentNullException(nameof(service));
@@ -63,7 +64,8 @@ namespace Microsoft.AspNetCore.Authorization
             ClaimsPrincipal user,
             object? resource,
             AuthorizationPolicy policy
-        ) {
+        )
+        {
             if (service == null)
             {
                 throw new ArgumentNullException(nameof(service));
@@ -91,7 +93,8 @@ namespace Microsoft.AspNetCore.Authorization
             this IAuthorizationService service,
             ClaimsPrincipal user,
             AuthorizationPolicy policy
-        ) {
+        )
+        {
             if (service == null)
             {
                 throw new ArgumentNullException(nameof(service));
@@ -119,7 +122,8 @@ namespace Microsoft.AspNetCore.Authorization
             this IAuthorizationService service,
             ClaimsPrincipal user,
             string policyName
-        ) {
+        )
+        {
             if (service == null)
             {
                 throw new ArgumentNullException(nameof(service));

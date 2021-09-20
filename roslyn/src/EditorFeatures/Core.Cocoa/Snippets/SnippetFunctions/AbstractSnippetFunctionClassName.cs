@@ -34,7 +34,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Snippets
             CancellationToken cancellationToken,
             out string value,
             out bool hasDefaultValue
-        ) {
+        )
+        {
             hasDefaultValue = false;
             value = string.Empty;
             if (!TryGetDocument(out var document))
@@ -53,7 +54,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Snippets
                     surfaceBufferFieldSpan,
                     out var subjectBufferFieldSpan
                 )
-            ) {
+            )
+            {
                 return;
             }
 

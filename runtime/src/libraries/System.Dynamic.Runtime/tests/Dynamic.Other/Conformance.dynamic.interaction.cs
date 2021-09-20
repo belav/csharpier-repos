@@ -2316,7 +2316,8 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.integeregereraction.sta
             if (
                 (!(bool)(FirstClassReturnDynamicClass.StaticMethod().InstanceMethod()))
                 || (!Verify.FirstCalled)
-            ) {
+            )
+            {
                 failcount++;
                 System.Console.WriteLine("Test failed at call result");
             }
@@ -2331,7 +2332,8 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.integeregereraction.sta
             if (
                 (!(bool)(FirstClassReturnDynamicClass.StaticMethod().InstanceProperty))
                 || (!Verify.FirstCalled)
-            ) {
+            )
+            {
                 failcount++;
                 System.Console.WriteLine("Test failed at call result");
             }
@@ -2378,7 +2380,8 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.integeregereraction.sta
             if (
                 (!(bool)(FirstClassReturnDynamicStruct.StaticMethod().InstanceMethod()))
                 || (!Verify.FirstCalled)
-            ) {
+            )
+            {
                 failcount++;
                 System.Console.WriteLine("Test failed at call result");
             }
@@ -2393,7 +2396,8 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.integeregereraction.sta
             if (
                 (!(bool)(FirstClassReturnDynamicStruct.StaticMethod().InstanceProperty))
                 || (!Verify.FirstCalled)
-            ) {
+            )
+            {
                 failcount++;
                 System.Console.WriteLine("Test failed at call result");
             }
@@ -2410,7 +2414,8 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.integeregereraction.sta
 
             if (
                 (!(bool)(FirstClassReturnDynamicStruct.StaticMethod() + 2)) || (!Verify.FirstCalled)
-            ) {
+            )
+            {
                 failcount++;
                 System.Console.WriteLine("Test failed at call result");
             }
@@ -2441,7 +2446,8 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.integeregereraction.sta
             if (
                 (!(bool)(FirstClassReturnDynamicInterface.StaticMethod().InstanceMethod()))
                 || (!Verify.FirstCalled)
-            ) {
+            )
+            {
                 failcount++;
                 System.Console.WriteLine("Test failed at call result");
             }
@@ -2456,7 +2462,8 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.integeregereraction.sta
             if (
                 (!(bool)(FirstClassReturnDynamicInterface.StaticMethod().InstanceProperty))
                 || (!Verify.FirstCalled)
-            ) {
+            )
+            {
                 failcount++;
                 System.Console.WriteLine("Test failed at call result");
             }
@@ -2474,7 +2481,8 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.integeregereraction.sta
             if (
                 (!(bool)(FirstClassReturnDynamicInterface.StaticMethod()[2]))
                 || (!Verify.FirstCalled)
-            ) {
+            )
+            {
                 failcount++;
                 System.Console.WriteLine("Test failed at call result");
             }
@@ -2537,7 +2545,8 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.integeregereraction.sta
             if (
                 (!(bool)(FirstClassReturnDynamicClass.StaticProperty.InstanceMethod()))
                 || (!Verify.FirstCalled)
-            ) {
+            )
+            {
                 failcount++;
                 System.Console.WriteLine("Test failed at call result");
             }
@@ -2552,7 +2561,8 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.integeregereraction.sta
             if (
                 (!(bool)(FirstClassReturnDynamicClass.StaticProperty.InstanceProperty))
                 || (!Verify.FirstCalled)
-            ) {
+            )
+            {
                 failcount++;
                 System.Console.WriteLine("Test failed at call result");
             }
@@ -2599,7 +2609,8 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.integeregereraction.sta
             if (
                 (!(bool)(FirstClassReturnDynamicStruct.StaticProperty.InstanceMethod()))
                 || (!Verify.FirstCalled)
-            ) {
+            )
+            {
                 failcount++;
                 System.Console.WriteLine("Test failed at call result");
             }
@@ -2614,7 +2625,8 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.integeregereraction.sta
             if (
                 (!(bool)(FirstClassReturnDynamicStruct.StaticProperty.InstanceProperty))
                 || (!Verify.FirstCalled)
-            ) {
+            )
+            {
                 failcount++;
                 System.Console.WriteLine("Test failed at call result");
             }
@@ -2631,7 +2643,8 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.integeregereraction.sta
 
             if (
                 (!(bool)(FirstClassReturnDynamicStruct.StaticProperty + 2)) || (!Verify.FirstCalled)
-            ) {
+            )
+            {
                 failcount++;
                 System.Console.WriteLine("Test failed at call result");
             }
@@ -2662,7 +2675,8 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.integeregereraction.sta
             if (
                 (!(bool)(FirstClassReturnDynamicInterface.StaticProperty.InstanceMethod()))
                 || (!Verify.FirstCalled)
-            ) {
+            )
+            {
                 failcount++;
                 System.Console.WriteLine("Test failed at call result");
             }
@@ -2677,7 +2691,8 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.integeregereraction.sta
             if (
                 (!(bool)(FirstClassReturnDynamicInterface.StaticProperty.InstanceProperty))
                 || (!Verify.FirstCalled)
-            ) {
+            )
+            {
                 failcount++;
                 System.Console.WriteLine("Test failed at call result");
             }
@@ -2695,7 +2710,8 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.integeregereraction.sta
             if (
                 (!(bool)(FirstClassReturnDynamicInterface.StaticProperty[2]))
                 || (!Verify.FirstCalled)
-            ) {
+            )
+            {
                 failcount++;
                 System.Console.WriteLine("Test failed at call result");
             }
@@ -2758,7 +2774,8 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.integeregereraction.sta
             if (
                 (!(bool)(FirstClassReturnDynamicClass<int>.StaticMethod().InstanceMethod()))
                 || (!Verify.FirstCalled)
-            ) {
+            )
+            {
                 failcount++;
                 System.Console.WriteLine("Test failed at call result");
             }
@@ -2773,7 +2790,8 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.integeregereraction.sta
             if (
                 (!(bool)(FirstClassReturnDynamicClass<int>.StaticMethod().InstanceProperty))
                 || (!Verify.FirstCalled)
-            ) {
+            )
+            {
                 failcount++;
                 System.Console.WriteLine("Test failed at call result");
             }
@@ -2791,7 +2809,8 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.integeregereraction.sta
             if (
                 (!(bool)(FirstClassReturnDynamicClass<int>.StaticMethod() + 2))
                 || (!Verify.FirstCalled)
-            ) {
+            )
+            {
                 failcount++;
                 System.Console.WriteLine("Test failed at call result");
             }
@@ -2807,7 +2826,8 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.integeregereraction.sta
             if (
                 (!(bool)(FirstClassReturnDynamicClass<int>.StaticMethod()[2]))
                 || (!Verify.FirstCalled)
-            ) {
+            )
+            {
                 failcount++;
                 System.Console.WriteLine("Test failed at call result");
             }
@@ -2824,7 +2844,8 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.integeregereraction.sta
             if (
                 (!(bool)(FirstClassReturnDynamicStruct<int>.StaticMethod().InstanceMethod()))
                 || (!Verify.FirstCalled)
-            ) {
+            )
+            {
                 failcount++;
                 System.Console.WriteLine("Test failed at call result");
             }
@@ -2839,7 +2860,8 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.integeregereraction.sta
             if (
                 (!(bool)(FirstClassReturnDynamicStruct<int>.StaticMethod().InstanceProperty))
                 || (!Verify.FirstCalled)
-            ) {
+            )
+            {
                 failcount++;
                 System.Console.WriteLine("Test failed at call result");
             }
@@ -2857,7 +2879,8 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.integeregereraction.sta
             if (
                 (!(bool)(FirstClassReturnDynamicStruct<int>.StaticMethod() + 2))
                 || (!Verify.FirstCalled)
-            ) {
+            )
+            {
                 failcount++;
                 System.Console.WriteLine("Test failed at call result");
             }
@@ -2873,7 +2896,8 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.integeregereraction.sta
             if (
                 (!(bool)(FirstClassReturnDynamicStruct<int>.StaticMethod()[2]))
                 || (!Verify.FirstCalled)
-            ) {
+            )
+            {
                 failcount++;
                 System.Console.WriteLine("Test failed at call result");
             }
@@ -2890,7 +2914,8 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.integeregereraction.sta
             if (
                 (!(bool)(FirstClassReturnDynamicInterface<int>.StaticMethod().InstanceMethod()))
                 || (!Verify.FirstCalled)
-            ) {
+            )
+            {
                 failcount++;
                 System.Console.WriteLine("Test failed at call result");
             }
@@ -2905,7 +2930,8 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.integeregereraction.sta
             if (
                 (!(bool)(FirstClassReturnDynamicInterface<int>.StaticMethod().InstanceProperty))
                 || (!Verify.FirstCalled)
-            ) {
+            )
+            {
                 failcount++;
                 System.Console.WriteLine("Test failed at call result");
             }
@@ -2923,7 +2949,8 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.integeregereraction.sta
             if (
                 (!(bool)(FirstClassReturnDynamicInterface<int>.StaticMethod()[2]))
                 || (!Verify.FirstCalled)
-            ) {
+            )
+            {
                 failcount++;
                 System.Console.WriteLine("Test failed at call result");
             }
@@ -2986,7 +3013,8 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.integeregereraction.sta
             if (
                 (!(bool)(FirstClassReturnDynamicClass<int>.StaticProperty.InstanceMethod()))
                 || (!Verify.FirstCalled)
-            ) {
+            )
+            {
                 failcount++;
                 System.Console.WriteLine("Test failed at call result");
             }
@@ -3001,7 +3029,8 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.integeregereraction.sta
             if (
                 (!(bool)(FirstClassReturnDynamicClass<int>.StaticProperty.InstanceProperty))
                 || (!Verify.FirstCalled)
-            ) {
+            )
+            {
                 failcount++;
                 System.Console.WriteLine("Test failed at call result");
             }
@@ -3019,7 +3048,8 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.integeregereraction.sta
             if (
                 (!(bool)(FirstClassReturnDynamicClass<int>.StaticProperty + 2))
                 || (!Verify.FirstCalled)
-            ) {
+            )
+            {
                 failcount++;
                 System.Console.WriteLine("Test failed at call result");
             }
@@ -3035,7 +3065,8 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.integeregereraction.sta
             if (
                 (!(bool)(FirstClassReturnDynamicClass<int>.StaticProperty[2]))
                 || (!Verify.FirstCalled)
-            ) {
+            )
+            {
                 failcount++;
                 System.Console.WriteLine("Test failed at call result");
             }
@@ -3052,7 +3083,8 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.integeregereraction.sta
             if (
                 (!(bool)(FirstClassReturnDynamicStruct<int>.StaticProperty.InstanceMethod()))
                 || (!Verify.FirstCalled)
-            ) {
+            )
+            {
                 failcount++;
                 System.Console.WriteLine("Test failed at call result");
             }
@@ -3067,7 +3099,8 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.integeregereraction.sta
             if (
                 (!(bool)(FirstClassReturnDynamicStruct<int>.StaticProperty.InstanceProperty))
                 || (!Verify.FirstCalled)
-            ) {
+            )
+            {
                 failcount++;
                 System.Console.WriteLine("Test failed at call result");
             }
@@ -3085,7 +3118,8 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.integeregereraction.sta
             if (
                 (!(bool)(FirstClassReturnDynamicStruct<int>.StaticProperty + 2))
                 || (!Verify.FirstCalled)
-            ) {
+            )
+            {
                 failcount++;
                 System.Console.WriteLine("Test failed at call result");
             }
@@ -3101,7 +3135,8 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.integeregereraction.sta
             if (
                 (!(bool)(FirstClassReturnDynamicStruct<int>.StaticProperty[2]))
                 || (!Verify.FirstCalled)
-            ) {
+            )
+            {
                 failcount++;
                 System.Console.WriteLine("Test failed at call result");
             }
@@ -3118,7 +3153,8 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.integeregereraction.sta
             if (
                 (!(bool)(FirstClassReturnDynamicInterface<int>.StaticProperty.InstanceMethod()))
                 || (!Verify.FirstCalled)
-            ) {
+            )
+            {
                 failcount++;
                 System.Console.WriteLine("Test failed at call result");
             }
@@ -3133,7 +3169,8 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.integeregereraction.sta
             if (
                 (!(bool)(FirstClassReturnDynamicInterface<int>.StaticProperty.InstanceProperty))
                 || (!Verify.FirstCalled)
-            ) {
+            )
+            {
                 failcount++;
                 System.Console.WriteLine("Test failed at call result");
             }
@@ -3151,7 +3188,8 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.integeregereraction.sta
             if (
                 (!(bool)(FirstClassReturnDynamicInterface<int>.StaticProperty[2]))
                 || (!Verify.FirstCalled)
-            ) {
+            )
+            {
                 failcount++;
                 System.Console.WriteLine("Test failed at call result");
             }
@@ -5468,7 +5506,8 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.integeregereraction.sta
             if (
                 (!(bool)(((dynamic)FirstClassReturnClass.StaticMethod()).InstanceMethod()))
                 || (!Verify.FirstCalled)
-            ) {
+            )
+            {
                 failcount++;
                 System.Console.WriteLine("Test failed at call result");
             }
@@ -5483,7 +5522,8 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.integeregereraction.sta
             if (
                 (!(bool)(((dynamic)FirstClassReturnClass.StaticMethod()).InstanceProperty))
                 || (!Verify.FirstCalled)
-            ) {
+            )
+            {
                 failcount++;
                 System.Console.WriteLine("Test failed at call result");
             }
@@ -5501,7 +5541,8 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.integeregereraction.sta
             if (
                 (!(bool)(((dynamic)FirstClassReturnClass.StaticMethod()) + 2))
                 || (!Verify.FirstCalled)
-            ) {
+            )
+            {
                 failcount++;
                 System.Console.WriteLine("Test failed at call result");
             }
@@ -5517,7 +5558,8 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.integeregereraction.sta
             if (
                 (!(bool)(((dynamic)FirstClassReturnClass.StaticMethod())[2]))
                 || (!Verify.FirstCalled)
-            ) {
+            )
+            {
                 failcount++;
                 System.Console.WriteLine("Test failed at call result");
             }
@@ -5534,7 +5576,8 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.integeregereraction.sta
             if (
                 (!(bool)(((dynamic)FirstClassReturnStruct.StaticMethod()).InstanceMethod()))
                 || (!Verify.FirstCalled)
-            ) {
+            )
+            {
                 failcount++;
                 System.Console.WriteLine("Test failed at call result");
             }
@@ -5549,7 +5592,8 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.integeregereraction.sta
             if (
                 (!(bool)(((dynamic)FirstClassReturnStruct.StaticMethod()).InstanceProperty))
                 || (!Verify.FirstCalled)
-            ) {
+            )
+            {
                 failcount++;
                 System.Console.WriteLine("Test failed at call result");
             }
@@ -5567,7 +5611,8 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.integeregereraction.sta
             if (
                 (!(bool)(((dynamic)FirstClassReturnStruct.StaticMethod()) + 2))
                 || (!Verify.FirstCalled)
-            ) {
+            )
+            {
                 failcount++;
                 System.Console.WriteLine("Test failed at call result");
             }
@@ -5583,7 +5628,8 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.integeregereraction.sta
             if (
                 (!(bool)(((dynamic)FirstClassReturnStruct.StaticMethod())[2]))
                 || (!Verify.FirstCalled)
-            ) {
+            )
+            {
                 failcount++;
                 System.Console.WriteLine("Test failed at call result");
             }
@@ -5600,7 +5646,8 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.integeregereraction.sta
             if (
                 (!(bool)(((dynamic)FirstClassReturnInterface.StaticMethod()).InstanceMethod()))
                 || (!Verify.FirstCalled)
-            ) {
+            )
+            {
                 failcount++;
                 System.Console.WriteLine("Test failed at call result");
             }
@@ -5615,7 +5662,8 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.integeregereraction.sta
             if (
                 (!(bool)(((dynamic)FirstClassReturnInterface.StaticMethod()).InstanceProperty))
                 || (!Verify.FirstCalled)
-            ) {
+            )
+            {
                 failcount++;
                 System.Console.WriteLine("Test failed at call result");
             }
@@ -5633,7 +5681,8 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.integeregereraction.sta
             if (
                 (!(bool)(((dynamic)FirstClassReturnInterface.StaticMethod())[2]))
                 || (!Verify.FirstCalled)
-            ) {
+            )
+            {
                 failcount++;
                 System.Console.WriteLine("Test failed at call result");
             }
@@ -5696,7 +5745,8 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.integeregereraction.sta
             if (
                 (!(bool)(((dynamic)FirstClassReturnClass.StaticProperty).InstanceMethod()))
                 || (!Verify.FirstCalled)
-            ) {
+            )
+            {
                 failcount++;
                 System.Console.WriteLine("Test failed at call result");
             }
@@ -5711,7 +5761,8 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.integeregereraction.sta
             if (
                 (!(bool)(((dynamic)FirstClassReturnClass.StaticProperty).InstanceProperty))
                 || (!Verify.FirstCalled)
-            ) {
+            )
+            {
                 failcount++;
                 System.Console.WriteLine("Test failed at call result");
             }
@@ -5729,7 +5780,8 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.integeregereraction.sta
             if (
                 (!(bool)(((dynamic)FirstClassReturnClass.StaticProperty) + 2))
                 || (!Verify.FirstCalled)
-            ) {
+            )
+            {
                 failcount++;
                 System.Console.WriteLine("Test failed at call result");
             }
@@ -5745,7 +5797,8 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.integeregereraction.sta
             if (
                 (!(bool)(((dynamic)FirstClassReturnClass.StaticProperty)[2]))
                 || (!Verify.FirstCalled)
-            ) {
+            )
+            {
                 failcount++;
                 System.Console.WriteLine("Test failed at call result");
             }
@@ -5762,7 +5815,8 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.integeregereraction.sta
             if (
                 (!(bool)(((dynamic)FirstClassReturnStruct.StaticProperty).InstanceMethod()))
                 || (!Verify.FirstCalled)
-            ) {
+            )
+            {
                 failcount++;
                 System.Console.WriteLine("Test failed at call result");
             }
@@ -5777,7 +5831,8 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.integeregereraction.sta
             if (
                 (!(bool)(((dynamic)FirstClassReturnStruct.StaticProperty).InstanceProperty))
                 || (!Verify.FirstCalled)
-            ) {
+            )
+            {
                 failcount++;
                 System.Console.WriteLine("Test failed at call result");
             }
@@ -5795,7 +5850,8 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.integeregereraction.sta
             if (
                 (!(bool)(((dynamic)FirstClassReturnStruct.StaticProperty) + 2))
                 || (!Verify.FirstCalled)
-            ) {
+            )
+            {
                 failcount++;
                 System.Console.WriteLine("Test failed at call result");
             }
@@ -5811,7 +5867,8 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.integeregereraction.sta
             if (
                 (!(bool)(((dynamic)FirstClassReturnStruct.StaticProperty)[2]))
                 || (!Verify.FirstCalled)
-            ) {
+            )
+            {
                 failcount++;
                 System.Console.WriteLine("Test failed at call result");
             }
@@ -5828,7 +5885,8 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.integeregereraction.sta
             if (
                 (!(bool)(((dynamic)FirstClassReturnInterface.StaticProperty).InstanceMethod()))
                 || (!Verify.FirstCalled)
-            ) {
+            )
+            {
                 failcount++;
                 System.Console.WriteLine("Test failed at call result");
             }
@@ -5843,7 +5901,8 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.integeregereraction.sta
             if (
                 (!(bool)(((dynamic)FirstClassReturnInterface.StaticProperty).InstanceProperty))
                 || (!Verify.FirstCalled)
-            ) {
+            )
+            {
                 failcount++;
                 System.Console.WriteLine("Test failed at call result");
             }
@@ -5861,7 +5920,8 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.integeregereraction.sta
             if (
                 (!(bool)(((dynamic)FirstClassReturnInterface.StaticProperty)[2]))
                 || (!Verify.FirstCalled)
-            ) {
+            )
+            {
                 failcount++;
                 System.Console.WriteLine("Test failed at call result");
             }
@@ -5924,7 +5984,8 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.integeregereraction.sta
             if (
                 (!(bool)(((dynamic)FirstClassReturnClass<int>.StaticMethod()).InstanceMethod()))
                 || (!Verify.FirstCalled)
-            ) {
+            )
+            {
                 failcount++;
                 System.Console.WriteLine("Test failed at call result");
             }
@@ -5939,7 +6000,8 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.integeregereraction.sta
             if (
                 (!(bool)(((dynamic)FirstClassReturnClass<int>.StaticMethod()).InstanceProperty))
                 || (!Verify.FirstCalled)
-            ) {
+            )
+            {
                 failcount++;
                 System.Console.WriteLine("Test failed at call result");
             }
@@ -5957,7 +6019,8 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.integeregereraction.sta
             if (
                 (!(bool)(((dynamic)FirstClassReturnClass<int>.StaticMethod()) + 2))
                 || (!Verify.FirstCalled)
-            ) {
+            )
+            {
                 failcount++;
                 System.Console.WriteLine("Test failed at call result");
             }
@@ -5973,7 +6036,8 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.integeregereraction.sta
             if (
                 (!(bool)(((dynamic)FirstClassReturnClass<int>.StaticMethod())[2]))
                 || (!Verify.FirstCalled)
-            ) {
+            )
+            {
                 failcount++;
                 System.Console.WriteLine("Test failed at call result");
             }
@@ -5990,7 +6054,8 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.integeregereraction.sta
             if (
                 (!(bool)(((dynamic)FirstClassReturnStruct<int>.StaticMethod()).InstanceMethod()))
                 || (!Verify.FirstCalled)
-            ) {
+            )
+            {
                 failcount++;
                 System.Console.WriteLine("Test failed at call result");
             }
@@ -6005,7 +6070,8 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.integeregereraction.sta
             if (
                 (!(bool)(((dynamic)FirstClassReturnStruct<int>.StaticMethod()).InstanceProperty))
                 || (!Verify.FirstCalled)
-            ) {
+            )
+            {
                 failcount++;
                 System.Console.WriteLine("Test failed at call result");
             }
@@ -6023,7 +6089,8 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.integeregereraction.sta
             if (
                 (!(bool)(((dynamic)FirstClassReturnStruct<int>.StaticMethod()) + 2))
                 || (!Verify.FirstCalled)
-            ) {
+            )
+            {
                 failcount++;
                 System.Console.WriteLine("Test failed at call result");
             }
@@ -6039,7 +6106,8 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.integeregereraction.sta
             if (
                 (!(bool)(((dynamic)FirstClassReturnStruct<int>.StaticMethod())[2]))
                 || (!Verify.FirstCalled)
-            ) {
+            )
+            {
                 failcount++;
                 System.Console.WriteLine("Test failed at call result");
             }
@@ -6056,7 +6124,8 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.integeregereraction.sta
             if (
                 (!(bool)(((dynamic)FirstClassReturnInterface<int>.StaticMethod()).InstanceMethod()))
                 || (!Verify.FirstCalled)
-            ) {
+            )
+            {
                 failcount++;
                 System.Console.WriteLine("Test failed at call result");
             }
@@ -6071,7 +6140,8 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.integeregereraction.sta
             if (
                 (!(bool)(((dynamic)FirstClassReturnInterface<int>.StaticMethod()).InstanceProperty))
                 || (!Verify.FirstCalled)
-            ) {
+            )
+            {
                 failcount++;
                 System.Console.WriteLine("Test failed at call result");
             }
@@ -6089,7 +6159,8 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.integeregereraction.sta
             if (
                 (!(bool)(((dynamic)FirstClassReturnInterface<int>.StaticMethod())[2]))
                 || (!Verify.FirstCalled)
-            ) {
+            )
+            {
                 failcount++;
                 System.Console.WriteLine("Test failed at call result");
             }
@@ -6152,7 +6223,8 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.integeregereraction.sta
             if (
                 (!(bool)(((dynamic)FirstClassReturnClass<int>.StaticProperty).InstanceMethod()))
                 || (!Verify.FirstCalled)
-            ) {
+            )
+            {
                 failcount++;
                 System.Console.WriteLine("Test failed at call result");
             }
@@ -6167,7 +6239,8 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.integeregereraction.sta
             if (
                 (!(bool)(((dynamic)FirstClassReturnClass<int>.StaticProperty).InstanceProperty))
                 || (!Verify.FirstCalled)
-            ) {
+            )
+            {
                 failcount++;
                 System.Console.WriteLine("Test failed at call result");
             }
@@ -6185,7 +6258,8 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.integeregereraction.sta
             if (
                 (!(bool)(((dynamic)FirstClassReturnClass<int>.StaticProperty) + 2))
                 || (!Verify.FirstCalled)
-            ) {
+            )
+            {
                 failcount++;
                 System.Console.WriteLine("Test failed at call result");
             }
@@ -6201,7 +6275,8 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.integeregereraction.sta
             if (
                 (!(bool)(((dynamic)FirstClassReturnClass<int>.StaticProperty)[2]))
                 || (!Verify.FirstCalled)
-            ) {
+            )
+            {
                 failcount++;
                 System.Console.WriteLine("Test failed at call result");
             }
@@ -6218,7 +6293,8 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.integeregereraction.sta
             if (
                 (!(bool)(((dynamic)FirstClassReturnStruct<int>.StaticProperty).InstanceMethod()))
                 || (!Verify.FirstCalled)
-            ) {
+            )
+            {
                 failcount++;
                 System.Console.WriteLine("Test failed at call result");
             }
@@ -6233,7 +6309,8 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.integeregereraction.sta
             if (
                 (!(bool)(((dynamic)FirstClassReturnStruct<int>.StaticProperty).InstanceProperty))
                 || (!Verify.FirstCalled)
-            ) {
+            )
+            {
                 failcount++;
                 System.Console.WriteLine("Test failed at call result");
             }
@@ -6251,7 +6328,8 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.integeregereraction.sta
             if (
                 (!(bool)(((dynamic)FirstClassReturnStruct<int>.StaticProperty) + 2))
                 || (!Verify.FirstCalled)
-            ) {
+            )
+            {
                 failcount++;
                 System.Console.WriteLine("Test failed at call result");
             }
@@ -6267,7 +6345,8 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.integeregereraction.sta
             if (
                 (!(bool)(((dynamic)FirstClassReturnStruct<int>.StaticProperty)[2]))
                 || (!Verify.FirstCalled)
-            ) {
+            )
+            {
                 failcount++;
                 System.Console.WriteLine("Test failed at call result");
             }
@@ -6284,7 +6363,8 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.integeregereraction.sta
             if (
                 (!(bool)(((dynamic)FirstClassReturnInterface<int>.StaticProperty).InstanceMethod()))
                 || (!Verify.FirstCalled)
-            ) {
+            )
+            {
                 failcount++;
                 System.Console.WriteLine("Test failed at call result");
             }
@@ -6299,7 +6379,8 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.integeregereraction.sta
             if (
                 (!(bool)(((dynamic)FirstClassReturnInterface<int>.StaticProperty).InstanceProperty))
                 || (!Verify.FirstCalled)
-            ) {
+            )
+            {
                 failcount++;
                 System.Console.WriteLine("Test failed at call result");
             }
@@ -6317,7 +6398,8 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.integeregereraction.sta
             if (
                 (!(bool)(((dynamic)FirstClassReturnInterface<int>.StaticProperty)[2]))
                 || (!Verify.FirstCalled)
-            ) {
+            )
+            {
                 failcount++;
                 System.Console.WriteLine("Test failed at call result");
             }
@@ -6496,7 +6578,8 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.integeregereraction.dyn
             Verify.FirstCalled = false;
             if (
                 (!(((SecondInterface)d.InstanceMethod()).InstanceMethod())) || (!Verify.FirstCalled)
-            ) {
+            )
+            {
                 failcount++;
                 System.Console.WriteLine("Test failed at call result");
             }
@@ -6511,7 +6594,8 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.integeregereraction.dyn
             Verify.FirstCalled = false;
             if (
                 (!(((SecondInterface)d.InstanceMethod()).InstanceProperty)) || (!Verify.FirstCalled)
-            ) {
+            )
+            {
                 failcount++;
                 System.Console.WriteLine("Test failed at call result");
             }
@@ -6698,7 +6782,8 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.integeregereraction.dyn
             Verify.FirstCalled = false;
             if (
                 (!(((SecondInterface)d.InstanceProperty).InstanceMethod())) || (!Verify.FirstCalled)
-            ) {
+            )
+            {
                 failcount++;
                 System.Console.WriteLine("Test failed at call result");
             }
@@ -6713,7 +6798,8 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.integeregereraction.dyn
             Verify.FirstCalled = false;
             if (
                 (!(((SecondInterface)d.InstanceProperty).InstanceProperty)) || (!Verify.FirstCalled)
-            ) {
+            )
+            {
                 failcount++;
                 System.Console.WriteLine("Test failed at call result");
             }
@@ -7185,7 +7271,8 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.integeregereraction.dyn
             if (
                 (!(((SecondClass<int>)d.InstanceMethod()).InstanceMethod()))
                 || (!Verify.FirstCalled)
-            ) {
+            )
+            {
                 failcount++;
                 System.Console.WriteLine("Test failed at call result");
             }
@@ -7201,7 +7288,8 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.integeregereraction.dyn
             if (
                 (!(((SecondClass<int>)d.InstanceMethod()).InstanceProperty))
                 || (!Verify.FirstCalled)
-            ) {
+            )
+            {
                 failcount++;
                 System.Console.WriteLine("Test failed at call result");
             }
@@ -7247,7 +7335,8 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.integeregereraction.dyn
             if (
                 (!(((SecondStruct<int>)d.InstanceMethod()).InstanceMethod()))
                 || (!Verify.FirstCalled)
-            ) {
+            )
+            {
                 failcount++;
                 System.Console.WriteLine("Test failed at call result");
             }
@@ -7263,7 +7352,8 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.integeregereraction.dyn
             if (
                 (!(((SecondStruct<int>)d.InstanceMethod()).InstanceProperty))
                 || (!Verify.FirstCalled)
-            ) {
+            )
+            {
                 failcount++;
                 System.Console.WriteLine("Test failed at call result");
             }
@@ -7309,7 +7399,8 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.integeregereraction.dyn
             if (
                 (!(((SecondInterface<int>)d.InstanceMethod()).InstanceMethod()))
                 || (!Verify.FirstCalled)
-            ) {
+            )
+            {
                 failcount++;
                 System.Console.WriteLine("Test failed at call result");
             }
@@ -7325,7 +7416,8 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.integeregereraction.dyn
             if (
                 (!(((SecondInterface<int>)d.InstanceMethod()).InstanceProperty))
                 || (!Verify.FirstCalled)
-            ) {
+            )
+            {
                 failcount++;
                 System.Console.WriteLine("Test failed at call result");
             }
@@ -7397,7 +7489,8 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.integeregereraction.dyn
             if (
                 (!(((SecondClass<int>)d.InstanceProperty).InstanceMethod()))
                 || (!Verify.FirstCalled)
-            ) {
+            )
+            {
                 failcount++;
                 System.Console.WriteLine("Test failed at call result");
             }
@@ -7413,7 +7506,8 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.integeregereraction.dyn
             if (
                 (!(((SecondClass<int>)d.InstanceProperty).InstanceProperty))
                 || (!Verify.FirstCalled)
-            ) {
+            )
+            {
                 failcount++;
                 System.Console.WriteLine("Test failed at call result");
             }
@@ -7459,7 +7553,8 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.integeregereraction.dyn
             if (
                 (!(((SecondStruct<int>)d.InstanceProperty).InstanceMethod()))
                 || (!Verify.FirstCalled)
-            ) {
+            )
+            {
                 failcount++;
                 System.Console.WriteLine("Test failed at call result");
             }
@@ -7475,7 +7570,8 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.integeregereraction.dyn
             if (
                 (!(((SecondStruct<int>)d.InstanceProperty).InstanceProperty))
                 || (!Verify.FirstCalled)
-            ) {
+            )
+            {
                 failcount++;
                 System.Console.WriteLine("Test failed at call result");
             }
@@ -7521,7 +7617,8 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.integeregereraction.dyn
             if (
                 (!(((SecondInterface<int>)d.InstanceProperty).InstanceMethod()))
                 || (!Verify.FirstCalled)
-            ) {
+            )
+            {
                 failcount++;
                 System.Console.WriteLine("Test failed at call result");
             }
@@ -7537,7 +7634,8 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.integeregereraction.dyn
             if (
                 (!(((SecondInterface<int>)d.InstanceProperty).InstanceProperty))
                 || (!Verify.FirstCalled)
-            ) {
+            )
+            {
                 failcount++;
                 System.Console.WriteLine("Test failed at call result");
             }
@@ -8127,7 +8225,8 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.integeregereraction.com
             if (
                 (!(bool)(((dynamic)(((Second)d.M1()).M2().M3())).M4()))
                 || (TestCount.CallCount != 4)
-            ) {
+            )
+            {
                 failcount++;
                 System.Console.WriteLine("Test failed at call result");
             }
@@ -8393,7 +8492,8 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.integeregereraction.com
             if (
                 (!(bool)(((C5)(((C2)d.M1()).M2().M3().M4())).M5().M6().M7()))
                 || (TestCount.CallCount != 7)
-            ) {
+            )
+            {
                 failcount++;
                 System.Console.WriteLine("Test failed at call result");
             }
@@ -8497,7 +8597,8 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.integeregereraction.com
             if (
                 (!(bool)(((C5)((dynamic)(((C2)d.M1()).M2().M3())).M4()).M5().M6().M7()))
                 || (TestCount.CallCount != 7)
-            ) {
+            )
+            {
                 failcount++;
                 System.Console.WriteLine("Test failed at call result");
             }
@@ -8613,7 +8714,8 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.integeregereraction.com
             if (
                 (!(bool)((((C5)((((C2)d[1]) + 2).P3.M4()))[5] + 6).P7))
                 || (TestCount.CallCount != 7)
-            ) {
+            )
+            {
                 failcount++;
                 System.Console.WriteLine("Test failed at call result");
             }
@@ -8729,7 +8831,8 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.integeregereraction.com
             if (
                 (!(bool)(((C5)((dynamic)(((C2)d.M1()).P2 + 3))[4]).P5[6] + 7))
                 || (TestCount.CallCount != 7)
-            ) {
+            )
+            {
                 failcount++;
                 System.Console.WriteLine("Test failed at call result");
             }

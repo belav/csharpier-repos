@@ -71,7 +71,8 @@ namespace Microsoft.AspNetCore.WebUtilities
             int bufferSize,
             ArrayPool<byte> bytePool,
             ArrayPool<char> charPool
-        ) {
+        )
+        {
             _stream = stream ?? throw new ArgumentNullException(nameof(stream));
             Encoding = encoding ?? throw new ArgumentNullException(nameof(encoding));
             _bytePool = bytePool ?? throw new ArgumentNullException(nameof(bytePool));
@@ -345,7 +346,8 @@ namespace Microsoft.AspNetCore.WebUtilities
         public override Task WriteAsync(
             ReadOnlyMemory<char> value,
             CancellationToken cancellationToken = default
-        ) {
+        )
+        {
             if (_disposed)
             {
                 return GetObjectDisposedTask();
@@ -399,7 +401,8 @@ namespace Microsoft.AspNetCore.WebUtilities
         public override Task WriteLineAsync(
             ReadOnlyMemory<char> value,
             CancellationToken cancellationToken = default
-        ) {
+        )
+        {
             if (_disposed)
             {
                 return GetObjectDisposedTask();

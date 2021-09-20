@@ -36,7 +36,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata
             bool propagatesNullability,
             string storeType,
             RelationalTypeMapping? typeMapping
-        ) {
+        )
+        {
             Function = function;
             _name = name;
             _clrType = clrType;

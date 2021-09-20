@@ -121,19 +121,22 @@ namespace System.DirectoryServices.AccountManagement
             if (
                 principalType == typeof(UserPrincipal)
                 || principalType.IsSubclassOf(typeof(UserPrincipal))
-            ) {
+            )
+            {
                 schemaTypes.Add("User");
             }
             else if (
                 principalType == typeof(GroupPrincipal)
                 || principalType.IsSubclassOf(typeof(GroupPrincipal))
-            ) {
+            )
+            {
                 schemaTypes.Add("Group");
             }
             else if (
                 principalType == typeof(ComputerPrincipal)
                 || principalType.IsSubclassOf(typeof(ComputerPrincipal))
-            ) {
+            )
+            {
                 schemaTypes.Add("Computer");
             }
             else if (principalType == typeof(Principal))

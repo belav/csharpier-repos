@@ -19,7 +19,8 @@ namespace Microsoft.AspNetCore.Hosting
             CancellationTokenSource cts,
             ManualResetEventSlim resetEvent,
             string shutdownMessage
-        ) {
+        )
+        {
             _cts = cts;
             _resetEvent = resetEvent;
             _shutdownMessage = shutdownMessage;

@@ -49,7 +49,8 @@ namespace Microsoft.Extensions.DependencyInjection
         /// </returns>
         public static IServiceCollection AddEntityFrameworkSqlServer(
             this IServiceCollection serviceCollection
-        ) {
+        )
+        {
             Check.NotNull(serviceCollection, nameof(serviceCollection));
 
             new EntityFrameworkRelationalServicesBuilder(serviceCollection).TryAdd<

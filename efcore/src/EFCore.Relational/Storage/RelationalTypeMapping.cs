@@ -51,7 +51,8 @@ namespace Microsoft.EntityFrameworkCore.Storage
                 bool fixedLength = false,
                 int? precision = null,
                 int? scale = null
-            ) {
+            )
+            {
                 Check.NotNull(storeType, nameof(storeType));
 
                 var converterHints = coreParameters.Converter?.MappingHints;
@@ -305,7 +306,8 @@ namespace Microsoft.EntityFrameworkCore.Storage
             RelationalTypeMappingParameters parameters,
             string storeType,
             string storeTypeNameBase
-        ) {
+        )
+        {
             Check.NotNull(storeType, nameof(storeType));
             Check.NotNull(storeTypeNameBase, nameof(storeTypeNameBase));
 
@@ -318,7 +320,8 @@ namespace Microsoft.EntityFrameworkCore.Storage
             else if (
                 parameters.StoreTypePostfix == StoreTypePostfix.PrecisionAndScale
                 || parameters.StoreTypePostfix == StoreTypePostfix.Precision
-            ) {
+            )
+            {
                 var precision = parameters.Precision;
                 if (precision != null)
                 {
@@ -370,19 +373,20 @@ namespace Microsoft.EntityFrameworkCore.Storage
             bool fixedLength = false,
             int? precision = null,
             int? scale = null
-        ) : this(
-            new RelationalTypeMappingParameters(
-                new CoreTypeMappingParameters(clrType),
-                storeType,
-                StoreTypePostfix.None,
-                dbType,
-                unicode,
-                size,
-                fixedLength,
-                precision,
-                scale
-            )
-        ) { }
+        )
+            : this(
+                new RelationalTypeMappingParameters(
+                    new CoreTypeMappingParameters(clrType),
+                    storeType,
+                    StoreTypePostfix.None,
+                    dbType,
+                    unicode,
+                    size,
+                    fixedLength,
+                    precision,
+                    scale
+                )
+            ) { }
 
         /// <summary>
         ///     Returns the parameters used to create this type mapping.
@@ -494,7 +498,8 @@ namespace Microsoft.EntityFrameworkCore.Storage
             string name,
             object? value,
             bool? nullable = null
-        ) {
+        )
+        {
             Check.NotNull(command, nameof(command));
 
             var parameter = command.CreateParameter();

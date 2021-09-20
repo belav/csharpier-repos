@@ -694,7 +694,8 @@ namespace System.Security.Cryptography.Dsa.Tests
             string hashAlgorithmName,
             DSAParameters dsaParameters,
             int expectedSignatureLength
-        ) {
+        )
+        {
             using (DSA dsa = DSAFactory.Create())
             {
                 dsa.ImportParameters(dsaParameters);

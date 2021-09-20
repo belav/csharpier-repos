@@ -31,7 +31,8 @@ namespace System.Net.Http.Formatting
             this MediaTypeFormatter formatter,
             string uriPathExtension,
             MediaTypeHeaderValue mediaType
-        ) {
+        )
+        {
             if (formatter == null)
             {
                 throw new ArgumentNullException("formatter");
@@ -61,7 +62,8 @@ namespace System.Net.Http.Formatting
             this MediaTypeFormatter formatter,
             string uriPathExtension,
             string mediaType
-        ) {
+        )
+        {
             if (formatter == null)
             {
                 throw new ArgumentNullException("formatter");

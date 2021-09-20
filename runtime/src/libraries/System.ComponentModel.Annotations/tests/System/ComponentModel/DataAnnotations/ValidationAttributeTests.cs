@@ -156,7 +156,8 @@ namespace System.ComponentModel.DataAnnotations.Tests
         public void FormatErrorMessage_HasErrorMessage_ReturnsExpected(
             string errorMessage,
             string expected
-        ) {
+        )
+        {
             var attribute = new ValidationAttributeOverrideBothIsValids();
             attribute.ErrorMessage = errorMessage;
             attribute.ErrorMessageResourceName = null;
@@ -184,7 +185,8 @@ namespace System.ComponentModel.DataAnnotations.Tests
             string resourceName,
             Type resourceType,
             string expected
-        ) {
+        )
+        {
             var attribute = new ValidationAttributeOverrideBothIsValids();
             attribute.ErrorMessage = string.Empty;
             attribute.ErrorMessageResourceName = resourceName;
@@ -197,7 +199,8 @@ namespace System.ComponentModel.DataAnnotations.Tests
         [InlineData("")]
         public void FormatErrorMessage_NullOrEmptyErrorMessageAndName_ThrowsInvalidOperationException(
             string value
-        ) {
+        )
+        {
             var attribute = new ValidationAttributeOverrideBothIsValids();
             attribute.ErrorMessage = value;
             attribute.ErrorMessageResourceName = value;
@@ -260,7 +263,8 @@ namespace System.ComponentModel.DataAnnotations.Tests
         public void FormatErrorMessage_InvalidResourceNameAndResourceType_ThrowsInvalidOperationException(
             string resourceName,
             Type resourceType
-        ) {
+        )
+        {
             var attribute = new ValidationAttributeOverrideBothIsValids();
             attribute.ErrorMessageResourceName = resourceName;
             attribute.ErrorMessageResourceType = resourceType;

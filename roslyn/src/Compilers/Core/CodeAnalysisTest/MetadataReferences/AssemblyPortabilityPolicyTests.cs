@@ -31,7 +31,8 @@ namespace Microsoft.CodeAnalysis.UnitTests
             bool platform,
             bool nonPlatform,
             bool fusionOnly = false
-        ) {
+        )
+        {
             using (var policy = FusionAssemblyPortabilityPolicy.LoadFromFile(appConfigPath))
             {
                 // portability is suppressed if the identities are not equivalent
@@ -64,7 +65,8 @@ namespace Microsoft.CodeAnalysis.UnitTests
                         FileAccess.Read,
                         FileShare.Read
                     )
-                ) {
+                )
+                {
                     var actual = AssemblyPortabilityPolicy.LoadFromXml(stream);
                     Assert.Equal(
                         platform,
@@ -82,7 +84,8 @@ namespace Microsoft.CodeAnalysis.UnitTests
             FusionAssemblyPortabilityPolicy policy,
             string reference,
             string ported
-        ) {
+        )
+        {
             bool equivalent;
             FusionAssemblyIdentityComparer.AssemblyComparisonResult result;
 

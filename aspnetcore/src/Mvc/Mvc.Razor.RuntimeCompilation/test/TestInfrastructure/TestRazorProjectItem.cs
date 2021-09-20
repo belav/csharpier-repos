@@ -14,7 +14,8 @@ namespace Microsoft.AspNetCore.Razor.Language
             string physicalPath = null,
             string relativePhysicalPath = null,
             string basePath = "/"
-        ) {
+        )
+        {
             FilePath = filePath;
             PhysicalPath = physicalPath;
             RelativePhysicalPath = relativePhysicalPath;

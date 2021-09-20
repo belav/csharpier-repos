@@ -31,7 +31,8 @@ namespace Microsoft.AspNetCore.Razor.Language.Syntax
             SyntaxNode root,
             SyntaxNode originalNode,
             IEnumerable<SyntaxNode> newNodes
-        ) {
+        )
+        {
             return new NodeListEditor(originalNode, newNodes, ListEditKind.Replace).Visit(root);
         }
 
@@ -40,7 +41,8 @@ namespace Microsoft.AspNetCore.Razor.Language.Syntax
             SyntaxNode nodeInList,
             IEnumerable<SyntaxNode> nodesToInsert,
             bool insertBefore
-        ) {
+        )
+        {
             return new NodeListEditor(
                 nodeInList,
                 nodesToInsert,
@@ -58,7 +60,8 @@ namespace Microsoft.AspNetCore.Razor.Language.Syntax
             public Replacer(
                 IEnumerable<TNode> nodes,
                 Func<TNode, TNode, SyntaxNode> computeReplacementNode
-            ) {
+            )
+            {
                 _computeReplacementNode = computeReplacementNode;
                 _nodeSet =
                     nodes != null ? new HashSet<SyntaxNode>(nodes) : new HashSet<SyntaxNode>();
@@ -147,7 +150,8 @@ namespace Microsoft.AspNetCore.Razor.Language.Syntax
                 SyntaxNode originalNode,
                 IEnumerable<SyntaxNode> replacementNodes,
                 ListEditKind editKind
-            ) {
+            )
+            {
                 _elementSpan = originalNode.Span;
                 _originalNode = originalNode;
                 _newNodes = replacementNodes;

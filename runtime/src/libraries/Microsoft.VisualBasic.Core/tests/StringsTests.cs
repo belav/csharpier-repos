@@ -169,7 +169,8 @@ namespace Microsoft.VisualBasic.Tests
             string[] source,
             string match,
             string[] expected
-        ) {
+        )
+        {
             Assert.Equal(expected, Strings.Filter(source, match));
         }
 
@@ -180,7 +181,8 @@ namespace Microsoft.VisualBasic.Tests
             string match,
             string[] includeExpected,
             string[] excludeExpected
-        ) {
+        )
+        {
             Assert.Equal(includeExpected, Strings.Filter(source, match, Include: true));
             Assert.Equal(excludeExpected, Strings.Filter(source, match, Include: false));
         }
@@ -199,7 +201,8 @@ namespace Microsoft.VisualBasic.Tests
             string match,
             string[] includeExpected,
             string[] excludeExpected
-        ) {
+        )
+        {
             Assert.Equal(includeExpected, Strings.Filter(source, match, Include: true));
             Assert.Equal(excludeExpected, Strings.Filter(source, match, Include: false));
         }
@@ -211,7 +214,8 @@ namespace Microsoft.VisualBasic.Tests
             string match,
             string[] includeExpected,
             string[] excludeExpected
-        ) {
+        )
+        {
             Assert.Equal(
                 includeExpected,
                 Strings.Filter(source, match, Include: true, Compare: CompareMethod.Binary)
@@ -229,7 +233,8 @@ namespace Microsoft.VisualBasic.Tests
             string match,
             string[] includeExpected,
             string[] excludeExpected
-        ) {
+        )
+        {
             Assert.Equal(
                 includeExpected,
                 Strings.Filter(source, match, Include: true, Compare: CompareMethod.Text)
@@ -250,7 +255,8 @@ namespace Microsoft.VisualBasic.Tests
             string match,
             string[] includeExpected,
             string[] excludeExpected
-        ) {
+        )
+        {
             Assert.Equal(includeExpected, Strings.Filter(source, match, Include: true));
             Assert.Equal(excludeExpected, Strings.Filter(source, match, Include: false));
         }
@@ -276,7 +282,8 @@ namespace Microsoft.VisualBasic.Tests
             string match,
             string[] includeExpected,
             string[] excludeExpected
-        ) {
+        )
+        {
             Assert.Equal(includeExpected, Strings.Filter(source, match, Include: true));
             Assert.Equal(excludeExpected, Strings.Filter(source, match, Include: false));
         }
@@ -352,7 +359,8 @@ namespace Microsoft.VisualBasic.Tests
             TriState useParensForNegativeNumbers,
             TriState groupDigits,
             string expected
-        ) {
+        )
+        {
             Assert.Equal(
                 expected,
                 Strings.FormatCurrency(
@@ -506,7 +514,8 @@ namespace Microsoft.VisualBasic.Tests
             TriState useParensForNegativeNumbers,
             TriState groupDigits,
             string expected
-        ) {
+        )
+        {
             Assert.Equal(
                 expected,
                 Strings.FormatNumber(
@@ -652,7 +661,8 @@ namespace Microsoft.VisualBasic.Tests
             TriState useParensForNegativeNumbers,
             TriState groupDigits,
             string expected
-        ) {
+        )
+        {
             Assert.Equal(
                 expected,
                 Strings.FormatPercent(
@@ -889,7 +899,8 @@ namespace Microsoft.VisualBasic.Tests
             string stringMatch,
             int start,
             int expected
-        ) {
+        )
+        {
             Assert.Equal(expected, Strings.InStrRev(stringCheck, stringMatch, start));
         }
 
@@ -901,7 +912,8 @@ namespace Microsoft.VisualBasic.Tests
             string stringMatch,
             int start,
             int expected
-        ) {
+        )
+        {
             Assert.Equal(
                 expected,
                 Strings.InStrRev(stringCheck, stringMatch, start, CompareMethod.Binary)
@@ -916,7 +928,8 @@ namespace Microsoft.VisualBasic.Tests
             string stringMatch,
             int start,
             int expected
-        ) {
+        )
+        {
             Assert.Equal(
                 expected,
                 Strings.InStrRev(stringCheck, stringMatch, start, CompareMethod.Text)
@@ -1261,7 +1274,8 @@ namespace Microsoft.VisualBasic.Tests
             int n,
             CompareMethod compare,
             string expected
-        ) {
+        )
+        {
             Assert.Equal(
                 expected,
                 Strings.Replace(expression, find, replacement, start, n, compare)
@@ -1278,7 +1292,8 @@ namespace Microsoft.VisualBasic.Tests
             int start,
             int length,
             CompareMethod compare
-        ) {
+        )
+        {
             Assert.Throws<ArgumentException>(
                 () => Strings.Replace(expression, find, replacement, start, length, compare)
             );
@@ -1318,7 +1333,8 @@ namespace Microsoft.VisualBasic.Tests
             int limit,
             CompareMethod compare,
             string[] expected
-        ) {
+        )
+        {
             Assert.Equal(expected, Strings.Split(expression, delimiter, limit, compare));
         }
 
@@ -1329,7 +1345,8 @@ namespace Microsoft.VisualBasic.Tests
             string delimiter,
             int limit,
             CompareMethod compare
-        ) {
+        )
+        {
             Assert.Throws<IndexOutOfRangeException>(
                 () => Strings.Split(expression, delimiter, limit, compare)
             );
@@ -1347,7 +1364,8 @@ namespace Microsoft.VisualBasic.Tests
             string right,
             int expectedBinaryCompare,
             int expectedTextCompare
-        ) {
+        )
+        {
             Assert.Equal(expectedBinaryCompare, Strings.StrComp(left, right, CompareMethod.Binary));
             Assert.Equal(expectedTextCompare, Strings.StrComp(left, right, CompareMethod.Text));
         }
@@ -1364,7 +1382,8 @@ namespace Microsoft.VisualBasic.Tests
             Microsoft.VisualBasic.VbStrConv conversion,
             int localeID,
             string expected
-        ) {
+        )
+        {
             if (RuntimeInformation.IsOSPlatform(OSPlatform.Windows))
             {
                 Assert.Equal(expected, Strings.StrConv(str, conversion, localeID));

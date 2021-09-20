@@ -31,7 +31,8 @@ namespace System.Web.Http.ApiExplorer
         {
             public override IEnumerable<ValueProviderFactory> GetValueProviderFactories(
                 HttpConfiguration configuration
-            ) {
+            )
+            {
                 var factories =
                     from f in base.GetValueProviderFactories(configuration)
                     where f is IUriValueProviderFactory
@@ -44,7 +45,8 @@ namespace System.Web.Http.ApiExplorer
         {
             public override IEnumerable<ValueProviderFactory> GetValueProviderFactories(
                 HttpConfiguration configuration
-            ) {
+            )
+            {
                 var factories = new ValueProviderFactory[] { new HeaderValueProvider() };
                 return factories;
             }
@@ -54,7 +56,8 @@ namespace System.Web.Http.ApiExplorer
         {
             public override IValueProvider GetValueProvider(
                 Controllers.HttpActionContext actionContext
-            ) {
+            )
+            {
                 throw new NotImplementedException();
             }
         }

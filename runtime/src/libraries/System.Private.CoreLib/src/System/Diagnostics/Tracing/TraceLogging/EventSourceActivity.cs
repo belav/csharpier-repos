@@ -212,7 +212,8 @@ namespace System.Diagnostics.Tracing
             string? eventName,
             EventSourceOptions options,
             T data
-        ) {
+        )
+        {
             this.Write(source, eventName, ref options, ref data);
         }
 
@@ -234,7 +235,8 @@ namespace System.Diagnostics.Tracing
             string? eventName,
             ref EventSourceOptions options,
             ref T data
-        ) {
+        )
+        {
             if (this.state != State.Started)
                 throw new InvalidOperationException();
 
@@ -273,7 +275,8 @@ namespace System.Diagnostics.Tracing
             string? eventName,
             ref EventSourceOptions options,
             ref T data
-        ) {
+        )
+        {
             if (this.state != State.Started)
                 throw new InvalidOperationException(); // Write after stop.
             if (eventName == null)

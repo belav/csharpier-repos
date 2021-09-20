@@ -19,7 +19,8 @@ namespace Microsoft.CodeAnalysis.CSharp
         internal ImmutableArray<Symbol> BindXmlNameAttribute(
             XmlNameAttributeSyntax syntax,
             ref CompoundUseSiteInfo<AssemblySymbol> useSiteInfo
-        ) {
+        )
+        {
             var identifier = syntax.Identifier;
 
             if (identifier.IsMissing)

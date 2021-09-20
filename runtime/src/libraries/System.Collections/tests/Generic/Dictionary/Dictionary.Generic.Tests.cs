@@ -301,7 +301,8 @@ namespace System.Collections.Tests
         [MemberData(nameof(ValidCollectionSizes))]
         public void EnsureCapacity_Generic_RequestingLargerCapacity_DoesInvalidateEnumeration(
             int count
-        ) {
+        )
+        {
             var dictionary = (Dictionary<TKey, TValue>)(GenericIDictionaryFactory(count));
             var capacity = dictionary.EnsureCapacity(0);
             var enumerator = dictionary.GetEnumerator();
@@ -335,7 +336,8 @@ namespace System.Collections.Tests
         [InlineData(4)]
         public void EnsureCapacity_Generic_DictionaryNotInitialized_RequestedNonZero_CapacityIsSetToAtLeastTheRequested(
             int requestedCapacity
-        ) {
+        )
+        {
             var dictionary = new Dictionary<TKey, TValue>();
             Assert.InRange(
                 dictionary.EnsureCapacity(requestedCapacity),
@@ -349,7 +351,8 @@ namespace System.Collections.Tests
         [InlineData(7)]
         public void EnsureCapacity_Generic_RequestedCapacitySmallerThanCurrent_CapacityUnchanged(
             int currentCapacity
-        ) {
+        )
+        {
             Dictionary<TKey, TValue> dictionary;
 
             // assert capacity remains the same when ensuring a capacity smaller or equal than existing
@@ -398,7 +401,8 @@ namespace System.Collections.Tests
         [InlineData(7)]
         public void EnsureCapacity_Generic_DictionaryNotEmpty_RequestedSmallerThanCount_ReturnsAtLeastSizeOfCount(
             int count
-        ) {
+        )
+        {
             var dictionary = (Dictionary<TKey, TValue>)GenericIDictionaryFactory(count);
             Assert.InRange(dictionary.EnsureCapacity(count - 1), count, int.MaxValue);
         }
@@ -478,7 +482,8 @@ namespace System.Collections.Tests
         [InlineData(23)]
         public void TrimExcess_Generic_TrimToLargerThanExistingCapacity_DoesNothing(
             int suggestedCapacity
-        ) {
+        )
+        {
             var dictionary = new Dictionary<TKey, TValue>();
             int capacity = dictionary.EnsureCapacity(0);
             dictionary.TrimExcess(suggestedCapacity);
@@ -533,7 +538,8 @@ namespace System.Collections.Tests
         [InlineData(89)]
         public void TrimExcess_WithArguments_OnDictionaryWithManyElementsRemoved_TrimsToAtLeastRequested(
             int finalCount
-        ) {
+        )
+        {
             const int InitToFinalRatio = 10;
             int initialCount = InitToFinalRatio * finalCount;
             var dictionary = new Dictionary<int, int>(initialCount);
@@ -565,7 +571,8 @@ namespace System.Collections.Tests
             int numAdd,
             int newCount,
             int newCapacity
-        ) {
+        )
+        {
             Random random = new Random(32);
             var dictionary = new Dictionary<int, int>();
             dictionary.TrimExcess();

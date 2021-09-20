@@ -35,7 +35,8 @@ namespace Microsoft.CodeAnalysis.FindSymbols
             ISymbol searchSymbol,
             ISymbol? symbolToMatch,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             if (ReferenceEquals(searchSymbol, symbolToMatch))
                 return true;
 
@@ -56,7 +57,8 @@ namespace Microsoft.CodeAnalysis.FindSymbols
             if (
                 searchSymbol.Kind == SymbolKind.Namespace
                 && symbolToMatch.Kind == SymbolKind.Namespace
-            ) {
+            )
+            {
                 // if one of them is a merged namespace symbol and other one is its constituent namespace symbol, they are equivalent.
                 var namespace1 = (INamespaceSymbol)searchSymbol;
                 var namespace2 = (INamespaceSymbol)symbolToMatch;
@@ -93,7 +95,8 @@ namespace Microsoft.CodeAnalysis.FindSymbols
                                 )
                                 .ConfigureAwait(false)
                         )
-                    ) {
+                    )
+                    {
                         return true;
                     }
                 }
@@ -107,7 +110,8 @@ namespace Microsoft.CodeAnalysis.FindSymbols
             ISymbol searchSymbol,
             ISymbol symbolToMatch,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             if (searchSymbol == null || symbolToMatch == null)
             {
                 return false;
@@ -146,7 +150,8 @@ namespace Microsoft.CodeAnalysis.FindSymbols
                     symbolToMatch,
                     equivalentTypesWithDifferingAssemblies
                 )
-            ) {
+            )
+            {
                 // 2) If the symbols are NOT equivalent ignoring assemblies, then they cannot be equivalent.
                 return false;
             }
@@ -172,7 +177,8 @@ namespace Microsoft.CodeAnalysis.FindSymbols
             INamespaceSymbol namespace1,
             INamespaceSymbol namespace2,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             return OriginalSymbolsMatchAsync(solution, namespace1, namespace2, cancellationToken);
         }
 
@@ -183,7 +189,8 @@ namespace Microsoft.CodeAnalysis.FindSymbols
             Solution solution,
             Dictionary<INamedTypeSymbol, INamedTypeSymbol> equivalentTypesWithDifferingAssemblies,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             Contract.ThrowIfNull(equivalentTypesWithDifferingAssemblies);
             Contract.ThrowIfTrue(!equivalentTypesWithDifferingAssemblies.Any());
 
@@ -231,7 +238,8 @@ namespace Microsoft.CodeAnalysis.FindSymbols
                             cancellationToken
                         )
                         .ConfigureAwait(false)
-                ) {
+                )
+                {
                     return false;
                 }
             }
@@ -249,7 +257,8 @@ namespace Microsoft.CodeAnalysis.FindSymbols
             INamedTypeSymbol forwardedTo,
             HashSet<Compilation> compilationSet,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             // Only need to operate on original definitions.  i.e. List<T> is the type that is forwarded,
             // not List<string>.
             candidate = GetOridinalUnderlyingType(candidate);

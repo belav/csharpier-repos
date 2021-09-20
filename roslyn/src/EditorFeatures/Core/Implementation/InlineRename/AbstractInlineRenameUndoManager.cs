@@ -54,7 +54,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.InlineRename
             string replacementText,
             ITextSelection selection,
             SnapshotSpan activeSpan
-        ) {
+        )
+        {
             var snapshot = activeSpan.Snapshot;
             var selectionSpan = selection.GetSnapshotSpansOnBuffer(snapshot.TextBuffer).Single();
 
@@ -77,7 +78,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.InlineRename
             string replacementText,
             ITextSelection selection,
             SnapshotSpan startingSpan
-        ) {
+        )
+        {
             UpdateCurrentState(replacementText, selection, startingSpan);
             this.initialState = this.currentState;
         }
@@ -105,7 +107,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.InlineRename
             ITextView textView,
             ITextBuffer subjectBuffer,
             ITrackingSpan activeRenameSpan
-        ) {
+        )
+        {
             var snapshot = subjectBuffer.CurrentSnapshot;
             var anchor = new VirtualSnapshotPoint(
                 snapshot,
@@ -160,7 +163,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.InlineRename
             object propagateSpansEditTag,
             IEnumerable<ITrackingSpan> spans,
             string replacementText
-        ) {
+        )
+        {
             // roll back to the initial state for the buffer after conflict resolution
             this.UndoTemporaryEdits(
                 subjectBuffer,

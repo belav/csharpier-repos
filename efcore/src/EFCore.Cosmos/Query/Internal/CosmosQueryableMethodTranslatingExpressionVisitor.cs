@@ -102,25 +102,29 @@ namespace Microsoft.EntityFrameworkCore.Cosmos.Query.Internal
                 && methodCallExpression.Method.IsGenericMethod
                 && methodCallExpression.Method.GetGenericMethodDefinition()
                     == QueryableMethods.FirstOrDefaultWithoutPredicate
-            ) {
+            )
+            {
                 if (
                     methodCallExpression.Arguments[0]
                         is MethodCallExpression queryRootMethodCallExpression
                     && methodCallExpression.Method.IsGenericMethod
                     && queryRootMethodCallExpression.Method.GetGenericMethodDefinition()
                         == QueryableMethods.Where
-                ) {
+                )
+                {
                     if (
                         queryRootMethodCallExpression.Arguments[0]
                         is QueryRootExpression queryRootExpression
-                    ) {
+                    )
+                    {
                         var entityType = queryRootExpression.EntityType;
 
                         if (
                             queryRootMethodCallExpression.Arguments[1]
                                 is UnaryExpression unaryExpression
                             && unaryExpression.Operand is LambdaExpression lambdaExpression
-                        ) {
+                        )
+                        {
                             var queryProperties = new List<IProperty>();
                             var parameterNames = new List<string>();
 
@@ -131,7 +135,8 @@ namespace Microsoft.EntityFrameworkCore.Cosmos.Query.Internal
                                     queryProperties,
                                     parameterNames
                                 )
-                            ) {
+                            )
+                            {
                                 var entityTypePrimaryKeyProperties =
                                     entityType.FindPrimaryKey().Properties;
                                 var idProperty = entityType.GetProperties()
@@ -157,7 +162,8 @@ namespace Microsoft.EntityFrameworkCore.Cosmos.Query.Internal
                                         idProperty.GetValueGeneratorFactory() != null
                                         || entityTypePrimaryKeyProperties.Contains(idProperty)
                                     )
-                                ) {
+                                )
+                                {
                                     var propertyParameterList = queryProperties.Zip(
                                             parameterNames,
                                             (property, parameter) => (property, parameter)
@@ -191,7 +197,8 @@ namespace Microsoft.EntityFrameworkCore.Cosmos.Query.Internal
                 Expression joinCondition,
                 ICollection<IProperty> properties,
                 ICollection<string> parameterNames
-            ) {
+            )
+            {
                 if (joinCondition is BinaryExpression joinBinaryExpression)
                 {
                     if (joinBinaryExpression.NodeType == ExpressionType.AndAlso)
@@ -219,7 +226,8 @@ namespace Microsoft.EntityFrameworkCore.Cosmos.Query.Internal
                             out _,
                             out var propertyName
                         )
-                    ) {
+                    )
+                    {
                         var property = entityType.FindProperty(propertyName);
                         if (property == null)
                         {
@@ -238,7 +246,8 @@ namespace Microsoft.EntityFrameworkCore.Cosmos.Query.Internal
             static bool TryGetPartitionKeyProperty(
                 IEntityType entityType,
                 out IProperty partitionKeyProperty
-            ) {
+            )
+            {
                 var partitionKeyPropertyName = entityType.GetPartitionKeyPropertyName();
                 if (partitionKeyPropertyName is null)
                 {
@@ -342,7 +351,8 @@ namespace Microsoft.EntityFrameworkCore.Cosmos.Query.Internal
         protected override ShapedQueryExpression TranslateAll(
             ShapedQueryExpression source,
             LambdaExpression predicate
-        ) {
+        )
+        {
             Check.NotNull(source, nameof(source));
             Check.NotNull(predicate, nameof(predicate));
 
@@ -358,7 +368,8 @@ namespace Microsoft.EntityFrameworkCore.Cosmos.Query.Internal
         protected override ShapedQueryExpression TranslateAny(
             ShapedQueryExpression source,
             LambdaExpression predicate
-        ) {
+        )
+        {
             Check.NotNull(source, nameof(source));
             Check.NotNull(predicate, nameof(predicate));
 
@@ -375,7 +386,8 @@ namespace Microsoft.EntityFrameworkCore.Cosmos.Query.Internal
             ShapedQueryExpression source,
             LambdaExpression selector,
             Type resultType
-        ) {
+        )
+        {
             Check.NotNull(source, nameof(source));
             Check.NotNull(resultType, nameof(resultType));
 
@@ -384,7 +396,8 @@ namespace Microsoft.EntityFrameworkCore.Cosmos.Query.Internal
                 selectExpression.IsDistinct
                 || selectExpression.Limit != null
                 || selectExpression.Offset != null
-            ) {
+            )
+            {
                 return null;
             }
 
@@ -415,7 +428,8 @@ namespace Microsoft.EntityFrameworkCore.Cosmos.Query.Internal
         protected override ShapedQueryExpression TranslateCast(
             ShapedQueryExpression source,
             Type resultType
-        ) {
+        )
+        {
             Check.NotNull(source, nameof(source));
             Check.NotNull(resultType, nameof(resultType));
 
@@ -435,7 +449,8 @@ namespace Microsoft.EntityFrameworkCore.Cosmos.Query.Internal
         protected override ShapedQueryExpression TranslateConcat(
             ShapedQueryExpression source1,
             ShapedQueryExpression source2
-        ) {
+        )
+        {
             Check.NotNull(source1, nameof(source1));
             Check.NotNull(source2, nameof(source2));
 
@@ -451,7 +466,8 @@ namespace Microsoft.EntityFrameworkCore.Cosmos.Query.Internal
         protected override ShapedQueryExpression TranslateContains(
             ShapedQueryExpression source,
             Expression item
-        ) {
+        )
+        {
             Check.NotNull(source, nameof(source));
             Check.NotNull(item, nameof(item));
 
@@ -467,7 +483,8 @@ namespace Microsoft.EntityFrameworkCore.Cosmos.Query.Internal
         protected override ShapedQueryExpression TranslateCount(
             ShapedQueryExpression source,
             LambdaExpression predicate
-        ) {
+        )
+        {
             Check.NotNull(source, nameof(source));
 
             var selectExpression = (SelectExpression)source.QueryExpression;
@@ -475,7 +492,8 @@ namespace Microsoft.EntityFrameworkCore.Cosmos.Query.Internal
                 selectExpression.IsDistinct
                 || selectExpression.Limit != null
                 || selectExpression.Offset != null
-            ) {
+            )
+            {
                 return null;
             }
 
@@ -524,7 +542,8 @@ namespace Microsoft.EntityFrameworkCore.Cosmos.Query.Internal
         protected override ShapedQueryExpression TranslateDefaultIfEmpty(
             ShapedQueryExpression source,
             Expression defaultValue
-        ) {
+        )
+        {
             Check.NotNull(source, nameof(source));
 
             return null;
@@ -555,7 +574,8 @@ namespace Microsoft.EntityFrameworkCore.Cosmos.Query.Internal
             ShapedQueryExpression source,
             Expression index,
             bool returnDefault
-        ) {
+        )
+        {
             Check.NotNull(source, nameof(source));
             Check.NotNull(index, nameof(index));
 
@@ -571,7 +591,8 @@ namespace Microsoft.EntityFrameworkCore.Cosmos.Query.Internal
         protected override ShapedQueryExpression TranslateExcept(
             ShapedQueryExpression source1,
             ShapedQueryExpression source2
-        ) {
+        )
+        {
             Check.NotNull(source1, nameof(source1));
             Check.NotNull(source2, nameof(source2));
 
@@ -589,7 +610,8 @@ namespace Microsoft.EntityFrameworkCore.Cosmos.Query.Internal
             LambdaExpression predicate,
             Type returnType,
             bool returnDefault
-        ) {
+        )
+        {
             Check.NotNull(source, nameof(source));
             Check.NotNull(returnType, nameof(returnType));
 
@@ -628,7 +650,8 @@ namespace Microsoft.EntityFrameworkCore.Cosmos.Query.Internal
             LambdaExpression keySelector,
             LambdaExpression elementSelector,
             LambdaExpression resultSelector
-        ) {
+        )
+        {
             Check.NotNull(source, nameof(source));
             Check.NotNull(keySelector, nameof(keySelector));
 
@@ -647,7 +670,8 @@ namespace Microsoft.EntityFrameworkCore.Cosmos.Query.Internal
             LambdaExpression outerKeySelector,
             LambdaExpression innerKeySelector,
             LambdaExpression resultSelector
-        ) {
+        )
+        {
             Check.NotNull(outer, nameof(outer));
             Check.NotNull(inner, nameof(inner));
             Check.NotNull(outerKeySelector, nameof(outerKeySelector));
@@ -666,7 +690,8 @@ namespace Microsoft.EntityFrameworkCore.Cosmos.Query.Internal
         protected override ShapedQueryExpression TranslateIntersect(
             ShapedQueryExpression source1,
             ShapedQueryExpression source2
-        ) {
+        )
+        {
             Check.NotNull(source1, nameof(source1));
             Check.NotNull(source2, nameof(source2));
 
@@ -685,7 +710,8 @@ namespace Microsoft.EntityFrameworkCore.Cosmos.Query.Internal
             LambdaExpression outerKeySelector,
             LambdaExpression innerKeySelector,
             LambdaExpression resultSelector
-        ) {
+        )
+        {
             Check.NotNull(outer, nameof(outer));
             Check.NotNull(inner, nameof(inner));
             Check.NotNull(outerKeySelector, nameof(outerKeySelector));
@@ -706,7 +732,8 @@ namespace Microsoft.EntityFrameworkCore.Cosmos.Query.Internal
             LambdaExpression predicate,
             Type returnType,
             bool returnDefault
-        ) {
+        )
+        {
             Check.NotNull(source, nameof(source));
             Check.NotNull(returnType, nameof(returnType));
 
@@ -742,7 +769,8 @@ namespace Microsoft.EntityFrameworkCore.Cosmos.Query.Internal
             LambdaExpression outerKeySelector,
             LambdaExpression innerKeySelector,
             LambdaExpression resultSelector
-        ) {
+        )
+        {
             Check.NotNull(outer, nameof(outer));
             Check.NotNull(inner, nameof(inner));
             Check.NotNull(outerKeySelector, nameof(outerKeySelector));
@@ -761,7 +789,8 @@ namespace Microsoft.EntityFrameworkCore.Cosmos.Query.Internal
         protected override ShapedQueryExpression TranslateLongCount(
             ShapedQueryExpression source,
             LambdaExpression predicate
-        ) {
+        )
+        {
             Check.NotNull(source, nameof(source));
 
             var selectExpression = (SelectExpression)source.QueryExpression;
@@ -769,7 +798,8 @@ namespace Microsoft.EntityFrameworkCore.Cosmos.Query.Internal
                 selectExpression.IsDistinct
                 || selectExpression.Limit != null
                 || selectExpression.Offset != null
-            ) {
+            )
+            {
                 return null;
             }
 
@@ -818,7 +848,8 @@ namespace Microsoft.EntityFrameworkCore.Cosmos.Query.Internal
             ShapedQueryExpression source,
             LambdaExpression selector,
             Type resultType
-        ) {
+        )
+        {
             Check.NotNull(source, nameof(source));
 
             var selectExpression = (SelectExpression)source.QueryExpression;
@@ -826,7 +857,8 @@ namespace Microsoft.EntityFrameworkCore.Cosmos.Query.Internal
                 selectExpression.IsDistinct
                 || selectExpression.Limit != null
                 || selectExpression.Offset != null
-            ) {
+            )
+            {
                 return null;
             }
 
@@ -859,7 +891,8 @@ namespace Microsoft.EntityFrameworkCore.Cosmos.Query.Internal
             ShapedQueryExpression source,
             LambdaExpression selector,
             Type resultType
-        ) {
+        )
+        {
             Check.NotNull(source, nameof(source));
 
             var selectExpression = (SelectExpression)source.QueryExpression;
@@ -867,7 +900,8 @@ namespace Microsoft.EntityFrameworkCore.Cosmos.Query.Internal
                 selectExpression.IsDistinct
                 || selectExpression.Limit != null
                 || selectExpression.Offset != null
-            ) {
+            )
+            {
                 return null;
             }
 
@@ -899,7 +933,8 @@ namespace Microsoft.EntityFrameworkCore.Cosmos.Query.Internal
         protected override ShapedQueryExpression TranslateOfType(
             ShapedQueryExpression source,
             Type resultType
-        ) {
+        )
+        {
             Check.NotNull(source, nameof(source));
             Check.NotNull(resultType, nameof(resultType));
 
@@ -930,7 +965,8 @@ namespace Microsoft.EntityFrameworkCore.Cosmos.Query.Internal
                         && sqlConstantExpression.Value is bool constantValue
                         && constantValue
                     )
-                ) {
+                )
+                {
                     selectExpression.ApplyPredicate(translation);
                 }
 
@@ -986,7 +1022,8 @@ namespace Microsoft.EntityFrameworkCore.Cosmos.Query.Internal
             ShapedQueryExpression source,
             LambdaExpression keySelector,
             bool ascending
-        ) {
+        )
+        {
             Check.NotNull(source, nameof(source));
             Check.NotNull(keySelector, nameof(keySelector));
 
@@ -1034,7 +1071,8 @@ namespace Microsoft.EntityFrameworkCore.Cosmos.Query.Internal
         protected override ShapedQueryExpression TranslateSelect(
             ShapedQueryExpression source,
             LambdaExpression selector
-        ) {
+        )
+        {
             Check.NotNull(source, nameof(source));
             Check.NotNull(selector, nameof(selector));
 
@@ -1070,7 +1108,8 @@ namespace Microsoft.EntityFrameworkCore.Cosmos.Query.Internal
             ShapedQueryExpression source,
             LambdaExpression collectionSelector,
             LambdaExpression resultSelector
-        ) {
+        )
+        {
             Check.NotNull(source, nameof(source));
             Check.NotNull(collectionSelector, nameof(collectionSelector));
             Check.NotNull(resultSelector, nameof(resultSelector));
@@ -1087,7 +1126,8 @@ namespace Microsoft.EntityFrameworkCore.Cosmos.Query.Internal
         protected override ShapedQueryExpression TranslateSelectMany(
             ShapedQueryExpression source,
             LambdaExpression selector
-        ) {
+        )
+        {
             Check.NotNull(source, nameof(source));
             Check.NotNull(selector, nameof(selector));
 
@@ -1105,7 +1145,8 @@ namespace Microsoft.EntityFrameworkCore.Cosmos.Query.Internal
             LambdaExpression predicate,
             Type returnType,
             bool returnDefault
-        ) {
+        )
+        {
             Check.NotNull(source, nameof(source));
             Check.NotNull(returnType, nameof(returnType));
 
@@ -1137,7 +1178,8 @@ namespace Microsoft.EntityFrameworkCore.Cosmos.Query.Internal
         protected override ShapedQueryExpression TranslateSkip(
             ShapedQueryExpression source,
             Expression count
-        ) {
+        )
+        {
             Check.NotNull(source, nameof(source));
             Check.NotNull(count, nameof(count));
 
@@ -1168,7 +1210,8 @@ namespace Microsoft.EntityFrameworkCore.Cosmos.Query.Internal
         protected override ShapedQueryExpression TranslateSkipWhile(
             ShapedQueryExpression source,
             LambdaExpression predicate
-        ) {
+        )
+        {
             Check.NotNull(source, nameof(source));
             Check.NotNull(predicate, nameof(predicate));
 
@@ -1185,7 +1228,8 @@ namespace Microsoft.EntityFrameworkCore.Cosmos.Query.Internal
             ShapedQueryExpression source,
             LambdaExpression selector,
             Type resultType
-        ) {
+        )
+        {
             Check.NotNull(source, nameof(source));
             Check.NotNull(resultType, nameof(resultType));
 
@@ -1194,7 +1238,8 @@ namespace Microsoft.EntityFrameworkCore.Cosmos.Query.Internal
                 selectExpression.IsDistinct
                 || selectExpression.Limit != null
                 || selectExpression.Offset != null
-            ) {
+            )
+            {
                 return null;
             }
 
@@ -1227,7 +1272,8 @@ namespace Microsoft.EntityFrameworkCore.Cosmos.Query.Internal
         protected override ShapedQueryExpression TranslateTake(
             ShapedQueryExpression source,
             Expression count
-        ) {
+        )
+        {
             Check.NotNull(source, nameof(source));
             Check.NotNull(count, nameof(count));
 
@@ -1258,7 +1304,8 @@ namespace Microsoft.EntityFrameworkCore.Cosmos.Query.Internal
         protected override ShapedQueryExpression TranslateTakeWhile(
             ShapedQueryExpression source,
             LambdaExpression predicate
-        ) {
+        )
+        {
             Check.NotNull(source, nameof(source));
             Check.NotNull(predicate, nameof(predicate));
 
@@ -1275,7 +1322,8 @@ namespace Microsoft.EntityFrameworkCore.Cosmos.Query.Internal
             ShapedQueryExpression source,
             LambdaExpression keySelector,
             bool ascending
-        ) {
+        )
+        {
             Check.NotNull(source, nameof(source));
             Check.NotNull(keySelector, nameof(keySelector));
 
@@ -1301,7 +1349,8 @@ namespace Microsoft.EntityFrameworkCore.Cosmos.Query.Internal
         protected override ShapedQueryExpression TranslateUnion(
             ShapedQueryExpression source1,
             ShapedQueryExpression source2
-        ) {
+        )
+        {
             Check.NotNull(source1, nameof(source1));
             Check.NotNull(source2, nameof(source2));
 
@@ -1317,7 +1366,8 @@ namespace Microsoft.EntityFrameworkCore.Cosmos.Query.Internal
         protected override ShapedQueryExpression TranslateWhere(
             ShapedQueryExpression source,
             LambdaExpression predicate
-        ) {
+        )
+        {
             Check.NotNull(source, nameof(source));
             Check.NotNull(predicate, nameof(predicate));
 
@@ -1330,7 +1380,8 @@ namespace Microsoft.EntityFrameworkCore.Cosmos.Query.Internal
                     out var newPredicate
                 )
                     is Expression partitionKeyValue
-            ) {
+            )
+            {
                 var partitionKeyProperty = entityShaperExpression.EntityType.GetProperty(
                     entityShaperExpression.EntityType.GetPartitionKeyPropertyName()
                 );
@@ -1361,7 +1412,8 @@ namespace Microsoft.EntityFrameworkCore.Cosmos.Query.Internal
                 Expression expression,
                 IEntityType entityType,
                 out Expression updatedPredicate
-            ) {
+            )
+            {
                 if (expression is BinaryExpression binaryExpression)
                 {
                     partitionKeyValue = GetPartitionKeyValue(binaryExpression, entityType);
@@ -1409,7 +1461,8 @@ namespace Microsoft.EntityFrameworkCore.Cosmos.Query.Internal
             Expression GetPartitionKeyValue(
                 BinaryExpression binaryExpression,
                 IEntityType entityType
-            ) {
+            )
+            {
                 if (binaryExpression.NodeType == ExpressionType.Equal)
                 {
                     var valueExpression = IsPartitionKeyPropertyAccess(
@@ -1430,7 +1483,8 @@ namespace Microsoft.EntityFrameworkCore.Cosmos.Query.Internal
                                 StringComparison.Ordinal
                             ) == true
                         )
-                    ) {
+                    )
+                    {
                         return valueExpression;
                     }
                 }
@@ -1486,7 +1540,8 @@ namespace Microsoft.EntityFrameworkCore.Cosmos.Query.Internal
         private SqlExpression TranslateLambdaExpression(
             ShapedQueryExpression shapedQueryExpression,
             LambdaExpression lambdaExpression
-        ) {
+        )
+        {
             var lambdaBody = RemapLambdaBody(
                 shapedQueryExpression.ShaperExpression,
                 lambdaExpression
@@ -1498,7 +1553,8 @@ namespace Microsoft.EntityFrameworkCore.Cosmos.Query.Internal
         private static Expression RemapLambdaBody(
             Expression shaperBody,
             LambdaExpression lambdaExpression
-        ) {
+        )
+        {
             return ReplacingExpressionVisitor.Replace(
                 lambdaExpression.Parameters.Single(),
                 shaperBody,
@@ -1511,7 +1567,8 @@ namespace Microsoft.EntityFrameworkCore.Cosmos.Query.Internal
             Expression projection,
             bool throwOnNullResult,
             Type resultType
-        ) {
+        )
+        {
             var selectExpression = (SelectExpression)source.QueryExpression;
             selectExpression.ReplaceProjectionMapping(
                 new Dictionary<ProjectionMember, Expression>

@@ -210,7 +210,8 @@ namespace System.Net.NetworkInformation.Tests
 
             foreach (
                 UnicastIPAddressInformation unicast in loopback.GetIPProperties().UnicastAddresses
-            ) {
+            )
+            {
                 if (unicast.Address.Equals(IPAddress.Loopback))
                 {
                     Assert.Equal(IPAddress.Parse("255.0.0.0"), unicast.IPv4Mask);
@@ -234,7 +235,8 @@ namespace System.Net.NetworkInformation.Tests
 
             foreach (
                 UnicastIPAddressInformation unicast in loopback.GetIPProperties().UnicastAddresses
-            ) {
+            )
+            {
                 if (unicast.Address.Equals(IPAddress.IPv6Loopback))
                 {
                     Assert.Equal(128, unicast.PrefixLength);

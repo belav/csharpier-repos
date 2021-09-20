@@ -25,7 +25,8 @@ namespace Microsoft.CodeAnalysis.CodeFixes.Suppression
                     NestedSuppressionCodeAction.IsEquivalenceKeyForLocalSuppression(
                         fixAllContext.CodeActionEquivalenceKey
                     )
-                ) {
+                )
+                {
                     return null;
                 }
 
@@ -37,7 +38,8 @@ namespace Microsoft.CodeAnalysis.CodeFixes.Suppression
                     NestedSuppressionCodeAction.IsEquivalenceKeyForGlobalSuppression(
                         fixAllContext.CodeActionEquivalenceKey
                     )
-                ) {
+                )
+                {
                     // For global suppressions, we defer to the global suppression system to handle directly.
                     var title = fixAllContext.CodeActionEquivalenceKey;
                     return fixAllContext.Document != null
@@ -61,7 +63,8 @@ namespace Microsoft.CodeAnalysis.CodeFixes.Suppression
                     NestedSuppressionCodeAction.IsEquivalenceKeyForPragmaWarning(
                         fixAllContext.CodeActionEquivalenceKey
                     )
-                ) {
+                )
+                {
                     var batchFixer = new PragmaWarningBatchFixAllProvider(suppressionFixer);
                     return await batchFixer.GetFixAsync(fixAllContext).ConfigureAwait(false);
                 }
@@ -70,7 +73,8 @@ namespace Microsoft.CodeAnalysis.CodeFixes.Suppression
                     NestedSuppressionCodeAction.IsEquivalenceKeyForRemoveSuppression(
                         fixAllContext.CodeActionEquivalenceKey
                     )
-                ) {
+                )
+                {
                     var batchFixer = RemoveSuppressionCodeAction.GetBatchFixer(suppressionFixer);
                     return await batchFixer.GetFixAsync(fixAllContext).ConfigureAwait(false);
                 }

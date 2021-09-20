@@ -20,7 +20,8 @@ namespace System.Diagnostics.Contracts.Tests
                         e.SetHandled();
                     }
                 )
-            ) {
+            )
+            {
                 Contract.Assert(false);
             }
 
@@ -33,7 +34,8 @@ namespace System.Diagnostics.Contracts.Tests
                         e.SetHandled();
                     }
                 )
-            ) {
+            )
+            {
                 Contract.Assume(false);
             }
         }
@@ -54,7 +56,8 @@ namespace System.Diagnostics.Contracts.Tests
                         e.SetHandled();
                     }
                 )
-            ) {
+            )
+            {
                 Contract.Assert(false, message);
             }
 
@@ -69,7 +72,8 @@ namespace System.Diagnostics.Contracts.Tests
                         e.SetHandled();
                     }
                 )
-            ) {
+            )
+            {
                 Contract.Assume(false, message);
             }
         }
@@ -85,7 +89,8 @@ namespace System.Diagnostics.Contracts.Tests
                         e.SetHandled();
                     }
                 )
-            ) {
+            )
+            {
                 Contract.Assert(false);
             }
 
@@ -97,7 +102,8 @@ namespace System.Diagnostics.Contracts.Tests
                         e.SetHandled();
                     }
                 )
-            ) {
+            )
+            {
                 Contract.Assume(false);
             }
         }

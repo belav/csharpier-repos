@@ -96,8 +96,9 @@ namespace Microsoft.Extensions.Options
         /// <returns>The current <see cref="OptionsBuilder{TOptions}"/>.</returns>
         public virtual OptionsBuilder<TOptions> Configure<TDep1, TDep2>(
             Action<TOptions, TDep1, TDep2> configureOptions
-        ) where TDep1 : class
-          where TDep2 : class
+        )
+            where TDep1 : class
+            where TDep2 : class
         {
             if (configureOptions == null)
             {
@@ -127,9 +128,10 @@ namespace Microsoft.Extensions.Options
         /// <returns>The current <see cref="OptionsBuilder{TOptions}"/>.</returns>
         public virtual OptionsBuilder<TOptions> Configure<TDep1, TDep2, TDep3>(
             Action<TOptions, TDep1, TDep2, TDep3> configureOptions
-        ) where TDep1 : class
-          where TDep2 : class
-          where TDep3 : class
+        )
+            where TDep1 : class
+            where TDep2 : class
+            where TDep3 : class
         {
             if (configureOptions == null)
             {
@@ -161,10 +163,11 @@ namespace Microsoft.Extensions.Options
         /// <returns>The current <see cref="OptionsBuilder{TOptions}"/>.</returns>
         public virtual OptionsBuilder<TOptions> Configure<TDep1, TDep2, TDep3, TDep4>(
             Action<TOptions, TDep1, TDep2, TDep3, TDep4> configureOptions
-        ) where TDep1 : class
-          where TDep2 : class
-          where TDep3 : class
-          where TDep4 : class
+        )
+            where TDep1 : class
+            where TDep2 : class
+            where TDep3 : class
+            where TDep4 : class
         {
             if (configureOptions == null)
             {
@@ -198,11 +201,12 @@ namespace Microsoft.Extensions.Options
         /// <returns>The current <see cref="OptionsBuilder{TOptions}"/>.</returns>
         public virtual OptionsBuilder<TOptions> Configure<TDep1, TDep2, TDep3, TDep4, TDep5>(
             Action<TOptions, TDep1, TDep2, TDep3, TDep4, TDep5> configureOptions
-        ) where TDep1 : class
-          where TDep2 : class
-          where TDep3 : class
-          where TDep4 : class
-          where TDep5 : class
+        )
+            where TDep1 : class
+            where TDep2 : class
+            where TDep3 : class
+            where TDep4 : class
+            where TDep5 : class
         {
             if (configureOptions == null)
             {
@@ -279,8 +283,9 @@ namespace Microsoft.Extensions.Options
         /// <returns>The current <see cref="OptionsBuilder{TOptions}"/>.</returns>
         public virtual OptionsBuilder<TOptions> PostConfigure<TDep1, TDep2>(
             Action<TOptions, TDep1, TDep2> configureOptions
-        ) where TDep1 : class
-          where TDep2 : class
+        )
+            where TDep1 : class
+            where TDep2 : class
         {
             if (configureOptions == null)
             {
@@ -310,9 +315,10 @@ namespace Microsoft.Extensions.Options
         /// <returns>The current <see cref="OptionsBuilder{TOptions}"/>.</returns>
         public virtual OptionsBuilder<TOptions> PostConfigure<TDep1, TDep2, TDep3>(
             Action<TOptions, TDep1, TDep2, TDep3> configureOptions
-        ) where TDep1 : class
-          where TDep2 : class
-          where TDep3 : class
+        )
+            where TDep1 : class
+            where TDep2 : class
+            where TDep3 : class
         {
             if (configureOptions == null)
             {
@@ -344,10 +350,11 @@ namespace Microsoft.Extensions.Options
         /// <returns>The current <see cref="OptionsBuilder{TOptions}"/>.</returns>
         public virtual OptionsBuilder<TOptions> PostConfigure<TDep1, TDep2, TDep3, TDep4>(
             Action<TOptions, TDep1, TDep2, TDep3, TDep4> configureOptions
-        ) where TDep1 : class
-          where TDep2 : class
-          where TDep3 : class
-          where TDep4 : class
+        )
+            where TDep1 : class
+            where TDep2 : class
+            where TDep3 : class
+            where TDep4 : class
         {
             if (configureOptions == null)
             {
@@ -381,11 +388,12 @@ namespace Microsoft.Extensions.Options
         /// <returns>The current <see cref="OptionsBuilder{TOptions}"/>.</returns>
         public virtual OptionsBuilder<TOptions> PostConfigure<TDep1, TDep2, TDep3, TDep4, TDep5>(
             Action<TOptions, TDep1, TDep2, TDep3, TDep4, TDep5> configureOptions
-        ) where TDep1 : class
-          where TDep2 : class
-          where TDep3 : class
-          where TDep4 : class
-          where TDep5 : class
+        )
+            where TDep1 : class
+            where TDep2 : class
+            where TDep3 : class
+            where TDep4 : class
+            where TDep5 : class
         {
             if (configureOptions == null)
             {
@@ -424,7 +432,8 @@ namespace Microsoft.Extensions.Options
         public virtual OptionsBuilder<TOptions> Validate(
             Func<TOptions, bool> validation,
             string failureMessage
-        ) {
+        )
+        {
             if (validation == null)
             {
                 throw new ArgumentNullException(nameof(validation));
@@ -456,7 +465,8 @@ namespace Microsoft.Extensions.Options
         public virtual OptionsBuilder<TOptions> Validate<TDep>(
             Func<TOptions, TDep, bool> validation,
             string failureMessage
-        ) {
+        )
+        {
             if (validation == null)
             {
                 throw new ArgumentNullException(nameof(validation));
@@ -496,7 +506,8 @@ namespace Microsoft.Extensions.Options
         public virtual OptionsBuilder<TOptions> Validate<TDep1, TDep2>(
             Func<TOptions, TDep1, TDep2, bool> validation,
             string failureMessage
-        ) {
+        )
+        {
             if (validation == null)
             {
                 throw new ArgumentNullException(nameof(validation));
@@ -539,7 +550,8 @@ namespace Microsoft.Extensions.Options
         public virtual OptionsBuilder<TOptions> Validate<TDep1, TDep2, TDep3>(
             Func<TOptions, TDep1, TDep2, TDep3, bool> validation,
             string failureMessage
-        ) {
+        )
+        {
             if (validation == null)
             {
                 throw new ArgumentNullException(nameof(validation));
@@ -585,7 +597,8 @@ namespace Microsoft.Extensions.Options
         public virtual OptionsBuilder<TOptions> Validate<TDep1, TDep2, TDep3, TDep4>(
             Func<TOptions, TDep1, TDep2, TDep3, TDep4, bool> validation,
             string failureMessage
-        ) {
+        )
+        {
             if (validation == null)
             {
                 throw new ArgumentNullException(nameof(validation));
@@ -634,7 +647,8 @@ namespace Microsoft.Extensions.Options
         public virtual OptionsBuilder<TOptions> Validate<TDep1, TDep2, TDep3, TDep4, TDep5>(
             Func<TOptions, TDep1, TDep2, TDep3, TDep4, TDep5, bool> validation,
             string failureMessage
-        ) {
+        )
+        {
             if (validation == null)
             {
                 throw new ArgumentNullException(nameof(validation));

@@ -66,11 +66,8 @@ namespace Microsoft.AspNetCore.Mvc
         /// <param name="routeName">The name of the route.</param>
         /// <param name="routeValues">The parameters for the route.</param>
         /// <param name="fragment">The fragment to add to the URL.</param>
-        public RedirectToRouteResult(
-            string? routeName,
-            object? routeValues,
-            string? fragment
-        ) : this(routeName, routeValues, permanent: false, fragment: fragment) { }
+        public RedirectToRouteResult(string? routeName, object? routeValues, string? fragment)
+            : this(routeName, routeValues, permanent: false, fragment: fragment) { }
 
         /// <summary>
         /// Initializes a new instance of the <see cref="RedirectToRouteResult"/> with the values
@@ -102,7 +99,8 @@ namespace Microsoft.AspNetCore.Mvc
             bool permanent,
             bool preserveMethod,
             string? fragment
-        ) {
+        )
+        {
             RouteName = routeName;
             RouteValues = routeValues == null ? null : new RouteValueDictionary(routeValues);
             PreserveMethod = preserveMethod;

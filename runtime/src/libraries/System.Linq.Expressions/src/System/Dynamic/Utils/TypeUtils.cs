@@ -39,7 +39,8 @@ namespace System.Dynamic.Utils
         public static ConstructorInfo GetNullableConstructor(
             Type nullableType,
             Type nonNullableType
-        ) {
+        )
+        {
             Debug.Assert(nullableType.IsNullableType());
             Debug.Assert(!nonNullableType.IsNullableType() && nonNullableType.IsValueType);
 
@@ -313,7 +314,8 @@ namespace System.Dynamic.Utils
             this Type source,
             Type dest,
             bool skipNonArray
-        ) {
+        )
+        {
             // HasReferenceConversionTo was both too strict and too lax. It was too strict in prohibiting
             // some valid conversions involving arrays, and too lax in allowing casts between interfaces
             // and sealed classes that don't implement them. Unfortunately fixing the lax cases would be
@@ -360,7 +362,8 @@ namespace System.Dynamic.Utils
                         if (
                             source.GetArrayRank() != dest.GetArrayRank()
                             || source.IsSZArray != dest.IsSZArray
-                        ) {
+                        )
+                        {
                             return false;
                         }
 
@@ -494,7 +497,8 @@ namespace System.Dynamic.Utils
                 || !IsDelegate(dest)
                 || !source.IsGenericType
                 || !dest.IsGenericType
-            ) {
+            )
+            {
                 return false;
             }
 
@@ -547,7 +551,8 @@ namespace System.Dynamic.Utils
                 else if (
                     IsContravariant(genericParameter)
                     && (sourceArgument.IsValueType || destArgument.IsValueType)
-                ) {
+                )
+                {
                     return false;
                 }
             }
@@ -694,13 +699,15 @@ namespace System.Dynamic.Utils
             MethodInfo[] methods,
             Type? typeFrom,
             Type? typeTo
-        ) {
+        )
+        {
             foreach (MethodInfo mi in methods)
             {
                 if (
                     (mi.Name == "op_Implicit" || mi.Name == "op_Explicit")
                     && AreEquivalent(mi.ReturnType, typeTo)
-                ) {
+                )
+                {
                     ParameterInfo[] pis = mi.GetParametersCached();
                     if (pis.Length == 1 && AreEquivalent(pis[0].ParameterType, typeFrom))
                     {
@@ -844,7 +851,8 @@ namespace System.Dynamic.Utils
                 if (
                     type.IsConstructedGenericType
                     && AreEquivalent(type.GetGenericTypeDefinition(), definition)
-                ) {
+                )
+                {
                     return type;
                 }
 
@@ -918,7 +926,8 @@ namespace System.Dynamic.Utils
             string? paramName,
             bool allowByRef,
             bool allowPointer
-        ) {
+        )
+        {
             if (ValidateType(type, paramName, -1))
             {
                 if (!allowByRef && type.IsByRef)

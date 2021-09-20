@@ -27,7 +27,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Completion.Providers
 
         protected override IImmutableList<SyntaxNode> GetAssemblyScopedAttributeSyntaxNodesOfDocument(
             SyntaxNode documentRoot
-        ) {
+        )
+        {
             var builder = (ImmutableList<SyntaxNode>.Builder)null;
             if (documentRoot is CompilationUnitSyntax compilationUnit)
             {
@@ -45,7 +46,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Completion.Providers
 
         protected override SyntaxNode GetConstructorArgumentOfInternalsVisibleToAttribute(
             SyntaxNode internalsVisibleToAttribute
-        ) {
+        )
+        {
             var arguments = ((AttributeSyntax)internalsVisibleToAttribute).ArgumentList.Arguments;
             // InternalsVisibleTo has only one constructor argument.
             // https://msdn.microsoft.com/en-us/library/system.runtime.compilerservices.internalsvisibletoattribute.internalsvisibletoattribute(v=vs.110).aspx

@@ -1004,7 +1004,8 @@ namespace System.Security.Cryptography.Xml.Tests
             X509Certificate2 cert,
             string canonicalizationMethod,
             string lineFeed
-        ) {
+        )
+        {
             XmlDocument doc = CreateSomeXml(lineFeed);
 
             SignedXml signedXml = new SignedXml(doc);
@@ -3339,7 +3340,8 @@ namespace System.Security.Cryptography.Xml.Tests
         private void ValidateSignedXmlDefaultHashAlgorithms(
             string expectedSignatureMethod,
             string expectedDigestMethod
-        ) {
+        )
+        {
             const string xml =
                 @"<?xml version=""1.0""?>
 <example>

@@ -22,7 +22,8 @@ namespace Microsoft.AspNetCore.Mvc
             string userId,
             string code,
             string scheme
-        ) {
+        )
+        {
             return urlHelper.Page(
                 "/Account/ConfirmEmail",
                 pageHandler: null,
@@ -36,7 +37,8 @@ namespace Microsoft.AspNetCore.Mvc
             string userId,
             string code,
             string scheme
-        ) {
+        )
+        {
             return urlHelper.Page(
                 "/Account/ResetPassword",
                 pageHandler: null,

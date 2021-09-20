@@ -13,7 +13,8 @@ namespace System.Security.Cryptography.X509Certificates.Tests
             string correctPassword,
             X509Certificate2 expectedCert,
             Action<X509Certificate2> otherWork
-        ) {
+        )
+        {
             ReadPfx(pfxBytes, correctPassword, expectedCert, null, otherWork, s_importFlags);
             ReadPfx(
                 pfxBytes,
@@ -31,7 +32,8 @@ namespace System.Security.Cryptography.X509Certificates.Tests
             X509Certificate2 expectedSingleCert,
             X509Certificate2[] expectedOrder,
             Action<X509Certificate2> perCertOtherWork
-        ) {
+        )
+        {
             ReadPfx(
                 pfxBytes,
                 correctPassword,
@@ -58,7 +60,8 @@ namespace System.Security.Cryptography.X509Certificates.Tests
             X509Certificate2[] expectedOrder,
             Action<X509Certificate2> otherWork,
             X509KeyStorageFlags flags
-        ) {
+        )
+        {
             using (ImportedCollection imported = Cert.Import(pfxBytes, correctPassword, flags))
             {
                 X509Certificate2Collection coll = imported.Collection;
@@ -102,7 +105,8 @@ namespace System.Security.Cryptography.X509Certificates.Tests
             string bestPassword,
             int win32Error,
             int altWin32Error
-        ) {
+        )
+        {
             X509Certificate2Collection coll = new X509Certificate2Collection();
 
             CryptographicException ex = Assert.ThrowsAny<CryptographicException>(

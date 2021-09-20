@@ -133,7 +133,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Formatting
             string name,
             T defaultValue,
             params OptionStorageLocation2[] storageLocations
-        ) {
+        )
+        {
             var option = new Option2<T>(
                 "CSharpFormattingOptions",
                 group,
@@ -148,7 +149,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Formatting
         private static Option2<bool> CreateSpaceWithinParenthesesOption(
             SpacingWithinParenthesesOption parenthesesOption,
             string name
-        ) {
+        )
+        {
             var option = CreateOption(
                 CSharpFormattingOptionGroups.Spacing,
                 name,
@@ -175,7 +177,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Formatting
         private static Option2<bool> CreateNewLineForBracesOption(
             NewLineOption newLineOption,
             string name
-        ) {
+        )
+        {
             var option = CreateOption(
                 CSharpFormattingOptionGroups.NewLine,
                 name,

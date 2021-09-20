@@ -37,7 +37,8 @@ namespace System.Buffers.Text
             out sbyte value,
             out int bytesConsumed,
             char standardFormat = default
-        ) {
+        )
+        {
             FastPath:
             if (standardFormat == default)
             {
@@ -102,7 +103,8 @@ namespace System.Buffers.Text
             out short value,
             out int bytesConsumed,
             char standardFormat = default
-        ) {
+        )
+        {
             FastPath:
             if (standardFormat == default)
             {
@@ -167,7 +169,8 @@ namespace System.Buffers.Text
             out int value,
             out int bytesConsumed,
             char standardFormat = default
-        ) {
+        )
+        {
             FastPath:
             if (standardFormat == default)
             {
@@ -232,7 +235,8 @@ namespace System.Buffers.Text
             out long value,
             out int bytesConsumed,
             char standardFormat = default
-        ) {
+        )
+        {
             FastPath:
             if (standardFormat == default)
             {

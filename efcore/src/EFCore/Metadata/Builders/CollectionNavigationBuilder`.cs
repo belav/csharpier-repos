@@ -52,7 +52,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Builders
         /// <returns> An object to further configure the relationship. </returns>
         public new virtual ReferenceCollectionBuilder<TEntity, TRelatedEntity> WithOne(
             string? navigationName = null
-        ) {
+        )
+        {
             return new(
                 DeclaringEntityType,
                 RelatedEntityType,
@@ -96,7 +97,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Builders
         /// <returns> An object to further configure the relationship. </returns>
         public new virtual CollectionCollectionBuilder<TRelatedEntity, TEntity> WithMany(
             string navigationName
-        ) {
+        )
+        {
             var leftName = Builder?.Metadata.PrincipalToDependent!.Name;
             var collectionCollectionBuilder = new CollectionCollectionBuilder<
                 TRelatedEntity,
@@ -126,7 +128,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Builders
         /// <returns> An object to further configure the relationship. </returns>
         public virtual CollectionCollectionBuilder<TRelatedEntity, TEntity> WithMany(
             Expression<Func<TRelatedEntity, IEnumerable<TEntity>?>> navigationExpression
-        ) {
+        )
+        {
             if (Builder != null && Builder.Metadata.PrincipalToDependent == null)
             {
                 throw new InvalidOperationException(

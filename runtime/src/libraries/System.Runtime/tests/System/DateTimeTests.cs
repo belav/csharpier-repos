@@ -144,7 +144,8 @@ namespace System.Tests
             int minute,
             int second,
             int millisecond
-        ) {
+        )
+        {
             var dateTime = new DateTime(year, month, day, hour, minute, second, millisecond);
             VerifyDateTime(
                 dateTime,
@@ -169,7 +170,8 @@ namespace System.Tests
             int minute,
             int second,
             int millisecond
-        ) {
+        )
+        {
             var dateTime = new DateTime(
                 year,
                 month,
@@ -203,7 +205,8 @@ namespace System.Tests
             int minute,
             int second,
             int millisecond
-        ) {
+        )
+        {
             var dateTime = new DateTime(
                 year,
                 month,
@@ -237,7 +240,8 @@ namespace System.Tests
             int minute,
             int second,
             int millisecond
-        ) {
+        )
+        {
             var dateTime = new DateTime(
                 year,
                 month,
@@ -696,7 +700,8 @@ namespace System.Tests
             DateTime dateTime,
             TimeSpan timeSpan,
             DateTime expected
-        ) {
+        )
+        {
             Assert.Equal(expected, dateTime.Add(timeSpan));
             Assert.Equal(expected, dateTime + timeSpan);
         }
@@ -714,7 +719,8 @@ namespace System.Tests
         public void Add_TimeSpan_NewDateOutOfRange_ThrowsArgumentOutOfRangeException(
             DateTime date,
             TimeSpan value
-        ) {
+        )
+        {
             AssertExtensions.Throws<ArgumentOutOfRangeException>("value", () => date.Add(value));
             AssertExtensions.Throws<ArgumentOutOfRangeException>("t", () => date + value);
         }
@@ -761,7 +767,8 @@ namespace System.Tests
         public static void AddYears_NewDateOutOfRange_ThrowsArgumentOutOfRangeException(
             DateTime date,
             int years
-        ) {
+        )
+        {
             AssertExtensions.Throws<ArgumentOutOfRangeException>(
                 "value",
                 () => date.AddYears(years)
@@ -845,7 +852,8 @@ namespace System.Tests
             DateTime dateTime,
             int months,
             DateTime expected
-        ) {
+        )
+        {
             Assert.Equal(expected, dateTime.AddMonths(months));
         }
 
@@ -862,7 +870,8 @@ namespace System.Tests
         public void AddMonths_NewDateOutOfRange_ThrowsArgumentOutOfRangeException(
             DateTime date,
             int months
-        ) {
+        )
+        {
             AssertExtensions.Throws<ArgumentOutOfRangeException>(
                 "months",
                 () => date.AddMonths(months)
@@ -903,7 +912,8 @@ namespace System.Tests
             DateTime dateTime,
             double days,
             DateTime expected
-        ) {
+        )
+        {
             Assert.Equal(expected, dateTime.AddDays(days));
         }
 
@@ -920,7 +930,8 @@ namespace System.Tests
         public void AddDays_NewDateOutOfRange_ThrowsArgumentOutOfRangeException(
             DateTime date,
             double days
-        ) {
+        )
+        {
             AssertExtensions.Throws<ArgumentOutOfRangeException>("value", () => date.AddDays(days));
         }
 
@@ -952,7 +963,8 @@ namespace System.Tests
             DateTime dateTime,
             double hours,
             DateTime expected
-        ) {
+        )
+        {
             Assert.Equal(expected, dateTime.AddHours(hours));
         }
 
@@ -969,7 +981,8 @@ namespace System.Tests
         public void AddHours_NewDateOutOfRange_ThrowsArgumentOutOfRangeException(
             DateTime date,
             double hours
-        ) {
+        )
+        {
             AssertExtensions.Throws<ArgumentOutOfRangeException>(
                 "value",
                 () => date.AddHours(hours)
@@ -1004,7 +1017,8 @@ namespace System.Tests
             DateTime dateTime,
             double minutes,
             DateTime expected
-        ) {
+        )
+        {
             Assert.Equal(expected, dateTime.AddMinutes(minutes));
         }
 
@@ -1021,7 +1035,8 @@ namespace System.Tests
         public void AddMinutes_NewDateOutOfRange_ThrowsArgumentOutOfRangeException(
             DateTime date,
             double minutes
-        ) {
+        )
+        {
             AssertExtensions.Throws<ArgumentOutOfRangeException>(
                 "value",
                 () => date.AddMinutes(minutes)
@@ -1056,7 +1071,8 @@ namespace System.Tests
             DateTime dateTime,
             double seconds,
             DateTime expected
-        ) {
+        )
+        {
             Assert.Equal(expected, dateTime.AddSeconds(seconds));
         }
 
@@ -1073,7 +1089,8 @@ namespace System.Tests
         public void AddSeconds_NewDateOutOfRange_ThrowsArgumentOutOfRangeException(
             DateTime date,
             double seconds
-        ) {
+        )
+        {
             AssertExtensions.Throws<ArgumentOutOfRangeException>(
                 "value",
                 () => date.AddSeconds(seconds)
@@ -1108,7 +1125,8 @@ namespace System.Tests
             DateTime dateTime,
             double milliseconds,
             DateTime expected
-        ) {
+        )
+        {
             Assert.Equal(expected, dateTime.AddMilliseconds(milliseconds));
         }
 
@@ -1125,7 +1143,8 @@ namespace System.Tests
         public void AddMilliseconds_NewDateOutOfRange_ThrowsArgumentOutOfRangeException(
             DateTime date,
             double milliseconds
-        ) {
+        )
+        {
             AssertExtensions.Throws<ArgumentOutOfRangeException>(
                 "value",
                 () => date.AddMilliseconds(milliseconds)
@@ -1145,7 +1164,8 @@ namespace System.Tests
             DateTime dateTime,
             long ticks,
             DateTime expected
-        ) {
+        )
+        {
             Assert.Equal(expected, dateTime.AddTicks(ticks));
         }
 
@@ -1162,7 +1182,8 @@ namespace System.Tests
         public void AddTicks_NewDateOutOfRange_ThrowsArgumentOutOfRangeException(
             DateTime date,
             long ticks
-        ) {
+        )
+        {
             AssertExtensions.Throws<ArgumentOutOfRangeException>(
                 "value",
                 () => date.AddTicks(ticks)
@@ -1299,7 +1320,8 @@ namespace System.Tests
             DateTime dateTime,
             TimeSpan timeSpan,
             DateTime expected
-        ) {
+        )
+        {
             Assert.Equal(expected, dateTime.Subtract(timeSpan));
             Assert.Equal(expected, dateTime - timeSpan);
         }
@@ -1317,7 +1339,8 @@ namespace System.Tests
         public static void Subtract_OutOfRangeTimeSpan_ThrowsArgumentOutOfRangeException(
             DateTime date,
             TimeSpan value
-        ) {
+        )
+        {
             Assert.Throws<ArgumentOutOfRangeException>(() => date.Subtract(value));
             Assert.Throws<ArgumentOutOfRangeException>(() => date - value);
         }
@@ -1339,7 +1362,8 @@ namespace System.Tests
             DateTime dateTime1,
             DateTime dateTime2,
             TimeSpan expected
-        ) {
+        )
+        {
             Assert.Equal(expected, dateTime1.Subtract(dateTime2));
             Assert.Equal(expected, dateTime1 - dateTime2);
         }
@@ -2137,7 +2161,8 @@ namespace System.Tests
         public static void ParseExact_ToStringThenParseExact_RoundtripWithOtherFormat_Fails(
             string toStringFormat,
             string parseFormat
-        ) {
+        )
+        {
             DateTime dt = DateTime.Now;
             string expected = dt.ToString(toStringFormat);
 
@@ -2175,7 +2200,8 @@ namespace System.Tests
         public static void ParseExact_String_String_FormatProvider_DateTimeStyles_R(
             DateTime dt,
             string input
-        ) {
+        )
+        {
             Assert.Equal(DateTimeKind.Unspecified, DateTime.ParseExact(input, "r", null).Kind);
 
             Assert.Equal(dt.ToString("r"), DateTime.ParseExact(input, "r", null).ToString("r"));
@@ -2360,7 +2386,8 @@ namespace System.Tests
         public static void ParseExact_String_String_FormatProvider_DateTimeStyles_O(
             DateTime dt,
             string input
-        ) {
+        )
+        {
             string expectedString;
             if (input.Length == 27) // no timezone
             {
@@ -2441,7 +2468,8 @@ namespace System.Tests
                     DateTimeKind.Utc,
                     DateTimeKind.Local
                 }
-            ) {
+            )
+            {
                 var dt = new DateTime(1234567891234567891, kind);
                 yield return new object[] { dt, dt.ToString("o") };
             }
@@ -2689,7 +2717,8 @@ namespace System.Tests
             if (
                 cultureInfo.DateTimeFormat.ShortDatePattern.Contains("yyyy")
                 || HasDifferentDateTimeSeparators(cultureInfo.DateTimeFormat)
-            ) {
+            )
+            {
                 Assert.Equal(dateTime.Date, parsedDate);
             }
             else
@@ -2823,7 +2852,8 @@ namespace System.Tests
             int second,
             int millisecond,
             DateTimeKind kind
-        ) {
+        )
+        {
             Assert.Equal(year, dateTime.Year);
             Assert.Equal(month, dateTime.Month);
             Assert.Equal(day, dateTime.Day);
@@ -2988,7 +3018,8 @@ namespace System.Tests
             string input,
             CultureInfo culture,
             DateTime? expected
-        ) {
+        )
+        {
             Assert.Equal(expected, DateTime.Parse(input, culture));
         }
 
@@ -3000,7 +3031,8 @@ namespace System.Tests
                     DateTimeStyles.None,
                     DateTimeStyles.AllowWhiteSpaces
                 }
-            ) {
+            )
+            {
                 yield return new object[]
                 {
                     "9",
@@ -3706,7 +3738,8 @@ namespace System.Tests
             CultureInfo culture,
             DateTimeStyles style,
             DateTime? expected
-        ) {
+        )
+        {
             DateTime result1 = DateTime.ParseExact(input, format, culture, style);
             DateTime result2 = DateTime.ParseExact(input, new[] { format }, culture, style);
 
@@ -3987,7 +4020,8 @@ namespace System.Tests
             string format,
             CultureInfo culture,
             DateTimeStyles style
-        ) {
+        )
+        {
             Assert.Throws<FormatException>(
                 () => DateTime.ParseExact(input, format, culture, style)
             );
@@ -4368,7 +4402,8 @@ namespace System.Tests
             string input,
             CultureInfo culture,
             DateTime? expected
-        ) {
+        )
+        {
             Assert.Equal(expected, DateTime.Parse(input.AsSpan(), culture));
         }
 
@@ -4380,7 +4415,8 @@ namespace System.Tests
             CultureInfo culture,
             DateTimeStyles style,
             DateTime? expected
-        ) {
+        )
+        {
             DateTime result1 = DateTime.ParseExact(input.AsSpan(), format, culture, style);
             DateTime result2 = DateTime.ParseExact(
                 input.AsSpan(),
@@ -4429,7 +4465,8 @@ namespace System.Tests
             string format,
             CultureInfo culture,
             DateTimeStyles style
-        ) {
+        )
+        {
             Assert.Throws<FormatException>(
                 () => DateTime.ParseExact(input.AsSpan(), format, culture, style)
             );
@@ -4452,7 +4489,8 @@ namespace System.Tests
             string format,
             IFormatProvider provider,
             string expected
-        ) {
+        )
+        {
             if (provider == null)
             {
                 Assert.Equal(expected, dateTime.ToString(format));
@@ -4731,7 +4769,8 @@ namespace System.Tests
             string format,
             IFormatProvider provider,
             string expected
-        ) {
+        )
+        {
             var destination = new char[expected.Length];
 
             Assert.False(

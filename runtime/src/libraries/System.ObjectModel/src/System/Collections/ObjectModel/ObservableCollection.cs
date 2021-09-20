@@ -272,7 +272,8 @@ namespace System.Collections.ObjectModel
             NotifyCollectionChangedAction action,
             object? item,
             int index
-        ) {
+        )
+        {
             OnCollectionChanged(new NotifyCollectionChangedEventArgs(action, item, index));
         }
 
@@ -284,7 +285,8 @@ namespace System.Collections.ObjectModel
             object? item,
             int index,
             int oldIndex
-        ) {
+        )
+        {
             OnCollectionChanged(
                 new NotifyCollectionChangedEventArgs(action, item, index, oldIndex)
             );
@@ -298,7 +300,8 @@ namespace System.Collections.ObjectModel
             object? oldItem,
             object? newItem,
             int index
-        ) {
+        )
+        {
             OnCollectionChanged(
                 new NotifyCollectionChangedEventArgs(action, newItem, oldItem, index)
             );

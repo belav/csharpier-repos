@@ -20,9 +20,10 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
             Func<TDerivedType2, TResult> matchFunc2,
             Func<TDerivedType3, TResult> matchFunc3,
             Func<TBaseType, TResult>? defaultFunc = null
-        ) where TDerivedType1 : TBaseType
-          where TDerivedType2 : TBaseType
-          where TDerivedType3 : TBaseType
+        )
+            where TDerivedType1 : TBaseType
+            where TDerivedType2 : TBaseType
+            where TDerivedType3 : TBaseType
         {
             return obj switch
             {
@@ -47,10 +48,11 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
             Func<TDerivedType3, TResult> matchFunc3,
             Func<TDerivedType4, TResult> matchFunc4,
             Func<TBaseType, TResult>? defaultFunc = null
-        ) where TDerivedType1 : TBaseType
-          where TDerivedType2 : TBaseType
-          where TDerivedType3 : TBaseType
-          where TDerivedType4 : TBaseType
+        )
+            where TDerivedType1 : TBaseType
+            where TDerivedType2 : TBaseType
+            where TDerivedType3 : TBaseType
+            where TDerivedType4 : TBaseType
         {
             return obj switch
             {
@@ -78,11 +80,12 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
             Func<TDerivedType4, TResult> matchFunc4,
             Func<TDerivedType5, TResult> matchFunc5,
             Func<TBaseType, TResult>? defaultFunc = null
-        ) where TDerivedType1 : TBaseType
-          where TDerivedType2 : TBaseType
-          where TDerivedType3 : TBaseType
-          where TDerivedType4 : TBaseType
-          where TDerivedType5 : TBaseType
+        )
+            where TDerivedType1 : TBaseType
+            where TDerivedType2 : TBaseType
+            where TDerivedType3 : TBaseType
+            where TDerivedType4 : TBaseType
+            where TDerivedType5 : TBaseType
         {
             return obj switch
             {
@@ -113,12 +116,13 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
             Func<TDerivedType5, TResult> matchFunc5,
             Func<TDerivedType6, TResult> matchFunc6,
             Func<TBaseType, TResult>? defaultFunc = null
-        ) where TDerivedType1 : TBaseType
-          where TDerivedType2 : TBaseType
-          where TDerivedType3 : TBaseType
-          where TDerivedType4 : TBaseType
-          where TDerivedType5 : TBaseType
-          where TDerivedType6 : TBaseType
+        )
+            where TDerivedType1 : TBaseType
+            where TDerivedType2 : TBaseType
+            where TDerivedType3 : TBaseType
+            where TDerivedType4 : TBaseType
+            where TDerivedType5 : TBaseType
+            where TDerivedType6 : TBaseType
         {
             return obj switch
             {
@@ -170,22 +174,23 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
             Func<TDerivedType15, TResult> matchFunc15,
             Func<TDerivedType16, TResult> matchFunc16,
             Func<TBaseType, TResult>? defaultFunc = null
-        ) where TDerivedType1 : TBaseType
-          where TDerivedType2 : TBaseType
-          where TDerivedType3 : TBaseType
-          where TDerivedType4 : TBaseType
-          where TDerivedType5 : TBaseType
-          where TDerivedType6 : TBaseType
-          where TDerivedType7 : TBaseType
-          where TDerivedType8 : TBaseType
-          where TDerivedType9 : TBaseType
-          where TDerivedType10 : TBaseType
-          where TDerivedType11 : TBaseType
-          where TDerivedType12 : TBaseType
-          where TDerivedType13 : TBaseType
-          where TDerivedType14 : TBaseType
-          where TDerivedType15 : TBaseType
-          where TDerivedType16 : TBaseType
+        )
+            where TDerivedType1 : TBaseType
+            where TDerivedType2 : TBaseType
+            where TDerivedType3 : TBaseType
+            where TDerivedType4 : TBaseType
+            where TDerivedType5 : TBaseType
+            where TDerivedType6 : TBaseType
+            where TDerivedType7 : TBaseType
+            where TDerivedType8 : TBaseType
+            where TDerivedType9 : TBaseType
+            where TDerivedType10 : TBaseType
+            where TDerivedType11 : TBaseType
+            where TDerivedType12 : TBaseType
+            where TDerivedType13 : TBaseType
+            where TDerivedType14 : TBaseType
+            where TDerivedType15 : TBaseType
+            where TDerivedType16 : TBaseType
         {
             return obj switch
             {
@@ -249,23 +254,24 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
             Func<TDerivedType16, TResult> matchFunc16,
             Func<TDerivedType17, TResult> matchFunc17,
             Func<TBaseType, TResult>? defaultFunc = null
-        ) where TDerivedType1 : TBaseType
-          where TDerivedType2 : TBaseType
-          where TDerivedType3 : TBaseType
-          where TDerivedType4 : TBaseType
-          where TDerivedType5 : TBaseType
-          where TDerivedType6 : TBaseType
-          where TDerivedType7 : TBaseType
-          where TDerivedType8 : TBaseType
-          where TDerivedType9 : TBaseType
-          where TDerivedType10 : TBaseType
-          where TDerivedType11 : TBaseType
-          where TDerivedType12 : TBaseType
-          where TDerivedType13 : TBaseType
-          where TDerivedType14 : TBaseType
-          where TDerivedType15 : TBaseType
-          where TDerivedType16 : TBaseType
-          where TDerivedType17 : TBaseType
+        )
+            where TDerivedType1 : TBaseType
+            where TDerivedType2 : TBaseType
+            where TDerivedType3 : TBaseType
+            where TDerivedType4 : TBaseType
+            where TDerivedType5 : TBaseType
+            where TDerivedType6 : TBaseType
+            where TDerivedType7 : TBaseType
+            where TDerivedType8 : TBaseType
+            where TDerivedType9 : TBaseType
+            where TDerivedType10 : TBaseType
+            where TDerivedType11 : TBaseType
+            where TDerivedType12 : TBaseType
+            where TDerivedType13 : TBaseType
+            where TDerivedType14 : TBaseType
+            where TDerivedType15 : TBaseType
+            where TDerivedType16 : TBaseType
+            where TDerivedType17 : TBaseType
         {
             return obj switch
             {
@@ -340,28 +346,29 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
             Func<TDerivedType21, TResult> matchFunc21,
             Func<TDerivedType22, TResult> matchFunc22,
             Func<TBaseType, TResult>? defaultFunc = null
-        ) where TDerivedType1 : TBaseType
-          where TDerivedType2 : TBaseType
-          where TDerivedType3 : TBaseType
-          where TDerivedType4 : TBaseType
-          where TDerivedType5 : TBaseType
-          where TDerivedType6 : TBaseType
-          where TDerivedType7 : TBaseType
-          where TDerivedType8 : TBaseType
-          where TDerivedType9 : TBaseType
-          where TDerivedType10 : TBaseType
-          where TDerivedType11 : TBaseType
-          where TDerivedType12 : TBaseType
-          where TDerivedType13 : TBaseType
-          where TDerivedType14 : TBaseType
-          where TDerivedType15 : TBaseType
-          where TDerivedType16 : TBaseType
-          where TDerivedType17 : TBaseType
-          where TDerivedType18 : TBaseType
-          where TDerivedType19 : TBaseType
-          where TDerivedType20 : TBaseType
-          where TDerivedType21 : TBaseType
-          where TDerivedType22 : TBaseType
+        )
+            where TDerivedType1 : TBaseType
+            where TDerivedType2 : TBaseType
+            where TDerivedType3 : TBaseType
+            where TDerivedType4 : TBaseType
+            where TDerivedType5 : TBaseType
+            where TDerivedType6 : TBaseType
+            where TDerivedType7 : TBaseType
+            where TDerivedType8 : TBaseType
+            where TDerivedType9 : TBaseType
+            where TDerivedType10 : TBaseType
+            where TDerivedType11 : TBaseType
+            where TDerivedType12 : TBaseType
+            where TDerivedType13 : TBaseType
+            where TDerivedType14 : TBaseType
+            where TDerivedType15 : TBaseType
+            where TDerivedType16 : TBaseType
+            where TDerivedType17 : TBaseType
+            where TDerivedType18 : TBaseType
+            where TDerivedType19 : TBaseType
+            where TDerivedType20 : TBaseType
+            where TDerivedType21 : TBaseType
+            where TDerivedType22 : TBaseType
         {
             return obj switch
             {
@@ -473,44 +480,45 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
             Func<TDerivedType37, TResult> matchFunc37,
             Func<TDerivedType38, TResult> matchFunc38,
             Func<TBaseType, TResult>? defaultFunc = null
-        ) where TDerivedType1 : TBaseType
-          where TDerivedType2 : TBaseType
-          where TDerivedType3 : TBaseType
-          where TDerivedType4 : TBaseType
-          where TDerivedType5 : TBaseType
-          where TDerivedType6 : TBaseType
-          where TDerivedType7 : TBaseType
-          where TDerivedType8 : TBaseType
-          where TDerivedType9 : TBaseType
-          where TDerivedType10 : TBaseType
-          where TDerivedType11 : TBaseType
-          where TDerivedType12 : TBaseType
-          where TDerivedType13 : TBaseType
-          where TDerivedType14 : TBaseType
-          where TDerivedType15 : TBaseType
-          where TDerivedType16 : TBaseType
-          where TDerivedType17 : TBaseType
-          where TDerivedType18 : TBaseType
-          where TDerivedType19 : TBaseType
-          where TDerivedType20 : TBaseType
-          where TDerivedType21 : TBaseType
-          where TDerivedType22 : TBaseType
-          where TDerivedType23 : TBaseType
-          where TDerivedType24 : TBaseType
-          where TDerivedType25 : TBaseType
-          where TDerivedType26 : TBaseType
-          where TDerivedType27 : TBaseType
-          where TDerivedType28 : TBaseType
-          where TDerivedType29 : TBaseType
-          where TDerivedType30 : TBaseType
-          where TDerivedType31 : TBaseType
-          where TDerivedType32 : TBaseType
-          where TDerivedType33 : TBaseType
-          where TDerivedType34 : TBaseType
-          where TDerivedType35 : TBaseType
-          where TDerivedType36 : TBaseType
-          where TDerivedType37 : TBaseType
-          where TDerivedType38 : TBaseType
+        )
+            where TDerivedType1 : TBaseType
+            where TDerivedType2 : TBaseType
+            where TDerivedType3 : TBaseType
+            where TDerivedType4 : TBaseType
+            where TDerivedType5 : TBaseType
+            where TDerivedType6 : TBaseType
+            where TDerivedType7 : TBaseType
+            where TDerivedType8 : TBaseType
+            where TDerivedType9 : TBaseType
+            where TDerivedType10 : TBaseType
+            where TDerivedType11 : TBaseType
+            where TDerivedType12 : TBaseType
+            where TDerivedType13 : TBaseType
+            where TDerivedType14 : TBaseType
+            where TDerivedType15 : TBaseType
+            where TDerivedType16 : TBaseType
+            where TDerivedType17 : TBaseType
+            where TDerivedType18 : TBaseType
+            where TDerivedType19 : TBaseType
+            where TDerivedType20 : TBaseType
+            where TDerivedType21 : TBaseType
+            where TDerivedType22 : TBaseType
+            where TDerivedType23 : TBaseType
+            where TDerivedType24 : TBaseType
+            where TDerivedType25 : TBaseType
+            where TDerivedType26 : TBaseType
+            where TDerivedType27 : TBaseType
+            where TDerivedType28 : TBaseType
+            where TDerivedType29 : TBaseType
+            where TDerivedType30 : TBaseType
+            where TDerivedType31 : TBaseType
+            where TDerivedType32 : TBaseType
+            where TDerivedType33 : TBaseType
+            where TDerivedType34 : TBaseType
+            where TDerivedType35 : TBaseType
+            where TDerivedType36 : TBaseType
+            where TDerivedType37 : TBaseType
+            where TDerivedType38 : TBaseType
         {
             return obj switch
             {
@@ -642,46 +650,47 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
             Func<TDerivedType39, TResult> matchFunc39,
             Func<TDerivedType40, TResult> matchFunc40,
             Func<TBaseType, TResult>? defaultFunc = null
-        ) where TDerivedType1 : TBaseType
-          where TDerivedType2 : TBaseType
-          where TDerivedType3 : TBaseType
-          where TDerivedType4 : TBaseType
-          where TDerivedType5 : TBaseType
-          where TDerivedType6 : TBaseType
-          where TDerivedType7 : TBaseType
-          where TDerivedType8 : TBaseType
-          where TDerivedType9 : TBaseType
-          where TDerivedType10 : TBaseType
-          where TDerivedType11 : TBaseType
-          where TDerivedType12 : TBaseType
-          where TDerivedType13 : TBaseType
-          where TDerivedType14 : TBaseType
-          where TDerivedType15 : TBaseType
-          where TDerivedType16 : TBaseType
-          where TDerivedType17 : TBaseType
-          where TDerivedType18 : TBaseType
-          where TDerivedType19 : TBaseType
-          where TDerivedType20 : TBaseType
-          where TDerivedType21 : TBaseType
-          where TDerivedType22 : TBaseType
-          where TDerivedType23 : TBaseType
-          where TDerivedType24 : TBaseType
-          where TDerivedType25 : TBaseType
-          where TDerivedType26 : TBaseType
-          where TDerivedType27 : TBaseType
-          where TDerivedType28 : TBaseType
-          where TDerivedType29 : TBaseType
-          where TDerivedType30 : TBaseType
-          where TDerivedType31 : TBaseType
-          where TDerivedType32 : TBaseType
-          where TDerivedType33 : TBaseType
-          where TDerivedType34 : TBaseType
-          where TDerivedType35 : TBaseType
-          where TDerivedType36 : TBaseType
-          where TDerivedType37 : TBaseType
-          where TDerivedType38 : TBaseType
-          where TDerivedType39 : TBaseType
-          where TDerivedType40 : TBaseType
+        )
+            where TDerivedType1 : TBaseType
+            where TDerivedType2 : TBaseType
+            where TDerivedType3 : TBaseType
+            where TDerivedType4 : TBaseType
+            where TDerivedType5 : TBaseType
+            where TDerivedType6 : TBaseType
+            where TDerivedType7 : TBaseType
+            where TDerivedType8 : TBaseType
+            where TDerivedType9 : TBaseType
+            where TDerivedType10 : TBaseType
+            where TDerivedType11 : TBaseType
+            where TDerivedType12 : TBaseType
+            where TDerivedType13 : TBaseType
+            where TDerivedType14 : TBaseType
+            where TDerivedType15 : TBaseType
+            where TDerivedType16 : TBaseType
+            where TDerivedType17 : TBaseType
+            where TDerivedType18 : TBaseType
+            where TDerivedType19 : TBaseType
+            where TDerivedType20 : TBaseType
+            where TDerivedType21 : TBaseType
+            where TDerivedType22 : TBaseType
+            where TDerivedType23 : TBaseType
+            where TDerivedType24 : TBaseType
+            where TDerivedType25 : TBaseType
+            where TDerivedType26 : TBaseType
+            where TDerivedType27 : TBaseType
+            where TDerivedType28 : TBaseType
+            where TDerivedType29 : TBaseType
+            where TDerivedType30 : TBaseType
+            where TDerivedType31 : TBaseType
+            where TDerivedType32 : TBaseType
+            where TDerivedType33 : TBaseType
+            where TDerivedType34 : TBaseType
+            where TDerivedType35 : TBaseType
+            where TDerivedType36 : TBaseType
+            where TDerivedType37 : TBaseType
+            where TDerivedType38 : TBaseType
+            where TDerivedType39 : TBaseType
+            where TDerivedType40 : TBaseType
         {
             return obj switch
             {

@@ -409,7 +409,8 @@ namespace Microsoft.AspNetCore.Components.Rendering
 
         private void CanAddMultipleAttributesTest(
             IEnumerable<KeyValuePair<string, object>> attributes
-        ) {
+        )
+        {
             // Arrange
             var builder = new RenderTreeBuilder();
 
@@ -1077,7 +1078,8 @@ namespace Microsoft.AspNetCore.Components.Rendering
         [MemberData(nameof(EventHandlerValues))]
         public void AddAttribute_Component_EventHandlerValue_SetsAttributeValue(
             Action<EventArgs> value
-        ) {
+        )
+        {
             // Arrange
             var builder = new RenderTreeBuilder();
 

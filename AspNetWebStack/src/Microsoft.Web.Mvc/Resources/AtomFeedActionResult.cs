@@ -82,7 +82,8 @@ namespace Microsoft.Web.Mvc.Resources
                     context.HttpContext.Response.OutputStream,
                     settings
                 )
-            ) {
+            )
+            {
                 this.Feed.GetAtom10Formatter().WriteTo(writer);
                 writer.Flush();
             }

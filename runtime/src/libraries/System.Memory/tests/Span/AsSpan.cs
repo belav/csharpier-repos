@@ -192,7 +192,8 @@ namespace System.SpanTests
             int length,
             int start,
             int subLength
-        ) {
+        )
+        {
             const int segmentOffset = 5;
 
             int[] a = new int[length + segmentOffset];
@@ -227,7 +228,8 @@ namespace System.SpanTests
             int length,
             int start,
             int subLength
-        ) {
+        )
+        {
             int[] a = new int[length];
             Assert.Throws<ArgumentOutOfRangeException>(() => a.AsSpan(start, subLength));
         }

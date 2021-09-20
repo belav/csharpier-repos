@@ -38,7 +38,8 @@ namespace Microsoft.CodeAnalysis.Diagnostics
                 DiagnosticAnalyzer analyzer,
                 in AnalyzerActions analyzerActions,
                 bool analyzerActionsNeedFiltering
-            ) {
+            )
+            {
                 Debug.Assert(!analyzerActions.IsEmpty);
 
                 _analyzer = analyzer;
@@ -226,7 +227,8 @@ namespace Microsoft.CodeAnalysis.Diagnostics
 
             public bool TryGetExecutableCodeBlockActions(
                 out ExecutableCodeBlockAnalyzerActions actions
-            ) {
+            )
+            {
                 if (
                     !OperationBlockStartActions.IsEmpty
                     || !OperationBlockActions.IsEmpty
@@ -234,7 +236,8 @@ namespace Microsoft.CodeAnalysis.Diagnostics
                     || !CodeBlockStartActions.IsEmpty
                     || !CodeBlockActions.IsEmpty
                     || !CodeBlockEndActions.IsEmpty
-                ) {
+                )
+                {
                     actions = new ExecutableCodeBlockAnalyzerActions
                     {
                         Analyzer = _analyzer,

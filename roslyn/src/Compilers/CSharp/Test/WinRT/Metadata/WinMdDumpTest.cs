@@ -46,7 +46,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.Symbols.Metadata
             StringBuilder result,
             NamespaceOrTypeSymbol container,
             string indent
-        ) {
+        )
+        {
             string memberIndent;
             if (container is NamedTypeSymbol)
             {
@@ -70,7 +71,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.Symbols.Metadata
             foreach (
                 var member in container.GetMembers()
                     .OrderBy(m => m.Name, System.StringComparer.InvariantCulture)
-            ) {
+            )
+            {
                 switch (member.Kind)
                 {
                     case SymbolKind.NamedType:
@@ -250,7 +252,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.Symbols.Metadata
             Symbol symbol,
             string indent,
             bool inBlock
-        ) {
+        )
+        {
             var attributes = symbol.GetAttributes();
             if (attributes.Length == 0)
             {
@@ -379,7 +382,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.Symbols.Metadata
             PEMethodSymbol method,
             string indent,
             bool includeTypeName = false
-        ) {
+        )
+        {
             MetadataSignatureHelper.AppendMethodAttributes(result, method.Flags);
             result.Append(" ");
             AppendSignatureType(result, method.ReturnType, RefKind.None);
@@ -415,7 +419,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.Symbols.Metadata
                         parameter.Flags,
                         all: true
                     )
-                ) {
+                )
+                {
                     result.Append(" ");
                 }
 
@@ -467,7 +472,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.Symbols.Metadata
             StringBuilder result,
             TypeSymbol type,
             RefKind refKind
-        ) {
+        )
+        {
             result.Append(type);
 
             if (refKind != RefKind.None)

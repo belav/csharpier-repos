@@ -181,7 +181,8 @@ namespace System.Collections.Immutable.Tests
 
         protected void AddDescendingTestHelper(
             IImmutableDictionary<int, GenericParameterHelper> map
-        ) {
+        )
+        {
             for (int i = 10; i > 0; i--)
             {
                 map = this.AddTestHelper(map, i, new GenericParameterHelper(i));
@@ -196,7 +197,8 @@ namespace System.Collections.Immutable.Tests
 
         protected void AddRemoveRandomDataTestHelper(
             IImmutableDictionary<double, GenericParameterHelper> map
-        ) {
+        )
+        {
             Assert.NotNull(map);
 
             double[] inputs = GenerateDummyFillData();
@@ -242,7 +244,8 @@ namespace System.Collections.Immutable.Tests
         protected void KeysTestHelper<TKey, TValue>(
             IImmutableDictionary<TKey, TValue> map,
             TKey key
-        ) {
+        )
+        {
             Assert.Equal(0, map.Keys.Count());
             Assert.Equal(0, map.ToReadOnlyDictionary().Keys.Count());
 
@@ -255,7 +258,8 @@ namespace System.Collections.Immutable.Tests
         protected void ValuesTestHelper<TKey, TValue>(
             IImmutableDictionary<TKey, TValue> map,
             TKey key
-        ) {
+        )
+        {
             Assert.Equal(0, map.Values.Count());
             Assert.Equal(0, map.ToReadOnlyDictionary().Values.Count());
 

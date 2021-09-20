@@ -41,7 +41,8 @@ namespace Microsoft.AspNetCore.Mvc.Rendering
         public static Task<IHtmlContent> InvokeAsync(
             this IViewComponentHelper helper,
             Type componentType
-        ) {
+        )
+        {
             if (helper == null)
             {
                 throw new ArgumentNullException(nameof(helper));
@@ -61,7 +62,8 @@ namespace Microsoft.AspNetCore.Mvc.Rendering
         public static Task<IHtmlContent> InvokeAsync<TComponent>(
             this IViewComponentHelper helper,
             object? arguments
-        ) {
+        )
+        {
             if (helper == null)
             {
                 throw new ArgumentNullException(nameof(helper));

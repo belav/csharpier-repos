@@ -94,7 +94,8 @@ namespace System.Text.Unicode
                     CultureInfo.InvariantCulture,
                     out DecimalDigitValue
                 )
-            ) {
+            )
+            {
                 DecimalDigitValue = -1;
             }
 
@@ -105,7 +106,8 @@ namespace System.Text.Unicode
                     CultureInfo.InvariantCulture,
                     out DigitValue
                 )
-            ) {
+            )
+            {
                 DigitValue = -1;
             }
 
@@ -148,7 +150,8 @@ namespace System.Text.Unicode
                     CultureInfo.InvariantCulture,
                     out SimpleUppercaseMapping
                 )
-            ) {
+            )
+            {
                 SimpleUppercaseMapping = CodePoint;
             }
 
@@ -159,7 +162,8 @@ namespace System.Text.Unicode
                     CultureInfo.InvariantCulture,
                     out SimpleLowercaseMapping
                 )
-            ) {
+            )
+            {
                 SimpleLowercaseMapping = CodePoint;
             }
 
@@ -170,7 +174,8 @@ namespace System.Text.Unicode
                     CultureInfo.InvariantCulture,
                     out SimpleTitlecaseMapping
                 )
-            ) {
+            )
+            {
                 SimpleTitlecaseMapping = CodePoint;
             }
         }

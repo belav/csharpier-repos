@@ -2198,7 +2198,8 @@ Parameter name: arrayIndex",
                 JsonWriter writer,
                 object value,
                 JsonSerializer serializer
-            ) {
+            )
+            {
                 var token = JToken.FromObject(
                     value,
                     new JsonSerializer
@@ -2223,7 +2224,8 @@ Parameter name: arrayIndex",
                 Type objectType,
                 object existingValue,
                 JsonSerializer serializer
-            ) {
+            )
+            {
                 throw new NotSupportedException(
                     "This custom converter only supportes serialization and not deserialization."
                 );

@@ -36,7 +36,8 @@ namespace Microsoft.Extensions.Logging.Console.Test
             SimpleConsoleFormatterOptions simpleOptions = null,
             ConsoleFormatterOptions systemdOptions = null,
             JsonConsoleFormatterOptions jsonOptions = null
-        ) {
+        )
+        {
             // Arrange
             var sink = new ConsoleSink();
             var errorSink = new ConsoleSink();
@@ -319,7 +320,8 @@ namespace Microsoft.Extensions.Logging.Console.Test
             in LogEntry<TState> logEntry,
             IExternalScopeProvider scopeProvider,
             TextWriter textWriter
-        ) {
+        )
+        {
             ;
         }
     }

@@ -42,7 +42,8 @@ namespace Microsoft.NET.HostModel.Bundle
             Version targetFrameworkVersion = null,
             bool diagnosticOutput = false,
             string appAssemblyName = null
-        ) {
+        )
+        {
             Tracer = new Trace(diagnosticOutput);
 
             HostName = hostName;
@@ -101,7 +102,8 @@ namespace Microsoft.NET.HostModel.Bundle
             Stream bundle,
             Stream file,
             FileType type
-        ) {
+        )
+        {
             long startOffset = bundle.Position;
             if (ShouldCompress(type))
             {
@@ -116,7 +118,8 @@ namespace Microsoft.NET.HostModel.Bundle
                         CompressionLevel.Optimal,
                         leaveOpen: true
                     )
-                ) {
+                )
+                {
                     file.CopyTo(compressionStream);
                 }
 
@@ -331,14 +334,16 @@ namespace Microsoft.NET.HostModel.Bundle
                             fileSpec.BundleRelativePath,
                             out var existingFileSpec
                         )
-                    ) {
+                    )
+                    {
                         if (
                             !string.Equals(
                                 fileSpec.SourcePath,
                                 existingFileSpec.SourcePath,
                                 StringComparison.Ordinal
                             )
-                        ) {
+                        )
+                        {
                             throw new ArgumentException(
                                 $"Invalid input specification: Found entries '{fileSpec.SourcePath}' and '{existingFileSpec.SourcePath}' with the same BundleRelativePath '{fileSpec.BundleRelativePath}'"
                             );

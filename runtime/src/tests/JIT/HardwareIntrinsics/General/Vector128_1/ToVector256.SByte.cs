@@ -126,7 +126,8 @@ namespace JIT.HardwareIntrinsics.General
             SByte[] values,
             bool isUnsafe,
             [CallerMemberName] string method = ""
-        ) {
+        )
+        {
             SByte[] resultElements = new SByte[ElementCount * 2];
             Unsafe.WriteUnaligned(ref Unsafe.As<SByte, byte>(ref resultElements[0]), result);
 
@@ -138,7 +139,8 @@ namespace JIT.HardwareIntrinsics.General
             SByte[] values,
             bool isUnsafe,
             [CallerMemberName] string method = ""
-        ) {
+        )
+        {
             bool succeeded = true;
 
             for (int i = 0; i < ElementCount; i++)

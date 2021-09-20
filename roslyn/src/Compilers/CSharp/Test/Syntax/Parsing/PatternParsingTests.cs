@@ -6600,7 +6600,8 @@ switch (e)
                     LanguageVersion.CSharp7,
                     LanguageVersion.CSharp8
                 }
-            ) {
+            )
+            {
                 UsingStatement(
                     text,
                     options: CSharpParseOptions.Default.WithLanguageVersion(langVersion)
@@ -10878,7 +10879,8 @@ switch (e)
             [CombinatorialValues("and", "or")] string left,
             [CombinatorialValues(SyntaxKind.AndKeyword, SyntaxKind.OrKeyword)] SyntaxKind opKind,
             [CombinatorialValues("and", "or")] string right
-        ) {
+        )
+        {
             UsingStatement(
                 $"_ = e is (int){left} {SyntaxFacts.GetText(opKind)} {right};",
                 TestOptions.RegularWithPatternCombinators
@@ -10998,7 +11000,8 @@ switch (e)
             [CombinatorialValues("and", "or")] string left,
             [CombinatorialValues(SyntaxKind.AndKeyword, SyntaxKind.OrKeyword)] SyntaxKind opKind,
             [CombinatorialValues("and", "or")] string right
-        ) {
+        )
+        {
             UsingStatement(
                 $"_ = e is {left} {SyntaxFacts.GetText(opKind)} {right};",
                 TestOptions.RegularWithPatternCombinators
@@ -11054,7 +11057,8 @@ switch (e)
         public void CombinatorAsConstant_01(
             [CombinatorialValues(SyntaxKind.AndKeyword, SyntaxKind.OrKeyword)] SyntaxKind opKind,
             [CombinatorialValues("and", "or")] string right
-        ) {
+        )
+        {
             UsingStatement(
                 $"_ = e is (int) {SyntaxFacts.GetText(opKind)} {right};",
                 TestOptions.RegularWithPatternCombinators

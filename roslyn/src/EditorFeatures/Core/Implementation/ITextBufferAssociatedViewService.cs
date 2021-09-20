@@ -27,7 +27,8 @@ namespace Microsoft.CodeAnalysis.Editor
         public SubjectBuffersConnectedEventArgs(
             ITextView textView,
             ReadOnlyCollection<ITextBuffer> subjectBuffers
-        ) {
+        )
+        {
             this.TextView = textView;
             this.SubjectBuffers = subjectBuffers;
         }

@@ -14,7 +14,8 @@ namespace System.Web.Razor.Test.Framework
         protected override ParserBase SelectActiveParser(
             ParserBase codeParser,
             ParserBase markupParser
-        ) {
+        )
+        {
             return codeParser;
         }
 
@@ -27,7 +28,8 @@ namespace System.Web.Razor.Test.Framework
             string input,
             AcceptedCharacters acceptedCharacters,
             params RazorError[] errors
-        ) {
+        )
+        {
             ImplicitExpressionTest(input, input, acceptedCharacters, errors);
         }
 
@@ -35,7 +37,8 @@ namespace System.Web.Razor.Test.Framework
             string input,
             string expected,
             params RazorError[] errors
-        ) {
+        )
+        {
             ImplicitExpressionTest(input, expected, AcceptedCharacters.NonWhiteSpace, errors);
         }
 
@@ -44,7 +47,8 @@ namespace System.Web.Razor.Test.Framework
             BlockType blockType,
             SpanKind spanType,
             AcceptedCharacters acceptedCharacters = AcceptedCharacters.Any
-        ) {
+        )
+        {
             SingleSpanBlockTest(
                 document,
                 blockType,
@@ -60,7 +64,8 @@ namespace System.Web.Razor.Test.Framework
             BlockType blockType,
             SpanKind spanType,
             AcceptedCharacters acceptedCharacters = AcceptedCharacters.Any
-        ) {
+        )
+        {
             SingleSpanBlockTest(
                 document,
                 spanContent,
@@ -76,7 +81,8 @@ namespace System.Web.Razor.Test.Framework
             BlockType blockType,
             SpanKind spanType,
             params RazorError[] expectedError
-        ) {
+        )
+        {
             SingleSpanBlockTest(document, document, blockType, spanType, expectedError);
         }
 
@@ -86,7 +92,8 @@ namespace System.Web.Razor.Test.Framework
             BlockType blockType,
             SpanKind spanType,
             params RazorError[] expectedErrors
-        ) {
+        )
+        {
             SingleSpanBlockTest(
                 document,
                 spanContent,
@@ -103,7 +110,8 @@ namespace System.Web.Razor.Test.Framework
             SpanKind spanType,
             AcceptedCharacters acceptedCharacters,
             params RazorError[] expectedError
-        ) {
+        )
+        {
             SingleSpanBlockTest(
                 document,
                 document,
@@ -121,7 +129,8 @@ namespace System.Web.Razor.Test.Framework
             SpanKind spanType,
             AcceptedCharacters acceptedCharacters,
             params RazorError[] expectedErrors
-        ) {
+        )
+        {
             Block b = CreateSimpleBlockAndSpan(
                 spanContent,
                 blockType,
@@ -136,7 +145,8 @@ namespace System.Web.Razor.Test.Framework
             string expected,
             AcceptedCharacters acceptedCharacters,
             params RazorError[] errors
-        ) {
+        )
+        {
             var factory = CreateSpanFactory();
             ParseBlockTest(
                 SyntaxConstants.TransitionString + input,

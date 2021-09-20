@@ -23,9 +23,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Emit
         : SpecializedNestedTypeReference,
           Cci.IGenericTypeInstanceReference
     {
-        public SpecializedGenericNestedTypeInstanceReference(
-            NamedTypeSymbol underlyingNamedType
-        ) : base(underlyingNamedType)
+        public SpecializedGenericNestedTypeInstanceReference(NamedTypeSymbol underlyingNamedType)
+            : base(underlyingNamedType)
         {
             Debug.Assert(underlyingNamedType.IsDefinition);
             // Definition doesn't have custom modifiers on type arguments
@@ -43,12 +42,14 @@ namespace Microsoft.CodeAnalysis.CSharp.Emit
 
         ImmutableArray<Cci.ITypeReference> Cci.IGenericTypeInstanceReference.GetGenericArguments(
             EmitContext context
-        ) {
+        )
+        {
             PEModuleBuilder moduleBeingBuilt = (PEModuleBuilder)context.Module;
             var builder = ArrayBuilder<Cci.ITypeReference>.GetInstance();
             foreach (
                 TypeWithAnnotations type in UnderlyingNamedType.TypeArgumentsWithAnnotationsNoUseSiteDiagnostics
-            ) {
+            )
+            {
                 builder.Add(
                     moduleBeingBuilt.Translate(
                         type.Type,
@@ -63,7 +64,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Emit
 
         Cci.INamedTypeReference Cci.IGenericTypeInstanceReference.GetGenericType(
             EmitContext context
-        ) {
+        )
+        {
             System.Diagnostics.Debug.Assert(UnderlyingNamedType.OriginalDefinition.IsDefinition);
             PEModuleBuilder moduleBeingBuilt = (PEModuleBuilder)context.Module;
             return moduleBeingBuilt.Translate(

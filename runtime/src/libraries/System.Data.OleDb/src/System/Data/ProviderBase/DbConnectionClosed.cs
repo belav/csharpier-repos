@@ -35,7 +35,8 @@ namespace System.Data.ProviderBase
         internal override void CloseConnection(
             DbConnection owningObject,
             DbConnectionFactory connectionFactory
-        ) {
+        )
+        {
             // not much to do here...
         }
 
@@ -55,7 +56,8 @@ namespace System.Data.ProviderBase
             DbConnection outerConnection,
             string collectionName,
             string?[]? restrictions
-        ) {
+        )
+        {
             throw ADP.ClosedConnectionError();
         }
 
@@ -69,7 +71,8 @@ namespace System.Data.ProviderBase
             DbConnectionFactory connectionFactory,
             TaskCompletionSource<DbConnectionInternal>? retry,
             DbConnectionOptions? userOptions
-        ) {
+        )
+        {
             return base.TryOpenConnectionInternal(
                 outerConnection,
                 connectionFactory,
@@ -88,7 +91,8 @@ namespace System.Data.ProviderBase
             DbConnectionFactory connectionFactory,
             TaskCompletionSource<DbConnectionInternal>? retry,
             DbConnectionOptions? userOptions
-        ) {
+        )
+        {
             throw ADP.ConnectionAlreadyOpen(State);
         }
     }
@@ -123,7 +127,8 @@ namespace System.Data.ProviderBase
         internal override void CloseConnection(
             DbConnection owningObject,
             DbConnectionFactory connectionFactory
-        ) {
+        )
+        {
             connectionFactory.SetInnerConnectionTo(
                 owningObject,
                 DbConnectionClosedPreviouslyOpened.SingletonInstance
@@ -135,7 +140,8 @@ namespace System.Data.ProviderBase
             DbConnectionFactory connectionFactory,
             TaskCompletionSource<DbConnectionInternal>? retry,
             DbConnectionOptions? userOptions
-        ) {
+        )
+        {
             if (retry == null || !retry.Task.IsCompleted)
             {
                 // retry is null if this is a synchronous call

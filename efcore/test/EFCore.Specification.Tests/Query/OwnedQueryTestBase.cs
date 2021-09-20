@@ -173,7 +173,8 @@ namespace Microsoft.EntityFrameworkCore.Query
         [MemberData(nameof(IsAsyncData))]
         public virtual Task Navigation_rewrite_on_owned_collection_with_composition_complex(
             bool async
-        ) {
+        )
+        {
             return AssertQuery(
                 async,
                 ss =>
@@ -212,7 +213,8 @@ namespace Microsoft.EntityFrameworkCore.Query
         [MemberData(nameof(IsAsyncData))]
         public virtual Task Navigation_rewrite_on_owned_reference_followed_by_regular_entity(
             bool async
-        ) {
+        )
+        {
             return AssertQuery(
                 async,
                 ss => ss.Set<OwnedPerson>().Select(p => p.PersonAddress.Country.Planet)
@@ -223,7 +225,8 @@ namespace Microsoft.EntityFrameworkCore.Query
         [MemberData(nameof(IsAsyncData))]
         public virtual Task Filter_owned_entity_chained_with_regular_entity_followed_by_projecting_owned_collection(
             bool async
-        ) {
+        )
+        {
             return AssertQuery(
                 async,
                 ss =>
@@ -262,7 +265,8 @@ namespace Microsoft.EntityFrameworkCore.Query
         [MemberData(nameof(IsAsyncData))]
         public virtual Task Project_multiple_owned_navigations_with_expansion_on_owned_collections(
             bool async
-        ) {
+        )
+        {
             return AssertQuery(
                 async,
                 ss =>
@@ -292,7 +296,8 @@ namespace Microsoft.EntityFrameworkCore.Query
         [MemberData(nameof(IsAsyncData))]
         public virtual Task Navigation_rewrite_on_owned_reference_followed_by_regular_entity_filter(
             bool async
-        ) {
+        )
+        {
             return AssertQuery(
                 async,
                 ss =>
@@ -308,7 +313,8 @@ namespace Microsoft.EntityFrameworkCore.Query
         [MemberData(nameof(IsAsyncData))]
         public virtual Task Navigation_rewrite_on_owned_reference_followed_by_regular_entity_and_property(
             bool async
-        ) {
+        )
+        {
             return AssertQueryScalar(
                 async,
                 ss => ss.Set<OwnedPerson>().Select(p => p.PersonAddress.Country.Planet.Id)
@@ -319,7 +325,8 @@ namespace Microsoft.EntityFrameworkCore.Query
         [MemberData(nameof(IsAsyncData))]
         public virtual Task Navigation_rewrite_on_owned_reference_followed_by_regular_entity_and_collection(
             bool async
-        ) {
+        )
+        {
             return AssertQuery(
                 async,
                 ss =>
@@ -335,7 +342,8 @@ namespace Microsoft.EntityFrameworkCore.Query
         [MemberData(nameof(IsAsyncData))]
         public virtual Task SelectMany_on_owned_reference_followed_by_regular_entity_and_collection(
             bool async
-        ) {
+        )
+        {
             return AssertQuery(
                 async,
                 ss => ss.Set<OwnedPerson>().SelectMany(p => p.PersonAddress.Country.Planet.Moons)
@@ -346,7 +354,8 @@ namespace Microsoft.EntityFrameworkCore.Query
         [MemberData(nameof(IsAsyncData))]
         public virtual Task SelectMany_on_owned_reference_with_entity_in_between_ending_in_owned_collection(
             bool async
-        ) {
+        )
+        {
             return AssertQuery(
                 async,
                 ss =>
@@ -359,7 +368,8 @@ namespace Microsoft.EntityFrameworkCore.Query
         [MemberData(nameof(IsAsyncData))]
         public virtual Task Navigation_rewrite_on_owned_reference_followed_by_regular_entity_and_collection_count(
             bool async
-        ) {
+        )
+        {
             return AssertQueryScalar(
                 async,
                 ss => ss.Set<OwnedPerson>().Select(p => p.PersonAddress.Country.Planet.Moons.Count)
@@ -370,7 +380,8 @@ namespace Microsoft.EntityFrameworkCore.Query
         [MemberData(nameof(IsAsyncData))]
         public virtual Task Navigation_rewrite_on_owned_reference_followed_by_regular_entity_and_another_reference(
             bool async
-        ) {
+        )
+        {
             return AssertQuery(
                 async,
                 ss => ss.Set<OwnedPerson>().Select(p => p.PersonAddress.Country.Planet.Star)
@@ -381,7 +392,8 @@ namespace Microsoft.EntityFrameworkCore.Query
         [MemberData(nameof(IsAsyncData))]
         public virtual Task Navigation_rewrite_on_owned_reference_followed_by_regular_entity_and_another_reference_and_scalar(
             bool async
-        ) {
+        )
+        {
             return AssertQuery(
                 async,
                 ss => ss.Set<OwnedPerson>().Select(p => p.PersonAddress.Country.Planet.Star.Name),
@@ -393,7 +405,8 @@ namespace Microsoft.EntityFrameworkCore.Query
         [MemberData(nameof(IsAsyncData))]
         public virtual Task Navigation_rewrite_on_owned_reference_followed_by_regular_entity_and_another_reference_in_predicate_and_projection(
             bool async
-        ) {
+        )
+        {
             return AssertQuery(
                 async,
                 ss =>
@@ -421,7 +434,8 @@ namespace Microsoft.EntityFrameworkCore.Query
         [MemberData(nameof(IsAsyncData))]
         public virtual async Task Throw_for_owned_entities_without_owner_in_tracking_query(
             bool async
-        ) {
+        )
+        {
             using var context = CreateContext();
             var query = context.Set<OwnedPerson>().Select(e => e.PersonAddress);
             var noTrackingQuery = query.AsNoTracking();
@@ -449,7 +463,8 @@ namespace Microsoft.EntityFrameworkCore.Query
         [MemberData(nameof(IsAsyncData))]
         public virtual async Task Owned_entity_without_owner_does_not_throw_for_identity_resolution(
             bool async
-        ) {
+        )
+        {
             using var context = CreateContext();
             var query = context.Set<OwnedPerson>()
                 .Select(e => e.PersonAddress)
@@ -465,7 +480,8 @@ namespace Microsoft.EntityFrameworkCore.Query
         [MemberData(nameof(IsAsyncData))]
         public virtual async Task Preserve_includes_when_applying_skip_take_after_anonymous_type_select(
             bool async
-        ) {
+        )
+        {
             using var context = CreateContext();
             var expectedQuery = Fixture.GetExpectedData().Set<OwnedPerson>().OrderBy(p => p.Id);
             var expectedResult = expectedQuery.Select(
@@ -688,7 +704,8 @@ namespace Microsoft.EntityFrameworkCore.Query
         [MemberData(nameof(IsAsyncData))]
         public virtual Task Can_query_on_indexer_property_when_property_name_from_closure(
             bool async
-        ) {
+        )
+        {
             var propertyName = "Name";
             return AssertQuery(
                 async,
@@ -936,7 +953,8 @@ namespace Microsoft.EntityFrameworkCore.Query
         [MemberData(nameof(IsAsyncData))]
         public virtual async Task NoTracking_Include_with_cycles_does_not_throw_when_performing_identity_resolution(
             bool async
-        ) {
+        )
+        {
             using var context = CreateContext();
             var query = context.Set<OwnedPerson>()
                 .SelectMany(op => op.Orders)
@@ -957,7 +975,8 @@ namespace Microsoft.EntityFrameworkCore.Query
         [MemberData(nameof(IsAsyncData))]
         public virtual Task Trying_to_access_non_existent_indexer_property_throws_meaningful_exception(
             bool async
-        ) {
+        )
+        {
             return AssertTranslationFailedWithDetails(
                 () => AssertQuery(async, ss => ss.Set<OwnedPerson>().Where(op => (bool)op["Foo"])),
                 CoreStrings.QueryUnableToTranslateMember("Foo", nameof(OwnedPerson))
@@ -968,7 +987,8 @@ namespace Microsoft.EntityFrameworkCore.Query
         [MemberData(nameof(IsAsyncData))]
         public virtual Task GroupBy_with_multiple_aggregates_on_owned_navigation_properties(
             bool async
-        ) {
+        )
+        {
             return AssertQuery(
                 async,
                 ss =>
@@ -1039,7 +1059,8 @@ namespace Microsoft.EntityFrameworkCore.Query
             foreach (
                 var element in expectedOrders.OrderBy(ee => ee.Id)
                     .Zip(actualOrders.OrderBy(aa => aa.Id), (e, a) => new { e, a })
-            ) {
+            )
+            {
                 Assert.Equal(element.e.Id, element.a.Id);
                 Assert.Equal(element.e["OrderDate"], element.a["OrderDate"]);
             }
@@ -1049,7 +1070,8 @@ namespace Microsoft.EntityFrameworkCore.Query
         [MemberData(nameof(IsAsyncData))]
         public virtual Task Projecting_collection_correlated_with_keyless_entity_after_navigation_works_using_parent_identifiers(
             bool async
-        ) {
+        )
+        {
             return AssertQuery(
                 async,
                 ss =>
@@ -1078,7 +1100,8 @@ namespace Microsoft.EntityFrameworkCore.Query
             private static void AssertAddress(
                 OwnedAddress expectedAddress,
                 OwnedAddress actualAddress
-            ) {
+            )
+            {
                 Assert.Equal(expectedAddress["AddressLine"], actualAddress["AddressLine"]);
                 Assert.Equal(expectedAddress["ZipCode"], actualAddress["ZipCode"]);
                 Assert.Equal(expectedAddress["BranchName"], actualAddress["BranchName"]);
@@ -1092,12 +1115,14 @@ namespace Microsoft.EntityFrameworkCore.Query
             private static void AssertOrders(
                 ICollection<Order> expectedOrders,
                 ICollection<Order> actualOrders
-            ) {
+            )
+            {
                 Assert.Equal(expectedOrders.Count, actualOrders.Count);
                 foreach (
                     var element in expectedOrders.OrderBy(ee => ee.Id)
                         .Zip(actualOrders.OrderBy(aa => aa.Id), (e, a) => new { e, a })
-                ) {
+                )
+                {
                     Assert.Equal(element.e.Id, element.a.Id);
                     Assert.Equal(element.e["OrderDate"], element.a["OrderDate"]);
                     Assert.Equal(element.e.Client.Id, element.a.Client.Id);
@@ -1108,7 +1133,8 @@ namespace Microsoft.EntityFrameworkCore.Query
             private static void AssertOrderDetails(
                 IList<OrderDetail> expectedOrderDetails,
                 IList<OrderDetail> actualOrderDetails
-            ) {
+            )
+            {
                 Assert.Equal(expectedOrderDetails.Count, actualOrderDetails.Count);
                 expectedOrderDetails = expectedOrderDetails.OrderBy(e => e.Detail).ToList();
                 actualOrderDetails = actualOrderDetails.OrderBy(e => e.Detail).ToList();
@@ -1965,7 +1991,8 @@ namespace Microsoft.EntityFrameworkCore.Query
                 IReadOnlyList<Moon> moons,
                 IReadOnlyList<Fink> finks,
                 IReadOnlyList<Barton> bartons
-            ) {
+            )
+            {
                 ownedPeople[0].PersonAddress.Country.Planet = planets[0];
 
                 var branch = (Branch)ownedPeople[1];

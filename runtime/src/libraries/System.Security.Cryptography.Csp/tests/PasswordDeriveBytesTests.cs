@@ -182,7 +182,8 @@ namespace System.Security.Cryptography.DeriveBytesTests
                     "SHA1",
                     DefaultIterationCount
                 )
-            ) {
+            )
+            {
                 byte[] saltOut = deriveBytes.Salt;
 
                 Assert.NotSame(saltIn, saltOut);
@@ -211,7 +212,8 @@ namespace System.Security.Cryptography.DeriveBytesTests
                     "SHA1",
                     DefaultIterationCount
                 )
-            ) {
+            )
+            {
                 first = deriveBytes.Salt;
                 second = deriveBytes.Salt;
             }
@@ -658,7 +660,8 @@ namespace System.Security.Cryptography.DeriveBytesTests
             int keySize,
             byte[] salt,
             byte[] expected
-        ) {
+        )
+        {
             byte[] output;
             byte[] iv = new byte[8];
 
@@ -681,7 +684,8 @@ namespace System.Security.Cryptography.DeriveBytesTests
             byte[] salt,
             int iterationCount,
             byte[] expected
-        ) {
+        )
+        {
             byte[] output;
 
             using (
@@ -691,7 +695,8 @@ namespace System.Security.Cryptography.DeriveBytesTests
                     hashName.Name,
                     iterationCount
                 )
-            ) {
+            )
+            {
                 output = deriveBytes.GetBytes(expected.Length);
             }
 

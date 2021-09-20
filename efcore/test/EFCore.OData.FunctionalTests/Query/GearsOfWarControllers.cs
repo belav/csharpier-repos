@@ -38,7 +38,8 @@ namespace Microsoft.EntityFrameworkCore.Query
         public ITestActionResult Get(
             [FromODataUri] string keyNickname,
             [FromODataUri] int keySquadId
-        ) {
+        )
+        {
             var result = _context.Gears.FirstOrDefault(
                 e => e.Nickname == keyNickname && e.SquadId == keySquadId
             );

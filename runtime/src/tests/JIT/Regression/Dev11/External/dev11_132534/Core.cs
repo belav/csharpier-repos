@@ -48,7 +48,8 @@ namespace Test
             double arg3,
             BasicStruct arg4,
             string arg5
-        ) {
+        )
+        {
             Console.WriteLine("        Executing C# target for: \"Pass6Args_Maxstack_2\"");
             Support.VerifyInt(arg0, IntValues.ForArg0);
             Support.VerifyLong(arg1, LongValues.ForArg1);
@@ -65,7 +66,8 @@ namespace Test
             double arg3,
             BasicStruct arg4,
             string arg5
-        ) {
+        )
+        {
             Console.WriteLine("        Executing C# target for: \"Pass6Args_Maxstack_3\"");
             Support.VerifyInt(arg0, IntValues.ForArg0);
             Support.VerifyLong(arg1, LongValues.ForArg1);
@@ -82,7 +84,8 @@ namespace Test
             double arg3,
             BasicStruct arg4,
             string arg5
-        ) {
+        )
+        {
             Console.WriteLine("        Executing C# target for: \"Pass6Args_Maxstack_4\"");
             Support.VerifyInt(arg0, IntValues.ForArg0);
             Support.VerifyLong(arg1, LongValues.ForArg1);
@@ -99,7 +102,8 @@ namespace Test
             double arg3,
             BasicStruct arg4,
             string arg5
-        ) {
+        )
+        {
             Console.WriteLine("        Executing C# target for: \"Pass6Args_Maxstack_5\"");
             Support.VerifyInt(arg0, IntValues.ForArg0);
             Support.VerifyLong(arg1, LongValues.ForArg1);
@@ -116,7 +120,8 @@ namespace Test
             double arg3,
             BasicStruct arg4,
             string arg5
-        ) {
+        )
+        {
             Console.WriteLine("        Executing C# target for: \"Pass6Args_Maxstack_6\"");
             Support.VerifyInt(arg0, IntValues.ForArg0);
             Support.VerifyLong(arg1, LongValues.ForArg1);
@@ -133,7 +138,8 @@ namespace Test
             double arg3,
             BasicStruct arg4,
             string arg5
-        ) {
+        )
+        {
             Console.WriteLine("        Executing C# target for: \"Pass6Args_Maxstack_7\"");
             Support.VerifyInt(arg0, IntValues.ForArg0);
             Support.VerifyLong(arg1, LongValues.ForArg1);
@@ -150,7 +156,8 @@ namespace Test
             double arg3,
             BasicStruct arg4,
             string arg5
-        ) {
+        )
+        {
             Console.WriteLine("        Executing C# target for: \"Pass6Args_Maxstack_8\"");
             Support.VerifyInt(arg0, IntValues.ForArg0);
             Support.VerifyLong(arg1, LongValues.ForArg1);
@@ -167,7 +174,8 @@ namespace Test
             double arg3,
             BasicStruct arg4,
             string arg5
-        ) {
+        )
+        {
             Console.WriteLine("        Executing C# target for: \"Pass6Args_Maxstack_9\"");
             Support.VerifyInt(arg0, IntValues.ForArg0);
             Support.VerifyLong(arg1, LongValues.ForArg1);
@@ -184,7 +192,8 @@ namespace Test
             double arg3,
             BasicStruct arg4,
             string arg5
-        ) {
+        )
+        {
             Console.WriteLine("        Executing C# target for: \"Pass6Args_Maxstack_10\"");
             Support.VerifyInt(arg0, IntValues.ForArg0);
             Support.VerifyLong(arg1, LongValues.ForArg1);

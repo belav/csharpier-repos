@@ -214,7 +214,8 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Diagnostics.NamingStyles
 
         internal static SymbolSpecification.SymbolKindOrTypeKind ToSymbolKindOrTypeKind(
             object symbolOrTypeKind
-        ) {
+        )
+        {
             switch (symbolOrTypeKind)
             {
                 case TypeKind typeKind:
@@ -431,7 +432,8 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Diagnostics.NamingStyles
 
         private static NamingStylePreferences MethodNamesAreCasedOption(
             Capitalization capitalization
-        ) {
+        )
+        {
             var symbolSpecification = new SymbolSpecification(
                 null,
                 "Name",
@@ -468,7 +470,8 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Diagnostics.NamingStyles
 
         private static NamingStylePreferences MethodNamesArePascalCaseOption(
             ImmutableArray<Accessibility> accessibilities
-        ) {
+        )
+        {
             var symbolSpecification = new SymbolSpecification(
                 null,
                 "Name",
@@ -505,7 +508,8 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Diagnostics.NamingStyles
 
         private static NamingStylePreferences SymbolKindsArePascalCaseOption(
             ImmutableArray<SymbolSpecification.SymbolKindOrTypeKind> symbolKinds
-        ) {
+        )
+        {
             var symbolSpecification = new SymbolSpecification(
                 null,
                 "Name",
@@ -540,7 +544,8 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Diagnostics.NamingStyles
 
         private static NamingStylePreferences AccessibilitiesArePascalCaseOption(
             ImmutableArray<Accessibility> accessibilities
-        ) {
+        )
+        {
             var symbolSpecification = new SymbolSpecification(
                 null,
                 "Name",

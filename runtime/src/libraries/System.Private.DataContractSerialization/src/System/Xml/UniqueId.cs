@@ -433,7 +433,8 @@ namespace System.Xml
                 || chars[22] != '-'
                 || chars[27] != '-'
                 || chars[32] != '-'
-            ) {
+            )
+            {
                 return;
             }
 

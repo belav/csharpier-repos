@@ -32,14 +32,16 @@ namespace Microsoft.CodeAnalysis.CSharp
             BuildPaths buildPaths,
             string? additionalReferenceDirectories,
             IAnalyzerAssemblyLoader assemblyLoader
-        ) : base(
-            parser,
-            responseFile,
-            args,
-            buildPaths,
-            additionalReferenceDirectories,
-            assemblyLoader
-        ) {
+        )
+            : base(
+                parser,
+                responseFile,
+                args,
+                buildPaths,
+                additionalReferenceDirectories,
+                assemblyLoader
+            )
+        {
             _diagnosticFormatter = new CommandLineDiagnosticFormatter(
                 buildPaths.WorkingDirectory,
                 Arguments.PrintFullPaths,
@@ -63,7 +65,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             ErrorLogger? errorLogger,
             ImmutableArray<AnalyzerConfigOptionsResult> analyzerConfigOptions,
             AnalyzerConfigOptionsResult globalConfigOptions
-        ) {
+        )
+        {
             var parseOptions = Arguments.ParseOptions;
 
             // We compute script parse options once so we don't have to do it repeatedly in
@@ -123,7 +126,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                     errorLogger,
                     compilation: null
                 )
-            ) {
+            )
+            {
                 Debug.Assert(hadErrors);
                 return null;
             }
@@ -176,7 +180,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                             FileMode.Open,
                             FileAccess.Read
                         )
-                    ) {
+                    )
+                    {
                         assemblyIdentityComparer = DesktopAssemblyIdentityComparer.LoadFromXml(
                             appConfigStream
                         );
@@ -254,7 +259,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             CommandLineSourceFile file,
             DiagnosticBag diagnostics,
             out string? normalizedFilePath
-        ) {
+        )
+        {
             var fileDiagnostics = new List<DiagnosticInfo>();
             var content = TryReadFileContent(file, fileDiagnostics, out normalizedFilePath);
 
@@ -280,7 +286,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             CSharpParseOptions scriptParseOptions,
             SourceText content,
             CommandLineSourceFile file
-        ) {
+        )
+        {
             var tree = SyntaxFactory.ParseSyntaxTree(
                 content,
                 file.IsScript ? scriptParseOptions : parseOptions,
@@ -314,7 +321,8 @@ namespace Microsoft.CodeAnalysis.CSharp
         protected override string GetOutputFileName(
             Compilation compilation,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             if (Arguments.OutputFileName is object)
             {
                 return Arguments.OutputFileName;
@@ -424,7 +432,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             bool skipAnalyzers,
             out ImmutableArray<DiagnosticAnalyzer> analyzers,
             out ImmutableArray<ISourceGenerator> generators
-        ) {
+        )
+        {
             Arguments.ResolveAnalyzersFromArguments(
                 LanguageNames.CSharp,
                 diagnostics,
@@ -441,14 +450,16 @@ namespace Microsoft.CodeAnalysis.CSharp
             SourceReferenceResolver resolver,
             OrderedSet<string> embeddedFiles,
             DiagnosticBag diagnostics
-        ) {
+        )
+        {
             foreach (
                 LineDirectiveTriviaSyntax directive in tree.GetRoot()
                     .GetDirectives(
                         d =>
                             d.IsActive && !d.HasErrors && d.Kind() == SyntaxKind.LineDirectiveTrivia
                     )
-            ) {
+            )
+            {
                 var path = (string?)directive.File.Value;
                 if (path == null)
                 {
@@ -480,7 +491,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             AnalyzerConfigOptionsProvider analyzerConfigProvider,
             ImmutableArray<AdditionalText> additionalTexts,
             DiagnosticBag diagnostics
-        ) {
+        )
+        {
             var driver = CSharpGeneratorDriver.Create(
                 generators,
                 additionalTexts,

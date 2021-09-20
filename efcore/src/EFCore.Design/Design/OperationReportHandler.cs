@@ -33,7 +33,8 @@ namespace Microsoft.EntityFrameworkCore.Design
             Action<string>? warningHandler = null,
             Action<string>? informationHandler = null,
             Action<string>? verboseHandler = null
-        ) {
+        )
+        {
             _errorHandler = errorHandler;
             _warningHandler = warningHandler;
             _informationHandler = informationHandler;

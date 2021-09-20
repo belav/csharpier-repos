@@ -107,7 +107,8 @@ namespace AutoMapper.UnitTests
                 if (
                     context.TypeMap.SourceType == typeof(Source)
                     && context.TypeMap.DestinationTypeToUse == typeof(Destination)
-                ) {
+                )
+                {
                     _validated = true;
                 }
             }
@@ -143,7 +144,8 @@ namespace AutoMapper.UnitTests
                 if (
                     context.TypeMap.SourceType == typeof(Source)
                     && context.TypeMap.DestinationTypeToUse == typeof(Destination)
-                ) {
+                )
+                {
                     _validated = true;
                 }
             }
@@ -164,7 +166,8 @@ namespace AutoMapper.UnitTests
                     Source source,
                     Destination destination,
                     ResolutionContext context
-                ) {
+                )
+                {
                     return new Destination();
                 }
             }
@@ -191,7 +194,8 @@ namespace AutoMapper.UnitTests
                 if (
                     context.TypeMap.SourceType == typeof(Source)
                     && context.TypeMap.DestinationTypeToUse == typeof(Destination)
-                ) {
+                )
+                {
                     _validated = true;
                 }
             }
@@ -212,7 +216,8 @@ namespace AutoMapper.UnitTests
                     Source source,
                     Destination destination,
                     ResolutionContext context
-                ) {
+                )
+                {
                     return new Destination();
                 }
             }
@@ -240,7 +245,8 @@ namespace AutoMapper.UnitTests
                 if (
                     context.TypeMap.SourceType == typeof(Source)
                     && context.TypeMap.DestinationTypeToUse == typeof(Destination)
-                ) {
+                )
+                {
                     _validated = true;
                 }
             }

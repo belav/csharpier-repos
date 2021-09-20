@@ -20,7 +20,8 @@ namespace System.Configuration
             if (
                 encryptedNode.NodeType != XmlNodeType.Element
                 || encryptedNode.Name != "EncryptedData"
-            ) {
+            )
+            {
                 throw new ConfigurationErrorsException(SR.DPAPI_bad_data);
             }
 
@@ -140,7 +141,8 @@ namespace System.Configuration
             NameValueCollection configurationValues,
             string valueName,
             bool defaultValue
-        ) {
+        )
+        {
             string s = configurationValues[valueName];
             if (s == null)
                 return defaultValue;

@@ -48,7 +48,8 @@ namespace Microsoft.AspNetCore.Builder
         public static IApplicationBuilder UseDatabaseErrorPage(
             this IApplicationBuilder app,
             DatabaseErrorPageOptions options
-        ) {
+        )
+        {
             if (app == null)
             {
                 throw new ArgumentNullException(nameof(app));

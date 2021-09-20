@@ -279,7 +279,8 @@ namespace System
                     TryGetCachedCursorPosition(out int leftCurrent, out int topCurrent)
                     && left == leftCurrent
                     && top == topCurrent
-                ) {
+                )
+                {
                     return;
                 }
 
@@ -480,7 +481,8 @@ namespace System
             out int left,
             out int top,
             bool reinitializeForRead = false
-        ) {
+        )
+        {
             left = top = 0;
 
             // Getting the cursor position involves both writing out a request string and
@@ -572,7 +574,8 @@ namespace System
                         )
                         || !BufferUntil((byte)';', r, ref readBytes, ref readBytesPos, out semiPos)
                         || !BufferUntil((byte)'R', r, ref readBytes, ref readBytesPos, out rPos)
-                    ) {
+                    )
+                    {
                         // We were unable to read everything from stdin, e.g. a timeout occurred.
                         // Since we couldn't get the complete CPR, transfer any bytes we did read
                         // back to the StdInReader's extra buffer, treating it all as user input,
@@ -634,7 +637,8 @@ namespace System
                     ref Span<byte> dst,
                     ref int dstPos,
                     out int foundPos
-                ) {
+                )
+                {
                     // Loop until we find the target byte.
                     while (true)
                     {
@@ -672,7 +676,8 @@ namespace System
                     Span<byte> foundByteDst,
                     ref int foundByteDstPos,
                     out int foundPos
-                ) {
+                )
+                {
                     // Loop until we find the target byte.
                     while (true)
                     {
@@ -707,7 +712,8 @@ namespace System
                     StdInReader reader,
                     ReadOnlySpan<byte> source,
                     ref int result
-                ) {
+                )
+                {
                     int row = 0;
 
                     for (int i = startExclusive + 1; i < endExclusive; i++)
@@ -756,7 +762,8 @@ namespace System
             int sourceHeight,
             int targetLeft,
             int targetTop
-        ) {
+        )
+        {
             throw new PlatformNotSupportedException();
         }
 
@@ -770,7 +777,8 @@ namespace System
             char sourceChar,
             ConsoleColor sourceForeColor,
             ConsoleColor sourceBackColor
-        ) {
+        )
+        {
             throw new PlatformNotSupportedException();
         }
 
@@ -952,7 +960,8 @@ namespace System
             int endIndex,
             out ConsoleKeyInfo key,
             out int keyLength
-        ) {
+        )
+        {
             int unprocessedCharCount = endIndex - startIndex;
 
             // First process special control character codes.  These override anything from terminfo.
@@ -993,7 +1002,8 @@ namespace System
                             currentString,
                             out key
                         )
-                    ) {
+                    )
+                    {
                         keyLength = currentString.Length;
                         return true;
                     }
@@ -1323,7 +1333,8 @@ namespace System
                             ReadOnlyMemory<char>,
                             ConsoleKeyInfo
                         > entry in KeyFormatToConsoleKey
-                    ) {
+                    )
+                    {
                         if (entry.Key.Length > MaxKeyFormatLength)
                         {
                             MaxKeyFormatLength = entry.Key.Length;
@@ -1380,7 +1391,8 @@ namespace System
                 TermInfo.Database db,
                 TermInfo.WellKnownStrings keyId,
                 ConsoleKey key
-            ) {
+            )
+            {
                 AddKey(db, keyId, key, shift: false, alt: false, control: false);
             }
 
@@ -1391,7 +1403,8 @@ namespace System
                 bool shift,
                 bool alt,
                 bool control
-            ) {
+            )
+            {
                 ReadOnlyMemory<char> keyFormat = db.GetString(keyId).AsMemory();
                 if (!keyFormat.IsEmpty)
                     KeyFormatToConsoleKey[keyFormat] = new ConsoleKeyInfo(
@@ -1407,7 +1420,8 @@ namespace System
                 TermInfo.Database db,
                 string extendedNamePrefix,
                 ConsoleKey key
-            ) {
+            )
+            {
                 AddKey(db, extendedNamePrefix + "3", key, shift: false, alt: true, control: false);
                 AddKey(db, extendedNamePrefix + "4", key, shift: true, alt: true, control: false);
                 AddKey(db, extendedNamePrefix + "5", key, shift: false, alt: false, control: true);
@@ -1422,7 +1436,8 @@ namespace System
                 bool shift,
                 bool alt,
                 bool control
-            ) {
+            )
+            {
                 ReadOnlyMemory<char> keyFormat = db.GetExtendedString(extendedName).AsMemory();
                 if (!keyFormat.IsEmpty)
                     KeyFormatToConsoleKey[keyFormat] = new ConsoleKeyInfo(
@@ -1457,7 +1472,8 @@ namespace System
             SafeFileHandle fd,
             ReadOnlySpan<byte> buffer,
             bool mayChangeCursorPosition = true
-        ) {
+        )
+        {
             // Console initialization might emit data to stdout.
             // In order to avoid splitting user data we need to
             // complete it before any writes are performed.
@@ -1523,7 +1539,8 @@ namespace System
             byte* bufPtr,
             int count,
             int cursorVersion
-        ) {
+        )
+        {
             lock (Console.Out)
             {
                 int left,
@@ -1622,7 +1639,8 @@ namespace System
         internal static void WriteStdoutAnsiString(
             string? value,
             bool mayChangeCursorPosition = true
-        ) {
+        )
+        {
             if (string.IsNullOrEmpty(value))
                 return;
 

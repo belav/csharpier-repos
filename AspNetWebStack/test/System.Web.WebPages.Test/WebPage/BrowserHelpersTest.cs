@@ -386,7 +386,8 @@ namespace System.Web.WebPages.Test
         private static string GetOverriddenBrowserType(
             HttpContextBase context,
             Func<string, HttpBrowserCapabilitiesBase> factory
-        ) {
+        )
+        {
             return context.GetOverriddenBrowser(factory).Type;
         }
     }

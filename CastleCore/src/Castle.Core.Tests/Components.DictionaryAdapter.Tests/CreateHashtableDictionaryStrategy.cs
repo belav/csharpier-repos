@@ -31,7 +31,8 @@ namespace Castle.Components.DictionaryAdapter.Tests
             IDictionaryAdapter adapter,
             Type type,
             IDictionary dictionary
-        ) {
+        )
+        {
             dictionary = dictionary ?? new Hashtable();
             return adapter.This.Factory.GetAdapter(type, dictionary, adapter.This.Descriptor);
         }

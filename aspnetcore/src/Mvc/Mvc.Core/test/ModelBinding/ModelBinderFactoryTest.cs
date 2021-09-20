@@ -355,7 +355,8 @@ namespace Microsoft.AspNetCore.Mvc.ModelBinding
             BindingInfo parameterBindingInfo,
             BindingMetadata bindingMetadata,
             BindingInfo expectedInfo
-        ) {
+        )
+        {
             // Arrange
             var metadataProvider = new TestModelMetadataProvider();
             metadataProvider.ForType<Employee>()

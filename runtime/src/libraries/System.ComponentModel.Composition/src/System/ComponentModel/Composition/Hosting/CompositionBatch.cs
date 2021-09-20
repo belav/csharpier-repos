@@ -32,7 +32,8 @@ namespace System.ComponentModel.Composition.Hosting
         public CompositionBatch(
             IEnumerable<ComposablePart>? partsToAdd,
             IEnumerable<ComposablePart>? partsToRemove
-        ) {
+        )
+        {
             _partsToAdd = new List<ComposablePart>();
             if (partsToAdd != null)
             {

@@ -607,7 +607,8 @@ namespace System.ServiceModel.Syndication.Tests
             string value,
             string version,
             bool expected
-        ) {
+        )
+        {
             Assert.Equal(
                 expected,
                 Formatter.TryParseAttributeEntryPoint(
@@ -644,7 +645,8 @@ namespace System.ServiceModel.Syndication.Tests
             string value,
             string version,
             bool expected
-        ) {
+        )
+        {
             Assert.Equal(
                 expected,
                 Formatter.TryParseAttributeEntryPoint(
@@ -681,7 +683,8 @@ namespace System.ServiceModel.Syndication.Tests
             string value,
             string version,
             bool expected
-        ) {
+        )
+        {
             Assert.Equal(
                 expected,
                 Formatter.TryParseAttributeEntryPoint(
@@ -718,7 +721,8 @@ namespace System.ServiceModel.Syndication.Tests
             string value,
             string version,
             bool expected
-        ) {
+        )
+        {
             Assert.Equal(
                 expected,
                 Formatter.TryParseAttributeEntryPoint(
@@ -755,7 +759,8 @@ namespace System.ServiceModel.Syndication.Tests
             string value,
             string version,
             bool expected
-        ) {
+        )
+        {
             Assert.Equal(
                 expected,
                 Formatter.TryParseAttributeEntryPoint(
@@ -802,7 +807,8 @@ namespace System.ServiceModel.Syndication.Tests
             XmlReader reader,
             string contentType,
             string version
-        ) {
+        )
+        {
             Assert.False(
                 Formatter.TryParseContentEntryPoint(
                     reader,
@@ -1478,7 +1484,8 @@ namespace System.ServiceModel.Syndication.Tests
                 string value,
                 SyndicationCategory category,
                 string version
-            ) {
+            )
+            {
                 return TryParseAttribute(name, ns, value, category, version);
             }
 
@@ -1488,7 +1495,8 @@ namespace System.ServiceModel.Syndication.Tests
                 string value,
                 SyndicationItem item,
                 string version
-            ) {
+            )
+            {
                 return TryParseAttribute(name, ns, value, item, version);
             }
 
@@ -1498,7 +1506,8 @@ namespace System.ServiceModel.Syndication.Tests
                 string value,
                 SyndicationFeed feed,
                 string version
-            ) {
+            )
+            {
                 return TryParseAttribute(name, ns, value, feed, version);
             }
 
@@ -1508,7 +1517,8 @@ namespace System.ServiceModel.Syndication.Tests
                 string value,
                 SyndicationLink link,
                 string version
-            ) {
+            )
+            {
                 return TryParseAttribute(name, ns, value, link, version);
             }
 
@@ -1518,7 +1528,8 @@ namespace System.ServiceModel.Syndication.Tests
                 string value,
                 SyndicationPerson person,
                 string version
-            ) {
+            )
+            {
                 return TryParseAttribute(name, ns, value, person, version);
             }
 
@@ -1528,7 +1539,8 @@ namespace System.ServiceModel.Syndication.Tests
                 string contentType,
                 string version,
                 out SyndicationContent content
-            ) {
+            )
+            {
                 return TryParseContent(reader, item, contentType, version, out content);
             }
 
@@ -1536,7 +1548,8 @@ namespace System.ServiceModel.Syndication.Tests
                 XmlReader reader,
                 SyndicationCategory category,
                 string version
-            ) {
+            )
+            {
                 return TryParseElement(reader, category, version);
             }
 
@@ -1544,7 +1557,8 @@ namespace System.ServiceModel.Syndication.Tests
                 XmlReader reader,
                 SyndicationItem item,
                 string version
-            ) {
+            )
+            {
                 return TryParseElement(reader, item, version);
             }
 
@@ -1552,7 +1566,8 @@ namespace System.ServiceModel.Syndication.Tests
                 XmlReader reader,
                 SyndicationFeed feed,
                 string version
-            ) {
+            )
+            {
                 return TryParseElement(reader, feed, version);
             }
 
@@ -1560,7 +1575,8 @@ namespace System.ServiceModel.Syndication.Tests
                 XmlReader reader,
                 SyndicationLink link,
                 string version
-            ) {
+            )
+            {
                 return TryParseElement(reader, link, version);
             }
 
@@ -1568,7 +1584,8 @@ namespace System.ServiceModel.Syndication.Tests
                 XmlReader reader,
                 SyndicationPerson person,
                 string version
-            ) {
+            )
+            {
                 return TryParseElement(reader, person, version);
             }
 
@@ -1576,7 +1593,8 @@ namespace System.ServiceModel.Syndication.Tests
                 XmlWriter writer,
                 SyndicationCategory category,
                 string version
-            ) {
+            )
+            {
                 WriteAttributeExtensions(writer, category, version);
             }
 
@@ -1584,7 +1602,8 @@ namespace System.ServiceModel.Syndication.Tests
                 XmlWriter writer,
                 SyndicationItem item,
                 string version
-            ) {
+            )
+            {
                 WriteAttributeExtensions(writer, item, version);
             }
 
@@ -1592,7 +1611,8 @@ namespace System.ServiceModel.Syndication.Tests
                 XmlWriter writer,
                 SyndicationFeed feed,
                 string version
-            ) {
+            )
+            {
                 WriteAttributeExtensions(writer, feed, version);
             }
 
@@ -1600,7 +1620,8 @@ namespace System.ServiceModel.Syndication.Tests
                 XmlWriter writer,
                 SyndicationLink link,
                 string version
-            ) {
+            )
+            {
                 WriteAttributeExtensions(writer, link, version);
             }
 
@@ -1608,7 +1629,8 @@ namespace System.ServiceModel.Syndication.Tests
                 XmlWriter writer,
                 SyndicationPerson person,
                 string version
-            ) {
+            )
+            {
                 WriteAttributeExtensions(writer, person, version);
             }
 
@@ -1616,7 +1638,8 @@ namespace System.ServiceModel.Syndication.Tests
                 XmlWriter writer,
                 SyndicationCategory category,
                 string version
-            ) {
+            )
+            {
                 WriteElementExtensions(writer, category, version);
             }
 
@@ -1624,7 +1647,8 @@ namespace System.ServiceModel.Syndication.Tests
                 XmlWriter writer,
                 SyndicationFeed feed,
                 string version
-            ) {
+            )
+            {
                 WriteElementExtensions(writer, feed, version);
             }
 
@@ -1632,7 +1656,8 @@ namespace System.ServiceModel.Syndication.Tests
                 XmlWriter writer,
                 SyndicationItem item,
                 string version
-            ) {
+            )
+            {
                 WriteElementExtensions(writer, item, version);
             }
 
@@ -1640,7 +1665,8 @@ namespace System.ServiceModel.Syndication.Tests
                 XmlWriter writer,
                 SyndicationLink link,
                 string version
-            ) {
+            )
+            {
                 WriteElementExtensions(writer, link, version);
             }
 
@@ -1648,7 +1674,8 @@ namespace System.ServiceModel.Syndication.Tests
                 XmlWriter writer,
                 SyndicationPerson person,
                 string version
-            ) {
+            )
+            {
                 WriteElementExtensions(writer, person, version);
             }
 

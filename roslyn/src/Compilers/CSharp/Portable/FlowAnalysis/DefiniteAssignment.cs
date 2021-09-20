@@ -169,15 +169,17 @@ namespace Microsoft.CodeAnalysis.CSharp
             bool requireOutParamsAssigned = true,
             bool trackClassFields = false,
             bool trackStaticMembers = false
-        ) : base(
-            compilation,
-            member,
-            node,
-            strictAnalysis
-              ? EmptyStructTypeCache.CreatePrecise()
-              : EmptyStructTypeCache.CreateForDev12Compatibility(compilation),
-            trackUnassignments
-        ) {
+        )
+            : base(
+                compilation,
+                member,
+                node,
+                strictAnalysis
+                  ? EmptyStructTypeCache.CreatePrecise()
+                  : EmptyStructTypeCache.CreateForDev12Compatibility(compilation),
+                trackUnassignments
+            )
+        {
             this.initiallyAssignedVariables = null;
             _sourceAssembly =
                 ((object)member == null) ? null : (SourceAssemblySymbol)member.ContainingAssembly;
@@ -220,16 +222,18 @@ namespace Microsoft.CodeAnalysis.CSharp
             HashSet<Symbol> initiallyAssignedVariables,
             HashSet<PrefixUnaryExpressionSyntax> unassignedVariableAddressOfSyntaxes,
             bool trackUnassignments
-        ) : base(
-            compilation,
-            member,
-            node,
-            EmptyStructTypeCache.CreateNeverEmpty(),
-            firstInRegion,
-            lastInRegion,
-            trackRegions: true,
-            trackUnassignments: trackUnassignments
-        ) {
+        )
+            : base(
+                compilation,
+                member,
+                node,
+                EmptyStructTypeCache.CreateNeverEmpty(),
+                firstInRegion,
+                lastInRegion,
+                trackRegions: true,
+                trackUnassignments: trackUnassignments
+            )
+        {
             this.initiallyAssignedVariables = initiallyAssignedVariables;
             _sourceAssembly = null;
             this.CurrentSymbol = member;
@@ -372,7 +376,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                 CurrentSymbol is MethodSymbol currentMethod
                 && currentMethod.IsAsync
                 && !currentMethod.IsImplicitlyDeclared
-            ) {
+            )
+            {
                 var foundAwait = result.Any(pending => HasAwait(pending));
                 if (!foundAwait)
                 {
@@ -423,7 +428,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             ParameterSymbol parameter,
             SyntaxNode node,
             Location location
-        ) {
+        )
+        {
             if (!_requireOutParamsAssigned && ReferenceEquals(topLevelMethod, CurrentSymbol))
             {
                 return;
@@ -451,7 +457,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                             var field in _emptyStructTypeCache.GetStructInstanceFields(
                                 parameter.Type
                             )
-                        ) {
+                        )
+                        {
                             if (_emptyStructTypeCache.IsEmptyStructType(field.Type))
                                 continue;
 
@@ -497,7 +504,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             BoundNode node,
             DiagnosticBag diagnostics,
             bool requireOutParamsAssigned = true
-        ) {
+        )
+        {
             Debug.Assert(diagnostics != null);
 
             // Run the strongest version of analysis
@@ -518,7 +526,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             if (
                 compatDiagnostics.AsEnumerable()
                     .Any(d => (ErrorCode)d.Code == ErrorCode.ERR_InsufficientStack)
-            ) {
+            )
+            {
                 diagnostics.AddRangeAndFree(compatDiagnostics);
                 strictDiagnostics.Free();
                 return;
@@ -545,7 +554,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                 if (
                     diagnostic.Severity != DiagnosticSeverity.Error
                     || compatDiagnosticSet.Contains(diagnostic)
-                ) {
+                )
+                {
                     diagnostics.Add(diagnostic);
                     continue;
                 }
@@ -680,11 +690,13 @@ namespace Microsoft.CodeAnalysis.CSharp
         private void CheckCaptured(
             Symbol variable,
             ParameterSymbol rangeVariableUnderlyingParameter = null
-        ) {
+        )
+        {
             if (
                 CurrentSymbol is SourceMethodSymbol sourceMethod
                 && Symbol.IsCaptured(rangeVariableUnderlyingParameter ?? variable, sourceMethod)
-            ) {
+            )
+            {
                 NoteCaptured(variable);
             }
         }
@@ -725,7 +737,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                 {
                     ContainingSymbol: SynthesizedRecordConstructor
                 } parameter
-            ) {
+            )
+            {
                 _readParameters ??= PooledHashSet<ParameterSymbol>.GetInstance();
                 _readParameters.Add(parameter);
             }
@@ -733,7 +746,8 @@ namespace Microsoft.CodeAnalysis.CSharp
         protected virtual void NoteRead(
             Symbol variable,
             ParameterSymbol rangeVariableUnderlyingParameter = null
-        ) {
+        )
+        {
             var local = variable as LocalSymbol;
             if ((object)local != null)
             {
@@ -886,7 +900,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                 (object)type != null
                 && type.IsReferenceType
                 && type.SpecialType != SpecialType.System_String
-            ) {
+            )
+            {
                 return value.ConstantValue != ConstantValue.Null;
             }
 
@@ -914,7 +929,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                     if (
                         boundConversion.ConversionKind.IsUserDefinedConversion()
                         || boundConversion.ConversionKind == ConversionKind.IntPtr
-                    ) {
+                    )
+                    {
                         return true;
                     }
                     return WriteConsideredUse(null, boundConversion.Operand);
@@ -1047,7 +1063,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             BoundExpression expr,
             out BoundExpression receiver,
             out Symbol member
-        ) {
+        )
+        {
             receiver = null;
             member = null;
 
@@ -1156,7 +1173,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             SyntaxNode node,
             int slot,
             bool skipIfUseBeforeDeclaration = true
-        ) {
+        )
+        {
             // If the symbol is captured by the nearest
             // local function, record the read and skip the diagnostic
             if (IsCapturedInLocalFunction(slot))
@@ -1177,7 +1195,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             SyntaxNode node,
             int slot,
             bool skipIfUseBeforeDeclaration
-        ) {
+        )
+        {
             if (slot <= 0)
             {
                 return;
@@ -1211,7 +1230,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                     symbol.Locations.Length == 0
                     || node.Span.End < symbol.Locations.FirstOrNone().SourceSpan.Start
                 )
-            ) {
+            )
+            {
                 // We've already reported the use of a local before its declaration.  No need to emit
                 // another diagnostic for the same issue.
             }
@@ -1240,7 +1260,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                 else if (
                     symbol.Kind == SymbolKind.Parameter
                     && ((ParameterSymbol)symbol).RefKind == RefKind.Out
-                ) {
+                )
+                {
                     if (((ParameterSymbol)symbol).IsThis)
                     {
                         errorCode = ErrorCode.ERR_UseDefViolationThis;
@@ -1265,7 +1286,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             BoundExpression expr,
             FieldSymbol fieldSymbol,
             SyntaxNode node
-        ) {
+        )
+        {
             if (this.State.Reachable && !IsAssigned(expr, out int unassignedSlot))
             {
                 ReportUnassignedIfNotCapturedInLocalFunction(fieldSymbol, node, unassignedSlot);
@@ -1306,7 +1328,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                     if (
                         !MayRequireTracking(fieldAccess.ReceiverOpt, fieldAccess.FieldSymbol)
                         || IsAssigned(fieldAccess.ReceiverOpt, out unassignedSlot)
-                    ) {
+                    )
+                    {
                         return true;
                     }
 
@@ -1322,7 +1345,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                             eventAccess.ReceiverOpt,
                             eventAccess.EventSymbol.AssociatedField
                         ) || IsAssigned(eventAccess.ReceiverOpt, out unassignedSlot)
-                    ) {
+                    )
+                    {
                         return true;
                     }
 
@@ -1341,7 +1365,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                             propertyAccess,
                             this.CurrentSymbol
                         )
-                    ) {
+                    )
+                    {
                         var property = propertyAccess.PropertySymbol;
                         var backingField = (property as SourcePropertySymbolBase)?.BackingField;
                         if (backingField != null)
@@ -1349,7 +1374,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                             if (
                                 !MayRequireTracking(propertyAccess.ReceiverOpt, backingField)
                                 || IsAssigned(propertyAccess.ReceiverOpt, out unassignedSlot)
-                            ) {
+                            )
+                            {
                                 return true;
                             }
 
@@ -1429,7 +1455,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             BoundExpression value,
             bool isRef = false,
             bool read = true
-        ) {
+        )
+        {
             AssignImpl(node, value, written: true, isRef: isRef, read: read);
         }
 
@@ -1447,7 +1474,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             bool isRef,
             bool written,
             bool read
-        ) {
+        )
+        {
             Debug.Assert(!IsConditionalState);
 
             switch (node.Kind)
@@ -1737,7 +1765,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             ImmutableArray<ParameterSymbol> parameters,
             SyntaxNode syntax,
             Location location
-        ) {
+        )
+        {
             Debug.Assert(!this.IsConditionalState);
             if (!this.State.Reachable)
             {
@@ -1751,7 +1780,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             ParameterSymbol parameter,
             SyntaxNode syntax,
             Location location
-        ) {
+        )
+        {
             if (parameter.RefKind != RefKind.None)
             {
                 var slot = VariableSlot(parameter);
@@ -2084,7 +2114,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             if (
                 (localSymbol as SourceLocalSymbol)?.IsVar == true
                 && localSymbol.ForbiddenZone?.Contains(node.Syntax) == true
-            ) {
+            )
+            {
                 // Since we've already reported a use of the variable where not permitted, we
                 // suppress the diagnostic that the variable may not be assigned where used.
                 int slot = GetOrCreateSlot(node.LocalSymbol);
@@ -2107,7 +2138,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                     || currentMethod.MethodKind == MethodKind.LocalFunction
                 )
                 && _capturedVariables.Contains(localSymbol)
-            ) {
+            )
+            {
                 Diagnostics.Add(
                     ErrorCode.ERR_FixedLocalInLambda,
                     new SourceLocation(node.Syntax),
@@ -2222,7 +2254,8 @@ namespace Microsoft.CodeAnalysis.CSharp
 
         public override BoundNode VisitDeconstructionAssignmentOperator(
             BoundDeconstructionAssignmentOperator node
-        ) {
+        )
+        {
             base.VisitDeconstructionAssignmentOperator(node);
             Assign(node.Left, node.Right);
             return null;
@@ -2237,7 +2270,8 @@ namespace Microsoft.CodeAnalysis.CSharp
 
         public override BoundNode VisitCompoundAssignmentOperator(
             BoundCompoundAssignmentOperator node
-        ) {
+        )
+        {
             VisitCompoundAssignmentTarget(node);
             VisitRvalue(node.Right);
             AfterRightHasBeenVisited(node);
@@ -2247,7 +2281,8 @@ namespace Microsoft.CodeAnalysis.CSharp
 
         public override BoundNode VisitFixedLocalCollectionInitializer(
             BoundFixedLocalCollectionInitializer node
-        ) {
+        )
+        {
             var initializer = node.Expression;
 
             if (initializer.Kind == BoundKind.AddressOfOperator)
@@ -2281,7 +2316,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                     _unassignedVariableAddressOfSyntaxes?.Contains(
                         node.Syntax as PrefixUnaryExpressionSyntax
                     ) == false
-                ) {
+                )
+                {
                     shouldReadOperand = true;
                 }
 
@@ -2301,7 +2337,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             BoundExpression arg,
             RefKind refKind,
             MethodSymbol method
-        ) {
+        )
+        {
             if (refKind == RefKind.Ref)
             {
                 // Though the method might write the argument, in the case of ref arguments it might not,
@@ -2320,7 +2357,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                 refKind != RefKind.None
                 && ((object)method == null || method.IsExtern)
                 && arg.Type is TypeSymbol type
-            ) {
+            )
+            {
                 MarkFieldsUsed(type);
             }
         }
@@ -2353,7 +2391,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                     if (
                         (object)associatedField != null
                         && MayRequireTracking(@event.ReceiverOpt, associatedField)
-                    ) {
+                    )
+                    {
                         CheckAssigned(@event, associatedField, node);
                     }
                     break;
@@ -2415,7 +2454,8 @@ namespace Microsoft.CodeAnalysis.CSharp
         protected override void VisitCatchBlock(
             BoundCatchBlock catchBlock,
             ref LocalState finallyState
-        ) {
+        )
+        {
             DeclareVariables(catchBlock.Locals);
 
             var exceptionSource = catchBlock.ExceptionSourceOpt;
@@ -2444,7 +2484,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                 node.FieldSymbol.IsFixedSizeBuffer
                 && node.Syntax != null
                 && !SyntaxFacts.IsFixedStatementExpression(node.Syntax)
-            ) {
+            )
+            {
                 Symbol receiver = UseNonFieldSymbolUnsafely(node.ReceiverOpt);
                 if ((object)receiver != null)
                 {
@@ -2531,7 +2572,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                 (object)_sourceAssembly != null
                 && node.MemberSymbol != null
                 && node.MemberSymbol.Kind == SymbolKind.Field
-            ) {
+            )
+            {
                 _sourceAssembly.NoteFieldAccess(
                     (FieldSymbol)node.MemberSymbol.OriginalDefinition,
                     read: false,
@@ -2544,21 +2586,24 @@ namespace Microsoft.CodeAnalysis.CSharp
 
         public override BoundNode VisitDynamicObjectInitializerMember(
             BoundDynamicObjectInitializerMember node
-        ) {
+        )
+        {
             return null;
         }
 
         protected override void VisitAssignmentOfNullCoalescingAssignment(
             BoundNullCoalescingAssignmentOperator node,
             BoundPropertyAccess propertyAccessOpt
-        ) {
+        )
+        {
             base.VisitAssignmentOfNullCoalescingAssignment(node, propertyAccessOpt);
             Assign(node.LeftOperand, node.RightOperand);
         }
 
         protected override void AdjustStateForNullCoalescingAssignmentNonNullCase(
             BoundNullCoalescingAssignmentOperator node
-        ) {
+        )
+        {
             // For the purposes of definite assignment in try/finally, we need to treat the left as having been assigned
             // in the left-side state. If LeftOperand was not definitely assigned before this call, we will have already
             // reported an error for use before assignment.

@@ -70,7 +70,8 @@ namespace System.Reflection.PortableExecutable
             int strongNameSignatureSize,
             int debugDataSize,
             int mappedFieldDataSize
-        ) {
+        )
+        {
             MetadataSize = metadataSize;
             ResourceDataSize = resourceDataSize;
             ILStreamSize = ilStreamSize;
@@ -255,7 +256,8 @@ namespace System.Reflection.PortableExecutable
             BlobBuilder? resourceBuilderOpt,
             BlobBuilder? debugDataBuilderOpt,
             out Blob strongNameSignature
-        ) {
+        )
+        {
             Debug.Assert(builder.Count == 0);
             Debug.Assert(metadataBuilder.Count == MetadataSize);
             Debug.Assert(metadataBuilder.Count % 4 == 0);
@@ -350,7 +352,8 @@ namespace System.Reflection.PortableExecutable
             BlobBuilder builder,
             int importTableRva,
             int importAddressTableRva
-        ) {
+        )
+        {
             int start = builder.Count;
 
             int ilRVA = importTableRva + 40;
@@ -409,7 +412,8 @@ namespace System.Reflection.PortableExecutable
             int textSectionRva,
             int entryPointTokenOrRva,
             CorFlags corFlags
-        ) {
+        )
+        {
             const ushort majorRuntimeVersion = 2;
             const ushort minorRuntimeVersion = 5;
 
@@ -468,7 +472,8 @@ namespace System.Reflection.PortableExecutable
             BlobBuilder sectionBuilder,
             int importAddressTableRva,
             ulong baseAddress
-        ) {
+        )
+        {
             // entry point code, consisting of a jump indirect to _CorXXXMain
             if (Is32Bit)
             {

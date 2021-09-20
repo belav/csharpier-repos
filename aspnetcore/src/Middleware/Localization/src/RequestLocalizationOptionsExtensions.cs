@@ -21,7 +21,8 @@ namespace Microsoft.AspNetCore.Builder
         public static RequestLocalizationOptions AddInitialRequestCultureProvider(
             this RequestLocalizationOptions requestLocalizationOptions,
             RequestCultureProvider requestCultureProvider
-        ) {
+        )
+        {
             if (requestLocalizationOptions == null)
             {
                 throw new ArgumentNullException(nameof(requestLocalizationOptions));

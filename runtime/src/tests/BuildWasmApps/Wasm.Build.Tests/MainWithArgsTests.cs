@@ -140,7 +140,8 @@ namespace Wasm.Build.Tests
             RunHost host,
             string id,
             bool? dotnetWasmFromRuntimePack = null
-        ) {
+        )
+        {
             string projectName = $"{projectNamePrefix}_{buildArgs.Config}_{buildArgs.AOT}";
             string code =
                 @"

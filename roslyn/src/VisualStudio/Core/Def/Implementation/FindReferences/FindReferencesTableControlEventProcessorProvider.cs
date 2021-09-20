@@ -34,7 +34,8 @@ namespace Microsoft.VisualStudio.LanguageServices.FindUsages
 
         public ITableControlEventProcessor GetAssociatedEventProcessor(
             IWpfTableControl tableControl
-        ) {
+        )
+        {
             return new TableControlEventProcessor();
         }
 
@@ -43,7 +44,8 @@ namespace Microsoft.VisualStudio.LanguageServices.FindUsages
             public override void PreprocessNavigate(
                 ITableEntryHandle entry,
                 TableEntryNavigateEventArgs e
-            ) {
+            )
+            {
                 if (entry.Identity is ISupportsNavigation supportsNavigation)
                 {
                     // TODO: Use a threaded-wait-dialog here so we can cancel navigation.
@@ -57,7 +59,8 @@ namespace Microsoft.VisualStudio.LanguageServices.FindUsages
                 if (
                     entry.TryGetValue(StreamingFindUsagesPresenter.SelfKeyName, out var item)
                     && item is ISupportsNavigation itemSupportsNavigation
-                ) {
+                )
+                {
                     // TODO: Use a threaded-wait-dialog here so we can cancel navigation.
                     if (itemSupportsNavigation.TryNavigateTo(e.IsPreview, CancellationToken.None))
                     {

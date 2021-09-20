@@ -160,7 +160,8 @@ namespace System.Collections.Generic
                 if (
                     !(comparer.Compare(item, min) < 0 || comparer.Compare(item, max) > 0)
                     && Contains(item)
-                ) {
+                )
+                {
                     Remove(item);
                 }
             }
@@ -653,7 +654,8 @@ namespace System.Collections.Generic
             ref Node parent,
             Node grandParent,
             Node greatGrandParent
-        ) {
+        )
+        {
             Debug.Assert(parent != null);
             Debug.Assert(grandParent != null);
 
@@ -711,7 +713,8 @@ namespace System.Collections.Generic
             Node parentOfMatch,
             Node successor,
             Node parentOfSuccessor
-        ) {
+        )
+        {
             Debug.Assert(match != null);
 
             if (successor == match)
@@ -840,7 +843,8 @@ namespace System.Collections.Generic
         /// </summary>
         public static IEqualityComparer<SortedSet<T>> CreateSetComparer(
             IEqualityComparer<T>? memberEqualityComparer
-        ) {
+        )
+        {
             return new SortedSetEqualityComparer<T>(memberEqualityComparer);
         }
 
@@ -855,7 +859,8 @@ namespace System.Collections.Generic
             SortedSet<T>? set1,
             SortedSet<T>? set2,
             IComparer<T> comparer
-        ) {
+        )
+        {
             if (set1 == null)
             {
                 return set2 == null;
@@ -936,7 +941,8 @@ namespace System.Collections.Generic
                 && treeSubset == null
                 && HasEqualComparer(asSorted)
                 && (asSorted.Count > this.Count / 2)
-            ) {
+            )
+            {
                 // First do a merge sort to an array.
                 T[] merged = new T[asSorted.Count + this.Count];
                 int c = 0;
@@ -994,7 +1000,8 @@ namespace System.Collections.Generic
             int startIndex,
             int endIndex,
             Node? redNode
-        ) {
+        )
+        {
             // You're given a sorted array... say 1 2 3 4 5 6
             // There are 2 cases:
             // -  If there are odd # of elements, pick the middle element (in this case 4), and compute
@@ -1174,7 +1181,8 @@ namespace System.Collections.Generic
                 if (
                     comparer.Compare(asSorted.Max, Min) >= 0
                     && comparer.Compare(asSorted.Min, Max) <= 0
-                ) {
+                )
+                {
                     T? min = Min;
                     T? max = Max;
                     foreach (T item in other)
@@ -1445,7 +1453,8 @@ namespace System.Collections.Generic
                     comparer.Compare(Min, asSorted.Max) > 0
                     || comparer.Compare(Max, asSorted.Min) < 0
                 )
-            ) {
+            )
+            {
                 return false;
             }
 
@@ -1486,7 +1495,8 @@ namespace System.Collections.Generic
         private unsafe ElementCount CheckUniqueAndUnfoundElements(
             IEnumerable<T> other,
             bool returnIfUnfound
-        ) {
+        )
+        {
             ElementCount result;
 
             // need special case in case this has no elements.

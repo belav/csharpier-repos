@@ -72,7 +72,8 @@ namespace Microsoft.EntityFrameworkCore.Storage
             IExecutionStrategyFactory executionStrategyFactory,
             ICurrentDbContext currentContext,
             IRelationalCommandDiagnosticsLogger commandLogger
-        ) {
+        )
+        {
             Check.NotNull(model, nameof(model));
             Check.NotNull(connection, nameof(connection));
             Check.NotNull(modelDiffer, nameof(modelDiffer));

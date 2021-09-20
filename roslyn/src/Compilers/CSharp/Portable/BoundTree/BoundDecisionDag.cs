@@ -98,7 +98,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                 Func<BoundDecisionDagNode, BoundDecisionDagNode>,
                 BoundDecisionDagNode
             > makeReplacement
-        ) {
+        )
+        {
             // First, we topologically sort the nodes of the dag so that we can translate the nodes bottom-up.
             // This will avoid overflowing the compiler's runtime stack which would occur for a large switch
             // statement if we were using a recursive strategy.
@@ -135,7 +136,8 @@ namespace Microsoft.CodeAnalysis.CSharp
         public static BoundDecisionDagNode TrivialReplacement(
             BoundDecisionDagNode dag,
             Func<BoundDecisionDagNode, BoundDecisionDagNode> replacement
-        ) {
+        )
+        {
             switch (dag)
             {
                 case BoundEvaluationDecisionDagNode p:
@@ -176,7 +178,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                 BoundDecisionDagNode makeReplacement(
                     BoundDecisionDagNode dag,
                     Func<BoundDecisionDagNode, BoundDecisionDagNode> replacement
-                ) {
+                )
+                {
                     if (dag is BoundTestDecisionDagNode p)
                     {
                         // This is the key to the optimization. The result of a top-level test might be known if the input is constant.

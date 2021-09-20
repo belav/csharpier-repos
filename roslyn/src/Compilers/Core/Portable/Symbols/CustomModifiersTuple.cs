@@ -18,7 +18,8 @@ namespace Microsoft.CodeAnalysis
         private CustomModifiersTuple(
             ImmutableArray<CustomModifier> typeCustomModifiers,
             ImmutableArray<CustomModifier> refCustomModifiers
-        ) {
+        )
+        {
             _typeCustomModifiers = typeCustomModifiers.NullToEmpty();
             _refCustomModifiers = refCustomModifiers.NullToEmpty();
         }
@@ -26,7 +27,8 @@ namespace Microsoft.CodeAnalysis
         public static CustomModifiersTuple Create(
             ImmutableArray<CustomModifier> typeCustomModifiers,
             ImmutableArray<CustomModifier> refCustomModifiers
-        ) {
+        )
+        {
             if (typeCustomModifiers.IsDefaultOrEmpty && refCustomModifiers.IsDefaultOrEmpty)
             {
                 return Empty;

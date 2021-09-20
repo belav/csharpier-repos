@@ -68,7 +68,8 @@ namespace System.Data
             ListChangedType changedType,
             DataRow? row,
             bool trackAddRemove
-        ) {
+        )
+        {
             DataView? dv = (DataView?)_dvWeak.Target;
             if (dv != null)
             {

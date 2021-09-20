@@ -52,7 +52,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                         && binaryOperator.OperatorKind == BinaryOperatorKind.DynamicLogicalOr
                     || node.OperatorKind == UnaryOperatorKind.DynamicFalse
                         && binaryOperator.OperatorKind == BinaryOperatorKind.DynamicLogicalAnd
-                ) {
+                )
+                {
                     return VisitBinaryOperator(binaryOperator, applyParentUnaryOperator: node);
                 }
             }
@@ -74,7 +75,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             MethodSymbol? method,
             BoundExpression loweredOperand,
             TypeSymbol type
-        ) {
+        )
+        {
             return MakeUnaryOperator(null, kind, syntax, method, loweredOperand, type);
         }
 
@@ -85,7 +87,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             MethodSymbol? method,
             BoundExpression loweredOperand,
             TypeSymbol type
-        ) {
+        )
+        {
             if (kind.IsDynamic())
             {
                 Debug.Assert(
@@ -135,7 +138,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                     !_inExpressionLambda
                     || kind == UnaryOperatorKind.UserDefinedTrue
                     || kind == UnaryOperatorKind.UserDefinedFalse
-                ) {
+                )
+                {
                     return BoundCall.Synthesized(syntax, receiverOpt: null, method, loweredOperand);
                 }
             }
@@ -224,7 +228,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             MethodSymbol? method,
             BoundExpression loweredOperand,
             TypeSymbol type
-        ) {
+        )
+        {
             // First, an optimization. If we know that the operand is always null then
             // we can simply lower to the alternative.
 
@@ -309,7 +314,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             MethodSymbol? method,
             BoundExpression loweredOperand,
             TypeSymbol type
-        ) {
+        )
+        {
             if (NullableNeverHasValue(loweredOperand))
             {
                 return new BoundDefaultExpression(syntax, type);
@@ -427,7 +433,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                     if (
                         NullableAlwaysHasValue(conditional.Consequence) != null
                         && NullableNeverHasValue(conditional.Alternative)
-                    ) {
+                    )
+                    {
                         return new BoundSequence(
                             syntax,
                             seq.Locals,
@@ -468,7 +475,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             MethodSymbol? method,
             TypeSymbol type,
             BoundExpression nonNullOperand
-        ) {
+        )
+        {
             MethodSymbol ctor = UnsafeGetNullableMethod(
                 syntax,
                 type,
@@ -665,7 +673,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             TypeSymbol operandType,
             BoundExpression boundTemp,
             BoundExpression newValue
-        ) {
+        )
+        {
             // prefix:  temp = (X)(T.Increment((T)operand)));  operand = temp;
             // postfix: temp = operand;                        operand = (X)(T.Increment((T)temp)));
             ImmutableArray<BoundExpression> assignments = ImmutableArray.Create<BoundExpression>(
@@ -710,7 +719,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             TypeSymbol operandType,
             BoundExpression boundTemp,
             BoundExpression newValue
-        ) {
+        )
+        {
             var tempValue = isPrefix ? newValue : MakeRValue(operand);
             Debug.Assert(tempValue.Type is { });
             var tempAssignment = MakeAssignmentOperator(
@@ -759,7 +769,8 @@ namespace Microsoft.CodeAnalysis.CSharp
         private BoundExpression MakeIncrementOperator(
             BoundIncrementOperator node,
             BoundExpression rewrittenValueToIncrement
-        ) {
+        )
+        {
             if (node.OperatorKind.IsDynamic())
             {
                 return _dynamicFactory.MakeDynamicUnaryOperator(
@@ -800,7 +811,8 @@ namespace Microsoft.CodeAnalysis.CSharp
         private BoundExpression MakeUserDefinedIncrementOperator(
             BoundIncrementOperator node,
             BoundExpression rewrittenValueToIncrement
-        ) {
+        )
+        {
             Debug.Assert(node.MethodOpt is { });
             Debug.Assert(node.MethodOpt.ParameterCount == 1);
 
@@ -924,7 +936,8 @@ namespace Microsoft.CodeAnalysis.CSharp
         private BoundExpression MakeBuiltInIncrementOperator(
             BoundIncrementOperator node,
             BoundExpression rewrittenValueToIncrement
-        ) {
+        )
+        {
             BoundExpression result;
             // If we have a built-in increment or decrement then things get a bit trickier. Suppose for example we have
             // a user-defined conversion from X to short and from short to X, but no user-defined increment operator on
@@ -1028,7 +1041,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                 unaryOperandType.IsNullableType()
                 && unaryOperandType.GetNullableUnderlyingType().SpecialType
                     == SpecialType.System_Decimal
-            ) {
+            )
+            {
                 binOp = MakeLiftedDecimalIncDecOperator(
                     node.Syntax,
                     binaryOperatorKind,
@@ -1079,7 +1093,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             SyntaxNode syntax,
             BinaryOperatorKind oper,
             BoundExpression operand
-        ) {
+        )
+        {
             Debug.Assert(operand.Type is { SpecialType: SpecialType.System_Decimal });
             MethodSymbol method = GetDecimalIncDecOperator(oper);
             return BoundCall.Synthesized(syntax, receiverOpt: null, method, operand);
@@ -1089,7 +1104,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             SyntaxNode syntax,
             BinaryOperatorKind oper,
             BoundExpression operand
-        ) {
+        )
+        {
             Debug.Assert(
                 operand.Type is { }
                     && operand.Type.IsNullableType()
@@ -1281,7 +1297,8 @@ namespace Microsoft.CodeAnalysis.CSharp
 
         private static BinaryOperatorKind GetCorrespondingBinaryOperator(
             BoundIncrementOperator node
-        ) {
+        )
+        {
             // We need to create expressions that have the semantics of incrementing or decrementing:
             // sbyte, byte, short, ushort, int, uint, long, ulong, char, float, double, decimal and
             // any enum.  However, the binary addition operators we have at our disposal are just
@@ -1398,7 +1415,8 @@ namespace Microsoft.CodeAnalysis.CSharp
         private static (TypeSymbol, ConstantValue) GetConstantOneForIncrement(
             CSharpCompilation compilation,
             BinaryOperatorKind binaryOperatorKind
-        ) {
+        )
+        {
             ConstantValue constantOne;
             switch (binaryOperatorKind.OperandTypes())
             {

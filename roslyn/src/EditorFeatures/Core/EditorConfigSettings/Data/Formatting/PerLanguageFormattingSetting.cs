@@ -34,7 +34,8 @@ namespace Microsoft.CodeAnalysis.Editor.EditorConfigSettings.Data
                 if (
                     _editorConfigOptions.TryGetEditorConfigOption(_option, out T? value)
                     && value is not null
-                ) {
+                )
+                {
                     return value;
                 }
 

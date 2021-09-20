@@ -36,7 +36,8 @@ namespace System.CommandLine.Tests
             [InlineData("outer inner xyz")]
             public void When_an_argument_is_shared_between_an_outer_and_inner_command_then_specifying_in_one_does_not_result_in_error_on_other(
                 string commandLine
-            ) {
+            )
+            {
                 var argument = new Argument<string> { Name = "the-argument" };
 
                 var command = new Command("outer") { new Command("inner") { argument }, argument };
@@ -69,7 +70,8 @@ namespace System.CommandLine.Tests
             [InlineData("outer inner --the-option xyz")]
             public void When_an_option_is_shared_between_an_outer_and_inner_command_then_specifying_in_one_does_not_result_in_error_on_other(
                 string commandLine
-            ) {
+            )
+            {
                 var option = new Option<string>("--the-option");
 
                 var command = new Command("outer") { new Command("inner") { option }, option };
@@ -85,7 +87,8 @@ namespace System.CommandLine.Tests
             public void A_command_can_be_specified_in_more_than_one_position(
                 string commandLine,
                 string expectedParent
-            ) {
+            )
+            {
                 var reusedCommand = new Command("reused")
                 {
                     Handler = CommandHandler.Create(() => { })

@@ -13,7 +13,8 @@ namespace System.Linq
             Func<TOuter, TKey> outerKeySelector,
             Func<TInner, TKey> innerKeySelector,
             Func<TOuter, IEnumerable<TInner>, TResult> resultSelector
-        ) {
+        )
+        {
             if (outer == null)
             {
                 ThrowHelper.ThrowArgumentNullException(ExceptionArgument.outer);
@@ -56,7 +57,8 @@ namespace System.Linq
             Func<TInner, TKey> innerKeySelector,
             Func<TOuter, IEnumerable<TInner>, TResult> resultSelector,
             IEqualityComparer<TKey>? comparer
-        ) {
+        )
+        {
             if (outer == null)
             {
                 ThrowHelper.ThrowArgumentNullException(ExceptionArgument.outer);
@@ -99,7 +101,8 @@ namespace System.Linq
             Func<TInner, TKey> innerKeySelector,
             Func<TOuter, IEnumerable<TInner>, TResult> resultSelector,
             IEqualityComparer<TKey>? comparer
-        ) {
+        )
+        {
             using (IEnumerator<TOuter> e = outer.GetEnumerator())
             {
                 if (e.MoveNext())

@@ -66,7 +66,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ImplementAbstractClass
             int index = 0,
             OptionsCollection options = null,
             ParseOptions parseOptions = null
-        ) {
+        )
+        {
             options = options ?? new OptionsCollection(GetLanguage());
             options.AddRange(AllOptionsOff);
 

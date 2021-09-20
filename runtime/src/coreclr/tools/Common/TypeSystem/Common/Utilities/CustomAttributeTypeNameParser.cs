@@ -26,7 +26,8 @@ namespace Internal.TypeSystem
             string name,
             bool throwIfNotFound = true,
             Func<string, ModuleDesc, bool, MetadataType> resolver = null
-        ) {
+        )
+        {
             TypeDesc loadedType;
 
             StringBuilder genericTypeDefName = new StringBuilder(name.Length);
@@ -97,7 +98,8 @@ namespace Internal.TypeSystem
                 && (ch + 1) < nameEnd
                 && (ch + 1).Current != ']'
                 && (ch + 1).Current != ','
-            ) {
+            )
+            {
                 ch++; // truncate the '['
                 var genericInstantiationEnd = ch + ReadTypeArgument(ch, nameEnd, true); // find the end of the instantiation list
                 while (ch < genericInstantiationEnd)
@@ -214,7 +216,8 @@ namespace Internal.TypeSystem
             string name,
             ModuleDesc module,
             bool throwIfNotFound
-        ) {
+        )
+        {
             MetadataType containingType = null;
             StringBuilder typeName = new StringBuilder(name.Length);
             bool escaped = false;
@@ -289,7 +292,8 @@ namespace Internal.TypeSystem
             this ModuleDesc module,
             string fullName,
             bool throwIfNotFound = true
-        ) {
+        )
+        {
             string namespaceName;
             string typeName;
             int split = fullName.LastIndexOf('.');
@@ -359,7 +363,8 @@ namespace Internal.TypeSystem
             StringIterator strBegin,
             StringIterator strEnd,
             bool ignoreComma
-        ) {
+        )
+        {
             int level = 0;
             int length = 0;
             for (var c = strBegin; c < strEnd; c++)

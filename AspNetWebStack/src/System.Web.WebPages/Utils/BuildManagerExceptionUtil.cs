@@ -26,7 +26,8 @@ namespace System.Web.WebPages
                     && site.Name == "GetBuildProviderTypeFromExtension"
                     && site.DeclaringType != null
                     && site.DeclaringType.Name == "CompilationUtil"
-                ) {
+                )
+                {
                     return true;
                 }
                 exception = exception.InnerException;

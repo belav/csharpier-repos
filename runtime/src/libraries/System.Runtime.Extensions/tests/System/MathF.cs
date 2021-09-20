@@ -1508,7 +1508,8 @@ namespace System.Tests
             float value,
             float expectedResult,
             float allowedVariance
-        ) {
+        )
+        {
             AssertEqual(expectedResult, MathF.ReciprocalEstimate(value), allowedVariance);
         }
 
@@ -1550,7 +1551,8 @@ namespace System.Tests
             float value,
             float expectedResult,
             float allowedVariance
-        ) {
+        )
+        {
             AssertEqual(expectedResult, MathF.ReciprocalSqrtEstimate(value), allowedVariance);
         }
 
@@ -2067,7 +2069,8 @@ namespace System.Tests
             float expectedResultCos,
             float allowedVarianceSin,
             float allowedVarianceCos
-        ) {
+        )
+        {
             (float resultSin, float resultCos) = MathF.SinCos(value);
             AssertEqual(expectedResultSin, resultSin, allowedVarianceSin);
             AssertEqual(expectedResultCos, resultCos, allowedVarianceCos);

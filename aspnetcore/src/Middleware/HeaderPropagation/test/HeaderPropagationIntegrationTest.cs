@@ -224,7 +224,8 @@ namespace Microsoft.AspNetCore.HeaderPropagation.Tests
             Action<HeaderPropagationOptions> configure,
             HttpMessageHandler primaryHandler,
             Action<HeaderPropagationMessageHandlerOptions> configureClient = null
-        ) {
+        )
+        {
             var host = new HostBuilder().ConfigureWebHost(
                     webHostBuilder =>
                     {
@@ -277,7 +278,8 @@ namespace Microsoft.AspNetCore.HeaderPropagation.Tests
             protected override Task<HttpResponseMessage> SendAsync(
                 HttpRequestMessage request,
                 CancellationToken cancellationToken
-            ) {
+            )
+            {
                 Headers = request.Headers;
                 return Task.FromResult(new HttpResponseMessage());
             }

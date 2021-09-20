@@ -75,7 +75,8 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking
             LambdaExpression equalsExpression,
             LambdaExpression hashCodeExpression,
             LambdaExpression snapshotExpression
-        ) {
+        )
+        {
             Check.NotNull(equalsExpression, nameof(equalsExpression));
             Check.NotNull(hashCodeExpression, nameof(hashCodeExpression));
             Check.NotNull(snapshotExpression, nameof(snapshotExpression));
@@ -153,7 +154,8 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking
         public virtual Expression ExtractEqualsBody(
             Expression leftExpression,
             Expression rightExpression
-        ) {
+        )
+        {
             Check.NotNull(leftExpression, nameof(leftExpression));
             Check.NotNull(rightExpression, nameof(rightExpression));
 
@@ -254,11 +256,12 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking
             public DefaultValueComparer(
                 Expression<Func<T?, T?, bool>> equalsExpression,
                 bool favorStructuralComparisons
-            ) : base(
-                equalsExpression,
-                CreateDefaultHashCodeExpression(favorStructuralComparisons),
-                CreateDefaultSnapshotExpression(favorStructuralComparisons)
-            ) { }
+            )
+                : base(
+                    equalsExpression,
+                    CreateDefaultHashCodeExpression(favorStructuralComparisons),
+                    CreateDefaultSnapshotExpression(favorStructuralComparisons)
+                ) { }
 
             public override Expression ExtractEqualsBody(
                 Expression leftExpression,

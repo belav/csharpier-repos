@@ -75,7 +75,8 @@ namespace Microsoft.CodeAnalysis.CodeFixes.GenerateMember
             SyntaxNode root,
             TextSpan span,
             Diagnostic diagnostic
-        ) {
+        )
+        {
             var token = root.FindToken(span.Start);
             if (token.Span.IntersectsWith(span))
             {
@@ -92,7 +93,8 @@ namespace Microsoft.CodeAnalysis.CodeFixes.GenerateMember
                     if (
                         syntaxFacts.IsAnonymousOrLocalFunction(ancestor)
                         && ancestor.SpanStart < token.SpanStart
-                    ) {
+                    )
+                    {
                         break;
                     }
 

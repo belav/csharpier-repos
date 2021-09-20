@@ -16,7 +16,8 @@ namespace Microsoft.AspNetCore.ConcurrencyLimiter.Tests
             IQueuePolicy queue = null,
             RequestDelegate onRejected = null,
             RequestDelegate next = null
-        ) {
+        )
+        {
             var options = Options.Create(
                 new ConcurrencyLimiterOptions
                 {
@@ -37,7 +38,8 @@ namespace Microsoft.AspNetCore.ConcurrencyLimiter.Tests
             int requestQueueLimit,
             RequestDelegate onRejected = null,
             RequestDelegate next = null
-        ) {
+        )
+        {
             return CreateTestMiddleware(
                 queue: CreateQueuePolicy(maxConcurrentRequests, requestQueueLimit),
                 onRejected: onRejected,
@@ -50,7 +52,8 @@ namespace Microsoft.AspNetCore.ConcurrencyLimiter.Tests
             int requestQueueLimit,
             RequestDelegate onRejected = null,
             RequestDelegate next = null
-        ) {
+        )
+        {
             return CreateTestMiddleware(
                 queue: CreateStackPolicy(maxConcurrentRequests, requestQueueLimit),
                 onRejected: onRejected,
@@ -61,7 +64,8 @@ namespace Microsoft.AspNetCore.ConcurrencyLimiter.Tests
         internal static StackPolicy CreateStackPolicy(
             int maxConcurrentRequests,
             int requestsQueuelimit = 100
-        ) {
+        )
+        {
             var options = Options.Create(
                 new QueuePolicyOptions
                 {
@@ -76,7 +80,8 @@ namespace Microsoft.AspNetCore.ConcurrencyLimiter.Tests
         internal static QueuePolicy CreateQueuePolicy(
             int maxConcurrentRequests,
             int requestQueueLimit = 100
-        ) {
+        )
+        {
             var options = Options.Create(
                 new QueuePolicyOptions
                 {

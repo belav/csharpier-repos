@@ -152,7 +152,8 @@ namespace System.Diagnostics.Tests
                                     if (
                                         logLink.DisplayName != null
                                         && logLink.DisplayName.Equals("System")
-                                    ) {
+                                    )
+                                    {
                                         Assert.Equal("System", logLink.LogName);
                                         Assert.True(logLink.IsImported);
                                     }
@@ -166,7 +167,8 @@ namespace System.Diagnostics.Tests
                                         if (
                                             eventLevel.Name.StartsWith(Prefix)
                                             && !eventLevel.Name.Contains("ReservedLevel")
-                                        ) {
+                                        )
+                                        {
                                             Assert.True(
                                                 System.Enum.IsDefined(
                                                     typeof(StandardEventLevel),
@@ -187,7 +189,8 @@ namespace System.Diagnostics.Tests
                                         opcode.Name != null
                                         && opcode.DisplayName != null
                                         && opcode.DisplayName.ToLower().Equals("apprun")
-                                    ) {
+                                    )
+                                    {
                                         Assert.Contains(
                                             opcode.DisplayName.ToLower(),
                                             opcode.Name.ToLower()

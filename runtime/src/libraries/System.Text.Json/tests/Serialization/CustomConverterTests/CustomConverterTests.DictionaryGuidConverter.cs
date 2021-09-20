@@ -63,7 +63,8 @@ namespace System.Text.Json.Serialization.Tests
                     ref Utf8JsonReader reader,
                     Type typeToConvert,
                     JsonSerializerOptions options
-                ) {
+                )
+                {
                     if (reader.TokenType != JsonTokenType.StartObject)
                     {
                         throw new JsonException();
@@ -117,7 +118,8 @@ namespace System.Text.Json.Serialization.Tests
                     Utf8JsonWriter writer,
                     Dictionary<Guid, TValue> value,
                     JsonSerializerOptions options
-                ) {
+                )
+                {
                     writer.WriteStartObject();
 
                     foreach (KeyValuePair<Guid, TValue> kvp in value)

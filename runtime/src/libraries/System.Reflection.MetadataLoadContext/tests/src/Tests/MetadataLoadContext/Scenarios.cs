@@ -18,7 +18,8 @@ namespace System.Reflection.Tests
                 MetadataLoadContext lc = new MetadataLoadContext(
                     new EmptyCoreMetadataAssemblyResolver()
                 )
-            ) {
+            )
+            {
                 Assembly a = lc.LoadFromAssemblyPath(
                     AssemblyPathHelper.GetAssemblyLocation(typeof(GenericClass1<>).Assembly)
                 );
@@ -35,7 +36,8 @@ namespace System.Reflection.Tests
                 MetadataLoadContext lc = new MetadataLoadContext(
                     new EmptyCoreMetadataAssemblyResolver()
                 )
-            ) {
+            )
+            {
                 Assembly a = lc.LoadFromAssemblyPath(
                     AssemblyPathHelper.GetAssemblyLocation(typeof(GenericClass1<>).Assembly)
                 );
@@ -54,7 +56,8 @@ namespace System.Reflection.Tests
                 MetadataLoadContext lc = new MetadataLoadContext(
                     new EmptyCoreMetadataAssemblyResolver()
                 )
-            ) {
+            )
+            {
                 Assembly[] candidates =
                 {
                     lc.LoadFromAssemblyPath(
@@ -87,7 +90,8 @@ namespace System.Reflection.Tests
                 MetadataLoadContext lc = new MetadataLoadContext(
                     new EmptyCoreMetadataAssemblyResolver()
                 )
-            ) {
+            )
+            {
                 Assembly a = lc.LoadFromAssemblyPath(
                     AssemblyPathHelper.GetAssemblyLocation(typeof(GenericClass1<>).Assembly)
                 );

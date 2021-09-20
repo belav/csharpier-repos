@@ -13,10 +13,12 @@ namespace System.Web.Http
             this HttpMessageHandler handler,
             HttpRequestMessage request,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             using (
                 HttpMessageInvoker invoker = new HttpMessageInvoker(handler, disposeHandler: false)
-            ) {
+            )
+            {
                 return invoker.SendAsync(request, cancellationToken);
             }
         }

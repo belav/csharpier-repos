@@ -25,7 +25,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             BoundNode node,
             BoundNode firstInRegion,
             BoundNode lastInRegion
-        ) {
+        )
+        {
             var walker = new VariablesDeclaredWalker(
                 compilation,
                 member,
@@ -174,7 +175,8 @@ namespace Microsoft.CodeAnalysis.CSharp
         protected override void VisitCatchBlock(
             BoundCatchBlock catchBlock,
             ref LocalState finallyState
-        ) {
+        )
+        {
             if (IsInside)
             {
                 var local = catchBlock.Locals.FirstOrDefault();

@@ -224,7 +224,8 @@ namespace System.Linq.Expressions.Tests
                     .Concat(TryExpressionProxy())
                     .Concat(TypeBinaryExpressionProxy())
                     .Concat(UnaryExpressionProxy())
-            ) {
+            )
+            {
                 if (seenTypes.Add(candidate[0].GetType()))
                     yield return candidate;
             }

@@ -124,7 +124,8 @@ namespace System.Runtime.InteropServices.RuntimeInformationTests
                         nameof(p.VirtualMemorySize64),
                         nameof(p.WorkingSet64),
                     }
-                ) {
+                )
+                {
                     sb.Append($"###\t{prop}: ");
                     try
                     {
@@ -156,7 +157,8 @@ namespace System.Runtime.InteropServices.RuntimeInformationTests
                         "/proc/sys/kernel/core_uses_pid",
                         "/proc/sys/kernel/coredump_filter"
                     }
-                ) {
+                )
+                {
                     Console.WriteLine($"### CONTENTS OF \"{path}\":");
                     try
                     {

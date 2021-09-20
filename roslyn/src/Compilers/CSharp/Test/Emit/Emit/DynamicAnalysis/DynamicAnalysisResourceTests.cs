@@ -1324,7 +1324,8 @@ class C
                 int endLine,
                 int endColumn,
                 string textStart
-            ) {
+            )
+            {
                 StartLine = startLine;
                 StartColumn = startColumn;
                 EndLine = endLine;
@@ -1338,7 +1339,8 @@ class C
             DynamicAnalysisMethod methodData,
             string[] sourceLines,
             params SpanResult[] expected
-        ) {
+        )
+        {
             ArrayBuilder<string> expectedSpanSpellings = ArrayBuilder<string>.GetInstance(
                 expected.Length
             );
@@ -1368,7 +1370,8 @@ class C
             DynamicAnalysisDataReader reader,
             DynamicAnalysisMethod methodData,
             params string[] expected
-        ) {
+        )
+        {
             AssertEx.Equal(
                 expected,
                 reader.GetSpans(methodData.Blob)
@@ -1380,7 +1383,8 @@ class C
             DynamicAnalysisDataReader reader,
             ImmutableArray<DynamicAnalysisDocument> documents,
             params string[] expected
-        ) {
+        )
+        {
             var sha1 = new Guid("ff1816ec-aa5e-4d10-87f7-6f4963833460");
 
             var actual =

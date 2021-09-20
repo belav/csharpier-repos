@@ -25,7 +25,8 @@ namespace Microsoft.VisualStudio.IntegrationTest.Utilities.InProcess
                 var cancellationTokenSource = new CancellationTokenSource(
                     Helper.HangMitigatingTimeout
                 )
-            ) {
+            )
+            {
                 var cancellationToken = cancellationTokenSource.Token;
                 while (true)
                 {
@@ -51,7 +52,8 @@ namespace Microsoft.VisualStudio.IntegrationTest.Utilities.InProcess
                 var cancellationTokenSource = new CancellationTokenSource(
                     Helper.HangMitigatingTimeout
                 )
-            ) {
+            )
+            {
                 var cancellationToken = cancellationTokenSource.Token;
                 while (true)
                 {
@@ -77,7 +79,8 @@ namespace Microsoft.VisualStudio.IntegrationTest.Utilities.InProcess
 
         protected virtual async Task<DialogType> TryGetDialogAsync(
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             await JoinableTaskFactory.SwitchToMainThreadAsync(alwaysYield: true, cancellationToken);
             return Application.Current.Windows.OfType<DialogType>().SingleOrDefault();
         }
@@ -85,7 +88,8 @@ namespace Microsoft.VisualStudio.IntegrationTest.Utilities.InProcess
         protected virtual async Task ClickAsync(
             Func<AccessorType, ButtonBase> buttonSelector,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             await JoinableTaskFactory.SwitchToMainThreadAsync(alwaysYield: true, cancellationToken);
             var dialog = await GetDialogAsync(cancellationToken);
             var button = buttonSelector(GetAccessor(dialog));

@@ -19,7 +19,8 @@ namespace System.ServiceModel.Syndication
             IEnumerable<SyndicationCategory> categories,
             bool isFixed,
             string scheme
-        ) {
+        )
+        {
             if (categories != null)
             {
                 _categories = new NullNotAllowedCollection<SyndicationCategory>();

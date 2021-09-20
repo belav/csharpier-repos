@@ -34,7 +34,8 @@ namespace System.DirectoryServices.Protocols.Tests
         public void Ctor_DistinguishedString_Modifications(
             string distinguishedName,
             DirectoryAttributeModification[] modifications
-        ) {
+        )
+        {
             var request = new ModifyRequest(distinguishedName, modifications);
             Assert.Empty(request.Controls);
             Assert.Equal(distinguishedName, request.DistinguishedName);
@@ -87,7 +88,8 @@ namespace System.DirectoryServices.Protocols.Tests
             DirectoryAttributeOperation operation,
             string attributeName,
             object[] values
-        ) {
+        )
+        {
             var request = new ModifyRequest(distinguishedName, operation, attributeName, values);
             Assert.Empty(request.Controls);
             DirectoryAttributeModification modification =

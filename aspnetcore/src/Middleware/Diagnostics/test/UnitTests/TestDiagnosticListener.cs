@@ -40,7 +40,8 @@ namespace Microsoft.AspNetCore.Diagnostics
         public virtual void OnHostingUnhandledException(
             IProxyHttpContext httpContext,
             IProxyException exception
-        ) {
+        )
+        {
             HostingUnhandledException = new OnExceptionEventData()
             {
                 HttpContext = httpContext,
@@ -52,7 +53,8 @@ namespace Microsoft.AspNetCore.Diagnostics
         public virtual void OnDiagnosticUnhandledException(
             IProxyHttpContext httpContext,
             IProxyException exception
-        ) {
+        )
+        {
             DiagnosticUnhandledException = new OnExceptionEventData()
             {
                 HttpContext = httpContext,
@@ -64,7 +66,8 @@ namespace Microsoft.AspNetCore.Diagnostics
         public virtual void OnDiagnosticHandledException(
             IProxyHttpContext httpContext,
             IProxyException exception
-        ) {
+        )
+        {
             DiagnosticHandledException = new OnExceptionEventData()
             {
                 HttpContext = httpContext,

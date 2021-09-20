@@ -33,7 +33,8 @@ namespace Microsoft.AspNetCore.Identity
         public virtual async Task<IdentityResult> ValidateAsync(
             RoleManager<TRole> manager,
             TRole role
-        ) {
+        )
+        {
             if (manager == null)
             {
                 throw new ArgumentNullException(nameof(manager));
@@ -55,7 +56,8 @@ namespace Microsoft.AspNetCore.Identity
             RoleManager<TRole> manager,
             TRole role,
             ICollection<IdentityError> errors
-        ) {
+        )
+        {
             var roleName = await manager.GetRoleNameAsync(role);
             if (string.IsNullOrWhiteSpace(roleName))
             {
@@ -70,7 +72,8 @@ namespace Microsoft.AspNetCore.Identity
                         await manager.GetRoleIdAsync(owner),
                         await manager.GetRoleIdAsync(role)
                     )
-                ) {
+                )
+                {
                     errors.Add(Describer.DuplicateRoleName(roleName));
                 }
             }

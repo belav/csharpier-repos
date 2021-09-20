@@ -136,7 +136,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.ProjectTelemetr
         private async Task NotifyTelemetryServiceAsync(
             ImmutableArray<ProjectTelemetryData> infos,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             cancellationToken.ThrowIfCancellationRequested();
 
             using var _1 = ArrayBuilder<ProjectTelemetryData>.GetInstance(out var filteredInfos);
@@ -152,7 +153,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.ProjectTelemetr
         private void AddFilteredData(
             ImmutableArray<ProjectTelemetryData> infos,
             ArrayBuilder<ProjectTelemetryData> filteredInfos
-        ) {
+        )
+        {
             using var _ = PooledHashSet<ProjectId>.GetInstance(out var seenProjectIds);
 
             // Walk the list of telemetry items in reverse, and skip any items for a project once
@@ -223,7 +225,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.ProjectTelemetr
         public ValueTask ReportProjectTelemetryDataAsync(
             ProjectTelemetryData info,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             Contract.ThrowIfNull(_workQueue);
             _workQueue.AddWork(info);
             return ValueTaskFactory.CompletedTask;

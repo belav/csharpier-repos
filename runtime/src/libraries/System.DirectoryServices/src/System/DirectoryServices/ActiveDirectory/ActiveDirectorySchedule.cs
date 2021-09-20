@@ -103,7 +103,8 @@ namespace System.DirectoryServices.ActiveDirectory
             MinuteOfHour fromMinute,
             HourOfDay toHour,
             MinuteOfHour toMinute
-        ) {
+        )
+        {
             if (day < DayOfWeek.Sunday || day > DayOfWeek.Saturday)
                 throw new InvalidEnumArgumentException(nameof(day), (int)day, typeof(DayOfWeek));
 
@@ -162,7 +163,8 @@ namespace System.DirectoryServices.ActiveDirectory
             MinuteOfHour fromMinute,
             HourOfDay toHour,
             MinuteOfHour toMinute
-        ) {
+        )
+        {
             if (days == null)
                 throw new ArgumentNullException(nameof(days));
 
@@ -185,7 +187,8 @@ namespace System.DirectoryServices.ActiveDirectory
             MinuteOfHour fromMinute,
             HourOfDay toHour,
             MinuteOfHour toMinute
-        ) {
+        )
+        {
             for (int i = 0; i < 7; i++)
             {
                 SetSchedule((DayOfWeek)i, fromHour, fromMinute, toHour, toMinute);

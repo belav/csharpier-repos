@@ -26,7 +26,8 @@ namespace System.Composition.Convention
             this AttributedModelProvider convention,
             Type reflectedType,
             MemberInfo member
-        ) {
+        )
+        {
             return convention.GetCustomAttributes(reflectedType, member).ToArray();
         }
 
@@ -56,7 +57,8 @@ namespace System.Composition.Convention
             this AttributedModelProvider convention,
             Type reflectedType,
             ParameterInfo parameter
-        ) {
+        )
+        {
             return convention.GetCustomAttributes(reflectedType, parameter)
                 .OfType<Attribute>()
                 .ToArray();

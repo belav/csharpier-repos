@@ -22,7 +22,8 @@ namespace Microsoft.Extensions.Configuration
                 StringBuilder stringBuilder,
                 IEnumerable<IConfigurationSection> children,
                 string indent
-            ) {
+            )
+            {
                 foreach (IConfigurationSection child in children)
                 {
                     (string Value, IConfigurationProvider Provider) valueAndProvider =
@@ -57,7 +58,8 @@ namespace Microsoft.Extensions.Configuration
         private static (string Value, IConfigurationProvider Provider) GetValueAndProvider(
             IConfigurationRoot root,
             string key
-        ) {
+        )
+        {
             foreach (IConfigurationProvider provider in root.Providers.Reverse())
             {
                 if (provider.TryGet(key, out string value))

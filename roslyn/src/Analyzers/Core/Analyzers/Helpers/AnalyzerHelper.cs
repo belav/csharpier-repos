@@ -55,7 +55,8 @@ namespace Microsoft.CodeAnalysis.Diagnostics
             this SemanticModelAnalysisContext context,
             PerLanguageOption2<T> option,
             string? language
-        ) {
+        )
+        {
             var analyzerOptions = context.Options;
             var syntaxTree = context.SemanticModel.SyntaxTree;
             var cancellationToken = context.CancellationToken;
@@ -67,7 +68,8 @@ namespace Microsoft.CodeAnalysis.Diagnostics
             this SyntaxNodeAnalysisContext context,
             PerLanguageOption2<T> option,
             string? language
-        ) {
+        )
+        {
             var analyzerOptions = context.Options;
             var syntaxTree = context.Node.SyntaxTree;
             var cancellationToken = context.CancellationToken;
@@ -79,7 +81,8 @@ namespace Microsoft.CodeAnalysis.Diagnostics
             this SyntaxTreeAnalysisContext context,
             PerLanguageOption2<T> option,
             string? language
-        ) {
+        )
+        {
             var analyzerOptions = context.Options;
             var syntaxTree = context.Tree;
             var cancellationToken = context.CancellationToken;
@@ -91,7 +94,8 @@ namespace Microsoft.CodeAnalysis.Diagnostics
             this OperationAnalysisContext context,
             PerLanguageOption2<T> option,
             string? language
-        ) {
+        )
+        {
             var analyzerOptions = context.Options;
             var syntaxTree = context.Operation.Syntax.SyntaxTree;
             var cancellationToken = context.CancellationToken;
@@ -104,7 +108,8 @@ namespace Microsoft.CodeAnalysis.Diagnostics
             TOption option,
             SyntaxTree syntaxTree,
             [MaybeNullWhen(false)] out T value
-        ) {
+        )
+        {
             var configOptions = analyzerOptions.AnalyzerConfigOptionsProvider.GetOptions(
                 syntaxTree
             );

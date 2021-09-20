@@ -239,7 +239,8 @@ namespace System.Tests
                 TupleTestDriver<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10> other,
                 bool expectEqual,
                 bool expectStructuallyEqual
-            ) {
+            )
+            {
                 if (expectEqual)
                 {
                     Assert.True(Tuple.Equals(other.Tuple));
@@ -299,7 +300,8 @@ namespace System.Tests
                 TupleTestDriver<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10> other,
                 int expectedResult,
                 int expectedStructuralResult
-            ) {
+            )
+            {
                 Assert.Equal(expectedResult, ((IComparable)Tuple).CompareTo(other.Tuple));
                 Assert.Equal(
                     expectedStructuralResult,

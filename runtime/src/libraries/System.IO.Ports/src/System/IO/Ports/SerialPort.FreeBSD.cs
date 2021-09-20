@@ -19,7 +19,8 @@ namespace System.IO.Ports
                 if (
                     !name.EndsWith(".init", StringComparison.Ordinal)
                     && !name.EndsWith(".lock", StringComparison.Ordinal)
-                ) {
+                )
+                {
                     ports.Add(name);
                 }
             }
@@ -29,7 +30,8 @@ namespace System.IO.Ports
                 if (
                     !name.EndsWith(".init", StringComparison.Ordinal)
                     && !name.EndsWith(".lock", StringComparison.Ordinal)
-                ) {
+                )
+                {
                     ports.Add(name);
                 }
             }

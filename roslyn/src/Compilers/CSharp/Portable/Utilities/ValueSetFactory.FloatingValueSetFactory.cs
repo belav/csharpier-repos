@@ -46,7 +46,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                 BinaryOperatorKind relation,
                 ConstantValue left,
                 ConstantValue right
-            ) {
+            )
+            {
                 TFloatingTC tc = default;
                 return tc.Related(
                     relation,

@@ -378,7 +378,8 @@ namespace Microsoft.AspNetCore.Razor.Language.Syntax
         public SyntaxTriviaList ReplaceRange(
             SyntaxTrivia triviaInList,
             IEnumerable<SyntaxTrivia> newTrivia
-        ) {
+        )
+        {
             var index = IndexOf(triviaInList);
             if (index >= 0 && index < Count)
             {

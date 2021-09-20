@@ -24,7 +24,8 @@ namespace System.IO.Compression
             Stream stream,
             ZipArchiveEntry.CompressionMethodValues method,
             long uncompressedSize = -1
-        ) {
+        )
+        {
             if (stream == null)
                 throw new ArgumentNullException(nameof(stream));
             if (!stream.CanRead)
@@ -177,7 +178,8 @@ namespace System.IO.Compression
         private ValueTask<int> ReadAsyncInternal(
             Memory<byte> buffer,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             if (cancellationToken.IsCancellationRequested)
             {
                 return ValueTask.FromCanceled<int>(cancellationToken);
@@ -224,7 +226,8 @@ namespace System.IO.Compression
             ValueTask<int> readTask,
             Memory<byte> buffer,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             try
             {
                 while (true)
@@ -274,7 +277,8 @@ namespace System.IO.Compression
             int offset,
             int count,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             // We use this checking order for compat to earlier versions:
             if (_asyncOperations != 0)
                 throw new InvalidOperationException(SR.InvalidBeginCall);
@@ -288,7 +292,8 @@ namespace System.IO.Compression
         public override ValueTask<int> ReadAsync(
             Memory<byte> buffer,
             CancellationToken cancellationToken = default
-        ) {
+        )
+        {
             // We use this checking order for compat to earlier versions:
             if (_asyncOperations != 0)
                 throw new InvalidOperationException(SR.InvalidBeginCall);

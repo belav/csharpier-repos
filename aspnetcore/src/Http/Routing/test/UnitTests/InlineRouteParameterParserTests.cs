@@ -958,7 +958,8 @@ namespace Microsoft.AspNetCore.Routing.Tests
         public void ParseRouteParameter_ParameterWithoutInlineConstraint_ReturnsTemplatePartWithEmptyInlineValues(
             string parameter,
             string expectedParameterName
-        ) {
+        )
+        {
             // Arrange & Act
             var templatePart = ParseParameter(parameter);
 
@@ -1006,7 +1007,8 @@ namespace Microsoft.AspNetCore.Routing.Tests
                 string routeKey,
                 RouteValueDictionary values,
                 RouteDirection routeDirection
-            ) {
+            )
+            {
                 throw new NotImplementedException();
             }
         }

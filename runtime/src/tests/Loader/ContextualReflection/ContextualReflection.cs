@@ -371,7 +371,8 @@ namespace ContextualReflectionTest
             bool isolated,
             Action<string> action,
             bool skipNullIsolated = false
-        ) {
+        )
+        {
             using (AssemblyLoadContext.EnterContextualReflection(null))
             {
                 TestResolve.Assert(ResolveEvents.ExpectedEvent, () => action("TestDefaultLoad"));
@@ -1015,7 +1016,8 @@ namespace ContextualReflectionTest
         void TestDefineDynamicAssembly(
             bool collectibleContext,
             AssemblyBuilderAccess assemblyBuilderAccess
-        ) {
+        )
+        {
             AssemblyLoadContext assemblyLoadContext = collectibleContext
                 ? new AssemblyLoadContext("DynamicAssembly Collectable context", true)
                 : AssemblyLoadContext.Default;

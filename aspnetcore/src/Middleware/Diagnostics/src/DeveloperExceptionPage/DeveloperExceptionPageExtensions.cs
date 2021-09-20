@@ -42,7 +42,8 @@ namespace Microsoft.AspNetCore.Builder
         public static IApplicationBuilder UseDeveloperExceptionPage(
             this IApplicationBuilder app,
             DeveloperExceptionPageOptions options
-        ) {
+        )
+        {
             if (app == null)
             {
                 throw new ArgumentNullException(nameof(app));

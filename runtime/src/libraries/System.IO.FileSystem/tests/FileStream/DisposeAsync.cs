@@ -39,7 +39,8 @@ namespace System.IO.Tests
                     FileAccess.ReadWrite,
                     FileShare.ReadWrite
                 )
-            ) {
+            )
+            {
                 Assert.Equal(0, fs2.Length);
             }
 
@@ -52,7 +53,8 @@ namespace System.IO.Tests
                     FileAccess.ReadWrite,
                     FileShare.ReadWrite
                 )
-            ) {
+            )
+            {
                 Assert.Equal(100, fs2.Length);
             }
         }

@@ -467,7 +467,8 @@ namespace System.Reflection.Tests
         // Higher numbers hit some codepaths that currently don't include the path in the exception message
         public void LoadFile_ValidPEBadIL_ThrowsBadImageFormatExceptionWithPath_ByInitialSeek(
             int seek
-        ) {
+        )
+        {
             ReadOnlySpan<byte> garbage = Encoding.UTF8.GetBytes(new string('X', 500));
             string path = GetTestFilePath();
             File.Copy(SourceTestAssemblyPath, path);
@@ -689,7 +690,8 @@ namespace System.Reflection.Tests
             string typeName,
             BindingFlags bindingFlags,
             Type expectedType
-        ) {
+        )
+        {
             Assert.IsType(
                 expectedType,
                 assembly.CreateInstance(typeName, true, bindingFlags, null, null, null, null)

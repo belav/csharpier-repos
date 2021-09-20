@@ -37,7 +37,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols.PublicModel
 
         protected override ITypeSymbol WithNullableAnnotation(
             CodeAnalysis.NullableAnnotation nullableAnnotation
-        ) {
+        )
+        {
             Debug.Assert(nullableAnnotation != this.NullableAnnotation);
             Debug.Assert(nullableAnnotation != _underlying.DefaultNullableAnnotation);
             return new FunctionPointerTypeSymbol(_underlying, nullableAnnotation);

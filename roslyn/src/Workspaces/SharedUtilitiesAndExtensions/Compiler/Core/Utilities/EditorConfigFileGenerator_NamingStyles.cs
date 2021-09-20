@@ -19,7 +19,8 @@ namespace Microsoft.CodeAnalysis.Options
             NamingStylePreferences namingStylePreferences,
             string language,
             StringBuilder editorconfig
-        ) {
+        )
+        {
             editorconfig.AppendLine($"#### {CompilerExtensionsResources.Naming_styles} ####");
 
             var serializedNameMap = AssignNamesToNamingStyleElements(namingStylePreferences);
@@ -99,7 +100,8 @@ namespace Microsoft.CodeAnalysis.Options
 
         private static ImmutableDictionary<Guid, string> AssignNamesToNamingStyleElements(
             NamingStylePreferences namingStylePreferences
-        ) {
+        )
+        {
             var symbolSpecificationNames = new HashSet<string>();
             var builder = ImmutableDictionary.CreateBuilder<Guid, string>();
             foreach (var symbolSpecification in namingStylePreferences.SymbolSpecifications)
@@ -154,7 +156,8 @@ namespace Microsoft.CodeAnalysis.Options
         > AssignNamesToNamingStyleRules(
             NamingStylePreferences namingStylePreferences,
             ImmutableDictionary<Guid, string> serializedNameMap
-        ) {
+        )
+        {
             var builder = ImmutableDictionary.CreateBuilder<SerializableNamingRule, string>();
             foreach (var rule in namingStylePreferences.NamingRules)
             {

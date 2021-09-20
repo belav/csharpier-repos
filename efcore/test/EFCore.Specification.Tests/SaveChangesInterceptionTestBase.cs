@@ -28,7 +28,8 @@ namespace Microsoft.EntityFrameworkCore
             bool async,
             bool inject,
             bool noAcceptChanges
-        ) {
+        )
+        {
             var (context, interceptor) = CreateContext<PassiveSaveChangesInterceptor>(inject);
 
             using var _ = context;
@@ -100,7 +101,8 @@ namespace Microsoft.EntityFrameworkCore
             bool async,
             bool inject,
             bool noAcceptChanges
-        ) {
+        )
+        {
             var (context, interceptor) = CreateContext<SuppressingSaveChangesInterceptor>(inject);
 
             using var _ = context;
@@ -160,7 +162,8 @@ namespace Microsoft.EntityFrameworkCore
             public override InterceptionResult<int> SavingChanges(
                 DbContextEventData eventData,
                 InterceptionResult<int> result
-            ) {
+            )
+            {
                 base.SavingChanges(eventData, result);
 
                 return InterceptionResult<int>.SuppressWithResult(-1);
@@ -170,7 +173,8 @@ namespace Microsoft.EntityFrameworkCore
                 DbContextEventData eventData,
                 InterceptionResult<int> result,
                 CancellationToken cancellationToken = default
-            ) {
+            )
+            {
                 await base.SavingChangesAsync(eventData, result, cancellationToken);
 
                 return InterceptionResult<int>.SuppressWithResult(-1);
@@ -190,7 +194,8 @@ namespace Microsoft.EntityFrameworkCore
             bool async,
             bool inject,
             bool noAcceptChanges
-        ) {
+        )
+        {
             var (context, interceptor) = CreateContext<ResultMutatingSaveChangesInterceptor>(
                 inject
             );
@@ -260,7 +265,8 @@ namespace Microsoft.EntityFrameworkCore
                 SaveChangesCompletedEventData eventData,
                 int result,
                 CancellationToken cancellationToken = default
-            ) {
+            )
+            {
                 await base.SavedChangesAsync(eventData, result, cancellationToken);
 
                 return 777;
@@ -289,7 +295,8 @@ namespace Microsoft.EntityFrameworkCore
             bool inject,
             bool noAcceptChanges,
             bool concurrencyError
-        ) {
+        )
+        {
             if (concurrencyError && !SupportsOptimisticConcurrency)
             {
                 return;
@@ -391,7 +398,8 @@ namespace Microsoft.EntityFrameworkCore
             bool async,
             bool inject,
             bool noAcceptChanges
-        ) {
+        )
+        {
             var interceptor1 = new PassiveSaveChangesInterceptor();
             var interceptor2 = new ResultMutatingSaveChangesInterceptor();
             var interceptor3 = new ResultMutatingSaveChangesInterceptor();
@@ -452,7 +460,8 @@ namespace Microsoft.EntityFrameworkCore
             public virtual InterceptionResult<int> SavingChanges(
                 DbContextEventData eventData,
                 InterceptionResult<int> result
-            ) {
+            )
+            {
                 Assert.NotNull(eventData.Context);
 
                 Context = eventData.Context;
@@ -488,7 +497,8 @@ namespace Microsoft.EntityFrameworkCore
                 DbContextEventData eventData,
                 InterceptionResult<int> result,
                 CancellationToken cancellationToken = default
-            ) {
+            )
+            {
                 Assert.NotNull(eventData.Context);
 
                 Context = eventData.Context;
@@ -502,7 +512,8 @@ namespace Microsoft.EntityFrameworkCore
                 SaveChangesCompletedEventData eventData,
                 int result,
                 CancellationToken cancellationToken = default
-            ) {
+            )
+            {
                 Assert.NotNull(eventData.Context);
 
                 Context = eventData.Context;
@@ -515,7 +526,8 @@ namespace Microsoft.EntityFrameworkCore
             public virtual Task SaveChangesFailedAsync(
                 DbContextErrorEventData eventData,
                 CancellationToken cancellationToken = default
-            ) {
+            )
+            {
                 Assert.NotNull(eventData.Context);
                 Assert.NotNull(eventData.Exception);
 
@@ -532,7 +544,8 @@ namespace Microsoft.EntityFrameworkCore
             DbContext context,
             SaveChangesInterceptorBase interceptor,
             bool async
-        ) {
+        )
+        {
             Assert.Equal(async, interceptor.AsyncCalled);
             Assert.NotEqual(async, interceptor.SyncCalled);
             Assert.NotEqual(interceptor.AsyncCalled, interceptor.SyncCalled);

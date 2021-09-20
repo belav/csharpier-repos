@@ -36,7 +36,8 @@ namespace Microsoft.VisualStudio.LanguageServices.LiveShare.Client.Projects
 
         public async Task<IReadOnlyCollection<ProjectInfo>> GetRemoteProjectInfosAsync(
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var projectInfos = new List<ProjectInfo>();
             foreach (var remoteProjectInfoProvider in _remoteProjectInfoProviders)
             {
@@ -47,7 +48,8 @@ namespace Microsoft.VisualStudio.LanguageServices.LiveShare.Client.Projects
                                 cancellationToken
                             )
                             .ConfigureAwait(false)
-                    ) {
+                    )
+                    {
                         projectInfos.Add(projectInfo);
                     }
                 }
@@ -65,7 +67,8 @@ namespace Microsoft.VisualStudio.LanguageServices.LiveShare.Client.Projects
             string projectName,
             string language,
             ImmutableArray<string> files
-        ) {
+        )
+        {
             var projectId = ProjectId.CreateNewId();
             var docInfos = ImmutableArray.CreateBuilder<DocumentInfo>();
 

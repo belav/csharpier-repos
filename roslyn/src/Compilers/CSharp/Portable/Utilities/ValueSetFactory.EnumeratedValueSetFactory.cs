@@ -48,7 +48,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                 BinaryOperatorKind relation,
                 ConstantValue left,
                 ConstantValue right
-            ) {
+            )
+            {
                 Debug.Assert(relation == BinaryOperatorKind.Equal);
                 TTC tc = default;
                 return tc.FromConstantValue(left).Equals(tc.FromConstantValue(right));

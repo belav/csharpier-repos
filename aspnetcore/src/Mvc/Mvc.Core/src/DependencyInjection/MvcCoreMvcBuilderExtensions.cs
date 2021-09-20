@@ -27,7 +27,8 @@ namespace Microsoft.Extensions.DependencyInjection
         public static IMvcBuilder AddMvcOptions(
             this IMvcBuilder builder,
             Action<MvcOptions> setupAction
-        ) {
+        )
+        {
             if (builder == null)
             {
                 throw new ArgumentNullException(nameof(builder));
@@ -51,7 +52,8 @@ namespace Microsoft.Extensions.DependencyInjection
         public static IMvcBuilder AddJsonOptions(
             this IMvcBuilder builder,
             Action<JsonOptions> configure
-        ) {
+        )
+        {
             if (builder == null)
             {
                 throw new ArgumentNullException(nameof(builder));
@@ -75,7 +77,8 @@ namespace Microsoft.Extensions.DependencyInjection
         public static IMvcBuilder AddFormatterMappings(
             this IMvcBuilder builder,
             Action<FormatterMappings> setupAction
-        ) {
+        )
+        {
             if (builder == null)
             {
                 throw new ArgumentNullException(nameof(builder));
@@ -135,7 +138,8 @@ namespace Microsoft.Extensions.DependencyInjection
         public static IMvcBuilder ConfigureApplicationPartManager(
             this IMvcBuilder builder,
             Action<ApplicationPartManager> setupAction
-        ) {
+        )
+        {
             if (builder == null)
             {
                 throw new ArgumentNullException(nameof(builder));
@@ -192,7 +196,8 @@ namespace Microsoft.Extensions.DependencyInjection
         public static IMvcBuilder SetCompatibilityVersion(
             this IMvcBuilder builder,
             CompatibilityVersion version
-        ) {
+        )
+        {
             if (builder == null)
             {
                 throw new ArgumentNullException(nameof(builder));
@@ -213,7 +218,8 @@ namespace Microsoft.Extensions.DependencyInjection
         public static IMvcBuilder ConfigureApiBehaviorOptions(
             this IMvcBuilder builder,
             Action<ApiBehaviorOptions> setupAction
-        ) {
+        )
+        {
             if (builder == null)
             {
                 throw new ArgumentNullException(nameof(builder));

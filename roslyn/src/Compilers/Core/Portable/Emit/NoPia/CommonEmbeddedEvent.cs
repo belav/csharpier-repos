@@ -90,7 +90,8 @@ namespace Microsoft.CodeAnalysis.Emit.NoPia
                 TSyntaxNode syntaxNodeOpt,
                 DiagnosticBag diagnostics,
                 bool isUsedForComAwareEventBinding
-            ) {
+            )
+            {
                 if (
                     _isUsedForComAwareEventBinding == 0
                     && (
@@ -98,7 +99,8 @@ namespace Microsoft.CodeAnalysis.Emit.NoPia
                         || Interlocked.CompareExchange(ref _isUsedForComAwareEventBinding, 1, 0)
                             == 0
                     )
-                ) {
+                )
+                {
                     Debug.Assert(
                         !isUsedForComAwareEventBinding || _isUsedForComAwareEventBinding != 0
                     );

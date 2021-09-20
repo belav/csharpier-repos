@@ -26,10 +26,8 @@ namespace System.Security.Cryptography.Pkcs
             _decoded = SecretBagAsn.Decode(EncodedBagValue, AsnEncodingRules.BER);
         }
 
-        private Pkcs12SecretBag(
-            SecretBagAsn secretBagAsn,
-            ReadOnlyMemory<byte> encodedBagValue
-        ) : this(encodedBagValue)
+        private Pkcs12SecretBag(SecretBagAsn secretBagAsn, ReadOnlyMemory<byte> encodedBagValue)
+            : this(encodedBagValue)
         {
             _decoded = secretBagAsn;
         }

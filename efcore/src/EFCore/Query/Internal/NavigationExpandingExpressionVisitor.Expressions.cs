@@ -94,7 +94,8 @@ namespace Microsoft.EntityFrameworkCore.Query.Internal
                 IEntityType entityType,
                 EntityReference? entityReference,
                 bool setLoaded
-            ) {
+            )
+            {
                 EntityType = entityType;
                 _entityReference = entityReference;
                 SetLoaded = setLoaded;
@@ -125,7 +126,8 @@ namespace Microsoft.EntityFrameworkCore.Query.Internal
                             (concreteNavigation.ForeignKey, concreteNavigation.IsOnDependent),
                             out var expansion
                         )
-                    ) {
+                    )
+                    {
                         // Value known to be non-null
                         nodeToAdd = UnwrapEntityReference(expansion)!.IncludePaths;
                     }
@@ -145,7 +147,8 @@ namespace Microsoft.EntityFrameworkCore.Query.Internal
                             ),
                             out var secondExpansion
                         )
-                    ) {
+                    )
+                    {
                         // Value known to be non-null
                         nodeToAdd = UnwrapEntityReference(secondExpansion)!.IncludePaths;
                     }
@@ -211,7 +214,8 @@ namespace Microsoft.EntityFrameworkCore.Query.Internal
                     if (
                         !includeTreeNode.TryGetValue(kvp.Key, out var otherIncludeTreeNode)
                         || !kvp.Value.Equals(otherIncludeTreeNode)
-                    ) {
+                    )
+                    {
                         return false;
                     }
                 }
@@ -240,7 +244,8 @@ namespace Microsoft.EntityFrameworkCore.Query.Internal
                 NavigationTreeNode currentTree,
                 Expression pendingSelector,
                 string parameterName
-            ) {
+            )
+            {
                 Source = source;
                 _parameterName = parameterName;
                 CurrentTree = currentTree;
@@ -437,7 +442,8 @@ namespace Microsoft.EntityFrameworkCore.Query.Internal
                 Expression parent,
                 INavigation navigation,
                 EntityReference entityReference
-            ) {
+            )
+            {
                 Parent = parent;
                 Navigation = navigation;
                 EntityReference = entityReference;

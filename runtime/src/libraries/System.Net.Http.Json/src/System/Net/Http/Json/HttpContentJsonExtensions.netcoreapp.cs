@@ -13,7 +13,8 @@ namespace System.Net.Http.Json
         private static Task<Stream> ReadHttpContentStreamAsync(
             HttpContent content,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             return content.ReadAsStreamAsync(cancellationToken);
         }
 

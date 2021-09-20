@@ -18,7 +18,8 @@ namespace Microsoft.AspNetCore.IISIntegration.FunctionalTests
                 var method in type.GetMethods(
                     BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance
                 )
-            ) {
+            )
+            {
                 var parameters = method.GetParameters();
                 if (method.Name != "Configure" && parameters.Length == 1)
                 {
@@ -55,7 +56,8 @@ namespace Microsoft.AspNetCore.IISIntegration.FunctionalTests
                                 out var matchedPath,
                                 out var remainingPath
                             )
-                        ) {
+                        )
+                        {
                             var pathBase = context.Request.PathBase;
                             context.Request.PathBase = pathBase.Add(matchedPath);
                             context.Request.Path = remainingPath;

@@ -34,7 +34,8 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
         public static INamedTypeSymbol? GetBestTypeByMetadataName(
             this Compilation compilation,
             string fullyQualifiedMetadataName
-        ) {
+        )
+        {
             // Try to get the unique type with this name, ignoring accessibility
             var type = compilation.GetTypeByMetadataName(fullyQualifiedMetadataName);
 

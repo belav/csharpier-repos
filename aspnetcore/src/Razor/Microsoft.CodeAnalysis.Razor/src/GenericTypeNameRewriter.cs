@@ -41,7 +41,8 @@ namespace Microsoft.CodeAnalysis.Razor
                 if (
                     node is IdentifierNameSyntax identifier
                     && !(identifier.Parent is QualifiedNameSyntax)
-                ) {
+                )
+                {
                     if (_bindings.TryGetValue(identifier.Identifier.Text, out var binding))
                     {
                         // If we don't have a valid replacement, use object. This will make the code at least reasonable

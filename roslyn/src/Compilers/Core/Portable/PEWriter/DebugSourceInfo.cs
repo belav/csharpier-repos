@@ -34,17 +34,19 @@ namespace Microsoft.Cci
             ImmutableArray<byte> checksum,
             SourceHashAlgorithm checksumAlgorithm,
             ImmutableArray<byte> embeddedTextBlob = default
-        ) : this(
-            checksum,
-            SourceHashAlgorithms.GetAlgorithmGuid(checksumAlgorithm),
-            embeddedTextBlob
-        ) { }
+        )
+            : this(
+                checksum,
+                SourceHashAlgorithms.GetAlgorithmGuid(checksumAlgorithm),
+                embeddedTextBlob
+            ) { }
 
         public DebugSourceInfo(
             ImmutableArray<byte> checksum,
             Guid checksumAlgorithmId,
             ImmutableArray<byte> embeddedTextBlob = default
-        ) {
+        )
+        {
             ChecksumAlgorithmId = checksumAlgorithmId;
             Checksum = checksum;
             EmbeddedTextBlob = embeddedTextBlob;

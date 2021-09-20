@@ -22,7 +22,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.CodeModel.Colle
             CodeModelState state,
             AbstractExternalCodeMember parent,
             ProjectId projectId
-        ) {
+        )
+        {
             var collection = new ExternalParameterCollection(state, parent, projectId);
             return (EnvDTE.CodeElements)ComAggregate.CreateAggregatedObject(collection);
         }

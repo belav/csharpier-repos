@@ -970,7 +970,8 @@ FROM ""People"";",
         protected virtual async Task AssertNotSupportedAsync(
             Func<Task> action,
             string? message = null
-        ) {
+        )
+        {
             var ex = await Assert.ThrowsAsync<NotSupportedException>(action);
             if (message != null)
             {

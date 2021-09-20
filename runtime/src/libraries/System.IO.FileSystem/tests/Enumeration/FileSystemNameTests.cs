@@ -20,7 +20,8 @@ namespace System.IO.Tests
             string name,
             bool ignoreCase,
             bool expected
-        ) {
+        )
+        {
             Assert.Equal(
                 expected,
                 FileSystemName.MatchesWin32Expression(expression, name.AsSpan(), ignoreCase)
@@ -33,7 +34,8 @@ namespace System.IO.Tests
             string name,
             bool ignoreCase,
             bool expected
-        ) {
+        )
+        {
             Assert.Equal(
                 expected,
                 FileSystemName.MatchesSimpleExpression(expression, name.AsSpan(), ignoreCase)

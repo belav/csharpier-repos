@@ -59,7 +59,8 @@ namespace Microsoft.CodeAnalysis.CSharp
 
         public override BoundNode? VisitLocalFunctionStatement(
             BoundLocalFunctionStatement localFunc
-        ) {
+        )
+        {
             if (localFunc.Symbol.IsExtern)
             {
                 // an extern local function is not permitted to have a body and thus shouldn't be flow analyzed
@@ -140,7 +141,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             if (
                 RecordStateChange(savedLocalFunctionState, localFunctionState, ref stateAtReturn)
                 && localFunctionState.Visited
-            ) {
+            )
+            {
                 // If the sets have changed and we already used the results
                 // of this local function in another computation, the previous
                 // calculations may be invalid. We need to analyze until we
@@ -160,7 +162,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             TLocalFunctionState savedState,
             TLocalFunctionState currentState,
             ref TLocalState stateAtReturn
-        ) {
+        )
+        {
             bool anyChanged = LocalFunctionEnd(savedState, currentState, ref stateAtReturn);
             anyChanged |= Join(ref currentState.StateFromTop, ref stateAtReturn);
 
@@ -194,7 +197,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             TLocalFunctionState savedState,
             TLocalFunctionState currentState,
             ref TLocalState stateAtReturn
-        ) {
+        )
+        {
             return false;
         }
     }

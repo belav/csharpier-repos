@@ -13,7 +13,8 @@ namespace System.Reflection.Context.Custom
             CustomType type,
             Type attributeFilterType,
             bool inherit
-        ) {
+        )
+        {
             IEnumerable<object> attributes = GetFilteredAttributes(
                 context,
                 type.UnderlyingType,
@@ -71,7 +72,8 @@ namespace System.Reflection.Context.Custom
             CustomMethodInfo method,
             Type attributeFilterType,
             bool inherit
-        ) {
+        )
+        {
             IEnumerable<object> attributes = GetFilteredAttributes(
                 context,
                 method.UnderlyingMethod,
@@ -129,7 +131,8 @@ namespace System.Reflection.Context.Custom
             CustomConstructorInfo constructor,
             Type attributeFilterType,
             bool inherit
-        ) {
+        )
+        {
             ConstructorInfo provider = constructor.UnderlyingConstructor;
             IEnumerable<object> attributes = GetFilteredAttributes(
                 context,
@@ -145,7 +148,8 @@ namespace System.Reflection.Context.Custom
             CustomPropertyInfo property,
             Type attributeFilterType,
             bool inherit
-        ) {
+        )
+        {
             PropertyInfo provider = property.UnderlyingProperty;
             IEnumerable<object> attributes = GetFilteredAttributes(
                 context,
@@ -161,7 +165,8 @@ namespace System.Reflection.Context.Custom
             CustomEventInfo evnt,
             Type attributeFilterType,
             bool inherit
-        ) {
+        )
+        {
             EventInfo provider = evnt.UnderlyingEvent;
             IEnumerable<object> attributes = GetFilteredAttributes(
                 context,
@@ -177,7 +182,8 @@ namespace System.Reflection.Context.Custom
             CustomFieldInfo field,
             Type attributeFilterType,
             bool inherit
-        ) {
+        )
+        {
             FieldInfo provider = field.UnderlyingField;
             IEnumerable<object> attributes = GetFilteredAttributes(
                 context,
@@ -193,7 +199,8 @@ namespace System.Reflection.Context.Custom
             CustomParameterInfo parameter,
             Type attributeFilterType,
             bool inherit
-        ) {
+        )
+        {
             ParameterInfo provider = parameter.UnderlyingParameter;
             IEnumerable<object> attributes = GetFilteredAttributes(
                 context,
@@ -208,7 +215,8 @@ namespace System.Reflection.Context.Custom
             ICustomAttributeProvider provider,
             Type attributeType,
             bool inherit
-        ) {
+        )
+        {
             object[] attributes = provider.GetCustomAttributes(attributeType, inherit);
             return attributes != null && attributes.Length > 0;
         }
@@ -217,7 +225,8 @@ namespace System.Reflection.Context.Custom
             CustomReflectionContext context,
             MemberInfo member,
             Type attributeFilterType
-        ) {
+        )
+        {
             object[] objects = member.GetCustomAttributes(attributeFilterType, false);
 
             return context.GetCustomAttributesOnMember(member, objects, attributeFilterType);
@@ -227,7 +236,8 @@ namespace System.Reflection.Context.Custom
             CustomReflectionContext context,
             ParameterInfo parameter,
             Type attributeFilterType
-        ) {
+        )
+        {
             object[] objects = parameter.GetCustomAttributes(attributeFilterType, false);
 
             return context.GetCustomAttributesOnParameter(parameter, objects, attributeFilterType);
@@ -239,7 +249,8 @@ namespace System.Reflection.Context.Custom
             Type attributeFilterType,
             bool inherited,
             bool allowMultiple
-        ) {
+        )
+        {
             foreach (object newAttribute in inheritedAttributes)
             {
                 // derived attributes should have already been filtered
@@ -261,7 +272,8 @@ namespace System.Reflection.Context.Custom
                         allowMultiple
                         || declaredAttributes.FindIndex((obj) => obj.GetType() == attributeType) < 0
                     )
-                ) {
+                )
+                {
                     declaredAttributes.Add(newAttribute);
                 }
             }
@@ -271,7 +283,8 @@ namespace System.Reflection.Context.Custom
             Type attributeFilterType,
             out bool inherited,
             out bool allowMultiple
-        ) {
+        )
+        {
             AttributeUsageAttribute[] usageAttributes =
                 (AttributeUsageAttribute[])attributeFilterType.GetCustomAttributes(
                     typeof(AttributeUsageAttribute),
@@ -297,7 +310,8 @@ namespace System.Reflection.Context.Custom
         internal static IEnumerable<object> FilterCustomAttributes(
             IEnumerable<object> attributes,
             Type attributeFilterType
-        ) {
+        )
+        {
             foreach (object attr in attributes)
             {
                 if (attr == null)

@@ -83,7 +83,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Xaml.LanguageServer
                 bool requiresLSPSolution,
                 IRequestHandler<RequestType, ResponseType> handler,
                 CancellationToken cancellationToken
-            ) {
+            )
+            {
                 var textDocument = handler.GetTextDocumentIdentifier(request);
 
                 DocumentId? documentId = null;
@@ -94,7 +95,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Xaml.LanguageServer
 
                 using (
                     var requestScope = _feedbackService?.CreateRequestScope(documentId, methodName)
-                ) {
+                )
+                {
                     try
                     {
                         return await base.ExecuteRequestAsync(

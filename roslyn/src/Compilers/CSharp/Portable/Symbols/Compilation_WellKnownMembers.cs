@@ -85,7 +85,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                     _lazyWellKnownTypeMembers[(int)member],
                     ErrorTypeSymbol.UnknownResultType
                 )
-            ) {
+            )
+            {
                 if (_lazyWellKnownTypeMembers == null)
                 {
                     var wellKnownTypeMembers = new Symbol[(int)WellKnownMember.Count];
@@ -228,7 +229,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                 if (
                     Interlocked.CompareExchange(ref _lazyWellKnownTypes[index], result, null)
                     is object
-                ) {
+                )
+                {
                     Debug.Assert(
                         TypeSymbol.Equals(
                             result,
@@ -266,7 +268,8 @@ namespace Microsoft.CodeAnalysis.CSharp
         internal bool IsExceptionType(
             TypeSymbol type,
             ref CompoundUseSiteInfo<AssemblySymbol> useSiteInfo
-        ) {
+        )
+        {
             return IsEqualOrDerivedFromWellKnownClass(
                 type,
                 WellKnownType.System_Exception,
@@ -287,7 +290,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             TypeSymbol type,
             WellKnownType wellKnownType,
             ref CompoundUseSiteInfo<AssemblySymbol> useSiteInfo
-        ) {
+        )
+        {
             Debug.Assert(
                 wellKnownType == WellKnownType.System_Attribute
                     || wellKnownType == WellKnownType.System_Exception
@@ -337,7 +341,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                 ParameterSymbol
             > comparer,
             AssemblySymbol? accessWithinOpt
-        ) {
+        )
+        {
             var members = declaringType.GetMembers(descriptor.Name);
             return GetRuntimeMember(members, descriptor, comparer, accessWithinOpt);
         }
@@ -353,7 +358,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                 ParameterSymbol
             > comparer,
             AssemblySymbol? accessWithinOpt
-        ) {
+        )
+        {
             SymbolKind targetSymbolKind;
             MethodKind targetMethodKind = MethodKind.Ordinary;
             bool isStatic = (descriptor.Flags & MemberFlags.Static) != 0;
@@ -406,7 +412,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                             && Symbol.IsSymbolAccessible(member, accessWithinOpt)
                         )
                     )
-                ) {
+                )
+                {
                     continue;
                 }
 
@@ -422,7 +429,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                             if (
                                 methodKind == MethodKind.Conversion
                                 || methodKind == MethodKind.UserDefinedOperator
-                            ) {
+                            )
+                            {
                                 methodKind = MethodKind.Ordinary;
                             }
 
@@ -431,7 +439,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                                 || methodKind != targetMethodKind
                                 || ((descriptor.Flags & MemberFlags.Virtual) != 0)
                                     != (method.IsVirtual || method.IsOverride || method.IsAbstract)
-                            ) {
+                            )
+                            {
                                 continue;
                             }
 
@@ -451,7 +460,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                                 != (
                                     property.IsVirtual || property.IsOverride || property.IsAbstract
                                 )
-                            ) {
+                            )
+                            {
                                 continue;
                             }
 
@@ -465,7 +475,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                     case SymbolKind.Field:
                         if (
                             !comparer.MatchFieldSignature((FieldSymbol)member, descriptor.Signature)
-                        ) {
+                        )
+                        {
                             continue;
                         }
                         break;
@@ -511,7 +522,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             ImmutableArray<TypedConstant> arguments = default,
             ImmutableArray<KeyValuePair<WellKnownMember, TypedConstant>> namedArguments = default,
             bool isOptionalUse = false
-        ) {
+        )
+        {
             UseSiteInfo<AssemblySymbol> info;
             var ctorSymbol = (MethodSymbol)Binder.GetWellKnownTypeMember(
                 this,
@@ -574,7 +586,8 @@ namespace Microsoft.CodeAnalysis.CSharp
         internal SynthesizedAttributeData? TrySynthesizeAttribute(
             SpecialMember constructor,
             bool isOptionalUse = false
-        ) {
+        )
+        {
             var ctorSymbol = (MethodSymbol)this.GetSpecialTypeMember(constructor);
 
             if ((object)ctorSymbol == null)
@@ -656,13 +669,15 @@ namespace Microsoft.CodeAnalysis.CSharp
             BindingDiagnosticBag? diagnostics,
             Location location,
             bool modifyCompilation
-        ) {
+        )
+        {
             Debug.Assert(!modifyCompilation || !_needsGeneratedAttributes_IsFrozen);
 
             if (
                 CheckIfAttributeShouldBeEmbedded(attribute, diagnostics, location)
                 && modifyCompilation
-            ) {
+            )
+            {
                 SetNeedsGeneratedAttributes(attribute);
             }
 
@@ -675,7 +690,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                     )
                 ) != 0
                 && modifyCompilation
-            ) {
+            )
+            {
                 SetUsesNullableAttributes();
             }
         }
@@ -684,7 +700,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             BindingDiagnosticBag? diagnostics,
             Location location,
             bool modifyCompilation
-        ) {
+        )
+        {
             EnsureEmbeddableAttributeExists(
                 EmbeddableAttributes.IsReadOnlyAttribute,
                 diagnostics,
@@ -697,7 +714,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             BindingDiagnosticBag? diagnostics,
             Location location,
             bool modifyCompilation
-        ) {
+        )
+        {
             EnsureEmbeddableAttributeExists(
                 EmbeddableAttributes.IsByRefLikeAttribute,
                 diagnostics,
@@ -710,7 +728,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             BindingDiagnosticBag? diagnostics,
             Location location,
             bool modifyCompilation
-        ) {
+        )
+        {
             EnsureEmbeddableAttributeExists(
                 EmbeddableAttributes.IsUnmanagedAttribute,
                 diagnostics,
@@ -723,7 +742,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             BindingDiagnosticBag? diagnostics,
             Location location,
             bool modifyCompilation
-        ) {
+        )
+        {
             EnsureEmbeddableAttributeExists(
                 EmbeddableAttributes.NullableAttribute,
                 diagnostics,
@@ -736,7 +756,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             BindingDiagnosticBag? diagnostics,
             Location location,
             bool modifyCompilation
-        ) {
+        )
+        {
             EnsureEmbeddableAttributeExists(
                 EmbeddableAttributes.NullableContextAttribute,
                 diagnostics,
@@ -749,7 +770,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             BindingDiagnosticBag? diagnostics,
             Location location,
             bool modifyCompilation
-        ) {
+        )
+        {
             EnsureEmbeddableAttributeExists(
                 EmbeddableAttributes.NativeIntegerAttribute,
                 diagnostics,
@@ -762,7 +784,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             EmbeddableAttributes attribute,
             BindingDiagnosticBag? diagnosticsOpt,
             Location locationOpt
-        ) {
+        )
+        {
             switch (attribute)
             {
                 case EmbeddableAttributes.IsReadOnlyAttribute:
@@ -836,7 +859,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             WellKnownType attributeType,
             WellKnownMember attributeCtor,
             WellKnownMember? secondAttributeCtor = null
-        ) {
+        )
+        {
             var userDefinedAttribute = GetWellKnownType(attributeType);
 
             if (userDefinedAttribute is MissingMetadataTypeSymbol)
@@ -919,7 +943,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             if (
                 ignoreSymbolStoreDebuggingMode is null
                 || !ignoreSymbolStoreDebuggingMode.HasConstantValue
-            ) {
+            )
+            {
                 return null;
             }
 
@@ -951,7 +976,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                 if (
                     disableOptimizationsDebuggingMode is null
                     || !disableOptimizationsDebuggingMode.HasConstantValue
-                ) {
+                )
+                {
                     return null;
                 }
 
@@ -1005,7 +1031,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             TypeSymbol type,
             int customModifiersCount,
             RefKind refKindOpt = RefKind.None
-        ) {
+        )
+        {
             RoslynDebug.Assert((object)type != null);
             Debug.Assert(type.ContainsDynamic());
 
@@ -1063,7 +1090,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             AttributeTargets targets,
             bool allowMultiple,
             bool inherited
-        ) {
+        )
+        {
             var attributeTargetsType = GetWellKnownType(WellKnownType.System_AttributeTargets);
             var boolType = GetSpecialType(SpecialType.System_Boolean);
             var arguments = ImmutableArray.Create(
@@ -1104,7 +1132,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             public static ImmutableArray<TypedConstant> Encode(
                 TypeSymbol type,
                 TypeSymbol stringType
-            ) {
+            )
+            {
                 var namesBuilder = ArrayBuilder<string?>.GetInstance();
 
                 if (!TryGetNames(type, namesBuilder))
@@ -1162,7 +1191,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                 RefKind refKind,
                 int customModifiersCount,
                 TypeSymbol booleanType
-            ) {
+            )
+            {
                 var flagsBuilder = ArrayBuilder<bool>.GetInstance();
                 Encode(
                     type,
@@ -1187,7 +1217,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                 TypeSymbol type,
                 RefKind refKind,
                 int customModifiersCount
-            ) {
+            )
+            {
                 var builder = ArrayBuilder<bool>.GetInstance();
                 Encode(type, customModifiersCount, refKind, builder, addCustomModifierFlags: true);
                 return builder.ToImmutableAndFree();
@@ -1196,7 +1227,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             internal static ImmutableArray<bool> EncodeWithoutCustomModifierFlags(
                 TypeSymbol type,
                 RefKind refKind
-            ) {
+            )
+            {
                 var builder = ArrayBuilder<bool>.GetInstance();
                 Encode(type, -1, refKind, builder, addCustomModifierFlags: false);
                 return builder.ToImmutableAndFree();
@@ -1208,7 +1240,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                 RefKind refKind,
                 ArrayBuilder<bool> transformFlagsBuilder,
                 bool addCustomModifierFlags
-            ) {
+            )
+            {
                 Debug.Assert(!transformFlagsBuilder.Any());
 
                 if (refKind != RefKind.None)
@@ -1242,7 +1275,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                 ArrayBuilder<bool> transformFlagsBuilder,
                 bool isNestedNamedType,
                 bool addCustomModifierFlags
-            ) {
+            )
+            {
                 // Encode transforms flag for this type and its custom modifiers (if any).
                 switch (type.TypeKind)
                 {
@@ -1316,7 +1350,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                     FunctionPointerTypeSymbol funcPtr,
                     ArrayBuilder<bool> transformFlagsBuilder,
                     bool addCustomModifierFlags
-                ) {
+                )
+                {
                     Func<TypeSymbol, (ArrayBuilder<bool>, bool), bool, bool> visitor = (
                         TypeSymbol type,
                         (ArrayBuilder<bool> builder, bool addCustomModifierFlags) param,
@@ -1344,7 +1379,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                         RefKind refKind,
                         ImmutableArray<CustomModifier> customModifiers,
                         TypeWithAnnotations twa
-                    ) {
+                    )
+                    {
                         if (addCustomModifierFlags)
                         {
                             HandleCustomModifiers(customModifiers.Length, transformFlagsBuilder);
@@ -1374,7 +1410,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             private static void HandleCustomModifiers(
                 int customModifiersCount,
                 ArrayBuilder<bool> transformFlagsBuilder
-            ) {
+            )
+            {
                 // Native compiler encodes an extra transforms flag, always false, for each custom modifier.
                 transformFlagsBuilder.AddMany(false, customModifiersCount);
             }
@@ -1447,7 +1484,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             protected override TypeSymbol? GetGenericTypeArgument(
                 TypeSymbol type,
                 int argumentIndex
-            ) {
+            )
+            {
                 if (type.Kind != SymbolKind.NamedType)
                 {
                     return null;
@@ -1489,7 +1527,8 @@ namespace Microsoft.CodeAnalysis.CSharp
 
             protected override ImmutableArray<ParameterSymbol> GetParameters(
                 PropertySymbol property
-            ) {
+            )
+            {
                 return property.Parameters;
             }
 

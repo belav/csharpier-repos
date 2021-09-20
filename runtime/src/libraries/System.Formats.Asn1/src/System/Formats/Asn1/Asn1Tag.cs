@@ -67,7 +67,8 @@ namespace System.Formats.Asn1
                 universalTagNumber < UniversalTagNumber.EndOfContents
                 || universalTagNumber > UniversalTagNumber.RelativeObjectIdentifierIRI
                 || universalTagNumber == ReservedIndex
-            ) {
+            )
+            {
                 throw new ArgumentOutOfRangeException(nameof(universalTagNumber));
             }
         }
@@ -160,7 +161,8 @@ namespace System.Formats.Asn1
             ReadOnlySpan<byte> source,
             out Asn1Tag tag,
             out int bytesConsumed
-        ) {
+        )
+        {
             tag = default(Asn1Tag);
             bytesConsumed = 0;
 

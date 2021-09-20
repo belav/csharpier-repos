@@ -24,7 +24,8 @@ namespace Microsoft.Web.Mvc.Resources
             ControllerContext controllerContext,
             ModelBindingContext bindingContext,
             ContentType requestFormat
-        ) {
+        )
+        {
             DataContractJsonSerializer json = new DataContractJsonSerializer(
                 bindingContext.ModelType
             );

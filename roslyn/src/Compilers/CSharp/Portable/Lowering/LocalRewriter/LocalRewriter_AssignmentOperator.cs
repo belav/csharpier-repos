@@ -119,7 +119,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             bool used,
             bool isChecked,
             bool isCompoundAssignment
-        ) {
+        )
+        {
             switch (rewrittenLeft.Kind)
             {
                 case BoundKind.DynamicIndexerAccess:
@@ -189,7 +190,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             BoundExpression loweredRight,
             bool isCompoundAssignment = false,
             bool isChecked = false
-        ) {
+        )
+        {
             // If we are calling a method on a NoPIA type, we need to embed all methods/properties
             // with the matching name of this dynamic invocation.
             EmbedIfNeedTo(loweredReceiver, indexerAccess.ApplicableIndexers, indexerAccess.Syntax);
@@ -217,7 +219,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             bool isRef,
             TypeSymbol type,
             bool used
-        ) {
+        )
+        {
             switch (rewrittenLeft.Kind)
             {
                 case BoundKind.DynamicIndexerAccess:
@@ -342,7 +345,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             BoundExpression rewrittenRight,
             TypeSymbol type,
             bool used
-        ) {
+        )
+        {
             // Rewrite property assignment into call to setter.
             var setMethod = property.GetOwnOrInheritedSetMethod();
 

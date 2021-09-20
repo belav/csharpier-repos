@@ -29,7 +29,8 @@ namespace System.Runtime.Serialization.Formatters.Binary
             ObjectReader objectReader,
             int objectId,
             BinaryAssemblyInfo assemblyInfo
-        ) {
+        )
+        {
             _objectName = objectName;
             _objectType = objectType;
             _memberNames = memberNames;
@@ -65,7 +66,8 @@ namespace System.Runtime.Serialization.Formatters.Binary
             int objectId,
             BinaryAssemblyInfo assemblyInfo,
             SizedArray assemIdToAssemblyTable
-        ) {
+        )
+        {
             _objectName = objectName;
             _memberNames = memberNames;
             _binaryTypeEnumA = binaryTypeEnumA;
@@ -110,7 +112,8 @@ namespace System.Runtime.Serialization.Formatters.Binary
         internal ReadObjectInfo CreateObjectInfo(
             ref SerializationInfo? si,
             ref object?[]? memberData
-        ) {
+        )
+        {
             if (_isInitObjectInfo)
             {
                 _isInitObjectInfo = false;

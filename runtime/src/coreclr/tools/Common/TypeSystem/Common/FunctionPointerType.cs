@@ -41,7 +41,8 @@ namespace Internal.TypeSystem
         public override TypeDesc InstantiateSignature(
             Instantiation typeInstantiation,
             Instantiation methodInstantiation
-        ) {
+        )
+        {
             MethodSignatureBuilder sigBuilder = new MethodSignatureBuilder(_signature);
             sigBuilder.ReturnType = _signature.ReturnType.InstantiateSignature(
                 typeInstantiation,

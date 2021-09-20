@@ -38,14 +38,15 @@ namespace Microsoft.EntityFrameworkCore.Storage
             IReadOnlyList<ReaderColumn>? readerColumns,
             DbContext? context,
             IRelationalCommandDiagnosticsLogger? logger
-        ) : this(
-            connection,
-            parameterValues,
-            readerColumns,
-            context,
-            logger,
-            detailedErrorsEnabled: false
-        ) { }
+        )
+            : this(
+                connection,
+                parameterValues,
+                readerColumns,
+                context,
+                logger,
+                detailedErrorsEnabled: false
+            ) { }
 
         /// <summary>
         ///     <para>
@@ -69,7 +70,8 @@ namespace Microsoft.EntityFrameworkCore.Storage
             DbContext? context,
             IRelationalCommandDiagnosticsLogger? logger,
             bool detailedErrorsEnabled
-        ) {
+        )
+        {
             Check.NotNull(connection, nameof(connection));
 
             Connection = connection;

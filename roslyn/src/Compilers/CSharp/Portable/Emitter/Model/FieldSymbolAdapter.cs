@@ -68,7 +68,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             if (
                 AdaptedFieldSymbol.IsDefinition
                 && AdaptedFieldSymbol.ContainingModule == moduleBeingBuilt.SourceModule
-            ) {
+            )
+            {
                 return this;
             }
 
@@ -115,7 +116,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             else if (
                 AdaptedFieldSymbol.ContainingModule
                 == ((PEModuleBuilder)visitor.Context.Module).SourceModule
-            ) {
+            )
+            {
                 visitor.Visit((Cci.IFieldDefinition)this);
             }
             else

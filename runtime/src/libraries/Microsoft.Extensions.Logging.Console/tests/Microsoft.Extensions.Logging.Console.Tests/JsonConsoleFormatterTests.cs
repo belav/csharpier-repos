@@ -286,7 +286,8 @@ namespace Microsoft.Extensions.Logging.Console.Test
         public void Log_StateAndScopeContainsSpecialCaseValue_SerializesValueAsExpected(
             object value,
             string expectedJsonValue
-        ) {
+        )
+        {
             // Arrange
             var t = SetUp(
                 new ConsoleLoggerOptions { FormatterName = ConsoleFormatterNames.Json },
@@ -420,7 +421,8 @@ namespace Microsoft.Extensions.Logging.Console.Test
                 logger.BeginScope(
                     new[] { 2 }.Select(x => new KeyValuePair<string, object>("Value", x))
                 )
-            ) {
+            )
+            {
                 logger.LogInformation("{LogEntryNumber}", 1);
             }
 

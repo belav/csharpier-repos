@@ -407,7 +407,8 @@ namespace JIT.HardwareIntrinsics.X86
             Byte scalarData,
             void* result,
             [CallerMemberName] string method = ""
-        ) {
+        )
+        {
             Byte[] inArray = new Byte[Op1ElementCount];
             Byte[] outArray = new Byte[RetElementCount];
 
@@ -426,7 +427,8 @@ namespace JIT.HardwareIntrinsics.X86
             Byte scalarData,
             void* result,
             [CallerMemberName] string method = ""
-        ) {
+        )
+        {
             Byte[] inArray = new Byte[Op1ElementCount];
             Byte[] outArray = new Byte[RetElementCount];
 
@@ -449,7 +451,8 @@ namespace JIT.HardwareIntrinsics.X86
             Byte scalarData,
             Byte[] result,
             [CallerMemberName] string method = ""
-        ) {
+        )
+        {
             bool succeeded = true;
 
             for (var i = 0; i < RetElementCount; i++)

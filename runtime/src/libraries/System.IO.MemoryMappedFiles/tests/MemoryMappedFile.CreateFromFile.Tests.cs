@@ -299,7 +299,8 @@ namespace System.IO.MemoryMappedFiles.Tests
         public void FileAccessAndMapAccessCombinations_Valid(
             FileAccess fileAccess,
             MemoryMappedFileAccess mmfAccess
-        ) {
+        )
+        {
             const int Capacity = 4096;
             using (TempFile file = new TempFile(GetTestFilePath(), Capacity))
             using (FileStream fs = new FileStream(file.Path, FileMode.Open, fileAccess))
@@ -312,7 +313,8 @@ namespace System.IO.MemoryMappedFiles.Tests
                     HandleInheritability.None,
                     true
                 )
-            ) {
+            )
+            {
                 ValidateMemoryMappedFile(mmf, Capacity, mmfAccess);
             }
         }
@@ -336,7 +338,8 @@ namespace System.IO.MemoryMappedFiles.Tests
         public void FileAccessAndMapAccessCombinations_Invalid_Windows(
             FileAccess fileAccess,
             MemoryMappedFileAccess mmfAccess
-        ) {
+        )
+        {
             // On Windows, creating the file mapping does the permissions checks, so the exception comes from CreateFromFile.
             const int Capacity = 4096;
             using (TempFile file = new TempFile(GetTestFilePath(), Capacity))
@@ -373,7 +376,8 @@ namespace System.IO.MemoryMappedFiles.Tests
         public void FileAccessAndMapAccessCombinations_Invalid_Unix(
             FileAccess fileAccess,
             MemoryMappedFileAccess mmfAccess
-        ) {
+        )
+        {
             // On Unix we don't actually create the OS map until the view is created; this results in the permissions
             // error being thrown from CreateView* instead of from CreateFromFile.
             const int Capacity = 4096;
@@ -388,7 +392,8 @@ namespace System.IO.MemoryMappedFiles.Tests
                     HandleInheritability.None,
                     true
                 )
-            ) {
+            )
+            {
                 Assert.Throws<UnauthorizedAccessException>(() => mmf.CreateViewAccessor());
             }
         }
@@ -731,7 +736,8 @@ namespace System.IO.MemoryMappedFiles.Tests
             string mapName,
             long capacity,
             MemoryMappedFileAccess access
-        ) {
+        )
+        {
             _ = access;
 
             // Test each of the four path-based CreateFromFile overloads
@@ -762,7 +768,8 @@ namespace System.IO.MemoryMappedFiles.Tests
                     mapName,
                     capacity
                 )
-            ) {
+            )
+            {
                 ValidateMemoryMappedFile(mmf, capacity);
             }
 
@@ -776,7 +783,8 @@ namespace System.IO.MemoryMappedFiles.Tests
                     mapName,
                     capacity
                 )
-            ) {
+            )
+            {
                 ValidateMemoryMappedFile(mmf, capacity);
             }
         }
@@ -810,7 +818,8 @@ namespace System.IO.MemoryMappedFiles.Tests
             string mapName,
             long capacity,
             MemoryMappedFileAccess access
-        ) {
+        )
+        {
             // For FileMode.CreateNew, the file will be created new and thus be empty, so we can only use the overloads
             // that take a capacity, since the default capacity doesn't work with an empty file.
 
@@ -821,7 +830,8 @@ namespace System.IO.MemoryMappedFiles.Tests
                     mapName,
                     capacity
                 )
-            ) {
+            )
+            {
                 ValidateMemoryMappedFile(mmf, capacity);
             }
             using (
@@ -832,7 +842,8 @@ namespace System.IO.MemoryMappedFiles.Tests
                     capacity,
                     access
                 )
-            ) {
+            )
+            {
                 ValidateMemoryMappedFile(mmf, capacity, access);
             }
         }
@@ -864,7 +875,8 @@ namespace System.IO.MemoryMappedFiles.Tests
                     mapName,
                     capacity
                 )
-            ) {
+            )
+            {
                 ValidateMemoryMappedFile(mmf, capacity);
             }
 
@@ -877,7 +889,8 @@ namespace System.IO.MemoryMappedFiles.Tests
                     capacity,
                     MemoryMappedFileAccess.ReadWrite
                 )
-            ) {
+            )
+            {
                 ValidateMemoryMappedFile(mmf, capacity, MemoryMappedFileAccess.ReadWrite);
             }
 
@@ -888,7 +901,8 @@ namespace System.IO.MemoryMappedFiles.Tests
                     mapName,
                     capacity
                 )
-            ) {
+            )
+            {
                 ValidateMemoryMappedFile(mmf, capacity);
             }
         }
@@ -914,13 +928,15 @@ namespace System.IO.MemoryMappedFiles.Tests
             string[] mapNames,
             long[] capacities,
             MemoryMappedFileAccess[] accesses
-        ) {
+        )
+        {
             foreach (
                 object[] namesCaps in MemberData_ValidNameCapacityCombinationsWithPath(
                     mapNames,
                     capacities
                 )
-            ) {
+            )
+            {
                 foreach (FileMode mode in modes)
                 {
                     foreach (MemoryMappedFileAccess access in accesses)
@@ -931,7 +947,8 @@ namespace System.IO.MemoryMappedFiles.Tests
                                 || mode == FileMode.CreateNew
                                 || mode == FileMode.Truncate
                             ) && !IsWritable(access)
-                        ) {
+                        )
+                        {
                             continue;
                         }
 
@@ -944,7 +961,8 @@ namespace System.IO.MemoryMappedFiles.Tests
         public static IEnumerable<object[]> MemberData_ValidNameCapacityCombinationsWithPath(
             string[] mapNames,
             long[] capacities
-        ) {
+        )
+        {
             foreach (string tmpMapName in mapNames)
             {
                 if (tmpMapName != null && !MapNamesSupported)
@@ -996,7 +1014,8 @@ namespace System.IO.MemoryMappedFiles.Tests
             MemoryMappedFileAccess access,
             HandleInheritability inheritability,
             bool leaveOpen
-        ) {
+        )
+        {
             // Create a file of the right size, then create the map for it.
             using (TempFile file = new TempFile(GetTestFilePath(), capacity))
             using (FileStream fs = File.Open(file.Path, FileMode.Open))
@@ -1009,7 +1028,8 @@ namespace System.IO.MemoryMappedFiles.Tests
                     inheritability,
                     leaveOpen
                 )
-            ) {
+            )
+            {
                 ValidateMemoryMappedFile(mmf, capacity, access, inheritability);
             }
 
@@ -1026,7 +1046,8 @@ namespace System.IO.MemoryMappedFiles.Tests
                         inheritability,
                         leaveOpen
                     )
-                ) {
+                )
+                {
                     ValidateMemoryMappedFile(mmf, capacity, access, inheritability);
                 }
             }
@@ -1055,7 +1076,8 @@ namespace System.IO.MemoryMappedFiles.Tests
             MemoryMappedFileAccess[] accesses,
             HandleInheritability[] inheritabilities,
             bool[] leaveOpens
-        ) {
+        )
+        {
             foreach (string tmpMapName in mapNames)
             {
                 if (tmpMapName != null && !MapNamesSupported)
@@ -1110,7 +1132,8 @@ namespace System.IO.MemoryMappedFiles.Tests
                     null,
                     DefaultCapacity
                 )
-            ) {
+            )
+            {
                 ValidateMemoryMappedFile(mmf, DesiredCapacity);
             }
 
@@ -1126,7 +1149,8 @@ namespace System.IO.MemoryMappedFiles.Tests
                     HandleInheritability.None,
                     true
                 )
-            ) {
+            )
+            {
                 ValidateMemoryMappedFile(mmf, DesiredCapacity);
             }
         }
@@ -1254,7 +1278,8 @@ namespace System.IO.MemoryMappedFiles.Tests
                     FileAccess.ReadWrite,
                     FileShare.None
                 )
-            ) {
+            )
+            {
                 Assert.Throws<IOException>(() => MemoryMappedFile.CreateFromFile(file.Path));
             }
         }
@@ -1298,7 +1323,8 @@ namespace System.IO.MemoryMappedFiles.Tests
                     Capacity,
                     MemoryMappedFileAccess.Read
                 )
-            ) {
+            )
+            {
                 Assert.Equal(acc1.Capacity, acc2.Capacity);
             }
         }
@@ -1626,7 +1652,8 @@ namespace System.IO.MemoryMappedFiles.Tests
                     name,
                     Capacity
                 )
-            ) {
+            )
+            {
                 ValidateMemoryMappedFile(mmf, Capacity);
                 Assert.Throws<IOException>(
                     () =>
@@ -1645,7 +1672,8 @@ namespace System.IO.MemoryMappedFiles.Tests
                     name,
                     Capacity
                 )
-            ) {
+            )
+            {
                 ValidateMemoryMappedFile(mmf, Capacity);
             }
         }
@@ -1654,10 +1682,12 @@ namespace System.IO.MemoryMappedFiles.Tests
             MemoryMappedFile memMap,
             long viewCapacity,
             MemoryMappedFileAccess access
-        ) {
+        )
+        {
             using (
                 MemoryMappedViewAccessor view = memMap.CreateViewAccessor(0, viewCapacity, access)
-            ) {
+            )
+            {
                 if (access != MemoryMappedFileAccess.Write)
                 {
                     byte b = view.ReadByte(0);
@@ -1708,7 +1738,8 @@ namespace System.IO.MemoryMappedFiles.Tests
                         HandleInheritability.None,
                         false
                     )
-                ) {
+                )
+                {
                     ValidateDeviceAccess(memMap, viewCapacity, access);
                 }
             }
@@ -1745,7 +1776,8 @@ namespace System.IO.MemoryMappedFiles.Tests
                         viewCapacity,
                         access
                     )
-                ) {
+                )
+                {
                     ValidateDeviceAccess(memMap, viewCapacity, access);
                 }
             }

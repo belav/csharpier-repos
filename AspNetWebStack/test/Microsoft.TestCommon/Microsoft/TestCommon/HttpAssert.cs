@@ -73,7 +73,8 @@ namespace Microsoft.TestCommon
             HttpResponseMessage expected,
             HttpResponseMessage actual,
             Action<string, string> verifyContentStringCallback
-        ) {
+        )
+        {
             Assert.NotNull(expected);
             Assert.NotNull(actual);
 
@@ -159,7 +160,8 @@ namespace Microsoft.TestCommon
         public bool IsKnownUnserializableType(
             Type type,
             Func<Type, bool> isTypeUnserializableCallback
-        ) {
+        )
+        {
             if (isTypeUnserializableCallback != null && isTypeUnserializableCallback(type))
             {
                 return true;
@@ -185,7 +187,8 @@ namespace Microsoft.TestCommon
             if (
                 type.HasElementType
                 && IsKnownUnserializableType(type.GetElementType(), isTypeUnserializableCallback)
-            ) {
+            )
+            {
                 return true;
             }
 
@@ -196,7 +199,8 @@ namespace Microsoft.TestCommon
             Type type,
             object obj,
             Func<Type, bool> isTypeUnserializableCallback
-        ) {
+        )
+        {
             if (IsKnownUnserializableType(type, isTypeUnserializableCallback))
             {
                 return true;
@@ -245,7 +249,8 @@ namespace Microsoft.TestCommon
         private static void HandleDateHeader(
             string[] expectedDateHeaderValues,
             string[] actualDateHeaderValues
-        ) {
+        )
+        {
             Assert.Equal(expectedDateHeaderValues.Length, actualDateHeaderValues.Length);
 
             for (int i = 0; i < expectedDateHeaderValues.Length; i++)

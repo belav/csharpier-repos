@@ -193,7 +193,8 @@ namespace System.Web.Cors
             IDictionary<string, string> headers,
             string headerName,
             IEnumerable<string> headerValues
-        ) {
+        )
+        {
             string methods = String.Join(",", headerValues);
             if (!String.IsNullOrEmpty(methods))
             {

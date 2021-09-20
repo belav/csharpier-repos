@@ -137,7 +137,8 @@ namespace Microsoft.CSharp.RuntimeBinder.Semantics
                         AggregateType agg = this;
                         agg != null;
                         agg = agg.BaseClassWithSuppressedMessage
-                    ) {
+                    )
+                    {
                         yield return agg;
                     }
                 }
@@ -344,7 +345,8 @@ namespace Microsoft.CSharp.RuntimeBinder.Semantics
                     if (
                         typeArg is TypeParameterType typeParamArg
                         && typeParamArg.Symbol.name == null
-                    ) {
+                    )
+                    {
                         return null;
                     }
 
@@ -394,7 +396,8 @@ namespace Microsoft.CSharp.RuntimeBinder.Semantics
                 if (
                     IsPredefType(PredefinedType.PT_INTPTR)
                     || IsPredefType(PredefinedType.PT_UINTPTR)
-                ) {
+                )
+                {
                     return ConstValKind.IntPtr;
                 }
 

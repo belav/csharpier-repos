@@ -120,7 +120,8 @@ namespace Microsoft.AspNetCore.Mvc.ModelBinding.Test
 
         private static ValueProviderFactoryContext CreateContext(
             Dictionary<string, StringValues> queryStringValues
-        ) {
+        )
+        {
             var context = new DefaultHttpContext();
 
             context.Request.Query = new QueryCollection(queryStringValues);

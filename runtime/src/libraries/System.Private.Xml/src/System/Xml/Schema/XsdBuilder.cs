@@ -104,7 +104,8 @@ namespace System.Xml.Schema
                 XsdInitFunction? init,
                 XsdEndChildFunction? end,
                 bool parseContent
-            ) {
+            )
+            {
                 Name = n;
                 CurrentState = state;
                 NextStates = nextStates;
@@ -1399,7 +1400,8 @@ namespace System.Xml.Schema
             XmlNameTable nameTable,
             SchemaNames schemaNames,
             ValidationEventHandler? eventhandler
-        ) {
+        )
+        {
             _reader = reader;
             _xso = _schema = schema;
             _namespaceManager = new BuilderNamespaceManager(curmgr, reader);
@@ -2223,7 +2225,8 @@ namespace System.Xml.Schema
                         builder._simpleContentRestriction.Attributes.Count != 0
                         || builder._simpleContentRestriction.AnyAttribute != null
                         || builder._simpleContentRestriction.Facets.Count != 0
-                    ) {
+                    )
+                    {
                         builder.SendValidationEvent(SR.Sch_SimpleTypeRestriction, null);
                     }
                     builder._simpleContentRestriction.BaseType = builder._simpleType;
@@ -2424,7 +2427,8 @@ namespace System.Xml.Schema
                     || builder._complexType.Attributes.Count != 0
                     || builder._complexType.AnyAttribute != null
                 )
-            ) {
+            )
+            {
                 builder.SendValidationEvent(SR.Sch_ComplexTypeContentModel, "complexContent");
             }
             builder._xso = builder._complexContent = new XmlSchemaComplexContent();
@@ -2496,7 +2500,8 @@ namespace System.Xml.Schema
                     || builder._complexType.Attributes.Count != 0
                     || builder._complexType.AnyAttribute != null
                 )
-            ) {
+            )
+            {
                 builder.SendValidationEvent(SR.Sch_ComplexTypeContentModel, "simpleContent");
             }
             builder._xso = builder._simpleContent = new XmlSchemaSimpleContent();
@@ -2908,7 +2913,8 @@ namespace System.Xml.Schema
                 if (
                     builder._simpleContentRestriction!.Attributes.Count != 0
                     || (builder._simpleContentRestriction.AnyAttribute != null)
-                ) {
+                )
+                {
                     builder.SendValidationEvent(SR.Sch_InvalidFacetPosition, null);
                 }
                 builder._simpleContentRestriction.Facets.Add(builder._facet!);
@@ -3058,7 +3064,8 @@ namespace System.Xml.Schema
                 builder._hasChild
                 && builder.ParentElement != SchemaNames.Token.XsdSchema
                 && builder.ParentElement != SchemaNames.Token.XsdRedefine
-            ) {
+            )
+            {
                 builder.SendValidationEvent(SR.Sch_AnnotationLocation, null);
             }
             builder._xso = builder._annotation = new XmlSchemaAnnotation();
@@ -3197,7 +3204,8 @@ namespace System.Xml.Schema
                         (_complexType!.ContentModel != null)
                         || (_complexType.Attributes.Count != 0 || _complexType.AnyAttribute != null)
                         || (_complexType.Particle != null)
-                    ) {
+                    )
+                    {
                         SendValidationEvent(SR.Sch_ComplexTypeContentModel, "complexType");
                     }
                     _complexType.Particle = particle;
@@ -3209,7 +3217,8 @@ namespace System.Xml.Schema
                             _complexContentExtension.Attributes.Count != 0
                             || _complexContentExtension.AnyAttribute != null
                         )
-                    ) {
+                    )
+                    {
                         SendValidationEvent(
                             SR.Sch_ComplexContentContentModel,
                             "ComplexContentExtension"
@@ -3224,7 +3233,8 @@ namespace System.Xml.Schema
                             _complexContentRestriction.Attributes.Count != 0
                             || _complexContentRestriction.AnyAttribute != null
                         )
-                    ) {
+                    )
+                    {
                         SendValidationEvent(
                             SR.Sch_ComplexContentContentModel,
                             "ComplexContentExtension"
@@ -3354,7 +3364,8 @@ namespace System.Xml.Schema
                         if (
                             (r & s_derivationMethodValues[j]) != 0
                             && (r & s_derivationMethodValues[j]) != s_derivationMethodValues[j]
-                        ) {
+                        )
+                        {
                             SendValidationEvent(
                                 SR.Sch_InvalidXsdAttributeValue,
                                 attributeName,

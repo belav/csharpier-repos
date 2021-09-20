@@ -235,7 +235,8 @@ However, we are keeping it in the source as it may be useful to developers who c
             ImmutableArray<T> sorted,
             Func<T, IEnumerable<T>> successors,
             string message = null
-        ) {
+        )
+        {
             var seen = new HashSet<T>();
             for (int i = sorted.Length - 1; i >= 0; i--)
             {

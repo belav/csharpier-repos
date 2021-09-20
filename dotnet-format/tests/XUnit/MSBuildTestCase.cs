@@ -51,7 +51,8 @@ namespace Microsoft.CodeAnalysis.Tools.Tests.XUnit
             object[] constructorArguments,
             ExceptionAggregator aggregator,
             CancellationTokenSource cancellationTokenSource
-        ) {
+        )
+        {
             await MSBuildWorkspaceLoader.Guard.WaitAsync();
             try
             {

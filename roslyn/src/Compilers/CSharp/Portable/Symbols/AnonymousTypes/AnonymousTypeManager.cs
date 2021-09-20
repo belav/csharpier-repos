@@ -52,7 +52,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
         /// </summary>
         internal static ImmutableArray<TypeWithAnnotations> GetAnonymousTypePropertyTypesWithAnnotations(
             NamedTypeSymbol type
-        ) {
+        )
+        {
             Debug.Assert(type.IsAnonymousType);
             var anonymous = (AnonymousTypePublicSymbol)type;
             var fields = anonymous.TypeDescriptor.Fields;
@@ -66,7 +67,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
         public static NamedTypeSymbol ConstructAnonymousTypeSymbol(
             NamedTypeSymbol type,
             ImmutableArray<TypeWithAnnotations> newFieldTypes
-        ) {
+        )
+        {
             Debug.Assert(!newFieldTypes.IsDefault);
             Debug.Assert(type.IsAnonymousType);
 

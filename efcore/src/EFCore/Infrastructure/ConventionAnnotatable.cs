@@ -69,7 +69,8 @@ namespace Microsoft.EntityFrameworkCore.Infrastructure
             string name,
             object? value,
             ConfigurationSource configurationSource
-        ) {
+        )
+        {
             var oldAnnotation = FindAnnotation(name);
             if (oldAnnotation != null)
             {
@@ -101,7 +102,8 @@ namespace Microsoft.EntityFrameworkCore.Infrastructure
             string name,
             object? value,
             ConfigurationSource configurationSource
-        ) {
+        )
+        {
             if (value == null)
             {
                 RemoveAnnotation(name);

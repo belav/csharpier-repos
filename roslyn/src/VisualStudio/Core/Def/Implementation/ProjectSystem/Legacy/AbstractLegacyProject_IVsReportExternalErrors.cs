@@ -39,7 +39,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.ProjectSystem.L
             int iLine,
             int iColumn,
             string bstrFileName
-        ) {
+        )
+        {
             return _externalErrorReporter.ReportError(
                 bstrErrorMessage,
                 bstrErrorId,
@@ -57,7 +58,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.ProjectSystem.L
             int iLine,
             int iColumn,
             string bstrFileName
-        ) {
+        )
+        {
             return _externalErrorReporter.ReportError(
                 bstrErrorMessage,
                 bstrErrorId,
@@ -77,7 +79,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.ProjectSystem.L
             int iEndLine,
             int iEndColumn,
             string bstrFileName
-        ) {
+        )
+        {
             _externalErrorReporter.ReportError2(
                 bstrErrorMessage,
                 bstrErrorId,

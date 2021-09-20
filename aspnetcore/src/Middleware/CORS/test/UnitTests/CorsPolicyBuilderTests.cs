@@ -361,7 +361,8 @@ namespace Microsoft.AspNetCore.Cors.Infrastructure
         public void GetNormalizedOrigin_ReturnsLowerCasedValue_IfStringIsNotHttpOrHttpsUrl(
             string origin,
             string expected
-        ) {
+        )
+        {
             // Act
             var normalizedOrigin = CorsPolicyBuilder.GetNormalizedOrigin(origin);
 

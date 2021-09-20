@@ -15,7 +15,8 @@ namespace System.Web.Http.WebHost
 
         public static CancellationToken GetClientDisconnectedTokenWhenFixed(
             this HttpResponseBase response
-        ) {
+        )
+        {
             if (response == null)
             {
                 throw new ArgumentNullException("response");

@@ -261,7 +261,8 @@ internal unsafe class testout1
         if (
             (Convert.ToInt64(Convert.ToDouble(8828430758690422784L) * ((*a2_0_1_1_1_1))))
             < (8828430758690422784L)
-        ) {
+        )
+        {
             return Convert.ToInt64(
                 (
                     Convert.ToInt64(
@@ -360,7 +361,8 @@ internal unsafe class testout1
             if (
                 (val_0_1_1_1)
                 >= (Convert.ToInt16((Convert.ToInt16(val_0_1_1_1)) % (Convert.ToInt16(15783))))
-            ) {
+            )
+            {
                 return Convert.ToUInt16(
                     Convert.ToUInt16(
                         Convert.ToInt16((Convert.ToInt16(val_0_1_1_1)) % (Convert.ToInt16(15783)))

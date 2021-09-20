@@ -195,7 +195,8 @@ namespace Castle.Components.DictionaryAdapter
             if (
                 This.EqualityHashCodeStrategy == null
                 || This.EqualityHashCodeStrategy.GetHashCode(this, out hashCode) == false
-            ) {
+            )
+            {
                 hashCode = base.GetHashCode();
             }
 

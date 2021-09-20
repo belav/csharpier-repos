@@ -35,7 +35,8 @@ namespace System.Web.Razor.Parser
             this TextReader reader,
             bool inclusive,
             params char[] terminators
-        ) {
+        )
+        {
             if (reader == null)
             {
                 throw new ArgumentNullException("reader");
@@ -57,7 +58,8 @@ namespace System.Web.Razor.Parser
             this TextReader reader,
             Predicate<char> condition,
             bool inclusive
-        ) {
+        )
+        {
             if (reader == null)
             {
                 throw new ArgumentNullException("reader");
@@ -92,7 +94,8 @@ namespace System.Web.Razor.Parser
             this TextReader reader,
             Predicate<char> condition,
             bool inclusive
-        ) {
+        )
+        {
             if (reader == null)
             {
                 throw new ArgumentNullException("reader");

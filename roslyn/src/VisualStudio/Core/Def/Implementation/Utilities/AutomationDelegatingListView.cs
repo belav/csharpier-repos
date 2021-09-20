@@ -40,9 +40,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Utilities
 
     internal class AutomationDelegatingListViewAutomationPeer : FrameworkElementAutomationPeer
     {
-        public AutomationDelegatingListViewAutomationPeer(
-            AutomationDelegatingListView listView
-        ) : base(listView) { }
+        public AutomationDelegatingListViewAutomationPeer(AutomationDelegatingListView listView)
+            : base(listView) { }
 
         protected override List<AutomationPeer> GetChildrenCore()
         {
@@ -62,7 +61,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Utilities
                     foreach (
                         var childPeer in peer.GetChildren()
                             ?? SpecializedCollections.EmptyEnumerable<AutomationPeer>()
-                    ) {
+                    )
+                    {
                         peersToProcess.Enqueue(childPeer);
                     }
                 }

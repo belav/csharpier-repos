@@ -28,7 +28,8 @@ namespace RunTests
             bool succeeded,
             ImmutableArray<TestResult> testResults,
             ImmutableArray<ProcessResult> processResults
-        ) {
+        )
+        {
             Succeeded = succeeded;
             TestResults = testResults;
             ProcessResults = processResults;
@@ -49,7 +50,8 @@ namespace RunTests
         internal async Task<RunAllResult> RunAllOnHelixAsync(
             IEnumerable<AssemblyInfo> assemblyInfoList,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var sourceBranch = Environment.GetEnvironmentVariable("BUILD_SOURCEBRANCH");
             if (sourceBranch is null)
             {
@@ -242,7 +244,8 @@ namespace RunTests
         internal async Task<RunAllResult> RunAllAsync(
             IEnumerable<AssemblyInfo> assemblyInfoList,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             // Use 1.5 times the number of processors for unit tests, but only 1 processor for the open integration tests
             // since they perform actual UI operations (such as mouse clicks and sending keystrokes) and we don't want two
             // tests to conflict with one-another.

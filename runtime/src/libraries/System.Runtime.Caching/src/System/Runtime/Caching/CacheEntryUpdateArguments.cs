@@ -51,7 +51,8 @@ namespace System.Runtime.Caching
             CacheEntryRemovedReason reason,
             string key,
             string regionName
-        ) {
+        )
+        {
             if (source == null)
             {
                 throw new ArgumentNullException(nameof(source));

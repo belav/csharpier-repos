@@ -20,7 +20,8 @@ namespace Microsoft.AspNetCore.SignalR.Tests
             ILoggerFactory loggerFactory = null,
             IDisposable wrappedDisposable = null,
             Func<WriteContext, bool> expectedErrorsFilter = null
-        ) {
+        )
+        {
             _wrappedDisposable = wrappedDisposable;
             _expectedErrorsFilter = expectedErrorsFilter;
             _sink = new LogSinkProvider();

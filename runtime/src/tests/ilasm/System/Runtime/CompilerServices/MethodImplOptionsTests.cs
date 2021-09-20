@@ -62,7 +62,8 @@ public static class MethodImplOptionsTests
         string testName,
         string ilFileName,
         string ilDisasmAttributeKeyword
-    ) {
+    )
+    {
         Console.WriteLine(testName);
 
         try
@@ -124,7 +125,8 @@ public static class MethodImplOptionsTests
         out string disasmIlFileName,
         out ProcessStartInfo ilasmPsi,
         out ProcessStartInfo ildasmPsi
-    ) {
+    )
+    {
         if (!File.Exists(ilFileName))
         {
             throw new FileNotFoundException(

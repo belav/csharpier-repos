@@ -15,7 +15,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Completion.Providers
             SyntaxKind directiveKind,
             out SyntaxToken stringLiteral,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             if (tree.IsEntirelyWithinStringLiteral(position, cancellationToken))
             {
                 var token = tree.GetRoot(cancellationToken)
@@ -23,14 +24,16 @@ namespace Microsoft.CodeAnalysis.CSharp.Completion.Providers
                 if (
                     token.Kind() == SyntaxKind.EndOfDirectiveToken
                     || token.Kind() == SyntaxKind.EndOfFileToken
-                ) {
+                )
+                {
                     token = token.GetPreviousToken(includeSkipped: true, includeDirectives: true);
                 }
 
                 if (
                     token.Kind() == SyntaxKind.StringLiteralToken
                     && token.Parent!.Kind() == directiveKind
-                ) {
+                )
+                {
                     stringLiteral = token;
                     return true;
                 }

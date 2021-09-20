@@ -23,7 +23,8 @@ namespace Microsoft.CodeAnalysis.Remote
         public static void RemoveChecksums(
             this Dictionary<Checksum, object> map,
             ChecksumWithChildren checksums
-        ) {
+        )
+        {
             var set = new HashSet<Checksum>();
             set.AppendChecksums(checksums);
 
@@ -33,7 +34,8 @@ namespace Microsoft.CodeAnalysis.Remote
         public static void RemoveChecksums(
             this Dictionary<Checksum, object> map,
             IEnumerable<Checksum> checksums
-        ) {
+        )
+        {
             foreach (var checksum in checksums)
             {
                 map.Remove(checksum);
@@ -45,7 +47,8 @@ namespace Microsoft.CodeAnalysis.Remote
             Checksum checksumFromRequest,
             Solution solutionFromScratch,
             Solution incrementalSolutionBuilt
-        ) {
+        )
+        {
 #if DEBUG
             var sb = new StringBuilder();
             var allChecksumsFromRequest = await GetAllChildrenChecksumsAsync(checksumFromRequest)
@@ -128,7 +131,8 @@ namespace Microsoft.CodeAnalysis.Remote
                 List<KeyValuePair<Checksum, object>> items,
                 string title,
                 StringBuilder stringBuilder
-            ) {
+            )
+            {
                 if (items.Count == 0)
                 {
                     return;
@@ -145,7 +149,8 @@ namespace Microsoft.CodeAnalysis.Remote
 
             async Task<List<KeyValuePair<Checksum, object>>> GetAssetFromAssetServiceAsync(
                 IEnumerable<Checksum> checksums
-            ) {
+            )
+            {
                 var items = new List<KeyValuePair<Checksum, object>>();
 
                 foreach (var checksum in checksums)
@@ -190,7 +195,8 @@ namespace Microsoft.CodeAnalysis.Remote
                                 projectChecksums.AdditionalDocuments
                             )
                             .Concat(projectChecksums.AnalyzerConfigDocuments)
-                    ) {
+                    )
+                    {
                         var documentChecksums =
                             await assetService.GetAssetAsync<DocumentStateChecksums>(
                                     documentChecksum,
@@ -217,7 +223,8 @@ namespace Microsoft.CodeAnalysis.Remote
         public static async Task<Dictionary<Checksum, object>> GetAssetMapAsync(
             this Solution solution,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var map = new Dictionary<Checksum, object>();
             await solution.AppendAssetMapAsync(map, cancellationToken).ConfigureAwait(false);
             return map;
@@ -230,7 +237,8 @@ namespace Microsoft.CodeAnalysis.Remote
         public static async Task<Dictionary<Checksum, object>> GetAssetMapAsync(
             this Project project,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var map = new Dictionary<Checksum, object>();
 
             await project.AppendAssetMapAsync(map, cancellationToken).ConfigureAwait(false);
@@ -241,7 +249,8 @@ namespace Microsoft.CodeAnalysis.Remote
             this Solution solution,
             Dictionary<Checksum, object> map,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var solutionChecksums = await solution.State.GetStateChecksumsAsync(cancellationToken)
                 .ConfigureAwait(false);
 
@@ -263,7 +272,8 @@ namespace Microsoft.CodeAnalysis.Remote
             this Project project,
             Dictionary<Checksum, object> map,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             if (!RemoteSupportedLanguages.IsSupported(project.Language))
             {
                 return;
@@ -282,7 +292,8 @@ namespace Microsoft.CodeAnalysis.Remote
             foreach (
                 var document in project.Documents.Concat(project.AdditionalDocuments)
                     .Concat(project.AnalyzerConfigDocuments)
-            ) {
+            )
+            {
                 var documentChecksums = await document.State.GetStateChecksumsAsync(
                         cancellationToken
                     )
@@ -308,7 +319,8 @@ namespace Microsoft.CodeAnalysis.Remote
         public static void AppendChecksums(
             this HashSet<Checksum> set,
             ChecksumWithChildren checksums
-        ) {
+        )
+        {
             set.Add(checksums.Checksum);
 
             foreach (var child in checksums.Children)

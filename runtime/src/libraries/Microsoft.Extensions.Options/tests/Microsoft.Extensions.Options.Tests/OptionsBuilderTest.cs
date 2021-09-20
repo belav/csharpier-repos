@@ -501,7 +501,8 @@ namespace Microsoft.Extensions.Options.Tests
             string name = "",
             int count = 1,
             params string[] errorsToMatch
-        ) {
+        )
+        {
             Assert.Equal(typeof(TOptions), e.OptionsType);
             Assert.Equal(name, e.OptionsName);
             if (errorsToMatch.Length == 0)
@@ -668,7 +669,8 @@ namespace Microsoft.Extensions.Options.Tests
             public OptionsStartupValidator(
                 IOptions<StartupValidationOptions> options,
                 IServiceProvider services
-            ) {
+            )
+            {
                 _services = services;
                 _options = options.Value;
             }
@@ -762,7 +764,8 @@ namespace Microsoft.Extensions.Options.Tests
             protected override ValidationResult IsValid(
                 object value,
                 ValidationContext validationContext
-            ) {
+            )
+            {
                 object instance = validationContext.ObjectInstance;
                 Type type = instance.GetType();
                 var dep1 = type.GetProperty("Dep1")?.GetValue(instance);

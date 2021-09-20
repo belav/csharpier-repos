@@ -22,7 +22,8 @@ namespace Microsoft.Extensions.Logging
         public static ILoggingBuilder AddTraceSource(
             this ILoggingBuilder builder,
             string switchName
-        ) {
+        )
+        {
             if (builder == null)
             {
                 throw new ArgumentNullException(nameof(builder));
@@ -47,7 +48,8 @@ namespace Microsoft.Extensions.Logging
             this ILoggingBuilder builder,
             string switchName,
             TraceListener listener
-        ) {
+        )
+        {
             if (builder == null)
             {
                 throw new ArgumentNullException(nameof(builder));
@@ -75,7 +77,8 @@ namespace Microsoft.Extensions.Logging
         public static ILoggingBuilder AddTraceSource(
             this ILoggingBuilder builder,
             SourceSwitch sourceSwitch
-        ) {
+        )
+        {
             if (builder == null)
             {
                 throw new ArgumentNullException(nameof(builder));
@@ -104,7 +107,8 @@ namespace Microsoft.Extensions.Logging
             this ILoggingBuilder builder,
             SourceSwitch sourceSwitch,
             TraceListener listener
-        ) {
+        )
+        {
             if (builder == null)
             {
                 throw new ArgumentNullException(nameof(builder));

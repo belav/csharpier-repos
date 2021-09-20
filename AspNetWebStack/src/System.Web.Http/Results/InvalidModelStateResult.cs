@@ -35,28 +35,28 @@ namespace System.Web.Http.Results
             IContentNegotiator contentNegotiator,
             HttpRequestMessage request,
             IEnumerable<MediaTypeFormatter> formatters
-        ) : this(
-            modelState,
-            new ExceptionResult.DirectDependencyProvider(
-                includeErrorDetail,
-                contentNegotiator,
-                request,
-                formatters
-            )
-        ) { }
+        )
+            : this(
+                modelState,
+                new ExceptionResult.DirectDependencyProvider(
+                    includeErrorDetail,
+                    contentNegotiator,
+                    request,
+                    formatters
+                )
+            ) { }
 
         /// <summary>Initializes a new instance of the <see cref="InvalidModelStateResult"/> class.</summary>
         /// <param name="modelState">The model state to include in the error.</param>
         /// <param name="controller">The controller from which to obtain the dependencies needed for execution.</param>
-        public InvalidModelStateResult(
-            ModelStateDictionary modelState,
-            ApiController controller
-        ) : this(modelState, new ExceptionResult.ApiControllerDependencyProvider(controller)) { }
+        public InvalidModelStateResult(ModelStateDictionary modelState, ApiController controller)
+            : this(modelState, new ExceptionResult.ApiControllerDependencyProvider(controller)) { }
 
         private InvalidModelStateResult(
             ModelStateDictionary modelState,
             ExceptionResult.IDependencyProvider dependencies
-        ) {
+        )
+        {
             if (modelState == null)
             {
                 throw new ArgumentNullException("modelState");

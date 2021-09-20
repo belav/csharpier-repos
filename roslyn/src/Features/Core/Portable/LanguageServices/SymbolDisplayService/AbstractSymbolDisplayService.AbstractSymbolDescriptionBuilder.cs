@@ -102,7 +102,8 @@ namespace Microsoft.CodeAnalysis.LanguageServices
                 Workspace workspace,
                 IAnonymousTypeDisplayService anonymousTypeDisplayService,
                 CancellationToken cancellationToken
-            ) {
+            )
+            {
                 _anonymousTypeDisplayService = anonymousTypeDisplayService;
                 Workspace = workspace;
                 CancellationToken = cancellationToken;
@@ -210,7 +211,8 @@ namespace Microsoft.CodeAnalysis.LanguageServices
                 void AddReturnsDocumentationParts(
                     ISymbol symbol,
                     IDocumentationCommentFormattingService formatter
-                ) {
+                )
+                {
                     var parts = symbol.GetReturnsDocumentationParts(
                         _semanticModel,
                         _position,
@@ -237,7 +239,8 @@ namespace Microsoft.CodeAnalysis.LanguageServices
                 void AddValueDocumentationParts(
                     ISymbol symbol,
                     IDocumentationCommentFormattingService formatter
-                ) {
+                )
+                {
                     var parts = symbol.GetValueDocumentationParts(
                         _semanticModel,
                         _position,
@@ -354,7 +357,8 @@ namespace Microsoft.CodeAnalysis.LanguageServices
             public async Task<ImmutableArray<SymbolDisplayPart>> BuildDescriptionAsync(
                 ImmutableArray<ISymbol> symbolGroup,
                 SymbolDescriptionGroups groups
-            ) {
+            )
+            {
                 Contract.ThrowIfFalse(symbolGroup.Length > 0);
 
                 await AddPartsAsync(symbolGroup).ConfigureAwait(false);
@@ -450,7 +454,8 @@ namespace Microsoft.CodeAnalysis.LanguageServices
 
             private ImmutableArray<SymbolDisplayPart> BuildDescription(
                 SymbolDescriptionGroups groups
-            ) {
+            )
+            {
                 var finalParts = new List<SymbolDisplayPart>();
                 var orderedGroups = _groupMap.Keys.OrderBy((g1, g2) => g1 - g2);
 
@@ -548,7 +553,8 @@ namespace Microsoft.CodeAnalysis.LanguageServices
                 if (
                     symbol.IsEnumType()
                     && symbol.EnumUnderlyingType.SpecialType != SpecialType.System_Int32
-                ) {
+                )
+                {
                     AddEnumUnderlyingTypeSeparator();
                     var underlyingTypeDisplayParts = symbol.EnumUnderlyingType.ToDisplayParts(
                         s_descriptionStyle.WithMiscellaneousOptions(
@@ -592,7 +598,8 @@ namespace Microsoft.CodeAnalysis.LanguageServices
                     if (
                         typeArgument is ITypeParameterSymbol
                         && typeArgument.Name == typeParameter.Name
-                    ) {
+                    )
+                    {
                         continue;
                     }
 
@@ -628,7 +635,8 @@ namespace Microsoft.CodeAnalysis.LanguageServices
                 // on Quick Info should be enough.
                 if (
                     symbol.ContainingType != null && symbol.ContainingType.TypeKind == TypeKind.Enum
-                ) {
+                )
+                {
                     AddToGroup(SymbolDescriptionGroups.MainDescription, parts);
                 }
                 else
@@ -645,7 +653,8 @@ namespace Microsoft.CodeAnalysis.LanguageServices
 
             private async Task<ImmutableArray<SymbolDisplayPart>> GetFieldPartsAsync(
                 IFieldSymbol symbol
-            ) {
+            )
+            {
                 if (symbol.IsConst)
                 {
                     var initializerParts = await GetInitializerSourcePartsAsync(symbol)
@@ -684,7 +693,8 @@ namespace Microsoft.CodeAnalysis.LanguageServices
 
             private async Task<ImmutableArray<SymbolDisplayPart>> GetLocalPartsAsync(
                 ILocalSymbol symbol
-            ) {
+            )
+            {
                 if (symbol.IsConst)
                 {
                     var initializerParts = await GetInitializerSourcePartsAsync(symbol)
@@ -849,7 +859,8 @@ namespace Microsoft.CodeAnalysis.LanguageServices
             protected void AddTypeParameterMapPart(
                 List<ITypeParameterSymbol> typeParameters,
                 List<ITypeSymbol> typeArguments
-            ) {
+            )
+            {
                 var parts = new List<SymbolDisplayPart>();
 
                 var count = typeParameters.Count;
@@ -879,7 +890,8 @@ namespace Microsoft.CodeAnalysis.LanguageServices
             protected void AddToGroup(
                 SymbolDescriptionGroups group,
                 params IEnumerable<SymbolDisplayPart>[] partsArray
-            ) {
+            )
+            {
                 var partsList = partsArray.Flatten().ToList();
                 if (partsList.Count > 0)
                 {
@@ -934,7 +946,8 @@ namespace Microsoft.CodeAnalysis.LanguageServices
             protected ImmutableArray<SymbolDisplayPart> ToMinimalDisplayParts(
                 ISymbol symbol,
                 SymbolDisplayFormat format = null
-            ) {
+            )
+            {
                 format ??= MinimallyQualifiedFormat;
                 return ToMinimalDisplayParts(symbol, _semanticModel, _position, format);
             }
@@ -943,7 +956,8 @@ namespace Microsoft.CodeAnalysis.LanguageServices
                 SymbolDisplayPartKind kind,
                 ISymbol symbol,
                 string text
-            ) {
+            )
+            {
                 yield return new SymbolDisplayPart(kind, symbol, text);
             }
 

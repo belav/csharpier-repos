@@ -26,7 +26,8 @@ namespace Microsoft.CodeAnalysis.EmbeddedLanguages.Common
             TSyntaxKind kind,
             VirtualCharSequence virtualChars,
             ImmutableArray<EmbeddedDiagnostic> diagnostics
-        ) {
+        )
+        {
             Debug.Assert(virtualChars.Length > 0);
             Kind = kind;
             VirtualChars = virtualChars;

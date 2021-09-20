@@ -52,7 +52,8 @@ namespace Microsoft.Extensions.Hosting
         /// <returns>The same instance of the <see cref="IHostBuilder"/> for chaining.</returns>
         public IHostBuilder ConfigureHostConfiguration(
             Action<IConfigurationBuilder> configureDelegate
-        ) {
+        )
+        {
             _configureHostConfigActions.Add(
                 configureDelegate ?? throw new ArgumentNullException(nameof(configureDelegate))
             );
@@ -69,7 +70,8 @@ namespace Microsoft.Extensions.Hosting
         /// <returns>The same instance of the <see cref="IHostBuilder"/> for chaining.</returns>
         public IHostBuilder ConfigureAppConfiguration(
             Action<HostBuilderContext, IConfigurationBuilder> configureDelegate
-        ) {
+        )
+        {
             _configureAppConfigActions.Add(
                 configureDelegate ?? throw new ArgumentNullException(nameof(configureDelegate))
             );
@@ -84,7 +86,8 @@ namespace Microsoft.Extensions.Hosting
         /// <returns>The same instance of the <see cref="IHostBuilder"/> for chaining.</returns>
         public IHostBuilder ConfigureServices(
             Action<HostBuilderContext, IServiceCollection> configureDelegate
-        ) {
+        )
+        {
             _configureServicesActions.Add(
                 configureDelegate ?? throw new ArgumentNullException(nameof(configureDelegate))
             );
@@ -99,7 +102,8 @@ namespace Microsoft.Extensions.Hosting
         /// <returns>The same instance of the <see cref="IHostBuilder"/> for chaining.</returns>
         public IHostBuilder UseServiceProviderFactory<TContainerBuilder>(
             IServiceProviderFactory<TContainerBuilder> factory
-        ) {
+        )
+        {
             _serviceProviderFactory = new ServiceFactoryAdapter<TContainerBuilder>(
                 factory ?? throw new ArgumentNullException(nameof(factory))
             );
@@ -114,7 +118,8 @@ namespace Microsoft.Extensions.Hosting
         /// <returns>The same instance of the <see cref="IHostBuilder"/> for chaining.</returns>
         public IHostBuilder UseServiceProviderFactory<TContainerBuilder>(
             Func<HostBuilderContext, IServiceProviderFactory<TContainerBuilder>> factory
-        ) {
+        )
+        {
             _serviceProviderFactory = new ServiceFactoryAdapter<TContainerBuilder>(
                 () => _hostBuilderContext,
                 factory ?? throw new ArgumentNullException(nameof(factory))
@@ -132,7 +137,8 @@ namespace Microsoft.Extensions.Hosting
         /// <returns>The same instance of the <see cref="IHostBuilder"/> for chaining.</returns>
         public IHostBuilder ConfigureContainer<TContainerBuilder>(
             Action<HostBuilderContext, TContainerBuilder> configureDelegate
-        ) {
+        )
+        {
             _configureContainerActions.Add(
                 new ConfigureContainerAdapter<TContainerBuilder>(
                     configureDelegate ?? throw new ArgumentNullException(nameof(configureDelegate))
@@ -231,7 +237,8 @@ namespace Microsoft.Extensions.Hosting
                     HostBuilderContext,
                     IConfigurationBuilder
                 > buildAction in _configureAppConfigActions
-            ) {
+            )
+            {
                 buildAction(_hostBuilderContext, configBuilder);
             }
             _appConfiguration = configBuilder.Build();
@@ -283,7 +290,8 @@ namespace Microsoft.Extensions.Hosting
                     HostBuilderContext,
                     IServiceCollection
                 > configureServicesAction in _configureServicesActions
-            ) {
+            )
+            {
                 configureServicesAction(_hostBuilderContext, services);
             }
 

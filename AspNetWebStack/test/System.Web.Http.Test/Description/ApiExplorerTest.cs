@@ -225,7 +225,8 @@ namespace System.Web.Http.Description
             string expectedPath,
             Type parameterType,
             string parameterName
-        ) {
+        )
+        {
             // Arrange
             string finalPath;
             List<ApiParameterDescription> descriptions = new List<ApiParameterDescription>()
@@ -320,7 +321,8 @@ namespace System.Web.Http.Description
         private static IHttpRoute CreateDirectRoute(
             string template,
             IReadOnlyCollection<ReflectedHttpActionDescriptor> actions
-        ) {
+        )
+        {
             DirectRouteBuilder builder = new DirectRouteBuilder(actions, targetIsAction: true);
             builder.Template = template;
             return builder.Build().Route;

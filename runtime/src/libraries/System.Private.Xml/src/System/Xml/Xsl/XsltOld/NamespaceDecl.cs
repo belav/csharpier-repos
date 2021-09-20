@@ -39,7 +39,8 @@ namespace System.Xml.Xsl.XsltOld
             string nsUri,
             string prevDefaultNsUri,
             NamespaceDecl? next
-        ) {
+        )
+        {
             Init(prefix, nsUri, prevDefaultNsUri, next);
         }
 
@@ -51,7 +52,8 @@ namespace System.Xml.Xsl.XsltOld
             string nsUri,
             string prevDefaultNsUri,
             NamespaceDecl? next
-        ) {
+        )
+        {
             _prefix = prefix;
             _nsUri = nsUri;
             _prevDefaultNsUri = prevDefaultNsUri;

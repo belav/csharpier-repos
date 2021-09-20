@@ -140,7 +140,8 @@ namespace Microsoft.CodeAnalysis.QualifyMemberAccess
             OperationAnalysisContext context,
             IOperation operation,
             IOperation instanceOperation
-        ) {
+        )
+        {
             // this is a static reference so we don't care if it's qualified
             if (instanceOperation == null)
             {
@@ -165,7 +166,8 @@ namespace Microsoft.CodeAnalysis.QualifyMemberAccess
             if (
                 (instanceOperation as IInstanceReferenceOperation)?.ReferenceKind
                 == InstanceReferenceKind.ImplicitReceiver
-            ) {
+            )
+            {
                 return;
             }
 

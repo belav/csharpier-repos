@@ -662,7 +662,8 @@ class Class
                 protected override Task<(ImmutableArray<CodeAction>, CodeAction actionToInvoke)> GetCodeActionsAsync(
                     TestWorkspace workspace,
                     TestParameters parameters
-                ) {
+                )
+                {
                     var solution = workspace.CurrentSolution;
                     var compilationOptions = solution.Projects.Single().CompilationOptions;
                     var specificDiagnosticOptions = new[]
@@ -973,7 +974,8 @@ class Class
                 protected override Task<(ImmutableArray<CodeAction>, CodeAction actionToInvoke)> GetCodeActionsAsync(
                     TestWorkspace workspace,
                     TestParameters parameters
-                ) {
+                )
+                {
                     var solution = workspace.CurrentSolution;
                     var compilationOptions = solution.Projects.Single().CompilationOptions;
                     var specificDiagnosticOptions = new[]
@@ -1138,7 +1140,8 @@ class Class
                                                 t.Kind() == SyntaxKind.SingleLineCommentTrivia
                                                 || t.Kind() == SyntaxKind.MultiLineCommentTrivia
                                         )
-                                ) {
+                                )
+                                {
                                     context.ReportDiagnostic(
                                         Diagnostic.Create(Descriptor, trivia.GetLocation())
                                     );

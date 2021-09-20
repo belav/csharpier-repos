@@ -30,7 +30,8 @@ namespace Microsoft.AspNetCore.Internal
         public IAsyncEnumerable<double> GetCounterValues(
             string counterName,
             CancellationToken cancellationToken = default
-        ) {
+        )
+        {
             return _counters[counterName].Reader.ReadAllAsync(cancellationToken);
         }
 

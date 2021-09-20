@@ -71,13 +71,15 @@ namespace Microsoft.AspNetCore.Routing.Tree
         public IList<OutboundMatchResult> GetMatches(
             RouteValueDictionary values,
             RouteValueDictionary ambientValues
-        ) {
+        )
+        {
             // Perf: Avoid allocation for List if there aren't any Matches or Criteria
             if (
                 _root.Matches.Count > 0
                 || _root.Criteria.Count > 0
                 || _conventionalEntries.Count > 0
-            ) {
+            )
+            {
                 var results = new List<OutboundMatchResult>();
                 Walk(
                     results,
@@ -125,7 +127,8 @@ namespace Microsoft.AspNetCore.Routing.Tree
             RouteValueDictionary ambientValues,
             DecisionTreeNode<OutboundMatch> node,
             bool isFallbackPath
-        ) {
+        )
+        {
             // Any entries in node.Matches have had all their required values satisfied, so add them
             // to the results.
             var matches = node.Matches;
@@ -160,7 +163,8 @@ namespace Microsoft.AspNetCore.Routing.Tree
                     if (
                         ambientValues.TryGetValue(key, out value)
                         && !criterion.Branches.Comparer.Equals(value, string.Empty)
-                    ) {
+                    )
+                    {
                         if (criterion.Branches.TryGetValue(value, out branch))
                         {
                             Walk(results, values, ambientValues, branch, isFallbackPath);
@@ -179,7 +183,8 @@ namespace Microsoft.AspNetCore.Routing.Tree
             List<OutboundMatchResult> results,
             RouteValueDictionary values,
             RouteValueDictionary ambientvalues
-        ) {
+        )
+        {
             for (var i = 0; i < _conventionalEntries.Count; i++)
             {
                 results.Add(
@@ -262,7 +267,8 @@ namespace Microsoft.AspNetCore.Routing.Tree
             Stack<string> branchStack,
             StringBuilder sb,
             DecisionTreeNode<OutboundMatch> node
-        ) {
+        )
+        {
             // leaf node
             if (node.Criteria.Count == 0)
             {

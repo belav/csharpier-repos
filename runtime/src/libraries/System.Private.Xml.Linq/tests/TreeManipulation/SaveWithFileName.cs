@@ -222,7 +222,8 @@ namespace XLinqTests
             SerializeNode serialize,
             bool testXElement,
             bool testXDocument
-        ) {
+        )
+        {
             // Test both options at once as they don't really collide
             SaveOptions so = SaveOptions.DisableFormatting | SaveOptions.OmitDuplicateNamespaces;
 

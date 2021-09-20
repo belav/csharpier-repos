@@ -439,7 +439,8 @@ public class Managed
                             clone_is,
                             "MarshalStructAsParam_AsSeqByVal"
                         )
-                    ) {
+                    )
+                    {
                         failures++;
                     }
                     break;
@@ -469,7 +470,8 @@ public class Managed
                             clone_ias,
                             "MarshalStructAsParam_AsSeqByVal2"
                         )
-                    ) {
+                    )
+                    {
                         failures++;
                     }
                     break;
@@ -497,7 +499,8 @@ public class Managed
                             clone_csas,
                             "MarshalStructAsParam_AsSeqByVal3"
                         )
-                    ) {
+                    )
+                    {
                         failures++;
                     }
                     break;
@@ -525,7 +528,8 @@ public class Managed
                             clone_csus,
                             "MarshalStructAsParam_AsSeqByVal4"
                         )
-                    ) {
+                    )
+                    {
                         failures++;
                     }
                     break;
@@ -573,7 +577,8 @@ public class Managed
                             clone_ns,
                             "MarshalStructAsParam_AsSeqByVal6"
                         )
-                    ) {
+                    )
+                    {
                         failures++;
                     }
                     break;
@@ -644,7 +649,8 @@ public class Managed
                             clone_sssa,
                             "MarshalStructAsParam_AsSeqByVal9"
                         )
-                    ) {
+                    )
+                    {
                         failures++;
                     }
                     break;
@@ -670,7 +676,8 @@ public class Managed
                             clone_sssu,
                             "MarshalStructAsParam_AsSeqByVal10"
                         )
-                    ) {
+                    )
+                    {
                         failures++;
                     }
                     break;
@@ -719,7 +726,8 @@ public class Managed
                         !MarshalStructAsParam_AsSeqByVal13(
                             sourceIncludeOuterIntegerStructSequential
                         )
-                    ) {
+                    )
+                    {
                         Console.WriteLine(
                             "\tFAILED! Managed to Native failed in MarshalStructAsParam_AsSeqByVal13.Expected:True;Actual:False"
                         );
@@ -731,7 +739,8 @@ public class Managed
                             cloneIncludeOuterIntegerStructSequential,
                             "MarshalStructAsParam_AsSeqByVal13"
                         )
-                    ) {
+                    )
+                    {
                         failures++;
                     }
                     break;
@@ -753,7 +762,8 @@ public class Managed
                             cloneS11,
                             "MarshalStructAsParam_AsSeqByVal14"
                         )
-                    ) {
+                    )
+                    {
                         failures++;
                     }
                     break;
@@ -843,7 +853,8 @@ public class Managed
                         !MarshalStructAsParam_AsSeqByValSequentialAggregateSequentialWrapper(
                             aggregateWrapper
                         )
-                    ) {
+                    )
+                    {
                         Console.WriteLine(
                             "\tFAILED! Managed to Native failed in MarshalStructAsParam_AsSeqByValSequentialAggregateSequentialWrapper.Expected:True;Actual:False"
                         );
@@ -866,7 +877,8 @@ public class Managed
                                 str,
                                 str.f.F
                             )
-                        ) {
+                        )
+                        {
                             Console.WriteLine(
                                 "\tFAILED! Managed to Native failed in MarshalStructAsParam_AsSeqByValFixedBufferClassificationTest. Expected:True;Actual:False"
                             );
@@ -890,7 +902,8 @@ public class Managed
                                 str,
                                 str.f
                             )
-                        ) {
+                        )
+                        {
                             Console.WriteLine(
                                 "\tFAILED! Managed to Native failed in MarshalStructAsParam_AsSeqByValFixedBufferClassificationTest. Expected:True;Actual:False"
                             );
@@ -916,7 +929,8 @@ public class Managed
                             fixedArrayTest,
                             fixedArrayTest.f
                         )
-                    ) {
+                    )
+                    {
                         Console.WriteLine(
                             "\tFAILED! Managed to Native failed in MarshalStructAsParam_AsSeqByValFixedBufferClassificationTest. Expected:True;Actual:False"
                         );
@@ -939,7 +953,8 @@ public class Managed
                                 str,
                                 str.f
                             )
-                        ) {
+                        )
+                        {
                             Console.WriteLine(
                                 "\tFAILED! Managed to Native failed in MarshalStructAsParam_AsSeqByValUnicodeCharArrayClassification. Expected:True;Actual:False"
                             );
@@ -1037,7 +1052,8 @@ public class Managed
                             change_is,
                             "MarshalStructAsParam_AsSeqByRef"
                         )
-                    ) {
+                    )
+                    {
                         failures++;
                     }
                     break;
@@ -1066,7 +1082,8 @@ public class Managed
                             change_ias,
                             "MarshalStructAsParam_AsSeqByRef2"
                         )
-                    ) {
+                    )
+                    {
                         failures++;
                     }
                     break;
@@ -1094,7 +1111,8 @@ public class Managed
                             changeStr1,
                             "MarshalStructAsParam_AsSeqByRef3"
                         )
-                    ) {
+                    )
+                    {
                         failures++;
                     }
                     break;
@@ -1122,7 +1140,8 @@ public class Managed
                             change_csus,
                             "MarshalStructAsParam_AsSeqByRef4"
                         )
-                    ) {
+                    )
+                    {
                         failures++;
                     }
                     break;
@@ -1170,7 +1189,8 @@ public class Managed
                             change_ns,
                             "MarshalStructAsParam_AsSeqByRef6"
                         )
-                    ) {
+                    )
+                    {
                         failures++;
                     }
                     break;
@@ -1240,7 +1260,8 @@ public class Managed
                             change_sssa,
                             "MarshalStructAsParam_AsSeqByRef9"
                         )
-                    ) {
+                    )
+                    {
                         failures++;
                     }
                     break;
@@ -1266,7 +1287,8 @@ public class Managed
                             change_sssu,
                             "MarshalStructAsParam_AsSeqByRef10"
                         )
-                    ) {
+                    )
+                    {
                         failures++;
                     }
                     break;
@@ -1315,7 +1337,8 @@ public class Managed
                         !MarshalStructAsParam_AsSeqByRef13(
                             ref sourceIncludeOuterIntegerStructSequential
                         )
-                    ) {
+                    )
+                    {
                         Console.WriteLine(
                             "\tFAILED! Managed to Native failed in MarshalStructAsParam_AsSeqByRef13.Expected:True;Actual:False"
                         );
@@ -1327,7 +1350,8 @@ public class Managed
                             changeIncludeOuterIntegerStructSequential,
                             "MarshalStructAsParam_AsSeqByRef13"
                         )
-                    ) {
+                    )
+                    {
                         failures++;
                     }
                     break;
@@ -1349,7 +1373,8 @@ public class Managed
                             changeS11,
                             "MarshalStructAsParam_AsSeqByRef14"
                         )
-                    ) {
+                    )
+                    {
                         failures++;
                     }
                     break;
@@ -1391,7 +1416,8 @@ public class Managed
                             clone_is,
                             "MarshalStructAsParam_AsSeqByValIn"
                         )
-                    ) {
+                    )
+                    {
                         failures++;
                     }
                     break;
@@ -1421,7 +1447,8 @@ public class Managed
                             clone_ias,
                             "MarshalStructAsParam_AsSeqByValIn2"
                         )
-                    ) {
+                    )
+                    {
                         failures++;
                     }
                     break;
@@ -1449,7 +1476,8 @@ public class Managed
                             clone_csas,
                             "MarshalStructAsParam_AsSeqByValIn3"
                         )
-                    ) {
+                    )
+                    {
                         failures++;
                     }
                     break;
@@ -1477,7 +1505,8 @@ public class Managed
                             clone_csus,
                             "MarshalStructAsParam_AsSeqByValIn4"
                         )
-                    ) {
+                    )
+                    {
                         failures++;
                     }
                     break;
@@ -1525,7 +1554,8 @@ public class Managed
                             clone_ns,
                             "MarshalStructAsParam_AsSeqByValIn6"
                         )
-                    ) {
+                    )
+                    {
                         failures++;
                     }
                     break;
@@ -1595,7 +1625,8 @@ public class Managed
                             clone_sssa,
                             "MarshalStructAsParam_AsSeqByValIn9"
                         )
-                    ) {
+                    )
+                    {
                         failures++;
                     }
                     break;
@@ -1621,7 +1652,8 @@ public class Managed
                             clone_sssu,
                             "MarshalStructAsParam_AsSeqByValIn10"
                         )
-                    ) {
+                    )
+                    {
                         failures++;
                     }
                     break;
@@ -1639,7 +1671,8 @@ public class Managed
                     }
                     if (
                         !Helper.ValidateS8(sourceS8, cloneS8, "MarshalStructAsParam_AsSeqByValIn11")
-                    ) {
+                    )
+                    {
                         failures++;
                     }
                     break;
@@ -1657,7 +1690,8 @@ public class Managed
                     }
                     if (
                         !Helper.ValidateS9(sourceS9, cloneS9, "MarshalStructAsParam_AsSeqByValIn12")
-                    ) {
+                    )
+                    {
                         failures++;
                     }
                     break;
@@ -1672,7 +1706,8 @@ public class Managed
                         !MarshalStructAsParam_AsSeqByValIn13(
                             sourceIncludeOuterIntegerStructSequential
                         )
-                    ) {
+                    )
+                    {
                         Console.WriteLine(
                             "\tFAILED! Managed to Native failed in MarshalStructAsParam_AsSeqByValIn13.Expected:True;Actual:False"
                         );
@@ -1684,7 +1719,8 @@ public class Managed
                             cloneIncludeOuterIntegerStructSequential,
                             "MarshalStructAsParam_AsSeqByValIn13"
                         )
-                    ) {
+                    )
+                    {
                         failures++;
                     }
                     break;
@@ -1706,7 +1742,8 @@ public class Managed
                             cloneS11,
                             "MarshalStructAsParam_AsSeqByValIn14"
                         )
-                    ) {
+                    )
+                    {
                         failures++;
                     }
                     break;
@@ -1749,7 +1786,8 @@ public class Managed
                             clone_is,
                             "MarshalStructAsParam_AsSeqByRefIn"
                         )
-                    ) {
+                    )
+                    {
                         failures++;
                     }
                     break;
@@ -1779,7 +1817,8 @@ public class Managed
                             clone_ias,
                             "MarshalStructAsParam_AsSeqByRefIn2"
                         )
-                    ) {
+                    )
+                    {
                         failures++;
                     }
                     break;
@@ -1807,7 +1846,8 @@ public class Managed
                             clone_csas,
                             "MarshalStructAsParam_AsSeqByRefIn3"
                         )
-                    ) {
+                    )
+                    {
                         failures++;
                     }
                     break;
@@ -1835,7 +1875,8 @@ public class Managed
                             clone_csus,
                             "MarshalStructAsParam_AsSeqByRefIn4"
                         )
-                    ) {
+                    )
+                    {
                         failures++;
                     }
                     break;
@@ -1883,7 +1924,8 @@ public class Managed
                             change_ns,
                             "MarshalStructAsParam_AsSeqByRefIn6"
                         )
-                    ) {
+                    )
+                    {
                         failures++;
                     }
                     break;
@@ -1953,7 +1995,8 @@ public class Managed
                             clone_sssa,
                             "MarshalStructAsParam_AsSeqByRefIn9"
                         )
-                    ) {
+                    )
+                    {
                         failures++;
                     }
                     break;
@@ -1979,7 +2022,8 @@ public class Managed
                             clone_sssu,
                             "MarshalStructAsParam_AsSeqByRefIn10"
                         )
-                    ) {
+                    )
+                    {
                         failures++;
                     }
                     break;
@@ -1997,7 +2041,8 @@ public class Managed
                     }
                     if (
                         !Helper.ValidateS8(sourceS8, cloneS8, "MarshalStructAsParam_AsSeqByRefIn11")
-                    ) {
+                    )
+                    {
                         failures++;
                     }
                     break;
@@ -2015,7 +2060,8 @@ public class Managed
                     }
                     if (
                         !Helper.ValidateS9(sourceS9, cloneS9, "MarshalStructAsParam_AsSeqByRefIn12")
-                    ) {
+                    )
+                    {
                         failures++;
                     }
                     break;
@@ -2030,7 +2076,8 @@ public class Managed
                         !MarshalStructAsParam_AsSeqByRefIn13(
                             ref sourceIncludeOuterIntegerStructSequential
                         )
-                    ) {
+                    )
+                    {
                         Console.WriteLine(
                             "\tFAILED! Managed to Native failed in MarshalStructAsParam_AsSeqByRefIn13.Expected:True;Actual:False"
                         );
@@ -2042,7 +2089,8 @@ public class Managed
                             changeIncludeOuterIntegerStructSequential,
                             "MarshalStructAsParam_AsSeqByRefIn13"
                         )
-                    ) {
+                    )
+                    {
                         failures++;
                     }
                     break;
@@ -2064,7 +2112,8 @@ public class Managed
                             changeS11,
                             "MarshalStructAsParam_AsSeqByRefIn14"
                         )
-                    ) {
+                    )
+                    {
                         failures++;
                     }
                     break;
@@ -2106,7 +2155,8 @@ public class Managed
                             clone_is,
                             "MarshalStructAsParam_AsSeqByValOut"
                         )
-                    ) {
+                    )
+                    {
                         failures++;
                     }
                     break;
@@ -2136,7 +2186,8 @@ public class Managed
                             clone_ias,
                             "MarshalStructAsParam_AsSeqByValOut2"
                         )
-                    ) {
+                    )
+                    {
                         failures++;
                     }
                     break;
@@ -2164,7 +2215,8 @@ public class Managed
                             clone_csas,
                             "MarshalStructAsParam_AsSeqByValOut3"
                         )
-                    ) {
+                    )
+                    {
                         failures++;
                     }
                     break;
@@ -2192,7 +2244,8 @@ public class Managed
                             clone_csus,
                             "MarshalStructAsParam_AsSeqByValOut4"
                         )
-                    ) {
+                    )
+                    {
                         failures++;
                     }
                     break;
@@ -2240,7 +2293,8 @@ public class Managed
                             clone_ns,
                             "MarshalStructAsParam_AsSeqByValOut6"
                         )
-                    ) {
+                    )
+                    {
                         failures++;
                     }
                     break;
@@ -2262,7 +2316,8 @@ public class Managed
                     }
                     if (
                         !Helper.ValidateS3(sourceS3, cloneS3, "MarshalStructAsParam_AsSeqByValOut7")
-                    ) {
+                    )
+                    {
                         failures++;
                     }
                     break;
@@ -2282,7 +2337,8 @@ public class Managed
                     }
                     if (
                         !Helper.ValidateS5(sourceS5, cloneS5, "MarshalStructAsParam_AsSeqByValOut8")
-                    ) {
+                    )
+                    {
                         failures++;
                     }
                     break;
@@ -2312,7 +2368,8 @@ public class Managed
                             clone_sssa,
                             "MarshalStructAsParam_AsSeqByValOut9"
                         )
-                    ) {
+                    )
+                    {
                         failures++;
                     }
                     break;
@@ -2338,7 +2395,8 @@ public class Managed
                             clone_sssu,
                             "MarshalStructAsParam_AsSeqByValOut10"
                         )
-                    ) {
+                    )
+                    {
                         failures++;
                     }
                     break;
@@ -2360,7 +2418,8 @@ public class Managed
                             cloneS8,
                             "MarshalStructAsParam_AsSeqByValOut11"
                         )
-                    ) {
+                    )
+                    {
                         failures++;
                     }
                     break;
@@ -2382,7 +2441,8 @@ public class Managed
                             cloneS9,
                             "MarshalStructAsParam_AsSeqByValOut12"
                         )
-                    ) {
+                    )
+                    {
                         failures++;
                     }
                     break;
@@ -2397,7 +2457,8 @@ public class Managed
                         !MarshalStructAsParam_AsSeqByValOut13(
                             sourceIncludeOuterIntegerStructSequential
                         )
-                    ) {
+                    )
+                    {
                         Console.WriteLine(
                             "\tFAILED! Managed to Native failed in MarshalStructAsParam_AsSeqByValOut13.Expected:True;Actual:False"
                         );
@@ -2409,7 +2470,8 @@ public class Managed
                             cloneIncludeOuterIntegerStructSequential,
                             "MarshalStructAsParam_AsSeqByValOut13"
                         )
-                    ) {
+                    )
+                    {
                         failures++;
                     }
                     break;
@@ -2431,7 +2493,8 @@ public class Managed
                             cloneS11,
                             "MarshalStructAsParam_AsSeqByValOut14"
                         )
-                    ) {
+                    )
+                    {
                         failures++;
                     }
                     break;
@@ -2477,7 +2540,8 @@ public class Managed
                             change_is,
                             "MarshalStructAsParam_AsSeqByRefOut"
                         )
-                    ) {
+                    )
+                    {
                         failures++;
                     }
                     break;
@@ -2507,7 +2571,8 @@ public class Managed
                             change_ias,
                             "MarshalStructAsParam_AsSeqByRefOut2"
                         )
-                    ) {
+                    )
+                    {
                         failures++;
                     }
                     break;
@@ -2535,7 +2600,8 @@ public class Managed
                             changeStr1,
                             "MarshalStructAsParam_AsSeqByRefOut3"
                         )
-                    ) {
+                    )
+                    {
                         failures++;
                     }
                     break;
@@ -2563,7 +2629,8 @@ public class Managed
                             change_csus,
                             "MarshalStructAsParam_AsSeqByRefOut4"
                         )
-                    ) {
+                    )
+                    {
                         failures++;
                     }
                     break;
@@ -2611,7 +2678,8 @@ public class Managed
                             change_ns,
                             "MarshalStructAsParam_AsSeqByRefOut6"
                         )
-                    ) {
+                    )
+                    {
                         failures++;
                     }
                     break;
@@ -2637,7 +2705,8 @@ public class Managed
                             changeS3,
                             "MarshalStructAsParam_AsSeqByRefOut7"
                         )
-                    ) {
+                    )
+                    {
                         failures++;
                     }
                     break;
@@ -2661,7 +2730,8 @@ public class Managed
                             changeS5,
                             "MarshalStructAsParam_AsSeqByRefOut8"
                         )
-                    ) {
+                    )
+                    {
                         failures++;
                     }
                     break;
@@ -2691,7 +2761,8 @@ public class Managed
                             change_sssa,
                             "MarshalStructAsParam_AsSeqByRefOut9"
                         )
-                    ) {
+                    )
+                    {
                         failures++;
                     }
                     break;
@@ -2717,7 +2788,8 @@ public class Managed
                             change_sssu,
                             "MarshalStructAsParam_AsSeqByRefOut10"
                         )
-                    ) {
+                    )
+                    {
                         failures++;
                     }
                     break;
@@ -2739,7 +2811,8 @@ public class Managed
                             changeS8,
                             "MarshalStructAsParam_AsSeqByRefOut11"
                         )
-                    ) {
+                    )
+                    {
                         failures++;
                     }
                     break;
@@ -2777,7 +2850,8 @@ public class Managed
                         !MarshalStructAsParam_AsSeqByRefOut13(
                             out sourceIncludeOuterIntegerStructSequential
                         )
-                    ) {
+                    )
+                    {
                         Console.WriteLine(
                             "\tFAILED! Managed to Native failed in MarshalStructAsParam_AsSeqByRefOut13.Expected:True;Actual:False"
                         );
@@ -2789,7 +2863,8 @@ public class Managed
                             changeIncludeOuterIntegerStructSequential,
                             "MarshalStructAsParam_AsSeqByRefOut13"
                         )
-                    ) {
+                    )
+                    {
                         failures++;
                     }
                     break;
@@ -2811,7 +2886,8 @@ public class Managed
                             changeS11,
                             "MarshalStructAsParam_AsSeqByRefOut14"
                         )
-                    ) {
+                    )
+                    {
                         failures++;
                     }
                     break;
@@ -2853,7 +2929,8 @@ public class Managed
                             clone_is,
                             "MarshalStructAsParam_AsSeqByValInOut"
                         )
-                    ) {
+                    )
+                    {
                         failures++;
                     }
                     break;
@@ -2883,7 +2960,8 @@ public class Managed
                             clone_ias,
                             "MarshalStructAsParam_AsSeqByValInOut2"
                         )
-                    ) {
+                    )
+                    {
                         failures++;
                     }
                     break;
@@ -2911,7 +2989,8 @@ public class Managed
                             clone_csas,
                             "MarshalStructAsParam_AsSeqByValInOut3"
                         )
-                    ) {
+                    )
+                    {
                         failures++;
                     }
                     break;
@@ -2939,7 +3018,8 @@ public class Managed
                             clone_csus,
                             "MarshalStructAsParam_AsSeqByValInOut4"
                         )
-                    ) {
+                    )
+                    {
                         failures++;
                     }
                     break;
@@ -2987,7 +3067,8 @@ public class Managed
                             clone_ns,
                             "MarshalStructAsParam_AsSeqByValInOut6"
                         )
-                    ) {
+                    )
+                    {
                         failures++;
                     }
                     break;
@@ -3013,7 +3094,8 @@ public class Managed
                             cloneS3,
                             "MarshalStructAsParam_AsSeqByValInOut7"
                         )
-                    ) {
+                    )
+                    {
                         failures++;
                     }
                     break;
@@ -3037,7 +3119,8 @@ public class Managed
                             cloneS5,
                             "MarshalStructAsParam_AsSeqByValInOut8"
                         )
-                    ) {
+                    )
+                    {
                         failures++;
                     }
                     break;
@@ -3067,7 +3150,8 @@ public class Managed
                             clone_sssa,
                             "MarshalStructAsParam_AsSeqByValInOut9"
                         )
-                    ) {
+                    )
+                    {
                         failures++;
                     }
                     break;
@@ -3093,7 +3177,8 @@ public class Managed
                             clone_sssu,
                             "MarshalStructAsParam_AsSeqByValInOut10"
                         )
-                    ) {
+                    )
+                    {
                         failures++;
                     }
                     break;
@@ -3115,7 +3200,8 @@ public class Managed
                             cloneS8,
                             "MarshalStructAsParam_AsSeqByValInOut11"
                         )
-                    ) {
+                    )
+                    {
                         failures++;
                     }
                     break;
@@ -3137,7 +3223,8 @@ public class Managed
                             cloneS9,
                             "MarshalStructAsParam_AsSeqByValInOut12"
                         )
-                    ) {
+                    )
+                    {
                         failures++;
                     }
                     break;
@@ -3152,7 +3239,8 @@ public class Managed
                         !MarshalStructAsParam_AsSeqByValInOut13(
                             sourceIncludeOuterIntegerStructSequential
                         )
-                    ) {
+                    )
+                    {
                         Console.WriteLine(
                             "\tFAILED! Managed to Native failed in MarshalStructAsParam_AsSeqByValInOut13.Expected:True;Actual:False"
                         );
@@ -3164,7 +3252,8 @@ public class Managed
                             cloneIncludeOuterIntegerStructSequential,
                             "MarshalStructAsParam_AsSeqByValInOut13"
                         )
-                    ) {
+                    )
+                    {
                         failures++;
                     }
                     break;
@@ -3186,7 +3275,8 @@ public class Managed
                             cloneS11,
                             "MarshalStructAsParam_AsSeqByValInOut14"
                         )
-                    ) {
+                    )
+                    {
                         failures++;
                     }
                     break;
@@ -3232,7 +3322,8 @@ public class Managed
                             change_is,
                             "MarshalStructAsParam_AsSeqByRefInOut"
                         )
-                    ) {
+                    )
+                    {
                         failures++;
                     }
                     break;
@@ -3262,7 +3353,8 @@ public class Managed
                             change_ias,
                             "MarshalStructAsParam_AsSeqByRefInOut2"
                         )
-                    ) {
+                    )
+                    {
                         failures++;
                     }
                     break;
@@ -3290,7 +3382,8 @@ public class Managed
                             changeStr1,
                             "MarshalStructAsParam_AsSeqByRefInOut3"
                         )
-                    ) {
+                    )
+                    {
                         failures++;
                     }
                     break;
@@ -3318,7 +3411,8 @@ public class Managed
                             change_csus,
                             "MarshalStructAsParam_AsSeqByRefInOut4"
                         )
-                    ) {
+                    )
+                    {
                         failures++;
                     }
                     break;
@@ -3366,7 +3460,8 @@ public class Managed
                             change_ns,
                             "MarshalStructAsParam_AsSeqByRefInOut6"
                         )
-                    ) {
+                    )
+                    {
                         failures++;
                     }
                     break;
@@ -3392,7 +3487,8 @@ public class Managed
                             changeS3,
                             "MarshalStructAsParam_AsSeqByRefInOut7"
                         )
-                    ) {
+                    )
+                    {
                         failures++;
                     }
                     break;
@@ -3416,7 +3512,8 @@ public class Managed
                             changeS5,
                             "MarshalStructAsParam_AsSeqByRefInOut8"
                         )
-                    ) {
+                    )
+                    {
                         failures++;
                     }
                     break;
@@ -3446,7 +3543,8 @@ public class Managed
                             change_sssa,
                             "MarshalStructAsParam_AsSeqByRefInOut9"
                         )
-                    ) {
+                    )
+                    {
                         failures++;
                     }
                     break;
@@ -3472,7 +3570,8 @@ public class Managed
                             change_sssu,
                             "MarshalStructAsParam_AsSeqByRefInOut10"
                         )
-                    ) {
+                    )
+                    {
                         failures++;
                     }
                     break;
@@ -3494,7 +3593,8 @@ public class Managed
                             changeS8,
                             "MarshalStructAsParam_AsSeqByRefInOut11"
                         )
-                    ) {
+                    )
+                    {
                         failures++;
                     }
                     break;
@@ -3516,7 +3616,8 @@ public class Managed
                             changeS9,
                             "MarshalStructAsParam_AsSeqByRefInOut12"
                         )
-                    ) {
+                    )
+                    {
                         failures++;
                     }
                     break;
@@ -3531,7 +3632,8 @@ public class Managed
                         !MarshalStructAsParam_AsSeqByRefInOut13(
                             ref sourceIncludeOuterIntegerStructSequential
                         )
-                    ) {
+                    )
+                    {
                         Console.WriteLine(
                             "\tFAILED! Managed to Native failed in MarshalStructAsParam_AsSeqByRefInOut13.Expected:True;Actual:False"
                         );
@@ -3543,7 +3645,8 @@ public class Managed
                             changeIncludeOuterIntegerStructSequential,
                             "MarshalStructAsParam_AsSeqByRefInOut13"
                         )
-                    ) {
+                    )
+                    {
                         failures++;
                     }
                     break;
@@ -3565,7 +3668,8 @@ public class Managed
                             changeS11,
                             "MarshalStructAsParam_AsSeqByRefInOut14"
                         )
-                    ) {
+                    )
+                    {
                         failures++;
                     }
                     break;

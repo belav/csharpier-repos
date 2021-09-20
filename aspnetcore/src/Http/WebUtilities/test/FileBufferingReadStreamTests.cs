@@ -30,7 +30,8 @@ namespace Microsoft.AspNetCore.WebUtilities
                     null,
                     Directory.GetCurrentDirectory()
                 )
-            ) {
+            )
+            {
                 Assert.True(stream.CanRead);
                 Assert.True(stream.CanSeek);
                 Assert.False(stream.CanWrite);
@@ -52,7 +53,8 @@ namespace Microsoft.AspNetCore.WebUtilities
                     null,
                     Directory.GetCurrentDirectory()
                 )
-            ) {
+            )
+            {
                 var bytes = new byte[1000];
                 var read0 = stream.Read(bytes, 0, bytes.Length);
                 Assert.Equal(bytes.Length, read0);
@@ -87,7 +89,8 @@ namespace Microsoft.AspNetCore.WebUtilities
             string tempFileName;
             using (
                 var stream = new FileBufferingReadStream(inner, 1024, null, GetCurrentDirectory())
-            ) {
+            )
+            {
                 var bytes = new byte[1000];
                 var read0 = stream.Read(bytes, 0, bytes.Length);
                 Assert.Equal(bytes.Length, read0);
@@ -131,7 +134,8 @@ namespace Microsoft.AspNetCore.WebUtilities
                     900,
                     Directory.GetCurrentDirectory()
                 )
-            ) {
+            )
+            {
                 var bytes = new byte[500];
                 var read0 = stream.Read(bytes, 0, bytes.Length);
                 Assert.Equal(bytes.Length, read0);
@@ -157,7 +161,8 @@ namespace Microsoft.AspNetCore.WebUtilities
             string tempFileName;
             using (
                 var stream = new FileBufferingReadStream(inner, 512, 1024, GetCurrentDirectory())
-            ) {
+            )
+            {
                 var bytes = new byte[500];
                 var read0 = stream.Read(bytes, 0, bytes.Length);
                 Assert.Equal(bytes.Length, read0);
@@ -199,7 +204,8 @@ namespace Microsoft.AspNetCore.WebUtilities
                     null,
                     Directory.GetCurrentDirectory()
                 )
-            ) {
+            )
+            {
                 var bytes = new byte[1000];
                 var read0 = await stream.ReadAsync(bytes, 0, bytes.Length);
                 Assert.Equal(bytes.Length, read0);
@@ -234,7 +240,8 @@ namespace Microsoft.AspNetCore.WebUtilities
             string tempFileName;
             using (
                 var stream = new FileBufferingReadStream(inner, 1024, null, GetCurrentDirectory())
-            ) {
+            )
+            {
                 var bytes = new byte[1000];
                 var read0 = await stream.ReadAsync(bytes, 0, bytes.Length);
                 Assert.Equal(bytes.Length, read0);
@@ -278,7 +285,8 @@ namespace Microsoft.AspNetCore.WebUtilities
                     900,
                     Directory.GetCurrentDirectory()
                 )
-            ) {
+            )
+            {
                 var bytes = new byte[500];
                 var read0 = await stream.ReadAsync(bytes, 0, bytes.Length);
                 Assert.Equal(bytes.Length, read0);
@@ -304,7 +312,8 @@ namespace Microsoft.AspNetCore.WebUtilities
             string tempFileName;
             using (
                 var stream = new FileBufferingReadStream(inner, 512, 1024, GetCurrentDirectory())
-            ) {
+            )
+            {
                 var bytes = new byte[500];
                 var read0 = await stream.ReadAsync(bytes, 0, bytes.Length);
                 Assert.Equal(bytes.Length, read0);
@@ -354,7 +363,8 @@ namespace Microsoft.AspNetCore.WebUtilities
                     GetCurrentDirectory(),
                     arrayPool.Object
                 )
-            ) {
+            )
+            {
                 arrayPool.Verify(v => v.Rent(It.IsAny<int>()), Times.Never());
 
                 stream.Read(new byte[1024 * 1024]);
@@ -395,7 +405,8 @@ namespace Microsoft.AspNetCore.WebUtilities
                     GetCurrentDirectory(),
                     arrayPool.Object
                 )
-            ) {
+            )
+            {
                 arrayPool.Verify(v => v.Rent(It.IsAny<int>()), Times.Never());
 
                 await stream.ReadAsync(new byte[1024 * 1024]);

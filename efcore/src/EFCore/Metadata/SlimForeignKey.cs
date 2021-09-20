@@ -45,7 +45,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata
             bool required,
             bool requiredDependent,
             bool ownership
-        ) {
+        )
+        {
             Properties = dependentProperties;
             PrincipalKey = principalKey;
             DeclaringEntityType = dependentEntityType;

@@ -21,7 +21,8 @@ namespace Microsoft.AspNetCore.Components.WebAssembly.Hosting
         public RootComponentMapping(
             [DynamicallyAccessedMembers(Component)] Type componentType,
             string selector
-        ) {
+        )
+        {
             if (componentType is null)
             {
                 throw new ArgumentNullException(nameof(componentType));

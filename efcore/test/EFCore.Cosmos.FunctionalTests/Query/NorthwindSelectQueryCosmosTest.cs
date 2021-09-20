@@ -172,7 +172,8 @@ WHERE ((c[""Discriminator""] = ""Employee"") AND (c[""EmployeeID""] = 1))"
         [ConditionalTheory(Skip = "Issue #17246")]
         public override async Task Select_bool_closure_with_order_by_property_with_cast_to_nullable(
             bool async
-        ) {
+        )
+        {
             await base.Select_bool_closure_with_order_by_property_with_cast_to_nullable(async);
 
             AssertSql(
@@ -185,7 +186,8 @@ WHERE (c[""Discriminator""] = ""Customer"")"
         [ConditionalTheory(Skip = "Issue #17246")]
         public override async Task Select_bool_closure_with_order_parameter_with_cast_to_nullable(
             bool async
-        ) {
+        )
+        {
             await base.Select_bool_closure_with_order_parameter_with_cast_to_nullable(async);
 
             AssertSql(
@@ -485,7 +487,8 @@ WHERE (c[""Discriminator""] = ""Customer"")"
 
         public override async Task Select_non_matching_value_types_int_to_long_introduces_explicit_cast(
             bool async
-        ) {
+        )
+        {
             await base.Select_non_matching_value_types_int_to_long_introduces_explicit_cast(async);
 
             AssertSql(
@@ -498,7 +501,8 @@ ORDER BY c[""OrderID""]"
 
         public override async Task Select_non_matching_value_types_nullable_int_to_long_introduces_explicit_cast(
             bool async
-        ) {
+        )
+        {
             await base.Select_non_matching_value_types_nullable_int_to_long_introduces_explicit_cast(
                 async
             );
@@ -513,7 +517,8 @@ ORDER BY c[""OrderID""]"
 
         public override async Task Select_non_matching_value_types_nullable_int_to_int_doesnt_introduce_explicit_cast(
             bool async
-        ) {
+        )
+        {
             await base.Select_non_matching_value_types_nullable_int_to_int_doesnt_introduce_explicit_cast(
                 async
             );
@@ -528,7 +533,8 @@ ORDER BY c[""OrderID""]"
 
         public override async Task Select_non_matching_value_types_int_to_nullable_int_doesnt_introduce_explicit_cast(
             bool async
-        ) {
+        )
+        {
             await base.Select_non_matching_value_types_int_to_nullable_int_doesnt_introduce_explicit_cast(
                 async
             );
@@ -543,7 +549,8 @@ ORDER BY c[""OrderID""]"
 
         public override async Task Select_non_matching_value_types_from_binary_expression_introduces_explicit_cast(
             bool async
-        ) {
+        )
+        {
             await base.Select_non_matching_value_types_from_binary_expression_introduces_explicit_cast(
                 async
             );
@@ -558,7 +565,8 @@ ORDER BY c[""OrderID""]"
 
         public override async Task Select_non_matching_value_types_from_binary_expression_nested_introduces_top_level_explicit_cast(
             bool async
-        ) {
+        )
+        {
             await base.Select_non_matching_value_types_from_binary_expression_nested_introduces_top_level_explicit_cast(
                 async
             );
@@ -573,7 +581,8 @@ ORDER BY c[""OrderID""]"
 
         public override async Task Select_non_matching_value_types_from_unary_expression_introduces_explicit_cast1(
             bool async
-        ) {
+        )
+        {
             await base.Select_non_matching_value_types_from_unary_expression_introduces_explicit_cast1(
                 async
             );
@@ -588,7 +597,8 @@ ORDER BY c[""OrderID""]"
 
         public override async Task Select_non_matching_value_types_from_unary_expression_introduces_explicit_cast2(
             bool async
-        ) {
+        )
+        {
             await base.Select_non_matching_value_types_from_unary_expression_introduces_explicit_cast2(
                 async
             );
@@ -603,7 +613,8 @@ ORDER BY c[""OrderID""]"
 
         public override async Task Select_non_matching_value_types_from_length_introduces_explicit_cast(
             bool async
-        ) {
+        )
+        {
             await base.Select_non_matching_value_types_from_length_introduces_explicit_cast(async);
 
             AssertSql(
@@ -616,7 +627,8 @@ ORDER BY c[""OrderID""]"
 
         public override async Task Select_non_matching_value_types_from_method_call_introduces_explicit_cast(
             bool async
-        ) {
+        )
+        {
             await base.Select_non_matching_value_types_from_method_call_introduces_explicit_cast(
                 async
             );
@@ -631,7 +643,8 @@ ORDER BY c[""OrderID""]"
 
         public override async Task Select_non_matching_value_types_from_anonymous_type_introduces_explicit_cast(
             bool async
-        ) {
+        )
+        {
             await base.Select_non_matching_value_types_from_anonymous_type_introduces_explicit_cast(
                 async
             );
@@ -647,7 +660,8 @@ ORDER BY c[""OrderID""]"
         [ConditionalTheory(Skip = "Issue #17246")]
         public override async Task Project_single_element_from_collection_with_OrderBy_Distinct_and_FirstOrDefault_followed_by_projecting_length(
             bool async
-        ) {
+        )
+        {
             await base.Project_single_element_from_collection_with_OrderBy_Distinct_and_FirstOrDefault_followed_by_projecting_length(
                 async
             );
@@ -692,7 +706,8 @@ WHERE ((c[""Discriminator""] = ""Order"") AND (c[""OrderID""] < 10300))"
         [ConditionalTheory(Skip = "Issue #17246")]
         public override async Task Project_single_element_from_collection_with_OrderBy_Take_and_FirstOrDefault(
             bool async
-        ) {
+        )
+        {
             await AssertQuery(
                 async,
                 ss =>
@@ -717,7 +732,8 @@ WHERE ((c[""Discriminator""] = ""Customer"") AND (c[""CustomerID""] = ""ALFKI"")
         [ConditionalTheory(Skip = "Issue #17246")]
         public override async Task Project_single_element_from_collection_with_OrderBy_Skip_and_FirstOrDefault(
             bool async
-        ) {
+        )
+        {
             await AssertQuery(
                 async,
                 ss =>
@@ -742,7 +758,8 @@ WHERE ((c[""Discriminator""] = ""Customer"") AND (c[""CustomerID""] = ""ALFKI"")
         [ConditionalTheory(Skip = "Issue #17246")]
         public override async Task Project_single_element_from_collection_with_OrderBy_Distinct_and_FirstOrDefault(
             bool async
-        ) {
+        )
+        {
             await AssertQuery(
                 async,
                 ss =>
@@ -767,7 +784,8 @@ WHERE ((c[""Discriminator""] = ""Customer"") AND (c[""CustomerID""] = ""ALFKI"")
         [ConditionalTheory(Skip = "Issue #17246")]
         public override async Task Project_single_element_from_collection_with_OrderBy_Take_and_SingleOrDefault(
             bool async
-        ) {
+        )
+        {
             await base.Project_single_element_from_collection_with_OrderBy_Take_and_SingleOrDefault(
                 async
             );
@@ -782,7 +800,8 @@ WHERE ((c[""Discriminator""] = ""Customer"") AND (c[""CustomerID""] = ""ALFKI"")
         [ConditionalTheory(Skip = "Issue #17246")]
         public override async Task Project_single_element_from_collection_with_OrderBy_Take_and_FirstOrDefault_with_parameter(
             bool async
-        ) {
+        )
+        {
             await AssertQuery(
                 async,
                 ss =>
@@ -807,7 +826,8 @@ WHERE ((c[""Discriminator""] = ""Customer"") AND (c[""CustomerID""] = ""ALFKI"")
         [ConditionalTheory(Skip = "Issue#17246")]
         public override async Task Project_single_element_from_collection_with_multiple_OrderBys_Take_and_FirstOrDefault(
             bool async
-        ) {
+        )
+        {
             await AssertQuery(
                 async,
                 ss =>
@@ -832,7 +852,8 @@ WHERE ((c[""Discriminator""] = ""Customer"") AND (c[""CustomerID""] = ""ALFKI"")
 
         public override async Task Project_single_element_from_collection_with_multiple_OrderBys_Take_and_FirstOrDefault_followed_by_projection_of_length_property(
             bool async
-        ) {
+        )
+        {
             await base.Project_single_element_from_collection_with_multiple_OrderBys_Take_and_FirstOrDefault_followed_by_projection_of_length_property(
                 async
             );
@@ -847,7 +868,8 @@ WHERE (c[""Discriminator""] = ""Customer"")"
         [ConditionalTheory(Skip = "Issue#17246")]
         public override async Task Project_single_element_from_collection_with_multiple_OrderBys_Take_and_FirstOrDefault_2(
             bool async
-        ) {
+        )
+        {
             await AssertQuery(
                 async,
                 ss =>
@@ -873,7 +895,8 @@ WHERE ((c[""Discriminator""] = ""Customer"") AND (c[""CustomerID""] = ""ALFKI"")
         [ConditionalTheory(Skip = "Issue #17246")]
         public override async Task Project_single_element_from_collection_with_OrderBy_over_navigation_Take_and_FirstOrDefault(
             bool async
-        ) {
+        )
+        {
             await AssertQueryScalar(
                 async,
                 ss =>
@@ -898,7 +921,8 @@ WHERE ((c[""Discriminator""] = ""Order"") AND (c[""OrderID""] < 10250))"
         [ConditionalTheory(Skip = "Issue #17246")]
         public override async Task Project_single_element_from_collection_with_OrderBy_over_navigation_Take_and_FirstOrDefault_2(
             bool async
-        ) {
+        )
+        {
             await base.Project_single_element_from_collection_with_OrderBy_over_navigation_Take_and_FirstOrDefault_2(
                 async
             );
@@ -1044,7 +1068,8 @@ WHERE (c[""Discriminator""] = ""Order"")"
 
         public override async Task Anonymous_projection_with_repeated_property_being_ordered(
             bool async
-        ) {
+        )
+        {
             await base.Anonymous_projection_with_repeated_property_being_ordered(async);
 
             AssertSql(
@@ -1058,7 +1083,8 @@ ORDER BY c[""CustomerID""]"
         [ConditionalTheory(Skip = "Issue #17246")]
         public override async Task Anonymous_projection_with_repeated_property_being_ordered_2(
             bool async
-        ) {
+        )
+        {
             await base.Anonymous_projection_with_repeated_property_being_ordered_2(async);
 
             AssertSql(
@@ -1112,14 +1138,16 @@ WHERE (c[""Discriminator""] = ""Customer"")"
         [ConditionalTheory(Skip = "Issue #17246")]
         public override Task SelectMany_without_result_selector_naked_collection_navigation(
             bool async
-        ) {
+        )
+        {
             return base.SelectMany_without_result_selector_naked_collection_navigation(async);
         }
 
         [ConditionalTheory(Skip = "Issue #17246")]
         public override Task SelectMany_without_result_selector_collection_navigation_composed(
             bool async
-        ) {
+        )
+        {
             return base.SelectMany_without_result_selector_collection_navigation_composed(async);
         }
 
@@ -1168,7 +1196,8 @@ WHERE (c[""Discriminator""] = ""Customer"")"
         [ConditionalTheory(Skip = "Issue#17246")]
         public override Task FirstOrDefault_over_empty_collection_of_value_type_returns_correct_results(
             bool async
-        ) {
+        )
+        {
             return base.FirstOrDefault_over_empty_collection_of_value_type_returns_correct_results(
                 async
             );
@@ -1177,7 +1206,8 @@ WHERE (c[""Discriminator""] = ""Customer"")"
         [ConditionalTheory(Skip = "Issue#17246")]
         public override Task Project_non_nullable_value_after_FirstOrDefault_on_empty_collection(
             bool async
-        ) {
+        )
+        {
             return base.Project_non_nullable_value_after_FirstOrDefault_on_empty_collection(async);
         }
 
@@ -1203,7 +1233,8 @@ WHERE (c[""Discriminator""] = ""Customer"")"
         [ConditionalTheory(Skip = "Issue #17246")]
         public override Task SelectMany_with_collection_being_correlated_subquery_which_references_inner_and_outer_entity(
             bool async
-        ) {
+        )
+        {
             return base.SelectMany_with_collection_being_correlated_subquery_which_references_inner_and_outer_entity(
                 async
             );
@@ -1212,7 +1243,8 @@ WHERE (c[""Discriminator""] = ""Customer"")"
         [ConditionalTheory(Skip = "Issue #17246")]
         public override Task Select_chained_entity_navigation_doesnt_materialize_intermittent_entities(
             bool async
-        ) {
+        )
+        {
             return base.Select_chained_entity_navigation_doesnt_materialize_intermittent_entities(
                 async
             );
@@ -1244,7 +1276,8 @@ WHERE ((c[""Discriminator""] = ""Order"") AND (c[""OrderID""] = 10243))"
         [ConditionalTheory(Skip = "Issue #17246")]
         public override Task Collection_FirstOrDefault_with_entity_equality_check_in_projection(
             bool async
-        ) {
+        )
+        {
             return base.Collection_FirstOrDefault_with_entity_equality_check_in_projection(async);
         }
 
@@ -1263,7 +1296,8 @@ WHERE ((c[""Discriminator""] = ""Order"") AND (c[""OrderID""] = 10243))"
         [ConditionalTheory(Skip = "Issue#17246")]
         public override Task LastOrDefault_member_access_in_projection_translates_to_server(
             bool async
-        ) {
+        )
+        {
             return base.LastOrDefault_member_access_in_projection_translates_to_server(async);
         }
 
@@ -1353,7 +1387,8 @@ ORDER BY c[""CustomerID""]"
         [ConditionalTheory(Skip = "Cross collection join Issue#17246")]
         public override Task Correlated_collection_after_distinct_with_complex_projection_containing_original_identifier(
             bool async
-        ) {
+        )
+        {
             return base.Correlated_collection_after_distinct_with_complex_projection_containing_original_identifier(
                 async
             );
@@ -1362,7 +1397,8 @@ ORDER BY c[""CustomerID""]"
         [ConditionalTheory(Skip = "Cross collection join Issue#17246")]
         public override Task Correlated_collection_after_distinct_not_containing_original_identifier(
             bool async
-        ) {
+        )
+        {
             return base.Correlated_collection_after_distinct_not_containing_original_identifier(
                 async
             );
@@ -1371,7 +1407,8 @@ ORDER BY c[""CustomerID""]"
         [ConditionalTheory(Skip = "Cross collection join Issue#17246")]
         public override Task Correlated_collection_after_distinct_with_complex_projection_not_containing_original_identifier(
             bool async
-        ) {
+        )
+        {
             return base.Correlated_collection_after_distinct_with_complex_projection_not_containing_original_identifier(
                 async
             );
@@ -1380,7 +1417,8 @@ ORDER BY c[""CustomerID""]"
         [ConditionalTheory(Skip = "Cross collection join Issue#17246")]
         public override Task Correlated_collection_after_groupby_with_complex_projection_containing_original_identifier(
             bool async
-        ) {
+        )
+        {
             return base.Correlated_collection_after_groupby_with_complex_projection_containing_original_identifier(
                 async
             );
@@ -1397,7 +1435,8 @@ ORDER BY c[""CustomerID""]"
         [ConditionalTheory(Skip = "Cross collection join Issue#17246")]
         public override Task Custom_projection_reference_navigation_PK_to_FK_optimization(
             bool async
-        ) {
+        )
+        {
             return base.Custom_projection_reference_navigation_PK_to_FK_optimization(async);
         }
 
@@ -1410,7 +1449,8 @@ ORDER BY c[""CustomerID""]"
         [ConditionalTheory(Skip = "Cross collection join Issue#17246")]
         public override Task Projecting_Length_of_a_string_property_after_FirstOrDefault_on_correlated_collection(
             bool async
-        ) {
+        )
+        {
             return base.Projecting_Length_of_a_string_property_after_FirstOrDefault_on_correlated_collection(
                 async
             );
@@ -1433,7 +1473,8 @@ OFFSET 0 LIMIT @__p_0"
 
         public override async Task Projection_take_projection_doesnt_project_intermittent_column(
             bool async
-        ) {
+        )
+        {
             await base.Projection_take_projection_doesnt_project_intermittent_column(async);
 
             AssertSql(
@@ -1449,7 +1490,8 @@ OFFSET 0 LIMIT @__p_0"
 
         public override async Task Projection_skip_projection_doesnt_project_intermittent_column(
             bool async
-        ) {
+        )
+        {
             var message =
                 (
                     await Assert.ThrowsAsync<InvalidOperationException>(
@@ -1466,7 +1508,8 @@ OFFSET 0 LIMIT @__p_0"
         [ConditionalTheory(Skip = "Issue#17246")]
         public override Task Projection_Distinct_projection_preserves_columns_used_for_distinct_in_subquery(
             bool async
-        ) {
+        )
+        {
             return base.Projection_Distinct_projection_preserves_columns_used_for_distinct_in_subquery(
                 async
             );
@@ -1487,7 +1530,8 @@ OFFSET 0 LIMIT @__p_0"
         [ConditionalTheory(Skip = "Cross collection join Issue#17246")]
         public override Task Do_not_erase_projection_mapping_when_adding_single_projection(
             bool async
-        ) {
+        )
+        {
             return base.Do_not_erase_projection_mapping_when_adding_single_projection(async);
         }
 
@@ -1500,7 +1544,8 @@ OFFSET 0 LIMIT @__p_0"
         [ConditionalTheory(Skip = "Cross collection join Issue#17246")]
         public override Task Correlated_collection_after_groupby_with_complex_projection_not_containing_original_identifier(
             bool async
-        ) {
+        )
+        {
             return base.Correlated_collection_after_groupby_with_complex_projection_not_containing_original_identifier(
                 async
             );
@@ -1527,14 +1572,16 @@ ORDER BY c[""OrderID""]"
         [ConditionalTheory(Skip = "Cross collection join Issue#17246")]
         public override Task Collection_projection_selecting_outer_element_followed_by_take(
             bool async
-        ) {
+        )
+        {
             return base.Collection_projection_selecting_outer_element_followed_by_take(async);
         }
 
         [ConditionalTheory(Skip = "Cross collection join Issue#17246")]
         public override Task Take_on_top_level_and_on_collection_projection_with_outer_apply(
             bool async
-        ) {
+        )
+        {
             return base.Take_on_top_level_and_on_collection_projection_with_outer_apply(async);
         }
 

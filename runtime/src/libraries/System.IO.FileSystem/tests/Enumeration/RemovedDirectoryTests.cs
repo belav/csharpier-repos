@@ -41,7 +41,8 @@ namespace System.IO.Tests.Enumeration
                     testDirectory.FullName,
                     new EnumerationOptions { RecurseSubdirectories = true }
                 )
-            ) {
+            )
+            {
                 enumerator.DirectoryFinishedAction = (d) =>
                 {
                     if (d.Equals(testDirectory.FullName, StringComparison.OrdinalIgnoreCase))
@@ -70,7 +71,8 @@ namespace System.IO.Tests.Enumeration
                     testDirectory.FullName,
                     new EnumerationOptions { RecurseSubdirectories = true }
                 )
-            ) {
+            )
+            {
                 // We shouldn't fail because a directory we found got deleted.
                 // If we yank the directory when we have it's data, but BEFORE we create the handle we'll fail internally with not found.
                 while (enumerator.MoveNext())
@@ -82,7 +84,8 @@ namespace System.IO.Tests.Enumeration
                             testFile.Name,
                             StringComparison.OrdinalIgnoreCase
                         )
-                    ) {
+                    )
+                    {
                         testSubdirectory.Delete();
                     }
                 }
@@ -105,7 +108,8 @@ namespace System.IO.Tests.Enumeration
                     testDirectory.FullName,
                     new EnumerationOptions { RecurseSubdirectories = true }
                 )
-            ) {
+            )
+            {
                 // We shouldn't fail because a directory we found got deleted.
                 // If replace the directory with a file when we have it's data, but BEFORE we create the handle we'll fail internally trying to create a directory handle on it.
                 while (enumerator.MoveNext())
@@ -117,7 +121,8 @@ namespace System.IO.Tests.Enumeration
                             testFile.Name,
                             StringComparison.OrdinalIgnoreCase
                         )
-                    ) {
+                    )
+                    {
                         testSubdirectory.Delete();
                         File.Create(testSubdirectory.FullName).Dispose();
                     }

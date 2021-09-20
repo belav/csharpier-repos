@@ -36,8 +36,9 @@ namespace Microsoft.CodeAnalysis.LanguageServerIndexFormat.Generator.Graph
             Id<TOutVertex> outVertex,
             Id<TInVertex> inVertex,
             IdFactory idFactory
-        ) where TOutVertex : Vertex
-          where TInVertex : Vertex
+        )
+            where TOutVertex : Vertex
+            where TInVertex : Vertex
         {
             var inVerticesArray = new Id<Vertex>[1];
             inVerticesArray[0] = inVertex.As<TInVertex, Vertex>();
@@ -50,8 +51,9 @@ namespace Microsoft.CodeAnalysis.LanguageServerIndexFormat.Generator.Graph
             Id<TOutVertex> outVertex,
             IList<Id<TInVertex>> inVertices,
             IdFactory idFactory
-        ) where TOutVertex : Vertex
-          where TInVertex : Vertex
+        )
+            where TOutVertex : Vertex
+            where TInVertex : Vertex
         {
             var inVerticesArray = new Id<Vertex>[inVertices.Count];
 

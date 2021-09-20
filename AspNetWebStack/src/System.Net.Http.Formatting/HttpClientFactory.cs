@@ -49,7 +49,8 @@ namespace System.Net.Http
         public static HttpClient Create(
             HttpMessageHandler innerHandler,
             params DelegatingHandler[] handlers
-        ) {
+        )
+        {
             HttpMessageHandler pipeline = CreatePipeline(innerHandler, handlers);
             return new HttpClient(pipeline);
         }
@@ -68,7 +69,8 @@ namespace System.Net.Http
         public static HttpMessageHandler CreatePipeline(
             HttpMessageHandler innerHandler,
             IEnumerable<DelegatingHandler> handlers
-        ) {
+        )
+        {
             if (innerHandler == null)
             {
                 throw Error.ArgumentNull("innerHandler");

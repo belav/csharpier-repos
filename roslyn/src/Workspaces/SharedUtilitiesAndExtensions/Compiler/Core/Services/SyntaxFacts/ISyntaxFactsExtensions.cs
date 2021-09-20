@@ -52,7 +52,8 @@ namespace Microsoft.CodeAnalysis.LanguageServices
         public static bool IsAnyMemberAccessExpression(
             this ISyntaxFacts syntaxFacts,
             SyntaxNode node
-        ) {
+        )
+        {
             return syntaxFacts.IsSimpleMemberAccessExpression(node)
                 || syntaxFacts.IsPointerMemberAccessExpression(node);
         }
@@ -65,7 +66,8 @@ namespace Microsoft.CodeAnalysis.LanguageServices
         public static ImmutableArray<SyntaxTrivia> GetTriviaAfterLeadingBlankLines(
             this ISyntaxFacts syntaxFacts,
             SyntaxNode node
-        ) {
+        )
+        {
             var leadingBlankLines = syntaxFacts.GetLeadingBlankLines(node);
             return node.GetLeadingTrivia().Skip(leadingBlankLines.Length).ToImmutableArray();
         }
@@ -75,14 +77,16 @@ namespace Microsoft.CodeAnalysis.LanguageServices
             SyntaxNode statement,
             out SyntaxNode left,
             out SyntaxNode right
-        ) {
+        )
+        {
             syntaxFacts.GetPartsOfAssignmentStatement(statement, out left, out _, out right);
         }
 
         public static SyntaxNode GetExpressionOfInvocationExpression(
             this ISyntaxFacts syntaxFacts,
             SyntaxNode node
-        ) {
+        )
+        {
             syntaxFacts.GetPartsOfInvocationExpression(node, out var expression, out _);
             return expression;
         }
@@ -134,7 +138,8 @@ namespace Microsoft.CodeAnalysis.LanguageServices
                     previousToken.TrailingTrivia.Count == 0
                     && syntaxFacts.IsWordOrNumber(previousToken)
                     && syntaxFacts.IsWordOrNumber(resultNode.GetFirstToken())
-                ) {
+                )
+                {
                     resultNode = resultNode.WithPrependedLeadingTrivia(syntaxFacts.ElasticMarker);
                 }
             }
@@ -146,7 +151,8 @@ namespace Microsoft.CodeAnalysis.LanguageServices
                     nextToken.LeadingTrivia.Count == 0
                     && syntaxFacts.IsWordOrNumber(nextToken)
                     && syntaxFacts.IsWordOrNumber(resultNode.GetLastToken())
-                ) {
+                )
+                {
                     resultNode = resultNode.WithAppendedTrailingTrivia(syntaxFacts.ElasticMarker);
                 }
             }
@@ -180,7 +186,8 @@ namespace Microsoft.CodeAnalysis.LanguageServices
         public static SyntaxNode GetPatternOfParenthesizedPattern(
             this ISyntaxFacts syntaxFacts,
             SyntaxNode node
-        ) {
+        )
+        {
             syntaxFacts.GetPartsOfParenthesizedPattern(node, out _, out var pattern, out _);
             return pattern;
         }
@@ -188,7 +195,8 @@ namespace Microsoft.CodeAnalysis.LanguageServices
         public static SyntaxNode GetExpressionOfParenthesizedExpression(
             this ISyntaxFacts syntaxFacts,
             SyntaxNode node
-        ) {
+        )
+        {
             syntaxFacts.GetPartsOfParenthesizedExpression(node, out _, out var expression, out _);
             return expression;
         }
@@ -196,7 +204,8 @@ namespace Microsoft.CodeAnalysis.LanguageServices
         public static SyntaxToken GetOperatorTokenOfBinaryExpression(
             this ISyntaxFacts syntaxFacts,
             SyntaxNode node
-        ) {
+        )
+        {
             syntaxFacts.GetPartsOfBinaryExpression(node, out _, out var token, out _);
             return token;
         }
@@ -209,7 +218,8 @@ namespace Microsoft.CodeAnalysis.LanguageServices
         public static SyntaxNode? GetExpressionOfElementAccessExpression(
             this ISyntaxFacts syntaxFacts,
             SyntaxNode node
-        ) {
+        )
+        {
             syntaxFacts.GetPartsOfElementAccessExpression(node, out var expression, out _);
             return expression;
         }
@@ -217,7 +227,8 @@ namespace Microsoft.CodeAnalysis.LanguageServices
         public static SyntaxNode? GetArgumentListOfElementAccessExpression(
             this ISyntaxFacts syntaxFacts,
             SyntaxNode node
-        ) {
+        )
+        {
             syntaxFacts.GetPartsOfElementAccessExpression(node, out _, out var argumentList);
             return argumentList;
         }
@@ -225,7 +236,8 @@ namespace Microsoft.CodeAnalysis.LanguageServices
         public static SyntaxNode GetExpressionOfConditionalAccessExpression(
             this ISyntaxFacts syntaxFacts,
             SyntaxNode node
-        ) {
+        )
+        {
             syntaxFacts.GetPartsOfConditionalAccessExpression(node, out var expression, out _);
             return expression;
         }
@@ -233,7 +245,8 @@ namespace Microsoft.CodeAnalysis.LanguageServices
         public static SyntaxToken GetOperatorTokenOfMemberAccessExpression(
             this ISyntaxFacts syntaxFacts,
             SyntaxNode node
-        ) {
+        )
+        {
             syntaxFacts.GetPartsOfMemberAccessExpression(node, out _, out var operatorToken, out _);
             return operatorToken;
         }
@@ -262,7 +275,8 @@ namespace Microsoft.CodeAnalysis.LanguageServices
             this ISyntaxFacts syntaxFacts,
             SyntaxNode root,
             SyntaxNode node
-        ) {
+        )
+        {
             // Span without AttributeLists
             // - No AttributeLists -> original .Span
             // - Some AttributeLists -> (first non-trivia/comment Token.Span.Begin, original.Span.End)
@@ -309,7 +323,8 @@ namespace Microsoft.CodeAnalysis.LanguageServices
         public static SyntaxNode? GetStatementContainer(
             this ISyntaxFacts syntaxFacts,
             SyntaxNode node
-        ) {
+        )
+        {
             for (var current = node; current is object; current = current.Parent)
             {
                 if (syntaxFacts.IsStatementContainer(current.Parent))
@@ -335,7 +350,8 @@ namespace Microsoft.CodeAnalysis.LanguageServices
         public static SyntaxNode GetRootStandaloneExpression(
             this ISyntaxFacts syntaxFacts,
             SyntaxNode node
-        ) {
+        )
+        {
             // First, make sure we're on a construct the language things is a standalone expression.
             var standalone = syntaxFacts.GetStandaloneExpression(node);
 

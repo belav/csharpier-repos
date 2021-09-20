@@ -64,7 +64,8 @@ namespace Microsoft.CodeAnalysis.Diagnostics
 
         public static bool SupportsSpanBasedSemanticDiagnosticAnalysis(
             this DiagnosticAnalyzer analyzer
-        ) {
+        )
+        {
             var category = analyzer.GetDiagnosticAnalyzerCategory();
             return (category & DiagnosticAnalyzerCategory.SemanticSpanAnalysis) != 0;
         }

@@ -49,7 +49,8 @@ namespace System.CommandLine.Rendering.Views
         protected void Observe<T>(
             IObservable<T> observable,
             Func<T, FormattableString> formatProvider
-        ) {
+        )
+        {
             if (observable == null)
             {
                 throw new ArgumentNullException(nameof(observable));
@@ -66,7 +67,8 @@ namespace System.CommandLine.Rendering.Views
         public static ContentView FromObservable<T>(
             IObservable<T> observable,
             Func<T, FormattableString> formatProvider = null
-        ) {
+        )
+        {
             var rv = new ContentView();
             rv.Observe(observable, formatProvider ?? (x => $"{x}"));
             return rv;

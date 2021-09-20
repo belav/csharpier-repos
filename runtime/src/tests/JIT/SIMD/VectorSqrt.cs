@@ -22,7 +22,8 @@ internal partial class VectorTest
                     (Vector.Abs(B) - new Vector<T>(root)),
                     new Vector<T>(allowableError)
                 )
-            ) {
+            )
+            {
                 return Pass;
             }
             else

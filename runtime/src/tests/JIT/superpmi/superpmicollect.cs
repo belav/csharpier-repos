@@ -310,7 +310,8 @@ namespace SuperPMICollection
         private static void RunProgramsWhileCollecting(
             string runProgramPath,
             string runProgramArguments
-        ) {
+        )
+        {
             if (runProgramPath == null)
             {
                 // No program was given to use for collection, so use our default set.
@@ -396,7 +397,8 @@ namespace SuperPMICollection
             if (
                 File.Exists(s_baseFailMclFile)
                 && !String.IsNullOrEmpty(File.ReadAllText(s_baseFailMclFile))
-            ) {
+            )
+            {
                 RunProgram(Global.McsPath, "-strip " + s_baseMchFile + " " + s_finalMchFile);
             }
             else
@@ -469,7 +471,8 @@ namespace SuperPMICollection
             if (
                 !File.Exists(s_finalFailMclFile)
                 || !String.IsNullOrEmpty(File.ReadAllText(s_finalFailMclFile))
-            ) {
+            )
+            {
                 throw new SpmiException("replay of final file is not error free");
             }
 
@@ -550,7 +553,8 @@ namespace SuperPMICollection
             string runProgramPath,
             string runProgramArguments,
             string tempPath
-        ) {
+        )
+        {
             // Do a basic SuperPMI collect and validation:
             // 1. Collect MC files by running a set of sample apps.
             // 2. Merge the MC files into a single MCH using "mcs -merge *.mc -recursive -dedup -thin".

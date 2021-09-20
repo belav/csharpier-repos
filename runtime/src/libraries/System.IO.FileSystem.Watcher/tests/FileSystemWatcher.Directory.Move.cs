@@ -146,7 +146,8 @@ namespace System.IO.Tests
         private void DirectoryMove_Multiple_FromWatchedToUnwatched(
             int filesCount,
             bool skipOldEvents
-        ) {
+        )
+        {
             Assert.InRange(filesCount, 0, int.MaxValue);
 
             using var watchedTestDirectory = new TempDirectory(GetTestFilePath());
@@ -279,7 +280,8 @@ namespace System.IO.Tests
         private void DirectoryMove_NestedDirectory(
             WatcherChangeTypes eventType,
             bool includeSubdirectories
-        ) {
+        )
+        {
             using (var dir = new TempDirectory(GetTestFilePath()))
             using (var firstDir = new TempDirectory(Path.Combine(dir.Path, "first")))
             using (var secondDir = new TempDirectory(Path.Combine(firstDir.Path, "second")))

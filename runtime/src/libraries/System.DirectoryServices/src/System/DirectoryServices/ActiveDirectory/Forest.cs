@@ -46,7 +46,8 @@ namespace System.DirectoryServices.ActiveDirectory
             DirectoryContext context,
             string forestDnsName,
             DirectoryEntryManager directoryEntryMgr
-        ) {
+        )
+        {
             _context = context;
             _directoryEntryMgr = directoryEntryMgr;
             _forestDnsName = forestDnsName;
@@ -96,7 +97,8 @@ namespace System.DirectoryServices.ActiveDirectory
             if (
                 (context.ContextType != DirectoryContextType.Forest)
                 && (context.ContextType != DirectoryContextType.DirectoryServer)
-            ) {
+            )
+            {
                 throw new ArgumentException(SR.TargetShouldBeServerORForest, nameof(context));
             }
 
@@ -146,7 +148,8 @@ namespace System.DirectoryServices.ActiveDirectory
                 if (
                     (context.isServer())
                     && (!Utils.CheckCapability(rootDSE, Capability.ActiveDirectory))
-                ) {
+                )
+                {
                     throw new ActiveDirectoryObjectNotFoundException(
                         SR.Format(SR.DCNotFound, context.Name),
                         typeof(Forest),
@@ -596,7 +599,8 @@ namespace System.DirectoryServices.ActiveDirectory
             string targetForestName,
             TrustDirection direction,
             string trustPassword
-        ) {
+        )
+        {
             CheckIfDisposed();
 
             if (targetForestName == null)
@@ -693,7 +697,8 @@ namespace System.DirectoryServices.ActiveDirectory
         public void UpdateLocalSideOfTrustRelationship(
             string targetForestName,
             string newTrustPassword
-        ) {
+        )
+        {
             CheckIfDisposed();
 
             if (targetForestName == null)
@@ -715,7 +720,8 @@ namespace System.DirectoryServices.ActiveDirectory
             string targetForestName,
             TrustDirection newTrustDirection,
             string newTrustPassword
-        ) {
+        )
+        {
             CheckIfDisposed();
 
             if (targetForestName == null)
@@ -1306,7 +1312,8 @@ namespace System.DirectoryServices.ActiveDirectory
                     if (
                         (!(nCName.Equals(schemaNamingContext)))
                         && (!(nCName.Equals(configurationNamingContext)))
-                    ) {
+                    )
+                    {
                         // create a new context to be passed on to the appNC object
                         // (pass the dns name of the appliction partition as the target)
                         string dnsName = (string)PropertyManager.GetSearchResultPropertyValue(
@@ -1550,7 +1557,8 @@ namespace System.DirectoryServices.ActiveDirectory
                                     & (int)TRUST_ATTRIBUTE.TRUST_ATTRIBUTE_FOREST_TRANSITIVE
                                 ) != 0
                             )
-                        ) {
+                        )
+                        {
                             // we don't want to include self
                             if (
                                 (unmanagedTrust.Flags & (int)DS_DOMAINTRUST_FLAG.DS_DOMAIN_PRIMARY)

@@ -263,7 +263,8 @@ namespace System.Text.Tests
             bool flush,
             int expected,
             string errorno
-        ) {
+        )
+        {
             int actual = decoder.GetChars(bytes, byteIndex, byteCount, chars, charIndex, flush);
             Assert.Equal(expected, actual);
         }
@@ -279,7 +280,8 @@ namespace System.Text.Tests
             int expected,
             char[] expectedChars,
             string errorno
-        ) {
+        )
+        {
             VerificationHelper(
                 decoder,
                 bytes,

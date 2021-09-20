@@ -53,7 +53,8 @@ namespace Microsoft.EntityFrameworkCore
             this IConventionPropertyBuilder propertyBuilder,
             int? srid,
             bool fromDataAnnotation = false
-        ) {
+        )
+        {
             if (propertyBuilder.CanSetSrid(srid, fromDataAnnotation))
             {
                 propertyBuilder.Metadata.SetSrid(srid, fromDataAnnotation);

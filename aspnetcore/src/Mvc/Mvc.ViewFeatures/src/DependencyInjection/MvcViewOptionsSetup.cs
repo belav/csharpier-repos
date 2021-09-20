@@ -21,7 +21,8 @@ namespace Microsoft.Extensions.DependencyInjection
         public MvcViewOptionsSetup(
             IOptions<MvcDataAnnotationsLocalizationOptions> dataAnnotationLocalizationOptions,
             IValidationAttributeAdapterProvider validationAttributeAdapterProvider
-        ) {
+        )
+        {
             if (dataAnnotationLocalizationOptions == null)
             {
                 throw new ArgumentNullException(nameof(dataAnnotationLocalizationOptions));

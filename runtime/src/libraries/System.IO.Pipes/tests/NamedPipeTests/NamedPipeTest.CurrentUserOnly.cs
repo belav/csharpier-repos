@@ -49,7 +49,8 @@ namespace System.IO.Pipes.Tests
                     PipeTransmissionMode.Byte,
                     PipeOptions.CurrentUserOnly
                 )
-            ) {
+            )
+            {
                 using (
                     var client = new NamedPipeClientStream(
                         ".",
@@ -57,7 +58,8 @@ namespace System.IO.Pipes.Tests
                         PipeDirection.InOut,
                         PipeOptions.CurrentUserOnly
                     )
-                ) {
+                )
+                {
                     // Should not fail to connect since both, the server and client have the same owner.
                     client.Connect();
                 }
@@ -76,7 +78,8 @@ namespace System.IO.Pipes.Tests
                     PipeTransmissionMode.Byte,
                     PipeOptions.CurrentUserOnly
                 )
-            ) {
+            )
+            {
                 using (
                     var client = new NamedPipeClientStream(
                         ".",
@@ -84,7 +87,8 @@ namespace System.IO.Pipes.Tests
                         PipeDirection.InOut,
                         PipeOptions.CurrentUserOnly
                     )
-                ) {
+                )
+                {
                     client.Connect();
                 }
             }
@@ -96,7 +100,8 @@ namespace System.IO.Pipes.Tests
         public static void Connection_UnderSameUser_SingleSide_CurrentUserOnly_Works(
             PipeOptions serverPipeOptions,
             PipeOptions clientPipeOptions
-        ) {
+        )
+        {
             string name = PipeStreamConformanceTests.GetUniquePipeName();
             using (
                 var server = new NamedPipeServerStream(
@@ -114,7 +119,8 @@ namespace System.IO.Pipes.Tests
                     PipeDirection.InOut,
                     clientPipeOptions
                 )
-            ) {
+            )
+            {
                 Task[] tasks = new[]
                 {
                     Task.Run(() => server.WaitForConnection()),
@@ -157,7 +163,8 @@ namespace System.IO.Pipes.Tests
                     PipeTransmissionMode.Byte,
                     PipeOptions.CurrentUserOnly
                 )
-            ) {
+            )
+            {
                 using (
                     var client1 = new NamedPipeClientStream(
                         ".",
@@ -181,7 +188,8 @@ namespace System.IO.Pipes.Tests
                         PipeDirection.InOut,
                         PipeOptions.CurrentUserOnly
                     )
-                ) {
+                )
+                {
                     client1.Connect();
                     client2.Connect();
                     client3.Connect();
@@ -208,7 +216,8 @@ namespace System.IO.Pipes.Tests
                                     PipeTransmissionMode.Byte,
                                     PipeOptions.CurrentUserOnly
                                 )
-                            ) {
+                            )
+                            {
                                 using (
                                     var client = new NamedPipeClientStream(
                                         ".",
@@ -216,7 +225,8 @@ namespace System.IO.Pipes.Tests
                                         PipeDirection.InOut,
                                         PipeOptions.CurrentUserOnly
                                     )
-                                ) {
+                                )
+                                {
                                     // Should not fail to connect since both, the server and client have the same owner.
                                     client.Connect();
                                 }
@@ -234,7 +244,8 @@ namespace System.IO.Pipes.Tests
         [InlineData(PipeOptions.None)]
         public static void CreateMultipleConcurrentServers_ConnectMultipleClients(
             PipeOptions extraPipeOptions
-        ) {
+        )
+        {
             var pipeServers = new NamedPipeServerStream[5];
             var pipeClients = new NamedPipeClientStream[pipeServers.Length];
 

@@ -459,7 +459,8 @@ namespace System.Threading.Tasks.Tests
                 int length,
                 AsyncCallback cb,
                 object o
-            ) {
+            )
+            {
                 myAsyncResult mar = new myAsyncResult(cb, o);
 
                 // Allow for exception throwing to test our handling of that.
@@ -525,7 +526,8 @@ namespace System.Threading.Tasks.Tests
                 int offset,
                 AsyncCallback cb,
                 object o
-            ) {
+            )
+            {
                 myAsyncResult mar = new myAsyncResult(cb, o);
 
                 // Allow for exception throwing to test our handling of that.
@@ -664,7 +666,8 @@ namespace System.Threading.Tasks.Tests
         [InlineData(true)]
         public void FromAsync_CompletedSynchronouslyIAsyncResult_CompletesSynchronously(
             bool invokesCallback
-        ) {
+        )
+        {
             Task t = Task.Factory.FromAsync(
                 (callback, state) =>
                 {

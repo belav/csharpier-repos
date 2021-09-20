@@ -37,7 +37,8 @@ namespace Microsoft.CodeAnalysis.Remote.Testing
             RemoteServiceCallbackDispatcherRegistry callbackDispatchers,
             TraceListener? traceListener,
             RemoteHostTestData testData
-        ) {
+        )
+        {
             var inprocServices = new InProcRemoteServices(services, traceListener, testData);
 
             var remoteHostStream = await inprocServices.RequestServiceAsync(
@@ -74,7 +75,8 @@ namespace Microsoft.CodeAnalysis.Remote.Testing
             InProcRemoteServices inprocServices,
             RemoteServiceCallbackDispatcherRegistry callbackDispatchers,
             Stream stream
-        ) {
+        )
+        {
             _workspaceServices = services;
             _callbackDispatchers = callbackDispatchers;
             _logger = new TraceSource("Default");
@@ -170,7 +172,8 @@ namespace Microsoft.CodeAnalysis.Remote.Testing
             RemoteServiceName serviceName,
             object? callbackTarget,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             // get stream from service hub to communicate service specific information
             // this is what consumer actually use to communicate information
             var serviceStream = await _inprocServices.RequestServiceAsync(serviceName)
@@ -307,7 +310,8 @@ namespace Microsoft.CodeAnalysis.Remote.Testing
                 HostWorkspaceServices workspaceServices,
                 TraceListener? traceListener,
                 RemoteHostTestData testData
-            ) {
+            )
+            {
                 var remoteLogger = new TraceSource("InProcRemoteClient")
                 {
                     Switch = { Level = SourceLevels.Verbose },
@@ -379,7 +383,8 @@ namespace Microsoft.CodeAnalysis.Remote.Testing
             public void RegisterService(
                 RemoteServiceName name,
                 Func<Stream, IServiceProvider, ServiceActivationOptions, ServiceBase> serviceFactory
-            ) {
+            )
+            {
                 _factoryMap.Add(name, serviceFactory);
                 _serviceNameMap.Add(
                     name.ToString(
@@ -405,7 +410,8 @@ namespace Microsoft.CodeAnalysis.Remote.Testing
             public void RegisterInProcBrokeredService(
                 ServiceDescriptor serviceDescriptor,
                 Func<object> serviceFactory
-            ) {
+            )
+            {
                 _inProcBrokeredServicesMap.Add(serviceDescriptor.Moniker, serviceFactory);
             }
 
@@ -422,13 +428,15 @@ namespace Microsoft.CodeAnalysis.Remote.Testing
                 ServiceRpcDescriptor descriptor,
                 IDuplexPipe pipe,
                 ServiceActivationOptions options
-            ) {
+            )
+            {
                 if (
                     _inProcBrokeredServicesMap.TryGetValue(
                         descriptor.Moniker,
                         out var inProcFactory
                     )
-                ) {
+                )
+                {
                     // This code is similar to service creation implemented in BrokeredServiceBase.FactoryBase.
                     // Currently don't support callback creation as we don't have in-proc service with callbacks yet.
                     Contract.ThrowIfFalse(descriptor.ClientInterface == null);
@@ -448,7 +456,8 @@ namespace Microsoft.CodeAnalysis.Remote.Testing
                         descriptor.Moniker,
                         out var remoteFactory
                     )
-                ) {
+                )
+                {
                     return remoteFactory.Create(pipe, ServiceProvider, options, ServiceBroker);
                 }
 

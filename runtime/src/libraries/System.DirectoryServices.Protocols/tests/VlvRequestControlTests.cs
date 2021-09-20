@@ -146,7 +146,8 @@ namespace System.DirectoryServices.Protocols.Tests
             int afterCount,
             int offset,
             byte[] expectedValue
-        ) {
+        )
+        {
             var control = new VlvRequestControl(beforeCount, afterCount, offset);
             Assert.Equal(afterCount, control.AfterCount);
             Assert.Equal(beforeCount, control.BeforeCount);
@@ -219,7 +220,8 @@ namespace System.DirectoryServices.Protocols.Tests
             string target,
             byte[] expectedTarget,
             byte[] expectedValue
-        ) {
+        )
+        {
             var control = new VlvRequestControl(beforeCount, afterCount, target);
             Assert.Equal(afterCount, control.AfterCount);
             Assert.Equal(beforeCount, control.BeforeCount);
@@ -290,7 +292,8 @@ namespace System.DirectoryServices.Protocols.Tests
             int afterCount,
             byte[] target,
             byte[] expectedValue
-        ) {
+        )
+        {
             var control = new VlvRequestControl(beforeCount, afterCount, target);
             Assert.Equal(afterCount, control.AfterCount);
             Assert.Equal(beforeCount, control.BeforeCount);

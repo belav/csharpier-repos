@@ -125,7 +125,8 @@ namespace System.ServiceModel.Syndication.Tests
             if (
                 failedNode.ChildNodes[0].InnerText.StartsWith("</")
                 && failedNode.ChildNodes[1].InnerText.StartsWith("</")
-            ) {
+            )
+            {
                 return true;
             }
 
@@ -134,7 +135,8 @@ namespace System.ServiceModel.Syndication.Tests
                 if (
                     failedNode.ChildNodes[0].InnerText == diff.File1Value
                     && failedNode.ChildNodes[1].InnerText == diff.File2Value
-                ) {
+                )
+                {
                     return true;
                 }
             }

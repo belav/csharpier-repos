@@ -76,11 +76,8 @@ namespace System.Web.Mvc
         /// <param name="areaReference">
         /// Find the controller in the root if <see cref="AreaReference.UseRoot"/>. Otherwise look in the current area.
         /// </param>
-        public RemoteAttribute(
-            string action,
-            string controller,
-            AreaReference areaReference
-        ) : this(action, controller)
+        public RemoteAttribute(string action, string controller, AreaReference areaReference)
+            : this(action, controller)
         {
             if (areaReference == AreaReference.UseRoot)
             {
@@ -169,7 +166,8 @@ namespace System.Web.Mvc
         public IEnumerable<ModelClientValidationRule> GetClientValidationRules(
             ModelMetadata metadata,
             ControllerContext context
-        ) {
+        )
+        {
             yield return new ModelClientValidationRemoteRule(
                 FormatErrorMessage(metadata.GetDisplayName()),
                 GetUrl(context),

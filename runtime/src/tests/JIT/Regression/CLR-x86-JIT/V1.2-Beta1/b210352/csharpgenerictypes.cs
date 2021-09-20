@@ -92,7 +92,8 @@ public class GenericClass<T>
     public static string StaticNonGenericMethodString(
         string methodParameter,
         Type methodParameterType
-    ) {
+    )
+    {
         Utils.CheckType<string>(methodParameter, methodParameterType);
         return methodParameter;
     }
@@ -100,7 +101,8 @@ public class GenericClass<T>
     public static int[] StaticNonGenericMethodIntArray(
         int[] methodParameter,
         Type methodParameterType
-    ) {
+    )
+    {
         Utils.CheckType<int[]>(methodParameter, methodParameterType);
         return methodParameter;
     }
@@ -108,7 +110,8 @@ public class GenericClass<T>
     public static string[] StaticNonGenericMethodStringArray(
         string[] methodParameter,
         Type methodParameterType
-    ) {
+    )
+    {
         Utils.CheckType<string[]>(methodParameter, methodParameterType);
         return methodParameter;
     }
@@ -117,7 +120,8 @@ public class GenericClass<T>
         T classParameter,
         U methodParameter,
         Type methodParameterType
-    ) {
+    )
+    {
         Utils.CheckType<U>(methodParameter, methodParameterType);
         Utils.CheckType<T>(classParameter, classParameterType);
         return methodParameter;
@@ -127,7 +131,8 @@ public class GenericClass<T>
         T classParameter,
         int methodParameter,
         Type methodParameterType
-    ) {
+    )
+    {
         Utils.CheckType<int>(methodParameter, methodParameterType);
         Utils.CheckType<T>(classParameter, classParameterType);
         return methodParameter;
@@ -137,7 +142,8 @@ public class GenericClass<T>
         T classParameter,
         string methodParameter,
         Type methodParameterType
-    ) {
+    )
+    {
         Utils.CheckType<string>(methodParameter, methodParameterType);
         Utils.CheckType<T>(classParameter, classParameterType);
         return methodParameter;
@@ -147,7 +153,8 @@ public class GenericClass<T>
         T classParameter,
         int[] methodParameter,
         Type methodParameterType
-    ) {
+    )
+    {
         Utils.CheckType<int[]>(methodParameter, methodParameterType);
         Utils.CheckType<T>(classParameter, classParameterType);
         return methodParameter;
@@ -157,7 +164,8 @@ public class GenericClass<T>
         T classParameter,
         string[] methodParameter,
         Type methodParameterType
-    ) {
+    )
+    {
         Utils.CheckType<string[]>(methodParameter, methodParameterType);
         Utils.CheckType<T>(classParameter, classParameterType);
         return methodParameter;
@@ -197,7 +205,8 @@ public class GenericClass<T>
         T classParameter,
         U methodParameter,
         Type methodParameterType
-    ) {
+    )
+    {
         Utils.CheckType<U>(methodParameter, methodParameterType);
         Utils.CheckType<T>(classParameter, classParameterType);
         return methodParameter;
@@ -207,7 +216,8 @@ public class GenericClass<T>
         T classParameter,
         int methodParameter,
         Type methodParameterType
-    ) {
+    )
+    {
         Utils.CheckType<int>(methodParameter, methodParameterType);
         Utils.CheckType<T>(classParameter, classParameterType);
         return methodParameter;
@@ -217,7 +227,8 @@ public class GenericClass<T>
         T classParameter,
         string methodParameter,
         Type methodParameterType
-    ) {
+    )
+    {
         Utils.CheckType<string>(methodParameter, methodParameterType);
         Utils.CheckType<T>(classParameter, classParameterType);
         return methodParameter;
@@ -227,7 +238,8 @@ public class GenericClass<T>
         T classParameter,
         int[] methodParameter,
         Type methodParameterType
-    ) {
+    )
+    {
         Utils.CheckType<int[]>(methodParameter, methodParameterType);
         Utils.CheckType<T>(classParameter, classParameterType);
         return methodParameter;
@@ -237,7 +249,8 @@ public class GenericClass<T>
         T classParameter,
         string[] methodParameter,
         Type methodParameterType
-    ) {
+    )
+    {
         Utils.CheckType<string[]>(methodParameter, methodParameterType);
         Utils.CheckType<T>(classParameter, classParameterType);
         return methodParameter;
@@ -247,7 +260,8 @@ public class GenericClass<T>
         U methodParameter,
         Type methodParameterType,
         bool isBase
-    ) {
+    )
+    {
         Utils.CheckType<U>(methodParameter, methodParameterType);
         if (isBase == false)
         {
@@ -260,7 +274,8 @@ public class GenericClass<T>
         int methodParameter,
         Type methodParameterType,
         bool isBase
-    ) {
+    )
+    {
         Utils.CheckType<int>(methodParameter, methodParameterType);
         if (isBase == false)
         {
@@ -273,7 +288,8 @@ public class GenericClass<T>
         string methodParameter,
         Type methodParameterType,
         bool isBase
-    ) {
+    )
+    {
         Utils.CheckType<string>(methodParameter, methodParameterType);
         if (isBase == false)
         {
@@ -286,7 +302,8 @@ public class GenericClass<T>
         int[] methodParameter,
         Type methodParameterType,
         bool isBase
-    ) {
+    )
+    {
         Utils.CheckType<int[]>(methodParameter, methodParameterType);
         if (isBase == false)
         {
@@ -299,7 +316,8 @@ public class GenericClass<T>
         string[] methodParameter,
         Type methodParameterType,
         bool isBase
-    ) {
+    )
+    {
         Utils.CheckType<string[]>(methodParameter, methodParameterType);
         if (isBase == false)
         {
@@ -313,7 +331,8 @@ public class GenericClass<T>
         U methodParameter,
         Type methodParameterType,
         bool isBase
-    ) {
+    )
+    {
         Utils.CheckType<U>(methodParameter, methodParameterType);
         if (isBase == false)
         {
@@ -328,7 +347,8 @@ public class GenericClass<T>
         int methodParameter,
         Type methodParameterType,
         bool isBase
-    ) {
+    )
+    {
         Utils.CheckType<int>(methodParameter, methodParameterType);
         if (isBase == false)
         {
@@ -343,7 +363,8 @@ public class GenericClass<T>
         string methodParameter,
         Type methodParameterType,
         bool isBase
-    ) {
+    )
+    {
         Utils.CheckType<string>(methodParameter, methodParameterType);
         if (isBase == false)
         {
@@ -358,7 +379,8 @@ public class GenericClass<T>
         int[] methodParameter,
         Type methodParameterType,
         bool isBase
-    ) {
+    )
+    {
         Utils.CheckType<int[]>(methodParameter, methodParameterType);
         if (isBase == false)
         {
@@ -373,7 +395,8 @@ public class GenericClass<T>
         string[] methodParameter,
         Type methodParameterType,
         bool isBase
-    ) {
+    )
+    {
         Utils.CheckType<string[]>(methodParameter, methodParameterType);
         if (isBase == false)
         {
@@ -596,7 +619,8 @@ public class GenericClassInheritsFromGenericClass<T> : GenericClass<T>
         U methodParameter,
         Type methodParameterType,
         bool isBase
-    ) {
+    )
+    {
         Utils.CheckType<U>(methodParameter, methodParameterType);
         if (isBase == true)
         {
@@ -609,7 +633,8 @@ public class GenericClassInheritsFromGenericClass<T> : GenericClass<T>
         int methodParameter,
         Type methodParameterType,
         bool isBase
-    ) {
+    )
+    {
         Utils.CheckType<int>(methodParameter, methodParameterType);
         if (isBase == true)
         {
@@ -622,7 +647,8 @@ public class GenericClassInheritsFromGenericClass<T> : GenericClass<T>
         string methodParameter,
         Type methodParameterType,
         bool isBase
-    ) {
+    )
+    {
         Utils.CheckType<string>(methodParameter, methodParameterType);
         if (isBase == true)
         {
@@ -635,7 +661,8 @@ public class GenericClassInheritsFromGenericClass<T> : GenericClass<T>
         int[] methodParameter,
         Type methodParameterType,
         bool isBase
-    ) {
+    )
+    {
         Utils.CheckType<int[]>(methodParameter, methodParameterType);
         if (isBase == true)
         {
@@ -648,7 +675,8 @@ public class GenericClassInheritsFromGenericClass<T> : GenericClass<T>
         string[] methodParameter,
         Type methodParameterType,
         bool isBase
-    ) {
+    )
+    {
         Utils.CheckType<string[]>(methodParameter, methodParameterType);
         if (isBase == true)
         {
@@ -662,7 +690,8 @@ public class GenericClassInheritsFromGenericClass<T> : GenericClass<T>
         U methodParameter,
         Type methodParameterType,
         bool isBase
-    ) {
+    )
+    {
         Utils.CheckType<U>(methodParameter, methodParameterType);
         if (isBase == true)
         {
@@ -677,7 +706,8 @@ public class GenericClassInheritsFromGenericClass<T> : GenericClass<T>
         int methodParameter,
         Type methodParameterType,
         bool isBase
-    ) {
+    )
+    {
         Utils.CheckType<int>(methodParameter, methodParameterType);
         if (isBase == true)
         {
@@ -692,7 +722,8 @@ public class GenericClassInheritsFromGenericClass<T> : GenericClass<T>
         string methodParameter,
         Type methodParameterType,
         bool isBase
-    ) {
+    )
+    {
         Utils.CheckType<string>(methodParameter, methodParameterType);
         if (isBase == true)
         {
@@ -707,7 +738,8 @@ public class GenericClassInheritsFromGenericClass<T> : GenericClass<T>
         int[] methodParameter,
         Type methodParameterType,
         bool isBase
-    ) {
+    )
+    {
         Utils.CheckType<int[]>(methodParameter, methodParameterType);
         if (isBase == true)
         {
@@ -722,7 +754,8 @@ public class GenericClassInheritsFromGenericClass<T> : GenericClass<T>
         string[] methodParameter,
         Type methodParameterType,
         bool isBase
-    ) {
+    )
+    {
         Utils.CheckType<string[]>(methodParameter, methodParameterType);
         if (isBase == true)
         {

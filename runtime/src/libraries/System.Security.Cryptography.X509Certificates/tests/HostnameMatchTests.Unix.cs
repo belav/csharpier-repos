@@ -53,7 +53,8 @@ namespace System.Security.Cryptography.X509Certificates.Tests
             string targetName,
             bool mixedCase,
             bool expectedResult
-        ) {
+        )
+        {
             string[] sanEntries =
             {
                 "Capitalized.SomeDomain.TLD",
@@ -84,7 +85,8 @@ namespace System.Security.Cryptography.X509Certificates.Tests
             IList<string> sanDnsNames,
             bool flattenCase,
             bool expectedResult
-        ) {
+        )
+        {
             using (RSA rsa = RSA.Create(TestData.RsaBigExponentParams))
             {
                 CertificateRequest request = new CertificateRequest(
@@ -143,7 +145,8 @@ namespace System.Security.Cryptography.X509Certificates.Tests
                                     idx < 2
                                     || extensionBytes[idx - 2] != 0x82
                                     || extensionBytes[idx - 1] != sanDnsName.Length
-                                ) {
+                                )
+                                {
                                     int relativeIdx = extensionSpan.Slice(idx + 1)
                                         .IndexOf(lowerBytes);
                                     idx = idx + 1 + relativeIdx;

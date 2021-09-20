@@ -21,7 +21,8 @@ namespace Microsoft.Web.Mvc.ModelBinding
         public override IExtensibleModelBinder GetBinder(
             ControllerContext controllerContext,
             ExtensibleModelBindingContext bindingContext
-        ) {
+        )
+        {
             return (
                 from provider in _providers
                 let binder = provider.GetBinder(controllerContext, bindingContext)
@@ -47,7 +48,8 @@ namespace Microsoft.Web.Mvc.ModelBinding
             public bool BindModel(
                 ControllerContext controllerContext,
                 ExtensibleModelBindingContext bindingContext
-            ) {
+            )
+            {
                 ModelBinderUtil.ValidateBindingContext(bindingContext);
                 ValueProviderResult valueProviderResult = bindingContext.ValueProvider.GetValue(
                     bindingContext.ModelName

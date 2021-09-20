@@ -11,7 +11,8 @@ namespace System.CodeDom
             CodeExpression left,
             CodeBinaryOperatorType op,
             CodeExpression right
-        ) {
+        )
+        {
             Right = right;
             Operator = op;
             Left = left;

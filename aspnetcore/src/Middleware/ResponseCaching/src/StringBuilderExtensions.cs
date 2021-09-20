@@ -10,7 +10,8 @@ namespace Microsoft.AspNetCore.ResponseCaching
         internal static StringBuilder AppendUpperInvariant(
             this StringBuilder builder,
             string? value
-        ) {
+        )
+        {
             if (!string.IsNullOrEmpty(value))
             {
                 builder.EnsureCapacity(builder.Length + value.Length);

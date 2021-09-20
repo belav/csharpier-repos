@@ -359,7 +359,8 @@ class Derived : PropertyCustomModifierCombinations
             bool onReturnType,
             bool inParameterType,
             bool onParameterType
-        ) {
+        )
+        {
             if (!method.ReturnsVoid)
             {
                 CheckCustomModifier(
@@ -393,7 +394,8 @@ class Derived : PropertyCustomModifierCombinations
             PropertySymbol property,
             bool inType,
             bool onType
-        ) {
+        )
+        {
             CheckCustomModifier(
                 inType,
                 ((ArrayTypeSymbol)property.Type).ElementTypeWithAnnotations.CustomModifiers
@@ -408,7 +410,8 @@ class Derived : PropertyCustomModifierCombinations
         private static void CheckCustomModifier(
             bool expectCustomModifier,
             ImmutableArray<CustomModifier> customModifiers
-        ) {
+        )
+        {
             if (expectCustomModifier)
             {
                 Assert.Equal(
@@ -2670,7 +2673,8 @@ class Implementation : I
         private static Func<Symbol, bool> IsPropertyWithSingleParameter(
             SpecialType paramSpecialType,
             bool isArrayType = false
-        ) {
+        )
+        {
             return s =>
             {
                 if (s.Kind != SymbolKind.Property)
@@ -2688,7 +2692,8 @@ class Implementation : I
         private static void AssertAllParametersHaveConstModOpt(
             Symbol member,
             bool ignoreLast = false
-        ) {
+        )
+        {
             int numParameters = member.GetParameterCount();
             var parameters = member.GetParameters();
             for (int i = 0; i < numParameters; i++)

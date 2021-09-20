@@ -41,7 +41,8 @@ namespace Internal.Cryptography.Pal
             DateTime verificationTime,
             TimeSpan timeout,
             bool disableAia
-        ) {
+        )
+        {
             if (timeout == TimeSpan.Zero)
             {
                 // An input value of 0 on the timeout is treated as 15 seconds, to match Windows.
@@ -105,7 +106,8 @@ namespace Internal.Cryptography.Pal
             if (
                 status != Interop.Crypto.X509VerifyStatusCode.X509_V_OK
                 || revocationMode != X509RevocationMode.NoCheck
-            ) {
+            )
+            {
                 if (OpenSslX509ChainProcessor.IsCompleteChain(status))
                 {
                     chainPal.CommitToChain();
@@ -136,7 +138,8 @@ namespace Internal.Cryptography.Pal
                     StoreName.CertificateAuthority,
                     StoreLocation.CurrentUser
                 )
-            ) {
+            )
+            {
                 try
                 {
                     userIntermediate.Open(OpenFlags.ReadWrite);

@@ -133,7 +133,8 @@ namespace Microsoft.CodeAnalysis
             string szAssemblyName,
             uint dwFlags,
             IntPtr pvReserved
-        ) {
+        )
+        {
             lock (s_assemblyIdentityGate)
             {
                 return RealCreateAssemblyNameObject(
@@ -164,7 +165,8 @@ namespace Microsoft.CodeAnalysis
         internal static unsafe string GetDisplayName(
             IAssemblyName nameObject,
             ASM_DISPLAYF displayFlags
-        ) {
+        )
+        {
             int hr;
             uint characterCountIncludingTerminator = 0;
 
@@ -206,7 +208,8 @@ namespace Microsoft.CodeAnalysis
         internal static unsafe byte[] GetPropertyBytes(
             IAssemblyName nameObject,
             PropertyId propertyId
-        ) {
+        )
+        {
             int hr;
             uint size = 0;
 
@@ -237,7 +240,8 @@ namespace Microsoft.CodeAnalysis
         internal static unsafe string GetPropertyString(
             IAssemblyName nameObject,
             PropertyId propertyId
-        ) {
+        )
+        {
             byte[] data = GetPropertyBytes(nameObject, propertyId);
             if (data == null)
             {
@@ -253,7 +257,8 @@ namespace Microsoft.CodeAnalysis
         internal static unsafe bool IsKeyOrTokenEmpty(
             IAssemblyName nameObject,
             PropertyId propertyId
-        ) {
+        )
+        {
             Debug.Assert(
                 propertyId == PropertyId.NULL_PUBLIC_KEY_TOKEN
                     || propertyId == PropertyId.NULL_PUBLIC_KEY
@@ -354,7 +359,8 @@ namespace Microsoft.CodeAnalysis
         internal static unsafe uint? GetPropertyWord(
             IAssemblyName nameObject,
             PropertyId propertyId
-        ) {
+        )
+        {
             uint result;
             uint size = sizeof(uint);
             int hr = nameObject.GetProperty(propertyId, &result, ref size);
@@ -410,7 +416,8 @@ namespace Microsoft.CodeAnalysis
             IAssemblyName nameObject,
             PropertyId propertyId,
             string data
-        ) {
+        )
+        {
             if (data == null)
             {
                 nameObject.SetProperty(propertyId, null, 0);
@@ -433,7 +440,8 @@ namespace Microsoft.CodeAnalysis
             IAssemblyName nameObject,
             PropertyId propertyId,
             byte[] data
-        ) {
+        )
+        {
             if (data == null)
             {
                 nameObject.SetProperty(propertyId, null, 0);
@@ -451,7 +459,8 @@ namespace Microsoft.CodeAnalysis
             IAssemblyName nameObject,
             PropertyId propertyId,
             ushort data
-        ) {
+        )
+        {
             nameObject.SetProperty(propertyId, &data, sizeof(ushort));
         }
 
@@ -459,7 +468,8 @@ namespace Microsoft.CodeAnalysis
             IAssemblyName nameObject,
             PropertyId propertyId,
             uint data
-        ) {
+        )
+        {
             nameObject.SetProperty(propertyId, &data, sizeof(uint));
         }
 
@@ -643,7 +653,8 @@ namespace Microsoft.CodeAnalysis
         internal static IAssemblyName GetBestMatch(
             IEnumerable<IAssemblyName> candidates,
             string preferredCultureOpt
-        ) {
+        )
+        {
             IAssemblyName bestCandidate = null;
             Version bestVersion = null;
             string bestCulture = null;
@@ -686,7 +697,8 @@ namespace Microsoft.CodeAnalysis
                                         bestCulture,
                                         preferredCultureOpt
                                     )
-                            ) {
+                            )
+                            {
                                 bestCandidate = candidate;
                                 bestVersion = candidateVersion;
                                 bestCulture = candidateCulture;

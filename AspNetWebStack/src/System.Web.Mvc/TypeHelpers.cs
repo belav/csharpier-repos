@@ -172,7 +172,8 @@ namespace System.Web.Mvc
         public static MissingMethodException EnsureDebuggableException(
             MissingMethodException originalException,
             string fullTypeName
-        ) {
+        )
+        {
             MissingMethodException replacementException = null;
             if (!originalException.Message.Contains(fullTypeName))
             {
@@ -210,7 +211,8 @@ namespace System.Web.Mvc
             object dictionary,
             string key,
             out object value
-        ) {
+        )
+        {
             IDictionary<TKey, TValue> strongDict = (IDictionary<TKey, TValue>)dictionary;
 
             TValue strongValue;
@@ -223,7 +225,8 @@ namespace System.Web.Mvc
             object dictionary,
             string key,
             out object value
-        ) {
+        )
+        {
             IDictionary weakDict = (IDictionary)dictionary;
 
             bool containsKey = weakDict.Contains(key);

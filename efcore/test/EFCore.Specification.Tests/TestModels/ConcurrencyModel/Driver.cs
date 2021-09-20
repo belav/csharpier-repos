@@ -24,7 +24,8 @@ namespace Microsoft.EntityFrameworkCore.TestModels.ConcurrencyModel
             int poles,
             int fastestLaps,
             int teamId
-        ) {
+        )
+        {
             _loader = loader;
 
             Id = id;

@@ -24,7 +24,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel.InMemory.FunctionalTests.TestTrans
 
         public async ValueTask<ConnectionContext> AcceptAsync(
             CancellationToken cancellationToken = default
-        ) {
+        )
+        {
             if (await _acceptQueue.Reader.WaitToReadAsync(cancellationToken))
             {
                 while (_acceptQueue.Reader.TryRead(out var item))
@@ -39,7 +40,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel.InMemory.FunctionalTests.TestTrans
         public ValueTask<IConnectionListener> BindAsync(
             EndPoint endpoint,
             CancellationToken cancellationToken = default
-        ) {
+        )
+        {
             EndPoint = endpoint;
 
             return new ValueTask<IConnectionListener>(this);

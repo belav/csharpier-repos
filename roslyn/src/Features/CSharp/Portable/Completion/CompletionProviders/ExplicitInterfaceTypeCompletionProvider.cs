@@ -83,7 +83,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Completion.Providers
             int position,
             OptionSet options,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var targetToken = context.TargetToken;
 
             // Don't want to offer this after "async" (even though the compiler may parse that as a type).
@@ -153,7 +154,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Completion.Providers
             if (
                 tokenBeforeType.Kind() == SyntaxKind.CloseBraceToken
                 || tokenBeforeType.Kind() == SyntaxKind.SemicolonToken
-            ) {
+            )
+            {
                 // Check that we're after a class/struct/interface member.
                 var memberDeclaration = tokenBeforeType.GetAncestor<MemberDeclarationSyntax>();
                 return memberDeclaration?.GetLastToken() == tokenBeforeType

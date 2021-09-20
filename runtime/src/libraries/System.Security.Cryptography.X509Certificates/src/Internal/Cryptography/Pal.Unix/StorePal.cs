@@ -22,7 +22,8 @@ namespace Internal.Cryptography.Pal
             ReadOnlySpan<byte> rawData,
             SafePasswordHandle password,
             X509KeyStorageFlags keyStorageFlags
-        ) {
+        )
+        {
             Debug.Assert(password != null);
 
             ICertificatePal? singleCert;
@@ -30,7 +31,8 @@ namespace Internal.Cryptography.Pal
             if (
                 OpenSslX509CertificateReader.TryReadX509Der(rawData, out singleCert)
                 || OpenSslX509CertificateReader.TryReadX509Pem(rawData, out singleCert)
-            ) {
+            )
+            {
                 // The single X509 structure methods shouldn't return true and out null, only empty
                 // collections have that behavior.
                 Debug.Assert(singleCert != null);
@@ -50,7 +52,8 @@ namespace Internal.Cryptography.Pal
                     out certPals,
                     out openSslException
                 )
-            ) {
+            )
+            {
                 Debug.Assert(certPals != null);
 
                 return ListToLoaderPal(certPals);
@@ -64,7 +67,8 @@ namespace Internal.Cryptography.Pal
             string fileName,
             SafePasswordHandle password,
             X509KeyStorageFlags keyStorageFlags
-        ) {
+        )
+        {
             using (SafeBioHandle bio = Interop.Crypto.BioNewFile(fileName, "rb"))
             {
                 Interop.Crypto.CheckValidOpenSslHandle(bio);
@@ -77,7 +81,8 @@ namespace Internal.Cryptography.Pal
             string fileName,
             SafeBioHandle bio,
             SafePasswordHandle password
-        ) {
+        )
+        {
             int bioPosition = Interop.Crypto.BioTell(bio);
             Debug.Assert(bioPosition >= 0);
 
@@ -146,7 +151,8 @@ namespace Internal.Cryptography.Pal
 
         public static IExportPal LinkFromCertificateCollection(
             X509Certificate2Collection certificates
-        ) {
+        )
+        {
             return new ExportProvider(certificates);
         }
 
@@ -154,7 +160,8 @@ namespace Internal.Cryptography.Pal
             string storeName,
             StoreLocation storeLocation,
             OpenFlags openFlags
-        ) {
+        )
+        {
             if (storeLocation == StoreLocation.CurrentUser)
             {
                 if (
@@ -162,7 +169,8 @@ namespace Internal.Cryptography.Pal
                         storeName,
                         StringComparison.OrdinalIgnoreCase
                     )
-                ) {
+                )
+                {
                     return DirectoryBasedStoreProvider.OpenDisallowedStore(openFlags);
                 }
 
@@ -195,7 +203,8 @@ namespace Internal.Cryptography.Pal
                     storeName,
                     StringComparison.OrdinalIgnoreCase
                 )
-            ) {
+            )
+            {
                 return CachedSystemStoreProvider.MachineIntermediate;
             }
 

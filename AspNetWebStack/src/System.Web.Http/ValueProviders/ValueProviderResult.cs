@@ -45,7 +45,8 @@ namespace System.Web.Http.ValueProviders
             CultureInfo culture,
             object value,
             Type destinationType
-        ) {
+        )
+        {
             if (value == null || destinationType.IsInstanceOfType(value))
             {
                 return value;
@@ -139,7 +140,8 @@ namespace System.Web.Http.ValueProviders
             CultureInfo culture,
             object value,
             Type destinationType
-        ) {
+        )
+        {
             // array conversion results in four cases, as below
             IList valueAsList = value as IList;
             if (destinationType.IsArray)

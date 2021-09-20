@@ -39,7 +39,8 @@ namespace Microsoft.AspNetCore.Mvc.Rendering
             this IHtmlHelper htmlHelper,
             string expression,
             string labelText
-        ) {
+        )
+        {
             if (htmlHelper == null)
             {
                 throw new ArgumentNullException(nameof(htmlHelper));
@@ -59,7 +60,8 @@ namespace Microsoft.AspNetCore.Mvc.Rendering
         public static IHtmlContent LabelFor<TModel, TResult>(
             this IHtmlHelper<TModel> htmlHelper,
             Expression<Func<TModel, TResult>> expression
-        ) {
+        )
+        {
             if (htmlHelper == null)
             {
                 throw new ArgumentNullException(nameof(htmlHelper));
@@ -86,7 +88,8 @@ namespace Microsoft.AspNetCore.Mvc.Rendering
             this IHtmlHelper<TModel> htmlHelper,
             Expression<Func<TModel, TResult>> expression,
             string labelText
-        ) {
+        )
+        {
             if (htmlHelper == null)
             {
                 throw new ArgumentNullException(nameof(htmlHelper));
@@ -117,7 +120,8 @@ namespace Microsoft.AspNetCore.Mvc.Rendering
             this IHtmlHelper<TModel> htmlHelper,
             Expression<Func<TModel, TResult>> expression,
             object htmlAttributes
-        ) {
+        )
+        {
             if (htmlHelper == null)
             {
                 throw new ArgumentNullException(nameof(htmlHelper));
@@ -205,7 +209,8 @@ namespace Microsoft.AspNetCore.Mvc.Rendering
             this IHtmlHelper htmlHelper,
             string labelText,
             object htmlAttributes
-        ) {
+        )
+        {
             if (htmlHelper == null)
             {
                 throw new ArgumentNullException(nameof(htmlHelper));

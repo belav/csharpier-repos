@@ -46,7 +46,8 @@ namespace Microsoft.CodeAnalysis.OrderModifiers
         public bool TryGetOrComputePreferredOrder(
             string value,
             out Dictionary<int, int> preferredOrder
-        ) {
+        )
+        {
             if (string.IsNullOrWhiteSpace(value))
             {
                 preferredOrder = null;

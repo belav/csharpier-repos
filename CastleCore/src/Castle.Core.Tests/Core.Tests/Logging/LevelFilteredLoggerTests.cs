@@ -1471,7 +1471,8 @@ namespace Castle.Core.Logging.Tests
             LoggerLevel expectedLevel,
             string expectedMessage,
             Exception expectedException
-        ) {
+        )
+        {
             Assert.AreEqual(
                 1,
                 calls,
@@ -1528,7 +1529,8 @@ namespace Castle.Core.Logging.Tests
             string loggerName,
             string message,
             Exception exception
-        ) {
+        )
+        {
             Fixture.level = loggerLevel;
             Fixture.name = loggerName;
             Fixture.message = message;

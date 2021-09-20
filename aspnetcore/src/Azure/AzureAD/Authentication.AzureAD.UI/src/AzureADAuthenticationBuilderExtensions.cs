@@ -62,7 +62,8 @@ namespace Microsoft.AspNetCore.Authentication
             string scheme,
             string jwtBearerScheme,
             Action<AzureADOptions> configureOptions
-        ) {
+        )
+        {
             builder.AddPolicyScheme(
                 scheme,
                 displayName: null,
@@ -146,7 +147,8 @@ namespace Microsoft.AspNetCore.Authentication
             string cookieScheme,
             string displayName,
             Action<AzureADOptions> configureOptions
-        ) {
+        )
+        {
             AddAdditionalMvcApplicationParts(builder.Services);
             builder.AddPolicyScheme(
                 scheme,
@@ -201,7 +203,8 @@ namespace Microsoft.AspNetCore.Authentication
         private static Action<AzureADSchemeOptions> TryAddJwtBearerSchemeMapping(
             string scheme,
             string jwtBearerScheme
-        ) {
+        )
+        {
             return TryAddMapping;
 
             void TryAddMapping(AzureADSchemeOptions o)
@@ -237,7 +240,8 @@ namespace Microsoft.AspNetCore.Authentication
             string scheme,
             string openIdConnectScheme,
             string cookieScheme
-        ) {
+        )
+        {
             return TryAddMapping;
 
             void TryAddMapping(AzureADSchemeOptions o)

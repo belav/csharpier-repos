@@ -129,7 +129,8 @@ namespace System.Net.Sockets
                 AwaitableSocketAsyncEventArgs saea,
                 ValueTask connectTask,
                 CancellationToken cancellationToken
-            ) {
+            )
+            {
                 Debug.Assert(cancellationToken.CanBeCanceled);
                 try
                 {
@@ -138,7 +139,8 @@ namespace System.Net.Sockets
                             o => CancelConnectAsync((SocketAsyncEventArgs)o!),
                             saea
                         )
-                    ) {
+                    )
+                    {
                         await connectTask.ConfigureAwait(false);
                     }
                 }
@@ -192,7 +194,8 @@ namespace System.Net.Sockets
             IPAddress[] addresses,
             int port,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             ThrowIfDisposed();
 
             if (addresses == null)
@@ -228,7 +231,8 @@ namespace System.Net.Sockets
                 IPAddress[] addresses,
                 int port,
                 CancellationToken cancellationToken
-            ) {
+            )
+            {
                 Exception? lastException = null;
                 IPEndPoint? endPoint = null;
                 foreach (IPAddress address in addresses)
@@ -301,7 +305,8 @@ namespace System.Net.Sockets
             ArraySegment<byte> buffer,
             SocketFlags socketFlags,
             bool fromNetworkStream
-        ) {
+        )
+        {
             ValidateBuffer(buffer);
             return ReceiveAsync(buffer, socketFlags, fromNetworkStream, default).AsTask();
         }
@@ -324,7 +329,8 @@ namespace System.Net.Sockets
             SocketFlags socketFlags,
             bool fromNetworkStream,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             if (cancellationToken.IsCancellationRequested)
             {
                 return ValueTask.FromCanceled<int>(cancellationToken);
@@ -387,7 +393,8 @@ namespace System.Net.Sockets
             ArraySegment<byte> buffer,
             SocketFlags socketFlags,
             EndPoint remoteEndPoint
-        ) {
+        )
+        {
             ValidateBuffer(buffer);
             return ReceiveFromAsync(buffer, socketFlags, remoteEndPoint, default).AsTask();
         }
@@ -405,7 +412,8 @@ namespace System.Net.Sockets
             SocketFlags socketFlags,
             EndPoint remoteEndPoint,
             CancellationToken cancellationToken = default
-        ) {
+        )
+        {
             ValidateReceiveFromEndpointAndState(remoteEndPoint, nameof(remoteEndPoint));
 
             if (cancellationToken.IsCancellationRequested)
@@ -436,7 +444,8 @@ namespace System.Net.Sockets
             ArraySegment<byte> buffer,
             SocketFlags socketFlags,
             EndPoint remoteEndPoint
-        ) {
+        )
+        {
             ValidateBuffer(buffer);
             return ReceiveMessageFromAsync(buffer, socketFlags, remoteEndPoint, default).AsTask();
         }
@@ -454,7 +463,8 @@ namespace System.Net.Sockets
             SocketFlags socketFlags,
             EndPoint remoteEndPoint,
             CancellationToken cancellationToken = default
-        ) {
+        )
+        {
             ValidateReceiveFromEndpointAndState(remoteEndPoint, nameof(remoteEndPoint));
             if (cancellationToken.IsCancellationRequested)
             {
@@ -496,7 +506,8 @@ namespace System.Net.Sockets
             ReadOnlyMemory<byte> buffer,
             SocketFlags socketFlags,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             if (cancellationToken.IsCancellationRequested)
             {
                 return ValueTask.FromCanceled<int>(cancellationToken);
@@ -517,7 +528,8 @@ namespace System.Net.Sockets
             ReadOnlyMemory<byte> buffer,
             SocketFlags socketFlags,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             if (cancellationToken.IsCancellationRequested)
             {
                 return ValueTask.FromCanceled(cancellationToken);
@@ -580,7 +592,8 @@ namespace System.Net.Sockets
             ArraySegment<byte> buffer,
             SocketFlags socketFlags,
             EndPoint remoteEP
-        ) {
+        )
+        {
             ValidateBuffer(buffer);
             return SendToAsync(buffer, socketFlags, remoteEP, default).AsTask();
         }
@@ -598,7 +611,8 @@ namespace System.Net.Sockets
             SocketFlags socketFlags,
             EndPoint remoteEP,
             CancellationToken cancellationToken = default
-        ) {
+        )
+        {
             if (remoteEP is null)
             {
                 throw new ArgumentNullException(nameof(remoteEP));
@@ -683,7 +697,8 @@ namespace System.Net.Sockets
             TaskSocketAsyncEventArgs<int> saea,
             bool fromNetworkStream,
             bool isReceive
-        ) {
+        )
+        {
             Task<int> t;
 
             if (pending)
@@ -762,7 +777,8 @@ namespace System.Net.Sockets
             Socket s,
             TaskSocketAsyncEventArgs<int> saea,
             bool isReceive
-        ) {
+        )
+        {
             // Pull the relevant state off of the SAEA
             SocketError error = saea.SocketError;
             int bytesTransferred = saea.BytesTransferred;
@@ -795,7 +811,8 @@ namespace System.Net.Sockets
         private static Exception GetException(
             SocketError error,
             bool wrapExceptionsInIOExceptions = false
-        ) {
+        )
+        {
             Exception e = ExceptionDispatchInfo.SetCurrentStackTrace(
                 new SocketException((int)error)
             );
@@ -898,7 +915,8 @@ namespace System.Net.Sockets
             /// <summary>Gets the builder's task with appropriate synchronization.</summary>
             internal AsyncTaskMethodBuilder<TResult> GetCompletionResponsibility(
                 out bool responsibleForReturningToPool
-            ) {
+            )
+            {
                 lock (this)
                 {
                     responsibleForReturningToPool = _accessed;
@@ -983,7 +1001,8 @@ namespace System.Net.Sockets
                             null
                         )
                     ) != null
-                ) {
+                )
+                {
                     Debug.Assert(
                         c != s_completedSentinel,
                         "The delegate should not have been the completed sentinel."
@@ -1056,7 +1075,8 @@ namespace System.Net.Sockets
             public ValueTask<SocketReceiveFromResult> ReceiveFromAsync(
                 Socket socket,
                 CancellationToken cancellationToken
-            ) {
+            )
+            {
                 Debug.Assert(
                     Volatile.Read(ref _continuation) == null,
                     "Expected null continuation to indicate reserved for use"
@@ -1088,7 +1108,8 @@ namespace System.Net.Sockets
             public ValueTask<SocketReceiveMessageFromResult> ReceiveMessageFromAsync(
                 Socket socket,
                 CancellationToken cancellationToken
-            ) {
+            )
+            {
                 Debug.Assert(
                     Volatile.Read(ref _continuation) == null,
                     "Expected null continuation to indicate reserved for use"
@@ -1149,7 +1170,8 @@ namespace System.Net.Sockets
             public ValueTask SendAsyncForNetworkStream(
                 Socket socket,
                 CancellationToken cancellationToken
-            ) {
+            )
+            {
                 Debug.Assert(
                     Volatile.Read(ref _continuation) == null,
                     "Expected null continuation to indicate reserved for use"
@@ -1243,7 +1265,8 @@ namespace System.Net.Sockets
                 object? state,
                 short token,
                 ValueTaskSourceOnCompletedFlags flags
-            ) {
+            )
+            {
                 if (token != _token)
                 {
                     ThrowIncorrectTokenException();
@@ -1307,7 +1330,8 @@ namespace System.Net.Sockets
                 object? state,
                 bool forceAsync,
                 bool requiresExecutionContextFlow
-            ) {
+            )
+            {
                 object? scheduler = _scheduler;
                 _scheduler = null;
 
@@ -1428,7 +1452,8 @@ namespace System.Net.Sockets
 
             SocketReceiveMessageFromResult IValueTaskSource<SocketReceiveMessageFromResult>.GetResult(
                 short token
-            ) {
+            )
+            {
                 if (token != _token)
                 {
                     ThrowIncorrectTokenException();

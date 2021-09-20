@@ -26,7 +26,8 @@ namespace Microsoft.Web.Mvc
         public IEnumerable<ModelClientValidationRule> GetClientValidationRules(
             ModelMetadata metadata,
             ControllerContext context
-        ) {
+        )
+        {
             yield return new ModelClientValidationRule
             {
                 ValidationType = "url",

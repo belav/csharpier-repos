@@ -39,7 +39,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.DocumentationComments
             Document document,
             SnapshotPoint position,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var tree = document.GetSyntaxTreeSynchronously(cancellationToken);
             var token = tree.FindTokenOnLeftOfPosition(
                 position,
@@ -63,7 +64,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.DocumentationComments
                 if (
                     parentStartTag.Name.LocalName.ValueText.Length > 0
                     && HasMatchingEndTag(parentStartTag)
-                ) {
+                )
+                {
                     if (HasUnmatchedIdenticalParent(parentStartTag))
                     {
                         InsertTextAndMoveCaret(
@@ -100,7 +102,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.DocumentationComments
                         out XmlElementSyntax parentElement
                     )
                     && !HasFollowingEndTagTrivia(parentElement, token)
-                ) {
+                )
+                {
                     CheckNameAndInsertText(
                         textView,
                         subjectBuffer,
@@ -116,7 +119,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.DocumentationComments
         private static bool HasFollowingEndTagTrivia(
             XmlElementSyntax parentElement,
             SyntaxToken lessThanSlashToken
-        ) {
+        )
+        {
             var expectedEndTagText = "</" + parentElement.StartTag.Name.LocalName.ValueText + ">";
 
             var token = lessThanSlashToken.GetNextToken(includeDocumentationComments: true);
@@ -140,7 +144,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.DocumentationComments
                 if (
                     grandParentElement.StartTag.Name.LocalName.ValueText
                     == parentStartTag.Name.LocalName.ValueText
-                ) {
+                )
+                {
                     if (HasMatchingEndTag(grandParentElement.StartTag))
                     {
                         return HasUnmatchedIdenticalParent(grandParentElement.StartTag);
@@ -178,7 +183,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.DocumentationComments
             XmlElementStartTagSyntax startTag,
             int? finalCaretPosition,
             string formatString
-        ) {
+        )
+        {
             if (startTag == null)
             {
                 return;

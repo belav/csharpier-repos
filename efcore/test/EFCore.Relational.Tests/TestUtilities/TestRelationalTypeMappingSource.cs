@@ -155,17 +155,18 @@ namespace Microsoft.EntityFrameworkCore.TestUtilities
                 bool unicode = false,
                 int? size = null,
                 bool fixedLength = false
-            ) : base(
-                new RelationalTypeMappingParameters(
-                    new CoreTypeMappingParameters(typeof(string)),
-                    storeType,
-                    StoreTypePostfix.None,
-                    dbType,
-                    unicode,
-                    size,
-                    fixedLength
-                )
-            ) { }
+            )
+                : base(
+                    new RelationalTypeMappingParameters(
+                        new CoreTypeMappingParameters(typeof(string)),
+                        storeType,
+                        StoreTypePostfix.None,
+                        dbType,
+                        unicode,
+                        size,
+                        fixedLength
+                    )
+                ) { }
 
             protected override string ProcessStoreType(
                 RelationalTypeMappingParameters parameters,
@@ -179,7 +180,8 @@ namespace Microsoft.EntityFrameworkCore.TestUtilities
 
         protected override RelationalTypeMapping FindMapping(
             in RelationalTypeMappingInfo mappingInfo
-        ) {
+        )
+        {
             var clrType = mappingInfo.ClrType;
             var storeTypeName = mappingInfo.StoreTypeName;
 
@@ -228,13 +230,15 @@ namespace Microsoft.EntityFrameworkCore.TestUtilities
                 if (
                     clrType == typeof(decimal)
                     && !string.Equals("money", storeTypeName, StringComparison.Ordinal)
-                ) {
+                )
+                {
                     var precision = mappingInfo.Precision;
                     var scale = mappingInfo.Scale;
                     if (
                         precision == _defaultDecimalMapping.Precision
                         && scale == _defaultDecimalMapping.Scale
-                    ) {
+                    )
+                    {
                         return _defaultDecimalMapping;
                     }
 
@@ -277,7 +281,8 @@ namespace Microsoft.EntityFrameworkCore.TestUtilities
             out int? size,
             out int? precision,
             out int? scale
-        ) {
+        )
+        {
             var parsedName = base.ParseStoreTypeName(
                 storeTypeName,
                 out unicode,
@@ -292,7 +297,8 @@ namespace Microsoft.EntityFrameworkCore.TestUtilities
                     "default_decimal_mapping",
                     StringComparison.OrdinalIgnoreCase
                 ) == true
-            ) {
+            )
+            {
                 precision = size;
                 size = null;
                 scale = 0;

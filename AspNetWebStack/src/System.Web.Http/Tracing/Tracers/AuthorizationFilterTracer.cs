@@ -21,10 +21,8 @@ namespace System.Web.Http.Tracing.Tracers
         private const string ExecuteAuthorizationFilterAsyncMethodName =
             "ExecuteAuthorizationFilterAsync";
 
-        public AuthorizationFilterTracer(
-            IAuthorizationFilter innerFilter,
-            ITraceWriter traceWriter
-        ) : base(innerFilter, traceWriter) { }
+        public AuthorizationFilterTracer(IAuthorizationFilter innerFilter, ITraceWriter traceWriter)
+            : base(innerFilter, traceWriter) { }
 
         public new IAuthorizationFilter Inner
         {
@@ -40,7 +38,8 @@ namespace System.Web.Http.Tracing.Tracers
             HttpActionContext actionContext,
             CancellationToken cancellationToken,
             Func<Task<HttpResponseMessage>> continuation
-        ) {
+        )
+        {
             return TraceWriter.TraceBeginEndAsync<HttpResponseMessage>(
                 actionContext.Request,
                 TraceCategories.FiltersCategory,

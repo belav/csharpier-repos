@@ -107,7 +107,8 @@ namespace Microsoft.CodeAnalysis.CSharp
 
         internal override ImmutableArray<NamedTypeSymbol> InterfacesNoUseSiteDiagnostics(
             ConsList<TypeSymbol> basesBeingResolved
-        ) {
+        )
+        {
             return _interfaces;
         }
     }

@@ -33,7 +33,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
             IConventionEntityTypeBuilder entityTypeBuilder,
             TableAttribute attribute,
             IConventionContext<IConventionEntityTypeBuilder> context
-        ) {
+        )
+        {
             if (!string.IsNullOrWhiteSpace(attribute.Schema))
             {
                 entityTypeBuilder.ToTable(

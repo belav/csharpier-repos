@@ -450,7 +450,8 @@ class Program
         public async Task FireForElseWithoutBracesButHasContextBraces(
             int bracesPreference,
             bool expectDiagnostic
-        ) {
+        )
+        {
             await TestAsync(
                 @"
 class Program
@@ -518,7 +519,8 @@ class Program
         public async Task FireForStandaloneElseWithoutBraces(
             int bracesPreference,
             bool expectDiagnostic
-        ) {
+        )
+        {
             await TestAsync(
                 @"
 class Program
@@ -551,7 +553,8 @@ class Program
         public async Task FireForIfNestedInElseWithoutBraces(
             int bracesPreference,
             bool expectDiagnostic
-        ) {
+        )
+        {
             await TestAsync(
                 @"
 class Program
@@ -586,7 +589,8 @@ class Program
         public async Task FireForIfNestedInElseWithoutBracesWithMultilineContext1(
             int bracesPreference,
             bool expectDiagnostic
-        ) {
+        )
+        {
             await TestAsync(
                 @"
 class Program
@@ -629,7 +633,8 @@ class Program
         public async Task FireForIfNestedInElseWithoutBracesWithMultilineContext2(
             int bracesPreference,
             bool expectDiagnostic
-        ) {
+        )
+        {
             await TestAsync(
                 @"
 class Program
@@ -676,7 +681,8 @@ class Program
         public async Task FireForIfNestedInElseWithoutBracesWithMultilineContext3(
             int bracesPreference,
             bool expectDiagnostic
-        ) {
+        )
+        {
             await TestAsync(
                 @"
 class Program
@@ -722,7 +728,8 @@ class Program
         public async Task FireForIfNestedInElseWithoutBracesWithMultilineContext4(
             int bracesPreference,
             bool expectDiagnostic
-        ) {
+        )
+        {
             await TestAsync(
                 @"
 class Program
@@ -776,7 +783,8 @@ class Program
         public async Task FireForIfNestedInElseWithoutBracesWithMultilineContext5(
             int bracesPreference,
             bool expectDiagnostic
-        ) {
+        )
+        {
             await TestAsync(
                 @"
 class Program
@@ -853,7 +861,8 @@ class Program
         public async Task FireForMultilineForWithoutBraces1(
             int bracesPreference,
             bool expectDiagnostic
-        ) {
+        )
+        {
             await TestAsync(
                 @"
 class Program
@@ -890,7 +899,8 @@ class Program
         public async Task FireForMultilineForWithoutBraces2(
             int bracesPreference,
             bool expectDiagnostic
-        ) {
+        )
+        {
             await TestAsync(
                 @"
 class Program
@@ -925,7 +935,8 @@ class Program
         public async Task FireForMultilineForWithoutBraces3(
             int bracesPreference,
             bool expectDiagnostic
-        ) {
+        )
+        {
             await TestAsync(
                 @"
 class Program
@@ -1089,7 +1100,8 @@ class Program
         public async Task FireForMultilineDoWhileWithoutBraces1(
             int bracesPreference,
             bool expectDiagnostic
-        ) {
+        )
+        {
             await TestAsync(
                 @"
 class Program
@@ -1173,7 +1185,8 @@ class Fizz : IDisposable
         public async Task FireForUsingWithoutBracesNestedInUsing(
             int bracesPreference,
             bool expectDiagnostic
-        ) {
+        )
+        {
             await TestAsync(
                 @"
 class Program
@@ -1241,7 +1254,8 @@ class Buzz : IDisposable
         public async Task FireForMultilineUsingWithoutBracesNestedInUsing1(
             int bracesPreference,
             bool expectDiagnostic
-        ) {
+        )
+        {
             await TestAsync(
                 @"
 class Program
@@ -1311,7 +1325,8 @@ class Buzz : IDisposable
         public async Task FireForMultilineUsingWithoutBracesNestedInUsing2(
             int bracesPreference,
             bool expectDiagnostic
-        ) {
+        )
+        {
             await TestAsync(
                 @"
 class Program
@@ -1415,7 +1430,8 @@ class Program
         public async Task FireForLockWithoutBracesNestedInLock(
             int bracesPreference,
             bool expectDiagnostic
-        ) {
+        )
+        {
             await TestAsync(
                 @"
 class Program
@@ -1550,7 +1566,8 @@ class Program
         public async Task OnlyFireForIfWithIntercedingDirectiveInElseAroundIf(
             int bracesPreference,
             bool expectDiagnostic
-        ) {
+        )
+        {
             await TestAsync(
                 @"
 #define test
@@ -1595,7 +1612,8 @@ class Program
         public async Task OnlyFireForElseWithIntercedingDirectiveInIfAroundElse(
             int bracesPreference,
             bool expectDiagnostic
-        ) {
+        )
+        {
             await TestAsync(
                 @"
 #define test
@@ -1640,7 +1658,8 @@ class Program
         public async Task OnlyFireForElseWithIntercedingDirectiveInIf(
             int bracesPreference,
             bool expectDiagnostic
-        ) {
+        )
+        {
             await TestAsync(
                 @"
 #define test
@@ -1685,7 +1704,8 @@ class Program
         public async Task OnlyFireForIfWithIntercedingDirectiveInElse(
             int bracesPreference,
             bool expectDiagnostic
-        ) {
+        )
+        {
             await TestAsync(
                 @"
 #define test
@@ -1730,7 +1750,8 @@ class Program
         public async Task FireForIfElseWithDirectiveAroundIf(
             int bracesPreference,
             bool expectDiagnostic
-        ) {
+        )
+        {
             await TestAsync(
                 @"
 #define test
@@ -1779,7 +1800,8 @@ class Program
         public async Task FireForIfElseWithDirectiveAroundElse(
             int bracesPreference,
             bool expectDiagnostic
-        ) {
+        )
+        {
             await TestAsync(
                 @"
 #define test
@@ -1828,7 +1850,8 @@ class Program
         public async Task FireForIfWithoutIntercedingDirective(
             int bracesPreference,
             bool expectDiagnostic
-        ) {
+        )
+        {
             await TestAsync(
                 @"
 #define test
@@ -1869,7 +1892,8 @@ class Program
         public async Task FireForIfWithDirectiveAfterEmbeddedStatement(
             int bracesPreference,
             bool expectDiagnostic
-        ) {
+        )
+        {
             await TestAsync(
                 @"
 #define test
@@ -1910,7 +1934,8 @@ class Program
         public async Task FireForInnerNestedStatementWhenDirectiveEntirelyInside(
             int bracesPreference,
             bool expectDiagnostic
-        ) {
+        )
+        {
             await TestAsync(
                 @"
 #define test
@@ -1953,7 +1978,8 @@ class Program
         public async Task FireForOuterNestedStatementWhenDirectiveEntirelyInside(
             int bracesPreference,
             bool expectDiagnostic
-        ) {
+        )
+        {
             await TestAsync(
                 @"
 #define test
@@ -1993,7 +2019,8 @@ class Program
             string expectedMarkup,
             PreferBracesPreference bracesPreference,
             bool expectDiagnostic
-        ) {
+        )
+        {
             if (expectDiagnostic)
             {
                 await TestInRegularAndScriptAsync(

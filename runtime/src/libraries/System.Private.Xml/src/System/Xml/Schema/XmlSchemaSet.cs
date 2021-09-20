@@ -392,7 +392,8 @@ namespace System.Xml.Schema
                         if (
                             _schemas.ContainsKey(schema.SchemaId)
                             || FindSchemaByNSAndUrl(schema.BaseUri, tns, null) != null
-                        ) { //Do not already existing url
+                        )
+                        { //Do not already existing url
                             continue;
                         }
                         currentSchema = Add(schema.TargetNamespace, schema);
@@ -487,7 +488,8 @@ namespace System.Xml.Schema
                         if (
                             mainSchema == schemaToRemove
                             || schemaToRemove.ImportedSchemas.Contains(mainSchema)
-                        ) {
+                        )
+                        {
                             continue;
                         }
                         needToCheckSchemaList.Add(mainSchema);
@@ -719,7 +721,8 @@ namespace System.Xml.Schema
                         _schemaForSchema == null
                         && tns == XmlReservedNs.NsXs
                         && schema.SchemaTypes[DatatypeImplementation.QnAnyType] != null
-                    ) { //it has xs:anyType
+                    )
+                    { //it has xs:anyType
                         _schemaForSchema = schema;
                     }
                     for (int i = 0; i < schema.ImportedSchemas.Count; ++i)
@@ -738,7 +741,8 @@ namespace System.Xml.Schema
                             _schemaForSchema == null
                             && tns == XmlReservedNs.NsXs
                             && schema.SchemaTypes[DatatypeImplementation.QnAnyType] != null
-                        ) { //it has xs:anyType
+                        )
+                        { //it has xs:anyType
                             _schemaForSchema = schema;
                         }
                     }
@@ -848,7 +852,8 @@ namespace System.Xml.Schema
             XmlSchema schema,
             SchemaInfo newCompiledInfo,
             ref XmlSchemaObjectTable substTable
-        ) {
+        )
+        {
             //Add schema's compiled tables to the set
             if (schema.BaseUri != null && schemaLocations[schema.BaseUri] == null)
             { //Update schemaLocations table
@@ -925,7 +930,8 @@ namespace System.Xml.Schema
                         targetNamespace,
                         null
                     ) != null
-                ) {
+                )
+                {
                     return;
                 }
                 else
@@ -942,7 +948,8 @@ namespace System.Xml.Schema
                     targetNamespace,
                     out schema
                 )
-            ) {
+            )
+            {
                 return;
             }
             else
@@ -969,7 +976,8 @@ namespace System.Xml.Schema
                         if (
                             validatedNamespaces[tns] != null
                             && (FindSchemaByNSAndUrl(impSchema.BaseUri, tns, oldLocations) == null)
-                        ) {
+                        )
+                        {
                             RemoveRecursive(schema);
                             throw new XmlSchemaException(SR.Sch_ComponentAlreadySeenForNS, tns);
                         }
@@ -982,7 +990,8 @@ namespace System.Xml.Schema
             Uri? schemaUri,
             string ns,
             DictionaryEntry[]? locationsTable
-        ) {
+        )
+        {
             if (schemaUri == null || schemaUri.OriginalString.Length == 0)
             {
                 return null;
@@ -1069,7 +1078,8 @@ namespace System.Xml.Schema
                 _schemaForSchema == null
                 && tns == XmlReservedNs.NsXs
                 && schema.SchemaTypes[DatatypeImplementation.QnAnyType] != null
-            ) { //it has xs:anyType
+            )
+            { //it has xs:anyType
                 _schemaForSchema = schema;
             }
             for (int i = 0; i < schema.ImportedSchemas.Count; ++i)
@@ -1088,7 +1098,8 @@ namespace System.Xml.Schema
                     _schemaForSchema == null
                     && tns == XmlReservedNs.NsXs
                     && schema.SchemaTypes[DatatypeImplementation.QnAnyType] != null
-                ) { //it has xs:anyType
+                )
+                { //it has xs:anyType
                     _schemaForSchema = schema;
                 }
             }
@@ -1098,7 +1109,8 @@ namespace System.Xml.Schema
         private void ProcessNewSubstitutionGroups(
             XmlSchemaObjectTable substitutionGroupsTable,
             bool resolve
-        ) {
+        )
+        {
             foreach (XmlSchemaSubstitutionGroup? substGroup in substitutionGroupsTable.Values)
             {
                 if (resolve)
@@ -1130,7 +1142,8 @@ namespace System.Xml.Schema
         private void ResolveSubstitutionGroup(
             XmlSchemaSubstitutionGroup substitutionGroup,
             XmlSchemaObjectTable substTable
-        ) {
+        )
+        {
             List<XmlSchemaElement>? newMembers = null;
             XmlSchemaElement headElement = (XmlSchemaElement)elements![substitutionGroup.Examplar]!;
             if (substitutionGroup.Members.Contains(headElement))
@@ -1283,7 +1296,8 @@ namespace System.Xml.Schema
                         && baseUri.OriginalString.Length != 0
                         && _schemaLocations[baseUri] != null
                     )
-                ) {
+                )
+                {
                     existingSchemas.Add(currentSchema);
                     continue;
                 }
@@ -1415,7 +1429,8 @@ namespace System.Xml.Schema
                 if (
                     _schemas.ContainsKey(schema.SchemaId)
                     && (targetNamespace.Length == 0 || targetNamespace == schema.TargetNamespace)
-                ) { //schema is present in set
+                )
+                { //schema is present in set
                     //Schema found
                 }
                 else if (schema.TargetNamespace == null)
@@ -1492,7 +1507,8 @@ namespace System.Xml.Schema
                 if (
                     reprocessList[i].BaseUri != null
                     && reprocessList[i].BaseUri!.OriginalString.Length != 0
-                ) {
+                )
+                {
                     _schemaLocations.Remove(reprocessList[i].BaseUri!);
                 }
 
@@ -1510,7 +1526,8 @@ namespace System.Xml.Schema
                         if (
                             cKey.originalSchema == null
                             || Ref.ReferenceEquals(cKey.originalSchema, reprocessList[i])
-                        ) {
+                        )
+                        {
                             removalList.Add(cKey);
                         }
                     }
@@ -1569,7 +1586,8 @@ namespace System.Xml.Schema
             XmlSchemaObjectTable table,
             XmlQualifiedName qname,
             XmlSchemaObject item
-        ) {
+        )
+        {
             if (qname.Name.Length == 0)
             {
                 return true;

@@ -64,7 +64,8 @@ namespace System.Linq.Parallel.Tests
         {
             foreach (
                 int leftCount in counts.DefaultIfEmpty(Sources.OuterLoopCount / DuplicateFactor / 2)
-            ) {
+            )
+            {
                 ParallelQuery<int> left = Enumerable.Range(0, leftCount * DuplicateFactor)
                     .Select(x => x % leftCount)
                     .ToArray()
@@ -97,7 +98,8 @@ namespace System.Linq.Parallel.Tests
             int rightCount,
             int start,
             int count
-        ) {
+        )
+        {
             ParallelQuery<int> leftQuery = UnorderedSources.Default(leftCount);
             ParallelQuery<int> rightQuery = UnorderedSources.Default(rightStart, rightCount);
             IntegerRangeSet seen = new IntegerRangeSet(start, count);
@@ -123,7 +125,8 @@ namespace System.Linq.Parallel.Tests
             int rightCount,
             int start,
             int count
-        ) {
+        )
+        {
             Except_Unordered(leftCount, rightStart, rightCount, start, count);
         }
 
@@ -136,7 +139,8 @@ namespace System.Linq.Parallel.Tests
             int rightCount,
             int start,
             int count
-        ) {
+        )
+        {
             _ = leftCount;
             _ = rightCount;
             ParallelQuery<int> leftQuery = left.Item;
@@ -164,7 +168,8 @@ namespace System.Linq.Parallel.Tests
             int rightCount,
             int start,
             int count
-        ) {
+        )
+        {
             Except(left, leftCount, rightQuery, rightCount, start, count);
         }
 
@@ -176,7 +181,8 @@ namespace System.Linq.Parallel.Tests
             int rightCount,
             int start,
             int count
-        ) {
+        )
+        {
             ParallelQuery<int> leftQuery = UnorderedSources.Default(leftCount);
             ParallelQuery<int> rightQuery = UnorderedSources.Default(rightStart, rightCount);
             IntegerRangeSet seen = new IntegerRangeSet(start, count);
@@ -199,7 +205,8 @@ namespace System.Linq.Parallel.Tests
             int rightCount,
             int start,
             int count
-        ) {
+        )
+        {
             Except_Unordered_NotPipelined(leftCount, rightStart, rightCount, start, count);
         }
 
@@ -212,7 +219,8 @@ namespace System.Linq.Parallel.Tests
             int rightCount,
             int start,
             int count
-        ) {
+        )
+        {
             _ = leftCount;
             _ = rightCount;
             ParallelQuery<int> leftQuery = left.Item;
@@ -237,7 +245,8 @@ namespace System.Linq.Parallel.Tests
             int rightCount,
             int start,
             int count
-        ) {
+        )
+        {
             Except_NotPipelined(left, leftCount, rightQuery, rightCount, start, count);
         }
 
@@ -249,7 +258,8 @@ namespace System.Linq.Parallel.Tests
             int rightCount,
             int start,
             int count
-        ) {
+        )
+        {
             _ = start;
             _ = count;
             ParallelQuery<int> leftQuery = UnorderedSources.Default(leftCount);
@@ -263,7 +273,8 @@ namespace System.Linq.Parallel.Tests
                     rightQuery.Select(x => Math.Abs(x) % DuplicateFactor),
                     new ModularCongruenceComparer(DuplicateFactor * 2)
                 )
-            ) {
+            )
+            {
                 seen.Add(i % (DuplicateFactor * 2));
             }
             seen.AssertComplete();
@@ -284,7 +295,8 @@ namespace System.Linq.Parallel.Tests
             int rightCount,
             int start,
             int count
-        ) {
+        )
+        {
             Except_Unordered_Distinct(leftCount, rightStart, rightCount, start, count);
         }
 
@@ -297,7 +309,8 @@ namespace System.Linq.Parallel.Tests
             int rightCount,
             int start,
             int count
-        ) {
+        )
+        {
             _ = start;
             _ = count;
             ParallelQuery<int> leftQuery = left.Item;
@@ -310,7 +323,8 @@ namespace System.Linq.Parallel.Tests
                     rightQuery.Select(x => Math.Abs(x) % DuplicateFactor),
                     new ModularCongruenceComparer(DuplicateFactor * 2)
                 )
-            ) {
+            )
+            {
                 Assert.Equal(seen++, i);
             }
             Assert.Equal(expectedCount == 0 ? 0 : leftCount, seen);
@@ -332,7 +346,8 @@ namespace System.Linq.Parallel.Tests
             int rightCount,
             int start,
             int count
-        ) {
+        )
+        {
             Except_Distinct(left, leftCount, rightQuery, rightCount, start, count);
         }
 
@@ -344,7 +359,8 @@ namespace System.Linq.Parallel.Tests
             int rightCount,
             int start,
             int count
-        ) {
+        )
+        {
             _ = start;
             _ = count;
             ParallelQuery<int> leftQuery = UnorderedSources.Default(leftCount);
@@ -379,7 +395,8 @@ namespace System.Linq.Parallel.Tests
             int rightCount,
             int start,
             int count
-        ) {
+        )
+        {
             Except_Unordered_Distinct_NotPipelined(leftCount, rightStart, rightCount, start, count);
         }
 
@@ -392,7 +409,8 @@ namespace System.Linq.Parallel.Tests
             int rightCount,
             int start,
             int count
-        ) {
+        )
+        {
             _ = start;
             _ = count;
             ParallelQuery<int> leftQuery = left.Item;
@@ -427,7 +445,8 @@ namespace System.Linq.Parallel.Tests
             int rightCount,
             int start,
             int count
-        ) {
+        )
+        {
             Except_Distinct_NotPipelined(left, leftCount, rightQuery, rightCount, start, count);
         }
 
@@ -440,7 +459,8 @@ namespace System.Linq.Parallel.Tests
             int rightCount,
             int start,
             int count
-        ) {
+        )
+        {
             // The difference between this test and the previous, is that it's not possible to
             // get non-unique results from ParallelEnumerable.Range()...
             // Those tests either need modification of source (via .Select(x => x / DuplicateFactor) or similar,
@@ -468,7 +488,8 @@ namespace System.Linq.Parallel.Tests
             int rightCount,
             int start,
             int count
-        ) {
+        )
+        {
             Except_Unordered_SourceMultiple(
                 leftQuery,
                 leftCount,
@@ -488,7 +509,8 @@ namespace System.Linq.Parallel.Tests
             int rightCount,
             int start,
             int count
-        ) {
+        )
+        {
             _ = leftCount;
             _ = rightCount;
             int seen = start;
@@ -512,7 +534,8 @@ namespace System.Linq.Parallel.Tests
             int rightCount,
             int start,
             int count
-        ) {
+        )
+        {
             Except_SourceMultiple(leftQuery, leftCount, rightQuery, rightCount, start, count);
         }
 

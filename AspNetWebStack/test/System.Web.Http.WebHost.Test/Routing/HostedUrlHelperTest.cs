@@ -130,7 +130,8 @@ namespace System.Web.Http.WebHost.Routing
         [InlineData("hTtProuTE")]
         public void UrlHelper_DoesntAddDuplicateHttpRoute_ForHttpRouteInDifferentCasing(
             string httpRoute
-        ) {
+        )
+        {
             // Mixed mode app with MVC generating URLs to Web APIs
             RouteCollection routes;
             RequestContext requestContext;
@@ -160,7 +161,8 @@ namespace System.Web.Http.WebHost.Routing
             WhichRoute whichRoute,
             out RouteCollection routes,
             out RequestContext requestContext
-        ) {
+        )
+        {
             routes = new RouteCollection();
 
             HttpRequestMessage request = new HttpRequestMessage();

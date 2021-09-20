@@ -55,7 +55,8 @@ namespace Microsoft.CodeAnalysis.CSharp.MakeLocalFunctionStatic
             ImmutableArray<Diagnostic> diagnostics,
             SyntaxEditor editor,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var localFunctions = diagnostics.SelectAsArray(
                 d => d.AdditionalLocations[0].FindNode(cancellationToken)
             );
@@ -73,13 +74,12 @@ namespace Microsoft.CodeAnalysis.CSharp.MakeLocalFunctionStatic
 
         private class MyCodeAction : CustomCodeActions.DocumentChangeAction
         {
-            public MyCodeAction(
-                Func<CancellationToken, Task<Document>> createChangedDocument
-            ) : base(
-                CSharpAnalyzersResources.Make_local_function_static,
-                createChangedDocument,
-                CSharpAnalyzersResources.Make_local_function_static
-            ) { }
+            public MyCodeAction(Func<CancellationToken, Task<Document>> createChangedDocument)
+                : base(
+                    CSharpAnalyzersResources.Make_local_function_static,
+                    createChangedDocument,
+                    CSharpAnalyzersResources.Make_local_function_static
+                ) { }
         }
     }
 }

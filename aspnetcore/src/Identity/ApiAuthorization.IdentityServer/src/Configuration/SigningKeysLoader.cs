@@ -16,7 +16,8 @@ namespace Microsoft.AspNetCore.ApiAuthorization.IdentityServer
             string path,
             string password,
             X509KeyStorageFlags keyStorageFlags
-        ) {
+        )
+        {
             try
             {
                 if (!File.Exists(path))
@@ -48,7 +49,8 @@ namespace Microsoft.AspNetCore.ApiAuthorization.IdentityServer
             string storeName,
             StoreLocation storeLocation,
             DateTimeOffset currentTime
-        ) {
+        )
+        {
             using (var store = new X509Store(storeName, storeLocation))
             {
                 X509Certificate2Collection storeCertificates = null;
@@ -137,7 +139,8 @@ namespace Microsoft.AspNetCore.ApiAuthorization.IdentityServer
                     if (
                         rsa is RSACryptoServiceProvider rSACryptoServiceProvider
                         && rsa.KeySize < 2048
-                    ) {
+                    )
+                    {
                         rsa.KeySize = 2048;
                         if (rsa.KeySize < 2048)
                         {
@@ -252,7 +255,8 @@ namespace Microsoft.AspNetCore.ApiAuthorization.IdentityServer
         private static void DisposeCertificates(
             X509Certificate2Collection certificates,
             X509Certificate2 except
-        ) {
+        )
+        {
             if (certificates != null)
             {
                 foreach (var certificate in certificates)

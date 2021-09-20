@@ -38,7 +38,8 @@ namespace Microsoft.WebAssembly.Diagnostics
             IOptionsMonitor<ProxyOptions> optionsAccessor,
             IWebHostEnvironment env,
             IHostApplicationLifetime applicationLifetime
-        ) {
+        )
+        {
             ProxyOptions options = optionsAccessor.CurrentValue;
 
             if (options.OwnerPid.HasValue)
@@ -64,7 +65,8 @@ namespace Microsoft.WebAssembly.Diagnostics
             Dictionary<string, string> response,
             HttpContext context,
             Uri debuggerHost
-        ) {
+        )
+        {
             var filtered = new Dictionary<string, string>();
             HttpRequest request = context.Request;
 
@@ -98,7 +100,8 @@ namespace Microsoft.WebAssembly.Diagnostics
             this IApplicationBuilder app,
             ProxyOptions options,
             Func<Dictionary<string, string>, HttpContext, Uri, Dictionary<string, string>> mapFunc
-        ) {
+        )
+        {
             Uri devToolsHost = options.DevToolsUrl;
             app.UseRouter(
                 router =>
@@ -123,7 +126,8 @@ namespace Microsoft.WebAssembly.Diagnostics
                     {
                         using (
                             var httpClient = new HttpClient { Timeout = TimeSpan.FromSeconds(5) }
-                        ) {
+                        )
+                        {
                             HttpResponseMessage response = await httpClient.GetAsync(
                                 GetEndpoint(context)
                             );

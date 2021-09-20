@@ -15,7 +15,8 @@ namespace Internal.Cryptography
             int iterations,
             HashAlgorithmName hashAlgorithmName,
             Span<byte> destination
-        ) {
+        )
+        {
             Debug.Assert(!destination.IsEmpty);
             Debug.Assert(hashAlgorithmName.Name is not null);
             IntPtr evpHashType = Interop.Crypto.HashAlgorithmToEvp(hashAlgorithmName.Name);

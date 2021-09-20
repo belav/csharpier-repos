@@ -1022,7 +1022,8 @@ class AsAnyTests
         char[] mappableCharArray_Out,
         string unMappableStr,
         string mappableStr
-    ) {
+    )
+    {
         char[] u = unMappableStr.ToCharArray();
         char[] m = mappableStr.ToCharArray();
         for (int i = 0; i < 3; i++)

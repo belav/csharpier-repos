@@ -64,7 +64,8 @@ namespace ILCompiler.DependencyAnalysis
             ref ObjectDataBuilder builder,
             NodeFactory factory,
             bool relocsOnly
-        ) {
+        )
+        {
             int index = 0;
             _nextElementToEncode = null;
             for (int i = 0; i < _nestedNodesList.Count; i++)

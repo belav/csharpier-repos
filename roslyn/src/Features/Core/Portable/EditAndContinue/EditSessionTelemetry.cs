@@ -79,7 +79,8 @@ namespace Microsoft.CodeAnalysis.EditAndContinue
         public void LogProjectAnalysisSummary(
             ProjectAnalysisSummary summary,
             ImmutableArray<string> errorsIds
-        ) {
+        )
+        {
             lock (_guard)
             {
                 _emitErrorIds.AddRange(errorsIds);

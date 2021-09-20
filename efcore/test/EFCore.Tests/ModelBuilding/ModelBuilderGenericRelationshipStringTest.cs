@@ -54,7 +54,8 @@ namespace Microsoft.EntityFrameworkCore.ModelBuilding
 
             public override TestModelBuilder Entity<TEntity>(
                 Action<TestEntityTypeBuilder<TEntity>> buildAction
-            ) {
+            )
+            {
                 ModelBuilder.Entity<TEntity>(
                     entityTypeBuilder =>
                         buildAction(
@@ -67,7 +68,8 @@ namespace Microsoft.EntityFrameworkCore.ModelBuilding
             public override TestModelBuilder SharedTypeEntity<TEntity>(
                 string name,
                 Action<TestEntityTypeBuilder<TEntity>> buildAction
-            ) {
+            )
+            {
                 ModelBuilder.SharedTypeEntity<TEntity>(
                     name,
                     entityTypeBuilder =>
@@ -93,9 +95,8 @@ namespace Microsoft.EntityFrameworkCore.ModelBuilding
         private class GenericStringTestEntityTypeBuilder<TEntity>
             : GenericTestEntityTypeBuilder<TEntity> where TEntity : class
         {
-            public GenericStringTestEntityTypeBuilder(
-                EntityTypeBuilder<TEntity> entityTypeBuilder
-            ) : base(entityTypeBuilder) { }
+            public GenericStringTestEntityTypeBuilder(EntityTypeBuilder<TEntity> entityTypeBuilder)
+                : base(entityTypeBuilder) { }
 
             protected override TestEntityTypeBuilder<TEntity> Wrap(
                 EntityTypeBuilder<TEntity> entityTypeBuilder

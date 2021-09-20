@@ -27,7 +27,8 @@ namespace Microsoft.Extensions.Diagnostics.HealthChecks
             string? description = null,
             Exception? exception = null,
             IReadOnlyDictionary<string, object>? data = null
-        ) {
+        )
+        {
             Status = status;
             Description = description;
             Exception = exception;
@@ -63,7 +64,8 @@ namespace Microsoft.Extensions.Diagnostics.HealthChecks
         public static HealthCheckResult Healthy(
             string? description = null,
             IReadOnlyDictionary<string, object>? data = null
-        ) {
+        )
+        {
             return new HealthCheckResult(
                 status: HealthStatus.Healthy,
                 description,
@@ -83,7 +85,8 @@ namespace Microsoft.Extensions.Diagnostics.HealthChecks
             string? description = null,
             Exception? exception = null,
             IReadOnlyDictionary<string, object>? data = null
-        ) {
+        )
+        {
             return new HealthCheckResult(
                 status: HealthStatus.Degraded,
                 description,
@@ -103,7 +106,8 @@ namespace Microsoft.Extensions.Diagnostics.HealthChecks
             string? description = null,
             Exception? exception = null,
             IReadOnlyDictionary<string, object>? data = null
-        ) {
+        )
+        {
             return new HealthCheckResult(
                 status: HealthStatus.Unhealthy,
                 description,

@@ -66,7 +66,8 @@ namespace System.Security.Cryptography.Pkcs.Asn1
         internal static KeyAgreeRecipientIdentifierAsn Decode(
             ReadOnlyMemory<byte> encoded,
             AsnEncodingRules ruleSet
-        ) {
+        )
+        {
             try
             {
                 AsnValueReader reader = new AsnValueReader(encoded.Span, ruleSet);
@@ -85,7 +86,8 @@ namespace System.Security.Cryptography.Pkcs.Asn1
             ref AsnValueReader reader,
             ReadOnlyMemory<byte> rebind,
             out KeyAgreeRecipientIdentifierAsn decoded
-        ) {
+        )
+        {
             try
             {
                 DecodeCore(ref reader, rebind, out decoded);
@@ -100,7 +102,8 @@ namespace System.Security.Cryptography.Pkcs.Asn1
             ref AsnValueReader reader,
             ReadOnlyMemory<byte> rebind,
             out KeyAgreeRecipientIdentifierAsn decoded
-        ) {
+        )
+        {
             decoded = default;
             Asn1Tag tag = reader.PeekTag();
 

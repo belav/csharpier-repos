@@ -32,7 +32,8 @@ namespace Microsoft.CodeAnalysis.ExternalAccess.IntelliCode
         public IntentSourceProvider(
             [ImportMany]
                 IEnumerable<Lazy<IIntentProvider, IIntentProviderMetadata>> lazyIntentProviders
-        ) {
+        )
+        {
             _lazyIntentProviders = CreateProviderMap(lazyIntentProviders);
         }
 
@@ -41,7 +42,8 @@ namespace Microsoft.CodeAnalysis.ExternalAccess.IntelliCode
             Lazy<IIntentProvider, IIntentProviderMetadata>
         > CreateProviderMap(
             IEnumerable<Lazy<IIntentProvider, IIntentProviderMetadata>> lazyIntentProviders
-        ) {
+        )
+        {
             return lazyIntentProviders.ToImmutableDictionary(
                 provider => (provider.Metadata.LanguageName, provider.Metadata.IntentName),
                 provider => provider
@@ -51,7 +53,8 @@ namespace Microsoft.CodeAnalysis.ExternalAccess.IntelliCode
         public async Task<ImmutableArray<IntentSource>> ComputeIntentsAsync(
             IntentRequestContext intentRequestContext,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var currentDocument =
                 intentRequestContext.CurrentSnapshotSpan.Snapshot.GetOpenDocumentInCurrentContextWithChanges();
             if (currentDocument == null)
@@ -65,7 +68,8 @@ namespace Microsoft.CodeAnalysis.ExternalAccess.IntelliCode
                     (LanguageName: languageName, IntentName: intentRequestContext.IntentName),
                     out var provider
                 )
-            ) {
+            )
+            {
                 Logger.Log(
                     FunctionId.Intellicode_UnknownIntent,
                     KeyValueLogMessage.Create(
@@ -122,7 +126,8 @@ namespace Microsoft.CodeAnalysis.ExternalAccess.IntelliCode
             Document originalDocument,
             Document currentDocument,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var newSolution = processorResult.Solution;
 
             // Merge linked file changes so all linked files have the same text changes.

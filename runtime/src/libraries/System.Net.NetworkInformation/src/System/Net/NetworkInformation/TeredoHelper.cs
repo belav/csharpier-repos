@@ -49,7 +49,8 @@ namespace System.Net.NetworkInformation
         public static unsafe bool UnsafeNotifyStableUnicastIpAddressTable(
             Action<object> callback,
             object state
-        ) {
+        )
+        {
             Debug.Assert(callback != null);
 
             TeredoHelper? helper = new TeredoHelper(callback, state);

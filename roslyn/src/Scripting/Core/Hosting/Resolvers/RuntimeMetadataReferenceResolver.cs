@@ -73,7 +73,8 @@ namespace Microsoft.CodeAnalysis.Scripting.Hosting
                 MetadataReferenceProperties,
                 PortableExecutableReference
             >? fileReferenceProvider = null
-        ) {
+        )
+        {
             return new RuntimeMetadataReferenceResolver(
                 searchPaths,
                 baseDirectory,
@@ -97,13 +98,14 @@ namespace Microsoft.CodeAnalysis.Scripting.Hosting
                 MetadataReferenceProperties,
                 PortableExecutableReference
             >? fileReferenceProvider = null
-        ) : this(
-            new RelativePathResolver(searchPaths.NullToEmpty(), baseDirectory),
-            packageResolver,
-            gacFileResolver,
-            GetTrustedPlatformAssemblies(platformAssemblyPaths.NullToEmpty()),
-            fileReferenceProvider
-        ) { }
+        )
+            : this(
+                new RelativePathResolver(searchPaths.NullToEmpty(), baseDirectory),
+                packageResolver,
+                gacFileResolver,
+                GetTrustedPlatformAssemblies(platformAssemblyPaths.NullToEmpty()),
+                fileReferenceProvider
+            ) { }
 
         internal RuntimeMetadataReferenceResolver(
             RelativePathResolver pathResolver,
@@ -115,7 +117,8 @@ namespace Microsoft.CodeAnalysis.Scripting.Hosting
                 MetadataReferenceProperties,
                 PortableExecutableReference
             >? fileReferenceProvider = null
-        ) {
+        )
+        {
             PathResolver = pathResolver;
             PackageResolver = packageResolver;
             GacFileResolver = gacFileResolver;
@@ -134,7 +137,8 @@ namespace Microsoft.CodeAnalysis.Scripting.Hosting
         public override PortableExecutableReference? ResolveMissingAssembly(
             MetadataReference definition,
             AssemblyIdentity referenceIdentity
-        ) {
+        )
+        {
             // look in the GAC:
             if (GacFileResolver != null && referenceIdentity.IsStrongName)
             {
@@ -190,14 +194,16 @@ namespace Microsoft.CodeAnalysis.Scripting.Hosting
             string reference,
             string? baseFilePath,
             MetadataReferenceProperties properties
-        ) {
+        )
+        {
             if (
                 NuGetPackageResolver.TryParsePackageReference(
                     reference,
                     out string packageName,
                     out string packageVersion
                 )
-            ) {
+            )
+            {
                 if (PackageResolver != null)
                 {
                     var paths = PackageResolver.ResolveNuGetPackage(packageName, packageVersion);
@@ -210,7 +216,8 @@ namespace Microsoft.CodeAnalysis.Scripting.Hosting
                 if (
                     !TrustedPlatformAssemblies.IsEmpty
                     && reference.IndexOfAny(s_directorySeparators) < 0
-                ) {
+                )
+                {
                     var result = ResolveTrustedPlatformAssembly(
                         PathUtilities.GetFileName(reference, includeExtension: false),
                         properties
@@ -250,7 +257,8 @@ namespace Microsoft.CodeAnalysis.Scripting.Hosting
                         out var identity,
                         out var identityParts
                     )
-                ) {
+                )
+                {
                     var result = ResolveTrustedPlatformAssembly(identity.Name, properties);
                     if (result != null)
                     {
@@ -279,7 +287,8 @@ namespace Microsoft.CodeAnalysis.Scripting.Hosting
 
         internal static ImmutableDictionary<string, string> GetTrustedPlatformAssemblies(
             ImmutableArray<string> paths
-        ) {
+        )
+        {
             if (paths.IsEmpty)
             {
                 return ImmutableDictionary<string, string>.Empty;
@@ -336,7 +345,8 @@ namespace Microsoft.CodeAnalysis.Scripting.Hosting
 
         internal RuntimeMetadataReferenceResolver WithRelativePathResolver(
             RelativePathResolver resolver
-        ) {
+        )
+        {
             return Equals(resolver, PathResolver)
               ? this
               : new RuntimeMetadataReferenceResolver(

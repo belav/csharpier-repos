@@ -24,7 +24,8 @@ namespace System.Composition.TypedParts.Discovery
         public TypeInspector(
             AttributedModelProvider attributeContext,
             ActivationFeature[] activationFeatures
-        ) {
+        )
+        {
             _attributeContext = attributeContext;
             _activationFeatures = activationFeatures;
         }
@@ -69,7 +70,8 @@ namespace System.Composition.TypedParts.Discovery
                     partTypeAsType,
                     partType
                 )
-            ) {
+            )
+            {
                 IDictionary<string, object> metadata = new Dictionary<string, object>();
                 ReadMetadataAttribute(export, metadata);
 
@@ -94,13 +96,15 @@ namespace System.Composition.TypedParts.Discovery
             foreach (
                 var property in partTypeAsType.GetRuntimeProperties()
                     .Where(pi => pi.CanRead && pi.GetMethod.IsPublic && !pi.GetMethod.IsStatic)
-            ) {
+            )
+            {
                 foreach (
                     var export in _attributeContext.GetDeclaredAttributes<ExportAttribute>(
                         partTypeAsType,
                         property
                     )
-                ) {
+                )
+                {
                     IDictionary<string, object> metadata = new Dictionary<string, object>();
                     ReadMetadataAttribute(export, metadata);
 
@@ -130,7 +134,8 @@ namespace System.Composition.TypedParts.Discovery
         private void ReadLooseMetadata(
             object[] appliedAttributes,
             IDictionary<string, object> metadata
-        ) {
+        )
+        {
             foreach (var attribute in appliedAttributes)
             {
                 if (attribute is ExportAttribute)
@@ -154,7 +159,8 @@ namespace System.Composition.TypedParts.Discovery
             string name,
             Type valueType,
             object value
-        ) {
+        )
+        {
             object existingValue;
             if (!metadata.TryGetValue(name, out existingValue))
             {
@@ -182,7 +188,8 @@ namespace System.Composition.TypedParts.Discovery
         private void ReadMetadataAttribute(
             Attribute attribute,
             IDictionary<string, object> metadata
-        ) {
+        )
+        {
             var attrType = attribute.GetType();
 
             // Note, we don't support ReflectionContext in this scenario as
@@ -192,7 +199,8 @@ namespace System.Composition.TypedParts.Discovery
             foreach (
                 var prop in attrType.GetRuntimeProperties()
                     .Where(p => p.DeclaringType == attrType && p.CanRead)
-            ) {
+            )
+            {
                 AddMetadata(metadata, prop.Name, prop.PropertyType, prop.GetValue(attribute, null));
             }
         }
@@ -201,7 +209,8 @@ namespace System.Composition.TypedParts.Discovery
             TypeInfo partType,
             PropertyInfo property,
             TypeInfo contractType
-        ) {
+        )
+        {
             if (partType.IsGenericTypeDefinition)
             {
                 CheckGenericContractCompatibility(
@@ -226,7 +235,8 @@ namespace System.Composition.TypedParts.Discovery
             TypeInfo partType,
             TypeInfo exportingMemberType,
             TypeInfo contractType
-        ) {
+        )
+        {
             if (!contractType.IsGenericTypeDefinition)
             {
                 string message = SR.Format(
@@ -247,7 +257,8 @@ namespace System.Composition.TypedParts.Discovery
                         ifce.IsGenericType
                         && ifce.GetGenericTypeDefinition() == contractType.AsType()
                     )
-                ) {
+                )
+                {
                     var mappedType = ifce;
                     if (
                         !(
@@ -256,7 +267,8 @@ namespace System.Composition.TypedParts.Discovery
                                 partType.GenericTypeParameters
                             )
                         )
-                    ) {
+                    )
+                    {
                         string message = SR.Format(
                             SR.TypeInspector_ArgumentMissmatch,
                             contractType.Name,
@@ -298,7 +310,8 @@ namespace System.Composition.TypedParts.Discovery
         private static void CheckInstanceExportCompatibility(
             TypeInfo partType,
             TypeInfo contractType
-        ) {
+        )
+        {
             if (partType.IsGenericTypeDefinition)
             {
                 CheckGenericContractCompatibility(partType, partType, contractType);

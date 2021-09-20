@@ -27,7 +27,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.CodeModel.Colle
             SyntaxNode parentNode,
             AbstractCodeElement parentElement,
             ImmutableArray<SyntaxNode> nodes
-        ) {
+        )
+        {
             _state = state;
             _fileCodeModel = fileCodeModel;
             _parentNode = parentNode;

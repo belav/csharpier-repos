@@ -23,7 +23,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
         /// <param name="dependencies"> Parameter object containing dependencies for this convention. </param>
         public NotMappedMemberAttributeConvention(
             ProviderConventionSetBuilderDependencies dependencies
-        ) {
+        )
+        {
             Dependencies = dependencies;
         }
 
@@ -40,7 +41,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
         public virtual void ProcessEntityTypeAdded(
             IConventionEntityTypeBuilder entityTypeBuilder,
             IConventionContext<IConventionEntityTypeBuilder> context
-        ) {
+        )
+        {
             Check.NotNull(entityTypeBuilder, nameof(entityTypeBuilder));
 
             var entityType = entityTypeBuilder.Metadata;
@@ -53,7 +55,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
                 if (
                     Attribute.IsDefined(member, typeof(NotMappedAttribute), inherit: true)
                     && ShouldIgnore(member)
-                ) {
+                )
+                {
                     entityTypeBuilder.Ignore(
                         member.GetSimpleMemberName(),
                         fromDataAnnotation: true

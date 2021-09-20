@@ -50,7 +50,8 @@ namespace BuildBoss
         private bool CheckProjects(
             TextWriter textWriter,
             Dictionary<ProjectKey, SolutionProjectData> map
-        ) {
+        )
+        {
             var solutionMap = new Dictionary<ProjectKey, ProjectData>();
             foreach (var pair in map)
             {
@@ -80,7 +81,8 @@ namespace BuildBoss
         private bool CheckDuplicate(
             TextWriter textWriter,
             out Dictionary<ProjectKey, SolutionProjectData> map
-        ) {
+        )
+        {
             map = new Dictionary<ProjectKey, SolutionProjectData>();
             var allGood = true;
             foreach (var projectEntry in SolutionUtil.ParseProjects(SolutionFilePath))
@@ -112,7 +114,8 @@ namespace BuildBoss
         private bool CheckProjectSystemGuid(
             TextWriter textWriter,
             IEnumerable<SolutionProjectData> dataList
-        ) {
+        )
+        {
             Guid getExpectedGuid(ProjectData data)
             {
                 var util = data.ProjectUtil;
@@ -132,7 +135,8 @@ namespace BuildBoss
             var allGood = true;
             foreach (
                 var data in dataList.Where(x => x.ProjectEntry.ProjectType != ProjectFileType.Tool)
-            ) {
+            )
+            {
                 var guid = getExpectedGuid(data.ProjectData);
                 if (guid != data.ProjectEntry.TypeGuid)
                 {

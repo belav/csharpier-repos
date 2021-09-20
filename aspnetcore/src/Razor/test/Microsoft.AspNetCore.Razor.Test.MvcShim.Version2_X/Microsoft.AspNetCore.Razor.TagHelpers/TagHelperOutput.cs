@@ -57,7 +57,8 @@ namespace Microsoft.AspNetCore.Razor.TagHelpers
         public Task<TagHelperContent> GetChildContentAsync(
             bool useCachedResult,
             HtmlEncoder encoder
-        ) {
+        )
+        {
             throw null;
         }
 

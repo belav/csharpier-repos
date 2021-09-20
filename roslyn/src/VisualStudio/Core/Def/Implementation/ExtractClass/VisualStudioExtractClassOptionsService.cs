@@ -40,7 +40,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.ExtractClass
             IThreadingContext threadingContext,
             IGlyphService glyphService,
             IWaitIndicator waitIndicator
-        ) {
+        )
+        {
             _threadingContext = threadingContext;
             _glyphService = glyphService;
             _waitIndicator = waitIndicator;
@@ -50,7 +51,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.ExtractClass
             Document document,
             INamedTypeSymbol selectedType,
             ISymbol? selectedMember
-        ) {
+        )
+        {
             var notificationService =
                 document.Project.Solution.Workspace.Services.GetRequiredService<INotificationService>();
 

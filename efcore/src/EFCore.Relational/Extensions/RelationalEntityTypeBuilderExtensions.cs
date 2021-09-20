@@ -93,7 +93,8 @@ namespace Microsoft.EntityFrameworkCore
             this EntityTypeBuilder entityTypeBuilder,
             string? name,
             string? schema
-        ) {
+        )
+        {
             entityTypeBuilder.Metadata.SetTableName(name);
             entityTypeBuilder.Metadata.SetSchema(schema);
             return entityTypeBuilder;
@@ -112,7 +113,8 @@ namespace Microsoft.EntityFrameworkCore
             string name,
             string? schema,
             Action<TableBuilder> buildAction
-        ) {
+        )
+        {
             Check.NotNull(name, nameof(name));
             Check.NullButNotEmpty(schema, nameof(schema));
 
@@ -227,8 +229,9 @@ namespace Microsoft.EntityFrameworkCore
         >(
             this OwnedNavigationBuilder<TEntity, TRelatedEntity> referenceOwnershipBuilder,
             string? name
-        ) where TEntity : class
-          where TRelatedEntity : class =>
+        )
+            where TEntity : class
+            where TRelatedEntity : class =>
             (OwnedNavigationBuilder<TEntity, TRelatedEntity>)ToTable(
                 referenceOwnershipBuilder,
                 name,
@@ -252,8 +255,9 @@ namespace Microsoft.EntityFrameworkCore
             this OwnedNavigationBuilder<TEntity, TRelatedEntity> referenceOwnershipBuilder,
             string? name,
             bool excludedFromMigrations
-        ) where TEntity : class
-          where TRelatedEntity : class =>
+        )
+            where TEntity : class
+            where TRelatedEntity : class =>
             (OwnedNavigationBuilder<TEntity, TRelatedEntity>)ToTable(
                 (OwnedNavigationBuilder)referenceOwnershipBuilder,
                 name,
@@ -286,7 +290,8 @@ namespace Microsoft.EntityFrameworkCore
             string? name,
             string? schema,
             bool excludedFromMigrations
-        ) {
+        )
+        {
             Check.NotNull(referenceOwnershipBuilder, nameof(referenceOwnershipBuilder));
             Check.NullButNotEmpty(name, nameof(name));
             Check.NullButNotEmpty(schema, nameof(schema));
@@ -299,7 +304,8 @@ namespace Microsoft.EntityFrameworkCore
             string? name,
             string? schema,
             bool? excludedFromMigrations
-        ) {
+        )
+        {
             referenceOwnershipBuilder.OwnedEntityType.SetTableName(name);
             referenceOwnershipBuilder.OwnedEntityType.SetSchema(schema);
 
@@ -329,8 +335,9 @@ namespace Microsoft.EntityFrameworkCore
             this OwnedNavigationBuilder<TEntity, TRelatedEntity> referenceOwnershipBuilder,
             string? name,
             string? schema
-        ) where TEntity : class
-          where TRelatedEntity : class =>
+        )
+            where TEntity : class
+            where TRelatedEntity : class =>
             (OwnedNavigationBuilder<TEntity, TRelatedEntity>)ToTable(
                 referenceOwnershipBuilder,
                 name,
@@ -356,8 +363,9 @@ namespace Microsoft.EntityFrameworkCore
             string? name,
             string? schema,
             bool excludedFromMigrations
-        ) where TEntity : class
-          where TRelatedEntity : class =>
+        )
+            where TEntity : class
+            where TRelatedEntity : class =>
             (OwnedNavigationBuilder<TEntity, TRelatedEntity>)ToTable(
                 (OwnedNavigationBuilder)referenceOwnershipBuilder,
                 name,
@@ -378,7 +386,8 @@ namespace Microsoft.EntityFrameworkCore
             this IConventionEntityTypeBuilder entityTypeBuilder,
             string? name,
             bool fromDataAnnotation = false
-        ) {
+        )
+        {
             if (!entityTypeBuilder.CanSetTable(name, fromDataAnnotation))
             {
                 return null;
@@ -403,11 +412,13 @@ namespace Microsoft.EntityFrameworkCore
             string? name,
             string? schema,
             bool fromDataAnnotation = false
-        ) {
+        )
+        {
             if (
                 !entityTypeBuilder.CanSetTable(name, fromDataAnnotation)
                 || !entityTypeBuilder.CanSetSchema(schema, fromDataAnnotation)
-            ) {
+            )
+            {
                 return null;
             }
 
@@ -428,7 +439,8 @@ namespace Microsoft.EntityFrameworkCore
             this IConventionEntityTypeBuilder entityTypeBuilder,
             string? name,
             bool fromDataAnnotation = false
-        ) {
+        )
+        {
             Check.NullButNotEmpty(name, nameof(name));
 
             return entityTypeBuilder.CanSetAnnotation(
@@ -451,7 +463,8 @@ namespace Microsoft.EntityFrameworkCore
             this IConventionEntityTypeBuilder entityTypeBuilder,
             string? schema,
             bool fromDataAnnotation = false
-        ) {
+        )
+        {
             if (!entityTypeBuilder.CanSetSchema(schema, fromDataAnnotation))
             {
                 return null;
@@ -473,7 +486,8 @@ namespace Microsoft.EntityFrameworkCore
             this IConventionEntityTypeBuilder entityTypeBuilder,
             string? schema,
             bool fromDataAnnotation = false
-        ) {
+        )
+        {
             Check.NullButNotEmpty(schema, nameof(schema));
 
             return entityTypeBuilder.CanSetAnnotation(
@@ -497,13 +511,15 @@ namespace Microsoft.EntityFrameworkCore
             this IConventionEntityTypeBuilder entityTypeBuilder,
             bool? excludedFromMigrations,
             bool fromDataAnnotation = false
-        ) {
+        )
+        {
             if (
                 !entityTypeBuilder.CanExcludeTableFromMigrations(
                     excludedFromMigrations,
                     fromDataAnnotation
                 )
-            ) {
+            )
+            {
                 return null;
             }
 
@@ -568,7 +584,8 @@ namespace Microsoft.EntityFrameworkCore
             this EntityTypeBuilder entityTypeBuilder,
             string? name,
             string? schema
-        ) {
+        )
+        {
             Check.NotNull(entityTypeBuilder, nameof(entityTypeBuilder));
             Check.NullButNotEmpty(name, nameof(name));
             Check.NullButNotEmpty(schema, nameof(schema));
@@ -611,7 +628,8 @@ namespace Microsoft.EntityFrameworkCore
             this IConventionEntityTypeBuilder entityTypeBuilder,
             string? name,
             bool fromDataAnnotation = false
-        ) {
+        )
+        {
             if (!entityTypeBuilder.CanSetView(name, fromDataAnnotation))
             {
                 return null;
@@ -636,11 +654,13 @@ namespace Microsoft.EntityFrameworkCore
             string? name,
             string? schema,
             bool fromDataAnnotation = false
-        ) {
+        )
+        {
             if (
                 !entityTypeBuilder.CanSetView(name, fromDataAnnotation)
                 || !entityTypeBuilder.CanSetViewSchema(schema, fromDataAnnotation)
-            ) {
+            )
+            {
                 return null;
             }
 
@@ -661,7 +681,8 @@ namespace Microsoft.EntityFrameworkCore
             this IConventionEntityTypeBuilder entityTypeBuilder,
             string? name,
             bool fromDataAnnotation = false
-        ) {
+        )
+        {
             Check.NullButNotEmpty(name, nameof(name));
 
             return entityTypeBuilder.CanSetAnnotation(
@@ -684,7 +705,8 @@ namespace Microsoft.EntityFrameworkCore
             this IConventionEntityTypeBuilder entityTypeBuilder,
             string? schema,
             bool fromDataAnnotation = false
-        ) {
+        )
+        {
             if (!entityTypeBuilder.CanSetSchema(schema, fromDataAnnotation))
             {
                 return null;
@@ -706,7 +728,8 @@ namespace Microsoft.EntityFrameworkCore
             this IConventionEntityTypeBuilder entityTypeBuilder,
             string? schema,
             bool fromDataAnnotation = false
-        ) {
+        )
+        {
             Check.NullButNotEmpty(schema, nameof(schema));
 
             return entityTypeBuilder.CanSetAnnotation(
@@ -747,7 +770,8 @@ namespace Microsoft.EntityFrameworkCore
             this IConventionEntityTypeBuilder entityTypeBuilder,
             string? name,
             bool fromDataAnnotation = false
-        ) {
+        )
+        {
             if (!entityTypeBuilder.CanSetSqlQuery(name, fromDataAnnotation))
             {
                 return null;
@@ -771,7 +795,8 @@ namespace Microsoft.EntityFrameworkCore
             this IConventionEntityTypeBuilder entityTypeBuilder,
             string? name,
             bool fromDataAnnotation = false
-        ) {
+        )
+        {
             Check.NullButNotEmpty(name, nameof(name));
 
             return entityTypeBuilder.CanSetAnnotation(
@@ -790,7 +815,8 @@ namespace Microsoft.EntityFrameworkCore
         public static EntityTypeBuilder ToFunction(
             this EntityTypeBuilder entityTypeBuilder,
             string? name
-        ) {
+        )
+        {
             Check.NotNull(entityTypeBuilder, nameof(entityTypeBuilder));
             Check.NullButNotEmpty(name, nameof(name));
 
@@ -810,7 +836,8 @@ namespace Microsoft.EntityFrameworkCore
             this EntityTypeBuilder entityTypeBuilder,
             string name,
             Action<TableValuedFunctionBuilder> configureFunction
-        ) {
+        )
+        {
             Check.NotNull(entityTypeBuilder, nameof(entityTypeBuilder));
             Check.NullButNotEmpty(name, nameof(name));
             Check.NotNull(configureFunction, nameof(configureFunction));
@@ -863,7 +890,8 @@ namespace Microsoft.EntityFrameworkCore
         public static OwnedNavigationBuilder ToFunction(
             this OwnedNavigationBuilder ownedNavigationBuilder,
             string? name
-        ) {
+        )
+        {
             Check.NotNull(ownedNavigationBuilder, nameof(ownedNavigationBuilder));
             Check.NullButNotEmpty(name, nameof(name));
 
@@ -883,7 +911,8 @@ namespace Microsoft.EntityFrameworkCore
             this OwnedNavigationBuilder ownedNavigationBuilder,
             string name,
             Action<TableValuedFunctionBuilder> configureFunction
-        ) {
+        )
+        {
             Check.NotNull(ownedNavigationBuilder, nameof(ownedNavigationBuilder));
             Check.NullButNotEmpty(name, nameof(name));
             Check.NotNull(configureFunction, nameof(configureFunction));
@@ -911,8 +940,9 @@ namespace Microsoft.EntityFrameworkCore
         >(
             this OwnedNavigationBuilder<TEntity, TRelatedEntity> referenceOwnershipBuilder,
             string? name
-        ) where TEntity : class
-          where TRelatedEntity : class =>
+        )
+            where TEntity : class
+            where TRelatedEntity : class =>
             (OwnedNavigationBuilder<TEntity, TRelatedEntity>)ToFunction(
                 (OwnedNavigationBuilder)referenceOwnershipBuilder,
                 name
@@ -934,8 +964,9 @@ namespace Microsoft.EntityFrameworkCore
             this OwnedNavigationBuilder<TEntity, TRelatedEntity> referenceOwnershipBuilder,
             string name,
             Action<TableValuedFunctionBuilder> configureFunction
-        ) where TEntity : class
-          where TRelatedEntity : class =>
+        )
+            where TEntity : class
+            where TRelatedEntity : class =>
             (OwnedNavigationBuilder<TEntity, TRelatedEntity>)ToFunction(
                 (OwnedNavigationBuilder)referenceOwnershipBuilder,
                 name,
@@ -975,7 +1006,8 @@ namespace Microsoft.EntityFrameworkCore
             this IConventionEntityTypeBuilder entityTypeBuilder,
             string? name,
             bool fromDataAnnotation = false
-        ) {
+        )
+        {
             if (!entityTypeBuilder.CanSetFunction(name, fromDataAnnotation))
             {
                 return null;
@@ -1008,7 +1040,8 @@ namespace Microsoft.EntityFrameworkCore
             this IConventionEntityTypeBuilder entityTypeBuilder,
             string? name,
             bool fromDataAnnotation = false
-        ) {
+        )
+        {
             Check.NullButNotEmpty(name, nameof(name));
 
             return entityTypeBuilder.CanSetAnnotation(
@@ -1029,7 +1062,8 @@ namespace Microsoft.EntityFrameworkCore
             this EntityTypeBuilder entityTypeBuilder,
             string name,
             string? sql
-        ) {
+        )
+        {
             Check.NotNull(entityTypeBuilder, nameof(entityTypeBuilder));
             Check.NotEmpty(name, nameof(name));
             Check.NullButNotEmpty(sql, nameof(sql));
@@ -1093,7 +1127,8 @@ namespace Microsoft.EntityFrameworkCore
             string name,
             string? sql,
             bool fromDataAnnotation = false
-        ) {
+        )
+        {
             Check.NotNull(entityTypeBuilder, nameof(entityTypeBuilder));
             Check.NotEmpty(name, nameof(name));
             Check.NullButNotEmpty(sql, nameof(sql));
@@ -1119,7 +1154,8 @@ namespace Microsoft.EntityFrameworkCore
                             ? ConfigurationSource.DataAnnotation
                             : ConfigurationSource.Convention
                     ).Overrides(constraint.GetConfigurationSource())
-                ) {
+                )
+                {
                     return null;
                 }
 
@@ -1147,7 +1183,8 @@ namespace Microsoft.EntityFrameworkCore
             string name,
             string? sql,
             bool fromDataAnnotation = false
-        ) {
+        )
+        {
             Check.NotNull(entityTypeBuilder, nameof(entityTypeBuilder));
             Check.NotEmpty(name, nameof(name));
             Check.NullButNotEmpty(sql, nameof(sql));
@@ -1172,7 +1209,8 @@ namespace Microsoft.EntityFrameworkCore
         public static EntityTypeBuilder HasComment(
             this EntityTypeBuilder entityTypeBuilder,
             string? comment
-        ) {
+        )
+        {
             Check.NotNull(entityTypeBuilder, nameof(entityTypeBuilder));
 
             entityTypeBuilder.Metadata.SetComment(comment);
@@ -1206,7 +1244,8 @@ namespace Microsoft.EntityFrameworkCore
             this IConventionEntityTypeBuilder entityTypeBuilder,
             string? comment,
             bool fromDataAnnotation = false
-        ) {
+        )
+        {
             Check.NotNull(entityTypeBuilder, nameof(entityTypeBuilder));
 
             if (!entityTypeBuilder.CanSetComment(comment, fromDataAnnotation))

@@ -14,7 +14,8 @@ namespace System.Security.AccessControl.Tests
             DiscretionaryAcl discretionaryAcl,
             SecurityIdentifier sid,
             int aceCount
-        ) {
+        )
+        {
             KnownAce ace = null;
 
             discretionaryAcl.Purge(sid);

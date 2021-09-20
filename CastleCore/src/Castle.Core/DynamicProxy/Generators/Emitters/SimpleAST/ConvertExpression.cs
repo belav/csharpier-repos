@@ -69,7 +69,8 @@ namespace Castle.DynamicProxy.Generators.Emitters.SimpleAST
                     if (
                         LdindOpCodesDictionary.Instance[target]
                         != LdindOpCodesDictionary.EmptyOpCode
-                    ) {
+                    )
+                    {
                         gen.Emit(OpCodes.Unbox, target);
                         OpCodeUtil.EmitLoadIndirectOpCodeForType(gen, target);
                     }

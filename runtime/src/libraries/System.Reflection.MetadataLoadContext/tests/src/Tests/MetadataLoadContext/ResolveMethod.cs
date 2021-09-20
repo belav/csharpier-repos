@@ -15,7 +15,8 @@ namespace System.Reflection.Tests
                 MetadataLoadContext lc = new MetadataLoadContext(
                     new EmptyCoreMetadataAssemblyResolver()
                 )
-            ) {
+            )
+            {
                 Assembly derived = lc.LoadFromByteArray(
                     TestData.s_DerivedClassWithVariationsOnFooImage
                 );
@@ -156,7 +157,8 @@ namespace System.Reflection.Tests
                         "Derived5",
                         "Derived6"
                     }
-                ) {
+                )
+                {
                     Type t = derived.GetType(typeName, throwOnError: true);
                     Type bt = t.BaseType;
                     Assert.Equal(bt.Assembly, resolver.Assembly);
@@ -211,7 +213,8 @@ namespace System.Reflection.Tests
         public override Assembly Resolve(
             System.Reflection.MetadataLoadContext context,
             AssemblyName assemblyName
-        ) {
+        )
+        {
             Context = context;
             AssemblyName = assemblyName;
             CallCount++;
@@ -234,7 +237,8 @@ namespace System.Reflection.Tests
         public override Assembly Resolve(
             System.Reflection.MetadataLoadContext context,
             AssemblyName assemblyName
-        ) {
+        )
+        {
             Context = context;
             AssemblyName = assemblyName;
             CallCount++;
@@ -254,7 +258,8 @@ namespace System.Reflection.Tests
         public override Assembly Resolve(
             System.Reflection.MetadataLoadContext context,
             AssemblyName assemblyName
-        ) {
+        )
+        {
             if (assemblyName.Name == "EmptyCore")
             {
                 return context.LoadFromByteArray(TestData.s_SimpleNameOnlyImage);

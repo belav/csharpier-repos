@@ -379,7 +379,8 @@ namespace JIT.HardwareIntrinsics.X86
             Vector256<SByte> firstOp,
             void* result,
             [CallerMemberName] string method = ""
-        ) {
+        )
+        {
             SByte[] inArray = new SByte[Op1ElementCount];
             SByte[] outArray = new SByte[RetElementCount];
 
@@ -397,7 +398,8 @@ namespace JIT.HardwareIntrinsics.X86
             void* firstOp,
             void* result,
             [CallerMemberName] string method = ""
-        ) {
+        )
+        {
             SByte[] inArray = new SByte[Op1ElementCount];
             SByte[] outArray = new SByte[RetElementCount];
 
@@ -419,7 +421,8 @@ namespace JIT.HardwareIntrinsics.X86
             SByte[] firstOp,
             SByte[] result,
             [CallerMemberName] string method = ""
-        ) {
+        )
+        {
             bool succeeded = true;
 
             if (result[0] != firstOp[16])

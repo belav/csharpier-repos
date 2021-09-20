@@ -34,8 +34,9 @@ namespace Microsoft.Extensions.DependencyInjection
         /// <returns>The <see cref="IIdentityServerBuilder"/>.</returns>
         public static IIdentityServerBuilder AddApiAuthorization<TUser, TContext>(
             this IIdentityServerBuilder builder
-        ) where TUser : class
-          where TContext : DbContext, IPersistedGrantDbContext
+        )
+            where TUser : class
+            where TContext : DbContext, IPersistedGrantDbContext
         {
             builder.AddApiAuthorization<TUser, TContext>(o => { });
             return builder;
@@ -53,8 +54,9 @@ namespace Microsoft.Extensions.DependencyInjection
         public static IIdentityServerBuilder AddApiAuthorization<TUser, TContext>(
             this IIdentityServerBuilder builder,
             Action<ApiAuthorizationOptions> configure
-        ) where TUser : class
-          where TContext : DbContext, IPersistedGrantDbContext
+        )
+            where TUser : class
+            where TContext : DbContext, IPersistedGrantDbContext
         {
             if (configure == null)
             {
@@ -92,7 +94,8 @@ namespace Microsoft.Extensions.DependencyInjection
         public static IIdentityServerBuilder AddApiResources(
             this IIdentityServerBuilder builder,
             IConfiguration configuration
-        ) {
+        )
+        {
             builder.ConfigureReplacedServices();
             builder.AddApiScopes();
             builder.AddInMemoryApiResources(Enumerable.Empty<ApiResource>());
@@ -173,7 +176,8 @@ namespace Microsoft.Extensions.DependencyInjection
         public static IIdentityServerBuilder AddIdentityResources(
             this IIdentityServerBuilder builder,
             IConfiguration configuration
-        ) {
+        )
+        {
             builder.ConfigureReplacedServices();
             builder.AddInMemoryIdentityResources(Enumerable.Empty<IdentityResource>());
             builder.Services.TryAddEnumerable(
@@ -224,7 +228,8 @@ namespace Microsoft.Extensions.DependencyInjection
         public static IIdentityServerBuilder AddClients(
             this IIdentityServerBuilder builder,
             IConfiguration configuration
-        ) {
+        )
+        {
             builder.ConfigureReplacedServices();
             builder.AddInMemoryClients(Enumerable.Empty<Client>());
 
@@ -283,7 +288,8 @@ namespace Microsoft.Extensions.DependencyInjection
         public static IIdentityServerBuilder AddSigningCredentials(
             this IIdentityServerBuilder builder,
             IConfiguration configuration
-        ) {
+        )
+        {
             builder.ConfigureReplacedServices();
             builder.Services.TryAddEnumerable(
                 ServiceDescriptor.Singleton<
@@ -334,7 +340,8 @@ namespace Microsoft.Extensions.DependencyInjection
 
         internal static IIdentityServerBuilder ConfigureReplacedServices(
             this IIdentityServerBuilder builder
-        ) {
+        )
+        {
             builder.Services.TryAddEnumerable(
                 ServiceDescriptor.Transient<
                     IConfigureOptions<IdentityServerOptions>,

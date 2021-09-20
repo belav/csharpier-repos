@@ -20,7 +20,8 @@ namespace System.ComponentModel
                 DynamicallyAccessedMemberTypes.PublicParameterlessConstructor
             )]
                 Type receiverType
-        ) {
+        )
+        {
             if (receiverType == null)
             {
                 throw new ArgumentNullException(nameof(receiverType));
@@ -39,7 +40,8 @@ namespace System.ComponentModel
                 DynamicallyAccessedMemberTypes.PublicParameterlessConstructor
             )]
                 string receiverTypeName
-        ) {
+        )
+        {
             PropertyName = propertyName;
             ReceiverTypeName = receiverTypeName;
         }

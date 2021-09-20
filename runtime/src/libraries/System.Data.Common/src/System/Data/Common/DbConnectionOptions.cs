@@ -37,7 +37,8 @@ namespace System.Data.Common
             string? connectionString,
             Dictionary<string, string>? synonyms,
             bool useOdbcRules
-        ) {
+        )
+        {
             _useOdbcRules = useOdbcRules;
             _parsetable = new Dictionary<string, string?>();
             _usersConnectionString = ((null != connectionString) ? connectionString : "");
@@ -70,7 +71,8 @@ namespace System.Data.Common
             string keyName,
             string? keyValue,
             bool useOdbcRules
-        ) {
+        )
+        {
             ADP.CheckArgumentNull(builder, nameof(builder));
             ADP.CheckArgumentLength(keyName, nameof(keyName));
 
@@ -117,7 +119,8 @@ namespace System.Data.Common
                             )
                         )
                         && !s_connectionStringQuoteOdbcValueRegex.IsMatch(keyValue)
-                    ) {
+                    )
+                    {
                         // always quote Driver value (required for ODBC Version 2.65 and earlier)
                         // always quote values that contain a ';'
                         builder.Append('{').Append(keyValue.Replace("}", "}}")).Append('}');
@@ -199,7 +202,8 @@ namespace System.Data.Common
             string keyname,
             string? keyvalue,
             Dictionary<string, string>? synonyms
-        ) {
+        )
+        {
             Debug.Assert(keyname == keyname.ToLowerInvariant(), "missing ToLower");
 
             string realkeyname = ((null != synonyms) ? (string)synonyms[keyname] : keyname);

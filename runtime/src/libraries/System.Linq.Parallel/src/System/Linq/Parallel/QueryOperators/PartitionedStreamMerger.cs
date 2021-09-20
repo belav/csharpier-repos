@@ -51,7 +51,8 @@ namespace System.Linq.Parallel
             bool outputOrdered,
             CancellationState cancellationState,
             int queryId
-        ) {
+        )
+        {
             _forEffectMerge = forEffectMerge;
             _mergeOptions = mergeOptions;
             _isOrdered = outputOrdered;

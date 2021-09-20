@@ -24,7 +24,8 @@ namespace Microsoft.AspNetCore.Testing
             MethodInfo testMethod,
             object[] methodArguments,
             ITestOutputHelper output
-        ) {
+        )
+        {
             TestClass = testClass;
             ConstructorArguments = constructorArguments;
             TestMethod = testMethod;

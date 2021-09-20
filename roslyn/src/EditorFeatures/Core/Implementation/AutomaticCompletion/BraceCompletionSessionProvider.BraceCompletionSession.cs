@@ -174,7 +174,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.AutomaticCompletion
                     && caretPos.Value.Position > 0
                     && (caretPos.Value.Position - 1) == OpeningPoint.GetPoint(snapshot).Position
                     && !HasForwardTyping
-                ) {
+                )
+                {
                     using var undo = CreateUndoTransaction();
                     using var edit = SubjectBuffer.CreateEdit();
 
@@ -233,7 +234,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.AutomaticCompletion
                         caretPos.HasValue
                         && caretPos.Value.Position < closingSnapshotPoint.Position
                         && closingSnapshotPoint.Position > 0
-                    ) {
+                    )
+                    {
                         using var undo = CreateUndoTransaction();
 
                         _editorOperations.AddBeforeTextBufferChangePrimitive();
@@ -317,7 +319,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.AutomaticCompletion
                             this.GetCaretPosition().Value,
                             closingSnapshotPoint.Subtract(1)
                         )
-                    ) {
+                    )
+                    {
                         var context = GetBraceCompletionContext();
                         if (context == null)
                         {
@@ -387,7 +390,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.AutomaticCompletion
                         if (
                             caretPos.HasValue
                             && !HasNoForwardTyping(caretPos.Value, closingSnapshotPoint.Subtract(1))
-                        ) {
+                        )
+                        {
                             return true;
                         }
                     }

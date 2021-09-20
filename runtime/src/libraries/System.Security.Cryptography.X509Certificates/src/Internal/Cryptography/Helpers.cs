@@ -217,7 +217,8 @@ namespace Internal.Cryptography
 
         public static ReadOnlyMemory<byte> DecodeOctetStringAsMemory(
             ReadOnlyMemory<byte> encodedOctetString
-        ) {
+        )
+        {
             try
             {
                 ReadOnlySpan<byte> input = encodedOctetString.Span;
@@ -229,7 +230,8 @@ namespace Internal.Cryptography
                         out ReadOnlySpan<byte> primitive,
                         out int consumed
                     )
-                ) {
+                )
+                {
                     if (consumed != input.Length)
                     {
                         throw new CryptographicException(SR.Cryptography_Der_Invalid_Encoding);
@@ -263,14 +265,16 @@ namespace Internal.Cryptography
         public static bool AreSamePublicECParameters(
             ECParameters aParameters,
             ECParameters bParameters
-        ) {
+        )
+        {
             if (aParameters.Curve.CurveType != bParameters.Curve.CurveType)
                 return false;
 
             if (
                 !aParameters.Q.X!.ContentsEqual(bParameters.Q.X!)
                 || !aParameters.Q.Y!.ContentsEqual(bParameters.Q.Y!)
-            ) {
+            )
+            {
                 return false;
             }
 
@@ -300,7 +304,8 @@ namespace Internal.Cryptography
                 || !aCurve.Order.ContentsEqual(bCurve.Order)
                 || !aCurve.A.ContentsEqual(bCurve.A)
                 || !aCurve.B.ContentsEqual(bCurve.B)
-            ) {
+            )
+            {
                 return false;
             }
 

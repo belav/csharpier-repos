@@ -176,7 +176,8 @@ public static class TieredVtableMethodTests
     private static void CallVirtualMethodForDevirtualization(
         DerivedForDevirtualization obj,
         int count = 1
-    ) {
+    )
+    {
         for (int i = 0; i < count; ++i)
         {
             s_expectedCallSequence.Append("vd ");

@@ -39,15 +39,17 @@ namespace Microsoft.VisualStudio.LanguageServices.CSharp.Interactive
             IInteractiveWindowCommandsFactory commandsFactory,
             [ImportMany] IInteractiveWindowCommand[] commands,
             VisualStudioWorkspace workspace
-        ) : base(
-            serviceProvider,
-            interactiveWindowFactory,
-            classifierAggregator,
-            contentTypeRegistry,
-            commandsFactory,
-            commands,
-            workspace
-        ) {
+        )
+            : base(
+                serviceProvider,
+                interactiveWindowFactory,
+                classifierAggregator,
+                contentTypeRegistry,
+                commandsFactory,
+                commands,
+                workspace
+            )
+        {
             _threadingContext = threadingContext;
             _listener = listenerProvider.GetListener(FeatureAttribute.InteractiveEvaluator);
         }
@@ -67,7 +69,8 @@ namespace Microsoft.VisualStudio.LanguageServices.CSharp.Interactive
             IViewClassifierAggregatorService classifierAggregator,
             IContentTypeRegistryService contentTypeRegistry,
             VisualStudioWorkspace workspace
-        ) {
+        )
+        {
             return new CSharpInteractiveEvaluator(
                 _threadingContext,
                 _listener,

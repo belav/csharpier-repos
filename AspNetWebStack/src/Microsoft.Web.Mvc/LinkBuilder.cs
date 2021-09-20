@@ -68,7 +68,8 @@ namespace Microsoft.Web.Mvc
         )]
         public static RouteValueDictionary BuildParameterValuesFromExpression(
             MethodCallExpression call
-        ) {
+        )
+        {
             RouteValueDictionary result = new RouteValueDictionary();
 
             ParameterInfo[] parameters = call.Method.GetParameters();

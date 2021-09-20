@@ -7,7 +7,8 @@ namespace Microsoft.AspNetCore.Razor.Language.Syntax
     {
         public static MarkupTextLiteralSyntax MergeTextLiterals(
             params MarkupTextLiteralSyntax[] literalSyntaxes
-        ) {
+        )
+        {
             if (literalSyntaxes == null || literalSyntaxes.Length == 0)
             {
                 return null;

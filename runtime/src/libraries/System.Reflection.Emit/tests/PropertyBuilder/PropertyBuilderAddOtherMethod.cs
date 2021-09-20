@@ -31,7 +31,8 @@ namespace System.Reflection.Emit.Tests
             MethodAttributes attributes,
             CallingConventions callingConventions,
             BindingFlags bindingFlags
-        ) {
+        )
+        {
             Type[] paramTypes = new Type[] { typeof(int) };
 
             TypeBuilder type = Helpers.DynamicType(TypeAttributes.Class | TypeAttributes.Public);

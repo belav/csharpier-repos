@@ -164,7 +164,8 @@ namespace System.Linq.Expressions
             int startColumn,
             int endLine,
             int endColumn
-        ) {
+        )
+        {
             ContractUtils.RequiresNotNull(document, nameof(document));
             if (startLine == 0xfeefee && startColumn == 0 && endLine == 0xfeefee && endColumn == 0)
             {

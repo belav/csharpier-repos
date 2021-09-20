@@ -62,7 +62,8 @@ namespace System.ComponentModel
         public static AttributeCollection FromExisting(
             AttributeCollection existing,
             params Attribute[] newAttributes
-        ) {
+        )
+        {
             if (existing == null)
             {
                 throw new ArgumentNullException(nameof(existing));
@@ -268,7 +269,8 @@ namespace System.ComponentModel
                     | DynamicallyAccessedMemberTypes.PublicFields
             )]
                 Type attributeType
-        ) {
+        )
+        {
             if (attributeType == null)
             {
                 throw new ArgumentNullException(nameof(attributeType));

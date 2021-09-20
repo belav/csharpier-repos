@@ -143,7 +143,8 @@ namespace System.Xml
             if (
                 CurrentNode.NodeType == XmlNodeType.Element
                 && mapper.GetTableSchemaForElement((XmlElement)(CurrentNode)) != null
-            ) {
+            )
+            {
                 if (CurrentNode != _rowElement)
                 {
                     Debug.Fail("Reading the initial text value for sub-regions.");
@@ -205,7 +206,8 @@ namespace System.Xml
                 if (
                     XmlDataDocument.IsTextLikeNode(n)
                     && (n.NextSibling == null || !XmlDataDocument.IsTextLikeNode(n.NextSibling))
-                ) {
+                )
+                {
                     // don't use string builder if only one text node exists
                     value = n.Value;
                     n = n.NextSibling;

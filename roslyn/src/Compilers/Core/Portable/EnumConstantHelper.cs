@@ -26,7 +26,8 @@ namespace Microsoft.CodeAnalysis
             ConstantValue constantValue,
             uint offset,
             out ConstantValue offsetValue
-        ) {
+        )
+        {
             Debug.Assert(!constantValue.IsBad);
             Debug.Assert(offset > 0);
 

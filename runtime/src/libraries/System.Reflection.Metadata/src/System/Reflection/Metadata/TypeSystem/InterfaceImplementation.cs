@@ -15,7 +15,8 @@ namespace System.Reflection.Metadata
         internal InterfaceImplementation(
             MetadataReader reader,
             InterfaceImplementationHandle handle
-        ) {
+        )
+        {
             Debug.Assert(reader != null);
             Debug.Assert(!handle.IsNil);
 

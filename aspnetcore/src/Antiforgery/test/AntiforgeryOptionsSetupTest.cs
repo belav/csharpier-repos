@@ -17,7 +17,8 @@ namespace Microsoft.AspNetCore.Antiforgery.Internal
         public void AntiforgeryOptionsSetup_SetsDefaultCookieName_BasedOnApplicationId(
             string applicationId,
             string expectedCookieName
-        ) {
+        )
+        {
             // Arrange
             var serviceCollection = new ServiceCollection();
             serviceCollection.AddAntiforgery();

@@ -20,7 +20,8 @@ namespace Microsoft.AspNetCore.Components.Web
             JsonSerializerOptions jsonSerializerOptions,
             string eventDescriptorJson,
             string eventArgsJson
-        ) {
+        )
+        {
             WebEventDescriptor eventDescriptor;
             try
             {
@@ -39,7 +40,8 @@ namespace Microsoft.AspNetCore.Components.Web
             JsonSerializerOptions jsonSerializerOptions,
             WebEventDescriptor eventDescriptor,
             string eventArgsJson
-        ) {
+        )
+        {
             var parsedEventArgs = ParseEventArgsJson(
                 renderer,
                 jsonSerializerOptions,
@@ -60,7 +62,8 @@ namespace Microsoft.AspNetCore.Components.Web
             ulong eventHandlerId,
             EventFieldInfo? eventFieldInfo,
             EventArgs eventArgs
-        ) {
+        )
+        {
             BrowserRendererId = browserRendererId;
             EventHandlerId = eventHandlerId;
             EventFieldInfo = eventFieldInfo;
@@ -81,7 +84,8 @@ namespace Microsoft.AspNetCore.Components.Web
             ulong eventHandlerId,
             string eventName,
             string eventArgsJson
-        ) {
+        )
+        {
             try
             {
                 if (TryDeserializeStandardWebEventArgs(eventName, eventArgsJson, out var eventArgs))
@@ -110,7 +114,8 @@ namespace Microsoft.AspNetCore.Components.Web
             string eventName,
             string eventArgsJson,
             [NotNullWhen(true)] out EventArgs? eventArgs
-        ) {
+        )
+        {
             // For back-compatibility, we recognize the built-in list of web event names and hard-code
             // rules about the deserialization type for their eventargs. This makes it possible to declare
             // an event handler as receiving EventArgs, and have it actually receive a subclass at runtime

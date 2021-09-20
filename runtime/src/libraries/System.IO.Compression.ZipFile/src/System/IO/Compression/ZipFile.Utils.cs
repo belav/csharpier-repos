@@ -19,7 +19,8 @@ namespace System.IO.Compression
             int length,
             ref char[] buffer,
             bool appendPathSeparator = false
-        ) {
+        )
+        {
             Debug.Assert(length <= entry.Length - offset);
             Debug.Assert(buffer != null);
 

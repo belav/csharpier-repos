@@ -19,7 +19,8 @@ namespace System.Text.Json.Serialization.Metadata
             ParameterInfo parameterInfo,
             JsonPropertyInfo matchingProperty,
             JsonSerializerOptions options
-        ) {
+        )
+        {
             base.Initialize(runtimePropertyType, parameterInfo, matchingProperty, options);
 
             Debug.Assert(parameterInfo.ParameterType == matchingProperty.DeclaredPropertyType);

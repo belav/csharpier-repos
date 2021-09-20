@@ -13,7 +13,8 @@ namespace System.Web.Mvc
             Func<object> modelAccessor,
             Type modelType,
             string propertyName
-        ) {
+        )
+        {
             return new ModelMetadata(this, containerType, modelAccessor, modelType, propertyName);
         }
     }

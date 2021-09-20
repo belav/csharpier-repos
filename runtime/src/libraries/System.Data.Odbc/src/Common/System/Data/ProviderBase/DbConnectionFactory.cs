@@ -16,7 +16,8 @@ namespace System.Data.ProviderBase
             DbConnectionOptions? userOptions,
             DbConnectionInternal? oldConnection,
             out DbConnectionInternal? connection
-        ) {
+        )
+        {
             Debug.Assert(null != owningConnection, "null owningConnection?");
 
             DbConnectionPoolGroup poolGroup;
@@ -96,7 +97,8 @@ namespace System.Data.ProviderBase
                                     if (
                                         (oldConnection != null)
                                         && (oldConnection.State == ConnectionState.Open)
-                                    ) {
+                                    )
+                                    {
                                         oldConnection.PrepareForReplaceConnection();
                                         oldConnection.Dispose();
                                     }
@@ -175,7 +177,8 @@ namespace System.Data.ProviderBase
                             userOptions,
                             out connection
                         )
-                    ) {
+                    )
+                    {
                         return false;
                     }
                     //}

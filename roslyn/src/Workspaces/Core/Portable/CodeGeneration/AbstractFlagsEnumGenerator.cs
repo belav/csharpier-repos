@@ -24,7 +24,8 @@ namespace Microsoft.CodeAnalysis.CodeGeneration
         public SyntaxNode? TryCreateEnumConstantValue(
             INamedTypeSymbol enumType,
             object constantValue
-        ) {
+        )
+        {
             // Code copied from System.Enum.
             var isFlagsEnum = IsFlagsEnum(enumType);
             if (isFlagsEnum)
@@ -61,7 +62,8 @@ namespace Microsoft.CodeAnalysis.CodeGeneration
                             && (
                                 (INamespaceSymbol)containingSymbol.ContainingSymbol
                             ).IsGlobalNamespace
-                        ) {
+                        )
+                        {
                             return true;
                         }
                     }
@@ -74,7 +76,8 @@ namespace Microsoft.CodeAnalysis.CodeGeneration
         private SyntaxNode? CreateFlagsEnumConstantValue(
             INamedTypeSymbol enumType,
             object constantValue
-        ) {
+        )
+        {
             // These values are sorted by value. Don't change this.
             var allFieldsAndValues = new List<(IFieldSymbol field, ulong value)>();
             GetSortedEnumFieldsAndValues(enumType, allFieldsAndValues);
@@ -93,7 +96,8 @@ namespace Microsoft.CodeAnalysis.CodeGeneration
             object constantValue,
             List<(IFieldSymbol field, ulong value)> allFieldsAndValues,
             List<(IFieldSymbol field, ulong value)> usedFieldsAndValues
-        ) {
+        )
+        {
             Contract.ThrowIfNull(enumType.EnumUnderlyingType);
             var underlyingSpecialType = enumType.EnumUnderlyingType.SpecialType;
             var constantValueULong = EnumUtilities.ConvertEnumUnderlyingTypeToUInt64(
@@ -172,7 +176,8 @@ namespace Microsoft.CodeAnalysis.CodeGeneration
             IFieldSymbol field,
             INamedTypeSymbol enumType,
             SpecialType underlyingSpecialType
-        ) {
+        )
+        {
             if (IsValidName(enumType, field.Name))
             {
                 var syntaxFactory = GetSyntaxGenerator();
@@ -193,7 +198,8 @@ namespace Microsoft.CodeAnalysis.CodeGeneration
 
         private static IFieldSymbol? GetZeroField(
             List<(IFieldSymbol field, ulong value)> allFieldsAndValues
-        ) {
+        )
+        {
             for (var i = allFieldsAndValues.Count - 1; i >= 0; i--)
             {
                 var (field, value) = allFieldsAndValues[i];
@@ -209,7 +215,8 @@ namespace Microsoft.CodeAnalysis.CodeGeneration
         private void GetSortedEnumFieldsAndValues(
             INamedTypeSymbol enumType,
             List<(IFieldSymbol field, ulong value)> allFieldsAndValues
-        ) {
+        )
+        {
             Contract.ThrowIfNull(enumType.EnumUnderlyingType);
             var underlyingSpecialType = enumType.EnumUnderlyingType.SpecialType;
             foreach (var field in enumType.GetMembers().OfType<IFieldSymbol>())
@@ -230,7 +237,8 @@ namespace Microsoft.CodeAnalysis.CodeGeneration
         private SyntaxNode CreateNonFlagsEnumConstantValue(
             INamedTypeSymbol enumType,
             object constantValue
-        ) {
+        )
+        {
             Contract.ThrowIfNull(enumType.EnumUnderlyingType);
             var underlyingSpecialType = enumType.EnumUnderlyingType.SpecialType;
             var constantValueULong = EnumUtilities.ConvertEnumUnderlyingTypeToUInt64(
@@ -265,7 +273,8 @@ namespace Microsoft.CodeAnalysis.CodeGeneration
         int IComparer<(IFieldSymbol field, ulong value)>.Compare(
             (IFieldSymbol field, ulong value) x,
             (IFieldSymbol field, ulong value) y
-        ) {
+        )
+        {
             unchecked
             {
                 return (long)x.value < (long)y.value

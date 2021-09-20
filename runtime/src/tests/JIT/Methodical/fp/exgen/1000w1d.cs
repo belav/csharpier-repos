@@ -1264,7 +1264,8 @@ internal unsafe class testout1
                     )
                 )
             ) <= (vt_0.a20_0)
-        ) {
+        )
+        {
             int if0_0retval_0 = Convert.ToInt32(
                 (
                     Convert.ToInt32(
@@ -2885,7 +2886,8 @@ internal unsafe class testout1
                         )
                     )
                 ) <= (vt_0.a20_0)
-            ) {
+            )
+            {
                 if (
                     (
                         (
@@ -3206,7 +3208,8 @@ internal unsafe class testout1
                             )
                         )
                     ) == (vt_0.a20_0)
-                ) {
+                )
+                {
                     if (
                         (
                             (

@@ -298,7 +298,8 @@ namespace System.Text.Json.Serialization.Tests
             int payloadSize,
             bool ignoreNull,
             bool writeIndented
-        ) {
+        )
+        {
             List<Order> list = PopulateLargeObject(payloadSize);
 
             JsonSerializerOptions options = new JsonSerializerOptions
@@ -351,7 +352,8 @@ namespace System.Text.Json.Serialization.Tests
             int depthFactor,
             bool ignoreNull,
             bool writeIndented
-        ) {
+        )
+        {
             const int ListLength = 10;
 
             int length = ListLength * depthFactor;

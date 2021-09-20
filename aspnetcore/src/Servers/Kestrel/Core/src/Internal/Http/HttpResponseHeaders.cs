@@ -42,7 +42,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Http
             static void CopyExtraHeaders(
                 ref BufferWriter<PipeWriter> buffer,
                 Dictionary<string, StringValues> headers
-            ) {
+            )
+            {
                 foreach (var kv in headers)
                 {
                     foreach (var value in kv.Value)

@@ -360,7 +360,8 @@ namespace System.Tests
             string format,
             IFormatProvider provider,
             string expected
-        ) {
+        )
+        {
             // Format is case insensitive
             string upperFormat = format.ToUpperInvariant();
             string lowerFormat = format.ToLowerInvariant();
@@ -911,7 +912,8 @@ namespace System.Tests
             NumberStyles style,
             IFormatProvider provider,
             IntPtr expected
-        ) {
+        )
+        {
             IntPtr result;
 
             // Default style and provider
@@ -971,7 +973,8 @@ namespace System.Tests
                     NumberStyles.HexNumber,
                     NumberStyles.Any
                 }
-            ) {
+            )
+            {
                 yield return new object[] { null, style, null, typeof(ArgumentNullException) };
                 yield return new object[] { "", style, null, typeof(FormatException) };
                 yield return new object[] { " \t \n \r ", style, null, typeof(FormatException) };
@@ -1002,7 +1005,8 @@ namespace System.Tests
                     "\x205F",
                     "\x3000"
                 }
-            ) {
+            )
+            {
                 yield return new object[]
                 {
                     c + "123",
@@ -1027,7 +1031,8 @@ namespace System.Tests
                     NumberStyles.HexNumber,
                     NumberStyles.Any
                 }
-            ) {
+            )
+            {
                 yield return new object[] { "Garbage", style, null, typeof(FormatException) };
                 yield return new object[] { "g", style, null, typeof(FormatException) };
                 yield return new object[] { "g1", style, null, typeof(FormatException) };
@@ -1500,7 +1505,8 @@ namespace System.Tests
                     "100000000000000000000000000000000000000000000000000000000000000000000000000000000000000", // really big
                     "-100000000000000000000000000000000000000000000000000000000000000000000000000000000000000" // really small
                 }
-            ) {
+            )
+            {
                 foreach (NumberStyles styles in new[] { NumberStyles.Any, NumberStyles.Integer })
                 {
                     yield return new object[] { s, styles, null, typeof(OverflowException) };
@@ -1533,7 +1539,8 @@ namespace System.Tests
                     "FFFFFFFFFFFFFFFF0", // extra digit after ulong.MaxValue
                     "100000000000000000000000000000000000000000000000000000000000000000000000000000000000000" // really big
                 }
-            ) {
+            )
+            {
                 yield return new object[]
                 {
                     s,
@@ -1609,7 +1616,8 @@ namespace System.Tests
             NumberStyles style,
             IFormatProvider provider,
             Type exceptionType
-        ) {
+        )
+        {
             if (2 == 2E10) { }
             IntPtr result;
 
@@ -1653,7 +1661,8 @@ namespace System.Tests
         public static void TryParse_InvalidNumberStyle_ThrowsArgumentException(
             NumberStyles style,
             string paramName
-        ) {
+        )
+        {
             IntPtr result = (IntPtr)0;
             AssertExtensions.Throws<ArgumentException>(
                 paramName,
@@ -1845,7 +1854,8 @@ namespace System.Tests
             NumberStyles style,
             IFormatProvider provider,
             IntPtr expected
-        ) {
+        )
+        {
             IntPtr result;
 
             // Default style and provider
@@ -1868,7 +1878,8 @@ namespace System.Tests
             NumberStyles style,
             IFormatProvider provider,
             Type exceptionType
-        ) {
+        )
+        {
             if (value != null)
             {
                 IntPtr result;
@@ -1923,7 +1934,8 @@ namespace System.Tests
             string format,
             IFormatProvider provider,
             string expected
-        ) {
+        )
+        {
             char[] actual;
             int charsWritten;
 

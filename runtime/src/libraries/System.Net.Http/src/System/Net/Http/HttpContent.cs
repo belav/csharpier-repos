@@ -100,7 +100,8 @@ namespace System.Net.Http
             int preambleLength,
             int first2Bytes,
             params byte[] preamble
-        ) {
+        )
+        {
             Debug.Assert(encoding != null);
             Debug.Assert(preamble != null);
 
@@ -224,7 +225,8 @@ namespace System.Net.Http
         internal static string ReadBufferAsString(
             ArraySegment<byte> buffer,
             HttpContentHeaders headers
-        ) {
+        )
+        {
             // We don't validate the Content-Encoding header: If the content was encoded, it's the caller's
             // responsibility to make sure to only call ReadAsString() on already decoded content. E.g. if the
             // Content-Encoding is 'gzip' the user should set HttpClientHandler.AutomaticDecompression to get a
@@ -246,7 +248,8 @@ namespace System.Net.Http
                         charset.Length > 2
                         && charset[0] == '\"'
                         && charset[charset.Length - 1] == '\"'
-                    ) {
+                    )
+                    {
                         encoding = Encoding.GetEncoding(charset.Substring(1, charset.Length - 2));
                     }
                     else
@@ -416,7 +419,8 @@ namespace System.Net.Http
             Stream stream,
             TransportContext? context,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             throw new NotSupportedException(
                 SR.Format(
                     SR.net_http_missing_sync_implementation,
@@ -445,7 +449,8 @@ namespace System.Net.Http
             Stream stream,
             TransportContext? context,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             CheckDisposed();
             if (stream == null)
             {
@@ -481,7 +486,8 @@ namespace System.Net.Http
             Stream stream,
             TransportContext? context,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             CheckDisposed();
             if (stream == null)
             {
@@ -514,7 +520,8 @@ namespace System.Net.Http
             Stream stream,
             TransportContext? context,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             if (TryGetBuffer(out ArraySegment<byte> buffer))
             {
                 return stream.WriteAsync(buffer, cancellationToken);
@@ -535,7 +542,8 @@ namespace System.Net.Http
                     out MemoryStream? tempBuffer,
                     out Exception? error
                 )
-            ) {
+            )
+            {
                 // If we already buffered the content, just return.
                 return;
             }
@@ -605,7 +613,8 @@ namespace System.Net.Http
                     out MemoryStream? tempBuffer,
                     out Exception? error
                 )
-            ) {
+            )
+            {
                 // If we already buffered the content, just return a completed task.
                 return Task.CompletedTask;
             }
@@ -632,7 +641,8 @@ namespace System.Net.Http
         private async Task LoadIntoBufferAsyncCore(
             Task serializeToStreamTask,
             MemoryStream tempBuffer
-        ) {
+        )
+        {
             try
             {
                 await serializeToStreamTask.ConfigureAwait(false);
@@ -679,7 +689,8 @@ namespace System.Net.Http
 
         protected virtual Task<Stream> CreateContentReadStreamAsync(
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             // Drops the CT for compatibility reasons, see https://github.com/dotnet/runtime/issues/916#issuecomment-562083237
             return CreateContentReadStreamAsync();
         }
@@ -725,7 +736,8 @@ namespace System.Net.Http
             long maxBufferSize,
             out MemoryStream? tempBuffer,
             out Exception? error
-        ) {
+        )
+        {
             if (maxBufferSize > HttpContent.MaxBufferSize)
             {
                 // This should only be hit when called directly; HttpClient/HttpClientHandler
@@ -926,7 +938,8 @@ namespace System.Net.Http
             ArraySegment<byte> buffer,
             [NotNullWhen(true)] out Encoding? encoding,
             out int preambleLength
-        ) {
+        )
+        {
             byte[]? data = buffer.Array;
             int offset = buffer.Offset;
             int dataLength = buffer.Count;
@@ -943,7 +956,8 @@ namespace System.Net.Http
                         if (
                             dataLength >= UTF8PreambleLength
                             && data[offset + 2] == UTF8PreambleByte2
-                        ) {
+                        )
+                        {
                             encoding = Encoding.UTF8;
                             preambleLength = UTF8PreambleLength;
                             return true;
@@ -956,7 +970,8 @@ namespace System.Net.Http
                             dataLength >= UTF32PreambleLength
                             && data[offset + 2] == UTF32PreambleByte2
                             && data[offset + 3] == UTF32PreambleByte3
-                        ) {
+                        )
+                        {
                             encoding = Encoding.UTF32;
                             preambleLength = UTF32PreambleLength;
                         }
@@ -1005,7 +1020,8 @@ namespace System.Net.Http
             Task waitTask,
             TState state,
             Func<TState, TResult> returnFunc
-        ) {
+        )
+        {
             await waitTask.ConfigureAwait(false);
             return returnFunc(state);
         }
@@ -1055,7 +1071,8 @@ namespace System.Net.Http
                 int offset,
                 int count,
                 CancellationToken cancellationToken
-            ) {
+            )
+            {
                 CheckSize(count);
                 return base.WriteAsync(buffer, offset, count, cancellationToken);
             }
@@ -1063,7 +1080,8 @@ namespace System.Net.Http
             public override ValueTask WriteAsync(
                 ReadOnlyMemory<byte> buffer,
                 CancellationToken cancellationToken
-            ) {
+            )
+            {
                 CheckSize(buffer.Length);
                 return base.WriteAsync(buffer, cancellationToken);
             }
@@ -1074,7 +1092,8 @@ namespace System.Net.Http
                 int count,
                 AsyncCallback? callback,
                 object? state
-            ) {
+            )
+            {
                 CheckSize(count);
                 return base.BeginWrite(buffer, offset, count, callback, state);
             }
@@ -1088,7 +1107,8 @@ namespace System.Net.Http
                 Stream destination,
                 int bufferSize,
                 CancellationToken cancellationToken
-            ) {
+            )
+            {
                 ArraySegment<byte> buffer;
                 if (TryGetBuffer(out buffer))
                 {
@@ -1227,7 +1247,8 @@ namespace System.Net.Http
                 int offset,
                 int count,
                 CancellationToken cancellationToken
-            ) {
+            )
+            {
                 Write(buffer, offset, count);
                 return Task.CompletedTask;
             }
@@ -1235,7 +1256,8 @@ namespace System.Net.Http
             public override ValueTask WriteAsync(
                 ReadOnlyMemory<byte> buffer,
                 CancellationToken cancellationToken = default
-            ) {
+            )
+            {
                 Write(buffer.Span);
                 return default;
             }

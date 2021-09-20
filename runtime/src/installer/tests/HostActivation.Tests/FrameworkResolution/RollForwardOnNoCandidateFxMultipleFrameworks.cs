@@ -79,7 +79,8 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation.FrameworkResolution
             int? rollForwardOnNoCandidateFx,
             bool? applyPatches,
             string resolvedFramework
-        ) {
+        )
+        {
             RunTest(
                     runtimeConfig =>
                         runtimeConfig.WithFramework(MiddleWare, "2.1.0")
@@ -122,7 +123,8 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation.FrameworkResolution
             int? rollForwardOnNoCandidateFx,
             bool? applyPatches,
             string resolvedFramework
-        ) {
+        )
+        {
             RunTest(
                     runtimeConfig =>
                         runtimeConfig.WithFramework(MicrosoftNETCoreApp, "5.1.1")
@@ -154,7 +156,8 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation.FrameworkResolution
             int? rollForwardOnNoCandidateFx,
             bool? applyPatches,
             string resolvedFramework
-        ) {
+        )
+        {
             RunTest(
                     runtimeConfig =>
                         runtimeConfig.WithFramework(MiddleWare, "2.1.0")
@@ -189,7 +192,8 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation.FrameworkResolution
             int? rollForwardOnNoCandidateFx,
             bool? applyPatches,
             string resolvedFramework
-        ) {
+        )
+        {
             RunTest(
                     runtimeConfig =>
                         runtimeConfig.WithFramework(MicrosoftNETCoreApp, "5.1.1")
@@ -232,7 +236,8 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation.FrameworkResolution
             int? rollForwardOnNoCandidateFx,
             bool? applyPatches,
             string resolvedFramework
-        ) {
+        )
+        {
             RunTest(
                     runtimeConfig =>
                         runtimeConfig.WithFramework(MicrosoftNETCoreApp, "6.1.1-preview.1")
@@ -273,7 +278,8 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation.FrameworkResolution
             int? rollForwardOnNoCandidateFx,
             bool? applyPatches,
             string resolvedFramework
-        ) {
+        )
+        {
             RunTest(
                     runtimeConfig =>
                         runtimeConfig.WithFramework(MiddleWare, "2.1.0")
@@ -322,7 +328,8 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation.FrameworkResolution
             int? rollForwardOnNoCandidateFx,
             bool? applyPatches,
             string resolvedFramework
-        ) {
+        )
+        {
             RunTest(
                     runtimeConfig =>
                         runtimeConfig.WithFramework(
@@ -358,7 +365,8 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation.FrameworkResolution
             int? rollForwardOnNoCandidateFx,
             bool? applyPatches,
             string resolvedFramework
-        ) {
+        )
+        {
             RunTest(
                     runtimeConfig =>
                         runtimeConfig.WithFramework(MiddleWare, "2.1.0")
@@ -399,7 +407,8 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation.FrameworkResolution
             int? rollForwardOnNoCandidateFx,
             bool? applyPatches,
             string resolvedFramework
-        ) {
+        )
+        {
             RunTest(
                     runtimeConfig =>
                         runtimeConfig.WithFramework(
@@ -442,7 +451,8 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation.FrameworkResolution
             int? rollForwardOnNoCandidateFx,
             bool? applyPatches,
             string resolvedFramework
-        ) {
+        )
+        {
             RunTest(
                     runtimeConfig => runtimeConfig.WithFramework(HighWare, "7.0.0"),
                     dotnetCustomizer =>
@@ -481,7 +491,8 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation.FrameworkResolution
             int? rollForwardOnNoCandidateFx,
             bool? applyPatches,
             string resolvedFramework
-        ) {
+        )
+        {
             RunTest(
                     runtimeConfig => runtimeConfig.WithFramework(HighWare, "7.0.0"),
                     dotnetCustomizer =>
@@ -622,7 +633,8 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation.FrameworkResolution
         private CommandResult RunTest(
             Func<RuntimeConfig, RuntimeConfig> runtimeConfig,
             Action<DotNetCliExtensions.DotNetCliCustomizer> customizeDotNet = null
-        ) {
+        )
+        {
             return RunTest(
                 SharedState.DotNetWithMultipleFrameworks,
                 SharedState.FrameworkReferenceApp,

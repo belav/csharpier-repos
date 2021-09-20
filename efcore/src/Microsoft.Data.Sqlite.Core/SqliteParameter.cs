@@ -74,12 +74,8 @@ namespace Microsoft.Data.Sqlite
         /// <param name="size">The maximum size, in bytes, of the parameter.</param>
         /// <param name="sourceColumn">The source column used for loading the value. Can be null.</param>
         /// <seealso href="https://docs.microsoft.com/dotnet/standard/data/sqlite/parameters">Parameters</seealso>
-        public SqliteParameter(
-            string? name,
-            SqliteType type,
-            int size,
-            string? sourceColumn
-        ) : this(name, type, size) => SourceColumn = sourceColumn;
+        public SqliteParameter(string? name, SqliteType type, int size, string? sourceColumn)
+            : this(name, type, size) => SourceColumn = sourceColumn;
 
         /// <summary>
         ///     Gets or sets the type of the parameter.

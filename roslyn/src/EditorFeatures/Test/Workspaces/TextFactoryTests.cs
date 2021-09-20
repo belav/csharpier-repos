@@ -186,7 +186,8 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Workspaces
             byte[] bytes,
             Encoding defaultEncoding,
             Encoding expectedEncoding
-        ) {
+        )
+        {
             var factory = CreateMockTextFactoryService();
             using var stream = new MemoryStream(bytes);
             var text = factory.CreateText(stream, defaultEncoding);

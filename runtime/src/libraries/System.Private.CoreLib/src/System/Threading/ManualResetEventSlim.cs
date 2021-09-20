@@ -737,7 +737,8 @@ namespace System.Threading
 
                 if (
                     Interlocked.CompareExchange(ref m_combinedState, newState, oldState) == oldState
-                ) {
+                )
+                {
                     return;
                 }
 
@@ -759,7 +760,8 @@ namespace System.Threading
             int state,
             int mask,
             int rightBitShiftCount
-        ) {
+        )
+        {
             // convert to uint before shifting so that right-shift does not replicate the sign-bit,
             // then convert back to int.
             return unchecked((int)(((uint)(state & mask)) >> rightBitShiftCount));

@@ -27,7 +27,8 @@ namespace Microsoft.AspNetCore.Mvc.Formatters.Xml
         public EnumerableWrapperProvider(
             Type sourceEnumerableOfT,
             IWrapperProvider elementWrapperProvider
-        ) {
+        )
+        {
             if (sourceEnumerableOfT == null)
             {
                 throw new ArgumentNullException(nameof(sourceEnumerableOfT));

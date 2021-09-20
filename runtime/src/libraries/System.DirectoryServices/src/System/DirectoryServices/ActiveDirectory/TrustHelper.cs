@@ -61,7 +61,8 @@ namespace System.DirectoryServices.ActiveDirectory
             string targetName,
             TRUST_ATTRIBUTE attribute,
             bool isForest
-        ) {
+        )
+        {
             PolicySafeHandle? handle = null;
             IntPtr buffer = (IntPtr)0;
             LSA_UNICODE_STRING? trustedDomainName = null;
@@ -196,7 +197,8 @@ namespace System.DirectoryServices.ActiveDirectory
             TRUST_ATTRIBUTE attribute,
             bool status,
             bool isForest
-        ) {
+        )
+        {
             PolicySafeHandle? handle = null;
             IntPtr buffer = (IntPtr)0;
             IntPtr newInfo = (IntPtr)0;
@@ -366,7 +368,8 @@ namespace System.DirectoryServices.ActiveDirectory
             string? sourceName,
             string? targetName,
             bool isForest
-        ) {
+        )
+        {
             PolicySafeHandle? policyHandle = null;
             LSA_UNICODE_STRING? trustedDomainName = null;
             int win32Error = 0;
@@ -474,7 +477,8 @@ namespace System.DirectoryServices.ActiveDirectory
             TrustDirection direction,
             bool forceSecureChannelReset,
             string? preferredTargetServer
-        ) {
+        )
+        {
             PolicySafeHandle? policyHandle = null;
             LSA_UNICODE_STRING? trustedDomainName = null;
             int win32Error = 0;
@@ -622,7 +626,8 @@ namespace System.DirectoryServices.ActiveDirectory
             bool isForest,
             TrustDirection direction,
             string password
-        ) {
+        )
+        {
             LSA_AUTH_INFORMATION? AuthData = null;
             TRUSTED_DOMAIN_AUTH_INFORMATION? AuthInfoEx = null;
             TRUSTED_DOMAIN_INFORMATION_EX? tdi = null;
@@ -767,7 +772,8 @@ namespace System.DirectoryServices.ActiveDirectory
             string? targetName,
             string password,
             bool isForest
-        ) {
+        )
+        {
             PolicySafeHandle? handle = null;
             IntPtr buffer = (IntPtr)0;
             LSA_UNICODE_STRING? trustedDomainName = null;
@@ -942,7 +948,8 @@ namespace System.DirectoryServices.ActiveDirectory
             string password,
             bool isForest,
             TrustDirection newTrustDirection
-        ) {
+        )
+        {
             PolicySafeHandle? handle = null;
             IntPtr buffer = (IntPtr)0;
             LSA_UNICODE_STRING? trustedDomainName = null;
@@ -1129,7 +1136,8 @@ namespace System.DirectoryServices.ActiveDirectory
             bool isForest,
             int direction,
             string serverName
-        ) {
+        )
+        {
             IntPtr buffer = (IntPtr)0;
 
             // get trust information
@@ -1215,14 +1223,16 @@ namespace System.DirectoryServices.ActiveDirectory
             bool isForest,
             string? sourceName,
             string? targetName
-        ) {
+        )
+        {
             if (isForest)
             {
                 // it should be a forest trust, make sure that TRUST_ATTRIBUTE_FOREST_TRANSITIVE bit is set
                 if (
                     (domainInfo.TrustAttributes & TRUST_ATTRIBUTE.TRUST_ATTRIBUTE_FOREST_TRANSITIVE)
                     == 0
-                ) {
+                )
+                {
                     throw new ActiveDirectoryObjectNotFoundException(
                         SR.Format(SR.ForestTrustDoesNotExist, sourceName, targetName),
                         typeof(ForestTrustRelationshipInformation),
@@ -1236,7 +1246,8 @@ namespace System.DirectoryServices.ActiveDirectory
                 if (
                     (domainInfo.TrustAttributes & TRUST_ATTRIBUTE.TRUST_ATTRIBUTE_FOREST_TRANSITIVE)
                     != 0
-                ) {
+                )
+                {
                     throw new ActiveDirectoryObjectNotFoundException(
                         SR.Format(SR.WrongForestTrust, sourceName, targetName),
                         typeof(TrustRelationshipInformation),
@@ -1286,7 +1297,8 @@ namespace System.DirectoryServices.ActiveDirectory
             DirectoryContext targetContext,
             string? targetName,
             bool isForest
-        ) {
+        )
+        {
             PolicySafeHandle? policyHandle = null;
             IntPtr buffer = (IntPtr)0;
             bool impersonated = false;

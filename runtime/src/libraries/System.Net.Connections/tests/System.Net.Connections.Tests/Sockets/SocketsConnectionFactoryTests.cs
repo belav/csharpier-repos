@@ -53,7 +53,8 @@ namespace System.Net.Connections.Tests
             SocketType? socketType = null,
             ProtocolType? protocolType = null,
             AddressFamily? addressFamily = null
-        ) {
+        )
+        {
             Assert.True(connection.ConnectionProperties.TryGet(out Socket socket));
             Assert.True(socket.Connected);
             if (addressFamily != null)
@@ -71,7 +72,8 @@ namespace System.Net.Connections.Tests
             EndPoint endPoint,
             SocketType socketType,
             ProtocolType protocolType
-        ) {
+        )
+        {
             endPoint = RecreateUdsEndpoint(endPoint);
             using var server = SocketTestServer.SocketTestServerFactory(
                 SocketImplementationType.Async,
@@ -253,7 +255,8 @@ namespace System.Net.Connections.Tests
             EndPoint endPoint,
             SocketType socketType,
             ProtocolType protocolType
-        ) {
+        )
+        {
             endPoint = RecreateUdsEndpoint(endPoint);
             using var server = SocketTestServer.SocketTestServerFactory(
                 SocketImplementationType.Async,
@@ -287,7 +290,8 @@ namespace System.Net.Connections.Tests
             EndPoint endPoint,
             SocketType socketType,
             ProtocolType protocolType
-        ) {
+        )
+        {
             endPoint = RecreateUdsEndpoint(endPoint);
             using var server = SocketTestServer.SocketTestServerFactory(
                 SocketImplementationType.Async,
@@ -312,7 +316,8 @@ namespace System.Net.Connections.Tests
             EndPoint endPoint,
             SocketType socketType,
             ProtocolType protocolType
-        ) {
+        )
+        {
             endPoint = RecreateUdsEndpoint(endPoint);
             using var server = SocketTestServer.SocketTestServerFactory(
                 SocketImplementationType.Async,
@@ -386,7 +391,8 @@ namespace System.Net.Connections.Tests
         public async Task Connection_CloseAsync_ClosesSocket(
             bool usePipe,
             ConnectionCloseMethod method
-        ) {
+        )
+        {
             using var server = SocketTestServer.SocketTestServerFactory(
                 SocketImplementationType.Async,
                 IPAddress.Loopback

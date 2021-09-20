@@ -46,7 +46,8 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation
                         RegistryHive.CurrentUser,
                         RegistryView.Registry32
                     )
-                ) {
+                )
+                {
                     parentKey = hkcu.CreateSubKey(@"Software\Classes\Interface");
                     keyName = "_DOTNET_Test" + Process.GetCurrentProcess().Id.ToString();
                     key = parentKey.CreateSubKey(keyName);
@@ -79,7 +80,8 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation
                     RegistryKey dotnetLocationKey = key.CreateSubKey(
                         $@"Setup\InstalledVersions\{architecture}"
                     )
-                ) {
+                )
+                {
                     dotnetLocationKey.SetValue("InstallLocation", installLocation);
                 }
             }
@@ -117,7 +119,8 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation
         public static Command ApplyRegisteredInstallLocationOverride(
             this Command command,
             RegisteredInstallLocationOverride registeredInstallLocationOverride
-        ) {
+        )
+        {
             if (registeredInstallLocationOverride == null)
             {
                 return command;

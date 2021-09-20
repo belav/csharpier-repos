@@ -54,7 +54,8 @@ namespace System.ComponentModel.Composition.Factories
             CompositionErrorId errorId,
             string message,
             Exception exception
-        ) {
+        )
+        {
             return new CompositionError(errorId, message, (ICompositionElement)null, exception);
         }
 
@@ -63,7 +64,8 @@ namespace System.ComponentModel.Composition.Factories
             string message,
             ICompositionElement element,
             Exception exception
-        ) {
+        )
+        {
             return new CompositionError(errorId, message, element, exception);
         }
 
@@ -142,7 +144,8 @@ namespace System.ComponentModel.Composition.Factories
         private static void AddIdentifier(
             List<Tuple<string, string>> identifiers,
             StringBuilder identifier
-        ) {
+        )
+        {
             AddIdentifier(identifiers, identifier, (string)null);
         }
 
@@ -150,7 +153,8 @@ namespace System.ComponentModel.Composition.Factories
             List<Tuple<string, string>> identifiers,
             StringBuilder identifier,
             string dsl
-        ) {
+        )
+        {
             if (identifier.Length == 0)
                 return;
 

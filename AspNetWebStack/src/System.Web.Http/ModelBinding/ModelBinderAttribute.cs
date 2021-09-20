@@ -143,7 +143,8 @@ namespace System.Web.Http.ModelBinding
         /// </summary>
         public virtual IEnumerable<ValueProviderFactory> GetValueProviderFactories(
             HttpConfiguration configuration
-        ) {
+        )
+        {
             // By default, just get all registered value provider factories
             return configuration.Services.GetValueProviderFactories();
         }

@@ -269,7 +269,8 @@ namespace System.DirectoryServices.Protocols
         ) { }
         public bool Contains(
             System.DirectoryServices.Protocols.DirectoryAttributeModification value
-        ) {
+        )
+        {
             throw null;
         }
         public void CopyTo(
@@ -648,7 +649,8 @@ namespace System.DirectoryServices.Protocols
             System.DirectoryServices.Protocols.PartialResultProcessing partialMode,
             System.AsyncCallback callback,
             object state
-        ) {
+        )
+        {
             throw null;
         }
         public System.IAsyncResult BeginSendRequest(
@@ -657,7 +659,8 @@ namespace System.DirectoryServices.Protocols
             System.DirectoryServices.Protocols.PartialResultProcessing partialMode,
             System.AsyncCallback callback,
             object state
-        ) {
+        )
+        {
             throw null;
         }
         public void Bind() { }
@@ -666,24 +669,28 @@ namespace System.DirectoryServices.Protocols
         protected virtual void Dispose(bool disposing) { }
         public System.DirectoryServices.Protocols.DirectoryResponse EndSendRequest(
             System.IAsyncResult asyncResult
-        ) {
+        )
+        {
             throw null;
         }
         ~LdapConnection() { }
         public System.DirectoryServices.Protocols.PartialResultsCollection GetPartialResults(
             System.IAsyncResult asyncResult
-        ) {
+        )
+        {
             throw null;
         }
         public override System.DirectoryServices.Protocols.DirectoryResponse SendRequest(
             System.DirectoryServices.Protocols.DirectoryRequest request
-        ) {
+        )
+        {
             throw null;
         }
         public System.DirectoryServices.Protocols.DirectoryResponse SendRequest(
             System.DirectoryServices.Protocols.DirectoryRequest request,
             System.TimeSpan requestTimeout
-        ) {
+        )
+        {
             throw null;
         }
     }
@@ -1354,9 +1361,8 @@ namespace System.DirectoryServices.Protocols
     {
         public SecurityDescriptorFlagControl()
             : base(default(string), default(byte[]), default(bool), default(bool)) { }
-        public SecurityDescriptorFlagControl(
-            System.DirectoryServices.Protocols.SecurityMasks masks
-        ) : base(default(string), default(byte[]), default(bool), default(bool)) { }
+        public SecurityDescriptorFlagControl(System.DirectoryServices.Protocols.SecurityMasks masks)
+            : base(default(string), default(byte[]), default(bool), default(bool)) { }
         public System.DirectoryServices.Protocols.SecurityMasks SecurityMasks
         {
             get { throw null; }
@@ -1446,16 +1452,12 @@ namespace System.DirectoryServices.Protocols
     }
     public partial class SortRequestControl : System.DirectoryServices.Protocols.DirectoryControl
     {
-        public SortRequestControl(
-            params System.DirectoryServices.Protocols.SortKey[] sortKeys
-        ) : base(default(string), default(byte[]), default(bool), default(bool)) { }
+        public SortRequestControl(params System.DirectoryServices.Protocols.SortKey[] sortKeys)
+            : base(default(string), default(byte[]), default(bool), default(bool)) { }
         public SortRequestControl(string attributeName, bool reverseOrder)
             : base(default(string), default(byte[]), default(bool), default(bool)) { }
-        public SortRequestControl(
-            string attributeName,
-            string matchingRule,
-            bool reverseOrder
-        ) : base(default(string), default(byte[]), default(bool), default(bool)) { }
+        public SortRequestControl(string attributeName, string matchingRule, bool reverseOrder)
+            : base(default(string), default(byte[]), default(bool), default(bool)) { }
         public System.DirectoryServices.Protocols.SortKey[] SortKeys
         {
             get { throw null; }

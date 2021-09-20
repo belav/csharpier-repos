@@ -123,7 +123,8 @@ internal static class IOInputs
     {
         foreach (
             char slash in new[] { Path.AltDirectorySeparatorChar, Path.DirectorySeparatorChar }
-        ) {
+        )
+        {
             if (!PlatformDetection.IsWindows && slash == '/') // Unc paths must start with '\' on Unix
             {
                 continue;
@@ -212,7 +213,8 @@ internal static class IOInputs
     public static IEnumerable<string> GetPathsLongerThanMaxPath(
         string rootPath,
         bool useExtendedSyntax = false
-    ) {
+    )
+    {
         yield return GetLongPath(rootPath, MaxPath + 1, useExtendedSyntax);
         yield return GetLongPath(rootPath, MaxPath + 2, useExtendedSyntax);
         yield return GetLongPath(rootPath, MaxPath + 3, useExtendedSyntax);
@@ -221,7 +223,8 @@ internal static class IOInputs
     public static IEnumerable<string> GetPathsLongerThanMaxLongPath(
         string rootPath,
         bool useExtendedSyntax = false
-    ) {
+    )
+    {
         yield return GetLongPath(rootPath, MaxExtendedPath + 1, useExtendedSyntax);
         yield return GetLongPath(rootPath, MaxExtendedPath + 2, useExtendedSyntax);
     }

@@ -69,7 +69,8 @@ namespace Microsoft.EntityFrameworkCore.Infrastructure
             Func<ServiceCollectionMap, ServiceCollectionMap> adder,
             Func<IServiceProvider, object> factory,
             ServiceLifetime lifetime
-        ) {
+        )
+        {
             var serviceCollectionMap = adder(new ServiceCollectionMap(new ServiceCollection()));
 
             var descriptor = serviceCollectionMap.ServiceCollection.Single();
@@ -111,7 +112,8 @@ namespace Microsoft.EntityFrameworkCore.Infrastructure
         private void AddServiceConcreteTest(
             Func<ServiceCollectionMap, ServiceCollectionMap> adder,
             ServiceLifetime lifetime
-        ) {
+        )
+        {
             var serviceCollectionMap = adder(new ServiceCollectionMap(new ServiceCollection()));
 
             var descriptor = serviceCollectionMap.ServiceCollection.Single();
@@ -136,7 +138,8 @@ namespace Microsoft.EntityFrameworkCore.Infrastructure
         private void AddServiceInstanceTest(
             Func<ServiceCollectionMap, ServiceCollectionMap> adder,
             object instance
-        ) {
+        )
+        {
             var serviceCollectionMap = adder(new ServiceCollectionMap(new ServiceCollection()));
 
             var descriptor = serviceCollectionMap.ServiceCollection.Single();
@@ -237,7 +240,8 @@ namespace Microsoft.EntityFrameworkCore.Infrastructure
             Func<ServiceCollectionMap, ServiceCollectionMap> adder1,
             Func<ServiceCollectionMap, ServiceCollectionMap> adder2,
             ServiceLifetime lifetime
-        ) {
+        )
+        {
             var serviceCollection = new ServiceCollection();
             adder2(adder1(adder2(adder1(new ServiceCollectionMap(serviceCollection)))));
 
@@ -291,7 +295,8 @@ namespace Microsoft.EntityFrameworkCore.Infrastructure
             Func<IServiceProvider, object> factory1,
             Func<IServiceProvider, object> factory2,
             ServiceLifetime lifetime
-        ) {
+        )
+        {
             var serviceCollection = new ServiceCollection();
             adder2(adder1(adder2(adder1(new ServiceCollectionMap(serviceCollection)))));
 
@@ -332,7 +337,8 @@ namespace Microsoft.EntityFrameworkCore.Infrastructure
             Func<ServiceCollectionMap, ServiceCollectionMap> adder2,
             object instance1,
             object instance2
-        ) {
+        )
+        {
             var serviceCollection = new ServiceCollection();
             adder2(adder1(adder2(adder1(new ServiceCollectionMap(serviceCollection)))));
 

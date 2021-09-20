@@ -59,22 +59,24 @@ namespace Microsoft.CodeAnalysis.Options
             string name,
             T defaultValue,
             ImmutableArray<OptionStorageLocation> storageLocations
-        ) : this(
-            new OptionDefinition(
-                feature,
-                group,
-                name,
-                defaultValue,
-                typeof(T),
-                isPerLanguage: true
-            ),
-            storageLocations
-        ) { }
+        )
+            : this(
+                new OptionDefinition(
+                    feature,
+                    group,
+                    name,
+                    defaultValue,
+                    typeof(T),
+                    isPerLanguage: true
+                ),
+                storageLocations
+            ) { }
 
         internal PerLanguageOption(
             OptionDefinition optionDefinition,
             ImmutableArray<OptionStorageLocation> storageLocations
-        ) {
+        )
+        {
             _optionDefinition = optionDefinition;
             StorageLocations = storageLocations;
         }

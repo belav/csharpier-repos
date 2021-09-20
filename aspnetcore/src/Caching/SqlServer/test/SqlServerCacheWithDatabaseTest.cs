@@ -253,7 +253,8 @@ namespace Microsoft.Extensions.Caching.SqlServer
         public async Task SetWithSlidingExpiration_ReturnsNullValue_ForExpiredCacheItem(
             int slidingExpirationWindow,
             int accessItemAt
-        ) {
+        )
+        {
             // Arrange
             var testClock = new TestClock();
             var key = Guid.NewGuid().ToString();
@@ -283,7 +284,8 @@ namespace Microsoft.Extensions.Caching.SqlServer
         public async Task SetWithSlidingExpiration_ExtendsExpirationTime(
             int accessItemAt,
             int expected
-        ) {
+        )
+        {
             // Arrange
             var testClock = new TestClock();
             var slidingExpirationWindow = TimeSpan.FromSeconds(10);
@@ -315,7 +317,8 @@ namespace Microsoft.Extensions.Caching.SqlServer
         [EnvironmentVariableSkipCondition(EnabledEnvVarName, "1")]
         public async Task SetWithSlidingExpirationAndAbsoluteExpiration_ReturnsNullValue_ForExpiredCacheItem(
             int accessItemAt
-        ) {
+        )
+        {
             // Arrange
             var testClock = new TestClock();
             var utcNow = testClock.UtcNow;
@@ -784,7 +787,8 @@ namespace Microsoft.Extensions.Caching.SqlServer
             TimeSpan? slidingExpiration,
             DateTimeOffset? absoluteExpiration,
             DateTimeOffset expectedExpirationTime
-        ) {
+        )
+        {
             var value = await cache.GetAsync(key);
             Assert.NotNull(value);
             Assert.Equal(expectedValue, value);

@@ -92,7 +92,8 @@ namespace Microsoft.AspNetCore.Razor.Language.Extensions
         public void WriteTagHelperBody(
             CodeRenderingContext context,
             DefaultTagHelperBodyIntermediateNode node
-        ) {
+        )
+        {
             if (context.Parent as TagHelperIntermediateNode == null)
             {
                 var message = Resources.FormatIntermediateNodes_InvalidParentNode(
@@ -146,7 +147,8 @@ namespace Microsoft.AspNetCore.Razor.Language.Extensions
         public void WriteTagHelperCreate(
             CodeRenderingContext context,
             DefaultTagHelperCreateIntermediateNode node
-        ) {
+        )
+        {
             if (context.Parent as TagHelperIntermediateNode == null)
             {
                 var message = Resources.FormatIntermediateNodes_InvalidParentNode(
@@ -173,7 +175,8 @@ namespace Microsoft.AspNetCore.Razor.Language.Extensions
         public void WriteTagHelperExecute(
             CodeRenderingContext context,
             DefaultTagHelperExecuteIntermediateNode node
-        ) {
+        )
+        {
             if (context.Parent as TagHelperIntermediateNode == null)
             {
                 var message = Resources.FormatIntermediateNodes_InvalidParentNode(
@@ -225,7 +228,8 @@ namespace Microsoft.AspNetCore.Razor.Language.Extensions
         public void WriteTagHelperHtmlAttribute(
             CodeRenderingContext context,
             DefaultTagHelperHtmlAttributeIntermediateNode node
-        ) {
+        )
+        {
             if (context.Parent as TagHelperIntermediateNode == null)
             {
                 var message = Resources.FormatIntermediateNodes_InvalidParentNode(
@@ -321,7 +325,8 @@ namespace Microsoft.AspNetCore.Razor.Language.Extensions
         public void WriteTagHelperProperty(
             CodeRenderingContext context,
             DefaultTagHelperPropertyIntermediateNode node
-        ) {
+        )
+        {
             var tagHelperNode = context.Parent as TagHelperIntermediateNode;
             if (context.Parent == null)
             {
@@ -338,7 +343,8 @@ namespace Microsoft.AspNetCore.Razor.Language.Extensions
                 if (
                     node.IsIndexerNameMatch
                     && object.ReferenceEquals(FindFirstUseOfIndexer(tagHelperNode, node), node)
-                ) {
+                )
+                {
                     // Throw a reasonable Exception at runtime if the dictionary property is null.
                     context.CodeWriter.Write("if (")
                         .Write(node.FieldName)
@@ -392,7 +398,8 @@ namespace Microsoft.AspNetCore.Razor.Language.Extensions
                     if (
                         node.Children.Count == 1
                         && node.Children.First() is HtmlContentIntermediateNode htmlNode
-                    ) {
+                    )
+                    {
                         var content = GetContent(htmlNode);
                         context.CodeWriter.WriteStringLiteral(content);
                     }
@@ -435,7 +442,8 @@ namespace Microsoft.AspNetCore.Razor.Language.Extensions
                             && node.Children.Count == 1
                             && node.Children.First() is IntermediateToken token
                             && token.IsCSharp
-                        ) {
+                        )
+                        {
                             assignmentPrefixLength +=
                                 $"global::{node.BoundAttribute.TypeName}.".Length;
 
@@ -471,7 +479,8 @@ namespace Microsoft.AspNetCore.Razor.Language.Extensions
                             node.Children.Count == 0
                             && node.AttributeStructure == AttributeStructure.Minimized
                             && node.BoundAttribute.ExpectsBooleanValue(node.AttributeName)
-                        ) {
+                        )
+                        {
                             // If this is a minimized boolean attribute, set the value to true.
                             context.CodeWriter.Write("true");
                         }
@@ -494,7 +503,8 @@ namespace Microsoft.AspNetCore.Razor.Language.Extensions
                             && node.Children.Count == 1
                             && node.Children.First() is IntermediateToken token
                             && token.IsCSharp
-                        ) {
+                        )
+                        {
                             context.CodeWriter.Write("global::")
                                 .Write(node.BoundAttribute.TypeName)
                                 .Write(".");
@@ -504,7 +514,8 @@ namespace Microsoft.AspNetCore.Razor.Language.Extensions
                             node.Children.Count == 0
                             && node.AttributeStructure == AttributeStructure.Minimized
                             && node.BoundAttribute.ExpectsBooleanValue(node.AttributeName)
-                        ) {
+                        )
+                        {
                             // If this is a minimized boolean attribute, set the value to true.
                             context.CodeWriter.Write("true");
                         }
@@ -539,7 +550,8 @@ namespace Microsoft.AspNetCore.Razor.Language.Extensions
         public void WriteTagHelperRuntime(
             CodeRenderingContext context,
             DefaultTagHelperRuntimeIntermediateNode node
-        ) {
+        )
+        {
             context.CodeWriter.WriteLine("#line hidden");
             context.CodeWriter.WriteField(
                 FieldUnintializedModifiers,
@@ -609,7 +621,8 @@ namespace Microsoft.AspNetCore.Razor.Language.Extensions
             CodeRenderingContext context,
             DefaultTagHelperPropertyIntermediateNode property,
             SourceSpan? span
-        ) {
+        )
+        {
             for (var i = 0; i < property.Children.Count; i++)
             {
                 RenderTagHelperAttributeInline(context, property, property.Children[i], span);
@@ -622,7 +635,8 @@ namespace Microsoft.AspNetCore.Razor.Language.Extensions
             DefaultTagHelperPropertyIntermediateNode property,
             IntermediateNode node,
             SourceSpan? span
-        ) {
+        )
+        {
             if (node is CSharpExpressionIntermediateNode || node is HtmlContentIntermediateNode)
             {
                 for (var i = 0; i < node.Children.Count; i++)
@@ -664,7 +678,8 @@ namespace Microsoft.AspNetCore.Razor.Language.Extensions
         private static DefaultTagHelperPropertyIntermediateNode FindFirstUseOfIndexer(
             TagHelperIntermediateNode tagHelperNode,
             DefaultTagHelperPropertyIntermediateNode propertyNode
-        ) {
+        )
+        {
             Debug.Assert(tagHelperNode.Children.Contains(propertyNode));
             Debug.Assert(propertyNode.IsIndexerNameMatch);
 
@@ -676,7 +691,8 @@ namespace Microsoft.AspNetCore.Razor.Language.Extensions
                     && otherPropertyNode.TagHelper.Equals(propertyNode.TagHelper)
                     && otherPropertyNode.BoundAttribute.Equals(propertyNode.BoundAttribute)
                     && otherPropertyNode.IsIndexerNameMatch
-                ) {
+                )
+                {
                     return otherPropertyNode;
                 }
             }
@@ -688,7 +704,8 @@ namespace Microsoft.AspNetCore.Razor.Language.Extensions
         private static DefaultTagHelperPropertyIntermediateNode FindFirstUseOfAttribute(
             TagHelperIntermediateNode tagHelperNode,
             DefaultTagHelperPropertyIntermediateNode propertyNode
-        ) {
+        )
+        {
             for (var i = 0; i < tagHelperNode.Children.Count; i++)
             {
                 if (
@@ -699,7 +716,8 @@ namespace Microsoft.AspNetCore.Razor.Language.Extensions
                         propertyNode.AttributeName,
                         StringComparison.Ordinal
                     )
-                ) {
+                )
+                {
                     return otherPropertyNode;
                 }
             }

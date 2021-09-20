@@ -17,7 +17,8 @@ internal static partial class Interop
         {
             using (
                 SafeCFStringHandle cfString = AppleCryptoNative_SecCopyErrorMessageString(osStatus)
-            ) {
+            )
+            {
                 if (cfString.IsInvalid)
                 {
                     return null;

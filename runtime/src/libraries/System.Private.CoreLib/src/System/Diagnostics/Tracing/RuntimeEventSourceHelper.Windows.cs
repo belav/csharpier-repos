@@ -24,7 +24,8 @@ namespace System.Diagnostics.Tracing
                     out long procKernelTime,
                     out long procUserTime
                 )
-            ) {
+            )
+            {
                 return 0;
             }
 
@@ -34,7 +35,8 @@ namespace System.Diagnostics.Tracing
                     out long systemUserTime,
                     out long systemKernelTime
                 )
-            ) {
+            )
+            {
                 return 0;
             }
 

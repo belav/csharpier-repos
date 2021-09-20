@@ -33,7 +33,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.RenameTracking
         public RenameTrackingCodeRefactoringProvider(
             ITextUndoHistoryRegistry undoHistoryRegistry,
             [ImportMany] IEnumerable<IRefactorNotifyService> refactorNotifyServices
-        ) {
+        )
+        {
             _undoHistoryRegistry = undoHistoryRegistry;
             _refactorNotifyServices = refactorNotifyServices;
         }

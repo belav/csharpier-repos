@@ -36,10 +36,8 @@ namespace System.Net.Mail
                     : new SmtpFailedRecipientException[] { smtpException };
         }
 
-        protected SmtpFailedRecipientsException(
-            SerializationInfo info,
-            StreamingContext context
-        ) : base(info, context)
+        protected SmtpFailedRecipientsException(SerializationInfo info, StreamingContext context)
+            : base(info, context)
         {
             _innerExceptions = (SmtpFailedRecipientException[])info.GetValue(
                 "innerExceptions",
@@ -50,13 +48,15 @@ namespace System.Net.Mail
         public SmtpFailedRecipientsException(
             string? message,
             SmtpFailedRecipientException[] innerExceptions
-        ) : base(
-            message,
-            innerExceptions != null && innerExceptions.Length > 0
-              ? innerExceptions[0].FailedRecipient
-              : null,
-            innerExceptions != null && innerExceptions.Length > 0 ? innerExceptions[0] : null
-        ) {
+        )
+            : base(
+                message,
+                innerExceptions != null && innerExceptions.Length > 0
+                  ? innerExceptions[0].FailedRecipient
+                  : null,
+                innerExceptions != null && innerExceptions.Length > 0 ? innerExceptions[0] : null
+            )
+        {
             if (innerExceptions == null)
             {
                 throw new ArgumentNullException(nameof(innerExceptions));
@@ -71,13 +71,15 @@ namespace System.Net.Mail
         internal SmtpFailedRecipientsException(
             List<SmtpFailedRecipientException> innerExceptions,
             bool allFailed
-        ) : base(
-            allFailed ? SR.SmtpAllRecipientsFailed : SR.SmtpRecipientFailed,
-            innerExceptions != null && innerExceptions.Count > 0
-              ? innerExceptions[0].FailedRecipient
-              : null,
-            innerExceptions != null && innerExceptions.Count > 0 ? innerExceptions[0] : null
-        ) {
+        )
+            : base(
+                allFailed ? SR.SmtpAllRecipientsFailed : SR.SmtpRecipientFailed,
+                innerExceptions != null && innerExceptions.Count > 0
+                  ? innerExceptions[0].FailedRecipient
+                  : null,
+                innerExceptions != null && innerExceptions.Count > 0 ? innerExceptions[0] : null
+            )
+        {
             if (innerExceptions == null)
             {
                 throw new ArgumentNullException(nameof(innerExceptions));
@@ -94,14 +96,16 @@ namespace System.Net.Mail
         void ISerializable.GetObjectData(
             SerializationInfo serializationInfo,
             StreamingContext streamingContext
-        ) {
+        )
+        {
             GetObjectData(serializationInfo, streamingContext);
         }
 
         public override void GetObjectData(
             SerializationInfo serializationInfo,
             StreamingContext streamingContext
-        ) {
+        )
+        {
             base.GetObjectData(serializationInfo, streamingContext);
             serializationInfo.AddValue(
                 "innerExceptions",

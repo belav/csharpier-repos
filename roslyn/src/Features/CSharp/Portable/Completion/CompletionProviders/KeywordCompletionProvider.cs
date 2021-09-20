@@ -191,7 +191,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Completion.Providers
             RecommendedKeyword keyword,
             CSharpSyntaxContext context,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var rules = context.IsPossibleTupleContext ? s_tupleRules : CompletionItemRules.Default;
 
             return CommonCompletionItem.Create(

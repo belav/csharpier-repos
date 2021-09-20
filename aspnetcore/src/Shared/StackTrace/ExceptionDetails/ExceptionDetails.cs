@@ -22,7 +22,8 @@ namespace Microsoft.Extensions.StackTrace.Sources
         public ExceptionDetails(
             string errorMessage,
             IEnumerable<StackFrameSourceCodeInfo> stackFrames
-        ) {
+        )
+        {
             ErrorMessage = errorMessage;
             StackFrames = stackFrames;
         }

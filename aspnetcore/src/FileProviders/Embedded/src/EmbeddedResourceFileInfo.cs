@@ -29,7 +29,8 @@ namespace Microsoft.Extensions.FileProviders.Embedded
             string resourcePath,
             string name,
             DateTimeOffset lastModified
-        ) {
+        )
+        {
             _assembly = assembly;
             _resourcePath = resourcePath;
             Name = name;

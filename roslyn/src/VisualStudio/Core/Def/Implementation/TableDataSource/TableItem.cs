@@ -30,7 +30,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.TableDataSource
             Guid projectGuid,
             string[] projectNames,
             Guid[] projectGuids
-        ) {
+        )
+        {
             Contract.ThrowIfNull(workspace);
             Contract.ThrowIfNull(projectNames);
             Contract.ThrowIfNull(projectGuids);
@@ -47,7 +48,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.TableDataSource
             ProjectId projectId,
             out string projectName,
             out Guid projectGuid
-        ) {
+        )
+        {
             projectName =
                 (projectId == null)
                     ? null

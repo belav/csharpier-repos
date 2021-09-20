@@ -59,14 +59,16 @@ namespace System.Net.Connections.Tests
             int offset,
             int count,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             return ReadAsync(buffer.AsMemory(offset, count), cancellationToken).AsTask();
         }
 
         public override ValueTask<int> ReadAsync(
             Memory<byte> buffer,
             CancellationToken cancellationToken = default
-        ) {
+        )
+        {
             return OnReadAsync(buffer, cancellationToken);
         }
 
@@ -76,7 +78,8 @@ namespace System.Net.Connections.Tests
             int count,
             AsyncCallback callback,
             object state
-        ) {
+        )
+        {
             return TaskToApm.Begin(ReadAsync(buffer, offset, count), callback, state);
         }
 
@@ -105,14 +108,16 @@ namespace System.Net.Connections.Tests
             int offset,
             int count,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             return WriteAsync(buffer.AsMemory(offset, count), cancellationToken).AsTask();
         }
 
         public override ValueTask WriteAsync(
             ReadOnlyMemory<byte> buffer,
             CancellationToken cancellationToken = default
-        ) {
+        )
+        {
             return OnWriteAsync(buffer, cancellationToken);
         }
 
@@ -122,7 +127,8 @@ namespace System.Net.Connections.Tests
             int count,
             AsyncCallback callback,
             object state
-        ) {
+        )
+        {
             return TaskToApm.Begin(WriteAsync(buffer, offset, count), callback, state);
         }
 

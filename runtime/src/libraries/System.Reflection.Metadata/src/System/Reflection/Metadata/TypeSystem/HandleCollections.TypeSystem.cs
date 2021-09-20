@@ -360,7 +360,8 @@ namespace System.Reflection.Metadata
         internal DeclarativeSecurityAttributeHandleCollection(
             MetadataReader reader,
             EntityHandle handle
-        ) {
+        )
+        {
             Debug.Assert(reader != null);
             Debug.Assert(!handle.IsNil);
 
@@ -467,7 +468,8 @@ namespace System.Reflection.Metadata
         internal MethodDefinitionHandleCollection(
             MetadataReader reader,
             TypeDefinitionHandle containingType
-        ) {
+        )
+        {
             Debug.Assert(reader != null);
             Debug.Assert(!containingType.IsNil);
 
@@ -589,7 +591,8 @@ namespace System.Reflection.Metadata
         internal FieldDefinitionHandleCollection(
             MetadataReader reader,
             TypeDefinitionHandle containingType
-        ) {
+        )
+        {
             Debug.Assert(reader != null);
             Debug.Assert(!containingType.IsNil);
 
@@ -709,7 +712,8 @@ namespace System.Reflection.Metadata
         internal PropertyDefinitionHandleCollection(
             MetadataReader reader,
             TypeDefinitionHandle containingType
-        ) {
+        )
+        {
             Debug.Assert(reader != null);
             Debug.Assert(!containingType.IsNil);
 
@@ -831,7 +835,8 @@ namespace System.Reflection.Metadata
         internal EventDefinitionHandleCollection(
             MetadataReader reader,
             TypeDefinitionHandle containingType
-        ) {
+        )
+        {
             Debug.Assert(reader != null);
             Debug.Assert(!containingType.IsNil);
 
@@ -941,7 +946,8 @@ namespace System.Reflection.Metadata
         internal MethodImplementationHandleCollection(
             MetadataReader reader,
             TypeDefinitionHandle containingType
-        ) {
+        )
+        {
             Debug.Assert(reader != null);
 
             if (containingType.IsNil)
@@ -1049,7 +1055,8 @@ namespace System.Reflection.Metadata
         internal ParameterHandleCollection(
             MetadataReader reader,
             MethodDefinitionHandle containingMethod
-        ) {
+        )
+        {
             Debug.Assert(reader != null);
             Debug.Assert(!containingMethod.IsNil);
             _reader = reader;
@@ -1161,7 +1168,8 @@ namespace System.Reflection.Metadata
         internal InterfaceImplementationHandleCollection(
             MetadataReader reader,
             TypeDefinitionHandle implementingType
-        ) {
+        )
+        {
             Debug.Assert(reader != null);
             Debug.Assert(!implementingType.IsNil);
             _reader = reader;
@@ -1639,7 +1647,8 @@ namespace System.Reflection.Metadata
             int getterRowId,
             int setterRowId,
             ImmutableArray<MethodDefinitionHandle> others
-        ) {
+        )
+        {
             _getterRowId = getterRowId;
             _setterRowId = setterRowId;
             _others = others;
@@ -1677,7 +1686,8 @@ namespace System.Reflection.Metadata
             int removerRowId,
             int raiserRowId,
             ImmutableArray<MethodDefinitionHandle> others
-        ) {
+        )
+        {
             _adderRowId = adderRowId;
             _removerRowId = removerRowId;
             _raiserRowId = raiserRowId;

@@ -54,13 +54,15 @@ namespace Microsoft.CodeAnalysis.CSharp.ExtractMethod
                 private static string GetMethodNameBasedOnExpression(
                     string methodName,
                     SyntaxNode expression
-                ) {
+                )
+                {
                     if (
                         expression.Parent != null
                         && expression.Parent.Kind() == SyntaxKind.EqualsValueClause
                         && expression.Parent.Parent != null
                         && expression.Parent.Parent.Kind() == SyntaxKind.VariableDeclarator
-                    ) {
+                    )
+                    {
                         var name =
                             (
                                 (VariableDeclaratorSyntax)expression.Parent.Parent
@@ -126,7 +128,8 @@ namespace Microsoft.CodeAnalysis.CSharp.ExtractMethod
                     if (
                         returnType.TypeKind == TypeKind.Array
                         && containingScope is InitializerExpressionSyntax
-                    ) {
+                    )
+                    {
                         var typeSyntax = returnType.GenerateTypeSyntax();
 
                         expression = SyntaxFactory.ArrayCreationExpression(
@@ -159,7 +162,8 @@ namespace Microsoft.CodeAnalysis.CSharp.ExtractMethod
 
                 private ExpressionSyntax WrapInCheckedExpressionIfNeeded(
                     ExpressionSyntax expression
-                ) {
+                )
+                {
                     var kind = CSharpSelectionResult.UnderCheckedExpressionContext();
                     if (kind == SyntaxKind.None)
                     {
@@ -171,7 +175,8 @@ namespace Microsoft.CodeAnalysis.CSharp.ExtractMethod
 
                 protected override SyntaxNode GetOutermostCallSiteContainerToProcess(
                     CancellationToken cancellationToken
-                ) {
+                )
+                {
                     var callSiteContainer = GetCallSiteContainerFromOutermostMoveInVariable(
                         cancellationToken
                     );
@@ -232,7 +237,8 @@ namespace Microsoft.CodeAnalysis.CSharp.ExtractMethod
 
                 protected override async Task<SyntaxNode> GetStatementOrInitializerContainingInvocationToExtractedMethodAsync(
                     CancellationToken cancellationToken
-                ) {
+                )
+                {
                     var enclosingStatement = GetFirstStatementOrInitializerSelectedAtCallSite();
 
                     var callSignature = CreateCallSignature()

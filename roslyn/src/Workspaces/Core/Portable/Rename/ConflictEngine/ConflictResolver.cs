@@ -49,7 +49,8 @@ namespace Microsoft.CodeAnalysis.Rename.ConflictEngine
             string replacementText,
             ImmutableHashSet<ISymbol>? nonConflictSymbols,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             cancellationToken.ThrowIfCancellationRequested();
 
             using (Logger.LogBlock(FunctionId.Renamer_FindRenameLocationsAsync, cancellationToken))
@@ -114,7 +115,8 @@ namespace Microsoft.CodeAnalysis.Rename.ConflictEngine
             string replacementText,
             ImmutableHashSet<ISymbol>? nonConflictSymbols,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var resolution = await ResolveMutableConflictsAsync(
                     renameLocationSet,
                     replacementText,
@@ -130,7 +132,8 @@ namespace Microsoft.CodeAnalysis.Rename.ConflictEngine
             string replacementText,
             ImmutableHashSet<ISymbol>? nonConflictSymbols,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             cancellationToken.ThrowIfCancellationRequested();
 
             // when someone e.g. renames a symbol from metadata through the API (IDE blocks this), we need to return
@@ -168,7 +171,8 @@ namespace Microsoft.CodeAnalysis.Rename.ConflictEngine
             SyntaxNode invocationExpression,
             SemanticModel semanticModel,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var symbolInfo = semanticModel.GetSymbolInfo(invocationExpression, cancellationToken);
             return symbolInfo.Symbol == null ? default : ImmutableArray.Create(symbolInfo.Symbol);
         }
@@ -176,7 +180,8 @@ namespace Microsoft.CodeAnalysis.Rename.ConflictEngine
         private static SyntaxNode? GetExpansionTargetForLocationPerLanguage(
             SyntaxToken tokenOrNode,
             Document document
-        ) {
+        )
+        {
             var renameRewriterService =
                 document.GetRequiredLanguageService<IRenameRewriterLanguageService>();
             var complexifiedTarget = renameRewriterService.GetExpansionTargetForLocation(
@@ -189,7 +194,8 @@ namespace Microsoft.CodeAnalysis.Rename.ConflictEngine
             SyntaxToken tokenOrNode,
             Document document,
             ImmutableArray<ISymbol> newReferencedSymbols
-        ) {
+        )
+        {
             var renameRewriterService =
                 document.GetRequiredLanguageService<IRenameRewriterLanguageService>();
             var isConflict = renameRewriterService.LocalVariableConflict(
@@ -203,11 +209,13 @@ namespace Microsoft.CodeAnalysis.Rename.ConflictEngine
             Solution solution,
             string replacementText,
             IEnumerable<ProjectId> projectIds
-        ) {
+        )
+        {
             foreach (
                 var language in projectIds.Select(p => solution.GetRequiredProject(p).Language)
                     .Distinct()
-            ) {
+            )
+            {
                 var languageServices = solution.Workspace.Services.GetLanguageServices(language);
                 var renameRewriterLanguageService =
                     languageServices.GetRequiredService<IRenameRewriterLanguageService>();
@@ -218,7 +226,8 @@ namespace Microsoft.CodeAnalysis.Rename.ConflictEngine
                         replacementText,
                         syntaxFactsLanguageService
                     )
-                ) {
+                )
+                {
                     return false;
                 }
             }
@@ -229,7 +238,8 @@ namespace Microsoft.CodeAnalysis.Rename.ConflictEngine
         private static bool IsRenameValid(
             MutableConflictResolution conflictResolution,
             ISymbol renamedSymbol
-        ) {
+        )
+        {
             // if we rename an identifier and it now binds to a symbol from metadata this should be treated as
             // an invalid rename.
             return conflictResolution.ReplacementTextValid
@@ -246,7 +256,8 @@ namespace Microsoft.CodeAnalysis.Rename.ConflictEngine
             int newDeclarationLocationStartingPosition,
             MutableConflictResolution conflictResolution,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             {
                 var renameRewriterService =
                     conflictResolution.CurrentSolution.Workspace.Services.GetLanguageServices(
@@ -285,7 +296,8 @@ namespace Microsoft.CodeAnalysis.Rename.ConflictEngine
                 var implicitReferenceLocationsPerLanguage in implicitReferenceLocations.GroupBy(
                     loc => loc.Document.Project.Language
                 )
-            ) {
+            )
+            {
                 // the location of the implicit reference defines the language rules to check.
                 // E.g. foreach in C# using a MoveNext in VB that is renamed to MOVENEXT (within VB)
                 var renameRewriterService = implicitReferenceLocationsPerLanguage.First()
@@ -328,7 +340,8 @@ namespace Microsoft.CodeAnalysis.Rename.ConflictEngine
             MutableConflictResolution conflictResolution,
             IDictionary<Location, Location> reverseMappedLocations,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             try
             {
                 var projectOpt = conflictResolution.CurrentSolution.GetProject(
@@ -388,7 +401,8 @@ namespace Microsoft.CodeAnalysis.Rename.ConflictEngine
                 if (
                     renamedSymbol.IsKind(SymbolKind.Namespace)
                     && renamedSymbol.ContainingSymbol.IsKind(SymbolKind.Namespace)
-                ) {
+                )
+                {
                     var otherThingsNamedTheSame = (
                         (INamespaceSymbol)renamedSymbol.ContainingSymbol
                     ).GetMembers(renamedSymbol.Name)
@@ -413,7 +427,8 @@ namespace Microsoft.CodeAnalysis.Rename.ConflictEngine
                 if (
                     renamedSymbol.IsKind(SymbolKind.NamedType)
                     && renamedSymbol.ContainingSymbol is INamespaceOrTypeSymbol
-                ) {
+                )
+                {
                     var otherThingsNamedTheSame = (
                         (INamespaceOrTypeSymbol)renamedSymbol.ContainingSymbol
                     ).GetMembers(renamedSymbol.Name)
@@ -495,7 +510,8 @@ namespace Microsoft.CodeAnalysis.Rename.ConflictEngine
             IEnumerable<ISymbol> conflictingSymbols,
             MutableConflictResolution conflictResolution,
             IDictionary<Location, Location> reverseMappedLocations
-        ) {
+        )
+        {
             foreach (var newSymbol in conflictingSymbols)
             {
                 foreach (var newLocation in newSymbol.Locations)
@@ -524,7 +540,8 @@ namespace Microsoft.CodeAnalysis.Rename.ConflictEngine
             Solution solution,
             IEnumerable<ISymbol> symbols,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var renameDeclarationLocations = new RenameDeclarationLocationReference[
                 symbols.Count()
             ];
@@ -602,7 +619,8 @@ namespace Microsoft.CodeAnalysis.Rename.ConflictEngine
             Solution solution,
             ISymbol symbol,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var locations = symbol.Locations;
 
             var originalsourcesymbol = await SymbolFinder.FindSourceDefinitionAsync(
@@ -629,7 +647,8 @@ namespace Microsoft.CodeAnalysis.Rename.ConflictEngine
             string newMetadataName,
             string originalText,
             string replacementText
-        ) {
+        )
+        {
             if (string.Equals(oldMetadataName, newMetadataName, StringComparison.Ordinal))
             {
                 return true;

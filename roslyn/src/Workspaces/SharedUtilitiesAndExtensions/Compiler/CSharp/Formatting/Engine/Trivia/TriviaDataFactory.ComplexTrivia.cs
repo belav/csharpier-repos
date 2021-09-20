@@ -59,7 +59,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Formatting
                 int lines,
                 int spaces,
                 CancellationToken cancellationToken
-            ) {
+            )
+            {
                 return new FormattedComplexTrivia(
                     context,
                     formattingRules,
@@ -129,7 +130,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Formatting
                 Action<int, TokenStream, TriviaData> formattingResultApplier,
                 CancellationToken cancellationToken,
                 int tokenPairIndex = TokenPairIndexNotNeeded
-            ) {
+            )
+            {
                 if (!ShouldFormat(context))
                 {
                     return;

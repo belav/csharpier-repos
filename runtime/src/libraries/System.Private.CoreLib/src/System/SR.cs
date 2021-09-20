@@ -57,7 +57,8 @@ namespace System
                     _currentlyLoading != null
                     && _currentlyLoading.Count > 0
                     && _currentlyLoading.LastIndexOf(key) != -1
-                ) {
+                )
+                {
                     // We can start infinitely recursing for one resource lookup,
                     // then during our failure reporting, start infinitely recursing again.
                     // avoid that.

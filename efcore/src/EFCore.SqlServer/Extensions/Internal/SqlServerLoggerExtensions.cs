@@ -25,7 +25,8 @@ namespace Microsoft.EntityFrameworkCore.SqlServer.Extensions.Internal
         public static void DecimalTypeKeyWarning(
             this IDiagnosticsLogger<DbLoggerCategory.Model.Validation> diagnostics,
             IProperty property
-        ) {
+        )
+        {
             var definition = SqlServerResources.LogDecimalTypeKey(diagnostics);
 
             if (diagnostics.ShouldLog(definition))
@@ -43,7 +44,8 @@ namespace Microsoft.EntityFrameworkCore.SqlServer.Extensions.Internal
                     out var diagnosticSourceEnabled,
                     out var simpleLogEnabled
                 )
-            ) {
+            )
+            {
                 var eventData = new PropertyEventData(definition, DecimalTypeKeyWarning, property);
 
                 diagnostics.DispatchEventData(
@@ -58,7 +60,8 @@ namespace Microsoft.EntityFrameworkCore.SqlServer.Extensions.Internal
         private static string DecimalTypeKeyWarning(
             EventDefinitionBase definition,
             EventData payload
-        ) {
+        )
+        {
             var d = (EventDefinition<string, string>)definition;
             var p = (PropertyEventData)payload;
             return d.GenerateMessage(p.Property.Name, p.Property.DeclaringEntityType.DisplayName());
@@ -73,7 +76,8 @@ namespace Microsoft.EntityFrameworkCore.SqlServer.Extensions.Internal
         public static void DecimalTypeDefaultWarning(
             this IDiagnosticsLogger<DbLoggerCategory.Model.Validation> diagnostics,
             IProperty property
-        ) {
+        )
+        {
             var definition = SqlServerResources.LogDefaultDecimalTypeColumn(diagnostics);
 
             if (diagnostics.ShouldLog(definition))
@@ -91,7 +95,8 @@ namespace Microsoft.EntityFrameworkCore.SqlServer.Extensions.Internal
                     out var diagnosticSourceEnabled,
                     out var simpleLogEnabled
                 )
-            ) {
+            )
+            {
                 var eventData = new PropertyEventData(
                     definition,
                     DecimalTypeDefaultWarning,
@@ -110,7 +115,8 @@ namespace Microsoft.EntityFrameworkCore.SqlServer.Extensions.Internal
         private static string DecimalTypeDefaultWarning(
             EventDefinitionBase definition,
             EventData payload
-        ) {
+        )
+        {
             var d = (EventDefinition<string, string>)definition;
             var p = (PropertyEventData)payload;
             return d.GenerateMessage(p.Property.Name, p.Property.DeclaringEntityType.DisplayName());
@@ -125,7 +131,8 @@ namespace Microsoft.EntityFrameworkCore.SqlServer.Extensions.Internal
         public static void ByteIdentityColumnWarning(
             this IDiagnosticsLogger<DbLoggerCategory.Model.Validation> diagnostics,
             IProperty property
-        ) {
+        )
+        {
             var definition = SqlServerResources.LogByteIdentityColumn(diagnostics);
 
             if (diagnostics.ShouldLog(definition))
@@ -143,7 +150,8 @@ namespace Microsoft.EntityFrameworkCore.SqlServer.Extensions.Internal
                     out var diagnosticSourceEnabled,
                     out var simpleLogEnabled
                 )
-            ) {
+            )
+            {
                 var eventData = new PropertyEventData(
                     definition,
                     ByteIdentityColumnWarning,
@@ -162,7 +170,8 @@ namespace Microsoft.EntityFrameworkCore.SqlServer.Extensions.Internal
         private static string ByteIdentityColumnWarning(
             EventDefinitionBase definition,
             EventData payload
-        ) {
+        )
+        {
             var d = (EventDefinition<string, string>)definition;
             var p = (PropertyEventData)payload;
             return d.GenerateMessage(p.Property.Name, p.Property.DeclaringEntityType.DisplayName());
@@ -179,7 +188,8 @@ namespace Microsoft.EntityFrameworkCore.SqlServer.Extensions.Internal
             SqlServerValueGenerationStrategy sqlServerValueGenerationStrategy,
             string otherValueGenerationStrategy,
             IReadOnlyProperty property
-        ) {
+        )
+        {
             var definition = SqlServerResources.LogConflictingValueGenerationStrategies(
                 diagnostics
             );
@@ -201,7 +211,8 @@ namespace Microsoft.EntityFrameworkCore.SqlServer.Extensions.Internal
                     out var diagnosticSourceEnabled,
                     out var simpleLogEnabled
                 )
-            ) {
+            )
+            {
                 var eventData = new ConflictingValueGenerationStrategiesEventData(
                     definition,
                     ConflictingValueGenerationStrategiesWarning,
@@ -222,7 +233,8 @@ namespace Microsoft.EntityFrameworkCore.SqlServer.Extensions.Internal
         private static string ConflictingValueGenerationStrategiesWarning(
             EventDefinitionBase definition,
             EventData payload
-        ) {
+        )
+        {
             var d = (EventDefinition<string, string, string, string>)definition;
             var p = (ConflictingValueGenerationStrategiesEventData)payload;
             return d.GenerateMessage(
@@ -253,7 +265,8 @@ namespace Microsoft.EntityFrameworkCore.SqlServer.Extensions.Internal
             string? defaultValue,
             string? computedValue,
             bool? stored
-        ) {
+        )
+        {
             var definition = SqlServerResources.LogFoundColumn(diagnostics);
 
             if (diagnostics.ShouldLog(definition))
@@ -295,7 +308,8 @@ namespace Microsoft.EntityFrameworkCore.SqlServer.Extensions.Internal
             string tableName,
             string principalTableName,
             string onDeleteAction
-        ) {
+        )
+        {
             var definition = SqlServerResources.LogFoundForeignKey(diagnostics);
 
             if (diagnostics.ShouldLog(definition))
@@ -320,7 +334,8 @@ namespace Microsoft.EntityFrameworkCore.SqlServer.Extensions.Internal
         public static void DefaultSchemaFound(
             this IDiagnosticsLogger<DbLoggerCategory.Scaffolding> diagnostics,
             string schemaName
-        ) {
+        )
+        {
             var definition = SqlServerResources.LogFoundDefaultSchema(diagnostics);
 
             if (diagnostics.ShouldLog(definition))
@@ -340,7 +355,8 @@ namespace Microsoft.EntityFrameworkCore.SqlServer.Extensions.Internal
             this IDiagnosticsLogger<DbLoggerCategory.Scaffolding> diagnostics,
             string typeAliasName,
             string systemTypeName
-        ) {
+        )
+        {
             var definition = SqlServerResources.LogFoundTypeAlias(diagnostics);
 
             if (diagnostics.ShouldLog(definition))
@@ -360,7 +376,8 @@ namespace Microsoft.EntityFrameworkCore.SqlServer.Extensions.Internal
             this IDiagnosticsLogger<DbLoggerCategory.Scaffolding> diagnostics,
             string primaryKeyName,
             string tableName
-        ) {
+        )
+        {
             var definition = SqlServerResources.LogFoundPrimaryKey(diagnostics);
 
             if (diagnostics.ShouldLog(definition))
@@ -380,7 +397,8 @@ namespace Microsoft.EntityFrameworkCore.SqlServer.Extensions.Internal
             this IDiagnosticsLogger<DbLoggerCategory.Scaffolding> diagnostics,
             string uniqueConstraintName,
             string tableName
-        ) {
+        )
+        {
             var definition = SqlServerResources.LogFoundUniqueConstraint(diagnostics);
 
             if (diagnostics.ShouldLog(definition))
@@ -401,7 +419,8 @@ namespace Microsoft.EntityFrameworkCore.SqlServer.Extensions.Internal
             string indexName,
             string tableName,
             bool unique
-        ) {
+        )
+        {
             var definition = SqlServerResources.LogFoundIndex(diagnostics);
 
             if (diagnostics.ShouldLog(definition))
@@ -422,7 +441,8 @@ namespace Microsoft.EntityFrameworkCore.SqlServer.Extensions.Internal
             string? foreignKeyName,
             string? tableName,
             string? principalTableName
-        ) {
+        )
+        {
             var definition = SqlServerResources.LogPrincipalTableNotInSelectionSet(diagnostics);
 
             if (diagnostics.ShouldLog(definition))
@@ -444,7 +464,8 @@ namespace Microsoft.EntityFrameworkCore.SqlServer.Extensions.Internal
             string tableName,
             string principalColumnName,
             string principalTableName
-        ) {
+        )
+        {
             var definition = SqlServerResources.LogPrincipalColumnNotFound(diagnostics);
 
             if (diagnostics.ShouldLog(definition))
@@ -469,7 +490,8 @@ namespace Microsoft.EntityFrameworkCore.SqlServer.Extensions.Internal
         public static void MissingSchemaWarning(
             this IDiagnosticsLogger<DbLoggerCategory.Scaffolding> diagnostics,
             string? schemaName
-        ) {
+        )
+        {
             var definition = SqlServerResources.LogMissingSchema(diagnostics);
 
             if (diagnostics.ShouldLog(definition))
@@ -488,7 +510,8 @@ namespace Microsoft.EntityFrameworkCore.SqlServer.Extensions.Internal
         public static void MissingTableWarning(
             this IDiagnosticsLogger<DbLoggerCategory.Scaffolding> diagnostics,
             string? tableName
-        ) {
+        )
+        {
             var definition = SqlServerResources.LogMissingTable(diagnostics);
 
             if (diagnostics.ShouldLog(definition))
@@ -513,7 +536,8 @@ namespace Microsoft.EntityFrameworkCore.SqlServer.Extensions.Internal
             long start,
             long min,
             long max
-        ) {
+        )
+        {
             // No DiagnosticsSource events because these are purely design-time messages
             var definition = SqlServerResources.LogFoundSequence(diagnostics);
 
@@ -547,7 +571,8 @@ namespace Microsoft.EntityFrameworkCore.SqlServer.Extensions.Internal
         public static void TableFound(
             this IDiagnosticsLogger<DbLoggerCategory.Scaffolding> diagnostics,
             string tableName
-        ) {
+        )
+        {
             var definition = SqlServerResources.LogFoundTable(diagnostics);
 
             if (diagnostics.ShouldLog(definition))
@@ -567,7 +592,8 @@ namespace Microsoft.EntityFrameworkCore.SqlServer.Extensions.Internal
             this IDiagnosticsLogger<DbLoggerCategory.Scaffolding> diagnostics,
             string foreignKeyName,
             string tableName
-        ) {
+        )
+        {
             var definition = SqlServerResources.LogReflexiveConstraintIgnored(diagnostics);
 
             if (diagnostics.ShouldLog(definition))
@@ -583,7 +609,8 @@ namespace Microsoft.EntityFrameworkCore.SqlServer.Extensions.Internal
         /// <param name="diagnostics"> The diagnostics logger to use. </param>
         public static void SavepointsDisabledBecauseOfMARS(
             this IDiagnosticsLogger<DbLoggerCategory.Database.Transaction> diagnostics
-        ) {
+        )
+        {
             var definition = SqlServerResources.LogSavepointsDisabledBecauseOfMARS(diagnostics);
 
             if (diagnostics.ShouldLog(definition))
@@ -597,7 +624,8 @@ namespace Microsoft.EntityFrameworkCore.SqlServer.Extensions.Internal
                     out var diagnosticSourceEnabled,
                     out var simpleLogEnabled
                 )
-            ) {
+            )
+            {
                 var eventData = new EventData(
                     definition,
                     (d, p) => ((EventDefinition)d).GenerateMessage()

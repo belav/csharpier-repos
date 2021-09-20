@@ -20,7 +20,8 @@ namespace System.Composition.Hosting.Providers.ExportFactory
         public override IEnumerable<ExportDescriptorPromise> GetExportDescriptors(
             CompositionContract contract,
             DependencyAccessor definitionAccessor
-        ) {
+        )
+        {
             if (
                 !contract.ContractType.IsConstructedGenericType
                 || contract.ContractType.GetGenericTypeDefinition() != typeof(ExportFactory<, >)
@@ -38,7 +39,8 @@ namespace System.Composition.Hosting.Providers.ExportFactory
         private static ExportDescriptorPromise[] GetExportFactoryDescriptors<TProduct, TMetadata>(
             CompositionContract exportFactoryContract,
             DependencyAccessor definitionAccessor
-        ) {
+        )
+        {
             var productContract = exportFactoryContract.ChangeType(typeof(TProduct));
             var boundaries = Array.Empty<string>();
 
@@ -50,7 +52,8 @@ namespace System.Composition.Hosting.Providers.ExportFactory
                     out specifiedBoundaries,
                     out unwrapped
                 )
-            ) {
+            )
+            {
                 productContract = unwrapped.ChangeType(typeof(TProduct));
                 boundaries = (specifiedBoundaries ?? Array.Empty<string>()).ToArray();
             }

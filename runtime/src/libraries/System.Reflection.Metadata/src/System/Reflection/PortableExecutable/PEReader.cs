@@ -174,7 +174,8 @@ namespace System.Reflection.PortableExecutable
                         options
                         & (PEStreamOptions.PrefetchMetadata | PEStreamOptions.PrefetchEntireImage)
                     ) == 0
-                ) {
+                )
+                {
                     _peImage = new StreamMemoryBlockProvider(
                         peStream,
                         start,
@@ -355,7 +356,8 @@ namespace System.Reflection.PortableExecutable
             long imageStartPosition,
             int imageSize,
             bool isLoadedImage
-        ) {
+        )
+        {
             Debug.Assert(imageStartPosition >= 0 && imageStartPosition <= stream.Length);
             stream.Seek(imageStartPosition, SeekOrigin.Begin);
             return new PEHeaders(stream, imageSize, isLoadedImage);
@@ -452,7 +454,8 @@ namespace System.Reflection.PortableExecutable
 
             if (
                 Interlocked.CompareExchange(ref _lazyPESectionBlocks[index], newBlock, null) != null
-            ) {
+            )
+            {
                 // another thread created the block already, we need to dispose ours:
                 newBlock.Dispose();
             }
@@ -590,14 +593,16 @@ namespace System.Reflection.PortableExecutable
             using (
                 AbstractMemoryBlock block = GetPEImage()
                     .GetMemoryBlock(position, debugDirectory.Size)
-            ) {
+            )
+            {
                 return ReadDebugDirectoryEntries(block.GetReader());
             }
         }
 
         internal static ImmutableArray<DebugDirectoryEntry> ReadDebugDirectoryEntries(
             BlobReader reader
-        ) {
+        )
+        {
             int entryCount = reader.Length / DebugDirectoryEntry.Size;
             var builder = ImmutableArray.CreateBuilder<DebugDirectoryEntry>(entryCount);
             for (int i = 0; i < entryCount; i++)
@@ -670,7 +675,8 @@ namespace System.Reflection.PortableExecutable
         // internal for testing
         internal static CodeViewDebugDirectoryData DecodeCodeViewDebugDirectoryData(
             AbstractMemoryBlock block
-        ) {
+        )
+        {
             var reader = block.GetReader();
 
             if (
@@ -678,7 +684,8 @@ namespace System.Reflection.PortableExecutable
                 || reader.ReadByte() != (byte)'S'
                 || reader.ReadByte() != (byte)'D'
                 || reader.ReadByte() != (byte)'S'
-            ) {
+            )
+            {
                 throw new BadImageFormatException(SR.UnexpectedCodeViewDataSignature);
             }
 
@@ -698,7 +705,8 @@ namespace System.Reflection.PortableExecutable
         /// <exception cref="InvalidOperationException">PE image not available.</exception>
         public PdbChecksumDebugDirectoryData ReadPdbChecksumDebugDirectoryData(
             DebugDirectoryEntry entry
-        ) {
+        )
+        {
             if (entry.Type != DebugDirectoryEntryType.PdbChecksum)
             {
                 Throw.InvalidArgument(
@@ -719,7 +727,8 @@ namespace System.Reflection.PortableExecutable
         // internal for testing
         internal static PdbChecksumDebugDirectoryData DecodePdbChecksumDebugDirectoryData(
             AbstractMemoryBlock block
-        ) {
+        )
+        {
             var reader = block.GetReader();
 
             var algorithmName = reader.ReadUtf8NullTerminated();
@@ -776,7 +785,8 @@ namespace System.Reflection.PortableExecutable
             Func<string, Stream?> pdbFileStreamProvider,
             out MetadataReaderProvider? pdbReaderProvider,
             out string? pdbPath
-        ) {
+        )
+        {
             if (peImagePath == null)
             {
                 Throw.ArgumentNull(nameof(peImagePath));
@@ -816,7 +826,8 @@ namespace System.Reflection.PortableExecutable
                     out pdbPath,
                     ref errorToReport
                 )
-            ) {
+            )
+            {
                 return true;
             }
 
@@ -858,7 +869,8 @@ namespace System.Reflection.PortableExecutable
             out MetadataReaderProvider? provider,
             out string? pdbPath,
             ref Exception? errorToReport
-        ) {
+        )
+        {
             pdbPath = null;
             provider = null;
 
@@ -894,7 +906,8 @@ namespace System.Reflection.PortableExecutable
                     out provider,
                     ref errorToReport
                 )
-            ) {
+            )
+            {
                 pdbPath = collocatedPdbPath;
                 return true;
             }
@@ -908,7 +921,8 @@ namespace System.Reflection.PortableExecutable
             Func<string, Stream?> pdbFileStreamProvider,
             out MetadataReaderProvider? provider,
             ref Exception? errorToReport
-        ) {
+        )
+        {
             provider = null;
             MetadataReaderProvider? candidate = null;
 

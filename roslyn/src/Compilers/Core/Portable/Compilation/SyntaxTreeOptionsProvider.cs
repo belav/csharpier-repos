@@ -70,7 +70,8 @@ namespace Microsoft.CodeAnalysis
             SyntaxTree?[] trees,
             ImmutableArray<AnalyzerConfigOptionsResult> results,
             AnalyzerConfigOptionsResult globalResults
-        ) {
+        )
+        {
             var builder = ImmutableDictionary.CreateBuilder<SyntaxTree, Options>();
             for (int i = 0; i < trees.Length; i++)
             {
@@ -96,7 +97,8 @@ namespace Microsoft.CodeAnalysis
             string diagnosticId,
             CancellationToken _,
             out ReportDiagnostic severity
-        ) {
+        )
+        {
             if (_options.TryGetValue(tree, out var value))
             {
                 return value.DiagnosticOptions.TryGetValue(diagnosticId, out severity);
@@ -109,7 +111,8 @@ namespace Microsoft.CodeAnalysis
             string diagnosticId,
             CancellationToken _,
             out ReportDiagnostic severity
-        ) {
+        )
+        {
             if (_globalOptions.TreeOptions is object)
             {
                 return _globalOptions.TreeOptions.TryGetValue(diagnosticId, out severity);

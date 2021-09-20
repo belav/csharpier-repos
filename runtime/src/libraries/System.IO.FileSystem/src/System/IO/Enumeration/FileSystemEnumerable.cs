@@ -33,7 +33,8 @@ namespace System.IO.Enumeration
             FindTransform transform,
             EnumerationOptions? options,
             bool isNormalized
-        ) {
+        )
+        {
             _directory = directory ?? throw new ArgumentNullException(nameof(directory));
             _transform = transform ?? throw new ArgumentNullException(nameof(transform));
             _options = options ?? EnumerationOptions.Default;
@@ -68,10 +69,8 @@ namespace System.IO.Enumeration
         {
             private readonly FileSystemEnumerable<TResult> _enumerable;
 
-            public DelegateEnumerator(
-                FileSystemEnumerable<TResult> enumerable,
-                bool isNormalized
-            ) : base(enumerable._directory, isNormalized, enumerable._options)
+            public DelegateEnumerator(FileSystemEnumerable<TResult> enumerable, bool isNormalized)
+                : base(enumerable._directory, isNormalized, enumerable._options)
             {
                 _enumerable = enumerable;
             }

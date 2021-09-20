@@ -138,7 +138,8 @@ namespace System.Net.Http.Functional.Tests
             string responseHeaders,
             int? maxResponseHeadersLength,
             bool shouldSucceed
-        ) {
+        )
+        {
             await LoopbackServer.CreateServerAsync(
                 async (server, url) =>
                 {

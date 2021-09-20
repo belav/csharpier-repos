@@ -56,7 +56,8 @@ namespace BoundTreeGenerator
                     infilename,
                     new XmlReaderSettings { DtdProcessing = DtdProcessing.Prohibit }
                 )
-            ) {
+            )
+            {
                 tree = (Tree)serializer.Deserialize(reader);
             }
 
@@ -65,7 +66,8 @@ namespace BoundTreeGenerator
                     File.Open(outfilename, FileMode.Create),
                     Encoding.UTF8
                 )
-            ) {
+            )
+            {
                 BoundNodeClassWriter.Write(outfile, tree, targetLanguage);
             }
 

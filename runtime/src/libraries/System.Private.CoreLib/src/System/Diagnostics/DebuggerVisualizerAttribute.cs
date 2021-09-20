@@ -23,7 +23,8 @@ namespace System.Diagnostics
         public DebuggerVisualizerAttribute(
             string visualizerTypeName,
             string? visualizerObjectSourceTypeName
-        ) {
+        )
+        {
             VisualizerTypeName = visualizerTypeName;
             VisualizerObjectSourceTypeName = visualizerObjectSourceTypeName;
         }

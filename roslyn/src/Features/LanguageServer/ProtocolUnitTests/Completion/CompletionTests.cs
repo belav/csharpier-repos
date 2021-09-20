@@ -563,7 +563,8 @@ partial class C
         private static async Task<LSP.CompletionList> RunGetCompletionsAsync(
             TestLspServer testLspServer,
             LSP.CompletionParams completionParams
-        ) {
+        )
+        {
             var clientCapabilities = new LSP.VSClientCapabilities
             {
                 SupportsVisualStudioExtensions = true

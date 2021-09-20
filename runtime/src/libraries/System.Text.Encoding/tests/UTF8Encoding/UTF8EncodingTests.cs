@@ -50,7 +50,8 @@ namespace System.Text.Tests
             UTF8Encoding encoding,
             bool encoderShouldEmitUTF8Identifier,
             bool throwOnInvalidBytes
-        ) {
+        )
+        {
             if (encoderShouldEmitUTF8Identifier)
             {
                 Assert.Equal(new byte[] { 0xEF, 0xBB, 0xBF }, encoding.GetPreamble());
@@ -274,7 +275,8 @@ namespace System.Text.Tests
                 int charCount,
                 byte[] bytes,
                 int byteIndex
-            ) {
+            )
+            {
                 // We'll narrow chars to bytes and surround each char with an exclamation point.
 
                 List<byte> builder = new List<byte>() { (byte)'!' };
@@ -300,7 +302,8 @@ namespace System.Text.Tests
                 int byteCount,
                 char[] chars,
                 int charIndex
-            ) {
+            )
+            {
                 // We'll widen bytes to chars and surround each char with an asterisk.
 
                 List<char> builder = new List<char>() { '*' };

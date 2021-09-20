@@ -21,7 +21,8 @@ namespace Microsoft.CodeAnalysis.EditAndContinue
             ImmutableArray<(ProjectId ProjectId, EmitBaseline Baseline)> emitBaselines,
             ImmutableArray<ManagedModuleUpdate> deltas,
             ImmutableArray<(Guid ModuleId, ImmutableArray<(ManagedModuleMethodId Method, NonRemappableRegion Region)>)> nonRemappableRegions
-        ) {
+        )
+        {
             Solution = solution;
             EmitBaselines = emitBaselines;
             Deltas = deltas;

@@ -44,7 +44,8 @@ namespace Microsoft.CodeAnalysis.Diagnostics
                     bool
                 > shouldSuppressGeneratedCodeDiagnostic,
                 CancellationToken cancellationToken
-            ) {
+            )
+            {
                 var item = s_objectPool.Allocate();
                 item._contextFile = contextFile;
                 item._span = span;
@@ -108,7 +109,8 @@ namespace Microsoft.CodeAnalysis.Diagnostics
                         _compilation,
                         _cancellationToken
                     )
-                ) {
+                )
+                {
                     return;
                 }
 
@@ -128,7 +130,8 @@ namespace Microsoft.CodeAnalysis.Diagnostics
                         !_span.HasValue
                         || _span.Value.IntersectsWith(diagnostic.Location.SourceSpan)
                     )
-                ) {
+                )
+                {
                     _addCategorizedLocalDiagnostic(diagnostic, _analyzer, _isSyntaxDiagnostic);
                 }
                 else
@@ -149,7 +152,8 @@ namespace Microsoft.CodeAnalysis.Diagnostics
                     if (
                         _contextFile?.AdditionalFile != null
                         && diagnostic.Location is ExternalFileLocation externalFileLocation
-                    ) {
+                    )
+                    {
                         return PathUtilities.Comparer.Equals(
                             _contextFile.Value.AdditionalFile.Path,
                             externalFileLocation.FilePath

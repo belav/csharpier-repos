@@ -81,7 +81,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Completion.KeywordRecommenders
             int position,
             CSharpSyntaxContext context,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var syntaxTree = context.SyntaxTree;
             return IsRefParameterModifierContext(position, context)
                 || syntaxTree.IsAnonymousMethodParameterModifierContext(position, context.LeftToken)
@@ -102,7 +103,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Completion.KeywordRecommenders
                     out var parameterIndex,
                     out var previousModifier
                 )
-            ) {
+            )
+            {
                 if (previousModifier == SyntaxKind.None)
                 {
                     return true;
@@ -112,7 +114,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Completion.KeywordRecommenders
                     previousModifier == SyntaxKind.ThisKeyword
                     && parameterIndex == 0
                     && context.SyntaxTree.IsPossibleExtensionMethodContext(context.LeftToken)
-                ) {
+                )
+                {
                     return true;
                 }
             }
@@ -125,7 +128,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Completion.KeywordRecommenders
             int position,
             CSharpSyntaxContext context,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             return IsValidRefExpressionContext(context)
                 || context.IsDelegateReturnTypeContext
                 || syntaxTree.IsGlobalMemberDeclarationContext(
@@ -209,7 +213,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Completion.KeywordRecommenders
         private static bool IsValidContextForType(
             CSharpSyntaxContext context,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             return context.IsTypeDeclarationContext(
                 validModifiers: SyntaxKindSet.AllTypeModifiers,
                 validTypeDeclarations: SyntaxKindSet.ClassInterfaceStructRecordTypeDeclarations,

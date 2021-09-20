@@ -20,7 +20,8 @@ namespace System.Xml.Xsl.Runtime
             char digit,
             char zeroDigit,
             char patternSeparator
-        ) {
+        )
+        {
             this.info = info;
             this.digit = digit;
             this.zeroDigit = zeroDigit;
@@ -229,7 +230,8 @@ namespace System.Xml.Xsl.Runtime
             StringBuilder builder,
             int commaIndex,
             int decimalIndex
-        ) {
+        )
+        {
             if (commaIndex > 0 && commaIndex == (decimalIndex - 1))
             {
                 builder.Remove(decimalIndex - 1, 1);

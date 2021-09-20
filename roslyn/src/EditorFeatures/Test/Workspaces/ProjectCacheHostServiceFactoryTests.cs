@@ -32,7 +32,8 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Workspaces
                 ICachedObjectOwner,
                 ObjectReference<object>
             > action
-        ) {
+        )
+        {
             // Putting cacheService.CreateStrongReference in a using statement
             // creates a temporary local that isn't collected in Debug builds
             // Wrapping it in a lambda allows it to get collected.
@@ -175,7 +176,8 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Workspaces
 
         private static ObjectReference<object> PutObjectInImplicitCache(
             ProjectCacheService cacheService
-        ) {
+        )
+        {
             var reference = ObjectReference.CreateFromFactory(() => new object());
 
             reference.UseReference(

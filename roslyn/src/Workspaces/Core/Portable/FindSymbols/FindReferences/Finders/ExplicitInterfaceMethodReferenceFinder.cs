@@ -23,7 +23,8 @@ namespace Microsoft.CodeAnalysis.FindSymbols.Finders
             FindReferencesSearchOptions options,
             FindReferencesCascadeDirection cascadeDirection,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             if (!cascadeDirection.HasFlag(FindReferencesCascadeDirection.Up))
                 return SpecializedTasks.EmptyImmutableArray<(ISymbol symbol, FindReferencesCascadeDirection cascadeDirection)>();
 
@@ -41,7 +42,8 @@ namespace Microsoft.CodeAnalysis.FindSymbols.Finders
             IImmutableSet<Document>? documents,
             FindReferencesSearchOptions options,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             // An explicit method can't be referenced anywhere.
             return SpecializedTasks.EmptyImmutableArray<Document>();
         }
@@ -52,7 +54,8 @@ namespace Microsoft.CodeAnalysis.FindSymbols.Finders
             SemanticModel semanticModel,
             FindReferencesSearchOptions options,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             // An explicit method can't be referenced anywhere.
             return new ValueTask<ImmutableArray<FinderLocation>>(
                 ImmutableArray<FinderLocation>.Empty

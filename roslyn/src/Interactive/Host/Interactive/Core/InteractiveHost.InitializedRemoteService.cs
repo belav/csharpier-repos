@@ -14,7 +14,8 @@ namespace Microsoft.CodeAnalysis.Interactive
             public InitializedRemoteService(
                 RemoteService service,
                 RemoteExecutionResult initializationResult
-            ) {
+            )
+            {
                 Service = service;
                 InitializationResult = initializationResult;
             }

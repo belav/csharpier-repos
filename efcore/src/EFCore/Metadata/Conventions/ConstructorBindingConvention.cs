@@ -36,7 +36,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
         public virtual void ProcessModelFinalizing(
             IConventionModelBuilder modelBuilder,
             IConventionContext<IConventionModelBuilder> context
-        ) {
+        )
+        {
             foreach (EntityType entityType in modelBuilder.Metadata.GetEntityTypes())
             {
                 if (
@@ -44,7 +45,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
                     && ConfigurationSource.Convention.Overrides(
                         entityType.GetConstructorBindingConfigurationSource()
                     )
-                ) {
+                )
+                {
                     Dependencies.ConstructorBindingFactory.GetBindings(
                         (IMutableEntityType)entityType,
                         out var constructorBinding,

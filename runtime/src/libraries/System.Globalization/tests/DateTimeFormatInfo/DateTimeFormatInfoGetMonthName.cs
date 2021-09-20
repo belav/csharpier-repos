@@ -69,7 +69,8 @@ namespace System.Globalization.Tests
         public void GetMonthName_Invoke_ReturnsExpected(
             DateTimeFormatInfo format,
             string[] expected
-        ) {
+        )
+        {
             for (int i = MinMonth; i <= MaxMonth; ++i)
             {
                 Assert.Equal(expected[i], format.GetMonthName(i));

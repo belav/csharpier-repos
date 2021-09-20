@@ -40,7 +40,8 @@ namespace Microsoft.EntityFrameworkCore.Diagnostics.Internal
         public static ScopedLoggerFactory Create(
             IServiceProvider internalServiceProvider,
             IDbContextOptions? contextOptions
-        ) {
+        )
+        {
             var coreOptions = (
                 contextOptions ?? internalServiceProvider.GetService<IDbContextOptions>()
             )?.FindExtension<CoreOptionsExtension>();
@@ -56,7 +57,8 @@ namespace Microsoft.EntityFrameworkCore.Diagnostics.Internal
                 if (
                     applicationServiceProvider != null
                     && applicationServiceProvider != internalServiceProvider
-                ) {
+                )
+                {
                     var loggerFactory = applicationServiceProvider.GetService<ILoggerFactory>();
                     if (loggerFactory != null)
                     {

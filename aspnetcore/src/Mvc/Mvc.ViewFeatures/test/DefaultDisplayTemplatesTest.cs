@@ -103,7 +103,8 @@ namespace Microsoft.AspNetCore.Mvc.ViewFeatures
             string simpleDisplayText,
             bool htmlEncode,
             string expectedResult
-        ) {
+        )
+        {
             // Arrange
             var model = new DefaultTemplatesUtilities.ObjectTemplateModel();
             model.Property1 = simpleDisplayText;

@@ -196,7 +196,8 @@ namespace System.Security.Cryptography.EcDsa.Tests
                             curveDef.Curve.IsNamed
                             && curveDef.Curve.Oid.FriendlyName
                                 != ECCurve.NamedCurves.nistP256.Oid.FriendlyName
-                        ) {
+                        )
+                        {
                             // Specify different curve (nistP256) by explicit value
                             newEc.GenerateKey(ECCurve.NamedCurves.nistP256);
                             Assert.Equal(256, newEc.KeySize);

@@ -161,7 +161,8 @@ namespace Microsoft.CodeAnalysis
         private AnalyzerConfigSet(
             ImmutableArray<AnalyzerConfig> analyzerConfigs,
             GlobalAnalyzerConfig globalConfig
-        ) {
+        )
+        {
             _analyzerConfigs = analyzerConfigs;
             _globalConfig = globalConfig;
 
@@ -247,7 +248,8 @@ namespace Microsoft.CodeAnalysis
                 int analyzerConfigIndex = 0;
                 analyzerConfigIndex < _analyzerConfigs.Length;
                 analyzerConfigIndex++
-            ) {
+            )
+            {
                 var config = _analyzerConfigs[analyzerConfigIndex];
 
                 if (normalizedPath.StartsWith(config.NormalizedDirectory, StringComparison.Ordinal))
@@ -322,7 +324,8 @@ namespace Microsoft.CodeAnalysis
                     analyzerConfigIndex < _analyzerConfigs.Length
                         && sectionKeyIndex < sectionKey.Count;
                     analyzerConfigIndex++
-                ) {
+                )
+                {
                     AnalyzerConfig config = _analyzerConfigs[analyzerConfigIndex];
                     ImmutableArray<SectionNameMatcher?> matchers = _analyzerMatchers[
                         analyzerConfigIndex
@@ -463,7 +466,8 @@ namespace Microsoft.CodeAnalysis
             ArrayBuilder<Diagnostic> diagnosticBuilder,
             string analyzerConfigPath,
             ConcurrentDictionary<ReadOnlyMemory<char>, string> diagIdCache
-        ) {
+        )
+        {
             const string diagnosticOptionPrefix = "dotnet_diagnostic.";
             const string diagnosticOptionSuffix = ".severity";
 
@@ -474,7 +478,8 @@ namespace Microsoft.CodeAnalysis
                 if (
                     key.StartsWith(diagnosticOptionPrefix, StringComparison.Ordinal)
                     && key.EndsWith(diagnosticOptionSuffix, StringComparison.Ordinal)
-                ) {
+                )
+                {
                     diagIdLength =
                         key.Length
                         - (diagnosticOptionPrefix.Length + diagnosticOptionSuffix.Length);
@@ -530,7 +535,8 @@ namespace Microsoft.CodeAnalysis
         internal static GlobalAnalyzerConfig MergeGlobalConfigs(
             ArrayBuilder<AnalyzerConfig> analyzerConfigs,
             out ImmutableArray<Diagnostic> diagnostics
-        ) {
+        )
+        {
             GlobalAnalyzerConfigBuilder globalAnalyzerConfigBuilder =
                 new GlobalAnalyzerConfigBuilder();
             DiagnosticBag diagnosticBag = DiagnosticBag.GetInstance();
@@ -689,7 +695,8 @@ namespace Microsoft.CodeAnalysis
                 Section section,
                 int globalLevel,
                 bool isGlobalSection
-            ) {
+            )
+            {
                 Debug.Assert(_values is object);
                 Debug.Assert(_duplicates is object);
 
@@ -710,7 +717,8 @@ namespace Microsoft.CodeAnalysis
                             Section.PropertiesKeyComparer.Equals(key, GlobalKey)
                             || Section.PropertiesKeyComparer.Equals(key, GlobalLevelKey)
                         )
-                    ) {
+                    )
+                    {
                         continue;
                     }
 
@@ -793,7 +801,8 @@ namespace Microsoft.CodeAnalysis
             public GlobalAnalyzerConfig(
                 AnalyzerConfig.Section globalSection,
                 ImmutableArray<AnalyzerConfig.Section> namedSections
-            ) {
+            )
+            {
                 GlobalSection = globalSection;
                 NamedSections = namedSections;
             }

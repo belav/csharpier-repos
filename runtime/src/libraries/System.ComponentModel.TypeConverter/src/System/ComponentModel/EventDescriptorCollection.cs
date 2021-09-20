@@ -59,7 +59,8 @@ namespace System.ComponentModel
             int eventCount,
             string[] namedSort,
             IComparer comparer
-        ) {
+        )
+        {
             _eventsOwned = false;
             if (namedSort != null)
             {

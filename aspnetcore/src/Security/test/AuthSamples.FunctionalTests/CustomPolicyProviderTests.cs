@@ -17,7 +17,8 @@ namespace AuthSamples.FunctionalTests
     {
         public CustomPolicyProviderTests(
             WebApplicationFactory<CustomPolicyProvider.Startup> fixture
-        ) {
+        )
+        {
             Client = fixture.CreateClient();
         }
 
@@ -162,7 +163,8 @@ namespace AuthSamples.FunctionalTests
             HttpClient client,
             string userName,
             string dob
-        ) {
+        )
+        {
             var goToSignIn = await client.GetAsync("/account/signin");
             var signIn = await TestAssert.IsHtmlDocumentAsync(goToSignIn);
 

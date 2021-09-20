@@ -161,7 +161,8 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation
             public RuntimeAssetGroupBuilder WithAsset(
                 string path,
                 Action<RuntimeFileBuilder> customizer = null
-            ) {
+            )
+            {
                 RuntimeFileBuilder runtimeFile = new RuntimeFileBuilder(path);
                 customizer?.Invoke(runtimeFile);
                 return WithAsset(runtimeFile);
@@ -210,14 +211,16 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation
             public RuntimeLibraryBuilder WithAssemblyGroup(
                 string runtime,
                 Action<RuntimeAssetGroupBuilder> customizer = null
-            ) {
+            )
+            {
                 return WithRuntimeAssetGroup(runtime, AssemblyGroups, customizer);
             }
 
             public RuntimeLibraryBuilder WithNativeLibraryGroup(
                 string runtime,
                 Action<RuntimeAssetGroupBuilder> customizer = null
-            ) {
+            )
+            {
                 return WithRuntimeAssetGroup(runtime, NativeLibraryGroups, customizer);
             }
 
@@ -225,7 +228,8 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation
                 string runtime,
                 IList<RuntimeAssetGroupBuilder> list,
                 Action<RuntimeAssetGroupBuilder> customizer
-            ) {
+            )
+            {
                 RuntimeAssetGroupBuilder runtimeAssetGroup = new RuntimeAssetGroupBuilder(runtime);
                 customizer?.Invoke(runtimeAssetGroup);
 
@@ -236,7 +240,8 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation
             public RuntimeLibraryBuilder WithResourceAssembly(
                 string path,
                 Action<ResourceAssemblyBuilder> customizer = null
-            ) {
+            )
+            {
                 ResourceAssemblyBuilder resourceAssembly = new ResourceAssemblyBuilder(path);
                 customizer?.Invoke(resourceAssembly);
                 ResourceAssemblies.Add(resourceAssembly);
@@ -315,7 +320,8 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation
             string name,
             string version,
             Action<RuntimeLibraryBuilder> customizer = null
-        ) {
+        )
+        {
             RuntimeLibraryBuilder runtimeLibrary = new RuntimeLibraryBuilder(type, name, version);
             customizer?.Invoke(runtimeLibrary);
 
@@ -327,7 +333,8 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation
             string name,
             string version,
             Action<RuntimeLibraryBuilder> customizer = null
-        ) {
+        )
+        {
             return WithRuntimeLibrary(RuntimeLibraryType.project, name, version, customizer);
         }
 
@@ -340,7 +347,8 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation
             string name,
             string version,
             Action<RuntimeLibraryBuilder> customizer = null
-        ) {
+        )
+        {
             return WithRuntimeLibrary(RuntimeLibraryType.package, name, version, customizer);
         }
 

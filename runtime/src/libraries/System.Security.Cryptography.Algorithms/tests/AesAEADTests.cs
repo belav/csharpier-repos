@@ -19,7 +19,8 @@ namespace System.Security.Cryptography.Algorithms.Tests
             KeySizes validSizes,
             int minValue = 0,
             int maxValue = 17
-        ) {
+        )
+        {
             for (int i = minValue; i <= maxValue; i++)
             {
                 if (MatchesKeySizes(i, validSizes))
@@ -31,7 +32,8 @@ namespace System.Security.Cryptography.Algorithms.Tests
             KeySizes validSizes,
             int minValue = 0,
             int maxValue = 17
-        ) {
+        )
+        {
             for (int i = minValue; i <= maxValue; i++)
             {
                 if (!MatchesKeySizes(i, validSizes))

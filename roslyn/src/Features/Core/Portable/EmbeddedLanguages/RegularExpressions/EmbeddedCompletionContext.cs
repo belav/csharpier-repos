@@ -30,7 +30,8 @@ namespace Microsoft.CodeAnalysis.Features.EmbeddedLanguages.RegularExpressions
                 CompletionContext context,
                 RegexTree tree,
                 SyntaxToken stringToken
-            ) {
+            )
+            {
                 _language = language;
                 _context = context;
                 _names = new HashSet<string>();
@@ -48,7 +49,8 @@ namespace Microsoft.CodeAnalysis.Features.EmbeddedLanguages.RegularExpressions
                 RegexNode parentOpt,
                 int? positionOffset = null,
                 string insertionText = null
-            ) {
+            )
+            {
                 var replacementStart = parentOpt != null ? parentOpt.GetSpan().Start : Position;
 
                 var replacementSpan = TextSpan.FromBounds(replacementStart, Position);

@@ -38,7 +38,8 @@ namespace Microsoft.EntityFrameworkCore.Scaffolding.Internal
         public CSharpEntityTypeGenerator(
             IAnnotationCodeGenerator annotationCodeGenerator,
             ICSharpHelper cSharpHelper
-        ) {
+        )
+        {
             Check.NotNull(cSharpHelper, nameof(cSharpHelper));
 
             _annotationCodeGenerator = annotationCodeGenerator;
@@ -55,7 +56,8 @@ namespace Microsoft.EntityFrameworkCore.Scaffolding.Internal
             IEntityType entityType,
             string? @namespace,
             bool useDataAnnotations
-        ) {
+        )
+        {
             Check.NotNull(entityType, nameof(entityType));
 
             _sb = new IndentedStringBuilder();
@@ -77,7 +79,8 @@ namespace Microsoft.EntityFrameworkCore.Scaffolding.Internal
                     .Where(ns => ns != "System" && ns != "System.Collections.Generic")
                     .Distinct()
                     .OrderBy(x => x, new NamespaceComparer())
-            ) {
+            )
+            {
                 _sb.AppendLine($"using {ns};");
             }
 
@@ -160,7 +163,8 @@ namespace Microsoft.EntityFrameworkCore.Scaffolding.Internal
                     entityType,
                     annotations
                 )
-            ) {
+            )
+            {
                 var attributeWriter = new AttributeWriter(attribute.Type.Name);
                 foreach (var argument in attribute.Arguments)
                 {
@@ -219,7 +223,8 @@ namespace Microsoft.EntityFrameworkCore.Scaffolding.Internal
                             ConfigurationSource.Convention
                             != ((IConventionIndex)i).GetConfigurationSource()
                     )
-            ) {
+            )
+            {
                 // If there are annotations that cannot be represented using an IndexAttribute then use fluent API instead.
                 var annotations = _annotationCodeGenerator.FilterIgnoredAnnotations(
                         index.GetAnnotations()
@@ -341,7 +346,8 @@ namespace Microsoft.EntityFrameworkCore.Scaffolding.Internal
                     property,
                     annotations
                 )
-            ) {
+            )
+            {
                 var attributeWriter = new AttributeWriter(attribute.Type.Name);
                 foreach (var argument in attribute.Arguments)
                 {
@@ -396,7 +402,8 @@ namespace Microsoft.EntityFrameworkCore.Scaffolding.Internal
                 !property.IsNullable
                 && property.ClrType.IsNullableType()
                 && !property.IsPrimaryKey()
-            ) {
+            )
+            {
                 _sb.AppendLine(new AttributeWriter(nameof(RequiredAttribute)).ToString());
             }
         }
@@ -562,7 +569,8 @@ namespace Microsoft.EntityFrameworkCore.Scaffolding.Internal
 
                 foreach (
                     var line in comment.Split(new[] { "\r\n", "\r", "\n" }, StringSplitOptions.None)
-                ) {
+                )
+                {
                     _sb.AppendLine($"/// {System.Security.SecurityElement.Escape(line)}");
                 }
 

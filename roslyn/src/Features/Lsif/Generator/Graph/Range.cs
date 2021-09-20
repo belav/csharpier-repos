@@ -26,7 +26,8 @@ namespace Microsoft.CodeAnalysis.LanguageServerIndexFormat.Generator.Graph
             TextSpan textSpan,
             SourceText sourceText,
             IdFactory idFactory
-        ) {
+        )
+        {
             var linePositionSpan = sourceText.Lines.GetLinePositionSpan(textSpan);
 
             return new Range(

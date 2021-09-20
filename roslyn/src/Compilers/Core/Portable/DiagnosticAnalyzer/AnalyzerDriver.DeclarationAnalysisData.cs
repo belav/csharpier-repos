@@ -17,7 +17,8 @@ namespace Microsoft.CodeAnalysis.Diagnostics
                 ImmutableArray<DeclarationInfo> declarationsInNodeBuilder,
                 ImmutableArray<SyntaxNode> descendantNodesToAnalyze,
                 bool isPartialAnalysis
-            ) {
+            )
+            {
                 DeclaringReferenceSyntax = declaringReferenceSyntax;
                 TopmostNodeForAnalysis = topmostNodeForAnalysis;
                 DeclarationsInNode = declarationsInNodeBuilder;

@@ -106,7 +106,8 @@ namespace Microsoft.CodeAnalysis.UseNullPropagation
             SyntaxNodeAnalysisContext context,
             INamedTypeSymbol? expressionTypeOpt,
             IMethodSymbol? referenceEqualsMethodOpt
-        ) {
+        )
+        {
             var conditionalExpression = (TConditionalExpressionSyntax)context.Node;
             if (!ShouldAnalyze(conditionalExpression.SyntaxTree.Options))
             {
@@ -152,7 +153,8 @@ namespace Microsoft.CodeAnalysis.UseNullPropagation
                     out var conditionPartToCheck,
                     out var isEquals
                 )
-            ) {
+            )
+            {
                 return;
             }
 
@@ -196,7 +198,8 @@ namespace Microsoft.CodeAnalysis.UseNullPropagation
                 if (
                     !(type is INamedTypeSymbol namedType)
                     || namedType.ConstructedFrom.SpecialType != SpecialType.System_Nullable_T
-                ) {
+                )
+                {
                     // User has something like:  If(str is nothing, nothing, str.Length)
                     // In this case, converting to str?.Length changes the type of this from
                     // int to int?
@@ -213,7 +216,8 @@ namespace Microsoft.CodeAnalysis.UseNullPropagation
                     expressionTypeOpt,
                     context.CancellationToken
                 )
-            ) {
+            )
+            {
                 return;
             }
 
@@ -250,7 +254,8 @@ namespace Microsoft.CodeAnalysis.UseNullPropagation
             SyntaxNode conditionNode,
             [NotNullWhen(true)] out SyntaxNode? conditionPartToCheck,
             out bool isEquals
-        ) {
+        )
+        {
             switch (conditionNode)
             {
                 case TBinaryExpressionSyntax binaryExpression:
@@ -286,7 +291,8 @@ namespace Microsoft.CodeAnalysis.UseNullPropagation
             TBinaryExpressionSyntax condition,
             [NotNullWhen(true)] out SyntaxNode? conditionPartToCheck,
             out bool isEquals
-        ) {
+        )
+        {
             var syntaxKinds = syntaxFacts.SyntaxKinds;
             isEquals = syntaxKinds.ReferenceEqualsExpression == condition.RawKind;
             var isNotEquals = syntaxKinds.ReferenceNotEqualsExpression == condition.RawKind;
@@ -318,7 +324,8 @@ namespace Microsoft.CodeAnalysis.UseNullPropagation
             TInvocationExpression invocation,
             [NotNullWhen(true)] out SyntaxNode? conditionPartToCheck,
             out bool isEquals
-        ) {
+        )
+        {
             conditionPartToCheck = null;
             isEquals = true;
 
@@ -373,7 +380,8 @@ namespace Microsoft.CodeAnalysis.UseNullPropagation
             ISyntaxFacts syntaxFacts,
             SyntaxNode conditionLeft,
             SyntaxNode conditionRight
-        ) {
+        )
+        {
             var conditionLeftIsNull = syntaxFacts.IsNullLiteralExpression(conditionLeft);
             var conditionRightIsNull = syntaxFacts.IsNullLiteralExpression(conditionRight);
 
@@ -396,7 +404,8 @@ namespace Microsoft.CodeAnalysis.UseNullPropagation
             SemanticModel semanticModel,
             SyntaxNode expressionToMatch,
             SyntaxNode whenPart
-        ) {
+        )
+        {
             expressionToMatch = RemoveObjectCastIfAny(
                 syntaxFacts,
                 semanticModel,
@@ -427,7 +436,8 @@ namespace Microsoft.CodeAnalysis.UseNullPropagation
             ISyntaxFacts syntaxFacts,
             SemanticModel semanticModel,
             SyntaxNode node
-        ) {
+        )
+        {
             if (syntaxFacts.IsCastExpression(node))
             {
                 syntaxFacts.GetPartsOfCastExpression(node, out var type, out var expression);

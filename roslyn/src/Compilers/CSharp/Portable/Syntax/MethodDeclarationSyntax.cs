@@ -35,7 +35,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             SyntaxList<TypeParameterConstraintClauseSyntax> constraintClauses,
             BlockSyntax body,
             SyntaxToken semicolonToken
-        ) {
+        )
+        {
             return SyntaxFactory.MethodDeclaration(
                 attributeLists,
                 modifiers,

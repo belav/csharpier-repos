@@ -61,7 +61,8 @@ namespace System.ComponentModel.Design.Tests
                     invalidServiceProvider,
                     validServiceProvider
                 }
-            ) {
+            )
+            {
                 yield return new object[] { parentProvider, typeof(object), o, o };
                 yield return new object[] { parentProvider, typeof(object), "abc", "abc" };
                 yield return new object[] { parentProvider, typeof(string), "abc", "abc" };
@@ -76,7 +77,8 @@ namespace System.ComponentModel.Design.Tests
             Type serviceType,
             object serviceInstance,
             object expected
-        ) {
+        )
+        {
             var container = new ServiceContainer(parentProvider);
             container.AddService(serviceType, serviceInstance);
             Assert.Same(expected, container.GetService(serviceType));
@@ -107,7 +109,8 @@ namespace System.ComponentModel.Design.Tests
                         invalidServiceProvider,
                         validServiceProvider
                     }
-                ) {
+                )
+                {
                     if (promote && parentProvider == validServiceProvider)
                     {
                         continue;
@@ -143,7 +146,8 @@ namespace System.ComponentModel.Design.Tests
             object serviceInstance,
             bool promote,
             object expected
-        ) {
+        )
+        {
             var container = new ServiceContainer(parentProvider);
             container.AddService(serviceType, serviceInstance, promote);
             Assert.Same(expected, container.GetService(serviceType));
@@ -229,7 +233,8 @@ namespace System.ComponentModel.Design.Tests
         public void AddService_PromoteCallback_Success(
             Type serviceType,
             ServiceCreatorCallback callback
-        ) {
+        )
+        {
             var parentContainer = new CustomServiceContainer();
             int addServiceCallCount = 0;
             parentContainer.AddServiceCallbackAction = (
@@ -379,7 +384,8 @@ namespace System.ComponentModel.Design.Tests
                     invalidServiceProvider,
                     validServiceProvider
                 }
-            ) {
+            )
+            {
                 yield return new object[] { parentProvider, typeof(object), callback, "abc" };
                 yield return new object[] { parentProvider, typeof(string), callback, "abc" };
                 yield return new object[] { parentProvider, typeof(int), callback, null };
@@ -400,7 +406,8 @@ namespace System.ComponentModel.Design.Tests
             Type serviceType,
             ServiceCreatorCallback callback,
             object expected
-        ) {
+        )
+        {
             var container = new ServiceContainer(parentProvider);
             container.AddService(serviceType, callback);
             Assert.Same(expected, container.GetService(serviceType));
@@ -436,7 +443,8 @@ namespace System.ComponentModel.Design.Tests
                         invalidServiceProvider,
                         validServiceProvider
                     }
-                ) {
+                )
+                {
                     if (promote && parentProvider == validServiceProvider)
                     {
                         continue;
@@ -507,7 +515,8 @@ namespace System.ComponentModel.Design.Tests
             ServiceCreatorCallback callback,
             bool promote,
             object expected
-        ) {
+        )
+        {
             var container = new ServiceContainer(parentProvider);
             container.AddService(serviceType, callback, promote);
             Assert.Same(expected, container.GetService(serviceType));
@@ -777,7 +786,8 @@ namespace System.ComponentModel.Design.Tests
         public void RemoveService_InvokeTypeBool_GetServiceReturnsNull(
             IServiceProvider parentProvider,
             bool promote
-        ) {
+        )
+        {
             var container = new ServiceContainer(parentProvider);
             container.AddService(typeof(int), 1);
             container.RemoveService(typeof(int), promote);

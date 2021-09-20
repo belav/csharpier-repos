@@ -158,7 +158,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             TypeSymbol returnType,
             Location errorLocation,
             BindingDiagnosticBag diagnostics
-        ) {
+        )
+        {
             if (refKind == RefKind.None && returnType.Kind == SymbolKind.NamedType)
             {
                 TypeSymbol originalDefinition = returnType.OriginalDefinition;
@@ -195,7 +196,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                         ),
                         TypeCompareKind.ConsiderEverything
                     )
-                ) {
+                )
+                {
                     return (
                         (NamedTypeSymbol)returnType
                     ).TypeArgumentsWithAnnotationsNoUseSiteDiagnostics[0];
@@ -209,7 +211,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             CSharpCompilation compilation,
             RefKind refKind,
             TypeSymbol returnType
-        ) {
+        )
+        {
             if (refKind == RefKind.None && returnType.Kind == SymbolKind.NamedType)
             {
                 TypeSymbol originalDefinition = returnType.OriginalDefinition;
@@ -229,7 +232,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                         ),
                         TypeCompareKind.ConsiderEverything
                     )
-                ) {
+                )
+                {
                     return true;
                 }
             }
@@ -246,13 +250,15 @@ namespace Microsoft.CodeAnalysis.CSharp
             Binder originalBinder,
             bool diagnose,
             ref CompoundUseSiteInfo<AssemblySymbol> useSiteInfo
-        ) {
+        )
+        {
             Debug.Assert(result.IsClear);
 
             if (
                 _methodSymbol.ParameterCount == 0
                 || (options & LookupOptions.NamespaceAliasesOnly) != 0
-            ) {
+            )
+            {
                 return;
             }
 
@@ -291,7 +297,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             LookupSymbolsInfo result,
             LookupOptions options,
             Binder originalBinder
-        ) {
+        )
+        {
             if (options.CanConsiderMembers())
             {
                 foreach (var parameter in _methodSymbol.Parameters)
@@ -310,7 +317,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             string name,
             Location newLocation,
             BindingDiagnosticBag diagnostics
-        ) {
+        )
+        {
 #if DEBUG
             var locations = parameter.Locations;
             Debug.Assert(!locations.IsEmpty || parameter.IsImplicitlyDeclared);
@@ -407,7 +415,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             string name,
             Location location,
             BindingDiagnosticBag diagnostics
-        ) {
+        )
+        {
             var parameters = _methodSymbol.Parameters;
             var typeParameters = _methodSymbol.TypeParameters;
 

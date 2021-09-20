@@ -71,7 +71,8 @@ namespace Microsoft.CodeAnalysis.Editor.Interactive
             ImmutableArray<IInteractiveWindowCommand> commands,
             InteractiveEvaluatorLanguageInfoProvider languageInfo,
             string initialWorkingDirectory
-        ) {
+        )
+        {
             Debug.Assert(
                 languageInfo.InteractiveResponseFileName.IndexOfAny(
                     new[] { Path.DirectorySeparatorChar, Path.AltDirectorySeparatorChar }
@@ -114,7 +115,8 @@ namespace Microsoft.CodeAnalysis.Editor.Interactive
             InteractiveHostPlatformInfo platformInfo,
             InteractiveHostOptions options,
             RemoteExecutionResult result
-        ) {
+        )
+        {
             // Capture and clear exising submission buffers. Independent of other operations that occur on restart.
             _ = _threadingContext.JoinableTaskFactory.RunAsync(
                 async () =>

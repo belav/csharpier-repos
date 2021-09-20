@@ -43,7 +43,8 @@ public class MockLicenseProvider : LicenseProvider
         Type type,
         object instance,
         bool allowExceptions
-    ) {
+    )
+    {
         if (DenyLicense)
         {
             if (allowExceptions)

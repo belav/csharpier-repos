@@ -38,7 +38,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.AddUsing
         protected override void InitializeWorkspace(
             TestWorkspace workspace,
             TestParameters parameters
-        ) {
+        )
+        {
             workspace.TryApplyChanges(
                 workspace.CurrentSolution.WithOptions(
                     workspace.Options.WithChangedOption(
@@ -58,7 +59,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.AddUsing
         internal override (DiagnosticAnalyzer, CodeFixProvider) CreateDiagnosticProviderAndFixer(
             Workspace workspace,
             TestParameters parameters
-        ) {
+        )
+        {
             var data = (FixProviderData)parameters.fixProviderData;
             return (null, new CSharpAddImportCodeFixProvider(data.Item1, data.Item2));
         }
@@ -601,7 +603,8 @@ class C
             string packageName,
             string typeName,
             ImmutableArray<string> containingNamespaceNames
-        ) {
+        )
+        {
             return CreateSearchResult(
                 new PackageWithTypeResult(
                     packageName: packageName,

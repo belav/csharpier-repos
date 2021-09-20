@@ -14,7 +14,8 @@ namespace System.Diagnostics.Tracing
             Interop.Advapi32.EtwEnableCallback enableCallback,
             void* callbackContext,
             ref long registrationHandle
-        ) {
+        )
+        {
             uint returnStatus = 0;
             m_provHandle = EventPipeInternal.CreateProvider(eventSource.Name, enableCallback);
             if (m_provHandle != IntPtr.Zero)
@@ -48,7 +49,8 @@ namespace System.Diagnostics.Tracing
             Guid* relatedActivityId,
             int userDataCount,
             EventProvider.EventData* userData
-        ) {
+        )
+        {
             if (eventHandle != IntPtr.Zero)
             {
                 if (userDataCount == 0)
@@ -88,7 +90,8 @@ namespace System.Diagnostics.Tracing
         int IEventProvider.EventActivityIdControl(
             Interop.Advapi32.ActivityControl ControlCode,
             ref Guid ActivityId
-        ) {
+        )
+        {
             return EventActivityIdControl(ControlCode, ref ActivityId);
         }
 
@@ -101,7 +104,8 @@ namespace System.Diagnostics.Tracing
             uint level,
             byte* pMetadata,
             uint metadataLength
-        ) {
+        )
+        {
             IntPtr eventHandlePtr = EventPipeInternal.DefineEvent(
                 m_provHandle,
                 eventID,
@@ -118,7 +122,8 @@ namespace System.Diagnostics.Tracing
         internal static int EventActivityIdControl(
             Interop.Advapi32.ActivityControl ControlCode,
             ref Guid ActivityId
-        ) {
+        )
+        {
             return EventPipeInternal.EventActivityIdControl((uint)ControlCode, ref ActivityId);
         }
     }

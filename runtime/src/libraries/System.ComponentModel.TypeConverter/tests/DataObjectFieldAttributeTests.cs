@@ -39,7 +39,8 @@ namespace System.ComponentModel.Tests
             bool primaryKey,
             bool isIdentity,
             bool isNullable
-        ) {
+        )
+        {
             var attribute = new DataObjectFieldAttribute(primaryKey, isIdentity, isNullable);
             Assert.Equal(primaryKey, attribute.PrimaryKey);
             Assert.Equal(isIdentity, attribute.IsIdentity);
@@ -55,7 +56,8 @@ namespace System.ComponentModel.Tests
             bool isIdentity,
             bool isNullable,
             int length
-        ) {
+        )
+        {
             var attribute = new DataObjectFieldAttribute(
                 primaryKey,
                 isIdentity,
@@ -114,7 +116,8 @@ namespace System.ComponentModel.Tests
             DataObjectFieldAttribute attribute,
             object other,
             bool expected
-        ) {
+        )
+        {
             Assert.Equal(expected, attribute.Equals(other));
         }
 

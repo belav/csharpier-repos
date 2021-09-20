@@ -44,7 +44,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
         public static CSharpCompilation VerifyErrorsAndGetCompilationWithMscorlib(
             string text,
             params ErrorDescription[] expectedErrorDesp
-        ) {
+        )
+        {
             return VerifyErrorsAndGetCompilationWithMscorlib(
                 new string[] { text },
                 expectedErrorDesp
@@ -57,7 +58,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
         protected internal static CSharpCompilation VerifyErrorsAndGetCompilationWithMscorlib(
             string[] srcs,
             params ErrorDescription[] expectedErrorDesp
-        ) {
+        )
+        {
             var comp = CSharpTestBase.CreateCompilation(
                 srcs,
                 parseOptions: TestOptions.RegularPreview
@@ -74,7 +76,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
             string text,
             IEnumerable<MetadataReference> refs,
             params ErrorDescription[] expectedErrorDesp
-        ) {
+        )
+        {
             return VerifyErrorsAndGetCompilationWithMscorlib(
                 new List<string> { text },
                 refs,
@@ -89,7 +92,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
             List<string> srcs,
             IEnumerable<MetadataReference> refs,
             params ErrorDescription[] expectedErrorDesp
-        ) {
+        )
+        {
             var synTrees = (from text in srcs select SyntaxFactory.ParseSyntaxTree(text)).ToArray();
 
             return VerifyErrorsAndGetCompilationWithMscorlib(synTrees, refs, expectedErrorDesp);
@@ -102,7 +106,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
             SyntaxTree[] trees,
             IEnumerable<MetadataReference> refs,
             params ErrorDescription[] expectedErrorDesp
-        ) {
+        )
+        {
             return VerifyErrorsAndGetCompilation(
                 trees,
                 refs.Concat(CSharpTestBase.MscorlibRef),
@@ -117,7 +122,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
             IEnumerable<SyntaxTree> synTrees,
             IEnumerable<MetadataReference> refs = null,
             params ErrorDescription[] expectedErrorDesp
-        ) {
+        )
+        {
             var comp = CSharpCompilation.Create(
                 assemblyName: "DiagnosticsTest",
                 options: TestOptions.ReleaseDll,
@@ -137,7 +143,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
         public static void VerifyErrorCodes(
             IEnumerable<Diagnostic> actualErrors,
             params ErrorDescription[] expectedErrorDesp
-        ) {
+        )
+        {
             if (expectedErrorDesp == null)
                 return;
 
@@ -238,7 +245,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
         public static void VerifyErrorCodesNoLineColumn(
             IEnumerable<Diagnostic> actualErrors,
             params ErrorDescription[] expectedErrorDesp
-        ) {
+        )
+        {
             if (expectedErrorDesp == null)
                 return;
 

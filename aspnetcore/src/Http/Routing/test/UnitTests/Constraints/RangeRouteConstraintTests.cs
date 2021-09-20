@@ -23,7 +23,8 @@ namespace Microsoft.AspNetCore.Routing.Tests
             long max,
             int parameterValue,
             bool expected
-        ) {
+        )
+        {
             // Arrange
             var constraint = new RangeRouteConstraint(min, max);
 

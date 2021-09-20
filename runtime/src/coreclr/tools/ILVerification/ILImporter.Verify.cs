@@ -260,7 +260,8 @@ namespace Internal.IL
                                 currentlySelected.TryOffset < probeItem.TryOffset
                                 && currentlySelected.TryOffset + currentlySelected.TryLength
                                     > probeItem.TryOffset + probeItem.TryLength
-                            ) {
+                            )
+                            {
                                 basicBlock.TryIndex = j;
                             }
                         }
@@ -282,7 +283,8 @@ namespace Internal.IL
                                 currentlySelected.HandlerOffset < probeItem.HandlerOffset
                                 && currentlySelected.HandlerOffset + currentlySelected.HandlerLength
                                     > probeItem.HandlerOffset + probeItem.HandlerLength
-                            ) {
+                            )
+                            {
                                 basicBlock.HandlerIndex = j;
                             }
                         }
@@ -290,7 +292,8 @@ namespace Internal.IL
                     // Check if offset is within the range [FilterOffset, HandlerOffset[
                     if (
                         r.FilterOffset != -1 && r.FilterOffset <= offset && offset < r.HandlerOffset
-                    ) {
+                    )
+                    {
                         if (!basicBlock.FilterIndex.HasValue)
                         {
                             basicBlock.FilterIndex = j;
@@ -593,7 +596,8 @@ namespace Internal.IL
                     VerifierError.ExpectedNumericType,
                     value
                 )
-            ) {
+            )
+            {
                 AbortBasicBlockVerification();
             }
         }
@@ -606,7 +610,8 @@ namespace Internal.IL
                     VerifierError.ExpectedIntegerType,
                     value
                 )
-            ) {
+            )
+            {
                 AbortBasicBlockVerification();
             }
         }
@@ -620,7 +625,8 @@ namespace Internal.IL
                     ,
                     value
                 )
-            ) {
+            )
+            {
                 AbortBasicBlockVerification();
             }
         }
@@ -646,7 +652,8 @@ namespace Internal.IL
             StackValue src,
             StackValue dst,
             VerifierError error = VerifierError.StackUnexpected
-        ) {
+        )
+        {
             if (!IsAssignable(src, dst))
                 VerificationError(error, src, dst);
         }
@@ -690,7 +697,8 @@ namespace Internal.IL
                     if (
                         targetRegion.TryOffset > srcRegion.TryOffset
                         || src.StartOffset >= targetRegion.TryOffset + targetRegion.TryLength
-                    ) {
+                    )
+                    {
                         // Target is not first instruction
                         if (target.StartOffset != targetRegion.TryOffset)
                         {
@@ -737,7 +745,8 @@ namespace Internal.IL
                             || targetRegion.TryOffset + targetRegion.TryLength
                                 < srcRegion.HandlerOffset
                         )
-                    ) {
+                    )
+                    {
                         // If target is not first instruction of try, or not a direct sibling
                         if (
                             target.StartOffset != targetRegion.TryOffset
@@ -797,7 +806,8 @@ namespace Internal.IL
             BasicBlock target,
             bool isFallthrough,
             bool reportErrors = true
-        ) {
+        )
+        {
             if (!_validTargetOffsets[target.StartOffset])
             {
                 if (reportErrors)
@@ -816,7 +826,8 @@ namespace Internal.IL
                         target.StartOffset
                             != _exceptionRegions[target.TryIndex.Value].ILRegion.TryOffset
                         || !IsDirectChildRegion(src, target)
-                    ) {
+                    )
+                    {
                         if (reportErrors)
                         {
                             Debug.Assert(!isFallthrough); // This should not be reachable by fallthrough
@@ -844,12 +855,14 @@ namespace Internal.IL
                     if (
                         srcRegion.TryOffset <= targetRegion.TryOffset
                         && target.StartOffset < srcRegion.TryOffset + srcRegion.TryLength
-                    ) {
+                    )
+                    {
                         // Only branching to first instruction of try-block is valid
                         if (
                             target.StartOffset != targetRegion.TryOffset
                             || !IsDirectChildRegion(src, target)
-                        ) {
+                        )
+                        {
                             if (reportErrors)
                             {
                                 Debug.Assert(!isFallthrough); // This should not be reachable by fallthrough
@@ -1035,7 +1048,8 @@ namespace Internal.IL
             if (
                 source.TryOffset <= disjoint.TryOffset
                 && source.TryOffset + source.TryLength >= disjoint.TryOffset + disjoint.TryLength
-            ) {
+            )
+            {
                 // source is enclosing disjoint
                 return false;
             }
@@ -1228,7 +1242,8 @@ namespace Internal.IL
                 if (
                     GetOpcodeAt(delegateStart) != ILOpcode.dup
                     || GetOpcodeAt(delegateStart + 1) != ILOpcode.ldvirtftn
-                ) {
+                )
+                {
                     VerificationError(VerifierError.DelegatePattern);
                     return;
                 }
@@ -1412,7 +1427,8 @@ namespace Internal.IL
                 if (
                     r.ILRegion.Kind == ILExceptionRegionKind.Filter
                     || r.ILRegion.Kind == ILExceptionRegionKind.Catch
-                ) {
+                )
+                {
                     // stack must uninit or 1 (exception object)
                     Check(
                         basicBlock.EntryStack == null || basicBlock.EntryStack.Length == 1,
@@ -1438,7 +1454,8 @@ namespace Internal.IL
                             SanityChecks
                             && basicBlock.EntryStack[0]
                                 != StackValue.CreateObjRef(GetWellKnownType(WellKnownType.Object))
-                        ) {
+                        )
+                        {
                             CheckIsAssignable(
                                 basicBlock.EntryStack[0],
                                 StackValue.CreateObjRef(GetWellKnownType(WellKnownType.Exception)),
@@ -1768,7 +1785,8 @@ namespace Internal.IL
                 if (
                     declaredThis.Kind == StackValueKind.ByRef
                     && (actualThis.Kind == StackValueKind.ByRef && actualThis.IsReadOnly)
-                ) {
+                )
+                {
                     declaredThis.SetIsReadOnly();
                 }
                 CheckIsAssignable(actualThis, declaredThis);
@@ -2210,7 +2228,8 @@ namespace Internal.IL
                     || opcode == ILOpcode.sub_ovf
                     || opcode == ILOpcode.sub_ovf_un
                 )
-            ) {
+            )
+            {
                 result = StackValue.CreatePrimitive(StackValueKind.NativeInt);
             }
 
@@ -2463,7 +2482,8 @@ namespace Internal.IL
             if (
                 SanityChecks
                 && value != StackValue.CreateObjRef(GetWellKnownType(WellKnownType.Object))
-            ) {
+            )
+            {
                 CheckIsAssignable(
                     value,
                     StackValue.CreateFromType(GetWellKnownType(WellKnownType.Exception)),
@@ -2835,7 +2855,8 @@ namespace Internal.IL
                     eR.Kind == ILExceptionRegionKind.Filter
                     && _currentOffset >= eR.HandlerOffset
                     && _currentOffset <= eR.HandlerOffset + eR.HandlerLength
-                ) {
+                )
+                {
                     return;
                 }
             }

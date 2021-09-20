@@ -18,7 +18,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.Structure
             AbstractStructureTaggerProvider tagProvider,
             BlockSpan blockSpan,
             ITextSnapshot snapshot
-        ) {
+        )
+        {
             Snapshot = snapshot;
             OutliningSpan = blockSpan.TextSpan.ToSpan();
             Type = ConvertType(blockSpan.Type);

@@ -26,7 +26,8 @@ namespace Microsoft.AspNetCore.Mvc.ModelBinding.Binders
             if (
                 bindingInfo.BindingSource == null
                 || !bindingInfo.BindingSource.CanAcceptDataFrom(BindingSource.Header)
-            ) {
+            )
+            {
                 return null;
             }
 

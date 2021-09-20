@@ -40,7 +40,8 @@ namespace System.ComponentModel.Composition.Hosting
                     | CompositionOptions.IsThreadSafe
                     | CompositionOptions.ExportCompositionService
                 )
-            ) {
+            )
+            {
                 throw new ArgumentOutOfRangeException(nameof(compositionOptions));
             }
 
@@ -210,7 +211,8 @@ namespace System.ComponentModel.Composition.Hosting
         protected override IEnumerable<Export>? GetExportsCore(
             ImportDefinition definition,
             AtomicComposition? atomicComposition
-        ) {
+        )
+        {
             ThrowIfDisposed();
             EnsureRunning();
 

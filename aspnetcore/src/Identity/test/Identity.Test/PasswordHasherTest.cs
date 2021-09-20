@@ -177,7 +177,8 @@ namespace Microsoft.AspNetCore.Identity.Test
         public void VerifyHashedPassword_Version3CompatMode_SuccessCases(
             string hashedPassword,
             PasswordVerificationResult expectedResult
-        ) {
+        )
+        {
             // Arrange
             var hasher = new PasswordHasher(compatMode: PasswordHasherCompatibilityMode.IdentityV3);
 
@@ -198,7 +199,8 @@ namespace Microsoft.AspNetCore.Identity.Test
             private static IOptions<PasswordHasherOptions> BuildOptions(
                 PasswordHasherCompatibilityMode? compatMode,
                 int? iterCount
-            ) {
+            )
+            {
                 var options = new PasswordHasherOptionsAccessor();
                 if (compatMode != null)
                 {

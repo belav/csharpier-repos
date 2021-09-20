@@ -1222,42 +1222,48 @@ namespace System.Web.Http.ModelBinding.Binders
             public virtual object CreateModelPublic(
                 HttpActionContext context,
                 ModelBindingContext bindingContext
-            ) {
+            )
+            {
                 return base.CreateModel(context, bindingContext);
             }
 
             protected override object CreateModel(
                 HttpActionContext context,
                 ModelBindingContext bindingContext
-            ) {
+            )
+            {
                 return CreateModelPublic(context, bindingContext);
             }
 
             public virtual void EnsureModelPublic(
                 HttpActionContext context,
                 ModelBindingContext bindingContext
-            ) {
+            )
+            {
                 base.EnsureModel(context, bindingContext);
             }
 
             protected override void EnsureModel(
                 HttpActionContext context,
                 ModelBindingContext bindingContext
-            ) {
+            )
+            {
                 EnsureModelPublic(context, bindingContext);
             }
 
             public virtual IEnumerable<ModelMetadata> GetMetadataForPropertiesPublic(
                 HttpActionContext context,
                 ModelBindingContext bindingContext
-            ) {
+            )
+            {
                 return base.GetMetadataForProperties(context, bindingContext);
             }
 
             protected override IEnumerable<ModelMetadata> GetMetadataForProperties(
                 HttpActionContext context,
                 ModelBindingContext bindingContext
-            ) {
+            )
+            {
                 return GetMetadataForPropertiesPublic(context, bindingContext);
             }
 
@@ -1267,7 +1273,8 @@ namespace System.Web.Http.ModelBinding.Binders
                 ModelMetadata propertyMetadata,
                 ComplexModelDtoResult dtoResult,
                 ModelValidator requiredValidator
-            ) {
+            )
+            {
                 base.SetProperty(
                     context,
                     bindingContext,
@@ -1283,7 +1290,8 @@ namespace System.Web.Http.ModelBinding.Binders
                 ModelMetadata propertyMetadata,
                 ComplexModelDtoResult dtoResult,
                 ModelValidator requiredValidator
-            ) {
+            )
+            {
                 SetPropertyPublic(
                     actionContext,
                     bindingContext,

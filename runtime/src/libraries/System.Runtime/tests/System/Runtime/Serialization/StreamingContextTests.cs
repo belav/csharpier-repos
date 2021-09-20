@@ -33,7 +33,8 @@ namespace System.Runtime.Serialization.Tests
         public void Ctor_StreamingContextStates_Object(
             StreamingContextStates state,
             object additional
-        ) {
+        )
+        {
             var context = new StreamingContext(state, additional);
             Assert.Equal(state, context.State);
             Assert.Equal(additional, context.Context);
@@ -67,7 +68,8 @@ namespace System.Runtime.Serialization.Tests
             StreamingContext context,
             object other,
             bool expected
-        ) {
+        )
+        {
             Assert.Equal(expected, context.Equals(other));
         }
 

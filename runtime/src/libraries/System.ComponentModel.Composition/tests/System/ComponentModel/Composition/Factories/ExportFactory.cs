@@ -30,7 +30,8 @@ namespace System.ComponentModel.Composition.Factories
         public static Lazy<T, IDictionary<string, object>> Create<T>(
             T value,
             IDictionary<string, object> metadata
-        ) {
+        )
+        {
             return Create<T, IDictionary<string, object>>(() => value, metadata);
         }
 
@@ -53,7 +54,8 @@ namespace System.ComponentModel.Composition.Factories
             string contractName,
             object value,
             IDictionary<string, object> metadata
-        ) {
+        )
+        {
             return Create(contractName, metadata, () => value);
         }
 
@@ -61,7 +63,8 @@ namespace System.ComponentModel.Composition.Factories
             string contractName,
             IDictionary<string, object> metadata,
             Func<object> exportedValueGetter
-        ) {
+        )
+        {
             return new Export(
                 ExportDefinitionFactory.Create(contractName, metadata),
                 exportedValueGetter
@@ -71,7 +74,8 @@ namespace System.ComponentModel.Composition.Factories
         private static Lazy<T, TMetadataView> Create<T, TMetadataView>(
             Func<T> exportedValueGetter,
             IDictionary<string, object> metadata
-        ) {
+        )
+        {
             return new Lazy<T, TMetadataView>(
                 exportedValueGetter,
                 AttributedModelServices.GetMetadataView<TMetadataView>(metadata),

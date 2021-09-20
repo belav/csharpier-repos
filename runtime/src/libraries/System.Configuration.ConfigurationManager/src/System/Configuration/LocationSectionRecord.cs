@@ -14,7 +14,8 @@ namespace System.Configuration
         internal LocationSectionRecord(
             SectionXmlInfo sectionXmlInfo,
             List<ConfigurationException> errors
-        ) {
+        )
+        {
             SectionXmlInfo = sectionXmlInfo;
             _errors = errors;
         }

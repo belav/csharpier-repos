@@ -34,7 +34,8 @@ namespace System.Web.Http.Tracing.Tracers
             HttpActionContext actionContext,
             CancellationToken cancellationToken,
             Func<Task<HttpResponseMessage>> continuation
-        ) {
+        )
+        {
             return TraceWriter.TraceBeginEndAsync<HttpResponseMessage>(
                 actionContext.Request,
                 TraceCategories.FiltersCategory,

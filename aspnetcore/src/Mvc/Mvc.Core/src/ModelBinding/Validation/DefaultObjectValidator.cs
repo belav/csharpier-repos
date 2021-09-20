@@ -35,7 +35,8 @@ namespace Microsoft.AspNetCore.Mvc.ModelBinding.Validation
             ValidatorCache validatorCache,
             IModelMetadataProvider metadataProvider,
             ValidationStateDictionary? validationState
-        ) {
+        )
+        {
             var visitor = new ValidationVisitor(
                 actionContext,
                 validatorProvider,

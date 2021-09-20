@@ -139,7 +139,8 @@ namespace Microsoft.AspNetCore.Mvc.Description
             bool isOptional,
             Type constraintType,
             object defaultValue
-        ) {
+        )
+        {
             // Arrange
             var action = CreateActionDescriptor();
             action.AttributeRouteInfo = new AttributeRouteInfo { Template = template };
@@ -185,7 +186,8 @@ namespace Microsoft.AspNetCore.Mvc.Description
             bool isOptional,
             Type constraintType,
             object defaultValue
-        ) {
+        )
+        {
             // Arrange
             var action = CreateActionDescriptor(nameof(FromRouting));
             action.AttributeRouteInfo = new AttributeRouteInfo { Template = template };
@@ -241,7 +243,8 @@ namespace Microsoft.AspNetCore.Mvc.Description
             string template,
             string methodName,
             string source
-        ) {
+        )
+        {
             // Arrange
             var action = CreateActionDescriptor(methodName);
             action.AttributeRouteInfo = new AttributeRouteInfo { Template = template };
@@ -277,7 +280,8 @@ namespace Microsoft.AspNetCore.Mvc.Description
             string template,
             string methodName,
             string source
-        ) {
+        )
+        {
             // Arrange
             var action = CreateActionDescriptor(methodName);
             action.AttributeRouteInfo = new AttributeRouteInfo { Template = template };
@@ -307,7 +311,8 @@ namespace Microsoft.AspNetCore.Mvc.Description
         public void GetApiDescription_ParameterFromPathAndDescriptor_IsOptionalIfRouteParameterIsOptional(
             string template,
             bool expectedOptional
-        ) {
+        )
+        {
             // Arrange
             var action = CreateActionDescriptor(nameof(FromRouting));
             action.AttributeRouteInfo = new AttributeRouteInfo { Template = template };
@@ -452,7 +457,8 @@ namespace Microsoft.AspNetCore.Mvc.Description
         [InlineData(nameof(ReturnsTaskOfActionResultOfSequenceOfProducts))]
         public void GetApiDescription_PopulatesResponseType_ForActionResultOfSequenceOfT(
             string methodName
-        ) {
+        )
+        {
             // Arrange
             var action = CreateActionDescriptor(methodName);
 
@@ -510,7 +516,8 @@ namespace Microsoft.AspNetCore.Mvc.Description
         [InlineData(nameof(ReturnsValueTaskOfJsonResult))]
         public void GetApiDescription_DoesNotPopulatesResponseInformation_WhenUnknown(
             string methodName
-        ) {
+        )
+        {
             // Arrange
             var action = CreateActionDescriptor(methodName);
 
@@ -581,7 +588,8 @@ namespace Microsoft.AspNetCore.Mvc.Description
             Type controllerType,
             string methodName,
             List<FilterDescriptor> filterDescriptors
-        ) {
+        )
+        {
             // Arrange
             var action = CreateActionDescriptor(methodName, controllerType);
             action.FilterDescriptors = filterDescriptors;
@@ -700,7 +708,8 @@ namespace Microsoft.AspNetCore.Mvc.Description
             Type controllerType,
             string methodName,
             List<FilterDescriptor> filterDescriptors
-        ) {
+        )
+        {
             // Arrange
             var action = CreateActionDescriptor(methodName, controllerType);
             action.FilterDescriptors = filterDescriptors;
@@ -744,7 +753,8 @@ namespace Microsoft.AspNetCore.Mvc.Description
         [InlineData(nameof(ReturnsTaskOfActionResultOfProduct))]
         public void GetApiDescription_ReturnsActionResultOfTWithProducesContentType(
             string methodName
-        ) {
+        )
+        {
             // Arrange
             var action = CreateActionDescriptor(methodName);
             action.FilterDescriptors = new List<FilterDescriptor>()
@@ -814,7 +824,8 @@ namespace Microsoft.AspNetCore.Mvc.Description
         [InlineData(nameof(ReturnsTaskOfActionResultOfProduct))]
         public void GetApiDescription_ReturnsActionResultOfTWithProducesContentType_ForStatusCode201(
             string methodName
-        ) {
+        )
+        {
             // Arrange
             var action = CreateActionDescriptor(methodName);
             action.FilterDescriptors = new List<FilterDescriptor>()
@@ -884,7 +895,8 @@ namespace Microsoft.AspNetCore.Mvc.Description
         [InlineData(nameof(ReturnsTaskOfActionResultOfSequenceOfProducts))]
         public void GetApiDescription_ReturnsActionResultOfSequenceOfTWithProducesContentType(
             string methodName
-        ) {
+        )
+        {
             // Arrange
             var action = CreateActionDescriptor(methodName);
             action.FilterDescriptors = new List<FilterDescriptor>()
@@ -1009,7 +1021,8 @@ namespace Microsoft.AspNetCore.Mvc.Description
         [InlineData(nameof(ReturnsValueTaskOfJsonResult))]
         public void GetApiDescription_PopulatesResponseInformation_WhenSetByFilter(
             string methodName
-        ) {
+        )
+        {
             // Arrange
             var action = CreateActionDescriptor(methodName);
             var filter = new ContentTypeAttribute("text/*") { Type = typeof(Order) };
@@ -2050,7 +2063,8 @@ namespace Microsoft.AspNetCore.Mvc.Description
 
         private static ApiParameterContext GetApiParameterContext(
             ApiParameterDescription description
-        ) {
+        )
+        {
             var context = new ApiParameterContext(
                 new EmptyModelMetadataProvider(),
                 new ControllerActionDescriptor(),
@@ -2065,7 +2079,8 @@ namespace Microsoft.AspNetCore.Mvc.Description
             List<MockInputFormatter> inputFormatters = null,
             List<MockOutputFormatter> outputFormatters = null,
             RouteOptions routeOptions = null
-        ) {
+        )
+        {
             var context = new ApiDescriptionProviderContext(new ActionDescriptor[] { action });
 
             var options = new MvcOptions();
@@ -2140,7 +2155,8 @@ namespace Microsoft.AspNetCore.Mvc.Description
         private ControllerActionDescriptor CreateActionDescriptor(
             string methodName = null,
             Type controllerType = null
-        ) {
+        )
+        {
             var action = new ControllerActionDescriptor();
             action.SetProperty(new ApiDescriptionActionData());
 
@@ -2550,7 +2566,8 @@ namespace Microsoft.AspNetCore.Mvc.Description
             public override Task<InputFormatterResult> ReadRequestBodyAsync(
                 InputFormatterContext context,
                 Encoding effectiveEncoding
-            ) {
+            )
+            {
                 throw new NotImplementedException();
             }
 

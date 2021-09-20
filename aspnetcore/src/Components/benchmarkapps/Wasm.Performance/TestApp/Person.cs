@@ -30,7 +30,8 @@ namespace Wasm.Performance.TestApp
             int thisDepth = 0,
             string namePrefix = null,
             int siblingIndex = 0
-        ) {
+        )
+        {
             var name = $"{namePrefix ?? "CEO"} - Subordinate {siblingIndex}";
             var rng = new Random(0);
             return new Person

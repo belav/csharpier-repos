@@ -200,7 +200,8 @@ namespace System.Linq.Expressions
             )]
                 Type type,
             string fieldName
-        ) {
+        )
+        {
             ContractUtils.RequiresNotNull(type, nameof(type));
             ContractUtils.RequiresNotNull(fieldName, nameof(fieldName));
 
@@ -287,7 +288,8 @@ namespace System.Linq.Expressions
             )]
                 Type type,
             string propertyName
-        ) {
+        )
+        {
             ContractUtils.RequiresNotNull(type, nameof(type));
             ContractUtils.RequiresNotNull(propertyName, nameof(propertyName));
             // bind to public names first
@@ -428,7 +430,8 @@ namespace System.Linq.Expressions
                 type.IsInterface
                 && method.Name == propertyMethod.Name
                 && type.GetMethod(method.Name) == propertyMethod
-            ) {
+            )
+            {
                 return true;
             }
             return false;
@@ -446,7 +449,8 @@ namespace System.Linq.Expressions
         public static MemberExpression PropertyOrField(
             Expression expression,
             string propertyOrFieldName
-        ) {
+        )
+        {
             ExpressionUtils.RequiresCanRead(expression, nameof(expression));
             // bind to public names first
             PropertyInfo? pi = expression.Type.GetProperty(

@@ -19,7 +19,8 @@ namespace Microsoft.Net.Http.Headers
             StringSegment value,
             ref int index,
             out T? parsedValue
-        ) {
+        )
+        {
             parsedValue = default;
 
             // If multiple values are supported (i.e. list of values), then accept an empty string: The header may
@@ -73,7 +74,8 @@ namespace Microsoft.Net.Http.Headers
             if (
                 (separatorFound && !SupportsMultipleValues)
                 || (!separatorFound && (current < value.Length))
-            ) {
+            )
+            {
                 return false;
             }
 

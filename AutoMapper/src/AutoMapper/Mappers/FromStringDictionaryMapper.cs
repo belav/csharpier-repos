@@ -40,7 +40,8 @@ namespace AutoMapper.Internal.Mappers
             Type destinationType,
             ResolutionContext context,
             ProfileMap profileMap
-        ) {
+        )
+        {
             boxedDestination ??= ObjectFactory.CreateInstance(destinationType);
             int matchedCount = 0;
             foreach (var member in profileMap.CreateTypeDetails(destinationType).WriteAccessors)

@@ -302,7 +302,8 @@ namespace ComWrappersTests.Common
             bool aggregateRefTracker,
             ComWrappers cw,
             delegate* <IntPtr, out IntPtr, IntPtr> CreateInstance
-        ) {
+        )
+        {
             bool isAggregation = typeof(T) != thisInstance.GetType();
 
             {
@@ -418,7 +419,8 @@ namespace ComWrappersTests.Common
                 if (
                     classNative.Inner != default(IntPtr)
                     && classNative.ReferenceTracker != default(IntPtr)
-                ) {
+                )
+                {
                     Marshal.Release(classNative.Inner);
                 }
             }

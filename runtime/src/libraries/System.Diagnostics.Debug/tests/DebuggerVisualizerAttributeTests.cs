@@ -25,7 +25,8 @@ namespace System.Diagnostics.Tests
         public void Ctor_VisualizerTypeName_VisualizerObjectSourceTypeName(
             string visualizerTypeName,
             string visualizerObjectSourceTypeName
-        ) {
+        )
+        {
             var attribute = new DebuggerVisualizerAttribute(
                 visualizerTypeName,
                 visualizerObjectSourceTypeName
@@ -42,7 +43,8 @@ namespace System.Diagnostics.Tests
         public void Ctor_VisualizerTypeName_VisualizerObjectSourceType(
             string visualizerTypeName,
             Type visualizerObjectSourceType
-        ) {
+        )
+        {
             var attribute = new DebuggerVisualizerAttribute(
                 visualizerTypeName,
                 visualizerObjectSourceType
@@ -77,7 +79,8 @@ namespace System.Diagnostics.Tests
         public void Ctor_VisualizerType_VisualizerObjectSourceType(
             Type visualizerType,
             Type visualizerObjectSourceType
-        ) {
+        )
+        {
             var attribute = new DebuggerVisualizerAttribute(
                 visualizerType,
                 visualizerObjectSourceType
@@ -97,7 +100,8 @@ namespace System.Diagnostics.Tests
         public void Ctor_VisualizerType_VisualizerObjectSourceTypeName(
             Type visualizerType,
             string visualizerObjectSourceTypeName
-        ) {
+        )
+        {
             var attribute = new DebuggerVisualizerAttribute(
                 visualizerType,
                 visualizerObjectSourceTypeName

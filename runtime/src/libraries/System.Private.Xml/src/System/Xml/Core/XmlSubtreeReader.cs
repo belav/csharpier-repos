@@ -34,7 +34,8 @@ namespace System.Xml
                 string name,
                 string namespaceUri,
                 string value
-            ) {
+            )
+            {
                 this.type = nodeType;
                 this.localName = localName;
                 this.prefix = prefix;
@@ -50,7 +51,8 @@ namespace System.Xml
                 string name,
                 string namespaceUri,
                 string value
-            ) {
+            )
+            {
                 this.type = nodeType;
                 this.localName = localName;
                 this.prefix = prefix;
@@ -471,7 +473,8 @@ namespace System.Xml
                         if (
                             reader.NodeType == XmlNodeType.EndElement
                             || (reader.NodeType == XmlNodeType.Element && reader.IsEmptyElement)
-                        ) {
+                        )
+                        {
                             _state = State.EndOfFile;
                             SetEmptyNode();
                             return false;
@@ -545,7 +548,8 @@ namespace System.Xml
                         reader.Depth == _initialDepth
                         && reader.NodeType == XmlNodeType.Element
                         && !reader.IsEmptyElement
-                    ) {
+                    )
+                    {
                         reader.Read();
                     }
                     // move to the end of the subtree, do nothing if on empty root element
@@ -590,7 +594,8 @@ namespace System.Xml
                                 while (
                                     reader.NodeType != XmlNodeType.EndElement
                                     && reader.Depth > _initialDepth
-                                ) {
+                                )
+                                {
                                     reader.Skip();
                                 }
                             }
@@ -800,7 +805,8 @@ namespace System.Xml
         public override object ReadContentAs(
             Type returnType,
             IXmlNamespaceResolver? namespaceResolver
-        ) {
+        )
+        {
             try
             {
                 InitReadContentAsType("ReadContentAs");
@@ -1224,7 +1230,8 @@ namespace System.Xml
         //
         IDictionary<string, string> IXmlNamespaceResolver.GetNamespacesInScope(
             XmlNamespaceScope scope
-        ) {
+        )
+        {
             if (!InNamespaceActiveState)
             {
                 return new Dictionary<string, string>();
@@ -1381,7 +1388,8 @@ namespace System.Xml
                 if (
                     Ref.Equal(prefix, _nsAttributes![i].prefix)
                     && Ref.Equal(localName, _nsAttributes[i].localName)
-                ) {
+                )
+                {
                     if (i < _nsAttrCount - 1)
                     {
                         // swap

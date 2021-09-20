@@ -160,7 +160,8 @@ namespace System.IO.IsolatedStorage
         }
         public static System.Collections.IEnumerator GetEnumerator(
             System.IO.IsolatedStorage.IsolatedStorageScope scope
-        ) {
+        )
+        {
             throw null;
         }
         public string[] GetFileNames()
@@ -194,27 +195,31 @@ namespace System.IO.IsolatedStorage
         public static System.IO.IsolatedStorage.IsolatedStorageFile GetStore(
             System.IO.IsolatedStorage.IsolatedStorageScope scope,
             object? applicationIdentity
-        ) {
+        )
+        {
             throw null;
         }
         public static System.IO.IsolatedStorage.IsolatedStorageFile GetStore(
             System.IO.IsolatedStorage.IsolatedStorageScope scope,
             object? domainIdentity,
             object? assemblyIdentity
-        ) {
+        )
+        {
             throw null;
         }
         public static System.IO.IsolatedStorage.IsolatedStorageFile GetStore(
             System.IO.IsolatedStorage.IsolatedStorageScope scope,
             System.Type? applicationEvidenceType
-        ) {
+        )
+        {
             throw null;
         }
         public static System.IO.IsolatedStorage.IsolatedStorageFile GetStore(
             System.IO.IsolatedStorage.IsolatedStorageScope scope,
             System.Type? domainEvidenceType,
             System.Type? assemblyEvidenceType
-        ) {
+        )
+        {
             throw null;
         }
         public static System.IO.IsolatedStorage.IsolatedStorageFile GetUserStoreForApplication()
@@ -242,14 +247,16 @@ namespace System.IO.IsolatedStorage
         public System.IO.IsolatedStorage.IsolatedStorageFileStream OpenFile(
             string path,
             System.IO.FileMode mode
-        ) {
+        )
+        {
             throw null;
         }
         public System.IO.IsolatedStorage.IsolatedStorageFileStream OpenFile(
             string path,
             System.IO.FileMode mode,
             System.IO.FileAccess access
-        ) {
+        )
+        {
             throw null;
         }
         public System.IO.IsolatedStorage.IsolatedStorageFileStream OpenFile(
@@ -257,7 +264,8 @@ namespace System.IO.IsolatedStorage
             System.IO.FileMode mode,
             System.IO.FileAccess access,
             System.IO.FileShare share
-        ) {
+        )
+        {
             throw null;
         }
         public override void Remove() { }
@@ -363,7 +371,8 @@ namespace System.IO.IsolatedStorage
             int numBytes,
             System.AsyncCallback? userCallback,
             object? stateObject
-        ) {
+        )
+        {
             throw null;
         }
         public override System.IAsyncResult BeginWrite(
@@ -372,7 +381,8 @@ namespace System.IO.IsolatedStorage
             int numBytes,
             System.AsyncCallback? userCallback,
             object? stateObject
-        ) {
+        )
+        {
             throw null;
         }
         protected override void Dispose(bool disposing) { }
@@ -389,7 +399,8 @@ namespace System.IO.IsolatedStorage
         public override void Flush(bool flushToDisk) { }
         public override System.Threading.Tasks.Task FlushAsync(
             System.Threading.CancellationToken cancellationToken
-        ) {
+        )
+        {
             throw null;
         }
         [System.Runtime.Versioning.UnsupportedOSPlatform("macos")]
@@ -407,14 +418,16 @@ namespace System.IO.IsolatedStorage
             int offset,
             int count,
             System.Threading.CancellationToken cancellationToken
-        ) {
+        )
+        {
             throw null;
         }
         public override System.Threading.Tasks.ValueTask<int> ReadAsync(
             System.Memory<byte> buffer,
             System.Threading.CancellationToken cancellationToken =
                 default(System.Threading.CancellationToken)
-        ) {
+        )
+        {
             throw null;
         }
         public override int ReadByte()
@@ -435,14 +448,16 @@ namespace System.IO.IsolatedStorage
             int offset,
             int count,
             System.Threading.CancellationToken cancellationToken
-        ) {
+        )
+        {
             throw null;
         }
         public override System.Threading.Tasks.ValueTask WriteAsync(
             System.ReadOnlyMemory<byte> buffer,
             System.Threading.CancellationToken cancellationToken =
                 default(System.Threading.CancellationToken)
-        ) {
+        )
+        {
             throw null;
         }
         public override void WriteByte(byte value) { }

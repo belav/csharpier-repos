@@ -31,7 +31,8 @@ namespace Microsoft.AspNetCore.Mvc.Infrastructure
             IOptions<JsonOptions> options,
             ILogger<SystemTextJsonResultExecutor> logger,
             IOptions<MvcOptions> mvcOptions
-        ) {
+        )
+        {
             _options = options.Value;
             _logger = logger;
             _asyncEnumerableReaderFactory = new AsyncEnumerableReader(mvcOptions.Value);
@@ -74,7 +75,8 @@ namespace Microsoft.AspNetCore.Mvc.Infrastructure
             if (
                 value != null
                 && _asyncEnumerableReaderFactory.TryGetReader(value.GetType(), out var reader)
-            ) {
+            )
+            {
                 Log.BufferingAsyncEnumerable(_logger, value);
                 value = await reader(value);
             }

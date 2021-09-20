@@ -79,7 +79,8 @@ namespace System.Drawing.Printing
             PaperSize paperSize,
             PaperSource paperSource,
             PrinterResolution printerResolution
-        ) {
+        )
+        {
             PrinterSettings = printerSettings;
             this.color = color;
             this.landscape = landscape;

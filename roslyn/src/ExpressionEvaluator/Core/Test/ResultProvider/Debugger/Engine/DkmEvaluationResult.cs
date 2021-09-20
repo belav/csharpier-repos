@@ -31,7 +31,8 @@ namespace Microsoft.VisualStudio.Debugger.Evaluation
             DkmEvaluationResultFlags Flags,
             string Type,
             DkmDataItem DataItem
-        ) {
+        )
+        {
             this.InspectionContext = InspectionContext;
             this.StackFrame = StackFrame;
             this.Name = Name;
@@ -50,7 +51,8 @@ namespace Microsoft.VisualStudio.Debugger.Evaluation
             int initialRequestSize,
             DkmInspectionContext inspectionContext,
             DkmCompletionRoutine<DkmGetChildrenAsyncResult> completionRoutine
-        ) {
+        )
+        {
             InspectionContext.InspectionSession.InvokeResultProvider(
                 this,
                 MethodId.GetChildren,

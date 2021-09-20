@@ -201,7 +201,8 @@ namespace System.IO
                                     )
                                     && left == 0
                                     && top > 0
-                                ) {
+                                )
+                                {
                                     if (s_clearToEol == null)
                                     {
                                         s_clearToEol =
@@ -393,7 +394,8 @@ namespace System.IO
             out bool isShift,
             out bool isAlt,
             out bool isCtrl
-        ) {
+        )
+        {
             Debug.Assert(!IsUnprocessedBufferEmpty());
 
             // Try to get the special key match from the TermInfo static information.
@@ -407,7 +409,8 @@ namespace System.IO
                     out keyInfo,
                     out keyLength
                 )
-            ) {
+            )
+            {
                 key = keyInfo.Key;
                 isShift = (keyInfo.Modifiers & ConsoleModifiers.Shift) != 0;
                 isAlt = (keyInfo.Modifiers & ConsoleModifiers.Alt) != 0;

@@ -347,7 +347,8 @@ namespace XLinqTests
             XName name,
             string value,
             bool isRefComparison
-        ) {
+        )
+        {
             bool wasReported = false;
             foreach (XAttribute a in e.Attributes())
             {

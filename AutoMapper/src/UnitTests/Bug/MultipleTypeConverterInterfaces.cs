@@ -36,7 +36,8 @@ namespace AutoMapper.UnitTests.Bug
                 SourceFoo source,
                 DestinationFoo destination,
                 ResolutionContext context
-            ) {
+            )
+            {
                 return new DestinationFoo { DestinationFooValue = source.SourceFooValue + 100 };
             }
 
@@ -44,7 +45,8 @@ namespace AutoMapper.UnitTests.Bug
                 SourceBar source,
                 DestinationBar destination,
                 ResolutionContext context
-            ) {
+            )
+            {
                 return new DestinationBar { DestinationBarValue = source.SourceBarValue + 1000 };
             }
         }

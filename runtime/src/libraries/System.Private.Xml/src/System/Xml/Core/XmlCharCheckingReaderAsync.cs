@@ -226,7 +226,8 @@ namespace System.Xml
             byte[] buffer,
             int index,
             int count
-        ) {
+        )
+        {
             if (ReadState != ReadState.Interactive)
             {
                 return 0;
@@ -278,7 +279,8 @@ namespace System.Xml
             byte[] buffer,
             int index,
             int count
-        ) {
+        )
+        {
             if (ReadState != ReadState.Interactive)
             {
                 return 0;
@@ -330,7 +332,8 @@ namespace System.Xml
             byte[] buffer,
             int index,
             int count
-        ) {
+        )
+        {
             // check arguments
             if (buffer == null)
             {
@@ -404,7 +407,8 @@ namespace System.Xml
             byte[] buffer,
             int index,
             int count
-        ) {
+        )
+        {
             // check arguments
             if (buffer == null)
             {

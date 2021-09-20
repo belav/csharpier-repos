@@ -38,7 +38,8 @@ namespace Microsoft.CSharp.RuntimeBinder
                 if (
                     !(mi2 is MethodInfo method2)
                     || method1.IsGenericMethod != method2.IsGenericMethod
-                ) {
+                )
+                {
                     return false;
                 }
 
@@ -49,7 +50,8 @@ namespace Microsoft.CSharp.RuntimeBinder
 
                     if (
                         method1.GetGenericArguments().Length != method2.GetGenericArguments().Length
-                    ) {
+                    )
+                    {
                         return false; // Methods of different arity are not equivalent.
                     }
                 }
@@ -110,7 +112,8 @@ namespace Microsoft.CSharp.RuntimeBinder
             ParameterInfo pi2,
             MethodBase method1,
             MethodBase method2
-        ) {
+        )
+        {
             if (pi1 == null || pi2 == null)
             {
                 return pi1 == null && pi2 == null;
@@ -154,7 +157,8 @@ namespace Microsoft.CSharp.RuntimeBinder
             Type t2,
             MemberInfo member1,
             MemberInfo member2
-        ) {
+        )
+        {
             Debug.Assert(
                 !(member1 is MethodBase)
                     || !((MethodBase)member1).IsGenericMethod
@@ -178,19 +182,22 @@ namespace Microsoft.CSharp.RuntimeBinder
                     // If member's declaring type is not type parameter's declaring type, we assume that it is used as a type argument
                     if (
                         t1.DeclaringMethod == null && member1.DeclaringType.Equals(t1.DeclaringType)
-                    ) {
+                    )
+                    {
                         if (
                             !(
                                 t2.DeclaringMethod == null
                                 && member2.DeclaringType.Equals(t2.DeclaringType)
                             )
-                        ) {
+                        )
+                        {
                             return t1.IsTypeParameterEquivalentToTypeInst(t2, member2);
                         }
                     }
                     else if (
                         t2.DeclaringMethod == null && member2.DeclaringType.Equals(t2.DeclaringType)
-                    ) {
+                    )
+                    {
                         return t2.IsTypeParameterEquivalentToTypeInst(t1, member1);
                     }
 
@@ -251,7 +258,8 @@ namespace Microsoft.CSharp.RuntimeBinder
             this Type typeParam,
             Type typeInst,
             MemberInfo member
-        ) {
+        )
+        {
             Debug.Assert(typeParam.IsGenericParameter);
 
             if (typeParam.DeclaringMethod != null)
@@ -397,7 +405,8 @@ namespace Microsoft.CSharp.RuntimeBinder
                             | BindingFlags.Static
                             | BindingFlags.Instance
                     )
-                ) {
+                )
+                {
                     if (p.Name == name && p.GetIndexParameters().Length != 0)
                     {
                         return name;

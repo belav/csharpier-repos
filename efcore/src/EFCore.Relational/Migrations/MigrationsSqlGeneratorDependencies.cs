@@ -64,7 +64,8 @@ namespace Microsoft.EntityFrameworkCore.Migrations
             ILoggingOptions loggingOptions,
             IRelationalCommandDiagnosticsLogger logger,
             IDiagnosticsLogger<DbLoggerCategory.Migrations> migrationsLogger
-        ) {
+        )
+        {
             Check.NotNull(commandBuilderFactory, nameof(commandBuilderFactory));
             Check.NotNull(updateSqlGenerator, nameof(updateSqlGenerator));
             Check.NotNull(sqlGenerationHelper, nameof(sqlGenerationHelper));

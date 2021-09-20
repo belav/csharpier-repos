@@ -377,7 +377,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.CodeModel.Metho
             ITypeSymbol type,
             bool? @implicit = null,
             bool assemblyQualify = false
-        ) {
+        )
+        {
             if (type.TypeKind == TypeKind.Array)
             {
                 var arrayType = (IArrayTypeSymbol)type;

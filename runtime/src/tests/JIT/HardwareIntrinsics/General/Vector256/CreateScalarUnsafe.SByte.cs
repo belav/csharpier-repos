@@ -71,7 +71,8 @@ namespace JIT.HardwareIntrinsics.General
             Vector256<SByte> result,
             SByte expectedValue,
             [CallerMemberName] string method = ""
-        ) {
+        )
+        {
             SByte[] resultElements = new SByte[ElementCount];
             Unsafe.WriteUnaligned(ref Unsafe.As<SByte, byte>(ref resultElements[0]), result);
             ValidateResult(resultElements, expectedValue, method);
@@ -81,7 +82,8 @@ namespace JIT.HardwareIntrinsics.General
             SByte[] resultElements,
             SByte expectedValue,
             [CallerMemberName] string method = ""
-        ) {
+        )
+        {
             bool succeeded = true;
 
             if (resultElements[0] != expectedValue)
@@ -94,7 +96,8 @@ namespace JIT.HardwareIntrinsics.General
                 {
                     if (
                         false /* value is uninitialized */
-                    ) {
+                    )
+                    {
                         succeeded = false;
                         break;
                     }

@@ -44,7 +44,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.CallHierarchy
             IThreadingContext threadingContext,
             [ImportMany] IEnumerable<ICallHierarchyPresenter> presenters,
             CallHierarchyProvider provider
-        ) {
+        )
+        {
             _threadingContext = threadingContext;
             _presenter = presenters.FirstOrDefault();
             _provider = provider;
@@ -53,13 +54,15 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.CallHierarchy
         public bool ExecuteCommand(
             ViewCallHierarchyCommandArgs args,
             CommandExecutionContext context
-        ) {
+        )
+        {
             using (
                 var waitScope = context.OperationContext.AddScope(
                     allowCancellation: true,
                     EditorFeaturesResources.Computing_Call_Hierarchy_Information
                 )
-            ) {
+            )
+            {
                 var cancellationToken = context.OperationContext.UserCancellationToken;
                 var document =
                     args.SubjectBuffer.CurrentSnapshot.GetFullyLoadedOpenDocumentInCurrentContextWithChanges(

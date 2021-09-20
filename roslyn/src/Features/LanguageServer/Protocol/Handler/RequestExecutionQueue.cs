@@ -85,7 +85,8 @@ namespace Microsoft.CodeAnalysis.LanguageServer.Handler
             ILspWorkspaceRegistrationService workspaceRegistrationService,
             string serverName,
             string serverTypeName
-        ) {
+        )
+        {
             _logger = logger;
             _workspaceRegistrationService = workspaceRegistrationService;
             _serverName = serverName;
@@ -266,7 +267,8 @@ namespace Microsoft.CodeAnalysis.LanguageServer.Handler
             QueueItem work,
             RequestContext context,
             CancellationToken queueCancellationToken
-        ) {
+        )
+        {
             // Create a combined cancellation token to cancel any requests in progress when this shuts down
             using var combinedTokenSource = queueCancellationToken.CombineWith(
                 work.CancellationToken

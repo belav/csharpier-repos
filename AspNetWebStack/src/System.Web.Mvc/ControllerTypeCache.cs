@@ -71,7 +71,8 @@ namespace System.Web.Mvc
         public ICollection<Type> GetControllerTypes(
             string controllerName,
             HashSet<string> namespaces
-        ) {
+        )
+        {
             HashSet<Type> matchingTypes = new HashSet<Type>();
 
             ILookup<string, Type> namespaceLookup;
@@ -146,7 +147,8 @@ namespace System.Web.Mvc
                         requestedNamespace,
                         StringComparison.OrdinalIgnoreCase
                     )
-                ) {
+                )
+                {
                     return false;
                 }
 

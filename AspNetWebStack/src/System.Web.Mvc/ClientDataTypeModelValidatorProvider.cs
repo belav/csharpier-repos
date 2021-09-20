@@ -38,7 +38,8 @@ namespace System.Web.Mvc
         public override IEnumerable<ModelValidator> GetValidators(
             ModelMetadata metadata,
             ControllerContext context
-        ) {
+        )
+        {
             if (metadata == null)
             {
                 throw new ArgumentNullException("metadata");
@@ -54,7 +55,8 @@ namespace System.Web.Mvc
         private static IEnumerable<ModelValidator> GetValidatorsImpl(
             ModelMetadata metadata,
             ControllerContext context
-        ) {
+        )
+        {
             Type type = metadata.ModelType;
 
             if (IsDateTimeType(type, metadata))
@@ -95,14 +97,16 @@ namespace System.Web.Mvc
         private static string GetUserResourceString(
             ControllerContext controllerContext,
             string resourceName
-        ) {
+        )
+        {
             string result = null;
 
             if (
                 !String.IsNullOrEmpty(ResourceClassKey)
                 && (controllerContext != null)
                 && (controllerContext.HttpContext != null)
-            ) {
+            )
+            {
                 result =
                     controllerContext.HttpContext.GetGlobalResourceObject(
                         ResourceClassKey,
@@ -178,15 +182,13 @@ namespace System.Web.Mvc
 
         internal sealed class DateModelValidator : ClientModelValidator
         {
-            public DateModelValidator(
-                ModelMetadata metadata,
-                ControllerContext controllerContext
-            ) : base(
-                metadata,
-                controllerContext,
-                "date",
-                GetFieldMustBeDateResource(controllerContext)
-            ) { }
+            public DateModelValidator(ModelMetadata metadata, ControllerContext controllerContext)
+                : base(
+                    metadata,
+                    controllerContext,
+                    "date",
+                    GetFieldMustBeDateResource(controllerContext)
+                ) { }
         }
 
         internal sealed class NumericModelValidator : ClientModelValidator
@@ -194,12 +196,13 @@ namespace System.Web.Mvc
             public NumericModelValidator(
                 ModelMetadata metadata,
                 ControllerContext controllerContext
-            ) : base(
-                metadata,
-                controllerContext,
-                "number",
-                GetFieldMustBeNumericResource(controllerContext)
-            ) { }
+            )
+                : base(
+                    metadata,
+                    controllerContext,
+                    "number",
+                    GetFieldMustBeNumericResource(controllerContext)
+                ) { }
         }
     }
 }

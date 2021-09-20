@@ -76,7 +76,8 @@ namespace System.Threading.Tasks.Dataflow.Tests
                             DataflowMessageHeader messageHeader,
                             ITargetBlock<int> target,
                             out bool messageConsumed
-                        ) {
+                        )
+                        {
                             consumedId = messageHeader.Id;
                             messageConsumed = true;
                             return 0;
@@ -101,7 +102,8 @@ namespace System.Threading.Tasks.Dataflow.Tests
                                     DataflowMessageHeader _,
                                     ITargetBlock<int> __,
                                     out bool ___
-                                ) {
+                                )
+                                {
                                     throw new InvalidOperationException();
                                 }
                             },
@@ -702,7 +704,8 @@ namespace System.Threading.Tasks.Dataflow.Tests
                         target,
                         new DataflowLinkOptions { PropagateCompletion = propagateCompletion }
                     )
-                ) {
+                )
+                {
                     source.PostRange(0, 2);
                     source.Complete();
                     await source.Completion;
@@ -1050,7 +1053,8 @@ namespace System.Threading.Tasks.Dataflow.Tests
                     int value,
                     ISourceBlock<int> source,
                     bool consumeToAccept
-                ) {
+                )
+                {
                     if (source == null)
                     {
                         return DataflowMessageStatus.Declined;
@@ -1084,7 +1088,8 @@ namespace System.Threading.Tasks.Dataflow.Tests
                     int value,
                     ISourceBlock<int> source,
                     bool consumeToAccept
-                ) {
+                )
+                {
                     if (source == null)
                     {
                         return DataflowMessageStatus.Declined;
@@ -1417,7 +1422,8 @@ namespace System.Threading.Tasks.Dataflow.Tests
                     DataflowMessageHeader messageHeader,
                     ITargetBlock<int> target,
                     out bool messageConsumed
-                ) {
+                )
+                {
                     throw new FormatException();
                 }
             };

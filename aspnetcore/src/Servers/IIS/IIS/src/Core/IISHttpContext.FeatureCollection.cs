@@ -401,7 +401,8 @@ namespace Microsoft.AspNetCore.Server.IIS.Core
 
         Task<X509Certificate2?> ITlsConnectionFeature.GetClientCertificateAsync(
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             return Task.FromResult(((ITlsConnectionFeature)this).ClientCertificate);
         }
 
@@ -415,7 +416,8 @@ namespace Microsoft.AspNetCore.Server.IIS.Core
                     && NativeRequest->pSslInfo->pClientCertInfo != null
                     && NativeRequest->pSslInfo->pClientCertInfo->pCertEncoded != null
                     && NativeRequest->pSslInfo->pClientCertInfo->CertEncodedSize != 0
-                ) {
+                )
+                {
                     // Based off of from https://referencesource.microsoft.com/#system/net/System/Net/HttpListenerRequest.cs,1037c8ec82879ba0,references
                     var rawCertificateCopy = new byte[
                         NativeRequest->pSslInfo->pClientCertInfo->CertEncodedSize
@@ -485,7 +487,8 @@ namespace Microsoft.AspNetCore.Server.IIS.Core
             if (
                 HttpVersion >= System.Net.HttpVersion.Version20
                 && NativeMethods.HttpSupportTrailer(_requestNativeHandle)
-            ) {
+            )
+            {
                 return this;
             }
 
@@ -504,7 +507,8 @@ namespace Microsoft.AspNetCore.Server.IIS.Core
             if (
                 HttpVersion >= System.Net.HttpVersion.Version20
                 && NativeMethods.HttpSupportTrailer(_requestNativeHandle)
-            ) {
+            )
+            {
                 return this;
             }
 

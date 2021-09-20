@@ -72,7 +72,8 @@ namespace Microsoft.CodeAnalysis.CSharp.ConvertSwitchStatementToExpression
             ImmutableArray<Diagnostic> diagnostics,
             SyntaxEditor editor,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             using var spansDisposer = ArrayBuilder<TextSpan>.GetInstance(
                 diagnostics.Length,
                 out var spans
@@ -158,12 +159,11 @@ namespace Microsoft.CodeAnalysis.CSharp.ConvertSwitchStatementToExpression
 
         private sealed class MyCodeAction : CustomCodeActions.DocumentChangeAction
         {
-            public MyCodeAction(
-                Func<CancellationToken, Task<Document>> createChangedDocument
-            ) : base(
-                CSharpAnalyzersResources.Convert_switch_statement_to_expression,
-                createChangedDocument
-            ) { }
+            public MyCodeAction(Func<CancellationToken, Task<Document>> createChangedDocument)
+                : base(
+                    CSharpAnalyzersResources.Convert_switch_statement_to_expression,
+                    createChangedDocument
+                ) { }
         }
     }
 }

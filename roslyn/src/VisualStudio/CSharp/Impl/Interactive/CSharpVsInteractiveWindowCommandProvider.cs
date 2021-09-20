@@ -35,7 +35,8 @@ namespace Microsoft.VisualStudio.LanguageServices.CSharp.Interactive
         public IOleCommandTarget GetCommandTarget(
             IWpfTextView textView,
             IOleCommandTarget nextTarget
-        ) {
+        )
+        {
             var target = new ScriptingOleCommandTarget(
                 textView,
                 (IComponentModel)_serviceProvider.GetService(typeof(SComponentModel))

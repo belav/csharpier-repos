@@ -496,7 +496,8 @@ namespace System.Runtime.Loader.Tests
 
         private static WeakReference<AssemblyLoadContext> CreateCollectible(
             CollectibleChecker checker
-        ) {
+        )
+        {
             var expectedContext = new ResourceAssemblyLoadContext(true);
             checker.SetAssemblyLoadContext(0, expectedContext);
             return new WeakReference<AssemblyLoadContext>(expectedContext);

@@ -142,7 +142,8 @@ namespace Microsoft.CodeAnalysis.UseObjectInitializer
                 >
             > matches,
             ImmutableArray<Location> locations
-        ) {
+        )
+        {
             var syntaxTree = context.Node.SyntaxTree;
 
             var fadeOutCode = context.GetOption(

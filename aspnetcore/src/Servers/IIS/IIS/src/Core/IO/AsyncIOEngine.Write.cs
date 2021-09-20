@@ -22,7 +22,8 @@ namespace Microsoft.AspNetCore.Server.IIS.Core.IO
                 int chunkCount,
                 HttpApiTypes.HTTP_DATA_CHUNK* dataChunks,
                 out bool completionExpected
-            ) {
+            )
+            {
                 return NativeMethods.HttpWriteResponseBytes(
                     requestHandler,
                     dataChunks,

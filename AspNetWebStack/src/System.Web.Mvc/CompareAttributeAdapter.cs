@@ -72,7 +72,8 @@ namespace System.Web.Mvc
                     !String.IsNullOrEmpty(attribute.ErrorMessage)
                     || !String.IsNullOrEmpty(attribute.ErrorMessageResourceName)
                     || attribute.ErrorMessageResourceType != null
-                ) {
+                )
+                {
                     ErrorMessage = attribute.ErrorMessage;
                     ErrorMessageResourceName = attribute.ErrorMessageResourceName;
                     ErrorMessageResourceType = attribute.ErrorMessageResourceType;

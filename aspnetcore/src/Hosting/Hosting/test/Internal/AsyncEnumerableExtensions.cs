@@ -10,7 +10,8 @@ namespace System.Collections.Generic
         public static async Task<T> FirstOrDefault<T>(
             this IAsyncEnumerator<T> values,
             Func<T, bool> filter
-        ) {
+        )
+        {
             while (await values.MoveNextAsync())
             {
                 if (filter(values.Current))

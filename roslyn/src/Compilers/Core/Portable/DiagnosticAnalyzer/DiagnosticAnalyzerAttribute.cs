@@ -25,7 +25,8 @@ namespace Microsoft.CodeAnalysis.Diagnostics
         public DiagnosticAnalyzerAttribute(
             string firstLanguage,
             params string[] additionalLanguages
-        ) {
+        )
+        {
             if (firstLanguage == null)
             {
                 throw new ArgumentNullException(nameof(firstLanguage));

@@ -125,7 +125,8 @@ namespace System.Reflection.TypeLoading
                 RuntimeTypeInfo type,
                 bool ignoreCase,
                 bool immediateTypeOnly
-            ) {
+            )
+            {
                 object[] perNameCaches = new object[MemberTypeIndex.Count];
                 perNameCaches[MemberTypeIndex.Constructor] = new PerNameQueryCache<ConstructorInfo>(
                     type,
@@ -197,7 +198,8 @@ namespace System.Reflection.TypeLoading
                     RuntimeTypeInfo type,
                     bool ignoreCase,
                     bool immediateTypeOnly
-                ) {
+                )
+                {
                     _type = type;
                     _ignoreCase = ignoreCase;
                     _immediateTypeOnly = immediateTypeOnly;

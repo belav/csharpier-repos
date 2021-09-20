@@ -27,7 +27,8 @@ namespace Microsoft.CodeAnalysis.CSharp.AddAccessibilityModifiers
             SyntaxTreeAnalysisContext context,
             CodeStyleOption2<AccessibilityModifiersRequired> option,
             CompilationUnitSyntax compilationUnit
-        ) {
+        )
+        {
             ProcessMembers(context, option, compilationUnit.Members);
         }
 
@@ -35,7 +36,8 @@ namespace Microsoft.CodeAnalysis.CSharp.AddAccessibilityModifiers
             SyntaxTreeAnalysisContext context,
             CodeStyleOption2<AccessibilityModifiersRequired> option,
             SyntaxList<MemberDeclarationSyntax> members
-        ) {
+        )
+        {
             foreach (var memberDeclaration in members)
             {
                 ProcessMemberDeclaration(context, option, memberDeclaration);
@@ -46,13 +48,15 @@ namespace Microsoft.CodeAnalysis.CSharp.AddAccessibilityModifiers
             SyntaxTreeAnalysisContext context,
             CodeStyleOption2<AccessibilityModifiersRequired> option,
             MemberDeclarationSyntax member
-        ) {
+        )
+        {
             if (
                 member.IsKind(
                     SyntaxKind.NamespaceDeclaration,
                     out NamespaceDeclarationSyntax namespaceDeclaration
                 )
-            ) {
+            )
+            {
                 ProcessMembers(context, option, namespaceDeclaration.Members);
             }
 
@@ -64,7 +68,8 @@ namespace Microsoft.CodeAnalysis.CSharp.AddAccessibilityModifiers
                 )
                 || member.IsKind(SyntaxKind.StructDeclaration, out typeDeclaration)
                 || member.IsKind(SyntaxKind.RecordDeclaration, out typeDeclaration)
-            ) {
+            )
+            {
                 ProcessMembers(context, option, typeDeclaration.Members);
             }
 

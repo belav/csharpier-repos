@@ -62,7 +62,8 @@ namespace Microsoft.CodeAnalysis.EditAndContinue
             DebuggingSession debuggingSession,
             EditSessionTelemetry telemetry,
             bool inBreakState
-        ) {
+        )
+        {
             DebuggingSession = debuggingSession;
             Telemetry = telemetry;
 
@@ -88,7 +89,8 @@ namespace Microsoft.CodeAnalysis.EditAndContinue
             Guid mvid,
             string projectDisplayName,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var availability = await DebuggingSession.DebuggerService.GetAvailabilityAsync(
                     mvid,
                     cancellationToken
@@ -118,7 +120,8 @@ namespace Microsoft.CodeAnalysis.EditAndContinue
 
         private async Task<ActiveStatementsMap> GetBaseActiveStatementsAsync(
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             try
             {
                 // Last committed solution reflects the state of the source that is in sync with the binaries that are loaded in the debuggee.
@@ -146,7 +149,8 @@ namespace Microsoft.CodeAnalysis.EditAndContinue
 
         private ActiveStatementsMap CreateActiveStatementsMap(
             ImmutableArray<ManagedActiveStatementDebugInfo> debugInfos
-        ) {
+        )
+        {
             var byDocument = PooledDictionary<
                 DocumentId,
                 ArrayBuilder<ActiveStatement>
@@ -187,7 +191,8 @@ namespace Microsoft.CodeAnalysis.EditAndContinue
                         firstDocumentId,
                         out var primaryDocumentActiveStatements
                     )
-                ) {
+                )
+                {
                     byDocument.Add(
                         firstDocumentId,
                         primaryDocumentActiveStatements =
@@ -248,7 +253,8 @@ namespace Microsoft.CodeAnalysis.EditAndContinue
 
         private LinePositionSpan GetUpToDateSpan(
             ManagedActiveStatementDebugInfo activeStatementInfo
-        ) {
+        )
+        {
             var activeSpan = activeStatementInfo.SourceSpan.ToLinePositionSpan();
 
             if ((activeStatementInfo.Flags & ActiveStatementFlags.MethodUpToDate) != 0)
@@ -282,10 +288,8 @@ namespace Microsoft.CodeAnalysis.EditAndContinue
         /// </summary>
         internal async Task<
             ImmutableArray<ActiveStatementExceptionRegions>
-        > GetBaseActiveExceptionRegionsAsync(
-            Solution solution,
-            CancellationToken cancellationToken
-        ) {
+        > GetBaseActiveExceptionRegionsAsync(Solution solution, CancellationToken cancellationToken)
+        {
             try
             {
                 if (!_lazyBaseActiveExceptionRegions.IsDefault)
@@ -386,7 +390,8 @@ namespace Microsoft.CodeAnalysis.EditAndContinue
             Project newProject,
             ArrayBuilder<Document> changedOrAddedDocuments,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             changedOrAddedDocuments.Clear();
 
             if (!EditAndContinueWorkspaceService.SupportsEditAndContinue(newProject))
@@ -422,7 +427,8 @@ namespace Microsoft.CodeAnalysis.EditAndContinue
                     oldProject.State.DocumentStates,
                     ignoreUnchangedContent: true
                 )
-            ) {
+            )
+            {
                 var document = newProject.GetDocument(documentId)!;
                 if (document.State.Attributes.DesignTimeOnly)
                 {
@@ -455,7 +461,8 @@ namespace Microsoft.CodeAnalysis.EditAndContinue
                 var documentId in newProject.State.DocumentStates.GetAddedStateIds(
                     oldProject.State.DocumentStates
                 )
-            ) {
+            )
+            {
                 var document = newProject.GetDocument(documentId)!;
                 if (document.State.Attributes.DesignTimeOnly)
                 {
@@ -489,7 +496,8 @@ namespace Microsoft.CodeAnalysis.EditAndContinue
                 && !newProject.State.AnalyzerConfigDocumentStates.HasAnyStateChanges(
                     oldProject.State.AnalyzerConfigDocumentStates
                 )
-            ) {
+            )
+            {
                 // Based on the above assumption there are no changes in source generated files.
                 return;
             }
@@ -512,7 +520,8 @@ namespace Microsoft.CodeAnalysis.EditAndContinue
                     oldSourceGeneratedDocumentStates,
                     ignoreUnchangedContent: true
                 )
-            ) {
+            )
+            {
                 var newState = newSourceGeneratedDocumentStates.GetRequiredState(documentId);
                 if (newState.Attributes.DesignTimeOnly)
                 {
@@ -528,7 +537,8 @@ namespace Microsoft.CodeAnalysis.EditAndContinue
                 var documentId in newSourceGeneratedDocumentStates.GetAddedStateIds(
                     oldSourceGeneratedDocumentStates
                 )
-            ) {
+            )
+            {
                 var newState = newSourceGeneratedDocumentStates.GetRequiredState(documentId);
                 if (newState.Attributes.DesignTimeOnly)
                 {
@@ -546,7 +556,8 @@ namespace Microsoft.CodeAnalysis.EditAndContinue
             ArrayBuilder<Document> changedOrAddedDocuments,
             SolutionActiveStatementSpanProvider newDocumentActiveStatementSpanProvider,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             using var _1 = ArrayBuilder<Diagnostic>.GetInstance(out var documentDiagnostics);
             using var _2 =
                 ArrayBuilder<(Document newDocument, ImmutableArray<TextSpan> newActiveStatementSpans)>.GetInstance(
@@ -654,7 +665,8 @@ namespace Microsoft.CodeAnalysis.EditAndContinue
             SolutionActiveStatementSpanProvider solutionActiveStatementSpanProvider,
             string? sourceFilePath,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             try
             {
                 var baseSolution = DebuggingSession.LastCommittedSolution;
@@ -762,7 +774,8 @@ namespace Microsoft.CodeAnalysis.EditAndContinue
 
         private static ProjectAnalysisSummary GetProjectAnalysisSymmary(
             ImmutableArray<DocumentAnalysisResults> documentAnalyses
-        ) {
+        )
+        {
             var hasChanges = false;
             var hasSignificantValidChanges = false;
 
@@ -809,7 +822,8 @@ namespace Microsoft.CodeAnalysis.EditAndContinue
             Compilation newCompilation,
             ImmutableArray<DocumentAnalysisResults> changedDocumentAnalyses,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             try
             {
                 using var _1 = ArrayBuilder<SemanticEditInfo>.GetInstance(out var allEdits);
@@ -879,7 +893,8 @@ namespace Microsoft.CodeAnalysis.EditAndContinue
             out ImmutableArray<SemanticEdit> mergedEdits,
             out ImmutableHashSet<ISymbol> addedSymbols,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             using var _0 = ArrayBuilder<SemanticEdit>.GetInstance(
                 edits.Count,
                 out var mergedEditsBuilder
@@ -1017,7 +1032,8 @@ namespace Microsoft.CodeAnalysis.EditAndContinue
             Solution solution,
             SolutionActiveStatementSpanProvider solutionActiveStatementSpanProvider,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             try
             {
                 using var _1 = ArrayBuilder<ManagedModuleUpdate>.GetInstance(out var deltas);
@@ -1172,7 +1188,8 @@ namespace Microsoft.CodeAnalysis.EditAndContinue
                             out var createBaselineDiagnostics,
                             out var baseline
                         )
-                    ) {
+                    )
+                    {
                         Debug.Assert(!createBaselineDiagnostics.IsEmpty);
 
                         // Report diagnosics even when the module is never going to be loaded (e.g. in multi-targeting scenario, where only one framework being debugged).
@@ -1360,7 +1377,8 @@ namespace Microsoft.CodeAnalysis.EditAndContinue
             out ImmutableArray<ManagedActiveStatementUpdate> activeStatementsInUpdatedMethods,
             out ImmutableArray<(ManagedModuleMethodId Method, NonRemappableRegion Region)> nonRemappableRegions,
             out ImmutableArray<ManagedExceptionRegionUpdate> exceptionRegionUpdates
-        ) {
+        )
+        {
             using var _1 = PooledDictionary<
                 (ManagedModuleMethodId MethodId, LinePositionSpan BaseSpan),
                 LinePositionSpan
@@ -1377,7 +1395,8 @@ namespace Microsoft.CodeAnalysis.EditAndContinue
                     newActiveStatements,
                     newExceptionRegions
                 ) in newActiveStatementsInChangedDocuments
-            ) {
+            )
+            {
                 var oldActiveStatements = baseActiveStatements.DocumentMap[documentId];
                 Debug.Assert(oldActiveStatements.Length == newActiveStatements.Length);
                 Debug.Assert(newActiveStatements.Length == newExceptionRegions.Length);
@@ -1405,7 +1424,8 @@ namespace Microsoft.CodeAnalysis.EditAndContinue
                         LinePositionSpan oldSpan,
                         LinePositionSpan newSpan,
                         bool isExceptionRegion
-                    ) {
+                    )
+                    {
                         if (oldActiveStatement.IsMethodUpToDate)
                         {
                             // Start tracking non-remappable regions for active statements in methods that were up-to-date
@@ -1449,7 +1469,8 @@ namespace Microsoft.CodeAnalysis.EditAndContinue
                     var j = 0;
                     foreach (
                         var oldSpan in baseActiveExceptionRegions[oldActiveStatement.Ordinal].Spans
-                    ) {
+                    )
+                    {
                         AddNonRemappableRegion(
                             oldSpan,
                             newExceptionRegions[oldActiveStatement.PrimaryDocumentOrdinal][j++],
@@ -1501,7 +1522,8 @@ namespace Microsoft.CodeAnalysis.EditAndContinue
                                 (methodInstance.Method, baseSpan),
                                 out var newSpan
                             )
-                        ) {
+                        )
+                        {
                             // all spans must be of the same size:
                             Debug.Assert(
                                 newSpan.End.Line - newSpan.Start.Line

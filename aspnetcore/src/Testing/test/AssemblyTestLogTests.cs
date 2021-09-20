@@ -49,7 +49,8 @@ namespace Microsoft.Extensions.Logging.Testing.Tests
 
             using (
                 assemblyLog.StartTestLog(output, "NonExistant.Test.Class", out var loggerFactory)
-            ) {
+            )
+            {
                 var logger = loggerFactory.CreateLogger("TestLogger");
                 logger.LogInformation("Information!");
 
@@ -92,7 +93,8 @@ namespace Microsoft.Extensions.Logging.Testing.Tests
                             out var _,
                             testName: illegalTestName
                         )
-                    ) {
+                    )
+                    {
                         Assert.Equal(escapedTestName, resolvedTestname);
                     }
                 }
@@ -119,7 +121,8 @@ namespace Microsoft.Extensions.Logging.Testing.Tests
                                 minLogLevel: LogLevel.Trace,
                                 testName: "FakeTestName"
                             )
-                        ) {
+                        )
+                        {
                             var testLogger = testLoggerFactory.CreateLogger("TestLogger");
                             testLogger.LogInformation("Information!");
                             testLogger.LogTrace("Trace!");
@@ -190,7 +193,8 @@ namespace Microsoft.Extensions.Logging.Testing.Tests
                                 minLogLevel: LogLevel.Trace,
                                 testName: longTestName
                             )
-                        ) {
+                        )
+                        {
                             testLoggerFactory.CreateLogger("TestLogger")
                                 .LogInformation("Information!");
                         }
@@ -242,7 +246,8 @@ namespace Microsoft.Extensions.Logging.Testing.Tests
                                     minLogLevel: LogLevel.Trace,
                                     testName: "FakeTestName"
                                 )
-                            ) {
+                            )
+                            {
                                 testLoggerFactory.CreateLogger("TestLogger")
                                     .LogInformation("Information!");
                             }
@@ -288,7 +293,8 @@ namespace Microsoft.Extensions.Logging.Testing.Tests
         private async Task RunTestLogFunctionalTest(
             Action<string> action,
             [CallerMemberName] string testName = null
-        ) {
+        )
+        {
             var tempDir = Path.Combine(
                 Path.GetTempPath(),
                 $"TestLogging_{Guid.NewGuid().ToString("N")}"

@@ -58,7 +58,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UseDeconstruction
             ImmutableArray<Diagnostic> diagnostics,
             SyntaxEditor editor,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var nodesToProcess = diagnostics.SelectAsArray(
                 d => d.Location.FindToken(cancellationToken).Parent
             );
@@ -91,7 +92,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UseDeconstruction
             SyntaxNode node,
             Workspace workspace,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var editor = new SyntaxEditor(root, workspace);
 
             // We use the callback form of ReplaceNode because we may have nested code that
@@ -110,7 +112,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UseDeconstruction
                         out memberAccessExpressions,
                         cancellationToken
                     )
-                ) {
+                )
+                {
                     editor.ReplaceNode(
                         variableDeclaration.Parent,
                         (current, _) =>
@@ -136,7 +139,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UseDeconstruction
                         out memberAccessExpressions,
                         cancellationToken
                     )
-                ) {
+                )
+                {
                     editor.ReplaceNode(
                         forEachStatement,
                         (current, _) =>
@@ -166,7 +170,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UseDeconstruction
         private ForEachVariableStatementSyntax CreateForEachVariableStatement(
             INamedTypeSymbol tupleType,
             ForEachStatementSyntax forEachStatement
-        ) {
+        )
+        {
             // Copy all the tokens/nodes from the existing foreach statement to the new foreach statement.
             // However, convert the existing declaration over to a "var (x, y)" declaration or (int x, int y)
             // tuple expression.
@@ -187,7 +192,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UseDeconstruction
             INamedTypeSymbol tupleType,
             LocalDeclarationStatementSyntax declarationStatement,
             VariableDeclaratorSyntax variableDeclarator
-        ) {
+        )
+        {
             // Copy all the tokens/nodes from the existing declaration statement to the new assignment
             // statement. However, convert the existing declaration over to a "var (x, y)" declaration
             // or (int x, int y) tuple expression.
@@ -208,7 +214,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UseDeconstruction
         private ExpressionSyntax CreateTupleOrDeclarationExpression(
             INamedTypeSymbol tupleType,
             TypeSyntax typeNode
-        ) {
+        )
+        {
             // If we have an explicit tuple type in code, convert that over to a tuple expression.
             // i.e.   (int x, int y) t = ...   will be converted to (int x, int y) = ...
             //
@@ -269,13 +276,12 @@ namespace Microsoft.CodeAnalysis.CSharp.UseDeconstruction
 
         private class MyCodeAction : CustomCodeActions.DocumentChangeAction
         {
-            public MyCodeAction(
-                Func<CancellationToken, Task<Document>> createChangedDocument
-            ) : base(
-                CSharpAnalyzersResources.Deconstruct_variable_declaration,
-                createChangedDocument,
-                CSharpAnalyzersResources.Deconstruct_variable_declaration
-            ) { }
+            public MyCodeAction(Func<CancellationToken, Task<Document>> createChangedDocument)
+                : base(
+                    CSharpAnalyzersResources.Deconstruct_variable_declaration,
+                    createChangedDocument,
+                    CSharpAnalyzersResources.Deconstruct_variable_declaration
+                ) { }
         }
     }
 }

@@ -36,7 +36,8 @@ namespace Microsoft.VisualStudio.IntegrationTest.Utilities.Input
         public static async Task<bool> SimulateClickAsync(
             this ButtonBase button,
             JoinableTaskFactory joinableTaskFactory
-        ) {
+        )
+        {
             await joinableTaskFactory.SwitchToMainThreadAsync();
 
             if (!button.IsEnabled || !button.IsVisible)

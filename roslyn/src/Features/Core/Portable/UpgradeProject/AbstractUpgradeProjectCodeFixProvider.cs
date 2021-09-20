@@ -86,7 +86,8 @@ namespace Microsoft.CodeAnalysis.UpgradeProject
             string language,
             string version,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var currentSolution = solution;
             foreach (var projectId in solution.Projects.Select(p => p.Id))
             {

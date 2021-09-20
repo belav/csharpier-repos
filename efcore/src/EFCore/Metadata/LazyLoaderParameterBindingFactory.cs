@@ -70,7 +70,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata
             IMutableEntityType entityType,
             Type parameterType,
             string parameterName
-        ) {
+        )
+        {
             Check.NotNull(entityType, nameof(entityType));
             Check.NotNull(parameterType, nameof(parameterType));
             Check.NotEmpty(parameterName, nameof(parameterName));
@@ -96,7 +97,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata
             IConventionEntityType entityType,
             Type parameterType,
             string parameterName
-        ) {
+        )
+        {
             Check.NotNull(entityType, nameof(entityType));
             Check.NotNull(parameterType, nameof(parameterType));
             Check.NotEmpty(parameterName, nameof(parameterName));
@@ -122,7 +124,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata
             IReadOnlyEntityType entityType,
             Type parameterType,
             string parameterName
-        ) {
+        )
+        {
             Check.NotNull(entityType, nameof(entityType));
             Check.NotNull(parameterType, nameof(parameterType));
             Check.NotEmpty(parameterName, nameof(parameterName));

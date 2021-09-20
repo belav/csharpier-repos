@@ -15,7 +15,8 @@ namespace System.Security.Cryptography.Xml
             StringBuilder strBuilder,
             DocPosition docPos,
             AncestralNamespaceContextManager anc
-        ) {
+        )
+        {
             if (node is ICanonicalizableNode)
             {
                 ((ICanonicalizableNode)node).Write(strBuilder, docPos, anc);
@@ -31,7 +32,8 @@ namespace System.Security.Cryptography.Xml
             StringBuilder strBuilder,
             DocPosition docPos,
             AncestralNamespaceContextManager anc
-        ) {
+        )
+        {
             if (node == null)
                 throw new ArgumentNullException(nameof(node));
 
@@ -47,7 +49,8 @@ namespace System.Security.Cryptography.Xml
             HashAlgorithm hash,
             DocPosition docPos,
             AncestralNamespaceContextManager anc
-        ) {
+        )
+        {
             if (node is ICanonicalizableNode)
             {
                 ((ICanonicalizableNode)node).WriteHash(hash, docPos, anc);
@@ -63,7 +66,8 @@ namespace System.Security.Cryptography.Xml
             HashAlgorithm hash,
             DocPosition docPos,
             AncestralNamespaceContextManager anc
-        ) {
+        )
+        {
             if (node == null)
                 throw new ArgumentNullException(nameof(node));
 

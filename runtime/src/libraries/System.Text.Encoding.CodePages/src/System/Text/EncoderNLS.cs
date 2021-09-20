@@ -132,7 +132,8 @@ namespace System.Text
             byte[] bytes,
             int byteIndex,
             bool flush
-        ) {
+        )
+        {
             // Validate parameters
             if (chars == null || bytes == null)
                 throw new ArgumentNullException(
@@ -177,7 +178,8 @@ namespace System.Text
             byte* bytes,
             int byteCount,
             bool flush
-        ) {
+        )
+        {
             // Validate parameters
             if (chars == null || bytes == null)
                 throw new ArgumentNullException(
@@ -209,7 +211,8 @@ namespace System.Text
             out int charsUsed,
             out int bytesUsed,
             out bool completed
-        ) {
+        )
+        {
             // Validate parameters
             if (chars == null || bytes == null)
                 throw new ArgumentNullException(
@@ -277,7 +280,8 @@ namespace System.Text
             out int charsUsed,
             out int bytesUsed,
             out bool completed
-        ) {
+        )
+        {
             // Validate input parameters
             if (bytes == null || chars == null)
                 throw new ArgumentNullException(

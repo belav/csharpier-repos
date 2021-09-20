@@ -35,7 +35,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.ProjectSystem.C
             VisualStudioWorkspaceImpl workspace,
             IProjectCodeModelFactory projectCodeModelFactory,
             SVsServiceProvider serviceProvider
-        ) {
+        )
+        {
             _threadingContext = threadingContext;
             _projectFactory = projectFactory;
             _workspace = workspace;
@@ -50,7 +51,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.ProjectSystem.C
             Guid projectGuid,
             object hierarchy,
             string binOutputPath
-        ) {
+        )
+        {
             return _threadingContext.JoinableTaskFactory.Run(
                 () =>
                     this.CreateProjectContextAsync(
@@ -73,7 +75,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.ProjectSystem.C
             object hierarchy,
             string binOutputPath,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             await _threadingContext.JoinableTaskFactory.SwitchToMainThreadAsync(cancellationToken);
 
             var creationInfo = new VisualStudioProjectCreationInfo

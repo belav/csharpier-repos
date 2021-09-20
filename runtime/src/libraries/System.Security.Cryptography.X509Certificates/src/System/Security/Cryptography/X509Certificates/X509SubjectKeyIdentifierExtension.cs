@@ -84,7 +84,8 @@ namespace System.Security.Cryptography.X509Certificates
         private static byte[] EncodeExtension(
             PublicKey key,
             X509SubjectKeyIdentifierHashAlgorithm algorithm
-        ) {
+        )
+        {
             if (key == null)
                 throw new ArgumentNullException(nameof(key));
 
@@ -100,7 +101,8 @@ namespace System.Security.Cryptography.X509Certificates
         private static byte[] GenerateSubjectKeyIdentifierFromPublicKey(
             PublicKey key,
             X509SubjectKeyIdentifierHashAlgorithm algorithm
-        ) {
+        )
+        {
             switch (algorithm)
             {
                 case X509SubjectKeyIdentifierHashAlgorithm.Sha1:

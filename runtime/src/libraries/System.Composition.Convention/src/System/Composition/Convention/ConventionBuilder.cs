@@ -174,7 +174,8 @@ namespace System.Composition.Convention
         public override IEnumerable<Attribute> GetCustomAttributes(
             Type reflectedType,
             System.Reflection.MemberInfo member
-        ) {
+        )
+        {
             if (member == null)
             {
                 throw new ArgumentNullException(nameof(member));
@@ -210,7 +211,8 @@ namespace System.Composition.Convention
                                     object,
                                     List<Attribute>
                                 > element in EvaluateThisTypeInfoAgainstTheConvention(typeInfo)
-                            ) {
+                            )
+                            {
                                 attributeList = element.Item2;
                                 if (attributeList != null)
                                 {
@@ -225,13 +227,15 @@ namespace System.Composition.Convention
                                                 || mi is PropertyInfo
                                                 || mi is MethodInfo
                                             )
-                                        ) {
+                                        )
+                                        {
                                             if (
                                                 !_memberInfos.TryGetValue(
                                                     mi,
                                                     out List<Attribute> memberAttributes
                                                 )
-                                            ) {
+                                            )
+                                            {
                                                 _memberInfos.Add(mi, element.Item2);
                                             }
                                         }
@@ -252,7 +256,8 @@ namespace System.Composition.Convention
                                                 pi,
                                                 out List<Attribute> parameterAttributes
                                             )
-                                        ) {
+                                        )
+                                        {
                                             _parameters.Add(pi, element.Item2);
                                         }
                                     }
@@ -289,7 +294,8 @@ namespace System.Composition.Convention
         private List<Attribute> ReadMemberCustomAttributes(
             Type reflectedType,
             System.Reflection.MemberInfo member
-        ) {
+        )
+        {
             List<Attribute> cachedAttributes = null;
             bool getMemberAttributes = false;
 
@@ -306,7 +312,8 @@ namespace System.Composition.Convention
                             member.DeclaringType.GetTypeInfo() as MemberInfo,
                             out cachedAttributes
                         )
-                    ) {
+                    )
+                    {
                         // If there is nothing for this parameter look to see if the declaring Member has been cached yet?
                         // need to do it outside of the lock, so set the flag we'll check it in a bit
                         getMemberAttributes = true;
@@ -349,7 +356,8 @@ namespace System.Composition.Convention
         public override IEnumerable<Attribute> GetCustomAttributes(
             Type reflectedType,
             System.Reflection.ParameterInfo parameter
-        ) {
+        )
+        {
             if (parameter == null)
             {
                 throw new ArgumentNullException(nameof(parameter));
@@ -366,7 +374,8 @@ namespace System.Composition.Convention
         private List<Attribute> ReadParameterCustomAttributes(
             Type reflectedType,
             System.Reflection.ParameterInfo parameter
-        ) {
+        )
+        {
             List<Attribute> cachedAttributes = null;
             bool getMemberAttributes = false;
 
@@ -383,7 +392,8 @@ namespace System.Composition.Convention
                             reflectedType.GetTypeInfo() as MemberInfo,
                             out cachedAttributes
                         )
-                    ) {
+                    )
+                    {
                         // If there is nothing for this parameter look to see if the declaring Member has been cached yet?
                         // need to do it outside of the lock, so set the flag we'll check it in a bit
                         getMemberAttributes = true;

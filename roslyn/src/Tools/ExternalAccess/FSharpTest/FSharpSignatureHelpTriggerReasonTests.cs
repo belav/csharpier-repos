@@ -26,7 +26,8 @@ namespace Microsoft.CodeAnalysis.ExternalAccess.FSharp.UnitTests
 
         internal static FSharpSignatureHelpTriggerReason GetExpectedTriggerReason(
             SignatureHelpTriggerReason triggerReason
-        ) {
+        )
+        {
             switch (triggerReason)
             {
                 case SignatureHelpTriggerReason.InvokeSignatureHelpCommand:

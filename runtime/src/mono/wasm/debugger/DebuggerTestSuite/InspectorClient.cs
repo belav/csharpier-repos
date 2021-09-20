@@ -41,7 +41,8 @@ namespace Microsoft.WebAssembly.Diagnostics
             Uri uri,
             Func<string, JObject, CancellationToken, Task> onEvent,
             CancellationToken token
-        ) {
+        )
+        {
             this.onEvent = onEvent;
 
             RunLoopStopped += (_, args) =>
@@ -70,7 +71,8 @@ namespace Microsoft.WebAssembly.Diagnostics
             string method,
             JObject args,
             CancellationToken token
-        ) {
+        )
+        {
             int id = ++next_cmd_id;
             if (args == null)
                 args = new JObject();

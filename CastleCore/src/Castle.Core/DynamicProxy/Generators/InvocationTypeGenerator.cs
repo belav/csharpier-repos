@@ -38,7 +38,8 @@ namespace Castle.DynamicProxy.Generators
             MethodInfo callback,
             bool canChangeTarget,
             IInvocationCreationContributor contributor
-        ) {
+        )
+        {
             this.targetType = targetType;
             this.method = method;
             this.callback = callback;
@@ -103,7 +104,8 @@ namespace Castle.DynamicProxy.Generators
             MethodInfo callbackMethod,
             Reference targetField,
             MethodEmitter invokeMethodOnTarget
-        ) {
+        )
+        {
             if (contributor != null)
             {
                 return contributor.GetCallbackMethodInvocation(
@@ -128,7 +130,8 @@ namespace Castle.DynamicProxy.Generators
             ParameterInfo[] parameters,
             MethodEmitter invokeMethodOnTarget,
             Reference targetField
-        ) {
+        )
+        {
             var callbackMethod = GetCallbackMethod(invocation);
             if (callbackMethod == null)
             {
@@ -228,7 +231,8 @@ namespace Castle.DynamicProxy.Generators
         private void AssignBackByRefArguments(
             MethodEmitter invokeMethodOnTarget,
             Dictionary<int, LocalReference> byRefArguments
-        ) {
+        )
+        {
             if (byRefArguments.Count == 0)
             {
                 return;
@@ -266,7 +270,8 @@ namespace Castle.DynamicProxy.Generators
         private ConstructorEmitter CreateConstructor(
             AbstractTypeEmitter invocation,
             ArgumentReference[] baseCtorArguments
-        ) {
+        )
+        {
             if (contributor == null)
             {
                 return invocation.CreateConstructor(baseCtorArguments);
@@ -309,7 +314,8 @@ namespace Castle.DynamicProxy.Generators
             Type[] interfaces,
             INamingScope namingScope,
             MethodInfo methodInfo
-        ) {
+        )
+        {
             var suggestedName = string.Format(
                 "Castle.Proxies.Invocations.{0}_{1}",
                 methodInfo.DeclaringType.Name,
@@ -331,7 +337,8 @@ namespace Castle.DynamicProxy.Generators
             ParameterInfo[] parameters,
             FieldReference targetField,
             MethodInfo callbackMethod
-        ) {
+        )
+        {
             var invokeMethodOnTarget = invocation.CreateMethod(
                 "InvokeMethodOnTarget",
                 typeof(void)
@@ -347,7 +354,8 @@ namespace Castle.DynamicProxy.Generators
         private void ImplementChangeInvocationTarget(
             AbstractTypeEmitter invocation,
             FieldReference targetField
-        ) {
+        )
+        {
             var changeInvocationTarget = invocation.CreateMethod(
                 "ChangeInvocationTarget",
                 typeof(void),
@@ -399,7 +407,8 @@ namespace Castle.DynamicProxy.Generators
             ClassEmitter @class,
             AbstractTypeEmitter invocation,
             FieldReference targetField
-        ) {
+        )
+        {
             ImplementChangeInvocationTarget(invocation, targetField);
 
             ImplementChangeProxyTarget(invocation, @class);

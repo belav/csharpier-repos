@@ -18,7 +18,8 @@ namespace System.Xml.Resolvers
             Uri absoluteUri,
             string? role,
             Type? ofObjectToReturn
-        ) {
+        )
+        {
             if (absoluteUri == null)
             {
                 throw new ArgumentNullException(nameof(absoluteUri));
@@ -38,7 +39,8 @@ namespace System.Xml.Resolvers
                 ofObjectToReturn == null
                 || ofObjectToReturn == typeof(Stream)
                 || ofObjectToReturn == typeof(object)
-            ) {
+            )
+            {
                 return Task.FromResult<object>(data.AsStream());
             }
             else if (ofObjectToReturn == typeof(TextReader))

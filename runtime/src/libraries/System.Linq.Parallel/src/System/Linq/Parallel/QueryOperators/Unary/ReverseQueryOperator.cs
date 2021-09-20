@@ -54,7 +54,8 @@ namespace System.Linq.Parallel
             IPartitionedStreamRecipient<TSource> recipient,
             bool preferStriping,
             QuerySettings settings
-        ) {
+        )
+        {
             Debug.Assert(
                 Child.OrdinalIndexState != OrdinalIndexState.Indexable,
                 "Don't take this code path if the child is indexable."
@@ -135,7 +136,8 @@ namespace System.Linq.Parallel
             internal ReverseQueryOperatorEnumerator(
                 QueryOperatorEnumerator<TSource, TKey> source,
                 CancellationToken cancellationToken
-            ) {
+            )
+            {
                 Debug.Assert(source != null);
                 _source = source;
                 _cancellationToken = cancellationToken;
@@ -148,7 +150,8 @@ namespace System.Linq.Parallel
             internal override bool MoveNext(
                 [MaybeNullWhen(false), AllowNull] ref TSource currentElement,
                 [AllowNull] ref TKey currentKey
-            ) {
+            )
+            {
                 // If the buffer has not been created, we will generate it lazily on demand.
                 if (_buffer == null)
                 {
@@ -200,7 +203,8 @@ namespace System.Linq.Parallel
                 ReverseQueryOperator<TSource> op,
                 QuerySettings settings,
                 bool preferStriping
-            ) {
+            )
+            {
                 if (childQueryResults.IsIndexible)
                 {
                     return new ReverseQueryOperatorResults(

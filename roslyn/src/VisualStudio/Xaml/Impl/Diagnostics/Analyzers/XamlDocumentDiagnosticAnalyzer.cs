@@ -28,7 +28,8 @@ namespace Microsoft.CodeAnalysis.Xaml.Diagnostics.Analyzers
         public override async Task<ImmutableArray<Diagnostic>> AnalyzeSyntaxAsync(
             Document document,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             if (XamlProjectService.AnalyzerService == null)
             {
                 return ImmutableArray<Diagnostic>.Empty;
@@ -44,7 +45,8 @@ namespace Microsoft.CodeAnalysis.Xaml.Diagnostics.Analyzers
         public override async Task<ImmutableArray<Diagnostic>> AnalyzeSemanticsAsync(
             Document document,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             if (XamlProjectService.AnalyzerService == null)
             {
                 return ImmutableArray<Diagnostic>.Empty;

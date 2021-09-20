@@ -944,7 +944,8 @@ namespace System.ComponentModel.Composition
         private static void ExpectedChangeRejectedErrorOnSetImport(
             object importer,
             ErrorId expectedErrorId
-        ) {
+        )
+        {
             var container = ContainerFactory.Create();
             var batch = new CompositionBatch();
             batch.AddPart(importer);

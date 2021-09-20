@@ -35,7 +35,8 @@ namespace Microsoft.VisualStudio.Debugger.Evaluation
         internal DkmInspectionSession(
             ImmutableArray<IDkmClrFormatter> formatters,
             ImmutableArray<IDkmClrResultProvider> resultProviders
-        ) {
+        )
+        {
             _formatters = new Dispatcher<IDkmClrFormatter>(formatters);
             _resultProviders = new Dispatcher<IDkmClrResultProvider>(resultProviders);
         }
@@ -49,7 +50,8 @@ namespace Microsoft.VisualStudio.Debugger.Evaluation
             object instance,
             MethodId method,
             Func<IDkmClrResultProvider, T> f
-        ) {
+        )
+        {
             return _resultProviders.Invoke(instance, method, f);
         }
 
@@ -83,7 +85,8 @@ namespace Microsoft.VisualStudio.Debugger.Evaluation
                 object instance,
                 MethodId method,
                 Func<TInterface, TResult> f
-            ) {
+            )
+            {
                 // If the last n - 1 calls are to the same method,
                 // call the n-th implementation.
                 var instanceAndMethod = new InstanceAndMethod(instance, method);

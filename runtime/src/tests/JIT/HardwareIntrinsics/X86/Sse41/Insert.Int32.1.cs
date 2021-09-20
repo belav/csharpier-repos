@@ -407,7 +407,8 @@ namespace JIT.HardwareIntrinsics.X86
             Int32 scalarData,
             void* result,
             [CallerMemberName] string method = ""
-        ) {
+        )
+        {
             Int32[] inArray = new Int32[Op1ElementCount];
             Int32[] outArray = new Int32[RetElementCount];
 
@@ -426,7 +427,8 @@ namespace JIT.HardwareIntrinsics.X86
             Int32 scalarData,
             void* result,
             [CallerMemberName] string method = ""
-        ) {
+        )
+        {
             Int32[] inArray = new Int32[Op1ElementCount];
             Int32[] outArray = new Int32[RetElementCount];
 
@@ -449,7 +451,8 @@ namespace JIT.HardwareIntrinsics.X86
             Int32 scalarData,
             Int32[] result,
             [CallerMemberName] string method = ""
-        ) {
+        )
+        {
             bool succeeded = true;
 
             for (var i = 0; i < RetElementCount; i++)

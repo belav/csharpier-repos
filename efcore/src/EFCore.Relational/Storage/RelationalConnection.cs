@@ -212,7 +212,8 @@ namespace Microsoft.EntityFrameworkCore.Storage
                         if (
                             _enlistedTransaction.TransactionInformation.Status
                             != TransactionStatus.Active
-                        ) {
+                        )
+                        {
                             _enlistedTransaction = null;
                         }
                     }
@@ -386,7 +387,8 @@ namespace Microsoft.EntityFrameworkCore.Storage
             // ReSharper disable once RedundantNameQualifier
             IsolationLevel isolationLevel,
             CancellationToken cancellationToken = default
-        ) {
+        )
+        {
             await OpenAsync(cancellationToken).ConfigureAwait(false);
 
             EnsureNoTransactions();
@@ -491,7 +493,8 @@ namespace Microsoft.EntityFrameworkCore.Storage
         public virtual IDbContextTransaction? UseTransaction(
             DbTransaction? transaction,
             Guid transactionId
-        ) {
+        )
+        {
             if (ShouldUseTransaction(transaction))
             {
                 Open();
@@ -537,7 +540,8 @@ namespace Microsoft.EntityFrameworkCore.Storage
             DbTransaction? transaction,
             Guid transactionId,
             CancellationToken cancellationToken = default
-        ) {
+        )
+        {
             if (ShouldUseTransaction(transaction))
             {
                 await OpenAsync(cancellationToken).ConfigureAwait(false);
@@ -679,7 +683,8 @@ namespace Microsoft.EntityFrameworkCore.Storage
         public virtual async Task<bool> OpenAsync(
             CancellationToken cancellationToken,
             bool errorsExpected = false
-        ) {
+        )
+        {
             if (DbConnectionState == ConnectionState.Broken)
             {
                 await CloseDbConnectionAsync().ConfigureAwait(false);
@@ -776,7 +781,8 @@ namespace Microsoft.EntityFrameworkCore.Storage
         private async Task OpenInternalAsync(
             bool errorsExpected,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var logger = Dependencies.ConnectionLogger;
             var startTime = DateTimeOffset.UtcNow;
 

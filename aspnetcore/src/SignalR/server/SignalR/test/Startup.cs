@@ -66,7 +66,8 @@ namespace Microsoft.AspNetCore.SignalR.Tests
                                         context.HttpContext.WebSockets.IsWebSocketRequest
                                         || context.Request.Headers["Accept"] == "text/event-stream"
                                     )
-                                ) {
+                                )
+                                {
                                     context.Token = context.Request.Query["access_token"];
                                 }
                                 return Task.CompletedTask;

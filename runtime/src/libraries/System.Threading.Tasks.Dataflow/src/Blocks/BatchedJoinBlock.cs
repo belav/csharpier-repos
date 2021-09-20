@@ -174,7 +174,8 @@ namespace System.Threading.Tasks.Dataflow
         public IDisposable LinkTo(
             ITargetBlock<Tuple<IList<T1>, IList<T2>>> target,
             DataflowLinkOptions linkOptions
-        ) {
+        )
+        {
             return _source.LinkTo(target, linkOptions);
         }
 
@@ -182,7 +183,8 @@ namespace System.Threading.Tasks.Dataflow
         public bool TryReceive(
             Predicate<Tuple<IList<T1>, IList<T2>>>? filter,
             [NotNullWhen(true)] out Tuple<IList<T1>, IList<T2>>? item
-        ) {
+        )
+        {
             return _source.TryReceive(filter, out item);
         }
 
@@ -240,7 +242,8 @@ namespace System.Threading.Tasks.Dataflow
             DataflowMessageHeader messageHeader,
             ITargetBlock<Tuple<IList<T1>, IList<T2>>> target,
             out bool messageConsumed
-        ) {
+        )
+        {
             return _source.ConsumeMessage(messageHeader, target, out messageConsumed);
         }
 
@@ -248,7 +251,8 @@ namespace System.Threading.Tasks.Dataflow
         bool ISourceBlock<Tuple<IList<T1>, IList<T2>>>.ReserveMessage(
             DataflowMessageHeader messageHeader,
             ITargetBlock<Tuple<IList<T1>, IList<T2>>> target
-        ) {
+        )
+        {
             return _source.ReserveMessage(messageHeader, target);
         }
 
@@ -256,7 +260,8 @@ namespace System.Threading.Tasks.Dataflow
         void ISourceBlock<Tuple<IList<T1>, IList<T2>>>.ReleaseReservation(
             DataflowMessageHeader messageHeader,
             ITargetBlock<Tuple<IList<T1>, IList<T2>>> target
-        ) {
+        )
+        {
             _source.ReleaseReservation(messageHeader, target);
         }
 
@@ -433,7 +438,8 @@ namespace System.Threading.Tasks.Dataflow
             if (
                 !dataflowBlockOptions.Greedy
                 || dataflowBlockOptions.BoundedCapacity != DataflowBlockOptions.Unbounded
-            ) {
+            )
+            {
                 throw new ArgumentException(
                     SR.Argument_NonGreedyNotSupported,
                     nameof(dataflowBlockOptions)
@@ -549,7 +555,8 @@ namespace System.Threading.Tasks.Dataflow
         public IDisposable LinkTo(
             ITargetBlock<Tuple<IList<T1>, IList<T2>, IList<T3>>> target,
             DataflowLinkOptions linkOptions
-        ) {
+        )
+        {
             return _source.LinkTo(target, linkOptions);
         }
 
@@ -557,14 +564,16 @@ namespace System.Threading.Tasks.Dataflow
         public bool TryReceive(
             Predicate<Tuple<IList<T1>, IList<T2>, IList<T3>>>? filter,
             [NotNullWhen(true)] out Tuple<IList<T1>, IList<T2>, IList<T3>>? item
-        ) {
+        )
+        {
             return _source.TryReceive(filter, out item);
         }
 
         /// <include file='XmlDocs/CommonXmlDocComments.xml' path='CommonXmlDocComments/Sources/Member[@name="TryReceiveAll"]/*' />
         public bool TryReceiveAll(
             [NotNullWhen(true)] out IList<Tuple<IList<T1>, IList<T2>, IList<T3>>>? items
-        ) {
+        )
+        {
             return _source.TryReceiveAll(out items);
         }
 
@@ -620,7 +629,8 @@ namespace System.Threading.Tasks.Dataflow
             DataflowMessageHeader messageHeader,
             ITargetBlock<Tuple<IList<T1>, IList<T2>, IList<T3>>> target,
             out bool messageConsumed
-        ) {
+        )
+        {
             return _source.ConsumeMessage(messageHeader, target, out messageConsumed);
         }
 
@@ -628,7 +638,8 @@ namespace System.Threading.Tasks.Dataflow
         bool ISourceBlock<Tuple<IList<T1>, IList<T2>, IList<T3>>>.ReserveMessage(
             DataflowMessageHeader messageHeader,
             ITargetBlock<Tuple<IList<T1>, IList<T2>, IList<T3>>> target
-        ) {
+        )
+        {
             return _source.ReserveMessage(messageHeader, target);
         }
 
@@ -636,7 +647,8 @@ namespace System.Threading.Tasks.Dataflow
         void ISourceBlock<Tuple<IList<T1>, IList<T2>, IList<T3>>>.ReleaseReservation(
             DataflowMessageHeader messageHeader,
             ITargetBlock<Tuple<IList<T1>, IList<T2>, IList<T3>>> target
-        ) {
+        )
+        {
             _source.ReleaseReservation(messageHeader, target);
         }
 
@@ -824,7 +836,8 @@ namespace System.Threading.Tasks.Dataflow.Internal
             T messageValue,
             ISourceBlock<T>? source,
             bool consumeToAccept
-        ) {
+        )
+        {
             // Validate arguments
             if (!messageHeader.IsValid)
                 throw new ArgumentException(
@@ -964,7 +977,8 @@ namespace System.Threading.Tasks.Dataflow.Internal
             Action allTargetsDecliningAction,
             Action<Exception> exceptionAction,
             Action completionAction
-        ) {
+        )
+        {
             Debug.Assert(batchSize >= 1, "A positive batch size is required.");
             Debug.Assert(
                 batchSizeReachedAction != null,

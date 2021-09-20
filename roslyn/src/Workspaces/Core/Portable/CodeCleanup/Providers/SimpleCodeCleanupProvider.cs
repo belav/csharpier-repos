@@ -47,7 +47,8 @@ namespace Microsoft.CodeAnalysis.CodeCleanup.Providers
                 CancellationToken,
                 SyntaxNode
             >? syntaxDelegatee = null
-        ) {
+        )
+        {
             Debug.Assert(documentDelegatee != null || syntaxDelegatee != null);
 
             this.Name = name;
@@ -61,7 +62,8 @@ namespace Microsoft.CodeAnalysis.CodeCleanup.Providers
             Document document,
             ImmutableArray<TextSpan> spans,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             if (_documentDelegatee != null)
             {
                 return _documentDelegatee(document, spans, cancellationToken);
@@ -74,7 +76,8 @@ namespace Microsoft.CodeAnalysis.CodeCleanup.Providers
             Document document,
             ImmutableArray<TextSpan> spans,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             RoslynDebug.AssertNotNull(_syntaxDelegatee);
 
             var root = await document.GetRequiredSyntaxRootAsync(cancellationToken)
@@ -99,7 +102,8 @@ namespace Microsoft.CodeAnalysis.CodeCleanup.Providers
             ImmutableArray<TextSpan> spans,
             Workspace workspace,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             if (_syntaxDelegatee != null)
             {
                 return Task.FromResult(_syntaxDelegatee(root, spans, workspace, cancellationToken));

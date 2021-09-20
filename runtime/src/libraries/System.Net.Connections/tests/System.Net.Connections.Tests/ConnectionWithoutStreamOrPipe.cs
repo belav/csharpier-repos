@@ -18,7 +18,8 @@ namespace System.Net.Connections.Tests
         protected override ValueTask CloseAsyncCore(
             ConnectionCloseMethod method,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             throw new NotImplementedException();
         }
     }

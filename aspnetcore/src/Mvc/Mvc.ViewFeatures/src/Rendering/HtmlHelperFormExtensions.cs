@@ -123,7 +123,8 @@ namespace Microsoft.AspNetCore.Mvc.Rendering
             this IHtmlHelper htmlHelper,
             FormMethod method,
             object htmlAttributes
-        ) {
+        )
+        {
             if (htmlHelper == null)
             {
                 throw new ArgumentNullException(nameof(htmlHelper));
@@ -167,7 +168,8 @@ namespace Microsoft.AspNetCore.Mvc.Rendering
             FormMethod method,
             bool? antiforgery,
             object htmlAttributes
-        ) {
+        )
+        {
             if (htmlHelper == null)
             {
                 throw new ArgumentNullException(nameof(htmlHelper));
@@ -235,7 +237,8 @@ namespace Microsoft.AspNetCore.Mvc.Rendering
             this IHtmlHelper htmlHelper,
             string actionName,
             string controllerName
-        ) {
+        )
+        {
             if (htmlHelper == null)
             {
                 throw new ArgumentNullException(nameof(htmlHelper));
@@ -276,7 +279,8 @@ namespace Microsoft.AspNetCore.Mvc.Rendering
             string actionName,
             string controllerName,
             object routeValues
-        ) {
+        )
+        {
             if (htmlHelper == null)
             {
                 throw new ArgumentNullException(nameof(htmlHelper));
@@ -311,7 +315,8 @@ namespace Microsoft.AspNetCore.Mvc.Rendering
             string actionName,
             string controllerName,
             FormMethod method
-        ) {
+        )
+        {
             if (htmlHelper == null)
             {
                 throw new ArgumentNullException(nameof(htmlHelper));
@@ -354,7 +359,8 @@ namespace Microsoft.AspNetCore.Mvc.Rendering
             string controllerName,
             object routeValues,
             FormMethod method
-        ) {
+        )
+        {
             if (htmlHelper == null)
             {
                 throw new ArgumentNullException(nameof(htmlHelper));
@@ -395,7 +401,8 @@ namespace Microsoft.AspNetCore.Mvc.Rendering
             string controllerName,
             FormMethod method,
             object htmlAttributes
-        ) {
+        )
+        {
             if (htmlHelper == null)
             {
                 throw new ArgumentNullException(nameof(htmlHelper));
@@ -472,7 +479,8 @@ namespace Microsoft.AspNetCore.Mvc.Rendering
             this IHtmlHelper htmlHelper,
             object routeValues,
             bool? antiforgery
-        ) {
+        )
+        {
             if (htmlHelper == null)
             {
                 throw new ArgumentNullException(nameof(htmlHelper));
@@ -536,7 +544,8 @@ namespace Microsoft.AspNetCore.Mvc.Rendering
             this IHtmlHelper htmlHelper,
             string routeName,
             bool? antiforgery
-        ) {
+        )
+        {
             if (htmlHelper == null)
             {
                 throw new ArgumentNullException(nameof(htmlHelper));
@@ -574,7 +583,8 @@ namespace Microsoft.AspNetCore.Mvc.Rendering
             this IHtmlHelper htmlHelper,
             string routeName,
             object routeValues
-        ) {
+        )
+        {
             if (htmlHelper == null)
             {
                 throw new ArgumentNullException(nameof(htmlHelper));
@@ -606,7 +616,8 @@ namespace Microsoft.AspNetCore.Mvc.Rendering
             this IHtmlHelper htmlHelper,
             string routeName,
             FormMethod method
-        ) {
+        )
+        {
             if (htmlHelper == null)
             {
                 throw new ArgumentNullException(nameof(htmlHelper));
@@ -646,7 +657,8 @@ namespace Microsoft.AspNetCore.Mvc.Rendering
             string routeName,
             object routeValues,
             FormMethod method
-        ) {
+        )
+        {
             if (htmlHelper == null)
             {
                 throw new ArgumentNullException(nameof(htmlHelper));
@@ -684,7 +696,8 @@ namespace Microsoft.AspNetCore.Mvc.Rendering
             string routeName,
             FormMethod method,
             object htmlAttributes
-        ) {
+        )
+        {
             if (htmlHelper == null)
             {
                 throw new ArgumentNullException(nameof(htmlHelper));

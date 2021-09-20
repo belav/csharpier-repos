@@ -28,7 +28,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Organizing
             string initial,
             string final,
             CSharpParseOptions options
-        ) {
+        )
+        {
             using var workspace = TestWorkspace.CreateCSharp(initial, options);
             var document = workspace.CurrentSolution.GetDocument(workspace.Documents.First().Id);
             var newRoot = await (

@@ -32,7 +32,8 @@ namespace R2RTest
         public override ProcessParameters CompilationProcess(
             string outputFileName,
             IEnumerable<string> inputAssemblyFileNames
-        ) {
+        )
+        {
             if (inputAssemblyFileNames.Count() != 1)
             {
                 throw new Exception(
@@ -48,7 +49,8 @@ namespace R2RTest
             IEnumerable<string> modules,
             IEnumerable<string> folders,
             bool noEtw
-        ) {
+        )
+        {
             ProcessParameters processParameters = base.ExecutionProcess(modules, folders, noEtw);
             processParameters.EnvironmentOverrides["COMPLUS_ReadyToRun"] = "0";
             return processParameters;
@@ -57,7 +59,8 @@ namespace R2RTest
         protected override IEnumerable<string> BuildCommandLineArguments(
             IEnumerable<string> assemblyFileNames,
             string outputFileName
-        ) {
+        )
+        {
             // This should never get called as the overridden CompilationProcess returns null
             throw new NotImplementedException();
         }

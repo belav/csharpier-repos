@@ -46,7 +46,8 @@ namespace Microsoft.CodeAnalysis.Shared.Utilities
             Solution annotatedSolution,
             ImmutableDictionary<DocumentId, ImmutableArray<ISymbol>> documentIdsToSymbolMap,
             SyntaxAnnotation typeNodeAnnotation
-        ) {
+        )
+        {
             SymbolToDeclarationAnnotationMap = symbolToDeclarationAnnotationMap;
             AnnotatedSolution = annotatedSolution;
             DocumentIdsToSymbolMap = documentIdsToSymbolMap;
@@ -63,7 +64,8 @@ namespace Microsoft.CodeAnalysis.Shared.Utilities
             Solution solution,
             SyntaxNode typeNode,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             using var _ = PooledDictionary<ISymbol, SyntaxAnnotation>.GetInstance(
                 out var symbolToDeclarationAnnotationMap
             );

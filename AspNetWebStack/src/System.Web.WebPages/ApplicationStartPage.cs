@@ -70,7 +70,8 @@ namespace System.Web.WebPages
             Action<string> monitorFile,
             IVirtualPathFactory virtualPathFactory,
             IEnumerable<string> supportedExtensions
-        ) {
+        )
+        {
             try
             {
                 ExecuteStartPageInternal(
@@ -94,7 +95,8 @@ namespace System.Web.WebPages
             Action<string> monitorFile,
             IVirtualPathFactory virtualPathFactory,
             IEnumerable<string> supportedExtensions
-        ) {
+        )
+        {
             ApplicationStartPage startPage = null;
 
             foreach (var extension in supportedExtensions)
@@ -132,7 +134,8 @@ namespace System.Web.WebPages
                     "DisableCustomHttpEncoder",
                     BindingFlags.NonPublic | BindingFlags.Instance | BindingFlags.DeclaredOnly
                 ) != null
-            ) {
+            )
+            {
                 // this version suffers from the bug
                 return HttpContextHelper.ExecuteInNullContext;
             }
@@ -147,7 +150,8 @@ namespace System.Web.WebPages
             string key,
             object value,
             CacheItemRemovedReason reason
-        ) {
+        )
+        {
             // Only handle case when the dependency has changed.
             if (reason != CacheItemRemovedReason.DependencyChanged)
             {

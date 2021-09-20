@@ -45,7 +45,8 @@ namespace System.Xml.Serialization
             MemberInfo? memberInfo,
             [DynamicallyAccessedMembers(TrimmerConstants.AllMethods)] Type? type,
             CodeGenerator ilg
-        ) {
+        )
+        {
             this.Source = source;
             this.Arg = arg ?? source;
             this.MemberInfo = memberInfo;
@@ -142,7 +143,8 @@ namespace System.Xml.Serialization
                             eType.IsAssignableFrom(elementType)
                             || elementType.IsAssignableFrom(eType)
                         )
-                    ) {
+                    )
+                    {
                         throw new CodeGeneratorConversionException(
                             eType,
                             elementType,
@@ -183,7 +185,8 @@ namespace System.Xml.Serialization
                     if (
                         CodeGenerator.IsNullableGenericType(varType)
                         && varType.GetGenericArguments()[0] == elementType
-                    ) {
+                    )
+                    {
                         ILG.LoadAddress(var);
                         ConvertNullableValue(varType, elementType);
                     }
@@ -251,7 +254,8 @@ namespace System.Xml.Serialization
             )]
                 Type nullableType,
             Type targetType
-        ) {
+        )
+        {
             System.Diagnostics.Debug.Assert(
                 targetType == nullableType
                     || targetType.IsAssignableFrom(nullableType.GetGenericArguments()[0])

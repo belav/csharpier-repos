@@ -42,7 +42,8 @@ namespace System.Net.Http.Functional.Tests
                     new HttpRequestMessage(),
                     CancellationToken.None
                 )
-            ) {
+            )
+            {
                 Assert.NotNull(response);
                 Assert.Equal(1, handler.SendAsyncCount);
             }
@@ -110,7 +111,8 @@ namespace System.Net.Http.Functional.Tests
             protected override Task<HttpResponseMessage> SendAsync(
                 HttpRequestMessage request,
                 CancellationToken cancellationToken
-            ) {
+            )
+            {
                 SendAsyncCount++;
 
                 return Task.FromResult<HttpResponseMessage>(new HttpResponseMessage());

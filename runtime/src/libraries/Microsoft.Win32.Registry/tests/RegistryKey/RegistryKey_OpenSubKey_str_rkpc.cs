@@ -40,7 +40,8 @@ namespace Microsoft.Win32.RegistryTests
                     name: TestRegistryKeyName,
                     permissionCheck: RegistryKeyPermissionCheck.Default
                 )
-            ) {
+            )
+            {
                 Assert.Throws<UnauthorizedAccessException>(() => rk.CreateSubKey(name));
                 Assert.Throws<UnauthorizedAccessException>(() => rk.SetValue(name, "String"));
                 Assert.Throws<UnauthorizedAccessException>(() => rk.DeleteValue(name));
@@ -54,7 +55,8 @@ namespace Microsoft.Win32.RegistryTests
                     name: TestRegistryKeyName,
                     permissionCheck: RegistryKeyPermissionCheck.ReadSubTree
                 )
-            ) {
+            )
+            {
                 Assert.Throws<UnauthorizedAccessException>(() => rk.CreateSubKey(name));
                 Assert.Throws<UnauthorizedAccessException>(() => rk.SetValue(name, "String"));
                 Assert.Throws<UnauthorizedAccessException>(() => rk.DeleteValue(name));
@@ -84,7 +86,8 @@ namespace Microsoft.Win32.RegistryTests
 
             using (
                 var rk = TestRegistryKey.OpenSubKey("", RegistryKeyPermissionCheck.ReadWriteSubTree)
-            ) {
+            )
+            {
                 rk.SetValue(valueName, expectedValue);
                 Assert.Equal(expectedValue, rk.GetValue(valueName));
                 rk.CreateSubKey(valueName);

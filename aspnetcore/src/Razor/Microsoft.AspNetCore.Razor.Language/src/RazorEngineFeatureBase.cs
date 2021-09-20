@@ -42,7 +42,8 @@ namespace Microsoft.AspNetCore.Razor.Language
 
         protected void ThrowForMissingDocumentDependency<TDocumentDependency>(
             TDocumentDependency value
-        ) {
+        )
+        {
             if (value == null)
             {
                 throw new InvalidOperationException(

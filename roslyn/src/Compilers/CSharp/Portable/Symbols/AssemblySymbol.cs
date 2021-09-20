@@ -135,7 +135,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             if (
                 namespaceSymbol.NamespaceKind == NamespaceKind.Assembly
                 && namespaceSymbol.ContainingAssembly == this
-            ) {
+            )
+            {
                 // this is already the correct assembly namespace
                 return namespaceSymbol;
             }
@@ -165,7 +166,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
         internal override TResult Accept<TArgument, TResult>(
             CSharpSymbolVisitor<TArgument, TResult> visitor,
             TArgument argument
-        ) {
+        )
+        {
             return visitor.VisitAssembly(this, argument);
         }
 
@@ -273,7 +275,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
         internal NamedTypeSymbol LookupTopLevelMetadataType(
             ref MetadataTypeName emittedName,
             bool digThroughForwardedTypes
-        ) {
+        )
+        {
             return LookupTopLevelMetadataTypeWithCycleDetection(
                 ref emittedName,
                 visitedAssemblies: null,
@@ -333,13 +336,15 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
         internal virtual NamedTypeSymbol TryLookupForwardedMetadataTypeWithCycleDetection(
             ref MetadataTypeName emittedName,
             ConsList<AssemblySymbol> visitedAssemblies
-        ) {
+        )
+        {
             return null;
         }
 
         internal ErrorTypeSymbol CreateCycleInTypeForwarderErrorTypeSymbol(
             ref MetadataTypeName emittedName
-        ) {
+        )
+        {
             DiagnosticInfo diagnosticInfo = new CSDiagnosticInfo(
                 ErrorCode.ERR_CycleInTypeForwarder,
                 emittedName.FullName,
@@ -357,7 +362,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             ModuleSymbol forwardingModule,
             AssemblySymbol destination1,
             AssemblySymbol destination2
-        ) {
+        )
+        {
             var diagnosticInfo = new CSDiagnosticInfo(
                 ErrorCode.ERR_TypeForwardedToMultipleAssemblies,
                 forwardingModule,
@@ -608,7 +614,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             bool useCLSCompliantNameArityEncoding = false,
             DiagnosticBag warnings = null,
             bool ignoreCorLibraryDuplicatedTypes = false
-        ) {
+        )
+        {
             NamedTypeSymbol type;
             MetadataTypeName mdName;
 
@@ -631,7 +638,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                     int i = 1;
                     (object)type != null && !type.IsErrorType() && i < parts.Length;
                     i++
-                ) {
+                )
+                {
                     mdName = MetadataTypeName.FromTypeName(parts[i]);
                     NamedTypeSymbol temp = type.LookupMetadataType(ref mdName);
                     type = (!isWellKnownType || IsValidWellKnownType(temp)) ? temp : null;
@@ -819,7 +827,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             Type[] typeArguments,
             ref int currentTypeArgument,
             bool includeReferences
-        ) {
+        )
+        {
             int remainingTypeArguments = typeArguments.Length - currentTypeArgument;
 
             // in case we are specializing a nested generic definition we might have more arguments than the current symbol:
@@ -856,7 +865,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             out (AssemblySymbol, AssemblySymbol) conflicts,
             DiagnosticBag warnings = null, // this is set to collect ambiguity warning for well-known types before C# 7
             bool ignoreCorLibraryDuplicatedTypes = false
-        ) {
+        )
+        {
             // Type from this assembly always wins.
             // After that we look in references, which may yield ambiguities. If `ignoreCorLibraryDuplicatedTypes` is set,
             // corlib does not contribute to ambiguities (corlib loses over other references).
@@ -892,7 +902,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                 && !CorLibrary.IsMissing
                 && !isWellKnownTypeBeforeCSharp7
                 && !ignoreCorLibraryDuplicatedTypes
-            ) {
+            )
+            {
                 NamedTypeSymbol corLibCandidate = GetTopLevelTypeByMetadataName(
                     CorLibrary,
                     ref metadataName,
@@ -1026,7 +1037,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             AssemblySymbol assembly,
             ref MetadataTypeName metadataName,
             AssemblyIdentity assemblyOpt
-        ) {
+        )
+        {
             var result = assembly.LookupTopLevelMetadataType(
                 ref metadataName,
                 digThroughForwardedTypes: false

@@ -34,7 +34,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                             this.GetEnumUnderlyingType(diagnostics),
                             ErrorTypeSymbol.UnknownResultType
                         ) == (object)ErrorTypeSymbol.UnknownResultType
-                    ) {
+                    )
+                    {
                         AddDeclarationDiagnostics(diagnostics);
                         this.state.NotePartComplete(CompletionPart.EnumUnderlyingType);
                     }

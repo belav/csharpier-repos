@@ -36,7 +36,8 @@ namespace Microsoft.VisualStudio.IntegrationTest.Utilities.OutOfProcess
                 string expectedText,
                 bool assertCaretPosition = false,
                 bool trimWhitespace = true
-            ) {
+            )
+            {
                 if (assertCaretPosition)
                 {
                     CurrentLineTextAndAssertCaretPosition(expectedText, trimWhitespace);
@@ -57,7 +58,8 @@ namespace Microsoft.VisualStudio.IntegrationTest.Utilities.OutOfProcess
             private void CurrentLineTextAndAssertCaretPosition(
                 string expectedText,
                 bool trimWhitespace
-            ) {
+            )
+            {
                 var expectedCaretIndex = expectedText.IndexOf("$$");
                 if (expectedCaretIndex < 0)
                 {

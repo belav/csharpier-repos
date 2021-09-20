@@ -37,7 +37,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Progression
         internal GraphQueryManager(
             Workspace workspace,
             IAsynchronousOperationListener asyncListener
-        ) {
+        )
+        {
             _workspace = workspace;
             _asyncListener = asyncListener;
         }
@@ -75,7 +76,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Progression
             List<IGraphQuery> graphQueries,
             IGraphContext context,
             Solution solution
-        ) {
+        )
+        {
             var workspace = solution.Workspace;
             var contextWeakReference = new WeakReference<IGraphContext>(context);
 
@@ -182,7 +184,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Progression
             Solution solution,
             List<IGraphQuery> graphQueries,
             IGraphContext context
-        ) {
+        )
+        {
             try
             {
                 var cancellationToken = context.CancelToken;

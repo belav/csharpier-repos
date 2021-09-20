@@ -55,7 +55,8 @@ namespace System.Text
             Encoding innerEncoding,
             Encoding thisEncoding,
             bool leaveOpen
-        ) {
+        )
+        {
             Debug.Assert(innerStream != null);
             Debug.Assert(innerEncoding != null);
             Debug.Assert(thisEncoding != null);
@@ -406,7 +407,8 @@ namespace System.Text
             int offset,
             int count,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             ValidateBufferArguments(buffer, offset, count);
 
             return ReadAsync(new Memory<byte>(buffer, offset, count), cancellationToken).AsTask();
@@ -415,7 +417,8 @@ namespace System.Text
         public override ValueTask<int> ReadAsync(
             Memory<byte> buffer,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             EnsurePreReadConditions();
 
             if (cancellationToken.IsCancellationRequested)
@@ -427,7 +430,8 @@ namespace System.Text
             async ValueTask<int> ReadAsyncCore(
                 Memory<byte> buffer,
                 CancellationToken cancellationToken
-            ) {
+            )
+            {
                 // If there's no data in our pending read buffer, we'll need to populate it from
                 // the inner stream. We read the inner stream's bytes, decode that to chars using
                 // the 'inner' encoding, then re-encode those chars under the 'this' encoding.
@@ -620,7 +624,8 @@ namespace System.Text
             int offset,
             int count,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             ValidateBufferArguments(buffer, offset, count);
 
             return WriteAsync(new ReadOnlyMemory<byte>(buffer, offset, count), cancellationToken)
@@ -630,7 +635,8 @@ namespace System.Text
         public override ValueTask WriteAsync(
             ReadOnlyMemory<byte> buffer,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             EnsurePreWriteConditions();
 
             if (cancellationToken.IsCancellationRequested)
@@ -647,7 +653,8 @@ namespace System.Text
             async ValueTask WriteAsyncCore(
                 ReadOnlyMemory<byte> remainingOuterEncodedBytes,
                 CancellationToken cancellationToken
-            ) {
+            )
+            {
                 int rentalLength = Math.Clamp(
                     remainingOuterEncodedBytes.Length,
                     MinWriteRentedArraySize,

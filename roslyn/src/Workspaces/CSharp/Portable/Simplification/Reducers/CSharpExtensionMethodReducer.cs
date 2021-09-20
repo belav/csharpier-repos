@@ -36,7 +36,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Simplification
             SemanticModel semanticModel,
             OptionSet optionSet,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var rewrittenNode = node;
 
             if (node.Expression.Kind() == SyntaxKind.SimpleMemberAccessExpression)
@@ -67,7 +68,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Simplification
             SemanticModel semanticModel,
             InvocationExpressionSyntax rewrittenNode,
             SimpleNameSyntax expressionName
-        ) {
+        )
+        {
             var targetSymbol = semanticModel.GetSymbolInfo(expressionName);
 
             if (targetSymbol.Symbol != null && targetSymbol.Symbol.Kind == SymbolKind.Method)
@@ -162,7 +164,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Simplification
                                 && oldSymbol.Equals(
                                     ((IMethodSymbol)newSymbol).GetConstructedReducedFrom()
                                 )
-                            ) {
+                            )
+                            {
                                 rewrittenNode = candidateRewrittenNode;
                             }
                         }

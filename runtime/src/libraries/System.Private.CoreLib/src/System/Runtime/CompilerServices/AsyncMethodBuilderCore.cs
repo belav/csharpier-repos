@@ -165,7 +165,8 @@ namespace System.Runtime.CompilerServices
                 Action continuation,
                 Action<Action, Task> invokeAction,
                 Task innerTask
-            ) {
+            )
+            {
                 Debug.Assert(continuation != null, "Expected non-null continuation");
                 Debug.Assert(invokeAction != null, "Expected non-null invokeAction");
                 Debug.Assert(innerTask != null, "Expected non-null innerTask");

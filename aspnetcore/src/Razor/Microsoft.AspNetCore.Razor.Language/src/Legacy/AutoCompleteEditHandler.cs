@@ -36,7 +36,8 @@ namespace Microsoft.AspNetCore.Razor.Language.Legacy
         protected override PartialParseResultInternal CanAcceptChange(
             SyntaxNode target,
             SourceChange change
-        ) {
+        )
+        {
             if (
                 (
                     (AutoCompleteAtEndOfSpan && IsAtEndOfSpan(target, change))
@@ -45,7 +46,8 @@ namespace Microsoft.AspNetCore.Razor.Language.Legacy
                 && change.IsInsert
                 && ParserHelpers.IsNewLine(change.NewText)
                 && AutoCompleteString != null
-            ) {
+            )
+            {
                 return PartialParseResultInternal.Rejected
                     | PartialParseResultInternal.AutoCompleteBlock;
             }

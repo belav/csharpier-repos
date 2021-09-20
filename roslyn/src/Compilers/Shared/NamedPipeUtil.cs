@@ -101,7 +101,8 @@ namespace Microsoft.CodeAnalysis
         internal static NamedPipeServerStream CreateServer(
             string pipeName,
             PipeDirection? pipeDirection = null
-        ) {
+        )
+        {
             var pipeOptions = PipeOptions.Asynchronous | PipeOptions.WriteThrough;
             return CreateServer(
                 pipeName,

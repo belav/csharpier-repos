@@ -273,7 +273,8 @@ namespace System.Management
         internal static ManagementBaseObject GetBaseObject(
             IWbemClassObjectFreeThreaded wbemObject,
             ManagementScope scope
-        ) {
+        )
+        {
             ManagementBaseObject newObject = null;
 
             if (_IsClass(wbemObject))
@@ -578,7 +579,8 @@ namespace System.Management
             string propertyName,
             string qualifierName,
             object qualifierValue
-        ) {
+        )
+        {
             Properties[propertyName].Qualifiers[qualifierName].Value = qualifierValue;
         }
 

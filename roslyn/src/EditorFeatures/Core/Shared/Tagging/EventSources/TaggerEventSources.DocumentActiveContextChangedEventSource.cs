@@ -27,7 +27,8 @@ namespace Microsoft.CodeAnalysis.Editor.Shared.Tagging
             private void OnDocumentActiveContextChanged(
                 object? sender,
                 DocumentActiveContextChangedEventArgs e
-            ) {
+            )
+            {
                 var document = SubjectBuffer.AsTextContainer().GetOpenDocumentInCurrentContext();
 
                 if (document != null && document.Id == e.NewActiveContextDocumentId)

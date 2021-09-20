@@ -67,7 +67,8 @@ namespace Microsoft.EntityFrameworkCore
             EntityState state,
             QueryTrackingBehavior queryTrackingBehavior,
             bool async
-        ) {
+        )
+        {
             using var context = Fixture.CreateContext();
 
             context.ChangeTracker.QueryTrackingBehavior = QueryTrackingBehavior.NoTracking;
@@ -185,7 +186,8 @@ namespace Microsoft.EntityFrameworkCore
                         .Concat(left.ThreeSkipPayloadFull)
                         .Concat(left.TwoSkipShared)
                         .Concat(left.ThreeSkipPayloadFullShared)
-                ) {
+                )
+                {
                     context.Entry(child).State = state;
                 }
 
@@ -264,7 +266,8 @@ namespace Microsoft.EntityFrameworkCore
         public virtual async Task Load_collection_using_Query_already_loaded(
             EntityState state,
             bool async
-        ) {
+        )
+        {
             using var context = Fixture.CreateContext();
 
             var left = context.Set<EntityOne>().Include(e => e.TwoSkip).Single(e => e.Id == 3);
@@ -439,7 +442,8 @@ namespace Microsoft.EntityFrameworkCore
         public virtual async Task Load_collection_using_Query_not_found_untyped(
             EntityState state,
             bool async
-        ) {
+        )
+        {
             using var context = Fixture.CreateContext();
 
             var left = context.Attach(new EntityOne { Id = 999 }).Entity;
@@ -483,7 +487,8 @@ namespace Microsoft.EntityFrameworkCore
             EntityState state,
             bool async,
             CascadeTiming deleteOrphansTiming
-        ) {
+        )
+        {
             using var context = Fixture.CreateContext();
 
             context.ChangeTracker.DeleteOrphansTiming = deleteOrphansTiming;
@@ -545,7 +550,8 @@ namespace Microsoft.EntityFrameworkCore
             EntityState state,
             bool async,
             CascadeTiming deleteOrphansTiming
-        ) {
+        )
+        {
             using var context = Fixture.CreateContext();
 
             context.ChangeTracker.DeleteOrphansTiming = deleteOrphansTiming;
@@ -643,7 +649,8 @@ namespace Microsoft.EntityFrameworkCore
         public virtual async Task Load_collection_using_Query_composite_key(
             EntityState state,
             bool async
-        ) {
+        )
+        {
             using var context = Fixture.CreateContext();
 
             var left = context.Set<EntityCompositeKey>().Find(7, "7_2", new DateTime(2007, 2, 1));
@@ -691,7 +698,8 @@ namespace Microsoft.EntityFrameworkCore
         public virtual async Task Load_collection_for_detached_throws(
             bool async,
             QueryTrackingBehavior queryTrackingBehavior
-        ) {
+        )
+        {
             using var context = Fixture.CreateContext();
 
             var left = context.Set<EntityOne>()
@@ -731,7 +739,8 @@ namespace Microsoft.EntityFrameworkCore
         [InlineData(QueryTrackingBehavior.NoTrackingWithIdentityResolution)]
         public virtual void Query_collection_for_detached_throws(
             QueryTrackingBehavior queryTrackingBehavior
-        ) {
+        )
+        {
             using var context = Fixture.CreateContext();
 
             var left = context.Set<EntityOne>()
@@ -842,7 +851,8 @@ namespace Microsoft.EntityFrameworkCore
         [InlineData(false)]
         public virtual async Task Load_collection_using_Query_with_Include_for_same_collection(
             bool async
-        ) {
+        )
+        {
             using var context = Fixture.CreateContext();
 
             var left = context.Set<EntityOne>().Find(3);
@@ -936,7 +946,8 @@ namespace Microsoft.EntityFrameworkCore
         [InlineData(false)]
         public virtual async Task Load_collection_using_Query_with_filtered_Include_and_projection(
             bool async
-        ) {
+        )
+        {
             using var context = Fixture.CreateContext();
 
             var left = context.Set<EntityOne>().Find(3);

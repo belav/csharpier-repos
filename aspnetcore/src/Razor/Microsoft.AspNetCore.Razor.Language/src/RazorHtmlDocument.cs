@@ -14,7 +14,8 @@ namespace Microsoft.AspNetCore.Razor.Language
         public static RazorHtmlDocument Create(
             string generatedHtml,
             RazorCodeGenerationOptions options
-        ) {
+        )
+        {
             if (generatedHtml == null)
             {
                 throw new ArgumentNullException(nameof(generatedHtml));

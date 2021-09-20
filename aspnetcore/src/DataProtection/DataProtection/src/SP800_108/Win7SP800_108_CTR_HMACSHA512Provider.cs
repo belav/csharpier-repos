@@ -25,7 +25,8 @@ namespace Microsoft.AspNetCore.DataProtection.SP800_108
             uint cbContext,
             byte* pbDerivedKey,
             uint cbDerivedKey
-        ) {
+        )
+        {
             const uint SHA512_DIGEST_SIZE_IN_BYTES = 512 / 8;
             byte* pbHashDigest = stackalloc byte[(int)SHA512_DIGEST_SIZE_IN_BYTES];
 

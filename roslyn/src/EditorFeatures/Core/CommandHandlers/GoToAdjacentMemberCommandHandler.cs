@@ -79,7 +79,8 @@ namespace Microsoft.CodeAnalysis.Editor.CommandHandlers
             EditorCommandArgs args,
             bool gotoNextMember,
             CommandExecutionContext context
-        ) {
+        )
+        {
             var subjectBuffer = args.SubjectBuffer;
             var caretPoint = args.TextView.GetCaretPoint(subjectBuffer);
             if (!caretPoint.HasValue || !subjectBuffer.SupportsNavigationToAnyPosition())
@@ -101,7 +102,8 @@ namespace Microsoft.CodeAnalysis.Editor.CommandHandlers
                     allowCancellation: true,
                     description: EditorFeaturesResources.Navigating
                 )
-            ) {
+            )
+            {
                 var task = GetTargetPositionAsync(
                     document,
                     caretPoint.Value.Position,
@@ -132,7 +134,8 @@ namespace Microsoft.CodeAnalysis.Editor.CommandHandlers
             int caretPosition,
             bool next,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var syntaxFactsService = document.GetLanguageService<ISyntaxFactsService>();
             if (syntaxFactsService == null)
             {

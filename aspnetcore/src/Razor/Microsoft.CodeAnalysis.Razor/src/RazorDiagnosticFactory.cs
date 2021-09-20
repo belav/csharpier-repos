@@ -43,7 +43,8 @@ namespace Microsoft.CodeAnalysis.Razor
         public static RazorDiagnostic CreateTagHelper_InvalidAttributeNameNullOrEmpty(
             string tagHelperDisplayName,
             string propertyDisplayName
-        ) {
+        )
+        {
             var diagnostic = RazorDiagnostic.Create(
                 TagHelper_InvalidAttributeNameNullOrEmpty,
                 new SourceSpan(SourceLocation.Undefined, contentLength: 0),
@@ -65,7 +66,8 @@ namespace Microsoft.CodeAnalysis.Razor
         public static RazorDiagnostic CreateTagHelper_InvalidAttributePrefixNotNull(
             string tagHelperDisplayName,
             string propertyDisplayName
-        ) {
+        )
+        {
             var diagnostic = RazorDiagnostic.Create(
                 TagHelper_InvalidAttributePrefixNotNull,
                 new SourceSpan(SourceLocation.Undefined, contentLength: 0),
@@ -88,7 +90,8 @@ namespace Microsoft.CodeAnalysis.Razor
         public static RazorDiagnostic CreateTagHelper_InvalidAttributePrefixNull(
             string tagHelperDisplayName,
             string propertyDisplayName
-        ) {
+        )
+        {
             var diagnostic = RazorDiagnostic.Create(
                 TagHelper_InvalidAttributePrefixNull,
                 new SourceSpan(SourceLocation.Undefined, contentLength: 0),
@@ -111,7 +114,8 @@ namespace Microsoft.CodeAnalysis.Razor
         public static RazorDiagnostic CreateTagHelper_InvalidRequiredAttributeCharacter(
             char invalidCharacter,
             string requiredAttributes
-        ) {
+        )
+        {
             var diagnostic = RazorDiagnostic.Create(
                 TagHelper_InvalidRequiredAttributeCharacter,
                 new SourceSpan(SourceLocation.Undefined, contentLength: 0),
@@ -131,7 +135,8 @@ namespace Microsoft.CodeAnalysis.Razor
         public static RazorDiagnostic CreateTagHelper_PartialRequiredAttributeOperator(
             char partialOperator,
             string requiredAttributes
-        ) {
+        )
+        {
             var diagnostic = RazorDiagnostic.Create(
                 TagHelper_PartialRequiredAttributeOperator,
                 new SourceSpan(SourceLocation.Undefined, contentLength: 0),
@@ -151,7 +156,8 @@ namespace Microsoft.CodeAnalysis.Razor
         public static RazorDiagnostic CreateTagHelper_InvalidRequiredAttributeOperator(
             char invalidOperator,
             string requiredAttributes
-        ) {
+        )
+        {
             var diagnostic = RazorDiagnostic.Create(
                 TagHelper_InvalidRequiredAttributeOperator,
                 new SourceSpan(SourceLocation.Undefined, contentLength: 0),
@@ -171,7 +177,8 @@ namespace Microsoft.CodeAnalysis.Razor
         public static RazorDiagnostic CreateTagHelper_InvalidRequiredAttributeMismatchedQuotes(
             char quote,
             string requiredAttributes
-        ) {
+        )
+        {
             var diagnostic = RazorDiagnostic.Create(
                 TagHelper_InvalidRequiredAttributeMismatchedQuotes,
                 new SourceSpan(SourceLocation.Undefined, contentLength: 0),
@@ -190,7 +197,8 @@ namespace Microsoft.CodeAnalysis.Razor
             );
         public static RazorDiagnostic CreateTagHelper_CouldNotFindMatchingEndBrace(
             string requiredAttributes
-        ) {
+        )
+        {
             var diagnostic = RazorDiagnostic.Create(
                 TagHelper_CouldNotFindMatchingEndBrace,
                 new SourceSpan(SourceLocation.Undefined, contentLength: 0),

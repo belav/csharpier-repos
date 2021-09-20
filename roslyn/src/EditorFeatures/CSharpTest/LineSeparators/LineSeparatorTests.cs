@@ -561,7 +561,8 @@ class Program
         private static async Task AssertTagsOnBracesOrSemicolonsAsync(
             string contents,
             params int[] tokenIndices
-        ) {
+        )
+        {
             await AssertTagsOnBracesOrSemicolonsTokensAsync(contents, tokenIndices);
             await AssertTagsOnBracesOrSemicolonsTokensAsync(contents, tokenIndices, Options.Script);
         }
@@ -570,7 +571,8 @@ class Program
             string contents,
             int[] tokenIndices,
             CSharpParseOptions options = null
-        ) {
+        )
+        {
             using var workspace = TestWorkspace.CreateCSharp(contents, options);
             var document = workspace.CurrentSolution.GetDocument(workspace.Documents.First().Id);
             var lineSeparatorService = Assert.IsType<CSharpLineSeparatorService>(

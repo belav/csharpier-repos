@@ -134,7 +134,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.RenameTracking
                             if (
                                 _isRenamableIdentifierTask.Result
                                 != TriggerIdentifierKind.NotRenamable
-                            ) {
+                            )
+                            {
                                 stateMachine.OnTrackingSessionUpdated(this);
                             }
                         },
@@ -186,7 +187,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.RenameTracking
             private async Task<TriggerIdentifierKind> DetermineIfRenamableIdentifierAsync(
                 SnapshotSpan snapshotSpan,
                 bool initialCheck
-            ) {
+            )
+            {
                 AssertIsBackground();
                 var document = snapshotSpan.Snapshot.GetOpenDocumentInCurrentContextWithChanges();
                 if (document != null)
@@ -217,7 +219,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.RenameTracking
                     if (
                         syntaxFactsService.IsIdentifier(token)
                         && languageHeuristicsService.IsIdentifierValidForRenameTracking(token.Text)
-                    ) {
+                    )
+                    {
                         var semanticModel = await document.ReuseExistingSpeculativeModelAsync(
                                 token.Parent,
                                 _cancellationToken
@@ -254,7 +257,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.RenameTracking
                             if (
                                 renameSymbolInfo.Symbols.Single().ContainingType?.IsTupleType()
                                 == true
-                            ) {
+                            )
+                            {
                                 return TriggerIdentifierKind.NotRenamable;
                             }
 
@@ -274,7 +278,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.RenameTracking
             private async Task<TriggerIdentifierKind> DetermineIfRenamableSymbolsAsync(
                 IEnumerable<ISymbol> symbols,
                 Document document
-            ) {
+            )
+            {
                 foreach (var symbol in symbols)
                 {
                     // Get the source symbol if possible
@@ -299,7 +304,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.RenameTracking
                 ISymbol symbol,
                 Document document,
                 SyntaxToken token
-            ) {
+            )
+            {
                 // Get the source symbol if possible
                 var sourceSymbol =
                     await SymbolFinder.FindSourceDefinitionAsync(
@@ -313,7 +319,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.RenameTracking
                     sourceSymbol.Kind == SymbolKind.Field
                     && ((IFieldSymbol)sourceSymbol).ContainingType.IsTupleType
                     && sourceSymbol.IsImplicitlyDeclared
-                ) {
+                )
+                {
                     // should not rename Item1, Item2...
                     // when user did not declare them in source.
                     return TriggerIdentifierKind.NotRenamable;
@@ -335,14 +342,16 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.RenameTracking
                 bool isSmartTagCheck,
                 bool waitForResult,
                 CancellationToken cancellationToken
-            ) {
+            )
+            {
                 if (
                     IsRenamableIdentifier(
                         _isRenamableIdentifierTask,
                         waitForResult,
                         cancellationToken
                     )
-                ) {
+                )
+                {
                     var isRenamingDeclaration =
                         _isRenamableIdentifierTask.Result
                         == TriggerIdentifierKind.RenamableDeclaration;
@@ -356,7 +365,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.RenameTracking
                         !string.Equals(OriginalName, newName, comparison)
                         && syntaxFactsService.IsValidIdentifier(newName)
                         && languageHeuristicsService.IsIdentifierValidForRenameTracking(newName)
-                    ) {
+                    )
+                    {
                         // At this point, we want to allow renaming if the user invoked Ctrl+. explicitly, but we
                         // want to avoid showing a smart tag if we're renaming a reference that binds to an existing
                         // symbol.
@@ -364,7 +374,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.RenameTracking
                             !isSmartTagCheck
                             || isRenamingDeclaration
                             || !NewIdentifierDefinitelyBindsToReference()
-                        ) {
+                        )
+                        {
                             return true;
                         }
                     }

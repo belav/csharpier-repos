@@ -121,7 +121,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.Semantics
             string pragma,
             NullableContextOptions globalContext,
             NullableContext expectedContext
-        ) {
+        )
+        {
             var source =
                 $@"
 {pragma}
@@ -243,7 +244,8 @@ partial class C
                 NullableContext context,
                 bool warningsEnabled,
                 bool annotationsEnabled
-            ) {
+            )
+            {
                 Assert.Equal(warningsEnabled, context.WarningsEnabled());
                 Assert.Equal(annotationsEnabled, context.AnnotationsEnabled());
                 Assert.False(context.WarningsInherited());
@@ -532,7 +534,8 @@ class Program
                 CSharpParseOptions parseOptions,
                 bool expectedFlowState,
                 params string[] expectedAnalyzedKeys
-            ) {
+            )
+            {
                 var comp = CreateCompilation(source, parseOptions: parseOptions);
                 comp.NullableAnalysisData = new();
                 var syntaxTree = comp.SyntaxTrees[0];
@@ -595,7 +598,8 @@ class B
                 CSharpParseOptions parseOptions,
                 bool expectedFlowState,
                 params string[] expectedAnalyzedKeys
-            ) {
+            )
+            {
                 var comp = CreateCompilation(source, parseOptions: parseOptions);
                 comp.NullableAnalysisData = new();
                 var syntaxTree = comp.SyntaxTrees[0];
@@ -653,7 +657,8 @@ class Program
                 CSharpParseOptions parseOptions,
                 bool expectedFlowState,
                 params string[] expectedAnalyzedKeys
-            ) {
+            )
+            {
                 var comp = CreateCompilation(source, parseOptions: parseOptions);
                 comp.NullableAnalysisData = new();
                 var syntaxTree = comp.SyntaxTrees[0];
@@ -685,7 +690,8 @@ class Program
                 string[] directives,
                 NullableContextState.State expectedWarningsState,
                 NullableContextState.State expectedAnnotationsState
-            ) {
+            )
+            {
                 Directives = directives;
                 ExpectedWarningsState = expectedWarningsState;
                 ExpectedAnnotationsState = expectedAnnotationsState;
@@ -843,7 +849,8 @@ class Program
             NullableContextOptions? projectContext,
             NullableDirectives classDirectives,
             NullableDirectives methodDirectives
-        ) {
+        )
+        {
             AnalyzeMethodsInEnabledContextOnly_01_Execute(
                 projectContext,
                 classDirectives,
@@ -858,7 +865,8 @@ class Program
             NullableContextOptions? projectContext,
             NullableDirectives classDirectives,
             NullableDirectives methodDirectives
-        ) {
+        )
+        {
             AnalyzeMethodsInEnabledContextOnly_01_Execute(
                 projectContext,
                 classDirectives,
@@ -870,7 +878,8 @@ class Program
             NullableContextOptions? projectContext,
             NullableDirectives classDirectives,
             NullableDirectives methodDirectives
-        ) {
+        )
+        {
             var sourceA =
                 @"#nullable enable
 public class A
@@ -949,7 +958,8 @@ static class B
                 CSharpSyntaxNode syntax,
                 NullableContextState.State expectedWarningsState,
                 NullableContextState.State expectedAnnotationsState
-            ) {
+            )
+            {
                 var actualState = tree.GetNullableContextState(syntax.SpanStart);
                 Assert.Equal(expectedWarningsState, actualState.WarningsState);
                 Assert.Equal(expectedAnnotationsState, actualState.AnnotationsState);
@@ -959,7 +969,8 @@ static class B
         private static NullableContextState.State CombineState(
             NullableContextState.State currentState,
             NullableContextState.State previousState
-        ) {
+        )
+        {
             return currentState == NullableContextState.State.Unknown
               ? previousState
               : currentState;
@@ -968,7 +979,8 @@ static class B
         private static bool IsNullableEnabled(
             NullableContextState.State state,
             bool isNullableEnabledForProject
-        ) {
+        )
+        {
             return state switch
             {
                 NullableContextState.State.Enabled => true,
@@ -1108,7 +1120,8 @@ static class Program
                 string source,
                 string[] expectedAnalyzedKeys,
                 params DiagnosticDescription[] expectedDiagnostics
-            ) {
+            )
+            {
                 var comp = CreateCompilation(source);
                 comp.NullableAnalysisData = new();
                 comp.VerifyDiagnostics(expectedDiagnostics);
@@ -1405,7 +1418,8 @@ struct S
                 string source,
                 string[] expectedAnalyzedKeys,
                 params DiagnosticDescription[] expectedDiagnostics
-            ) {
+            )
+            {
                 var comp = CreateCompilation(source);
                 comp.NullableAnalysisData = new();
                 comp.VerifyDiagnostics(expectedDiagnostics);
@@ -1518,7 +1532,8 @@ partial class Program
                 CSharpCompilationOptions options,
                 string[] expectedAnalyzedKeys,
                 params DiagnosticDescription[] expectedDiagnostics
-            ) {
+            )
+            {
                 var comp = CreateCompilation(source, options: options);
                 comp.NullableAnalysisData = new();
                 comp.VerifyDiagnostics(expectedDiagnostics);
@@ -1636,7 +1651,8 @@ class Program
                 string source,
                 string[] expectedAnalyzedKeys,
                 params DiagnosticDescription[] expectedDiagnostics
-            ) {
+            )
+            {
                 var comp = CreateCompilation(source);
                 comp.NullableAnalysisData = new();
                 comp.VerifyDiagnostics(expectedDiagnostics);
@@ -1707,7 +1723,8 @@ class Program
                 string source,
                 string[] expectedAnalyzedKeys,
                 params DiagnosticDescription[] expectedDiagnostics
-            ) {
+            )
+            {
                 var comp = CreateCompilation(source);
                 comp.NullableAnalysisData = new();
                 comp.VerifyDiagnostics(expectedDiagnostics);
@@ -1817,7 +1834,8 @@ class Program
                 string source,
                 string[] expectedAnalyzedKeys,
                 params DiagnosticDescription[] expectedDiagnostics
-            ) {
+            )
+            {
                 var comp = CreateCompilation(source);
                 comp.NullableAnalysisData = new();
                 comp.VerifyDiagnostics(expectedDiagnostics);
@@ -1889,7 +1907,8 @@ class B
                 string source,
                 string[] expectedAnalyzedKeys,
                 params DiagnosticDescription[] expectedDiagnostics
-            ) {
+            )
+            {
                 var comp = CreateCompilation(source);
                 comp.NullableAnalysisData = new();
                 comp.VerifyDiagnostics(expectedDiagnostics);
@@ -2000,7 +2019,8 @@ record B2() : A(
                 string source,
                 string[] expectedAnalyzedKeys,
                 params DiagnosticDescription[] expectedDiagnostics
-            ) {
+            )
+            {
                 var comp = CreateCompilation(new[] { source, IsExternalInitTypeDefinition });
                 comp.NullableAnalysisData = new();
                 comp.VerifyDiagnostics(expectedDiagnostics);
@@ -2342,7 +2362,8 @@ _ = x.ToString();
                 NullableContextOptions? projectContext,
                 string[] expectedAnalyzedKeys,
                 params DiagnosticDescription[] expectedDiagnostics
-            ) {
+            )
+            {
                 var options = TestOptions.ReleaseExe;
                 if (projectContext != null)
                     options = options.WithNullableContextOptions(
@@ -2470,7 +2491,8 @@ _ = x.ToString();
                 string source,
                 Microsoft.CodeAnalysis.NullableFlowState expectedFlowState,
                 params string[] expectedAnalyzedKeys
-            ) {
+            )
+            {
                 var comp = CreateCompilation(source);
                 comp.NullableAnalysisData = new();
 
@@ -2549,7 +2571,8 @@ class B2
                 AttributeArgumentSyntax syntax,
                 string expectedText,
                 Microsoft.CodeAnalysis.NullableFlowState expectedFlowState
-            ) {
+            )
+            {
                 Assert.Equal(expectedText, syntax.ToString());
                 var typeInfo = model.GetTypeInfo(syntax.Expression);
                 Assert.Equal(expectedFlowState, typeInfo.Nullability.FlowState);
@@ -2613,7 +2636,8 @@ class Program
                 AttributeArgumentSyntax syntax,
                 string expectedText,
                 Microsoft.CodeAnalysis.NullableFlowState expectedFlowState
-            ) {
+            )
+            {
                 Assert.Equal(expectedText, syntax.ToString());
                 var typeInfo = model.GetTypeInfo(syntax.Expression);
                 Assert.Equal(expectedFlowState, typeInfo.Nullability.FlowState);
@@ -2666,7 +2690,8 @@ class Program
                 EqualsValueClauseSyntax syntax,
                 string expectedText,
                 Microsoft.CodeAnalysis.NullableFlowState expectedFlowState
-            ) {
+            )
+            {
                 var value = syntax.Value;
                 Assert.Equal(expectedText, value.ToString());
                 var typeInfo = model.GetTypeInfo(value);
@@ -2717,7 +2742,8 @@ class B
                 VariableDeclaratorSyntax syntax,
                 string expectedText,
                 Microsoft.CodeAnalysis.NullableFlowState expectedFlowState
-            ) {
+            )
+            {
                 Assert.Equal(expectedText, syntax.Identifier.ValueText);
                 var typeInfo = model.GetTypeInfo(syntax.Initializer.Value);
                 Assert.Equal(expectedFlowState, typeInfo.Nullability.FlowState);
@@ -2765,7 +2791,8 @@ class B
                 PropertyDeclarationSyntax syntax,
                 string expectedText,
                 Microsoft.CodeAnalysis.NullableFlowState expectedFlowState
-            ) {
+            )
+            {
                 Assert.Equal(expectedText, syntax.Identifier.ValueText);
                 var typeInfo = model.GetTypeInfo(syntax.Initializer.Value);
                 Assert.Equal(expectedFlowState, typeInfo.Nullability.FlowState);
@@ -2930,7 +2957,8 @@ class Program
             NullableContextOptions? projectContext,
             NullableDirectives sourceDirectives,
             NullableDirectives speculativeDirectives
-        ) {
+        )
+        {
             AnalyzeMethodsInEnabledContextOnly_SpeculativeSemanticModel_Execute(
                 projectContext,
                 sourceDirectives,
@@ -2945,7 +2973,8 @@ class Program
             NullableContextOptions? projectContext,
             NullableDirectives sourceDirectives,
             NullableDirectives speculativeDirectives
-        ) {
+        )
+        {
             AnalyzeMethodsInEnabledContextOnly_SpeculativeSemanticModel_Execute(
                 projectContext,
                 sourceDirectives,
@@ -2957,7 +2986,8 @@ class Program
             NullableContextOptions? projectContext,
             NullableDirectives sourceDirectives,
             NullableDirectives speculativeDirectives
-        ) {
+        )
+        {
             // https://github.com/dotnet/roslyn/issues/50234: SyntaxTreeSemanticModel.IsNullableAnalysisEnabledAtSpeculativePosition()
             // does not handle '#nullable restore'.
             if (
@@ -3002,7 +3032,8 @@ string";
             NullableContextOptions? projectContext,
             string typeName,
             Microsoft.CodeAnalysis.NullableAnnotation expectedAnnotation
-        ) {
+        )
+        {
             var options = TestOptions.ReleaseDll;
             if (projectContext != null)
                 options = options.WithNullableContextOptions(projectContext.GetValueOrDefault());
@@ -3038,7 +3069,8 @@ string";
         private static string[] GetIsNullableEnabledMethods(
             CSharpCompilation.NullableData nullableData,
             Func<object, string> toString = null
-        ) {
+        )
+        {
             toString ??= GetNullableDataKeyAsString;
             return nullableData.Data.Where(
                     pair =>

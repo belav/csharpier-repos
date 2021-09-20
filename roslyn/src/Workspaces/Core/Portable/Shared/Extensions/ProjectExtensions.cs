@@ -23,7 +23,8 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
         internal static DocumentId? GetDocumentForExternalLocation(
             this Project project,
             Location location
-        ) {
+        )
+        {
             Debug.Assert(location.Kind == LocationKind.ExternalFile);
             return project.GetDocumentIdWithFilePath(location.GetLineSpan().Path);
         }
@@ -56,7 +57,8 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
         public static TextDocument GetRequiredTextDocument(
             this Project project,
             DocumentId documentId
-        ) {
+        )
+        {
             var document = project.GetTextDocument(documentId);
             if (document == null)
             {

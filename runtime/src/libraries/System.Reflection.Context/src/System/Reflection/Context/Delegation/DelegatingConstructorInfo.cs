@@ -128,7 +128,8 @@ namespace System.Reflection.Context.Delegation
             Binder binder,
             object[] parameters,
             CultureInfo culture
-        ) {
+        )
+        {
             return UnderlyingConstructor.Invoke(invokeAttr, binder, parameters, culture);
         }
 
@@ -138,7 +139,8 @@ namespace System.Reflection.Context.Delegation
             Binder binder,
             object[] parameters,
             CultureInfo culture
-        ) {
+        )
+        {
             return UnderlyingConstructor.Invoke(obj, invokeAttr, binder, parameters, culture);
         }
 

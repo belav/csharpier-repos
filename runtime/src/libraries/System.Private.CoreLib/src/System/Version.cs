@@ -293,7 +293,8 @@ namespace System
         public static bool TryParse(
             [NotNullWhen(true)] string? input,
             [NotNullWhen(true)] out Version? result
-        ) {
+        )
+        {
             if (input == null)
             {
                 result = null;
@@ -351,7 +352,8 @@ namespace System
                     throwOnFailure,
                     out int major
                 )
-            ) {
+            )
+            {
                 return null;
             }
 
@@ -365,7 +367,8 @@ namespace System
                         throwOnFailure,
                         out minor
                     )
-                ) {
+                )
+                {
                     return null;
                 }
 
@@ -420,7 +423,8 @@ namespace System
             string componentName,
             bool throwOnFailure,
             out int parsedComponent
-        ) {
+        )
+        {
             if (throwOnFailure)
             {
                 if (
@@ -431,7 +435,8 @@ namespace System
                             CultureInfo.InvariantCulture
                         )
                     ) < 0
-                ) {
+                )
+                {
                     throw new ArgumentOutOfRangeException(
                         componentName,
                         SR.ArgumentOutOfRange_Version

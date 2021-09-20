@@ -76,7 +76,8 @@ namespace Microsoft.CodeAnalysis.Host.Mef
         /// </summary>
         protected internal override HostWorkspaceServices CreateWorkspaceServices(
             Workspace workspace
-        ) {
+        )
+        {
             return new MefWorkspaceServices(this, workspace);
         }
 

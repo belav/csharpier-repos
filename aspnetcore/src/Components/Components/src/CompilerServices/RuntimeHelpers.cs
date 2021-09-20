@@ -35,7 +35,8 @@ namespace Microsoft.AspNetCore.Components.CompilerServices
             object receiver,
             Action<T> callback,
             T value
-        ) {
+        )
+        {
             return EventCallback.Factory.Create<T>(receiver, callback);
         }
 
@@ -55,7 +56,8 @@ namespace Microsoft.AspNetCore.Components.CompilerServices
             object receiver,
             Func<T, Task> callback,
             T value
-        ) {
+        )
+        {
             return EventCallback.Factory.Create<T>(receiver, callback);
         }
     }

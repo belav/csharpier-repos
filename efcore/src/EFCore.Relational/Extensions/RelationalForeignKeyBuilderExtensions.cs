@@ -22,7 +22,8 @@ namespace Microsoft.EntityFrameworkCore
         public static ReferenceCollectionBuilder HasConstraintName(
             this ReferenceCollectionBuilder referenceCollectionBuilder,
             string? name
-        ) {
+        )
+        {
             Check.NotNull(referenceCollectionBuilder, nameof(referenceCollectionBuilder));
             Check.NullButNotEmpty(name, nameof(name));
 
@@ -45,8 +46,9 @@ namespace Microsoft.EntityFrameworkCore
         >(
             this ReferenceCollectionBuilder<TEntity, TRelatedEntity> referenceCollectionBuilder,
             string? name
-        ) where TEntity : class
-          where TRelatedEntity : class =>
+        )
+            where TEntity : class
+            where TRelatedEntity : class =>
             (ReferenceCollectionBuilder<TEntity, TRelatedEntity>)HasConstraintName(
                 (ReferenceCollectionBuilder)referenceCollectionBuilder,
                 name
@@ -61,7 +63,8 @@ namespace Microsoft.EntityFrameworkCore
         public static ReferenceReferenceBuilder HasConstraintName(
             this ReferenceReferenceBuilder referenceReferenceBuilder,
             string? name
-        ) {
+        )
+        {
             Check.NotNull(referenceReferenceBuilder, nameof(referenceReferenceBuilder));
             Check.NullButNotEmpty(name, nameof(name));
 
@@ -84,8 +87,9 @@ namespace Microsoft.EntityFrameworkCore
         >(
             this ReferenceReferenceBuilder<TEntity, TRelatedEntity> referenceReferenceBuilder,
             string? name
-        ) where TEntity : class
-          where TRelatedEntity : class =>
+        )
+            where TEntity : class
+            where TRelatedEntity : class =>
             (ReferenceReferenceBuilder<TEntity, TRelatedEntity>)HasConstraintName(
                 (ReferenceReferenceBuilder)referenceReferenceBuilder,
                 name
@@ -100,7 +104,8 @@ namespace Microsoft.EntityFrameworkCore
         public static OwnershipBuilder HasConstraintName(
             this OwnershipBuilder ownershipBuilder,
             string? name
-        ) {
+        )
+        {
             Check.NullButNotEmpty(name, nameof(name));
 
             ownershipBuilder.Metadata.SetConstraintName(name);
@@ -119,11 +124,9 @@ namespace Microsoft.EntityFrameworkCore
         public static OwnershipBuilder<TEntity, TDependentEntity> HasConstraintName<
             TEntity,
             TDependentEntity
-        >(
-            this OwnershipBuilder<TEntity, TDependentEntity> ownershipBuilder,
-            string? name
-        ) where TEntity : class
-          where TDependentEntity : class =>
+        >(this OwnershipBuilder<TEntity, TDependentEntity> ownershipBuilder, string? name)
+            where TEntity : class
+            where TDependentEntity : class =>
             (OwnershipBuilder<TEntity, TDependentEntity>)HasConstraintName(
                 (OwnershipBuilder)ownershipBuilder,
                 name
@@ -143,7 +146,8 @@ namespace Microsoft.EntityFrameworkCore
             this IConventionForeignKeyBuilder relationship,
             string? name,
             bool fromDataAnnotation = false
-        ) {
+        )
+        {
             if (!relationship.CanSetConstraintName(name, fromDataAnnotation))
             {
                 return null;

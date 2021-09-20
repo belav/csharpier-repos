@@ -54,7 +54,8 @@ namespace ROOT_PROJECT_NAMESPACE.Areas.HelpPage.Controllers
                         modelName,
                         out modelDescription
                     )
-                ) {
+                )
+                {
                     return View(modelDescription);
                 }
             }

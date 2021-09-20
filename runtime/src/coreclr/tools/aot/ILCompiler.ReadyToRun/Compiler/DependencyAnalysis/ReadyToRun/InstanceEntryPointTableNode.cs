@@ -62,7 +62,8 @@ namespace ILCompiler.DependencyAnalysis.ReadyToRun
                     null,
                     CompiledMethodCategory.Instantiated
                 )
-            ) {
+            )
+            {
                 Debug.Assert(
                     method.Method.HasInstantiation || method.Method.OwningType.HasInstantiation
                 );

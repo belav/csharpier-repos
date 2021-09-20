@@ -35,7 +35,8 @@ namespace Microsoft.AspNetCore.Mvc.Razor.TagHelpers
         public TagHelperComponentTagHelper(
             ITagHelperComponentManager manager,
             ILoggerFactory loggerFactory
-        ) {
+        )
+        {
             if (manager == null)
             {
                 throw new ArgumentNullException(nameof(manager));

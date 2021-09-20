@@ -51,10 +51,8 @@ namespace Microsoft.AspNetCore.Mvc
         /// <param name="authenticationScheme">The authentication schemes to challenge.</param>
         /// <param name="properties"><see cref="AuthenticationProperties"/> used to perform the authentication
         /// challenge.</param>
-        public ForbidResult(
-            string authenticationScheme,
-            AuthenticationProperties? properties
-        ) : this(new[] { authenticationScheme }, properties) { }
+        public ForbidResult(string authenticationScheme, AuthenticationProperties? properties)
+            : this(new[] { authenticationScheme }, properties) { }
 
         /// <summary>
         /// Initializes a new instance of <see cref="ForbidResult"/> with the
@@ -66,7 +64,8 @@ namespace Microsoft.AspNetCore.Mvc
         public ForbidResult(
             IList<string> authenticationSchemes,
             AuthenticationProperties? properties
-        ) {
+        )
+        {
             AuthenticationSchemes = authenticationSchemes;
             Properties = properties;
         }

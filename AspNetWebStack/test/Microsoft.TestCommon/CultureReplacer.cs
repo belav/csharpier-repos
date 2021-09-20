@@ -25,7 +25,8 @@ namespace Microsoft.TestCommon
         public CultureReplacer(
             string culture = _defaultCultureName,
             string uiCulture = _defaultUICultureName
-        ) {
+        )
+        {
             _originalCulture = Thread.CurrentThread.CurrentCulture;
             _originalUICulture = Thread.CurrentThread.CurrentUICulture;
             _threadId = Thread.CurrentThread.ManagedThreadId;

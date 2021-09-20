@@ -20,7 +20,8 @@ namespace Microsoft.Extensions.DependencyInjection
         public static IServiceCollection AddCookiePolicy(
             this IServiceCollection services,
             Action<CookiePolicyOptions> configureOptions
-        ) {
+        )
+        {
             if (services == null)
             {
                 throw new ArgumentNullException(nameof(services));

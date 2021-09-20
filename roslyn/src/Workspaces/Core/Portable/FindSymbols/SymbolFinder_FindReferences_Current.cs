@@ -28,7 +28,8 @@ namespace Microsoft.CodeAnalysis.FindSymbols
             IImmutableSet<Document> documents,
             FindReferencesSearchOptions options,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             using (Logger.LogBlock(FunctionId.FindReference, cancellationToken))
             {
                 if (
@@ -38,7 +39,8 @@ namespace Microsoft.CodeAnalysis.FindSymbols
                         cancellationToken,
                         out var serializedSymbol
                     )
-                ) {
+                )
+                {
                     var client = await RemoteHostClient.TryGetClientAsync(
                             solution.Workspace,
                             cancellationToken
@@ -96,7 +98,8 @@ namespace Microsoft.CodeAnalysis.FindSymbols
             IImmutableSet<Document> documents,
             FindReferencesSearchOptions options,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var finders = ReferenceFinders.DefaultReferenceFinders;
             progress ??= NoOpStreamingFindReferencesProgress.Instance;
             var engine = new FindReferencesSearchEngine(

@@ -69,7 +69,8 @@ namespace System.IO.IsolatedStorage
             this IsolatedStorageFile isf,
             string fileName,
             string content = null
-        ) {
+        )
+        {
             using (var stream = isf.CreateFile(fileName))
             {
                 if (content != null)
@@ -81,7 +82,8 @@ namespace System.IO.IsolatedStorage
             this IsolatedStorageFile isf,
             string fileName,
             string content
-        ) {
+        )
+        {
             using (var stream = isf.OpenFile(fileName, FileMode.OpenOrCreate, FileAccess.ReadWrite))
             {
                 stream.WriteAllText(content);

@@ -93,7 +93,8 @@ namespace ILCompiler.DependencyAnalysis
             ReadyToRunHelperId id,
             Object target,
             TypeSystemEntity dictionaryOwner
-        ) {
+        )
+        {
             return _genericReadyToRunHelpersFromDict.GetOrAdd(
                 new ReadyToRunGenericHelperKey(id, target, dictionaryOwner)
             );
@@ -108,7 +109,8 @@ namespace ILCompiler.DependencyAnalysis
             ReadyToRunHelperId id,
             Object target,
             TypeSystemEntity dictionaryOwner
-        ) {
+        )
+        {
             return _genericReadyToRunHelpersFromType.GetOrAdd(
                 new ReadyToRunGenericHelperKey(id, target, dictionaryOwner)
             );
@@ -124,7 +126,8 @@ namespace ILCompiler.DependencyAnalysis
                 ReadyToRunHelperId helperId,
                 object target,
                 TypeSystemEntity dictionaryOwner
-            ) {
+            )
+            {
                 HelperId = helperId;
                 Target = target;
                 DictionaryOwner = dictionaryOwner;
@@ -179,7 +182,8 @@ namespace ILCompiler.DependencyAnalysis
             DebugDirectoryNode debugDirectoryNode,
             ResourceData win32Resources,
             ReadyToRunFlags flags
-        ) {
+        )
+        {
             TypeSystemContext = context;
             CompilationModuleGroup = compilationModuleGroup;
             ProfileDataManager = profileDataManager;
@@ -469,7 +473,8 @@ namespace ILCompiler.DependencyAnalysis
             MethodWithToken method,
             bool isInstantiatingStub,
             bool isPrecodeImportRequired
-        ) {
+        )
+        {
             TypeAndMethod key = new TypeAndMethod(
                 method.ConstrainedType,
                 method,
@@ -487,13 +492,15 @@ namespace ILCompiler.DependencyAnalysis
         public IEnumerable<MethodWithGCInfo> EnumerateCompiledMethods(
             EcmaModule moduleToEnumerate,
             CompiledMethodCategory methodCategory
-        ) {
+        )
+        {
             foreach (
                 IMethodNode methodNode in MetadataManager.GetCompiledMethods(
                     moduleToEnumerate,
                     methodCategory
                 )
-            ) {
+            )
+            {
                 MethodDesc method = methodNode.Method;
                 MethodWithGCInfo methodCodeNode = methodNode as MethodWithGCInfo;
 #if DEBUG
@@ -518,13 +525,15 @@ namespace ILCompiler.DependencyAnalysis
                 if (
                     methodCodeNodeDebug == null
                     && methodNodeDebug is DelayLoadMethodImport DelayLoadMethodImport
-                ) {
+                )
+                {
                     methodCodeNodeDebug = DelayLoadMethodImport.MethodCodeNode;
                 }
                 if (
                     methodCodeNodeDebug == null
                     && methodNodeDebug is PrecodeMethodImport precodeMethodImport
-                ) {
+                )
+                {
                     methodCodeNodeDebug = precodeMethodImport.MethodCodeNode;
                 }
                 Debug.Assert(methodCodeNodeDebug == methodCodeNode);
@@ -570,7 +579,8 @@ namespace ILCompiler.DependencyAnalysis
             ReadyToRunFixupKind fixupKind,
             MethodWithToken method,
             bool isInstantiatingStub
-        ) {
+        )
+        {
             TypeAndMethod key = new TypeAndMethod(
                 method.ConstrainedType,
                 method,
@@ -625,7 +635,8 @@ namespace ILCompiler.DependencyAnalysis
                 ReadyToRunHelper helper,
                 ImportSectionNode containingImportSection,
                 bool useVirtualCall
-            ) {
+            )
+            {
                 Helper = helper;
                 ContainingImportSection = containingImportSection;
                 UseVirtualCall = useVirtualCall;
@@ -659,7 +670,8 @@ namespace ILCompiler.DependencyAnalysis
             ReadyToRunHelper helper,
             ImportSectionNode containingImportSection,
             bool useVirtualCall
-        ) {
+        )
+        {
             ImportThunkKey thunkKey = new ImportThunkKey(
                 helper,
                 containingImportSection,
@@ -881,7 +893,8 @@ namespace ILCompiler.DependencyAnalysis
                 {
                     foreach (
                         MethodDesc method in ProfileDataManager.GetMethodsForModuleDesc(inputModule)
-                    ) {
+                    )
+                    {
                         if (ProfileDataManager[method].SchemaData != null)
                         {
                             methodsToInsertInstrumentationDataFor.Add(method);
@@ -1020,7 +1033,8 @@ namespace ILCompiler.DependencyAnalysis
                 MethodWithToken method,
                 bool isUnboxingStub,
                 bool isInstantiatingStub
-            ) {
+            )
+            {
                 Method = method;
                 IsUnboxingStub = isUnboxingStub;
                 IsInstantiatingStub = isInstantiatingStub;
@@ -1051,7 +1065,8 @@ namespace ILCompiler.DependencyAnalysis
         public ISymbolNode DynamicHelperCell(
             MethodWithToken methodWithToken,
             bool isInstantiatingStub
-        ) {
+        )
+        {
             DynamicHelperCellKey key = new DynamicHelperCellKey(
                 methodWithToken,
                 isUnboxingStub: false,
@@ -1072,7 +1087,8 @@ namespace ILCompiler.DependencyAnalysis
         public DebugDirectoryEntryNode DebugDirectoryEntry(
             EcmaModule module,
             int debugDirEntryIndex
-        ) {
+        )
+        {
             return _debugDirectoryEntries.GetOrAdd(
                 new ModuleAndIntValueKey(debugDirEntryIndex, module)
             );

@@ -88,14 +88,16 @@ namespace System.ComponentModel.Composition.Registration
         // Choose a constructor from all of the available constructors, then configure them
         public PartBuilder SelectConstructor(
             Func<ConstructorInfo[], ConstructorInfo> constructorFilter
-        ) {
+        )
+        {
             return SelectConstructor(constructorFilter, null);
         }
 
         public PartBuilder SelectConstructor(
             Func<ConstructorInfo[], ConstructorInfo> constructorFilter,
             Action<ParameterInfo, ImportBuilder> importConfiguration
-        ) {
+        )
+        {
             _constructorFilter = constructorFilter;
             _configureConstuctorImports = importConfiguration;
 
@@ -116,7 +118,8 @@ namespace System.ComponentModel.Composition.Registration
         public PartBuilder ExportInterfaces(
             Predicate<Type> interfaceFilter,
             Action<Type, ExportBuilder> exportConfiguration
-        ) {
+        )
+        {
             if (interfaceFilter == null)
                 throw new ArgumentNullException(nameof(interfaceFilter));
             _interfaceExports.Add(Tuple.Create(interfaceFilter, exportConfiguration));
@@ -136,7 +139,8 @@ namespace System.ComponentModel.Composition.Registration
         public PartBuilder ExportProperties(
             Predicate<PropertyInfo> propertyFilter,
             Action<PropertyInfo, ExportBuilder> exportConfiguration
-        ) {
+        )
+        {
             if (propertyFilter == null)
                 throw new ArgumentNullException(nameof(propertyFilter));
 
@@ -157,7 +161,8 @@ namespace System.ComponentModel.Composition.Registration
         public PartBuilder ExportProperties<T>(
             Predicate<PropertyInfo> propertyFilter,
             Action<PropertyInfo, ExportBuilder> exportConfiguration
-        ) {
+        )
+        {
             if (propertyFilter == null)
                 throw new ArgumentNullException(nameof(propertyFilter));
 
@@ -178,7 +183,8 @@ namespace System.ComponentModel.Composition.Registration
         public PartBuilder ImportProperties(
             Predicate<PropertyInfo> propertyFilter,
             Action<PropertyInfo, ImportBuilder> importConfiguration
-        ) {
+        )
+        {
             if (propertyFilter == null)
                 throw new ArgumentNullException(nameof(propertyFilter));
 
@@ -198,7 +204,8 @@ namespace System.ComponentModel.Composition.Registration
         public PartBuilder ImportProperties<T>(
             Predicate<PropertyInfo> propertyFilter,
             Action<PropertyInfo, ImportBuilder> importConfiguration
-        ) {
+        )
+        {
             if (propertyFilter == null)
                 throw new ArgumentNullException(nameof(propertyFilter));
 
@@ -250,7 +257,8 @@ namespace System.ComponentModel.Composition.Registration
                     if (
                         attrType != s_exportAttributeType
                         && attrType.IsDefined(typeof(MetadataAttributeAttribute), true)
-                    ) {
+                    )
+                    {
                         return true;
                     }
                 }
@@ -360,7 +368,8 @@ namespace System.ComponentModel.Composition.Registration
                             if (
                                 underlyingType == typeof(IDisposable)
                                 || underlyingType == typeof(IPartImportsSatisfiedNotification)
-                            ) {
+                            )
+                            {
                                 continue;
                             }
 
@@ -370,11 +379,13 @@ namespace System.ComponentModel.Composition.Registration
                                     Predicate<Type>,
                                     Action<Type, ExportBuilder>
                                 > exportSpecification in _interfaceExports
-                            ) {
+                            )
+                            {
                                 if (
                                     exportSpecification.Item1 != null
                                     && exportSpecification.Item1(underlyingType)
-                                ) {
+                                )
+                                {
                                     ExportBuilder exportBuilder = new ExportBuilder();
                                     exportBuilder.AsContractType((Type)iface);
                                     exportSpecification.Item2?.Invoke(iface, exportBuilder);
@@ -392,7 +403,8 @@ namespace System.ComponentModel.Composition.Registration
         internal bool BuildConstructorAttributes(
             Type type,
             ref List<Tuple<object, List<Attribute>>> configuredMembers
-        ) {
+        )
+        {
             ConstructorInfo[] constructors = type.GetConstructors();
 
             // First see if any of these constructors have the ImportingConstructorAttribute if so then we are already done
@@ -446,7 +458,8 @@ namespace System.ComponentModel.Composition.Registration
         internal static void BuildDefaultConstructorAttributes(
             Type type,
             ref List<Tuple<object, List<Attribute>>> configuredMembers
-        ) {
+        )
+        {
             ConstructorInfo[] constructors = type.GetConstructors();
 
             foreach (ConstructorInfo constructorInfo in FindLongestConstructors(constructors))
@@ -459,7 +472,8 @@ namespace System.ComponentModel.Composition.Registration
             ConstructorInfo constructorInfo,
             ref List<Tuple<object, List<Attribute>>> configuredMembers,
             Action<ParameterInfo, ImportBuilder> configureConstuctorImports
-        ) {
+        )
+        {
             if (configuredMembers == null)
             {
                 configuredMembers = new List<Tuple<object, List<Attribute>>>();
@@ -503,7 +517,8 @@ namespace System.ComponentModel.Composition.Registration
         internal void BuildPropertyAttributes(
             Type type,
             ref List<Tuple<object, List<Attribute>>> configuredMembers
-        ) {
+        )
+        {
             if (_propertyImports.Any() || _propertyExports.Any())
             {
                 foreach (PropertyInfo pi in type.GetProperties())
@@ -524,11 +539,13 @@ namespace System.ComponentModel.Composition.Registration
                             Action<PropertyInfo, ImportBuilder>,
                             Type
                         > importSpecification in _propertyImports
-                    ) {
+                    )
+                    {
                         if (
                             importSpecification.Item1 != null
                             && importSpecification.Item1(declaredPi)
-                        ) {
+                        )
+                        {
                             var importBuilder = new ImportBuilder();
 
                             if (importSpecification.Item3 != null)
@@ -584,11 +601,13 @@ namespace System.ComponentModel.Composition.Registration
                             Action<PropertyInfo, ExportBuilder>,
                             Type
                         > exportSpecification in _propertyExports
-                    ) {
+                    )
+                    {
                         if (
                             exportSpecification.Item1 != null
                             && exportSpecification.Item1(declaredPi)
-                        ) {
+                        )
+                        {
                             var exportBuilder = new ExportBuilder();
 
                             if (exportSpecification.Item3 != null)
@@ -640,7 +659,8 @@ namespace System.ComponentModel.Composition.Registration
 
         private static IEnumerable<ConstructorInfo> FindLongestConstructors(
             ConstructorInfo[] constructors
-        ) {
+        )
+        {
             ConstructorInfo longestConstructor = null;
             int argumentsCount = 0;
             int constructorsFound = 0;

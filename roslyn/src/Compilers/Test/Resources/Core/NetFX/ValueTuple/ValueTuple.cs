@@ -385,7 +385,8 @@ namespace System
             int h6,
             int h7,
             int h8
-        ) {
+        )
+        {
             return HashHelpers.Combine(CombineHashCodes(h1, h2, h3, h4, h5, h6, h7), h8);
         }
     }
@@ -2282,7 +2283,8 @@ namespace System
             T6 item6,
             T7 item7,
             TRest rest
-        ) {
+        )
+        {
             if (!(rest is IValueTupleInternal))
             {
                 throw new ArgumentException();

@@ -66,7 +66,8 @@ namespace Microsoft.AspNetCore.Http.Features
             int offset,
             int count,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             return _inner.ReadAsync(buffer, offset, count, cancellationToken);
         }
     }

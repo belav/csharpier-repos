@@ -74,7 +74,8 @@ namespace Microsoft.CodeAnalysis.Scripting.Hosting
             string directory = null,
             IEnumerable<string> noShadowCopyDirectories = null,
             CultureInfo documentationCommentsCulture = null
-        ) {
+        )
+        {
             if (directory != null)
             {
                 RequireAbsolutePath(directory, nameof(directory));
@@ -203,7 +204,8 @@ namespace Microsoft.CodeAnalysis.Scripting.Hosting
                             searchPattern: "*",
                             searchOption: SearchOption.AllDirectories
                         )
-                    ) {
+                    )
+                    {
                         StripReadOnlyAttributeFromFile(fileInfo);
                     }
 
@@ -302,7 +304,8 @@ namespace Microsoft.CodeAnalysis.Scripting.Hosting
         private MetadataShadowCopy GetMetadataShadowCopyNoCheck(
             string fullPath,
             MetadataImageKind kind
-        ) {
+        )
+        {
             if (kind < MetadataImageKind.Assembly || kind > MetadataImageKind.Module)
             {
                 throw new ArgumentOutOfRangeException(nameof(kind));
@@ -358,7 +361,8 @@ namespace Microsoft.CodeAnalysis.Scripting.Hosting
         private bool CopyExistsOrIsSuppressed(
             FileKey key,
             out CacheEntry<MetadataShadowCopy> existing
-        ) {
+        )
+        {
             if (_lazySuppressedFiles != null && _lazySuppressedFiles.Contains(key.FullPath))
             {
                 existing = default(CacheEntry<MetadataShadowCopy>);
@@ -409,7 +413,8 @@ namespace Microsoft.CodeAnalysis.Scripting.Hosting
             if (
                 referencesDir != null
                 && directory.StartsWith(referencesDir, StringComparison.Ordinal)
-            ) {
+            )
+            {
                 return false;
             }
 
@@ -421,7 +426,8 @@ namespace Microsoft.CodeAnalysis.Scripting.Hosting
         private CacheEntry<MetadataShadowCopy> CreateMetadataShadowCopy(
             string originalPath,
             MetadataImageKind kind
-        ) {
+        )
+        {
             int attempts = 10;
             while (true)
             {
@@ -499,7 +505,8 @@ namespace Microsoft.CodeAnalysis.Scripting.Hosting
             FileStream manifestModuleCopyStream,
             string originalPath,
             string shadowCopyPath
-        ) {
+        )
+        {
             // We don't need to use the global metadata cache here since the shadow copy
             // won't change and is private to us - only users of the same shadow copy provider see it.
 
@@ -605,7 +612,8 @@ namespace Microsoft.CodeAnalysis.Scripting.Hosting
             string originalAssemblyPath,
             string assemblyCopyDirectory,
             CultureInfo docCultureOpt
-        ) {
+        )
+        {
             // Note: Doc comments are not supported for netmodules.
 
             string assemblyDirectory = Path.GetDirectoryName(originalAssemblyPath);
@@ -622,7 +630,8 @@ namespace Microsoft.CodeAnalysis.Scripting.Hosting
                     out xmlSubdirectory,
                     out xmlFileName
                 )
-            ) {
+            )
+            {
                 return null;
             }
 
@@ -654,7 +663,8 @@ namespace Microsoft.CodeAnalysis.Scripting.Hosting
             CultureInfo culture,
             out string docSubdirectory,
             out string docFileName
-        ) {
+        )
+        {
             Debug.Assert(assemblyDirectory != null);
             Debug.Assert(assemblyFileName != null);
             Debug.Assert(culture != null);
@@ -688,7 +698,8 @@ namespace Microsoft.CodeAnalysis.Scripting.Hosting
             string originalPath,
             string shadowCopyPath,
             bool fileMayNotExist = false
-        ) {
+        )
+        {
             try
             {
                 File.Copy(originalPath, shadowCopyPath, overwrite: true);

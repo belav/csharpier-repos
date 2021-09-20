@@ -75,7 +75,8 @@ namespace System.Dynamic
             string name,
             bool ignoreCase,
             out object? value
-        ) {
+        )
+        {
             // read the data now.  The data is immutable so we get a consistent view.
             // If there's a concurrent writer they will replace data and it just appears
             // that we won the race
@@ -131,7 +132,8 @@ namespace System.Dynamic
             string name,
             bool ignoreCase,
             bool add
-        ) {
+        )
+        {
             ExpandoData data;
             object? oldValue;
 
@@ -206,7 +208,8 @@ namespace System.Dynamic
             string name,
             bool ignoreCase,
             object? deleteValue
-        ) {
+        )
+        {
             ExpandoData data;
             lock (LockObject)
             {
@@ -747,7 +750,8 @@ namespace System.Dynamic
         void ICollection<KeyValuePair<string, object?>>.CopyTo(
             KeyValuePair<string, object?>[] array,
             int arrayIndex
-        ) {
+        )
+        {
             ContractUtils.RequiresNotNull(array, nameof(array));
 
             // We want this to be atomic and not throw, though we must do the range checks inside this lock.
@@ -795,7 +799,8 @@ namespace System.Dynamic
         private IEnumerator<KeyValuePair<string, object?>> GetExpandoEnumerator(
             ExpandoData data,
             int version
-        ) {
+        )
+        {
             for (int i = 0; i < data.Class.Keys.Length; i++)
             {
                 if (_data.Version != version || data != _data)
@@ -830,7 +835,8 @@ namespace System.Dynamic
                 bool ignoreCase,
                 DynamicMetaObject fallback,
                 Func<DynamicMetaObject, DynamicMetaObject>? fallbackInvoke
-            ) {
+            )
+            {
                 ExpandoClass klass = Value.Class;
 
                 //try to find the member, including the deleted members
@@ -887,7 +893,8 @@ namespace System.Dynamic
             public override DynamicMetaObject BindInvokeMember(
                 InvokeMemberBinder binder,
                 DynamicMetaObject[] args
-            ) {
+            )
+            {
                 ContractUtils.RequiresNotNull(binder, nameof(binder));
                 return BindGetOrInvokeMember(
                     binder,
@@ -901,7 +908,8 @@ namespace System.Dynamic
             public override DynamicMetaObject BindSetMember(
                 SetMemberBinder binder,
                 DynamicMetaObject value
-            ) {
+            )
+            {
                 ContractUtils.RequiresNotNull(binder, nameof(binder));
                 ContractUtils.RequiresNotNull(value, nameof(value));
 
@@ -982,7 +990,8 @@ namespace System.Dynamic
                 ExpandoClass klass,
                 ExpandoClass? originalClass,
                 DynamicMetaObject succeeds
-            ) {
+            )
+            {
                 Expression ifTestSucceeds = succeeds.Expression;
                 if (originalClass != null)
                 {
@@ -1030,7 +1039,8 @@ namespace System.Dynamic
                 ExpandoObject obj,
                 out ExpandoClass klass,
                 out int index
-            ) {
+            )
+            {
                 ExpandoClass originalClass = Value.Class;
 
                 index = originalClass.GetValueIndex(name, caseInsensitive, obj);
@@ -1230,7 +1240,8 @@ namespace System.Runtime.CompilerServices
             string name,
             bool ignoreCase,
             out object? value
-        ) {
+        )
+        {
             return expando.TryGetValue(indexClass, index, name, ignoreCase, out value);
         }
 
@@ -1257,7 +1268,8 @@ namespace System.Runtime.CompilerServices
             object? value,
             string name,
             bool ignoreCase
-        ) {
+        )
+        {
             expando.TrySetValue(indexClass, index, value, name, ignoreCase, false);
             return value;
         }
@@ -1281,7 +1293,8 @@ namespace System.Runtime.CompilerServices
             int index,
             string name,
             bool ignoreCase
-        ) {
+        )
+        {
             return expando.TryDeleteValue(
                 indexClass,
                 index,
@@ -1320,7 +1333,8 @@ namespace System.Runtime.CompilerServices
             ExpandoObject expando,
             object oldClass,
             object newClass
-        ) {
+        )
+        {
             expando.PromoteClass(oldClass, newClass);
         }
     }

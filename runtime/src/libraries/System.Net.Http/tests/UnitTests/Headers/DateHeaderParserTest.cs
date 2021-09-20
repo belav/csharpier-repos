@@ -78,7 +78,8 @@ namespace System.Net.Http.Tests
             int startIndex,
             DateTimeOffset expectedResult,
             int expectedIndex
-        ) {
+        )
+        {
             DateHeaderParser parser = DateHeaderParser.Parser;
             object result = null;
             Assert.True(parser.TryParseValue(input, null, ref startIndex, out result));

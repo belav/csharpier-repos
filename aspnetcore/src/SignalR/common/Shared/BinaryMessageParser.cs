@@ -13,7 +13,8 @@ namespace Microsoft.AspNetCore.Internal
         public static bool TryParseMessage(
             ref ReadOnlySequence<byte> buffer,
             out ReadOnlySequence<byte> payload
-        ) {
+        )
+        {
             if (buffer.IsEmpty)
             {
                 payload = default;

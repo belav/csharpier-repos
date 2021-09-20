@@ -16,7 +16,8 @@ internal static partial class Interop
         private static ArraySegment<byte> RentDynamicBuffer<THandle>(
             NegativeSizeReadMethod<THandle> method,
             THandle handle
-        ) {
+        )
+        {
             int negativeSize = method(handle, null, 0);
 
             if (negativeSize > 0)

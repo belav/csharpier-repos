@@ -33,7 +33,8 @@ namespace Microsoft.AspNetCore.Server.IIS.FunctionalTests
                     },
                     LoggerFactory
                 )
-            ) {
+            )
+            {
                 var result = await testServer.HttpClient.GetAsync(expectedPath);
                 Assert.Equal(helloWorld, await result.Content.ReadAsStringAsync());
                 Assert.Equal(expectedPath, path);

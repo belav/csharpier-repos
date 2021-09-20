@@ -18,7 +18,8 @@ namespace Microsoft.AspNetCore.SignalR.Internal
         public HubFilterFactory(
             [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicConstructors)]
                 Type filterType
-        ) {
+        )
+        {
             _objectFactory = ActivatorUtilities.CreateFactory(filterType, Array.Empty<Type>());
             _filterType = filterType;
         }
@@ -26,7 +27,8 @@ namespace Microsoft.AspNetCore.SignalR.Internal
         public async ValueTask<object?> InvokeMethodAsync(
             HubInvocationContext invocationContext,
             Func<HubInvocationContext, ValueTask<object?>> next
-        ) {
+        )
+        {
             var (filter, owned) = GetFilter(invocationContext.ServiceProvider);
 
             try
@@ -46,7 +48,8 @@ namespace Microsoft.AspNetCore.SignalR.Internal
         public async Task OnConnectedAsync(
             HubLifetimeContext context,
             Func<HubLifetimeContext, Task> next
-        ) {
+        )
+        {
             var (filter, owned) = GetFilter(context.ServiceProvider);
 
             try
@@ -67,7 +70,8 @@ namespace Microsoft.AspNetCore.SignalR.Internal
             HubLifetimeContext context,
             Exception? exception,
             Func<HubLifetimeContext, Exception?, Task> next
-        ) {
+        )
+        {
             var (filter, owned) = GetFilter(context.ServiceProvider);
 
             try

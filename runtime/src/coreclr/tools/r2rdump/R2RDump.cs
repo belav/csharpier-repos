@@ -88,7 +88,8 @@ namespace R2RDump
             MetadataReader metadataReader,
             AssemblyReferenceHandle assemblyReferenceHandle,
             string parentFile
-        ) {
+        )
+        {
             string simpleName = metadataReader.GetString(
                 metadataReader.GetAssemblyReference(assemblyReferenceHandle).Name
             );
@@ -109,7 +110,8 @@ namespace R2RDump
                 if (
                     Path.GetFileNameWithoutExtension(refAsm.FullName)
                         .Equals(simpleName, StringComparison.OrdinalIgnoreCase)
-                ) {
+                )
+                {
                     return Open(refAsm.FullName);
                 }
             }
@@ -181,7 +183,8 @@ namespace R2RDump
             TextWriter writer,
             Disassembler disassembler,
             DumpOptions options
-        ) {
+        )
+        {
             _r2r = r2r;
             _writer = writer;
             _disassembler = disassembler;
@@ -335,7 +338,8 @@ namespace R2RDump
             string title,
             IReadOnlyList<string> queries,
             bool exact
-        ) {
+        )
+        {
             if (queries.Count > 0)
             {
                 _dumper.WriteDivider(title);
@@ -620,7 +624,8 @@ namespace R2RDump
                     if (
                         rtf.Id == rtfQuery
                         || (rtf.StartAddress >= rtfQuery && rtf.StartAddress + rtf.Size < rtfQuery)
-                    ) {
+                    )
+                    {
                         return rtf;
                     }
                 }

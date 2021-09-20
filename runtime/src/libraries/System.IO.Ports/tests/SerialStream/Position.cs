@@ -22,7 +22,8 @@ namespace System.IO.Ports.Tests
                 SerialPort com = new SerialPort(
                     TCSupport.LocalMachineSerialInfo.FirstAvailablePortName
                 )
-            ) {
+            )
+            {
                 com.Open();
                 Stream serialStream = com.BaseStream;
                 com.Close();
@@ -42,7 +43,8 @@ namespace System.IO.Ports.Tests
                 SerialPort com = new SerialPort(
                     TCSupport.LocalMachineSerialInfo.FirstAvailablePortName
                 )
-            ) {
+            )
+            {
                 com.Open();
                 Stream serialStream = com.BaseStream;
                 com.BaseStream.Close();
@@ -62,7 +64,8 @@ namespace System.IO.Ports.Tests
                 SerialPort com = new SerialPort(
                     TCSupport.LocalMachineSerialInfo.FirstAvailablePortName
                 )
-            ) {
+            )
+            {
                 com.Open();
                 Debug.WriteLine(
                     "Verifying Position property throws exception after a call to Open()"
@@ -83,7 +86,8 @@ namespace System.IO.Ports.Tests
                 SerialPort com = new SerialPort(
                     TCSupport.LocalMachineSerialInfo.FirstAvailablePortName
                 )
-            ) {
+            )
+            {
                 com.Open();
                 Debug.WriteLine(
                     "Verifying Position property throws exception with a bad value after a call to Open()"
@@ -100,7 +104,8 @@ namespace System.IO.Ports.Tests
             Stream serialStream,
             long value,
             Type expectedException
-        ) {
+        )
+        {
             Assert.Throws(expectedException, () => serialStream.Position = value);
             Assert.Throws(
                 expectedException,

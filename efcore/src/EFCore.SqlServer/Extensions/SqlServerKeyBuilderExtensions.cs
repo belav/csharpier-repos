@@ -53,7 +53,8 @@ namespace Microsoft.EntityFrameworkCore
             this IConventionKeyBuilder keyBuilder,
             bool? clustered,
             bool fromDataAnnotation = false
-        ) {
+        )
+        {
             if (keyBuilder.CanSetIsClustered(clustered, fromDataAnnotation))
             {
                 keyBuilder.Metadata.SetIsClustered(clustered, fromDataAnnotation);
@@ -74,7 +75,8 @@ namespace Microsoft.EntityFrameworkCore
             this IConventionKeyBuilder keyBuilder,
             bool? clustered,
             bool fromDataAnnotation = false
-        ) {
+        )
+        {
             Check.NotNull(keyBuilder, nameof(keyBuilder));
 
             return keyBuilder.CanSetAnnotation(

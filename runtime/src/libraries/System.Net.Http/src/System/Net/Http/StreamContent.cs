@@ -59,7 +59,8 @@ namespace System.Net.Http
             Stream stream,
             TransportContext? context,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             Debug.Assert(stream != null);
             PrepareContent();
             // If the stream can't be re-read, make sure that it gets disposed once it is consumed.
@@ -203,14 +204,16 @@ namespace System.Net.Http
                 int offset,
                 int count,
                 Threading.CancellationToken cancellationToken
-            ) {
+            )
+            {
                 throw new NotSupportedException(SR.net_http_content_readonly_stream);
             }
 
             public override ValueTask WriteAsync(
                 ReadOnlyMemory<byte> buffer,
                 CancellationToken cancellationToken = default
-            ) {
+            )
+            {
                 throw new NotSupportedException(SR.net_http_content_readonly_stream);
             }
         }

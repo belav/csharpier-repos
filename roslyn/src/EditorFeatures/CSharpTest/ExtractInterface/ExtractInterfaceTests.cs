@@ -1321,7 +1321,8 @@ class Program $$: ISomeInterface<object>
             string markup,
             TypeDiscoveryRule typeDiscoveryRule,
             bool expectedExtractable
-        ) {
+        )
+        {
             using var testState = ExtractInterfaceTestState.Create(
                 markup,
                 LanguageNames.CSharp,

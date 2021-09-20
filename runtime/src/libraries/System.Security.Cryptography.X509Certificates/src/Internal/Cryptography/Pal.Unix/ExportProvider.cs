@@ -18,7 +18,8 @@ namespace Internal.Cryptography.Pal
         protected override byte[] ExportPkcs8(
             ICertificatePalCore certificatePal,
             ReadOnlySpan<char> password
-        ) {
+        )
+        {
             AsymmetricAlgorithm? alg = null;
             SafeEvpPKeyHandle? privateKey =
                 ((OpenSslX509CertificateReader)certificatePal).PrivateKeyHandle;
@@ -79,7 +80,8 @@ namespace Internal.Cryptography.Pal
 
                 using (
                     SafePkcs7Handle pkcs7 = Interop.Crypto.Pkcs7CreateCertificateCollection(certs)
-                ) {
+                )
+                {
                     Interop.Crypto.CheckValidOpenSslHandle(pkcs7);
                     return Interop.Crypto.OpenSslEncode(
                         handle => Interop.Crypto.GetPkcs7DerSize(handle),

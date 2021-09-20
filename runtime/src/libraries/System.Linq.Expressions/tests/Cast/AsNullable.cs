@@ -139,35 +139,40 @@ namespace System.Linq.Expressions.Tests
         [Theory, ClassData(typeof(CompilationTypes))]
         public static void ConvertGenericWithStructRestrictionCastObjectAsStruct(
             bool useInterpreter
-        ) {
+        )
+        {
             CheckGenericWithStructRestrictionAsObjectHelper<S>(useInterpreter);
         }
 
         [Theory, ClassData(typeof(CompilationTypes))]
         public static void ConvertGenericWithStructRestrictionCastObjectAsStructWithStringAndField(
             bool useInterpreter
-        ) {
+        )
+        {
             CheckGenericWithStructRestrictionAsObjectHelper<Scs>(useInterpreter);
         }
 
         [Theory, ClassData(typeof(CompilationTypes))]
         public static void ConvertGenericWithStructRestrictionCastValueTypeAsEnum(
             bool useInterpreter
-        ) {
+        )
+        {
             CheckGenericWithStructRestrictionAsValueTypeHelper<E>(useInterpreter);
         }
 
         [Theory, ClassData(typeof(CompilationTypes))]
         public static void ConvertGenericWithStructRestrictionCastValueTypeAsStruct(
             bool useInterpreter
-        ) {
+        )
+        {
             CheckGenericWithStructRestrictionAsValueTypeHelper<S>(useInterpreter);
         }
 
         [Theory, ClassData(typeof(CompilationTypes))]
         public static void ConvertGenericWithStructRestrictionCastValueTypeAsStructWithStringAndField(
             bool useInterpreter
-        ) {
+        )
+        {
             CheckGenericWithStructRestrictionAsValueTypeHelper<Scs>(useInterpreter);
         }
 

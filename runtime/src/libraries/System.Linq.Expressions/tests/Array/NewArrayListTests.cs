@@ -859,28 +859,32 @@ namespace System.Linq.Expressions.Tests
         [Theory, ClassData(typeof(CompilationTypes))]
         public static void CheckGenericCustomWithSubClassRestrictionArrayListTest(
             bool useInterpreter
-        ) {
+        )
+        {
             CheckGenericWithSubClassRestrictionArrayListHelper<C>(useInterpreter);
         }
 
         [Theory, ClassData(typeof(CompilationTypes))]
         public static void CheckGenericCustomWithClassAndNewRestrictionArrayListTest(
             bool useInterpreter
-        ) {
+        )
+        {
             CheckGenericWithClassAndNewRestrictionArrayListHelper<C>(useInterpreter);
         }
 
         [Theory, ClassData(typeof(CompilationTypes))]
         public static void CheckGenericObjectWithClassAndNewRestrictionArrayListTest(
             bool useInterpreter
-        ) {
+        )
+        {
             CheckGenericWithClassAndNewRestrictionArrayListHelper<object>(useInterpreter);
         }
 
         [Theory, ClassData(typeof(CompilationTypes))]
         public static void CheckGenericCustomWithSubClassAndNewRestrictionArrayListTest(
             bool useInterpreter
-        ) {
+        )
+        {
             CheckGenericWithSubClassAndNewRestrictionArrayListHelper<C>(useInterpreter);
         }
 
@@ -899,7 +903,8 @@ namespace System.Linq.Expressions.Tests
         [Theory, ClassData(typeof(CompilationTypes))]
         public static void CheckGenericStructWithStringAndFieldWithStructRestrictionArrayListTest(
             bool useInterpreter
-        ) {
+        )
+        {
             CheckGenericWithStructRestrictionArrayListHelper<Scs>(useInterpreter);
         }
 
@@ -1264,7 +1269,8 @@ namespace System.Linq.Expressions.Tests
             decimal[] val,
             Expression[] exprs,
             bool useInterpreter
-        ) {
+        )
+        {
             Expression<Func<decimal[]>> e = Expression.Lambda<Func<decimal[]>>(
                 Expression.NewArrayInit(typeof(decimal), exprs),
                 Enumerable.Empty<ParameterExpression>()
@@ -1282,7 +1288,8 @@ namespace System.Linq.Expressions.Tests
             Delegate[] val,
             Expression[] exprs,
             bool useInterpreter
-        ) {
+        )
+        {
             Expression<Func<Delegate[]>> e = Expression.Lambda<Func<Delegate[]>>(
                 Expression.NewArrayInit(typeof(Delegate), exprs),
                 Enumerable.Empty<ParameterExpression>()
@@ -1300,7 +1307,8 @@ namespace System.Linq.Expressions.Tests
             double[] val,
             Expression[] exprs,
             bool useInterpreter
-        ) {
+        )
+        {
             Expression<Func<double[]>> e = Expression.Lambda<Func<double[]>>(
                 Expression.NewArrayInit(typeof(double), exprs),
                 Enumerable.Empty<ParameterExpression>()
@@ -1333,7 +1341,8 @@ namespace System.Linq.Expressions.Tests
             El[] val,
             Expression[] exprs,
             bool useInterpreter
-        ) {
+        )
+        {
             Expression<Func<El[]>> e = Expression.Lambda<Func<El[]>>(
                 Expression.NewArrayInit(typeof(El), exprs),
                 Enumerable.Empty<ParameterExpression>()
@@ -1351,7 +1360,8 @@ namespace System.Linq.Expressions.Tests
             float[] val,
             Expression[] exprs,
             bool useInterpreter
-        ) {
+        )
+        {
             Expression<Func<float[]>> e = Expression.Lambda<Func<float[]>>(
                 Expression.NewArrayInit(typeof(float), exprs),
                 Enumerable.Empty<ParameterExpression>()
@@ -1369,7 +1379,8 @@ namespace System.Linq.Expressions.Tests
             Func<object>[] val,
             Expression[] exprs,
             bool useInterpreter
-        ) {
+        )
+        {
             Expression<Func<Func<object>[]>> e = Expression.Lambda<Func<Func<object>[]>>(
                 Expression.NewArrayInit(typeof(Func<object>), exprs),
                 Enumerable.Empty<ParameterExpression>()
@@ -1387,7 +1398,8 @@ namespace System.Linq.Expressions.Tests
             I[] val,
             Expression[] exprs,
             bool useInterpreter
-        ) {
+        )
+        {
             Expression<Func<I[]>> e = Expression.Lambda<Func<I[]>>(
                 Expression.NewArrayInit(typeof(I), exprs),
                 Enumerable.Empty<ParameterExpression>()
@@ -1405,7 +1417,8 @@ namespace System.Linq.Expressions.Tests
             IEquatable<C>[] val,
             Expression[] exprs,
             bool useInterpreter
-        ) {
+        )
+        {
             Expression<Func<IEquatable<C>[]>> e = Expression.Lambda<Func<IEquatable<C>[]>>(
                 Expression.NewArrayInit(typeof(IEquatable<C>), exprs),
                 Enumerable.Empty<ParameterExpression>()
@@ -1423,7 +1436,8 @@ namespace System.Linq.Expressions.Tests
             IEquatable<D>[] val,
             Expression[] exprs,
             bool useInterpreter
-        ) {
+        )
+        {
             Expression<Func<IEquatable<D>[]>> e = Expression.Lambda<Func<IEquatable<D>[]>>(
                 Expression.NewArrayInit(typeof(IEquatable<D>), exprs),
                 Enumerable.Empty<ParameterExpression>()
@@ -1471,7 +1485,8 @@ namespace System.Linq.Expressions.Tests
             object[] val,
             Expression[] exprs,
             bool useInterpreter
-        ) {
+        )
+        {
             Expression<Func<object[]>> e = Expression.Lambda<Func<object[]>>(
                 Expression.NewArrayInit(typeof(object), exprs),
                 Enumerable.Empty<ParameterExpression>()
@@ -1504,7 +1519,8 @@ namespace System.Linq.Expressions.Tests
             sbyte[] val,
             Expression[] exprs,
             bool useInterpreter
-        ) {
+        )
+        {
             Expression<Func<sbyte[]>> e = Expression.Lambda<Func<sbyte[]>>(
                 Expression.NewArrayInit(typeof(sbyte), exprs),
                 Enumerable.Empty<ParameterExpression>()
@@ -1522,7 +1538,8 @@ namespace System.Linq.Expressions.Tests
             Sc[] val,
             Expression[] exprs,
             bool useInterpreter
-        ) {
+        )
+        {
             Expression<Func<Sc[]>> e = Expression.Lambda<Func<Sc[]>>(
                 Expression.NewArrayInit(typeof(Sc), exprs),
                 Enumerable.Empty<ParameterExpression>()
@@ -1540,7 +1557,8 @@ namespace System.Linq.Expressions.Tests
             Scs[] val,
             Expression[] exprs,
             bool useInterpreter
-        ) {
+        )
+        {
             Expression<Func<Scs[]>> e = Expression.Lambda<Func<Scs[]>>(
                 Expression.NewArrayInit(typeof(Scs), exprs),
                 Enumerable.Empty<ParameterExpression>()
@@ -1558,7 +1576,8 @@ namespace System.Linq.Expressions.Tests
             short[] val,
             Expression[] exprs,
             bool useInterpreter
-        ) {
+        )
+        {
             Expression<Func<short[]>> e = Expression.Lambda<Func<short[]>>(
                 Expression.NewArrayInit(typeof(short), exprs),
                 Enumerable.Empty<ParameterExpression>()
@@ -1576,7 +1595,8 @@ namespace System.Linq.Expressions.Tests
             Sp[] val,
             Expression[] exprs,
             bool useInterpreter
-        ) {
+        )
+        {
             Expression<Func<Sp[]>> e = Expression.Lambda<Func<Sp[]>>(
                 Expression.NewArrayInit(typeof(Sp), exprs),
                 Enumerable.Empty<ParameterExpression>()
@@ -1594,7 +1614,8 @@ namespace System.Linq.Expressions.Tests
             Ss[] val,
             Expression[] exprs,
             bool useInterpreter
-        ) {
+        )
+        {
             Expression<Func<Ss[]>> e = Expression.Lambda<Func<Ss[]>>(
                 Expression.NewArrayInit(typeof(Ss), exprs),
                 Enumerable.Empty<ParameterExpression>()
@@ -1612,7 +1633,8 @@ namespace System.Linq.Expressions.Tests
             string[] val,
             Expression[] exprs,
             bool useInterpreter
-        ) {
+        )
+        {
             Expression<Func<string[]>> e = Expression.Lambda<Func<string[]>>(
                 Expression.NewArrayInit(typeof(string), exprs),
                 Enumerable.Empty<ParameterExpression>()
@@ -1645,7 +1667,8 @@ namespace System.Linq.Expressions.Tests
             ulong[] val,
             Expression[] exprs,
             bool useInterpreter
-        ) {
+        )
+        {
             Expression<Func<ulong[]>> e = Expression.Lambda<Func<ulong[]>>(
                 Expression.NewArrayInit(typeof(ulong), exprs),
                 Enumerable.Empty<ParameterExpression>()
@@ -1663,7 +1686,8 @@ namespace System.Linq.Expressions.Tests
             ushort[] val,
             Expression[] exprs,
             bool useInterpreter
-        ) {
+        )
+        {
             Expression<Func<ushort[]>> e = Expression.Lambda<Func<ushort[]>>(
                 Expression.NewArrayInit(typeof(ushort), exprs),
                 Enumerable.Empty<ParameterExpression>()
@@ -1681,7 +1705,8 @@ namespace System.Linq.Expressions.Tests
             T[] val,
             Expression[] exprs,
             bool useInterpreter
-        ) {
+        )
+        {
             Expression<Func<T[]>> e = Expression.Lambda<Func<T[]>>(
                 Expression.NewArrayInit(typeof(T), exprs),
                 Enumerable.Empty<ParameterExpression>()

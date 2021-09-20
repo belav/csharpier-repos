@@ -309,7 +309,8 @@ namespace System.Web.Http.Owin
         private static async Task AssertDelegatesToAsync(
             Mock<IExceptionHandler> expected,
             IExceptionHandler actual
-        ) {
+        )
+        {
             Assert.NotNull(actual);
 
             ExceptionHandlerContext context = new ExceptionHandlerContext(
@@ -336,7 +337,8 @@ namespace System.Web.Http.Owin
         private static async Task AssertDelegatesToAsync(
             Mock<IExceptionLogger> expected,
             IExceptionLogger actual
-        ) {
+        )
+        {
             Assert.NotNull(actual);
 
             ExceptionLoggerContext context = new ExceptionLoggerContext(
@@ -396,14 +398,16 @@ namespace System.Web.Http.Owin
 
         private static IDictionary<string, object> CreateStubOnAppDisposingDictionary(
             object onAppDisposing
-        ) {
+        )
+        {
             return CreateStubOnAppDisposingDictionary(onAppDisposing, hasOnAppDisposing: true);
         }
 
         private static IDictionary<string, object> CreateStubOnAppDisposingDictionary(
             object onAppDisposing,
             bool hasOnAppDisposing
-        ) {
+        )
+        {
             Mock<IDictionary<string, object>> mock = new Mock<IDictionary<string, object>>();
             mock.Setup(d => d.TryGetValue("host.OnAppDisposing", out onAppDisposing))
                 .Returns(hasOnAppDisposing);

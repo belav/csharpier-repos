@@ -93,14 +93,15 @@ namespace Microsoft.AspNetCore.Mvc
             object? routeValues,
             bool permanent,
             string? fragment
-        ) : this(
-            actionName,
-            controllerName,
-            routeValues,
-            permanent,
-            preserveMethod: false,
-            fragment: fragment
-        ) { }
+        )
+            : this(
+                actionName,
+                controllerName,
+                routeValues,
+                permanent,
+                preserveMethod: false,
+                fragment: fragment
+            ) { }
 
         /// <summary>
         /// Initializes a new instance of the <see cref="RedirectToActionResult"/> with the values
@@ -119,7 +120,8 @@ namespace Microsoft.AspNetCore.Mvc
             bool permanent,
             bool preserveMethod,
             string? fragment
-        ) {
+        )
+        {
             ActionName = actionName;
             ControllerName = controllerName;
             RouteValues = routeValues == null ? null : new RouteValueDictionary(routeValues);

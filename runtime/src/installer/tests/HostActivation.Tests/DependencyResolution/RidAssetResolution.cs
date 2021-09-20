@@ -116,7 +116,8 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation.DependencyResolution
             string rid,
             string expectedAssemblyPath,
             string expectedNativePath
-        ) {
+        )
+        {
             RunTest(
                 p =>
                     p.WithAssemblyGroup("any", g => g.WithAsset("any/ManagedAny.dll"))
@@ -148,7 +149,8 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation.DependencyResolution
             string rid,
             string expectedAssemblyPath,
             string expectedNativePath
-        ) {
+        )
+        {
             // Skip the component on self-contained app case as that won't work and our simple checks will be broken
             // in this complex test case (the PortableLib and PortableLib2 will always resolve, even in this broken case).
             if (GetType() == typeof(PortableComponentOnSelfContainedAppRidAssetResolution))
@@ -238,7 +240,8 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation.DependencyResolution
             string includedNativeLibraryPaths,
             string excludedNativeLibraryPaths,
             Action<NetCoreAppBuilder> appCustomizer
-        ) {
+        )
+        {
             using (
                 TestApp app = NetCoreAppBuilder.PortableForNETCoreApp(
                         SharedState.FrameworkReferenceApp
@@ -252,7 +255,8 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation.DependencyResolution
                     )
                     .WithCustomizer(appCustomizer)
                     .Build()
-            ) {
+            )
+            {
                 SharedState.DotNetWithNetCoreApp.Exec(app.AppDll)
                     .EnableTracingAndCaptureOutputs()
                     .RuntimeId(rid)
@@ -284,7 +288,8 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation.DependencyResolution
             string includedNativeLibraryPaths,
             string excludedNativeLibraryPaths,
             Action<NetCoreAppBuilder> appCustomizer
-        ) {
+        )
+        {
             var component = SharedState.CreateComponentWithNoDependencies(
                 b =>
                     b.WithPackage("NativeDependency", "1.0.0", p => assetsCustomizer?.Invoke(p))
@@ -331,7 +336,8 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation.DependencyResolution
             string includedNativeLibraryPaths,
             string excludedNativeLibraryPaths,
             Action<NetCoreAppBuilder> appCustomizer
-        ) {
+        )
+        {
             var component = SharedState.CreateComponentWithNoDependencies(
                 b =>
                     b.WithPackage("NativeDependency", "1.0.0", p => assetsCustomizer?.Invoke(p))
@@ -412,7 +418,8 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation.DependencyResolution
             string includedNativeLibraryPaths,
             string excludedNativeLibraryPaths,
             Action<NetCoreAppBuilder> appCustomizer
-        ) {
+        )
+        {
             var component = SharedState.CreateComponentWithNoDependencies(
                 b =>
                     b.WithPackage("NativeDependency", "1.0.0", p => assetsCustomizer?.Invoke(p))

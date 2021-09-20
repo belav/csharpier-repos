@@ -350,7 +350,8 @@ namespace System.Text
 
             if (
                 (fallback != null && fallback.MaxCharCount == 1) /* || bIsBestFit*/
-            ) {
+            )
+            {
                 // Replacement fallback encodes surrogate pairs as two ?? (or two whatever), so return size is always
                 // same as input size.
                 // Note that no existing SBCS code pages map code points to supplementary characters, so this is easy.
@@ -401,7 +402,8 @@ namespace System.Text
             while (
                 (ch = (fallbackBuffer == null) ? '\0' : fallbackHelper.InternalGetNextChar()) != 0
                 || chars < charEnd
-            ) {
+            )
+            {
                 // First unwind any fallback
                 if (ch == 0)
                 {
@@ -454,7 +456,8 @@ namespace System.Text
             byte* bytes,
             int byteCount,
             EncoderNLS? encoder
-        ) {
+        )
+        {
             // Just need to ASSERT, this is called by something else internal that checked parameters already
             Debug.Assert(bytes != null, "[SBCSCodePageEncoding.GetBytes]bytes is null");
             Debug.Assert(byteCount >= 0, "[SBCSCodePageEncoding.GetBytes]byteCount is negative");
@@ -613,7 +616,8 @@ namespace System.Text
             while (
                 (ch = (fallbackBuffer == null) ? '\0' : fallbackHelper.InternalGetNextChar()) != 0
                 || chars < charEnd
-            ) {
+            )
+            {
                 // First unwind any fallback
                 if (ch == 0)
                 {
@@ -817,7 +821,8 @@ namespace System.Text
             char* chars,
             int charCount,
             DecoderNLS? decoder
-        ) {
+        )
+        {
             // Just need to ASSERT, this is called by something else internal that checked parameters already
             Debug.Assert(bytes != null, "[SBCSCodePageEncoding.GetChars]bytes is null");
             Debug.Assert(byteCount >= 0, "[SBCSCodePageEncoding.GetChars]byteCount is negative");

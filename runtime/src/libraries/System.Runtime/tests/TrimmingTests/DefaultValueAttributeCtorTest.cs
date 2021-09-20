@@ -31,7 +31,8 @@ class Program
             ITypeDescriptorContext context,
             CultureInfo culture,
             object value
-        ) {
+        )
+        {
             if (value is string)
             {
                 return (string)value + "trivia";

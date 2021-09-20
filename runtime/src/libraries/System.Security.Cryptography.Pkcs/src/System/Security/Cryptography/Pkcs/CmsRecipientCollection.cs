@@ -25,7 +25,8 @@ namespace System.Security.Cryptography.Pkcs
         public CmsRecipientCollection(
             SubjectIdentifierType recipientIdentifierType,
             X509Certificate2Collection certificates
-        ) {
+        )
+        {
             if (certificates == null)
                 throw new NullReferenceException(); //Desktop compat: this is the wrong exception to throw but it is the compatible one.
 

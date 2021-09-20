@@ -60,7 +60,8 @@ namespace Microsoft.AspNetCore.StaticFiles
             PathString matchUrl,
             bool forDirectory,
             out PathString subpath
-        ) {
+        )
+        {
             var path = context.Request.Path;
 
             if (forDirectory && !PathEndsInSlash(path))

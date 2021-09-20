@@ -24,7 +24,8 @@ namespace Microsoft.CodeAnalysis.Editor.EditorConfigSettings.Updater
             SourceText originalText,
             string filePath,
             IReadOnlyList<(AnalyzerSetting option, DiagnosticSeverity value)> settingsToUpdate
-        ) {
+        )
+        {
             if (originalText is null)
                 return null;
             if (settingsToUpdate is null)
@@ -42,7 +43,8 @@ namespace Microsoft.CodeAnalysis.Editor.EditorConfigSettings.Updater
             static (string option, string value, Language language) TryGetOptionValueAndLanguage(
                 AnalyzerSetting diagnostic,
                 DiagnosticSeverity severity
-            ) {
+            )
+            {
                 var optionName = $"{DiagnosticOptionPrefix}{diagnostic.Id}{SeveritySuffix}";
                 var optionValue = severity.ToEditorConfigString();
                 var language = diagnostic.Language;
@@ -55,7 +57,8 @@ namespace Microsoft.CodeAnalysis.Editor.EditorConfigSettings.Updater
             string filePath,
             OptionSet optionSet,
             IReadOnlyList<(IOption2 option, object value)> settingsToUpdate
-        ) {
+        )
+        {
             if (originalText is null)
                 return null;
             if (settingsToUpdate is null)
@@ -77,11 +80,13 @@ namespace Microsoft.CodeAnalysis.Editor.EditorConfigSettings.Updater
                 IOption2 option,
                 object value,
                 OptionSet optionSet
-            ) {
+            )
+            {
                 if (
                     option.StorageLocations.FirstOrDefault(x => x is IEditorConfigStorageLocation2)
                     is not IEditorConfigStorageLocation2 storageLocation
-                ) {
+                )
+                {
                     return (false, null!, null!, default);
                 }
 
@@ -111,7 +116,8 @@ namespace Microsoft.CodeAnalysis.Editor.EditorConfigSettings.Updater
             SourceText originalText,
             string filePath,
             IReadOnlyList<(string option, string value, Language language)> settingsToUpdate
-        ) {
+        )
+        {
             if (originalText is null)
                 throw new ArgumentNullException(nameof(originalText));
             if (filePath is null)
@@ -183,7 +189,8 @@ namespace Microsoft.CodeAnalysis.Editor.EditorConfigSettings.Updater
             string optionName,
             string optionValue,
             Language language
-        ) {
+        )
+        {
             var editorConfigDirectory = PathUtilities.GetDirectoryName(filePath);
             Assumes.NotNull(editorConfigDirectory);
             var relativePath = PathUtilities.GetRelativePath(
@@ -211,7 +218,8 @@ namespace Microsoft.CodeAnalysis.Editor.EditorConfigSettings.Updater
                     if (
                         IsValidHeader(mostRecentHeader, lastValidHeader)
                         && string.Equals(key, optionName, StringComparison.OrdinalIgnoreCase)
-                    ) {
+                    )
+                    {
                         // We found the rule in the file -- replace it with updated option value.
                         textChange = new TextChange(
                             curLine.Span,
@@ -234,7 +242,8 @@ namespace Microsoft.CodeAnalysis.Editor.EditorConfigSettings.Updater
                         if (
                             (relativePath.IsEmpty() || new Regex(fileName).IsMatch(relativePath))
                             && HeaderMatchesLanguageRequirements(language, splicedFileExtensions)
-                        ) {
+                        )
+                        {
                             lastValidHeader = mostRecentHeader;
                         }
                     }
@@ -244,12 +253,14 @@ namespace Microsoft.CodeAnalysis.Editor.EditorConfigSettings.Updater
                 if (
                     IsValidHeader(mostRecentHeader, lastValidHeader)
                     && IsNotEmptyOrComment(curLineText)
-                ) {
+                )
+                {
                     lastValidHeaderSpanEnd = curLine;
                     if (
                         lastValidSpecificHeader != null
                         && mostRecentHeader.Equals(lastValidSpecificHeader)
-                    ) {
+                    )
+                    {
                         lastValidSpecificHeaderSpanEnd = curLine;
                     }
                 }
@@ -270,7 +281,8 @@ namespace Microsoft.CodeAnalysis.Editor.EditorConfigSettings.Updater
 
             static (string untrimmedKey, string key, string value, string severitySuffixInValue, string commentValue) GetGroups(
                 GroupCollection groups
-            ) {
+            )
+            {
                 var untrimmedKey = groups[1].Value.ToString();
                 var key = untrimmedKey.Trim();
                 var value = groups[2].Value.ToString();
@@ -289,7 +301,8 @@ namespace Microsoft.CodeAnalysis.Editor.EditorConfigSettings.Updater
             static bool ShouldSetAsLastValidHeader(
                 string curLineText,
                 out string mostRecentHeaderText
-            ) {
+            )
+            {
                 var groups = s_headerPattern.Match(curLineText.Trim()).Groups;
                 mostRecentHeaderText = groups[1].Value.ToString().ToLowerInvariant();
                 return mostRecentHeaderText.Equals("*", StringComparison.Ordinal);
@@ -297,7 +310,8 @@ namespace Microsoft.CodeAnalysis.Editor.EditorConfigSettings.Updater
 
             static (string fileName, string[] splicedFileExtensions) ParseHeaderParts(
                 string mostRecentHeaderText
-            ) {
+            )
+            {
                 // We splice on the last occurrence of '.' to account for filenames containing periods.
                 var nameExtensionSplitIndex = mostRecentHeaderText.LastIndexOf('.');
                 var fileName = mostRecentHeaderText.Substring(0, nameExtensionSplitIndex);
@@ -322,7 +336,8 @@ namespace Microsoft.CodeAnalysis.Editor.EditorConfigSettings.Updater
             static bool HeaderMatchesLanguageRequirements(
                 Language language,
                 string[] splicedFileExtensions
-            ) {
+            )
+            {
                 return IsCSharpOnly(language, splicedFileExtensions)
                     || IsVisualBasicOnly(language, splicedFileExtensions)
                     || IsBothVisualBasicAndCSharp(language, splicedFileExtensions);
@@ -347,7 +362,8 @@ namespace Microsoft.CodeAnalysis.Editor.EditorConfigSettings.Updater
             static bool IsBothVisualBasicAndCSharp(
                 Language language,
                 string[] splicedFileExtensions
-            ) {
+            )
+            {
                 return language.HasFlag(Language.VisualBasic)
                     && language.HasFlag(Language.CSharp)
                     && splicedFileExtensions.Contains("vb")
@@ -362,7 +378,8 @@ namespace Microsoft.CodeAnalysis.Editor.EditorConfigSettings.Updater
             string optionName,
             string optionValue,
             Language language
-        ) {
+        )
+        {
             var newEntry = $"{optionName}={optionValue}";
             if (lastValidSpecificHeaderSpanEnd.HasValue)
             {

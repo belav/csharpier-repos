@@ -35,7 +35,8 @@ namespace System.Net.Http
         public virtual HttpResponseMessage Send(
             HttpRequestMessage request,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             if (request == null)
             {
                 throw new ArgumentNullException(nameof(request));
@@ -46,7 +47,8 @@ namespace System.Net.Http
                 HttpTelemetry.Log.IsEnabled()
                 && !request.WasSentByHttpClient()
                 && request.RequestUri != null
-            ) {
+            )
+            {
                 HttpTelemetry.Log.RequestStart(request);
 
                 try
@@ -72,7 +74,8 @@ namespace System.Net.Http
         public virtual Task<HttpResponseMessage> SendAsync(
             HttpRequestMessage request,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             if (request == null)
             {
                 throw new ArgumentNullException(nameof(request));
@@ -83,7 +86,8 @@ namespace System.Net.Http
                 HttpTelemetry.Log.IsEnabled()
                 && !request.WasSentByHttpClient()
                 && request.RequestUri != null
-            ) {
+            )
+            {
                 return SendAsyncWithTelemetry(_handler, request, cancellationToken);
             }
 
@@ -93,7 +97,8 @@ namespace System.Net.Http
                 HttpMessageHandler handler,
                 HttpRequestMessage request,
                 CancellationToken cancellationToken
-            ) {
+            )
+            {
                 HttpTelemetry.Log.RequestStart(request);
 
                 try

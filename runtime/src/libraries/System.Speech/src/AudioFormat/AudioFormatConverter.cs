@@ -48,7 +48,8 @@ namespace System.Speech.Internal
                     CultureInfo.InvariantCulture,
                     out streamFormat
                 )
-            ) {
+            )
+            {
                 // Now convert enum value into real info
                 return ConvertFormat((StreamFormat)streamFormat);
             }
@@ -70,7 +71,8 @@ namespace System.Speech.Internal
             if (
                 eFormat >= StreamFormat.PCM_8kHz8BitMono
                 && eFormat <= StreamFormat.PCM_48kHz16BitStereo
-            ) {
+            )
+            {
                 uint index = (uint)(eFormat - StreamFormat.PCM_8kHz8BitMono);
                 bool isStereo = (index & 0x1) != 0;
                 bool is16 = (index & 0x2) != 0;
@@ -114,7 +116,8 @@ namespace System.Speech.Internal
             else if (
                 (eFormat >= StreamFormat.CCITT_ALaw_8kHzMono)
                 && (eFormat <= StreamFormat.CCITT_ALaw_44kHzStereo)
-            ) {
+            )
+            {
                 uint index = (uint)(eFormat - StreamFormat.CCITT_ALaw_8kHzMono);
                 uint dwKHZ = index / 2;
                 uint[] adwKHZ = { 8000, 11025, 22050, 44100 };
@@ -128,7 +131,8 @@ namespace System.Speech.Internal
             else if (
                 (eFormat >= StreamFormat.CCITT_uLaw_8kHzMono)
                 && (eFormat <= StreamFormat.CCITT_uLaw_44kHzStereo)
-            ) {
+            )
+            {
                 uint index = (uint)(eFormat - StreamFormat.CCITT_uLaw_8kHzMono);
                 uint dwKHZ = index / 2;
                 uint[] adwKHZ = new uint[] { 8000, 11025, 22050, 44100 };
@@ -142,7 +146,8 @@ namespace System.Speech.Internal
             else if (
                 (eFormat >= StreamFormat.ADPCM_8kHzMono)
                 && (eFormat <= StreamFormat.ADPCM_44kHzStereo)
-            ) {
+            )
+            {
                 //--- Some of these values seem odd. We used what the codec told us.
                 uint[] adwKHZ = new uint[] { 8000, 11025, 22050, 44100 };
                 uint[] BytesPerSec = new uint[]
@@ -281,7 +286,8 @@ namespace System.Speech.Internal
             else if (
                 (eFormat >= StreamFormat.GSM610_8kHzMono)
                 && (eFormat <= StreamFormat.GSM610_44kHzMono)
-            ) {
+            )
+            {
                 //--- Some of these values seem odd. We used what the codec told us.
                 uint[] adwKHZ = new uint[] { 8000, 11025, 22050, 44100 };
                 uint[] BytesPerSec = new uint[] { 1625, 2239, 4478, 8957 };

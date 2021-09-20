@@ -33,7 +33,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             NamedTypeSymbol containingType,
             SyntheticBoundNodeFactory factory,
             AwaitInFinallyAnalysis analysis
-        ) {
+        )
+        {
             _F = factory;
             _F.CurrentFunction = containingMethod;
             Debug.Assert(
@@ -117,7 +118,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             BoundStatement statement,
             TypeCompilationState compilationState,
             BindingDiagnosticBag diagnostics
-        ) {
+        )
+        {
             Debug.Assert(containingSymbol != null);
             Debug.Assert((object)containingType != null);
             Debug.Assert(statement != null);
@@ -287,7 +289,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             AwaitFinallyFrame frame,
             LocalSymbol pendingBranchVar,
             LabelSymbol finallyLabel
-        ) {
+        )
+        {
             var bodyStatements = ArrayBuilder<BoundStatement>.GetInstance();
 
             // handle proxy labels if have any
@@ -322,7 +325,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             int i,
             LocalSymbol pendingBranchVar,
             LabelSymbol finallyLabel
-        ) {
+        )
+        {
             // branch lands here
             bodyStatements.Add(_F.Label(proxy));
 
@@ -337,7 +341,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             AwaitFinallyFrame frame,
             SynthesizedLocal pendingBranchVar,
             SynthesizedLocal pendingException
-        ) {
+        )
+        {
             var parent = frame.ParentOpt;
 
             // handle proxy labels if have any
@@ -706,7 +711,8 @@ namespace Microsoft.CodeAnalysis.CSharp
         private BoundExpression AssignCatchSource(
             BoundExpression rewrittenSource,
             AwaitCatchFrame currentAwaitCatchFrame
-        ) {
+        )
+        {
             BoundExpression assignSource = null;
             if (rewrittenSource != null)
             {
@@ -730,7 +736,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             if (
                 catchFrame == null
                 || !catchFrame.TryGetHoistedLocal(node.LocalSymbol, out hoistedLocal)
-            ) {
+            )
+            {
                 return base.VisitLocal(node);
             }
 
@@ -992,7 +999,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                 AwaitFinallyFrame parent,
                 HashSet<LabelSymbol> labelsOpt,
                 StatementSyntax statementSyntax
-            ) {
+            )
+            {
                 Debug.Assert(parent != null);
                 Debug.Assert(statementSyntax != null);
 
@@ -1062,7 +1070,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                 MethodSymbol containingMethod,
                 BoundExpression valueOpt,
                 out SynthesizedLocal returnValue
-            ) {
+            )
+            {
                 returnValue = null;
 
                 // no need to proxy returns  at the root
@@ -1123,7 +1132,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             public AwaitCatchFrame(
                 SyntheticBoundNodeFactory F,
                 TryStatementSyntax tryStatementSyntax
-            ) {
+            )
+            {
                 this.pendingCaughtException = new SynthesizedLocal(
                     F.CurrentFunction,
                     TypeWithAnnotations.Create(F.SpecialType(SpecialType.System_Object)),
@@ -1154,7 +1164,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                                 TypeCompareKind.ConsiderEverything2
                             )
                     )
-                ) {
+                )
+                {
                     _hoistedLocals.Add(local, local);
                     _orderedHoistedLocals.Add(local);
                     return;

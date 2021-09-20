@@ -41,7 +41,8 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeGeneration
             SyntaxToken name,
             SyntaxNode initializer,
             bool isConst
-        ) {
+        )
+        {
             return SyntaxFactory.LocalDeclarationStatement(
                 isConst
                   ? SyntaxFactory.TokenList(SyntaxFactory.Token(SyntaxKind.ConstKeyword))
@@ -67,7 +68,8 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeGeneration
             SyntaxNode type,
             SyntaxToken name,
             SyntaxNode expression
-        ) {
+        )
+        {
             return SyntaxFactory.VariableDeclaration(
                 type == null ? SyntaxFactory.IdentifierName("var") : (TypeSyntax)type,
                 SyntaxFactory.SingletonSeparatedList(

@@ -46,7 +46,8 @@ namespace Microsoft.CodeAnalysis.CSharp.RemoveAsyncModifier
         protected override SyntaxNode? ConvertToBlockBody(
             SyntaxNode node,
             ExpressionSyntax expressionBody
-        ) {
+        )
+        {
             var semicolonToken = SyntaxFactory.Token(SyntaxKind.SemicolonToken);
             if (
                 expressionBody.TryConvertToStatement(
@@ -54,7 +55,8 @@ namespace Microsoft.CodeAnalysis.CSharp.RemoveAsyncModifier
                     createReturnStatementForExpression: false,
                     out var statement
                 )
-            ) {
+            )
+            {
                 var block = SyntaxFactory.Block(statement);
                 return node switch
                 {

@@ -347,7 +347,8 @@ namespace System.Diagnostics.Tests
                 string message,
                 string detailMessage,
                 string errorSource
-            ) {
+            )
+            {
                 OutputString +=
                     $"Mock dialog - message: {message}, detailed message: {detailMessage}";
             }

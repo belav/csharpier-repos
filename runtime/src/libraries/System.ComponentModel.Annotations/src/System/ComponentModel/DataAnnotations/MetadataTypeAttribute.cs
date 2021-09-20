@@ -23,7 +23,8 @@ namespace System.ComponentModel.DataAnnotations
         /// <exception cref="System.ArgumentNullException">metadataClassType is null.</exception>
         public MetadataTypeAttribute(
             [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)] Type metadataClassType
-        ) {
+        )
+        {
             _metadataClassType = metadataClassType;
         }
 

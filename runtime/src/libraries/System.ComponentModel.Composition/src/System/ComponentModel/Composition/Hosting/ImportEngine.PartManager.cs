@@ -99,7 +99,8 @@ namespace System.ComponentModel.Composition.Hosting
                 ImportDefinition import,
                 Export[]? exports,
                 AtomicComposition? atomicComposition
-            ) {
+            )
+            {
                 if (atomicComposition != null)
                 {
                     var savedExports = GetSavedImport(import);
@@ -171,7 +172,8 @@ namespace System.ComponentModel.Composition.Hosting
                 if (
                     _importedDisposableExports != null
                     && _importedDisposableExports.TryGetValue(import, out oldDisposableExports)
-                ) {
+                )
+                {
                     oldDisposableExports.ForEach(disposable => disposable.Dispose());
 
                     // If there aren't any replacements, get rid of the old storage

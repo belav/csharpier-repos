@@ -20,7 +20,8 @@ namespace Microsoft.CodeAnalysis.AddImport
             internal async Task FindNugetOrReferenceAssemblyReferencesAsync(
                 ArrayBuilder<Reference> allReferences,
                 CancellationToken cancellationToken
-            ) {
+            )
+            {
                 if (allReferences.Count > 0)
                 {
                     // Only do this if none of the project or metadata searches produced
@@ -50,7 +51,8 @@ namespace Microsoft.CodeAnalysis.AddImport
                         checkForExtensionMethods: false,
                         cancellationToken: cancellationToken
                     )
-                ) {
+                )
+                {
                     return;
                 }
 
@@ -72,7 +74,8 @@ namespace Microsoft.CodeAnalysis.AddImport
                 int arity,
                 bool inAttributeContext,
                 CancellationToken cancellationToken
-            ) {
+            )
+            {
                 if (arity == 0 && inAttributeContext)
                 {
                     await FindNugetOrReferenceAssemblyTypeReferencesWorkerAsync(
@@ -104,7 +107,8 @@ namespace Microsoft.CodeAnalysis.AddImport
                 int arity,
                 bool isAttributeSearch,
                 CancellationToken cancellationToken
-            ) {
+            )
+            {
                 if (_searchReferenceAssemblies)
                 {
                     cancellationToken.ThrowIfCancellationRequested();
@@ -142,7 +146,8 @@ namespace Microsoft.CodeAnalysis.AddImport
                 int arity,
                 bool isAttributeSearch,
                 CancellationToken cancellationToken
-            ) {
+            )
+            {
                 cancellationToken.ThrowIfCancellationRequested();
                 var results = await _symbolSearchService.FindReferenceAssembliesWithTypeAsync(
                         name,
@@ -177,7 +182,8 @@ namespace Microsoft.CodeAnalysis.AddImport
                 int arity,
                 bool isAttributeSearch,
                 CancellationToken cancellationToken
-            ) {
+            )
+            {
                 cancellationToken.ThrowIfCancellationRequested();
                 var results = await _symbolSearchService.FindPackagesWithTypeAsync(
                         source.Name,
@@ -209,7 +215,8 @@ namespace Microsoft.CodeAnalysis.AddImport
                 ReferenceAssemblyWithTypeResult result,
                 int weight,
                 CancellationToken cancellationToken
-            ) {
+            )
+            {
                 foreach (var reference in project.MetadataReferences)
                 {
                     cancellationToken.ThrowIfCancellationRequested();
@@ -247,7 +254,8 @@ namespace Microsoft.CodeAnalysis.AddImport
                 bool isAttributeSearch,
                 PackageWithTypeResult result,
                 int weight
-            ) {
+            )
+            {
                 var desiredName = GetDesiredName(isAttributeSearch, result.TypeName);
                 allReferences.Add(
                     new PackageReference(

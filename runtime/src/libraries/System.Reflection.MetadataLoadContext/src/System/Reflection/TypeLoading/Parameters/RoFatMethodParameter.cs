@@ -12,11 +12,8 @@ namespace System.Reflection.TypeLoading
     /// </summary>
     internal abstract class RoFatMethodParameter : RoMethodParameter
     {
-        protected RoFatMethodParameter(
-            IRoMethodBase roMethodBase,
-            int position,
-            Type parameterType
-        ) : base(roMethodBase, position, parameterType)
+        protected RoFatMethodParameter(IRoMethodBase roMethodBase, int position, Type parameterType)
+            : base(roMethodBase, position, parameterType)
         {
             Debug.Assert(roMethodBase != null);
             Debug.Assert(parameterType != null);

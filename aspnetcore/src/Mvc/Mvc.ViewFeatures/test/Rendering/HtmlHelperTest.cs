@@ -128,7 +128,8 @@ namespace Microsoft.AspNetCore.Mvc.Rendering
         public void AnonymousObjectToHtmlAttributes_IgnoresPropertyCase(
             object htmlAttributeObject,
             KeyValuePair<string, object> expectedEntry
-        ) {
+        )
+        {
             // Act
             var result = HtmlHelper.AnonymousObjectToHtmlAttributes(htmlAttributeObject);
 
@@ -160,7 +161,8 @@ namespace Microsoft.AspNetCore.Mvc.Rendering
         public void EncodeDynamic_ReturnsExpectedString_WithBaseHelper(
             object value,
             string expectedString
-        ) {
+        )
+        {
             // Arrange
             // Important to preserve these particular variable types. Otherwise may end up testing different runtime
             // (not compiler) behaviors.
@@ -231,7 +233,8 @@ namespace Microsoft.AspNetCore.Mvc.Rendering
         public void RawDynamic_ReturnsExpectedString_WithBaseHelper(
             object value,
             string expectedString
-        ) {
+        )
+        {
             // Arrange
             // Important to preserve these particular variable types. Otherwise may end up testing different runtime
             // (not compiler) behaviors.

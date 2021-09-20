@@ -30,7 +30,8 @@ namespace Microsoft.AspNetCore.Mvc.Controllers
         public DefaultControllerFactory(
             IControllerActivator controllerActivator,
             IEnumerable<IControllerPropertyActivator> propertyActivators
-        ) {
+        )
+        {
             if (controllerActivator == null)
             {
                 throw new ArgumentNullException(nameof(controllerActivator));

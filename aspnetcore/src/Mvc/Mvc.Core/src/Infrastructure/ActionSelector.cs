@@ -39,7 +39,8 @@ namespace Microsoft.AspNetCore.Mvc.Infrastructure
             IActionDescriptorCollectionProvider actionDescriptorCollectionProvider,
             ActionConstraintCache actionConstraintCache,
             ILoggerFactory loggerFactory
-        ) {
+        )
+        {
             _actionDescriptorCollectionProvider = actionDescriptorCollectionProvider;
             _logger = loggerFactory.CreateLogger<ActionSelector>();
             _actionConstraintCache = actionConstraintCache;
@@ -85,7 +86,8 @@ namespace Microsoft.AspNetCore.Mvc.Infrastructure
         public ActionDescriptor? SelectBestCandidate(
             RouteContext context,
             IReadOnlyList<ActionDescriptor> candidates
-        ) {
+        )
+        {
             if (context == null)
             {
                 throw new ArgumentNullException(nameof(context));
@@ -129,7 +131,8 @@ namespace Microsoft.AspNetCore.Mvc.Infrastructure
         private IReadOnlyList<ActionDescriptor>? EvaluateActionConstraints(
             RouteContext context,
             IReadOnlyList<ActionDescriptor> actions
-        ) {
+        )
+        {
             var actionsCount = actions.Count;
             var candidates = new List<ActionSelectorCandidate>(actionsCount);
 
@@ -166,7 +169,8 @@ namespace Microsoft.AspNetCore.Mvc.Infrastructure
             RouteContext context,
             IReadOnlyList<ActionSelectorCandidate> candidates,
             int? startingOrder
-        ) {
+        )
+        {
             // Find the next group of constraints to process. This will be the lowest value of
             // order that is higher than startingOrder.
             int? order = null;
@@ -183,7 +187,8 @@ namespace Microsoft.AspNetCore.Mvc.Infrastructure
                         if (
                             (startingOrder == null || constraint.Order > startingOrder)
                             && (order == null || constraint.Order < order)
-                        ) {
+                        )
+                        {
                             order = constraint.Order;
                         }
                     }

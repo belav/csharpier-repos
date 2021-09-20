@@ -76,11 +76,8 @@ namespace System.Data
         /// Initializes a new instance of the <see cref='System.Data.DataRelation'/> class using the specified name,
         /// parent, and child columns.
         /// </summary>
-        public DataRelation(
-            string? relationName,
-            DataColumn parentColumn,
-            DataColumn childColumn
-        ) : this(relationName, parentColumn, childColumn, true) { }
+        public DataRelation(string? relationName, DataColumn parentColumn, DataColumn childColumn)
+            : this(relationName, parentColumn, childColumn, true) { }
 
         /// <summary>
         /// Initializes a new instance of the <see cref='System.Data.DataRelation'/> class using the specified name, parent, and child columns, and
@@ -91,7 +88,8 @@ namespace System.Data
             DataColumn parentColumn,
             DataColumn childColumn,
             bool createConstraints
-        ) {
+        )
+        {
             DataCommonEventSource.Log.Trace(
                 "<ds.DataRelation.DataRelation|API> {0}, relationName='{1}', parentColumn={2}, childColumn={3}, createConstraints={4}",
                 ObjectID,
@@ -127,7 +125,8 @@ namespace System.Data
             DataColumn[] parentColumns,
             DataColumn[] childColumns,
             bool createConstraints
-        ) {
+        )
+        {
             Create(relationName, parentColumns, childColumns, createConstraints);
         }
 
@@ -139,7 +138,8 @@ namespace System.Data
             string[]? parentColumnNames,
             string[]? childColumnNames,
             bool nested
-        ) {
+        )
+        {
             _relationName = relationName;
             _parentColumnNames = parentColumnNames;
             _childColumnNames = childColumnNames;
@@ -158,7 +158,8 @@ namespace System.Data
             string[]? parentColumnNames,
             string[]? childColumnNames,
             bool nested
-        ) {
+        )
+        {
             _relationName = relationName;
             _parentColumnNames = parentColumnNames;
             _childColumnNames = childColumnNames;
@@ -252,7 +253,8 @@ namespace System.Data
             DataKey childKey,
             DataRow parentRow,
             DataRowVersion version
-        ) {
+        )
+        {
             object[] values = parentRow.GetKeyValues(parentKey, version);
             if (IsKeyNull(values))
             {
@@ -275,7 +277,8 @@ namespace System.Data
             DataKey childKey,
             DataRow childRow,
             DataRowVersion version
-        ) {
+        )
+        {
             object[] values = childRow.GetKeyValues(childKey, version);
             if (IsKeyNull(values))
             {
@@ -295,14 +298,16 @@ namespace System.Data
             DataKey childKey,
             DataRow childRow,
             DataRowVersion version
-        ) {
+        )
+        {
             if (
                 !childRow.HasVersion(
                     (version == DataRowVersion.Original)
                       ? DataRowVersion.Original
                       : DataRowVersion.Current
                 )
-            ) {
+            )
+            {
                 if (childRow._tempRecord == -1)
                 {
                     return null;
@@ -623,7 +628,8 @@ namespace System.Data
                         if (
                             !value
                             && (_parentKey.ColumnsReference[0].ColumnMapping == MappingType.Hidden)
-                        ) {
+                        )
+                        {
                             throw ExceptionBuilder.RelationNestedReadOnly();
                         }
 
@@ -658,7 +664,8 @@ namespace System.Data
                                                 ChildTable.DataSet.Locale
                                             ) == 0
                                         )
-                                    ) {
+                                    )
+                                    {
                                         throw ExceptionBuilder.DatasetConflictingName(
                                             DataSet.DataSetName
                                         );
@@ -693,7 +700,8 @@ namespace System.Data
                                         && !(ChildTable.DataSet!.Relations.Contains(RelationName))
                                     )
                                 )
-                            ) {
+                            )
+                            {
                                 string? parentNs = null;
                                 foreach (DataRelation rel in ChildTable.ParentRelations)
                                 {
@@ -711,7 +719,8 @@ namespace System.Data
                                                     rel.ParentTable.Namespace,
                                                     StringComparison.Ordinal
                                                 )
-                                            ) {
+                                            )
+                                            {
                                                 _nested = false;
                                                 throw ExceptionBuilder.InvalidParentNamespaceinNestedRelation(
                                                     ChildTable.TableName
@@ -725,7 +734,8 @@ namespace System.Data
                                     CheckMultipleNested
                                     && ChildTable._tableNamespace != null
                                     && ChildTable._tableNamespace.Length == 0
-                                ) {
+                                )
+                                {
                                     throw ExceptionBuilder.TableCantBeNestedInTwoTables(
                                         ChildTable.TableName
                                     );
@@ -839,7 +849,8 @@ namespace System.Data
                                 ) != DataSetDateTime.Unspecified
                             )
                         )
-                    ) {
+                    )
+                    {
                         // allow unspecified and unspecifiedlocal
                         throw ExceptionBuilder.ColumnsTypeMismatch();
                     }
@@ -868,7 +879,8 @@ namespace System.Data
             DataColumn[] parentColumns,
             DataColumn[] childColumns,
             bool createConstraints
-        ) {
+        )
+        {
             long logScopeId = DataCommonEventSource.Log.EnterScope(
                 "<ds.DataRelation.Create|INFO> {0}, relationName='{1}', createConstraints={2}",
                 ObjectID,
@@ -890,7 +902,8 @@ namespace System.Data
                     if (
                         (parentColumns[i].Table!.DataSet == null)
                         || (childColumns[i].Table!.DataSet == null)
-                    ) {
+                    )
+                    {
                         throw ExceptionBuilder.ParentOrChildColumnsDoNotHaveDataSet();
                     }
                 }

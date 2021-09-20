@@ -57,7 +57,8 @@ namespace Microsoft.CodeAnalysis.SolutionCrawler
                     int normalBackOffTimeSpanInMs,
                     int lowBackOffTimeSpanInMs,
                     CancellationToken shutdownToken
-                ) {
+                )
+                {
                     _logAggregator = new LogAggregator();
 
                     _listener = listener;
@@ -132,7 +133,8 @@ namespace Microsoft.CodeAnalysis.SolutionCrawler
                     IEnumerable<
                         Lazy<IIncrementalAnalyzerProvider, IncrementalAnalyzerProviderMetadata>
                     > analyzerProviders
-                ) {
+                )
+                {
                     // alternatively, we could just MEF import IDiagnosticAnalyzerService directly
                     // this can be null in test env.
                     return (IDiagnosticAnalyzerService?)analyzerProviders.Where(
@@ -145,7 +147,8 @@ namespace Microsoft.CodeAnalysis.SolutionCrawler
                     Registration registration,
                     AnalyzersGetter analyzersGetter,
                     bool onlyHighPriorityAnalyzer
-                ) {
+                )
+                {
                     var orderedAnalyzers = analyzersGetter.GetOrderedAnalyzers(
                         registration.Workspace,
                         onlyHighPriorityAnalyzer
@@ -187,7 +190,8 @@ namespace Microsoft.CodeAnalysis.SolutionCrawler
                                 _listener,
                                 out var newWorkItem
                             )
-                        ) {
+                        )
+                        {
                             _highPriorityProcessor.Enqueue(newWorkItem.Value);
                         }
 
@@ -200,7 +204,8 @@ namespace Microsoft.CodeAnalysis.SolutionCrawler
                                 _listener,
                                 out newWorkItem
                             )
-                        ) {
+                        )
+                        {
                             _normalPriorityProcessor.Enqueue(newWorkItem.Value);
                         }
 
@@ -213,7 +218,8 @@ namespace Microsoft.CodeAnalysis.SolutionCrawler
                                 _listener,
                                 out newWorkItem
                             )
-                        ) {
+                        )
+                        {
                             _lowPriorityProcessor.Enqueue(newWorkItem.Value);
                         }
 
@@ -227,7 +233,8 @@ namespace Microsoft.CodeAnalysis.SolutionCrawler
                     bool ShouldEnqueueForAllQueues(
                         WorkItem item,
                         BackgroundAnalysisScope analysisScope
-                    ) {
+                    )
+                    {
                         var reasons = item.InvocationReasons;
 
                         // For active file analysis scope we only process following:
@@ -241,7 +248,8 @@ namespace Microsoft.CodeAnalysis.SolutionCrawler
                             analysisScope == BackgroundAnalysisScope.ActiveFile
                             && !reasons.Contains(PredefinedInvocationReasons.DocumentClosed)
                             && !reasons.Contains(PredefinedInvocationReasons.DocumentRemoved)
-                        ) {
+                        )
+                        {
                             return item.DocumentId == _documentTracker?.TryGetActiveDocument();
                         }
 
@@ -256,7 +264,8 @@ namespace Microsoft.CodeAnalysis.SolutionCrawler
                     BackgroundAnalysisScope analysisScope,
                     IAsynchronousOperationListener listener,
                     [NotNullWhen(returnValue: true)] out WorkItem? newWorkItem
-                ) {
+                )
+                {
                     var analyzersToExecute = item.GetApplicableAnalyzers(allAnalyzers);
 
                     var analyzersWithOverriddenAnalysisScope = analyzersToExecute.Where(
@@ -282,7 +291,8 @@ namespace Microsoft.CodeAnalysis.SolutionCrawler
                 public void AddAnalyzer(
                     IIncrementalAnalyzer analyzer,
                     bool highPriorityForActiveFile
-                ) {
+                )
+                {
                     if (highPriorityForActiveFile)
                     {
                         _highPriorityProcessor.AddAnalyzer(analyzer);
@@ -342,13 +352,15 @@ namespace Microsoft.CodeAnalysis.SolutionCrawler
                     ImmutableArray<IIncrementalAnalyzer> analyzers,
                     WorkItem workItem,
                     CancellationToken cancellationToken
-                ) {
+                )
+                {
                     // process all analyzers for each categories in this order - syntax, body, document
                     var reasons = workItem.InvocationReasons;
                     if (
                         workItem.MustRefresh
                         || reasons.Contains(PredefinedInvocationReasons.SyntaxChanged)
-                    ) {
+                    )
+                    {
                         await RunAnalyzersAsync(
                                 analyzers,
                                 textDocument,
@@ -368,7 +380,8 @@ namespace Microsoft.CodeAnalysis.SolutionCrawler
                     if (
                         workItem.MustRefresh
                         || reasons.Contains(PredefinedInvocationReasons.SemanticChanged)
-                    ) {
+                    )
+                    {
                         await RunAnalyzersAsync(
                                 analyzers,
                                 document,
@@ -397,7 +410,8 @@ namespace Microsoft.CodeAnalysis.SolutionCrawler
                         TextDocument textDocument,
                         InvocationReasons reasons,
                         CancellationToken cancellationToken
-                    ) {
+                    )
+                    {
                         if (textDocument is Document document)
                         {
                             await analyzer.AnalyzeSyntaxAsync(document, reasons, cancellationToken)
@@ -421,7 +435,8 @@ namespace Microsoft.CodeAnalysis.SolutionCrawler
                     WorkItem workItem,
                     Func<IIncrementalAnalyzer, T, CancellationToken, Task> runnerAsync,
                     CancellationToken cancellationToken
-                ) {
+                )
+                {
                     using var evaluating = _registration.ProgressReporter.GetEvaluatingScope();
 
                     ReportPendingWorkItemCount();
@@ -460,7 +475,8 @@ namespace Microsoft.CodeAnalysis.SolutionCrawler
                     WorkItem workItem,
                     Document document,
                     CancellationToken cancellationToken
-                ) {
+                )
+                {
                     try
                     {
                         var root = await GetOrDefaultAsync(
@@ -551,7 +567,8 @@ namespace Microsoft.CodeAnalysis.SolutionCrawler
 
                     static bool ReportWithoutCrashUnlessAllCanceledAndPropagate(
                         AggregateException aggregate
-                    ) {
+                    )
+                    {
                         var flattened = aggregate.Flatten();
                         if (flattened.InnerExceptions.All(e => e is OperationCanceledException))
                         {
@@ -566,7 +583,8 @@ namespace Microsoft.CodeAnalysis.SolutionCrawler
                     ISyntaxFactsService service,
                     SyntaxNode? root,
                     SyntaxPath? memberPath
-                ) {
+                )
+                {
                     if (root == null || memberPath == null)
                     {
                         return null;
@@ -587,7 +605,8 @@ namespace Microsoft.CodeAnalysis.SolutionCrawler
                     int tick,
                     object documentOrProjectId,
                     bool replaced
-                ) {
+                )
+                {
                     if (documentOrProjectId is DocumentId documentId)
                     {
                         return $"Tick:{tick}, {documentId}, {documentId.ProjectId}, Replaced:{replaced}";
@@ -613,7 +632,8 @@ namespace Microsoft.CodeAnalysis.SolutionCrawler
                     internal void WaitUntilCompletion(
                         ImmutableArray<IIncrementalAnalyzer> analyzers,
                         List<WorkItem> items
-                    ) {
+                    )
+                    {
                         _incrementalAnalyzerProcessor._normalPriorityProcessor.GetTestAccessor()
                             .WaitUntilCompletion(analyzers, items);
 
@@ -654,7 +674,8 @@ namespace Microsoft.CodeAnalysis.SolutionCrawler
                         IEnumerable<
                             Lazy<IIncrementalAnalyzerProvider, IncrementalAnalyzerProviderMetadata>
                         > analyzerProviders
-                    ) {
+                    )
+                    {
                         _analyzerMap = new Dictionary<
                             Workspace,
                             ImmutableArray<ValueTuple<IIncrementalAnalyzer, bool>>
@@ -665,7 +686,8 @@ namespace Microsoft.CodeAnalysis.SolutionCrawler
                     public ImmutableArray<IIncrementalAnalyzer> GetOrderedAnalyzers(
                         Workspace workspace,
                         bool onlyHighPriorityAnalyzer
-                    ) {
+                    )
+                    {
                         lock (_analyzerMap)
                         {
                             if (!_analyzerMap.TryGetValue(workspace, out var analyzers))

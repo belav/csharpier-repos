@@ -63,7 +63,8 @@ namespace System.Globalization.Tests
         [InlineData(CalendarWeekRule.FirstFourDayWeek + 1)]
         public void CalendarWeekRule_SetInvalidValue_ThrowsArgumentOutOfRangeException(
             CalendarWeekRule value
-        ) {
+        )
+        {
             var format = new DateTimeFormatInfo();
             AssertExtensions.Throws<ArgumentOutOfRangeException>(
                 "value",

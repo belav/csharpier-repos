@@ -20,7 +20,8 @@ namespace Microsoft.Win32.RegistryTests
             int testIndex,
             object testValue,
             RegistryValueKind expectedValueKind
-        ) {
+        )
+        {
             string valueName = "Testing_" + testIndex.ToString();
 
             Registry.SetValue(
@@ -40,7 +41,8 @@ namespace Microsoft.Win32.RegistryTests
             int testIndex,
             object testValue,
             RegistryValueKind expectedValueKind
-        ) {
+        )
+        {
             string valueName = "Testing_" + testIndex.ToString();
             expectedValueKind = RegistryValueKind.String;
 
@@ -56,7 +58,8 @@ namespace Microsoft.Win32.RegistryTests
             int testIndex,
             object testValue,
             RegistryValueKind expectedValueKind
-        ) {
+        )
+        {
             string valueName = "Testing_" + testIndex.ToString();
             expectedValueKind = RegistryValueKind.ExpandString;
 
@@ -72,7 +75,8 @@ namespace Microsoft.Win32.RegistryTests
             int testIndex,
             object testValue,
             RegistryValueKind expectedValueKind
-        ) {
+        )
+        {
             try
             {
                 string valueName = "Testing_" + testIndex.ToString();
@@ -95,7 +99,8 @@ namespace Microsoft.Win32.RegistryTests
             int testIndex,
             object testValue,
             RegistryValueKind expectedValueKind
-        ) {
+        )
+        {
             try
             {
                 string valueName = "Testing_" + testIndex.ToString();
@@ -118,7 +123,8 @@ namespace Microsoft.Win32.RegistryTests
             int testIndex,
             object testValue,
             RegistryValueKind expectedValueKind
-        ) {
+        )
+        {
             try
             {
                 string valueName = "Testing_" + testIndex.ToString();
@@ -145,7 +151,8 @@ namespace Microsoft.Win32.RegistryTests
             int testIndex,
             object testValue,
             RegistryValueKind expectedValueKind
-        ) {
+        )
+        {
             try
             {
                 string valueName = "Testing_" + testIndex.ToString();

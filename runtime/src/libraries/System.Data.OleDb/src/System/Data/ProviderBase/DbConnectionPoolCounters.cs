@@ -125,7 +125,8 @@ namespace System.Data.ProviderBase
                 string? instanceName,
                 string counterName,
                 PerformanceCounterType counterType
-            ) {
+            )
+            {
                 if (ADP.IsPlatformNT5)
                 {
                     try

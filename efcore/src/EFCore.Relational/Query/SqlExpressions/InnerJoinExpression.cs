@@ -46,7 +46,8 @@ namespace Microsoft.EntityFrameworkCore.Query.SqlExpressions
         public virtual InnerJoinExpression Update(
             TableExpressionBase table,
             SqlExpression joinPredicate
-        ) {
+        )
+        {
             Check.NotNull(table, nameof(table));
             Check.NotNull(joinPredicate, nameof(joinPredicate));
 

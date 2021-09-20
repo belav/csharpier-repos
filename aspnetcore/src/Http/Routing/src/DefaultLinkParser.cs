@@ -31,7 +31,8 @@ namespace Microsoft.AspNetCore.Routing
             EndpointDataSource dataSource,
             ILogger<DefaultLinkParser> logger,
             IServiceProvider serviceProvider
-        ) {
+        )
+        {
             _parameterPolicyFactory = parameterPolicyFactory;
             _logger = logger;
             _serviceProvider = serviceProvider;
@@ -57,7 +58,8 @@ namespace Microsoft.AspNetCore.Routing
         public override RouteValueDictionary? ParsePathByAddress<TAddress>(
             TAddress address,
             PathString path
-        ) {
+        )
+        {
             var endpoints = GetEndpoints(address);
             if (endpoints.Count == 0)
             {
@@ -141,7 +143,8 @@ namespace Microsoft.AspNetCore.Routing
             RouteEndpoint endpoint,
             PathString path,
             [NotNullWhen(true)] out RouteValueDictionary? values
-        ) {
+        )
+        {
             var (matcher, constraints) = GetMatcherState(endpoint);
 
             values = new RouteValueDictionary();
@@ -164,7 +167,8 @@ namespace Microsoft.AspNetCore.Routing
                             values,
                             RouteDirection.IncomingRequest
                         )
-                    ) {
+                    )
+                    {
                         values = null;
                         return false;
                     }
@@ -188,7 +192,8 @@ namespace Microsoft.AspNetCore.Routing
             public MatcherState(
                 RoutePatternMatcher matcher,
                 Dictionary<string, List<IRouteConstraint>> constraints
-            ) {
+            )
+            {
                 Matcher = matcher;
                 Constraints = constraints;
             }
@@ -196,7 +201,8 @@ namespace Microsoft.AspNetCore.Routing
             public void Deconstruct(
                 out RoutePatternMatcher matcher,
                 out Dictionary<string, List<IRouteConstraint>> constraints
-            ) {
+            )
+            {
                 matcher = Matcher;
                 constraints = Constraints;
             }
@@ -270,7 +276,8 @@ namespace Microsoft.AspNetCore.Routing
                 ILogger logger,
                 object address,
                 IEnumerable<Endpoint> endpoints
-            ) {
+            )
+            {
                 // Checking level again to avoid allocation on the common path
                 if (logger.IsEnabled(LogLevel.Debug))
                 {
@@ -287,7 +294,8 @@ namespace Microsoft.AspNetCore.Routing
                 ILogger logger,
                 PathString path,
                 Endpoint endpoint
-            ) {
+            )
+            {
                 // Checking level again to avoid allocation on the common path
                 if (logger.IsEnabled(LogLevel.Debug))
                 {
@@ -299,7 +307,8 @@ namespace Microsoft.AspNetCore.Routing
                 ILogger logger,
                 PathString path,
                 IEnumerable<Endpoint> endpoints
-            ) {
+            )
+            {
                 // Checking level again to avoid allocation on the common path
                 if (logger.IsEnabled(LogLevel.Debug))
                 {

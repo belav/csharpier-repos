@@ -21,7 +21,8 @@ namespace Microsoft.CodeAnalysis.UnitTests
             Workspace workspace,
             IOptionProvider? optionProvider = null,
             IOptionPersisterProvider? optionPersisterProvider = null
-        ) {
+        )
+        {
             var mefHostServices = (IMefHostExportProvider)workspace.Services.HostServices;
             var workspaceThreadingService =
                 mefHostServices.GetExportedValues<IWorkspaceThreadingService>().SingleOrDefault();

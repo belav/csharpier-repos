@@ -35,14 +35,16 @@ namespace Microsoft.CodeAnalysis.CSharp.Emit
             EmitBaseline previousGeneration,
             IEnumerable<SemanticEdit> edits,
             Func<ISymbol, bool> isAddedSymbol
-        ) : base(
-            sourceAssembly,
-            emitOptions,
-            outputKind,
-            serializationProperties,
-            manifestResources,
-            additionalTypes: ImmutableArray<NamedTypeSymbol>.Empty
-        ) {
+        )
+            : base(
+                sourceAssembly,
+                emitOptions,
+                outputKind,
+                serializationProperties,
+                manifestResources,
+                additionalTypes: ImmutableArray<NamedTypeSymbol>.Empty
+            )
+        {
             var initialBaseline = previousGeneration.InitialBaseline;
             var context = new EmitContext(
                 this,
@@ -126,7 +128,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Emit
         internal override Cci.ITypeReference EncTranslateLocalVariableType(
             TypeSymbol type,
             DiagnosticBag diagnostics
-        ) {
+        )
+        {
             // Note: The translator is not aware of synthesized types. If type is a synthesized type it won't get mapped.
             // In such case use the type itself. This can only happen for variables storing lambda display classes.
             var visited = (TypeSymbol)_deepTranslator.Visit(type);
@@ -138,7 +141,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Emit
         private static EmitBaseline.MetadataSymbols GetOrCreateMetadataSymbols(
             EmitBaseline initialBaseline,
             CSharpCompilation compilation
-        ) {
+        )
+        {
             if (initialBaseline.LazyMetadataSymbols != null)
             {
                 return initialBaseline.LazyMetadataSymbols;
@@ -219,7 +223,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Emit
             MetadataReader reader,
             TypeDefinition def,
             ArrayBuilder<AnonymousTypeKeyField> builder
-        ) {
+        )
+        {
             foreach (var typeParameterHandle in def.GetGenericParameters())
             {
                 var typeParameter = reader.GetGenericParameter(typeParameterHandle);
@@ -229,7 +234,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Emit
                         reader.GetString(typeParameter.Name),
                         out fieldName
                     )
-                ) {
+                )
+                {
                     return false;
                 }
 
@@ -270,7 +276,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Emit
 
         public override IEnumerable<Cci.INamespaceTypeDefinition> GetTopLevelTypeDefinitions(
             EmitContext context
-        ) {
+        )
+        {
             foreach (var typeDef in GetAnonymousTypeDefinitions(context))
             {
                 yield return typeDef;
@@ -284,7 +291,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Emit
 
         public override IEnumerable<Cci.INamespaceTypeDefinition> GetTopLevelSourceTypeDefinitions(
             EmitContext context
-        ) {
+        )
+        {
             return _changes.GetTopLevelSourceTypeDefinitions(context);
         }
 
@@ -292,7 +300,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Emit
             MethodSymbol method,
             MethodSymbol topLevelMethod,
             DiagnosticBag diagnostics
-        ) {
+        )
+        {
             return _previousDefinitions.TryCreateVariableSlotAllocator(
                 _previousGeneration,
                 Compilation,
@@ -316,7 +325,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Emit
             AnonymousTypeManager.AnonymousTypeTemplateSymbol template,
             [NotNullWhen(true)] out string? name,
             out int index
-        ) {
+        )
+        {
             Debug.Assert(this.Compilation == template.DeclaringCompilation);
             return _previousDefinitions.TryGetAnonymousTypeName(template, out name, out index);
         }

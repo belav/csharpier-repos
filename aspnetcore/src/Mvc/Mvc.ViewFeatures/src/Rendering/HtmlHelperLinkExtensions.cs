@@ -22,7 +22,8 @@ namespace Microsoft.AspNetCore.Mvc.Rendering
             this IHtmlHelper helper,
             string linkText,
             string actionName
-        ) {
+        )
+        {
             if (helper == null)
             {
                 throw new ArgumentNullException(nameof(helper));
@@ -64,7 +65,8 @@ namespace Microsoft.AspNetCore.Mvc.Rendering
             string linkText,
             string actionName,
             object routeValues
-        ) {
+        )
+        {
             if (helper == null)
             {
                 throw new ArgumentNullException(nameof(helper));
@@ -112,7 +114,8 @@ namespace Microsoft.AspNetCore.Mvc.Rendering
             string actionName,
             object routeValues,
             object htmlAttributes
-        ) {
+        )
+        {
             if (helper == null)
             {
                 throw new ArgumentNullException(nameof(helper));
@@ -148,7 +151,8 @@ namespace Microsoft.AspNetCore.Mvc.Rendering
             string linkText,
             string actionName,
             string controllerName
-        ) {
+        )
+        {
             if (helper == null)
             {
                 throw new ArgumentNullException(nameof(helper));
@@ -192,7 +196,8 @@ namespace Microsoft.AspNetCore.Mvc.Rendering
             string actionName,
             string controllerName,
             object routeValues
-        ) {
+        )
+        {
             if (helper == null)
             {
                 throw new ArgumentNullException(nameof(helper));
@@ -242,7 +247,8 @@ namespace Microsoft.AspNetCore.Mvc.Rendering
             string controllerName,
             object routeValues,
             object htmlAttributes
-        ) {
+        )
+        {
             if (helper == null)
             {
                 throw new ArgumentNullException(nameof(helper));
@@ -282,7 +288,8 @@ namespace Microsoft.AspNetCore.Mvc.Rendering
             this IHtmlHelper htmlHelper,
             string linkText,
             object routeValues
-        ) {
+        )
+        {
             if (htmlHelper == null)
             {
                 throw new ArgumentNullException(nameof(htmlHelper));
@@ -315,7 +322,8 @@ namespace Microsoft.AspNetCore.Mvc.Rendering
             this IHtmlHelper htmlHelper,
             string linkText,
             string routeName
-        ) {
+        )
+        {
             if (htmlHelper == null)
             {
                 throw new ArgumentNullException(nameof(htmlHelper));
@@ -356,7 +364,8 @@ namespace Microsoft.AspNetCore.Mvc.Rendering
             string linkText,
             string routeName,
             object routeValues
-        ) {
+        )
+        {
             if (htmlHelper == null)
             {
                 throw new ArgumentNullException(nameof(htmlHelper));
@@ -401,7 +410,8 @@ namespace Microsoft.AspNetCore.Mvc.Rendering
             string linkText,
             object routeValues,
             object htmlAttributes
-        ) {
+        )
+        {
             if (htmlHelper == null)
             {
                 throw new ArgumentNullException(nameof(htmlHelper));
@@ -448,7 +458,8 @@ namespace Microsoft.AspNetCore.Mvc.Rendering
             string routeName,
             object routeValues,
             object htmlAttributes
-        ) {
+        )
+        {
             if (htmlHelper == null)
             {
                 throw new ArgumentNullException(nameof(htmlHelper));

@@ -22,7 +22,8 @@ namespace Microsoft.AspNetCore.Components
         public ProtectedPrerenderComponentApplicationStore(
             string existingState,
             IDataProtectionProvider dataProtectionProvider
-        ) {
+        )
+        {
             CreateProtector(dataProtectionProvider);
             ExistingState = JsonSerializer.Deserialize<Dictionary<string, byte[]>>(
                 _protector.Unprotect(Convert.FromBase64String(existingState))

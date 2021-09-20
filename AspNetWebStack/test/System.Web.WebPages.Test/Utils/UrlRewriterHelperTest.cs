@@ -147,7 +147,8 @@ namespace System.Web.WebPages.Test
         private UrlRewriteMocks CreateMockContext(
             bool isUrlRewriteOnForServer,
             bool isUrlRewriteOnForRequest
-        ) {
+        )
+        {
             Mock<HttpContextBase> mockContext = new Mock<HttpContextBase>();
 
             Mock<HttpWorkerRequest> mockWorkerRequest = new Mock<HttpWorkerRequest>();

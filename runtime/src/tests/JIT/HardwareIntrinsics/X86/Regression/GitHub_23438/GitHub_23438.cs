@@ -49,7 +49,8 @@ namespace GitHub_23438
             long expectedResult,
             long actualResult,
             [CallerMemberName] string methodName = ""
-        ) {
+        )
+        {
             bool areEqual = (expectedResult == actualResult);
 
             if (!areEqual)
@@ -66,7 +67,8 @@ namespace GitHub_23438
             ulong expectedResult,
             ulong actualResult,
             [CallerMemberName] string methodName = ""
-        ) {
+        )
+        {
             bool areEqual = (expectedResult == actualResult);
 
             if (!areEqual)

@@ -57,7 +57,8 @@ namespace System.Reflection.PortableExecutable
             uint stamp,
             TData data,
             Action<BlobBuilder, TData> dataSerializer
-        ) {
+        )
+        {
             if (dataSerializer == null)
             {
                 Throw.ArgumentNull(nameof(dataSerializer));
@@ -83,7 +84,8 @@ namespace System.Reflection.PortableExecutable
             string pdbPath,
             BlobContentId pdbContentId,
             ushort portablePdbVersion
-        ) {
+        )
+        {
             AddCodeViewEntry(pdbPath, pdbContentId, portablePdbVersion, age: 1);
         }
 
@@ -103,7 +105,8 @@ namespace System.Reflection.PortableExecutable
             BlobContentId pdbContentId,
             ushort portablePdbVersion,
             int age
-        ) {
+        )
+        {
             if (pdbPath == null)
             {
                 Throw.ArgumentNull(nameof(pdbPath));
@@ -148,7 +151,8 @@ namespace System.Reflection.PortableExecutable
             string pdbPath,
             Guid pdbGuid,
             int age
-        ) {
+        )
+        {
             int start = builder.Count;
 
             builder.WriteByte((byte)'R');
@@ -212,7 +216,8 @@ namespace System.Reflection.PortableExecutable
             BlobBuilder builder,
             string algorithmName,
             ImmutableArray<byte> checksum
-        ) {
+        )
+        {
             int start = builder.Count;
 
             // NUL-terminated algorithm name:
@@ -238,7 +243,8 @@ namespace System.Reflection.PortableExecutable
             BlobBuilder builder,
             SectionLocation sectionLocation,
             int sectionOffset
-        ) {
+        )
+        {
             int dataOffset = sectionOffset + TableSize;
             foreach (var entry in _entries)
             {

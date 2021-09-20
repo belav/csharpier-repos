@@ -40,7 +40,8 @@ namespace BasicApi.Controllers
         public TokenController(
             IOptionsSnapshot<JwtBearerOptions> options,
             SigningCredentials credentials
-        ) {
+        )
+        {
             _options = options.Get(JwtBearerDefaults.AuthenticationScheme);
             _credentials = credentials;
         }

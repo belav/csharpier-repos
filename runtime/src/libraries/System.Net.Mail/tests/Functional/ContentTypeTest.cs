@@ -50,7 +50,8 @@ namespace System.Net.Mime.Tests
             string expectedCharSet,
             string expectedBoundary,
             string expectedName
-        ) {
+        )
+        {
             var ct = new ContentType(contentType);
             Assert.Equal(expectedMediaType, ct.MediaType);
             Assert.Equal(expectedCharSet, ct.CharSet);

@@ -16,7 +16,8 @@ namespace Internal.Cryptography
             int paddingSize,
             int feedbackSizeInBytes,
             bool encrypting
-        ) {
+        )
+        {
             BasicSymmetricCipher cipher = new AppleCCCryptor(
                 Interop.AppleCrypto.PAL_SymmetricAlgorithm.AES,
                 cipherMode,

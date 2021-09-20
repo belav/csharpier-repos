@@ -16,7 +16,8 @@ namespace System.ComponentModel.Composition
 
         public static IDictionary<string, object?> AsReadOnly(
             this IDictionary<string, object?>? metadata
-        ) {
+        )
+        {
             if (metadata == null)
             {
                 return EmptyMetadata;

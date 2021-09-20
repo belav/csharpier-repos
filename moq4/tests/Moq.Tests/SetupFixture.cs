@@ -213,7 +213,8 @@ namespace Moq.Tests
                 var setup = mock.Setups.Single();
                 setup.InnerMock != null;
                 setup = setup.InnerMock.Setups.Single()
-            ) {
+            )
+            {
                 setups.Add(setup);
             }
 

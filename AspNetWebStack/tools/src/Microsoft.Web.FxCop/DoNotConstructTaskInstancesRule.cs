@@ -28,7 +28,8 @@ namespace Microsoft.Web.FxCop
                 memberBinding != null
                 && memberBinding.BoundMember.Name.Name == ".ctor"
                 && memberBinding.BoundMember.DeclaringType.IsTask()
-            ) {
+            )
+            {
                 Problems.Add(new Problem(GetResolution(), construct.UniqueKey.ToString()));
             }
 

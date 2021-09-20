@@ -41,7 +41,8 @@ namespace Microsoft.CodeAnalysis.GenerateEqualsAndGetHashCodeFromMembers
                 bool generateGetHashCode,
                 bool implementIEquatable,
                 bool generateOperators
-            ) {
+            )
+            {
                 _document = document;
                 _typeDeclaration = typeDeclaration;
                 _containingType = containingType;
@@ -56,7 +57,8 @@ namespace Microsoft.CodeAnalysis.GenerateEqualsAndGetHashCodeFromMembers
 
             protected override async Task<Document> GetChangedDocumentAsync(
                 CancellationToken cancellationToken
-            ) {
+            )
+            {
                 using var _ = ArrayBuilder<IMethodSymbol>.GetInstance(out var methods);
 
                 if (_generateEquals)
@@ -133,7 +135,8 @@ namespace Microsoft.CodeAnalysis.GenerateEqualsAndGetHashCodeFromMembers
 
             private async Task<INamedTypeSymbol?> GetConstructedTypeToImplementAsync(
                 CancellationToken cancellationToken
-            ) {
+            )
+            {
                 if (!_implementIEquatable)
                     return null;
 
@@ -161,7 +164,8 @@ namespace Microsoft.CodeAnalysis.GenerateEqualsAndGetHashCodeFromMembers
                 SyntaxNode oldType,
                 SyntaxNode newType,
                 CancellationToken cancellationToken
-            ) {
+            )
+            {
                 var oldRoot = await _document.GetRequiredSyntaxRootAsync(cancellationToken)
                     .ConfigureAwait(false);
                 var newDocument = _document.WithSyntaxRoot(oldRoot.ReplaceNode(oldType, newType));
@@ -176,7 +180,8 @@ namespace Microsoft.CodeAnalysis.GenerateEqualsAndGetHashCodeFromMembers
             private async Task AddOperatorsAsync(
                 ArrayBuilder<IMethodSymbol> members,
                 CancellationToken cancellationToken
-            ) {
+            )
+            {
                 var compilation = await _document.Project.GetRequiredCompilationAsync(
                         cancellationToken
                     )
@@ -208,7 +213,8 @@ namespace Microsoft.CodeAnalysis.GenerateEqualsAndGetHashCodeFromMembers
                 Compilation compilation,
                 SyntaxGenerator generator,
                 ImmutableArray<IParameterSymbol> parameters
-            ) {
+            )
+            {
                 var expression = _containingType.IsValueType
                     ? generator.InvocationExpression(
                           generator.MemberAccessExpression(
@@ -241,7 +247,8 @@ namespace Microsoft.CodeAnalysis.GenerateEqualsAndGetHashCodeFromMembers
                 Compilation compilation,
                 SyntaxGenerator generator,
                 ImmutableArray<IParameterSymbol> parameters
-            ) {
+            )
+            {
                 var expression = generator.LogicalNotExpression(
                     generator.ValueEqualsExpression(
                         generator.IdentifierName(LeftName),
@@ -262,7 +269,8 @@ namespace Microsoft.CodeAnalysis.GenerateEqualsAndGetHashCodeFromMembers
 
             private Task<IMethodSymbol> CreateGetHashCodeMethodAsync(
                 CancellationToken cancellationToken
-            ) {
+            )
+            {
                 var service =
                     _document.GetRequiredLanguageService<IGenerateEqualsAndGetHashCodeService>();
                 return service.GenerateGetHashCodeMethodAsync(
@@ -294,7 +302,8 @@ namespace Microsoft.CodeAnalysis.GenerateEqualsAndGetHashCodeFromMembers
             private async Task<IMethodSymbol> CreateIEquatableEqualsMethodAsync(
                 INamedTypeSymbol constructedEquatableType,
                 CancellationToken cancellationToken
-            ) {
+            )
+            {
                 var service =
                     _document.GetRequiredLanguageService<IGenerateEqualsAndGetHashCodeService>();
                 return await service.GenerateIEquatableEqualsMethodAsync(

@@ -114,7 +114,8 @@ namespace Microsoft.EntityFrameworkCore.Query
         [InlineData(true)]
         public virtual async Task From_sql_queryable_stored_procedure_re_projection_on_client(
             bool async
-        ) {
+        )
+        {
             using var context = CreateContext();
             var query = context.Set<MostExpensiveProduct>()
                 .FromSqlRaw(TenMostExpensiveProductsSproc, GetTenMostExpensiveProductsParameters());
@@ -197,7 +198,8 @@ namespace Microsoft.EntityFrameworkCore.Query
         [InlineData(true)]
         public virtual async Task From_sql_queryable_stored_procedure_with_parameter_composed(
             bool async
-        ) {
+        )
+        {
             using var context = CreateContext();
 
             var query = context.Set<CustomerOrderHistory>()
@@ -222,7 +224,8 @@ namespace Microsoft.EntityFrameworkCore.Query
         [InlineData(true)]
         public virtual async Task From_sql_queryable_stored_procedure_with_parameter_composed_on_client(
             bool async
-        ) {
+        )
+        {
             using var context = CreateContext();
             var query = context.Set<CustomerOrderHistory>()
                 .FromSqlRaw(CustomerOrderHistorySproc, GetCustomerOrderHistorySprocParameters());
@@ -324,7 +327,8 @@ namespace Microsoft.EntityFrameworkCore.Query
         [InlineData(true)]
         public virtual async Task From_sql_queryable_stored_procedure_with_include_throws(
             bool async
-        ) {
+        )
+        {
             using var context = CreateContext();
             var query = context.Set<Product>()
                 .FromSqlRaw("SelectStoredProcedure")
@@ -379,7 +383,8 @@ namespace Microsoft.EntityFrameworkCore.Query
         [InlineData(true)]
         public virtual async Task From_sql_queryable_with_multiple_stored_procedures_on_client(
             bool async
-        ) {
+        )
+        {
             using var context = CreateContext();
             var query1 = context.Set<MostExpensiveProduct>()
                 .FromSqlRaw(TenMostExpensiveProductsSproc, GetTenMostExpensiveProductsParameters());
@@ -434,7 +439,8 @@ namespace Microsoft.EntityFrameworkCore.Query
         [InlineData(true)]
         public virtual async Task From_sql_queryable_stored_procedure_and_select_on_client(
             bool async
-        ) {
+        )
+        {
             using var context = CreateContext();
             var query1 = context.Set<MostExpensiveProduct>()
                 .FromSqlRaw(TenMostExpensiveProductsSproc, GetTenMostExpensiveProductsParameters());
@@ -488,7 +494,8 @@ namespace Microsoft.EntityFrameworkCore.Query
         [InlineData(true)]
         public virtual async Task From_sql_queryable_select_and_stored_procedure_on_client(
             bool async
-        ) {
+        )
+        {
             using var context = CreateContext();
 
             var query1 = context.Set<Product>()

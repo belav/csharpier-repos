@@ -24,7 +24,8 @@ namespace Microsoft.CodeAnalysis.CSharp
         protected void FindExpressionVariables(
             ArrayBuilder<TFieldOrLocalSymbol> builder,
             CSharpSyntaxNode node
-        ) {
+        )
+        {
             Debug.Assert(node != null);
 
             ArrayBuilder<TFieldOrLocalSymbol> save = _variablesBuilder;
@@ -126,7 +127,8 @@ namespace Microsoft.CodeAnalysis.CSharp
         protected void FindExpressionVariables(
             ArrayBuilder<TFieldOrLocalSymbol> builder,
             SeparatedSyntaxList<ExpressionSyntax> nodes
-        ) {
+        )
+        {
             Debug.Assert(nodes.Count > 0);
             ArrayBuilder<TFieldOrLocalSymbol> save = _variablesBuilder;
             _variablesBuilder = builder;
@@ -279,7 +281,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                         VariableDesignationSyntax nested in (
                             (ParenthesizedVariableDesignationSyntax)node
                         ).Variables
-                    ) {
+                    )
+                    {
                         VisitPatternDesignation(nested);
                     }
                     break;
@@ -378,7 +381,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             DeclarationExpressionSyntax node,
             VariableDesignationSyntax designation,
             BaseArgumentListSyntax argumentListSyntaxOpt
-        ) {
+        )
+        {
             switch (designation.Kind())
             {
                 case SyntaxKind.SingleVariableDesignation:
@@ -402,7 +406,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                         VariableDesignationSyntax nested in (
                             (ParenthesizedVariableDesignationSyntax)designation
                         ).Variables
-                    ) {
+                    )
+                    {
                         VisitDeclarationExpressionDesignation(node, nested, argumentListSyntaxOpt);
                     }
                     break;
@@ -441,7 +446,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             if (
                 node.PrimaryConstructorBaseType
                 is PrimaryConstructorBaseTypeSyntax baseWithArguments
-            ) {
+            )
+            {
                 VisitNodeToBind(baseWithArguments);
             }
         }
@@ -449,7 +455,8 @@ namespace Microsoft.CodeAnalysis.CSharp
         private void CollectVariablesFromDeconstruction(
             ExpressionSyntax possibleTupleDeclaration,
             AssignmentExpressionSyntax deconstruction
-        ) {
+        )
+        {
             switch (possibleTupleDeclaration.Kind())
             {
                 case SyntaxKind.TupleExpression:
@@ -484,7 +491,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             VariableDesignationSyntax designation,
             TypeSyntax closestTypeSyntax,
             AssignmentExpressionSyntax deconstruction
-        ) {
+        )
+        {
             switch (designation.Kind())
             {
                 case SyntaxKind.SingleVariableDesignation:
@@ -550,7 +558,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             ArrayBuilder<LocalSymbol> builder,
             CSharpSyntaxNode node,
             Binder enclosingBinderOpt = null
-        ) {
+        )
+        {
             if (node == null)
             {
                 return;
@@ -571,7 +580,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             Binder binder,
             ArrayBuilder<LocalSymbol> builder,
             SeparatedSyntaxList<ExpressionSyntax> nodes
-        ) {
+        )
+        {
             if (nodes.Count == 0)
             {
                 return;
@@ -592,14 +602,16 @@ namespace Microsoft.CodeAnalysis.CSharp
             TypeSyntax type,
             SingleVariableDesignationSyntax designation,
             SyntaxNode nodeToBind
-        ) {
+        )
+        {
             return MakePatternVariable(type, designation, nodeToBind);
         }
 
         protected override LocalSymbol MakePatternVariable(
             RecursivePatternSyntax node,
             SyntaxNode nodeToBind
-        ) {
+        )
+        {
             return MakePatternVariable(node.Type, node.Designation, nodeToBind);
         }
 
@@ -607,7 +619,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             TypeSyntax type,
             VariableDesignationSyntax variableDesignation,
             SyntaxNode nodeToBind
-        ) {
+        )
+        {
             var designation = variableDesignation as SingleVariableDesignationSyntax;
             if (designation == null)
             {
@@ -623,7 +636,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                 (object)container != null
                 && container.IsScriptClass
                 && (object)_scopeBinder.LookupDeclaredField(designation) != null
-            ) {
+            )
+            {
                 // This is a field declaration
                 return null;
             }
@@ -645,14 +659,16 @@ namespace Microsoft.CodeAnalysis.CSharp
             SingleVariableDesignationSyntax designation,
             BaseArgumentListSyntax argumentListSyntaxOpt,
             SyntaxNode nodeToBind
-        ) {
+        )
+        {
             NamedTypeSymbol container = _scopeBinder.ContainingType;
 
             if (
                 (object)container != null
                 && container.IsScriptClass
                 && (object)_scopeBinder.LookupDeclaredField(designation) != null
-            ) {
+            )
+            {
                 // This is a field declaration
                 return null;
             }
@@ -675,14 +691,16 @@ namespace Microsoft.CodeAnalysis.CSharp
             TypeSyntax closestTypeSyntax,
             SingleVariableDesignationSyntax designation,
             AssignmentExpressionSyntax deconstruction
-        ) {
+        )
+        {
             NamedTypeSymbol container = _scopeBinder.ContainingType;
 
             if (
                 (object)container != null
                 && container.IsScriptClass
                 && (object)_scopeBinder.LookupDeclaredField(designation) != null
-            ) {
+            )
+            {
                 // This is a field declaration
                 return null;
             }
@@ -723,7 +741,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             SourceMemberContainerTypeSymbol containingType,
             DeclarationModifiers modifiers,
             FieldSymbol containingFieldOpt
-        ) {
+        )
+        {
             if (node == null)
             {
                 return;
@@ -746,7 +765,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             TypeSyntax type,
             SingleVariableDesignationSyntax designation,
             SyntaxNode nodeToBind
-        ) {
+        )
+        {
             return designation == null
               ? null
               : GlobalExpressionVariable.Create(
@@ -764,7 +784,8 @@ namespace Microsoft.CodeAnalysis.CSharp
         protected override Symbol MakePatternVariable(
             RecursivePatternSyntax node,
             SyntaxNode nodeToBind
-        ) {
+        )
+        {
             return MakePatternVariable(
                 node.Type,
                 node.Designation as SingleVariableDesignationSyntax,
@@ -777,7 +798,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             SingleVariableDesignationSyntax designation,
             BaseArgumentListSyntax argumentListSyntaxOpt,
             SyntaxNode nodeToBind
-        ) {
+        )
+        {
             return GlobalExpressionVariable.Create(
                 _containingType,
                 _modifiers,
@@ -794,7 +816,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             TypeSyntax closestTypeSyntax,
             SingleVariableDesignationSyntax designation,
             AssignmentExpressionSyntax deconstruction
-        ) {
+        )
+        {
             return GlobalExpressionVariable.Create(
                 containingType: _containingType,
                 modifiers: DeclarationModifiers.Private,

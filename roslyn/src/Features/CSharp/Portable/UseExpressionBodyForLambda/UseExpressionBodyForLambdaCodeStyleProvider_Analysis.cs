@@ -30,7 +30,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UseExpressionBodyForLambda
         private void AnalyzeSyntax(
             SyntaxNodeAnalysisContext context,
             CodeStyleOption2<ExpressionBodyPreference> option
-        ) {
+        )
+        {
             var declaration = (LambdaExpressionSyntax)context.Node;
             var diagnostic = AnalyzeSyntax(
                 context.SemanticModel,
@@ -49,7 +50,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UseExpressionBodyForLambda
             CodeStyleOption2<ExpressionBodyPreference> option,
             LambdaExpressionSyntax declaration,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             if (CanOfferUseExpressionBody(option.Value, declaration))
             {
                 var location = GetDiagnosticLocation(declaration);

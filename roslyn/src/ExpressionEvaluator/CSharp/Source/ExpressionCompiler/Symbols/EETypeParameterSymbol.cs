@@ -26,7 +26,8 @@ namespace Microsoft.CodeAnalysis.CSharp.ExpressionEvaluator
             TypeParameterSymbol sourceTypeParameter,
             int ordinal,
             Func<TypeMap> getTypeMap
-        ) {
+        )
+        {
             Debug.Assert(
                 (container.Kind == SymbolKind.NamedType) || (container.Kind == SymbolKind.Method)
             );
@@ -146,7 +147,8 @@ namespace Microsoft.CodeAnalysis.CSharp.ExpressionEvaluator
 
         internal override ImmutableArray<TypeWithAnnotations> GetConstraintTypes(
             ConsList<TypeParameterSymbol> inProgress
-        ) {
+        )
+        {
             var constraintTypes = _sourceTypeParameter.GetConstraintTypes(inProgress);
 
             if (constraintTypes.IsEmpty)
@@ -167,14 +169,16 @@ namespace Microsoft.CodeAnalysis.CSharp.ExpressionEvaluator
 
         internal override NamedTypeSymbol GetEffectiveBaseClass(
             ConsList<TypeParameterSymbol> inProgress
-        ) {
+        )
+        {
             var type = _sourceTypeParameter.GetEffectiveBaseClass(inProgress);
             return this.TypeMap.SubstituteNamedType(type);
         }
 
         internal override ImmutableArray<NamedTypeSymbol> GetInterfaces(
             ConsList<TypeParameterSymbol> inProgress
-        ) {
+        )
+        {
             var interfaces = _sourceTypeParameter.GetInterfaces(inProgress);
             return this.TypeMap.SubstituteNamedTypes(interfaces);
         }

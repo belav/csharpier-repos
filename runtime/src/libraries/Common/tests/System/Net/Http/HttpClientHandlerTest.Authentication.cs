@@ -42,7 +42,8 @@ namespace System.Net.Http.Functional.Tests
             Uri url,
             HttpStatusCode expectedStatusCode,
             ICredentials credentials
-        ) {
+        )
+        {
             handler.Credentials = credentials;
             using (HttpClient client = CreateHttpClient(handler))
             using (HttpResponseMessage response = await client.GetAsync(url))
@@ -58,7 +59,8 @@ namespace System.Net.Http.Functional.Tests
         public async Task SocketsHttpHandler_Authentication_Succeeds(
             string authenticateHeader,
             bool result
-        ) {
+        )
+        {
             await HttpClientHandler_Authentication_Succeeds(authenticateHeader, result);
         }
 
@@ -165,7 +167,8 @@ namespace System.Net.Http.Functional.Tests
         public async Task HttpClientHandler_Authentication_Succeeds(
             string authenticateHeader,
             bool result
-        ) {
+        )
+        {
             if (PlatformDetection.IsWindowsNanoServer)
             {
                 return;
@@ -221,7 +224,8 @@ namespace System.Net.Http.Functional.Tests
         )]
         public async Task HttpClientHandler_MultipleAuthenticateHeaders_WithSameAuth_Succeeds(
             string authenticateHeader
-        ) {
+        )
+        {
             if (IsWinHttpHandler)
             {
                 return;
@@ -240,7 +244,8 @@ namespace System.Net.Http.Functional.Tests
         [ActiveIssue("https://github.com/dotnet/runtime/issues/39187", TestPlatforms.Browser)]
         public async Task HttpClientHandler_MultipleAuthenticateHeaders_Succeeds(
             string authenticateHeader
-        ) {
+        )
+        {
             if (PlatformDetection.IsWindowsNanoServer)
             {
                 return;
@@ -284,7 +289,8 @@ namespace System.Net.Http.Functional.Tests
             string authenticateHeader,
             string supportedAuth,
             string unsupportedAuth
-        ) {
+        )
+        {
             if (PlatformDetection.IsWindowsNanoServer)
             {
                 return;
@@ -404,7 +410,8 @@ namespace System.Net.Http.Functional.Tests
         [ActiveIssue("https://github.com/dotnet/runtime/issues/39187", TestPlatforms.Browser)]
         public async Task PreAuthenticate_NoPreviousAuthenticatedRequests_NoCredentialsSent(
             string credCacheScheme
-        ) {
+        )
+        {
             const int NumRequests = 3;
             await LoopbackServer.CreateClientAndServerAsync(
                 async uri =>
@@ -457,7 +464,8 @@ namespace System.Net.Http.Functional.Tests
         public async Task PreAuthenticate_FirstRequestNoHeaderAndAuthenticates_SecondRequestPreauthenticates(
             string credCacheScheme,
             string authResponse
-        ) {
+        )
+        {
             await LoopbackServer.CreateClientAndServerAsync(
                 async uri =>
                 {
@@ -558,7 +566,8 @@ namespace System.Net.Http.Functional.Tests
         [ActiveIssue("https://github.com/dotnet/runtime/issues/39187", TestPlatforms.Browser)]
         public async Task PreAuthenticate_FirstRequestNoHeader_SecondRequestVariousStatusCodes_ThirdRequestPreauthenticates(
             HttpStatusCode statusCode
-        ) {
+        )
+        {
             const string AuthResponse = "WWW-Authenticate: Basic realm=\"hello\"\r\n";
 
             await LoopbackServer.CreateClientAndServerAsync(
@@ -613,7 +622,8 @@ namespace System.Net.Http.Functional.Tests
             string originalRelativeUri,
             string secondRelativeUri,
             bool expectedAuthHeader
-        ) {
+        )
+        {
             const string AuthResponse = "WWW-Authenticate: Basic realm=\"hello\"\r\n";
 
             await LoopbackServer.CreateClientAndServerAsync(
@@ -941,7 +951,8 @@ namespace System.Net.Http.Functional.Tests
         [InlineData("Negotiate")]
         public async Task Credentials_ServerChallengesWithWindowsAuth_ClientSendsWindowsAuthHeader(
             string authScheme
-        ) {
+        )
+        {
             if (IsWinHttpHandler && UseVersion >= HttpVersion20.Value)
             {
                 return;

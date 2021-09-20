@@ -130,7 +130,8 @@ namespace Moq
         public static T Create<T>(
             Func<object, Type, bool> condition,
             Expression<Func<T>> renderExpression
-        ) {
+        )
+        {
             Guard.NotNull(condition, nameof(condition));
             Guard.NotNull(renderExpression, nameof(renderExpression));
 
@@ -173,7 +174,8 @@ namespace Moq
             Predicate<T> condition,
             Expression<Func<T>> renderExpression,
             Action<T> success = null
-        ) {
+        )
+        {
             this.Condition = condition;
             this.RenderExpression = renderExpression.Body.Apply(EvaluateCaptures.Rewriter);
             this.Success = success;
@@ -228,7 +230,8 @@ namespace Moq
                     this.RenderExpression is MethodCallExpression ce
                     && ce.Method.DeclaringType == typeof(Match)
                 )
-            ) {
+            )
+            {
                 return ExpressionComparer.Default.Equals(
                     this.RenderExpression,
                     other.RenderExpression

@@ -69,7 +69,8 @@ namespace Microsoft.AspNetCore.Authentication.OpenIdConnect
             if (
                 string.IsNullOrEmpty(options.TokenValidationParameters.ValidAudience)
                 && !string.IsNullOrEmpty(options.ClientId)
-            ) {
+            )
+            {
                 options.TokenValidationParameters.ValidAudience = options.ClientId;
             }
 
@@ -99,11 +100,13 @@ namespace Microsoft.AspNetCore.Authentication.OpenIdConnect
                         string.IsNullOrEmpty(options.MetadataAddress)
                         && string.IsNullOrEmpty(options.Authority)
                     )
-                ) {
+                )
+                {
                     if (
                         string.IsNullOrEmpty(options.MetadataAddress)
                         && !string.IsNullOrEmpty(options.Authority)
-                    ) {
+                    )
+                    {
                         options.MetadataAddress = options.Authority;
                         if (!options.MetadataAddress.EndsWith("/", StringComparison.Ordinal))
                         {
@@ -121,7 +124,8 @@ namespace Microsoft.AspNetCore.Authentication.OpenIdConnect
                                 StringComparison.OrdinalIgnoreCase
                             ) ?? false
                         )
-                    ) {
+                    )
+                    {
                         throw new InvalidOperationException(
                             "The MetadataAddress or Authority must use HTTPS unless disabled for development by setting RequireHttpsMetadata=false."
                         );

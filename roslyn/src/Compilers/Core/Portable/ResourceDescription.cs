@@ -35,18 +35,15 @@ namespace Microsoft.CodeAnalysis
         /// <remarks>
         /// Returns a stream of the data to embed.
         /// </remarks>
-        public ResourceDescription(
-            string resourceName,
-            Func<Stream> dataProvider,
-            bool isPublic
-        ) : this(
-            resourceName,
-            fileName: null,
-            dataProvider,
-            isPublic,
-            isEmbedded: true,
-            checkArgs: true
-        ) { }
+        public ResourceDescription(string resourceName, Func<Stream> dataProvider, bool isPublic)
+            : this(
+                resourceName,
+                fileName: null,
+                dataProvider,
+                isPublic,
+                isEmbedded: true,
+                checkArgs: true
+            ) { }
 
         /// <summary>
         /// Creates a representation of a resource whose file name will be recorded in the assembly.
@@ -75,7 +72,8 @@ namespace Microsoft.CodeAnalysis
             bool isPublic,
             bool isEmbedded,
             bool checkArgs
-        ) {
+        )
+        {
             if (checkArgs)
             {
                 if (dataProvider == null)

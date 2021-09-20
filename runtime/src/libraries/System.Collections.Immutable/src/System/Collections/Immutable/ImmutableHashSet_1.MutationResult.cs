@@ -55,7 +55,8 @@ namespace System.Collections.Immutable
                 SortedInt32KeyNode<HashBucket> root,
                 int count,
                 CountType countType = ImmutableHashSet<T>.CountType.Adjustment
-            ) {
+            )
+            {
                 Requires.NotNull(root, nameof(root));
                 _root = root;
                 _count = count;

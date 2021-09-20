@@ -75,7 +75,8 @@ namespace Microsoft.AspNetCore.Mvc
             int offset,
             int count,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             count = Math.Max(count, 1);
             return _inner.ReadAsync(buffer, offset, count, cancellationToken);
         }

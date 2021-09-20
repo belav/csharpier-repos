@@ -53,7 +53,8 @@ namespace Microsoft.AspNetCore.TestHost
             WebSocketCloseStatus closeStatus,
             string? statusDescription,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             ThrowIfDisposed();
 
             if (State == WebSocketState.Open || State == WebSocketState.CloseReceived)
@@ -78,7 +79,8 @@ namespace Microsoft.AspNetCore.TestHost
             WebSocketCloseStatus closeStatus,
             string? statusDescription,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             ThrowIfDisposed();
             ThrowIfOutputClosed();
 
@@ -121,7 +123,8 @@ namespace Microsoft.AspNetCore.TestHost
         public override async Task<WebSocketReceiveResult> ReceiveAsync(
             ArraySegment<byte> buffer,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             ThrowIfDisposed();
             ThrowIfInputClosed();
             ValidateSegment(buffer);
@@ -185,12 +188,14 @@ namespace Microsoft.AspNetCore.TestHost
             WebSocketMessageType messageType,
             bool endOfMessage,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             ValidateSegment(buffer);
             if (
                 messageType != WebSocketMessageType.Binary
                 && messageType != WebSocketMessageType.Text
-            ) {
+            )
+            {
                 // Block control frames
                 throw new ArgumentOutOfRangeException(
                     nameof(messageType),
@@ -261,7 +266,8 @@ namespace Microsoft.AspNetCore.TestHost
             string? subProtocol,
             ReceiverSenderBuffer readBuffer,
             ReceiverSenderBuffer writeBuffer
-        ) {
+        )
+        {
             _state = WebSocketState.Open;
             _subProtocol = subProtocol;
             _receiveBuffer = readBuffer;
@@ -274,7 +280,8 @@ namespace Microsoft.AspNetCore.TestHost
                 ArraySegment<byte> buffer,
                 WebSocketMessageType messageType,
                 bool endOfMessage
-            ) {
+            )
+            {
                 Buffer = buffer;
                 CloseStatus = null;
                 CloseStatusDescription = null;

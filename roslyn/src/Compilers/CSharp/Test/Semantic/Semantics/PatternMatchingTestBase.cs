@@ -24,7 +24,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
         protected IEnumerable<SingleVariableDesignationSyntax> GetPatternDeclarations(
             SyntaxTree tree,
             string v
-        ) {
+        )
+        {
             return GetPatternDeclarations(tree).Where(d => d.Identifier.ValueText == v);
         }
 
@@ -35,7 +36,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
 
         protected IEnumerable<SingleVariableDesignationSyntax> GetPatternDeclarations(
             SyntaxTree tree
-        ) {
+        )
+        {
             return tree.GetRoot()
                 .DescendantNodes()
                 .OfType<SingleVariableDesignationSyntax>()
@@ -49,7 +51,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
         protected IEnumerable<VariableDeclaratorSyntax> GetVariableDeclarations(
             SyntaxTree tree,
             string v
-        ) {
+        )
+        {
             return GetVariableDeclarations(tree).Where(d => d.Identifier.ValueText == v);
         }
 
@@ -60,7 +63,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
 
         protected static IEnumerable<DiscardDesignationSyntax> GetDiscardDesignations(
             SyntaxTree tree
-        ) {
+        )
+        {
             return tree.GetRoot().DescendantNodes().OfType<DiscardDesignationSyntax>();
         }
 
@@ -72,7 +76,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
         protected static IEnumerable<IdentifierNameSyntax> GetReferences(
             SyntaxTree tree,
             string name
-        ) {
+        )
+        {
             return tree.GetRoot()
                 .DescendantNodes()
                 .OfType<IdentifierNameSyntax>()
@@ -83,7 +88,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
             SemanticModel model,
             SingleVariableDesignationSyntax decl,
             params IdentifierNameSyntax[] references
-        ) {
+        )
+        {
             VerifyModelForDeclarationOrVarSimplePattern(model, decl, false, references);
         }
 
@@ -91,7 +97,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
             SemanticModel model,
             SingleVariableDesignationSyntax decl,
             params IdentifierNameSyntax[] references
-        ) {
+        )
+        {
             VerifyModelForDeclarationOrVarSimplePattern(model, decl, false, references);
         }
 
@@ -100,7 +107,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
             SingleVariableDesignationSyntax designation,
             bool isShadowed,
             params IdentifierNameSyntax[] references
-        ) {
+        )
+        {
             var symbol = model.GetDeclaredSymbol(designation);
             Assert.Equal(designation.Identifier.ValueText, symbol.Name);
             Assert.Equal(designation, symbol.DeclaringSyntaxReferences.Single().GetSyntax());
@@ -171,7 +179,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
             SemanticModel model,
             TypeSyntax typeSyntax,
             ITypeSymbol expectedType
-        ) {
+        )
+        {
             TypeInfo typeInfo = model.GetTypeInfo(typeSyntax);
             Assert.Equal(expectedType, typeInfo.Type);
             Assert.Equal(expectedType, typeInfo.ConvertedType);
@@ -182,7 +191,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
         protected static void VerifyModelForDeclarationOrVarPatternDuplicateInSameScope(
             SemanticModel model,
             SingleVariableDesignationSyntax designation
-        ) {
+        )
+        {
             var symbol = model.GetDeclaredSymbol(designation);
             Assert.Equal(designation.Identifier.ValueText, symbol.Name);
             Assert.Equal(designation, symbol.DeclaringSyntaxReferences.Single().GetSyntax());
@@ -219,7 +229,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
         protected static void VerifyModelForDuplicateVariableDeclarationInSameScope(
             SemanticModel model,
             VariableDeclaratorSyntax declarator
-        ) {
+        )
+        {
             var symbol = model.GetDeclaredSymbol(declarator);
             Assert.Equal(declarator.Identifier.ValueText, symbol.Name);
             Assert.Equal(declarator, symbol.DeclaringSyntaxReferences.Single().GetSyntax());
@@ -242,7 +253,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
             SemanticModel model,
             SingleVariableDesignationSyntax designation,
             LocalDeclarationKind kind = LocalDeclarationKind.PatternVariable
-        ) {
+        )
+        {
             var symbol = model.GetDeclaredSymbol(designation);
             Assert.Equal(designation.Identifier.ValueText, symbol.Name);
             Assert.Equal(designation, symbol.DeclaringSyntaxReferences.Single().GetSyntax());
@@ -261,7 +273,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
         protected static void VerifyNotAPatternField(
             SemanticModel model,
             IdentifierNameSyntax reference
-        ) {
+        )
+        {
             var symbol = model.GetSymbolInfo(reference).Symbol;
 
             Assert.NotEqual(SymbolKind.Field, symbol.Kind);
@@ -279,7 +292,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
         protected static void VerifyNotAPatternLocal(
             SemanticModel model,
             IdentifierNameSyntax reference
-        ) {
+        )
+        {
             var symbol = model.GetSymbolInfo(reference).Symbol;
 
             if (symbol.Kind == SymbolKind.Local)
@@ -316,7 +330,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
             SemanticModel model,
             SingleVariableDesignationSyntax decl,
             params IdentifierNameSyntax[] references
-        ) {
+        )
+        {
             VerifyModelForDeclarationField(model, decl, false, references);
         }
 
@@ -324,7 +339,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
             SemanticModel model,
             SingleVariableDesignationSyntax decl,
             params IdentifierNameSyntax[] references
-        ) {
+        )
+        {
             VerifyModelForDeclarationField(model, decl, true, references);
         }
 
@@ -333,7 +349,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
             SingleVariableDesignationSyntax designation,
             bool duplicate,
             params IdentifierNameSyntax[] references
-        ) {
+        )
+        {
             var symbol = model.GetDeclaredSymbol(designation);
             Assert.Equal(designation.Identifier.ValueText, symbol.Name);
             Assert.Equal(SymbolKind.Field, symbol.Kind);
@@ -492,7 +509,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
 
         protected static void AssertContainedInDeclaratorArguments(
             SingleVariableDesignationSyntax decl
-        ) {
+        )
+        {
             Assert.True(
                 decl.Ancestors()
                     .OfType<VariableDeclaratorSyntax>()
@@ -503,7 +521,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
 
         protected static void AssertContainedInDeclaratorArguments(
             params SingleVariableDesignationSyntax[] decls
-        ) {
+        )
+        {
             foreach (var decl in decls)
             {
                 AssertContainedInDeclaratorArguments(decl);
@@ -514,7 +533,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
             SemanticModel model,
             SingleVariableDesignationSyntax designation,
             params IdentifierNameSyntax[] references
-        ) {
+        )
+        {
             Assert.Null(model.GetDeclaredSymbol(designation));
             var identifierText = designation.Identifier.ValueText;
             Assert.False(model.LookupSymbols(designation.SpanStart, name: identifierText).Any());
@@ -558,7 +578,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
         protected static void VerifyModelNotSupported(
             SemanticModel model,
             params IdentifierNameSyntax[] references
-        ) {
+        )
+        {
             foreach (var reference in references)
             {
                 Assert.Null(model.GetSymbolInfo(reference).Symbol);
@@ -582,7 +603,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
         protected CSharpCompilation CreatePatternCompilation(
             string source,
             CSharpCompilationOptions options = null
-        ) {
+        )
+        {
             return CreateCompilation(
                 new[] { source, _iTupleSource },
                 options: options ?? TestOptions.DebugExe,

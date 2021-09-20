@@ -33,7 +33,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation
             ITextUndoHistoryRegistry undoHistoryRegistry,
             SVsServiceProvider serviceProvider,
             Lazy<VisualStudioWorkspace> workspace
-        ) {
+        )
+        {
             _singleton = new GlobalUndoService(
                 threadingContext,
                 undoHistoryRegistry,
@@ -58,7 +59,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation
                 ITextUndoHistoryRegistry undoHistoryRegistry,
                 SVsServiceProvider serviceProvider,
                 Lazy<VisualStudioWorkspace> lazyVSWorkspace
-            ) {
+            )
+            {
                 _threadingContext = threadingContext;
                 _undoHistoryRegistry = undoHistoryRegistry;
                 _undoManager = (IVsLinkedUndoTransactionManager)serviceProvider.GetService(
@@ -76,7 +78,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation
             public IWorkspaceGlobalUndoTransaction OpenGlobalUndoTransaction(
                 Workspace workspace,
                 string description
-            ) {
+            )
+            {
                 if (!CanUndo(workspace))
                 {
                     throw new ArgumentException(

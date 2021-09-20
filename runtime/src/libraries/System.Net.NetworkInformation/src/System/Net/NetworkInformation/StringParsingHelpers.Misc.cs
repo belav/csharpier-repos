@@ -25,7 +25,8 @@ namespace System.Net.NetworkInformation
                 if (
                     file.Name != NetworkFiles.AllNetworkInterfaceFileName
                     && file.Name != NetworkFiles.DefaultNetworkInterfaceFileName
-                ) {
+                )
+                {
                     interfacesCount++;
                 }
             }

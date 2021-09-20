@@ -21,7 +21,8 @@ namespace Microsoft.AspNetCore.Mvc.ModelBinding.Metadata
         public ValidationMetadataProviderContext(
             ModelMetadataIdentity key,
             ModelAttributes attributes
-        ) {
+        )
+        {
             if (attributes == null)
             {
                 throw new ArgumentNullException(nameof(attributes));

@@ -29,7 +29,8 @@ namespace Microsoft.Extensions.Logging.Generators
             if (
                 context.SyntaxReceiver is not SyntaxReceiver receiver
                 || receiver.ClassDeclarations.Count == 0
-            ) {
+            )
+            {
                 // nothing to do yet
                 return;
             }

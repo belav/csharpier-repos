@@ -24,17 +24,19 @@ namespace Microsoft.CodeAnalysis.UseConditionalExpression
             EnforceOnBuild enforceOnBuild,
             LocalizableResourceString message,
             PerLanguageOption2<CodeStyleOption2<bool>> option
-        ) : base(
-            descriptorId,
-            enforceOnBuild,
-            option,
-            new LocalizableResourceString(
-                nameof(AnalyzersResources.Convert_to_conditional_expression),
-                AnalyzersResources.ResourceManager,
-                typeof(AnalyzersResources)
-            ),
-            message
-        ) {
+        )
+            : base(
+                descriptorId,
+                enforceOnBuild,
+                option,
+                new LocalizableResourceString(
+                    nameof(AnalyzersResources.Convert_to_conditional_expression),
+                    AnalyzersResources.ResourceManager,
+                    typeof(AnalyzersResources)
+                ),
+                message
+            )
+        {
             _option = option;
         }
 

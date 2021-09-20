@@ -50,7 +50,8 @@ namespace System.Net.Security
 
         public static byte[] ConvertAlpnProtocolListToByteArray(
             List<SslApplicationProtocol> protocols
-        ) {
+        )
+        {
             return Interop.Sec_Application_Protocols.ToByteArray(protocols);
         }
 
@@ -60,7 +61,8 @@ namespace System.Net.Security
             ReadOnlySpan<byte> inputBuffer,
             ref byte[]? outputBuffer,
             SslAuthenticationOptions sslAuthenticationOptions
-        ) {
+        )
+        {
             Interop.SspiCli.ContextFlags unusedAttributes = default;
 
             InputSecurityBuffers inputBuffers = default;
@@ -74,7 +76,8 @@ namespace System.Net.Security
             if (
                 sslAuthenticationOptions.ApplicationProtocols != null
                 && sslAuthenticationOptions.ApplicationProtocols.Count != 0
-            ) {
+            )
+            {
                 byte[] alpnBytes = ConvertAlpnProtocolListToByteArray(
                     sslAuthenticationOptions.ApplicationProtocols
                 );
@@ -115,7 +118,8 @@ namespace System.Net.Security
             ReadOnlySpan<byte> inputBuffer,
             ref byte[]? outputBuffer,
             SslAuthenticationOptions sslAuthenticationOptions
-        ) {
+        )
+        {
             Interop.SspiCli.ContextFlags unusedAttributes = default;
 
             InputSecurityBuffers inputBuffers = default;
@@ -128,7 +132,8 @@ namespace System.Net.Security
             if (
                 sslAuthenticationOptions.ApplicationProtocols != null
                 && sslAuthenticationOptions.ApplicationProtocols.Count != 0
-            ) {
+            )
+            {
                 byte[] alpnBytes = ConvertAlpnProtocolListToByteArray(
                     sslAuthenticationOptions.ApplicationProtocols
                 );
@@ -163,7 +168,8 @@ namespace System.Net.Security
             SslProtocols protocols,
             EncryptionPolicy policy,
             bool isServer
-        ) {
+        )
+        {
             // New crypto API supports TLS1.3 but it does not allow to force NULL encryption.
             return !UseNewCryptoApi || policy == EncryptionPolicy.NoEncryption
               ? AcquireCredentialsHandleSchannelCred(
@@ -187,7 +193,8 @@ namespace System.Net.Security
             SslProtocols protocols,
             EncryptionPolicy policy,
             bool isServer
-        ) {
+        )
+        {
             int protocolFlags = GetProtocolFlagsFromSslProtocols(protocols, isServer);
             Interop.SspiCli.SCHANNEL_CRED.Flags flags;
             Interop.SspiCli.CredentialUse direction;
@@ -211,7 +218,8 @@ namespace System.Net.Security
                     )
                     && (policy != EncryptionPolicy.AllowNoEncryption)
                     && (policy != EncryptionPolicy.NoEncryption)
-                ) {
+                )
+                {
                     flags |= Interop.SspiCli.SCHANNEL_CRED.Flags.SCH_USE_STRONG_CRYPTO;
                 }
             }
@@ -248,7 +256,8 @@ namespace System.Net.Security
             SslProtocols protocols,
             EncryptionPolicy policy,
             bool isServer
-        ) {
+        )
+        {
             int protocolFlags = GetProtocolFlagsFromSslProtocols(protocols, isServer);
             Interop.SspiCli.SCH_CREDENTIALS.Flags flags;
             Interop.SspiCli.CredentialUse direction;
@@ -334,7 +343,8 @@ namespace System.Net.Security
                 && alpnContext.ProtoNegoExt == Interop.ApplicationProtocolNegotiationExt.ALPN
                 && alpnContext.ProtoNegoStatus
                     == Interop.ApplicationProtocolNegotiationStatus.Success
-            ) {
+            )
+            {
                 return alpnContext.Protocol;
             }
 
@@ -348,7 +358,8 @@ namespace System.Net.Security
             int trailerSize,
             ref byte[] output,
             out int resultSize
-        ) {
+        )
+        {
             // Ensure that there is sufficient space for the message output.
             int bufferSizeNeeded = checked(input.Length + headerSize + trailerSize);
             if (output == null || output.Length < bufferSizeNeeded)
@@ -428,7 +439,8 @@ namespace System.Net.Security
             byte[] buffer,
             ref int offset,
             ref int count
-        ) {
+        )
+        {
             const int NumSecBuffers = 4; // data + empty + empty + empty
             fixed (byte* bufferPtr = buffer)
             {
@@ -475,7 +487,8 @@ namespace System.Net.Security
                             errorCode != Interop.SECURITY_STATUS.OK
                             && unmanagedBuffer[i].BufferType == SecurityBufferType.SECBUFFER_EXTRA
                         )
-                    ) {
+                    )
+                    {
                         offset = (int)((byte*)unmanagedBuffer[i].pvBuffer - bufferPtr);
                         count = unmanagedBuffer[i].cbBuffer;
 
@@ -500,7 +513,8 @@ namespace System.Net.Security
             SafeDeleteContext? securityContext,
             TlsAlertType alertType,
             TlsAlertMessage alertMessage
-        ) {
+        )
+        {
             var alertToken = new Interop.SChannel.SCHANNEL_ALERT_TOKEN
             {
                 dwTokenType = Interop.SChannel.SCHANNEL_ALERT,
@@ -532,7 +546,8 @@ namespace System.Net.Security
         public static SecurityStatusPal ApplyShutdownToken(
             ref SafeFreeCredentials? credentialsHandle,
             SafeDeleteContext? securityContext
-        ) {
+        )
+        {
             var securityBuffer = new SecurityBuffer(
                 s_schannelShutdownBytes,
                 SecurityBufferType.SECBUFFER_TOKEN
@@ -553,7 +568,8 @@ namespace System.Net.Security
         public static SafeFreeContextBufferChannelBinding? QueryContextChannelBinding(
             SafeDeleteContext securityContext,
             ChannelBindingKind attribute
-        ) {
+        )
+        {
             return SSPIWrapper.QueryContextChannelBinding(
                 GlobalSSPI.SSPISecureChannel,
                 securityContext,
@@ -564,7 +580,8 @@ namespace System.Net.Security
         public static void QueryContextStreamSizes(
             SafeDeleteContext securityContext,
             out StreamSizes streamSizes
-        ) {
+        )
+        {
             SecPkgContext_StreamSizes interopStreamSizes = default;
             bool success = SSPIWrapper.QueryBlittableContextAttributes(
                 GlobalSSPI.SSPISecureChannel,
@@ -579,7 +596,8 @@ namespace System.Net.Security
         public static void QueryContextConnectionInfo(
             SafeDeleteContext securityContext,
             out SslConnectionInfo connectionInfo
-        ) {
+        )
+        {
             SecPkgContext_ConnectionInfo interopConnectionInfo = default;
             bool success = SSPIWrapper.QueryBlittableContextAttributes(
                 GlobalSSPI.SSPISecureChannel,
@@ -626,7 +644,8 @@ namespace System.Net.Security
             Interop.SspiCli.SCHANNEL_CRED.Flags flags,
             int protocols,
             EncryptionPolicy policy
-        ) {
+        )
+        {
             var credential = new Interop.SspiCli.SCHANNEL_CRED()
             {
                 hRootStore = IntPtr.Zero,
@@ -679,7 +698,8 @@ namespace System.Net.Security
         private static unsafe SafeFreeCredentials AcquireCredentialsHandle(
             Interop.SspiCli.CredentialUse credUsage,
             Interop.SspiCli.SCHANNEL_CRED* secureCredential
-        ) {
+        )
+        {
             // First try without impersonation, if it fails, then try the process account.
             // I.E. We don't know which account the certificate context was created under.
             try
@@ -714,7 +734,8 @@ namespace System.Net.Security
         private static unsafe SafeFreeCredentials AcquireCredentialsHandle(
             Interop.SspiCli.CredentialUse credUsage,
             Interop.SspiCli.SCH_CREDENTIALS* secureCredential
-        ) {
+        )
+        {
             // First try without impersonation, if it fails, then try the process account.
             // I.E. We don't know which account the certificate context was created under.
             try

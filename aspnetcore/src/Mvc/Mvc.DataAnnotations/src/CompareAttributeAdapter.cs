@@ -74,7 +74,8 @@ namespace Microsoft.AspNetCore.Mvc.DataAnnotations
                     !string.IsNullOrEmpty(attribute.ErrorMessage)
                     || !string.IsNullOrEmpty(attribute.ErrorMessageResourceName)
                     || attribute.ErrorMessageResourceType != null
-                ) {
+                )
+                {
                     ErrorMessage = attribute.ErrorMessage;
                     ErrorMessageResourceName = attribute.ErrorMessageResourceName;
                     ErrorMessageResourceType = attribute.ErrorMessageResourceType;
@@ -95,7 +96,8 @@ namespace Microsoft.AspNetCore.Mvc.DataAnnotations
             public static string GetOtherPropertyDisplayName(
                 ModelValidationContextBase validationContext,
                 CompareAttribute attribute
-            ) {
+            )
+            {
                 // The System.ComponentModel.DataAnnotations.CompareAttribute doesn't populate the
                 // OtherPropertyDisplayName until after IsValid() is called. Therefore, at the time we get
                 // the error message for client validation, the display name is not populated and won't be used.
@@ -103,7 +105,8 @@ namespace Microsoft.AspNetCore.Mvc.DataAnnotations
                 if (
                     otherPropertyDisplayName == null
                     && validationContext.ModelMetadata.ContainerType != null
-                ) {
+                )
+                {
                     var otherProperty = validationContext.MetadataProvider.GetMetadataForProperty(
                         validationContext.ModelMetadata.ContainerType,
                         attribute.OtherProperty

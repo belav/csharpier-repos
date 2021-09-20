@@ -90,7 +90,8 @@ namespace System.Drawing.Imaging.Tests
                     ImageAttributes clone = Assert.IsAssignableFrom<ImageAttributes>(
                         imageAttr.Clone()
                     )
-                ) {
+                )
+                {
                     bitmap.SetPixel(0, 0, _actualYellow);
                     graphics.DrawImage(
                         bitmap,
@@ -421,7 +422,8 @@ namespace System.Drawing.Imaging.Tests
         [MemberData(nameof(ColorAdjustType_InvalidTypes_TestData))]
         public void SetColorMatrix_InvalidTypes_ThrowsInvalidEnumArgumentException(
             ColorAdjustType type
-        ) {
+        )
+        {
             using (var imageAttr = new ImageAttributes())
             {
                 AssertExtensions.Throws<ArgumentException>(
@@ -584,7 +586,8 @@ namespace System.Drawing.Imaging.Tests
         [MemberData(nameof(ColorAdjustType_InvalidTypes_TestData))]
         public void ClearColorMatrix_InvalidTypes_ThrowsInvalidEnumArgumentException(
             ColorAdjustType type
-        ) {
+        )
+        {
             using (var imageAttr = new ImageAttributes())
             {
                 AssertExtensions.Throws<ArgumentException>(
@@ -648,7 +651,8 @@ namespace System.Drawing.Imaging.Tests
             ColorMatrixFlag flag,
             Color grayShade,
             Color expecedGrayShade
-        ) {
+        )
+        {
             using (var brush = new SolidBrush(_actualGreen))
             using (var bitmap = new Bitmap(_rectangle.Width, _rectangle.Height))
             using (var graphics = Graphics.FromImage(bitmap))
@@ -725,7 +729,8 @@ namespace System.Drawing.Imaging.Tests
             ColorAdjustType type,
             Color grayShade,
             Color expecedGrayShade
-        ) {
+        )
+        {
             using (var brush = new SolidBrush(_actualGreen))
             using (var bitmap = new Bitmap(_rectangle.Width, _rectangle.Height))
             using (var graphics = Graphics.FromImage(bitmap))
@@ -818,7 +823,8 @@ namespace System.Drawing.Imaging.Tests
             ColorMatrixFlag flag,
             ColorAdjustType type,
             Color grayShade
-        ) {
+        )
+        {
             using (var brush = new SolidBrush(_actualGreen))
             using (var bitmap = new Bitmap(_rectangle.Width, _rectangle.Height))
             using (var graphics = Graphics.FromImage(bitmap))
@@ -927,7 +933,8 @@ namespace System.Drawing.Imaging.Tests
         [MemberData(nameof(ColorAdjustType_InvalidTypes_TestData))]
         public void SetColorMatrices_InvalidTypes_ThrowsInvalidEnumArgumentException(
             ColorAdjustType type
-        ) {
+        )
+        {
             using (var imageAttr = new ImageAttributes())
             {
                 AssertExtensions.Throws<ArgumentException>(
@@ -1735,7 +1742,8 @@ namespace System.Drawing.Imaging.Tests
             ColorChannelFlag flag,
             Color actualColor,
             Color expectedColor
-        ) {
+        )
+        {
             using (var bitmap = new Bitmap(_rectangle.Width, _rectangle.Height))
             using (var graphics = Graphics.FromImage(bitmap))
             using (var imageAttr = new ImageAttributes())
@@ -1825,7 +1833,8 @@ namespace System.Drawing.Imaging.Tests
             ColorAdjustType type,
             Color actualColor,
             Color expectedColor
-        ) {
+        )
+        {
             using (var bitmap = new Bitmap(_rectangle.Width, _rectangle.Height))
             using (var graphics = Graphics.FromImage(bitmap))
             using (var imageAttr = new ImageAttributes())
@@ -1930,7 +1939,8 @@ namespace System.Drawing.Imaging.Tests
             ColorChannelFlag flag,
             ColorAdjustType type,
             Color color
-        ) {
+        )
+        {
             using (var bitmap = new Bitmap(_rectangle.Width, _rectangle.Height))
             using (var graphics = Graphics.FromImage(bitmap))
             using (var imageAttr = new ImageAttributes())
@@ -2223,7 +2233,8 @@ namespace System.Drawing.Imaging.Tests
         [MemberData(nameof(ColorAdjustType_InvalidTypes_TestData))]
         public void SetOutputChannelColorProfile_InvalidTypes_ThrowsArgumentException(
             ColorAdjustType type
-        ) {
+        )
+        {
             using (var imageAttr = new ImageAttributes())
             {
                 AssertExtensions.Throws<ArgumentException>(
@@ -2315,7 +2326,8 @@ namespace System.Drawing.Imaging.Tests
         [MemberData(nameof(ColorAdjustType_InvalidTypes_TestData))]
         public void ClearOutputChannelColorProfile_InvalidTypes_ThrowsArgumentException(
             ColorAdjustType type
-        ) {
+        )
+        {
             using (var imageAttr = new ImageAttributes())
             {
                 AssertExtensions.Throws<ArgumentException>(

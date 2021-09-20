@@ -27,7 +27,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Emit
             ICollection<MethodDefinitionHandle> updatedMethods,
             CompilationTestData? testData,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var diagnostics = DiagnosticBag.GetInstance();
 
             var emitOptions = EmitOptions.Default.WithDebugInformationFormat(
@@ -92,7 +93,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Emit
                     filterOpt: s => changes.RequiresCompilation(s.GetISymbol()),
                     cancellationToken: cancellationToken
                 )
-            ) {
+            )
+            {
                 // Map the definitions from the previous compilation to the current compilation.
                 // This must be done after compiling above since synthesized definitions
                 // (generated when compiling method bodies) may be required.
@@ -131,7 +133,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Emit
         private static EmitBaseline MapToCompilation(
             CSharpCompilation compilation,
             PEDeltaAssemblyBuilder moduleBeingBuilt
-        ) {
+        )
+        {
             var previousGeneration = moduleBeingBuilt.PreviousGeneration;
             RoslynDebug.Assert(previousGeneration.Compilation != compilation);
 

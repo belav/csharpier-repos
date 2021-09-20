@@ -144,7 +144,8 @@ namespace Microsoft.AspNetCore.Http.Extensions.Tests
                 long offset,
                 long? length,
                 CancellationToken cancellation
-            ) {
+            )
+            {
                 Name = path;
                 Offset = offset;
                 Length = length;

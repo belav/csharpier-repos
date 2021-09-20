@@ -17,7 +17,8 @@ namespace System.Dynamic.Utils
         internal static Delegate CreateObjectArrayDelegate(
             Type delegateType,
             Func<object?[], object?> handler
-        ) {
+        )
+        {
 #if !FEATURE_DYNAMIC_DELEGATE
             return CreateObjectArrayDelegateRefEmit(delegateType, handler);
 #else
@@ -72,7 +73,8 @@ namespace System.Dynamic.Utils
             Func<object?[], object> handler,
             T1 t1,
             T2 t2
-        ) {
+        )
+        {
             return (TReturn)handler(new object?[] { t1, t2 });
         }
 
@@ -110,7 +112,8 @@ namespace System.Dynamic.Utils
             Type returnType,
             bool hasReturnValue,
             ParameterInfo[] parameters
-        ) {
+        )
+        {
             try
             {
                 if (parameters.Length > 2)
@@ -130,7 +133,8 @@ namespace System.Dynamic.Utils
                         parameterType.IsByRefLike
                         || parameterType.IsByRef
                         || parameterType.IsPointer
-                    ) {
+                    )
+                    {
                         return null; // Don't use C# thunks for types that cannot be generic arguments
                     }
                 }
@@ -188,7 +192,8 @@ namespace System.Dynamic.Utils
         private static Delegate CreateObjectArrayDelegateRefEmit(
             Type delegateType,
             Func<object?[], object?> handler
-        ) {
+        )
+        {
             if (!s_thunks.TryGetValue(delegateType, out MethodInfo? thunkMethod))
             {
                 MethodInfo delegateInvokeMethod = delegateType.GetInvokeMethod();

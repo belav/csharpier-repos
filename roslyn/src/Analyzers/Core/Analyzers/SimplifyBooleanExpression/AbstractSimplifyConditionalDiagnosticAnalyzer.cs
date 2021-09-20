@@ -111,7 +111,8 @@ namespace Microsoft.CodeAnalysis.SimplifyBooleanExpression
                 !IsSimpleBooleanType(condition)
                 || !IsSimpleBooleanType(whenTrue)
                 || !IsSimpleBooleanType(whenFalse)
-            ) {
+            )
+            {
                 return;
             }
 

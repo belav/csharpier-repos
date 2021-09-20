@@ -241,13 +241,15 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
 
         internal sealed override bool IsMetadataNewSlot(
             bool ignoreInterfaceImplementationChanges = false
-        ) {
+        )
+        {
             return false;
         }
 
         internal sealed override bool IsMetadataVirtual(
             bool ignoreInterfaceImplementationChanges = false
-        ) {
+        )
+        {
             return false;
         }
 
@@ -274,7 +276,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
         internal sealed override int CalculateLocalSyntaxOffset(
             int localPosition,
             SyntaxTree localTree
-        ) {
+        )
+        {
             var containingType = (SourceMemberContainerTypeSymbol)this.ContainingType;
             return containingType.CalculateSyntaxOffsetInSynthesizedConstructor(
                 localPosition,
@@ -300,7 +303,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
         protected void GenerateMethodBodyCore(
             TypeCompilationState compilationState,
             BindingDiagnosticBag diagnostics
-        ) {
+        )
+        {
             var factory = new SyntheticBoundNodeFactory(
                 this,
                 this.GetNonNullSyntaxNode(),
@@ -338,7 +342,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             SyntheticBoundNodeFactory factory,
             ArrayBuilder<BoundStatement> statements,
             BindingDiagnosticBag diagnostics
-        ) {
+        )
+        {
             // overridden in a derived class to add extra statements to the body of the generated constructor
         }
     }

@@ -12,7 +12,8 @@ namespace Microsoft.CodeAnalysis.Formatting
             SyntaxTriviaList triviaList,
             int startIndex,
             int endIndex
-        ) {
+        )
+        {
             if (startIndex > endIndex)
                 return default;
 

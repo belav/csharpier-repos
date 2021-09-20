@@ -48,7 +48,8 @@ namespace System.Xml.Schema
             XmlValidatingReaderImpl reader,
             XmlSchemaCollection? schemaCollection,
             IValidationEventHandling? eventHandling
-        ) {
+        )
+        {
             Debug.Assert(
                 schemaCollection == null || schemaCollection.NameTable == reader.NameTable
             );
@@ -343,7 +344,8 @@ namespace System.Xml.Schema
             string? baseUri,
             int lineNumber,
             int linePosition
-        ) {
+        )
+        {
             SchemaEntity? en;
             XmlSchemaException? e = null;
             if (!sinfo.GeneralEntities.TryGetValue(new XmlQualifiedName(name), out en))
@@ -388,7 +390,8 @@ namespace System.Xml.Schema
             string baseUriStr,
             int lineNumber,
             int linePosition
-        ) {
+        )
+        {
             SchemaEntity? en;
             string? errorResId = null;
             if (!sinfo.GeneralEntities.TryGetValue(new XmlQualifiedName(name), out en))
@@ -427,7 +430,8 @@ namespace System.Xml.Schema
             XmlSchemaCollection schemaCollection,
             IValidationEventHandling eventHandling,
             bool processIdentityConstraints
-        ) {
+        )
+        {
             switch (valType)
             {
                 case ValidationType.XDR:

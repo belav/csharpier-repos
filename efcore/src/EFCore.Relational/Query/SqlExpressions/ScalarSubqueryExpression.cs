@@ -28,7 +28,8 @@ namespace Microsoft.EntityFrameworkCore.Query.SqlExpressions
             : base(
                 Verify(subquery).Projection[0].Type,
                 subquery.Projection[0].Expression.TypeMapping
-            ) {
+            )
+        {
             Check.NotNull(subquery, nameof(subquery));
 
             Subquery = subquery;

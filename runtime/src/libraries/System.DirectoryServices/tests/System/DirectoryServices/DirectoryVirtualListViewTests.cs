@@ -59,7 +59,8 @@ namespace System.DirectoryServices.Tests
             int beforeCount,
             int afterCount,
             string target
-        ) {
+        )
+        {
             var listView = new DirectoryVirtualListView(beforeCount, afterCount, target);
             Assert.Equal(afterCount, listView.AfterCount);
             Assert.Equal(0, listView.ApproximateTotal);
@@ -83,7 +84,8 @@ namespace System.DirectoryServices.Tests
             int afterCount,
             int offset,
             DirectoryVirtualListViewContext context
-        ) {
+        )
+        {
             var listView = new DirectoryVirtualListView(beforeCount, afterCount, offset, context);
             Assert.Equal(afterCount, listView.AfterCount);
             Assert.Equal(0, listView.ApproximateTotal);
@@ -108,7 +110,8 @@ namespace System.DirectoryServices.Tests
             int afterCount,
             string target,
             DirectoryVirtualListViewContext context
-        ) {
+        )
+        {
             var listView = new DirectoryVirtualListView(beforeCount, afterCount, target, context);
             Assert.Equal(afterCount, listView.AfterCount);
             Assert.Equal(0, listView.ApproximateTotal);
@@ -233,7 +236,8 @@ namespace System.DirectoryServices.Tests
             int approximateTotal,
             int targetPercentage,
             int expectedOffset
-        ) {
+        )
+        {
             var listView = new DirectoryVirtualListView
             {
                 ApproximateTotal = approximateTotal,

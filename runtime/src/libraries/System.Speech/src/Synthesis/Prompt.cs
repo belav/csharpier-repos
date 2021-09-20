@@ -57,7 +57,8 @@ namespace System.Speech.Synthesis
                             out baseUri,
                             out localPath
                         )
-                    ) {
+                    )
+                    {
                         try
                         {
                             using (TextReader reader = new StreamReader(stream))

@@ -19,7 +19,8 @@ namespace Microsoft.CodeAnalysis.Remote
         public static void CancelOnAbnormalCompletion(
             this CancellationTokenSource cancellationTokenSource,
             Task task
-        ) {
+        )
+        {
             if (cancellationTokenSource is null)
                 throw new ArgumentNullException(nameof(cancellationTokenSource));
 

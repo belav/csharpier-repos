@@ -24,10 +24,8 @@ namespace Microsoft.CodeAnalysis.CSharp
     {
         private class TypeInferrer : AbstractTypeInferrer
         {
-            internal TypeInferrer(
-                SemanticModel semanticModel,
-                CancellationToken cancellationToken
-            ) : base(semanticModel, cancellationToken) { }
+            internal TypeInferrer(SemanticModel semanticModel, CancellationToken cancellationToken)
+                : base(semanticModel, cancellationToken) { }
 
             protected override bool IsUnusableType(ITypeSymbol otherSideType)
             {
@@ -38,7 +36,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             protected override IEnumerable<TypeInferenceInfo> GetTypes_DoNotCallDirectly(
                 SyntaxNode node,
                 bool objectAsDefault
-            ) {
+            )
+            {
                 var types = GetTypesSimple(node).Where(IsUsableTypeFunc);
                 if (types.Any())
                 {
@@ -53,7 +52,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                 out SyntaxToken operatorToken,
                 out ExpressionSyntax left,
                 out ExpressionSyntax right
-            ) {
+            )
+            {
                 if (node is BinaryExpressionSyntax binaryExpression)
                 {
                     operatorToken = binaryExpression.OperatorToken;
@@ -84,7 +84,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                         out var left,
                         out var right
                     )
-                ) {
+                )
+                {
                     var types = InferTypeInBinaryOrAssignmentExpression(
                             (ExpressionSyntax)node,
                             operatorToken,
@@ -152,7 +153,8 @@ namespace Microsoft.CodeAnalysis.CSharp
 
             protected override IEnumerable<TypeInferenceInfo> InferTypesWorker_DoNotCallDirectly(
                 SyntaxNode node
-            ) {
+            )
+            {
                 var expression = node as ExpressionSyntax;
                 if (expression != null)
                 {
@@ -259,7 +261,8 @@ namespace Microsoft.CodeAnalysis.CSharp
 
             protected override IEnumerable<TypeInferenceInfo> InferTypesWorker_DoNotCallDirectly(
                 int position
-            ) {
+            )
+            {
                 var syntaxTree = SemanticModel.SyntaxTree;
                 var token = syntaxTree.FindTokenOnLeftOfPosition(position, CancellationToken);
                 token = token.GetPreviousTokenIfTouchingWord(position);
@@ -383,7 +386,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             private IEnumerable<TypeInferenceInfo> InferTypeInAnonymousObjectCreation(
                 AnonymousObjectCreationExpressionSyntax expression,
                 SyntaxToken previousToken
-            ) {
+            )
+            {
                 if (previousToken == expression.NewKeyword)
                 {
                     return InferTypes(expression.SpanStart);
@@ -395,13 +399,15 @@ namespace Microsoft.CodeAnalysis.CSharp
             private IEnumerable<TypeInferenceInfo> InferTypeInArgument(
                 ArgumentSyntax argument,
                 SyntaxToken? previousToken = null
-            ) {
+            )
+            {
                 if (previousToken.HasValue)
                 {
                     // If we have a position, then it must be after the colon in a named argument.
                     if (
                         argument.NameColon == null || argument.NameColon.ColonToken != previousToken
-                    ) {
+                    )
+                    {
                         return SpecializedCollections.EmptyEnumerable<TypeInferenceInfo>();
                     }
                 }
@@ -419,7 +425,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                             SyntaxKind.InvocationExpression,
                             out InvocationExpressionSyntax invocation
                         )
-                    ) {
+                    )
+                    {
                         var index = invocation.ArgumentList.Arguments.IndexOf(argument);
                         return InferTypeInInvocationExpression(invocation, index, argument);
                     }
@@ -429,7 +436,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                             SyntaxKind.ObjectCreationExpression,
                             out ObjectCreationExpressionSyntax creation
                         )
-                    ) {
+                    )
+                    {
                         // new Outer(Goo());
                         //
                         // new Outer(a: Goo());
@@ -444,7 +452,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                             SyntaxKind.ElementAccessExpression,
                             out ElementAccessExpressionSyntax elementAccess
                         )
-                    ) {
+                    )
+                    {
                         // Outer[Goo()];
                         //
                         // Outer[a: Goo()];
@@ -459,7 +468,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                             SyntaxKind.TupleExpression,
                             out TupleExpressionSyntax tupleExpression
                         )
-                    ) {
+                    )
+                    {
                         return InferTypeInTupleExpression(tupleExpression, argument);
                     }
                 }
@@ -474,7 +484,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                         SyntaxKind.ObjectCreationExpression,
                         out ObjectCreationExpressionSyntax objectCreation
                     )
-                ) {
+                )
+                {
                     var types = GetTypes(objectCreation).Select(t => t.InferredType);
 
                     if (types.Any(t => t is INamedTypeSymbol))
@@ -490,7 +501,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             private IEnumerable<TypeInferenceInfo> InferTypeInTupleExpression(
                 TupleExpressionSyntax tupleExpression,
                 SyntaxToken previousToken
-            ) {
+            )
+            {
                 if (previousToken == tupleExpression.OpenParenToken)
                     return InferTypeInTupleExpression(
                         tupleExpression,
@@ -513,7 +525,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             private IEnumerable<TypeInferenceInfo> InferTypeInTupleExpression(
                 TupleExpressionSyntax tupleExpression,
                 ArgumentSyntax argument
-            ) {
+            )
+            {
                 var index = tupleExpression.Arguments.IndexOf(argument);
                 var parentTypes = InferTypes(tupleExpression);
 
@@ -530,7 +543,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             private IEnumerable<TypeInferenceInfo> InferTypeInAttributeArgument(
                 AttributeArgumentSyntax argument,
                 SyntaxToken? previousToken = null
-            ) {
+            )
+            {
                 if (previousToken.HasValue)
                 {
                     // If we have a position, then it must be after the colon or equals in an argument.
@@ -538,7 +552,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                         argument.NameColon == null
                         || argument.NameColon.ColonToken != previousToken
                         || argument.NameEquals.EqualsToken != previousToken
-                    ) {
+                    )
+                    {
                         return SpecializedCollections.EmptyEnumerable<TypeInferenceInfo>();
                     }
                 }
@@ -559,7 +574,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                 ConstructorInitializerSyntax initializer,
                 int index,
                 ArgumentSyntax argument = null
-            ) {
+            )
+            {
                 var info = SemanticModel.GetSymbolInfo(initializer, CancellationToken);
                 var methods = info.GetBestOrAllSymbols().OfType<IMethodSymbol>();
                 return InferTypeInArgument(
@@ -573,7 +589,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             private IEnumerable<TypeInferenceInfo> InferTypeInObjectCreationExpression(
                 BaseObjectCreationExpressionSyntax expression,
                 SyntaxToken previousToken
-            ) {
+            )
+            {
                 // A couple of broken code scenarios where the new keyword in objectcreationexpression
                 // appears to be a part of a subsequent assignment.  For example:
                 //
@@ -611,7 +628,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                             SyntaxKind.OpenParenToken,
                             SyntaxKind.CommaToken
                         )
-                ) {
+                )
+                {
                     return InferTypes(previousToken.SpanStart);
                 }
 
@@ -622,7 +640,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                 BaseObjectCreationExpressionSyntax creation,
                 int index,
                 ArgumentSyntax argumentOpt = null
-            ) {
+            )
+            {
                 var info = SemanticModel.GetTypeInfo(creation, CancellationToken);
 
                 if (!(info.Type is INamedTypeSymbol type))
@@ -654,7 +673,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                 InvocationExpressionSyntax invocation,
                 int index,
                 ArgumentSyntax argumentOpt = null
-            ) {
+            )
+            {
                 // Check all the methods that have at least enough arguments to support
                 // being called with argument at this position.  Note: if they're calling an
                 // extension method then it will need one more argument in order for us to
@@ -672,7 +692,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                     || argumentOpt == null
                         && info.Symbol is IMethodSymbol method
                         && method.Parameters.All(p => p.IsOptional || p.IsParams)
-                ) {
+                )
+                {
                     var memberGroupMethods = SemanticModel.GetMemberGroup(
                             invocation.Expression,
                             CancellationToken
@@ -706,12 +727,14 @@ namespace Microsoft.CodeAnalysis.CSharp
             private IEnumerable<TypeInferenceInfo> InferTypeInArgumentList(
                 ArgumentListSyntax argumentList,
                 SyntaxToken previousToken
-            ) {
+            )
+            {
                 // Has to follow the ( or a ,
                 if (
                     previousToken != argumentList.OpenParenToken
                     && previousToken.Kind() != SyntaxKind.CommaToken
-                ) {
+                )
+                {
                     return SpecializedCollections.EmptyEnumerable<TypeInferenceInfo>();
                 }
 
@@ -742,12 +765,14 @@ namespace Microsoft.CodeAnalysis.CSharp
             private IEnumerable<TypeInferenceInfo> InferTypeInAttributeArgumentList(
                 AttributeArgumentListSyntax attributeArgumentList,
                 SyntaxToken previousToken
-            ) {
+            )
+            {
                 // Has to follow the ( or a ,
                 if (
                     previousToken != attributeArgumentList.OpenParenToken
                     && previousToken.Kind() != SyntaxKind.CommaToken
-                ) {
+                )
+                {
                     return SpecializedCollections.EmptyEnumerable<TypeInferenceInfo>();
                 }
 
@@ -764,7 +789,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                 AttributeSyntax attribute,
                 int index,
                 AttributeArgumentSyntax argumentOpt = null
-            ) {
+            )
+            {
                 var info = SemanticModel.GetSymbolInfo(attribute, CancellationToken);
                 var methods = info.GetBestOrAllSymbols().OfType<IMethodSymbol>();
                 return InferTypeInAttributeArgument(index, methods, argumentOpt);
@@ -774,7 +800,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                 ElementAccessExpressionSyntax elementAccess,
                 int index,
                 ArgumentSyntax argumentOpt = null
-            ) {
+            )
+            {
                 var info = SemanticModel.GetTypeInfo(elementAccess.Expression, CancellationToken);
                 if (info.Type is INamedTypeSymbol type)
                 {
@@ -816,7 +843,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                 IEnumerable<IMethodSymbol> methods,
                 ArgumentSyntax argumentOpt,
                 InvocationExpressionSyntax parentInvocationExpressionToTypeInfer
-            ) {
+            )
+            {
                 if (parentInvocationExpressionToTypeInfer != null)
                 {
                     // We're trying to figure out the signature of a method we're an argument to.
@@ -851,7 +879,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             private IMethodSymbol Instantiate(
                 IMethodSymbol method,
                 IList<ITypeSymbol> invocationTypes
-            ) {
+            )
+            {
                 // No need to instantiate if this isn't a generic method.
                 if (method.TypeArguments.Length == 0)
                 {
@@ -901,7 +930,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             private Dictionary<ITypeParameterSymbol, ITypeSymbol> DetermineTypeParameterMapping(
                 ITypeSymbol inferredType,
                 ITypeSymbol returnType
-            ) {
+            )
+            {
                 var result = new Dictionary<ITypeParameterSymbol, ITypeSymbol>();
                 DetermineTypeParameterMapping(inferredType, returnType, result);
                 return result;
@@ -911,7 +941,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                 ITypeSymbol inferredType,
                 ITypeSymbol returnType,
                 Dictionary<ITypeParameterSymbol, ITypeSymbol> result
-            ) {
+            )
+            {
                 if (inferredType == null || returnType == null)
                 {
                     return;
@@ -957,7 +988,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                         if (
                             inferredNamedType.TypeArguments.Length
                             == returnNamedType.TypeArguments.Length
-                        ) {
+                        )
+                        {
                             for (int i = 0, n = inferredNamedType.TypeArguments.Length; i < n; i++)
                             {
                                 DetermineTypeParameterMapping(
@@ -975,7 +1007,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                 int index,
                 IEnumerable<ImmutableArray<IParameterSymbol>> parameterizedSymbols,
                 AttributeArgumentSyntax argumentOpt = null
-            ) {
+            )
+            {
                 if (argumentOpt != null && argumentOpt.NameEquals != null)
                 {
                     // [MyAttribute(Prop = ...
@@ -997,7 +1030,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                 int index,
                 IEnumerable<ImmutableArray<IParameterSymbol>> parameterizedSymbols,
                 ArgumentSyntax argumentOpt
-            ) {
+            )
+            {
                 var name =
                     argumentOpt != null && argumentOpt.NameColon != null
                         ? argumentOpt.NameColon.Name.Identifier.ValueText
@@ -1011,7 +1045,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                 IEnumerable<ImmutableArray<IParameterSymbol>> parameterizedSymbols,
                 string name,
                 RefKind refKind
-            ) {
+            )
+            {
                 // If the callsite has a named argument, then try to find a method overload that has a
                 // parameter with that name.  If we can find one, then return the type of that one.
                 if (name != null)
@@ -1051,11 +1086,13 @@ namespace Microsoft.CodeAnalysis.CSharp
             private IEnumerable<TypeInferenceInfo> InferTypeInArrayCreationExpression(
                 ArrayCreationExpressionSyntax arrayCreationExpression,
                 SyntaxToken? previousToken = null
-            ) {
+            )
+            {
                 if (
                     previousToken.HasValue
                     && previousToken.Value != arrayCreationExpression.NewKeyword
-                ) {
+                )
+                {
                     // Has to follow the 'new' keyword.
                     return SpecializedCollections.EmptyEnumerable<TypeInferenceInfo>();
                 }
@@ -1063,7 +1100,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                 if (
                     previousToken.HasValue
                     && previousToken.Value.GetPreviousToken().Kind() == SyntaxKind.EqualsToken
-                ) {
+                )
+                {
                     // We parsed an array creation but the token before `new` is `=`.
                     // This could be a case like:
                     //
@@ -1084,7 +1122,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             private IEnumerable<TypeInferenceInfo> InferTypeInArrayRankSpecifier(
                 ArrayRankSpecifierSyntax arrayRankSpecifier,
                 SyntaxToken? previousToken = null
-            ) {
+            )
+            {
                 // If we have a token, and it's not the open bracket or one of the commas, then no
                 // inference.
                 if (previousToken == arrayRankSpecifier.CloseBracketToken)
@@ -1098,7 +1137,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             private IEnumerable<TypeInferenceInfo> InferTypeInArrayType(
                 ArrayTypeSyntax arrayType,
                 SyntaxToken? previousToken = null
-            ) {
+            )
+            {
                 if (previousToken.HasValue)
                 {
                     // TODO(cyrusn): NYI.  Handle this appropriately if we need to.
@@ -1123,12 +1163,14 @@ namespace Microsoft.CodeAnalysis.CSharp
             private IEnumerable<TypeInferenceInfo> InferTypeInAttributeDeclaration(
                 AttributeListSyntax attributeDeclaration,
                 SyntaxToken? previousToken
-            ) {
+            )
+            {
                 // If we have a position, then it has to be after the open bracket.
                 if (
                     previousToken.HasValue
                     && previousToken.Value != attributeDeclaration.OpenBracketToken
-                ) {
+                )
+                {
                     return SpecializedCollections.EmptyEnumerable<TypeInferenceInfo>();
                 }
 
@@ -1138,12 +1180,14 @@ namespace Microsoft.CodeAnalysis.CSharp
             private IEnumerable<TypeInferenceInfo> InferTypeInAttributeTargetSpecifier(
                 AttributeTargetSpecifierSyntax attributeTargetSpecifier,
                 SyntaxToken? previousToken
-            ) {
+            )
+            {
                 // If we have a position, then it has to be after the colon.
                 if (
                     previousToken.HasValue
                     && previousToken.Value != attributeTargetSpecifier.ColonToken
-                ) {
+                )
+                {
                     return SpecializedCollections.EmptyEnumerable<TypeInferenceInfo>();
                 }
 
@@ -1153,12 +1197,14 @@ namespace Microsoft.CodeAnalysis.CSharp
             private IEnumerable<TypeInferenceInfo> InferTypeInBracketedArgumentList(
                 BracketedArgumentListSyntax bracketedArgumentList,
                 SyntaxToken previousToken
-            ) {
+            )
+            {
                 // Has to follow the [ or a ,
                 if (
                     previousToken != bracketedArgumentList.OpenBracketToken
                     && previousToken.Kind() != SyntaxKind.CommaToken
-                ) {
+                )
+                {
                     return SpecializedCollections.EmptyEnumerable<TypeInferenceInfo>();
                 }
 
@@ -1174,7 +1220,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             private static int GetArgumentListIndex(
                 BaseArgumentListSyntax argumentList,
                 SyntaxToken previousToken
-            ) {
+            )
+            {
                 if (previousToken == argumentList.GetOpenToken())
                 {
                     return 0;
@@ -1195,7 +1242,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             private static int GetArgumentListIndex(
                 AttributeArgumentListSyntax attributeArgumentList,
                 SyntaxToken previousToken
-            ) {
+            )
+            {
                 if (previousToken == attributeArgumentList.OpenParenToken)
                 {
                     return 0;
@@ -1221,7 +1269,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                 ExpressionSyntax right,
                 ExpressionSyntax expressionOpt = null,
                 SyntaxToken? previousToken = null
-            ) {
+            )
+            {
                 // If we got here through a token, then it must have actually been the binary
                 // operator's token.
                 Contract.ThrowIfTrue(
@@ -1259,7 +1308,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                 if (
                     operatorToken.Kind() == SyntaxKind.AmpersandAmpersandToken
                     || operatorToken.Kind() == SyntaxKind.BarBarToken
-                ) {
+                )
+                {
                     return CreateResult(SpecialType.System_Boolean);
                 }
 
@@ -1267,7 +1317,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                 if (
                     binop.Kind() == SyntaxKind.SimpleAssignmentExpression
                     && ((AssignmentExpressionSyntax)binop).IsDeconstruction()
-                ) {
+                )
+                {
                     return InferTypeInVariableComponentAssignment(left);
                 }
 
@@ -1303,7 +1354,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                     || operatorToken.Kind() == SyntaxKind.BarEqualsToken
                     || operatorToken.Kind() == SyntaxKind.CaretToken
                     || operatorToken.Kind() == SyntaxKind.CaretEqualsToken
-                ) {
+                )
+                {
                     var parentTypes = InferTypes(binop);
                     if (parentTypes.Any())
                     {
@@ -1325,7 +1377,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                                 parentType.InferredType.SpecialType == SpecialType.System_String
                                 || parentType.InferredType.TypeKind == TypeKind.Delegate
                         )
-                    ) {
+                    )
+                    {
                         return parentTypes.Where(
                             parentType =>
                                 parentType.InferredType.SpecialType == SpecialType.System_String
@@ -1378,7 +1431,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                 CastExpressionSyntax castExpression,
                 ExpressionSyntax expressionOpt = null,
                 SyntaxToken? previousToken = null
-            ) {
+            )
+            {
                 if (expressionOpt != null && castExpression.Expression != expressionOpt)
                 {
                     return SpecializedCollections.EmptyEnumerable<TypeInferenceInfo>();
@@ -1396,11 +1450,13 @@ namespace Microsoft.CodeAnalysis.CSharp
             private IEnumerable<TypeInferenceInfo> InferTypeInCatchDeclaration(
                 CatchDeclarationSyntax catchDeclaration,
                 SyntaxToken? previousToken = null
-            ) {
+            )
+            {
                 // If we have a position, it has to be after "catch("
                 if (
                     previousToken.HasValue && previousToken.Value != catchDeclaration.OpenParenToken
-                ) {
+                )
+                {
                     return SpecializedCollections.EmptyEnumerable<TypeInferenceInfo>();
                 }
 
@@ -1410,12 +1466,14 @@ namespace Microsoft.CodeAnalysis.CSharp
             private IEnumerable<TypeInferenceInfo> InferTypeInCatchFilterClause(
                 CatchFilterClauseSyntax catchFilterClause,
                 SyntaxToken? previousToken = null
-            ) {
+            )
+            {
                 // If we have a position, it has to be after "if ("
                 if (
                     previousToken.HasValue
                     && previousToken.Value != catchFilterClause.OpenParenToken
-                ) {
+                )
+                {
                     return SpecializedCollections.EmptyEnumerable<TypeInferenceInfo>();
                 }
 
@@ -1426,7 +1484,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                 BinaryExpressionSyntax coalesceExpression,
                 ExpressionSyntax expressionOpt = null,
                 SyntaxToken? previousToken = null
-            ) {
+            )
+            {
                 // If we got here through a token, then it must have actually been the binary
                 // operator's token.
                 Contract.ThrowIfTrue(
@@ -1492,7 +1551,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                 ConditionalExpressionSyntax conditional,
                 ExpressionSyntax expressionOpt = null,
                 SyntaxToken? previousToken = null
-            ) {
+            )
+            {
                 if (expressionOpt != null && conditional.Condition == expressionOpt)
                 {
                     // Goo() ? a : b
@@ -1526,7 +1586,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             private IEnumerable<TypeInferenceInfo> InferTypeInDoStatement(
                 DoStatementSyntax doStatement,
                 SyntaxToken? previousToken = null
-            ) {
+            )
+            {
                 // If we have a position, we need to be after "do { } while("
                 if (previousToken.HasValue && previousToken.Value != doStatement.OpenParenToken)
                 {
@@ -1539,7 +1600,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             private IEnumerable<TypeInferenceInfo> InferTypeInEqualsValueClause(
                 EqualsValueClauseSyntax equalsValue,
                 SyntaxToken? previousToken = null
-            ) {
+            )
+            {
                 // If we have a position, it has to be after the =
                 if (previousToken.HasValue && previousToken.Value != equalsValue.EqualsToken)
                     return SpecializedCollections.EmptyEnumerable<TypeInferenceInfo>();
@@ -1564,7 +1626,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                     equalsValue.IsParentKind(SyntaxKind.Parameter)
                     && SemanticModel.GetDeclaredSymbol(equalsValue.Parent, CancellationToken)
                         is IParameterSymbol parameter
-                ) {
+                )
+                {
                     return CreateResult(parameter.Type);
                 }
 
@@ -1573,7 +1636,8 @@ namespace Microsoft.CodeAnalysis.CSharp
 
             private IEnumerable<TypeInferenceInfo> InferTypeInPropertyDeclaration(
                 PropertyDeclarationSyntax propertyDeclaration
-            ) {
+            )
+            {
                 Debug.Assert(
                     propertyDeclaration?.Type != null,
                     "Property type should never be null"
@@ -1585,7 +1649,8 @@ namespace Microsoft.CodeAnalysis.CSharp
 
             private IEnumerable<TypeInferenceInfo> InferTypeInExpressionStatement(
                 SyntaxToken? previousToken = null
-            ) {
+            )
+            {
                 // If we're position based, then that means we're after the semicolon.  In this case
                 // we don't have any sort of type to infer.
                 if (previousToken.HasValue)
@@ -1600,12 +1665,14 @@ namespace Microsoft.CodeAnalysis.CSharp
                 ForEachStatementSyntax forEachStatementSyntax,
                 ExpressionSyntax expressionOpt = null,
                 SyntaxToken? previousToken = null
-            ) {
+            )
+            {
                 // If we have a position, then we have to be after "foreach(... in"
                 if (
                     previousToken.HasValue
                     && previousToken.Value != forEachStatementSyntax.InKeyword
-                ) {
+                )
+                {
                     return SpecializedCollections.EmptyEnumerable<TypeInferenceInfo>();
                 }
 
@@ -1647,12 +1714,14 @@ namespace Microsoft.CodeAnalysis.CSharp
                 ForStatementSyntax forStatement,
                 ExpressionSyntax expressionOpt = null,
                 SyntaxToken? previousToken = null
-            ) {
+            )
+            {
                 // If we have a position, it has to be after "for(...;"
                 if (
                     previousToken.HasValue
                     && previousToken.Value != forStatement.FirstSemicolonToken
-                ) {
+                )
+                {
                     return SpecializedCollections.EmptyEnumerable<TypeInferenceInfo>();
                 }
 
@@ -1667,7 +1736,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             private IEnumerable<TypeInferenceInfo> InferTypeInIfStatement(
                 IfStatementSyntax ifStatement,
                 SyntaxToken? previousToken = null
-            ) {
+            )
+            {
                 // If we have a position, we have to be after the "if("
                 if (previousToken.HasValue && previousToken.Value != ifStatement.OpenParenToken)
                 {
@@ -1685,7 +1755,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                 InitializerExpressionSyntax initializerExpression,
                 ExpressionSyntax expressionOpt = null,
                 SyntaxToken? previousToken = null
-            ) {
+            )
+            {
                 if (initializerExpression.IsKind(SyntaxKind.ComplexElementInitializerExpression))
                 {
                     // new Dictionary<K,V> { { x, ... } }
@@ -1743,7 +1814,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                             var sibling in initializerExpression.Expressions.Where(
                                 e => e.Kind() != SyntaxKind.ComplexElementInitializerExpression
                             )
-                        ) {
+                        )
+                        {
                             var types = GetTypes(sibling);
                             if (types.Any())
                             {
@@ -1758,7 +1830,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                         SyntaxKind.ImplicitArrayCreationExpression,
                         out ImplicitArrayCreationExpressionSyntax implicitArray
                     )
-                ) {
+                )
+                {
                     // new[] { 1, x }
 
                     // First, try to infer the type that the array should be.  If we can infer an
@@ -1792,7 +1865,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                         SyntaxKind.EqualsValueClause,
                         out EqualsValueClauseSyntax equalsValueClause
                     )
-                ) {
+                )
+                {
                     // = { Goo() }
                     var types = InferTypeInEqualsValueClause(equalsValueClause)
                         .Select(t => t.InferredType);
@@ -1808,7 +1882,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                         SyntaxKind.ArrayCreationExpression,
                         out ArrayCreationExpressionSyntax arrayCreation
                     )
-                ) {
+                )
+                {
                     // new int[] { Goo() }
                     var types = GetTypes(arrayCreation).Select(t => t.InferredType);
 
@@ -1823,7 +1898,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                         SyntaxKind.ObjectCreationExpression,
                         out ObjectCreationExpressionSyntax objectCreation
                     )
-                ) {
+                )
+                {
                     // new List<T> { Goo() }
                     var types = GetTypes(objectCreation).Select(t => t.InferredType);
                     if (types.Any(t => t is INamedTypeSymbol))
@@ -1874,27 +1950,31 @@ namespace Microsoft.CodeAnalysis.CSharp
 
             private IEnumerable<TypeInferenceInfo> InferTypeInRecursivePattern(
                 RecursivePatternSyntax recursivePattern
-            ) {
+            )
+            {
                 var type = this.SemanticModel.GetTypeInfo(recursivePattern).ConvertedType;
                 return CreateResult(type);
             }
 
             private IEnumerable<TypeInferenceInfo> InferTypeInConstantPattern(
                 ConstantPatternSyntax constantPattern
-            ) {
+            )
+            {
                 return InferTypes(constantPattern);
             }
 
             private IEnumerable<TypeInferenceInfo> InferTypeInPropertyPatternClause(
                 PropertyPatternClauseSyntax propertySubpattern
-            ) {
+            )
+            {
                 return InferTypes(propertySubpattern);
             }
 
             private IEnumerable<TypeInferenceInfo> InferTypeInSubpattern(
                 SubpatternSyntax subpattern,
                 SyntaxNode child
-            ) {
+            )
+            {
                 // we have  { X: ... }.  The type of ... is whatever the type of 'X' is in its
                 // parent type.  So look up the parent type first, then find the X member in it
                 // and use that type.
@@ -1905,7 +1985,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                     foreach (
                         var symbol in this.SemanticModel.GetSymbolInfo(subpattern.NameColon.Name)
                             .GetAllSymbols()
-                    ) {
+                    )
+                    {
                         switch (symbol)
                         {
                             case IFieldSymbol field:
@@ -1925,7 +2006,8 @@ namespace Microsoft.CodeAnalysis.CSharp
 
             private IEnumerable<TypeInferenceInfo> InferTypeForSingleVariableDesignation(
                 SingleVariableDesignationSyntax singleVariableDesignation
-            ) {
+            )
+            {
                 if (singleVariableDesignation.Parent is DeclarationPatternSyntax declarationPattern)
                 {
                     // c is Color.Red or $$
@@ -1936,7 +2018,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                     if (
                         identifier.HasMatchingText(SyntaxKind.OrKeyword)
                         || identifier.HasMatchingText(SyntaxKind.AndKeyword)
-                    ) {
+                    )
+                    {
                         return GetPatternTypes(declarationPattern);
                     }
                 }
@@ -1947,7 +2030,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             private IEnumerable<TypeInferenceInfo> InferTypeInIsPatternExpression(
                 IsPatternExpressionSyntax isPatternExpression,
                 SyntaxNode child
-            ) {
+            )
+            {
                 if (child == isPatternExpression.Expression)
                 {
                     return GetPatternTypes(isPatternExpression.Pattern);
@@ -1986,7 +2070,8 @@ namespace Microsoft.CodeAnalysis.CSharp
 
             private IEnumerable<TypeInferenceInfo> GetTypesForRecursivePattern(
                 RecursivePatternSyntax recursivePattern
-            ) {
+            )
+            {
                 // if it's of the for "X (...)" then just infer 'X' as the type.
                 if (recursivePattern.Type != null)
                 {
@@ -2045,7 +2130,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             private IEnumerable<TypeInferenceInfo> InferTypeInLockStatement(
                 LockStatementSyntax lockStatement,
                 SyntaxToken? previousToken = null
-            ) {
+            )
+            {
                 // If we're position based, then we have to be after the "lock("
                 if (previousToken.HasValue && previousToken.Value != lockStatement.OpenParenToken)
                 {
@@ -2058,7 +2144,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             private IEnumerable<TypeInferenceInfo> InferTypeInLambdaExpression(
                 LambdaExpressionSyntax lambdaExpression,
                 SyntaxToken? previousToken = null
-            ) {
+            )
+            {
                 // If we have a position, it has to be after the lambda arrow.
                 if (previousToken.HasValue && previousToken.Value != lambdaExpression.ArrowToken)
                 {
@@ -2070,7 +2157,8 @@ namespace Microsoft.CodeAnalysis.CSharp
 
             private IEnumerable<TypeInferenceInfo> InferTypeInAnonymousFunctionExpression(
                 AnonymousFunctionExpressionSyntax anonymousFunction
-            ) {
+            )
+            {
                 // Func<int,string> = i => Goo();
                 // Func<int,string> = delegate (int i) { return Goo(); };
                 var types = InferTypes(anonymousFunction);
@@ -2094,16 +2182,19 @@ namespace Microsoft.CodeAnalysis.CSharp
             private IEnumerable<TypeInferenceInfo> InferTypeInMemberDeclarator(
                 AnonymousObjectMemberDeclaratorSyntax memberDeclarator,
                 SyntaxToken? previousTokenOpt = null
-            ) {
+            )
+            {
                 if (
                     memberDeclarator.NameEquals != null
                     && memberDeclarator.Parent is AnonymousObjectCreationExpressionSyntax
-                ) {
+                )
+                {
                     // If we're position based, then we have to be after the =
                     if (
                         previousTokenOpt.HasValue
                         && previousTokenOpt.Value != memberDeclarator.NameEquals.EqualsToken
-                    ) {
+                    )
+                    {
                         return SpecializedCollections.EmptyEnumerable<TypeInferenceInfo>();
                     }
 
@@ -2130,7 +2221,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             private IEnumerable<TypeInferenceInfo> InferTypeInNameColon(
                 NameColonSyntax nameColon,
                 SyntaxToken previousToken
-            ) {
+            )
+            {
                 if (previousToken != nameColon.ColonToken)
                 {
                     // Must follow the colon token.
@@ -2150,7 +2242,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                 MemberAccessExpressionSyntax memberAccessExpression,
                 ExpressionSyntax expressionOpt = null,
                 SyntaxToken? previousToken = null
-            ) {
+            )
+            {
                 // We need to be on the right of the dot to infer an appropriate type for
                 // the member access expression.  i.e. if we have "Goo.Bar" then we can
                 // def infer what the type of 'Bar' should be (it's whatever type we infer
@@ -2185,7 +2278,8 @@ namespace Microsoft.CodeAnalysis.CSharp
 
             private IEnumerable<TypeInferenceInfo> InferTypeForExpressionOfMemberAccessExpression(
                 MemberAccessExpressionSyntax memberAccessExpression
-            ) {
+            )
+            {
                 // If we're on the left side of a dot, it's possible in a few cases
                 // to figure out what type we should be.  Specifically, if we have
                 //
@@ -2201,7 +2295,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                         out InvocationExpressionSyntax invocation
                     )
                     && memberAccessExpression.Parent.IsParentKind(SyntaxKind.AwaitExpression)
-                ) {
+                )
+                {
                     return InferTypes(invocation);
                 }
                 else if (name.Equals(nameof(Task<int>.ContinueWith)))
@@ -2218,7 +2313,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                 }
                 else if (
                     name.Equals(nameof(Enumerable.Select)) || name.Equals(nameof(Enumerable.Where))
-                ) {
+                )
+                {
                     var ienumerableType = this.Compilation.IEnumerableOfTType();
 
                     // goo.Select
@@ -2230,7 +2326,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                             SyntaxKind.InvocationExpression,
                             out invocation
                         )
-                    ) {
+                    )
+                    {
                         if (invocation.ArgumentList.Arguments.Count > 0)
                         {
                             var argumentExpression =
@@ -2249,7 +2346,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                                 if (
                                     IsUnusableType(typeArg)
                                     && argumentExpression is LambdaExpressionSyntax lambdaExpression
-                                ) {
+                                )
+                                {
                                     typeArg =
                                         InferTypeForFirstParameterOfLambda(lambdaExpression)
                                         ?? this.Compilation.ObjectType;
@@ -2266,7 +2364,8 @@ namespace Microsoft.CodeAnalysis.CSharp
 
             private ITypeSymbol InferTypeForFirstParameterOfLambda(
                 LambdaExpressionSyntax lambdaExpression
-            ) {
+            )
+            {
                 if (lambdaExpression is ParenthesizedLambdaExpressionSyntax parenLambda)
                 {
                     return InferTypeForFirstParameterOfParenthesizedLambda(parenLambda);
@@ -2281,7 +2380,8 @@ namespace Microsoft.CodeAnalysis.CSharp
 
             private ITypeSymbol InferTypeForFirstParameterOfParenthesizedLambda(
                 ParenthesizedLambdaExpressionSyntax lambdaExpression
-            ) {
+            )
+            {
                 return lambdaExpression.ParameterList.Parameters.Count == 0
                   ? null
                   : InferTypeForFirstParameterOfLambda(
@@ -2292,7 +2392,8 @@ namespace Microsoft.CodeAnalysis.CSharp
 
             private ITypeSymbol InferTypeForFirstParameterOfSimpleLambda(
                 SimpleLambdaExpressionSyntax lambdaExpression
-            ) {
+            )
+            {
                 return InferTypeForFirstParameterOfLambda(
                     lambdaExpression,
                     lambdaExpression.Parameter
@@ -2302,7 +2403,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             private ITypeSymbol InferTypeForFirstParameterOfLambda(
                 LambdaExpressionSyntax lambdaExpression,
                 ParameterSyntax parameter
-            ) {
+            )
+            {
                 return InferTypeForFirstParameterOfLambda(
                     parameter.Identifier.ValueText,
                     lambdaExpression.Body
@@ -2312,14 +2414,16 @@ namespace Microsoft.CodeAnalysis.CSharp
             private ITypeSymbol InferTypeForFirstParameterOfLambda(
                 string parameterName,
                 SyntaxNode node
-            ) {
+            )
+            {
                 if (node.IsKind(SyntaxKind.IdentifierName, out IdentifierNameSyntax identifierName))
                 {
                     if (
                         identifierName.Identifier.ValueText.Equals(parameterName)
                         && SemanticModel.GetSymbolInfo(identifierName.Identifier).Symbol?.Kind
                             == SymbolKind.Parameter
-                    ) {
+                    )
+                    {
                         return InferTypes(identifierName).FirstOrDefault().InferredType;
                     }
                 }
@@ -2357,7 +2461,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             private IEnumerable<TypeInferenceInfo> InferTypeInNameEquals(
                 NameEqualsSyntax nameEquals,
                 SyntaxToken? previousToken = null
-            ) {
+            )
+            {
                 if (previousToken == nameEquals.EqualsToken)
                 {
                     // we're on the right of the equals.  Try to bind the left name to see if it
@@ -2377,7 +2482,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             private IEnumerable<TypeInferenceInfo> InferTypeInPostfixUnaryExpression(
                 PostfixUnaryExpressionSyntax postfixUnaryExpressionSyntax,
                 SyntaxToken? previousToken = null
-            ) {
+            )
+            {
                 // If we're after a postfix ++ or -- then we can't infer anything.
                 if (previousToken.HasValue)
                 {
@@ -2399,7 +2505,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             private IEnumerable<TypeInferenceInfo> InferTypeInPrefixUnaryExpression(
                 PrefixUnaryExpressionSyntax prefixUnaryExpression,
                 SyntaxToken? previousToken = null
-            ) {
+            )
+            {
                 // If we have a position, then we must be after the prefix token.
                 Contract.ThrowIfTrue(
                     previousToken.HasValue
@@ -2442,7 +2549,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             private IEnumerable<TypeInferenceInfo> InferTypeInAwaitExpression(
                 AwaitExpressionSyntax awaitExpression,
                 SyntaxToken? previousToken = null
-            ) {
+            )
+            {
                 // If we have a position, then we must be after the prefix token.
                 Contract.ThrowIfTrue(
                     previousToken.HasValue && previousToken.Value != awaitExpression.AwaitKeyword
@@ -2475,7 +2583,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             private IEnumerable<TypeInferenceInfo> InferTypeInYieldStatement(
                 YieldStatementSyntax yieldStatement,
                 SyntaxToken? previousToken = null
-            ) {
+            )
+            {
                 // If we are position based, then we have to be after the return keyword
                 if (
                     previousToken.HasValue
@@ -2483,7 +2592,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                         previousToken.Value != yieldStatement.ReturnOrBreakKeyword
                         || yieldStatement.ReturnOrBreakKeyword.IsKind(SyntaxKind.BreakKeyword)
                     )
-                ) {
+                )
+                {
                     return SpecializedCollections.EmptyEnumerable<TypeInferenceInfo>();
                 }
 
@@ -2530,7 +2640,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             private IEnumerable<TypeInferenceInfo> InferTypeForReturnStatement(
                 ReturnStatementSyntax returnStatement,
                 SyntaxToken? previousToken = null
-            ) {
+            )
+            {
                 // If we are position based, then we have to be after the return statement.
                 if (previousToken.HasValue && previousToken.Value != returnStatement.ReturnKeyword)
                 {
@@ -2552,7 +2663,8 @@ namespace Microsoft.CodeAnalysis.CSharp
 
             private IEnumerable<TypeInferenceInfo> InferTypeInMethodLikeDeclaration(
                 SyntaxNode declaration
-            ) {
+            )
+            {
                 // `declaration` can be a base-method member, property, accessor or local function
 
                 var symbol = GetDeclaredMemberSymbolFromOriginalSemanticModel(declaration);
@@ -2568,14 +2680,16 @@ namespace Microsoft.CodeAnalysis.CSharp
 
             private ISymbol GetDeclaredMemberSymbolFromOriginalSemanticModel(
                 SyntaxNode declarationInCurrentTree
-            ) {
+            )
+            {
                 var currentSemanticModel = SemanticModel;
                 var originalSemanticModel = currentSemanticModel.GetOriginalSemanticModel();
 
                 if (
                     declarationInCurrentTree is MemberDeclarationSyntax
                     && currentSemanticModel.IsSpeculativeSemanticModel
-                ) {
+                )
+                {
                     var tokenInOriginalTree = originalSemanticModel.SyntaxTree.GetRoot(
                             CancellationToken
                         )
@@ -2595,13 +2709,15 @@ namespace Microsoft.CodeAnalysis.CSharp
             private IEnumerable<TypeInferenceInfo> InferTypeInSwitchLabel(
                 SwitchLabelSyntax switchLabel,
                 SyntaxToken? previousToken = null
-            ) {
+            )
+            {
                 if (previousToken.HasValue)
                 {
                     if (
                         previousToken.Value != switchLabel.Keyword
                         || switchLabel.Kind() != SyntaxKind.CaseSwitchLabel
-                    ) {
+                    )
+                    {
                         return SpecializedCollections.EmptyEnumerable<TypeInferenceInfo>();
                     }
                 }
@@ -2613,7 +2729,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             private IEnumerable<TypeInferenceInfo> InferTypeInSwitchStatement(
                 SwitchStatementSyntax switchStatement,
                 SyntaxToken? previousToken = null
-            ) {
+            )
+            {
                 // If we have a position, then it has to be after "switch("
                 if (previousToken.HasValue && previousToken.Value != switchStatement.OpenParenToken)
                 {
@@ -2625,7 +2742,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                     switchStatement.Sections.SelectMany(ss => ss.Labels)
                         .FirstOrDefault(label => label.Kind() == SyntaxKind.CaseSwitchLabel)
                     is CaseSwitchLabelSyntax firstCase
-                ) {
+                )
+                {
                     var result = GetTypes(firstCase.Value);
                     if (result.Any())
                     {
@@ -2639,7 +2757,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             private IEnumerable<TypeInferenceInfo> InferTypeInThrowExpression(
                 ThrowExpressionSyntax throwExpression,
                 SyntaxToken? previousToken = null
-            ) {
+            )
+            {
                 // If we have a position, it has to be after the 'throw' keyword.
                 if (previousToken.HasValue && previousToken.Value != throwExpression.ThrowKeyword)
                 {
@@ -2652,7 +2771,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             private IEnumerable<TypeInferenceInfo> InferTypeInThrowStatement(
                 ThrowStatementSyntax throwStatement,
                 SyntaxToken? previousToken = null
-            ) {
+            )
+            {
                 // If we have a position, it has to be after the 'throw' keyword.
                 if (previousToken.HasValue && previousToken.Value != throwStatement.ThrowKeyword)
                 {
@@ -2665,7 +2785,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             private IEnumerable<TypeInferenceInfo> InferTypeInUsingStatement(
                 UsingStatementSyntax usingStatement,
                 SyntaxToken? previousToken = null
-            ) {
+            )
+            {
                 // If we have a position, it has to be after "using("
                 if (previousToken.HasValue && previousToken.Value != usingStatement.OpenParenToken)
                 {
@@ -2677,7 +2798,8 @@ namespace Microsoft.CodeAnalysis.CSharp
 
             private IEnumerable<TypeInferenceInfo> InferTypeInVariableDeclarator(
                 VariableDeclaratorSyntax variableDeclarator
-            ) {
+            )
+            {
                 var variableType = variableDeclarator.GetVariableType();
                 if (variableType == null)
                 {
@@ -2721,13 +2843,15 @@ namespace Microsoft.CodeAnalysis.CSharp
 
             private IEnumerable<TypeInferenceInfo> InferTypeInVariableComponentAssignment(
                 ExpressionSyntax left
-            ) {
+            )
+            {
                 if (
                     left.IsKind(
                         SyntaxKind.DeclarationExpression,
                         out DeclarationExpressionSyntax declExpr
                     )
-                ) {
+                )
+                {
                     return GetTypes(declExpr.Type);
                 }
                 else if (
@@ -2735,7 +2859,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                         SyntaxKind.TupleExpression,
                         out TupleExpressionSyntax tupleExpression
                     )
-                ) {
+                )
+                {
                     // We have something of the form:
                     //   (int a, int b) = ...
                     //
@@ -2760,7 +2885,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                         out var elementTypes,
                         out var elementNames
                     )
-                ) {
+                )
+                {
                     return null;
                 }
 
@@ -2776,7 +2902,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                 SeparatedSyntaxList<ArgumentSyntax> arguments,
                 out ImmutableArray<ITypeSymbol> elementTypes,
                 out ImmutableArray<string> elementNames
-            ) {
+            )
+            {
                 elementTypes = default;
                 elementNames = default;
 
@@ -2791,12 +2918,14 @@ namespace Microsoft.CodeAnalysis.CSharp
                             SyntaxKind.DeclarationExpression,
                             out DeclarationExpressionSyntax declExpr
                         )
-                    ) {
+                    )
+                    {
                         AddTypeAndName(declExpr, elementTypesBuilder, elementNamesBuilder);
                     }
                     else if (
                         expr.IsKind(SyntaxKind.TupleExpression, out TupleExpressionSyntax tupleExpr)
-                    ) {
+                    )
+                    {
                         AddTypeAndName(tupleExpr, elementTypesBuilder, elementNamesBuilder);
                     }
                     else if (expr is IdentifierNameSyntax name)
@@ -2818,7 +2947,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                 if (
                     elementTypesBuilder.Contains(null)
                     || elementTypesBuilder.Count != arguments.Count
-                ) {
+                )
+                {
                     return false;
                 }
 
@@ -2831,7 +2961,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                 DeclarationExpressionSyntax declaration,
                 ArrayBuilder<ITypeSymbol> elementTypesBuilder,
                 ArrayBuilder<string> elementNamesBuilder
-            ) {
+            )
+            {
                 elementTypesBuilder.Add(GetTypes(declaration.Type).FirstOrDefault().InferredType);
 
                 var designation = declaration.Designation;
@@ -2840,7 +2971,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                         SyntaxKind.SingleVariableDesignation,
                         out SingleVariableDesignationSyntax singleVariable
                     )
-                ) {
+                )
+                {
                     var name = singleVariable.Identifier.ValueText;
 
                     if (name != string.Empty)
@@ -2857,7 +2989,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                 TupleExpressionSyntax tuple,
                 ArrayBuilder<ITypeSymbol> elementTypesBuilder,
                 ArrayBuilder<string> elementNamesBuilder
-            ) {
+            )
+            {
                 var tupleType = GetTupleType(tuple);
                 elementTypesBuilder.Add(tupleType);
                 elementNamesBuilder.Add(null);
@@ -2866,7 +2999,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             private IEnumerable<TypeInferenceInfo> InferTypeInWhenClause(
                 WhenClauseSyntax whenClause,
                 SyntaxToken? previousToken = null
-            ) {
+            )
+            {
                 // If we have a position, we have to be after the "when"
                 if (previousToken.HasValue && previousToken.Value != whenClause.WhenKeyword)
                 {
@@ -2881,7 +3015,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             private IEnumerable<TypeInferenceInfo> InferTypeInWhileStatement(
                 WhileStatementSyntax whileStatement,
                 SyntaxToken? previousToken = null
-            ) {
+            )
+            {
                 // If we're position based, then we have to be after the "while("
                 if (previousToken.HasValue && previousToken.Value != whileStatement.OpenParenToken)
                 {

@@ -76,7 +76,8 @@ namespace Microsoft.AspNetCore.Http.Connections.Tests
                         timeoutToken,
                         context.RequestAborted
                     )
-                ) {
+                )
+                {
                     await poll.ProcessRequestAsync(context, cts.Token).DefaultTimeout();
 
                     Assert.Equal(0, context.Response.ContentLength);

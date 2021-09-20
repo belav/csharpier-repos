@@ -18,7 +18,8 @@ namespace System.Data.Common
             IDbCommand? command,
             StatementType statementType,
             DataTableMapping tableMapping
-        ) {
+        )
+        {
             ADP.CheckArgumentNull(dataRow, nameof(dataRow));
             ADP.CheckArgumentNull(tableMapping, nameof(tableMapping));
             switch (statementType)

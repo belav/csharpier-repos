@@ -117,7 +117,8 @@ comp.goo()"
                     "directivesScenario4.csx",
                     "class Complex { public int goo() { return 4; } }"
                 )
-            ) {
+            )
+            {
                 temporaryTextFile.Create();
                 VisualStudio.InteractiveWindow.SubmitText(
                     string.Format("#load \"{0}\"", temporaryTextFile.FullName)
@@ -148,7 +149,8 @@ Process.GetCurrentProcess().ProcessName"
                     "directivesScenario6.csx",
                     "System.Console.WriteLine(2);"
                 )
-            ) {
+            )
+            {
                 temporaryTextFile.Create();
                 VisualStudio.InteractiveWindow.SubmitText(
                     string.Format("#load \"{0}\"", temporaryTextFile.FullName)

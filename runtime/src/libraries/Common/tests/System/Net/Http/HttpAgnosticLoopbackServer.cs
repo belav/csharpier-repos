@@ -92,7 +92,8 @@ namespace System.Net.Test.Common
 
                     using (
                         X509Certificate2 cert = Configuration.Certificates.GetServerCertificate()
-                    ) {
+                    )
+                    {
                         SslServerAuthenticationOptions sslOptions =
                             new SslServerAuthenticationOptions();
 
@@ -122,7 +123,8 @@ namespace System.Net.Test.Common
                     if (
                         sslStream.NegotiatedApplicationProtocol == SslApplicationProtocol.Http11
                         || sslStream.NegotiatedApplicationProtocol == default
-                    ) {
+                    )
+                    {
                         // Do not pass original options so the CreateConnectionAsync won't try to do ALPN again.
                         return connection =
                             await Http11LoopbackServerFactory.Singleton.CreateConnectionAsync(
@@ -173,7 +175,8 @@ namespace System.Net.Test.Common
                     if (
                         _options.ClearTextVersion == HttpVersion.Version20
                         || _options.ClearTextVersion == HttpVersion.Unknown
-                    ) {
+                    )
+                    {
                         return connection =
                             await Http2LoopbackServerFactory.Singleton.CreateConnectionAsync(
                                     socket,
@@ -188,7 +191,8 @@ namespace System.Net.Test.Common
                     if (
                         _options.ClearTextVersion == HttpVersion.Version11
                         || _options.ClearTextVersion == HttpVersion.Unknown
-                    ) {
+                    )
+                    {
                         return connection =
                             await Http11LoopbackServerFactory.Singleton.CreateConnectionAsync(
                                     socket,
@@ -223,11 +227,13 @@ namespace System.Net.Test.Common
             HttpStatusCode statusCode = HttpStatusCode.OK,
             IList<HttpHeaderData> headers = null,
             string content = ""
-        ) {
+        )
+        {
             using (
                 GenericLoopbackConnection connection = await EstablishGenericConnectionAsync()
                     .ConfigureAwait(false)
-            ) {
+            )
+            {
                 return await connection.HandleRequestAsync(statusCode, headers, content)
                     .ConfigureAwait(false);
             }
@@ -235,11 +241,13 @@ namespace System.Net.Test.Common
 
         public override async Task AcceptConnectionAsync(
             Func<GenericLoopbackConnection, Task> funcAsync
-        ) {
+        )
+        {
             using (
                 GenericLoopbackConnection connection = await EstablishGenericConnectionAsync()
                     .ConfigureAwait(false)
-            ) {
+            )
+            {
                 await funcAsync(connection).ConfigureAwait(false);
             }
         }
@@ -248,7 +256,8 @@ namespace System.Net.Test.Common
             Func<Uri, Task> clientFunc,
             Func<GenericLoopbackServer, Task> serverFunc,
             int timeout = 60_000
-        ) {
+        )
+        {
             return CreateClientAndServerAsync(clientFunc, serverFunc, null, timeout);
         }
 
@@ -257,12 +266,14 @@ namespace System.Net.Test.Common
             Func<GenericLoopbackServer, Task> serverFunc,
             HttpAgnosticOptions httpOptions,
             int timeout = 60_000
-        ) {
+        )
+        {
             using (
                 var server = HttpAgnosticLoopbackServer.CreateServer(
                     httpOptions ?? new HttpAgnosticOptions()
                 )
-            ) {
+            )
+            {
                 Task clientTask = clientFunc(server.Address);
                 Task serverTask = serverFunc(server);
 
@@ -288,7 +299,8 @@ namespace System.Net.Test.Common
         public static async Task CreateServerAsync(
             Func<HttpAgnosticLoopbackServer, Uri, Task> funcAsync,
             int millisecondsTimeout = 60_000
-        ) {
+        )
+        {
             using (var server = HttpAgnosticLoopbackServer.CreateServer())
             {
                 await funcAsync(server, server.Address)
@@ -305,7 +317,8 @@ namespace System.Net.Test.Common
             Socket socket,
             Stream stream,
             GenericLoopbackOptions options = null
-        ) {
+        )
+        {
             // This method is always unacceptable to call for an agnostic server.
             throw new NotImplementedException(
                 "HttpAgnosticLoopbackServerFactory cannot create connection."
@@ -329,7 +342,8 @@ namespace System.Net.Test.Common
             Func<GenericLoopbackServer, Uri, Task> funcAsync,
             int millisecondsTimeout = 60_000,
             GenericLoopbackOptions options = null
-        ) {
+        )
+        {
             using (var server = CreateServer(options))
             {
                 await funcAsync(server, server.Address)

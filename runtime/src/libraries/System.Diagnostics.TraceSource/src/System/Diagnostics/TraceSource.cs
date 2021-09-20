@@ -275,7 +275,8 @@ namespace System.Diagnostics
             int id,
             string? format,
             params object?[]? args
-        ) {
+        )
+        {
             Initialize();
 
             if (_internalSwitch!.ShouldTrace(eventType) && _listeners != null)

@@ -1800,7 +1800,8 @@ namespace System.Net.Http.Tests
             ContentDispositionHeaderValue header,
             string expectedDispositionType,
             string expectedFilename
-        ) {
+        )
+        {
             Assert.NotNull(header);
             Assert.Equal(expectedDispositionType, header.DispositionType);
             Assert.Equal(expectedFilename, header.FileName);
@@ -1810,7 +1811,8 @@ namespace System.Net.Http.Tests
             ContentDispositionHeaderValue header,
             string name,
             string expectedValue
-        ) {
+        )
+        {
             Assert.NotNull(header);
             NameValueHeaderValue parameter = FindParameter(header.Parameters, name);
             Assert.NotNull(parameter);
@@ -1820,7 +1822,8 @@ namespace System.Net.Http.Tests
         private static NameValueHeaderValue FindParameter(
             ICollection<NameValueHeaderValue> values,
             string name
-        ) {
+        )
+        {
             if ((values == null) || (values.Count == 0))
             {
                 return null;

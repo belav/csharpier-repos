@@ -43,7 +43,8 @@ namespace Microsoft.CodeAnalysis.Scripting.Test
             string reference,
             string expectedName,
             string expectedVersion
-        ) {
+        )
+        {
             string name;
             string version;
             Assert.True(

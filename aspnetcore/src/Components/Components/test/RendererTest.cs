@@ -5997,7 +5997,8 @@ namespace Microsoft.AspNetCore.Components.Test
         private void AssertStream(
             int expectedId,
             (int id, NestedAsyncComponent.EventType @event)[] logStream
-        ) {
+        )
+        {
             // OnInit runs first
             Assert.Equal((expectedId, NestedAsyncComponent.EventType.OnInit), logStream[0]);
 
@@ -6040,7 +6041,8 @@ namespace Microsoft.AspNetCore.Components.Test
 
         private Func<NestedAsyncComponent, RenderFragment> CreateRenderFactory(
             int[] childrenToRender
-        ) {
+        )
+        {
             // For some reason nameof doesn't work inside a nested lambda, so capturing the value here.
             var eventActionsName = nameof(NestedAsyncComponent.EventActions);
             var whatToRenderName = nameof(NestedAsyncComponent.WhatToRender);
@@ -6357,7 +6359,8 @@ namespace Microsoft.AspNetCore.Components.Test
             public static void RenderNestedErrorBoundaries(
                 RenderTreeBuilder builder,
                 RenderFragment innerContent
-            ) {
+            )
+            {
                 // Create an error boundary
                 builder.OpenComponent<TestErrorBoundary>(0);
                 builder.AddAttribute(

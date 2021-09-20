@@ -67,7 +67,8 @@ namespace System.Web.Http.ValueProviders.Providers
         internal static IDictionary<string, string> GetKeysFromPrefixFromProvider(
             IValueProvider provider,
             string prefix
-        ) {
+        )
+        {
             IEnumerableValueProvider enumeratedProvider = provider as IEnumerableValueProvider;
             return (enumeratedProvider != null)
               ? enumeratedProvider.GetKeysFromPrefix(prefix)

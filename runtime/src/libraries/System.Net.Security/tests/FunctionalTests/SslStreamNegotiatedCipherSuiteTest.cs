@@ -99,7 +99,8 @@ namespace System.Net.Security.Tests
         [InlineData(SslProtocols.Tls12)]
         public void NegotiatedCipherSuite_SslProtocolIsLowerThanTls13_ShouldMatchTheProtocol(
             SslProtocols protocol
-        ) {
+        )
+        {
             var p = new ConnectionParams() { SslProtocols = protocol };
 
             NegotiatedParams ret = ConnectAndGetNegotiatedParams(p, p);
@@ -458,7 +459,8 @@ namespace System.Net.Security.Tests
             IEnumerable<TlsCipherSuite> cipherSuites,
             Predicate<TlsCipherSuite> mustSucceed,
             Action<TlsCipherSuite> cipherSuitePicked = null
-        ) {
+        )
+        {
             foreach (TlsCipherSuite cs in cipherSuites)
             {
                 CipherSuitesPolicy csp = BuildPolicy(cs);
@@ -640,7 +642,8 @@ namespace System.Net.Security.Tests
             SslClientAuthenticationOptions clientOptions,
             SslStream server,
             SslServerAuthenticationOptions serverOptions
-        ) {
+        )
+        {
             Task serverTask = null;
             Task clientTask = null;
 
@@ -737,7 +740,8 @@ namespace System.Net.Security.Tests
         private static NegotiatedParams ConnectAndGetNegotiatedParams(
             ConnectionParams serverParams,
             ConnectionParams clientParams
-        ) {
+        )
+        {
             (Stream clientStream, Stream serverStream) = TestHelper.GetConnectedStreams();
 
             using (clientStream)
@@ -745,7 +749,8 @@ namespace System.Net.Security.Tests
             using (
                 SslStream server = new SslStream(serverStream, leaveInnerStreamOpen: false),
                     client = new SslStream(clientStream, leaveInnerStreamOpen: false)
-            ) {
+            )
+            {
                 var serverOptions = new SslServerAuthenticationOptions();
                 serverOptions.ServerCertificate =
                     Configuration.Certificates.GetSelfSignedServerCertificate();

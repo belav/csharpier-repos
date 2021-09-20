@@ -22,7 +22,8 @@ namespace System.Reflection.Emit
             Type[][]? optionalCustomModifiers,
             ModuleBuilder mod,
             [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)] TypeBuilder type
-        ) {
+        )
+        {
             m_methodBuilder = new MethodBuilder(
                 name,
                 attributes,
@@ -100,7 +101,8 @@ namespace System.Reflection.Emit
             Binder? binder,
             object?[]? parameters,
             CultureInfo? culture
-        ) {
+        )
+        {
             throw new NotSupportedException(SR.NotSupported_DynamicModule);
         }
 
@@ -128,7 +130,8 @@ namespace System.Reflection.Emit
             Binder? binder,
             object?[]? parameters,
             CultureInfo? culture
-        ) {
+        )
+        {
             throw new NotSupportedException(SR.NotSupported_DynamicModule);
         }
 
@@ -157,7 +160,8 @@ namespace System.Reflection.Emit
             int iSequence,
             ParameterAttributes attributes,
             string? strParamName
-        ) {
+        )
+        {
             // Theoretically we shouldn't allow iSequence to be 0 because in reflection ctors don't have
             // return parameters. But we'll allow it for backward compatibility with V2. The attributes
             // defined on the return parameters won't be very useful but won't do much harm either.

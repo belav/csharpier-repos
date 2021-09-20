@@ -122,7 +122,8 @@ namespace Microsoft.CodeAnalysis.CodeGen
         private static ArrayMethod MakeArrayMethod(
             Cci.IArrayTypeReference arrayType,
             ArrayMethodKind id
-        ) {
+        )
+        {
             switch (id)
             {
                 case ArrayMethodKind.CTOR:

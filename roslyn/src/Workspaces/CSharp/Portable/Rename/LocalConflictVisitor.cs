@@ -52,7 +52,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Rename
                         SyntaxKind.LocalDeclarationStatement,
                         out LocalDeclarationStatementSyntax declarationStatement
                     )
-                ) {
+                )
+                {
                     foreach (var declarator in declarationStatement.Declaration.Variables)
                     {
                         tokens.Add(declarator.Identifier);
@@ -123,7 +124,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Rename
 
         public override void VisitParenthesizedLambdaExpression(
             ParenthesizedLambdaExpressionSyntax node
-        ) {
+        )
+        {
             var tokens = node.ParameterList.Parameters.Select(p => p.Identifier);
             _tracker.AddIdentifiers(tokens);
             Visit(node.Body);
@@ -171,7 +173,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Rename
 
             foreach (
                 var child in body.ChildNodes().Where(c => c.Kind() != SyntaxKind.QueryContinuation)
-            ) {
+            )
+            {
                 Visit(child);
             }
 

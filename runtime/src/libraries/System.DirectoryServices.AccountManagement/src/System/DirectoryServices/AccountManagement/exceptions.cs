@@ -58,10 +58,8 @@ namespace System.DirectoryServices.AccountManagement
         public NoMatchingPrincipalException(string message, Exception innerException)
             : base(message, innerException) { }
 
-        protected NoMatchingPrincipalException(
-            SerializationInfo info,
-            StreamingContext context
-        ) : base(info, context)
+        protected NoMatchingPrincipalException(SerializationInfo info, StreamingContext context)
+            : base(info, context)
         {
             throw new PlatformNotSupportedException();
         }
@@ -121,11 +119,8 @@ namespace System.DirectoryServices.AccountManagement
         {
             _errorCode = errorCode;
         }
-        public PrincipalServerDownException(
-            string message,
-            Exception innerException,
-            int errorCode
-        ) : base(message, innerException)
+        public PrincipalServerDownException(string message, Exception innerException, int errorCode)
+            : base(message, innerException)
         {
             _errorCode = errorCode;
         }
@@ -140,10 +135,8 @@ namespace System.DirectoryServices.AccountManagement
             _serverName = serverName;
         }
 
-        protected PrincipalServerDownException(
-            SerializationInfo info,
-            StreamingContext context
-        ) : base(info, context)
+        protected PrincipalServerDownException(SerializationInfo info, StreamingContext context)
+            : base(info, context)
         {
             _errorCode = info.GetInt32("errorCode");
             _serverName = (string)info.GetValue("serverName", typeof(string));
@@ -176,19 +169,14 @@ namespace System.DirectoryServices.AccountManagement
         {
             _errorCode = errorCode;
         }
-        public PrincipalOperationException(
-            string message,
-            Exception innerException,
-            int errorCode
-        ) : base(message, innerException)
+        public PrincipalOperationException(string message, Exception innerException, int errorCode)
+            : base(message, innerException)
         {
             _errorCode = errorCode;
         }
 
-        protected PrincipalOperationException(
-            SerializationInfo info,
-            StreamingContext context
-        ) : base(info, context)
+        protected PrincipalOperationException(SerializationInfo info, StreamingContext context)
+            : base(info, context)
         {
             _errorCode = info.GetInt32("errorCode");
         }
@@ -251,7 +239,8 @@ namespace System.DirectoryServices.AccountManagement
                 errorCode == unchecked((int)0x800708c5)
                 || errorCode == unchecked((int)0x80070056)
                 || errorCode == unchecked((int)0x8007052)
-            ) {
+            )
+            {
                 //
                 // Password does not meet complexity requirements or old password does not match or policy restriction has been enforced.
                 //
@@ -259,7 +248,8 @@ namespace System.DirectoryServices.AccountManagement
             }
             else if (
                 errorCode == unchecked((int)0x800708b0) || errorCode == unchecked((int)0x80071392)
-            ) {
+            )
+            {
                 //
                 // Principal already exists
                 //
@@ -297,7 +287,8 @@ namespace System.DirectoryServices.AccountManagement
                 (errorCode == unchecked((int)0x8007203a))
                 || (errorCode == unchecked((int)0x8007200e))
                 || (errorCode == unchecked((int)0x8007200f))
-            ) {
+            )
+            {
                 exception = new PrincipalServerDownException(errorMessage, e, errorCode, null);
             }
             else
@@ -336,7 +327,8 @@ namespace System.DirectoryServices.AccountManagement
                 || (errorCode == ERROR_NO_SUCH_DOMAIN)
                 || (errorCode == RPC_S_SERVER_UNAVAILABLE)
                 || (errorCode == RPC_S_CALL_FAILED)
-            ) {
+            )
+            {
                 return new PrincipalServerDownException(errorMsg, errorCode);
             }
             else

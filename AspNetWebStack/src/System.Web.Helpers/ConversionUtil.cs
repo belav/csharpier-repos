@@ -80,7 +80,8 @@ namespace System.Web.Helpers
             Type enumType,
             string value,
             out object result
-        ) {
+        )
+        {
             result = null;
             if (_stringToEnumMethod == null)
             {

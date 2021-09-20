@@ -3461,7 +3461,8 @@ class C
                 IEnumerable<KeyValuePair<TreeDumperNode, TreeDumperNode>>,
                 IEnumerable<string>
             > query
-        ) {
+        )
+        {
             // The mechanism of this test is: we build the bound tree for the code passed in and then extract
             // from it the nodes that describe the operators. We then compare the description of
             // the operators given to the comment that follows the use of the operator.
@@ -7814,7 +7815,8 @@ public class RubyTime
                 BoundExpression left,
                 BoundExpression right,
                 bool useEasyOut
-            ) {
+            )
+            {
                 var overloadResolution = new OverloadResolution(binder);
                 var result = BinaryOperatorOverloadResolutionResult.GetInstance();
                 if (useEasyOut)
@@ -7901,7 +7903,8 @@ public class RubyTime
                     if (
                         operators[k] == UnaryOperatorKind.PostfixDecrement
                         || operators[k] == UnaryOperatorKind.PostfixIncrement
-                    ) {
+                    )
+                    {
                         builder.AppendFormat(
                             "    var z{0}_1 = x1 {1};\n"
                                 + "    var z{0}_2 = x2 {1};\n"
@@ -7993,7 +7996,8 @@ public class RubyTime
             ExpressionSyntax node2,
             ExpressionSyntax node3,
             ExpressionSyntax node4
-        ) {
+        )
+        {
             SymbolInfo info1 = semanticModel.GetSymbolInfo(node1);
             Assert.Equal(
                 type.IsDynamic() ? CandidateReason.LateBound : CandidateReason.None,
@@ -8030,7 +8034,8 @@ public class RubyTime
                 || op == UnaryOperatorKind.PrefixIncrement
                 || op == UnaryOperatorKind.PostfixDecrement
                 || op == UnaryOperatorKind.PostfixIncrement
-            ) {
+            )
+            {
                 underlying = type.EnumUnderlyingTypeOrSelf();
             }
 
@@ -8055,7 +8060,8 @@ public class RubyTime
                         || op == UnaryOperatorKind.PostfixDecrement
                         || op == UnaryOperatorKind.PostfixIncrement
                     )
-                ) {
+                )
+                {
                     signature = new UnaryOperatorSignature(
                         op | UnaryOperatorKind.Pointer,
                         type,
@@ -8593,7 +8599,8 @@ class Module1
             ExpressionSyntax node6,
             ExpressionSyntax node7,
             ExpressionSyntax node8
-        ) {
+        )
+        {
             SymbolInfo info1 = semanticModel.GetSymbolInfo(node1);
             HashSet<DiagnosticInfo> useSiteDiagnostics = null;
 
@@ -8689,7 +8696,8 @@ class Module1
                     leftType.IsDynamic()
                     && !rightType.IsPointerType()
                     && !rightType.IsRestrictedType()
-                ) {
+                )
+                {
                     signature = new BinaryOperatorSignature(
                         op | BinaryOperatorKind.Dynamic,
                         leftType,
@@ -8701,7 +8709,8 @@ class Module1
                     rightType.IsDynamic()
                     && !leftType.IsPointerType()
                     && !leftType.IsRestrictedType()
-                ) {
+                )
+                {
                     signature = new BinaryOperatorSignature(
                         op | BinaryOperatorKind.Dynamic,
                         leftType,
@@ -8721,7 +8730,8 @@ class Module1
                             ref useSiteDiagnostics
                         ).IsReference
                     )
-                ) {
+                )
+                {
                     if (leftType.IsDelegateType() && rightType.IsDelegateType())
                     {
                         Assert.Equal(leftType, rightType);
@@ -8735,7 +8745,8 @@ class Module1
                     else if (
                         leftType.SpecialType == SpecialType.System_Delegate
                         && rightType.SpecialType == SpecialType.System_Delegate
-                    ) {
+                    )
+                    {
                         signature = new BinaryOperatorSignature(
                             op | BinaryOperatorKind.Delegate,
                             compilation.GetSpecialType(SpecialType.System_Delegate),
@@ -8759,7 +8770,8 @@ class Module1
                         (leftType.IsStringType() && !rightType.IsPointerType())
                         || (!leftType.IsPointerType() && rightType.IsStringType())
                     )
-                ) {
+                )
+                {
                     Assert.False(leftType.IsStringType() && rightType.IsStringType());
 
                     if (leftType.IsStringType())
@@ -8794,7 +8806,8 @@ class Module1
                             && (rightType.IsIntegralType() || rightType.IsCharType())
                         )
                     )
-                ) {
+                )
+                {
                     if (leftType.IsPointerType())
                     {
                         signature = new BinaryOperatorSignature(
@@ -8822,7 +8835,8 @@ class Module1
                         leftType.IsPointerType()
                         && (rightType.IsIntegralType() || rightType.IsCharType())
                     )
-                ) {
+                )
+                {
                     signature = new BinaryOperatorSignature(
                         op | BinaryOperatorKind.String,
                         leftType,
@@ -8835,7 +8849,8 @@ class Module1
                     op == BinaryOperatorKind.Subtraction
                     && leftType.IsPointerType()
                     && TypeSymbol.Equals(leftType, rightType, TypeCompareKind.ConsiderEverything2)
-                ) {
+                )
+                {
                     signature = new BinaryOperatorSignature(
                         op | BinaryOperatorKind.Pointer,
                         leftType,
@@ -8859,7 +8874,8 @@ class Module1
                         leftType.EnumUnderlyingTypeOrSelf(),
                         TypeCompareKind.ConsiderEverything2
                     )
-                ) {
+                )
+                {
                     signature = new BinaryOperatorSignature(
                         signature.Kind | BinaryOperatorKind.EnumAndUnderlying,
                         leftType,
@@ -8883,7 +8899,8 @@ class Module1
                         rightType.EnumUnderlyingTypeOrSelf(),
                         TypeCompareKind.ConsiderEverything2
                     )
-                ) {
+                )
+                {
                     signature = new BinaryOperatorSignature(
                         signature.Kind | BinaryOperatorKind.EnumAndUnderlying,
                         signature.LeftType,
@@ -8895,7 +8912,8 @@ class Module1
                     op == BinaryOperatorKind.Subtraction
                     && leftType.IsEnumType()
                     && TypeSymbol.Equals(leftType, rightType, TypeCompareKind.ConsiderEverything2)
-                ) {
+                )
+                {
                     signature = new BinaryOperatorSignature(
                         op | BinaryOperatorKind.Enum,
                         leftType,
@@ -8914,7 +8932,8 @@ class Module1
                     )
                     && leftType.IsEnumType()
                     && TypeSymbol.Equals(leftType, rightType, TypeCompareKind.ConsiderEverything2)
-                ) {
+                )
+                {
                     signature = new BinaryOperatorSignature(
                         op | BinaryOperatorKind.Enum,
                         leftType,
@@ -8930,7 +8949,8 @@ class Module1
                     )
                     && leftType.IsEnumType()
                     && TypeSymbol.Equals(leftType, rightType, TypeCompareKind.ConsiderEverything2)
-                ) {
+                )
+                {
                     signature = new BinaryOperatorSignature(
                         op | BinaryOperatorKind.Enum,
                         leftType,
@@ -8942,7 +8962,8 @@ class Module1
                     (op == BinaryOperatorKind.Addition || op == BinaryOperatorKind.Subtraction)
                     && leftType.IsDelegateType()
                     && TypeSymbol.Equals(leftType, rightType, TypeCompareKind.ConsiderEverything2)
-                ) {
+                )
+                {
                     signature = new BinaryOperatorSignature(
                         op | BinaryOperatorKind.Delegate,
                         leftType,
@@ -8961,7 +8982,8 @@ class Module1
                     )
                     && leftType.IsPointerType()
                     && rightType.IsPointerType()
-                ) {
+                )
+                {
                     signature = new BinaryOperatorSignature(
                         op | BinaryOperatorKind.Pointer,
                         compilation.CreatePointerTypeSymbol(
@@ -9060,7 +9082,8 @@ class Module1
                         ref useSiteDiagnostics
                     ).IsReference
                 )
-            ) {
+            )
+            {
                 Assert.Null(symbol1);
                 Assert.Null(symbol2);
                 Assert.Null(symbol3);
@@ -9092,7 +9115,8 @@ class Module1
                 else if (
                     (leftType.IsEnumType() || leftType.IsPointerType())
                     && (rightType.IsIntegralType() || rightType.IsCharType())
-                ) {
+                )
+                {
                     containerName = leftType.ToTestDisplayString();
                     leftName = containerName;
                     returnName = containerName;
@@ -9100,7 +9124,8 @@ class Module1
                 else if (
                     (rightType.IsEnumType() || rightType.IsPointerType())
                     && (leftType.IsIntegralType() || leftType.IsCharType())
-                ) {
+                )
+                {
                     containerName = rightType.ToTestDisplayString();
                     rightName = containerName;
                     returnName = containerName;
@@ -9170,7 +9195,8 @@ class Module1
                     symbol1.ContainingSymbol,
                     symbol1.ReturnType
                 )
-            ) {
+            )
+            {
                 match++;
             }
 
@@ -9179,7 +9205,8 @@ class Module1
                     symbol1.ContainingSymbol,
                     symbol1.Parameters[0].Type
                 )
-            ) {
+            )
+            {
                 match++;
             }
 
@@ -9188,7 +9215,8 @@ class Module1
                     symbol1.ContainingSymbol,
                     symbol1.Parameters[1].Type
                 )
-            ) {
+            )
+            {
                 match++;
             }
 
@@ -9731,7 +9759,8 @@ class P
         {
             protected override BoundExpression VisitExpressionWithoutStackGuard(
                 BoundExpression node
-            ) {
+            )
+            {
                 throw new NotImplementedException();
             }
         }
@@ -9743,7 +9772,8 @@ class P
 
             public override BoundNode VisitCompoundAssignmentOperator(
                 BoundCompoundAssignmentOperator node
-            ) {
+            )
+            {
                 if (FirstNode == null)
                 {
                     FirstNode = node;

@@ -27,7 +27,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel.InMemory.FunctionalTests
         [MemberData(nameof(EchoAppRequestDelegates))]
         public async Task CanReadAndWriteWithRewritingConnectionAdapter(
             RequestDelegate requestDelegate
-        ) {
+        )
+        {
             RewritingConnectionMiddleware middleware = null;
 
             var listenOptions = new ListenOptions(new IPEndPoint(IPAddress.Loopback, 0));
@@ -45,7 +46,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel.InMemory.FunctionalTests
 
             await using (
                 var server = new TestServer(requestDelegate, serviceContext, listenOptions)
-            ) {
+            )
+            {
                 using (var connection = server.CreateConnection())
                 {
                     // "?" changes to "!"
@@ -67,7 +69,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel.InMemory.FunctionalTests
         [MemberData(nameof(EchoAppRequestDelegates))]
         public async Task CanReadAndWriteWithAsyncConnectionMiddleware(
             RequestDelegate requestDelegate
-        ) {
+        )
+        {
             var listenOptions = new ListenOptions(new IPEndPoint(IPAddress.Loopback, 0));
             listenOptions.Use(next => new AsyncConnectionMiddleware(next).OnConnectionAsync);
 
@@ -75,7 +78,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel.InMemory.FunctionalTests
 
             await using (
                 var server = new TestServer(requestDelegate, serviceContext, listenOptions)
-            ) {
+            )
+            {
                 using (var connection = server.CreateConnection())
                 {
                     await connection.Send(
@@ -99,7 +103,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel.InMemory.FunctionalTests
         [MemberData(nameof(EchoAppRequestDelegates))]
         public async Task ImmediateFinAfterOnConnectionAsyncClosesGracefully(
             RequestDelegate requestDelegate
-        ) {
+        )
+        {
             var listenOptions = new ListenOptions(new IPEndPoint(IPAddress.Loopback, 0));
             listenOptions.Use(next => new AsyncConnectionMiddleware(next).OnConnectionAsync);
 
@@ -107,7 +112,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel.InMemory.FunctionalTests
 
             await using (
                 var server = new TestServer(requestDelegate, serviceContext, listenOptions)
-            ) {
+            )
+            {
                 using (var connection = server.CreateConnection())
                 {
                     // FIN
@@ -128,7 +134,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel.InMemory.FunctionalTests
 
             await using (
                 var server = new TestServer(requestDelegate, serviceContext, listenOptions)
-            ) {
+            )
+            {
                 using (var connection = server.CreateConnection())
                 {
                     // FIN
@@ -143,7 +150,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel.InMemory.FunctionalTests
         [MemberData(nameof(EchoAppRequestDelegates))]
         public async Task ImmediateShutdownAfterOnConnectionAsyncDoesNotCrash(
             RequestDelegate requestDelegate
-        ) {
+        )
+        {
             var listenOptions = new ListenOptions(new IPEndPoint(IPAddress.Loopback, 0));
             listenOptions.Use(next => new AsyncConnectionMiddleware(next).OnConnectionAsync);
 
@@ -189,7 +197,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel.InMemory.FunctionalTests
 
             await using (
                 var server = new TestServer(TestApp.EchoApp, serviceContext, listenOptions)
-            ) {
+            )
+            {
                 Task stopTask;
 
                 using (var connection = server.CreateConnection())
@@ -207,7 +216,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel.InMemory.FunctionalTests
         [MemberData(nameof(EchoAppRequestDelegates))]
         public async Task ThrowingSynchronousConnectionMiddlewareDoesNotCrashServer(
             RequestDelegate requestDelegate
-        ) {
+        )
+        {
             var connectionId = "";
             var listenOptions = new ListenOptions(new IPEndPoint(IPAddress.Loopback, 0));
             listenOptions.Use(
@@ -223,7 +233,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel.InMemory.FunctionalTests
 
             await using (
                 var server = new TestServer(requestDelegate, serviceContext, listenOptions)
-            ) {
+            )
+            {
                 using (var connection = server.CreateConnection())
                 {
                     await connection.Send("POST / HTTP/1.0", "Content-Length: 1000", "\r\n");
@@ -259,7 +270,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel.InMemory.FunctionalTests
                     serviceContext,
                     listenOptions
                 )
-            ) {
+            )
+            {
                 using (var connection = server.CreateConnection())
                 {
                     await connection.Send("GET / HTTP/1.0", "", "");
@@ -298,7 +310,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel.InMemory.FunctionalTests
                     serviceContext,
                     listenOptions
                 )
-            ) {
+            )
+            {
                 using (var connection = server.CreateConnection())
                 {
                     await connection.Send("GET / HTTP/1.0", "", "");
@@ -434,7 +447,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel.InMemory.FunctionalTests
                 int offset,
                 int count,
                 CancellationToken cancellationToken
-            ) {
+            )
+            {
                 var actual = await _innerStream.ReadAsync(buffer, offset, count, cancellationToken);
 
                 BytesRead += actual;
@@ -470,7 +484,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel.InMemory.FunctionalTests
                 int offset,
                 int count,
                 CancellationToken cancellationToken
-            ) {
+            )
+            {
                 for (int i = 0; i < buffer.Length; i++)
                 {
                     if (buffer[i] == '?')

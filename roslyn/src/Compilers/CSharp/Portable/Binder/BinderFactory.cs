@@ -61,7 +61,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             CSharpCompilation compilation,
             SyntaxTree syntaxTree,
             bool ignoreAccessibility
-        ) {
+        )
+        {
             _compilation = compilation;
             _syntaxTree = syntaxTree;
             _ignoreAccessibility = ignoreAccessibility;
@@ -108,7 +109,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             SyntaxNode node,
             CSharpSyntaxNode memberDeclarationOpt = null,
             Symbol memberOpt = null
-        ) {
+        )
+        {
             int position = node.SpanStart;
 
             // Unless this is interactive retrieving a binder for global statements
@@ -127,7 +129,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             int position,
             CSharpSyntaxNode memberDeclarationOpt = null,
             Symbol memberOpt = null
-        ) {
+        )
+        {
             Debug.Assert(node != null);
 
 #if DEBUG
@@ -146,7 +149,8 @@ namespace Microsoft.CodeAnalysis.CSharp
 
         internal InMethodBinder GetRecordConstructorInMethodBinder(
             SynthesizedRecordConstructor constructor
-        ) {
+        )
+        {
             RecordDeclarationSyntax typeDecl = constructor.GetSyntax();
 
             var extraInfo = NodeUsage.ConstructorBodyOrInitializer;

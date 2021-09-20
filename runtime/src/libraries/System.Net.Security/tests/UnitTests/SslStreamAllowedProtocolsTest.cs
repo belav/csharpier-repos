@@ -88,7 +88,8 @@ namespace System.Net.Security.Tests
                 X509CertificateCollection clientCertificates,
                 SslProtocols enabledSslProtocols,
                 bool checkCertificateRevocation
-            ) {
+            )
+            {
                 Task t = stream.AuthenticateAsClientAsync(
                     targetHost,
                     clientCertificates,
@@ -111,7 +112,8 @@ namespace System.Net.Security.Tests
                 X509CertificateCollection clientCertificates,
                 SslProtocols enabledSslProtocols,
                 bool checkCertificateRevocation
-            ) {
+            )
+            {
                 IAsyncResult iar = stream.BeginAuthenticateAsClient(
                     targetHost,
                     clientCertificates,
@@ -136,7 +138,8 @@ namespace System.Net.Security.Tests
                 X509CertificateCollection clientCertificates,
                 SslProtocols enabledSslProtocols,
                 bool checkCertificateRevocation
-            ) {
+            )
+            {
                 stream.AuthenticateAsClient(
                     targetHost,
                     clientCertificates,

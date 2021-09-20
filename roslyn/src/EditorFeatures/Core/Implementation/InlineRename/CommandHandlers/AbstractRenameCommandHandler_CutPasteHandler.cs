@@ -19,7 +19,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.InlineRename
             CutCommandArgs args,
             Action nextHandler,
             CommandExecutionContext context
-        ) {
+        )
+        {
             HandlePossibleTypingCommand(
                 args,
                 nextHandler,
@@ -39,7 +40,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.InlineRename
             PasteCommandArgs args,
             Action nextHandler,
             CommandExecutionContext context
-        ) {
+        )
+        {
             HandlePossibleTypingCommand(
                 args,
                 nextHandler,

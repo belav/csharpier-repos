@@ -126,7 +126,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Http3.QPack
                                 DynamicTableCapacityPrefix,
                                 out intResult
                             )
-                        ) {
+                        )
+                        {
                             OnDynamicTableCapacity(intResult);
                         }
                         else
@@ -136,7 +137,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Http3.QPack
                     }
                     else if (
                         (b & InsertWithNameReferenceMask) == InsertWithNameReferenceRepresentation
-                    ) {
+                    )
+                    {
                         prefixInt = InsertWithNameReferencePrefixMask & b;
                         _s =
                             (InsertWithNameReferenceStaticMask & b)
@@ -148,7 +150,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Http3.QPack
                                 InsertWithNameReferencePrefix,
                                 out intResult
                             )
-                        ) {
+                        )
+                        {
                             OnNameIndex(intResult);
                         }
                         else
@@ -159,7 +162,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Http3.QPack
                     else if (
                         (b & InsertWithoutNameReferenceMask)
                         == InsertWithoutNameReferenceRepresentation
-                    ) {
+                    )
+                    {
                         prefixInt = InsertWithoutNameReferencePrefixMask & b;
                         _huffman =
                             (InsertWithoutNameReferenceHuffmanMask & b)
@@ -171,7 +175,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Http3.QPack
                                 InsertWithoutNameReferencePrefix,
                                 out intResult
                             )
-                        ) {
+                        )
+                        {
                             OnStringLength(intResult, State.Name);
                         }
                         else
@@ -188,7 +193,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Http3.QPack
                                 DuplicatePrefix,
                                 out intResult
                             )
-                        ) {
+                        )
+                        {
                             OnDuplicate(intResult);
                         }
                         else
@@ -233,7 +239,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Http3.QPack
                             StringLengthPrefix,
                             out intResult
                         )
-                    ) {
+                    )
+                    {
                         OnStringLength(intResult, nextState: State.Value);
                         if (intResult == 0)
                         {

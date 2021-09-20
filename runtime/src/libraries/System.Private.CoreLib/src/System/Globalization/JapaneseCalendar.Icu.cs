@@ -27,7 +27,8 @@ namespace System.Globalization
                     CalendarDataType.EraNames,
                     out eraNames
                 )
-            ) {
+            )
+            {
                 return null;
             }
 
@@ -76,7 +77,8 @@ namespace System.Globalization
                     CalendarDataType.AbbrevEraNames,
                     out abbrevEnglishEraNames!
                 )
-            ) {
+            )
+            {
                 // Failed to get English names. fallback to hardcoded data.
                 abbrevEnglishEraNames = s_abbreviatedEnglishEraNames;
             }
@@ -87,7 +89,8 @@ namespace System.Globalization
             if (
                 abbrevEnglishEraNames[abbrevEnglishEraNames.Length - 1].Length == 0
                 || abbrevEnglishEraNames[abbrevEnglishEraNames.Length - 1][0] > '\u007F'
-            ) {
+            )
+            {
                 // Couldn't get English names.
                 abbrevEnglishEraNames = s_abbreviatedEnglishEraNames;
             }

@@ -39,7 +39,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Infrastructure
             ulong knownMethodUlong,
             HttpMethod knownMethod,
             int length
-        ) {
+        )
+        {
             _knownMethods[GetKnownMethodIndex(knownMethodUlong)] = new Tuple<
                 ulong,
                 ulong,
@@ -118,7 +119,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Infrastructure
                         output,
                         buffer.Length
                     )
-                ) {
+                )
+                {
                     KestrelBadHttpRequestException.Throw(
                         RequestRejectionReason.InvalidCharactersInHeaderName
                     );
@@ -165,7 +167,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Infrastructure
                         output,
                         buffer.Length
                     )
-                ) {
+                )
+                {
                     throw new InvalidOperationException();
                 }
             }
@@ -175,13 +178,15 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Infrastructure
             this ReadOnlySpan<byte> span,
             string name,
             Func<string, Encoding?> encodingSelector
-        ) {
+        )
+        {
             if (
                 ReferenceEquals(
                     KestrelServerOptions.DefaultRequestHeaderEncodingSelector,
                     encodingSelector
                 )
-            ) {
+            )
+            {
                 return span.GetAsciiOrUTF8StringNonNullCharacters(DefaultRequestHeaderEncoding);
             }
 
@@ -241,7 +246,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Infrastructure
             this ReadOnlySpan<byte> span,
             out HttpMethod method,
             out int length
-        ) {
+        )
+        {
             method = GetKnownMethod(span, out length);
             return method != HttpMethod.Custom;
         }
@@ -309,13 +315,15 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Infrastructure
                 if (
                     firstChar == 'G'
                     && string.Equals(value, HttpMethods.Get, StringComparison.Ordinal)
-                ) {
+                )
+                {
                     method = HttpMethod.Get;
                 }
                 else if (
                     firstChar == 'P'
                     && string.Equals(value, HttpMethods.Put, StringComparison.Ordinal)
-                ) {
+                )
+                {
                     method = HttpMethod.Put;
                 }
             }
@@ -324,13 +332,15 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Infrastructure
                 if (
                     firstChar == 'H'
                     && string.Equals(value, HttpMethods.Head, StringComparison.Ordinal)
-                ) {
+                )
+                {
                     method = HttpMethod.Head;
                 }
                 else if (
                     firstChar == 'P'
                     && string.Equals(value, HttpMethods.Post, StringComparison.Ordinal)
-                ) {
+                )
+                {
                     method = HttpMethod.Post;
                 }
             }
@@ -339,13 +349,15 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Infrastructure
                 if (
                     firstChar == 'T'
                     && string.Equals(value, HttpMethods.Trace, StringComparison.Ordinal)
-                ) {
+                )
+                {
                     method = HttpMethod.Trace;
                 }
                 else if (
                     firstChar == 'P'
                     && string.Equals(value, HttpMethods.Patch, StringComparison.Ordinal)
-                ) {
+                )
+                {
                     method = HttpMethod.Patch;
                 }
             }
@@ -354,7 +366,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Infrastructure
                 if (
                     firstChar == 'D'
                     && string.Equals(value, HttpMethods.Delete, StringComparison.Ordinal)
-                ) {
+                )
+                {
                     method = HttpMethod.Delete;
                 }
             }
@@ -363,13 +376,15 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Infrastructure
                 if (
                     firstChar == 'C'
                     && string.Equals(value, HttpMethods.Connect, StringComparison.Ordinal)
-                ) {
+                )
+                {
                     method = HttpMethod.Connect;
                 }
                 else if (
                     firstChar == 'O'
                     && string.Equals(value, HttpMethods.Options, StringComparison.Ordinal)
-                ) {
+                )
+                {
                     method = HttpMethod.Options;
                 }
             }
@@ -392,7 +407,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Infrastructure
             this ReadOnlySpan<byte> span,
             out HttpVersion knownVersion,
             out byte length
-        ) {
+        )
+        {
             knownVersion = GetKnownVersionAndConfirmCR(span);
             if (knownVersion != HttpVersion.Unknown)
             {

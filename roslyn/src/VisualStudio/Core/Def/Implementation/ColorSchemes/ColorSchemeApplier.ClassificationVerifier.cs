@@ -129,7 +129,8 @@ namespace Microsoft.VisualStudio.LanguageServices.ColorSchemes
                     SystemParameters.HighContrast
                     || !_colorSchemes.TryGetValue(schemeName, out var colorScheme)
                     || !colorScheme.TryGetValue(themeId, out var colorSchemeTheme)
-                ) {
+                )
+                {
                     return false;
                 }
 
@@ -144,7 +145,8 @@ namespace Microsoft.VisualStudio.LanguageServices.ColorSchemes
                         TextEditorMEFItemsColorCategory,
                         (uint)__FCSTORAGEFLAGS.FCSF_READONLY
                     ) != VSConstants.S_OK
-                ) {
+                )
+                {
                     // We were unable to access color information.
                     return false;
                 }
@@ -158,7 +160,8 @@ namespace Microsoft.VisualStudio.LanguageServices.ColorSchemes
                         if (
                             _fontAndColorStorage.GetItem(classification, colorItems)
                             != VSConstants.S_OK
-                        ) {
+                        )
+                        {
                             // Classifications that are still defaulted will not have entries.
                             continue;
                         }
@@ -172,7 +175,8 @@ namespace Microsoft.VisualStudio.LanguageServices.ColorSchemes
                                 colorItem,
                                 classification
                             )
-                        ) {
+                        )
+                        {
                             return true;
                         }
                     }
@@ -195,7 +199,8 @@ namespace Microsoft.VisualStudio.LanguageServices.ColorSchemes
                 ImmutableDictionary<string, uint> schemeThemeColors,
                 ColorableItemInfo colorItem,
                 string classification
-            ) {
+            )
+            {
                 AssertIsForeground();
                 Contract.ThrowIfNull(_fontAndColorUtilities);
 
@@ -206,7 +211,8 @@ namespace Microsoft.VisualStudio.LanguageServices.ColorSchemes
                         foregroundColorRef,
                         out var foregroundColorType
                     ) != VSConstants.S_OK
-                ) {
+                )
+                {
                     // Without being able to check color type, we cannot make a determination.
                     return false;
                 }

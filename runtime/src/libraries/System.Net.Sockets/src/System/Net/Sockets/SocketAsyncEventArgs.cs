@@ -561,7 +561,8 @@ namespace System.Net.Sockets
                         || operation == SocketAsyncOperation.Accept
                     )
                 )
-            ) {
+            )
+            {
                 _context = ExecutionContext.Capture();
             }
 
@@ -634,7 +635,8 @@ namespace System.Net.Sockets
             SocketError socketError,
             int bytesTransferred,
             SocketFlags flags
-        ) {
+        )
+        {
             SetResults(socketError, bytesTransferred, flags);
 
             // This will be null if we're doing a static ConnectAsync to a DnsEndPoint with AddressFamily.Unspecified;
@@ -669,7 +671,8 @@ namespace System.Net.Sockets
             SocketError socketError,
             int bytesTransferred,
             SocketFlags flags
-        ) {
+        )
+        {
             ExecutionContext? context = _context; // store context before it's cleared as part of finishing the operation
 
             FinishOperationSyncFailure(socketError, bytesTransferred, flags);
@@ -693,7 +696,8 @@ namespace System.Net.Sockets
             DnsEndPoint endPoint,
             SocketType socketType,
             ProtocolType protocolType
-        ) {
+        )
+        {
             Debug.Assert(
                 endPoint.AddressFamily == AddressFamily.Unspecified
                     || endPoint.AddressFamily == AddressFamily.InterNetwork
@@ -741,7 +745,8 @@ namespace System.Net.Sockets
                 SocketType socketType,
                 ProtocolType protocolType,
                 CancellationToken cancellationToken
-            ) {
+            )
+            {
                 Socket? tempSocketIPv4 = null,
                     tempSocketIPv6 = null;
                 Exception? caughtException = null;
@@ -825,7 +830,8 @@ namespace System.Net.Sockets
                                     s => Socket.CancelConnectAsync((SocketAsyncEventArgs)s!),
                                     internalArgs
                                 )
-                            ) {
+                            )
+                            {
                                 await new ValueTask(
                                     internalArgs,
                                     internalArgs.Version
@@ -882,7 +888,8 @@ namespace System.Net.Sockets
                                 caughtException is SocketException se
                                 && se.SocketErrorCode == SocketError.OperationAborted
                             )
-                        ) {
+                        )
+                        {
                             _currentSocket.Dispose();
                         }
                     }
@@ -1114,7 +1121,8 @@ namespace System.Net.Sockets
             SocketError socketError,
             int bytesTransferred,
             SocketFlags flags
-        ) {
+        )
+        {
             Debug.Assert(socketError != SocketError.IOPending);
 
             if (socketError == SocketError.Success)
@@ -1134,7 +1142,8 @@ namespace System.Net.Sockets
             SocketType? socketType,
             SocketAsyncOperation operation,
             int bytesTransferred
-        ) {
+        )
+        {
             switch (operation)
             {
                 case SocketAsyncOperation.Receive:

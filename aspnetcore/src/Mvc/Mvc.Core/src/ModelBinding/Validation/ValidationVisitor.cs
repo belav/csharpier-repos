@@ -35,7 +35,8 @@ namespace Microsoft.AspNetCore.Mvc.ModelBinding.Validation
             ValidatorCache validatorCache,
             IModelMetadataProvider metadataProvider,
             ValidationStateDictionary? validationState
-        ) {
+        )
+        {
             if (actionContext == null)
             {
                 throw new ArgumentNullException(nameof(actionContext));
@@ -189,7 +190,8 @@ namespace Microsoft.AspNetCore.Mvc.ModelBinding.Validation
             object? model,
             bool alwaysValidateAtTopLevel,
             object? container
-        ) {
+        )
+        {
             if (container != null && metadata!.MetadataKind != ModelMetadataKind.Property)
             {
                 throw new ArgumentException(
@@ -378,7 +380,8 @@ namespace Microsoft.AspNetCore.Mvc.ModelBinding.Validation
             else if (
                 metadata.HasValidators == false
                 && ModelState.GetFieldValidationState(key) != ModelValidationState.Invalid
-            ) {
+            )
+            {
                 if (metadata.BoundConstructor != null)
                 {
                     metadata.ThrowIfRecordTypeHasValidationOnProperties();
@@ -440,7 +443,8 @@ namespace Microsoft.AspNetCore.Mvc.ModelBinding.Validation
             if (
                 (isValid || ValidateComplexTypesIfChildValidationFails)
                 && !ModelState.HasReachedMaxErrors
-            ) {
+            )
+            {
                 isValid &= ValidateNode();
             }
 
@@ -483,7 +487,8 @@ namespace Microsoft.AspNetCore.Mvc.ModelBinding.Validation
                 if (
                     metadata.PropertyValidationFilter?.ShouldValidateEntry(entry, parentEntry)
                     == false
-                ) {
+                )
+                {
                     SuppressValidation(key);
                     continue;
                 }
@@ -560,7 +565,8 @@ namespace Microsoft.AspNetCore.Mvc.ModelBinding.Validation
                 ModelMetadata metadata,
                 object? model,
                 IValidationStrategy strategy
-            ) {
+            )
+            {
                 var recursifier = new StateManager(visitor, null);
 
                 visitor.Container = visitor.Model;

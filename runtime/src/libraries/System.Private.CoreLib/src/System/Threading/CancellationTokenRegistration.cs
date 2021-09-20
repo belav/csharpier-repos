@@ -37,13 +37,15 @@ namespace System.Threading
             if (
                 _node is CancellationTokenSource.CallbackNode node
                 && !node.Registrations.Unregister(_id, node)
-            ) {
+            )
+            {
                 WaitForCallbackIfNecessary(_id, node);
 
                 static void WaitForCallbackIfNecessary(
                     long id,
                     CancellationTokenSource.CallbackNode node
-                ) {
+                )
+                {
                     // We're a valid registration but we were unable to unregister, which means the callback wasn't in the list,
                     // which means either it already executed or it's currently executing. We guarantee that we will not return
                     // if the callback is being executed (assuming we are not currently called by the callback itself)
@@ -89,7 +91,8 @@ namespace System.Threading
             static ValueTask WaitForCallbackIfNecessaryAsync(
                 long id,
                 CancellationTokenSource.CallbackNode node
-            ) {
+            )
+            {
                 // Same as WaitForCallbackIfNecessary, except returning a task that'll be completed when callbacks complete.
 
                 CancellationTokenSource source = node.Registrations.Source;

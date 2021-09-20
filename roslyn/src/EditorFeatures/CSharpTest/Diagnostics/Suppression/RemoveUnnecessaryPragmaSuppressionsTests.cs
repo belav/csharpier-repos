@@ -101,7 +101,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessarySuppre
                                     localReference.Parent
                                         is ISimpleAssignmentOperation simpleAssignment
                                     && simpleAssignment.Target == localReference
-                                ) {
+                                )
+                                {
                                     localsToIsAssignedMap.AddOrUpdate(
                                         localReference.Local,
                                         true,
@@ -348,7 +349,8 @@ class Class
             public async Task TestDoNotRemoveUnsupportedDiagnosticSuppression(
                 bool disable,
                 TestKind testKind
-            ) {
+            )
+            {
                 var disableOrRestore = disable ? "disable" : "restore";
                 var pragmas = new StringBuilder();
                 var suppressMessageAttribtes = new StringBuilder();
@@ -708,7 +710,8 @@ class Class
             [Theory, CombinatorialData]
             public async Task TestRemoveDiagnosticSuppression_DuplicatePragmaSuppression(
                 bool testFixFromDisable
-            ) {
+            )
+            {
                 var (disablePrefix, disableSuffix, restorePrefix, restoreSuffix) =
                     testFixFromDisable ? ("[|", "|]", "", "") : ("", "", "[|", "|]");
 
@@ -857,7 +860,8 @@ class Class
             [Theory, CombinatorialData]
             public async Task TestRemoveDiagnosticSuppression_Pragma_InnerValidSuppression(
                 bool testFixFromDisable
-            ) {
+            )
+            {
                 var (disablePrefix, disableSuffix, restorePrefix, restoreSuffix) =
                     testFixFromDisable ? ("[|", "|]", "", "") : ("", "", "[|", "|]");
 
@@ -916,7 +920,8 @@ class Class
             [Theory, CombinatorialData]
             public async Task TestRemoveDiagnosticSuppression_Pragma_OuterValidSuppression(
                 bool testFixFromDisable
-            ) {
+            )
+            {
                 var (disablePrefix, disableSuffix, restorePrefix, restoreSuffix) =
                     testFixFromDisable ? ("[|", "|]", "", "") : ("", "", "[|", "|]");
 
@@ -975,7 +980,8 @@ class Class
             [Theory, CombinatorialData]
             public async Task TestRemoveDiagnosticSuppression_OverlappingDirectives(
                 bool testFixFromDisable
-            ) {
+            )
+            {
                 var (disablePrefix, disableSuffix, restorePrefix, restoreSuffix) =
                     testFixFromDisable ? ("[|", "|]", "", "") : ("", "", "[|", "|]");
 
@@ -1174,7 +1180,8 @@ class Class
             [Theory, CombinatorialData]
             public async Task TestDoNotRemoveCompilerDiagnosticSuppression_IntegerId(
                 bool leadingZero
-            ) {
+            )
+            {
                 var id = leadingZero ? "0168" : "168";
                 await TestMissingInRegularAndScriptAsync(
                     $@"
@@ -1253,7 +1260,8 @@ class Class
             public async Task TestDoNotRemoveExcludedDiagnosticSuppression_Subset(
                 bool suppressCompilerDiagnostic,
                 bool testDisableDirective
-            ) {
+            )
+            {
                 var (disabledId, enabledId) = suppressCompilerDiagnostic
                     ? ("CS0168", UserDiagnosticAnalyzer.Descriptor0168.Id)
                     : (UserDiagnosticAnalyzer.Descriptor0168.Id, "CS0168");

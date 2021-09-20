@@ -30,7 +30,8 @@ namespace Roslyn.Test.Utilities
         public static DiagnosticDescriptor CreateSimpleDescriptor(
             string id,
             params string[] additionalCustomTags
-        ) {
+        )
+        {
             var customTags = additionalCustomTags.Concat(WellKnownDiagnosticTags.NotConfigurable)
                 .AsArray();
             return new DiagnosticDescriptor(

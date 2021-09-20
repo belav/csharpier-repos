@@ -28,7 +28,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.ProjectSystem
             EventHandler updatedOnDiskHandler = null,
             EventHandler<bool> openedHandler = null,
             EventHandler<bool> closingHandler = null
-        ) {
+        )
+        {
             return new ShimDocument(
                 hostProject,
                 DocumentId.CreateNewId(hostProject.Id),
@@ -44,7 +45,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.ProjectSystem
                 DocumentId id,
                 string filePath,
                 SourceCodeKind sourceCodeKind = SourceCodeKind.Regular
-            ) {
+            )
+            {
                 Project = hostProject;
                 Id = id ?? DocumentId.CreateNewId(hostProject.Id, filePath);
                 FilePath = filePath;

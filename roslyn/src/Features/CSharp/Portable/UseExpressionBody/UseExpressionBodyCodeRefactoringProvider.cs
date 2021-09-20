@@ -87,7 +87,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UseExpressionBody
             SourceText text,
             SyntaxNode node,
             int position
-        ) {
+        )
+        {
             var declaration = GetDeclaration(node, helper);
             if (declaration == null)
                 return null;
@@ -111,7 +112,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UseExpressionBody
             SyntaxNode declaration,
             OptionSet optionSet,
             UseExpressionBodyHelper helper
-        ) {
+        )
+        {
             var document = context.Document;
 
             var succeeded = false;
@@ -181,7 +183,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UseExpressionBody
             UseExpressionBodyHelper helper,
             bool useExpressionBody,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var semanticModel = await document.GetSemanticModelAsync(cancellationToken)
                 .ConfigureAwait(false);
             var updatedDeclaration = helper.Update(semanticModel, declaration, useExpressionBody);

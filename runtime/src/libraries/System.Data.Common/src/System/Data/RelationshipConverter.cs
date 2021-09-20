@@ -37,7 +37,8 @@ namespace System.Data
             CultureInfo culture,
             object value,
             Type destinationType
-        ) {
+        )
+        {
             if (destinationType == null)
             {
                 throw new ArgumentNullException(nameof(destinationType));
@@ -55,7 +56,8 @@ namespace System.Data
                 if (
                     string.IsNullOrEmpty(parentTable.Namespace)
                     && string.IsNullOrEmpty(childTable.Namespace)
-                ) {
+                )
+                {
                     ctor = typeof(DataRelation).GetConstructor(
                         new Type[]
                         {

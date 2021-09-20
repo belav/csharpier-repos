@@ -53,7 +53,8 @@ namespace System.Reflection.Emit.Tests
         public static AssemblyBuilder DynamicAssembly(
             string name = "TestAssembly",
             AssemblyBuilderAccess access = AssemblyBuilderAccess.Run
-        ) {
+        )
+        {
             AssemblyName assemblyName = new AssemblyName(name);
             return AssemblyBuilder.DefineDynamicAssembly(assemblyName, access);
         }
@@ -61,7 +62,8 @@ namespace System.Reflection.Emit.Tests
         public static ModuleBuilder DynamicModule(
             string assemblyName = "TestAssembly",
             string moduleName = "TestModule"
-        ) {
+        )
+        {
             return DynamicAssembly(assemblyName).DefineDynamicModule(moduleName);
         }
 
@@ -70,7 +72,8 @@ namespace System.Reflection.Emit.Tests
             string assemblyName = "TestAssembly",
             string moduleName = "TestModule",
             string typeName = "TestType"
-        ) {
+        )
+        {
             return DynamicModule(assemblyName, moduleName).DefineType(typeName, attributes);
         }
 
@@ -80,7 +83,8 @@ namespace System.Reflection.Emit.Tests
             string enumName = "TestEnum",
             string assemblyName = "TestAssembly",
             string moduleName = "TestModule"
-        ) {
+        )
+        {
             return DynamicModule(assemblyName, moduleName)
                 .DefineEnum(enumName, visibility, underlyingType);
         }
@@ -95,7 +99,8 @@ namespace System.Reflection.Emit.Tests
             int size,
             PackingSize packingSize,
             Type[] implementedInterfaces
-        ) {
+        )
+        {
             Assert.Equal(module, type.Module);
             Assert.Equal(module.Assembly, type.Assembly);
 
@@ -126,7 +131,8 @@ namespace System.Reflection.Emit.Tests
                 declaringType == null
                 && !type.IsInterface
                 && (implementedInterfaces == null || implementedInterfaces.Length == 0)
-            ) {
+            )
+            {
                 Type createdType = type.CreateTypeInfo().AsType();
                 Assert.Equal(createdType, module.GetType(name, false, false));
                 Assert.Equal(createdType, module.GetType(name, true, false));
@@ -152,7 +158,8 @@ namespace System.Reflection.Emit.Tests
             MethodAttributes attributes,
             CallingConventions callingConvention,
             Type[] parameterTypes
-        ) {
+        )
+        {
             string expectedName =
                 (attributes & MethodAttributes.Static) != 0
                     ? ConstructorInfo.TypeConstructorName

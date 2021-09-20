@@ -94,7 +94,8 @@ namespace System.Reflection.Context.Custom
             Type returnType,
             Type[] types,
             ParameterModifier[] modifiers
-        ) {
+        )
+        {
             PropertyInfo property = base.GetPropertyImpl(
                 name,
                 bindingAttr,
@@ -219,7 +220,8 @@ namespace System.Reflection.Context.Custom
             CallingConventions callConvention,
             Type[] types,
             ParameterModifier[] modifiers
-        ) {
+        )
+        {
             MethodInfo method = base.GetMethodImpl(
                 name,
                 bindingAttr,

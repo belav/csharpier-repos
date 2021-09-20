@@ -1074,7 +1074,8 @@ class C<T> { enum E4 : T { } }
             string text,
             string enumName,
             params object[] expectedEnumValues
-        ) {
+        )
+        {
             var comp = CreateCompilation(text);
             var specialType = SpecialType.System_Int32;
             if (expectedEnumValues.Length > 0)
@@ -1091,7 +1092,8 @@ class C<T> { enum E4 : T { } }
             string enumName,
             SpecialType underlyingType,
             params object[] expectedEnumValues
-        ) {
+        )
+        {
             var global = comp.SourceModule.GlobalNamespace;
             var symEnum = GetSymbolByFullName(comp, enumName) as NamedTypeSymbol;
             Assert.NotNull(symEnum);

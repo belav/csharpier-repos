@@ -11,7 +11,8 @@ namespace System.CodeDom.Compiler
         CompilerResults ICodeCompiler.CompileAssemblyFromDom(
             CompilerParameters options,
             CodeCompileUnit e
-        ) {
+        )
+        {
             if (options == null)
             {
                 throw new ArgumentNullException(nameof(options));
@@ -31,7 +32,8 @@ namespace System.CodeDom.Compiler
         CompilerResults ICodeCompiler.CompileAssemblyFromFile(
             CompilerParameters options,
             string fileName
-        ) {
+        )
+        {
             if (options == null)
             {
                 throw new ArgumentNullException(nameof(options));
@@ -51,7 +53,8 @@ namespace System.CodeDom.Compiler
         CompilerResults ICodeCompiler.CompileAssemblyFromSource(
             CompilerParameters options,
             string source
-        ) {
+        )
+        {
             if (options == null)
             {
                 throw new ArgumentNullException(nameof(options));
@@ -71,7 +74,8 @@ namespace System.CodeDom.Compiler
         CompilerResults ICodeCompiler.CompileAssemblyFromSourceBatch(
             CompilerParameters options,
             string[] sources
-        ) {
+        )
+        {
             if (options == null)
             {
                 throw new ArgumentNullException(nameof(options));
@@ -91,7 +95,8 @@ namespace System.CodeDom.Compiler
         CompilerResults ICodeCompiler.CompileAssemblyFromFileBatch(
             CompilerParameters options,
             string[] fileNames
-        ) {
+        )
+        {
             if (options == null)
             {
                 throw new ArgumentNullException(nameof(options));
@@ -121,7 +126,8 @@ namespace System.CodeDom.Compiler
         CompilerResults ICodeCompiler.CompileAssemblyFromDomBatch(
             CompilerParameters options,
             CodeCompileUnit[] ea
-        ) {
+        )
+        {
             if (options == null)
             {
                 throw new ArgumentNullException(nameof(options));
@@ -182,7 +188,8 @@ namespace System.CodeDom.Compiler
         protected virtual CompilerResults FromDomBatch(
             CompilerParameters options,
             CodeCompileUnit[] ea
-        ) {
+        )
+        {
             if (options == null)
             {
                 throw new ArgumentNullException(nameof(options));
@@ -238,7 +245,8 @@ namespace System.CodeDom.Compiler
         protected virtual CompilerResults FromFileBatch(
             CompilerParameters options,
             string[] fileNames
-        ) {
+        )
+        {
             if (options == null)
             {
                 throw new ArgumentNullException(nameof(options));
@@ -279,7 +287,8 @@ namespace System.CodeDom.Compiler
         protected virtual CompilerResults FromSourceBatch(
             CompilerParameters options,
             string[] sources
-        ) {
+        )
+        {
             if (options == null)
             {
                 throw new ArgumentNullException(nameof(options));

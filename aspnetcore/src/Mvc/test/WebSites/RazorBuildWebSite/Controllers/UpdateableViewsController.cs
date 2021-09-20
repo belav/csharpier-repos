@@ -14,7 +14,8 @@ namespace RazorBuildWebSite
             [FromServices] UpdateableFileProvider fileProvider,
             string path,
             string content
-        ) {
+        )
+        {
             fileProvider.UpdateContent(path, content);
             return Ok();
         }

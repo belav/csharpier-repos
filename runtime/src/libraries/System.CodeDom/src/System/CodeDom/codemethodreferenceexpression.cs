@@ -20,7 +20,8 @@ namespace System.CodeDom
             CodeExpression targetObject,
             string methodName,
             params CodeTypeReference[] typeParameters
-        ) {
+        )
+        {
             TargetObject = targetObject;
             MethodName = methodName;
             if (typeParameters != null && typeParameters.Length > 0)

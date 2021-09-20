@@ -35,7 +35,8 @@ namespace Microsoft.CodeAnalysis.Remote
         public ValueTask ComputeProjectTelemetryAsync(
             RemoteServiceCallbackId callbackId,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             return RunServiceAsync(
                 cancellationToken =>
                 {

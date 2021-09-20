@@ -565,7 +565,8 @@ namespace Microsoft.Win32.SystemEventsTests
             int uiAction,
             string area,
             UserPreferenceCategory expectedCategory
-        ) {
+        )
+        {
             var changing = new AutoResetEvent(false);
             var changed = new AutoResetEvent(false);
 
@@ -684,7 +685,8 @@ namespace Microsoft.Win32.SystemEventsTests
             int uiAction,
             string area,
             UserPreferenceCategory expectedCategory
-        ) {
+        )
+        {
             bool changing = false,
                 changed = false;
 

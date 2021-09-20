@@ -14,7 +14,8 @@ namespace System
         // On equal, first sequence wins. <-1, -1> for no compression.
         internal static (int longestSequenceStart, int longestSequenceLength) FindCompressionRange(
             ReadOnlySpan<ushort> numbers
-        ) {
+        )
+        {
             int longestSequenceLength = 0,
                 longestSequenceStart = -1,
                 currentSequenceLength = 0;
@@ -52,7 +53,8 @@ namespace System
                 && numbers[2] == 0
                 && numbers[3] == 0
                 && numbers[6] != 0
-            ) {
+            )
+            {
                 // RFC 5952 Section 5 - 0:0 : 0:0 : 0:[0 | FFFF] : x.x.x.x
                 if (numbers[4] == 0 && (numbers[5] == 0 || numbers[5] == 0xFFFF))
                 {
@@ -238,7 +240,8 @@ namespace System
                                     false,
                                     false
                                 )
-                            ) {
+                            )
+                            {
                                 return false;
                             }
                             // ipv4 address takes 2 slots in ipv6 address, one was just counted meeting the '.'
@@ -308,7 +311,8 @@ namespace System
             Span<ushort> numbers,
             int start,
             ref string? scopeId
-        ) {
+        )
+        {
             int number = 0;
             int index = 0;
             int compressorIndex = -1;
@@ -368,7 +372,8 @@ namespace System
                                 && (address[j] != '/')
                                 && (j < i + 4);
                             ++j
-                        ) {
+                        )
+                        {
                             if (address[j] == '.')
                             {
                                 // we have an IPv4 address. Find the end of it:
@@ -382,7 +387,8 @@ namespace System
                                     && (address[j] != ']')
                                     && (address[j] != '/')
                                     && (address[j] != '%')
-                                ) {
+                                )
+                                {
                                     ++j;
                                 }
                                 number = IPv4AddressHelper.ParseHostNumber(address, i, j);

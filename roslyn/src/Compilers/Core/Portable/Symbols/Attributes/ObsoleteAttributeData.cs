@@ -44,7 +44,8 @@ namespace Microsoft.CodeAnalysis
             bool isError,
             string? diagnosticId,
             string? urlFormat
-        ) {
+        )
+        {
             Kind = kind;
             Message = message;
             IsError = isError;

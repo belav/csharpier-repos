@@ -22,7 +22,8 @@ namespace System.Reflection
             object defaultValue,
             MemberInfo member,
             MarshalAsAttribute marshalAs
-        ) {
+        )
+        {
             NameImpl = name;
             ClassImpl = type;
             PositionImpl = position;
@@ -36,7 +37,8 @@ namespace System.Reflection
             StringBuilder sb,
             ParameterInfo[] p,
             CallingConventions callingConvention
-        ) {
+        )
+        {
             for (int i = 0; i < p.Length; ++i)
             {
                 if (i > 0)
@@ -73,7 +75,8 @@ namespace System.Reflection
             Type? type,
             MemberInfo member,
             int position
-        ) {
+        )
+        {
             this.ClassImpl = type;
             this.MemberImpl = member;
             if (pb != null)
@@ -95,7 +98,8 @@ namespace System.Reflection
             Type? type,
             MemberInfo member,
             int position
-        ) {
+        )
+        {
             return new RuntimeParameterInfo(pb, type, member, position);
         }
 
@@ -105,7 +109,8 @@ namespace System.Reflection
             Type? type,
             MemberInfo member,
             int position
-        ) {
+        )
+        {
             this.ClassImpl = type;
             this.MemberImpl = member;
             if (pinfo != null)
@@ -350,7 +355,8 @@ namespace System.Reflection
             Type? type,
             MemberInfo member,
             int position
-        ) {
+        )
+        {
             return new RuntimeParameterInfo(pinfo, type, member, position);
         }
 
@@ -363,7 +369,8 @@ namespace System.Reflection
             Type type,
             MemberInfo member,
             MarshalAsAttribute marshalAs
-        ) {
+        )
+        {
             return new RuntimeParameterInfo(type, member, marshalAs);
         }
 

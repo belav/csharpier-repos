@@ -95,7 +95,8 @@ namespace Microsoft.CodeAnalysis.CSharp.SignatureHelp
         internal static SignatureHelpState? GetSignatureHelpState(
             BaseArgumentListSyntax argumentList,
             int position
-        ) {
+        )
+        {
             return CommonSignatureHelpUtilities.GetSignatureHelpState(
                 argumentList,
                 position,
@@ -109,7 +110,8 @@ namespace Microsoft.CodeAnalysis.CSharp.SignatureHelp
         internal static SignatureHelpState? GetSignatureHelpState(
             TypeArgumentListSyntax argumentList,
             int position
-        ) {
+        )
+        {
             return CommonSignatureHelpUtilities.GetSignatureHelpState(
                 argumentList,
                 position,
@@ -123,7 +125,8 @@ namespace Microsoft.CodeAnalysis.CSharp.SignatureHelp
         internal static SignatureHelpState? GetSignatureHelpState(
             InitializerExpressionSyntax argumentList,
             int position
-        ) {
+        )
+        {
             return CommonSignatureHelpUtilities.GetSignatureHelpState(
                 argumentList,
                 position,
@@ -137,7 +140,8 @@ namespace Microsoft.CodeAnalysis.CSharp.SignatureHelp
         internal static SignatureHelpState? GetSignatureHelpState(
             AttributeArgumentListSyntax argumentList,
             int position
-        ) {
+        )
+        {
             return CommonSignatureHelpUtilities.GetSignatureHelpState(
                 argumentList,
                 position,
@@ -186,7 +190,8 @@ namespace Microsoft.CodeAnalysis.CSharp.SignatureHelp
                     SyntaxKind.ParenthesizedExpression,
                     out ParenthesizedExpressionSyntax? parenExpr
                 )
-            ) {
+            )
+            {
                 var parenthesizedExpr = parenExpr.WalkUpParentheses();
                 if (parenthesizedExpr.Parent is ArgumentSyntax)
                 {
@@ -216,7 +221,8 @@ namespace Microsoft.CodeAnalysis.CSharp.SignatureHelp
                 token.IsKind(SyntaxKind.CommaToken)
                 && token.Parent is TupleExpressionSyntax
                 && token.GetAncestor<TSyntaxNode>() != null
-            ) {
+            )
+            {
                 return true;
             }
 

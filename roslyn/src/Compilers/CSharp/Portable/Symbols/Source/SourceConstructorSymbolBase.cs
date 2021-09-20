@@ -79,7 +79,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                 && (_lazyParameters.Length != 0)
                 && ContainingType.Name
                     == ((ConstructorDeclarationSyntax)this.SyntaxNode).Identifier.ValueText
-            ) {
+            )
+            {
                 diagnostics.Add(ErrorCode.ERR_StaticConstParam, location, this);
             }
 
@@ -93,7 +94,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                     || _lazyParameters.Length > 0
                         && _lazyParameters[_lazyParameters.Length - 1].IsParams
                 )
-            ) {
+            )
+            {
                 diagnostics.Add(ErrorCode.ERR_BadVarargs, location);
             }
         }
@@ -107,7 +109,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
         internal sealed override void AfterAddingTypeMembersChecks(
             ConversionsBase conversions,
             BindingDiagnosticBag diagnostics
-        ) {
+        )
+        {
             base.AfterAddingTypeMembersChecks(conversions, diagnostics);
 
             var compilation = DeclaringCompilation;
@@ -286,7 +289,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                     ctorInitializerLength,
                     out syntaxOffset
                 )
-            ) {
+            )
+            {
                 return syntaxOffset;
             }
 

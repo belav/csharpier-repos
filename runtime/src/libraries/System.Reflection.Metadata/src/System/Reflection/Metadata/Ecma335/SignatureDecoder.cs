@@ -30,7 +30,8 @@ namespace System.Reflection.Metadata.Ecma335
             ISignatureTypeProvider<TType, TGenericContext> provider,
             MetadataReader metadataReader,
             TGenericContext genericContext
-        ) {
+        )
+        {
             if (provider == null)
             {
                 Throw.ArgumentNull(nameof(provider));
@@ -63,7 +64,8 @@ namespace System.Reflection.Metadata.Ecma335
             ref BlobReader blobReader,
             bool allowTypeSpecifications,
             int typeCode
-        ) {
+        )
+        {
             TType elementType;
             int index;
 
@@ -326,7 +328,8 @@ namespace System.Reflection.Metadata.Ecma335
             ref BlobReader blobReader,
             byte rawTypeKind,
             bool allowTypeSpecifications
-        ) {
+        )
+        {
             EntityHandle handle = blobReader.ReadTypeHandle();
             if (!handle.IsNil)
             {

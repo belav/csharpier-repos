@@ -59,7 +59,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UseDefaultLiteral
             ImmutableArray<Diagnostic> diagnostics,
             SyntaxEditor editor,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             // Fix-All for this feature is somewhat complicated.  Each time we fix one case, it
             // may make the next case unfixable.  For example:
             //
@@ -111,13 +112,12 @@ namespace Microsoft.CodeAnalysis.CSharp.UseDefaultLiteral
 
         private class MyCodeAction : CustomCodeActions.DocumentChangeAction
         {
-            public MyCodeAction(
-                Func<CancellationToken, Task<Document>> createChangedDocument
-            ) : base(
-                CSharpAnalyzersResources.Simplify_default_expression,
-                createChangedDocument,
-                CSharpAnalyzersResources.Simplify_default_expression
-            ) { }
+            public MyCodeAction(Func<CancellationToken, Task<Document>> createChangedDocument)
+                : base(
+                    CSharpAnalyzersResources.Simplify_default_expression,
+                    createChangedDocument,
+                    CSharpAnalyzersResources.Simplify_default_expression
+                ) { }
         }
     }
 }

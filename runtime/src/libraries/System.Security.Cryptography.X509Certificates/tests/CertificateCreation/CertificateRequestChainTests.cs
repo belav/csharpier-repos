@@ -48,7 +48,8 @@ namespace System.Security.Cryptography.X509Certificates.Tests.CertificateCreatio
             using (ECDiffieHellman leafKey = ECDiffieHellman.Create(ECCurve.NamedCurves.nistP256))
             using (
                 ECDiffieHellman leafPubKey = ECDiffieHellman.Create(leafKey.ExportParameters(false))
-            ) {
+            )
+            {
                 CreateAndTestChain(rootKey, intermed1Key, intermed2Key, leafPubKey);
             }
         }
@@ -115,7 +116,8 @@ namespace System.Security.Cryptography.X509Certificates.Tests.CertificateCreatio
             bool? isCA,
             X509KeyUsageFlags keyUsage,
             bool expectSuccess
-        ) {
+        )
+        {
             HashAlgorithmName hashAlgorithm = HashAlgorithmName.SHA384;
 
             ECDsa rootKey = null;
@@ -181,7 +183,8 @@ namespace System.Security.Cryptography.X509Certificates.Tests.CertificateCreatio
                             end,
                             new byte[] { 6, 0, 2, 2, 10, 23 }
                         )
-                    ) {
+                    )
+                    {
                         intermedCert = tmp.CopyWithPrivateKey(intermedKey);
                     }
 
@@ -240,7 +243,8 @@ namespace System.Security.Cryptography.X509Certificates.Tests.CertificateCreatio
             string dn,
             AsymmetricAlgorithm key,
             HashAlgorithmName hashAlgorithm
-        ) {
+        )
+        {
             X500DistinguishedName x500dn = new X500DistinguishedName(dn);
             return key switch
             {
@@ -279,7 +283,8 @@ namespace System.Security.Cryptography.X509Certificates.Tests.CertificateCreatio
             HashAlgorithmName hashAlgorithm,
             bool isCa,
             int? pathLen
-        ) {
+        )
+        {
             const X509KeyUsageFlags CAFlags =
                 X509KeyUsageFlags.CrlSign | X509KeyUsageFlags.KeyCertSign;
             const X509KeyUsageFlags EEFlags =
@@ -319,7 +324,8 @@ namespace System.Security.Cryptography.X509Certificates.Tests.CertificateCreatio
             X509Certificate2 cert,
             bool expectSuccess,
             string msg
-        ) {
+        )
+        {
             bool success = chain.Build(cert);
 
             FormattableString errMsg = null;
@@ -373,7 +379,8 @@ namespace System.Security.Cryptography.X509Certificates.Tests.CertificateCreatio
         private static X509Certificate2 CloneWithPrivateKey(
             X509Certificate2 cert,
             AsymmetricAlgorithm key
-        ) {
+        )
+        {
             RSA rsa = key as RSA;
 
             if (rsa != null)
@@ -399,7 +406,8 @@ namespace System.Security.Cryptography.X509Certificates.Tests.CertificateCreatio
             AsymmetricAlgorithm intermed1PrivKey,
             AsymmetricAlgorithm intermed2PrivKey,
             AsymmetricAlgorithm leafPubKey
-        ) {
+        )
+        {
             const string RootDN = "CN=Experimental Root Certificate";
             const string Intermed1DN = "CN=First Intermediate Certificate, O=Experimental";
             const string Intermed2DN = "CN=Second Intermediate Certificate, O=Experimental";

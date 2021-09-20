@@ -10,7 +10,8 @@ namespace System.Reflection
             int token,
             RuntimeTypeHandle fieldTypeHandle,
             bool raw
-        ) {
+        )
+        {
             string? stringVal = scope.GetDefaultValue(
                 token,
                 out long buffer,

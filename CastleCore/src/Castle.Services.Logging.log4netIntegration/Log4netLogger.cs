@@ -150,7 +150,8 @@ namespace Castle.Services.Logging.Log4netIntegration
             IFormatProvider formatProvider,
             string format,
             params object[] args
-        ) {
+        )
+        {
             if (IsTraceEnabled)
             {
                 Logger.Log(
@@ -230,7 +231,8 @@ namespace Castle.Services.Logging.Log4netIntegration
             IFormatProvider formatProvider,
             string format,
             params object[] args
-        ) {
+        )
+        {
             if (IsDebugEnabled)
             {
                 Logger.Log(
@@ -310,7 +312,8 @@ namespace Castle.Services.Logging.Log4netIntegration
             IFormatProvider formatProvider,
             string format,
             params object[] args
-        ) {
+        )
+        {
             if (IsErrorEnabled)
             {
                 Logger.Log(
@@ -390,7 +393,8 @@ namespace Castle.Services.Logging.Log4netIntegration
             IFormatProvider formatProvider,
             string format,
             params object[] args
-        ) {
+        )
+        {
             if (IsFatalEnabled)
             {
                 Logger.Log(
@@ -470,7 +474,8 @@ namespace Castle.Services.Logging.Log4netIntegration
             IFormatProvider formatProvider,
             string format,
             params object[] args
-        ) {
+        )
+        {
             if (IsInfoEnabled)
             {
                 Logger.Log(
@@ -550,7 +555,8 @@ namespace Castle.Services.Logging.Log4netIntegration
             IFormatProvider formatProvider,
             string format,
             params object[] args
-        ) {
+        )
+        {
             if (IsWarnEnabled)
             {
                 Logger.Log(

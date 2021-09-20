@@ -47,7 +47,8 @@ namespace Microsoft.CodeAnalysis.FindSymbols
             IStreamingFindReferencesProgress progress,
             FindReferencesSearchOptions options,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             _documents = documents;
             _solution = solution;
             _finders = finders;

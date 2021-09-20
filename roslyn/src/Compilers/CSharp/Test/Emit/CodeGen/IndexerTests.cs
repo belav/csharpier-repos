@@ -442,7 +442,8 @@ class C : B
             ModuleSymbol module,
             string getterDisplayString,
             string setterDisplayString
-        ) {
+        )
+        {
             var @class = module.GlobalNamespace.GetMember<NamedTypeSymbol>("C");
             var indexer = @class.Indexers.Single();
 

@@ -650,7 +650,8 @@ namespace TypeSystemTests
             ModuleDesc testModule,
             out InstantiatedType genOfIntNestedInt,
             out InstantiatedType genOfLongNestedInt
-        ) {
+        )
+        {
             // Given a struct with all field universal, what is the layout?
             MetadataType tGen = testModule.GetType("GenericTypes", "GenStruct`3");
             InstantiatedType genOfUUU = tGen.MakeInstantiatedType(
@@ -741,7 +742,8 @@ namespace TypeSystemTests
             TypeSystemContext context,
             MetadataType type,
             LayoutInt expectedIndeterminateByteAlignment
-        ) {
+        )
+        {
             Assert.Equal(context.Target.LayoutPointerSize, type.InstanceFieldAlignment);
             Assert.Equal(context.Target.LayoutPointerSize, type.InstanceFieldSize);
             Assert.Equal(expectedIndeterminateByteAlignment, type.InstanceByteAlignment);
@@ -758,7 +760,8 @@ namespace TypeSystemTests
             out InstantiatedType genOfUU,
             out InstantiatedType genOfUI,
             out InstantiatedType genOfUL
-        ) {
+        )
+        {
             MetadataType tDerivedGen = testModule.GetType("GenericTypes", "GenDerivedClass`2");
             genOfIU = tDerivedGen.MakeInstantiatedType(
                 context.GetWellKnownType(WellKnownType.Int32),

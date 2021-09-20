@@ -91,7 +91,8 @@ namespace Microsoft.CodeAnalysis.SplitOrMergeIfStatements
                     MergeDirection direction,
                     TextSpan upperIfOrElseIfSpan,
                     TextSpan lowerIfOrElseIfSpan
-                ) {
+                )
+                {
                     context.RegisterRefactoring(
                         CreateCodeAction(
                             c =>
@@ -115,7 +116,8 @@ namespace Microsoft.CodeAnalysis.SplitOrMergeIfStatements
             TextSpan upperIfOrElseIfSpan,
             TextSpan lowerIfOrElseIfSpan,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var ifGenerator = document.GetLanguageService<IIfLikeStatementGenerator>();
 
             var root = await document.GetSyntaxRootAsync(cancellationToken).ConfigureAwait(false);
@@ -133,7 +135,8 @@ namespace Microsoft.CodeAnalysis.SplitOrMergeIfStatements
                 TextSpan span,
                 IIfLikeStatementGenerator ifGenerator,
                 SyntaxNode root
-            ) {
+            )
+            {
                 var innerMatch = root.FindNode(span, getInnermostNodeForTie: true);
                 return innerMatch?.FirstAncestorOrSelf<SyntaxNode>(
                     node => ifGenerator.IsIfOrElseIf(node) && node.Span == span
@@ -144,7 +147,8 @@ namespace Microsoft.CodeAnalysis.SplitOrMergeIfStatements
         protected static IReadOnlyList<SyntaxNode> WalkDownScopeBlocks(
             ISyntaxFactsService syntaxFacts,
             IReadOnlyList<SyntaxNode> statements
-        ) {
+        )
+        {
             // If our statements only contain a single block, walk down the block and any subsequent nested blocks
             // to get the real statements inside.
 
@@ -159,7 +163,8 @@ namespace Microsoft.CodeAnalysis.SplitOrMergeIfStatements
         protected static IReadOnlyList<SyntaxNode> WalkUpScopeBlocks(
             ISyntaxFactsService syntaxFacts,
             IReadOnlyList<SyntaxNode> statements
-        ) {
+        )
+        {
             // If our statements are inside a block, walk up the block and any subsequent nested blocks that contain
             // no other statements to get the topmost block. The last check is necessary to make sure we stop
             // walking upwards if there are other statements next to our current block:
@@ -175,7 +180,8 @@ namespace Microsoft.CodeAnalysis.SplitOrMergeIfStatements
                 && statements[0].Parent is var parent
                 && syntaxFacts.IsScopeBlock(parent)
                 && syntaxFacts.GetExecutableBlockStatements(parent).Count == statements.Count
-            ) {
+            )
+            {
                 statements = ImmutableArray.Create(parent);
             }
 

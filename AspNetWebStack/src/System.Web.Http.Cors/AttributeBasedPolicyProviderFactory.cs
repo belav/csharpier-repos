@@ -66,7 +66,8 @@ namespace System.Web.Http.Cors
                         if (
                             property.Key != HttpPropertyKeys.HttpRouteDataKey
                             && property.Key != HttpContextBaseKey
-                        ) {
+                        )
+                        {
                             targetRequest.Properties.Add(property.Key, property.Value);
                         }
                     }
@@ -132,7 +133,8 @@ namespace System.Web.Http.Cors
             HttpRequestMessage request,
             IHttpRouteData routeData,
             HttpConfiguration config
-        ) {
+        )
+        {
             request.SetRouteData(routeData);
 
             routeData.RemoveOptionalRoutingParameters();

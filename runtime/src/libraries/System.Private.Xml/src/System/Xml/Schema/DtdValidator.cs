@@ -122,7 +122,8 @@ namespace System.Xml.Schema
                 && context.ElementDecl.IsDeclaredInExternal
                 && context.ElementDecl.ContentValidator!.ContentType
                     == XmlSchemaContentType.ElementOnly
-            ) {
+            )
+            {
                 SendValidationEvent(SR.Sch_StandAlone);
                 return false;
             }
@@ -148,7 +149,8 @@ namespace System.Xml.Schema
                 (reader.Depth == 0)
                 && (!schemaInfo!.DocTypeName.IsEmpty)
                 && (!schemaInfo.DocTypeName.Equals(elementName))
-            ) { //VC 1
+            )
+            { //VC 1
                 SendValidationEvent(SR.Sch_RootMatchDocType);
             }
             else
@@ -217,7 +219,8 @@ namespace System.Xml.Schema
                             if (
                                 context.ElementDecl != null
                                 && context.ElementDecl.HasRequiredAttribute
-                            ) {
+                            )
+                            {
                                 _attPresence.Add(attnDef.Name, attnDef);
                             }
                             Reader.SchemaTypeObject = attnDef.SchemaType;
@@ -423,7 +426,8 @@ namespace System.Xml.Schema
                     ttype == XmlTokenizedType.ENTITY
                     || ttype == XmlTokenizedType.ID
                     || ttype == XmlTokenizedType.IDREF
-                ) {
+                )
+                {
                     if (dtype.Variety == XmlSchemaDatatypeVariety.List)
                     {
                         string[] ss = (string[])typedValue;
@@ -608,7 +612,8 @@ namespace System.Xml.Schema
         public static void SetDefaultTypedValue(
             SchemaAttDef attdef,
             IDtdParserAdapter readerAdapter
-        ) {
+        )
+        {
             try
             {
                 string value = attdef.DefaultValueExpanded;
@@ -651,7 +656,8 @@ namespace System.Xml.Schema
             SchemaInfo sinfo,
             IValidationEventHandling eventHandling,
             string? baseUriStr
-        ) {
+        )
+        {
             try
             {
                 if (baseUriStr == null)

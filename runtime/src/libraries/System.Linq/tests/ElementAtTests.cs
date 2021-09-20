@@ -74,7 +74,8 @@ namespace System.Linq.Tests
             int index,
             int indexFromEnd,
             int expected
-        ) {
+        )
+        {
             Assert.Equal(expected, source.RunOnce().ElementAt(index));
             Assert.Equal(expected, source.RunOnce().ElementAt(new Index(index)));
             Assert.Equal(expected, source.RunOnce().ElementAt(^indexFromEnd));

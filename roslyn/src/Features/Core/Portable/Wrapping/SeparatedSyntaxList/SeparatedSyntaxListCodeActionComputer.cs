@@ -77,7 +77,8 @@ namespace Microsoft.CodeAnalysis.Wrapping.SeparatedSyntaxList
             private void AddTextChangeBetweenOpenAndFirstItem(
                 WrappingStyle wrappingStyle,
                 ArrayBuilder<Edit> result
-            ) {
+            )
+            {
                 result.Add(
                     wrappingStyle == WrappingStyle.WrapFirst_IndentRest
                       ? Edit.UpdateBetween(
@@ -167,7 +168,8 @@ namespace Microsoft.CodeAnalysis.Wrapping.SeparatedSyntaxList
             private async Task<WrapItemsAction> GetUnwrapAllCodeActionAsync(
                 string parentTitle,
                 WrappingStyle wrappingStyle
-            ) {
+            )
+            {
                 var edits = GetUnwrapAllEdits(wrappingStyle);
                 var title =
                     wrappingStyle == WrappingStyle.WrapFirst_IndentRest
@@ -255,7 +257,8 @@ namespace Microsoft.CodeAnalysis.Wrapping.SeparatedSyntaxList
             private async Task<WrapItemsAction> GetWrapLongLineCodeActionAsync(
                 string parentTitle,
                 WrappingStyle wrappingStyle
-            ) {
+            )
+            {
                 var indentationTrivia = GetIndentationTrivia(wrappingStyle);
 
                 var edits = GetWrapLongLinesEdits(wrappingStyle, indentationTrivia);
@@ -268,7 +271,8 @@ namespace Microsoft.CodeAnalysis.Wrapping.SeparatedSyntaxList
             private ImmutableArray<Edit> GetWrapLongLinesEdits(
                 WrappingStyle wrappingStyle,
                 SyntaxTrivia indentationTrivia
-            ) {
+            )
+            {
                 using var _ = ArrayBuilder<Edit>.GetInstance(out var result);
 
                 AddTextChangeBetweenOpenAndFirstItem(wrappingStyle, result);
@@ -385,7 +389,8 @@ namespace Microsoft.CodeAnalysis.Wrapping.SeparatedSyntaxList
             private async Task<WrapItemsAction> GetWrapEveryNestedCodeActionAsync(
                 string parentTitle,
                 WrappingStyle wrappingStyle
-            ) {
+            )
+            {
                 var indentationTrivia = GetIndentationTrivia(wrappingStyle);
 
                 var edits = GetWrapEachEdits(wrappingStyle, indentationTrivia);
@@ -407,7 +412,8 @@ namespace Microsoft.CodeAnalysis.Wrapping.SeparatedSyntaxList
             private ImmutableArray<Edit> GetWrapEachEdits(
                 WrappingStyle wrappingStyle,
                 SyntaxTrivia indentationTrivia
-            ) {
+            )
+            {
                 using var _ = ArrayBuilder<Edit>.GetInstance(out var result);
 
                 AddTextChangeBetweenOpenAndFirstItem(wrappingStyle, result);

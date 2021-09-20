@@ -44,7 +44,8 @@ namespace Templates.Test.Helpers
             bool hasListeningUri = true,
             bool usePublishedAppHost = false,
             ILogger logger = null
-        ) {
+        )
+        {
             _developmentCertificate = cert;
             _output = output;
             _httpClient = new HttpClient(
@@ -284,7 +285,8 @@ namespace Templates.Test.Helpers
             string requestUrl,
             HttpStatusCode statusCode,
             string acceptContentType = null
-        ) {
+        )
+        {
             var response = await RetryHelper.RetryRequest(
                 () =>
                 {

@@ -30,7 +30,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.TableDataSource
         public TableEntriesFactory(
             AbstractTableDataSource<TItem, TData> tableSource,
             AbstractTableEntriesSource<TItem> entriesSource
-        ) {
+        )
+        {
             _tableSource = tableSource;
             _entriesSources = new AggregatedEntriesSource(_tableSource, entriesSource);
         }
@@ -139,7 +140,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.TableDataSource
             public AggregatedEntriesSource(
                 AbstractTableDataSource<TItem, TData> tableSource,
                 AbstractTableEntriesSource<TItem> primary
-            ) {
+            )
+            {
                 _tableSource = tableSource;
                 _sources = new EntriesSourceCollections(primary);
             }
@@ -184,7 +186,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.TableDataSource
                 int version,
                 ImmutableArray<TItem> items,
                 ImmutableArray<ITrackingPoint> trackingPoints
-            ) {
+            )
+            {
                 if (_sources.Primary != null)
                 {
                     return _tableSource.CreateSnapshot(
@@ -279,7 +282,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.TableDataSource
                 public void OnDataAddedOrChanged(
                     TData data,
                     AbstractTableDataSource<TItem, TData> tableSource
-                ) {
+                )
+                {
                     var key = tableSource.GetItemKey(data);
                     if (_primary != null && _primary.Key.Equals(key))
                     {
@@ -303,7 +307,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.TableDataSource
                 public bool OnDataRemoved(
                     TData data,
                     AbstractTableDataSource<TItem, TData> tableSource
-                ) {
+                )
+                {
                     var key = tableSource.GetItemKey(data);
                     if (_primary != null && _primary.Key.Equals(key))
                     {

@@ -31,7 +31,8 @@ namespace System.Net.Http.Formatting
         public void ConstructorMediaType_Initialises_MediaTypeAndUriPathExtension(
             string uriPathExtension,
             string mediaType
-        ) {
+        )
+        {
             UriPathExtensionMapping mapping = new UriPathExtensionMapping(
                 uriPathExtension,
                 mediaType
@@ -50,7 +51,8 @@ namespace System.Net.Http.Formatting
         public void ConstructorMediaType_ThrowsWithEmptyUriPathExtension(
             string uriPathExtension,
             string mediaType
-        ) {
+        )
+        {
             Assert.ThrowsArgumentNull(
                 () => new UriPathExtensionMapping(uriPathExtension, mediaType),
                 "uriPathExtension"
@@ -67,7 +69,8 @@ namespace System.Net.Http.Formatting
         public void ConstructorMediaType_ThrowsWithEmptyMediaType(
             string uriPathExtension,
             string mediaType
-        ) {
+        )
+        {
             Assert.ThrowsArgumentNull(
                 () => new UriPathExtensionMapping(uriPathExtension, mediaType),
                 "mediaType"
@@ -84,7 +87,8 @@ namespace System.Net.Http.Formatting
         public void ConstructorMediaTypeHeaderValue_Initialises_MediaTypeAndUriPathExtension(
             string uriPathExtension,
             MediaTypeHeaderValue mediaType
-        ) {
+        )
+        {
             UriPathExtensionMapping mapping = new UriPathExtensionMapping(
                 uriPathExtension,
                 mediaType
@@ -103,7 +107,8 @@ namespace System.Net.Http.Formatting
         public void ConstructorMediaTypeHeaderValue_ThrowsWithEmptyUriPathExtension(
             string uriPathExtension,
             MediaTypeHeaderValue mediaType
-        ) {
+        )
+        {
             Assert.ThrowsArgumentNull(
                 () => new UriPathExtensionMapping(uriPathExtension, mediaType),
                 "uriPathExtension"
@@ -114,7 +119,8 @@ namespace System.Net.Http.Formatting
         [TestDataSet(typeof(HttpTestData), "LegalUriPathExtensions")]
         public void ConstructorMediaTypeHeaderValue_ThrowsWithEmptyMediaType(
             string uriPathExtension
-        ) {
+        )
+        {
             Assert.ThrowsArgumentNull(
                 () => new UriPathExtensionMapping(uriPathExtension, (MediaTypeHeaderValue)null),
                 "mediaType"
@@ -134,7 +140,8 @@ namespace System.Net.Http.Formatting
             string uriPathExtension,
             string mediaType,
             string baseUriString
-        ) {
+        )
+        {
             GC.KeepAlive(baseUriString); // Mark parameter as used. See xUnit1026, [Theory] method doesn't use all parameters.
             UriPathExtensionMapping mapping = new UriPathExtensionMapping(
                 uriPathExtension,
@@ -157,7 +164,8 @@ namespace System.Net.Http.Formatting
             string uriPathExtension,
             string mediaType,
             string baseUriString
-        ) {
+        )
+        {
             GC.KeepAlive(baseUriString); // Mark parameter as used. See xUnit1026, [Theory] method doesn't use all parameters.
             UriPathExtensionMapping mapping = new UriPathExtensionMapping(
                 uriPathExtension.ToUpperInvariant(),
@@ -182,7 +190,8 @@ namespace System.Net.Http.Formatting
             string uriPathExtension,
             string mediaType,
             string baseUriString
-        ) {
+        )
+        {
             UriPathExtensionMapping mapping = new UriPathExtensionMapping(
                 uriPathExtension,
                 mediaType
@@ -202,7 +211,8 @@ namespace System.Net.Http.Formatting
         public void TryMatchMediaType_Throws_WithNullHttpRequestMessage(
             string uriPathExtension,
             string mediaType
-        ) {
+        )
+        {
             UriPathExtensionMapping mapping = new UriPathExtensionMapping(
                 uriPathExtension,
                 mediaType

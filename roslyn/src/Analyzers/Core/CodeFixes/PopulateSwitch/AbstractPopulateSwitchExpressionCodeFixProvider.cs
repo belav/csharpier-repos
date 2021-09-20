@@ -43,7 +43,8 @@ namespace Microsoft.CodeAnalysis.PopulateSwitch
             bool hasMissingDefaultCase,
             TSwitchSyntax switchNode,
             ISwitchExpressionOperation switchExpression
-        ) {
+        )
+        {
             var newSwitchNode = UpdateSwitchNode(
                     editor,
                     semanticModel,

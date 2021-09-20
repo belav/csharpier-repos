@@ -25,7 +25,8 @@ namespace Microsoft.AspNetCore.Mvc
             Exception exception = null,
             IActionResult result = null,
             IList<IValueProviderFactory> valueProviderFactories = null
-        ) {
+        )
+        {
             return CreateInvoker(
                 new IFilterMetadata[] { filter },
                 exception,

@@ -18,7 +18,8 @@ namespace Microsoft.AspNetCore.Mvc.ApplicationModels
         public AuthorizationApplicationModelProvider(
             IAuthorizationPolicyProvider policyProvider,
             IOptions<MvcOptions> mvcOptions
-        ) {
+        )
+        {
             _policyProvider = policyProvider;
             _mvcOptions = mvcOptions.Value;
         }
@@ -79,7 +80,8 @@ namespace Microsoft.AspNetCore.Mvc.ApplicationModels
         public static AuthorizeFilter GetFilter(
             IAuthorizationPolicyProvider policyProvider,
             IEnumerable<IAuthorizeData> authData
-        ) {
+        )
+        {
             // The default policy provider will make the same policy for given input, so make it only once.
             // This will always execute synchronously.
             if (policyProvider.GetType() == typeof(DefaultAuthorizationPolicyProvider))

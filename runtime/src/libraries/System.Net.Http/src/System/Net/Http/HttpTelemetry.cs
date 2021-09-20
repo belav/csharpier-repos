@@ -35,7 +35,8 @@ namespace System.Net.Http
             byte versionMajor,
             byte versionMinor,
             HttpVersionPolicy versionPolicy
-        ) {
+        )
+        {
             Interlocked.Increment(ref _startedRequests);
             WriteEvent(
                 eventId: 1,
@@ -96,7 +97,8 @@ namespace System.Net.Http
             double timeOnQueueMilliseconds,
             byte versionMajor,
             byte versionMinor
-        ) {
+        )
+        {
             WriteEvent(eventId: 6, timeOnQueueMilliseconds, versionMajor, versionMinor);
         }
 
@@ -195,7 +197,8 @@ namespace System.Net.Http
             byte arg5,
             byte arg6,
             HttpVersionPolicy arg7
-        ) {
+        )
+        {
             if (IsEnabled())
             {
                 if (arg1 == null)

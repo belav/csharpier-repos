@@ -38,7 +38,8 @@ namespace System.IO
         public static (Stream Writer, Stream Reader) CreateUnidirectional(
             int initialBufferSize,
             int maxBufferSize
-        ) {
+        )
+        {
             var buffer = new StreamBuffer(initialBufferSize, maxBufferSize);
 
             // The StreamBuffer is shared between the streams: we don't want to dispose of the underlying storage
@@ -76,7 +77,8 @@ namespace System.IO
         public static (Stream Stream1, Stream Stream2) CreateBidirectional(
             int initialBufferSize,
             int maxBufferSize
-        ) {
+        )
+        {
             // Each direction needs a buffer; one stream will use b1 for reading and b2 for writing,
             // and the other stream will do the inverse.
             var b1 = new StreamBuffer(initialBufferSize, maxBufferSize);
@@ -104,7 +106,8 @@ namespace System.IO
                 StreamBuffer buffer,
                 bool reader,
                 StrongBox<int> refCount
-            ) {
+            )
+            {
                 _buffer = buffer;
                 _reader = reader;
                 _refCount = refCount;
@@ -199,7 +202,8 @@ namespace System.IO
                 int offset,
                 int count,
                 CancellationToken cancellationToken
-            ) {
+            )
+            {
                 ValidateBufferArguments(buffer, offset, count);
                 ThrowIfDisposed();
                 ThrowIfReadingNotSupported();
@@ -211,7 +215,8 @@ namespace System.IO
             public override ValueTask<int> ReadAsync(
                 Memory<byte> buffer,
                 CancellationToken cancellationToken = default
-            ) {
+            )
+            {
                 ThrowIfDisposed();
                 ThrowIfReadingNotSupported();
 
@@ -248,7 +253,8 @@ namespace System.IO
                 int offset,
                 int count,
                 CancellationToken cancellationToken
-            ) {
+            )
+            {
                 ValidateBufferArguments(buffer, offset, count);
                 ThrowIfDisposed();
                 ThrowIfWritingNotSupported();
@@ -263,7 +269,8 @@ namespace System.IO
             public override ValueTask WriteAsync(
                 ReadOnlyMemory<byte> buffer,
                 CancellationToken cancellationToken = default
-            ) {
+            )
+            {
                 ThrowIfDisposed();
                 ThrowIfWritingNotSupported();
 
@@ -337,7 +344,8 @@ namespace System.IO
                 StreamBuffer readBuffer,
                 StreamBuffer writeBuffer,
                 StrongBox<int> refCount
-            ) {
+            )
+            {
                 _readBuffer = readBuffer;
                 _writeBuffer = writeBuffer;
                 _refCount = refCount;
@@ -421,7 +429,8 @@ namespace System.IO
                 int offset,
                 int count,
                 CancellationToken cancellationToken
-            ) {
+            )
+            {
                 ValidateBufferArguments(buffer, offset, count);
                 ThrowIfDisposed();
                 return _readBuffer.ReadAsync(
@@ -434,7 +443,8 @@ namespace System.IO
             public override ValueTask<int> ReadAsync(
                 Memory<byte> buffer,
                 CancellationToken cancellationToken = default
-            ) {
+            )
+            {
                 ThrowIfDisposed();
                 return _readBuffer.ReadAsync(buffer, cancellationToken);
             }
@@ -463,7 +473,8 @@ namespace System.IO
                 int offset,
                 int count,
                 CancellationToken cancellationToken
-            ) {
+            )
+            {
                 ValidateBufferArguments(buffer, offset, count);
                 ThrowIfDisposed();
                 return _writeBuffer.WriteAsync(
@@ -476,7 +487,8 @@ namespace System.IO
             public override ValueTask WriteAsync(
                 ReadOnlyMemory<byte> buffer,
                 CancellationToken cancellationToken = default
-            ) {
+            )
+            {
                 ThrowIfDisposed();
                 return _writeBuffer.WriteAsync(buffer, cancellationToken);
             }

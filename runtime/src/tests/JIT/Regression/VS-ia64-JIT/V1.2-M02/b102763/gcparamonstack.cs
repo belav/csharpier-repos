@@ -30,7 +30,8 @@ class test
         int i8,
         int i9,
         String strParam
-    ) {
+    )
+    {
         return Func1(strParam);
     }
 

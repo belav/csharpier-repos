@@ -36,7 +36,8 @@ namespace Microsoft.CodeAnalysis.CSharp.ExpressionEvaluator
             DisplayClassVariableKind kind,
             DisplayClassInstance displayClassInstance,
             ConsList<FieldSymbol> displayClassFields
-        ) {
+        )
+        {
             Debug.Assert(displayClassFields.Any());
 
             this.Name = name;
@@ -84,7 +85,8 @@ namespace Microsoft.CodeAnalysis.CSharp.ExpressionEvaluator
         internal DisplayClassVariable SubstituteFields(
             DisplayClassInstance otherInstance,
             TypeMap typeMap
-        ) {
+        )
+        {
             var otherFields = SubstituteFields(this.DisplayClassFields, typeMap);
             return new DisplayClassVariable(this.Name, this.Kind, otherInstance, otherFields);
         }
@@ -97,7 +99,8 @@ namespace Microsoft.CodeAnalysis.CSharp.ExpressionEvaluator
         private static ConsList<FieldSymbol> SubstituteFields(
             ConsList<FieldSymbol> fields,
             TypeMap typeMap
-        ) {
+        )
+        {
             if (!fields.Any())
             {
                 return ConsList<FieldSymbol>.Empty;
@@ -134,7 +137,8 @@ namespace Microsoft.CodeAnalysis.CSharp.ExpressionEvaluator
                 NamedTypeSymbol container,
                 string name,
                 TypeWithAnnotations type
-            ) {
+            )
+            {
                 _container = container;
                 _name = name;
                 _type = type;
@@ -228,13 +232,15 @@ namespace Microsoft.CodeAnalysis.CSharp.ExpressionEvaluator
             internal override ConstantValue GetConstantValue(
                 ConstantFieldsInProgress inProgress,
                 bool earlyDecodingWellKnownAttributes
-            ) {
+            )
+            {
                 throw ExceptionUtilities.Unreachable;
             }
 
             internal override TypeWithAnnotations GetFieldType(
                 ConsList<FieldSymbol> fieldsBeingBound
-            ) {
+            )
+            {
                 return _type;
             }
         }

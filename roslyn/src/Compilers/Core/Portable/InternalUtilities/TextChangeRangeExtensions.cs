@@ -17,7 +17,8 @@ namespace Roslyn.Utilities
         public static TextChangeRange? Accumulate(
             this TextChangeRange? accumulatedTextChangeSoFar,
             IEnumerable<TextChangeRange> changesInNextVersion
-        ) {
+        )
+        {
             if (!changesInNextVersion.Any())
             {
                 return accumulatedTextChangeSoFar;
@@ -123,7 +124,8 @@ namespace Roslyn.Utilities
         public static ImmutableArray<TextChangeRange> Merge(
             ImmutableArray<TextChangeRange> oldChanges,
             ImmutableArray<TextChangeRange> newChanges
-        ) {
+        )
+        {
             // Earlier steps are expected to prevent us from ever reaching this point with empty change sets.
             if (oldChanges.IsEmpty)
             {
@@ -433,7 +435,8 @@ namespace Roslyn.Utilities
                 ArrayBuilder<TextChangeRange> builder,
                 ref int oldDelta,
                 TextChangeRange oldChange
-            ) {
+            )
+            {
                 // modify oldDelta to reflect characters deleted and inserted by an old change
                 oldDelta = oldDelta - oldChange.Span.Length + oldChange.NewLength;
                 add(builder, oldChange);
@@ -443,7 +446,8 @@ namespace Roslyn.Utilities
                 ArrayBuilder<TextChangeRange> builder,
                 int oldDelta,
                 UnadjustedNewChange newChange
-            ) {
+            )
+            {
                 // unadjusted new change is relative to the original text with old changes applied. Subtract oldDelta to make it relative to the original text.
                 add(
                     builder,

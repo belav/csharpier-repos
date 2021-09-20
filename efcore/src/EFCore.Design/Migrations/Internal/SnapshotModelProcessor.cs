@@ -34,7 +34,8 @@ namespace Microsoft.EntityFrameworkCore.Migrations.Internal
         public SnapshotModelProcessor(
             IOperationReporter operationReporter,
             IModelRuntimeInitializer modelRuntimeInitializer
-        ) {
+        )
+        {
             _operationReporter = operationReporter;
             _relationalNames = new HashSet<string>(
                 typeof(RelationalAnnotationNames).GetRuntimeFields()
@@ -115,7 +116,8 @@ namespace Microsoft.EntityFrameworkCore.Migrations.Internal
                 )
                 && entityType is IMutableEntityType mutableEntityType
                 && !entityType.IsOwned()
-            ) {
+            )
+            {
                 UpdateOwnedTypes(mutableEntityType);
             }
         }
@@ -125,7 +127,8 @@ namespace Microsoft.EntityFrameworkCore.Migrations.Internal
             if (
                 version.StartsWith("1.", StringComparison.Ordinal)
                 && metadata is IMutableAnnotatable mutableMetadata
-            ) {
+            )
+            {
                 foreach (var annotation in mutableMetadata.GetAnnotations().ToList())
                 {
                     var colon = annotation.Name.IndexOf(':');
@@ -162,7 +165,8 @@ namespace Microsoft.EntityFrameworkCore.Migrations.Internal
                     && !version.StartsWith("2.", StringComparison.Ordinal)
                     && !version.StartsWith("3.", StringComparison.Ordinal)
                 ) || !(model is IMutableModel mutableModel)
-            ) {
+            )
+            {
                 return;
             }
 
@@ -210,7 +214,8 @@ namespace Microsoft.EntityFrameworkCore.Migrations.Internal
                     if (
                         oldPrincipalKey is IConventionKey conventionKey
                         && conventionKey.GetConfigurationSource() == ConfigurationSource.Convention
-                    ) {
+                    )
+                    {
                         oldPrincipalKey.DeclaringEntityType.RemoveKey(oldPrincipalKey);
                     }
 
@@ -220,7 +225,8 @@ namespace Microsoft.EntityFrameworkCore.Migrations.Internal
                             oldProperty is IConventionProperty conventionProperty
                             && conventionProperty.GetConfigurationSource()
                                 == ConfigurationSource.Convention
-                        ) {
+                        )
+                        {
                             oldProperty.DeclaringEntityType.RemoveProperty(oldProperty);
                         }
                     }

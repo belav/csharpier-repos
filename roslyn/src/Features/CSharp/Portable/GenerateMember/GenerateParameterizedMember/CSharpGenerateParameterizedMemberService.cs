@@ -48,7 +48,8 @@ namespace Microsoft.CodeAnalysis.CSharp.GenerateMember.GenerateMethod
 
             protected override ImmutableArray<ParameterName> DetermineParameterNames(
                 CancellationToken cancellationToken
-            ) {
+            )
+            {
                 return Document.SemanticModel.GenerateParameterNames(
                     _invocationExpression.ArgumentList,
                     cancellationToken
@@ -62,7 +63,8 @@ namespace Microsoft.CodeAnalysis.CSharp.GenerateMember.GenerateMethod
 
             protected override ITypeSymbol DetermineReturnTypeWorker(
                 CancellationToken cancellationToken
-            ) {
+            )
+            {
                 // Defer to the type inferrer to figure out what the return type of this new method
                 // should be.
                 var typeInference = Document.Document.GetLanguageService<ITypeInferenceService>();
@@ -78,7 +80,8 @@ namespace Microsoft.CodeAnalysis.CSharp.GenerateMember.GenerateMethod
 
             protected override ImmutableArray<ITypeParameterSymbol> GetCapturedTypeParameters(
                 CancellationToken cancellationToken
-            ) {
+            )
+            {
                 var result = new List<ITypeParameterSymbol>();
                 var semanticModel = Document.SemanticModel;
                 foreach (var argument in _invocationExpression.ArgumentList.Arguments)
@@ -92,7 +95,8 @@ namespace Microsoft.CodeAnalysis.CSharp.GenerateMember.GenerateMethod
 
             protected override ImmutableArray<ITypeParameterSymbol> GenerateTypeParameters(
                 CancellationToken cancellationToken
-            ) {
+            )
+            {
                 // Generate dummy type parameter names for a generic method.  If the user is inside a
                 // generic method, and calls a generic method with type arguments from the outer
                 // method, then use those same names for the generated type parameters.
@@ -141,7 +145,8 @@ namespace Microsoft.CodeAnalysis.CSharp.GenerateMember.GenerateMethod
                 TypeSyntax type,
                 Func<string, bool> isUnique,
                 CancellationToken cancellationToken
-            ) {
+            )
+            {
                 var methodTypeParameter = GetMethodTypeParameter(type, cancellationToken);
                 return methodTypeParameter
                     ?? CodeGenerationSymbolFactory.CreateTypeParameterSymbol(
@@ -152,14 +157,16 @@ namespace Microsoft.CodeAnalysis.CSharp.GenerateMember.GenerateMethod
             private ITypeParameterSymbol GetMethodTypeParameter(
                 TypeSyntax type,
                 CancellationToken cancellationToken
-            ) {
+            )
+            {
                 if (type is IdentifierNameSyntax)
                 {
                     var info = Document.SemanticModel.GetTypeInfo(type, cancellationToken);
                     if (
                         info.Type is ITypeParameterSymbol typeParameter
                         && typeParameter.TypeParameterKind == TypeParameterKind.Method
-                    ) {
+                    )
+                    {
                         return typeParameter;
                     }
                 }
@@ -169,7 +176,8 @@ namespace Microsoft.CodeAnalysis.CSharp.GenerateMember.GenerateMethod
 
             protected override ImmutableArray<RefKind> DetermineParameterModifiers(
                 CancellationToken cancellationToken
-            ) {
+            )
+            {
                 return _invocationExpression.ArgumentList.Arguments.Select(
                         a =>
                             a.RefOrOutKeyword.Kind() == SyntaxKind.RefKeyword
@@ -192,7 +200,8 @@ namespace Microsoft.CodeAnalysis.CSharp.GenerateMember.GenerateMethod
             private ITypeSymbol DetermineParameterType(
                 ArgumentSyntax argument,
                 CancellationToken cancellationToken
-            ) {
+            )
+            {
                 return argument.DetermineParameterType(Document.SemanticModel, cancellationToken);
             }
 
@@ -207,14 +216,16 @@ namespace Microsoft.CodeAnalysis.CSharp.GenerateMember.GenerateMethod
                 Compilation compilation,
                 ITypeSymbol sourceType,
                 ITypeSymbol targetType
-            ) {
+            )
+            {
                 var conversion = compilation.ClassifyConversion(sourceType, targetType);
                 return conversion.IsImplicit && conversion.IsReference;
             }
 
             protected override ImmutableArray<ITypeSymbol> DetermineTypeArguments(
                 CancellationToken cancellationToken
-            ) {
+            )
+            {
                 var result = ArrayBuilder<ITypeSymbol>.GetInstance();
 
                 if (State.SimpleNameOpt is GenericNameSyntax)
@@ -223,7 +234,8 @@ namespace Microsoft.CodeAnalysis.CSharp.GenerateMember.GenerateMethod
                         var typeArgument in (
                             (GenericNameSyntax)State.SimpleNameOpt
                         ).TypeArgumentList.Arguments
-                    ) {
+                    )
+                    {
                         var typeInfo = Document.SemanticModel.GetTypeInfo(
                             typeArgument,
                             cancellationToken

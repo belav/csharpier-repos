@@ -109,7 +109,8 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation.FrameworkResolution
             SettingLocation rollForwardOnNoCandidateFxLocation,
             SettingLocation applyPatchesLocation,
             bool passes
-        ) {
+        )
+        {
             CommandResult result = RunTest(
                 new TestSettings().WithRuntimeConfigCustomizer(
                         runtimeConfig => runtimeConfig.WithFramework(MicrosoftNETCoreApp, "5.0.0")
@@ -185,7 +186,8 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation.FrameworkResolution
             SettingLocation rollForwardLocation,
             SettingLocation rollForwardOnNoCandidateFxLocation,
             bool passes
-        ) {
+        )
+        {
             CommandResult result = RunTest(
                 new TestSettings().WithRuntimeConfigCustomizer(
                         runtimeConfig => runtimeConfig.WithFramework(MicrosoftNETCoreApp, "5.0.0")

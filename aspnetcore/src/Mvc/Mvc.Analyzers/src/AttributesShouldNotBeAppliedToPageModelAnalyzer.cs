@@ -29,7 +29,8 @@ namespace Microsoft.AspNetCore.Mvc.Analyzers
                     if (
                         typeCache.PageModelAttribute == null
                         || typeCache.PageModelAttribute.TypeKind == TypeKind.Error
-                    ) {
+                    )
+                    {
                         // No-op if we can't find types we care about.
                         return;
                     }
@@ -42,7 +43,8 @@ namespace Microsoft.AspNetCore.Mvc.Analyzers
         private void InitializeWorker(
             CompilationStartAnalysisContext compilationStartAnalysisContext,
             TypeCache typeCache
-        ) {
+        )
+        {
             compilationStartAnalysisContext.RegisterSymbolAction(
                 symbolAnalysisContext =>
                 {
@@ -52,7 +54,8 @@ namespace Microsoft.AspNetCore.Mvc.Analyzers
                     if (
                         !IsPageModel(declaringType, typeCache.PageModelAttribute)
                         || !IsPageHandlerMethod(method)
-                    ) {
+                    )
+                    {
                         return;
                     }
 
@@ -119,7 +122,8 @@ namespace Microsoft.AspNetCore.Mvc.Analyzers
             ref SymbolAnalysisContext symbolAnalysisContext,
             INamedTypeSymbol typeSymbol,
             INamedTypeSymbol routeAttribute
-        ) {
+        )
+        {
             var attribute = GetAttribute(typeSymbol, routeAttribute);
             if (attribute != null)
             {
@@ -139,7 +143,8 @@ namespace Microsoft.AspNetCore.Mvc.Analyzers
             ref SymbolAnalysisContext symbolAnalysisContext,
             IMethodSymbol method,
             INamedTypeSymbol routeAttribute
-        ) {
+        )
+        {
             var attribute = GetAttribute(method, routeAttribute);
             if (attribute != null)
             {
@@ -159,7 +164,8 @@ namespace Microsoft.AspNetCore.Mvc.Analyzers
             ref SymbolAnalysisContext symbolAnalysisContext,
             IMethodSymbol method,
             INamedTypeSymbol filterAttribute
-        ) {
+        )
+        {
             var attribute = GetAttribute(method, filterAttribute);
             if (attribute != null)
             {
@@ -191,7 +197,8 @@ namespace Microsoft.AspNetCore.Mvc.Analyzers
         private static Location GetAttributeLocation(
             ref SymbolAnalysisContext symbolAnalysisContext,
             AttributeData attribute
-        ) {
+        )
+        {
             var syntax = attribute.ApplicationSyntaxReference.GetSyntax(
                 symbolAnalysisContext.CancellationToken
             );

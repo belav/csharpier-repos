@@ -40,7 +40,8 @@ namespace Microsoft.EntityFrameworkCore.Cosmos.Infrastructure.Internal
         public override void Validate(
             IModel model,
             IDiagnosticsLogger<DbLoggerCategory.Model.Validation> logger
-        ) {
+        )
+        {
             base.Validate(model, logger);
 
             ValidateDatabaseProperties(model, logger);
@@ -58,11 +59,13 @@ namespace Microsoft.EntityFrameworkCore.Cosmos.Infrastructure.Internal
         protected virtual void ValidateSharedContainerCompatibility(
             IModel model,
             IDiagnosticsLogger<DbLoggerCategory.Model.Validation> logger
-        ) {
+        )
+        {
             var containers = new Dictionary<string, List<IEntityType>>();
             foreach (
                 var entityType in model.GetEntityTypes().Where(et => et.FindPrimaryKey() != null)
-            ) {
+            )
+            {
                 var container = entityType.GetContainer();
                 if (container == null)
                 {
@@ -96,7 +99,8 @@ namespace Microsoft.EntityFrameworkCore.Cosmos.Infrastructure.Internal
             IReadOnlyList<IEntityType> mappedTypes,
             string container,
             IDiagnosticsLogger<DbLoggerCategory.Model.Validation> logger
-        ) {
+        )
+        {
             var discriminatorValues = new Dictionary<object, IEntityType>();
             IProperty? partitionKey = null;
             IEntityType? firstEntityType = null;
@@ -129,7 +133,8 @@ namespace Microsoft.EntityFrameworkCore.Cosmos.Infrastructure.Internal
                     else if (
                         partitionKey.GetJsonPropertyName()
                         != nextPartitionKeyProperty.GetJsonPropertyName()
-                    ) {
+                    )
+                    {
                         throw new InvalidOperationException(
                             CosmosStrings.PartitionKeyStoreNameMismatch(
                                 partitionKey.Name,
@@ -162,7 +167,8 @@ namespace Microsoft.EntityFrameworkCore.Cosmos.Infrastructure.Internal
                 if (
                     entityType.ClrType.IsInstantiable()
                     && entityType.GetContainingPropertyName() == null
-                ) {
+                )
+                {
                     if (entityType.FindDiscriminatorProperty() == null)
                     {
                         throw new InvalidOperationException(
@@ -186,7 +192,8 @@ namespace Microsoft.EntityFrameworkCore.Cosmos.Infrastructure.Internal
                             discriminatorValue,
                             out var duplicateEntityType
                         )
-                    ) {
+                    )
+                    {
                         throw new InvalidOperationException(
                             CosmosStrings.DuplicateDiscriminatorValue(
                                 entityType.DisplayName(),
@@ -211,7 +218,8 @@ namespace Microsoft.EntityFrameworkCore.Cosmos.Infrastructure.Internal
         protected virtual void ValidateOnlyETagConcurrencyToken(
             IModel model,
             IDiagnosticsLogger<DbLoggerCategory.Model.Validation> logger
-        ) {
+        )
+        {
             foreach (var entityType in model.GetEntityTypes())
             {
                 foreach (var property in entityType.GetDeclaredProperties())
@@ -256,7 +264,8 @@ namespace Microsoft.EntityFrameworkCore.Cosmos.Infrastructure.Internal
         protected virtual void ValidateKeys(
             IModel model,
             IDiagnosticsLogger<DbLoggerCategory.Model.Validation> logger
-        ) {
+        )
+        {
             foreach (var entityType in model.GetEntityTypes())
             {
                 var primaryKey = entityType.FindPrimaryKey();
@@ -327,7 +336,8 @@ namespace Microsoft.EntityFrameworkCore.Cosmos.Infrastructure.Internal
                     if (
                         !partitionKey.GetContainingKeys()
                             .Any(k => k.Properties.Contains(idProperty))
-                    ) {
+                    )
+                    {
                         throw new InvalidOperationException(
                             CosmosStrings.NoPartitionKeyKey(
                                 entityType.DisplayName(),
@@ -349,7 +359,8 @@ namespace Microsoft.EntityFrameworkCore.Cosmos.Infrastructure.Internal
         protected virtual void ValidateDatabaseProperties(
             IModel model,
             IDiagnosticsLogger<DbLoggerCategory.Model.Validation> logger
-        ) {
+        )
+        {
             foreach (var entityType in model.GetEntityTypes())
             {
                 var properties = new Dictionary<string, IPropertyBase>();

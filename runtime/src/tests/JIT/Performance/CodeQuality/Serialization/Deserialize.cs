@@ -243,7 +243,8 @@ namespace Serialization
         private void DeserializeDataContractJsonBenchInner(
             DataContractJsonSerializer ds,
             MemoryStream ms
-        ) {
+        )
+        {
             TestObject t;
             for (int i = 0; i < Iterations; i++)
             {

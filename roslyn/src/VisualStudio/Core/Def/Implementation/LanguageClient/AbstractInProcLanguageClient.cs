@@ -85,7 +85,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.LanguageClient
             VSShell.IAsyncServiceProvider asyncServiceProvider,
             IThreadingContext threadingContext,
             string? diagnosticsClientName
-        ) {
+        )
+        {
             _requestDispatcherFactory = requestDispatcherFactory;
             Workspace = workspace;
             _diagnosticService = diagnosticService;

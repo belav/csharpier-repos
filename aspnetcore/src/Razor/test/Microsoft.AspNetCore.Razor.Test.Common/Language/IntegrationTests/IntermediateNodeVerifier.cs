@@ -69,7 +69,8 @@ namespace Microsoft.AspNetCore.Razor.Language.IntegrationTests
                 IEnumerable<IntermediateNode> ancestors,
                 string expected,
                 string actual
-            ) {
+            )
+            {
                 if (string.Equals(expected, actual))
                 {
                     // YAY!!! everything is great.
@@ -107,7 +108,8 @@ namespace Microsoft.AspNetCore.Razor.Language.IntegrationTests
                 string expected,
                 string actual,
                 ref int charsVerified
-            ) {
+            )
+            {
                 var i = 0;
                 for (; i < expected.Length; i++)
                 {
@@ -155,7 +157,8 @@ namespace Microsoft.AspNetCore.Razor.Language.IntegrationTests
                 string expected,
                 string actual,
                 ref int charsVerified
-            ) {
+            )
+            {
                 var expectedName = GetName(expected, charsVerified);
                 var actualName = GetName(actual, charsVerified);
 
@@ -181,7 +184,8 @@ namespace Microsoft.AspNetCore.Razor.Language.IntegrationTests
                 string actual,
                 bool required,
                 ref int charsVerified
-            ) {
+            )
+            {
                 if (charsVerified == expected.Length && required)
                 {
                     throw new InvalidOperationException(
@@ -236,7 +240,8 @@ namespace Microsoft.AspNetCore.Razor.Language.IntegrationTests
                 string expected,
                 string actual,
                 ref int charsVerified
-            ) {
+            )
+            {
                 var expectedLocation = GetLocation(expected, charsVerified);
                 var actualLocation = GetLocation(actual, charsVerified);
 
@@ -261,7 +266,8 @@ namespace Microsoft.AspNetCore.Razor.Language.IntegrationTests
                 string expected,
                 string actual,
                 ref int charsVerified
-            ) {
+            )
+            {
                 var expectedContent = GetContent(expected, charsVerified);
                 var actualContent = GetContent(actual, charsVerified);
 
@@ -333,7 +339,8 @@ namespace Microsoft.AspNetCore.Razor.Language.IntegrationTests
                     string expected,
                     string actual,
                     string userMessage
-                ) {
+                )
+                {
                     var builder = new StringBuilder();
                     builder.AppendLine(userMessage);
                     builder.AppendLine();

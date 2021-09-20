@@ -13,7 +13,8 @@ namespace Microsoft.Extensions.Logging
             string providerTypeFullName,
             LogLevel? minLevel,
             Func<string, string, LogLevel, bool> filter
-        ) {
+        )
+        {
             Logger = logger;
             Category = category;
             ProviderTypeFullName = providerTypeFullName;

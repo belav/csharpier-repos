@@ -108,7 +108,8 @@ namespace Microsoft.CodeAnalysis.Diagnostics
             string? description = null,
             string? helpLink = null,
             bool isSuppressed = false
-        ) {
+        )
+        {
             Id = id;
             Category = category;
             Message = message;
@@ -223,7 +224,8 @@ namespace Microsoft.CodeAnalysis.Diagnostics
         public static TextSpan GetExistingOrCalculatedTextSpan(
             DiagnosticDataLocation? diagnosticLocation,
             SourceText text
-        ) {
+        )
+        {
             if (diagnosticLocation?.SourceSpan != null)
             {
                 return EnsureInBounds(diagnosticLocation.SourceSpan.Value, text);
@@ -274,7 +276,8 @@ namespace Microsoft.CodeAnalysis.Diagnostics
         public async Task<Diagnostic> ToDiagnosticAsync(
             Project project,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var location = await DataLocation.ConvertLocationAsync(project, cancellationToken)
                 .ConfigureAwait(false);
             var additionalLocations = await AdditionalLocations.ConvertLocationsAsync(
@@ -306,7 +309,8 @@ namespace Microsoft.CodeAnalysis.Diagnostics
             DiagnosticDataLocation? dataLocation,
             SourceText text,
             bool useMapped
-        ) {
+        )
+        {
             var lines = text.Lines;
             if (lines.Count == 0)
             {
@@ -369,7 +373,8 @@ namespace Microsoft.CodeAnalysis.Diagnostics
             out int startColumn,
             out int endLine,
             out int endColumn
-        ) {
+        )
+        {
             startLine = dataLocationStartLine;
             var originalStartColumn = dataLocationStartColumn;
 
@@ -399,7 +404,8 @@ namespace Microsoft.CodeAnalysis.Diagnostics
         private static void SwapIfNeeded(
             ref LinePosition startLinePosition,
             ref LinePosition endLinePosition
-        ) {
+        )
+        {
             if (endLinePosition < startLinePosition)
             {
                 var temp = startLinePosition;
@@ -411,7 +417,8 @@ namespace Microsoft.CodeAnalysis.Diagnostics
         private static DiagnosticDataLocation? CreateLocation(
             TextDocument? document,
             Location location
-        ) {
+        )
+        {
             if (document == null)
             {
                 return null;
@@ -523,7 +530,8 @@ namespace Microsoft.CodeAnalysis.Diagnostics
             DiagnosticDataLocation? location,
             ImmutableArray<DiagnosticDataLocation> additionalLocations,
             ImmutableDictionary<string, string?>? additionalProperties
-        ) {
+        )
+        {
             return new DiagnosticData(
                 diagnostic.Id,
                 diagnostic.Descriptor.Category,
@@ -553,7 +561,8 @@ namespace Microsoft.CodeAnalysis.Diagnostics
         private static ImmutableDictionary<string, string?>? GetAdditionalProperties(
             TextDocument document,
             Diagnostic diagnostic
-        ) {
+        )
+        {
             var service = document.Project.GetLanguageService<IDiagnosticPropertiesService>();
             return service?.GetAdditionalProperties(diagnostic);
         }
@@ -561,7 +570,8 @@ namespace Microsoft.CodeAnalysis.Diagnostics
         private static ImmutableArray<DiagnosticDataLocation> GetAdditionalLocations(
             TextDocument document,
             Diagnostic diagnostic
-        ) {
+        )
+        {
             if (diagnostic.AdditionalLocations.Count == 0)
             {
                 return ImmutableArray<DiagnosticDataLocation>.Empty;
@@ -600,7 +610,8 @@ namespace Microsoft.CodeAnalysis.Diagnostics
             string[] messageArguments,
             Project project,
             [NotNullWhen(true)] out DiagnosticData? diagnosticData
-        ) {
+        )
+        {
             diagnosticData = null;
 
             DiagnosticSeverity effectiveSeverity;
@@ -640,7 +651,8 @@ namespace Microsoft.CodeAnalysis.Diagnostics
         private static DiagnosticSeverity GetEffectiveSeverity(
             ReportDiagnostic effectiveReportDiagnostic,
             DiagnosticSeverity defaultSeverity
-        ) {
+        )
+        {
             switch (effectiveReportDiagnostic)
             {
                 case ReportDiagnostic.Default:
@@ -669,7 +681,8 @@ namespace Microsoft.CodeAnalysis.Diagnostics
             out TextSpan sourceSpan,
             out FileLinePositionSpan originalLineInfo,
             out FileLinePositionSpan mappedLineInfo
-        ) {
+        )
+        {
             var diagnosticSpanMappingService =
                 document.Project.Solution.Workspace.Services.GetService<IWorkspaceVenusSpanMappingService>();
             if (diagnosticSpanMappingService != null)

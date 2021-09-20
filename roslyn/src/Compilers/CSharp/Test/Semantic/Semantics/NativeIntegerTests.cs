@@ -254,7 +254,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.Semantics
             INamedTypeSymbol underlyingType,
             INamedTypeSymbol nativeIntegerType,
             bool signed
-        ) {
+        )
+        {
             VerifyType(underlyingType, signed, isNativeInt: false);
             VerifyType(nativeIntegerType, signed, isNativeInt: true);
 
@@ -294,7 +295,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.Semantics
             ImmutableArray<INamedTypeSymbol> underlyingInterfaces,
             INamedTypeSymbol nativeIntegerType,
             ImmutableArray<INamedTypeSymbol> nativeIntegerInterfaces
-        ) {
+        )
+        {
             Assert.Equal(underlyingInterfaces.Length, nativeIntegerInterfaces.Length);
 
             for (int i = 0; i < underlyingInterfaces.Length; i++)
@@ -305,7 +307,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.Semantics
             void verifyInterface(
                 INamedTypeSymbol underlyingInterface,
                 INamedTypeSymbol nativeIntegerInterface
-            ) {
+            )
+            {
                 Assert.True(
                     underlyingInterface.Equals(
                         nativeIntegerInterface,
@@ -335,7 +338,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.Semantics
             INamedTypeSymbol underlyingType,
             INamedTypeSymbol nativeIntegerType,
             bool signed
-        ) {
+        )
+        {
             Assert.Empty(nativeIntegerType.GetTypeMembers());
 
             var nativeIntegerMembers = nativeIntegerType.GetMembers();
@@ -409,7 +413,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.Semantics
             NamedTypeSymbol underlyingType,
             NamedTypeSymbol nativeIntegerType,
             bool signed
-        ) {
+        )
+        {
             VerifyType(underlyingType, signed, isNativeInt: false);
             VerifyType(nativeIntegerType, signed, isNativeInt: true);
 
@@ -451,7 +456,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.Semantics
         private static void VerifyEqualButDistinct(
             NamedTypeSymbol underlyingType,
             NamedTypeSymbol nativeIntegerType
-        ) {
+        )
+        {
             Assert.NotSame(underlyingType, nativeIntegerType);
             Assert.NotEqual(underlyingType, nativeIntegerType);
             Assert.NotEqual(nativeIntegerType, underlyingType);
@@ -475,7 +481,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.Semantics
             ImmutableArray<NamedTypeSymbol> underlyingInterfaces,
             NamedTypeSymbol nativeIntegerType,
             ImmutableArray<NamedTypeSymbol> nativeIntegerInterfaces
-        ) {
+        )
+        {
             Assert.Equal(underlyingInterfaces.Length, nativeIntegerInterfaces.Length);
 
             for (int i = 0; i < underlyingInterfaces.Length; i++)
@@ -486,7 +493,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.Semantics
             void verifyInterface(
                 NamedTypeSymbol underlyingInterface,
                 NamedTypeSymbol nativeIntegerInterface
-            ) {
+            )
+            {
                 Assert.True(
                     underlyingInterface.Equals(
                         nativeIntegerInterface,
@@ -498,7 +506,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.Semantics
                     int i = 0;
                     i < underlyingInterface.TypeArgumentsWithAnnotationsNoUseSiteDiagnostics.Length;
                     i++
-                ) {
+                )
+                {
                     var underlyingTypeArgument =
                         underlyingInterface.TypeArgumentsWithAnnotationsNoUseSiteDiagnostics[
                             i
@@ -525,7 +534,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.Semantics
             NamedTypeSymbol underlyingType,
             NamedTypeSymbol nativeIntegerType,
             bool signed
-        ) {
+        )
+        {
             Assert.Empty(nativeIntegerType.GetTypeMembers());
 
             var nativeIntegerMembers = nativeIntegerType.GetMembers();
@@ -618,7 +628,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.Semantics
                 NamedTypeSymbol type,
                 ImmutableArray<Symbol> allMembers,
                 ImmutableArray<Symbol> members
-            ) {
+            )
+            {
                 foreach (var member in members)
                 {
                     Assert.Contains(member, allMembers);
@@ -662,7 +673,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.Semantics
                 INamedTypeSymbol type,
                 ImmutableArray<ISymbol> allMembers,
                 ImmutableArray<ISymbol> members
-            ) {
+            )
+            {
                 foreach (var member in members)
                 {
                     Assert.Contains(member, allMembers);
@@ -744,7 +756,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.Semantics
             void verifyTypes(
                 TypeWithAnnotations fromMember,
                 TypeWithAnnotations fromUnderlyingMember
-            ) {
+            )
+            {
                 Assert.True(
                     fromMember.Equals(fromUnderlyingMember, TypeCompareKind.IgnoreNativeIntegers)
                 );
@@ -924,7 +937,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.Semantics
             NamedTypeSymbol type,
             SpecialType specialType,
             bool isNativeInt
-        ) {
+        )
+        {
             Assert.Equal(SymbolKind.ErrorType, type.Kind);
             Assert.Equal(TypeKind.Error, type.TypeKind);
             Assert.Equal(isNativeInt, type.IsNativeIntegerType);
@@ -935,7 +949,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.Semantics
             INamedTypeSymbol type,
             SpecialType specialType,
             bool isNativeInt
-        ) {
+        )
+        {
             Assert.Equal(SymbolKind.ErrorType, type.Kind);
             Assert.Equal(TypeKind.Error, type.TypeKind);
             Assert.Equal(isNativeInt, type.IsNativeIntegerType);
@@ -946,7 +961,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.Semantics
             NamedTypeSymbol underlyingType,
             NamedTypeSymbol nativeIntegerType,
             bool signed
-        ) {
+        )
+        {
             var specialType = signed ? SpecialType.System_IntPtr : SpecialType.System_UIntPtr;
 
             VerifyErrorType(underlyingType, SpecialType.None, isNativeInt: false);
@@ -974,7 +990,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.Semantics
             INamedTypeSymbol underlyingType,
             INamedTypeSymbol nativeIntegerType,
             bool signed
-        ) {
+        )
+        {
             var specialType = signed ? SpecialType.System_IntPtr : SpecialType.System_UIntPtr;
 
             VerifyErrorType(underlyingType, SpecialType.None, isNativeInt: false);
@@ -1046,7 +1063,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.Semantics
                 FieldSymbol field,
                 string expectedSymbol,
                 AssemblySymbol expectedAssembly
-            ) {
+            )
+            {
                 Assert.IsType<Microsoft.CodeAnalysis.CSharp.Symbols.Retargeting.RetargetingFieldSymbol>(
                     field
                 );
@@ -1167,7 +1185,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.Semantics
                 FieldSymbol field,
                 string expectedSymbol,
                 AssemblySymbol expectedAssembly
-            ) {
+            )
+            {
                 Assert.IsType<Microsoft.CodeAnalysis.CSharp.Symbols.Retargeting.RetargetingFieldSymbol>(
                     field
                 );
@@ -1287,7 +1306,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.Semantics
                 FieldSymbol field,
                 string expectedSymbol,
                 AssemblySymbol expectedAssembly
-            ) {
+            )
+            {
                 Assert.IsType<Microsoft.CodeAnalysis.CSharp.Symbols.Retargeting.RetargetingFieldSymbol>(
                     field
                 );
@@ -1917,7 +1937,8 @@ namespace System
                 NamedTypeSymbol type,
                 SpecialType specialType,
                 bool includesIEquatable
-            ) {
+            )
+            {
                 var underlyingType = type.NativeIntegerUnderlyingType;
 
                 Assert.True(type.IsNativeIntegerType);
@@ -5602,7 +5623,8 @@ False
                     CSharpCompilation comp,
                     UnaryOperatorKind operatorKind,
                     bool skipNativeIntegerOperators
-                ) {
+                )
+                {
                     var builder = ArrayBuilder<UnaryOperatorSignature>.GetInstance();
                     comp.builtInOperators.GetSimpleBuiltInOperators(
                         operatorKind,
@@ -5632,7 +5654,8 @@ False
                     CSharpCompilation comp,
                     BinaryOperatorKind operatorKind,
                     bool skipNativeIntegerOperators
-                ) {
+                )
+                {
                     var builder = ArrayBuilder<BinaryOperatorSignature>.GetInstance();
                     comp.builtInOperators.GetSimpleBuiltInOperators(
                         operatorKind,
@@ -5660,7 +5683,8 @@ False
                     Func<T, bool, bool> predicate,
                     int expectedSigned,
                     int expectedUnsigned
-                ) {
+                )
+                {
                     Assert.Equal(expectedSigned, operators.Count(op => predicate(op, true)));
                     Assert.Equal(expectedUnsigned, operators.Count(op => predicate(op, false)));
                 }
@@ -6484,7 +6508,8 @@ class A
         public void NativeIntegerOperatorsCSharp8_02(
             bool useCompilationReference,
             [CombinatorialValues("nint", "nint?", "nuint", "nuint?")] string type
-        ) {
+        )
+        {
             var sourceA =
                 $@"public class A
 {{
@@ -6547,7 +6572,8 @@ class A
         public void NativeIntegerOperatorsCSharp8_03(
             bool useCompilationReference,
             [CombinatorialValues("nint", "nint?", "nuint", "nuint?")] string type
-        ) {
+        )
+        {
             var sourceA =
                 $@"public class A
 {{
@@ -6682,7 +6708,8 @@ class A
         public void NativeIntegerOperatorsCSharp8_04(
             bool useCompilationReference,
             [CombinatorialValues("nint", "nint?", "nuint", "nuint?")] string type
-        ) {
+        )
+        {
             var sourceA =
                 $@"public class A
 {{
@@ -6743,7 +6770,8 @@ class A
         public void NativeIntegerOperatorsCSharp8_05(
             bool useCompilationReference,
             [CombinatorialValues("nint", "nint?", "nuint", "nuint?")] string type
-        ) {
+        )
+        {
             var sourceA =
                 $@"public class A
 {{
@@ -6842,7 +6870,8 @@ class A
         public void NativeIntegerConversionsCSharp8_01(
             bool useCompilationReference,
             [CombinatorialValues("nint", "nuint")] string type
-        ) {
+        )
+        {
             var sourceA =
                 $@"public class A
 {{
@@ -7114,7 +7143,8 @@ class A
         public void NativeIntegerConversionsCSharp8_04(
             bool useCompilationReference,
             [CombinatorialValues("nint", "nuint")] string type
-        ) {
+        )
+        {
             var sourceA =
                 $@"public class A
 {{
@@ -8406,7 +8436,8 @@ class Program
                 DiagnosticDescription uncheckedError,
                 string unchecked32,
                 string unchecked64
-            ) {
+            )
+            {
                 constantConversion(
                     sourceType,
                     destinationType,
@@ -8432,7 +8463,8 @@ class Program
                 bool useChecked,
                 DiagnosticDescription expectedError,
                 string expectedOutput
-            ) {
+            )
+            {
                 var source =
                     $@"using System;
 class Program
@@ -9875,7 +9907,8 @@ default: 0
                 string expectedImplicitIL,
                 string expectedExplicitIL,
                 string expectedCheckedIL = null
-            ) {
+            )
+            {
                 // https://github.com/dotnet/roslyn/issues/42834: Invalid code generated for nullable conversions
                 // involving System.[U]IntPtr: the conversion is dropped. And when converting from System.[U]IntPtr,
                 // an assert in LocalRewriter.MakeLiftedUserDefinedConversionConsequence fails.
@@ -15433,7 +15466,8 @@ default: 0
                 bool useChecked,
                 bool verify,
                 ErrorCode expectedErrorCode
-            ) {
+            )
+            {
                 bool useUnsafeContext = useUnsafe(sourceType) || useUnsafe(destType);
                 string value = "value";
                 if (useExplicitCast)
@@ -15516,7 +15550,8 @@ enum E {{ }}
                 string expectedResult = null,
                 string expectedIL = "",
                 DiagnosticDescription diagnostic = null
-            ) {
+            )
+            {
                 operand ??= "default";
                 if (expectedSymbol == null && diagnostic == null)
                 {
@@ -15782,7 +15817,8 @@ enum E {{ }}
                 string expectedResult,
                 string expectedIL,
                 DiagnosticDescription[] expectedDiagnostics
-            ) {
+            )
+            {
                 string source =
                     $@"class Program
 {{
@@ -15839,7 +15875,8 @@ enum E {{ }}
                 string expectedIL = "",
                 string expectedLiftedIL = "",
                 DiagnosticDescription diagnostic = null
-            ) {
+            )
+            {
                 incrementOperator(
                     op,
                     opType,
@@ -15890,7 +15927,8 @@ enum E {{ }}
                     string opType,
                     bool isPrefix,
                     DiagnosticDescription diagnostic
-                ) {
+                )
+                {
                     if (expectedSymbol == null && diagnostic == null)
                     {
                         diagnostic = Diagnostic(
@@ -16253,7 +16291,8 @@ enum E {{ }}
                 string expectedResult,
                 string expectedIL,
                 DiagnosticDescription[] expectedDiagnostics
-            ) {
+            )
+            {
                 var source =
                     $@"using System;
 class Program
@@ -16338,7 +16377,8 @@ class Program
                 string expectedIL = "",
                 string expectedLiftedIL = "",
                 DiagnosticDescription diagnostic = null
-            ) {
+            )
+            {
                 incrementOperator(
                     op,
                     opType,
@@ -16362,7 +16402,8 @@ class Program
                 DiagnosticDescription[] getDiagnostics(
                     string opType,
                     DiagnosticDescription diagnostic
-                ) {
+                )
+                {
                     if (expectedSymbol == null && diagnostic == null)
                     {
                         diagnostic = Diagnostic(ErrorCode.ERR_BadUnaryOp, op + "operand")
@@ -16551,7 +16592,8 @@ class Program
                 string expectedResult,
                 string expectedIL,
                 DiagnosticDescription[] expectedDiagnostics
-            ) {
+            )
+            {
                 string source =
                     $@"using System;
 class Program
@@ -16792,7 +16834,8 @@ class Program
                 string expectedSymbol2 = "",
                 DiagnosticDescription[] diagnostics1 = null,
                 DiagnosticDescription[] diagnostics2 = null
-            ) {
+            )
+            {
                 binaryOp(op, leftType, rightType, expectedSymbol1, diagnostics1);
                 binaryOp(
                     op,
@@ -16809,7 +16852,8 @@ class Program
                 string rightType,
                 string expectedSymbol,
                 DiagnosticDescription[] diagnostics
-            ) {
+            )
+            {
                 if (expectedSymbol == null && diagnostics == null)
                 {
                     diagnostics = getBadBinaryOpsDiagnostics(op, leftType, rightType);
@@ -16829,7 +16873,8 @@ class Program
                 string rightType,
                 bool includeBadBinaryOps = true,
                 bool includeVoidError = false
-            ) {
+            )
+            {
                 var builder = ArrayBuilder<DiagnosticDescription>.GetInstance();
                 if (includeBadBinaryOps)
                     builder.Add(
@@ -16845,7 +16890,8 @@ class Program
                 string op,
                 string leftType,
                 string rightType
-            ) {
+            )
+            {
                 return new[]
                 {
                     Diagnostic(ErrorCode.ERR_AmbigBinaryOps, $"x {op} y")
@@ -22061,7 +22107,8 @@ class Program
                 string rightType,
                 string expectedSymbol,
                 DiagnosticDescription[] expectedDiagnostics
-            ) {
+            )
+            {
                 bool useUnsafeContext = useUnsafe(leftType) || useUnsafe(rightType);
                 string source =
                     $@"class Program
@@ -23138,7 +23185,8 @@ class Program
                 string operand,
                 string expectedResult,
                 Func<string, string, string, DiagnosticDescription[]> getDiagnostics = null
-            ) {
+            )
+            {
                 getDiagnostics ??= getNoDiagnostics;
 
                 var declarations = $"const {opType} A = {operand};";
@@ -23172,7 +23220,8 @@ class Program
                 string op,
                 string operand,
                 string expectedResult
-            ) {
+            )
+            {
                 var declarations = $"const {opType} A = {operand};";
                 var expr = $"{op}A";
                 constantDeclaration(
@@ -23227,7 +23276,8 @@ class Program
                 string op,
                 string operand,
                 string expectedResult
-            ) {
+            )
+            {
                 var declarations = $"const {opType} A = {operand};";
                 var expr = $"{op}A";
                 constantDeclaration(
@@ -23294,7 +23344,8 @@ class Program
                 string rightOperand,
                 string expectedResult,
                 Func<string, string, string, DiagnosticDescription[]> getDiagnostics = null
-            ) {
+            )
+            {
                 getDiagnostics ??= getNoDiagnostics;
 
                 var declarations =
@@ -23332,7 +23383,8 @@ class Program
                 string rightType,
                 string rightOperand,
                 string expectedResult
-            ) {
+            )
+            {
                 var declarations =
                     $"const {leftType} A = {leftOperand}; const {rightType} B = {rightOperand};";
                 var expr = $"A {op} B";
@@ -23391,7 +23443,8 @@ class Program
                 string rightType,
                 string rightOperand,
                 string expectedResult
-            ) {
+            )
+            {
                 var declarations =
                     $"const {leftType} A = {leftOperand}; const {rightType} B = {rightOperand};";
                 var expr = $"A {op} B";
@@ -23456,7 +23509,8 @@ class Program
                 string expr,
                 string expectedResult,
                 DiagnosticDescription[] expectedDiagnostics
-            ) {
+            )
+            {
                 string sourceA =
                     $@"public class Library
 {{
@@ -23494,7 +23548,8 @@ class Program
                 string expr,
                 string expectedResult,
                 DiagnosticDescription[] expectedDiagnostics
-            ) {
+            )
+            {
                 string source =
                     $@"using System;
 class Program
@@ -24024,7 +24079,8 @@ class B : A
                 string toConvUnchecked,
                 string toValueChecked,
                 string toConvChecked
-            ) {
+            )
+            {
                 string source =
                     $@"using System;
 class Program
@@ -24948,7 +25004,8 @@ B
                 string toConvUnchecked,
                 string toValueChecked,
                 string toConvChecked
-            ) {
+            )
+            {
                 if (baseType != null)
                     baseType = " : " + baseType;
                 string source =

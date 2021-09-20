@@ -84,7 +84,8 @@ namespace System.Text
             Encoding encoding,
             DecoderNLS? decoder,
             int originalByteCount
-        ) {
+        )
+        {
             // The original byte count is only used for keeping track of what 'index' value needs
             // to be passed to the abstract Fallback method. The index value is calculated by subtracting
             // 'bytes.Length' (where bytes is expected to be the entire remaining input buffer)
@@ -220,7 +221,8 @@ namespace System.Text
         internal int InternalFallbackGetCharCount(
             ReadOnlySpan<byte> remainingBytes,
             int fallbackLength
-        ) {
+        )
+        {
             return (
                 Fallback(
                     remainingBytes.Slice(0, fallbackLength).ToArray(),
@@ -236,13 +238,15 @@ namespace System.Text
             int fallbackLength,
             Span<char> chars,
             out int charsWritten
-        ) {
+        )
+        {
             if (
                 Fallback(
                     remainingBytes.Slice(0, fallbackLength).ToArray(),
                     index: _originalByteCount - remainingBytes.Length
                 )
-            ) {
+            )
+            {
                 return TryDrainRemainingDataForGetChars(chars, out charsWritten);
             }
             else

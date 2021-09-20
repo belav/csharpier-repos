@@ -43,7 +43,8 @@ namespace Microsoft.CodeAnalysis.MSBuild
             bool isLinked,
             bool isGenerated,
             SourceCodeKind sourceCodeKind
-        ) {
+        )
+        {
             this.FilePath = filePath;
             this.LogicalPath = logicalPath;
             this.IsLinked = isLinked;

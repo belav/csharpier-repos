@@ -22,7 +22,8 @@ namespace Microsoft.Win32
             string subkey,
             RegistryKeyPermissionCheck permissionCheck,
             RegistryOptions registryOptions
-        ) {
+        )
+        {
             throw new PlatformNotSupportedException(SR.PlatformNotSupported_Registry);
         }
 
@@ -50,7 +51,8 @@ namespace Microsoft.Win32
             RegistryHive hKey,
             string machineName,
             RegistryView view
-        ) {
+        )
+        {
             throw new PlatformNotSupportedException(SR.Security_RegistryPermission); // remote stores not supported on Unix
         }
 
@@ -58,7 +60,8 @@ namespace Microsoft.Win32
             string name,
             RegistryKeyPermissionCheck permissionCheck,
             int rights
-        ) {
+        )
+        {
             throw new PlatformNotSupportedException(SR.PlatformNotSupported_Registry);
         }
 

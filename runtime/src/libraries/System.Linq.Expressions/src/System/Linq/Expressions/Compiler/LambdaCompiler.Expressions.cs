@@ -35,7 +35,8 @@ namespace System.Linq.Expressions.Compiler
         private static CompilationFlags UpdateEmitAsTailCallFlag(
             CompilationFlags flags,
             CompilationFlags newValue
-        ) {
+        )
+        {
             Debug.Assert(
                 newValue == CompilationFlags.EmitAsTail
                     || newValue == CompilationFlags.EmitAsMiddle
@@ -51,7 +52,8 @@ namespace System.Linq.Expressions.Compiler
         private static CompilationFlags UpdateEmitExpressionStartFlag(
             CompilationFlags flags,
             CompilationFlags newValue
-        ) {
+        )
+        {
             Debug.Assert(
                 newValue == CompilationFlags.EmitExpressionStart
                     || newValue == CompilationFlags.EmitNoExpressionStart
@@ -66,7 +68,8 @@ namespace System.Linq.Expressions.Compiler
         private static CompilationFlags UpdateEmitAsTypeFlag(
             CompilationFlags flags,
             CompilationFlags newValue
-        ) {
+        )
+        {
             Debug.Assert(
                 newValue == CompilationFlags.EmitAsDefaultType
                     || newValue == CompilationFlags.EmitAsVoidType
@@ -195,7 +198,8 @@ namespace System.Linq.Expressions.Compiler
             if (
                 (flags & CompilationFlags.EmitExpressionStartMask)
                 == CompilationFlags.EmitExpressionStart
-            ) {
+            )
+            {
                 PopLabelBlock(_labelBlock.Kind);
             }
         }
@@ -408,7 +412,8 @@ namespace System.Linq.Expressions.Compiler
             Expression obj,
             MethodInfo method,
             IArgumentProvider methodCallExpr
-        ) {
+        )
+        {
             EmitMethodCall(obj, method, methodCallExpr, CompilationFlags.EmitAsNoTail);
         }
 
@@ -417,7 +422,8 @@ namespace System.Linq.Expressions.Compiler
             MethodInfo method,
             IArgumentProvider methodCallExpr,
             CompilationFlags flags
-        ) {
+        )
+        {
             // Emit instance, if calling an instance method
             Type? objectType = null;
             if (!method.IsStatic)
@@ -449,7 +455,8 @@ namespace System.Linq.Expressions.Compiler
             IArgumentProvider args,
             Type? objectType,
             CompilationFlags flags
-        ) {
+        )
+        {
             // Emit arguments
             List<WriteBack>? wb = EmitArguments(mi, args);
 
@@ -468,7 +475,8 @@ namespace System.Linq.Expressions.Compiler
             if (
                 (flags & CompilationFlags.EmitAsTailCallMask) == CompilationFlags.EmitAsTail
                 && !MethodHasByRefParameter(mi)
-            ) {
+            )
+            {
                 _ilg.Emit(OpCodes.Tailcall);
             }
             if (mi.CallingConvention == CallingConventions.VarArgs)
@@ -569,7 +577,8 @@ namespace System.Linq.Expressions.Compiler
             MethodBase method,
             IArgumentProvider args,
             int skipParameters
-        ) {
+        )
+        {
             ParameterInfo[] pis = method.GetParametersCached();
             Debug.Assert(args.ArgumentCount + skipParameters == pis.Length);
 
@@ -1110,7 +1119,8 @@ namespace System.Linq.Expressions.Compiler
             ReadOnlyCollection<MemberBinding> bindings,
             bool keepOnStack,
             Type objectType
-        ) {
+        )
+        {
             int n = bindings.Count;
             if (n == 0)
             {
@@ -1157,7 +1167,8 @@ namespace System.Linq.Expressions.Compiler
             ReadOnlyCollection<ElementInit> initializers,
             bool keepOnStack,
             Type objectType
-        ) {
+        )
+        {
             int n = initializers.Count;
 
             if (n == 0)
@@ -1203,7 +1214,8 @@ namespace System.Linq.Expressions.Compiler
             MethodCallExpression mc,
             ParameterExpression[] paramList,
             Expression[] argList
-        ) {
+        )
+        {
             Debug.Assert(
                 TypeUtils.AreEquivalent(
                     resultType.GetNonNullableType(),
@@ -1259,7 +1271,8 @@ namespace System.Linq.Expressions.Compiler
                     EmitMethodCallExpression(mc);
                     if (
                         resultType.IsNullableType() && !TypeUtils.AreEquivalent(resultType, mc.Type)
-                    ) {
+                    )
+                    {
                         ConstructorInfo ci = TypeUtils.GetNullableConstructor(resultType, mc.Type);
                         _ilg.Emit(OpCodes.Newobj, ci);
                     }
@@ -1366,7 +1379,8 @@ namespace System.Linq.Expressions.Compiler
                     EmitMethodCallExpression(mc);
                     if (
                         resultType.IsNullableType() && !TypeUtils.AreEquivalent(resultType, mc.Type)
-                    ) {
+                    )
+                    {
                         ConstructorInfo ci = TypeUtils.GetNullableConstructor(resultType, mc.Type);
                         _ilg.Emit(OpCodes.Newobj, ci);
                     }

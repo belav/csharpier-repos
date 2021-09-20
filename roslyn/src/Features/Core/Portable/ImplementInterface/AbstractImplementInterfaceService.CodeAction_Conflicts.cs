@@ -20,7 +20,8 @@ namespace Microsoft.CodeAnalysis.ImplementInterface
             private bool HasConflictingMember(
                 ISymbol member,
                 ArrayBuilder<ISymbol> implementedVisibleMembers
-            ) {
+            )
+            {
                 // Checks if this member conflicts with an existing member in classOrStructType or with
                 // a method we've already implemented.  If so, we'll need to implement this one
                 // explicitly.
@@ -45,7 +46,8 @@ namespace Microsoft.CodeAnalysis.ImplementInterface
                     if (
                         member1.ExplicitInterfaceImplementations().Any()
                         || member2.ExplicitInterfaceImplementations().Any()
-                    ) {
+                    )
+                    {
                         // explicit methods don't conflict with anything.
                         return false;
                     }
@@ -70,7 +72,8 @@ namespace Microsoft.CodeAnalysis.ImplementInterface
                 // then they do not conflict.
                 if (
                     !SignatureComparer.Instance.HaveSameSignature(member1, member2, IsCaseSensitive)
-                ) {
+                )
+                {
                     return false;
                 }
 
@@ -94,7 +97,8 @@ namespace Microsoft.CodeAnalysis.ImplementInterface
                         member2,
                         IsCaseSensitive
                     )
-                ) {
+                )
+                {
                     return true;
                 }
 

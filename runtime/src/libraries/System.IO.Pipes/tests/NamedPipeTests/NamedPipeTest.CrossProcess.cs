@@ -33,14 +33,16 @@ namespace System.IO.Pipes.Tests
                     TokenImpersonationLevel.None,
                     HandleInheritability.Inheritable
                 )
-            ) {
+            )
+            {
                 Task.WaitAll(server.WaitForConnectionAsync(), client.ConnectAsync());
                 using (
                     RemoteExecutor.Invoke(
                         new Action<string>(ChildFunc),
                         client.SafePipeHandle.DangerousGetHandle().ToString()
                     )
-                ) {
+                )
+                {
                     client.Dispose();
                     for (int i = 0; i < 5; i++)
                     {
@@ -61,7 +63,8 @@ namespace System.IO.Pipes.Tests
                             ownsHandle: true
                         )
                     )
-                ) {
+                )
+                {
                     for (int i = 0; i < 5; i++)
                     {
                         childClient.WriteByte((byte)i);
@@ -87,7 +90,8 @@ namespace System.IO.Pipes.Tests
                     outName,
                     inName
                 )
-            ) {
+            )
+            {
                 // Wait for both pipes to be connected
                 Task.WaitAll(outbound.WaitForConnectionAsync(), inbound.ConnectAsync());
 
@@ -118,7 +122,8 @@ namespace System.IO.Pipes.Tests
                     outName,
                     inName
                 )
-            ) {
+            )
+            {
                 // Wait for both pipes to be connected
                 await Task.WhenAll(outbound.WaitForConnectionAsync(), inbound.ConnectAsync());
 

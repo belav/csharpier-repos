@@ -371,7 +371,8 @@ public class B
                 public Reference(
                     CountedSyntaxTree countedSyntaxTree,
                     SyntaxReference syntaxReference
-                ) {
+                )
+                {
                     _countedSyntaxTree = countedSyntaxTree;
                     _underlyingSyntaxReference = syntaxReference;
                 }
@@ -400,7 +401,8 @@ public class B
                         if (
                             node.Span == nodeInUnderlying.Span
                             && node.RawKind == nodeInUnderlying.RawKind
-                        ) {
+                        )
+                        {
                             return (CSharpSyntaxNode)node;
                         }
                     }
@@ -437,7 +439,8 @@ public class B
 
             public override CSharpSyntaxNode GetRoot(
                 CancellationToken cancellationToken = default(CancellationToken)
-            ) {
+            )
+            {
                 AccessCount++;
                 return _root;
             }

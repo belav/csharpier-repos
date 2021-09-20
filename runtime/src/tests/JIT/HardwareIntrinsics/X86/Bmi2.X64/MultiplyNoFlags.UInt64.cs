@@ -229,7 +229,8 @@ namespace JIT.HardwareIntrinsics.X86
             UInt64 right,
             UInt64 result,
             [CallerMemberName] string method = ""
-        ) {
+        )
+        {
             var isUnexpectedResult = false;
 
             ulong expectedResult = 18446744073709551614;

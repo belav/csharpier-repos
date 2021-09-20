@@ -17,7 +17,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Completion.KeywordRecommenders
             int position,
             CSharpSyntaxContext context,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             if (context.IsStatementContext || context.IsGlobalStatementContext)
             {
                 return true;
@@ -40,7 +41,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Completion.KeywordRecommenders
             if (
                 context.TargetToken.Kind() == SyntaxKind.QuestionToken
                 || context.TargetToken.Kind() == SyntaxKind.ColonToken
-            ) {
+            )
+            {
                 return context.TargetToken.Parent.Kind() == SyntaxKind.ConditionalExpression;
             }
 

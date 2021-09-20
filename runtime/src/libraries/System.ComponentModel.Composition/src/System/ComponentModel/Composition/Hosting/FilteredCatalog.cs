@@ -35,7 +35,8 @@ namespace System.ComponentModel.Composition.Hosting
             ComposablePartCatalog catalog,
             Func<ComposablePartDefinition, bool> filter,
             FilteredCatalog? complement
-        ) {
+        )
+        {
             Requires.NotNull(catalog, nameof(catalog));
             Requires.NotNull(filter, nameof(filter));
 
@@ -163,7 +164,8 @@ namespace System.ComponentModel.Composition.Hosting
         /// </remarks>
         public override IEnumerable<Tuple<ComposablePartDefinition, ExportDefinition>> GetExports(
             ImportDefinition definition
-        ) {
+        )
+        {
             ThrowIfDisposed();
             Requires.NotNull(definition, nameof(definition));
 
@@ -235,7 +237,8 @@ namespace System.ComponentModel.Composition.Hosting
 
         private ComposablePartCatalogChangeEventArgs? ProcessEventArgs(
             ComposablePartCatalogChangeEventArgs e
-        ) {
+        )
+        {
             // the constructor for ComposablePartCatalogChangeEventArgs takes a snapshot of the arguments, so we don't have to
             var result = new ComposablePartCatalogChangeEventArgs(
                 e.AddedDefinitions.Where(_filter),

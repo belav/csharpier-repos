@@ -302,7 +302,8 @@ namespace System.DirectoryServices.AccountManagement
             PrincipalContext context,
             DateTime time,
             MatchType type
-        ) {
+        )
+        {
             return FindByLockoutTime<UserPrincipal>(context, time, type);
         }
 
@@ -310,7 +311,8 @@ namespace System.DirectoryServices.AccountManagement
             PrincipalContext context,
             DateTime time,
             MatchType type
-        ) {
+        )
+        {
             return FindByLogonTime<UserPrincipal>(context, time, type);
         }
 
@@ -318,7 +320,8 @@ namespace System.DirectoryServices.AccountManagement
             PrincipalContext context,
             DateTime time,
             MatchType type
-        ) {
+        )
+        {
             return FindByExpirationTime<UserPrincipal>(context, time, type);
         }
 
@@ -326,7 +329,8 @@ namespace System.DirectoryServices.AccountManagement
             PrincipalContext context,
             DateTime time,
             MatchType type
-        ) {
+        )
+        {
             return FindByBadPasswordAttempt<UserPrincipal>(context, time, type);
         }
 
@@ -334,14 +338,16 @@ namespace System.DirectoryServices.AccountManagement
             PrincipalContext context,
             DateTime time,
             MatchType type
-        ) {
+        )
+        {
             return FindByPasswordSetTime<UserPrincipal>(context, time, type);
         }
 
         public static new UserPrincipal FindByIdentity(
             PrincipalContext context,
             string identityValue
-        ) {
+        )
+        {
             return (UserPrincipal)FindByIdentityWithType(
                 context,
                 typeof(UserPrincipal),
@@ -353,7 +359,8 @@ namespace System.DirectoryServices.AccountManagement
             PrincipalContext context,
             IdentityType identityType,
             string identityValue
-        ) {
+        )
+        {
             return (UserPrincipal)FindByIdentityWithType(
                 context,
                 typeof(UserPrincipal),

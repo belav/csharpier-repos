@@ -18,7 +18,8 @@ namespace Microsoft.Cci
         internal static string GetSerializedTypeName(
             this ITypeReference typeReference,
             EmitContext context
-        ) {
+        )
+        {
             bool isAssemblyQualified = true;
             return GetSerializedTypeName(typeReference, context, ref isAssemblyQualified);
         }
@@ -27,7 +28,8 @@ namespace Microsoft.Cci
             this ITypeReference typeReference,
             EmitContext context,
             ref bool isAssemblyQualified
-        ) {
+        )
+        {
             var pooled = PooledStringBuilder.GetInstance();
             StringBuilder sb = pooled.Builder;
             IArrayTypeReference arrType = typeReference as IArrayTypeReference;
@@ -155,7 +157,8 @@ namespace Microsoft.Cci
             ITypeReference type,
             ref bool isAssemQualified,
             EmitContext context
-        ) {
+        )
+        {
             string argTypeName = GetSerializedTypeName(type, context, ref isAssemQualified);
             if (isAssemQualified)
             {
@@ -174,7 +177,8 @@ namespace Microsoft.Cci
             ITypeReference typeReference,
             out bool isAssemQualified,
             EmitContext context
-        ) {
+        )
+        {
             INestedTypeReference nestedType = typeReference.AsNestedTypeReference;
             if (nestedType != null)
             {
@@ -238,7 +242,8 @@ namespace Microsoft.Cci
                 if (
                     containingAssembly == null
                     || !ReferenceEquals(referencedAssembly, containingAssembly)
-                ) {
+                )
+                {
                     sb.Append(", ");
                     sb.Append(MetadataWriter.StrongName(referencedAssembly));
                     isAssemQualified = true;
@@ -276,7 +281,8 @@ namespace Microsoft.Cci
         private static ITypeReference UnwrapTypeReference(
             ITypeReference typeReference,
             EmitContext context
-        ) {
+        )
+        {
             while (true)
             {
                 IArrayTypeReference arrType = typeReference as IArrayTypeReference;

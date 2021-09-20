@@ -66,7 +66,8 @@ namespace ILCompiler.DependencyAnalysis.ReadyToRun
                     _module,
                     CompiledMethodCategory.NonInstantiated
                 )
-            ) {
+            )
+            {
                 Debug.Assert(method.Method is EcmaMethod);
                 EcmaMethod ecmaMethod = (EcmaMethod)method.Method;
                 Debug.Assert(ecmaMethod.Module == _module);

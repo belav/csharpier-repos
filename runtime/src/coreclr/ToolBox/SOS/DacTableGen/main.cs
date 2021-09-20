@@ -252,7 +252,8 @@ Required:
             || (pdbFile == null && mapFile == null)
             || (dllFile == null && pdbFile != null)
             || binFile == null
-        ) {
+        )
+        {
             HelpHdr();
             Console.WriteLine();
             Console.WriteLine("Required option missing.");
@@ -314,7 +315,8 @@ Required:
             if (
                 Path.GetFullPath(pdbSymProvider.LoadedPdbPath).ToLowerInvariant()
                 != Path.GetFullPath(pdbFile).ToLowerInvariant()
-            ) {
+            )
+            {
                 // DIA loaded a PDB oter than the one the user asked for.  This could possibly happen if the PDB
                 // also exists in a sub-directory that DIA automatically probes for ("retail" etc.).  There doesn't
                 // appear to be any mechanism for turning this sub-directory probing off, but all other searching mechanisms
@@ -373,7 +375,8 @@ Required:
                         rvaArray[i] != mapRvaArray[i]
                         // it is ok if we find more stuff in the MAP file
                         && rvaArray[i] != UInt32.MaxValue
-                    ) {
+                    )
+                    {
                         throw new InvalidOperationException(
                             "RVAs differ between pdb file and map file: "
                                 + ToHexNB(rvaArray[i])
@@ -461,7 +464,8 @@ Required:
         SymbolProvider sf,
         List<UInt32> rvaArray,
         out UInt32 numGlobals
-    ) {
+    )
+    {
         StreamReader strm = new StreamReader(file, System.Text.Encoding.ASCII);
         String line;
         Hashtable vtables = new Hashtable(); // hashtable to guarantee uniqueness of entries
@@ -507,7 +511,8 @@ Required:
                 || line.Equals("};")
                 || line.StartsWith("#line ")
                 || line.StartsWith("# ")
-            ) {
+            )
+            {
                 // Ignore.
             }
             else if (line.StartsWith("ULONG "))

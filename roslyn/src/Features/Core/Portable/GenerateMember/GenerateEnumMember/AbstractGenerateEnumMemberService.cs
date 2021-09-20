@@ -42,13 +42,15 @@ namespace Microsoft.CodeAnalysis.GenerateMember.GenerateEnumMember
             Document document,
             SyntaxNode node,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             using (
                 Logger.LogBlock(
                     FunctionId.Refactoring_GenerateMember_GenerateEnumMember,
                     cancellationToken
                 )
-            ) {
+            )
+            {
                 var semanticDocument = await SemanticDocument.CreateAsync(
                         document,
                         cancellationToken

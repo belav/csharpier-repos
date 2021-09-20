@@ -107,7 +107,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
 
         internal override void SetLinkedReferencedAssemblies(
             ImmutableArray<AssemblySymbol> assemblies
-        ) {
+        )
+        {
             throw ExceptionUtilities.Unreachable;
         }
 
@@ -118,7 +119,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
 
         internal override void SetNoPiaResolutionAssemblies(
             ImmutableArray<AssemblySymbol> assemblies
-        ) {
+        )
+        {
             throw ExceptionUtilities.Unreachable;
         }
 
@@ -146,7 +148,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             ref MetadataTypeName emittedName,
             ConsList<AssemblySymbol> visitedAssemblies,
             bool digThroughForwardedTypes
-        ) {
+        )
+        {
             var result = this.moduleSymbol.LookupTopLevelMetadataType(ref emittedName);
             Debug.Assert(result is MissingMetadataTypeSymbol);
             return result;
@@ -164,7 +167,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
 
         internal override IEnumerable<ImmutableArray<byte>> GetInternalsVisibleToPublicKeys(
             string simpleName
-        ) {
+        )
+        {
             return SpecializedCollections.EmptyEnumerable<ImmutableArray<byte>>();
         }
 

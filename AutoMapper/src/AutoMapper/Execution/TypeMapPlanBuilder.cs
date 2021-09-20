@@ -83,7 +83,8 @@ namespace AutoMapper.Execution
             IGlobalConfiguration configurationProvider,
             TypeMap typeMap,
             HashSet<TypeMap> typeMapsPath
-        ) {
+        )
+        {
             if (typeMap.DestinationTypeOverride != null)
             {
                 CheckForCycles(
@@ -106,7 +107,8 @@ namespace AutoMapper.Execution
                 if (
                     !inlineWasChecked
                     && typeMapsPath.Count % configurationProvider.MaxExecutionPlanDepth == 0
-                ) {
+                )
+                {
                     memberMap.Inline = false;
                     Debug.WriteLine(
                         $"Resetting Inline: {memberMap.DestinationName} in {typeMap.SourceType} - {typeMap.DestinationType}"
@@ -133,7 +135,8 @@ namespace AutoMapper.Execution
                         var derivedTypeMap in configurationProvider.GetIncludedTypeMaps(
                             memberTypeMap
                         )
-                    ) {
+                    )
+                    {
                         derivedTypeMap.PreserveReferences = true;
                         Trace(typeMap, derivedTypeMap);
                     }
@@ -224,7 +227,8 @@ namespace AutoMapper.Execution
                     if (
                         isConstructorMapping
                         && _typeMap.ConstructorParameterMatches(propertyMap.DestinationName)
-                    ) {
+                    )
+                    {
                         property = _initialDestination.IfNullElse(Default(property.Type), property);
                     }
                     actions.Add(property);
@@ -385,7 +389,8 @@ namespace AutoMapper.Execution
         }
         private Expression CreateConstructorParameterExpression(
             ConstructorParameterMap ctorParamMap
-        ) {
+        )
+        {
             var defaultValue = ctorParamMap.Parameter.IsOptional
                 ? ctorParamMap.DefaultValue()
                 : Default(ctorParamMap.DestinationType);
@@ -423,7 +428,8 @@ namespace AutoMapper.Execution
             MemberMap memberMap,
             Expression destination,
             MemberInfo destinationMember
-        ) {
+        )
+        {
             Expression destinationMemberAccess,
                 destinationMemberGetter;
             bool destinationMemberReadOnly;
@@ -486,11 +492,13 @@ namespace AutoMapper.Execution
                 MemberMap memberMap,
                 Expression destinationMemberGetter,
                 bool destinationMemberReadOnly
-            ) {
+            )
+            {
                 if (
                     memberMap is { UseDestinationValue: true }
                     || (memberMap.UseDestinationValue is null && destinationMemberReadOnly)
-                ) {
+                )
+                {
                     return destinationMemberGetter;
                 }
                 else if (DestinationType.IsValueType)
@@ -521,7 +529,8 @@ namespace AutoMapper.Execution
                 MemberMap memberMap,
                 Expression destinationMemberValue,
                 ParameterExpression resolvedValue
-            ) {
+            )
+            {
                 var typePair = memberMap.Types();
                 var mapMember = memberMap.Inline
                     ? _configurationProvider.MapExpression(
@@ -539,7 +548,8 @@ namespace AutoMapper.Execution
                 Expression valueResolver,
                 ParameterExpression resolvedValueVariable,
                 Expression mappedMember
-            ) {
+            )
+            {
                 _propertyMapExpressions.Clear();
                 _propertyMapVariables.Clear();
                 _propertyMapVariables.Add(resolvedValueVariable);
@@ -615,7 +625,8 @@ namespace AutoMapper.Execution
                 Expression mapFrom,
                 Type destinationPropertyType,
                 Expression destValueExpr
-            ) {
+            )
+            {
                 var nullCheckedExpression = mapFrom.NullCheck(
                     destinationPropertyType,
                     destValueExpr
@@ -640,7 +651,8 @@ namespace AutoMapper.Execution
             Expression source,
             Expression destValueExpr,
             MemberMap memberMap
-        ) {
+        )
+        {
             var typeMap = memberMap.TypeMap;
             var valueResolverConfig = memberMap.ValueResolverConfig;
             var resolverInstance =
@@ -675,7 +687,8 @@ namespace AutoMapper.Execution
             Expression source,
             MemberMap memberMap,
             Expression destValueExpr
-        ) {
+        )
+        {
             var valueConverterConfig = memberMap.ValueConverterConfig;
             var iResolverType = valueConverterConfig.InterfaceType;
             var iResolverTypeArgs = iResolverType.GenericTypeArguments;

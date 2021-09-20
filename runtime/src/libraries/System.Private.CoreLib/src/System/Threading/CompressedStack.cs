@@ -33,7 +33,8 @@ namespace System.Threading
             CompressedStack compressedStack,
             ContextCallback callback,
             object? state
-        ) {
+        )
+        {
             if (compressedStack == null)
             {
                 throw new ArgumentNullException(nameof(compressedStack));

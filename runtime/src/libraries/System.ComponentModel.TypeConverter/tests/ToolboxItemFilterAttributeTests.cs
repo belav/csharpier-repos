@@ -29,7 +29,8 @@ namespace System.ComponentModel.Tests
         public void Ctor_String_ToolboxItemFilterType(
             string filterString,
             ToolboxItemFilterType filterType
-        ) {
+        )
+        {
             var attribute = new ToolboxItemFilterAttribute(filterString, filterType);
             Assert.Equal(filterString ?? string.Empty, attribute.FilterString);
             Assert.Equal(filterType, attribute.FilterType);
@@ -42,7 +43,8 @@ namespace System.ComponentModel.Tests
         public void TypeId_ValidEditorBaseTypeName_ReturnsExcepted(
             string filterType,
             object expected
-        ) {
+        )
+        {
             var attribute = new ToolboxItemFilterAttribute(filterType);
             Assert.Equal(expected, attribute.TypeId);
             Assert.Same(attribute.TypeId, attribute.TypeId);
@@ -85,7 +87,8 @@ namespace System.ComponentModel.Tests
             ToolboxItemFilterAttribute attribute,
             object other,
             bool expected
-        ) {
+        )
+        {
             Assert.Equal(expected, attribute.Equals(other));
         }
 
@@ -133,7 +136,8 @@ namespace System.ComponentModel.Tests
             ToolboxItemFilterAttribute attribute,
             object other,
             bool expected
-        ) {
+        )
+        {
             Assert.Equal(expected, attribute.Match(other));
         }
 
@@ -148,7 +152,8 @@ namespace System.ComponentModel.Tests
             string filterString,
             ToolboxItemFilterType filterType,
             string expected
-        ) {
+        )
+        {
             var attribute = new ToolboxItemFilterAttribute(filterString, filterType);
             Assert.Equal(expected, attribute.ToString());
         }

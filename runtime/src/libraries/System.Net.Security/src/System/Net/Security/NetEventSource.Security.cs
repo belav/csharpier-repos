@@ -108,7 +108,8 @@ namespace System.Net
             string hostname,
             X509CertificateCollection? clientCertificates,
             EncryptionPolicy encryptionPolicy
-        ) {
+        )
+        {
             if (IsEnabled())
             {
                 SecureChannelCtor(
@@ -257,7 +258,8 @@ namespace System.Net
         public void AttemptingRestartUsingCert(
             X509Certificate? clientCertificate,
             SecureChannel secureChannel
-        ) {
+        )
+        {
             if (IsEnabled())
             {
                 AttemptingRestartUsingCert(
@@ -380,7 +382,8 @@ namespace System.Net
             int hashStrength,
             ExchangeAlgorithmType keyExchangeAlgorithm,
             int keyExchangeStrength
-        ) {
+        )
+        {
             if (IsEnabled())
             {
                 WriteEvent(

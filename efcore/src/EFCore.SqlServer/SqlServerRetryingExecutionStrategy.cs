@@ -44,9 +44,8 @@ namespace Microsoft.EntityFrameworkCore
         ///     </para>
         /// </summary>
         /// <param name="dependencies"> Parameter object containing service dependencies. </param>
-        public SqlServerRetryingExecutionStrategy(
-            ExecutionStrategyDependencies dependencies
-        ) : this(dependencies, DefaultMaxRetryCount) { }
+        public SqlServerRetryingExecutionStrategy(ExecutionStrategyDependencies dependencies)
+            : this(dependencies, DefaultMaxRetryCount) { }
 
         /// <summary>
         ///     <para>

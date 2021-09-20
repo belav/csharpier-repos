@@ -20,7 +20,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata
         public ParameterBindingInfo(
             IEntityType entityType,
             Expression materializationContextExpression
-        ) {
+        )
+        {
             Check.NotNull(entityType, nameof(entityType));
             Check.NotNull(entityType, nameof(materializationContextExpression));
 

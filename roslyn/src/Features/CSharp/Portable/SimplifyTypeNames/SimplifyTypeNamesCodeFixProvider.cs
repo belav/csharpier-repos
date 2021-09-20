@@ -74,7 +74,8 @@ namespace Microsoft.CodeAnalysis.CSharp.SimplifyTypeNames
             if (
                 annotatedexpressionSyntax.Kind() == SyntaxKind.IsExpression
                 || annotatedexpressionSyntax.Kind() == SyntaxKind.AsExpression
-            ) {
+            )
+            {
                 var right = ((BinaryExpressionSyntax)annotatedexpressionSyntax).Right;
                 annotatedexpressionSyntax = annotatedexpressionSyntax.ReplaceNode(
                     right,

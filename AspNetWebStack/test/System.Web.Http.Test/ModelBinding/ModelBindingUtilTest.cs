@@ -348,7 +348,8 @@ namespace System.Web.Http.ModelBinding
             public bool BindModel(
                 HttpActionContext actionContext,
                 ModelBindingContext bindingContext
-            ) {
+            )
+            {
                 throw new NotImplementedException();
             }
         }

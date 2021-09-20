@@ -28,7 +28,8 @@ namespace System
             string configName,
             int defaultValue,
             bool allowNegative = true
-        ) {
+        )
+        {
             try
             {
                 object? config = AppContext.GetData(configName);
@@ -79,7 +80,8 @@ namespace System
             string configName,
             short defaultValue,
             bool allowNegative = true
-        ) {
+        )
+        {
             try
             {
                 object? config = AppContext.GetData(configName);

@@ -756,7 +756,8 @@ namespace Microsoft.AspNetCore.Routing
                 string routeKey,
                 RouteValueDictionary values,
                 RouteDirection routeDirection
-            ) {
+            )
+            {
                 HasHttpContext = (httpContext != null);
                 return true;
             }
@@ -817,7 +818,8 @@ namespace Microsoft.AspNetCore.Routing
             string[] routeNames,
             string[] routeValues,
             string expectedPath
-        ) {
+        )
+        {
             // Arrange
             var endpointControllerAction = EndpointFactory.CreateRouteEndpoint(
                 "Home/Index",
@@ -893,7 +895,8 @@ namespace Microsoft.AspNetCore.Routing
             string[] routeNames,
             string[] routeValues,
             string expectedPath
-        ) {
+        )
+        {
             // Arrange
             var homeIndex = EndpointFactory.CreateRouteEndpoint(
                 "{controller}/{action}/{id?}",
@@ -948,7 +951,8 @@ namespace Microsoft.AspNetCore.Routing
             string[] routeNames,
             string[] routeValues,
             string expectedPath
-        ) {
+        )
+        {
             // Arrange
             var homeIndex = EndpointFactory.CreateRouteEndpoint(
                 "{controller}/{action}/{id?}",

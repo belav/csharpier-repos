@@ -26,9 +26,8 @@ namespace Microsoft.EntityFrameworkCore.Storage
             public FakeRelationalGeometryTypeMapping() : base(new NullValueConverter(), "geometry")
             { }
 
-            private FakeRelationalGeometryTypeMapping(
-                RelationalTypeMappingParameters parameters
-            ) : base(parameters, new NullValueConverter()) { }
+            private FakeRelationalGeometryTypeMapping(RelationalTypeMappingParameters parameters)
+                : base(parameters, new NullValueConverter()) { }
 
             protected override RelationalTypeMapping Clone(
                 RelationalTypeMappingParameters parameters

@@ -117,7 +117,8 @@ namespace JIT.HardwareIntrinsics.General
             Byte result,
             Byte[] values,
             [CallerMemberName] string method = ""
-        ) {
+        )
+        {
             if (result != values[0])
             {
                 TestLibrary.TestFramework.LogInformation(

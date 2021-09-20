@@ -62,7 +62,8 @@ namespace System.Web.WebPages.Test.Instrumentation
             int length,
             bool isLiteral,
             dynamic context
-        ) {
+        )
+        {
             PageExecutionContextAdapter ctx = new PageExecutionContextAdapter(context);
             Assert.Equal(virtualPath, ctx.VirtualPath);
             Assert.Same(writer, ctx.TextWriter);
@@ -111,7 +112,8 @@ namespace System.Web.WebPages.Test.Instrumentation
             int startPosition,
             int length,
             bool isLiteral
-        ) {
+        )
+        {
             dynamic ctx = new ExpandoObject();
             ctx.VirtualPath = virtualPath;
             ctx.TextWriter = writer;

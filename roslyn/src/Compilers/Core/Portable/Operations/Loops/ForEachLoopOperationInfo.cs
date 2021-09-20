@@ -52,7 +52,8 @@ namespace Microsoft.CodeAnalysis.Operations
             ImmutableArray<IArgumentOperation> moveNextArguments = default,
             ImmutableArray<IArgumentOperation> currentArguments = default,
             ImmutableArray<IArgumentOperation> disposeArguments = default
-        ) {
+        )
+        {
             ElementType = elementType;
             GetEnumeratorMethod = getEnumeratorMethod;
             CurrentProperty = currentProperty;

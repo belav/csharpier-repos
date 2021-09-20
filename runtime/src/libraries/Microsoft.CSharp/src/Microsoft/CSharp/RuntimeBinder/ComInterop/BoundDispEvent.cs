@@ -39,7 +39,8 @@ namespace Microsoft.CSharp.RuntimeBinder.ComInterop
             BinaryOperationBinder binder,
             object handler,
             out object result
-        ) {
+        )
+        {
             if (binder.Operation == ExpressionType.AddAssign)
             {
                 result = InPlaceAdd(handler);

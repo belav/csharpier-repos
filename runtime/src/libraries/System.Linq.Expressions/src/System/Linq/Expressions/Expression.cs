@@ -98,7 +98,8 @@ namespace System.Linq.Expressions
                 if (
                     s_legacyCtorSupportTable != null
                     && s_legacyCtorSupportTable.TryGetValue(this, out ExtensionInfo? extInfo)
-                ) {
+                )
+                {
                     return extInfo.NodeType;
                 }
 
@@ -117,7 +118,8 @@ namespace System.Linq.Expressions
                 if (
                     s_legacyCtorSupportTable != null
                     && s_legacyCtorSupportTable.TryGetValue(this, out ExtensionInfo? extInfo)
-                ) {
+                )
+                {
                     return extInfo.Type;
                 }
 
@@ -247,7 +249,8 @@ namespace System.Linq.Expressions
                     System.IO.StringWriter writer = new System.IO.StringWriter(
                         CultureInfo.CurrentCulture
                     )
-                ) {
+                )
+                {
                     DebugViewWriter.WriteTo(this, writer);
                     return writer.ToString();
                 }

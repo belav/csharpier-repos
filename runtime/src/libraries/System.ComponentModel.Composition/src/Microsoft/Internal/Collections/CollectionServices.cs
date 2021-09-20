@@ -44,7 +44,8 @@ namespace Microsoft.Internal.Collections
                     IEnumerableOfTType,
                     out Type? closedType
                 )
-            ) {
+            )
+            {
                 return closedType.GetGenericArguments()[0];
             }
 
@@ -59,7 +60,8 @@ namespace Microsoft.Internal.Collections
                     ICollectionOfTType,
                     out Type? closedType
                 )
-            ) {
+            )
+            {
                 return closedType.GetGenericArguments()[0];
             }
 
@@ -79,7 +81,8 @@ namespace Microsoft.Internal.Collections
         public static IEnumerable<T>? ConcatAllowingNull<T>(
             this IEnumerable<T>? source,
             IEnumerable<T>? second
-        ) {
+        )
+        {
             if (second == null || !second.Any())
             {
                 return source;
@@ -96,7 +99,8 @@ namespace Microsoft.Internal.Collections
         public static ICollection<T>? ConcatAllowingNull<T>(
             this ICollection<T>? source,
             ICollection<T>? second
-        ) {
+        )
+        {
             if (second == null || (second.Count == 0))
             {
                 return source;
@@ -116,7 +120,8 @@ namespace Microsoft.Internal.Collections
         public static List<T>? FastAppendToListAllowNulls<T>(
             this List<T>? source,
             IEnumerable<T>? second
-        ) {
+        )
+        {
             if (second == null)
             {
                 return source;

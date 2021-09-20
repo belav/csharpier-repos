@@ -87,7 +87,8 @@ namespace Newtonsoft.Json.Converters
                         == DateTimeStyles.AdjustToUniversal
                     || (_dateTimeStyles & DateTimeStyles.AssumeUniversal)
                         == DateTimeStyles.AssumeUniversal
-                ) {
+                )
+                {
                     dateTime = dateTime.ToUniversalTime();
                 }
 
@@ -101,7 +102,8 @@ namespace Newtonsoft.Json.Converters
                         == DateTimeStyles.AdjustToUniversal
                     || (_dateTimeStyles & DateTimeStyles.AssumeUniversal)
                         == DateTimeStyles.AssumeUniversal
-                ) {
+                )
+                {
                     dateTimeOffset = dateTimeOffset.ToUniversalTime();
                 }
 
@@ -134,7 +136,8 @@ namespace Newtonsoft.Json.Converters
             Type objectType,
             object? existingValue,
             JsonSerializer serializer
-        ) {
+        )
+        {
             bool nullable = ReflectionUtils.IsNullableType(objectType);
             if (reader.TokenType == JsonToken.Null)
             {

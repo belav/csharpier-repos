@@ -222,7 +222,8 @@ namespace System.Reflection.PortableExecutable
                     out startOffset,
                     canCrossSectionBoundary: false
                 )
-            ) {
+            )
+            {
                 startOffset = -1;
                 return false;
             }
@@ -313,7 +314,8 @@ namespace System.Reflection.PortableExecutable
             DirectoryEntry directory,
             out int offset,
             bool canCrossSectionBoundary
-        ) {
+        )
+        {
             int sectionIndex = GetContainingSectionIndex(directory.RelativeVirtualAddress);
             if (sectionIndex < 0)
             {
@@ -326,7 +328,8 @@ namespace System.Reflection.PortableExecutable
             if (
                 !canCrossSectionBoundary
                 && directory.Size > _sectionHeaders[sectionIndex].VirtualSize - relativeOffset
-            ) {
+            )
+            {
                 throw new BadImageFormatException(SR.SectionTooSmall);
             }
 
@@ -352,7 +355,8 @@ namespace System.Reflection.PortableExecutable
                     _sectionHeaders[i].VirtualAddress <= relativeVirtualAddress
                     && relativeVirtualAddress
                         < _sectionHeaders[i].VirtualAddress + _sectionHeaders[i].VirtualSize
-                ) {
+                )
+                {
                     return i;
                 }
             }
@@ -410,7 +414,8 @@ namespace System.Reflection.PortableExecutable
                         out start,
                         canCrossSectionBoundary: false
                     )
-                ) {
+                )
+                {
                     throw new BadImageFormatException(SR.MissingDataDirectory);
                 }
 

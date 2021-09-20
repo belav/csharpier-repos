@@ -31,7 +31,8 @@ namespace Microsoft.CodeAnalysis.Formatting
         /// </summary>
         internal static IEnumerable<AbstractFormattingRule> GetDefaultFormattingRules(
             Document document
-        ) {
+        )
+        {
             if (document == null)
             {
                 throw new ArgumentNullException(nameof(document));
@@ -54,7 +55,8 @@ namespace Microsoft.CodeAnalysis.Formatting
         internal static IEnumerable<AbstractFormattingRule> GetDefaultFormattingRules(
             Workspace workspace,
             string language
-        ) {
+        )
+        {
             if (workspace == null)
             {
                 throw new ArgumentNullException(nameof(workspace));
@@ -130,7 +132,8 @@ namespace Microsoft.CodeAnalysis.Formatting
             IEnumerable<TextSpan>? spans,
             OptionSet? options = null,
             CancellationToken cancellationToken = default
-        ) {
+        )
+        {
             var formattingService = document.GetLanguageService<IFormattingService>();
             return formattingService == null
               ? SpecializedTasks.FromResult(document)
@@ -143,7 +146,8 @@ namespace Microsoft.CodeAnalysis.Formatting
             OptionSet? options,
             IEnumerable<AbstractFormattingRule>? rules,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             if (document == null)
             {
                 throw new ArgumentNullException(nameof(document));
@@ -193,7 +197,8 @@ namespace Microsoft.CodeAnalysis.Formatting
             OptionSet? options,
             IEnumerable<AbstractFormattingRule>? rules,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             if (document == null)
             {
                 throw new ArgumentNullException(nameof(document));
@@ -252,7 +257,8 @@ namespace Microsoft.CodeAnalysis.Formatting
             OptionSet? options,
             IEnumerable<AbstractFormattingRule>? rules,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             if (workspace == null)
             {
                 throw new ArgumentNullException(nameof(workspace));
@@ -356,7 +362,8 @@ namespace Microsoft.CodeAnalysis.Formatting
             OptionSet? options,
             IEnumerable<AbstractFormattingRule>? rules,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var formattingResult = GetFormattingResult(
                 node,
                 spans,
@@ -377,7 +384,8 @@ namespace Microsoft.CodeAnalysis.Formatting
             OptionSet? options,
             IEnumerable<AbstractFormattingRule>? rules,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             if (workspace == null)
             {
                 throw new ArgumentNullException(nameof(workspace));
@@ -493,7 +501,8 @@ namespace Microsoft.CodeAnalysis.Formatting
             OptionSet? options,
             IEnumerable<AbstractFormattingRule>? rules,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var formattingResult = GetFormattingResult(
                 node,
                 spans,
@@ -516,7 +525,8 @@ namespace Microsoft.CodeAnalysis.Formatting
         public static Task<Document> OrganizeImportsAsync(
             Document document,
             CancellationToken cancellationToken = default
-        ) {
+        )
+        {
             var organizeImportsService = document.GetLanguageService<IOrganizeImportsService>();
             if (organizeImportsService is null)
             {

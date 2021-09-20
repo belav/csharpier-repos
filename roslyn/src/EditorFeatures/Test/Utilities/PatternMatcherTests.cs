@@ -305,7 +305,8 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Utilities
             string pattern,
             PatternMatchKind matchKind,
             bool isCaseSensitive
-        ) {
+        )
+        {
             var match = TestNonFuzzyMatchCore(candidate, pattern);
             Assert.NotNull(match);
 
@@ -562,7 +563,8 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Utilities
         private static ImmutableArray<string> PartListToSubstrings(
             string identifier,
             ArrayBuilder<TextSpan> parts
-        ) {
+        )
+        {
             using var resultDisposer = ArrayBuilder<string>.GetInstance(out var result);
             foreach (var span in parts)
             {
@@ -605,7 +607,8 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Utilities
         private static IEnumerable<PatternMatch> TryMatchMultiWordPattern(
             string candidate,
             string pattern
-        ) {
+        )
+        {
             MarkupTestFile.GetSpans(
                 candidate,
                 out candidate,

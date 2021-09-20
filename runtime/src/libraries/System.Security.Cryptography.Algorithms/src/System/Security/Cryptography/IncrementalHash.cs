@@ -391,7 +391,8 @@ namespace System.Security.Cryptography
         public static IncrementalHash CreateHMAC(
             HashAlgorithmName hashAlgorithm,
             ReadOnlySpan<byte> key
-        ) {
+        )
+        {
             if (string.IsNullOrEmpty(hashAlgorithm.Name))
                 throw new ArgumentException(
                     SR.Cryptography_HashAlgorithmNameNullOrEmpty,

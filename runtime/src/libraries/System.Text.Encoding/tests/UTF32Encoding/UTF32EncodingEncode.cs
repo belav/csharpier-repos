@@ -243,7 +243,8 @@ namespace System.Text.Tests
             int index,
             int count,
             byte[] littleEndianExpected
-        ) {
+        )
+        {
             byte[] bigEndianExpected = GetBigEndianBytes(littleEndianExpected);
 
             EncodingHelpers.Encode(

@@ -44,7 +44,8 @@ namespace System.Linq.Expressions.Interpreter
             int handlerEndIndex,
             Type exceptionType,
             ExceptionFilter? filter
-        ) {
+        )
+        {
             Debug.Assert(exceptionType != null);
             LabelIndex = labelIndex;
             _exceptionType = exceptionType;
@@ -99,14 +100,16 @@ namespace System.Linq.Expressions.Interpreter
             int tryEnd,
             int gotoEndTargetIndex,
             ExceptionHandler[] handlers
-        ) : this(
-            tryStart,
-            tryEnd,
-            gotoEndTargetIndex,
-            Instruction.UnknownInstrIndex,
-            Instruction.UnknownInstrIndex,
-            handlers
-        ) {
+        )
+            : this(
+                tryStart,
+                tryEnd,
+                gotoEndTargetIndex,
+                Instruction.UnknownInstrIndex,
+                Instruction.UnknownInstrIndex,
+                handlers
+            )
+        {
             Debug.Assert(handlers != null, "catch blocks should exist");
         }
 
@@ -120,7 +123,8 @@ namespace System.Linq.Expressions.Interpreter
             int finallyStart,
             int finallyEnd,
             ExceptionHandler[]? handlers
-        ) {
+        )
+        {
             TryStartIndex = tryStart;
             TryEndIndex = tryEnd;
             FinallyStartIndex = finallyStart;
@@ -134,7 +138,8 @@ namespace System.Linq.Expressions.Interpreter
             Exception exception,
             [NotNullWhen(true)] out ExceptionHandler? handler,
             out object? unwrappedException
-        ) {
+        )
+        {
 #if DEBUG
             if (exception is RethrowException)
             {
@@ -161,7 +166,8 @@ namespace System.Linq.Expressions.Interpreter
                             candidate.Filter == null
                             || FilterPasses(frame, ref unwrappedException, candidate.Filter)
                         )
-                    ) {
+                    )
+                    {
                         handler = candidate;
                         return true;
                     }
@@ -180,7 +186,8 @@ namespace System.Linq.Expressions.Interpreter
             InterpretedFrame frame,
             ref object? exception,
             ExceptionFilter filter
-        ) {
+        )
+        {
             Interpreter interpreter = frame.Interpreter;
             Instruction[] instructions = interpreter.Instructions.Instructions;
             int stackIndex = frame.StackIndex;
@@ -724,7 +731,8 @@ namespace System.Linq.Expressions.Interpreter
             MemberInfo refMember,
             Expression value,
             bool forBinding
-        ) {
+        )
+        {
             if (refMember is PropertyInfo pi)
             {
                 MethodInfo method = pi.GetSetMethod(nonPublic: true)!;
@@ -1196,7 +1204,8 @@ namespace System.Linq.Expressions.Interpreter
                 if (
                     operandType.IsNullableType()
                     && parameterType.Equals(operandType.GetNonNullableType())
-                ) {
+                )
+                {
                     _instructions.Emit(NullableMethodCallInstruction.CreateGetValue());
                 }
 
@@ -1240,7 +1249,8 @@ namespace System.Linq.Expressions.Interpreter
             Type typeTo,
             bool isChecked,
             bool isLiftedToNull
-        ) {
+        )
+        {
             Debug.Assert(typeFrom != typeof(void) && typeTo != typeof(void));
 
             if (typeTo.Equals(typeFrom))
@@ -1252,7 +1262,8 @@ namespace System.Linq.Expressions.Interpreter
                 typeFrom.IsValueType
                 && typeTo.IsNullableType()
                 && typeTo.GetNonNullableType().Equals(typeFrom)
-            ) {
+            )
+            {
                 // VT -> vt?, no conversion necessary
                 return;
             }
@@ -1261,7 +1272,8 @@ namespace System.Linq.Expressions.Interpreter
                 typeTo.IsValueType
                 && typeFrom.IsNullableType()
                 && typeFrom.GetNonNullableType().Equals(typeTo)
-            ) {
+            )
+            {
                 // VT? -> vt, call get_Value
                 _instructions.Emit(NullableMethodCallInstruction.CreateGetValue());
                 return;
@@ -1278,7 +1290,8 @@ namespace System.Linq.Expressions.Interpreter
                     || nonNullableTo.IsEnum
                     || nonNullableTo == typeof(decimal)
                 )
-            ) {
+            )
+            {
                 Type? enumTypeTo = null;
 
                 if (nonNullableFrom.IsEnum)
@@ -2015,7 +2028,8 @@ namespace System.Linq.Expressions.Interpreter
                         if (
                             _labelBlock.Parent!.Kind == LabelScopeKind.Switch
                             && _labelBlock.Parent.ContainsTarget(label)
-                        ) {
+                        )
+                        {
                             return false;
                         }
                     }
@@ -2338,7 +2352,8 @@ namespace System.Linq.Expressions.Interpreter
             Expression @object,
             MethodInfo method,
             IArgumentProvider arguments
-        ) {
+        )
+        {
             ParameterInfo[] parameters = method.GetParametersCached();
 
             // TODO: Support pass by reference.
@@ -2407,7 +2422,8 @@ namespace System.Linq.Expressions.Interpreter
             Expression array,
             Expression index,
             int argumentIndex
-        ) {
+        )
+        {
             LocalDefinition left = _locals.DefineLocal(
                 Expression.Parameter(array.Type, nameof(array)),
                 _instructions.Count
@@ -2574,7 +2590,8 @@ namespace System.Linq.Expressions.Interpreter
                             !call.Method.IsStatic
                             && call.Object!.Type.IsArray
                             && call.Method == TypeUtils.GetArrayGetMethod(call.Object.Type)
-                        ) {
+                        )
+                        {
                             return CompileMultiDimArrayAccess(call.Object, call, index);
                         }
                         break;
@@ -2589,7 +2606,8 @@ namespace System.Linq.Expressions.Interpreter
             Expression array,
             IArgumentProvider arguments,
             int index
-        ) {
+        )
+        {
             Compile(array);
             LocalDefinition objTmp = _locals.DefineLocal(
                 Expression.Parameter(array.Type),
@@ -2873,7 +2891,8 @@ namespace System.Linq.Expressions.Interpreter
             }
             else if (
                 node.Right.Type.IsValueType && !TypeUtils.AreEquivalent(node.Type, node.Right.Type)
-            ) {
+            )
+            {
                 // The right hand side may need to be widened to either the left hand side's type
                 // if the right hand side is nullable, or the left hand side's underlying type otherwise
                 CompileConvertToType(
@@ -3492,11 +3511,8 @@ namespace System.Linq.Expressions.Interpreter
         private readonly LocalDefinition _array,
             _index;
 
-        public ArrayByRefUpdater(
-            LocalDefinition array,
-            LocalDefinition index,
-            int argumentIndex
-        ) : base(argumentIndex)
+        public ArrayByRefUpdater(LocalDefinition array, LocalDefinition index, int argumentIndex)
+            : base(argumentIndex)
         {
             _array = array;
             _index = index;
@@ -3547,11 +3563,8 @@ namespace System.Linq.Expressions.Interpreter
         private readonly LocalDefinition? _object;
         private readonly PropertyInfo _property;
 
-        public PropertyByRefUpdater(
-            LocalDefinition? obj,
-            PropertyInfo property,
-            int argumentIndex
-        ) : base(argumentIndex)
+        public PropertyByRefUpdater(LocalDefinition? obj, PropertyInfo property, int argumentIndex)
+            : base(argumentIndex)
         {
             _object = obj;
             _property = property;

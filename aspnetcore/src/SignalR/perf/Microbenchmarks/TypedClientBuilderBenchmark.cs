@@ -26,7 +26,8 @@ namespace Microsoft.AspNetCore.SignalR.Microbenchmarks
                 string method,
                 object[] args,
                 CancellationToken cancellationToken = default
-            ) {
+            )
+            {
                 return Task.CompletedTask;
             }
         }

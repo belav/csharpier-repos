@@ -44,7 +44,8 @@ namespace Microsoft.AspNetCore.Mvc.Localization
             this IHtmlLocalizer htmlLocalizer,
             string name,
             params object[] arguments
-        ) {
+        )
+        {
             if (htmlLocalizer == null)
             {
                 throw new ArgumentNullException(nameof(htmlLocalizer));

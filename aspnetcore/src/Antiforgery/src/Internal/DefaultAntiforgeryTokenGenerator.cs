@@ -18,7 +18,8 @@ namespace Microsoft.AspNetCore.Antiforgery
         public DefaultAntiforgeryTokenGenerator(
             IClaimUidExtractor claimUidExtractor,
             IAntiforgeryAdditionalDataProvider additionalDataProvider
-        ) {
+        )
+        {
             _claimUidExtractor = claimUidExtractor;
             _additionalDataProvider = additionalDataProvider;
         }
@@ -37,7 +38,8 @@ namespace Microsoft.AspNetCore.Antiforgery
         public AntiforgeryToken GenerateRequestToken(
             HttpContext httpContext,
             AntiforgeryToken cookieToken
-        ) {
+        )
+        {
             if (httpContext == null)
             {
                 throw new ArgumentNullException(nameof(httpContext));
@@ -92,7 +94,8 @@ namespace Microsoft.AspNetCore.Antiforgery
                 && string.IsNullOrEmpty(requestToken.Username)
                 && requestToken.ClaimUid == null
                 && string.IsNullOrEmpty(requestToken.AdditionalData)
-            ) {
+            )
+            {
                 // Application says user is authenticated, but we have no identifier for the user.
                 throw new InvalidOperationException(
                     Resources.FormatAntiforgeryTokenValidator_AuthenticatedUserWithoutUsername(
@@ -121,7 +124,8 @@ namespace Microsoft.AspNetCore.Antiforgery
             AntiforgeryToken cookieToken,
             AntiforgeryToken requestToken,
             [NotNullWhen(false)] out string? message
-        ) {
+        )
+        {
             if (httpContext == null)
             {
                 throw new ArgumentNullException(nameof(httpContext));
@@ -179,7 +183,8 @@ namespace Microsoft.AspNetCore.Antiforgery
             if (
                 currentUsername.StartsWith("http://", StringComparison.OrdinalIgnoreCase)
                 || currentUsername.StartsWith("https://", StringComparison.OrdinalIgnoreCase)
-            ) {
+            )
+            {
                 comparer = StringComparer.Ordinal;
             }
 
@@ -205,7 +210,8 @@ namespace Microsoft.AspNetCore.Antiforgery
                     httpContext,
                     requestToken.AdditionalData
                 )
-            ) {
+            )
+            {
                 message = Resources.AntiforgeryToken_AdditionalDataCheckFailed;
                 return false;
             }

@@ -19,7 +19,7 @@ namespace Microsoft.EntityFrameworkCore.Query
             ITestOutputHelper testOutputHelper
         )
 #pragma warning restore IDE0060 // Remove unused parameter
-          : base(fixture)
+            : base(fixture)
         {
             Fixture.TestSqlLoggerFactory.Clear();
             //Fixture.TestSqlLoggerFactory.SetTestOutputHelper(testOutputHelper);
@@ -86,7 +86,8 @@ ORDER BY [t].[Id], [g].[Nickname], [g].[SquadId], [w].[Id]"
 
         public override async Task Include_multiple_one_to_one_optional_and_one_to_one_required(
             bool async
-        ) {
+        )
+        {
             await base.Include_multiple_one_to_one_optional_and_one_to_one_required(async);
 
             AssertSql(
@@ -303,7 +304,8 @@ INNER JOIN [Cities] AS [c] ON [t0].[CityOfBirthName] = [c].[Name]"
 
         public override async Task Include_with_join_and_inheritance_with_orderby_before_and_after_include(
             bool async
-        ) {
+        )
+        {
             await base.Include_with_join_and_inheritance_with_orderby_before_and_after_include(
                 async
             );
@@ -487,7 +489,8 @@ WHERE ([w].[AmmunitionType] & NULL) > 0"
 
         public override async Task Where_bitwise_and_nullable_enum_with_non_nullable_parameter(
             bool async
-        ) {
+        )
+        {
             await base.Where_bitwise_and_nullable_enum_with_non_nullable_parameter(async);
 
             AssertSql(
@@ -501,7 +504,8 @@ WHERE ([w].[AmmunitionType] & @__ammunitionType_0) > 0"
 
         public override async Task Where_bitwise_and_nullable_enum_with_nullable_parameter(
             bool async
-        ) {
+        )
+        {
             await base.Where_bitwise_and_nullable_enum_with_nullable_parameter(async);
 
             AssertSql(
@@ -1154,7 +1158,8 @@ FROM [Gears] AS [g]"
 
         public override async Task Select_null_propagation_works_for_navigations_with_composite_keys(
             bool async
-        ) {
+        )
+        {
             await base.Select_null_propagation_works_for_navigations_with_composite_keys(async);
 
             AssertSql(
@@ -1166,7 +1171,8 @@ LEFT JOIN [Gears] AS [g] ON ([t].[GearNickName] = [g].[Nickname]) AND ([t].[Gear
 
         public override async Task Select_null_propagation_works_for_multiple_navigations_with_composite_keys(
             bool async
-        ) {
+        )
+        {
             await base.Select_null_propagation_works_for_multiple_navigations_with_composite_keys(
                 async
             );
@@ -1186,7 +1192,8 @@ LEFT JOIN [Cities] AS [c] ON [g0].[AssignedCityName] = [c].[Name]"
 
         public override async Task Select_conditional_with_anonymous_type_and_null_constant(
             bool async
-        ) {
+        )
+        {
             await base.Select_conditional_with_anonymous_type_and_null_constant(async);
 
             AssertSql(
@@ -1279,7 +1286,8 @@ WHERE [g].[LeaderNickname] = N'Marcus'"
 
         public override async Task Where_compare_anonymous_types_with_uncorrelated_members(
             bool async
-        ) {
+        )
+        {
             await base.Where_compare_anonymous_types_with_uncorrelated_members(async);
 
             AssertSql(
@@ -1291,7 +1299,8 @@ WHERE 0 = 1"
 
         public override async Task Select_Where_Navigation_Scalar_Equals_Navigation_Scalar(
             bool async
-        ) {
+        )
+        {
             await base.Select_Where_Navigation_Scalar_Equals_Navigation_Scalar(async);
 
             AssertSql(
@@ -1368,7 +1377,8 @@ WHERE [g].[Nickname] IS NULL OR [g].[SquadId] IS NULL"
 
         public override async Task Select_Where_Navigation_Scalar_Equals_Navigation_Scalar_Projected(
             bool async
-        ) {
+        )
+        {
             await base.Select_Where_Navigation_Scalar_Equals_Navigation_Scalar_Projected(async);
 
             AssertSql(
@@ -1443,7 +1453,8 @@ WHERE ([g].[HasSoulPatch] = CAST(1 AS bit)) AND (COALESCE((
 
         public override async Task Where_subquery_distinct_firstordefault_boolean_with_pushdown(
             bool async
-        ) {
+        )
+        {
             await base.Where_subquery_distinct_firstordefault_boolean_with_pushdown(async);
 
             AssertSql(
@@ -1514,7 +1525,8 @@ ORDER BY [g].[Nickname]"
 
         public override async Task Where_subquery_distinct_singleordefault_boolean_with_pushdown(
             bool async
-        ) {
+        )
+        {
             await base.Where_subquery_distinct_singleordefault_boolean_with_pushdown(async);
 
             AssertSql(
@@ -1571,7 +1583,8 @@ ORDER BY [g].[Nickname]"
 
         public override async Task Where_subquery_distinct_orderby_firstordefault_boolean(
             bool async
-        ) {
+        )
+        {
             await base.Where_subquery_distinct_orderby_firstordefault_boolean(async);
 
             AssertSql(
@@ -1590,7 +1603,8 @@ WHERE ([g].[HasSoulPatch] = CAST(1 AS bit)) AND (COALESCE((
 
         public override async Task Where_subquery_distinct_orderby_firstordefault_boolean_with_pushdown(
             bool async
-        ) {
+        )
+        {
             await base.Where_subquery_distinct_orderby_firstordefault_boolean_with_pushdown(async);
 
             AssertSql(
@@ -1876,7 +1890,8 @@ INNER JOIN (
 
         public override async Task Join_with_order_by_on_inner_sequence_navigation_translated_to_subquery_composite_key(
             bool async
-        ) {
+        )
+        {
             await base.Join_with_order_by_on_inner_sequence_navigation_translated_to_subquery_composite_key(
                 async
             );
@@ -1955,7 +1970,8 @@ WHERE [g].[Discriminator] = N'Officer'"
 
         public override async Task Non_unicode_string_literal_is_used_for_non_unicode_column(
             bool async
-        ) {
+        )
+        {
             await base.Non_unicode_string_literal_is_used_for_non_unicode_column(async);
 
             AssertSql(
@@ -1967,7 +1983,8 @@ WHERE [c].[Location] = 'Unknown'"
 
         public override async Task Non_unicode_string_literal_is_used_for_non_unicode_column_right(
             bool async
-        ) {
+        )
+        {
             await base.Non_unicode_string_literal_is_used_for_non_unicode_column_right(async);
 
             AssertSql(
@@ -1992,7 +2009,8 @@ WHERE [c].[Location] = @__value_0"
 
         public override async Task Non_unicode_string_literals_in_contains_is_used_for_non_unicode_column(
             bool async
-        ) {
+        )
+        {
             await base.Non_unicode_string_literals_in_contains_is_used_for_non_unicode_column(
                 async
             );
@@ -2006,7 +2024,8 @@ WHERE [c].[Location] IN ('Unknown', 'Jacinto''s location', 'Ephyra''s location')
 
         public override async Task Non_unicode_string_literals_is_used_for_non_unicode_column_with_subquery(
             bool async
-        ) {
+        )
+        {
             await base.Non_unicode_string_literals_is_used_for_non_unicode_column_with_subquery(
                 async
             );
@@ -2023,7 +2042,8 @@ WHERE ([c].[Location] = 'Unknown') AND ((
 
         public override async Task Non_unicode_string_literals_is_used_for_non_unicode_column_in_subquery(
             bool async
-        ) {
+        )
+        {
             await base.Non_unicode_string_literals_is_used_for_non_unicode_column_in_subquery(
                 async
             );
@@ -2038,7 +2058,8 @@ WHERE ([g].[Nickname] = N'Marcus') AND ([c].[Location] = 'Jacinto''s location')"
 
         public override async Task Non_unicode_string_literals_is_used_for_non_unicode_column_with_contains(
             bool async
-        ) {
+        )
+        {
             await base.Non_unicode_string_literals_is_used_for_non_unicode_column_with_contains(
                 async
             );
@@ -2052,7 +2073,8 @@ WHERE [c].[Location] LIKE '%Jacinto%'"
 
         public override async Task Non_unicode_string_literals_is_used_for_non_unicode_column_with_concat(
             bool async
-        ) {
+        )
+        {
             await base.Non_unicode_string_literals_is_used_for_non_unicode_column_with_concat(
                 async
             );
@@ -2094,7 +2116,8 @@ ORDER BY [g].[Nickname], [g].[SquadId], [g0].[Nickname], [g0].[SquadId], [w].[Id
 
         public override async Task Include_on_GroupJoin_SelectMany_DefaultIfEmpty_with_coalesce_result3(
             bool async
-        ) {
+        )
+        {
             await base.Include_on_GroupJoin_SelectMany_DefaultIfEmpty_with_coalesce_result3(async);
 
             // Issue#16897
@@ -2110,7 +2133,8 @@ ORDER BY [g].[Nickname], [g].[SquadId], [g0].[Nickname], [g0].[SquadId], [w].[Id
 
         public override async Task Include_on_GroupJoin_SelectMany_DefaultIfEmpty_with_coalesce_result4(
             bool async
-        ) {
+        )
+        {
             await base.Include_on_GroupJoin_SelectMany_DefaultIfEmpty_with_coalesce_result4(async);
 
             // Issue#16897
@@ -2157,7 +2181,8 @@ ORDER BY [t3].[FullName0], [t3].[FullName]"
 
         public override async Task Include_on_GroupJoin_SelectMany_DefaultIfEmpty_with_inheritance_and_coalesce_result(
             bool async
-        ) {
+        )
+        {
             await base.Include_on_GroupJoin_SelectMany_DefaultIfEmpty_with_inheritance_and_coalesce_result(
                 async
             );
@@ -2179,7 +2204,8 @@ ORDER BY [g].[Nickname], [g].[SquadId], [t].[Nickname], [t].[SquadId], [w].[Id],
 
         public override async Task Include_on_GroupJoin_SelectMany_DefaultIfEmpty_with_conditional_result(
             bool async
-        ) {
+        )
+        {
             await base.Include_on_GroupJoin_SelectMany_DefaultIfEmpty_with_conditional_result(
                 async
             );
@@ -2200,7 +2226,8 @@ ORDER BY [g].[Nickname], [g].[SquadId], [w].[Id], [w0].[Id]"
 
         public override async Task Include_on_GroupJoin_SelectMany_DefaultIfEmpty_with_complex_projection_result(
             bool async
-        ) {
+        )
+        {
             await base.Include_on_GroupJoin_SelectMany_DefaultIfEmpty_with_complex_projection_result(
                 async
             );
@@ -2283,7 +2310,8 @@ FROM [Weapons] AS [w]"
 
         public override async Task Optional_navigation_type_compensation_works_with_predicate(
             bool async
-        ) {
+        )
+        {
             await base.Optional_navigation_type_compensation_works_with_predicate(async);
 
             AssertSql(
@@ -2296,7 +2324,8 @@ WHERE (([t].[Note] <> N'K.I.A.') OR [t].[Note] IS NULL) AND ([g].[HasSoulPatch] 
 
         public override async Task Optional_navigation_type_compensation_works_with_predicate2(
             bool async
-        ) {
+        )
+        {
             await base.Optional_navigation_type_compensation_works_with_predicate2(async);
 
             AssertSql(
@@ -2309,7 +2338,8 @@ WHERE [g].[HasSoulPatch] = CAST(1 AS bit)"
 
         public override async Task Optional_navigation_type_compensation_works_with_predicate_negated(
             bool async
-        ) {
+        )
+        {
             await base.Optional_navigation_type_compensation_works_with_predicate_negated(async);
 
             AssertSql(
@@ -2322,7 +2352,8 @@ WHERE [g].[HasSoulPatch] = CAST(0 AS bit)"
 
         public override async Task Optional_navigation_type_compensation_works_with_predicate_negated_complex1(
             bool async
-        ) {
+        )
+        {
             await base.Optional_navigation_type_compensation_works_with_predicate_negated_complex1(
                 async
             );
@@ -2340,7 +2371,8 @@ END = CAST(0 AS bit)"
 
         public override async Task Optional_navigation_type_compensation_works_with_predicate_negated_complex2(
             bool async
-        ) {
+        )
+        {
             await base.Optional_navigation_type_compensation_works_with_predicate_negated_complex2(
                 async
             );
@@ -2358,7 +2390,8 @@ END = CAST(0 AS bit)"
 
         public override async Task Optional_navigation_type_compensation_works_with_conditional_expression(
             bool async
-        ) {
+        )
+        {
             await base.Optional_navigation_type_compensation_works_with_conditional_expression(
                 async
             );
@@ -2376,7 +2409,8 @@ END = CAST(1 AS bit)"
 
         public override async Task Optional_navigation_type_compensation_works_with_binary_expression(
             bool async
-        ) {
+        )
+        {
             await base.Optional_navigation_type_compensation_works_with_binary_expression(async);
 
             AssertSql(
@@ -2389,7 +2423,8 @@ WHERE ([g].[HasSoulPatch] = CAST(1 AS bit)) OR ([t].[Note] LIKE N'%Cole%')"
 
         public override async Task Optional_navigation_type_compensation_works_with_binary_and_expression(
             bool async
-        ) {
+        )
+        {
             await base.Optional_navigation_type_compensation_works_with_binary_and_expression(
                 async
             );
@@ -2406,7 +2441,8 @@ LEFT JOIN [Gears] AS [g] ON ([t].[GearNickName] = [g].[Nickname]) AND ([t].[Gear
 
         public override async Task Optional_navigation_type_compensation_works_with_projection(
             bool async
-        ) {
+        )
+        {
             await base.Optional_navigation_type_compensation_works_with_projection(async);
 
             AssertSql(
@@ -2419,7 +2455,8 @@ WHERE ([t].[Note] <> N'K.I.A.') OR [t].[Note] IS NULL"
 
         public override async Task Optional_navigation_type_compensation_works_with_projection_into_anonymous_type(
             bool async
-        ) {
+        )
+        {
             await base.Optional_navigation_type_compensation_works_with_projection_into_anonymous_type(
                 async
             );
@@ -2446,7 +2483,8 @@ WHERE ([t].[Note] <> N'K.I.A.') OR [t].[Note] IS NULL"
 
         public override async Task Optional_navigation_type_compensation_works_with_list_initializers(
             bool async
-        ) {
+        )
+        {
             await base.Optional_navigation_type_compensation_works_with_list_initializers(async);
 
             AssertSql(
@@ -2460,7 +2498,8 @@ ORDER BY [t].[Note]"
 
         public override async Task Optional_navigation_type_compensation_works_with_array_initializers(
             bool async
-        ) {
+        )
+        {
             await base.Optional_navigation_type_compensation_works_with_array_initializers(async);
 
             AssertSql(
@@ -2473,7 +2512,8 @@ WHERE ([t].[Note] <> N'K.I.A.') OR [t].[Note] IS NULL"
 
         public override async Task Optional_navigation_type_compensation_works_with_orderby(
             bool async
-        ) {
+        )
+        {
             await base.Optional_navigation_type_compensation_works_with_orderby(async);
 
             AssertSql(
@@ -2503,7 +2543,8 @@ END"
 
         public override async Task Optional_navigation_type_compensation_works_with_negated_predicate(
             bool async
-        ) {
+        )
+        {
             await base.Optional_navigation_type_compensation_works_with_negated_predicate(async);
 
             AssertSql(
@@ -2516,7 +2557,8 @@ WHERE (([t].[Note] <> N'K.I.A.') OR [t].[Note] IS NULL) AND ([g].[HasSoulPatch] 
 
         public override async Task Optional_navigation_type_compensation_works_with_contains(
             bool async
-        ) {
+        )
+        {
             await base.Optional_navigation_type_compensation_works_with_contains(async);
 
             AssertSql(
@@ -2659,7 +2701,8 @@ ORDER BY [g].[Nickname], [g].[SquadId], [c].[Name], [t].[Id]"
 
         public override async Task Select_correlated_filtered_collection_with_composite_key(
             bool async
-        ) {
+        )
+        {
             await base.Select_correlated_filtered_collection_with_composite_key(async);
 
             AssertSql(
@@ -2677,7 +2720,8 @@ ORDER BY [g].[Nickname], [g].[SquadId], [t].[Nickname], [t].[SquadId]"
 
         public override async Task Select_correlated_filtered_collection_works_with_caching(
             bool async
-        ) {
+        )
+        {
             await base.Select_correlated_filtered_collection_works_with_caching(async);
 
             AssertSql(
@@ -2939,7 +2983,8 @@ FROM [Missions] AS [m]"
 
         public override async Task Where_datetimeoffset_milliseconds_parameter_and_constant(
             bool async
-        ) {
+        )
+        {
             await base.Where_datetimeoffset_milliseconds_parameter_and_constant(async);
 
             AssertSql(
@@ -2951,7 +2996,8 @@ WHERE [m].[Timeline] = '1902-01-02T10:00:00.1234567+01:30'"
 
         public override async Task Orderby_added_for_client_side_GroupJoin_composite_dependent_to_principal_LOJ_when_incomplete_key_is_used(
             bool async
-        ) {
+        )
+        {
             await base.Orderby_added_for_client_side_GroupJoin_composite_dependent_to_principal_LOJ_when_incomplete_key_is_used(
                 async
             );
@@ -2970,7 +3016,8 @@ ORDER BY [t].[GearNickName]"
 
         public override async Task Complex_predicate_with_AndAlso_and_nullable_bool_property(
             bool async
-        ) {
+        )
+        {
             await base.Complex_predicate_with_AndAlso_and_nullable_bool_property(async);
 
             AssertSql(
@@ -2983,7 +3030,8 @@ WHERE ([w].[Id] <> 50) AND ([g].[HasSoulPatch] = CAST(0 AS bit))"
 
         public override async Task Distinct_with_optional_navigation_is_translated_to_sql(
             bool async
-        ) {
+        )
+        {
             await base.Distinct_with_optional_navigation_is_translated_to_sql(async);
 
             AssertSql(
@@ -3020,7 +3068,8 @@ WHERE ([t].[Note] <> N'Foo') OR [t].[Note] IS NULL"
 
         public override async Task FirstOrDefault_with_manually_created_groupjoin_is_translated_to_sql(
             bool async
-        ) {
+        )
+        {
             await base.FirstOrDefault_with_manually_created_groupjoin_is_translated_to_sql(async);
 
             AssertSql(
@@ -3033,7 +3082,8 @@ WHERE [s].[Name] = N'Kilo'"
 
         public override async Task Any_with_optional_navigation_as_subquery_predicate_is_translated_to_sql(
             bool async
-        ) {
+        )
+        {
             await base.Any_with_optional_navigation_as_subquery_predicate_is_translated_to_sql(
                 async
             );
@@ -3078,7 +3128,8 @@ WHERE [t].[Id] IN ('d2c26679-562b-44d1-ab96-23d1775e0926', '23cbcf9b-ce14-45cf-a
 
         public override async Task Unnecessary_include_doesnt_get_added_complex_when_projecting_EF_Property(
             bool async
-        ) {
+        )
+        {
             await base.Unnecessary_include_doesnt_get_added_complex_when_projecting_EF_Property(
                 async
             );
@@ -3093,7 +3144,8 @@ ORDER BY [g].[Rank]"
 
         public override async Task Multiple_order_bys_are_properly_lifted_from_subquery_created_by_include(
             bool async
-        ) {
+        )
+        {
             await base.Multiple_order_bys_are_properly_lifted_from_subquery_created_by_include(
                 async
             );
@@ -3108,7 +3160,8 @@ ORDER BY [g].[FullName]"
 
         public override async Task Order_by_is_properly_lifted_from_subquery_with_same_order_by_in_the_outer_query(
             bool async
-        ) {
+        )
+        {
             await base.Order_by_is_properly_lifted_from_subquery_with_same_order_by_in_the_outer_query(
                 async
             );
@@ -3123,7 +3176,8 @@ ORDER BY [g].[FullName]"
 
         public override async Task Where_is_properly_lifted_from_subquery_created_by_include(
             bool async
-        ) {
+        )
+        {
             await base.Where_is_properly_lifted_from_subquery_created_by_include(async);
 
             AssertSql(
@@ -3137,7 +3191,8 @@ ORDER BY [g].[FullName]"
 
         public override async Task Subquery_is_lifted_from_main_from_clause_of_SelectMany(
             bool async
-        ) {
+        )
+        {
             await base.Subquery_is_lifted_from_main_from_clause_of_SelectMany(async);
 
             AssertSql(
@@ -3151,7 +3206,8 @@ ORDER BY [g].[FullName]"
 
         public override async Task Subquery_containing_SelectMany_projecting_main_from_clause_gets_lifted(
             bool async
-        ) {
+        )
+        {
             await base.Subquery_containing_SelectMany_projecting_main_from_clause_gets_lifted(
                 async
             );
@@ -3167,7 +3223,8 @@ ORDER BY [g].[FullName]"
 
         public override async Task Subquery_containing_join_projecting_main_from_clause_gets_lifted(
             bool async
-        ) {
+        )
+        {
             await base.Subquery_containing_join_projecting_main_from_clause_gets_lifted(async);
 
             AssertSql(
@@ -3180,7 +3237,8 @@ ORDER BY [g].[Nickname]"
 
         public override async Task Subquery_containing_left_join_projecting_main_from_clause_gets_lifted(
             bool async
-        ) {
+        )
+        {
             await base.Subquery_containing_left_join_projecting_main_from_clause_gets_lifted(async);
 
             AssertSql(
@@ -3276,7 +3334,8 @@ ORDER BY [t].[Rank]"
 
         public override async Task Take_without_orderby_followed_by_orderBy_is_pushed_down1(
             bool async
-        ) {
+        )
+        {
             await base.Take_without_orderby_followed_by_orderBy_is_pushed_down1(async);
 
             AssertSql(
@@ -3294,7 +3353,8 @@ ORDER BY [t].[Rank]"
 
         public override async Task Take_without_orderby_followed_by_orderBy_is_pushed_down2(
             bool async
-        ) {
+        )
+        {
             await base.Take_without_orderby_followed_by_orderBy_is_pushed_down2(async);
 
             AssertSql(
@@ -3312,7 +3372,8 @@ ORDER BY [t].[Rank]"
 
         public override async Task Take_without_orderby_followed_by_orderBy_is_pushed_down3(
             bool async
-        ) {
+        )
+        {
             await base.Take_without_orderby_followed_by_orderBy_is_pushed_down3(async);
 
             AssertSql(
@@ -3340,7 +3401,8 @@ FROM [Weapons] AS [w]"
 
         public override async Task Client_method_on_collection_navigation_in_outer_join_key(
             bool async
-        ) {
+        )
+        {
             await base.Client_method_on_collection_navigation_in_outer_join_key(async);
 
             AssertSql(
@@ -3409,7 +3471,8 @@ ORDER BY [f].[Name]"
 
         public override async Task Member_access_on_derived_materialized_entity_using_cast(
             bool async
-        ) {
+        )
+        {
             await base.Member_access_on_derived_materialized_entity_using_cast(async);
 
             AssertSql(
@@ -3459,7 +3522,8 @@ ORDER BY [f].[Name]"
 
         public override async Task Navigation_access_on_derived_materialized_entity_using_cast(
             bool async
-        ) {
+        )
+        {
             await base.Navigation_access_on_derived_materialized_entity_using_cast(async);
 
             AssertSql(
@@ -3476,7 +3540,8 @@ ORDER BY [f].[Name]"
 
         public override async Task Navigation_access_via_EFProperty_on_derived_entity_using_cast(
             bool async
-        ) {
+        )
+        {
             await base.Navigation_access_via_EFProperty_on_derived_entity_using_cast(async);
 
             AssertSql(
@@ -3509,7 +3574,8 @@ ORDER BY [f].[Name]"
 
         public override async Task Collection_navigation_access_on_derived_entity_using_cast(
             bool async
-        ) {
+        )
+        {
             await base.Collection_navigation_access_on_derived_entity_using_cast(async);
 
             AssertSql(
@@ -3524,7 +3590,8 @@ ORDER BY [f].[Name]"
 
         public override async Task Collection_navigation_access_on_derived_entity_using_cast_in_SelectMany(
             bool async
-        ) {
+        )
+        {
             await base.Collection_navigation_access_on_derived_entity_using_cast_in_SelectMany(
                 async
             );
@@ -3569,7 +3636,8 @@ FROM (
 
         public override async Task Cast_result_operator_on_subquery_is_properly_lifted_to_a_convert(
             bool async
-        ) {
+        )
+        {
             await base.Cast_result_operator_on_subquery_is_properly_lifted_to_a_convert(async);
 
             AssertSql(
@@ -3750,7 +3818,8 @@ LEFT JOIN [Gears] AS [g] ON ([l].[DefeatedByNickname] = [g].[Nickname]) AND ([l]
 
         public override async Task Include_reference_on_derived_type_using_string_nested1(
             bool async
-        ) {
+        )
+        {
             await base.Include_reference_on_derived_type_using_string_nested1(async);
 
             AssertSql(
@@ -3763,7 +3832,8 @@ LEFT JOIN [Squads] AS [s] ON [g].[SquadId] = [s].[Id]"
 
         public override async Task Include_reference_on_derived_type_using_string_nested2(
             bool async
-        ) {
+        )
+        {
             await base.Include_reference_on_derived_type_using_string_nested2(async);
 
             AssertSql(
@@ -3792,7 +3862,8 @@ LEFT JOIN [Gears] AS [g] ON ([l].[DefeatedByNickname] = [g].[Nickname]) AND ([l]
 
         public override async Task Include_reference_on_derived_type_using_lambda_with_soft_cast(
             bool async
-        ) {
+        )
+        {
             await base.Include_reference_on_derived_type_using_lambda_with_soft_cast(async);
 
             AssertSql(
@@ -3804,7 +3875,8 @@ LEFT JOIN [Gears] AS [g] ON ([l].[DefeatedByNickname] = [g].[Nickname]) AND ([l]
 
         public override async Task Include_reference_on_derived_type_using_lambda_with_tracking(
             bool async
-        ) {
+        )
+        {
             await base.Include_reference_on_derived_type_using_lambda_with_tracking(async);
 
             AssertSql(
@@ -3840,7 +3912,8 @@ ORDER BY [g].[Nickname], [g].[SquadId], [g0].[Nickname], [g0].[SquadId]"
 
         public override async Task Include_collection_on_derived_type_using_lambda_with_soft_cast(
             bool async
-        ) {
+        )
+        {
             await base.Include_collection_on_derived_type_using_lambda_with_soft_cast(async);
 
             AssertSql(
@@ -3866,7 +3939,8 @@ ORDER BY [g].[Nickname], [g].[SquadId], [t].[Id], [w].[Id]"
 
         public override async Task ThenInclude_collection_on_derived_after_base_reference(
             bool async
-        ) {
+        )
+        {
             await base.ThenInclude_collection_on_derived_after_base_reference(async);
 
             AssertSql(
@@ -3880,7 +3954,8 @@ ORDER BY [t].[Id], [g].[Nickname], [g].[SquadId], [w].[Id]"
 
         public override async Task ThenInclude_collection_on_derived_after_derived_reference(
             bool async
-        ) {
+        )
+        {
             await base.ThenInclude_collection_on_derived_after_derived_reference(async);
 
             AssertSql(
@@ -3899,7 +3974,8 @@ ORDER BY [f].[Id], [t].[Name], [g].[Nickname], [g].[SquadId], [g0].[Nickname], [
 
         public override async Task ThenInclude_collection_on_derived_after_derived_collection(
             bool async
-        ) {
+        )
+        {
             await base.ThenInclude_collection_on_derived_after_derived_collection(async);
 
             AssertSql(
@@ -3916,7 +3992,8 @@ ORDER BY [g].[Nickname], [g].[SquadId], [t].[Nickname], [t].[SquadId], [t].[Nick
 
         public override async Task ThenInclude_reference_on_derived_after_derived_collection(
             bool async
-        ) {
+        )
+        {
             await base.ThenInclude_reference_on_derived_after_derived_collection(async);
 
             AssertSql(
@@ -4006,7 +4083,8 @@ ORDER BY [g].[Nickname], [g].[SquadId], [w].[Id]"
 
         public override async Task Correlated_collections_naked_navigation_with_ToList_followed_by_projecting_count(
             bool async
-        ) {
+        )
+        {
             await base.Correlated_collections_naked_navigation_with_ToList_followed_by_projecting_count(
                 async
             );
@@ -4054,7 +4132,8 @@ ORDER BY [g].[Nickname], [g].[SquadId], [t].[Id]"
 
         public override async Task Correlated_collections_basic_projection_explicit_to_list(
             bool async
-        ) {
+        )
+        {
             await base.Correlated_collections_basic_projection_explicit_to_list(async);
 
             AssertSql(
@@ -4072,7 +4151,8 @@ ORDER BY [g].[Nickname], [g].[SquadId], [t].[Id]"
 
         public override async Task Correlated_collections_basic_projection_explicit_to_array(
             bool async
-        ) {
+        )
+        {
             await base.Correlated_collections_basic_projection_explicit_to_array(async);
 
             AssertSql(
@@ -4124,7 +4204,8 @@ ORDER BY [g].[Nickname], [g].[SquadId], [t].[Nickname], [t].[SquadId]"
 
         public override async Task Correlated_collections_basic_projecting_single_property(
             bool async
-        ) {
+        )
+        {
             await base.Correlated_collections_basic_projecting_single_property(async);
 
             AssertSql(
@@ -4176,7 +4257,8 @@ ORDER BY [g].[Nickname], [g].[SquadId], [t].[Id]"
 
         public override async Task Correlated_collections_projection_of_collection_thru_navigation(
             bool async
-        ) {
+        )
+        {
             await base.Correlated_collections_projection_of_collection_thru_navigation(async);
 
             AssertSql(
@@ -4195,7 +4277,8 @@ ORDER BY [g].[FullName], [g].[Nickname], [g].[SquadId], [s].[Id], [t].[SquadId],
 
         public override async Task Correlated_collections_project_anonymous_collection_result(
             bool async
-        ) {
+        )
+        {
             await base.Correlated_collections_project_anonymous_collection_result(async);
 
             AssertSql(
@@ -4231,7 +4314,8 @@ ORDER BY [s].[Id], [t0].[SquadId], [t0].[MissionId], [t0].[Id], [t0].[SquadId0],
 
         public override async Task Correlated_collections_nested_mixed_streaming_with_buffer1(
             bool async
-        ) {
+        )
+        {
             await base.Correlated_collections_nested_mixed_streaming_with_buffer1(async);
 
             AssertSql(
@@ -4254,7 +4338,8 @@ ORDER BY [s].[Id], [t0].[SquadId], [t0].[MissionId], [t0].[Id], [t0].[SquadId0],
 
         public override async Task Correlated_collections_nested_mixed_streaming_with_buffer2(
             bool async
-        ) {
+        )
+        {
             await base.Correlated_collections_nested_mixed_streaming_with_buffer2(async);
 
             AssertSql(
@@ -4299,7 +4384,8 @@ ORDER BY [g].[HasSoulPatch] DESC, [g].[Nickname], [g].[SquadId], [t0].[Rank], [t
 
         public override async Task Correlated_collections_same_collection_projected_multiple_times(
             bool async
-        ) {
+        )
+        {
             await base.Correlated_collections_same_collection_projected_multiple_times(async);
 
             AssertSql(
@@ -4321,7 +4407,8 @@ ORDER BY [g].[Nickname], [g].[SquadId], [t].[Id], [t0].[Id]"
 
         public override async Task Correlated_collections_similar_collection_projected_multiple_times(
             bool async
-        ) {
+        )
+        {
             await base.Correlated_collections_similar_collection_projected_multiple_times(async);
 
             AssertSql(
@@ -4343,7 +4430,8 @@ ORDER BY [g].[Rank], [g].[Nickname], [g].[SquadId], [t].[OwnerFullName], [t].[Id
 
         public override async Task Correlated_collections_different_collections_projected(
             bool async
-        ) {
+        )
+        {
             await base.Correlated_collections_different_collections_projected(async);
 
             AssertSql(
@@ -4365,7 +4453,8 @@ ORDER BY [g].[FullName], [g].[Nickname], [g].[SquadId], [t].[Id], [t0].[FullName
 
         public override async Task Multiple_orderby_with_navigation_expansion_on_one_of_the_order_bys(
             bool async
-        ) {
+        )
+        {
             await base.Multiple_orderby_with_navigation_expansion_on_one_of_the_order_bys(async);
 
             AssertSql(
@@ -4382,7 +4471,8 @@ ORDER BY [g].[HasSoulPatch] DESC, [t].[Note]"
 
         public override async Task Multiple_orderby_with_navigation_expansion_on_one_of_the_order_bys_inside_subquery(
             bool async
-        ) {
+        )
+        {
             await base.Multiple_orderby_with_navigation_expansion_on_one_of_the_order_bys_inside_subquery(
                 async
             );
@@ -4407,7 +4497,8 @@ ORDER BY [g].[HasSoulPatch] DESC, [t].[Note], [g].[Nickname], [g].[SquadId], [t]
 
         public override async Task Multiple_orderby_with_navigation_expansion_on_one_of_the_order_bys_inside_subquery_duplicated_orderings(
             bool async
-        ) {
+        )
+        {
             await base.Multiple_orderby_with_navigation_expansion_on_one_of_the_order_bys_inside_subquery_duplicated_orderings(
                 async
             );
@@ -4432,7 +4523,8 @@ ORDER BY [g].[HasSoulPatch] DESC, [t].[Note], [g].[Nickname], [g].[SquadId], [t]
 
         public override async Task Multiple_orderby_with_navigation_expansion_on_one_of_the_order_bys_inside_subquery_complex_orderings(
             bool async
-        ) {
+        )
+        {
             await base.Multiple_orderby_with_navigation_expansion_on_one_of_the_order_bys_inside_subquery_complex_orderings(
                 async
             );
@@ -4460,7 +4552,8 @@ ORDER BY [g].[HasSoulPatch] DESC, [t].[Note], [g].[Nickname], [g].[SquadId], [t]
 
         public override async Task Correlated_collections_multiple_nested_complex_collections(
             bool async
-        ) {
+        )
+        {
             await base.Correlated_collections_multiple_nested_complex_collections(async);
 
             AssertSql(
@@ -4500,7 +4593,8 @@ ORDER BY [g].[HasSoulPatch] DESC, [t].[Note], [g].[Nickname], [g].[SquadId], [t]
 
         public override async Task Correlated_collections_inner_subquery_selector_references_outer_qsre(
             bool async
-        ) {
+        )
+        {
             await base.Correlated_collections_inner_subquery_selector_references_outer_qsre(async);
 
             AssertSql(
@@ -4518,7 +4612,8 @@ ORDER BY [g].[Nickname], [g].[SquadId], [t].[Nickname], [t].[SquadId]"
 
         public override async Task Correlated_collections_inner_subquery_predicate_references_outer_qsre(
             bool async
-        ) {
+        )
+        {
             await base.Correlated_collections_inner_subquery_predicate_references_outer_qsre(async);
 
             AssertSql(
@@ -4536,7 +4631,8 @@ ORDER BY [g].[Nickname], [g].[SquadId], [t].[Nickname], [t].[SquadId]"
 
         public override async Task Correlated_collections_nested_inner_subquery_references_outer_qsre_one_level_up(
             bool async
-        ) {
+        )
+        {
             await base.Correlated_collections_nested_inner_subquery_references_outer_qsre_one_level_up(
                 async
             );
@@ -4561,7 +4657,8 @@ ORDER BY [g].[Nickname], [g].[SquadId], [t0].[Nickname], [t0].[SquadId], [t0].[I
 
         public override async Task Correlated_collections_nested_inner_subquery_references_outer_qsre_two_levels_up(
             bool async
-        ) {
+        )
+        {
             await base.Correlated_collections_nested_inner_subquery_references_outer_qsre_two_levels_up(
                 async
             );
@@ -4764,7 +4861,8 @@ ORDER BY [t].[Note], [g].[Nickname] DESC, [t].[Id], [g].[SquadId], [s].[Id], [t0
 
         public override async Task Correlated_collections_from_left_join_with_additional_elements_projected_of_that_join(
             bool async
-        ) {
+        )
+        {
             await base.Correlated_collections_from_left_join_with_additional_elements_projected_of_that_join(
                 async
             );
@@ -4836,7 +4934,8 @@ ORDER BY [g].[Nickname], [g].[SquadId], [t1].[Nickname], [t1].[SquadId], [t1].[I
 
         public override async Task Correlated_collections_with_funky_orderby_complex_scenario1(
             bool async
-        ) {
+        )
+        {
             await base.Correlated_collections_with_funky_orderby_complex_scenario1(async);
 
             AssertSql(
@@ -4858,7 +4957,8 @@ ORDER BY [g].[FullName], [g].[Nickname] DESC, [g].[SquadId], [t0].[Id], [t0].[Ni
 
         public override async Task Correlated_collections_with_funky_orderby_complex_scenario2(
             bool async
-        ) {
+        )
+        {
             await base.Correlated_collections_with_funky_orderby_complex_scenario2(async);
 
             AssertSql(
@@ -4911,7 +5011,8 @@ FROM [Gears] AS [g]"
 
         public override async Task Correlated_collection_with_top_level_Last_with_orderby_on_outer(
             bool async
-        ) {
+        )
+        {
             await base.Correlated_collection_with_top_level_Last_with_orderby_on_outer(async);
 
             AssertSql(
@@ -4928,7 +5029,8 @@ ORDER BY [t].[FullName], [t].[Nickname], [t].[SquadId], [w].[Id]"
 
         public override async Task Correlated_collection_with_top_level_Last_with_order_by_on_inner(
             bool async
-        ) {
+        )
+        {
             await base.Correlated_collection_with_top_level_Last_with_order_by_on_inner(async);
 
             AssertSql(
@@ -4948,7 +5050,8 @@ ORDER BY [t].[FullName] DESC, [t].[Nickname], [t].[SquadId], [t0].[Name], [t0].[
 
         public override async Task Null_semantics_on_nullable_bool_from_inner_join_subquery_is_fully_applied(
             bool async
-        ) {
+        )
+        {
             await base.Null_semantics_on_nullable_bool_from_inner_join_subquery_is_fully_applied(
                 async
             );
@@ -4967,7 +5070,8 @@ WHERE ([t].[Eradicated] <> CAST(1 AS bit)) OR [t].[Eradicated] IS NULL"
 
         public override async Task Null_semantics_on_nullable_bool_from_left_join_subquery_is_fully_applied(
             bool async
-        ) {
+        )
+        {
             await base.Null_semantics_on_nullable_bool_from_left_join_subquery_is_fully_applied(
                 async
             );
@@ -5091,7 +5195,8 @@ ORDER BY [g].[Nickname], [g].[SquadId], [t0].[Id], [t0].[Nickname], [t0].[SquadI
 
         public override async Task Negated_bool_ternary_inside_anonymous_type_in_projection(
             bool async
-        ) {
+        )
+        {
             await base.Negated_bool_ternary_inside_anonymous_type_in_projection(async);
 
             AssertSql(
@@ -5223,7 +5328,8 @@ INNER JOIN (
 
         public override async Task Join_on_entity_qsre_keys_inner_key_is_navigation_composite_key(
             bool async
-        ) {
+        )
+        {
             await base.Join_on_entity_qsre_keys_inner_key_is_navigation_composite_key(async);
 
             AssertSql(
@@ -5240,7 +5346,8 @@ INNER JOIN (
 
         public override async Task Join_on_entity_qsre_keys_inner_key_is_nested_navigation(
             bool async
-        ) {
+        )
+        {
             await base.Join_on_entity_qsre_keys_inner_key_is_nested_navigation(async);
 
             AssertSql(
@@ -5258,7 +5365,8 @@ INNER JOIN (
 
         public override async Task GroupJoin_on_entity_qsre_keys_inner_key_is_nested_navigation(
             bool async
-        ) {
+        )
+        {
             await base.GroupJoin_on_entity_qsre_keys_inner_key_is_nested_navigation(async);
 
             AssertSql(
@@ -5309,7 +5417,8 @@ WHERE [s].[Name] = N'Kilo'"
 
         public override async Task Project_one_value_type_converted_to_nullable_from_empty_collection(
             bool async
-        ) {
+        )
+        {
             await base.Project_one_value_type_converted_to_nullable_from_empty_collection(async);
 
             AssertSql(
@@ -5324,7 +5433,8 @@ WHERE [s].[Name] = N'Kilo'"
 
         public override async Task Project_one_value_type_with_client_projection_from_empty_collection(
             bool async
-        ) {
+        )
+        {
             await base.Project_one_value_type_with_client_projection_from_empty_collection(async);
 
             AssertSql(
@@ -5345,7 +5455,8 @@ WHERE [s].[Name] = N'Kilo'"
 
         public override async Task Filter_on_subquery_projecting_one_value_type_from_empty_collection(
             bool async
-        ) {
+        )
+        {
             await base.Filter_on_subquery_projecting_one_value_type_from_empty_collection(async);
 
             AssertSql(
@@ -5400,7 +5511,8 @@ FROM [Squads] AS [s]"
 
         public override async Task Select_subquery_projecting_single_constant_inside_anonymous(
             bool async
-        ) {
+        )
+        {
             await base.Select_subquery_projecting_single_constant_inside_anonymous(async);
 
             AssertSql(
@@ -5420,7 +5532,8 @@ LEFT JOIN (
 
         public override async Task Select_subquery_projecting_multiple_constants_inside_anonymous(
             bool async
-        ) {
+        )
+        {
             await base.Select_subquery_projecting_multiple_constants_inside_anonymous(async);
 
             AssertSql(
@@ -5464,7 +5577,8 @@ ORDER BY [g].[Nickname], [g].[SquadId], [w].[Id]"
 
         public override async Task Select_subquery_projecting_single_constant_null_of_non_mapped_type(
             bool async
-        ) {
+        )
+        {
             await base.Select_subquery_projecting_single_constant_null_of_non_mapped_type(async);
 
             AssertSql(
@@ -5484,7 +5598,8 @@ LEFT JOIN (
 
         public override async Task Select_subquery_projecting_single_constant_of_non_mapped_type(
             bool async
-        ) {
+        )
+        {
             await base.Select_subquery_projecting_single_constant_of_non_mapped_type(async);
 
             AssertSql(
@@ -5755,7 +5870,8 @@ WHERE [g].[HasSoulPatch] = CAST(1 AS bit)"
 
         public override async Task Select_subquery_distinct_singleordefault_boolean_with_pushdown(
             bool async
-        ) {
+        )
+        {
             await base.Select_subquery_distinct_singleordefault_boolean_with_pushdown(async);
 
             AssertSql(
@@ -5773,7 +5889,8 @@ WHERE [g].[HasSoulPatch] = CAST(1 AS bit)"
 
         public override async Task Select_subquery_distinct_singleordefault_boolean_empty1(
             bool async
-        ) {
+        )
+        {
             await base.Select_subquery_distinct_singleordefault_boolean_empty1(async);
 
             AssertSql(
@@ -5791,7 +5908,8 @@ WHERE [g].[HasSoulPatch] = CAST(1 AS bit)"
 
         public override async Task Select_subquery_distinct_singleordefault_boolean_empty2(
             bool async
-        ) {
+        )
+        {
             await base.Select_subquery_distinct_singleordefault_boolean_empty2(async);
 
             AssertSql(
@@ -5806,7 +5924,8 @@ WHERE [g].[HasSoulPatch] = CAST(1 AS bit)"
 
         public override async Task Select_subquery_distinct_singleordefault_boolean_empty_with_pushdown(
             bool async
-        ) {
+        )
+        {
             await base.Select_subquery_distinct_singleordefault_boolean_empty_with_pushdown(async);
 
             AssertSql(
@@ -5837,7 +5956,8 @@ ORDER BY [c].[Name], [g].[Nickname], [g].[SquadId]"
 
         public override async Task Cast_ordered_subquery_to_base_type_using_typed_ToArray(
             bool async
-        ) {
+        )
+        {
             await base.Cast_ordered_subquery_to_base_type_using_typed_ToArray(async);
 
             AssertSql(
@@ -5854,7 +5974,8 @@ ORDER BY [c].[Name], [t].[Nickname] DESC, [t].[SquadId]"
 
         public override async Task Correlated_collection_with_complex_order_by_funcletized_to_constant_bool(
             bool async
-        ) {
+        )
+        {
             await base.Correlated_collection_with_complex_order_by_funcletized_to_constant_bool(
                 async
             );
@@ -5878,7 +5999,8 @@ ORDER BY [t].[c] DESC, [t].[Nickname], [t].[SquadId], [t].[FullName]"
 
         public override async Task Double_order_by_on_nullable_bool_coming_from_optional_navigation(
             bool async
-        ) {
+        )
+        {
             await base.Double_order_by_on_nullable_bool_coming_from_optional_navigation(async);
 
             AssertSql(
@@ -6072,7 +6194,8 @@ GROUP BY [g].[Rank]"
 
         public override async Task GroupBy_Property_Include_Aggregate_with_anonymous_selector(
             bool async
-        ) {
+        )
+        {
             await base.GroupBy_Property_Include_Aggregate_with_anonymous_selector(async);
 
             AssertSql(
@@ -6085,7 +6208,8 @@ ORDER BY [g].[Nickname]"
 
         public override async Task Group_by_entity_key_with_include_on_that_entity_with_key_in_result_selector(
             bool async
-        ) {
+        )
+        {
             await base.Group_by_entity_key_with_include_on_that_entity_with_key_in_result_selector(
                 async
             );
@@ -6095,7 +6219,8 @@ ORDER BY [g].[Nickname]"
 
         public override async Task Group_by_entity_key_with_include_on_that_entity_with_key_in_result_selector_using_EF_Property(
             bool async
-        ) {
+        )
+        {
             await base.Group_by_entity_key_with_include_on_that_entity_with_key_in_result_selector_using_EF_Property(
                 async
             );
@@ -6129,7 +6254,8 @@ GROUP BY [g].[Rank]"
 
         public override async Task Include_with_group_by_and_FirstOrDefault_gets_properly_applied(
             bool async
-        ) {
+        )
+        {
             await base.Include_with_group_by_and_FirstOrDefault_gets_properly_applied(async);
 
             AssertSql(
@@ -6155,7 +6281,8 @@ ORDER BY [g].[Nickname], [g].[SquadId], [w].[Id]"
 
         public override async Task Include_with_client_method_and_member_access_still_applies_includes(
             bool async
-        ) {
+        )
+        {
             await base.Include_with_client_method_and_member_access_still_applies_includes(async);
 
             AssertSql(
@@ -6167,7 +6294,8 @@ LEFT JOIN [Tags] AS [t] ON ([g].[Nickname] = [t].[GearNickName]) AND ([g].[Squad
 
         public override async Task Include_with_projection_of_unmapped_property_still_gets_applied(
             bool async
-        ) {
+        )
+        {
             await base.Include_with_projection_of_unmapped_property_still_gets_applied(async);
 
             AssertSql(
@@ -6197,7 +6325,8 @@ ORDER BY [s].[Id], [t].[Nickname], [t].[SquadId], [t].[Id]"
 
         public override async Task OrderBy_same_expression_containing_IsNull_correctly_deduplicates_the_ordering(
             bool async
-        ) {
+        )
+        {
             await base.OrderBy_same_expression_containing_IsNull_correctly_deduplicates_the_ordering(
                 async
             );
@@ -6306,7 +6435,8 @@ WHERE ([g].[FullName] <> N'Dom') AND (
 
         public override async Task Query_with_complex_let_containing_ordering_and_filter_projecting_firstOrDefault_element_of_let(
             bool async
-        ) {
+        )
+        {
             await base.Query_with_complex_let_containing_ordering_and_filter_projecting_firstOrDefault_element_of_let(
                 async
             );
@@ -6324,7 +6454,8 @@ WHERE [g].[Nickname] <> N'Dom'"
 
         public override async Task Null_semantics_is_correctly_applied_for_function_comparisons_that_take_arguments_from_optional_navigation(
             bool async
-        ) {
+        )
+        {
             await base.Null_semantics_is_correctly_applied_for_function_comparisons_that_take_arguments_from_optional_navigation(
                 async
             );
@@ -6334,7 +6465,8 @@ WHERE [g].[Nickname] <> N'Dom'"
 
         public override async Task Null_semantics_is_correctly_applied_for_function_comparisons_that_take_arguments_from_optional_navigation_complex(
             bool async
-        ) {
+        )
+        {
             await base.Null_semantics_is_correctly_applied_for_function_comparisons_that_take_arguments_from_optional_navigation_complex(
                 async
             );
@@ -6517,7 +6649,8 @@ ORDER BY (
 
         public override async Task Anonymous_projection_take_followed_by_projecting_single_element_from_collection_navigation(
             bool async
-        ) {
+        )
+        {
             await base.Anonymous_projection_take_followed_by_projecting_single_element_from_collection_navigation(
                 async
             );
@@ -6527,7 +6660,8 @@ ORDER BY (
 
         public override async Task Bool_projection_from_subquery_treated_appropriately_in_where(
             bool async
-        ) {
+        )
+        {
             await base.Bool_projection_from_subquery_treated_appropriately_in_where(async);
 
             AssertSql(
@@ -6595,7 +6729,8 @@ LEFT JOIN [Gears] AS [g0] ON [g].[LeaderNickname] = [g0].[Nickname]"
 
         public override async Task Project_collection_navigation_nested_with_take_composite_key(
             bool async
-        ) {
+        )
+        {
             await base.Project_collection_navigation_nested_with_take_composite_key(async);
 
             AssertSql(
@@ -6631,7 +6766,8 @@ ORDER BY [t].[Id], [g].[Nickname], [g].[SquadId], [g0].[Nickname], [g0].[SquadId
 
         public override async Task Null_checks_in_correlated_predicate_are_correctly_translated(
             bool async
-        ) {
+        )
+        {
             await base.Null_checks_in_correlated_predicate_are_correctly_translated(async);
 
             AssertSql(
@@ -6644,7 +6780,8 @@ ORDER BY [t].[Id], [g].[Nickname], [g].[SquadId]"
 
         public override async Task SelectMany_Where_DefaultIfEmpty_with_navigation_in_the_collection_selector(
             bool async
-        ) {
+        )
+        {
             await base.SelectMany_Where_DefaultIfEmpty_with_navigation_in_the_collection_selector(
                 async
             );
@@ -6667,7 +6804,8 @@ LEFT JOIN (
 
         public override async Task SelectMany_Where_DefaultIfEmpty_with_navigation_in_the_collection_selector_not_equal(
             bool async
-        ) {
+        )
+        {
             await base.SelectMany_Where_DefaultIfEmpty_with_navigation_in_the_collection_selector_not_equal(
                 async
             );
@@ -6690,7 +6828,8 @@ LEFT JOIN (
 
         public override async Task SelectMany_Where_DefaultIfEmpty_with_navigation_in_the_collection_selector_order_comparison(
             bool async
-        ) {
+        )
+        {
             await base.SelectMany_Where_DefaultIfEmpty_with_navigation_in_the_collection_selector_order_comparison(
                 async
             );
@@ -6713,7 +6852,8 @@ LEFT JOIN (
 
         public override async Task Join_with_inner_being_a_subquery_projecting_single_property(
             bool async
-        ) {
+        )
+        {
             await base.Join_with_inner_being_a_subquery_projecting_single_property(async);
 
             AssertSql(
@@ -6725,7 +6865,8 @@ INNER JOIN [Gears] AS [g0] ON [g].[Nickname] = [g0].[Nickname]"
 
         public override async Task Join_with_inner_being_a_subquery_projecting_anonymous_type_with_single_property(
             bool async
-        ) {
+        )
+        {
             await base.Join_with_inner_being_a_subquery_projecting_anonymous_type_with_single_property(
                 async
             );
@@ -6851,7 +6992,8 @@ FROM [Factions] AS [f]"
 
         public override async Task Acessing_reference_navigation_collection_composition_generates_single_query(
             bool async
-        ) {
+        )
+        {
             await base.Acessing_reference_navigation_collection_composition_generates_single_query(
                 async
             );
@@ -6870,7 +7012,8 @@ ORDER BY [g].[Nickname], [g].[SquadId], [t].[Id], [t].[Id0]"
 
         public override async Task Reference_include_chain_loads_correctly_when_middle_is_null(
             bool async
-        ) {
+        )
+        {
             await base.Reference_include_chain_loads_correctly_when_middle_is_null(async);
 
             AssertSql(
@@ -6884,7 +7027,8 @@ ORDER BY [t].[Note]"
 
         public override async Task Accessing_property_of_optional_navigation_in_child_projection_works(
             bool async
-        ) {
+        )
+        {
             await base.Accessing_property_of_optional_navigation_in_child_projection_works(async);
 
             AssertSql(
@@ -6919,7 +7063,8 @@ WHERE EXISTS (
 
         public override async Task Query_reusing_parameter_doesnt_declare_duplicate_parameter(
             bool async
-        ) {
+        )
+        {
             await base.Query_reusing_parameter_doesnt_declare_duplicate_parameter(async);
 
             AssertSql(
@@ -6937,7 +7082,8 @@ ORDER BY [t].[FullName]"
 
         public override async Task Query_reusing_parameter_with_inner_query_doesnt_declare_duplicate_parameter(
             bool async
-        ) {
+        )
+        {
             await base.Query_reusing_parameter_with_inner_query_doesnt_declare_duplicate_parameter(
                 async
             );
@@ -6969,7 +7115,8 @@ ORDER BY [t].[FullName]"
 
         public override async Task Query_reusing_parameter_with_inner_query_expression_doesnt_declare_duplicate_parameter(
             bool async
-        ) {
+        )
+        {
             await base.Query_reusing_parameter_with_inner_query_expression_doesnt_declare_duplicate_parameter(
                 async
             );
@@ -6988,7 +7135,8 @@ WHERE EXISTS (
 
         public override async Task Query_reusing_parameter_doesnt_declare_duplicate_parameter_complex(
             bool async
-        ) {
+        )
+        {
             await base.Query_reusing_parameter_doesnt_declare_duplicate_parameter_complex(async);
 
             AssertSql(
@@ -7034,7 +7182,8 @@ GROUP BY [t].[Name], [t].[Count]"
 
         public override async Task Complex_GroupBy_after_set_operator_using_result_selector(
             bool async
-        ) {
+        )
+        {
             await base.Complex_GroupBy_after_set_operator_using_result_selector(async);
 
             AssertSql(
@@ -7090,7 +7239,8 @@ END"
 
         public override async Task GroupBy_with_boolean_groupin_key_thru_navigation_access(
             bool async
-        ) {
+        )
+        {
             await base.GroupBy_with_boolean_groupin_key_thru_navigation_access(async);
 
             AssertSql(
@@ -7104,7 +7254,8 @@ GROUP BY [g].[HasSoulPatch], [s].[Name]"
 
         public override async Task Group_by_over_projection_with_multiple_properties_accessed_thru_navigation(
             bool async
-        ) {
+        )
+        {
             await base.Group_by_over_projection_with_multiple_properties_accessed_thru_navigation(
                 async
             );
@@ -7121,7 +7272,8 @@ GROUP BY [c].[Name]"
 
         public override async Task Group_by_on_StartsWith_with_null_parameter_as_argument(
             bool async
-        ) {
+        )
+        {
             await base.Group_by_on_StartsWith_with_null_parameter_as_argument(async);
 
             AssertSql(
@@ -7132,7 +7284,8 @@ FROM [Gears] AS [g]"
 
         public override async Task Group_by_with_having_StartsWith_with_null_parameter_as_argument(
             bool async
-        ) {
+        )
+        {
             await base.Group_by_with_having_StartsWith_with_null_parameter_as_argument(async);
 
             AssertSql(
@@ -7227,7 +7380,8 @@ WHERE 0 = 1"
 
         public override async Task FirstOrDefault_navigation_access_entity_equality_in_where_predicate_apply_peneding_selector(
             bool async
-        ) {
+        )
+        {
             await base.FirstOrDefault_navigation_access_entity_equality_in_where_predicate_apply_peneding_selector(
                 async
             );
@@ -7250,7 +7404,8 @@ WHERE ([c].[Name] = (
 
         public override async Task Bitwise_operation_with_non_null_parameter_optimizes_null_checks(
             bool async
-        ) {
+        )
+        {
             await base.Bitwise_operation_with_non_null_parameter_optimizes_null_checks(async);
 
             AssertSql(
@@ -7314,7 +7469,8 @@ WHERE ([w].[AmmunitionType] & @__prm_0) = @__prm_0"
 
         public override async Task Logical_operation_with_non_null_parameter_optimizes_null_checks(
             bool async
-        ) {
+        )
+        {
             await base.Logical_operation_with_non_null_parameter_optimizes_null_checks(async);
 
             AssertSql(
@@ -7345,7 +7501,8 @@ WHERE [g].[Discriminator] = N'Officer'"
 
         public override async Task Join_inner_source_custom_projection_followed_by_filter(
             bool async
-        ) {
+        )
+        {
             await base.Join_inner_source_custom_projection_followed_by_filter(async);
 
             AssertSql(
@@ -7428,7 +7585,8 @@ WHERE CHARINDEX(CAST(@__someByte_0 AS varbinary(max)), [s].[Banner]) > 0"
 
         public override async Task Byte_array_filter_by_length_literal_does_not_cast_on_varbinary_n(
             bool async
-        ) {
+        )
+        {
             await base.Byte_array_filter_by_length_literal_does_not_cast_on_varbinary_n(async);
 
             AssertSql(
@@ -7440,7 +7598,8 @@ WHERE DATALENGTH([s].[Banner5]) = 5"
 
         public override async Task Conditional_expression_with_test_being_simplified_to_constant_simple(
             bool isAsync
-        ) {
+        )
+        {
             await base.Conditional_expression_with_test_being_simplified_to_constant_simple(
                 isAsync
             );
@@ -7459,7 +7618,8 @@ END = CAST(1 AS bit)"
 
         public override async Task Conditional_expression_with_test_being_simplified_to_constant_complex(
             bool isAsync
-        ) {
+        )
+        {
             await base.Conditional_expression_with_test_being_simplified_to_constant_complex(
                 isAsync
             );
@@ -7513,7 +7673,8 @@ WHERE CONVERT(date, [m].[Timeline]) >= @__dateTimeOffset_Date_0"
 
         public override async Task Conditional_with_conditions_evaluating_to_false_gets_optimized(
             bool async
-        ) {
+        )
+        {
             await base.Conditional_with_conditions_evaluating_to_false_gets_optimized(async);
 
             AssertSql(
@@ -7524,7 +7685,8 @@ FROM [Gears] AS [g]"
 
         public override async Task Conditional_with_conditions_evaluating_to_true_gets_optimized(
             bool async
-        ) {
+        )
+        {
             await base.Conditional_with_conditions_evaluating_to_true_gets_optimized(async);
 
             AssertSql(
@@ -7535,7 +7697,8 @@ FROM [Gears] AS [g]"
 
         public override async Task Projecting_required_string_column_compared_to_null_parameter(
             bool async
-        ) {
+        )
+        {
             await base.Projecting_required_string_column_compared_to_null_parameter(async);
 
             AssertSql(
@@ -7559,7 +7722,8 @@ WHERE [s].[Banner5] = @__byteArrayParam_0"
 
         public override async Task Group_by_nullable_property_HasValue_and_project_the_grouping_key(
             bool async
-        ) {
+        )
+        {
             await base.Group_by_nullable_property_HasValue_and_project_the_grouping_key(async);
 
             AssertSql(
@@ -7577,7 +7741,8 @@ END"
 
         public override async Task Group_by_nullable_property_and_project_the_grouping_key_HasValue(
             bool async
-        ) {
+        )
+        {
             await base.Group_by_nullable_property_and_project_the_grouping_key_HasValue(async);
 
             AssertSql(
@@ -7726,7 +7891,8 @@ WHERE EXISTS (
 
         public override async Task Contains_on_collection_of_nullable_byte_subquery_null_constant(
             bool async
-        ) {
+        )
+        {
             await base.Contains_on_collection_of_nullable_byte_subquery_null_constant(async);
 
             AssertSql(
@@ -7741,7 +7907,8 @@ WHERE EXISTS (
 
         public override async Task Contains_on_collection_of_nullable_byte_subquery_null_parameter(
             bool async
-        ) {
+        )
+        {
             await base.Contains_on_collection_of_nullable_byte_subquery_null_parameter(async);
 
             AssertSql(
@@ -7768,7 +7935,8 @@ WHERE CHARINDEX(CAST([l].[ThreatLevelByte] AS varbinary(max)), [s].[Banner]) > 0
 
         public override async Task Subquery_projecting_non_nullable_scalar_contains_non_nullable_value_doesnt_need_null_expansion(
             bool async
-        ) {
+        )
+        {
             await base.Subquery_projecting_non_nullable_scalar_contains_non_nullable_value_doesnt_need_null_expansion(
                 async
             );
@@ -7789,7 +7957,8 @@ CROSS APPLY (
 
         public override async Task Subquery_projecting_non_nullable_scalar_contains_non_nullable_value_doesnt_need_null_expansion_negated(
             bool async
-        ) {
+        )
+        {
             await base.Subquery_projecting_non_nullable_scalar_contains_non_nullable_value_doesnt_need_null_expansion_negated(
                 async
             );
@@ -7810,7 +7979,8 @@ CROSS APPLY (
 
         public override async Task Subquery_projecting_nullable_scalar_contains_nullable_value_needs_null_expansion(
             bool async
-        ) {
+        )
+        {
             await base.Subquery_projecting_nullable_scalar_contains_nullable_value_needs_null_expansion(
                 async
             );
@@ -7831,7 +8001,8 @@ CROSS APPLY (
 
         public override async Task Subquery_projecting_nullable_scalar_contains_nullable_value_needs_null_expansion_negated(
             bool async
-        ) {
+        )
+        {
             await base.Subquery_projecting_nullable_scalar_contains_nullable_value_needs_null_expansion_negated(
                 async
             );
@@ -7852,7 +8023,8 @@ CROSS APPLY (
 
         public override async Task Enum_closure_typed_as_underlying_type_generates_correct_parameter_type(
             bool async
-        ) {
+        )
+        {
             await base.Enum_closure_typed_as_underlying_type_generates_correct_parameter_type(
                 async
             );
@@ -7868,7 +8040,8 @@ WHERE @__prm_0 = [w].[AmmunitionType]"
 
         public override async Task Enum_flags_closure_typed_as_underlying_type_generates_correct_parameter_type(
             bool async
-        ) {
+        )
+        {
             await base.Enum_flags_closure_typed_as_underlying_type_generates_correct_parameter_type(
                 async
             );
@@ -7884,7 +8057,8 @@ WHERE (@__prm_0 & [g].[Rank]) = [g].[Rank]"
 
         public override async Task Enum_flags_closure_typed_as_different_type_generates_correct_parameter_type(
             bool async
-        ) {
+        )
+        {
             await base.Enum_flags_closure_typed_as_different_type_generates_correct_parameter_type(
                 async
             );
@@ -7900,7 +8074,8 @@ WHERE (@__prm_0 & CAST([g].[Rank] AS int)) = CAST([g].[Rank] AS int)"
 
         public override async Task Constant_enum_with_same_underlying_value_as_previously_parameterized_int(
             bool async
-        ) {
+        )
+        {
             await base.Constant_enum_with_same_underlying_value_as_previously_parameterized_int(
                 async
             );
@@ -7944,7 +8119,8 @@ FROM [Missions] AS [m]"
 
         public override async Task CompareTo_used_with_non_unicode_string_column_and_constant(
             bool async
-        ) {
+        )
+        {
             await base.CompareTo_used_with_non_unicode_string_column_and_constant(async);
 
             AssertSql(
@@ -7956,7 +8132,8 @@ WHERE [c].[Location] = 'Unknown'"
 
         public override async Task Coalesce_used_with_non_unicode_string_column_and_constant(
             bool async
-        ) {
+        )
+        {
             await base.Coalesce_used_with_non_unicode_string_column_and_constant(async);
 
             AssertSql(
@@ -7967,7 +8144,8 @@ FROM [Cities] AS [c]"
 
         public override async Task Groupby_anonymous_type_with_navigations_followed_up_by_anonymous_projection_and_orderby(
             bool async
-        ) {
+        )
+        {
             await base.Groupby_anonymous_type_with_navigations_followed_up_by_anonymous_projection_and_orderby(
                 async
             );
@@ -7984,7 +8162,8 @@ ORDER BY [c].[Location]"
 
         public override async Task SelectMany_predicate_with_non_equality_comparison_converted_to_inner_join(
             bool async
-        ) {
+        )
+        {
             await base.SelectMany_predicate_with_non_equality_comparison_converted_to_inner_join(
                 async
             );
@@ -7999,7 +8178,8 @@ ORDER BY [g].[Nickname], [w].[Id]"
 
         public override async Task SelectMany_predicate_with_non_equality_comparison_DefaultIfEmpty_converted_to_left_join(
             bool async
-        ) {
+        )
+        {
             await base.SelectMany_predicate_with_non_equality_comparison_DefaultIfEmpty_converted_to_left_join(
                 async
             );
@@ -8014,7 +8194,8 @@ ORDER BY [g].[Nickname], [w].[Id]"
 
         public override async Task SelectMany_predicate_after_navigation_with_non_equality_comparison_DefaultIfEmpty_converted_to_left_join(
             bool async
-        ) {
+        )
+        {
             await base.SelectMany_predicate_after_navigation_with_non_equality_comparison_DefaultIfEmpty_converted_to_left_join(
                 async
             );
@@ -8033,7 +8214,8 @@ ORDER BY [g].[Nickname], [t].[Id]"
 
         public override async Task SelectMany_without_result_selector_and_non_equality_comparison_converted_to_join(
             bool async
-        ) {
+        )
+        {
             await base.SelectMany_without_result_selector_and_non_equality_comparison_converted_to_join(
                 async
             );
@@ -8047,7 +8229,8 @@ LEFT JOIN [Weapons] AS [w] ON ([g].[FullName] <> [w].[OwnerFullName]) OR [w].[Ow
 
         public override async Task Filtered_collection_projection_with_order_comparison_predicate_converted_to_join(
             bool async
-        ) {
+        )
+        {
             await base.Filtered_collection_projection_with_order_comparison_predicate_converted_to_join(
                 async
             );
@@ -8062,7 +8245,8 @@ ORDER BY [g].[Nickname], [g].[SquadId], [w].[Id]"
 
         public override async Task Filtered_collection_projection_with_order_comparison_predicate_converted_to_join2(
             bool async
-        ) {
+        )
+        {
             await base.Filtered_collection_projection_with_order_comparison_predicate_converted_to_join2(
                 async
             );
@@ -8077,7 +8261,8 @@ ORDER BY [g].[Nickname], [g].[SquadId], [w].[Id]"
 
         public override async Task Filtered_collection_projection_with_order_comparison_predicate_converted_to_join3(
             bool async
-        ) {
+        )
+        {
             await base.Filtered_collection_projection_with_order_comparison_predicate_converted_to_join3(
                 async
             );
@@ -8092,7 +8277,8 @@ ORDER BY [g].[Nickname], [g].[SquadId], [w].[Id]"
 
         public override async Task SelectMany_predicate_with_non_equality_comparison_with_Take_doesnt_convert_to_join(
             bool async
-        ) {
+        )
+        {
             await base.SelectMany_predicate_with_non_equality_comparison_with_Take_doesnt_convert_to_join(
                 async
             );
@@ -8126,7 +8312,8 @@ WHERE ([s].[Name] = N'Kilo') AND (COALESCE((
 
         public override async Task Correlated_collection_with_inner_collection_references_element_two_levels_up(
             bool async
-        ) {
+        )
+        {
             await base.Correlated_collection_with_inner_collection_references_element_two_levels_up(
                 async
             );
@@ -8161,7 +8348,8 @@ WHERE ([l].[Discriminator] = N'LocustCommander') AND (([l].[HighCommandId] <> 0)
 
         public override async Task Cast_to_derived_followed_by_include_and_FirstOrDefault(
             bool async
-        ) {
+        )
+        {
             await base.Cast_to_derived_followed_by_include_and_FirstOrDefault(async);
 
             AssertSql(
@@ -8194,7 +8382,8 @@ ORDER BY [g].[Nickname], [g].[SquadId], [c].[Name], [t0].[OwnerFullName], [t0].[
 
         public override async Task FirstOrDefault_on_empty_collection_of_DateTime_in_subquery(
             bool async
-        ) {
+        )
+        {
             await base.FirstOrDefault_on_empty_collection_of_DateTime_in_subquery(async);
 
             AssertSql(
@@ -8399,7 +8588,8 @@ WHERE CONTAINS([m].[BriefingDocument], N'bomb', LANGUAGE 1033)"
 
         public override async Task Projecting_property_converted_to_nullable_with_comparison(
             bool async
-        ) {
+        )
+        {
             await base.Projecting_property_converted_to_nullable_with_comparison(async);
 
             AssertSql(
@@ -8418,7 +8608,8 @@ END = 1"
 
         public override async Task Projecting_property_converted_to_nullable_with_addition(
             bool async
-        ) {
+        )
+        {
             await base.Projecting_property_converted_to_nullable_with_addition(async);
 
             AssertSql(
@@ -8437,7 +8628,8 @@ END + 1) = 2"
 
         public override async Task Projecting_property_converted_to_nullable_with_addition_and_final_projection(
             bool async
-        ) {
+        )
+        {
             await base.Projecting_property_converted_to_nullable_with_addition_and_final_projection(
                 async
             );
@@ -8458,7 +8650,8 @@ END IS NOT NULL"
 
         public override async Task Projecting_property_converted_to_nullable_with_conditional(
             bool async
-        ) {
+        )
+        {
             await base.Projecting_property_converted_to_nullable_with_conditional(async);
 
             AssertSql(
@@ -8476,7 +8669,8 @@ LEFT JOIN [Gears] AS [g] ON ([t].[GearNickName] = [g].[Nickname]) AND ([t].[Gear
 
         public override async Task Projecting_property_converted_to_nullable_with_function_call(
             bool async
-        ) {
+        )
+        {
             await base.Projecting_property_converted_to_nullable_with_function_call(async);
 
             AssertSql(
@@ -8491,7 +8685,8 @@ LEFT JOIN [Gears] AS [g] ON ([t].[GearNickName] = [g].[Nickname]) AND ([t].[Gear
 
         public override async Task Projecting_property_converted_to_nullable_with_function_call2(
             bool async
-        ) {
+        )
+        {
             await base.Projecting_property_converted_to_nullable_with_function_call2(async);
 
             AssertSql(
@@ -8510,7 +8705,8 @@ END IS NOT NULL"
 
         public override async Task Projecting_property_converted_to_nullable_into_element_init(
             bool async
-        ) {
+        )
+        {
             await base.Projecting_property_converted_to_nullable_into_element_init(async);
 
             AssertSql(
@@ -8536,7 +8732,8 @@ ORDER BY [t].[Note]"
 
         public override async Task Projecting_property_converted_to_nullable_into_member_assignment(
             bool async
-        ) {
+        )
+        {
             await base.Projecting_property_converted_to_nullable_into_member_assignment(async);
 
             AssertSql(
@@ -8556,7 +8753,8 @@ ORDER BY [t].[Note]"
 
         public override async Task Projecting_property_converted_to_nullable_into_new_array(
             bool async
-        ) {
+        )
+        {
             await base.Projecting_property_converted_to_nullable_into_new_array(async);
 
             AssertSql(
@@ -8601,7 +8799,8 @@ ORDER BY [t].[Note]"
 
         public override async Task Projecting_property_converted_to_nullable_into_member_access(
             bool async
-        ) {
+        )
+        {
             await base.Projecting_property_converted_to_nullable_into_member_access(async);
 
             AssertSql(
@@ -8615,7 +8814,8 @@ ORDER BY [g].[Nickname]"
 
         public override async Task Projecting_property_converted_to_nullable_and_use_it_in_order_by(
             bool async
-        ) {
+        )
+        {
             await base.Projecting_property_converted_to_nullable_and_use_it_in_order_by(async);
 
             AssertSql(
@@ -8638,7 +8838,8 @@ END, [t].[Note]"
 
         public override async Task Correlated_collection_with_distinct_projecting_identifier_column(
             bool async
-        ) {
+        )
+        {
             await base.Correlated_collection_with_distinct_projecting_identifier_column(async);
 
             AssertSql(
@@ -8655,7 +8856,8 @@ ORDER BY [g].[Nickname], [g].[SquadId], [t].[Id]"
 
         public override async Task Correlated_collection_with_distinct_projecting_identifier_column_and_correlation_key(
             bool async
-        ) {
+        )
+        {
             await base.Correlated_collection_with_distinct_projecting_identifier_column_and_correlation_key(
                 async
             );
@@ -8673,7 +8875,8 @@ ORDER BY [g].[Nickname], [g].[SquadId], [t].[Id]"
 
         public override async Task Correlated_collection_with_distinct_projecting_identifier_column_composite_key(
             bool async
-        ) {
+        )
+        {
             await base.Correlated_collection_with_distinct_projecting_identifier_column_composite_key(
                 async
             );
@@ -8691,7 +8894,8 @@ ORDER BY [s].[Id], [t].[Nickname], [t].[SquadId]"
 
         public override async Task Correlated_collection_with_distinct_not_projecting_identifier_column(
             bool async
-        ) {
+        )
+        {
             await base.Correlated_collection_with_distinct_not_projecting_identifier_column(async);
 
             AssertSql(
@@ -8708,7 +8912,8 @@ ORDER BY [g].[Nickname], [g].[SquadId], [t].[Name], [t].[IsAutomatic]"
 
         public override async Task Correlated_collection_with_groupby_not_projecting_identifier_column_but_only_grouping_key_in_final_projection(
             bool async
-        ) {
+        )
+        {
             await base.Correlated_collection_with_groupby_not_projecting_identifier_column_but_only_grouping_key_in_final_projection(
                 async
             );
@@ -8728,7 +8933,8 @@ ORDER BY [g].[Nickname], [g].[SquadId], [t].[Key]"
 
         public override async Task Correlated_collection_with_groupby_not_projecting_identifier_column_with_group_aggregate_in_final_projection(
             bool async
-        ) {
+        )
+        {
             await base.Correlated_collection_with_groupby_not_projecting_identifier_column_with_group_aggregate_in_final_projection(
                 async
             );
@@ -8748,7 +8954,8 @@ ORDER BY [g].[Nickname], [g].[SquadId], [t].[Key]"
 
         public override async Task Correlated_collection_with_groupby_not_projecting_identifier_column_with_group_aggregate_in_final_projection_multiple_grouping_keys(
             bool async
-        ) {
+        )
+        {
             await base.Correlated_collection_with_groupby_not_projecting_identifier_column_with_group_aggregate_in_final_projection_multiple_grouping_keys(
                 async
             );
@@ -8768,7 +8975,8 @@ ORDER BY [g].[Nickname], [g].[SquadId], [t].[IsAutomatic], [t].[Name]"
 
         public override async Task Correlated_collection_via_SelectMany_with_Distinct_missing_indentifying_columns_in_projection(
             bool async
-        ) {
+        )
+        {
             await base.Correlated_collection_via_SelectMany_with_Distinct_missing_indentifying_columns_in_projection(
                 async
             );
@@ -8817,7 +9025,8 @@ ORDER BY [t].[Id], [t1].[Nickname], [t1].[FullName], [t1].[HasSoulPatch], [t1].[
 
         public override async Task Correlated_collection_after_distinct_3_levels_without_original_identifiers(
             bool async
-        ) {
+        )
+        {
             await base.Correlated_collection_after_distinct_3_levels_without_original_identifiers(
                 async
             );

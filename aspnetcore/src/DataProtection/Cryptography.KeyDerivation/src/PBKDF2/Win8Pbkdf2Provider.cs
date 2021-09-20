@@ -21,7 +21,8 @@ namespace Microsoft.AspNetCore.Cryptography.KeyDerivation.PBKDF2
             KeyDerivationPrf prf,
             int iterationCount,
             int numBytesRequested
-        ) {
+        )
+        {
             Debug.Assert(password != null);
             Debug.Assert(salt != null);
             Debug.Assert(iterationCount > 0);
@@ -40,7 +41,8 @@ namespace Microsoft.AspNetCore.Cryptography.KeyDerivation.PBKDF2
                         CachedAlgorithmHandles.PBKDF2,
                         prf
                     )
-                ) {
+                )
+                {
                     fixed (byte* pbRetVal = retVal)
                     {
                         DeriveKeyCore(
@@ -77,7 +79,8 @@ namespace Microsoft.AspNetCore.Cryptography.KeyDerivation.PBKDF2
             string password,
             BCryptAlgorithmHandle pbkdf2AlgHandle,
             KeyDerivationPrf prf
-        ) {
+        )
+        {
             byte dummy; // CLR doesn't like pinning zero-length buffers, so this provides a valid memory address when working with zero-length buffers
 
             // Convert password string to bytes.
@@ -88,7 +91,8 @@ namespace Microsoft.AspNetCore.Cryptography.KeyDerivation.PBKDF2
                     (cbPasswordBuffer > Constants.MAX_STACKALLOC_BYTES)
                         ? new byte[cbPasswordBuffer]
                         : null
-            ) {
+            )
+            {
                 byte* pbPasswordBuffer = pbHeapAllocatedPasswordBuffer;
                 if (pbPasswordBuffer == null)
                 {
@@ -136,7 +140,8 @@ namespace Microsoft.AspNetCore.Cryptography.KeyDerivation.PBKDF2
             byte* pbPassword,
             uint cbPassword,
             KeyDerivationPrf prf
-        ) {
+        )
+        {
             const uint PBKDF2_MAX_KEYLENGTH_IN_BYTES = 2048; // GetSupportedKeyLengths() on a Win8 box; value should never be lowered in any future version of Windows
             if (cbPassword <= PBKDF2_MAX_KEYLENGTH_IN_BYTES)
             {
@@ -168,7 +173,8 @@ namespace Microsoft.AspNetCore.Cryptography.KeyDerivation.PBKDF2
                 // Final sanity check: don't hash the password if the HMAC key initialization function wouldn't have done it for us.
                 if (
                     cbPassword <= prfAlgorithmHandle.GetHashBlockLength() /* in bytes */
-                ) {
+                )
+                {
                     return pbkdf2AlgHandle.GenerateSymmetricKey(pbPassword, cbPassword);
                 }
 
@@ -210,7 +216,8 @@ namespace Microsoft.AspNetCore.Cryptography.KeyDerivation.PBKDF2
             ulong iterCount,
             byte* pbDerivedBytes,
             uint cbDerivedBytes
-        ) {
+        )
+        {
             // First, build the buffers necessary to pass (hash alg, salt, iter count) into the KDF
             BCryptBuffer* pBuffers = stackalloc BCryptBuffer[3];
 

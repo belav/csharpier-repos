@@ -29,7 +29,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             public SymbolAndDiagnostics(
                 Symbol symbol,
                 ImmutableBindingDiagnostic<AssemblySymbol> diagnostics
-            ) {
+            )
+            {
                 this.Symbol = symbol;
                 this.Diagnostics = diagnostics;
             }

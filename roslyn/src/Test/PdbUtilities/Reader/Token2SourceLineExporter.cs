@@ -52,7 +52,8 @@ namespace Roslyn.Test.PdbUtilities
                 uint column,
                 uint endLine,
                 uint endColumn
-            ) {
+            )
+            {
                 this.token = token;
                 this.file_id = file_id;
                 this.line = line;
@@ -666,7 +667,8 @@ namespace Roslyn.Test.PdbUtilities
                     if (
                         ((_buckets[bucketNumber].hash_coll & 0x7FFFFFFF) == hashcode)
                         && key == _buckets[bucketNumber].key
-                    ) {
+                    )
+                    {
                         if (add)
                         {
                             throw new ArgumentException(
@@ -1401,7 +1403,8 @@ namespace Roslyn.Test.PdbUtilities
             Dictionary<string, int> nameIndex,
             PdbReader reader,
             Dictionary<uint, PdbTokenLine> tokenToSourceMapping
-        ) {
+        )
+        {
             bits.Position = 0;
             bits.ReadInt32(out var sig);
             if (sig != 4)
@@ -1512,7 +1515,8 @@ namespace Roslyn.Test.PdbUtilities
             MsfDirectory dir,
             Dictionary<string, int> nameIndex,
             PdbReader reader
-        ) {
+        )
+        {
             IntHashTable checks = new IntHashTable();
 
             int begin = bits.Position;
@@ -1606,7 +1610,8 @@ namespace Roslyn.Test.PdbUtilities
             out DbiModuleInfo[] modules,
             out DbiDbgHdr header,
             bool readStrings
-        ) {
+        )
+        {
             DbiHeader dh = new DbiHeader(bits);
             header = new DbiDbgHdr();
 

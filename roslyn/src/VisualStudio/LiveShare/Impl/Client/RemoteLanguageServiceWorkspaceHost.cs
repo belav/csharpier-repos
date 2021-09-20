@@ -65,7 +65,8 @@ namespace Microsoft.VisualStudio.LanguageServices.LiveShare.Client
             RemoteProjectInfoProvider remoteProjectInfoProvider,
             SVsServiceProvider serviceProvider,
             IThreadingContext threadingContext
-        ) {
+        )
+        {
             _remoteLanguageServiceWorkspace = Requires.NotNull(
                 remoteLanguageServiceWorkspace,
                 nameof(remoteLanguageServiceWorkspace)
@@ -82,7 +83,8 @@ namespace Microsoft.VisualStudio.LanguageServices.LiveShare.Client
         public async Task<ICollaborationService> CreateServiceAsync(
             CollaborationSession collaborationSession,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             await LoadRoslynPackageAsync(cancellationToken).ConfigureAwait(false);
 
             await _remoteLanguageServiceWorkspace.SetSessionAsync(collaborationSession)
@@ -116,7 +118,8 @@ namespace Microsoft.VisualStudio.LanguageServices.LiveShare.Client
                         _projectsLoadedTaskCompletionSource.SetCanceled();
                     }
                 )
-            ) {
+            )
+            {
                 await _projectsLoadedTaskCompletionSource.Task.ConfigureAwait(false);
             }
         }

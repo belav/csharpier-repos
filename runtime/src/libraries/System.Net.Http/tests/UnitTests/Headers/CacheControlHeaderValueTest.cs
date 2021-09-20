@@ -743,7 +743,8 @@ namespace System.Net.Http.Tests
             CacheControlHeaderValue x,
             CacheControlHeaderValue y,
             bool areEqual
-        ) {
+        )
+        {
             if (areEqual)
             {
                 Assert.Equal(x.GetHashCode(), y.GetHashCode());
@@ -758,7 +759,8 @@ namespace System.Net.Http.Tests
             CacheControlHeaderValue x,
             CacheControlHeaderValue y,
             bool areEqual
-        ) {
+        )
+        {
             Assert.Equal(areEqual, x.Equals(y));
             Assert.Equal(areEqual, y.Equals(x));
         }
@@ -769,7 +771,8 @@ namespace System.Net.Http.Tests
             CacheControlHeaderValue storeValue,
             int expectedLength,
             CacheControlHeaderValue expectedResult
-        ) {
+        )
+        {
             CacheControlHeaderValue result = null;
             Assert.Equal(
                 expectedLength,

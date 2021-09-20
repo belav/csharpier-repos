@@ -27,7 +27,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
             string source,
             CSharpCompilationOptions options = null,
             MetadataReference[] references = null
-        ) {
+        )
+        {
             return CreateCompilation(
                 source,
                 options: options,
@@ -39,7 +40,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
             string source,
             CSharpCompilationOptions options = null,
             MetadataReference[] references = null
-        ) {
+        )
+        {
             Debug.Assert(
                 TestOptions.Regular.LanguageVersion
                     >= MessageID.IDS_FeatureImprovedOverloadCandidates.RequiredVersion()

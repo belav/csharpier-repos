@@ -113,7 +113,8 @@ namespace System.Reflection.Context.Projection
             string name,
             MemberTypes type,
             BindingFlags bindingAttr
-        ) {
+        )
+        {
             StringComparison comparisonType =
                 (bindingAttr & BindingFlags.IgnoreCase) == BindingFlags.IgnoreCase
                     ? StringComparison.OrdinalIgnoreCase
@@ -194,7 +195,8 @@ namespace System.Reflection.Context.Projection
             CallingConventions callConvention,
             Type[] types,
             ParameterModifier[] modifiers
-        ) {
+        )
+        {
             types = _projector.Unproject(types);
 
             return _projector.ProjectConstructor(
@@ -290,7 +292,8 @@ namespace System.Reflection.Context.Projection
             CallingConventions callConvention,
             Type[] types,
             ParameterModifier[] modifiers
-        ) {
+        )
+        {
             types = _projector.Unproject(types);
 
             return _projector.ProjectMethod(
@@ -325,7 +328,8 @@ namespace System.Reflection.Context.Projection
             Type returnType,
             Type[] types,
             ParameterModifier[] modifiers
-        ) {
+        )
+        {
             returnType = _projector.Unproject(returnType);
             types = _projector.Unproject(types);
 

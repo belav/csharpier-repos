@@ -155,7 +155,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols.Retargeting
 
         internal override IEnumerable<CSharpAttributeData> GetCustomAttributesToEmit(
             PEModuleBuilder moduleBuilder
-        ) {
+        )
+        {
             return this.RetargetingTranslator.RetargetAttributes(
                 _underlyingEvent.GetCustomAttributesToEmit(moduleBuilder)
             );

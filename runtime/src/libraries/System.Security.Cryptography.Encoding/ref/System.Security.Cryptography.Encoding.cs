@@ -124,7 +124,8 @@ namespace System.Security.Cryptography
             int inputCount,
             byte[] outputBuffer,
             int outputOffset
-        ) {
+        )
+        {
             throw null;
         }
         public byte[] TransformFinalBlock(byte[] inputBuffer, int inputOffset, int inputCount)
@@ -156,13 +157,15 @@ namespace System.Security.Cryptography
         public static System.Security.Cryptography.Oid FromFriendlyName(
             string friendlyName,
             System.Security.Cryptography.OidGroup group
-        ) {
+        )
+        {
             throw null;
         }
         public static System.Security.Cryptography.Oid FromOidValue(
             string oidValue,
             System.Security.Cryptography.OidGroup group
-        ) {
+        )
+        {
             throw null;
         }
     }
@@ -250,7 +253,8 @@ namespace System.Security.Cryptography
         public static bool TryFind(
             System.ReadOnlySpan<char> pemData,
             out System.Security.Cryptography.PemFields fields
-        ) {
+        )
+        {
             throw null;
         }
         public static bool TryWrite(
@@ -258,7 +262,8 @@ namespace System.Security.Cryptography
             System.ReadOnlySpan<byte> data,
             System.Span<char> destination,
             out int charsWritten
-        ) {
+        )
+        {
             throw null;
         }
         public static char[] Write(System.ReadOnlySpan<char> label, System.ReadOnlySpan<byte> data)
@@ -318,7 +323,8 @@ namespace System.Security.Cryptography
             int inputCount,
             byte[] outputBuffer,
             int outputOffset
-        ) {
+        )
+        {
             throw null;
         }
         public byte[] TransformFinalBlock(byte[] inputBuffer, int inputOffset, int inputCount)

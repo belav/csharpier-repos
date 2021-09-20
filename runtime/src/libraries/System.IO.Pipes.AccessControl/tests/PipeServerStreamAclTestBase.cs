@@ -64,7 +64,8 @@ namespace System.IO.Pipes.Tests
             WellKnownSidType sid,
             PipeAccessRights rights,
             AccessControlType accessControl
-        ) {
+        )
+        {
             var security = new PipeSecurity();
             SecurityIdentifier identity = new SecurityIdentifier(sid, null);
             var accessRule = new PipeAccessRule(identity, rights, accessControl);
@@ -75,7 +76,8 @@ namespace System.IO.Pipes.Tests
         protected void VerifyPipeSecurity(
             PipeSecurity expectedSecurity,
             PipeSecurity actualSecurity
-        ) {
+        )
+        {
             Assert.Equal(typeof(PipeAccessRights), expectedSecurity.AccessRightType);
             Assert.Equal(typeof(PipeAccessRights), actualSecurity.AccessRightType);
 

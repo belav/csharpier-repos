@@ -580,7 +580,8 @@ namespace System.ComponentModel.Composition
                     Source = ImportSource.NonLocal
                 )]
                     ClassXXXX xxxx
-            ) {
+            )
+            {
                 this.xxxx = xxxx;
             }
 

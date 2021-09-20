@@ -32,7 +32,8 @@ namespace System.ComponentModel
                 string typeName,
             [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicConstructors)]
                 string? baseTypeName
-        ) {
+        )
+        {
             EditorTypeName = typeName ?? throw new ArgumentNullException(nameof(typeName));
             EditorBaseTypeName = baseTypeName;
         }
@@ -45,7 +46,8 @@ namespace System.ComponentModel
                 string typeName,
             [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicConstructors)]
                 Type baseType
-        ) {
+        )
+        {
             if (typeName == null)
             {
                 throw new ArgumentNullException(nameof(typeName));
@@ -67,7 +69,8 @@ namespace System.ComponentModel
                 Type type,
             [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicConstructors)]
                 Type baseType
-        ) {
+        )
+        {
             if (type == null)
             {
                 throw new ArgumentNullException(nameof(type));

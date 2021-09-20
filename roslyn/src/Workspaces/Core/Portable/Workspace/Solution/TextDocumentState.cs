@@ -51,7 +51,8 @@ namespace Microsoft.CodeAnalysis
             DocumentInfo.DocumentAttributes attributes,
             SourceText? sourceText,
             ValueSource<TextAndVersion> textAndVersionSource
-        ) {
+        )
+        {
             this.solutionServices = solutionServices;
             this.sourceText = sourceText;
             this.TextAndVersionSource = textAndVersionSource;
@@ -99,7 +100,8 @@ namespace Microsoft.CodeAnalysis
             TextLoader loader,
             DocumentId documentId,
             SolutionServices services
-        ) {
+        )
+        {
             return new AsyncLazy<TextAndVersion>(
                 asynchronousComputeFunction: cancellationToken =>
                     loader.LoadTextAsync(services.Workspace, documentId, cancellationToken),
@@ -112,7 +114,8 @@ namespace Microsoft.CodeAnalysis
         protected static ValueSource<TextAndVersion> CreateRecoverableText(
             TextAndVersion text,
             SolutionServices services
-        ) {
+        )
+        {
             var result = new RecoverableTextAndVersion(
                 CreateStrongText(text),
                 services.TemporaryStorage
@@ -133,7 +136,8 @@ namespace Microsoft.CodeAnalysis
             TextLoader loader,
             DocumentId documentId,
             SolutionServices services
-        ) {
+        )
+        {
             return new RecoverableTextAndVersion(
                 new AsyncLazy<TextAndVersion>(
                     asynchronousComputeFunction: cancellationToken =>
@@ -282,7 +286,8 @@ namespace Microsoft.CodeAnalysis
             ValueSource<TextAndVersion> newTextSource,
             PreservationMode mode,
             bool incremental
-        ) {
+        )
+        {
             return new TextDocumentState(
                 this.solutionServices,
                 this.Services,
@@ -294,7 +299,8 @@ namespace Microsoft.CodeAnalysis
 
         private async Task<TextAndVersion> GetTextAndVersionAsync(
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             if (this.TextAndVersionSource.TryGetValue(out var textAndVersion))
             {
                 return textAndVersion;
@@ -322,7 +328,8 @@ namespace Microsoft.CodeAnalysis
 
         public virtual async Task<VersionStamp> GetTopLevelChangeTextVersionAsync(
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var textAndVersion = await this.TextAndVersionSource.GetValueAsync(cancellationToken)
                 .ConfigureAwait(false);
             return textAndVersion.Version;

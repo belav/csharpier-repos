@@ -54,7 +54,8 @@ namespace Microsoft.AspNetCore.SignalR
             ILogger logger,
             string hubMethod,
             Exception exception
-        ) {
+        )
+        {
             _errorDispatchingHubEvent(logger, hubMethod, exception);
         }
 

@@ -182,7 +182,8 @@ namespace System.ComponentModel.EventBasedAsync.Tests
             public TestAsyncOperation(
                 Action<TestAsyncOperation> executeDelegate,
                 ManualResetEventSlim cancelEvent = null
-            ) {
+            )
+            {
                 // Create an async operation passing an object as the state so we can
                 // verify that state is passed properly.
                 _operationId = new object();

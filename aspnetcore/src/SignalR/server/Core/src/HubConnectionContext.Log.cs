@@ -117,7 +117,8 @@ namespace Microsoft.AspNetCore.SignalR
                 ILogger logger,
                 string protocolName,
                 int version
-            ) {
+            )
+            {
                 _protocolVersionFailed(logger, protocolName, version, null);
             }
 

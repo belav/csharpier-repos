@@ -29,7 +29,8 @@ namespace SourceGenerators.Tests
         public static Project CreateTestProject(
             IEnumerable<Assembly>? references,
             bool includeBaseReferences = true
-        ) {
+        )
+        {
             string corelib = Assembly.GetAssembly(typeof(object))!.Location;
             string runtimeDir = Path.GetDirectoryName(corelib)!;
 
@@ -92,7 +93,8 @@ namespace SourceGenerators.Tests
             this Project project,
             IEnumerable<string> sources,
             IEnumerable<string>? sourceNames = null
-        ) {
+        )
+        {
             int count = 0;
             Project result = project;
             if (sourceNames != null)
@@ -162,7 +164,8 @@ namespace SourceGenerators.Tests
             AnalyzerConfigOptionsProvider? optionsProvider = null,
             bool includeBaseReferences = true,
             CancellationToken cancellationToken = default
-        ) {
+        )
+        {
             Project proj = CreateTestProject(references, includeBaseReferences);
 
             proj = proj.WithDocuments(sources);
@@ -189,7 +192,8 @@ namespace SourceGenerators.Tests
             DiagnosticAnalyzer analyzer,
             IEnumerable<Assembly> references,
             IEnumerable<string> sources
-        ) {
+        )
+        {
             Project proj = CreateTestProject(references);
 
             proj = proj.WithDocuments(sources);
@@ -215,7 +219,8 @@ namespace SourceGenerators.Tests
             IEnumerable<string>? sourceNames = null,
             string? defaultNamespace = null,
             string? extraFile = null
-        ) {
+        )
+        {
             Project proj = CreateTestProject(references);
 
             int count = sources.Count();

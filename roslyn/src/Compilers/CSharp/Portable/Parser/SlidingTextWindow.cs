@@ -369,7 +369,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Syntax.InternalSyntax
         public char NextCharOrUnicodeEscape(
             out char surrogateCharacter,
             out SyntaxDiagnosticInfo info
-        ) {
+        )
+        {
             var ch = this.PeekChar();
             Debug.Assert(
                 ch != InvalidCharacter,
@@ -407,7 +408,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Syntax.InternalSyntax
             bool peek,
             out char surrogateCharacter,
             out SyntaxDiagnosticInfo info
-        ) {
+        )
+        {
             surrogateCharacter = InvalidCharacter;
             info = null;
 
@@ -703,7 +705,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Syntax.InternalSyntax
                         _characterWindow[offset] == '/'
                         && _characterWindow[offset + 1] == '/'
                         && _characterWindow[offset + 2] == ' '
-                    ) {
+                    )
+                    {
                         return "// ";
                     }
                     break;

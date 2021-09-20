@@ -2511,7 +2511,8 @@ D.M"
         private static CSharpCompilation CreateCompilationWithMscorlibAndReference(
             string libSource,
             string exeSource
-        ) {
+        )
+        {
             var libComp = CreateCompilation(
                 libSource,
                 options: TestOptions.ReleaseDll,

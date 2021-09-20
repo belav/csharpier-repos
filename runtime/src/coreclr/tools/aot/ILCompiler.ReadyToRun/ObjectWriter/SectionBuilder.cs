@@ -151,7 +151,8 @@ namespace ILCompiler.PEWriter
             string name,
             SectionCharacteristics characteristics,
             int alignment
-        ) {
+        )
+        {
             Index = index;
             Name = name;
             Characteristics = characteristics;
@@ -444,7 +445,8 @@ namespace ILCompiler.PEWriter
             int sectionIndex,
             string name,
             OutputInfoBuilder outputInfoBuilder
-        ) {
+        )
+        {
             Section section = _sections[sectionIndex];
 
             // Calculate alignment padding - apparently ObjectDataBuilder can produce an alignment of 0
@@ -541,7 +543,8 @@ namespace ILCompiler.PEWriter
             ISymbolNode symbol,
             ISymbolNode firstNode,
             ISymbolNode secondNode
-        ) {
+        )
+        {
             SymbolTarget firstSymbolTarget = _symbolMap[firstNode];
             SymbolTarget secondSymbolTarget = _symbolMap[secondNode];
             Debug.Assert(firstSymbolTarget.SectionIndex == secondSymbolTarget.SectionIndex);
@@ -690,7 +693,8 @@ namespace ILCompiler.PEWriter
                         int relocIndex = 0;
                         relocIndex < placedObjectData.Relocs.Length;
                         relocIndex++
-                    ) {
+                    )
+                    {
                         RelocType relocType = placedObjectData.Relocs[relocIndex].RelocType;
                         RelocType fileRelocType = Relocation.GetFileRelocationType(relocType);
                         if (fileRelocType != RelocType.IMAGE_REL_BASED_ABSOLUTE)
@@ -702,7 +706,8 @@ namespace ILCompiler.PEWriter
                             if (
                                 offsetsAndTypes != null
                                 && relocationRVA - baseRVA > MaxRelativeOffsetInBlock
-                            ) {
+                            )
+                            {
                                 // Need to flush relocation block as the current RVA is too far from base RVA
                                 FlushRelocationBlock(builder, baseRVA, offsetsAndTypes);
                                 offsetsAndTypes = null;
@@ -749,7 +754,8 @@ namespace ILCompiler.PEWriter
             BlobBuilder builder,
             int baseRVA,
             List<ushort> offsetsAndTypes
-        ) {
+        )
+        {
             // First, emit the block header: 4 bytes starting RVA,
             builder.WriteInt32(baseRVA);
             // followed by the total block size comprising this header
@@ -955,7 +961,8 @@ namespace ILCompiler.PEWriter
             BlobBuilder peFile,
             ulong defaultImageBase,
             Stream outputStream
-        ) {
+        )
+        {
             RelocationHelper relocationHelper = new RelocationHelper(
                 outputStream,
                 defaultImageBase,

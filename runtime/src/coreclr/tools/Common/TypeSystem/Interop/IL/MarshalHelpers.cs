@@ -19,7 +19,8 @@ namespace Internal.TypeSystem.Interop
 #endif
             MarshalAsDescriptor marshalAs,
             bool isArrayElement = false
-        ) {
+        )
+        {
             TypeSystemContext context = type.Context;
             NativeTypeKind nativeType = NativeTypeKind.Default;
             if (marshalAs != null)
@@ -181,7 +182,8 @@ namespace Internal.TypeSystem.Interop
         private static bool HasCopyConstructorCustomModifier(
             int? parameterIndex,
             EmbeddedSignatureData[] customModifierData
-        ) {
+        )
+        {
             if (!parameterIndex.HasValue || customModifierData == null)
                 return false;
 
@@ -210,7 +212,8 @@ namespace Internal.TypeSystem.Interop
                         customModifierType.Namespace == "Microsoft.VisualC"
                         && customModifierType.Name == "NeedsCopyConstructorModifier"
                     )
-                ) {
+                )
+                {
                     return true;
                 }
             }
@@ -227,7 +230,8 @@ namespace Internal.TypeSystem.Interop
             bool isAnsi,
             MarshallerType marshallerType,
             out MarshallerKind elementMarshallerKind
-        ) {
+        )
+        {
             elementMarshallerKind = MarshallerKind.Invalid;
 
             bool isByRef = false;
@@ -242,7 +246,8 @@ namespace Internal.TypeSystem.Interop
                     && type.IsValueType
                     && marshallerType != MarshallerType.Field
                     && HasCopyConstructorCustomModifier(parameterIndex, customModifierData)
-                ) {
+                )
+                {
                     return MarshallerKind.BlittableValueClassWithCopyCtor;
                 }
 
@@ -441,7 +446,8 @@ namespace Internal.TypeSystem.Interop
                         || InteropTypes.IsSystemRuntimeIntrinsicsVector256T(context, type)
                         || InteropTypes.IsSystemNumericsVectorT(context, type)
                     )
-                ) {
+                )
+                {
                     // Generic types cannot be marshaled.
                     return MarshallerKind.Invalid;
                 }
@@ -542,7 +548,8 @@ namespace Internal.TypeSystem.Interop
                         && !type.IsEnum
                         && marshallerType != MarshallerType.Field
                         && HasCopyConstructorCustomModifier(parameterIndex, customModifierData)
-                    ) {
+                    )
+                    {
                         return MarshallerKind.BlittableValueClassWithCopyCtor;
                     }
                     return MarshallerKind.BlittableValue;
@@ -685,7 +692,8 @@ namespace Internal.TypeSystem.Interop
             ArrayType arrayType,
             MarshalAsDescriptor marshalAs,
             bool isAnsi
-        ) {
+        )
+        {
             TypeDesc elementType = arrayType.ElementType;
             NativeTypeKind nativeType = NativeTypeKind.Default;
             TypeSystemContext context = arrayType.Context;

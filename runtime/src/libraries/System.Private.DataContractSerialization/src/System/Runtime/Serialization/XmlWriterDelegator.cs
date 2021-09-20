@@ -117,7 +117,8 @@ namespace System.Runtime.Serialization
             string prefix,
             XmlDictionaryString localName,
             XmlDictionaryString namespaceUri
-        ) {
+        )
+        {
             if (dictionaryWriter != null)
                 dictionaryWriter.WriteStartAttribute(prefix, localName, namespaceUri);
             else
@@ -133,7 +134,8 @@ namespace System.Runtime.Serialization
             string localName,
             string? ns,
             string value
-        ) {
+        )
+        {
             WriteStartAttribute(prefix, localName, ns);
             WriteAttributeStringValue(value);
             WriteEndAttribute();
@@ -144,7 +146,8 @@ namespace System.Runtime.Serialization
             XmlDictionaryString attrName,
             XmlDictionaryString attrNs,
             string value
-        ) {
+        )
+        {
             WriteStartAttribute(prefix, attrName, attrNs);
             WriteAttributeStringValue(value);
             WriteEndAttribute();
@@ -160,7 +163,8 @@ namespace System.Runtime.Serialization
             XmlDictionaryString attrName,
             XmlDictionaryString attrNs,
             XmlDictionaryString value
-        ) {
+        )
+        {
             WriteStartAttribute(prefix, attrName, attrNs);
             WriteAttributeStringValue(value);
             WriteEndAttribute();
@@ -179,7 +183,8 @@ namespace System.Runtime.Serialization
             XmlDictionaryString attrName,
             XmlDictionaryString attrNs,
             int value
-        ) {
+        )
+        {
             WriteStartAttribute(prefix, attrName, attrNs);
             WriteAttributeIntValue(value);
             WriteEndAttribute();
@@ -195,7 +200,8 @@ namespace System.Runtime.Serialization
             XmlDictionaryString attrName,
             XmlDictionaryString attrNs,
             bool value
-        ) {
+        )
+        {
             WriteStartAttribute(prefix, attrName, attrNs);
             WriteAttributeBoolValue(value);
             WriteEndAttribute();
@@ -212,7 +218,8 @@ namespace System.Runtime.Serialization
             XmlDictionaryString attrNs,
             string name,
             string? ns
-        ) {
+        )
+        {
             WriteXmlnsAttribute(ns);
             WriteStartAttribute(attrPrefix, attrName, attrNs);
             WriteAttributeQualifiedNameValue(name, ns);
@@ -230,7 +237,8 @@ namespace System.Runtime.Serialization
             XmlDictionaryString attrNs,
             XmlDictionaryString name,
             XmlDictionaryString ns
-        ) {
+        )
+        {
             WriteXmlnsAttribute(ns);
             WriteStartAttribute(attrPrefix, attrName, attrNs);
             WriteAttributeQualifiedNameValue(name, ns);
@@ -240,7 +248,8 @@ namespace System.Runtime.Serialization
         private void WriteAttributeQualifiedNameValue(
             XmlDictionaryString name,
             XmlDictionaryString ns
-        ) {
+        )
+        {
             if (dictionaryWriter == null)
                 writer.WriteQualifiedName(name.Value, ns.Value);
             else
@@ -262,7 +271,8 @@ namespace System.Runtime.Serialization
         internal void WriteStartElement(
             XmlDictionaryString localName,
             XmlDictionaryString? namespaceUri
-        ) {
+        )
+        {
             WriteStartElement(null, localName, namespaceUri);
         }
 
@@ -270,7 +280,8 @@ namespace System.Runtime.Serialization
             string? prefix,
             XmlDictionaryString localName,
             XmlDictionaryString? namespaceUri
-        ) {
+        )
+        {
             if (dictionaryWriter != null)
                 dictionaryWriter.WriteStartElement(prefix, localName, namespaceUri);
             else
@@ -286,7 +297,8 @@ namespace System.Runtime.Serialization
         internal void WriteStartElementPrimitive(
             XmlDictionaryString localName,
             XmlDictionaryString? namespaceUri
-        ) {
+        )
+        {
             if (dictionaryWriter != null)
                 dictionaryWriter.WriteStartElement(null, localName, namespaceUri);
             else
@@ -523,7 +535,8 @@ namespace System.Runtime.Serialization
             DateTime value,
             XmlDictionaryString name,
             XmlDictionaryString? ns
-        ) {
+        )
+        {
             WriteStartElementPrimitive(name, ns);
             WriteDateTime(value);
             WriteEndElementPrimitive();
@@ -617,7 +630,8 @@ namespace System.Runtime.Serialization
             byte value,
             XmlDictionaryString name,
             XmlDictionaryString? ns
-        ) {
+        )
+        {
             WriteStartElementPrimitive(name, ns);
             WriteUnsignedByte(value);
             WriteEndElementPrimitive();
@@ -632,7 +646,8 @@ namespace System.Runtime.Serialization
             sbyte value,
             XmlDictionaryString name,
             XmlDictionaryString? ns
-        ) {
+        )
+        {
             WriteStartElementPrimitive(name, ns);
             WriteSignedByte(value);
             WriteEndElementPrimitive();
@@ -647,7 +662,8 @@ namespace System.Runtime.Serialization
             uint value,
             XmlDictionaryString name,
             XmlDictionaryString? ns
-        ) {
+        )
+        {
             WriteStartElementPrimitive(name, ns);
             WriteUnsignedInt(value);
             WriteEndElementPrimitive();
@@ -661,7 +677,8 @@ namespace System.Runtime.Serialization
             ulong value,
             XmlDictionaryString name,
             XmlDictionaryString? ns
-        ) {
+        )
+        {
             WriteStartElementPrimitive(name, ns);
             WriteUnsignedLong(value);
             WriteEndElementPrimitive();
@@ -676,7 +693,8 @@ namespace System.Runtime.Serialization
             ushort value,
             XmlDictionaryString name,
             XmlDictionaryString? ns
-        ) {
+        )
+        {
             WriteStartElementPrimitive(name, ns);
             WriteUnsignedShort(value);
             WriteEndElementPrimitive();
@@ -710,7 +728,8 @@ namespace System.Runtime.Serialization
             TimeSpan value,
             XmlDictionaryString name,
             XmlDictionaryString? ns
-        ) {
+        )
+        {
             WriteStartElementPrimitive(name, ns);
             WriteTimeSpan(value);
             WriteEndElementPrimitive();
@@ -768,7 +787,8 @@ namespace System.Runtime.Serialization
             bool[] value,
             XmlDictionaryString itemName,
             XmlDictionaryString itemNamespace
-        ) {
+        )
+        {
             if (dictionaryWriter == null)
             {
                 for (int i = 0; i < value.Length; i++)
@@ -786,7 +806,8 @@ namespace System.Runtime.Serialization
             DateTime[] value,
             XmlDictionaryString itemName,
             XmlDictionaryString itemNamespace
-        ) {
+        )
+        {
             if (dictionaryWriter == null)
             {
                 for (int i = 0; i < value.Length; i++)
@@ -804,7 +825,8 @@ namespace System.Runtime.Serialization
             decimal[] value,
             XmlDictionaryString itemName,
             XmlDictionaryString itemNamespace
-        ) {
+        )
+        {
             if (dictionaryWriter == null)
             {
                 for (int i = 0; i < value.Length; i++)
@@ -822,7 +844,8 @@ namespace System.Runtime.Serialization
             int[] value,
             XmlDictionaryString itemName,
             XmlDictionaryString itemNamespace
-        ) {
+        )
+        {
             if (dictionaryWriter == null)
             {
                 for (int i = 0; i < value.Length; i++)
@@ -840,7 +863,8 @@ namespace System.Runtime.Serialization
             long[] value,
             XmlDictionaryString itemName,
             XmlDictionaryString itemNamespace
-        ) {
+        )
+        {
             if (dictionaryWriter == null)
             {
                 for (int i = 0; i < value.Length; i++)
@@ -858,7 +882,8 @@ namespace System.Runtime.Serialization
             float[] value,
             XmlDictionaryString itemName,
             XmlDictionaryString itemNamespace
-        ) {
+        )
+        {
             if (dictionaryWriter == null)
             {
                 for (int i = 0; i < value.Length; i++)
@@ -876,7 +901,8 @@ namespace System.Runtime.Serialization
             double[] value,
             XmlDictionaryString itemName,
             XmlDictionaryString itemNamespace
-        ) {
+        )
+        {
             if (dictionaryWriter == null)
             {
                 for (int i = 0; i < value.Length; i++)

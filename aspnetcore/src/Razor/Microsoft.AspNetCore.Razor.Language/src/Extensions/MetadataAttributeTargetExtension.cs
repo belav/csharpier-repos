@@ -20,7 +20,8 @@ namespace Microsoft.AspNetCore.Razor.Language.Extensions
         public void WriteRazorCompiledItemAttribute(
             CodeRenderingContext context,
             RazorCompiledItemAttributeIntermediateNode node
-        ) {
+        )
+        {
             if (context == null)
             {
                 throw new ArgumentNullException(nameof(context));
@@ -46,7 +47,8 @@ namespace Microsoft.AspNetCore.Razor.Language.Extensions
         public void WriteRazorCompiledItemMetadataAttribute(
             CodeRenderingContext context,
             RazorCompiledItemMetadataAttributeIntermediateNode node
-        ) {
+        )
+        {
             if (context == null)
             {
                 throw new ArgumentNullException(nameof(context));
@@ -70,7 +72,8 @@ namespace Microsoft.AspNetCore.Razor.Language.Extensions
         public void WriteRazorSourceChecksumAttribute(
             CodeRenderingContext context,
             RazorSourceChecksumAttributeIntermediateNode node
-        ) {
+        )
+        {
             if (context == null)
             {
                 throw new ArgumentNullException(nameof(context));

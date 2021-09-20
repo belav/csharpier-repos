@@ -57,7 +57,8 @@ namespace Microsoft.AspNetCore.SignalR.Crankier
             string targetAddress,
             HttpTransportType transportType,
             int numberOfConnections
-        ) {
+        )
+        {
             Log(
                 "Worker received connect command with target address {0} and number of connections {1}",
                 targetAddress,

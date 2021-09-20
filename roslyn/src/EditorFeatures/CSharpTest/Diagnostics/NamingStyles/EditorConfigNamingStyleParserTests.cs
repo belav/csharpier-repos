@@ -473,7 +473,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Diagnostics.NamingStyle
         public static void TestApplicableKindsParse(
             string specification,
             object[] typeOrSymbolKinds
-        ) {
+        )
+        {
             var rule = new Dictionary<string, string>()
             {
                 ["dotnet_naming_rule.kinds_parse.severity"] = "error",
@@ -543,7 +544,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Diagnostics.NamingStyle
         public static void TestApplicableAccessibilitiesParse(
             string specification,
             Accessibility[] accessibilities
-        ) {
+        )
+        {
             var rule = new Dictionary<string, string>()
             {
                 ["dotnet_naming_rule.accessibilities_parse.severity"] = "error",

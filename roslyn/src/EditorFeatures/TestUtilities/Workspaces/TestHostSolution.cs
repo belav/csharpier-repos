@@ -24,14 +24,15 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Workspaces
             CompilationOptions compilationOptions,
             ParseOptions parseOptions,
             params MetadataReference[] references
-        ) : this(
-            new TestHostProject(
-                languageServiceProvider,
-                compilationOptions,
-                parseOptions,
-                references
-            )
-        ) { }
+        )
+            : this(
+                new TestHostProject(
+                    languageServiceProvider,
+                    compilationOptions,
+                    parseOptions,
+                    references
+                )
+            ) { }
 
         public TestHostSolution(params TestHostProject[] projects)
         {

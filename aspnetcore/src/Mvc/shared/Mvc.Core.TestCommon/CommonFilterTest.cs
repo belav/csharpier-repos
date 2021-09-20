@@ -246,7 +246,8 @@ namespace Microsoft.AspNetCore.Mvc.Filters
 
         private static ActionExecutedContext CreateActionExecutedContext(
             ActionExecutingContext context
-        ) {
+        )
+        {
             return new ActionExecutedContext(context, context.Filters, context.Controller)
             {
                 Result = context.Result,
@@ -265,7 +266,8 @@ namespace Microsoft.AspNetCore.Mvc.Filters
 
         private static ResultExecutedContext CreateResultExecutedContext(
             ResultExecutingContext context
-        ) {
+        )
+        {
             return new ResultExecutedContext(
                 context,
                 context.Filters,

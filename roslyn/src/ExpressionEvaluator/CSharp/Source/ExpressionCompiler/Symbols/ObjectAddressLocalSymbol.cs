@@ -37,7 +37,8 @@ namespace Microsoft.CodeAnalysis.CSharp.ExpressionEvaluator
             EENamedTypeSymbol container,
             SyntaxNode syntax,
             DiagnosticBag diagnostics
-        ) {
+        )
+        {
             var method = GetIntrinsicMethod(
                 compilation,
                 ExpressionCompilerConstants.GetObjectAtAddressMethodName

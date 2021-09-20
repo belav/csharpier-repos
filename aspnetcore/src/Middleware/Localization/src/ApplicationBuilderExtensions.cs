@@ -38,7 +38,8 @@ namespace Microsoft.AspNetCore.Builder
         public static IApplicationBuilder UseRequestLocalization(
             this IApplicationBuilder app,
             RequestLocalizationOptions options
-        ) {
+        )
+        {
             if (app == null)
             {
                 throw new ArgumentNullException(nameof(app));
@@ -65,7 +66,8 @@ namespace Microsoft.AspNetCore.Builder
         public static IApplicationBuilder UseRequestLocalization(
             this IApplicationBuilder app,
             Action<RequestLocalizationOptions> optionsAction
-        ) {
+        )
+        {
             if (app == null)
             {
                 throw new ArgumentNullException(nameof(app));
@@ -95,7 +97,8 @@ namespace Microsoft.AspNetCore.Builder
         public static IApplicationBuilder UseRequestLocalization(
             this IApplicationBuilder app,
             params string[] cultures
-        ) {
+        )
+        {
             if (app == null)
             {
                 throw new ArgumentNullException(nameof(app));

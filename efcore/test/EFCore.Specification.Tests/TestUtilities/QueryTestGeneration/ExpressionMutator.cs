@@ -96,7 +96,8 @@ namespace Microsoft.EntityFrameworkCore.TestUtilities.QueryTestGeneration
                         i =>
                             i.IsGenericType && i.GetGenericTypeDefinition() == typeof(ICollection<>)
                     )
-            ) {
+            )
+            {
                 properties = properties.Where(p => p.Name != "IsReadOnly").ToList();
             }
 
@@ -145,7 +146,8 @@ namespace Microsoft.EntityFrameworkCore.TestUtilities.QueryTestGeneration
             public ExpressionInjector(
                 Expression expressionToInject,
                 Func<Expression, Expression> injectionPattern
-            ) {
+            )
+            {
                 _expressionToInject = expressionToInject;
                 _injectionPattern = injectionPattern;
             }

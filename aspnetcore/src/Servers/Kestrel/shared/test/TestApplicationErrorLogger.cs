@@ -79,7 +79,8 @@ namespace Microsoft.AspNetCore.Testing
             TState state,
             Exception exception,
             Func<TState, Exception, string> formatter
-        ) {
+        )
+        {
             var exceptionIsIgnored = IgnoredExceptions.Contains(exception?.GetType());
 
             if (logLevel == LogLevel.Critical && ThrowOnCriticalErrors && !exceptionIsIgnored)
@@ -107,7 +108,8 @@ namespace Microsoft.AspNetCore.Testing
                         && eventId.Name == nameof(KestrelTrace.NotAllConnectionsAborted)
                     )
                 )
-            ) {
+            )
+            {
                 var log = $"Log {logLevel}[{eventId}]: {formatter(state, exception)} {exception}";
                 throw new Exception($"Shutdown failure. {log}");
             }

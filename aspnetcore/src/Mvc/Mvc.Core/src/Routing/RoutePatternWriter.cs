@@ -14,7 +14,8 @@ namespace Microsoft.AspNetCore.Mvc.Routing
         public static void WriteString(
             StringBuilder sb,
             IEnumerable<RoutePatternPathSegment> routeSegments
-        ) {
+        )
+        {
             foreach (var segment in routeSegments)
             {
                 if (sb.Length > 0)

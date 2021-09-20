@@ -34,7 +34,8 @@ namespace System.ComponentModel.Composition.Hosting
             IEnumerable<ComposablePartCatalog>? catalogs,
             Action<ComposablePartCatalogChangeEventArgs>? onChanged,
             Action<ComposablePartCatalogChangeEventArgs>? onChanging
-        ) {
+        )
+        {
             catalogs = catalogs ?? Enumerable.Empty<ComposablePartCatalog>();
             _catalogs = new List<ComposablePartCatalog>(catalogs);
             _onChanged = onChanged;
@@ -307,7 +308,8 @@ namespace System.ComponentModel.Composition.Hosting
         private void RaiseChangedEvent(
             Lazy<IEnumerable<ComposablePartDefinition>>? addedDefinitions,
             Lazy<IEnumerable<ComposablePartDefinition>>? removedDefinitions
-        ) {
+        )
+        {
             if (_onChanged == null || Changed == null)
             {
                 return;
@@ -340,7 +342,8 @@ namespace System.ComponentModel.Composition.Hosting
             Lazy<IEnumerable<ComposablePartDefinition>>? addedDefinitions,
             Lazy<IEnumerable<ComposablePartDefinition>>? removedDefinitions,
             AtomicComposition? atomicComposition
-        ) {
+        )
+        {
             if (_onChanging == null || Changing == null)
             {
                 return;
@@ -373,7 +376,8 @@ namespace System.ComponentModel.Composition.Hosting
         private void OnContainedCatalogChanged(
             object? sender,
             ComposablePartCatalogChangeEventArgs e
-        ) {
+        )
+        {
             if (_onChanged == null || Changed == null)
             {
                 return;
@@ -385,7 +389,8 @@ namespace System.ComponentModel.Composition.Hosting
         private void OnContainedCatalogChanging(
             object? sender,
             ComposablePartCatalogChangeEventArgs e
-        ) {
+        )
+        {
             if (_onChanging == null || Changing == null)
             {
                 return;
@@ -422,7 +427,8 @@ namespace System.ComponentModel.Composition.Hosting
 
         private void UnsubscribeFromCatalogNotifications(
             IEnumerable<ComposablePartCatalog> catalogs
-        ) {
+        )
+        {
             foreach (var catalog in catalogs)
             {
                 UnsubscribeFromCatalogNotifications(catalog);

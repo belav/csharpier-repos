@@ -396,7 +396,8 @@ namespace System.Security.Cryptography
             int plaintextLength,
             PaddingMode paddingMode = PaddingMode.None,
             int feedbackSizeInBits = 8
-        ) {
+        )
+        {
             if (plaintextLength < 0)
                 throw new ArgumentOutOfRangeException(
                     nameof(plaintextLength),

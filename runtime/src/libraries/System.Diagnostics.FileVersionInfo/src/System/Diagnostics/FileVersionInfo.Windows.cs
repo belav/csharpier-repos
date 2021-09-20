@@ -34,7 +34,8 @@ namespace System.Diagnostics
                             infoSize,
                             memIntPtr
                         )
-                    ) {
+                    )
+                    {
                         uint langid = GetVarEntry(memIntPtr);
                         if (!GetVersionInfoForCodePage(memIntPtr, ConvertTo8DigitHex(langid)))
                         {
@@ -48,7 +49,8 @@ namespace System.Diagnostics
                                 {
                                     if (
                                         GetVersionInfoForCodePage(memIntPtr, ConvertTo8DigitHex(id))
-                                    ) {
+                                    )
+                                    {
                                         break;
                                     }
                                 }
@@ -128,7 +130,8 @@ namespace System.Diagnostics
                     out memRef,
                     out memLen
                 )
-            ) {
+            )
+            {
                 return (uint)(
                     (Marshal.ReadInt16(memRef) << 16)
                     + Marshal.ReadInt16((IntPtr)((long)memRef + 2))

@@ -84,7 +84,8 @@ namespace System.Threading
         internal static bool NotifyWorkItemComplete(
             object? threadLocalCompletionCountObject,
             int currentTimeMs
-        ) {
+        )
+        {
             return true;
         }
 
@@ -97,7 +98,8 @@ namespace System.Threading
             uint millisecondsTimeOutInterval,
             bool executeOnlyOnce,
             bool flowExecutionContext
-        ) {
+        )
+        {
             throw new PlatformNotSupportedException();
         }
 

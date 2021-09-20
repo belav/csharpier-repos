@@ -66,7 +66,8 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation.DependencyResolution
             public TestApp CreateComponentWithNoDependencies(
                 Action<NetCoreAppBuilder> customizer = null,
                 string location = null
-            ) {
+            )
+            {
                 TestApp componentWithNoDependencies = CreateTestApp(
                     location,
                     "ComponentWithNoDependencies"
@@ -85,7 +86,8 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation.DependencyResolution
                 string version,
                 Action<NetCoreAppBuilder> customizer = null,
                 string location = null
-            ) {
+            )
+            {
                 TestApp testApp = CreateTestApp(location, name);
 
                 string hostFxrFileName =

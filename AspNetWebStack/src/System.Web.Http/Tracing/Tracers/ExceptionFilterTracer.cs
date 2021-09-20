@@ -34,7 +34,8 @@ namespace System.Web.Http.Tracing.Tracers
         public Task ExecuteExceptionFilterAsync(
             HttpActionExecutedContext actionExecutedContext,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             return TraceWriter.TraceBeginEndAsync(
                 actionExecutedContext.Request,
                 TraceCategories.FiltersCategory,

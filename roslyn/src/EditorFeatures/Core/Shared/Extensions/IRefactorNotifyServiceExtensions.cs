@@ -15,7 +15,8 @@ namespace Microsoft.CodeAnalysis.Editor.Shared.Extensions
             ISymbol symbol,
             string newName,
             bool throwOnFailure
-        ) {
+        )
+        {
             foreach (var refactorNotifyService in refactorNotifyServices)
             {
                 if (
@@ -26,7 +27,8 @@ namespace Microsoft.CodeAnalysis.Editor.Shared.Extensions
                         newName,
                         throwOnFailure
                     )
-                ) {
+                )
+                {
                     return false;
                 }
             }
@@ -41,7 +43,8 @@ namespace Microsoft.CodeAnalysis.Editor.Shared.Extensions
             ISymbol symbol,
             string newName,
             bool throwOnFailure
-        ) {
+        )
+        {
             foreach (var refactorNotifyService in refactorNotifyServices)
             {
                 if (
@@ -52,7 +55,8 @@ namespace Microsoft.CodeAnalysis.Editor.Shared.Extensions
                         newName,
                         throwOnFailure
                     )
-                ) {
+                )
+                {
                     return false;
                 }
             }

@@ -24,7 +24,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             if (
                 receiver is BoundFieldAccess fieldAccess
                 && fieldAccess.FieldSymbol.IsFixedSizeBuffer
-            ) {
+            )
+            {
                 var loweredFieldReceiver = VisitExpression(fieldAccess.ReceiverOpt);
                 fieldAccess = fieldAccess.Update(
                     loweredFieldReceiver,
@@ -48,7 +49,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             BoundPointerElementAccess node,
             BoundExpression rewrittenExpression,
             BoundExpression rewrittenIndex
-        ) {
+        )
+        {
             // Optimization: p[0] == *p
             if (rewrittenIndex.IsDefaultValue())
             {

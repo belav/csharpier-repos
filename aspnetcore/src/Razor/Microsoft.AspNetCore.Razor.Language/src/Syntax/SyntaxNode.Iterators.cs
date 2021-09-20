@@ -12,7 +12,8 @@ namespace Microsoft.AspNetCore.Razor.Language.Syntax
             TextSpan span,
             Func<SyntaxNode, bool> descendIntoChildren,
             bool includeSelf
-        ) {
+        )
+        {
             if (includeSelf && IsInSpan(in span, FullSpan))
             {
                 yield return this;
@@ -56,7 +57,8 @@ namespace Microsoft.AspNetCore.Razor.Language.Syntax
             public ChildSyntaxListEnumeratorStack(
                 SyntaxNode startingNode,
                 Func<SyntaxNode, bool> descendIntoChildren
-            ) {
+            )
+            {
                 if (descendIntoChildren == null || descendIntoChildren(startingNode))
                 {
                     _stack = StackPool.Allocate();

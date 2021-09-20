@@ -43,7 +43,8 @@ namespace Microsoft.EntityFrameworkCore.SqlServer.Query.Internal
             MethodInfo method,
             IReadOnlyList<SqlExpression> arguments,
             IDiagnosticsLogger<DbLoggerCategory.Query> logger
-        ) {
+        )
+        {
             Check.NotNull(method, nameof(method));
             Check.NotNull(arguments, nameof(arguments));
             Check.NotNull(logger, nameof(logger));
@@ -52,7 +53,8 @@ namespace Microsoft.EntityFrameworkCore.SqlServer.Query.Internal
                 method.IsGenericMethod
                 && method.GetGenericMethodDefinition().Equals(EnumerableMethods.Contains)
                 && arguments[0].Type == typeof(byte[])
-            ) {
+            )
+            {
                 var source = arguments[0];
                 var sourceTypeMapping = source.TypeMapping;
 
@@ -84,7 +86,8 @@ namespace Microsoft.EntityFrameworkCore.SqlServer.Query.Internal
                 && method.GetGenericMethodDefinition()
                     .Equals(EnumerableMethods.FirstWithoutPredicate)
                 && arguments[0].Type == typeof(byte[])
-            ) {
+            )
+            {
                 return _sqlExpressionFactory.Convert(
                     _sqlExpressionFactory.Function(
                         "SUBSTRING",

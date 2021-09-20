@@ -21,7 +21,8 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
         public static SyntaxNode CreateThrowNotImplementedStatement(
             this SyntaxGenerator codeDefinitionFactory,
             Compilation compilation
-        ) {
+        )
+        {
             return codeDefinitionFactory.ThrowStatement(
                 CreateNotImplementedException(codeDefinitionFactory, compilation)
             );
@@ -30,7 +31,8 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
         public static SyntaxNode CreateThrowNotImplementedExpression(
             this SyntaxGenerator codeDefinitionFactory,
             Compilation compilation
-        ) {
+        )
+        {
             return codeDefinitionFactory.ThrowExpression(
                 CreateNotImplementedException(codeDefinitionFactory, compilation)
             );
@@ -59,14 +61,16 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
         public static ImmutableArray<SyntaxNode> CreateArguments(
             this SyntaxGenerator factory,
             ImmutableArray<IParameterSymbol> parameters
-        ) {
+        )
+        {
             return parameters.SelectAsArray(p => CreateArgument(factory, p));
         }
 
         private static SyntaxNode CreateArgument(
             this SyntaxGenerator factory,
             IParameterSymbol parameter
-        ) {
+        )
+        {
             return factory.Argument(parameter.RefKind, factory.IdentifierName(parameter.Name));
         }
 
@@ -74,7 +78,8 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
             this SyntaxGenerator factory,
             Compilation compilation,
             ITypeSymbol type
-        ) {
+        )
+        {
             var equalityComparerType = compilation.EqualityComparerOfTType();
             var typeExpression =
                 equalityComparerType == null

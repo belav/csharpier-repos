@@ -29,10 +29,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Builders.Internal
         ///     any release. You should only use it directly in your code with extreme caution and knowing that
         ///     doing so can result in application failures when updating to a new Entity Framework Core release.
         /// </summary>
-        public InternalDbFunctionBuilder(
-            DbFunction function,
-            IConventionModelBuilder modelBuilder
-        ) : base(function, modelBuilder) { }
+        public InternalDbFunctionBuilder(DbFunction function, IConventionModelBuilder modelBuilder)
+            : base(function, modelBuilder) { }
 
         /// <summary>
         ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -43,7 +41,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Builders.Internal
         public virtual IConventionDbFunctionBuilder? HasName(
             string? name,
             ConfigurationSource configurationSource
-        ) {
+        )
+        {
             if (CanSetName(name, configurationSource))
             {
                 Metadata.SetName(name, configurationSource);
@@ -75,7 +74,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Builders.Internal
         public virtual IConventionDbFunctionBuilder? HasSchema(
             string? schema,
             ConfigurationSource configurationSource
-        ) {
+        )
+        {
             if (CanSetSchema(schema, configurationSource))
             {
                 Metadata.SetSchema(schema, configurationSource);
@@ -104,7 +104,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Builders.Internal
         public virtual IConventionDbFunctionBuilder? IsBuiltIn(
             bool builtIn,
             ConfigurationSource configurationSource
-        ) {
+        )
+        {
             if (CanSetIsBuiltIn(builtIn, configurationSource))
             {
                 Metadata.SetIsBuiltIn(builtIn, configurationSource);
@@ -136,7 +137,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Builders.Internal
         public virtual IConventionDbFunctionBuilder? IsNullable(
             bool nullable,
             ConfigurationSource configurationSource
-        ) {
+        )
+        {
             if (CanSetIsNullable(nullable, configurationSource))
             {
                 Metadata.SetIsNullable(nullable, configurationSource);
@@ -168,7 +170,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Builders.Internal
         public virtual IConventionDbFunctionBuilder? HasStoreType(
             string? storeType,
             ConfigurationSource configurationSource
-        ) {
+        )
+        {
             if (CanSetStoreType(storeType, configurationSource))
             {
                 Metadata.SetStoreType(storeType, configurationSource);
@@ -200,7 +203,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Builders.Internal
         public virtual IConventionDbFunctionBuilder? HasTypeMapping(
             RelationalTypeMapping? returnTypeMapping,
             ConfigurationSource configurationSource
-        ) {
+        )
+        {
             if (CanSetTypeMapping(returnTypeMapping, configurationSource))
             {
                 Metadata.SetTypeMapping(returnTypeMapping, configurationSource);
@@ -232,7 +236,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Builders.Internal
         public virtual IConventionDbFunctionBuilder? HasTranslation(
             Func<IReadOnlyList<SqlExpression>, SqlExpression>? translation,
             ConfigurationSource configurationSource
-        ) {
+        )
+        {
             if (CanSetTranslation(translation, configurationSource))
             {
                 Metadata.SetTranslation(translation, configurationSource);
@@ -270,7 +275,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Builders.Internal
         public virtual InternalDbFunctionParameterBuilder HasParameter(
             string name,
             ConfigurationSource configurationSource
-        ) {
+        )
+        {
             var parameter = Metadata.FindParameter(name);
             if (parameter == null)
             {

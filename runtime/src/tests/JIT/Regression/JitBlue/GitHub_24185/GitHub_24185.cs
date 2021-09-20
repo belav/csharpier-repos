@@ -30,7 +30,8 @@ namespace GitHub_24185
                         (((AggregateException)e).InnerExceptions[0] is ArgumentException)
                         || ((AggregateException)e).InnerExceptions[0] is AggregateException
                     )
-                ) {
+                )
+                {
                     return 100;
                 }
             }

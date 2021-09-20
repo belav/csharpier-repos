@@ -37,7 +37,8 @@ namespace System.Net.Http.Formatting
         public int Compare(
             MediaTypeWithQualityHeaderValue mediaType1,
             MediaTypeWithQualityHeaderValue mediaType2
-        ) {
+        )
+        {
             Contract.Assert(mediaType1 != null, "The 'mediaType1' parameter should not be null.");
             Contract.Assert(mediaType2 != null, "The 'mediaType2' parameter should not be null.");
 
@@ -70,13 +71,15 @@ namespace System.Net.Http.Formatting
                     else if (
                         parsedMediaType1.IsSubtypeMediaRange
                         && !parsedMediaType2.IsSubtypeMediaRange
-                    ) {
+                    )
+                    {
                         return -1;
                     }
                     else if (
                         !parsedMediaType1.IsSubtypeMediaRange
                         && parsedMediaType2.IsSubtypeMediaRange
-                    ) {
+                    )
+                    {
                         return 1;
                     }
                 }
@@ -99,7 +102,8 @@ namespace System.Net.Http.Formatting
         private static int CompareBasedOnQualityFactor(
             MediaTypeWithQualityHeaderValue mediaType1,
             MediaTypeWithQualityHeaderValue mediaType2
-        ) {
+        )
+        {
             Contract.Assert(mediaType1 != null);
             Contract.Assert(mediaType2 != null);
 

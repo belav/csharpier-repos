@@ -27,7 +27,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             bool isPublic,
             bool isReadOnly,
             bool isStatic
-        ) {
+        )
+        {
             Debug.Assert((object)containingType != null);
             Debug.Assert(!string.IsNullOrEmpty(name));
 
@@ -44,7 +45,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
         internal override void AddSynthesizedAttributes(
             PEModuleBuilder moduleBuilder,
             ref ArrayBuilder<SynthesizedAttributeData> attributes
-        ) {
+        )
+        {
             base.AddSynthesizedAttributes(moduleBuilder, ref attributes);
 
             CSharpCompilation compilation = this.DeclaringCompilation;
@@ -71,7 +73,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                     Location.None
                 )
                 && compilation.CanEmitBoolean()
-            ) {
+            )
+            {
                 AddSynthesizedAttribute(
                     ref attributes,
                     compilation.SynthesizeDynamicAttribute(
@@ -96,7 +99,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                     Location.None
                 )
                 && compilation.CanEmitSpecialType(SpecialType.System_String)
-            ) {
+            )
+            {
                 AddSynthesizedAttribute(
                     ref attributes,
                     compilation.SynthesizeTupleNamesAttribute(Type)
@@ -166,7 +170,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
         internal override ConstantValue GetConstantValue(
             ConstantFieldsInProgress inProgress,
             bool earlyDecodingWellKnownAttributes
-        ) {
+        )
+        {
             return null;
         }
 

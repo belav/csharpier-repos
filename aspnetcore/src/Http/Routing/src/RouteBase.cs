@@ -42,7 +42,8 @@ namespace Microsoft.AspNetCore.Routing
             RouteValueDictionary? defaults,
             IDictionary<string, object>? constraints,
             RouteValueDictionary? dataTokens
-        ) {
+        )
+        {
             if (constraintResolver == null)
             {
                 throw new ArgumentNullException(nameof(constraintResolver));
@@ -147,7 +148,8 @@ namespace Microsoft.AspNetCore.Routing
                     RouteDirection.IncomingRequest,
                     _constraintLogger
                 )
-            ) {
+            )
+            {
                 return Task.CompletedTask;
             }
             _logger.RequestMatchedRoute(Name!, ParsedTemplate.TemplateText!);
@@ -177,7 +179,8 @@ namespace Microsoft.AspNetCore.Routing
                     RouteDirection.UrlGeneration,
                     _constraintLogger
                 )
-            ) {
+            )
+            {
                 return null;
             }
 
@@ -222,7 +225,8 @@ namespace Microsoft.AspNetCore.Routing
             IInlineConstraintResolver inlineConstraintResolver,
             RouteTemplate parsedTemplate,
             IDictionary<string, object>? constraints
-        ) {
+        )
+        {
             var constraintBuilder = new RouteConstraintBuilder(
                 inlineConstraintResolver,
                 parsedTemplate.TemplateText!
@@ -263,7 +267,8 @@ namespace Microsoft.AspNetCore.Routing
         protected static RouteValueDictionary GetDefaults(
             RouteTemplate parsedTemplate,
             RouteValueDictionary? defaults
-        ) {
+        )
+        {
             var result =
                 defaults == null ? new RouteValueDictionary() : new RouteValueDictionary(defaults);
 
@@ -303,7 +308,8 @@ namespace Microsoft.AspNetCore.Routing
         private static void MergeValues(
             RouteValueDictionary destination,
             RouteValueDictionary values
-        ) {
+        )
+        {
             foreach (var kvp in values)
             {
                 // This will replace the original value for the specified key.

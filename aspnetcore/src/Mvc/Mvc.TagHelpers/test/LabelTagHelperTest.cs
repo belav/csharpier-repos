@@ -651,7 +651,8 @@ namespace Microsoft.AspNetCore.Mvc.TagHelpers
             Func<object> modelAccessor,
             string propertyPath,
             TagHelperOutputContent tagHelperOutputContent
-        ) {
+        )
+        {
             // Arrange
             var expectedTagName = "not-label";
             var expectedAttributes = new TagHelperAttributeList
@@ -809,7 +810,8 @@ namespace Microsoft.AspNetCore.Mvc.TagHelpers
             string htmlFieldPrefix,
             string expectedContent,
             string expectedId
-        ) {
+        )
+        {
             // Arrange
             var expectedAttributes = new TagHelperAttributeList { { "for", expectedId } };
 
@@ -876,7 +878,8 @@ namespace Microsoft.AspNetCore.Mvc.TagHelpers
                 string outputContent,
                 string expectedContent,
                 string expectedId
-            ) {
+            )
+            {
                 OriginalChildContent = originalChildContent;
                 OriginalContent = outputContent;
                 ExpectedContent = expectedContent;

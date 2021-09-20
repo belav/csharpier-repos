@@ -51,7 +51,8 @@ namespace Microsoft.CodeAnalysis.QuickInfo
             Document document,
             int position,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var extensionManager = _workspace.Services.GetRequiredService<IExtensionManager>();
 
             // returns the first non-empty quick info found (based on provider order)

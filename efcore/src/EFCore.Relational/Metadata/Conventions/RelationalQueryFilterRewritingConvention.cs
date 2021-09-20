@@ -33,7 +33,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
         public override void ProcessModelFinalizing(
             IConventionModelBuilder modelBuilder,
             IConventionContext<IConventionModelBuilder> context
-        ) {
+        )
+        {
             foreach (var entityType in modelBuilder.Metadata.GetEntityTypes())
             {
                 var queryFilter = entityType.GetQueryFilter();
@@ -86,7 +87,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
                         methodName == nameof(RelationalQueryableExtensions.FromSqlRaw)
                         || methodName == nameof(RelationalQueryableExtensions.FromSqlInterpolated)
                     )
-                ) {
+                )
+                {
                     var newSource = (QueryRootExpression)Visit(methodCallExpression.Arguments[0]);
 
                     string sql;

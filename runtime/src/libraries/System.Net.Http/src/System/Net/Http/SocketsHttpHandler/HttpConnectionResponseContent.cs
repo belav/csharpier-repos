@@ -37,7 +37,8 @@ namespace System.Net.Http
             Stream stream,
             TransportContext? context,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             if (stream == null)
             {
                 throw new ArgumentNullException(nameof(stream));
@@ -59,7 +60,8 @@ namespace System.Net.Http
             Stream stream,
             TransportContext? context,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             if (stream == null)
             {
                 throw new ArgumentNullException(nameof(stream));

@@ -37,7 +37,8 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.CodeActions
         protected override async Task<(ImmutableArray<CodeAction>, CodeAction actionToInvoke)> GetCodeActionsAsync(
             TestWorkspace workspace,
             TestParameters parameters
-        ) {
+        )
+        {
             var refactoring = await GetCodeRefactoringAsync(workspace, parameters);
             var actions =
                 refactoring == null
@@ -55,14 +56,16 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.CodeActions
         internal async Task<CodeRefactoring> GetCodeRefactoringAsync(
             TestWorkspace workspace,
             TestParameters parameters
-        ) {
+        )
+        {
             return (await GetCodeRefactoringsAsync(workspace, parameters)).FirstOrDefault();
         }
 
         private async Task<IEnumerable<CodeRefactoring>> GetCodeRefactoringsAsync(
             TestWorkspace workspace,
             TestParameters parameters
-        ) {
+        )
+        {
             var provider = CreateCodeRefactoringProvider(workspace, parameters);
             return SpecializedCollections.SingletonEnumerable(
                 await GetCodeRefactoringAsync(provider, workspace)
@@ -72,7 +75,8 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.CodeActions
         private static async Task<CodeRefactoring> GetCodeRefactoringAsync(
             CodeRefactoringProvider provider,
             TestWorkspace workspace
-        ) {
+        )
+        {
             var documentsWithSelections = workspace.Documents.Where(
                 d => !d.IsLinkFile && d.SelectedSpans.Count == 1
             );
@@ -105,7 +109,8 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.CodeActions
             string expectedText,
             CodeAction action,
             string expectedPreviewContents = null
-        ) {
+        )
+        {
             var operations = await VerifyActionAndGetOperationsAsync(workspace, action, default);
 
             await VerifyPreviewContents(workspace, expectedPreviewContents, operations);
@@ -130,7 +135,8 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.CodeActions
             TestWorkspace workspace,
             string expectedPreviewContents,
             ImmutableArray<CodeActionOperation> operations
-        ) {
+        )
+        {
             if (expectedPreviewContents != null)
             {
                 var editHandler =
@@ -155,7 +161,8 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.CodeActions
         internal static void EnableOptions(
             ImmutableArray<PickMembersOption> options,
             params string[] ids
-        ) {
+        )
+        {
             foreach (var id in ids)
             {
                 EnableOption(options, id);
@@ -178,7 +185,8 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.CodeActions
             Action<ImmutableArray<PickMembersOption>> optionsCallback = null,
             int index = 0,
             TestParameters parameters = default
-        ) {
+        )
+        {
             var pickMembersService = new TestPickMembersService(
                 chosenSymbols.AsImmutableOrNull(),
                 optionsCallback
@@ -210,7 +218,8 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.CodeActions
         public TestPickMembersService(
             ImmutableArray<string> memberNames,
             Action<ImmutableArray<PickMembersOption>> optionsCallback
-        ) {
+        )
+        {
             MemberNames = memberNames;
             OptionsCallback = optionsCallback;
         }
@@ -220,7 +229,8 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.CodeActions
             string title,
             ImmutableArray<ISymbol> members,
             ImmutableArray<PickMembersOption> options
-        ) {
+        )
+        {
             OptionsCallback?.Invoke(options);
             return new PickMembersResult(
                 MemberNames.IsDefault

@@ -22,7 +22,8 @@ namespace Microsoft.EntityFrameworkCore.Query.Internal
             if (
                 methodCallExpression.Method.DeclaringType == typeof(Queryable)
                 && methodCallExpression.Method.IsGenericMethod
-            ) {
+            )
+            {
                 var genericMethod = methodCallExpression.Method.GetGenericMethodDefinition();
                 Expression source = methodCallExpression;
                 var singleResult = false;
@@ -32,7 +33,8 @@ namespace Microsoft.EntityFrameworkCore.Query.Internal
                     || genericMethod == QueryableMethods.FirstWithoutPredicate
                     || genericMethod == QueryableMethods.SingleOrDefaultWithoutPredicate
                     || genericMethod == QueryableMethods.SingleWithoutPredicate
-                ) {
+                )
+                {
                     singleResult = true;
                     source = methodCallExpression.Arguments[0];
                 }
@@ -40,7 +42,8 @@ namespace Microsoft.EntityFrameworkCore.Query.Internal
                 if (
                     genericMethod == QueryableMethods.LastOrDefaultWithoutPredicate
                     || genericMethod == QueryableMethods.LastWithoutPredicate
-                ) {
+                )
+                {
                     singleResult = true;
                     reverseOrdering = true;
                     source = methodCallExpression.Arguments[0];
@@ -52,7 +55,8 @@ namespace Microsoft.EntityFrameworkCore.Query.Internal
                     && selectMethodCall.Method.IsGenericMethod
                     && selectMethodCall.Method.GetGenericMethodDefinition()
                         == QueryableMethods.Select
-                ) {
+                )
+                {
                     var selector = RewriteCollectionInclude(
                         selectMethodCall.Arguments[0],
                         selectMethodCall.Arguments[1].UnwrapLambdaFromQuote(),
@@ -85,7 +89,8 @@ namespace Microsoft.EntityFrameworkCore.Query.Internal
             LambdaExpression selector,
             bool singleResult,
             bool reverseOrdering
-        ) {
+        )
+        {
             var selectorParameter = selector.Parameters[0];
             var selectorBody = selector.Body;
             var sourceElementType = source.Type.GetSequenceType();
@@ -129,7 +134,8 @@ namespace Microsoft.EntityFrameworkCore.Query.Internal
                 Expression parentQuery,
                 Type sourceElementType,
                 ParameterExpression parameterExpression
-            ) {
+            )
+            {
                 _parentQuery = new CloningExpressionVisitor().Visit(parentQuery);
                 _parentVisitor = parentVisitor;
                 _sourceElementType = sourceElementType;
@@ -142,7 +148,8 @@ namespace Microsoft.EntityFrameworkCore.Query.Internal
                     extensionExpression
                         is MaterializeCollectionNavigationExpression materializeCollectionNavigationExpression
                     && materializeCollectionNavigationExpression.Navigation.IsCollection
-                ) {
+                )
+                {
                     var subquery = materializeCollectionNavigationExpression.Subquery;
                     // Extract last select from subquery
                     if (
@@ -150,7 +157,8 @@ namespace Microsoft.EntityFrameworkCore.Query.Internal
                         && subqueryMethodCallExpression.Method.IsGenericMethod
                         && subqueryMethodCallExpression.Method.GetGenericMethodDefinition()
                             == QueryableMethods.Select
-                    ) {
+                    )
+                    {
                         subquery = RewriteSubqueryToSelectMany(
                             subqueryMethodCallExpression.Arguments[0]
                         );
@@ -226,7 +234,8 @@ namespace Microsoft.EntityFrameworkCore.Query.Internal
 
                 private static IReadOnlyList<ParameterExpression> CopyParameters(
                     IReadOnlyList<ParameterExpression> parameters
-                ) {
+                )
+                {
                     var newParameters = new List<ParameterExpression>();
                     foreach (var parameter in parameters)
                     {

@@ -41,7 +41,8 @@ namespace System.Security.Cryptography.Cng.Tests
             int plainBytesCount,
             CipherMode cipherMode,
             PaddingMode paddingMode
-        ) {
+        )
+        {
             SymmetricCngTestHelpers.VerifyPersistedKey(
                 s_cngAlgorithm,
                 192,

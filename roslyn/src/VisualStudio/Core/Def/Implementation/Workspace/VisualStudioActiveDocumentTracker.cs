@@ -80,7 +80,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation
                                 out var value
                             )
                         )
-                    ) {
+                    )
+                    {
                         if (value is IVsWindowFrame windowFrame)
                         {
                             TrackNewActiveWindowFrame(windowFrame);
@@ -202,7 +203,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation
             [ComAliasName("Microsoft.VisualStudio.Shell.Interop.VSSELELEMID")] uint elementid,
             object varValueOld,
             object varValueNew
-        ) {
+        )
+        {
             AssertIsForeground();
 
             if (elementid == (uint)VSConstants.VSSELELEMID.SEID_DocumentFrame)
@@ -249,7 +251,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation
                     ErrorHandler.Succeeded(
                         frame.GetProperty((int)__VSFPROPID.VSFPROPID_DocData, out var docData)
                     )
-                ) {
+                )
+                {
                     if (docData is IVsTextBuffer bufferAdapter)
                     {
                         _textBuffer =
@@ -260,7 +263,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation
                         if (
                             _textBuffer != null
                             && !_textBuffer.ContentType.IsOfType(ContentTypeNames.RoslynContentType)
-                        ) {
+                        )
+                        {
                             _textBuffer.Changed += NonRoslynTextBuffer_Changed;
                         }
                     }

@@ -347,7 +347,8 @@ namespace System.Xml.Serialization
                             if (
                                 a.LocalName == "IsDataSet"
                                 && a.NamespaceURI == "urn:schemas-microsoft-com:xml-msdata"
-                            ) {
+                            )
+                            {
                                 // currently the msdata:IsDataSet uses its own format for the boolean values
                                 if (a.Value == "True" || a.Value == "true" || a.Value == "1")
                                     return true;
@@ -683,7 +684,8 @@ namespace System.Xml.Serialization
             XmlSchemaObject src,
             XmlSchemaObject dest,
             string? ns
-        ) {
+        )
+        {
             string err = SR.Format(SR.XmlSerializableMergeItem, ns, GetSchemaItem(src, ns, null));
             err += "\r\n" + Dump(src);
             err += "\r\n" + Dump(dest);
@@ -790,7 +792,8 @@ namespace System.Xml.Serialization
         internal static Exception CreateValidationException(
             XmlSchemaException exception,
             string message
-        ) {
+        )
+        {
             XmlSchemaObject? source = exception.SourceSchemaObject;
             if (exception.LineNumber == 0 && exception.LinePosition == 0)
             {

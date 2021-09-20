@@ -35,7 +35,8 @@ namespace Microsoft.CodeAnalysis.ExtractClass
                 !context.Document.Project.Solution.Workspace.CanApplyChange(
                     ApplyChangesKind.AddDocument
                 )
-            ) {
+            )
+            {
                 return;
             }
 
@@ -62,7 +63,8 @@ namespace Microsoft.CodeAnalysis.ExtractClass
         private async Task<ExtractClassWithDialogCodeAction?> TryGetMemberActionAsync(
             CodeRefactoringContext context,
             IExtractClassOptionsService optionsService
-        ) {
+        )
+        {
             var selectedMemberNode = await GetSelectedNodeAsync(context).ConfigureAwait(false);
             if (selectedMemberNode is null)
             {
@@ -116,7 +118,8 @@ namespace Microsoft.CodeAnalysis.ExtractClass
         private async Task<ExtractClassWithDialogCodeAction?> TryGetClassActionAsync(
             CodeRefactoringContext context,
             IExtractClassOptionsService optionsService
-        ) {
+        )
+        {
             var selectedClassNode = await GetSelectedClassDeclarationAsync(context)
                 .ConfigureAwait(false);
             if (selectedClassNode is null)

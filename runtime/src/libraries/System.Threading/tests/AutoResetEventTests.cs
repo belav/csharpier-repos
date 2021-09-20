@@ -92,7 +92,8 @@ namespace System.Threading.Tests
             using (
                 AutoResetEvent are1 = new AutoResetEvent(true),
                     are2 = new AutoResetEvent(false)
-            ) {
+            )
+            {
                 const int Iters = 10;
                 Task.WaitAll(
                     Task.Factory.StartNew(

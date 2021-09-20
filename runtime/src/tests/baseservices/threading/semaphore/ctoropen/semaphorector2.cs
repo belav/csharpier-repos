@@ -84,7 +84,8 @@ class CtorTest
                         (semName != null && semName != string.Empty)
                             ? Semaphore.OpenExisting(semName)
                             : sem1
-                ) {
+                )
+                {
                     if (iCount > 0)
                     {
                         sem2.WaitOne();

@@ -79,7 +79,8 @@ namespace System.IO
             int count,
             bool writable,
             bool publiclyVisible
-        ) {
+        )
+        {
             if (buffer == null)
                 throw new ArgumentNullException(nameof(buffer), SR.ArgumentNull_Buffer);
             if (index < 0)
@@ -395,7 +396,8 @@ namespace System.IO
             int offset,
             int count,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             ValidateBufferArguments(buffer, offset, count);
 
             // If cancellation was requested, bail early
@@ -425,7 +427,8 @@ namespace System.IO
         public override ValueTask<int> ReadAsync(
             Memory<byte> buffer,
             CancellationToken cancellationToken = default
-        ) {
+        )
+        {
             if (cancellationToken.IsCancellationRequested)
             {
                 return ValueTask.FromCanceled<int>(cancellationToken);
@@ -509,7 +512,8 @@ namespace System.IO
             Stream destination,
             int bufferSize,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             // This implementation offers better performance compared to the base class version.
 
             ValidateCopyToArguments(destination, bufferSize);
@@ -733,7 +737,8 @@ namespace System.IO
             int offset,
             int count,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             ValidateBufferArguments(buffer, offset, count);
 
             // If cancellation is already requested, bail early
@@ -758,7 +763,8 @@ namespace System.IO
         public override ValueTask WriteAsync(
             ReadOnlyMemory<byte> buffer,
             CancellationToken cancellationToken = default
-        ) {
+        )
+        {
             if (cancellationToken.IsCancellationRequested)
             {
                 return ValueTask.FromCanceled(cancellationToken);

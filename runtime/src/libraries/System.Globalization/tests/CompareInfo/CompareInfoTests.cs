@@ -106,7 +106,8 @@ namespace System.Globalization.Tests
             string source2,
             CompareOptions options2,
             bool expected
-        ) {
+        )
+        {
             CompareInfo invariantCompare = CultureInfo.InvariantCulture.CompareInfo;
             Assert.Equal(
                 expected,
@@ -1431,7 +1432,8 @@ namespace System.Globalization.Tests
             string string2,
             CompareOptions options,
             int expected
-        ) {
+        )
+        {
             SortKeyTest(compareInfo, string1, string2, options, expected);
         }
 
@@ -1471,7 +1473,8 @@ namespace System.Globalization.Tests
             string string2,
             CompareOptions options,
             int expectedSign
-        ) {
+        )
+        {
             SortKey sk1 = compareInfo.GetSortKey(string1, options);
             SortKey sk2 = compareInfo.GetSortKey(string2, options);
 
@@ -1502,7 +1505,8 @@ namespace System.Globalization.Tests
                 ReadOnlySpan<char> source,
                 CompareOptions options,
                 byte[] expectedSortKey
-            ) {
+            )
+            {
                 using BoundedMemory<char> sourceBoundedMemory =
                     BoundedMemory.AllocateFromExistingData(source);
                 sourceBoundedMemory.MakeReadonly();
@@ -1593,7 +1597,8 @@ namespace System.Globalization.Tests
             int startIndex,
             int indexOfExpected,
             int lastIndexOfExpected
-        ) {
+        )
+        {
             Assert.Equal(indexOfExpected, compareInfo.IndexOf(source, value, startIndex));
             if (value.Length == 1)
             {
@@ -1650,7 +1655,8 @@ namespace System.Globalization.Tests
             string source2,
             CompareOptions options2,
             bool expectSameHashCode
-        ) {
+        )
+        {
             CompareInfo invariantCompare = CultureInfo.InvariantCulture.CompareInfo;
 
             int hashOfSource1AsString = invariantCompare.GetHashCode(source1, options1);

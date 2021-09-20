@@ -58,7 +58,8 @@ namespace System.Web.Razor.Tokenizer
             string content,
             HtmlSymbolType type,
             IEnumerable<RazorError> errors
-        ) {
+        )
+        {
             return new HtmlSymbol(start, content, type, errors);
         }
 
@@ -112,7 +113,8 @@ namespace System.Web.Razor.Tokenizer
             char prev = '\0';
             while (
                 !EndOfFile && !ParserHelpers.IsWhitespaceOrNewLine(CurrentCharacter) && !AtSymbol()
-            ) {
+            )
+            {
                 prev = CurrentCharacter;
                 TakeCurrent();
             }
@@ -123,7 +125,8 @@ namespace System.Web.Razor.Tokenizer
                 if (
                     ParserHelpers.IsLetterOrDecimalDigit(prev)
                     && ParserHelpers.IsLetterOrDecimalDigit(next)
-                ) {
+                )
+                {
                     TakeCurrent(); // Take the "@"
                     return Stay(); // Stay in the Text state
                 }

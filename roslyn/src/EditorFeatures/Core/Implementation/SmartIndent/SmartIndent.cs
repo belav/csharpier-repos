@@ -35,7 +35,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.SmartIndent
         private int? GetDesiredIndentation(
             ITextSnapshotLine lineToBeIndented,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             if (lineToBeIndented == null)
             {
                 throw new ArgumentNullException(@"line");

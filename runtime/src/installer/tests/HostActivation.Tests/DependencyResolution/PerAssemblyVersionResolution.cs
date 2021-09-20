@@ -60,7 +60,8 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation.DependencyResolution
             string appAsmVersion,
             string appFileVersion,
             bool appWins
-        ) {
+        )
+        {
             RunTest(
                 b =>
                     b.WithPackage(
@@ -97,7 +98,8 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation.DependencyResolution
 
             protected override void CustomizeDotNetWithNetCoreAppMicrosoftNETCoreApp(
                 NetCoreAppBuilder builder
-            ) {
+            )
+            {
                 builder.WithPackage(
                     TestVersionsPackage,
                     "1.0.0",
@@ -145,7 +147,8 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation.DependencyResolution
             string appAsmVersion,
             string appFileVersion,
             bool appWins
-        ) {
+        )
+        {
             var app = SharedState.CreateTestFrameworkReferenceApp(
                 b =>
                     b.WithPackage(
@@ -192,7 +195,8 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation.DependencyResolution
             string appAsmVersion,
             string appFileVersion,
             bool appWins
-        ) {
+        )
+        {
             var component = SharedState.CreateComponentWithNoDependencies(
                 b =>
                     b.WithPackage(

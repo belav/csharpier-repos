@@ -22,7 +22,8 @@ namespace Microsoft.AspNetCore.Server.IntegrationTesting.IIS
         protected override async Task<HttpResponseMessage> SendAsync(
             HttpRequestMessage request,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             _logger.LogDebug(request.ToString());
             var response = await base.SendAsync(request, cancellationToken);
 

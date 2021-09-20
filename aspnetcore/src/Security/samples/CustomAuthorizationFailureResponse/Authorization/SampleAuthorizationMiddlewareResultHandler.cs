@@ -24,18 +24,21 @@ namespace CustomAuthorizationFailureResponse.Authorization
             HttpContext httpContext,
             AuthorizationPolicy authorizationPolicy,
             PolicyAuthorizationResult policyAuthorizationResult
-        ) {
+        )
+        {
             // if the authorization was forbidden, let's use custom logic to handle that.
             if (
                 policyAuthorizationResult.Forbidden
                 && policyAuthorizationResult.AuthorizationFailure != null
-            ) {
+            )
+            {
                 // as an example, let's return 404 if specific requirement has failed
                 if (
                     policyAuthorizationResult.AuthorizationFailure.FailedRequirements.Any(
                         requirement => requirement is SampleRequirement
                     )
-                ) {
+                )
+                {
                     httpContext.Response.StatusCode = (int)HttpStatusCode.NotFound;
                     await httpContext.Response.WriteAsync(Startup.CustomForbiddenMessage);
 
@@ -46,7 +49,8 @@ namespace CustomAuthorizationFailureResponse.Authorization
                     policyAuthorizationResult.AuthorizationFailure.FailedRequirements.Any(
                         requirement => requirement is SampleWithCustomMessageRequirement
                     )
-                ) {
+                )
+                {
                     // if other requirements failed, let's just use a custom message
                     // but we have to use OnStarting callback because the default handlers will want to modify i.e. status code of the response
                     // and modifications of the response are not allowed once the writing has started

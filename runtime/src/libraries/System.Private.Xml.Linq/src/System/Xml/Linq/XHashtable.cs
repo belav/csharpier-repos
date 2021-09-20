@@ -85,7 +85,8 @@ namespace System.Xml.Linq
             int index,
             int count,
             [MaybeNullWhen(false)] out TValue value
-        ) {
+        )
+        {
             return _state.TryGetValue(key, index, count, out value);
         }
 
@@ -262,7 +263,8 @@ namespace System.Xml.Linq
                 int index,
                 int count,
                 [MaybeNullWhen(false)] out TValue value
-            ) {
+            )
+            {
                 int hashCode = ComputeHashCode(key, index, count);
                 int entryIndex = 0;
 
@@ -366,7 +368,8 @@ namespace System.Xml.Linq
                 int index,
                 int count,
                 ref int entryIndex
-            ) {
+            )
+            {
                 int previousIndex = entryIndex;
                 int currentIndex;
 
@@ -409,7 +412,8 @@ namespace System.Xml.Linq
                             if (
                                 count == keyCompare.Length
                                 && string.CompareOrdinal(key, index, keyCompare, 0, count) == 0
-                            ) {
+                            )
+                            {
                                 // Found match, so return true and matching entry in list
                                 entryIndex = currentIndex;
                                 return true;

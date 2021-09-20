@@ -30,7 +30,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
             this CompilationVerifier verifier,
             string qualifiedMethodName,
             bool realIL = false
-        ) {
+        )
+        {
             if (realIL)
             {
                 var peReader = new PEReader(verifier.EmittedAssemblyData);
@@ -3395,7 +3396,8 @@ public class C
             bool? setLastError = null,
             bool? bestFitMapping = null,
             bool? throwOnUnmappableChar = null
-        ) {
+        )
+        {
             StringBuilder sb = new StringBuilder("[DllImport(\"bar\"");
             if (cc != null)
             {
@@ -4113,7 +4115,8 @@ delegate void D();
                                 "<PrivateImplementationDetails>",
                                 StringComparison.Ordinal
                             )
-                        ) {
+                        )
+                        {
                             Assert.Equal(TypeAttributes.AnsiClass, actual);
                         }
                         else
@@ -10449,7 +10452,8 @@ class C2 : C1
             void verify(
                 CSharpCompilationOptions options,
                 params DiagnosticDescription[] expectedDiagnostics
-            ) {
+            )
+            {
                 verifyReference(comp1.ToMetadataReference(), options, expectedDiagnostics);
                 verifyReference(comp1.EmitToImageReference(), options, expectedDiagnostics);
             }
@@ -10458,7 +10462,8 @@ class C2 : C1
                 MetadataReference reference,
                 CSharpCompilationOptions options,
                 DiagnosticDescription[] expectedDiagnostics
-            ) {
+            )
+            {
                 var comp2 = CreateCompilation(
                     source2,
                     references: new[] { reference },
@@ -12227,7 +12232,8 @@ public class C
             CSharpCompilationOptions options,
             CSharpParseOptions parseOptions = null,
             Verification verify = Verification.Fails
-        ) {
+        )
+        {
             const string skipLocalsInitDef =
                 @"
 namespace System.Runtime.CompilerServices
@@ -12249,7 +12255,8 @@ namespace System.Runtime.CompilerServices
             string src,
             CSharpParseOptions parseOptions = null,
             Verification verify = Verification.Fails
-        ) {
+        )
+        {
             return CompileAndVerifyWithSkipLocalsInit(
                 src,
                 TestOptions.UnsafeReleaseDll,
@@ -14996,7 +15003,8 @@ class ClassNoAttributeNoLocal
             string outerAttribute,
             string ctorAttribute,
             bool hasLocalsInit
-        ) {
+        )
+        {
             var src =
                 $@"
 using System.Runtime.CompilerServices;
@@ -15050,7 +15058,8 @@ namespace System.Runtime.CompilerServices
             string ctorAttribute,
             string propAttribute,
             bool hasLocalsInit
-        ) {
+        )
+        {
             var src =
                 $@"
 using System.Runtime.CompilerServices;
@@ -15266,7 +15275,8 @@ class MyAttribute : System.Attribute
             if (
                 !symbol.GetAttributes("System.Diagnostics", "DebuggerStepperBoundaryAttribute")
                     .Any()
-            ) {
+            )
+            {
                 result += "DebuggerStepperBoundaryAttribute is missing\n";
             }
 

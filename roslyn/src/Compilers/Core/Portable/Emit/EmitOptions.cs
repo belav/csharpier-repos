@@ -128,20 +128,21 @@ namespace Microsoft.CodeAnalysis.Emit
             string runtimeMetadataVersion,
             bool tolerateErrors,
             bool includePrivateMembers
-        ) : this(
-            metadataOnly,
-            debugInformationFormat,
-            pdbFilePath,
-            outputNameOverride,
-            fileAlignment,
-            baseAddress,
-            highEntropyVirtualAddressSpace,
-            subsystemVersion,
-            runtimeMetadataVersion,
-            tolerateErrors,
-            includePrivateMembers,
-            instrumentationKinds: ImmutableArray<InstrumentationKind>.Empty
-        ) { }
+        )
+            : this(
+                metadataOnly,
+                debugInformationFormat,
+                pdbFilePath,
+                outputNameOverride,
+                fileAlignment,
+                baseAddress,
+                highEntropyVirtualAddressSpace,
+                subsystemVersion,
+                runtimeMetadataVersion,
+                tolerateErrors,
+                includePrivateMembers,
+                instrumentationKinds: ImmutableArray<InstrumentationKind>.Empty
+            ) { }
 
         // 2.7 BACKCOMPAT OVERLOAD -- DO NOT TOUCH
         public EmitOptions(
@@ -157,21 +158,22 @@ namespace Microsoft.CodeAnalysis.Emit
             bool tolerateErrors,
             bool includePrivateMembers,
             ImmutableArray<InstrumentationKind> instrumentationKinds
-        ) : this(
-            metadataOnly,
-            debugInformationFormat,
-            pdbFilePath,
-            outputNameOverride,
-            fileAlignment,
-            baseAddress,
-            highEntropyVirtualAddressSpace,
-            subsystemVersion,
-            runtimeMetadataVersion,
-            tolerateErrors,
-            includePrivateMembers,
-            instrumentationKinds,
-            pdbChecksumAlgorithm: null
-        ) { }
+        )
+            : this(
+                metadataOnly,
+                debugInformationFormat,
+                pdbFilePath,
+                outputNameOverride,
+                fileAlignment,
+                baseAddress,
+                highEntropyVirtualAddressSpace,
+                subsystemVersion,
+                runtimeMetadataVersion,
+                tolerateErrors,
+                includePrivateMembers,
+                instrumentationKinds,
+                pdbChecksumAlgorithm: null
+            ) { }
 
         // 3.7 BACKCOMPAT OVERLOAD -- DO NOT TOUCH
         public EmitOptions(
@@ -188,23 +190,24 @@ namespace Microsoft.CodeAnalysis.Emit
             bool includePrivateMembers,
             ImmutableArray<InstrumentationKind> instrumentationKinds,
             HashAlgorithmName? pdbChecksumAlgorithm
-        ) : this(
-            metadataOnly,
-            debugInformationFormat,
-            pdbFilePath,
-            outputNameOverride,
-            fileAlignment,
-            baseAddress,
-            highEntropyVirtualAddressSpace,
-            subsystemVersion,
-            runtimeMetadataVersion,
-            tolerateErrors,
-            includePrivateMembers,
-            instrumentationKinds,
-            pdbChecksumAlgorithm,
-            defaultSourceFileEncoding: null,
-            fallbackSourceFileEncoding: null
-        ) { }
+        )
+            : this(
+                metadataOnly,
+                debugInformationFormat,
+                pdbFilePath,
+                outputNameOverride,
+                fileAlignment,
+                baseAddress,
+                highEntropyVirtualAddressSpace,
+                subsystemVersion,
+                runtimeMetadataVersion,
+                tolerateErrors,
+                includePrivateMembers,
+                instrumentationKinds,
+                pdbChecksumAlgorithm,
+                defaultSourceFileEncoding: null,
+                fallbackSourceFileEncoding: null
+            ) { }
 
         public EmitOptions(
             bool metadataOnly = false,
@@ -222,7 +225,8 @@ namespace Microsoft.CodeAnalysis.Emit
             HashAlgorithmName? pdbChecksumAlgorithm = null,
             Encoding? defaultSourceFileEncoding = null,
             Encoding? fallbackSourceFileEncoding = null
-        ) {
+        )
+        {
             EmitMetadataOnly = metadataOnly;
             DebugInformationFormat =
                 (debugInformationFormat == 0) ? DebugInformationFormat.Pdb : debugInformationFormat;
@@ -356,7 +360,8 @@ namespace Microsoft.CodeAnalysis.Emit
             DiagnosticBag diagnostics,
             CommonMessageProvider messageProvider,
             bool isDeterministic
-        ) {
+        )
+        {
             if (!DebugInformationFormat.IsValid())
             {
                 diagnostics.Add(
@@ -599,7 +604,8 @@ namespace Microsoft.CodeAnalysis.Emit
 
         public EmitOptions WithInstrumentationKinds(
             ImmutableArray<InstrumentationKind> instrumentationKinds
-        ) {
+        )
+        {
             if (InstrumentationKinds == instrumentationKinds)
             {
                 return this;

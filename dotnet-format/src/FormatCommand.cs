@@ -157,7 +157,8 @@ namespace Microsoft.CodeAnalysis.Tools
 
         internal static string? EnsureFolderNotSpecifiedWhenFixingAnalyzers(
             CommandResult symbolResult
-        ) {
+        )
+        {
             var folder = symbolResult.ValueForOption<bool>("--folder");
             var fixAnalyzers = symbolResult.OptionResult("--fix-analyzers");
             return folder && fixAnalyzers != null
@@ -185,7 +186,8 @@ namespace Microsoft.CodeAnalysis.Tools
 
         internal static string? EnsureFolderNotSpecifiedWhenLoggingBinlog(
             CommandResult symbolResult
-        ) {
+        )
+        {
             var folder = symbolResult.ValueForOption<bool>("--folder");
             var binarylog = symbolResult.OptionResult("--binarylog");
             return folder && binarylog is not null && !binarylog.IsImplicit

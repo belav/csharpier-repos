@@ -74,7 +74,8 @@ namespace Microsoft.EntityFrameworkCore.Design
         public virtual void RemoveAnnotationsHandledByConventions(
             IEntityType entityType,
             IDictionary<string, IAnnotation> annotations
-        ) {
+        )
+        {
             annotations.Remove(RelationalAnnotationNames.IsTableExcludedFromMigrations);
 
             RemoveConventionalAnnotationsHelper(entityType, annotations, IsHandledByConvention);
@@ -84,7 +85,8 @@ namespace Microsoft.EntityFrameworkCore.Design
         public virtual void RemoveAnnotationsHandledByConventions(
             IProperty property,
             IDictionary<string, IAnnotation> annotations
-        ) {
+        )
+        {
             var columnName = property.GetColumnBaseName();
             if (columnName == property.Name)
             {
@@ -116,7 +118,8 @@ namespace Microsoft.EntityFrameworkCore.Design
         public virtual IReadOnlyList<MethodCallCodeFragment> GenerateFluentApiCalls(
             IModel model,
             IDictionary<string, IAnnotation> annotations
-        ) {
+        )
+        {
             var methodCallCodeFragments = new List<MethodCallCodeFragment>();
 
             GenerateSimpleFluentApiCall(
@@ -136,7 +139,8 @@ namespace Microsoft.EntityFrameworkCore.Design
         public virtual IReadOnlyList<MethodCallCodeFragment> GenerateFluentApiCalls(
             IEntityType entityType,
             IDictionary<string, IAnnotation> annotations
-        ) {
+        )
+        {
             var methodCallCodeFragments = new List<MethodCallCodeFragment>();
 
             GenerateSimpleFluentApiCall(
@@ -157,7 +161,8 @@ namespace Microsoft.EntityFrameworkCore.Design
         public virtual IReadOnlyList<MethodCallCodeFragment> GenerateFluentApiCalls(
             IProperty property,
             IDictionary<string, IAnnotation> annotations
-        ) {
+        )
+        {
             var methodCallCodeFragments = new List<MethodCallCodeFragment>();
 
             GenerateSimpleFluentApiCall(
@@ -173,7 +178,8 @@ namespace Microsoft.EntityFrameworkCore.Design
                     RelationalAnnotationNames.DefaultValueSql,
                     out string? defaultValueSql
                 )
-            ) {
+            )
+            {
                 methodCallCodeFragments.Add(
                     defaultValueSql.Length == 0
                       ? new MethodCallCodeFragment(
@@ -192,7 +198,8 @@ namespace Microsoft.EntityFrameworkCore.Design
                     RelationalAnnotationNames.ComputedColumnSql,
                     out string? computedColumnSql
                 )
-            ) {
+            )
+            {
                 methodCallCodeFragments.Add(
                     computedColumnSql.Length == 0
                       ? new MethodCallCodeFragment(
@@ -221,7 +228,8 @@ namespace Microsoft.EntityFrameworkCore.Design
                     RelationalAnnotationNames.IsFixedLength,
                     out bool isFixedLength
                 )
-            ) {
+            )
+            {
                 methodCallCodeFragments.Add(
                     isFixedLength
                       ? new MethodCallCodeFragment(nameof(RelationalAnnotationNames.IsFixedLength))
@@ -257,7 +265,8 @@ namespace Microsoft.EntityFrameworkCore.Design
         public virtual IReadOnlyList<MethodCallCodeFragment> GenerateFluentApiCalls(
             IKey key,
             IDictionary<string, IAnnotation> annotations
-        ) {
+        )
+        {
             var methodCallCodeFragments = new List<MethodCallCodeFragment>();
 
             GenerateSimpleFluentApiCall(
@@ -278,7 +287,8 @@ namespace Microsoft.EntityFrameworkCore.Design
         public virtual IReadOnlyList<MethodCallCodeFragment> GenerateFluentApiCalls(
             IForeignKey navigation,
             IDictionary<string, IAnnotation> annotations
-        ) {
+        )
+        {
             var methodCallCodeFragments = new List<MethodCallCodeFragment>();
 
             GenerateSimpleFluentApiCall(
@@ -299,7 +309,8 @@ namespace Microsoft.EntityFrameworkCore.Design
         public virtual IReadOnlyList<MethodCallCodeFragment> GenerateFluentApiCalls(
             INavigation navigation,
             IDictionary<string, IAnnotation> annotations
-        ) {
+        )
+        {
             var methodCallCodeFragments = new List<MethodCallCodeFragment>();
 
             methodCallCodeFragments.AddRange(
@@ -313,7 +324,8 @@ namespace Microsoft.EntityFrameworkCore.Design
         public virtual IReadOnlyList<MethodCallCodeFragment> GenerateFluentApiCalls(
             ISkipNavigation navigation,
             IDictionary<string, IAnnotation> annotations
-        ) {
+        )
+        {
             var methodCallCodeFragments = new List<MethodCallCodeFragment>();
 
             methodCallCodeFragments.AddRange(
@@ -327,7 +339,8 @@ namespace Microsoft.EntityFrameworkCore.Design
         public virtual IReadOnlyList<MethodCallCodeFragment> GenerateFluentApiCalls(
             IIndex index,
             IDictionary<string, IAnnotation> annotations
-        ) {
+        )
+        {
             var methodCallCodeFragments = new List<MethodCallCodeFragment>();
 
             GenerateSimpleFluentApiCall(
@@ -355,7 +368,8 @@ namespace Microsoft.EntityFrameworkCore.Design
         public virtual IReadOnlyList<AttributeCodeFragment> GenerateDataAnnotationAttributes(
             IEntityType entityType,
             IDictionary<string, IAnnotation> annotations
-        ) {
+        )
+        {
             var attributeCodeFragments = new List<AttributeCodeFragment>();
 
             attributeCodeFragments.AddRange(
@@ -369,7 +383,8 @@ namespace Microsoft.EntityFrameworkCore.Design
         public virtual IReadOnlyList<AttributeCodeFragment> GenerateDataAnnotationAttributes(
             IProperty property,
             IDictionary<string, IAnnotation> annotations
-        ) {
+        )
+        {
             var attributeCodeFragments = new List<AttributeCodeFragment>();
 
             if (TryGetAndRemove(annotations, CoreAnnotationNames.MaxLength, out int maxLength))
@@ -529,7 +544,8 @@ namespace Microsoft.EntityFrameworkCore.Design
         protected virtual MethodCallCodeFragment? GenerateFluentApi(
             IModel model,
             IAnnotation annotation
-        ) {
+        )
+        {
             Check.NotNull(model, nameof(model));
             Check.NotNull(annotation, nameof(annotation));
 
@@ -551,7 +567,8 @@ namespace Microsoft.EntityFrameworkCore.Design
         protected virtual MethodCallCodeFragment? GenerateFluentApi(
             IEntityType entityType,
             IAnnotation annotation
-        ) {
+        )
+        {
             Check.NotNull(entityType, nameof(entityType));
             Check.NotNull(annotation, nameof(annotation));
 
@@ -573,7 +590,8 @@ namespace Microsoft.EntityFrameworkCore.Design
         protected virtual MethodCallCodeFragment? GenerateFluentApi(
             IKey key,
             IAnnotation annotation
-        ) {
+        )
+        {
             Check.NotNull(key, nameof(key));
             Check.NotNull(annotation, nameof(annotation));
 
@@ -595,7 +613,8 @@ namespace Microsoft.EntityFrameworkCore.Design
         protected virtual MethodCallCodeFragment? GenerateFluentApi(
             IProperty property,
             IAnnotation annotation
-        ) {
+        )
+        {
             Check.NotNull(property, nameof(property));
             Check.NotNull(annotation, nameof(annotation));
 
@@ -617,7 +636,8 @@ namespace Microsoft.EntityFrameworkCore.Design
         protected virtual MethodCallCodeFragment? GenerateFluentApi(
             IForeignKey foreignKey,
             IAnnotation annotation
-        ) {
+        )
+        {
             Check.NotNull(foreignKey, nameof(foreignKey));
             Check.NotNull(annotation, nameof(annotation));
 
@@ -639,7 +659,8 @@ namespace Microsoft.EntityFrameworkCore.Design
         protected virtual MethodCallCodeFragment? GenerateFluentApi(
             INavigation navigation,
             IAnnotation annotation
-        ) {
+        )
+        {
             Check.NotNull(navigation, nameof(navigation));
             Check.NotNull(annotation, nameof(annotation));
 
@@ -661,7 +682,8 @@ namespace Microsoft.EntityFrameworkCore.Design
         protected virtual MethodCallCodeFragment? GenerateFluentApi(
             ISkipNavigation navigation,
             IAnnotation annotation
-        ) {
+        )
+        {
             Check.NotNull(navigation, nameof(navigation));
             Check.NotNull(annotation, nameof(annotation));
 
@@ -683,7 +705,8 @@ namespace Microsoft.EntityFrameworkCore.Design
         protected virtual MethodCallCodeFragment? GenerateFluentApi(
             IIndex index,
             IAnnotation annotation
-        ) {
+        )
+        {
             Check.NotNull(index, nameof(index));
             Check.NotNull(annotation, nameof(annotation));
 
@@ -705,7 +728,8 @@ namespace Microsoft.EntityFrameworkCore.Design
         protected virtual AttributeCodeFragment? GenerateDataAnnotation(
             IEntityType entityType,
             IAnnotation annotation
-        ) {
+        )
+        {
             Check.NotNull(entityType, nameof(entityType));
             Check.NotNull(annotation, nameof(annotation));
 
@@ -727,7 +751,8 @@ namespace Microsoft.EntityFrameworkCore.Design
         protected virtual AttributeCodeFragment? GenerateDataAnnotation(
             IProperty property,
             IAnnotation annotation
-        ) {
+        )
+        {
             Check.NotNull(property, nameof(property));
             Check.NotNull(annotation, nameof(annotation));
 
@@ -758,7 +783,8 @@ namespace Microsoft.EntityFrameworkCore.Design
             TAnnotatable annotatable,
             IDictionary<string, IAnnotation> annotations,
             Func<TAnnotatable, IAnnotation, bool> isHandledByConvention
-        ) {
+        )
+        {
             foreach (var (name, annotation) in EnumerateForRemoval(annotations))
             {
                 if (isHandledByConvention(annotatable, annotation))
@@ -772,11 +798,13 @@ namespace Microsoft.EntityFrameworkCore.Design
             IDictionary<string, IAnnotation> annotations,
             string annotationName,
             [NotNullWhen(true)] out T? annotationValue
-        ) {
+        )
+        {
             if (
                 annotations.TryGetValue(annotationName, out var annotation)
                 && annotation.Value != null
-            ) {
+            )
+            {
                 annotations.Remove(annotationName);
                 annotationValue = (T)annotation.Value;
                 return true;
@@ -791,11 +819,13 @@ namespace Microsoft.EntityFrameworkCore.Design
             string annotationName,
             string methodName,
             List<MethodCallCodeFragment> methodCallCodeFragments
-        ) {
+        )
+        {
             if (
                 annotations.TryGetValue(annotationName, out var annotation)
                 && annotation.Value is object annotationValue
-            ) {
+            )
+            {
                 annotations.Remove(annotationName);
                 methodCallCodeFragments.Add(
                     new MethodCallCodeFragment(methodName, annotationValue)

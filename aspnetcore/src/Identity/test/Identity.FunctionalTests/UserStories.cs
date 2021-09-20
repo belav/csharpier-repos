@@ -20,7 +20,8 @@ namespace Microsoft.AspNetCore.Identity.FunctionalTests
             HttpClient client,
             string userName = null,
             string password = null
-        ) {
+        )
+        {
             userName = userName ?? $"{Guid.NewGuid()}@example.com";
             password = password ?? $"!Test.Password1$";
 
@@ -35,7 +36,8 @@ namespace Microsoft.AspNetCore.Identity.FunctionalTests
             string userName = null,
             string password = null,
             bool hasRealEmailSender = false
-        ) {
+        )
+        {
             userName = userName ?? $"{Guid.NewGuid()}@example.com";
             password = password ?? $"!Test.Password1$";
 
@@ -53,7 +55,8 @@ namespace Microsoft.AspNetCore.Identity.FunctionalTests
             HttpClient client,
             string userName,
             string password
-        ) {
+        )
+        {
             var index = await Index.CreateAsync(client);
 
             var login = await index.ClickLoginLinkAsync();
@@ -65,7 +68,8 @@ namespace Microsoft.AspNetCore.Identity.FunctionalTests
             HttpClient client,
             string userName,
             string password
-        ) {
+        )
+        {
             var index = await Index.CreateAsync(client);
 
             var login = await index.ClickLoginLinkAsync();
@@ -77,7 +81,8 @@ namespace Microsoft.AspNetCore.Identity.FunctionalTests
             HttpClient client,
             string userName,
             string password
-        ) {
+        )
+        {
             var index = await Index.CreateAsync(client);
 
             var login = await index.ClickLoginLinkAsync();
@@ -90,7 +95,8 @@ namespace Microsoft.AspNetCore.Identity.FunctionalTests
             HttpClient client,
             string userName,
             string email
-        ) {
+        )
+        {
             var index = await Index.CreateAsync(
                 client,
                 new DefaultUIContext().WithSocialLoginEnabled()
@@ -110,7 +116,8 @@ namespace Microsoft.AspNetCore.Identity.FunctionalTests
             string userName,
             string email,
             bool hasRealEmailSender = false
-        ) {
+        )
+        {
             var index = await Index.CreateAsync(
                 client,
                 new DefaultUIContext().WithSocialLoginEnabled()
@@ -129,7 +136,8 @@ namespace Microsoft.AspNetCore.Identity.FunctionalTests
             HttpClient client,
             string userName,
             string email
-        ) {
+        )
+        {
             var index = await Index.CreateAsync(
                 client,
                 new DefaultUIContext().WithSocialLoginEnabled()
@@ -161,7 +169,8 @@ namespace Microsoft.AspNetCore.Identity.FunctionalTests
         internal static async Task<Index> LoginWithSocialLoginAsync(
             HttpClient client,
             string userName
-        ) {
+        )
+        {
             var index = await Index.CreateAsync(
                 client,
                 new DefaultUIContext().WithSocialLoginEnabled().WithExistingUser()
@@ -179,7 +188,8 @@ namespace Microsoft.AspNetCore.Identity.FunctionalTests
             string userName,
             string password,
             string twoFactorKey
-        ) {
+        )
+        {
             var index = await Index.CreateAsync(client);
 
             var loginWithPassword = await index.ClickLoginLinkAsync();
@@ -195,7 +205,8 @@ namespace Microsoft.AspNetCore.Identity.FunctionalTests
         internal static async Task<ShowRecoveryCodes> EnableTwoFactorAuthentication(
             Index index,
             bool consent = true
-        ) {
+        )
+        {
             var manage = await index.ClickManageLinkAsync();
             var twoFactor = await manage.ClickTwoFactorLinkAsync(consent);
             if (consent)
@@ -219,7 +230,8 @@ namespace Microsoft.AspNetCore.Identity.FunctionalTests
             string userName,
             string password,
             string recoveryCode
-        ) {
+        )
+        {
             var index = await Index.CreateAsync(client);
 
             var loginWithPassword = await index.ClickLoginLinkAsync();
@@ -237,7 +249,8 @@ namespace Microsoft.AspNetCore.Identity.FunctionalTests
         internal static async Task<ConfirmEmail> ConfirmEmailAsync(
             IdentityEmail email,
             HttpClient client
-        ) {
+        )
+        {
             var emailBody = HtmlAssert.IsHtmlFragment(email.Body);
             var linkElement = HtmlAssert.HasElement("a", emailBody);
             var link = Assert.IsAssignableFrom<IHtmlAnchorElement>(linkElement);
@@ -263,7 +276,8 @@ namespace Microsoft.AspNetCore.Identity.FunctionalTests
         internal static async Task<ForgotPasswordConfirmation> ForgotPasswordAsync(
             HttpClient client,
             string userName
-        ) {
+        )
+        {
             var index = await Index.CreateAsync(client);
 
             var login = await index.ClickLoginLinkAsync();
@@ -278,7 +292,8 @@ namespace Microsoft.AspNetCore.Identity.FunctionalTests
             IdentityEmail resetPasswordEmail,
             string email,
             string newPassword
-        ) {
+        )
+        {
             var emailBody = HtmlAssert.IsHtmlFragment(resetPasswordEmail.Body);
             var linkElement = HtmlAssert.HasElement("a", emailBody);
             var link = Assert.IsAssignableFrom<IHtmlAnchorElement>(linkElement);
@@ -295,7 +310,8 @@ namespace Microsoft.AspNetCore.Identity.FunctionalTests
             Index index,
             string oldPassword,
             string newPassword
-        ) {
+        )
+        {
             var manage = await index.ClickManageLinkAsync();
             var changePassword = await manage.ClickChangePasswordLinkAsync();
 
@@ -313,7 +329,8 @@ namespace Microsoft.AspNetCore.Identity.FunctionalTests
         internal static async Task<ManageExternalLogin> LinkExternalLoginAsync(
             Index index,
             string loginEmail
-        ) {
+        )
+        {
             var manage = await index.ClickManageLinkWithExternalLoginAsync();
             var linkLogin = await manage.ClickLinkLoginAsync();
 
@@ -323,7 +340,8 @@ namespace Microsoft.AspNetCore.Identity.FunctionalTests
         internal static async Task<RemoveExternalLogin> RemoveExternalLoginAsync(
             ManageExternalLogin manageExternalLogin,
             string loginEmail
-        ) {
+        )
+        {
             // Provide an email to link an external account to
             var removeLogin = await manageExternalLogin.ManageExternalLoginAsync(loginEmail);
 

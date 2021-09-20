@@ -254,7 +254,8 @@ namespace System.Web.Mvc.Razor.Test
         private static List<Span> ParseDocument(
             string documentContents,
             IList<RazorError> errors = null
-        ) {
+        )
+        {
             errors = errors ?? new List<RazorError>();
             var markupParser = new HtmlMarkupParser();
             var codeParser = new TestMvcCSharpRazorCodeParser();

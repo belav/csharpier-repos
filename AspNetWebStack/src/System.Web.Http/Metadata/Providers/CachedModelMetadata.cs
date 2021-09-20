@@ -27,14 +27,16 @@ namespace System.Web.Http.Metadata.Providers
         protected CachedModelMetadata(
             CachedModelMetadata<TPrototypeCache> prototype,
             Func<object> modelAccessor
-        ) : base(
-            prototype.Provider,
-            prototype.ContainerType,
-            modelAccessor,
-            prototype.ModelType,
-            prototype.PropertyName,
-            prototype.CacheKey
-        ) {
+        )
+            : base(
+                prototype.Provider,
+                prototype.ContainerType,
+                modelAccessor,
+                prototype.ModelType,
+                prototype.PropertyName,
+                prototype.CacheKey
+            )
+        {
             PrototypeCache = prototype.PrototypeCache;
 
             _isComplexType = prototype.IsComplexType;
@@ -48,14 +50,16 @@ namespace System.Web.Http.Metadata.Providers
             Type modelType,
             string propertyName,
             TPrototypeCache prototypeCache
-        ) : base(
-            provider,
-            containerType,
-            null /* modelAccessor */
-            ,
-            modelType,
-            propertyName
-        ) {
+        )
+            : base(
+                provider,
+                containerType,
+                null /* modelAccessor */
+                ,
+                modelType,
+                propertyName
+            )
+        {
             PrototypeCache = prototypeCache;
         }
 

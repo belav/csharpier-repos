@@ -197,7 +197,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Test.Utilities
             this CSharpParseOptions options,
             string feature,
             string value = "true"
-        ) {
+        )
+        {
             return options.WithFeatures(
                 options.Features.Concat(new[] { new KeyValuePair<string, string>(feature, value) })
             );
@@ -206,7 +207,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Test.Utilities
         internal static CSharpParseOptions WithExperimental(
             this CSharpParseOptions options,
             params MessageID[] features
-        ) {
+        )
+        {
             if (features.Length == 0)
             {
                 throw new InvalidOperationException("Need at least one feature to enable");
@@ -232,7 +234,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Test.Utilities
             this CSharpCompilationOptions options,
             string key,
             ReportDiagnostic value
-        ) {
+        )
+        {
             return options.WithSpecificDiagnosticOptions(
                 ImmutableDictionary<string, ReportDiagnostic>.Empty.Add(key, value)
             );
@@ -243,7 +246,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Test.Utilities
             string key1,
             string key2,
             ReportDiagnostic value
-        ) {
+        )
+        {
             return options.WithSpecificDiagnosticOptions(
                 ImmutableDictionary<string, ReportDiagnostic>.Empty.Add(key1, value)
                     .Add(key2, value)

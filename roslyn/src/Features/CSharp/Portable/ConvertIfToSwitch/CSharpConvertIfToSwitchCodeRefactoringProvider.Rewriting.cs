@@ -32,7 +32,8 @@ namespace Microsoft.CodeAnalysis.CSharp.ConvertIfToSwitch
             SyntaxNode target,
             ImmutableArray<AnalyzedSwitchSection> sections,
             Feature feature
-        ) {
+        )
+        {
             return ReturnStatement(
                 SwitchExpression(
                     (ExpressionSyntax)target,
@@ -46,7 +47,8 @@ namespace Microsoft.CodeAnalysis.CSharp.ConvertIfToSwitch
         private static SwitchExpressionArmSyntax AsSwitchExpressionArmSyntax(
             AnalyzedSwitchSection section,
             Feature feature
-        ) {
+        )
+        {
             if (section.Labels.IsDefault)
                 return SwitchExpressionArm(DiscardPattern(), AsExpressionSyntax(section.Body));
 
@@ -90,7 +92,8 @@ namespace Microsoft.CodeAnalysis.CSharp.ConvertIfToSwitch
             IfStatementSyntax ifStatement,
             SyntaxNode expression,
             IEnumerable<SyntaxNode> sectionList
-        ) {
+        )
+        {
             var block = ifStatement.Statement as BlockSyntax;
             return SwitchStatement(
                 switchKeyword: Token(SyntaxKind.SwitchKeyword)

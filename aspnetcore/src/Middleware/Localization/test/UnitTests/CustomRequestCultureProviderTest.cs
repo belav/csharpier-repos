@@ -85,7 +85,8 @@ namespace Microsoft.Extensions.Localization
         private string GetCultureInfoFromUrl(
             HttpContext context,
             IList<CultureInfo> supportedCultures
-        ) {
+        )
+        {
             var currentCulture = "en";
             var segments = context.Request.Path.Value.Split(
                 new char[] { '/' },

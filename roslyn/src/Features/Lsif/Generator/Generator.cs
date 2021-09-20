@@ -35,7 +35,8 @@ namespace Microsoft.CodeAnalysis.LanguageServerIndexFormat.Generator
             string projectPath,
             HostLanguageServices languageServices,
             OptionSet options
-        ) {
+        )
+        {
             var projectVertex = new Graph.LsifProject(
                 kind: GetLanguageKind(compilation.Language),
                 new Uri(projectPath),
@@ -113,7 +114,8 @@ namespace Microsoft.CodeAnalysis.LanguageServerIndexFormat.Generator
             IResultSetTracker topLevelSymbolsResultSetTracker,
             ILsifJsonWriter lsifJsonWriter,
             IdFactory idFactory
-        ) {
+        )
+        {
             var syntaxTree = semanticModel.SyntaxTree;
             var sourceText = semanticModel.SyntaxTree.GetText();
             var syntaxFactsService = languageServices.GetRequiredService<ISyntaxFactsService>();
@@ -163,7 +165,8 @@ namespace Microsoft.CodeAnalysis.LanguageServerIndexFormat.Generator
                         symbol.Kind == SymbolKind.Local
                         || symbol.Kind == SymbolKind.RangeVariable
                         || symbol.Kind == SymbolKind.Label
-                    ) {
+                    )
+                    {
                         // These symbols can go in the document local one because they can't escape methods
                         return documentLocalSymbolsResultSetTracker;
                     }
@@ -171,7 +174,8 @@ namespace Microsoft.CodeAnalysis.LanguageServerIndexFormat.Generator
                         symbol.ContainingType != null
                         && symbol.DeclaredAccessibility == Accessibility.Private
                         && symbol.ContainingType.Locations.Length == 1
-                    ) {
+                    )
+                    {
                         // This is a private member in a class that isn't partial, so it can't escape the file
                         return documentLocalSymbolsResultSetTracker;
                     }
@@ -187,7 +191,8 @@ namespace Microsoft.CodeAnalysis.LanguageServerIndexFormat.Generator
 
             foreach (
                 var syntaxToken in syntaxTree.GetRoot().DescendantTokens(descendIntoTrivia: true)
-            ) {
+            )
+            {
                 // We'll only create the Range vertex once it's needed, but any number of bits of code might create it first,
                 // so we'll just make it Lazy.
                 var lazyRangeVertex = new Lazy<Graph.Range>(
@@ -224,7 +229,8 @@ namespace Microsoft.CodeAnalysis.LanguageServerIndexFormat.Generator
                         if (
                             symbolInfo.Symbol != null
                             && IncludeSymbolInReferences(symbolInfo.Symbol)
-                        ) {
+                        )
+                        {
                             referencedSymbol = symbolInfo.Symbol;
                         }
                     }
@@ -326,7 +332,8 @@ namespace Microsoft.CodeAnalysis.LanguageServerIndexFormat.Generator
                 symbol.Kind == SymbolKind.ArrayType
                 || symbol.Kind == SymbolKind.Discard
                 || symbol.Kind == SymbolKind.ErrorType
-            ) {
+            )
+            {
                 return false;
             }
 

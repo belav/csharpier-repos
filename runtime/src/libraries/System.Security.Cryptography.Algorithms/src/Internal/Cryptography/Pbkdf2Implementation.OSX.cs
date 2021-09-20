@@ -16,7 +16,8 @@ namespace Internal.Cryptography
             int iterations,
             HashAlgorithmName hashAlgorithmName,
             Span<byte> destination
-        ) {
+        )
+        {
             Debug.Assert(!destination.IsEmpty);
 
             PAL_HashAlgorithm prfAlgorithm;

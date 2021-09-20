@@ -533,7 +533,8 @@ namespace Microsoft.EntityFrameworkCore
             > configureLogging,
             int dateAt = 6,
             bool utc = false
-        ) {
+        )
+        {
             var options =
                 configureLogging(
                     new DbContextOptionsBuilder<LoggingContext>().UseInMemoryDatabase(

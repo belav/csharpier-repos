@@ -60,7 +60,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Tagging
             static List<ITagSpan<TestTag>> tagProducer(
                 SnapshotSpan span,
                 CancellationToken cancellationToken
-            ) {
+            )
+            {
                 return new List<ITagSpan<TestTag>>() { new TagSpan<TestTag>(span, new TestTag()) };
             }
 
@@ -164,7 +165,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Tagging
                 TaggerContext<TestTag> context,
                 DocumentSnapshotSpan snapshotSpan,
                 int? caretPosition
-            ) {
+            )
+            {
                 var tags = _callback(snapshotSpan.SnapshotSpan, context.CancellationToken);
                 if (tags != null)
                 {

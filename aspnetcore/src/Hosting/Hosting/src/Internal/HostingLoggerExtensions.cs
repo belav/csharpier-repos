@@ -66,7 +66,8 @@ namespace Microsoft.AspNetCore.Hosting
             EventId eventId,
             string message,
             Exception exception
-        ) {
+        )
+        {
             var reflectionTypeLoadException = exception as ReflectionTypeLoadException;
             if (reflectionTypeLoadException != null)
             {

@@ -1011,7 +1011,8 @@ public class Tests
                     (mono_test_marshal_safearray_in_out_byref_1dim_vt_i4(ref array) != 0)
                     || (array.Rank != 1)
                     || (array.Length != 1)
-                ) {
+                )
+                {
                     return 85;
                 }
                 if (Convert.ToInt32(array.GetValue(0)) != -1)
@@ -1024,7 +1025,8 @@ public class Tests
                     (mono_test_marshal_safearray_in_out_byval_1dim_vt_i4(array) != 0)
                     || (array.Rank != 1)
                     || (array.Length != 1)
-                ) {
+                )
+                {
                     return 87;
                 }
                 if (Convert.ToInt32(array.GetValue(0)) != 12345)
@@ -1039,7 +1041,8 @@ public class Tests
                     (mono_test_marshal_safearray_in_out_byval_3dim_vt_bstr(array) != 0)
                     || (array.Rank != 3)
                     || (array.Length != 12)
-                ) {
+                )
+                {
                     return 89;
                 }
                 if (Convert.ToInt32(array.GetValue(new int[] { 1, 1, 1 })) != 111)
@@ -1083,7 +1086,8 @@ public class Tests
                     || (array2.Length != 10)
                     || (array4.Rank != 1)
                     || (array4.Length != 8)
-                ) {
+                )
+                {
                     return 93;
                 }
                 for (int i = 0; i < 10; ++i)

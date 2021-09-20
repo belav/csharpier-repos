@@ -769,7 +769,8 @@ class C
             SemanticModel model,
             SyntaxNode node,
             string name
-        ) {
+        )
+        {
             Assert.NotNull(node);
             var symbol = model.GetDeclaredSymbol(node);
             Assert.NotNull(symbol);
@@ -1795,7 +1796,8 @@ interface IB<T3, T4>
             SemanticModel model,
             TypeParameterConstraintClauseSyntax constraintSyntax,
             string name
-        ) {
+        )
+        {
             var constraintStart = constraintSyntax.WhereKeyword.SpanStart;
             var symbols = model.LookupSymbols(constraintStart, null, name: name);
             Assert.Equal(1, symbols.Length);
@@ -2405,14 +2407,16 @@ class C
         private static void CheckSymbols(
             ImmutableArray<ISymbol> symbols,
             params string[] descriptions
-        ) {
+        )
+        {
             CompilationUtils.CheckISymbols(symbols, descriptions);
         }
 
         private static void CheckSymbolsUnordered(
             ImmutableArray<ISymbol> symbols,
             params string[] descriptions
-        ) {
+        )
+        {
             CompilationUtils.CheckSymbolsUnordered(symbols, descriptions);
         }
 
@@ -6331,7 +6335,8 @@ class Program
             string expectedSymbol,
             string expectedType,
             object expectedConstant
-        ) {
+        )
+        {
             var symbol = (IParameterSymbol)model.GetDeclaredSymbol(decl);
             Assert.Equal(expectedOrdinal, symbol.Ordinal);
             Assert.Equal(expectedSymbol, symbol.ToTestDisplayString());

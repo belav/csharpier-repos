@@ -184,7 +184,8 @@ namespace Microsoft.EntityFrameworkCore
             DbContext context,
             bool clientOrder,
             List<Blog> expectedBlogs
-        ) {
+        )
+        {
             expectedBlogs = clientOrder
                 ? expectedBlogs.OrderBy(b => b.Order).ToList()
                 : expectedBlogs.OrderBy(b => b.Id).ToList();

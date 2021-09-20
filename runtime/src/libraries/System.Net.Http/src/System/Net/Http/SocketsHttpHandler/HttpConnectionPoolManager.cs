@@ -195,7 +195,8 @@ namespace System.Net.Http
                         poolsRef.TryGetTarget(
                             out ConcurrentDictionary<HttpConnectionKey, HttpConnectionPool>? pools
                         )
-                    ) {
+                    )
+                    {
                         foreach (HttpConnectionPool pool in pools.Values)
                         {
                             pool.OnNetworkChanged();
@@ -282,7 +283,8 @@ namespace System.Net.Http
             HttpRequestMessage request,
             Uri? proxyUri,
             bool isProxyConnect
-        ) {
+        )
+        {
             Uri? uri = request.RequestUri;
             Debug.Assert(uri != null);
 
@@ -396,7 +398,8 @@ namespace System.Net.Http
             bool doRequestAuth,
             bool isProxyConnect,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             HttpConnectionKey key = GetConnectionKey(request, proxyUri, isProxyConnect);
 
             HttpConnectionPool? pool;
@@ -445,7 +448,8 @@ namespace System.Net.Http
             Uri proxyUri,
             bool async,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             return SendAsyncCore(
                 request,
                 proxyUri,
@@ -461,7 +465,8 @@ namespace System.Net.Http
             bool async,
             bool doRequestAuth,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             if (_proxy == null)
             {
                 return SendAsyncCore(
@@ -488,7 +493,8 @@ namespace System.Net.Http
                         if (
                             multiProxy.ReadNext(out proxyUri, out bool isFinalProxy)
                             && !isFinalProxy
-                        ) {
+                        )
+                        {
                             return SendAsyncMultiProxy(
                                 request,
                                 async,
@@ -547,7 +553,8 @@ namespace System.Net.Http
             MultiProxy multiProxy,
             Uri? firstProxy,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             HttpRequestException rethrowException;
 
             do
@@ -672,7 +679,8 @@ namespace System.Net.Http
                 string? sslHostName,
                 Uri? proxyUri,
                 string identity
-            ) {
+            )
+            {
                 Kind = kind;
                 Host = host;
                 Port = port;

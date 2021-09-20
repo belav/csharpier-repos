@@ -44,7 +44,8 @@ namespace MS.Internal.Xml.XPath
             if (
                 _qyInput.StaticType != XPathResultType.NodeSet
                 && _qyInput.StaticType != XPathResultType.Any
-            ) {
+            )
+            {
                 throw XPathException.Create(SR.Xp_NodeSetExpected);
             }
         }
@@ -209,7 +210,8 @@ namespace MS.Internal.Xml.XPath
             if (
                 evalQuery.StaticType == XPathResultType.NodeSet
                 || evalQuery.StaticType == XPathResultType.Any
-            ) {
+            )
+            {
                 evalQuery = new StringFunctions(
                     Function.FunctionType.FuncString,
                     new Query[] { evalQuery }

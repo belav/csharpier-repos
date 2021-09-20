@@ -22,7 +22,8 @@ namespace System.Net.Connections
         public static bool TryGet<T>(
             this IConnectionProperties properties,
             [MaybeNullWhen(false)] out T property
-        ) {
+        )
+        {
             if (properties == null)
                 throw new ArgumentNullException(nameof(properties));
 
@@ -52,7 +53,8 @@ namespace System.Net.Connections
                 CancellationToken,
                 ValueTask<Connection>
             > filter
-        ) {
+        )
+        {
             if (factory == null)
                 throw new ArgumentNullException(nameof(factory));
             if (filter == null)
@@ -78,7 +80,8 @@ namespace System.Net.Connections
                     CancellationToken,
                     ValueTask<Connection>
                 > filter
-            ) {
+            )
+            {
                 _baseFactory = baseFactory;
                 _filter = filter;
             }
@@ -87,7 +90,8 @@ namespace System.Net.Connections
                 EndPoint? endPoint,
                 IConnectionProperties? options = null,
                 CancellationToken cancellationToken = default
-            ) {
+            )
+            {
                 Connection con = await _baseFactory.ConnectAsync(
                         endPoint,
                         options,

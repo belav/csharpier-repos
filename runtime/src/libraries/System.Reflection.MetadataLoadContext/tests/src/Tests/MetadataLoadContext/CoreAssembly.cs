@@ -39,7 +39,8 @@ namespace System.Reflection.Tests
                     }
                     else if (
                         refName.Name == new AssemblyName(TestData.s_PhonyCoreAssemblyFullName).Name
-                    ) {
+                    )
+                    {
                         return testAssembly = context.LoadFromByteArray(
                             TestData.s_PhonyCoreAssemblyImage
                         );
@@ -53,7 +54,8 @@ namespace System.Reflection.Tests
                     resolver,
                     coreAssemblyName: TestData.s_PhonyCoreAssemblyFullName
                 )
-            ) {
+            )
+            {
                 // This is a sanity check to ensure that "TestData.s_PhonyCoreAssemblyFullName" is actually the def-name of this
                 // assembly. It better be since we told our MetadataLoadContext to use it as our core assembly.
                 Assembly aAgain = lc.LoadFromAssemblyName(TestData.s_PhonyCoreAssemblyFullName);

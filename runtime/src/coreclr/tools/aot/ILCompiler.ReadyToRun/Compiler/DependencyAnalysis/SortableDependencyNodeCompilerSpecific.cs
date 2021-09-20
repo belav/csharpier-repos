@@ -21,7 +21,8 @@ namespace ILCompiler.DependencyAnalysis
             SortableDependencyNode x,
             SortableDependencyNode y,
             ref int result
-        ) {
+        )
+        {
             result = x.CustomSort.CompareTo(y.CustomSort);
         }
     }

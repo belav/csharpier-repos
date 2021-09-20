@@ -57,7 +57,8 @@ namespace Microsoft.CodeAnalysis.CSharp.NewLines.ConstructorInitializerPlacement
             SyntaxTreeAnalysisContext context,
             ReportDiagnostic severity,
             SyntaxNode node
-        ) {
+        )
+        {
             context.CancellationToken.ThrowIfCancellationRequested();
 
             // Don't bother analyzing nodes that have syntax errors in them.
@@ -78,7 +79,8 @@ namespace Microsoft.CodeAnalysis.CSharp.NewLines.ConstructorInitializerPlacement
             SyntaxTreeAnalysisContext context,
             ReportDiagnostic severity,
             ConstructorInitializerSyntax initializer
-        ) {
+        )
+        {
             var sourceText = context.Tree.GetText(context.CancellationToken);
 
             var colonToken = initializer.ColonToken;

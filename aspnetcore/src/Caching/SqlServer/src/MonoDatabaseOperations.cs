@@ -67,7 +67,8 @@ namespace Microsoft.Extensions.Caching.SqlServer
             string key,
             bool includeValue,
             CancellationToken token = default(CancellationToken)
-        ) {
+        )
+        {
             token.ThrowIfCancellationRequested();
 
             var utcNow = SystemClock.UtcNow;
@@ -117,7 +118,8 @@ namespace Microsoft.Extensions.Caching.SqlServer
             string key,
             byte[] value,
             DistributedCacheEntryOptions options
-        ) {
+        )
+        {
             var utcNow = SystemClock.UtcNow;
 
             var absoluteExpiration = GetAbsoluteExpiration(utcNow, options);
@@ -158,7 +160,8 @@ namespace Microsoft.Extensions.Caching.SqlServer
             byte[] value,
             DistributedCacheEntryOptions options,
             CancellationToken token = default(CancellationToken)
-        ) {
+        )
+        {
             token.ThrowIfCancellationRequested();
 
             var utcNow = SystemClock.UtcNow;

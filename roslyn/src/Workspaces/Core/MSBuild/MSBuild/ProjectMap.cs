@@ -91,7 +91,8 @@ namespace Microsoft.CodeAnalysis.MSBuild
             string? projectPath,
             string? outputFilePath,
             string? outputRefFilePath
-        ) {
+        )
+        {
             if (!RoslynString.IsNullOrEmpty(projectPath))
             {
                 _projectPathToProjectIdsMap.MultiAdd(projectPath, projectId);
@@ -135,7 +136,8 @@ namespace Microsoft.CodeAnalysis.MSBuild
             string? projectPath,
             string? outputFilePath,
             string? outputRefFilePath
-        ) {
+        )
+        {
             var newProjectId = ProjectId.CreateNewId(debugName: projectPath);
             Add(newProjectId, projectPath, outputFilePath, outputRefFilePath);
             return newProjectId;
@@ -173,7 +175,8 @@ namespace Microsoft.CodeAnalysis.MSBuild
                         projectIds,
                         out projectId
                     )
-                ) {
+                )
+                {
                     return projectId;
                 }
             }
@@ -199,7 +202,8 @@ namespace Microsoft.CodeAnalysis.MSBuild
             Func<ProjectId, string?> getPathById,
             HashSet<ProjectId> set,
             [NotNullWhen(true)] out ProjectId? result
-        ) {
+        )
+        {
             if (!RoslynString.IsNullOrEmpty(path))
             {
                 foreach (var id in set)

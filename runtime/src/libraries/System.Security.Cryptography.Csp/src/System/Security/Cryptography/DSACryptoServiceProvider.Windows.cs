@@ -385,7 +385,8 @@ namespace System.Security.Cryptography
             ReadOnlySpan<byte> passwordBytes,
             ReadOnlySpan<byte> source,
             out int bytesRead
-        ) {
+        )
+        {
             ThrowIfDisposed();
             base.ImportEncryptedPkcs8PrivateKey(passwordBytes, source, out bytesRead);
         }
@@ -394,7 +395,8 @@ namespace System.Security.Cryptography
             ReadOnlySpan<char> password,
             ReadOnlySpan<byte> source,
             out int bytesRead
-        ) {
+        )
+        {
             ThrowIfDisposed();
             base.ImportEncryptedPkcs8PrivateKey(password, source, out bytesRead);
         }
@@ -466,7 +468,8 @@ namespace System.Security.Cryptography
             int offset,
             int count,
             HashAlgorithmName hashAlgorithm
-        ) {
+        )
+        {
             // we're sealed and the base should have checked this before calling us
             Debug.Assert(data != null);
             Debug.Assert(offset >= 0 && offset <= data.Length);
@@ -583,7 +586,8 @@ namespace System.Security.Cryptography
                 || keyBlob[10] != 0x53
                 || keyBlob[9] != 0x53
                 || keyBlob[8] != 0x44
-            ) {
+            )
+            {
                 return false;
             }
 

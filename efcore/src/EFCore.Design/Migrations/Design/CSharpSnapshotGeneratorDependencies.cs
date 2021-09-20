@@ -51,7 +51,8 @@ namespace Microsoft.EntityFrameworkCore.Migrations.Design
             ICSharpHelper csharpHelper,
             IRelationalTypeMappingSource relationalTypeMappingSource,
             IAnnotationCodeGenerator annotationCodeGenerator
-        ) {
+        )
+        {
             Check.NotNull(csharpHelper, nameof(csharpHelper));
 
             CSharpHelper = csharpHelper;

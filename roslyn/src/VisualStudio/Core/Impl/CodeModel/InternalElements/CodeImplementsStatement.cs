@@ -21,7 +21,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.CodeModel.Inter
             AbstractCodeMember parent,
             string namespaceName,
             int ordinal
-        ) {
+        )
+        {
             var element = new CodeImplementsStatement(state, parent, namespaceName, ordinal);
             var result = (EnvDTE80.CodeElement2)ComAggregate.CreateAggregatedObject(element);
 
@@ -33,7 +34,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.CodeModel.Inter
             FileCodeModel fileCodeModel,
             int nodeKind,
             string name
-        ) {
+        )
+        {
             var element = new CodeImplementsStatement(state, fileCodeModel, nodeKind, name);
             return (EnvDTE80.CodeElement2)ComAggregate.CreateAggregatedObject(element);
         }
@@ -81,7 +83,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.CodeModel.Inter
                     _ordinal,
                     out var implementsNode
                 )
-            ) {
+            )
+            {
                 return false;
             }
 

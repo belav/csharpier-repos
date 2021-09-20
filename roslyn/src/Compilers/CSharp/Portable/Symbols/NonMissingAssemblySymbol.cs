@@ -92,7 +92,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             ref MetadataTypeName emittedName,
             ConsList<AssemblySymbol> visitedAssemblies,
             bool digThroughForwardedTypes
-        ) {
+        )
+        {
             NamedTypeSymbol result = null;
 
             // This is a cache similar to the one used by MetaImport::GetTypeByName in native
@@ -123,7 +124,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                 if (
                     digThroughForwardedTypes
                     || (!result.IsErrorType() && (object)result.ContainingAssembly == (object)this)
-                ) {
+                )
+                {
                     return result;
                 }
 
@@ -225,7 +227,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
         private void CacheTopLevelMetadataType(
             ref MetadataTypeName emittedName,
             NamedTypeSymbol result
-        ) {
+        )
+        {
             NamedTypeSymbol result1 = null;
             result1 = _emittedNameToTypeMap.GetOrAdd(emittedName.ToKey(), result);
             System.Diagnostics.Debug.Assert(

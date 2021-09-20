@@ -131,7 +131,8 @@ namespace System.CommandLine.Tests
         [InlineData("inner -h")]
         public void UseHelp_can_be_called_more_than_once_on_the_same_CommandLineBuilder(
             string commandline
-        ) {
+        )
+        {
             var root = new RootCommand { new Command("inner") };
 
             var parser = new CommandLineBuilder(root).UseHelp().UseHelp().Build();
@@ -146,7 +147,8 @@ namespace System.CommandLine.Tests
         [InlineData("inner -h")]
         public void UseHelp_can_be_called_more_than_once_on_the_same_command_with_different_CommandLineBuilders(
             string commandline
-        ) {
+        )
+        {
             var root = new RootCommand { new Command("inner") };
 
             var parser = new CommandLineBuilder(root).UseHelp().Build();

@@ -26,7 +26,8 @@ namespace Microsoft.AspNetCore.TestHost
         public ApplicationWrapper(
             IHttpApplication<TContext> application,
             Action preProcessRequestAsync
-        ) {
+        )
+        {
             _application = application;
             _preProcessRequestAsync = preProcessRequestAsync;
         }

@@ -88,7 +88,8 @@ namespace System.Diagnostics
 
         private static System.Diagnostics.ThreadState ConvertOsxThreadRunStateToThreadState(
             Interop.libproc.ThreadRunState state
-        ) {
+        )
+        {
             switch (state)
             {
                 case Interop.libproc.ThreadRunState.TH_STATE_RUNNING:
@@ -108,7 +109,8 @@ namespace System.Diagnostics
 
         private static System.Diagnostics.ThreadWaitReason ConvertOsxThreadFlagsToWaitReason(
             Interop.libproc.ThreadFlags flags
-        ) {
+        )
+        {
             // Since ThreadWaitReason isn't a flag, we have to do a mapping and will lose some information.
             if (
                 (flags & Interop.libproc.ThreadFlags.TH_FLAGS_SWAPPED)

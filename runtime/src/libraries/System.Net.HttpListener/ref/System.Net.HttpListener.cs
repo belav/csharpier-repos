@@ -119,14 +119,16 @@ namespace System.Net
         }
         public System.Threading.Tasks.Task<System.Net.WebSockets.HttpListenerWebSocketContext> AcceptWebSocketAsync(
             string? subProtocol
-        ) {
+        )
+        {
             throw null;
         }
         public System.Threading.Tasks.Task<System.Net.WebSockets.HttpListenerWebSocketContext> AcceptWebSocketAsync(
             string? subProtocol,
             int receiveBufferSize,
             System.TimeSpan keepAliveInterval
-        ) {
+        )
+        {
             throw null;
         }
         public System.Threading.Tasks.Task<System.Net.WebSockets.HttpListenerWebSocketContext> AcceptWebSocketAsync(
@@ -134,13 +136,15 @@ namespace System.Net
             int receiveBufferSize,
             System.TimeSpan keepAliveInterval,
             System.ArraySegment<byte> internalBuffer
-        ) {
+        )
+        {
             throw null;
         }
         public System.Threading.Tasks.Task<System.Net.WebSockets.HttpListenerWebSocketContext> AcceptWebSocketAsync(
             string? subProtocol,
             System.TimeSpan keepAliveInterval
-        ) {
+        )
+        {
             throw null;
         }
     }
@@ -319,12 +323,14 @@ namespace System.Net
         public System.IAsyncResult BeginGetClientCertificate(
             System.AsyncCallback? requestCallback,
             object? state
-        ) {
+        )
+        {
             throw null;
         }
         public System.Security.Cryptography.X509Certificates.X509Certificate2? EndGetClientCertificate(
             System.IAsyncResult asyncResult
-        ) {
+        )
+        {
             throw null;
         }
         public System.Security.Cryptography.X509Certificates.X509Certificate2? GetClientCertificate()

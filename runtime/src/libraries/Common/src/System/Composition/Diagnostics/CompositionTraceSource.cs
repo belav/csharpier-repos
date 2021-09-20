@@ -26,7 +26,8 @@ namespace System.Composition.Diagnostics
             CompositionTraceId traceId,
             string format,
             params object[] arguments
-        ) {
+        )
+        {
             EnsureEnabled(CanWriteInformation);
 
             s_source.WriteInformation(traceId, format, arguments);
@@ -36,7 +37,8 @@ namespace System.Composition.Diagnostics
             CompositionTraceId traceId,
             string format,
             params object[] arguments
-        ) {
+        )
+        {
             EnsureEnabled(CanWriteWarning);
 
             s_source.WriteWarning(traceId, format, arguments);
@@ -46,7 +48,8 @@ namespace System.Composition.Diagnostics
             CompositionTraceId traceId,
             string format,
             params object[] arguments
-        ) {
+        )
+        {
             EnsureEnabled(CanWriteError);
 
             s_source.WriteError(traceId, format, arguments);

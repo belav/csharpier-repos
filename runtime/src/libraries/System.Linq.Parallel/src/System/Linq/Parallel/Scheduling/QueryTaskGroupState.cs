@@ -120,7 +120,8 @@ namespace System.Linq.Parallel
                             oce == null
                             || !oce.CancellationToken.IsCancellationRequested
                             || oce.CancellationToken != _cancellationState.ExternalCancellationToken
-                        ) {
+                        )
+                        {
                             allOCEsOnTrackedExternalCancellationToken = false;
                             break;
                         }

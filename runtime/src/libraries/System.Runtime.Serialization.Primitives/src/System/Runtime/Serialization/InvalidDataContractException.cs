@@ -19,9 +19,7 @@ namespace System.Runtime.Serialization
         public InvalidDataContractException(string? message, Exception? innerException)
             : base(message, innerException) { }
 
-        protected InvalidDataContractException(
-            SerializationInfo info,
-            StreamingContext context
-        ) : base(info, context) { }
+        protected InvalidDataContractException(SerializationInfo info, StreamingContext context)
+            : base(info, context) { }
     }
 }

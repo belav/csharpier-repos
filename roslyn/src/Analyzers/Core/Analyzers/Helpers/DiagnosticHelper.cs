@@ -44,7 +44,8 @@ namespace Microsoft.CodeAnalysis.Diagnostics
             IEnumerable<Location> additionalLocations,
             ImmutableDictionary<string, string> properties,
             params object[] messageArgs
-        ) {
+        )
+        {
             if (descriptor == null)
             {
                 throw new ArgumentNullException(nameof(descriptor));
@@ -96,7 +97,8 @@ namespace Microsoft.CodeAnalysis.Diagnostics
             ImmutableArray<Location> additionalLocations,
             ImmutableArray<Location> additionalUnnecessaryLocations,
             params object[] messageArgs
-        ) {
+        )
+        {
             if (additionalUnnecessaryLocations.IsEmpty)
             {
                 return Create(
@@ -155,7 +157,8 @@ namespace Microsoft.CodeAnalysis.Diagnostics
             ImmutableArray<Location> additionalUnnecessaryLocations,
             ImmutableDictionary<string, string> properties,
             params object[] messageArgs
-        ) {
+        )
+        {
             if (additionalUnnecessaryLocations.IsEmpty)
             {
                 return Create(
@@ -211,7 +214,8 @@ namespace Microsoft.CodeAnalysis.Diagnostics
             IDictionary<string, IEnumerable<int>> tagIndices,
             ImmutableDictionary<string, string> properties,
             params object[] messageArgs
-        ) {
+        )
+        {
             Contract.ThrowIfTrue(additionalLocations.IsEmpty());
             Contract.ThrowIfTrue(tagIndices.IsEmpty());
 
@@ -277,7 +281,8 @@ namespace Microsoft.CodeAnalysis.Diagnostics
             IEnumerable<Location> additionalLocations,
             ImmutableDictionary<string, string> properties,
             LocalizableString message
-        ) {
+        )
+        {
             if (descriptor == null)
             {
                 throw new ArgumentNullException(nameof(descriptor));
@@ -332,7 +337,8 @@ namespace Microsoft.CodeAnalysis.Diagnostics
             public LocalizableStringWithArguments(
                 LocalizableString messageFormat,
                 params object[] formatArguments
-            ) {
+            )
+            {
                 if (messageFormat == null)
                 {
                     throw new ArgumentNullException(nameof(messageFormat));

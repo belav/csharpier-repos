@@ -25,7 +25,8 @@ namespace System.IO.Packaging
         protected override Stream? GetStreamCore(
             FileMode streamFileMode,
             FileAccess streamFileAccess
-        ) {
+        )
+        {
             if (_zipArchiveEntry != null)
             {
                 // Reset the stream when FileMode.Create is specified.  Since ZipArchiveEntry only
@@ -36,14 +37,16 @@ namespace System.IO.Packaging
                 if (
                     streamFileMode == FileMode.Create
                     && _zipArchiveEntry.Archive.Mode != ZipArchiveMode.Create
-                ) {
+                )
+                {
                     using (
                         var tempStream = _zipStreamManager.Open(
                             _zipArchiveEntry,
                             streamFileMode,
                             streamFileAccess
                         )
-                    ) {
+                    )
+                    {
                         tempStream.SetLength(0);
                     }
                 }

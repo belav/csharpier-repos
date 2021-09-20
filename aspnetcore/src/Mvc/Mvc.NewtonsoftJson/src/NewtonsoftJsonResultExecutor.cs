@@ -47,7 +47,8 @@ namespace Microsoft.AspNetCore.Mvc.NewtonsoftJson
             IOptions<MvcOptions> mvcOptions,
             IOptions<MvcNewtonsoftJsonOptions> jsonOptions,
             ArrayPool<char> charPool
-        ) {
+        )
+        {
             if (writerFactory == null)
             {
                 throw new ArgumentNullException(nameof(writerFactory));
@@ -130,7 +131,8 @@ namespace Microsoft.AspNetCore.Mvc.NewtonsoftJson
                         responseStream,
                         resolvedContentTypeEncoding
                     )
-                ) {
+                )
+                {
                     using var jsonWriter = new JsonTextWriter(writer);
                     jsonWriter.ArrayPool = _charPool;
                     jsonWriter.CloseOutput = false;
@@ -144,7 +146,8 @@ namespace Microsoft.AspNetCore.Mvc.NewtonsoftJson
                             value.GetType(),
                             out var reader
                         )
-                    ) {
+                    )
+                    {
                         Log.BufferingAsyncEnumerable(_logger, value);
                         value = await reader(value);
                     }

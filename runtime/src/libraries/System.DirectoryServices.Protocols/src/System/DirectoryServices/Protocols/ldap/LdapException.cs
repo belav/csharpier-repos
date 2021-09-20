@@ -84,7 +84,8 @@ namespace System.DirectoryServices.Protocols
                 error == LdapError.IsLeaf
                 || error == LdapError.InvalidCredentials
                 || error == LdapError.SendTimeOut
-            ) {
+            )
+            {
                 return true;
             }
 
@@ -163,11 +164,8 @@ namespace System.DirectoryServices.Protocols
         public TlsOperationException(DirectoryResponse response, string message)
             : base(response, message) { }
 
-        public TlsOperationException(
-            DirectoryResponse response,
-            string message,
-            Exception inner
-        ) : base(response, message, inner) { }
+        public TlsOperationException(DirectoryResponse response, string message, Exception inner)
+            : base(response, message, inner) { }
     }
 
     internal static class ErrorChecking

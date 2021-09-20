@@ -166,7 +166,8 @@ namespace Microsoft.Extensions.DependencyInjection
 
         private static ProblemDetailsFactory GetProblemDetailsFactory(
             Action<ApiBehaviorOptions> configure = null
-        ) {
+        )
+        {
             var options = new ApiBehaviorOptions();
             var setup = new ApiBehaviorOptionsSetup();
 

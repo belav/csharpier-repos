@@ -29,7 +29,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.AutomaticCompletion
             string description,
             ITextUndoHistoryRegistry registry,
             IEditorOperationsFactoryService service
-        ) {
+        )
+        {
             return new CaretPreservingEditTransaction(description, view, registry, service)
             {
                 MergePolicy = AutomaticCodeChangeMergePolicy.Instance
@@ -40,7 +41,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.AutomaticCompletion
             this ITextSnapshot snapshot,
             int position,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var document = snapshot.GetOpenDocumentInCurrentContextWithChanges();
             if (document == null)
             {
@@ -91,7 +93,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.AutomaticCompletion
             this Document document,
             IEnumerable<TextChange> textChanges,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             // here assumption is that text change are based on current solution
             var oldSolution = document.Project.Solution;
             var newSolution = oldSolution.UpdateDocument(
@@ -116,7 +119,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.AutomaticCompletion
             DocumentId id,
             IEnumerable<TextChange> textChanges,
             CancellationToken cancellationToken = default
-        ) {
+        )
+        {
             var oldDocument = solution.GetDocument(id);
             var newText = oldDocument.GetTextSynchronously(cancellationToken)
                 .WithChanges(textChanges);

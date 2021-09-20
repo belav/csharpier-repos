@@ -26,7 +26,8 @@ namespace System.IO
             string? fullPath = null,
             string? fileName = null,
             bool isNormalized = false
-        ) {
+        )
+        {
             // Want to throw the original argument name
             OriginalPath = originalPath ?? throw new ArgumentNullException(nameof(fileName));
 
@@ -189,7 +190,8 @@ namespace System.IO
             string destinationFileName,
             string? destinationBackupFileName,
             bool ignoreMetadataErrors
-        ) {
+        )
+        {
             if (destinationFileName == null)
                 throw new ArgumentNullException(nameof(destinationFileName));
 

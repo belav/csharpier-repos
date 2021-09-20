@@ -65,7 +65,8 @@ namespace Microsoft.AspNetCore.Identity.Test
             TState state,
             Exception exception,
             Func<TState, Exception, string> formatter
-        ) {
+        )
+        {
             if (formatter == null)
             {
                 LogMessages.Add(state.ToString());

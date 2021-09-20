@@ -45,7 +45,8 @@ GROUP BY [o].[CustomerID]"
 
         public override async Task GroupBy_Property_Select_Average_with_group_enumerable_projected(
             bool async
-        ) {
+        )
+        {
             await base.GroupBy_Property_Select_Average_with_group_enumerable_projected(async);
 
             AssertSql(@"");
@@ -207,7 +208,8 @@ GROUP BY [o].[CustomerID]"
 
         public override async Task GroupBy_Property_Select_key_multiple_times_and_aggregate(
             bool async
-        ) {
+        )
+        {
             await base.GroupBy_Property_Select_key_multiple_times_and_aggregate(async);
 
             AssertSql(
@@ -247,7 +249,8 @@ GROUP BY [o].[OrderDate]"
 
         public override async Task GroupBy_aggregate_projecting_conditional_expression_based_on_group_key(
             bool async
-        ) {
+        )
+        {
             await base.GroupBy_aggregate_projecting_conditional_expression_based_on_group_key(
                 async
             );
@@ -517,7 +520,8 @@ GROUP BY [o].[CustomerID], [o].[EmployeeID]"
 
         public override async Task GroupBy_Composite_Select_Sum_Min_Key_flattened_Max_Avg(
             bool async
-        ) {
+        )
+        {
             await base.GroupBy_Composite_Select_Sum_Min_Key_flattened_Max_Avg(async);
 
             AssertSql(
@@ -551,7 +555,8 @@ GROUP BY [o].[CustomerID]"
 
         public override async Task GroupBy_Composite_Select_Dto_Sum_Min_Key_flattened_Max_Avg(
             bool async
-        ) {
+        )
+        {
             await base.GroupBy_Composite_Select_Dto_Sum_Min_Key_flattened_Max_Avg(async);
 
             AssertSql(
@@ -563,7 +568,8 @@ GROUP BY [o].[CustomerID], [o].[EmployeeID]"
 
         public override async Task GroupBy_Composite_Select_Sum_Min_part_Key_flattened_Max_Avg(
             bool async
-        ) {
+        )
+        {
             await base.GroupBy_Composite_Select_Sum_Min_part_Key_flattened_Max_Avg(async);
 
             AssertSql(
@@ -615,7 +621,8 @@ FROM [Orders] AS [o]"
 
         public override async Task GroupBy_after_predicate_Constant_Select_Sum_Min_Key_Max_Avg(
             bool async
-        ) {
+        )
+        {
             await base.GroupBy_after_predicate_Constant_Select_Sum_Min_Key_Max_Avg(async);
 
             AssertSql(
@@ -627,7 +634,8 @@ WHERE [o].[OrderID] > 10500"
 
         public override async Task GroupBy_Constant_with_element_selector_Select_Sum_Min_Key_Max_Avg(
             bool async
-        ) {
+        )
+        {
             await base.GroupBy_Constant_with_element_selector_Select_Sum_Min_Key_Max_Avg(async);
 
             AssertSql(
@@ -638,7 +646,8 @@ FROM [Orders] AS [o]"
 
         public override async Task GroupBy_constant_with_where_on_grouping_with_aggregate_operators(
             bool async
-        ) {
+        )
+        {
             await base.GroupBy_constant_with_where_on_grouping_with_aggregate_operators(async);
 
             AssertSql(
@@ -691,7 +700,8 @@ FROM [Orders] AS [o]"
 
         public override async Task GroupBy_param_with_element_selector_Select_Sum_Min_Key_Max_Avg(
             bool async
-        ) {
+        )
+        {
             await base.GroupBy_param_with_element_selector_Select_Sum_Min_Key_Max_Avg(async);
 
             AssertSql(
@@ -782,7 +792,8 @@ GROUP BY [o].[CustomerID]"
 
         public override async Task GroupBy_Property_scalar_element_selector_Sum_Min_Max_Avg(
             bool async
-        ) {
+        )
+        {
             await base.GroupBy_Property_scalar_element_selector_Sum_Min_Max_Avg(async);
 
             AssertSql(
@@ -860,7 +871,8 @@ GROUP BY [o].[CustomerID]"
 
         public override async Task GroupBy_Property_anonymous_element_selector_Sum_Min_Max_Avg(
             bool async
-        ) {
+        )
+        {
             await base.GroupBy_Property_anonymous_element_selector_Sum_Min_Max_Avg(async);
 
             AssertSql(
@@ -916,7 +928,8 @@ GROUP BY [o].[CustomerID]"
 
         public override async Task Element_selector_with_case_block_repeated_inside_another_case_block_in_projection(
             bool async
-        ) {
+        )
+        {
             await base.Element_selector_with_case_block_repeated_inside_another_case_block_in_projection(
                 async
             );
@@ -1285,7 +1298,8 @@ GROUP BY [c].[CustomerID]"
 
         public override async Task GroupBy_after_anonymous_projection_and_distinct_followed_by_another_anonymous_projection(
             bool async
-        ) {
+        )
+        {
             await base.GroupBy_after_anonymous_projection_and_distinct_followed_by_another_anonymous_projection(
                 async
             );
@@ -1374,7 +1388,8 @@ OFFSET @__p_1 ROWS"
 
         public override async Task GroupBy_aggregate_Pushdown_followed_by_projecting_Length(
             bool async
-        ) {
+        )
+        {
             await base.GroupBy_aggregate_Pushdown_followed_by_projecting_Length(async);
 
             AssertSql(
@@ -1396,7 +1411,8 @@ OFFSET @__p_1 ROWS"
 
         public override async Task GroupBy_aggregate_Pushdown_followed_by_projecting_constant(
             bool async
-        ) {
+        )
+        {
             await base.GroupBy_aggregate_Pushdown_followed_by_projecting_constant(async);
 
             AssertSql(
@@ -1688,7 +1704,8 @@ ORDER BY [c].[CustomerID], [t].[OrderID]"
 
         public override async Task Select_uncorrelated_collection_with_groupby_multiple_collections_work(
             bool async
-        ) {
+        )
+        {
             await base.Select_uncorrelated_collection_with_groupby_multiple_collections_work(async);
 
             AssertSql(
@@ -1889,7 +1906,8 @@ GROUP BY [o].[CustomerID]"
 
         public override async Task GroupBy_multiple_Sum_with_Select_conditional_projection(
             bool async
-        ) {
+        )
+        {
             await base.GroupBy_multiple_Sum_with_Select_conditional_projection(async);
 
             AssertSql(
@@ -1962,7 +1980,8 @@ ORDER BY [e].[EmployeeID]"
 
         public override async Task GroupBy_with_orderby_take_skip_distinct_followed_by_group_key_projection(
             bool async
-        ) {
+        )
+        {
             await base.GroupBy_with_orderby_take_skip_distinct_followed_by_group_key_projection(
                 async
             );
@@ -2221,7 +2240,8 @@ FROM (
 
         public override async Task LongCount_with_predicate_after_GroupBy_without_aggregate(
             bool async
-        ) {
+        )
+        {
             await base.LongCount_with_predicate_after_GroupBy_without_aggregate(async);
 
             AssertSql(
@@ -2361,7 +2381,8 @@ GROUP BY [c].[Country]"
 
         public override async Task GroupBy_with_group_key_being_navigation_with_entity_key_projection(
             bool async
-        ) {
+        )
+        {
             await base.GroupBy_with_group_key_being_navigation_with_entity_key_projection(async);
 
             AssertSql(@"");
@@ -2369,7 +2390,8 @@ GROUP BY [c].[Country]"
 
         public override async Task GroupBy_with_group_key_being_navigation_with_complex_projection(
             bool async
-        ) {
+        )
+        {
             await base.GroupBy_with_group_key_being_navigation_with_complex_projection(async);
 
             AssertSql(@"");
@@ -2433,7 +2455,8 @@ ORDER BY COUNT(*) DESC, [c].[City]"
 
         public override async Task GroupBy_let_orderby_projection_with_coalesce_operation(
             bool async
-        ) {
+        )
+        {
             await base.GroupBy_let_orderby_projection_with_coalesce_operation(async);
 
             AssertSql(" ");
@@ -2664,7 +2687,8 @@ GROUP BY [o].[OrderID]"
 
         public override async Task Where_select_function_groupby_followed_by_another_select_with_aggregates(
             bool async
-        ) {
+        )
+        {
             await base.Where_select_function_groupby_followed_by_another_select_with_aggregates(
                 async
             );
@@ -2743,7 +2767,8 @@ GROUP BY [o].[CustomerID]"
 
         public override async Task Select_uncorrelated_collection_with_groupby_when_outer_is_distinct(
             bool async
-        ) {
+        )
+        {
             await base.Select_uncorrelated_collection_with_groupby_when_outer_is_distinct(async);
 
             AssertSql(
@@ -2770,7 +2795,8 @@ ORDER BY [t].[City], [t0].[ProductID], [t1].[ProductID]"
 
         public override async Task Select_correlated_collection_after_GroupBy_aggregate_when_identifier_does_not_change(
             bool async
-        ) {
+        )
+        {
             await base.Select_correlated_collection_after_GroupBy_aggregate_when_identifier_does_not_change(
                 async
             );
@@ -2790,7 +2816,8 @@ ORDER BY [t].[CustomerID], [o].[OrderID]"
 
         public override async Task Select_correlated_collection_after_GroupBy_aggregate_when_identifier_changes(
             bool async
-        ) {
+        )
+        {
             await base.Select_correlated_collection_after_GroupBy_aggregate_when_identifier_changes(
                 async
             );
@@ -2810,7 +2837,8 @@ ORDER BY [t].[CustomerID], [o0].[OrderID]"
 
         public override async Task Select_correlated_collection_after_GroupBy_aggregate_when_identifier_changes_to_complex(
             bool async
-        ) {
+        )
+        {
             await base.Select_correlated_collection_after_GroupBy_aggregate_when_identifier_changes_to_complex(
                 async
             );

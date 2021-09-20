@@ -84,7 +84,8 @@ namespace Microsoft.CodeAnalysis.CodeRefactorings.PullMemberUp
             ISymbol selectedMember,
             Solution solution,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var containingType = selectedMember.ContainingType;
             var allDestinations = selectedMember.IsKind(SymbolKind.Field)
                 ? containingType.GetBaseTypes().ToImmutableArray()

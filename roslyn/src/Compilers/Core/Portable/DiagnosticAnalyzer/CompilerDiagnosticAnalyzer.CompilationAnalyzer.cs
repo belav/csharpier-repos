@@ -86,13 +86,15 @@ namespace Microsoft.CodeAnalysis.Diagnostics
                 Action<Diagnostic> reportDiagnostic,
                 Func<Location, bool> locationFilter,
                 ImmutableDictionary<string, string?>? properties = null
-            ) {
+            )
+            {
                 foreach (var diagnostic in diagnostics)
                 {
                     if (
                         locationFilter(diagnostic.Location)
                         && diagnostic.Severity != DiagnosticSeverity.Hidden
-                    ) {
+                    )
+                    {
                         var current =
                             properties == null
                                 ? diagnostic
@@ -110,7 +112,8 @@ namespace Microsoft.CodeAnalysis.Diagnostics
                 public CompilerDiagnostic(
                     Diagnostic original,
                     ImmutableDictionary<string, string?> properties
-                ) {
+                )
+                {
                     _original = original;
                     _properties = properties;
                 }

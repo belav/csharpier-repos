@@ -25,7 +25,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             IPropertySymbol isCompleted,
             IMethodSymbol getResult,
             bool isDynamic
-        ) {
+        )
+        {
             GetAwaiterMethod = getAwaiter;
             IsCompletedProperty = isCompleted;
             GetResultMethod = getResult;

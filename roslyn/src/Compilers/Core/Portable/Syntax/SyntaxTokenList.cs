@@ -30,7 +30,8 @@ namespace Microsoft.CodeAnalysis
             GreenNode? tokenOrList,
             int position,
             int index
-        ) {
+        )
+        {
             Debug.Assert(tokenOrList != null || (position == 0 && index == 0 && parent == null));
             Debug.Assert(position >= 0);
             Debug.Assert(tokenOrList == null || (tokenOrList.IsToken) || (tokenOrList.IsList));
@@ -437,7 +438,8 @@ namespace Microsoft.CodeAnalysis
         public SyntaxTokenList ReplaceRange(
             SyntaxToken tokenInList,
             IEnumerable<SyntaxToken> newTokens
-        ) {
+        )
+        {
             var index = this.IndexOf(tokenInList);
             if (index >= 0 && index <= this.Count)
             {

@@ -214,7 +214,8 @@ namespace System
                     && rule.DaylightTransitionStart != s_daylightRuleMarker
                     && rule.DaylightDelta == TimeSpan.Zero
                     && rule.BaseUtcOffsetDelta == TimeSpan.Zero
-                ) {
+                )
+                {
                     // This rule has no time transition, ignore it.
                     continue;
                 }
@@ -397,7 +398,8 @@ namespace System
             string id,
             out TimeZoneInfo? value,
             out Exception? e
-        ) {
+        )
+        {
             value = null;
             e = null;
 
@@ -462,7 +464,8 @@ namespace System
                         Path.Combine(timeZoneDirectory, ZoneTabFileName),
                         Encoding.UTF8
                     )
-                ) {
+                )
+                {
                     string? zoneTabFileLine;
                     while ((zoneTabFileLine = sr.ReadLine()) != null)
                     {
@@ -518,7 +521,8 @@ namespace System
         private static bool TryGetLocalTzFile(
             [NotNullWhen(true)] out byte[]? rawData,
             [NotNullWhen(true)] out string? id
-        ) {
+        )
+        {
             rawData = null;
             id = null;
             string? tzVariable = GetTzEnvironmentVariable();
@@ -574,7 +578,8 @@ namespace System
             string tzFilePath,
             [NotNullWhen(true)] ref byte[]? rawData,
             [NotNullWhen(true)] ref string? id
-        ) {
+        )
+        {
             if (File.Exists(tzFilePath))
             {
                 try
@@ -625,7 +630,8 @@ namespace System
         private static string? GetDirectoryEntryFullPath(
             ref Interop.Sys.DirectoryEntry dirent,
             string currentPath
-        ) {
+        )
+        {
             ReadOnlySpan<char> direntName = dirent.GetName(
                 stackalloc char[Interop.Sys.DirectoryEntry.NameBufferSize]
             );
@@ -645,7 +651,8 @@ namespace System
         private static unsafe void EnumerateFilesRecursively(
             string path,
             Predicate<string> condition
-        ) {
+        )
+        {
             List<string>? toExplore = null; // List used as a stack
 
             int bufferSize = Interop.Sys.GetReadDirRBufferSize();
@@ -680,7 +687,8 @@ namespace System
                                     bufferSize,
                                     out dirent
                                 ) == 0
-                            ) {
+                            )
+                            {
                                 string? fullPath = GetDirectoryEntryFullPath(
                                     ref dirent,
                                     currentPath
@@ -699,7 +707,8 @@ namespace System
                                 else if (
                                     dirent.InodeType == Interop.Sys.NodeType.DT_LNK
                                     || dirent.InodeType == Interop.Sys.NodeType.DT_UNKNOWN
-                                ) {
+                                )
+                                {
                                     // It's a symlink or unknown: stat to it to see if we can resolve it to a directory.
                                     // If we can't (e.g. symlink to a file, broken symlink, etc.), we'll just treat it as a file.
 
@@ -789,7 +798,8 @@ namespace System
                                 posixrulesFilePath,
                                 StringComparison.OrdinalIgnoreCase
                             )
-                        ) {
+                        )
+                        {
                             if (CompareTimeZoneFile(filePath, buffer, rawData))
                             {
                                 // if all bytes are the same, this must be the right tz file
@@ -827,7 +837,8 @@ namespace System
                         FileShare.Read,
                         bufferSize: 1
                     )
-                ) {
+                )
+                {
                     if (stream.Length == rawData.Length)
                     {
                         int index = 0;
@@ -999,7 +1010,8 @@ namespace System
         internal static TimeSpan GetDateTimeNowUtcOffsetFromUtc(
             DateTime time,
             out bool isAmbiguousLocalDst
-        ) {
+        )
+        {
             bool isDaylightSavings;
             // Use the standard code path for Unix since there isn't a faster way of handling current-year-only time zones
             return GetUtcOffsetFromUtc(time, Local, out isDaylightSavings, out isAmbiguousLocalDst);
@@ -1143,7 +1155,8 @@ namespace System
             bool[] StandardTime,
             bool[] GmtTime,
             string? futureTransitionsPosixFormat
-        ) {
+        )
+        {
             rules = null;
 
             if (dts.Length > 0)
@@ -1184,7 +1197,8 @@ namespace System
             bool[] StandardTime,
             bool[] GmtTime,
             string? futureTransitionsPosixFormat
-        ) {
+        )
+        {
             // To generate AdjustmentRules, use the following approach:
             // The first AdjustmentRule will go from DateTime.MinValue to the first transition time greater than DateTime.MinValue.
             // Each middle AdjustmentRule wil go from dts[index-1] to dts[index].
@@ -1341,7 +1355,8 @@ namespace System
         private static TimeSpan TZif_CalculateTransitionOffsetFromBase(
             TimeSpan transitionOffset,
             TimeSpan timeZoneBaseUtcOffset
-        ) {
+        )
+        {
             TimeSpan result = transitionOffset - timeZoneBaseUtcOffset;
 
             // TZif supports seconds-level granularity with offsets but TimeZoneInfo only supports minutes since it aligns
@@ -1393,7 +1408,8 @@ namespace System
             string posixFormat,
             DateTime startTransitionDate,
             TimeSpan timeZoneBaseUtcOffset
-        ) {
+        )
+        {
             if (
                 TZif_ParsePosixFormat(
                     posixFormat,
@@ -1406,7 +1422,8 @@ namespace System
                     out ReadOnlySpan<char> end,
                     out ReadOnlySpan<char> endTime
                 )
-            ) {
+            )
+            {
                 // a valid posixFormat has at least standardName and standardOffset
 
                 TimeSpan? parsedBaseOffset = TZif_ParseOffsetString(standardOffset);
@@ -1517,7 +1534,8 @@ namespace System
                             CultureInfo.InvariantCulture,
                             out parsedTimeSpan
                         )
-                    ) {
+                    )
+                    {
                         result = parsedTimeSpan;
                     }
                 }
@@ -1569,7 +1587,8 @@ namespace System
         private static TransitionTime? TZif_CreateTransitionTimeFromPosixRule(
             ReadOnlySpan<char> date,
             ReadOnlySpan<char> time
-        ) {
+        )
+        {
             if (date.IsEmpty)
             {
                 return null;
@@ -1710,7 +1729,8 @@ namespace System
             out int month,
             out int week,
             out DayOfWeek dayOfWeek
-        ) {
+        )
+        {
             if (dateRule[0] == 'M')
             {
                 int monthWeekDotIndex = dateRule.IndexOf('.');
@@ -1724,7 +1744,8 @@ namespace System
                             int.TryParse(dateRule.Slice(1, monthWeekDotIndex - 1), out month)
                             && int.TryParse(weekDaySpan.Slice(0, weekDayDotIndex), out week)
                             && int.TryParse(weekDaySpan.Slice(weekDayDotIndex + 1), out int day)
-                        ) {
+                        )
+                        {
                             dayOfWeek = (DayOfWeek)day;
                             return true;
                         }
@@ -1748,7 +1769,8 @@ namespace System
             out ReadOnlySpan<char> startTime,
             out ReadOnlySpan<char> end,
             out ReadOnlySpan<char> endTime
-        ) {
+        )
+        {
             standardName = null;
             standardOffset = null;
             daylightSavingsName = null;
@@ -1786,7 +1808,8 @@ namespace System
         private static ReadOnlySpan<char> TZif_ParsePosixName(
             ReadOnlySpan<char> posixFormat,
             ref int index
-        ) {
+        )
+        {
             bool isBracketEnclosed = index < posixFormat.Length && posixFormat[index] == '<';
             if (isBracketEnclosed)
             {
@@ -1832,7 +1855,8 @@ namespace System
             ref int index,
             out ReadOnlySpan<char> date,
             out ReadOnlySpan<char> time
-        ) {
+        )
+        {
             time = null;
 
             date = TZif_ParsePosixDate(posixFormat, ref index);
@@ -1857,7 +1881,8 @@ namespace System
             ReadOnlySpan<char> posixFormat,
             ref int index,
             Func<char, bool> breakCondition
-        ) {
+        )
+        {
             int startIndex = index;
             for (; index < posixFormat.Length; index++)
             {
@@ -1913,7 +1938,8 @@ namespace System
             out bool[] StandardTime,
             out bool[] GmtTime,
             out string? futureTransitionsPosixFormat
-        ) {
+        )
+        {
             // initialize the out parameters in case the TZifHead ctor throws
             dts = null!;
             typeOfLocalTime = null!;
@@ -2044,7 +2070,8 @@ namespace System
         private static void NormalizeAdjustmentRuleOffset(
             TimeSpan baseUtcOffset,
             [NotNull] ref AdjustmentRule adjustmentRule
-        ) {
+        )
+        {
             // Certain time zones such as:
             //       Time Zone  start date  end date    offset
             // -----------------------------------------------------
@@ -2173,7 +2200,8 @@ namespace System
             string value,
             string[] source,
             StringComparison comparison
-        ) {
+        )
+        {
             foreach (string s in source)
             {
                 if (string.Equals(s, value, comparison))

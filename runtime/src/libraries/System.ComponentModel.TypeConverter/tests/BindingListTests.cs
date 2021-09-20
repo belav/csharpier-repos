@@ -844,7 +844,8 @@ namespace System.ComponentModel.Tests
         [MemberData(nameof(InvalidEventArgs_TestData))]
         public void ItemPropertyChanged_InvalidEventArgs_InvokesReset(
             PropertyChangedEventArgs eventArgs
-        ) {
+        )
+        {
             var item = new Item();
             var bindingList = new BindingList<Item> { item };
 

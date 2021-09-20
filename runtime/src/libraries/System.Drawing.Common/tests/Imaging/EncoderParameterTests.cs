@@ -16,7 +16,8 @@ namespace System.Drawing.Imaging.Tests
             Encoder expectedEncoder,
             EncoderParameterValueType expectedType,
             int expectedNumberOfValues
-        ) {
+        )
+        {
             Assert.Equal(expectedEncoder.Guid, encoderParameter.Encoder.Guid);
             Assert.Equal(expectedType, encoderParameter.ValueType);
             Assert.Equal(expectedType, encoderParameter.Type);
@@ -116,7 +117,8 @@ namespace System.Drawing.Imaging.Tests
             int denominator1,
             int numerator2,
             int denominator2
-        ) {
+        )
+        {
             using (
                 EncoderParameter ep = new EncoderParameter(
                     s_anyEncoder,
@@ -125,7 +127,8 @@ namespace System.Drawing.Imaging.Tests
                     numerator2,
                     denominator2
                 )
-            ) {
+            )
+            {
                 CheckEncoderParameter(
                     ep,
                     s_anyEncoder,
@@ -190,7 +193,8 @@ namespace System.Drawing.Imaging.Tests
             byte[] value,
             bool undefined,
             EncoderParameterValueType expected
-        ) {
+        )
+        {
             using (EncoderParameter ep = new EncoderParameter(s_anyEncoder, value, undefined))
             {
                 CheckEncoderParameter(ep, s_anyEncoder, expected, value.Length);
@@ -271,7 +275,8 @@ namespace System.Drawing.Imaging.Tests
             int[] denominator1,
             int[] numerator2,
             int[] denominator2
-        ) {
+        )
+        {
             using (
                 EncoderParameter ep = new EncoderParameter(
                     s_anyEncoder,
@@ -280,7 +285,8 @@ namespace System.Drawing.Imaging.Tests
                     numerator2,
                     denominator2
                 )
-            ) {
+            )
+            {
                 CheckEncoderParameter(
                     ep,
                     s_anyEncoder,
@@ -357,7 +363,8 @@ namespace System.Drawing.Imaging.Tests
             int numberOfValues,
             EncoderParameterValueType type,
             IntPtr value
-        ) {
+        )
+        {
             using (
                 EncoderParameter ep = new EncoderParameter(
                     s_anyEncoder,
@@ -365,7 +372,8 @@ namespace System.Drawing.Imaging.Tests
                     type,
                     value
                 )
-            ) {
+            )
+            {
                 CheckEncoderParameter(ep, s_anyEncoder, type, numberOfValues);
             }
         }
@@ -376,7 +384,8 @@ namespace System.Drawing.Imaging.Tests
             Encoder encoder = new Encoder(Guid.NewGuid());
             using (
                 EncoderParameter ep = new EncoderParameter(s_anyEncoder, 0) { Encoder = encoder }
-            ) {
+            )
+            {
                 Assert.Equal(encoder.Guid, ep.Encoder.Guid);
             }
         }
@@ -444,7 +453,8 @@ namespace System.Drawing.Imaging.Tests
             int[] numerator2,
             int[] denominator2,
             Type expected
-        ) {
+        )
+        {
             Assert.Throws(
                 expected,
                 () =>
@@ -476,7 +486,8 @@ namespace System.Drawing.Imaging.Tests
             int[] numerator,
             int[] denominator,
             Type expected
-        ) {
+        )
+        {
             Assert.Throws(
                 expected,
                 () => new EncoderParameter(s_anyEncoder, numerator, denominator)
@@ -492,7 +503,8 @@ namespace System.Drawing.Imaging.Tests
             long[] rangeBegin,
             long[] rangeEnd,
             Type expected
-        ) {
+        )
+        {
             Assert.Throws(expected, () => new EncoderParameter(s_anyEncoder, rangeBegin, rangeEnd));
         }
 
@@ -632,7 +644,8 @@ namespace System.Drawing.Imaging.Tests
             EncoderParameterValueType type,
             int numberOfValues,
             Type expected
-        ) {
+        )
+        {
             Assert.Throws(
                 expected,
                 () => new EncoderParameter(s_anyEncoder, numberOfValues, type, IntPtr.Zero)
@@ -645,7 +658,8 @@ namespace System.Drawing.Imaging.Tests
         // This test may depend on amount of RAM and system configuration and load.
         public void Ctor_Encoder_NegativeNumberOfValues_Type_Value_OutOfMemoryException(
             int numberOfValues
-        ) {
+        )
+        {
             if (PlatformDetection.Is32BitProcess)
             {
                 throw new SkipTestException(

@@ -61,7 +61,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols.Retargeting
         public RetargetingMethodSymbol(
             RetargetingModuleSymbol retargetingModule,
             MethodSymbol underlyingMethod
-        ) {
+        )
+        {
             Debug.Assert((object)retargetingModule != null);
             Debug.Assert((object)underlyingMethod != null);
             Debug.Assert(!(underlyingMethod is RetargetingMethodSymbol));
@@ -232,7 +233,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols.Retargeting
 
         internal override IEnumerable<CSharpAttributeData> GetCustomAttributesToEmit(
             PEModuleBuilder moduleBuilder
-        ) {
+        )
+        {
             return this.RetargetingTranslator.RetargetAttributes(
                 _underlyingMethod.GetCustomAttributesToEmit(moduleBuilder)
             );
@@ -250,13 +252,15 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols.Retargeting
 #nullable enable
         internal override UnmanagedCallersOnlyAttributeData? GetUnmanagedCallersOnlyAttributeData(
             bool forceComplete
-        ) {
+        )
+        {
             if (
                 ReferenceEquals(
                     _lazyUnmanagedAttributeData,
                     UnmanagedCallersOnlyAttributeData.Uninitialized
                 )
-            ) {
+            )
+            {
                 var data = _underlyingMethod.GetUnmanagedCallersOnlyAttributeData(forceComplete);
                 if (
                     ReferenceEquals(data, UnmanagedCallersOnlyAttributeData.Uninitialized)
@@ -264,7 +268,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols.Retargeting
                         data,
                         UnmanagedCallersOnlyAttributeData.AttributePresentDataNotBound
                     )
-                ) {
+                )
+                {
                     // Underlying hasn't been found yet either, just return it. We'll check again the next
                     // time this is called
                     return data;

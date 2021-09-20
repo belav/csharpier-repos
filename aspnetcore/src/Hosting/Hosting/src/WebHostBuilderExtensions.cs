@@ -31,7 +31,8 @@ namespace Microsoft.AspNetCore.Hosting
         public static IWebHostBuilder Configure(
             this IWebHostBuilder hostBuilder,
             Action<IApplicationBuilder> configureApp
-        ) {
+        )
+        {
             return hostBuilder.Configure(
                 (_, app) => configureApp(app),
                 configureApp.GetMethodInfo().DeclaringType!.Assembly.GetName().Name!
@@ -47,7 +48,8 @@ namespace Microsoft.AspNetCore.Hosting
         public static IWebHostBuilder Configure(
             this IWebHostBuilder hostBuilder,
             Action<WebHostBuilderContext, IApplicationBuilder> configureApp
-        ) {
+        )
+        {
             return hostBuilder.Configure(
                 configureApp,
                 configureApp.GetMethodInfo().DeclaringType!.Assembly.GetName().Name!
@@ -58,7 +60,8 @@ namespace Microsoft.AspNetCore.Hosting
             this IWebHostBuilder hostBuilder,
             Action<WebHostBuilderContext, IApplicationBuilder> configureApp,
             string startupAssemblyName
-        ) {
+        )
+        {
             if (configureApp == null)
             {
                 throw new ArgumentNullException(nameof(configureApp));
@@ -99,10 +102,8 @@ namespace Microsoft.AspNetCore.Hosting
         /// <remarks>When using the il linker, all public methods of <typeparamref name="TStartup"/> are preserved. This should match the Startup type directly (and not a base type).</remarks>
         public static IWebHostBuilder UseStartup<
             [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicMethods)] TStartup
-        >(
-            this IWebHostBuilder hostBuilder,
-            Func<WebHostBuilderContext, TStartup> startupFactory
-        ) where TStartup : class
+        >(this IWebHostBuilder hostBuilder, Func<WebHostBuilderContext, TStartup> startupFactory)
+            where TStartup : class
         {
             if (startupFactory == null)
             {
@@ -164,7 +165,8 @@ namespace Microsoft.AspNetCore.Hosting
         public static IWebHostBuilder UseStartup(
             this IWebHostBuilder hostBuilder,
             [DynamicallyAccessedMembers(StartupLinkerOptions.Accessibility)] Type startupType
-        ) {
+        )
+        {
             if (startupType == null)
             {
                 throw new ArgumentNullException(nameof(startupType));
@@ -230,7 +232,8 @@ namespace Microsoft.AspNetCore.Hosting
         public static IWebHostBuilder UseDefaultServiceProvider(
             this IWebHostBuilder hostBuilder,
             Action<ServiceProviderOptions> configure
-        ) {
+        )
+        {
             return hostBuilder.UseDefaultServiceProvider((context, options) => configure(options));
         }
 
@@ -243,7 +246,8 @@ namespace Microsoft.AspNetCore.Hosting
         public static IWebHostBuilder UseDefaultServiceProvider(
             this IWebHostBuilder hostBuilder,
             Action<WebHostBuilderContext, ServiceProviderOptions> configure
-        ) {
+        )
+        {
             // Light up the GenericWebHostBuilder implementation
             if (hostBuilder is ISupportsUseDefaultServiceProvider supportsDefaultServiceProvider)
             {
@@ -277,7 +281,8 @@ namespace Microsoft.AspNetCore.Hosting
         public static IWebHostBuilder ConfigureAppConfiguration(
             this IWebHostBuilder hostBuilder,
             Action<IConfigurationBuilder> configureDelegate
-        ) {
+        )
+        {
             return hostBuilder.ConfigureAppConfiguration(
                 (context, builder) => configureDelegate(builder)
             );
@@ -292,7 +297,8 @@ namespace Microsoft.AspNetCore.Hosting
         public static IWebHostBuilder ConfigureLogging(
             this IWebHostBuilder hostBuilder,
             Action<ILoggingBuilder> configureLogging
-        ) {
+        )
+        {
             return hostBuilder.ConfigureServices(
                 collection => collection.AddLogging(configureLogging)
             );
@@ -307,7 +313,8 @@ namespace Microsoft.AspNetCore.Hosting
         public static IWebHostBuilder ConfigureLogging(
             this IWebHostBuilder hostBuilder,
             Action<WebHostBuilderContext, ILoggingBuilder> configureLogging
-        ) {
+        )
+        {
             return hostBuilder.ConfigureServices(
                 (context, collection) =>
                     collection.AddLogging(builder => configureLogging(context, builder))

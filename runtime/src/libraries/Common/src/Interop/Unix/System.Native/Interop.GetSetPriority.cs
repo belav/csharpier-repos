@@ -45,7 +45,8 @@ internal static partial class Interop
 
         internal static System.Diagnostics.ThreadPriorityLevel GetThreadPriorityFromNiceValue(
             int nice
-        ) {
+        )
+        {
             Debug.Assert((nice >= -20) && (nice <= 20));
             return (nice < -15)
               ? ThreadPriorityLevel.TimeCritical
@@ -64,7 +65,8 @@ internal static partial class Interop
 
         internal static int GetNiceValueFromThreadPriority(
             System.Diagnostics.ThreadPriorityLevel priority
-        ) {
+        )
+        {
             return (
                 priority == ThreadPriorityLevel.TimeCritical
                     ? -20

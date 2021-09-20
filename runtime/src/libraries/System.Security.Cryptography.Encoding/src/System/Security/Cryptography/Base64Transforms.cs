@@ -32,7 +32,8 @@ namespace System.Security.Cryptography
             int inputCount,
             byte[] outputBuffer,
             int outputOffset
-        ) {
+        )
+        {
             // inputCount < InputBlockSize is not allowed
             ThrowHelper.ValidateTransformBlock(
                 inputBuffer,
@@ -157,7 +158,8 @@ namespace System.Security.Cryptography
             int inputCount,
             byte[] outputBuffer,
             int outputOffset
-        ) {
+        )
+        {
             // inputCount != InputBlockSize is allowed
             ThrowHelper.ValidateTransformBlock(inputBuffer, inputOffset, inputCount);
 
@@ -317,7 +319,8 @@ namespace System.Security.Cryptography
             Span<byte> outputBuffer,
             out int consumed,
             out int written
-        ) {
+        )
+        {
             int bytesToTransform = _inputIndex + tmpBuffer.Length;
             Debug.Assert(bytesToTransform >= 4);
 
@@ -415,7 +418,8 @@ namespace System.Security.Cryptography
             byte[] inputBuffer,
             int inputOffset,
             int inputCount
-        ) {
+        )
+        {
             if (inputBuffer == null)
                 ThrowArgumentNull(ExceptionArgument.inputBuffer);
 
@@ -434,7 +438,8 @@ namespace System.Security.Cryptography
             int inputOffset,
             int inputCount,
             int inputBlockSize
-        ) {
+        )
+        {
             ValidateTransformBlock(inputBuffer, inputOffset, inputCount);
 
             if (inputCount < inputBlockSize)

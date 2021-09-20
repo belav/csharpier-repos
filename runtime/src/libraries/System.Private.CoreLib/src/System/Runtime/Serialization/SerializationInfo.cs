@@ -389,7 +389,8 @@ namespace System.Runtime.Serialization
                 ReferenceEquals(foundType, type)
                 || type.IsAssignableFrom(foundType)
                 || value == null
-            ) {
+            )
+            {
                 return value;
             }
 

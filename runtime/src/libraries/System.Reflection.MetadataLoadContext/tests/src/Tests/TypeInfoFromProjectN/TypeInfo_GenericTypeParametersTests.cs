@@ -345,7 +345,8 @@ namespace System.Reflection.Tests
             Type type,
             string[] expectedGTP,
             string[] expectedBaseGTP
-        ) {
+        )
+        {
             //Fix to initialize Reflection
             string str = typeof(object).Project().Name;
 

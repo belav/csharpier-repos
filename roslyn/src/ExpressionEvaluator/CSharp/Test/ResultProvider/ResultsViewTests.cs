@@ -2774,7 +2774,8 @@ class C
             DkmClrRuntimeInstance runtime,
             object value,
             string propertyName
-        ) {
+        )
+        {
             var propertyInfo = value.GetType()
                 .GetProperty(
                     propertyName,

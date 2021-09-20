@@ -62,7 +62,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UseInterpolatedVerbatimString
             ImmutableArray<Diagnostic> diagnostics,
             SyntaxEditor editor,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             foreach (var diagnostic in diagnostics)
             {
                 cancellationToken.ThrowIfCancellationRequested();
@@ -76,7 +77,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UseInterpolatedVerbatimString
             SyntaxEditor editor,
             Diagnostic diagnostic,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var verbatimInterpolatedLocation = diagnostic.Location;
             var verbatimInterpolated =
                 (InterpolatedStringExpressionSyntax)verbatimInterpolatedLocation.FindNode(
@@ -100,9 +102,9 @@ namespace Microsoft.CodeAnalysis.CSharp.UseInterpolatedVerbatimString
 
         private class MyCodeAction : CodeAction.DocumentChangeAction
         {
-            public MyCodeAction(
-                Func<CancellationToken, Task<Document>> createChangedDocument
-            ) : base(FeaturesResources.Use_interpolated_verbatim_string, createChangedDocument) { }
+            public MyCodeAction(Func<CancellationToken, Task<Document>> createChangedDocument)
+                : base(FeaturesResources.Use_interpolated_verbatim_string, createChangedDocument)
+            { }
         }
     }
 }

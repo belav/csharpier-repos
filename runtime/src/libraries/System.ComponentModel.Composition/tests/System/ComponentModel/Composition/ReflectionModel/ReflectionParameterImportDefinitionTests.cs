@@ -140,7 +140,8 @@ namespace System.ComponentModel.Composition.ReflectionModel
         private static string CreateDisplayNameExpectationFromContractName(
             ReflectionParameterImportDefinition definition,
             Type type
-        ) {
+        )
+        {
             string contractName = AttributedModelServices.GetContractName(type);
 
             return string.Format(
@@ -153,7 +154,8 @@ namespace System.ComponentModel.Composition.ReflectionModel
         private static string CreateDisplayNameExpectationFromParameterName(
             ReflectionParameterImportDefinition definition,
             string name
-        ) {
+        )
+        {
             return string.Format(
                 "{0} (Parameter=\"{1}\", ContractName=\"System.String\")",
                 definition.ImportingLazyParameter.Value.Member.GetDisplayName(),
@@ -163,7 +165,8 @@ namespace System.ComponentModel.Composition.ReflectionModel
 
         private static ReflectionParameterImportDefinition CreateReflectionParameterImportDefinition(
             Type parameterType
-        ) {
+        )
+        {
             var parameter = ReflectionFactory.CreateParameter(parameterType);
 
             return CreateReflectionParameterImportDefinition(parameter);
@@ -171,7 +174,8 @@ namespace System.ComponentModel.Composition.ReflectionModel
 
         private static ReflectionParameterImportDefinition CreateReflectionParameterImportDefinition(
             string name
-        ) {
+        )
+        {
             var parameter = ReflectionFactory.CreateParameter(name);
 
             return CreateReflectionParameterImportDefinition(parameter);
@@ -179,7 +183,8 @@ namespace System.ComponentModel.Composition.ReflectionModel
 
         private static ReflectionParameterImportDefinition CreateReflectionParameterImportDefinition(
             ParameterInfo parameter
-        ) {
+        )
+        {
             return new ReflectionParameterImportDefinition(
                 parameter.AsLazy(),
                 AttributedModelServices.GetContractName(parameter.ParameterType),

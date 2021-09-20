@@ -244,7 +244,8 @@ namespace Microsoft.AspNetCore.Razor.Language.Syntax.InternalSyntax
         internal static SyntaxToken CreateMissing(
             SyntaxKind kind,
             params RazorDiagnostic[] diagnostics
-        ) {
+        )
+        {
             return new MissingToken(kind, diagnostics);
         }
 

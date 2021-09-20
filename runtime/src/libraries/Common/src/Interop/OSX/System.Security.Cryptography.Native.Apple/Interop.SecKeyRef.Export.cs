@@ -27,7 +27,8 @@ internal static partial class Interop
             SafeSecKeyRefHandle? key,
             bool exportPrivate,
             ReadOnlySpan<char> password
-        ) {
+        )
+        {
             SafeCreateHandle exportPassword = exportPrivate
                 ? CoreFoundation.CFStringCreateFromSpan(password)
                 : s_nullExportString;
@@ -75,7 +76,8 @@ internal static partial class Interop
             SafeSecKeyRefHandle? key,
             bool exportPrivate,
             string password
-        ) {
+        )
+        {
             using (SafeCFDataHandle cfData = SecKeyExportData(key, exportPrivate, password))
             {
                 return CoreFoundation.CFGetData(cfData);

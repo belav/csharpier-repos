@@ -361,7 +361,8 @@ namespace Microsoft.VisualStudio.LanguageServices.CSharp.Options
         private void Enable_pull_diagnostics_experimental_requires_restart_Checked(
             object sender,
             RoutedEventArgs e
-        ) {
+        )
+        {
             this.OptionStore.SetOption(
                 InternalDiagnosticsOptions.NormalDiagnosticMode,
                 DiagnosticMode.Pull
@@ -372,7 +373,8 @@ namespace Microsoft.VisualStudio.LanguageServices.CSharp.Options
         private void Enable_pull_diagnostics_experimental_requires_restart_Unchecked(
             object sender,
             RoutedEventArgs e
-        ) {
+        )
+        {
             this.OptionStore.SetOption(
                 InternalDiagnosticsOptions.NormalDiagnosticMode,
                 DiagnosticMode.Push
@@ -383,7 +385,8 @@ namespace Microsoft.VisualStudio.LanguageServices.CSharp.Options
         private void Enable_Razor_pull_diagnostics_experimental_requires_restart_Checked(
             object sender,
             RoutedEventArgs e
-        ) {
+        )
+        {
             this.OptionStore.SetOption(
                 InternalDiagnosticsOptions.RazorDiagnosticMode,
                 DiagnosticMode.Pull
@@ -394,7 +397,8 @@ namespace Microsoft.VisualStudio.LanguageServices.CSharp.Options
         private void Enable_Razor_pull_diagnostics_experimental_requires_restart_Unchecked(
             object sender,
             RoutedEventArgs e
-        ) {
+        )
+        {
             this.OptionStore.SetOption(
                 InternalDiagnosticsOptions.RazorDiagnosticMode,
                 DiagnosticMode.Push

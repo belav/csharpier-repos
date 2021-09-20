@@ -132,7 +132,8 @@ namespace Microsoft.CodeAnalysis.Editing
         public void ReplaceNode(
             SyntaxNode node,
             Func<SyntaxNode, SyntaxGenerator, SyntaxNode> computeReplacement
-        ) {
+        )
+        {
             CheckNodeInOriginalTreeOrTracked(node);
             if (computeReplacement == null)
             {
@@ -146,7 +147,8 @@ namespace Microsoft.CodeAnalysis.Editing
         internal void ReplaceNode(
             SyntaxNode node,
             Func<SyntaxNode, SyntaxGenerator, IEnumerable<SyntaxNode>> computeReplacement
-        ) {
+        )
+        {
             CheckNodeInOriginalTreeOrTracked(node);
             if (computeReplacement == null)
             {
@@ -161,7 +163,8 @@ namespace Microsoft.CodeAnalysis.Editing
             SyntaxNode node,
             Func<SyntaxNode, SyntaxGenerator, TArgument, SyntaxNode> computeReplacement,
             TArgument argument
-        ) {
+        )
+        {
             CheckNodeInOriginalTreeOrTracked(node);
             if (computeReplacement == null)
             {
@@ -402,11 +405,8 @@ namespace Microsoft.CodeAnalysis.Editing
             private readonly List<SyntaxNode> _newNodes;
             private readonly bool _isBefore;
 
-            public InsertChange(
-                SyntaxNode node,
-                IEnumerable<SyntaxNode> newNodes,
-                bool isBefore
-            ) : base(node)
+            public InsertChange(SyntaxNode node, IEnumerable<SyntaxNode> newNodes, bool isBefore)
+                : base(node)
             {
                 _newNodes = newNodes.ToList();
                 _isBefore = isBefore;

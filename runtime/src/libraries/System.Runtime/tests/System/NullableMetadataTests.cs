@@ -139,7 +139,8 @@ namespace System.Runtime.Tests
                         if (
                             methodInfo.ReturnParameter.CustomAttributes.GetNullableAttributes()
                                 .Any()
-                        ) {
+                        )
+                        {
                             foundAtLeastOneNullableAttribute = true;
                             break;
                         }

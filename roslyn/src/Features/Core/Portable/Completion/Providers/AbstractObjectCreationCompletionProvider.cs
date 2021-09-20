@@ -39,7 +39,8 @@ namespace Microsoft.CodeAnalysis.Completion.Providers
             ImmutableArray<(ISymbol symbol, bool preselect)> symbols,
             TSyntaxContext context,
             SupportedPlatformData? supportedPlatformData
-        ) {
+        )
+        {
             return SymbolCompletionItem.CreateWithSymbolId(
                 displayText: displayText,
                 displayTextSuffix: displayTextSuffix,
@@ -59,7 +60,8 @@ namespace Microsoft.CodeAnalysis.Completion.Providers
             int position,
             OptionSet options,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var newExpression = GetObjectCreationNewExpression(
                 context.SyntaxTree,
                 position,
@@ -108,7 +110,8 @@ namespace Microsoft.CodeAnalysis.Completion.Providers
                     || type.TypeKind == TypeKind.Pointer
                     || type.TypeKind == TypeKind.Dynamic
                     || type.IsAbstract
-                ) {
+                )
+                {
                     return SpecializedTasks.EmptyImmutableArray<(ISymbol symbol, bool preselect)>();
                 }
 
@@ -138,7 +141,8 @@ namespace Microsoft.CodeAnalysis.Completion.Providers
         protected override (string displayText, string suffix, string insertionText) GetDisplayAndSuffixAndInsertionText(
             ISymbol symbol,
             TSyntaxContext context
-        ) {
+        )
+        {
             var displayString = symbol.ToMinimalDisplayString(
                 context.SemanticModel,
                 context.Position

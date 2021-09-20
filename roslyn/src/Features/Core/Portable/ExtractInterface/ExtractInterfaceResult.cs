@@ -16,7 +16,8 @@ namespace Microsoft.CodeAnalysis.ExtractInterface
             bool succeeded,
             Solution updatedSolution = null,
             DocumentId navigationDocumentId = null
-        ) {
+        )
+        {
             Succeeded = succeeded;
             UpdatedSolution = updatedSolution;
             NavigationDocumentId = navigationDocumentId;

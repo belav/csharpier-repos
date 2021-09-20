@@ -22,7 +22,8 @@ namespace System.Linq.Parallel.Tests
                                 new Guid("159eeeec-4a14-4418-a8fe-faabcd987887"),
                                 EventLevel.Verbose
                             )
-                        ) {
+                        )
+                        {
                             var events = new ConcurrentQueue<int>();
                             listener.RunWithCallback(
                                 ev => events.Enqueue(ev.EventId),

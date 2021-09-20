@@ -31,7 +31,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.ExtractInterfac
             string defaultNamespace,
             string generatedNameTypeParameterSuffix,
             string languageName
-        ) {
+        )
+        {
             _notificationService = notificationService;
 
             DestinationViewModel = new NewTypeDestinationSelectionViewModel(

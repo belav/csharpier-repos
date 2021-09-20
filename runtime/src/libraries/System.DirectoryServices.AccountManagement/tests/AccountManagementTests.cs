@@ -30,7 +30,8 @@ namespace System.DirectoryServices.AccountManagement.Tests
                     LdapConfiguration.Configuration.UserNameWithNoDomain,
                     context
                 )
-            ) {
+            )
+            {
                 Assert.NotNull(p);
                 Assert.Equal(LdapConfiguration.Configuration.UserNameWithNoDomain, p.Name);
             }
@@ -61,7 +62,8 @@ namespace System.DirectoryServices.AccountManagement.Tests
                     LdapConfiguration.Configuration.UserNameWithNoDomain,
                     context
                 )
-            ) {
+            )
+            {
                 Assert.NotNull(p);
                 Assert.Equal(LdapConfiguration.Configuration.UserNameWithNoDomain, p.Name);
             }
@@ -348,7 +350,8 @@ namespace System.DirectoryServices.AccountManagement.Tests
                     using (ComputerPrincipal r1 = ps.FindOne() as ComputerPrincipal)
                     using (
                         ComputerPrincipal r2 = ComputerPrincipal.FindByIdentity(context, r1.Name)
-                    ) {
+                    )
+                    {
                         Assert.Equal(r2.AccountExpirationDate, r1.AccountExpirationDate);
                         Assert.Equal(r2.Description, r1.Description);
                         Assert.Equal(r2.DisplayName, r1.DisplayName);

@@ -31,7 +31,8 @@ namespace System.Buffers.Text
             out bool value,
             out int bytesConsumed,
             char standardFormat = default
-        ) {
+        )
+        {
             if (
                 !(standardFormat == default(char) || standardFormat == 'G' || standardFormat == 'l')
             )
@@ -42,7 +43,8 @@ namespace System.Buffers.Text
                 int dw = BinaryPrimitives.ReadInt32LittleEndian(source) & ~0x20202020;
                 if (
                     dw == 0x45555254 /* 'EURT' */
-                ) {
+                )
+                {
                     bytesConsumed = 4;
                     value = true;
                     return true;
@@ -53,7 +55,8 @@ namespace System.Buffers.Text
                     if (
                         dw == 0x534c4146 /* 'SLAF' */
                         && (source[4] & ~0x20) == 'E'
-                    ) {
+                    )
+                    {
                         bytesConsumed = 5;
                         value = false;
                         return true;

@@ -186,7 +186,8 @@ namespace System.Configuration
                     sectionInput.SectionXmlInfo.OverrideModeSetting.OverrideMode
                     != OverrideMode.Inherit
                 )
-            ) {
+            )
+            {
                 // Store the current setting before applying the lock from the file input
                 // So that if the user changes the current OverrideMode on this configKey to "Inherit"
                 // we will know what we are going to inherit ( used in SectionInformation.OverrideModeEffective )

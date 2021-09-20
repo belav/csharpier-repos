@@ -16,7 +16,8 @@ namespace System.Linq.Expressions.Tests
                 IndexExpression expr,
                 Expression newObject,
                 Expression[] newArguments
-            ) {
+            )
+            {
                 _dict = new Dictionary<Expression, Expression> { { expr.Object, newObject } };
 
                 for (int i = 0; i < expr.Arguments.Count; i++)

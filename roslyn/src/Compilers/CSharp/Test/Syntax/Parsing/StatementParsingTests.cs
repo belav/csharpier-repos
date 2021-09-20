@@ -22,7 +22,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
             string text,
             int offset = 0,
             ParseOptions options = null
-        ) {
+        )
+        {
             return SyntaxFactory.ParseStatement(text, offset, options);
         }
 

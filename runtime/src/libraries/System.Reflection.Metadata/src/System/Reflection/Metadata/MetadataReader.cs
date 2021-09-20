@@ -55,11 +55,8 @@ namespace System.Reflection.Metadata
         /// Use <see cref="PEReaderExtensions.GetMetadataReader(PortableExecutable.PEReader, MetadataReaderOptions)"/> to obtain
         /// metadata from a PE image.
         /// </remarks>
-        public unsafe MetadataReader(
-            byte* metadata,
-            int length,
-            MetadataReaderOptions options
-        ) : this(metadata, length, options, utf8Decoder: null, memoryOwner: null) { }
+        public unsafe MetadataReader(byte* metadata, int length, MetadataReaderOptions options)
+            : this(metadata, length, options, utf8Decoder: null, memoryOwner: null) { }
 
         /// <summary>
         /// Creates a metadata reader from the metadata stored at the given memory location.
@@ -87,7 +84,8 @@ namespace System.Reflection.Metadata
             MetadataReaderOptions options,
             MetadataStringDecoder? utf8Decoder,
             object? memoryOwner
-        ) {
+        )
+        {
             // Do not throw here when length is 0. We'll throw BadImageFormatException later on, so that the caller doesn't need to
             // worry about the image (stream) being empty and can handle all image errors by catching BadImageFormatException.
             if (length < 0)
@@ -311,7 +309,8 @@ namespace System.Reflection.Metadata
             out MetadataStreamKind metadataStreamKind,
             out MemoryBlock metadataTableStream,
             out MemoryBlock standalonePdbStream
-        ) {
+        )
+        {
             metadataTableStream = default;
             standalonePdbStream = default;
             metadataStreamKind = MetadataStreamKind.Illegal;
@@ -510,7 +509,8 @@ namespace System.Reflection.Metadata
             out HeapSizes heapSizes,
             out int[] metadataTableRowCounts,
             out TableMask sortedTables
-        ) {
+        )
+        {
             if (reader.RemainingBytes < MetadataStreamConstants.SizeOfMetadataTableHeader)
             {
                 throw new BadImageFormatException(SR.MetadataTableHeaderTooSmall);
@@ -572,7 +572,8 @@ namespace System.Reflection.Metadata
         private static int[] ReadMetadataTableRowCounts(
             ref BlobReader memReader,
             ulong presentTableMask
-        ) {
+        )
+        {
             ulong currentTableBit = 1;
 
             var rowCounts = new int[MetadataTokens.TableCount];
@@ -606,7 +607,8 @@ namespace System.Reflection.Metadata
             int pdbStreamOffset,
             out DebugMetadataHeader debugMetadataHeader,
             out int[] externalTableRowCounts
-        ) {
+        )
+        {
             var reader = new BlobReader(pdbStreamBlock);
 
             const int PdbIdSize = 20;
@@ -626,7 +628,8 @@ namespace System.Reflection.Metadata
                     (entryPointToken & TokenTypeIds.TypeMask) != TokenTypeIds.MethodDef
                     || entryPointRowId == 0
                 )
-            ) {
+            )
+            {
                 throw new BadImageFormatException(
                     SR.Format(SR.InvalidEntryPointToken, entryPointToken)
                 );
@@ -669,7 +672,8 @@ namespace System.Reflection.Metadata
             HeapSizes heapSizes,
             int[] rowCounts,
             int[]? externalRowCountsOpt
-        ) {
+        )
+        {
             // Size of reference tags in each table.
             this.TableRowCounts = rowCounts;
 
@@ -1291,7 +1295,8 @@ namespace System.Reflection.Metadata
             int[] local,
             int[] external,
             TableIndex firstLocalTableIndex
-        ) {
+        )
+        {
             Debug.Assert(local.Length == external.Length);
 
             var rowCounts = new int[local.Length];
@@ -1312,7 +1317,8 @@ namespace System.Reflection.Metadata
             int largeRowSize,
             int[] rowCounts,
             TableMask tablesReferenced
-        ) {
+        )
+        {
             if (IsMinimalDelta)
             {
                 return LargeIndexSize;
@@ -1353,7 +1359,8 @@ namespace System.Reflection.Metadata
             TypeDefinitionHandle typeDef,
             out int firstFieldRowId,
             out int lastFieldRowId
-        ) {
+        )
+        {
             int typeDefRowId = typeDef.RowId;
 
             firstFieldRowId = this.TypeDefTable.GetFieldStart(typeDefRowId);
@@ -1379,7 +1386,8 @@ namespace System.Reflection.Metadata
             TypeDefinitionHandle typeDef,
             out int firstMethodRowId,
             out int lastMethodRowId
-        ) {
+        )
+        {
             int typeDefRowId = typeDef.RowId;
             firstMethodRowId = this.TypeDefTable.GetMethodStart(typeDefRowId);
             if (firstMethodRowId == 0)
@@ -1404,7 +1412,8 @@ namespace System.Reflection.Metadata
             TypeDefinitionHandle typeDef,
             out int firstEventRowId,
             out int lastEventRowId
-        ) {
+        )
+        {
             int eventMapRowId = this.EventMapTable.FindEventMapRowIdFor(typeDef);
             if (eventMapRowId == 0)
             {
@@ -1430,7 +1439,8 @@ namespace System.Reflection.Metadata
             TypeDefinitionHandle typeDef,
             out int firstPropertyRowId,
             out int lastPropertyRowId
-        ) {
+        )
+        {
             int propertyMapRowId = this.PropertyMapTable.FindPropertyMapRowIdFor(typeDef);
             if (propertyMapRowId == 0)
             {
@@ -1458,7 +1468,8 @@ namespace System.Reflection.Metadata
             MethodDefinitionHandle methodDef,
             out int firstParamRowId,
             out int lastParamRowId
-        ) {
+        )
+        {
             int rid = methodDef.RowId;
 
             firstParamRowId = this.MethodDefTable.GetParamStart(rid);
@@ -1485,7 +1496,8 @@ namespace System.Reflection.Metadata
             LocalScopeHandle scope,
             out int firstVariableRowId,
             out int lastVariableRowId
-        ) {
+        )
+        {
             int scopeRowId = scope.RowId;
 
             firstVariableRowId = this.LocalScopeTable.GetVariableStart(scopeRowId);
@@ -1508,7 +1520,8 @@ namespace System.Reflection.Metadata
             LocalScopeHandle scope,
             out int firstConstantRowId,
             out int lastConstantRowId
-        ) {
+        )
+        {
             int scopeRowId = scope.RowId;
 
             firstConstantRowId = this.LocalScopeTable.GetConstantStart(scopeRowId);
@@ -1763,7 +1776,8 @@ namespace System.Reflection.Metadata
 
         public DeclarativeSecurityAttribute GetDeclarativeSecurityAttribute(
             DeclarativeSecurityAttributeHandle handle
-        ) {
+        )
+        {
             // PERF: This code pattern is JIT friendly and results in very efficient code.
             return new DeclarativeSecurityAttribute(this, handle.RowId);
         }
@@ -1856,7 +1870,8 @@ namespace System.Reflection.Metadata
 
         public GenericParameterConstraint GetGenericParameterConstraint(
             GenericParameterConstraintHandle handle
-        ) {
+        )
+        {
             return new GenericParameterConstraint(this, handle);
         }
 
@@ -1887,7 +1902,8 @@ namespace System.Reflection.Metadata
 
         public InterfaceImplementation GetInterfaceImplementation(
             InterfaceImplementationHandle handle
-        ) {
+        )
+        {
             return new InterfaceImplementation(this, handle);
         }
 

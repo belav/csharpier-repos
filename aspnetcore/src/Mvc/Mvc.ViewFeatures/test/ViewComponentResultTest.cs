@@ -575,7 +575,8 @@ namespace Microsoft.AspNetCore.Mvc
         public async Task ViewComponentResult_SetsContentTypeHeader(
             string contentType,
             string expectedContentType
-        ) {
+        )
+        {
             // Arrange
             var methodInfo = typeof(TextViewComponent).GetMethod(nameof(TextViewComponent.Invoke));
             var descriptor = new ViewComponentDescriptor()
@@ -663,7 +664,8 @@ namespace Microsoft.AspNetCore.Mvc
         public async Task ViewComponentResult_NoContentTypeSet_PreservesResponseContentType(
             string responseContentType,
             string expectedContentType
-        ) {
+        )
+        {
             // Arrange
             var methodInfo = typeof(TextViewComponent).GetMethod(nameof(TextViewComponent.Invoke));
             var descriptor = new ViewComponentDescriptor()
@@ -697,7 +699,8 @@ namespace Microsoft.AspNetCore.Mvc
             object diagnosticListener,
             HttpContext context,
             params ViewComponentDescriptor[] descriptors
-        ) {
+        )
+        {
             var httpContext = new DefaultHttpContext();
             var diagnosticSource = new DiagnosticListener("Microsoft.AspNetCore");
             if (diagnosticListener != null)
@@ -747,7 +750,8 @@ namespace Microsoft.AspNetCore.Mvc
         private HttpContext CreateHttpContext(
             object diagnosticListener,
             params ViewComponentDescriptor[] descriptors
-        ) {
+        )
+        {
             var httpContext = new DefaultHttpContext();
             var services = CreateServices(diagnosticListener, httpContext, descriptors);
 
@@ -760,7 +764,8 @@ namespace Microsoft.AspNetCore.Mvc
         private ActionContext CreateActionContext(
             object diagnosticListener,
             params ViewComponentDescriptor[] descriptors
-        ) {
+        )
+        {
             return new ActionContext(
                 CreateHttpContext(diagnosticListener, descriptors),
                 new RouteData(),
@@ -779,7 +784,8 @@ namespace Microsoft.AspNetCore.Mvc
 
             public FixedSetViewComponentDescriptorProvider(
                 params ViewComponentDescriptor[] descriptors
-            ) {
+            )
+            {
                 _descriptors = descriptors ?? new ViewComponentDescriptor[0];
             }
 

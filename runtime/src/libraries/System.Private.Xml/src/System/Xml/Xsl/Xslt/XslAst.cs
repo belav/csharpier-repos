@@ -463,7 +463,8 @@ namespace System.Xml.Xsl.Xslt
             QilName? name,
             string? arg,
             XslVersion xslVer
-        ) {
+        )
+        {
             return new XslNode(nodeType, name, arg, xslVer);
         }
 
@@ -477,7 +478,8 @@ namespace System.Xml.Xsl.Xslt
             string select,
             ContextInfo ctxInfo,
             XslVersion xslVer
-        ) {
+        )
+        {
             return new XslNodeEx(XslNodeType.ApplyTemplates, mode, select, ctxInfo, xslVer);
         }
 
@@ -588,7 +590,8 @@ namespace System.Xml.Xsl.Xslt
             string? groupingSeparator,
             string? groupingSize,
             XslVersion xslVer
-        ) {
+        )
+        {
             return new Number(
                 level,
                 count,
@@ -620,7 +623,8 @@ namespace System.Xml.Xsl.Xslt
             string? order,
             string? caseOrder,
             XslVersion xslVer
-        ) {
+        )
+        {
             return new Sort(select, lang, dataType, order, caseOrder, xslVer);
         }
 
@@ -630,7 +634,8 @@ namespace System.Xml.Xsl.Xslt
             QilName mode,
             double priority,
             XslVersion xslVer
-        ) {
+        )
+        {
             return new Template(name, match, mode, priority, xslVer);
         }
 

@@ -19,7 +19,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.ProjectSystem.E
         public static bool TryGetFullPath(
             this ProjectItem item,
             [NotNullWhen(returnValue: true)] out string? fullPath
-        ) {
+        )
+        {
             fullPath = item.Properties.Item("FullPath").Value as string;
             return fullPath != null;
         }

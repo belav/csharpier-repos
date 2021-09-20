@@ -50,7 +50,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             ImmutableArray<RefKind> parameterRefKinds,
             RefKind refKind,
             TypeWithAnnotations returnType
-        ) {
+        )
+        {
             _containingSymbol = containingSymbol;
             _messageID = unboundLambda.Data.MessageID;
             _syntax = unboundLambda.Syntax;
@@ -123,13 +124,15 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
 
         internal sealed override bool IsMetadataNewSlot(
             bool ignoreInterfaceImplementationChanges = false
-        ) {
+        )
+        {
             return false;
         }
 
         internal sealed override bool IsMetadataVirtual(
             bool ignoreInterfaceImplementationChanges = false
-        ) {
+        )
+        {
             return false;
         }
 
@@ -334,7 +337,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             UnboundLambda unboundLambda,
             ImmutableArray<TypeWithAnnotations> parameterTypes,
             ImmutableArray<RefKind> parameterRefKinds
-        ) {
+        )
+        {
             Debug.Assert(parameterTypes.Length == parameterRefKinds.Length);
 
             if (!unboundLambda.HasSignature || unboundLambda.ParameterCount == 0)

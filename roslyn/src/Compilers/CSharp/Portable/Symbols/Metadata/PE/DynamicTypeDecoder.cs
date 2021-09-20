@@ -46,7 +46,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols.Metadata.PE
             bool haveCustomModifierFlags,
             bool checkLength,
             AssemblySymbol containingAssembly
-        ) {
+        )
+        {
             Debug.Assert(!dynamicTransformFlags.IsEmpty);
             Debug.Assert((object)containingAssembly != null);
 
@@ -71,7 +72,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols.Metadata.PE
             EntityHandle targetSymbolToken,
             PEModuleSymbol containingModule,
             RefKind targetSymbolRefKind = RefKind.None
-        ) {
+        )
+        {
             Debug.Assert((object)metadataType != null);
 
             ImmutableArray<bool> dynamicTransformFlags;
@@ -80,7 +82,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols.Metadata.PE
                     targetSymbolToken,
                     out dynamicTransformFlags
                 )
-            ) {
+            )
+            {
                 return TransformTypeInternal(
                     metadataType,
                     containingModule.ContainingAssembly,
@@ -102,7 +105,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols.Metadata.PE
             RefKind targetSymbolRefKind,
             ImmutableArray<bool> dynamicTransformFlags,
             bool checkLength = true
-        ) {
+        )
+        {
             return TransformTypeInternal(
                 type,
                 containingAssembly,
@@ -122,7 +126,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols.Metadata.PE
             ImmutableArray<bool> dynamicTransformFlags,
             bool haveCustomModifierFlags,
             bool checkLength
-        ) {
+        )
+        {
             Debug.Assert((object)metadataType != null);
             Debug.Assert((object)containingAssembly != null);
             Debug.Assert(!dynamicTransformFlags.IsDefault);
@@ -143,13 +148,15 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols.Metadata.PE
             if (
                 decoder.HandleCustomModifiers(targetSymbolCustomModifierCount)
                 && decoder.HandleRefKind(targetSymbolRefKind)
-            ) {
+            )
+            {
                 TypeSymbol transformedType = decoder.TransformType(metadataType);
 
                 if (
                     (object)transformedType != null
                     && (!checkLength || decoder._index == dynamicTransformFlags.Length)
-                ) {
+                )
+                {
                     // Even when we're not checking the length, there shouldn't be any unconsumed "true"s.
                     Debug.Assert(
                         checkLength
@@ -171,7 +178,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols.Metadata.PE
                 !HasFlag
                 || PeekFlag()
                     && (type.SpecialType != SpecialType.System_Object && !type.IsDynamic())
-            ) {
+            )
+            {
                 // Bail, since flags are invalid.
                 return null;
             }
@@ -246,7 +254,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols.Metadata.PE
         private NamedTypeSymbol TransformNamedType(
             NamedTypeSymbol namedType,
             bool isContaining = false
-        ) {
+        )
+        {
             // Native compiler encodes a bool for the given namedType, but none for its containing types.
             if (!isContaining)
             {
@@ -315,7 +324,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols.Metadata.PE
 
         private ImmutableArray<TypeWithAnnotations> TransformTypeArguments(
             ImmutableArray<TypeWithAnnotations> typeArguments
-        ) {
+        )
+        {
             if (!typeArguments.Any())
             {
                 return typeArguments;
@@ -403,7 +413,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols.Metadata.PE
                 !HandleCustomModifiers(
                     pointerType.PointedAtTypeWithAnnotations.CustomModifiers.Length
                 )
-            ) {
+            )
+            {
                 return null;
             }
 
@@ -430,7 +441,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols.Metadata.PE
 #nullable enable
         private FunctionPointerTypeSymbol? TransformFunctionPointerType(
             FunctionPointerTypeSymbol type
-        ) {
+        )
+        {
             var flag = ConsumeFlag();
             Debug.Assert(!flag);
 
@@ -504,12 +516,14 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols.Metadata.PE
                 RefKind refKind,
                 ImmutableArray<CustomModifier> refCustomModifiers,
                 TypeWithAnnotations typeWithAnnotations
-            ) {
+            )
+            {
                 if (
                     !decoder.HandleCustomModifiers(refCustomModifiers.Length)
                     || !decoder.HandleRefKind(refKind)
                     || !decoder.HandleCustomModifiers(typeWithAnnotations.CustomModifiers.Length)
-                ) {
+                )
+                {
                     return (default, false);
                 }
 
@@ -524,7 +538,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols.Metadata.PE
                         typeWithAnnotations.Type,
                         TypeCompareKind.ConsiderEverything
                     )
-                ) {
+                )
+                {
                     return (typeWithAnnotations, false);
                 }
 

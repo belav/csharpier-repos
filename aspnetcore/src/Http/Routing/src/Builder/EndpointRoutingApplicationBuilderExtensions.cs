@@ -76,7 +76,8 @@ namespace Microsoft.AspNetCore.Builder
         public static IApplicationBuilder UseEndpoints(
             this IApplicationBuilder builder,
             Action<IEndpointRouteBuilder> configure
-        ) {
+        )
+        {
             if (builder == null)
             {
                 throw new ArgumentNullException(nameof(builder));
@@ -128,7 +129,8 @@ namespace Microsoft.AspNetCore.Builder
         private static void VerifyEndpointRoutingMiddlewareIsRegistered(
             IApplicationBuilder app,
             out DefaultEndpointRouteBuilder endpointRouteBuilder
-        ) {
+        )
+        {
             if (!app.Properties.TryGetValue(EndpointRouteBuilder, out var obj))
             {
                 var message =

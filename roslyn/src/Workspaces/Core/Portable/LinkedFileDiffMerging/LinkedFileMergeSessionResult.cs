@@ -21,7 +21,8 @@ namespace Microsoft.CodeAnalysis
         public LinkedFileMergeSessionResult(
             Solution mergedSolution,
             IEnumerable<LinkedFileMergeResult> fileMergeResults
-        ) {
+        )
+        {
             this.MergedSolution = mergedSolution;
 
             foreach (var fileMergeResult in fileMergeResults)

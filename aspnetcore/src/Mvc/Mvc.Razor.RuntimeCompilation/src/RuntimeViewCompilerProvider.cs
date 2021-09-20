@@ -29,7 +29,8 @@ namespace Microsoft.AspNetCore.Mvc.Razor.RuntimeCompilation
             RuntimeCompilationFileProvider fileProvider,
             CSharpCompiler csharpCompiler,
             ILoggerFactory loggerFactory
-        ) {
+        )
+        {
             _applicationPartManager = applicationPartManager;
             _razorProjectEngine = razorProjectEngine;
             _csharpCompiler = csharpCompiler;

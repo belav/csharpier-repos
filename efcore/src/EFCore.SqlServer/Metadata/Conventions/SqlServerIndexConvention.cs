@@ -35,7 +35,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
             ProviderConventionSetBuilderDependencies dependencies,
             RelationalConventionSetBuilderDependencies relationalDependencies,
             ISqlGenerationHelper sqlGenerationHelper
-        ) {
+        )
+        {
             _sqlGenerationHelper = sqlGenerationHelper;
             Dependencies = dependencies;
         }
@@ -57,7 +58,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
             IConventionEntityType? newBaseType,
             IConventionEntityType? oldBaseType,
             IConventionContext<IConventionEntityType> context
-        ) {
+        )
+        {
             if (oldBaseType == null || newBaseType == null)
             {
                 foreach (var index in entityTypeBuilder.Metadata.GetDeclaredIndexes())
@@ -95,7 +97,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
         public virtual void ProcessPropertyNullabilityChanged(
             IConventionPropertyBuilder propertyBuilder,
             IConventionContext<bool?> context
-        ) {
+        )
+        {
             foreach (var index in propertyBuilder.Metadata.GetContainingIndexes())
             {
                 SetIndexFilter(index.Builder);
@@ -116,7 +119,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
             IConventionAnnotation? annotation,
             IConventionAnnotation? oldAnnotation,
             IConventionContext<IConventionAnnotation> context
-        ) {
+        )
+        {
             if (name == SqlServerAnnotationNames.Clustered)
             {
                 SetIndexFilter(indexBuilder);
@@ -137,7 +141,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
             IConventionAnnotation? annotation,
             IConventionAnnotation? oldAnnotation,
             IConventionContext<IConventionAnnotation> context
-        ) {
+        )
+        {
             if (name == RelationalAnnotationNames.ColumnName)
             {
                 foreach (var index in propertyBuilder.Metadata.GetContainingIndexes())
@@ -150,14 +155,16 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
         private IConventionIndexBuilder SetIndexFilter(
             IConventionIndexBuilder indexBuilder,
             bool columnNameChanged = false
-        ) {
+        )
+        {
             var index = indexBuilder.Metadata;
             if (
                 index.IsUnique
                 && index.IsClustered() != true
                 && GetNullableColumns(index) is List<string> nullableColumns
                 && nullableColumns.Count > 0
-            ) {
+            )
+            {
                 if (columnNameChanged || index.GetFilter() == null)
                 {
                     indexBuilder.HasFilter(CreateIndexFilter(nullableColumns));

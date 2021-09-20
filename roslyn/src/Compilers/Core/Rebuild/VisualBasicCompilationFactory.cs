@@ -37,7 +37,8 @@ namespace Microsoft.CodeAnalysis.Rebuild
         internal static new VisualBasicCompilationFactory Create(
             string assemblyFileName,
             CompilationOptionsReader optionsReader
-        ) {
+        )
+        {
             Debug.Assert(optionsReader.GetLanguageName() == LanguageNames.VisualBasic);
             var compilationOptions = CreateVisualBasicCompilationOptions(
                 assemblyFileName,
@@ -67,7 +68,8 @@ namespace Microsoft.CodeAnalysis.Rebuild
         private static VisualBasicCompilationOptions CreateVisualBasicCompilationOptions(
             string assemblyFileName,
             CompilationOptionsReader optionsReader
-        ) {
+        )
+        {
             var pdbOptions = optionsReader.GetMetadataCompilationOptions();
 
             var langVersionString = pdbOptions.GetUniqueOption(

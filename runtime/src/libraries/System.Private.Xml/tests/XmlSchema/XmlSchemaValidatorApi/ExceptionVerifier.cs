@@ -95,7 +95,8 @@ namespace System.Xml.Tests
             string assemblyName,
             ExceptionVerificationFlags flags,
             ITestOutputHelper output
-        ) {
+        )
+        {
             _output = output;
 
             if (assemblyName == null)
@@ -129,7 +130,8 @@ namespace System.Xml.Tests
                 if (
                     !CultureInfo.CurrentCulture.Equals(new CultureInfo("en-US"))
                     && !CultureInfo.CurrentCulture.Equals(new CultureInfo("en"))
-                ) {
+                )
+                {
                     try
                     {
                         // load satellite assembly
@@ -294,7 +296,8 @@ namespace System.Xml.Tests
             if (
                 Regex.Match(_actualMessage, _expectedMessage, RegexOptions.Singleline).ToString()
                 != _actualMessage
-            ) {
+            )
+            {
                 // Unescape before printing the expected message string
                 _expectedMessage = Regex.Unescape(_expectedMessage);
                 _output.WriteLine("Mismatch in error message");
@@ -338,7 +341,8 @@ namespace System.Xml.Tests
             string expectedResId,
             string[] paramValues,
             LineInfo lineInfo
-        ) {
+        )
+        {
             var list = new ArrayList { expectedResId, lineInfo };
 
             foreach (var param in paramValues)

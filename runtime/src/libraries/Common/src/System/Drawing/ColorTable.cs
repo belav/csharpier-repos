@@ -26,12 +26,14 @@ namespace System.Drawing
             Dictionary<string, Color> dictionary,
             [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicProperties)]
                 Type typeWithColors
-        ) {
+        )
+        {
             foreach (
                 PropertyInfo prop in typeWithColors.GetProperties(
                     BindingFlags.Public | BindingFlags.Static
                 )
-            ) {
+            )
+            {
                 if (prop.PropertyType == typeof(Color))
                     dictionary[prop.Name] = (Color)prop.GetValue(null, null)!;
             }

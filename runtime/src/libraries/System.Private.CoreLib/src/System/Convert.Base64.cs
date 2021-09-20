@@ -35,7 +35,8 @@ namespace System
             Span<byte> bytes,
             out int consumed,
             out int written
-        ) {
+        )
+        {
             ref char srcChars = ref MemoryMarshal.GetReference(utf16);
             ref byte destBytes = ref MemoryMarshal.GetReference(bytes);
 

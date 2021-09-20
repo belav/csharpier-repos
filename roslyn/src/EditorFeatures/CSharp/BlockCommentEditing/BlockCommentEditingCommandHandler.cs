@@ -39,7 +39,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.BlockCommentEditing
         public BlockCommentEditingCommandHandler(
             ITextUndoHistoryRegistry undoHistoryRegistry,
             IEditorOperationsFactoryService editorOperationsFactoryService
-        ) {
+        )
+        {
             Contract.ThrowIfNull(undoHistoryRegistry);
             Contract.ThrowIfNull(editorOperationsFactoryService);
 
@@ -295,7 +296,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.BlockCommentEditing
             SnapshotPoint caretPosition,
             out SyntaxTrivia trivia,
             [NotNullWhen(true)] out string? newLine
-        ) {
+        )
+        {
             trivia = default;
             newLine = null;
 

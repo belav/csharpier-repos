@@ -41,7 +41,8 @@ namespace Microsoft.CodeAnalysis.Test.Utilities
         protected override void OnOptions(
             AnalyzerOptions options,
             [CallerMemberName] string callerName = null
-        ) {
+        )
+        {
             if (AreEqual(options, _expectedOptions))
             {
                 return;

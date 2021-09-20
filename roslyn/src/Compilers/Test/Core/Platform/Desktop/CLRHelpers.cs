@@ -50,7 +50,8 @@ namespace Roslyn.Test.Utilities.Desktop
         private static Assembly ReflectionOnlyAssemblyResolveHandler(
             object sender,
             ResolveEventArgs args
-        ) {
+        )
+        {
             var handler = ReflectionOnlyAssemblyResolve;
             if (handler != null)
             {
@@ -256,7 +257,8 @@ namespace Roslyn.Test.Utilities.Desktop
                 string input,
                 string oldFormat,
                 string newFormat
-            ) {
+            )
+            {
                 // not foolproof/efficient, but easy to write/understand...
                 var parts = input.Replace(oldFormat, "|").Split('|');
 

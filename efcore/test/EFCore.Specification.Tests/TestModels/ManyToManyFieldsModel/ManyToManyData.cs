@@ -1472,7 +1472,8 @@ namespace Microsoft.EntityFrameworkCore.TestModels.ManyToManyFieldsModel
             ManyToManyContext context,
             EntityOne one,
             EntityTwo two
-        ) {
+        )
+        {
             return CreateInstance(
                 context?.Set<Dictionary<string, object>>("EntityOneEntityTwo"),
                 (e, p) =>

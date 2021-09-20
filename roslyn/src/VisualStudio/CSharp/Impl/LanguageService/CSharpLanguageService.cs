@@ -60,7 +60,8 @@ namespace Microsoft.VisualStudio.LanguageServices.CSharp.LanguageService
             IVsTextLines debuggerBuffer,
             ITextBuffer subjectBuffer,
             Microsoft.VisualStudio.TextManager.Interop.TextSpan[] currentStatementSpan
-        ) {
+        )
+        {
             return new CSharpDebuggerIntelliSenseContext(
                 view,
                 vsTextView,

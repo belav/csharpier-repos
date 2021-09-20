@@ -1082,7 +1082,8 @@ public class E : bar::C { }
             CSharpCompilation createCompilationCore(
                 string s,
                 IEnumerable<MetadataReference> references
-            ) {
+            )
+            {
                 references = TargetFrameworkUtil.StandardReferences.AddRange(references);
                 return CreateEmptyCompilation(s, references);
             }
@@ -1463,7 +1464,8 @@ public class Q
                         TestResources.WinRt.W1
                     ),
                     metadataLib2 = AssemblyMetadata.CreateFromImage(TestResources.WinRt.W2)
-            ) {
+            )
+            {
                 var mdRefLib1 = metadataLib1.GetReference(filePath: @"C:\W1.dll");
                 var mdRefLib2 = metadataLib2.GetReference(filePath: @"C:\W2.dll");
 
@@ -1505,7 +1507,8 @@ public class Q
                         TestResources.WinRt.W1
                     ),
                     metadataLib2 = AssemblyMetadata.CreateFromImage(TestResources.WinRt.WB)
-            ) {
+            )
+            {
                 var mdRefLib1 = metadataLib1.GetReference(filePath: @"C:\W1.dll");
                 var mdRefLib2 = metadataLib2.GetReference(filePath: @"C:\WB.dll");
 
@@ -1538,7 +1541,8 @@ public class Q
                         TestResources.WinRt.WB
                     ),
                     metadataLib2 = AssemblyMetadata.CreateFromImage(TestResources.WinRt.WB_Version1)
-            ) {
+            )
+            {
                 var mdRefLib1 = metadataLib1.GetReference(filePath: @"C:\WB.dll");
                 var mdRefLib2 = metadataLib2.GetReference(filePath: @"C:\WB_Version1.dll");
 
@@ -1605,7 +1609,8 @@ public class A
                 string reference,
                 string baseFilePath,
                 MetadataReferenceProperties properties
-            ) {
+            )
+            {
                 switch (reference)
                 {
                     case "1":
@@ -1667,7 +1672,8 @@ public class A
                 string reference,
                 string baseFilePath,
                 MetadataReferenceProperties properties
-            ) {
+            )
+            {
                 switch (reference)
                 {
                     case "throw":

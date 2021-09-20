@@ -24,7 +24,8 @@ namespace BuildValidator
             Options options,
             ImmutableArray<SourceLinkEntry> sourceLinkEntries,
             ILogger logger
-        ) {
+        )
+        {
             Options = options;
             SourceLinkEntries = sourceLinkEntries;
             Logger = logger;
@@ -41,7 +42,8 @@ namespace BuildValidator
                         link.Prefix,
                         FileNameEqualityComparer.StringComparison
                     )
-                ) {
+                )
+                {
                     onDiskPath = Path.GetFullPath(
                         Path.Combine(
                             Options.SourcePath,

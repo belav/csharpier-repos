@@ -206,7 +206,8 @@ namespace System.Formats.Cbor.Tests
         public static void ByteString_Encoding_ShouldContainInputBytes(
             CborConformanceMode mode,
             byte[] input
-        ) {
+        )
+        {
             var writer = new CborWriter(mode);
             writer.WriteByteString(input);
             byte[] encoding = writer.Encode();

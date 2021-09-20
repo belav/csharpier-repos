@@ -12,7 +12,8 @@ namespace System.Net
             string hostNameOrAddress,
             System.AsyncCallback? requestCallback,
             object? state
-        ) {
+        )
+        {
             throw null;
         }
         [System.ObsoleteAttribute(
@@ -22,21 +23,24 @@ namespace System.Net
             string hostName,
             System.AsyncCallback? requestCallback,
             object? stateObject
-        ) {
+        )
+        {
             throw null;
         }
         public static System.IAsyncResult BeginGetHostEntry(
             System.Net.IPAddress address,
             System.AsyncCallback? requestCallback,
             object? stateObject
-        ) {
+        )
+        {
             throw null;
         }
         public static System.IAsyncResult BeginGetHostEntry(
             string hostNameOrAddress,
             System.AsyncCallback? requestCallback,
             object? stateObject
-        ) {
+        )
+        {
             throw null;
         }
         [System.ObsoleteAttribute(
@@ -46,7 +50,8 @@ namespace System.Net
             string hostName,
             System.AsyncCallback? requestCallback,
             object? stateObject
-        ) {
+        )
+        {
             throw null;
         }
         public static System.Net.IPAddress[] EndGetHostAddresses(System.IAsyncResult asyncResult)
@@ -78,12 +83,14 @@ namespace System.Net
         public static System.Net.IPAddress[] GetHostAddresses(
             string hostNameOrAddress,
             System.Net.Sockets.AddressFamily family
-        ) {
+        )
+        {
             throw null;
         }
         public static System.Threading.Tasks.Task<System.Net.IPAddress[]> GetHostAddressesAsync(
             string hostNameOrAddress
-        ) {
+        )
+        {
             throw null;
         }
         public static System.Threading.Tasks.Task<System.Net.IPAddress[]> GetHostAddressesAsync(
@@ -91,13 +98,15 @@ namespace System.Net
             System.Net.Sockets.AddressFamily family,
             System.Threading.CancellationToken cancellationToken =
                 default(System.Threading.CancellationToken)
-        ) {
+        )
+        {
             throw null;
         }
         public static System.Threading.Tasks.Task<System.Net.IPAddress[]> GetHostAddressesAsync(
             string hostNameOrAddress,
             System.Threading.CancellationToken cancellationToken
-        ) {
+        )
+        {
             throw null;
         }
         [System.ObsoleteAttribute(
@@ -132,17 +141,20 @@ namespace System.Net
         public static System.Net.IPHostEntry GetHostEntry(
             string hostNameOrAddress,
             System.Net.Sockets.AddressFamily family
-        ) {
+        )
+        {
             throw null;
         }
         public static System.Threading.Tasks.Task<System.Net.IPHostEntry> GetHostEntryAsync(
             System.Net.IPAddress address
-        ) {
+        )
+        {
             throw null;
         }
         public static System.Threading.Tasks.Task<System.Net.IPHostEntry> GetHostEntryAsync(
             string hostNameOrAddress
-        ) {
+        )
+        {
             throw null;
         }
         public static System.Threading.Tasks.Task<System.Net.IPHostEntry> GetHostEntryAsync(
@@ -150,13 +162,15 @@ namespace System.Net
             System.Net.Sockets.AddressFamily family,
             System.Threading.CancellationToken cancellationToken =
                 default(System.Threading.CancellationToken)
-        ) {
+        )
+        {
             throw null;
         }
         public static System.Threading.Tasks.Task<System.Net.IPHostEntry> GetHostEntryAsync(
             string hostNameOrAddress,
             System.Threading.CancellationToken cancellationToken
-        ) {
+        )
+        {
             throw null;
         }
         public static string GetHostName()

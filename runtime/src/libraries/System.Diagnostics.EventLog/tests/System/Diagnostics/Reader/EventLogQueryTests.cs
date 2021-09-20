@@ -34,7 +34,8 @@ namespace System.Diagnostics.Tests
                     EventRecord eventRecord = logReader.ReadEvent();
                     eventRecord != null;
                     eventRecord = logReader.ReadEvent()
-                ) {
+                )
+                {
                     count++;
                     if (eventRecord.Level.HasValue)
                         Assert.Equal(4, eventRecord.Level.Value);

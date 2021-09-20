@@ -59,7 +59,8 @@ namespace Microsoft.AspNetCore.Identity.EntityFrameworkCore.Test
             bool lockoutEnabled = false,
             DateTimeOffset? lockoutEnd = default(DateTimeOffset?),
             bool useNamePrefixAsUserName = false
-        ) {
+        )
+        {
             return new IdentityUserWithGenerics
             {
                 UserName = useNamePrefixAsUserName
@@ -80,7 +81,8 @@ namespace Microsoft.AspNetCore.Identity.EntityFrameworkCore.Test
         protected override MyIdentityRole CreateTestRole(
             string roleNamePrefix = "",
             bool useRoleNamePrefixAsRoleName = false
-        ) {
+        )
+        {
             var roleName = useRoleNamePrefixAsRoleName
                 ? roleNamePrefix
                 : string.Format(
@@ -95,7 +97,8 @@ namespace Microsoft.AspNetCore.Identity.EntityFrameworkCore.Test
         protected override void SetUserPasswordHash(
             IdentityUserWithGenerics user,
             string hashedPassword
-        ) {
+        )
+        {
             user.PasswordHash = hashedPassword;
         }
 
@@ -278,7 +281,8 @@ namespace Microsoft.AspNetCore.Identity.EntityFrameworkCore.Test
         protected override IdentityUserRoleWithDate CreateUserRole(
             IdentityUserWithGenerics user,
             MyIdentityRole role
-        ) {
+        )
+        {
             return new IdentityUserRoleWithDate()
             {
                 RoleId = role.Id,
@@ -290,7 +294,8 @@ namespace Microsoft.AspNetCore.Identity.EntityFrameworkCore.Test
         protected override IdentityUserClaimWithIssuer CreateUserClaim(
             IdentityUserWithGenerics user,
             Claim claim
-        ) {
+        )
+        {
             return new IdentityUserClaimWithIssuer
             {
                 UserId = user.Id,
@@ -303,7 +308,8 @@ namespace Microsoft.AspNetCore.Identity.EntityFrameworkCore.Test
         protected override IdentityUserLoginWithContext CreateUserLogin(
             IdentityUserWithGenerics user,
             UserLoginInfo login
-        ) {
+        )
+        {
             return new IdentityUserLoginWithContext
             {
                 UserId = user.Id,
@@ -319,7 +325,8 @@ namespace Microsoft.AspNetCore.Identity.EntityFrameworkCore.Test
             string loginProvider,
             string name,
             string value
-        ) {
+        )
+        {
             return new IdentityUserTokenWithStuff
             {
                 UserId = user.Id,
@@ -350,7 +357,8 @@ namespace Microsoft.AspNetCore.Identity.EntityFrameworkCore.Test
         protected override IdentityRoleClaimWithIssuer CreateRoleClaim(
             MyIdentityRole role,
             Claim claim
-        ) {
+        )
+        {
             return new IdentityRoleClaimWithIssuer
             {
                 RoleId = role.Id,

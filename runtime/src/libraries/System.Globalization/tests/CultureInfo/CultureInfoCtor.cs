@@ -383,7 +383,8 @@ namespace System.Globalization.Tests
             if (
                 (!PlatformDetection.IsWindows || PlatformDetection.WindowsVersion >= 10)
                 && (PlatformDetection.IsNotBrowser)
-            ) {
+            )
+            {
                 yield return new object[]
                 {
                     "en-US-CUSTOM",
@@ -399,7 +400,8 @@ namespace System.Globalization.Tests
             string name,
             string[] expectedNames,
             bool expectToThrowOnBrowser = false
-        ) {
+        )
+        {
             if (!expectToThrowOnBrowser || PlatformDetection.IsNotBrowser)
             {
                 CultureInfo culture = new CultureInfo(name);

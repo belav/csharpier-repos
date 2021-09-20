@@ -39,7 +39,8 @@ namespace Microsoft.CodeAnalysis.ExternalAccess.FSharp.DocumentHighlighting
         public FSharpDocumentHighlights(
             Document document,
             ImmutableArray<FSharpHighlightSpan> highlightSpans
-        ) {
+        )
+        {
             this.Document = document;
             this.HighlightSpans = highlightSpans;
         }

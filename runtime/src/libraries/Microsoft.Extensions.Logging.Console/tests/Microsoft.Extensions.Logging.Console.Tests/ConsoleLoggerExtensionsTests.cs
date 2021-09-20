@@ -100,7 +100,8 @@ namespace Microsoft.Extensions.Logging.Test
         [MemberData(nameof(FormatterNames))]
         public void AddConsole_ConsoleLoggerOptionsFromConfigFile_IsReadFromLoggingConfiguration(
             string formatterName
-        ) {
+        )
+        {
             var configuration = new ConfigurationBuilder().AddInMemoryCollection(
                     new[]
                     {
@@ -183,7 +184,8 @@ namespace Microsoft.Extensions.Logging.Test
                 in LogEntry<TState> logEntry,
                 IExternalScopeProvider scopeProvider,
                 TextWriter textWriter
-            ) {
+            )
+            {
                 CustomLog = logEntry.Formatter(logEntry.State, logEntry.Exception);
             }
 
@@ -599,7 +601,8 @@ namespace Microsoft.Extensions.Logging.Test
         [InlineData("Simple")]
         public void AddConsole_FormatterNameIsSet_UsingDefaultFormat_IgnoreDeprecatedAndUseFormatterOptionsInstead(
             string formatterName
-        ) {
+        )
+        {
             var configuration = new ConfigurationBuilder().AddInMemoryCollection(
                     new[]
                     {
@@ -662,7 +665,8 @@ namespace Microsoft.Extensions.Logging.Test
         [InlineData("Systemd")]
         public void AddConsole_FormatterNameIsSet_UsingSystemdFormat_IgnoreDeprecatedAndUseFormatterOptionsInstead(
             string formatterName
-        ) {
+        )
+        {
             var configuration = new ConfigurationBuilder().AddInMemoryCollection(
                     new[]
                     {

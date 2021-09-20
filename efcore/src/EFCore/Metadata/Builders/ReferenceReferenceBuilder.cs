@@ -192,7 +192,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Builders
             EntityType? dependentEntityType,
             string dependentEntityTypeName,
             Func<InternalForeignKeyBuilder, EntityType, InternalForeignKeyBuilder> hasForeignKey
-        ) {
+        )
+        {
             if (dependentEntityType == null)
             {
                 throw new InvalidOperationException(
@@ -324,7 +325,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Builders
             EntityType? principalEntityType,
             string principalEntityTypeName,
             Func<InternalForeignKeyBuilder, InternalForeignKeyBuilder> hasPrincipalKey
-        ) {
+        )
+        {
             if (principalEntityType == null)
             {
                 throw new InvalidOperationException(
@@ -379,7 +381,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Builders
             if (
                 DeclaringEntityType.HasSharedClrType
                 && DeclaringEntityType.ShortName() == entityTypeName
-            ) {
+            )
+            {
                 return (EntityType)DeclaringEntityType;
             }
 

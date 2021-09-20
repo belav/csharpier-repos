@@ -61,7 +61,8 @@ namespace System.CommandLine.Binding
                     valueDescriptor.ValueType,
                     out ModelBinder binder
                 )
-            ) {
+            )
+            {
                 return binder;
             }
             return new ModelBinder(valueDescriptor);
@@ -85,7 +86,8 @@ namespace System.CommandLine.Binding
         internal bool TryGetValueSource(
             IValueDescriptor valueDescriptor,
             [MaybeNullWhen(false)] out IValueSource valueSource
-        ) {
+        )
+        {
             if (ServiceProvider.AvailableServiceTypes.Contains(valueDescriptor.ValueType))
             {
                 valueSource = new ServiceProviderValueSource();
@@ -100,7 +102,8 @@ namespace System.CommandLine.Binding
             IValueDescriptor valueDescriptor,
             IValueSource valueSource,
             out BoundValue? boundValue
-        ) {
+        )
+        {
             if (valueSource.TryGetValue(valueDescriptor, this, out var value))
             {
                 if (value is null || valueDescriptor.ValueType.IsInstanceOfType(value))

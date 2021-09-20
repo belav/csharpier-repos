@@ -39,7 +39,8 @@ namespace System.Net.Http.Functional.Tests
         [InlineData((ClientCertificateOption)(-1))]
         public void ClientCertificateOptions_InvalidArg_ThrowsException(
             ClientCertificateOption option
-        ) {
+        )
+        {
             using (HttpClientHandler handler = CreateHttpClientHandler())
             {
                 AssertExtensions.Throws<ArgumentOutOfRangeException>(
@@ -89,7 +90,8 @@ namespace System.Net.Http.Functional.Tests
         public async Task Manual_CertificateOnlySentWhenValid_Success(
             int certIndex,
             bool serverExpectsClientCertificate
-        ) {
+        )
+        {
             var options = new LoopbackServer.Options { UseSsl = true };
 
             X509Certificate2 GetClientCertificate(int certIndex) =>
@@ -160,7 +162,8 @@ namespace System.Net.Http.Functional.Tests
                 LoopbackServer server,
                 Uri url,
                 X509Certificate2 cert
-            ) {
+            )
+            {
                 await TestHelper.WhenAllCompletedOrAnyFailed(
                     client.GetStringAsync(url),
                     server.AcceptConnectionAsync(
@@ -183,7 +186,8 @@ namespace System.Net.Http.Functional.Tests
                 {
                     using (
                         X509Certificate2 cert = Configuration.Certificates.GetClientCertificate()
-                    ) {
+                    )
+                    {
                         if (reuseClient)
                         {
                             using (HttpClient client = CreateHttpClientWithCert(cert))
@@ -222,7 +226,8 @@ namespace System.Net.Http.Functional.Tests
         [InlineData(ClientCertificateOption.Automatic)]
         public async Task AutomaticOrManual_DoesntFailRegardlessOfWhetherClientCertsAreAvailable(
             ClientCertificateOption mode
-        ) {
+        )
+        {
             using (HttpClientHandler handler = CreateHttpClientHandler())
             using (HttpClient client = CreateHttpClient(handler))
             {

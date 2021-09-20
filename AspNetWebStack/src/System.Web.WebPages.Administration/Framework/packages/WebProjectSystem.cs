@@ -208,7 +208,8 @@ namespace System.Web.WebPages.Administration.PackageManager
             IFileSystem fileSystem,
             string webConfigPath,
             XDocument document
-        ) {
+        )
+        {
             using (MemoryStream stream = new MemoryStream())
             {
                 document.Save(stream);

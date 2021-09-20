@@ -413,7 +413,8 @@ namespace Microsoft.AspNetCore.Identity.FunctionalTests
             ClaimsPrincipal expectedPrincipal,
             ClaimsPrincipal actualPrincipal,
             string claimType
-        ) {
+        )
+        {
             var expectedPrincipalClaim =
                 expectedPrincipal.Identities.Single().Claims.Single(c => c.Type == claimType).Value;
             var actualPrincipalClaim =
@@ -425,7 +426,8 @@ namespace Microsoft.AspNetCore.Identity.FunctionalTests
             ClaimsPrincipal expectedPrincipal,
             ClaimsPrincipal actualPrincipal,
             string claimType
-        ) {
+        )
+        {
             var expectedPrincipalClaim =
                 expectedPrincipal.Identities.Single().Claims.Single(c => c.Type == claimType).Value;
             var actualPrincipalClaim =

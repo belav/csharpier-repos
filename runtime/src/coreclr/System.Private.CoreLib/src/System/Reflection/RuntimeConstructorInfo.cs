@@ -51,7 +51,8 @@ namespace System.Reflection
                             (CallingConvention & CallingConventions.VarArgs)
                             == CallingConventions.VarArgs
                         )
-                    ) {
+                    )
+                    {
                         // We don't need other flags if this method cannot be invoked
                         invocationFlags |= INVOCATION_FLAGS.INVOCATION_FLAGS_NO_INVOKE;
                     }
@@ -99,7 +100,8 @@ namespace System.Reflection
             RuntimeTypeCache reflectedTypeCache,
             MethodAttributes methodAttributes,
             BindingFlags bindingFlags
-        ) {
+        )
+        {
             m_bindingFlags = bindingFlags;
             m_reflectedTypeCache = reflectedTypeCache;
             m_declaringType = declaringType;
@@ -331,7 +333,8 @@ namespace System.Reflection
             Binder? binder,
             object?[]? parameters,
             CultureInfo? culture
-        ) {
+        )
+        {
             INVOCATION_FLAGS invocationFlags = InvocationFlags;
 
             if ((invocationFlags & INVOCATION_FLAGS.INVOCATION_FLAGS_NO_INVOKE) != 0)
@@ -420,7 +423,8 @@ namespace System.Reflection
             Binder? binder,
             object?[]? parameters,
             CultureInfo? culture
-        ) {
+        )
+        {
             INVOCATION_FLAGS invocationFlags = InvocationFlags;
 
             if (

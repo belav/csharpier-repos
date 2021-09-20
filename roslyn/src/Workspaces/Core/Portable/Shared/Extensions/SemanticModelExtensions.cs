@@ -30,7 +30,8 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
             this SemanticModel semanticModel,
             SyntaxNode expression,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var typeInfo = semanticModel.GetTypeInfo(expression, cancellationToken);
 
             if (typeInfo.Type != null)
@@ -75,7 +76,8 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
                 symbol is IMethodSymbol methodSymbol
                 && methodSymbol.MethodKind == MethodKind.BuiltinOperator
                 && methodSymbol.ContainingType is ITypeSymbol containingType
-            ) {
+            )
+            {
                 var comparer = SymbolEquivalenceComparer.Instance.ParameterEquivalenceComparer;
 
                 // Note: this will find the real method vs the built-in.  That's because the
@@ -97,7 +99,8 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
             SyntaxToken token,
             Workspace workspace,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var languageServices = workspace.Services.GetLanguageServices(token.Language);
             var syntaxFacts = languageServices.GetRequiredService<ISyntaxFactsService>();
             if (!syntaxFacts.IsBindableToken(token))
@@ -179,7 +182,8 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
                     if (
                         namedType.TypeKind == TypeKind.Delegate
                         || namedType.AssociatedSymbol != null
-                    ) {
+                    )
+                    {
                         allSymbols = ImmutableArray.Create<ISymbol?>(type);
                         type = null;
                     }
@@ -207,7 +211,8 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
             ITypeSymbol type,
             ISyntaxFacts syntaxFacts,
             bool capitalize
-        ) {
+        )
+        {
             var pluralize = semanticModel.ShouldPluralize(type);
             var typeArguments = type.GetAllTypeArguments();
 
@@ -220,7 +225,8 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
                     capitalize,
                     out var typeArgumentParameterName
                 )
-            ) {
+            )
+            {
                 return typeArgumentParameterName;
             }
 
@@ -253,7 +259,8 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
             ImmutableArray<ITypeSymbol> typeArguments,
             bool capitalize,
             [NotNullWhen(true)] out string? parameterName
-        ) {
+        )
+        {
             // We only consider generating a name if there's one type argument.
             // This logic can potentially be expanded upon in the future.
             if (typeArguments.Length == 1)

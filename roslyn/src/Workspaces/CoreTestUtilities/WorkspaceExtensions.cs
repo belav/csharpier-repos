@@ -19,7 +19,8 @@ namespace Microsoft.CodeAnalysis.UnitTests
             string name,
             SourceText initialText,
             SourceCodeKind sourceCodeKind = SourceCodeKind.Regular
-        ) {
+        )
+        {
             var id = projectId.CreateDocumentId(name, folders);
             var oldSolution = workspace.CurrentSolution;
             var newSolution =
@@ -40,7 +41,8 @@ namespace Microsoft.CodeAnalysis.UnitTests
             this Workspace workspace,
             DocumentId documentId,
             SourceText newText
-        ) {
+        )
+        {
             var oldSolution = workspace.CurrentSolution;
             var newSolution = oldSolution.WithDocumentText(documentId, newText);
             workspace.TryApplyChanges(newSolution);
@@ -53,7 +55,8 @@ namespace Microsoft.CodeAnalysis.UnitTests
             this ProjectId projectId,
             string name,
             IEnumerable<string>? folders = null
-        ) {
+        )
+        {
             if (folders != null)
             {
                 var uniqueName = string.Join("/", folders) + "/" + name;
@@ -73,7 +76,8 @@ namespace Microsoft.CodeAnalysis.UnitTests
         internal static EventWaiter VerifyWorkspaceChangedEvent(
             this Workspace workspace,
             Action<WorkspaceChangeEventArgs> action
-        ) {
+        )
+        {
             var wew = new EventWaiter();
             workspace.WorkspaceChanged += wew.Wrap<WorkspaceChangeEventArgs>(
                 (sender, args) => action(args)

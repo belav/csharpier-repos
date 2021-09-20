@@ -63,7 +63,8 @@ namespace Microsoft.EntityFrameworkCore.Storage
             DbDataReader reader,
             Guid commandId,
             IRelationalCommandDiagnosticsLogger? logger
-        ) {
+        )
+        {
             Check.NotNull(command, nameof(command));
             Check.NotNull(reader, nameof(reader));
 

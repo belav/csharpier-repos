@@ -17,7 +17,8 @@ namespace Microsoft.CodeAnalysis.Classification.Classifiers
             SyntaxNode node,
             SymbolInfo symbolInfo,
             SemanticModel semanticModel
-        ) {
+        )
+        {
             var symbol = symbolInfo.Symbol;
 
             if (symbol is null && symbolInfo.CandidateSymbols.Length > 0)
@@ -53,7 +54,8 @@ namespace Microsoft.CodeAnalysis.Classification.Classifiers
                                 node.SpanStart,
                                 firstSymbol.ContainingType
                             )
-                        ) {
+                        )
+                        {
                             symbol = firstSymbol;
                         }
                         break;
@@ -87,7 +89,8 @@ namespace Microsoft.CodeAnalysis.Classification.Classifiers
             ISymbol? symbol,
             TextSpan span,
             ArrayBuilder<ClassifiedSpan> result
-        ) {
+        )
+        {
             if (!IsStaticSymbol(symbol))
             {
                 return;

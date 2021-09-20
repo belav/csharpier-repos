@@ -32,7 +32,8 @@ namespace System.Net.WebSockets
             Uri uri,
             CancellationToken cancellationToken,
             ClientWebSocketOptions options
-        ) {
+        )
+        {
             try
             {
                 cancellationToken.ThrowIfCancellationRequested(); // avoid allocating a WebSocket object if cancellation was requested before connect

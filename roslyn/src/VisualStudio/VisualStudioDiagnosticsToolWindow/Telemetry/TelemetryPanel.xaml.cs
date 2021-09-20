@@ -111,7 +111,8 @@ namespace Roslyn.VisualStudio.DiagnosticsWindow.Telemetry
                     var nestedTypeInfo in type.GetNestedTypes(
                         BindingFlags.Public | BindingFlags.NonPublic
                     )
-                ) {
+                )
+                {
                     ScanType(nestedTypeInfo, typeDiscovered);
                 }
             }

@@ -43,7 +43,8 @@ namespace Microsoft.AspNetCore.WebUtilities
             int memoryThreshold = DefaultMemoryThreshold,
             long? bufferLimit = null,
             Func<string>? tempFileDirectoryAccessor = null
-        ) {
+        )
+        {
             if (memoryThreshold < 0)
             {
                 throw new ArgumentOutOfRangeException(nameof(memoryThreshold));
@@ -145,7 +146,8 @@ namespace Microsoft.AspNetCore.WebUtilities
             int offset,
             int count,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             ThrowArgumentException(buffer, offset, count);
             ThrowIfDisposed();
 
@@ -201,7 +203,8 @@ namespace Microsoft.AspNetCore.WebUtilities
         public async Task DrainBufferAsync(
             Stream destination,
             CancellationToken cancellationToken = default
-        ) {
+        )
+        {
             // When not null, FileStream always has "older" spooled content. The PagedByteBuffer always has "newer"
             // unspooled content. Copy the FileStream content first when available.
             if (FileStream != null)
@@ -240,7 +243,8 @@ namespace Microsoft.AspNetCore.WebUtilities
         public async Task DrainBufferAsync(
             PipeWriter destination,
             CancellationToken cancellationToken = default
-        ) {
+        )
+        {
             // When not null, FileStream always has "older" spooled content. The PagedByteBuffer always has "newer"
             // unspooled content. Copy the FileStream content first when available.
             if (FileStream != null)

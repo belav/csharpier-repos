@@ -141,7 +141,8 @@ namespace Test.Cryptography
         private X509Certificate2Collection FindMatches(
             string storeName,
             StoreLocation storeLocation
-        ) {
+        )
+        {
             using (X509Certificate2 cer = new X509Certificate2(CerData))
             {
                 X509Certificate2Collection matches = new X509Certificate2Collection();

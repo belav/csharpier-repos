@@ -12,7 +12,8 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation.FrameworkResolution
             this CommandResultAssertions assertion,
             string name,
             string version
-        ) {
+        )
+        {
             return assertion.HaveStdOutContaining($"mock frameworks: {name} {version}");
         }
 
@@ -20,7 +21,8 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation.FrameworkResolution
             this CommandResult result,
             string resolvedFrameworkName,
             string resolvedFrameworkVersion
-        ) {
+        )
+        {
             return result.Should()
                 .Pass()
                 .And.HaveResolvedFramework(resolvedFrameworkName, resolvedFrameworkVersion);
@@ -39,12 +41,14 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation.FrameworkResolution
             this CommandResult result,
             string resolvedFrameworkName,
             string resolvedFrameworkVersion
-        ) {
+        )
+        {
             if (
                 resolvedFrameworkName == null
                 || resolvedFrameworkVersion == null
                 || resolvedFrameworkVersion == FrameworkResolutionBase.ResolvedFramework.NotFound
-            ) {
+            )
+            {
                 return result.ShouldFailToFindCompatibleFrameworkVersion();
             }
             else
@@ -58,7 +62,8 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation.FrameworkResolution
 
         public static AndConstraint<CommandResultAssertions> DidNotFindCompatibleFrameworkVersion(
             this CommandResultAssertions assertion
-        ) {
+        )
+        {
             return assertion.HaveStdErrContaining(
                 "It was not possible to find any compatible framework version"
             );
@@ -66,7 +71,8 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation.FrameworkResolution
 
         public static AndConstraint<CommandResultAssertions> ShouldFailToFindCompatibleFrameworkVersion(
             this CommandResult result
-        ) {
+        )
+        {
             return result.Should().Fail().And.DidNotFindCompatibleFrameworkVersion();
         }
 
@@ -75,7 +81,8 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation.FrameworkResolution
             string frameworkName,
             string newVersion,
             string previousVersion
-        ) {
+        )
+        {
             return assertion.HaveStdErrMatching(
                 $".*The specified framework '{frameworkName}', version '{newVersion}', apply_patches=[0-1], version_compatibility_range=[^ ]* cannot roll-forward to the previously referenced version '{previousVersion}'.*"
             );
@@ -87,11 +94,13 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation.FrameworkResolution
             string resolvedVersion,
             string lowerVersion,
             string higherVersion
-        ) {
+        )
+        {
             if (
                 resolvedVersion == null
                 || resolvedVersion == FrameworkResolutionBase.ResolvedFramework.FailedToReconcile
-            ) {
+            )
+            {
                 return result.Should()
                     .Fail()
                     .And.FailedToReconcileFrameworkReference(
@@ -112,7 +121,8 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation.FrameworkResolution
             string resolvedVersion,
             string lowerVersion,
             string higherVersion
-        ) {
+        )
+        {
             if (resolvedVersion == FrameworkResolutionBase.ResolvedFramework.FailedToReconcile)
             {
                 return result.Should()
@@ -137,7 +147,8 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation.FrameworkResolution
             this CommandResultAssertions assertion,
             string resolvedVersion,
             string newVersion
-        ) {
+        )
+        {
             return assertion.HaveStdErrContaining(
                 $"--- Restarting all framework resolution because the previously resolved framework 'Microsoft.NETCore.App', version '{resolvedVersion}' must be re-resolved with the new version '{newVersion}'"
             );
@@ -146,7 +157,8 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation.FrameworkResolution
         public static AndConstraint<CommandResultAssertions> DidNotRecognizeRollForwardValue(
             this CommandResultAssertions assertion,
             string value
-        ) {
+        )
+        {
             return assertion.HaveStdErrContaining(
                 $"Unrecognized roll forward setting value '{value}'."
             );

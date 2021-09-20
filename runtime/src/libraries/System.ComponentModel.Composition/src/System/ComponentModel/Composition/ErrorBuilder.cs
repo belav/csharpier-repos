@@ -10,7 +10,8 @@ namespace System.ComponentModel.Composition
         public static CompositionError PreventedByExistingImport(
             ComposablePart part,
             ImportDefinition import
-        ) {
+        )
+        {
             return CompositionError.Create(
                 CompositionErrorId.ImportEngine_PreventedByExistingImport,
                 SR.ImportEngine_PreventedByExistingImport,
@@ -30,7 +31,8 @@ namespace System.ComponentModel.Composition
 
         public static CompositionError ComposeTookTooManyIterations(
             int maximumNumberOfCompositionIterations
-        ) {
+        )
+        {
             return CompositionError.Create(
                 CompositionErrorId.ImportEngine_ComposeTookTooManyIterations,
                 SR.ImportEngine_ComposeTookTooManyIterations,
@@ -41,7 +43,8 @@ namespace System.ComponentModel.Composition
         public static CompositionError CreateImportCardinalityMismatch(
             ImportCardinalityMismatchException exception,
             ImportDefinition definition
-        ) {
+        )
+        {
             if (exception == null)
             {
                 throw new ArgumentNullException(nameof(exception));
@@ -63,7 +66,8 @@ namespace System.ComponentModel.Composition
         public static CompositionError CreatePartCannotActivate(
             ComposablePart part,
             Exception innerException
-        ) {
+        )
+        {
             if (part == null)
             {
                 throw new ArgumentNullException(nameof(part));
@@ -88,7 +92,8 @@ namespace System.ComponentModel.Composition
             ComposablePart part,
             ImportDefinition definition,
             Exception innerException
-        ) {
+        )
+        {
             if (part == null)
             {
                 throw new ArgumentNullException(nameof(part));
@@ -119,7 +124,8 @@ namespace System.ComponentModel.Composition
             ComposablePart part,
             ExportDefinition definition,
             Exception innerException
-        ) {
+        )
+        {
             if (part == null)
             {
                 throw new ArgumentNullException(nameof(part));

@@ -422,7 +422,8 @@ namespace Microsoft.Extensions.Internal
         private ObjectMethodExecutor GetExecutorForMethod(
             string methodName,
             object[] parameterDefaultValues
-        ) {
+        )
+        {
             var method = typeof(TestObject).GetMethod(methodName);
             return ObjectMethodExecutor.Create(method, targetTypeInfo, parameterDefaultValues);
         }
@@ -476,7 +477,8 @@ namespace Microsoft.Extensions.Internal
 
             public async Task<TestObject> ValueMethodWithReturnTypeThrowsExceptionAsync(
                 TestObject i
-            ) {
+            )
+            {
                 await Task.CompletedTask;
                 throw new NotImplementedException("Not Implemented Exception");
             }
@@ -490,7 +492,8 @@ namespace Microsoft.Extensions.Internal
             public TestAwaitable<TestObject> CustomAwaitableOfReferenceTypeAsync(
                 string input1,
                 int input2
-            ) {
+            )
+            {
                 return new TestAwaitable<TestObject>(
                     new TestObject { value = $"{input1} {input2}" }
                 );

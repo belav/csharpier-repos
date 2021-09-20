@@ -580,7 +580,8 @@ namespace System.Web.Mvc.Async.Test
             TaskAsyncActionDescriptor actionDescriptor,
             Dictionary<string, object> parameters,
             ControllerContext controllerContext = null
-        ) {
+        )
+        {
             using (SignalContainer<object> resultContainer = new SignalContainer<object>())
             {
                 AsyncCallback callback = ar =>
@@ -679,7 +680,8 @@ namespace System.Web.Mvc.Async.Test
             public Task<ActionResult> TaskTimeoutWithNullParam(
                 Object nullParam,
                 CancellationToken cancellationToken
-            ) {
+            )
+            {
                 return TaskTimeout(cancellationToken);
             }
 

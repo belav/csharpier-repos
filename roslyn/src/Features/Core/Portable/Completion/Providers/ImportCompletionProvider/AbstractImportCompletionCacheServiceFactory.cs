@@ -51,7 +51,8 @@ namespace Microsoft.CodeAnalysis.Completion.Providers.ImportCompletion
             public ImportCompletionCacheService(
                 ConcurrentDictionary<string, TMetadataCacheEntry> peCache,
                 ConcurrentDictionary<ProjectId, TProjectCacheEntry> projectCache
-            ) {
+            )
+            {
                 PEItemsCache = peCache;
                 ProjectItemsCache = projectCache;
             }

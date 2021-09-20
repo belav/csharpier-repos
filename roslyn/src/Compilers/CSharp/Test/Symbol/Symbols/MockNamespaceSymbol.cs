@@ -22,7 +22,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
             string name,
             NamespaceExtent extent,
             IEnumerable<Symbol> children
-        ) {
+        )
+        {
             _name = name;
             _extent = extent;
             _children = children;

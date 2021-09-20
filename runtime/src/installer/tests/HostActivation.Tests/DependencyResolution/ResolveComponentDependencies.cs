@@ -608,7 +608,8 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation.DependencyResolution
             public TestApp CreateComponentWithDependencies(
                 Action<NetCoreAppBuilder> customizer = null,
                 string location = null
-            ) {
+            )
+            {
                 TestApp componentWithDependencies = CreateTestApp(
                     location,
                     "ComponentWithDependencies"
@@ -683,7 +684,8 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation.DependencyResolution
             public TestApp CreateComponentWithResources(
                 Action<NetCoreAppBuilder> customizer = null,
                 string location = null
-            ) {
+            )
+            {
                 TestApp componentWithResources = CreateTestApp(location, "ComponentWithResources");
                 NetCoreAppBuilder builder = NetCoreAppBuilder.PortableForNETCoreApp(
                         componentWithResources

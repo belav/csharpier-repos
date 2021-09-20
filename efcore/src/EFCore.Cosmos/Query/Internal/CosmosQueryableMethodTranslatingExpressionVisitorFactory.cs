@@ -39,7 +39,8 @@ namespace Microsoft.EntityFrameworkCore.Cosmos.Query.Internal
             ISqlExpressionFactory sqlExpressionFactory,
             IMemberTranslatorProvider memberTranslatorProvider,
             IMethodCallTranslatorProvider methodCallTranslatorProvider
-        ) {
+        )
+        {
             _dependencies = dependencies;
             _sqlExpressionFactory = sqlExpressionFactory;
             _memberTranslatorProvider = memberTranslatorProvider;
@@ -54,7 +55,8 @@ namespace Microsoft.EntityFrameworkCore.Cosmos.Query.Internal
         /// </summary>
         public virtual QueryableMethodTranslatingExpressionVisitor Create(
             QueryCompilationContext queryCompilationContext
-        ) {
+        )
+        {
             Check.NotNull(queryCompilationContext, nameof(queryCompilationContext));
 
             return new CosmosQueryableMethodTranslatingExpressionVisitor(

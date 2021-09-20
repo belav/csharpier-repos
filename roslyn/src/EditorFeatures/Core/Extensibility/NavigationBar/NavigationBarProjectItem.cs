@@ -23,15 +23,17 @@ namespace Microsoft.CodeAnalysis.Editor
             Workspace workspace,
             DocumentId documentId,
             string language
-        ) : base(
-            text,
-            glyph,
-            spans: ImmutableArray<TextSpan>.Empty,
-            childItems: ImmutableArray<NavigationBarItem>.Empty,
-            indent: 0,
-            bolded: false,
-            grayed: false
-        ) {
+        )
+            : base(
+                text,
+                glyph,
+                spans: ImmutableArray<TextSpan>.Empty,
+                childItems: ImmutableArray<NavigationBarItem>.Empty,
+                indent: 0,
+                bolded: false,
+                grayed: false
+            )
+        {
             this.Workspace = workspace;
             this.DocumentId = documentId;
             this.Language = language;

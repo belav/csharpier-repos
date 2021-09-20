@@ -19,7 +19,8 @@ namespace System.Net.Security
         private SslStreamCertificateContext(
             X509Certificate2 target,
             X509Certificate2[] intermediates
-        ) {
+        )
+        {
             if (intermediates.Length > 0)
             {
                 using (X509Chain chain = new X509Chain())
@@ -35,7 +36,8 @@ namespace System.Net.Security
                         if (
                             status.Status.HasFlag(X509ChainStatusFlags.PartialChain)
                             || status.Status.HasFlag(X509ChainStatusFlags.NotSignatureValid)
-                        ) {
+                        )
+                        {
                             osCanBuildChain = false;
                             break;
                         }
@@ -100,7 +102,8 @@ namespace System.Net.Security
                                         || status.Status.HasFlag(
                                             X509ChainStatusFlags.NotSignatureValid
                                         )
-                                    ) {
+                                    )
+                                    {
                                         osCanBuildChain = false;
                                         break;
                                     }

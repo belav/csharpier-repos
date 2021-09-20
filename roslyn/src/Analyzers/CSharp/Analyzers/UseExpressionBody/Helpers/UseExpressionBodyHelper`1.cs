@@ -41,7 +41,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UseExpressionBody
             LocalizableString useBlockBodyTitle,
             Option2<CodeStyleOption2<ExpressionBodyPreference>> option,
             ImmutableArray<SyntaxKind> syntaxKinds
-        ) {
+        )
+        {
             DiagnosticId = diagnosticId;
             EnforceOnBuild = enforceOnBuild;
             Option = option;
@@ -52,13 +53,15 @@ namespace Microsoft.CodeAnalysis.CSharp.UseExpressionBody
 
         protected static AccessorDeclarationSyntax GetSingleGetAccessor(
             AccessorListSyntax accessorList
-        ) {
+        )
+        {
             if (
                 accessorList != null
                 && accessorList.Accessors.Count == 1
                 && accessorList.Accessors[0].AttributeLists.Count == 0
                 && accessorList.Accessors[0].IsKind(SyntaxKind.GetAccessorDeclaration)
-            ) {
+            )
+            {
                 return accessorList.Accessors[0];
             }
 
@@ -103,7 +106,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UseExpressionBody
             OptionSet optionSet,
             TDeclaration declaration,
             bool forAnalyzer
-        ) {
+        )
+        {
             var currentOptionValue = optionSet.GetOption(Option);
             var preference = currentOptionValue.Value;
             var userPrefersExpressionBodies = preference != ExpressionBodyPreference.Never;
@@ -145,7 +149,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UseExpressionBody
             ExpressionBodyPreference conversionPreference,
             out ArrowExpressionClauseSyntax expressionWhenOnSingleLine,
             out SyntaxToken semicolonWhenOnSingleLine
-        ) {
+        )
+        {
             return TryConvertToExpressionBodyWorker(
                 declaration,
                 options,
@@ -161,7 +166,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UseExpressionBody
             ExpressionBodyPreference conversionPreference,
             out ArrowExpressionClauseSyntax expressionWhenOnSingleLine,
             out SyntaxToken semicolonWhenOnSingleLine
-        ) {
+        )
+        {
             var body = GetBody(declaration);
 
             return body.TryConvertToArrowExpressionBody(
@@ -179,7 +185,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UseExpressionBody
             ExpressionBodyPreference conversionPreference,
             out ArrowExpressionClauseSyntax arrowExpression,
             out SyntaxToken semicolonToken
-        ) {
+        )
+        {
             if (
                 TryConvertToExpressionBodyWorker(
                     declaration,
@@ -188,7 +195,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UseExpressionBody
                     out arrowExpression,
                     out semicolonToken
                 )
-            ) {
+            )
+            {
                 return true;
             }
 
@@ -199,7 +207,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UseExpressionBody
                     getAccessor.ExpressionBody.Expression,
                     conversionPreference
                 )
-            ) {
+            )
+            {
                 arrowExpression = SyntaxFactory.ArrowExpressionClause(
                     getAccessor.ExpressionBody.Expression
                 );
@@ -214,7 +223,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UseExpressionBody
             OptionSet optionSet,
             TDeclaration declaration,
             bool forAnalyzer
-        ) {
+        )
+        {
             var currentOptionValue = optionSet.GetOption(Option);
             var preference = currentOptionValue.Value;
             var userPrefersBlockBodies = preference == ExpressionBodyPreference.Never;
@@ -238,7 +248,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UseExpressionBody
             if (
                 expressionBodyOpt.Expression.IsKind(SyntaxKind.ThrowExpression)
                 && languageVersion < LanguageVersion.CSharp7
-            ) {
+            )
+            {
                 // If they're using a throw expression in a declaration and it's prior to C# 7
                 // then always mark this as something that can be fixed by the analyzer.  This way
                 // we'll also get 'fix all' working to fix all these cases.
@@ -274,7 +285,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UseExpressionBody
             SemanticModel semanticModel,
             TDeclaration declaration,
             bool useExpressionBody
-        ) {
+        )
+        {
             if (useExpressionBody)
             {
                 TryConvertToExpressionBody(
@@ -332,7 +344,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UseExpressionBody
         protected virtual TDeclaration WithGenerateBody(
             SemanticModel semanticModel,
             TDeclaration declaration
-        ) {
+        )
+        {
             var expressionBody = GetExpressionBody(declaration);
 
             if (
@@ -341,7 +354,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UseExpressionBody
                     CreateReturnStatementForExpression(semanticModel, declaration),
                     out var block
                 )
-            ) {
+            )
+            {
                 return WithBody(declaration, block);
             }
 
@@ -351,7 +365,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UseExpressionBody
         protected TDeclaration WithAccessorList(
             SemanticModel semanticModel,
             TDeclaration declaration
-        ) {
+        )
+        {
             var expressionBody = GetExpressionBody(declaration);
             var semicolonToken = GetSemicolonToken(declaration);
 

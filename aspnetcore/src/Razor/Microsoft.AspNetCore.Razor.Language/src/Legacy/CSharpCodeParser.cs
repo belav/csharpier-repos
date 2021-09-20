@@ -102,15 +102,14 @@ namespace Microsoft.AspNetCore.Razor.Language.Legacy
         public CSharpCodeParser(ParserContext context)
             : this(directives: Enumerable.Empty<DirectiveDescriptor>(), context: context) { }
 
-        public CSharpCodeParser(
-            IEnumerable<DirectiveDescriptor> directives,
-            ParserContext context
-        ) : base(
-            context.ParseLeadingDirectives
-              ? FirstDirectiveCSharpLanguageCharacteristics.Instance
-              : CSharpLanguageCharacteristics.Instance,
-            context
-        ) {
+        public CSharpCodeParser(IEnumerable<DirectiveDescriptor> directives, ParserContext context)
+            : base(
+                context.ParseLeadingDirectives
+                  ? FirstDirectiveCSharpLanguageCharacteristics.Instance
+                  : CSharpLanguageCharacteristics.Instance,
+                context
+            )
+        {
             if (directives == null)
             {
                 throw new ArgumentNullException(nameof(directives));
@@ -162,7 +161,8 @@ namespace Microsoft.AspNetCore.Razor.Language.Legacy
                         At(SyntaxKind.StringLiteral)
                         && CurrentToken.Content.Length > 0
                         && CurrentToken.Content[0] == SyntaxConstants.TransitionCharacter
-                    ) {
+                    )
+                    {
                         var split = Language.SplitToken(CurrentToken, 1, SyntaxKind.Transition);
                         transitionToken = split.Item1;
 
@@ -218,7 +218,8 @@ namespace Microsoft.AspNetCore.Razor.Language.Legacy
                                 transition,
                                 CurrentToken.Content
                             )
-                        ) {
+                        )
+                        {
                             // Not a directive.
                             // This is an implicit expression. We want to preserve preceding whitespace in the output.
                             Accept(precedingWhitespace);
@@ -230,7 +231,8 @@ namespace Microsoft.AspNetCore.Razor.Language.Legacy
                                     SyntaxConstants.CSharp.HelperKeyword,
                                     StringComparison.Ordinal
                                 )
-                            ) {
+                            )
+                            {
                                 var diagnostic =
                                     RazorDiagnosticFactory.CreateParsing_HelperDirectiveNotAvailable(
                                         new SourceSpan(CurrentStart, CurrentToken.Content.Length)
@@ -256,7 +258,8 @@ namespace Microsoft.AspNetCore.Razor.Language.Legacy
                                 transition,
                                 CurrentToken.Content
                             ) && !TryParseKeyword(builder, precedingWhitespace, transition)
-                        ) {
+                        )
+                        {
                             // Not a directive or keyword.
                             // This is an implicit expression. We want to preserve preceding whitespace in the output.
                             Accept(precedingWhitespace);
@@ -439,7 +442,8 @@ namespace Microsoft.AspNetCore.Razor.Language.Legacy
         private void ParseImplicitExpression(
             in SyntaxListBuilder<RazorSyntaxNode> builder,
             AcceptedCharactersInternal acceptedCharacters
-        ) {
+        )
+        {
             using (
                 PushSpanContextConfig(
                     spanContext =>
@@ -453,7 +457,8 @@ namespace Microsoft.AspNetCore.Razor.Language.Legacy
                         spanContext.ChunkGenerator = new ExpressionChunkGenerator();
                     }
                 )
-            ) {
+            )
+            {
                 do
                 {
                     if (AtIdentifier(allowKeywords: true))
@@ -470,13 +475,15 @@ namespace Microsoft.AspNetCore.Razor.Language.Legacy
         private bool ParseMethodCallOrArrayIndex(
             in SyntaxListBuilder<RazorSyntaxNode> builder,
             AcceptedCharactersInternal acceptedCharacters
-        ) {
+        )
+        {
             if (!EndOfFile)
             {
                 if (
                     CurrentToken.Kind == SyntaxKind.LeftParenthesis
                     || CurrentToken.Kind == SyntaxKind.LeftBracket
-                ) {
+                )
+                {
                     // If we end within "(", whitespace is fine
                     SpanContext.EditHandler.AcceptedCharacters = AcceptedCharactersInternal.Any;
 
@@ -492,7 +499,8 @@ namespace Microsoft.AspNetCore.Razor.Language.Legacy
                                     AcceptedCharactersInternal.Any;
                             }
                         )
-                    ) {
+                    )
+                    {
                         right = Language.FlipBracket(CurrentToken.Kind);
                         success = Balance(
                             builder,
@@ -541,7 +549,8 @@ namespace Microsoft.AspNetCore.Razor.Language.Legacy
                 }
                 else if (
                     At(SyntaxKind.Not) && Context.FeatureFlags.AllowNullableForgivenessOperator
-                ) {
+                )
+                {
                     // C# 8.0 Null forgiveness Operator
 
                     var next = Lookahead(count: 1);
@@ -566,7 +575,8 @@ namespace Microsoft.AspNetCore.Razor.Language.Legacy
                         if (
                             nextNext.Kind == SyntaxKind.Identifier
                             || nextNext.Kind == SyntaxKind.Keyword
-                        ) {
+                        )
+                        {
                             // Accept null forgiveness operator followed by a dot (!.)
                             AcceptAndMoveNext();
 
@@ -593,7 +603,8 @@ namespace Microsoft.AspNetCore.Razor.Language.Legacy
                     else if (
                         next.Kind == SyntaxKind.LeftBracket
                         || next.Kind == SyntaxKind.LeftParenthesis
-                    ) {
+                    )
+                    {
                         // We're at the ! for a null forgiveness bracket or parenthesis operator (![).
                         AcceptAndMoveNext();
 
@@ -700,7 +711,8 @@ namespace Microsoft.AspNetCore.Razor.Language.Legacy
                 if (
                     At(SyntaxKind.NewLine)
                     || (At(SyntaxKind.Whitespace) && NextIs(SyntaxKind.NewLine))
-                ) {
+                )
+                {
                     Context.NullGenerateWhitespaceAndNewLine = true;
                 }
             }
@@ -770,7 +782,8 @@ namespace Microsoft.AspNetCore.Razor.Language.Legacy
                         SyntaxConstants.TextTagName,
                         StringComparison.Ordinal
                     )
-                ) {
+                )
+                {
                     PutBack(lastWhitespace);
                 }
                 else
@@ -803,7 +816,8 @@ namespace Microsoft.AspNetCore.Razor.Language.Legacy
                         CurrentToken.Kind == SyntaxKind.LessThan
                         || CurrentToken.Kind == SyntaxKind.Transition
                     )
-                ) {
+                )
+                {
                     PutCurrentBack();
                 }
                 OtherParserBlock(builder);
@@ -964,7 +978,8 @@ namespace Microsoft.AspNetCore.Razor.Language.Legacy
                     (!Context.FeatureFlags.AllowRazorInAllCodeBlocks && At(SyntaxKind.LeftBrace))
                     || At(SyntaxKind.LeftParenthesis)
                     || At(SyntaxKind.LeftBracket)
-                ) {
+                )
+                {
                     Accept(read);
                     if (
                         Balance(
@@ -972,7 +987,8 @@ namespace Microsoft.AspNetCore.Razor.Language.Legacy
                             BalancingModes.AllowCommentsAndTemplates
                                 | BalancingModes.BacktrackOnFailure
                         )
-                    ) {
+                    )
+                    {
                         TryAccept(SyntaxKind.RightBrace);
                     }
                     else
@@ -989,7 +1005,8 @@ namespace Microsoft.AspNetCore.Razor.Language.Legacy
                 }
                 else if (
                     At(SyntaxKind.Transition) && (NextIs(SyntaxKind.LessThan, SyntaxKind.Colon))
-                ) {
+                )
+                {
                     Accept(read);
                     builder.Add(OutputTokensAsStatementLiteral());
                     ParseTemplate(builder);
@@ -1063,7 +1080,8 @@ namespace Microsoft.AspNetCore.Razor.Language.Legacy
             IReadOnlyList<SyntaxToken> whitespace,
             CSharpTransitionSyntax transition,
             string directive
-        ) {
+        )
+        {
             if (_directiveParserMap.TryGetValue(directive, out var handler))
             {
                 // This is a directive. We don't want to generate the preceding whitespace in the output.
@@ -1145,7 +1163,8 @@ namespace Microsoft.AspNetCore.Razor.Language.Legacy
         internal void MapDirectives(
             Action<SyntaxListBuilder<RazorSyntaxNode>, CSharpTransitionSyntax> handler,
             params string[] directives
-        ) {
+        )
+        {
             foreach (var directive in directives)
             {
                 if (_directiveParserMap.ContainsKey(directive))
@@ -1171,7 +1190,8 @@ namespace Microsoft.AspNetCore.Razor.Language.Legacy
         private void ParseTagHelperPrefixDirective(
             SyntaxListBuilder<RazorSyntaxNode> builder,
             CSharpTransitionSyntax transition
-        ) {
+        )
+        {
             RazorDiagnostic duplicateDiagnostic = null;
             if (Context.SeenDirectives.Contains(SyntaxConstants.CSharp.TagHelperPrefixKeyword))
             {
@@ -1225,7 +1245,8 @@ namespace Microsoft.AspNetCore.Razor.Language.Legacy
         private void ParseAddTagHelperDirective(
             SyntaxListBuilder<RazorSyntaxNode> builder,
             CSharpTransitionSyntax transition
-        ) {
+        )
+        {
             var directiveBody = ParseTagHelperDirective(
                 SyntaxConstants.CSharp.AddTagHelperKeyword,
                 (lookupText, errors, startLocation) =>
@@ -1254,7 +1275,8 @@ namespace Microsoft.AspNetCore.Razor.Language.Legacy
         private void ParseRemoveTagHelperDirective(
             SyntaxListBuilder<RazorSyntaxNode> builder,
             CSharpTransitionSyntax transition
-        ) {
+        )
+        {
             var directiveBody = ParseTagHelperDirective(
                 SyntaxConstants.CSharp.RemoveTagHelperKeyword,
                 (lookupText, errors, startLocation) =>
@@ -1298,7 +1320,8 @@ namespace Microsoft.AspNetCore.Razor.Language.Legacy
                 SourceLocation,
                 ISpanChunkGenerator
             > chunkGeneratorFactory
-        ) {
+        )
+        {
             AssertDirective(keyword);
 
             var savedErrorSink = Context.ErrorSink;
@@ -1408,14 +1431,16 @@ namespace Microsoft.AspNetCore.Razor.Language.Legacy
             SourceLocation directiveLocation,
             TagHelperDirectiveType directiveType,
             List<RazorDiagnostic> errors
-        ) {
+        )
+        {
             var offset = 0;
             directiveText = directiveText.Trim();
             if (
                 directiveText.Length >= 2
                 && directiveText.StartsWith("\"", StringComparison.Ordinal)
                 && directiveText.EndsWith("\"", StringComparison.Ordinal)
-            ) {
+            )
+            {
                 directiveText = directiveText.Substring(1, directiveText.Length - 2);
                 if (string.IsNullOrEmpty(directiveText))
                 {
@@ -1433,7 +1458,8 @@ namespace Microsoft.AspNetCore.Razor.Language.Legacy
                 TokenBuilder.Count == 1
                 && TokenBuilder[0] is SyntaxToken token
                 && token.Kind == SyntaxKind.StringLiteral
-            ) {
+            )
+            {
                 offset += token.Content.IndexOf(directiveText, StringComparison.Ordinal);
 
                 // This is safe because inside one of these directives all of the text needs to be on the
@@ -1464,7 +1490,8 @@ namespace Microsoft.AspNetCore.Razor.Language.Legacy
             ParsedDirective directive,
             SourceLocation directiveLocation,
             List<RazorDiagnostic> errors
-        ) {
+        )
+        {
             var text = directive.DirectiveText;
             var lookupStrings = text?.Split(new[] { ',' });
 
@@ -1475,7 +1502,8 @@ namespace Microsoft.AspNetCore.Razor.Language.Legacy
                 || lookupStrings.Length != 2
                 || text.StartsWith("'", StringComparison.Ordinal)
                 || text.EndsWith("'", StringComparison.Ordinal)
-            ) {
+            )
+            {
                 errors.Add(
                     RazorDiagnosticFactory.CreateParsing_InvalidTagHelperLookupText(
                         new SourceSpan(directiveLocation, Math.Max(text.Length, 1)),
@@ -1506,14 +1534,16 @@ namespace Microsoft.AspNetCore.Razor.Language.Legacy
             string prefix,
             SourceLocation directiveLocation,
             List<RazorDiagnostic> diagnostics
-        ) {
+        )
+        {
             foreach (var character in prefix)
             {
                 // Prefixes are correlated with tag names, tag names cannot have whitespace.
                 if (
                     char.IsWhiteSpace(character)
                     || InvalidNonWhitespaceNameCharacters.Contains(character)
-                ) {
+                )
+                {
                     diagnostics.Add(
                         RazorDiagnosticFactory.CreateParsing_InvalidTagHelperPrefixValue(
                             new SourceSpan(directiveLocation, prefix.Length),
@@ -1532,7 +1562,8 @@ namespace Microsoft.AspNetCore.Razor.Language.Legacy
             in SyntaxListBuilder<RazorSyntaxNode> builder,
             CSharpTransitionSyntax transition,
             DirectiveDescriptor descriptor
-        ) {
+        )
+        {
             AssertDirective(descriptor.Directive);
 
             var directiveErrorSink = new ErrorSink();
@@ -1607,7 +1638,8 @@ namespace Microsoft.AspNetCore.Razor.Language.Legacy
                                 || tokenDescriptor.Kind == DirectiveTokenKind.Attribute
                                 || tokenDescriptor.Kind == DirectiveTokenKind.GenericTypeConstraint
                                 || tokenDescriptor.Kind == DirectiveTokenKind.Boolean
-                            ) {
+                            )
+                            {
                                 directiveBuilder.Add(OutputTokensAsStatementLiteral());
 
                                 if (EndOfFile || At(SyntaxKind.NewLine))
@@ -1710,7 +1742,8 @@ namespace Microsoft.AspNetCore.Razor.Language.Legacy
                                 if (
                                     At(SyntaxKind.StringLiteral)
                                     && !CurrentToken.ContainsDiagnostics
-                                ) {
+                                )
+                                {
                                     AcceptAndMoveNext();
                                 }
                                 else
@@ -1783,7 +1816,8 @@ namespace Microsoft.AspNetCore.Razor.Language.Legacy
                                         ),
                                         StringComparison.Ordinal
                                     )
-                                ) {
+                                )
+                                {
                                     // Consume the 'where' keyword plus any aditional whitespace
                                     AcceptAndMoveNext();
                                     AcceptWhile(SyntaxKind.Whitespace);
@@ -1795,7 +1829,8 @@ namespace Microsoft.AspNetCore.Razor.Language.Legacy
                                             lastSeenMemberIdentifier,
                                             StringComparison.Ordinal
                                         )
-                                    ) {
+                                    )
+                                    {
                                         // @typeparam TKey where TValue : ...
                                         // The type parameter in the generic type constraint 'TValue' does not match the type parameter 'TKey' defined in the directive '@typeparam'.
                                         Context.ErrorSink.OnError(
@@ -2006,7 +2041,8 @@ namespace Microsoft.AspNetCore.Razor.Language.Legacy
         private void ValidateDirectiveUsage(
             DirectiveDescriptor descriptor,
             SourceLocation directiveStart
-        ) {
+        )
+        {
             if (descriptor.Usage == DirectiveUsage.FileScopedSinglyOccurring)
             {
                 if (Context.SeenDirectives.Contains(descriptor.Directive))
@@ -2042,7 +2078,8 @@ namespace Microsoft.AspNetCore.Razor.Language.Legacy
                     if (
                         (expectingDot && type == SyntaxKind.Dot)
                         || (!expectingDot && type == SyntaxKind.Identifier)
-                    ) {
+                    )
+                    {
                         expectingDot = !expectingDot;
                         return true;
                     }
@@ -2088,7 +2125,8 @@ namespace Microsoft.AspNetCore.Razor.Language.Legacy
             in SyntaxListBuilder<RazorSyntaxNode> builder,
             DirectiveDescriptor descriptor,
             Action<SyntaxListBuilder<RazorSyntaxNode>, SourceLocation> parseChildren
-        ) {
+        )
+        {
             if (EndOfFile)
             {
                 Context.ErrorSink.OnError(
@@ -2164,7 +2202,8 @@ namespace Microsoft.AspNetCore.Razor.Language.Legacy
             in SyntaxListBuilder<RazorSyntaxNode> builder,
             IReadOnlyList<SyntaxToken> whitespace,
             CSharpTransitionSyntax transition
-        ) {
+        )
+        {
             var result = CSharpTokenizer.GetTokenKeyword(CurrentToken);
             Debug.Assert(CurrentToken.Kind == SyntaxKind.Keyword && result.HasValue);
             if (_keywordParserMap.TryGetValue(result.Value, out var handler))
@@ -2215,7 +2254,8 @@ namespace Microsoft.AspNetCore.Razor.Language.Legacy
         private void MapExpressionKeyword(
             Action<SyntaxListBuilder<RazorSyntaxNode>, CSharpTransitionSyntax> handler,
             CSharpKeyword keyword
-        ) {
+        )
+        {
             _keywordParserMap.Add(keyword, handler);
             // Expression keywords don't belong in the regular keyword list
         }
@@ -2223,7 +2263,8 @@ namespace Microsoft.AspNetCore.Razor.Language.Legacy
         private void MapKeywords(
             Action<SyntaxListBuilder<RazorSyntaxNode>, CSharpTransitionSyntax> handler,
             params CSharpKeyword[] keywords
-        ) {
+        )
+        {
             MapKeywords(handler, topLevel: true, keywords: keywords);
         }
 
@@ -2231,7 +2272,8 @@ namespace Microsoft.AspNetCore.Razor.Language.Legacy
             Action<SyntaxListBuilder<RazorSyntaxNode>, CSharpTransitionSyntax> handler,
             bool topLevel,
             params CSharpKeyword[] keywords
-        ) {
+        )
+        {
             foreach (var keyword in keywords)
             {
                 _keywordParserMap.Add(keyword, handler);
@@ -2245,7 +2287,8 @@ namespace Microsoft.AspNetCore.Razor.Language.Legacy
         private void ParseAwaitExpression(
             SyntaxListBuilder<RazorSyntaxNode> builder,
             CSharpTransitionSyntax transition
-        ) {
+        )
+        {
             // Ensure that we're on the await statement (only runs in debug)
             Assert(CSharpKeyword.Await);
 
@@ -2286,7 +2329,8 @@ namespace Microsoft.AspNetCore.Razor.Language.Legacy
         private void ParseConditionalBlock(
             SyntaxListBuilder<RazorSyntaxNode> builder,
             CSharpTransitionSyntax transition
-        ) {
+        )
+        {
             var topLevel = transition != null;
             ParseConditionalBlock(builder, transition, topLevel);
         }
@@ -2295,7 +2339,8 @@ namespace Microsoft.AspNetCore.Razor.Language.Legacy
             in SyntaxListBuilder<RazorSyntaxNode> builder,
             CSharpTransitionSyntax transition,
             bool topLevel
-        ) {
+        )
+        {
             Assert(SyntaxKind.Keyword);
             if (transition != null)
             {
@@ -2313,7 +2358,8 @@ namespace Microsoft.AspNetCore.Razor.Language.Legacy
         private void ParseConditionalBlock(
             in SyntaxListBuilder<RazorSyntaxNode> builder,
             Block block
-        ) {
+        )
+        {
             AcceptAndMoveNext();
             AcceptWhile(IsSpacingTokenIncludingNewLinesAndComments);
 
@@ -2350,7 +2396,8 @@ namespace Microsoft.AspNetCore.Razor.Language.Legacy
         private void ParseExpectedCodeBlock(
             in SyntaxListBuilder<RazorSyntaxNode> builder,
             Block block
-        ) {
+        )
+        {
             if (!EndOfFile)
             {
                 // If it's a block control flow statement the current syntax token will be a LeftBrace {,
@@ -2407,7 +2454,8 @@ namespace Microsoft.AspNetCore.Razor.Language.Legacy
         private void ParseCaseStatement(
             SyntaxListBuilder<RazorSyntaxNode> builder,
             CSharpTransitionSyntax transition
-        ) {
+        )
+        {
             Assert(SyntaxKind.Keyword);
             if (transition != null)
             {
@@ -2427,7 +2475,8 @@ namespace Microsoft.AspNetCore.Razor.Language.Legacy
         private void ParseIfStatement(
             SyntaxListBuilder<RazorSyntaxNode> builder,
             CSharpTransitionSyntax transition
-        ) {
+        )
+        {
             Assert(CSharpKeyword.If);
             ParseConditionalBlock(builder, transition, topLevel: false);
             ParseAfterIfClause(builder);
@@ -2486,7 +2535,8 @@ namespace Microsoft.AspNetCore.Razor.Language.Legacy
         private void ParseTryStatement(
             SyntaxListBuilder<RazorSyntaxNode> builder,
             CSharpTransitionSyntax transition
-        ) {
+        )
+        {
             Assert(CSharpKeyword.Try);
             var topLevel = transition != null;
             if (topLevel)
@@ -2568,7 +2618,8 @@ namespace Microsoft.AspNetCore.Razor.Language.Legacy
         private void ParseDoStatement(
             SyntaxListBuilder<RazorSyntaxNode> builder,
             CSharpTransitionSyntax transition
-        ) {
+        )
+        {
             Assert(CSharpKeyword.Do);
             if (transition != null)
             {
@@ -2610,7 +2661,8 @@ namespace Microsoft.AspNetCore.Razor.Language.Legacy
         private void ParseUsingKeyword(
             SyntaxListBuilder<RazorSyntaxNode> builder,
             CSharpTransitionSyntax transition
-        ) {
+        )
+        {
             Assert(CSharpKeyword.Using);
             var topLevel = transition != null;
             var block = new Block(CurrentToken, CurrentStart);
@@ -2684,7 +2736,8 @@ namespace Microsoft.AspNetCore.Razor.Language.Legacy
             in SyntaxListBuilder<RazorSyntaxNode> builder,
             CSharpTransitionSyntax transition,
             Block block
-        ) {
+        )
+        {
             Assert(CSharpKeyword.Using);
             AcceptAndMoveNext();
             AcceptWhile(IsSpacingTokenIncludingComments);
@@ -2708,7 +2761,8 @@ namespace Microsoft.AspNetCore.Razor.Language.Legacy
         private void ParseUsingDeclaration(
             in SyntaxListBuilder<RazorSyntaxNode> builder,
             CSharpTransitionSyntax transition
-        ) {
+        )
+        {
             // Using declarations should always be top level. The error case is handled in a different code path.
             Debug.Assert(transition != null);
             using (var pooledResult = Pool.Allocate<RazorSyntaxNode>())
@@ -2879,7 +2933,8 @@ namespace Microsoft.AspNetCore.Razor.Language.Legacy
         private void ParseReservedDirective(
             SyntaxListBuilder<RazorSyntaxNode> builder,
             CSharpTransitionSyntax transition
-        ) {
+        )
+        {
             Context.ErrorSink.OnError(
                 RazorDiagnosticFactory.CreateParsing_ReservedWord(
                     new SourceSpan(CurrentStart, CurrentToken.Content.Length),
@@ -2920,11 +2975,13 @@ namespace Microsoft.AspNetCore.Razor.Language.Legacy
         protected void CompleteBlock(
             bool insertMarkerIfNecessary,
             bool captureWhitespaceToEndOfLine
-        ) {
+        )
+        {
             if (
                 insertMarkerIfNecessary
                 && Context.LastAcceptedCharacters != AcceptedCharactersInternal.Any
-            ) {
+            )
+            {
                 AcceptMarkerTokenIfNecessary();
             }
 
@@ -2937,7 +2994,8 @@ namespace Microsoft.AspNetCore.Razor.Language.Legacy
                 && captureWhitespaceToEndOfLine
                 && !Context.DesignTimeMode
                 && !IsNested
-            ) {
+            )
+            {
                 var whitespace = ReadWhile(token => token.Kind == SyntaxKind.Whitespace);
                 if (At(SyntaxKind.NewLine))
                 {
@@ -2959,7 +3017,8 @@ namespace Microsoft.AspNetCore.Razor.Language.Legacy
 
         private IReadOnlyList<SyntaxToken> SkipToNextImportantToken(
             in SyntaxListBuilder<RazorSyntaxNode> builder
-        ) {
+        )
+        {
             while (!EndOfFile)
             {
                 var whitespace = ReadWhile(IsSpacingTokenIncludingNewLinesAndComments);
@@ -3066,7 +3125,8 @@ namespace Microsoft.AspNetCore.Razor.Language.Legacy
             if (
                 EndOfFile
                 && ((mode & BalancingModes.NoErrorOnFailure) != BalancingModes.NoErrorOnFailure)
-            ) {
+            )
+            {
                 Context.ErrorSink.OnError(
                     RazorDiagnosticFactory.CreateParsing_ExpectedCloseBracketBeforeEOF(
                         new SourceSpan(
@@ -3088,7 +3148,8 @@ namespace Microsoft.AspNetCore.Razor.Language.Legacy
             SyntaxKind left,
             SyntaxKind right,
             SourceLocation start
-        ) {
+        )
+        {
             var startPosition = CurrentStart.AbsoluteIndex;
             var nesting = 1;
             var stopAtEndOfLine =
@@ -3105,7 +3166,8 @@ namespace Microsoft.AspNetCore.Razor.Language.Legacy
                             (mode & BalancingModes.AllowEmbeddedTransitions)
                                 == BalancingModes.AllowEmbeddedTransitions
                         )
-                    ) {
+                    )
+                    {
                         Accept(tokens);
                         tokens.Clear();
                         ParseEmbeddedTransition(builder);
@@ -3147,7 +3209,8 @@ namespace Microsoft.AspNetCore.Razor.Language.Legacy
                     if (
                         (mode & BalancingModes.BacktrackOnFailure)
                         == BalancingModes.BacktrackOnFailure
-                    ) {
+                    )
+                    {
                         Context.Source.Position = startPosition;
                         NextToken();
                     }

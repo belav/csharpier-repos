@@ -31,7 +31,8 @@ namespace Microsoft.AspNetCore.JsonPatch.Operations
         public void InvalidOperationType_SetsOperationTypeInvalid(
             string op,
             OperationType operationType
-        ) {
+        )
+        {
             // Arrange
             var operationBase = new OperationBase();
             operationBase.op = op;

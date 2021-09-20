@@ -122,7 +122,8 @@ namespace Microsoft.CodeAnalysis.CodeFixes.Suppression
             TextSpan span,
             IEnumerable<Diagnostic> diagnostics,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             return GetSuppressionsAsync(
                 document,
                 span,
@@ -138,7 +139,8 @@ namespace Microsoft.CodeAnalysis.CodeFixes.Suppression
             TextSpan span,
             IEnumerable<Diagnostic> diagnostics,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var codeFixes = await GetSuppressionsAsync(
                     document,
                     span,
@@ -160,7 +162,8 @@ namespace Microsoft.CodeAnalysis.CodeFixes.Suppression
             bool skipSuppressMessage,
             bool skipUnsuppress,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var suppressionTargetInfo = await GetSuppressionTargetInfoAsync(
                     document,
                     span,
@@ -188,7 +191,8 @@ namespace Microsoft.CodeAnalysis.CodeFixes.Suppression
             Project project,
             IEnumerable<Diagnostic> diagnostics,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             if (!project.SupportsCompilation)
             {
                 return ImmutableArray<CodeFix>.Empty;
@@ -220,7 +224,8 @@ namespace Microsoft.CodeAnalysis.CodeFixes.Suppression
             bool skipSuppressMessage,
             bool skipUnsuppress,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             // We only care about diagnostics that can be suppressed/unsuppressed.
             diagnostics = diagnostics.Where(IsFixableDiagnostic);
             if (diagnostics.IsEmpty())
@@ -261,7 +266,8 @@ namespace Microsoft.CodeAnalysis.CodeFixes.Suppression
                     if (
                         !skipSuppressMessage
                         && SuppressionHelpers.CanBeSuppressedWithAttribute(diagnostic)
-                    ) {
+                    )
+                    {
                         // global assembly-level suppress message attribute.
                         nestedActions.Add(
                             new GlobalSuppressMessageCodeAction(
@@ -279,7 +285,8 @@ namespace Microsoft.CodeAnalysis.CodeFixes.Suppression
                         if (
                             suppressionTargetInfo.TargetMemberNode != null
                             && suppressionTargetInfo.TargetSymbol.Kind != SymbolKind.Namespace
-                        ) {
+                        )
+                        {
                             nestedActions.Add(
                                 new LocalSuppressMessageCodeAction(
                                     this,
@@ -336,12 +343,14 @@ namespace Microsoft.CodeAnalysis.CodeFixes.Suppression
             Document document,
             TextSpan span,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var syntaxTree = await document.GetSyntaxTreeAsync(cancellationToken)
                 .ConfigureAwait(false);
             if (
                 syntaxTree.GetLineVisibility(span.Start, cancellationToken) == LineVisibility.Hidden
-            ) {
+            )
+            {
                 return null;
             }
 
@@ -415,7 +424,8 @@ namespace Microsoft.CodeAnalysis.CodeFixes.Suppression
                                         !minContainingSpan.HasValue
                                         || minContainingSpan.Value.Contains(declSpan)
                                     )
-                                ) {
+                                )
+                                {
                                     minContainingSpan = declSpan;
                                     targetSymbol = decl.DeclaredSymbol;
                                 }
@@ -445,7 +455,8 @@ namespace Microsoft.CodeAnalysis.CodeFixes.Suppression
             SyntaxToken startToken,
             SyntaxToken endToken,
             SyntaxNode root
-        ) {
+        )
+        {
             if (IsEndOfFileToken(endToken))
             {
                 return root;

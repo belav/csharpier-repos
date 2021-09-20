@@ -62,7 +62,8 @@ namespace Microsoft.CodeAnalysis.Test.Utilities
                         {
                             if (
                                 operationBlockContext.OwningSymbol is IMethodSymbol containingMethod
-                            ) {
+                            )
+                            {
                                 Dictionary<
                                     ILocalSymbol,
                                     HashSet<INamedTypeSymbol>
@@ -78,7 +79,8 @@ namespace Microsoft.CodeAnalysis.Test.Utilities
                                         if (
                                             operationContext.Operation
                                             is IAssignmentOperation assignment
-                                        ) {
+                                        )
+                                        {
                                             AssignTo(
                                                 assignment.Target,
                                                 localsSourceTypes,
@@ -89,7 +91,8 @@ namespace Microsoft.CodeAnalysis.Test.Utilities
                                         else if (
                                             operationContext.Operation
                                             is IIncrementOrDecrementOperation increment
-                                        ) {
+                                        )
+                                        {
                                             SyntaxNode syntax = increment.Syntax;
                                             ITypeSymbol type = increment.Type;
                                             var constantValue = ConstantValue.Create(1);
@@ -129,11 +132,13 @@ namespace Microsoft.CodeAnalysis.Test.Utilities
                                             (IInvocationOperation)operationContext.Operation;
                                         foreach (
                                             IArgumentOperation argument in invocation.Arguments
-                                        ) {
+                                        )
+                                        {
                                             if (
                                                 argument.Parameter.RefKind == RefKind.Out
                                                 || argument.Parameter.RefKind == RefKind.Ref
-                                            ) {
+                                            )
+                                            {
                                                 AssignTo(
                                                     argument.Value,
                                                     localsSourceTypes,
@@ -157,7 +162,8 @@ namespace Microsoft.CodeAnalysis.Test.Utilities
                                         if (
                                             initializer.Parent
                                             is IVariableDeclaratorOperation singleVariableDeclaration
-                                        ) {
+                                        )
+                                        {
                                             ILocalSymbol local = singleVariableDeclaration.Symbol;
                                             AssignTo(
                                                 local,
@@ -169,10 +175,12 @@ namespace Microsoft.CodeAnalysis.Test.Utilities
                                         else if (
                                             initializer.Parent
                                             is IVariableDeclarationOperation multiVariableDeclaration
-                                        ) {
+                                        )
+                                        {
                                             foreach (
                                                 ILocalSymbol local in multiVariableDeclaration.GetDeclaredVariables()
-                                            ) {
+                                            )
+                                            {
                                                 AssignTo(
                                                     local,
                                                     local.Type,
@@ -198,7 +206,8 @@ namespace Microsoft.CodeAnalysis.Test.Utilities
                                                     localsSourceTypes,
                                                     out var mostSpecificSourceType
                                                 )
-                                            ) {
+                                            )
+                                            {
                                                 Report(
                                                     operationBlockEndContext,
                                                     local,
@@ -245,7 +254,8 @@ namespace Microsoft.CodeAnalysis.Test.Utilities
                                         fieldsSourceTypes,
                                         out var mostSpecificSourceType
                                     )
-                                ) {
+                                )
+                                {
                                     Report(
                                         compilationEndContext,
                                         field,
@@ -265,14 +275,16 @@ namespace Microsoft.CodeAnalysis.Test.Utilities
             ITypeSymbol symbolType,
             Dictionary<SymbolType, HashSet<INamedTypeSymbol>> symbolsSourceTypes,
             out INamedTypeSymbol commonSourceType
-        ) {
+        )
+        {
             if (symbolsSourceTypes.TryGetValue(symbol, out var sourceTypes))
             {
                 commonSourceType = CommonType(sourceTypes);
                 if (
                     commonSourceType != null
                     && DerivesFrom(commonSourceType, (INamedTypeSymbol)symbolType)
-                ) {
+                )
+                {
                     return true;
                 }
             }
@@ -311,7 +323,8 @@ namespace Microsoft.CodeAnalysis.Test.Utilities
         {
             if (
                 derivedType.TypeKind == TypeKind.Class || derivedType.TypeKind == TypeKind.Structure
-            ) {
+            )
+            {
                 INamedTypeSymbol derivedBaseType = derivedType.BaseType;
                 return derivedBaseType != null
                     && (derivedBaseType.Equals(baseType) || DerivesFrom(derivedBaseType, baseType));
@@ -343,7 +356,8 @@ namespace Microsoft.CodeAnalysis.Test.Utilities
             Dictionary<ILocalSymbol, HashSet<INamedTypeSymbol>> localsSourceTypes,
             Dictionary<IFieldSymbol, HashSet<INamedTypeSymbol>> fieldsSourceTypes,
             IOperation sourceValue
-        ) {
+        )
+        {
             AssignTo(target, localsSourceTypes, fieldsSourceTypes, OriginalType(sourceValue));
         }
 
@@ -352,7 +366,8 @@ namespace Microsoft.CodeAnalysis.Test.Utilities
             Dictionary<ILocalSymbol, HashSet<INamedTypeSymbol>> localsSourceTypes,
             Dictionary<IFieldSymbol, HashSet<INamedTypeSymbol>> fieldsSourceTypes,
             ITypeSymbol sourceType
-        ) {
+        )
+        {
             OperationKind targetKind = target.Kind;
             if (targetKind == OperationKind.LocalReference)
             {
@@ -371,7 +386,8 @@ namespace Microsoft.CodeAnalysis.Test.Utilities
             ITypeSymbol targetType,
             Dictionary<SymbolType, HashSet<INamedTypeSymbol>> sourceTypes,
             IOperation sourceValue
-        ) {
+        )
+        {
             AssignTo(target, targetType, sourceTypes, OriginalType(sourceValue));
         }
 
@@ -380,7 +396,8 @@ namespace Microsoft.CodeAnalysis.Test.Utilities
             ITypeSymbol targetType,
             Dictionary<SymbolType, HashSet<INamedTypeSymbol>> sourceTypes,
             ITypeSymbol sourceType
-        ) {
+        )
+        {
             if (sourceType != null && targetType != null)
             {
                 TypeKind targetTypeKind = targetType.TypeKind;
@@ -402,7 +419,8 @@ namespace Microsoft.CodeAnalysis.Test.Utilities
                         )
                         && targetType.SpecialType == SpecialType.System_Object
                     )
-                ) {
+                )
+                {
                     if (!sourceTypes.TryGetValue(target, out var symbolSourceTypes))
                     {
                         symbolSourceTypes = new HashSet<INamedTypeSymbol>();
@@ -433,7 +451,8 @@ namespace Microsoft.CodeAnalysis.Test.Utilities
             ILocalSymbol local,
             ITypeSymbol moreSpecificType,
             DiagnosticDescriptor descriptor
-        ) {
+        )
+        {
             context.ReportDiagnostic(
                 Diagnostic.Create(
                     descriptor,
@@ -449,7 +468,8 @@ namespace Microsoft.CodeAnalysis.Test.Utilities
             IFieldSymbol field,
             ITypeSymbol moreSpecificType,
             DiagnosticDescriptor descriptor
-        ) {
+        )
+        {
             context.ReportDiagnostic(
                 Diagnostic.Create(
                     descriptor,

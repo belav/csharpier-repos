@@ -305,7 +305,8 @@ namespace System.Security.Cryptography.Pkcs.EnvelopedCmsTests.Tests
             using (
                 X509Certificate2 cer =
                     Certificates.RSAKeyTransfer1.TryGetCertificateWithPrivateKey()
-            ) {
+            )
+            {
                 if (cer == null)
                     return; // Sorry - CertLoader is not configured to load certs with private keys - we've tested as much as we can.
 
@@ -356,7 +357,8 @@ namespace System.Security.Cryptography.Pkcs.EnvelopedCmsTests.Tests
             using (
                 X509Certificate2 cer =
                     Certificates.RSAKeyTransfer1.TryGetCertificateWithPrivateKey()
-            ) {
+            )
+            {
                 if (cer == null)
                     return; // Sorry - CertLoader is not configured to load certs with private keys - we've tested as much as we can.
                 X509Certificate2Collection extraStore = new X509Certificate2Collection(cer);
@@ -420,7 +422,8 @@ namespace System.Security.Cryptography.Pkcs.EnvelopedCmsTests.Tests
             using (
                 X509Certificate2 cert3 =
                     Certificates.RSAKeyTransfer3.TryGetCertificateWithPrivateKey()
-            ) {
+            )
+            {
                 if (cert1 == null || cert2 == null || cert3 == null)
                     return; // Sorry - CertLoader is not configured to load certs with private keys - we've tested as much as we can.
                 X509Certificate2Collection extraStore = new X509Certificate2Collection();

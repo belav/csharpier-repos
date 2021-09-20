@@ -117,7 +117,8 @@ namespace Microsoft.CodeAnalysis.BuildTasks
                     null != _rcwForCurrentCtx
                     && _shouldReleaseRCW
                     && Marshal.IsComObject(_rcwForCurrentCtx)
-                ) {
+                )
+                {
                     Marshal.ReleaseComObject(_rcwForCurrentCtx);
                 }
             }

@@ -86,7 +86,8 @@ namespace System.Buffers
                 VirtualAllocHandle handle,
                 int byteOffsetIntoHandle,
                 int elementCount
-            ) {
+            )
+            {
                 _handle = handle;
                 _byteOffsetIntoHandle = byteOffsetIntoHandle;
                 _elementCount = elementCount;
@@ -110,7 +111,8 @@ namespace System.Buffers
                                 lpBuffer: out var memoryInfo,
                                 dwLength: (IntPtr)sizeof(MEMORY_BASIC_INFORMATION)
                             ) == IntPtr.Zero
-                        ) {
+                        )
+                        {
                             Marshal.ThrowExceptionForHR(Marshal.GetHRForLastWin32Error());
                             throw new InvalidOperationException(
                                 "VirtualQuery failed unexpectedly."
@@ -142,7 +144,8 @@ namespace System.Buffers
                                     flNewProtect: value,
                                     lpflOldProtect: out _
                                 )
-                            ) {
+                            )
+                            {
                                 Marshal.ThrowExceptionForHR(Marshal.GetHRForLastWin32Error());
                                 throw new InvalidOperationException(
                                     "VirtualProtect failed unexpectedly."

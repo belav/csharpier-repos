@@ -77,7 +77,8 @@ namespace System.Web.WebPages
                 ScopeStorage.CreateTransientScope(
                     new ScopeStorageDictionary(ScopeStorage.CurrentScope, PageData)
                 )
-            ) {
+            )
+            {
                 ExecutePageHierarchy(_executors);
             }
         }

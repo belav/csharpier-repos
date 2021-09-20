@@ -17,7 +17,8 @@ namespace System.Threading.Tasks.Dataflow.Tests
             this ITargetBlock<int> target,
             int lowerBoundInclusive,
             int upperBoundExclusive
-        ) {
+        )
+        {
             return PostRange(target, lowerBoundInclusive, upperBoundExclusive, i => i);
         }
 
@@ -26,7 +27,8 @@ namespace System.Threading.Tasks.Dataflow.Tests
             int lowerBoundInclusive,
             int upperBoundExclusive,
             Func<int, T> selector
-        ) {
+        )
+        {
             Assert.NotNull(target);
             for (int i = lowerBoundInclusive; i < upperBoundExclusive; i++)
             {
@@ -43,7 +45,8 @@ namespace System.Threading.Tasks.Dataflow.Tests
         internal static ITargetBlock<T> PostAll<T>(
             this ITargetBlock<T> target,
             IEnumerable<T> items
-        ) {
+        )
+        {
             Assert.NotNull(target);
             Assert.NotNull(items);
             foreach (var item in items)
@@ -141,7 +144,8 @@ namespace System.Threading.Tasks.Dataflow.Tests
         internal static void TestOfferMessage_AcceptsDataDirectly<T>(
             ITargetBlock<T> target,
             int messages = 3
-        ) {
+        )
+        {
             for (int i = 1; i <= messages; i++)
             {
                 Assert.Equal(
@@ -159,7 +163,8 @@ namespace System.Threading.Tasks.Dataflow.Tests
         internal static void TestOfferMessage_CompleteAndOffer<T>(
             ITargetBlock<T> target,
             int messages = 3
-        ) {
+        )
+        {
             target.Complete();
             for (int i = 1; i <= messages; i++)
             {
@@ -178,7 +183,8 @@ namespace System.Threading.Tasks.Dataflow.Tests
         internal static async Task TestOfferMessage_AcceptsViaLinking<T>(
             ITargetBlock<T> target,
             int messages = 3
-        ) {
+        )
+        {
             var src = new BufferBlock<T>();
 
             var stingySource = new DelegatePropagator<T, T>
@@ -261,7 +267,8 @@ namespace System.Threading.Tasks.Dataflow.Tests
         internal static async Task TestReserveAndRelease<T>(
             IReceivableSourceBlock<T> block,
             bool reservationIsTargetSpecific = true
-        ) {
+        )
+        {
             var tcs = new TaskCompletionSource<bool>();
 
             // Offer the message to a target and wait until it's postponed
@@ -308,7 +315,8 @@ namespace System.Threading.Tasks.Dataflow.Tests
         internal static async Task TestReserveAndConsume<T>(
             ISourceBlock<T> block,
             bool reservationIsTargetSpecific = true
-        ) {
+        )
+        {
             bool consumed;
             block.ConsumeMessage(
                 new DataflowMessageHeader(-99),

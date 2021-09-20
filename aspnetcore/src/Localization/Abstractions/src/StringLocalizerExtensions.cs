@@ -43,7 +43,8 @@ namespace Microsoft.Extensions.Localization
             this IStringLocalizer stringLocalizer,
             string name,
             params object[] arguments
-        ) {
+        )
+        {
             if (stringLocalizer == null)
             {
                 throw new ArgumentNullException(nameof(stringLocalizer));
@@ -64,7 +65,8 @@ namespace Microsoft.Extensions.Localization
         /// <returns>The string resources.</returns>
         public static IEnumerable<LocalizedString> GetAllStrings(
             this IStringLocalizer stringLocalizer
-        ) {
+        )
+        {
             if (stringLocalizer == null)
             {
                 throw new ArgumentNullException(nameof(stringLocalizer));

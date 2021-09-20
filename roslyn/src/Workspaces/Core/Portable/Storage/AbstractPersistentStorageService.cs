@@ -119,7 +119,8 @@ namespace Microsoft.CodeAnalysis.Storage
             Solution? bulkLoadSnapshot,
             bool checkBranchId,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             if (!DatabaseSupported(solutionKey, checkBranchId))
             {
                 return new(NoOpPersistentStorage.Instance);
@@ -138,7 +139,8 @@ namespace Microsoft.CodeAnalysis.Storage
             SolutionKey solutionKey,
             Solution? bulkLoadSnapshot,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             using (await _lock.DisposableWaitAsync(cancellationToken).ConfigureAwait(false))
             {
                 // Do we already have storage for this?
@@ -194,7 +196,8 @@ namespace Microsoft.CodeAnalysis.Storage
             Workspace workspace,
             SolutionKey solutionKey,
             Solution? bulkLoadSnapshot
-        ) {
+        )
+        {
             // First, see if we have the new API that just operates on a Workspace/Key.  If so, use that.
             if (_locationService is IPersistentStorageLocationService2 locationService2)
                 return locationService2.TryGetStorageLocation(workspace, solutionKey);
@@ -225,7 +228,8 @@ namespace Microsoft.CodeAnalysis.Storage
         private async ValueTask<IChecksummedPersistentStorage> CreatePersistentStorageAsync(
             SolutionKey solutionKey,
             string workingFolderPath
-        ) {
+        )
+        {
             // Attempt to create the database up to two times.  The first time we may encounter
             // some sort of issue (like DB corruption).  We'll then try to delete the DB and can
             // try to create it again.  If we can't create it the second time, then there's nothing
@@ -244,7 +248,8 @@ namespace Microsoft.CodeAnalysis.Storage
         private async ValueTask<IChecksummedPersistentStorage?> TryCreatePersistentStorageAsync(
             SolutionKey solutionKey,
             string workingFolderPath
-        ) {
+        )
+        {
             var databaseFilePath = GetDatabaseFilePath(workingFolderPath);
             try
             {
@@ -319,7 +324,8 @@ namespace Microsoft.CodeAnalysis.Storage
 
             public static IChecksummedPersistentStorage AddReferenceCountToAndCreateWrapper(
                 ReferenceCountedDisposable<IChecksummedPersistentStorage> storage
-            ) {
+            )
+            {
                 // This should only be called from a caller that has a non-null storage that it
                 // already has a reference on.  So .TryAddReference cannot fail.
                 return new PersistentStorageReferenceCountedDisposableWrapper(

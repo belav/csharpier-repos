@@ -2275,7 +2275,8 @@ IAnonymousObjectCreationOperation (OperationKind.AnonymousObjectCreation, Type: 
             int node,
             TextSpan typeSpan,
             params int[] fields
-        ) {
+        )
+        {
             var info = data.Model.GetSemanticInfoSummary(data.Nodes[node]);
             var type = info.Type;
 
@@ -2300,7 +2301,8 @@ IAnonymousObjectCreationOperation (OperationKind.AnonymousObjectCreation, Type: 
             TestData data,
             ITypeSymbol type,
             SyntaxNode identifier
-        ) {
+        )
+        {
             var anonymousType = (INamedTypeSymbol)type;
 
             var current = identifier;
@@ -2337,7 +2339,8 @@ IAnonymousObjectCreationOperation (OperationKind.AnonymousObjectCreation, Type: 
             string source,
             int expectedIntervals,
             params DiagnosticDescription[] diagnostics
-        ) {
+        )
+        {
             var intervals = ExtractTextIntervals(ref source);
             Assert.Equal(expectedIntervals, intervals.Count);
 
@@ -2445,7 +2448,8 @@ IAnonymousObjectCreationOperation (OperationKind.AnonymousObjectCreation, Type: 
                     new String[] { Environment.NewLine },
                     StringSplitOptions.None
                 )
-            ) {
+            )
+            {
                 if (!string.IsNullOrWhiteSpace(line))
                 {
                     if (!line.Trim().StartsWith("//", StringComparison.Ordinal))
@@ -2454,7 +2458,8 @@ IAnonymousObjectCreationOperation (OperationKind.AnonymousObjectCreation, Type: 
                             int index = line.IndexOf("new ", StringComparison.Ordinal);
                             index >= 0;
 
-                        ) {
+                        )
+                        {
                             cnt++;
                             index = line.IndexOf("new ", index + 1, StringComparison.Ordinal);
                         }

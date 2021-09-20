@@ -24,7 +24,8 @@ namespace GCTest
                 if (
                     ((Array)a2.GetValue(i)).GetLowerBound(0) != 0
                     || ((Array)a2.GetValue(i)).GetUpperBound(0) != 15
-                ) {
+                )
+                {
                     Console.WriteLine("TEST FAILED!");
                     return 1;
                 }

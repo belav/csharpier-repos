@@ -26,7 +26,8 @@ namespace Internal.Cryptography
             ReadOnlySpan<byte> input,
             Span<byte> destination,
             out int bytesWritten
-        ) {
+        )
+        {
             AsnWriter writer = WriteIeee1363ToDer(input);
             return writer.TryEncode(destination, out bytesWritten);
         }
@@ -65,7 +66,8 @@ namespace Internal.Cryptography
             ReadOnlySpan<byte> input,
             int fieldSizeBits,
             Span<byte> destination
-        ) {
+        )
+        {
             int fieldSizeBytes = BitsToBytes(fieldSizeBits);
             int encodedSize = 2 * fieldSizeBytes;
 
@@ -153,7 +155,8 @@ namespace Internal.Cryptography
         internal static byte[] ConvertFromIeeeP1363Signature(
             byte[] signature,
             DSASignatureFormat targetFormat
-        ) {
+        )
+        {
             switch (targetFormat)
             {
                 case DSASignatureFormat.IeeeP1363FixedFieldConcatenation:
@@ -175,7 +178,8 @@ namespace Internal.Cryptography
             DSASignatureFormat currentFormat,
             ReadOnlySpan<byte> signature,
             int fieldSizeBits
-        ) {
+        )
+        {
             switch (currentFormat)
             {
                 case DSASignatureFormat.IeeeP1363FixedFieldConcatenation:
@@ -200,14 +204,16 @@ namespace Internal.Cryptography
         private static void CopySignatureField(
             ReadOnlySpan<byte> signatureField,
             Span<byte> response
-        ) {
+        )
+        {
             if (signatureField.Length > response.Length)
             {
                 if (
                     signatureField.Length != response.Length + 1
                     || signatureField[0] != 0
                     || signatureField[1] <= 0x7F
-                ) {
+                )
+                {
                     // The only way this should be true is if the value required a zero-byte-pad.
                     Debug.Fail(
                         $"A signature field was longer ({signatureField.Length}) than expected ({response.Length})"
@@ -232,7 +238,8 @@ namespace Internal.Cryptography
             DSASignatureFormat currentFormat,
             ReadOnlySpan<byte> signature,
             int fieldSizeBits = 0
-        ) {
+        )
+        {
             try
             {
                 if (fieldSizeBits == 0)
@@ -256,7 +263,8 @@ namespace Internal.Cryptography
             this ECDsa ecdsa,
             DSASignatureFormat currentFormat,
             ReadOnlySpan<byte> signature
-        ) {
+        )
+        {
             try
             {
                 return ConvertSignatureToIeeeP1363(currentFormat, signature, ecdsa.KeySize);

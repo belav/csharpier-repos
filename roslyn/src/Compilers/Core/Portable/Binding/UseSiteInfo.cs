@@ -47,16 +47,15 @@ namespace Microsoft.CodeAnalysis
         public UseSiteInfo(DiagnosticInfo? diagnosticInfo)
             : this(diagnosticInfo, primaryDependency: null, secondaryDependencies: null) { }
 
-        public UseSiteInfo(
-            DiagnosticInfo? diagnosticInfo,
-            TAssemblySymbol? primaryDependency
-        ) : this(diagnosticInfo, primaryDependency, secondaryDependencies: null) { }
+        public UseSiteInfo(DiagnosticInfo? diagnosticInfo, TAssemblySymbol? primaryDependency)
+            : this(diagnosticInfo, primaryDependency, secondaryDependencies: null) { }
 
         public UseSiteInfo(
             DiagnosticInfo? diagnosticInfo,
             TAssemblySymbol? primaryDependency,
             ImmutableHashSet<TAssemblySymbol>? secondaryDependencies
-        ) {
+        )
+        {
             Debug.Assert(
                 diagnosticInfo?.Severity != DiagnosticSeverity.Error
                     || (primaryDependency is null && secondaryDependencies?.IsEmpty != false)
@@ -106,7 +105,8 @@ namespace Microsoft.CodeAnalysis
         public void MergeDependencies(
             ref TAssemblySymbol? primaryDependency,
             ref ImmutableHashSet<TAssemblySymbol>? secondaryDependencies
-        ) {
+        )
+        {
             secondaryDependencies = (
                 secondaryDependencies ?? ImmutableHashSet<TAssemblySymbol>.Empty
             ).Union(SecondaryDependencies ?? ImmutableHashSet<TAssemblySymbol>.Empty);
@@ -156,7 +156,8 @@ namespace Microsoft.CodeAnalysis
         public CompoundUseSiteInfo(
             BindingDiagnosticBag<TAssemblySymbol>? futureDestination,
             TAssemblySymbol assemblyBeingBuilt
-        ) {
+        )
+        {
             Debug.Assert(assemblyBeingBuilt is object);
             Debug.Assert(assemblyBeingBuilt is ISourceAssemblySymbolInternal);
 
@@ -281,7 +282,8 @@ namespace Microsoft.CodeAnalysis
             if (
                 HashSetExtensions.InitializeAndAdd(ref _diagnostics, info.DiagnosticInfo)
                 && info.DiagnosticInfo?.Severity == DiagnosticSeverity.Error
-            ) {
+            )
+            {
                 RecordPresenceOfAnError();
             }
         }
@@ -311,7 +313,8 @@ namespace Microsoft.CodeAnalysis
                     if (
                         _diagnostics.Add(diagnosticInfo)
                         && diagnosticInfo?.Severity == DiagnosticSeverity.Error
-                    ) {
+                    )
+                    {
                         RecordPresenceOfAnError();
                     }
                 }
@@ -334,7 +337,8 @@ namespace Microsoft.CodeAnalysis
                     if (
                         _diagnostics.Add(diagnosticInfo)
                         && diagnosticInfo?.Severity == DiagnosticSeverity.Error
-                    ) {
+                    )
+                    {
                         RecordPresenceOfAnError();
                     }
                 }
@@ -357,7 +361,8 @@ namespace Microsoft.CodeAnalysis
                     if (
                         _diagnostics.Add(diagnosticInfo)
                         && diagnosticInfo?.Severity == DiagnosticSeverity.Error
-                    ) {
+                    )
+                    {
                         RecordPresenceOfAnError();
                     }
                 }
@@ -379,7 +384,8 @@ namespace Microsoft.CodeAnalysis
                         _assemblyBeingBuilt is null
                         || info.SecondaryDependencies.AsSingleton() != _assemblyBeingBuilt
                     )
-                ) {
+                )
+                {
                     (_dependencies ??= new HashSet<TAssemblySymbol>()).AddAll(
                         info.SecondaryDependencies
                     );
@@ -405,7 +411,8 @@ namespace Microsoft.CodeAnalysis
                 && (
                     _assemblyBeingBuilt is null || dependencies.AsSingleton() != _assemblyBeingBuilt
                 )
-            ) {
+            )
+            {
                 (_dependencies ??= new HashSet<TAssemblySymbol>()).AddAll(dependencies);
             }
         }
@@ -419,7 +426,8 @@ namespace Microsoft.CodeAnalysis
                 && (
                     _assemblyBeingBuilt is null || dependencies.AsSingleton() != _assemblyBeingBuilt
                 )
-            ) {
+            )
+            {
                 (_dependencies ??= new HashSet<TAssemblySymbol>()).AddAll(dependencies);
             }
         }
@@ -435,7 +443,8 @@ namespace Microsoft.CodeAnalysis
                     || dependencies.Length != 1
                     || dependencies[0] != _assemblyBeingBuilt
                 )
-            ) {
+            )
+            {
                 (_dependencies ??= new HashSet<TAssemblySymbol>()).AddAll(dependencies);
             }
         }
@@ -539,7 +548,8 @@ namespace Microsoft.CodeAnalysis
         public void Initialize(
             TAssemblySymbol? primaryDependency,
             UseSiteInfo<TAssemblySymbol> useSiteInfo
-        ) {
+        )
+        {
             Initialize(
                 useSiteInfo.DiagnosticInfo,
                 GetDependenciesToCache(primaryDependency, useSiteInfo)
@@ -549,7 +559,8 @@ namespace Microsoft.CodeAnalysis
         private static ImmutableHashSet<TAssemblySymbol> GetDependenciesToCache(
             TAssemblySymbol? primaryDependency,
             UseSiteInfo<TAssemblySymbol> useSiteInfo
-        ) {
+        )
+        {
             var secondaryDependencies =
                 useSiteInfo.SecondaryDependencies ?? ImmutableHashSet<TAssemblySymbol>.Empty;
             Debug.Assert(
@@ -587,14 +598,16 @@ namespace Microsoft.CodeAnalysis
         private void Initialize(
             DiagnosticInfo? diagnosticInfo,
             ImmutableHashSet<TAssemblySymbol> dependencies
-        ) {
+        )
+        {
             _info = Compact(diagnosticInfo, dependencies);
         }
 
         private static object? Compact(
             DiagnosticInfo? diagnosticInfo,
             ImmutableHashSet<TAssemblySymbol> dependencies
-        ) {
+        )
+        {
             object? info;
 
             if (dependencies.IsEmpty)
@@ -616,7 +629,8 @@ namespace Microsoft.CodeAnalysis
         public void InterlockedCompareExchange(
             TAssemblySymbol? primaryDependency,
             UseSiteInfo<TAssemblySymbol> value
-        ) {
+        )
+        {
             if ((object?)_info == Sentinel)
             {
                 object? info = Compact(
@@ -630,7 +644,8 @@ namespace Microsoft.CodeAnalysis
         public UseSiteInfo<TAssemblySymbol> InterlockedInitialize(
             TAssemblySymbol? primaryDependency,
             UseSiteInfo<TAssemblySymbol> value
-        ) {
+        )
+        {
             object? info = Compact(
                 value.DiagnosticInfo,
                 GetDependenciesToCache(primaryDependency, value)
@@ -655,7 +670,8 @@ namespace Microsoft.CodeAnalysis
             object? info,
             out DiagnosticInfo? diagnosticInfo,
             out ImmutableHashSet<TAssemblySymbol>? dependencies
-        ) {
+        )
+        {
             switch (info)
             {
                 case null:
@@ -697,7 +713,8 @@ namespace Microsoft.CodeAnalysis
             public Boxed(
                 DiagnosticInfo diagnosticInfo,
                 ImmutableHashSet<TAssemblySymbol> dependencies
-            ) {
+            )
+            {
                 Debug.Assert(!dependencies.IsEmpty);
                 DiagnosticInfo = diagnosticInfo;
                 Dependencies = dependencies;

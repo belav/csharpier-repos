@@ -47,7 +47,8 @@ namespace System.ComponentModel
             ITypeDescriptorContext context,
             CultureInfo culture,
             object value
-        ) {
+        )
+        {
             if (value is string text)
             {
                 text = text.Trim();
@@ -89,7 +90,8 @@ namespace System.ComponentModel
             CultureInfo culture,
             object value,
             Type destinationType
-        ) {
+        )
+        {
             if (destinationType == typeof(string))
             {
                 if (value != null)
@@ -165,7 +167,8 @@ namespace System.ComponentModel
                                 && _type != null
                                 && _type.IsInstanceOfType(obj)
                                 && IsValueAllowed(context, obj)
-                            ) {
+                            )
+                            {
                                 components.Add(obj);
                             }
                         }

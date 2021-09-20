@@ -37,7 +37,8 @@ namespace Microsoft.AspNetCore.Http.Connections.Client.Internal
             HttpConnectionOptions httpConnectionOptions,
             ILoggerFactory loggerFactory,
             Func<Task<string?>> accessTokenProvider
-        ) {
+        )
+        {
             _webSocket = new ClientWebSocket();
             _logger = (
                 loggerFactory ?? NullLoggerFactory.Instance
@@ -127,7 +128,8 @@ namespace Microsoft.AspNetCore.Http.Connections.Client.Internal
             Uri url,
             TransferFormat transferFormat,
             CancellationToken cancellationToken = default
-        ) {
+        )
+        {
             if (url == null)
             {
                 throw new ArgumentNullException(nameof(url));

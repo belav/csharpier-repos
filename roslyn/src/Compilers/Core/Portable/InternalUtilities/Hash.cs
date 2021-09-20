@@ -45,7 +45,8 @@ namespace Roslyn.Utilities
         internal static int CombineValues<T>(
             IEnumerable<T>? values,
             int maxItemsToHash = int.MaxValue
-        ) {
+        )
+        {
             if (values == null)
             {
                 return 0;
@@ -97,7 +98,8 @@ namespace Roslyn.Utilities
         internal static int CombineValues<T>(
             ImmutableArray<T> values,
             int maxItemsToHash = int.MaxValue
-        ) {
+        )
+        {
             if (values.IsDefaultOrEmpty)
             {
                 return 0;
@@ -126,7 +128,8 @@ namespace Roslyn.Utilities
             IEnumerable<string?>? values,
             StringComparer stringComparer,
             int maxItemsToHash = int.MaxValue
-        ) {
+        )
+        {
             if (values == null)
             {
                 return 0;

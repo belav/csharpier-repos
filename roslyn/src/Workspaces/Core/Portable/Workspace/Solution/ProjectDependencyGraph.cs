@@ -79,21 +79,22 @@ namespace Microsoft.CodeAnalysis
         internal ProjectDependencyGraph(
             ImmutableHashSet<ProjectId> projectIds,
             ImmutableDictionary<ProjectId, ImmutableHashSet<ProjectId>> referencesMap
-        ) : this(
-            projectIds,
-            RemoveItemsWithEmptyValues(referencesMap),
-            reverseReferencesMap: null,
-            transitiveReferencesMap: ImmutableDictionary<
-                ProjectId,
-                ImmutableHashSet<ProjectId>
-            >.Empty,
-            reverseTransitiveReferencesMap: ImmutableDictionary<
-                ProjectId,
-                ImmutableHashSet<ProjectId>
-            >.Empty,
-            default,
-            default
-        ) { }
+        )
+            : this(
+                projectIds,
+                RemoveItemsWithEmptyValues(referencesMap),
+                reverseReferencesMap: null,
+                transitiveReferencesMap: ImmutableDictionary<
+                    ProjectId,
+                    ImmutableHashSet<ProjectId>
+                >.Empty,
+                reverseTransitiveReferencesMap: ImmutableDictionary<
+                    ProjectId,
+                    ImmutableHashSet<ProjectId>
+                >.Empty,
+                default,
+                default
+            ) { }
 
         // This constructor is private to prevent other Roslyn code from producing this type with inconsistent inputs.
         private ProjectDependencyGraph(
@@ -107,7 +108,8 @@ namespace Microsoft.CodeAnalysis
             > reverseTransitiveReferencesMap,
             ImmutableArray<ProjectId> topologicallySortedProjects,
             ImmutableArray<IEnumerable<ProjectId>> dependencySets
-        ) {
+        )
+        {
             Contract.ThrowIfNull(transitiveReferencesMap);
             Contract.ThrowIfNull(reverseTransitiveReferencesMap);
 
@@ -130,7 +132,8 @@ namespace Microsoft.CodeAnalysis
             ImmutableHashSet<ProjectId>
         > RemoveItemsWithEmptyValues(
             ImmutableDictionary<ProjectId, ImmutableHashSet<ProjectId>> map
-        ) {
+        )
+        {
             ImmutableDictionary<ProjectId, ImmutableHashSet<ProjectId>>.Builder? builder = null;
             foreach (var (key, value) in map)
             {
@@ -149,7 +152,8 @@ namespace Microsoft.CodeAnalysis
         internal ProjectDependencyGraph WithProjectReferences(
             ProjectId projectId,
             IReadOnlyList<ProjectReference> projectReferences
-        ) {
+        )
+        {
             Contract.ThrowIfFalse(_projectIds.Contains(projectId));
 
             // This method we can't optimize very well: changing project references arbitrarily could invalidate pretty much anything.
@@ -174,7 +178,8 @@ namespace Microsoft.CodeAnalysis
         /// </summary>
         public IImmutableSet<ProjectId> GetProjectsThatThisProjectDirectlyDependsOn(
             ProjectId projectId
-        ) {
+        )
+        {
             if (projectId == null)
             {
                 throw new ArgumentNullException(nameof(projectId));
@@ -188,7 +193,8 @@ namespace Microsoft.CodeAnalysis
         /// </summary>
         public IImmutableSet<ProjectId> GetProjectsThatDirectlyDependOnThisProject(
             ProjectId projectId
-        ) {
+        )
+        {
             if (projectId == null)
             {
                 throw new ArgumentNullException(nameof(projectId));
@@ -210,7 +216,8 @@ namespace Microsoft.CodeAnalysis
 
         private ImmutableHashSet<ProjectId> GetProjectsThatDirectlyDependOnThisProject_NoLock(
             ProjectId projectId
-        ) {
+        )
+        {
             if (_lazyReverseReferencesMap == null)
             {
                 _lazyReverseReferencesMap = this.ComputeReverseReferencesMap();
@@ -252,7 +259,8 @@ namespace Microsoft.CodeAnalysis
         /// </summary>
         internal ImmutableHashSet<ProjectId>? TryGetProjectsThatThisProjectTransitivelyDependsOn(
             ProjectId projectId
-        ) {
+        )
+        {
             if (projectId is null)
             {
                 throw new ArgumentNullException(nameof(projectId));
@@ -267,7 +275,8 @@ namespace Microsoft.CodeAnalysis
         /// </summary>
         public IImmutableSet<ProjectId> GetProjectsThatThisProjectTransitivelyDependsOn(
             ProjectId projectId
-        ) {
+        )
+        {
             if (projectId == null)
             {
                 throw new ArgumentNullException(nameof(projectId));
@@ -290,7 +299,8 @@ namespace Microsoft.CodeAnalysis
 
         private ImmutableHashSet<ProjectId> GetProjectsThatThisProjectTransitivelyDependsOn_NoLock(
             ProjectId projectId
-        ) {
+        )
+        {
             if (!_transitiveReferencesMap.TryGetValue(projectId, out var transitiveReferences))
             {
                 using var pooledObject = SharedPools.Default<HashSet<ProjectId>>()
@@ -325,7 +335,8 @@ namespace Microsoft.CodeAnalysis
         /// </summary>
         public IEnumerable<ProjectId> GetProjectsThatTransitivelyDependOnThisProject(
             ProjectId projectId
-        ) {
+        )
+        {
             if (projectId == null)
             {
                 throw new ArgumentNullException(nameof(projectId));
@@ -348,13 +359,15 @@ namespace Microsoft.CodeAnalysis
 
         private ImmutableHashSet<ProjectId> GetProjectsThatTransitivelyDependOnThisProject_NoLock(
             ProjectId projectId
-        ) {
+        )
+        {
             if (
                 !_reverseTransitiveReferencesMap.TryGetValue(
                     projectId,
                     out var reverseTransitiveReferences
                 )
-            ) {
+            )
+            {
                 using var pooledObject = SharedPools.Default<HashSet<ProjectId>>()
                     .GetPooledObject();
                 var results = pooledObject.Object;
@@ -373,7 +386,8 @@ namespace Microsoft.CodeAnalysis
         private void ComputeReverseTransitiveReferences(
             ProjectId project,
             HashSet<ProjectId> results
-        ) {
+        )
+        {
             var otherProjects = this.GetProjectsThatDirectlyDependOnThisProject_NoLock(project);
             foreach (var other in otherProjects)
             {
@@ -391,7 +405,8 @@ namespace Microsoft.CodeAnalysis
         /// </summary>
         public IEnumerable<ProjectId> GetTopologicallySortedProjects(
             CancellationToken cancellationToken = default
-        ) {
+        )
+        {
             if (_lazyTopologicallySortedProjects.IsDefault)
             {
                 using (_dataLock.DisposableWait(cancellationToken))
@@ -425,7 +440,8 @@ namespace Microsoft.CodeAnalysis
             HashSet<ProjectId> seenProjects,
             List<ProjectId> resultList,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             foreach (var projectId in projectIds)
             {
                 cancellationToken.ThrowIfCancellationRequested();
@@ -455,7 +471,8 @@ namespace Microsoft.CodeAnalysis
         /// </summary>
         public IEnumerable<IEnumerable<ProjectId>> GetDependencySets(
             CancellationToken cancellationToken = default
-        ) {
+        )
+        {
             if (_lazyDependencySets == null)
             {
                 using (_dataLock.DisposableWait(cancellationToken))
@@ -469,7 +486,8 @@ namespace Microsoft.CodeAnalysis
 
         private ImmutableArray<IEnumerable<ProjectId>> GetDependencySets_NoLock(
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             if (_lazyDependencySets == null)
             {
                 using var seenProjects = SharedPools.Default<HashSet<ProjectId>>()
@@ -487,7 +505,8 @@ namespace Microsoft.CodeAnalysis
             HashSet<ProjectId> seenProjects,
             List<IEnumerable<ProjectId>> results,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             foreach (var project in _projectIds)
             {
                 if (seenProjects.Add(project))
@@ -535,7 +554,8 @@ namespace Microsoft.CodeAnalysis
         private static void ValidateForwardReferences(
             ImmutableHashSet<ProjectId> projectIds,
             ImmutableDictionary<ProjectId, ImmutableHashSet<ProjectId>> referencesMap
-        ) {
+        )
+        {
             RoslynDebug.Assert(referencesMap is object);
 
             Debug.Assert(projectIds.Count >= referencesMap.Count);
@@ -562,7 +582,8 @@ namespace Microsoft.CodeAnalysis
             ImmutableHashSet<ProjectId> projectIds,
             ImmutableDictionary<ProjectId, ImmutableHashSet<ProjectId>> forwardReferencesMap,
             ImmutableDictionary<ProjectId, ImmutableHashSet<ProjectId>>? reverseReferencesMap
-        ) {
+        )
+        {
             if (reverseReferencesMap is null)
                 return;
 
@@ -606,7 +627,8 @@ namespace Microsoft.CodeAnalysis
             /// </summary>
             public ImmutableHashSet<ProjectId>? TryGetProjectsThatTransitivelyDependOnThisProject(
                 ProjectId projectId
-            ) {
+            )
+            {
                 if (projectId is null)
                 {
                     throw new ArgumentNullException(nameof(projectId));

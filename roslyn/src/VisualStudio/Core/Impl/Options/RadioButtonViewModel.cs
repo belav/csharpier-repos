@@ -21,13 +21,15 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Options
             Option<TOption> option,
             AbstractOptionPreviewViewModel info,
             OptionStore optionStore
-        ) : base(
-            description,
-            preview,
-            info,
-            isChecked: optionStore.GetOption(option).Equals(value),
-            group: group
-        ) {
+        )
+            : base(
+                description,
+                preview,
+                info,
+                isChecked: optionStore.GetOption(option).Equals(value),
+                group: group
+            )
+        {
             _value = value;
             _option = option;
         }

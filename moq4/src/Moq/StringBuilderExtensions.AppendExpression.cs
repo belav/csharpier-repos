@@ -20,7 +20,8 @@ namespace Moq
         public static StringBuilder AppendExpression(
             this StringBuilder builder,
             Expression expression
-        ) {
+        )
+        {
             if (expression == null)
             {
                 return builder.Append("null");
@@ -130,7 +131,8 @@ namespace Moq
         private static StringBuilder AppendElementInit(
             this StringBuilder builder,
             ElementInit initializer
-        ) {
+        )
+        {
             return builder.AppendCommaSeparated(
                 "{ ",
                 initializer.Arguments,
@@ -142,7 +144,8 @@ namespace Moq
         private static StringBuilder AppendExpression(
             this StringBuilder builder,
             UnaryExpression expression
-        ) {
+        )
+        {
             switch (expression.NodeType)
             {
                 case ExpressionType.Convert:
@@ -179,7 +182,8 @@ namespace Moq
         private static StringBuilder AppendExpression(
             this StringBuilder builder,
             BinaryExpression expression
-        ) {
+        )
+        {
             if (expression.NodeType == ExpressionType.ArrayIndex)
             {
                 builder.AppendExpression(expression.Left)
@@ -250,7 +254,8 @@ namespace Moq
         private static StringBuilder AppendExpression(
             this StringBuilder builder,
             TypeBinaryExpression expression
-        ) {
+        )
+        {
             return builder.AppendExpression(expression.Expression)
                 .Append(" is ")
                 .AppendNameOf(expression.TypeOperand);
@@ -259,7 +264,8 @@ namespace Moq
         private static StringBuilder AppendExpression(
             this StringBuilder builder,
             ConditionalExpression expression
-        ) {
+        )
+        {
             return builder.AppendExpression(expression.Test)
                 .Append(" ? ")
                 .AppendExpression(expression.IfTrue)
@@ -270,20 +276,23 @@ namespace Moq
         private static StringBuilder AppendExpression(
             this StringBuilder builder,
             ParameterExpression expression
-        ) {
+        )
+        {
             return builder.Append(expression.Name ?? "<param>");
         }
 
         private static StringBuilder AppendExpression(
             this StringBuilder builder,
             MemberExpression expression
-        ) {
+        )
+        {
             if (expression.Expression != null)
             {
                 if (
                     expression.Expression is ConstantExpression ce
                     && ce.Type.IsDefined(typeof(CompilerGeneratedAttribute))
-                ) {
+                )
+                {
                     return builder.Append(expression.Member.Name);
                 }
                 else
@@ -302,7 +311,8 @@ namespace Moq
         private static StringBuilder AppendExpression(
             this StringBuilder builder,
             MethodCallExpression expression
-        ) {
+        )
+        {
             var instance = expression.Object;
             var method = expression.Method;
             var arguments = (IEnumerable<Expression>)expression.Arguments;
@@ -386,7 +396,8 @@ namespace Moq
         private static StringBuilder AppendExpression(
             this StringBuilder builder,
             IndexExpression expression
-        ) {
+        )
+        {
             return builder.AppendExpression(expression.Object)
                 .AppendCommaSeparated("[", expression.Arguments, AppendExpression, "]");
         }
@@ -394,7 +405,8 @@ namespace Moq
         private static StringBuilder AppendExpression(
             this StringBuilder builder,
             LambdaExpression expression
-        ) {
+        )
+        {
             if (expression.Parameters.Count == 1)
             {
                 builder.AppendExpression(expression.Parameters[0]);
@@ -409,7 +421,8 @@ namespace Moq
         private static StringBuilder AppendExpression(
             this StringBuilder builder,
             NewExpression expression
-        ) {
+        )
+        {
             Type type =
                 (expression.Constructor == null)
                     ? expression.Type
@@ -422,7 +435,8 @@ namespace Moq
         private static StringBuilder AppendExpression(
             this StringBuilder builder,
             NewArrayExpression expression
-        ) {
+        )
+        {
             switch (expression.NodeType)
             {
                 case ExpressionType.NewArrayInit:
@@ -445,7 +459,8 @@ namespace Moq
         private static StringBuilder AppendExpression(
             this StringBuilder builder,
             InvocationExpression expression
-        ) {
+        )
+        {
             return builder.AppendExpression(expression.Expression)
                 .AppendCommaSeparated("(", expression.Arguments, AppendExpression, ")");
         }
@@ -453,7 +468,8 @@ namespace Moq
         private static StringBuilder AppendExpression(
             this StringBuilder builder,
             MemberInitExpression expression
-        ) {
+        )
+        {
             return builder.AppendExpression(expression.NewExpression)
                 .AppendCommaSeparated(" { ", expression.Bindings, AppendMemberBinding, " }");
 
@@ -492,7 +508,8 @@ namespace Moq
         private static StringBuilder AppendExpression(
             this StringBuilder builder,
             ListInitExpression expression
-        ) {
+        )
+        {
             return builder.AppendExpression(expression.NewExpression)
                 .AppendCommaSeparated(" { ", expression.Initializers, AppendElementInit, " }");
         }
@@ -500,7 +517,8 @@ namespace Moq
         private static StringBuilder AppendExpression(
             this StringBuilder builder,
             MatchExpression expression
-        ) {
+        )
+        {
             return builder.AppendExpression(expression.Match.RenderExpression);
         }
     }

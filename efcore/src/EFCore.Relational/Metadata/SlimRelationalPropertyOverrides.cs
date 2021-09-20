@@ -23,7 +23,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata
             SlimProperty property,
             string? columnName,
             bool columnNameOverriden
-        ) {
+        )
+        {
             Property = property;
             if (columnNameOverriden)
             {

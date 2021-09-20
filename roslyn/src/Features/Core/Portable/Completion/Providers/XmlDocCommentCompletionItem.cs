@@ -22,7 +22,8 @@ namespace Microsoft.CodeAnalysis.Completion.Providers
             string beforeCaretTextOnSpace,
             string afterCaretTextOnSpace,
             CompletionItemRules rules
-        ) {
+        )
+        {
             var props = ImmutableDictionary<string, string>.Empty.Add(
                     BeforeCaretText,
                     beforeCaretText
@@ -56,7 +57,8 @@ namespace Microsoft.CodeAnalysis.Completion.Providers
             CompletionItem item,
             out string beforeCaretText,
             out string afterCaretText
-        ) {
+        )
+        {
             return item.Properties.TryGetValue(BeforeCaretTextOnSpace, out beforeCaretText)
                     & item.Properties.TryGetValue(AfterCaretTextOnSpace, out afterCaretText)
                 && (

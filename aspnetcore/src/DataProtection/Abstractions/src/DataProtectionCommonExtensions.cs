@@ -29,7 +29,8 @@ namespace Microsoft.AspNetCore.DataProtection
         public static IDataProtector CreateProtector(
             this IDataProtectionProvider provider,
             IEnumerable<string> purposes
-        ) {
+        )
+        {
             if (provider == null)
             {
                 throw new ArgumentNullException(nameof(provider));
@@ -86,7 +87,8 @@ namespace Microsoft.AspNetCore.DataProtection
             this IDataProtectionProvider provider,
             string purpose,
             params string[] subPurposes
-        ) {
+        )
+        {
             if (provider == null)
             {
                 throw new ArgumentNullException(nameof(provider));
@@ -117,7 +119,8 @@ namespace Microsoft.AspNetCore.DataProtection
         /// <exception cref="InvalidOperationException">If no <see cref="IDataProtectionProvider"/> service exists in <paramref name="services"/>.</exception>
         public static IDataProtectionProvider GetDataProtectionProvider(
             this IServiceProvider services
-        ) {
+        )
+        {
             if (services == null)
             {
                 throw new ArgumentNullException(nameof(services));
@@ -155,7 +158,8 @@ namespace Microsoft.AspNetCore.DataProtection
         public static IDataProtector GetDataProtector(
             this IServiceProvider services,
             IEnumerable<string> purposes
-        ) {
+        )
+        {
             if (services == null)
             {
                 throw new ArgumentNullException(nameof(services));
@@ -187,7 +191,8 @@ namespace Microsoft.AspNetCore.DataProtection
             this IServiceProvider services,
             string purpose,
             params string[] subPurposes
-        ) {
+        )
+        {
             if (services == null)
             {
                 throw new ArgumentNullException(nameof(services));

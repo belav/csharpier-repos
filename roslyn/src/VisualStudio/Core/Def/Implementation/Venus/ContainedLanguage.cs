@@ -77,16 +77,17 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Venus
             ProjectId projectId,
             Guid languageServiceGuid,
             AbstractFormattingRule? vbHelperFormattingRule = null
-        ) : this(
-            bufferCoordinator,
-            componentModel,
-            projectTrackerOpt?.Workspace ?? componentModel.GetService<VisualStudioWorkspace>(),
-            projectId,
-            project,
-            GetFilePathFromHierarchyAndItemId(hierarchy, itemid),
-            languageServiceGuid,
-            vbHelperFormattingRule
-        ) { }
+        )
+            : this(
+                bufferCoordinator,
+                componentModel,
+                projectTrackerOpt?.Workspace ?? componentModel.GetService<VisualStudioWorkspace>(),
+                projectId,
+                project,
+                GetFilePathFromHierarchyAndItemId(hierarchy, itemid),
+                languageServiceGuid,
+                vbHelperFormattingRule
+            ) { }
 
         public static string GetFilePathFromHierarchyAndItemId(IVsHierarchy hierarchy, uint itemid)
         {
@@ -94,7 +95,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Venus
                 !ErrorHandler.Succeeded(
                     ((IVsProject)hierarchy).GetMkDocument(itemid, out var filePath)
                 )
-            ) {
+            )
+            {
                 // we couldn't look up the document moniker from an hierarchy for an itemid.
                 // Since we only use this moniker as a key, we could fall back to something else, like the document name.
                 Debug.Assert(
@@ -123,7 +125,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Venus
             string filePath,
             Guid languageServiceGuid,
             AbstractFormattingRule? vbHelperFormattingRule = null
-        ) {
+        )
+        {
             this.BufferCoordinator = bufferCoordinator;
             this.ComponentModel = componentModel;
             this.Project = project;

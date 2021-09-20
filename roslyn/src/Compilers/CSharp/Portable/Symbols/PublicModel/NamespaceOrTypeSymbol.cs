@@ -33,7 +33,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols.PublicModel
         ImmutableArray<INamedTypeSymbol> INamespaceOrTypeSymbol.GetTypeMembers(
             string name,
             int arity
-        ) {
+        )
+        {
             return UnderlyingNamespaceOrTypeSymbol.GetTypeMembers(name, arity).GetPublicSymbols();
         }
 

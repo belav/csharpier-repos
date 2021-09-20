@@ -32,7 +32,8 @@ namespace Microsoft.CodeAnalysis
             public static SymbolKeyResolution Resolve(
                 SymbolKeyReader reader,
                 out string? failureReason
-            ) {
+            )
+            {
                 using var propertyTypes = reader.ReadSymbolKeyArray<ITypeSymbol>(
                     out var propertyTypesFailureReason
                 );
@@ -78,7 +79,8 @@ namespace Microsoft.CodeAnalysis
             private static ImmutableArray<Location> ReadPropertyLocations(
                 SymbolKeyReader reader,
                 out string? failureReason
-            ) {
+            )
+            {
                 using var propertyLocations = reader.ReadLocationArray(out failureReason);
                 if (failureReason != null)
                     return default;

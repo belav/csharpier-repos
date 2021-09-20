@@ -98,7 +98,8 @@ namespace System.ComponentModel.Composition.Primitives
         /// </remarks>
         public virtual IEnumerable<Tuple<ComposablePartDefinition, ExportDefinition>> GetExports(
             ImportDefinition definition
-        ) {
+        )
+        {
             ThrowIfDisposed();
 
             Requires.NotNull(definition, nameof(definition));
@@ -117,7 +118,8 @@ namespace System.ComponentModel.Composition.Primitives
                                 Tuple<ComposablePartDefinition, ExportDefinition>
                             >? multipleMatches
                         )
-                    ) {
+                    )
+                    {
                         exports = exports.FastAppendToListAllowNulls(singleMatch, multipleMatches);
                     }
                 }
@@ -129,7 +131,8 @@ namespace System.ComponentModel.Composition.Primitives
 
         internal virtual IEnumerable<ComposablePartDefinition>? GetCandidateParts(
             ImportDefinition definition
-        ) {
+        )
+        {
             return this;
         }
 

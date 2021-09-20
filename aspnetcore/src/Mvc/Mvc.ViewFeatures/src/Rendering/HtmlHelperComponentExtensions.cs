@@ -55,7 +55,8 @@ namespace Microsoft.AspNetCore.Mvc.Rendering
             Type componentType,
             RenderMode renderMode,
             object parameters
-        ) {
+        )
+        {
             if (htmlHelper is null)
             {
                 throw new ArgumentNullException(nameof(htmlHelper));

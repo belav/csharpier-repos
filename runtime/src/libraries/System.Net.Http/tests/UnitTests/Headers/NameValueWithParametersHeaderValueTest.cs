@@ -309,7 +309,8 @@ namespace System.Net.Http.Tests
         private void CheckValidParse(
             string input,
             NameValueWithParametersHeaderValue expectedResult
-        ) {
+        )
+        {
             NameValueWithParametersHeaderValue result = NameValueWithParametersHeaderValue.Parse(
                 input
             );
@@ -329,7 +330,8 @@ namespace System.Net.Http.Tests
         private void CheckValidTryParse(
             string input,
             NameValueWithParametersHeaderValue expectedResult
-        ) {
+        )
+        {
             NameValueWithParametersHeaderValue result = null;
             Assert.True(NameValueWithParametersHeaderValue.TryParse(input, out result));
             Assert.Equal(expectedResult, result);
@@ -347,7 +349,8 @@ namespace System.Net.Http.Tests
             int startIndex,
             int expectedLength,
             out NameValueWithParametersHeaderValue result
-        ) {
+        )
+        {
             object temp = null;
             Assert.Equal(
                 expectedLength,
@@ -363,7 +366,8 @@ namespace System.Net.Http.Tests
         private static void CheckInvalidGetNameValueWithParametersLength(
             string input,
             int startIndex
-        ) {
+        )
+        {
             object result = null;
             Assert.Equal(
                 0,

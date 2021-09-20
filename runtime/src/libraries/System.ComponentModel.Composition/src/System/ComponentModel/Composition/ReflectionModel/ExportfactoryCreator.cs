@@ -34,7 +34,8 @@ namespace System.ComponentModel.Composition.ReflectionModel
         public Func<Export, object> CreateStronglyTypedExportFactoryFactory(
             Type exportType,
             Type? metadataViewType
-        ) {
+        )
+        {
             MethodInfo genericMethod;
             if (metadataViewType == null)
             {

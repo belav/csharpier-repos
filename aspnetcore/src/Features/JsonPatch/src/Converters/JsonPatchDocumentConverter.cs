@@ -24,7 +24,8 @@ namespace Microsoft.AspNetCore.JsonPatch.Converters
             Type objectType,
             object existingValue,
             JsonSerializer serializer
-        ) {
+        )
+        {
             if (objectType != typeof(JsonPatchDocument))
             {
                 throw new ArgumentException(

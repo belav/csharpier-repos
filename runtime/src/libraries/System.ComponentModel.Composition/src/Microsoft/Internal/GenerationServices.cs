@@ -48,7 +48,8 @@ namespace Microsoft.Internal
         public static ILGenerator CreateGeneratorForPublicConstructor(
             this TypeBuilder typeBuilder,
             Type[] ctrArgumentTypes
-        ) {
+        )
+        {
             ConstructorBuilder ctorBuilder = typeBuilder.DefineConstructor(
                 MethodAttributes.Public,
                 CallingConventions.Standard,
@@ -126,7 +127,8 @@ namespace Microsoft.Internal
                 || (valueType == GenerationServices.s_int16Type)
                 || (valueType == GenerationServices.s_uInt16Type)
                 || (valueType == GenerationServices.s_int32Type)
-            ) {
+            )
+            {
                 // NOTE : Everything that is 32 bit or less uses ldc.i4. We need to pass int32, even if the actual types is shorter - this is IL memory model
                 // direct casting to (int) won't work, because the value is boxed, thus we need to use Convert.
                 // Sadly, this will not work for all cases - namely large uint32 - because they can't semantically fit into 32 signed bits
@@ -179,7 +181,8 @@ namespace Microsoft.Internal
             LocalBuilder dictionary,
             object key,
             object value
-        ) {
+        )
+        {
             Debug.Assert(ilGenerator != null);
 
             if (dictionary == null)
@@ -213,7 +216,8 @@ namespace Microsoft.Internal
             LocalBuilder dictionary,
             object key,
             LocalBuilder value
-        ) {
+        )
+        {
             Debug.Assert(ilGenerator != null);
 
             if (dictionary == null)
@@ -245,7 +249,8 @@ namespace Microsoft.Internal
             this ILGenerator ilGenerator,
             LocalBuilder exception,
             LocalBuilder dataStore
-        ) {
+        )
+        {
             Debug.Assert(ilGenerator != null);
 
             if (exception == null)
@@ -280,7 +285,8 @@ namespace Microsoft.Internal
                     GenerationServices.s_iEnumerableTypeofT,
                     out Type? closedType
                 )
-            ) {
+            )
+            {
                 elementType = closedType.GetGenericArguments()[0];
             }
             else

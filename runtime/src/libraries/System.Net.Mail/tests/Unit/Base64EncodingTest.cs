@@ -33,7 +33,8 @@ namespace System.Net.Mime.Tests
         [InlineData("some test h\xE9ader to base64asdf\xE9\xE5")]
         public void Base64Stream_EncodeString_WithBasicAsciiString_ShouldEncodeAndDecode(
             string testHeader
-        ) {
+        )
+        {
             var s = new Base64Stream(new Base64WriteStateInfo());
             s.EncodeString(testHeader, Encoding.UTF8);
 

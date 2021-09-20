@@ -32,7 +32,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
         protected static void ReportBadRefToken(
             TypeSyntax returnTypeSyntax,
             BindingDiagnosticBag diagnostics
-        ) {
+        )
+        {
             if (!returnTypeSyntax.HasErrors)
             {
                 var refKeyword = returnTypeSyntax.GetFirstToken();
@@ -68,7 +69,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
         internal void ReportAsyncParameterErrors(
             BindingDiagnosticBag diagnostics,
             Location location
-        ) {
+        )
+        {
             foreach (var parameter in Parameters)
             {
                 if (parameter.RefKind != RefKind.None)

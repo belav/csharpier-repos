@@ -478,7 +478,8 @@ namespace System.Xml.Xsl.Xslt
                             != ((QilLiteral)((QilBinary)varList[i]).Right).Value
                         || ((QilLiteral)((QilBinary)nsList[i]).Left).Value
                             != ((QilLiteral)((QilBinary)varList[i]).Left).Value
-                    ) {
+                    )
+                    {
                         found = false;
                         break;
                     }
@@ -559,7 +560,8 @@ namespace System.Xml.Xsl.Xslt
                                     xslPar.Name!.LocalName,
                                     xslPar.Name.NamespaceUri
                                 )
-                            ) {
+                            )
+                            {
                                 ReportError( /*[XT0580]*/
                                     SR.Xslt_DupLocalVariable,
                                     xslPar.Name.QualifiedName
@@ -865,7 +867,8 @@ namespace System.Xml.Xsl.Xslt
                 if (
                     nodeType != XslNodeType.LiteralAttribute
                     && nodeType != XslNodeType.UseAttributeSet
-                ) {
+                )
+                {
                     SetLineInfoCheck(result, node.SourceLine);
                 }
 
@@ -989,7 +992,8 @@ namespace System.Xml.Xsl.Xslt
             if (
                 qilName.NodeType == QilNodeType.LiteralString
                 && (qilNs == null || qilNs.NodeType == QilNodeType.LiteralString)
-            ) {
+            )
+            {
                 string name = (string)(QilLiteral)qilName;
                 string prefix,
                     local,
@@ -1065,7 +1069,8 @@ namespace System.Xml.Xsl.Xslt
             if (
                 qilName.NodeType == QilNodeType.LiteralString
                 && (qilNs == null || qilNs.NodeType == QilNodeType.LiteralString)
-            ) {
+            )
+            {
                 string name = (string)(QilLiteral)qilName;
                 string prefix,
                     local,
@@ -1510,7 +1515,8 @@ namespace System.Xml.Xsl.Xslt
             else if (
                 (node.XmlType.NodeKinds & (XmlNodeKindFlags.Element | XmlNodeKindFlags.Document))
                 == XmlNodeKindFlags.None
-            ) {
+            )
+            {
                 // Context node is neither an element, nor a document
                 // The content of xsl:copy is not instantiated
                 return node;
@@ -1536,7 +1542,8 @@ namespace System.Xml.Xsl.Xslt
                     selectExpr.XmlType.IsNotRtf
                     && (selectExpr.XmlType.NodeKinds & XmlNodeKindFlags.Document)
                         == XmlNodeKindFlags.None
-                ) {
+                )
+                {
                     // Expression returns non-document nodes only
                     return selectExpr;
                 }
@@ -1839,7 +1846,8 @@ namespace System.Xml.Xsl.Xslt
             bool fwdCompat,
             ref QilNode select,
             out QilNode? select2
-        ) {
+        )
+        {
             const string DtText = "text";
             const string DtNumber = "number";
             QilNode? result = CompileStringAvt(attValue);
@@ -1969,7 +1977,8 @@ namespace System.Xml.Xsl.Xslt
             string value0,
             string value1,
             bool fwdCompat
-        ) {
+        )
+        {
             QilNode? result = CompileStringAvt(attValue);
             if (result != null)
             {
@@ -2044,7 +2053,8 @@ namespace System.Xml.Xsl.Xslt
                 || sort.DataType != null
                 || sort.Order != null
                 || sort.CaseOrder != null
-            ) {
+            )
+            {
                 // Calculate these attributes in the context of the parent loop
                 LoopFocus curLoopSaved = _curLoop;
                 _curLoop = parentLoop;
@@ -3041,7 +3051,8 @@ namespace System.Xml.Xsl.Xslt
             IList<QilNode> formalArgs,
             IList<XslNode> actualArgs,
             QilList invokeArgs
-        ) {
+        )
+        {
             if (actualArgs.Count != formalArgs.Count)
             {
                 return false;
@@ -3070,7 +3081,8 @@ namespace System.Xml.Xsl.Xslt
                                     valueType.IsNode
                                     && paramType.IsNode
                                     && valueType.IsSubtypeOf(paramType)
-                                ) {
+                                )
+                                {
                                     // We can pass it
                                 }
                                 else
@@ -3099,7 +3111,8 @@ namespace System.Xml.Xsl.Xslt
             StylesheetLevel sheet,
             QilName mode,
             IList<XslNode>? actualArgs
-        ) {
+        )
+        {
             // Here we create function that has one argument for each with-param in apply-templates
             // We have actualArgs -- list of xsl:with-param(name, value)
             // From it we create:
@@ -3135,7 +3148,8 @@ namespace System.Xml.Xsl.Xslt
                         actualArgs!, /*ref*/
                         invokeArgs
                     )
-                ) {
+                )
+                {
                     applyFunction = func;
                     break;
                 }

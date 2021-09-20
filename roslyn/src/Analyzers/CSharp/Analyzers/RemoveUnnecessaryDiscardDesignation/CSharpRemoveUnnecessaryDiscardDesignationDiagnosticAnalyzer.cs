@@ -63,7 +63,8 @@ namespace Microsoft.CodeAnalysis.CSharp.RemoveUnnecessaryDiscardDesignation
                 if (
                     recursivePattern.PositionalPatternClause != null
                     && recursivePattern.PositionalPatternClause.Subpatterns.Count == 1
-                ) {
+                )
+                {
                     return;
                 }
 

@@ -28,7 +28,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Telemetry
         public VisualStudioWorkspaceTelemetryService(
             VisualStudioWorkspace workspace,
             IGlobalOptionService optionsService
-        ) {
+        )
+        {
             _workspace = workspace;
             _optionsService = optionsService;
         }

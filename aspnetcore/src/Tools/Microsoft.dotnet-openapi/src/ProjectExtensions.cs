@@ -14,7 +14,8 @@ namespace Microsoft.DotNet.OpenApi
             string tagName,
             string include,
             IDictionary<string, string> metadata
-        ) {
+        )
+        {
             var item = project.AddItem(tagName, include).Single();
             foreach (var kvp in metadata)
             {

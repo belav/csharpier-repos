@@ -238,7 +238,8 @@ namespace ILVerify
             VerificationResult result,
             EcmaModule module,
             string pathOrModuleName
-        ) {
+        )
+        {
             Write("[IL]: Error [");
             if (result.Code != VerifierError.None)
             {
@@ -391,7 +392,8 @@ namespace ILVerify
             ref int numErrors,
             ref int verifiedMethodCounter,
             ref int methodCounter
-        ) {
+        )
+        {
             numErrors = 0;
             verifiedMethodCounter = 0;
             methodCounter = 0;
@@ -443,7 +445,8 @@ namespace ILVerify
             ref int numErrors,
             ref int verifiedTypeCounter,
             ref int typeCounter
-        ) {
+        )
+        {
             MetadataReader metadataReader = peReader.GetMetadataReader();
 
             foreach (TypeDefinitionHandle typeHandle in metadataReader.TypeDefinitions)
@@ -489,7 +492,8 @@ namespace ILVerify
         private string GetQualifiedClassName(
             MetadataReader metadataReader,
             TypeDefinitionHandle typeHandle
-        ) {
+        )
+        {
             var typeDef = metadataReader.GetTypeDefinition(typeHandle);
             var typeName = metadataReader.GetString(typeDef.Name);
 
@@ -517,7 +521,8 @@ namespace ILVerify
         private string GetQualifiedMethodName(
             MetadataReader metadataReader,
             MethodDefinitionHandle methodHandle
-        ) {
+        )
+        {
             var methodDef = metadataReader.GetMethodDefinition(methodHandle);
             var typeDef = metadataReader.GetTypeDefinition(methodDef.GetDeclaringType());
 
@@ -578,7 +583,8 @@ namespace ILVerify
             if (
                 _inputFilePaths.TryGetValue(simpleName, out path)
                 || _referenceFilePaths.TryGetValue(simpleName, out path)
-            ) {
+            )
+            {
                 return new PEReader(File.OpenRead(path));
             }
 

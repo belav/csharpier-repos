@@ -16,7 +16,8 @@ namespace Microsoft.AspNetCore.Analyzers
         public static async Task<IImmutableSet<string>> DetectFeaturesAsync(
             Compilation compilation,
             CancellationToken cancellationToken = default
-        ) {
+        )
+        {
             var symbols = new StartupSymbols(compilation);
             if (!symbols.HasRequiredSymbols)
             {
@@ -54,7 +55,8 @@ namespace Microsoft.AspNetCore.Analyzers
                             .Any(
                                 op => StartupFacts.IsSignalRConfigureMethodGesture(op.TargetMethod)
                             )
-                    ) {
+                    )
+                    {
                         features.Add(WellKnownFeatures.SignalR);
                     }
                 }

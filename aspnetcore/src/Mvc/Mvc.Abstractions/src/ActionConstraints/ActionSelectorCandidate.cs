@@ -22,7 +22,8 @@ namespace Microsoft.AspNetCore.Mvc.ActionConstraints
         public ActionSelectorCandidate(
             ActionDescriptor action,
             IReadOnlyList<IActionConstraint>? constraints
-        ) {
+        )
+        {
             if (action == null)
             {
                 throw new ArgumentNullException(nameof(action));

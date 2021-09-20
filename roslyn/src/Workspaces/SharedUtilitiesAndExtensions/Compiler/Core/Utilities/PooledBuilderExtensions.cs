@@ -59,7 +59,8 @@ namespace Roslyn.Utilities
 
         public static ImmutableArray<T> ToFlattenedImmutableArrayAndFree<T>(
             this ArrayBuilder<ArrayBuilder<T>> builders
-        ) {
+        )
+        {
             try
             {
                 if (builders.Count == 0)

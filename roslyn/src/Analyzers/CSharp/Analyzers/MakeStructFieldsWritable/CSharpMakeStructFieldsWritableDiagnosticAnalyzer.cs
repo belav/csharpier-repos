@@ -107,7 +107,8 @@ namespace Microsoft.CodeAnalysis.CSharp.MakeStructFieldsWritable
                             {
                                 MethodKind: MethodKind.Constructor
                             }
-                        ) {
+                        )
+                        {
                             // We are looking for assignment to 'this' outside the constructor scope
                             return;
                         }
@@ -130,7 +131,8 @@ namespace Microsoft.CodeAnalysis.CSharp.MakeStructFieldsWritable
                     {
                         ReferenceKind: InstanceReferenceKind.ContainingTypeInstance
                     }
-                ) {
+                )
+                {
                     Volatile.Write(ref _hasTypeInstanceAssignment, true);
                 }
             }

@@ -40,7 +40,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                     Lazy<RootSingleNamespaceDeclaration>
                 > rootNamespaces,
                 DeclarationTable declarationTable
-            ) {
+            )
+            {
                 Debug.Assert(
                     syntaxTrees.All(tree => syntaxTrees[syntaxTreeOrdinalMap[tree]] == tree)
                 );

@@ -27,7 +27,8 @@ namespace Internal.Cryptography
         private static SafeAlgorithmHandle OpenRC2Algorithm(
             string cipherMode,
             int effectiveKeyLength
-        ) {
+        )
+        {
             SafeAlgorithmHandle hAlg = Cng.BCryptOpenAlgorithmProvider(
                 Cng.BCRYPT_RC2_ALGORITHM,
                 null,

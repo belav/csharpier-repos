@@ -220,7 +220,8 @@ namespace Castle.DynamicProxy.Tests
             IFormatProvider formatProvider,
             string format,
             params object[] args
-        ) {
+        )
+        {
             throw new NotSupportedException();
         }
 
@@ -259,7 +260,8 @@ namespace Castle.DynamicProxy.Tests
             IFormatProvider formatProvider,
             string format,
             params object[] args
-        ) {
+        )
+        {
             throw new NotImplementedException();
         }
 
@@ -298,7 +300,8 @@ namespace Castle.DynamicProxy.Tests
             IFormatProvider formatProvider,
             string format,
             params object[] args
-        ) {
+        )
+        {
             throw new NotImplementedException();
         }
 
@@ -337,7 +340,8 @@ namespace Castle.DynamicProxy.Tests
             IFormatProvider formatProvider,
             string format,
             params object[] args
-        ) {
+        )
+        {
             throw new NotImplementedException();
         }
 
@@ -376,7 +380,8 @@ namespace Castle.DynamicProxy.Tests
             IFormatProvider formatProvider,
             string format,
             params object[] args
-        ) {
+        )
+        {
             throw new NotImplementedException();
         }
 
@@ -415,7 +420,8 @@ namespace Castle.DynamicProxy.Tests
             IFormatProvider formatProvider,
             string format,
             params object[] args
-        ) {
+        )
+        {
             throw new NotImplementedException();
         }
 

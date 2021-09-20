@@ -15,7 +15,8 @@ namespace Microsoft.CodeAnalysis
         internal ProjectDependencyGraph WithAdditionalProjectReferences(
             ProjectId projectId,
             IReadOnlyCollection<ProjectReference> projectReferences
-        ) {
+        )
+        {
             Contract.ThrowIfFalse(_projectIds.Contains(projectId));
 
             if (projectReferences.Count == 0)
@@ -85,7 +86,8 @@ namespace Microsoft.CodeAnalysis
             ImmutableDictionary<ProjectId, ImmutableHashSet<ProjectId>> existingReferencesMap,
             ProjectId projectId,
             IReadOnlyList<ProjectId> referencedProjectIds
-        ) {
+        )
+        {
             if (existingReferencesMap.TryGetValue(projectId, out var existingReferences))
             {
                 return existingReferencesMap.SetItem(
@@ -117,7 +119,8 @@ namespace Microsoft.CodeAnalysis
             >? existingReverseReferencesMap,
             ProjectId projectId,
             IReadOnlyList<ProjectId> referencedProjectIds
-        ) {
+        )
+        {
             if (existingReverseReferencesMap is null)
                 return null;
 
@@ -144,7 +147,8 @@ namespace Microsoft.CodeAnalysis
             > existingTransitiveReferencesMap,
             ProjectId projectId,
             IReadOnlyList<ProjectId> referencedProjectIds
-        ) {
+        )
+        {
             // To update our forward transitive map, we need to add referencedProjectIds (and their transitive dependencies) to the transitive references
             // of projects. First, let's just compute the new set of transitive references. It's possible while doing so we'll discover that we don't
             // know the transitive project references for one of our new references. In that case, we'll use null as a sentinel to mean "we don't know" and
@@ -158,7 +162,8 @@ namespace Microsoft.CodeAnalysis
                         referencedProjectId,
                         out var additionalTransitiveReferences
                     )
-                ) {
+                )
+                {
                     newTransitiveReferences.UnionWith(additionalTransitiveReferences);
                 }
                 else
@@ -183,7 +188,8 @@ namespace Microsoft.CodeAnalysis
                 if (
                     projectIdToUpdate == projectId
                     || existingTransitiveReferences?.Contains(projectId) == true
-                ) {
+                )
+                {
                     // This needs an update. If we know what to include in, we'll union it with the existing ones. Otherwise, we don't know
                     // and we'll remove any data from the cache.
                     if (newTransitiveReferences != null && existingTransitiveReferences != null)
@@ -217,7 +223,8 @@ namespace Microsoft.CodeAnalysis
             > existingReverseTransitiveReferencesMap,
             ProjectId projectId,
             IReadOnlyList<ProjectId> referencedProjectIds
-        ) {
+        )
+        {
             // To update the reverse transitive map, we need to add the existing reverse transitive references of projectId to any of referencedProjectIds,
             // and anything else with a reverse dependency on them. If we don't already know our reverse transitive references, then we'll have to instead remove
             // the cache entries instead of update them. We'll fetch this from the map, and use "null" to indicate the "we don't know and should remove the cache entry"
@@ -247,13 +254,15 @@ namespace Microsoft.CodeAnalysis
                 if (
                     referencedProjectIds.Contains(projectIdToUpdate)
                     || existingReverseTransitiveReferences?.Overlaps(referencedProjectIds) == true
-                ) {
+                )
+                {
                     // This needs an update. If we know what to include in, we'll union it with the existing ones. Otherwise, we don't know
                     // and we'll remove any data from the cache.
                     if (
                         newReverseTranstiveReferences != null
                         && existingReverseTransitiveReferences != null
-                    ) {
+                    )
+                    {
                         builder[projectIdToUpdate] = existingReverseTransitiveReferences.Union(
                             newReverseTranstiveReferences
                         );

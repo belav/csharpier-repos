@@ -198,7 +198,8 @@ namespace Microsoft.EntityFrameworkCore
             protected virtual IServiceCollection InjectInterceptors(
                 IServiceCollection serviceCollection,
                 IEnumerable<IInterceptor> injectedInterceptors
-            ) {
+            )
+            {
                 foreach (var interceptor in injectedInterceptors)
                 {
                     serviceCollection.AddSingleton(interceptor);

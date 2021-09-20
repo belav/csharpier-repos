@@ -153,7 +153,8 @@ namespace System.Xml
                     otherDataDocXPathNav != null
                     && _doc == otherDataDocXPathNav.Document
                     && _curNode.IsSamePosition(otherDataDocXPathNav.CurNode)
-                ) {
+                )
+                {
                     return true;
                 }
             }

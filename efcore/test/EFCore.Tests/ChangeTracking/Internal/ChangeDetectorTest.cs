@@ -186,7 +186,8 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
             bool useTypeMapping,
             bool useStateChange,
             bool nullValue
-        ) {
+        )
+        {
             using var context = useTypeMapping
                 ? new BaxterWithMappingContext()
                 : new BaxterContext();
@@ -293,7 +294,8 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
         private static void AssertDetected(
             EntityEntry<Baxter> entityEntry,
             PropertyEntry<Baxter, int[]> propertyEntry
-        ) {
+        )
+        {
             Assert.Equal(EntityState.Modified, entityEntry.State);
             Assert.True(propertyEntry.IsModified);
             Assert.Equal(new[] { 1, 2, 3, 4 }, propertyEntry.OriginalValue);
@@ -1468,7 +1470,8 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
         [InlineData(true)]
         public void Handles_notification_of_reference_navigation_changing_back_to_original_value(
             bool useNull
-        ) {
+        )
+        {
             var contextServices = CreateContextServices(BuildNotifyingModel());
 
             var stateManager = contextServices.GetRequiredService<IStateManager>();
@@ -2012,7 +2015,8 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
                 T value,
                 ref T field,
                 [CallerMemberName] string propertyName = ""
-            ) {
+            )
+            {
                 // Intentionally not checking if new value is different for robustness of handler code
                 NotifyChanging(propertyName);
                 field = value;
@@ -2149,7 +2153,8 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
                 EntityState targetState,
                 EntityState storeGeneratedWithKeySetTargetState,
                 bool forceStateWhenUnknownKey
-            ) {
+            )
+            {
                 Attached = Tuple.Create(rootEntry, targetState);
 
                 base.AttachGraph(
@@ -2195,7 +2200,8 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
                 INavigationBase navigationBase,
                 object oldValue,
                 object newValue
-            ) {
+            )
+            {
                 ReferenceChange = Tuple.Create(entry, navigationBase, oldValue, newValue);
 
                 base.NavigationReferenceChanged(entry, navigationBase, oldValue, newValue);
@@ -2206,7 +2212,8 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
                 INavigationBase navigation,
                 IEnumerable<object> added,
                 IEnumerable<object> removed
-            ) {
+            )
+            {
                 // ReSharper disable PossibleMultipleEnumeration
                 CollectionChange = Tuple.Create(entry, navigation, added, removed);
 
@@ -2221,7 +2228,8 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
                 IEnumerable<IForeignKey> containingForeignKeys,
                 object oldValue,
                 object newValue
-            ) {
+            )
+            {
                 KeyChange = Tuple.Create(
                     entry,
                     property,

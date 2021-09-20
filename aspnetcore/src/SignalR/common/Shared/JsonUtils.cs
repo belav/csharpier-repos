@@ -53,7 +53,8 @@ namespace Microsoft.AspNetCore.Internal
             JObject json,
             string property,
             JTokenType expectedType = JTokenType.None
-        ) {
+        )
+        {
             var prop = json[property];
 
             if (prop == null)

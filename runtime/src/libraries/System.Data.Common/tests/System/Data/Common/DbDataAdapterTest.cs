@@ -169,7 +169,8 @@ namespace System.Data.Tests.Common
                 int commandIdentifier,
                 out int recordsAffected,
                 out Exception error
-            ) {
+            )
+            {
                 return base.GetBatchedRecordsAffected(
                     commandIdentifier,
                     out recordsAffected,

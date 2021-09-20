@@ -463,7 +463,8 @@ namespace System.Globalization
                         if (
                             _ymdFlags == FoundDatePattern.FoundYMDPatternFlag
                             && !char.IsWhiteSpace(ch)
-                        ) {
+                        )
+                        {
                             // We are not seeing "." after YMD. Clear the flag.
                             _ymdFlags = FoundDatePattern.None;
                         }
@@ -545,7 +546,8 @@ namespace System.Globalization
             string[] genitveMonthNames,
             string[] abbrevMonthNames,
             string[] genetiveAbbrevMonthNames
-        ) {
+        )
+        {
             // If we have different names in regular and genitive month names, use genitive month flag.
             return (
                 !EqualStringArrays(monthNames, genitveMonthNames)
@@ -565,7 +567,8 @@ namespace System.Globalization
             string[] genitveMonthNames,
             string[] abbrevMonthNames,
             string[] genetiveAbbrevMonthNames
-        ) {
+        )
+        {
             FORMATFLAGS formatFlags = 0;
             formatFlags |= (
                 ArrayElementsBeginWithDigit(monthNames)
@@ -595,7 +598,8 @@ namespace System.Globalization
         internal static FORMATFLAGS GetFormatFlagUseSpaceInDayNames(
             string[] dayNames,
             string[] abbrevDayNames
-        ) {
+        )
+        {
             return (ArrayElementsHaveSpace(dayNames) || ArrayElementsHaveSpace(abbrevDayNames))
               ? FORMATFLAGS.UseSpacesInDayNames
               : 0;
@@ -687,7 +691,8 @@ namespace System.Globalization
                     int index = 1;
                     while (
                         index < array[i].Length && array[i][index] >= '0' && array[i][index] <= '9'
-                    ) {
+                    )
+                    {
                         // Skip other digits.
                         index++;
                     }
@@ -719,7 +724,8 @@ namespace System.Globalization
                             && array[i][index + 1] == ' '
                             && array[i][index + 2] == CJKMonthSuff
                             && array[i][index + 3] == '\''
-                        ) {
+                        )
+                        {
                             return false;
                         }
                     }

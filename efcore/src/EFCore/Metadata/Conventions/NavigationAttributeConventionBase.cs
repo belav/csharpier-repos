@@ -33,7 +33,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
         /// <param name="dependencies"> Parameter object containing dependencies for this convention. </param>
         protected NavigationAttributeConventionBase(
             ProviderConventionSetBuilderDependencies dependencies
-        ) {
+        )
+        {
             Dependencies = dependencies;
         }
 
@@ -46,7 +47,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
         public virtual void ProcessEntityTypeAdded(
             IConventionEntityTypeBuilder entityTypeBuilder,
             IConventionContext<IConventionEntityTypeBuilder> context
-        ) {
+        )
+        {
             var navigations = GetNavigationsWithAttribute(entityTypeBuilder.Metadata);
             if (navigations == null)
             {
@@ -72,7 +74,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
                         (
                             (ConventionContext<IConventionEntityTypeBuilder>)context
                         ).ShouldStopProcessing()
-                    ) {
+                    )
+                    {
                         return;
                     }
                 }
@@ -85,7 +88,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
             string name,
             Type? type,
             IConventionContext<string> context
-        ) {
+        )
+        {
             if (type == null)
             {
                 return;
@@ -141,7 +145,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
             IConventionModelBuilder modelBuilder,
             IConventionEntityType entityType,
             IConventionContext<IConventionEntityType> context
-        ) {
+        )
+        {
             var type = entityType.ClrType;
 
             var navigations = GetNavigationsWithAttribute(entityType);
@@ -180,7 +185,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
             IConventionEntityType? newBaseType,
             IConventionEntityType? oldBaseType,
             IConventionContext<IConventionEntityType> context
-        ) {
+        )
+        {
             var entityType = entityTypeBuilder.Metadata;
             if (entityTypeBuilder.Metadata.BaseType != newBaseType)
             {
@@ -220,7 +226,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
 
         private List<(PropertyInfo, Type)>? GetNavigationsWithAttribute(
             IConventionEntityType entityType
-        ) {
+        )
+        {
             var navigations = new List<(PropertyInfo, Type)>();
             foreach (var navigationPropertyInfo in entityType.GetRuntimeProperties().Values)
             {
@@ -252,7 +259,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
         public virtual void ProcessNavigationAdded(
             IConventionNavigationBuilder navigationBuilder,
             IConventionContext<IConventionNavigationBuilder> context
-        ) {
+        )
+        {
             var navigation = navigationBuilder.Metadata;
             var attributes = GetAttributes<TAttribute>(navigation.DeclaringEntityType, navigation);
             foreach (var attribute in attributes)
@@ -269,7 +277,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
         public virtual void ProcessSkipNavigationAdded(
             IConventionSkipNavigationBuilder skipNavigationBuilder,
             IConventionContext<IConventionSkipNavigationBuilder> context
-        ) {
+        )
+        {
             var skipNavigation = skipNavigationBuilder.Metadata;
             var attributes = GetAttributes<TAttribute>(
                 skipNavigation.DeclaringEntityType,
@@ -289,7 +298,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
         public virtual void ProcessForeignKeyPrincipalEndChanged(
             IConventionForeignKeyBuilder relationshipBuilder,
             IConventionContext<IConventionForeignKeyBuilder> context
-        ) {
+        )
+        {
             var fk = relationshipBuilder.Metadata;
             var dependentToPrincipalAttributes =
                 fk.DependentToPrincipal == null
@@ -312,7 +322,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
             IConventionEntityTypeBuilder entityTypeBuilder,
             string name,
             IConventionContext<string> context
-        ) {
+        )
+        {
             var navigationPropertyInfo = entityTypeBuilder.Metadata.GetRuntimeProperties()
                 .Find(name);
             if (navigationPropertyInfo == null)

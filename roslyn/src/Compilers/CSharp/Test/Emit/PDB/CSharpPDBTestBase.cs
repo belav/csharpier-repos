@@ -22,7 +22,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.PDB
             CSharpCompilationOptions compilationOptions,
             CSharpParseOptions parseOptions = null,
             string methodName = ""
-        ) {
+        )
+        {
             int? position;
             TextSpan? expectedSpan;
             string source;
@@ -65,7 +66,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.PDB
                 {
                     DtdProcessing = DtdProcessing.Prohibit
                 }
-            ) {
+            )
+            {
                 doc.Load(reader);
             }
 
@@ -78,7 +80,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.PDB
                         && startColumn.ToString() == item.GetAttribute("startColumn")
                         && endRow.ToString() == item.GetAttribute("endLine")
                         && endColumn.ToString() == item.GetAttribute("endColumn")
-                    ) {
+                    )
+                    {
                         return true;
                     }
                 }

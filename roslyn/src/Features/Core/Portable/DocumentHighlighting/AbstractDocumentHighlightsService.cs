@@ -30,7 +30,8 @@ namespace Microsoft.CodeAnalysis.DocumentHighlighting
             int position,
             IImmutableSet<Document> documentsToSearch,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var solution = document.Project.Solution;
 
             var client = await RemoteHostClient.TryGetClientAsync(
@@ -81,7 +82,8 @@ namespace Microsoft.CodeAnalysis.DocumentHighlighting
             int position,
             IImmutableSet<Document> documentsToSearch,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var result = await TryGetEmbeddedLanguageHighlightsAsync(
                     document,
                     position,
@@ -127,7 +129,8 @@ namespace Microsoft.CodeAnalysis.DocumentHighlighting
             int position,
             IImmutableSet<Document> documentsToSearch,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var languagesProvider = document.GetLanguageService<IEmbeddedLanguagesProvider>();
             if (languagesProvider != null)
             {
@@ -162,7 +165,8 @@ namespace Microsoft.CodeAnalysis.DocumentHighlighting
             Document document,
             IImmutableSet<Document> documentsToSearch,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             Contract.ThrowIfNull(symbol);
             if (ShouldConsiderSymbol(symbol))
             {
@@ -227,7 +231,8 @@ namespace Microsoft.CodeAnalysis.DocumentHighlighting
             ISymbol symbol,
             FindSymbols.FindReferencesSearchOptions options,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var solution = startingDocument.Project.Solution;
             references = references.FilterToItemsToShow(options);
             references = references.FilterNonMatchingMethodNames(solution, symbol);
@@ -276,7 +281,8 @@ namespace Microsoft.CodeAnalysis.DocumentHighlighting
             Document document,
             ISymbol symbol,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             return SpecializedTasks.EmptyImmutableArray<Location>();
         }
 
@@ -287,7 +293,8 @@ namespace Microsoft.CodeAnalysis.DocumentHighlighting
             ArrayBuilder<Location> additionalReferences,
             IImmutableSet<Document> documentToSearch,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var spanSet = new HashSet<DocumentSpan>();
             var tagMap = new MultiDictionary<Document, HighlightSpan>();
             var addAllDefinitions = true;
@@ -426,7 +433,8 @@ namespace Microsoft.CodeAnalysis.DocumentHighlighting
             MultiDictionary<Document, HighlightSpan> tagList,
             HighlightSpanKind kind,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var span = await GetLocationSpanAsync(solution, location, cancellationToken)
                 .ConfigureAwait(false);
             if (span != null && !spanSet.Contains(span.Value))
@@ -440,7 +448,8 @@ namespace Microsoft.CodeAnalysis.DocumentHighlighting
             Solution solution,
             Location location,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             try
             {
                 if (location != null && location.IsInSource)

@@ -34,7 +34,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.SolutionExplore
             ProjectId projectId,
             IAnalyzersCommandHandler commandHandler,
             IDiagnosticAnalyzerService diagnosticAnalyzerService
-        ) {
+        )
+        {
             Workspace = workspace;
             ProjectId = projectId;
             CommandHandler = commandHandler;
@@ -112,7 +113,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.SolutionExplore
             string language,
             CompilationOptions options,
             AnalyzerConfigOptionsResult? analyzerConfigOptions
-        ) {
+        )
+        {
             // Within an analyzer assembly, an individual analyzer may report multiple different diagnostics
             // with the same ID. Or, multiple analyzers may report diagnostics with the same ID. Or a
             // combination of the two may occur.
@@ -164,12 +166,14 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.SolutionExplore
         private void OnWorkspaceChangedLookForOptionsChanges(
             object sender,
             WorkspaceChangeEventArgs e
-        ) {
+        )
+        {
             if (
                 e.Kind == WorkspaceChangeKind.SolutionCleared
                 || e.Kind == WorkspaceChangeKind.SolutionReloaded
                 || e.Kind == WorkspaceChangeKind.SolutionRemoved
-            ) {
+            )
+            {
                 Workspace.WorkspaceChanged -= OnWorkspaceChangedLookForOptionsChanges;
             }
             else if (e.ProjectId == ProjectId)
@@ -222,7 +226,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.SolutionExplore
                         newAnalyzerConfigOptions?.AnalyzerOptions,
                         _analyzerConfigOptions?.AnalyzerOptions
                     )
-                ) {
+                )
+                {
                     _generalDiagnosticOption = newGeneralDiagnosticOption;
                     _specificDiagnosticOptions = newSpecificDiagnosticOptions;
                     _analyzerConfigOptions = newAnalyzerConfigOptions;

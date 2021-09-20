@@ -203,7 +203,8 @@ namespace System.Xml.Xsl
                 {
                     if (
                         message.Length > 0 && !XmlCharType.IsWhiteSpace(message[message.Length - 1])
-                    ) {
+                    )
+                    {
                         message += " ";
                     }
                     message += lineInfoMessage;
@@ -216,7 +217,8 @@ namespace System.Xml.Xsl
             ISourceLineInfo? lineInfo,
             string res,
             params string?[]? args
-        ) {
+        )
+        {
             return AppendLineInfoMessage(CreateMessage(res, args), lineInfo);
         }
 

@@ -18,7 +18,8 @@ namespace System.Web.Mvc
             EntryLimitedDictionary backingStore,
             string prefix,
             object value
-        ) {
+        )
+        {
             IDictionary<string, object> d = value as IDictionary<string, object>;
             if (d != null)
             {
@@ -54,7 +55,8 @@ namespace System.Web.Mvc
                     "application/json",
                     StringComparison.OrdinalIgnoreCase
                 )
-            ) {
+            )
+            {
                 // not JSON request
                 return null;
             }

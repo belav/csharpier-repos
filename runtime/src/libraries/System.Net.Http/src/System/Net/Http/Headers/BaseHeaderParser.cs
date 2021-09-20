@@ -87,7 +87,8 @@ namespace System.Net.Http.Headers
             if (
                 (separatorFound && !SupportsMultipleValues)
                 || (!separatorFound && (current < value.Length))
-            ) {
+            )
+            {
                 return false;
             }
 

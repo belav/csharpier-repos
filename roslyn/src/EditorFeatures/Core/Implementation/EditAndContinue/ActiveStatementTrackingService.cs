@@ -69,7 +69,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.EditAndContinue
         public async ValueTask StartTrackingAsync(
             Solution solution,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var newSession = new TrackingSession(_workspace, _spanProvider);
             if (Interlocked.CompareExchange(ref _session, newSession, null) != null)
             {
@@ -171,7 +172,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.EditAndContinue
             private async Task TrackActiveSpansAsync(
                 Document document,
                 CancellationToken cancellationToken
-            ) {
+            )
+            {
                 try
                 {
                     if (!TryGetSnapshot(document, out var snapshot))
@@ -195,7 +197,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.EditAndContinue
             internal async Task TrackActiveSpansAsync(
                 Solution solution,
                 CancellationToken cancellationToken
-            ) {
+            )
+            {
                 try
                 {
                     var openDocumentIds = _workspace.GetOpenDocumentIds().ToImmutableArray();
@@ -274,7 +277,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.EditAndContinue
             private static ImmutableArray<ActiveStatementTrackingSpan> CreateTrackingSpans(
                 ITextSnapshot snapshot,
                 ImmutableArray<(LinePositionSpan span, ActiveStatementFlags flags)> activeStatementSpans
-            ) {
+            )
+            {
                 return activeStatementSpans.SelectAsArray(
                     spanAndFlags =>
                         new ActiveStatementTrackingSpan(
@@ -291,7 +295,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.EditAndContinue
                 ITextSnapshot snapshot,
                 ImmutableArray<ActiveStatementTrackingSpan> oldSpans,
                 ImmutableArray<(LinePositionSpan, ActiveStatementFlags)> newSpans
-            ) {
+            )
+            {
                 Debug.Assert(oldSpans.Length == newSpans.Length);
 
                 ArrayBuilder<ActiveStatementTrackingSpan>? lazyBuilder = null;
@@ -328,7 +333,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.EditAndContinue
             private static bool TryGetSnapshot(
                 Document document,
                 [NotNullWhen(true)] out ITextSnapshot? snapshot
-            ) {
+            )
+            {
                 if (!document.TryGetText(out var source))
                 {
                     snapshot = null;
@@ -342,7 +348,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.EditAndContinue
             public async ValueTask<ImmutableArray<TextSpan>> GetSpansAsync(
                 Document document,
                 CancellationToken cancellationToken
-            ) {
+            )
+            {
                 var sourceText = await document.GetTextAsync(cancellationToken)
                     .ConfigureAwait(false);
 
@@ -351,12 +358,14 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.EditAndContinue
                     if (
                         _trackingSpans.TryGetValue(document.Id, out var documentSpans)
                         && !documentSpans.IsDefaultOrEmpty
-                    ) {
+                    )
+                    {
                         var snapshot = sourceText.FindCorrespondingEditorTextSnapshot();
                         if (
                             snapshot != null
                             && snapshot.TextBuffer == documentSpans.First().Span.TextBuffer
-                        ) {
+                        )
+                        {
                             return documentSpans.SelectAsArray(
                                 s => s.Span.GetSpan(snapshot).Span.ToTextSpan()
                             );
@@ -376,7 +385,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.EditAndContinue
                 Document document,
                 ITextSnapshot snapshot,
                 CancellationToken cancellationToken
-            ) {
+            )
+            {
                 try
                 {
                     Debug.Assert(TryGetSnapshot(document, out var s) && s == snapshot);

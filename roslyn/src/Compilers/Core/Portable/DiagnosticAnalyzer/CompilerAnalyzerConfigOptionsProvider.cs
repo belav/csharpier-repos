@@ -19,7 +19,8 @@ namespace Microsoft.CodeAnalysis.Diagnostics
         internal CompilerAnalyzerConfigOptionsProvider(
             ImmutableDictionary<object, AnalyzerConfigOptions> treeDict,
             AnalyzerConfigOptions globalOptions
-        ) {
+        )
+        {
             _treeDict = treeDict;
             GlobalOptions = globalOptions;
         }

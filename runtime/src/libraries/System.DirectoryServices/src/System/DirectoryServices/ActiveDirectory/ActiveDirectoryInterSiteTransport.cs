@@ -24,7 +24,8 @@ namespace System.DirectoryServices.ActiveDirectory
             DirectoryContext context,
             ActiveDirectoryTransportType transport,
             DirectoryEntry entry
-        ) {
+        )
+        {
             _context = context;
             _transport = transport;
             _cachedEntry = entry;
@@ -33,7 +34,8 @@ namespace System.DirectoryServices.ActiveDirectory
         public static ActiveDirectoryInterSiteTransport FindByTransportType(
             DirectoryContext context,
             ActiveDirectoryTransportType transport
-        ) {
+        )
+        {
             if (context == null)
                 throw new ArgumentNullException(nameof(context));
 
@@ -109,7 +111,8 @@ namespace System.DirectoryServices.ActiveDirectory
                     if (
                         Utils.CheckCapability(tmpDE, Capability.ActiveDirectoryApplicationMode)
                         && transport == ActiveDirectoryTransportType.Smtp
-                    ) {
+                    )
+                    {
                         throw new NotSupportedException(SR.NotSupportTransportSMTP);
                     }
 

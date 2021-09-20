@@ -20,7 +20,8 @@ namespace Microsoft.Win32.RegistryTests
             int testIndex,
             object testValue,
             RegistryValueKind expectedValueKind
-        ) {
+        )
+        {
             string valueName = "Testing_" + testIndex.ToString();
 
             TestRegistryKey.SetValue(valueName, testValue, RegistryValueKind.Unknown);
@@ -35,7 +36,8 @@ namespace Microsoft.Win32.RegistryTests
             int testIndex,
             object testValue,
             RegistryValueKind expectedValueKind
-        ) {
+        )
+        {
             string valueName = "Testing_" + testIndex.ToString();
             expectedValueKind = RegistryValueKind.String;
 
@@ -51,7 +53,8 @@ namespace Microsoft.Win32.RegistryTests
             int testIndex,
             object testValue,
             RegistryValueKind expectedValueKind
-        ) {
+        )
+        {
             string valueName = "Testing_" + testIndex.ToString();
             expectedValueKind = RegistryValueKind.ExpandString;
 
@@ -67,7 +70,8 @@ namespace Microsoft.Win32.RegistryTests
             int testIndex,
             object testValue,
             RegistryValueKind expectedValueKind
-        ) {
+        )
+        {
             try
             {
                 string valueName = "Testing_" + testIndex.ToString();
@@ -90,7 +94,8 @@ namespace Microsoft.Win32.RegistryTests
             int testIndex,
             object testValue,
             RegistryValueKind expectedValueKind
-        ) {
+        )
+        {
             try
             {
                 string valueName = "Testing_" + testIndex.ToString();
@@ -113,7 +118,8 @@ namespace Microsoft.Win32.RegistryTests
             int testIndex,
             object testValue,
             RegistryValueKind expectedValueKind
-        ) {
+        )
+        {
             try
             {
                 string valueName = "Testing_" + testIndex.ToString();
@@ -140,7 +146,8 @@ namespace Microsoft.Win32.RegistryTests
             int testIndex,
             object testValue,
             RegistryValueKind expectedValueKind
-        ) {
+        )
+        {
             try
             {
                 string valueName = "Testing_" + testIndex.ToString();

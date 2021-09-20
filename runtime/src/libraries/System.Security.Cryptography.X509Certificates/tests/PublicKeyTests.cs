@@ -320,7 +320,8 @@ namespace System.Security.Cryptography.X509Certificates.Tests
             if (
                 !expectedModulus.SequenceEqual(rsaParameters.Modulus)
                 || !expectedExponent.SequenceEqual(rsaParameters.Exponent)
-            ) {
+            )
+            {
                 Console.WriteLine("Modulus or Exponent not equal");
 
                 rsaParameters = rsa.ExportParameters(false);
@@ -328,7 +329,8 @@ namespace System.Security.Cryptography.X509Certificates.Tests
                 if (
                     !expectedModulus.SequenceEqual(rsaParameters.Modulus)
                     || !expectedExponent.SequenceEqual(rsaParameters.Exponent)
-                ) {
+                )
+                {
                     Console.WriteLine(
                         "Second call to ExportParameters did not produce valid data either"
                     );
@@ -342,7 +344,8 @@ namespace System.Security.Cryptography.X509Certificates.Tests
                     if (
                         !expectedModulus.SequenceEqual(rsaParameters.Modulus)
                         || !expectedExponent.SequenceEqual(rsaParameters.Exponent)
-                    ) {
+                    )
+                    {
                         Console.WriteLine(
                             "New key handle ExportParameters was not successful either"
                         );
@@ -478,7 +481,8 @@ namespace System.Security.Cryptography.X509Certificates.Tests
             using (ECDiffieHellman publicKey = cert.GetECDiffieHellmanPublicKey())
             using (
                 ECDiffieHellman otherParty = ECDiffieHellman.Create(ECCurve.NamedCurves.nistP256)
-            ) {
+            )
+            {
                 Assert.Equal(256, publicKey.KeySize);
 
                 // The public key should be unable to derive a secret private parameters.
@@ -672,7 +676,8 @@ namespace System.Security.Cryptography.X509Certificates.Tests
         public static void TestECDsaPublicKey_BrainpoolP160r1_ValidatesSignature(
             byte[] curveData,
             byte[] existingSignature
-        ) {
+        )
+        {
             byte[] helloBytes = Encoding.ASCII.GetBytes("Hello");
 
             try

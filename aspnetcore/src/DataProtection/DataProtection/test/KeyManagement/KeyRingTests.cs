@@ -121,7 +121,8 @@ namespace Microsoft.AspNetCore.DataProtection.KeyManagement
             public MyKey(
                 bool isRevoked = false,
                 IAuthenticatedEncryptor expectedEncryptorInstance = null
-            ) {
+            )
+            {
                 CreationDate = DateTimeOffset.Now;
                 ActivationDate = CreationDate + TimeSpan.FromHours(1);
                 ExpirationDate = CreationDate + TimeSpan.FromDays(30);

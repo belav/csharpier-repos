@@ -141,7 +141,8 @@ namespace Microsoft.AspNetCore.Identity.EntityFrameworkCore
         public async virtual Task<IdentityResult> CreateAsync(
             TRole role,
             CancellationToken cancellationToken = default(CancellationToken)
-        ) {
+        )
+        {
             cancellationToken.ThrowIfCancellationRequested();
             ThrowIfDisposed();
             if (role == null)
@@ -162,7 +163,8 @@ namespace Microsoft.AspNetCore.Identity.EntityFrameworkCore
         public async virtual Task<IdentityResult> UpdateAsync(
             TRole role,
             CancellationToken cancellationToken = default(CancellationToken)
-        ) {
+        )
+        {
             cancellationToken.ThrowIfCancellationRequested();
             ThrowIfDisposed();
             if (role == null)
@@ -192,7 +194,8 @@ namespace Microsoft.AspNetCore.Identity.EntityFrameworkCore
         public async virtual Task<IdentityResult> DeleteAsync(
             TRole role,
             CancellationToken cancellationToken = default(CancellationToken)
-        ) {
+        )
+        {
             cancellationToken.ThrowIfCancellationRequested();
             ThrowIfDisposed();
             if (role == null)
@@ -220,7 +223,8 @@ namespace Microsoft.AspNetCore.Identity.EntityFrameworkCore
         public virtual Task<string> GetRoleIdAsync(
             TRole role,
             CancellationToken cancellationToken = default(CancellationToken)
-        ) {
+        )
+        {
             cancellationToken.ThrowIfCancellationRequested();
             ThrowIfDisposed();
             if (role == null)
@@ -239,7 +243,8 @@ namespace Microsoft.AspNetCore.Identity.EntityFrameworkCore
         public virtual Task<string> GetRoleNameAsync(
             TRole role,
             CancellationToken cancellationToken = default(CancellationToken)
-        ) {
+        )
+        {
             cancellationToken.ThrowIfCancellationRequested();
             ThrowIfDisposed();
             if (role == null)
@@ -260,7 +265,8 @@ namespace Microsoft.AspNetCore.Identity.EntityFrameworkCore
             TRole role,
             string roleName,
             CancellationToken cancellationToken = default(CancellationToken)
-        ) {
+        )
+        {
             cancellationToken.ThrowIfCancellationRequested();
             ThrowIfDisposed();
             if (role == null)
@@ -308,7 +314,8 @@ namespace Microsoft.AspNetCore.Identity.EntityFrameworkCore
         public virtual Task<TRole> FindByIdAsync(
             string id,
             CancellationToken cancellationToken = default(CancellationToken)
-        ) {
+        )
+        {
             cancellationToken.ThrowIfCancellationRequested();
             ThrowIfDisposed();
             var roleId = ConvertIdFromString(id);
@@ -324,7 +331,8 @@ namespace Microsoft.AspNetCore.Identity.EntityFrameworkCore
         public virtual Task<TRole> FindByNameAsync(
             string normalizedName,
             CancellationToken cancellationToken = default(CancellationToken)
-        ) {
+        )
+        {
             cancellationToken.ThrowIfCancellationRequested();
             ThrowIfDisposed();
             return Roles.FirstOrDefaultAsync(
@@ -342,7 +350,8 @@ namespace Microsoft.AspNetCore.Identity.EntityFrameworkCore
         public virtual Task<string> GetNormalizedRoleNameAsync(
             TRole role,
             CancellationToken cancellationToken = default(CancellationToken)
-        ) {
+        )
+        {
             cancellationToken.ThrowIfCancellationRequested();
             ThrowIfDisposed();
             if (role == null)
@@ -363,7 +372,8 @@ namespace Microsoft.AspNetCore.Identity.EntityFrameworkCore
             TRole role,
             string normalizedName,
             CancellationToken cancellationToken = default(CancellationToken)
-        ) {
+        )
+        {
             cancellationToken.ThrowIfCancellationRequested();
             ThrowIfDisposed();
             if (role == null)
@@ -399,7 +409,8 @@ namespace Microsoft.AspNetCore.Identity.EntityFrameworkCore
         public async virtual Task<IList<Claim>> GetClaimsAsync(
             TRole role,
             CancellationToken cancellationToken = default(CancellationToken)
-        ) {
+        )
+        {
             ThrowIfDisposed();
             if (role == null)
             {
@@ -422,7 +433,8 @@ namespace Microsoft.AspNetCore.Identity.EntityFrameworkCore
             TRole role,
             Claim claim,
             CancellationToken cancellationToken = default(CancellationToken)
-        ) {
+        )
+        {
             ThrowIfDisposed();
             if (role == null)
             {
@@ -448,7 +460,8 @@ namespace Microsoft.AspNetCore.Identity.EntityFrameworkCore
             TRole role,
             Claim claim,
             CancellationToken cancellationToken = default(CancellationToken)
-        ) {
+        )
+        {
             ThrowIfDisposed();
             if (role == null)
             {

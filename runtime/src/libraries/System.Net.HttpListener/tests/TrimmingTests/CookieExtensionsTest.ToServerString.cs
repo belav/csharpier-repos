@@ -35,7 +35,8 @@ namespace CookieExtensionsTest
                 expectedSetCookie.Replace("Set-Cookie: ", "") != response.Headers["Set-Cookie"]
                 || expectedSetCookie2.Replace("Set-Cookie2: ", "")
                     != response.Headers["Set-Cookie2"]
-            ) {
+            )
+            {
                 return -1;
             }
 
@@ -44,7 +45,8 @@ namespace CookieExtensionsTest
             if (
                 !clientResponse.Contains($"\r\n{expectedSetCookie}\r\n")
                 || !clientResponse.Contains($"\r\n{expectedSetCookie2}\r\n")
-            ) {
+            )
+            {
                 return -1;
             }
 

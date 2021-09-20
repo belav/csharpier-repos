@@ -138,7 +138,8 @@ namespace JIT.HardwareIntrinsics.X86
                     (alignment != 32 && alignment != 16)
                     || (alignment * 2) < sizeOfinArray1
                     || (alignment * 2) < sizeOfinArray2
-                ) {
+                )
+                {
                     throw new ArgumentException("Invalid value of alignment");
                 }
 
@@ -218,7 +219,8 @@ namespace JIT.HardwareIntrinsics.X86
 
             public void RunStructFldScenario_Load(
                 BooleanBinaryOpTest__TestNotZAndNotCSByte testClass
-            ) {
+            )
+            {
                 fixed (Vector128<SByte>* pFld1 = &_fld1)fixed (Vector128<SByte>* pFld2 = &_fld2)
                 {
                     var result = Sse41.TestNotZAndNotC(
@@ -420,7 +422,8 @@ namespace JIT.HardwareIntrinsics.X86
 
             fixed (Vector128<SByte>* pClsVar1 = &_clsVar1)fixed (
                 Vector128<SByte>* pClsVar2 = &_clsVar2
-            ) {
+            )
+            {
                 var result = Sse41.TestNotZAndNotC(
                     Sse2.LoadVector128((SByte*)(pClsVar1)),
                     Sse2.LoadVector128((SByte*)(pClsVar2))
@@ -481,7 +484,8 @@ namespace JIT.HardwareIntrinsics.X86
 
             fixed (Vector128<SByte>* pFld1 = &test._fld1)fixed (
                 Vector128<SByte>* pFld2 = &test._fld2
-            ) {
+            )
+            {
                 var result = Sse41.TestNotZAndNotC(
                     Sse2.LoadVector128((SByte*)(pFld1)),
                     Sse2.LoadVector128((SByte*)(pFld2))
@@ -579,7 +583,8 @@ namespace JIT.HardwareIntrinsics.X86
             Vector128<SByte> op2,
             bool result,
             [CallerMemberName] string method = ""
-        ) {
+        )
+        {
             SByte[] inArray1 = new SByte[Op1ElementCount];
             SByte[] inArray2 = new SByte[Op2ElementCount];
 
@@ -594,7 +599,8 @@ namespace JIT.HardwareIntrinsics.X86
             void* op2,
             bool result,
             [CallerMemberName] string method = ""
-        ) {
+        )
+        {
             SByte[] inArray1 = new SByte[Op1ElementCount];
             SByte[] inArray2 = new SByte[Op2ElementCount];
 
@@ -617,7 +623,8 @@ namespace JIT.HardwareIntrinsics.X86
             SByte[] right,
             bool result,
             [CallerMemberName] string method = ""
-        ) {
+        )
+        {
             bool succeeded = true;
 
             var expectedResult1 = true;

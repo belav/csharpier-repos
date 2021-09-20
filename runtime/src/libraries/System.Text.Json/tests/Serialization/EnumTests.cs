@@ -55,7 +55,8 @@ namespace System.Text.Json.Serialization.Tests
             Type expectedType,
             string value,
             string name
-        ) {
+        )
+        {
             string json = $"{{ \"{name}\" : {value} }}";
             SimpleTestClass result = JsonSerializer.Deserialize<SimpleTestClass>(json);
             object expected = Enum.ToObject(expectedType, long.Parse(value));
@@ -71,7 +72,8 @@ namespace System.Text.Json.Serialization.Tests
             object expected,
             long value,
             string name
-        ) {
+        )
+        {
             string json = $"{{ \"{name}\" : {value} }}";
             SimpleTestClass result = JsonSerializer.Deserialize<SimpleTestClass>(json);
             Assert.Equal(expected, GetProperty(result, name));
@@ -86,7 +88,8 @@ namespace System.Text.Json.Serialization.Tests
             Type expectedType,
             string value,
             string name
-        ) {
+        )
+        {
             string json = $"{{ \"{name}\" : {value} }}";
             SimpleTestClass result = JsonSerializer.Deserialize<SimpleTestClass>(json);
             object expected = Enum.ToObject(expectedType, ulong.Parse(value));
@@ -102,7 +105,8 @@ namespace System.Text.Json.Serialization.Tests
             object expected,
             ulong value,
             string name
-        ) {
+        )
+        {
             string json = $"{{ \"{name}\" : {value} }}";
             SimpleTestClass result = JsonSerializer.Deserialize<SimpleTestClass>(json);
             Assert.Equal(expected, GetProperty(result, name));
@@ -129,7 +133,8 @@ namespace System.Text.Json.Serialization.Tests
             string maxCapacity,
             Type type,
             long expected
-        ) {
+        )
+        {
             object enumValue = Enum.ToObject(type, long.Parse(maxCapacity) * timesOverflow);
             string json = JsonSerializer.Serialize(enumValue);
             Assert.Equal(expected.ToString(), json);

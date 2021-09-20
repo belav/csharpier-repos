@@ -12,7 +12,8 @@ namespace System.Web.Razor.Test.Parser.Html
         public static void RunSingleAtEscapeTest(
             Action<string, Block> testMethod,
             AcceptedCharacters lastSpanAcceptedCharacters = AcceptedCharacters.None
-        ) {
+        )
+        {
             var factory = SpanFactory.CreateCsHtml();
             testMethod(
                 "<foo>@@bar</foo>",
@@ -27,7 +28,8 @@ namespace System.Web.Razor.Test.Parser.Html
         public static void RunMultiAtEscapeTest(
             Action<string, Block> testMethod,
             AcceptedCharacters lastSpanAcceptedCharacters = AcceptedCharacters.None
-        ) {
+        )
+        {
             var factory = SpanFactory.CreateCsHtml();
             testMethod(
                 "<foo>@@@@@bar</foo>",

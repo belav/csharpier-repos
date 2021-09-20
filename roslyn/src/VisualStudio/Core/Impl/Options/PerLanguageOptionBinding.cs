@@ -21,7 +21,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Options
             OptionStore optionStore,
             PerLanguageOption2<T> key,
             string languageName
-        ) {
+        )
+        {
             _optionStore = optionStore;
             _key = key;
             _languageName = languageName;

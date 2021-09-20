@@ -11,12 +11,8 @@ namespace Microsoft.AspNetCore.Razor.Language.Legacy
     [DebuggerDisplay("{" + nameof(DebuggerToString) + "(),nq}")]
     internal class LocationTagged<TValue> : IFormattable
     {
-        public LocationTagged(
-            TValue value,
-            int absoluteIndex,
-            int lineIndex,
-            int characterIndex
-        ) : this(value, new SourceLocation(absoluteIndex, lineIndex, characterIndex)) { }
+        public LocationTagged(TValue value, int absoluteIndex, int lineIndex, int characterIndex)
+            : this(value, new SourceLocation(absoluteIndex, lineIndex, characterIndex)) { }
 
         public LocationTagged(TValue value, SourceLocation location)
         {

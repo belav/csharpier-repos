@@ -54,7 +54,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.AutomaticCompletion
             char openingBrace,
             char closingBrace,
             out IBraceCompletionSession session
-        ) {
+        )
+        {
             this.AssertIsForeground();
             var textSnapshot = openingPoint.Snapshot;
             var document = textSnapshot.GetOpenDocumentInCurrentContextWithChanges();

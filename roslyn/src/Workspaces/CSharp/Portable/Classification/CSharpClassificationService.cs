@@ -25,7 +25,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Classification
             TextSpan textSpan,
             List<ClassifiedSpan> result,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             using var _ = ArrayBuilder<ClassifiedSpan>.GetInstance(out var temp);
             ClassificationHelpers.AddLexicalClassifications(
                 text,

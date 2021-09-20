@@ -33,7 +33,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
             IEntityType entityType,
             Type parameterType,
             string parameterName
-        ) {
+        )
+        {
             var candidateNames = GetCandidatePropertyNames(parameterName);
 
             return entityType.GetProperties()

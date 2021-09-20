@@ -54,7 +54,8 @@ namespace Microsoft.CodeAnalysis.CodeFixes
         /// </param>
         public static FixAllProvider Create(
             Func<FixAllContext, Document, ImmutableArray<Diagnostic>, Task<Document?>> fixAllAsync
-        ) {
+        )
+        {
             if (fixAllAsync == null)
                 throw new ArgumentNullException(nameof(fixAllAsync));
 
@@ -77,7 +78,8 @@ namespace Microsoft.CodeAnalysis.CodeFixes
                     ImmutableArray<Diagnostic>,
                     Task<Document?>
                 > fixAllAsync
-            ) {
+            )
+            {
                 _fixAllAsync = fixAllAsync;
             }
 

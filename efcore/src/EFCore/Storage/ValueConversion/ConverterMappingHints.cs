@@ -27,7 +27,8 @@ namespace Microsoft.EntityFrameworkCore.Storage.ValueConversion
             int? scale = null,
             bool? unicode = null,
             Func<IProperty, IEntityType, ValueGenerator>? valueGeneratorFactory = null
-        ) {
+        )
+        {
             Size = size;
             Precision = precision;
             Scale = scale;

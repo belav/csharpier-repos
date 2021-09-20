@@ -30,7 +30,8 @@ namespace System.Text.Tests
             byte[] bytes,
             int byteIndex,
             bool flush
-        ) {
+        )
+        {
             return _encoder.GetBytes(chars, charIndex, charCount, bytes, byteIndex, flush);
         }
     }
@@ -1293,7 +1294,8 @@ namespace System.Text.Tests
             int expectedCharsUsed,
             int expectedBytesUsed,
             bool expectedCompleted
-        ) {
+        )
+        {
             int charsUsed;
             int bytesUsed;
             bool completed;

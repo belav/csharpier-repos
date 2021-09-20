@@ -78,7 +78,8 @@ namespace System.Runtime.Intrinsics.X86
             Vector128<short> left,
             Vector128<short> right,
             byte control
-        ) {
+        )
+        {
             throw new PlatformNotSupportedException();
         }
 
@@ -90,7 +91,8 @@ namespace System.Runtime.Intrinsics.X86
             Vector128<ushort> left,
             Vector128<ushort> right,
             byte control
-        ) {
+        )
+        {
             throw new PlatformNotSupportedException();
         }
 
@@ -102,7 +104,8 @@ namespace System.Runtime.Intrinsics.X86
             Vector128<float> left,
             Vector128<float> right,
             byte control
-        ) {
+        )
+        {
             throw new PlatformNotSupportedException();
         }
 
@@ -114,7 +117,8 @@ namespace System.Runtime.Intrinsics.X86
             Vector128<double> left,
             Vector128<double> right,
             byte control
-        ) {
+        )
+        {
             throw new PlatformNotSupportedException();
         }
 
@@ -126,7 +130,8 @@ namespace System.Runtime.Intrinsics.X86
             Vector128<sbyte> left,
             Vector128<sbyte> right,
             Vector128<sbyte> mask
-        ) {
+        )
+        {
             throw new PlatformNotSupportedException();
         }
         /// <summary>
@@ -137,7 +142,8 @@ namespace System.Runtime.Intrinsics.X86
             Vector128<byte> left,
             Vector128<byte> right,
             Vector128<byte> mask
-        ) {
+        )
+        {
             throw new PlatformNotSupportedException();
         }
         /// <summary>
@@ -149,7 +155,8 @@ namespace System.Runtime.Intrinsics.X86
             Vector128<short> left,
             Vector128<short> right,
             Vector128<short> mask
-        ) {
+        )
+        {
             throw new PlatformNotSupportedException();
         }
         /// <summary>
@@ -161,7 +168,8 @@ namespace System.Runtime.Intrinsics.X86
             Vector128<ushort> left,
             Vector128<ushort> right,
             Vector128<ushort> mask
-        ) {
+        )
+        {
             throw new PlatformNotSupportedException();
         }
         /// <summary>
@@ -173,7 +181,8 @@ namespace System.Runtime.Intrinsics.X86
             Vector128<int> left,
             Vector128<int> right,
             Vector128<int> mask
-        ) {
+        )
+        {
             throw new PlatformNotSupportedException();
         }
         /// <summary>
@@ -185,7 +194,8 @@ namespace System.Runtime.Intrinsics.X86
             Vector128<uint> left,
             Vector128<uint> right,
             Vector128<uint> mask
-        ) {
+        )
+        {
             throw new PlatformNotSupportedException();
         }
         /// <summary>
@@ -197,7 +207,8 @@ namespace System.Runtime.Intrinsics.X86
             Vector128<long> left,
             Vector128<long> right,
             Vector128<long> mask
-        ) {
+        )
+        {
             throw new PlatformNotSupportedException();
         }
         /// <summary>
@@ -209,7 +220,8 @@ namespace System.Runtime.Intrinsics.X86
             Vector128<ulong> left,
             Vector128<ulong> right,
             Vector128<ulong> mask
-        ) {
+        )
+        {
             throw new PlatformNotSupportedException();
         }
         /// <summary>
@@ -220,7 +232,8 @@ namespace System.Runtime.Intrinsics.X86
             Vector128<float> left,
             Vector128<float> right,
             Vector128<float> mask
-        ) {
+        )
+        {
             throw new PlatformNotSupportedException();
         }
         /// <summary>
@@ -231,7 +244,8 @@ namespace System.Runtime.Intrinsics.X86
             Vector128<double> left,
             Vector128<double> right,
             Vector128<double> mask
-        ) {
+        )
+        {
             throw new PlatformNotSupportedException();
         }
 
@@ -278,7 +292,8 @@ namespace System.Runtime.Intrinsics.X86
         public static Vector128<double> CeilingScalar(
             Vector128<double> upper,
             Vector128<double> value
-        ) {
+        )
+        {
             throw new PlatformNotSupportedException();
         }
         /// <summary>
@@ -509,7 +524,8 @@ namespace System.Runtime.Intrinsics.X86
             Vector128<float> left,
             Vector128<float> right,
             byte control
-        ) {
+        )
+        {
             throw new PlatformNotSupportedException();
         }
         /// <summary>
@@ -520,7 +536,8 @@ namespace System.Runtime.Intrinsics.X86
             Vector128<double> left,
             Vector128<double> right,
             byte control
-        ) {
+        )
+        {
             throw new PlatformNotSupportedException();
         }
 
@@ -600,7 +617,8 @@ namespace System.Runtime.Intrinsics.X86
         public static Vector128<double> FloorScalar(
             Vector128<double> upper,
             Vector128<double> value
-        ) {
+        )
+        {
             throw new PlatformNotSupportedException();
         }
         /// <summary>
@@ -652,7 +670,8 @@ namespace System.Runtime.Intrinsics.X86
             Vector128<float> value,
             Vector128<float> data,
             byte index
-        ) {
+        )
+        {
             throw new PlatformNotSupportedException();
         }
 
@@ -739,7 +758,8 @@ namespace System.Runtime.Intrinsics.X86
             Vector128<byte> left,
             Vector128<byte> right,
             byte mask
-        ) {
+        )
+        {
             throw new PlatformNotSupportedException();
         }
 
@@ -776,7 +796,8 @@ namespace System.Runtime.Intrinsics.X86
         public static Vector128<ushort> PackUnsignedSaturate(
             Vector128<int> left,
             Vector128<int> right
-        ) {
+        )
+        {
             throw new PlatformNotSupportedException();
         }
 
@@ -909,7 +930,8 @@ namespace System.Runtime.Intrinsics.X86
         public static Vector128<double> RoundCurrentDirectionScalar(
             Vector128<double> upper,
             Vector128<double> value
-        ) {
+        )
+        {
             throw new PlatformNotSupportedException();
         }
         /// <summary>
@@ -919,7 +941,8 @@ namespace System.Runtime.Intrinsics.X86
         public static Vector128<double> RoundToNearestIntegerScalar(
             Vector128<double> upper,
             Vector128<double> value
-        ) {
+        )
+        {
             throw new PlatformNotSupportedException();
         }
         /// <summary>
@@ -929,7 +952,8 @@ namespace System.Runtime.Intrinsics.X86
         public static Vector128<double> RoundToNegativeInfinityScalar(
             Vector128<double> upper,
             Vector128<double> value
-        ) {
+        )
+        {
             throw new PlatformNotSupportedException();
         }
         /// <summary>
@@ -939,7 +963,8 @@ namespace System.Runtime.Intrinsics.X86
         public static Vector128<double> RoundToPositiveInfinityScalar(
             Vector128<double> upper,
             Vector128<double> value
-        ) {
+        )
+        {
             throw new PlatformNotSupportedException();
         }
         /// <summary>
@@ -949,7 +974,8 @@ namespace System.Runtime.Intrinsics.X86
         public static Vector128<double> RoundToZeroScalar(
             Vector128<double> upper,
             Vector128<double> value
-        ) {
+        )
+        {
             throw new PlatformNotSupportedException();
         }
 
@@ -1006,7 +1032,8 @@ namespace System.Runtime.Intrinsics.X86
         public static Vector128<float> RoundCurrentDirectionScalar(
             Vector128<float> upper,
             Vector128<float> value
-        ) {
+        )
+        {
             throw new PlatformNotSupportedException();
         }
         /// <summary>
@@ -1016,7 +1043,8 @@ namespace System.Runtime.Intrinsics.X86
         public static Vector128<float> RoundToNearestIntegerScalar(
             Vector128<float> upper,
             Vector128<float> value
-        ) {
+        )
+        {
             throw new PlatformNotSupportedException();
         }
         /// <summary>
@@ -1026,7 +1054,8 @@ namespace System.Runtime.Intrinsics.X86
         public static Vector128<float> RoundToNegativeInfinityScalar(
             Vector128<float> upper,
             Vector128<float> value
-        ) {
+        )
+        {
             throw new PlatformNotSupportedException();
         }
         /// <summary>
@@ -1036,7 +1065,8 @@ namespace System.Runtime.Intrinsics.X86
         public static Vector128<float> RoundToPositiveInfinityScalar(
             Vector128<float> upper,
             Vector128<float> value
-        ) {
+        )
+        {
             throw new PlatformNotSupportedException();
         }
         /// <summary>
@@ -1046,7 +1076,8 @@ namespace System.Runtime.Intrinsics.X86
         public static Vector128<float> RoundToZeroScalar(
             Vector128<float> upper,
             Vector128<float> value
-        ) {
+        )
+        {
             throw new PlatformNotSupportedException();
         }
 

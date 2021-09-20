@@ -115,7 +115,8 @@ namespace Microsoft.EntityFrameworkCore.Infrastructure
         /// <returns> A new instance with the option changed. </returns>
         public virtual CoreOptionsExtension WithInternalServiceProvider(
             IServiceProvider? internalServiceProvider
-        ) {
+        )
+        {
             var clone = Clone();
 
             clone._internalServiceProvider = internalServiceProvider;
@@ -131,7 +132,8 @@ namespace Microsoft.EntityFrameworkCore.Infrastructure
         /// <returns> A new instance with the option changed. </returns>
         public virtual CoreOptionsExtension WithApplicationServiceProvider(
             IServiceProvider? applicationServiceProvider
-        ) {
+        )
+        {
             var clone = Clone();
 
             clone._applicationServiceProvider = applicationServiceProvider;
@@ -207,7 +209,8 @@ namespace Microsoft.EntityFrameworkCore.Infrastructure
         /// <returns> A new instance with the option changed. </returns>
         public virtual CoreOptionsExtension WithSensitiveDataLoggingEnabled(
             bool sensitiveDataLoggingEnabled
-        ) {
+        )
+        {
             var clone = Clone();
 
             clone._sensitiveDataLoggingEnabled = sensitiveDataLoggingEnabled;
@@ -238,7 +241,8 @@ namespace Microsoft.EntityFrameworkCore.Infrastructure
         /// <returns> A new instance with the option changed. </returns>
         public virtual CoreOptionsExtension WithConcurrencyDetectionEnabled(
             bool concurrencyDetectionEnabled
-        ) {
+        )
+        {
             var clone = Clone();
 
             clone._concurrencyDetectionEnabled = concurrencyDetectionEnabled;
@@ -254,7 +258,8 @@ namespace Microsoft.EntityFrameworkCore.Infrastructure
         /// <returns> A new instance with the option changed. </returns>
         public virtual CoreOptionsExtension WithQueryTrackingBehavior(
             QueryTrackingBehavior queryTrackingBehavior
-        ) {
+        )
+        {
             var clone = Clone();
 
             clone._queryTrackingBehavior = queryTrackingBehavior;
@@ -274,7 +279,8 @@ namespace Microsoft.EntityFrameworkCore.Infrastructure
             Type serviceType,
             Type newImplementationType,
             Type? currentImplementationType = null
-        ) {
+        )
+        {
             var clone = Clone();
 
             if (clone._replacedServices == null)
@@ -311,7 +317,8 @@ namespace Microsoft.EntityFrameworkCore.Infrastructure
         /// <returns> A new instance with the option changed. </returns>
         public virtual CoreOptionsExtension WithLoggingConfigCacheTime(
             TimeSpan loggingConfigCacheTime
-        ) {
+        )
+        {
             var clone = Clone();
 
             clone._loggingConfigCacheTime = loggingConfigCacheTime;
@@ -327,7 +334,8 @@ namespace Microsoft.EntityFrameworkCore.Infrastructure
         /// <returns> A new instance with the option changed. </returns>
         public virtual CoreOptionsExtension WithWarningsConfiguration(
             WarningsConfiguration warningsConfiguration
-        ) {
+        )
+        {
             var clone = Clone();
 
             clone._warningsConfiguration = warningsConfiguration;
@@ -343,7 +351,8 @@ namespace Microsoft.EntityFrameworkCore.Infrastructure
         /// <returns> A new instance with the option changed. </returns>
         public virtual CoreOptionsExtension WithServiceProviderCachingEnabled(
             bool serviceProviderCachingEnabled
-        ) {
+        )
+        {
             var clone = Clone();
 
             clone._serviceProviderCachingEnabled = serviceProviderCachingEnabled;

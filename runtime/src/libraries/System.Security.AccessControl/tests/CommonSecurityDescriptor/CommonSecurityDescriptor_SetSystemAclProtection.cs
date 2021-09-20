@@ -120,7 +120,8 @@ namespace System.Security.AccessControl.Tests
             bool isProtected,
             bool preserveInheritance,
             string verifierSddl
-        ) {
+        )
+        {
             CommonSecurityDescriptor commonSecurityDescriptor = null;
             string resultSddl = null;
             commonSecurityDescriptor = new CommonSecurityDescriptor(isContainer, isDS, sddl);
@@ -129,13 +130,15 @@ namespace System.Security.AccessControl.Tests
             if (
                 !isProtected
                 && (commonSecurityDescriptor.ControlFlags & ControlFlags.SystemAclProtected) == 0
-            ) {
+            )
+            {
                 Assert.False(resultSddl != verifierSddl);
             }
             else if (
                 isProtected
                 && (commonSecurityDescriptor.ControlFlags & ControlFlags.SystemAclProtected) != 0
-            ) {
+            )
+            {
                 Assert.False(resultSddl != verifierSddl);
             }
         }

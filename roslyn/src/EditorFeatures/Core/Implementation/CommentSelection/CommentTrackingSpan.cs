@@ -34,7 +34,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.CommentSelection
             TextSpan trackingTextSpan,
             int amountToAddToStart,
             int amountToAddToEnd
-        ) {
+        )
+        {
             TrackingTextSpan = trackingTextSpan;
             AmountToAddToTrackingSpanStart = amountToAddToStart;
             AmountToAddToTrackingSpanEnd = amountToAddToEnd;

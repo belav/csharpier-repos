@@ -18,7 +18,8 @@ namespace System.Net.Http
             Stream plaintextStream,
             Version negotiatedHttpVersion,
             HttpRequestMessage initialRequestMessage
-        ) {
+        )
+        {
             _plaintextStream = plaintextStream;
             _negotiatedHttpVersion = negotiatedHttpVersion;
             _initialRequestMessage = initialRequestMessage;

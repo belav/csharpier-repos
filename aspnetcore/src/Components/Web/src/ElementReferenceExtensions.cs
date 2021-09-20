@@ -35,7 +35,8 @@ namespace Microsoft.AspNetCore.Components
         public static ValueTask FocusAsync(
             this ElementReference elementReference,
             bool preventScroll
-        ) {
+        )
+        {
             var jsRuntime = elementReference.GetJSRuntime();
 
             if (jsRuntime == null)

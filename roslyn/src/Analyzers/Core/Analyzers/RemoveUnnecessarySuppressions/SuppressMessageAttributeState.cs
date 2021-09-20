@@ -26,7 +26,8 @@ namespace Microsoft.CodeAnalysis.Diagnostics
         public SuppressMessageAttributeState(
             Compilation compilation,
             INamedTypeSymbol suppressMessageAttributeType
-        ) {
+        )
+        {
             _compilation = compilation;
             _suppressMessageAttributeType = suppressMessageAttributeType;
         }
@@ -57,7 +58,8 @@ namespace Microsoft.CodeAnalysis.Diagnostics
             SemanticModel model,
             CancellationToken cancellationToken,
             out ImmutableArray<(string name, IOperation value)> namedAttributeArguments
-        ) {
+        )
+        {
             var attribute = model.GetOperation(attributeSyntax, cancellationToken);
             if (attribute == null)
             {
@@ -80,7 +82,8 @@ namespace Microsoft.CodeAnalysis.Diagnostics
                     && _suppressMessageAttributeType.Equals(
                         propertyReference.Property.ContainingType
                     )
-                ) {
+                )
+                {
                     builder.Add((propertyReference.Property.Name, simpleAssignment.Value));
                 }
             }
@@ -92,7 +95,8 @@ namespace Microsoft.CodeAnalysis.Diagnostics
         public static bool HasValidScope(
             ImmutableArray<(string name, IOperation value)> namedAttributeArguments,
             out TargetScope targetScope
-        ) {
+        )
+        {
             if (
                 !TryGetNamedArgument(
                     namedAttributeArguments,
@@ -100,7 +104,8 @@ namespace Microsoft.CodeAnalysis.Diagnostics
                     out var scopeString,
                     out _
                 ) || RoslynString.IsNullOrEmpty(scopeString)
-            ) {
+            )
+            {
                 // Missing/Null/Empty scope values are treated equivalent to a compilation wide suppression.
                 targetScope = TargetScope.Module;
             }
@@ -120,7 +125,8 @@ namespace Microsoft.CodeAnalysis.Diagnostics
             out string? targetSymbolString,
             out IOperation? targetValueOperation,
             out ImmutableArray<ISymbol> resolvedSymbols
-        ) {
+        )
+        {
             targetHasDocCommentIdFormat = false;
             targetSymbolString = null;
             targetValueOperation = null;
@@ -139,7 +145,8 @@ namespace Microsoft.CodeAnalysis.Diagnostics
                     out targetSymbolString,
                     out targetValueOperation
                 )
-            ) {
+            )
+            {
                 targetSymbolString = null;
             }
 
@@ -164,14 +171,16 @@ namespace Microsoft.CodeAnalysis.Diagnostics
             string argumentName,
             out string? argumentValue,
             [NotNullWhen(returnValue: true)] out IOperation? argumentValueOperation
-        ) {
+        )
+        {
             foreach (var (name, value) in namedAttributeArguments)
             {
                 if (
                     name == argumentName
                     && value.ConstantValue.HasValue
                     && value.ConstantValue.Value is string stringValue
-                ) {
+                )
+                {
                     argumentValue = stringValue;
                     argumentValueOperation = value;
                     return true;

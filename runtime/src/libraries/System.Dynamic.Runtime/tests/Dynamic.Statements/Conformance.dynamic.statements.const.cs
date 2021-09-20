@@ -329,7 +329,8 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.statements.cnst.readonl
             string o7,
             dynamic o8,
             byte o9
-        ) {
+        )
+        {
             d0 = o0;
             d1 = o1;
             d2 = o2;
@@ -820,7 +821,8 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.statements.cnst.readonl
             string o7,
             object o8,
             sbyte o9
-        ) {
+        )
+        {
             d0 = o0;
             d1 = o1;
             d2 = o2;

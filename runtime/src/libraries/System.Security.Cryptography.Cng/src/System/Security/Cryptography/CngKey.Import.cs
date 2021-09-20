@@ -50,7 +50,8 @@ namespace System.Security.Cryptography
         internal static CngKey ImportEncryptedPkcs8(
             ReadOnlySpan<byte> keyBlob,
             ReadOnlySpan<char> password
-        ) {
+        )
+        {
             return ImportEncryptedPkcs8(
                 keyBlob,
                 password,
@@ -62,7 +63,8 @@ namespace System.Security.Cryptography
             ReadOnlySpan<byte> keyBlob,
             ReadOnlySpan<char> password,
             CngProvider provider
-        ) {
+        )
+        {
             SafeNCryptProviderHandle providerHandle = provider.OpenStorageProvider();
             SafeNCryptKeyHandle keyHandle;
 
@@ -117,7 +119,8 @@ namespace System.Security.Cryptography
             string? curveName,
             CngKeyBlobFormat format,
             CngProvider provider
-        ) {
+        )
+        {
             if (keyBlob == null)
                 throw new ArgumentNullException(nameof(keyBlob));
 
@@ -129,7 +132,8 @@ namespace System.Security.Cryptography
             string? curveName,
             CngKeyBlobFormat format,
             CngProvider provider
-        ) {
+        )
+        {
             if (format == null)
                 throw new ArgumentNullException(nameof(format));
             if (provider == null)

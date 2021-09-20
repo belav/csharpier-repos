@@ -67,7 +67,8 @@ namespace Microsoft.CodeAnalysis.Diagnostics
             int mappedStartColumn = 0,
             int mappedEndLine = 0,
             int mappedEndColumn = 0
-        ) {
+        )
+        {
             // If the original source location path is not available then mapped must be as well.
             Contract.ThrowIfFalse(originalFilePath != null || mappedFilePath == null);
 

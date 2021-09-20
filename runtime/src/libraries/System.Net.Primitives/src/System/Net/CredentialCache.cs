@@ -55,7 +55,8 @@ namespace System.Net
                         )
                     )
                 )
-            ) {
+            )
+            {
                 throw new ArgumentException(
                     SR.Format(SR.net_nodefaultcreds, authType),
                     nameof(authType)
@@ -85,7 +86,8 @@ namespace System.Net
             int port,
             string authenticationType,
             NetworkCredential credential
-        ) {
+        )
+        {
             if (host == null)
             {
                 throw new ArgumentNullException(nameof(host));
@@ -134,7 +136,8 @@ namespace System.Net
                         )
                     )
                 )
-            ) {
+            )
+            {
                 throw new ArgumentException(
                     SR.Format(SR.net_nodefaultcreds, authenticationType),
                     nameof(authenticationType)
@@ -592,7 +595,8 @@ namespace System.Net
                     AuthenticationType,
                     StringComparison.OrdinalIgnoreCase
                 )
-            ) {
+            )
+            {
                 return false;
             }
 
@@ -623,7 +627,8 @@ namespace System.Net
                 prefixUri.Scheme != uri.Scheme
                 || prefixUri.Host != uri.Host
                 || prefixUri.Port != uri.Port
-            ) {
+            )
+            {
                 return false;
             }
 

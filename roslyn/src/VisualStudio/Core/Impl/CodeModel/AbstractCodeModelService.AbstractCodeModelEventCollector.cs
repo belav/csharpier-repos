@@ -82,8 +82,9 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.CodeModel
                 TParent newNodeParent,
                 CodeModelEventType eventType,
                 CodeModelEventQueue eventQueue
-            ) where TNode : SyntaxNode
-              where TParent : SyntaxNode
+            )
+                where TNode : SyntaxNode
+                where TParent : SyntaxNode
             {
                 var oldCount = oldChildren.Count;
                 var newCount = newChildren.Count;
@@ -140,8 +141,9 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.CodeModel
                 SyntaxNode newNode,
                 TParent newNodeParent,
                 CodeModelEventQueue eventQueue
-            ) where TNode : SyntaxNode
-              where TParent : SyntaxNode
+            )
+                where TNode : SyntaxNode
+                where TParent : SyntaxNode
             {
                 var oldCount = oldChildren.Count;
                 var newCount = newChildren.Count;
@@ -183,8 +185,9 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.CodeModel
                 IReadOnlyList<TNode> newChildren,
                 TParent newNodeParent,
                 CodeModelEventQueue eventQueue
-            ) where TNode : SyntaxNode
-              where TParent : SyntaxNode
+            )
+                where TNode : SyntaxNode
+                where TParent : SyntaxNode
             {
                 Debug.Assert(oldChildren.Count == newChildren.Count);
 
@@ -239,8 +242,9 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.CodeModel
                 TParent newNodeParent,
                 int delta,
                 CodeModelEventQueue eventQueue
-            ) where TNode : SyntaxNode
-              where TParent : SyntaxNode
+            )
+                where TNode : SyntaxNode
+                where TParent : SyntaxNode
             {
                 Debug.Assert(oldChildren.Count + delta == newChildren.Count);
 
@@ -258,7 +262,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.CodeModel
                     oldIndex = 0, newIndex = 0;
                     newIndex < newChildren.Count;
                     oldIndex++, newIndex++
-                ) {
+                )
+                {
                     if (
                         oldIndex >= oldChildren.Count
                         || !compare(
@@ -267,7 +272,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.CodeModel
                             newNodeParent,
                             null
                         )
-                    ) {
+                    )
+                    {
                         firstAdded = newIndex;
                         newIndex += delta;
                         break;
@@ -306,8 +312,9 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.CodeModel
                 TParent newNodeParent,
                 int delta,
                 CodeModelEventQueue eventQueue
-            ) where TNode : SyntaxNode
-              where TParent : SyntaxNode
+            )
+                where TNode : SyntaxNode
+                where TParent : SyntaxNode
             {
                 Debug.Assert(oldChildren.Count - delta == newChildren.Count);
 
@@ -325,7 +332,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.CodeModel
                     oldIndex = 0, newIndex = 0;
                     oldIndex < oldChildren.Count;
                     oldIndex++, newIndex++
-                ) {
+                )
+                {
                     if (
                         newIndex >= newChildren.Count
                         || !compare(
@@ -334,7 +342,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.CodeModel
                             newNodeParent,
                             null
                         )
-                    ) {
+                    )
+                    {
                         firstRemoved = oldIndex;
                         oldIndex += delta;
                         break;

@@ -78,7 +78,8 @@ namespace System.Configuration
         public override SettingsPropertyValueCollection GetPropertyValues(
             SettingsContext context,
             SettingsPropertyCollection properties
-        ) {
+        )
+        {
             SettingsPropertyValueCollection values = new SettingsPropertyValueCollection();
             string sectionName = GetSectionName(context);
 
@@ -129,7 +130,8 @@ namespace System.Configuration
                 if (
                     isUserSetting
                     && !ConfigurationManagerInternalFactory.Instance.SupportsUserConfig
-                ) {
+                )
+                {
                     // We encountered a user setting, but the current configuration system does not support
                     // user settings.
                     throw new ConfigurationErrorsException(SR.UserSettingsNotSupported);
@@ -173,7 +175,8 @@ namespace System.Configuration
         public override void SetPropertyValues(
             SettingsContext context,
             SettingsPropertyValueCollection values
-        ) {
+        )
+        {
             string sectionName = GetSectionName(context);
             IDictionary roamingUserSettings = new Hashtable();
             IDictionary localUserSettings = new Hashtable();
@@ -281,7 +284,8 @@ namespace System.Configuration
         public SettingsPropertyValue GetPreviousVersion(
             SettingsContext context,
             SettingsProperty property
-        ) {
+        )
+        {
             bool isRoaming = IsRoamingSetting(property);
             string prevConfig = GetPreviousConfigFileName(isRoaming);
 
@@ -333,7 +337,8 @@ namespace System.Configuration
                         ConfigurationManagerInternalFactory.Instance.ExeProductVersion,
                         out currentVersion
                     )
-                ) {
+                )
+                {
                     return null;
                 }
 
@@ -352,7 +357,8 @@ namespace System.Configuration
                         if (
                             Version.TryParse(directory.Name, out tempVersion)
                             && tempVersion < currentVersion
-                        ) {
+                        )
+                        {
                             if (previousVersion == null)
                             {
                                 previousVersion = tempVersion;
@@ -423,7 +429,8 @@ namespace System.Configuration
             string sectionName,
             bool userScoped,
             SettingsPropertyCollection properties
-        ) {
+        )
+        {
             SettingsPropertyValueCollection values = new SettingsPropertyValueCollection();
             IDictionary settings = ClientSettingsStore.ReadSettingsFromFile(
                 configFileName,
@@ -560,7 +567,8 @@ namespace System.Configuration
             SettingsContext context,
             SettingsPropertyCollection properties,
             bool isRoaming
-        ) {
+        )
+        {
             string prevConfig = GetPreviousConfigFileName(isRoaming);
 
             if (!string.IsNullOrEmpty(prevConfig))
@@ -574,7 +582,8 @@ namespace System.Configuration
                             sp.Attributes[typeof(NoSettingsVersionUpgradeAttribute)]
                             is NoSettingsVersionUpgradeAttribute
                         )
-                    ) {
+                    )
+                    {
                         upgradeProperties.Add(sp);
                     }
                 }

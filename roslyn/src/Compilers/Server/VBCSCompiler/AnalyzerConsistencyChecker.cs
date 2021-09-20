@@ -30,7 +30,8 @@ namespace Microsoft.CodeAnalysis.CompilerServer
             IAnalyzerAssemblyLoader loader,
             ICompilerServerLogger? logger,
             [NotNullWhen(false)] out List<string>? errorMessages
-        ) {
+        )
+        {
             try
             {
                 logger?.Log("Begin Analyzer Consistency Check");
@@ -61,7 +62,8 @@ namespace Microsoft.CodeAnalysis.CompilerServer
             IAnalyzerAssemblyLoader loader,
             ICompilerServerLogger? logger,
             [NotNullWhen(false)] out List<string>? errorMessages
-        ) {
+        )
+        {
             errorMessages = null;
             var resolvedPaths = new List<string>();
 

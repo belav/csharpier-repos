@@ -43,7 +43,8 @@ namespace System.Web.Http.ValueProviders
 
         public override IEnumerable<ValueProviderFactory> GetValueProviderFactories(
             HttpConfiguration configuration
-        ) {
+        )
+        {
             // By default, just get all registered value provider factories
             return Array.ConvertAll(_valueProviderFactoryTypes, Instantiate);
         }

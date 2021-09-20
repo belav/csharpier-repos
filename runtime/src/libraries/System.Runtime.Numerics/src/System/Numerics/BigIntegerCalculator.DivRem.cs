@@ -88,7 +88,8 @@ namespace System.Numerics
                 uint* l = &localLeft[0],
                     r = &right[0],
                     b = &bits[0]
-            ) {
+            )
+            {
                 Divide(l, localLeft.Length, r, right.Length, b, bits.Length);
             }
 
@@ -125,7 +126,8 @@ namespace System.Numerics
                 uint* l = &localLeft[0],
                     r = &right[0],
                     b = &bits[0]
-            ) {
+            )
+            {
                 Divide(l, localLeft.Length, r, right.Length, b, bits.Length);
             }
 
@@ -147,7 +149,8 @@ namespace System.Numerics
             fixed (
                 uint* l = &localLeft[0],
                     r = &right[0]
-            ) {
+            )
+            {
                 Divide(l, localLeft.Length, r, right.Length, null, 0);
             }
 
@@ -161,7 +164,8 @@ namespace System.Numerics
             int rightLength,
             uint* bits,
             int bitsLength
-        ) {
+        )
+        {
             Debug.Assert(leftLength >= 1);
             Debug.Assert(rightLength >= 1);
             Debug.Assert(leftLength >= rightLength);
@@ -252,7 +256,8 @@ namespace System.Numerics
             int leftLength,
             uint* right,
             int rightLength
-        ) {
+        )
+        {
             Debug.Assert(leftLength >= 0);
             Debug.Assert(rightLength >= 0);
             Debug.Assert(leftLength >= rightLength);
@@ -277,7 +282,8 @@ namespace System.Numerics
             uint* right,
             int rightLength,
             ulong q
-        ) {
+        )
+        {
             Debug.Assert(leftLength >= 0);
             Debug.Assert(rightLength >= 0);
             Debug.Assert(leftLength >= rightLength);
@@ -307,7 +313,8 @@ namespace System.Numerics
             uint valLo,
             uint divHi,
             uint divLo
-        ) {
+        )
+        {
             Debug.Assert(q <= 0xFFFFFFFF);
 
             // We multiply the two most significant limbs of the divisor

@@ -35,7 +35,8 @@ namespace Microsoft.EntityFrameworkCore.Internal
             Expression<Func<TOuter, TKey>> outerKeySelector,
             Expression<Func<TInner, TKey>> innerKeySelector,
             Expression<Func<TOuter, TInner, TResult>> resultSelector
-        ) {
+        )
+        {
             throw new NotSupportedException();
         }
     }

@@ -169,7 +169,8 @@ namespace System.Security.Cryptography
             ref ECParameters ecParams,
             byte[] ecBlob,
             bool includePrivateParameters
-        ) {
+        )
+        {
             // We now have a buffer laid out as follows:
             //     BCRYPT_ECCKEY_BLOB   header
             //     byte[cbKey]          Q.X
@@ -212,7 +213,8 @@ namespace System.Security.Cryptography
             ref ECParameters ecParams,
             byte[] ecBlob,
             bool includePrivateParameters
-        ) {
+        )
+        {
             // We now have a buffer laid out as follows:
             //     BCRYPT_ECCFULLKEY_BLOB       header
             //     byte[cbFieldLength]          P
@@ -372,7 +374,8 @@ namespace System.Security.Cryptography
         private static void CheckMagicValueOfKey(
             KeyBlobMagicNumber magic,
             bool includePrivateParameters
-        ) {
+        )
+        {
             if (includePrivateParameters)
             {
                 if (!IsMagicValueOfKeyPrivate(magic))
@@ -495,7 +498,8 @@ namespace System.Security.Cryptography
         /// </summary>
         private static Interop.BCrypt.ECC_CURVE_TYPE_ENUM ConvertToCurveTypeEnum(
             ECCurve.ECCurveType value
-        ) {
+        )
+        {
             // Currently values 1-3 are interchangeable
             Debug.Assert(
                 value == ECCurve.ECCurveType.Characteristic2
@@ -510,7 +514,8 @@ namespace System.Security.Cryptography
         /// </summary>
         private static ECCurve.ECCurveType ConvertToCurveTypeEnum(
             Interop.BCrypt.ECC_CURVE_TYPE_ENUM value
-        ) {
+        )
+        {
             // Currently values 1-3 are interchangeable
             ECCurve.ECCurveType curveType = (ECCurve.ECCurveType)value;
             Debug.Assert(
@@ -526,7 +531,8 @@ namespace System.Security.Cryptography
             ReadOnlySpan<byte> keyBlob,
             string curveName,
             SafeNCryptProviderHandle provider
-        ) {
+        )
+        {
             ErrorCode errorCode;
             SafeNCryptKeyHandle keyHandle;
 

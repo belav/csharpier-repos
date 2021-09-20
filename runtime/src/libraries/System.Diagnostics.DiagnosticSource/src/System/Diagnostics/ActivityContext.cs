@@ -29,7 +29,8 @@ namespace System.Diagnostics
             ActivityTraceFlags traceFlags,
             string? traceState = null,
             bool isRemote = false
-        ) {
+        )
+        {
             TraceId = traceId;
             SpanId = spanId;
             TraceFlags = traceFlags;
@@ -75,7 +76,8 @@ namespace System.Diagnostics
             string traceParent,
             string? traceState,
             out ActivityContext context
-        ) {
+        )
+        {
             if (traceParent == null)
             {
                 throw new ArgumentNullException(nameof(traceParent));

@@ -172,7 +172,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Syntax.InternalSyntax
                         var node = cursor.CurrentNodeOrToken;
                         node.Kind() != SyntaxKind.None && !SyntaxFacts.IsAnyToken(node.Kind());
                         node = cursor.CurrentNodeOrToken
-                    ) {
+                    )
+                    {
                         cursor = cursor.MoveToFirstChild();
                     }
                 }

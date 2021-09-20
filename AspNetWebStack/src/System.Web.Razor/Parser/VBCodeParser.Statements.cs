@@ -172,7 +172,8 @@ namespace System.Web.Razor.Parser
                             SyntaxConstants.VB.OffKeyword,
                             StringComparison.OrdinalIgnoreCase
                         )
-                    ) {
+                    )
+                    {
                         AcceptAndMoveNext();
                         boolVal = false;
                     }
@@ -214,7 +215,8 @@ namespace System.Web.Razor.Parser
                         SyntaxConstants.VB.StrictKeyword,
                         StringComparison.OrdinalIgnoreCase
                     )
-                ) {
+                )
+                {
                     Span.CodeGenerator = SetVBOptionCodeGenerator.Strict(boolVal);
                 }
                 else if (
@@ -223,7 +225,8 @@ namespace System.Web.Razor.Parser
                         SyntaxConstants.VB.ExplicitKeyword,
                         StringComparison.OrdinalIgnoreCase
                     )
-                ) {
+                )
+                {
                     Span.CodeGenerator = SetVBOptionCodeGenerator.Explicit(boolVal);
                 }
                 else
@@ -276,7 +279,8 @@ namespace System.Web.Razor.Parser
             VBKeyword keyword,
             bool supportsExit,
             bool supportsContinue
-        ) {
+        )
+        {
             return EndTerminatedStatement(
                 keyword,
                 supportsExit,
@@ -290,12 +294,14 @@ namespace System.Web.Razor.Parser
             bool supportsExit,
             bool supportsContinue,
             string blockName
-        ) {
+        )
+        {
             return () =>
             {
                 using (
                     PushSpanConfig(StatementBlockSpanConfiguration(new StatementCodeGenerator()))
-                ) {
+                )
+                {
                     SourceLocation blockStart = CurrentLocation;
                     Assert(keyword);
                     AcceptAndMoveNext();
@@ -308,7 +314,8 @@ namespace System.Web.Razor.Parser
                                 allowTemplatesAndComments: true,
                                 allowTransitions: true
                             )
-                        ) {
+                        )
+                        {
                             HandleEmbeddedTransition(lastWhitespace);
                         }
                         else
@@ -318,7 +325,8 @@ namespace System.Web.Razor.Parser
                             if (
                                 (supportsExit && At(VBKeyword.Exit))
                                 || (supportsContinue && At(VBKeyword.Continue))
-                            ) {
+                            )
+                            {
                                 HandleExitOrContinue(keyword);
                             }
                             else if (At(VBKeyword.End))
@@ -365,12 +373,14 @@ namespace System.Web.Razor.Parser
             VBKeyword terminator,
             bool supportsExit,
             bool supportsContinue
-        ) {
+        )
+        {
             return () =>
             {
                 using (
                     PushSpanConfig(StatementBlockSpanConfiguration(new StatementCodeGenerator()))
-                ) {
+                )
+                {
                     SourceLocation blockStart = CurrentLocation;
                     Assert(start);
                     AcceptAndMoveNext();
@@ -382,7 +392,8 @@ namespace System.Web.Razor.Parser
                                 allowTemplatesAndComments: true,
                                 allowTransitions: true
                             )
-                        ) {
+                        )
+                        {
                             HandleEmbeddedTransition(lastWhitespace);
                         }
                         else
@@ -391,7 +402,8 @@ namespace System.Web.Razor.Parser
                             if (
                                 (supportsExit && At(VBKeyword.Exit))
                                 || (supportsContinue && At(VBKeyword.Continue))
-                            ) {
+                            )
+                            {
                                 HandleExitOrContinue(start);
                             }
                             else if (At(start))

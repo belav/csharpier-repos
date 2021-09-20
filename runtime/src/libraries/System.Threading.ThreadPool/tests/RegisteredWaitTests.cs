@@ -696,7 +696,8 @@ namespace System.Threading.ThreadPools.Tests
             void SetAndUnregister(
                 AutoResetEvent waitEvent,
                 RegisteredWaitHandle registeredWaitHandle
-            ) {
+            )
+            {
                 waitEvent.Set();
                 handlePendingRemoval.CheckedWait();
                 Thread.Sleep(ExpectedTimeoutMilliseconds); // wait for removal

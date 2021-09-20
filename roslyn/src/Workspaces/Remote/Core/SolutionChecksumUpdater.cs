@@ -31,14 +31,16 @@ namespace Microsoft.CodeAnalysis.Remote
             Workspace workspace,
             IAsynchronousOperationListenerProvider listenerProvider,
             CancellationToken shutdownToken
-        ) : base(
-            listenerProvider.GetListener(FeatureAttribute.SolutionChecksumUpdater),
-            workspace.Services.GetService<IGlobalOperationNotificationService>(),
-            workspace.Options.GetOption(
-                RemoteHostOptions.SolutionChecksumMonitorBackOffTimeSpanInMS
-            ),
-            shutdownToken
-        ) {
+        )
+            : base(
+                listenerProvider.GetListener(FeatureAttribute.SolutionChecksumUpdater),
+                workspace.Services.GetService<IGlobalOperationNotificationService>(),
+                workspace.Options.GetOption(
+                    RemoteHostOptions.SolutionChecksumMonitorBackOffTimeSpanInMS
+                ),
+                shutdownToken
+            )
+        {
             _workspace = workspace;
             _textChangeQueue = new TaskQueue(Listener, TaskScheduler.Default);
 
@@ -155,7 +157,8 @@ namespace Microsoft.CodeAnalysis.Remote
                     FunctionId.SolutionChecksumUpdater_SynchronizePrimaryWorkspace,
                     cancellationToken
                 )
-            ) {
+            )
+            {
                 var checksum = await solution.State.GetChecksumAsync(cancellationToken)
                     .ConfigureAwait(false);
 
@@ -204,7 +207,8 @@ namespace Microsoft.CodeAnalysis.Remote
             if (
                 (oldDocument.TryGetText(out var oldText) == false)
                 || (newDocument.TryGetText(out var newText) == false)
-            ) {
+            )
+            {
                 // we only support case where text already exist
                 return;
             }

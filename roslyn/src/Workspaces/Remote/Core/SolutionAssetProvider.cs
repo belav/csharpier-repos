@@ -48,7 +48,8 @@ namespace Microsoft.CodeAnalysis.Remote
             int scopeId,
             Checksum[] checksums,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var assetStorage =
                 _services.GetRequiredService<ISolutionAssetStorageProvider>().AssetStorage;
             var serializer = _services.GetRequiredService<ISerializerService>();
@@ -143,7 +144,8 @@ namespace Microsoft.CodeAnalysis.Remote
                     if (
                         cancellationToken.IsCancellationRequested
                         && exception is null or OperationCanceledException
-                    ) {
+                    )
+                    {
                         // Throw rather than close the pipe writer. The caller will coordinate cancellation and closing
                         // of the reader and writer together.
                         cancellationToken.ThrowIfCancellationRequested();

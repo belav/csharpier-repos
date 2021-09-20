@@ -15,7 +15,8 @@ namespace System.Threading
             Span<IntPtr> waitHandles,
             bool waitAll,
             int millisecondsTimeout
-        ) {
+        )
+        {
             fixed (IntPtr* pWaitHandles = &MemoryMarshal.GetReference(waitHandles))
             {
                 return WaitMultipleIgnoringSyncContext(
@@ -39,7 +40,8 @@ namespace System.Threading
             IntPtr waitHandleToSignal,
             IntPtr waitHandleToWaitOn,
             int millisecondsTimeout
-        ) {
+        )
+        {
             int ret = SignalAndWaitNative(
                 waitHandleToSignal,
                 waitHandleToWaitOn,

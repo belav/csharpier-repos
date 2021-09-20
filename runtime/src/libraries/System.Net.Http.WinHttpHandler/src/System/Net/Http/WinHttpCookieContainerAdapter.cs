@@ -36,7 +36,8 @@ namespace System.Net.Http
                     ref index,
                     out cookieHeader
                 )
-            ) {
+            )
+            {
                 try
                 {
                     cookieContainer.SetCookies(request.RequestUri, cookieHeader);
@@ -71,7 +72,8 @@ namespace System.Net.Http
                     (uint)CookieHeaderNameWithColon.Length,
                     Interop.WinHttp.WINHTTP_ADDREQ_FLAG_REPLACE
                 )
-            ) {
+            )
+            {
                 int lastError = Marshal.GetLastWin32Error();
                 if (lastError != Interop.WinHttp.ERROR_WINHTTP_HEADER_NOT_FOUND)
                 {
@@ -94,7 +96,8 @@ namespace System.Net.Http
                         (uint)cookieHeader.Length,
                         Interop.WinHttp.WINHTTP_ADDREQ_FLAG_ADD
                     )
-                ) {
+                )
+                {
                     WinHttpException.ThrowExceptionUsingLastError(
                         nameof(Interop.WinHttp.WinHttpAddRequestHeaders)
                     );

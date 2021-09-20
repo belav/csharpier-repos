@@ -95,7 +95,8 @@ namespace System
             Array destinationArray,
             int destinationIndex,
             int length
-        ) {
+        )
+        {
             Copy(sourceArray, sourceIndex, destinationArray, destinationIndex, length, true);
         }
 
@@ -122,7 +123,8 @@ namespace System
             Array destinationArray,
             int destinationIndex,
             int length
-        ) {
+        )
+        {
             Copy(sourceArray, sourceIndex, destinationArray, destinationIndex, length, false);
         }
 
@@ -133,7 +135,8 @@ namespace System
             int destinationIndex,
             int length,
             bool reliable
-        ) {
+        )
+        {
             if (sourceArray == null)
                 throw new ArgumentNullException(nameof(sourceArray));
 
@@ -206,7 +209,8 @@ namespace System
                         && src_type.IsPrimitive
                         && CanChangePrimitive(ref dst_type, ref src_type, true)
                     )
-                ) {
+                )
+                {
                     throw new ArrayTypeMismatchException(SR.ArrayTypeMismatch_CantAssignType);
                 }
             }
@@ -370,7 +374,8 @@ namespace System
             int length1,
             int length2,
             int length3
-        ) {
+        )
+        {
             if (elementType is null)
                 ThrowHelper.ThrowArgumentNullException(ExceptionArgument.elementType);
             if (length1 < 0)
@@ -443,7 +448,8 @@ namespace System
             Type elementType,
             int[] lengths,
             int[] lowerBounds
-        ) {
+        )
+        {
             if (elementType == null)
                 ThrowHelper.ThrowArgumentNullException(ExceptionArgument.elementType);
             if (lengths == null)

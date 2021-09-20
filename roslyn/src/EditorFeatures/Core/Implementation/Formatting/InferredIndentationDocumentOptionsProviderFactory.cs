@@ -62,7 +62,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.Formatting
                     Workspace workspace,
                     DocumentId id,
                     IIndentationManagerService indentationManagerService
-                ) {
+                )
+                {
                     _workspace = workspace;
                     _documentId = id;
                     _indentationManagerService = indentationManagerService;
@@ -102,7 +103,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.Formatting
                     ITextBuffer textBuffer,
                     OptionKey option,
                     out object? value
-                ) {
+                )
+                {
                     if (option.Option == FormattingOptions.UseTabs)
                     {
                         value = !_indentationManagerService.UseSpacesForWhitespace(

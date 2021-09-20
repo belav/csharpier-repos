@@ -188,7 +188,8 @@ namespace Castle.DynamicProxy
             Type interfaceToProxy,
             object target,
             params IInterceptor[] interceptors
-        ) {
+        )
+        {
             return CreateInterfaceProxyWithTarget(
                 interfaceToProxy,
                 target,
@@ -230,7 +231,8 @@ namespace Castle.DynamicProxy
             object target,
             ProxyGenerationOptions options,
             params IInterceptor[] interceptors
-        ) {
+        )
+        {
             return CreateInterfaceProxyWithTarget(
                 interfaceToProxy,
                 null,
@@ -275,7 +277,8 @@ namespace Castle.DynamicProxy
             Type[] additionalInterfacesToProxy,
             object target,
             params IInterceptor[] interceptors
-        ) {
+        )
+        {
             return CreateInterfaceProxyWithTarget(
                 interfaceToProxy,
                 additionalInterfacesToProxy,
@@ -322,7 +325,8 @@ namespace Castle.DynamicProxy
             object target,
             ProxyGenerationOptions options,
             params IInterceptor[] interceptors
-        ) {
+        )
+        {
             if (interfaceToProxy == null)
             {
                 throw new ArgumentNullException(nameof(interfaceToProxy));
@@ -374,7 +378,8 @@ namespace Castle.DynamicProxy
             object target,
             IInterceptor[] interceptors,
             ProxyGenerationOptions options
-        ) {
+        )
+        {
             // create constructor arguments (initialized with mixin implementations, interceptors and target type constructor arguments)
             var arguments = new List<object>(options.MixinData.Mixins) { interceptors, target };
             if (options.Selector != null)
@@ -415,7 +420,8 @@ namespace Castle.DynamicProxy
             Type interfaceToProxy,
             object target,
             params IInterceptor[] interceptors
-        ) {
+        )
+        {
             return CreateInterfaceProxyWithTargetInterface(
                 interfaceToProxy,
                 target,
@@ -533,7 +539,8 @@ namespace Castle.DynamicProxy
             Type[] additionalInterfacesToProxy,
             object target,
             params IInterceptor[] interceptors
-        ) {
+        )
+        {
             return CreateInterfaceProxyWithTargetInterface(
                 interfaceToProxy,
                 additionalInterfacesToProxy,
@@ -576,7 +583,8 @@ namespace Castle.DynamicProxy
             object target,
             ProxyGenerationOptions options,
             params IInterceptor[] interceptors
-        ) {
+        )
+        {
             return CreateInterfaceProxyWithTargetInterface(
                 interfaceToProxy,
                 null,
@@ -616,7 +624,8 @@ namespace Castle.DynamicProxy
             object target,
             ProxyGenerationOptions options,
             params IInterceptor[] interceptors
-        ) {
+        )
+        {
             //TODO: add <example> to xml comments to show how to use IChangeProxyTarget
 
             if (interfaceToProxy == null)
@@ -803,7 +812,8 @@ namespace Castle.DynamicProxy
         public object CreateInterfaceProxyWithoutTarget(
             Type interfaceToProxy,
             IInterceptor interceptor
-        ) {
+        )
+        {
             return CreateInterfaceProxyWithoutTarget(
                 interfaceToProxy,
                 Type.EmptyTypes,
@@ -836,7 +846,8 @@ namespace Castle.DynamicProxy
         public object CreateInterfaceProxyWithoutTarget(
             Type interfaceToProxy,
             params IInterceptor[] interceptors
-        ) {
+        )
+        {
             return CreateInterfaceProxyWithoutTarget(
                 interfaceToProxy,
                 Type.EmptyTypes,
@@ -873,7 +884,8 @@ namespace Castle.DynamicProxy
             Type interfaceToProxy,
             Type[] additionalInterfacesToProxy,
             params IInterceptor[] interceptors
-        ) {
+        )
+        {
             return CreateInterfaceProxyWithoutTarget(
                 interfaceToProxy,
                 additionalInterfacesToProxy,
@@ -906,7 +918,8 @@ namespace Castle.DynamicProxy
             Type interfaceToProxy,
             ProxyGenerationOptions options,
             params IInterceptor[] interceptors
-        ) {
+        )
+        {
             return CreateInterfaceProxyWithoutTarget(
                 interfaceToProxy,
                 Type.EmptyTypes,
@@ -945,7 +958,8 @@ namespace Castle.DynamicProxy
             Type[] additionalInterfacesToProxy,
             ProxyGenerationOptions options,
             params IInterceptor[] interceptors
-        ) {
+        )
+        {
             if (interfaceToProxy == null)
             {
                 throw new ArgumentNullException(nameof(interfaceToProxy));
@@ -1073,7 +1087,8 @@ namespace Castle.DynamicProxy
             Type[] additionalInterfacesToProxy,
             object target,
             params IInterceptor[] interceptors
-        ) {
+        )
+        {
             return CreateClassProxyWithTarget(
                 classToProxy,
                 additionalInterfacesToProxy,
@@ -1113,7 +1128,8 @@ namespace Castle.DynamicProxy
             ProxyGenerationOptions options,
             object[] constructorArguments,
             params IInterceptor[] interceptors
-        ) {
+        )
+        {
             return CreateClassProxyWithTarget(
                 classToProxy,
                 Type.EmptyTypes,
@@ -1151,7 +1167,8 @@ namespace Castle.DynamicProxy
             object target,
             object[] constructorArguments,
             params IInterceptor[] interceptors
-        ) {
+        )
+        {
             return CreateClassProxyWithTarget(
                 classToProxy,
                 Type.EmptyTypes,
@@ -1187,7 +1204,8 @@ namespace Castle.DynamicProxy
             Type classToProxy,
             object target,
             params IInterceptor[] interceptors
-        ) {
+        )
+        {
             return CreateClassProxyWithTarget(
                 classToProxy,
                 Type.EmptyTypes,
@@ -1225,7 +1243,8 @@ namespace Castle.DynamicProxy
             object target,
             ProxyGenerationOptions options,
             params IInterceptor[] interceptors
-        ) {
+        )
+        {
             return CreateClassProxyWithTarget(
                 classToProxy,
                 Type.EmptyTypes,
@@ -1266,7 +1285,8 @@ namespace Castle.DynamicProxy
             object target,
             ProxyGenerationOptions options,
             params IInterceptor[] interceptors
-        ) {
+        )
+        {
             return CreateClassProxyWithTarget(
                 classToProxy,
                 additionalInterfacesToProxy,
@@ -1310,7 +1330,8 @@ namespace Castle.DynamicProxy
             ProxyGenerationOptions options,
             object[] constructorArguments,
             params IInterceptor[] interceptors
-        ) {
+        )
+        {
             if (classToProxy == null)
             {
                 throw new ArgumentNullException(nameof(classToProxy));
@@ -1428,7 +1449,8 @@ namespace Castle.DynamicProxy
             Type classToProxy,
             Type[] additionalInterfacesToProxy,
             params IInterceptor[] interceptors
-        ) {
+        )
+        {
             return CreateClassProxy(
                 classToProxy,
                 additionalInterfacesToProxy,
@@ -1464,7 +1486,8 @@ namespace Castle.DynamicProxy
             ProxyGenerationOptions options,
             object[] constructorArguments,
             params IInterceptor[] interceptors
-        ) {
+        )
+        {
             return CreateClassProxy(
                 classToProxy,
                 null,
@@ -1499,7 +1522,8 @@ namespace Castle.DynamicProxy
             Type classToProxy,
             object[] constructorArguments,
             params IInterceptor[] interceptors
-        ) {
+        )
+        {
             return CreateClassProxy(
                 classToProxy,
                 null,
@@ -1565,7 +1589,8 @@ namespace Castle.DynamicProxy
             Type classToProxy,
             ProxyGenerationOptions options,
             params IInterceptor[] interceptors
-        ) {
+        )
+        {
             return CreateClassProxy(classToProxy, null, options, interceptors);
         }
 
@@ -1597,7 +1622,8 @@ namespace Castle.DynamicProxy
             Type[] additionalInterfacesToProxy,
             ProxyGenerationOptions options,
             params IInterceptor[] interceptors
-        ) {
+        )
+        {
             return CreateClassProxy(
                 classToProxy,
                 additionalInterfacesToProxy,
@@ -1638,7 +1664,8 @@ namespace Castle.DynamicProxy
             ProxyGenerationOptions options,
             object[] constructorArguments,
             params IInterceptor[] interceptors
-        ) {
+        )
+        {
             if (classToProxy == null)
             {
                 throw new ArgumentNullException(nameof(classToProxy));
@@ -1683,7 +1710,8 @@ namespace Castle.DynamicProxy
             List<object> proxyArguments,
             Type classToProxy,
             object[] constructorArguments
-        ) {
+        )
+        {
             try
             {
                 return Activator.CreateInstance(proxyType, proxyArguments.ToArray());
@@ -1744,7 +1772,8 @@ namespace Castle.DynamicProxy
             object target,
             ProxyGenerationOptions options,
             IInterceptor[] interceptors
-        ) {
+        )
+        {
             var arguments = new List<object>();
             arguments.Add(target);
             arguments.AddRange(options.MixinData.Mixins);
@@ -1759,7 +1788,8 @@ namespace Castle.DynamicProxy
         protected List<object> BuildArgumentListForClassProxy(
             ProxyGenerationOptions options,
             IInterceptor[] interceptors
-        ) {
+        )
+        {
             var arguments = new List<object>(options.MixinData.Mixins) { interceptors };
             if (options.Selector != null)
             {
@@ -1780,7 +1810,8 @@ namespace Castle.DynamicProxy
             Type classToProxy,
             Type[] additionalInterfacesToProxy,
             ProxyGenerationOptions options
-        ) {
+        )
+        {
             // create proxy
             return ProxyBuilder.CreateClassProxyType(
                 classToProxy,
@@ -1804,7 +1835,8 @@ namespace Castle.DynamicProxy
             Type[] additionalInterfacesToProxy,
             Type targetType,
             ProxyGenerationOptions options
-        ) {
+        )
+        {
             // create proxy
             return ProxyBuilder.CreateInterfaceProxyTypeWithTarget(
                 interfaceToProxy,
@@ -1827,7 +1859,8 @@ namespace Castle.DynamicProxy
             Type interfaceToProxy,
             Type[] additionalInterfacesToProxy,
             ProxyGenerationOptions options
-        ) {
+        )
+        {
             // create proxy
             return ProxyBuilder.CreateInterfaceProxyTypeWithTargetInterface(
                 interfaceToProxy,
@@ -1848,7 +1881,8 @@ namespace Castle.DynamicProxy
             Type interfaceToProxy,
             Type[] additionalInterfacesToProxy,
             ProxyGenerationOptions options
-        ) {
+        )
+        {
             // create proxy
             return ProxyBuilder.CreateInterfaceProxyTypeWithoutTarget(
                 interfaceToProxy,
@@ -1861,7 +1895,8 @@ namespace Castle.DynamicProxy
             Type classToProxy,
             Type[] additionalInterfacesToProxy,
             ProxyGenerationOptions options
-        ) {
+        )
+        {
             // create proxy
             return ProxyBuilder.CreateClassProxyTypeWithTarget(
                 classToProxy,

@@ -56,7 +56,8 @@ namespace Microsoft.AspNetCore.Authentication.Negotiate
             bool supportsAuth = false,
             bool isEnabled = false,
             string authScheme = null
-        ) {
+        )
+        {
             var builder = new HostBuilder().ConfigureServices(
                     services =>
                     {

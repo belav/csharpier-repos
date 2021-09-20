@@ -81,7 +81,8 @@ namespace Microsoft.AspNetCore.Mvc.ViewComponents
         {
             if (
                 componentType.Name.EndsWith(ViewComponentSuffix, StringComparison.OrdinalIgnoreCase)
-            ) {
+            )
+            {
                 return componentType.Name.Substring(
                     0,
                     componentType.Name.Length - ViewComponentSuffix.Length
@@ -113,7 +114,8 @@ namespace Microsoft.AspNetCore.Mvc.ViewComponents
                 || typeInfo.IsAbstract
                 || typeInfo.ContainsGenericParameters
                 || typeInfo.IsDefined(typeof(NonViewComponentAttribute))
-            ) {
+            )
+            {
                 return false;
             }
 

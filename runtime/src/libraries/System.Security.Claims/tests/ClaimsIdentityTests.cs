@@ -575,11 +575,8 @@ namespace System.Security.Claims
         [Serializable]
         private sealed class CustomClaimsIdentity : ClaimsIdentity, ISerializable
         {
-            public CustomClaimsIdentity(
-                string authenticationType,
-                string nameType,
-                string roleType
-            ) : base(authenticationType, nameType, roleType) { }
+            public CustomClaimsIdentity(string authenticationType, string nameType, string roleType)
+                : base(authenticationType, nameType, roleType) { }
 
             public CustomClaimsIdentity(SerializationInfo info, StreamingContext context)
                 : base(info, context) { }

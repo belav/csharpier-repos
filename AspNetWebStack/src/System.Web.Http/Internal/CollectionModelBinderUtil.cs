@@ -17,7 +17,8 @@ namespace System.Web.Http.Internal
             ModelBindingContext bindingContext,
             IEnumerable<TElement> incomingElements,
             Func<ICollection<TElement>> creator
-        ) {
+        )
+        {
             ICollection<TElement> collection = bindingContext.Model as ICollection<TElement>;
             if (collection == null || collection.IsReadOnly)
             {
@@ -36,7 +37,8 @@ namespace System.Web.Http.Internal
             ModelBindingContext bindingContext,
             IEnumerable<KeyValuePair<TKey, TValue>> incomingElements,
             Func<IDictionary<TKey, TValue>> creator
-        ) {
+        )
+        {
             IDictionary<TKey, TValue> dictionary =
                 bindingContext.Model as IDictionary<TKey, TValue>;
             if (dictionary == null || dictionary.IsReadOnly)
@@ -72,7 +74,8 @@ namespace System.Web.Http.Internal
             Type newInstanceType,
             Type openBinderType,
             Type modelType
-        ) {
+        )
+        {
             Contract.Assert(supportedInterfaceType != null);
             Contract.Assert(openBinderType != null);
             Contract.Assert(modelType != null);
@@ -122,7 +125,8 @@ namespace System.Web.Http.Internal
         )]
         internal static IEnumerable<string> GetIndexNamesFromValueProviderResult(
             ValueProviderResult valueProviderResultIndex
-        ) {
+        )
+        {
             IEnumerable<string> indexNames = null;
             if (valueProviderResultIndex != null)
             {

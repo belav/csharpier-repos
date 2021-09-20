@@ -133,7 +133,8 @@ namespace JIT.HardwareIntrinsics.Arm
                     || (alignment * 2) < sizeOfinArray1
                     || (alignment * 2) < sizeOfinArray2
                     || (alignment * 2) < sizeOfoutArray
-                ) {
+                )
+                {
                     throw new ArgumentException("Invalid value of alignment");
                 }
 
@@ -212,7 +213,8 @@ namespace JIT.HardwareIntrinsics.Arm
 
             public void RunStructFldScenario(
                 SimpleBinaryOpTest__MaxScalar_Vector64_Single testClass
-            ) {
+            )
+            {
                 var result = AdvSimd.Arm64.MaxScalar(_fld1, _fld2);
 
                 Unsafe.Write(testClass._dataTable.outArrayPtr, result);
@@ -221,7 +223,8 @@ namespace JIT.HardwareIntrinsics.Arm
 
             public void RunStructFldScenario_Load(
                 SimpleBinaryOpTest__MaxScalar_Vector64_Single testClass
-            ) {
+            )
+            {
                 fixed (Vector64<Single>* pFld1 = &_fld1)fixed (Vector64<Single>* pFld2 = &_fld2)
                 {
                     var result = AdvSimd.Arm64.MaxScalar(
@@ -404,7 +407,8 @@ namespace JIT.HardwareIntrinsics.Arm
 
             fixed (Vector64<Single>* pClsVar1 = &_clsVar1)fixed (
                 Vector64<Single>* pClsVar2 = &_clsVar2
-            ) {
+            )
+            {
                 var result = AdvSimd.Arm64.MaxScalar(
                     AdvSimd.LoadVector64((Single*)(pClsVar1)),
                     AdvSimd.LoadVector64((Single*)(pClsVar2))
@@ -458,7 +462,8 @@ namespace JIT.HardwareIntrinsics.Arm
 
             fixed (Vector64<Single>* pFld1 = &test._fld1)fixed (
                 Vector64<Single>* pFld2 = &test._fld2
-            ) {
+            )
+            {
                 var result = AdvSimd.Arm64.MaxScalar(
                     AdvSimd.LoadVector64((Single*)(pFld1)),
                     AdvSimd.LoadVector64((Single*)(pFld2))
@@ -562,7 +567,8 @@ namespace JIT.HardwareIntrinsics.Arm
             Vector64<Single> op2,
             void* result,
             [CallerMemberName] string method = ""
-        ) {
+        )
+        {
             Single[] inArray1 = new Single[Op1ElementCount];
             Single[] inArray2 = new Single[Op2ElementCount];
             Single[] outArray = new Single[RetElementCount];
@@ -583,7 +589,8 @@ namespace JIT.HardwareIntrinsics.Arm
             void* op2,
             void* result,
             [CallerMemberName] string method = ""
-        ) {
+        )
+        {
             Single[] inArray1 = new Single[Op1ElementCount];
             Single[] inArray2 = new Single[Op2ElementCount];
             Single[] outArray = new Single[RetElementCount];
@@ -612,13 +619,15 @@ namespace JIT.HardwareIntrinsics.Arm
             Single[] right,
             Single[] result,
             [CallerMemberName] string method = ""
-        ) {
+        )
+        {
             bool succeeded = true;
 
             if (
                 BitConverter.SingleToInt32Bits(Helpers.Max(left[0], right[0]))
                 != BitConverter.SingleToInt32Bits(result[0])
-            ) {
+            )
+            {
                 succeeded = false;
             }
             else

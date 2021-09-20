@@ -321,7 +321,8 @@ namespace System.Web.Razor.Test.Parser.VB
             string startKeyword,
             string endKeyword1,
             string endKeyword2
-        ) {
+        )
+        {
             string code =
                 startKeyword
                 + Environment.NewLine
@@ -362,7 +363,8 @@ namespace System.Web.Razor.Test.Parser.VB
             string startKeyword,
             string wrongEndKeyword,
             string endKeyword
-        ) {
+        )
+        {
             string code =
                 startKeyword
                 + Environment.NewLine
@@ -426,7 +428,8 @@ namespace System.Web.Razor.Test.Parser.VB
             string keyword,
             string endSequence,
             bool acceptToEndOfLine
-        ) {
+        )
+        {
             string code =
                 keyword
                 + Environment.NewLine
@@ -524,7 +527,8 @@ namespace System.Web.Razor.Test.Parser.VB
             string exitKeyword,
             string endKeyword,
             bool acceptToEndOfLine
-        ) {
+        )
+        {
             string code =
                 startKeyword
                 + Environment.NewLine

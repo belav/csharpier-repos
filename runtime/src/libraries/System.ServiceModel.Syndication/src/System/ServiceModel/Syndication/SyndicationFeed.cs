@@ -64,7 +64,8 @@ namespace System.ServiceModel.Syndication
             string id,
             DateTimeOffset lastUpdatedTime,
             IEnumerable<SyndicationItem> items
-        ) {
+        )
+        {
             if (title != null)
             {
                 Title = new TextSyndicationContent(title);
@@ -220,7 +221,8 @@ namespace System.ServiceModel.Syndication
                         || value.Value.Seconds != 0
                         || value.Value.TotalMinutes < 0
                     )
-                ) {
+                )
+                {
                     throw new ArgumentOutOfRangeException(
                         nameof(value),
                         value.Value,
@@ -278,7 +280,8 @@ namespace System.ServiceModel.Syndication
 
         private SyndicationLink TryReadDocumentationFromExtension(
             SyndicationElementExtensionCollection elementExtensions
-        ) {
+        )
+        {
             SyndicationElementExtension documentationElement = elementExtensions.FirstOrDefault(
                 e =>
                     e.OuterName == Rss20Constants.DocumentationTag
@@ -302,7 +305,8 @@ namespace System.ServiceModel.Syndication
 
         private TimeSpan? TryReadTimeToLiveFromExtension(
             SyndicationElementExtensionCollection elementExtensions
-        ) {
+        )
+        {
             SyndicationElementExtension timeToLiveElement = elementExtensions.FirstOrDefault(
                 e =>
                     e.OuterName == Rss20Constants.TimeToLiveTag
@@ -336,7 +340,8 @@ namespace System.ServiceModel.Syndication
         private void TryReadSkipHoursFromExtension(
             SyndicationElementExtensionCollection elementExtensions,
             Collection<int> skipHours
-        ) {
+        )
+        {
             SyndicationElementExtension skipHoursElement = elementExtensions.FirstOrDefault(
                 e =>
                     e.OuterName == Rss20Constants.SkipHoursTag
@@ -380,7 +385,8 @@ namespace System.ServiceModel.Syndication
         private void TryReadSkipDaysFromExtension(
             SyndicationElementExtensionCollection elementExtensions,
             Collection<string> skipDays
-        ) {
+        )
+        {
             SyndicationElementExtension skipDaysElement = elementExtensions.FirstOrDefault(
                 e =>
                     e.OuterName == Rss20Constants.SkipDaysTag
@@ -420,7 +426,8 @@ namespace System.ServiceModel.Syndication
 
         private SyndicationTextInput TryReadTextInputFromExtension(
             SyndicationElementExtensionCollection elementExtensions
-        ) {
+        )
+        {
             SyndicationElementExtension textInputElement = elementExtensions.FirstOrDefault(
                 e =>
                     e.OuterName == Rss20Constants.TextInputTag
@@ -558,7 +565,8 @@ namespace System.ServiceModel.Syndication
             string ns,
             string value,
             string version
-        ) {
+        )
+        {
             return false;
         }
 
@@ -606,7 +614,8 @@ namespace System.ServiceModel.Syndication
         internal void LoadElementExtensions(
             XmlReader readerOverUnparsedExtensions,
             int maxExtensionSize
-        ) {
+        )
+        {
             _extensions.LoadElementExtensions(readerOverUnparsedExtensions, maxExtensionSize);
         }
 

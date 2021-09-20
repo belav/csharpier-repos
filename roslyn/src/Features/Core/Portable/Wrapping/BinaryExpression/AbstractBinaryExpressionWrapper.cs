@@ -49,7 +49,8 @@ namespace Microsoft.CodeAnalysis.Wrapping.BinaryExpression
             int position,
             SyntaxNode node,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             if (!(node is TBinaryExpressionSyntax binaryExpr))
             {
                 return null;
@@ -74,7 +75,8 @@ namespace Microsoft.CodeAnalysis.Wrapping.BinaryExpression
             if (
                 binaryExpr.Parent is TBinaryExpressionSyntax parentBinary
                 && precedence <= _precedenceService.GetPrecedenceKind(parentBinary)
-            ) {
+            )
+            {
                 return null;
             }
 
@@ -120,7 +122,8 @@ namespace Microsoft.CodeAnalysis.Wrapping.BinaryExpression
         private ImmutableArray<SyntaxNodeOrToken> GetExpressionsAndOperators(
             PrecedenceKind precedence,
             TBinaryExpressionSyntax binaryExpr
-        ) {
+        )
+        {
             using var _ = ArrayBuilder<SyntaxNodeOrToken>.GetInstance(out var result);
             AddExpressionsAndOperators(precedence, binaryExpr, result);
             return result.ToImmutable();
@@ -130,11 +133,13 @@ namespace Microsoft.CodeAnalysis.Wrapping.BinaryExpression
             PrecedenceKind precedence,
             SyntaxNode expr,
             ArrayBuilder<SyntaxNodeOrToken> result
-        ) {
+        )
+        {
             if (
                 expr is TBinaryExpressionSyntax
                 && precedence == _precedenceService.GetPrecedenceKind(expr)
-            ) {
+            )
+            {
                 _syntaxFacts.GetPartsOfBinaryExpression(
                     expr,
                     out var left,

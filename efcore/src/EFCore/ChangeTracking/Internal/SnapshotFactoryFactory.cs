@@ -49,7 +49,8 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
         protected virtual Expression CreateConstructorExpression(
             IEntityType entityType,
             ParameterExpression parameter
-        ) {
+        )
+        {
             var count = GetPropertyCount(entityType);
 
             var types = new Type[count];
@@ -114,7 +115,8 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
             ParameterExpression parameter,
             Type[] types,
             IList<IPropertyBase> propertyBases
-        ) {
+        )
+        {
             var count = types.Length;
 
             var arguments = new Expression[count];
@@ -206,7 +208,8 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
         private Expression CreateSnapshotValueExpression(
             Expression expression,
             IPropertyBase propertyBase
-        ) {
+        )
+        {
             if (propertyBase is IProperty property)
             {
                 var comparer = GetValueComparer(property);

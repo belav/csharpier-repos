@@ -14,10 +14,8 @@ namespace System.Security.Cryptography.Xml
         private readonly bool _includeComments;
         private bool _isInNodeSet;
 
-        public CanonicalXmlDocument(
-            bool defaultNodeSetInclusionState,
-            bool includeComments
-        ) : base()
+        public CanonicalXmlDocument(bool defaultNodeSetInclusionState, bool includeComments)
+            : base()
         {
             PreserveWhitespace = true;
             _includeComments = includeComments;
@@ -34,7 +32,8 @@ namespace System.Security.Cryptography.Xml
             StringBuilder strBuilder,
             DocPosition docPos,
             AncestralNamespaceContextManager anc
-        ) {
+        )
+        {
             docPos = DocPosition.BeforeRootElement;
             foreach (XmlNode childNode in ChildNodes)
             {
@@ -59,7 +58,8 @@ namespace System.Security.Cryptography.Xml
             HashAlgorithm hash,
             DocPosition docPos,
             AncestralNamespaceContextManager anc
-        ) {
+        )
+        {
             docPos = DocPosition.BeforeRootElement;
             foreach (XmlNode childNode in ChildNodes)
             {
@@ -84,7 +84,8 @@ namespace System.Security.Cryptography.Xml
             string prefix,
             string localName,
             string namespaceURI
-        ) {
+        )
+        {
             return new CanonicalXmlElement(
                 prefix,
                 localName,
@@ -98,7 +99,8 @@ namespace System.Security.Cryptography.Xml
             string prefix,
             string localName,
             string namespaceURI
-        ) {
+        )
+        {
             return new CanonicalXmlAttribute(
                 prefix,
                 localName,
@@ -112,7 +114,8 @@ namespace System.Security.Cryptography.Xml
             string prefix,
             string localName,
             string namespaceURI
-        ) {
+        )
+        {
             return new CanonicalXmlAttribute(
                 prefix,
                 localName,
@@ -140,7 +143,8 @@ namespace System.Security.Cryptography.Xml
         public override XmlProcessingInstruction CreateProcessingInstruction(
             string target,
             string data
-        ) {
+        )
+        {
             return new CanonicalXmlProcessingInstruction(
                 target,
                 data,

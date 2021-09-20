@@ -58,7 +58,8 @@ namespace Microsoft.CodeAnalysis.SimplifyBooleanExpression
             ImmutableArray<Diagnostic> diagnostics,
             SyntaxEditor editor,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var generator = SyntaxGenerator.GetGenerator(document);
             var generatorInternal = document.GetRequiredLanguageService<SyntaxGeneratorInternal>();
             var syntaxFacts = document.GetRequiredLanguageService<ISyntaxFactsService>();
@@ -107,13 +108,12 @@ namespace Microsoft.CodeAnalysis.SimplifyBooleanExpression
 
         private class MyCodeAction : CustomCodeActions.DocumentChangeAction
         {
-            public MyCodeAction(
-                Func<CancellationToken, Task<Document>> createChangedDocument
-            ) : base(
-                AnalyzersResources.Simplify_conditional_expression,
-                createChangedDocument,
-                AnalyzersResources.Simplify_conditional_expression
-            ) { }
+            public MyCodeAction(Func<CancellationToken, Task<Document>> createChangedDocument)
+                : base(
+                    AnalyzersResources.Simplify_conditional_expression,
+                    createChangedDocument,
+                    AnalyzersResources.Simplify_conditional_expression
+                ) { }
         }
     }
 }

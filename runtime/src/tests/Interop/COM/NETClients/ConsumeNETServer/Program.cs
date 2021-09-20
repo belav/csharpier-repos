@@ -104,7 +104,8 @@ namespace NetClient
                         string.Empty,
                         string.Empty
                     )
-                ) {
+                )
+                {
                     Validate_Activation();
                     Validate_CCW_Wasnt_Unwrapped();
                     Validate_Client_CCW_RCW();

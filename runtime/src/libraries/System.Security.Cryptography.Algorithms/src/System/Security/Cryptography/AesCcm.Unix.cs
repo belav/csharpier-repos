@@ -25,12 +25,14 @@ namespace System.Security.Cryptography
             Span<byte> ciphertext,
             Span<byte> tag,
             ReadOnlySpan<byte> associatedData = default
-        ) {
+        )
+        {
             using (
                 SafeEvpCipherCtxHandle ctx = Interop.Crypto.EvpCipherCreatePartial(
                     GetCipher(_key.Length * 8)
                 )
-            ) {
+            )
+            {
                 Interop.Crypto.CheckValidOpenSslHandle(ctx);
 
                 // We need to set mode to encryption before setting the tag and nonce length
@@ -62,7 +64,8 @@ namespace System.Security.Cryptography
                             out _,
                             associatedData
                         )
-                    ) {
+                    )
+                    {
                         throw Interop.Crypto.CreateOpenSslCryptographicException();
                     }
                 }
@@ -74,7 +77,8 @@ namespace System.Security.Cryptography
                         out int ciphertextBytesWritten,
                         plaintext
                     )
-                ) {
+                )
+                {
                     throw Interop.Crypto.CreateOpenSslCryptographicException();
                 }
 
@@ -84,7 +88,8 @@ namespace System.Security.Cryptography
                         ciphertext.Slice(ciphertextBytesWritten),
                         out int bytesWritten
                     )
-                ) {
+                )
+                {
                     throw Interop.Crypto.CreateOpenSslCryptographicException();
                 }
 
@@ -108,12 +113,14 @@ namespace System.Security.Cryptography
             ReadOnlySpan<byte> tag,
             Span<byte> plaintext,
             ReadOnlySpan<byte> associatedData
-        ) {
+        )
+        {
             using (
                 SafeEvpCipherCtxHandle ctx = Interop.Crypto.EvpCipherCreatePartial(
                     GetCipher(_key.Length * 8)
                 )
-            ) {
+            )
+            {
                 Interop.Crypto.CheckValidOpenSslHandle(ctx);
                 Interop.Crypto.EvpCipherSetCcmNonceLength(ctx, nonce.Length);
                 Interop.Crypto.EvpCipherSetCcmTag(ctx, tag);
@@ -137,7 +144,8 @@ namespace System.Security.Cryptography
                             out _,
                             associatedData
                         )
-                    ) {
+                    )
+                    {
                         throw Interop.Crypto.CreateOpenSslCryptographicException();
                     }
                 }
@@ -149,7 +157,8 @@ namespace System.Security.Cryptography
                         out int plaintextBytesWritten,
                         ciphertext
                     )
-                ) {
+                )
+                {
                     plaintext.Clear();
                     throw new CryptographicException(SR.Cryptography_AuthTagMismatch);
                 }

@@ -28,7 +28,8 @@ namespace System.Web.Mvc.Routing
         internal static int ComputeDigit(
             PathContentSegment segment,
             IDictionary<string, object> constraints
-        ) {
+        )
+        {
             if (segment.Subsegments.Count > 1)
             {
                 // Multi-part segments should appear after literal segments but before parameter segments
@@ -61,7 +62,8 @@ namespace System.Web.Mvc.Routing
         public static decimal Compute(
             TParsedRoute parsedRoute,
             IDictionary<string, object> constraints
-        ) {
+        )
+        {
             // Each precedence digit corresponds to one decimal place. For example, 3 segments with precedences 2, 1,
             // and 4 results in a combined precedence of 2.14 (decimal).
             IList<PathContentSegment> segments =

@@ -529,7 +529,8 @@ namespace Microsoft.AspNetCore.Mvc.RazorPages.Infrastructure
             PageActionDescriptor descriptor,
             Type pageType = null,
             Type modelType = null
-        ) {
+        )
+        {
             pageType = pageType ?? typeof(object);
             var pageTypeInfo = pageType.GetTypeInfo();
 
@@ -562,7 +563,8 @@ namespace Microsoft.AspNetCore.Mvc.RazorPages.Infrastructure
             IPageModelFactoryProvider modelProvider = null,
             IRazorPageFactoryProvider razorPageFactoryProvider = null,
             MvcOptions mvcOptions = null
-        ) {
+        )
+        {
             var tempDataFactory = new Mock<ITempDataDictionaryFactory>();
             tempDataFactory.Setup(t => t.GetTempData(It.IsAny<HttpContext>()))
                 .Returns(

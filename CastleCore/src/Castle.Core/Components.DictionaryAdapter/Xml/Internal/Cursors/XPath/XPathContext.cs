@@ -57,7 +57,8 @@ namespace Castle.Components.DictionaryAdapter.Xml
             string prefix,
             string name,
             XPathResultType[] argTypes
-        ) {
+        )
+        {
             return context.ResolveFunction(prefix, name, argTypes);
         }
 

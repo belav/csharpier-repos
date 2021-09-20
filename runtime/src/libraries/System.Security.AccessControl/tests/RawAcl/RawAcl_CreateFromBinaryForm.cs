@@ -380,7 +380,8 @@ namespace System.Security.AccessControl.Tests
             byte revision,
             int aceCount,
             int length
-        ) {
+        )
+        {
             RawAcl rawAcl = null;
             byte[] verifierBinaryForm = null;
             rawAcl = new RawAcl(binaryForm, offset);

@@ -73,7 +73,8 @@ namespace Internal.CommandLine
             string name,
             T defaultValue,
             Func<string, T> valueConverter
-        ) {
+        )
+        {
             return DefineOption(name, defaultValue, valueConverter, true);
         }
 
@@ -82,7 +83,8 @@ namespace Internal.CommandLine
             ref T value,
             Func<string, T> valueConverter,
             string help
-        ) {
+        )
+        {
             return DefineOption(name, ref value, valueConverter, true, help);
         }
 
@@ -92,7 +94,8 @@ namespace Internal.CommandLine
             Func<string, T> valueConverter,
             bool requireValue,
             string help
-        ) {
+        )
+        {
             var option = DefineOption(name, value, valueConverter, requireValue);
             option.Help = help;
 
@@ -120,7 +123,8 @@ namespace Internal.CommandLine
             ref string value,
             bool requireValue,
             string help
-        ) {
+        )
+        {
             return DefineOption(name, ref value, s_stringParser, requireValue, help);
         }
 
@@ -129,7 +133,8 @@ namespace Internal.CommandLine
             ref bool value,
             bool requireValue,
             string help
-        ) {
+        )
+        {
             return DefineOption(name, ref value, s_booleanParser, requireValue, help);
         }
 
@@ -138,7 +143,8 @@ namespace Internal.CommandLine
             ref int value,
             bool requireValue,
             string help
-        ) {
+        )
+        {
             return DefineOption(name, ref value, s_int32Parser, requireValue, help);
         }
 
@@ -147,7 +153,8 @@ namespace Internal.CommandLine
         public ArgumentList<string> DefineOptionList(
             string name,
             IReadOnlyList<string> defaultValue
-        ) {
+        )
+        {
             return DefineOptionList(name, defaultValue, s_stringParser);
         }
 
@@ -160,7 +167,8 @@ namespace Internal.CommandLine
             string name,
             IReadOnlyList<string> defaultValue,
             bool requireValue
-        ) {
+        )
+        {
             return DefineOptionList(name, defaultValue, s_stringParser, requireValue);
         }
 
@@ -168,7 +176,8 @@ namespace Internal.CommandLine
             string name,
             IReadOnlyList<int> defaultValue,
             bool requireValue
-        ) {
+        )
+        {
             return DefineOptionList(name, defaultValue, s_int32Parser, requireValue);
         }
 
@@ -176,7 +185,8 @@ namespace Internal.CommandLine
             string name,
             IReadOnlyList<T> defaultValue,
             Func<string, T> valueConverter
-        ) {
+        )
+        {
             return DefineOptionList(name, defaultValue, valueConverter, true);
         }
 
@@ -185,7 +195,8 @@ namespace Internal.CommandLine
             ref IReadOnlyList<T> value,
             Func<string, T> valueConverter,
             string help
-        ) {
+        )
+        {
             return DefineOptionList(name, ref value, valueConverter, true, help);
         }
 
@@ -195,7 +206,8 @@ namespace Internal.CommandLine
             Func<string, T> valueConverter,
             bool requireValue,
             string help
-        ) {
+        )
+        {
             var optionList = DefineOptionList(name, value, valueConverter, requireValue);
             optionList.Help = help;
 
@@ -207,7 +219,8 @@ namespace Internal.CommandLine
             string name,
             ref IReadOnlyList<string> value,
             string help
-        ) {
+        )
+        {
             return DefineOptionList(name, ref value, s_stringParser, help);
         }
 
@@ -215,7 +228,8 @@ namespace Internal.CommandLine
             string name,
             ref IReadOnlyList<int> value,
             string help
-        ) {
+        )
+        {
             return DefineOptionList(name, ref value, s_int32Parser, help);
         }
 
@@ -224,7 +238,8 @@ namespace Internal.CommandLine
             ref IReadOnlyList<string> value,
             bool requireValue,
             string help
-        ) {
+        )
+        {
             return DefineOptionList(name, ref value, s_stringParser, requireValue, help);
         }
 
@@ -233,7 +248,8 @@ namespace Internal.CommandLine
             ref IReadOnlyList<int> value,
             bool requireValue,
             string help
-        ) {
+        )
+        {
             return DefineOptionList(name, ref value, s_int32Parser, requireValue, help);
         }
 
@@ -259,7 +275,8 @@ namespace Internal.CommandLine
             ref T value,
             Func<string, T> valueConverter,
             string help
-        ) {
+        )
+        {
             var parameter = DefineParameter(name, value, valueConverter);
             parameter.Help = help;
 
@@ -287,7 +304,8 @@ namespace Internal.CommandLine
         public ArgumentList<string> DefineParameterList(
             string name,
             IReadOnlyList<string> defaultValue
-        ) {
+        )
+        {
             return DefineParameterList(name, defaultValue, s_stringParser);
         }
 
@@ -301,7 +319,8 @@ namespace Internal.CommandLine
             ref IReadOnlyList<T> value,
             Func<string, T> valueConverter,
             string help
-        ) {
+        )
+        {
             var parameterList = DefineParameterList(name, value, valueConverter);
             parameterList.Help = help;
 
@@ -313,7 +332,8 @@ namespace Internal.CommandLine
             string name,
             ref IReadOnlyList<string> value,
             string help
-        ) {
+        )
+        {
             return DefineParameterList(name, ref value, s_stringParser, help);
         }
 
@@ -321,7 +341,8 @@ namespace Internal.CommandLine
             string name,
             ref IReadOnlyList<int> value,
             string help
-        ) {
+        )
+        {
             return DefineParameterList(name, ref value, s_int32Parser, help);
         }
     }

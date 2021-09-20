@@ -40,7 +40,8 @@ namespace System.IO.Ports.Tests
                 SerialPort com1 = new SerialPort(
                     TCSupport.LocalMachineSerialInfo.FirstAvailablePortName
                 )
-            ) {
+            )
+            {
                 SerialPortProperties serPortProp = new SerialPortProperties();
 
                 Debug.WriteLine("Verifying default BytesToWrite");
@@ -93,7 +94,8 @@ namespace System.IO.Ports.Tests
             WriteMethodDelegate writeMethod,
             int bufferSize,
             bool sendNewLine
-        ) {
+        )
+        {
             using (
                 SerialPort com1 = new SerialPort(
                     TCSupport.LocalMachineSerialInfo.FirstAvailablePortName
@@ -103,7 +105,8 @@ namespace System.IO.Ports.Tests
                 SerialPort com2 = new SerialPort(
                     TCSupport.LocalMachineSerialInfo.SecondAvailablePortName
                 )
-            ) {
+            )
+            {
                 SerialPortProperties serPortProp = new SerialPortProperties();
                 int expectedBytesToWrite;
                 int actualBytesToWrite;

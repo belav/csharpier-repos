@@ -215,7 +215,8 @@ namespace System.CodeDom.Compiler
         public override async Task WriteAsync(
             ReadOnlyMemory<char> buffer,
             CancellationToken cancellationToken = default
-        ) {
+        )
+        {
             await OutputTabsAsync().ConfigureAwait(false);
             await _writer.WriteAsync(buffer, cancellationToken).ConfigureAwait(false);
         }
@@ -230,7 +231,8 @@ namespace System.CodeDom.Compiler
         public override async Task WriteAsync(
             StringBuilder? value,
             CancellationToken cancellationToken = default
-        ) {
+        )
+        {
             await OutputTabsAsync().ConfigureAwait(false);
             await _writer.WriteAsync(value, cancellationToken).ConfigureAwait(false);
         }
@@ -415,7 +417,8 @@ namespace System.CodeDom.Compiler
         public override async Task WriteLineAsync(
             ReadOnlyMemory<char> buffer,
             CancellationToken cancellationToken = default
-        ) {
+        )
+        {
             await OutputTabsAsync().ConfigureAwait(false);
             await _writer.WriteLineAsync(buffer, cancellationToken).ConfigureAwait(false);
             _tabsPending = true;
@@ -431,7 +434,8 @@ namespace System.CodeDom.Compiler
         public override async Task WriteLineAsync(
             StringBuilder? value,
             CancellationToken cancellationToken = default
-        ) {
+        )
+        {
             await OutputTabsAsync().ConfigureAwait(false);
             await _writer.WriteLineAsync(value, cancellationToken).ConfigureAwait(false);
             _tabsPending = true;

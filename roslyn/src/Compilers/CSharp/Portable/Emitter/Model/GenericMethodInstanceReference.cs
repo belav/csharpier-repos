@@ -29,7 +29,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Emit
 
         IEnumerable<Cci.ITypeReference> Cci.IGenericMethodInstanceReference.GetGenericArguments(
             EmitContext context
-        ) {
+        )
+        {
             PEModuleBuilder moduleBeingBuilt = (PEModuleBuilder)context.Module;
 
             foreach (var arg in UnderlyingMethod.TypeArgumentsWithAnnotations)
@@ -45,7 +46,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Emit
 
         Cci.IMethodReference Cci.IGenericMethodInstanceReference.GetGenericMethod(
             EmitContext context
-        ) {
+        )
+        {
             // NoPia method might come through here.
             return ((PEModuleBuilder)context.Module).Translate(
                 UnderlyingMethod.OriginalDefinition,

@@ -19,7 +19,8 @@ namespace Microsoft.AspNetCore.Mvc.ViewComponents
         public ViewComponentDescriptorCollection(
             IEnumerable<ViewComponentDescriptor> items,
             int version
-        ) {
+        )
+        {
             if (items == null)
             {
                 throw new ArgumentNullException(nameof(items));

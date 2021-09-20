@@ -262,7 +262,8 @@ namespace System.Linq.Expressions
             char separator,
             IReadOnlyList<T> expressions,
             Action<T> visit
-        ) {
+        )
+        {
             Out(open.ToString());
 
             if (expressions != null)
@@ -562,7 +563,8 @@ namespace System.Linq.Expressions
             else if (
                 (value is int) && node.Type == typeof(int)
                 || (value is bool) && node.Type == typeof(bool)
-            ) {
+            )
+            {
                 Out(value.ToString()!);
             }
             else
@@ -612,7 +614,8 @@ namespace System.Linq.Expressions
 
         protected internal override Expression VisitRuntimeVariables(
             RuntimeVariablesExpression node
-        ) {
+        )
+        {
             Out(".RuntimeVariables");
             VisitExpressions('(', node.Variables);
             return node;
@@ -721,7 +724,8 @@ namespace System.Linq.Expressions
                     parent.NodeType == ExpressionType.Negate
                     || parent.NodeType == ExpressionType.NegateChecked
                 )
-            ) {
+            )
+            {
                 return true;
             }
 

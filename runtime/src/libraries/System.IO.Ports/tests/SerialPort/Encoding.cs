@@ -34,7 +34,8 @@ namespace System.IO.Ports.Tests
                 SerialPort com1 = new SerialPort(
                     TCSupport.LocalMachineSerialInfo.FirstAvailablePortName
                 )
-            ) {
+            )
+            {
                 SerialPortProperties serPortProp = new SerialPortProperties();
 
                 Debug.WriteLine("Verifying default Encoding");
@@ -160,7 +161,8 @@ namespace System.IO.Ports.Tests
                 SerialPort com = new SerialPort(
                     TCSupport.LocalMachineSerialInfo.FirstAvailablePortName
                 )
-            ) {
+            )
+            {
                 VerifyExceptionAtOpen(com, encoding, throwAt, expectedException);
 
                 if (com.IsOpen)
@@ -175,7 +177,8 @@ namespace System.IO.Ports.Tests
             Encoding encoding,
             ThrowAt throwAt,
             Type expectedException
-        ) {
+        )
+        {
             Encoding origEncoding = com.Encoding;
             SerialPortProperties serPortProp = new SerialPortProperties();
 
@@ -234,7 +237,8 @@ namespace System.IO.Ports.Tests
             SerialPort com,
             Encoding encoding,
             Type expectedException
-        ) {
+        )
+        {
             SerialPortProperties serPortProp = new SerialPortProperties();
 
             com.Open();
@@ -284,7 +288,8 @@ namespace System.IO.Ports.Tests
                 SerialPort com1 = new SerialPort(
                     TCSupport.LocalMachineSerialInfo.FirstAvailablePortName
                 )
-            ) {
+            )
+            {
                 SerialPortProperties serPortProp = new SerialPortProperties();
 
                 serPortProp.SetAllPropertiesToOpenDefaults();
@@ -309,7 +314,8 @@ namespace System.IO.Ports.Tests
                 SerialPort com1 = new SerialPort(
                     TCSupport.LocalMachineSerialInfo.FirstAvailablePortName
                 )
-            ) {
+            )
+            {
                 SerialPortProperties serPortProp = new SerialPortProperties();
 
                 serPortProp.SetAllPropertiesToOpenDefaults();
@@ -334,7 +340,8 @@ namespace System.IO.Ports.Tests
                 SerialPort com2 = new SerialPort(
                     TCSupport.LocalMachineSerialInfo.SecondAvailablePortName
                 )
-            ) {
+            )
+            {
                 int origReadTimeout = com1.ReadTimeout;
                 char[] xmitChars = TCSupport.GetRandomChars(DEFAULT_CHAR_ARRAY_SIZE, true);
                 byte[] xmitBytes;

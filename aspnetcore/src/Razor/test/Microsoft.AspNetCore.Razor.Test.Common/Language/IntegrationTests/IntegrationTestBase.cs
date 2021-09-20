@@ -55,7 +55,8 @@ namespace Microsoft.AspNetCore.Razor.Language.IntegrationTests
         protected IntegrationTestBase(
             bool? generateBaselines = null,
             string? projectDirectoryHint = null
-        ) {
+        )
+        {
             TestProjectRoot =
                 projectDirectoryHint == null
                     ? TestProject.GetProjectDirectory(GetType())
@@ -143,7 +144,8 @@ namespace Microsoft.AspNetCore.Razor.Language.IntegrationTests
         protected RazorProjectItem AddProjectItemFromText(
             string text,
             string filePath = "_ViewImports.cshtml"
-        ) {
+        )
+        {
             var projectItem = CreateProjectItemFromText(text, filePath);
             FileSystem.Add(projectItem);
             return projectItem;
@@ -153,7 +155,8 @@ namespace Microsoft.AspNetCore.Razor.Language.IntegrationTests
             string text,
             string filePath,
             string? cssScope = null
-        ) {
+        )
+        {
             // Consider the file path to be relative to the 'FileName' of the test.
             var workingDirectory = Path.GetDirectoryName(FileName);
 
@@ -189,7 +192,8 @@ namespace Microsoft.AspNetCore.Razor.Language.IntegrationTests
         protected RazorProjectItem CreateProjectItemFromFile(
             string? filePath = null,
             string? fileKind = null
-        ) {
+        )
+        {
             if (FileName == null)
             {
                 var message =
@@ -241,7 +245,8 @@ namespace Microsoft.AspNetCore.Razor.Language.IntegrationTests
             string path = "test.cshtml",
             bool? designTime = null,
             string? cssScope = null
-        ) {
+        )
+        {
             var projectItem = CreateProjectItemFromText(text, path, cssScope);
             return CompileToCSharp(projectItem, designTime);
         }
@@ -249,7 +254,8 @@ namespace Microsoft.AspNetCore.Razor.Language.IntegrationTests
         protected CompiledCSharpCode CompileToCSharp(
             RazorProjectItem projectItem,
             bool? designTime = null
-        ) {
+        )
+        {
             var compilation = CreateCompilation();
             var references = compilation.References.Concat(
                     new[] { compilation.ToMetadataReference(), }
@@ -281,7 +287,8 @@ namespace Microsoft.AspNetCore.Razor.Language.IntegrationTests
             string path = "test.cshtml",
             bool? designTime = null,
             bool throwOnFailure = true
-        ) {
+        )
+        {
             var compiled = CompileToCSharp(text, path, designTime);
             return CompileToAssembly(compiled);
         }
@@ -290,7 +297,8 @@ namespace Microsoft.AspNetCore.Razor.Language.IntegrationTests
             RazorProjectItem projectItem,
             bool? designTime = null,
             bool throwOnFailure = true
-        ) {
+        )
+        {
             var compiled = CompileToCSharp(projectItem, designTime);
             return CompileToAssembly(compiled, throwOnFailure: throwOnFailure);
         }
@@ -298,7 +306,8 @@ namespace Microsoft.AspNetCore.Razor.Language.IntegrationTests
         protected CompiledAssembly CompileToAssembly(
             CompiledCSharpCode code,
             bool throwOnFailure = true
-        ) {
+        )
+        {
             var cSharpDocument = code.CodeDocument.GetCSharpDocument();
             if (cSharpDocument.Diagnostics.Any())
             {
@@ -369,7 +378,8 @@ namespace Microsoft.AspNetCore.Razor.Language.IntegrationTests
 
         protected RazorProjectEngine CreateProjectEngine(
             Action<RazorProjectEngineBuilder>? configure = null
-        ) {
+        )
+        {
             var compilation = CreateCompilation();
             var references = compilation.References.Concat(
                     new[] { compilation.ToMetadataReference(), }
@@ -382,7 +392,8 @@ namespace Microsoft.AspNetCore.Razor.Language.IntegrationTests
             RazorConfiguration configuration,
             MetadataReference[] references,
             Action<RazorProjectEngineBuilder>? configure
-        ) {
+        )
+        {
             return RazorProjectEngine.Create(
                 configuration,
                 FileSystem,
@@ -672,7 +683,8 @@ namespace Microsoft.AspNetCore.Razor.Language.IntegrationTests
                         if (
                             sourceMapping.OriginalSpan.LineIndex >= linePragma.StartLineIndex
                             && sourceMapping.OriginalSpan.LineIndex <= linePragma.EndLineIndex
-                        ) {
+                        )
+                        {
                             // Found a match.
                             foundMatchingPragma = true;
                             break;
@@ -702,14 +714,16 @@ namespace Microsoft.AspNetCore.Razor.Language.IntegrationTests
                         !string.IsNullOrWhiteSpace(content)
                         && classifiedSpan.BlockKind != BlockKindInternal.Directive
                         && classifiedSpan.SpanKind == SpanKindInternal.Code
-                    ) {
+                    )
+                    {
                         var foundMatchingPragma = false;
                         foreach (var linePragma in linePragmas)
                         {
                             if (
                                 classifiedSpan.Span.LineIndex >= linePragma.StartLineIndex
                                 && classifiedSpan.Span.LineIndex <= linePragma.EndLineIndex
-                            ) {
+                            )
+                            {
                                 // Found a match.
                                 foundMatchingPragma = true;
                                 break;
@@ -731,7 +745,8 @@ namespace Microsoft.AspNetCore.Razor.Language.IntegrationTests
 
             public override Syntax.SyntaxNode VisitCSharpStatementLiteral(
                 CSharpStatementLiteralSyntax node
-            ) {
+            )
+            {
                 var context = node.GetSpanContext();
                 if (context != null && context.ChunkGenerator != SpanChunkGenerator.Null)
                 {
@@ -742,7 +757,8 @@ namespace Microsoft.AspNetCore.Razor.Language.IntegrationTests
 
             public override Syntax.SyntaxNode VisitCSharpExpressionLiteral(
                 CSharpExpressionLiteralSyntax node
-            ) {
+            )
+            {
                 var context = node.GetSpanContext();
                 if (context != null && context.ChunkGenerator != SpanChunkGenerator.Null)
                 {

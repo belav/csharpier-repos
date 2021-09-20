@@ -444,7 +444,8 @@ namespace System.Resources
                     if (
                         dataOffset < 0
                         || dataOffset >= _store.BaseStream.Length - _dataSectionOffset
-                    ) {
+                    )
+                    {
                         throw new FormatException(
                             SR.Format(SR.BadImageFormat_ResourcesDataInvalidOffset, dataOffset)
                         );

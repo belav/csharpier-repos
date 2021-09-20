@@ -84,7 +84,8 @@ namespace System.Runtime.InteropServices
                     (collectionGeneration == 0)
                     || (_gcCounts[collectionGeneration] == GC.CollectionCount(collectionGeneration))
                 )
-            ) {
+            )
+            {
                 GC.Collect(collectionGeneration);
                 Thread.Sleep(10 * collectionGeneration);
             }

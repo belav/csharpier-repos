@@ -45,7 +45,8 @@ namespace Wasm.Build.Tests
             string emsdkPath,
             string errorPattern,
             string id
-        ) {
+        )
+        {
             string projectName = $"simple_native_build";
             buildArgs = buildArgs with
             {
@@ -74,7 +75,8 @@ namespace Wasm.Build.Tests
             BuildArgs buildArgs,
             RunHost host,
             string id
-        ) {
+        )
+        {
             string projectName = $"{projectNamePrefix}_{buildArgs.Config}_{buildArgs.AOT}";
 
             buildArgs = buildArgs with

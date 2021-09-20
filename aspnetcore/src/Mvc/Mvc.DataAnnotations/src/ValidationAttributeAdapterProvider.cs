@@ -21,7 +21,8 @@ namespace Microsoft.AspNetCore.Mvc.DataAnnotations
         public IAttributeAdapter? GetAttributeAdapter(
             ValidationAttribute attribute,
             IStringLocalizer? stringLocalizer
-        ) {
+        )
+        {
             if (attribute == null)
             {
                 throw new ArgumentNullException(nameof(attribute));

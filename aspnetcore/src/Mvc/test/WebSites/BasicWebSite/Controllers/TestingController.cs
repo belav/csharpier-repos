@@ -24,7 +24,8 @@ namespace BasicWebSite.Controllers
             [FromRoute] int value,
             [FromBody] Number number,
             [FromHeader(Name = "X-Pass-Thru")] string passThruValue
-        ) {
+        )
+        {
             Response.Headers.Add("X-Pass-Thru", passThruValue);
             if (value < number.Value)
             {

@@ -36,7 +36,8 @@ namespace System.Web.Http
         public void ConfigurationService_IsWebHost(
             Type serviceInterfaceType,
             Type expectedImplementationType
-        ) {
+        )
+        {
             // Arrange
             HttpConfiguration configuration = GlobalConfiguration.Configuration;
             Assert.NotNull(configuration); // Guard

@@ -37,7 +37,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.DebuggerIntelli
             IBufferGraph bufferGraph,
             IVsTextLines debuggerTextLinesOpt,
             bool isImmediateWindow
-        ) {
+        )
+        {
             _innerTextView = innerTextView;
             _debuggerTextLinesOpt = debuggerTextLinesOpt;
             BufferGraph = bufferGraph;

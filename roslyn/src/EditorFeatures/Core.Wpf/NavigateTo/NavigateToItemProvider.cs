@@ -28,7 +28,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.NavigateTo
             Workspace workspace,
             IAsynchronousOperationListener asyncListener,
             IThreadingContext threadingContext
-        ) {
+        )
+        {
             Contract.ThrowIfNull(workspace);
             Contract.ThrowIfNull(asyncListener);
 
@@ -115,7 +116,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.NavigateTo
             INavigateToCallback callback,
             string searchValue,
             IImmutableSet<string> kinds
-        ) {
+        )
+        {
             this.StopSearch();
 
             if (string.IsNullOrWhiteSpace(searchValue))

@@ -13,7 +13,8 @@ namespace System.Reflection.Metadata
             this System.Reflection.Assembly assembly,
             out byte* blob,
             out int length
-        ) {
+        )
+        {
             throw null;
         }
         public static void ApplyUpdate(
@@ -21,7 +22,8 @@ namespace System.Reflection.Metadata
             ReadOnlySpan<byte> metadataDelta,
             ReadOnlySpan<byte> ilDelta,
             ReadOnlySpan<byte> pdbDelta
-        ) {
+        )
+        {
             throw null;
         }
     }
@@ -115,7 +117,8 @@ namespace System.Runtime.Loader
         }
         public static System.Runtime.Loader.AssemblyLoadContext.ContextualReflectionScope EnterContextualReflection(
             System.Reflection.Assembly? activating
-        ) {
+        )
+        {
             throw null;
         }
         ~AssemblyLoadContext() { }
@@ -125,17 +128,20 @@ namespace System.Runtime.Loader
         }
         public static System.Runtime.Loader.AssemblyLoadContext? GetLoadContext(
             System.Reflection.Assembly assembly
-        ) {
+        )
+        {
             throw null;
         }
         protected virtual System.Reflection.Assembly? Load(
             System.Reflection.AssemblyName assemblyName
-        ) {
+        )
+        {
             throw null;
         }
         public System.Reflection.Assembly LoadFromAssemblyName(
             System.Reflection.AssemblyName assemblyName
-        ) {
+        )
+        {
             throw null;
         }
         [System.Diagnostics.CodeAnalysis.RequiresUnreferencedCodeAttribute(
@@ -151,7 +157,8 @@ namespace System.Runtime.Loader
         public System.Reflection.Assembly LoadFromNativeImagePath(
             string nativeImagePath,
             string? assemblyPath
-        ) {
+        )
+        {
             throw null;
         }
         [System.Diagnostics.CodeAnalysis.RequiresUnreferencedCodeAttribute(
@@ -167,7 +174,8 @@ namespace System.Runtime.Loader
         public System.Reflection.Assembly LoadFromStream(
             System.IO.Stream assembly,
             System.IO.Stream? assemblySymbols
-        ) {
+        )
+        {
             throw null;
         }
         protected virtual System.IntPtr LoadUnmanagedDll(string unmanagedDllName)

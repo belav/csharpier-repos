@@ -33,10 +33,12 @@ namespace Microsoft.CodeAnalysis.UnitTests
                 Func<ParseOptions, ParseOptions, bool>? canApplyParseOptions = null,
                 Func<CompilationOptions, CompilationOptions, bool>? canApplyCompilationOptions =
                     null
-            ) : base(
-                Host.Mef.MefHostServices.DefaultHost,
-                workspaceKind: nameof(CustomizedCanApplyWorkspace)
-            ) {
+            )
+                : base(
+                    Host.Mef.MefHostServices.DefaultHost,
+                    workspaceKind: nameof(CustomizedCanApplyWorkspace)
+                )
+            {
                 _allowedKinds = allowedKinds.ToImmutableArray();
                 _canApplyParseOptions = canApplyParseOptions;
                 _canApplyCompilationOptions = canApplyCompilationOptions;
@@ -62,7 +64,8 @@ namespace Microsoft.CodeAnalysis.UnitTests
                 ParseOptions oldOptions,
                 ParseOptions newOptions,
                 Project project
-            ) {
+            )
+            {
                 if (_canApplyParseOptions != null)
                 {
                     return _canApplyParseOptions(oldOptions, newOptions);
@@ -75,7 +78,8 @@ namespace Microsoft.CodeAnalysis.UnitTests
                 CompilationOptions oldOptions,
                 CompilationOptions newOptions,
                 Project project
-            ) {
+            )
+            {
                 if (_canApplyCompilationOptions != null)
                 {
                     return _canApplyCompilationOptions(oldOptions, newOptions);

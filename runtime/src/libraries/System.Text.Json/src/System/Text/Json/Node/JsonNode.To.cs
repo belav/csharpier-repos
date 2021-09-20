@@ -20,7 +20,8 @@ namespace System.Text.Json.Node
                     output,
                     options == null ? default(JsonWriterOptions) : options.GetWriterOptions()
                 )
-            ) {
+            )
+            {
                 WriteTo(writer, options);
             }
             return JsonHelpers.Utf8GetString(output.WrittenSpan);
@@ -43,7 +44,8 @@ namespace System.Text.Json.Node
                 if (
                     this is JsonValue<JsonElement> jsonElement
                     && jsonElement.Value.ValueKind == JsonValueKind.String
-                ) {
+                )
+                {
                     return jsonElement.Value.GetString()!;
                 }
             }

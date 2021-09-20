@@ -106,14 +106,16 @@ namespace ILCompiler.DependencyAnalysisFramework
 
             public void MarkNewDynamicDependencies(
                 DependencyAnalyzer<MarkStrategy, DependencyContextType> analyzer
-            ) {
+            )
+            {
                 foreach (
                     DependencyNodeCore<DependencyContextType>.CombinedDependencyListEntry dependency in _node.SearchDynamicDependencies(
                         analyzer._dynamicDependencyInterestingList,
                         _next,
                         analyzer._dependencyContext
                     )
-                ) {
+                )
+                {
                     analyzer.AddToMarkStack(
                         dependency.Node,
                         dependency.Reason,
@@ -129,7 +131,8 @@ namespace ILCompiler.DependencyAnalysisFramework
         public DependencyAnalyzer(
             DependencyContextType dependencyContext,
             IComparer<DependencyNodeCore<DependencyContextType>> resultSorter
-        ) {
+        )
+        {
             _dependencyContext = dependencyContext;
             _resultSorter = resultSorter;
             _marker.AttachContext(dependencyContext);
@@ -140,7 +143,8 @@ namespace ILCompiler.DependencyAnalysisFramework
                     Environment.GetEnvironmentVariable("CoreRT_DeterminismSeed"),
                     out int seed
                 )
-            ) {
+            )
+            {
                 // Expose output file determinism bugs in our system by randomizing the order nodes are pushed
                 // onto the mark stack.
                 stackPopRandomizer = new Random(seed);
@@ -156,7 +160,8 @@ namespace ILCompiler.DependencyAnalysisFramework
         public override sealed void AddRoot(
             DependencyNodeCore<DependencyContextType> rootNode,
             string reason
-        ) {
+        )
+        {
             if (AddToMarkStack(rootNode, reason, null, null))
             {
                 _rootNodes.Add(rootNode);
@@ -198,7 +203,8 @@ namespace ILCompiler.DependencyAnalysisFramework
 
         public override sealed void VisitLogNodes(
             IDependencyAnalyzerLogNodeVisitor<DependencyContextType> logNodeVisitor
-        ) {
+        )
+        {
             foreach (DependencyNodeCore<DependencyContextType> node in MarkedNodesEnumerable())
             {
                 logNodeVisitor.VisitNode(node);
@@ -208,7 +214,8 @@ namespace ILCompiler.DependencyAnalysisFramework
 
         public override sealed void VisitLogEdges(
             IDependencyAnalyzerLogEdgeVisitor<DependencyContextType> logEdgeVisitor
-        ) {
+        )
+        {
             _marker.VisitLogEdges(MarkedNodesEnumerable(), logEdgeVisitor);
         }
 
@@ -218,7 +225,8 @@ namespace ILCompiler.DependencyAnalysisFramework
         /// <param name="deferredStaticDependencies">List of nodes which must have static dependencies computed</param>
         private void ComputeDependencies(
             List<DependencyNodeCore<DependencyContextType>> deferredStaticDependencies
-        ) {
+        )
+        {
             if (ComputeDependencyRoutine != null)
                 ComputeDependencyRoutine(deferredStaticDependencies);
         }
@@ -232,7 +240,8 @@ namespace ILCompiler.DependencyAnalysisFramework
             {
                 foreach (
                     DependencyNodeCore<DependencyContextType>.DependencyListEntry dependency in staticDependencies
-                ) {
+                )
+                {
                     AddToMarkStack(dependency.Node, dependency.Reason, node, null);
                 }
             }
@@ -243,7 +252,8 @@ namespace ILCompiler.DependencyAnalysisFramework
                     DependencyNodeCore<DependencyContextType>.CombinedDependencyListEntry dependency in node.GetConditionalStaticDependencies(
                         _dependencyContext
                     )
-                ) {
+                )
+                {
                     if (dependency.OtherReasonNode.Marked)
                     {
                         AddToMarkStack(
@@ -262,7 +272,8 @@ namespace ILCompiler.DependencyAnalysisFramework
                                 dependency.OtherReasonNode,
                                 out storedDependencySet
                             )
-                        ) {
+                        )
+                        {
                             storedDependencySet =
                                 new HashSet<DependencyNodeCore<DependencyContextType>.CombinedDependencyListEntry>();
                             _conditional_dependency_store.Add(
@@ -302,7 +313,8 @@ namespace ILCompiler.DependencyAnalysisFramework
                         dependencyPhase,
                         out var deferredPerPhaseDependencies
                     )
-                ) {
+                )
+                {
                     deferredPerPhaseDependencies = new List<
                         DependencyNodeCore<DependencyContextType>
                     >();
@@ -353,10 +365,12 @@ namespace ILCompiler.DependencyAnalysisFramework
                             currentNode,
                             out storedDependencySet
                         )
-                    ) {
+                    )
+                    {
                         foreach (
                             DependencyNodeCore<DependencyContextType>.CombinedDependencyListEntry newlySatisfiedDependency in storedDependencySet
-                        ) {
+                        )
+                        {
                             AddToMarkStack(
                                 newlySatisfiedDependency.Node,
                                 newlySatisfiedDependency.Reason,
@@ -411,7 +425,8 @@ namespace ILCompiler.DependencyAnalysisFramework
                         ComputeDependencies(deferredDependenciesInCurrentPhase);
                         foreach (
                             DependencyNodeCore<DependencyContextType> node in deferredDependenciesInCurrentPhase
-                        ) {
+                        )
+                        {
                             Debug.Assert(node.StaticDependenciesAreComputed);
                             GetStaticDependenciesImpl(node);
                         }
@@ -452,7 +467,8 @@ namespace ILCompiler.DependencyAnalysisFramework
             string reason,
             DependencyNodeCore<DependencyContextType> reason1,
             DependencyNodeCore<DependencyContextType> reason2
-        ) {
+        )
+        {
             if (_marker.MarkNode(node, reason1, reason2, reason))
             {
                 if (PerfEventSource.Log.IsEnabled())

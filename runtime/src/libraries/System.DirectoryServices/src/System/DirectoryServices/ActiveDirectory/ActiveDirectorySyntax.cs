@@ -77,7 +77,8 @@ namespace System.DirectoryServices.ActiveDirectory
             if (
                 (!syntax.attributeSyntax.Equals(this.attributeSyntax))
                 || (syntax.oMSyntax != this.oMSyntax)
-            ) {
+            )
+            {
                 result = false;
             }
             else
@@ -90,7 +91,8 @@ namespace System.DirectoryServices.ActiveDirectory
                         && (syntax.oMObjectClass != null)
                         && (!this.oMObjectClass.Equals(syntax.oMObjectClass))
                     )
-                ) {
+                )
+                {
                     result = false;
                 }
             }

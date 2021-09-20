@@ -57,7 +57,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
         internal override TResult Accept<TArgument, TResult>(
             CSharpSymbolVisitor<TArgument, TResult> visitor,
             TArgument argument
-        ) {
+        )
+        {
             return visitor.VisitModule(this, argument);
         }
 
@@ -315,7 +316,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                 (object)moduleNs != null
                 && moduleNs.Extent.Kind == NamespaceKind.Module
                 && moduleNs.ContainingModule == this
-            ) {
+            )
+            {
                 // this is already the correct module namespace
                 return moduleNs;
             }
@@ -323,7 +325,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             if (
                 namespaceSymbol.IsGlobalNamespace
                 || (object)namespaceSymbol.ContainingNamespace == null
-            ) {
+            )
+            {
                 return this.GlobalNamespace;
             }
             else

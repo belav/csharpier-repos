@@ -84,7 +84,8 @@ namespace Generators
                             if (
                                 length != EventSourceAttribute.Length
                                 && length != EventSourceAttributeShort.Length
-                            ) {
+                            )
+                            {
                                 continue;
                             }
 
@@ -93,7 +94,8 @@ namespace Generators
                             if (
                                 attrName == EventSourceAttribute
                                 || attrName == EventSourceAttributeShort
-                            ) {
+                            )
+                            {
                                 // Match add to candidates
                                 _candidateClasses ??= new List<ClassDeclarationSyntax>();
                                 _candidateClasses.Add(classDeclaration);

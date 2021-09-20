@@ -30,7 +30,8 @@ namespace Microsoft.CodeAnalysis.ExternalAccess.FSharp.Internal.Editor
             Document document,
             int position,
             CancellationToken cancellationToken = default
-        ) {
+        )
+        {
             var result = await _braceMatcher.FindBracesAsync(document, position, cancellationToken)
                 .ConfigureAwait(false);
             if (result.HasValue)

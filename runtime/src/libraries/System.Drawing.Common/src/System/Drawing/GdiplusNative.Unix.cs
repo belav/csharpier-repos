@@ -43,7 +43,8 @@ namespace System.Drawing
                                 default,
                                 out lib
                             )
-                        ) {
+                        )
+                        {
                             // macports install location
                             NativeLibrary.TryLoad(
                                 "/opt/local/lib/libgdiplus.dylib",

@@ -16,7 +16,8 @@ namespace Microsoft.Net.Http.Headers
             IDictionary<string, string> store,
             bool enableCookieNameEncoding,
             bool supportsMultipleValues
-        ) {
+        )
+        {
             // If a parser returns an empty list, it means there was no value, but that's valid (e.g. "Accept: "). The caller
             // can ignore the value.
             if (values.Count == 0)
@@ -40,7 +41,8 @@ namespace Microsoft.Net.Http.Headers
                             out var parsedName,
                             out var parsedValue
                         )
-                    ) {
+                    )
+                    {
                         // The entry may not contain an actual value, like " , "
                         if (parsedName != null && parsedValue != null)
                         {
@@ -68,7 +70,8 @@ namespace Microsoft.Net.Http.Headers
             bool supportsMultipleValues,
             [NotNullWhen(true)] out StringSegment? parsedName,
             [NotNullWhen(true)] out StringSegment? parsedValue
-        ) {
+        )
+        {
             parsedName = null;
             parsedValue = null;
 
@@ -119,7 +122,8 @@ namespace Microsoft.Net.Http.Headers
             if (
                 (separatorFound && !supportsMultipleValues)
                 || (!separatorFound && (current < value.Length))
-            ) {
+            )
+            {
                 return false;
             }
 
@@ -133,7 +137,8 @@ namespace Microsoft.Net.Http.Headers
             int startIndex,
             bool skipEmptyValues,
             out bool separatorFound
-        ) {
+        )
+        {
             Contract.Requires(startIndex <= input.Length); // it's OK if index == value.Length.
 
             separatorFound = false;
@@ -155,7 +160,8 @@ namespace Microsoft.Net.Http.Headers
                 // Most headers only split on ',', but cookies primarily split on ';'
                 while (
                     (current < input.Length) && ((input[current] == ',') || (input[current] == ';'))
-                ) {
+                )
+                {
                     current++; // skip delimiter.
                     current = current + HttpRuleParser.GetWhitespaceLength(input, current);
                 }
@@ -170,7 +176,8 @@ namespace Microsoft.Net.Http.Headers
             ref int offset,
             [NotNullWhen(true)] out StringSegment? parsedName,
             [NotNullWhen(true)] out StringSegment? parsedValue
-        ) {
+        )
+        {
             Contract.Requires(offset >= 0);
 
             parsedName = null;

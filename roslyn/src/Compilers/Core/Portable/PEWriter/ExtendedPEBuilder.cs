@@ -41,19 +41,21 @@ namespace Microsoft.Cci
             CorFlags flags,
             Func<IEnumerable<Blob>, BlobContentId> deterministicIdProvider,
             bool withMvidSection
-        ) : base(
-            header,
-            metadataRootBuilder,
-            ilStream,
-            mappedFieldData,
-            managedResources,
-            nativeResources,
-            debugDirectoryBuilder,
-            strongNameSignatureSize,
-            entryPoint,
-            flags,
-            deterministicIdProvider
-        ) {
+        )
+            : base(
+                header,
+                metadataRootBuilder,
+                ilStream,
+                mappedFieldData,
+                managedResources,
+                nativeResources,
+                debugDirectoryBuilder,
+                strongNameSignatureSize,
+                entryPoint,
+                flags,
+                deterministicIdProvider
+            )
+        {
             _withMvidSection = withMvidSection;
         }
 

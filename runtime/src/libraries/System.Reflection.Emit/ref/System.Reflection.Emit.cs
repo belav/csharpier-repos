@@ -53,14 +53,16 @@ namespace System.Reflection.Emit
         public static System.Reflection.Emit.AssemblyBuilder DefineDynamicAssembly(
             System.Reflection.AssemblyName name,
             System.Reflection.Emit.AssemblyBuilderAccess access
-        ) {
+        )
+        {
             throw null;
         }
         public static System.Reflection.Emit.AssemblyBuilder DefineDynamicAssembly(
             System.Reflection.AssemblyName name,
             System.Reflection.Emit.AssemblyBuilderAccess access,
             System.Collections.Generic.IEnumerable<System.Reflection.Emit.CustomAttributeBuilder>? assemblyAttributes
-        ) {
+        )
+        {
             throw null;
         }
         public System.Reflection.Emit.ModuleBuilder DefineDynamicModule(string name)
@@ -112,7 +114,8 @@ namespace System.Reflection.Emit
         }
         public override System.Reflection.ManifestResourceInfo? GetManifestResourceInfo(
             string resourceName
-        ) {
+        )
+        {
             throw null;
         }
         public override string[] GetManifestResourceNames()
@@ -148,13 +151,15 @@ namespace System.Reflection.Emit
         }
         public override System.Reflection.Assembly GetSatelliteAssembly(
             System.Globalization.CultureInfo culture
-        ) {
+        )
+        {
             throw null;
         }
         public override System.Reflection.Assembly GetSatelliteAssembly(
             System.Globalization.CultureInfo culture,
             System.Version? version
-        ) {
+        )
+        {
             throw null;
         }
         [System.Diagnostics.CodeAnalysis.RequiresUnreferencedCodeAttribute(
@@ -226,7 +231,8 @@ namespace System.Reflection.Emit
             int iSequence,
             System.Reflection.ParameterAttributes attributes,
             string? strParamName
-        ) {
+        )
+        {
             throw null;
         }
         public override object[] GetCustomAttributes(bool inherit)
@@ -259,7 +265,8 @@ namespace System.Reflection.Emit
             System.Reflection.Binder? binder,
             object?[]? parameters,
             System.Globalization.CultureInfo? culture
-        ) {
+        )
+        {
             throw null;
         }
         public override object Invoke(
@@ -267,7 +274,8 @@ namespace System.Reflection.Emit
             System.Reflection.Binder? binder,
             object?[]? parameters,
             System.Globalization.CultureInfo? culture
-        ) {
+        )
+        {
             throw null;
         }
         public override bool IsDefined(System.Type attributeType, bool inherit)
@@ -375,7 +383,8 @@ namespace System.Reflection.Emit
         public System.Reflection.Emit.FieldBuilder DefineLiteral(
             string literalName,
             object? literalValue
-        ) {
+        )
+        {
             throw null;
         }
         protected override System.Reflection.TypeAttributes GetAttributeFlagsImpl()
@@ -392,7 +401,8 @@ namespace System.Reflection.Emit
             System.Reflection.CallingConventions callConvention,
             System.Type[] types,
             System.Reflection.ParameterModifier[]? modifiers
-        ) {
+        )
+        {
             throw null;
         }
         [System.Diagnostics.CodeAnalysis.DynamicallyAccessedMembersAttribute(
@@ -401,7 +411,8 @@ namespace System.Reflection.Emit
         )]
         public override System.Reflection.ConstructorInfo[] GetConstructors(
             System.Reflection.BindingFlags bindingAttr
-        ) {
+        )
+        {
             throw null;
         }
         public override object[] GetCustomAttributes(bool inherit)
@@ -427,7 +438,8 @@ namespace System.Reflection.Emit
         public override System.Reflection.EventInfo? GetEvent(
             string name,
             System.Reflection.BindingFlags bindingAttr
-        ) {
+        )
+        {
             throw null;
         }
         [System.Diagnostics.CodeAnalysis.DynamicallyAccessedMembersAttribute(
@@ -443,7 +455,8 @@ namespace System.Reflection.Emit
         )]
         public override System.Reflection.EventInfo[] GetEvents(
             System.Reflection.BindingFlags bindingAttr
-        ) {
+        )
+        {
             throw null;
         }
         [System.Diagnostics.CodeAnalysis.DynamicallyAccessedMembersAttribute(
@@ -453,7 +466,8 @@ namespace System.Reflection.Emit
         public override System.Reflection.FieldInfo? GetField(
             string name,
             System.Reflection.BindingFlags bindingAttr
-        ) {
+        )
+        {
             throw null;
         }
         [System.Diagnostics.CodeAnalysis.DynamicallyAccessedMembersAttribute(
@@ -462,7 +476,8 @@ namespace System.Reflection.Emit
         )]
         public override System.Reflection.FieldInfo[] GetFields(
             System.Reflection.BindingFlags bindingAttr
-        ) {
+        )
+        {
             throw null;
         }
         public override System.Type? GetInterface(string name, bool ignoreCase)
@@ -471,7 +486,8 @@ namespace System.Reflection.Emit
         }
         public override System.Reflection.InterfaceMapping GetInterfaceMap(
             System.Type interfaceType
-        ) {
+        )
+        {
             throw null;
         }
         public override System.Type[] GetInterfaces()
@@ -496,7 +512,8 @@ namespace System.Reflection.Emit
             string name,
             System.Reflection.MemberTypes type,
             System.Reflection.BindingFlags bindingAttr
-        ) {
+        )
+        {
             throw null;
         }
         [System.Diagnostics.CodeAnalysis.DynamicallyAccessedMembersAttribute(
@@ -515,7 +532,8 @@ namespace System.Reflection.Emit
         )]
         public override System.Reflection.MemberInfo[] GetMembers(
             System.Reflection.BindingFlags bindingAttr
-        ) {
+        )
+        {
             throw null;
         }
         [System.Diagnostics.CodeAnalysis.DynamicallyAccessedMembersAttribute(
@@ -529,7 +547,8 @@ namespace System.Reflection.Emit
             System.Reflection.CallingConventions callConvention,
             System.Type[]? types,
             System.Reflection.ParameterModifier[]? modifiers
-        ) {
+        )
+        {
             throw null;
         }
         [System.Diagnostics.CodeAnalysis.DynamicallyAccessedMembersAttribute(
@@ -538,7 +557,8 @@ namespace System.Reflection.Emit
         )]
         public override System.Reflection.MethodInfo[] GetMethods(
             System.Reflection.BindingFlags bindingAttr
-        ) {
+        )
+        {
             throw null;
         }
         [System.Diagnostics.CodeAnalysis.DynamicallyAccessedMembersAttribute(
@@ -548,7 +568,8 @@ namespace System.Reflection.Emit
         public override System.Type? GetNestedType(
             string name,
             System.Reflection.BindingFlags bindingAttr
-        ) {
+        )
+        {
             throw null;
         }
         [System.Diagnostics.CodeAnalysis.DynamicallyAccessedMembersAttribute(
@@ -565,7 +586,8 @@ namespace System.Reflection.Emit
         )]
         public override System.Reflection.PropertyInfo[] GetProperties(
             System.Reflection.BindingFlags bindingAttr
-        ) {
+        )
+        {
             throw null;
         }
         [System.Diagnostics.CodeAnalysis.DynamicallyAccessedMembersAttribute(
@@ -579,7 +601,8 @@ namespace System.Reflection.Emit
             System.Type? returnType,
             System.Type[]? types,
             System.Reflection.ParameterModifier[]? modifiers
-        ) {
+        )
+        {
             throw null;
         }
         protected override bool HasElementTypeImpl()
@@ -598,7 +621,8 @@ namespace System.Reflection.Emit
             System.Reflection.ParameterModifier[]? modifiers,
             System.Globalization.CultureInfo? culture,
             string[]? namedParameters
-        ) {
+        )
+        {
             throw null;
         }
         protected override bool IsArrayImpl()
@@ -608,7 +632,8 @@ namespace System.Reflection.Emit
         public override bool IsAssignableFrom(
             [System.Diagnostics.CodeAnalysis.NotNullWhenAttribute(true)]
                 System.Reflection.TypeInfo? typeInfo
-        ) {
+        )
+        {
             throw null;
         }
         protected override bool IsByRefImpl()
@@ -859,7 +884,8 @@ namespace System.Reflection.Emit
             System.Reflection.CallingConventions callConvention,
             System.Type[] types,
             System.Reflection.ParameterModifier[]? modifiers
-        ) {
+        )
+        {
             throw null;
         }
         [System.Diagnostics.CodeAnalysis.DynamicallyAccessedMembersAttribute(
@@ -868,7 +894,8 @@ namespace System.Reflection.Emit
         )]
         public override System.Reflection.ConstructorInfo[] GetConstructors(
             System.Reflection.BindingFlags bindingAttr
-        ) {
+        )
+        {
             throw null;
         }
         public override object[] GetCustomAttributes(bool inherit)
@@ -890,7 +917,8 @@ namespace System.Reflection.Emit
         public override System.Reflection.EventInfo GetEvent(
             string name,
             System.Reflection.BindingFlags bindingAttr
-        ) {
+        )
+        {
             throw null;
         }
         [System.Diagnostics.CodeAnalysis.DynamicallyAccessedMembersAttribute(
@@ -906,7 +934,8 @@ namespace System.Reflection.Emit
         )]
         public override System.Reflection.EventInfo[] GetEvents(
             System.Reflection.BindingFlags bindingAttr
-        ) {
+        )
+        {
             throw null;
         }
         [System.Diagnostics.CodeAnalysis.DynamicallyAccessedMembersAttribute(
@@ -916,7 +945,8 @@ namespace System.Reflection.Emit
         public override System.Reflection.FieldInfo GetField(
             string name,
             System.Reflection.BindingFlags bindingAttr
-        ) {
+        )
+        {
             throw null;
         }
         [System.Diagnostics.CodeAnalysis.DynamicallyAccessedMembersAttribute(
@@ -925,7 +955,8 @@ namespace System.Reflection.Emit
         )]
         public override System.Reflection.FieldInfo[] GetFields(
             System.Reflection.BindingFlags bindingAttr
-        ) {
+        )
+        {
             throw null;
         }
         public override System.Type[] GetGenericArguments()
@@ -946,7 +977,8 @@ namespace System.Reflection.Emit
         }
         public override System.Reflection.InterfaceMapping GetInterfaceMap(
             System.Type interfaceType
-        ) {
+        )
+        {
             throw null;
         }
         public override System.Type[] GetInterfaces()
@@ -971,7 +1003,8 @@ namespace System.Reflection.Emit
             string name,
             System.Reflection.MemberTypes type,
             System.Reflection.BindingFlags bindingAttr
-        ) {
+        )
+        {
             throw null;
         }
         [System.Diagnostics.CodeAnalysis.DynamicallyAccessedMembersAttribute(
@@ -990,7 +1023,8 @@ namespace System.Reflection.Emit
         )]
         public override System.Reflection.MemberInfo[] GetMembers(
             System.Reflection.BindingFlags bindingAttr
-        ) {
+        )
+        {
             throw null;
         }
         [System.Diagnostics.CodeAnalysis.DynamicallyAccessedMembersAttribute(
@@ -1004,7 +1038,8 @@ namespace System.Reflection.Emit
             System.Reflection.CallingConventions callConvention,
             System.Type[]? types,
             System.Reflection.ParameterModifier[]? modifiers
-        ) {
+        )
+        {
             throw null;
         }
         [System.Diagnostics.CodeAnalysis.DynamicallyAccessedMembersAttribute(
@@ -1013,7 +1048,8 @@ namespace System.Reflection.Emit
         )]
         public override System.Reflection.MethodInfo[] GetMethods(
             System.Reflection.BindingFlags bindingAttr
-        ) {
+        )
+        {
             throw null;
         }
         [System.Diagnostics.CodeAnalysis.DynamicallyAccessedMembersAttribute(
@@ -1023,7 +1059,8 @@ namespace System.Reflection.Emit
         public override System.Type GetNestedType(
             string name,
             System.Reflection.BindingFlags bindingAttr
-        ) {
+        )
+        {
             throw null;
         }
         [System.Diagnostics.CodeAnalysis.DynamicallyAccessedMembersAttribute(
@@ -1040,7 +1077,8 @@ namespace System.Reflection.Emit
         )]
         public override System.Reflection.PropertyInfo[] GetProperties(
             System.Reflection.BindingFlags bindingAttr
-        ) {
+        )
+        {
             throw null;
         }
         [System.Diagnostics.CodeAnalysis.DynamicallyAccessedMembersAttribute(
@@ -1054,7 +1092,8 @@ namespace System.Reflection.Emit
             System.Type? returnType,
             System.Type[]? types,
             System.Reflection.ParameterModifier[]? modifiers
-        ) {
+        )
+        {
             throw null;
         }
         protected override bool HasElementTypeImpl()
@@ -1073,7 +1112,8 @@ namespace System.Reflection.Emit
             System.Reflection.ParameterModifier[]? modifiers,
             System.Globalization.CultureInfo? culture,
             string[]? namedParameters
-        ) {
+        )
+        {
             throw null;
         }
         protected override bool IsArrayImpl()
@@ -1083,12 +1123,14 @@ namespace System.Reflection.Emit
         public override bool IsAssignableFrom(
             [System.Diagnostics.CodeAnalysis.NotNullWhenAttribute(true)]
                 System.Reflection.TypeInfo? typeInfo
-        ) {
+        )
+        {
             throw null;
         }
         public override bool IsAssignableFrom(
             [System.Diagnostics.CodeAnalysis.NotNullWhenAttribute(true)] System.Type? c
-        ) {
+        )
+        {
             throw null;
         }
         protected override bool IsByRefImpl()
@@ -1239,14 +1281,16 @@ namespace System.Reflection.Emit
         }
         public System.Reflection.Emit.GenericTypeParameterBuilder[] DefineGenericParameters(
             params string[] names
-        ) {
+        )
+        {
             throw null;
         }
         public System.Reflection.Emit.ParameterBuilder DefineParameter(
             int position,
             System.Reflection.ParameterAttributes attributes,
             string? strParamName
-        ) {
+        )
+        {
             throw null;
         }
         public override bool Equals(object? obj)
@@ -1299,7 +1343,8 @@ namespace System.Reflection.Emit
             System.Reflection.Binder? binder,
             object?[]? parameters,
             System.Globalization.CultureInfo? culture
-        ) {
+        )
+        {
             throw null;
         }
         public override bool IsDefined(System.Type attributeType, bool inherit)
@@ -1308,7 +1353,8 @@ namespace System.Reflection.Emit
         }
         public override System.Reflection.MethodInfo MakeGenericMethod(
             params System.Type[] typeArguments
-        ) {
+        )
+        {
             throw null;
         }
         public void SetCustomAttribute(
@@ -1370,7 +1416,8 @@ namespace System.Reflection.Emit
             string name,
             System.Reflection.TypeAttributes visibility,
             System.Type underlyingType
-        ) {
+        )
+        {
             throw null;
         }
         public System.Reflection.Emit.MethodBuilder DefineGlobalMethod(
@@ -1379,7 +1426,8 @@ namespace System.Reflection.Emit
             System.Reflection.CallingConventions callingConvention,
             System.Type? returnType,
             System.Type[]? parameterTypes
-        ) {
+        )
+        {
             throw null;
         }
         public System.Reflection.Emit.MethodBuilder DefineGlobalMethod(
@@ -1392,7 +1440,8 @@ namespace System.Reflection.Emit
             System.Type[]? parameterTypes,
             System.Type[][]? requiredParameterTypeCustomModifiers,
             System.Type[][]? optionalParameterTypeCustomModifiers
-        ) {
+        )
+        {
             throw null;
         }
         public System.Reflection.Emit.MethodBuilder DefineGlobalMethod(
@@ -1400,14 +1449,16 @@ namespace System.Reflection.Emit
             System.Reflection.MethodAttributes attributes,
             System.Type? returnType,
             System.Type[]? parameterTypes
-        ) {
+        )
+        {
             throw null;
         }
         public System.Reflection.Emit.FieldBuilder DefineInitializedData(
             string name,
             byte[] data,
             System.Reflection.FieldAttributes attributes
-        ) {
+        )
+        {
             throw null;
         }
         public System.Reflection.Emit.MethodBuilder DefinePInvokeMethod(
@@ -1419,7 +1470,8 @@ namespace System.Reflection.Emit
             System.Type[]? parameterTypes,
             System.Runtime.InteropServices.CallingConvention nativeCallConv,
             System.Runtime.InteropServices.CharSet nativeCharSet
-        ) {
+        )
+        {
             throw null;
         }
         public System.Reflection.Emit.MethodBuilder DefinePInvokeMethod(
@@ -1432,7 +1484,8 @@ namespace System.Reflection.Emit
             System.Type[]? parameterTypes,
             System.Runtime.InteropServices.CallingConvention nativeCallConv,
             System.Runtime.InteropServices.CharSet nativeCharSet
-        ) {
+        )
+        {
             throw null;
         }
         public System.Reflection.Emit.TypeBuilder DefineType(string name)
@@ -1442,7 +1495,8 @@ namespace System.Reflection.Emit
         public System.Reflection.Emit.TypeBuilder DefineType(
             string name,
             System.Reflection.TypeAttributes attr
-        ) {
+        )
+        {
             throw null;
         }
         public System.Reflection.Emit.TypeBuilder DefineType(
@@ -1452,7 +1506,8 @@ namespace System.Reflection.Emit
                 System.Diagnostics.CodeAnalysis.DynamicallyAccessedMemberTypes.All
             )]
                 System.Type? parent
-        ) {
+        )
+        {
             throw null;
         }
         public System.Reflection.Emit.TypeBuilder DefineType(
@@ -1463,7 +1518,8 @@ namespace System.Reflection.Emit
             )]
                 System.Type? parent,
             int typesize
-        ) {
+        )
+        {
             throw null;
         }
         public System.Reflection.Emit.TypeBuilder DefineType(
@@ -1474,7 +1530,8 @@ namespace System.Reflection.Emit
             )]
                 System.Type? parent,
             System.Reflection.Emit.PackingSize packsize
-        ) {
+        )
+        {
             throw null;
         }
         public System.Reflection.Emit.TypeBuilder DefineType(
@@ -1486,7 +1543,8 @@ namespace System.Reflection.Emit
                 System.Type? parent,
             System.Reflection.Emit.PackingSize packingSize,
             int typesize
-        ) {
+        )
+        {
             throw null;
         }
         public System.Reflection.Emit.TypeBuilder DefineType(
@@ -1497,14 +1555,16 @@ namespace System.Reflection.Emit
             )]
                 System.Type? parent,
             System.Type[]? interfaces
-        ) {
+        )
+        {
             throw null;
         }
         public System.Reflection.Emit.FieldBuilder DefineUninitializedData(
             string name,
             int size,
             System.Reflection.FieldAttributes attributes
-        ) {
+        )
+        {
             throw null;
         }
         public override bool Equals(object? obj)
@@ -1517,7 +1577,8 @@ namespace System.Reflection.Emit
             System.Reflection.CallingConventions callingConvention,
             System.Type? returnType,
             System.Type[]? parameterTypes
-        ) {
+        )
+        {
             throw null;
         }
         public override object[] GetCustomAttributes(bool inherit)
@@ -1538,7 +1599,8 @@ namespace System.Reflection.Emit
         public override System.Reflection.FieldInfo? GetField(
             string name,
             System.Reflection.BindingFlags bindingAttr
-        ) {
+        )
+        {
             throw null;
         }
         [System.Diagnostics.CodeAnalysis.RequiresUnreferencedCodeAttribute(
@@ -1546,7 +1608,8 @@ namespace System.Reflection.Emit
         )]
         public override System.Reflection.FieldInfo[] GetFields(
             System.Reflection.BindingFlags bindingFlags
-        ) {
+        )
+        {
             throw null;
         }
         public override int GetHashCode()
@@ -1563,7 +1626,8 @@ namespace System.Reflection.Emit
             System.Reflection.CallingConventions callConvention,
             System.Type[]? types,
             System.Reflection.ParameterModifier[]? modifiers
-        ) {
+        )
+        {
             throw null;
         }
         [System.Diagnostics.CodeAnalysis.RequiresUnreferencedCodeAttribute(
@@ -1571,13 +1635,15 @@ namespace System.Reflection.Emit
         )]
         public override System.Reflection.MethodInfo[] GetMethods(
             System.Reflection.BindingFlags bindingFlags
-        ) {
+        )
+        {
             throw null;
         }
         public override void GetPEKind(
             out System.Reflection.PortableExecutableKinds peKind,
             out System.Reflection.ImageFileMachine machine
-        ) {
+        )
+        {
             throw null;
         }
         [System.Diagnostics.CodeAnalysis.RequiresUnreferencedCodeAttribute(
@@ -1623,7 +1689,8 @@ namespace System.Reflection.Emit
             int metadataToken,
             System.Type[]? genericTypeArguments,
             System.Type[]? genericMethodArguments
-        ) {
+        )
+        {
             throw null;
         }
         [System.Diagnostics.CodeAnalysis.RequiresUnreferencedCodeAttribute(
@@ -1633,7 +1700,8 @@ namespace System.Reflection.Emit
             int metadataToken,
             System.Type[]? genericTypeArguments,
             System.Type[]? genericMethodArguments
-        ) {
+        )
+        {
             throw null;
         }
         [System.Diagnostics.CodeAnalysis.RequiresUnreferencedCodeAttribute(
@@ -1643,7 +1711,8 @@ namespace System.Reflection.Emit
             int metadataToken,
             System.Type[]? genericTypeArguments,
             System.Type[]? genericMethodArguments
-        ) {
+        )
+        {
             throw null;
         }
         [System.Diagnostics.CodeAnalysis.RequiresUnreferencedCodeAttribute(
@@ -1667,7 +1736,8 @@ namespace System.Reflection.Emit
             int metadataToken,
             System.Type[]? genericTypeArguments,
             System.Type[]? genericMethodArguments
-        ) {
+        )
+        {
             throw null;
         }
         public void SetCustomAttribute(
@@ -1748,7 +1818,8 @@ namespace System.Reflection.Emit
             System.Reflection.Binder? binder,
             object?[]? index,
             System.Globalization.CultureInfo? culture
-        ) {
+        )
+        {
             throw null;
         }
         public override bool IsDefined(System.Type attributeType, bool inherit)
@@ -1915,7 +1986,8 @@ namespace System.Reflection.Emit
             System.Reflection.MethodAttributes attributes,
             System.Reflection.CallingConventions callingConvention,
             System.Type[]? parameterTypes
-        ) {
+        )
+        {
             throw null;
         }
         public System.Reflection.Emit.ConstructorBuilder DefineConstructor(
@@ -1924,26 +1996,30 @@ namespace System.Reflection.Emit
             System.Type[]? parameterTypes,
             System.Type[][]? requiredCustomModifiers,
             System.Type[][]? optionalCustomModifiers
-        ) {
+        )
+        {
             throw null;
         }
         public System.Reflection.Emit.ConstructorBuilder DefineDefaultConstructor(
             System.Reflection.MethodAttributes attributes
-        ) {
+        )
+        {
             throw null;
         }
         public System.Reflection.Emit.EventBuilder DefineEvent(
             string name,
             System.Reflection.EventAttributes attributes,
             System.Type eventtype
-        ) {
+        )
+        {
             throw null;
         }
         public System.Reflection.Emit.FieldBuilder DefineField(
             string fieldName,
             System.Type type,
             System.Reflection.FieldAttributes attributes
-        ) {
+        )
+        {
             throw null;
         }
         public System.Reflection.Emit.FieldBuilder DefineField(
@@ -1952,32 +2028,37 @@ namespace System.Reflection.Emit
             System.Type[]? requiredCustomModifiers,
             System.Type[]? optionalCustomModifiers,
             System.Reflection.FieldAttributes attributes
-        ) {
+        )
+        {
             throw null;
         }
         public System.Reflection.Emit.GenericTypeParameterBuilder[] DefineGenericParameters(
             params string[] names
-        ) {
+        )
+        {
             throw null;
         }
         public System.Reflection.Emit.FieldBuilder DefineInitializedData(
             string name,
             byte[] data,
             System.Reflection.FieldAttributes attributes
-        ) {
+        )
+        {
             throw null;
         }
         public System.Reflection.Emit.MethodBuilder DefineMethod(
             string name,
             System.Reflection.MethodAttributes attributes
-        ) {
+        )
+        {
             throw null;
         }
         public System.Reflection.Emit.MethodBuilder DefineMethod(
             string name,
             System.Reflection.MethodAttributes attributes,
             System.Reflection.CallingConventions callingConvention
-        ) {
+        )
+        {
             throw null;
         }
         public System.Reflection.Emit.MethodBuilder DefineMethod(
@@ -1986,7 +2067,8 @@ namespace System.Reflection.Emit
             System.Reflection.CallingConventions callingConvention,
             System.Type? returnType,
             System.Type[]? parameterTypes
-        ) {
+        )
+        {
             throw null;
         }
         public System.Reflection.Emit.MethodBuilder DefineMethod(
@@ -1999,7 +2081,8 @@ namespace System.Reflection.Emit
             System.Type[]? parameterTypes,
             System.Type[][]? parameterTypeRequiredCustomModifiers,
             System.Type[][]? parameterTypeOptionalCustomModifiers
-        ) {
+        )
+        {
             throw null;
         }
         public System.Reflection.Emit.MethodBuilder DefineMethod(
@@ -2007,7 +2090,8 @@ namespace System.Reflection.Emit
             System.Reflection.MethodAttributes attributes,
             System.Type? returnType,
             System.Type[]? parameterTypes
-        ) {
+        )
+        {
             throw null;
         }
         public void DefineMethodOverride(
@@ -2021,7 +2105,8 @@ namespace System.Reflection.Emit
         public System.Reflection.Emit.TypeBuilder DefineNestedType(
             string name,
             System.Reflection.TypeAttributes attr
-        ) {
+        )
+        {
             throw null;
         }
         public System.Reflection.Emit.TypeBuilder DefineNestedType(
@@ -2031,7 +2116,8 @@ namespace System.Reflection.Emit
                 System.Diagnostics.CodeAnalysis.DynamicallyAccessedMemberTypes.All
             )]
                 System.Type? parent
-        ) {
+        )
+        {
             throw null;
         }
         public System.Reflection.Emit.TypeBuilder DefineNestedType(
@@ -2042,7 +2128,8 @@ namespace System.Reflection.Emit
             )]
                 System.Type? parent,
             int typeSize
-        ) {
+        )
+        {
             throw null;
         }
         public System.Reflection.Emit.TypeBuilder DefineNestedType(
@@ -2053,7 +2140,8 @@ namespace System.Reflection.Emit
             )]
                 System.Type? parent,
             System.Reflection.Emit.PackingSize packSize
-        ) {
+        )
+        {
             throw null;
         }
         public System.Reflection.Emit.TypeBuilder DefineNestedType(
@@ -2065,7 +2153,8 @@ namespace System.Reflection.Emit
                 System.Type? parent,
             System.Reflection.Emit.PackingSize packSize,
             int typeSize
-        ) {
+        )
+        {
             throw null;
         }
         public System.Reflection.Emit.TypeBuilder DefineNestedType(
@@ -2076,7 +2165,8 @@ namespace System.Reflection.Emit
             )]
                 System.Type? parent,
             System.Type[]? interfaces
-        ) {
+        )
+        {
             throw null;
         }
         public System.Reflection.Emit.MethodBuilder DefinePInvokeMethod(
@@ -2088,7 +2178,8 @@ namespace System.Reflection.Emit
             System.Type[]? parameterTypes,
             System.Runtime.InteropServices.CallingConvention nativeCallConv,
             System.Runtime.InteropServices.CharSet nativeCharSet
-        ) {
+        )
+        {
             throw null;
         }
         public System.Reflection.Emit.MethodBuilder DefinePInvokeMethod(
@@ -2101,7 +2192,8 @@ namespace System.Reflection.Emit
             System.Type[]? parameterTypes,
             System.Runtime.InteropServices.CallingConvention nativeCallConv,
             System.Runtime.InteropServices.CharSet nativeCharSet
-        ) {
+        )
+        {
             throw null;
         }
         public System.Reflection.Emit.MethodBuilder DefinePInvokeMethod(
@@ -2118,7 +2210,8 @@ namespace System.Reflection.Emit
             System.Type[][]? parameterTypeOptionalCustomModifiers,
             System.Runtime.InteropServices.CallingConvention nativeCallConv,
             System.Runtime.InteropServices.CharSet nativeCharSet
-        ) {
+        )
+        {
             throw null;
         }
         public System.Reflection.Emit.PropertyBuilder DefineProperty(
@@ -2127,7 +2220,8 @@ namespace System.Reflection.Emit
             System.Reflection.CallingConventions callingConvention,
             System.Type returnType,
             System.Type[]? parameterTypes
-        ) {
+        )
+        {
             throw null;
         }
         public System.Reflection.Emit.PropertyBuilder DefineProperty(
@@ -2140,7 +2234,8 @@ namespace System.Reflection.Emit
             System.Type[]? parameterTypes,
             System.Type[][]? parameterTypeRequiredCustomModifiers,
             System.Type[][]? parameterTypeOptionalCustomModifiers
-        ) {
+        )
+        {
             throw null;
         }
         public System.Reflection.Emit.PropertyBuilder DefineProperty(
@@ -2148,7 +2243,8 @@ namespace System.Reflection.Emit
             System.Reflection.PropertyAttributes attributes,
             System.Type returnType,
             System.Type[]? parameterTypes
-        ) {
+        )
+        {
             throw null;
         }
         public System.Reflection.Emit.PropertyBuilder DefineProperty(
@@ -2160,7 +2256,8 @@ namespace System.Reflection.Emit
             System.Type[]? parameterTypes,
             System.Type[][]? parameterTypeRequiredCustomModifiers,
             System.Type[][]? parameterTypeOptionalCustomModifiers
-        ) {
+        )
+        {
             throw null;
         }
         public System.Reflection.Emit.ConstructorBuilder DefineTypeInitializer()
@@ -2171,7 +2268,8 @@ namespace System.Reflection.Emit
             string name,
             int size,
             System.Reflection.FieldAttributes attributes
-        ) {
+        )
+        {
             throw null;
         }
         protected override System.Reflection.TypeAttributes GetAttributeFlagsImpl()
@@ -2181,7 +2279,8 @@ namespace System.Reflection.Emit
         public static System.Reflection.ConstructorInfo GetConstructor(
             System.Type type,
             System.Reflection.ConstructorInfo constructor
-        ) {
+        )
+        {
             throw null;
         }
         [System.Diagnostics.CodeAnalysis.DynamicallyAccessedMembersAttribute(
@@ -2194,7 +2293,8 @@ namespace System.Reflection.Emit
             System.Reflection.CallingConventions callConvention,
             System.Type[] types,
             System.Reflection.ParameterModifier[]? modifiers
-        ) {
+        )
+        {
             throw null;
         }
         [System.Diagnostics.CodeAnalysis.DynamicallyAccessedMembersAttribute(
@@ -2203,7 +2303,8 @@ namespace System.Reflection.Emit
         )]
         public override System.Reflection.ConstructorInfo[] GetConstructors(
             System.Reflection.BindingFlags bindingAttr
-        ) {
+        )
+        {
             throw null;
         }
         public override object[] GetCustomAttributes(bool inherit)
@@ -2225,7 +2326,8 @@ namespace System.Reflection.Emit
         public override System.Reflection.EventInfo? GetEvent(
             string name,
             System.Reflection.BindingFlags bindingAttr
-        ) {
+        )
+        {
             throw null;
         }
         [System.Diagnostics.CodeAnalysis.DynamicallyAccessedMembersAttribute(
@@ -2241,7 +2343,8 @@ namespace System.Reflection.Emit
         )]
         public override System.Reflection.EventInfo[] GetEvents(
             System.Reflection.BindingFlags bindingAttr
-        ) {
+        )
+        {
             throw null;
         }
         [System.Diagnostics.CodeAnalysis.DynamicallyAccessedMembersAttribute(
@@ -2251,13 +2354,15 @@ namespace System.Reflection.Emit
         public override System.Reflection.FieldInfo? GetField(
             string name,
             System.Reflection.BindingFlags bindingAttr
-        ) {
+        )
+        {
             throw null;
         }
         public static System.Reflection.FieldInfo GetField(
             System.Type type,
             System.Reflection.FieldInfo field
-        ) {
+        )
+        {
             throw null;
         }
         [System.Diagnostics.CodeAnalysis.DynamicallyAccessedMembersAttribute(
@@ -2266,7 +2371,8 @@ namespace System.Reflection.Emit
         )]
         public override System.Reflection.FieldInfo[] GetFields(
             System.Reflection.BindingFlags bindingAttr
-        ) {
+        )
+        {
             throw null;
         }
         public override System.Type[] GetGenericArguments()
@@ -2283,7 +2389,8 @@ namespace System.Reflection.Emit
         }
         public override System.Reflection.InterfaceMapping GetInterfaceMap(
             System.Type interfaceType
-        ) {
+        )
+        {
             throw null;
         }
         public override System.Type[] GetInterfaces()
@@ -2308,7 +2415,8 @@ namespace System.Reflection.Emit
             string name,
             System.Reflection.MemberTypes type,
             System.Reflection.BindingFlags bindingAttr
-        ) {
+        )
+        {
             throw null;
         }
         [System.Diagnostics.CodeAnalysis.DynamicallyAccessedMembersAttribute(
@@ -2327,13 +2435,15 @@ namespace System.Reflection.Emit
         )]
         public override System.Reflection.MemberInfo[] GetMembers(
             System.Reflection.BindingFlags bindingAttr
-        ) {
+        )
+        {
             throw null;
         }
         public static System.Reflection.MethodInfo GetMethod(
             System.Type type,
             System.Reflection.MethodInfo method
-        ) {
+        )
+        {
             throw null;
         }
         [System.Diagnostics.CodeAnalysis.DynamicallyAccessedMembersAttribute(
@@ -2347,7 +2457,8 @@ namespace System.Reflection.Emit
             System.Reflection.CallingConventions callConvention,
             System.Type[]? types,
             System.Reflection.ParameterModifier[]? modifiers
-        ) {
+        )
+        {
             throw null;
         }
         [System.Diagnostics.CodeAnalysis.DynamicallyAccessedMembersAttribute(
@@ -2356,7 +2467,8 @@ namespace System.Reflection.Emit
         )]
         public override System.Reflection.MethodInfo[] GetMethods(
             System.Reflection.BindingFlags bindingAttr
-        ) {
+        )
+        {
             throw null;
         }
         [System.Diagnostics.CodeAnalysis.DynamicallyAccessedMembersAttribute(
@@ -2366,7 +2478,8 @@ namespace System.Reflection.Emit
         public override System.Type? GetNestedType(
             string name,
             System.Reflection.BindingFlags bindingAttr
-        ) {
+        )
+        {
             throw null;
         }
         [System.Diagnostics.CodeAnalysis.DynamicallyAccessedMembersAttribute(
@@ -2383,7 +2496,8 @@ namespace System.Reflection.Emit
         )]
         public override System.Reflection.PropertyInfo[] GetProperties(
             System.Reflection.BindingFlags bindingAttr
-        ) {
+        )
+        {
             throw null;
         }
         [System.Diagnostics.CodeAnalysis.DynamicallyAccessedMembersAttribute(
@@ -2397,7 +2511,8 @@ namespace System.Reflection.Emit
             System.Type? returnType,
             System.Type[]? types,
             System.Reflection.ParameterModifier[]? modifiers
-        ) {
+        )
+        {
             throw null;
         }
         protected override bool HasElementTypeImpl()
@@ -2416,7 +2531,8 @@ namespace System.Reflection.Emit
             System.Reflection.ParameterModifier[]? modifiers,
             System.Globalization.CultureInfo? culture,
             string[]? namedParameters
-        ) {
+        )
+        {
             throw null;
         }
         protected override bool IsArrayImpl()
@@ -2426,12 +2542,14 @@ namespace System.Reflection.Emit
         public override bool IsAssignableFrom(
             [System.Diagnostics.CodeAnalysis.NotNullWhenAttribute(true)]
                 System.Reflection.TypeInfo? typeInfo
-        ) {
+        )
+        {
             throw null;
         }
         public override bool IsAssignableFrom(
             [System.Diagnostics.CodeAnalysis.NotNullWhenAttribute(true)] System.Type? c
-        ) {
+        )
+        {
             throw null;
         }
         protected override bool IsByRefImpl()

@@ -96,7 +96,8 @@ namespace Microsoft.AspNetCore.SignalR.Microbenchmarks
             if (
                 _parser.ParseMessage(buffer, out _, out _, out _)
                 != ServerSentEventsMessageParser.ParseResult.Completed
-            ) {
+            )
+            {
                 throw new InvalidOperationException("Parse failed!");
             }
 

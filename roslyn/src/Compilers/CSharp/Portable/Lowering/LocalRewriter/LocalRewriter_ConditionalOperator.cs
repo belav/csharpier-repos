@@ -57,7 +57,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             ConstantValue? constantValueOpt,
             TypeSymbol rewrittenType,
             bool isRef
-        ) {
+        )
+        {
             ConstantValue? conditionConstantValue = rewrittenCondition.ConstantValue;
             if (conditionConstantValue == ConstantValue.True)
             {

@@ -21,7 +21,8 @@ namespace System.Speech.Internal.SrgsCompiler
             object[] parameters,
             string onInitParameters,
             out Exception exceptionThrown
-        ) {
+        )
+        {
             exceptionThrown = null;
             try
             {
@@ -68,7 +69,8 @@ namespace System.Speech.Internal.SrgsCompiler
             string method,
             object[] parameters,
             out Exception exceptionThrown
-        ) {
+        )
+        {
             exceptionThrown = null;
             try
             {
@@ -92,7 +94,8 @@ namespace System.Speech.Internal.SrgsCompiler
             string method,
             object[] parameters,
             out Exception exceptionThrown
-        ) {
+        )
+        {
             exceptionThrown = null;
             try
             {
@@ -115,7 +118,8 @@ namespace System.Speech.Internal.SrgsCompiler
             string method,
             object[] parameters,
             out Exception exceptionThrown
-        ) {
+        )
+        {
             exceptionThrown = null;
             try
             {
@@ -165,12 +169,14 @@ namespace System.Speech.Internal.SrgsCompiler
             string method,
             out MethodInfo onParse,
             out System.Speech.Recognition.Grammar grammar
-        ) {
+        )
+        {
             Type ruleClass = rule == _rule ? _grammarType : GetTypeForRule(_assembly, rule);
             if (
                 ruleClass == null
                 || !ruleClass.IsSubclassOf(typeof(System.Speech.Recognition.Grammar))
-            ) {
+            )
+            {
                 throw new FormatException(SR.Get(SRID.RecognizerInvalidBinaryGrammar));
             }
 
@@ -203,7 +209,8 @@ namespace System.Speech.Internal.SrgsCompiler
                     type.Name == rule
                     && type.IsPublic
                     && type.IsSubclassOf(typeof(System.Speech.Recognition.Grammar))
-                ) {
+                )
+                {
                     return type;
                 }
             }
@@ -218,7 +225,8 @@ namespace System.Speech.Internal.SrgsCompiler
             string onInitParameters,
             string grammar,
             string rule
-        ) {
+        )
+        {
             MethodInfo[] mis = _grammarType.GetMethods();
 
             NameValuePair[] pairs = ParseInitParams(onInitParameters);

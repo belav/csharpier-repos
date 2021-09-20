@@ -164,7 +164,8 @@ namespace System.Linq.Expressions.Interpreter
         public bool TryGetLocalOrClosure(
             ParameterExpression var,
             [NotNullWhen(true)] out LocalVariable? local
-        ) {
+        )
+        {
             if (_variables.TryGetValue(var, out VariableScope? scope))
             {
                 local = scope.Variable;

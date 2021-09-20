@@ -46,7 +46,8 @@ namespace System.Xml
                 ofObjectToReturn is null
                 || ofObjectToReturn == typeof(System.IO.Stream)
                 || ofObjectToReturn == typeof(object)
-            ) {
+            )
+            {
                 return DownloadManager.GetStream(absoluteUri, _credentials, _proxy);
             }
 

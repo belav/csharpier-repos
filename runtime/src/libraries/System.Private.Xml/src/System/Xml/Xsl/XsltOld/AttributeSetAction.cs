@@ -67,7 +67,8 @@ namespace System.Xml.Xsl.XsltOld
                             if (
                                 Ref.Equal(nspace, input.Atoms.UriXsl)
                                 && Ref.Equal(name, input.Atoms.Attribute)
-                            ) {
+                            )
+                            {
                                 // found attribute so add it
                                 AddAction(compiler.CreateAttributeAction());
                             }

@@ -14,7 +14,8 @@ namespace AuthSamples.FunctionalTests
     {
         public IdentityExternalClaimsTests(
             WebApplicationFactory<Identity.ExternalClaims.Startup> fixture
-        ) {
+        )
+        {
             Client = fixture.CreateDefaultClient();
         }
 

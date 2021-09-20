@@ -129,7 +129,8 @@ namespace Microsoft.EntityFrameworkCore.Cosmos.Query.Internal
             MethodInfo method,
             IReadOnlyList<SqlExpression> arguments,
             IDiagnosticsLogger<DbLoggerCategory.Query> logger
-        ) {
+        )
+        {
             Check.NotNull(method, nameof(method));
             Check.NotNull(arguments, nameof(arguments));
             Check.NotNull(logger, nameof(logger));
@@ -183,7 +184,8 @@ namespace Microsoft.EntityFrameworkCore.Cosmos.Query.Internal
                         // Cosmos DB LTRIM does not take arguments
                         && ((arguments[0] as SqlConstantExpression)?.Value as Array)?.Length == 0
                     )
-                ) {
+                )
+                {
                     return TranslateSystemFunction("LTRIM", method.ReturnType, instance);
                 }
 
@@ -194,7 +196,8 @@ namespace Microsoft.EntityFrameworkCore.Cosmos.Query.Internal
                         // Cosmos DB RTRIM does not take arguments
                         && ((arguments[0] as SqlConstantExpression)?.Value as Array)?.Length == 0
                     )
-                ) {
+                )
+                {
                     return TranslateSystemFunction("RTRIM", method.ReturnType, instance);
                 }
 
@@ -205,7 +208,8 @@ namespace Microsoft.EntityFrameworkCore.Cosmos.Query.Internal
                         // Cosmos DB TRIM does not take arguments
                         && ((arguments[0] as SqlConstantExpression)?.Value as Array)?.Length == 0
                     )
-                ) {
+                )
+                {
                     return TranslateSystemFunction("TRIM", method.ReturnType, instance);
                 }
 

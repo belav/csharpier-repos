@@ -26,7 +26,8 @@ namespace Microsoft.CodeAnalysis.Diagnostics.EngineV2
             TaskQueue postBuildAndErrorListRefreshTaskQueue,
             bool onBuildCompleted,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var options = Workspace.Options;
 
             using (
@@ -37,7 +38,8 @@ namespace Microsoft.CodeAnalysis.Diagnostics.EngineV2
                     buildDiagnostics,
                     cancellationToken
                 )
-            ) {
+            )
+            {
                 DebugVerifyDiagnosticLocations(buildDiagnostics);
 
                 if (!PreferBuildErrors(options))
@@ -126,13 +128,15 @@ namespace Microsoft.CodeAnalysis.Diagnostics.EngineV2
                             // Enqueue re-analysis of projects, if required.
                             foreach (
                                 var projectsByLanguage in solution.Projects.GroupBy(p => p.Language)
-                            ) {
+                            )
+                            {
                                 if (
                                     SolutionCrawlerOptions.GetBackgroundAnalysisScope(
                                         Workspace.Options,
                                         projectsByLanguage.Key
                                     ) == BackgroundAnalysisScope.FullSolution
-                                ) {
+                                )
+                                {
                                     AnalyzerService.Reanalyze(
                                         Workspace,
                                         projectsByLanguage.Select(p => p.Id)
@@ -149,7 +153,8 @@ namespace Microsoft.CodeAnalysis.Diagnostics.EngineV2
         [Conditional("DEBUG")]
         private static void DebugVerifyDiagnosticLocations(
             ImmutableDictionary<ProjectId, ImmutableArray<DiagnosticData>> buildDiagnostics
-        ) {
+        )
+        {
             foreach (var diagnostic in buildDiagnostics.Values.SelectMany(v => v))
             {
                 // errors from build shouldn't have any span set.
@@ -166,7 +171,8 @@ namespace Microsoft.CodeAnalysis.Diagnostics.EngineV2
             Project project,
             ImmutableArray<StateSet> stateSets,
             ImmutableArray<DiagnosticData> diagnostics
-        ) {
+        )
+        {
             using var poolObject = SharedPools.Default<HashSet<string>>().GetPooledObject();
 
             var lookup = diagnostics.ToLookup(d => d.Id);
@@ -216,7 +222,8 @@ namespace Microsoft.CodeAnalysis.Diagnostics.EngineV2
             ILookup<string, DiagnosticData> lookup,
             ImmutableArray<DiagnosticDescriptor> descriptors,
             HashSet<string> seen
-        ) {
+        )
+        {
             if (lookup == null)
             {
                 return ImmutableArray<DiagnosticData>.Empty;
@@ -248,7 +255,8 @@ namespace Microsoft.CodeAnalysis.Diagnostics.EngineV2
         private static DiagnosticData CreateLiveDiagnostic(
             DiagnosticDescriptor descriptor,
             DiagnosticData diagnostic
-        ) {
+        )
+        {
             return new DiagnosticData(
                 descriptor.Id,
                 descriptor.Category,
@@ -274,7 +282,8 @@ namespace Microsoft.CodeAnalysis.Diagnostics.EngineV2
         private static string LogSynchronizeWithBuild(
             OptionSet options,
             ImmutableDictionary<ProjectId, ImmutableArray<DiagnosticData>> map
-        ) {
+        )
+        {
             using var pooledObject = SharedPools.Default<StringBuilder>().GetPooledObject();
             var sb = pooledObject.Object;
             sb.Append(

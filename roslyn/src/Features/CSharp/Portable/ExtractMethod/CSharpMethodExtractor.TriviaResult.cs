@@ -22,7 +22,8 @@ namespace Microsoft.CodeAnalysis.CSharp.ExtractMethod
             public static async Task<CSharpTriviaResult> ProcessAsync(
                 SelectionResult selectionResult,
                 CancellationToken cancellationToken
-            ) {
+            )
+            {
                 var preservationService =
                     selectionResult.SemanticDocument.Document.Project.LanguageServices.GetService<ISyntaxTriviaService>();
                 var root = selectionResult.SemanticDocument.Root;
@@ -51,7 +52,8 @@ namespace Microsoft.CodeAnalysis.CSharp.ExtractMethod
             protected override AnnotationResolver GetAnnotationResolver(
                 SyntaxNode callsite,
                 SyntaxNode method
-            ) {
+            )
+            {
                 var isMethodOrLocalFunction =
                     method is MethodDeclarationSyntax || method is LocalFunctionStatementSyntax;
                 if (callsite == null || !isMethodOrLocalFunction)
@@ -82,7 +84,8 @@ namespace Microsoft.CodeAnalysis.CSharp.ExtractMethod
                 SyntaxAnnotation annotation,
                 SyntaxNode callsite,
                 SyntaxNode method
-            ) {
+            )
+            {
                 var token = node.GetAnnotatedNodesAndTokens(annotation).FirstOrDefault().AsToken();
                 if (token.RawKind != 0)
                 {
@@ -115,7 +118,8 @@ namespace Microsoft.CodeAnalysis.CSharp.ExtractMethod
                 PreviousNextTokenPair tokenPair,
                 Dictionary<SyntaxToken, LeadingTrailingTriviaPair> triviaMap,
                 SyntaxNode method
-            ) {
+            )
+            {
                 // Resolve trivia at the edge of the selection. simple case is easy to deal with, but complex cases where
                 // elastic trivia and user trivia are mixed (hybrid case) and we want to preserve some part of user coding style
                 // but not others can be dealt with here.
@@ -128,7 +132,8 @@ namespace Microsoft.CodeAnalysis.CSharp.ExtractMethod
                     if (
                         tokenPair.PreviousToken == body.OpenBraceToken
                         && tokenPair.NextToken == body.CloseBraceToken
-                    ) {
+                    )
+                    {
                         return (location == TriviaLocation.AfterBeginningOfSpan)
                           ? SpecializedCollections.SingletonEnumerable(SyntaxFactory.ElasticMarker)
                           : SpecializedCollections.EmptyEnumerable<SyntaxTrivia>();
@@ -139,7 +144,8 @@ namespace Microsoft.CodeAnalysis.CSharp.ExtractMethod
                     if (
                         tokenPair.PreviousToken == expressionBody.ArrowToken
                         && tokenPair.NextToken.GetPreviousToken() == semicolonToken
-                    ) {
+                    )
+                    {
                         return (location == TriviaLocation.AfterBeginningOfSpan)
                           ? SpecializedCollections.SingletonEnumerable(SyntaxFactory.ElasticMarker)
                           : SpecializedCollections.EmptyEnumerable<SyntaxTrivia>();
@@ -185,7 +191,8 @@ namespace Microsoft.CodeAnalysis.CSharp.ExtractMethod
 
             private static (BlockSyntax body, ArrowExpressionClauseSyntax expressionBody, SyntaxToken semicolonToken) GetResolverElements(
                 SyntaxNode method
-            ) {
+            )
+            {
                 return method switch
                 {
                     MethodDeclarationSyntax methodDeclaration
@@ -207,7 +214,8 @@ namespace Microsoft.CodeAnalysis.CSharp.ExtractMethod
             private IEnumerable<SyntaxTrivia> FilterBeforeBeginningOfSpan(
                 PreviousNextTokenPair tokenPair,
                 IEnumerable<SyntaxTrivia> list
-            ) {
+            )
+            {
                 var allList = FilterTriviaList(
                     tokenPair.PreviousToken.TrailingTrivia.Concat(list)
                         .Concat(AppendLeadingTrivia(tokenPair))
@@ -223,11 +231,13 @@ namespace Microsoft.CodeAnalysis.CSharp.ExtractMethod
 
             private static IEnumerable<SyntaxTrivia> AppendLeadingTrivia(
                 PreviousNextTokenPair tokenPair
-            ) {
+            )
+            {
                 if (
                     tokenPair.PreviousToken.RawKind == (int)SyntaxKind.OpenBraceToken
                     || tokenPair.PreviousToken.RawKind == (int)SyntaxKind.SemicolonToken
-                ) {
+                )
+                {
                     return tokenPair.NextToken.LeadingTrivia;
                 }
 
@@ -236,11 +246,13 @@ namespace Microsoft.CodeAnalysis.CSharp.ExtractMethod
 
             private static IEnumerable<SyntaxTrivia> AppendTrailingTrivia(
                 PreviousNextTokenPair tokenPair
-            ) {
+            )
+            {
                 if (
                     tokenPair.PreviousToken.RawKind == (int)SyntaxKind.OpenBraceToken
                     || tokenPair.PreviousToken.RawKind == (int)SyntaxKind.SemicolonToken
-                ) {
+                )
+                {
                     return tokenPair.PreviousToken.TrailingTrivia;
                 }
 

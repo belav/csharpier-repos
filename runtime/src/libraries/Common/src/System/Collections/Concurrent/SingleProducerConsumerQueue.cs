@@ -173,7 +173,8 @@ namespace System.Collections.Concurrent
             ref Segment segment,
             ref T[] array,
             [MaybeNullWhen(false)] out T result
-        ) {
+        )
+        {
             Debug.Assert(segment != null, "Expected a non-null segment.");
             Debug.Assert(array != null, "Expected a non-null item array.");
 
@@ -231,7 +232,8 @@ namespace System.Collections.Concurrent
                     int pt = segment._state._first;
                     pt != segment._state._last;
                     pt = (pt + 1) & (segment._array.Length - 1)
-                ) {
+                )
+                {
                     yield return segment._array[pt];
                 }
             }
@@ -318,7 +320,8 @@ namespace System.Collections.Concurrent
             /// <param name="queue">The queue being debugged.</param>
             public SingleProducerSingleConsumerQueue_DebugView(
                 SingleProducerSingleConsumerQueue<T> queue
-            ) {
+            )
+            {
                 Debug.Assert(queue != null, "Expected a non-null queue.");
                 _queue = queue;
             }

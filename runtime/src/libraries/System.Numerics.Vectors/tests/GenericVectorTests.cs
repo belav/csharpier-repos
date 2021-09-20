@@ -5356,7 +5356,8 @@ namespace System.Numerics.Tests
                 || typeof(T) == typeof(double)
                 || typeof(T) == typeof(uint)
                 || typeof(T) == typeof(ulong)
-            ) {
+            )
+            {
                 return int.MinValue;
             }
             else if (typeof(T) == typeof(byte))
@@ -5432,7 +5433,8 @@ namespace System.Numerics.Tests
                 || typeof(T) == typeof(double)
                 || typeof(T) == typeof(uint)
                 || typeof(T) == typeof(ulong)
-            ) {
+            )
+            {
                 return int.MaxValue;
             }
             else if (typeof(T) == typeof(byte))

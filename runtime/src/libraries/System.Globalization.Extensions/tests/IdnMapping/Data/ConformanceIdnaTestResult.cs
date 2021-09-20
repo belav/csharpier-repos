@@ -43,14 +43,15 @@ namespace System.Globalization.Tests
             string statusValue,
             string statusFallbackValue,
             IdnaTestResultType resultType = IdnaTestResultType.ToAscii
-        ) : this(
-            entry,
-            fallbackValue,
-            statusValue,
-            statusFallbackValue,
-            useValueForStatus: false,
-            resultType
-        ) { }
+        )
+            : this(
+                entry,
+                fallbackValue,
+                statusValue,
+                statusFallbackValue,
+                useValueForStatus: false,
+                resultType
+            ) { }
 
         private ConformanceIdnaTestResult(
             string entry,
@@ -59,7 +60,8 @@ namespace System.Globalization.Tests
             string statusFallbackValue,
             bool useValueForStatus,
             IdnaTestResultType resultType
-        ) {
+        )
+        {
             ResultType = resultType;
             SetValue(string.IsNullOrEmpty(entry.Trim()) ? fallbackValue : entry);
             SetSuccess(

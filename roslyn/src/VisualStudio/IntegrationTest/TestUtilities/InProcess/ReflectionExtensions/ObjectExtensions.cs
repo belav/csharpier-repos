@@ -14,7 +14,8 @@ namespace Microsoft.VisualStudio.IntegrationTest.Utilities.InProcess.ReflectionE
         public static PropertyType GetPropertyValue<PropertyType>(
             this object instance,
             string propertyName
-        ) {
+        )
+        {
             return (PropertyType)GetPropertyValue(instance, propertyName);
         }
 

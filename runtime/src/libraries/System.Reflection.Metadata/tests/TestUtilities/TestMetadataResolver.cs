@@ -17,7 +17,8 @@ namespace System.Reflection.Metadata.Tests
                     if (
                         reader.StringComparer.Equals(definition.Namespace, type.Namespace)
                         && reader.StringComparer.Equals(definition.Name, type.Name)
-                    ) {
+                    )
+                    {
                         return handle;
                     }
                 }

@@ -283,7 +283,8 @@ namespace Internal.TypeSystem.Interop
             bool isIn,
             bool isOut,
             bool isReturn
-        ) {
+        )
+        {
             bool isAnsi = flags.CharSet switch
             {
                 CharSet.Ansi => true,
@@ -343,7 +344,8 @@ namespace Internal.TypeSystem.Interop
                         || parameterType.IsString
                         || parameterType.IsPointer
                         || parameterType.IsFunctionPointer
-                    ) {
+                    )
+                    {
                         isOut = false;
                     }
                 }
@@ -1036,7 +1038,8 @@ namespace Internal.TypeSystem.Interop
                 && MarshallerType == MarshallerType.Argument
                 && !Return
                 && !IsManagedByRef
-            ) {
+            )
+            {
                 EmitElementCount(codeStream, MarshalDirection.Forward);
             }
             else
@@ -2098,7 +2101,8 @@ namespace Internal.TypeSystem.Interop
                 In
                 && MarshalDirection == MarshalDirection.Forward
                 && MarshallerType == MarshallerType.Argument
-            ) {
+            )
+            {
                 LoadManagedValue(codeStream);
                 codeStream.Emit(
                     ILOpcode.call,

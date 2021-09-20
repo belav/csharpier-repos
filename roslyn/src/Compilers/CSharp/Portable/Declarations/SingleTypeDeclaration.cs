@@ -169,14 +169,16 @@ namespace Microsoft.CodeAnalysis.CSharp
                     (thisDecl._arity != otherDecl._arity)
                     || (thisDecl._kind != otherDecl._kind)
                     || (thisDecl.name != otherDecl.name)
-                ) {
+                )
+                {
                     return false;
                 }
 
                 if (
                     thisDecl._kind == DeclarationKind.Enum
                     || thisDecl._kind == DeclarationKind.Delegate
-                ) {
+                )
+                {
                     // oh, so close, but enums and delegates cannot be partial
                     return false;
                 }

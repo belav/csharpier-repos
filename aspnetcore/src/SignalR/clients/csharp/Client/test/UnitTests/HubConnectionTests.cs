@@ -836,7 +836,8 @@ namespace Microsoft.AspNetCore.SignalR.Client.Tests
                 ref ReadOnlySequence<byte> input,
                 IInvocationBinder binder,
                 out HubMessage message
-            ) {
+            )
+            {
                 if (_error != null)
                 {
                     throw _error;

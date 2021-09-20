@@ -56,7 +56,8 @@ namespace ILCompiler.DependencyAnalysis.ReadyToRun
                     _module,
                     CompiledMethodCategory.All
                 )
-            ) {
+            )
+            {
                 MethodDesc[] inlinees = methodNode.InlinedMethods;
                 MethodDesc inliner = methodNode.Method;
                 EcmaMethod inlinerDefinition = (EcmaMethod)inliner.GetTypicalMethodDefinition();
@@ -88,7 +89,8 @@ namespace ILCompiler.DependencyAnalysis.ReadyToRun
                             ecmaInlineeDefinition,
                             out HashSet<EcmaMethod> inliners
                         )
-                    ) {
+                    )
+                    {
                         inliners = new HashSet<EcmaMethod>();
                         inlineeToInliners.Add(ecmaInlineeDefinition, inliners);
                     }

@@ -23,7 +23,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.CodeModel.Inter
             FileCodeModel fileCodeModel,
             SyntaxNodeKey nodeKey,
             int? nodeKind
-        ) {
+        )
+        {
             var element = new CodeVariable(state, fileCodeModel, nodeKey, nodeKind);
             var result = (EnvDTE.CodeVariable)ComAggregate.CreateAggregatedObject(element);
 
@@ -37,7 +38,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.CodeModel.Inter
             FileCodeModel fileCodeModel,
             int nodeKind,
             string name
-        ) {
+        )
+        {
             var element = new CodeVariable(state, fileCodeModel, nodeKind, name);
             return (EnvDTE.CodeVariable)ComAggregate.CreateAggregatedObject(element);
         }

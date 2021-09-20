@@ -39,7 +39,8 @@ namespace Microsoft.Extensions.DependencyInjection
         public static IServiceCollection AddResponseCaching(
             this IServiceCollection services,
             Action<ResponseCachingOptions> configureOptions
-        ) {
+        )
+        {
             if (services == null)
             {
                 throw new ArgumentNullException(nameof(services));

@@ -204,35 +204,40 @@ namespace Microsoft.AspNetCore.Identity.Test
             public Task<IdentityResult> CreateAsync(
                 PocoRole role,
                 CancellationToken cancellationToken = default(CancellationToken)
-            ) {
+            )
+            {
                 throw new NotImplementedException();
             }
 
             public Task<IdentityResult> UpdateAsync(
                 PocoRole role,
                 CancellationToken cancellationToken = default(CancellationToken)
-            ) {
+            )
+            {
                 throw new NotImplementedException();
             }
 
             public Task<IdentityResult> DeleteAsync(
                 PocoRole role,
                 CancellationToken cancellationToken = default(CancellationToken)
-            ) {
+            )
+            {
                 throw new NotImplementedException();
             }
 
             public Task<string> GetRoleIdAsync(
                 PocoRole role,
                 CancellationToken cancellationToken = default(CancellationToken)
-            ) {
+            )
+            {
                 throw new NotImplementedException();
             }
 
             public Task<string> GetRoleNameAsync(
                 PocoRole role,
                 CancellationToken cancellationToken = default(CancellationToken)
-            ) {
+            )
+            {
                 throw new NotImplementedException();
             }
 
@@ -240,21 +245,24 @@ namespace Microsoft.AspNetCore.Identity.Test
                 PocoRole role,
                 string roleName,
                 CancellationToken cancellationToken = default(CancellationToken)
-            ) {
+            )
+            {
                 throw new NotImplementedException();
             }
 
             public Task<PocoRole> FindByIdAsync(
                 string roleId,
                 CancellationToken cancellationToken = default(CancellationToken)
-            ) {
+            )
+            {
                 throw new NotImplementedException();
             }
 
             public Task<PocoRole> FindByNameAsync(
                 string roleName,
                 CancellationToken cancellationToken = default(CancellationToken)
-            ) {
+            )
+            {
                 throw new NotImplementedException();
             }
 
@@ -266,7 +274,8 @@ namespace Microsoft.AspNetCore.Identity.Test
             public Task<string> GetNormalizedRoleNameAsync(
                 PocoRole role,
                 CancellationToken cancellationToken = default(CancellationToken)
-            ) {
+            )
+            {
                 throw new NotImplementedException();
             }
 
@@ -274,7 +283,8 @@ namespace Microsoft.AspNetCore.Identity.Test
                 PocoRole role,
                 string normalizedName,
                 CancellationToken cancellationToken = default(CancellationToken)
-            ) {
+            )
+            {
                 throw new NotImplementedException();
             }
         }

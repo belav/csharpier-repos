@@ -25,7 +25,8 @@ namespace Microsoft.CodeAnalysis.CodeCleanup.Providers
             ImmutableArray<TextSpan> spans,
             Workspace workspace,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             // Simplifier doesn't work without semantic information
             return Task.FromResult(root);
         }

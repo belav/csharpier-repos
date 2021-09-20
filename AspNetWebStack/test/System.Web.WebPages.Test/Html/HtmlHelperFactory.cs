@@ -11,7 +11,8 @@ namespace System.Web.WebPages.Test
         internal static HtmlHelper Create(
             ModelStateDictionary modelStateDictionary = null,
             ValidationHelper validationHelper = null
-        ) {
+        )
+        {
             modelStateDictionary = modelStateDictionary ?? new ModelStateDictionary();
             var httpContext = new Mock<HttpContextBase>();
             validationHelper =

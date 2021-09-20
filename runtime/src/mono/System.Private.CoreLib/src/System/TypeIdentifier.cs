@@ -121,7 +121,8 @@ namespace System
         internal static ITypeIdentifier FromInternal(
             string internalNameSpace,
             ITypeIdentifier typeName
-        ) {
+        )
+        {
             return new Internal(internalNameSpace, typeName);
         }
 

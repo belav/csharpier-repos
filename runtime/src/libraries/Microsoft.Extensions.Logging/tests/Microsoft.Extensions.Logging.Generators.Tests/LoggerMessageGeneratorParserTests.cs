@@ -726,7 +726,8 @@ namespace Microsoft.Extensions.Logging.Generators.Tests
             bool includeBaseReferences = true,
             bool includeLoggingReferences = true,
             CancellationToken cancellationToken = default
-        ) {
+        )
+        {
             var text = code;
             if (wrap)
             {

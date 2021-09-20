@@ -113,7 +113,8 @@ namespace Microsoft.CodeAnalysis.CSharp.EditAndContinue.UnitTests
             string src1,
             string src2,
             MethodKind kind = MethodKind.Regular
-        ) {
+        )
+        {
             var match = GetMethodMatch(src1, src2, kind);
             return match.GetTreeEdits();
         }
@@ -122,7 +123,8 @@ namespace Microsoft.CodeAnalysis.CSharp.EditAndContinue.UnitTests
             string src1,
             string src2,
             MethodKind kind = MethodKind.Regular
-        ) {
+        )
+        {
             var m1 = MakeMethodBody(src1, kind);
             var m2 = MakeMethodBody(src2, kind);
 
@@ -157,7 +159,8 @@ namespace Microsoft.CodeAnalysis.CSharp.EditAndContinue.UnitTests
             string src1,
             string src2,
             MethodKind kind = MethodKind.Regular
-        ) {
+        )
+        {
             var methodMatch = GetMethodMatch(src1, src2, kind);
             return EditAndContinueTestHelpers.GetMethodMatches(CreateAnalyzer(), methodMatch);
         }
@@ -174,7 +177,8 @@ namespace Microsoft.CodeAnalysis.CSharp.EditAndContinue.UnitTests
         internal static BlockSyntax MakeMethodBody(
             string bodySource,
             MethodKind kind = MethodKind.Regular
-        ) {
+        )
+        {
             var source = WrapMethodBodyWithClass(bodySource, kind);
 
             var tree = ParseSource(source);
@@ -221,7 +225,8 @@ namespace Microsoft.CodeAnalysis.CSharp.EditAndContinue.UnitTests
         internal static void VerifyPreserveLocalVariables(
             EditScript<SyntaxNode> edits,
             bool preserveLocalVariables
-        ) {
+        )
+        {
             var decl1 = (MethodDeclarationSyntax)(
                 (ClassDeclarationSyntax)((CompilationUnitSyntax)edits.Match.OldRoot).Members[0]
             ).Members[0];

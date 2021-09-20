@@ -72,7 +72,8 @@ namespace System.Net.Sockets.Tests
             AddressFamily addressFamily,
             SocketType socketType,
             ProtocolType protocolType
-        ) {
+        )
+        {
             using (new Socket(addressFamily, socketType, protocolType)) { }
         }
 
@@ -96,7 +97,8 @@ namespace System.Net.Sockets.Tests
             AddressFamily addressFamily,
             SocketType socketType,
             ProtocolType protocolType
-        ) {
+        )
+        {
             Assert.Throws<SocketException>(
                 () => new Socket(addressFamily, socketType, protocolType)
             );
@@ -113,7 +115,8 @@ namespace System.Net.Sockets.Tests
         public void Ctor_Raw_Supported_Success(
             AddressFamily addressFamily,
             ProtocolType protocolType
-        ) {
+        )
+        {
             using (new Socket(addressFamily, SocketType.Raw, protocolType)) { }
         }
 
@@ -128,7 +131,8 @@ namespace System.Net.Sockets.Tests
         public void Ctor_Raw_NotSupported_ExpectedError(
             AddressFamily addressFamily,
             ProtocolType protocolType
-        ) {
+        )
+        {
             SocketException e = Assert.Throws<SocketException>(
                 () => new Socket(addressFamily, SocketType.Raw, protocolType)
             );
@@ -148,7 +152,8 @@ namespace System.Net.Sockets.Tests
         public void CtorAndAccept_SocketNotKeptAliveViaInheritance(
             bool validateClientOuter,
             int acceptApiOuter
-        ) {
+        )
+        {
             // 300 ms should be long enough to connect if the socket is actually present & listening.
             const int ConnectionTimeoutMs = 300;
 
@@ -167,7 +172,8 @@ namespace System.Net.Sockets.Tests
                                 SocketType.Stream,
                                 ProtocolType.Tcp
                             )
-                        ) {
+                        )
+                        {
                             listener.Bind(new IPEndPoint(IPAddress.Loopback, 0));
                             listener.Listen();
                             EndPoint ep = listener.LocalEndPoint;
@@ -179,7 +185,8 @@ namespace System.Net.Sockets.Tests
                                     SocketType.Stream,
                                     ProtocolType.Tcp
                                 )
-                            ) {
+                            )
+                            {
                                 client.Connect(ep);
 
                                 // Accept the connection using one of multiple accept mechanisms.
@@ -213,7 +220,8 @@ namespace System.Net.Sockets.Tests
                                         PipeDirection.Out,
                                         HandleInheritability.Inheritable
                                     )
-                                ) {
+                                )
+                                {
                                     // Create a child process that blocks waiting to receive a signal on the anonymous pipe.
                                     // The whole purpose of the child is to test whether handles are inherited, so we
                                     // keep the child process alive until we're done validating that handles close as expected.
@@ -226,13 +234,15 @@ namespace System.Net.Sockets.Tests
                                                         PipeDirection.In,
                                                         clientPipeHandle
                                                     )
-                                                ) {
+                                                )
+                                                {
                                                     Assert.Equal(42, clientPipe.ReadByte());
                                                 }
                                             },
                                             serverPipe.GetClientHandleAsString()
                                         )
-                                    ) {
+                                    )
+                                    {
                                         if (validateClient) // Validate that the child isn't keeping alive the "new Socket" for the client
                                         {
                                             // Send data from the server to client, then validate the client gets EOF when the server closes.
@@ -258,7 +268,8 @@ namespace System.Net.Sockets.Tests
                                                 SocketType.Stream,
                                                 ProtocolType.Tcp
                                             )
-                                        ) {
+                                        )
+                                        {
                                             bool connected = tmpClient.TryConnect(
                                                 ep,
                                                 ConnectionTimeoutMs
@@ -349,7 +360,8 @@ namespace System.Net.Sockets.Tests
             AddressFamily addressFamily,
             SocketType socketType,
             ProtocolType protocolType
-        ) {
+        )
+        {
             bool isRawPacket =
                 (addressFamily == AddressFamily.Packet) && (socketType == SocketType.Raw);
             if (isRawPacket)
@@ -472,7 +484,8 @@ namespace System.Net.Sockets.Tests
             AddressFamily addressFamily,
             SocketType socketType,
             ProtocolType protocolType
-        ) {
+        )
+        {
             using var orig = new Socket(addressFamily, socketType, protocolType);
             using var listener = new Socket(addressFamily, socketType, protocolType);
             listener.Bind(
@@ -576,7 +589,8 @@ namespace System.Net.Sockets.Tests
                         SocketType.Stream,
                         ProtocolType.Tcp
                     )
-                ) {
+                )
+                {
                     Task connect1 = client1.ConnectAsync(listenerSocket.LocalEndPoint);
                     using (Socket server1 = listenerSocket.Accept())
                     {

@@ -333,7 +333,8 @@ internal class TestApp
                 1,
                 1
             ) != 100
-        ) {
+        )
+        {
             Console.WriteLine("test_50() failed.");
             return 150;
         }
@@ -611,7 +612,8 @@ internal class TestApp
                 1,
                 1
             ) != 100
-        ) {
+        )
+        {
             Console.WriteLine("test_323() failed.");
             return 423;
         }

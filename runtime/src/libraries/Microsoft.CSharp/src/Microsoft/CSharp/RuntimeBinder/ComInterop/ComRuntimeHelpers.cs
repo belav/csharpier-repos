@@ -21,7 +21,8 @@ namespace Microsoft.CSharp.RuntimeBinder.ComInterop
             ref ExcepInfo excepInfo,
             uint argErr,
             string message
-        ) {
+        )
+        {
             if (ComHresults.IsSuccess(hresult))
             {
                 return;
@@ -87,7 +88,8 @@ namespace Microsoft.CSharp.RuntimeBinder.ComInterop
             ComTypes.ITypeInfo typeInfo,
             out string name,
             out string documentation
-        ) {
+        )
+        {
             typeInfo.GetDocumentation(-1, out name, out documentation, out int _, out string _);
         }
 
@@ -229,7 +231,8 @@ namespace Microsoft.CSharp.RuntimeBinder.ComInterop
         public static DispCallable CreateDispCallable(
             IDispatchComObject dispatch,
             ComMethodDesc method
-        ) {
+        )
+        {
             return new DispCallable(dispatch, method.Name, method.DispId);
         }
     }
@@ -317,7 +320,8 @@ namespace Microsoft.CSharp.RuntimeBinder.ComInterop
             out Variant result,
             out ExcepInfo excepInfo,
             out uint argErr
-        ) {
+        )
+        {
             Guid IID_NULL = default;
 
             fixed (ComTypes.DISPPARAMS* pDispParams = &dispParams)fixed (
@@ -362,7 +366,8 @@ namespace Microsoft.CSharp.RuntimeBinder.ComInterop
                             | ComTypes.INVOKEKIND.INVOKE_PROPERTYPUTREF
                         )
                     ) == 0
-                ) {
+                )
+                {
                     // Re-invoke with no result argument to accomodate Word
                     hresult = pfnIDispatchInvoke(
                         dispatchPointer,
@@ -387,7 +392,8 @@ namespace Microsoft.CSharp.RuntimeBinder.ComInterop
             string[] names,
             int methodDispId,
             out GCHandle pinningHandle
-        ) {
+        )
+        {
             pinningHandle = GCHandle.Alloc(null, GCHandleType.Pinned);
             int[] dispIds = new int[names.Length];
             Guid empty = Guid.Empty;

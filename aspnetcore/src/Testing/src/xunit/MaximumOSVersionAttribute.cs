@@ -22,11 +22,13 @@ namespace Microsoft.AspNetCore.Testing
         private readonly Version _currentVersion;
         private readonly bool _skip;
 
-        public MaximumOSVersionAttribute(
-            OperatingSystems operatingSystem,
-            string maxVersion
-        ) : this(operatingSystem, Version.Parse(maxVersion), GetCurrentOS(), GetCurrentOSVersion())
-        { }
+        public MaximumOSVersionAttribute(OperatingSystems operatingSystem, string maxVersion)
+            : this(
+                operatingSystem,
+                Version.Parse(maxVersion),
+                GetCurrentOS(),
+                GetCurrentOSVersion()
+            ) { }
 
         // to enable unit testing
         internal MaximumOSVersionAttribute(
@@ -34,7 +36,8 @@ namespace Microsoft.AspNetCore.Testing
             Version maxVersion,
             OperatingSystems currentOS,
             Version currentVersion
-        ) {
+        )
+        {
             if (targetOS != OperatingSystems.Windows)
             {
                 throw new NotImplementedException(

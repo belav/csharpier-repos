@@ -59,7 +59,8 @@ namespace Internal.IO
                     FileShare.Read,
                     bufferSize: 1
                 )
-            ) {
+            )
+            {
                 long fileLength = fs.Length;
                 if (fileLength > int.MaxValue)
                     throw new IOException(SR.IO_FileTooLong2GB);

@@ -23,7 +23,8 @@ namespace Roslyn.Utilities
         public TaskQueue(
             IAsynchronousOperationListener operationListener,
             TaskScheduler taskScheduler
-        ) {
+        )
+        {
             Contract.ThrowIfNull(operationListener);
             Contract.ThrowIfNull(taskScheduler);
 
@@ -126,7 +127,8 @@ namespace Roslyn.Utilities
         private Task<T> ScheduleTaskInProgress<T>(
             Func<T> operation,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             lock (_gate)
             {
                 var task = _latestTask.SafeContinueWith(
@@ -148,7 +150,8 @@ namespace Roslyn.Utilities
         private Task ScheduleTaskInProgress(
             Func<Task> operation,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             lock (_gate)
             {
                 var task = _latestTask.SafeContinueWithFromAsync(
@@ -170,7 +173,8 @@ namespace Roslyn.Utilities
         private Task<T> ScheduleTaskInProgress<T>(
             Func<Task<T>> operation,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             lock (_gate)
             {
                 var task = _latestTask.SafeContinueWithFromAsync(

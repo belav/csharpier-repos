@@ -271,7 +271,8 @@ namespace Microsoft.AspNetCore.Mvc.Routing
                     if (
                         b.Metadata.OfType<ActionDescriptor>().FirstOrDefault()?.AttributeRouteInfo
                         != null
-                    ) {
+                    )
+                    {
                         b.Metadata.Add(new EndpointNameMetadata("NewName"));
                     }
                 }
@@ -442,7 +443,8 @@ namespace Microsoft.AspNetCore.Mvc.Routing
         private protected override ActionEndpointDataSourceBase CreateDataSource(
             IActionDescriptorCollectionProvider actions,
             ActionEndpointFactory endpointFactory
-        ) {
+        )
+        {
             return new ControllerActionEndpointDataSource(
                 new ControllerActionEndpointDataSourceIdProvider(),
                 actions,
@@ -455,7 +457,8 @@ namespace Microsoft.AspNetCore.Mvc.Routing
             object values,
             string pattern = null,
             IList<object> metadata = null
-        ) {
+        )
+        {
             var action = new ControllerActionDescriptor();
 
             foreach (var kvp in new RouteValueDictionary(values))

@@ -278,7 +278,8 @@ namespace System.Text.Json.Serialization.Tests
             bool element0Null,
             bool element1Null,
             bool element2Null
-        ) {
+        )
+        {
             SimpleTestClass[] arr = JsonSerializer.Deserialize<SimpleTestClass[]>(json);
             Assert.Equal(3, arr.Length);
             VerifyReadNull(arr[0], element0Null);

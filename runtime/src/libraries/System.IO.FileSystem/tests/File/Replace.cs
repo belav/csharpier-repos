@@ -19,7 +19,8 @@ namespace System.IO.Tests
             string dest,
             string destBackup,
             bool ignoreMetadataErrors
-        ) {
+        )
+        {
             File.Replace(source, dest, destBackup, ignoreMetadataErrors);
         }
 
@@ -65,7 +66,8 @@ namespace System.IO.Tests
         public void Backup_FileCopiedAndDeleted_DestCopied(
             bool backupExists,
             bool ignoreMetadataErrors
-        ) {
+        )
+        {
             string srcPath = GetTestFilePath();
             string destPath = GetTestFilePath();
             string destBackupPath = GetTestFilePath();

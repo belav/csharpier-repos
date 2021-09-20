@@ -107,7 +107,8 @@ namespace System.Speech.Recognition.SrgsGrammar
                     int iCurPron = 0, iDeliminator = 0;
                     iCurPron < _pronunciation.Length;
                     iCurPron = iDeliminator + 1
-                ) {
+                )
+                {
                     // Find semi-colon delimiter and replace with null
                     iDeliminator = _pronunciation.IndexOf(';', iCurPron);
                     if (iDeliminator == -1)

@@ -208,7 +208,8 @@ namespace System.Text.Json.Serialization.Tests
                 JsonSerializerOptions serializerOptions,
                 JsonReaderOptions readerOptions,
                 int expectedLength
-            ) {
+            )
+            {
                 var reader = new Utf8JsonReader(utf8, readerOptions);
                 int[] result = JsonSerializer.Deserialize<int[]>(ref reader, serializerOptions);
                 Assert.Equal(3, result.Length);
@@ -865,7 +866,8 @@ namespace System.Text.Json.Serialization.Tests
                 JsonSerializerOptions options,
                 JsonReaderOptions readerOptions,
                 bool expectedThrow
-            ) {
+            )
+            {
                 options.Converters.Add(new CustomConverter());
 
                 if (expectedThrow)
@@ -915,7 +917,8 @@ namespace System.Text.Json.Serialization.Tests
             ref Utf8JsonReader reader,
             Type typeToConvert,
             JsonSerializerOptions options
-        ) {
+        )
+        {
             Utf8JsonReader sideReader = reader;
 
             sideReader.Read();
@@ -933,7 +936,8 @@ namespace System.Text.Json.Serialization.Tests
             Utf8JsonWriter writer,
             IContent value,
             JsonSerializerOptions options
-        ) {
+        )
+        {
             writer.WriteStartObject();
             writer.WriteString("type", "array");
             writer.WritePropertyName("array");

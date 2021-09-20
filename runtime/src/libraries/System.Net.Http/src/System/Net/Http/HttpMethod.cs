@@ -237,7 +237,8 @@ namespace System.Net.Http
                         match._method,
                         StringComparison.OrdinalIgnoreCase
                     )
-                ) {
+                )
+                {
                     return match;
                 }
             }

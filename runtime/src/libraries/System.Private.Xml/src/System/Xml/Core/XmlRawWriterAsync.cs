@@ -64,7 +64,8 @@ namespace System.Xml
             string? pubid,
             string? sysid,
             string? subset
-        ) {
+        )
+        {
             return Task.CompletedTask;
         }
 
@@ -200,7 +201,8 @@ namespace System.Xml
             string prefix,
             string localName,
             string? ns
-        ) {
+        )
+        {
             if (prefix.Length != 0)
             {
                 await WriteStringAsync(prefix).ConfigureAwait(false);

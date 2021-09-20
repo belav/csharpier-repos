@@ -335,7 +335,8 @@ internal class RFLogging
         float cpuVal,
         float memVal,
         bool testStartPrevented
-    ) {
+    )
+    {
         WriteToLog(
             String.Format(
                 "    <PerfStats CPU=\"{0}\" Pages=\"{1}\" PageFaults=\"{2}\" OurPageFaults=\"{3}\" TestStartPrevented=\"{4}\" />\r\n",
@@ -549,7 +550,8 @@ internal class RFLogging
         ReliabilityTestSet curTestSet,
         LoggingLevels level,
         string str
-    ) {
+    )
+    {
         if (curTestSet == null || (curTestSet.LoggingLevel & level) != 0)
         {
             str = String.Format(

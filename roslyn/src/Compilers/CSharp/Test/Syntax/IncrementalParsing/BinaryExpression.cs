@@ -191,7 +191,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.IncrementalParsing
             SyntaxKind newSyntaxKind,
             bool topLevel = false,
             CSharpParseOptions options = null
-        ) {
+        )
+        {
             string oldName = GetExpressionString(oldSyntaxKind);
             string newName = GetExpressionString(newSyntaxKind);
 

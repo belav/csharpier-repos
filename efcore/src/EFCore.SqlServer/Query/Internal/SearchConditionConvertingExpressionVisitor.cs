@@ -31,7 +31,8 @@ namespace Microsoft.EntityFrameworkCore.SqlServer.Query.Internal
         /// </summary>
         public SearchConditionConvertingExpressionVisitor(
             ISqlExpressionFactory sqlExpressionFactory
-        ) {
+        )
+        {
             _sqlExpressionFactory = sqlExpressionFactory;
         }
 
@@ -85,7 +86,8 @@ namespace Microsoft.EntityFrameworkCore.SqlServer.Query.Internal
                     sqlBinaryOperand.OperatorType == ExpressionType.Equal
                     || sqlBinaryOperand.OperatorType == ExpressionType.NotEqual
                 )
-            ) {
+            )
+            {
                 if (
                     sqlBinaryOperand.Left.Type == typeof(bool)
                     && sqlBinaryOperand.Right.Type == typeof(bool)
@@ -93,7 +95,8 @@ namespace Microsoft.EntityFrameworkCore.SqlServer.Query.Internal
                         sqlBinaryOperand.Left is SqlConstantExpression
                         || sqlBinaryOperand.Right is SqlConstantExpression
                     )
-                ) {
+                )
+                {
                     var constant =
                         sqlBinaryOperand.Left as SqlConstantExpression
                         ?? (SqlConstantExpression)sqlBinaryOperand.Right;
@@ -540,7 +543,8 @@ namespace Microsoft.EntityFrameworkCore.SqlServer.Query.Internal
         /// </summary>
         protected override Expression VisitTableValuedFunction(
             TableValuedFunctionExpression tableValuedFunctionExpression
-        ) {
+        )
+        {
             Check.NotNull(tableValuedFunctionExpression, nameof(tableValuedFunctionExpression));
 
             var parentSearchCondition = _isSearchCondition;
@@ -564,7 +568,8 @@ namespace Microsoft.EntityFrameworkCore.SqlServer.Query.Internal
         /// </summary>
         protected override Expression VisitSqlParameter(
             SqlParameterExpression sqlParameterExpression
-        ) {
+        )
+        {
             Check.NotNull(sqlParameterExpression, nameof(sqlParameterExpression));
 
             return ApplyConversion(sqlParameterExpression, condition: false);
@@ -715,7 +720,8 @@ namespace Microsoft.EntityFrameworkCore.SqlServer.Query.Internal
         /// </summary>
         protected override Expression VisitScalarSubquery(
             ScalarSubqueryExpression scalarSubqueryExpression
-        ) {
+        )
+        {
             Check.NotNull(scalarSubqueryExpression, nameof(scalarSubqueryExpression));
 
             var parentSearchCondition = _isSearchCondition;

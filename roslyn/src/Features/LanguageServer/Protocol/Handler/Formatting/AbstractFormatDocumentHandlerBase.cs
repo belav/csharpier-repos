@@ -25,7 +25,8 @@ namespace Microsoft.CodeAnalysis.LanguageServer.Handler
             LSP.FormattingOptions options,
             CancellationToken cancellationToken,
             LSP.Range? range = null
-        ) {
+        )
+        {
             var edits = new ArrayBuilder<LSP.TextEdit>();
             var document = context.Document;
 

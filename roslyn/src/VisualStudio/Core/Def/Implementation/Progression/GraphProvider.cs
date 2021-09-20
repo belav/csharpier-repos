@@ -36,7 +36,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Progression
             SVsServiceProvider serviceProvider,
             Workspace workspace,
             IAsynchronousOperationListenerProvider listenerProvider
-        ) {
+        )
+        {
             _threadingContext = threadingContext;
             _glyphService = glyphService;
             _serviceProvider = serviceProvider;
@@ -64,7 +65,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Progression
             if (
                 context.Direction == GraphContextDirection.Self
                 && context.RequestedProperties.Contains(DgmlNodeProperties.ContainsChildren)
-            ) {
+            )
+            {
                 graphQueries.Add(new ContainsChildrenGraphQuery());
             }
 
@@ -74,7 +76,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Progression
                     context.Direction == GraphContextDirection.Target
                     && context.LinkCategories.Contains(CodeLinkCategories.Contains)
                 )
-            ) {
+            )
+            {
                 graphQueries.Add(new ContainsGraphQuery());
             }
 
@@ -177,7 +180,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Progression
             if (
                 nodes.Any(n => n.Properties.Any(p => p.Key == DgmlNodeProperties.ContainsChildren))
                 || nodes.Any(n => IsAnySymbolKind(n, SymbolKind.NamedType))
-            ) {
+            )
+            {
                 yield return new GraphCommand(
                     GraphCommandDefinition.Contains,
                     targetCategories: null,
@@ -206,7 +210,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Progression
                             TypeKind.Delegate
                         )
                 )
-            ) {
+            )
+            {
                 yield return new GraphCommand(
                     GraphCommandDefinition.BaseTypes,
                     targetCategories: null,
@@ -234,7 +239,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Progression
                             SymbolKind.Field
                         )
                 )
-            ) {
+            )
+            {
                 yield return new GraphCommand(
                     GraphCommandDefinition.Calls,
                     targetCategories: null,
@@ -250,7 +256,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Progression
                         IsAnySymbolKind(n, SymbolKind.Event, SymbolKind.Method, SymbolKind.Property)
                         && IsAnyTypeKind(n, TypeKind.Class, TypeKind.Struct)
                 )
-            ) {
+            )
+            {
                 yield return new GraphCommand(
                     GraphCommandDefinition.IsCalledBy,
                     targetCategories: null,
@@ -274,7 +281,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Progression
                         IsAnySymbolKind(n, SymbolKind.NamedType)
                         && IsAnyTypeKind(n, TypeKind.Class, TypeKind.Struct)
                 )
-            ) {
+            )
+            {
                 yield return new GraphCommand(
                     s_implementsCommandDefinition,
                     targetCategories: null,
@@ -292,12 +300,14 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Progression
                         && IsAnyTypeKind(n, TypeKind.Class, TypeKind.Struct)
                         && !GetModifiers(n).IsStatic
                 )
-            ) {
+            )
+            {
                 if (
                     nodes.Any(
                         n => CheckAccessibility(n, Accessibility.Public) || HasExplicitInterfaces(n)
                     )
-                ) {
+                )
+                {
                     yield return new GraphCommand(
                         s_implementsCommandDefinition,
                         targetCategories: null,
@@ -314,7 +324,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Progression
                         IsAnySymbolKind(n, SymbolKind.NamedType)
                         && IsAnyTypeKind(n, TypeKind.Interface)
                 )
-            ) {
+            )
+            {
                 yield return new GraphCommand(
                     s_implementedByCommandDefinition,
                     targetCategories: null,
@@ -330,7 +341,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Progression
                         IsAnySymbolKind(n, SymbolKind.Event, SymbolKind.Method, SymbolKind.Property)
                         && IsAnyTypeKind(n, TypeKind.Interface)
                 )
-            ) {
+            )
+            {
                 yield return new GraphCommand(
                     s_implementedByCommandDefinition,
                     targetCategories: null,
@@ -347,7 +359,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Progression
                         && IsAnyTypeKind(n, TypeKind.Class, TypeKind.Struct)
                         && GetModifiers(n).IsOverride
                 )
-            ) {
+            )
+            {
                 yield return new GraphCommand(
                     s_overridesCommandDefinition,
                     targetCategories: null,
@@ -364,7 +377,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Progression
                         && IsAnyTypeKind(n, TypeKind.Class, TypeKind.Struct)
                         && IsOverridable(n)
                 )
-            ) {
+            )
+            {
                 yield return new GraphCommand(
                     s_overriddenByCommandDefinition,
                     targetCategories: null,

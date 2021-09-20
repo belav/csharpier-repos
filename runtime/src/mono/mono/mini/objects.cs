@@ -396,7 +396,8 @@ class Tests
         int a6,
         Small v,
         int b
-    ) {
+    )
+    {
         if (v.b1 != 1)
             return 1;
         if (v.b2 != 2)
@@ -560,7 +561,8 @@ class Tests
         int p,
         Struct3 s,
         int q
-    ) {
+    )
+    {
         if (s.i + s.j + s.k + s.l != 10)
             return 1;
         else
@@ -2135,7 +2137,8 @@ class Tests
         double d7,
         double d8,
         HFA4D s
-    ) {
+    )
+    {
         return s.a + s.b + s.c + s.d;
     }
 
@@ -2190,7 +2193,8 @@ class Tests
         object o6,
         object o7,
         Struct16 o8
-    ) {
+    )
+    {
         // This disables LLVM
         try { }
         catch { }

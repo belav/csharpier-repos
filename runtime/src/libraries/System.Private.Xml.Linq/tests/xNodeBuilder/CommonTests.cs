@@ -1482,7 +1482,8 @@ namespace CoreXml.Test.XLinq
                     if (
                         xr.ReadState == ReadState.EndOfFile
                         || xr.NodeType.ToString() != Variation.Param.ToString()
-                    ) {
+                    )
+                    {
                         xr.Dispose();
                         TestLog.WriteLine("Reader not positioned on correct node");
                         TestLog.WriteLine("ReadState: {0}", xr.ReadState);

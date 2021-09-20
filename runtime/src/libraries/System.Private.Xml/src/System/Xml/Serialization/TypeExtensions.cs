@@ -16,7 +16,8 @@ namespace System.Xml.Serialization
                 this Type targetType,
             object? data,
             out object? returnValue
-        ) {
+        )
+        {
             if (targetType == null)
             {
                 throw new ArgumentNullException(nameof(targetType));
@@ -45,14 +46,16 @@ namespace System.Xml.Serialization
                     method.Name == ImplicitCastOperatorName
                     && method.ReturnType != null
                     && targetType.IsAssignableFrom(method.ReturnType)
-                ) {
+                )
+                {
                     ParameterInfo[] parameters = method.GetParameters();
 
                     if (
                         parameters != null
                         && parameters.Length == 1
                         && parameters[0].ParameterType.IsAssignableFrom(sourceType)
-                    ) {
+                    )
+                    {
                         returnValue = method.Invoke(null, new object[] { data });
                         return true;
                     }

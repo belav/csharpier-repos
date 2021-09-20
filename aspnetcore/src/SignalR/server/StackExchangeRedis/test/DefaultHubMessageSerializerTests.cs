@@ -212,7 +212,8 @@ namespace Microsoft.AspNetCore.SignalR.Tests.Internal
                 List<IHubProtocol> supportedHubProtocols,
                 int serializedCount,
                 params byte[] encoded
-            ) {
+            )
+            {
                 Name = name;
                 Encoded = encoded;
                 SerializedCount = serializedCount;
@@ -248,7 +249,8 @@ namespace Microsoft.AspNetCore.SignalR.Tests.Internal
                 ref ReadOnlySequence<byte> input,
                 IInvocationBinder binder,
                 out HubMessage message
-            ) {
+            )
+            {
                 throw new NotImplementedException();
             }
 

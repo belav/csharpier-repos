@@ -49,7 +49,8 @@ namespace System.Reflection.Emit.Tests
             string[] genericParams,
             Type[] typeArguments,
             string expectedFullName
-        ) {
+        )
+        {
             TypeBuilder type = Helpers.DynamicType(TypeAttributes.NotPublic);
             GenericTypeParameterBuilder[] typeGenParam = type.DefineGenericParameters(
                 genericParams

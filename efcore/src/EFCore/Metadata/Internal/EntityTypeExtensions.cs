@@ -50,7 +50,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
         public static MemberInfo GetNavigationMemberInfo(
             this IReadOnlyEntityType entityType,
             string navigationName
-        ) {
+        )
+        {
             var memberInfo = entityType.ClrType.GetMembersInHierarchy(navigationName)
                 .FirstOrDefault();
 
@@ -90,7 +91,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
         public static IReadOnlyEntityType? FindInOwnershipPath(
             this IReadOnlyEntityType entityType,
             Type targetType
-        ) {
+        )
+        {
             if (entityType.ClrType == targetType)
             {
                 return entityType;
@@ -265,7 +267,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
             foreach (
                 var navigation in entityType.GetDeclaredNavigations()
                     .Union<IPropertyBase>(entityType.GetDeclaredSkipNavigations())
-            ) {
+            )
+            {
                 var indexes = new PropertyIndexes(
                     index: navigationIndex++,
                     originalValueIndex: -1,
@@ -405,7 +408,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
         public static IProperty CheckPropertyBelongsToType(
             this IEntityType entityType,
             IProperty property
-        ) {
+        )
+        {
             Check.NotNull(property, nameof(property));
 
             if (!property.DeclaringEntityType.IsAssignableFrom(entityType))

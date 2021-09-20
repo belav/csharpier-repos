@@ -18,7 +18,8 @@ namespace Microsoft.AspNetCore.Components.Routing
             RouteTemplate template,
             [DynamicallyAccessedMembers(Component)] Type handler,
             string[] unusedRouteParameterNames
-        ) {
+        )
+        {
             Template = template;
             UnusedRouteParameterNames = unusedRouteParameterNames;
             Handler = handler;
@@ -121,7 +122,8 @@ namespace Microsoft.AspNetCore.Components.Routing
             if (
                 (pathIndex == context.Segments.Length && templateIndex == Template.Segments.Length)
                 || hasRemainingOptionalSegments
-            ) {
+            )
+            {
                 if (hasRemainingOptionalSegments)
                 {
                     parameters ??= new Dictionary<string, object>(StringComparer.Ordinal);
@@ -144,7 +146,8 @@ namespace Microsoft.AspNetCore.Components.Routing
             Dictionary<string, object> parameters,
             int templateIndex,
             TemplateSegment[] segments
-        ) {
+        )
+        {
             for (var i = templateIndex; i < segments.Length; i++)
             {
                 var currentSegment = segments[i];

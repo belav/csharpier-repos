@@ -84,7 +84,8 @@ namespace Microsoft.AspNetCore.Http.Connections.Internal
                 ILogger logger,
                 string connectionId,
                 Exception exception
-            ) {
+            )
+            {
                 _failedDispose(logger, connectionId, exception);
             }
 
@@ -97,7 +98,8 @@ namespace Microsoft.AspNetCore.Http.Connections.Internal
                 ILogger logger,
                 string connectionId,
                 Exception exception
-            ) {
+            )
+            {
                 _connectionReset(logger, connectionId, exception);
             }
 

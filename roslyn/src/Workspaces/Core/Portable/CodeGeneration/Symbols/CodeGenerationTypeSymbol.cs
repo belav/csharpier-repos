@@ -24,14 +24,16 @@ namespace Microsoft.CodeAnalysis.CodeGeneration
             string name,
             SpecialType specialType,
             NullableAnnotation nullableAnnotation
-        ) : base(
-            containingAssembly,
-            containingType,
-            attributes,
-            declaredAccessibility,
-            modifiers,
-            name
-        ) {
+        )
+            : base(
+                containingAssembly,
+                containingType,
+                attributes,
+                declaredAccessibility,
+                modifiers,
+                name
+            )
+        {
             this.SpecialType = specialType;
             this.NullableAnnotation = nullableAnnotation;
         }

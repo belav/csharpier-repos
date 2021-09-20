@@ -27,7 +27,8 @@ namespace System.ComponentModel
             ITypeDescriptorContext context,
             CultureInfo culture,
             object value
-        ) {
+        )
+        {
             if (value is string)
             {
                 return (string)value;

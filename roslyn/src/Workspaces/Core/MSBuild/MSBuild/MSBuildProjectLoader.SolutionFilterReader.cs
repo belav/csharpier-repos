@@ -26,7 +26,8 @@ namespace Microsoft.CodeAnalysis.MSBuild
                 PathResolver pathResolver,
                 [NotNullWhen(true)] out string? solutionFilename,
                 out ImmutableHashSet<string> projectFilter
-            ) {
+            )
+            {
                 try
                 {
                     using var document = JsonDocument.Parse(File.ReadAllText(filterFilename));
@@ -39,7 +40,8 @@ namespace Microsoft.CodeAnalysis.MSBuild
                     if (
                         solutionPath is null
                         || Path.GetDirectoryName(filterFilename) is not string baseDirectory
-                    ) {
+                    )
+                    {
                         solutionFilename = string.Empty;
                         projectFilter = ImmutableHashSet<string>.Empty;
                         return false;
@@ -52,7 +54,8 @@ namespace Microsoft.CodeAnalysis.MSBuild
                             DiagnosticReportingMode.Throw,
                             out solutionFilename
                         )
-                    ) {
+                    )
+                    {
                         // TryGetAbsoluteSolutionPath should throw before we get here.
                         solutionFilename = string.Empty;
                         projectFilter = ImmutableHashSet<string>.Empty;
@@ -92,7 +95,8 @@ namespace Microsoft.CodeAnalysis.MSBuild
                                 DiagnosticReportingMode.Throw,
                                 out var absoluteProjectPath
                             )
-                        ) {
+                        )
+                        {
                             filterProjects.Add(absoluteProjectPath);
                         }
                     }

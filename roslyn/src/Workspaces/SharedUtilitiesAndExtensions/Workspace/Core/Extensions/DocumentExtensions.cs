@@ -36,7 +36,8 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
         public static async ValueTask<SemanticModel> GetRequiredSemanticModelAsync(
             this Document document,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             if (document.TryGetSemanticModel(out var semanticModel))
                 return semanticModel;
 
@@ -54,7 +55,8 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
         public static async ValueTask<SyntaxTree> GetRequiredSyntaxTreeAsync(
             this Document document,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             if (document.TryGetSyntaxTree(out var syntaxTree))
                 return syntaxTree;
 
@@ -72,7 +74,8 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
         public static SyntaxTree GetRequiredSyntaxTreeSynchronously(
             this Document document,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var syntaxTree = document.GetSyntaxTreeSynchronously(cancellationToken);
             return syntaxTree
                 ?? throw new InvalidOperationException(
@@ -87,7 +90,8 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
         public static async ValueTask<SyntaxNode> GetRequiredSyntaxRootAsync(
             this Document document,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             if (document.TryGetSyntaxRoot(out var root))
                 return root;
 
@@ -105,7 +109,8 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
         public static SyntaxNode GetRequiredSyntaxRootSynchronously(
             this Document document,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var root = document.GetSyntaxRootSynchronously(cancellationToken);
             return root
                 ?? throw new InvalidOperationException(
@@ -166,7 +171,8 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
             this Document document,
             TextSpan span,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             Contract.ThrowIfFalse(document.SupportsSemanticModel);
 
             var root = await document.GetRequiredSyntaxRootAsync(cancellationToken)
@@ -196,7 +202,8 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
             this Document document,
             SyntaxNode? node,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             if (node == null)
                 return document.GetRequiredSemanticModelAsync(cancellationToken);
 
@@ -216,7 +223,8 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
             this Document document,
             CancellationToken cancellationToken,
             List<string>? ignoreErrorCode = null
-        ) {
+        )
+        {
             var errors = await GetErrorsAsync(document, cancellationToken, ignoreErrorCode)
                 .ConfigureAwait(false);
             return errors.Length > 0;
@@ -226,7 +234,8 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
             this Document document,
             CancellationToken cancellationToken,
             IList<string>? ignoreErrorCode = null
-        ) {
+        )
+        {
             if (!document.SupportsSemanticModel)
             {
                 return ImmutableArray<Diagnostic>.Empty;
@@ -251,7 +260,8 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
             string message,
             CancellationToken cancellationToken,
             List<string>? ignoreErrorCodes = null
-        ) {
+        )
+        {
             var errors = await newDocument.GetErrorsAsync(cancellationToken, ignoreErrorCodes)
                 .ConfigureAwait(false);
             if (errors.Length > 0)
@@ -266,7 +276,8 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
         public static bool IsGeneratedCode(
             this Document document,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var generatedCodeRecognitionService =
                 document.GetLanguageService<IGeneratedCodeRecognitionService>();
             return generatedCodeRecognitionService?.IsGeneratedCode(document, cancellationToken)
@@ -277,7 +288,8 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
         public static async Task<bool> IsGeneratedCodeAsync(
             this Document document,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var generatedCodeRecognitionService =
                 document.GetLanguageService<IGeneratedCodeRecognitionService>();
             return generatedCodeRecognitionService != null

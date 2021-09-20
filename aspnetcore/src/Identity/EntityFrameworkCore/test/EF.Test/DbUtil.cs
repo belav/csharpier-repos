@@ -54,14 +54,16 @@ namespace Microsoft.AspNetCore.Identity.EntityFrameworkCore.Test
             string table,
             int maxLength,
             params string[] columns
-        ) {
+        )
+        {
             var count = 0;
 
             foreach (
                 var property in context.Model.GetEntityTypes()
                     .Single(e => e.GetTableName() == table)
                     .GetProperties()
-            ) {
+            )
+            {
                 if (
                     !columns.Contains(
                         property.GetColumnName(
@@ -71,7 +73,8 @@ namespace Microsoft.AspNetCore.Identity.EntityFrameworkCore.Test
                             )
                         )
                     )
-                ) {
+                )
+                {
                     continue;
                 }
                 if (property.GetMaxLength() != maxLength)
@@ -88,14 +91,16 @@ namespace Microsoft.AspNetCore.Identity.EntityFrameworkCore.Test
             SqliteConnection conn,
             string table,
             params string[] columns
-        ) {
+        )
+        {
             var count = 0;
             using (
                 var command = new SqliteCommand(
                     "SELECT \"name\" FROM pragma_table_info(@table)",
                     conn
                 )
-            ) {
+            )
+            {
                 command.Parameters.Add(new SqliteParameter("table", table));
                 using (var reader = command.ExecuteReader())
                 {
@@ -117,13 +122,15 @@ namespace Microsoft.AspNetCore.Identity.EntityFrameworkCore.Test
             string table,
             string index,
             bool isUnique = false
-        ) {
+        )
+        {
             using (
                 var command = new SqliteCommand(
                     "SELECT COUNT(*) FROM pragma_index_list(@table) WHERE \"name\" = @index AND \"unique\" = @unique",
                     conn
                 )
-            ) {
+            )
+            {
                 command.Parameters.Add(new SqliteParameter("index", index));
                 command.Parameters.Add(new SqliteParameter("table", table));
                 command.Parameters.Add(new SqliteParameter("unique", isUnique));

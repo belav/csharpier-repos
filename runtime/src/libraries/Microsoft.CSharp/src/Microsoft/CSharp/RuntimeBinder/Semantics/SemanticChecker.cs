@@ -34,7 +34,8 @@ namespace Microsoft.CSharp.RuntimeBinder.Semantics
             AggregateType atsCheck,
             Symbol symWhere,
             CType typeThru
-        ) {
+        )
+        {
             Debug.Assert(symCheck != null);
             Debug.Assert(atsCheck == null || symCheck.parent == atsCheck.OwningAggregate);
             Debug.Assert(
@@ -105,7 +106,8 @@ namespace Microsoft.CSharp.RuntimeBinder.Semantics
                 if (
                     ACCESSERROR.ACCESSERROR_NOERROR
                     != CheckAccessCore(ats.OwningAggregate, ats.OuterType, symWhere, null)
-                ) {
+                )
+                {
                     return false;
                 }
 
@@ -128,7 +130,8 @@ namespace Microsoft.CSharp.RuntimeBinder.Semantics
             AggregateType atsCheck,
             Symbol symWhere,
             CType typeThru
-        ) {
+        )
+        {
             Debug.Assert(symCheck != null);
             Debug.Assert(atsCheck == null || symCheck.parent == atsCheck.OwningAggregate);
             Debug.Assert(
@@ -271,7 +274,8 @@ namespace Microsoft.CSharp.RuntimeBinder.Semantics
             SymWithType swtBad,
             Symbol symWhere,
             CType typeQual
-        ) {
+        )
+        {
             Debug.Assert(
                 !CheckAccess(swtBad.Sym, swtBad.GetType(), symWhere, typeQual)
                     || !CheckTypeAccess(swtBad.GetType(), symWhere)

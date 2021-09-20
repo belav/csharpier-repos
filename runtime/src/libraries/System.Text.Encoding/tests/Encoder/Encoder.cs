@@ -31,7 +31,8 @@ namespace System.Text.Encodings.Tests
 
             fixed (char* pChars1 = s1)fixed (char* pChars2 = s2)fixed (char* pChars3 = s3)fixed (
                 byte* pBytes = bytes
-            ) {
+            )
+            {
                 encoder.Convert(
                     pChars1,
                     s1.Length,
@@ -290,7 +291,8 @@ namespace System.Text.Encodings.Tests
 
             fixed (char* pChars1 = s1)fixed (char* pChars2 = s2)fixed (char* pChars3 = s3)fixed (
                 byte* pBytes = bytes
-            ) {
+            )
+            {
                 int bytesUsed = encoder.GetBytes(pChars1, s1.Length, pBytes, bytes.Length, true);
                 Assert.Equal(bytes1.Length, bytesUsed);
                 Assert.Equal(bytes1.Length, encoder.GetByteCount(pChars1, s1.Length, true));
@@ -449,7 +451,8 @@ namespace System.Text.Encodings.Tests
             char[] firstPayload,
             char[] secondPayload,
             int expectedIndex
-        ) {
+        )
+        {
             UTF8Encoding encoding = new UTF8Encoding(
                 encoderShouldEmitUTF8Identifier: false,
                 throwOnInvalidBytes: true

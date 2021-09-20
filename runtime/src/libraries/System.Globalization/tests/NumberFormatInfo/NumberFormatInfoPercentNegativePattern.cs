@@ -27,7 +27,8 @@ namespace System.Globalization.Tests
         public void PercentNegativePattern_Get_ReturnsExpected_ICU(
             NumberFormatInfo format,
             int expected
-        ) {
+        )
+        {
             Assert.Equal(expected, format.PercentNegativePattern);
         }
 

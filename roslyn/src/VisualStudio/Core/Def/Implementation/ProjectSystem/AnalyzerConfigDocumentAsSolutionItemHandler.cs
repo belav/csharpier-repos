@@ -47,7 +47,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.ProjectSystem
         public AnalyzerConfigDocumentAsSolutionItemHandler(
             VisualStudioWorkspace workspace,
             IThreadingContext threadingContext
-        ) {
+        )
+        {
             _workspace = workspace;
             _threadingContext = threadingContext;
 
@@ -93,7 +94,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.ProjectSystem
                 analyzerConfigDocumentFilePath == null
                 || analyzerConfigDirectory == null
                 || analyzerConfigDirectory != solutionDirectory
-            ) {
+            )
+            {
                 return;
             }
 
@@ -117,7 +119,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.ProjectSystem
                             out _,
                             out var hasExistingSolutionItem
                         ) && hasExistingSolutionItem
-                    ) {
+                    )
+                    {
                         return;
                     }
 

@@ -25,7 +25,8 @@ namespace Microsoft.CodeAnalysis.Razor.Serialization
             Type objectType,
             object existingValue,
             JsonSerializer serializer
-        ) {
+        )
+        {
             if (reader.TokenType != JsonToken.StartObject)
             {
                 return null;

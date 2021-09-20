@@ -35,7 +35,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Completion.Providers
                     alias.Target.IsType
                     && ((INamedTypeSymbol)alias.Target).IsInterfaceType()
                     && CanRemoveInterfacePrefix(name)
-                ) {
+                )
+                {
                     name = name.Substring(1);
                 }
 
@@ -49,7 +50,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Completion.Providers
                 ArrayBuilder<TextSpan> breaks,
                 string baseName,
                 bool pluralize
-            ) {
+            )
+            {
                 var result = ArrayBuilder<Words>.GetInstance();
                 var breakCount = breaks.Count;
                 result.Add(GetWords(0, breakCount, breaks, baseName, pluralize));
@@ -71,7 +73,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Completion.Providers
                 ArrayBuilder<TextSpan> breaks,
                 string baseName,
                 bool pluralize
-            ) {
+            )
+            {
                 var breakCount = breaks.Count;
                 var start = breakCount - length;
                 return GetWords(start, breakCount, breaks, baseName, pluralize);
@@ -90,7 +93,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Completion.Providers
                 ArrayBuilder<TextSpan> breaks,
                 string baseName,
                 bool pluralize
-            ) {
+            )
+            {
                 var result = ArrayBuilder<string>.GetInstance();
                 // Add all the words but the last one
                 for (; start < end; start++)

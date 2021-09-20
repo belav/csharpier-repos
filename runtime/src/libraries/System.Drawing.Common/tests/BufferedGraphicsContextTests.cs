@@ -48,7 +48,8 @@ namespace System.Drawing.Tests
                         context.MaximumBuffer.Height - 1
                     )
                 )
-            ) {
+            )
+            {
                 Assert.NotNull(bufferedGraphics.Graphics);
 
                 context.Invalidate();
@@ -71,7 +72,8 @@ namespace System.Drawing.Tests
                         context.MaximumBuffer.Height + 1
                     )
                 )
-            ) {
+            )
+            {
                 Assert.NotNull(bufferedGraphics.Graphics);
 
                 context.Invalidate();
@@ -91,7 +93,8 @@ namespace System.Drawing.Tests
                     IntPtr hdc = graphics.GetHdc();
                     using (
                         BufferedGraphics bufferedGraphics = context.Allocate(hdc, Rectangle.Empty)
-                    ) {
+                    )
+                    {
                         Assert.NotNull(bufferedGraphics.Graphics);
                     }
 
@@ -125,7 +128,8 @@ namespace System.Drawing.Tests
                                 context.MaximumBuffer.Height - 1
                             )
                         )
-                    ) {
+                    )
+                    {
                         Assert.NotNull(bufferedGraphics.Graphics);
                     }
 
@@ -159,7 +163,8 @@ namespace System.Drawing.Tests
                                 context.MaximumBuffer.Height + 1
                             )
                         )
-                    ) {
+                    )
+                    {
                         Assert.NotNull(bufferedGraphics.Graphics);
                     }
 

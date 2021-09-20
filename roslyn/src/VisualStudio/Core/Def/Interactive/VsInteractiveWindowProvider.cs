@@ -49,7 +49,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Interactive
             IInteractiveWindowCommandsFactory commandsFactory,
             IInteractiveWindowCommand[] commands,
             VisualStudioWorkspace workspace
-        ) {
+        )
+        {
             _vsServiceProvider = serviceProvider;
             _classifierAggregator = classifierAggregator;
             _contentTypeRegistry = contentTypeRegistry;
@@ -184,7 +185,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Interactive
             IInteractiveWindowCommand[] commands,
             string coreContentType,
             string specializedContentType
-        ) {
+        )
+        {
             // get all commands of coreContentType - generic interactive window commands
             var interactiveCommands = commands.Where(
                     c =>

@@ -75,7 +75,8 @@ namespace System.Threading.Tasks.Dataflow.Internal
             ITargetBlock<TInput> owningTarget,
             Action<TInput> action,
             ExecutionDataflowBlockOptions dataflowBlockOptions
-        ) {
+        )
+        {
             Debug.Assert(owningTarget != null, "Expected non-null owningTarget");
             Debug.Assert(action != null, "Expected non-null action");
             Debug.Assert(dataflowBlockOptions != null, "Expected non-null dataflowBlockOptions");
@@ -115,7 +116,8 @@ namespace System.Threading.Tasks.Dataflow.Internal
             TInput messageValue,
             ISourceBlock<TInput>? source,
             bool consumeToAccept
-        ) {
+        )
+        {
             // If we're not required to go back to the source to consume the offered message, try fast path.
             return !consumeToAccept && Post(messageValue)
               ? DataflowMessageStatus.Accepted
@@ -133,7 +135,8 @@ namespace System.Threading.Tasks.Dataflow.Internal
             TInput messageValue,
             ISourceBlock<TInput>? source,
             bool consumeToAccept
-        ) {
+        )
+        {
             // If we're declining permanently, let the caller know.
             if (_decliningPermanently)
             {
@@ -239,7 +242,8 @@ namespace System.Threading.Tasks.Dataflow.Internal
                         _exceptions == null
                         && messagesProcessed < maxMessagesToProcess
                         && _messages.TryDequeue(out nextMessage)
-                    ) {
+                    )
+                    {
                         messagesProcessed++; // done before _action invoked in case it throws exception
                         _action(nextMessage);
                     }
@@ -267,7 +271,8 @@ namespace System.Threading.Tasks.Dataflow.Internal
                         !_messages.IsEmpty
                         && _exceptions == null
                         && (messagesProcessed < maxMessagesToProcess)
-                    ) {
+                    )
+                    {
                         continueProcessing = true;
                     }
                     else

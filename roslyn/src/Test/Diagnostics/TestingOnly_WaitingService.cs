@@ -39,7 +39,8 @@ namespace Roslyn.Hosting.Diagnostics.Waiters
             TimeSpan timeout,
             string featureName,
             bool waitForWorkspaceFirst = true
-        ) {
+        )
+        {
             var workspaceWaiter = _provider.GetWaiter(FeatureAttribute.Workspace);
             var featureWaiter = _provider.GetWaiter(featureName);
             Contract.ThrowIfNull(featureWaiter);
@@ -68,7 +69,8 @@ namespace Roslyn.Hosting.Diagnostics.Waiters
             Workspace? workspace,
             TimeSpan timeout,
             params string[] featureNames
-        ) {
+        )
+        {
             var task = _provider.WaitAllAsync(workspace, featureNames, timeout: timeout);
 
             if (timeout == TimeSpan.FromMilliseconds(-1))

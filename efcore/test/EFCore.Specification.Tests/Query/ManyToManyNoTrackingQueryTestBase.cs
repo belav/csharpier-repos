@@ -34,7 +34,8 @@ namespace Microsoft.EntityFrameworkCore.Query
                 elementType.UnwrapNullableType().IsValueType
                 && serverQueryExpression is MethodCallExpression methodCallExpression
                 && methodCallExpression.Method.DeclaringType == typeof(Queryable)
-            ) {
+            )
+            {
                 return methodCallExpression.Update(
                     null,
                     new[] { ApplyNoTracking(methodCallExpression.Arguments[0]) }.Concat(
@@ -58,7 +59,8 @@ namespace Microsoft.EntityFrameworkCore.Query
         [MemberData(nameof(IsAsyncData))]
         public virtual async Task Include_skip_navigation_then_include_inverse_throws_in_no_tracking(
             bool async
-        ) {
+        )
+        {
             Assert.Equal(
                 CoreStrings.IncludeWithCycle(
                     nameof(EntityThree.OneSkipPayloadFullShared),

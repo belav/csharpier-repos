@@ -19,7 +19,8 @@ namespace Microsoft.CodeAnalysis.CSharp
 
             private NamespaceOrTypeOrAliasSymbolWithAnnotations(
                 TypeWithAnnotations typeWithAnnotations
-            ) {
+            )
+            {
                 Debug.Assert(typeWithAnnotations.HasType);
                 _typeWithAnnotations = typeWithAnnotations;
                 _symbol = null;
@@ -29,7 +30,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             private NamespaceOrTypeOrAliasSymbolWithAnnotations(
                 Symbol symbol,
                 bool isNullableEnabled
-            ) {
+            )
+            {
                 Debug.Assert(!(symbol is TypeSymbol));
                 _typeWithAnnotations = default;
                 _symbol = symbol;
@@ -55,7 +57,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             internal static NamespaceOrTypeOrAliasSymbolWithAnnotations CreateUnannotated(
                 bool isNullableEnabled,
                 Symbol symbol
-            ) {
+            )
+            {
                 if (symbol is null)
                 {
                     return default;
@@ -70,7 +73,8 @@ namespace Microsoft.CodeAnalysis.CSharp
 
             public static implicit operator NamespaceOrTypeOrAliasSymbolWithAnnotations(
                 TypeWithAnnotations typeWithAnnotations
-            ) {
+            )
+            {
                 return new NamespaceOrTypeOrAliasSymbolWithAnnotations(typeWithAnnotations);
             }
         }

@@ -25,7 +25,8 @@ namespace Microsoft.Web.Helpers
             GravatarRating rating = GravatarRating.Default,
             string imageExtension = null,
             object attributes = null
-        ) {
+        )
+        {
             bool altSpecified = false;
             string url = GetUrl(email, imageSize, defaultImage, rating, imageExtension);
             StringBuilder html = new StringBuilder(
@@ -82,7 +83,8 @@ namespace Microsoft.Web.Helpers
             string defaultImage = null,
             GravatarRating rating = GravatarRating.Default,
             string imageExtension = null
-        ) {
+        )
+        {
             if (String.IsNullOrEmpty(email))
             {
                 throw new ArgumentException(

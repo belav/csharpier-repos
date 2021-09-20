@@ -32,7 +32,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.CodeModel
             HostLanguageServices languageServices,
             VisualStudioWorkspace workspace,
             ProjectCodeModelFactory projectCodeModelFactory
-        ) {
+        )
+        {
             Debug.Assert(threadingContext != null);
             Debug.Assert(serviceProvider != null);
             Debug.Assert(languageServices != null);

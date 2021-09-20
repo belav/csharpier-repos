@@ -38,7 +38,8 @@ namespace Microsoft.CodeAnalysis.LanguageServices
             SyntaxNode containerOpt,
             string baseName,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             return GenerateUniqueName(
                 semanticModel,
                 location,
@@ -57,7 +58,8 @@ namespace Microsoft.CodeAnalysis.LanguageServices
             string baseName,
             IEnumerable<string> usedNames,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             return GenerateUniqueName(
                 semanticModel,
                 location,
@@ -75,7 +77,8 @@ namespace Microsoft.CodeAnalysis.LanguageServices
             SyntaxNode containerOpt,
             string baseName,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             return GenerateUniqueName(
                 semanticModel,
                 location,
@@ -94,7 +97,8 @@ namespace Microsoft.CodeAnalysis.LanguageServices
             string baseName,
             IEnumerable<string> usedNames,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             return GenerateUniqueName(
                 semanticModel,
                 location,
@@ -114,7 +118,8 @@ namespace Microsoft.CodeAnalysis.LanguageServices
             Func<ISymbol, bool> filter,
             IEnumerable<string> usedNames,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var container =
                 containerOpt
                 ?? location.AncestorsAndSelf()

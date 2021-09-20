@@ -66,7 +66,8 @@ namespace Microsoft.CodeAnalysis.ExternalAccess.FSharp.Internal.DocumentHighligh
 
         private static ImmutableArray<HighlightSpan> MapHighlightSpans(
             ImmutableArray<FSharpHighlightSpan> highlightSpans
-        ) {
+        )
+        {
             return highlightSpans.SelectAsArray(
                 x => new HighlightSpan(x.TextSpan, FSharpHighlightSpanKindHelpers.ConvertTo(x.Kind))
             );
@@ -77,7 +78,8 @@ namespace Microsoft.CodeAnalysis.ExternalAccess.FSharp.Internal.DocumentHighligh
             int position,
             IImmutableSet<Document> documentsToSearch,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var highlights = await _service.GetDocumentHighlightsAsync(
                     document,
                     position,

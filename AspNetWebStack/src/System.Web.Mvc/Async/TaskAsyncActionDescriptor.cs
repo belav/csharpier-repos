@@ -43,7 +43,8 @@ namespace System.Web.Mvc.Async
             string actionName,
             ControllerDescriptor controllerDescriptor,
             bool validateMethod
-        ) {
+        )
+        {
             if (taskMethodInfo == null)
             {
                 throw new ArgumentNullException("taskMethodInfo");
@@ -111,7 +112,8 @@ namespace System.Web.Mvc.Async
             IDictionary<string, object> parameters,
             AsyncCallback callback,
             object state
-        ) {
+        )
+        {
             if (controllerContext == null)
             {
                 throw new ArgumentNullException("controllerContext");
@@ -242,7 +244,8 @@ namespace System.Web.Mvc.Async
         public override object Execute(
             ControllerContext controllerContext,
             IDictionary<string, object> parameters
-        ) {
+        )
+        {
             string errorMessage = String.Format(
                 CultureInfo.CurrentCulture,
                 MvcResources.TaskAsyncActionDescriptor_CannotExecuteSynchronously,

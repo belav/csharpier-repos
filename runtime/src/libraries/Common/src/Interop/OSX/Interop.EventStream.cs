@@ -137,7 +137,8 @@ internal static partial class Interop
             FSEventStreamEventId sinceWhen,
             CFTimeInterval latency,
             FSEventStreamCreateFlags flags
-        ) {
+        )
+        {
             return FSEventStreamCreate(
                 IntPtr.Zero,
                 cb,

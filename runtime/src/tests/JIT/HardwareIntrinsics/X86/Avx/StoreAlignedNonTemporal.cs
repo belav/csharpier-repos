@@ -34,7 +34,8 @@ namespace IntelHardwareIntrinsicTest
                         if (
                             BitConverter.DoubleToInt64Bits(inArray[i])
                             != BitConverter.DoubleToInt64Bits(outArray[i])
-                        ) {
+                        )
+                        {
                             Console.WriteLine("Avx StoreAlignedNonTemporal failed on double:");
                             for (var n = 0; n < 4; n++)
                             {
@@ -61,7 +62,8 @@ namespace IntelHardwareIntrinsicTest
                         if (
                             BitConverter.SingleToInt32Bits(inArray[i])
                             != BitConverter.SingleToInt32Bits(outArray[i])
-                        ) {
+                        )
+                        {
                             Console.WriteLine("Avx StoreAlignedNonTemporal failed on float:");
                             for (var n = 0; n < 8; n++)
                             {

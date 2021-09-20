@@ -93,7 +93,8 @@ namespace System.Security.Cryptography.EcDiffieHellman.Tests
                     ECDiffieHellman ecdh2 = ECDiffieHellmanFactory.Create(
                         ecdh1ExplicitParameters.Curve
                     )
-                ) {
+                )
+                {
                     ecdh1Explicit.ImportParameters(ecdh1ExplicitParameters);
 
                     using (ECDiffieHellmanPublicKey ecdh1NamedPub = ecdh1Named.PublicKey)
@@ -507,7 +508,8 @@ namespace System.Security.Cryptography.EcDiffieHellman.Tests
             ECDiffieHellman ec,
             int keySize,
             bool includePrivate
-        ) {
+        )
+        {
             parameters.Validate();
             Assert.True(parameters.Curve.IsNamed);
             Assert.Equal(keySize, ec.KeySize);
@@ -528,7 +530,8 @@ namespace System.Security.Cryptography.EcDiffieHellman.Tests
             ECParameters parameters,
             ECDiffieHellman ec,
             CurveDef curveDef
-        ) {
+        )
+        {
             Assert.True(parameters.Curve.IsExplicit);
             ECCurve curve = parameters.Curve;
 

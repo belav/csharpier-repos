@@ -13,7 +13,8 @@ namespace System.Security.AccessControl
             string? name,
             SafeHandle? handle,
             object? context
-        ) {
+        )
+        {
             Exception? exception = null;
 
             switch (errorCode)

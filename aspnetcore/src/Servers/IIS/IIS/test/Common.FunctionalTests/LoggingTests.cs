@@ -148,7 +148,8 @@ namespace Microsoft.AspNetCore.Server.IIS.FunctionalTests
         [MemberData(nameof(InprocessTestVariants))]
         public async Task StartupMessagesAreLoggedIntoDefaultDebugLogFileWhenEnabledWithEnvVar(
             TestVariant variant
-        ) {
+        )
+        {
             var deploymentParameters = Fixture.GetBaseDeploymentParameters(variant);
             deploymentParameters.EnvironmentVariables["ASPNETCORE_MODULE_DEBUG"] = "file";
             // Add empty debugFile handler setting to prevent IIS deployer from overriding debug settings
@@ -170,7 +171,8 @@ namespace Microsoft.AspNetCore.Server.IIS.FunctionalTests
         [MemberData(nameof(InprocessTestVariants))]
         public async Task StartupMessagesLogFileSwitchedWhenLogFilePresentInWebConfig(
             TestVariant variant
-        ) {
+        )
+        {
             var firstTempFile = Path.GetTempFileName();
             var secondTempFile = Path.GetTempFileName();
 

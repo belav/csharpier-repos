@@ -50,7 +50,8 @@ namespace Microsoft.CodeAnalysis.CSharp
 
         internal override CompilationReference WithPropertiesImpl(
             MetadataReferenceProperties properties
-        ) {
+        )
+        {
             return new CSharpCompilationReference(Compilation, properties);
         }
 

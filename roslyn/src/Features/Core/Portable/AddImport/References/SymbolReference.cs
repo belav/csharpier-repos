@@ -56,7 +56,8 @@ namespace Microsoft.CodeAnalysis.AddImport
                 bool allowInHiddenRegions,
                 bool hasExistingImport,
                 CancellationToken cancellationToken
-            ) {
+            )
+            {
                 // Defer to the language to add the actual import/using.
                 if (hasExistingImport)
                 {
@@ -101,7 +102,8 @@ namespace Microsoft.CodeAnalysis.AddImport
                 bool placeSystemNamespaceFirst,
                 bool allowInHiddenRegions,
                 CancellationToken cancellationToken
-            ) {
+            )
+            {
                 var semanticModel = await document.GetSemanticModelAsync(cancellationToken)
                     .ConfigureAwait(false);
                 var (description, hasExistingImport) = GetDescription(
@@ -167,7 +169,8 @@ namespace Microsoft.CodeAnalysis.AddImport
                 SyntaxNode node,
                 SemanticModel semanticModel,
                 CancellationToken cancellationToken
-            ) {
+            )
+            {
                 return provider.GetDescription(
                     document,
                     SymbolResult.Symbol,

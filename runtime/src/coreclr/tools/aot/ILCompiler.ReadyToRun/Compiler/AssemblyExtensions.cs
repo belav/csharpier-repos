@@ -53,7 +53,8 @@ namespace ILCompiler
                     if (
                         !(decoded.FixedArguments[0].Value is bool)
                         || !(decoded.FixedArguments[1].Value is bool)
-                    ) {
+                    )
+                    {
                         ThrowHelper.ThrowBadImageFormatException();
                     }
                     result = ((bool)decoded.FixedArguments[1].Value);

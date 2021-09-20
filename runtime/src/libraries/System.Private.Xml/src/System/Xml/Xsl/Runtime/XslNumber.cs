@@ -128,7 +128,8 @@ namespace System.Xml.Xsl.Runtime
             string letterValue,
             string groupingSeparator,
             int groupingSize
-        ) {
+        )
+        {
             Debug.Assert(groupingSeparator.Length <= 1);
             _formatString = formatString;
             _lang = lang;
@@ -158,7 +159,8 @@ namespace System.Xml.Xsl.Runtime
                 if (
                     idx == formatString.Length
                     || isAlphaNumeric != CharUtil.IsAlphaNumeric(formatString[idx])
-                ) {
+                )
+                {
                     if (isAlphaNumeric)
                     {
                         // Just finished a format token
@@ -335,7 +337,8 @@ namespace System.Xml.Xsl.Runtime
             char zero,
             string groupSeparator,
             int groupSize
-        ) {
+        )
+        {
             Debug.Assert(
                 val >= 0 && val == Math.Round(val),
                 "ConvertToArabic operates on non-negative integer numbers only"

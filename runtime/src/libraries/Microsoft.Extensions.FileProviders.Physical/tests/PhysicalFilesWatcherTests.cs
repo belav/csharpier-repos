@@ -28,7 +28,8 @@ namespace Microsoft.Extensions.FileProviders.Physical.Tests
                     fileSystemWatcher,
                     pollForChanges: false
                 )
-            ) {
+            )
+            {
                 var token = physicalFilesWatcher.CreateFileChangeToken(
                     Path.GetFullPath(Path.Combine(root.RootPath, ".."))
                 );
@@ -61,7 +62,8 @@ namespace Microsoft.Extensions.FileProviders.Physical.Tests
                     fileSystemWatcher,
                     pollForChanges: false
                 )
-            ) {
+            )
+            {
                 var token = physicalFilesWatcher.CreateFileChangeToken("**");
                 var called = false;
                 token.RegisterChangeCallback(o => called = true, null);
@@ -198,7 +200,8 @@ namespace Microsoft.Extensions.FileProviders.Physical.Tests
                     fileSystemWatcher,
                     pollForChanges: true
                 )
-            ) {
+            )
+            {
                 physicalFilesWatcher.UseActivePolling = true;
 
                 var changeToken = physicalFilesWatcher.GetOrAddFilePathChangeToken("some-path");
@@ -230,7 +233,8 @@ namespace Microsoft.Extensions.FileProviders.Physical.Tests
                     fileSystemWatcher,
                     pollForChanges: true
                 )
-            ) {
+            )
+            {
                 var changeToken = physicalFilesWatcher.GetOrAddFilePathChangeToken("some-path");
 
                 var compositeChangeToken = Assert.IsType<CompositeChangeToken>(changeToken);
@@ -260,7 +264,8 @@ namespace Microsoft.Extensions.FileProviders.Physical.Tests
                     fileSystemWatcher,
                     pollForChanges: false
                 )
-            ) {
+            )
+            {
                 var changeToken = physicalFilesWatcher.GetOrAddFilePathChangeToken("some-path");
 
                 Assert.IsType<CancellationChangeToken>(changeToken);
@@ -279,7 +284,8 @@ namespace Microsoft.Extensions.FileProviders.Physical.Tests
                     fileSystemWatcher,
                     pollForChanges: true
                 )
-            ) {
+            )
+            {
                 physicalFilesWatcher.UseActivePolling = true;
 
                 var changeToken = physicalFilesWatcher.GetOrAddWildcardChangeToken("*.cshtml");

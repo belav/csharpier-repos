@@ -60,7 +60,8 @@ namespace System.Linq.Parallel
 
             internal QueryOperatorClassicEnumerator(
                 QueryOperatorEnumerator<TElement, TKey> operatorEnumerator
-            ) {
+            )
+            {
                 Debug.Assert(operatorEnumerator != null);
                 _operatorEnumerator = operatorEnumerator;
             }

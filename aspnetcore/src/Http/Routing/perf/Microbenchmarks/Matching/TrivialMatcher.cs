@@ -37,7 +37,8 @@ namespace Microsoft.AspNetCore.Routing.Matching
                     path,
                     StringComparison.OrdinalIgnoreCase
                 )
-            ) {
+            )
+            {
                 httpContext.SetEndpoint(_endpoint);
                 httpContext.Request.RouteValues = new RouteValueDictionary();
             }
@@ -54,7 +55,8 @@ namespace Microsoft.AspNetCore.Routing.Matching
                     path,
                     StringComparison.OrdinalIgnoreCase
                 )
-            ) {
+            )
+            {
                 return _candidates;
             }
 

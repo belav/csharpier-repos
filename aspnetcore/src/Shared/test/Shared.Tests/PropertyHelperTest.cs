@@ -637,7 +637,8 @@ namespace Microsoft.Extensions.Internal
         public void ObjectToDictionary_IgnoresPropertyCase(
             object testObject,
             KeyValuePair<string, object> expectedEntry
-        ) {
+        )
+        {
             // Act
             var result = PropertyHelper.ObjectToDictionary(testObject);
 

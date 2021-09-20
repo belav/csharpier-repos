@@ -24,7 +24,8 @@ namespace Microsoft.EntityFrameworkCore.SqlServer.Query.Internal
         /// </summary>
         public SqlServerSqlTranslatingExpressionVisitorFactory(
             RelationalSqlTranslatingExpressionVisitorDependencies dependencies
-        ) {
+        )
+        {
             _dependencies = dependencies;
         }
 

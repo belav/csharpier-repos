@@ -32,7 +32,8 @@ namespace System.Net.Http.Formatting
             string headerName,
             string headerValue,
             MediaTypeHeaderValue mediaType
-        ) {
+        )
+        {
             RequestHeaderMapping mapping = new RequestHeaderMapping(
                 headerName,
                 headerValue,
@@ -57,7 +58,8 @@ namespace System.Net.Http.Formatting
         public void ConstructorThrowsWithEmptyHeaderName(
             MediaTypeHeaderValue mediaType,
             string headerName
-        ) {
+        )
+        {
             Assert.ThrowsArgumentNull(
                 () =>
                     new RequestHeaderMapping(
@@ -81,7 +83,8 @@ namespace System.Net.Http.Formatting
         public void ConstructorThrowsWithEmptyHeaderValue(
             MediaTypeHeaderValue mediaType,
             string headerValue
-        ) {
+        )
+        {
             Assert.ThrowsArgumentNull(
                 () =>
                     new RequestHeaderMapping(
@@ -105,7 +108,8 @@ namespace System.Net.Http.Formatting
         public void ConstructorThrowsWithNullMediaTypeHeaderValue(
             string headerName,
             string headerValue
-        ) {
+        )
+        {
             Assert.ThrowsArgumentNull(
                 () =>
                     new RequestHeaderMapping(
@@ -132,7 +136,8 @@ namespace System.Net.Http.Formatting
             string headerName,
             string headerValue,
             MediaTypeHeaderValue mediaType
-        ) {
+        )
+        {
             int invalidValue = 999;
             Assert.ThrowsInvalidEnumArgument(
                 () =>
@@ -231,7 +236,8 @@ namespace System.Net.Http.Formatting
             string headerName,
             string headerValue,
             string mediaType
-        ) {
+        )
+        {
             Assert.ThrowsArgumentNull(
                 () =>
                     new RequestHeaderMapping(
@@ -258,7 +264,8 @@ namespace System.Net.Http.Formatting
             string headerName,
             string headerValue,
             string mediaType
-        ) {
+        )
+        {
             int invalidValue = 999;
             Assert.ThrowsInvalidEnumArgument(
                 () =>
@@ -291,7 +298,8 @@ namespace System.Net.Http.Formatting
             string headerValue,
             string mediaType,
             bool subset
-        ) {
+        )
+        {
             RequestHeaderMapping mapping = new RequestHeaderMapping(
                 headerName,
                 headerValue,
@@ -317,7 +325,8 @@ namespace System.Net.Http.Formatting
             string headerName,
             string headerValue,
             string mediaType
-        ) {
+        )
+        {
             RequestHeaderMapping mapping = new RequestHeaderMapping(
                 headerName,
                 headerValue,
@@ -351,7 +360,8 @@ namespace System.Net.Http.Formatting
             string headerName,
             string headerValue,
             string mediaType
-        ) {
+        )
+        {
             RequestHeaderMapping mapping = new RequestHeaderMapping(
                 headerName,
                 headerValue,
@@ -385,7 +395,8 @@ namespace System.Net.Http.Formatting
             string headerName,
             string headerValue,
             string mediaType
-        ) {
+        )
+        {
             RequestHeaderMapping mapping = new RequestHeaderMapping(
                 headerName,
                 headerValue,
@@ -419,7 +430,8 @@ namespace System.Net.Http.Formatting
             string headerName,
             string headerValue,
             string mediaType
-        ) {
+        )
+        {
             RequestHeaderMapping mapping = new RequestHeaderMapping(
                 headerName,
                 headerValue,

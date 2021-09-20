@@ -12,11 +12,8 @@ namespace System.Web.Mvc
         public WebFormView(ControllerContext controllerContext, string viewPath)
             : this(controllerContext, viewPath, null, null) { }
 
-        public WebFormView(
-            ControllerContext controllerContext,
-            string viewPath,
-            string masterPath
-        ) : this(controllerContext, viewPath, masterPath, null) { }
+        public WebFormView(ControllerContext controllerContext, string viewPath, string masterPath)
+            : this(controllerContext, viewPath, masterPath, null) { }
 
         public WebFormView(
             ControllerContext controllerContext,
@@ -34,7 +31,8 @@ namespace System.Web.Mvc
             ViewContext viewContext,
             TextWriter writer,
             object instance
-        ) {
+        )
+        {
             ViewPage viewPage = instance as ViewPage;
             if (viewPage != null)
             {

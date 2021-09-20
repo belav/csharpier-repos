@@ -85,7 +85,8 @@ namespace Microsoft.AspNetCore.Routing.Tests
                 string routeKey,
                 RouteValueDictionary values,
                 RouteDirection routeDirection
-            ) {
+            )
+            {
                 throw new NotImplementedException();
             }
         }

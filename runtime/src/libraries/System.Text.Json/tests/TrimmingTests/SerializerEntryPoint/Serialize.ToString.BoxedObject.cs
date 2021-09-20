@@ -27,7 +27,8 @@ namespace SerializerTrimmingTest
                     @"{""X"":0,""Y"":0}",
                     JsonSerializer.Serialize(obj, typeof(MyStruct))
                 )
-            ) {
+            )
+            {
                 return -1;
             }
 

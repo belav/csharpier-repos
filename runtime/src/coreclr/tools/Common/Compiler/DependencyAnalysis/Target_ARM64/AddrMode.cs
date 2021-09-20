@@ -28,7 +28,8 @@ namespace ILCompiler.DependencyAnalysis.ARM64
             int offset,
             byte scale,
             AddrModeSize size
-        ) {
+        )
+        {
             BaseReg = baseRegister;
             IndexReg = indexRegister;
             Offset = offset;

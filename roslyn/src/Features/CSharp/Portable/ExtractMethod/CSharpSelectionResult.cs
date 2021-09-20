@@ -31,7 +31,8 @@ namespace Microsoft.CodeAnalysis.CSharp.ExtractMethod
             SyntaxToken firstToken,
             SyntaxToken lastToken,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             Contract.ThrowIfNull(status);
             Contract.ThrowIfNull(document);
 
@@ -97,22 +98,24 @@ namespace Microsoft.CodeAnalysis.CSharp.ExtractMethod
             SemanticDocument document,
             SyntaxAnnotation firstTokenAnnotation,
             SyntaxAnnotation lastTokenAnnotation
-        ) : base(
-            status,
-            originalSpan,
-            finalSpan,
-            options,
-            selectionInExpression,
-            document,
-            firstTokenAnnotation,
-            lastTokenAnnotation
-        ) { }
+        )
+            : base(
+                status,
+                originalSpan,
+                finalSpan,
+                options,
+                selectionInExpression,
+                document,
+                firstTokenAnnotation,
+                lastTokenAnnotation
+            ) { }
 
         protected override bool UnderAnonymousOrLocalMethod(
             SyntaxToken token,
             SyntaxToken firstToken,
             SyntaxToken lastToken
-        ) {
+        )
+        {
             var current = token.Parent;
             for (; current != null; current = current.Parent)
             {
@@ -122,7 +125,8 @@ namespace Microsoft.CodeAnalysis.CSharp.ExtractMethod
                     || current is ParenthesizedLambdaExpressionSyntax
                     || current is AnonymousMethodExpressionSyntax
                     || current is LocalFunctionStatementSyntax
-                ) {
+                )
+                {
                     break;
                 }
             }
@@ -221,7 +225,8 @@ namespace Microsoft.CodeAnalysis.CSharp.ExtractMethod
                 ancestors.Where(a => SyntaxFacts.IsTypeDeclaration(a.Kind()))
                     .Cast<MemberDeclarationSyntax>()
                     .Any(m => m.GetModifiers().Any(SyntaxKind.UnsafeKeyword))
-            ) {
+            )
+            {
                 return false;
             }
 

@@ -110,7 +110,8 @@ namespace Microsoft.CodeAnalysis.InitializeParameter
                     out var parameter,
                     cancellationToken
                 )
-            ) {
+            )
+            {
                 return;
             }
 
@@ -120,7 +121,8 @@ namespace Microsoft.CodeAnalysis.InitializeParameter
                 || methodSymbol.IsExtern
                 || methodSymbol.PartialImplementationPart != null
                 || methodSymbol.ContainingType.TypeKind == TypeKind.Interface
-            ) {
+            )
+            {
                 return;
             }
 
@@ -132,7 +134,8 @@ namespace Microsoft.CodeAnalysis.InitializeParameter
                     cancellationToken,
                     out var blockStatementOpt
                 )
-            ) {
+            )
+            {
                 // Ok.  Looks like the selected parameter could be refactored. Defer to subclass to
                 // actually determine if there are any viable refactorings here.
                 var refactorings = await GetRefactoringsForSingleParameterAsync(
@@ -191,7 +194,8 @@ namespace Microsoft.CodeAnalysis.InitializeParameter
                 SemanticModel semanticModel,
                 [NotNullWhen(true)] out IParameterSymbol? parameter,
                 CancellationToken cancellationToken
-            ) {
+            )
+            {
                 parameter = (IParameterSymbol?)semanticModel.GetDeclaredSymbol(
                     parameterNode,
                     cancellationToken
@@ -207,7 +211,8 @@ namespace Microsoft.CodeAnalysis.InitializeParameter
             ISyntaxFactsService syntaxFacts,
             CancellationToken cancellationToken,
             out IBlockOperation? blockStatementOpt
-        ) {
+        )
+        {
             blockStatementOpt = null;
 
             var functionBody = GetBody(functionDeclaration);
@@ -266,7 +271,8 @@ namespace Microsoft.CodeAnalysis.InitializeParameter
             IOperation condition,
             IParameterSymbol parameter,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             foreach (var child in condition.Syntax.DescendantNodes().OfType<TExpressionSyntax>())
             {
                 var childOperation = semanticModel.GetOperation(child, cancellationToken);
@@ -289,11 +295,13 @@ namespace Microsoft.CodeAnalysis.InitializeParameter
             INamedTypeSymbol containingType,
             [NotNullWhen(true)] out IAssignmentOperation? assignmentExpression,
             [NotNullWhen(true)] out ISymbol? fieldOrProperty
-        ) {
+        )
+        {
             if (
                 statement is IExpressionStatementOperation expressionStatement
                 && expressionStatement.Operation is IAssignmentOperation assignment
-            ) {
+            )
+            {
                 assignmentExpression = assignment;
                 return IsFieldOrPropertyReference(
                     assignmentExpression.Target,
@@ -316,15 +324,18 @@ namespace Microsoft.CodeAnalysis.InitializeParameter
             IOperation? operation,
             INamedTypeSymbol containingType,
             [NotNullWhen(true)] out ISymbol? fieldOrProperty
-        ) {
+        )
+        {
             if (
                 operation is IMemberReferenceOperation memberReference
                 && memberReference.Member.ContainingType.Equals(containingType)
-            ) {
+            )
+            {
                 if (
                     memberReference.Member is IFieldSymbol
                     || memberReference.Member is IPropertySymbol
-                ) {
+                )
+                {
                     fieldOrProperty = memberReference.Member;
                     return true;
                 }

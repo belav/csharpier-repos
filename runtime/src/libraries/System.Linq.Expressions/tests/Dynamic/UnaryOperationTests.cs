@@ -19,7 +19,8 @@ namespace System.Dynamic.Tests
             public override DynamicMetaObject FallbackUnaryOperation(
                 DynamicMetaObject target,
                 DynamicMetaObject errorSuggestion
-            ) {
+            )
+            {
                 throw new NotSupportedException();
             }
         }

@@ -111,7 +111,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel.FunctionalTests
             string headerName,
             StringValues headerValue,
             string expectedValue
-        ) {
+        )
+        {
             var hostBuilder = TransportSelector.GetHostBuilder()
                 .ConfigureWebHost(
                     webHostBuilder =>
@@ -194,7 +195,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel.FunctionalTests
                     new TestServiceContext(LoggerFactory),
                     listenOptions
                 )
-            ) {
+            )
+            {
                 using (var connection = server.CreateConnection())
                 {
                     await connection.Send("GET / HTTP/1.1", "Host:", "", "");
@@ -214,7 +216,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel.FunctionalTests
         [MemberData(nameof(ConnectionMiddlewareData))]
         public async Task ThrowsOnWriteWithRequestAbortedTokenAfterRequestIsAborted(
             ListenOptions listenOptions
-        ) {
+        )
+        {
             // This should match _maxBytesPreCompleted in SocketOutput
             var maxBytesPreCompleted = 65536;
 
@@ -266,7 +269,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel.FunctionalTests
                     new TestServiceContext(LoggerFactory),
                     listenOptions
                 )
-            ) {
+            )
+            {
                 using (var connection = server.CreateConnection())
                 {
                     await connection.Send("POST / HTTP/1.1", "Host:", "Content-Length: 0", "", "");
@@ -290,7 +294,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel.FunctionalTests
         [MemberData(nameof(ConnectionMiddlewareData))]
         public async Task WritingToConnectionAfterUnobservedCloseTriggersRequestAbortedToken(
             ListenOptions listenOptions
-        ) {
+        )
+        {
             const int connectionPausedEventId = 4;
             const int maxRequestBufferSize = 4096;
 
@@ -312,7 +317,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel.FunctionalTests
                 if (
                     context.LoggerName != "Microsoft.AspNetCore.Server.Kestrel.Transport.Libuv"
                     && context.LoggerName != "Microsoft.AspNetCore.Server.Kestrel.Transport.Sockets"
-                ) {
+                )
+                {
                     return;
                 }
 
@@ -373,7 +379,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel.FunctionalTests
                     testContext,
                     listenOptions
                 )
-            ) {
+            )
+            {
                 using (var connection = server.CreateConnection())
                 {
                     await connection.Send(
@@ -408,7 +415,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel.FunctionalTests
         [MemberData(nameof(ConnectionMiddlewareData))]
         public async Task AppCanHandleClientAbortingConnectionMidResponse(
             ListenOptions listenOptions
-        ) {
+        )
+        {
             const int connectionResetEventId = 19;
             const int connectionFinEventId = 6;
             const int connectionStopEventId = 2;
@@ -447,7 +455,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel.FunctionalTests
                     new TestServiceContext(LoggerFactory),
                     listenOptions
                 )
-            ) {
+            )
+            {
                 using (var connection = server.CreateConnection())
                 {
                     await connection.Send("GET / HTTP/1.1", "Host:", "", "");
@@ -499,7 +508,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel.FunctionalTests
         [MemberData(nameof(ConnectionMiddlewareData))]
         public async Task ClientAbortingConnectionImmediatelyIsNotLoggedHigherThanDebug(
             ListenOptions listenOptions
-        ) {
+        )
+        {
             // Attempt multiple connections to be extra sure the resets are consistently logged appropriately.
             const int numConnections = 10;
 
@@ -512,7 +522,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel.FunctionalTests
                     testServiceContext,
                     listenOptions
                 )
-            ) {
+            )
+            {
                 for (var i = 0; i < numConnections; i++)
                 {
                     using (var connection = server.CreateConnection())
@@ -751,7 +762,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel.FunctionalTests
                     testContext,
                     ConfigureListenOptions
                 )
-            ) {
+            )
+            {
                 using (var connection = server.CreateConnection())
                 {
                     using (
@@ -761,7 +773,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel.FunctionalTests
                             (sender, cert, chain, errors) => true,
                             null
                         )
-                    ) {
+                    )
+                    {
                         await sslStream.AuthenticateAsClientAsync(
                             "localhost",
                             new X509CertificateCollection(),
@@ -1208,7 +1221,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel.FunctionalTests
             Stream stream,
             int expectedBytes,
             int targetBytesPerSecond
-        ) {
+        )
+        {
             var receiveBuffer = new byte[64 * 1024];
             var totalReceived = 0;
             var startTime = DateTimeOffset.UtcNow;
@@ -1240,7 +1254,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel.FunctionalTests
             Stream stream,
             long expectedBytes,
             int targetBytesPerSecond
-        ) {
+        )
+        {
             var receiveBuffer = new byte[64 * 1024];
             var received = 0;
             var totalReceived = 0;

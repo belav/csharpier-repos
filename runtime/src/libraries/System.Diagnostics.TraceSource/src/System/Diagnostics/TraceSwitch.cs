@@ -18,11 +18,8 @@ namespace System.Diagnostics
         public TraceSwitch(string displayName, string? description) : base(displayName, description)
         { }
 
-        public TraceSwitch(
-            string displayName,
-            string? description,
-            string defaultSwitchValue
-        ) : base(displayName, description, defaultSwitchValue) { }
+        public TraceSwitch(string displayName, string? description, string defaultSwitchValue)
+            : base(displayName, description, defaultSwitchValue) { }
 
         /// <devdoc>
         ///    <para>Gets or sets the trace

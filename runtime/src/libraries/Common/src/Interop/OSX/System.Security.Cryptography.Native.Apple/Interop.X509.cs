@@ -26,7 +26,8 @@ internal static partial class Interop
             out SafeSecCertificateHandle pCertOut,
             out SafeSecIdentityHandle pPrivateKeyOut,
             out int pOSStatus
-        ) {
+        )
+        {
             return AppleCryptoNative_X509ImportCertificate(
                 ref MemoryMarshal.GetReference(keyBlob),
                 keyBlob.Length,
@@ -162,7 +163,8 @@ internal static partial class Interop
             SafeKeychainHandle keychain,
             bool exportable,
             out SafeSecIdentityHandle identityHandle
-        ) {
+        )
+        {
             SafeCreateHandle? cfPassphrase = null;
             bool releasePassword = false;
 
@@ -204,7 +206,8 @@ internal static partial class Interop
             SafeKeychainHandle keychain,
             bool exportable,
             out SafeSecIdentityHandle identityHandle
-        ) {
+        )
+        {
             SafeSecCertificateHandle certHandle;
             int osStatus;
 
@@ -255,7 +258,8 @@ internal static partial class Interop
             SafePasswordHandle importPassword,
             SafeKeychainHandle keychain,
             bool exportable
-        ) {
+        )
+        {
             SafeCreateHandle cfPassphrase = s_nullExportString;
             bool releasePassword = false;
 
@@ -327,7 +331,8 @@ internal static partial class Interop
 
         internal static SafeSecCertificateHandle X509GetCertFromIdentity(
             SafeSecIdentityHandle identity
-        ) {
+        )
+        {
             SafeSecCertificateHandle cert;
             int osStatus = AppleCryptoNative_X509CopyCertFromIdentity(identity, out cert);
 
@@ -350,7 +355,8 @@ internal static partial class Interop
 
         internal static SafeSecKeyRefHandle X509GetPrivateKeyFromIdentity(
             SafeSecIdentityHandle identity
-        ) {
+        )
+        {
             SafeSecKeyRefHandle key;
             int osStatus = AppleCryptoNative_X509CopyPrivateKeyFromIdentity(identity, out key);
 
@@ -399,7 +405,8 @@ internal static partial class Interop
             IntPtr handle,
             out SafeSecCertificateHandle certHandle,
             out SafeSecIdentityHandle identityHandle
-        ) {
+        )
+        {
             int result = AppleCryptoNative_X509DemuxAndRetainHandle(
                 handle,
                 out certHandle,
@@ -425,7 +432,8 @@ internal static partial class Interop
             SafeSecCertificateHandle certHandle,
             SafeSecKeyRefHandle privateKeyHandle,
             SafeKeychainHandle targetKeychain
-        ) {
+        )
+        {
             SafeSecIdentityHandle identityHandle;
             int osStatus;
 
@@ -458,7 +466,8 @@ internal static partial class Interop
             SafeSecCertificateHandle cert,
             SafeKeychainHandle targetKeychain,
             SafeSecKeyRefHandle? privateKey
-        ) {
+        )
+        {
             SafeSecIdentityHandle identityHandle;
             int osStatus;
 
@@ -509,7 +518,8 @@ internal static partial class Interop
             X509ContentType contentType,
             SafeCreateHandle cfPassphrase,
             IntPtr[] certHandles
-        ) {
+        )
+        {
             Debug.Assert(
                 contentType == X509ContentType.Pkcs7 || contentType == X509ContentType.Pkcs12
             );
@@ -519,7 +529,8 @@ internal static partial class Interop
                     certHandles,
                     (UIntPtr)certHandles.Length
                 )
-            ) {
+            )
+            {
                 SafeCFDataHandle exportData;
                 int osStatus;
 
@@ -560,7 +571,8 @@ internal static partial class Interop
         internal static byte[] X509ExportPfx(
             IntPtr[] certHandles,
             SafePasswordHandle exportPassword
-        ) {
+        )
+        {
             SafeCreateHandle cfPassphrase = s_emptyExportString;
             bool releasePassword = false;
 

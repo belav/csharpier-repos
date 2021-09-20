@@ -239,7 +239,8 @@ namespace Microsoft.AspNetCore.BrowserTesting
 
         private BrowserContextOptions EnsureFoldersExist(
             BrowserContextOptions browserContextOptions
-        ) {
+        )
+        {
             if (browserContextOptions?.RecordVideo?.Dir != null)
             {
                 browserContextOptions.RecordVideo.Dir = EnsureFolderExists(
@@ -315,7 +316,8 @@ namespace Microsoft.AspNetCore.BrowserTesting
         private T BindMultiValueMap<T>(
             IConfigurationSection processArgsMap,
             Func<Dictionary<string, HashSet<string>>, T> mapper
-        ) {
+        )
+        {
             // TODO: We need a way to pass in arguments that allows overriding values through our config system.
             // "Args": {
             //   // switch argument
@@ -385,7 +387,8 @@ namespace Microsoft.AspNetCore.BrowserTesting
             static HashSet<string> InitializeMapValue(
                 Dictionary<string, HashSet<string>> argsMap,
                 string argName
-            ) {
+            )
+            {
                 if (!argsMap.TryGetValue(argName, out var argValue))
                 {
                     argValue = new HashSet<string>();

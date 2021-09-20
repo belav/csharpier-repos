@@ -38,7 +38,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
             int expectedEndLine,
             int expectedEndOffset,
             bool hasMappedPath
-        ) {
+        )
+        {
             var span = GetSpanIn(syntaxTree, sourceText);
             var mappedSpan = syntaxTree.GetMappedLineSpan(span);
             var actualDisplayPath = syntaxTree.GetDisplayPath(span, s_resolver);

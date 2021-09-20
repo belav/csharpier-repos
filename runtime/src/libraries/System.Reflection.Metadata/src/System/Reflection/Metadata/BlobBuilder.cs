@@ -244,7 +244,8 @@ namespace System.Reflection.Metadata
                         rightStart,
                         minLength
                     )
-                ) {
+                )
+                {
                     return false;
                 }
 
@@ -1085,7 +1086,8 @@ namespace System.Reflection.Metadata
             int length,
             bool allowUnpairedSurrogates,
             bool prependSize
-        ) {
+        )
+        {
             Debug.Assert(start >= 0);
             Debug.Assert(length >= 0);
             Debug.Assert(start + length <= str.Length);

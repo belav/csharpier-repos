@@ -51,7 +51,8 @@ namespace Microsoft.AspNetCore.Http
             IHeaderDictionary headers,
             string key,
             StringValues value
-        ) {
+        )
+        {
             if (headers == null)
             {
                 throw new ArgumentNullException(nameof(headers));
@@ -78,7 +79,8 @@ namespace Microsoft.AspNetCore.Http
                 !string.IsNullOrEmpty(value)
                 && value.Contains(',')
                 && (value[0] != '"' || value[value.Length - 1] != '"')
-            ) {
+            )
+            {
                 return $"\"{value}\"";
             }
             return value;
@@ -89,7 +91,8 @@ namespace Microsoft.AspNetCore.Http
             if (
                 !string.IsNullOrEmpty(value)
                 && (value.Length > 1 && value[0] == '"' && value[value.Length - 1] == '"')
-            ) {
+            )
+            {
                 value = value.Substring(1, value.Length - 2);
             }
 
@@ -100,7 +103,8 @@ namespace Microsoft.AspNetCore.Http
             IHeaderDictionary headers,
             string key,
             StringValues? values
-        ) {
+        )
+        {
             if (headers == null)
             {
                 throw new ArgumentNullException(nameof(headers));
@@ -124,7 +128,8 @@ namespace Microsoft.AspNetCore.Http
             IHeaderDictionary headers,
             string key,
             params string[] values
-        ) {
+        )
+        {
             if (headers == null)
             {
                 throw new ArgumentNullException(nameof(headers));
@@ -156,7 +161,8 @@ namespace Microsoft.AspNetCore.Http
             IHeaderDictionary headers,
             string key,
             StringValues values
-        ) {
+        )
+        {
             if (headers == null)
             {
                 throw new ArgumentNullException(nameof(headers));

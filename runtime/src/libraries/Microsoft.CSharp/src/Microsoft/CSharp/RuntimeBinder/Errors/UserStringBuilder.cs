@@ -137,7 +137,8 @@ namespace Microsoft.CSharp.RuntimeBinder.Errors
                 && !pctx.IsNop
                 && parent is AggregateSymbol agg
                 && 0 != agg.GetTypeVarsAll().Count
-            ) {
+            )
+            {
                 CType pType = TypeManager.SubstType(agg.getThisType(), pctx);
                 ErrAppendType(pType, null);
             }
@@ -489,7 +490,8 @@ namespace Microsoft.CSharp.RuntimeBinder.Errors
                         elementType = pType;
                         elementType is ArrayType arrType;
                         elementType = arrType.ElementType
-                    ) {
+                    )
+                    {
                         int rank = arrType.Rank;
 
                         // Add [] with (rank-1) commas inside
@@ -579,7 +581,8 @@ namespace Microsoft.CSharp.RuntimeBinder.Errors
                     if (
                         parg.name
                         == NameManager.GetPredefinedName(PredefinedName.PN_INDEXERINTERNAL)
-                    ) {
+                    )
+                    {
                         psz = "this";
                     }
                     else

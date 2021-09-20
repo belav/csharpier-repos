@@ -61,7 +61,8 @@ namespace Microsoft.CodeAnalysis.CSharp.RemoveUnusedLocalFunction
             ImmutableArray<Diagnostic> diagnostics,
             SyntaxEditor editor,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var root = editor.OriginalRoot;
 
             // Order diagnostics in reverse (from latest in file to earliest) so that we process
@@ -88,13 +89,12 @@ namespace Microsoft.CodeAnalysis.CSharp.RemoveUnusedLocalFunction
 
         private class MyCodeAction : CodeAction.DocumentChangeAction
         {
-            public MyCodeAction(
-                Func<CancellationToken, Task<Document>> createChangedDocument
-            ) : base(
-                CSharpFeaturesResources.Remove_unused_function,
-                createChangedDocument,
-                CSharpFeaturesResources.Remove_unused_function
-            ) { }
+            public MyCodeAction(Func<CancellationToken, Task<Document>> createChangedDocument)
+                : base(
+                    CSharpFeaturesResources.Remove_unused_function,
+                    createChangedDocument,
+                    CSharpFeaturesResources.Remove_unused_function
+                ) { }
         }
     }
 }

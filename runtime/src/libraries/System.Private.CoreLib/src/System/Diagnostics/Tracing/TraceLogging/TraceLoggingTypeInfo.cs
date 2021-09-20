@@ -46,7 +46,8 @@ namespace System.Diagnostics.Tracing
             EventOpcode opcode,
             EventKeywords keywords,
             EventTags tags
-        ) {
+        )
+        {
             if (dataType == null)
             {
                 throw new ArgumentNullException(nameof(dataType));

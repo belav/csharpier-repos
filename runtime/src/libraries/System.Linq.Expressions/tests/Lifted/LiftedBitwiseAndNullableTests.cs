@@ -290,7 +290,8 @@ namespace System.Linq.Expressions.Tests
             ushort? a,
             ushort? b,
             bool useInterpreter
-        ) {
+        )
+        {
             Expression<Func<ushort?>> e = Expression.Lambda<Func<ushort?>>(
                 Expression.And(
                     Expression.Constant(a, typeof(ushort?)),
@@ -308,7 +309,8 @@ namespace System.Linq.Expressions.Tests
             Number? a,
             Number? b,
             bool useInterpreter
-        ) {
+        )
+        {
             Expression<Func<Number?>> e = Expression.Lambda<Func<Number?>>(
                 Expression.And(
                     Expression.Constant(a, typeof(Number?)),

@@ -32,7 +32,8 @@ namespace Microsoft.CodeAnalysis.SolutionCrawler
                 public AsyncWorkItemQueue(
                     SolutionCrawlerProgressReporter progressReporter,
                     Workspace workspace
-                ) {
+                )
+                {
                     _gate = new object();
                     _semaphore = new SemaphoreSlim(initialCount: 0);
                     _cancellationMap = new Dictionary<object, CancellationTokenSource>();
@@ -169,7 +170,8 @@ namespace Microsoft.CodeAnalysis.SolutionCrawler
 
                 private static void RaiseCancellation_NoLock(
                     List<CancellationTokenSource>? cancellations
-                ) {
+                )
+                {
                     if (cancellations == null)
                     {
                         return;
@@ -209,7 +211,8 @@ namespace Microsoft.CodeAnalysis.SolutionCrawler
                     TKey key,
                     out WorkItem workInfo,
                     out CancellationToken cancellationToken
-                ) {
+                )
+                {
                     lock (_gate)
                     {
                         if (TryTake_NoLock(key, out workInfo))
@@ -232,7 +235,8 @@ namespace Microsoft.CodeAnalysis.SolutionCrawler
                     IDiagnosticAnalyzerService? analyzerService,
                     out WorkItem workItem,
                     out CancellationToken cancellationToken
-                ) {
+                )
+                {
                     lock (_gate)
                     {
                         // there must be at least one item in the map when this is called unless host is shutting down.
@@ -243,7 +247,8 @@ namespace Microsoft.CodeAnalysis.SolutionCrawler
                                 analyzerService,
                                 out workItem
                             )
-                        ) {
+                        )
+                        {
                             cancellationToken = GetNewCancellationToken_NoLock(workItem.Key);
                             workItem.AsyncToken.Dispose();
                             return true;
@@ -271,7 +276,8 @@ namespace Microsoft.CodeAnalysis.SolutionCrawler
                     ProjectId? projectId,
                     ProjectDependencyGraph dependencyGraph,
                     IDiagnosticAnalyzerService? analyzerService
-                ) {
+                )
+                {
                     if (projectId != null)
                     {
                         if (workQueue.ContainsKey(projectId))
@@ -285,14 +291,16 @@ namespace Microsoft.CodeAnalysis.SolutionCrawler
                             var dependingProjectId in dependencyGraph.GetProjectsThatDirectlyDependOnThisProject(
                                 projectId
                             )
-                        ) {
+                        )
+                        {
                             if (
                                 workQueue.ContainsKey(dependingProjectId)
                                 && analyzerService?.ContainsDiagnostics(
                                     Workspace,
                                     dependingProjectId
                                 ) == true
-                            ) {
+                            )
+                            {
                                 return dependingProjectId;
                             }
                         }
@@ -304,7 +312,8 @@ namespace Microsoft.CodeAnalysis.SolutionCrawler
                         if (
                             analyzerService?.ContainsDiagnostics(Workspace, pendingProjectId)
                             == true
-                        ) {
+                        )
+                        {
                             return pendingProjectId;
                         }
                     }

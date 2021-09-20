@@ -107,7 +107,8 @@ namespace Microsoft.VisualStudio.LanguageServices.CSharp.CodeModel
             private static void AppendParameterList(
                 StringBuilder builder,
                 BaseParameterListSyntax parameterList
-            ) {
+            )
+            {
                 builder.Append(parameterList is BracketedParameterListSyntax ? '[' : '(');
 
                 var firstSeen = false;

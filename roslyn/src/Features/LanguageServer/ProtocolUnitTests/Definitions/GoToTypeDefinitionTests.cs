@@ -88,7 +88,8 @@ class B
         private static async Task<LSP.Location[]> RunGotoTypeDefinitionAsync(
             TestLspServer testLspServer,
             LSP.Location caret
-        ) {
+        )
+        {
             return await testLspServer.ExecuteRequestAsync<
                 LSP.TextDocumentPositionParams,
                 LSP.Location[]

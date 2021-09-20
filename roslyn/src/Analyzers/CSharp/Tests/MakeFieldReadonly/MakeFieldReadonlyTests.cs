@@ -203,7 +203,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.MakeFieldReadonly
         [InlineData("\r\n\r\n")]
         public async Task MultipleFieldsAssignedInline_LeadingCommentAndWhitespace(
             string leadingTrvia
-        ) {
+        )
+        {
             await TestInRegularAndScript1Async(
                 $@"class MyClass
 {{

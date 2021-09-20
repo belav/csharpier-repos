@@ -23,7 +23,8 @@ namespace Microsoft.Extensions.StackTrace.Sources
             IFileProvider fileProvider,
             ILogger? logger,
             int sourceCodeLineCount
-        ) {
+        )
+        {
             _fileProvider = fileProvider;
             _logger = logger;
             _sourceCodeLineCount = sourceCodeLineCount;
@@ -103,7 +104,8 @@ namespace Microsoft.Extensions.StackTrace.Sources
             string? method,
             string? filePath,
             int lineNumber
-        ) {
+        )
+        {
             var stackFrame = new StackFrameSourceCodeInfo
             {
                 Function = method,
@@ -154,7 +156,8 @@ namespace Microsoft.Extensions.StackTrace.Sources
             IEnumerable<string> allLines,
             int errorStartLineNumberInFile,
             int errorEndLineNumberInFile
-        ) {
+        )
+        {
             // Get the line boundaries in the file to be read and read all these lines at once into an array.
             var preErrorLineNumberInFile = Math.Max(
                 errorStartLineNumberInFile - _sourceCodeLineCount,

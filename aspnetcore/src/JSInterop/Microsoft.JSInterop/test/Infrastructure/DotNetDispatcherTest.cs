@@ -1137,7 +1137,8 @@ namespace Microsoft.JSInterop.Infrastructure
             public object[] InvokableInstanceMethod(
                 string someString,
                 DotNetObjectReference<TestDTO> someDTORef
-            ) {
+            )
+            {
                 var someDTO = someDTORef.Value;
                 // Returning an array to make the point that object references
                 // can be embedded anywhere in the result
@@ -1158,7 +1159,8 @@ namespace Microsoft.JSInterop.Infrastructure
             public async Task<object[]> InvokableAsyncMethod(
                 TestDTO dtoViaJson,
                 DotNetObjectReference<TestDTO> dtoByRefWrapper
-            ) {
+            )
+            {
                 await Task.Delay(50);
                 var dtoByRef = dtoByRefWrapper.Value;
                 return new object[]
@@ -1250,7 +1252,8 @@ namespace Microsoft.JSInterop.Infrastructure
                 string argsJson,
                 JSCallResultType resultType,
                 long targetInstanceId
-            ) {
+            )
+            {
                 LastInvocationAsyncHandle = asyncHandle;
                 LastInvocationIdentifier = identifier;
                 LastInvocationArgsJson = argsJson;
@@ -1263,7 +1266,8 @@ namespace Microsoft.JSInterop.Infrastructure
                 string argsJson,
                 JSCallResultType resultType,
                 long targetInstanceId
-            ) {
+            )
+            {
                 LastInvocationAsyncHandle = default;
                 LastInvocationIdentifier = identifier;
                 LastInvocationArgsJson = argsJson;
@@ -1275,7 +1279,8 @@ namespace Microsoft.JSInterop.Infrastructure
             protected internal override void EndInvokeDotNet(
                 DotNetInvocationInfo invocationInfo,
                 in DotNetInvocationResult invocationResult
-            ) {
+            )
+            {
                 LastCompletionCallId = invocationInfo.CallId;
                 LastCompletionResult = invocationResult;
                 _nextInvocationTcs.SetResult(null);

@@ -176,7 +176,8 @@ internal static partial class Interop
                     subsystem,
                     out string? cgroupPathRelativeToMount
                 )
-            ) {
+            )
+            {
                 return FindCGroupPath(hierarchyRoot, hierarchyMount, cgroupPathRelativeToMount);
             }
 
@@ -187,7 +188,8 @@ internal static partial class Interop
             string hierarchyRoot,
             string hierarchyMount,
             string cgroupPathRelativeToMount
-        ) {
+        )
+        {
             // For a host cgroup, we need to append the relative path.
             // The root and cgroup path can share a common prefix of the path that should not be appended.
             // Example 1 (docker):
@@ -208,7 +210,8 @@ internal static partial class Interop
             if (
                 (commonPathPrefixLength == 1)
                 || !cgroupPathRelativeToMount.StartsWith(hierarchyRoot, StringComparison.Ordinal)
-            ) {
+            )
+            {
                 commonPathPrefixLength = 0;
             }
 
@@ -229,7 +232,8 @@ internal static partial class Interop
             string subsystem,
             [NotNullWhen(true)] out string? root,
             [NotNullWhen(true)] out string? path
-        ) {
+        )
+        {
             return TryFindHierarchyMount(
                 cgroupVersion,
                 ProcMountInfoFilePath,
@@ -252,7 +256,8 @@ internal static partial class Interop
             string subsystem,
             [NotNullWhen(true)] out string? root,
             [NotNullWhen(true)] out string? path
-        ) {
+        )
+        {
             if (File.Exists(mountInfoFilePath))
             {
                 try
@@ -348,7 +353,8 @@ internal static partial class Interop
             CGroupVersion cgroupVersion,
             string subsystem,
             [NotNullWhen(true)] out string? path
-        ) {
+        )
+        {
             return TryFindCGroupPathForSubsystem(
                 cgroupVersion,
                 ProcCGroupFilePath,
@@ -368,7 +374,8 @@ internal static partial class Interop
             string procCGroupFilePath,
             string subsystem,
             [NotNullWhen(true)] out string? path
-        ) {
+        )
+        {
             if (File.Exists(procCGroupFilePath))
             {
                 try

@@ -42,7 +42,8 @@ namespace System.Runtime.Serialization.Json
             byte[] array,
             int offset,
             int count
-        ) {
+        )
+        {
             XmlJsonReader.CheckArray(array, offset, count);
             int actual = 0;
             while (actual < count && reader.IsStartElement(JsonGlobals.itemString, string.Empty))
@@ -61,7 +62,8 @@ namespace System.Runtime.Serialization.Json
             byte[] array,
             int offset,
             int count
-        ) {
+        )
+        {
             WriteArray(writer, array, offset, count);
         }
 

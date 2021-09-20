@@ -26,7 +26,8 @@ namespace System.Text.Encodings.Web.Tests
 
         public static unsafe ref readonly AllowedBmpCodePointsBitmap GetAllowedBmpCodePointsBitmap(
             this TextEncoderSettings settings
-        ) {
+        )
+        {
             IntPtr getBitmapFnPtr = _lazyGetBitmapFnPtr.Value;
             return ref (
                 (delegate* managed<

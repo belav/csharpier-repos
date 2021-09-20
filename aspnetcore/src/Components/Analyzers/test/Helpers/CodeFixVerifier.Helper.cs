@@ -44,7 +44,8 @@ namespace TestHelper
         private static IEnumerable<Diagnostic> GetNewDiagnostics(
             IEnumerable<Diagnostic> diagnostics,
             IEnumerable<Diagnostic> newDiagnostics
-        ) {
+        )
+        {
             var oldArray = diagnostics.OrderBy(d => d.Location.SourceSpan.Start).ToArray();
             var newArray = newDiagnostics.OrderBy(d => d.Location.SourceSpan.Start).ToArray();
 

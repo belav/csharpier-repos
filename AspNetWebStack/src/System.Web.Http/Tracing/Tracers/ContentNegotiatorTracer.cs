@@ -38,7 +38,8 @@ namespace System.Web.Http.Tracing.Tracers
             Type type,
             HttpRequestMessage request,
             IEnumerable<MediaTypeFormatter> formatters
-        ) {
+        )
+        {
             ContentNegotiationResult result = null;
 
             _traceWriter.TraceBeginEnd(

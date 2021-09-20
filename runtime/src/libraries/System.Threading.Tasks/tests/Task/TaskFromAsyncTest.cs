@@ -92,7 +92,8 @@ namespace System.Threading.Tasks.Tests.FromAsync
                     exp != null
                     && exp.InnerExceptions.Count == 1
                     && exp.InnerExceptions[0] is TPLTestException
-                ) {
+                )
+                {
                     Debug.WriteLine("Caught AggregateException as expected");
                 }
                 else
@@ -147,7 +148,8 @@ namespace System.Threading.Tasks.Tests.FromAsync
         private static void SequenceEquals(
             List<object> expectedItems,
             ReadOnlyCollection<object> actualItems
-        ) {
+        )
+        {
             Assert.Equal(expectedItems.Count, actualItems.Count);
             for (int i = 0; i < expectedItems.Count; i++)
             {
@@ -1209,7 +1211,8 @@ namespace System.Threading.Tasks.Tests.FromAsync
             TaskType fromAsyncTask,
             OverloadChoice overloadChoice,
             ErrorCase errorCase
-        ) {
+        )
+        {
             Api = api;
             SourceTaskType = sourceTask;
             FromAsyncTaskType = fromAsyncTask;

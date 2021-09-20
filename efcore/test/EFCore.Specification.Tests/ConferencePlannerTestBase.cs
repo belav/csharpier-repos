@@ -382,7 +382,8 @@ namespace Microsoft.EntityFrameworkCore
             string searchTerm,
             int totalCount,
             int sessionCount
-        ) {
+        )
+        {
             await ExecuteWithStrategyInTransactionAsync(
                 async context =>
                 {
@@ -914,12 +915,14 @@ namespace Microsoft.EntityFrameworkCore
 
                         foreach (
                             var sessionJson in roomJson.GetProperty("sessions").EnumerateArray()
-                        ) {
+                        )
+                        {
                             var sessionSpeakers = new List<Speaker>();
                             foreach (
                                 var speakerJson in sessionJson.GetProperty("speakers")
                                     .EnumerateArray()
-                            ) {
+                            )
+                            {
                                 var speakerId = speakerJson.GetProperty("id").GetGuid();
                                 if (!speakers.TryGetValue(speakerId, out var speaker))
                                 {

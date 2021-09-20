@@ -108,7 +108,8 @@ namespace Microsoft.EntityFrameworkCore
             IServiceProvider serviceProvider,
             string dbName1,
             string dbName2
-        ) {
+        )
+        {
             using var context1 = new BronieContext(serviceProvider, dbName1);
             using var context2 = new BronieContext(serviceProvider, dbName2);
             for (var i = 0; i < 29; i++)
@@ -160,7 +161,8 @@ namespace Microsoft.EntityFrameworkCore
         private static async Task AddEntitiesAsync(
             IServiceProvider serviceProvider,
             string databaseName
-        ) {
+        )
+        {
             using var context = new BronieContext(serviceProvider, databaseName);
             for (var i = 0; i < 10; i++)
             {
@@ -252,7 +254,8 @@ namespace Microsoft.EntityFrameworkCore
             IServiceProvider serviceProvider,
             int idOffset,
             string name
-        ) {
+        )
+        {
             using var context = new BronieContext(serviceProvider, name);
             for (var i = 1; i < 11; i++)
             {
@@ -363,7 +366,8 @@ namespace Microsoft.EntityFrameworkCore
             IServiceProvider serviceProvider,
             string databaseName,
             bool useSequence
-        ) {
+        )
+        {
             using var context = new NullableBronieContext(
                 serviceProvider,
                 databaseName,
@@ -388,7 +392,8 @@ namespace Microsoft.EntityFrameworkCore
                 IServiceProvider serviceProvider,
                 string databaseName,
                 bool useSequence
-            ) {
+            )
+            {
                 _serviceProvider = serviceProvider;
                 _databaseName = databaseName;
                 _useSequence = useSequence;

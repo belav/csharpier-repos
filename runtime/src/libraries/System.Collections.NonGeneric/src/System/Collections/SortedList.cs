@@ -835,7 +835,8 @@ namespace System.Collections
                 int index,
                 int count,
                 int getObjRetType
-            ) {
+            )
+            {
                 _sortedList = sortedList;
                 _index = index;
                 _startIndex = index;

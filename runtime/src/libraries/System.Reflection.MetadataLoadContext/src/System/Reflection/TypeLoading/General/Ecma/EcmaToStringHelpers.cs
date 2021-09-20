@@ -20,7 +20,8 @@ namespace System.Reflection.TypeLoading.Ecma
             this EntityHandle handle,
             in TypeContext typeContext,
             MetadataReader reader
-        ) {
+        )
+        {
             Debug.Assert(!handle.IsNil);
             Debug.Assert(reader != null);
 
@@ -63,7 +64,8 @@ namespace System.Reflection.TypeLoading.Ecma
             if (
                 tr.ResolutionScope.Kind == HandleKind.TypeDefinition
                 || tr.ResolutionScope.Kind == HandleKind.TypeReference
-            ) {
+            )
+            {
                 string declaringTypeName = tr.ResolutionScope.ToTypeString(default, reader);
                 name = declaringTypeName + "+" + name;
             }
@@ -74,7 +76,8 @@ namespace System.Reflection.TypeLoading.Ecma
             this TypeSpecificationHandle handle,
             MetadataReader reader,
             in TypeContext typeContext
-        ) {
+        )
+        {
             return handle.GetTypeSpecification(reader)
                 .DecodeSignature(EcmaSignatureTypeProviderForToString.Instance, typeContext);
         }

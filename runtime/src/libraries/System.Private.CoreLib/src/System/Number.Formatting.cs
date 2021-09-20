@@ -327,7 +327,8 @@ namespace System
             decimal value,
             ReadOnlySpan<char> format,
             NumberFormatInfo info
-        ) {
+        )
+        {
             char fmt = ParseFormatSpecifier(format, out int digits);
 
             byte* pDigits = stackalloc byte[DecimalNumberBufferLength];
@@ -362,7 +363,8 @@ namespace System
             NumberFormatInfo info,
             Span<char> destination,
             out int charsWritten
-        ) {
+        )
+        {
             char fmt = ParseFormatSpecifier(format, out int digits);
 
             byte* pDigits = stackalloc byte[DecimalNumberBufferLength];
@@ -431,7 +433,8 @@ namespace System
             NumberFormatInfo info,
             Span<char> destination,
             out int charsWritten
-        ) {
+        )
+        {
             var sb = new ValueStringBuilder(stackalloc char[CharStackBufferSize]);
             string? s = FormatDouble(ref sb, value, format, info);
             return s != null
@@ -444,7 +447,8 @@ namespace System
             ref int precision,
             NumberFormatInfo info,
             out bool isSignificantDigits
-        ) {
+        )
+        {
             if (fmt == 0)
             {
                 isSignificantDigits = true;
@@ -567,7 +571,8 @@ namespace System
             double value,
             ReadOnlySpan<char> format,
             NumberFormatInfo info
-        ) {
+        )
+        {
             if (!double.IsFinite(value))
             {
                 if (double.IsNaN(value))
@@ -609,7 +614,8 @@ namespace System
             if (
                 (value != 0.0)
                 && (!isSignificantDigits || !Grisu3.TryRunDouble(value, precision, ref number))
-            ) {
+            )
+            {
                 Dragon4Double(value, precision, isSignificantDigits, ref number);
             }
 
@@ -663,7 +669,8 @@ namespace System
             NumberFormatInfo info,
             Span<char> destination,
             out int charsWritten
-        ) {
+        )
+        {
             var sb = new ValueStringBuilder(stackalloc char[CharStackBufferSize]);
             string? s = FormatSingle(ref sb, value, format, info);
             return s != null
@@ -681,7 +688,8 @@ namespace System
             float value,
             ReadOnlySpan<char> format,
             NumberFormatInfo info
-        ) {
+        )
+        {
             if (!float.IsFinite(value))
             {
                 if (float.IsNaN(value))
@@ -723,7 +731,8 @@ namespace System
             if (
                 (value != default)
                 && (!isSignificantDigits || !Grisu3.TryRunSingle(value, precision, ref number))
-            ) {
+            )
+            {
                 Dragon4Single(value, precision, isSignificantDigits, ref number);
             }
 
@@ -781,7 +790,8 @@ namespace System
             Half value,
             ReadOnlySpan<char> format,
             NumberFormatInfo info
-        ) {
+        )
+        {
             if (!Half.IsFinite(value))
             {
                 if (Half.IsNaN(value))
@@ -821,7 +831,8 @@ namespace System
             if (
                 (value != default)
                 && (!isSignificantDigits || !Grisu3.TryRunHalf(value, precision, ref number))
-            ) {
+            )
+            {
                 Dragon4Half(value, precision, isSignificantDigits, ref number);
             }
 
@@ -869,7 +880,8 @@ namespace System
             NumberFormatInfo info,
             Span<char> destination,
             out int charsWritten
-        ) {
+        )
+        {
             var sb = new ValueStringBuilder(stackalloc char[CharStackBufferSize]);
             string? s = FormatHalf(ref sb, value, format, info);
             return s != null
@@ -903,7 +915,8 @@ namespace System
             int hexMask,
             string? format,
             IFormatProvider? provider
-        ) {
+        )
+        {
             // Fast path for default format
             if (string.IsNullOrEmpty(format))
             {
@@ -923,7 +936,8 @@ namespace System
                 int hexMask,
                 string? format,
                 IFormatProvider? provider
-            ) {
+            )
+            {
                 ReadOnlySpan<char> formatSpan = format;
                 char fmt = ParseFormatSpecifier(formatSpan, out int digits);
                 char fmtUpper = (char)(fmt & 0xFFDF); // ensure fmt is upper-cased for purposes of comparison
@@ -979,7 +993,8 @@ namespace System
             IFormatProvider? provider,
             Span<char> destination,
             out int charsWritten
-        ) {
+        )
+        {
             // Fast path for default format
             if (format.Length == 0)
             {
@@ -1010,7 +1025,8 @@ namespace System
                 IFormatProvider? provider,
                 Span<char> destination,
                 out int charsWritten
-            ) {
+            )
+            {
                 char fmt = ParseFormatSpecifier(format, out int digits);
                 char fmtUpper = (char)(fmt & 0xFFDF); // ensure fmt is upper-cased for purposes of comparison
                 if (fmtUpper == 'G' ? digits < 1 : fmtUpper == 'D')
@@ -1080,7 +1096,8 @@ namespace System
                 uint value,
                 string? format,
                 IFormatProvider? provider
-            ) {
+            )
+            {
                 ReadOnlySpan<char> formatSpan = format;
                 char fmt = ParseFormatSpecifier(formatSpan, out int digits);
                 char fmtUpper = (char)(fmt & 0xFFDF); // ensure fmt is upper-cased for purposes of comparison
@@ -1129,7 +1146,8 @@ namespace System
             IFormatProvider? provider,
             Span<char> destination,
             out int charsWritten
-        ) {
+        )
+        {
             // Fast path for default format
             if (format.Length == 0)
             {
@@ -1144,7 +1162,8 @@ namespace System
                 IFormatProvider? provider,
                 Span<char> destination,
                 out int charsWritten
-            ) {
+            )
+            {
                 char fmt = ParseFormatSpecifier(format, out int digits);
                 char fmtUpper = (char)(fmt & 0xFFDF); // ensure fmt is upper-cased for purposes of comparison
                 if (fmtUpper == 'G' ? digits < 1 : fmtUpper == 'D')
@@ -1212,7 +1231,8 @@ namespace System
                 long value,
                 string? format,
                 IFormatProvider? provider
-            ) {
+            )
+            {
                 ReadOnlySpan<char> formatSpan = format;
                 char fmt = ParseFormatSpecifier(formatSpan, out int digits);
                 char fmtUpper = (char)(fmt & 0xFFDF); // ensure fmt is upper-cased for purposes of comparison
@@ -1267,7 +1287,8 @@ namespace System
             IFormatProvider? provider,
             Span<char> destination,
             out int charsWritten
-        ) {
+        )
+        {
             // Fast path for default format
             if (format.Length == 0)
             {
@@ -1290,7 +1311,8 @@ namespace System
                 IFormatProvider? provider,
                 Span<char> destination,
                 out int charsWritten
-            ) {
+            )
+            {
                 char fmt = ParseFormatSpecifier(format, out int digits);
                 char fmtUpper = (char)(fmt & 0xFFDF); // ensure fmt is upper-cased for purposes of comparison
                 if (fmtUpper == 'G' ? digits < 1 : fmtUpper == 'D')
@@ -1360,7 +1382,8 @@ namespace System
                 ulong value,
                 string? format,
                 IFormatProvider? provider
-            ) {
+            )
+            {
                 ReadOnlySpan<char> formatSpan = format;
                 char fmt = ParseFormatSpecifier(formatSpan, out int digits);
                 char fmtUpper = (char)(fmt & 0xFFDF); // ensure fmt is upper-cased for purposes of comparison
@@ -1409,7 +1432,8 @@ namespace System
             IFormatProvider? provider,
             Span<char> destination,
             out int charsWritten
-        ) {
+        )
+        {
             // Fast path for default format
             if (format.Length == 0)
             {
@@ -1424,7 +1448,8 @@ namespace System
                 IFormatProvider? provider,
                 Span<char> destination,
                 out int charsWritten
-            ) {
+            )
+            {
                 char fmt = ParseFormatSpecifier(format, out int digits);
                 char fmtUpper = (char)(fmt & 0xFFDF); // ensure fmt is upper-cased for purposes of comparison
                 if (fmtUpper == 'G' ? digits < 1 : fmtUpper == 'D')
@@ -1540,7 +1565,8 @@ namespace System
             string sNegative,
             Span<char> destination,
             out int charsWritten
-        ) {
+        )
+        {
             Debug.Assert(value < 0);
 
             if (digits < 1)
@@ -1590,7 +1616,8 @@ namespace System
             int digits,
             Span<char> destination,
             out int charsWritten
-        ) {
+        )
+        {
             if (digits < 1)
                 digits = 1;
 
@@ -1615,7 +1642,8 @@ namespace System
             uint value,
             int hexBase,
             int digits
-        ) {
+        )
+        {
             while (--digits >= 0 || value != 0)
             {
                 byte digit = (byte)(value & 0xF);
@@ -1716,7 +1744,8 @@ namespace System
             int digits,
             Span<char> destination,
             out int charsWritten
-        ) {
+        )
+        {
             int bufferLength = Math.Max(digits, FormattingHelpers.CountDigits(value));
             if (bufferLength > destination.Length)
             {
@@ -1822,7 +1851,8 @@ namespace System
             string sNegative,
             Span<char> destination,
             out int charsWritten
-        ) {
+        )
+        {
             Debug.Assert(input < 0);
 
             if (digits < 1)
@@ -1888,7 +1918,8 @@ namespace System
             int digits,
             Span<char> destination,
             out int charsWritten
-        ) {
+        )
+        {
             int bufferLength = Math.Max(digits, FormattingHelpers.CountHexDigits((ulong)value));
             if (bufferLength > destination.Length)
             {
@@ -1972,7 +2003,8 @@ namespace System
             int digits,
             Span<char> destination,
             out int charsWritten
-        ) {
+        )
+        {
             if (digits < 1)
                 digits = 1;
 
@@ -2076,7 +2108,8 @@ namespace System
             char format,
             int nMaxDigits,
             NumberFormatInfo info
-        ) {
+        )
+        {
             number.CheckConsistency();
             bool isCorrectlyRounded = (number.Kind == NumberBufferKind.FloatingPoint);
 
@@ -2223,7 +2256,8 @@ namespace System
             ref NumberBuffer number,
             ReadOnlySpan<char> format,
             NumberFormatInfo info
-        ) {
+        )
+        {
             number.CheckConsistency();
 
             int digitCount;
@@ -2318,7 +2352,8 @@ namespace System
                                         && (pFormat[src] == '+' || pFormat[src] == '-')
                                         && pFormat[src + 1] == '0'
                                     )
-                                ) {
+                                )
+                                {
                                     while (++src < format.Length && pFormat[src] == '0')
                                         ;
                                     scientific = true;
@@ -2550,7 +2585,8 @@ namespace System
                                     src + 1 < format.Length
                                     && pFormat[src] == '+'
                                     && pFormat[src + 1] == '0'
-                                ) {
+                                )
+                                {
                                     // Handles E+0
                                     positiveSign = true;
                                 }
@@ -2558,7 +2594,8 @@ namespace System
                                     src + 1 < format.Length
                                     && pFormat[src] == '-'
                                     && pFormat[src + 1] == '0'
-                                ) {
+                                )
+                                {
                                     // Handles E-0
                                     // Do nothing, this is just a place holder s.t. we don't break out of the loop.
                                 }
@@ -2606,7 +2643,8 @@ namespace System
             ref NumberBuffer number,
             int nMaxDigits,
             NumberFormatInfo info
-        ) {
+        )
+        {
             string fmt = number.IsNegative
                 ? s_negCurrencyFormats[info.CurrencyNegativePattern]
                 : s_posCurrencyFormats[info.CurrencyPositivePattern];
@@ -2645,7 +2683,8 @@ namespace System
             int[]? groupDigits,
             string? sDecimal,
             string? sGroup
-        ) {
+        )
+        {
             int digPos = number.Scale;
             byte* dig = number.GetDigitsPointer();
 
@@ -2752,7 +2791,8 @@ namespace System
             ref NumberBuffer number,
             int nMaxDigits,
             NumberFormatInfo info
-        ) {
+        )
+        {
             string fmt = number.IsNegative
                 ? s_negNumberFormats[info.NumberNegativePattern]
                 : PosNumberFormat;
@@ -2787,7 +2827,8 @@ namespace System
             int nMaxDigits,
             NumberFormatInfo info,
             char expChar
-        ) {
+        )
+        {
             byte* dig = number.GetDigitsPointer();
 
             sb.Append((*dig != 0) ? (char)(*dig++) : '0');
@@ -2809,7 +2850,8 @@ namespace System
             char expChar,
             int minDigits,
             bool positiveSign
-        ) {
+        )
+        {
             sb.Append(expChar);
 
             if (value < 0)
@@ -2835,7 +2877,8 @@ namespace System
             NumberFormatInfo info,
             char expChar,
             bool bSuppressScientific
-        ) {
+        )
+        {
             int digPos = number.Scale;
             bool scientific = false;
 
@@ -2886,7 +2929,8 @@ namespace System
             ref NumberBuffer number,
             int nMaxDigits,
             NumberFormatInfo info
-        ) {
+        )
+        {
             string fmt = number.IsNegative
                 ? s_negPercentFormats[info.PercentNegativePattern]
                 : s_posPercentFormats[info.PercentPositivePattern];
@@ -2922,7 +2966,8 @@ namespace System
             ref NumberBuffer number,
             int pos,
             bool isCorrectlyRounded
-        ) {
+        )
+        {
             byte* dig = number.GetDigitsPointer();
 
             int i = 0;
@@ -2970,7 +3015,8 @@ namespace System
                 int i,
                 NumberBufferKind numberKind,
                 bool isCorrectlyRounded
-            ) {
+            )
+            {
                 // We only want to round up if the digit is greater than or equal to 5 and we are
                 // not rounding a floating-point number. If we are rounding a floating-point number
                 // we have one of two cases.

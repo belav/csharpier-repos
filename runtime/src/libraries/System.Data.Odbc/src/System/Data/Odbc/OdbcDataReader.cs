@@ -62,7 +62,8 @@ namespace System.Data.Odbc
             OdbcCommand command,
             CMDWrapper cmdWrapper,
             CommandBehavior commandbehavior
-        ) {
+        )
+        {
             Debug.Assert(command != null, "Command null on OdbcDataReader ctor");
             _command = command;
             _commandBehavior = commandbehavior;
@@ -223,7 +224,8 @@ namespace System.Data.Odbc
                     if (
                         !Connection!.ProviderInfo.NoSqlSoptSSNoBrowseTable
                         && !Connection.ProviderInfo.NoSqlSoptSSHiddenColumns
-                    ) {
+                    )
+                    {
                         for (int i = 0; i < cColsAffected; i++)
                         {
                             SQLLEN isHidden = GetColAttribute(
@@ -263,7 +265,8 @@ namespace System.Data.Odbc
                 ODBC32.RetCode retcode = StatementHandle.RowCount(out cRowsAffected);
                 if (
                     ODBC32.RetCode.SUCCESS == retcode || ODBC32.RetCode.SUCCESS_WITH_INFO == retcode
-                ) {
+                )
+                {
                     return cRowsAffected;
                 }
             }
@@ -1023,7 +1026,8 @@ namespace System.Data.Odbc
                         if (
                             lengthOrIndicator <= cbMaxData
                             && (ODBC32.SQL_NO_TOTAL != lengthOrIndicator)
-                        ) {
+                        )
+                        {
                             // all data read? good! Directly marshal to a string and we're done
                             //
                             string strdata = buffer.PtrToStringUni(
@@ -1147,7 +1151,8 @@ namespace System.Data.Odbc
             byte[]? buffer,
             int bufferIndex,
             int length
-        ) {
+        )
+        {
             return GetBytesOrChars(
                 i,
                 dataIndex,
@@ -1164,7 +1169,8 @@ namespace System.Data.Odbc
             char[]? buffer,
             int bufferIndex,
             int length
-        ) {
+        )
+        {
             return GetBytesOrChars(
                 i,
                 dataIndex,
@@ -1184,7 +1190,8 @@ namespace System.Data.Odbc
             bool isCharsBuffer,
             int bufferIndex,
             int length
-        ) {
+        )
+        {
             if (IsClosed)
             {
                 throw ADP.DataReaderNoData();
@@ -1397,7 +1404,8 @@ namespace System.Data.Odbc
                     if (
                         (isCharsBuffer && dataIndex < _sequentialBytesRead / 2)
                         || (!isCharsBuffer && dataIndex < _sequentialBytesRead)
-                    ) {
+                    )
+                    {
                         // backward reading is not allowed in sequential access
                         throw ADP.NonSeqByteAccess(
                             dataIndex,
@@ -1482,7 +1490,8 @@ namespace System.Data.Odbc
             bool isCharsBuffer,
             int bufferIndex,
             long bytesOrCharsLength
-        ) {
+        )
+        {
             Debug.Assert(bufferIndex >= 0, "Negative buffer index");
             Debug.Assert(bytesOrCharsLength >= 0, "Negative number of bytes or chars to read");
 
@@ -1691,7 +1700,8 @@ namespace System.Data.Odbc
             ODBC32.SQL_DESC v3FieldId,
             ODBC32.SQL_COLUMN v2FieldId,
             ODBC32.HANDLER handler
-        ) {
+        )
+        {
             short cchNameLength = 0;
             SQLLEN numericAttribute;
             ODBC32.RetCode retcode;
@@ -1760,7 +1770,8 @@ namespace System.Data.Odbc
             ODBC32.SQL_DESC v3FieldId,
             ODBC32.SQL_COLUMN v2FieldId,
             ODBC32.HANDLER handler
-        ) {
+        )
+        {
             ODBC32.RetCode retcode;
             short cchNameLength = 0;
             SQLLEN numericAttribute;
@@ -1850,7 +1861,8 @@ namespace System.Data.Odbc
                     StatementHandle,
                     ODBC32.SQL_ATTR.APP_PARAM_DESC
                 )
-            ) {
+            )
+            {
                 //SQLGetDescField
                 retcode = hdesc.GetDescriptionField(i + 1, attribute, buffer, out numericAttribute);
 
@@ -2170,7 +2182,8 @@ namespace System.Data.Odbc
                     !disposing
                     && (retcode != ODBC32.RetCode.NO_DATA)
                     && (ODBC32.RetCode.SUCCESS != retcode)
-                ) {
+                )
+                {
                     // allow for building comulative error messages.
                     if (null == errors)
                     {
@@ -2415,7 +2428,8 @@ namespace System.Data.Odbc
                     if (
                         (metaInfos[i].baseTableName is string baseTableName)
                         && !(qrytables!.Contains(baseTableName))
-                    ) {
+                    )
+                    {
                         qrytables.Add(baseTableName);
                     }
                 }
@@ -2639,7 +2653,8 @@ namespace System.Data.Odbc
             bool needkeyinfo,
             QualifiedTableName qualifiedTableName,
             bool quoted
-        ) {
+        )
+        {
             Debug.Assert(_metadata != null);
 
             ODBC32.RetCode retcode;
@@ -2676,7 +2691,8 @@ namespace System.Data.Odbc
                         if (
                             (retcode == ODBC32.RetCode.SUCCESS)
                             || (retcode == ODBC32.RetCode.SUCCESS_WITH_INFO)
-                        ) {
+                        )
+                        {
                             bool noUniqueKey = false;
 
                             // We are only interested in column name
@@ -2690,7 +2706,8 @@ namespace System.Data.Odbc
                             );
                             while (
                                 ODBC32.RetCode.SUCCESS == (retcode = KeyInfoStatementHandle.Fetch())
-                            ) {
+                            )
+                            {
                                 cbActual = buffer.ReadIntPtr(256);
                                 columnname = buffer.PtrToStringUni(
                                     0,
@@ -2766,7 +2783,8 @@ namespace System.Data.Odbc
                 if (
                     (retcode == ODBC32.RetCode.SUCCESS)
                     || (retcode == ODBC32.RetCode.SUCCESS_WITH_INFO)
-                ) {
+                )
+                {
                     // We are only interested in column name
                     cbActual = IntPtr.Zero;
                     buffer.WriteInt16(0, 0);
@@ -2830,7 +2848,8 @@ namespace System.Data.Odbc
         private int RetrieveKeyInfoFromStatistics(
             QualifiedTableName qualifiedTableName,
             bool quoted
-        ) {
+        )
+        {
             Debug.Assert(_metadata != null);
 
             ODBC32.RetCode retcode;
@@ -3040,7 +3059,8 @@ namespace System.Data.Odbc
             string indexname,
             int ordinal,
             int ncols
-        ) {
+        )
+        {
             if (string.IsNullOrEmpty(currentindexname))
             {
                 return false;
@@ -3069,7 +3089,8 @@ namespace System.Data.Odbc
                     if (
                         (_metadata[i].baseColumnName != null)
                         && (columnname == _metadata[i].baseColumnName)
-                    ) {
+                    )
+                    {
                         if (!string.IsNullOrEmpty(tablename))
                         {
                             if (tablename == _metadata[i].baseTableName)
@@ -3124,7 +3145,8 @@ namespace System.Data.Odbc
                     (tokenstmt.StartsWith("insert") == true)
                     || (tokenstmt.StartsWith("update") == true)
                     || (tokenstmt.StartsWith("delete") == true)
-                ) {
+                )
+                {
                     // Get the following word
                     idx = tokenstmt.CurrentPosition;
                 }
@@ -3145,7 +3167,8 @@ namespace System.Data.Odbc
                 (localcmdtext.Length == 2)
                 && ((localcmdtext[0] == 'a') || (localcmdtext[0] == 'A'))
                 && ((localcmdtext[1] == 's') || (localcmdtext[1] == 'S'))
-            ) {
+            )
+            {
                 // aliased table, skip the alias name
                 localcmdtext = tokenstmt.NextToken();
                 localcmdtext = tokenstmt.NextToken();
@@ -3254,7 +3277,8 @@ namespace System.Data.Odbc
                 string? name,
                 string? quotePrefix,
                 string? quoteSuffix
-            ) {
+            )
+            {
                 // Procedure may consist of up to four parts:
                 // 0) Server
                 // 1) Catalog
@@ -3278,7 +3302,8 @@ namespace System.Data.Odbc
                         parts = 0;
                         (parts < qualifiers.Length) && (currentPos < name.Length);
                         ++parts
-                    ) {
+                    )
+                    {
                         int startPos = currentPos;
 
                         // does the part begin with a quotePrefix?
@@ -3292,7 +3317,8 @@ namespace System.Data.Odbc
                                     StringComparison.Ordinal
                                 ) == currentPos
                             )
-                        ) {
+                        )
+                        {
                             Debug.Assert(quotePrefix != null && quoteSuffix != null);
 
                             currentPos += quotePrefix.Length; // move past the quotePrefix
@@ -3326,7 +3352,8 @@ namespace System.Data.Odbc
                                                 StringComparison.Ordinal
                                             ) == currentPos
                                         )
-                                    ) {
+                                    )
+                                    {
                                         // a second quoteSuffix, continue search for terminating quoteSuffix
                                         currentPos += quoteSuffix.Length; // move past the second quoteSuffix
                                     }

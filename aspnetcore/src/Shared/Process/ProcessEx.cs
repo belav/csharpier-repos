@@ -108,7 +108,8 @@ namespace Microsoft.AspNetCore.Internal
             string args = null,
             IDictionary<string, string> envVars = null,
             TimeSpan? timeout = default
-        ) {
+        )
+        {
             var startInfo = new ProcessStartInfo(command, args)
             {
                 RedirectStandardOutput = true,

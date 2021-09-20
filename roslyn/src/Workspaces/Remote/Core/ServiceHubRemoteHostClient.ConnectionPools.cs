@@ -83,7 +83,8 @@ namespace Microsoft.CodeAnalysis.Remote
             public async Task<RemoteServiceConnection> GetOrCreateConnectionAsync(
                 RemoteServiceName serviceName,
                 CancellationToken cancellationToken
-            ) {
+            )
+            {
                 var pool = _pools.GetOrAdd(serviceName, _ => new Pool(this));
                 if (pool.TryAcquire(out var connection))
                 {
@@ -97,7 +98,8 @@ namespace Microsoft.CodeAnalysis.Remote
             internal void Free(
                 ConcurrentQueue<JsonRpcConnection> pool,
                 JsonRpcConnection connection
-            ) {
+            )
+            {
                 using (_shutdownLock.DisposableRead())
                 {
                     // There is a race between checking the current pool capacity i nthe condition and

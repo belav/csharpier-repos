@@ -166,7 +166,8 @@ namespace System.Xml.Schema
 
             if (
                 list.Type == NamespaceList.ListType.Any || list.Type == NamespaceList.ListType.Other
-            ) {
+            )
+            {
                 match.Add(_last); // add wildcard
             }
 
@@ -347,7 +348,8 @@ namespace System.Xml.Schema
             InteriorNode parent,
             SymbolsDictionary symbols,
             Positions positions
-        ) {
+        )
+        {
             // do nothing
         }
 
@@ -393,7 +395,8 @@ namespace System.Xml.Schema
             InteriorNode parent,
             SymbolsDictionary symbols,
             Positions positions
-        ) {
+        )
+        {
             SyntaxTreeNode? replacementNode = null;
             foreach (int symbol in GetResolvedSymbols(symbols))
             {
@@ -471,7 +474,8 @@ namespace System.Xml.Schema
             InteriorNode parent,
             SymbolsDictionary symbols,
             Positions positions
-        ) {
+        )
+        {
             Stack<InteriorNode> nodeStack = new Stack<InteriorNode>();
             InteriorNode this_ = this;
             while (true)
@@ -503,7 +507,8 @@ namespace System.Xml.Schema
             InteriorNode parent,
             SymbolsDictionary symbols,
             Positions positions
-        ) {
+        )
+        {
             _leftChild!.ExpandTree(this, symbols, positions);
             if (_rightChild != null)
             {
@@ -576,7 +581,8 @@ namespace System.Xml.Schema
                     int pos = context.lastposLeft!.NextSet(-1);
                     pos != -1;
                     pos = context.lastposLeft.NextSet(pos)
-                ) {
+                )
+                {
                     followpos[pos].Or(context.firstposRight);
                 }
                 if (this_.RightChild.IsRangeNode)
@@ -617,7 +623,8 @@ namespace System.Xml.Schema
             InteriorNode parent,
             SymbolsDictionary symbols,
             Positions positions
-        ) {
+        )
+        {
             ExpandTreeNoRecursive(parent, symbols, positions);
         }
 
@@ -659,7 +666,8 @@ namespace System.Xml.Schema
             BitSet firstpos,
             BitSet lastpos,
             BitSet[] followpos
-        ) {
+        )
+        {
             BitSet firstPosTemp = new BitSet(firstpos.Count);
             BitSet lastPosTemp = new BitSet(lastpos.Count);
             child.ConstructPos(firstPosTemp, lastPosTemp, followpos);
@@ -706,7 +714,8 @@ namespace System.Xml.Schema
             InteriorNode parent,
             SymbolsDictionary symbols,
             Positions positions
-        ) {
+        )
+        {
             ExpandTreeNoRecursive(parent, symbols, positions);
         }
 
@@ -863,7 +872,8 @@ namespace System.Xml.Schema
             InteriorNode parent,
             SymbolsDictionary symbols,
             Positions positions
-        ) {
+        )
+        {
             LeftChild.ExpandTree(this, symbols, positions);
             SyntaxTreeNode replacementNode = null;
             if (min == 0)
@@ -1002,7 +1012,8 @@ namespace System.Xml.Schema
             InteriorNode parent,
             SymbolsDictionary symbols,
             Positions positions
-        ) {
+        )
+        {
             Debug.Assert(parent is SequenceNode);
             Debug.Assert(this == parent.RightChild);
             //change the range node min to zero if left is nullable
@@ -1098,11 +1109,13 @@ namespace System.Xml.Schema
             XmlQualifiedName name,
             ValidationState context,
             out int errorCode
-        ) {
+        )
+        {
             if (
                 _contentType == XmlSchemaContentType.TextOnly
                 || _contentType == XmlSchemaContentType.Empty
-            ) { //Cannot have elements in TextOnly or Empty content
+            )
+            { //Cannot have elements in TextOnly or Empty content
                 context.NeedValidateChildren = false;
             }
             errorCode = -1;
@@ -1123,7 +1136,8 @@ namespace System.Xml.Schema
             ValidationState context,
             bool isRequiredOnly,
             XmlSchemaSet schemaSet
-        ) {
+        )
+        {
             return null;
         }
 
@@ -1131,7 +1145,8 @@ namespace System.Xml.Schema
             XmlSchemaParticle p,
             XmlSchemaSet schemaSet,
             ArrayList particles
-        ) {
+        )
+        {
             AddParticleToExpected(p, schemaSet, particles, false);
         }
 
@@ -1140,7 +1155,8 @@ namespace System.Xml.Schema
             XmlSchemaSet schemaSet,
             ArrayList particles,
             bool global
-        ) {
+        )
+        {
             if (!particles.Contains(p))
             {
                 particles.Add(p);
@@ -1162,7 +1178,8 @@ namespace System.Xml.Schema
                         if (
                             !elem.QualifiedName.Equals(member.QualifiedName)
                             && !particles.Contains(member)
-                        ) { //A member might have been directly present as an element in the content model
+                        )
+                        { //A member might have been directly present as an element in the content model
                             particles.Add(member);
                         }
                     }
@@ -1184,10 +1201,8 @@ namespace System.Xml.Schema
         public ParticleContentValidator(XmlSchemaContentType contentType) : this(contentType, true)
         { }
 
-        public ParticleContentValidator(
-            XmlSchemaContentType contentType,
-            bool enableUpaCheck
-        ) : base(contentType)
+        public ParticleContentValidator(XmlSchemaContentType contentType, bool enableUpaCheck)
+            : base(contentType)
         {
             _enableUpaCheck = enableUpaCheck;
         }
@@ -1202,7 +1217,8 @@ namespace System.Xml.Schema
             XmlQualifiedName name,
             ValidationState context,
             out int errorCode
-        ) {
+        )
+        {
             // ParticleContentValidator cannot be used during validation
             throw new InvalidOperationException();
         }
@@ -1499,7 +1515,8 @@ namespace System.Xml.Schema
             BitSet firstpos,
             BitSet[] followpos,
             out BitSet posWithRangeTerminals
-        ) {
+        )
+        {
             int positionsCount = _positions!.Count; //terminals
             posWithRangeTerminals = new BitSet(positionsCount);
 
@@ -1528,7 +1545,8 @@ namespace System.Xml.Schema
                         int pos = tempFollowPos.NextSet(-1);
                         pos != -1;
                         pos = tempFollowPos.NextSet(pos)
-                    ) {
+                    )
+                    {
                         if (pos > i)
                         {
                             Position p1 = _positions[pos];
@@ -1576,7 +1594,8 @@ namespace System.Xml.Schema
             BitSet curpos,
             BitSet posWithRangeTerminals,
             BitSet[] minmaxFollowPos
-        ) {
+        )
+        {
             if (curpos.Intersects(posWithRangeTerminals))
             {
                 BitSet newSet = new BitSet(_positions!.Count); //Doing work again
@@ -1673,7 +1692,8 @@ namespace System.Xml.Schema
                         int pos = statePosSet.NextSet(-1);
                         pos != -1;
                         pos = statePosSet.NextSet(pos)
-                    ) {
+                    )
+                    {
                         if (symbol == _positions[pos].symbol)
                         {
                             newset.Or(followpos[pos]);
@@ -1797,7 +1817,8 @@ namespace System.Xml.Schema
             XmlQualifiedName name,
             ValidationState context,
             out int errorCode
-        ) {
+        )
+        {
             int symbol = _symbols[name];
             int state = _transitionTable[context.CurrentState.State][symbol];
             errorCode = 0;
@@ -1870,7 +1891,8 @@ namespace System.Xml.Schema
             ValidationState context,
             bool isRequiredOnly,
             XmlSchemaSet schemaSet
-        ) {
+        )
+        {
             ArrayList particles = new ArrayList();
             int[] transition = _transitionTable[context.CurrentState.State];
             if (transition != null)
@@ -1937,7 +1959,8 @@ namespace System.Xml.Schema
             XmlQualifiedName name,
             ValidationState context,
             out int errorCode
-        ) {
+        )
+        {
             BitSet curpos = context.CurPos[context.CurrentState.CurPosIndex];
             int next = (context.CurrentState.CurPosIndex + 1) % 2;
             BitSet nextpos = context.CurPos[next];
@@ -2037,7 +2060,8 @@ namespace System.Xml.Schema
             ValidationState context,
             bool isRequiredOnly,
             XmlSchemaSet schemaSet
-        ) {
+        )
+        {
             ArrayList particles = new ArrayList();
             BitSet curpos = context.CurPos[context.CurrentState.CurPosIndex];
             for (int pos = curpos.NextSet(-1); pos != -1; pos = curpos.NextSet(pos))
@@ -2119,7 +2143,8 @@ namespace System.Xml.Schema
             XmlQualifiedName name,
             ValidationState context,
             out int errorCode
-        ) {
+        )
+        {
             errorCode = 0;
             int symbol = _symbols[name];
             bool hasSeenFinalPosition = false;
@@ -2140,7 +2165,8 @@ namespace System.Xml.Schema
                     int matchpos = curpos.NextSet(-1);
                     matchpos != -1;
                     matchpos = curpos.NextSet(matchpos)
-                ) { //In all sets, have to scan all positions because of Disabled UPA possibility
+                )
+                { //In all sets, have to scan all positions because of Disabled UPA possibility
                     if (symbol == _positions[matchpos].symbol)
                     {
                         pos = matchpos;
@@ -2219,7 +2245,8 @@ namespace System.Xml.Schema
                     while (
                         matchCount < 10000
                         && currentRunningPosition.Intersects(_positionsWithRangeTerminals)
-                    ) {
+                    )
+                    {
                         //Now might add 2 more positions to followpos
                         //1. nextIteration of the rangeNode, which is firstpos of its parent's leftChild
                         //2. Followpos of the range node
@@ -2356,7 +2383,8 @@ namespace System.Xml.Schema
             ValidationState context,
             bool isRequiredOnly,
             XmlSchemaSet schemaSet
-        ) {
+        )
+        {
             ArrayList particles = new ArrayList();
             BitSet expectedPos;
             if (context.RunningPositions != null)
@@ -2438,7 +2466,8 @@ namespace System.Xml.Schema
             XmlQualifiedName name,
             ValidationState context,
             out int errorCode
-        ) {
+        )
+        {
             object? lookup = _elements[name];
             errorCode = 0;
             if (lookup == null)
@@ -2473,7 +2502,8 @@ namespace System.Xml.Schema
             if (
                 context.CurrentState.AllElementsRequired == _countRequired
                 || IsEmptiable && context.CurrentState.AllElementsRequired == -1
-            ) {
+            )
+            {
                 return true;
             }
 
@@ -2488,7 +2518,8 @@ namespace System.Xml.Schema
                 if (
                     !context.AllElementsSet![(int)entry.Value!]
                     && (!isRequiredOnly || _isRequired[(int)entry.Value])
-                ) {
+                )
+                {
                     if (names == null)
                     {
                         names = new ArrayList();
@@ -2505,14 +2536,16 @@ namespace System.Xml.Schema
             ValidationState context,
             bool isRequiredOnly,
             XmlSchemaSet schemaSet
-        ) {
+        )
+        {
             ArrayList expectedParticles = new ArrayList();
             foreach (DictionaryEntry entry in _elements)
             {
                 if (
                     !context.AllElementsSet![(int)entry.Value!]
                     && (!isRequiredOnly || _isRequired[(int)entry.Value])
-                ) {
+                )
+                {
                     AddParticleToExpected(
                         (_particles[(int)entry.Value] as XmlSchemaParticle)!,
                         schemaSet,

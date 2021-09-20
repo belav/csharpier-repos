@@ -130,7 +130,8 @@ namespace Microsoft.CodeAnalysis.CSharp
         public virtual TResult VisitFunctionPointerType(
             FunctionPointerTypeSymbol symbol,
             TArgument argument
-        ) {
+        )
+        {
             return DefaultVisit(symbol, argument);
         }
 

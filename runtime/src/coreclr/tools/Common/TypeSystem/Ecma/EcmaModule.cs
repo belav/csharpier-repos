@@ -70,7 +70,8 @@ namespace Internal.TypeSystem.Ecma
             protected override bool CompareValueToValue(
                 IEntityHandleObject value1,
                 IEntityHandleObject value2
-            ) {
+            )
+            {
                 if (Object.ReferenceEquals(value1, value2))
                     return true;
                 else
@@ -212,7 +213,8 @@ namespace Internal.TypeSystem.Ecma
             PEReader peReader,
             IAssemblyDesc containingAssembly,
             IModuleResolver customModuleResolver = null
-        ) {
+        )
+        {
             MetadataReader metadataReader = CreateMetadataReader(context, peReader);
 
             if (containingAssembly == null)
@@ -230,7 +232,8 @@ namespace Internal.TypeSystem.Ecma
         private static MetadataReader CreateMetadataReader(
             TypeSystemContext context,
             PEReader peReader
-        ) {
+        )
+        {
             if (!peReader.HasMetadata)
             {
                 ThrowHelper.ThrowBadImageFormatException();
@@ -316,7 +319,8 @@ namespace Internal.TypeSystem.Ecma
             string nameSpace,
             string name,
             NotFoundBehavior notFoundBehavior
-        ) {
+        )
+        {
             var stringComparer = _metadataReader.StringComparer;
 
             // TODO: More efficient implementation?
@@ -326,7 +330,8 @@ namespace Internal.TypeSystem.Ecma
                 if (
                     stringComparer.Equals(typeDefinition.Name, name)
                     && stringComparer.Equals(typeDefinition.Namespace, nameSpace)
-                ) {
+                )
+                {
                     return (MetadataType)GetType((EntityHandle)typeDefinitionHandle);
                 }
             }
@@ -337,7 +342,8 @@ namespace Internal.TypeSystem.Ecma
                 if (
                     stringComparer.Equals(exportedType.Name, name)
                     && stringComparer.Equals(exportedType.Namespace, nameSpace)
-                ) {
+                )
+                {
                     if (exportedType.IsForwarder)
                     {
                         Object implementation = GetObject(
@@ -412,7 +418,8 @@ namespace Internal.TypeSystem.Ecma
         public Object GetObject(
             EntityHandle handle,
             NotFoundBehavior notFoundBehavior = NotFoundBehavior.Throw
-        ) {
+        )
+        {
             IEntityHandleObject obj = _resolvedTokens.GetOrCreateValue(handle);
             if (obj is EcmaObjectLookupWrapper)
             {
@@ -420,7 +427,8 @@ namespace Internal.TypeSystem.Ecma
                 if (
                     (result is ResolutionFailure failure)
                     && (notFoundBehavior != NotFoundBehavior.ReturnResolutionFailure)
-                ) {
+                )
+                {
                     if (notFoundBehavior == NotFoundBehavior.ReturnNull)
                         return null;
                     else

@@ -14,7 +14,8 @@ namespace System.Web.Mvc.Html
             this HtmlHelper htmlHelper,
             string linkText,
             string actionName
-        ) {
+        )
+        {
             return ActionLink(
                 htmlHelper,
                 linkText,
@@ -31,7 +32,8 @@ namespace System.Web.Mvc.Html
             string linkText,
             string actionName,
             object routeValues
-        ) {
+        )
+        {
             return ActionLink(
                 htmlHelper,
                 linkText,
@@ -49,7 +51,8 @@ namespace System.Web.Mvc.Html
             string actionName,
             object routeValues,
             object htmlAttributes
-        ) {
+        )
+        {
             return ActionLink(
                 htmlHelper,
                 linkText,
@@ -66,7 +69,8 @@ namespace System.Web.Mvc.Html
             string linkText,
             string actionName,
             RouteValueDictionary routeValues
-        ) {
+        )
+        {
             return ActionLink(
                 htmlHelper,
                 linkText,
@@ -84,7 +88,8 @@ namespace System.Web.Mvc.Html
             string actionName,
             RouteValueDictionary routeValues,
             IDictionary<string, object> htmlAttributes
-        ) {
+        )
+        {
             return ActionLink(
                 htmlHelper,
                 linkText,
@@ -101,7 +106,8 @@ namespace System.Web.Mvc.Html
             string linkText,
             string actionName,
             string controllerName
-        ) {
+        )
+        {
             return ActionLink(
                 htmlHelper,
                 linkText,
@@ -119,7 +125,8 @@ namespace System.Web.Mvc.Html
             string controllerName,
             object routeValues,
             object htmlAttributes
-        ) {
+        )
+        {
             return ActionLink(
                 htmlHelper,
                 linkText,
@@ -137,7 +144,8 @@ namespace System.Web.Mvc.Html
             string controllerName,
             RouteValueDictionary routeValues,
             IDictionary<string, object> htmlAttributes
-        ) {
+        )
+        {
             if (String.IsNullOrEmpty(linkText))
             {
                 throw new ArgumentException(MvcResources.Common_NullOrEmpty, "linkText");
@@ -167,7 +175,8 @@ namespace System.Web.Mvc.Html
             string fragment,
             object routeValues,
             object htmlAttributes
-        ) {
+        )
+        {
             return ActionLink(
                 htmlHelper,
                 linkText,
@@ -191,7 +200,8 @@ namespace System.Web.Mvc.Html
             string fragment,
             RouteValueDictionary routeValues,
             IDictionary<string, object> htmlAttributes
-        ) {
+        )
+        {
             if (String.IsNullOrEmpty(linkText))
             {
                 throw new ArgumentException(MvcResources.Common_NullOrEmpty, "linkText");
@@ -218,7 +228,8 @@ namespace System.Web.Mvc.Html
             this HtmlHelper htmlHelper,
             string linkText,
             object routeValues
-        ) {
+        )
+        {
             return RouteLink(htmlHelper, linkText, TypeHelper.ObjectToDictionary(routeValues));
         }
 
@@ -226,7 +237,8 @@ namespace System.Web.Mvc.Html
             this HtmlHelper htmlHelper,
             string linkText,
             RouteValueDictionary routeValues
-        ) {
+        )
+        {
             return RouteLink(htmlHelper, linkText, routeValues, new RouteValueDictionary());
         }
 
@@ -234,7 +246,8 @@ namespace System.Web.Mvc.Html
             this HtmlHelper htmlHelper,
             string linkText,
             string routeName
-        ) {
+        )
+        {
             return RouteLink(
                 htmlHelper,
                 linkText,
@@ -248,7 +261,8 @@ namespace System.Web.Mvc.Html
             string linkText,
             string routeName,
             object routeValues
-        ) {
+        )
+        {
             return RouteLink(
                 htmlHelper,
                 linkText,
@@ -262,7 +276,8 @@ namespace System.Web.Mvc.Html
             string linkText,
             string routeName,
             RouteValueDictionary routeValues
-        ) {
+        )
+        {
             return RouteLink(
                 htmlHelper,
                 linkText,
@@ -277,7 +292,8 @@ namespace System.Web.Mvc.Html
             string linkText,
             object routeValues,
             object htmlAttributes
-        ) {
+        )
+        {
             return RouteLink(
                 htmlHelper,
                 linkText,
@@ -291,7 +307,8 @@ namespace System.Web.Mvc.Html
             string linkText,
             RouteValueDictionary routeValues,
             IDictionary<string, object> htmlAttributes
-        ) {
+        )
+        {
             return RouteLink(
                 htmlHelper,
                 linkText,
@@ -308,7 +325,8 @@ namespace System.Web.Mvc.Html
             string routeName,
             object routeValues,
             object htmlAttributes
-        ) {
+        )
+        {
             return RouteLink(
                 htmlHelper,
                 linkText,
@@ -324,7 +342,8 @@ namespace System.Web.Mvc.Html
             string routeName,
             RouteValueDictionary routeValues,
             IDictionary<string, object> htmlAttributes
-        ) {
+        )
+        {
             if (String.IsNullOrEmpty(linkText))
             {
                 throw new ArgumentException(MvcResources.Common_NullOrEmpty, "linkText");
@@ -350,7 +369,8 @@ namespace System.Web.Mvc.Html
             string fragment,
             object routeValues,
             object htmlAttributes
-        ) {
+        )
+        {
             return RouteLink(
                 htmlHelper,
                 linkText,
@@ -372,7 +392,8 @@ namespace System.Web.Mvc.Html
             string fragment,
             RouteValueDictionary routeValues,
             IDictionary<string, object> htmlAttributes
-        ) {
+        )
+        {
             if (String.IsNullOrEmpty(linkText))
             {
                 throw new ArgumentException(MvcResources.Common_NullOrEmpty, "linkText");

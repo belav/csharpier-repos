@@ -50,8 +50,9 @@ namespace Microsoft.Win32.SafeHandles
         internal static TInteriorHandle OpenInteriorHandle<TInteriorHandle, TExteriorHandle>(
             Func<TExteriorHandle, TInteriorHandle> accessor,
             TExteriorHandle exteriorHandle
-        ) where TInteriorHandle : SafeInteriorHandle
-          where TExteriorHandle : SafeHandle
+        )
+            where TInteriorHandle : SafeInteriorHandle
+            where TExteriorHandle : SafeHandle
         {
             TInteriorHandle interiorHandle = accessor(exteriorHandle);
 
@@ -67,8 +68,9 @@ namespace Microsoft.Win32.SafeHandles
             Func<TExteriorHandle, TArg1, TInteriorHandle> accessor,
             TExteriorHandle exteriorHandle,
             TArg1 arg1
-        ) where TInteriorHandle : SafeInteriorHandle
-          where TExteriorHandle : SafeHandle
+        )
+            where TInteriorHandle : SafeInteriorHandle
+            where TExteriorHandle : SafeHandle
         {
             TInteriorHandle interiorHandle = accessor(exteriorHandle, arg1);
 

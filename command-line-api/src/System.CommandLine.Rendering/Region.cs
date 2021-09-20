@@ -15,7 +15,8 @@ namespace System.CommandLine.Rendering
             int? width = null,
             int? height = null,
             bool isOverwrittenOnRender = true
-        ) {
+        )
+        {
             if (height < 0)
             {
                 throw new ArgumentOutOfRangeException(nameof(height));

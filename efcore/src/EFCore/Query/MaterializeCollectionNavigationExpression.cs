@@ -27,7 +27,8 @@ namespace Microsoft.EntityFrameworkCore.Query
         public MaterializeCollectionNavigationExpression(
             Expression subquery,
             INavigationBase navigation
-        ) {
+        )
+        {
             Check.NotNull(subquery, nameof(subquery));
             Check.NotNull(navigation, nameof(navigation));
 

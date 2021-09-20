@@ -65,7 +65,8 @@ namespace Microsoft.AspNetCore.Rewrite.Tests.PatternSegments
             string path,
             int uriMatchPart,
             string expectedResult
-        ) {
+        )
+        {
             // Arrange
             var httpContext = new DefaultHttpContext();
             httpContext.Request.Scheme = scheme;

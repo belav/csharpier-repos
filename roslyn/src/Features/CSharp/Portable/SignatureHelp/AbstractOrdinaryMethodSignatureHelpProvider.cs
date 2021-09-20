@@ -20,7 +20,8 @@ namespace Microsoft.CodeAnalysis.CSharp.SignatureHelp
             IMethodSymbol method,
             int position,
             SemanticModel semanticModel
-        ) {
+        )
+        {
             return ConvertMethodGroupMethod(
                 document,
                 method,
@@ -36,7 +37,8 @@ namespace Microsoft.CodeAnalysis.CSharp.SignatureHelp
             int position,
             SemanticModel semanticModel,
             IList<SymbolDisplayPart>? descriptionParts
-        ) {
+        )
+        {
             var anonymousTypeDisplayService =
                 document.GetRequiredLanguageService<IAnonymousTypeDisplayService>();
             var documentationCommentFormattingService =
@@ -76,7 +78,8 @@ namespace Microsoft.CodeAnalysis.CSharp.SignatureHelp
             IMethodSymbol method,
             SemanticModel semanticModel,
             int position
-        ) {
+        )
+        {
             var result = new List<SymbolDisplayPart>();
 
             var awaitable = method.GetOriginalUnreducedDefinition()

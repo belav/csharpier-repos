@@ -45,7 +45,8 @@ namespace Microsoft.CodeAnalysis.ExtractMethod
                 AnalyzerResult analyzerResult,
                 OptionSet options = null,
                 bool localFunction = false
-            ) {
+            )
+            {
                 Contract.ThrowIfFalse(
                     insertionPoint.SemanticDocument == analyzerResult.SemanticDocument
                 );
@@ -233,7 +234,8 @@ namespace Microsoft.CodeAnalysis.ExtractMethod
                         methodDefinition.AsNode().Span.End,
                         cancellationToken
                     )
-                ) {
+                )
+                {
                     return await CreateGeneratedCodeAsync(
                             result.Status.With(OperationStatus.OverlapsHiddenPosition),
                             finalDocument,
@@ -260,7 +262,8 @@ namespace Microsoft.CodeAnalysis.ExtractMethod
                 OperationStatus status,
                 SemanticDocument newDocument,
                 CancellationToken cancellationToken
-            ) {
+            )
+            {
                 return Task.FromResult(
                     new GeneratedCode(
                         status,
@@ -274,7 +277,8 @@ namespace Microsoft.CodeAnalysis.ExtractMethod
 
             protected VariableInfo GetOutermostVariableToMoveIntoMethodDefinition(
                 CancellationToken cancellationToken
-            ) {
+            )
+            {
                 using var _ = ArrayBuilder<VariableInfo>.GetInstance(out var variables);
                 variables.AddRange(
                     AnalyzerResult.GetVariablesToMoveIntoMethodDefinition(cancellationToken)
@@ -288,7 +292,8 @@ namespace Microsoft.CodeAnalysis.ExtractMethod
 
             protected ImmutableArray<TStatement> AddReturnIfUnreachable(
                 ImmutableArray<TStatement> statements
-            ) {
+            )
+            {
                 if (AnalyzerResult.EndOfSelectionReachable)
                 {
                     return statements;
@@ -312,7 +317,8 @@ namespace Microsoft.CodeAnalysis.ExtractMethod
             protected async Task<ImmutableArray<TStatement>> AddInvocationAtCallSiteAsync(
                 ImmutableArray<TStatement> statements,
                 CancellationToken cancellationToken
-            ) {
+            )
+            {
                 if (AnalyzerResult.HasVariableToUseAsReturnValue)
                 {
                     return statements;
@@ -335,7 +341,8 @@ namespace Microsoft.CodeAnalysis.ExtractMethod
             protected ImmutableArray<TStatement> AddAssignmentStatementToCallSite(
                 ImmutableArray<TStatement> statements,
                 CancellationToken cancellationToken
-            ) {
+            )
+            {
                 if (!AnalyzerResult.HasVariableToUseAsReturnValue)
                 {
                     return statements;
@@ -375,7 +382,8 @@ namespace Microsoft.CodeAnalysis.ExtractMethod
             protected ImmutableArray<TStatement> CreateDeclarationStatements(
                 ImmutableArray<VariableInfo> variables,
                 CancellationToken cancellationToken
-            ) {
+            )
+            {
                 return variables.SelectAsArray(
                     v => CreateDeclarationStatement(v, initialValue: null, cancellationToken)
                 );
@@ -383,14 +391,16 @@ namespace Microsoft.CodeAnalysis.ExtractMethod
 
             protected ImmutableArray<TStatement> AddSplitOrMoveDeclarationOutStatementsToCallSite(
                 CancellationToken cancellationToken
-            ) {
+            )
+            {
                 using var _ = ArrayBuilder<TStatement>.GetInstance(out var list);
 
                 foreach (
                     var variable in AnalyzerResult.GetVariablesToSplitOrMoveOutToCallSite(
                         cancellationToken
                     )
-                ) {
+                )
+                {
                     if (variable.UseAsReturnValue)
                         continue;
 
@@ -407,7 +417,8 @@ namespace Microsoft.CodeAnalysis.ExtractMethod
 
             protected ImmutableArray<TStatement> AppendReturnStatementIfNeeded(
                 ImmutableArray<TStatement> statements
-            ) {
+            )
+            {
                 if (!AnalyzerResult.HasVariableToUseAsReturnValue)
                 {
                     return statements;
@@ -429,7 +440,8 @@ namespace Microsoft.CodeAnalysis.ExtractMethod
             protected static HashSet<SyntaxAnnotation> CreateVariableDeclarationToRemoveMap(
                 IEnumerable<VariableInfo> variables,
                 CancellationToken cancellationToken
-            ) {
+            )
+            {
                 var annotations = new List<Tuple<SyntaxToken, SyntaxAnnotation>>();
 
                 foreach (var variable in variables)

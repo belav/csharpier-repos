@@ -21,7 +21,8 @@ namespace System.Composition.TypedParts
         public TypedPartExportDescriptorProvider(
             IEnumerable<Type> types,
             AttributedModelProvider attributeContext
-        ) {
+        )
+        {
             var activationFeatures = CreateActivationFeatures(attributeContext);
             var typeInspector = new TypeInspector(attributeContext, activationFeatures);
 
@@ -46,7 +47,8 @@ namespace System.Composition.TypedParts
         private void AddDiscoveredExport(
             DiscoveredExport export,
             CompositionContract contract = null
-        ) {
+        )
+        {
             var actualContract = contract ?? export.Contract;
 
             ICollection<DiscoveredExport> forKey;
@@ -62,7 +64,8 @@ namespace System.Composition.TypedParts
         public override IEnumerable<ExportDescriptorPromise> GetExportDescriptors(
             CompositionContract contract,
             DependencyAccessor definitionAccessor
-        ) {
+        )
+        {
             DiscoverGenericParts(contract);
             DiscoverConstrainedParts(contract);
 
@@ -143,7 +146,8 @@ namespace System.Composition.TypedParts
 
         private static ActivationFeature[] CreateActivationFeatures(
             AttributedModelProvider attributeContext
-        ) {
+        )
+        {
             return new ActivationFeature[]
             {
                 new DisposalFeature(),
@@ -155,7 +159,8 @@ namespace System.Composition.TypedParts
 
         internal static ActivationFeature[] DebugGetActivationFeatures(
             AttributedModelProvider attributeContext
-        ) {
+        )
+        {
             return CreateActivationFeatures(attributeContext);
         }
     }

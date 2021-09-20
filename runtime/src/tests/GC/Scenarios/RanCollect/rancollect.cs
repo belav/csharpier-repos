@@ -37,7 +37,8 @@ namespace DefaultNamespace
                     || !Int32.TryParse(Args[1], out iObj)
                     || !Int32.TryParse(Args[2], out iBigSize)
                     || !Int32.TryParse(Args[3], out iSeed)
-                ) {
+                )
+                {
                     return 1;
                 }
             }

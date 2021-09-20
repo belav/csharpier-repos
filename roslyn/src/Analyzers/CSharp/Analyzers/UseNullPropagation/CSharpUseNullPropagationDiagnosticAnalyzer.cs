@@ -43,7 +43,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UseNullPropagation
             SyntaxNode conditionNode,
             [NotNullWhen(true)] out SyntaxNode? conditionPartToCheck,
             out bool isEquals
-        ) {
+        )
+        {
             conditionPartToCheck = null;
             isEquals = true;
 

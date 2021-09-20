@@ -18,7 +18,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Structure
             ref TemporaryArray<BlockSpan> spans,
             BlockStructureOptionProvider optionProvider,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             CollectBlockSpans(trivia.SyntaxTree, trivia, ref spans, cancellationToken);
         }
 
@@ -27,7 +28,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Structure
             SyntaxTrivia trivia,
             ref TemporaryArray<BlockSpan> spans,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             // We'll always be leading trivia of some token.
             var startPos = trivia.FullSpan.Start;
 
@@ -52,7 +54,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Structure
                 !parentTriviaList[indexInParent - 1].IsKind(SyntaxKind.IfDirectiveTrivia)
                 && !parentTriviaList[indexInParent - 1].IsKind(SyntaxKind.ElifDirectiveTrivia)
                 && !parentTriviaList[indexInParent - 1].IsKind(SyntaxKind.ElseDirectiveTrivia)
-            ) {
+            )
+            {
                 return;
             }
 
@@ -79,7 +82,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Structure
             SyntaxTree syntaxTree,
             SyntaxTrivia trivia,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var endPos = trivia.FullSpan.End;
             var text = syntaxTree.GetText(cancellationToken);
             return endPos >= 2 && text[endPos - 1] == '\n' && text[endPos - 2] == '\r'
@@ -91,7 +95,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Structure
             SyntaxTrivia trivia,
             SyntaxTriviaList triviaList,
             int index
-        ) {
+        )
+        {
             // Look through our parent token's trivia, to extend the span to the end of the last
             // disabled trivia.
             //

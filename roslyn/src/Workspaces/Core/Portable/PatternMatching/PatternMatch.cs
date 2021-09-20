@@ -36,14 +36,15 @@ namespace Microsoft.CodeAnalysis.PatternMatching
             bool punctuationStripped,
             bool isCaseSensitive,
             TextSpan? matchedSpan
-        ) : this(
-            resultType,
-            punctuationStripped,
-            isCaseSensitive,
-            matchedSpan == null
-              ? ImmutableArray<TextSpan>.Empty
-              : ImmutableArray.Create(matchedSpan.Value)
-        ) { }
+        )
+            : this(
+                resultType,
+                punctuationStripped,
+                isCaseSensitive,
+                matchedSpan == null
+                  ? ImmutableArray<TextSpan>.Empty
+                  : ImmutableArray.Create(matchedSpan.Value)
+            ) { }
 
         internal PatternMatch(
             PatternMatchKind resultType,

@@ -45,7 +45,8 @@ namespace Microsoft.CodeAnalysis.Host
                         assemblyPath,
                         out var provider
                     )
-                ) {
+                )
+                {
                     provider = _assemblyPathToDocumentationProviderMap.GetOrAdd(
                         assemblyPath,
                         _path => XmlDocumentationProvider.CreateFromFile(_path)

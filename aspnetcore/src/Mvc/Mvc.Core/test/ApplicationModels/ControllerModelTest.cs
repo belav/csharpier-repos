@@ -107,7 +107,8 @@ namespace Microsoft.AspNetCore.Mvc.ApplicationModels
                     || property.Name.Equals("Selectors")
                     || property.Name.Equals("ApiExplorer")
                     || property.Name.Equals("ControllerProperties")
-                ) {
+                )
+                {
                     // This test excludes other ApplicationModel objects on purpose because we deep copy them.
                     continue;
                 }
@@ -124,7 +125,8 @@ namespace Microsoft.AspNetCore.Mvc.ApplicationModels
                 }
                 else if (
                     typeof(IDictionary<string, string>).IsAssignableFrom(property.PropertyType)
-                ) {
+                )
+                {
                     Assert.Equal(value1, value2);
 
                     // Ensure non-default value
@@ -132,7 +134,8 @@ namespace Microsoft.AspNetCore.Mvc.ApplicationModels
                 }
                 else if (
                     typeof(IDictionary<object, object>).IsAssignableFrom(property.PropertyType)
-                ) {
+                )
+                {
                     Assert.Equal(value1, value2);
 
                     // Ensure non-default value
@@ -141,7 +144,8 @@ namespace Microsoft.AspNetCore.Mvc.ApplicationModels
                 else if (
                     property.PropertyType.IsValueType
                     || Nullable.GetUnderlyingType(property.PropertyType) != null
-                ) {
+                )
+                {
                     Assert.Equal(value1, value2);
 
                     // Ensure non-default value

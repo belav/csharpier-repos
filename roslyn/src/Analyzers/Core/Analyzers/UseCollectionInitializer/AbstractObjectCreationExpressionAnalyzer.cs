@@ -41,7 +41,8 @@ namespace Microsoft.CodeAnalysis.UseCollectionInitializer
             ISyntaxFacts syntaxFacts,
             TObjectCreationExpressionSyntax objectCreationExpression,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             _semanticModel = semanticModel;
             _syntaxFacts = syntaxFacts;
             _objectCreationExpression = objectCreationExpression;
@@ -103,7 +104,8 @@ namespace Microsoft.CodeAnalysis.UseCollectionInitializer
                     _objectCreationExpression.Parent.Parent
                     is TVariableDeclaratorSyntax containingDeclarator
                 )
-            ) {
+            )
+            {
                 return false;
             }
 
@@ -123,7 +125,8 @@ namespace Microsoft.CodeAnalysis.UseCollectionInitializer
                     containingDeclarator,
                     _containingStatement
                 )
-            ) {
+            )
+            {
                 return false;
             }
 
@@ -180,14 +183,17 @@ namespace Microsoft.CodeAnalysis.UseCollectionInitializer
 
         protected bool ExpressionContainsValuePatternOrReferencesInitializedSymbol(
             SyntaxNode expression
-        ) {
+        )
+        {
             foreach (
                 var subExpression in expression.DescendantNodesAndSelf().OfType<TExpressionSyntax>()
-            ) {
+            )
+            {
                 if (
                     !_syntaxFacts.IsNameOfSimpleMemberAccessExpression(subExpression)
                     && !_syntaxFacts.IsNameOfMemberBindingExpression(subExpression)
-                ) {
+                )
+                {
                     if (ValuePatternMatches(subExpression))
                     {
                         return true;
@@ -200,7 +206,8 @@ namespace Microsoft.CodeAnalysis.UseCollectionInitializer
                         _semanticModel.GetSymbolInfo(subExpression, _cancellationToken)
                             .GetAnySymbol()
                     )
-                ) {
+                )
+                {
                     return true;
                 }
             }

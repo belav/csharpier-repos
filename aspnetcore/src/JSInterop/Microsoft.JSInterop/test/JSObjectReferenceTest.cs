@@ -91,7 +91,8 @@ namespace Microsoft.JSInterop.Tests
                 string? argsJson,
                 JSCallResultType resultType,
                 long targetInstanceId
-            ) {
+            )
+            {
                 BeginInvokeJSInvocationCount++;
             }
 
@@ -118,7 +119,8 @@ namespace Microsoft.JSInterop.Tests
                 string? argsJson,
                 JSCallResultType resultType,
                 long targetInstanceId
-            ) {
+            )
+            {
                 InvokeJSInvocationCount++;
 
                 return null;

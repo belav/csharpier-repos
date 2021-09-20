@@ -146,7 +146,8 @@ namespace System.Web.Mvc.Test
         private static void ReplaceCollectionContents(
             ICollection<string> collectionToReplace,
             IEnumerable<string> newContents
-        ) {
+        )
+        {
             collectionToReplace.Clear();
             foreach (string item in newContents)
             {

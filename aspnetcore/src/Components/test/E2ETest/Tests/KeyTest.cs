@@ -335,7 +335,8 @@ namespace Microsoft.AspNetCore.Components.E2ETest.Tests
             IWebElement appElem,
             Node expectedRootNode,
             bool validatePreservation
-        ) {
+        )
+        {
             var actualRootElem = appElem.FindElement(By.CssSelector(".render-output > .node"));
             var actualRootNode = ReadNodeFromDOM(actualRootElem);
             AssertNodesEqual(expectedRootNode, actualRootNode, validatePreservation);
@@ -345,7 +346,8 @@ namespace Microsoft.AspNetCore.Components.E2ETest.Tests
             Node expectedRootNode,
             Node actualRootNode,
             bool validatePreservation
-        ) {
+        )
+        {
             Assert.Equal(expectedRootNode.Label, actualRootNode.Label);
 
             if (validatePreservation)

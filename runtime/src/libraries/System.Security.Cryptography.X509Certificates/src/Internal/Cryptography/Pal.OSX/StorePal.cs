@@ -29,7 +29,8 @@ namespace Internal.Cryptography.Pal
             ReadOnlySpan<byte> rawData,
             SafePasswordHandle password,
             X509KeyStorageFlags keyStorageFlags
-        ) {
+        )
+        {
             Debug.Assert(password != null);
 
             X509ContentType contentType = X509Certificate2.GetCertContentType(rawData);
@@ -39,7 +40,8 @@ namespace Internal.Cryptography.Pal
                 if (
                     (keyStorageFlags & X509KeyStorageFlags.EphemeralKeySet)
                     == X509KeyStorageFlags.EphemeralKeySet
-                ) {
+                )
+                {
                     throw new PlatformNotSupportedException(SR.Cryptography_X509_NoEphemeralPfx);
                 }
 
@@ -74,7 +76,8 @@ namespace Internal.Cryptography.Pal
             SafePasswordHandle password,
             bool exportable,
             SafeKeychainHandle keychain
-        ) {
+        )
+        {
             ApplePkcs12Reader reader = new ApplePkcs12Reader(rawData);
 
             try
@@ -94,7 +97,8 @@ namespace Internal.Cryptography.Pal
             string fileName,
             SafePasswordHandle password,
             X509KeyStorageFlags keyStorageFlags
-        ) {
+        )
+        {
             Debug.Assert(password != null);
 
             byte[] fileBytes = File.ReadAllBytes(fileName);
@@ -108,7 +112,8 @@ namespace Internal.Cryptography.Pal
 
         public static IExportPal LinkFromCertificateCollection(
             X509Certificate2Collection certificates
-        ) {
+        )
+        {
             return new AppleCertificateExporter(certificates);
         }
 
@@ -116,7 +121,8 @@ namespace Internal.Cryptography.Pal
             string storeName,
             StoreLocation storeLocation,
             OpenFlags openFlags
-        ) {
+        )
+        {
             StringComparer ordinalIgnoreCase = StringComparer.OrdinalIgnoreCase;
 
             switch (storeLocation)
@@ -195,7 +201,8 @@ namespace Internal.Cryptography.Pal
         private static void ReadCollection(
             SafeCFArrayHandle matches,
             HashSet<X509Certificate2> collection
-        ) {
+        )
+        {
             if (matches.IsInvalid)
             {
                 return;
@@ -216,7 +223,8 @@ namespace Internal.Cryptography.Pal
                         out certHandle,
                         out identityHandle
                     )
-                ) {
+                )
+                {
                     X509Certificate2 cert;
 
                     if (certHandle.IsInvalid)

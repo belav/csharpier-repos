@@ -37,7 +37,8 @@ namespace System.CodeDom.Tests
         public void Ctor_CodeExpression_ParamsCodeExpression(
             CodeExpression targetObject,
             CodeExpression[] parameters
-        ) {
+        )
+        {
             var indexer = new CodeIndexerExpression(targetObject, parameters);
             Assert.Equal(targetObject, indexer.TargetObject);
             Assert.Equal(parameters, indexer.Indices.Cast<CodeExpression>());

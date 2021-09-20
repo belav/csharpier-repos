@@ -377,7 +377,8 @@ namespace System.ServiceModel.Syndication.Tests
             {
                 using (
                     FileStream fileStream = new FileStream(serializeFilePath, FileMode.OpenOrCreate)
-                ) {
+                )
+                {
                     using (XmlWriter writer = XmlDictionaryWriter.CreateTextWriter(fileStream))
                     {
                         Atom10ItemFormatter f = new Atom10ItemFormatter(item);
@@ -523,7 +524,8 @@ namespace System.ServiceModel.Syndication.Tests
         private static void ReadWriteSyndicationItem(
             string file,
             Func<SyndicationItem, SyndicationItemFormatter> itemFormatter
-        ) {
+        )
+        {
             string serializeFilePath = Path.GetTempFileName();
             bool toDeletedFile = true;
 
@@ -537,14 +539,16 @@ namespace System.ServiceModel.Syndication.Tests
                             fileStream,
                             XmlDictionaryReaderQuotas.Max
                         )
-                    ) {
+                    )
+                    {
                         itemObjct = SyndicationItem.Load(reader);
                     }
                 }
 
                 using (
                     FileStream fileStream = new FileStream(serializeFilePath, FileMode.OpenOrCreate)
-                ) {
+                )
+                {
                     using (XmlWriter writer = XmlDictionaryWriter.CreateTextWriter(fileStream))
                     {
                         SyndicationItemFormatter formatter = itemFormatter(itemObjct);
@@ -594,7 +598,8 @@ namespace System.ServiceModel.Syndication.Tests
             Func<SyndicationFeed, SyndicationFeedFormatter> feedFormatter,
             List<AllowableDifference> allowableDifferences = null,
             Action<SyndicationFeed> verifySyndicationFeedRead = null
-        ) {
+        )
+        {
             string serializeFilePath = Path.GetTempFileName();
             bool toDeletedFile = true;
 
@@ -608,7 +613,8 @@ namespace System.ServiceModel.Syndication.Tests
                             fileStream,
                             XmlDictionaryReaderQuotas.Max
                         )
-                    ) {
+                    )
+                    {
                         feedObjct = SyndicationFeed.Load(reader);
                         verifySyndicationFeedRead?.Invoke(feedObjct);
                     }
@@ -616,7 +622,8 @@ namespace System.ServiceModel.Syndication.Tests
 
                 using (
                     FileStream fileStream = new FileStream(serializeFilePath, FileMode.OpenOrCreate)
-                ) {
+                )
+                {
                     using (XmlWriter writer = XmlDictionaryWriter.CreateTextWriter(fileStream))
                     {
                         SyndicationFeedFormatter formatter = feedFormatter(feedObjct);

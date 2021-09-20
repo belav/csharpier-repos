@@ -109,7 +109,8 @@ namespace Internal.TypeSystem
         public virtual MethodDesc GetNonRuntimeDeterminedMethodFromRuntimeDeterminedMethodViaSubstitution(
             Instantiation typeInstantiation,
             Instantiation methodInstantiation
-        ) {
+        )
+        {
             Instantiation instantiation = Instantiation;
             TypeDesc[] clone = null;
 

@@ -39,7 +39,8 @@ namespace Microsoft.AspNetCore.Identity
             ILookupNormalizer keyNormalizer,
             IdentityErrorDescriber errors,
             ILogger<RoleManager<TRole>> logger
-        ) {
+        )
+        {
             if (store == null)
             {
                 throw new ArgumentNullException(nameof(store));

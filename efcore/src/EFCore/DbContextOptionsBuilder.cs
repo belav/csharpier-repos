@@ -161,7 +161,8 @@ namespace Microsoft.EntityFrameworkCore
             IEnumerable<EventId> events,
             LogLevel minimumLevel = LogLevel.Debug,
             DbContextLoggerOptions? options = null
-        ) {
+        )
+        {
             Check.NotNull(events, nameof(events));
 
             var eventsArray = events.ToArray();
@@ -226,7 +227,8 @@ namespace Microsoft.EntityFrameworkCore
             IEnumerable<string> categories,
             LogLevel minimumLevel = LogLevel.Debug,
             DbContextLoggerOptions? options = null
-        ) {
+        )
+        {
             Check.NotNull(categories, nameof(categories));
 
             var categoriesArray = categories.ToArray();
@@ -253,7 +255,8 @@ namespace Microsoft.EntityFrameworkCore
                                         categoriesArray[i],
                                         StringComparison.OrdinalIgnoreCase
                                     )
-                                ) {
+                                )
+                                {
                                     return true;
                                 }
                             }
@@ -299,7 +302,8 @@ namespace Microsoft.EntityFrameworkCore
             Action<string> action,
             Func<EventId, LogLevel, bool> filter,
             DbContextLoggerOptions? options = null
-        ) {
+        )
+        {
             Check.NotNull(action, nameof(action));
             Check.NotNull(filter, nameof(filter));
 
@@ -334,7 +338,8 @@ namespace Microsoft.EntityFrameworkCore
         public virtual DbContextOptionsBuilder LogTo(
             Func<EventId, LogLevel, bool> filter,
             Action<EventData> logger
-        ) {
+        )
+        {
             Check.NotNull(logger, nameof(logger));
             Check.NotNull(filter, nameof(filter));
 
@@ -535,7 +540,8 @@ namespace Microsoft.EntityFrameworkCore
         /// <returns> The same builder instance so that multiple calls can be chained. </returns>
         public virtual DbContextOptionsBuilder ConfigureWarnings(
             Action<WarningsConfigurationBuilder> warningsConfigurationBuilderAction
-        ) {
+        )
+        {
             Check.NotNull(
                 warningsConfigurationBuilderAction,
                 nameof(warningsConfigurationBuilderAction)
@@ -690,7 +696,8 @@ namespace Microsoft.EntityFrameworkCore
         /// <param name="extension"> The extension to be added. </param>
         void IDbContextOptionsBuilderInfrastructure.AddOrUpdateExtension<TExtension>(
             TExtension extension
-        ) {
+        )
+        {
             Check.NotNull(extension, nameof(extension));
 
             _options = _options.WithExtension(extension);
@@ -698,7 +705,8 @@ namespace Microsoft.EntityFrameworkCore
 
         private DbContextOptionsBuilder WithOption(
             Func<CoreOptionsExtension, CoreOptionsExtension> withFunc
-        ) {
+        )
+        {
             ((IDbContextOptionsBuilderInfrastructure)this).AddOrUpdateExtension(
                 withFunc(
                     Options.FindExtension<CoreOptionsExtension>() ?? new CoreOptionsExtension()

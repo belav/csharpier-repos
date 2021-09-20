@@ -43,7 +43,8 @@ namespace System.Reflection.Metadata
                 if (
                     callingConventionOrKind > maxCallingConvention
                     && callingConventionOrKind != (int)SignatureCallingConvention.Unmanaged
-                ) {
+                )
+                {
                     return SignatureCallingConvention.Default;
                 }
 
@@ -60,7 +61,8 @@ namespace System.Reflection.Metadata
                 if (
                     callingConventionOrKind <= maxCallingConvention
                     || callingConventionOrKind == (int)SignatureCallingConvention.Unmanaged
-                ) {
+                )
+                {
                     return SignatureKind.Method;
                 }
 

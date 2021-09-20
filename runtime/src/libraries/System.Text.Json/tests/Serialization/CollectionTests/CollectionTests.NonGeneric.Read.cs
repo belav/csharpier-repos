@@ -623,7 +623,8 @@ namespace System.Text.Json.Serialization.Tests
             Type type,
             string json,
             Type exceptionMessageType
-        ) {
+        )
+        {
             NotSupportedException ex = Assert.Throws<NotSupportedException>(
                 () => JsonSerializer.Deserialize(json, type)
             );

@@ -51,7 +51,8 @@ namespace Microsoft.AspNetCore.Razor.Language
             if (
                 FileKinds.IsComponentImport(codeDocument.GetFileKind())
                 && syntaxTree.Options.FeatureFlags.AllowComponentFileKind
-            ) {
+            )
+            {
                 visitor = new ComponentImportFileKindVisitor(
                     document,
                     builder,
@@ -65,7 +66,8 @@ namespace Microsoft.AspNetCore.Razor.Language
             else if (
                 FileKinds.IsComponent(codeDocument.GetFileKind())
                 && syntaxTree.Options.FeatureFlags.AllowComponentFileKind
-            ) {
+            )
+            {
                 visitor = new ComponentFileKindVisitor(
                     document,
                     builder,
@@ -145,7 +147,8 @@ namespace Microsoft.AspNetCore.Razor.Language
             IntermediateNodeBuilder builder,
             RazorParserOptions options,
             IReadOnlyList<RazorSyntaxTree> imports
-        ) {
+        )
+        {
             if (imports == null)
             {
                 return Array.Empty<UsingReference>();
@@ -186,7 +189,8 @@ namespace Microsoft.AspNetCore.Razor.Language
                         if (
                             seenDirective
                             && descriptor.Usage == DirectiveUsage.FileScopedSinglyOccurring
-                        ) {
+                        )
+                        {
                             // This directive has been overridden, it should be removed from the document.
                             break;
                         }
@@ -259,7 +263,8 @@ namespace Microsoft.AspNetCore.Razor.Language
                 DocumentIntermediateNode document,
                 IntermediateNodeBuilder builder,
                 RazorParserFeatureFlags featureFlags
-            ) {
+            )
+            {
                 _document = document;
                 _builder = builder;
                 _usings = new List<UsingReference>();
@@ -342,7 +347,8 @@ namespace Microsoft.AspNetCore.Razor.Language
                 }
                 else if (
                     context.ChunkGenerator is AddTagHelperChunkGenerator addTagHelperChunkGenerator
-                ) {
+                )
+                {
                     IntermediateNode directiveNode;
                     if (IsMalformed(addTagHelperChunkGenerator.Diagnostics))
                     {
@@ -387,7 +393,8 @@ namespace Microsoft.AspNetCore.Razor.Language
                 else if (
                     context.ChunkGenerator
                     is RemoveTagHelperChunkGenerator removeTagHelperChunkGenerator
-                ) {
+                )
+                {
                     IntermediateNode directiveNode;
                     if (IsMalformed(removeTagHelperChunkGenerator.Diagnostics))
                     {
@@ -432,7 +439,8 @@ namespace Microsoft.AspNetCore.Razor.Language
                 else if (
                     context.ChunkGenerator
                     is TagHelperPrefixDirectiveChunkGenerator tagHelperPrefixChunkGenerator
-                ) {
+                )
+                {
                     IntermediateNode directiveNode;
                     if (IsMalformed(tagHelperPrefixChunkGenerator.Diagnostics))
                     {
@@ -530,7 +538,8 @@ namespace Microsoft.AspNetCore.Razor.Language
                 if (
                     name.StartsWith("data-", StringComparison.OrdinalIgnoreCase)
                     && !_featureFlags.AllowConditionalDataDashAttributes
-                ) {
+                )
+                {
                     Visit(prefix);
                     Visit(node.Value);
                     Visit(node.ValueSuffix);
@@ -540,7 +549,8 @@ namespace Microsoft.AspNetCore.Razor.Language
                     if (
                         node.Value != null
                         && node.Value.ChildNodes().All(c => c is MarkupLiteralAttributeValueSyntax)
-                    ) {
+                    )
+                    {
                         // We need to do what ConditionalAttributeCollapser used to do.
                         var literalAttributeValueNodes = node.Value.ChildNodes()
                             .Cast<MarkupLiteralAttributeValueSyntax>()
@@ -583,12 +593,14 @@ namespace Microsoft.AspNetCore.Razor.Language
 
             public override void VisitMarkupMinimizedAttributeBlock(
                 MarkupMinimizedAttributeBlockSyntax node
-            ) {
+            )
+            {
                 var name = node.Name.GetContent();
                 if (
                     name.StartsWith("data-", StringComparison.OrdinalIgnoreCase)
                     && !_featureFlags.AllowConditionalDataDashAttributes
-                ) {
+                )
+                {
                     base.VisitMarkupMinimizedAttributeBlock(node);
                     return;
                 }
@@ -610,7 +622,8 @@ namespace Microsoft.AspNetCore.Razor.Language
             //  Children will contain a token for @false.
             public override void VisitMarkupDynamicAttributeValue(
                 MarkupDynamicAttributeValueSyntax node
-            ) {
+            )
+            {
                 var containsExpression = false;
                 var descendantNodes = node.DescendantNodes(
                     n =>
@@ -624,7 +637,8 @@ namespace Microsoft.AspNetCore.Razor.Language
                     if (
                         child is CSharpImplicitExpressionSyntax
                         || child is CSharpExplicitExpressionSyntax
-                    ) {
+                    )
+                    {
                         containsExpression = true;
                     }
                 }
@@ -657,7 +671,8 @@ namespace Microsoft.AspNetCore.Razor.Language
 
             public override void VisitMarkupLiteralAttributeValue(
                 MarkupLiteralAttributeValueSyntax node
-            ) {
+            )
+            {
                 _builder.Push(
                     new HtmlAttributeValueIntermediateNode()
                     {
@@ -869,7 +884,8 @@ namespace Microsoft.AspNetCore.Razor.Language
                         token != null
                         && token.Kind == SyntaxKind.Marker
                         && token.Content.Length == 0
-                    ) {
+                    )
+                    {
                         // We don't want to create IR nodes for marker tokens.
                         return;
                     }
@@ -918,7 +934,8 @@ namespace Microsoft.AspNetCore.Razor.Language
                 if (
                     currentChildren.Count > 0
                     && currentChildren[currentChildren.Count - 1] is HtmlContentIntermediateNode
-                ) {
+                )
+                {
                     var existingHtmlContent = (HtmlContentIntermediateNode)currentChildren[
                         currentChildren.Count - 1
                     ];
@@ -936,7 +953,8 @@ namespace Microsoft.AspNetCore.Razor.Language
                         && existingHtmlContent.Source.Value.AbsoluteIndex
                             + existingHtmlContent.Source.Value.Length
                             == source.Value.AbsoluteIndex
-                    ) {
+                    )
+                    {
                         Combine(existingHtmlContent, node);
                         return;
                     }
@@ -1006,7 +1024,8 @@ namespace Microsoft.AspNetCore.Razor.Language
                     if (
                         child is MarkupTagHelperAttributeSyntax
                         || child is MarkupMinimizedTagHelperAttributeSyntax
-                    ) {
+                    )
+                    {
                         Visit(child);
                     }
                 }
@@ -1014,7 +1033,8 @@ namespace Microsoft.AspNetCore.Razor.Language
 
             public override void VisitMarkupMinimizedTagHelperAttribute(
                 MarkupMinimizedTagHelperAttributeSyntax node
-            ) {
+            )
+            {
                 if (!_featureFlags.AllowMinimizedBooleanTagHelperAttributes)
                 {
                     // Minimized attributes are not valid for non-boolean bound attributes. TagHelperBlockRewriter
@@ -1169,7 +1189,8 @@ namespace Microsoft.AspNetCore.Razor.Language
                     && markupBlock.Children.Count == 2
                     && markupBlock.Children[0] is MarkupTextLiteralSyntax
                     && markupBlock.Children[1] is MarkupEphemeralTextLiteralSyntax
-                ) {
+                )
+                {
                     // This is a special case when we have an attribute like attr="@@foo".
                     // In this case, we want the foo to be written out as HtmlContent and not HtmlAttributeValue.
                     Visit(markupBlock);
@@ -1226,7 +1247,8 @@ namespace Microsoft.AspNetCore.Razor.Language
 
             private MarkupTextLiteralSyntax MergeAttributeValue(
                 MarkupLiteralAttributeValueSyntax node
-            ) {
+            )
+            {
                 var valueTokens = MergeLiterals(
                     node.Prefix?.LiteralTokens,
                     node.Value?.LiteralTokens
@@ -1272,7 +1294,8 @@ namespace Microsoft.AspNetCore.Razor.Language
 
             private SyntaxList<SyntaxToken> MergeLiterals(
                 params SyntaxList<SyntaxToken>?[] literals
-            ) {
+            )
+            {
                 var builder = SyntaxListBuilder<SyntaxToken>.Create();
                 for (var i = 0; i < literals.Length; i++)
                 {
@@ -1312,7 +1335,8 @@ namespace Microsoft.AspNetCore.Razor.Language
                 if (
                     (node.StartTag != null && node.StartTag.IsMarkupTransition)
                     || (node.EndTag != null && node.EndTag.IsMarkupTransition)
-                ) {
+                )
+                {
                     // We don't want to create a node for Markup transitions (<text></text>). Treat their contents as regular markup.
                     // Technically there shouldn't be an end transition without a start transition but just being defensive.
                     base.VisitMarkupElement(node);
@@ -1341,7 +1365,8 @@ namespace Microsoft.AspNetCore.Razor.Language
                     && node.EndTag == null
                     && !node.StartTag.IsVoidElement()
                     && !node.StartTag.IsSelfClosing()
-                ) {
+                )
+                {
                     element.Diagnostics.Add(
                         ComponentDiagnosticFactory.Create_UnclosedTag(
                             BuildSourceSpanFromNode(node.StartTag),
@@ -1367,7 +1392,8 @@ namespace Microsoft.AspNetCore.Razor.Language
                         startTagName != null
                         && startTagName.Length > 0
                         && char.IsUpper(startTagName, 0)
-                    ) {
+                    )
+                    {
                         // A markup element that starts with an uppercase character.
                         // It is most likely intended to be a component. Add a warning.
                         element.Diagnostics.Add(
@@ -1454,7 +1480,8 @@ namespace Microsoft.AspNetCore.Razor.Language
 
             public override void VisitMarkupMinimizedAttributeBlock(
                 MarkupMinimizedAttributeBlockSyntax node
-            ) {
+            )
+            {
                 var prefixTokens = MergeLiterals(
                     node.NamePrefix?.LiteralTokens,
                     node.Name.LiteralTokens
@@ -1480,7 +1507,8 @@ namespace Microsoft.AspNetCore.Razor.Language
             //  Children will contain a token for @false.
             public override void VisitMarkupDynamicAttributeValue(
                 MarkupDynamicAttributeValueSyntax node
-            ) {
+            )
+            {
                 var containsExpression = false;
                 var descendantNodes = node.DescendantNodes(
                     n =>
@@ -1494,7 +1522,8 @@ namespace Microsoft.AspNetCore.Razor.Language
                     if (
                         child is CSharpImplicitExpressionSyntax
                         || child is CSharpExplicitExpressionSyntax
-                    ) {
+                    )
+                    {
                         containsExpression = true;
                     }
                 }
@@ -1527,7 +1556,8 @@ namespace Microsoft.AspNetCore.Razor.Language
 
             public override void VisitMarkupLiteralAttributeValue(
                 MarkupLiteralAttributeValueSyntax node
-            ) {
+            )
+            {
                 _builder.Push(
                     new HtmlAttributeValueIntermediateNode()
                     {
@@ -1588,7 +1618,8 @@ namespace Microsoft.AspNetCore.Razor.Language
                         token != null
                         && token.Kind == SyntaxKind.Marker
                         && token.Content.Length == 0
-                    ) {
+                    )
+                    {
                         // We don't want to create IR nodes for marker tokens.
                         return;
                     }
@@ -1601,7 +1632,8 @@ namespace Microsoft.AspNetCore.Razor.Language
                     currentChildren.Count > 0
                     && currentChildren[currentChildren.Count - 1]
                         is HtmlContentIntermediateNode existingHtmlContent
-                ) {
+                )
+                {
                     if (existingHtmlContent.Source == null && source == null)
                     {
                         Combine(existingHtmlContent, node);
@@ -1615,7 +1647,8 @@ namespace Microsoft.AspNetCore.Razor.Language
                         && existingHtmlContent.Source.Value.AbsoluteIndex
                             + existingHtmlContent.Source.Value.Length
                             == source.Value.AbsoluteIndex
-                    ) {
+                    )
+                    {
                         Combine(existingHtmlContent, node);
                         return;
                     }
@@ -1919,7 +1952,8 @@ namespace Microsoft.AspNetCore.Razor.Language
                         || child is MarkupMinimizedTagHelperAttributeSyntax
                         || child is MarkupTagHelperDirectiveAttributeSyntax
                         || child is MarkupMinimizedTagHelperDirectiveAttributeSyntax
-                    ) {
+                    )
+                    {
                         Visit(child);
                     }
                 }
@@ -1927,7 +1961,8 @@ namespace Microsoft.AspNetCore.Razor.Language
 
             public override void VisitMarkupMinimizedTagHelperAttribute(
                 MarkupMinimizedTagHelperAttributeSyntax node
-            ) {
+            )
+            {
                 if (!_featureFlags.AllowMinimizedBooleanTagHelperAttributes)
                 {
                     // Minimized attributes are not valid for non-boolean bound attributes. TagHelperBlockRewriter
@@ -1962,7 +1997,8 @@ namespace Microsoft.AspNetCore.Razor.Language
                                 out _,
                                 out _
                             )
-                        ) {
+                        )
+                        {
                             var expectsBooleanValue =
                                 associatedAttributeDescriptor.ExpectsBooleanValue(attributeName);
 
@@ -2000,7 +2036,8 @@ namespace Microsoft.AspNetCore.Razor.Language
 
             public override void VisitMarkupMinimizedTagHelperDirectiveAttribute(
                 MarkupMinimizedTagHelperDirectiveAttributeSyntax node
-            ) {
+            )
+            {
                 if (!_featureFlags.AllowMinimizedBooleanTagHelperAttributes)
                 {
                     // Minimized attributes are not valid for non-boolean bound attributes. TagHelperBlockRewriter
@@ -2035,7 +2072,8 @@ namespace Microsoft.AspNetCore.Razor.Language
                                 out var parameterMatch,
                                 out var associatedAttributeParameterDescriptor
                             )
-                        ) {
+                        )
+                        {
                             // Directive attributes should start with '@' unless the descriptors are misconfigured.
                             // In that case, we would have already logged an error.
                             var actualAttributeName = attributeName.StartsWith(
@@ -2053,7 +2091,8 @@ namespace Microsoft.AspNetCore.Razor.Language
                                     out var attributeNameWithoutParameter,
                                     out _
                                 )
-                            ) {
+                            )
+                            {
                                 var expectsBooleanValue =
                                     associatedAttributeParameterDescriptor.IsBooleanProperty;
                                 if (!expectsBooleanValue)
@@ -2150,7 +2189,8 @@ namespace Microsoft.AspNetCore.Razor.Language
                                 out _,
                                 out _
                             )
-                        ) {
+                        )
+                        {
                             var setTagHelperProperty = new TagHelperPropertyIntermediateNode()
                             {
                                 AttributeName = attributeName,
@@ -2183,7 +2223,8 @@ namespace Microsoft.AspNetCore.Razor.Language
 
             public override void VisitMarkupTagHelperDirectiveAttribute(
                 MarkupTagHelperDirectiveAttributeSyntax node
-            ) {
+            )
+            {
                 var element = node.FirstAncestorOrSelf<MarkupTagHelperElementSyntax>();
                 var descriptors = element.TagHelperInfo.BindingResult.Descriptors;
                 var attributeName = node.FullName;
@@ -2213,7 +2254,8 @@ namespace Microsoft.AspNetCore.Razor.Language
                                 out var parameterMatch,
                                 out var associatedAttributeParameterDescriptor
                             )
-                        ) {
+                        )
+                        {
                             // Directive attributes should start with '@' unless the descriptors are misconfigured.
                             // In that case, we would have already logged an error.
                             var actualAttributeName = attributeName.StartsWith(
@@ -2231,7 +2273,8 @@ namespace Microsoft.AspNetCore.Razor.Language
                                     out var attributeNameWithoutParameter,
                                     out _
                                 )
-                            ) {
+                            )
+                            {
                                 attributeNode =
                                     new TagHelperDirectiveAttributeParameterIntermediateNode()
                                     {
@@ -2298,7 +2341,8 @@ namespace Microsoft.AspNetCore.Razor.Language
                     && markupBlock.Children.Count == 2
                     && markupBlock.Children[0] is MarkupTextLiteralSyntax
                     && markupBlock.Children[1] is MarkupEphemeralTextLiteralSyntax
-                ) {
+                )
+                {
                     // This is a special case when we have an attribute like attr="@@foo".
                     // In this case, we want the foo to be written out as HtmlContent and not HtmlAttributeValue.
                     Visit(markupBlock);
@@ -2355,7 +2399,8 @@ namespace Microsoft.AspNetCore.Razor.Language
 
             private MarkupTextLiteralSyntax MergeAttributeValue(
                 MarkupLiteralAttributeValueSyntax node
-            ) {
+            )
+            {
                 var valueTokens = MergeLiterals(
                     node.Prefix?.LiteralTokens,
                     node.Value?.LiteralTokens
@@ -2403,7 +2448,8 @@ namespace Microsoft.AspNetCore.Razor.Language
 
             private SyntaxList<SyntaxToken> MergeLiterals(
                 params SyntaxList<SyntaxToken>?[] literals
-            ) {
+            )
+            {
                 var builder = SyntaxListBuilder<SyntaxToken>.Create();
                 for (var i = 0; i < literals.Length; i++)
                 {
@@ -2486,7 +2532,8 @@ namespace Microsoft.AspNetCore.Razor.Language
                     node.FirstAncestorOrSelf<SyntaxNode>(
                         n => n is MarkupStartTagSyntax || n is MarkupEndTagSyntax
                     ) != null
-                ) {
+                )
+                {
                     // We don't care about implicit expresssion in attributes.
                     return;
                 }
@@ -2535,7 +2582,8 @@ namespace Microsoft.AspNetCore.Razor.Language
                 if (
                     node.FirstAncestorOrSelf<SyntaxNode>(n => n is CSharpImplicitExpressionSyntax)
                     == null
-                ) {
+                )
+                {
                     // We only care about implicit expressions.
                     return;
                 }

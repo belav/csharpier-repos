@@ -73,7 +73,8 @@ namespace System.Formats.Cbor
             ReadOnlyMemory<byte> data,
             CborConformanceMode conformanceMode = CborConformanceMode.Strict,
             bool allowMultipleRootLevelValues = false
-        ) {
+        )
+        {
             CborConformanceModeHelpers.Validate(conformanceMode);
 
             _data = data;
@@ -138,7 +139,8 @@ namespace System.Formats.Cbor
                         nextByte.InitialByte == CborInitialByte.IndefiniteLengthBreakByte
                         || nextByte.MajorType == _currentMajorType.Value
                             && nextByte.AdditionalInfo != CborAdditionalInfo.IndefiniteLength
-                    ) {
+                    )
+                    {
                         break;
                     }
 
@@ -304,7 +306,8 @@ namespace System.Formats.Cbor
                 int? currentKeyOffset,
                 (int Offset, int Length)? previousKeyEncodingRange,
                 HashSet<(int Offset, int Length)>? keyEncodingRanges
-            ) {
+            )
+            {
                 MajorType = type;
                 FrameOffset = frameOffset;
                 DefiniteLength = definiteLength;
@@ -353,7 +356,8 @@ namespace System.Formats.Cbor
                 int itemsRead,
                 int? currentKeyOffset,
                 (int Offset, int Length)? previousKeyEncodingRange
-            ) {
+            )
+            {
                 Depth = depth;
                 Offset = offset;
                 FrameOffset = frameOffset;

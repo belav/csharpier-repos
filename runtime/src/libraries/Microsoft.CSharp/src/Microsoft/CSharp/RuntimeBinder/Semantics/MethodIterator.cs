@@ -33,7 +33,8 @@ namespace Microsoft.CSharp.RuntimeBinder.Semantics
                 EXPRFLAG flags,
                 symbmask_t mask,
                 ArgInfos nonTrailingNamedArguments
-            ) {
+            )
+            {
                 Debug.Assert(name != null);
                 Debug.Assert(containingTypes != null);
                 Debug.Assert(containingTypes.Count != 0);
@@ -80,7 +81,8 @@ namespace Microsoft.CSharp.RuntimeBinder.Semantics
                             )
                         || _mask == symbmask_t.MASK_PropertySymbol
                             && !(CurrentSymbol is IndexerSymbol)
-                    ) {
+                    )
+                    {
                         // Get the next symbol.
                         return false;
                     }
@@ -89,7 +91,8 @@ namespace Microsoft.CSharp.RuntimeBinder.Semantics
                     if (
                         _arity > 0 & _mask == symbmask_t.MASK_MethodSymbol
                         && ((MethodSymbol)CurrentSymbol).typeVars.Count != _arity
-                    ) {
+                    )
+                    {
                         return false;
                     }
 
@@ -99,7 +102,8 @@ namespace Microsoft.CSharp.RuntimeBinder.Semantics
                             CurrentSymbol,
                             (_flags & EXPRFLAG.EXF_USERCALLABLE) != 0
                         )
-                    ) {
+                    )
+                    {
                         return false;
                     }
 
@@ -140,7 +144,8 @@ namespace Microsoft.CSharp.RuntimeBinder.Semantics
                             if (
                                 paramNames[i] != named.Name
                                 || i == paramNames.Count - 1 && i != args.carg - 1
-                            ) {
+                            )
+                            {
                                 return true;
                             }
                         }

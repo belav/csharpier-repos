@@ -271,7 +271,8 @@ namespace System.Reflection.Tests
             object obj,
             object value,
             Type exceptionType
-        ) {
+        )
+        {
             FieldInfo fieldInfo = GetField(type, name);
             Assert.Throws(exceptionType, () => fieldInfo.SetValue(obj, value));
         }
@@ -629,7 +630,8 @@ namespace System.Reflection.Tests
                     typeof(FI_GenericClassField<>),
                     typeof(FI_StaticGenericField<>)
                 }
-            ) {
+            )
+            {
                 yield return new object[] { genericType, typeof(int), "genparamField", 0, -300 };
                 yield return new object[] { genericType, typeof(int), "dependField", null, g_int };
                 yield return new object[]
@@ -817,7 +819,8 @@ namespace System.Reflection.Tests
             string fieldName,
             object initialValue,
             object changedValue
-        ) {
+        )
+        {
             Type type = openType.MakeGenericType(gaType);
             object obj = Activator.CreateInstance(type);
 

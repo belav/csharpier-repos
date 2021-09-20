@@ -234,7 +234,8 @@ namespace System.Diagnostics
             bool isChild,
             bool usesTerminal,
             DateTime exitTime = default
-        ) {
+        )
+        {
             Debug.Assert(processId >= 0);
             _processId = processId;
             _isChild = isChild;

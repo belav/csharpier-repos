@@ -47,7 +47,8 @@ namespace System.Globalization
             CalendarId calendar,
             uint calType,
             out int data
-        ) {
+        )
+        {
             return Interop.Kernel32.GetCalendarInfoEx(
                     localeName,
                     (uint)calendar,
@@ -64,7 +65,8 @@ namespace System.Globalization
             CalendarId calendar,
             uint calType,
             out string data
-        ) {
+        )
+        {
             const int BUFFER_LENGTH = 80;
 
             // The maximum size for values returned from GetCalendarInfoEx is 80 characters.
@@ -106,7 +108,8 @@ namespace System.Globalization
             uint calendar,
             IntPtr pReserved,
             void* lParam
-        ) {
+        )
+        {
             ref EnumData context = ref Unsafe.As<byte, EnumData>(ref *(byte*)lParam);
             try
             {
@@ -142,7 +145,8 @@ namespace System.Globalization
             uint calendar,
             IntPtr reserved,
             void* lParam
-        ) {
+        )
+        {
             ref NlsEnumCalendarsData context = ref Unsafe.As<byte, NlsEnumCalendarsData>(
                 ref *(byte*)lParam
             );

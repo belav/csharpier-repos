@@ -32,7 +32,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.LanguageClient
                 IEnumerable<
                 Lazy<CompletionProvider, CompletionProviderMetadata>
             > completionProviders
-        ) {
+        )
+        {
             _completionProviders = completionProviders.Where(
                     lz =>
                         lz.Metadata.Language == LanguageNames.CSharp

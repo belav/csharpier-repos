@@ -21,7 +21,8 @@ namespace System.Reflection.TypeLoading
             string name,
             MemberTypes type,
             BindingFlags bindingAttr
-        ) {
+        )
+        {
             if (name == null)
                 throw new ArgumentNullException(nameof(name));
             return GetMemberImpl(name, type, bindingAttr);
@@ -31,7 +32,8 @@ namespace System.Reflection.TypeLoading
             string? optionalNameOrPrefix,
             MemberTypes type,
             BindingFlags bindingAttr
-        ) {
+        )
+        {
             bool prefixSearch =
                 optionalNameOrPrefix != null
                 && optionalNameOrPrefix.EndsWith("*", StringComparison.Ordinal);

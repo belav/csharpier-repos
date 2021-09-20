@@ -46,7 +46,8 @@ namespace System.Reflection.Metadata
         public MethodSignature<TType> DecodeSignature<TType, TGenericContext>(
             ISignatureTypeProvider<TType, TGenericContext> provider,
             TGenericContext genericContext
-        ) {
+        )
+        {
             var decoder = new SignatureDecoder<TType, TGenericContext>(
                 provider,
                 _reader,

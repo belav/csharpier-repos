@@ -31,7 +31,8 @@ namespace Microsoft.Extensions.DependencyModel
             IEnumerable<string> nonEntryPointDepsPaths,
             IFileSystem fileSystem,
             Func<IDependencyContextReader> jsonReaderFactory
-        ) {
+        )
+        {
             _entryPointDepsLocation = entryPointDepsLocation;
             _nonEntryPointDepsPaths = nonEntryPointDepsPaths;
             _fileSystem = fileSystem;
@@ -106,13 +107,15 @@ namespace Microsoft.Extensions.DependencyModel
         private DependencyContext LoadAssemblyContext(
             Assembly assembly,
             IDependencyContextReader reader
-        ) {
+        )
+        {
             using (
                 Stream stream = GetResourceStream(
                     assembly,
                     assembly.GetName().Name + DepsJsonExtension
                 )
-            ) {
+            )
+            {
                 if (stream != null)
                 {
                     return reader.Read(stream);
@@ -164,7 +167,8 @@ namespace Microsoft.Extensions.DependencyModel
             if (
                 Uri.TryCreate(assembly.CodeBase, UriKind.Absolute, out Uri codeBase)
                 && codeBase.IsFile
-            ) {
+            )
+            {
                 return codeBase.LocalPath;
             }
             else

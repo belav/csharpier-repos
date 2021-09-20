@@ -105,7 +105,8 @@ namespace System.Net.Sockets.Tests
                     SocketType.Stream,
                     ProtocolType.Tcp
                 )
-            ) {
+            )
+            {
                 socket.Bind(new IPEndPoint(IPAddress.Loopback, 0));
                 Assert.Throws<InvalidOperationException>(
                     () =>
@@ -217,7 +218,8 @@ namespace System.Net.Sockets.Tests
                     SocketType.Stream,
                     ProtocolType.Tcp
                 )
-            ) {
+            )
+            {
                 socket.Bind(new IPEndPoint(IPAddress.Loopback, 0));
                 socket.Listen(1);
                 Assert.Throws<InvalidOperationException>(
@@ -310,7 +312,8 @@ namespace System.Net.Sockets.Tests
                     SocketType.Stream,
                     ProtocolType.Tcp
                 )
-            ) {
+            )
+            {
                 socket.Bind(new IPEndPoint(IPAddress.Loopback, 0));
                 Assert.Throws<InvalidOperationException>(() => socket.Accept());
             }
@@ -637,7 +640,8 @@ namespace System.Net.Sockets.Tests
                     SocketType.Stream,
                     ProtocolType.Tcp
                 )
-            ) {
+            )
+            {
                 socket.Bind(new IPEndPoint(IPAddress.Loopback, 0));
                 Assert.Throws<InvalidOperationException>(() => socket.AcceptAsync(s_eventArgs));
             }
@@ -682,7 +686,8 @@ namespace System.Net.Sockets.Tests
                     SocketType.Stream,
                     ProtocolType.Tcp
                 )
-            ) {
+            )
+            {
                 socket.Bind(new IPEndPoint(IPAddress.Loopback, 0));
                 socket.Listen(1);
                 Assert.Throws<InvalidOperationException>(() => socket.ConnectAsync(eventArgs));
@@ -782,7 +787,8 @@ namespace System.Net.Sockets.Tests
                     SocketType.Stream,
                     ProtocolType.Tcp
                 )
-            ) {
+            )
+            {
                 if (useSafeHandle)
                 {
                     _ = s.SafeHandle;
@@ -806,7 +812,8 @@ namespace System.Net.Sockets.Tests
                     SocketType.Stream,
                     ProtocolType.Tcp
                 )
-            ) {
+            )
+            {
                 host.Bind(new IPEndPoint(IPAddress.Loopback, 0));
                 host.Listen(1);
                 Task accept = host.AcceptAsync();
@@ -817,7 +824,8 @@ namespace System.Net.Sockets.Tests
                         SocketType.Stream,
                         ProtocolType.Tcp
                     )
-                ) {
+                )
+                {
                     s.Connect(
                         new DnsEndPoint(
                             IPAddress.Loopback.ToString(),
@@ -842,7 +850,8 @@ namespace System.Net.Sockets.Tests
                     SocketType.Stream,
                     ProtocolType.Tcp
                 )
-            ) {
+            )
+            {
                 if (useSafeHandle)
                 {
                     _ = s.SafeHandle;
@@ -864,7 +873,8 @@ namespace System.Net.Sockets.Tests
                     SocketType.Stream,
                     ProtocolType.Tcp
                 )
-            ) {
+            )
+            {
                 host.Bind(new IPEndPoint(IPAddress.Loopback, 0));
                 host.Listen(1);
                 Task accept = host.AcceptAsync();
@@ -875,7 +885,8 @@ namespace System.Net.Sockets.Tests
                         SocketType.Stream,
                         ProtocolType.Tcp
                     )
-                ) {
+                )
+                {
                     s.Connect(IPAddress.Loopback.ToString(), ((IPEndPoint)host.LocalEndPoint).Port);
                 }
 
@@ -892,7 +903,8 @@ namespace System.Net.Sockets.Tests
                     SocketType.Stream,
                     ProtocolType.Tcp
                 )
-            ) {
+            )
+            {
                 host.Bind(new IPEndPoint(IPAddress.IPv6Loopback, 0));
                 host.Listen(1);
                 Task accept = host.AcceptAsync();
@@ -903,7 +915,8 @@ namespace System.Net.Sockets.Tests
                         SocketType.Stream,
                         ProtocolType.Tcp
                     )
-                ) {
+                )
+                {
                     s.Connect(
                         IPAddress.IPv6Loopback.ToString(),
                         ((IPEndPoint)host.LocalEndPoint).Port
@@ -926,7 +939,8 @@ namespace System.Net.Sockets.Tests
                     SocketType.Stream,
                     ProtocolType.Tcp
                 )
-            ) {
+            )
+            {
                 if (useSafeHandle)
                 {
                     _ = s.SafeHandle;
@@ -953,7 +967,8 @@ namespace System.Net.Sockets.Tests
                     SocketType.Stream,
                     ProtocolType.Tcp
                 )
-            ) {
+            )
+            {
                 if (useSafeHandle)
                 {
                     _ = s.SafeHandle;
@@ -980,7 +995,8 @@ namespace System.Net.Sockets.Tests
                     SocketType.Stream,
                     ProtocolType.Tcp
                 )
-            ) {
+            )
+            {
                 host.Bind(new IPEndPoint(IPAddress.Loopback, 0));
                 host.Listen(1);
 
@@ -990,7 +1006,8 @@ namespace System.Net.Sockets.Tests
                         SocketType.Stream,
                         ProtocolType.Tcp
                     )
-                ) {
+                )
+                {
                     await Task.WhenAll(
                         host.AcceptAsync(),
                         s.ConnectAsync(
@@ -1016,7 +1033,8 @@ namespace System.Net.Sockets.Tests
                     SocketType.Stream,
                     ProtocolType.Tcp
                 )
-            ) {
+            )
+            {
                 if (useSafeHandle)
                 {
                     _ = s.SafeHandle;
@@ -1043,7 +1061,8 @@ namespace System.Net.Sockets.Tests
                     SocketType.Stream,
                     ProtocolType.Tcp
                 )
-            ) {
+            )
+            {
                 host.Bind(new IPEndPoint(IPAddress.Loopback, 0));
                 host.Listen(1);
 
@@ -1053,7 +1072,8 @@ namespace System.Net.Sockets.Tests
                         SocketType.Stream,
                         ProtocolType.Tcp
                     )
-                ) {
+                )
+                {
                     await Task.WhenAll(
                         host.AcceptAsync(),
                         s.ConnectAsync(
@@ -1074,7 +1094,8 @@ namespace System.Net.Sockets.Tests
                     SocketType.Stream,
                     ProtocolType.Tcp
                 )
-            ) {
+            )
+            {
                 host.Bind(new IPEndPoint(IPAddress.IPv6Loopback, 0));
                 host.Listen(1);
 
@@ -1084,7 +1105,8 @@ namespace System.Net.Sockets.Tests
                         SocketType.Stream,
                         ProtocolType.Tcp
                     )
-                ) {
+                )
+                {
                     await Task.WhenAll(
                         host.AcceptAsync(),
                         s.ConnectAsync(
@@ -1108,7 +1130,8 @@ namespace System.Net.Sockets.Tests
                     SocketType.Stream,
                     ProtocolType.Tcp
                 )
-            ) {
+            )
+            {
                 switch (invalidatingAction)
                 {
                     case 0:
@@ -1146,7 +1169,8 @@ namespace System.Net.Sockets.Tests
                     SocketType.Stream,
                     ProtocolType.Tcp
                 )
-            ) {
+            )
+            {
                 switch (invalidatingAction)
                 {
                     case 0:
@@ -1207,7 +1231,8 @@ namespace System.Net.Sockets.Tests
                     SocketType.Stream,
                     ProtocolType.Tcp
                 )
-            ) {
+            )
+            {
                 socket.Bind(new IPEndPoint(IPAddress.Loopback, 0));
 
                 Assert.Throws<InvalidOperationException>(
@@ -1251,7 +1276,8 @@ namespace System.Net.Sockets.Tests
                     SocketType.Stream,
                     ProtocolType.Tcp
                 )
-            ) {
+            )
+            {
                 socket.Bind(new IPEndPoint(IPAddress.Loopback, 0));
                 socket.Listen(1);
                 Assert.Throws<InvalidOperationException>(
@@ -1280,7 +1306,8 @@ namespace System.Net.Sockets.Tests
 
             using (
                 var s = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp)
-            ) {
+            )
+            {
                 Assert.Throws<NotSupportedException>(
                     () =>
                         s.BeginConnect(
@@ -1293,7 +1320,8 @@ namespace System.Net.Sockets.Tests
 
             using (
                 var s = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp)
-            ) {
+            )
+            {
                 Assert.Throws<NotSupportedException>(
                     () =>
                     {
@@ -1344,7 +1372,8 @@ namespace System.Net.Sockets.Tests
                     SocketType.Stream,
                     ProtocolType.Tcp
                 )
-            ) {
+            )
+            {
                 socket.Bind(new IPEndPoint(IPAddress.Loopback, 0));
                 socket.Listen(1);
                 Assert.Throws<InvalidOperationException>(
@@ -1466,7 +1495,8 @@ namespace System.Net.Sockets.Tests
                     SocketType.Stream,
                     ProtocolType.Tcp
                 )
-            ) {
+            )
+            {
                 socket.Bind(new IPEndPoint(IPAddress.Loopback, 0));
                 socket.Listen(1);
                 Assert.Throws<InvalidOperationException>(
@@ -1485,7 +1515,8 @@ namespace System.Net.Sockets.Tests
                     SocketType.Stream,
                     ProtocolType.Tcp
                 )
-            ) {
+            )
+            {
                 socket.Bind(new IPEndPoint(IPAddress.Loopback, 0));
                 socket.Listen(1);
                 await Assert.ThrowsAsync<InvalidOperationException>(

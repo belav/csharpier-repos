@@ -58,7 +58,8 @@ namespace System.CodeDom.Tests
             CodeExpression targetObject,
             string methodName,
             CodeTypeReference[] typeArguments
-        ) {
+        )
+        {
             var methodReference = new CodeMethodReferenceExpression(
                 targetObject,
                 methodName,

@@ -35,7 +35,8 @@ namespace Microsoft.CodeAnalysis
                 Diagnostic originalDiagnostic,
                 string suppressionId,
                 LocalizableString suppressionJustification
-            ) {
+            )
+            {
                 Debug.Assert(originalDiagnostic != null);
                 Debug.Assert(originalDiagnostic.ProgrammaticSuppressionInfo != null);
                 Debug.Assert(!string.IsNullOrEmpty(suppressionId));

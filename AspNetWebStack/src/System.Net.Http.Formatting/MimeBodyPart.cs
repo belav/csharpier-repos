@@ -34,7 +34,8 @@ namespace System.Net.Http
             MultipartStreamProvider streamProvider,
             int maxBodyPartHeaderSize,
             HttpContent parentContent
-        ) {
+        )
+        {
             Contract.Assert(streamProvider != null);
             Contract.Assert(parentContent != null);
             _streamProvider = streamProvider;
@@ -105,7 +106,8 @@ namespace System.Net.Http
         public async Task WriteSegment(
             ArraySegment<byte> segment,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var stream = GetOutputStream();
             await stream.WriteAsync(
                 segment.Array,

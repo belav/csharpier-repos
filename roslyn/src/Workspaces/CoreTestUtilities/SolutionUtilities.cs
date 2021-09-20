@@ -15,7 +15,8 @@ namespace Microsoft.CodeAnalysis.UnitTests
         public static ProjectChanges GetSingleChangedProjectChanges(
             Solution oldSolution,
             Solution newSolution
-        ) {
+        )
+        {
             var solutionDifferences = newSolution.GetChanges(oldSolution);
             var projectChanges = solutionDifferences.GetProjectChanges();
 
@@ -33,7 +34,8 @@ namespace Microsoft.CodeAnalysis.UnitTests
         private static IEnumerable<ProjectChanges> GetChangedProjectChanges(
             Solution oldSolution,
             Solution newSolution
-        ) {
+        )
+        {
             var solutionDifferences = newSolution.GetChanges(oldSolution);
             return solutionDifferences.GetProjectChanges()
                 .Select(n => n.NewProject.GetChanges(n.OldProject));
@@ -50,7 +52,8 @@ namespace Microsoft.CodeAnalysis.UnitTests
         public static TextDocument GetSingleChangedAdditionalDocument(
             Solution oldSolution,
             Solution newSolution
-        ) {
+        )
+        {
             var projectDifferences = GetSingleChangedProjectChanges(oldSolution, newSolution);
             var documentId = projectDifferences.GetChangedAdditionalDocuments().Single();
 
@@ -60,7 +63,8 @@ namespace Microsoft.CodeAnalysis.UnitTests
         public static IEnumerable<DocumentId> GetChangedDocuments(
             Solution oldSolution,
             Solution newSolution
-        ) {
+        )
+        {
             var changedDocuments = new List<DocumentId>();
             var projectsDifference = GetChangedProjectChanges(oldSolution, newSolution);
             foreach (var projectDifference in projectsDifference)
@@ -82,7 +86,8 @@ namespace Microsoft.CodeAnalysis.UnitTests
         public static IEnumerable<DocumentId> GetTextChangedDocuments(
             Solution oldSolution,
             Solution newSolution
-        ) {
+        )
+        {
             var changedDocuments = new List<DocumentId>();
             var projectsDifference = GetChangedProjectChanges(oldSolution, newSolution);
             foreach (var projectDifference in projectsDifference)
@@ -98,7 +103,8 @@ namespace Microsoft.CodeAnalysis.UnitTests
         public static IEnumerable<DocumentId> GetAddedDocuments(
             Solution oldSolution,
             Solution newSolution
-        ) {
+        )
+        {
             var addedDocuments = new List<DocumentId>();
             var projectsDifference = GetChangedProjectChanges(oldSolution, newSolution);
             foreach (var projectDifference in projectsDifference)
@@ -112,7 +118,8 @@ namespace Microsoft.CodeAnalysis.UnitTests
         public static Tuple<Project, ProjectReference> GetSingleAddedProjectReference(
             Solution oldSolution,
             Solution newSolution
-        ) {
+        )
+        {
             var projectChanges = GetSingleChangedProjectChanges(oldSolution, newSolution);
             return Tuple.Create(
                 projectChanges.NewProject,

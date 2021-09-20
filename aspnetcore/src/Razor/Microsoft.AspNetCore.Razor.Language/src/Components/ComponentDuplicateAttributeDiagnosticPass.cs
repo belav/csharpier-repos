@@ -18,7 +18,8 @@ namespace Microsoft.AspNetCore.Razor.Language.Components
         protected override void ExecuteCore(
             RazorCodeDocument codeDocument,
             DocumentIntermediateNode documentNode
-        ) {
+        )
+        {
             var visitor = new Visitor();
             visitor.Visit(documentNode);
         }
@@ -37,7 +38,8 @@ namespace Microsoft.AspNetCore.Razor.Language.Components
                     if (
                         node.Children[i] is HtmlAttributeIntermediateNode attribute
                         && attribute.AttributeName != null
-                    ) {
+                    )
+                    {
                         if (_attributes.TryGetValue(attribute.AttributeName, out var other))
                         {
                             // As a special case we want to point it out explicitly where a directive or other construct
@@ -93,7 +95,8 @@ namespace Microsoft.AspNetCore.Razor.Language.Components
                     if (
                         node.Children[i] is ComponentAttributeIntermediateNode attribute
                         && attribute.AttributeName != null
-                    ) {
+                    )
+                    {
                         if (_attributes.TryGetValue(attribute.AttributeName, out var other))
                         {
                             // As a special case we want to point it out explicitly where a directive or other construct

@@ -31,7 +31,8 @@ namespace Microsoft.AspNetCore.JsonPatch.Adapters
             IContractResolver contractResolver,
             Action<JsonPatchError> logErrorAction,
             IAdapterFactory adapterFactory
-        ) {
+        )
+        {
             ContractResolver =
                 contractResolver ?? throw new ArgumentNullException(nameof(contractResolver));
             LogErrorAction = logErrorAction;
@@ -109,7 +110,8 @@ namespace Microsoft.AspNetCore.JsonPatch.Adapters
                     value,
                     out errorMessage
                 )
-            ) {
+            )
+            {
                 var error = CreateOperationFailedError(
                     objectToApplyTo,
                     path,
@@ -191,7 +193,8 @@ namespace Microsoft.AspNetCore.JsonPatch.Adapters
                     ContractResolver,
                     out errorMessage
                 )
-            ) {
+            )
+            {
                 var error = CreateOperationFailedError(
                     objectToApplyTo,
                     path,
@@ -239,7 +242,8 @@ namespace Microsoft.AspNetCore.JsonPatch.Adapters
                     operation.value,
                     out errorMessage
                 )
-            ) {
+            )
+            {
                 var error = CreateOperationFailedError(
                     objectToApplyTo,
                     operation.path,
@@ -325,7 +329,8 @@ namespace Microsoft.AspNetCore.JsonPatch.Adapters
                     operation.value,
                     out errorMessage
                 )
-            ) {
+            )
+            {
                 var error = CreateOperationFailedError(
                     objectToApplyTo,
                     operation.path,
@@ -342,7 +347,8 @@ namespace Microsoft.AspNetCore.JsonPatch.Adapters
             object objectToGetValueFrom,
             Operation operation,
             out object propertyValue
-        ) {
+        )
+        {
             if (fromLocation == null)
             {
                 throw new ArgumentNullException(nameof(fromLocation));
@@ -384,7 +390,8 @@ namespace Microsoft.AspNetCore.JsonPatch.Adapters
                     out propertyValue,
                     out errorMessage
                 )
-            ) {
+            )
+            {
                 var error = CreateOperationFailedError(
                     objectToGetValueFrom,
                     fromLocation,
@@ -408,7 +415,8 @@ namespace Microsoft.AspNetCore.JsonPatch.Adapters
             string path,
             Operation operation,
             string errorMessage
-        ) {
+        )
+        {
             return new JsonPatchError(
                 target,
                 operation,
@@ -421,7 +429,8 @@ namespace Microsoft.AspNetCore.JsonPatch.Adapters
             string path,
             Operation operation,
             string errorMessage
-        ) {
+        )
+        {
             return new JsonPatchError(
                 target,
                 operation,

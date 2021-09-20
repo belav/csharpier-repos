@@ -54,7 +54,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.PullMemberUp.Ma
             ImmutableArray<PullMemberUpSymbolViewModel> members,
             BaseTypeTreeNodeViewModel destinationTreeViewModel,
             ImmutableDictionary<ISymbol, Task<ImmutableArray<ISymbol>>> dependentsMap
-        ) {
+        )
+        {
             _waitIndicator = waitIndicator;
             _symbolToDependentsMap = dependentsMap;
 

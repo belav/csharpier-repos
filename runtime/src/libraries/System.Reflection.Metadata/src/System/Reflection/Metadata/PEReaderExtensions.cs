@@ -24,7 +24,8 @@ namespace System.Reflection.Metadata
         public static MethodBodyBlock GetMethodBody(
             this PEReader peReader,
             int relativeVirtualAddress
-        ) {
+        )
+        {
             if (peReader == null)
             {
                 throw new ArgumentNullException(nameof(peReader));
@@ -72,7 +73,8 @@ namespace System.Reflection.Metadata
         public static MetadataReader GetMetadataReader(
             this PEReader peReader,
             MetadataReaderOptions options
-        ) {
+        )
+        {
             return GetMetadataReader(peReader, options, null);
         }
 
@@ -90,7 +92,8 @@ namespace System.Reflection.Metadata
             this PEReader peReader,
             MetadataReaderOptions options,
             MetadataStringDecoder? utf8Decoder
-        ) {
+        )
+        {
             if (peReader == null)
             {
                 throw new ArgumentNullException(nameof(peReader));

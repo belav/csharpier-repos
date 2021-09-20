@@ -27,7 +27,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             TypeSymbol source,
             TypeSymbol target,
             ref CompoundUseSiteInfo<AssemblySymbol> useSiteInfo
-        ) {
+        )
+        {
             Debug.Assert(sourceExpression != null || (object)source != null);
             Debug.Assert((object)target != null);
 
@@ -134,7 +135,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             TypeSymbol t,
             ArrayBuilder<NamedTypeSymbol> d,
             ref CompoundUseSiteInfo<AssemblySymbol> useSiteInfo
-        ) {
+        )
+        {
             // Spec 6.4.4: User-defined implicit conversions
             //   Find the set of types D from which user-defined conversion operators
             //   will be considered. This set consists of S0 (if S0 is a class or struct),
@@ -178,7 +180,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             ArrayBuilder<UserDefinedConversionAnalysis> u,
             ref CompoundUseSiteInfo<AssemblySymbol> useSiteInfo,
             bool allowAnyTarget = false
-        ) {
+        )
+        {
             Debug.Assert(sourceExpression != null || (object)source != null);
             Debug.Assert(((object)target != null) == !allowAnyTarget);
             Debug.Assert(d != null);
@@ -273,7 +276,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             if (
                 (object)source != null && source.IsInterfaceType()
                 || (object)target != null && target.IsInterfaceType()
-            ) {
+            )
+            {
                 return;
             }
 
@@ -283,7 +287,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                     MethodSymbol op in declaringType.GetOperators(
                         WellKnownMemberNames.ImplicitConversionName
                     )
-                ) {
+                )
+                {
                     // We might have a bad operator and be in an error recovery situation. Ignore it.
                     if (op.ReturnsVoid || op.ParameterCount != 1)
                     {
@@ -318,7 +323,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                             (object)target != null
                             && target.IsNullableType()
                             && convertsTo.IsNonNullableValueType()
-                        ) {
+                        )
+                        {
                             convertsTo = MakeNullableType(convertsTo);
                             toConversion = allowAnyTarget
                                 ? Conversion.Identity
@@ -345,7 +351,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                         && source.IsNullableType()
                         && convertsFrom.IsNonNullableValueType()
                         && (allowAnyTarget || target.CanBeAssignedNull())
-                    ) {
+                    )
+                    {
                         // As mentioned above, here we diverge from the specification, in two ways.
                         // First, we only check for the lifted form if the normal form was inapplicable.
                         // Second, we are supposed to apply lifting semantics only if the conversion
@@ -400,7 +407,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             ImmutableArray<UserDefinedConversionAnalysis> u,
             TypeSymbol source,
             ref CompoundUseSiteInfo<AssemblySymbol> useSiteInfo
-        ) {
+        )
+        {
             // SPEC: If any of the operators in U convert from S then SX is S.
             if ((object)source != null)
             {
@@ -413,7 +421,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                                 TypeCompareKind.ConsiderEverything2
                             )
                     )
-                ) {
+                )
+                {
                     return source;
                 }
             }
@@ -427,7 +436,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             ImmutableArray<UserDefinedConversionAnalysis> u,
             TypeSymbol target,
             ref CompoundUseSiteInfo<AssemblySymbol> useSiteInfo
-        ) {
+        )
+        {
             // SPEC: If any of the operators in U convert to T then TX is T.
             // SPEC: Otherwise, TX is the most encompassing type in the set of
             // SPEC: target types of the operators in U.
@@ -454,7 +464,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                     conv =>
                         TypeSymbol.Equals(conv.ToType, target, TypeCompareKind.ConsiderEverything2)
                 )
-            ) {
+            )
+            {
                 return target;
             }
 
@@ -470,7 +481,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                     conv.Operator.GetParameterType(0),
                     TypeCompareKind.ConsiderEverything2
                 )
-            ) {
+            )
+            {
                 count += 1;
             }
 
@@ -480,7 +492,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                     conv.Operator.ReturnType,
                     TypeCompareKind.ConsiderEverything2
                 )
-            ) {
+            )
+            {
                 count += 1;
             }
 
@@ -491,7 +504,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             TypeSymbol sx,
             TypeSymbol tx,
             ImmutableArray<UserDefinedConversionAnalysis> u
-        ) {
+        )
+        {
             return MostSpecificConversionOperator(
                 conv =>
                     TypeSymbol.Equals(conv.FromType, sx, TypeCompareKind.ConsiderEverything2)
@@ -506,7 +520,8 @@ namespace Microsoft.CodeAnalysis.CSharp
         private static int? MostSpecificConversionOperator(
             Func<UserDefinedConversionAnalysis, bool> constraint,
             ImmutableArray<UserDefinedConversionAnalysis> u
-        ) {
+        )
+        {
             // SPEC: If U contains exactly one user-defined conversion operator from SX to TX
             // SPEC: then that is the most-specific conversion operator;
             //
@@ -649,7 +664,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             TypeSymbol a,
             TypeSymbol b,
             ref CompoundUseSiteInfo<AssemblySymbol> useSiteInfo
-        ) {
+        )
+        {
             Debug.Assert((object)a != null);
             Debug.Assert((object)b != null);
 
@@ -665,7 +681,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             TypeSymbol a,
             TypeSymbol b,
             ref CompoundUseSiteInfo<AssemblySymbol> useSiteInfo
-        ) {
+        )
+        {
             Debug.Assert(aExpr != null || (object)a != null);
             Debug.Assert((object)b != null);
 
@@ -749,7 +766,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             ImmutableArray<T> items,
             Func<T, TypeSymbol> extract,
             ref CompoundUseSiteInfo<AssemblySymbol> useSiteInfo
-        ) {
+        )
+        {
             return MostEncompassedType<T>(items, x => true, extract, ref useSiteInfo);
         }
 
@@ -758,7 +776,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             Func<T, bool> valid,
             Func<T, TypeSymbol> extract,
             ref CompoundUseSiteInfo<AssemblySymbol> useSiteInfo
-        ) {
+        )
+        {
             // SPEC: The most encompassed type is the one type in the set that
             // SPEC: is encompassed by all the other types.
 
@@ -824,7 +843,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             ImmutableArray<T> items,
             Func<T, TypeSymbol> extract,
             ref CompoundUseSiteInfo<AssemblySymbol> useSiteInfo
-        ) {
+        )
+        {
             return MostEncompassingType<T>(items, x => true, extract, ref useSiteInfo);
         }
 
@@ -833,7 +853,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             Func<T, bool> valid,
             Func<T, TypeSymbol> extract,
             ref CompoundUseSiteInfo<AssemblySymbol> useSiteInfo
-        ) {
+        )
+        {
             // See comments above.
             CompoundUseSiteInfo<AssemblySymbol> inLambdaUseSiteInfo = useSiteInfo;
             int? best = UniqueBestValidIndex(
@@ -890,7 +911,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             ImmutableArray<T> items,
             Func<T, bool> valid,
             Func<T, T, BetterResult> better
-        ) {
+        )
+        {
             if (items.IsEmpty)
             {
                 return null;
@@ -982,7 +1004,8 @@ namespace Microsoft.CodeAnalysis.CSharp
         protected UserDefinedConversionResult AnalyzeImplicitUserDefinedConversionForV6SwitchGoverningType(
             TypeSymbol source,
             ref CompoundUseSiteInfo<AssemblySymbol> useSiteInfo
-        ) {
+        )
+        {
             // SPEC:    The governing type of a switch statement is established by the switch expression.
             // SPEC:    1) If the type of the switch expression is sbyte, byte, short, ushort, int, uint,
             // SPEC:       long, ulong, bool, char, string, or an enum-type, or if it is the nullable type

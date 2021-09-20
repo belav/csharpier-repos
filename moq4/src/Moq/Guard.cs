@@ -34,7 +34,8 @@ namespace Moq
             Type interfaceType,
             Type type,
             string paramName = null
-        ) {
+        )
+        {
             Debug.Assert(interfaceType != null);
             Debug.Assert(interfaceType.IsInterface);
 
@@ -65,7 +66,8 @@ namespace Moq
         public static void IsAssignmentToPropertyOrIndexer(
             LambdaExpression expression,
             string paramName
-        ) {
+        )
+        {
             Debug.Assert(expression != null);
 
             switch (expression.Body.NodeType)
@@ -134,7 +136,8 @@ namespace Moq
             if (
                 ProxyFactory.Instance.IsMethodVisible(method, out string messageIfNotVisible)
                 == false
-            ) {
+            )
+            {
                 throw new ArgumentException(
                     string.Format(
                         CultureInfo.CurrentCulture,

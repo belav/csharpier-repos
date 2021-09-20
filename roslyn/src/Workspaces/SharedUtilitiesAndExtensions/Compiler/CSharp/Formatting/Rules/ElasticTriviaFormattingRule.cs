@@ -24,7 +24,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Formatting
             List<SuppressOperation> list,
             SyntaxNode node,
             in NextSuppressOperationAction nextOperation
-        ) {
+        )
+        {
             nextOperation.Invoke();
 
             if (!node.ContainsAnnotations)
@@ -40,14 +41,16 @@ namespace Microsoft.CodeAnalysis.CSharp.Formatting
         private static void AddPropertyDeclarationSuppressOperations(
             List<SuppressOperation> list,
             SyntaxNode node
-        ) {
+        )
+        {
             if (
                 node is BasePropertyDeclarationSyntax basePropertyDeclaration
                 && basePropertyDeclaration.AccessorList != null
                 && basePropertyDeclaration.AccessorList.Accessors.All(a => a.Body == null)
                 && basePropertyDeclaration.GetAnnotatedTrivia(SyntaxAnnotation.ElasticAnnotation)
                     .Any()
-            ) {
+            )
+            {
                 var (firstToken, lastToken) =
                     basePropertyDeclaration.GetFirstAndLastMemberDeclarationTokensAfterAttributes();
 
@@ -64,7 +67,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Formatting
         private static void AddInitializerSuppressOperations(
             List<SuppressOperation> list,
             SyntaxNode node
-        ) {
+        )
+        {
             var initializer = GetInitializerNode(node);
             var lastTokenOfType = GetLastTokenOfType(node);
             if (initializer != null && lastTokenOfType != null)
@@ -124,7 +128,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Formatting
             in SyntaxToken previousToken,
             in SyntaxToken currentToken,
             in NextGetAdjustNewLinesOperation nextOperation
-        ) {
+        )
+        {
             var operation = nextOperation.Invoke(in previousToken, in currentToken);
             if (operation == null)
             {
@@ -136,7 +141,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Formatting
                     )
                     && currentToken.IsKind(SyntaxKind.WhereKeyword)
                     && currentToken.Parent.IsKind(SyntaxKind.TypeParameterConstraintClause)
-                ) {
+                )
+                {
                     RoslynDebug.AssertNotNull(previousToken.Parent);
 
                     // Check if there is another TypeParameterConstraintClause before
@@ -144,7 +150,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Formatting
                         previousToken.Parent.Ancestors()
                             .OfType<TypeParameterConstraintClauseSyntax>()
                             .Any()
-                    ) {
+                    )
+                    {
                         return CreateAdjustNewLinesOperation(1, AdjustNewLinesOption.PreserveLines);
                     }
 
@@ -162,7 +169,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Formatting
                         && firstTokenAfterTypeConstraint.Parent.IsKind(
                             SyntaxKind.TypeParameterConstraintClause
                         )
-                    ) {
+                    )
+                    {
                         return CreateAdjustNewLinesOperation(1, AdjustNewLinesOption.PreserveLines);
                     }
                 }
@@ -202,7 +210,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Formatting
         private static AdjustNewLinesOperation? GetAdjustNewLinesOperationBetweenMembers(
             SyntaxToken previousToken,
             SyntaxToken currentToken
-        ) {
+        )
+        {
             if (!FormattingRangeHelper.InBetweenTwoMembers(previousToken, currentToken))
             {
                 return null;
@@ -242,7 +251,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Formatting
                 if (
                     previousMember.Kind() == SyntaxKind.FieldDeclaration
                     || previousMember.Kind() == SyntaxKind.EventFieldDeclaration
-                ) {
+                )
+                {
                     // Ensure that fields and events are each declared on a separate line.
                     return CreateAdjustNewLinesOperation(1, AdjustNewLinesOption.ForceLines);
                 }
@@ -255,7 +265,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Formatting
                     if (
                         previousProperty?.AccessorList?.Accessors.All(a => a.Body == null) == true
                         && nextProperty?.AccessorList?.Accessors.All(a => a.Body == null) == true
-                    ) {
+                    )
+                    {
                         return CreateAdjustNewLinesOperation(1, AdjustNewLinesOption.PreserveLines);
                     }
                 }
@@ -283,7 +294,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Formatting
             in SyntaxToken previousToken,
             in SyntaxToken currentToken,
             in NextGetAdjustSpacesOperation nextOperation
-        ) {
+        )
+        {
             var operation = nextOperation.Invoke(in previousToken, in currentToken);
             if (operation == null)
             {
@@ -309,7 +321,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Formatting
                     previousToken.IsKind(SyntaxKind.CloseBracketToken)
                     && previousToken.Parent is AttributeListSyntax
                     && !(currentToken.Parent is AttributeListSyntax)
-                ) {
+                )
+                {
                     return CreateAdjustSpacesOperation(1, AdjustSpacesOption.ForceSpaces);
                 }
 
@@ -369,11 +382,13 @@ namespace Microsoft.CodeAnalysis.CSharp.Formatting
                                     SyntaxKind.ModuleKeyword
                                 )
                             )
-                        ) {
+                        )
+                        {
                             if (
                                 !currentToken.IsKind(SyntaxKind.EndOfFileToken)
                                 && !(currentToken.Parent is AttributeListSyntax)
-                            ) {
+                            )
+                            {
                                 return 2;
                             }
                         }
@@ -381,7 +396,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Formatting
                         if (
                             previousToken.GetAncestor<ParameterSyntax>() == null
                             && previousToken.GetAncestor<TypeParameterSyntax>() == null
-                        ) {
+                        )
+                        {
                             return 1;
                         }
                     }
@@ -400,7 +416,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Formatting
                     if (
                         previousToken.Parent is LabeledStatementSyntax
                         || previousToken.Parent is SwitchLabelSyntax
-                    ) {
+                    )
+                    {
                         return 1;
                     }
                     break;
@@ -439,7 +456,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Formatting
                     currentToken.Kind() == SyntaxKind.GroupKeyword
                     && currentToken.Parent.IsKind(SyntaxKind.GroupClause)
                 )
-            ) {
+            )
+            {
                 return 1;
             }
 
@@ -463,7 +481,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Formatting
                                     == SyntaxFactory.Token(SyntaxKind.AssemblyKeyword)
                                 || parent.Target.Identifier
                                     == SyntaxFactory.Token(SyntaxKind.ModuleKeyword)
-                            ) {
+                            )
+                            {
                                 if (!(previousToken.Parent is AttributeListSyntax))
                                 {
                                     return 2;
@@ -498,13 +517,15 @@ namespace Microsoft.CodeAnalysis.CSharp.Formatting
                 nextToken.Kind() == SyntaxKind.CatchKeyword
                 || nextToken.Kind() == SyntaxKind.FinallyKeyword
                 || nextToken.Kind() == SyntaxKind.ElseKeyword
-            ) {
+            )
+            {
                 return 1;
             }
             else if (
                 nextToken.Kind() == SyntaxKind.WhileKeyword
                 && nextToken.Parent.IsKind(SyntaxKind.DoStatement)
-            ) {
+            )
+            {
                 return 1;
             }
             else if (nextToken.Kind() == SyntaxKind.EndOfFileToken)
@@ -520,7 +541,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Formatting
         private static int LineBreaksAfterSemicolon(
             SyntaxToken previousToken,
             SyntaxToken currentToken
-        ) {
+        )
+        {
             if (previousToken.Parent is ForStatementSyntax)
             {
                 return 0;

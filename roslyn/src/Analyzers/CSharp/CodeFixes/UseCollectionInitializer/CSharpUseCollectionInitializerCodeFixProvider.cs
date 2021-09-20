@@ -48,7 +48,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UseCollectionInitializer
             StatementSyntax statement,
             ObjectCreationExpressionSyntax objectCreation,
             ImmutableArray<ExpressionStatementSyntax> matches
-        ) {
+        )
+        {
             return statement.ReplaceNode(
                 objectCreation,
                 GetNewObjectCreation(objectCreation, matches)
@@ -58,7 +59,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UseCollectionInitializer
         private static ObjectCreationExpressionSyntax GetNewObjectCreation(
             ObjectCreationExpressionSyntax objectCreation,
             ImmutableArray<ExpressionStatementSyntax> matches
-        ) {
+        )
+        {
             return UseInitializerHelpers.GetNewObjectCreation(
                 objectCreation,
                 CreateExpressions(matches)
@@ -67,7 +69,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UseCollectionInitializer
 
         private static SeparatedSyntaxList<ExpressionSyntax> CreateExpressions(
             ImmutableArray<ExpressionStatementSyntax> matches
-        ) {
+        )
+        {
             var nodesAndTokens = new List<SyntaxNodeOrToken>();
             for (var i = 0; i < matches.Length; i++)
             {

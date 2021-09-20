@@ -29,16 +29,18 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.SplitStringLiteral
                 int tabSize,
                 IndentStyle indentStyle,
                 CancellationToken cancellationToken
-            ) : base(
-                document,
-                position,
-                root,
-                sourceText,
-                useTabs,
-                tabSize,
-                indentStyle,
-                cancellationToken
-            ) {
+            )
+                : base(
+                    document,
+                    position,
+                    root,
+                    sourceText,
+                    useTabs,
+                    tabSize,
+                    indentStyle,
+                    cancellationToken
+                )
+            {
                 _token = token;
             }
 

@@ -31,7 +31,8 @@ namespace Microsoft.AspNetCore.Http
             long offset,
             long? count,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var fileInfo = new FileInfo(filePath);
             if (offset < 0 || offset > fileInfo.Length)
             {

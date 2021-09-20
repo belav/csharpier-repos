@@ -15,7 +15,8 @@ namespace Microsoft.AspNetCore.Razor.Language
             bool suppressPrimaryMethodBody,
             bool suppressNullabilityEnforcement,
             bool omitMinimizedComponentAttributeValues
-        ) {
+        )
+        {
             IndentWithTabs = indentWithTabs;
             IndentSize = indentSize;
             DesignTime = designTime;

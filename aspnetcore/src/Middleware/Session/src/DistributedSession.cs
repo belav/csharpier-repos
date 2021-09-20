@@ -64,7 +64,8 @@ namespace Microsoft.AspNetCore.Session
             Func<bool> tryEstablishSession,
             ILoggerFactory loggerFactory,
             bool isNewSessionKey
-        ) {
+        )
+        {
             if (cache == null)
             {
                 throw new ArgumentNullException(nameof(cache));

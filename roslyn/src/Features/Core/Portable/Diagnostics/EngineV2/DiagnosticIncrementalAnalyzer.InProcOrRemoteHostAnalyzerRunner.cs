@@ -30,7 +30,8 @@ namespace Microsoft.CodeAnalysis.Diagnostics
         public InProcOrRemoteHostAnalyzerRunner(
             DiagnosticAnalyzerInfoCache analyzerInfoCache,
             IAsynchronousOperationListener? operationListener = null
-        ) {
+        )
+        {
             AnalyzerInfoCache = analyzerInfoCache;
             _asyncOperationListener =
                 operationListener ?? AsynchronousOperationListenerProvider.NullListener;
@@ -85,7 +86,8 @@ namespace Microsoft.CodeAnalysis.Diagnostics
             bool logPerformanceInfo,
             bool getTelemetryInfo,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var result = await AnalyzeCoreAsync().ConfigureAwait(false);
             Debug.Assert(getTelemetryInfo || result.TelemetryInfo.IsEmpty);
             return result;
@@ -139,7 +141,8 @@ namespace Microsoft.CodeAnalysis.Diagnostics
             bool logPerformanceInfo,
             bool getTelemetryInfo,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var version = await DiagnosticIncrementalAnalyzer.GetDiagnosticVersionAsync(
                     project,
                     cancellationToken
@@ -204,7 +207,8 @@ namespace Microsoft.CodeAnalysis.Diagnostics
             RemoteHostClient? client,
             AnalysisResult analysisResult,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             if (client == null)
             {
                 return;
@@ -250,7 +254,8 @@ namespace Microsoft.CodeAnalysis.Diagnostics
             bool logPerformanceInfo,
             bool getTelemetryInfo,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var solution = project.Solution;
 
             using var pooledObject = SharedPools.Default<Dictionary<string, DiagnosticAnalyzer>>()

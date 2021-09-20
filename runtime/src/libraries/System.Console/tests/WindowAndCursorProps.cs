@@ -293,7 +293,8 @@ public class WindowAndCursorProps
                         && !PlatformDetection.IsNetCore
                         && PlatformDetection.IsWindows10Version1703OrGreater
                         && !PlatformDetection.IsWindows10Version1709OrGreater
-                    ) {
+                    )
+                    {
                         // RS2 has a bug when getting the window title when the title length is longer than 513 character
                         Assert.Throws<IOException>(() => Console.Title);
                     }
@@ -368,7 +369,8 @@ public class WindowAndCursorProps
         if (
             !OperatingSystem.IsWindows()
             || (!Console.IsInputRedirected && !Console.IsOutputRedirected)
-        ) {
+        )
+        {
             // Nothing to verify; just run the code.
             Console.Clear();
         }
@@ -388,7 +390,8 @@ public class WindowAndCursorProps
         if (
             !OperatingSystem.IsWindows()
             || (!Console.IsInputRedirected && !Console.IsOutputRedirected)
-        ) {
+        )
+        {
             int origLeft = Console.CursorLeft;
             int origTop = Console.CursorTop;
 

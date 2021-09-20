@@ -32,7 +32,8 @@ namespace Microsoft.EntityFrameworkCore.TestUtilities
         public override Task<bool> OpenAsync(
             CancellationToken cancellationToken,
             bool errorsExpected = false
-        ) {
+        )
+        {
             PreOpen();
 
             return base.OpenAsync(cancellationToken, errorsExpected);

@@ -20,7 +20,8 @@ namespace System.Reflection.Emit
             Type localType,
             MethodInfo methodBuilder,
             bool isPinned
-        ) {
+        )
+        {
             m_isPinned = isPinned;
             m_localIndex = localIndex;
             m_localType = localType;

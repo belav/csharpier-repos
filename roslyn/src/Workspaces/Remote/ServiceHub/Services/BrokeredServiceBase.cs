@@ -54,7 +54,8 @@ namespace Microsoft.CodeAnalysis.Remote
         protected ValueTask<Solution> GetSolutionAsync(
             PinnedSolutionInfo solutionInfo,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var workspace = GetWorkspace();
             var assetProvider = workspace.CreateAssetProvider(
                 solutionInfo,
@@ -73,7 +74,8 @@ namespace Microsoft.CodeAnalysis.Remote
         protected ValueTask<T> RunServiceAsync<T>(
             Func<CancellationToken, ValueTask<T>> implementation,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             WorkspaceManager.SolutionAssetCache.UpdateLastActivityTime();
             return RunServiceImplAsync(implementation, cancellationToken);
         }
@@ -81,7 +83,8 @@ namespace Microsoft.CodeAnalysis.Remote
         internal static async ValueTask<T> RunServiceImplAsync<T>(
             Func<CancellationToken, ValueTask<T>> implementation,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             try
             {
                 return await implementation(cancellationToken).ConfigureAwait(false);
@@ -96,7 +99,8 @@ namespace Microsoft.CodeAnalysis.Remote
         protected ValueTask RunServiceAsync(
             Func<CancellationToken, ValueTask> implementation,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             WorkspaceManager.SolutionAssetCache.UpdateLastActivityTime();
             return RunServiceImplAsync(implementation, cancellationToken);
         }
@@ -104,7 +108,8 @@ namespace Microsoft.CodeAnalysis.Remote
         internal static async ValueTask RunServiceImplAsync(
             Func<CancellationToken, ValueTask> implementation,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             try
             {
                 await implementation(cancellationToken).ConfigureAwait(false);

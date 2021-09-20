@@ -12,7 +12,8 @@ namespace Microsoft.AspNetCore.Testing
             string preserveExistingLogsInOutput,
             string targetFramework,
             string baseDirectory = null
-        ) {
+        )
+        {
             TargetFramework = targetFramework;
             BaseDirectory = baseDirectory;
             PreserveExistingLogsInOutput = bool.Parse(preserveExistingLogsInOutput);

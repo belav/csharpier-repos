@@ -45,7 +45,8 @@ namespace Moq
             Moq.IInterceptor interceptor,
             Type[] interfaces,
             object[] arguments
-        ) {
+        )
+        {
             // All generated proxies need to implement `IProxy`:
             var additionalInterfaces = new Type[1 + interfaces.Length];
             additionalInterfaces[0] = typeof(IProxy);
@@ -250,7 +251,8 @@ namespace Moq
                         var implementedInterface in implementedInterfaces.Where(
                             i => declaringType.IsAssignableFrom(i)
                         )
-                    ) {
+                    )
+                    {
                         // Search for an implicit override:
                         var candidateMethod = implementedInterface.GetMethod(
                             declaration.Name,
@@ -331,7 +333,8 @@ namespace Moq
             MethodInfo method,
             object instance,
             object[] arguments
-        ) {
+        )
+        {
             // There are a couple of probable alternatives to the following implementation that
             // unfortunately don't work in practice:
             //

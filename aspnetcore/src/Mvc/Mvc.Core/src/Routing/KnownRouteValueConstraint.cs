@@ -28,7 +28,8 @@ namespace Microsoft.AspNetCore.Mvc.Routing
         /// <param name="actionDescriptorCollectionProvider">The <see cref="IActionDescriptorCollectionProvider"/>.</param>
         public KnownRouteValueConstraint(
             IActionDescriptorCollectionProvider actionDescriptorCollectionProvider
-        ) {
+        )
+        {
             if (actionDescriptorCollectionProvider == null)
             {
                 throw new ArgumentNullException(nameof(actionDescriptorCollectionProvider));
@@ -44,7 +45,8 @@ namespace Microsoft.AspNetCore.Mvc.Routing
             string routeKey,
             RouteValueDictionary values,
             RouteDirection routeDirection
-        ) {
+        )
+        {
             if (routeKey == null)
             {
                 throw new ArgumentNullException(nameof(routeKey));
@@ -110,7 +112,8 @@ namespace Microsoft.AspNetCore.Mvc.Routing
         private string[] GetAndCacheAllMatchingValues(
             string routeKey,
             ActionDescriptorCollection actionDescriptors
-        ) {
+        )
+        {
             var version = actionDescriptors.Version;
             var valuesCollection = _cachedValuesCollection;
 
@@ -124,7 +127,8 @@ namespace Microsoft.AspNetCore.Mvc.Routing
                     if (
                         action.RouteValues.TryGetValue(routeKey, out var value)
                         && !string.IsNullOrEmpty(value)
-                    ) {
+                    )
+                    {
                         values.Add(value);
                     }
                 }

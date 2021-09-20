@@ -68,7 +68,8 @@ namespace Microsoft.Extensions.Http
             ILoggerFactory loggerFactory,
             IOptionsMonitor<HttpClientFactoryOptions> optionsMonitor,
             IEnumerable<IHttpMessageHandlerBuilderFilter> filters
-        ) {
+        )
+        {
             if (services == null)
             {
                 throw new ArgumentNullException(nameof(services));
@@ -422,7 +423,8 @@ namespace Microsoft.Extensions.Http
                 TimeSpan duration,
                 int disposedCount,
                 int finalCount
-            ) {
+            )
+            {
                 _cleanupCycleEnd(
                     logger,
                     duration.TotalMilliseconds,
@@ -436,7 +438,8 @@ namespace Microsoft.Extensions.Http
                 ILogger logger,
                 string clientName,
                 Exception exception
-            ) {
+            )
+            {
                 _cleanupItemFailed(logger, clientName, exception);
             }
 

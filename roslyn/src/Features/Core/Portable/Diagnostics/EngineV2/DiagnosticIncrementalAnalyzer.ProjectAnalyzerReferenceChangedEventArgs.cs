@@ -25,7 +25,8 @@ namespace Microsoft.CodeAnalysis.Diagnostics.EngineV2
                 Project project,
                 ImmutableArray<StateSet> added,
                 ImmutableArray<StateSet> removed
-            ) {
+            )
+            {
                 Project = project;
                 Added = added;
                 Removed = removed;

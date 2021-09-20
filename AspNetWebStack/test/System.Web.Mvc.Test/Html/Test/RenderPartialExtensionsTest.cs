@@ -115,7 +115,8 @@ namespace System.Web.Mvc.Html.Test
                 object model,
                 TextWriter writer,
                 ViewEngineCollection viewEngineCollection
-            ) {
+            )
+            {
                 RenderPartialInternal_PartialViewName = partialViewName;
                 RenderPartialInternal_ViewData = viewData;
                 RenderPartialInternal_Model = model;

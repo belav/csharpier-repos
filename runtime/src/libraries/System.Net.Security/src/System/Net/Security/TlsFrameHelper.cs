@@ -275,7 +275,8 @@ namespace System.Net.Security
             ref TlsFrameInfo info,
             ProcessingOptions options = ProcessingOptions.All,
             HelloExtensionCallback? callback = null
-        ) {
+        )
+        {
             const int HandshakeTypeOffset = 5;
             if (frame.Length < HeaderSize)
             {
@@ -317,7 +318,8 @@ namespace System.Net.Security
                     info.HandshakeType == TlsHandshakeType.ClientHello
                     || info.HandshakeType == TlsHandshakeType.ServerHello
                 )
-            ) {
+            )
+            {
                 if (!TryParseHelloFrame(frame.Slice(HeaderSize), ref info, options, callback))
                 {
                     isComplete = false;
@@ -345,7 +347,8 @@ namespace System.Net.Security
             ReadOnlySpan<byte> frame,
             ref TlsAlertLevel level,
             ref TlsAlertDescription description
-        ) {
+        )
+        {
             if (frame.Length < 7 || frame[0] != (byte)TlsContentType.Alert)
             {
                 return false;
@@ -413,7 +416,8 @@ namespace System.Net.Security
             ref TlsFrameInfo info,
             ProcessingOptions options,
             HelloExtensionCallback? callback
-        ) {
+        )
+        {
             // https://tools.ietf.org/html/rfc6101#section-5.6
             // struct {
             //     HandshakeType msg_type;    /* handshake type */
@@ -437,7 +441,8 @@ namespace System.Net.Security
                     && (TlsHandshakeType)sslHandshake[HandshakeTypeOffset]
                         != TlsHandshakeType.ServerHello
                 )
-            ) {
+            )
+            {
                 return false;
             }
 
@@ -468,7 +473,8 @@ namespace System.Net.Security
             ref TlsFrameInfo info,
             ProcessingOptions options,
             HelloExtensionCallback? callback
-        ) {
+        )
+        {
             // Basic structure: https://tools.ietf.org/html/rfc6101#section-5.6.1.2
             // Extended structure: https://tools.ietf.org/html/rfc3546#section-2.1
             // struct {
@@ -513,7 +519,8 @@ namespace System.Net.Security
             ref TlsFrameInfo info,
             ProcessingOptions options,
             HelloExtensionCallback? callback
-        ) {
+        )
+        {
             // Basic structure: https://tools.ietf.org/html/rfc6101#section-5.6.1.3
             // Extended structure: https://tools.ietf.org/html/rfc3546#section-2.2
             // struct {
@@ -556,7 +563,8 @@ namespace System.Net.Security
             ref TlsFrameInfo info,
             ProcessingOptions options,
             HelloExtensionCallback? callback
-        ) {
+        )
+        {
             const int ExtensionHeader = 4;
             bool isComplete = true;
 
@@ -583,7 +591,8 @@ namespace System.Net.Security
                         options == ProcessingOptions.All
                         || (options & ProcessingOptions.ServerName) == ProcessingOptions.ServerName
                     )
-                ) {
+                )
+                {
                     if (!TryGetSniFromServerNameList(extensionData, out string? sni))
                     {
                         return false;
@@ -597,13 +606,15 @@ namespace System.Net.Security
                         options == ProcessingOptions.All
                         || (options & ProcessingOptions.Versions) == ProcessingOptions.Versions
                     )
-                ) {
+                )
+                {
                     if (
                         !TryGetSupportedVersionsFromExtension(
                             extensionData,
                             out SslProtocols versions
                         )
-                    ) {
+                    )
+                    {
                         return false;
                     }
 
@@ -616,13 +627,15 @@ namespace System.Net.Security
                         || (options & ProcessingOptions.ApplicationProtocol)
                             == ProcessingOptions.ApplicationProtocol
                     )
-                ) {
+                )
+                {
                     if (
                         !TryGetApplicationProtocolsFromExtension(
                             extensionData,
                             out ApplicationProtocolInfo alpn
                         )
-                    ) {
+                    )
+                    {
                         return false;
                     }
 
@@ -639,7 +652,8 @@ namespace System.Net.Security
         private static bool TryGetSniFromServerNameList(
             ReadOnlySpan<byte> serverNameListExtension,
             out string? sni
-        ) {
+        )
+        {
             // https://tools.ietf.org/html/rfc3546#section-3.1
             // struct {
             //     ServerName server_name_list<1..2^16-1>
@@ -702,7 +716,8 @@ namespace System.Net.Security
         private static string? GetSniFromHostNameStruct(
             ReadOnlySpan<byte> hostNameStruct,
             out bool invalid
-        ) {
+        )
+        {
             // https://tools.ietf.org/html/rfc3546#section-3.1
             // HostName is an opaque type (length of sufficient size for max data length is prepended)
             const int HostNameLengthOffset = 0;
@@ -723,7 +738,8 @@ namespace System.Net.Security
         private static bool TryGetSupportedVersionsFromExtension(
             ReadOnlySpan<byte> extensionData,
             out SslProtocols protocols
-        ) {
+        )
+        {
             // https://tools.ietf.org/html/rfc8446#section-4.2.1
             // struct {
             // select(Handshake.msg_type) {
@@ -766,7 +782,8 @@ namespace System.Net.Security
         private static bool TryGetApplicationProtocolsFromExtension(
             ReadOnlySpan<byte> extensionData,
             out ApplicationProtocolInfo alpn
-        ) {
+        )
+        {
             // https://tools.ietf.org/html/rfc7301#section-3.1
             // opaque ProtocolName<1..2 ^ 8 - 1 >;
             //
@@ -814,7 +831,8 @@ namespace System.Net.Security
                 else if (
                     protocolLength == SslApplicationProtocol.Http11.Protocol.Length
                     && protocol.SequenceEqual(SslApplicationProtocol.Http11.Protocol.Span)
-                ) {
+                )
+                {
                     alpn |= ApplicationProtocolInfo.Http11;
                 }
                 else
@@ -890,7 +908,8 @@ namespace System.Net.Security
         private static ReadOnlySpan<byte> SkipBytes(
             ReadOnlySpan<byte> bytes,
             int numberOfBytesToSkip
-        ) {
+        )
+        {
             return (numberOfBytesToSkip < bytes.Length)
               ? bytes.Slice(numberOfBytesToSkip)
               : ReadOnlySpan<byte>.Empty;

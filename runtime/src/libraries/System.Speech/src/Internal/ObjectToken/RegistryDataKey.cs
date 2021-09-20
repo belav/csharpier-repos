@@ -24,7 +24,8 @@ namespace System.Speech.Internal.ObjectTokens
             if (
                 (hresult != SAPIErrorCodes.S_OK)
                 && (hresult != SAPIErrorCodes.SPERR_ALREADY_INITIALIZED)
-            ) {
+            )
+            {
                 throw new InvalidOperationException();
             }
 
@@ -99,7 +100,8 @@ namespace System.Speech.Internal.ObjectTokens
             RegistryDataKey baseKey,
             string registryPath,
             bool createIfNotExist
-        ) {
+        )
+        {
             if (string.IsNullOrEmpty(registryPath) || null == baseKey)
             {
                 return null;
@@ -166,7 +168,8 @@ namespace System.Speech.Internal.ObjectTokens
             [MarshalAs(UnmanagedType.LPWStr)] string valueName,
             [MarshalAs(UnmanagedType.SysUInt)] uint cbData,
             [MarshalAs(UnmanagedType.LPArray, SizeParamIndex = 1)] byte[] data
-        ) {
+        )
+        {
             return _sapiRegKey.SetData(valueName, cbData, data);
         }
 
@@ -178,7 +181,8 @@ namespace System.Speech.Internal.ObjectTokens
             [MarshalAs(UnmanagedType.LPWStr)] string valueName,
             [MarshalAs(UnmanagedType.SysUInt)] ref uint pcbData,
             [MarshalAs(UnmanagedType.LPArray, SizeParamIndex = 1), Out] byte[] data
-        ) {
+        )
+        {
             return _sapiRegKey.GetData(valueName, ref pcbData, data);
         }
 
@@ -190,7 +194,8 @@ namespace System.Speech.Internal.ObjectTokens
         public int SetStringValue(
             [MarshalAs(UnmanagedType.LPWStr)] string valueName,
             [MarshalAs(UnmanagedType.LPWStr)] string value
-        ) {
+        )
+        {
             return _sapiRegKey.SetStringValue(valueName, value);
         }
 
@@ -202,7 +207,8 @@ namespace System.Speech.Internal.ObjectTokens
         public int GetStringValue(
             [MarshalAs(UnmanagedType.LPWStr)] string valueName,
             [MarshalAs(UnmanagedType.LPWStr)] out string value
-        ) {
+        )
+        {
             return _sapiRegKey.GetStringValue(valueName, out value);
         }
 
@@ -213,7 +219,8 @@ namespace System.Speech.Internal.ObjectTokens
         public int SetDWORD(
             [MarshalAs(UnmanagedType.LPWStr)] string valueName,
             [MarshalAs(UnmanagedType.SysUInt)] uint value
-        ) {
+        )
+        {
             return _sapiRegKey.SetDWORD(valueName, value);
         }
 
@@ -234,7 +241,8 @@ namespace System.Speech.Internal.ObjectTokens
         public int OpenKey(
             [MarshalAs(UnmanagedType.LPWStr)] string subKeyName,
             out ISpDataKey ppSubKey
-        ) {
+        )
+        {
             return _sapiRegKey.OpenKey(subKeyName, out ppSubKey);
         }
 
@@ -246,7 +254,8 @@ namespace System.Speech.Internal.ObjectTokens
         public int CreateKey(
             [MarshalAs(UnmanagedType.LPWStr)] string subKeyName,
             out ISpDataKey ppSubKey
-        ) {
+        )
+        {
             return _sapiRegKey.CreateKey(subKeyName, out ppSubKey);
         }
 

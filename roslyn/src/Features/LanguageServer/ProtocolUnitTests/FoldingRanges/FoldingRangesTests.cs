@@ -68,7 +68,8 @@ comment */|}";
 
         private static async Task<LSP.FoldingRange[]> RunGetFoldingRangeAsync(
             TestLspServer testLspServer
-        ) {
+        )
+        {
             var document = testLspServer.GetCurrentSolution().Projects.First().Documents.First();
             var request = new LSP.FoldingRangeParams()
             {

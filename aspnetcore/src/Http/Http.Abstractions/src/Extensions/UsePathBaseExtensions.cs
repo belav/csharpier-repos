@@ -21,7 +21,8 @@ namespace Microsoft.AspNetCore.Builder
         public static IApplicationBuilder UsePathBase(
             this IApplicationBuilder app,
             PathString pathBase
-        ) {
+        )
+        {
             if (app == null)
             {
                 throw new ArgumentNullException(nameof(app));

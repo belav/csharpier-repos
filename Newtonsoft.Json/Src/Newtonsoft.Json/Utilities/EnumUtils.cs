@@ -154,7 +154,8 @@ namespace Newtonsoft.Json.Utilities
             object value,
             bool camelCase,
             [NotNullWhen(true)] out string? name
-        ) {
+        )
+        {
             return TryToString(
                 enumType,
                 value,
@@ -168,7 +169,8 @@ namespace Newtonsoft.Json.Utilities
             object value,
             NamingStrategy? namingStrategy,
             [NotNullWhen(true)] out string? name
-        ) {
+        )
+        {
             EnumInfo enumInfo = ValuesAndNamesPerEnum.Get(
                 new StructMultiKey<Type, NamingStrategy?>(enumType, namingStrategy)
             );
@@ -301,7 +303,8 @@ namespace Newtonsoft.Json.Utilities
             NamingStrategy? namingStrategy,
             string value,
             bool disallowNumber
-        ) {
+        )
+        {
             ValidationUtils.ArgumentNotNull(enumType, nameof(enumType));
             ValidationUtils.ArgumentNotNull(value, nameof(value));
 
@@ -352,7 +355,8 @@ namespace Newtonsoft.Json.Utilities
                 char.IsDigit(firstNonWhitespaceChar)
                 || firstNonWhitespaceChar == '-'
                 || firstNonWhitespaceChar == '+'
-            ) {
+            )
+            {
                 Type underlyingType = Enum.GetUnderlyingType(enumType);
 
                 value = value.Trim();
@@ -407,7 +411,8 @@ namespace Newtonsoft.Json.Utilities
                 while (
                     endIndexNoWhitespace > valueIndex
                     && char.IsWhiteSpace(value[endIndexNoWhitespace - 1])
-                ) {
+                )
+                {
                     endIndexNoWhitespace--;
                 }
                 int valueSubstringLength = endIndexNoWhitespace - valueIndex;
@@ -476,7 +481,8 @@ namespace Newtonsoft.Json.Utilities
             int valueIndex,
             int valueSubstringLength,
             StringComparison comparison
-        ) {
+        )
+        {
             int? matchingIndex = FindIndexByName(
                 resolvedNames,
                 value,
@@ -504,7 +510,8 @@ namespace Newtonsoft.Json.Utilities
             int valueIndex,
             int valueSubstringLength,
             StringComparison comparison
-        ) {
+        )
+        {
             for (int i = 0; i < enumNames.Length; i++)
             {
                 if (
@@ -517,7 +524,8 @@ namespace Newtonsoft.Json.Utilities
                         valueSubstringLength,
                         comparison
                     ) == 0
-                ) {
+                )
+                {
                     return i;
                 }
             }

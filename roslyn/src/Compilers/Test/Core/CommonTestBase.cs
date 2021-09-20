@@ -49,7 +49,8 @@ namespace Microsoft.CodeAnalysis.Test.Utilities
             string[] args = null,
             EmitOptions emitOptions = null,
             Verification verify = Verification.Passes
-        ) {
+        )
+        {
             Assert.NotNull(compilation);
 
             Assert.True(
@@ -104,7 +105,8 @@ namespace Microsoft.CodeAnalysis.Test.Utilities
             Compilation compilation,
             Dictionary<string, byte[]> expectedBlobs,
             bool isField = true
-        ) {
+        )
+        {
             return CompileAndVerifyFieldMarshalCommon(
                 compilation,
                 (s, _omitted1) =>
@@ -123,7 +125,8 @@ namespace Microsoft.CodeAnalysis.Test.Utilities
             Compilation compilation,
             Func<string, PEAssembly, byte[]> getExpectedBlob,
             bool isField = true
-        ) {
+        )
+        {
             return CompileAndVerifyCommon(
                 compilation,
                 assemblyValidator: (assembly) =>
@@ -139,7 +142,8 @@ namespace Microsoft.CodeAnalysis.Test.Utilities
             CompilationVerifier verifier,
             Action<PEAssembly> assemblyValidator,
             Action<IModuleSymbol> symbolValidator
-        ) {
+        )
+        {
             Assert.True(assemblyValidator != null || symbolValidator != null);
 
             var emittedMetadata = verifier.GetMetadata();
@@ -179,7 +183,8 @@ namespace Microsoft.CodeAnalysis.Test.Utilities
             Action<IModuleSymbol> symbolValidator,
             EmitOptions emitOptions,
             Verification verify
-        ) {
+        )
+        {
             var verifier = new CompilationVerifier(compilation, VisualizeRealIL, dependencies);
 
             verifier.Emit(
@@ -219,7 +224,8 @@ namespace Microsoft.CodeAnalysis.Test.Utilities
             out ImmutableArray<byte> assemblyBytes,
             out ImmutableArray<byte> pdbBytes,
             bool autoInherit = true
-        ) {
+        )
+        {
             IlasmUtilities.IlasmTempAssembly(
                 ilSource,
                 appendDefaultHeader,
@@ -255,7 +261,8 @@ namespace Microsoft.CodeAnalysis.Test.Utilities
             bool prependDefaultHeader = true,
             bool embedInteropTypes = false,
             bool autoInherit = true
-        ) {
+        )
+        {
             EmitILToArray(
                 ilSource,
                 prependDefaultHeader,
@@ -271,7 +278,8 @@ namespace Microsoft.CodeAnalysis.Test.Utilities
         internal static MetadataReference GetILModuleReference(
             string ilSource,
             bool prependDefaultHeader = true
-        ) {
+        )
+        {
             EmitILToArray(
                 ilSource,
                 prependDefaultHeader,
@@ -292,7 +300,8 @@ namespace Microsoft.CodeAnalysis.Test.Utilities
             CSharp.CSharpCompilationOptions compilationOptions = null,
             string assemblyName = null,
             IEnumerable<MetadataReference> referencedAssemblies = null
-        ) {
+        )
+        {
             return CreateCSharpCompilation(
                 assemblyName,
                 code,
@@ -310,7 +319,8 @@ namespace Microsoft.CodeAnalysis.Test.Utilities
             CSharp.CSharpCompilationOptions compilationOptions = null,
             IEnumerable<MetadataReference> referencedAssemblies = null,
             IEnumerable<Compilation> referencedCompilations = null
-        ) {
+        )
+        {
             return CreateCSharpCompilation(
                 assemblyName,
                 code.Value,
@@ -327,7 +337,8 @@ namespace Microsoft.CodeAnalysis.Test.Utilities
             VisualBasic.VisualBasicCompilationOptions compilationOptions = null,
             string assemblyName = null,
             IEnumerable<MetadataReference> referencedAssemblies = null
-        ) {
+        )
+        {
             return CreateVisualBasicCompilation(
                 assemblyName,
                 code,
@@ -345,7 +356,8 @@ namespace Microsoft.CodeAnalysis.Test.Utilities
             VisualBasic.VisualBasicCompilationOptions compilationOptions = null,
             IEnumerable<MetadataReference> referencedAssemblies = null,
             IEnumerable<Compilation> referencedCompilations = null
-        ) {
+        )
+        {
             return CreateVisualBasicCompilation(
                 assemblyName,
                 code.Value,
@@ -362,7 +374,8 @@ namespace Microsoft.CodeAnalysis.Test.Utilities
             CSharp.CSharpCompilationOptions compilationOptions = null,
             string assemblyName = null,
             IEnumerable<MetadataReference> referencedAssemblies = null
-        ) {
+        )
+        {
             return CreateCSharpCompilation(
                 assemblyName,
                 code,
@@ -380,7 +393,8 @@ namespace Microsoft.CodeAnalysis.Test.Utilities
             CSharp.CSharpCompilationOptions compilationOptions = null,
             IEnumerable<MetadataReference> referencedAssemblies = null,
             IEnumerable<Compilation> referencedCompilations = null
-        ) {
+        )
+        {
             if (assemblyName == null)
             {
                 assemblyName = GetUniqueName();
@@ -434,7 +448,8 @@ namespace Microsoft.CodeAnalysis.Test.Utilities
             VisualBasic.VisualBasicCompilationOptions compilationOptions = null,
             string assemblyName = null,
             IEnumerable<MetadataReference> referencedAssemblies = null
-        ) {
+        )
+        {
             return CreateVisualBasicCompilation(
                 assemblyName,
                 code,
@@ -454,7 +469,8 @@ namespace Microsoft.CodeAnalysis.Test.Utilities
             IEnumerable<Compilation> referencedCompilations = null,
             Encoding encoding = null,
             string sourceFileName = null
-        ) {
+        )
+        {
             if (assemblyName == null)
             {
                 assemblyName = GetUniqueName();
@@ -508,7 +524,8 @@ namespace Microsoft.CodeAnalysis.Test.Utilities
         private void AddReferencedCompilations(
             IEnumerable<Compilation> referencedCompilations,
             List<MetadataReference> references
-        ) {
+        )
+        {
             if (referencedCompilations != null)
             {
                 foreach (var referencedCompilation in referencedCompilations)
@@ -521,7 +538,8 @@ namespace Microsoft.CodeAnalysis.Test.Utilities
         internal static MetadataReference AsReference(
             Compilation comp,
             bool useCompilationReference
-        ) {
+        )
+        {
             return useCompilationReference
               ? comp.ToMetadataReference()
               : comp.EmitToImageReference();
@@ -576,7 +594,8 @@ namespace Microsoft.CodeAnalysis.Test.Utilities
             PEModuleSymbol peModule,
             WellKnownType type,
             Accessibility expectedAccessibility
-        ) {
+        )
+        {
             var name = MetadataTypeName.FromFullName(type.GetMetadataName());
             Assert.Equal(
                 expectedAccessibility,
@@ -610,7 +629,8 @@ namespace Microsoft.CodeAnalysis.Test.Utilities
             string fullyQualifiedTypeName,
             string memberName,
             string expectedSignature = ""
-        ) {
+        )
+        {
             return new SignatureDescription()
             {
                 FullyQualifiedTypeName = fullyQualifiedTypeName,
@@ -642,7 +662,8 @@ namespace Microsoft.CodeAnalysis.Test.Utilities
 
         private static Dictionary<IOperation, IOperation> GetParentOperationsMap(
             SemanticModel model
-        ) {
+        )
+        {
             // get top operations first
             var topOperations = new HashSet<IOperation>();
             var root = model.SyntaxTree.GetRoot();
@@ -665,7 +686,8 @@ namespace Microsoft.CodeAnalysis.Test.Utilities
         private static void CollectParentOperations(
             IOperation operation,
             Dictionary<IOperation, IOperation> map
-        ) {
+        )
+        {
             // walk down to collect all parent operation map for this tree
             foreach (var child in operation.Children.WhereNotNull())
             {
@@ -679,7 +701,8 @@ namespace Microsoft.CodeAnalysis.Test.Utilities
             SemanticModel model,
             SyntaxNode node,
             HashSet<IOperation> topOperations
-        ) {
+        )
+        {
             foreach (var child in node.ChildNodes())
             {
                 var operation = model.GetOperation(child);
@@ -754,7 +777,8 @@ namespace Microsoft.CodeAnalysis.Test.Utilities
             SemanticModel semanticModel,
             HashSet<IOperation> set,
             SyntaxNode node
-        ) {
+        )
+        {
             while (node != semanticModel.Root)
             {
                 var operation = semanticModel.GetOperation(node);

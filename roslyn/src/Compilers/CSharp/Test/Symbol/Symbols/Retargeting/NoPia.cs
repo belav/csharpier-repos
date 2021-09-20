@@ -3417,7 +3417,8 @@ class UsePia2
                     piaCompilation.EmitToImageReference(),
                     piaCompilation.ToMetadataReference()
                 }
-            ) {
+            )
+            {
                 var compilation1 = CreateCompilationWithMscorlib45(
                     consumer1,
                     references: new[] { piaRef.WithEmbedInteropTypes(true) }
@@ -3429,7 +3430,8 @@ class UsePia2
                         compilation1.EmitToImageReference(),
                         compilation1.ToMetadataReference()
                     }
-                ) {
+                )
+                {
                     var compilation2 = CreateCompilationWithMscorlib46(
                         consumer2,
                         references: new[] { piaRef, consumer1Ref }

@@ -26,7 +26,8 @@ namespace Microsoft.CodeAnalysis.Diagnostics.Analyzers.NamingStyles
                 var currentSymbol = symbol;
                 currentSymbol != null;
                 currentSymbol = currentSymbol.ContainingSymbol
-            ) {
+            )
+            {
                 switch (currentSymbol.Kind)
                 {
                     case SymbolKind.Namespace:

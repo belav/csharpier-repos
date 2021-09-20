@@ -101,7 +101,8 @@ namespace System.Xml.Xsl.XsltOld
                             string.Empty,
                             false
                         ) == false
-                    ) {
+                    )
+                    {
                         // Come back later
                         frame.State = NameReady;
                         break;
@@ -167,7 +168,8 @@ namespace System.Xml.Xsl.XsltOld
                 && (name[0] == CharX || name[0] == Charx)
                 && (name[1] == CharM || name[1] == Charm)
                 && (name[2] == CharL || name[2] == Charl)
-            ) {
+            )
+            {
                 return false;
             }
 

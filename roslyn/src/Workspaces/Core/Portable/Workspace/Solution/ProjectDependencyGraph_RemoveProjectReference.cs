@@ -13,7 +13,8 @@ namespace Microsoft.CodeAnalysis
         internal ProjectDependencyGraph WithProjectReferenceRemoved(
             ProjectId projectId,
             ProjectId referencedProjectId
-        ) {
+        )
+        {
             Contract.ThrowIfFalse(_projectIds.Contains(projectId));
             Contract.ThrowIfFalse(_referencesMap[projectId].Contains(referencedProjectId));
 
@@ -65,7 +66,8 @@ namespace Microsoft.CodeAnalysis
             > existingForwardReferencesMap,
             ProjectId projectId,
             ProjectId referencedProjectId
-        ) {
+        )
+        {
             return existingForwardReferencesMap.MultiRemove(projectId, referencedProjectId);
         }
 
@@ -88,7 +90,8 @@ namespace Microsoft.CodeAnalysis
             >? existingReverseReferencesMap,
             ProjectId projectId,
             ProjectId referencedProjectId
-        ) {
+        )
+        {
             if (existingReverseReferencesMap is null)
             {
                 return null;
@@ -107,7 +110,8 @@ namespace Microsoft.CodeAnalysis
             > existingTransitiveReferencesMap,
             ProjectId projectId,
             ProjectId referencedProjectId
-        ) {
+        )
+        {
             var builder = existingTransitiveReferencesMap.ToBuilder();
 
             // Invalidate the transitive references from every project referencing the changed project (transitively)
@@ -140,7 +144,8 @@ namespace Microsoft.CodeAnalysis
             > existingReverseTransitiveReferencesMap,
             ProjectId projectId,
             ProjectId referencedProjectId
-        ) {
+        )
+        {
             var builder = existingReverseTransitiveReferencesMap.ToBuilder();
 
             // Invalidate the transitive reverse references from every project previously referenced by the original

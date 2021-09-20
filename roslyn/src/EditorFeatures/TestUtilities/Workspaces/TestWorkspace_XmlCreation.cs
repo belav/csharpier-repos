@@ -25,7 +25,8 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Workspaces
             string[] metadataReferences = null,
             string extension = null,
             bool commonReferences = true
-        ) {
+        )
+        {
             var documentElements = new List<XElement>();
 
             if (files != null)
@@ -77,7 +78,8 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Workspaces
             ParseOptions parseOptions,
             CompilationOptions compilationOptions,
             params object[] elements
-        ) {
+        )
+        {
             return new XElement(
                 ProjectElementName,
                 new XAttribute(AssemblyNameAttributeName, assemblyName),
@@ -203,7 +205,8 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Workspaces
             string code,
             string filePath,
             ParseOptions parseOptions = null
-        ) {
+        )
+        {
             return new XElement(
                 DocumentElementName,
                 new XAttribute(FilePathAttributeName, filePath),

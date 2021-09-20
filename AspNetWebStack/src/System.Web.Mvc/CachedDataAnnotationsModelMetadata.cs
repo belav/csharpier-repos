@@ -26,13 +26,14 @@ namespace System.Web.Mvc
             Type modelType,
             string propertyName,
             IEnumerable<Attribute> attributes
-        ) : base(
-            provider,
-            containerType,
-            modelType,
-            propertyName,
-            new CachedDataAnnotationsMetadataAttributes(attributes.ToArray())
-        ) { }
+        )
+            : base(
+                provider,
+                containerType,
+                modelType,
+                propertyName,
+                new CachedDataAnnotationsMetadataAttributes(attributes.ToArray())
+            ) { }
 
         protected override bool ComputeConvertEmptyStringToNull()
         {
@@ -92,7 +93,8 @@ namespace System.Web.Mvc
             if (
                 PrototypeCache.DisplayFormat != null
                 && PrototypeCache.DisplayFormat.ApplyFormatInEditMode
-            ) {
+            )
+            {
                 _isEditFormatStringFromCache = true;
                 return PrototypeCache.DisplayFormat.DataFormatString;
             }
@@ -210,7 +212,8 @@ namespace System.Web.Mvc
                 if (
                     PrototypeCache.DisplayColumn != null
                     && !String.IsNullOrEmpty(PrototypeCache.DisplayColumn.DisplayColumn)
-                ) {
+                )
+                {
                     PropertyInfo displayColumnProperty = ModelType.GetProperty(
                         PrototypeCache.DisplayColumn.DisplayColumn,
                         BindingFlags.Public | BindingFlags.IgnoreCase | BindingFlags.Instance
@@ -261,7 +264,8 @@ namespace System.Web.Mvc
             DisplayColumnAttribute displayColumnAttribute,
             PropertyInfo displayColumnProperty,
             Type modelType
-        ) {
+        )
+        {
             if (displayColumnProperty == null)
             {
                 throw new InvalidOperationException(

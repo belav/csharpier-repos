@@ -46,7 +46,8 @@ namespace Microsoft.CodeAnalysis.LanguageServer.Handler
         public WorkspaceSymbolsHandler(
             IAsynchronousOperationListenerProvider listenerProvider,
             IThreadingContext threadingContext
-        ) {
+        )
+        {
             _asyncListener = listenerProvider.GetListener(FeatureAttribute.NavigateTo);
             _threadingContext = threadingContext;
         }
@@ -64,7 +65,8 @@ namespace Microsoft.CodeAnalysis.LanguageServer.Handler
             WorkspaceSymbolParams request,
             RequestContext context,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             Contract.ThrowIfNull(context.Solution);
 
             var solution = context.Solution;
@@ -97,7 +99,8 @@ namespace Microsoft.CodeAnalysis.LanguageServer.Handler
                 Project project,
                 INavigateToSearchResult result,
                 CancellationToken cancellationToken
-            ) {
+            )
+            {
                 return ReportSymbolInformationAsync(result, cancellationToken);
             }
 
@@ -116,7 +119,8 @@ namespace Microsoft.CodeAnalysis.LanguageServer.Handler
             private async Task ReportSymbolInformationAsync(
                 INavigateToSearchResult result,
                 CancellationToken cancellationToken
-            ) {
+            )
+            {
                 var location = await ProtocolConversions.TextSpanToLocationAsync(
                         result.NavigableItem.Document,
                         result.NavigableItem.SourceSpan,

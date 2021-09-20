@@ -1787,7 +1787,8 @@ C
         private static string GetAttributeConstructorName(
             MetadataReader reader,
             CustomAttributeHandle handle
-        ) {
+        )
+        {
             return reader.Dump(reader.GetCustomAttribute(handle).Constructor);
         }
 
@@ -1795,7 +1796,8 @@ C
             MetadataReader reader,
             CustomAttributeHandleCollection handles,
             string name
-        ) {
+        )
+        {
             return reader.GetCustomAttribute(
                 handles.FirstOrDefault(h => GetAttributeConstructorName(reader, h) == name)
             );
@@ -1805,27 +1807,31 @@ C
             MetadataReader reader,
             CustomAttributeHandleCollection handles,
             params string[] expectedNames
-        ) {
+        )
+        {
             var actualNames = handles.Select(h => GetAttributeConstructorName(reader, h)).ToArray();
             AssertEx.Equal(actualNames, expectedNames);
         }
 
         private static void AssertNoNativeIntegerAttribute(
             ImmutableArray<CSharpAttributeData> attributes
-        ) {
+        )
+        {
             AssertAttributes(attributes);
         }
 
         private static void AssertNativeIntegerAttribute(
             ImmutableArray<CSharpAttributeData> attributes
-        ) {
+        )
+        {
             AssertAttributes(attributes, "System.Runtime.CompilerServices.NativeIntegerAttribute");
         }
 
         private static void AssertAttributes(
             ImmutableArray<CSharpAttributeData> attributes,
             params string[] expectedNames
-        ) {
+        )
+        {
             var actualNames = attributes.Select(a => a.AttributeClass.ToTestDisplayString())
                 .ToArray();
             AssertEx.Equal(actualNames, expectedNames);
@@ -1860,7 +1866,8 @@ C
 
         private static CSharpAttributeData GetNativeIntegerAttribute(
             ImmutableArray<CSharpAttributeData> attributes
-        ) {
+        )
+        {
             return attributes.Single(
                 a =>
                     a.AttributeClass.ToTestDisplayString()

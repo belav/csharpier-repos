@@ -19,7 +19,8 @@ namespace System.Reflection.TypeLoading
         internal RoPseudoCustomAttributeData(
             ConstructorInfo constructor,
             Func<CustomAttributeArguments> argumentsPromise
-        ) {
+        )
+        {
             _constructor = constructor;
             _argumentsPromise = argumentsPromise;
         }
@@ -28,7 +29,8 @@ namespace System.Reflection.TypeLoading
             ConstructorInfo constructor,
             IList<CustomAttributeTypedArgument>? fixedArguments = null,
             IList<CustomAttributeNamedArgument>? namedArguments = null
-        ) {
+        )
+        {
             _constructor = constructor;
             _lazyFixedArguments = fixedArguments ?? Array.Empty<CustomAttributeTypedArgument>();
             _lazyNamedArguments = namedArguments ?? Array.Empty<CustomAttributeNamedArgument>();

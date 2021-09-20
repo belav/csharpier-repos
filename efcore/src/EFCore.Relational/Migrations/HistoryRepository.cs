@@ -279,7 +279,8 @@ namespace Microsoft.EntityFrameworkCore.Migrations
         /// <exception cref="OperationCanceledException"> If the <see cref="CancellationToken"/> is canceled. </exception>
         public virtual async Task<IReadOnlyList<HistoryRow>> GetAppliedMigrationsAsync(
             CancellationToken cancellationToken = default
-        ) {
+        )
+        {
             var rows = new List<HistoryRow>();
 
             if (await ExistsAsync(cancellationToken).ConfigureAwait(false))

@@ -14,7 +14,8 @@ namespace System.Web.Http.ModelBinding.Binders
             HttpActionContext actionContext,
             ModelBindingContext bindingContext,
             IList<KeyValuePair<TKey, TValue>> newCollection
-        ) {
+        )
+        {
             CollectionModelBinderUtil.CreateOrReplaceDictionary(
                 bindingContext,
                 newCollection,

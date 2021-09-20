@@ -8,7 +8,8 @@ namespace System.Web.Mvc
         public virtual object BindModel(
             ControllerContext controllerContext,
             ModelBindingContext bindingContext
-        ) {
+        )
+        {
             if (bindingContext == null)
             {
                 throw new ArgumentNullException("bindingContext");

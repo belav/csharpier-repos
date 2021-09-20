@@ -24,7 +24,8 @@ namespace System.Net.Sockets.Tests
                     SocketType.Stream,
                     ProtocolType.Tcp
                 )
-            ) {
+            )
+            {
                 int port = listen.BindToAnonymousPort(listenAt);
                 listen.Listen(1);
 
@@ -37,7 +38,8 @@ namespace System.Net.Sockets.Tests
                         SocketType.Stream,
                         ProtocolType.Tcp
                     )
-                ) {
+                )
+                {
                     await ConnectAsync(client, new IPEndPoint(listenAt, port));
                     Socket accept = await acceptTask;
                     Assert.NotNull(accept);
@@ -60,7 +62,8 @@ namespace System.Net.Sockets.Tests
                     SocketType.Stream,
                     ProtocolType.Tcp
                 )
-            ) {
+            )
+            {
                 listener.Bind(new IPEndPoint(IPAddress.Loopback, 0));
                 Listen(listener, numberAccepts);
 
@@ -120,7 +123,8 @@ namespace System.Net.Sockets.Tests
                     SocketType.Stream,
                     ProtocolType.Tcp
                 )
-            ) {
+            )
+            {
                 listener.Bind(new IPEndPoint(IPAddress.Loopback, 0));
                 Listen(listener, numberAccepts);
 
@@ -203,7 +207,8 @@ namespace System.Net.Sockets.Tests
                     SocketType.Stream,
                     ProtocolType.Tcp
                 )
-            ) {
+            )
+            {
                 int port = listener.BindToAnonymousPort(IPAddress.Loopback);
                 listener.Listen(1);
 
@@ -243,7 +248,8 @@ namespace System.Net.Sockets.Tests
                     SocketType.Stream,
                     ProtocolType.Tcp
                 )
-            ) {
+            )
+            {
                 int port = listener.BindToAnonymousPort(IPAddress.Loopback);
                 listener.Listen(1);
 
@@ -253,7 +259,8 @@ namespace System.Net.Sockets.Tests
                         SocketType.Stream,
                         ProtocolType.Tcp
                     )
-                ) {
+                )
+                {
                     Task<Socket> acceptTask = AcceptAsync(listener, server);
                     client.Connect(IPAddress.Loopback, port);
 
@@ -273,7 +280,8 @@ namespace System.Net.Sockets.Tests
                             SocketType.Stream,
                             ProtocolType.Tcp
                         )
-                    ) {
+                    )
+                    {
                         Task<Socket> acceptTask = AcceptAsync(listener, server);
                         client.Connect(IPAddress.Loopback, port);
 
@@ -320,7 +328,8 @@ namespace System.Net.Sockets.Tests
                     SocketType.Stream,
                     ProtocolType.Tcp
                 )
-            ) {
+            )
+            {
                 int port = listener.BindToAnonymousPort(IPAddress.Loopback);
                 listener.Listen(1);
 
@@ -363,7 +372,8 @@ namespace System.Net.Sockets.Tests
                     SocketType.Stream,
                     ProtocolType.Tcp
                 )
-            ) {
+            )
+            {
                 int port = listener.BindToAnonymousPort(IPAddress.Loopback);
                 listener.Listen(1);
 
@@ -399,7 +409,8 @@ namespace System.Net.Sockets.Tests
                         SocketType.Stream,
                         ProtocolType.Tcp
                     )
-                ) {
+                )
+                {
                     listener.Bind(new IPEndPoint(IPAddress.Loopback, 0));
                     listener.Listen(2);
 

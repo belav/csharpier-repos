@@ -113,7 +113,8 @@ namespace JIT.HardwareIntrinsics.X86
 
             public void RunStructFldScenario(
                 SimdScalarUnaryOpConvertTest__MoveMaskVector128Byte testClass
-            ) {
+            )
+            {
                 var result = Sse2.MoveMask(_fld);
                 testClass.ValidateResult(_fld, result);
             }
@@ -340,7 +341,8 @@ namespace JIT.HardwareIntrinsics.X86
             Vector128<Byte> firstOp,
             Int32 result,
             [CallerMemberName] string method = ""
-        ) {
+        )
+        {
             Byte[] inArray = new Byte[Op1ElementCount];
             Unsafe.WriteUnaligned(ref Unsafe.As<Byte, byte>(ref inArray[0]), firstOp);
             ValidateResult(inArray, result, method);
@@ -350,7 +352,8 @@ namespace JIT.HardwareIntrinsics.X86
             void* firstOp,
             Int32 result,
             [CallerMemberName] string method = ""
-        ) {
+        )
+        {
             Byte[] inArray = new Byte[Op1ElementCount];
             Unsafe.CopyBlockUnaligned(
                 ref Unsafe.As<Byte, byte>(ref inArray[0]),
@@ -364,7 +367,8 @@ namespace JIT.HardwareIntrinsics.X86
             Byte[] firstOp,
             Int32 result,
             [CallerMemberName] string method = ""
-        ) {
+        )
+        {
             bool succeeded = true;
 
             if (((firstOp[0] & 128) == 0) != ((result & 1) == 0))

@@ -26,7 +26,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseExpressionBody
             string code,
             string fixedCode,
             LanguageVersion version = LanguageVersion.CSharp8
-        ) {
+        )
+        {
             await new VerifyCS.Test
             {
                 TestCode = code,

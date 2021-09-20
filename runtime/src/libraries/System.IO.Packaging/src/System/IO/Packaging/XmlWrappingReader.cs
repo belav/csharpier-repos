@@ -188,7 +188,8 @@ namespace System.IO.Packaging
 
         IDictionary<string, string>? IXmlNamespaceResolver.GetNamespacesInScope(
             XmlNamespaceScope scope
-        ) {
+        )
+        {
             return (_readerAsResolver == null)
               ? null
               : _readerAsResolver.GetNamespacesInScope(scope);

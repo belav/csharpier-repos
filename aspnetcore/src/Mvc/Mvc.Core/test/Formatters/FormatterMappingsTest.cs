@@ -15,7 +15,8 @@ namespace Microsoft.AspNetCore.Mvc.Formatters
         [InlineData("")]
         public void FormatterMappings_GetMediaTypeMappingForFormat_ThrowsForInvalidFormats(
             string format
-        ) {
+        )
+        {
             // Arrange
             var options = new FormatterMappings();
 
@@ -36,7 +37,8 @@ namespace Microsoft.AspNetCore.Mvc.Formatters
             string setFormat,
             string contentType,
             string getFormat
-        ) {
+        )
+        {
             // Arrange
             var options = new FormatterMappings();
             options.SetMediaTypeMappingForFormat(

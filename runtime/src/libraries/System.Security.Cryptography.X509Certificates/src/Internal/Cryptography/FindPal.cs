@@ -42,7 +42,8 @@ namespace Internal.Cryptography.Pal
             X509FindType findType,
             object findValue,
             bool validOnly
-        ) {
+        )
+        {
             X509Certificate2Collection results = new X509Certificate2Collection();
 
             using (IFindPal findPal = OpenPal(coll, results, validOnly))
@@ -177,7 +178,8 @@ namespace Internal.Cryptography.Pal
             IFindPal findPal,
             object findValue,
             OidGroup oidGroup
-        ) {
+        )
+        {
             string maybeOid = ConfirmedCast<string>(findValue);
 
             if (maybeOid.Length == 0)

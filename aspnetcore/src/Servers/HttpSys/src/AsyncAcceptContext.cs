@@ -31,7 +31,8 @@ namespace Microsoft.AspNetCore.Server.HttpSys
         internal AsyncAcceptContext(
             HttpSysListener server,
             IRequestContextFactory requestContextFactory
-        ) {
+        )
+        {
             Server = server;
             _requestContextFactory = requestContextFactory;
             _preallocatedOverlapped = new(IOCallback, state: this, pinData: null);
@@ -49,7 +50,8 @@ namespace Microsoft.AspNetCore.Server.HttpSys
             if (
                 statusCode != UnsafeNclNativeMethods.ErrorCodes.ERROR_SUCCESS
                 && statusCode != UnsafeNclNativeMethods.ErrorCodes.ERROR_IO_PENDING
-            ) {
+            )
+            {
                 // some other bad error, possible(?) return values are:
                 // ERROR_INVALID_HANDLE, ERROR_INSUFFICIENT_BUFFER, ERROR_OPERATION_ABORTED
                 return ValueTask.FromException<RequestContext>(
@@ -67,7 +69,8 @@ namespace Microsoft.AspNetCore.Server.HttpSys
                 if (
                     errorCode != UnsafeNclNativeMethods.ErrorCodes.ERROR_SUCCESS
                     && errorCode != UnsafeNclNativeMethods.ErrorCodes.ERROR_MORE_DATA
-                ) {
+                )
+                {
                     _mrvts.SetException(new HttpSysException((int)errorCode));
                     return;
                 }
@@ -94,7 +97,8 @@ namespace Microsoft.AspNetCore.Server.HttpSys
                     if (
                         statusCode != UnsafeNclNativeMethods.ErrorCodes.ERROR_SUCCESS
                         && statusCode != UnsafeNclNativeMethods.ErrorCodes.ERROR_IO_PENDING
-                    ) {
+                    )
+                    {
                         // someother bad error, possible(?) return values are:
                         // ERROR_INVALID_HANDLE, ERROR_INSUFFICIENT_BUFFER, ERROR_OPERATION_ABORTED
                         _mrvts.SetException(new HttpSysException((int)statusCode));
@@ -111,7 +115,8 @@ namespace Microsoft.AspNetCore.Server.HttpSys
             uint errorCode,
             uint numBytes,
             NativeOverlapped* nativeOverlapped
-        ) {
+        )
+        {
             var acceptContext = (AsyncAcceptContext)ThreadPoolBoundHandle.GetNativeOverlappedState(
                 nativeOverlapped
             )!;
@@ -143,7 +148,8 @@ namespace Microsoft.AspNetCore.Server.HttpSys
                 if (
                     statusCode == UnsafeNclNativeMethods.ErrorCodes.ERROR_INVALID_PARAMETER
                     && _requestContext.RequestId != 0
-                ) {
+                )
+                {
                     // we might get this if somebody stole our RequestId,
                     // set RequestId to 0 and start all over again with the buffer we just allocated
                     // BUGBUG: how can someone steal our request ID?  seems really bad and in need of fix.
@@ -161,7 +167,8 @@ namespace Microsoft.AspNetCore.Server.HttpSys
                 else if (
                     statusCode == UnsafeNclNativeMethods.ErrorCodes.ERROR_SUCCESS
                     && HttpSysListener.SkipIOCPCallbackOnSuccess
-                ) {
+                )
+                {
                     // IO operation completed synchronously - callback won't be called to signal completion.
                     IOCompleted(statusCode, bytesTransferred);
                 }
@@ -225,7 +232,8 @@ namespace Microsoft.AspNetCore.Server.HttpSys
             object? state,
             short token,
             ValueTaskSourceOnCompletedFlags flags
-        ) {
+        )
+        {
             _mrvts.OnCompleted(continuation, state, token, flags);
         }
     }

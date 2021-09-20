@@ -480,7 +480,8 @@ namespace System.Linq.Expressions.Tests
             object ifFalse,
             object expected,
             bool useInterpreter
-        ) {
+        )
+        {
             Func<object> func = Expression.Lambda<Func<object>>(
                     Expression.Convert(
                         Expression.Condition(
@@ -503,7 +504,8 @@ namespace System.Linq.Expressions.Tests
             object ifFalse,
             object expected,
             bool useInterpreter
-        ) {
+        )
+        {
             Func<object> func = Expression.Lambda<Func<object>>(
                     Expression.Convert(
                         Expression.Condition(
@@ -526,7 +528,8 @@ namespace System.Linq.Expressions.Tests
             object ifFalse,
             object expected,
             bool useInterpreter
-        ) {
+        )
+        {
             Func<object> func = Expression.Lambda<Func<object>>(
                     Expression.Convert(
                         Expression.Condition(
@@ -553,7 +556,8 @@ namespace System.Linq.Expressions.Tests
             object expected,
             Type type,
             bool useInterpreter
-        ) {
+        )
+        {
             Func<object> func = Expression.Lambda<Func<object>>(
                     Expression.Condition(
                         Expression.Constant(test),

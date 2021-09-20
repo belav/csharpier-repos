@@ -979,7 +979,8 @@ namespace System.Xml.Tests
             byte[] srcBuff,
             int srcStart,
             int count
-        ) {
+        )
+        {
             ensureSpace(ref destBuff, destStart + count - 1);
             for (int i = srcStart; i < srcStart + count; i++)
             {
@@ -991,7 +992,8 @@ namespace System.Xml.Tests
             ref byte[] destBuffer,
             ref int destBuffLen,
             string strValue
-        ) {
+        )
+        {
             for (int i = 0; i < strValue.Length; i++)
             {
                 WriteToBuffer(

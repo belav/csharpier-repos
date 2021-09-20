@@ -37,7 +37,8 @@ namespace Microsoft.CodeAnalysis.CSharp.TodoComments
             SyntacticDocument document,
             SyntaxTrivia trivia,
             ArrayBuilder<TodoComment> todoList
-        ) {
+        )
+        {
             if (PreprocessorHasComment(trivia))
             {
                 var message = trivia.ToFullString();

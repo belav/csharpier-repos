@@ -130,7 +130,8 @@ namespace JIT.HardwareIntrinsics.Arm
                     (alignment != 16 && alignment != 8)
                     || (alignment * 2) < sizeOfinArray1
                     || (alignment * 2) < sizeOfoutArray
-                ) {
+                )
+                {
                     throw new ArgumentException("Invalid value of alignment");
                 }
 
@@ -189,7 +190,8 @@ namespace JIT.HardwareIntrinsics.Arm
 
             public void RunStructFldScenario(
                 SimpleUnaryOpTest__ExtractNarrowingSaturateUnsignedScalar_Vector64_Byte testClass
-            ) {
+            )
+            {
                 var result = AdvSimd.Arm64.ExtractNarrowingSaturateUnsignedScalar(_fld1);
 
                 Unsafe.Write(testClass._dataTable.outArrayPtr, result);
@@ -198,7 +200,8 @@ namespace JIT.HardwareIntrinsics.Arm
 
             public void RunStructFldScenario_Load(
                 SimpleUnaryOpTest__ExtractNarrowingSaturateUnsignedScalar_Vector64_Byte testClass
-            ) {
+            )
+            {
                 fixed (Vector64<Int16>* pFld1 = &_fld1)
                 {
                     var result = AdvSimd.Arm64.ExtractNarrowingSaturateUnsignedScalar(
@@ -489,7 +492,8 @@ namespace JIT.HardwareIntrinsics.Arm
             Vector64<Int16> op1,
             void* result,
             [CallerMemberName] string method = ""
-        ) {
+        )
+        {
             Int16[] inArray1 = new Int16[Op1ElementCount];
             Byte[] outArray = new Byte[RetElementCount];
 
@@ -526,7 +530,8 @@ namespace JIT.HardwareIntrinsics.Arm
             Int16[] firstOp,
             Byte[] result,
             [CallerMemberName] string method = ""
-        ) {
+        )
+        {
             bool succeeded = true;
 
             if (Helpers.ExtractNarrowingSaturateUnsigned(firstOp[0]) != result[0])

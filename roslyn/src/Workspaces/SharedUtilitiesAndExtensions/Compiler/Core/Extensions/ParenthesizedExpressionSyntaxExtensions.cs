@@ -14,7 +14,8 @@ namespace Microsoft.CodeAnalysis.Extensions
             SyntaxNode parentBinaryLeft,
             SyntaxNode parentBinaryRight,
             SemanticModel semanticModel
-        ) {
+        )
+        {
             // Now we'll perform a few semantic checks to determine whether removal
             // of the parentheses might break semantics. Note that we'll try and be
             // fairly conservative with these. For example, we'll assume that failing
@@ -55,7 +56,8 @@ namespace Microsoft.CodeAnalysis.Extensions
                     semanticModel.GetTypeInfo(parentBinaryLeft).Type,
                     semanticModel.GetTypeInfo(parentBinaryRight).Type
                 )
-            ) {
+            )
+            {
                 return false;
             }
 
@@ -64,7 +66,8 @@ namespace Microsoft.CodeAnalysis.Extensions
                     semanticModel.GetTypeInfo(parentBinaryLeft).ConvertedType,
                     semanticModel.GetTypeInfo(parentBinaryRight).ConvertedType
                 )
-            ) {
+            )
+            {
                 return false;
             }
 

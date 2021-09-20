@@ -207,7 +207,8 @@ namespace System.Web.Http.Tracing.Tracers
             protected override Task<HttpResponseMessage> SendAsync(
                 HttpRequestMessage request,
                 CancellationToken cancellationToken
-            ) {
+            )
+            {
                 return _callback(request, cancellationToken);
             }
         }
@@ -231,7 +232,8 @@ namespace System.Web.Http.Tracing.Tracers
             protected override Task<HttpResponseMessage> SendAsync(
                 HttpRequestMessage request,
                 CancellationToken cancellationToken
-            ) {
+            )
+            {
                 return _callback(request, cancellationToken);
             }
         }

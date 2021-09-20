@@ -36,7 +36,8 @@ namespace Microsoft.CodeAnalysis
             AssemblyIdentity identity,
             out TValue value,
             bool allowHigherVersion = true
-        ) {
+        )
+        {
             OneOrMany<KeyValuePair<AssemblyIdentity, TValue>> sameName;
             if (_map.TryGetValue(identity.Name, out sameName))
             {
@@ -64,7 +65,8 @@ namespace Microsoft.CodeAnalysis
                             minHigherVersionCandidate == -1
                             || currentIdentity.Version
                                 < sameName[minHigherVersionCandidate].Key.Version
-                        ) {
+                        )
+                        {
                             minHigherVersionCandidate = i;
                         }
                     }
@@ -85,7 +87,8 @@ namespace Microsoft.CodeAnalysis
             AssemblyIdentity identity,
             out TValue value,
             Func<Version, Version, TValue, bool> comparer
-        ) {
+        )
+        {
             OneOrMany<KeyValuePair<AssemblyIdentity, TValue>> sameName;
             if (_map.TryGetValue(identity.Name, out sameName))
             {
@@ -96,7 +99,8 @@ namespace Microsoft.CodeAnalysis
                     if (
                         comparer(identity.Version, currentIdentity.Version, sameName[i].Value)
                         && AssemblyIdentity.EqualIgnoringNameAndVersion(currentIdentity, identity)
-                    ) {
+                    )
+                    {
                         value = sameName[i].Value;
                         return true;
                     }

@@ -77,7 +77,8 @@ namespace System.Collections.Immutable
         public static ImmutableHashSet<T> CreateRange<T>(
             IEqualityComparer<T>? equalityComparer,
             IEnumerable<T> items
-        ) {
+        )
+        {
             return ImmutableHashSet<T>.Empty.WithComparer(equalityComparer).Union(items);
         }
 
@@ -102,7 +103,8 @@ namespace System.Collections.Immutable
         public static ImmutableHashSet<T> Create<T>(
             IEqualityComparer<T>? equalityComparer,
             params T[] items
-        ) {
+        )
+        {
             return ImmutableHashSet<T>.Empty.WithComparer(equalityComparer).Union(items);
         }
 
@@ -126,7 +128,8 @@ namespace System.Collections.Immutable
         /// </returns>
         public static ImmutableHashSet<T>.Builder CreateBuilder<T>(
             IEqualityComparer<T>? equalityComparer
-        ) {
+        )
+        {
             return Create<T>(equalityComparer).ToBuilder();
         }
 
@@ -140,7 +143,8 @@ namespace System.Collections.Immutable
         public static ImmutableHashSet<TSource> ToImmutableHashSet<TSource>(
             this IEnumerable<TSource> source,
             IEqualityComparer<TSource>? equalityComparer
-        ) {
+        )
+        {
             if (source is ImmutableHashSet<TSource> existingSet)
             {
                 return existingSet.WithComparer(equalityComparer);
@@ -156,7 +160,8 @@ namespace System.Collections.Immutable
         /// <returns>An immutable set.</returns>
         public static ImmutableHashSet<TSource> ToImmutableHashSet<TSource>(
             this ImmutableHashSet<TSource>.Builder builder
-        ) {
+        )
+        {
             Requires.NotNull(builder, nameof(builder));
 
             return builder.ToImmutable();
@@ -170,7 +175,8 @@ namespace System.Collections.Immutable
         /// <returns>An immutable set.</returns>
         public static ImmutableHashSet<TSource> ToImmutableHashSet<TSource>(
             this IEnumerable<TSource> source
-        ) {
+        )
+        {
             return ToImmutableHashSet(source, null);
         }
     }

@@ -234,7 +234,8 @@ namespace Microsoft.AspNetCore.Mvc
         public void GetHeaderValue_Produces_Correct_ContentDisposition(
             string input,
             string expectedOutput
-        ) {
+        )
+        {
             // Arrange & Act
             var cd = new ContentDispositionHeaderValue("attachment");
             cd.SetHttpFileName(input);
@@ -271,7 +272,8 @@ namespace Microsoft.AspNetCore.Mvc
             string ifNoneMatch,
             bool isWeak,
             string ifRange
-        ) {
+        )
+        {
             // Arrange
             var actionContext = new ActionContext();
             var httpContext = new DefaultHttpContext();
@@ -319,7 +321,8 @@ namespace Microsoft.AspNetCore.Mvc
             string ifMatch,
             string ifNoneMatch,
             bool isWeak
-        ) {
+        )
+        {
             // Arrange
             var actionContext = new ActionContext();
             var httpContext = new DefaultHttpContext();
@@ -354,7 +357,8 @@ namespace Microsoft.AspNetCore.Mvc
             string ifMatch,
             string ifNoneMatch,
             bool isWeak
-        ) {
+        )
+        {
             // Arrange
             var actionContext = new ActionContext();
             var httpContext = new DefaultHttpContext();
@@ -442,7 +446,8 @@ namespace Microsoft.AspNetCore.Mvc
         public async Task IfModifiedSinceComparison_OnlyUsesWholeSeconds(
             DateTimeOffset ifModifiedSince,
             int expectedStatusCode
-        ) {
+        )
+        {
             // Arrange
             var httpContext = GetHttpContext();
             httpContext.Request.Headers[HeaderNames.IfModifiedSince] = HeaderUtilities.FormatDate(
@@ -484,7 +489,8 @@ namespace Microsoft.AspNetCore.Mvc
         public async Task IfUnmodifiedSinceComparison_OnlyUsesWholeSeconds(
             DateTimeOffset ifUnmodifiedSince,
             int expectedStatusCode
-        ) {
+        )
+        {
             // Arrange
             var httpContext = GetHttpContext();
             httpContext.Request.Headers[HeaderNames.IfUnmodifiedSince] = HeaderUtilities.FormatDate(

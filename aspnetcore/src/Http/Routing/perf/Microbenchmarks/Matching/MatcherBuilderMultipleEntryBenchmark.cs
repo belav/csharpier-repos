@@ -123,7 +123,8 @@ namespace Microsoft.AspNetCore.Routing.Matching
             public PolicyJumpTable BuildJumpTable(
                 int exitDestination,
                 IReadOnlyList<PolicyJumpTableEdge> edges
-            ) {
+            )
+            {
                 throw new NotImplementedException();
             }
 
@@ -145,7 +146,8 @@ namespace Microsoft.AspNetCore.Routing.Matching
             public PolicyJumpTable BuildJumpTable(
                 int exitDestination,
                 IReadOnlyList<PolicyJumpTableEdge> edges
-            ) {
+            )
+            {
                 throw new NotImplementedException();
             }
 

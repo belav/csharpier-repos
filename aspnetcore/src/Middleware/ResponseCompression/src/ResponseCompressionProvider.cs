@@ -32,7 +32,8 @@ namespace Microsoft.AspNetCore.ResponseCompression
         public ResponseCompressionProvider(
             IServiceProvider services,
             IOptions<ResponseCompressionOptions> options
-        ) {
+        )
+        {
             if (services == null)
             {
                 throw new ArgumentNullException(nameof(services));
@@ -98,7 +99,8 @@ namespace Microsoft.AspNetCore.ResponseCompression
             if (
                 !StringWithQualityHeaderValue.TryParseList(accept, out var encodings)
                 || encodings.Count == 0
-            ) {
+            )
+            {
                 _logger.NoAcceptEncoding();
                 return null;
             }
@@ -125,7 +127,8 @@ namespace Microsoft.AspNetCore.ResponseCompression
                             encodingName,
                             StringComparison.OrdinalIgnoreCase
                         )
-                    ) {
+                    )
+                    {
                         candidates.Add(
                             new ProviderCandidate(provider.EncodingName, quality, i, provider)
                         );
@@ -153,7 +156,8 @@ namespace Microsoft.AspNetCore.ResponseCompression
                         encodingName,
                         StringComparison.OrdinalIgnoreCase
                     )
-                ) {
+                )
+                {
                     // We add 'identity' to the list of "candidates" with a very low priority and no provider.
                     // This will allow it to be ordered based on its quality (and priority) later in the method.
                     candidates.Add(
@@ -205,7 +209,8 @@ namespace Microsoft.AspNetCore.ResponseCompression
                     httpsMode == HttpsCompressionMode.DoNotCompress
                     || !(_enableForHttps || httpsMode == HttpsCompressionMode.Compress)
                 )
-            ) {
+            )
+            {
                 _logger.NoCompressionForHttps();
                 return false;
             }
@@ -302,7 +307,8 @@ namespace Microsoft.AspNetCore.ResponseCompression
                 double quality,
                 int priority,
                 ICompressionProvider? provider
-            ) {
+            )
+            {
                 EncodingName = encodingName;
                 Quality = quality;
                 Priority = priority;

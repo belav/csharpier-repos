@@ -33,7 +33,8 @@ namespace Microsoft.AspNetCore.Mvc.DataAnnotations
             IValidationAttributeAdapterProvider validationAttributeAdapterProvider,
             IOptions<MvcDataAnnotationsLocalizationOptions> options,
             IStringLocalizerFactory? stringLocalizerFactory
-        ) {
+        )
+        {
             if (validationAttributeAdapterProvider == null)
             {
                 throw new ArgumentNullException(nameof(validationAttributeAdapterProvider));
@@ -59,7 +60,8 @@ namespace Microsoft.AspNetCore.Mvc.DataAnnotations
             if (
                 _options.Value.DataAnnotationLocalizerProvider != null
                 && _stringLocalizerFactory != null
-            ) {
+            )
+            {
                 // This will pass first non-null type (either containerType or modelType) to delegate.
                 // Pass the root model type(container type) if it is non null, else pass the model type.
                 stringLocalizer = _options.Value.DataAnnotationLocalizerProvider(

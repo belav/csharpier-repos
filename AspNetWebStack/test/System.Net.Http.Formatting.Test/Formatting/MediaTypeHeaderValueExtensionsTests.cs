@@ -224,7 +224,8 @@ namespace System.Net.Http.Formatting
             string mediaType1,
             string mediaType2,
             int range
-        ) {
+        )
+        {
             MediaTypeHeaderValue mediaTypeHeaderValue1 = MediaTypeHeaderValue.Parse(mediaType1);
             MediaTypeHeaderValue mediaTypeHeaderValue2 = MediaTypeHeaderValue.Parse(mediaType2);
 
@@ -241,7 +242,8 @@ namespace System.Net.Http.Formatting
             string mediaType1,
             string mediaType2,
             int range
-        ) {
+        )
+        {
             MediaTypeHeaderValue mediaTypeHeaderValue1 = MediaTypeHeaderValue.Parse(mediaType1);
             MediaTypeHeaderValue mediaTypeHeaderValue2 = MediaTypeHeaderValue.Parse(mediaType2);
 
@@ -258,7 +260,8 @@ namespace System.Net.Http.Formatting
             string mediaType1,
             string mediaType2,
             int range
-        ) {
+        )
+        {
             MediaTypeHeaderValue mediaTypeHeaderValue1 = MediaTypeHeaderValue.Parse(mediaType1);
             MediaTypeHeaderValue mediaTypeHeaderValue2 = MediaTypeHeaderValue.Parse(mediaType2);
 

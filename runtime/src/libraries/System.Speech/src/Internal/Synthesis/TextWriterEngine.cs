@@ -30,7 +30,8 @@ namespace System.Speech.Internal.Synthesis
             string baseUri,
             CultureInfo culture,
             List<SsmlXmlAttribute> extraNamespace
-        ) {
+        )
+        {
             if (!string.IsNullOrEmpty(baseUri))
             {
                 throw new ArgumentException(
@@ -76,7 +77,8 @@ namespace System.Speech.Internal.Synthesis
             ref FragmentState fragmentState,
             int position,
             bool fIgnore
-        ) {
+        )
+        {
             _writer.WriteString(text);
         }
 
@@ -92,7 +94,8 @@ namespace System.Speech.Internal.Synthesis
             EmphasisBreak eBreak,
             int time,
             bool fIgnore
-        ) {
+        )
+        {
             _writer.WriteStartElement("break");
             if (time > 0 && eBreak == EmphasisBreak.None)
             {
@@ -160,7 +163,8 @@ namespace System.Speech.Internal.Synthesis
             ref FragmentState fragmentState,
             string name,
             bool fIgnore
-        ) {
+        )
+        {
             _writer.WriteStartElement("mark");
             _writer.WriteAttributeString("name", name);
         }
@@ -173,7 +177,8 @@ namespace System.Speech.Internal.Synthesis
             bool newCulture,
             VoiceGender gender,
             VoiceAge age
-        ) {
+        )
+        {
             _writer.WriteStartElement(isParagraph ? "p" : "s");
             if (culture != null)
             {
@@ -189,7 +194,8 @@ namespace System.Speech.Internal.Synthesis
             AlphabetType alphabet,
             string ph,
             char[] phoneIds
-        ) {
+        )
+        {
             _writer.WriteStartElement("phoneme");
             if (alphabet != AlphabetType.Ipa)
             {
@@ -211,7 +217,8 @@ namespace System.Speech.Internal.Synthesis
             string volume,
             string duration,
             string points
-        ) {
+        )
+        {
             _writer.WriteStartElement("prosody");
             if (!string.IsNullOrEmpty(range))
             {
@@ -255,7 +262,8 @@ namespace System.Speech.Internal.Synthesis
             ref FragmentState fragmentState,
             int position,
             bool fIgnore
-        ) {
+        )
+        {
             _writer.WriteStartElement("sub");
             _writer.WriteAttributeString("alias", alias);
         }
@@ -267,7 +275,8 @@ namespace System.Speech.Internal.Synthesis
             int variant,
             bool fNewCulture,
             List<SsmlXmlAttribute> extraNamespace
-        ) {
+        )
+        {
             _writer.WriteStartElement("voice");
             if (!string.IsNullOrEmpty(name))
             {
@@ -334,7 +343,8 @@ namespace System.Speech.Internal.Synthesis
             object voice,
             ref FragmentState fragmentState,
             XmlReader reader
-        ) {
+        )
+        {
             _writer.WriteNode(reader, false);
         }
 
@@ -343,7 +353,8 @@ namespace System.Speech.Internal.Synthesis
             ref FragmentState fragmentState,
             string sElement,
             List<SsmlXmlAttribute> extraAttributes
-        ) {
+        )
+        {
             // write all the additional namespace
             foreach (SsmlXmlAttribute attribute in extraAttributes)
             {
@@ -373,7 +384,8 @@ namespace System.Speech.Internal.Synthesis
         private bool ProcessPromptEngine(
             string element,
             params KeyValuePair<string, string>[] attributes
-        ) {
+        )
+        {
             _writer.WriteStartElement(_pexmlPrefix, element, xmlNamespacePrompt);
 
             if (attributes != null)
@@ -399,7 +411,8 @@ namespace System.Speech.Internal.Synthesis
             string fname,
             string delta,
             string idset
-        ) {
+        )
+        {
             return ProcessPromptEngine(
                 "database",
                 new KeyValuePair<string, string>[]

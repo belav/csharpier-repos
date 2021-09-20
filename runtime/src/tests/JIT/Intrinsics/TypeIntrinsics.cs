@@ -161,7 +161,8 @@ public partial class Program
         bool expression,
         [CallerLineNumber] int line = 0,
         [CallerFilePath] string file = ""
-    ) {
+    )
+    {
         if (!expression)
         {
             Console.WriteLine($"{file}:L{line} test failed (expected: true).");
@@ -173,7 +174,8 @@ public partial class Program
         bool expression,
         [CallerLineNumber] int line = 0,
         [CallerFilePath] string file = ""
-    ) {
+    )
+    {
         if (expression)
         {
             Console.WriteLine($"{file}:L{line} test failed (expected: false).");
@@ -185,7 +187,8 @@ public partial class Program
         Action action,
         [CallerLineNumber] int line = 0,
         [CallerFilePath] string file = ""
-    ) {
+    )
+    {
         try
         {
             action();

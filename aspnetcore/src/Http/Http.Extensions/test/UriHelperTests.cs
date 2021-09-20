@@ -171,7 +171,8 @@ namespace Microsoft.AspNetCore.Http.Extensions
             string query,
             string fragment,
             string expectedUri
-        ) {
+        )
+        {
             var uri = UriHelper.BuildAbsolute(
                 scheme,
                 new HostString(host),
@@ -297,7 +298,8 @@ namespace Microsoft.AspNetCore.Http.Extensions
             string expectedPath,
             string expectedQuery,
             string expectedFragment
-        ) {
+        )
+        {
             string scheme = null;
             var host = new HostString();
             var path = new PathString();

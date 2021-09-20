@@ -32,7 +32,8 @@ namespace Microsoft.AspNetCore.Components.WebAssembly.Hosting
             IJSUnmarshalledRuntime invoker,
             CultureInfo initialCulture,
             CultureInfo initialUICulture
-        ) {
+        )
+        {
             _invoker = invoker;
             InitialCulture = initialCulture;
             InitialUICulture = initialUICulture;
@@ -78,7 +79,8 @@ namespace Microsoft.AspNetCore.Components.WebAssembly.Hosting
                         )
                     )
                 )
-            ) {
+            )
+            {
                 throw new InvalidOperationException(
                     "Blazor detected a change in the application's culture that is not supported with the current project configuration. "
                         + "To change culture dynamically during startup, set <BlazorWebAssemblyLoadAllGlobalizationData>true</BlazorWebAssemblyLoadAllGlobalizationData> in the application's project file."

@@ -18,7 +18,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Extensions
             Microsoft.CodeAnalysis.Workspace workspace,
             DocumentId documentId,
             out VsTextSpan spanInPrimaryBuffer
-        ) {
+        )
+        {
             spanInPrimaryBuffer = default;
 
             if (!(workspace is VisualStudioWorkspaceImpl visualStudioWorkspace))

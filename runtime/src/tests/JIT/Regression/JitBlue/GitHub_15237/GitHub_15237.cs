@@ -24,7 +24,8 @@ namespace UnsafeTesting
                 || (Math.Abs(UnsafeRead - ManualVectors) > Single.Epsilon)
                 || (Math.Abs(UnsafeReadUnaligned - ManualVectors) > Single.Epsilon)
                 || (Math.Abs(NoVectors - ManualVectors) > Single.Epsilon)
-            ) {
+            )
+            {
                 Console.WriteLine("FAIL");
                 return -1;
             }

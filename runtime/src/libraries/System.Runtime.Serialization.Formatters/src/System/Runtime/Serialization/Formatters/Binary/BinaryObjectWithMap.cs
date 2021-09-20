@@ -27,7 +27,8 @@ namespace System.Runtime.Serialization.Formatters.Binary
             int numMembers,
             string[] memberNames,
             int assemId
-        ) {
+        )
+        {
             _objectId = objectId;
             _name = name;
             _numMembers = numMembers;

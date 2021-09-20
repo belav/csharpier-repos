@@ -21,7 +21,8 @@ namespace Microsoft.CSharp.RuntimeBinder.Semantics
                 PfnBindBinOp pfn,
                 OpSigFlags grfos,
                 BinOpFuncKind fnkind
-            ) {
+            )
+            {
                 this.pt1 = pt1;
                 this.pt2 = pt2;
                 this.mask = mask;
@@ -67,7 +68,8 @@ namespace Microsoft.CSharp.RuntimeBinder.Semantics
                 OpSigFlags grfos,
                 LiftFlags grflt,
                 BinOpFuncKind fnkind
-            ) {
+            )
+            {
                 this.pt1 = PredefinedType.PT_UNDEFINEDINDEX;
                 this.pt2 = PredefinedType.PT_UNDEFINEDINDEX;
                 this.mask = BinOpMask.None;

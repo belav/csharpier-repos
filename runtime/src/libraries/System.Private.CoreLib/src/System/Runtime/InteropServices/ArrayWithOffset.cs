@@ -24,7 +24,8 @@ namespace System.Runtime.InteropServices
                     !(array is Array arrayObj)
                     || (arrayObj.Rank != 1)
                     || !Marshal.IsPinnable(arrayObj)
-                ) {
+                )
+                {
                     throw new ArgumentException(SR.ArgumentException_NotIsomorphic);
                 }
 

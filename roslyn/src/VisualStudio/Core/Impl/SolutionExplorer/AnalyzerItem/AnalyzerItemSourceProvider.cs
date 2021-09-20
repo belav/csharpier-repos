@@ -30,7 +30,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.SolutionExplore
         protected override IAttachedCollectionSource CreateCollectionSource(
             AnalyzersFolderItem analyzersFolder,
             string relationshipName
-        ) {
+        )
+        {
             if (relationshipName == KnownRelationships.Contains)
             {
                 return new AnalyzerItemSource(analyzersFolder, _commandHandler);

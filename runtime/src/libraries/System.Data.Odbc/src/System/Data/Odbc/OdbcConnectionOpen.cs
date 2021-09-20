@@ -12,7 +12,8 @@ namespace System.Data.Odbc
         internal OdbcConnectionOpen(
             OdbcConnection outerConnection,
             OdbcConnectionString connectionOptions
-        ) {
+        )
+        {
             OdbcEnvironmentHandle environmentHandle = OdbcEnvironment.GetGlobalEnvironmentHandle();
             outerConnection.ConnectionHandle = new OdbcConnectionHandle(
                 outerConnection,

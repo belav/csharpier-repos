@@ -31,7 +31,8 @@ namespace System.Linq.Expressions.Interpreter
             object[]? objects,
             RuntimeLabel[] labels,
             List<KeyValuePair<int, object?>>? debugCookies
-        ) {
+        )
+        {
             MaxStackDepth = maxStackDepth;
             MaxContinuationDepth = maxContinuationDepth;
             Instructions = instructions;
@@ -58,7 +59,8 @@ namespace System.Linq.Expressions.Interpreter
 
             public InstructionList.DebugView.InstructionView[] GetInstructionViews(
                 bool includeDebugCookies = false
-            ) {
+            )
+            {
                 return InstructionList.DebugView.GetInstructionViews(
                     _array.Instructions,
                     _array.Objects,
@@ -123,7 +125,8 @@ namespace System.Linq.Expressions.Interpreter
                 IReadOnlyList<object>? objects,
                 Func<int, int> labelIndexer,
                 IReadOnlyList<KeyValuePair<int, object?>>? debugCookies
-            ) {
+            )
+            {
                 var result = new List<InstructionView>();
                 int index = 0;
                 int stackDepth = 0;
@@ -195,7 +198,8 @@ namespace System.Linq.Expressions.Interpreter
                     int index,
                     int stackDepth,
                     int continuationsDepth
-                ) {
+                )
+                {
                     _instruction = instruction;
                     _name = name;
                     _index = index;
@@ -910,7 +914,8 @@ namespace System.Linq.Expressions.Interpreter
             ConstructorInfo constructorInfo,
             ParameterInfo[] parameters,
             ByRefUpdater[] updaters
-        ) {
+        )
+        {
             Emit(new ByRefNewInstruction(constructorInfo, parameters.Length, updaters));
         }
 
@@ -1019,7 +1024,8 @@ namespace System.Linq.Expressions.Interpreter
             MethodInfo method,
             ParameterInfo[] parameters,
             ByRefUpdater[] byrefArgs
-        ) {
+        )
+        {
             Emit(
                 new ByRefMethodInfoCallInstruction(
                     method,
@@ -1111,7 +1117,8 @@ namespace System.Linq.Expressions.Interpreter
             bool hasResult,
             bool hasValue,
             bool labelTargetGetsValue
-        ) {
+        )
+        {
             Emit(
                 GotoInstruction.Create(
                     EnsureLabelIndex(label),

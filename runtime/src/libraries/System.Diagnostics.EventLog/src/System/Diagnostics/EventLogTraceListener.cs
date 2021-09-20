@@ -76,7 +76,8 @@ namespace System.Diagnostics
             int id,
             string format,
             params object[] args
-        ) {
+        )
+        {
             if (
                 Filter != null
                 && !Filter.ShouldTrace(eventCache, source, severity, id, format, args, null, null)
@@ -115,7 +116,8 @@ namespace System.Diagnostics
             TraceEventType severity,
             int id,
             string message
-        ) {
+        )
+        {
             if (
                 Filter != null
                 && !Filter.ShouldTrace(eventCache, source, severity, id, message, null, null, null)
@@ -132,7 +134,8 @@ namespace System.Diagnostics
             TraceEventType severity,
             int id,
             object data
-        ) {
+        )
+        {
             if (
                 Filter != null
                 && !Filter.ShouldTrace(eventCache, source, severity, id, null, null, data, null)
@@ -149,7 +152,8 @@ namespace System.Diagnostics
             TraceEventType severity,
             int id,
             params object[] data
-        ) {
+        )
+        {
             if (
                 Filter != null
                 && !Filter.ShouldTrace(eventCache, source, severity, id, null, null, null, data)

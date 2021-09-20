@@ -48,7 +48,8 @@ namespace System.Web.Mvc.Routing
         public Route BuildDirectRoute(
             string routeTemplate,
             ControllerDescriptor controllerDescriptor
-        ) {
+        )
+        {
             if (routeTemplate == null)
             {
                 throw Error.ArgumentNull("routeTemplate");
@@ -120,7 +121,8 @@ namespace System.Web.Mvc.Routing
             string actionName,
             MethodInfo targetMethod,
             string areaName
-        ) {
+        )
+        {
             if (routeTemplate == null)
             {
                 throw Error.ArgumentNull("routeTemplate");
@@ -199,7 +201,8 @@ namespace System.Web.Mvc.Routing
             RouteValueDictionary dataTokens,
             string routeTemplate,
             MethodInfo targetMethod
-        ) {
+        )
+        {
             Route route = new Route(routeTemplate, new MvcRouteHandler())
             {
                 Defaults = defaults,

@@ -16,7 +16,8 @@ namespace Microsoft.AspNetCore.Mvc.Infrastructure
 
         public OrderedEndpointsSequenceProvider GetOrCreateOrderedEndpointsSequenceProvider(
             IEndpointRouteBuilder endpoints
-        ) {
+        )
+        {
             return _sequenceProviderCache.GetOrAdd(
                 endpoints,
                 new OrderedEndpointsSequenceProvider()

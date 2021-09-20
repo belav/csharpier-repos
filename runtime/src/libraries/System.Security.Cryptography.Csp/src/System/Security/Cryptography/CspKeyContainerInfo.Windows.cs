@@ -29,7 +29,8 @@ namespace System.Security.Cryptography
                 if (
                     _parameters.ProviderType == (int)CapiHelper.ProviderType.PROV_RSA_FULL
                     || _parameters.ProviderType == (int)CapiHelper.ProviderType.PROV_RSA_AES
-                ) {
+                )
+                {
                     _parameters.KeyNumber = (int)KeyNumber.Exchange;
                 }
                 else if (_parameters.ProviderType == (int)CapiHelper.ProviderType.PROV_DSS_DH)

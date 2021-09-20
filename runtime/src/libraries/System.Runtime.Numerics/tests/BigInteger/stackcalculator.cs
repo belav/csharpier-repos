@@ -185,7 +185,8 @@ namespace System.Numerics.Tests
             BigInteger num2,
             string op,
             out BigInteger num3
-        ) {
+        )
+        {
             num3 = 0;
             switch (op)
             {
@@ -242,7 +243,8 @@ namespace System.Numerics.Tests
             BigInteger num2,
             BigInteger num3,
             string op
-        ) {
+        )
+        {
             switch (op)
             {
                 case "tModPow":

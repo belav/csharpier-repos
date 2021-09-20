@@ -61,7 +61,8 @@ namespace System.Security.Cryptography.X509Certificates.Tests
                     TestData.PfxDataPassword,
                     X509KeyStorageFlags.DefaultKeySet
                 )
-            ) {
+            )
+            {
                 store.Open(OpenFlags.ReadWrite);
 
                 // Defensive removal.
@@ -79,7 +80,8 @@ namespace System.Security.Cryptography.X509Certificates.Tests
                         TestData.PfxDataPassword,
                         X509KeyStorageFlags.PersistKeySet
                     )
-                ) {
+                )
+                {
                     Assert.True(
                         IsCertInStore(cert, store),
                         "PtxData certificate was found upon PersistKeySet import"
@@ -107,7 +109,8 @@ namespace System.Security.Cryptography.X509Certificates.Tests
                     TestData.PfxDataPassword,
                     X509KeyStorageFlags.DefaultKeySet
                 )
-            ) {
+            )
+            {
                 store.Open(OpenFlags.ReadWrite);
 
                 int countBefore = GetStoreCertificateCount(store);

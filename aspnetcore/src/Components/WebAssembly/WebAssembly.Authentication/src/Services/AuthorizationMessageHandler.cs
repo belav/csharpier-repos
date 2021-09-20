@@ -33,7 +33,8 @@ namespace Microsoft.AspNetCore.Components.WebAssembly.Authentication
         public AuthorizationMessageHandler(
             IAccessTokenProvider provider,
             NavigationManager navigation
-        ) {
+        )
+        {
             _provider = provider;
             _navigation = navigation;
         }
@@ -42,7 +43,8 @@ namespace Microsoft.AspNetCore.Components.WebAssembly.Authentication
         protected override async Task<HttpResponseMessage> SendAsync(
             HttpRequestMessage request,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var now = DateTimeOffset.Now;
             if (_authorizedUris == null)
             {
@@ -99,7 +101,8 @@ namespace Microsoft.AspNetCore.Components.WebAssembly.Authentication
             IEnumerable<string> authorizedUrls,
             IEnumerable<string> scopes = null,
             string returnUrl = null
-        ) {
+        )
+        {
             if (_authorizedUris != null)
             {
                 throw new InvalidOperationException("Handler already configured.");

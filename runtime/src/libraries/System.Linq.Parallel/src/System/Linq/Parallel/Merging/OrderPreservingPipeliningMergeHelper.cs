@@ -116,7 +116,8 @@ namespace System.Linq.Parallel
             bool autoBuffered,
             int queryId,
             IComparer<TKey> keyComparer
-        ) {
+        )
+        {
             Debug.Assert(partitions != null);
 
             TraceHelpers.TraceInfo(
@@ -298,7 +299,8 @@ namespace System.Linq.Parallel
                         int producer = 0;
                         producer < _mergeHelper._partitions.PartitionCount;
                         producer++
-                    ) {
+                    )
+                    {
                         Pair<TKey, TOutput> element = default(Pair<TKey, TOutput>);
 
                         // Get the first element from this producer
@@ -339,7 +341,8 @@ namespace System.Linq.Parallel
                     if (
                         TryGetPrivateElement(lastProducer, ref element)
                         || TryWaitForElement(lastProducer, ref element)
-                    ) {
+                    )
+                    {
                         // Update the producer heap and its helper array with the received element
                         _producerHeap.ReplaceMax(new Producer<TKey>(element.First, lastProducer));
                         _producerNextElement[lastProducer] = element.Second;
@@ -368,7 +371,8 @@ namespace System.Linq.Parallel
             {
                 if (
                     _mergeHelper._taskGroupState.CancellationState.MergedCancellationToken.IsCancellationRequested
-                ) {
+                )
+                {
                     try
                     {
                         // Wake up all producers. Since the cancellation token has already been

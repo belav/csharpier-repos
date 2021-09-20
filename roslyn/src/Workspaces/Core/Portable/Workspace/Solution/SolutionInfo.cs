@@ -50,7 +50,8 @@ namespace Microsoft.CodeAnalysis
             SolutionAttributes attributes,
             IReadOnlyList<ProjectInfo> projects,
             IReadOnlyList<AnalyzerReference> analyzerReferences
-        ) {
+        )
+        {
             Attributes = attributes;
             Projects = projects;
             AnalyzerReferences = analyzerReferences;
@@ -66,7 +67,8 @@ namespace Microsoft.CodeAnalysis
             VersionStamp version,
             string? filePath,
             IEnumerable<ProjectInfo>? projects
-        ) {
+        )
+        {
             return Create(id, version, filePath, projects, analyzerReferences: null);
         }
 
@@ -79,7 +81,8 @@ namespace Microsoft.CodeAnalysis
             string? filePath = null,
             IEnumerable<ProjectInfo>? projects = null,
             IEnumerable<AnalyzerReference>? analyzerReferences = null
-        ) {
+        )
+        {
             return new SolutionInfo(
                 new SolutionAttributes(
                     id ?? throw new ArgumentNullException(nameof(id)),
@@ -148,7 +151,8 @@ namespace Microsoft.CodeAnalysis
                 VersionStamp version,
                 string? filePath,
                 Guid telemetryId
-            ) {
+            )
+            {
                 Id = id;
                 Version = version;
                 FilePath = filePath;
@@ -159,7 +163,8 @@ namespace Microsoft.CodeAnalysis
                 VersionStamp? version = null,
                 Optional<string?> filePath = default,
                 Optional<Guid> telemetryId = default
-            ) {
+            )
+            {
                 var newVersion = version ?? Version;
                 var newFilePath = filePath.HasValue ? filePath.Value : FilePath;
                 var newTelemetryId = telemetryId.HasValue ? telemetryId.Value : TelemetryId;
@@ -168,7 +173,8 @@ namespace Microsoft.CodeAnalysis
                     newVersion == Version
                     && newFilePath == FilePath
                     && newTelemetryId == TelemetryId
-                ) {
+                )
+                {
                     return this;
                 }
 

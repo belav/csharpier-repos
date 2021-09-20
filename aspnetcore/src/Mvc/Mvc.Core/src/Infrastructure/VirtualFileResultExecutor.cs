@@ -90,7 +90,8 @@ namespace Microsoft.AspNetCore.Mvc.Infrastructure
             IFileInfo fileInfo,
             RangeItemHeaderValue? range,
             long rangeLength
-        ) {
+        )
+        {
             if (context == null)
             {
                 throw new ArgumentNullException(nameof(context));

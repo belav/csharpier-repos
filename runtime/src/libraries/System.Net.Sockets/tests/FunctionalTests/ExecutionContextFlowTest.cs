@@ -17,7 +17,8 @@ namespace System.Net.Sockets.Tests
         [InlineData(true)]
         public async Task SocketAsyncEventArgs_ExecutionContextFlowsAcrossAcceptAsyncOperation(
             bool suppressContext
-        ) {
+        )
+        {
             using (
                 var listener = new Socket(
                     AddressFamily.InterNetwork,
@@ -84,7 +85,8 @@ namespace System.Net.Sockets.Tests
                     SocketType.Stream,
                     ProtocolType.Tcp
                 )
-            ) {
+            )
+            {
                 listener.Bind(new IPEndPoint(IPAddress.Loopback, 0));
                 listener.Listen(1);
 
@@ -124,7 +126,8 @@ namespace System.Net.Sockets.Tests
         [InlineData(true)]
         public async Task SocketAsyncEventArgs_ExecutionContextFlowsAcrossConnectAsyncOperation(
             bool suppressContext
-        ) {
+        )
+        {
             using (
                 var listener = new Socket(
                     AddressFamily.InterNetwork,
@@ -190,7 +193,8 @@ namespace System.Net.Sockets.Tests
                     SocketType.Stream,
                     ProtocolType.Tcp
                 )
-            ) {
+            )
+            {
                 listener.Bind(new IPEndPoint(IPAddress.Loopback, 0));
                 listener.Listen(1);
 
@@ -233,7 +237,8 @@ namespace System.Net.Sockets.Tests
         [InlineData(true)]
         public async Task SocketAsyncEventArgs_ExecutionContextFlowsAcrossDisconnectAsyncOperation(
             bool suppressContext
-        ) {
+        )
+        {
             using (
                 var listener = new Socket(
                     AddressFamily.InterNetwork,
@@ -289,7 +294,8 @@ namespace System.Net.Sockets.Tests
         [InlineData(true)]
         public async Task APM_ExecutionContextFlowsAcrossBeginDisconnectOperation(
             bool suppressContext
-        ) {
+        )
+        {
             using (
                 var listener = new Socket(
                     AddressFamily.InterNetwork,
@@ -303,7 +309,8 @@ namespace System.Net.Sockets.Tests
                     SocketType.Stream,
                     ProtocolType.Tcp
                 )
-            ) {
+            )
+            {
                 listener.Bind(new IPEndPoint(IPAddress.Loopback, 0));
                 listener.Listen(1);
 
@@ -353,7 +360,8 @@ namespace System.Net.Sockets.Tests
         public async Task SocketAsyncEventArgs_ExecutionContextFlowsAcrossReceiveAsyncOperation(
             bool suppressContext,
             bool receiveFrom
-        ) {
+        )
+        {
             using (
                 var listener = new Socket(
                     AddressFamily.InterNetwork,
@@ -413,7 +421,8 @@ namespace System.Net.Sockets.Tests
         public async Task APM_ExecutionContextFlowsAcrossBeginReceiveOperation(
             bool suppressContext,
             bool receiveFrom
-        ) {
+        )
+        {
             using (
                 var listener = new Socket(
                     AddressFamily.InterNetwork,
@@ -427,7 +436,8 @@ namespace System.Net.Sockets.Tests
                     SocketType.Stream,
                     ProtocolType.Tcp
                 )
-            ) {
+            )
+            {
                 listener.Bind(new IPEndPoint(IPAddress.Loopback, 0));
                 listener.Listen(1);
 
@@ -499,7 +509,8 @@ namespace System.Net.Sockets.Tests
         public async Task SocketAsyncEventArgs_ExecutionContextFlowsAcrossSendAsyncOperation(
             bool suppressContext,
             int sendMode
-        ) {
+        )
+        {
             using (
                 var listener = new Socket(
                     AddressFamily.InterNetwork,
@@ -574,7 +585,8 @@ namespace System.Net.Sockets.Tests
         public async Task APM_ExecutionContextFlowsAcrossBeginSendOperation(
             bool suppressContext,
             bool sendTo
-        ) {
+        )
+        {
             using (
                 var listener = new Socket(
                     AddressFamily.InterNetwork,
@@ -588,7 +600,8 @@ namespace System.Net.Sockets.Tests
                     SocketType.Stream,
                     ProtocolType.Tcp
                 )
-            ) {
+            )
+            {
                 listener.Bind(new IPEndPoint(IPAddress.Loopback, 0));
                 listener.Listen(1);
 
@@ -660,7 +673,8 @@ namespace System.Net.Sockets.Tests
         [InlineData(true)]
         public async Task APM_ExecutionContextFlowsAcrossBeginSendFileOperation(
             bool suppressContext
-        ) {
+        )
+        {
             using (
                 var listener = new Socket(
                     AddressFamily.InterNetwork,
@@ -674,7 +688,8 @@ namespace System.Net.Sockets.Tests
                     SocketType.Stream,
                     ProtocolType.Tcp
                 )
-            ) {
+            )
+            {
                 listener.Bind(new IPEndPoint(IPAddress.Loopback, 0));
                 listener.Listen(1);
 
@@ -739,7 +754,8 @@ namespace System.Net.Sockets.Tests
                     SocketType.Stream,
                     ProtocolType.Tcp
                 )
-            ) {
+            )
+            {
                 listener.Bind(new IPEndPoint(IPAddress.Loopback, 0));
                 listener.Listen(1);
 
@@ -804,7 +820,8 @@ namespace System.Net.Sockets.Tests
                             SocketType.Stream,
                             ProtocolType.Tcp
                         )
-                    ) {
+                    )
+                    {
                         listener.Bind(new IPEndPoint(IPAddress.Loopback, 0));
                         listener.Listen(1);
 
@@ -870,7 +887,8 @@ namespace System.Net.Sockets.Tests
             public AwaitWithOnCompletedInvocation(
                 ValueTask<T> valueTask,
                 Action invokeAfterOnCompleted
-            ) {
+            )
+            {
                 _valueTask = valueTask;
                 _invokeAfterOnCompleted = invokeAfterOnCompleted;
             }

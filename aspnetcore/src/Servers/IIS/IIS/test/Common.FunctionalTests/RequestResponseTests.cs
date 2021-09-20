@@ -642,7 +642,8 @@ namespace Microsoft.AspNetCore.Server.IIS.FunctionalTests
             string reason,
             string expectedReason,
             string body
-        ) {
+        )
+        {
             var response = await _fixture.Client.GetAsync(
                 $"SetCustomErorCode?code={code}&reason={reason}&writeBody={body != null}&body={body}"
             );

@@ -168,7 +168,8 @@ namespace System.Net
             if (
                 statusCode != Interop.HttpApi.ERROR_SUCCESS
                 && statusCode != Interop.HttpApi.ERROR_HANDLE_EOF
-            ) {
+            )
+            {
                 Exception exception = new HttpListenerException((int)statusCode);
                 if (NetEventSource.Log.IsEnabled())
                     NetEventSource.Error(this, exception.ToString());
@@ -187,7 +188,8 @@ namespace System.Net
             int size,
             AsyncCallback? callback,
             object? state
-        ) {
+        )
+        {
             Interop.HttpApi.HTTP_FLAGS flags = ComputeLeftToWrite();
             if (_closed || (size == 0 && _leftToWrite != 0))
             {
@@ -276,7 +278,8 @@ namespace System.Net
             if (
                 statusCode != Interop.HttpApi.ERROR_SUCCESS
                 && statusCode != Interop.HttpApi.ERROR_IO_PENDING
-            ) {
+            )
+            {
                 asyncResult.InternalCleanup();
                 if (_httpContext.Listener!.IgnoreWriteExceptions && sentHeaders)
                 {
@@ -297,7 +300,8 @@ namespace System.Net
             if (
                 statusCode == Interop.HttpApi.ERROR_SUCCESS
                 && HttpListener.SkipIOCPCallbackOnSuccess
-            ) {
+            )
+            {
                 // IO operation completed synchronously - callback won't be called to signal completion.
                 asyncResult.IOCompleted(statusCode, bytesSent);
             }
@@ -410,7 +414,8 @@ namespace System.Net
                     "HEAD",
                     StringComparison.OrdinalIgnoreCase
                 )
-            ) {
+            )
+            {
                 if (_httpContext.Response.BoundaryType == BoundaryType.None)
                 {
                     flags |= Interop.HttpApi.HTTP_FLAGS.HTTP_SEND_RESPONSE_FLAG_DISCONNECT;
@@ -482,7 +487,8 @@ namespace System.Net
             if (
                 statusCode != Interop.HttpApi.ERROR_SUCCESS
                 && statusCode != Interop.HttpApi.ERROR_HANDLE_EOF
-            ) {
+            )
+            {
                 Exception exception = new HttpListenerException((int)statusCode);
                 if (NetEventSource.Log.IsEnabled())
                     NetEventSource.Error(this, exception.ToString());

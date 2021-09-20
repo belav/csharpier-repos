@@ -92,7 +92,8 @@ namespace System.Data.Tests
             string name,
             int tableCount,
             int relCount
-        ) {
+        )
+        {
             Assert.Equal(name, ds.DataSetName);
             Assert.Equal(tableCount, ds.Tables.Count);
             if (relCount >= 0)
@@ -109,7 +110,8 @@ namespace System.Data.Tests
             int childRelationCount,
             int constraintCount,
             int primaryKeyLength
-        ) {
+        )
+        {
             Assert.Equal(name, dt.TableName);
             Assert.Equal(columnCount, dt.Columns.Count);
             Assert.Equal(rowCount, dt.Rows.Count);
@@ -127,7 +129,8 @@ namespace System.Data.Tests
             XmlReadMode resultMode,
             string datasetName,
             int tableCount
-        ) {
+        )
+        {
             DataSetAssertion.AssertReadXml(
                 ds,
                 label,
@@ -151,7 +154,8 @@ namespace System.Data.Tests
             string datasetName,
             int tableCount,
             ReadState state
-        ) {
+        )
+        {
             DataSetAssertion.AssertReadXml(
                 ds,
                 label,
@@ -178,7 +182,8 @@ namespace System.Data.Tests
             ReadState state,
             string readerLocalName,
             string readerNS
-        ) {
+        )
+        {
             XmlReader xtr = new XmlTextReader(xml, XmlNodeType.Element, null);
             Assert.Equal(resultMode, ds.ReadXml(xtr, readMode));
             AssertDataSet(label + ".dataset", ds, datasetName, tableCount, -1);
@@ -198,7 +203,8 @@ namespace System.Data.Tests
             string[] childColNames,
             bool existsUK,
             bool existsFK
-        ) {
+        )
+        {
             Assert.Equal(name, rel.RelationName);
             Assert.Equal(nested, rel.Nested);
             for (int i = 0; i < parentColNames.Length; i++)
@@ -223,7 +229,8 @@ namespace System.Data.Tests
             string name,
             bool isPrimaryKey,
             string[] colNames
-        ) {
+        )
+        {
             Assert.Equal(name, uc.ConstraintName);
             Assert.Equal(isPrimaryKey, uc.IsPrimaryKey);
             for (int i = 0; i < colNames.Length; i++)
@@ -240,7 +247,8 @@ namespace System.Data.Tests
             Rule updateRule,
             string[] colNames,
             string[] relColNames
-        ) {
+        )
+        {
             Assert.Equal(name, fk.ConstraintName);
             Assert.Equal(acceptRejectRule, fk.AcceptRejectRule);
             Assert.Equal(delRule, fk.DeleteRule);
@@ -272,7 +280,8 @@ namespace System.Data.Tests
             string prefix,
             bool readOnly,
             bool unique
-        ) {
+        )
+        {
             Assert.Equal(colName, col.ColumnName);
             Assert.Equal(allowDBNull, col.AllowDBNull);
             Assert.Equal(autoIncr, col.AutoIncrement);

@@ -661,7 +661,8 @@ namespace RazorSyntaxGenerator
                     IsDerivedOrListOfDerived("SyntaxNode", field.Type)
                     || IsDerivedOrListOfDerived("SyntaxToken", field.Type)
                     || field.Type == "SyntaxNodeOrTokenList"
-                ) {
+                )
+                {
                     if (nCompared > 0)
                         Write(" || ");
                     Write("{0} != {1}", CamelCase(field.Name), field.Name);
@@ -817,7 +818,8 @@ namespace RazorSyntaxGenerator
         private void WriteGreenFactories(
             List<TreeType> nodes,
             bool withSyntaxFactoryContext = false
-        ) {
+        )
+        {
             for (int i = 0, n = nodes.Count; i < n; i++)
             {
                 var node = nodes[i];
@@ -930,7 +932,8 @@ namespace RazorSyntaxGenerator
                 && nd.Name != "DocumentationCommentTriviaSyntax"
                 && nd.Name != "IncompleteMemberSyntax"
                 && valueFields.Count + nodeFields.Count <= 3
-            ) {
+            )
+            {
                 //int hash;
                 //var cached = SyntaxNodeCache.TryGetNode((int)SyntaxKind.IdentifierName, identifier, this.context, out hash);
                 //if (cached != null) return (IdentifierNameSyntax)cached;
@@ -1023,7 +1026,8 @@ namespace RazorSyntaxGenerator
             bool withSyntaxFactoryContext,
             List<Field> valueFields,
             List<Field> nodeFields
-        ) {
+        )
+        {
             if (nd.Kinds.Count == 1)
             {
                 Write("SyntaxKind.");
@@ -1617,7 +1621,8 @@ namespace RazorSyntaxGenerator
                     IsDerivedOrListOfDerived("SyntaxNode", field.Type)
                     || IsDerivedOrListOfDerived("SyntaxToken", field.Type)
                     || field.Type == "SyntaxNodeOrTokenList"
-                ) {
+                )
+                {
                     if (nCompared > 0)
                         Write(" || ");
                     Write("{0} != {1}", CamelCase(field.Name), field.Name);
@@ -1814,7 +1819,8 @@ namespace RazorSyntaxGenerator
             if (
                 referencedNode != null
                 && (!IsOptional(field) || RequiredFactoryArgumentCount(referencedNode) == 0)
-            ) {
+            )
+            {
                 return referencedNode;
             }
 
@@ -1859,7 +1865,8 @@ namespace RazorSyntaxGenerator
             Field field,
             Node referencedNode,
             Field referencedNodeField
-        ) {
+        )
+        {
             var argType = GetElementType(referencedNodeField.Type);
 
             var isNew = false;
@@ -2343,7 +2350,8 @@ namespace RazorSyntaxGenerator
                     field.Type == "SyntaxToken"
                     && CanBeAutoCreated(nd, field)
                     && field.Kinds.Count > 1
-                ) {
+                )
+                {
                     WriteLine();
                     WriteLine(
                         "    private static SyntaxKind Get{0}{1}Kind(SyntaxKind kind)",
@@ -2390,7 +2398,8 @@ namespace RazorSyntaxGenerator
             if (
                 minimalFactoryFields != null
                 && factoryWithNoAutoCreatableTokenFields.SetEquals(minimalFactoryFields)
-            ) {
+            )
+            {
                 return; // will be handled in minimal factory case
             }
 

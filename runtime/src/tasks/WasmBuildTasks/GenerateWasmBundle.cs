@@ -62,7 +62,8 @@ public class GenerateWasmBundle : Task
                 FileAccess.ReadWrite,
                 FileShare.ReadWrite
             )
-        ) {
+        )
+        {
             var lengthBytes = new byte[4];
             var magicBytes = Encoding.ASCII.GetBytes("talb");
             BinaryPrimitives.WriteInt32LittleEndian(lengthBytes, data.json_bytes.Length);

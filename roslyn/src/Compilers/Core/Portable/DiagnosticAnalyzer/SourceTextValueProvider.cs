@@ -24,7 +24,8 @@ namespace Microsoft.CodeAnalysis.Diagnostics
         public SourceTextValueProvider(
             Func<SourceText, TValue> computeValue,
             IEqualityComparer<SourceText>? sourceTextComparer = null
-        ) {
+        )
+        {
             CoreValueProvider = new AnalysisValueProvider<SourceText, TValue>(
                 computeValue,
                 sourceTextComparer ?? SourceTextComparer.Instance

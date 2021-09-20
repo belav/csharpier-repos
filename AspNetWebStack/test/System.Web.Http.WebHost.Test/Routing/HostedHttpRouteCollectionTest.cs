@@ -522,13 +522,15 @@ namespace System.Web.Http.WebHost.Routing
                 string parameterName,
                 IDictionary<string, object> values,
                 HttpRouteDirection routeDirection
-            ) {
+            )
+            {
                 long id;
                 if (
                     values.ContainsKey("id")
                     && Int64.TryParse(values["id"].ToString(), out id)
                     && (id == 10 || id == 15 || id == 20)
-                ) {
+                )
+                {
                     return true;
                 }
 
@@ -538,7 +540,8 @@ namespace System.Web.Http.WebHost.Routing
 
         private static async Task<HttpResponseMessage> SubmitRequestAsync(
             HttpRequestMessage request
-        ) {
+        )
+        {
             HttpConfiguration config = new HttpConfiguration(
                 new HostedHttpRouteCollection(new RouteCollection())
             );
@@ -580,7 +583,8 @@ namespace System.Web.Http.WebHost.Routing
 
         private static HttpRequestMessage CreateHttpRequestMessageWithContext(
             string requestPath = "controllerName/actionName"
-        ) {
+        )
+        {
             HttpRequestMessage request = new HttpRequestMessage(
                 HttpMethod.Get,
                 "http://localhost/api/" + requestPath
@@ -594,7 +598,8 @@ namespace System.Web.Http.WebHost.Routing
         private static HttpContextBase CreateHttpContext(
             string relativeUrl,
             string appPathModifierReturnValue = ""
-        ) {
+        )
+        {
             var mockContext = new Mock<HttpContextBase>();
 
             mockContext.SetupGet(c => c.Request.ApplicationPath).Returns(String.Empty);
@@ -628,17 +633,14 @@ namespace System.Web.Http.WebHost.Routing
 
         public class HttpDomainRoute : Route
         {
-            public HttpDomainRoute(
-                string routeTemplate,
-                object defaults,
-                object constraints = null
-            ) : base(
-                routeTemplate,
-                new RouteValueDictionary(defaults),
-                new RouteValueDictionary(constraints),
-                new RouteValueDictionary(),
-                HttpControllerRouteHandler.Instance
-            ) { }
+            public HttpDomainRoute(string routeTemplate, object defaults, object constraints = null)
+                : base(
+                    routeTemplate,
+                    new RouteValueDictionary(defaults),
+                    new RouteValueDictionary(constraints),
+                    new RouteValueDictionary(),
+                    HttpControllerRouteHandler.Instance
+                ) { }
 
             public override RouteData GetRouteData(HttpContextBase context)
             {
@@ -650,7 +652,8 @@ namespace System.Web.Http.WebHost.Routing
             public override VirtualPathData GetVirtualPath(
                 RequestContext requestContext,
                 RouteValueDictionary values
-            ) {
+            )
+            {
                 return base.GetVirtualPath(requestContext, values);
             }
         }
@@ -662,11 +665,13 @@ namespace System.Web.Http.WebHost.Routing
                 string routeTemplate,
                 object defaults,
                 object constraints = null
-            ) : base(
-                routeTemplate,
-                new HttpRouteValueDictionary(defaults),
-                new HttpRouteValueDictionary(constraints)
-            ) {
+            )
+                : base(
+                    routeTemplate,
+                    new HttpRouteValueDictionary(defaults),
+                    new HttpRouteValueDictionary(constraints)
+                )
+            {
                 Domain = domain;
             }
 
@@ -675,7 +680,8 @@ namespace System.Web.Http.WebHost.Routing
             public override IHttpRouteData GetRouteData(
                 string virtualPathRoot,
                 System.Net.Http.HttpRequestMessage request
-            ) {
+            )
+            {
                 // Route data
                 IHttpRouteData data = base.GetRouteData(virtualPathRoot, request);
                 data.Values.Add("domain", Domain);
@@ -685,7 +691,8 @@ namespace System.Web.Http.WebHost.Routing
             public override IHttpVirtualPathData GetVirtualPath(
                 System.Net.Http.HttpRequestMessage request,
                 IDictionary<string, object> values
-            ) {
+            )
+            {
                 // customize the action token
                 values["action"] = "actionNameFromDomain";
 
@@ -701,7 +708,8 @@ namespace System.Web.Http.WebHost.Routing
                 string parameterName,
                 IDictionary<string, object> values,
                 HttpRouteDirection routeDirection
-            ) {
+            )
+            {
                 throw new NotImplementedException();
             }
         }
@@ -714,7 +722,8 @@ namespace System.Web.Http.WebHost.Routing
                 string parameterName,
                 RouteValueDictionary values,
                 RouteDirection routeDirection
-            ) {
+            )
+            {
                 throw new NotImplementedException();
             }
         }
@@ -729,7 +738,8 @@ namespace System.Web.Http.WebHost.Routing
                 string routeTemplate,
                 string name,
                 object constraint
-            ) {
+            )
+            {
                 TimesValidateConstraintCalled++;
                 base.ValidateConstraint(routeTemplate, name, constraint);
             }

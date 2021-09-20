@@ -30,7 +30,8 @@ namespace System.Configuration
             string oldStreamname,
             string newStreamname,
             bool alwaysIntercept
-        ) {
+        )
+        {
             // After reviewing all the code paths, oldStreamname shouldn't be Null or Empty.
             // It actually doesn't make much sense if we're asked to intercept an null or empty stream.
             Debug.Assert(!string.IsNullOrEmpty(oldStreamname));
@@ -92,7 +93,8 @@ namespace System.Configuration
             string streamName,
             string templateStreamName,
             ref object writeContext
-        ) {
+        )
+        {
             // Always attempt to write to the new stream name if it exists.
             StreamUpdate streamUpdate = GetStreamUpdate(streamName, true);
             if (streamUpdate != null)

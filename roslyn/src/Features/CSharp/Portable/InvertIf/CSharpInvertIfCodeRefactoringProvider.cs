@@ -144,7 +144,8 @@ namespace Microsoft.CodeAnalysis.CSharp.InvertIf
         protected override StatementSyntax AsEmbeddedStatement(
             IEnumerable<StatementSyntax> statements,
             StatementSyntax original
-        ) {
+        )
+        {
             var statementArray = statements.ToArray();
             if (statementArray.Length > 0)
             {
@@ -164,7 +165,8 @@ namespace Microsoft.CodeAnalysis.CSharp.InvertIf
             SyntaxNode condition,
             StatementSyntax trueStatement,
             StatementSyntax falseStatementOpt = null
-        ) {
+        )
+        {
             var isSingleLine = sourceText.AreOnSameLine(
                 ifNode.GetFirstToken(),
                 ifNode.GetLastToken()
@@ -211,7 +213,8 @@ namespace Microsoft.CodeAnalysis.CSharp.InvertIf
         protected override SyntaxNode WithStatements(
             SyntaxNode node,
             IEnumerable<StatementSyntax> statements
-        ) {
+        )
+        {
             switch (node)
             {
                 case BlockSyntax n:

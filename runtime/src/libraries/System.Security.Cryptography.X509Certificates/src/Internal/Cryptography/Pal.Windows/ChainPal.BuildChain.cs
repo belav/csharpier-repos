@@ -32,7 +32,8 @@ namespace Internal.Cryptography.Pal
             DateTime verificationTime,
             TimeSpan timeout,
             bool disableAia
-        ) {
+        )
+        {
             CertificatePal certificatePal = (CertificatePal)cert;
             unsafe
             {
@@ -53,7 +54,8 @@ namespace Internal.Cryptography.Pal
                         SafeHandle applicationPolicyOids = applicationPolicy!.ToLpstrArray(
                             out applicationPolicyCount
                         )
-                    ) {
+                    )
+                    {
                         if (!applicationPolicyOids.IsInvalid)
                         {
                             chainPara.RequestedUsage.dwType =
@@ -69,7 +71,8 @@ namespace Internal.Cryptography.Pal
                             SafeHandle certificatePolicyOids = certificatePolicy!.ToLpstrArray(
                                 out certificatePolicyCount
                             )
-                        ) {
+                        )
+                        {
                             if (!certificatePolicyOids.IsInvalid)
                             {
                                 chainPara.RequestedIssuancePolicy.dwType =
@@ -102,7 +105,8 @@ namespace Internal.Cryptography.Pal
                                     IntPtr.Zero,
                                     out chain
                                 )
-                            ) {
+                            )
+                            {
                                 return null;
                             }
 
@@ -117,7 +121,8 @@ namespace Internal.Cryptography.Pal
             X509ChainTrustMode trustMode,
             X509Certificate2Collection? customTrustStore,
             bool useMachineContext
-        ) {
+        )
+        {
             SafeChainEngineHandle chainEngineHandle;
             if (trustMode == X509ChainTrustMode.CustomRootTrust)
             {
@@ -127,7 +132,8 @@ namespace Internal.Cryptography.Pal
                         customTrustStore,
                         true
                     )
-                ) {
+                )
+                {
                     CERT_CHAIN_ENGINE_CONFIG customChainEngine = default;
                     customChainEngine.cbSize = Marshal.SizeOf<CERT_CHAIN_ENGINE_CONFIG>();
                     customChainEngine.hExclusiveRoot = customTrustStoreHandle.DangerousGetHandle();
@@ -149,7 +155,8 @@ namespace Internal.Cryptography.Pal
         private static SafeCertStoreHandle ConvertStoreToSafeHandle(
             X509Certificate2Collection? extraStore,
             bool returnEmptyHandle = false
-        ) {
+        )
+        {
             if ((extraStore == null || extraStore.Count == 0) && !returnEmptyHandle)
                 return SafeCertStoreHandle.InvalidHandle;
 
@@ -162,7 +169,8 @@ namespace Internal.Cryptography.Pal
             X509RevocationMode revocationMode,
             X509RevocationFlag revocationFlag,
             bool disableAia
-        ) {
+        )
+        {
             const CertChainFlags AiaDisabledFlags =
                 CertChainFlags.CERT_CHAIN_DISABLE_AIA
                 | CertChainFlags.CERT_CHAIN_DISABLE_AUTH_ROOT_AUTO_UPDATE;

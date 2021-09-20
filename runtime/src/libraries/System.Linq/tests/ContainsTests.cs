@@ -105,7 +105,8 @@ namespace System.Linq.Tests
             IEqualityComparer<string> comparer,
             string value,
             bool expected
-        ) {
+        )
+        {
             if (comparer == null)
             {
                 Assert.Equal(expected, source.Contains(value));
@@ -119,7 +120,8 @@ namespace System.Linq.Tests
             IEqualityComparer<string> comparer,
             string value,
             bool expected
-        ) {
+        )
+        {
             if (comparer == null)
             {
                 Assert.Equal(expected, source.RunOnce().Contains(value));

@@ -77,7 +77,8 @@ namespace System.Drawing
                 PlatformDetection.IsRedHatFamily
                 || PlatformDetection.IsFedora
                 || PlatformDetection.IsOpenSUSE
-            ) {
+            )
+            {
                 return false;
             }
 
@@ -150,7 +151,8 @@ namespace System.Drawing
             Color[][] colors,
             int firstFailureX,
             int firstFailureY
-        ) {
+        )
+        {
             // Print out the whole bitmap to provide a view of the whole image, rather than just the difference between
             // a single pixel.
             var actualStringBuilder = new StringBuilder();

@@ -15,7 +15,8 @@ namespace Microsoft.AspNetCore.Razor.Language
             RazorSourceDocument source,
             IEnumerable<RazorDiagnostic> diagnostics,
             RazorParserOptions options
-        ) {
+        )
+        {
             if (root == null)
             {
                 throw new ArgumentNullException(nameof(root));

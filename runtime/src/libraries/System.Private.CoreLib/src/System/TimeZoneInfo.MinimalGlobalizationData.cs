@@ -11,7 +11,8 @@ namespace System
             ref string? standardDisplayName,
             ref string? daylightDisplayName,
             ref string? displayName
-        ) {
+        )
+        {
             // Do nothing. We'll use the fallback values already set.
         }
 
@@ -38,7 +39,8 @@ namespace System
             string ianaId,
             bool allocate,
             out string? windowsId
-        ) {
+        )
+        {
             windowsId = null;
             return false;
         }
@@ -48,7 +50,8 @@ namespace System
             string? region,
             bool allocate,
             out string? ianaId
-        ) {
+        )
+        {
             ianaId = null;
             return false;
         }

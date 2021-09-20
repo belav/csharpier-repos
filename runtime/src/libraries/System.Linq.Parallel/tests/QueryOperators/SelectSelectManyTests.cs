@@ -19,7 +19,8 @@ namespace System.Linq.Parallel.Tests
             IntegerRangeSet seen = new IntegerRangeSet(0, count);
             foreach (
                 var p in UnorderedSources.Default(count).Select(x => KeyValuePair.Create(x, x * x))
-            ) {
+            )
+            {
                 seen.Add(p.Key);
                 Assert.Equal(p.Key * p.Key, p.Value);
             }
@@ -104,7 +105,8 @@ namespace System.Linq.Parallel.Tests
         public static void Select_NotPipelined_Longrunning(
             Labeled<ParallelQuery<int>> labeled,
             int count
-        ) {
+        )
+        {
             Select_NotPipelined(labeled, count);
         }
 
@@ -125,7 +127,8 @@ namespace System.Linq.Parallel.Tests
             foreach (
                 var p in UnorderedSources.Default(count)
                     .Select((x, index) => KeyValuePair.Create(x, index))
-            ) {
+            )
+            {
                 seen.Add(p.Key);
                 Assert.Equal(p.Key, p.Value);
             }
@@ -159,7 +162,8 @@ namespace System.Linq.Parallel.Tests
         public static void Select_Indexed_Longrunning(
             Labeled<ParallelQuery<int>> labeled,
             int count
-        ) {
+        )
+        {
             Select_Indexed(labeled, count);
         }
 
@@ -198,7 +202,8 @@ namespace System.Linq.Parallel.Tests
         public static void Select_Indexed_NotPipelined(
             Labeled<ParallelQuery<int>> labeled,
             int count
-        ) {
+        )
+        {
             ParallelQuery<int> query = labeled.Item;
             int seen = 0;
             Assert.All(
@@ -218,7 +223,8 @@ namespace System.Linq.Parallel.Tests
         public static void Select_Indexed_NotPipelined_Longrunning(
             Labeled<ParallelQuery<int>> labeled,
             int count
-        ) {
+        )
+        {
             Select_Indexed_NotPipelined(labeled, count);
         }
 
@@ -251,7 +257,8 @@ namespace System.Linq.Parallel.Tests
         public static void Select_OrderablePartitionerWithOutOfOrderInputs_AsOrdered_CorrectOrder(
             bool keysOrderedInEachPartition,
             bool keysNormalized
-        ) {
+        )
+        {
             var range = new RangeOrderablePartitioner(
                 0,
                 1024,
@@ -297,7 +304,8 @@ namespace System.Linq.Parallel.Tests
                 object[] results in Sources.Ranges(
                     counts.DefaultIfEmpty(Sources.OuterLoopCount / 64)
                 )
-            ) {
+            )
+            {
                 foreach (Labeled<Func<int, int, IEnumerable<int>>> expander in Expanders())
                 {
                     foreach (int count in new[] { 0, 1, 2, 8 })
@@ -330,7 +338,8 @@ namespace System.Linq.Parallel.Tests
             int count,
             Labeled<Func<int, int, IEnumerable<int>>> expander,
             int expansion
-        ) {
+        )
+        {
             Func<int, int, IEnumerable<int>> expand = expander.Item;
             IntegerRangeSet seen = new IntegerRangeSet(0, count * expansion);
             foreach (int i in UnorderedSources.Default(count).SelectMany(x => expand(x, expansion)))
@@ -353,7 +362,8 @@ namespace System.Linq.Parallel.Tests
             int count,
             Labeled<Func<int, int, IEnumerable<int>>> expander,
             int expansion
-        ) {
+        )
+        {
             SelectMany_Unordered(count, expander, expansion);
         }
 
@@ -364,7 +374,8 @@ namespace System.Linq.Parallel.Tests
             int count,
             Labeled<Func<int, int, IEnumerable<int>>> expander,
             int expansion
-        ) {
+        )
+        {
             ParallelQuery<int> query = labeled.Item;
             Func<int, int, IEnumerable<int>> expand = expander.Item;
             int seen = 0;
@@ -389,7 +400,8 @@ namespace System.Linq.Parallel.Tests
             int count,
             Labeled<Func<int, int, IEnumerable<int>>> expander,
             int expansion
-        ) {
+        )
+        {
             SelectMany(labeled, count, expander, expansion);
         }
 
@@ -399,7 +411,8 @@ namespace System.Linq.Parallel.Tests
             int count,
             Labeled<Func<int, int, IEnumerable<int>>> expander,
             int expansion
-        ) {
+        )
+        {
             Func<int, int, IEnumerable<int>> expand = expander.Item;
             IntegerRangeSet seen = new IntegerRangeSet(0, count * expansion);
             Assert.All(
@@ -422,7 +435,8 @@ namespace System.Linq.Parallel.Tests
             int count,
             Labeled<Func<int, int, IEnumerable<int>>> expander,
             int expansion
-        ) {
+        )
+        {
             SelectMany_Unordered_NotPipelined(count, expander, expansion);
         }
 
@@ -433,7 +447,8 @@ namespace System.Linq.Parallel.Tests
             int count,
             Labeled<Func<int, int, IEnumerable<int>>> expander,
             int expansion
-        ) {
+        )
+        {
             ParallelQuery<int> query = labeled.Item;
             Func<int, int, IEnumerable<int>> expand = expander.Item;
             int seen = 0;
@@ -458,7 +473,8 @@ namespace System.Linq.Parallel.Tests
             int count,
             Labeled<Func<int, int, IEnumerable<int>>> expander,
             int expansion
-        ) {
+        )
+        {
             SelectMany_NotPipelined(labeled, count, expander, expansion);
         }
 
@@ -468,7 +484,8 @@ namespace System.Linq.Parallel.Tests
             int count,
             Labeled<Func<int, int, IEnumerable<int>>> expander,
             int expansion
-        ) {
+        )
+        {
             Func<int, int, IEnumerable<int>> expand = expander.Item;
             IntegerRangeSet seen = new IntegerRangeSet(0, count * expansion);
             foreach (
@@ -477,7 +494,8 @@ namespace System.Linq.Parallel.Tests
                         x => expand(x, expansion),
                         (original, expanded) => KeyValuePair.Create(original, expanded)
                     )
-            ) {
+            )
+            {
                 seen.Add(p.Value);
                 Assert.Equal(p.Key, p.Value / expansion);
             }
@@ -497,7 +515,8 @@ namespace System.Linq.Parallel.Tests
             int count,
             Labeled<Func<int, int, IEnumerable<int>>> expander,
             int expansion
-        ) {
+        )
+        {
             SelectMany_Unordered_ResultSelector(count, expander, expansion);
         }
 
@@ -507,7 +526,8 @@ namespace System.Linq.Parallel.Tests
             int count,
             Labeled<Func<int, int, IEnumerable<int>>> expander,
             int expansion
-        ) {
+        )
+        {
             Func<int, int, IEnumerable<int>> expand = expander.Item;
             IntegerRangeSet seen = new IntegerRangeSet(0, count * expansion);
             Assert.All(
@@ -539,7 +559,8 @@ namespace System.Linq.Parallel.Tests
             int count,
             Labeled<Func<int, int, IEnumerable<int>>> expander,
             int expansion
-        ) {
+        )
+        {
             SelectMany_Unordered_ResultSelector_NotPipelined(count, expander, expansion);
         }
 
@@ -550,7 +571,8 @@ namespace System.Linq.Parallel.Tests
             int count,
             Labeled<Func<int, int, IEnumerable<int>>> expander,
             int expansion
-        ) {
+        )
+        {
             ParallelQuery<int> query = labeled.Item;
             Func<int, int, IEnumerable<int>> expand = expander.Item;
             int seen = 0;
@@ -559,7 +581,8 @@ namespace System.Linq.Parallel.Tests
                     x => expand(x, expansion),
                     (original, expanded) => KeyValuePair.Create(original, expanded)
                 )
-            ) {
+            )
+            {
                 Assert.Equal(seen++, p.Value);
                 Assert.Equal(p.Key, p.Value / expansion);
             }
@@ -580,7 +603,8 @@ namespace System.Linq.Parallel.Tests
             int count,
             Labeled<Func<int, int, IEnumerable<int>>> expander,
             int expansion
-        ) {
+        )
+        {
             SelectMany_ResultSelector(labeled, count, expander, expansion);
         }
 
@@ -591,7 +615,8 @@ namespace System.Linq.Parallel.Tests
             int count,
             Labeled<Func<int, int, IEnumerable<int>>> expander,
             int expansion
-        ) {
+        )
+        {
             ParallelQuery<int> query = labeled.Item;
             Func<int, int, IEnumerable<int>> expand = expander.Item;
             int seen = 0;
@@ -624,7 +649,8 @@ namespace System.Linq.Parallel.Tests
             int count,
             Labeled<Func<int, int, IEnumerable<int>>> expander,
             int expansion
-        ) {
+        )
+        {
             SelectMany_ResultSelector_NotPipelined(labeled, count, expander, expansion);
         }
 
@@ -634,7 +660,8 @@ namespace System.Linq.Parallel.Tests
             int count,
             Labeled<Func<int, int, IEnumerable<int>>> expander,
             int expansion
-        ) {
+        )
+        {
             // For unordered collections, which element is at which index isn't actually guaranteed, but an effect of the implementation.
             // If this test starts failing it should be updated, and possibly mentioned in release notes.
             Func<int, int, IEnumerable<int>> expand = expander.Item;
@@ -645,7 +672,8 @@ namespace System.Linq.Parallel.Tests
                         (x, index) =>
                             expand(x, expansion).Select(y => KeyValuePair.Create(index, y))
                     )
-            ) {
+            )
+            {
                 seen.Add(pIndex.Value);
                 Assert.Equal(pIndex.Key, pIndex.Value / expansion);
             }
@@ -665,7 +693,8 @@ namespace System.Linq.Parallel.Tests
             int count,
             Labeled<Func<int, int, IEnumerable<int>>> expander,
             int expansion
-        ) {
+        )
+        {
             SelectMany_Indexed_Unordered(count, expander, expansion);
         }
 
@@ -675,7 +704,8 @@ namespace System.Linq.Parallel.Tests
             int count,
             Labeled<Func<int, int, IEnumerable<int>>> expander,
             int expansion
-        ) {
+        )
+        {
             // For unordered collections, which element is at which index isn't actually guaranteed, but an effect of the implementation.
             // If this test starts failing it should be updated, and possibly mentioned in release notes.
             Func<int, int, IEnumerable<int>> expand = expander.Item;
@@ -709,7 +739,8 @@ namespace System.Linq.Parallel.Tests
             int count,
             Labeled<Func<int, int, IEnumerable<int>>> expander,
             int expansion
-        ) {
+        )
+        {
             SelectMany_Indexed_Unordered_NotPipelined(count, expander, expansion);
         }
 
@@ -720,7 +751,8 @@ namespace System.Linq.Parallel.Tests
             int count,
             Labeled<Func<int, int, IEnumerable<int>>> expander,
             int expansion
-        ) {
+        )
+        {
             ParallelQuery<int> query = labeled.Item;
             Func<int, int, IEnumerable<int>> expand = expander.Item;
             int seen = 0;
@@ -728,7 +760,8 @@ namespace System.Linq.Parallel.Tests
                 var pIndex in query.SelectMany(
                     (x, index) => expand(x, expansion).Select(y => KeyValuePair.Create(index, y))
                 )
-            ) {
+            )
+            {
                 Assert.Equal(seen++, pIndex.Value);
                 Assert.Equal(pIndex.Key, pIndex.Value / expansion);
             }
@@ -749,7 +782,8 @@ namespace System.Linq.Parallel.Tests
             int count,
             Labeled<Func<int, int, IEnumerable<int>>> expander,
             int expansion
-        ) {
+        )
+        {
             SelectMany_Indexed(labeled, count, expander, expansion);
         }
 
@@ -760,7 +794,8 @@ namespace System.Linq.Parallel.Tests
             int count,
             Labeled<Func<int, int, IEnumerable<int>>> expander,
             int expansion
-        ) {
+        )
+        {
             ParallelQuery<int> query = labeled.Item;
             Func<int, int, IEnumerable<int>> expand = expander.Item;
             int seen = 0;
@@ -793,7 +828,8 @@ namespace System.Linq.Parallel.Tests
             int count,
             Labeled<Func<int, int, IEnumerable<int>>> expander,
             int expansion
-        ) {
+        )
+        {
             SelectMany_Indexed_NotPipelined(labeled, count, expander, expansion);
         }
 
@@ -803,7 +839,8 @@ namespace System.Linq.Parallel.Tests
             int count,
             Labeled<Func<int, int, IEnumerable<int>>> expander,
             int expansion
-        ) {
+        )
+        {
             // For unordered collections, which element is at which index isn't actually guaranteed, but an effect of the implementation.
             // If this test starts failing it should be updated, and possibly mentioned in release notes.
             Func<int, int, IEnumerable<int>> expand = expander.Item;
@@ -815,7 +852,8 @@ namespace System.Linq.Parallel.Tests
                             expand(x, expansion).Select(y => KeyValuePair.Create(index, y)),
                         (original, expanded) => KeyValuePair.Create(original, expanded)
                     )
-            ) {
+            )
+            {
                 var pInner = pOuter.Value;
                 Assert.Equal(pOuter.Key, pInner.Key);
                 seen.Add(pInner.Value);
@@ -837,7 +875,8 @@ namespace System.Linq.Parallel.Tests
             int count,
             Labeled<Func<int, int, IEnumerable<int>>> expander,
             int expansion
-        ) {
+        )
+        {
             SelectMany_Indexed_Unordered_ResultSelector(count, expander, expansion);
         }
 
@@ -847,7 +886,8 @@ namespace System.Linq.Parallel.Tests
             int count,
             Labeled<Func<int, int, IEnumerable<int>>> expander,
             int expansion
-        ) {
+        )
+        {
             // For unordered collections, which element is at which index isn't actually guaranteed, but an effect of the implementation.
             // If this test starts failing it should be updated, and possibly mentioned in release notes.
             Func<int, int, IEnumerable<int>> expand = expander.Item;
@@ -884,7 +924,8 @@ namespace System.Linq.Parallel.Tests
             int count,
             Labeled<Func<int, int, IEnumerable<int>>> expander,
             int expansion
-        ) {
+        )
+        {
             SelectMany_Indexed_Unordered_ResultSelector_NotPipelined(count, expander, expansion);
         }
 
@@ -895,7 +936,8 @@ namespace System.Linq.Parallel.Tests
             int count,
             Labeled<Func<int, int, IEnumerable<int>>> expander,
             int expansion
-        ) {
+        )
+        {
             ParallelQuery<int> query = labeled.Item;
             Func<int, int, IEnumerable<int>> expand = expander.Item;
             int seen = 0;
@@ -904,7 +946,8 @@ namespace System.Linq.Parallel.Tests
                     (x, index) => expand(x, expansion).Select(y => KeyValuePair.Create(index, y)),
                     (original, expanded) => KeyValuePair.Create(original, expanded)
                 )
-            ) {
+            )
+            {
                 var pInner = pOuter.Value;
                 Assert.Equal(pOuter.Key, pInner.Key);
                 Assert.Equal(seen++, pInner.Value);
@@ -927,7 +970,8 @@ namespace System.Linq.Parallel.Tests
             int count,
             Labeled<Func<int, int, IEnumerable<int>>> expander,
             int expansion
-        ) {
+        )
+        {
             SelectMany_Indexed_ResultSelector(labeled, count, expander, expansion);
         }
 
@@ -938,7 +982,8 @@ namespace System.Linq.Parallel.Tests
             int count,
             Labeled<Func<int, int, IEnumerable<int>>> expander,
             int expansion
-        ) {
+        )
+        {
             ParallelQuery<int> query = labeled.Item;
             Func<int, int, IEnumerable<int>> expand = expander.Item;
             int seen = 0;
@@ -974,7 +1019,8 @@ namespace System.Linq.Parallel.Tests
             int count,
             Labeled<Func<int, int, IEnumerable<int>>> expander,
             int expansion
-        ) {
+        )
+        {
             SelectMany_Indexed_ResultSelector_NotPipelined(labeled, count, expander, expansion);
         }
 

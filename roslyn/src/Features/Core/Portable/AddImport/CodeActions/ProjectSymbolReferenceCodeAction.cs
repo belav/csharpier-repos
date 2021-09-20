@@ -36,7 +36,8 @@ namespace Microsoft.CodeAnalysis.AddImport
                 Project project,
                 bool isPreview,
                 CancellationToken cancellationToken
-            ) {
+            )
+            {
                 if (!ShouldAddProjectReference())
                 {
                     return SpecializedTasks.Null<CodeActionOperation>();
@@ -70,7 +71,8 @@ namespace Microsoft.CodeAnalysis.AddImport
                     ProjectId referencingProject,
                     ProjectId referencedProject,
                     ApplyChangesOperation applyOperation
-                ) {
+                )
+                {
                     _referencingProject = referencingProject;
                     _referencedProject = referencedProject;
                     _applyOperation = applyOperation;
@@ -90,7 +92,8 @@ namespace Microsoft.CodeAnalysis.AddImport
                     Workspace workspace,
                     IProgressTracker progressTracker,
                     CancellationToken cancellationToken
-                ) {
+                )
+                {
                     if (!CanApply(workspace))
                         return false;
 

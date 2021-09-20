@@ -47,7 +47,8 @@ namespace Microsoft.EntityFrameworkCore.SqlServer.Update.Internal
             StringBuilder commandStringBuilder,
             IReadOnlyList<ModificationCommand> modificationCommands,
             int commandPosition
-        ) {
+        )
+        {
             var table = StoreObjectIdentifier.Table(
                 modificationCommands[0].TableName,
                 modificationCommands[0].Schema
@@ -61,7 +62,8 @@ namespace Microsoft.EntityFrameworkCore.SqlServer.Update.Internal
                         || o.Property?.GetValueGenerationStrategy(table)
                             == SqlServerValueGenerationStrategy.IdentityColumn
                 )
-            ) {
+            )
+            {
                 return AppendInsertOperation(
                     commandStringBuilder,
                     modificationCommands[0],
@@ -130,7 +132,8 @@ namespace Microsoft.EntityFrameworkCore.SqlServer.Update.Internal
                         e => e.EntityType.GetAllBaseTypesInclusive()
                     )
                     .Any(e => e.IsMemoryOptimized())
-            ) {
+            )
+            {
                 if (!nonIdentityOperations.Any(o => o.IsRead && o.IsKey))
                 {
                     foreach (var modification in modificationCommands)
@@ -173,7 +176,8 @@ namespace Microsoft.EntityFrameworkCore.SqlServer.Update.Internal
             StringBuilder commandStringBuilder,
             IReadOnlyList<ModificationCommand> modificationCommands,
             List<ColumnModification> writeOperations
-        ) {
+        )
+        {
             Check.DebugAssert(
                 writeOperations.Count > 0,
                 $"writeOperations.Count is {writeOperations.Count}"
@@ -214,7 +218,8 @@ namespace Microsoft.EntityFrameworkCore.SqlServer.Update.Internal
             List<ColumnModification> writeOperations,
             List<ColumnModification> keyOperations,
             List<ColumnModification> readOperations
-        ) {
+        )
+        {
             AppendDeclareTable(
                 commandStringBuilder,
                 InsertedTableBaseName,
@@ -265,7 +270,8 @@ namespace Microsoft.EntityFrameworkCore.SqlServer.Update.Internal
             List<ColumnModification> nonIdentityOperations,
             List<ColumnModification> keyOperations,
             List<ColumnModification> readOperations
-        ) {
+        )
+        {
             AppendDeclareTable(
                 commandStringBuilder,
                 InsertedTableBaseName,
@@ -313,7 +319,8 @@ namespace Microsoft.EntityFrameworkCore.SqlServer.Update.Internal
             IReadOnlyList<ModificationCommand> modificationCommands,
             IReadOnlyList<ColumnModification> writeOperations,
             string? additionalColumns = null
-        ) {
+        )
+        {
             commandStringBuilder.Append("MERGE ");
             SqlGenerationHelper.DelimitIdentifier(commandStringBuilder, name, schema);
 
@@ -376,7 +383,8 @@ namespace Microsoft.EntityFrameworkCore.SqlServer.Update.Internal
             StringBuilder commandStringBuilder,
             IReadOnlyList<ColumnModification> operations,
             string additionalLiteral
-        ) {
+        )
+        {
             if (operations.Count > 0)
             {
                 commandStringBuilder.Append("(")
@@ -407,7 +415,8 @@ namespace Microsoft.EntityFrameworkCore.SqlServer.Update.Internal
             int index,
             IReadOnlyList<ColumnModification> operations,
             string? additionalColumns = null
-        ) {
+        )
+        {
             commandStringBuilder.Append("DECLARE ")
                 .Append(name)
                 .Append(index)
@@ -451,7 +460,8 @@ namespace Microsoft.EntityFrameworkCore.SqlServer.Update.Internal
             string tableName,
             int tableIndex,
             string? additionalColumns = null
-        ) {
+        )
+        {
             commandStringBuilder.AppendLine()
                 .Append("OUTPUT ")
                 .AppendJoin(
@@ -478,7 +488,8 @@ namespace Microsoft.EntityFrameworkCore.SqlServer.Update.Internal
             IReadOnlyList<ColumnModification> keyOperations,
             IReadOnlyList<ColumnModification> readOperations,
             int commandPosition
-        ) {
+        )
+        {
             var name = command.TableName;
             var schema = command.Schema;
             var operations = command.ColumnModifications;
@@ -523,7 +534,8 @@ namespace Microsoft.EntityFrameworkCore.SqlServer.Update.Internal
             string tableName,
             string? schema,
             string? orderColumn = null
-        ) {
+        )
+        {
             commandStringBuilder.AppendLine()
                 .Append("SELECT ")
                 .AppendJoin(
@@ -574,7 +586,8 @@ namespace Microsoft.EntityFrameworkCore.SqlServer.Update.Internal
             string name,
             string? schema,
             int commandPosition
-        ) {
+        )
+        {
             commandStringBuilder.Append("SELECT @@ROWCOUNT")
                 .AppendLine(SqlGenerationHelper.StatementTerminator)
                 .AppendLine();
@@ -601,7 +614,8 @@ namespace Microsoft.EntityFrameworkCore.SqlServer.Update.Internal
         protected override void AppendIdentityWhereCondition(
             StringBuilder commandStringBuilder,
             ColumnModification columnModification
-        ) {
+        )
+        {
             SqlGenerationHelper.DelimitIdentifier(
                 commandStringBuilder,
                 columnModification.ColumnName

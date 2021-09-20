@@ -18,7 +18,8 @@ namespace System.Security.Cryptography
             byte[] userData,
             byte[]? optionalEntropy,
             DataProtectionScope scope
-        ) {
+        )
+        {
             if (userData == null)
                 throw new ArgumentNullException(nameof(userData));
 
@@ -29,7 +30,8 @@ namespace System.Security.Cryptography
             byte[] encryptedData,
             byte[]? optionalEntropy,
             DataProtectionScope scope
-        ) {
+        )
+        {
             if (encryptedData == null)
                 throw new ArgumentNullException(nameof(encryptedData));
 
@@ -41,7 +43,8 @@ namespace System.Security.Cryptography
             byte[]? optionalEntropy,
             DataProtectionScope scope,
             bool protect
-        ) {
+        )
+        {
             unsafe
             {
                 // The Win32 API will reject pbData == nullptr, and the fixed statement
@@ -52,7 +55,8 @@ namespace System.Security.Cryptography
                 fixed (
                     byte* pInputData = relevantData,
                         pOptionalEntropy = optionalEntropy
-                ) {
+                )
+                {
                     DATA_BLOB userDataBlob = new DATA_BLOB(
                         (IntPtr)pInputData,
                         (uint)(inputData.Length)

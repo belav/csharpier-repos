@@ -470,7 +470,8 @@ namespace System.Net.Http.Formatting
         public async Task ReadFromStreamAsync_RoundTripsWriteToStreamAsync(
             Type variationType,
             object testData
-        ) {
+        )
+        {
             // Guard
             bool canSerialize =
                 IsTypeSerializableWithJsonSerializer(variationType, testData)
@@ -501,7 +502,8 @@ namespace System.Net.Http.Formatting
         public async Task ReadFromStreamAsync_RoundTripsWriteToStreamAsync_DBNullAsNull(
             Type variationType,
             object testData
-        ) {
+        )
+        {
             // Arrange
             TestJsonMediaTypeFormatter formatter = new TestJsonMediaTypeFormatter();
 
@@ -525,7 +527,8 @@ namespace System.Net.Http.Formatting
         public async Task ReadFromStreamAsync_RoundTripsWriteToStreamAsync_DBNullAsNull_Dictionary(
             Type variationType,
             object testData
-        ) {
+        )
+        {
             // Guard
             IDictionary<string, object> expectedDictionary = Assert.IsType<
                 Dictionary<string, object>
@@ -563,7 +566,8 @@ namespace System.Net.Http.Formatting
         public async Task ReadFromStreamAsync_RoundTripsWriteToStreamAsync_DBNullAsNull_Enumerable(
             Type variationType,
             object testData
-        ) {
+        )
+        {
             // Guard
             Assert.True((testData as IEnumerable<object>) != null);
 
@@ -599,7 +603,8 @@ namespace System.Net.Http.Formatting
         public async Task ReadFromStreamAsync_RoundTripsWriteToStreamAsync_DBNullAsNull_Holder(
             Type variationType,
             object testData
-        ) {
+        )
+        {
             // Guard
             Assert.IsType<TestDataHolder<object>>(testData);
 
@@ -770,7 +775,8 @@ namespace System.Net.Http.Formatting
             string content,
             string encoding,
             bool isDefaultEncoding
-        ) {
+        )
+        {
             // Arrange
             JsonMediaTypeFormatter formatter = new JsonMediaTypeFormatter();
             string formattedContent = "\"" + content + "\"";
@@ -791,7 +797,8 @@ namespace System.Net.Http.Formatting
             string content,
             string encoding,
             bool isDefaultEncoding
-        ) {
+        )
+        {
             // Arrange
             JsonMediaTypeFormatter formatter = new JsonMediaTypeFormatter();
             string formattedContent = "\"" + content + "\"";

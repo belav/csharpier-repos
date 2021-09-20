@@ -28,7 +28,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
             IReadOnlyList<Column> columns,
             IReadOnlyList<Column> principalColumns,
             ReferentialAction onDeleteAction
-        ) {
+        )
+        {
             Name = name;
             Table = table;
             PrincipalTable = principalTable;

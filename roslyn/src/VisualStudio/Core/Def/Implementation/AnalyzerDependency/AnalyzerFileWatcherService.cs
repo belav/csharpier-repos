@@ -55,7 +55,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation
             VisualStudioWorkspaceImpl workspace,
             HostDiagnosticUpdateSource hostDiagnosticUpdateSource,
             SVsServiceProvider serviceProvider
-        ) {
+        )
+        {
             _workspace = workspace;
             _updateSource = hostDiagnosticUpdateSource;
             _fileChangeService = (IVsFileChangeEx)serviceProvider.GetService(
@@ -84,7 +85,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation
                     project,
                     out var diagnostic
                 )
-            ) {
+            )
+            {
                 _updateSource.UpdateDiagnosticsForProject(
                     projectId,
                     Tuple.Create(s_analyzerChangedErrorId, analyzerPath),
@@ -186,7 +188,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation
                     analyzerFileReferences.Any(
                         a => a.FullPath.Equals(filePath, StringComparison.OrdinalIgnoreCase)
                     )
-                ) {
+                )
+                {
                     RaiseAnalyzerChangedWarning(project.Id, filePath);
                 }
             }

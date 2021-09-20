@@ -219,7 +219,8 @@ namespace System.Web.Http.Owin
 
         private static HostAuthenticationAttribute CreateProductUnderTest(
             IAuthenticationFilter innerFilter
-        ) {
+        )
+        {
             return new HostAuthenticationAttribute(innerFilter);
         }
 

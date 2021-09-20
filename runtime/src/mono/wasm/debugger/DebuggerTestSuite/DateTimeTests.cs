@@ -50,7 +50,8 @@ namespace DebuggerTests
             string ltp,
             string sdp,
             string stp
-        ) {
+        )
+        {
             var debugger_test_loc = "dotnet://debugger-test.dll/debugger-datetime-test.cs";
 
             await SetBreakpointInMethod(

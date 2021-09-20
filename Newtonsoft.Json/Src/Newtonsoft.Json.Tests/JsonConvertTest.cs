@@ -181,7 +181,8 @@ namespace Newtonsoft.Json.Tests
                 JsonWriter writer,
                 object value,
                 JsonSerializer serializer
-            ) {
+            )
+            {
                 throw new NotImplementedException();
             }
 
@@ -190,7 +191,8 @@ namespace Newtonsoft.Json.Tests
                 Type objectType,
                 object existingValue,
                 JsonSerializer serializer
-            ) {
+            )
+            {
                 reader.Read();
                 reader.Read();
 
@@ -473,7 +475,8 @@ namespace Newtonsoft.Json.Tests
                 JsonWriter writer,
                 object value,
                 JsonSerializer serializer
-            ) {
+            )
+            {
                 int i = (int)value;
                 writer.WriteValue(i * 2);
             }
@@ -483,7 +486,8 @@ namespace Newtonsoft.Json.Tests
                 Type objectType,
                 object existingValue,
                 JsonSerializer serializer
-            ) {
+            )
+            {
                 throw new NotImplementedException();
             }
 
@@ -1367,7 +1371,8 @@ namespace Newtonsoft.Json.Tests
             T value,
             DateFormatHandling format,
             DateTimeZoneHandling timeZoneHandling
-        ) {
+        )
+        {
             string date = null;
 
             if (value is DateTime)
@@ -1667,7 +1672,8 @@ namespace Newtonsoft.Json.Tests
                 JsonWriter writer,
                 object value,
                 JsonSerializer serializer
-            ) {
+            )
+            {
                 writer.WriteValue(
                     ClobberValueString + "-" + ClobberValueInt.ToString() + "-" + value.ToString()
                 );
@@ -1678,7 +1684,8 @@ namespace Newtonsoft.Json.Tests
                 Type objectType,
                 object existingValue,
                 JsonSerializer serializer
-            ) {
+            )
+            {
                 throw new NotImplementedException();
             }
 
@@ -1785,7 +1792,8 @@ namespace Newtonsoft.Json.Tests
                 JsonWriter writer,
                 object value,
                 JsonSerializer serializer
-            ) {
+            )
+            {
                 writer.WriteValue(_type);
             }
 
@@ -1794,7 +1802,8 @@ namespace Newtonsoft.Json.Tests
                 Type objectType,
                 object existingValue,
                 JsonSerializer serializer
-            ) {
+            )
+            {
                 throw new NotImplementedException();
             }
 
@@ -2105,7 +2114,8 @@ namespace Newtonsoft.Json.Tests
                 Type objectType,
                 object existingValue,
                 JsonSerializer serializer
-            ) {
+            )
+            {
                 throw new NotImplementedException();
             }
 
@@ -2113,7 +2123,8 @@ namespace Newtonsoft.Json.Tests
                 JsonWriter writer,
                 object value,
                 JsonSerializer serializer
-            ) {
+            )
+            {
                 writer.WriteValue(Math.Round((double)value, _precision, _rounding));
             }
         }
@@ -2243,7 +2254,8 @@ namespace Newtonsoft.Json.Tests
                     Type objectType,
                     object existingValue,
                     JsonSerializer serializer
-                ) {
+                )
+                {
                     reader.Skip();
                     return new EnumerableWithConverter();
                 }
@@ -2252,7 +2264,8 @@ namespace Newtonsoft.Json.Tests
                     JsonWriter writer,
                     object value,
                     JsonSerializer serializer
-                ) {
+                )
+                {
                     writer.WriteStartObject();
                     writer.WriteEndObject();
                 }

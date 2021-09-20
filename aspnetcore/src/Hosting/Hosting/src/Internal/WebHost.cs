@@ -55,7 +55,8 @@ namespace Microsoft.AspNetCore.Hosting
             WebHostOptions options,
             IConfiguration config,
             AggregateException? hostingStartupErrors
-        ) {
+        )
+        {
             if (appServices == null)
             {
                 throw new ArgumentNullException(nameof(appServices));
@@ -314,7 +315,8 @@ namespace Microsoft.AspNetCore.Hosting
 
                         foreach (
                             var value in urls.Split(';', StringSplitOptions.RemoveEmptyEntries)
-                        ) {
+                        )
+                        {
                             addresses.Add(value);
                         }
                     }

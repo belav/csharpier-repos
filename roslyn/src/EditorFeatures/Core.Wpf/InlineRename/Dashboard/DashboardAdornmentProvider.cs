@@ -43,7 +43,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.InlineRename
         public DashboardAdornmentProvider(
             InlineRenameService renameService,
             IEditorFormatMapService editorFormatMapService
-        ) {
+        )
+        {
             _renameService = renameService;
             _editorFormatMapService = editorFormatMapService;
         }
@@ -52,7 +53,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.InlineRename
             IWpfTextView textView,
             ConnectionReason reason,
             Collection<ITextBuffer> subjectBuffers
-        ) {
+        )
+        {
             // Create it for the view if we don't already have one
             textView.GetOrCreateAutoClosingProperty(
                 v => new DashboardAdornmentManager(_renameService, _editorFormatMapService, v)
@@ -63,14 +65,16 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.InlineRename
             IWpfTextView textView,
             ConnectionReason reason,
             Collection<ITextBuffer> subjectBuffers
-        ) {
+        )
+        {
             // Do we still have any buffers alive?
             if (
                 textView.BufferGraph.GetTextBuffers(
                         b => b.ContentType.IsOfType(ContentTypeNames.RoslynContentType)
                     )
                     .Any()
-            ) {
+            )
+            {
                 // Yep, some are still attached
                 return;
             }
@@ -80,7 +84,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.InlineRename
                     typeof(DashboardAdornmentManager),
                     out DashboardAdornmentManager manager
                 )
-            ) {
+            )
+            {
                 manager.Dispose();
                 textView.Properties.RemoveProperty(typeof(DashboardAdornmentManager));
             }

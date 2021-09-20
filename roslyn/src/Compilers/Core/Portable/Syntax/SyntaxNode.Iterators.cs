@@ -19,7 +19,8 @@ namespace Microsoft.CodeAnalysis
             Func<SyntaxNode, bool>? descendIntoChildren,
             bool descendIntoTrivia,
             bool includeSelf
-        ) {
+        )
+        {
             return descendIntoTrivia
               ? DescendantNodesAndTokensImpl(span, descendIntoChildren, true, includeSelf)
                     .Where(e => e.IsNode)
@@ -32,7 +33,8 @@ namespace Microsoft.CodeAnalysis
             Func<SyntaxNode, bool>? descendIntoChildren,
             bool descendIntoTrivia,
             bool includeSelf
-        ) {
+        )
+        {
             return descendIntoTrivia
               ? DescendantNodesAndTokensIntoTrivia(span, descendIntoChildren, includeSelf)
               : DescendantNodesAndTokensOnly(span, descendIntoChildren, includeSelf);
@@ -42,7 +44,8 @@ namespace Microsoft.CodeAnalysis
             TextSpan span,
             Func<SyntaxNode, bool>? descendIntoChildren = null,
             bool descendIntoTrivia = false
-        ) {
+        )
+        {
             return descendIntoTrivia
               ? DescendantTriviaIntoTrivia(span, descendIntoChildren)
               : DescendantTriviaOnly(span, descendIntoChildren);
@@ -68,7 +71,8 @@ namespace Microsoft.CodeAnalysis
             public ChildSyntaxListEnumeratorStack(
                 SyntaxNode startingNode,
                 Func<SyntaxNode, bool>? descendIntoChildren
-            ) {
+            )
+            {
                 if (descendIntoChildren == null || descendIntoChildren(startingNode))
                 {
                     _stack = s_stackPool.Allocate();
@@ -223,7 +227,8 @@ namespace Microsoft.CodeAnalysis
             public TwoEnumeratorListStack(
                 SyntaxNode startingNode,
                 Func<SyntaxNode, bool>? descendIntoChildren
-            ) {
+            )
+            {
                 _nodeStack = new ChildSyntaxListEnumeratorStack(startingNode, descendIntoChildren);
                 _triviaStack = new TriviaListEnumeratorStack();
                 if (_nodeStack.IsNotEmpty)
@@ -321,7 +326,8 @@ namespace Microsoft.CodeAnalysis
             public ThreeEnumeratorListStack(
                 SyntaxNode startingNode,
                 Func<SyntaxNode, bool>? descendIntoChildren
-            ) {
+            )
+            {
                 _nodeStack = new ChildSyntaxListEnumeratorStack(startingNode, descendIntoChildren);
                 _triviaStack = new TriviaListEnumeratorStack();
                 if (_nodeStack.IsNotEmpty)
@@ -425,7 +431,8 @@ namespace Microsoft.CodeAnalysis
             TextSpan span,
             Func<SyntaxNode, bool>? descendIntoChildren,
             bool includeSelf
-        ) {
+        )
+        {
             if (includeSelf && IsInSpan(in span, this.FullSpan))
             {
                 yield return this;
@@ -453,7 +460,8 @@ namespace Microsoft.CodeAnalysis
             TextSpan span,
             Func<SyntaxNode, bool>? descendIntoChildren,
             bool includeSelf
-        ) {
+        )
+        {
             if (includeSelf && IsInSpan(in span, this.FullSpan))
             {
                 yield return this;
@@ -485,7 +493,8 @@ namespace Microsoft.CodeAnalysis
             TextSpan span,
             Func<SyntaxNode, bool>? descendIntoChildren,
             bool includeSelf
-        ) {
+        )
+        {
             if (includeSelf && IsInSpan(in span, this.FullSpan))
             {
                 yield return this;
@@ -551,7 +560,8 @@ namespace Microsoft.CodeAnalysis
                                 if (
                                     trivia.TryGetStructure(out var structureNode)
                                     && IsInSpan(in span, trivia.FullSpan)
-                                ) {
+                                )
+                                {
                                     // parent nodes come before children (prefix document order)
 
                                     // PERF: Push before yield return so that "structureNode" is 'dead' after the yield
@@ -575,7 +585,8 @@ namespace Microsoft.CodeAnalysis
         private IEnumerable<SyntaxTrivia> DescendantTriviaOnly(
             TextSpan span,
             Func<SyntaxNode, bool>? descendIntoChildren
-        ) {
+        )
+        {
             using (var stack = new ChildSyntaxListEnumeratorStack(this, descendIntoChildren))
             {
                 while (stack.IsNotEmpty)
@@ -615,7 +626,8 @@ namespace Microsoft.CodeAnalysis
         private IEnumerable<SyntaxTrivia> DescendantTriviaIntoTrivia(
             TextSpan span,
             Func<SyntaxNode, bool>? descendIntoChildren
-        ) {
+        )
+        {
             using (var stack = new TwoEnumeratorListStack(this, descendIntoChildren))
             {
                 while (stack.IsNotEmpty)

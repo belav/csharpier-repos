@@ -138,7 +138,8 @@ namespace Microsoft.AspNetCore.Http.Abstractions
             string name2,
             string value2,
             string expected
-        ) {
+        )
+        {
             var q1 = new QueryString(query1);
             var q2 = q1.Add(name2, value2);
             Assert.Equal(expected, q2.Value);

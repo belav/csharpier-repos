@@ -17,7 +17,8 @@ namespace Microsoft.CodeAnalysis.Options
             AnalyzerConfigOptions analyzerConfigOptions,
             Type type,
             out object value
-        ) {
+        )
+        {
             // This is a workaround until we have an API for enumeratings AnalyzerConfigOptions. See https://github.com/dotnet/roslyn/issues/41840
             var backingField = analyzerConfigOptions.GetType()
                 .GetField(

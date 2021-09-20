@@ -21,7 +21,8 @@ namespace Microsoft.EntityFrameworkCore.Query.Internal
             object? parent,
             object? collection,
             object[] parentIdentifier
-        ) {
+        )
+        {
             Parent = parent;
             Collection = collection;
             ParentIdentifier = parentIdentifier;

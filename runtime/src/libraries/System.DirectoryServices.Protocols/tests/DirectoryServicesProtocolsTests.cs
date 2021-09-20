@@ -715,7 +715,8 @@ namespace System.DirectoryServices.Protocols.Tests
             LdapConnection connection,
             string entryDn,
             string attributeName
-        ) {
+        )
+        {
             string dn = entryDn + "," + LdapConfiguration.Configuration.SearchDn;
             ModifyRequest modifyRequest = new ModifyRequest(
                 dn,
@@ -731,7 +732,8 @@ namespace System.DirectoryServices.Protocols.Tests
             string entryDn,
             string attributeName,
             string attributeValue
-        ) {
+        )
+        {
             string dn = entryDn + "," + LdapConfiguration.Configuration.SearchDn;
             ModifyRequest modifyRequest = new ModifyRequest(
                 dn,
@@ -748,7 +750,8 @@ namespace System.DirectoryServices.Protocols.Tests
             string entryDn,
             string attributeName,
             string attributeValue
-        ) {
+        )
+        {
             string dn = entryDn + "," + LdapConfiguration.Configuration.SearchDn;
             ModifyRequest modifyRequest = new ModifyRequest(
                 dn,
@@ -795,7 +798,8 @@ namespace System.DirectoryServices.Protocols.Tests
             LdapConnection connection,
             string rootDn,
             string ouName
-        ) {
+        )
+        {
             string filter = $"(&(objectClass=organizationalUnit)(ou={ouName}))";
             SearchRequest searchRequest = new SearchRequest(
                 rootDn,
@@ -821,7 +825,8 @@ namespace System.DirectoryServices.Protocols.Tests
             LdapConnection connection,
             string rootDn,
             string userName
-        ) {
+        )
+        {
             string filter = $"(&(objectClass=organizationalRole)(cn={userName}))";
             SearchRequest searchRequest = new SearchRequest(
                 rootDn,

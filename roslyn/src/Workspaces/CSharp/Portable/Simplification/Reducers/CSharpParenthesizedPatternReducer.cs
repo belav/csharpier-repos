@@ -36,7 +36,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Simplification
             SemanticModel semanticModel,
             OptionSet optionSet,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             if (node.CanRemoveParentheses())
             {
                 var resultNode = CSharpSyntaxFacts.Instance.Unparenthesize(node);

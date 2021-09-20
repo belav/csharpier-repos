@@ -138,7 +138,8 @@ namespace JIT.HardwareIntrinsics.X86
                     (alignment != 32 && alignment != 16)
                     || (alignment * 2) < sizeOfinArray1
                     || (alignment * 2) < sizeOfoutArray
-                ) {
+                )
+                {
                     throw new ArgumentException("Invalid value of alignment");
                 }
 
@@ -197,7 +198,8 @@ namespace JIT.HardwareIntrinsics.X86
 
             public void RunStructFldScenario(
                 SimpleUnaryOpTest__RoundToNearestIntegerSingle testClass
-            ) {
+            )
+            {
                 var result = Sse41.RoundToNearestInteger(_fld1);
 
                 Unsafe.Write(testClass._dataTable.outArrayPtr, result);
@@ -206,7 +208,8 @@ namespace JIT.HardwareIntrinsics.X86
 
             public void RunStructFldScenario_Load(
                 SimpleUnaryOpTest__RoundToNearestIntegerSingle testClass
-            ) {
+            )
+            {
                 fixed (Vector128<Single>* pFld1 = &_fld1)
                 {
                     var result = Sse41.RoundToNearestInteger(Sse.LoadVector128((Single*)(pFld1)));
@@ -525,7 +528,8 @@ namespace JIT.HardwareIntrinsics.X86
             Vector128<Single> op1,
             void* result,
             [CallerMemberName] string method = ""
-        ) {
+        )
+        {
             Single[] inArray1 = new Single[Op1ElementCount];
             Single[] outArray = new Single[RetElementCount];
 
@@ -562,7 +566,8 @@ namespace JIT.HardwareIntrinsics.X86
             Single[] firstOp,
             Single[] result,
             [CallerMemberName] string method = ""
-        ) {
+        )
+        {
             bool succeeded = true;
 
             if (
@@ -570,7 +575,8 @@ namespace JIT.HardwareIntrinsics.X86
                 != BitConverter.SingleToInt32Bits(
                     MathF.Round(firstOp[0], MidpointRounding.AwayFromZero)
                 )
-            ) {
+            )
+            {
                 succeeded = false;
             }
             else
@@ -582,7 +588,8 @@ namespace JIT.HardwareIntrinsics.X86
                         != BitConverter.SingleToInt32Bits(
                             MathF.Round(firstOp[i], MidpointRounding.AwayFromZero)
                         )
-                    ) {
+                    )
+                    {
                         succeeded = false;
                         break;
                     }

@@ -107,7 +107,8 @@ namespace Roslyn.Utilities
             internal static void GetOrRemoveAssemblyResolveHandler(
                 Func<string, Assembly, Assembly> handler,
                 MethodInfo handlerOperation
-            ) {
+            )
+            {
                 if (_AppDomain.add_AssemblyResolve == null)
                 {
                     throw new PlatformNotSupportedException();
@@ -126,7 +127,8 @@ namespace Roslyn.Utilities
 
             internal static void RemoveAssemblyResolveHandler(
                 Func<string, Assembly, Assembly> handler
-            ) {
+            )
+            {
                 GetOrRemoveAssemblyResolveHandler(handler, _AppDomain.remove_AssemblyResolve);
             }
         }

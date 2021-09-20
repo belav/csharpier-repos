@@ -21,7 +21,8 @@ namespace System.IO.Tests
             using (var dir = new TempDirectory(Path.Combine(testDirectory.Path, "dir")))
             using (
                 var watcher = new FileSystemWatcher(testDirectory.Path, Path.GetFileName(dir.Path))
-            ) {
+            )
+            {
                 Action action = () =>
                     Directory.SetLastWriteTime(dir.Path, DateTime.Now + TimeSpan.FromSeconds(10));
 

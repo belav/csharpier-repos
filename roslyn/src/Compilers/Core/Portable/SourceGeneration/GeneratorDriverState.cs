@@ -18,7 +18,8 @@ namespace Microsoft.CodeAnalysis
             ImmutableArray<GeneratorState> generatorStates,
             ImmutableArray<PendingEdit> edits,
             bool editsFailed
-        ) {
+        )
+        {
             Generators = generators;
             GeneratorStates = generatorStates;
             AdditionalTexts = additionalTexts;
@@ -79,7 +80,8 @@ namespace Microsoft.CodeAnalysis
             ImmutableArray<AdditionalText>? additionalTexts = null,
             ImmutableArray<PendingEdit>? edits = null,
             bool? editsFailed = null
-        ) {
+        )
+        {
             return new GeneratorDriverState(
                 this.ParseOptions,
                 this.OptionsProvider,

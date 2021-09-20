@@ -26,7 +26,8 @@ namespace IntelHardwareIntrinsicTest
                         new float[4] { 1, -5, 100, 0 },
                         new float[4]
                     )
-                ) {
+                )
+                {
                     var vf1 = Sse.LoadVector128((float*)(floatTable.inArrayPtr));
                     var vf2 = Sse3.MoveLowAndDuplicate(vf1);
                     Unsafe.Write(floatTable.outArrayPtr, vf2);
@@ -40,7 +41,8 @@ namespace IntelHardwareIntrinsicTest
                             != BitConverter.SingleToInt32Bits(floatTable.outArray[2])
                         || BitConverter.SingleToInt32Bits(floatTable.inArray[2])
                             != BitConverter.SingleToInt32Bits(floatTable.outArray[3])
-                    ) {
+                    )
+                    {
                         Console.WriteLine("Sse3 MoveLowAndDuplicate failed on float:");
                         foreach (var item in floatTable.outArray)
                         {

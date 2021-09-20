@@ -22,7 +22,8 @@ namespace Microsoft.AspNetCore.Routing.Template
         private static decimal ComputeRoutePattern(
             string template,
             Func<RoutePattern, decimal> func
-        ) {
+        )
+        {
             var parsed = RoutePatternFactory.Parse(template);
             return func(parsed);
         }

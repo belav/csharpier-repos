@@ -108,7 +108,8 @@ namespace System.Diagnostics
                             Interop.Kernel32.GetCurrentProcess(),
                             out bool sourceProcessIsWow64
                         )
-                    ) {
+                    )
+                    {
                         throw new Win32Exception();
                     }
 
@@ -117,7 +118,8 @@ namespace System.Diagnostics
                             processHandle,
                             out bool targetProcessIsWow64
                         )
-                    ) {
+                    )
+                    {
                         throw new Win32Exception();
                     }
 
@@ -177,7 +179,8 @@ namespace System.Diagnostics
                                 moduleHandle,
                                 out ntModuleInfo
                             )
-                        ) {
+                        )
+                        {
                             HandleLastWin32Error();
                             continue;
                         }
@@ -252,7 +255,8 @@ namespace System.Diagnostics
             IntPtr[]? modules,
             int size,
             out int needed
-        ) {
+        )
+        {
             // When called on a running process, EnumProcessModules may fail with ERROR_PARTIAL_COPY
             // if the target process is not yet initialized or if the module list changes during the function call.
             // We just try to avoid the race by retring 50 (an arbitrary number) times.
@@ -402,7 +406,8 @@ namespace System.Diagnostics
         private static unsafe ProcessInfo[] GetProcessInfos(
             ReadOnlySpan<byte> data,
             int? processIdFilter
-        ) {
+        )
+        {
             // Use a dictionary to avoid duplicate entries if any
             // 60 is a reasonable number for processes on a normal machine.
             Dictionary<int, ProcessInfo> processInfos = new Dictionary<int, ProcessInfo>(60);
@@ -421,7 +426,8 @@ namespace System.Diagnostics
                 if (
                     processIdFilter == null
                     || processIdFilter.GetValueOrDefault() == processInfoProcessId
-                ) {
+                )
+                {
                     // get information for a process
                     ProcessInfo processInfo = new ProcessInfo((int)pi.NumberOfThreads)
                     {

@@ -20,7 +20,8 @@ namespace Microsoft.CodeAnalysis.Options
                 OptionSet optionSet,
                 IOptionService optionService,
                 string? language
-            ) {
+            )
+            {
                 _optionSet = optionSet;
                 _optionService = optionService;
                 _language = language;
@@ -35,7 +36,8 @@ namespace Microsoft.CodeAnalysis.Options
                         out var storageLocation,
                         out var optionKey
                     )
-                ) {
+                )
+                {
                     // There are couple of reasons this assert might fire:
                     //  1. Attempting to access an option which does not have an IEditorConfigStorageLocation.
                     //  2. Attempting to access an option which is not exposed from any option provider, i.e. IOptionProvider.Options.

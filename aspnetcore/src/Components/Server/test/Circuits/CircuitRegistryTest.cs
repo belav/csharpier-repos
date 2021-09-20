@@ -491,11 +491,12 @@ namespace Microsoft.AspNetCore.Components.Server.Circuits
             public TestCircuitRegistry(
                 CircuitIdFactory factory,
                 CircuitOptions circuitOptions = null
-            ) : base(
-                Options.Create(circuitOptions ?? new CircuitOptions()),
-                NullLogger<CircuitRegistry>.Instance,
-                factory
-            ) { }
+            )
+                : base(
+                    Options.Create(circuitOptions ?? new CircuitOptions()),
+                    NullLogger<CircuitRegistry>.Instance,
+                    factory
+                ) { }
 
             public ManualResetEventSlim BeforeConnect { get; set; }
             public ManualResetEventSlim BeforeDisconnect { get; set; }
@@ -506,7 +507,8 @@ namespace Microsoft.AspNetCore.Components.Server.Circuits
                 CircuitId circuitId,
                 IClientProxy clientProxy,
                 string connectionId
-            ) {
+            )
+            {
                 if (BeforeConnect != null)
                 {
                     Assert.True(
@@ -536,7 +538,8 @@ namespace Microsoft.AspNetCore.Components.Server.Circuits
                 object value,
                 EvictionReason reason,
                 object state
-            ) {
+            )
+            {
                 base.OnEntryEvicted(key, value, reason, state);
                 OnAfterEntryEvicted?.Invoke();
             }

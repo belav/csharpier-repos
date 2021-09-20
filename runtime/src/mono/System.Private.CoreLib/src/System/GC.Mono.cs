@@ -105,7 +105,8 @@ namespace System
             GCCollectionMode mode,
             bool blocking,
             bool compacting
-        ) {
+        )
+        {
             if (generation < 0)
                 throw new ArgumentOutOfRangeException(
                     nameof(generation),
@@ -173,7 +174,8 @@ namespace System
         private static bool _RegisterForFullGCNotification(
             int maxGenerationPercentage,
             int largeObjectHeapPercentage
-        ) {
+        )
+        {
             throw new NotImplementedException();
         }
 
@@ -195,7 +197,8 @@ namespace System
         public static void RegisterForFullGCNotification(
             int maxGenerationThreshold,
             int largeObjectHeapThreshold
-        ) {
+        )
+        {
             if ((maxGenerationThreshold <= 0) || (maxGenerationThreshold >= 100))
                 throw new ArgumentOutOfRangeException(
                     nameof(maxGenerationThreshold),
@@ -253,7 +256,8 @@ namespace System
             bool hasLohSize,
             long lohSize,
             bool disallowFullBlockingGC
-        ) {
+        )
+        {
             throw new NotImplementedException();
         }
 

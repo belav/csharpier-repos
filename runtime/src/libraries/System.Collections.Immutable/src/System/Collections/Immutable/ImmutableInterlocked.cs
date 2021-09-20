@@ -122,7 +122,8 @@ namespace System.Collections.Immutable
         public static bool Update<T>(
             ref ImmutableArray<T> location,
             Func<ImmutableArray<T>, ImmutableArray<T>> transformer
-        ) {
+        )
+        {
             Requires.NotNull(transformer, nameof(transformer));
 
             bool successful;
@@ -172,7 +173,8 @@ namespace System.Collections.Immutable
             ref ImmutableArray<T> location,
             Func<ImmutableArray<T>, TArg, ImmutableArray<T>> transformer,
             TArg transformerArgument
-        ) {
+        )
+        {
             Requires.NotNull(transformer, nameof(transformer));
 
             bool successful;
@@ -213,7 +215,8 @@ namespace System.Collections.Immutable
         public static ImmutableArray<T> InterlockedExchange<T>(
             ref ImmutableArray<T> location,
             ImmutableArray<T> value
-        ) {
+        )
+        {
             return new ImmutableArray<T>(
                 Interlocked.Exchange(ref Unsafe.AsRef(in location.array), value.array)
             );
@@ -232,7 +235,8 @@ namespace System.Collections.Immutable
             ref ImmutableArray<T> location,
             ImmutableArray<T> value,
             ImmutableArray<T> comparand
-        ) {
+        )
+        {
             return new ImmutableArray<T>(
                 Interlocked.CompareExchange(
                     ref Unsafe.AsRef(in location.array),
@@ -253,7 +257,8 @@ namespace System.Collections.Immutable
         public static bool InterlockedInitialize<T>(
             ref ImmutableArray<T> location,
             ImmutableArray<T> value
-        ) {
+        )
+        {
             return InterlockedCompareExchange(
                 ref location,
                 value,
@@ -550,7 +555,8 @@ namespace System.Collections.Immutable
                 if (
                     !priorCollection.TryGetValue(key, out priorValue!)
                     || !valueComparer.Equals(priorValue, comparisonValue)
-                ) {
+                )
+                {
                     // The key isn't in the dictionary, or its current value doesn't match what the caller expected.
                     return false;
                 }
@@ -621,7 +627,8 @@ namespace System.Collections.Immutable
         public static bool TryPop<T>(
             ref ImmutableStack<T> location,
             [MaybeNullWhen(false)] out T value
-        ) {
+        )
+        {
             var priorCollection = Volatile.Read(ref location);
             bool successful;
             do
@@ -686,7 +693,8 @@ namespace System.Collections.Immutable
         public static bool TryDequeue<T>(
             ref ImmutableQueue<T> location,
             [MaybeNullWhen(false)] out T value
-        ) {
+        )
+        {
             var priorCollection = Volatile.Read(ref location);
             bool successful;
             do

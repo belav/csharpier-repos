@@ -250,7 +250,8 @@ namespace Interop.FunctionalTests
                         exitedTcs.Task,
                         Task.Delay(TimeSpan.FromSeconds(TimeoutSeconds * 2))
                     ) != exitedTcs.Task
-                ) {
+                )
+                {
                     try
                     {
                         process.Kill();

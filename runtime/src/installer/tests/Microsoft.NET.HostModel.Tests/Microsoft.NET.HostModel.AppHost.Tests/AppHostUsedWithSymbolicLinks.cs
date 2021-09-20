@@ -66,7 +66,8 @@ namespace Microsoft.NET.HostModel.Tests
         public void Run_apphost_behind_transitive_symlinks(
             string firstSymlinkRelativePath,
             string secondSymlinkRelativePath
-        ) {
+        )
+        {
             // Creating symbolic links requires administrative privilege on Windows, so skip test.
             if (RuntimeInformation.IsOSPlatform(OSPlatform.Windows))
                 return;

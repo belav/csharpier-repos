@@ -44,14 +44,15 @@ namespace System.Reflection.Emit
             object?[] constructorArgs,
             PropertyInfo[] namedProperties,
             object?[] propertyValues
-        ) : this(
-            con,
-            constructorArgs,
-            namedProperties,
-            propertyValues,
-            Array.Empty<FieldInfo>(),
-            Array.Empty<object>()
-        ) { }
+        )
+            : this(
+                con,
+                constructorArgs,
+                namedProperties,
+                propertyValues,
+                Array.Empty<FieldInfo>(),
+                Array.Empty<object>()
+            ) { }
 
         // public constructor to form the custom attribute with constructor and constructor
         // parameters.
@@ -60,14 +61,15 @@ namespace System.Reflection.Emit
             object?[] constructorArgs,
             FieldInfo[] namedFields,
             object?[] fieldValues
-        ) : this(
-            con,
-            constructorArgs,
-            Array.Empty<PropertyInfo>(),
-            Array.Empty<object>(),
-            namedFields,
-            fieldValues
-        ) { }
+        )
+            : this(
+                con,
+                constructorArgs,
+                Array.Empty<PropertyInfo>(),
+                Array.Empty<object>(),
+                namedFields,
+                fieldValues
+            ) { }
 
         // public constructor to form the custom attribute with constructor and constructor
         // parameters.
@@ -78,7 +80,8 @@ namespace System.Reflection.Emit
             object?[] propertyValues,
             FieldInfo[] namedFields,
             object?[] fieldValues
-        ) {
+        )
+        {
             if (con == null)
                 throw new ArgumentNullException(nameof(con));
             if (constructorArgs == null)
@@ -192,7 +195,8 @@ namespace System.Reflection.Emit
                     property.DeclaringType != con.DeclaringType
                     && (!(con.DeclaringType is TypeBuilderInstantiation))
                     && !con.DeclaringType!.IsSubclassOf(property.DeclaringType!)
-                ) {
+                )
+                {
                     // Might have failed check because one type is a XXXBuilder
                     // and the other is not. Deal with these special cases
                     // separately.
@@ -257,7 +261,8 @@ namespace System.Reflection.Emit
                     namedField.DeclaringType != con.DeclaringType
                     && (!(con.DeclaringType is TypeBuilderInstantiation))
                     && !con.DeclaringType!.IsSubclassOf(namedField.DeclaringType!)
-                ) {
+                )
+                {
                     // Might have failed check because one type is a XXXBuilder
                     // and the other is not. Deal with these special cases
                     // separately.
@@ -340,7 +345,8 @@ namespace System.Reflection.Emit
             Type type,
             Type passedType,
             string paramName
-        ) {
+        )
+        {
             if (type != typeof(object) && Type.GetTypeCode(passedType) != Type.GetTypeCode(type))
             {
                 throw new ArgumentException(SR.Argument_ConstantDoesntMatch);

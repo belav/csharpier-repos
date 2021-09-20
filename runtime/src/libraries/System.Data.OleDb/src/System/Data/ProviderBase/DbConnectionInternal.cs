@@ -28,7 +28,8 @@ namespace System.Data.ProviderBase
         internal virtual void CloseConnection(
             DbConnection owningObject,
             DbConnectionFactory connectionFactory
-        ) {
+        )
+        {
             // The implementation here is the implementation required for the
             // "open" internal connections, since our own private "closed"
             // singleton internal connection objects override this method to
@@ -79,7 +80,8 @@ namespace System.Data.ProviderBase
                     DbConnectionOpenBusy.SingletonInstance,
                     this
                 )
-            ) {
+            )
+            {
                 // Lock to prevent race condition with cancellation
                 lock (this)
                 {

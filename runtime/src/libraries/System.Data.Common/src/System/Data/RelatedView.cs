@@ -90,7 +90,8 @@ namespace System.Data
             string newSort,
             DataViewRowState newRowStates,
             IFilter? newRowFilter
-        ) {
+        )
+        {
             SetIndex2(newSort, newRowStates, newRowFilter, false);
             Reset();
         }

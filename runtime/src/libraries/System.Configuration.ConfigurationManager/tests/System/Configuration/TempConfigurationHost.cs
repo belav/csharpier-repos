@@ -32,7 +32,8 @@ public class TempConfigurationHost : DelegatingConfigHost
         out string locationConfigPath,
         IInternalConfigRoot configRoot,
         params object[] hostInitConfigurationParams
-    ) {
+    )
+    {
         Host.Init(configRoot, hostInitConfigurationParams);
 
         _fileMap = hostInitConfigurationParams[1] as ConfigurationFileMap;

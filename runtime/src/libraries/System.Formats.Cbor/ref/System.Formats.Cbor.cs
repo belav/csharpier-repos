@@ -94,7 +94,8 @@ namespace System.Formats.Cbor
         }
         public System.ReadOnlyMemory<byte> ReadEncodedValue(
             bool disableConformanceModeChecks = false
-        ) {
+        )
+        {
             throw null;
         }
         public void ReadEndArray() { }

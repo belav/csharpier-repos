@@ -293,7 +293,8 @@ namespace Microsoft.AspNetCore.Mvc.ViewFeatures
             }
             else if (
                 string.Equals(item.Value, Get(index).Value, StringComparison.OrdinalIgnoreCase)
-            ) {
+            )
+            {
                 Remove(index);
                 return true;
             }
@@ -439,7 +440,8 @@ namespace Microsoft.AspNetCore.Mvc.ViewFeatures
                             _attributes.Get(i).Key,
                             StringComparison.OrdinalIgnoreCase
                         )
-                    ) {
+                    )
+                    {
                         return true;
                     }
                 }
@@ -550,7 +552,8 @@ namespace Microsoft.AspNetCore.Mvc.ViewFeatures
                             _attributes.Get(i).Value,
                             StringComparison.OrdinalIgnoreCase
                         )
-                    ) {
+                    )
+                    {
                         return true;
                     }
                 }

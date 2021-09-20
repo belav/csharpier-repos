@@ -76,7 +76,8 @@ namespace System.Reflection.Emit
             ParameterModifier[]? modifiers,
             CultureInfo? culture,
             string[]? namedParameters
-        ) {
+        )
+        {
             return m_typeBuilder.InvokeMember(
                 name,
                 invokeAttr,
@@ -115,7 +116,8 @@ namespace System.Reflection.Emit
             CallingConventions callConvention,
             Type[] types,
             ParameterModifier[]? modifiers
-        ) {
+        )
+        {
             return m_typeBuilder.GetConstructor(
                 bindingAttr,
                 binder,
@@ -145,7 +147,8 @@ namespace System.Reflection.Emit
             CallingConventions callConvention,
             Type[]? types,
             ParameterModifier[]? modifiers
-        ) {
+        )
+        {
             if (types == null)
                 return m_typeBuilder.GetMethod(name, bindingAttr);
             else
@@ -222,7 +225,8 @@ namespace System.Reflection.Emit
             Type? returnType,
             Type[]? types,
             ParameterModifier[]? modifiers
-        ) {
+        )
+        {
             throw new NotSupportedException(SR.NotSupported_DynamicModule);
         }
 
@@ -258,7 +262,8 @@ namespace System.Reflection.Emit
             string name,
             MemberTypes type,
             BindingFlags bindingAttr
-        ) {
+        )
+        {
             return m_typeBuilder.GetMember(name, type, bindingAttr);
         }
 

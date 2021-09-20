@@ -14,7 +14,8 @@ namespace Microsoft.AspNetCore.Authentication
         protected override Task<HttpResponseMessage> SendAsync(
             HttpRequestMessage request,
             System.Threading.CancellationToken cancellationToken
-        ) {
+        )
+        {
             if (Sender != null)
             {
                 return Task.FromResult(Sender(request));

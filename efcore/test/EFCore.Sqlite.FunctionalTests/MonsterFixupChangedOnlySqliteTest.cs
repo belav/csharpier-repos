@@ -8,9 +8,8 @@ namespace Microsoft.EntityFrameworkCore
     public class MonsterFixupChangedOnlySqliteTest
         : MonsterFixupTestBase<MonsterFixupChangedOnlySqliteTest.MonsterFixupChangedOnlySqliteFixture>
     {
-        public MonsterFixupChangedOnlySqliteTest(
-            MonsterFixupChangedOnlySqliteFixture fixture
-        ) : base(fixture) { }
+        public MonsterFixupChangedOnlySqliteTest(MonsterFixupChangedOnlySqliteFixture fixture)
+            : base(fixture) { }
 
         public class MonsterFixupChangedOnlySqliteFixture : MonsterFixupChangedOnlyFixtureBase
         {

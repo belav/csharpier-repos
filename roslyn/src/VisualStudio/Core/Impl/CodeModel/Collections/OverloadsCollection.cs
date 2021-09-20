@@ -49,7 +49,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.CodeModel.Colle
                 if (
                     symbol.MethodKind != MethodKind.Ordinary
                     && symbol.MethodKind != MethodKind.Constructor
-                ) {
+                )
+                {
                     return ImmutableArray.Create((EnvDTE.CodeElement)Parent);
                 }
 

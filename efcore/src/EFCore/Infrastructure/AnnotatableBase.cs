@@ -102,7 +102,8 @@ namespace Microsoft.EntityFrameworkCore.Infrastructure
         internal static void AddAnnotations(
             AnnotatableBase annotatable,
             IEnumerable<IAnnotation> annotations
-        ) {
+        )
+        {
             foreach (var annotation in annotations)
             {
                 annotatable.AddAnnotation(annotation.Name, (Annotation)annotation);
@@ -145,7 +146,8 @@ namespace Microsoft.EntityFrameworkCore.Infrastructure
             string name,
             Annotation annotation,
             Annotation? oldAnnotation
-        ) {
+        )
+        {
             EnsureMutable();
 
             if (_annotations == null)
@@ -204,7 +206,8 @@ namespace Microsoft.EntityFrameworkCore.Infrastructure
         internal static IAnnotation GetAnnotation(
             IReadOnlyAnnotatable annotatable,
             string annotationName
-        ) {
+        )
+        {
             Check.NotEmpty(annotationName, nameof(annotationName));
 
             var annotation = annotatable.FindAnnotation(annotationName);
@@ -368,7 +371,8 @@ namespace Microsoft.EntityFrameworkCore.Infrastructure
             string name,
             Annotation annotation,
             Annotation? oldAnnotation
-        ) {
+        )
+        {
             GetOrCreateRuntimeAnnotations()[name] = annotation;
 
             return annotation;

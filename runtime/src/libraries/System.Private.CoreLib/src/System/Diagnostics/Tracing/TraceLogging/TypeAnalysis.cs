@@ -35,7 +35,8 @@ namespace System.Diagnostics.Tracing
             Type dataType,
             EventDataAttribute? eventAttrib,
             List<Type> recursionCheck
-        ) {
+        )
+        {
             var propertyList = new List<PropertyAnalysis>();
 
             foreach (PropertyInfo propertyInfo in dataType.GetProperties())

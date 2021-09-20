@@ -62,7 +62,8 @@ namespace Microsoft.Extensions.DependencyInjection
         public static IHttpClientBuilder AddHeaderPropagation(
             this IHttpClientBuilder builder,
             Action<HeaderPropagationMessageHandlerOptions> configure
-        ) {
+        )
+        {
             if (builder == null)
             {
                 throw new ArgumentNullException(nameof(builder));

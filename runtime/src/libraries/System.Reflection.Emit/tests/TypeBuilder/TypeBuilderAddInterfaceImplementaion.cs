@@ -122,7 +122,8 @@ namespace System.Reflection.Emit.Tests
         [MemberData(nameof(NonInterfaceTypes_TestData))]
         public void AddInterfaceImplementation_TypeNotInterface_ThrowsTypeLoadExceptionOnCreation(
             Type interfaceType
-        ) {
+        )
+        {
             TypeBuilder type = Helpers.DynamicType(TypeAttributes.Public);
             type.AddInterfaceImplementation(interfaceType);
 
@@ -134,7 +135,8 @@ namespace System.Reflection.Emit.Tests
         [InlineData(typeof(EmptyGenericClass<>))]
         public void AddInterfaceImplementation_OpenGenericType_ThrowsBadImageFormatExceptionOnCreation(
             Type interfaceType
-        ) {
+        )
+        {
             TypeBuilder type = Helpers.DynamicType(TypeAttributes.Public);
             type.AddInterfaceImplementation(interfaceType);
 

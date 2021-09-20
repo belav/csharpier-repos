@@ -45,7 +45,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.AddImports
             PasteCommandArgs args,
             Action nextCommandHandler,
             CommandExecutionContext executionContext
-        ) {
+        )
+        {
             // Check that the feature is enabled before doing any work
             var optionValue = args.SubjectBuffer.GetOptionalFeatureOnOffOption(
                 FeatureOnOffOptions.AddImportsOnPaste
@@ -98,7 +99,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.AddImports
             CommandExecutionContext executionContext,
             bool? optionValue,
             ITrackingSpan trackingSpan
-        ) {
+        )
+        {
             if (!args.SubjectBuffer.CanApplyChangeDocumentToWorkspace())
             {
                 return;

@@ -39,7 +39,8 @@ namespace Microsoft.CodeAnalysis.Differencing.UnitTests
         private static void VerifyMatchingPairs(
             IEnumerable<KeyValuePair<int, int>> actualPairs,
             string expectedPairsStr
-        ) {
+        )
+        {
             var sb = new StringBuilder(expectedPairsStr.Length);
             foreach (var actPair in actualPairs)
             {
@@ -53,7 +54,8 @@ namespace Microsoft.CodeAnalysis.Differencing.UnitTests
             string oldStr,
             string newStr,
             IEnumerable<SequenceEdit> edits
-        ) {
+        )
+        {
             var oldChars = oldStr.ToCharArray();
             var newChars = new char[newStr.Length];
 

@@ -12,7 +12,8 @@ namespace System
             char[] right,
             int rightStartIndex,
             int rightLength
-        ) {
+        )
+        {
             Debug.Assert(left != null, "Expected non-null string");
             DebugAssertArrayInputs(right, rightStartIndex, rightLength);
 

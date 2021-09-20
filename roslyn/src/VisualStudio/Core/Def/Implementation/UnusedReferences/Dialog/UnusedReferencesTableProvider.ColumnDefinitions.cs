@@ -70,7 +70,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.UnusedReference
             ImageMoniker imageMoniker,
             string text,
             bool isBold
-        ) {
+        )
+        {
             var stackPanel = new StackPanel
             {
                 Orientation = Orientation.Horizontal,
@@ -129,7 +130,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.UnusedReference
                 ITableEntryHandle entry,
                 bool singleColumnView,
                 out FrameworkElement? content
-            ) {
+            )
+            {
                 if (entry.TryGetValue(UnusedReferencesTableKeyNames.SolutionName, out string name))
                 {
                     content = CreateGridElement(KnownMonikers.Solution, name, isBold: false);
@@ -145,7 +147,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.UnusedReference
                 bool truncatedText,
                 bool singleColumnView,
                 out string content
-            ) {
+            )
+            {
                 return entry.TryGetValue(UnusedReferencesTableKeyNames.SolutionName, out content);
             }
 
@@ -174,7 +177,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.UnusedReference
                 ITableEntryHandle entry,
                 bool singleColumnView,
                 out FrameworkElement? content
-            ) {
+            )
+            {
                 if (entry.TryGetValue(UnusedReferencesTableKeyNames.ProjectName, out string name))
                 {
                     content = CreateGridElement(GetImageMoniker(entry), name, isBold: false);
@@ -190,7 +194,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.UnusedReference
                 bool truncatedText,
                 bool singleColumnView,
                 out string content
-            ) {
+            )
+            {
                 return entry.TryGetValue(UnusedReferencesTableKeyNames.ProjectName, out content);
             }
 
@@ -228,13 +233,15 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.UnusedReference
                 ITableEntryHandle entry,
                 bool singleColumnView,
                 out FrameworkElement? content
-            ) {
+            )
+            {
                 if (
                     entry.TryGetValue<ReferenceType>(
                         UnusedReferencesTableKeyNames.ReferenceType,
                         out var referenceType
                     )
-                ) {
+                )
+                {
                     content = CreateGridElement(
                         GetReferenceTypeImageMoniker(referenceType),
                         GetText(referenceType),
@@ -252,7 +259,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.UnusedReference
                 bool truncatedText,
                 bool singleColumnView,
                 out string? content
-            ) {
+            )
+            {
                 content = entry.TryGetValue<ReferenceType>(
                     UnusedReferencesTableKeyNames.ReferenceType,
                     out var referenceType
@@ -304,7 +312,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.UnusedReference
                 ITableEntryHandle entry,
                 bool singleColumnView,
                 out FrameworkElement? content
-            ) {
+            )
+            {
                 content = CreateGridElement(GetImageMoniker(entry), GetText(entry), isBold: false);
                 return true;
             }
@@ -314,7 +323,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.UnusedReference
                 bool truncatedText,
                 bool singleColumnView,
                 out string content
-            ) {
+            )
+            {
                 return entry.TryGetValue(UnusedReferencesTableKeyNames.ReferenceName, out content);
             }
 
@@ -357,7 +367,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.UnusedReference
                 ITableEntryHandle entry,
                 bool singleColumnView,
                 out FrameworkElement? content
-            ) {
+            )
+            {
                 var combobox = new ComboBox
                 {
                     IsEditable = false,
@@ -371,7 +382,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.UnusedReference
                         UnusedReferencesTableKeyNames.UpdateAction,
                         out UpdateAction action
                     )
-                ) {
+                )
+                {
                     combobox.SelectedItem = action switch
                     {
                         UpdateAction.Remove => ServicesVSResources.Remove,

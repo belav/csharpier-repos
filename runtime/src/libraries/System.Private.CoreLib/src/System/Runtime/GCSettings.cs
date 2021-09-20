@@ -63,7 +63,8 @@ namespace System.Runtime
                 if (
                     (value < GCLargeObjectHeapCompactionMode.Default)
                     || (value > GCLargeObjectHeapCompactionMode.CompactOnce)
-                ) {
+                )
+                {
                     throw new ArgumentOutOfRangeException(
                         nameof(value),
                         SR.ArgumentOutOfRange_Enum

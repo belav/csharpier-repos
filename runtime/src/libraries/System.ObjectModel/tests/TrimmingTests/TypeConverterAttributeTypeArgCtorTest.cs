@@ -41,7 +41,8 @@ namespace TypeConverterAttributeTest
             ITypeDescriptorContext context,
             CultureInfo culture,
             object value
-        ) {
+        )
+        {
             if (_type == typeof(DayOfWeek) && value is string str && str == "Friday")
             {
                 return DayOfWeek.Monday;

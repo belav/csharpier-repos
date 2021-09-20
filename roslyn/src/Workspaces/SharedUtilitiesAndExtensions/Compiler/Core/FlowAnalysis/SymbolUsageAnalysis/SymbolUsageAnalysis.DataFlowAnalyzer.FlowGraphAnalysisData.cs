@@ -121,7 +121,8 @@ namespace Microsoft.CodeAnalysis.FlowAnalysis.SymbolUsageAnalysis
                         IFlowAnonymousFunctionOperation,
                         ControlFlowGraph
                     > lambdaTargetsToAccessingCfgMap
-                ) {
+                )
+                {
                     ControlFlowGraph = controlFlowGraph;
                     OwningSymbol = owningSymbol;
                     _parameters = parameters;
@@ -178,7 +179,8 @@ namespace Microsoft.CodeAnalysis.FlowAnalysis.SymbolUsageAnalysis
                         CancellationToken,
                         BasicBlockAnalysisData
                     > analyzeLocalFunctionOrLambdaInvocation
-                ) {
+                )
+                {
                     Debug.Assert(cfg.Parent == null);
 
                     var parameters = owningSymbol.GetParameters();
@@ -210,7 +212,8 @@ namespace Microsoft.CodeAnalysis.FlowAnalysis.SymbolUsageAnalysis
                     ControlFlowGraph cfg,
                     IMethodSymbol lambdaOrLocalFunction,
                     FlowGraphAnalysisData parentAnalysisData
-                ) {
+                )
+                {
                     Debug.Assert(cfg.Parent != null);
                     Debug.Assert(
                         lambdaOrLocalFunction.IsAnonymousFunction()
@@ -270,7 +273,8 @@ namespace Microsoft.CodeAnalysis.FlowAnalysis.SymbolUsageAnalysis
                 public BasicBlockAnalysisData GetOrCreateBlockAnalysisData(
                     BasicBlock basicBlock,
                     CancellationToken cancellationToken
-                ) {
+                )
+                {
                     if (_analysisDataByBasicBlockMap[basicBlock] == null)
                     {
                         _analysisDataByBasicBlockMap[basicBlock] = CreateBlockAnalysisData();
@@ -284,13 +288,15 @@ namespace Microsoft.CodeAnalysis.FlowAnalysis.SymbolUsageAnalysis
                     int firstBlockOrdinal,
                     int lastBlockOrdinal,
                     CancellationToken cancellationToken
-                ) {
+                )
+                {
                     if (
                         !_symbolWritesInsideBlockRangeMap.TryGetValue(
                             (firstBlockOrdinal, lastBlockOrdinal),
                             out var writesInBlockRange
                         )
-                    ) {
+                    )
+                    {
                         // Compute all descendant operations in basic block range.
                         var operations = PooledHashSet<IOperation>.GetInstance();
                         AddDescendantOperationsInRange(
@@ -307,7 +313,8 @@ namespace Microsoft.CodeAnalysis.FlowAnalysis.SymbolUsageAnalysis
                             var (symbol, write) in SymbolsWriteBuilder.Where(kvp => !kvp.Value)
                                 .Select(kvp => kvp.Key)
                                 .ToArray()
-                        ) {
+                        )
+                        {
                             if (write != null && operations.Contains(write))
                             {
                                 writesInBlockRange.Add((symbol, write));
@@ -324,7 +331,8 @@ namespace Microsoft.CodeAnalysis.FlowAnalysis.SymbolUsageAnalysis
                     int lastBlockOrdinal,
                     PooledHashSet<IOperation> operationsBuilder,
                     CancellationToken cancellationToken
-                ) {
+                )
+                {
                     // Compute all descendant operations in basic block range.
                     for (var i = firstBlockOrdinal; i <= lastBlockOrdinal; i++)
                     {
@@ -340,7 +348,8 @@ namespace Microsoft.CodeAnalysis.FlowAnalysis.SymbolUsageAnalysis
                                         invocation.Instance,
                                         out var targets
                                     )
-                                ) {
+                                )
+                                {
                                     AddDescendantOperationsFromDelegateCreationTargets(targets);
                                 }
                                 else if (invocation.TargetMethod.IsLocalFunction())
@@ -366,7 +375,8 @@ namespace Microsoft.CodeAnalysis.FlowAnalysis.SymbolUsageAnalysis
                     // Local functions.
                     void AddDescendantOperationsFromDelegateCreationTargets(
                         PooledHashSet<IOperation> targets
-                    ) {
+                    )
+                    {
                         foreach (var target in targets)
                         {
                             ControlFlowGraph lambdaOrLocalFunctionCfgOpt = null;
@@ -397,7 +407,8 @@ namespace Microsoft.CodeAnalysis.FlowAnalysis.SymbolUsageAnalysis
 
                             if (
                                 lambdaOrLocalFunctionCfgOpt != null && operationsBuilder.Add(target)
-                            ) {
+                            )
+                            {
                                 AddDescendantOperationsInLambdaOrLocalFunctionGraph(
                                     lambdaOrLocalFunctionCfgOpt
                                 );
@@ -407,7 +418,8 @@ namespace Microsoft.CodeAnalysis.FlowAnalysis.SymbolUsageAnalysis
 
                     void AddDescendantOperationsInLambdaOrLocalFunctionGraph(
                         ControlFlowGraph lambdaOrLocalFunctionCfg
-                    ) {
+                    )
+                    {
                         Debug.Assert(lambdaOrLocalFunctionCfg != null);
                         AddDescendantOperationsInRange(
                             lambdaOrLocalFunctionCfg,
@@ -420,13 +432,15 @@ namespace Microsoft.CodeAnalysis.FlowAnalysis.SymbolUsageAnalysis
 
                     ControlFlowGraph TryGetAnonymousFunctionControlFlowGraphInScope(
                         IFlowAnonymousFunctionOperation flowAnonymousFunctionOperation
-                    ) {
+                    )
+                    {
                         if (
                             _lambdaTargetsToAccessingCfgMap.TryGetValue(
                                 flowAnonymousFunctionOperation,
                                 out var lambdaAccessingCfg
                             )
-                        ) {
+                        )
+                        {
                             var anonymousFunctionCfg =
                                 lambdaAccessingCfg.GetAnonymousFunctionControlFlowGraphInScope(
                                     flowAnonymousFunctionOperation,
@@ -441,7 +455,8 @@ namespace Microsoft.CodeAnalysis.FlowAnalysis.SymbolUsageAnalysis
 
                     ControlFlowGraph TryGetLocalFunctionControlFlowGraphInScope(
                         IMethodSymbol localFunction
-                    ) {
+                    )
+                    {
                         Debug.Assert(localFunction.IsLocalFunction());
 
                         // Use the original definition of the local function for flow analysis.
@@ -452,7 +467,8 @@ namespace Microsoft.CodeAnalysis.FlowAnalysis.SymbolUsageAnalysis
                                 localFunction,
                                 out var localFunctionAccessingCfg
                             )
-                        ) {
+                        )
+                        {
                             var localFunctionCfg =
                                 localFunctionAccessingCfg.GetLocalFunctionControlFlowGraphInScope(
                                     localFunction,
@@ -475,7 +491,8 @@ namespace Microsoft.CodeAnalysis.FlowAnalysis.SymbolUsageAnalysis
                 private void HandleCatchOrFilterOrFinallyInitialization(
                     BasicBlock basicBlock,
                     CancellationToken cancellationToken
-                ) {
+                )
+                {
                     Debug.Assert(_analysisDataByBasicBlockMap[basicBlock] != null);
 
                     // Ensure we are processing a basic block with following properties:
@@ -486,7 +503,8 @@ namespace Microsoft.CodeAnalysis.FlowAnalysis.SymbolUsageAnalysis
                         !basicBlock.Predecessors.IsEmpty
                         || basicBlock.Kind == BasicBlockKind.Entry
                         || basicBlock.EnclosingRegion.FirstBlockOrdinal != basicBlock.Ordinal
-                    ) {
+                    )
+                    {
                         return;
                     }
 
@@ -495,7 +513,8 @@ namespace Microsoft.CodeAnalysis.FlowAnalysis.SymbolUsageAnalysis
                     while (
                         outermostEnclosingRegionStartingBlock.EnclosingRegion?.FirstBlockOrdinal
                         == basicBlock.Ordinal
-                    ) {
+                    )
+                    {
                         outermostEnclosingRegionStartingBlock =
                             outermostEnclosingRegionStartingBlock.EnclosingRegion;
                     }
@@ -545,7 +564,8 @@ namespace Microsoft.CodeAnalysis.FlowAnalysis.SymbolUsageAnalysis
                             basicBlock.Ordinal - 1,
                             cancellationToken
                         )
-                    ) {
+                    )
+                    {
                         mergedAnalysisData.OnWriteReferenceFound(symbol, write, maybeWritten: true);
                         SymbolsWriteBuilder[(symbol, write)] = true;
                         SymbolsReadBuilder.Add(symbol);
@@ -625,7 +645,8 @@ namespace Microsoft.CodeAnalysis.FlowAnalysis.SymbolUsageAnalysis
                     ISymbol symbol,
                     IOperation operation,
                     CaptureId captureId
-                ) {
+                )
+                {
                     if (!_lValueFlowCapturesMap.TryGetValue(captureId, out var captures))
                     {
                         captures = PooledHashSet<(ISymbol, IOperation)>.GetInstance();
@@ -650,7 +671,8 @@ namespace Microsoft.CodeAnalysis.FlowAnalysis.SymbolUsageAnalysis
                 protected override BasicBlockAnalysisData AnalyzeLocalFunctionInvocationCore(
                     IMethodSymbol localFunction,
                     CancellationToken cancellationToken
-                ) {
+                )
+                {
                     Debug.Assert(localFunction.IsLocalFunction());
                     Debug.Assert(localFunction.Equals(localFunction.OriginalDefinition));
 
@@ -660,7 +682,8 @@ namespace Microsoft.CodeAnalysis.FlowAnalysis.SymbolUsageAnalysis
                             localFunction,
                             out var accessingCfg
                         )
-                    ) {
+                    )
+                    {
                         accessingCfg = ControlFlowGraph;
                     }
 
@@ -679,7 +702,8 @@ namespace Microsoft.CodeAnalysis.FlowAnalysis.SymbolUsageAnalysis
                 protected override BasicBlockAnalysisData AnalyzeLambdaInvocationCore(
                     IFlowAnonymousFunctionOperation lambda,
                     CancellationToken cancellationToken
-                ) {
+                )
+                {
                     cancellationToken.ThrowIfCancellationRequested();
                     if (!_lambdaTargetsToAccessingCfgMap.TryGetValue(lambda, out var accessingCfg))
                     {
@@ -703,7 +727,8 @@ namespace Microsoft.CodeAnalysis.FlowAnalysis.SymbolUsageAnalysis
                 public override void SetTargetsFromSymbolForDelegate(
                     IOperation write,
                     ISymbol symbol
-                ) {
+                )
+                {
                     // Transfer reaching delegate creation targets when assigning from a local/parameter symbol
                     // that has known set of potential delegate creation targets. For example, this method will be called
                     // for definition 'y' from symbol 'x' for below code:
@@ -723,7 +748,8 @@ namespace Microsoft.CodeAnalysis.FlowAnalysis.SymbolUsageAnalysis
                                 symbolWrite,
                                 out var targetsBuilderForSymbolWrite
                             )
-                        ) {
+                        )
+                        {
                             // Unable to find delegate creation targets for this symbol write.
                             // Bail out without setting targets.
                             targetsBuilder.Free();
@@ -744,7 +770,8 @@ namespace Microsoft.CodeAnalysis.FlowAnalysis.SymbolUsageAnalysis
                 public override void SetLambdaTargetForDelegate(
                     IOperation write,
                     IFlowAnonymousFunctionOperation lambdaTarget
-                ) {
+                )
+                {
                     // Sets a lambda delegate target for the current write.
                     // For example, this method will be called for the definition 'x' below with assigned lambda.
                     //      Action x = () => { };
@@ -756,7 +783,8 @@ namespace Microsoft.CodeAnalysis.FlowAnalysis.SymbolUsageAnalysis
                 public override void SetLocalFunctionTargetForDelegate(
                     IOperation write,
                     IMethodReferenceOperation localFunctionTarget
-                ) {
+                )
+                {
                     // Sets a local function delegate target for the current write.
                     // For example, this method will be called for the definition 'x' below with assigned LocalFunction delegate.
                     //      Action x = LocalFunction;
@@ -786,7 +814,8 @@ namespace Microsoft.CodeAnalysis.FlowAnalysis.SymbolUsageAnalysis
                 public override bool TryGetDelegateInvocationTargets(
                     IOperation write,
                     out ImmutableHashSet<IOperation> targets
-                ) {
+                )
+                {
                     // Attempts to return potential lamba/local function delegate invocation targets for the given write.
                     if (_reachingDelegateCreationTargets.TryGetValue(write, out var targetsBuilder))
                     {

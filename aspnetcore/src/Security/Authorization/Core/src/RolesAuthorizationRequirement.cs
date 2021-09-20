@@ -48,7 +48,8 @@ namespace Microsoft.AspNetCore.Authorization.Infrastructure
         protected override Task HandleRequirementAsync(
             AuthorizationHandlerContext context,
             RolesAuthorizationRequirement requirement
-        ) {
+        )
+        {
             if (context.User != null)
             {
                 bool found = false;

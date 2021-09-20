@@ -21,7 +21,8 @@ namespace Microsoft.AspNetCore.Builder
         internal ControllerActionEndpointConventionBuilder(
             object @lock,
             List<Action<EndpointBuilder>> conventions
-        ) {
+        )
+        {
             _lock = @lock;
             _conventions = conventions;
         }

@@ -35,7 +35,8 @@ namespace Microsoft.CodeAnalysis.GenerateMember.GenerateParameterizedMember
                 SemanticDocument document,
                 SyntaxNode interfaceNode,
                 CancellationToken cancellationToken
-            ) {
+            )
+            {
                 var state = new State();
                 if (
                     !await state.TryInitializeMethodAsync(
@@ -45,7 +46,8 @@ namespace Microsoft.CodeAnalysis.GenerateMember.GenerateParameterizedMember
                             cancellationToken
                         )
                         .ConfigureAwait(false)
-                ) {
+                )
+                {
                     return null;
                 }
 
@@ -57,7 +59,8 @@ namespace Microsoft.CodeAnalysis.GenerateMember.GenerateParameterizedMember
                 SemanticDocument document,
                 SyntaxNode node,
                 CancellationToken cancellationToken
-            ) {
+            )
+            {
                 // Cases that we deal with currently:
                 //
                 // 1) expr.Goo
@@ -89,7 +92,8 @@ namespace Microsoft.CodeAnalysis.GenerateMember.GenerateParameterizedMember
                             (TSimpleNameSyntax)node,
                             cancellationToken
                         )
-                    ) {
+                    )
+                    {
                         return SpecializedTasks.False;
                     }
                 }
@@ -102,7 +106,8 @@ namespace Microsoft.CodeAnalysis.GenerateMember.GenerateParameterizedMember
                 SemanticDocument document,
                 SyntaxNode methodDeclaration,
                 CancellationToken cancellationToken
-            ) {
+            )
+            {
                 MethodKind = MethodKind.Ordinary;
                 if (
                     !service.TryInitializeExplicitInterfaceState(
@@ -113,7 +118,8 @@ namespace Microsoft.CodeAnalysis.GenerateMember.GenerateParameterizedMember
                         out var methodSymbol,
                         out var typeToGenerateIn
                     )
-                ) {
+                )
+                {
                     return false;
                 }
 
@@ -150,7 +156,8 @@ namespace Microsoft.CodeAnalysis.GenerateMember.GenerateParameterizedMember
                 SemanticDocument semanticDocument,
                 TSimpleNameSyntax simpleName,
                 CancellationToken cancellationToken
-            ) {
+            )
+            {
                 MethodKind = MethodKind.Ordinary;
                 SimpleNameOpt = simpleName;
                 if (
@@ -163,7 +170,8 @@ namespace Microsoft.CodeAnalysis.GenerateMember.GenerateParameterizedMember
                         out var invocationExpressionOpt,
                         out var isInConditionalExpression
                     )
-                ) {
+                )
+                {
                     return false;
                 }
 
@@ -248,7 +256,8 @@ namespace Microsoft.CodeAnalysis.GenerateMember.GenerateParameterizedMember
                     semanticInfo.GetAllSymbols()
                         .Any(s => s.Kind == SymbolKind.Local || s.Kind == SymbolKind.Parameter)
                     && !service.AreSpecialOptionsActive(semanticModel)
-                ) {
+                )
+                {
                     // if the name bound to something in scope then we don't want to generate the
                     // method because it will be shadowed by what's in scope. Unless we are in a
                     // special state such as Option Strict On where we want to generate fixes even
@@ -261,7 +270,8 @@ namespace Microsoft.CodeAnalysis.GenerateMember.GenerateParameterizedMember
                 if (
                     semanticInfo.Symbol != null
                     && !service.IsValidSymbol(semanticInfo.Symbol, semanticModel)
-                ) {
+                )
+                {
                     return false;
                 }
 
@@ -278,7 +288,8 @@ namespace Microsoft.CodeAnalysis.GenerateMember.GenerateParameterizedMember
                         out var typeToGenerateIn,
                         out var isStatic
                     )
-                ) {
+                )
+                {
                     return false;
                 }
 
@@ -297,7 +308,8 @@ namespace Microsoft.CodeAnalysis.GenerateMember.GenerateParameterizedMember
 
             private static IMethodSymbol CreateMethodSymbolWithReturnType(
                 ITypeSymbol expressionType
-            ) {
+            )
+            {
                 return CodeGenerationSymbolFactory.CreateMethodSymbol(
                     attributes: ImmutableArray<AttributeData>.Empty,
                     accessibility: default,

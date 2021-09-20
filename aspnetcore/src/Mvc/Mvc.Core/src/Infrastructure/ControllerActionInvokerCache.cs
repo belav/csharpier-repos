@@ -29,7 +29,8 @@ namespace Microsoft.AspNetCore.Mvc.Infrastructure
             IEnumerable<IFilterProvider> filterProviders,
             IControllerFactoryProvider factoryProvider,
             IOptions<MvcOptions> mvcOptions
-        ) {
+        )
+        {
             _parameterBinder = parameterBinder;
             _modelBinderFactory = modelBinderFactory;
             _modelMetadataProvider = modelMetadataProvider;
@@ -40,7 +41,8 @@ namespace Microsoft.AspNetCore.Mvc.Infrastructure
 
         public (ControllerActionInvokerCacheEntry cacheEntry, IFilterMetadata[] filters) GetCachedResult(
             ControllerContext controllerContext
-        ) {
+        )
+        {
             var actionDescriptor = controllerContext.ActionDescriptor;
 
             IFilterMetadata[] filters;

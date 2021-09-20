@@ -82,7 +82,8 @@ namespace Microsoft.Extensions.Caching.SqlConfig.Tools
                                     string.IsNullOrEmpty(connectionStringArg.Value)
                                     || string.IsNullOrEmpty(schemaNameArg.Value)
                                     || string.IsNullOrEmpty(tableNameArg.Value)
-                                ) {
+                                )
+                                {
                                     reporter.Error("Invalid input");
                                     command.ShowHelp();
                                     return 2;
@@ -135,7 +136,8 @@ namespace Microsoft.Extensions.Caching.SqlConfig.Tools
                                 if (
                                     string.IsNullOrEmpty(schemaNameArg.Value)
                                     || string.IsNullOrEmpty(tableNameArg.Value)
-                                ) {
+                                )
+                                {
                                     reporter.Error("Invalid input");
                                     command.ShowHelp();
                                     return 2;

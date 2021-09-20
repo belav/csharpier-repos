@@ -37,7 +37,8 @@ build_property.RootNamespace = {DefaultNamespace}
             string? directory = null,
             string? editorConfig = null,
             string? fixedCode = null
-        ) {
+        )
+        {
             var filePath = Path.Combine(directory ?? Directory, fileName);
             fixedCode ??= fileContents;
 
@@ -52,7 +53,8 @@ build_property.RootNamespace = {DefaultNamespace}
             IEnumerable<(string, string)> originalSources,
             IEnumerable<(string, string)>? fixedSources = null,
             string? editorconfig = null
-        ) {
+        )
+        {
             var testState = new VerifyCS.Test
             {
                 EditorConfig = editorconfig ?? EditorConfig,

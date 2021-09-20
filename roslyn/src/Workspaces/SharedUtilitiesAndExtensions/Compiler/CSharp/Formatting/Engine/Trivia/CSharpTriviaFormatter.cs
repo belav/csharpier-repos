@@ -60,7 +60,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Formatting
             LineColumnDelta existingWhitespaceBetween,
             bool implicitLineBreak,
             SyntaxTrivia trivia2
-        ) {
+        )
+        {
             if (IsStartOrEndOfFile(trivia1, trivia2))
             {
                 return LineColumnRule.PreserveLinesWithAbsoluteIndentation(
@@ -91,7 +92,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Formatting
                 if (
                     existingWhitespaceBetween.Lines > 0
                     && existingWhitespaceBetween.Spaces != this.Spaces
-                ) {
+                )
+                {
                     return LineColumnRule.PreserveWithGivenSpaces(spaces: this.Spaces);
                 }
 
@@ -107,7 +109,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Formatting
                     trivia2.IsKind(SyntaxKind.BadDirectiveTrivia)
                     && existingWhitespaceBetween.Lines == 0
                     && !implicitLineBreak
-                ) {
+                )
+                {
                     _succeeded = false;
                     return LineColumnRule.Preserve;
                 }
@@ -121,7 +124,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Formatting
                 if (
                     trivia2.IsKind(SyntaxKind.RegionDirectiveTrivia)
                     || trivia2.IsKind(SyntaxKind.EndRegionDirectiveTrivia)
-                ) {
+                )
+                {
                     return LineColumnRule.PreserveLinesWithDefaultIndentation(lines);
                 }
 
@@ -140,11 +144,13 @@ namespace Microsoft.CodeAnalysis.CSharp.Formatting
                     || trivia2.IsMultiLineComment()
                     || trivia2.IsMultiLineDocComment()
                     || existingWhitespaceBetween.Lines > 1
-                ) {
+                )
+                {
                     if (
                         this.FormattingRules.GetAdjustNewLinesOperation(this.Token1, this.Token2)
                         != null
-                    ) {
+                    )
+                    {
                         return LineColumnRule.PreserveLinesWithDefaultIndentation(lines: 0);
                     }
 
@@ -208,7 +214,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Formatting
             LineColumn lineColumn,
             SyntaxTrivia trivia,
             out SyntaxTrivia result
-        ) {
+        )
+        {
             if (trivia.Kind() == SyntaxKind.MultiLineCommentTrivia)
             {
                 var indentation = lineColumn.Column;
@@ -247,7 +254,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Formatting
             SyntaxTrivia trivia,
             ArrayBuilder<SyntaxTrivia> changes,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             if (trivia.HasStructure)
             {
                 return FormatStructuredTrivia(lineColumn, trivia, changes, cancellationToken);
@@ -268,7 +276,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Formatting
             SyntaxTrivia trivia,
             ArrayBuilder<TextChange> changes,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             if (trivia.HasStructure)
             {
                 return FormatStructuredTrivia(lineColumn, trivia, changes, cancellationToken);
@@ -343,7 +352,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Formatting
             SyntaxTrivia trivia,
             ArrayBuilder<SyntaxTrivia> changes,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             if (trivia.Kind() == SyntaxKind.SkippedTokensTrivia)
             {
                 // don't touch anything if it contains skipped tokens
@@ -382,7 +392,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Formatting
             SyntaxTrivia trivia,
             ArrayBuilder<TextChange> changes,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             if (trivia.Kind() == SyntaxKind.SkippedTokensTrivia)
             {
                 // don't touch anything if it contains skipped tokens

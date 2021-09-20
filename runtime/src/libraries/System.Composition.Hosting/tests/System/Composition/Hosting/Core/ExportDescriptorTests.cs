@@ -27,7 +27,8 @@ namespace System.Composition.Hosting.Core.Tests
         public void Create_Valid_ReturnsExpected(
             CompositeActivator activator,
             Dictionary<string, object> metadata
-        ) {
+        )
+        {
             ExportDescriptor descriptor = ExportDescriptor.Create(activator, metadata);
             Assert.Same(activator, descriptor.Activator);
             Assert.Same(metadata, descriptor.Metadata);

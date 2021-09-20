@@ -50,11 +50,13 @@ namespace Microsoft.CodeAnalysis.Features.EmbeddedLanguages.DateAndTime
             int caretPosition,
             CompletionTrigger trigger,
             OptionSet options
-        ) {
+        )
+        {
             if (
                 trigger.Kind == CompletionTriggerKind.Invoke
                 || trigger.Kind == CompletionTriggerKind.InvokeAndCommitIfUnique
-            ) {
+            )
+            {
                 return true;
             }
 
@@ -88,7 +90,8 @@ namespace Microsoft.CodeAnalysis.Features.EmbeddedLanguages.DateAndTime
                 context.Trigger.Kind != CompletionTriggerKind.Invoke
                 && context.Trigger.Kind != CompletionTriggerKind.InvokeAndCommitIfUnique
                 && context.Trigger.Kind != CompletionTriggerKind.Insertion
-            ) {
+            )
+            {
                 return;
             }
 
@@ -486,7 +489,8 @@ namespace Microsoft.CodeAnalysis.Features.EmbeddedLanguages.DateAndTime
             CompletionItem item,
             char? commitKey,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             // These values have always been added by us.
             var startString = item.Properties[StartKey];
             var lengthString = item.Properties[LengthKey];
@@ -506,7 +510,8 @@ namespace Microsoft.CodeAnalysis.Features.EmbeddedLanguages.DateAndTime
             Document document,
             CompletionItem item,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             if (!item.Properties.TryGetValue(DescriptionKey, out var description))
                 return SpecializedTasks.Null<CompletionDescription>();
 

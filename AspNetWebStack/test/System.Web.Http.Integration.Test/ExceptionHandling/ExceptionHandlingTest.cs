@@ -18,7 +18,8 @@ namespace System.Web.Http
         [InlineData("AsyncUnavailableDelegate")]
         public async Task ThrowingHttpResponseException_FromAction_GetsReturnedToClient(
             string actionName
-        ) {
+        )
+        {
             string controllerName = "Exception";
             string requestUrl = String.Format(
                 "{0}/{1}/{2}",
@@ -44,7 +45,8 @@ namespace System.Web.Http
         [InlineData("AsyncArgumentNull")]
         public async Task ThrowingArgumentNullException_FromAction_GetsReturnedToClient(
             string actionName
-        ) {
+        )
+        {
             string controllerName = "Exception";
             string requestUrl = String.Format(
                 "{0}/{1}/{2}",
@@ -74,7 +76,8 @@ namespace System.Web.Http
         [InlineData("AsyncArgumentNull")]
         public async Task ThrowingArgumentNullException_FromAction_GetsReturnedToClientParsedAsJson(
             string actionName
-        ) {
+        )
+        {
             string controllerName = "Exception";
             string requestUrl = String.Format(
                 "{0}/{1}/{2}",
@@ -107,7 +110,8 @@ namespace System.Web.Http
         [InlineData("ExceptionFilter")]
         public async Task ThrowingArgumentException_FromFilter_GetsReturnedToClient(
             string actionName
-        ) {
+        )
+        {
             string controllerName = "Exception";
             string requestUrl = String.Format(
                 "{0}/{1}/{2}",
@@ -143,7 +147,8 @@ namespace System.Web.Http
         public async Task ThrowingHttpResponseException_FromFilter_GetsReturnedToClient(
             string actionName,
             HttpStatusCode responseExceptionStatusCode
-        ) {
+        )
+        {
             string controllerName = "Exception";
             string requestUrl = String.Format(
                 "{0}/{1}/{2}",

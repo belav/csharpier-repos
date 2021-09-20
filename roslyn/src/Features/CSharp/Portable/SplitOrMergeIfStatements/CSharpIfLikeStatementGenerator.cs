@@ -29,7 +29,8 @@ namespace Microsoft.CodeAnalysis.CSharp.SplitOrMergeIfStatements
             if (
                 expression.Parent is IfStatementSyntax ifStatement
                 && ifStatement.Condition == expression
-            ) {
+            )
+            {
                 ifOrElseIf = ifStatement;
                 return true;
             }
@@ -134,7 +135,8 @@ namespace Microsoft.CodeAnalysis.CSharp.SplitOrMergeIfStatements
             SyntaxEditor editor,
             SyntaxNode afterIfOrElseIf,
             SyntaxNode elseIfClause
-        ) {
+        )
+        {
             editor.ReplaceNode(
                 afterIfOrElseIf,
                 (currentNode, _) =>
@@ -182,7 +184,8 @@ namespace Microsoft.CodeAnalysis.CSharp.SplitOrMergeIfStatements
                 var statement = ifStatement.Statement;
                 statement.IsEmbeddedStatementOwner();
                 statement = statement.GetEmbeddedStatement()
-            ) {
+            )
+            {
                 if (statement.IsKind(SyntaxKind.IfStatement))
                 {
                     return true;

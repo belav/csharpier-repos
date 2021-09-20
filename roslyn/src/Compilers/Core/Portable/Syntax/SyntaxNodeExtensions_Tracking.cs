@@ -130,7 +130,8 @@ namespace Microsoft.CodeAnalysis
         private static IReadOnlyList<SyntaxNode> GetCurrentNodeFromTrueRoots(
             SyntaxNode trueRoot,
             SyntaxNode node
-        ) {
+        )
+        {
             var id = GetId(node);
             if (id is object)
             {
@@ -214,7 +215,8 @@ namespace Microsoft.CodeAnalysis
                 foreach (
                     var node in root.GetAnnotatedNodesAndTokens(IdAnnotationKind)
                         .Select(n => n.AsNode()!)
-                ) {
+                )
+                {
                     Debug.Assert(node is object);
                     foreach (var id in node.GetAnnotations(IdAnnotationKind))
                     {

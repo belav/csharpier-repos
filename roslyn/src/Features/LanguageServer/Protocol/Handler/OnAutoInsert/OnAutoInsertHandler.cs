@@ -45,7 +45,8 @@ namespace Microsoft.CodeAnalysis.LanguageServer.Handler
                 IEnumerable<IBraceCompletionService> csharpBraceCompletionServices,
             [ImportMany(LanguageNames.VisualBasic)]
                 IEnumerable<IBraceCompletionService> visualBasicBraceCompletionServices
-        ) {
+        )
+        {
             _csharpBraceCompletionServices = csharpBraceCompletionServices.ToImmutableArray();
             _visualBasicBraceCompletionServices =
                 _visualBasicBraceCompletionServices.ToImmutableArray();
@@ -59,7 +60,8 @@ namespace Microsoft.CodeAnalysis.LanguageServer.Handler
             LSP.DocumentOnAutoInsertParams request,
             RequestContext context,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var document = context.Document;
             if (document == null)
             {
@@ -81,7 +83,8 @@ namespace Microsoft.CodeAnalysis.LanguageServer.Handler
             if (
                 request.Character == "\n"
                 || request.Character == service.DocumentationCommentCharacter
-            ) {
+            )
+            {
                 var documentationCommentResponse = await GetDocumentationCommentResponseAsync(
                         request,
                         document,
@@ -103,7 +106,8 @@ namespace Microsoft.CodeAnalysis.LanguageServer.Handler
                 request.Character == "\n"
                 && context.ClientName
                     == document.Services.GetService<DocumentPropertiesService>()?.DiagnosticsLspClientName
-            ) {
+            )
+            {
                 var braceCompletionAfterReturnResponse =
                     await GetBraceCompletionAfterReturnResponseAsync(
                             request,
@@ -127,7 +131,8 @@ namespace Microsoft.CodeAnalysis.LanguageServer.Handler
             IDocumentationCommentSnippetService service,
             DocumentOptionSet documentOptions,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var syntaxTree = await document.GetRequiredSyntaxTreeAsync(cancellationToken)
                 .ConfigureAwait(false);
             var sourceText = await document.GetTextAsync(cancellationToken).ConfigureAwait(false);
@@ -175,7 +180,8 @@ namespace Microsoft.CodeAnalysis.LanguageServer.Handler
             Document document,
             DocumentOptionSet documentOptions,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var sourceText = await document.GetTextAsync(cancellationToken).ConfigureAwait(false);
             var position = sourceText.Lines.GetPosition(
                 ProtocolConversions.PositionToLinePosition(autoInsertParams.Position)
@@ -266,7 +272,8 @@ namespace Microsoft.CodeAnalysis.LanguageServer.Handler
                 TextLine lineToIndent,
                 LinePosition desiredCaretLinePosition,
                 DocumentOptionSet documentOptions
-            ) {
+            )
+            {
                 // Indent by the amount needed to make the caret line contain the desired indentation column.
                 var amountToIndent = desiredCaretLinePosition.Character - lineToIndent.Span.Length;
 
@@ -285,7 +292,8 @@ namespace Microsoft.CodeAnalysis.LanguageServer.Handler
                 ImmutableArray<TextChange> textChanges,
                 Document oldDocument,
                 CancellationToken cancellationToken
-            ) {
+            )
+            {
                 var documentText = await oldDocument.GetTextAsync(cancellationToken)
                     .ConfigureAwait(false);
                 documentText = documentText.WithChanges(textChanges);
@@ -296,7 +304,8 @@ namespace Microsoft.CodeAnalysis.LanguageServer.Handler
                 SourceText sourceText,
                 TextChange textChange,
                 LinePosition desiredCaretLinePosition
-            ) {
+            )
+            {
                 var desiredCaretLocation = sourceText.Lines.GetPosition(desiredCaretLinePosition);
                 Debug.Assert(desiredCaretLocation >= textChange.Span.Start);
                 var offsetInTextChange = desiredCaretLocation - textChange.Span.Start;
@@ -309,7 +318,8 @@ namespace Microsoft.CodeAnalysis.LanguageServer.Handler
             int caretLocation,
             Document document,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var servicesForDocument = document.Project.Language switch
             {
                 LanguageNames.CSharp => _csharpBraceCompletionServices,

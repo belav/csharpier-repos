@@ -44,7 +44,8 @@ namespace System.Security.Cryptography.X509Certificates.Tests
             byte[] rawData,
             string password,
             X509KeyStorageFlags keyStorageFlags
-        ) {
+        )
+        {
             X509Certificate2Collection collection = new X509Certificate2Collection();
             collection.Import(rawData, password, keyStorageFlags);
             return new ImportedCollection(collection);
@@ -54,7 +55,8 @@ namespace System.Security.Cryptography.X509Certificates.Tests
             ReadOnlySpan<byte> rawData,
             ReadOnlySpan<char> password,
             X509KeyStorageFlags keyStorageFlags
-        ) {
+        )
+        {
             X509Certificate2Collection collection = new X509Certificate2Collection();
             collection.Import(rawData, password, keyStorageFlags);
             return new ImportedCollection(collection);
@@ -73,7 +75,8 @@ namespace System.Security.Cryptography.X509Certificates.Tests
             string fileName,
             string password,
             X509KeyStorageFlags keyStorageFlags
-        ) {
+        )
+        {
             X509Certificate2Collection collection = new X509Certificate2Collection();
             collection.Import(fileName, password, keyStorageFlags);
             return new ImportedCollection(collection);
@@ -83,7 +86,8 @@ namespace System.Security.Cryptography.X509Certificates.Tests
             string fileName,
             ReadOnlySpan<char> password,
             X509KeyStorageFlags keyStorageFlags
-        ) {
+        )
+        {
             X509Certificate2Collection collection = new X509Certificate2Collection();
             collection.Import(fileName, password, keyStorageFlags);
             return new ImportedCollection(collection);

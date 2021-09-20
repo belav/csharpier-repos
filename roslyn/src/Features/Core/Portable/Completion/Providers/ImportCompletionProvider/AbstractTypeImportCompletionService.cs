@@ -42,7 +42,8 @@ namespace Microsoft.CodeAnalysis.Completion.Providers.ImportCompletion
             SyntaxContext syntaxContext,
             bool forceCacheCreation,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var hideAdvancedmembers = currentProject.Solution.Options.GetOption(
                 CompletionOptions.HideAdvancedMembers,
                 currentProject.Language
@@ -105,7 +106,8 @@ namespace Microsoft.CodeAnalysis.Completion.Providers.ImportCompletion
             SyntaxContext syntaxContext,
             bool forceCacheCreation,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var _ = ArrayBuilder<GetCacheResult>.GetInstance(out var builder);
 
             var currentCompilation = await currentProject.GetRequiredCompilationAsync(
@@ -177,7 +179,8 @@ namespace Microsoft.CodeAnalysis.Completion.Providers.ImportCompletion
 
             foreach (
                 var peReference in currentProject.MetadataReferences.OfType<PortableExecutableReference>()
-            ) {
+            )
+            {
                 if (
                     HasGlobalAlias(peReference)
                     && currentCompilation.GetAssemblyOrModuleSymbol(peReference)
@@ -192,7 +195,8 @@ namespace Microsoft.CodeAnalysis.Completion.Providers.ImportCompletion
                         cancellationToken,
                         out cacheResult
                     )
-                ) {
+                )
+                {
                     if (cacheResult.HasValue)
                     {
                         builder.Add(cacheResult.Value);
@@ -229,7 +233,8 @@ namespace Microsoft.CodeAnalysis.Completion.Providers.ImportCompletion
             bool forceCacheCreation,
             Lazy<EditorBrowsableInfo>? editorBrowsableInfo,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var compilation = await project.GetRequiredCompilationAsync(cancellationToken)
                 .ConfigureAwait(false);
 
@@ -265,7 +270,8 @@ namespace Microsoft.CodeAnalysis.Completion.Providers.ImportCompletion
             bool forceCacheCreation,
             CancellationToken cancellationToken,
             out GetCacheResult? result
-        ) {
+        )
+        {
             var key = peReference.FilePath ?? peReference.Display;
             if (key == null)
             {
@@ -348,7 +354,8 @@ namespace Microsoft.CodeAnalysis.Completion.Providers.ImportCompletion
             INamespaceSymbol rootNamespaceSymbol,
             CacheEntry.Builder builder,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             VisitNamespace(
                 rootNamespaceSymbol,
                 containingNamespace: null,
@@ -362,7 +369,8 @@ namespace Microsoft.CodeAnalysis.Completion.Providers.ImportCompletion
                 string? containingNamespace,
                 CacheEntry.Builder builder,
                 CancellationToken cancellationToken
-            ) {
+            )
+            {
                 cancellationToken.ThrowIfCancellationRequested();
                 containingNamespace = CompletionHelper.ConcatNamespace(
                     containingNamespace,
@@ -432,7 +440,8 @@ namespace Microsoft.CodeAnalysis.Completion.Providers.ImportCompletion
                 INamedTypeSymbol nonGenericOverload,
                 INamedTypeSymbol bestGenericOverload,
                 bool containsPublicGenericOverload
-            ) {
+            )
+            {
                 NonGenericOverload = nonGenericOverload;
                 BestGenericOverload = bestGenericOverload;
                 ContainsPublicGenericOverload = containsPublicGenericOverload;
@@ -496,7 +505,8 @@ namespace Microsoft.CodeAnalysis.Completion.Providers.ImportCompletion
                 bool isGeneric,
                 bool isAttribute,
                 bool isEditorBrowsableStateAdvanced
-            ) {
+            )
+            {
                 Item = item;
                 _properties =
                     (isPublic ? ItemPropertyKind.IsPublic : 0)

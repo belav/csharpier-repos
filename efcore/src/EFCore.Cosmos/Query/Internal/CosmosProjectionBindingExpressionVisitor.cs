@@ -61,7 +61,8 @@ namespace Microsoft.EntityFrameworkCore.Cosmos.Query.Internal
         public CosmosProjectionBindingExpressionVisitor(
             IModel model,
             CosmosSqlTranslatingExpressionVisitor sqlTranslator
-        ) {
+        )
+        {
             _model = model;
             _sqlTranslator = sqlTranslator;
         }
@@ -75,7 +76,8 @@ namespace Microsoft.EntityFrameworkCore.Cosmos.Query.Internal
         public virtual Expression Translate(
             SelectExpression selectExpression,
             Expression expression
-        ) {
+        )
+        {
             _selectExpression = selectExpression;
             _clientEval = false;
 
@@ -118,7 +120,8 @@ namespace Microsoft.EntityFrameworkCore.Cosmos.Query.Internal
                 expression is NewExpression
                 || expression is MemberInitExpression
                 || expression is EntityShaperExpression
-            ) {
+            )
+            {
                 return base.Visit(expression);
             }
 
@@ -127,7 +130,8 @@ namespace Microsoft.EntityFrameworkCore.Cosmos.Query.Internal
                 expression is ParameterExpression parameter
                 && parameter.Type.IsGenericType
                 && parameter.Type.GetGenericTypeDefinition() == typeof(IEnumerable<>)
-            ) {
+            )
+            {
                 return parameter;
             }
 
@@ -149,7 +153,8 @@ namespace Microsoft.EntityFrameworkCore.Cosmos.Query.Internal
                                 QueryCompilationContext.QueryParameterPrefix,
                                 StringComparison.Ordinal
                             ) == true
-                        ) {
+                        )
+                        {
                             return Expression.Call(
                                 _getParameterValueMethodInfo.MakeGenericMethod(
                                     parameterExpression.Type
@@ -305,7 +310,8 @@ namespace Microsoft.EntityFrameworkCore.Cosmos.Query.Internal
                             includeExpression.Navigation is INavigation includableNavigation
                             && includableNavigation.IsEmbedded()
                         )
-                    ) {
+                    )
+                    {
                         throw new InvalidOperationException(
                             CosmosStrings.NonEmbeddedIncludeNotSupported(
                                 includeExpression.Navigation
@@ -366,7 +372,8 @@ namespace Microsoft.EntityFrameworkCore.Cosmos.Query.Internal
                     if (
                         shaperExpression == null
                         || unaryExpression.NodeType != ExpressionType.Convert
-                    ) {
+                    )
+                    {
                         return NullSafeUpdate(innerExpression);
                     }
                     break;
@@ -561,7 +568,8 @@ namespace Microsoft.EntityFrameworkCore.Cosmos.Query.Internal
             if (
                 methodCallExpression.TryGetEFPropertyArguments(out var source, out var memberName)
                 || methodCallExpression.TryGetIndexerArguments(_model, out source, out memberName)
-            ) {
+            )
+            {
                 if (!_clientEval)
                 {
                     return null;
@@ -581,7 +589,8 @@ namespace Microsoft.EntityFrameworkCore.Cosmos.Query.Internal
                         if (
                             shaperExpression == null
                             || unaryExpression.NodeType != ExpressionType.Convert
-                        ) {
+                        )
+                        {
                             return null;
                         }
                         break;
@@ -592,7 +601,8 @@ namespace Microsoft.EntityFrameworkCore.Cosmos.Query.Internal
                                 parameterExpression,
                                 out var collectionShaper
                             )
-                        ) {
+                        )
+                        {
                             return null;
                         }
 
@@ -639,7 +649,8 @@ namespace Microsoft.EntityFrameworkCore.Cosmos.Query.Internal
                     if (
                         !(propertyBase is INavigation projectedNavigation)
                         || !projectedNavigation.IsEmbedded()
-                    ) {
+                    )
+                    {
                         return null;
                     }
 
@@ -749,7 +760,8 @@ namespace Microsoft.EntityFrameworkCore.Cosmos.Query.Internal
             if (
                 @object?.Type.IsNullableType() == true
                 && !methodCallExpression.Object.Type.IsNullableType()
-            ) {
+            )
+            {
                 var nullableReturnType = methodCallExpression.Type.MakeNullable();
                 if (!methodCallExpression.Type.IsNullableType())
                 {

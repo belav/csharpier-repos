@@ -293,7 +293,8 @@ namespace Castle.DynamicProxy
             }
             if (
                 !Equals(BaseTypeForInterfaceProxy, proxyGenerationOptions.BaseTypeForInterfaceProxy)
-            ) {
+            )
+            {
                 return false;
             }
             if (!HasEquivalentAdditionalAttributes(proxyGenerationOptions))

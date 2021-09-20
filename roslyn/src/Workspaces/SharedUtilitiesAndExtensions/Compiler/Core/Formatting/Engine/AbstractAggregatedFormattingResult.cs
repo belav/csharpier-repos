@@ -31,7 +31,8 @@ namespace Microsoft.CodeAnalysis.Formatting
             SyntaxNode node,
             IList<AbstractFormattingResult> formattingResults,
             SimpleIntervalTree<TextSpan, TextSpanIntervalIntrospector>? formattingSpans
-        ) {
+        )
+        {
             Contract.ThrowIfNull(node);
             Contract.ThrowIfNull(formattingResults);
 
@@ -75,7 +76,8 @@ namespace Microsoft.CodeAnalysis.Formatting
         {
             using (
                 Logger.LogBlock(FunctionId.Formatting_AggregateCreateTextChanges, cancellationToken)
-            ) {
+            )
+            {
                 // quick check
                 var changes = CreateTextChangesWorker(cancellationToken);
 
@@ -112,7 +114,8 @@ namespace Microsoft.CodeAnalysis.Formatting
                     FunctionId.Formatting_AggregateCreateFormattedRoot,
                     cancellationToken
                 )
-            ) {
+            )
+            {
                 // create a map
                 var map = new Dictionary<ValueTuple<SyntaxToken, SyntaxToken>, TriviaData>();
 

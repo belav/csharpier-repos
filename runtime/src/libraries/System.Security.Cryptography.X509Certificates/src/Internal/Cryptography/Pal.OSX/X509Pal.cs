@@ -40,7 +40,8 @@ namespace Internal.Cryptography.Pal
                 byte[] encodedKeyValue,
                 byte[] encodedParameters,
                 ICertificatePal? certificatePal
-            ) {
+            )
+            {
                 AppleCertificatePal? applePal = certificatePal as AppleCertificatePal;
 
                 if (applePal != null)
@@ -131,7 +132,8 @@ namespace Internal.Cryptography.Pal
             private static AsymmetricAlgorithm DecodeDsaPublicKey(
                 byte[] encodedKeyValue,
                 byte[] encodedParameters
-            ) {
+            )
+            {
                 SubjectPublicKeyInfoAsn spki = new SubjectPublicKeyInfoAsn
                 {
                     Algorithm = new AlgorithmIdentifierAsn
@@ -173,7 +175,8 @@ namespace Internal.Cryptography.Pal
             public string X500DistinguishedNameDecode(
                 byte[] encodedDistinguishedName,
                 X500DistinguishedNameFlags flag
-            ) {
+            )
+            {
                 return X500NameEncoder.X500DistinguishedNameDecode(
                     encodedDistinguishedName,
                     true,
@@ -184,14 +187,16 @@ namespace Internal.Cryptography.Pal
             public byte[] X500DistinguishedNameEncode(
                 string distinguishedName,
                 X500DistinguishedNameFlags flag
-            ) {
+            )
+            {
                 return X500NameEncoder.X500DistinguishedNameEncode(distinguishedName, flag);
             }
 
             public string X500DistinguishedNameFormat(
                 byte[] encodedDistinguishedName,
                 bool multiLine
-            ) {
+            )
+            {
                 return X500NameEncoder.X500DistinguishedNameDecode(
                     encodedDistinguishedName,
                     true,
@@ -227,7 +232,8 @@ namespace Internal.Cryptography.Pal
                                         pin,
                                         rawData.Length
                                     )
-                                ) {
+                                )
+                                {
                                     PfxAsn.Decode(manager.Memory, AsnEncodingRules.BER);
                                 }
 

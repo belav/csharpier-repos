@@ -34,7 +34,8 @@ namespace Internal.Cryptography.Pal
             X509RevocationMode revocationMode,
             DateTime verificationTime,
             TimeSpan downloadTimeout
-        ) {
+        )
+        {
             // In Offline mode, accept any cached CRL we have.
             // "CRL is Expired" is a better match for Offline than "Could not find CRL"
             if (revocationMode != X509RevocationMode.Online)
@@ -69,7 +70,8 @@ namespace Internal.Cryptography.Pal
             string crlFileName,
             SafeX509StoreHandle store,
             DateTime verificationTime
-        ) {
+        )
+        {
             string crlFile = GetCachedCrlPath(crlFileName);
 
             using (SafeBioHandle bio = Interop.Crypto.BioNewFile(crlFile, "rb"))
@@ -159,7 +161,8 @@ namespace Internal.Cryptography.Pal
             string crlFileName,
             SafeX509StoreHandle store,
             TimeSpan downloadTimeout
-        ) {
+        )
+        {
             // X509_STORE_add_crl will increase the refcount on the CRL object, so we should still
             // dispose our copy.
             using (
@@ -167,7 +170,8 @@ namespace Internal.Cryptography.Pal
                     url,
                     downloadTimeout
                 )
-            ) {
+            )
+            {
                 // null is a valid return (e.g. no remainingDownloadTime)
                 if (crl != null && !crl.IsInvalid)
                 {
@@ -286,15 +290,18 @@ namespace Internal.Cryptography.Pal
                     if (
                         distributionPoint.DistributionPoint.HasValue
                         && distributionPoint.DistributionPoint.Value.FullName != null
-                    ) {
+                    )
+                    {
                         foreach (
                             GeneralNameAsn name in distributionPoint.DistributionPoint.Value.FullName
-                        ) {
+                        )
+                        {
                             if (
                                 name.Uri != null
                                 && Uri.TryCreate(name.Uri, UriKind.Absolute, out Uri? uri)
                                 && uri.Scheme == "http"
-                            ) {
+                            )
+                            {
                                 return name.Uri;
                             }
                         }

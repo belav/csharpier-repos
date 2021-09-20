@@ -20,7 +20,8 @@ namespace System.Reflection.Runtime.BindingFlagSupport
             RuntimeTypeInfo type,
             NameFilter? filter,
             RuntimeTypeInfo reflectedType
-        ) {
+        )
+        {
             return type.GetEventsCore(filter, reflectedType);
         }
 
@@ -32,7 +33,8 @@ namespace System.Reflection.Runtime.BindingFlagSupport
             out bool isStatic,
             out bool isVirtual,
             out bool isNewSlot
-        ) {
+        )
+        {
             MethodInfo? accessorMethod = GetAccessorMethod(member);
             if (accessorMethod == null)
             {
@@ -62,7 +64,8 @@ namespace System.Reflection.Runtime.BindingFlagSupport
             EventInfo[] priorMembers,
             int startIndex,
             int endIndex
-        ) {
+        )
+        {
             for (int i = startIndex; i < endIndex; i++)
             {
                 if (priorMembers[i].Name == member.Name)
@@ -74,7 +77,8 @@ namespace System.Reflection.Runtime.BindingFlagSupport
         public sealed override bool ImplicitlyOverrides(
             EventInfo? baseMember,
             EventInfo? derivedMember
-        ) {
+        )
+        {
             MethodInfo? baseAccessor = GetAccessorMethod(baseMember!);
             MethodInfo? derivedAccessor = GetAccessorMethod(derivedMember!);
             return MemberPolicies<MethodInfo>.Default.ImplicitlyOverrides(

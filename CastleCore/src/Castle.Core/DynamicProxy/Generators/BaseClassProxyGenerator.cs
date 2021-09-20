@@ -117,7 +117,8 @@ namespace Castle.DynamicProxy.Generators
         private IEnumerable<Type> GetTypeImplementerMapping(
             out IEnumerable<ITypeContributor> contributors,
             INamingScope namingScope
-        ) {
+        )
+        {
             var contributorsList = new List<ITypeContributor>(capacity: 5);
             var targetInterfaces = targetType.GetAllInterfaces();
             var typeImplementerMapping = new Dictionary<Type, ITypeContributor>();
@@ -143,7 +144,8 @@ namespace Castle.DynamicProxy.Generators
                         if (
                             interfaces.Contains(mixinInterface)
                             && typeImplementerMapping.ContainsKey(mixinInterface) == false
-                        ) {
+                        )
+                        {
                             AddMappingNoCheck(
                                 mixinInterface,
                                 targetContributor,

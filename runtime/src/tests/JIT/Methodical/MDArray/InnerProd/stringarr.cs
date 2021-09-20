@@ -42,7 +42,8 @@ public class Stringmm
         ref String[,] b,
         int row,
         int col
-    ) {
+    )
+    {
         int i;
         res = "";
 
@@ -68,7 +69,8 @@ public class Stringmm
         ref String[][] b,
         int row,
         int col
-    ) {
+    )
+    {
         int i;
         res = "";
 
@@ -137,7 +139,8 @@ public class Stringmm
         String[][] b,
         int row,
         int col
-    ) {
+    )
+    {
         int i;
         res = "";
 

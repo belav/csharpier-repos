@@ -32,7 +32,8 @@ namespace Microsoft.EntityFrameworkCore.Query.Internal
         public SqlExpressionSimplifyingExpressionVisitor(
             ISqlExpressionFactory sqlExpressionFactory,
             bool useRelationalNulls
-        ) {
+        )
+        {
             _sqlExpressionFactory = sqlExpressionFactory;
             _useRelationalNulls = useRelationalNulls;
         }
@@ -61,7 +62,8 @@ namespace Microsoft.EntityFrameworkCore.Query.Internal
                 && caseExpression.Operand == null
                 && caseExpression.ElseResult is CaseExpression nestedCaseExpression
                 && nestedCaseExpression.Operand == null
-            ) {
+            )
+            {
                 return VisitExtension(
                     _sqlExpressionFactory.Case(
                         caseExpression.WhenClauses.Union(nestedCaseExpression.WhenClauses).ToList(),
@@ -91,7 +93,8 @@ namespace Microsoft.EntityFrameworkCore.Query.Internal
                         && c.Result is SqlConstantExpression constant
                         && constant.Value is int
                 )
-            ) {
+            )
+            {
                 var whenClauses = caseExpression.WhenClauses.Select(
                         c =>
                             new
@@ -113,7 +116,8 @@ namespace Microsoft.EntityFrameworkCore.Query.Internal
                     && whenClauses[0].resultValue == 0
                     && whenClauses[1].resultValue == 1
                     && whenClauses[2].resultValue == -1
-                ) {
+                )
+                {
                     return true;
                 }
             }
@@ -125,7 +129,8 @@ namespace Microsoft.EntityFrameworkCore.Query.Internal
             SqlBinaryExpression sqlBinaryExpression,
             int intValue,
             CaseExpression caseExpression
-        ) {
+        )
+        {
             var testLeft = ((SqlBinaryExpression)caseExpression.WhenClauses[0].Test).Left;
             var testRight = ((SqlBinaryExpression)caseExpression.WhenClauses[0].Test).Right;
             var operatorType =
@@ -248,7 +253,8 @@ namespace Microsoft.EntityFrameworkCore.Query.Internal
                 && sqlConstantComponent.Value != null
                 && caseComponent != null
                 && caseComponent.Operand == null
-            ) {
+            )
+            {
                 var matchingCaseBlock = caseComponent.WhenClauses.FirstOrDefault(
                     wc => sqlConstantComponent.Equals(wc.Result)
                 );
@@ -271,7 +277,8 @@ namespace Microsoft.EntityFrameworkCore.Query.Internal
                     || sqlBinaryExpression.OperatorType == ExpressionType.LessThan
                     || sqlBinaryExpression.OperatorType == ExpressionType.LessThanOrEqual
                 )
-            ) {
+            )
+            {
                 return OptimizeCompareTo(sqlBinaryExpression, intValue, caseComponent);
             }
 
@@ -281,13 +288,15 @@ namespace Microsoft.EntityFrameworkCore.Query.Internal
             if (
                 sqlBinaryExpression.OperatorType == ExpressionType.AndAlso
                 || sqlBinaryExpression.OperatorType == ExpressionType.OrElse
-            ) {
+            )
+            {
                 if (
                     TryGetInExressionCandidateInfo(left, out var leftCandidateInfo)
                     && TryGetInExressionCandidateInfo(right, out var rightCandidateInfo)
                     && leftCandidateInfo.ColumnExpression == rightCandidateInfo.ColumnExpression
                     && leftCandidateInfo.OperationType == rightCandidateInfo.OperationType
-                ) {
+                )
+                {
                     var leftConstantIsEnumerable =
                         leftCandidateInfo.ConstantValue is IEnumerable
                         && !(leftCandidateInfo.ConstantValue is string)
@@ -307,7 +316,8 @@ namespace Microsoft.EntityFrameworkCore.Query.Internal
                             leftCandidateInfo.OperationType == ExpressionType.NotEqual
                             && sqlBinaryExpression.OperatorType == ExpressionType.AndAlso
                         )
-                    ) {
+                    )
+                    {
                         object leftValue;
                         object rightValue;
                         List<object> resultArray;
@@ -459,11 +469,13 @@ namespace Microsoft.EntityFrameworkCore.Query.Internal
             SqlExpression sqlExpression,
             [MaybeNullWhen(false)]
                 out (ColumnExpression ColumnExpression, object ConstantValue, RelationalTypeMapping TypeMapping, ExpressionType OperationType) candidateInfo
-        ) {
+        )
+        {
             if (
                 sqlExpression is SqlUnaryExpression sqlUnaryExpression
                 && sqlUnaryExpression.OperatorType == ExpressionType.Not
-            ) {
+            )
+            {
                 if (TryGetInExressionCandidateInfo(sqlUnaryExpression.Operand, out var inner))
                 {
                     candidateInfo = (
@@ -484,7 +496,8 @@ namespace Microsoft.EntityFrameworkCore.Query.Internal
                     sqlBinaryExpression.OperatorType == ExpressionType.Equal
                     || sqlBinaryExpression.OperatorType == ExpressionType.NotEqual
                 )
-            ) {
+            )
+            {
                 var column = (
                     sqlBinaryExpression.Left as ColumnExpression
                     ?? sqlBinaryExpression.Right as ColumnExpression
@@ -510,7 +523,8 @@ namespace Microsoft.EntityFrameworkCore.Query.Internal
                 && inExpression.Item is ColumnExpression column
                 && inExpression.Subquery == null
                 && inExpression.Values is SqlConstantExpression valuesConstant
-            ) {
+            )
+            {
                 candidateInfo = (
                     column,
                     valuesConstant.Value!,

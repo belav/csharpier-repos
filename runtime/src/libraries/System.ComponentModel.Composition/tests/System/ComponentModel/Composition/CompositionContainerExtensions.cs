@@ -64,7 +64,8 @@ namespace System.ComponentModel.Composition
         public static void AddAndComposeExportedValue<T>(
             this CompositionContainer container,
             T exportedValue
-        ) {
+        )
+        {
             var batch = new CompositionBatch();
             batch.AddExportedValue<T>(exportedValue);
             container.Compose(batch);
@@ -74,7 +75,8 @@ namespace System.ComponentModel.Composition
             this CompositionContainer container,
             string contractName,
             T exportedValue
-        ) {
+        )
+        {
             var batch = new CompositionBatch();
             batch.AddExportedValue<T>(contractName, exportedValue);
             container.Compose(batch);
@@ -101,7 +103,8 @@ namespace System.ComponentModel.Composition
             string contractName,
             Type contractType,
             object exportedValue
-        ) {
+        )
+        {
             string typeIdentity = AttributedModelServices.GetTypeIdentity(contractType);
 
             IDictionary<string, object> metadata = null;

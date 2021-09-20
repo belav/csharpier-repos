@@ -82,7 +82,8 @@ namespace Microsoft.AspNetCore.Mvc.Rendering
             this IHtmlHelper htmlHelper,
             string expression,
             string optionLabel
-        ) {
+        )
+        {
             if (htmlHelper == null)
             {
                 throw new ArgumentNullException(nameof(htmlHelper));
@@ -124,7 +125,8 @@ namespace Microsoft.AspNetCore.Mvc.Rendering
             this IHtmlHelper htmlHelper,
             string expression,
             IEnumerable<SelectListItem> selectList
-        ) {
+        )
+        {
             if (htmlHelper == null)
             {
                 throw new ArgumentNullException(nameof(htmlHelper));
@@ -171,7 +173,8 @@ namespace Microsoft.AspNetCore.Mvc.Rendering
             string expression,
             IEnumerable<SelectListItem> selectList,
             object htmlAttributes
-        ) {
+        )
+        {
             if (htmlHelper == null)
             {
                 throw new ArgumentNullException(nameof(htmlHelper));
@@ -217,7 +220,8 @@ namespace Microsoft.AspNetCore.Mvc.Rendering
             string expression,
             IEnumerable<SelectListItem> selectList,
             string optionLabel
-        ) {
+        )
+        {
             if (htmlHelper == null)
             {
                 throw new ArgumentNullException(nameof(htmlHelper));
@@ -259,7 +263,8 @@ namespace Microsoft.AspNetCore.Mvc.Rendering
             this IHtmlHelper<TModel> htmlHelper,
             Expression<Func<TModel, TResult>> expression,
             IEnumerable<SelectListItem> selectList
-        ) {
+        )
+        {
             if (htmlHelper == null)
             {
                 throw new ArgumentNullException(nameof(htmlHelper));
@@ -311,7 +316,8 @@ namespace Microsoft.AspNetCore.Mvc.Rendering
             Expression<Func<TModel, TResult>> expression,
             IEnumerable<SelectListItem> selectList,
             object htmlAttributes
-        ) {
+        )
+        {
             if (htmlHelper == null)
             {
                 throw new ArgumentNullException(nameof(htmlHelper));
@@ -362,7 +368,8 @@ namespace Microsoft.AspNetCore.Mvc.Rendering
             Expression<Func<TModel, TResult>> expression,
             IEnumerable<SelectListItem> selectList,
             string optionLabel
-        ) {
+        )
+        {
             if (htmlHelper == null)
             {
                 throw new ArgumentNullException(nameof(htmlHelper));
@@ -442,7 +449,8 @@ namespace Microsoft.AspNetCore.Mvc.Rendering
             this IHtmlHelper htmlHelper,
             string expression,
             IEnumerable<SelectListItem> selectList
-        ) {
+        )
+        {
             if (htmlHelper == null)
             {
                 throw new ArgumentNullException(nameof(htmlHelper));
@@ -479,7 +487,8 @@ namespace Microsoft.AspNetCore.Mvc.Rendering
             this IHtmlHelper<TModel> htmlHelper,
             Expression<Func<TModel, TResult>> expression,
             IEnumerable<SelectListItem> selectList
-        ) {
+        )
+        {
             if (htmlHelper == null)
             {
                 throw new ArgumentNullException(nameof(htmlHelper));

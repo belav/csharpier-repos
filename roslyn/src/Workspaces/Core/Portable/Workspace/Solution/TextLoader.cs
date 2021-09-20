@@ -47,7 +47,8 @@ namespace Microsoft.CodeAnalysis
             Workspace workspace,
             DocumentId documentId,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             // this implementation exists in case a custom derived type does not have access to internals
             return LoadTextAndVersionAsync(workspace, documentId, cancellationToken)
                 .WaitAndGetResult_CanCallOnBackground(cancellationToken);
@@ -57,7 +58,8 @@ namespace Microsoft.CodeAnalysis
             Workspace workspace,
             DocumentId documentId,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var retries = 0;
 
             while (true)
@@ -89,7 +91,8 @@ namespace Microsoft.CodeAnalysis
             Workspace workspace,
             DocumentId documentId,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var retries = 0;
 
             while (true)
@@ -124,7 +127,8 @@ namespace Microsoft.CodeAnalysis
             Workspace workspace,
             DocumentId documentId,
             string message
-        ) {
+        )
+        {
             // Notify workspace for backwards compatibility.
             workspace.OnWorkspaceFailed(
                 new DocumentDiagnostic(WorkspaceDiagnosticKind.Failure, message, documentId)
@@ -181,7 +185,8 @@ namespace Microsoft.CodeAnalysis
             SourceTextContainer container,
             VersionStamp version,
             string? filePath = null
-        ) {
+        )
+        {
             if (container == null)
             {
                 throw new ArgumentNullException(nameof(container));
@@ -220,7 +225,8 @@ namespace Microsoft.CodeAnalysis
                 SourceTextContainer container,
                 VersionStamp version,
                 string? filePath
-            ) {
+            )
+            {
                 _container = container;
                 _version = version;
                 _filePath = filePath;

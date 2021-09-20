@@ -60,7 +60,8 @@ namespace Microsoft.AspNetCore.Mvc.Razor.Extensions
 
         public static RazorDiagnostic CreateViewComponent_AsyncMethod_ShouldReturnTask(
             string tagHelperType
-        ) {
+        )
+        {
             var diagnostic = RazorDiagnostic.Create(
                 ViewComponent_AsyncMethod_ShouldReturnTask,
                 new SourceSpan(SourceLocation.Undefined, contentLength: 0),
@@ -81,7 +82,8 @@ namespace Microsoft.AspNetCore.Mvc.Razor.Extensions
 
         public static RazorDiagnostic CreateViewComponent_SyncMethod_ShouldReturnValue(
             string tagHelperType
-        ) {
+        )
+        {
             var diagnostic = RazorDiagnostic.Create(
                 ViewComponent_SyncMethod_ShouldReturnValue,
                 new SourceSpan(SourceLocation.Undefined, contentLength: 0),
@@ -101,7 +103,8 @@ namespace Microsoft.AspNetCore.Mvc.Razor.Extensions
 
         public static RazorDiagnostic CreateViewComponent_SyncMethod_CannotReturnTask(
             string tagHelperType
-        ) {
+        )
+        {
             var diagnostic = RazorDiagnostic.Create(
                 ViewComponent_SyncMethod_CannotReturnTask,
                 new SourceSpan(SourceLocation.Undefined, contentLength: 0),

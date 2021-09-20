@@ -34,7 +34,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Extensions
 
         public static SyntaxKind MapCompoundAssignmentKindToBinaryExpressionKind(
             this SyntaxKind syntaxKind
-        ) {
+        )
+        {
             switch (syntaxKind)
             {
                 case SyntaxKind.AddAssignmentExpression:

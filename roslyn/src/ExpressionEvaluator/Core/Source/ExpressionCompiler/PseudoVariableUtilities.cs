@@ -28,7 +28,8 @@ namespace Microsoft.CodeAnalysis.ExpressionEvaluator
             string type,
             Guid customTypeInfoId,
             ReadOnlyCollection<byte> customTypeInfo
-        ) {
+        )
+        {
             RoslynDebug.Assert(!string.IsNullOrEmpty(fullName));
             RoslynDebug.Assert(!string.IsNullOrEmpty(type));
 

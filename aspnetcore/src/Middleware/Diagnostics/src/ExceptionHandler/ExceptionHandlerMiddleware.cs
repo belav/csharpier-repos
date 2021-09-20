@@ -37,7 +37,8 @@ namespace Microsoft.AspNetCore.Diagnostics
             ILoggerFactory loggerFactory,
             IOptions<ExceptionHandlerOptions> options,
             DiagnosticListener diagnosticListener
-        ) {
+        )
+        {
             _next = next;
             _options = options.Value;
             _logger = loggerFactory.CreateLogger<ExceptionHandlerMiddleware>();
@@ -87,7 +88,8 @@ namespace Microsoft.AspNetCore.Diagnostics
                 ExceptionHandlerMiddleware middleware,
                 HttpContext context,
                 Task task
-            ) {
+            )
+            {
                 ExceptionDispatchInfo? edi = null;
                 try
                 {
@@ -140,13 +142,15 @@ namespace Microsoft.AspNetCore.Diagnostics
                 if (
                     context.Response.StatusCode != StatusCodes.Status404NotFound
                     || _options.AllowStatusCode404Response
-                ) {
+                )
+                {
                     if (
                         _diagnosticListener.IsEnabled()
                         && _diagnosticListener.IsEnabled(
                             "Microsoft.AspNetCore.Diagnostics.HandledException"
                         )
-                    ) {
+                    )
+                    {
                         _diagnosticListener.Write(
                             "Microsoft.AspNetCore.Diagnostics.HandledException",
                             new { httpContext = context, exception = edi.SourceException }

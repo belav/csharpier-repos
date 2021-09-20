@@ -44,7 +44,8 @@ namespace System.IO.Ports.Tests
                 SerialPort com1 = new SerialPort(
                     TCSupport.LocalMachineSerialInfo.FirstAvailablePortName
                 )
-            ) {
+            )
+            {
                 SerialPortProperties serPortProp = new SerialPortProperties();
 
                 Debug.WriteLine("Verifying default ParityReplace after Open");
@@ -113,7 +114,8 @@ namespace System.IO.Ports.Tests
                 SerialPort com2 = new SerialPort(
                     TCSupport.LocalMachineSerialInfo.SecondAvailablePortName
                 )
-            ) {
+            )
+            {
                 SerialPortProperties serPortProp = new SerialPortProperties();
 
                 Debug.WriteLine("Verifying setting ParityReplace after Parity has been set");
@@ -150,7 +152,8 @@ namespace System.IO.Ports.Tests
                 SerialPort com2 = new SerialPort(
                     TCSupport.LocalMachineSerialInfo.SecondAvailablePortName
                 )
-            ) {
+            )
+            {
                 SerialPortProperties serPortProp = new SerialPortProperties();
 
                 Debug.WriteLine(
@@ -190,7 +193,8 @@ namespace System.IO.Ports.Tests
                 SerialPort com2 = new SerialPort(
                     TCSupport.LocalMachineSerialInfo.SecondAvailablePortName
                 )
-            ) {
+            )
+            {
                 SerialPortProperties serPortProp = new SerialPortProperties();
 
                 Debug.WriteLine(
@@ -233,7 +237,8 @@ namespace System.IO.Ports.Tests
             int parityReplace,
             ReadMethodDelegate readMethod,
             bool newLine
-        ) {
+        )
+        {
             VerifyParityReplaceByteBeforeOpen(parityReplace, readMethod, newLine);
             VerifyParityReplaceByteAfterOpen(parityReplace, readMethod, newLine);
         }
@@ -242,7 +247,8 @@ namespace System.IO.Ports.Tests
             int parityReplace,
             ReadMethodDelegate readMethod,
             bool newLine
-        ) {
+        )
+        {
             using (
                 SerialPort com1 = new SerialPort(
                     TCSupport.LocalMachineSerialInfo.FirstAvailablePortName
@@ -252,7 +258,8 @@ namespace System.IO.Ports.Tests
                 SerialPort com2 = new SerialPort(
                     TCSupport.LocalMachineSerialInfo.SecondAvailablePortName
                 )
-            ) {
+            )
+            {
                 com1.ParityReplace = (byte)parityReplace;
                 com1.Open();
                 com2.Open();
@@ -265,7 +272,8 @@ namespace System.IO.Ports.Tests
             int parityReplace,
             ReadMethodDelegate readMethod,
             bool newLine
-        ) {
+        )
+        {
             using (
                 SerialPort com1 = new SerialPort(
                     TCSupport.LocalMachineSerialInfo.FirstAvailablePortName
@@ -275,7 +283,8 @@ namespace System.IO.Ports.Tests
                 SerialPort com2 = new SerialPort(
                     TCSupport.LocalMachineSerialInfo.SecondAvailablePortName
                 )
-            ) {
+            )
+            {
                 com1.Open();
                 com2.Open();
 
@@ -289,7 +298,8 @@ namespace System.IO.Ports.Tests
             SerialPort com2,
             ReadMethodDelegate readMethod,
             bool newLine
-        ) {
+        )
+        {
             byte[] bytesToWrite = new byte[s_numRndBytesPairty];
             char[] expectedChars = new char[s_numRndBytesPairty];
             Random rndGen = new Random();
@@ -327,7 +337,8 @@ namespace System.IO.Ports.Tests
             char[] expectedChars,
             ReadMethodDelegate readMethod,
             bool newLine
-        ) {
+        )
+        {
             com2.Write(bytesToWrite, 0, bytesToWrite.Length);
 
             if (newLine)

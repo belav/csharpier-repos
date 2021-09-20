@@ -33,7 +33,8 @@ namespace Microsoft.AspNetCore.Components.Forms
             long sourceOffset,
             Memory<byte> destination,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             await _jsRuntime.InvokeVoidAsync(
                 InputFileInterop.EnsureArrayBufferReadyForSharedMemoryInterop,
                 cancellationToken,
@@ -53,7 +54,8 @@ namespace Microsoft.AspNetCore.Components.Forms
                     destination,
                     out ArraySegment<byte> destinationArraySegment
                 )
-            ) {
+            )
+            {
                 readRequest.Destination = destinationArraySegment.Array!;
                 readRequest.DestinationOffset = destinationArraySegment.Offset;
                 readRequest.MaxBytes = destinationArraySegment.Count;

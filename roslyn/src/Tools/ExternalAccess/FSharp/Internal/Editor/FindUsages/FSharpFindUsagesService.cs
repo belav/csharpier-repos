@@ -31,7 +31,8 @@ namespace Microsoft.CodeAnalysis.ExternalAccess.FSharp.Internal.Editor.FindUsage
             Document document,
             int position,
             IFindUsagesContext context
-        ) {
+        )
+        {
             return _service.FindImplementationsAsync(
                 document,
                 position,

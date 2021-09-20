@@ -35,7 +35,8 @@ namespace Microsoft.EntityFrameworkCore.InMemory.Infrastructure.Internal
         public override void Validate(
             IModel model,
             IDiagnosticsLogger<DbLoggerCategory.Model.Validation> logger
-        ) {
+        )
+        {
             base.Validate(model, logger);
 
             ValidateDefiningQuery(model, logger);
@@ -49,7 +50,8 @@ namespace Microsoft.EntityFrameworkCore.InMemory.Infrastructure.Internal
         protected virtual void ValidateDefiningQuery(
             IModel model,
             IDiagnosticsLogger<DbLoggerCategory.Model.Validation> logger
-        ) {
+        )
+        {
             Check.NotNull(model, nameof(model));
 
             foreach (var entityType in model.GetEntityTypes())

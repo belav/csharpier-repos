@@ -58,7 +58,8 @@ internal static partial class Interop
             SafeX509ChainHandle pChainContext,
             ref CERT_CHAIN_POLICY_PARA pPolicyPara,
             ref CERT_CHAIN_POLICY_STATUS pPolicyStatus
-        ) {
+        )
+        {
             return true;
         }
     }
@@ -85,7 +86,8 @@ internal static partial class Interop
             string proxyName,
             string proxyBypass,
             uint flags
-        ) {
+        )
+        {
             if (TestControl.WinHttpOpen.ErrorWithApiCall)
             {
                 TestControl.LastWin32Error = (int)Interop.WinHttp.ERROR_INVALID_HANDLE;
@@ -95,7 +97,8 @@ internal static partial class Interop
             if (
                 accessType == Interop.WinHttp.WINHTTP_ACCESS_TYPE_AUTOMATIC_PROXY
                 && !TestControl.WinHttpAutomaticProxySupport
-            ) {
+            )
+            {
                 TestControl.LastWin32Error = (int)Interop.WinHttp.ERROR_INVALID_PARAMETER;
                 return new FakeSafeWinHttpHandle(false);
             }
@@ -121,7 +124,8 @@ internal static partial class Interop
             string serverName,
             ushort serverPort,
             uint reserved
-        ) {
+        )
+        {
             return new FakeSafeWinHttpHandle(true);
         }
 
@@ -130,7 +134,8 @@ internal static partial class Interop
             StringBuilder headers,
             uint headersLength,
             uint modifiers
-        ) {
+        )
+        {
             return true;
         }
 
@@ -139,7 +144,8 @@ internal static partial class Interop
             string headers,
             uint headersLength,
             uint modifiers
-        ) {
+        )
+        {
             return true;
         }
 
@@ -151,7 +157,8 @@ internal static partial class Interop
             string referrer,
             string acceptTypes,
             uint flags
-        ) {
+        )
+        {
             return new FakeSafeWinHttpHandle(true);
         }
 
@@ -163,7 +170,8 @@ internal static partial class Interop
             uint optionalLength,
             uint totalLength,
             IntPtr context
-        ) {
+        )
+        {
             Task.Run(
                 () =>
                 {
@@ -224,7 +232,8 @@ internal static partial class Interop
         public static bool WinHttpQueryDataAvailable(
             SafeWinHttpHandle requestHandle,
             IntPtr bytesAvailableShouldBeNullForAsync
-        ) {
+        )
+        {
             if (bytesAvailableShouldBeNullForAsync != IntPtr.Zero)
             {
                 return false;
@@ -280,7 +289,8 @@ internal static partial class Interop
             IntPtr buffer,
             uint bufferSize,
             IntPtr bytesReadShouldBeNullForAsync
-        ) {
+        )
+        {
             if (bytesReadShouldBeNullForAsync != IntPtr.Zero)
             {
                 return false;
@@ -336,7 +346,8 @@ internal static partial class Interop
             IntPtr buffer,
             ref uint bufferLength,
             ref uint index
-        ) {
+        )
+        {
             string httpVersion = "HTTP/1.1";
             string statusText = "OK";
 
@@ -402,7 +413,8 @@ internal static partial class Interop
             string value,
             IntPtr buffer,
             ref uint bufferLength
-        ) {
+        )
+        {
             // The length of the string (plus terminating null char) in bytes.
             uint bufferLengthNeeded = ((uint)value.Length + 1) * sizeof(char);
 
@@ -430,7 +442,8 @@ internal static partial class Interop
             ref uint number,
             ref uint bufferLength,
             IntPtr index
-        ) {
+        )
+        {
             infoLevel &= ~Interop.WinHttp.WINHTTP_QUERY_FLAG_NUMBER;
 
             if (infoLevel == Interop.WinHttp.WINHTTP_QUERY_STATUS_CODE)
@@ -447,7 +460,8 @@ internal static partial class Interop
             uint option,
             StringBuilder buffer,
             ref uint bufferSize
-        ) {
+        )
+        {
             string uri = "http://www.contoso.com/";
 
             if (option == Interop.WinHttp.WINHTTP_OPTION_URL)
@@ -471,7 +485,8 @@ internal static partial class Interop
             uint option,
             ref IntPtr buffer,
             ref uint bufferSize
-        ) {
+        )
+        {
             return true;
         }
 
@@ -480,7 +495,8 @@ internal static partial class Interop
             uint option,
             IntPtr buffer,
             ref uint bufferSize
-        ) {
+        )
+        {
             return true;
         }
 
@@ -489,7 +505,8 @@ internal static partial class Interop
             uint option,
             ref uint buffer,
             ref uint bufferSize
-        ) {
+        )
+        {
             if (option == WINHTTP_OPTION_STREAM_ERROR_CODE)
             {
                 TestControl.LastWin32Error = (int)ERROR_INVALID_PARAMETER;
@@ -504,7 +521,8 @@ internal static partial class Interop
             IntPtr buffer,
             uint bufferSize,
             IntPtr bytesWrittenShouldBeNullForAsync
-        ) {
+        )
+        {
             if (bytesWrittenShouldBeNullForAsync != IntPtr.Zero)
             {
                 return false;
@@ -559,11 +577,13 @@ internal static partial class Interop
             uint option,
             ref uint optionData,
             uint optionLength = sizeof(uint)
-        ) {
+        )
+        {
             if (
                 option == Interop.WinHttp.WINHTTP_OPTION_DECOMPRESSION
                 & !TestControl.WinHttpDecompressionSupport
-            ) {
+            )
+            {
                 TestControl.LastWin32Error = (int)Interop.WinHttp.ERROR_WINHTTP_INVALID_OPTION;
                 return false;
             }
@@ -571,13 +591,15 @@ internal static partial class Interop
             if (
                 option == Interop.WinHttp.WINHTTP_OPTION_DISABLE_FEATURE
                 && optionData == Interop.WinHttp.WINHTTP_DISABLE_COOKIES
-            ) {
+            )
+            {
                 APICallHistory.WinHttpOptionDisableCookies = true;
             }
             else if (
                 option == Interop.WinHttp.WINHTTP_OPTION_ENABLE_FEATURE
                 && optionData == Interop.WinHttp.WINHTTP_ENABLE_SSL_REVOCATION
-            ) {
+            )
+            {
                 APICallHistory.WinHttpOptionEnableSslRevocation = true;
             }
             else if (option == Interop.WinHttp.WINHTTP_OPTION_SECURE_PROTOCOLS)
@@ -609,7 +631,8 @@ internal static partial class Interop
             uint option,
             string optionData,
             uint optionLength
-        ) {
+        )
+        {
             if (option == Interop.WinHttp.WINHTTP_OPTION_PROXY_USERNAME)
             {
                 APICallHistory.ProxyUsernameWithDomain = optionData;
@@ -635,7 +658,8 @@ internal static partial class Interop
             uint option,
             IntPtr optionData,
             uint optionLength
-        ) {
+        )
+        {
             if (option == Interop.WinHttp.WINHTTP_OPTION_PROXY)
             {
                 var proxyInfo = Marshal.PtrToStructure<Interop.WinHttp.WINHTTP_PROXY_INFO>(
@@ -671,7 +695,8 @@ internal static partial class Interop
             string userName,
             string password,
             IntPtr reserved
-        ) {
+        )
+        {
             return true;
         }
 
@@ -680,7 +705,8 @@ internal static partial class Interop
             out uint supportedSchemes,
             out uint firstScheme,
             out uint authTarget
-        ) {
+        )
+        {
             supportedSchemes = 0;
             firstScheme = 0;
             authTarget = 0;
@@ -694,13 +720,15 @@ internal static partial class Interop
             int connectTimeout,
             int sendTimeout,
             int receiveTimeout
-        ) {
+        )
+        {
             return true;
         }
 
         public static bool WinHttpGetIEProxyConfigForCurrentUser(
             out Interop.WinHttp.WINHTTP_CURRENT_USER_IE_PROXY_CONFIG proxyConfig
-        ) {
+        )
+        {
             if (FakeRegistry.WinInetProxySettings.RegistryKeyMissing)
             {
                 proxyConfig.AutoDetect = false;
@@ -729,7 +757,8 @@ internal static partial class Interop
             string url,
             ref Interop.WinHttp.WINHTTP_AUTOPROXY_OPTIONS autoProxyOptions,
             out Interop.WinHttp.WINHTTP_PROXY_INFO proxyInfo
-        ) {
+        )
+        {
             if (TestControl.PACFileNotDetectedOnNetwork)
             {
                 proxyInfo.AccessType = WINHTTP_ACCESS_TYPE_NO_PROXY;
@@ -753,7 +782,8 @@ internal static partial class Interop
             Interop.WinHttp.WINHTTP_STATUS_CALLBACK callback,
             uint notificationFlags,
             IntPtr reserved
-        ) {
+        )
+        {
             if (handle == null)
             {
                 throw new ArgumentNullException(nameof(handle));

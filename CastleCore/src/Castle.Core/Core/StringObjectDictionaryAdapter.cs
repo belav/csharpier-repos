@@ -95,7 +95,8 @@ namespace Castle.Core
         void ICollection<KeyValuePair<string, object>>.CopyTo(
             KeyValuePair<string, object>[] array,
             int arrayIndex
-        ) {
+        )
+        {
             throw new NotImplementedException();
         }
 

@@ -27,7 +27,8 @@ namespace System.Net.Security.Tests
             X509Certificate certificate,
             X509Chain chain,
             SslPolicyErrors sslPolicyErrors
-        ) {
+        )
+        {
             return true; // allow everything
         }
 
@@ -55,7 +56,8 @@ namespace System.Net.Security.Tests
                         null,
                         EncryptionPolicy.RequireEncryption
                     )
-                ) {
+                )
+                {
                     await sslStream.AuthenticateAsClientAsync(
                         "localhost",
                         null,
@@ -104,7 +106,8 @@ namespace System.Net.Security.Tests
                         null,
                         EncryptionPolicy.AllowNoEncryption
                     )
-                ) {
+                )
+                {
                     await sslStream.AuthenticateAsClientAsync(
                         "localhost",
                         null,
@@ -152,7 +155,8 @@ namespace System.Net.Security.Tests
                         null,
                         EncryptionPolicy.NoEncryption
                     )
-                ) {
+                )
+                {
                     await Assert.ThrowsAsync(
                         TestConfiguration.SupportsHandshakeAlerts
                           ? typeof(AuthenticationException)

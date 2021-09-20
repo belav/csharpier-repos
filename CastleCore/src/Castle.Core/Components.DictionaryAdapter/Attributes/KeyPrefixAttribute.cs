@@ -48,7 +48,8 @@ namespace Castle.Components.DictionaryAdapter
             IDictionaryAdapter dictionaryAdapter,
             string key,
             PropertyDescriptor property
-        ) {
+        )
+        {
             return KeyPrefix + key;
         }
     }

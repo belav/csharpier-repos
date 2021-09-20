@@ -48,7 +48,8 @@ namespace Microsoft.CodeAnalysis
         public static ICollection<T> Create<TOrig>(
             ImmutableArray<TOrig> collections,
             Func<TOrig, ICollection<T>> selector
-        ) {
+        )
+        {
             Debug.Assert(collections.All(c => selector(c).IsReadOnly));
 
             switch (collections.Length)

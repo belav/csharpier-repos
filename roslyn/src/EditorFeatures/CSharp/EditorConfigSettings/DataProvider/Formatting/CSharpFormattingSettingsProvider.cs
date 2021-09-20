@@ -31,7 +31,8 @@ namespace Microsoft.VisualStudio.LanguageServices.CSharp.EditorConfigSettings.Da
         protected override void UpdateOptions(
             AnalyzerConfigOptions editorConfigOptions,
             OptionSet visualStudioOptions
-        ) {
+        )
+        {
             var spacingOptions = GetSpacingOptions(
                 editorConfigOptions,
                 visualStudioOptions,
@@ -62,7 +63,8 @@ namespace Microsoft.VisualStudio.LanguageServices.CSharp.EditorConfigSettings.Da
             AnalyzerConfigOptions editorConfigOptions,
             OptionSet visualStudioOptions,
             OptionUpdater updaterService
-        ) {
+        )
+        {
             yield return FormattingSetting.Create(
                 CSharpFormattingOptions2.SpacingAfterMethodDeclarationName,
                 CSharpEditorResources.Insert_space_between_method_name_and_its_opening_parenthesis2,
@@ -241,7 +243,8 @@ namespace Microsoft.VisualStudio.LanguageServices.CSharp.EditorConfigSettings.Da
             AnalyzerConfigOptions editorConfigOptions,
             OptionSet visualStudioOptions,
             OptionUpdater updaterService
-        ) {
+        )
+        {
             yield return FormattingSetting.Create(
                 CSharpFormattingOptions2.NewLinesForBracesInTypes,
                 CSharpEditorResources.Place_open_brace_on_new_line_for_types,
@@ -353,7 +356,8 @@ namespace Microsoft.VisualStudio.LanguageServices.CSharp.EditorConfigSettings.Da
             AnalyzerConfigOptions editorConfigOptions,
             OptionSet visualStudioOptions,
             OptionUpdater updaterService
-        ) {
+        )
+        {
             yield return FormattingSetting.Create(
                 CSharpFormattingOptions2.IndentBlock,
                 CSharpEditorResources.Indent_block_contents,
@@ -402,7 +406,8 @@ namespace Microsoft.VisualStudio.LanguageServices.CSharp.EditorConfigSettings.Da
             AnalyzerConfigOptions editorConfigOptions,
             OptionSet visualStudioOptions,
             OptionUpdater updaterService
-        ) {
+        )
+        {
             yield return FormattingSetting.Create(
                 CSharpFormattingOptions2.WrappingPreserveSingleLine,
                 CSharpEditorResources.Leave_block_on_single_line,

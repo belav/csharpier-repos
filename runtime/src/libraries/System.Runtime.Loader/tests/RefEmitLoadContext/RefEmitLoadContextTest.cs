@@ -95,7 +95,8 @@ namespace System.Runtime.Loader.Tests
         private static void LoadRefEmitAssemblyInLoadContext(
             AssemblyLoadContext loadContext,
             AssemblyBuilderAccess builderType
-        ) {
+        )
+        {
             // Load this assembly in custom LoadContext
             var assemblyNameStr = "System.Runtime.Loader.Noop.Assembly.dll";
 

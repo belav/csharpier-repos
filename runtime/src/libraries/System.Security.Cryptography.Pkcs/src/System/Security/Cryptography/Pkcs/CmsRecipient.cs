@@ -17,10 +17,8 @@ namespace System.Security.Cryptography.Pkcs
 #else
         public
 #endif
-        CmsRecipient(
-            X509Certificate2 certificate,
-            RSAEncryptionPadding rsaEncryptionPadding
-        ) : this(certificate)
+        CmsRecipient(X509Certificate2 certificate, RSAEncryptionPadding rsaEncryptionPadding)
+            : this(certificate)
         {
             ValidateRSACertificate(certificate);
             RSAEncryptionPadding =
@@ -48,7 +46,8 @@ namespace System.Security.Cryptography.Pkcs
         public CmsRecipient(
             SubjectIdentifierType recipientIdentifierType,
             X509Certificate2 certificate
-        ) {
+        )
+        {
             if (certificate == null)
                 throw new ArgumentNullException(nameof(certificate));
 

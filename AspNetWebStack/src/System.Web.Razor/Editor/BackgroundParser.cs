@@ -85,7 +85,8 @@ namespace System.Web.Razor.Editor
             Block leftTree,
             Block rightTree,
             IEnumerable<TextChange> changes
-        ) {
+        )
+        {
             return TreesAreDifferent(leftTree, rightTree, changes, CancellationToken.None);
         }
 
@@ -94,7 +95,8 @@ namespace System.Web.Razor.Editor
             Block rightTree,
             IEnumerable<TextChange> changes,
             CancellationToken cancelToken
-        ) {
+        )
+        {
             // Apply all the pending changes to the original tree
             // PERF: If this becomes a bottleneck, we can probably do it the other way around,
             //  i.e. visit the tree and find applicable changes for each node.
@@ -374,7 +376,8 @@ namespace System.Web.Razor.Editor
                                             _shutdownToken,
                                             parcel.CancelToken
                                         )
-                                ) {
+                                )
+                                {
                                     if (!linkedCancel.IsCancellationRequested)
                                     {
                                         // Collect ALL changes
@@ -382,7 +385,8 @@ namespace System.Web.Razor.Editor
                                         if (
                                             _previouslyDiscarded != null
                                             && _previouslyDiscarded.Any()
-                                        ) {
+                                        )
+                                        {
                                             RazorEditorTrace.TraceLine(
                                                 RazorResources.Trace_CollectedDiscardedChanges,
                                                 fileNameOnly,
@@ -430,7 +434,8 @@ namespace System.Web.Razor.Editor
 
                                         if (
                                             results != null && !linkedCancel.IsCancellationRequested
-                                        ) {
+                                        )
+                                        {
                                             // Clear discarded changes list
                                             _previouslyDiscarded = null;
 

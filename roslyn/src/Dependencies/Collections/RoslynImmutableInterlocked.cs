@@ -430,7 +430,8 @@ namespace Microsoft.CodeAnalysis.Collections
                 if (
                     !priorCollection.TryGetValue(key, out var priorValue)
                     || !valueComparer.Equals(priorValue, comparisonValue)
-                ) {
+                )
+                {
                     // The key isn't in the dictionary, or its current value doesn't match what the caller expected.
                     return false;
                 }

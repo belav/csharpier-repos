@@ -1466,7 +1466,8 @@ namespace N1
         private static IEnumerable<string> EnumerateNamespaces(
             NamespaceSymbol @namespace,
             string baseName
-        ) {
+        )
+        {
             foreach (var child in @namespace.GetNamespaceMembers())
             {
                 var childName = string.IsNullOrEmpty(baseName)
@@ -1731,7 +1732,8 @@ namespace NS
             string source1,
             string source2,
             params string[] forwardedTypeFullNames
-        ) {
+        )
+        {
             var comp1 = CreateCompilation(
                 source1,
                 options: TestOptions.ReleaseDll,
@@ -1798,7 +1800,8 @@ namespace NS
                 ModuleMetadata metadata = ModuleMetadata.CreateFromImage(
                     verifier2.EmittedAssemblyData
                 )
-            ) {
+            )
+            {
                 var metadataReader = metadata.Module.GetMetadataReader();
 
                 Assert.Equal(
@@ -2138,7 +2141,8 @@ public class CF1
             string source1,
             string source2,
             params string[] forwardedTypeFullNames
-        ) {
+        )
+        {
             var folder = Temp.CreateDirectory();
             var comp0 = CreateCompilation(
                 source0,
@@ -2212,7 +2216,8 @@ public class CF1
                 ModuleMetadata metadata = ModuleMetadata.CreateFromImage(
                     verifier2.EmittedAssemblyData
                 )
-            ) {
+            )
+            {
                 var peReader = metadata.Module.GetMetadataReader();
 
                 Assert.Equal(
@@ -2233,7 +2238,8 @@ public class CF1
             ExportedTypeHandle exportedTypeHandle,
             MetadataReader reader,
             string expectedFullName
-        ) {
+        )
+        {
             ExportedType exportedTypeRow = reader.GetExportedType(exportedTypeHandle);
             var split = expectedFullName.Split('.');
             int numParts = split.Length;

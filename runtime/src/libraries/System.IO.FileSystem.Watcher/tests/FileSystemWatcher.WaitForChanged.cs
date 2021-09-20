@@ -121,7 +121,8 @@ namespace System.IO.Tests
         public void NonZeroTimeout_NoActivity_TimesOut(
             WatcherChangeTypes changeType,
             bool enabledBeforeWait
-        ) {
+        )
+        {
             using (var testDirectory = new TempDirectory(GetTestFilePath()))
             using (var dir = new TempDirectory(Path.Combine(testDirectory.Path, GetTestFileName())))
             using (var fsw = new FileSystemWatcher(testDirectory.Path))

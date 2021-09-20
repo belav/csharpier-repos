@@ -27,7 +27,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.KeywordHighlighting.KeywordHighli
             DirectiveTriviaSyntax directive,
             List<TextSpan> highlights,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var matchingDirective = directive.GetMatchingDirective(cancellationToken);
             if (matchingDirective == null)
             {

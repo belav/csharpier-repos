@@ -618,7 +618,8 @@ namespace System.Collections.Specialized.Tests
         public static void Section_Unequal_EqualsTest(
             BitVector32.Section left,
             BitVector32.Section right
-        ) {
+        )
+        {
             Assert.False(left.Equals(right));
             Assert.False(right.Equals(left));
             Assert.False(left.Equals((object)right));
@@ -636,7 +637,8 @@ namespace System.Collections.Specialized.Tests
         public static void Section_GetHashCodeTest(
             BitVector32.Section left,
             BitVector32.Section right
-        ) {
+        )
+        {
             Assert.Equal(left.GetHashCode(), left.GetHashCode());
             Assert.Equal(left.GetHashCode(), right.GetHashCode());
         }

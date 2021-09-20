@@ -57,7 +57,8 @@ namespace ILCompiler.DependencyAnalysis.ReadyToRun
                 if (
                     customAttributeTypeNamespace == "System.Runtime.CompilerServices"
                     && customAttributeTypeName == "NullableAttribute"
-                ) {
+                )
+                {
                     continue;
                 }
                 bool addToTable = false;
@@ -120,7 +121,8 @@ namespace ILCompiler.DependencyAnalysis.ReadyToRun
                 MetadataReader reader,
                 TypeDefinitionHandle handle,
                 byte rawTypeKind
-            ) {
+            )
+            {
                 if (_firstTypeHandle.IsNil)
                 {
                     _firstTypeHandle = handle;
@@ -132,7 +134,8 @@ namespace ILCompiler.DependencyAnalysis.ReadyToRun
                 MetadataReader reader,
                 TypeReferenceHandle handle,
                 byte rawTypeKind
-            ) {
+            )
+            {
                 if (_firstTypeHandle.IsNil)
                 {
                     _firstTypeHandle = handle;
@@ -162,14 +165,16 @@ namespace ILCompiler.DependencyAnalysis.ReadyToRun
             public DummyType GetGenericInstantiation(
                 DummyType genericType,
                 ImmutableArray<DummyType> typeArguments
-            ) {
+            )
+            {
                 return DummyType.Instance;
             }
 
             public DummyType GetGenericMethodParameter(
                 DummyGenericContext genericContext,
                 int index
-            ) {
+            )
+            {
                 return DummyType.Instance;
             }
 
@@ -182,7 +187,8 @@ namespace ILCompiler.DependencyAnalysis.ReadyToRun
                 DummyType modifier,
                 DummyType unmodifiedType,
                 bool isRequired
-            ) {
+            )
+            {
                 return DummyType.Instance;
             }
 
@@ -211,7 +217,8 @@ namespace ILCompiler.DependencyAnalysis.ReadyToRun
                 DummyGenericContext genericContext,
                 TypeSpecificationHandle handle,
                 byte rawTypeKind
-            ) {
+            )
+            {
                 return DummyType.Instance;
             }
             #endregion
@@ -234,7 +241,8 @@ namespace ILCompiler.DependencyAnalysis.ReadyToRun
             EntityHandle customAttributeConstructorHandle,
             out string customAttributeTypeNamespace,
             out string customAttributeTypeName
-        ) {
+        )
+        {
             /**
              * It is possible that the assembly that defines the attribute is not provided as a reference assembly.
              *
@@ -272,7 +280,8 @@ namespace ILCompiler.DependencyAnalysis.ReadyToRun
                     customAttributeConstructorReference.Parent;
                 if (
                     customAttributeConstructorReferenceParentHandle.Kind == HandleKind.TypeReference
-                ) {
+                )
+                {
                     TypeReferenceHandle customAttributeConstructorTypeReferenceHandle =
                         (TypeReferenceHandle)customAttributeConstructorReferenceParentHandle;
                     GetTypeNameFromTypeReferenceHandle(
@@ -335,7 +344,8 @@ namespace ILCompiler.DependencyAnalysis.ReadyToRun
             TypeReferenceHandle typeReferenceHandle,
             out string typeNamespace,
             out string typeName
-        ) {
+        )
+        {
             TypeReference typeReference = _module.MetadataReader.GetTypeReference(
                 typeReferenceHandle
             );
@@ -349,7 +359,8 @@ namespace ILCompiler.DependencyAnalysis.ReadyToRun
             TypeDefinitionHandle typeDefinitionHandle,
             out string typeNamespace,
             out string typeName
-        ) {
+        )
+        {
             TypeDefinition typeDefinition = _module.MetadataReader.GetTypeDefinition(
                 typeDefinitionHandle
             );
@@ -484,7 +495,8 @@ namespace ILCompiler.DependencyAnalysis.ReadyToRun
                     if (
                         hasEntryInBucket(bucketAIndex, fingerprint)
                         || hasEntryInBucket(bucketBIndex, fingerprint)
-                    ) {
+                    )
+                    {
                         continue;
                     }
 

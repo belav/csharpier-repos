@@ -24,7 +24,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.CodeModel.Inter
             CodeModelState state,
             AbstractCodeMember parent,
             MethodKind kind
-        ) {
+        )
+        {
             var newElement = new CodeAccessorFunction(state, parent, kind);
             return (EnvDTE.CodeFunction)ComAggregate.CreateAggregatedObject(newElement);
         }

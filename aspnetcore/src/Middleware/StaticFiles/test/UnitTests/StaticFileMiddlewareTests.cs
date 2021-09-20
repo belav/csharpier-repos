@@ -211,7 +211,8 @@ namespace Microsoft.AspNetCore.StaticFiles
             string baseUrl,
             string baseDir,
             string requestUrl
-        ) {
+        )
+        {
             await FoundFile_Served(baseUrl, baseDir, requestUrl);
         }
 
@@ -221,7 +222,8 @@ namespace Microsoft.AspNetCore.StaticFiles
                 var fileProvider = new PhysicalFileProvider(
                     Path.Combine(AppContext.BaseDirectory, baseDir)
                 )
-            ) {
+            )
+            {
                 using var host = await StaticFilesTestServer.Create(
                     app =>
                         app.UseStaticFiles(
@@ -258,12 +260,14 @@ namespace Microsoft.AspNetCore.StaticFiles
             string baseUrl,
             string baseDir,
             string requestUrl
-        ) {
+        )
+        {
             using (
                 var fileProvider = new PhysicalFileProvider(
                     Path.Combine(AppContext.BaseDirectory, baseDir)
                 )
-            ) {
+            )
+            {
                 using var host = await StaticFilesTestServer.Create(
                     app =>
                         app.UseStaticFiles(
@@ -354,12 +358,14 @@ namespace Microsoft.AspNetCore.StaticFiles
             string baseUrl,
             string baseDir,
             string requestUrl
-        ) {
+        )
+        {
             using (
                 var fileProvider = new PhysicalFileProvider(
                     Path.Combine(AppContext.BaseDirectory, baseDir)
                 )
-            ) {
+            )
+            {
                 using var host = await StaticFilesTestServer.Create(
                     app =>
                         app.UseStaticFiles(

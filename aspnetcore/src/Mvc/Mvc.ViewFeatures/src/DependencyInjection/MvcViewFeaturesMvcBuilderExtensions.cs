@@ -26,7 +26,8 @@ namespace Microsoft.Extensions.DependencyInjection
         public static IMvcBuilder AddViewOptions(
             this IMvcBuilder builder,
             Action<MvcViewOptions> setupAction
-        ) {
+        )
+        {
             if (builder == null)
             {
                 throw new ArgumentNullException(nameof(builder));
@@ -134,7 +135,8 @@ namespace Microsoft.Extensions.DependencyInjection
         public static IMvcBuilder AddCookieTempDataProvider(
             this IMvcBuilder builder,
             Action<CookieTempDataProviderOptions> setupAction
-        ) {
+        )
+        {
             if (builder == null)
             {
                 throw new ArgumentNullException(nameof(builder));

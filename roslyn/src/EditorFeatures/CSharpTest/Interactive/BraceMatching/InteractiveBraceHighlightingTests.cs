@@ -33,7 +33,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.BraceHighlighting
             TestWorkspace workspace,
             ITextBuffer buffer,
             int position
-        ) {
+        )
+        {
             var producer = new BraceHighlightingViewTaggerProvider(
                 workspace.ExportProvider.GetExportedValue<IThreadingContext>(),
                 workspace.GetService<IBraceMatchingService>(),

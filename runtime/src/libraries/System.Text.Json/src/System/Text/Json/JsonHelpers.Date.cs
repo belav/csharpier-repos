@@ -158,7 +158,8 @@ namespace System.Text.Json
             else if (
                 parseData.OffsetToken == JsonConstants.Plus
                 || parseData.OffsetToken == JsonConstants.Hyphen
-            ) {
+            )
+            {
                 if (!TryCreateDateTimeOffset(ref parseData, out DateTimeOffset dateTimeOffset))
                 {
                     value = default;
@@ -191,7 +192,8 @@ namespace System.Text.Json
                 || // Same as specifying an offset of "+00:00", except that DateTime's Kind gets set to UTC rather than Local
                 parseData.OffsetToken == JsonConstants.Plus
                 || parseData.OffsetToken == JsonConstants.Hyphen
-            ) {
+            )
+            {
                 return TryCreateDateTimeOffset(ref parseData, out value);
             }
 
@@ -229,7 +231,8 @@ namespace System.Text.Json
         private static bool TryParseDateTimeOffset(
             ReadOnlySpan<byte> source,
             out DateTimeParseData parseData
-        ) {
+        )
+        {
             parseData = default;
 
             // too short datetime
@@ -266,7 +269,8 @@ namespace System.Text.Json
                 || !TryGetNextTwoDigits(source.Slice(start: 5, length: 2), ref parseData.Month)
                 || source[7] != JsonConstants.Hyphen
                 || !TryGetNextTwoDigits(source.Slice(start: 8, length: 2), ref parseData.Day)
-            ) {
+            )
+            {
                 return false;
             }
 
@@ -325,7 +329,8 @@ namespace System.Text.Json
                 || source[13] != JsonConstants.Colon
                 || !TryGetNextTwoDigits(source.Slice(start: 11, length: 2), ref parseData.Hour)
                 || !TryGetNextTwoDigits(source.Slice(start: 14, length: 2), ref parseData.Minute)
-            ) {
+            )
+            {
                 return false;
             }
 
@@ -359,7 +364,8 @@ namespace System.Text.Json
             if (
                 source.Length < 19
                 || !TryGetNextTwoDigits(source.Slice(start: 17, length: 2), ref parseData.Second)
-            ) {
+            )
+            {
                 return false;
             }
 
@@ -454,7 +460,8 @@ namespace System.Text.Json
                 if (
                     offsetData.Length < 2
                     || !TryGetNextTwoDigits(offsetData.Slice(0, 2), ref parseData.OffsetHours)
-                ) {
+                )
+                {
                     return false;
                 }
 
@@ -471,7 +478,8 @@ namespace System.Text.Json
                     offsetData.Length != 5
                     || offsetData[2] != JsonConstants.Colon
                     || !TryGetNextTwoDigits(offsetData.Slice(3), ref parseData.OffsetMinutes)
-                ) {
+                )
+                {
                     return false;
                 }
 
@@ -506,7 +514,8 @@ namespace System.Text.Json
             DateTime dateTime,
             ref DateTimeParseData parseData,
             out DateTimeOffset value
-        ) {
+        )
+        {
             if (((uint)parseData.OffsetHours) > JsonConstants.MaxDateTimeUtcOffsetHours)
             {
                 value = default;
@@ -522,7 +531,8 @@ namespace System.Text.Json
             if (
                 parseData.OffsetHours == JsonConstants.MaxDateTimeUtcOffsetHours
                 && parseData.OffsetMinutes != 0
-            ) {
+            )
+            {
                 value = default;
                 return false;
             }
@@ -559,10 +569,12 @@ namespace System.Text.Json
         private static bool TryCreateDateTimeOffset(
             ref DateTimeParseData parseData,
             out DateTimeOffset value
-        ) {
+        )
+        {
             if (
                 !TryCreateDateTime(parseData, kind: DateTimeKind.Unspecified, out DateTime dateTime)
-            ) {
+            )
+            {
                 value = default;
                 return false;
             }
@@ -582,7 +594,8 @@ namespace System.Text.Json
         private static bool TryCreateDateTimeOffsetInterpretingDataAsLocalTime(
             DateTimeParseData parseData,
             out DateTimeOffset value
-        ) {
+        )
+        {
             if (!TryCreateDateTime(parseData, DateTimeKind.Local, out DateTime dateTime))
             {
                 value = default;
@@ -611,7 +624,8 @@ namespace System.Text.Json
             DateTimeParseData parseData,
             DateTimeKind kind,
             out DateTime value
-        ) {
+        )
+        {
             if (parseData.Year == 0)
             {
                 value = default;
@@ -630,7 +644,8 @@ namespace System.Text.Json
             if (
                 dayMinusOne >= 28
                 && dayMinusOne >= DateTime.DaysInMonth(parseData.Year, parseData.Month)
-            ) {
+            )
+            {
                 value = default;
                 return false;
             }

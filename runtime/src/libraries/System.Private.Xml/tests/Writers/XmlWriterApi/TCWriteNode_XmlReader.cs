@@ -275,7 +275,8 @@ namespace System.Xml.Tests
                 XmlReader xr = CreateReaderIgnoreWSFromString(
                     "<!DOCTYPE node [ <!ENTITY test \"Test Entity\"> ]><node>&test;</node>"
                 )
-            ) {
+            )
+            {
                 bool sanityCheck = false;
                 while (xr.Read())
                 {

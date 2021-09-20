@@ -17,29 +17,32 @@ namespace System.DirectoryServices.Protocols
             string server,
             bool fullyQualifiedDnsHostName,
             bool connectionless
-        ) : this(
-            server != null ? new string[] { server } : null,
-            fullyQualifiedDnsHostName,
-            connectionless
-        ) { }
+        )
+            : this(
+                server != null ? new string[] { server } : null,
+                fullyQualifiedDnsHostName,
+                connectionless
+            ) { }
 
         public LdapDirectoryIdentifier(
             string server,
             int portNumber,
             bool fullyQualifiedDnsHostName,
             bool connectionless
-        ) : this(
-            server != null ? new string[] { server } : null,
-            portNumber,
-            fullyQualifiedDnsHostName,
-            connectionless
-        ) { }
+        )
+            : this(
+                server != null ? new string[] { server } : null,
+                portNumber,
+                fullyQualifiedDnsHostName,
+                connectionless
+            ) { }
 
         public LdapDirectoryIdentifier(
             string[] servers,
             bool fullyQualifiedDnsHostName,
             bool connectionless
-        ) {
+        )
+        {
             // validate the servers, we don't allow space in the server name
             if (servers != null)
             {

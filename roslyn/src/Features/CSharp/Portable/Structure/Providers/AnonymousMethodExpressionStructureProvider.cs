@@ -17,13 +17,15 @@ namespace Microsoft.CodeAnalysis.CSharp.Structure
             ref TemporaryArray<BlockSpan> spans,
             BlockStructureOptionProvider optionProvider,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             // fault tolerance
             if (
                 anonymousMethod.Block.IsMissing
                 || anonymousMethod.Block.OpenBraceToken.IsMissing
                 || anonymousMethod.Block.CloseBraceToken.IsMissing
-            ) {
+            )
+            {
                 return;
             }
 

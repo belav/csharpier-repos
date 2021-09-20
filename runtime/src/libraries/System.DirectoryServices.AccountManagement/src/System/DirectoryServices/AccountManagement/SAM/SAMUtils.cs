@@ -26,7 +26,8 @@ namespace System.DirectoryServices.AccountManagement
             DirectoryEntry computerDE,
             out int versionMajor,
             out int versionMinor
-        ) {
+        )
+        {
             Debug.Assert(SAMUtils.IsOfObjectClass(computerDE, "Computer"));
 
             versionMajor = 0;
@@ -116,7 +117,8 @@ namespace System.DirectoryServices.AccountManagement
                 SAMUtils.IsOfObjectClass(de, "Computer")
                 || SAMUtils.IsOfObjectClass(de, "User")
                 || SAMUtils.IsOfObjectClass(de, "Group")
-            ) {
+            )
+            {
                 return storeCtx.GetAsPrincipal(de, null);
             }
             else

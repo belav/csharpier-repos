@@ -67,15 +67,14 @@ namespace System.Net.NetworkInformation.Tests
             p.OutputDataReceived += delegate(
                 object sendingProcess,
                 DataReceivedEventArgs outputLine
-            ) {
+            )
+            {
                 stdOutLines.Add(outputLine.Data);
             };
 
             p.StartInfo.RedirectStandardError = true;
-            p.ErrorDataReceived += delegate(
-                object sendingProcess,
-                DataReceivedEventArgs errorLine
-            ) {
+            p.ErrorDataReceived += delegate(object sendingProcess, DataReceivedEventArgs errorLine)
+            {
                 stdErrLines.Add(errorLine.Data);
             };
 
@@ -135,7 +134,8 @@ namespace System.Net.NetworkInformation.Tests
             IPAddress localAddress,
             int payloadSize,
             int timeout
-        ) {
+        )
+        {
             bool ipv4 = localAddress.AddressFamily == AddressFamily.InterNetwork;
             string arguments = UnixCommandLinePing.ConstructCommandLine(
                 payloadSize,

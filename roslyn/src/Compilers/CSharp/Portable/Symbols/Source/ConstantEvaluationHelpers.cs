@@ -53,7 +53,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             this SourceFieldSymbolWithSyntaxReference field,
             ArrayBuilder<FieldInfo> order,
             bool earlyDecodingWellKnownAttributes
-        ) {
+        )
+        {
             Debug.Assert(order.Count == 0);
 
             var graph = PooledDictionary<
@@ -109,7 +110,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             > graph,
             SourceFieldSymbolWithSyntaxReference field,
             bool earlyDecodingWellKnownAttributes
-        ) {
+        )
+        {
             var pending = ArrayBuilder<SourceFieldSymbolWithSyntaxReference>.GetInstance();
             pending.Push(field);
 
@@ -170,7 +172,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                 Node<SourceFieldSymbolWithSyntaxReference>
             > graph,
             ArrayBuilder<FieldInfo> order
-        ) {
+        )
+        {
             Debug.Assert(graph.Count > 0);
 
             PooledHashSet<SourceFieldSymbolWithSyntaxReference> lastUpdated = null;
@@ -284,7 +287,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                 Node<SourceFieldSymbolWithSyntaxReference>
             > graph,
             ref ArrayBuilder<SourceFieldSymbolWithSyntaxReference> fieldsInvolvedInCycles
-        ) {
+        )
+        {
             Debug.Assert(graph.Count > 0);
 
             if (fieldsInvolvedInCycles is null)
@@ -325,7 +329,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                 Node<SourceFieldSymbolWithSyntaxReference>
             > graph,
             SourceFieldSymbolWithSyntaxReference field
-        ) {
+        )
+        {
             var set = PooledHashSet<SourceFieldSymbolWithSyntaxReference>.GetInstance();
             var stack = ArrayBuilder<SourceFieldSymbolWithSyntaxReference>.GetInstance();
 
@@ -364,7 +369,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                 SourceFieldSymbolWithSyntaxReference,
                 Node<SourceFieldSymbolWithSyntaxReference>
             > graph
-        ) {
+        )
+        {
             // Avoid O(n^2) behavior by checking
             // a maximum number of entries.
             int i = 10;

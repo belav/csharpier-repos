@@ -45,16 +45,17 @@ namespace Microsoft.VisualStudio.LanguageServices.CSharp.Snippets
             IEditorCommandHandlerServiceFactory editorCommandHandlerServiceFactory,
             IVsEditorAdaptersFactoryService editorAdaptersFactoryService,
             ImmutableArray<Lazy<ArgumentProvider, OrderableLanguageMetadata>> argumentProviders
-        ) : base(
-            threadingContext,
-            languageServiceGuid,
-            textView,
-            subjectBuffer,
-            signatureHelpControllerProvider,
-            editorCommandHandlerServiceFactory,
-            editorAdaptersFactoryService,
-            argumentProviders
-        ) { }
+        )
+            : base(
+                threadingContext,
+                languageServiceGuid,
+                textView,
+                subjectBuffer,
+                signatureHelpControllerProvider,
+                editorCommandHandlerServiceFactory,
+                editorAdaptersFactoryService,
+                argumentProviders
+            ) { }
 
         /// <returns>The tracking span of the inserted "/**/" if there is an $end$ location, null
         /// otherwise.</returns>
@@ -91,14 +92,16 @@ namespace Microsoft.VisualStudio.LanguageServices.CSharp.Snippets
             IXMLDOMNode xmlFunctionNode,
             string bstrFieldName,
             out IVsExpansionFunction? pFunc
-        ) {
+        )
+        {
             if (
                 !TryGetSnippetFunctionInfo(
                     xmlFunctionNode,
                     out var snippetFunctionName,
                     out var param
                 )
-            ) {
+            )
+            {
                 pFunc = null;
                 return VSConstants.E_INVALIDARG;
             }
@@ -137,7 +140,8 @@ namespace Microsoft.VisualStudio.LanguageServices.CSharp.Snippets
             bool placeSystemNamespaceFirst,
             bool allowInHiddenRegions,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var importsNode = snippetNode.Element(
                 XName.Get("Imports", snippetNode.Name.NamespaceName)
             );
@@ -166,7 +170,8 @@ namespace Microsoft.VisualStudio.LanguageServices.CSharp.Snippets
                     document,
                     newUsingDirectives.Where(u => u.Alias == null).Select(u => u.Name.ToString())
                 )
-            ) {
+            )
+            {
                 return document;
             }
 
@@ -205,7 +210,8 @@ namespace Microsoft.VisualStudio.LanguageServices.CSharp.Snippets
             SyntaxNode contextLocation,
             XElement snippetNode,
             XElement importsNode
-        ) {
+        )
+        {
             var namespaceXmlName = XName.Get("Namespace", snippetNode.Name.NamespaceName);
             var existingUsings = contextLocation.GetEnclosingUsingDirectives();
             var newUsings = new List<UsingDirectiveSyntax>();
@@ -214,7 +220,8 @@ namespace Microsoft.VisualStudio.LanguageServices.CSharp.Snippets
                 var import in importsNode.Elements(
                     XName.Get("Import", snippetNode.Name.NamespaceName)
                 )
-            ) {
+            )
+            {
                 var namespaceElement = import.Element(namespaceXmlName);
                 if (namespaceElement == null)
                 {

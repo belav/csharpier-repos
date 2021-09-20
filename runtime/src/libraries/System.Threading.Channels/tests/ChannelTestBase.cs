@@ -809,7 +809,8 @@ namespace System.Threading.Channels.Tests
         public void WaitToReadAsync_MultipleContinuations_Throws(
             bool onCompleted,
             bool? continueOnCapturedContext
-        ) {
+        )
+        {
             Channel<int> c = CreateChannel();
 
             ValueTask<bool> read = c.Reader.WaitToReadAsync();
@@ -871,7 +872,8 @@ namespace System.Threading.Channels.Tests
         public void ReadAsync_MultipleContinuations_Throws(
             bool onCompleted,
             bool? continueOnCapturedContext
-        ) {
+        )
+        {
             Channel<int> c = CreateChannel();
 
             ValueTask<int> read = c.Reader.ReadAsync();
@@ -1001,7 +1003,8 @@ namespace System.Threading.Channels.Tests
         public void WaitToWriteAsync_MultipleContinuations_Throws(
             bool onCompleted,
             bool? continueOnCapturedContext
-        ) {
+        )
+        {
             Channel<int> c = CreateFullChannel();
             if (c == null)
             {
@@ -1067,7 +1070,8 @@ namespace System.Threading.Channels.Tests
         public void WriteAsync_MultipleContinuations_Throws(
             bool onCompleted,
             bool? continueOnCapturedContext
-        ) {
+        )
+        {
             Channel<int> c = CreateFullChannel();
             if (c == null)
             {
@@ -1146,7 +1150,8 @@ namespace System.Threading.Channels.Tests
             bool flowExecutionContext,
             bool? continueOnCapturedContext,
             bool setNonDefaultTaskScheduler
-        ) {
+        )
+        {
             if (AllowSynchronousContinuations)
             {
                 return;
@@ -1265,7 +1270,8 @@ namespace System.Threading.Channels.Tests
             bool flowExecutionContext,
             bool? continueOnCapturedContext,
             bool setDefaultSyncContext
-        ) {
+        )
+        {
             if (AllowSynchronousContinuations)
             {
                 return;

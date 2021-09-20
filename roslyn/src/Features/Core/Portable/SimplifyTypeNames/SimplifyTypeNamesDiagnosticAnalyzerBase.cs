@@ -187,7 +187,8 @@ namespace Microsoft.CodeAnalysis.SimplifyTypeNames
             [NotNullWhen(true)] out Diagnostic? diagnostic,
             OptionSet optionSet,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             if (
                 !CanSimplifyTypeNameExpression(
                     model,
@@ -198,7 +199,8 @@ namespace Microsoft.CodeAnalysis.SimplifyTypeNames
                     out var inDeclaration,
                     cancellationToken
                 )
-            ) {
+            )
+            {
                 diagnostic = null;
                 return false;
             }
@@ -219,7 +221,8 @@ namespace Microsoft.CodeAnalysis.SimplifyTypeNames
             TextSpan issueSpan,
             string diagnosticId,
             bool inDeclaration
-        ) {
+        )
+        {
             PerLanguageOption2<CodeStyleOption2<bool>> option;
             DiagnosticDescriptor descriptor;
             ReportDiagnostic severity;
@@ -394,7 +397,8 @@ namespace Microsoft.CodeAnalysis.SimplifyTypeNames
                     TextSpan span,
                     StrongBox<bool> completed,
                     SimpleIntervalTree<TextSpan, TextSpanIntervalIntrospector> intervalTree
-                ) {
+                )
+                {
                     lock (completed)
                     {
                         if (completed.Value)

@@ -23,7 +23,8 @@ namespace Microsoft.AspNetCore.Mvc.Razor.Infrastructure
         public DefaultFileVersionProvider(
             IWebHostEnvironment hostingEnvironment,
             TagHelperMemoryCacheProvider cacheProvider
-        ) {
+        )
+        {
             if (hostingEnvironment == null)
             {
                 throw new ArgumentNullException(nameof(hostingEnvironment));
@@ -79,7 +80,8 @@ namespace Microsoft.AspNetCore.Mvc.Razor.Infrastructure
                     requestPathBase.Value,
                     StringComparison.OrdinalIgnoreCase
                 )
-            ) {
+            )
+            {
                 var requestPathBaseRelativePath = resolvedPath.Substring(
                     requestPathBase.Value.Length
                 );

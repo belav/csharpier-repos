@@ -19,7 +19,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Syntax
             BlockSyntax body,
             ArrowExpressionClauseSyntax expressionBody,
             SyntaxToken semicolonToken
-        ) {
+        )
+        {
             return Update(
                 AttributeLists,
                 modifiers,
@@ -50,7 +51,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             SyntaxList<TypeParameterConstraintClauseSyntax> constraintClauses,
             BlockSyntax body,
             ArrowExpressionClauseSyntax expressionBody
-        ) {
+        )
+        {
             return LocalFunctionStatement(
                 attributeLists: default,
                 modifiers,
@@ -76,7 +78,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             BlockSyntax body,
             ArrowExpressionClauseSyntax expressionBody,
             SyntaxToken semicolonToken
-        ) {
+        )
+        {
             return LocalFunctionStatement(
                 attributeLists: default,
                 modifiers,

@@ -33,7 +33,8 @@ namespace Microsoft.AspNetCore.Routing.Constraints
             string routeKey,
             RouteValueDictionary values,
             RouteDirection routeDirection
-        ) {
+        )
+        {
             if (routeKey == null)
             {
                 throw new ArgumentNullException(nameof(routeKey));
@@ -54,7 +55,8 @@ namespace Microsoft.AspNetCore.Routing.Constraints
                         CultureInfo.InvariantCulture,
                         out var longValue
                     )
-                ) {
+                )
+                {
                     return longValue >= Min;
                 }
             }

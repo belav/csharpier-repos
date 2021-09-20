@@ -65,7 +65,8 @@ namespace System.ComponentModel.DataAnnotations
                 || valueType == typeof(double)
                 || valueType == typeof(decimal)
                 || valueType == typeof(char)
-            ) {
+            )
+            {
                 // non-integral types cannot be converted
                 return false;
             }

@@ -28,7 +28,8 @@ namespace Tests.System.Net
         [MemberData(nameof(UnknownHeaderNames))]
         public unsafe void TryGetHeaderName_IntPtrBuffer_UnknownStrings_NotFound(
             string shouldNotBeFound
-        ) {
+        )
+        {
             byte[] buffer = shouldNotBeFound.Select(c => checked((byte)c)).ToArray();
 
             fixed (byte* pBuffer = buffer)
@@ -55,7 +56,8 @@ namespace Tests.System.Net
         [MemberData(nameof(HttpKnownHeaderNamesPublicStringConstants))]
         public void TryGetHeaderName_CharArray_AllHttpKnownHeaderNamesPublicStringConstants_Found(
             string constant
-        ) {
+        )
+        {
             char[] array = constant.ToCharArray();
 
             string name1;
@@ -75,7 +77,8 @@ namespace Tests.System.Net
         [MemberData(nameof(HttpKnownHeaderNamesPublicStringConstants))]
         public unsafe void TryGetHeaderName_IntPtrBuffer_AllHttpKnownHeaderNamesPublicStringConstants_Found(
             string constant
-        ) {
+        )
+        {
             byte[] buffer = constant.Select(c => checked((byte)c)).ToArray();
 
             fixed (byte* pBuffer = buffer)

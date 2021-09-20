@@ -152,7 +152,8 @@ namespace Microsoft.EntityFrameworkCore
         private static void AssertNullMappedNullableDataTypes(
             MappedNullableDataTypes entity,
             int id
-        ) {
+        )
+        {
             Assert.Equal(id, entity.Id);
             Assert.Null(entity.Integer);
             Assert.Null(entity.Real);
@@ -310,7 +311,8 @@ namespace Microsoft.EntityFrameworkCore
         private static void AssertMappedDataTypesWithIdentity(
             MappedDataTypesWithIdentity entity,
             int id
-        ) {
+        )
+        {
             Assert.Equal(id, entity.AltId);
             Assert.Equal(78L, entity.Integer);
             Assert.Equal(84.4, entity.Real);
@@ -354,7 +356,8 @@ namespace Microsoft.EntityFrameworkCore
         private static void AssertMappedNullableDataTypesWithIdentity(
             MappedNullableDataTypesWithIdentity entity,
             int id
-        ) {
+        )
+        {
             Assert.Equal(id, entity.AltId);
             Assert.Equal(78L, entity.Integer);
             Assert.Equal(84.4, entity.Real);
@@ -400,7 +403,8 @@ namespace Microsoft.EntityFrameworkCore
         private static void AssertNullMappedNullableDataTypesWithIdentity(
             MappedNullableDataTypesWithIdentity entity,
             int id
-        ) {
+        )
+        {
             Assert.Equal(id, entity.AltId);
             Assert.Null(entity.Integer);
             Assert.Null(entity.Real);
@@ -435,7 +439,8 @@ namespace Microsoft.EntityFrameworkCore
         private static void AssertMappedSizedDataTypesWithIdentity(
             MappedSizedDataTypesWithIdentity entity,
             int id
-        ) {
+        )
+        {
             Assert.Equal(id, entity.AltId);
             Assert.Equal("Into", entity.Nvarchar);
             Assert.Equal(new byte[] { 10, 11, 12, 13 }, entity.Binary);
@@ -468,7 +473,8 @@ namespace Microsoft.EntityFrameworkCore
         private static void AssertNullMappedSizedDataTypesWithIdentity(
             MappedSizedDataTypesWithIdentity entity,
             int id
-        ) {
+        )
+        {
             Assert.Equal(id, entity.AltId);
             Assert.Null(entity.Nvarchar);
             Assert.Null(entity.Binary);
@@ -499,7 +505,8 @@ namespace Microsoft.EntityFrameworkCore
         private static void AssertMappedScaledDataTypesWithIdentity(
             MappedScaledDataTypesWithIdentity entity,
             int id
-        ) {
+        )
+        {
             Assert.Equal(id, entity.AltId);
             Assert.Equal(83.3f, entity.Float);
             Assert.Equal(
@@ -1015,7 +1022,8 @@ namespace Microsoft.EntityFrameworkCore
             foreach (
                 var property in context.Model.GetEntityTypes()
                     .SelectMany(e => e.GetDeclaredProperties())
-            ) {
+            )
+            {
                 var columnType = property.GetColumnType();
                 Assert.NotNull(columnType);
 

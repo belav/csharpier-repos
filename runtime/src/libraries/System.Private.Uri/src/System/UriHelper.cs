@@ -42,7 +42,8 @@ namespace System
             char* otherPtr,
             int otherLength,
             bool ignoreCase
-        ) {
+        )
+        {
             int i = 0;
             char chSelf;
             char chOther;
@@ -123,7 +124,8 @@ namespace System
             ReadOnlySpan<bool> unreserved,
             char forceEscape1 = '\0',
             char forceEscape2 = '\0'
-        ) {
+        )
+        {
             if (stringToEscape is null)
             {
                 throw new ArgumentNullException(nameof(stringToEscape));
@@ -183,7 +185,8 @@ namespace System
             bool checkExistingEscaped,
             char forceEscape1 = '\0',
             char forceEscape2 = '\0'
-        ) {
+        )
+        {
             // Get the table of characters that do not need to be escaped.
             ReadOnlySpan<bool> noEscape = stackalloc bool[0];
             if ((forceEscape1 | forceEscape2) == 0)
@@ -239,7 +242,8 @@ namespace System
             ref ValueStringBuilder vsb,
             ReadOnlySpan<bool> noEscape,
             bool checkExistingEscaped
-        ) {
+        )
+        {
             // Allocate enough stack space to hold any Rune's UTF8 encoding.
             Span<byte> utf8Bytes = stackalloc byte[4];
 
@@ -319,7 +323,8 @@ namespace System
             UnescapeMode unescapeMode,
             UriParser? syntax,
             bool isQuery
-        ) {
+        )
+        {
             fixed (char* pStr = input)
             {
                 return UnescapeString(
@@ -350,7 +355,8 @@ namespace System
             UnescapeMode unescapeMode,
             UriParser? syntax,
             bool isQuery
-        ) {
+        )
+        {
             ValueStringBuilder vsb = new ValueStringBuilder(dest.Length);
             vsb.Append(dest.AsSpan(0, destPosition));
             UnescapeString(
@@ -401,7 +407,8 @@ namespace System
             UnescapeMode unescapeMode,
             UriParser? syntax,
             bool isQuery
-        ) {
+        )
+        {
             fixed (char* pStr = input)
             {
                 UnescapeString(
@@ -427,7 +434,8 @@ namespace System
             UnescapeMode unescapeMode,
             UriParser? syntax,
             bool isQuery
-        ) {
+        )
+        {
             fixed (char* pStr = &MemoryMarshal.GetReference(input))
             {
                 UnescapeString(
@@ -455,7 +463,8 @@ namespace System
             UnescapeMode unescapeMode,
             UriParser? syntax,
             bool isQuery
-        ) {
+        )
+        {
             if ((unescapeMode & UnescapeMode.EscapeUnescape) == UnescapeMode.CopyOnly)
             {
                 dest.Append(pStr + start, end - start);
@@ -520,7 +529,8 @@ namespace System
                             else if (
                                 (unescapeMode & UnescapeMode.V1ToStringFlag) == 0
                                 && IsNotSafeForUnescape(ch)
-                            ) {
+                            )
+                            {
                                 next += 2;
                                 continue;
                             }
@@ -530,7 +540,8 @@ namespace System
                                     (ch <= '\x9F' && IsNotSafeForUnescape(ch))
                                     || (ch > '\x9F' && !IriHelper.CheckIriUnicodeRange(ch, isQuery))
                                 )
-                            ) {
+                            )
+                            {
                                 // check if unenscaping gives a char outside iri range
                                 // if it does then keep it escaped
                                 next += 2;
@@ -559,7 +570,8 @@ namespace System
                     else if (
                         (unescapeMode & (UnescapeMode.Unescape | UnescapeMode.UnescapeAll))
                         == (UnescapeMode.Unescape | UnescapeMode.UnescapeAll)
-                    ) {
+                    )
+                    {
                         continue;
                     }
                     else if ((unescapeMode & UnescapeMode.Escape) != 0)
@@ -574,7 +586,8 @@ namespace System
                         else if (
                             (unescapeMode & UnescapeMode.V1ToStringFlag) == 0
                             && (ch <= '\x1F' || (ch >= '\x7F' && ch <= '\x9F'))
-                        ) {
+                        )
+                        {
                             // found an unescaped reserved character -> escape it
                             escapeReserved = true;
                             break;
@@ -996,7 +1009,8 @@ namespace System
         internal static unsafe string StripBidiControlCharacters(
             ReadOnlySpan<char> strToClean,
             string? backingString = null
-        ) {
+        )
+        {
             Debug.Assert(backingString is null || strToClean.Length == backingString.Length);
 
             int charsToRemove = 0;
@@ -1035,7 +1049,8 @@ namespace System
                             if (
                                 (uint)(c - '\u200E') > ('\u202E' - '\u200E')
                                 || !IsBidiControlCharacter(c)
-                            ) {
+                            )
+                            {
                                 buffer[destIndex++] = c;
                             }
                         }

@@ -20,7 +20,8 @@ namespace Microsoft.AspNetCore.DataProtection.AuthenticatedEncryption.Configurat
         public AuthenticatedEncryptorDescriptor(
             AuthenticatedEncryptorConfiguration configuration,
             ISecret masterKey
-        ) {
+        )
+        {
             if (configuration == null)
             {
                 throw new ArgumentNullException(nameof(configuration));

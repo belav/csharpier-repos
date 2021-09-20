@@ -58,7 +58,8 @@ namespace Castle.Components.DictionaryAdapter.Xml
             Tokenizer source,
             CompiledXPath path,
             ref CompiledXPathStep step
-        ) {
+        )
+        {
             var previous = step;
             var start = source.Index;
 
@@ -189,7 +190,8 @@ namespace Castle.Components.DictionaryAdapter.Xml
             Tokenizer source,
             CompiledXPathNode parent,
             out CompiledXPathNode node
-        ) {
+        )
+        {
             for (node = null;;)
             {
                 if (!ParseNode(source, parent, ref node))
@@ -214,7 +216,8 @@ namespace Castle.Components.DictionaryAdapter.Xml
             Tokenizer source,
             CompiledXPathNode parent,
             ref CompiledXPathNode node
-        ) {
+        )
+        {
             var previous = node;
 
             if (!ParseNodeCore(source, NodeFactory, ref node))

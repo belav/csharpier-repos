@@ -81,7 +81,8 @@ namespace System.ComponentModel.Tests
             CategoryAttribute attribute,
             object other,
             bool expected
-        ) {
+        )
+        {
             Assert.Equal(expected, attribute.Equals(other));
             if (other is CategoryAttribute otherAttribute)
             {
@@ -163,7 +164,8 @@ namespace System.ComponentModel.Tests
         public void Properties_Get_ReturnsExpected(
             Func<CategoryAttribute> attributeThunk,
             string expectedCategory
-        ) {
+        )
+        {
             CategoryAttribute attribute = attributeThunk();
             Assert.Same(attribute, attributeThunk());
             Assert.Equal(expectedCategory, attribute.Category);

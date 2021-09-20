@@ -32,7 +32,8 @@ namespace Microsoft.EntityFrameworkCore.Query
         // Include with cycles are not allowed in no tracking query.
         public override async Task Include_multi_level_reference_and_collection_predicate(
             bool async
-        ) {
+        )
+        {
             Assert.Equal(
                 CoreStrings.IncludeWithCycle("Customer", "Orders"),
                 (
@@ -45,7 +46,8 @@ namespace Microsoft.EntityFrameworkCore.Query
 
         public override async Task Include_multi_level_reference_then_include_collection_predicate(
             bool async
-        ) {
+        )
+        {
             Assert.Equal(
                 CoreStrings.IncludeWithCycle("Customer", "Orders"),
                 (
@@ -61,7 +63,8 @@ namespace Microsoft.EntityFrameworkCore.Query
 
         public override async Task Include_multiple_references_and_collection_multi_level(
             bool async
-        ) {
+        )
+        {
             Assert.Equal(
                 CoreStrings.IncludeWithCycle("Customer", "Orders"),
                 (
@@ -74,7 +77,8 @@ namespace Microsoft.EntityFrameworkCore.Query
 
         public override async Task Include_multiple_references_and_collection_multi_level_reverse(
             bool async
-        ) {
+        )
+        {
             Assert.Equal(
                 CoreStrings.IncludeWithCycle("Customer", "Orders"),
                 (
@@ -90,7 +94,8 @@ namespace Microsoft.EntityFrameworkCore.Query
 
         public override async Task Include_multiple_references_then_include_collection_multi_level(
             bool async
-        ) {
+        )
+        {
             Assert.Equal(
                 CoreStrings.IncludeWithCycle("Customer", "Orders"),
                 (
@@ -106,7 +111,8 @@ namespace Microsoft.EntityFrameworkCore.Query
 
         public override async Task Include_multiple_references_then_include_collection_multi_level_reverse(
             bool async
-        ) {
+        )
+        {
             Assert.Equal(
                 CoreStrings.IncludeWithCycle("Customer", "Orders"),
                 (
@@ -146,7 +152,8 @@ namespace Microsoft.EntityFrameworkCore.Query
 
         public override async Task Include_references_and_collection_multi_level_predicate(
             bool async
-        ) {
+        )
+        {
             Assert.Equal(
                 CoreStrings.IncludeWithCycle("Customer", "Orders"),
                 (
@@ -171,7 +178,8 @@ namespace Microsoft.EntityFrameworkCore.Query
 
         public override async Task Include_references_then_include_collection_multi_level(
             bool async
-        ) {
+        )
+        {
             Assert.Equal(
                 CoreStrings.IncludeWithCycle("Customer", "Orders"),
                 (
@@ -184,7 +192,8 @@ namespace Microsoft.EntityFrameworkCore.Query
 
         public override async Task Include_references_then_include_collection_multi_level_predicate(
             bool async
-        ) {
+        )
+        {
             Assert.Equal(
                 CoreStrings.IncludeWithCycle("Customer", "Orders"),
                 (

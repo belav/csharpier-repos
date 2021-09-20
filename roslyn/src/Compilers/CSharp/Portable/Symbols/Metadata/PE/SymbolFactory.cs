@@ -22,7 +22,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols.Metadata.PE
             ImmutableArray<ModifierInfo<TypeSymbol>> customModifiers,
             ImmutableArray<int> sizes,
             ImmutableArray<int> lowerBounds
-        ) {
+        )
+        {
             if (elementType is UnsupportedMetadataTypeSymbol)
             {
                 return elementType;
@@ -40,7 +41,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols.Metadata.PE
         internal override TypeSymbol GetSpecialType(
             PEModuleSymbol moduleSymbol,
             SpecialType specialType
-        ) {
+        )
+        {
             return moduleSymbol.ContainingAssembly.GetSpecialType(specialType);
         }
 
@@ -53,7 +55,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols.Metadata.PE
             PEModuleSymbol moduleSymbol,
             TypeSymbol type,
             ImmutableArray<ModifierInfo<TypeSymbol>> customModifiers
-        ) {
+        )
+        {
             if (type is UnsupportedMetadataTypeSymbol)
             {
                 return type;
@@ -65,7 +68,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols.Metadata.PE
         internal override TypeSymbol MakeFunctionPointerTypeSymbol(
             Cci.CallingConvention callingConvention,
             ImmutableArray<ParamInfo<TypeSymbol>> retAndParamTypes
-        ) {
+        )
+        {
             return FunctionPointerTypeSymbol.CreateFromMetadata(
                 callingConvention,
                 retAndParamTypes
@@ -75,14 +79,16 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols.Metadata.PE
         internal override TypeSymbol GetEnumUnderlyingType(
             PEModuleSymbol moduleSymbol,
             TypeSymbol type
-        ) {
+        )
+        {
             return type.GetEnumUnderlyingType();
         }
 
         internal override Cci.PrimitiveTypeCode GetPrimitiveTypeCode(
             PEModuleSymbol moduleSymbol,
             TypeSymbol type
-        ) {
+        )
+        {
             return type.PrimitiveTypeCode;
         }
 
@@ -90,7 +96,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols.Metadata.PE
             PEModuleSymbol moduleSymbol,
             TypeSymbol elementType,
             ImmutableArray<ModifierInfo<TypeSymbol>> customModifiers
-        ) {
+        )
+        {
             if (elementType is UnsupportedMetadataTypeSymbol)
             {
                 return elementType;
@@ -105,7 +112,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols.Metadata.PE
         internal override TypeSymbol GetUnsupportedMetadataTypeSymbol(
             PEModuleSymbol moduleSymbol,
             BadImageFormatException exception
-        ) {
+        )
+        {
             return new UnsupportedMetadataTypeSymbol(exception);
         }
 
@@ -116,7 +124,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols.Metadata.PE
                 KeyValuePair<TypeSymbol, ImmutableArray<ModifierInfo<TypeSymbol>>>
             > arguments,
             ImmutableArray<bool> refersToNoPiaLocalType
-        ) {
+        )
+        {
             if (genericTypeDef is UnsupportedMetadataTypeSymbol)
             {
                 return genericTypeDef;
@@ -127,7 +136,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols.Metadata.PE
             {
                 if (
                     arg.Key.Kind == SymbolKind.ErrorType && arg.Key is UnsupportedMetadataTypeSymbol
-                ) {
+                )
+                {
                     return new UnsupportedMetadataTypeSymbol();
                 }
             }
@@ -170,7 +180,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols.Metadata.PE
                                 linkedAssemblies
                             )
                         )
-                    ) {
+                    )
+                    {
                         noPiaIllegalGenericInstantiation = true;
                         break;
                     }
@@ -208,7 +219,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols.Metadata.PE
         internal override TypeSymbol MakeUnboundIfGeneric(
             PEModuleSymbol moduleSymbol,
             TypeSymbol type
-        ) {
+        )
+        {
             var namedType = type as NamedTypeSymbol;
             return ((object)namedType != null && namedType.IsGenericType)
               ? namedType.AsUnboundGenericType()
@@ -218,7 +230,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols.Metadata.PE
         private static TypeWithAnnotations CreateType(
             TypeSymbol type,
             ImmutableArray<ModifierInfo<TypeSymbol>> customModifiers
-        ) {
+        )
+        {
             // The actual annotation will be set when these types are transformed by the caller.
             return TypeWithAnnotations.Create(
                 type,

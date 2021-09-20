@@ -38,7 +38,8 @@ namespace Microsoft.DiaSymReader
             int* qualifiedNameLength,
             string namespaceStr,
             string nameStr
-        ) {
+        )
+        {
             Debug.Assert(nameStr != null);
 
             if (namespaceStr == null)

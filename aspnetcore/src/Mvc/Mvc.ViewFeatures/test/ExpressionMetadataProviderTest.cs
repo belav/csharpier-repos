@@ -134,7 +134,8 @@ namespace Microsoft.AspNetCore.Mvc.ViewFeatures
             string expression,
             ModelMetadataKind expectedKind,
             Type expectedType
-        ) {
+        )
+        {
             // Arrange
             var provider = new EmptyModelMetadataProvider();
             var viewData = new ViewDataDictionary<TestModel>(provider);

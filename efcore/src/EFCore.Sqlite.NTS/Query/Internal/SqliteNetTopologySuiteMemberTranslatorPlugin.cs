@@ -30,7 +30,8 @@ namespace Microsoft.EntityFrameworkCore.Sqlite.Query.Internal
         /// </summary>
         public SqliteNetTopologySuiteMemberTranslatorPlugin(
             ISqlExpressionFactory sqlExpressionFactory
-        ) {
+        )
+        {
             Translators = new IMemberTranslator[]
             {
                 new SqliteGeometryMemberTranslator(sqlExpressionFactory),

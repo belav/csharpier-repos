@@ -115,7 +115,8 @@ namespace System
             ReadOnlySequenceSegment<T>? startSegment,
             int startIndex,
             ReadOnlySequenceSegment<T>? endSegment
-        ) {
+        )
+        {
             if (startSegment == null)
                 return CreateArgumentNullException(ExceptionArgument.startSegment);
             else if (endSegment == null)

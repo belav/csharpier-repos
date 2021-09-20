@@ -16,7 +16,8 @@ namespace System.Web.Http
             IHttpController instance = null,
             IHttpRouteData routeData = null,
             HttpRequestMessage request = null
-        ) {
+        )
+        {
             HttpConfiguration config = configuration ?? new HttpConfiguration();
             IHttpRouteData route = routeData ?? new HttpRouteData(new HttpRoute());
             HttpRequestMessage req = request ?? new HttpRequestMessage();
@@ -36,7 +37,8 @@ namespace System.Web.Http
         public static HttpActionContext CreateActionContext(
             HttpControllerContext controllerContext = null,
             HttpActionDescriptor actionDescriptor = null
-        ) {
+        )
+        {
             HttpControllerContext context =
                 controllerContext ?? ContextUtil.CreateControllerContext();
             HttpActionDescriptor descriptor = actionDescriptor ?? CreateActionDescriptor();
@@ -54,7 +56,8 @@ namespace System.Web.Http
         public static HttpActionExecutedContext GetActionExecutedContext(
             HttpRequestMessage request,
             HttpResponseMessage response
-        ) {
+        )
+        {
             HttpActionContext actionContext = CreateActionContext();
             actionContext.ControllerContext.Request = request;
             HttpActionExecutedContext actionExecutedContext = new HttpActionExecutedContext(
@@ -68,7 +71,8 @@ namespace System.Web.Http
 
         public static HttpControllerDescriptor CreateControllerDescriptor(
             HttpConfiguration config = null
-        ) {
+        )
+        {
             if (config == null)
             {
                 config = new HttpConfiguration();

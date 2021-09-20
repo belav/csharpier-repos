@@ -14,7 +14,8 @@ namespace System.Text.Json.Serialization.Converters
             ref Utf8JsonReader reader,
             Type typeToConvert,
             JsonSerializerOptions options
-        ) {
+        )
+        {
             return reader.GetDecimal();
         }
 
@@ -22,7 +23,8 @@ namespace System.Text.Json.Serialization.Converters
             Utf8JsonWriter writer,
             decimal value,
             JsonSerializerOptions options
-        ) {
+        )
+        {
             writer.WriteNumberValue(value);
         }
 
@@ -36,18 +38,21 @@ namespace System.Text.Json.Serialization.Converters
             decimal value,
             JsonSerializerOptions options,
             ref WriteStack state
-        ) {
+        )
+        {
             writer.WritePropertyName(value);
         }
 
         internal override decimal ReadNumberWithCustomHandling(
             ref Utf8JsonReader reader,
             JsonNumberHandling handling
-        ) {
+        )
+        {
             if (
                 reader.TokenType == JsonTokenType.String
                 && (JsonNumberHandling.AllowReadingFromString & handling) != 0
-            ) {
+            )
+            {
                 return reader.GetDecimalWithQuotes();
             }
 
@@ -58,7 +63,8 @@ namespace System.Text.Json.Serialization.Converters
             Utf8JsonWriter writer,
             decimal value,
             JsonNumberHandling handling
-        ) {
+        )
+        {
             if ((JsonNumberHandling.WriteAsString & handling) != 0)
             {
                 writer.WriteNumberValueAsString(value);

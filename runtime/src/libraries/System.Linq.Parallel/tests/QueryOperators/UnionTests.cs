@@ -95,7 +95,8 @@ namespace System.Linq.Parallel.Tests
                         Math.Max(DuplicateFactor, leftCount / 2),
                         Math.Max(DuplicateFactor, leftCount)
                     }.Distinct()
-                ) {
+                )
+                {
                     int rightStart = leftCount - Math.Min(leftCount, rightCount) / 2;
                     ParallelQuery<int> right = Enumerable.Range(0, rightCount * DuplicateFactor)
                         .Select(x => x % rightCount + rightStart)
@@ -144,7 +145,8 @@ namespace System.Linq.Parallel.Tests
             int leftCount,
             Labeled<ParallelQuery<int>> right,
             int rightCount
-        ) {
+        )
+        {
             ParallelQuery<int> leftQuery = left.Item;
             ParallelQuery<int> rightQuery = right.Item;
             int seen = 0;
@@ -163,7 +165,8 @@ namespace System.Linq.Parallel.Tests
             int leftCount,
             Labeled<ParallelQuery<int>> right,
             int rightCount
-        ) {
+        )
+        {
             Union(left, leftCount, right, rightCount);
         }
 
@@ -174,7 +177,8 @@ namespace System.Linq.Parallel.Tests
             int leftCount,
             Labeled<ParallelQuery<int>> right,
             int rightCount
-        ) {
+        )
+        {
             ParallelQuery<int> leftQuery = left.Item;
             ParallelQuery<int> rightQuery = right.Item;
             IntegerRangeSet seenUnordered = new IntegerRangeSet(leftCount, rightCount);
@@ -202,7 +206,8 @@ namespace System.Linq.Parallel.Tests
             int leftCount,
             Labeled<ParallelQuery<int>> right,
             int rightCount
-        ) {
+        )
+        {
             Union_FirstOrdered(left, leftCount, right, rightCount);
         }
 
@@ -213,7 +218,8 @@ namespace System.Linq.Parallel.Tests
             int leftCount,
             Labeled<ParallelQuery<int>> right,
             int rightCount
-        ) {
+        )
+        {
             ParallelQuery<int> leftQuery = left.Item;
             ParallelQuery<int> rightQuery = right.Item;
             IntegerRangeSet seenUnordered = new IntegerRangeSet(0, leftCount);
@@ -241,7 +247,8 @@ namespace System.Linq.Parallel.Tests
             int leftCount,
             Labeled<ParallelQuery<int>> right,
             int rightCount
-        ) {
+        )
+        {
             Union_SecondOrdered(left, leftCount, right, rightCount);
         }
 
@@ -270,7 +277,8 @@ namespace System.Linq.Parallel.Tests
             int leftCount,
             Labeled<ParallelQuery<int>> right,
             int rightCount
-        ) {
+        )
+        {
             ParallelQuery<int> leftQuery = left.Item;
             ParallelQuery<int> rightQuery = right.Item;
             int seen = 0;
@@ -286,7 +294,8 @@ namespace System.Linq.Parallel.Tests
             int leftCount,
             Labeled<ParallelQuery<int>> right,
             int rightCount
-        ) {
+        )
+        {
             Union_NotPipelined(left, leftCount, right, rightCount);
         }
 
@@ -297,7 +306,8 @@ namespace System.Linq.Parallel.Tests
             int leftCount,
             Labeled<ParallelQuery<int>> right,
             int rightCount
-        ) {
+        )
+        {
             ParallelQuery<int> leftQuery = left.Item;
             ParallelQuery<int> rightQuery = right.Item;
             IntegerRangeSet seenUnordered = new IntegerRangeSet(leftCount, rightCount);
@@ -324,7 +334,8 @@ namespace System.Linq.Parallel.Tests
             int leftCount,
             Labeled<ParallelQuery<int>> right,
             int rightCount
-        ) {
+        )
+        {
             Union_FirstOrdered_NotPipelined(left, leftCount, right, rightCount);
         }
 
@@ -335,7 +346,8 @@ namespace System.Linq.Parallel.Tests
             int leftCount,
             Labeled<ParallelQuery<int>> right,
             int rightCount
-        ) {
+        )
+        {
             ParallelQuery<int> leftQuery = left.Item;
             ParallelQuery<int> rightQuery = right.Item;
             IntegerRangeSet seenUnordered = new IntegerRangeSet(0, leftCount);
@@ -362,7 +374,8 @@ namespace System.Linq.Parallel.Tests
             int leftCount,
             Labeled<ParallelQuery<int>> right,
             int rightCount
-        ) {
+        )
+        {
             Union_SecondOrdered_NotPipelined(left, leftCount, right, rightCount);
         }
 
@@ -384,7 +397,8 @@ namespace System.Linq.Parallel.Tests
                         rightQuery.Select(x => (x - leftCount) % DuplicateFactor + offset),
                         new ModularCongruenceComparer(DuplicateFactor + DuplicateFactor / 2)
                     )
-            ) {
+            )
+            {
                 seen.Add(i);
             }
             seen.AssertComplete();
@@ -404,7 +418,8 @@ namespace System.Linq.Parallel.Tests
             int leftCount,
             Labeled<ParallelQuery<int>> right,
             int rightCount
-        ) {
+        )
+        {
             ParallelQuery<int> leftQuery = left.Item;
             ParallelQuery<int> rightQuery = right.Item;
             leftCount = Math.Min(DuplicateFactor, leftCount);
@@ -419,7 +434,8 @@ namespace System.Linq.Parallel.Tests
                         rightQuery.Select(x => (x - leftCount) % DuplicateFactor + offset),
                         new ModularCongruenceComparer(DuplicateFactor + DuplicateFactor / 2)
                     )
-            ) {
+            )
+            {
                 Assert.Equal(seen++, i);
             }
             Assert.Equal(expectedCount, seen);
@@ -433,7 +449,8 @@ namespace System.Linq.Parallel.Tests
             int leftCount,
             Labeled<ParallelQuery<int>> right,
             int rightCount
-        ) {
+        )
+        {
             Union_Distinct(left, leftCount, right, rightCount);
         }
 
@@ -475,7 +492,8 @@ namespace System.Linq.Parallel.Tests
             int leftCount,
             Labeled<ParallelQuery<int>> right,
             int rightCount
-        ) {
+        )
+        {
             ParallelQuery<int> leftQuery = left.Item;
             ParallelQuery<int> rightQuery = right.Item;
             leftCount = Math.Min(DuplicateFactor, leftCount);
@@ -505,7 +523,8 @@ namespace System.Linq.Parallel.Tests
             int leftCount,
             Labeled<ParallelQuery<int>> right,
             int rightCount
-        ) {
+        )
+        {
             Union_Distinct_NotPipelined(left, leftCount, right, rightCount);
         }
 
@@ -517,7 +536,8 @@ namespace System.Linq.Parallel.Tests
             ParallelQuery<int> rightQuery,
             int rightCount,
             int count
-        ) {
+        )
+        {
             // The difference between this test and the previous, is that it's not possible to
             // get non-unique results from ParallelEnumerable.Range()...
             // Those tests either need modification of source (via .Select(x => x / DuplicateFactor) or similar,
@@ -538,7 +558,8 @@ namespace System.Linq.Parallel.Tests
             ParallelQuery<int> rightQuery,
             int rightCount,
             int count
-        ) {
+        )
+        {
             Union_Unordered_SourceMultiple(leftQuery, leftCount, rightQuery, rightCount, count);
         }
 
@@ -550,7 +571,8 @@ namespace System.Linq.Parallel.Tests
             ParallelQuery<int> rightQuery,
             int rightCount,
             int count
-        ) {
+        )
+        {
             _ = leftCount;
             _ = rightCount;
             int seen = 0;
@@ -570,7 +592,8 @@ namespace System.Linq.Parallel.Tests
             ParallelQuery<int> rightQuery,
             int rightCount,
             int count
-        ) {
+        )
+        {
             Union_SourceMultiple(leftQuery, leftCount, rightQuery, rightCount, count);
         }
 

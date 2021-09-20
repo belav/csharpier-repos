@@ -19,7 +19,8 @@ namespace System.Runtime.CompilerServices
             IAsyncEnumerable<T> enumerable,
             bool continueOnCapturedContext,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             _enumerable = enumerable;
             _continueOnCapturedContext = continueOnCapturedContext;
             _cancellationToken = cancellationToken;

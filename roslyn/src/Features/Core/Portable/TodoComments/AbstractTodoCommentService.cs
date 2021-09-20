@@ -33,7 +33,8 @@ namespace Microsoft.CodeAnalysis.TodoComments
             Document document,
             ImmutableArray<TodoCommentDescriptor> commentDescriptors,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             if (commentDescriptors.IsEmpty)
                 return ImmutableArray<TodoComment>.Empty;
 
@@ -69,7 +70,8 @@ namespace Microsoft.CodeAnalysis.TodoComments
             string message,
             int start,
             ArrayBuilder<TodoComment> todoList
-        ) {
+        )
+        {
             var index = GetCommentStartingIndex(message);
             if (index >= message.Length)
             {
@@ -89,14 +91,16 @@ namespace Microsoft.CodeAnalysis.TodoComments
                         length: token.Length,
                         comparisonType: StringComparison.OrdinalIgnoreCase
                     ) != 0
-                ) {
+                )
+                {
                     continue;
                 }
 
                 if (
                     (message.Length > index + token.Length)
                     && IsIdentifierCharacter(message[index + token.Length])
-                ) {
+                )
+                {
                     // they wrote something like:
                     // todoboo
                     // instead of
@@ -114,7 +118,8 @@ namespace Microsoft.CodeAnalysis.TodoComments
             SyntaxTrivia trivia,
             int postfixLength,
             ArrayBuilder<TodoComment> todoList
-        ) {
+        )
+        {
             // this is okay since we know it is already alive
             var text = document.Text;
 
@@ -153,7 +158,8 @@ namespace Microsoft.CodeAnalysis.TodoComments
                 var lineNumber = startLine.LineNumber + 1;
                 lineNumber < endLine.LineNumber;
                 lineNumber++
-            ) {
+            )
+            {
                 var line = text.Lines[lineNumber];
                 var message = line.ToString();
 

@@ -87,7 +87,8 @@ namespace System.Collections.Immutable
             SortedInt32KeyNode<HashBucket> root,
             IEqualityComparer<T> equalityComparer,
             int count
-        ) {
+        )
+        {
             Requires.NotNull(root, nameof(root));
             Requires.NotNull(equalityComparer, nameof(equalityComparer));
 
@@ -787,7 +788,8 @@ namespace System.Collections.Immutable
             int hashCode,
             IEqualityComparer<HashBucket> hashBucketEqualityComparer,
             HashBucket newBucket
-        ) {
+        )
+        {
             bool mutated;
             if (newBucket.IsEmpty)
             {
@@ -843,7 +845,8 @@ namespace System.Collections.Immutable
             IEqualityComparer<T> equalityComparer,
             IEqualityComparer<HashBucket> hashBucketEqualityComparer,
             SortedInt32KeyNode<HashBucket> root
-        ) {
+        )
+        {
             Requires.NotNull(other, nameof(other));
             Requires.NotNull(equalityComparer, nameof(equalityComparer));
             Requires.NotNull(root, nameof(root));
@@ -1043,7 +1046,8 @@ namespace System.Collections.Immutable
             SortedInt32KeyNode<HashBucket> root,
             IEqualityComparer<T> equalityComparer,
             int count
-        ) {
+        )
+        {
             Requires.NotNull(root, nameof(root));
             Requires.NotNull(equalityComparer, nameof(equalityComparer));
             Requires.Range(count >= 0, nameof(count));
@@ -1057,7 +1061,8 @@ namespace System.Collections.Immutable
         /// <returns>The equality comparer to use.</returns>
         private static IEqualityComparer<HashBucket> GetHashBucketEqualityComparer(
             IEqualityComparer<T> valueComparer
-        ) {
+        )
+        {
             if (!ImmutableExtensions.IsValueType<T>())
             {
                 return HashBucketByRefEqualityComparer.DefaultInstance;
@@ -1081,7 +1086,8 @@ namespace System.Collections.Immutable
         private ImmutableHashSet<T> Wrap(
             SortedInt32KeyNode<HashBucket> root,
             int adjustedCountIfDifferentRoot
-        ) {
+        )
+        {
             return (root != _root)
               ? new ImmutableHashSet<T>(root, _equalityComparer, adjustedCountIfDifferentRoot)
               : this;

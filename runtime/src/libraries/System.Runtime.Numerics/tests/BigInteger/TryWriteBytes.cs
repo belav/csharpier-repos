@@ -57,7 +57,8 @@ namespace System.Numerics.Tests
             bool isUnsigned,
             bool isBigEndian,
             byte[] expectedBytes
-        ) {
+        )
+        {
             if (bi.Sign < 0 && isUnsigned)
             {
                 Assert.Throws<OverflowException>(() => bi.GetByteCount(isUnsigned));

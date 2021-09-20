@@ -18,7 +18,8 @@ namespace Microsoft.CodeAnalysis.Diagnostics.Analyzers.NamingStyles
             SymbolSpecification symbolSpecification,
             NamingStyle namingStyle,
             ReportDiagnostic enforcementLevel
-        ) {
+        )
+        {
             SymbolSpecification = symbolSpecification;
             NamingStyle = namingStyle;
             EnforcementLevel = enforcementLevel;

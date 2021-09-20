@@ -62,7 +62,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             LookupSymbolsInfo result,
             LookupOptions options,
             Binder originalBinder
-        ) {
+        )
+        {
             if (CanConsiderTypeParameters(options))
             {
                 foreach (var parameter in _methodSymbol.TypeParameters)

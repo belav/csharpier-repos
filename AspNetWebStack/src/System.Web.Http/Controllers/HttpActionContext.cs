@@ -23,7 +23,8 @@ namespace System.Web.Http.Controllers
         public HttpActionContext(
             HttpControllerContext controllerContext,
             HttpActionDescriptor actionDescriptor
-        ) {
+        )
+        {
             if (controllerContext == null)
             {
                 throw Error.ArgumentNull("controllerContext");

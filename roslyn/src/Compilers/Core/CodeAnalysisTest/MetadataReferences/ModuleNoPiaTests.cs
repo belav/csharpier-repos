@@ -24,7 +24,8 @@ namespace Microsoft.CodeAnalysis.UnitTests
                     metadata2 = AssemblyMetadata.CreateFromImage(
                         TestResources.SymbolsTests.NoPia.LocalTypes2
                     )
-            ) {
+            )
+            {
                 var pia1 = piaMetadata.GetAssembly().Modules[0];
                 var localTypes1 = metadata1.GetAssembly().Modules[0];
                 var localTypes2 = metadata2.GetAssembly().Modules[0];

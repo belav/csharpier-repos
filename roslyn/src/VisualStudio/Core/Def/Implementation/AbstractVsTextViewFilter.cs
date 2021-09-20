@@ -29,10 +29,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation
 {
     internal abstract class AbstractVsTextViewFilter : AbstractOleCommandTarget, IVsTextViewFilter
     {
-        public AbstractVsTextViewFilter(
-            IWpfTextView wpfTextView,
-            IComponentModel componentModel
-        ) : base(wpfTextView, componentModel) { }
+        public AbstractVsTextViewFilter(IWpfTextView wpfTextView, IComponentModel componentModel)
+            : base(wpfTextView, componentModel) { }
 
         int IVsTextViewFilter.GetDataTipText(TextSpan[] pSpan, out string pbstrText)
         {
@@ -68,7 +66,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation
             ITextBuffer subjectBuffer,
             TextSpan[] pSpan,
             out string pbstrText
-        ) {
+        )
+        {
             pbstrText = null;
 
             var vsBuffer = EditorAdaptersFactory.GetBufferAdapter(subjectBuffer);
@@ -84,7 +83,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation
                     FunctionId.Debugging_VsLanguageDebugInfo_GetDataTipText,
                     CancellationToken.None
                 )
-            ) {
+            )
+            {
                 pbstrText = null;
                 if (pSpan == null || pSpan.Length != 1)
                 {
@@ -113,7 +113,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation
                         if (
                             ErrorHandler.Succeeded(debugger.GetMode(debugMode))
                             && debugMode[0] != DBGMODE.DBGMODE_Design
-                        ) {
+                        )
+                        {
                             var textSpan = pSpan[0];
 
                             var textSnapshot = subjectBuffer.CurrentSnapshot;
@@ -188,7 +189,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation
             int iIndex,
             TextSpan[] pSpan,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var braceMatcher = ComponentModel.GetService<IBraceMatchingService>();
             return GetPairExtentsWorker(
                 WpfTextView,
@@ -211,7 +213,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation
             TextSpan[] pSpan,
             bool extendSelection,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             pSpan[0].iStartLine = pSpan[0].iEndLine = iLine;
             pSpan[0].iStartIndex = pSpan[0].iEndIndex = iIndex;
 

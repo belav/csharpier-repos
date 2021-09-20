@@ -64,7 +64,8 @@ namespace Microsoft.AspNetCore.Builder.Extensions
             string matchPath,
             string basePath,
             string requestPath
-        ) {
+        )
+        {
             HttpContext context = CreateRequest(basePath, requestPath);
             var builder = new ApplicationBuilder(serviceProvider: null!);
             builder.Map(matchPath, UseSuccess);
@@ -95,7 +96,8 @@ namespace Microsoft.AspNetCore.Builder.Extensions
             string matchPath,
             string basePath,
             string requestPath
-        ) {
+        )
+        {
             HttpContext context = CreateRequest(basePath, requestPath);
             var builder = new ApplicationBuilder(serviceProvider: null!);
             builder.Map(matchPath, subBuilder => subBuilder.Run(Success));
@@ -129,7 +131,8 @@ namespace Microsoft.AspNetCore.Builder.Extensions
             string matchPath,
             string basePath,
             string requestPath
-        ) {
+        )
+        {
             HttpContext context = CreateRequest(basePath, requestPath);
             var builder = new ApplicationBuilder(serviceProvider: null!);
             builder.Map(matchPath, true, subBuilder => subBuilder.Run(Success));
@@ -166,7 +169,8 @@ namespace Microsoft.AspNetCore.Builder.Extensions
             string matchPath,
             string basePath,
             string requestPath
-        ) {
+        )
+        {
             HttpContext context = CreateRequest(basePath, requestPath);
             var builder = new ApplicationBuilder(serviceProvider: null!);
             builder.Map(matchPath, UseNotImplemented);
@@ -191,7 +195,8 @@ namespace Microsoft.AspNetCore.Builder.Extensions
             string matchPath,
             string basePath,
             string requestPath
-        ) {
+        )
+        {
             HttpContext context = CreateRequest(basePath, requestPath);
             var builder = new ApplicationBuilder(serviceProvider: null!);
             builder.Map(matchPath, UseNotImplemented);

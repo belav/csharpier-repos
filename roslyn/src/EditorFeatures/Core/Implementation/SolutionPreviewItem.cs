@@ -29,7 +29,8 @@ namespace Microsoft.CodeAnalysis.Editor
             ProjectId projectId,
             DocumentId? documentId,
             Func<CancellationToken, Task<object?>> lazyPreview
-        ) {
+        )
+        {
             ProjectId = projectId;
             DocumentId = documentId;
             LazyPreview = lazyPreview;

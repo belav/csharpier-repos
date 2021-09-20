@@ -40,7 +40,8 @@ namespace Microsoft.CodeAnalysis.LanguageServer.Handler
             DocumentOnTypeFormattingParams request,
             RequestContext context,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var edits = new ArrayBuilder<TextEdit>();
             var document = context.Document;
             if (document != null)

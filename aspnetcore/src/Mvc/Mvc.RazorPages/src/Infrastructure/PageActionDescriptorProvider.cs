@@ -32,7 +32,8 @@ namespace Microsoft.AspNetCore.Mvc.RazorPages.Infrastructure
             IEnumerable<IPageRouteModelProvider> pageRouteModelProviders,
             IOptions<MvcOptions> mvcOptionsAccessor,
             IOptions<RazorPagesOptions> pagesOptionsAccessor
-        ) {
+        )
+        {
             _routeModelProviders = pageRouteModelProviders.OrderBy(p => p.Order).ToArray();
             _mvcOptions = mvcOptionsAccessor.Value;
 

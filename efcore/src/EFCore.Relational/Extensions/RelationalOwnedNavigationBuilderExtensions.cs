@@ -25,7 +25,8 @@ namespace Microsoft.EntityFrameworkCore
             this OwnedNavigationBuilder ownedNavigationBuilder,
             string name,
             string? sql
-        ) {
+        )
+        {
             Check.NotNull(ownedNavigationBuilder, nameof(ownedNavigationBuilder));
             Check.NotEmpty(name, nameof(name));
             Check.NullButNotEmpty(sql, nameof(sql));
@@ -70,8 +71,9 @@ namespace Microsoft.EntityFrameworkCore
             this OwnedNavigationBuilder<TEntity, TDependentEntity> ownedNavigationBuilder,
             string name,
             string? sql
-        ) where TEntity : class
-          where TDependentEntity : class =>
+        )
+            where TEntity : class
+            where TDependentEntity : class =>
             (OwnedNavigationBuilder<TEntity, TDependentEntity>)HasCheckConstraint(
                 (OwnedNavigationBuilder)ownedNavigationBuilder,
                 name,

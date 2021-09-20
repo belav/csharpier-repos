@@ -70,7 +70,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Xaml.Implementation.LanguageSe
             TDiagnosticsParams diagnosticsParams,
             RequestContext context,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             Contract.ThrowIfNull(context.Solution);
 
             using var progress = BufferedProgress.Create(GetProgress(diagnosticsParams));
@@ -150,7 +151,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Xaml.Implementation.LanguageSe
             ImmutableArray<XamlDiagnostic>? xamlDiagnostics,
             Document document,
             SourceText text
-        ) {
+        )
+        {
             if (xamlDiagnostics == null)
             {
                 return null;

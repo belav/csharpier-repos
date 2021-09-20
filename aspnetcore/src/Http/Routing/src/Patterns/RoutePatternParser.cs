@@ -230,7 +230,8 @@ namespace Microsoft.AspNetCore.Routing.Patterns
             if (
                 decoded.StartsWith("*", StringComparison.Ordinal)
                 && decoded.EndsWith("?", StringComparison.Ordinal)
-            ) {
+            )
+            {
                 context.Error = Resources.TemplateRoute_CatchAllCannotBeOptional;
                 return false;
             }
@@ -341,7 +342,8 @@ namespace Microsoft.AspNetCore.Routing.Patterns
                         part is RoutePatternParameterPart parameter
                         && parameter.IsCatchAll
                         && (i != segments.Count - 1 || j != segment.Parts.Count - 1)
-                    ) {
+                    )
+                    {
                         context.Error = Resources.TemplateRoute_CatchAllMustBeLast;
                         return false;
                     }
@@ -361,7 +363,8 @@ namespace Microsoft.AspNetCore.Routing.Patterns
                     part is RoutePatternParameterPart parameter
                     && parameter.IsCatchAll
                     && parts.Count > 1
-                ) {
+                )
+                {
                     context.Error = Resources.TemplateRoute_CannotHaveCatchAllInMultiSegment;
                     return false;
                 }
@@ -377,7 +380,8 @@ namespace Microsoft.AspNetCore.Routing.Patterns
                     part is RoutePatternParameterPart parameter
                     && parameter.IsOptional
                     && parts.Count > 1
-                ) {
+                )
+                {
                     // This optional parameter is the last part in the segment
                     if (i == parts.Count - 1)
                     {
@@ -401,7 +405,8 @@ namespace Microsoft.AspNetCore.Routing.Patterns
                         else if (
                             previousPart is RoutePatternLiteralPart literal
                             && literal.Content != PeriodString
-                        ) {
+                        )
+                        {
                             // The optional parameter is preceded by a literal other than period.
                             // Example of error message:
                             // "In the segment '{RouteValue}-{param?}', the optional parameter 'param' is preceded
@@ -460,7 +465,8 @@ namespace Microsoft.AspNetCore.Routing.Patterns
             if (
                 parameterName.Length == 0
                 || parameterName.IndexOfAny(InvalidParameterNameChars) >= 0
-            ) {
+            )
+            {
                 context.Error = Resources.FormatTemplateRoute_InvalidParameterName(parameterName);
                 return false;
             }

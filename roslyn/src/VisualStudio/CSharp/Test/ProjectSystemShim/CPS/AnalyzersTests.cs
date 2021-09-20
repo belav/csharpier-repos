@@ -95,7 +95,8 @@ namespace Roslyn.VisualStudio.CSharp.UnitTests.ProjectSystemShim.CPS
 
             using (
                 var project = await CSharpHelpers.CreateCSharpCPSProjectAsync(environment, "Test")
-            ) {
+            )
+            {
                 project.SetOptions(ImmutableArray.Create($"/ruleset:{ruleSetFile.Path}"));
 
                 projectId = project.Id;

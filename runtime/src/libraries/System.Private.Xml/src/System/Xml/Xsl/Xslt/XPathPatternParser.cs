@@ -104,7 +104,8 @@ namespace System.Xml.Xsl.Xslt
                         _scanner.CanBeFunction
                         && _scanner.Prefix.Length == 0
                         && (_scanner.Name == "id" || _scanner.Name == "key")
-                    ) {
+                    )
+                    {
                         opnd = ParseIdKeyPattern();
                         switch (_scanner.Kind)
                         {

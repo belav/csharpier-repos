@@ -57,7 +57,8 @@ namespace System.Security.Cryptography
             int kdfCount,
             Span<byte> destination,
             out int bytesWritten
-        ) {
+        )
+        {
             return Key.TryExportPkcs8KeyBlob(
                 pkcs8Password,
                 kdfCount,

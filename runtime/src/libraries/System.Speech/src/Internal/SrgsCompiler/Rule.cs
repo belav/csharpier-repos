@@ -109,7 +109,8 @@ namespace System.Speech.Internal.SrgsCompiler
                 && (!_cfgRule.Import)
                 && _id != "VOID"
                 && _firstState.NumArcs == 0
-            ) {
+            )
+            {
                 XmlParser.ThrowSrgsException(SRID.EmptyRule);
             }
             else
@@ -182,7 +183,8 @@ namespace System.Speech.Internal.SrgsCompiler
                     _startArc.IsEpsilonTransition
                     && _startArc.End != null
                     && Graph.MoveSemanticTagRight(_startArc)
-                ) {
+                )
+                {
                     // Discard the arc and replace it with the startArc
                     _firstState = _startArc.End;
                     System.Diagnostics.Debug.Assert(_startArc.End == _startArc.End);
@@ -246,7 +248,8 @@ namespace System.Speech.Internal.SrgsCompiler
             int iSerialize,
             GrammarOptions SemanticFormat,
             ref int cImportedRules
-        ) {
+        )
+        {
             _id = id;
             _cfgRule = cfgRule;
             _firstState = null;
@@ -274,7 +277,8 @@ namespace System.Speech.Internal.SrgsCompiler
                     endArc.IsEpsilonTransition
                     && endState.OutArcs.CountIsOne
                     && Graph.MoveSemanticTagLeft(endArc)
-                ) {
+                )
+                {
                     // State has a single input epsilon transition
                     // Delete the input epsilon transition and delete state.
                     endArc.Start = null;

@@ -635,7 +635,8 @@ namespace System.Xml
             XmlDocumentType dtNode,
             bool bUseResolver,
             XmlResolver? resolver
-        ) {
+        )
+        {
             _doc = dtNode.OwnerDocument;
             XmlParserContext pc = new XmlParserContext(
                 null,
@@ -736,7 +737,8 @@ namespace System.Xml
                         XmlQualifiedName,
                         SchemaElementDecl
                     > elementDecls in schInfo.ElementDecls
-                ) {
+                )
+                {
                     SchemaElementDecl elementDecl = elementDecls.Value;
                     if (elementDecl.AttDefs != null)
                     {
@@ -745,7 +747,8 @@ namespace System.Xml
                                 XmlQualifiedName,
                                 SchemaAttDef
                             > attDefs in elementDecl.AttDefs
-                        ) {
+                        )
+                        {
                             SchemaAttDef attdef = attDefs.Value;
                             if (attdef.Datatype.TokenizedType == XmlTokenizedType.ID)
                             {
@@ -804,7 +807,8 @@ namespace System.Xml
                             !bHasDefXmlnsAttr
                             && attr.Prefix.Length == 0
                             && attr.LocalName == _doc.strXmlns
-                        ) {
+                        )
+                        {
                             // Save the case xmlns="..." where xmlns is the LocalName
                             mgr.AddNamespace(string.Empty, attr.Value);
                             bHasDefXmlnsAttr = true;
@@ -813,7 +817,8 @@ namespace System.Xml
                             spaceMode == XmlSpace.None
                             && attr.Prefix == _doc.strXml
                             && attr.LocalName == _doc.strSpace
-                        ) {
+                        )
+                        {
                             // Save xml:space context
                             if (attr.Value == "default")
                                 spaceMode = XmlSpace.Default;
@@ -824,7 +829,8 @@ namespace System.Xml
                             lang == null
                             && attr.Prefix == _doc.strXml
                             && attr.LocalName == _doc.strLang
-                        ) {
+                        )
+                        {
                             // Save xml:lag context
                             lang = attr.Value;
                         }
@@ -850,7 +856,8 @@ namespace System.Xml
             XmlNode parentNode,
             string innerxmltext,
             XmlNodeType nt
-        ) {
+        )
+        {
             //the function shouldn't be used to set innerxml for XmlDocument node
             Debug.Assert(parentNode.NodeType != XmlNodeType.Document);
             _doc = parentNode.OwnerDocument;
@@ -909,7 +916,8 @@ namespace System.Xml
             XmlElement elem,
             XmlNamespaceManager mgr,
             bool fCheckElemAttrs
-        ) {
+        )
+        {
             //remove the duplicate attributes on current node first
             mgr.PushScope();
             XmlAttributeCollection attrs = elem.Attributes;
@@ -1039,7 +1047,8 @@ namespace System.Xml
             XmlNodeType nt,
             XmlParserContext context,
             XmlDocument doc
-        ) {
+        )
+        {
             XmlNodeType contentNT = nt;
             if (contentNT == XmlNodeType.Entity || contentNT == XmlNodeType.EntityReference)
                 contentNT = XmlNodeType.Element;
@@ -1099,7 +1108,8 @@ namespace System.Xml
             out string? version,
             out string? encoding,
             out string? standalone
-        ) {
+        )
+        {
             version = null;
             encoding = null;
             standalone = null;

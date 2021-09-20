@@ -55,7 +55,8 @@ namespace System.Net.Http
                                 buffer,
                                 out ushort serializedShort
                             )
-                        ) {
+                        )
+                        {
                             value = serializedShort - TwoByteLengthMask;
                             bytesRead = 2;
                             return true;
@@ -76,7 +77,8 @@ namespace System.Net.Http
                                 buffer,
                                 out ulong serializedLong
                             )
-                        ) {
+                        )
+                        {
                             value = (long)(serializedLong - EightByteLengthMask);
                             Debug.Assert(
                                 value >= 0 && value <= EightByteLimit,
@@ -142,7 +144,8 @@ namespace System.Net.Http
             in ReadOnlySequence<byte> buffer,
             out SequencePosition consumed,
             out SequencePosition examined
-        ) {
+        )
+        {
             var reader = new SequenceReader<byte>(buffer);
             if (TryRead(ref reader, out long value))
             {
@@ -178,7 +181,8 @@ namespace System.Net.Http
                         buffer,
                         (ushort)((uint)longToEncode | TwoByteLengthMask)
                     )
-                ) {
+                )
+                {
                     bytesWritten = 2;
                     return true;
                 }
@@ -190,7 +194,8 @@ namespace System.Net.Http
                         buffer,
                         (uint)longToEncode | FourByteLengthMask
                     )
-                ) {
+                )
+                {
                     bytesWritten = 4;
                     return true;
                 }
@@ -202,7 +207,8 @@ namespace System.Net.Http
                         buffer,
                         (ulong)longToEncode | EightByteLengthMask
                     )
-                ) {
+                )
+                {
                     bytesWritten = 8;
                     return true;
                 }

@@ -120,7 +120,8 @@ namespace Microsoft.CodeAnalysis.CSharp.MisplacedUsingDirectives
             if (
                 option.Value != AddImportPlacement.InsideNamespace
                 || ShouldSuppressDiagnostic(compilationUnit)
-            ) {
+            )
+            {
                 return;
             }
 
@@ -147,7 +148,8 @@ namespace Microsoft.CodeAnalysis.CSharp.MisplacedUsingDirectives
             DiagnosticDescriptor descriptor,
             IEnumerable<UsingDirectiveSyntax> usingDirectives,
             CodeStyleOption2<AddImportPlacement> option
-        ) {
+        )
+        {
             foreach (var usingDirective in usingDirectives)
             {
                 context.ReportDiagnostic(

@@ -254,7 +254,8 @@ namespace Microsoft.AspNetCore.Components.Server.Circuits
                 if (
                     !allowDeduplication
                     || !_deduplicatedStringIndices.TryGetValue(value, out stringIndex)
-                ) {
+                )
+                {
                     stringIndex = _strings.Count;
                     _strings.Append(value);
 

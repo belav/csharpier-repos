@@ -17,7 +17,8 @@ namespace System.Web.WebPages.Razor.Test
             public override WebPageRazorHost CreateHost(
                 string virtualPath,
                 string physicalPath = null
-            ) {
+            )
+            {
                 return new TestHost();
             }
         }

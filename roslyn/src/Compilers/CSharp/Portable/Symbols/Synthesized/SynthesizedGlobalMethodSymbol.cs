@@ -34,7 +34,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             PrivateImplementationDetails privateImplType,
             TypeSymbol returnType,
             string name
-        ) {
+        )
+        {
             Debug.Assert((object)containingModule != null);
             Debug.Assert(privateImplType != null);
             Debug.Assert((object)returnType != null);
@@ -277,13 +278,15 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
 
         internal sealed override bool IsMetadataNewSlot(
             bool ignoreInterfaceImplementationChanges = false
-        ) {
+        )
+        {
             return false;
         }
 
         internal sealed override bool IsMetadataVirtual(
             bool ignoreInterfaceImplementationChanges = false
-        ) {
+        )
+        {
             return false;
         }
 

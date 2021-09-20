@@ -33,7 +33,8 @@ namespace Microsoft.AspNetCore.Mvc.ApplicationModels
             TypeInfo declaredModelType,
             TypeInfo handlerType,
             IReadOnlyList<object> handlerAttributes
-        ) {
+        )
+        {
             ActionDescriptor =
                 actionDescriptor ?? throw new ArgumentNullException(nameof(actionDescriptor));
             DeclaredModelType = declaredModelType;

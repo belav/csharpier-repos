@@ -61,7 +61,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             int generation,
             int closureOrdinal,
             int closureGeneration
-        ) {
+        )
+        {
             // -1 for singleton static lambdas
             Debug.Assert(closureOrdinal >= -1);
             Debug.Assert(methodOrdinal >= 0);
@@ -80,7 +81,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             int index,
             int submissionSlotIndex,
             string moduleId
-        ) {
+        )
+        {
             var name = "<" + moduleId + ">f__AnonymousType" + StringExtensions.GetNumeral(index);
             if (submissionSlotIndex >= 0)
             {
@@ -105,7 +107,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                         CultureInfo.InvariantCulture,
                         out index
                     )
-                ) {
+                )
+                {
                     return true;
                 }
             }
@@ -127,11 +130,13 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
         internal static bool TryParseAnonymousTypeParameterName(
             string typeParameterName,
             out string propertyName
-        ) {
+        )
+        {
             if (
                 typeParameterName.StartsWith("<", StringComparison.Ordinal)
                 && typeParameterName.EndsWith(">j__TPar", StringComparison.Ordinal)
-            ) {
+            )
+            {
                 propertyName = typeParameterName.Substring(1, typeParameterName.Length - 9);
                 return true;
             }
@@ -144,7 +149,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             string methodName,
             int methodOrdinal,
             int generation
-        ) {
+        )
+        {
             Debug.Assert(generation >= 0);
             Debug.Assert(methodOrdinal >= -1);
 
@@ -168,7 +174,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             int methodGeneration,
             int lambdaOrdinal,
             int lambdaGeneration
-        ) {
+        )
+        {
             Debug.Assert(methodOrdinal >= -1);
             Debug.Assert(methodGeneration >= 0);
             Debug.Assert(lambdaOrdinal >= 0);
@@ -191,7 +198,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             int generation,
             int lambdaOrdinal,
             int lambdaGeneration
-        ) {
+        )
+        {
             Debug.Assert(methodOrdinal >= -1);
             Debug.Assert(lambdaOrdinal >= 0);
 
@@ -211,7 +219,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             int methodGeneration,
             int lambdaOrdinal,
             int lambdaGeneration
-        ) {
+        )
+        {
             Debug.Assert(methodOrdinal >= -1);
             Debug.Assert(methodGeneration >= 0);
             Debug.Assert(lambdaOrdinal >= 0);
@@ -238,7 +247,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             char suffixTerminator = default,
             int entityOrdinal = -1,
             int entityGeneration = -1
-        ) {
+        )
+        {
             Debug.Assert(methodOrdinal >= -1);
             Debug.Assert(methodGeneration >= 0 || methodGeneration == -1 && methodOrdinal == -1);
             Debug.Assert(entityOrdinal >= -1);
@@ -313,7 +323,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             SynthesizedLocalKind kind,
             int slotIndex,
             string localNameOpt = null
-        ) {
+        )
+        {
             Debug.Assert((localNameOpt != null) == (kind == SynthesizedLocalKind.UserDefined));
             Debug.Assert(slotIndex >= 0);
             Debug.Assert(kind.IsLongLived());
@@ -381,7 +392,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             out GeneratedNameKind kind,
             out int openBracketOffset,
             out int closeBracketOffset
-        ) {
+        )
+        {
             openBracketOffset = -1;
             if (name.StartsWith("CS$<", StringComparison.Ordinal))
             {
@@ -416,7 +428,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             string generatedName,
             GeneratedNameKind requiredKind,
             out string methodName
-        ) {
+        )
+        {
             int openBracketOffset;
             int closeBracketOffset;
             GeneratedNameKind kind;
@@ -427,7 +440,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                     out openBracketOffset,
                     out closeBracketOffset
                 )
-            ) {
+            )
+            {
                 methodName = null;
                 return false;
             }
@@ -467,7 +481,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                 lastUnder - 1 < 0
                 || lastUnder == fieldName.Length
                 || fieldName[lastUnder - 1] != '_'
-            ) {
+            )
+            {
                 slotIndex = -1;
                 return false;
             }
@@ -480,7 +495,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                     out slotIndex
                 )
                 && slotIndex >= 1
-            ) {
+            )
+            {
                 slotIndex--;
                 return true;
             }
@@ -595,7 +611,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             int methodOrdinal,
             int localFunctionOrdinal,
             int generation
-        ) {
+        )
+        {
             return MakeMethodScopedSynthesizedName(
                 GeneratedNameKind.DynamicCallSiteContainerType,
                 methodOrdinal,
@@ -619,7 +636,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             BitVector byRefs,
             bool returnsVoid,
             int generation
-        ) {
+        )
+        {
             var pooledBuilder = PooledStringBuilder.GetInstance();
             var builder = pooledBuilder.Builder;
 

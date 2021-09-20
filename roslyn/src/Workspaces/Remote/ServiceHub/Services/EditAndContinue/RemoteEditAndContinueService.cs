@@ -40,7 +40,8 @@ namespace Microsoft.CodeAnalysis.EditAndContinue
             public ManagedEditAndContinueDebuggerService(
                 RemoteCallback<IRemoteEditAndContinueService.ICallback> callback,
                 RemoteServiceCallbackId callbackId
-            ) {
+            )
+            {
                 _callback = callback;
                 _callbackId = callbackId;
             }
@@ -133,7 +134,8 @@ namespace Microsoft.CodeAnalysis.EditAndContinue
             RemoteServiceCallbackId callbackId,
             bool captureMatchingDocuments,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             return RunServiceAsync(
                 async cancellationToken =>
                 {
@@ -161,7 +163,8 @@ namespace Microsoft.CodeAnalysis.EditAndContinue
         /// </summary>
         public ValueTask<ImmutableArray<DocumentId>> BreakStateEnteredAsync(
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             return RunServiceAsync(
                 cancellationToken =>
                 {
@@ -177,7 +180,8 @@ namespace Microsoft.CodeAnalysis.EditAndContinue
         /// </summary>
         public ValueTask<ImmutableArray<DocumentId>> EndDebuggingSessionAsync(
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             return RunServiceAsync(
                 cancellationToken =>
                 {
@@ -196,7 +200,8 @@ namespace Microsoft.CodeAnalysis.EditAndContinue
             RemoteServiceCallbackId callbackId,
             DocumentId documentId,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             return RunServiceAsync(
                 async cancellationToken =>
                 {
@@ -227,7 +232,8 @@ namespace Microsoft.CodeAnalysis.EditAndContinue
             RemoteServiceCallbackId callbackId,
             string? sourceFilePath,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             return RunServiceAsync(
                 async cancellationToken =>
                 {
@@ -254,7 +260,8 @@ namespace Microsoft.CodeAnalysis.EditAndContinue
             PinnedSolutionInfo solutionInfo,
             RemoteServiceCallbackId callbackId,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             return RunServiceAsync(
                 async cancellationToken =>
                 {
@@ -307,7 +314,8 @@ namespace Microsoft.CodeAnalysis.EditAndContinue
         /// </summary>
         public ValueTask<ImmutableArray<DocumentId>> CommitSolutionUpdateAsync(
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             return RunServiceAsync(
                 cancellationToken =>
                 {
@@ -342,7 +350,8 @@ namespace Microsoft.CodeAnalysis.EditAndContinue
             PinnedSolutionInfo solutionInfo,
             ImmutableArray<DocumentId> documentIds,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             return RunServiceAsync(
                 async cancellationToken =>
                 {
@@ -366,7 +375,8 @@ namespace Microsoft.CodeAnalysis.EditAndContinue
             RemoteServiceCallbackId callbackId,
             DocumentId documentId,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             return RunServiceAsync(
                 async cancellationToken =>
                 {
@@ -392,7 +402,8 @@ namespace Microsoft.CodeAnalysis.EditAndContinue
             PinnedSolutionInfo solutionInfo,
             ManagedInstructionId instructionId,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             return RunServiceAsync(
                 async cancellationToken =>
                 {
@@ -418,7 +429,8 @@ namespace Microsoft.CodeAnalysis.EditAndContinue
             RemoteServiceCallbackId callbackId,
             ManagedInstructionId instructionId,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             return RunServiceAsync(
                 async cancellationToken =>
                 {
@@ -444,7 +456,8 @@ namespace Microsoft.CodeAnalysis.EditAndContinue
             PinnedSolutionInfo solutionInfo,
             DocumentId documentId,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             return RunServiceAsync(
                 async cancellationToken =>
                 {

@@ -19,7 +19,8 @@ namespace Microsoft.AspNetCore.Mvc.ModelBinding.Validation
         public ClientValidatorProviderContext(
             ModelMetadata modelMetadata,
             IList<ClientValidatorItem> items
-        ) {
+        )
+        {
             ModelMetadata = modelMetadata;
             Results = items;
         }

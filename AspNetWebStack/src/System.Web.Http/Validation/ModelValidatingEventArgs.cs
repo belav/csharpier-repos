@@ -11,7 +11,8 @@ namespace System.Web.Http.Validation
         public ModelValidatingEventArgs(
             HttpActionContext actionContext,
             ModelValidationNode parentNode
-        ) {
+        )
+        {
             if (actionContext == null)
             {
                 throw Error.ArgumentNull("actionContext");

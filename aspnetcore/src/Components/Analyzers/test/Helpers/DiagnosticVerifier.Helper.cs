@@ -47,7 +47,8 @@ namespace TestHelper
             string[] sources,
             string language,
             DiagnosticAnalyzer analyzer
-        ) {
+        )
+        {
             return GetSortedDiagnosticsFromDocuments(analyzer, GetDocuments(sources, language));
         }
 
@@ -61,7 +62,8 @@ namespace TestHelper
         protected static Diagnostic[] GetSortedDiagnosticsFromDocuments(
             DiagnosticAnalyzer analyzer,
             Document[] documents
-        ) {
+        )
+        {
             var projects = new HashSet<Project>();
             foreach (var document in documents)
             {
@@ -148,7 +150,8 @@ namespace TestHelper
         protected static Document CreateDocument(
             string source,
             string language = LanguageNames.CSharp
-        ) {
+        )
+        {
             return CreateProject(new[] { source }, language).Documents.First();
         }
 
@@ -161,7 +164,8 @@ namespace TestHelper
         private static Project CreateProject(
             string[] sources,
             string language = LanguageNames.CSharp
-        ) {
+        )
+        {
             string fileNamePrefix = DefaultFilePathPrefix;
             string fileExt =
                 language == LanguageNames.CSharp ? CSharpDefaultFileExt : VisualBasicDefaultExt;

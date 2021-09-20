@@ -757,7 +757,8 @@ namespace System.Text.Tests
         private async Task RunReadTestAsync(
             Func<Stream, CancellationToken, MemoryStream, ValueTask<int>> callback,
             bool suppressExpectedCancellationTokenAsserts = false
-        ) {
+        )
+        {
             CancellationToken expectedCancellationToken = new CancellationTokenSource().Token;
             MemoryStream sink = new MemoryStream();
             MemoryStream innerStream = new MemoryStream();
@@ -1386,7 +1387,8 @@ namespace System.Text.Tests
                 int charCount,
                 byte[] bytes,
                 int byteIndex
-            ) {
+            )
+            {
                 Span<char> span = chars.AsSpan(charIndex, charCount);
                 for (int i = 0; i < span.Length; i++)
                 {
@@ -1404,7 +1406,8 @@ namespace System.Text.Tests
                 int byteCount,
                 char[] chars,
                 int charIndex
-            ) {
+            )
+            {
                 Span<byte> span = bytes.AsSpan(byteIndex, byteCount);
                 for (int i = 0; i < span.Length; i++)
                 {

@@ -26,7 +26,8 @@ namespace Microsoft.CodeAnalysis.CSharp.SignatureHelp
             INamedTypeSymbol normalType,
             ISymbol within,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var accessibleConstructors = normalType.InstanceConstructors.WhereAsArray(
                     c => c.IsAccessibleWithin(within)
                 )
@@ -65,7 +66,8 @@ namespace Microsoft.CodeAnalysis.CSharp.SignatureHelp
             SemanticModel semanticModel,
             IAnonymousTypeDisplayService anonymousTypeDisplayService,
             IDocumentationCommentFormattingService documentationCommentFormattingService
-        ) {
+        )
+        {
             var position = objectCreationExpression.SpanStart;
             var item = CreateItem(
                 constructor,
@@ -100,7 +102,8 @@ namespace Microsoft.CodeAnalysis.CSharp.SignatureHelp
             IMethodSymbol method,
             SemanticModel semanticModel,
             int position
-        ) {
+        )
+        {
             var result = new List<SymbolDisplayPart>();
 
             result.AddRange(method.ContainingType.ToMinimalDisplayParts(semanticModel, position));

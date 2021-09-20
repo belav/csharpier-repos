@@ -32,7 +32,8 @@ namespace Microsoft.CodeAnalysis.Editor.CommandHandlers
         public AbstractGoToCommandHandler(
             IThreadingContext threadingContext,
             IStreamingFindUsagesPresenter streamingPresenter
-        ) {
+        )
+        {
             _threadingContext = threadingContext;
             _streamingPresenter = streamingPresenter;
         }
@@ -92,7 +93,8 @@ namespace Microsoft.CodeAnalysis.Editor.CommandHandlers
             int caretPosition,
             TLanguageService service,
             CommandExecutionContext context
-        ) {
+        )
+        {
             if (service != null)
             {
                 // We have all the cheap stuff, so let's do expensive stuff now
@@ -105,7 +107,8 @@ namespace Microsoft.CodeAnalysis.Editor.CommandHandlers
                         KeyValueLogMessage.Create(LogType.UserAction),
                         userCancellationToken
                     )
-                ) {
+                )
+                {
                     messageToShow = _threadingContext.JoinableTaskFactory.Run(
                         () =>
                             NavigateToOrPresentResultsAsync(
@@ -139,7 +142,8 @@ namespace Microsoft.CodeAnalysis.Editor.CommandHandlers
             int caretPosition,
             TLanguageService service,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             // We create our own context object, simply to capture all the definitions reported by
             // the individual TLanguageService.  Once we get the results back we'll then decide
             // what to do with them.  If we get only a single result back, then we'll just go

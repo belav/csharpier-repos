@@ -304,7 +304,8 @@ namespace Microsoft.EntityFrameworkCore.Storage
 
             public TestRawSqlCommandBuilder(
                 IRelationalCommandBuilderFactory relationalCommandBuilderFactory
-            ) {
+            )
+            {
                 _commandBuilderFactory = relationalCommandBuilderFactory;
             }
 

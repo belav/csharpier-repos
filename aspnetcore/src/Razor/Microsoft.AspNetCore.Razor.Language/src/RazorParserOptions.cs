@@ -27,7 +27,8 @@ namespace Microsoft.AspNetCore.Razor.Language
         public static RazorParserOptions Create(
             Action<RazorParserOptionsBuilder> configure,
             string fileKind
-        ) {
+        )
+        {
             if (configure == null)
             {
                 throw new ArgumentNullException(nameof(configure));
@@ -46,14 +47,16 @@ namespace Microsoft.AspNetCore.Razor.Language
 
         public static RazorParserOptions CreateDesignTime(
             Action<RazorParserOptionsBuilder> configure
-        ) {
+        )
+        {
             return CreateDesignTime(configure, fileKind: null);
         }
 
         public static RazorParserOptions CreateDesignTime(
             Action<RazorParserOptionsBuilder> configure,
             string fileKind
-        ) {
+        )
+        {
             if (configure == null)
             {
                 throw new ArgumentNullException(nameof(configure));

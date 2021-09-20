@@ -95,7 +95,8 @@ After flush inside partial<form action=""/FlushPoint/PageWithoutLayout"" method=
         public async Task FlushPointsAreExecutedForPagesWithComponentsPartialsAndSections(
             string action,
             string title
-        ) {
+        )
+        {
             var expected =
                 $@"<title>{title}</title>
 RenderBody content

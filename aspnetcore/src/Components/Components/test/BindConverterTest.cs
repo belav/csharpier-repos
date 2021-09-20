@@ -273,7 +273,8 @@ namespace Microsoft.AspNetCore.Components
                 ITypeDescriptorContext context,
                 CultureInfo culture,
                 object value
-            ) {
+            )
+            {
                 if (value is string text)
                 {
                     return JsonSerializer.Deserialize<Person>(text);
@@ -297,7 +298,8 @@ namespace Microsoft.AspNetCore.Components
                 CultureInfo culture,
                 object value,
                 Type destinationType
-            ) {
+            )
+            {
                 if (destinationType == typeof(string))
                 {
                     return JsonSerializer.Serialize((Person)value);

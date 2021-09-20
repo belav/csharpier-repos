@@ -84,7 +84,8 @@ namespace Microsoft.Extensions.FileProviders.Embedded.Manifest
                             entriesList[j].Name,
                             StringComparison.OrdinalIgnoreCase
                         )
-                    ) {
+                    )
+                    {
                         throw new InvalidOperationException(
                             "Found two entries with the same name but different casing:"
                                 + $" '{entriesList[i].Name}' and '{entriesList[j]}'"
@@ -166,7 +167,8 @@ namespace Microsoft.Extensions.FileProviders.Embedded.Manifest
                 && !element.IsEmpty
                 && element.Nodes().Count() == 1
                 && element.FirstNode?.NodeType == XmlNodeType.Text
-            ) {
+            )
+            {
                 return element.Value;
             }
 

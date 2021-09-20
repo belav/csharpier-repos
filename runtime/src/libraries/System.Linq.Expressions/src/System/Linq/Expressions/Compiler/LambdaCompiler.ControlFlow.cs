@@ -178,7 +178,8 @@ namespace System.Linq.Expressions.Compiler
                         if (
                             _labelBlock.Parent!.Kind == LabelScopeKind.Switch
                             && _labelBlock.Parent.ContainsTarget(label)
-                        ) {
+                        )
+                        {
                             return false;
                         }
                     }

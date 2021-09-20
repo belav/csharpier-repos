@@ -85,7 +85,8 @@ namespace System.Runtime.CompilerServices
         public static void PrepareMethod(
             RuntimeMethodHandle method,
             RuntimeTypeHandle[]? instantiation
-        ) {
+        )
+        {
             if (method.IsNullHandle())
                 throw new ArgumentException(SR.Argument_InvalidHandle);
             unsafe
@@ -146,7 +147,8 @@ namespace System.Runtime.CompilerServices
                     | DynamicallyAccessedMemberTypes.NonPublicConstructors
             )]
                 Type type
-        ) {
+        )
+        {
             if (type is not RuntimeType rt)
             {
                 if (type is null)

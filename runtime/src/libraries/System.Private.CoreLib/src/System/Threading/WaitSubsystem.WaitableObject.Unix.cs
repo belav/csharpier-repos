@@ -35,7 +35,8 @@ namespace System.Threading
                 int initialSignalCount,
                 int maximumSignalCount,
                 OwnershipInfo? ownershipInfo
-            ) {
+            )
+            {
                 Debug.Assert(initialSignalCount >= 0);
                 Debug.Assert(maximumSignalCount > 0);
                 Debug.Assert(initialSignalCount <= maximumSignalCount);
@@ -66,7 +67,8 @@ namespace System.Threading
             public static WaitableObject NewSemaphore(
                 int initialSignalCount,
                 int maximumSignalCount
-            ) {
+            )
+            {
                 return new WaitableObject(
                     WaitableObjectType.Semaphore,
                     initialSignalCount,
@@ -247,7 +249,8 @@ namespace System.Threading
                 int timeoutMilliseconds,
                 bool interruptible,
                 bool prioritize
-            ) {
+            )
+            {
                 Debug.Assert(waitInfo != null);
                 Debug.Assert(waitInfo.Thread == Thread.CurrentThread);
 
@@ -273,7 +276,8 @@ namespace System.Threading
                 int timeoutMilliseconds,
                 bool interruptible,
                 bool prioritize
-            ) {
+            )
+            {
                 s_lock.VerifyIsLocked();
                 Debug.Assert(waitInfo != null);
                 Debug.Assert(waitInfo.Thread == Thread.CurrentThread);
@@ -295,7 +299,8 @@ namespace System.Threading
                         IsMutex
                         && _ownershipInfo != null
                         && _ownershipInfo.Thread == waitInfo.Thread
-                    ) {
+                    )
+                    {
                         if (!_ownershipInfo.CanIncrementReacquireCount)
                         {
                             throw new OverflowException(SR.Overflow_MutexReacquireCount);
@@ -335,7 +340,8 @@ namespace System.Threading
                 int timeoutMilliseconds,
                 bool interruptible,
                 bool prioritize
-            ) {
+            )
+            {
                 s_lock.VerifyIsNotLocked();
                 Debug.Assert(waitInfo != null);
                 Debug.Assert(waitInfo.Thread == Thread.CurrentThread);
@@ -490,7 +496,8 @@ namespace System.Threading
                 int signaledWaitedObjectIndex,
                 ref bool wouldAnyMutexReacquireCountOverflow,
                 ref bool isAnyAbandonedMutex
-            ) {
+            )
+            {
                 s_lock.VerifyIsLocked();
                 Debug.Assert(waitingThread != null);
                 Debug.Assert(waitingThread != Thread.CurrentThread);
@@ -545,7 +552,8 @@ namespace System.Threading
                 WaitableObject?[] waitedObjects,
                 int waitedCount,
                 int signaledWaitedObjectIndex
-            ) {
+            )
+            {
                 s_lock.VerifyIsLocked();
                 Debug.Assert(waitInfo != null);
                 Debug.Assert(waitInfo.Thread != Thread.CurrentThread);
@@ -639,7 +647,8 @@ namespace System.Threading
                     ThreadWaitInfo.WaitedListNode? waiterNode = _waitersHead, nextWaiterNode;
                     waiterNode != null;
                     waiterNode = nextWaiterNode
-                ) {
+                )
+                {
                     // Signaling a waiter will unregister the waiter node, so keep the next node before trying
                     nextWaiterNode = waiterNode.Next;
 
@@ -663,7 +672,8 @@ namespace System.Threading
                     ThreadWaitInfo.WaitedListNode? waiterNode = _waitersHead, nextWaiterNode;
                     waiterNode != null;
                     waiterNode = nextWaiterNode
-                ) {
+                )
+                {
                     // Signaling a waiter will unregister the waiter node, but it may only abort the wait without satisfying the
                     // wait, in which case we would try to signal another waiter. So, keep the next node before trying.
                     nextWaiterNode = waiterNode.Next;
@@ -673,7 +683,8 @@ namespace System.Threading
                             waiterNode,
                             isAbandonedMutex: false
                         )
-                    ) {
+                    )
+                    {
                         return;
                     }
                 }
@@ -723,7 +734,8 @@ namespace System.Threading
                     ThreadWaitInfo.WaitedListNode? waiterNode = _waitersHead, nextWaiterNode;
                     waiterNode != null;
                     waiterNode = nextWaiterNode
-                ) {
+                )
+                {
                     // Signaling the waiter will unregister the waiter node, so keep the next node before trying
                     nextWaiterNode = waiterNode.Next;
 
@@ -733,7 +745,8 @@ namespace System.Threading
                             isAbandonedMutex: false
                         )
                         && --count == 0
-                    ) {
+                    )
+                    {
                         return oldSignalCount;
                     }
                 }
@@ -792,7 +805,8 @@ namespace System.Threading
                     ThreadWaitInfo.WaitedListNode? waiterNode = _waitersHead, nextWaiterNode;
                     waiterNode != null;
                     waiterNode = nextWaiterNode
-                ) {
+                )
+                {
                     // Signaling a waiter will unregister the waiter node, but it may only abort the wait without satisfying the
                     // wait, in which case we would try to signal another waiter. So, keep the next node before trying.
                     nextWaiterNode = waiterNode.Next;

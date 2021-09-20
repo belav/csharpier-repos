@@ -3931,7 +3931,8 @@ public static class Extensions
             string text,
             CSharpParseOptions options = null,
             params DiagnosticDescription[] diagnostics
-        ) {
+        )
+        {
             var tree = Parse(text, options: options);
             var comp = CreateCompilationWithMscorlib40AndSystemCore(new[] { tree });
 

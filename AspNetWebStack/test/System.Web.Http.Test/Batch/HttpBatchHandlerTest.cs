@@ -41,7 +41,8 @@ namespace System.Web.Http
                     expectedExceptionLogger,
                     exceptionHandler
                 )
-            ) {
+            )
+            {
                 // Act
                 IExceptionLogger exceptionLogger = handler.ExceptionLogger;
 
@@ -64,7 +65,8 @@ namespace System.Web.Http
                     exceptionLogger,
                     expectedExceptionHandler
                 )
-            ) {
+            )
+            {
                 // Act
                 IExceptionHandler exceptionHandler = handler.ExceptionHandler;
 
@@ -212,7 +214,8 @@ namespace System.Web.Http
                     exceptionHandler,
                     (i1, i2) => CreateFaultedTask<HttpResponseMessage>(expectedException)
                 )
-            ) {
+            )
+            {
                 CancellationToken cancellationToken = CreateCancellationToken();
 
                 // Act
@@ -277,7 +280,8 @@ namespace System.Web.Http
                     exceptionHandler,
                     (i1, i2) => CreateFaultedTask<HttpResponseMessage>(expectedException)
                 )
-            ) {
+            )
+            {
                 CancellationToken cancellationToken = CreateCancellationToken();
 
                 // Act & Assert
@@ -320,7 +324,8 @@ namespace System.Web.Http
                     exceptionHandler,
                     (i1, i2) => CreateFaultedTask<HttpResponseMessage>(expectedException)
                 )
-            ) {
+            )
+            {
                 CancellationToken cancellationToken = CreateCancellationToken();
 
                 // Act
@@ -369,7 +374,8 @@ namespace System.Web.Http
                         exceptionHandler,
                         (i1, i2) => CreateFaultedTask<HttpResponseMessage>(CreateException())
                     )
-                ) {
+                )
+                {
                     CancellationToken cancellationToken = CreateCancellationToken();
 
                     // Act
@@ -461,7 +467,8 @@ namespace System.Web.Http
             HttpServer httpServer,
             IExceptionLogger exceptionLogger,
             IExceptionHandler exceptionHanlder
-        ) {
+        )
+        {
             return new MockHttpBatchHandler(httpServer, exceptionLogger, exceptionHanlder);
         }
 
@@ -546,7 +553,8 @@ namespace System.Web.Http
             public override Task<HttpResponseMessage> ProcessBatchAsync(
                 HttpRequestMessage request,
                 CancellationToken cancellationToken
-            ) {
+            )
+            {
                 return _processBatchAsync.Invoke(request, cancellationToken);
             }
         }
@@ -573,7 +581,8 @@ namespace System.Web.Http
             public override Task<HttpResponseMessage> ProcessBatchAsync(
                 HttpRequestMessage request,
                 CancellationToken cancellationToken
-            ) {
+            )
+            {
                 return Task.FromResult(new HttpResponseMessage());
             }
         }

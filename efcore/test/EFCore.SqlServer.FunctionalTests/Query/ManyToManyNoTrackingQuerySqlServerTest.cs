@@ -659,7 +659,8 @@ ORDER BY [e].[Key1], [e].[Key2], [e].[Key3], [t1].[CompositeId1], [t1].[Composit
 
         public override async Task Include_skip_navigation_then_include_reference_and_skip_navigation(
             bool async
-        ) {
+        )
+        {
             await base.Include_skip_navigation_then_include_reference_and_skip_navigation(async);
 
             AssertSql(
@@ -814,7 +815,8 @@ ORDER BY [e].[Id], [t0].[EntityRootId], [t0].[EntityThreeId], [t0].[Id], [t0].[O
 
         public override async Task Filtered_then_include_skip_navigation_order_by_skip_take(
             bool async
-        ) {
+        )
+        {
             await base.Filtered_then_include_skip_navigation_order_by_skip_take(async);
 
             AssertSql(
@@ -840,7 +842,8 @@ ORDER BY [e].[Id], [t1].[CompositeId1], [t1].[CompositeId2], [t1].[CompositeId3]
 
         public override async Task Filtered_include_skip_navigation_where_then_include_skip_navigation(
             bool async
-        ) {
+        )
+        {
             await base.Filtered_include_skip_navigation_where_then_include_skip_navigation(async);
 
             AssertSql(
@@ -864,7 +867,8 @@ ORDER BY [e].[Id], [t0].[CompositeId1], [t0].[CompositeId2], [t0].[CompositeId3]
 
         public override async Task Filtered_include_skip_navigation_order_by_skip_take_then_include_skip_navigation_where(
             bool async
-        ) {
+        )
+        {
             await base.Filtered_include_skip_navigation_order_by_skip_take_then_include_skip_navigation_where(
                 async
             );
@@ -895,7 +899,8 @@ ORDER BY [e].[Id], [t1].[Id], [t1].[OneId], [t1].[TwoId], [t1].[ThreeId], [t1].[
 
         public override async Task Filtered_include_skip_navigation_where_then_include_skip_navigation_order_by_skip_take(
             bool async
-        ) {
+        )
+        {
             await base.Filtered_include_skip_navigation_where_then_include_skip_navigation_order_by_skip_take(
                 async
             );
@@ -943,7 +948,8 @@ ORDER BY [e].[Id], [t].[OneId], [t].[TwoId], [t].[Id], [t].[Id0], [t].[Id1]"
 
         public override async Task Filter_include_on_skip_navigation_combined_with_filtered_then_includes(
             bool async
-        ) {
+        )
+        {
             await base.Filter_include_on_skip_navigation_combined_with_filtered_then_includes(
                 async
             );
@@ -982,7 +988,8 @@ ORDER BY [e].[Id], [t3].[OneId], [t3].[ThreeId], [t3].[Id], [t3].[OneId0], [t3].
 
         public override async Task Filtered_include_on_skip_navigation_then_filtered_include_on_navigation(
             bool async
-        ) {
+        )
+        {
             await base.Filtered_include_on_skip_navigation_then_filtered_include_on_navigation(
                 async
             );
@@ -1007,7 +1014,8 @@ ORDER BY [e].[Id], [t0].[OneId], [t0].[ThreeId], [t0].[Id], [t0].[Id0]"
 
         public override async Task Filtered_include_on_navigation_then_filtered_include_on_skip_navigation(
             bool async
-        ) {
+        )
+        {
             await base.Filtered_include_on_navigation_then_filtered_include_on_skip_navigation(
                 async
             );
@@ -1039,7 +1047,8 @@ ORDER BY [e].[Id], [t0].[Id], [t0].[ThreeId], [t0].[TwoId], [t0].[Id0]"
 
         public override async Task Filered_includes_accessed_via_different_path_are_merged(
             bool async
-        ) {
+        )
+        {
             await base.Filered_includes_accessed_via_different_path_are_merged(async);
 
             AssertSql(" ");
@@ -1088,7 +1097,8 @@ ORDER BY [e].[Id]"
 
         public override async Task Include_skip_navigation_then_include_skip_navigation_split(
             bool async
-        ) {
+        )
+        {
             await base.Include_skip_navigation_then_include_skip_navigation_split(async);
 
             AssertSql(
@@ -1131,7 +1141,8 @@ ORDER BY [e].[Key1], [e].[Key2], [e].[Key3], [t0].[CompositeId1], [t0].[Composit
 
         public override async Task Include_skip_navigation_then_include_reference_and_skip_navigation_split(
             bool async
-        ) {
+        )
+        {
             await base.Include_skip_navigation_then_include_reference_and_skip_navigation_split(
                 async
             );
@@ -1285,7 +1296,8 @@ ORDER BY [e].[Key1], [e].[Key2], [e].[Key3], [t0].[CompositeId1], [t0].[Composit
 
         public override async Task Filtered_include_skip_navigation_order_by_skip_take_split(
             bool async
-        ) {
+        )
+        {
             await base.Filtered_include_skip_navigation_order_by_skip_take_split(async);
 
             AssertSql(
@@ -1345,7 +1357,8 @@ ORDER BY [e].[Id], [t].[EntityRootId], [t].[EntityThreeId], [t].[Id]"
 
         public override async Task Filtered_then_include_skip_navigation_order_by_skip_take_split(
             bool async
-        ) {
+        )
+        {
             await base.Filtered_then_include_skip_navigation_order_by_skip_take_split(async);
 
             AssertSql(
@@ -1384,7 +1397,8 @@ ORDER BY [e].[Id], [t].[CompositeId1], [t].[CompositeId2], [t].[CompositeId3], [
 
         public override async Task Filtered_include_skip_navigation_where_then_include_skip_navigation_split(
             bool async
-        ) {
+        )
+        {
             await base.Filtered_include_skip_navigation_where_then_include_skip_navigation_split(
                 async
             );
@@ -1426,7 +1440,8 @@ ORDER BY [e].[Id], [t].[CompositeId1], [t].[CompositeId2], [t].[CompositeId3], [
 
         public override async Task Filtered_include_skip_navigation_order_by_skip_take_then_include_skip_navigation_where_split(
             bool async
-        ) {
+        )
+        {
             await base.Filtered_include_skip_navigation_order_by_skip_take_then_include_skip_navigation_where_split(
                 async
             );
@@ -1472,7 +1487,8 @@ ORDER BY [e].[Id], [t0].[OneId], [t0].[TwoId], [t0].[Id]"
 
         public override async Task Filtered_include_skip_navigation_where_then_include_skip_navigation_order_by_skip_take_split(
             bool async
-        ) {
+        )
+        {
             await base.Filtered_include_skip_navigation_where_then_include_skip_navigation_order_by_skip_take_split(
                 async
             );
@@ -1549,7 +1565,8 @@ ORDER BY [e].[Id], [t].[OneId], [t].[TwoId], [t].[Id], [t].[Id0]"
 
         public override async Task Filter_include_on_skip_navigation_combined_with_filtered_then_includes_split(
             bool async
-        ) {
+        )
+        {
             await base.Filter_include_on_skip_navigation_combined_with_filtered_then_includes_split(
                 async
             );
@@ -1612,7 +1629,8 @@ ORDER BY [e].[Id], [t].[OneId], [t].[ThreeId], [t].[Id]"
 
         public override async Task Filtered_include_on_skip_navigation_then_filtered_include_on_navigation_split(
             bool async
-        ) {
+        )
+        {
             await base.Filtered_include_on_skip_navigation_then_filtered_include_on_navigation_split(
                 async
             );
@@ -1651,7 +1669,8 @@ ORDER BY [e].[Id], [t].[OneId], [t].[ThreeId], [t].[Id]"
 
         public override async Task Filtered_include_on_navigation_then_filtered_include_on_skip_navigation_split(
             bool async
-        ) {
+        )
+        {
             await base.Filtered_include_on_navigation_then_filtered_include_on_skip_navigation_split(
                 async
             );

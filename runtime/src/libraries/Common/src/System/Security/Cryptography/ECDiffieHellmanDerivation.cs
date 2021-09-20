@@ -22,7 +22,8 @@ namespace System.Security.Cryptography
             ReadOnlySpan<byte> secretPrepend,
             ReadOnlySpan<byte> secretAppend,
             DeriveSecretAgreement deriveSecretAgreement
-        ) {
+        )
+        {
             Debug.Assert(otherPartyPublicKey != null);
             Debug.Assert(!string.IsNullOrEmpty(hashAlgorithm.Name));
 
@@ -47,7 +48,8 @@ namespace System.Security.Cryptography
             ReadOnlySpan<byte> secretPrepend,
             ReadOnlySpan<byte> secretAppend,
             DeriveSecretAgreement deriveSecretAgreement
-        ) {
+        )
+        {
             Debug.Assert(otherPartyPublicKey != null);
             Debug.Assert(!string.IsNullOrEmpty(hashAlgorithm.Name));
 
@@ -72,7 +74,8 @@ namespace System.Security.Cryptography
                 {
                     using (
                         IncrementalHash hash = IncrementalHash.CreateHMAC(hashAlgorithm, hmacKey)
-                    ) {
+                    )
+                    {
                         hash.AppendData(secretPrepend);
 
                         if (useSecretAsKey)
@@ -110,7 +113,8 @@ namespace System.Security.Cryptography
             ReadOnlySpan<byte> prfLabel,
             ReadOnlySpan<byte> prfSeed,
             DeriveSecretAgreement deriveSecretAgreement
-        ) {
+        )
+        {
             Debug.Assert(otherPartyPublicKey != null);
 
             if (prfSeed.Length != 64)
@@ -189,7 +193,8 @@ namespace System.Security.Cryptography
             ReadOnlySpan<byte> prfSeed,
             int hashOutputSize,
             Span<byte> ret
-        ) {
+        )
+        {
             // https://tools.ietf.org/html/rfc4346#section-5
             //
             // P_hash(secret, seed) = HMAC_hash(secret, A(1) + seed) +
@@ -222,7 +227,8 @@ namespace System.Security.Cryptography
                             algorithmName,
                             secretTmp
                         )
-                    ) {
+                    )
+                    {
                         Span<byte> a = stackalloc byte[hashOutputSize];
                         Span<byte> p = stackalloc byte[hashOutputSize];
 
@@ -233,7 +239,8 @@ namespace System.Security.Cryptography
                         if (
                             !hasher.TryGetHashAndReset(a, out int bytesWritten)
                             || bytesWritten != hashOutputSize
-                        ) {
+                        )
+                        {
                             throw new CryptographicException();
                         }
 
@@ -247,7 +254,8 @@ namespace System.Security.Cryptography
                             if (
                                 !hasher.TryGetHashAndReset(p, out bytesWritten)
                                 || bytesWritten != hashOutputSize
-                            ) {
+                            )
+                            {
                                 throw new CryptographicException();
                             }
 
@@ -267,7 +275,8 @@ namespace System.Security.Cryptography
                             if (
                                 !hasher.TryGetHashAndReset(a, out bytesWritten)
                                 || bytesWritten != hashOutputSize
-                            ) {
+                            )
+                            {
                                 throw new CryptographicException();
                             }
                         }

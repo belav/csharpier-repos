@@ -18,7 +18,8 @@ namespace System.Web.Http.Cors.Tracing
         public CorsPolicyProviderFactoryTracer(
             ICorsPolicyProviderFactory innerPolicyProviderFactory,
             ITraceWriter traceWriter
-        ) {
+        )
+        {
             Contract.Assert(innerPolicyProviderFactory != null);
             Contract.Assert(traceWriter != null);
 

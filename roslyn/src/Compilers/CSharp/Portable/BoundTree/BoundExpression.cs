@@ -182,21 +182,23 @@ namespace Microsoft.CodeAnalysis.CSharp
             ConstantValue? constantValueOpt,
             TypeSymbol type,
             bool hasErrors = false
-        ) : this(
-            syntax,
-            localSymbol,
-            BoundLocalDeclarationKind.None,
-            constantValueOpt,
-            false,
-            type,
-            hasErrors
-        ) { }
+        )
+            : this(
+                syntax,
+                localSymbol,
+                BoundLocalDeclarationKind.None,
+                constantValueOpt,
+                false,
+                type,
+                hasErrors
+            ) { }
 
         public BoundLocal Update(
             LocalSymbol localSymbol,
             ConstantValue? constantValueOpt,
             TypeSymbol type
-        ) {
+        )
+        {
             return this.Update(
                 localSymbol,
                 this.DeclarationKind,
@@ -442,7 +444,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             ImmutableArray<RefKind> newRefKinds,
             BoundObjectInitializerExpressionBase? newInitializerExpression,
             TypeSymbol? changeTypeOpt = null
-        ) {
+        )
+        {
             return Update(
                 constructor: Constructor,
                 arguments: newArguments,
@@ -599,7 +602,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             BindingDiagnosticBag valueDiagnostics,
             BoundExpression typeExpression,
             BindingDiagnosticBag typeDiagnostics
-        ) {
+        )
+        {
             Debug.Assert(
                 valueSymbol != null,
                 "Field 'valueSymbol' cannot be null (use Null=\"allow\" in BoundNodes.xml to remove this check)"

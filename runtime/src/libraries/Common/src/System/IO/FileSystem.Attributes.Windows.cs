@@ -63,7 +63,8 @@ namespace System.IO
             string? path,
             ref Interop.Kernel32.WIN32_FILE_ATTRIBUTE_DATA data,
             bool returnErrorOnNotFound
-        ) {
+        )
+        {
             int errorCode = Interop.Errors.ERROR_SUCCESS;
 
             // Neither GetFileAttributes or FindFirstFile like trailing separators
@@ -77,7 +78,8 @@ namespace System.IO
                         Interop.Kernel32.GET_FILEEX_INFO_LEVELS.GetFileExInfoStandard,
                         ref data
                     )
-                ) {
+                )
+                {
                     errorCode = Marshal.GetLastWin32Error();
 
                     if (
@@ -93,7 +95,8 @@ namespace System.IO
                         && errorCode != Interop.Errors.ERROR_NETWORK_ACCESS_DENIED
                         && errorCode != Interop.Errors.ERROR_INVALID_HANDLE // eg from \\.\CON
                         && errorCode != Interop.Errors.ERROR_FILENAME_EXCED_RANGE // Path is too long
-                    ) {
+                    )
+                    {
                         // Assert so we can track down other cases (if any) to add to our test suite
                         Debug.Assert(
                             errorCode == Interop.Errors.ERROR_ACCESS_DENIED
@@ -121,7 +124,8 @@ namespace System.IO
                                 path!,
                                 ref findData
                             )
-                        ) {
+                        )
+                        {
                             if (handle.IsInvalid)
                             {
                                 errorCode = Marshal.GetLastWin32Error();

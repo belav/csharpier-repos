@@ -37,7 +37,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.FindReferences
             Solution solution,
             DefinitionItem definitionItem,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var symbolNavigationService =
                 solution.Workspace.Services.GetRequiredService<ISymbolNavigationService>();
             if (
@@ -49,7 +50,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.FindReferences
                     out var lineNumber,
                     out var charOffset
                 )
-            ) {
+            )
+            {
                 return null;
             }
 
@@ -68,7 +70,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.FindReferences
             string filePath,
             int lineNumber,
             int charOffset
-        ) {
+        )
+        {
             var sourceLine = GetSourceLine(filePath, lineNumber).Trim(' ', '\t');
 
             // Put the line in 1-based for the presentation of this item.
@@ -91,7 +94,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.FindReferences
                 vsTextLines.GetLengthOfLine(lineNumber, out var lineLength) == VSConstants.S_OK
                 && vsTextLines.GetLineText(lineNumber, 0, lineNumber, lineLength, out var lineText)
                     == VSConstants.S_OK
-            ) {
+            )
+            {
                 return lineText;
             }
 
@@ -114,16 +118,18 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.FindReferences
                 string filePath,
                 int lineNumber,
                 int charOffset
-            ) : base(
-                tags,
-                displayParts,
-                ImmutableArray<TaggedText>.Empty,
-                originationParts: default,
-                sourceSpans: default,
-                properties: null,
-                displayableProperties: null,
-                displayIfNoReferences: true
-            ) {
+            )
+                : base(
+                    tags,
+                    displayParts,
+                    ImmutableArray<TaggedText>.Empty,
+                    originationParts: default,
+                    sourceSpans: default,
+                    properties: null,
+                    displayableProperties: null,
+                    displayIfNoReferences: true
+                )
+            {
                 _serviceProvider = serviceProvider;
                 _filePath = filePath;
                 _lineNumber = lineNumber;
@@ -157,7 +163,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.FindReferences
                         out _,
                         out var frame
                     ) == VSConstants.S_OK
-                ) {
+                )
+                {
                     frame.Show();
                     return true;
                 }
@@ -179,7 +186,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.FindReferences
                         out var bufferPtr,
                         out _
                     ) != VSConstants.S_OK
-                ) {
+                )
+                {
                     return false;
                 }
 

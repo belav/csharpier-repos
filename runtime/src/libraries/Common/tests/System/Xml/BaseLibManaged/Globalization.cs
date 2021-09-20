@@ -716,7 +716,8 @@ namespace WebData.BaseLib
                     if (
                         (cBaseCharMap[i] - cBaseCharMap[i - 1] - 1 > 0)
                         && (cBaseCharMap[i] - cBaseCharMap[i - 1] - 1 < 100)
-                    ) {
+                    )
+                    {
                         iSum += cBaseCharMap[i] - cBaseCharMap[i - 1] - 1;
                     }
                 }

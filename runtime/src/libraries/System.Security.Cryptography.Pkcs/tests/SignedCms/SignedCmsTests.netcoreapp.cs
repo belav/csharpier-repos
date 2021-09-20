@@ -24,7 +24,8 @@ namespace System.Security.Cryptography.Pkcs.Tests
             using (
                 X509Certificate2 cert =
                     Certificates.RSA2048SignatureOnly.TryGetCertificateWithPrivateKey()
-            ) {
+            )
+            {
                 CmsSigner cmsSigner = new CmsSigner(
                     SubjectIdentifierType.SubjectKeyIdentifier,
                     cert
@@ -344,7 +345,8 @@ namespace System.Security.Cryptography.Pkcs.Tests
             using (
                 X509Certificate2 newCert =
                     Certificates.RSAKeyTransfer1.TryGetCertificateWithPrivateKey()
-            ) {
+            )
+            {
                 Assert.True(newCert.HasPrivateKey);
                 cms.AddCertificate(newCert);
 
@@ -475,7 +477,8 @@ namespace System.Security.Cryptography.Pkcs.Tests
                     Certificates.RSA2048SignatureOnly.TryGetCertificateWithPrivateKey(
                         exportable: true
                     )
-            ) {
+            )
+            {
                 if (certificateWithKey == null)
                 {
                     return;
@@ -490,7 +493,8 @@ namespace System.Security.Cryptography.Pkcs.Tests
                     X509Certificate2 certWithEphemeralKey = publicCertificate.CopyWithPrivateKey(
                         rsa
                     )
-                ) {
+                )
+                {
                     ContentInfo content = new ContentInfo(new byte[] { 1, 2, 3 });
                     SignedCms cms = new SignedCms(content, false);
                     CmsSigner signer = new CmsSigner(certWithEphemeralKey);
@@ -507,7 +511,8 @@ namespace System.Security.Cryptography.Pkcs.Tests
             using (
                 X509Certificate2 certificateWithKey =
                     Certificates.Dsa1024.TryGetCertificateWithPrivateKey(exportable: true)
-            ) {
+            )
+            {
                 if (certificateWithKey == null)
                 {
                     return;
@@ -522,7 +527,8 @@ namespace System.Security.Cryptography.Pkcs.Tests
                     X509Certificate2 certWithEphemeralKey = publicCertificate.CopyWithPrivateKey(
                         dsa
                     )
-                ) {
+                )
+                {
                     ContentInfo content = new ContentInfo(new byte[] { 1, 2, 3 });
                     SignedCms cms = new SignedCms(content, false);
                     CmsSigner signer = new CmsSigner(certWithEphemeralKey)
@@ -542,7 +548,8 @@ namespace System.Security.Cryptography.Pkcs.Tests
             using (
                 X509Certificate2 certificateWithKey =
                     Certificates.ECDsaP256Win.TryGetCertificateWithPrivateKey(exportable: true)
-            ) {
+            )
+            {
                 if (certificateWithKey == null)
                 {
                     return;
@@ -557,7 +564,8 @@ namespace System.Security.Cryptography.Pkcs.Tests
                     X509Certificate2 certWithEphemeralKey = publicCertificate.CopyWithPrivateKey(
                         ecdsa
                     )
-                ) {
+                )
+                {
                     ContentInfo content = new ContentInfo(new byte[] { 1, 2, 3 });
                     SignedCms cms = new SignedCms(content, false);
                     CmsSigner signer = new CmsSigner(certWithEphemeralKey);
@@ -574,7 +582,8 @@ namespace System.Security.Cryptography.Pkcs.Tests
             using (
                 X509Certificate2 cert =
                     Certificates.RSAKeyTransferCapi1.TryGetCertificateWithPrivateKey()
-            ) {
+            )
+            {
                 CmsSigner signer = new CmsSigner(cert);
                 signer.DigestAlgorithm = new Oid(Oids.RsaPkcs1Sha256);
 
@@ -590,7 +599,8 @@ namespace System.Security.Cryptography.Pkcs.Tests
         private static void VerifyWithExplicitPrivateKey(
             X509Certificate2 cert,
             AsymmetricAlgorithm key
-        ) {
+        )
+        {
             using (var pubCert = new X509Certificate2(cert.RawData))
             {
                 Assert.False(pubCert.HasPrivateKey);
@@ -621,7 +631,8 @@ namespace System.Security.Cryptography.Pkcs.Tests
             AsymmetricAlgorithm key,
             X509Certificate2 counterSignerCert,
             AsymmetricAlgorithm counterSignerKey
-        ) {
+        )
+        {
             Assert.NotNull(key);
             Assert.NotNull(counterSignerKey);
             using (var pubCert = new X509Certificate2(cert.RawData))

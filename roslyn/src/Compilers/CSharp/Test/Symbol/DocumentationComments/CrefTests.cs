@@ -7707,7 +7707,8 @@ class Cat { }
             CrefSyntax crefSyntax,
             CSharpCompilation compilation,
             params DiagnosticDescription[] expectedDiagnostics
-        ) {
+        )
+        {
             Symbol ambiguityWinner;
             var references = GetReferencedSymbols(
                 crefSyntax,
@@ -7726,7 +7727,8 @@ class Cat { }
             CSharpCompilation compilation,
             out Symbol ambiguityWinner,
             params DiagnosticDescription[] expectedDiagnostics
-        ) {
+        )
+        {
             var binderFactory = compilation.GetBinderFactory(crefSyntax.SyntaxTree);
             var binder = binderFactory.GetBinder(crefSyntax);
 
@@ -7740,7 +7742,8 @@ class Cat { }
         private static ISymbol[] GetCrefOriginalDefinitions(
             SemanticModel model,
             IEnumerable<CrefSyntax> crefs
-        ) {
+        )
+        {
             return crefs.Select(syntax => model.GetSymbolInfo(syntax).Symbol)
                 .Select(symbol => (object)symbol == null ? null : symbol.OriginalDefinition)
                 .ToArray();

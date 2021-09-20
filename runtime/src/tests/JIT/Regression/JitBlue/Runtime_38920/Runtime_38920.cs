@@ -50,7 +50,8 @@ class TestStructs
         CastFromStruct20 impByRefStruct20,
         int b,
         int c
-    ) {
+    )
+    {
         CastToStruct8 to8 = new CastToStruct8();
         CastToStruct12 to12 = new CastToStruct12();
 

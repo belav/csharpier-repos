@@ -57,7 +57,8 @@ namespace System.IO
                 sourceUri == null
                   ? SR.FileFormatException
                   : SR.Format(SR.FileFormatExceptionWithFileName, sourceUri)
-            ) {
+            )
+        {
             _sourceUri = sourceUri;
         }
 
@@ -91,7 +92,8 @@ namespace System.IO
                   ? SR.FileFormatException
                   : SR.Format(SR.FileFormatExceptionWithFileName, sourceUri),
                 innerException
-            ) {
+            )
+        {
             _sourceUri = sourceUri;
         }
 
@@ -106,11 +108,8 @@ namespace System.IO
         /// <param name="sourceUri">The Uri of a file that caused this error.</param>
         /// <param name="message">The message that describes the error.</param>
         /// <param name="innerException">The exception that is the cause of the current exception.</param>
-        public FileFormatException(
-            Uri? sourceUri,
-            string? message,
-            Exception? innerException
-        ) : base(message, innerException)
+        public FileFormatException(Uri? sourceUri, string? message, Exception? innerException)
+            : base(message, innerException)
         {
             _sourceUri = sourceUri;
         }

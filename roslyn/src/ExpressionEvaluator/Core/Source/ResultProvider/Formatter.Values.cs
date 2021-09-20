@@ -33,7 +33,8 @@ namespace Microsoft.CodeAnalysis.ExpressionEvaluator
             DkmInspectionContext inspectionContext,
             ObjectDisplayOptions options,
             GetValueFlags flags
-        ) {
+        )
+        {
             if (value.IsError())
             {
                 return (string)value.HostObjectValue;
@@ -239,7 +240,8 @@ namespace Microsoft.CodeAnalysis.ExpressionEvaluator
             DkmClrValue value,
             DkmInspectionContext inspectionContext,
             ObjectDisplayOptions options
-        ) {
+        )
+        {
             Debug.Assert(value.Type.GetLmrType().IsCharacter());
             if (UsesHexadecimalNumbers(inspectionContext))
             {
@@ -264,7 +266,8 @@ namespace Microsoft.CodeAnalysis.ExpressionEvaluator
         private string GetUnderlyingString(
             DkmClrValue value,
             DkmInspectionContext inspectionContext
-        ) {
+        )
+        {
             var dataItem = value.GetDataItem<RawStringDataItem>();
             if (dataItem != null)
             {
@@ -280,7 +283,8 @@ namespace Microsoft.CodeAnalysis.ExpressionEvaluator
         private string GetUnderlyingStringImpl(
             DkmClrValue value,
             DkmInspectionContext inspectionContext
-        ) {
+        )
+        {
             Debug.Assert(!value.IsError());
 
             if (value.IsNull)
@@ -340,7 +344,8 @@ namespace Microsoft.CodeAnalysis.ExpressionEvaluator
             ObjectDisplayOptions options,
             bool includeTypeName,
             DkmInspectionContext inspectionContext
-        ) {
+        )
+        {
             Debug.Assert(lmrType.IsEnum);
             Debug.Assert(value != null);
 
@@ -414,7 +419,8 @@ namespace Microsoft.CodeAnalysis.ExpressionEvaluator
             ArrayBuilder<EnumField> usedFields,
             ArrayBuilder<EnumField> fields,
             ulong underlyingValue
-        ) {
+        )
+        {
             var remaining = underlyingValue;
             foreach (var field in fields)
             {
@@ -501,7 +507,8 @@ namespace Microsoft.CodeAnalysis.ExpressionEvaluator
             DkmClrValue value,
             DkmInspectionContext inspectionContext,
             DkmClrCustomTypeInfo customTypeInfo
-        ) {
+        )
+        {
             if (value.IsError())
             {
                 return null;
@@ -565,7 +572,8 @@ namespace Microsoft.CodeAnalysis.ExpressionEvaluator
             DkmClrValue value,
             ObjectDisplayOptions options,
             DkmInspectionContext inspectionContext
-        ) {
+        )
+        {
             Debug.Assert(value != null);
             // check if HostObjectValue is null, since any of these types might actually be a synthetic value as well.
             if (value.HostObjectValue == null)
@@ -592,7 +600,8 @@ namespace Microsoft.CodeAnalysis.ExpressionEvaluator
             DkmClrValue value,
             string valueStr,
             GetValueFlags flags
-        ) {
+        )
+        {
             Debug.Assert(valueStr != null);
             return (flags & GetValueFlags.IncludeObjectId) == 0
               ? valueStr

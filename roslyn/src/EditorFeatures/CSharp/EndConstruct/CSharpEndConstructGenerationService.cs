@@ -28,7 +28,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.EndConstructGeneration
             ITextBuffer subjectBuffer,
             char typedChar,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             return false;
         }
     }

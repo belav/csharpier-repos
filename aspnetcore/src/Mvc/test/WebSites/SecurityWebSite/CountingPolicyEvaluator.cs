@@ -22,7 +22,8 @@ namespace SecurityWebSite
             AuthenticateResult authenticationResult,
             HttpContext context,
             object resource
-        ) {
+        )
+        {
             AuthorizeCount++;
             return base.AuthorizeAsync(policy, authenticationResult, context, resource);
         }

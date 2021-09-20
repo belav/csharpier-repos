@@ -77,7 +77,8 @@ namespace System.Web.WebPages.Test
             string layoutPath,
             string pagePath = "~/index.cshtml",
             string layoutPage = "Layout.cshtml"
-        ) {
+        )
+        {
             // The page ~/index.cshtml does the following:
             // PageData["Title"] = "MyPage";
             // Layout = "Layout.cshtml";
@@ -891,7 +892,8 @@ namespace System.Web.WebPages.Test
             string pagePath = "~/index.cshtml",
             string layoutPath = "~/Layout.cshtml",
             string layoutPage = "Layout.cshtml"
-        ) {
+        )
+        {
             var page = CreatePageWithLayout(
                 pageExecuteAction,
                 layoutExecuteAction,
@@ -908,7 +910,8 @@ namespace System.Web.WebPages.Test
             string pagePath = "~/index.cshtml",
             string layoutPath = "~/Layout.cshtml",
             string layoutPageName = "Layout.cshtml"
-        ) {
+        )
+        {
             var page = Utils.CreatePage(
                 p =>
                 {

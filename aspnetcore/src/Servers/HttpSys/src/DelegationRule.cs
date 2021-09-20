@@ -31,7 +31,8 @@ namespace Microsoft.AspNetCore.Server.HttpSys
             string queueName,
             string urlPrefix,
             ILogger logger
-        ) {
+        )
+        {
             _sourceQueueUrlGroup = sourceQueueUrlGroup;
             _logger = logger;
             QueueName = queueName;

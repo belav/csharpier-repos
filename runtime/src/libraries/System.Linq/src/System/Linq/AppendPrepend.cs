@@ -11,7 +11,8 @@ namespace System.Linq
         public static IEnumerable<TSource> Append<TSource>(
             this IEnumerable<TSource> source,
             TSource element
-        ) {
+        )
+        {
             if (source == null)
             {
                 ThrowHelper.ThrowArgumentNullException(ExceptionArgument.source);
@@ -25,7 +26,8 @@ namespace System.Linq
         public static IEnumerable<TSource> Prepend<TSource>(
             this IEnumerable<TSource> source,
             TSource element
-        ) {
+        )
+        {
             if (source == null)
             {
                 ThrowHelper.ThrowArgumentNullException(ExceptionArgument.source);
@@ -96,11 +98,8 @@ namespace System.Linq
             private readonly TSource _item;
             private readonly bool _appending;
 
-            public AppendPrepend1Iterator(
-                IEnumerable<TSource> source,
-                TSource item,
-                bool appending
-            ) : base(source)
+            public AppendPrepend1Iterator(IEnumerable<TSource> source, TSource item, bool appending)
+                : base(source)
             {
                 _item = item;
                 _appending = appending;

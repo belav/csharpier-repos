@@ -770,7 +770,8 @@ namespace Microsoft.AspNetCore.Mvc
                 string content,
                 string contentType,
                 Encoding encoding
-            ) {
+            )
+            {
                 return Content(content, contentType, encoding);
             }
 
@@ -788,7 +789,8 @@ namespace Microsoft.AspNetCore.Mvc
                 string content,
                 string contentType,
                 string fileName
-            ) {
+            )
+            {
                 var contentArray = Encoding.UTF8.GetBytes(content);
                 return File(contentArray, contentType, fileName);
             }
@@ -797,7 +799,8 @@ namespace Microsoft.AspNetCore.Mvc
                 string content,
                 string contentType,
                 string fileName
-            ) {
+            )
+            {
                 var memoryStream = new MemoryStream(Encoding.UTF8.GetBytes(content));
                 return File(memoryStream, contentType, fileName);
             }
@@ -810,7 +813,8 @@ namespace Microsoft.AspNetCore.Mvc
             public IActionResult JsonWithSerializerSettings_Action(
                 object data,
                 object serializerSettings
-            ) {
+            )
+            {
                 return Json(data, serializerSettings);
             }
 
@@ -823,7 +827,8 @@ namespace Microsoft.AspNetCore.Mvc
                 string actionName,
                 string controllerName,
                 object routeValues
-            ) {
+            )
+            {
                 return RedirectToAction(actionName, controllerName, routeValues);
             }
 
@@ -837,7 +842,8 @@ namespace Microsoft.AspNetCore.Mvc
                 string controllerName,
                 object routeValues,
                 object value
-            ) {
+            )
+            {
                 return CreatedAtAction(actionName, controllerName, routeValues, value);
             }
 
@@ -845,7 +851,8 @@ namespace Microsoft.AspNetCore.Mvc
                 string routeName,
                 object routeValues,
                 object value
-            ) {
+            )
+            {
                 return CreatedAtRoute(routeName, routeValues, value);
             }
 
@@ -854,7 +861,8 @@ namespace Microsoft.AspNetCore.Mvc
                 string controllerName,
                 object routeValues,
                 object value
-            ) {
+            )
+            {
                 return AcceptedAtAction(actionName, controllerName, routeValues, value);
             }
 
@@ -862,7 +870,8 @@ namespace Microsoft.AspNetCore.Mvc
                 string routeName,
                 object routeValues,
                 object value
-            ) {
+            )
+            {
                 return AcceptedAtRoute(routeName, routeValues, value);
             }
 

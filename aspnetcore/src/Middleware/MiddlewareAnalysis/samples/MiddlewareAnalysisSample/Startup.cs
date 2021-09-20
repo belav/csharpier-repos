@@ -22,7 +22,8 @@ namespace MiddlewareAnaysisSample
             IApplicationBuilder app,
             ILoggerFactory factory,
             DiagnosticListener diagnosticListener
-        ) {
+        )
+        {
             // Listen for middleware events and log them to the console.
             var listener = new TestDiagnosticListener();
             diagnosticListener.SubscribeWithAdapter(listener);

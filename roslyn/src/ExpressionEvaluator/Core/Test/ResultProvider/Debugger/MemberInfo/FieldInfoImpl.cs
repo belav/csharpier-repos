@@ -122,7 +122,8 @@ namespace Microsoft.CodeAnalysis.ExpressionEvaluator
             BindingFlags invokeAttr,
             Binder binder,
             CultureInfo culture
-        ) {
+        )
+        {
             throw new NotImplementedException();
         }
 

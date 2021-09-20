@@ -115,7 +115,8 @@ namespace System.Collections.Tests
                 Type expectedInternalComparerTypeBeforeCollisionThreshold,
                 IEqualityComparer<string> expectedPublicComparerBeforeCollisionThreshold,
                 Type expectedInternalComparerTypeAfterCollisionThreshold
-            ) {
+            )
+            {
                 RunCollectionTestCommon(
                     () => new Dictionary<string, object>(equalityComparer),
                     (dictionary, key) => dictionary.Add(key, null),
@@ -198,7 +199,8 @@ namespace System.Collections.Tests
                 Type expectedInternalComparerTypeBeforeCollisionThreshold,
                 IEqualityComparer<string> expectedPublicComparerBeforeCollisionThreshold,
                 Type expectedInternalComparerTypeAfterCollisionThreshold
-            ) {
+            )
+            {
                 RunCollectionTestCommon(
                     () => new HashSet<string>(equalityComparer),
                     (set, key) => Assert.True(set.Add(key)),
@@ -219,7 +221,8 @@ namespace System.Collections.Tests
             Type expectedInternalComparerTypeBeforeCollisionThreshold,
             IEqualityComparer<string> expectedPublicComparerBeforeCollisionThreshold,
             Type expectedInternalComparerTypeAfterCollisionThreshold
-        ) {
+        )
+        {
             TCollection collection = collectionFactory();
             List<string> allKeys = new List<string>();
 
@@ -393,7 +396,8 @@ namespace System.Collections.Tests
         private static void ValidateBehaviorOfInternalComparerVsPublicComparer(
             IEqualityComparer<string> internalComparer,
             IEqualityComparer<string> publicComparer
-        ) {
+        )
+        {
             // This helper ensures that when we substitute one of our internal comparers
             // in place of the expected public comparer, the internal comparer's Equals
             // and GetHashCode behavior are consistent with the public comparer's.
@@ -417,7 +421,8 @@ namespace System.Collections.Tests
                     ("Hello", "HE\u200dLLO"), // equal under case-insensitive linguistic comparer
                     ("абвгдеёжзийклмнопрстуфхцчшщьыъэюя", "АБВГДЕЁЖЗИЙКЛМНОПРСТУФХЦЧШЩЬЫЪЭЮЯ"), // Cyrillic, case-insensitive equal
                 }
-            ) {
+            )
+            {
                 bool arePairElementsExpectedEqual = publicComparer.Equals(pair.Item1, pair.Item2);
                 Assert.Equal(
                     arePairElementsExpectedEqual,

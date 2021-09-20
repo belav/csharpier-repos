@@ -16,7 +16,8 @@ namespace System.IO.Pipelines.Tests
         protected PipeTest(
             int pauseWriterThreshold = MaximumSizeHigh,
             int resumeWriterThreshold = MaximumSizeLow
-        ) {
+        )
+        {
             _pool = new TestMemoryPool();
             Pipe = new Pipe(
                 new PipeOptions(

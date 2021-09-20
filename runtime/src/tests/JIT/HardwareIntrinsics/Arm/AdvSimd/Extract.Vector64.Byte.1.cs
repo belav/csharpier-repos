@@ -455,7 +455,8 @@ namespace JIT.HardwareIntrinsics.Arm
             Vector64<Byte> op1,
             Byte result,
             [CallerMemberName] string method = ""
-        ) {
+        )
+        {
             Byte[] inArray1 = new Byte[Op1ElementCount];
 
             Unsafe.WriteUnaligned(ref Unsafe.As<Byte, byte>(ref inArray1[0]), op1);
@@ -480,7 +481,8 @@ namespace JIT.HardwareIntrinsics.Arm
             Byte[] firstOp,
             Byte result,
             [CallerMemberName] string method = ""
-        ) {
+        )
+        {
             bool succeeded = true;
 
             if (firstOp[ElementIndex] != result)

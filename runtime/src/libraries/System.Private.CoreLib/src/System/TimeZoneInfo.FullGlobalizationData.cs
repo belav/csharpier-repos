@@ -11,7 +11,8 @@ namespace System
             string ianaId,
             bool allocate,
             out string? windowsId
-        ) {
+        )
+        {
             if (GlobalizationMode.Invariant || GlobalizationMode.UseNls || ianaId is null)
             {
                 windowsId = null;
@@ -46,7 +47,8 @@ namespace System
             string? region,
             bool allocate,
             out string? ianaId
-        ) {
+        )
+        {
             // This functionality is not enabled in the browser for the sake of size reduction.
             if (GlobalizationMode.Invariant || GlobalizationMode.UseNls || windowsId is null)
             {

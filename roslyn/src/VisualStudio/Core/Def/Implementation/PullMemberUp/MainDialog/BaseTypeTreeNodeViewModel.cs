@@ -48,7 +48,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.PullMemberUp.Ma
             Solution solution,
             INamedTypeSymbol root,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var rootTreeNode = new BaseTypeTreeNodeViewModel(root, glyphService)
             {
                 IsChecked = false,

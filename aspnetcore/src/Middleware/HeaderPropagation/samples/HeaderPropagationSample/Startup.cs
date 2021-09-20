@@ -59,7 +59,8 @@ namespace HeaderPropagationSample
             IApplicationBuilder app,
             IWebHostEnvironment env,
             IHttpClientFactory clientFactory
-        ) {
+        )
+        {
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();

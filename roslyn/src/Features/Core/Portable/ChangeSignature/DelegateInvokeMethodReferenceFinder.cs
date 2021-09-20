@@ -43,7 +43,8 @@ namespace Microsoft.CodeAnalysis.ChangeSignature
             FindReferencesSearchOptions options,
             FindReferencesCascadeDirection cascadeDirection,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             using var _ =
                 ArrayBuilder<(ISymbol symbol, FindReferencesCascadeDirection cascadeDirection)>.GetInstance(
                     out var result
@@ -83,7 +84,8 @@ namespace Microsoft.CodeAnalysis.ChangeSignature
             IImmutableSet<Document> documents,
             FindReferencesSearchOptions options,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             return Task.FromResult(project.Documents.ToImmutableArray());
         }
 
@@ -95,7 +97,8 @@ namespace Microsoft.CodeAnalysis.ChangeSignature
             SemanticModel semanticModel,
             FindReferencesSearchOptions options,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             // FAR on the Delegate type and use those results to find Invoke calls
 
             var syntaxFactsService = document.GetLanguageService<ISyntaxFactsService>();

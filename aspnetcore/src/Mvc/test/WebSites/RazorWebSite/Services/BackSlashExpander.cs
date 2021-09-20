@@ -14,11 +14,13 @@ namespace RazorWebSite
         public virtual IEnumerable<string> ExpandViewLocations(
             ViewLocationExpanderContext context,
             IEnumerable<string> viewLocations
-        ) {
+        )
+        {
             if (
                 context.ActionContext is ViewContext viewContext
                 && (string)viewContext.ViewData["back-slash"] == "true"
-            ) {
+            )
+            {
                 return new[] { $@"Views\BackSlash\{context.ViewName}.cshtml" };
             }
 

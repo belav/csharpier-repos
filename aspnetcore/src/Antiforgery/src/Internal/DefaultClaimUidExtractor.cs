@@ -42,7 +42,8 @@ namespace Microsoft.AspNetCore.Antiforgery
 
         public static IList<string>? GetUniqueIdentifierParameters(
             IEnumerable<ClaimsIdentity> claimsIdentities
-        ) {
+        )
+        {
             var identitiesList = claimsIdentities as List<ClaimsIdentity>;
             if (identitiesList == null)
             {

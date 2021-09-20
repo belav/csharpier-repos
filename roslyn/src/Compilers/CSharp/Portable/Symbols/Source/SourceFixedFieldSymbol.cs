@@ -40,7 +40,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
         internal override void AddSynthesizedAttributes(
             PEModuleBuilder moduleBuilder,
             ref ArrayBuilder<SynthesizedAttributeData> attributes
-        ) {
+        )
+        {
             base.AddSynthesizedAttributes(moduleBuilder, ref attributes);
 
             var compilation = this.DeclaringCompilation;
@@ -84,7 +85,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                             arguments.Count == 0
                             || arguments[0].Expression.Kind()
                                 == SyntaxKind.OmittedArraySizeExpression
-                        ) {
+                        )
+                        {
                             Debug.Assert(
                                 declarator.ArgumentList.ContainsDiagnostics,
                                 "The parser should have caught this."
@@ -182,7 +184,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                     if (
                         Interlocked.CompareExchange(ref _fixedSize, size, FixedSizeNotInitialized)
                         == FixedSizeNotInitialized
-                    ) {
+                    )
+                    {
                         this.AddDeclarationDiagnostics(diagnostics);
                         state.NotePartComplete(CompletionPart.FixedSize);
                     }
@@ -214,7 +217,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                 GeneratedNames.MakeFixedFieldImplementationName(field.Name),
                 typeParameters: ImmutableArray<TypeParameterSymbol>.Empty,
                 typeMap: TypeMap.Empty
-            ) {
+            )
+        {
             _field = field;
             _constructor = new SynthesizedInstanceConstructor(this);
             _internalField = new SynthesizedFieldSymbol(
@@ -271,7 +275,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
         internal override void AddSynthesizedAttributes(
             PEModuleBuilder moduleBuilder,
             ref ArrayBuilder<SynthesizedAttributeData> attributes
-        ) {
+        )
+        {
             base.AddSynthesizedAttributes(moduleBuilder, ref attributes);
             var compilation = ContainingSymbol.DeclaringCompilation;
             AddSynthesizedAttribute(

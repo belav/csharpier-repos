@@ -35,7 +35,8 @@ namespace Microsoft.CodeAnalysis.GenerateMember
             INamedTypeSymbol typeToGenerateIn,
             bool isStatic,
             ISet<TypeKind> typeKinds
-        ) {
+        )
+        {
             if (typeToGenerateIn == null)
             {
                 return false;
@@ -69,7 +70,8 @@ namespace Microsoft.CodeAnalysis.GenerateMember
             CancellationToken cancellationToken,
             out INamedTypeSymbol typeToGenerateIn,
             out bool isStatic
-        ) {
+        )
+        {
             TryDetermineTypeToGenerateInWorker(
                 document,
                 containingType,
@@ -94,7 +96,8 @@ namespace Microsoft.CodeAnalysis.GenerateMember
             CancellationToken cancellationToken,
             out INamedTypeSymbol typeToGenerateIn,
             out bool isStatic
-        ) {
+        )
+        {
             typeToGenerateIn = null;
             isStatic = false;
 
@@ -141,7 +144,8 @@ namespace Microsoft.CodeAnalysis.GenerateMember
                     if (
                         typeToGenerateIn.IsNullable(out var underlyingType)
                         && underlyingType is INamedTypeSymbol underlyingNamedType
-                    ) {
+                    )
+                    {
                         typeToGenerateIn = underlyingNamedType;
                     }
                 }
@@ -189,7 +193,8 @@ namespace Microsoft.CodeAnalysis.GenerateMember
                     expression,
                     out var initializedObject
                 )
-            ) {
+            )
+            {
                 typeToGenerateIn =
                     semanticModel.GetTypeInfo(initializedObject, cancellationToken).Type
                     as INamedTypeSymbol;
@@ -230,7 +235,8 @@ namespace Microsoft.CodeAnalysis.GenerateMember
             out INamedTypeSymbol typeToGenerateIn,
             out bool isStatic,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var typeInfo = semanticModel.GetTypeInfo(expression, cancellationToken);
             var semanticInfo = semanticModel.GetSymbolInfo(expression, cancellationToken);
 

@@ -40,7 +40,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.RenameTracking
                 ITextBuffer textBuffer,
                 int trackingSessionId,
                 bool shouldRestoreStateOnUndo
-            ) {
+            )
+            {
                 _weakTextBuffer = new WeakReference<ITextBuffer>(textBuffer);
                 _trackingSessionId = trackingSessionId;
                 _shouldRestoreStateOnUndo = shouldRestoreStateOnUndo;

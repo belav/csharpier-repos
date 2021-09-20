@@ -42,7 +42,8 @@ namespace System.Xml.Serialization
             TypeScope[] scopes,
             string access,
             string className
-        ) {
+        )
+        {
             _writer = writer;
             _scopes = scopes;
             if (scopes.Length > 0)
@@ -191,14 +192,16 @@ namespace System.Xml.Serialization
             string publicName,
             string?[] methods,
             XmlMapping[] xmlMappings
-        ) {
+        )
+        {
             GenerateHashtableGetBegin(privateName, publicName);
             if (
                 methods != null
                 && methods.Length != 0
                 && xmlMappings != null
                 && xmlMappings.Length == methods.Length
-            ) {
+            )
+            {
                 for (int i = 0; i < methods.Length; i++)
                 {
                     if (methods[i] == null)
@@ -255,7 +258,8 @@ namespace System.Xml.Serialization
             string readerClass,
             string writerClass,
             CodeIdentifiers classes
-        ) {
+        )
+        {
             baseSerializer = CodeIdentifier.MakeValid(baseSerializer);
             baseSerializer = classes.AddUnique(baseSerializer, baseSerializer);
 
@@ -301,7 +305,8 @@ namespace System.Xml.Serialization
             string baseSerializer,
             string readerClass,
             string writerClass
-        ) {
+        )
+        {
             string serializerName = CodeIdentifier.MakeValid(
                 Accessor.UnescapeName(mapping.Accessor.Mapping!.TypeDesc!.Name)
             );
@@ -443,7 +448,8 @@ namespace System.Xml.Serialization
             string writerType,
             string?[] writerMethods,
             Hashtable serializers
-        ) {
+        )
+        {
             _writer.WriteLine();
             _writer.Write("public class XmlSerializerContract : global::");
             _writer.Write(typeof(System.Xml.Serialization.XmlSerializerImplementation).FullName);

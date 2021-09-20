@@ -108,7 +108,8 @@ namespace Microsoft.EntityFrameworkCore.TestUtilities.QueryTestGeneration
                 if (
                     node.Type.IsGenericType
                     && node.Type.GetGenericTypeDefinition() == typeof(EntityQueryable<>)
-                ) {
+                )
+                {
                     FoundExpressions.Add(node);
                 }
 

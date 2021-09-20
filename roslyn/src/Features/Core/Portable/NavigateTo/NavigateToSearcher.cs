@@ -41,7 +41,8 @@ namespace Microsoft.CodeAnalysis.NavigateTo
             string searchPattern,
             bool searchCurrentDocument,
             IImmutableSet<string> kinds
-        ) {
+        )
+        {
             _host = host;
             _solution = solution;
             _asyncListener = asyncListener;
@@ -86,7 +87,8 @@ namespace Microsoft.CodeAnalysis.NavigateTo
             IImmutableSet<string> kinds,
             CancellationToken disposalToken,
             INavigateToSearcherHost? host = null
-        ) {
+        )
+        {
             host ??= new DefaultNavigateToSearchHost(solution, asyncListener, disposalToken);
             return new NavigateToSearcher(
                 host,
@@ -259,7 +261,8 @@ namespace Microsoft.CodeAnalysis.NavigateTo
             ImmutableArray<ImmutableArray<Project>> orderedProjects,
             bool isFullyLoaded,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             await _progress.AddItemsAsync(orderedProjects.Sum(p => p.Length)).ConfigureAwait(false);
 
             using var _ =
@@ -297,7 +300,8 @@ namespace Microsoft.CodeAnalysis.NavigateTo
             bool isFullyLoaded,
             HashSet<INavigateToSearchResult> seenItems,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             try
             {
                 var location = await SearchCoreAsync(
@@ -321,7 +325,8 @@ namespace Microsoft.CodeAnalysis.NavigateTo
             bool isFullyLoaded,
             HashSet<INavigateToSearchResult> seenItems,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             // If they don't even support the service, then always show them as having done the
             // complete search.  That way we don't call back into this project ever.
             var service = _host.GetNavigateToSearchService(project);

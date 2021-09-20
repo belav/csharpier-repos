@@ -23,7 +23,8 @@ namespace Microsoft.AspNetCore.Authentication
             string? displayName,
             [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicConstructors)]
                 Type handlerType
-        ) {
+        )
+        {
             if (name == null)
             {
                 throw new ArgumentNullException(nameof(name));

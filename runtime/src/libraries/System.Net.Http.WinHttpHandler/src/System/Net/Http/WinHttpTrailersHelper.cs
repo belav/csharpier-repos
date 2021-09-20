@@ -57,7 +57,8 @@ namespace System.Net.Http
                     ref buffer,
                     ref bufferSize
                 )
-            ) {
+            )
+            {
                 Debug.Fail(
                     "Querying WINHTTP_OPTION_STREAM_ERROR_CODE on a session handle should never succeed."
                 );

@@ -22,7 +22,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.CodeCleanup
 
         protected AbstractCodeCleanUpFixerProvider(
             IEnumerable<Lazy<AbstractCodeCleanUpFixer, ContentTypeMetadata>> codeCleanUpFixers
-        ) {
+        )
+        {
             _codeCleanUpFixers = codeCleanUpFixers.ToImmutableArray();
         }
 

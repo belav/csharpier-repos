@@ -66,7 +66,8 @@ namespace System.Security.Cryptography.X509Certificates.Tests.RevocationTests
                             designationOptions.HasFlag(
                                 PkiOptions.RootAuthorityHasDesignatedOcspResponder
                             ) && !issuerRevocation.HasFlag(PkiOptions.IssuerRevocationViaOcsp)
-                        ) {
+                        )
+                        {
                             continue;
                         }
 
@@ -81,7 +82,8 @@ namespace System.Security.Cryptography.X509Certificates.Tests.RevocationTests
                                 && !endEntityRevocation.HasFlag(
                                     PkiOptions.EndEntityRevocationViaOcsp
                                 )
-                            ) {
+                            )
+                            {
                                 continue;
                             }
 
@@ -93,7 +95,8 @@ namespace System.Security.Cryptography.X509Certificates.Tests.RevocationTests
                                     !endEntityRevocation.HasFlag(
                                         PkiOptions.EndEntityRevocationViaOcsp
                                     )
-                                ) {
+                                )
+                                {
                                     continue;
                                 }
                             }
@@ -447,7 +450,8 @@ namespace System.Security.Cryptography.X509Certificates.Tests.RevocationTests
                                 cdpUrl: null,
                                 ocspUrl: null
                             )
-                        ) {
+                        )
+                        {
                             X509Certificate2 designatedSigner = unrelated.CreateOcspSigner(
                                 BuildSubject(
                                     "Unrelated Designated OCSP Responder",
@@ -547,7 +551,8 @@ namespace System.Security.Cryptography.X509Certificates.Tests.RevocationTests
                                 cdpUrl: null,
                                 ocspUrl: null
                             )
-                        ) {
+                        )
+                        {
                             X509Certificate2 designatedSigner = unrelated.CreateOcspSigner(
                                 BuildSubject(
                                     "Unrelated Designated OCSP Responder",
@@ -625,7 +630,8 @@ namespace System.Security.Cryptography.X509Certificates.Tests.RevocationTests
         public static void RevokeIntermediate_PolicyErrors_NotTimeValid(
             bool policyErrors,
             bool notTimeValid
-        ) {
+        )
+        {
             SimpleTest(
                 PkiOptions.OcspEverywhere,
                 (root, intermediate, endEntity, holder, responder) =>
@@ -722,7 +728,8 @@ namespace System.Security.Cryptography.X509Certificates.Tests.RevocationTests
         public static void RevokeEndEntity_PolicyErrors_NotTimeValid(
             bool policyErrors,
             bool notTimeValid
-        ) {
+        )
+        {
             SimpleTest(
                 PkiOptions.OcspEverywhere,
                 (root, intermediate, endEntity, holder, responder) =>
@@ -1371,7 +1378,8 @@ namespace System.Security.Cryptography.X509Certificates.Tests.RevocationTests
             ChainHolder holder,
             CertificateAuthority intermediate,
             X509Certificate2 endEntity
-        ) {
+        )
+        {
             DateTimeOffset now = DateTimeOffset.UtcNow;
             X509Chain chain = holder.Chain;
 
@@ -1387,7 +1395,8 @@ namespace System.Security.Cryptography.X509Certificates.Tests.RevocationTests
             CertificateAuthority root,
             CertificateAuthority intermediate,
             X509Certificate2 endEntity
-        ) {
+        )
+        {
             DateTimeOffset now = DateTimeOffset.UtcNow;
             X509Chain chain = holder.Chain;
 
@@ -1447,7 +1456,8 @@ namespace System.Security.Cryptography.X509Certificates.Tests.RevocationTests
         private static void RunWithInconclusiveEndEntityRevocation(
             ChainHolder holder,
             X509Certificate2 endEntity
-        ) {
+        )
+        {
             X509Chain chain = holder.Chain;
             bool chainBuilt = chain.Build(endEntity);
 
@@ -1492,7 +1502,8 @@ namespace System.Security.Cryptography.X509Certificates.Tests.RevocationTests
         private static void RunWithInconclusiveIntermediateRevocation(
             ChainHolder holder,
             X509Certificate2 endEntity
-        ) {
+        )
+        {
             X509Chain chain = holder.Chain;
             bool chainBuilt = chain.Build(endEntity);
 
@@ -1550,7 +1561,8 @@ namespace System.Security.Cryptography.X509Certificates.Tests.RevocationTests
             bool issrRevoked,
             bool leafRevoked,
             bool testWithRootRevocation = false
-        ) {
+        )
+        {
             X509Chain chain = holder.Chain;
 
             // This is the default mode, and probably already set right.
@@ -1581,7 +1593,8 @@ namespace System.Security.Cryptography.X509Certificates.Tests.RevocationTests
             bool rootRevoked,
             bool issrRevoked,
             bool leafRevoked
-        ) {
+        )
+        {
             bool chainBuilt;
 
             if (rootRevoked)
@@ -1643,7 +1656,8 @@ namespace System.Security.Cryptography.X509Certificates.Tests.RevocationTests
             RunSimpleTest callback,
             [CallerMemberName] string callerName = null,
             bool pkiOptionsInTestName = true
-        ) {
+        )
+        {
             BuildPrivatePki(
                 pkiOptions,
                 out RevocationResponder responder,
@@ -1675,7 +1689,8 @@ namespace System.Security.Cryptography.X509Certificates.Tests.RevocationTests
                             ),
                             tmpKey
                         )
-                    ) {
+                    )
+                    {
                         root.DesignateOcspResponder(tmp.CopyWithPrivateKey(tmpKey));
                     }
                 }
@@ -1693,7 +1708,8 @@ namespace System.Security.Cryptography.X509Certificates.Tests.RevocationTests
                             ),
                             tmpKey
                         )
-                    ) {
+                    )
+                    {
                         intermediate.DesignateOcspResponder(tmp.CopyWithPrivateKey(tmpKey));
                     }
                 }
@@ -1714,7 +1730,8 @@ namespace System.Security.Cryptography.X509Certificates.Tests.RevocationTests
             X509ChainStatusFlags rootStatus,
             X509ChainStatusFlags issrStatus,
             X509ChainStatusFlags leafStatus
-        ) {
+        )
+        {
             Assert.Equal(3, chain.ChainElements.Count);
 
             X509ChainStatusFlags allFlags = rootStatus | issrStatus | leafStatus;
@@ -1730,7 +1747,8 @@ namespace System.Security.Cryptography.X509Certificates.Tests.RevocationTests
                 || issrActual != issrStatus
                 || leafActual != leafStatus
                 || chainActual != allFlags
-            ) {
+            )
+            {
                 X509ChainStatusFlags[] expected = { rootStatus, issrStatus, leafStatus };
                 X509ChainStatusFlags[] actual = { rootActual, issrActual, leafActual };
 
@@ -1748,7 +1766,8 @@ namespace System.Security.Cryptography.X509Certificates.Tests.RevocationTests
             [CallerMemberName] string testName = null,
             bool registerAuthorities = true,
             bool pkiOptionsInSubject = false
-        ) {
+        )
+        {
             bool issuerRevocationViaCrl = pkiOptions.HasFlag(PkiOptions.IssuerRevocationViaCrl);
             bool issuerRevocationViaOcsp = pkiOptions.HasFlag(PkiOptions.IssuerRevocationViaOcsp);
             bool endEntityRevocationViaCrl = pkiOptions.HasFlag(
@@ -1783,7 +1802,8 @@ namespace System.Security.Cryptography.X509Certificates.Tests.RevocationTests
             string testName,
             PkiOptions pkiOptions,
             bool includePkiOptions
-        ) {
+        )
+        {
             if (includePkiOptions)
             {
                 return $"CN=\"{cn}\", O=\"{testName}\", OU=\"{pkiOptions}\"";

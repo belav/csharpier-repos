@@ -57,7 +57,8 @@ namespace System.ComponentModel
             ITypeDescriptorContext context,
             CultureInfo culture,
             object value
-        ) {
+        )
+        {
             if (value == null || value.GetType() == UnderlyingType)
             {
                 return value;
@@ -103,7 +104,8 @@ namespace System.ComponentModel
             CultureInfo culture,
             object value,
             Type destinationType
-        ) {
+        )
+        {
             if (destinationType == null)
             {
                 throw new ArgumentNullException(nameof(destinationType));
@@ -113,7 +115,8 @@ namespace System.ComponentModel
                 destinationType == UnderlyingType
                 && value != null
                 && NullableType.IsInstanceOfType(value)
-            ) {
+            )
+            {
                 return value;
             }
             else if (destinationType == typeof(InstanceDescriptor))
@@ -154,7 +157,8 @@ namespace System.ComponentModel
         public override object CreateInstance(
             ITypeDescriptorContext context,
             IDictionary propertyValues
-        ) {
+        )
+        {
             if (UnderlyingTypeConverter != null)
             {
                 object instance = UnderlyingTypeConverter.CreateInstance(context, propertyValues);
@@ -191,7 +195,8 @@ namespace System.ComponentModel
             ITypeDescriptorContext context,
             object value,
             Attribute[] attributes
-        ) {
+        )
+        {
             if (UnderlyingTypeConverter != null)
             {
                 object unwrappedValue = value;

@@ -34,7 +34,8 @@ namespace Microsoft.CodeAnalysis.Internal.Log
         public static KeyValueLogMessage Create(
             LogType kind,
             Action<Dictionary<string, object>> propertySetter
-        ) {
+        )
+        {
             var logMessage = s_pool.Allocate();
             logMessage.Construct(kind, propertySetter);
 

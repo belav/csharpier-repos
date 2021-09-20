@@ -82,7 +82,8 @@ namespace RunTests
             Action<string>? errorDataReceived = null,
             Action<int>? onStart = null,
             CancellationToken cancellationToken = default
-        ) {
+        )
+        {
             Console.WriteLine($"Running '{filename} {arguments}'");
             using var process = new Process()
             {

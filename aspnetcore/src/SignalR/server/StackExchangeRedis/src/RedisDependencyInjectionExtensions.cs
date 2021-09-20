@@ -20,7 +20,8 @@ namespace Microsoft.Extensions.DependencyInjection
         /// <returns>The same instance of the <see cref="ISignalRServerBuilder"/> for chaining.</returns>
         public static ISignalRServerBuilder AddStackExchangeRedis(
             this ISignalRServerBuilder signalrBuilder
-        ) {
+        )
+        {
             return AddStackExchangeRedis(signalrBuilder, o => { });
         }
 
@@ -33,7 +34,8 @@ namespace Microsoft.Extensions.DependencyInjection
         public static ISignalRServerBuilder AddStackExchangeRedis(
             this ISignalRServerBuilder signalrBuilder,
             string redisConnectionString
-        ) {
+        )
+        {
             return AddStackExchangeRedis(
                 signalrBuilder,
                 o =>
@@ -52,7 +54,8 @@ namespace Microsoft.Extensions.DependencyInjection
         public static ISignalRServerBuilder AddStackExchangeRedis(
             this ISignalRServerBuilder signalrBuilder,
             Action<RedisOptions> configure
-        ) {
+        )
+        {
             signalrBuilder.Services.Configure(configure);
             signalrBuilder.Services.AddSingleton(
                 typeof(HubLifetimeManager<>),
@@ -72,7 +75,8 @@ namespace Microsoft.Extensions.DependencyInjection
             this ISignalRServerBuilder signalrBuilder,
             string redisConnectionString,
             Action<RedisOptions> configure
-        ) {
+        )
+        {
             return AddStackExchangeRedis(
                 signalrBuilder,
                 o =>

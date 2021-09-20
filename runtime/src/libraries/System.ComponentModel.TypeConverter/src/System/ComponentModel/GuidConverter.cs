@@ -40,7 +40,8 @@ namespace System.ComponentModel
             ITypeDescriptorContext context,
             CultureInfo culture,
             object value
-        ) {
+        )
+        {
             if (value is string text)
             {
                 return new Guid(text);
@@ -61,7 +62,8 @@ namespace System.ComponentModel
             CultureInfo culture,
             object value,
             Type destinationType
-        ) {
+        )
+        {
             if (destinationType == typeof(InstanceDescriptor) && value is Guid)
             {
                 ConstructorInfo ctor = typeof(Guid).GetConstructor(new Type[] { typeof(string) });

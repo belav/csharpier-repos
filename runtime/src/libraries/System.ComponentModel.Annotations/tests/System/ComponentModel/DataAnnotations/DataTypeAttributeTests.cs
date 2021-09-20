@@ -68,7 +68,8 @@ namespace System.ComponentModel.DataAnnotations.Tests
         [InlineData(DataType.Upload + 1)]
         public static void GetDataTypeName_InvalidDataType_ThrowsIndexOutOfRangeException(
             DataType dataType
-        ) {
+        )
+        {
             DataTypeAttribute attribute = new DataTypeAttribute(dataType);
             Assert.Throws<IndexOutOfRangeException>(() => attribute.GetDataTypeName());
         }
@@ -113,7 +114,8 @@ namespace System.ComponentModel.DataAnnotations.Tests
             DataType dataType,
             string dataFormatString,
             bool applyFormatInEditMode
-        ) {
+        )
+        {
             DataTypeAttribute attribute = new DataTypeAttribute(dataType);
             Assert.Equal(dataFormatString, attribute.DisplayFormat.DataFormatString);
             Assert.Equal(applyFormatInEditMode, attribute.DisplayFormat.ApplyFormatInEditMode);

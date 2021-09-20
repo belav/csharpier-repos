@@ -35,7 +35,8 @@ namespace System.Web.Razor.Parser.SyntaxTree
             BlockType type,
             IEnumerable<SyntaxTreeNode> contents,
             IBlockCodeGenerator generator
-        ) {
+        )
+        {
             Type = type;
             CodeGenerator = generator;
             Children = contents;
@@ -184,7 +185,8 @@ namespace System.Web.Razor.Parser.SyntaxTree
         private static bool ChildrenEqual(
             IEnumerable<SyntaxTreeNode> left,
             IEnumerable<SyntaxTreeNode> right
-        ) {
+        )
+        {
             IEnumerator<SyntaxTreeNode> leftEnum = left.GetEnumerator();
             IEnumerator<SyntaxTreeNode> rightEnum = right.GetEnumerator();
             while (leftEnum.MoveNext())
@@ -193,7 +195,8 @@ namespace System.Web.Razor.Parser.SyntaxTree
                     !rightEnum.MoveNext()
                     || // More items in left than in right
                     !Equals(leftEnum.Current, rightEnum.Current)
-                ) {
+                )
+                {
                     // Nodes are not equal
                     return false;
                 }

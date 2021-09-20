@@ -37,7 +37,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.KeywordHighlighting.KeywordHighli
             SyntaxNode node,
             List<TextSpan> highlights,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             foreach (var current in WalkChildren(node))
             {
                 cancellationToken.ThrowIfCancellationRequested();

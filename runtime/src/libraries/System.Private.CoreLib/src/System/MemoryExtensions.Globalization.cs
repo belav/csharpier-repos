@@ -35,7 +35,8 @@ namespace System
             this ReadOnlySpan<char> span,
             ReadOnlySpan<char> value,
             StringComparison comparisonType
-        ) {
+        )
+        {
             return IndexOf(span, value, comparisonType) >= 0;
         }
 
@@ -50,7 +51,8 @@ namespace System
             this ReadOnlySpan<char> span,
             ReadOnlySpan<char> other,
             StringComparison comparisonType
-        ) {
+        )
+        {
             string.CheckStringComparison(comparisonType);
 
             switch (comparisonType)
@@ -94,7 +96,8 @@ namespace System
         internal static bool EqualsOrdinalIgnoreCase(
             this ReadOnlySpan<char> span,
             ReadOnlySpan<char> value
-        ) {
+        )
+        {
             if (span.Length != value.Length)
                 return false;
             if (value.Length == 0) // span.Length == value.Length == 0
@@ -117,7 +120,8 @@ namespace System
             this ReadOnlySpan<char> span,
             ReadOnlySpan<char> other,
             StringComparison comparisonType
-        ) {
+        )
+        {
             string.CheckStringComparison(comparisonType);
 
             switch (comparisonType)
@@ -164,7 +168,8 @@ namespace System
             this ReadOnlySpan<char> span,
             ReadOnlySpan<char> value,
             StringComparison comparisonType
-        ) {
+        )
+        {
             string.CheckStringComparison(comparisonType);
 
             if (comparisonType == StringComparison.Ordinal)
@@ -211,7 +216,8 @@ namespace System
             this ReadOnlySpan<char> span,
             ReadOnlySpan<char> value,
             StringComparison comparisonType
-        ) {
+        )
+        {
             string.CheckStringComparison(comparisonType);
 
             if (comparisonType == StringComparison.Ordinal)
@@ -262,7 +268,8 @@ namespace System
             this ReadOnlySpan<char> source,
             Span<char> destination,
             CultureInfo? culture
-        ) {
+        )
+        {
             if (source.Overlaps(destination))
                 throw new InvalidOperationException(SR.InvalidOperation_SpanOverlappedOperation);
 
@@ -317,7 +324,8 @@ namespace System
             this ReadOnlySpan<char> source,
             Span<char> destination,
             CultureInfo? culture
-        ) {
+        )
+        {
             if (source.Overlaps(destination))
                 throw new InvalidOperationException(SR.InvalidOperation_SpanOverlappedOperation);
 
@@ -368,7 +376,8 @@ namespace System
             this ReadOnlySpan<char> span,
             ReadOnlySpan<char> value,
             StringComparison comparisonType
-        ) {
+        )
+        {
             string.CheckStringComparison(comparisonType);
 
             switch (comparisonType)
@@ -420,7 +429,8 @@ namespace System
             this ReadOnlySpan<char> span,
             ReadOnlySpan<char> value,
             StringComparison comparisonType
-        ) {
+        )
+        {
             string.CheckStringComparison(comparisonType);
 
             switch (comparisonType)

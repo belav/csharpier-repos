@@ -32,7 +32,8 @@ namespace Microsoft.Extensions.DependencyInjection
             IHealthCheck instance,
             HealthStatus? failureStatus,
             IEnumerable<string> tags
-        ) {
+        )
+        {
             return AddCheck(builder, name, instance, failureStatus, tags, default);
         }
 
@@ -61,7 +62,8 @@ namespace Microsoft.Extensions.DependencyInjection
             HealthStatus? failureStatus = null,
             IEnumerable<string>? tags = null,
             TimeSpan? timeout = null
-        ) {
+        )
+        {
             if (builder == null)
             {
                 throw new ArgumentNullException(nameof(builder));

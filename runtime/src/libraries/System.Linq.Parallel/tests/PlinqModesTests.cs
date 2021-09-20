@@ -129,7 +129,8 @@ namespace System.Linq.Parallel.Tests
 
         public static IEnumerable<Labeled<Action<UsedTaskTracker, ParallelQuery<int>>>> HardQueries(
             int count
-        ) {
+        )
+        {
             yield return Labeled.Label<Action<UsedTaskTracker, ParallelQuery<int>>>(
                 "Select+Where+TakeWhile+ToArray",
                 (verifier, query) =>
@@ -191,7 +192,8 @@ namespace System.Linq.Parallel.Tests
                         ParallelExecutionMode.Default,
                         ParallelExecutionMode.ForceParallelism
                     }
-                ) {
+                )
+                {
                     foreach (Labeled<ParallelQuery<int>> source in partitionedRanges)
                     {
                         foreach (var query in EasyUnorderedQueries(count))
@@ -262,7 +264,8 @@ namespace System.Linq.Parallel.Tests
             int expectedDop,
             Labeled<Action<UsedTaskTracker, ParallelQuery<int>>> operation,
             ParallelExecutionMode mode
-        ) {
+        )
+        {
             UsedTaskTracker tracker = new UsedTaskTracker();
             operation.Item(
                 tracker,
@@ -280,7 +283,8 @@ namespace System.Linq.Parallel.Tests
         public static void WithExecutionMode_ArgumentException(
             Labeled<ParallelQuery<int>> labeled,
             int count
-        ) {
+        )
+        {
             _ = count;
             ParallelQuery<int> query = labeled.Item;
             AssertExtensions.Throws<ArgumentException>(
@@ -294,7 +298,8 @@ namespace System.Linq.Parallel.Tests
         public static void WithExecutionMode_Multiple(
             ParallelExecutionMode first,
             ParallelExecutionMode second
-        ) {
+        )
+        {
             Assert.Throws<InvalidOperationException>(
                 () =>
                     ParallelEnumerable.Range(0, 1)

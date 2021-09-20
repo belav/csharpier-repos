@@ -21,7 +21,8 @@ namespace System.Net.Mime
             int count,
             bool dontDeferFinalBytes,
             bool shouldAppendSpaceToCRLF
-        ) {
+        )
+        {
             // Add Encoding header, if any. e.g. =?encoding?b?
             WriteState.AppendHeader();
 

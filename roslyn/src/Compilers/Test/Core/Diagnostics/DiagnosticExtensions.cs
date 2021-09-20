@@ -31,28 +31,32 @@ namespace Microsoft.CodeAnalysis
         public static void VerifyErrorCodes(
             this IEnumerable<Diagnostic> actual,
             params DiagnosticDescription[] expected
-        ) {
+        )
+        {
             Verify(actual, expected, errorCodeOnly: true);
         }
 
         public static void VerifyErrorCodes(
             this ImmutableArray<Diagnostic> actual,
             params DiagnosticDescription[] expected
-        ) {
+        )
+        {
             VerifyErrorCodes((IEnumerable<Diagnostic>)actual, expected);
         }
 
         internal static void Verify(
             this DiagnosticBag actual,
             params DiagnosticDescription[] expected
-        ) {
+        )
+        {
             Verify(actual.AsEnumerable(), expected, errorCodeOnly: false);
         }
 
         public static void Verify(
             this IEnumerable<Diagnostic> actual,
             params DiagnosticDescription[] expected
-        ) {
+        )
+        {
             Verify(actual, expected, errorCodeOnly: false);
         }
 
@@ -60,7 +64,8 @@ namespace Microsoft.CodeAnalysis
             this IEnumerable<Diagnostic> actual,
             bool fallbackToErrorCodeOnlyForNonEnglish,
             params DiagnosticDescription[] expected
-        ) {
+        )
+        {
             Verify(
                 actual,
                 expected,
@@ -72,14 +77,16 @@ namespace Microsoft.CodeAnalysis
         public static void VerifyWithFallbackToErrorCodeOnlyForNonEnglish(
             this IEnumerable<Diagnostic> actual,
             params DiagnosticDescription[] expected
-        ) {
+        )
+        {
             Verify(actual, true, expected);
         }
 
         public static void Verify(
             this ImmutableArray<Diagnostic> actual,
             params DiagnosticDescription[] expected
-        ) {
+        )
+        {
             Verify((IEnumerable<Diagnostic>)actual, expected);
         }
 
@@ -87,7 +94,8 @@ namespace Microsoft.CodeAnalysis
             IEnumerable<Diagnostic> actual,
             DiagnosticDescription[] expected,
             bool errorCodeOnly
-        ) {
+        )
+        {
             if (expected == null)
             {
                 throw new ArgumentException("Must specify expected errors.", nameof(expected));
@@ -279,7 +287,8 @@ namespace Microsoft.CodeAnalysis
             if (
                 c.Options.GeneralDiagnosticOption == ReportDiagnostic.Default
                 && c.Options.SpecificDiagnosticOptions.IsEmpty
-            ) {
+            )
+            {
                 _ = c.VerifySuppressedDiagnostics(
                     toggleWarnAsError: true,
                     analyzers,
@@ -433,7 +442,8 @@ namespace Microsoft.CodeAnalysis
         public static IEnumerable<Diagnostic> GetEffectiveDiagnostics(
             this Compilation compilation,
             IEnumerable<Diagnostic> diagnostics
-        ) {
+        )
+        {
             return CompilationWithAnalyzers.GetEffectiveDiagnostics(diagnostics, compilation);
         }
 
@@ -443,7 +453,8 @@ namespace Microsoft.CodeAnalysis
         public static bool IsDiagnosticAnalyzerSuppressed(
             this DiagnosticAnalyzer analyzer,
             CompilationOptions options
-        ) {
+        )
+        {
             return CompilationWithAnalyzers.IsDiagnosticAnalyzerSuppressed(analyzer, options);
         }
 

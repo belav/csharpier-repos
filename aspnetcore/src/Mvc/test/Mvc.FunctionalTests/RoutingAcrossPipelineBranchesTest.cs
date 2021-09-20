@@ -19,7 +19,8 @@ namespace Microsoft.AspNetCore.Mvc.FunctionalTests
     {
         public RoutingAcrossPipelineBranchesTests(
             MvcTestFixture<RoutingWebSite.StartupRoutingDifferentBranches> fixture
-        ) {
+        )
+        {
             Factory =
                 fixture.Factories.FirstOrDefault()
                 ?? fixture.WithWebHostBuilder(ConfigureWebHostBuilder);

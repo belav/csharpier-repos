@@ -37,7 +37,8 @@ namespace Runtime_1241
                     (bug.Vertices[0].Position.X != 1)
                     || (bug.Vertices[0].Position.Y != 1)
                     || (bug.Vertices[0].Position.Z != 1)
-                ) {
+                )
+                {
                     returnVal = -1;
                 }
             }
@@ -55,7 +56,8 @@ namespace Runtime_1241
                     (bug.Vertices[0].Position.X != 1)
                     || (bug.Vertices[0].Position.Y != 1)
                     || (bug.Vertices[0].Position.Z != 1)
-                ) {
+                )
+                {
                     returnVal = -1;
                 }
             }

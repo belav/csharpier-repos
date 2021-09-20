@@ -137,7 +137,8 @@ namespace System.Web.Mvc.Routing
             int length,
             string parameterValue,
             bool expected
-        ) {
+        )
+        {
             var constraint = new LengthRouteConstraint(length);
             var actual = TestValue(constraint, parameterValue);
             Assert.Equal(expected, actual);
@@ -154,7 +155,8 @@ namespace System.Web.Mvc.Routing
             int max,
             string parameterValue,
             bool expected
-        ) {
+        )
+        {
             var constraint = new LengthRouteConstraint(min, max);
             var actual = TestValue(constraint, parameterValue);
             Assert.Equal(expected, actual);
@@ -170,7 +172,8 @@ namespace System.Web.Mvc.Routing
             object parameterValue,
             bool parseBeforeTest,
             bool expected
-        ) {
+        )
+        {
             if (parseBeforeTest)
             {
                 parameterValue = Guid.Parse(parameterValue.ToString());
@@ -255,7 +258,8 @@ namespace System.Web.Mvc.Routing
             object parameterValue,
             bool shouldCallInner,
             bool expected
-        ) {
+        )
+        {
             // Arrange
             var inner = MockConstraintWithResult((string)parameterValue != "fail");
 
@@ -292,7 +296,8 @@ namespace System.Web.Mvc.Routing
             bool inner1Result,
             bool inner2Result,
             bool expected
-        ) {
+        )
+        {
             // Arrange
             var inner1 = MockConstraintWithResult(inner1Result);
 
@@ -332,7 +337,8 @@ namespace System.Web.Mvc.Routing
             IHttpRouteConstraint constraint,
             object value,
             Action<IHttpRoute> routeConfig = null
-        ) {
+        )
+        {
             HttpRequestMessage httpRequestMessage = new HttpRequestMessage();
 
             HttpRoute httpRoute = new HttpRoute();
@@ -381,7 +387,8 @@ namespace System.Web.Mvc.Routing
             IRouteConstraint constraint,
             object value,
             Action<Route> routeConfig = null
-        ) {
+        )
+        {
             var context = new Mock<HttpContextBase>();
 
             Route route = new Route("", null);

@@ -331,13 +331,15 @@ namespace System.Buffers
             if (
                 memoryInfo.MemoryLoadBytes
                 >= memoryInfo.HighMemoryLoadThresholdBytes * HighPressureThreshold
-            ) {
+            )
+            {
                 return MemoryPressure.High;
             }
             else if (
                 memoryInfo.MemoryLoadBytes
                 >= memoryInfo.HighMemoryLoadThresholdBytes * MediumPressureThreshold
-            ) {
+            )
+            {
                 return MemoryPressure.Medium;
             }
             return MemoryPressure.Low;
@@ -492,7 +494,8 @@ namespace System.Buffers
                     if (
                         _count > 0 && _firstStackItemMS > tickCount
                         || (tickCount - _firstStackItemMS) > trimTicks
-                    ) {
+                    )
+                    {
                         // We've wrapped the tick count or elapsed enough time since the
                         // first item went into the stack. Drop the top item so it can
                         // be collected and make the stack look a little newer.

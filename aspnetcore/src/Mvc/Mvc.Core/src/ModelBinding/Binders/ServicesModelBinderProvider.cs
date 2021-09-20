@@ -27,7 +27,8 @@ namespace Microsoft.AspNetCore.Mvc.ModelBinding.Binders
             if (
                 context.BindingInfo.BindingSource != null
                 && context.BindingInfo.BindingSource.CanAcceptDataFrom(BindingSource.Services)
-            ) {
+            )
+            {
                 return _modelBinder;
             }
 

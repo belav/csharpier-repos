@@ -12,7 +12,8 @@ namespace System.CodeDom
         public CodeMethodInvokeExpression(
             CodeMethodReferenceExpression method,
             params CodeExpression[] parameters
-        ) {
+        )
+        {
             _method = method;
             Parameters.AddRange(parameters);
         }
@@ -21,7 +22,8 @@ namespace System.CodeDom
             CodeExpression targetObject,
             string methodName,
             params CodeExpression[] parameters
-        ) {
+        )
+        {
             _method = new CodeMethodReferenceExpression(targetObject, methodName);
             Parameters.AddRange(parameters);
         }

@@ -71,7 +71,8 @@ namespace System.IO.Tests
             string fileName = GetTestFilePath();
             using (
                 FileStream fs = CreateFileStream(fileName, FileMode.Create, FileAccess.ReadWrite)
-            ) {
+            )
+            {
                 fs.WriteByte(0);
             }
 
@@ -93,7 +94,8 @@ namespace System.IO.Tests
                     FileMode.Create,
                     FileAccess.Write
                 )
-            ) {
+            )
+            {
                 Assert.True(fs.CanWrite);
                 fs.WriteByte(0); // should not throw
                 Assert.False(fs.CanRead);
@@ -107,7 +109,8 @@ namespace System.IO.Tests
             string fileName = GetTestFilePath();
             using (
                 FileStream fs = CreateFileStream(fileName, FileMode.Create, FileAccess.ReadWrite)
-            ) {
+            )
+            {
                 fs.WriteByte(0); // should not throw
             }
 

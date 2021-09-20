@@ -111,7 +111,8 @@ namespace System.Web.Http.ExceptionHandling
         protected override async Task<HttpResponseMessage> SendAsync(
             HttpRequestMessage request,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             ExceptionTestsUtility.CheckForThrow(_throwAt, "RequestMessageHandler");
 
             HttpResponseMessage response = await base.SendAsync(request, cancellationToken);
@@ -151,7 +152,8 @@ namespace System.Web.Http.ExceptionHandling
         public Task AuthenticateAsync(
             HttpAuthenticationContext context,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             ExceptionTestsUtility.CheckForThrow(_throwAt, "AuthenticationAuthenticate");
             return Task.FromResult<object>(null);
         }
@@ -159,7 +161,8 @@ namespace System.Web.Http.ExceptionHandling
         public Task ChallengeAsync(
             HttpAuthenticationChallengeContext context,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             ExceptionTestsUtility.CheckForThrow(_throwAt, "AuthenticationChallenge");
             return Task.FromResult<object>(null);
         }
@@ -233,7 +236,8 @@ namespace System.Web.Http.ExceptionHandling
             Type type,
             HttpRequestMessage request,
             IEnumerable<MediaTypeFormatter> formatters
-        ) {
+        )
+        {
             ExceptionTestsUtility.CheckForThrow(_throwAt, "ContentNegotiatorNegotiate");
 
             return base.Negotiate(type, request, formatters);
@@ -254,7 +258,8 @@ namespace System.Web.Http.ExceptionHandling
             Stream readStream,
             HttpContent content,
             IFormatterLogger formatterLogger
-        ) {
+        )
+        {
             ExceptionTestsUtility.CheckForThrow(_throwAt, "MediaTypeFormatterReadFromStreamAsync");
 
             return base.ReadFromStreamAsync(type, readStream, content, formatterLogger);
@@ -266,7 +271,8 @@ namespace System.Web.Http.ExceptionHandling
             Stream writeStream,
             HttpContent content,
             TransportContext transportContext
-        ) {
+        )
+        {
             ExceptionTestsUtility.CheckForThrow(_throwAt, "MediaTypeFormatterWriteToStreamAsync");
 
             return base.WriteToStreamAsync(type, value, writeStream, content, transportContext);

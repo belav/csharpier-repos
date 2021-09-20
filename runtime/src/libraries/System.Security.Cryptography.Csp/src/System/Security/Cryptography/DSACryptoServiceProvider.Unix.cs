@@ -117,7 +117,8 @@ namespace System.Security.Cryptography
             int offset,
             int count,
             HashAlgorithmName hashAlgorithm
-        ) {
+        )
+        {
             if (hashAlgorithm != HashAlgorithmName.SHA1)
                 throw new CryptographicException(
                     SR.Cryptography_UnknownHashAlgorithm,
@@ -143,7 +144,8 @@ namespace System.Security.Cryptography
             Span<byte> destination,
             HashAlgorithmName hashAlgorithm,
             out int bytesWritten
-        ) {
+        )
+        {
             if (hashAlgorithm != HashAlgorithmName.SHA1)
                 throw new CryptographicException(
                     SR.Cryptography_UnknownHashAlgorithm,
@@ -179,7 +181,8 @@ namespace System.Security.Cryptography
             ReadOnlySpan<byte> passwordBytes,
             ReadOnlySpan<byte> source,
             out int bytesRead
-        ) {
+        )
+        {
             _impl.ImportEncryptedPkcs8PrivateKey(passwordBytes, source, out bytesRead);
         }
 
@@ -187,7 +190,8 @@ namespace System.Security.Cryptography
             ReadOnlySpan<char> password,
             ReadOnlySpan<byte> source,
             out int bytesRead
-        ) {
+        )
+        {
             _impl.ImportEncryptedPkcs8PrivateKey(password, source, out bytesRead);
         }
 
@@ -241,7 +245,8 @@ namespace System.Security.Cryptography
             int offset,
             int count,
             HashAlgorithmName hashAlgorithm
-        ) {
+        )
+        {
             if (hashAlgorithm != HashAlgorithmName.SHA1)
                 throw new CryptographicException(
                     SR.Cryptography_UnknownHashAlgorithm,
@@ -267,7 +272,8 @@ namespace System.Security.Cryptography
             Span<byte> destination,
             HashAlgorithmName hashAlgorithm,
             out int bytesWritten
-        ) {
+        )
+        {
             if (hashAlgorithm != HashAlgorithmName.SHA1)
                 throw new CryptographicException(
                     SR.Cryptography_UnknownHashAlgorithm,
@@ -325,7 +331,8 @@ namespace System.Security.Cryptography
             int count,
             byte[] signature,
             HashAlgorithmName hashAlgorithm
-        ) {
+        )
+        {
             if (hashAlgorithm != HashAlgorithmName.SHA1)
                 throw new CryptographicException(
                     SR.Cryptography_UnknownHashAlgorithm,
@@ -339,7 +346,8 @@ namespace System.Security.Cryptography
             Stream data,
             byte[] signature,
             HashAlgorithmName hashAlgorithm
-        ) {
+        )
+        {
             if (hashAlgorithm != HashAlgorithmName.SHA1)
                 throw new CryptographicException(
                     SR.Cryptography_UnknownHashAlgorithm,
@@ -353,7 +361,8 @@ namespace System.Security.Cryptography
             ReadOnlySpan<byte> data,
             ReadOnlySpan<byte> signature,
             HashAlgorithmName hashAlgorithm
-        ) {
+        )
+        {
             if (hashAlgorithm != HashAlgorithmName.SHA1)
                 throw new CryptographicException(
                     SR.Cryptography_UnknownHashAlgorithm,
@@ -398,7 +407,8 @@ namespace System.Security.Cryptography
                 || keyBlob[10] != 0x53
                 || keyBlob[9] != 0x53
                 || keyBlob[8] != 0x44
-            ) {
+            )
+            {
                 return false;
             }
 

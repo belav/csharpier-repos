@@ -24,7 +24,8 @@ namespace Internal.Cryptography.Pal
             X509Certificate2Collection findFrom,
             X509Certificate2Collection copyTo,
             bool validOnly
-        ) {
+        )
+        {
             _storePal = (StorePal)StorePal.LinkFromCertificateCollection(findFrom);
             _copyTo = copyTo;
             _validOnly = validOnly;
@@ -34,7 +35,8 @@ namespace Internal.Cryptography.Pal
             X509Certificate2Collection findFrom,
             X509Certificate2Collection copyTo,
             bool validOnly
-        ) {
+        )
+        {
             return new FindPal(findFrom, copyTo, validOnly);
         }
 
@@ -211,7 +213,8 @@ namespace Internal.Cryptography.Pal
                                             foundMatch = true;
                                     }
                                 )
-                            ) {
+                            )
+                            {
                                 return false;
                             }
                         }
@@ -256,7 +259,8 @@ namespace Internal.Cryptography.Pal
                                             foundMatch = true;
                                     }
                                 )
-                            ) {
+                            )
+                            {
                                 return false;
                             }
                         }
@@ -358,7 +362,8 @@ namespace Internal.Cryptography.Pal
                                 }
                             }
                         )
-                    ) {
+                    )
+                    {
                         return false;
                     }
 
@@ -450,7 +455,8 @@ namespace Internal.Cryptography.Pal
         private unsafe void FindCore<TState>(
             TState state,
             Func<TState, SafeCertContextHandle, bool> filter
-        ) {
+        )
+        {
             FindCore(CertFindType.CERT_FIND_ANY, null, state, filter);
         }
 
@@ -459,7 +465,8 @@ namespace Internal.Cryptography.Pal
             void* pvFindPara,
             TState state = default!,
             Func<TState, SafeCertContextHandle, bool>? filter = null
-        ) {
+        )
+        {
             SafeCertStoreHandle findResults = Interop.crypt32.CertOpenStore(
                 CertStoreProvider.CERT_STORE_PROV_MEMORY,
                 CertEncodingType.All,
@@ -479,7 +486,8 @@ namespace Internal.Cryptography.Pal
                     pvFindPara,
                     ref pCertContext
                 )
-            ) {
+            )
+            {
                 if (filter != null && !filter(state, pCertContext))
                     continue;
 
@@ -546,7 +554,8 @@ namespace Internal.Cryptography.Pal
             SafeCertContextHandle pCertContext,
             CertNameType dwNameType,
             CertNameFlags dwNameFlags
-        ) {
+        )
+        {
             Debug.Assert(dwNameType != CertNameType.CERT_NAME_ATTR_TYPE);
             return Interop.crypt32.CertGetNameString(
                 pCertContext,

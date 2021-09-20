@@ -30,7 +30,8 @@ namespace System.Text.Json
             Span<byte> utf8Destination,
             out int bytesConsumed,
             out int bytesWritten
-        ) {
+        )
+        {
             //
             //
             // KEEP THIS IMPLEMENTATION IN SYNC WITH https://github.com/dotnet/coreclr/blob/master/src/System.Private.CoreLib/shared/System/Text/UTF8Encoding.cs#L841
@@ -38,7 +39,8 @@ namespace System.Text.Json
             //
             fixed (byte* chars = &MemoryMarshal.GetReference(utf16Source))fixed (
                 byte* bytes = &MemoryMarshal.GetReference(utf8Destination)
-            ) {
+            )
+            {
                 char* pSrc = (char*)chars;
                 byte* pTarget = bytes;
 
@@ -163,7 +165,8 @@ namespace System.Text.Json
                                     JsonConstants.HighSurrogateStart,
                                     JsonConstants.LowSurrogateEnd
                                 )
-                            ) {
+                            )
+                            {
                                 // 3 byte encoding
                                 chd = unchecked((sbyte)0xE0) | (ch >> 12);
                             }
@@ -186,7 +189,8 @@ namespace System.Text.Json
                                         JsonConstants.LowSurrogateStart,
                                         JsonConstants.LowSurrogateEnd
                                     )
-                                ) {
+                                )
+                                {
                                     // high not followed by low -> bad
                                     goto InvalidData;
                                 }
@@ -268,7 +272,8 @@ namespace System.Text.Json
                                 JsonConstants.HighSurrogateStart,
                                 JsonConstants.LowSurrogateEnd
                             )
-                        ) {
+                        )
+                        {
                             if (pAllocatedBufferEnd - pTarget <= 2)
                                 goto DestinationFull;
 
@@ -300,7 +305,8 @@ namespace System.Text.Json
                                     JsonConstants.LowSurrogateStart,
                                     JsonConstants.LowSurrogateEnd
                                 )
-                            ) {
+                            )
+                            {
                                 // high not followed by low -> bad
                                 goto InvalidData;
                             }

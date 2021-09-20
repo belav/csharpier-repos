@@ -62,7 +62,8 @@ namespace Microsoft.AspNetCore.Mvc.Razor.Extensions.Version2_X
         public void GetNamespace_ForNonRelatedFiles_UsesNamespaceVerbatim(
             string source,
             string imports
-        ) {
+        )
+        {
             // Arrange
             var node = new DirectiveIntermediateNode()
             {
@@ -94,7 +95,8 @@ namespace Microsoft.AspNetCore.Mvc.Razor.Extensions.Version2_X
             string source,
             string imports,
             string expected
-        ) {
+        )
+        {
             // Arrange
             var node = new DirectiveIntermediateNode()
             {

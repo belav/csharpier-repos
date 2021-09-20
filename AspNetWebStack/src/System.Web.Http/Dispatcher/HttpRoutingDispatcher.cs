@@ -47,7 +47,8 @@ namespace System.Web.Http.Dispatcher
         public HttpRoutingDispatcher(
             HttpConfiguration configuration,
             HttpMessageHandler defaultHandler
-        ) {
+        )
+        {
             if (configuration == null)
             {
                 throw Error.ArgumentNull("configuration");
@@ -70,7 +71,8 @@ namespace System.Web.Http.Dispatcher
         protected override Task<HttpResponseMessage> SendAsync(
             HttpRequestMessage request,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             // Lookup route data, or if not found as a request property then we look it up in the route table
             IHttpRouteData routeData = request.GetRouteData();
             if (routeData == null)
@@ -85,7 +87,8 @@ namespace System.Web.Http.Dispatcher
             if (
                 routeData == null
                 || (routeData.Route != null && routeData.Route.Handler is StopRoutingHandler)
-            ) {
+            )
+            {
                 request.Properties.Add(HttpPropertyKeys.NoRouteMatched, true);
                 return Task.FromResult(
                     request.CreateErrorResponse(

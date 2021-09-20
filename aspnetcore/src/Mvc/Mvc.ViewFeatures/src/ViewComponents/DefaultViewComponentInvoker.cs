@@ -36,7 +36,8 @@ namespace Microsoft.AspNetCore.Mvc.ViewComponents
             ViewComponentInvokerCache viewComponentInvokerCache,
             DiagnosticListener diagnosticListener,
             ILogger logger
-        ) {
+        )
+        {
             if (viewComponentFactory == null)
             {
                 throw new ArgumentNullException(nameof(viewComponentFactory));
@@ -112,7 +113,8 @@ namespace Microsoft.AspNetCore.Mvc.ViewComponents
             ObjectMethodExecutor executor,
             object component,
             ViewComponentContext context
-        ) {
+        )
+        {
             using (_logger.ViewComponentScope(context))
             {
                 var arguments = PrepareArguments(context.Arguments, executor);
@@ -182,7 +184,8 @@ namespace Microsoft.AspNetCore.Mvc.ViewComponents
             ObjectMethodExecutor executor,
             object component,
             ViewComponentContext context
-        ) {
+        )
+        {
             using (_logger.ViewComponentScope(context))
             {
                 var arguments = PrepareArguments(context.Arguments, executor);
@@ -241,7 +244,8 @@ namespace Microsoft.AspNetCore.Mvc.ViewComponents
         private static object?[]? PrepareArguments(
             IDictionary<string, object?> parameters,
             ObjectMethodExecutor objectMethodExecutor
-        ) {
+        )
+        {
             var declaredParameterInfos = objectMethodExecutor.MethodParameters;
             var count = declaredParameterInfos.Length;
             if (count == 0)

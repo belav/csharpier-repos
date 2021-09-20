@@ -59,11 +59,13 @@ namespace Microsoft.CodeAnalysis.CSharp.UseIndexOrRangeOperator
             ImmutableArray<Diagnostic> diagnostics,
             SyntaxEditor editor,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             // Process diagnostics from innermost to outermost in case any are nested.
             foreach (
                 var diagnostic in diagnostics.OrderByDescending(d => d.Location.SourceSpan.Start)
-            ) {
+            )
+            {
                 var node = diagnostic.Location.FindNode(
                     getInnermostNodeForTie: true,
                     cancellationToken
@@ -80,13 +82,12 @@ namespace Microsoft.CodeAnalysis.CSharp.UseIndexOrRangeOperator
 
         private class MyCodeAction : CustomCodeActions.DocumentChangeAction
         {
-            public MyCodeAction(
-                Func<CancellationToken, Task<Document>> createChangedDocument
-            ) : base(
-                CSharpAnalyzersResources.Use_index_operator,
-                createChangedDocument,
-                CSharpAnalyzersResources.Use_index_operator
-            ) { }
+            public MyCodeAction(Func<CancellationToken, Task<Document>> createChangedDocument)
+                : base(
+                    CSharpAnalyzersResources.Use_index_operator,
+                    createChangedDocument,
+                    CSharpAnalyzersResources.Use_index_operator
+                ) { }
         }
     }
 }

@@ -87,7 +87,8 @@ namespace System.Globalization.Tests
                                 entry.Source,
                                 StringComparison.OrdinalIgnoreCase
                             )
-                        ) {
+                        )
+                        {
                             string actualCodePoints = GetCodePoints(entry.Source);
                             string expectedCodePoints = GetCodePoints(entry.UnicodeResult.Value);
                             throw new Exception(

@@ -34,7 +34,8 @@ namespace System.Web.Mvc.Routing
             ControllerDescriptor controllerDescriptor,
             IReadOnlyList<ActionDescriptor> actionDescriptors,
             IInlineConstraintResolver constraintResolver
-        ) {
+        )
+        {
             List<RouteEntry> entries = new List<RouteEntry>();
 
             List<ActionDescriptor> actionsWithoutRoutes = new List<ActionDescriptor>();
@@ -95,7 +96,8 @@ namespace System.Web.Mvc.Routing
         /// </remarks>
         protected virtual IReadOnlyList<IDirectRouteFactory> GetControllerRouteFactories(
             ControllerDescriptor controllerDescriptor
-        ) {
+        )
+        {
             object[] attributes = controllerDescriptor.GetCustomAttributes(inherit: false);
             IEnumerable<IDirectRouteFactory> newFactories =
                 attributes.OfType<IDirectRouteFactory>();
@@ -128,7 +130,8 @@ namespace System.Web.Mvc.Routing
         /// </remarks>
         protected virtual IReadOnlyList<IDirectRouteFactory> GetActionRouteFactories(
             ActionDescriptor actionDescriptor
-        ) {
+        )
+        {
             // Skip Route attributes on inherited actions.
             IMethodInfoActionDescriptor methodInfoActionDescriptor =
                 actionDescriptor as IMethodInfoActionDescriptor;
@@ -138,7 +141,8 @@ namespace System.Web.Mvc.Routing
                 && actionDescriptor.ControllerDescriptor != null
                 && methodInfoActionDescriptor.MethodInfo.DeclaringType
                     != actionDescriptor.ControllerDescriptor.ControllerType
-            ) {
+            )
+            {
                 return null;
             }
 
@@ -177,7 +181,8 @@ namespace System.Web.Mvc.Routing
             IReadOnlyList<ActionDescriptor> actionDescriptors,
             IReadOnlyList<IDirectRouteFactory> factories,
             IInlineConstraintResolver constraintResolver
-        ) {
+        )
+        {
             return CreateRouteEntries(
                 GetAreaPrefix(controllerDescriptor),
                 GetRoutePrefix(controllerDescriptor),
@@ -200,7 +205,8 @@ namespace System.Web.Mvc.Routing
             ActionDescriptor actionDescriptor,
             IReadOnlyList<IDirectRouteFactory> factories,
             IInlineConstraintResolver constraintResolver
-        ) {
+        )
+        {
             return CreateRouteEntries(
                 GetAreaPrefix(actionDescriptor.ControllerDescriptor),
                 GetRoutePrefix(actionDescriptor.ControllerDescriptor),
@@ -255,7 +261,8 @@ namespace System.Web.Mvc.Routing
                     if (
                         prefix.StartsWith("/", StringComparison.Ordinal)
                         || prefix.EndsWith("/", StringComparison.Ordinal)
-                    ) {
+                    )
+                    {
                         string errorMessage = Error.Format(
                             MvcResources.RoutePrefix_CannotStartOrEnd_WithForwardSlash,
                             prefix,
@@ -294,7 +301,8 @@ namespace System.Web.Mvc.Routing
             IReadOnlyCollection<ActionDescriptor> actions,
             IInlineConstraintResolver constraintResolver,
             bool targetIsAction
-        ) {
+        )
+        {
             List<RouteEntry> entries = new List<RouteEntry>();
             foreach (IDirectRouteFactory factory in factories)
             {
@@ -320,7 +328,8 @@ namespace System.Web.Mvc.Routing
             IReadOnlyCollection<ActionDescriptor> actions,
             IInlineConstraintResolver constraintResolver,
             bool targetIsAction
-        ) {
+        )
+        {
             Contract.Assert(factory != null);
 
             DirectRouteFactoryContext context = new DirectRouteFactoryContext(
@@ -351,7 +360,8 @@ namespace System.Web.Mvc.Routing
             string areaPrefix,
             string areaName,
             ControllerDescriptor controllerDescriptor
-        ) {
+        )
+        {
             if (areaPrefix != null && areaPrefix.EndsWith("/", StringComparison.Ordinal))
             {
                 string errorMessage = Error.Format(

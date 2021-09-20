@@ -54,7 +54,8 @@ namespace Microsoft.EntityFrameworkCore.Infrastructure
         public override void Validate(
             IModel model,
             IDiagnosticsLogger<DbLoggerCategory.Model.Validation> logger
-        ) {
+        )
+        {
             base.Validate(model, logger);
 
             ValidatePropertyOverrides(model, logger);
@@ -75,7 +76,8 @@ namespace Microsoft.EntityFrameworkCore.Infrastructure
         protected virtual void ValidateSqlQueries(
             IModel model,
             IDiagnosticsLogger<DbLoggerCategory.Model.Validation> logger
-        ) {
+        )
+        {
             foreach (var entityType in model.GetEntityTypes())
             {
                 var sqlQuery = entityType.GetSqlQuery();
@@ -90,7 +92,8 @@ namespace Microsoft.EntityFrameworkCore.Infrastructure
                         entityType.FindDiscriminatorProperty() == null
                         || sqlQuery != entityType.BaseType.GetSqlQuery()
                     )
-                ) {
+                )
+                {
                     throw new InvalidOperationException(
                         RelationalStrings.InvalidMappedSqlQueryDerivedType(
                             entityType.DisplayName(),
@@ -109,7 +112,8 @@ namespace Microsoft.EntityFrameworkCore.Infrastructure
         protected virtual void ValidateDbFunctions(
             IModel model,
             IDiagnosticsLogger<DbLoggerCategory.Model.Validation> logger
-        ) {
+        )
+        {
             foreach (var dbFunction in model.GetDbFunctions())
             {
                 if (dbFunction.IsScalar)
@@ -136,7 +140,8 @@ namespace Microsoft.EntityFrameworkCore.Infrastructure
                             entityType == null
                             && model.GetEntityTypes().Any(e => e.ClrType == elementType)
                         )
-                    ) {
+                    )
+                    {
                         throw new InvalidOperationException(
                             RelationalStrings.DbFunctionInvalidIQueryableOwnedReturnType(
                                 dbFunction.ModelName,
@@ -159,7 +164,8 @@ namespace Microsoft.EntityFrameworkCore.Infrastructure
                     if (
                         (entityType.BaseType != null || entityType.GetDerivedTypes().Any())
                         && entityType.FindDiscriminatorProperty() == null
-                    ) {
+                    )
+                    {
                         throw new InvalidOperationException(
                             RelationalStrings.TableValuedFunctionNonTPH(
                                 dbFunction.ModelName,
@@ -217,7 +223,8 @@ namespace Microsoft.EntityFrameworkCore.Infrastructure
                 if (
                     mappedFunction.IsScalar
                     || mappedFunction.ReturnType.GetGenericArguments()[0] != entityType.ClrType
-                ) {
+                )
+                {
                     throw new InvalidOperationException(
                         RelationalStrings.InvalidMappedFunctionUnmatchedReturn(
                             entityType.DisplayName(),
@@ -256,7 +263,8 @@ namespace Microsoft.EntityFrameworkCore.Infrastructure
         protected virtual void ValidateBoolsWithDefaults(
             IModel model,
             IDiagnosticsLogger<DbLoggerCategory.Model.Validation> logger
-        ) {
+        )
+        {
             Check.NotNull(model, nameof(model));
 
             foreach (var entityType in model.GetEntityTypes())
@@ -266,7 +274,8 @@ namespace Microsoft.EntityFrameworkCore.Infrastructure
                     if (
                         property.ClrType != typeof(bool)
                         || property.ValueGenerated == ValueGenerated.Never
-                    ) {
+                    )
+                    {
                         continue;
                     }
 
@@ -280,7 +289,8 @@ namespace Microsoft.EntityFrameworkCore.Infrastructure
                             IsNotNullAndFalse(property.GetDefaultValue(table))
                             || property.GetDefaultValueSql(table) != null
                         )
-                    ) {
+                    )
+                    {
                         logger.BoolWithDefaultWarning(property);
                     }
                 }
@@ -298,7 +308,8 @@ namespace Microsoft.EntityFrameworkCore.Infrastructure
         protected virtual void ValidateDefaultValuesOnKeys(
             IModel model,
             IDiagnosticsLogger<DbLoggerCategory.Model.Validation> logger
-        ) {
+        )
+        {
             foreach (var entityType in model.GetEntityTypes())
             {
                 foreach (var key in entityType.GetDeclaredKeys())
@@ -312,7 +323,8 @@ namespace Microsoft.EntityFrameworkCore.Infrastructure
                             defaultValue?.Value != null
                             && defaultValue.GetConfigurationSource()
                                 .Overrides(ConfigurationSource.DataAnnotation)
-                        ) {
+                        )
+                        {
                             logger.ModelValidationKeyDefaultValueWarning(property);
                         }
                     }
@@ -328,7 +340,8 @@ namespace Microsoft.EntityFrameworkCore.Infrastructure
         protected virtual void ValidateSharedTableCompatibility(
             IModel model,
             IDiagnosticsLogger<DbLoggerCategory.Model.Validation> logger
-        ) {
+        )
+        {
             var tables = new Dictionary<StoreObjectIdentifier, List<IEntityType>>();
             foreach (var entityType in model.GetEntityTypes())
             {
@@ -409,7 +422,8 @@ namespace Microsoft.EntityFrameworkCore.Infrastructure
                             entityType.GetReferencingForeignKeys()
                                 .Select(e => e.DeclaringEntityType)
                                 .Any(t => mappedTypes.Contains(t))
-                        ) {
+                        )
+                        {
                             throw new InvalidOperationException(
                                 RelationalStrings.OptionalDependentWithDependentWithoutIdentifyingProperty(
                                     entityType.DisplayName()
@@ -423,7 +437,8 @@ namespace Microsoft.EntityFrameworkCore.Infrastructure
 
                 (List<IEntityType> EntityTypes, bool Optional) GetPrincipalEntityTypes(
                     IEntityType entityType
-                ) {
+                )
+                {
                     if (!principalEntityTypesMap.TryGetValue(entityType, out var tuple))
                     {
                         var list = new List<IEntityType>();
@@ -432,7 +447,8 @@ namespace Microsoft.EntityFrameworkCore.Infrastructure
                             var foreignKey in entityType.FindForeignKeys(
                                 entityType.FindPrimaryKey()!.Properties
                             )
-                        ) {
+                        )
+                        {
                             var principalEntityType = foreignKey.PrincipalEntityType;
                             if (!mappedTypes.Contains(principalEntityType))
                             {
@@ -468,7 +484,8 @@ namespace Microsoft.EntityFrameworkCore.Infrastructure
             string tableName,
             string? schema,
             IDiagnosticsLogger<DbLoggerCategory.Model.Validation> logger
-        ) {
+        )
+        {
             if (mappedTypes.Count == 1)
             {
                 return;
@@ -496,7 +513,8 @@ namespace Microsoft.EntityFrameworkCore.Infrastructure
                             )
                         is IForeignKey linkingFK
                     )
-                ) {
+                )
+                {
                     if (mappedType.BaseType != null)
                     {
                         throw new InvalidOperationException(
@@ -569,7 +587,8 @@ namespace Microsoft.EntityFrameworkCore.Infrastructure
                         if (
                             nextComment != null
                             && !comment.Equals(nextComment, StringComparison.Ordinal)
-                        ) {
+                        )
+                        {
                             throw new InvalidOperationException(
                                 RelationalStrings.IncompatibleTableCommentMismatch(
                                     storeObject.DisplayName(),
@@ -632,7 +651,8 @@ namespace Microsoft.EntityFrameworkCore.Infrastructure
         protected virtual void ValidateSharedViewCompatibility(
             IModel model,
             IDiagnosticsLogger<DbLoggerCategory.Model.Validation> logger
-        ) {
+        )
+        {
             var views = new Dictionary<StoreObjectIdentifier, List<IEntityType>>();
             foreach (var entityType in model.GetEntityTypes())
             {
@@ -673,7 +693,8 @@ namespace Microsoft.EntityFrameworkCore.Infrastructure
             string viewName,
             string? schema,
             IDiagnosticsLogger<DbLoggerCategory.Model.Validation> logger
-        ) {
+        )
+        {
             if (mappedTypes.Count == 1)
             {
                 return;
@@ -697,7 +718,8 @@ namespace Microsoft.EntityFrameworkCore.Infrastructure
                                 fk.PrincipalKey.IsPrimaryKey()
                                 && unvalidatedTypes.Contains(fk.PrincipalEntityType)
                         )
-                ) {
+                )
+                {
                     if (mappedType.BaseType != null)
                     {
                         var principalType =
@@ -797,7 +819,8 @@ namespace Microsoft.EntityFrameworkCore.Infrastructure
             IReadOnlyList<IEntityType> mappedTypes,
             in StoreObjectIdentifier storeObject,
             IDiagnosticsLogger<DbLoggerCategory.Model.Validation> logger
-        ) {
+        )
+        {
             var concurrencyColumns = TableSharingConcurrencyTokenConvention.GetConcurrencyTokensMap(
                 storeObject,
                 mappedTypes
@@ -822,7 +845,8 @@ namespace Microsoft.EntityFrameworkCore.Infrastructure
                                 entityType,
                                 mappedTypes
                             )
-                        ) {
+                        )
+                        {
                             missingConcurrencyTokens.Add(tokenPair.Key);
                         }
                     }
@@ -855,7 +879,8 @@ namespace Microsoft.EntityFrameworkCore.Infrastructure
                         foreach (
                             var property in entityType.GetAllBaseTypesAscending()
                                 .SelectMany(t => t.GetDeclaredProperties())
-                        ) {
+                        )
+                        {
                             if (property.GetColumnName(storeObject) == missingColumn)
                             {
                                 columnFound = true;
@@ -892,11 +917,13 @@ namespace Microsoft.EntityFrameworkCore.Infrastructure
             string columnName,
             in StoreObjectIdentifier storeObject,
             IDiagnosticsLogger<DbLoggerCategory.Model.Validation> logger
-        ) {
+        )
+        {
             if (
                 property.IsColumnNullable(storeObject)
                 != duplicateProperty.IsColumnNullable(storeObject)
-            ) {
+            )
+            {
                 throw new InvalidOperationException(
                     RelationalStrings.DuplicateColumnNameNullabilityMismatch(
                         duplicateProperty.DeclaringEntityType.DisplayName(),
@@ -1017,7 +1044,8 @@ namespace Microsoft.EntityFrameworkCore.Infrastructure
                     previousTypeString,
                     StringComparison.OrdinalIgnoreCase
                 )
-            ) {
+            )
+            {
                 throw new InvalidOperationException(
                     RelationalStrings.DuplicateColumnNameDataTypeMismatch(
                         duplicateProperty.DeclaringEntityType.DisplayName(),
@@ -1040,7 +1068,8 @@ namespace Microsoft.EntityFrameworkCore.Infrastructure
                     previousComputedColumnSql,
                     StringComparison.OrdinalIgnoreCase
                 )
-            ) {
+            )
+            {
                 throw new InvalidOperationException(
                     RelationalStrings.DuplicateColumnNameComputedSqlMismatch(
                         duplicateProperty.DeclaringEntityType.DisplayName(),
@@ -1104,7 +1133,8 @@ namespace Microsoft.EntityFrameworkCore.Infrastructure
                     previousDefaultValueSql,
                     StringComparison.OrdinalIgnoreCase
                 )
-            ) {
+            )
+            {
                 throw new InvalidOperationException(
                     RelationalStrings.DuplicateColumnNameDefaultSqlMismatch(
                         duplicateProperty.DeclaringEntityType.DisplayName(),
@@ -1165,7 +1195,8 @@ namespace Microsoft.EntityFrameworkCore.Infrastructure
         protected virtual object? GetDefaultColumnValue(
             IProperty property,
             in StoreObjectIdentifier storeObject
-        ) {
+        )
+        {
             var value = property.GetDefaultValue(storeObject);
             var converter =
                 property.GetValueConverter()
@@ -1184,7 +1215,8 @@ namespace Microsoft.EntityFrameworkCore.Infrastructure
             IReadOnlyList<IEntityType> mappedTypes,
             in StoreObjectIdentifier storeObject,
             IDiagnosticsLogger<DbLoggerCategory.Model.Validation> logger
-        ) {
+        )
+        {
             if (storeObject.StoreObjectType != StoreObjectType.Table)
             {
                 return;
@@ -1223,7 +1255,8 @@ namespace Microsoft.EntityFrameworkCore.Infrastructure
                             t =>
                                 foreignKey.GetConstraintName(t!.Value, principalTable.Value) == null
                         )
-                    ) {
+                    )
+                    {
                         logger.ForeignKeyPropertiesMappedToUnrelatedTables(foreignKey);
                     }
                     continue;
@@ -1271,7 +1304,8 @@ namespace Microsoft.EntityFrameworkCore.Infrastructure
             IReadOnlyList<IEntityType> mappedTypes,
             in StoreObjectIdentifier storeObject,
             IDiagnosticsLogger<DbLoggerCategory.Model.Validation> logger
-        ) {
+        )
+        {
             var indexMappings = new Dictionary<string, IIndex>();
             foreach (var index in mappedTypes.SelectMany(et => et.GetDeclaredIndexes()))
             {
@@ -1317,7 +1351,8 @@ namespace Microsoft.EntityFrameworkCore.Infrastructure
             IReadOnlyList<IEntityType> mappedTypes,
             in StoreObjectIdentifier storeObject,
             IDiagnosticsLogger<DbLoggerCategory.Model.Validation> logger
-        ) {
+        )
+        {
             var keyMappings = new Dictionary<string, IKey>();
             foreach (var key in mappedTypes.SelectMany(et => et.GetDeclaredKeys()))
             {
@@ -1351,7 +1386,8 @@ namespace Microsoft.EntityFrameworkCore.Infrastructure
             string keyName,
             in StoreObjectIdentifier storeObject,
             IDiagnosticsLogger<DbLoggerCategory.Model.Validation> logger
-        ) {
+        )
+        {
             key.AreCompatible(duplicateKey, storeObject, shouldThrow: true);
         }
 
@@ -1363,7 +1399,8 @@ namespace Microsoft.EntityFrameworkCore.Infrastructure
         protected override void ValidateInheritanceMapping(
             IModel model,
             IDiagnosticsLogger<DbLoggerCategory.Model.Validation> logger
-        ) {
+        )
+        {
             foreach (var rootEntityType in model.GetEntityTypes())
             {
                 if (rootEntityType.BaseType != null)
@@ -1473,7 +1510,8 @@ namespace Microsoft.EntityFrameworkCore.Infrastructure
         protected virtual void ValidatePropertyOverrides(
             IModel model,
             IDiagnosticsLogger<DbLoggerCategory.Model.Validation> logger
-        ) {
+        )
+        {
             foreach (var entityType in model.GetEntityTypes())
             {
                 foreach (var property in entityType.GetDeclaredProperties())
@@ -1499,7 +1537,8 @@ namespace Microsoft.EntityFrameworkCore.Infrastructure
                                         .Any(
                                             d => d.GetTableName() == name && d.GetSchema() == schema
                                         )
-                                ) {
+                                )
+                                {
                                     throw new InvalidOperationException(
                                         RelationalStrings.TableOverrideMismatch(
                                             entityType.DisplayName() + "." + property.Name,
@@ -1516,7 +1555,8 @@ namespace Microsoft.EntityFrameworkCore.Infrastructure
                                                 d.GetViewName() == name
                                                 && d.GetViewSchema() == schema
                                         )
-                                ) {
+                                )
+                                {
                                     throw new InvalidOperationException(
                                         RelationalStrings.ViewOverrideMismatch(
                                             entityType.DisplayName() + "." + property.Name,
@@ -1529,7 +1569,8 @@ namespace Microsoft.EntityFrameworkCore.Infrastructure
                                 if (
                                     !entityType.GetDerivedTypesInclusive()
                                         .Any(d => d.GetDefaultSqlQueryName() == name)
-                                ) {
+                                )
+                                {
                                     throw new InvalidOperationException(
                                         RelationalStrings.SqlQueryOverrideMismatch(
                                             entityType.DisplayName() + "." + property.Name,
@@ -1542,7 +1583,8 @@ namespace Microsoft.EntityFrameworkCore.Infrastructure
                                 if (
                                     !entityType.GetDerivedTypesInclusive()
                                         .Any(d => d.GetFunctionName() == name)
-                                ) {
+                                )
+                                {
                                     throw new InvalidOperationException(
                                         RelationalStrings.FunctionOverrideMismatch(
                                             entityType.DisplayName() + "." + property.Name,
@@ -1570,7 +1612,8 @@ namespace Microsoft.EntityFrameworkCore.Infrastructure
         protected virtual void ValidateIndexProperties(
             IModel model,
             IDiagnosticsLogger<DbLoggerCategory.Model.Validation> logger
-        ) {
+        )
+        {
             Check.NotNull(model, nameof(model));
 
             foreach (var entityType in model.GetEntityTypes())
@@ -1582,7 +1625,8 @@ namespace Microsoft.EntityFrameworkCore.Infrastructure
                                 ConfigurationSource.Convention
                                 != ((IConventionIndex)i).GetConfigurationSource()
                         )
-                ) {
+                )
+                {
                     IProperty? propertyNotMappedToAnyTable = null;
                     Tuple<string, List<(string Table, string? Schema)>>? firstPropertyTables = null;
                     Tuple<string, List<(string Table, string? Schema)>>? lastPropertyTables = null;

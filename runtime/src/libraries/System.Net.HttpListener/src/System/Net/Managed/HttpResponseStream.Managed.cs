@@ -50,7 +50,8 @@ namespace System.Net
             Stream stream,
             HttpListenerResponse response,
             bool ignore_errors
-        ) {
+        )
+        {
             _response = response;
             _ignore_errors = ignore_errors;
             _stream = stream;
@@ -217,7 +218,8 @@ namespace System.Net
             int size,
             AsyncCallback? cback,
             object? state
-        ) {
+        )
+        {
             if (_closed)
             {
                 HttpStreamAsyncResult ares = new HttpStreamAsyncResult(this);
@@ -302,7 +304,8 @@ namespace System.Net
                     if (
                         ex.InnerException is ArgumentException
                         || ex.InnerException is InvalidOperationException
-                    ) {
+                    )
+                    {
                         ExceptionDispatchInfo.Throw(ex.InnerException);
                     }
 

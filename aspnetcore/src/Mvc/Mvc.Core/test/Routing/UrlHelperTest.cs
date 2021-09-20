@@ -36,7 +36,8 @@ namespace Microsoft.AspNetCore.Mvc.Routing
             string protocol,
             string routeName,
             string template
-        ) {
+        )
+        {
             var services = CreateServices();
             var httpContext = CreateHttpContext(services, appRoot, host, protocol);
             var actionContext = CreateActionContext(httpContext);
@@ -54,7 +55,8 @@ namespace Microsoft.AspNetCore.Mvc.Routing
             string appRoot,
             string host,
             string protocol
-        ) {
+        )
+        {
             var services = CreateServices();
             var context = CreateHttpContext(services, appRoot, host, protocol);
 
@@ -72,7 +74,8 @@ namespace Microsoft.AspNetCore.Mvc.Routing
             string routeName,
             string template,
             object defaults
-        ) {
+        )
+        {
             var services = CreateServices();
             var routeBuilder = CreateRouteBuilder(services);
             routeBuilder.MapRoute(routeName, template, defaults);
@@ -92,7 +95,8 @@ namespace Microsoft.AspNetCore.Mvc.Routing
             IServiceProvider services,
             string mockRouteName,
             string mockTemplateValue
-        ) {
+        )
+        {
             var routeBuilder = CreateRouteBuilder(services);
 
             var target = new Mock<IRouter>(MockBehavior.Strict);

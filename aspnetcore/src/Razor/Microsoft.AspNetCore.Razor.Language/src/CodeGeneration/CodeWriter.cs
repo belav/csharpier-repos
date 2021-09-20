@@ -163,7 +163,8 @@ namespace Microsoft.AspNetCore.Razor.Language.CodeGeneration
                 &&
                 // Check the first character of the current write operation.
                 _builder[_builder.Length - count] == '\n'
-            ) {
+            )
+            {
                 // This is newline that's spread across two writes. Skip the first character of the
                 // current write operation.
                 //

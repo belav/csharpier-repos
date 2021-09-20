@@ -13,7 +13,8 @@ namespace Microsoft.AspNetCore.Components.E2ETest
             string usernameOrNull,
             string rolesOrNull,
             bool useSeparateTab = false
-        ) {
+        )
+        {
             var basePath = baseUri.LocalPath.EndsWith("/", StringComparison.Ordinal)
                 ? baseUri.LocalPath
                 : baseUri.LocalPath + "/";

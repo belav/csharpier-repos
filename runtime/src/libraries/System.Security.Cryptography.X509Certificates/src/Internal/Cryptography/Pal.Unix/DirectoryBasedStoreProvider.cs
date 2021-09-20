@@ -240,7 +240,8 @@ namespace Internal.Cryptography.Pal
             X509Certificate2 cert,
             string storePath,
             out bool hadCandidates
-        ) {
+        )
+        {
             hadCandidates = false;
 
             foreach (
@@ -248,7 +249,8 @@ namespace Internal.Cryptography.Pal
                     storePath,
                     cert.Thumbprint + PfxWildcard
                 )
-            ) {
+            )
+            {
                 hadCandidates = true;
 
                 try
@@ -375,7 +377,8 @@ namespace Internal.Cryptography.Pal
             if (
                 (dirStat.Mode & (int)Interop.Sys.Permissions.S_IRWXU)
                 != (int)Interop.Sys.Permissions.S_IRWXU
-            ) {
+            )
+            {
                 throw new CryptographicException(
                     SR.Format(SR.Cryptography_InvalidDirectoryPermissions, path)
                 );
@@ -423,7 +426,8 @@ namespace Internal.Cryptography.Pal
             if (
                 (stat.Mode & (int)requiredPermissions) != (int)requiredPermissions
                 || (stat.Mode & (int)forbiddenPermissions) != 0
-            ) {
+            )
+            {
                 if (Interop.Sys.FChMod(stream.SafeFileHandle, (int)requiredPermissions) < 0)
                 {
                     Interop.ErrorInfo error = Interop.Sys.GetLastErrorInfo();
@@ -446,7 +450,8 @@ namespace Internal.Cryptography.Pal
                 if (
                     (stat.Mode & (int)requiredPermissions) != (int)requiredPermissions
                     || (stat.Mode & (int)forbiddenPermissions) != 0
-                ) {
+                )
+                {
                     throw new CryptographicException(
                         SR.Format(SR.Cryptography_InvalidFilePermissions, stream.Name)
                     );

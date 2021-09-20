@@ -101,7 +101,8 @@ namespace System.Globalization
                 int number,
                 int leadingZeroes,
                 ReadOnlySpan<char> separator
-            ) {
+            )
+            {
                 _ttt = type;
                 _num = number;
                 _zeroes = leadingZeroes;
@@ -428,7 +429,8 @@ namespace System.Globalization
                         if (
                             (_tokenCount == 0 && !AddSep(default, ref result))
                             || !AddNum(tok, ref result)
-                        ) {
+                        )
+                        {
                             return false;
                         }
                         break;
@@ -638,14 +640,16 @@ namespace System.Globalization
             TimeSpanToken seconds,
             TimeSpanToken fraction,
             out long result
-        ) {
+        )
+        {
             if (
                 days._num > MaxDays
                 || hours._num > MaxHours
                 || minutes._num > MaxMinutes
                 || seconds._num > MaxSeconds
                 || !fraction.NormalizeAndValidateFraction()
-            ) {
+            )
+            {
                 result = 0;
                 return false;
             }
@@ -660,7 +664,8 @@ namespace System.Globalization
             if (
                 ticks > InternalGlobalizationHelper.MaxMilliSeconds
                 || ticks < InternalGlobalizationHelper.MinMilliSeconds
-            ) {
+            )
+            {
                 result = 0;
                 return false;
             }
@@ -695,7 +700,8 @@ namespace System.Globalization
             ReadOnlySpan<char> input,
             IFormatProvider? formatProvider,
             out TimeSpan result
-        ) {
+        )
+        {
             var parseResult = new TimeSpanResult(
                 throwOnFailure: false,
                 originalTimeSpanString: input
@@ -703,7 +709,8 @@ namespace System.Globalization
 
             if (
                 TryParseTimeSpan(input, TimeSpanStandardStyles.Any, formatProvider, ref parseResult)
-            ) {
+            )
+            {
                 result = parseResult.parsedTimeSpan;
                 return true;
             }
@@ -717,7 +724,8 @@ namespace System.Globalization
             ReadOnlySpan<char> format,
             IFormatProvider? formatProvider,
             TimeSpanStyles styles
-        ) {
+        )
+        {
             var parseResult = new TimeSpanResult(
                 throwOnFailure: true,
                 originalTimeSpanString: input
@@ -739,7 +747,8 @@ namespace System.Globalization
             IFormatProvider? formatProvider,
             TimeSpanStyles styles,
             out TimeSpan result
-        ) {
+        )
+        {
             var parseResult = new TimeSpanResult(
                 throwOnFailure: false,
                 originalTimeSpanString: input
@@ -760,7 +769,8 @@ namespace System.Globalization
             string?[]? formats,
             IFormatProvider? formatProvider,
             TimeSpanStyles styles
-        ) {
+        )
+        {
             var parseResult = new TimeSpanResult(
                 throwOnFailure: true,
                 originalTimeSpanString: input
@@ -782,7 +792,8 @@ namespace System.Globalization
             IFormatProvider? formatProvider,
             TimeSpanStyles styles,
             out TimeSpan result
-        ) {
+        )
+        {
             var parseResult = new TimeSpanResult(
                 throwOnFailure: false,
                 originalTimeSpanString: input
@@ -796,7 +807,8 @@ namespace System.Globalization
                     styles,
                     ref parseResult
                 )
-            ) {
+            )
+            {
                 result = parseResult.parsedTimeSpan;
                 return true;
             }
@@ -811,7 +823,8 @@ namespace System.Globalization
             TimeSpanStandardStyles style,
             IFormatProvider? formatProvider,
             ref TimeSpanResult result
-        ) {
+        )
+        {
             input = input.Trim();
             if (input.IsEmpty)
             {
@@ -864,7 +877,8 @@ namespace System.Globalization
             ref TimeSpanRawInfo raw,
             TimeSpanStandardStyles style,
             ref TimeSpanResult result
-        ) {
+        )
+        {
             if (raw._lastSeenTTT == TTT.Num)
             {
                 TimeSpanToken tok = default;
@@ -891,7 +905,8 @@ namespace System.Globalization
             ref TimeSpanRawInfo raw,
             TimeSpanStandardStyles style,
             ref TimeSpanResult result
-        ) {
+        )
+        {
             if (raw._sepCount != 6)
             {
                 return result.SetBadTimeSpanFailure();
@@ -943,7 +958,8 @@ namespace System.Globalization
                         raw._numbers4,
                         out long ticks
                     )
-                ) {
+                )
+                {
                     return result.SetOverflowFailure();
                 }
 
@@ -971,7 +987,8 @@ namespace System.Globalization
             ref TimeSpanRawInfo raw,
             TimeSpanStandardStyles style,
             ref TimeSpanResult result
-        ) {
+        )
+        {
             if (raw._sepCount != 5 || (style & TimeSpanStandardStyles.RequireFull) != 0)
             {
                 return result.SetBadTimeSpanFailure();
@@ -1021,7 +1038,8 @@ namespace System.Globalization
 
                 if (
                     !match && raw.FullAppCompatMatch(TimeSpanFormat.PositiveInvariantFormatLiterals)
-                ) {
+                )
+                {
                     positive = true;
                     match = TryTimeToTicks(
                         positive,
@@ -1067,7 +1085,8 @@ namespace System.Globalization
 
                 if (
                     !match && raw.FullAppCompatMatch(TimeSpanFormat.NegativeInvariantFormatLiterals)
-                ) {
+                )
+                {
                     positive = false;
                     match = TryTimeToTicks(
                         positive,
@@ -1201,7 +1220,8 @@ namespace System.Globalization
             ref TimeSpanRawInfo raw,
             TimeSpanStandardStyles style,
             ref TimeSpanResult result
-        ) {
+        )
+        {
             if (raw._sepCount != 4 || (style & TimeSpanStandardStyles.RequireFull) != 0)
             {
                 return result.SetBadTimeSpanFailure();
@@ -1252,7 +1272,8 @@ namespace System.Globalization
                 if (
                     !match
                     && raw.PartialAppCompatMatch(TimeSpanFormat.PositiveInvariantFormatLiterals)
-                ) {
+                )
+                {
                     positive = true;
                     match = TryTimeToTicks(
                         positive,
@@ -1299,7 +1320,8 @@ namespace System.Globalization
                 if (
                     !match
                     && raw.PartialAppCompatMatch(TimeSpanFormat.NegativeInvariantFormatLiterals)
-                ) {
+                )
+                {
                     positive = false;
                     match = TryTimeToTicks(
                         positive,
@@ -1433,7 +1455,8 @@ namespace System.Globalization
             ref TimeSpanRawInfo raw,
             TimeSpanStandardStyles style,
             ref TimeSpanResult result
-        ) {
+        )
+        {
             if (raw._sepCount != 3 || (style & TimeSpanStandardStyles.RequireFull) != 0)
             {
                 return result.SetBadTimeSpanFailure();
@@ -1490,7 +1513,8 @@ namespace System.Globalization
                         zero,
                         out long ticks
                     )
-                ) {
+                )
+                {
                     return result.SetOverflowFailure();
                 }
 
@@ -1515,7 +1539,8 @@ namespace System.Globalization
             ref TimeSpanRawInfo raw,
             TimeSpanStandardStyles style,
             ref TimeSpanResult result
-        ) {
+        )
+        {
             if (raw._sepCount != 2 || (style & TimeSpanStandardStyles.RequireFull) != 0)
             {
                 return result.SetBadTimeSpanFailure();
@@ -1564,7 +1589,8 @@ namespace System.Globalization
 
                 if (
                     !TryTimeToTicks(positive, raw._numbers0, zero, zero, zero, zero, out long ticks)
-                ) {
+                )
+                {
                     return result.SetOverflowFailure();
                 }
 
@@ -1591,7 +1617,8 @@ namespace System.Globalization
             IFormatProvider? formatProvider,
             TimeSpanStyles styles,
             ref TimeSpanResult result
-        ) {
+        )
+        {
             if (format.Length == 0)
             {
                 return result.SetBadFormatSpecifierFailure();
@@ -1636,7 +1663,8 @@ namespace System.Globalization
             ReadOnlySpan<char> format,
             TimeSpanStyles styles,
             ref TimeSpanResult result
-        ) {
+        )
+        {
             bool seenDD = false; // already processed days?
             bool seenHH = false; // already processed hours?
             bool seenMM = false; // already processed minutes?
@@ -1666,7 +1694,8 @@ namespace System.Globalization
                             tokenLen > 2
                             || seenHH
                             || !ParseExactDigits(ref tokenizer, tokenLen, out hh)
-                        ) {
+                        )
+                        {
                             return result.SetInvalidStringFailure();
                         }
                         seenHH = true;
@@ -1678,7 +1707,8 @@ namespace System.Globalization
                             tokenLen > 2
                             || seenMM
                             || !ParseExactDigits(ref tokenizer, tokenLen, out mm)
-                        ) {
+                        )
+                        {
                             return result.SetInvalidStringFailure();
                         }
                         seenMM = true;
@@ -1690,7 +1720,8 @@ namespace System.Globalization
                             tokenLen > 2
                             || seenSS
                             || !ParseExactDigits(ref tokenizer, tokenLen, out ss)
-                        ) {
+                        )
+                        {
                             return result.SetInvalidStringFailure();
                         }
                         seenSS = true;
@@ -1708,7 +1739,8 @@ namespace System.Globalization
                                 out leadingZeroes,
                                 out ff
                             )
-                        ) {
+                        )
+                        {
                             return result.SetInvalidStringFailure();
                         }
                         seenFF = true;
@@ -1742,7 +1774,8 @@ namespace System.Globalization
                                 out _,
                                 out dd
                             )
-                        ) {
+                        )
+                        {
                             return result.SetInvalidStringFailure();
                         }
                         seenDD = true;
@@ -1758,7 +1791,8 @@ namespace System.Globalization
                                 enquotedString,
                                 out tokenLen
                             )
-                        ) {
+                        )
+                        {
                             StringBuilderCache.Release(enquotedString);
                             return result.SetBadQuoteFailure(ch);
                         }
@@ -1830,7 +1864,8 @@ namespace System.Globalization
                     new TimeSpanToken(ff, leadingZeroes),
                     out long ticks
                 )
-            ) {
+            )
+            {
                 if (!positive)
                 {
                     ticks = -ticks;
@@ -1849,7 +1884,8 @@ namespace System.Globalization
             ref TimeSpanTokenizer tokenizer,
             int minDigitLength,
             out int result
-        ) {
+        )
+        {
             int maxDigitLength = (minDigitLength == 1) ? 2 : minDigitLength;
             return ParseExactDigits(
                 ref tokenizer,
@@ -1866,7 +1902,8 @@ namespace System.Globalization
             int maxDigitLength,
             out int zeroes,
             out int result
-        ) {
+        )
+        {
             int tmpResult = 0,
                 tmpZeroes = 0;
 
@@ -1894,7 +1931,8 @@ namespace System.Globalization
         private static bool ParseExactLiteral(
             ref TimeSpanTokenizer tokenizer,
             StringBuilder enquotedString
-        ) {
+        )
+        {
             for (int i = 0; i < enquotedString.Length; i++)
             {
                 if (enquotedString[i] != tokenizer.NextChar)
@@ -1979,7 +2017,8 @@ namespace System.Globalization
                             out int days,
                             ref result
                         )
-                    ) {
+                    )
+                    {
                         return false;
                     }
 
@@ -2125,7 +2164,8 @@ namespace System.Globalization
             IFormatProvider? formatProvider,
             TimeSpanStyles styles,
             ref TimeSpanResult result
-        ) {
+        )
+        {
             if (formats == null)
             {
                 return result.SetArgumentNullFailure(nameof(formats));

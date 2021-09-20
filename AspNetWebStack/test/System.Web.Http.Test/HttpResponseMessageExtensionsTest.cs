@@ -47,7 +47,8 @@ namespace System.Net.Http
         [InlineData(default(object))]
         public void TryGetContentValue_WhenResponseHasNonObjectContent_ReturnsFalse<T>(
             T expectedResult
-        ) {
+        )
+        {
             _response.Content = new StringContent("43");
             T value;
 
@@ -62,7 +63,8 @@ namespace System.Net.Http
         [InlineData(default(object))]
         public void TryGetContentValue_WhenResponseHasObjectContentWithNullValue_ReturnsFalse<T>(
             T expectedResult
-        ) {
+        )
+        {
             _response.Content = new ObjectContent(typeof(object), null, _formatterMock.Object);
             T value;
 
@@ -76,7 +78,8 @@ namespace System.Net.Http
         [InlineData(default(int))]
         public void TryGetContentValue_WhenResponseHasObjectContentWithIncompatibleValue_ReturnsFalse<T>(
             T expectedResult
-        ) {
+        )
+        {
             _response.Content = new ObjectContent<string>("42", _formatterMock.Object);
             T value;
 

@@ -19,7 +19,8 @@ namespace WebMatrix.Data
         public ConfigurationManagerWrapper(
             IDictionary<string, IDbFileHandler> handlers,
             string dataDirectory = null
-        ) {
+        )
+        {
             Debug.Assert(handlers != null, "handlers should not be null");
             _dataDirectory = dataDirectory ?? Database.DataDirectory;
             _handlers = handlers;
@@ -60,7 +61,8 @@ namespace WebMatrix.Data
             string name,
             Func<string, IConnectionConfiguration> getConfigConnection,
             Func<string, bool> fileExists
-        ) {
+        )
+        {
             // First try config
             IConnectionConfiguration configuraitonConfig = getConfigConnection(name);
             if (configuraitonConfig != null)

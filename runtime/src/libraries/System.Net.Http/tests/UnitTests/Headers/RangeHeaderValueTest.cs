@@ -261,7 +261,8 @@ namespace System.Net.Http.Tests
             int startIndex,
             int expectedLength,
             out RangeHeaderValue result
-        ) {
+        )
+        {
             object temp = null;
             Assert.Equal(
                 expectedLength,

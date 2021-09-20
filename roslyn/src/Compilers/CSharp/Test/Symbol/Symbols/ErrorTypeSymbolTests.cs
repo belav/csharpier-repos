@@ -78,7 +78,8 @@ class C7 : A<string>.B<object> { }";
             CSharpCompilation compilation,
             bool missingTypes,
             bool fromSource
-        ) {
+        )
+        {
             // Get all root types.
             var allTypes = compilation.GlobalNamespace.GetTypeMembers();
 

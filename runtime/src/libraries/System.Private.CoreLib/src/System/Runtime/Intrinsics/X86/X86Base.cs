@@ -81,7 +81,8 @@ namespace System.Runtime.Intrinsics.X86
         public static unsafe (int Eax, int Ebx, int Ecx, int Edx) CpuId(
             int functionId,
             int subFunctionId
-        ) {
+        )
+        {
             int* cpuInfo = stackalloc int[4];
             __cpuidex(cpuInfo, functionId, subFunctionId);
             return (cpuInfo[0], cpuInfo[1], cpuInfo[2], cpuInfo[3]);

@@ -128,7 +128,8 @@ namespace System.ComponentModel.Design
                             // by looking at the assembly name (which doesn't change even after a file rename) + ".exe.licenses" or + ".dll.licenses"
                             foreach (
                                 string existingName in resourceAssembly.GetManifestResourceNames()
-                            ) {
+                            )
+                            {
                                 if (
                                     comparer.Compare(
                                         existingName,
@@ -145,7 +146,8 @@ namespace System.ComponentModel.Design
                                         shortAssemblyName + ".dll.licenses",
                                         CompareOptions.IgnoreCase
                                     ) == 0
-                                ) {
+                                )
+                                {
                                     resolvedName = existingName;
                                     break;
                                 }
@@ -189,7 +191,8 @@ namespace System.ComponentModel.Design
                     comparer.Compare(existingName, name, CompareOptions.IgnoreCase) == 0
                     || comparer.Compare(existingName, assemblyShortName + ".exe.licenses") == 0
                     || comparer.Compare(existingName, assemblyShortName + ".dll.licenses") == 0
-                ) {
+                )
+                {
                     name = existingName;
                     break;
                 }

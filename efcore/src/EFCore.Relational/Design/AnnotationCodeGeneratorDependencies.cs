@@ -48,7 +48,8 @@ namespace Microsoft.EntityFrameworkCore.Design
         [EntityFrameworkInternal]
         public AnnotationCodeGeneratorDependencies(
             IRelationalTypeMappingSource relationalTypeMappingSource
-        ) {
+        )
+        {
             Check.NotNull(relationalTypeMappingSource, nameof(relationalTypeMappingSource));
 
             RelationalTypeMappingSource = relationalTypeMappingSource;

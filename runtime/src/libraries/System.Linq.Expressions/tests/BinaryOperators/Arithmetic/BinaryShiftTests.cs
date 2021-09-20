@@ -345,7 +345,8 @@ namespace System.Linq.Expressions.Tests
             int b,
             bool left,
             bool useInterpreter
-        ) {
+        )
+        {
             Expression<Func<sbyte?>> e = Expression.Lambda<Func<sbyte?>>(
                 left
                   ? Expression.LeftShift(
@@ -443,7 +444,8 @@ namespace System.Linq.Expressions.Tests
             int b,
             bool left,
             bool useInterpreter
-        ) {
+        )
+        {
             Expression<Func<ushort?>> e = Expression.Lambda<Func<ushort?>>(
                 left
                   ? Expression.LeftShift(
@@ -541,7 +543,8 @@ namespace System.Linq.Expressions.Tests
             int b,
             bool left,
             bool useInterpreter
-        ) {
+        )
+        {
             Expression<Func<short?>> e = Expression.Lambda<Func<short?>>(
                 left
                   ? Expression.LeftShift(
@@ -827,7 +830,8 @@ namespace System.Linq.Expressions.Tests
             int b,
             bool left,
             bool useInterpreter
-        ) {
+        )
+        {
             Expression<Func<ulong?>> e = Expression.Lambda<Func<ulong?>>(
                 left
                   ? Expression.LeftShift(

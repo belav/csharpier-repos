@@ -36,7 +36,8 @@ namespace System.Net.Sockets
                 family != AddressFamily.InterNetwork
                 && family != AddressFamily.InterNetworkV6
                 && family != AddressFamily.Unknown
-            ) {
+            )
+            {
                 throw new ArgumentException(
                     SR.Format(SR.net_protocol_invalid_family, "TCP"),
                     nameof(family)
@@ -182,7 +183,8 @@ namespace System.Net.Sockets
                                     address.AddressFamily == AddressFamily.InterNetwork
                                     && Socket.OSSupportsIPv4
                                 ) || Socket.OSSupportsIPv6
-                            ) {
+                            )
+                            {
                                 var socket = new Socket(
                                     address.AddressFamily,
                                     SocketType.Stream,
@@ -218,7 +220,8 @@ namespace System.Net.Sockets
                         }
                         else if (
                             address.AddressFamily == _family || _family == AddressFamily.Unknown
-                        ) {
+                        )
+                        {
                             // Only use addresses with a matching family
                             Connect(new IPEndPoint(address, port));
                             _active = true;

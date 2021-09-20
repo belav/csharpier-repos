@@ -16,27 +16,31 @@ namespace System.IO
         public static void Delete(string path, bool recursive) { }
         public static System.Collections.Generic.IEnumerable<string> EnumerateDirectories(
             string path
-        ) {
+        )
+        {
             throw null;
         }
         public static System.Collections.Generic.IEnumerable<string> EnumerateDirectories(
             string path,
             string searchPattern
-        ) {
+        )
+        {
             throw null;
         }
         public static System.Collections.Generic.IEnumerable<string> EnumerateDirectories(
             string path,
             string searchPattern,
             System.IO.EnumerationOptions enumerationOptions
-        ) {
+        )
+        {
             throw null;
         }
         public static System.Collections.Generic.IEnumerable<string> EnumerateDirectories(
             string path,
             string searchPattern,
             System.IO.SearchOption searchOption
-        ) {
+        )
+        {
             throw null;
         }
         public static System.Collections.Generic.IEnumerable<string> EnumerateFiles(string path)
@@ -46,51 +50,59 @@ namespace System.IO
         public static System.Collections.Generic.IEnumerable<string> EnumerateFiles(
             string path,
             string searchPattern
-        ) {
+        )
+        {
             throw null;
         }
         public static System.Collections.Generic.IEnumerable<string> EnumerateFiles(
             string path,
             string searchPattern,
             System.IO.EnumerationOptions enumerationOptions
-        ) {
+        )
+        {
             throw null;
         }
         public static System.Collections.Generic.IEnumerable<string> EnumerateFiles(
             string path,
             string searchPattern,
             System.IO.SearchOption searchOption
-        ) {
+        )
+        {
             throw null;
         }
         public static System.Collections.Generic.IEnumerable<string> EnumerateFileSystemEntries(
             string path
-        ) {
+        )
+        {
             throw null;
         }
         public static System.Collections.Generic.IEnumerable<string> EnumerateFileSystemEntries(
             string path,
             string searchPattern
-        ) {
+        )
+        {
             throw null;
         }
         public static System.Collections.Generic.IEnumerable<string> EnumerateFileSystemEntries(
             string path,
             string searchPattern,
             System.IO.EnumerationOptions enumerationOptions
-        ) {
+        )
+        {
             throw null;
         }
         public static System.Collections.Generic.IEnumerable<string> EnumerateFileSystemEntries(
             string path,
             string searchPattern,
             System.IO.SearchOption searchOption
-        ) {
+        )
+        {
             throw null;
         }
         public static bool Exists(
             [System.Diagnostics.CodeAnalysis.NotNullWhenAttribute(true)] string? path
-        ) {
+        )
+        {
             throw null;
         }
         public static System.DateTime GetCreationTime(string path)
@@ -117,14 +129,16 @@ namespace System.IO
             string path,
             string searchPattern,
             System.IO.EnumerationOptions enumerationOptions
-        ) {
+        )
+        {
             throw null;
         }
         public static string[] GetDirectories(
             string path,
             string searchPattern,
             System.IO.SearchOption searchOption
-        ) {
+        )
+        {
             throw null;
         }
         public static string GetDirectoryRoot(string path)
@@ -143,14 +157,16 @@ namespace System.IO
             string path,
             string searchPattern,
             System.IO.EnumerationOptions enumerationOptions
-        ) {
+        )
+        {
             throw null;
         }
         public static string[] GetFiles(
             string path,
             string searchPattern,
             System.IO.SearchOption searchOption
-        ) {
+        )
+        {
             throw null;
         }
         public static string[] GetFileSystemEntries(string path)
@@ -165,14 +181,16 @@ namespace System.IO
             string path,
             string searchPattern,
             System.IO.EnumerationOptions enumerationOptions
-        ) {
+        )
+        {
             throw null;
         }
         public static string[] GetFileSystemEntries(
             string path,
             string searchPattern,
             System.IO.SearchOption searchOption
-        ) {
+        )
+        {
             throw null;
         }
         public static System.DateTime GetLastAccessTime(string path)
@@ -240,19 +258,22 @@ namespace System.IO
         }
         public System.Collections.Generic.IEnumerable<System.IO.DirectoryInfo> EnumerateDirectories(
             string searchPattern
-        ) {
+        )
+        {
             throw null;
         }
         public System.Collections.Generic.IEnumerable<System.IO.DirectoryInfo> EnumerateDirectories(
             string searchPattern,
             System.IO.EnumerationOptions enumerationOptions
-        ) {
+        )
+        {
             throw null;
         }
         public System.Collections.Generic.IEnumerable<System.IO.DirectoryInfo> EnumerateDirectories(
             string searchPattern,
             System.IO.SearchOption searchOption
-        ) {
+        )
+        {
             throw null;
         }
         public System.Collections.Generic.IEnumerable<System.IO.FileInfo> EnumerateFiles()
@@ -261,19 +282,22 @@ namespace System.IO
         }
         public System.Collections.Generic.IEnumerable<System.IO.FileInfo> EnumerateFiles(
             string searchPattern
-        ) {
+        )
+        {
             throw null;
         }
         public System.Collections.Generic.IEnumerable<System.IO.FileInfo> EnumerateFiles(
             string searchPattern,
             System.IO.EnumerationOptions enumerationOptions
-        ) {
+        )
+        {
             throw null;
         }
         public System.Collections.Generic.IEnumerable<System.IO.FileInfo> EnumerateFiles(
             string searchPattern,
             System.IO.SearchOption searchOption
-        ) {
+        )
+        {
             throw null;
         }
         public System.Collections.Generic.IEnumerable<System.IO.FileSystemInfo> EnumerateFileSystemInfos()
@@ -282,19 +306,22 @@ namespace System.IO
         }
         public System.Collections.Generic.IEnumerable<System.IO.FileSystemInfo> EnumerateFileSystemInfos(
             string searchPattern
-        ) {
+        )
+        {
             throw null;
         }
         public System.Collections.Generic.IEnumerable<System.IO.FileSystemInfo> EnumerateFileSystemInfos(
             string searchPattern,
             System.IO.EnumerationOptions enumerationOptions
-        ) {
+        )
+        {
             throw null;
         }
         public System.Collections.Generic.IEnumerable<System.IO.FileSystemInfo> EnumerateFileSystemInfos(
             string searchPattern,
             System.IO.SearchOption searchOption
-        ) {
+        )
+        {
             throw null;
         }
         public System.IO.DirectoryInfo[] GetDirectories()
@@ -308,13 +335,15 @@ namespace System.IO
         public System.IO.DirectoryInfo[] GetDirectories(
             string searchPattern,
             System.IO.EnumerationOptions enumerationOptions
-        ) {
+        )
+        {
             throw null;
         }
         public System.IO.DirectoryInfo[] GetDirectories(
             string searchPattern,
             System.IO.SearchOption searchOption
-        ) {
+        )
+        {
             throw null;
         }
         public System.IO.FileInfo[] GetFiles()
@@ -328,13 +357,15 @@ namespace System.IO
         public System.IO.FileInfo[] GetFiles(
             string searchPattern,
             System.IO.EnumerationOptions enumerationOptions
-        ) {
+        )
+        {
             throw null;
         }
         public System.IO.FileInfo[] GetFiles(
             string searchPattern,
             System.IO.SearchOption searchOption
-        ) {
+        )
+        {
             throw null;
         }
         public System.IO.FileSystemInfo[] GetFileSystemInfos()
@@ -348,13 +379,15 @@ namespace System.IO
         public System.IO.FileSystemInfo[] GetFileSystemInfos(
             string searchPattern,
             System.IO.EnumerationOptions enumerationOptions
-        ) {
+        )
+        {
             throw null;
         }
         public System.IO.FileSystemInfo[] GetFileSystemInfos(
             string searchPattern,
             System.IO.SearchOption searchOption
-        ) {
+        )
+        {
             throw null;
         }
         public void MoveTo(string destDirName) { }
@@ -424,7 +457,8 @@ namespace System.IO
             System.Text.Encoding encoding,
             System.Threading.CancellationToken cancellationToken =
                 default(System.Threading.CancellationToken)
-        ) {
+        )
+        {
             throw null;
         }
         public static System.Threading.Tasks.Task AppendAllLinesAsync(
@@ -432,7 +466,8 @@ namespace System.IO
             System.Collections.Generic.IEnumerable<string> contents,
             System.Threading.CancellationToken cancellationToken =
                 default(System.Threading.CancellationToken)
-        ) {
+        )
+        {
             throw null;
         }
         public static void AppendAllText(string path, string? contents) { }
@@ -447,7 +482,8 @@ namespace System.IO
             System.Text.Encoding encoding,
             System.Threading.CancellationToken cancellationToken =
                 default(System.Threading.CancellationToken)
-        ) {
+        )
+        {
             throw null;
         }
         public static System.Threading.Tasks.Task AppendAllTextAsync(
@@ -455,7 +491,8 @@ namespace System.IO
             string? contents,
             System.Threading.CancellationToken cancellationToken =
                 default(System.Threading.CancellationToken)
-        ) {
+        )
+        {
             throw null;
         }
         public static System.IO.StreamWriter AppendText(string path)
@@ -476,7 +513,8 @@ namespace System.IO
             string path,
             int bufferSize,
             System.IO.FileOptions options
-        ) {
+        )
+        {
             throw null;
         }
         public static System.IO.StreamWriter CreateText(string path)
@@ -490,7 +528,8 @@ namespace System.IO
         public static void Encrypt(string path) { }
         public static bool Exists(
             [System.Diagnostics.CodeAnalysis.NotNullWhenAttribute(true)] string? path
-        ) {
+        )
+        {
             throw null;
         }
         public static System.IO.FileAttributes GetAttributes(string path)
@@ -531,7 +570,8 @@ namespace System.IO
             string path,
             System.IO.FileMode mode,
             System.IO.FileAccess access
-        ) {
+        )
+        {
             throw null;
         }
         public static System.IO.FileStream Open(
@@ -539,7 +579,8 @@ namespace System.IO
             System.IO.FileMode mode,
             System.IO.FileAccess access,
             System.IO.FileShare share
-        ) {
+        )
+        {
             throw null;
         }
         public static System.IO.FileStream OpenRead(string path)
@@ -562,7 +603,8 @@ namespace System.IO
             string path,
             System.Threading.CancellationToken cancellationToken =
                 default(System.Threading.CancellationToken)
-        ) {
+        )
+        {
             throw null;
         }
         public static string[] ReadAllLines(string path)
@@ -578,14 +620,16 @@ namespace System.IO
             System.Text.Encoding encoding,
             System.Threading.CancellationToken cancellationToken =
                 default(System.Threading.CancellationToken)
-        ) {
+        )
+        {
             throw null;
         }
         public static System.Threading.Tasks.Task<string[]> ReadAllLinesAsync(
             string path,
             System.Threading.CancellationToken cancellationToken =
                 default(System.Threading.CancellationToken)
-        ) {
+        )
+        {
             throw null;
         }
         public static string ReadAllText(string path)
@@ -601,14 +645,16 @@ namespace System.IO
             System.Text.Encoding encoding,
             System.Threading.CancellationToken cancellationToken =
                 default(System.Threading.CancellationToken)
-        ) {
+        )
+        {
             throw null;
         }
         public static System.Threading.Tasks.Task<string> ReadAllTextAsync(
             string path,
             System.Threading.CancellationToken cancellationToken =
                 default(System.Threading.CancellationToken)
-        ) {
+        )
+        {
             throw null;
         }
         public static System.Collections.Generic.IEnumerable<string> ReadLines(string path)
@@ -618,7 +664,8 @@ namespace System.IO
         public static System.Collections.Generic.IEnumerable<string> ReadLines(
             string path,
             System.Text.Encoding encoding
-        ) {
+        )
+        {
             throw null;
         }
         public static void Replace(
@@ -645,7 +692,8 @@ namespace System.IO
             byte[] bytes,
             System.Threading.CancellationToken cancellationToken =
                 default(System.Threading.CancellationToken)
-        ) {
+        )
+        {
             throw null;
         }
         public static void WriteAllLines(
@@ -669,7 +717,8 @@ namespace System.IO
             System.Text.Encoding encoding,
             System.Threading.CancellationToken cancellationToken =
                 default(System.Threading.CancellationToken)
-        ) {
+        )
+        {
             throw null;
         }
         public static System.Threading.Tasks.Task WriteAllLinesAsync(
@@ -677,7 +726,8 @@ namespace System.IO
             System.Collections.Generic.IEnumerable<string> contents,
             System.Threading.CancellationToken cancellationToken =
                 default(System.Threading.CancellationToken)
-        ) {
+        )
+        {
             throw null;
         }
         public static void WriteAllText(string path, string? contents) { }
@@ -692,7 +742,8 @@ namespace System.IO
             System.Text.Encoding encoding,
             System.Threading.CancellationToken cancellationToken =
                 default(System.Threading.CancellationToken)
-        ) {
+        )
+        {
             throw null;
         }
         public static System.Threading.Tasks.Task WriteAllTextAsync(
@@ -700,7 +751,8 @@ namespace System.IO
             string? contents,
             System.Threading.CancellationToken cancellationToken =
                 default(System.Threading.CancellationToken)
-        ) {
+        )
+        {
             throw null;
         }
     }
@@ -771,7 +823,8 @@ namespace System.IO
             System.IO.FileMode mode,
             System.IO.FileAccess access,
             System.IO.FileShare share
-        ) {
+        )
+        {
             throw null;
         }
         public System.IO.FileStream OpenRead()
@@ -789,14 +842,16 @@ namespace System.IO
         public System.IO.FileInfo Replace(
             string destinationFileName,
             string? destinationBackupFileName
-        ) {
+        )
+        {
             throw null;
         }
         public System.IO.FileInfo Replace(
             string destinationFileName,
             string? destinationBackupFileName,
             bool ignoreMetadataErrors
-        ) {
+        )
+        {
             throw null;
         }
         public override string ToString()
@@ -1015,7 +1070,8 @@ namespace System.IO.Enumeration
         }
         protected virtual bool ShouldRecurseIntoEntry(
             ref System.IO.Enumeration.FileSystemEntry entry
-        ) {
+        )
+        {
             throw null;
         }
         protected abstract TResult TransformEntry(ref System.IO.Enumeration.FileSystemEntry entry);
@@ -1026,14 +1082,16 @@ namespace System.IO.Enumeration
             System.ReadOnlySpan<char> expression,
             System.ReadOnlySpan<char> name,
             bool ignoreCase = true
-        ) {
+        )
+        {
             throw null;
         }
         public static bool MatchesWin32Expression(
             System.ReadOnlySpan<char> expression,
             System.ReadOnlySpan<char> name,
             bool ignoreCase = true
-        ) {
+        )
+        {
             throw null;
         }
         public static string TranslateWin32Expression(string? expression)

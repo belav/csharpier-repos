@@ -97,7 +97,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel.InMemory.FunctionalTests
         [InlineData("PUT")]
         public Task BadRequestIfMethodRequiresLengthButNoContentLengthOrTransferEncodingInRequest(
             string method
-        ) {
+        )
+        {
             return TestBadRequest(
                 $"{method} / HTTP/1.1\r\nHost:\r\n\r\n",
                 "411 Length Required",
@@ -167,7 +168,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel.InMemory.FunctionalTests
         public Task BadRequestIfHostHeaderDoesNotMatchRequestTarget(
             string requestTarget,
             string host
-        ) {
+        )
+        {
             return TestBadRequest(
                 $"{requestTarget} HTTP/1.1\r\nHost: {host}\r\n\r\n",
                 "400 Bad Request",
@@ -206,7 +208,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel.InMemory.FunctionalTests
                     },
                     new TestServiceContext(LoggerFactory)
                 )
-            ) {
+            )
+            {
                 using (var connection = server.CreateConnection())
                 {
                     await connection.SendAll("GET ? HTTP/1.1", "", "");
@@ -233,7 +236,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel.InMemory.FunctionalTests
                     context => Task.CompletedTask,
                     new TestServiceContext(LoggerFactory)
                 )
-            ) {
+            )
+            {
                 using (var client = server.CreateConnection())
                 {
                     await client.SendAll(
@@ -251,7 +255,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel.InMemory.FunctionalTests
             string expectedResponseStatusCode,
             string expectedExceptionMessage,
             string expectedAllowHeader = null
-        ) {
+        )
+        {
             BadHttpRequestException loggedException = null;
 
             var mockKestrelTrace = new Mock<IKestrelTrace>();
@@ -272,7 +277,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel.InMemory.FunctionalTests
                     context => Task.CompletedTask,
                     new TestServiceContext(LoggerFactory, mockKestrelTrace.Object)
                 )
-            ) {
+            )
+            {
                 using (var connection = server.CreateConnection())
                 {
                     await connection.SendAll(request);
@@ -300,7 +306,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel.InMemory.FunctionalTests
             string expectedResponseStatusCode,
             string expectedDateHeaderValue,
             string expectedAllowHeader = null
-        ) {
+        )
+        {
             var lines = new[]
             {
                 $"HTTP/1.1 {expectedResponseStatusCode}",

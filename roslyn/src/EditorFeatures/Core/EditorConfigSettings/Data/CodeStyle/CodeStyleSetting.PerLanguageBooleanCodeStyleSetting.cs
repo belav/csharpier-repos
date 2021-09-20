@@ -25,13 +25,15 @@ namespace Microsoft.CodeAnalysis.Editor.EditorConfigSettings.Data
                 AnalyzerConfigOptions editorConfigOptions,
                 OptionSet visualStudioOptions,
                 OptionUpdater updater
-            ) : base(
-                description,
-                option.Group.Description,
-                trueValueDescription,
-                falseValueDescription,
-                updater
-            ) {
+            )
+                : base(
+                    description,
+                    option.Group.Description,
+                    trueValueDescription,
+                    falseValueDescription,
+                    updater
+                )
+            {
                 _option = option;
                 _editorConfigOptions = editorConfigOptions;
                 _visualStudioOptions = visualStudioOptions;

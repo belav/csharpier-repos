@@ -134,7 +134,8 @@ namespace Microsoft.AspNetCore.Http.Connections.Internal.Transports
                 ILogger logger,
                 WebSocketCloseStatus? closeStatus,
                 string closeDescription
-            ) {
+            )
+            {
                 _clientClosed(logger, closeStatus, closeDescription, null);
             }
 
@@ -168,7 +169,8 @@ namespace Microsoft.AspNetCore.Http.Connections.Internal.Transports
                 WebSocketMessageType type,
                 int size,
                 bool endOfMessage
-            ) {
+            )
+            {
                 _messageReceived(logger, type, size, endOfMessage, null);
             }
 

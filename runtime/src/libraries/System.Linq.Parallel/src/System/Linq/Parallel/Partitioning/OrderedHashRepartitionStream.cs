@@ -21,12 +21,14 @@ namespace System.Linq.Parallel
             IEqualityComparer<THashKey>? hashKeyComparer,
             IEqualityComparer<TInputOutput>? elementComparer,
             CancellationToken cancellationToken
-        ) : base(
-            inputStream.PartitionCount,
-            inputStream.KeyComparer,
-            hashKeyComparer,
-            elementComparer
-        ) {
+        )
+            : base(
+                inputStream.PartitionCount,
+                inputStream.KeyComparer,
+                hashKeyComparer,
+                elementComparer
+            )
+        {
             _partitions = new OrderedHashRepartitionEnumerator<TInputOutput, THashKey, TOrderKey>[
                 inputStream.PartitionCount
             ];

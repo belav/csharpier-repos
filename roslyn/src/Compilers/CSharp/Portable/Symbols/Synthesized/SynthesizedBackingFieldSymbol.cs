@@ -29,7 +29,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             bool isReadOnly,
             bool isStatic,
             bool hasInitializer
-        ) {
+        )
+        {
             Debug.Assert(!string.IsNullOrEmpty(name));
 
             _name = name;
@@ -66,7 +67,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                 CSharpAttributeData,
                 AttributeLocation
             > arguments
-        ) {
+        )
+        {
             Debug.Assert((object)arguments.AttributeSyntaxOpt != null);
             Debug.Assert(arguments.Diagnostics is BindingDiagnosticBag);
 
@@ -91,7 +93,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
         internal override void AddSynthesizedAttributes(
             PEModuleBuilder moduleBuilder,
             ref ArrayBuilder<SynthesizedAttributeData> attributes
-        ) {
+        )
+        {
             base.AddSynthesizedAttributes(moduleBuilder, ref attributes);
 
             var compilation = this.DeclaringCompilation;
@@ -140,7 +143,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             BindingDiagnosticBag diagnostics,
             AttributeLocation symbolPart,
             WellKnownAttributeData decodedData
-        ) {
+        )
+        {
             base.PostDecodeWellKnownAttributes(
                 boundAttributes,
                 allAttributeSyntaxNodes,

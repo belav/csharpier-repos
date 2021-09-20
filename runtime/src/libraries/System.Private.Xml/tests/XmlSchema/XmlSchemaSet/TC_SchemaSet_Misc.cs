@@ -66,7 +66,8 @@ namespace System.Xml.Tests
             xss.XmlResolver = new XmlUrlResolver();
             using (
                 XmlTextReader xtr = new XmlTextReader(Path.Combine(TestData._Root, "bug110823.xsd"))
-            ) {
+            )
+            {
                 xss.Add(XmlSchema.Read(xtr, null));
             }
         }
@@ -977,7 +978,8 @@ namespace System.Xml.Tests
                 XmlReader schemaReader = XmlReader.Create(
                     Path.Combine(TestData._Root, "Bug397633.xsd")
                 )
-            ) {
+            )
+            {
                 XmlSchemaSet sc = new XmlSchemaSet();
                 sc.XmlResolver = new XmlUrlResolver();
                 sc.Add("", schemaReader);
@@ -992,7 +994,8 @@ namespace System.Xml.Tests
                         Path.Combine(TestData._Root, "Bug397633.xml"),
                         readerSettings
                     )
-                ) {
+                )
+                {
                     XmlDocument doc = new XmlDocument();
                     try
                     {
@@ -1005,7 +1008,8 @@ namespace System.Xml.Tests
                             ex.LineNumber == 1
                             && ex.LinePosition == 2
                             && !string.IsNullOrEmpty(ex.SourceUri)
-                        ) {
+                        )
+                        {
                             return;
                         }
                     }
@@ -1025,7 +1029,8 @@ namespace System.Xml.Tests
                     Path.Combine(TestData._Root, "Bug397633.xml"),
                     readerSettings
                 )
-            ) {
+            )
+            {
                 XmlDocument doc = new XmlDocument();
                 try
                 {
@@ -1101,7 +1106,8 @@ namespace System.Xml.Tests
                     readerSettings,
                     parserContext
                 )
-            ) {
+            )
+            {
                 xmlReader.Read();
                 xmlReader.MoveToAttribute(0);
                 xmlReader.MoveToNextAttribute();

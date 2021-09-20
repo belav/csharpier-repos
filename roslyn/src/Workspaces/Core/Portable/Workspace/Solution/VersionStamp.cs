@@ -173,7 +173,8 @@ namespace Microsoft.CodeAnalysis
         internal static bool CanReusePersistedVersion(
             VersionStamp baseVersion,
             VersionStamp persistedVersion
-        ) {
+        )
+        {
             if (baseVersion == persistedVersion)
             {
                 return true;

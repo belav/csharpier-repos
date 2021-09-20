@@ -77,7 +77,8 @@ namespace System.Threading.Tasks.Tests.Status
                 if (
                     (options & TaskCreationOptions.AttachedToParent) != 0
                     && (options & TaskCreationOptions.RunContinuationsAsynchronously) != 0
-                ) {
+                )
+                {
                     AssertExtensions.Throws<ArgumentOutOfRangeException>(
                         "creationOptions",
                         () => new TaskCompletionSource(options)

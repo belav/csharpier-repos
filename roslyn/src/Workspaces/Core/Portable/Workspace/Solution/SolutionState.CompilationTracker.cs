@@ -164,7 +164,8 @@ namespace Microsoft.CodeAnalysis
                     while (
                         index < secondarySymbols.Length
                         && secondarySymbols[index].hashCode == symbolHash
-                    ) {
+                    )
+                    {
                         var cached = secondarySymbols[index].symbol;
                         if (cached.TryGetTarget(out var otherSymbol) && otherSymbol == symbol)
                             return true;
@@ -198,7 +199,8 @@ namespace Microsoft.CodeAnalysis
                 CompilationAndGeneratorDriverTranslationAction? translate = null,
                 bool clone = false,
                 CancellationToken cancellationToken = default
-            ) {
+            )
+            {
                 var state = ReadState();
 
                 var baseCompilation = state.CompilationWithoutGeneratedDocuments?.GetValueOrNull(
@@ -272,7 +274,8 @@ namespace Microsoft.CodeAnalysis
                 DocumentState docState,
                 SyntaxTree tree,
                 CancellationToken cancellationToken
-            ) {
+            )
+            {
                 GetPartialCompilationState(
                     solution,
                     docState.Id,
@@ -345,7 +348,8 @@ namespace Microsoft.CodeAnalysis
                 out TextDocumentStates<SourceGeneratedDocumentState> sourceGeneratedDocuments,
                 out Dictionary<MetadataReference, ProjectId>? metadataReferenceToProjectId,
                 CancellationToken cancellationToken
-            ) {
+            )
+            {
                 var state = ReadState();
                 var compilationWithoutGeneratedDocuments =
                     state.CompilationWithoutGeneratedDocuments?.GetValueOrNull(cancellationToken);
@@ -363,7 +367,8 @@ namespace Microsoft.CodeAnalysis
                     && inProgressState.IntermediateProjects.All(
                         t => IsTouchDocumentActionForDocument(t.action, id)
                     )
-                ) {
+                )
+                {
                     inProgressProject = ProjectState;
 
                     // We'll add in whatever generated documents we do have; these may be from a prior run prior to some changes
@@ -498,7 +503,8 @@ namespace Microsoft.CodeAnalysis
                         inProgressCompilation.ExternalReferences,
                         metadataReferences
                     )
-                ) {
+                )
+                {
                     inProgressCompilation = inProgressCompilation.WithReferences(
                         metadataReferences
                     );
@@ -527,7 +533,8 @@ namespace Microsoft.CodeAnalysis
                         out var compilationOpt
                     )
                     && compilationOpt.HasValue
-                ) {
+                )
+                {
                     compilation = compilationOpt.Value;
                     return true;
                 }
@@ -539,7 +546,8 @@ namespace Microsoft.CodeAnalysis
             public Task<Compilation> GetCompilationAsync(
                 SolutionState solution,
                 CancellationToken cancellationToken
-            ) {
+            )
+            {
                 if (this.TryGetCompilation(out var compilation))
                 {
                     // PERF: This is a hot code path and Task<TResult> isn't cheap,
@@ -557,7 +565,8 @@ namespace Microsoft.CodeAnalysis
             private async Task<Compilation> GetCompilationSlowAsync(
                 SolutionState solution,
                 CancellationToken cancellationToken
-            ) {
+            )
+            {
                 var compilationInfo = await GetOrBuildCompilationInfoAsync(
                         solution,
                         lockGate: true,
@@ -570,7 +579,8 @@ namespace Microsoft.CodeAnalysis
             private async Task<Compilation> GetOrBuildDeclarationCompilationAsync(
                 SolutionServices solutionServices,
                 CancellationToken cancellationToken
-            ) {
+            )
+            {
                 try
                 {
                     cancellationToken.ThrowIfCancellationRequested();
@@ -578,7 +588,8 @@ namespace Microsoft.CodeAnalysis
                     using (
                         await _buildLock.DisposableWaitAsync(cancellationToken)
                             .ConfigureAwait(false)
-                    ) {
+                    )
+                    {
                         var state = ReadState();
 
                         // we are already in the final stage. just return it.
@@ -651,7 +662,8 @@ namespace Microsoft.CodeAnalysis
                 SolutionState solution,
                 bool lockGate,
                 CancellationToken cancellationToken
-            ) {
+            )
+            {
                 try
                 {
                     using (
@@ -661,7 +673,8 @@ namespace Microsoft.CodeAnalysis
                             ProjectState,
                             cancellationToken
                         )
-                    ) {
+                    )
+                    {
                         cancellationToken.ThrowIfCancellationRequested();
 
                         var state = ReadState();
@@ -688,7 +701,8 @@ namespace Microsoft.CodeAnalysis
                             using (
                                 await _buildLock.DisposableWaitAsync(cancellationToken)
                                     .ConfigureAwait(false)
-                            ) {
+                            )
+                            {
                                 return await BuildCompilationInfoAsync(solution, cancellationToken)
                                     .ConfigureAwait(false);
                             }
@@ -714,7 +728,8 @@ namespace Microsoft.CodeAnalysis
             private Task<CompilationInfo> BuildCompilationInfoAsync(
                 SolutionState solution,
                 CancellationToken cancellationToken
-            ) {
+            )
+            {
                 cancellationToken.ThrowIfCancellationRequested();
 
                 var state = ReadState();
@@ -795,7 +810,8 @@ namespace Microsoft.CodeAnalysis
             private async Task<CompilationInfo> BuildCompilationInfoFromScratchAsync(
                 SolutionState solution,
                 CancellationToken cancellationToken
-            ) {
+            )
+            {
                 try
                 {
                     var compilation = await BuildDeclarationCompilationFromScratchAsync(
@@ -829,7 +845,8 @@ namespace Microsoft.CodeAnalysis
             private async Task<Compilation> BuildDeclarationCompilationFromScratchAsync(
                 SolutionServices solutionServices,
                 CancellationToken cancellationToken
-            ) {
+            )
+            {
                 try
                 {
                     var compilation = CreateEmptyCompilation();
@@ -839,7 +856,8 @@ namespace Microsoft.CodeAnalysis
                     );
                     foreach (
                         var documentState in ProjectState.DocumentStates.GetStatesInCompilationOrder()
-                    ) {
+                    )
+                    {
                         cancellationToken.ThrowIfCancellationRequested();
                         // Include the tree even if the content of the document failed to load.
                         trees.Add(
@@ -895,7 +913,8 @@ namespace Microsoft.CodeAnalysis
                 InProgressState state,
                 Compilation inProgressCompilation,
                 CancellationToken cancellationToken
-            ) {
+            )
+            {
                 try
                 {
                     var compilation = await BuildDeclarationCompilationFromInProgressAsync(
@@ -926,7 +945,8 @@ namespace Microsoft.CodeAnalysis
                 InProgressState state,
                 Compilation inProgressCompilation,
                 CancellationToken cancellationToken
-            ) {
+            )
+            {
                 try
                 {
                     var intermediateProjects = state.IntermediateProjects;
@@ -973,7 +993,8 @@ namespace Microsoft.CodeAnalysis
                     Compilation compilation,
                     bool hasSuccessfullyLoaded,
                     TextDocumentStates<SourceGeneratedDocumentState> generatedDocuments
-                ) {
+                )
+                {
                     Compilation = compilation;
                     HasSuccessfullyLoaded = hasSuccessfullyLoaded;
                     GeneratedDocuments = generatedDocuments;
@@ -997,7 +1018,8 @@ namespace Microsoft.CodeAnalysis
                 TextDocumentStates<SourceGeneratedDocumentState>? authoritativeGeneratedDocuments,
                 TextDocumentStates<SourceGeneratedDocumentState> nonAuthoritativeGeneratedDocuments,
                 CancellationToken cancellationToken
-            ) {
+            )
+            {
                 try
                 {
                     // if HasAllInformation is false, then this project is always not completed.
@@ -1116,10 +1138,12 @@ namespace Microsoft.CodeAnalysis
 
                                 foreach (
                                     var generatorResult in generatorDriver.GetRunResult().Results
-                                ) {
+                                )
+                                {
                                     foreach (
                                         var generatedSource in generatorResult.GeneratedSources
-                                    ) {
+                                    )
+                                    {
                                         var existing = FindExistingGeneratedDocumentState(
                                             nonAuthoritativeGeneratedDocuments,
                                             generatorResult.Generator,
@@ -1203,7 +1227,8 @@ namespace Microsoft.CodeAnalysis
                     TextDocumentStates<SourceGeneratedDocumentState> states,
                     ISourceGenerator generator,
                     string hintName
-                ) {
+                )
+                {
                     foreach (var state in states.States)
                     {
                         if (state.SourceGenerator != generator)
@@ -1223,7 +1248,8 @@ namespace Microsoft.CodeAnalysis
                 ProjectId projectId,
                 ISourceGenerator generator,
                 string hintName
-            ) {
+            )
+            {
                 // We want the DocumentId generated for a generated output to be stable between Compilations; this is so features that track
                 // a document by DocumentId can find it after some change has happened that requires generators to run again.
                 // To achieve this we'll just do a crytographic hash of the generator name and hint name; the choice of a cryptographic hash
@@ -1267,14 +1293,16 @@ namespace Microsoft.CodeAnalysis
                 ProjectState fromProject,
                 ProjectReference projectReference,
                 CancellationToken cancellationToken
-            ) {
+            )
+            {
                 try
                 {
                     // if we already have the compilation and its right kind then use it.
                     if (
                         this.ProjectState.LanguageServices == fromProject.LanguageServices
                         && this.TryGetCompilation(out var compilation)
-                    ) {
+                    )
+                    {
                         return compilation.ToMetadataReference(
                             projectReference.Aliases,
                             projectReference.EmbedInteropTypes
@@ -1318,7 +1346,8 @@ namespace Microsoft.CodeAnalysis
             public MetadataReference? GetPartialMetadataReference(
                 ProjectState fromProject,
                 ProjectReference projectReference
-            ) {
+            )
+            {
                 var state = ReadState();
 
                 // get compilation in any state it happens to be in right now.
@@ -1329,7 +1358,8 @@ namespace Microsoft.CodeAnalysis
                     )
                     && compilationOpt.HasValue
                     && ProjectState.LanguageServices == fromProject.LanguageServices
-                ) {
+                )
+                {
                     // if we have a compilation and its the correct language, use a simple compilation reference
                     return compilationOpt.Value.ToMetadataReference(
                         projectReference.Aliases,
@@ -1347,7 +1377,8 @@ namespace Microsoft.CodeAnalysis
                 SolutionState solution,
                 ProjectReference projectReference,
                 CancellationToken cancellationToken
-            ) {
+            )
+            {
                 try
                 {
                     using (
@@ -1355,7 +1386,8 @@ namespace Microsoft.CodeAnalysis
                             FunctionId.Workspace_SkeletonAssembly_GetMetadataOnlyImage,
                             cancellationToken
                         )
-                    ) {
+                    )
+                    {
                         var version = await this.GetDependentSemanticVersionAsync(
                                 solution,
                                 cancellationToken
@@ -1381,12 +1413,14 @@ namespace Microsoft.CodeAnalysis
                                 version,
                                 out var reference
                             )
-                        ) {
+                        )
+                        {
                             // using async build lock so we don't get multiple consumers attempting to build metadata-only images for the same compilation.
                             using (
                                 await _buildLock.DisposableWaitAsync(cancellationToken)
                                     .ConfigureAwait(false)
-                            ) {
+                            )
+                            {
                                 solution.Workspace.LogTestMessage(
                                     $"Build lock taken for {ProjectState.Id}..."
                                 );
@@ -1432,7 +1466,8 @@ namespace Microsoft.CodeAnalysis
                 string name,
                 SymbolFilter filter,
                 CancellationToken cancellationToken
-            ) {
+            )
+            {
                 // DO NOT expose declaration only compilation to outside since it can be held alive long time, we don't want to create any symbol from the declaration only compilation.
                 var state = this.ReadState();
                 return state.DeclarationOnlyCompilation == null
@@ -1451,7 +1486,8 @@ namespace Microsoft.CodeAnalysis
                 Func<string, bool> predicate,
                 SymbolFilter filter,
                 CancellationToken cancellationToken
-            ) {
+            )
+            {
                 // DO NOT expose declaration only compilation to outside since it can be held alive long time, we don't want to create any symbol from the declaration only compilation.
                 var state = this.ReadState();
                 return state.DeclarationOnlyCompilation == null
@@ -1470,7 +1506,8 @@ namespace Microsoft.CodeAnalysis
                 Func<string, bool> predicate,
                 SymbolFilter filter,
                 CancellationToken cancellationToken
-            ) {
+            )
+            {
                 var state = this.ReadState();
                 if (state.DeclarationOnlyCompilation == null)
                 {
@@ -1488,7 +1525,8 @@ namespace Microsoft.CodeAnalysis
             public Task<bool> HasSuccessfullyLoadedAsync(
                 SolutionState solution,
                 CancellationToken cancellationToken
-            ) {
+            )
+            {
                 var state = this.ReadState();
 
                 if (state.HasSuccessfullyLoaded.HasValue)
@@ -1506,7 +1544,8 @@ namespace Microsoft.CodeAnalysis
             private async Task<bool> HasSuccessfullyLoadedSlowAsync(
                 SolutionState solution,
                 CancellationToken cancellationToken
-            ) {
+            )
+            {
                 var compilationInfo = await GetOrBuildCompilationInfoAsync(
                         solution,
                         lockGate: true,
@@ -1521,7 +1560,8 @@ namespace Microsoft.CodeAnalysis
             > GetSourceGeneratedDocumentStatesAsync(
                 SolutionState solution,
                 CancellationToken cancellationToken
-            ) {
+            )
+            {
                 var compilationInfo = await GetOrBuildCompilationInfoAsync(
                         solution,
                         lockGate: true,
@@ -1533,7 +1573,8 @@ namespace Microsoft.CodeAnalysis
 
             public SourceGeneratedDocumentState? TryGetSourceGeneratedDocumentStateForAlreadyGeneratedId(
                 DocumentId documentId
-            ) {
+            )
+            {
                 var state = ReadState();
 
                 // If we are in FinalState, then we have correctly ran generators and then know the final contents of the
@@ -1554,7 +1595,8 @@ namespace Microsoft.CodeAnalysis
             public Task<VersionStamp> GetDependentVersionAsync(
                 SolutionState solution,
                 CancellationToken cancellationToken
-            ) {
+            )
+            {
                 if (_lazyDependentVersion == null)
                 {
                     var tmp = solution; // temp. local to avoid a closure allocation for the fast path
@@ -1575,7 +1617,8 @@ namespace Microsoft.CodeAnalysis
             private async Task<VersionStamp> ComputeDependentVersionAsync(
                 SolutionState solution,
                 CancellationToken cancellationToken
-            ) {
+            )
+            {
                 var projectState = this.ProjectState;
                 var projVersion = projectState.Version;
                 var docVersion = await projectState.GetLatestDocumentVersionAsync(cancellationToken)
@@ -1603,7 +1646,8 @@ namespace Microsoft.CodeAnalysis
             public Task<VersionStamp> GetDependentSemanticVersionAsync(
                 SolutionState solution,
                 CancellationToken cancellationToken
-            ) {
+            )
+            {
                 if (_lazyDependentSemanticVersion == null)
                 {
                     var tmp = solution; // temp. local to avoid a closure allocation for the fast path
@@ -1624,7 +1668,8 @@ namespace Microsoft.CodeAnalysis
             private async Task<VersionStamp> ComputeDependentSemanticVersionAsync(
                 SolutionState solution,
                 CancellationToken cancellationToken
-            ) {
+            )
+            {
                 var projectState = this.ProjectState;
                 var version = await projectState.GetSemanticVersionAsync(cancellationToken)
                     .ConfigureAwait(false);

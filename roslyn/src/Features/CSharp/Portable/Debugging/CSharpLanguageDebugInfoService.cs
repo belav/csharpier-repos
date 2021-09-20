@@ -34,7 +34,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Debugging
             Document document,
             int position,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             return DataTipInfoGetter.GetInfoAsync(document, position, cancellationToken);
         }
     }

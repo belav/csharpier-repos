@@ -89,7 +89,8 @@ namespace System.Reflection.Context.Delegation
             CallingConventions callConvention,
             Type[] types,
             ParameterModifier[] modifiers
-        ) {
+        )
+        {
             if (types == null)
             {
                 return UnderlyingModule.GetMethod(name);
@@ -113,7 +114,8 @@ namespace System.Reflection.Context.Delegation
         public override void GetPEKind(
             out PortableExecutableKinds peKind,
             out ImageFileMachine machine
-        ) {
+        )
+        {
             UnderlyingModule.GetPEKind(out peKind, out machine);
         }
 
@@ -146,7 +148,8 @@ namespace System.Reflection.Context.Delegation
             int metadataToken,
             Type[] genericTypeArguments,
             Type[] genericMethodArguments
-        ) {
+        )
+        {
             return UnderlyingModule.ResolveField(
                 metadataToken,
                 genericTypeArguments,
@@ -158,7 +161,8 @@ namespace System.Reflection.Context.Delegation
             int metadataToken,
             Type[] genericTypeArguments,
             Type[] genericMethodArguments
-        ) {
+        )
+        {
             return UnderlyingModule.ResolveMember(
                 metadataToken,
                 genericTypeArguments,
@@ -170,7 +174,8 @@ namespace System.Reflection.Context.Delegation
             int metadataToken,
             Type[] genericTypeArguments,
             Type[] genericMethodArguments
-        ) {
+        )
+        {
             return UnderlyingModule.ResolveMethod(
                 metadataToken,
                 genericTypeArguments,
@@ -192,7 +197,8 @@ namespace System.Reflection.Context.Delegation
             int metadataToken,
             Type[] genericTypeArguments,
             Type[] genericMethodArguments
-        ) {
+        )
+        {
             return UnderlyingModule.ResolveType(
                 metadataToken,
                 genericTypeArguments,

@@ -115,7 +115,8 @@ namespace Newtonsoft.Json.Tests.Issues
                 Type objectType,
                 object existingValue,
                 JsonSerializer serializer
-            ) {
+            )
+            {
                 JToken token = JToken.Load(reader);
 
                 var newToken = token.ToObject<JObject>(serializer);
@@ -127,7 +128,8 @@ namespace Newtonsoft.Json.Tests.Issues
                 JsonWriter writer,
                 object value,
                 JsonSerializer serializer
-            ) {
+            )
+            {
                 throw new NotImplementedException();
             }
         }

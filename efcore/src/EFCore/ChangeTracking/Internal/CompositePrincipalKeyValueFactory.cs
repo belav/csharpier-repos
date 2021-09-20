@@ -105,7 +105,8 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
         private object[] CreateFromEntry(
             IUpdateEntry entry,
             Func<IUpdateEntry, IProperty, object?> getValue
-        ) {
+        )
+        {
             var values = new object[Properties.Count];
             var index = 0;
 

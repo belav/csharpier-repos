@@ -67,7 +67,8 @@ namespace Microsoft.Extensions.DependencyInjection
         public static void Add(
             this IList<IApplicationModelConvention> conventions,
             IControllerModelConvention controllerModelConvention
-        ) {
+        )
+        {
             if (conventions == null)
             {
                 throw new ArgumentNullException(nameof(conventions));
@@ -91,7 +92,8 @@ namespace Microsoft.Extensions.DependencyInjection
         public static void Add(
             this IList<IApplicationModelConvention> conventions,
             IActionModelConvention actionModelConvention
-        ) {
+        )
+        {
             if (conventions == null)
             {
                 throw new ArgumentNullException(nameof(conventions));
@@ -115,7 +117,8 @@ namespace Microsoft.Extensions.DependencyInjection
         public static void Add(
             this IList<IApplicationModelConvention> conventions,
             IParameterModelConvention parameterModelConvention
-        ) {
+        )
+        {
             if (conventions == null)
             {
                 throw new ArgumentNullException(nameof(conventions));
@@ -139,7 +142,8 @@ namespace Microsoft.Extensions.DependencyInjection
         public static void Add(
             this IList<IApplicationModelConvention> conventions,
             IParameterModelBaseConvention parameterModelConvention
-        ) {
+        )
+        {
             if (conventions == null)
             {
                 throw new ArgumentNullException(nameof(conventions));
@@ -159,7 +163,8 @@ namespace Microsoft.Extensions.DependencyInjection
 
             public ParameterApplicationModelConvention(
                 IParameterModelConvention parameterModelConvention
-            ) {
+            )
+            {
                 _parameterModelConvention = parameterModelConvention;
             }
 
@@ -197,7 +202,8 @@ namespace Microsoft.Extensions.DependencyInjection
 
             public ParameterBaseApplicationModelConvention(
                 IParameterModelBaseConvention parameterModelBaseConvention
-            ) {
+            )
+            {
                 _parameterBaseModelConvention = parameterModelBaseConvention;
             }
 
@@ -263,7 +269,8 @@ namespace Microsoft.Extensions.DependencyInjection
 
             public ControllerApplicationModelConvention(
                 IControllerModelConvention controllerConvention
-            ) {
+            )
+            {
                 if (controllerConvention == null)
                 {
                     throw new ArgumentNullException(nameof(controllerConvention));

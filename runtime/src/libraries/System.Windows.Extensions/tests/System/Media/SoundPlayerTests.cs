@@ -122,7 +122,8 @@ namespace System.Media.Test
                     SocketType.Stream,
                     ProtocolType.Tcp
                 )
-            ) {
+            )
+            {
                 listener.Bind(new IPEndPoint(IPAddress.Loopback, 0));
                 listener.Listen(1);
                 var ep = (IPEndPoint)listener.LocalEndPoint;
@@ -137,7 +138,8 @@ namespace System.Media.Test
                             FileStream sourceStream = File.OpenRead(
                                 sourceLocation.Replace("file://", "")
                             )
-                        ) {
+                        )
+                        {
                             string line;
                             while (!string.IsNullOrEmpty(line = await reader.ReadLineAsync()))
                                 ;
@@ -175,7 +177,8 @@ namespace System.Media.Test
                     SocketType.Stream,
                     ProtocolType.Tcp
                 )
-            ) {
+            )
+            {
                 listener.Bind(new IPEndPoint(IPAddress.Loopback, 0));
                 listener.Listen(1);
                 var ep = (IPEndPoint)listener.LocalEndPoint;
@@ -582,7 +585,8 @@ namespace System.Media.Test
                 int offset,
                 int count,
                 CancellationToken cancellationToken
-            ) {
+            )
+            {
                 await Task.Delay(-1, cancellationToken);
                 return 0;
             }

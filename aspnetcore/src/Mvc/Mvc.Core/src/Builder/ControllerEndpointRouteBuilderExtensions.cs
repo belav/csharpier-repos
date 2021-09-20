@@ -25,7 +25,8 @@ namespace Microsoft.AspNetCore.Builder
         /// <returns>An <see cref="ControllerActionEndpointConventionBuilder"/> for endpoints associated with controller actions.</returns>
         public static ControllerActionEndpointConventionBuilder MapControllers(
             this IEndpointRouteBuilder endpoints
-        ) {
+        )
+        {
             if (endpoints == null)
             {
                 throw new ArgumentNullException(nameof(endpoints));
@@ -46,7 +47,8 @@ namespace Microsoft.AspNetCore.Builder
         /// </returns>
         public static ControllerActionEndpointConventionBuilder MapDefaultControllerRoute(
             this IEndpointRouteBuilder endpoints
-        ) {
+        )
+        {
             if (endpoints == null)
             {
                 throw new ArgumentNullException(nameof(endpoints));
@@ -94,7 +96,8 @@ namespace Microsoft.AspNetCore.Builder
             object? defaults = null,
             object? constraints = null,
             object? dataTokens = null
-        ) {
+        )
+        {
             if (endpoints == null)
             {
                 throw new ArgumentNullException(nameof(endpoints));
@@ -144,7 +147,8 @@ namespace Microsoft.AspNetCore.Builder
             object? defaults = null,
             object? constraints = null,
             object? dataTokens = null
-        ) {
+        )
+        {
             if (endpoints == null)
             {
                 throw new ArgumentNullException(nameof(endpoints));
@@ -208,7 +212,8 @@ namespace Microsoft.AspNetCore.Builder
             this IEndpointRouteBuilder endpoints,
             string action,
             string controller
-        ) {
+        )
+        {
             if (endpoints == null)
             {
                 throw new ArgumentNullException(nameof(endpoints));
@@ -286,7 +291,8 @@ namespace Microsoft.AspNetCore.Builder
             string pattern,
             string action,
             string controller
-        ) {
+        )
+        {
             if (endpoints == null)
             {
                 throw new ArgumentNullException(nameof(endpoints));
@@ -366,7 +372,8 @@ namespace Microsoft.AspNetCore.Builder
             string action,
             string controller,
             string area
-        ) {
+        )
+        {
             if (endpoints == null)
             {
                 throw new ArgumentNullException(nameof(endpoints));
@@ -446,7 +453,8 @@ namespace Microsoft.AspNetCore.Builder
             string action,
             string controller,
             string area
-        ) {
+        )
+        {
             if (endpoints == null)
             {
                 throw new ArgumentNullException(nameof(endpoints));
@@ -617,7 +625,8 @@ namespace Microsoft.AspNetCore.Builder
             string action,
             string controller,
             string? area
-        ) {
+        )
+        {
             return new DynamicControllerMetadata(
                 new RouteValueDictionary()
                 {
@@ -645,7 +654,8 @@ namespace Microsoft.AspNetCore.Builder
 
         private static ControllerActionEndpointDataSource GetOrCreateDataSource(
             IEndpointRouteBuilder endpoints
-        ) {
+        )
+        {
             var dataSource = endpoints.DataSources.OfType<ControllerActionEndpointDataSource>()
                 .FirstOrDefault();
             if (dataSource == null)
@@ -666,7 +676,8 @@ namespace Microsoft.AspNetCore.Builder
         private static void RegisterInCache(
             IServiceProvider serviceProvider,
             ControllerActionEndpointDataSource dataSource
-        ) {
+        )
+        {
             var cache =
                 serviceProvider.GetRequiredService<DynamicControllerEndpointSelectorCache>();
             cache.AddDataSource(dataSource);

@@ -21,7 +21,8 @@ namespace ILCompiler.DependencyAnalysis
         protected EmbeddedDataContainerNode(
             string startSymbolMangledName,
             string endSymbolMangledName
-        ) {
+        )
+        {
             _startSymbolMangledName = startSymbolMangledName;
             _startSymbol = new ObjectAndOffsetSymbolNode(this, 0, startSymbolMangledName, true);
             _endSymbol = new ObjectAndOffsetSymbolNode(this, 0, endSymbolMangledName, true);

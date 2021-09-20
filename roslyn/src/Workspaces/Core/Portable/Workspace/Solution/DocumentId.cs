@@ -48,7 +48,8 @@ namespace Microsoft.CodeAnalysis
             ProjectId projectId,
             Guid id,
             string? debugName = null
-        ) {
+        )
+        {
             if (projectId == null)
             {
                 throw new ArgumentNullException(nameof(projectId));

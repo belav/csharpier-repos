@@ -321,7 +321,8 @@ namespace System
                 string? remoteStackTrace,
                 UIntPtr ipForWatsonBuckets,
                 byte[]? watsonBuckets
-            ) {
+            )
+            {
                 StackTrace = stackTrace;
                 DynamicMethods = dynamicMethods;
                 RemoteStackTrace = remoteStackTrace;

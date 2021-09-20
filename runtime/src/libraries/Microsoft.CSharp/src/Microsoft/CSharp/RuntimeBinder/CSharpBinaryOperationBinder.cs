@@ -116,7 +116,8 @@ namespace Microsoft.CSharp.RuntimeBinder
                 || Operation != otherBinder.Operation
                 || IsChecked != otherBinder.IsChecked
                 || _callingContext != otherBinder._callingContext
-            ) {
+            )
+            {
                 return false;
             }
 
@@ -139,7 +140,8 @@ namespace Microsoft.CSharp.RuntimeBinder
             DynamicMetaObject target,
             DynamicMetaObject arg,
             DynamicMetaObject errorSuggestion
-        ) {
+        )
+        {
             BinderHelper.ValidateBindArgument(target, nameof(target));
             BinderHelper.ValidateBindArgument(arg, nameof(arg));
             return BinderHelper.Bind(

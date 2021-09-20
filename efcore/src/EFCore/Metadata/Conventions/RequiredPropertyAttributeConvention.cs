@@ -34,7 +34,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
             RequiredAttribute attribute,
             MemberInfo clrMember,
             IConventionContext context
-        ) {
+        )
+        {
             propertyBuilder.IsRequired(true, fromDataAnnotation: true);
         }
     }

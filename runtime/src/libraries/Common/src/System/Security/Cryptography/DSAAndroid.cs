@@ -129,7 +129,8 @@ namespace System.Security.Cryptography
                         parameters.X,
                         parameters.X != null ? parameters.X.Length : 0
                     )
-                ) {
+                )
+                {
                     throw new CryptographicException();
                 }
 
@@ -140,7 +141,8 @@ namespace System.Security.Cryptography
                 ReadOnlySpan<byte> passwordBytes,
                 ReadOnlySpan<byte> source,
                 out int bytesRead
-            ) {
+            )
+            {
                 ThrowIfDisposed();
                 base.ImportEncryptedPkcs8PrivateKey(passwordBytes, source, out bytesRead);
             }
@@ -149,7 +151,8 @@ namespace System.Security.Cryptography
                 ReadOnlySpan<char> password,
                 ReadOnlySpan<byte> source,
                 out int bytesRead
-            ) {
+            )
+            {
                 ThrowIfDisposed();
                 base.ImportEncryptedPkcs8PrivateKey(password, source, out bytesRead);
             }
@@ -203,7 +206,8 @@ namespace System.Security.Cryptography
                 int offset,
                 int count,
                 HashAlgorithmName hashAlgorithm
-            ) {
+            )
+            {
                 // we're sealed and the base should have checked this already
                 Debug.Assert(data != null);
                 Debug.Assert(offset >= 0 && offset <= data.Length);
@@ -256,7 +260,8 @@ namespace System.Security.Cryptography
                 ReadOnlySpan<byte> hash,
                 Span<byte> destination,
                 out int bytesWritten
-            ) {
+            )
+            {
                 return TryCreateSignatureCore(
                     hash,
                     destination,
@@ -270,7 +275,8 @@ namespace System.Security.Cryptography
                 Span<byte> destination,
                 DSASignatureFormat signatureFormat,
                 out int bytesWritten
-            ) {
+            )
+            {
                 SafeDsaHandle key = GetKey();
                 int maxSignatureSize = Interop.AndroidCrypto.DsaEncodedSignatureSize(key);
                 Span<byte> signDestination = stackalloc byte[SignatureStackBufSize];
@@ -352,7 +358,8 @@ namespace System.Security.Cryptography
                 Span<byte> destination,
                 int signatureLength,
                 SafeDsaHandle key
-            ) {
+            )
+            {
                 if (signatureLength > destination.Length)
                 {
                     Debug.Fail(
@@ -404,7 +411,8 @@ namespace System.Security.Cryptography
                 ReadOnlySpan<byte> hash,
                 ReadOnlySpan<byte> signature,
                 DSASignatureFormat signatureFormat
-            ) {
+            )
+            {
                 SafeDsaHandle key = GetKey();
 
                 if (signatureFormat == DSASignatureFormat.IeeeP1363FixedFieldConcatenation)

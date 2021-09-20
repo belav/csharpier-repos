@@ -56,7 +56,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             out bool failedThroughTypeCheck,
             ref CompoundUseSiteInfo<AssemblySymbol> useSiteInfo,
             ConsList<TypeSymbol> basesBeingResolved
-        ) {
+        )
+        {
             failedThroughTypeCheck = false;
             return IsSymbolAccessibleConditional(symbol, Compilation.Assembly, ref useSiteInfo);
         }
@@ -136,13 +137,15 @@ namespace Microsoft.CodeAnalysis.CSharp
 
         internal override ImmutableArray<LocalSymbol> GetDeclaredLocalsForScope(
             SyntaxNode scopeDesignator
-        ) {
+        )
+        {
             throw ExceptionUtilities.Unreachable;
         }
 
         internal override ImmutableArray<LocalFunctionSymbol> GetDeclaredLocalFunctionsForScope(
             CSharpSyntaxNode scopeDesignator
-        ) {
+        )
+        {
             throw ExceptionUtilities.Unreachable;
         }
 
@@ -150,7 +153,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             SwitchStatementSyntax node,
             Binder originalBinder,
             BindingDiagnosticBag diagnostics
-        ) {
+        )
+        {
             // There's supposed to be a SwitchBinder (or other overrider of this method) in the chain.
             throw ExceptionUtilities.Unreachable;
         }
@@ -159,7 +163,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             SwitchExpressionSyntax node,
             Binder originalBinder,
             BindingDiagnosticBag diagnostics
-        ) {
+        )
+        {
             // There's supposed to be a SwitchExpressionBinder (or other overrider of this method) in the chain.
             throw ExceptionUtilities.Unreachable;
         }
@@ -167,7 +172,8 @@ namespace Microsoft.CodeAnalysis.CSharp
         internal override void BindPatternSwitchLabelForInference(
             CasePatternSwitchLabelSyntax node,
             BindingDiagnosticBag diagnostics
-        ) {
+        )
+        {
             // There's supposed to be a SwitchBinder (or other overrider of this method) in the chain.
             throw ExceptionUtilities.Unreachable;
         }
@@ -177,7 +183,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             TypeSymbol switchGoverningType,
             uint switchGoverningValEscape,
             BindingDiagnosticBag diagnostics
-        ) {
+        )
+        {
             // There's supposed to be an overrider of this method (e.g. SwitchExpressionArmBinder) for the arm in the chain.
             throw ExceptionUtilities.Unreachable;
         }
@@ -185,7 +192,8 @@ namespace Microsoft.CodeAnalysis.CSharp
         internal override BoundForStatement BindForParts(
             BindingDiagnosticBag diagnostics,
             Binder originalBinder
-        ) {
+        )
+        {
             // There's supposed to be a ForLoopBinder (or other overrider of this method) in the chain.
             throw ExceptionUtilities.Unreachable;
         }
@@ -193,7 +201,8 @@ namespace Microsoft.CodeAnalysis.CSharp
         internal override BoundStatement BindForEachParts(
             BindingDiagnosticBag diagnostics,
             Binder originalBinder
-        ) {
+        )
+        {
             // There's supposed to be a ForEachLoopBinder (or other overrider of this method) in the chain.
             throw ExceptionUtilities.Unreachable;
         }
@@ -201,7 +210,8 @@ namespace Microsoft.CodeAnalysis.CSharp
         internal override BoundStatement BindForEachDeconstruction(
             BindingDiagnosticBag diagnostics,
             Binder originalBinder
-        ) {
+        )
+        {
             // There's supposed to be a ForEachLoopBinder (or other overrider of this method) in the chain.
             throw ExceptionUtilities.Unreachable;
         }
@@ -209,7 +219,8 @@ namespace Microsoft.CodeAnalysis.CSharp
         internal override BoundWhileStatement BindWhileParts(
             BindingDiagnosticBag diagnostics,
             Binder originalBinder
-        ) {
+        )
+        {
             // There's supposed to be a WhileBinder (or other overrider of this method) in the chain.
             throw ExceptionUtilities.Unreachable;
         }
@@ -217,7 +228,8 @@ namespace Microsoft.CodeAnalysis.CSharp
         internal override BoundDoStatement BindDoParts(
             BindingDiagnosticBag diagnostics,
             Binder originalBinder
-        ) {
+        )
+        {
             // There's supposed to be a WhileBinder (or other overrider of this method) in the chain.
             throw ExceptionUtilities.Unreachable;
         }
@@ -225,7 +237,8 @@ namespace Microsoft.CodeAnalysis.CSharp
         internal override BoundStatement BindUsingStatementParts(
             BindingDiagnosticBag diagnostics,
             Binder originalBinder
-        ) {
+        )
+        {
             // There's supposed to be a UsingStatementBinder (or other overrider of this method) in the chain.
             throw ExceptionUtilities.Unreachable;
         }
@@ -233,7 +246,8 @@ namespace Microsoft.CodeAnalysis.CSharp
         internal override BoundStatement BindLockStatementParts(
             BindingDiagnosticBag diagnostics,
             Binder originalBinder
-        ) {
+        )
+        {
             // There's supposed to be a LockBinder (or other overrider of this method) in the chain.
             throw ExceptionUtilities.Unreachable;
         }

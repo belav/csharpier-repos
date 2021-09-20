@@ -25,7 +25,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             CSharpCompilation compilation,
             Symbol member,
             BoundNode node
-        ) {
+        )
+        {
             var walker = new UnassignedAddressTakenVariablesWalker(compilation, member, node);
             try
             {
@@ -60,7 +61,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             SyntaxNode node,
             int slot,
             bool skipIfUseBeforeDeclaration
-        ) {
+        )
+        {
             if (node.Parent.Kind() == SyntaxKind.AddressOfExpression)
             {
                 _result.Add((PrefixUnaryExpressionSyntax)node.Parent);

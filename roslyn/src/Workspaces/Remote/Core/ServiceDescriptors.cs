@@ -114,7 +114,8 @@ namespace Microsoft.CodeAnalysis.Remote
             Func<string, string> featureDisplayNameProvider,
             RemoteSerializationOptions serializationOptions,
             IEnumerable<(Type serviceInterface, Type? callbackInterface)> interfaces
-        ) {
+        )
+        {
             Options = serializationOptions;
             _componentName = componentName;
             _featureDisplayNameProvider = featureDisplayNameProvider;
@@ -147,7 +148,8 @@ namespace Microsoft.CodeAnalysis.Remote
         private (ServiceDescriptor, ServiceDescriptor, ServiceDescriptor) CreateDescriptors(
             Type serviceInterface,
             Type? callbackInterface
-        ) {
+        )
+        {
             Contract.ThrowIfFalse(callbackInterface == null || callbackInterface.IsInterface);
 
             var qualifiedServiceName = GetQualifiedServiceName(serviceInterface);
@@ -185,7 +187,8 @@ namespace Microsoft.CodeAnalysis.Remote
             Type serviceType,
             bool isRemoteHost64Bit,
             bool isRemoteHostServerGC
-        ) {
+        )
+        {
             var (descriptor32, descriptor64, descriptor64ServerGC) = _descriptors[serviceType];
             return (isRemoteHost64Bit, isRemoteHostServerGC) switch
             {

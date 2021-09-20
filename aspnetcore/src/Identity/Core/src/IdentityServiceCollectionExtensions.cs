@@ -36,8 +36,9 @@ namespace Microsoft.Extensions.DependencyInjection
         public static IdentityBuilder AddIdentity<TUser, TRole>(
             this IServiceCollection services,
             Action<IdentityOptions> setupAction
-        ) where TUser : class
-          where TRole : class
+        )
+            where TUser : class
+            where TRole : class
         {
             // Services used by identity
             services.AddAuthentication(

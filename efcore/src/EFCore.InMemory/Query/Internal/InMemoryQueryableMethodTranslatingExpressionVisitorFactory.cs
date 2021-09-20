@@ -33,7 +33,8 @@ namespace Microsoft.EntityFrameworkCore.InMemory.Query.Internal
         /// </summary>
         public InMemoryQueryableMethodTranslatingExpressionVisitorFactory(
             QueryableMethodTranslatingExpressionVisitorDependencies dependencies
-        ) {
+        )
+        {
             _dependencies = dependencies;
         }
 
@@ -45,7 +46,8 @@ namespace Microsoft.EntityFrameworkCore.InMemory.Query.Internal
         /// </summary>
         public virtual QueryableMethodTranslatingExpressionVisitor Create(
             QueryCompilationContext queryCompilationContext
-        ) {
+        )
+        {
             Check.NotNull(queryCompilationContext, nameof(queryCompilationContext));
 
             return new InMemoryQueryableMethodTranslatingExpressionVisitor(

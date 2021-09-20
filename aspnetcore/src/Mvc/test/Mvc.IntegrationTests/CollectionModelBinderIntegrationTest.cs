@@ -71,7 +71,8 @@ namespace Microsoft.AspNetCore.Mvc.IntegrationTests
         )]
         public async Task CollectionModelBinder_BindsListOfSimpleType_WithExplicitPrefix_Success(
             string queryString
-        ) {
+        )
+        {
             // Arrange
             var parameterBinder = ModelBindingTestHelper.GetParameterBinder();
             var parameter = new ParameterDescriptor()
@@ -111,7 +112,8 @@ namespace Microsoft.AspNetCore.Mvc.IntegrationTests
         [InlineData("?index=index&index=indexer&[indexer]=11&[index]=10&[extra]=12")]
         public async Task CollectionModelBinder_BindsCollectionOfSimpleType_EmptyPrefix_Success(
             string queryString
-        ) {
+        )
+        {
             // Arrange
             var parameterBinder = ModelBindingTestHelper.GetParameterBinder();
             var parameter = new ParameterDescriptor()
@@ -192,7 +194,8 @@ namespace Microsoft.AspNetCore.Mvc.IntegrationTests
         )]
         public async Task CollectionModelBinder_BindsListOfComplexType_ImpliedPrefix_Success(
             string queryString
-        ) {
+        )
+        {
             // Arrange
             var parameterBinder = ModelBindingTestHelper.GetParameterBinder();
             var parameter = new ParameterDescriptor()
@@ -233,7 +236,8 @@ namespace Microsoft.AspNetCore.Mvc.IntegrationTests
         )]
         public async Task CollectionModelBinder_BindsListOfComplexType_ExplicitPrefix_Success(
             string queryString
-        ) {
+        )
+        {
             // Arrange
             var parameterBinder = ModelBindingTestHelper.GetParameterBinder();
             var parameter = new ParameterDescriptor()
@@ -741,7 +745,8 @@ namespace Microsoft.AspNetCore.Mvc.IntegrationTests
         [InlineData("?parameter.index=index&parameter[index].Street=LongStreet")]
         public async Task CollectionModelBinder_BindsCollectionOfComplexType_ImpliedPrefix_FindsValidationErrors(
             string queryString
-        ) {
+        )
+        {
             // Arrange
             var parameterBinder = ModelBindingTestHelper.GetParameterBinder();
             var parameter = new ParameterDescriptor()
@@ -989,7 +994,8 @@ namespace Microsoft.AspNetCore.Mvc.IntegrationTests
             Type parameterType,
             Dictionary<string, StringValues> formContent,
             Type expectedType
-        ) {
+        )
+        {
             // Arrange
             var expectedCollection = new List<string> { "hello", "world" };
             var parameter = new ParameterDescriptor

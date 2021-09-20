@@ -89,7 +89,8 @@ namespace Microsoft.AspNetCore.Mvc.ViewComponents
         public void ViewDataModelSetter_DoesNotThrow_IfValueIncompatibleWithSourceDeclaredType(
             object model,
             Type expectedType
-        ) {
+        )
+        {
             // Arrange
             var httpContext = new DefaultHttpContext();
             var actionContext = new ActionContext(

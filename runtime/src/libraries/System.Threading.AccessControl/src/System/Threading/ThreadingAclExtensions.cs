@@ -24,7 +24,8 @@ namespace System.Threading
         public static void SetAccessControl(
             this EventWaitHandle handle,
             EventWaitHandleSecurity eventSecurity
-        ) {
+        )
+        {
             if (eventSecurity == null)
                 throw new ArgumentNullException(nameof(eventSecurity));
 
@@ -62,7 +63,8 @@ namespace System.Threading
         public static void SetAccessControl(
             this Semaphore semaphore,
             SemaphoreSecurity semaphoreSecurity
-        ) {
+        )
+        {
             if (semaphoreSecurity == null)
                 throw new ArgumentNullException(nameof(semaphoreSecurity));
 

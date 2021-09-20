@@ -90,7 +90,8 @@ namespace System.Configuration
             ConfigurationElement sourceElement,
             ConfigurationElement parentElement,
             ConfigurationSaveMode saveMode
-        ) {
+        )
+        {
             ProviderSettings parentProviders = parentElement as ProviderSettings;
             parentProviders?.UpdatePropertyCollection(); // before reseting make sure the bag is filled in
 

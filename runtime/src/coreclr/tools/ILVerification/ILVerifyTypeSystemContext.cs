@@ -44,7 +44,8 @@ namespace ILVerify
             IAssemblyDesc referencingModule,
             string fileName,
             bool throwIfNotFound = true
-        ) {
+        )
+        {
             // Referenced modules are stored without their extension (see CommandLineHelpers.cs), so we have to drop
             // the extension here as well to find a match.
             string simpleName = Path.GetFileNameWithoutExtension(fileName);
@@ -70,7 +71,8 @@ namespace ILVerify
             string verificationName,
             IAssemblyDesc containingAssembly,
             bool throwIfNotFound
-        ) {
+        )
+        {
             PEReader peReader = _resolver.Resolve(simpleName);
             if (peReader == null && throwIfNotFound)
             {
@@ -99,7 +101,8 @@ namespace ILVerify
 
         protected override RuntimeInterfacesAlgorithm GetRuntimeInterfacesAlgorithmForNonPointerArrayType(
             ArrayType type
-        ) {
+        )
+        {
             if (_arrayOfTRuntimeInterfacesAlgorithm == null)
             {
                 _arrayOfTRuntimeInterfacesAlgorithm = new SimpleArrayOfTRuntimeInterfacesAlgorithm(
@@ -111,7 +114,8 @@ namespace ILVerify
 
         protected override RuntimeInterfacesAlgorithm GetRuntimeInterfacesAlgorithmForDefType(
             DefType type
-        ) {
+        )
+        {
             return _metadataRuntimeInterfacesAlgorithm;
         }
 

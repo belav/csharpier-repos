@@ -276,7 +276,8 @@ namespace System.IO.Ports.Tests
             int parity,
             Type expectedException,
             ThrowAt throwAt
-        ) {
+        )
+        {
             SerialPortProperties serPortProp = new SerialPortProperties();
 
             Debug.WriteLine(

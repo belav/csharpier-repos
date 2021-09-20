@@ -16,7 +16,8 @@ namespace System.ComponentModel
                 DynamicallyAccessedMemberTypes.PublicParameterlessConstructor
             )]
                 string typeName
-        ) {
+        )
+        {
             if (typeName == null)
             {
                 throw new ArgumentNullException(nameof(typeName));
@@ -33,7 +34,8 @@ namespace System.ComponentModel
                 DynamicallyAccessedMemberTypes.PublicParameterlessConstructor
             )]
                 Type type
-        ) {
+        )
+        {
             if (type == null)
             {
                 throw new ArgumentNullException(nameof(type));

@@ -12,7 +12,8 @@ namespace System.Net.Test.Common
             Uri uri,
             ICredentials credentials = null,
             bool bypass = false
-        ) {
+        )
+        {
             _uri = uri;
             _bypass = bypass;
             Credentials = credentials;

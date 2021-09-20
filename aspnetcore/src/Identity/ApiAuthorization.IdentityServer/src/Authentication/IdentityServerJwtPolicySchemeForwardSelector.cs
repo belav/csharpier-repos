@@ -15,7 +15,8 @@ namespace Microsoft.AspNetCore.ApiAuthorization.IdentityServer.Authentication
         public IdentityServerJwtPolicySchemeForwardSelector(
             string identityPath,
             string IdentityServerJwtScheme
-        ) {
+        )
+        {
             _identityPath = identityPath;
             _IdentityServerJwtScheme = IdentityServerJwtScheme;
         }
@@ -27,7 +28,8 @@ namespace Microsoft.AspNetCore.ApiAuthorization.IdentityServer.Authentication
                     _identityPath,
                     StringComparison.OrdinalIgnoreCase
                 )
-            ) {
+            )
+            {
                 return IdentityConstants.ApplicationScheme;
             }
 

@@ -45,7 +45,8 @@ namespace Microsoft.CodeAnalysis.CodeFixes.Suppression
                 AbstractSuppressionCodeFixProvider fixer,
                 Document triggerDocument,
                 ImmutableDictionary<Document, ImmutableArray<Diagnostic>> diagnosticsByDocument
-            ) {
+            )
+            {
                 return new GlobalSuppressionSolutionChangeAction(
                     title,
                     ct =>
@@ -64,7 +65,8 @@ namespace Microsoft.CodeAnalysis.CodeFixes.Suppression
                 AbstractSuppressionCodeFixProvider fixer,
                 Project triggerProject,
                 ImmutableDictionary<Project, ImmutableArray<Diagnostic>> diagnosticsByProject
-            ) {
+            )
+            {
                 return new GlobalSuppressionSolutionChangeAction(
                     title,
                     ct =>
@@ -84,7 +86,8 @@ namespace Microsoft.CodeAnalysis.CodeFixes.Suppression
                 protected override Task<Document> PostProcessChangesAsync(
                     Document document,
                     CancellationToken cancellationToken
-                ) {
+                )
+                {
                     // PERF: We don't to formatting on the entire global suppressions document, but instead do it for each attribute individual in the fixer.
                     return Task.FromResult(document);
                 }
@@ -95,7 +98,8 @@ namespace Microsoft.CodeAnalysis.CodeFixes.Suppression
                 Document triggerDocument,
                 ImmutableDictionary<Document, ImmutableArray<Diagnostic>> diagnosticsByDocument,
                 CancellationToken cancellationToken
-            ) {
+            )
+            {
                 var currentSolution = triggerDocument.Project.Solution;
                 foreach (var grouping in diagnosticsByDocument.GroupBy(d => d.Key.Project))
                 {
@@ -139,7 +143,8 @@ namespace Microsoft.CodeAnalysis.CodeFixes.Suppression
                 Project triggerProject,
                 ImmutableDictionary<Project, ImmutableArray<Diagnostic>> diagnosticsByProject,
                 CancellationToken cancellationToken
-            ) {
+            )
+            {
                 var currentSolution = triggerProject.Solution;
                 foreach (var (oldProject, diagnostics) in diagnosticsByProject)
                 {
@@ -182,7 +187,8 @@ namespace Microsoft.CodeAnalysis.CodeFixes.Suppression
 
             protected override async Task<Document> GetChangedSuppressionDocumentAsync(
                 CancellationToken cancellationToken
-            ) {
+            )
+            {
                 var suppressionsDoc = await GetOrCreateSuppressionsDocumentAsync(cancellationToken)
                     .ConfigureAwait(false);
                 var workspace = suppressionsDoc.Project.Solution.Workspace;
@@ -227,7 +233,8 @@ namespace Microsoft.CodeAnalysis.CodeFixes.Suppression
                     KeyValuePair<Document, ImmutableArray<Diagnostic>>
                 > diagnosticsByDocument,
                 CancellationToken cancellationToken
-            ) {
+            )
+            {
                 var diagnosticsMapBuilder = ImmutableDictionary.CreateBuilder<
                     ISymbol,
                     List<Diagnostic>
@@ -265,7 +272,8 @@ namespace Microsoft.CodeAnalysis.CodeFixes.Suppression
                 Project project,
                 ImmutableArray<Diagnostic> diagnostics,
                 CancellationToken cancellationToken
-            ) {
+            )
+            {
                 var diagnosticsMapBuilder = ImmutableDictionary.CreateBuilder<
                     ISymbol,
                     List<Diagnostic>
@@ -293,7 +301,8 @@ namespace Microsoft.CodeAnalysis.CodeFixes.Suppression
                 ISymbol targetSymbol,
                 Diagnostic diagnostic,
                 ImmutableDictionary<ISymbol, List<Diagnostic>>.Builder diagnosticsMapBuilder
-            ) {
+            )
+            {
                 if (diagnostic.IsSuppressed)
                 {
                     return;
@@ -312,7 +321,8 @@ namespace Microsoft.CodeAnalysis.CodeFixes.Suppression
                 KeyValuePair<ISymbol, ImmutableArray<Diagnostic>>
             > CreateDiagnosticsBySymbol(
                 ImmutableDictionary<ISymbol, List<Diagnostic>>.Builder diagnosticsMapBuilder
-            ) {
+            )
+            {
                 if (diagnosticsMapBuilder.Count == 0)
                 {
                     return SpecializedCollections.EmptyEnumerable<
@@ -329,7 +339,8 @@ namespace Microsoft.CodeAnalysis.CodeFixes.Suppression
 
             private static ImmutableArray<Diagnostic> GetUniqueDiagnostics(
                 List<Diagnostic> diagnostics
-            ) {
+            )
+            {
                 var uniqueIds = new HashSet<string>();
                 var uniqueDiagnostics = ArrayBuilder<Diagnostic>.GetInstance();
                 foreach (var diagnostic in diagnostics)

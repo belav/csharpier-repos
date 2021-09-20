@@ -41,7 +41,8 @@ namespace System.IO.Tests
             using (var file = new TempFile(Path.Combine(testDirectory.Path, "file")))
             using (
                 var watcher = new FileSystemWatcher(testDirectory.Path, Path.GetFileName(file.Path))
-            ) {
+            )
+            {
                 Action action = () => new FileInfo(file.Path);
 
                 ExpectEvent(watcher, 0, action, expectedPath: file.Path);
@@ -55,7 +56,8 @@ namespace System.IO.Tests
             using (var file = new TempFile(Path.Combine(testDirectory.Path, "file")))
             using (
                 var watcher = new FileSystemWatcher(testDirectory.Path, Path.GetFileName(file.Path))
-            ) {
+            )
+            {
                 FileAttributes res;
                 Action action = () => res = new FileInfo(file.Path).Attributes;
 
@@ -70,7 +72,8 @@ namespace System.IO.Tests
             using (var file = new TempFile(Path.Combine(testDirectory.Path, "file")))
             using (
                 var watcher = new FileSystemWatcher(testDirectory.Path, Path.GetFileName(file.Path))
-            ) {
+            )
+            {
                 Action action = () => { };
 
                 ExpectEvent(watcher, 0, action, expectedPath: file.Path);
@@ -575,7 +578,8 @@ namespace System.IO.Tests
                 OperatingSystem.IsWindows()
                 || // expect no change for OrdinalIgnoreCase-equal strings
                 OperatingSystem.IsMacOS()
-            ) {
+            )
+            {
                 watcher.Path = currentDir.ToUpperInvariant();
                 Assert.Equal(currentDir, watcher.Path);
 
@@ -1125,7 +1129,8 @@ namespace System.IO.Tests
                     directory.FullName,
                     Path.GetFileName(directoryOne)
                 )
-            ) {
+            )
+            {
                 watcher.Filters.Add(Path.GetFileName(directoryTwo));
 
                 ExpectEvent(
@@ -1314,7 +1319,8 @@ namespace System.IO.Tests
                     IncludeSubdirectories = true,
                     NotifyFilter = NotifyFilters.FileName
                 }
-            ) {
+            )
+            {
                 Action action = () =>
                 {
                     // Create enough directories to exceed the number of allowed watches

@@ -14,7 +14,8 @@ namespace Microsoft.AspNetCore.Server.HttpSys
         public ApplicationRequestContextFactory(
             IHttpApplication<TContext> application,
             MessagePump messagePump
-        ) {
+        )
+        {
             _application = application;
             _messagePump = messagePump;
         }

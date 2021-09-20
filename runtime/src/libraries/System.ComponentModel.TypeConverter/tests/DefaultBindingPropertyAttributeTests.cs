@@ -72,7 +72,8 @@ namespace System.ComponentModel.Tests
             DefaultBindingPropertyAttribute attribute,
             object other,
             bool expected
-        ) {
+        )
+        {
             Assert.Equal(expected, attribute.Equals(other));
         }
 

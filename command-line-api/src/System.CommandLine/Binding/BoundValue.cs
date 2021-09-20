@@ -9,7 +9,8 @@ namespace System.CommandLine.Binding
             object? value,
             IValueDescriptor valueDescriptor,
             IValueSource valueSource
-        ) {
+        )
+        {
             Value = value;
             ValueDescriptor = valueDescriptor;
             ValueSource = valueSource;

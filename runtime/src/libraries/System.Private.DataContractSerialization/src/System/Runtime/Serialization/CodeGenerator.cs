@@ -144,7 +144,8 @@ namespace System.Runtime.Serialization
             string methodName,
             Type[] argTypes,
             bool allowPrivateMemberAccess
-        ) {
+        )
+        {
             _dynamicMethod = dynamicMethod;
             _ilGen = _dynamicMethod.GetILGenerator();
             _delegateType = delegateType;
@@ -156,7 +157,8 @@ namespace System.Runtime.Serialization
             string methodName,
             Type delegateType,
             bool allowPrivateMemberAccess
-        ) {
+        )
+        {
             MethodInfo signature = JsonFormatWriterGenerator.GetInvokeMethod(delegateType);
             ParameterInfo[] parameters = signature.GetParameters();
             Type[] paramTypes = new Type[parameters.Length];
@@ -171,7 +173,8 @@ namespace System.Runtime.Serialization
             string methodName,
             Type[] argTypes,
             bool allowPrivateMemberAccess
-        ) {
+        )
+        {
             _dynamicMethod = new DynamicMethod(
                 methodName,
                 returnType,
@@ -342,7 +345,8 @@ namespace System.Runtime.Serialization
             Type enumeratorType,
             LocalBuilder enumerator,
             MethodInfo getCurrentMethod
-        ) {
+        )
+        {
             ForState forState = new ForState(local, DefineLabel(), DefineLabel(), enumerator);
 
             Br(forState.TestLabel);
@@ -380,7 +384,8 @@ namespace System.Runtime.Serialization
                 (typeCode == TypeCode.Object && type.IsValueType)
                 || typeCode == TypeCode.DateTime
                 || typeCode == TypeCode.Decimal
-            ) {
+            )
+            {
                 LoadDefaultValue(type);
                 ConvertValue(type, Globals.TypeOfObject);
                 Load(value);
@@ -521,7 +526,8 @@ namespace System.Runtime.Serialization
             object? param1,
             object? param2,
             object? param3
-        ) {
+        )
+        {
             VerifyParameterCount(methodInfo, 3);
             LoadThis(thisObj, methodInfo);
             LoadParam(param1, 1, methodInfo);
@@ -537,7 +543,8 @@ namespace System.Runtime.Serialization
             object? param2,
             object? param3,
             object? param4
-        ) {
+        )
+        {
             VerifyParameterCount(methodInfo, 4);
             LoadThis(thisObj, methodInfo);
             LoadParam(param1, 1, methodInfo);
@@ -555,7 +562,8 @@ namespace System.Runtime.Serialization
             object? param3,
             object? param4,
             object? param5
-        ) {
+        )
+        {
             VerifyParameterCount(methodInfo, 5);
             LoadThis(thisObj, methodInfo);
             LoadParam(param1, 1, methodInfo);
@@ -575,7 +583,8 @@ namespace System.Runtime.Serialization
             object? param4,
             object? param5,
             object? param6
-        ) {
+        )
+        {
             VerifyParameterCount(methodInfo, 6);
             LoadThis(thisObj, methodInfo);
             LoadParam(param1, 1, methodInfo);

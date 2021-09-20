@@ -23,7 +23,8 @@ namespace Microsoft.CodeAnalysis.ExternalAccess.FSharp.Internal.InlineHints
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
         public FSharpInlineHintsService(
             [Import(AllowDefault = true)] IFSharpInlineHintsService? service
-        ) {
+        )
+        {
             _service = service;
         }
 
@@ -31,7 +32,8 @@ namespace Microsoft.CodeAnalysis.ExternalAccess.FSharp.Internal.InlineHints
             Document document,
             TextSpan textSpan,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             if (_service == null)
                 return ImmutableArray<InlineHint>.Empty;
 

@@ -50,7 +50,8 @@ namespace System.Web.Http.Common
         public void GetMappedTraceLevel_ReturnsExpectedTraceLevel(
             Exception exception,
             TraceLevel? expectedTraceLevel
-        ) {
+        )
+        {
             Assert.Equal(
                 expectedTraceLevel,
                 TraceWriterExceptionMapper.GetMappedTraceLevel(exception)

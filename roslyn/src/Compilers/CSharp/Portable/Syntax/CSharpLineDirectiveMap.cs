@@ -26,7 +26,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Syntax
             DirectiveTriviaSyntax directiveNode,
             SourceText sourceText,
             LineMappingEntry previous
-        ) {
+        )
+        {
             Debug.Assert(ShouldAddDirective(directiveNode));
             var directive = (LineDirectiveTriviaSyntax)directiveNode;
 
@@ -137,7 +138,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Syntax
             string treeFilePath,
             TextSpan span,
             out bool isHiddenPosition
-        ) {
+        )
+        {
             var lines = sourceText.Lines;
             var unmappedStartPos = lines.GetLinePosition(span.Start);
             var unmappedEndPos = lines.GetLinePosition(span.End);

@@ -31,7 +31,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel.InMemory.FunctionalTests
                         listenOptions.UseConnectionLogging();
                     }
                 )
-            ) {
+            )
+            {
                 {
                     var response = await server.HttpClientSlim.GetStringAsync(
                             $"https://localhost:{server.Port}/",

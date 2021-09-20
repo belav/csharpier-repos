@@ -29,7 +29,8 @@ namespace Microsoft.CodeAnalysis.GenerateConstructorFromMembers
                 Document document,
                 State state,
                 bool addNullChecks
-            ) {
+            )
+            {
                 _service = service;
                 _document = document;
                 _state = state;
@@ -38,7 +39,8 @@ namespace Microsoft.CodeAnalysis.GenerateConstructorFromMembers
 
             protected override async Task<Document> GetChangedDocumentAsync(
                 CancellationToken cancellationToken
-            ) {
+            )
+            {
                 // First, see if there are any constructors that would take the first 'n' arguments
                 // we've provided.  If so, delegate to those, and then create a field for any
                 // remaining arguments.  Try to match from largest to smallest.

@@ -24,7 +24,8 @@ namespace Microsoft.AspNetCore.Authentication
         public static void StoreTokens(
             this AuthenticationProperties properties,
             IEnumerable<AuthenticationToken> tokens
-        ) {
+        )
+        {
             if (properties == null)
             {
                 throw new ArgumentNullException(nameof(properties));
@@ -69,7 +70,8 @@ namespace Microsoft.AspNetCore.Authentication
         public static string? GetTokenValue(
             this AuthenticationProperties properties,
             string tokenName
-        ) {
+        )
+        {
             if (properties == null)
             {
                 throw new ArgumentNullException(nameof(properties));
@@ -95,7 +97,8 @@ namespace Microsoft.AspNetCore.Authentication
             this AuthenticationProperties properties,
             string tokenName,
             string tokenValue
-        ) {
+        )
+        {
             if (properties == null)
             {
                 throw new ArgumentNullException(nameof(properties));
@@ -121,7 +124,8 @@ namespace Microsoft.AspNetCore.Authentication
         /// <returns>The authentication tokens.</returns>
         public static IEnumerable<AuthenticationToken> GetTokens(
             this AuthenticationProperties properties
-        ) {
+        )
+        {
             if (properties == null)
             {
                 throw new ArgumentNullException(nameof(properties));
@@ -131,7 +135,8 @@ namespace Microsoft.AspNetCore.Authentication
             if (
                 properties.Items.TryGetValue(TokenNamesKey, out var value)
                 && !string.IsNullOrEmpty(value)
-            ) {
+            )
+            {
                 var tokenNames = value.Split(';');
                 foreach (var name in tokenNames)
                 {
@@ -172,7 +177,8 @@ namespace Microsoft.AspNetCore.Authentication
             HttpContext context,
             string? scheme,
             string tokenName
-        ) {
+        )
+        {
             if (auth == null)
             {
                 throw new ArgumentNullException(nameof(auth));

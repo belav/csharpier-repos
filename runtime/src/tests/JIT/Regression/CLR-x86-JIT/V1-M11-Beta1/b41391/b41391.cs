@@ -44,7 +44,8 @@ namespace Test
             uint[] param4,
             int[] param5,
             __arglist
-        ) {
+        )
+        {
             GC.Collect();
             return 0;
         }

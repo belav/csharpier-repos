@@ -72,7 +72,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.RenameTracking
                     !_stateMachine.Buffer.GetFeatureOnOffOption(
                         InternalFeatureOnOffOptions.RenameTracking
                     )
-                ) {
+                )
+                {
                     // Changes aren't being triggered by the buffer, but there may still be taggers
                     // out there which we should prevent from doing work.
                     yield break;

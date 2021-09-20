@@ -62,7 +62,8 @@ namespace Microsoft.Extensions.Internal
             string command,
             string args = null,
             IDictionary<string, string> envVars = null
-        ) {
+        )
+        {
             var startInfo = new ProcessStartInfo(command, args)
             {
                 RedirectStandardOutput = true,

@@ -29,7 +29,8 @@ namespace Castle.DynamicProxy.Generators
             LocalReference invocation,
             MethodInfo method,
             MethodEmitter emitter
-        ) {
+        )
+        {
             var parameters = method.GetParameters();
 
             // Create it only if there are byref writable arguments.
@@ -84,7 +85,8 @@ namespace Castle.DynamicProxy.Generators
                 if (
                     (parameter.Attributes & (ParameterAttributes.In | ParameterAttributes.Out))
                     != ParameterAttributes.In
-                ) {
+                )
+                {
                     return false;
                 }
 
@@ -110,7 +112,8 @@ namespace Castle.DynamicProxy.Generators
                                 x.GetType().FullName
                                 == "System.Runtime.CompilerServices.IsReadOnlyAttribute"
                         )
-                ) {
+                )
+                {
                     return true;
                 }
 
@@ -122,7 +125,8 @@ namespace Castle.DynamicProxy.Generators
             int i,
             LocalReference invocationArgs,
             TypeReference[] arguments
-        ) {
+        )
+        {
             return new ConvertExpression(
                 arguments[i].Type,
                 new LoadRefArrayElementExpression(i, invocationArgs)
@@ -133,7 +137,8 @@ namespace Castle.DynamicProxy.Generators
             TypeReference[] dereferencedArguments,
             int i,
             LocalReference invocationArgs
-        ) {
+        )
+        {
             return new AssignStatement(
                 dereferencedArguments[i],
                 Argument(i, invocationArgs, dereferencedArguments)
@@ -143,7 +148,8 @@ namespace Castle.DynamicProxy.Generators
         private static AssignStatement GetArguments(
             LocalReference invocationArgs,
             LocalReference invocation
-        ) {
+        )
+        {
             return new AssignStatement(
                 invocationArgs,
                 new MethodInvocationExpression(invocation, InvocationMethods.GetArguments)
@@ -153,7 +159,8 @@ namespace Castle.DynamicProxy.Generators
         private static LocalReference StoreInvocationArgumentsInLocal(
             MethodEmitter emitter,
             LocalReference invocation
-        ) {
+        )
+        {
             var invocationArgs = emitter.CodeBuilder.DeclareLocal(typeof(object[]));
             emitter.CodeBuilder.AddStatement(GetArguments(invocationArgs, invocation));
             return invocationArgs;

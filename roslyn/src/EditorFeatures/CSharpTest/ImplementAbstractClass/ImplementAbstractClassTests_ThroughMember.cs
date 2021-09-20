@@ -63,7 +63,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ImplementAbstractClass
             string expectedMarkup,
             OptionsCollection options = null,
             ParseOptions parseOptions = null
-        ) {
+        )
+        {
             options ??= new OptionsCollection(GetLanguage());
             options.AddRange(AllOptionsOff);
 

@@ -50,7 +50,8 @@ namespace Microsoft.Extensions.DependencyInjection
         public static IMvcCoreBuilder AddRazorViewEngine(
             this IMvcCoreBuilder builder,
             Action<RazorViewEngineOptions> setupAction
-        ) {
+        )
+        {
             if (builder == null)
             {
                 throw new ArgumentNullException(nameof(builder));

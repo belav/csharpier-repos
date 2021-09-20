@@ -40,7 +40,8 @@ namespace Microsoft.AspNetCore.Authentication
         protected virtual async Task<IHost> CreateHostWithServices(
             Action<IServiceCollection> configureServices,
             Func<HttpContext, Task> testpath = null
-        ) {
+        )
+        {
             var host = new HostBuilder().ConfigureWebHost(
                     webHostBuilder =>
                         webHostBuilder.UseTestServer()

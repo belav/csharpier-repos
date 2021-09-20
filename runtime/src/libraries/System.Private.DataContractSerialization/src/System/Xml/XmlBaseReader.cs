@@ -214,7 +214,8 @@ namespace System.Xml
             string? value,
             bool checkLower,
             string valueSR
-        ) {
+        )
+        {
             XmlAttributeNode node = _attributeNodes![index];
             if (!node.Prefix.IsEmpty)
                 XmlExceptionHelper.ThrowXmlException(this, new XmlException(SR.XmlMalformedDecl));
@@ -633,7 +634,8 @@ namespace System.Xml
         private XmlAttributeNode? GetAttributeNode(
             XmlDictionaryString localName,
             XmlDictionaryString namespaceUri
-        ) {
+        )
+        {
             if (localName == null)
                 throw System.Runtime.Serialization.DiagnosticUtility.ExceptionUtility.ThrowHelperError(
                     new ArgumentNullException(nameof(localName))
@@ -685,7 +687,8 @@ namespace System.Xml
         public override string? GetAttribute(
             XmlDictionaryString localName,
             XmlDictionaryString namespaceUri
-        ) {
+        )
+        {
             XmlAttributeNode? attributeNode = GetAttributeNode(localName, namespaceUri);
             if (attributeNode == null)
                 return null;
@@ -793,7 +796,8 @@ namespace System.Xml
                                     attributeNode2.QNameType == QNameType.Normal
                                     && attributeNode1.LocalName == attributeNode2.LocalName
                                     && attributeNode1.Namespace.Uri == attributeNode2.Namespace.Uri
-                                ) {
+                                )
+                                {
                                     XmlExceptionHelper.ThrowDuplicateAttribute(
                                         this,
                                         attributeNode1.Prefix.GetString(),
@@ -1114,7 +1118,8 @@ namespace System.Xml
         public override bool IsStartElement(
             XmlDictionaryString localName,
             XmlDictionaryString namespaceUri
-        ) {
+        )
+        {
             if (localName == null)
                 throw System.Runtime.Serialization.DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull(
                     nameof(localName)
@@ -1181,7 +1186,8 @@ namespace System.Xml
         public override int IndexOfLocalName(
             XmlDictionaryString[] localNames,
             XmlDictionaryString namespaceUri
-        ) {
+        )
+        {
             if (localNames == null)
                 throw System.Runtime.Serialization.DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull(
                     nameof(localNames)
@@ -1363,7 +1369,8 @@ namespace System.Xml
             if (
                 _node.NodeType != XmlNodeType.EndElement
                 && MoveToContent() != XmlNodeType.EndElement
-            ) {
+            )
+            {
                 int nodeDepth = _node.NodeType == XmlNodeType.Element ? _depth - 1 : _depth;
                 if (nodeDepth == 0)
                     throw System.Runtime.Serialization.DiagnosticUtility.ExceptionUtility.ThrowHelperError(
@@ -1501,7 +1508,8 @@ namespace System.Xml
                     while (
                         _node.NodeType != XmlNodeType.Comment
                         && _node.Value.TryReadBase64(buffer, offset, count, out actual)
-                    ) {
+                    )
+                    {
                         if (actual != 0)
                             return actual;
                         Read();
@@ -1585,7 +1593,8 @@ namespace System.Xml
             int offset,
             int byteCount,
             bool readContent
-        ) {
+        )
+        {
             // If there are any trailing buffer return them.
             if (_trailByteCount > 0)
             {
@@ -1973,19 +1982,22 @@ namespace System.Xml
 
         public override bool TryGetLocalNameAsDictionaryString(
             [NotNullWhen(true)] out XmlDictionaryString? localName
-        ) {
+        )
+        {
             return _node.TryGetLocalNameAsDictionaryString(out localName);
         }
 
         public override bool TryGetNamespaceUriAsDictionaryString(
             [NotNullWhen(true)] out XmlDictionaryString? localName
-        ) {
+        )
+        {
             return _node.TryGetNamespaceUriAsDictionaryString(out localName);
         }
 
         public override bool TryGetValueAsDictionaryString(
             [NotNullWhen(true)] out XmlDictionaryString? value
-        ) {
+        )
+        {
             return _node.TryGetValueAsDictionaryString(out value);
         }
 
@@ -2002,7 +2014,8 @@ namespace System.Xml
         public override short[] ReadInt16Array(
             XmlDictionaryString localName,
             XmlDictionaryString namespaceUri
-        ) {
+        )
+        {
             return Int16ArrayHelperWithDictionaryString.Instance.ReadArray(
                 this,
                 localName,
@@ -2024,7 +2037,8 @@ namespace System.Xml
         public override int[] ReadInt32Array(
             XmlDictionaryString localName,
             XmlDictionaryString namespaceUri
-        ) {
+        )
+        {
             return Int32ArrayHelperWithDictionaryString.Instance.ReadArray(
                 this,
                 localName,
@@ -2046,7 +2060,8 @@ namespace System.Xml
         public override long[] ReadInt64Array(
             XmlDictionaryString localName,
             XmlDictionaryString namespaceUri
-        ) {
+        )
+        {
             return Int64ArrayHelperWithDictionaryString.Instance.ReadArray(
                 this,
                 localName,
@@ -2068,7 +2083,8 @@ namespace System.Xml
         public override float[] ReadSingleArray(
             XmlDictionaryString localName,
             XmlDictionaryString namespaceUri
-        ) {
+        )
+        {
             return SingleArrayHelperWithDictionaryString.Instance.ReadArray(
                 this,
                 localName,
@@ -2090,7 +2106,8 @@ namespace System.Xml
         public override double[] ReadDoubleArray(
             XmlDictionaryString localName,
             XmlDictionaryString namespaceUri
-        ) {
+        )
+        {
             return DoubleArrayHelperWithDictionaryString.Instance.ReadArray(
                 this,
                 localName,
@@ -2112,7 +2129,8 @@ namespace System.Xml
         public override decimal[] ReadDecimalArray(
             XmlDictionaryString localName,
             XmlDictionaryString namespaceUri
-        ) {
+        )
+        {
             return DecimalArrayHelperWithDictionaryString.Instance.ReadArray(
                 this,
                 localName,
@@ -2134,7 +2152,8 @@ namespace System.Xml
         public override DateTime[] ReadDateTimeArray(
             XmlDictionaryString localName,
             XmlDictionaryString namespaceUri
-        ) {
+        )
+        {
             return DateTimeArrayHelperWithDictionaryString.Instance.ReadArray(
                 this,
                 localName,
@@ -2156,7 +2175,8 @@ namespace System.Xml
         public override Guid[] ReadGuidArray(
             XmlDictionaryString localName,
             XmlDictionaryString namespaceUri
-        ) {
+        )
+        {
             return GuidArrayHelperWithDictionaryString.Instance.ReadArray(
                 this,
                 localName,
@@ -2178,7 +2198,8 @@ namespace System.Xml
         public override TimeSpan[] ReadTimeSpanArray(
             XmlDictionaryString localName,
             XmlDictionaryString namespaceUri
-        ) {
+        )
+        {
             return TimeSpanArrayHelperWithDictionaryString.Instance.ReadArray(
                 this,
                 localName,
@@ -2360,7 +2381,8 @@ namespace System.Xml
             Stream stream,
             bool includeComments,
             string[]? inclusivePrefixes
-        ) {
+        )
+        {
             if (_signing)
                 throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
                     new InvalidOperationException(SR.XmlCanonicalizationStarted)
@@ -2440,7 +2462,8 @@ namespace System.Xml
                 ReadState readState,
                 XmlAttributeTextNode? attributeTextNode,
                 int depthDelta
-            ) {
+            )
+            {
                 _nodeType = nodeType;
                 _prefix = prefix;
                 _localName = localName;
@@ -2636,7 +2659,8 @@ namespace System.Xml
             public bool IsLocalNameAndNamespaceUri(
                 XmlDictionaryString localName,
                 XmlDictionaryString ns
-            ) {
+            )
+            {
                 if (_qnameType == QNameType.Normal)
                 {
                     return this.LocalName == localName && this.Namespace.IsUri(ns);
@@ -2662,7 +2686,8 @@ namespace System.Xml
 
             public bool TryGetLocalNameAsDictionaryString(
                 [NotNullWhen(true)] out XmlDictionaryString? localName
-            ) {
+            )
+            {
                 if (_qnameType == QNameType.Normal)
                 {
                     return this.LocalName.TryGetDictionaryString(out localName);
@@ -2677,7 +2702,8 @@ namespace System.Xml
 
             public bool TryGetNamespaceUriAsDictionaryString(
                 [NotNullWhen(true)] out XmlDictionaryString? ns
-            ) {
+            )
+            {
                 if (_qnameType == QNameType.Normal)
                 {
                     return this.Namespace.Uri.TryGetDictionaryString(out ns);
@@ -2692,7 +2718,8 @@ namespace System.Xml
 
             public bool TryGetValueAsDictionaryString(
                 [NotNullWhen(true)] out XmlDictionaryString? value
-            ) {
+            )
+            {
                 if (_qnameType == QNameType.Normal)
                 {
                     return this.Value.TryGetDictionaryString(out value);
@@ -2733,20 +2760,18 @@ namespace System.Xml
                     new ValueHandle(bufferReader)
                 ) { }
 
-            private XmlElementNode(
-                PrefixHandle prefix,
-                StringHandle localName,
-                ValueHandle value
-            ) : base(
-                XmlNodeType.Element,
-                prefix,
-                localName,
-                value,
-                XmlNodeFlags.CanGetAttribute | XmlNodeFlags.HasContent,
-                ReadState.Interactive,
-                null,
-                -1
-            ) {
+            private XmlElementNode(PrefixHandle prefix, StringHandle localName, ValueHandle value)
+                : base(
+                    XmlNodeType.Element,
+                    prefix,
+                    localName,
+                    value,
+                    XmlNodeFlags.CanGetAttribute | XmlNodeFlags.HasContent,
+                    ReadState.Interactive,
+                    null,
+                    -1
+                )
+            {
                 _endElementNode = new XmlEndElementNode(prefix, localName, value);
             }
 
@@ -2774,41 +2799,35 @@ namespace System.Xml
                     new ValueHandle(bufferReader)
                 ) { }
 
-            private XmlAttributeNode(
-                PrefixHandle prefix,
-                StringHandle localName,
-                ValueHandle value
-            ) : base(
-                XmlNodeType.Attribute,
-                prefix,
-                localName,
-                value,
-                XmlNodeFlags.CanGetAttribute
-                    | XmlNodeFlags.CanMoveToElement
-                    | XmlNodeFlags.HasValue
-                    | XmlNodeFlags.AtomicValue,
-                ReadState.Interactive,
-                new XmlAttributeTextNode(prefix, localName, value),
-                0
-            ) { }
+            private XmlAttributeNode(PrefixHandle prefix, StringHandle localName, ValueHandle value)
+                : base(
+                    XmlNodeType.Attribute,
+                    prefix,
+                    localName,
+                    value,
+                    XmlNodeFlags.CanGetAttribute
+                        | XmlNodeFlags.CanMoveToElement
+                        | XmlNodeFlags.HasValue
+                        | XmlNodeFlags.AtomicValue,
+                    ReadState.Interactive,
+                    new XmlAttributeTextNode(prefix, localName, value),
+                    0
+                ) { }
         }
 
         protected class XmlEndElementNode : XmlNode
         {
-            public XmlEndElementNode(
-                PrefixHandle prefix,
-                StringHandle localName,
-                ValueHandle value
-            ) : base(
-                XmlNodeType.EndElement,
-                prefix,
-                localName,
-                value,
-                XmlNodeFlags.HasContent,
-                ReadState.Interactive,
-                null,
-                -1
-            ) { }
+            public XmlEndElementNode(PrefixHandle prefix, StringHandle localName, ValueHandle value)
+                : base(
+                    XmlNodeType.EndElement,
+                    prefix,
+                    localName,
+                    value,
+                    XmlNodeFlags.HasContent,
+                    ReadState.Interactive,
+                    null,
+                    -1
+                ) { }
         }
 
         protected class XmlTextNode : XmlNode
@@ -2822,16 +2841,17 @@ namespace System.Xml
                 ReadState readState,
                 XmlAttributeTextNode? attributeTextNode,
                 int depthDelta
-            ) : base(
-                nodeType,
-                prefix,
-                localName,
-                value,
-                nodeFlags,
-                readState,
-                attributeTextNode,
-                depthDelta
-            ) { }
+            )
+                : base(
+                    nodeType,
+                    prefix,
+                    localName,
+                    value,
+                    nodeFlags,
+                    readState,
+                    attributeTextNode,
+                    depthDelta
+                ) { }
         }
 
         protected class XmlAtomicTextNode : XmlTextNode
@@ -2903,20 +2923,21 @@ namespace System.Xml
                 PrefixHandle prefix,
                 StringHandle localName,
                 ValueHandle value
-            ) : base(
-                XmlNodeType.Text,
-                prefix,
-                localName,
-                value,
-                XmlNodeFlags.HasValue
-                    | XmlNodeFlags.CanGetAttribute
-                    | XmlNodeFlags.CanMoveToElement
-                    | XmlNodeFlags.AtomicValue
-                    | XmlNodeFlags.HasContent,
-                ReadState.Interactive,
-                null,
-                1
-            ) { }
+            )
+                : base(
+                    XmlNodeType.Text,
+                    prefix,
+                    localName,
+                    value,
+                    XmlNodeFlags.HasValue
+                        | XmlNodeFlags.CanGetAttribute
+                        | XmlNodeFlags.CanMoveToElement
+                        | XmlNodeFlags.AtomicValue
+                        | XmlNodeFlags.HasContent,
+                    ReadState.Interactive,
+                    null,
+                    1
+                ) { }
         }
 
         protected class XmlInitialNode : XmlNode

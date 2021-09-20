@@ -87,7 +87,8 @@ namespace Microsoft.CodeAnalysis.SolutionCrawler
             int documentCount,
             string languages,
             bool highPriority
-        ) {
+        )
+        {
             Logger.Log(
                 FunctionId.WorkCoordinatorRegistrationService_Reanalyze,
                 KeyValueLogMessage.Create(
@@ -122,7 +123,8 @@ namespace Microsoft.CodeAnalysis.SolutionCrawler
             Workspace workspace,
             ImmutableArray<IIncrementalAnalyzer> reordered,
             bool onlyHighPriorityAnalyzer
-        ) {
+        )
+        {
             if (onlyHighPriorityAnalyzer)
             {
                 LogAnalyzersWorker(
@@ -151,7 +153,8 @@ namespace Microsoft.CodeAnalysis.SolutionCrawler
             int correlationId,
             Workspace workspace,
             ImmutableArray<IIncrementalAnalyzer> reordered
-        ) {
+        )
+        {
             if (workspace.Kind == WorkspaceKind.Preview)
             {
                 return;
@@ -203,7 +206,8 @@ namespace Microsoft.CodeAnalysis.SolutionCrawler
         public static void LogWorkCoordinatorShutdown(
             int correlationId,
             LogAggregator logAggregator
-        ) {
+        )
+        {
             Logger.Log(
                 FunctionId.WorkCoordinator_Shutdown,
                 KeyValueLogMessage.Create(
@@ -238,7 +242,8 @@ namespace Microsoft.CodeAnalysis.SolutionCrawler
             bool lowPriority,
             SyntaxPath? activeMember,
             bool added
-        ) {
+        )
+        {
             logAggregator.IncreaseCount(language);
             logAggregator.IncreaseCount(added ? NewWorkItem : UpdateWorkItem);
 
@@ -273,7 +278,8 @@ namespace Microsoft.CodeAnalysis.SolutionCrawler
             Solution solution,
             LogAggregator logAggregator,
             ImmutableArray<IIncrementalAnalyzer> analyzers
-        ) {
+        )
+        {
             Logger.Log(
                 FunctionId.IncrementalAnalyzerProcessor_Shutdown,
                 KeyValueLogMessage.Create(
@@ -360,7 +366,8 @@ namespace Microsoft.CodeAnalysis.SolutionCrawler
             LogAggregator logAggregator,
             Guid _,
             bool processed
-        ) {
+        )
+        {
             if (processed)
             {
                 logAggregator.IncreaseCount(ActiveFileProcessDocument);
@@ -375,7 +382,8 @@ namespace Microsoft.CodeAnalysis.SolutionCrawler
             LogAggregator logAggregator,
             Guid documentId,
             bool processed
-        ) {
+        )
+        {
             if (processed)
             {
                 logAggregator.IncreaseCount(ProcessDocument);
@@ -395,7 +403,8 @@ namespace Microsoft.CodeAnalysis.SolutionCrawler
             LogAggregator logAggregator,
             Guid projectId,
             bool processed
-        ) {
+        )
+        {
             if (processed)
             {
                 logAggregator.IncreaseCount(ProcessProject);

@@ -15,7 +15,8 @@ namespace System.IO
             int bufferSize,
             FileOptions options,
             FileSecurity fileSecurity
-        ) {
+        )
+        {
             if (fileInfo == null)
                 throw new ArgumentNullException(nameof(fileInfo));
 
@@ -36,7 +37,8 @@ namespace System.IO
         public static void Create(
             this DirectoryInfo directoryInfo,
             DirectorySecurity directorySecurity
-        ) {
+        )
+        {
             if (directoryInfo == null)
                 throw new ArgumentNullException(nameof(directoryInfo));
 
@@ -49,7 +51,8 @@ namespace System.IO
         public static DirectoryInfo CreateDirectory(
             this DirectorySecurity directorySecurity,
             string path
-        ) {
+        )
+        {
             if (directorySecurity == null)
                 throw new ArgumentNullException(nameof(directorySecurity));
 
@@ -73,7 +76,8 @@ namespace System.IO
         public static DirectorySecurity GetAccessControl(
             this DirectoryInfo directoryInfo,
             AccessControlSections includeSections
-        ) {
+        )
+        {
             if (directoryInfo == null)
                 throw new ArgumentNullException(nameof(directoryInfo));
 
@@ -83,7 +87,8 @@ namespace System.IO
         public static void SetAccessControl(
             this DirectoryInfo directoryInfo,
             DirectorySecurity directorySecurity
-        ) {
+        )
+        {
             if (directoryInfo == null)
                 throw new ArgumentNullException(nameof(directoryInfo));
 
@@ -104,7 +109,8 @@ namespace System.IO
         public static FileSecurity GetAccessControl(
             this FileInfo fileInfo,
             AccessControlSections includeSections
-        ) {
+        )
+        {
             if (fileInfo == null)
                 throw new ArgumentNullException(nameof(fileInfo));
 

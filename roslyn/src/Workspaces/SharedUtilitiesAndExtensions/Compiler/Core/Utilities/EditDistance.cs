@@ -76,7 +76,8 @@ namespace Roslyn.Utilities
             string source,
             string target,
             int threshold = int.MaxValue
-        ) {
+        )
+        {
             using var editDistance = new EditDistance(source);
             return editDistance.GetEditDistance(target, threshold);
         }
@@ -180,7 +181,8 @@ namespace Roslyn.Utilities
             ReadOnlySpan<char> source,
             ReadOnlySpan<char> target,
             int threshold = int.MaxValue
-        ) {
+        )
+        {
             return source.Length <= target.Length
               ? GetEditDistanceWorker(source, target, threshold)
               : GetEditDistanceWorker(target, source, threshold);
@@ -190,7 +192,8 @@ namespace Roslyn.Utilities
             ReadOnlySpan<char> source,
             ReadOnlySpan<char> target,
             int threshold
-        ) {
+        )
+        {
             // Note: sourceLength will always be smaller or equal to targetLength.
             //
             // Also Note: sourceLength and targetLength values will mutate and represent the lengths

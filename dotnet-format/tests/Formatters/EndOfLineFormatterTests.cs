@@ -31,7 +31,8 @@ namespace Microsoft.CodeAnalysis.Tools.Tests.Formatters
             string codeNewline,
             string expectedNewline,
             string endOfLine
-        ) {
+        )
+        {
             var testCode = $"class C{codeNewline}{{{codeNewline}}}";
 
             var expectedCode = $"class C{expectedNewline}{{{expectedNewline}}}";
@@ -55,7 +56,8 @@ namespace Microsoft.CodeAnalysis.Tools.Tests.Formatters
             string codeNewline,
             string expectedNewline,
             string endOfLine
-        ) {
+        )
+        {
             var testCode = $"class C{codeNewline}{{{codeNewline}}}{codeNewline}";
 
             var expectedCode = $"class C{expectedNewline}{{{expectedNewline}}}{expectedNewline}";

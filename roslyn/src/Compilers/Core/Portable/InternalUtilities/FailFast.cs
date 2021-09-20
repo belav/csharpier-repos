@@ -66,7 +66,8 @@ namespace Microsoft.CodeAnalysis
                     Exception? current = exception;
                     current is object;
                     current = current.InnerException
-                ) {
+                )
+                {
                     Console.WriteLine(current.Message);
                     Console.WriteLine(current.StackTrace);
                 }

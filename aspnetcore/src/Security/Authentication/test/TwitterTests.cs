@@ -34,7 +34,8 @@ namespace Microsoft.AspNetCore.Authentication.Twitter
         protected override void RegisterAuth(
             AuthenticationBuilder services,
             Action<TwitterOptions> configure
-        ) {
+        )
+        {
             services.AddTwitter(
                 o =>
                 {
@@ -452,7 +453,8 @@ namespace Microsoft.AspNetCore.Authentication.Twitter
         private static async Task<IHost> CreateHost(
             Action<TwitterOptions> options,
             Func<HttpContext, Task<bool>> handler = null
-        ) {
+        )
+        {
             var host = new HostBuilder().ConfigureWebHost(
                     builder =>
                         builder.UseTestServer()
@@ -549,7 +551,8 @@ namespace Microsoft.AspNetCore.Authentication.Twitter
 
         private HttpResponseMessage UnknownContentTypeErroredBackchannelRequestToken(
             HttpRequestMessage req
-        ) {
+        )
+        {
             if (req.RequestUri.AbsoluteUri == "https://api.twitter.com/oauth/request_token")
             {
                 return new HttpResponseMessage(HttpStatusCode.Forbidden)

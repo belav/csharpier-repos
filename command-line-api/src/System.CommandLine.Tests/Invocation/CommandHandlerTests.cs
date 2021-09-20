@@ -472,7 +472,8 @@ namespace System.CommandLine.Tests.Invocation
         public async Task Method_invoked_is_matching_to_the_interface_implementation(
             Type type,
             int expectedResult
-        ) {
+        )
+        {
             var command = new Command("command");
             command.Handler = CommandHandler.Create(
                 type.GetMethod(nameof(ICommandHandler.InvokeAsync))

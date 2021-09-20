@@ -793,7 +793,8 @@ aylTdOmNGHG+7yEVFQ+sgvJJVIG9mz+YP9tBbzm65UvbzPrXSvNldgm2XUF0Z8LZMRqrurKLYjLE
             string password,
             PbeParameters pbeParameters,
             in DSAParameters expected
-        ) {
+        )
+        {
             ReadWriteKey(
                 base64EncPkcs8,
                 expected,
@@ -816,7 +817,8 @@ aylTdOmNGHG+7yEVFQ+sgvJJVIG9mz+YP9tBbzm65UvbzPrXSvNldgm2XUF0Z8LZMRqrurKLYjLE
             byte[] passwordBytes,
             PbeParameters pbeParameters,
             in DSAParameters expected
-        ) {
+        )
+        {
             ReadWriteKey(
                 base64EncPkcs8,
                 expected,
@@ -837,7 +839,8 @@ aylTdOmNGHG+7yEVFQ+sgvJJVIG9mz+YP9tBbzm65UvbzPrXSvNldgm2XUF0Z8LZMRqrurKLYjLE
         private static void ReadWriteBase64SubjectPublicKeyInfo(
             string base64SubjectPublicKeyInfo,
             in DSAParameters expected
-        ) {
+        )
+        {
             DSAParameters expectedPublic = new DSAParameters
             {
                 P = expected.P,
@@ -877,7 +880,8 @@ aylTdOmNGHG+7yEVFQ+sgvJJVIG9mz+YP9tBbzm65UvbzPrXSvNldgm2XUF0Z8LZMRqrurKLYjLE
             Func<DSA, byte[]> writeArrayFunc,
             WriteKeyToSpanFunc writeSpanFunc,
             bool isEncrypted = false
-        ) {
+        )
+        {
             bool isPrivateKey = expected.X != null;
 
             byte[] derBytes = Convert.FromBase64String(base64);

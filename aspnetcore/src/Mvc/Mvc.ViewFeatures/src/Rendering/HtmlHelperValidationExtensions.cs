@@ -62,7 +62,8 @@ namespace Microsoft.AspNetCore.Mvc.Rendering
             this IHtmlHelper htmlHelper,
             string expression,
             string message
-        ) {
+        )
+        {
             if (htmlHelper == null)
             {
                 throw new ArgumentNullException(nameof(htmlHelper));
@@ -101,7 +102,8 @@ namespace Microsoft.AspNetCore.Mvc.Rendering
             this IHtmlHelper htmlHelper,
             string expression,
             object htmlAttributes
-        ) {
+        )
+        {
             if (htmlHelper == null)
             {
                 throw new ArgumentNullException(nameof(htmlHelper));
@@ -140,7 +142,8 @@ namespace Microsoft.AspNetCore.Mvc.Rendering
             string expression,
             string message,
             string tag
-        ) {
+        )
+        {
             if (htmlHelper == null)
             {
                 throw new ArgumentNullException(nameof(htmlHelper));
@@ -181,7 +184,8 @@ namespace Microsoft.AspNetCore.Mvc.Rendering
             string expression,
             string message,
             object htmlAttributes
-        ) {
+        )
+        {
             if (htmlHelper == null)
             {
                 throw new ArgumentNullException(nameof(htmlHelper));
@@ -210,7 +214,8 @@ namespace Microsoft.AspNetCore.Mvc.Rendering
         public static IHtmlContent ValidationMessageFor<TModel, TResult>(
             this IHtmlHelper<TModel> htmlHelper,
             Expression<Func<TModel, TResult>> expression
-        ) {
+        )
+        {
             if (htmlHelper == null)
             {
                 throw new ArgumentNullException(nameof(htmlHelper));
@@ -251,7 +256,8 @@ namespace Microsoft.AspNetCore.Mvc.Rendering
             this IHtmlHelper<TModel> htmlHelper,
             Expression<Func<TModel, TResult>> expression,
             string message
-        ) {
+        )
+        {
             if (htmlHelper == null)
             {
                 throw new ArgumentNullException(nameof(htmlHelper));
@@ -299,7 +305,8 @@ namespace Microsoft.AspNetCore.Mvc.Rendering
             Expression<Func<TModel, TResult>> expression,
             string message,
             object htmlAttributes
-        ) {
+        )
+        {
             if (htmlHelper == null)
             {
                 throw new ArgumentNullException(nameof(htmlHelper));
@@ -340,7 +347,8 @@ namespace Microsoft.AspNetCore.Mvc.Rendering
             Expression<Func<TModel, TResult>> expression,
             string message,
             string tag
-        ) {
+        )
+        {
             if (htmlHelper == null)
             {
                 throw new ArgumentNullException(nameof(htmlHelper));
@@ -398,7 +406,8 @@ namespace Microsoft.AspNetCore.Mvc.Rendering
         public static IHtmlContent ValidationSummary(
             this IHtmlHelper htmlHelper,
             bool excludePropertyErrors
-        ) {
+        )
+        {
             if (htmlHelper == null)
             {
                 throw new ArgumentNullException(nameof(htmlHelper));
@@ -458,7 +467,8 @@ namespace Microsoft.AspNetCore.Mvc.Rendering
             this IHtmlHelper htmlHelper,
             string message,
             string tag
-        ) {
+        )
+        {
             if (htmlHelper == null)
             {
                 throw new ArgumentNullException(nameof(htmlHelper));
@@ -491,7 +501,8 @@ namespace Microsoft.AspNetCore.Mvc.Rendering
             this IHtmlHelper htmlHelper,
             bool excludePropertyErrors,
             string message
-        ) {
+        )
+        {
             if (htmlHelper == null)
             {
                 throw new ArgumentNullException(nameof(htmlHelper));
@@ -526,7 +537,8 @@ namespace Microsoft.AspNetCore.Mvc.Rendering
             this IHtmlHelper htmlHelper,
             string message,
             object htmlAttributes
-        ) {
+        )
+        {
             if (htmlHelper == null)
             {
                 throw new ArgumentNullException(nameof(htmlHelper));
@@ -565,7 +577,8 @@ namespace Microsoft.AspNetCore.Mvc.Rendering
             string message,
             object htmlAttributes,
             string tag
-        ) {
+        )
+        {
             if (htmlHelper == null)
             {
                 throw new ArgumentNullException(nameof(htmlHelper));
@@ -602,7 +615,8 @@ namespace Microsoft.AspNetCore.Mvc.Rendering
             bool excludePropertyErrors,
             string message,
             string tag
-        ) {
+        )
+        {
             if (htmlHelper == null)
             {
                 throw new ArgumentNullException(nameof(htmlHelper));
@@ -641,7 +655,8 @@ namespace Microsoft.AspNetCore.Mvc.Rendering
             bool excludePropertyErrors,
             string message,
             object htmlAttributes
-        ) {
+        )
+        {
             if (htmlHelper == null)
             {
                 throw new ArgumentNullException(nameof(htmlHelper));

@@ -20,7 +20,8 @@ namespace System.Buffers.Text.Tests
                         TimeSpanParserBigGTestData.Concat(TimeSpanCombinatorialData),
                         TimeSpan.TryParseExact
                     )
-                ) {
+                )
+                {
                     yield return testData;
                 }
 
@@ -30,7 +31,8 @@ namespace System.Buffers.Text.Tests
                         TimeSpanParserLittleGTestData.Concat(TimeSpanCombinatorialData),
                         TimeSpan.TryParseExact
                     )
-                ) {
+                )
+                {
                     yield return testData;
                 }
 
@@ -40,7 +42,8 @@ namespace System.Buffers.Text.Tests
                         TimeSpanParserCTestData.Concat(TimeSpanCombinatorialData),
                         TimeSpan.TryParseExact
                     )
-                ) {
+                )
+                {
                     yield return testData;
                 }
             }
@@ -59,7 +62,8 @@ namespace System.Buffers.Text.Tests
                         int separatorMask = 0;
                         separatorMask < (1 << (numComponents - 1));
                         separatorMask++
-                    ) {
+                    )
+                    {
                         StringBuilder sb = new StringBuilder();
                         for (int i = 0; i < numComponents; i++)
                         {

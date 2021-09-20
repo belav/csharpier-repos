@@ -67,12 +67,14 @@ namespace System.Reflection.PortableExecutable
             ulong sizeOfStackCommit = 0x1000,
             ulong sizeOfHeapReserve = 0x00100000,
             ulong sizeOfHeapCommit = 0x1000
-        ) {
+        )
+        {
             if (
                 fileAlignment < 512
                 || fileAlignment > 64 * 1024
                 || BitArithmetic.CountBits(fileAlignment) != 1
-            ) {
+            )
+            {
                 Throw.ArgumentOutOfRange(nameof(fileAlignment));
             }
 

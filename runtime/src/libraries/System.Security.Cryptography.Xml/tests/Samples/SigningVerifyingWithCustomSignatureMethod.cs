@@ -33,7 +33,8 @@ namespace System.Security.Cryptography.Xml.Tests
             RSA key,
             string signatureMethod,
             string digestMethod
-        ) {
+        )
+        {
             var signedXml = new SignedXml(doc) { SigningKey = key };
 
             signedXml.SignedInfo.SignatureMethod = signatureMethod;

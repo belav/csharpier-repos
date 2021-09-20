@@ -21,7 +21,8 @@ namespace System.Configuration
         internal LocationUpdates FindLocationUpdates(
             OverrideModeSetting overrideMode,
             bool inheritInChildApps
-        ) {
+        )
+        {
             foreach (LocationUpdates locationUpdates in LocationUpdatesList)
                 if (
                     OverrideModeSetting.CanUseSameLocationTag(
@@ -41,7 +42,8 @@ namespace System.Configuration
             bool moved,
             string updatedXml,
             SectionRecord sectionRecord
-        ) {
+        )
+        {
             LocationUpdates locationUpdates = FindLocationUpdates(overrideMode, inheritInChildApps);
             if (locationUpdates == null)
             {

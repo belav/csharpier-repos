@@ -71,7 +71,8 @@ namespace Microsoft.CodeAnalysis.Wrapping
                 SourceText originalSourceText,
                 DocumentOptionSet options,
                 CancellationToken cancellationToken
-            ) {
+            )
+            {
                 Wrapper = service;
                 OriginalDocument = document;
                 OriginalSourceText = originalSourceText;
@@ -140,7 +141,8 @@ namespace Microsoft.CodeAnalysis.Wrapping
                 ImmutableArray<Edit> edits,
                 string parentTitle,
                 string title
-            ) {
+            )
+            {
                 // First, rewrite the tree with the edits provided.
                 var (root, rewrittenRoot, spanToFormat) = await RewriteTreeAsync(edits)
                     .ConfigureAwait(false);
@@ -191,7 +193,8 @@ namespace Microsoft.CodeAnalysis.Wrapping
             private async Task<Document> FormatDocumentAsync(
                 SyntaxNode rewrittenRoot,
                 TextSpan spanToFormat
-            ) {
+            )
+            {
                 var newDocument = OriginalDocument.WithSyntaxRoot(rewrittenRoot);
                 var formattedDocument = await Formatter.FormatAsync(
                         newDocument,
@@ -204,7 +207,8 @@ namespace Microsoft.CodeAnalysis.Wrapping
 
             private async Task<(SyntaxNode root, SyntaxNode rewrittenRoot, TextSpan spanToFormat)> RewriteTreeAsync(
                 ImmutableArray<Edit> edits
-            ) {
+            )
+            {
                 using var _1 = PooledDictionary<SyntaxToken, SyntaxTriviaList>.GetInstance(
                     out var leftTokenToTrailingTrivia
                 );
@@ -258,7 +262,8 @@ namespace Microsoft.CodeAnalysis.Wrapping
             private async Task<(SyntaxNode root, SyntaxNode rewrittenRoot, TextSpan spanToFormat)> RewriteTreeAsync(
                 Dictionary<SyntaxToken, SyntaxTriviaList> leftTokenToTrailingTrivia,
                 Dictionary<SyntaxToken, SyntaxTriviaList> rightTokenToLeadingTrivia
-            ) {
+            )
+            {
                 var root = await OriginalDocument.GetSyntaxRootAsync(CancellationToken)
                     .ConfigureAwait(false);
                 var tokens = leftTokenToTrailingTrivia.Keys.Concat(rightTokenToLeadingTrivia.Keys)

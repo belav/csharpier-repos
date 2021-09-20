@@ -85,7 +85,8 @@ namespace System.Web.Http.ModelBinding.Binders
             public bool BindModel(
                 HttpActionContext actionContext,
                 ModelBindingContext bindingContext
-            ) {
+            )
+            {
                 Contract.Assert(!_parent.SuppressPrefixCheck); // wouldn't have even created this binder
                 if (bindingContext.ValueProvider.ContainsPrefix(bindingContext.ModelName))
                 {

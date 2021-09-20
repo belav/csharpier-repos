@@ -458,7 +458,8 @@ namespace NativeVarargTest
         static bool TestPassingFloatsAndDoubles(
             float[] expectedFloatValues,
             double[] expectedDoubleValues
-        ) {
+        )
+        {
             Debug.Assert(expectedFloatValues.Length == 2);
             Debug.Assert(expectedDoubleValues.Length == 2);
             double expectedSum = test_passing_floats_and_doubles(
@@ -1493,7 +1494,8 @@ namespace NativeVarargTest
         static bool TestPassingIntsAndLongsManaged(
             int[] expectedIntValues,
             long[] expectedLongValues
-        ) {
+        )
+        {
             Debug.Assert(expectedIntValues.Length == 2);
             Debug.Assert(expectedLongValues.Length == 2);
             long expectedSum = ManagedNativeVarargTests.TestPassingIntsAndLongs(
@@ -1537,7 +1539,8 @@ namespace NativeVarargTest
         static bool TestPassingFloatsAndDoublesManaged(
             float[] expectedFloatValues,
             double[] expectedDoubleValues
-        ) {
+        )
+        {
             Debug.Assert(expectedFloatValues.Length == 2);
             Debug.Assert(expectedDoubleValues.Length == 2);
             double expectedSum = ManagedNativeVarargTests.TestPassingFloatsAndDoubles(
@@ -3821,7 +3824,8 @@ namespace NativeVarargTest
             EightByteStruct eight,
             EightByteStruct nine,
             EightByteStruct ten
-        ) {
+        )
+        {
             int sum = 0;
 
             sum +=
@@ -3931,7 +3935,8 @@ namespace NativeVarargTest
             SixteenByteStruct eight,
             SixteenByteStruct nine,
             SixteenByteStruct ten
-        ) {
+        )
+        {
             int sum = 0;
 
             sum +=

@@ -41,7 +41,8 @@ namespace Microsoft.EntityFrameworkCore.Query.Internal
             MethodInfo method,
             IReadOnlyList<SqlExpression> arguments,
             IDiagnosticsLogger<DbLoggerCategory.Query> logger
-        ) {
+        )
+        {
             Check.NotNull(method, nameof(method));
             Check.NotNull(arguments, nameof(arguments));
             Check.NotNull(logger, nameof(logger));
@@ -54,7 +55,8 @@ namespace Microsoft.EntityFrameworkCore.Query.Internal
                     method.Name == nameof(string.Compare)
                     && arguments.Count == 2
                     && arguments[0].Type == arguments[1].Type
-                ) {
+                )
+                {
                     left = arguments[0];
                     right = arguments[1];
                 }
@@ -63,7 +65,8 @@ namespace Microsoft.EntityFrameworkCore.Query.Internal
                     && arguments.Count == 1
                     && instance != null
                     && instance.Type == arguments[0].Type
-                ) {
+                )
+                {
                     left = instance;
                     right = arguments[0];
                 }

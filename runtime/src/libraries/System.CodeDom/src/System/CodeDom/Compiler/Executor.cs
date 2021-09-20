@@ -81,7 +81,8 @@ namespace System.CodeDom.Compiler
             TempFileCollection tempFiles,
             ref string outputName,
             ref string errorName
-        ) {
+        )
+        {
             if (userToken != IntPtr.Zero)
             {
                 throw new PlatformNotSupportedException();
@@ -102,7 +103,8 @@ namespace System.CodeDom.Compiler
             )
             using (
                 var errorWriter = new StreamWriter(CreateInheritedFile(errorName), Encoding.UTF8)
-            ) {
+            )
+            {
                 // Output the command line...
                 outputWriter.Write(currentDir);
                 outputWriter.Write("> ");

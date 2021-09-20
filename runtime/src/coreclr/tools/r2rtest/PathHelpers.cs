@@ -251,7 +251,8 @@ static class PathExtensions
         string coreRootFolder,
         IEnumerable<CompilerRunner> runners,
         bool recursive
-    ) {
+    )
+    {
         ConcurrentBag<string> directories = new ConcurrentBag<string>();
         LocateOutputFoldersAsync(folder, coreRootFolder, runners, recursive, directories).Wait();
         return directories.ToArray();
@@ -263,11 +264,13 @@ static class PathExtensions
         IEnumerable<CompilerRunner> runners,
         bool recursive,
         ConcurrentBag<string> directories
-    ) {
+    )
+    {
         if (
             coreRootFolder == null
             || !StringComparer.OrdinalIgnoreCase.Equals(folder, coreRootFolder)
-        ) {
+        )
+        {
             List<Task> subfolderTasks = new List<Task>();
             foreach (string dir in Directory.EnumerateDirectories(folder))
             {
@@ -306,7 +309,8 @@ static class PathExtensions
         string coreRootFolder,
         IEnumerable<CompilerRunner> runners,
         bool recursive
-    ) {
+    )
+    {
         Stopwatch stopwatch = new Stopwatch();
         stopwatch.Start();
 

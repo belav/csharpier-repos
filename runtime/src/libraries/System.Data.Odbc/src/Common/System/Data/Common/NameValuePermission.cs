@@ -61,7 +61,8 @@ namespace System.Data.Common
             NameValuePermission kvtree,
             ArrayList entries,
             DBConnectionString entry
-        ) {
+        )
+        {
             Debug.Assert(null != entry, "null DBConnectionString");
 
             if (null != entry.KeyChain)
@@ -70,7 +71,8 @@ namespace System.Data.Common
                     NameValuePair? keychain = entry.KeyChain;
                     null != keychain;
                     keychain = keychain.Next
-                ) {
+                )
+                {
                     NameValuePermission? kv;
 
                     kv = kvtree.CheckKeyForValue(keychain.Name);
@@ -289,7 +291,8 @@ namespace System.Data.Common
                             permitValue._value,
                             StringComparison.OrdinalIgnoreCase
                         )
-                    ) {
+                    )
+                    {
                         return permitValue;
                     }
                 }

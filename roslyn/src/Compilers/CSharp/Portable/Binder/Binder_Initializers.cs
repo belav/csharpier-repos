@@ -29,7 +29,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             ImmutableArray<ImmutableArray<FieldOrPropertyInitializer>> fieldInitializers,
             BindingDiagnosticBag diagnostics,
             ref ProcessedFieldInitializers processedInitializers
-        ) {
+        )
+        {
             var diagsForInstanceInitializers = BindingDiagnosticBag.GetInstance(
                 withDiagnostics: true,
                 diagnostics.AccumulatesDependencies
@@ -54,7 +55,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             ImmutableArray<ImmutableArray<FieldOrPropertyInitializer>> initializers,
             BindingDiagnosticBag diagnostics,
             out ImportChain? firstImportChain
-        ) {
+        )
+        {
             if (initializers.IsEmpty)
             {
                 firstImportChain = null;
@@ -96,7 +98,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             ArrayBuilder<BoundInitializer> boundInitializers,
             BindingDiagnosticBag diagnostics,
             out ImportChain? firstDebugImports
-        ) {
+        )
+        {
             firstDebugImports = null;
 
             foreach (ImmutableArray<FieldOrPropertyInitializer> siblingInitializers in initializers)
@@ -188,7 +191,8 @@ namespace Microsoft.CodeAnalysis.CSharp
         internal Binder GetFieldInitializerBinder(
             FieldSymbol fieldSymbol,
             bool suppressBinderFlagsFieldInitializer = false
-        ) {
+        )
+        {
             Debug.Assert(
                 (
                     ContainingMemberOrLambda is TypeSymbol containing
@@ -210,7 +214,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                     .OfType<SynthesizedRecordConstructor>()
                     .SingleOrDefault()
                     is SynthesizedRecordConstructor recordCtor
-            ) {
+            )
+            {
                 binder = new InMethodBinder(recordCtor, binder);
             }
 
@@ -233,7 +238,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             ArrayBuilder<BoundInitializer> boundInitializers,
             BindingDiagnosticBag diagnostics,
             out ImportChain? firstDebugImports
-        ) {
+        )
+        {
             firstDebugImports = null;
 
             for (int i = 0; i < initializers.Length; i++)
@@ -324,7 +330,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             StatementSyntax statementNode,
             BindingDiagnosticBag diagnostics,
             bool isLast
-        ) {
+        )
+        {
             var statement = binder.BindStatement(statementNode, diagnostics);
             if (isLast && !statement.HasAnyErrors)
             {
@@ -336,7 +343,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                     if (
                         expression != null
                         && ((object?)expression.Type == null || !expression.Type.IsVoidType())
-                    ) {
+                    )
+                    {
                         var submissionResultType = scriptInitializer.ResultType;
                         expression = binder.GenerateConversionForAssignment(
                             submissionResultType,
@@ -363,7 +371,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                     if (
                         InitializerRewriter.GetTrailingScriptExpression(labeledStatementBody)
                         != null
-                    ) {
+                    )
+                    {
                         Error(
                             diagnostics,
                             ErrorCode.ERR_SemicolonExpected,
@@ -381,7 +390,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             FieldSymbol fieldSymbol,
             EqualsValueClauseSyntax equalsValueClauseNode,
             BindingDiagnosticBag diagnostics
-        ) {
+        )
+        {
             Debug.Assert(!fieldSymbol.IsMetadataConstant);
 
             var fieldsBeingBound = binder.FieldsBeingBound;

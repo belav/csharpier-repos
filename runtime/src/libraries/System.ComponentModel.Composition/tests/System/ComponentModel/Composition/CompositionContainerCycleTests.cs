@@ -114,7 +114,8 @@ namespace System.ComponentModel.Composition
             string contractName,
             Dependency partADependency,
             Dependency partBDependency
-        ) {
+        )
+        {
             var container = GetContainer(partADependency, partBDependency);
 
             return container.GetExports(typeof(object), null, contractName).Single();
@@ -123,7 +124,8 @@ namespace System.ComponentModel.Composition
         private static CompositionContainer GetContainer(
             Dependency partADependency,
             Dependency partBDependency
-        ) {
+        )
+        {
             var partA = CreatePartA(partADependency);
             var partB = CreatePartB(partBDependency);
 
@@ -146,7 +148,8 @@ namespace System.ComponentModel.Composition
             Dependency dependency,
             string exportContractName,
             string importContractName
-        ) {
+        )
+        {
             ConcreteComposablePart part = new ConcreteComposablePart();
             part.AddExport(exportContractName, exportContractName);
 

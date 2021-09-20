@@ -46,7 +46,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Venus
             string className,
             CancellationToken cancellationToken,
             out string baseClassName
-        ) {
+        )
+        {
             baseClassName = null;
             var type = document.Project.GetCompilationAsync(cancellationToken)
                 .WaitAndGetResult_Venus(cancellationToken)
@@ -66,7 +67,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Venus
             string objectName,
             string nameOfEvent,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var type = document.Project.GetCompilationAsync(cancellationToken)
                 .WaitAndGetResult_Venus(cancellationToken)
                 .GetTypeByMetadataName(className);
@@ -111,7 +113,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Venus
             string objectTypeName,
             string nameOfEvent,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var compilation = document.Project.GetCompilationAsync(cancellationToken)
                 .WaitAndGetResult_Venus(cancellationToken);
             var type = compilation.GetTypeByMetadataName(className);
@@ -151,7 +154,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Venus
             string nameOfEvent,
             string eventHandlerName,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var nameAndId = GetCompatibleEventHandlers(
                     document,
                     className,
@@ -241,7 +245,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Venus
             if (
                 eventType.Kind != SymbolKind.NamedType
                 || ((INamedTypeSymbol)eventType).DelegateInvokeMethod == null
-            ) {
+            )
+            {
                 throw new InvalidOperationException(ServicesVSResources.Event_type_is_invalid);
             }
 
@@ -359,7 +364,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Venus
             out VsTextSpan textSpan,
             out Document targetDocument,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             targetDocument = null;
             textSpan = default;
 
@@ -411,7 +417,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Venus
             string className,
             CODEMEMBERTYPE codeMemberType,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var type = document.Project.GetCompilationAsync(cancellationToken)
                 .WaitAndGetResult_Venus(cancellationToken)
                 .GetTypeByMetadataName(className);
@@ -446,7 +453,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Venus
             string newFullyQualifiedName,
             IEnumerable<IRefactorNotifyService> refactorNotifyServices,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var symbol = FindSymbol(document, clrt, oldFullyQualifiedName, cancellationToken);
             if (symbol == null)
             {
@@ -458,7 +466,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Venus
                     document.GetTextSynchronously(cancellationToken).Container,
                     out var workspace
                 )
-            ) {
+            )
+            {
                 var newName = newFullyQualifiedName.Substring(
                     newFullyQualifiedName.LastIndexOf('.') + 1
                 );
@@ -480,7 +489,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Venus
                 );
                 using (
                     var workspaceUndoTransaction = workspace.OpenGlobalUndoTransaction(undoTitle)
-                ) {
+                )
+                {
                     // Notify third parties about the coming rename operation on the workspace, and let
                     // any exceptions propagate through
                     refactorNotifyServices.TryOnBeforeGlobalSymbolRenamed(
@@ -522,7 +532,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Venus
             ISymbol member,
             CODEMEMBERTYPE memberType,
             Compilation compilation
-        ) {
+        )
+        {
             if (!member.CanBeReferencedByName)
             {
                 return false;
@@ -555,7 +566,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Venus
 
                     if (
                         !method.Parameters[1].Type.InheritsFromOrEquals(compilation.EventArgsType())
-                    ) {
+                    )
+                    {
                         return false;
                     }
 
@@ -577,7 +589,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Venus
             ContainedLanguageRenameType renameType,
             string fullyQualifiedName,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             switch (renameType)
             {
                 case ContainedLanguageRenameType.CLRT_CLASS:
@@ -669,7 +682,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Venus
             string nameOfEvent,
             INamedTypeSymbol type,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var compilation = document.Project.GetCompilationAsync(cancellationToken)
                 .WaitAndGetResult_Venus(cancellationToken);
             var semanticModel = document.GetSemanticModelAsync(cancellationToken)

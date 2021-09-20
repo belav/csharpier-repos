@@ -26,7 +26,8 @@ namespace Microsoft.VisualStudio.IntegrationTest.Setup
         public AsyncCompletionTracker(
             IAsynchronousOperationListenerProvider asynchronousOperationListenerProvider,
             IAsyncCompletionBroker asyncCompletionBroker
-        ) {
+        )
+        {
             // Store the listener provider, but delay accessing the listener itself since tracking could still be
             // disabled during the initialization sequence for integration tests.
             _asynchronousOperationListenerProvider = asynchronousOperationListenerProvider;

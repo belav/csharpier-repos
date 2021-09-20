@@ -54,7 +54,8 @@ namespace System.Runtime.ExceptionServices.Tests
                     () => CauseAVInNative(),
                     new RemoteInvokeOptions { CheckExitCode = false, StartInfo = psi }
                 )
-            ) {
+            )
+            {
                 Process p = handle.Process;
                 p.WaitForExit();
                 Assert.NotEqual(RemoteExecutor.SuccessExitCode, p.ExitCode);

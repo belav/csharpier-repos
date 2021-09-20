@@ -470,7 +470,8 @@ namespace XLinqTests
                 XObject node in doc.DescendantNodes()
                     .OfType<object>()
                     .Concat2(doc.Descendants().Attributes().OfType<object>())
-            ) {
+            )
+            {
                 string baseUri = node.BaseUri;
                 // fail when use stream replace file
                 if (!string.IsNullOrWhiteSpace(baseUri))
@@ -488,7 +489,8 @@ namespace XLinqTests
                 XObject node in doc.DescendantNodes()
                     .OfType<object>()
                     .Concat2(doc.Descendants().Attributes().OfType<object>())
-            ) {
+            )
+            {
                 string baseUri = node.BaseUri;
                 TestLog.Compare(baseUri, "", "base uri failed");
             }
@@ -506,7 +508,8 @@ namespace XLinqTests
                 object node in doc.DescendantNodes()
                     .OfType<object>()
                     .Concat2(doc.Descendants().Attributes().OfType<object>())
-            ) {
+            )
+            {
                 TestLog.Compare((node as IXmlLineInfo).LineNumber != 0, "LineNumber failed");
                 TestLog.Compare((node as IXmlLineInfo).LinePosition != 0, "LinePosition failed");
             }
@@ -516,7 +519,8 @@ namespace XLinqTests
                 object node in doc.DescendantNodes()
                     .OfType<object>()
                     .Concat2(doc.Descendants().Attributes().OfType<object>())
-            ) {
+            )
+            {
                 TestLog.Compare((node as IXmlLineInfo).LineNumber == 0, "LineNumber failed");
                 TestLog.Compare((node as IXmlLineInfo).LinePosition == 0, "LinePosition failed");
             }
@@ -645,7 +649,8 @@ namespace XLinqTests
                     Encoding.GetEncoding("UTF-16"),
                     Encoding.GetEncoding("UTF-16BE")
                 }
-            ) {
+            )
+            {
                 MemoryStream ms = CreateStream(purchaseOrderXml, enc);
 
                 XDocument d = XDocument.Load(ms);
@@ -663,7 +668,8 @@ namespace XLinqTests
                     Encoding.GetEncoding("UTF-16"),
                     Encoding.GetEncoding("UTF-16BE")
                 }
-            ) {
+            )
+            {
                 MemoryStream ms = CreateStream(purchaseOrderXml, enc);
 
                 XElement e = XElement.Load(ms);
@@ -686,7 +692,8 @@ namespace XLinqTests
                 XObject node in e.DescendantNodesAndSelf()
                     .OfType<object>()
                     .Concat2(e.DescendantsAndSelf().Attributes().OfType<object>())
-            ) {
+            )
+            {
                 string baseUri = node.BaseUri;
                 if (!string.IsNullOrWhiteSpace(baseUri))
                 {
@@ -703,7 +710,8 @@ namespace XLinqTests
                 XObject node in e.DescendantNodesAndSelf()
                     .OfType<object>()
                     .Concat2(e.DescendantsAndSelf().Attributes().OfType<object>())
-            ) {
+            )
+            {
                 string baseUri = node.BaseUri;
                 TestLog.Compare(baseUri, "", "base uri failed");
             }
@@ -721,7 +729,8 @@ namespace XLinqTests
                 object node in e.DescendantNodesAndSelf()
                     .OfType<object>()
                     .Concat2(e.DescendantsAndSelf().Attributes().OfType<object>())
-            ) {
+            )
+            {
                 TestLog.Compare((node as IXmlLineInfo).LineNumber != 0, "LineNumber failed");
                 TestLog.Compare((node as IXmlLineInfo).LinePosition != 0, "LinePosition failed");
             }
@@ -731,7 +740,8 @@ namespace XLinqTests
                 object node in e.DescendantNodesAndSelf()
                     .OfType<object>()
                     .Concat2(e.DescendantsAndSelf().Attributes().OfType<object>())
-            ) {
+            )
+            {
                 TestLog.Compare((node as IXmlLineInfo).LineNumber == 0, "LineNumber failed");
                 TestLog.Compare((node as IXmlLineInfo).LinePosition == 0, "LinePosition failed");
             }

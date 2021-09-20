@@ -17,7 +17,8 @@ namespace Microsoft.AspNetCore.Routing.Matching
             int defaultDestination,
             int exitDestination,
             (string text, int destination)[] entries
-        ) {
+        )
+        {
             _defaultDestination = defaultDestination;
             _exitDestination = exitDestination;
             _entries = entries;
@@ -44,7 +45,8 @@ namespace Microsoft.AspNetCore.Routing.Matching
                         segment.Length,
                         StringComparison.OrdinalIgnoreCase
                     ) == 0
-                ) {
+                )
+                {
                     return entries[i].destination;
                 }
             }

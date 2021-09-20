@@ -154,7 +154,8 @@ namespace JitBench
                         settings.IgnoreUnknownArguments = true;
                     }
                 )
-            ) {
+            )
+            {
                 CommandLineOptions options = null;
                 parser.ParseArguments<CommandLineOptions>(args)
                     .WithParsed(parsed => options = parsed)

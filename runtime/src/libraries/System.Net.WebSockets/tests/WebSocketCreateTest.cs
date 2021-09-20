@@ -91,7 +91,8 @@ namespace System.Net.WebSockets.Tests
         )]
         public async Task WebSocketProtocol_CreateFromConnectedStream_CanSendReceiveData(
             Uri echoUri
-        ) {
+        )
+        {
             if (PlatformDetection.IsWindows7)
             {
                 // https://github.com/dotnet/runtime/issues/31382
@@ -104,7 +105,8 @@ namespace System.Net.WebSockets.Tests
                     SocketType.Stream,
                     ProtocolType.Tcp
                 )
-            ) {
+            )
+            {
                 bool secure = echoUri.Scheme == "wss";
                 client.Connect(echoUri.Host, secure ? 443 : 80);
 
@@ -116,7 +118,8 @@ namespace System.Net.WebSockets.Tests
                         null,
                         TimeSpan.FromSeconds(10)
                     )
-                ) {
+                )
+                {
                     Assert.NotNull(socket);
                     Assert.Equal(WebSocketState.Open, socket.State);
 
@@ -205,7 +208,8 @@ namespace System.Net.WebSockets.Tests
             byte firstByte,
             byte secondByte,
             bool shouldFail
-        ) {
+        )
+        {
             using (
                 Socket listener = new Socket(
                     AddressFamily.InterNetwork,
@@ -219,7 +223,8 @@ namespace System.Net.WebSockets.Tests
                     SocketType.Stream,
                     ProtocolType.Tcp
                 )
-            ) {
+            )
+            {
                 listener.Bind(new IPEndPoint(IPAddress.Loopback, 0));
                 listener.Listen(1);
 
@@ -285,7 +290,8 @@ namespace System.Net.WebSockets.Tests
                     SocketType.Stream,
                     ProtocolType.Tcp
                 )
-            ) {
+            )
+            {
                 listener.Bind(new IPEndPoint(IPAddress.Loopback, 0));
                 listener.Listen(1);
 
@@ -355,7 +361,8 @@ namespace System.Net.WebSockets.Tests
         public async Task WebSocketProtocol_CreateFromConnectedStream_CloseAsyncClosesStream(
             Uri echoUri,
             bool explicitCloseAsync
-        ) {
+        )
+        {
             if (PlatformDetection.IsWindows7)
             {
                 // https://github.com/dotnet/runtime/issues/31382
@@ -368,7 +375,8 @@ namespace System.Net.WebSockets.Tests
                     SocketType.Stream,
                     ProtocolType.Tcp
                 )
-            ) {
+            )
+            {
                 bool secure = echoUri.Scheme == "wss";
                 client.Connect(echoUri.Host, secure ? 443 : 80);
 
@@ -381,7 +389,8 @@ namespace System.Net.WebSockets.Tests
                             null,
                             TimeSpan.FromSeconds(10)
                         )
-                    ) {
+                    )
+                    {
                         Assert.NotNull(socket);
                         Assert.Equal(WebSocketState.Open, socket.State);
 
@@ -417,14 +426,16 @@ namespace System.Net.WebSockets.Tests
         public async Task WebSocketProtocol_CreateFromConnectedStream_CloseAsyncAfterCloseReceivedClosesStream(
             Uri echoUri,
             bool useCloseOutputAsync
-        ) {
+        )
+        {
             using (
                 var client = new Socket(
                     AddressFamily.InterNetwork,
                     SocketType.Stream,
                     ProtocolType.Tcp
                 )
-            ) {
+            )
+            {
                 bool secure = echoUri.Scheme == "wss";
                 client.Connect(echoUri.Host, secure ? 443 : 80);
 
@@ -436,7 +447,8 @@ namespace System.Net.WebSockets.Tests
                         null,
                         TimeSpan.FromSeconds(10)
                     )
-                ) {
+                )
+                {
                     Assert.NotNull(socket);
                     Assert.Equal(WebSocketState.Open, socket.State);
 
@@ -484,7 +496,8 @@ namespace System.Net.WebSockets.Tests
             Uri echoUri,
             Socket client,
             bool secure
-        ) {
+        )
+        {
             Stream stream = new NetworkStream(client, ownsSocket: false);
 
             if (secure)
@@ -508,7 +521,8 @@ namespace System.Net.WebSockets.Tests
                     bufferSize: 1,
                     leaveOpen: true
                 )
-            ) {
+            )
+            {
                 await writer.WriteAsync($"GET {echoUri.PathAndQuery} HTTP/1.1\r\n");
                 await writer.WriteAsync($"Host: {echoUri.Host}\r\n");
                 await writer.WriteAsync($"Upgrade: websocket\r\n");
@@ -528,7 +542,8 @@ namespace System.Net.WebSockets.Tests
                     bufferSize: 1,
                     leaveOpen: true
                 )
-            ) {
+            )
+            {
                 string statusLine = await reader.ReadLineAsync();
                 Assert.NotEmpty(statusLine);
                 Assert.Equal("HTTP/1.1 101 Switching Protocols", statusLine);

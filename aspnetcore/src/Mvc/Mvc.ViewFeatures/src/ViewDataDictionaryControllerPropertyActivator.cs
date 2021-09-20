@@ -30,7 +30,8 @@ namespace Microsoft.AspNetCore.Mvc.ViewFeatures
         /// <param name="modelMetadataProvider">The <see cref="IModelMetadataProvider"/> to use.</param>
         public ViewDataDictionaryControllerPropertyActivator(
             IModelMetadataProvider modelMetadataProvider
-        ) {
+        )
+        {
             _modelMetadataProvider = modelMetadataProvider;
             _getPropertiesToActivate = GetPropertiesToActivate;
         }
@@ -60,7 +61,8 @@ namespace Microsoft.AspNetCore.Mvc.ViewFeatures
         /// <inheritdoc/>
         public Action<ControllerContext, object> GetActivatorDelegate(
             ControllerActionDescriptor actionDescriptor
-        ) {
+        )
+        {
             var controllerType = actionDescriptor.ControllerTypeInfo?.AsType();
             if (controllerType == null)
             {

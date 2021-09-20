@@ -23,7 +23,8 @@ namespace System.Threading.Tasks
                         ),
                     this
                 )
-            ) {
+            )
+            {
                 return await Task.ConfigureAwait(false);
             }
         }

@@ -37,7 +37,8 @@ namespace Microsoft.CodeAnalysis.Editor.Shared.Extensions
             IEditorOptions editorOptions,
             IContentType? contentType = null,
             params SnapshotSpan[] exposedSpans
-        ) {
+        )
+        {
             return factoryService.CreateProjectionBufferWithoutIndentation(
                 editorOptions,
                 contentType,
@@ -50,7 +51,8 @@ namespace Microsoft.CodeAnalysis.Editor.Shared.Extensions
             IEditorOptions editorOptions,
             IContentType? contentType,
             IEnumerable<SnapshotSpan> exposedSpans
-        ) {
+        )
+        {
             var spans = new NormalizedSnapshotSpanCollection(exposedSpans);
 
             if (spans.Count > 0)
@@ -92,7 +94,8 @@ namespace Microsoft.CodeAnalysis.Editor.Shared.Extensions
                         var lineNumber = startLineNumber;
                         lineNumber <= endLineNumber;
                         lineNumber++
-                    ) {
+                    )
+                    {
                         // Compute the span clamped to this line
                         var line = snapshot.GetLineFromLineNumber(lineNumber);
                         var finalSpanStart = Math.Max(line.Start, span.Start);
@@ -134,7 +137,8 @@ namespace Microsoft.CodeAnalysis.Editor.Shared.Extensions
         private static int DetermineIndentationColumn(
             IEditorOptions editorOptions,
             IEnumerable<SnapshotSpan> spans
-        ) {
+        )
+        {
             int? indentationColumn = null;
             foreach (var span in spans)
             {
@@ -161,7 +165,8 @@ namespace Microsoft.CodeAnalysis.Editor.Shared.Extensions
                 if (
                     startLineFirstNonWhitespace.HasValue
                     && startLineFirstNonWhitespace.Value < span.Start
-                ) {
+                )
+                {
                     startLineNumber++;
                 }
 
@@ -192,7 +197,8 @@ namespace Microsoft.CodeAnalysis.Editor.Shared.Extensions
             ITextSnapshot snapshot,
             string separator,
             params LineSpan[] exposedLineSpans
-        ) {
+        )
+        {
             return CreateProjectionBuffer(
                 factoryService,
                 registryService,
@@ -212,7 +218,8 @@ namespace Microsoft.CodeAnalysis.Editor.Shared.Extensions
             ITextSnapshot snapshot,
             string separator,
             params LineSpan[] exposedLineSpans
-        ) {
+        )
+        {
             return factoryService.CreateProjectionBufferWithoutIndentation(
                 registryService,
                 editorOptions,
@@ -231,7 +238,8 @@ namespace Microsoft.CodeAnalysis.Editor.Shared.Extensions
             string separator,
             object? suffixOpt,
             params LineSpan[] exposedLineSpans
-        ) {
+        )
+        {
             return CreateProjectionBuffer(
                 factoryService,
                 registryService,
@@ -248,7 +256,8 @@ namespace Microsoft.CodeAnalysis.Editor.Shared.Extensions
             this IProjectionBufferFactoryService factoryService,
             IList<object> sourceSpans,
             IContentTypeRegistryService registryService
-        ) {
+        )
+        {
             return factoryService.CreateProjectionBuffer(
                 projectionEditResolver: null,
                 sourceSpans: sourceSpans,
@@ -266,7 +275,8 @@ namespace Microsoft.CodeAnalysis.Editor.Shared.Extensions
             object? suffixOpt,
             bool trim,
             params LineSpan[] exposedLineSpans
-        ) {
+        )
+        {
             var spans = new List<object>();
             if (exposedLineSpans.Length > 0)
             {
@@ -318,7 +328,8 @@ namespace Microsoft.CodeAnalysis.Editor.Shared.Extensions
                 if (
                     snapshot.GetLineNumberFromPosition(snapshotSpanRanges.Last().Last().End)
                     < snapshot.LineCount - 1
-                ) {
+                )
+                {
                     spans.Add(editorOptions.GetNewLineCharacter());
                     spans.Add(separator);
                 }
@@ -351,7 +362,8 @@ namespace Microsoft.CodeAnalysis.Editor.Shared.Extensions
         private static IList<IList<SnapshotSpan>> CreateSnapshotSpanRanges(
             ITextSnapshot snapshot,
             LineSpan[] exposedLineSpans
-        ) {
+        )
+        {
             var result = new List<IList<SnapshotSpan>>();
             foreach (var lineSpan in exposedLineSpans)
             {
@@ -368,7 +380,8 @@ namespace Microsoft.CodeAnalysis.Editor.Shared.Extensions
         private static IList<SnapshotSpan> CreateSnapshotSpans(
             ITextSnapshot snapshot,
             LineSpan lineSpan
-        ) {
+        )
+        {
             var result = new List<SnapshotSpan>();
             for (var i = lineSpan.Start; i < lineSpan.End; i++)
             {

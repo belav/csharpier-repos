@@ -21,7 +21,8 @@ namespace System.Web.Mvc
             RouteValueDictionary implicitRouteValues,
             RouteValueDictionary routeValues,
             bool includeImplicitMvcValues
-        ) {
+        )
+        {
             // Create a new dictionary containing implicit and auto-generated values
             RouteValueDictionary mergedRouteValues = new RouteValueDictionary();
 
@@ -36,14 +37,16 @@ namespace System.Web.Mvc
                 if (
                     implicitRouteValues != null
                     && implicitRouteValues.TryGetValue("action", out implicitValue)
-                ) {
+                )
+                {
                     mergedRouteValues["action"] = implicitValue;
                 }
 
                 if (
                     implicitRouteValues != null
                     && implicitRouteValues.TryGetValue("controller", out implicitValue)
-                ) {
+                )
+                {
                     mergedRouteValues["controller"] = implicitValue;
                 }
             }

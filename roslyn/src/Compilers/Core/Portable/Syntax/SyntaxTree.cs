@@ -254,7 +254,8 @@ namespace Microsoft.CodeAnalysis
         public virtual LineVisibility GetLineVisibility(
             int position,
             CancellationToken cancellationToken = default
-        ) {
+        )
+        {
             return LineVisibility.Visible;
         }
 
@@ -270,7 +271,8 @@ namespace Microsoft.CodeAnalysis
         internal virtual FileLinePositionSpan GetMappedLineSpanAndVisibility(
             TextSpan span,
             out bool isHiddenPosition
-        ) {
+        )
+        {
             isHiddenPosition = GetLineVisibility(span.Start) == LineVisibility.Hidden;
             return GetMappedLineSpan(span);
         }
@@ -401,7 +403,8 @@ namespace Microsoft.CodeAnalysis
         )]
         public virtual SyntaxTree WithDiagnosticOptions(
             ImmutableDictionary<string, ReportDiagnostic> options
-        ) {
+        )
+        {
             throw new NotImplementedException();
         }
 

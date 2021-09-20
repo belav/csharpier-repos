@@ -17,7 +17,8 @@ namespace Microsoft.Web.Mvc.ModelBinding
             ModelMetadata modelMetadata,
             string modelStateKey,
             IEnumerable<ModelValidationNode> childNodes
-        ) {
+        )
+        {
             if (modelMetadata == null)
             {
                 throw new ArgumentNullException("modelMetadata");
@@ -183,12 +184,14 @@ namespace Microsoft.Web.Mvc.ModelBinding
                         ModelValidator propertyValidator in propertyMetadata.GetValidators(
                             controllerContext
                         )
-                    ) {
+                    )
+                    {
                         foreach (
                             ModelValidationResult propertyResult in propertyValidator.Validate(
                                 model
                             )
-                        ) {
+                        )
+                        {
                             string thisErrorKey = ModelBinderUtil.CreatePropertyModelName(
                                 propertyKeyRoot,
                                 propertyResult.MemberName
@@ -203,7 +206,8 @@ namespace Microsoft.Web.Mvc.ModelBinding
         private void ValidateThis(
             ControllerContext controllerContext,
             ModelValidationNode parentNode
-        ) {
+        )
+        {
             ModelStateDictionary modelState = controllerContext.Controller.ViewData.ModelState;
             if (!modelState.IsValidField(ModelStateKey))
             {

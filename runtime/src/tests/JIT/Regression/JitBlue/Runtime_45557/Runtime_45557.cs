@@ -41,7 +41,8 @@ namespace Runtime_45557
             Dictionary<Type, int> typeToIndex,
             List<Type> types,
             List<Func<Object, Object>> typeReaders
-        ) {
+        )
+        {
             _typeToIndex = new Dictionary<Type, int>(typeToIndex);
             _types = types.ToImmutableArray(); // stack variable here would go live
             _typeReaders = typeReaders.ToImmutableArray(); // it would get erroneously killed in GC info here

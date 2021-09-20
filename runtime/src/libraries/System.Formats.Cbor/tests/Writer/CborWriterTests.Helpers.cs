@@ -46,7 +46,8 @@ namespace System.Formats.Cbor.Tests
                 CborWriter writer,
                 object value,
                 bool useDefiniteLengthCollections = true
-            ) {
+            )
+            {
                 switch (value)
                 {
                     case null:
@@ -126,7 +127,8 @@ namespace System.Formats.Cbor.Tests
                 CborWriter writer,
                 object[] values,
                 bool useDefiniteLengthCollections = true
-            ) {
+            )
+            {
                 if (useDefiniteLengthCollections)
                 {
                     writer.WriteStartArray(values.Length);
@@ -148,7 +150,8 @@ namespace System.Formats.Cbor.Tests
                 CborWriter writer,
                 object[] keyValuePairs,
                 bool useDefiniteLengthCollections = true
-            ) {
+            )
+            {
                 if (!IsCborMapRepresentation(keyValuePairs))
                 {
                     throw new ArgumentException(

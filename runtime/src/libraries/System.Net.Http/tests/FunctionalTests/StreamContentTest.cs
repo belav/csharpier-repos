@@ -206,7 +206,8 @@ namespace System.Net.Http.Functional.Tests
         [InlineData(false)]
         public async Task ContentReadStream_GetPropertyPartiallyConsumed_ReturnOriginalStream(
             bool readStreamAsync
-        ) {
+        )
+        {
             int consumed = 4;
             var source = new MockStream(new byte[10]);
             source.Read(new byte[consumed], 0, consumed);
@@ -225,7 +226,8 @@ namespace System.Net.Http.Functional.Tests
         [InlineData(false)]
         public async Task ContentReadStream_CheckResultProperties_ValuesRepresentReadOnlyStream(
             bool readStreamAsync
-        ) {
+        )
+        {
             byte[] data = new byte[10];
             for (int i = 0; i < data.Length; i++)
             {

@@ -30,7 +30,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel.InMemory.FunctionalTests
                     },
                     testContext
                 )
-            ) {
+            )
+            {
                 using (var connection = server.CreateConnection())
                 {
                     await connection.Send(
@@ -84,7 +85,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel.InMemory.FunctionalTests
                     },
                     testContext
                 )
-            ) {
+            )
+            {
                 using (var connection = server.CreateConnection())
                 {
                     await connection.Send($"GET {requestTarget} HTTP/1.1", "Host:", "", "");
@@ -124,7 +126,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel.InMemory.FunctionalTests
                     },
                     testContext
                 )
-            ) {
+            )
+            {
                 using (var connection = server.CreateConnection())
                 {
                     var host = method == HttpMethod.Connect ? requestTarget : string.Empty;

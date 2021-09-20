@@ -3115,7 +3115,8 @@ class C
         [Theory, CombinatorialData, Trait(Traits.Feature, Traits.Features.SignatureHelp)]
         public async Task ShowWarningForOverloadUnavailableInRelatedDocument(
             bool typeParameterProvided
-        ) {
+        )
+        {
             var markup =
                 $@"<Workspace>
     <Project Language=""C#"" CommonReferences=""true"" AssemblyName=""Proj1"" PreprocessorSymbols=""TFM"">

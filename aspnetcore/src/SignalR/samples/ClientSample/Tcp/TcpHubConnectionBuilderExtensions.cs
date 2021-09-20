@@ -15,7 +15,8 @@ namespace Microsoft.AspNetCore.SignalR.Client
         public static IHubConnectionBuilder WithEndPoint(
             this IHubConnectionBuilder builder,
             Uri uri
-        ) {
+        )
+        {
             if (!string.Equals(uri.Scheme, "net.tcp", StringComparison.Ordinal))
             {
                 throw new InvalidOperationException($"URI Scheme {uri.Scheme} not supported.");
@@ -37,7 +38,8 @@ namespace Microsoft.AspNetCore.SignalR.Client
         public static IHubConnectionBuilder WithEndPoint(
             this IHubConnectionBuilder builder,
             EndPoint endPoint
-        ) {
+        )
+        {
             builder.Services.AddSingleton<IConnectionFactory, TcpConnectionFactory>();
             builder.Services.AddSingleton(endPoint);
 
@@ -49,7 +51,8 @@ namespace Microsoft.AspNetCore.SignalR.Client
             public ValueTask<ConnectionContext> ConnectAsync(
                 EndPoint endPoint,
                 CancellationToken cancellationToken = default
-            ) {
+            )
+            {
                 return new TcpConnection(endPoint).StartAsync();
             }
         }

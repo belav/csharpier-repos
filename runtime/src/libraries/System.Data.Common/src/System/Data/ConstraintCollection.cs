@@ -188,7 +188,8 @@ namespace System.Data
             string? name,
             DataColumn primaryKeyColumn,
             DataColumn foreignKeyColumn
-        ) {
+        )
+        {
             ForeignKeyConstraint constraint = new ForeignKeyConstraint(
                 name,
                 primaryKeyColumn,
@@ -206,7 +207,8 @@ namespace System.Data
             string? name,
             DataColumn[] primaryKeyColumns,
             DataColumn[] foreignKeyColumns
-        ) {
+        )
+        {
             ForeignKeyConstraint constraint = new ForeignKeyConstraint(
                 name,
                 primaryKeyColumns,
@@ -342,7 +344,8 @@ namespace System.Data
             int oldLength,
             Constraint[] newArray,
             int newLength
-        ) {
+        )
+        {
             // We're doing a smart diff of oldArray and newArray to find out what
             // should be removed.  We'll pass through oldArray and see if it exists
             // in newArray, and if not, do remove work.  newBase is an opt. in case
@@ -570,7 +573,8 @@ namespace System.Data
         internal ForeignKeyConstraint? FindForeignKeyConstraint(
             DataColumn[] parentColumns,
             DataColumn[] childColumns
-        ) {
+        )
+        {
             int constraintCount = List.Count;
             for (int i = 0; i < constraintCount; i++)
             {
@@ -705,7 +709,8 @@ namespace System.Data
                 if (
                     NamesEqual(name, ((Constraint)List[i]!).ConstraintName, true, _table.Locale)
                     != 0
-                ) {
+                )
+                {
                     throw ExceptionBuilder.DuplicateConstraintName(
                         ((Constraint)List[i]!).ConstraintName
                     );

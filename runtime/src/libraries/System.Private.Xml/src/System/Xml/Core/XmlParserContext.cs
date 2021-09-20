@@ -53,18 +53,20 @@ namespace System.Xml
             string? baseURI,
             string? xmlLang,
             XmlSpace xmlSpace
-        ) : this(
-            nt,
-            nsMgr,
-            docTypeName,
-            pubId,
-            sysId,
-            internalSubset,
-            baseURI,
-            xmlLang,
-            xmlSpace,
-            null
-        ) {
+        )
+            : this(
+                nt,
+                nsMgr,
+                docTypeName,
+                pubId,
+                sysId,
+                internalSubset,
+                baseURI,
+                xmlLang,
+                xmlSpace,
+                null
+            )
+        {
             // Intentionally Empty
         }
 
@@ -79,7 +81,8 @@ namespace System.Xml
             string? xmlLang,
             XmlSpace xmlSpace,
             Encoding? enc
-        ) {
+        )
+        {
             if (nsMgr != null)
             {
                 if (nt == null)

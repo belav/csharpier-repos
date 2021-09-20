@@ -160,7 +160,8 @@ internal static partial class Interop
             SafeSslHandle ssl,
             TlsCipherSuite cipherSuite,
             out bool isTls12OrLower
-        ) {
+        )
+        {
             string? ret = Marshal.PtrToStringAnsi(
                 GetOpenSslCipherSuiteName(ssl, (int)cipherSuite, out int isTls12OrLowerInt)
             );
@@ -228,7 +229,8 @@ internal static partial class Interop
         internal static bool AddExtraChainCertificates(
             SafeSslHandle sslContext,
             X509Certificate2[] chain
-        ) {
+        )
+        {
             // send pre-computed list of intermediates.
             for (int i = 0; i < chain.Length; i++)
             {

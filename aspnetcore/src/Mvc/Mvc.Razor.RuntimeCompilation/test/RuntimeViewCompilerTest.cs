@@ -226,7 +226,8 @@ namespace Microsoft.AspNetCore.Mvc.Razor.RuntimeCompilation
         [InlineData("/viEws/HoME/inDex.cshtml")]
         public async Task CompileAsync_PerformsCaseInsensitiveLookupsForPrecompiledViews(
             string lookupPath
-        ) {
+        )
+        {
             // Arrange
             var path = "/Views/Home/Index.cshtml";
             var fileProvider = new TestFileProvider();
@@ -944,7 +945,8 @@ this should fail";
             RazorReferenceManager referenceManager = null,
             IList<CompiledViewDescriptor> precompiledViews = null,
             CSharpCompiler csharpCompiler = null
-        ) {
+        )
+        {
             fileProvider = fileProvider ?? new TestFileProvider();
             var options = Options.Create(
                 new MvcRazorRuntimeCompilationOptions { FileProviders = { fileProvider } }
@@ -1001,13 +1003,15 @@ this should fail";
                 CSharpCompiler csharpCompiler,
                 IList<CompiledViewDescriptor> precompiledViews,
                 Func<string, CompiledViewDescriptor> compile = null
-            ) : base(
-                fileProvider,
-                projectEngine,
-                csharpCompiler,
-                precompiledViews,
-                NullLogger.Instance
-            ) {
+            )
+                : base(
+                    fileProvider,
+                    projectEngine,
+                    csharpCompiler,
+                    precompiledViews,
+                    NullLogger.Instance
+                )
+            {
                 Compile = compile;
                 if (Compile == null)
                 {

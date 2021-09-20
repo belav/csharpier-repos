@@ -23,7 +23,8 @@ namespace Internal.Cryptography.Pal.Windows
             X509Certificate2Collection originatorCerts,
             X509Certificate2Collection extraStore,
             out Exception? exception
-        ) {
+        )
+        {
             Debug.Assert((cert != null) ^ (privateKey != null));
 
             if (privateKey != null)
@@ -99,7 +100,8 @@ namespace Internal.Cryptography.Pal.Windows
                     out _,
                     out exception
                 )
-            ) {
+            )
+            {
                 if (hKey == null)
                     return null;
 
@@ -142,7 +144,8 @@ namespace Internal.Cryptography.Pal.Windows
         private static Exception? TryGetKeySpecForCertificate(
             X509Certificate2 cert,
             out CryptKeySpec keySpec
-        ) {
+        )
+        {
             using (SafeCertContextHandle hCertContext = cert.CreateCertContextHandle())
             {
                 int cbSize = 0;
@@ -154,7 +157,8 @@ namespace Internal.Cryptography.Pal.Windows
                         null,
                         ref cbSize
                     )
-                ) {
+                )
+                {
                     keySpec = CryptKeySpec.CERT_NCRYPT_KEY_SPEC;
                     return null;
                 }
@@ -166,7 +170,8 @@ namespace Internal.Cryptography.Pal.Windows
                         null,
                         ref cbSize
                     )
-                ) {
+                )
+                {
                     ErrorCode errorCode = (ErrorCode)(Marshal.GetLastWin32Error());
                     keySpec = default(CryptKeySpec);
                     return errorCode.ToCryptographicException();
@@ -184,7 +189,8 @@ namespace Internal.Cryptography.Pal.Windows
                                 pData,
                                 ref cbSize
                             )
-                        ) {
+                        )
+                        {
                             ErrorCode errorCode = (ErrorCode)(Marshal.GetLastWin32Error());
                             keySpec = default(CryptKeySpec);
                             return errorCode.ToCryptographicException();
@@ -202,7 +208,8 @@ namespace Internal.Cryptography.Pal.Windows
             KeyTransRecipientInfo recipientInfo,
             SafeProvOrNCryptKeyHandle hKey,
             CryptKeySpec keySpec
-        ) {
+        )
+        {
             KeyTransRecipientInfoPalWindows pal = (KeyTransRecipientInfoPalWindows)(
                 recipientInfo.Pal
             );
@@ -231,7 +238,8 @@ namespace Internal.Cryptography.Pal.Windows
             CryptKeySpec keySpec,
             X509Certificate2Collection originatorCerts,
             X509Certificate2Collection extraStore
-        ) {
+        )
+        {
             unsafe
             {
                 KeyAgreeRecipientInfoPalWindows pal = (KeyAgreeRecipientInfoPalWindows)(
@@ -281,7 +289,8 @@ namespace Internal.Cryptography.Pal.Windows
                                 using (
                                     SafeCertContextHandle hCertContext =
                                         originatorCert.CreateCertContextHandle()
-                                ) {
+                                )
+                                {
                                     CERT_CONTEXT* pOriginatorCertContext =
                                         hCertContext.DangerousGetCertContext();
                                     decryptPara.OriginatorPublicKey =
@@ -322,7 +331,8 @@ namespace Internal.Cryptography.Pal.Windows
                     MsgControlType.CMSG_CTRL_KEY_AGREE_DECRYPT,
                     ref decryptPara
                 )
-            ) {
+            )
+            {
                 ErrorCode errorCode = (ErrorCode)(Marshal.GetHRForLastWin32Error());
                 return errorCode.ToCryptographicException();
             }

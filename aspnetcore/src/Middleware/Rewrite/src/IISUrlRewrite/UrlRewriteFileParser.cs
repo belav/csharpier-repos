@@ -24,7 +24,8 @@ namespace Microsoft.AspNetCore.Rewrite.IISUrlRewrite
         public IList<IISUrlRewriteRule> Parse(
             TextReader reader,
             bool alwaysUseManagedServerVariables
-        ) {
+        )
+        {
             var xmlDoc = XDocument.Load(reader, LoadOptions.SetLineInfo);
             var xmlRoot = xmlDoc.Descendants(RewriteTags.Rewrite).FirstOrDefault();
 
@@ -121,7 +122,8 @@ namespace Microsoft.AspNetCore.Rewrite.IISUrlRewrite
             XElement match,
             UrlRewriteRuleBuilder builder,
             PatternSyntax patternSyntax
-        ) {
+        )
+        {
             var parsedInputString = match.Attribute(RewriteTags.Url)?.Value;
             if (parsedInputString == null)
             {
@@ -137,7 +139,8 @@ namespace Microsoft.AspNetCore.Rewrite.IISUrlRewrite
             XElement? conditions,
             UrlRewriteRuleBuilder builder,
             PatternSyntax patternSyntax
-        ) {
+        )
+        {
             if (conditions == null)
             {
                 return;
@@ -171,7 +174,8 @@ namespace Microsoft.AspNetCore.Rewrite.IISUrlRewrite
             XElement conditionElement,
             UrlRewriteRuleBuilder builder,
             PatternSyntax patternSyntax
-        ) {
+        )
+        {
             var ignoreCase = ParseBool(
                 conditionElement,
                 RewriteTags.IgnoreCase,
@@ -268,7 +272,8 @@ namespace Microsoft.AspNetCore.Rewrite.IISUrlRewrite
             XElement urlAction,
             UrlRewriteRuleBuilder builder,
             bool stopProcessing
-        ) {
+        )
+        {
             var actionType = ParseEnum(urlAction, RewriteTags.Type, ActionType.None);
             UrlAction action;
             switch (actionType)
@@ -338,7 +343,8 @@ namespace Microsoft.AspNetCore.Rewrite.IISUrlRewrite
                             CultureInfo.InvariantCulture,
                             out statusCode
                         )
-                    ) {
+                    )
+                    {
                         throw new InvalidUrlRewriteFormatException(
                             urlAction,
                             "A valid status code is required"
@@ -354,7 +360,8 @@ namespace Microsoft.AspNetCore.Rewrite.IISUrlRewrite
 
                     if (
                         !string.IsNullOrEmpty(urlAction.Attribute(RewriteTags.SubStatusCode)?.Value)
-                    ) {
+                    )
+                    {
                         throw new NotSupportedException("Substatus codes are not supported");
                     }
 

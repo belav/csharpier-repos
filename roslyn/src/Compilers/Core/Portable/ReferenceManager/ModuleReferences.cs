@@ -42,7 +42,8 @@ namespace Microsoft.CodeAnalysis
             ImmutableArray<AssemblyIdentity> identities,
             ImmutableArray<TAssemblySymbol> symbols,
             ImmutableArray<UnifiedAssembly<TAssemblySymbol>> unifiedAssemblies
-        ) {
+        )
+        {
             Debug.Assert(!identities.IsDefault);
             Debug.Assert(!symbols.IsDefault);
             Debug.Assert(identities.Length == symbols.Length);

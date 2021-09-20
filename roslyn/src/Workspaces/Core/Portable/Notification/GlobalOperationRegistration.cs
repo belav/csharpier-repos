@@ -19,7 +19,8 @@ namespace Microsoft.CodeAnalysis.Notification
         public GlobalOperationRegistration(
             AbstractGlobalOperationNotificationService service,
             string operation
-        ) {
+        )
+        {
             _service = service;
             _done = false;
             this.Operation = operation;

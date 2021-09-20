@@ -147,7 +147,8 @@ namespace Microsoft.AspNetCore.Mvc.Filters
 
         private static PageApplicationModelProviderContext GetApplicationProviderContext(
             TypeInfo typeInfo
-        ) {
+        )
+        {
             var modelMetadataProvider = TestModelMetadataProvider.CreateDefaultProvider();
 
             var defaultProvider = new DefaultPageApplicationModelProvider(

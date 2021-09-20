@@ -247,7 +247,8 @@ namespace Microsoft.EntityFrameworkCore.Query
                     methodCallExpression.Method.DeclaringType
                         == typeof(EntityFrameworkQueryableExtensions)
                     && methodCallExpression.Method.IsGenericMethod
-                ) {
+                )
+                {
                     var genericMethodDefinition =
                         methodCallExpression.Method.GetGenericMethodDefinition();
                     if (genericMethodDefinition == _includeMethodInfo)
@@ -270,7 +271,8 @@ namespace Microsoft.EntityFrameworkCore.Query
                     if (
                         genericMethodDefinition == _thenIncludeAfterEnumerableMethodInfo
                         || genericMethodDefinition == _thenIncludeAfterReferenceMethodInfo
-                    ) {
+                    )
+                    {
                         var innerIncludeMethodCall = (MethodCallExpression)Visit(
                             methodCallExpression.Arguments[0]
                         );

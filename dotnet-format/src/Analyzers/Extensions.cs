@@ -81,7 +81,8 @@ namespace Microsoft.CodeAnalysis.Tools.Analyzers
             Project project,
             ImmutableHashSet<string> formattablePaths,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var severity = DiagnosticSeverity.Hidden;
             var compilation = await project.GetCompilationAsync(cancellationToken)
                 .ConfigureAwait(false);
@@ -133,7 +134,8 @@ namespace Microsoft.CodeAnalysis.Tools.Analyzers
             AnalyzerOptions? analyzerOptions,
             OptionSet options,
             Compilation compilation
-        ) {
+        )
+        {
             var severity = DiagnosticSeverity.Hidden;
 
             if (!document.TryGetSyntaxTree(out var tree))
@@ -155,7 +157,8 @@ namespace Microsoft.CodeAnalysis.Tools.Analyzers
                         descriptor,
                         out var reportDiagnostic
                     )
-                ) {
+                )
+                {
                     var configuredSeverity = reportDiagnostic.ToSeverity();
                     if (configuredSeverity > severity)
                     {
@@ -171,7 +174,8 @@ namespace Microsoft.CodeAnalysis.Tools.Analyzers
                         options,
                         out var codeStyleSeverity
                     )
-                ) {
+                )
+                {
                     if (codeStyleSeverity > severity)
                     {
                         severity = codeStyleSeverity;
@@ -192,7 +196,8 @@ namespace Microsoft.CodeAnalysis.Tools.Analyzers
                 Compilation compilation,
                 OptionSet options,
                 out DiagnosticSeverity severity
-            ) {
+            )
+            {
                 severity = DiagnosticSeverity.Hidden;
 
                 var parameters = new object?[] { descriptor.Id, compilation.Language, null };

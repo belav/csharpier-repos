@@ -11,9 +11,8 @@ namespace Microsoft.EntityFrameworkCore
 {
     public abstract class SaveChangesInterceptionInMemoryTestBase : SaveChangesInterceptionTestBase
     {
-        protected SaveChangesInterceptionInMemoryTestBase(
-            InterceptionInMemoryFixtureBase fixture
-        ) : base(fixture) { }
+        protected SaveChangesInterceptionInMemoryTestBase(InterceptionInMemoryFixtureBase fixture)
+            : base(fixture) { }
 
         protected override bool SupportsOptimisticConcurrency => false;
 

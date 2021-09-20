@@ -24,7 +24,8 @@ namespace Microsoft.CodeAnalysis.CSharp.ExpressionEvaluator
             StringBuilder builder,
             string identifier,
             out bool sawInvalidIdentifier
-        ) {
+        )
+        {
             sawInvalidIdentifier = !SyntaxFacts.IsValidIdentifier(identifier);
             if (IsPotentialKeyword(identifier))
             {
@@ -44,7 +45,8 @@ namespace Microsoft.CodeAnalysis.CSharp.ExpressionEvaluator
             int arity,
             bool escapeKeywordIdentifiers,
             out bool sawInvalidIdentifier
-        ) {
+        )
+        {
             sawInvalidIdentifier = false;
             builder.Append('<');
             for (int i = 0; i < arity; i++)
@@ -81,7 +83,8 @@ namespace Microsoft.CodeAnalysis.CSharp.ExpressionEvaluator
             ref int tupleElementIndex,
             bool escapeKeywordIdentifiers,
             out bool sawInvalidIdentifier
-        ) {
+        )
+        {
             sawInvalidIdentifier = false;
             bool sawSingleInvalidIdentifier;
             AppendQualifiedTypeName(
@@ -121,7 +124,8 @@ namespace Microsoft.CodeAnalysis.CSharp.ExpressionEvaluator
             StringBuilder builder,
             Type type,
             bool isDynamic
-        ) {
+        )
+        {
             if (isDynamic)
             {
                 Debug.Assert(type.IsObject());

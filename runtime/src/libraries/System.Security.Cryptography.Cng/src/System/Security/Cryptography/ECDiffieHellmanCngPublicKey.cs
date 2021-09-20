@@ -60,7 +60,8 @@ namespace System.Security.Cryptography
         public static ECDiffieHellmanPublicKey FromByteArray(
             byte[] publicKeyBlob,
             CngKeyBlobFormat format
-        ) {
+        )
+        {
             if (publicKeyBlob == null)
                 throw new ArgumentNullException(nameof(publicKeyBlob));
             if (format == null)

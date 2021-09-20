@@ -53,7 +53,8 @@ namespace Microsoft.AspNetCore.Http
                 && (index = host.IndexOf(':')) >= 0
                 && index < host.Length - 1
                 && host.IndexOf(':', index + 1) >= 0
-            ) {
+            )
+            {
                 // IPv6 without brackets ::1 is the only type of host with 2 or more colons
                 host = $"[{host}]";
             }
@@ -110,7 +111,8 @@ namespace Microsoft.AspNetCore.Http
                         CultureInfo.InvariantCulture,
                         out var p
                     )
-                ) {
+                )
+                {
                     return p;
                 }
 
@@ -182,7 +184,8 @@ namespace Microsoft.AspNetCore.Http
                     (index = uriComponent.IndexOf(':')) >= 0
                     && index < uriComponent.Length - 1
                     && uriComponent.IndexOf(':', index + 1) >= 0
-                ) {
+                )
+                {
                     // IPv6 without brackets ::1 is the only type of host with 2 or more colons
                 }
                 else if (uriComponent.IndexOf("xn--", StringComparison.Ordinal) >= 0)
@@ -286,7 +289,8 @@ namespace Microsoft.AspNetCore.Http
                 if (
                     pattern.StartsWith("*.", StringComparison.Ordinal)
                     && host.Length >= pattern.Length
-                ) {
+                )
+                {
                     // .example.com
                     var allowedRoot = pattern.Subsegment(1);
 
@@ -370,7 +374,8 @@ namespace Microsoft.AspNetCore.Http
             StringSegment value,
             out StringSegment host,
             out StringSegment port
-        ) {
+        )
+        {
             int index;
             port = null;
             host = null;
@@ -393,7 +398,8 @@ namespace Microsoft.AspNetCore.Http
                 (index = value.IndexOf(':')) >= 0
                 && index < value.Length - 1
                 && value.IndexOf(':', index + 1) >= 0
-            ) {
+            )
+            {
                 // IPv6 without brackets ::1 is the only type of host with 2 or more colons
                 host = $"[{value}]";
                 port = null;

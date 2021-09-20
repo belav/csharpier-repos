@@ -39,7 +39,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
         private OverriddenOrHiddenMembersResult(
             ImmutableArray<Symbol> overriddenMembers,
             ImmutableArray<Symbol> hiddenMembers
-        ) {
+        )
+        {
             _overriddenMembers = overriddenMembers;
             _hiddenMembers = hiddenMembers;
         }
@@ -47,7 +48,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
         public static OverriddenOrHiddenMembersResult Create(
             ImmutableArray<Symbol> overriddenMembers,
             ImmutableArray<Symbol> hiddenMembers
-        ) {
+        )
+        {
             if (overriddenMembers.IsEmpty && hiddenMembers.IsEmpty)
             {
                 return Empty;
@@ -61,7 +63,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
         internal static Symbol GetOverriddenMember(
             Symbol substitutedOverridingMember,
             Symbol overriddenByDefinitionMember
-        ) {
+        )
+        {
             Debug.Assert(!substitutedOverridingMember.IsDefinition);
 
             if ((object)overriddenByDefinitionMember != null)
@@ -75,21 +78,24 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                         substitutedOverridingMember.ContainingType.BaseTypeNoUseSiteDiagnostics;
                     (object)baseType != null;
                     baseType = baseType.BaseTypeNoUseSiteDiagnostics
-                ) {
+                )
+                {
                     if (
                         TypeSymbol.Equals(
                             baseType.OriginalDefinition,
                             overriddenByDefinitionContainingTypeDefinition,
                             TypeCompareKind.ConsiderEverything2
                         )
-                    ) {
+                    )
+                    {
                         if (
                             TypeSymbol.Equals(
                                 baseType,
                                 overriddenByDefinitionContaining,
                                 TypeCompareKind.ConsiderEverything2
                             )
-                        ) {
+                        )
+                        {
                             return overriddenByDefinitionMember;
                         }
 
@@ -118,7 +124,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                     overriddenMember.IsAbstract
                     || overriddenMember.IsVirtual
                     || overriddenMember.IsOverride
-                ) {
+                )
+                {
                     return overriddenMember;
                 }
             }

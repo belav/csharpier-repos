@@ -262,7 +262,8 @@ namespace System.ComponentModel.Composition.Hosting
             Type type,
             Type? metadataViewType,
             string? contractName
-        ) {
+        )
+        {
             IEnumerable<Export> exports = GetExportsCore(
                 type,
                 metadataViewType,
@@ -436,7 +437,8 @@ namespace System.ComponentModel.Composition.Hosting
         /// </exception>
         public IEnumerable<Lazy<T, TMetadataView>> GetExports<T, TMetadataView>(
             string? contractName
-        ) {
+        )
+        {
             return GetExportsCore<T, TMetadataView>(contractName);
         }
 
@@ -767,7 +769,8 @@ namespace System.ComponentModel.Composition.Hosting
 
         private IEnumerable<Lazy<T, TMetadataView>> GetExportsCore<T, TMetadataView>(
             string? contractName
-        ) {
+        )
+        {
             IEnumerable<Export> exports = GetExportsCore(
                 typeof(T),
                 typeof(TMetadataView),
@@ -816,7 +819,8 @@ namespace System.ComponentModel.Composition.Hosting
             Type? metadataViewType,
             string? contractName,
             ImportCardinality cardinality
-        ) {
+        )
+        {
             // Only 'type' cannot be null - the other parameters have sensible defaults.
             Requires.NotNull(type, nameof(type));
 
@@ -851,7 +855,8 @@ namespace System.ComponentModel.Composition.Hosting
             Type metadataViewType,
             string contractName,
             ImportCardinality cardinality
-        ) {
+        )
+        {
             if (type == null)
             {
                 throw new ArgumentNullException(nameof(type));

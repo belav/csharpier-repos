@@ -277,7 +277,8 @@ namespace Microsoft.CodeAnalysis.UnitTests
             string baseDirectory,
             IEnumerable<String> searchPaths,
             string expected
-        ) {
+        )
+        {
             string actual = FileUtilities.ResolveRelativePath(
                 path,
                 basePath,

@@ -110,7 +110,8 @@ namespace System.Security.Cryptography.Pkcs
                     _parentSignerInfo != null
                     || _unsignedAttributes == null
                     || _unsignedAttributes.Length == 0
-                ) {
+                )
+                {
                     return new SignerInfoCollection();
                 }
 
@@ -215,7 +216,8 @@ namespace System.Security.Cryptography.Pkcs
         private static void AddUnsignedAttribute(
             ref SignerInfoAsn mySigner,
             AsnEncodedData unsignedAttribute
-        ) {
+        )
+        {
             int existingAttribute =
                 mySigner.UnsignedAttributes == null
                     ? -1
@@ -263,7 +265,8 @@ namespace System.Security.Cryptography.Pkcs
         private static void RemoveUnsignedAttribute(
             ref SignerInfoAsn mySigner,
             AsnEncodedData unsignedAttribute
-        ) {
+        )
+        {
             (int outerIndex, int innerIndex) = FindAttributeLocation(
                 mySigner.UnsignedAttributes,
                 unsignedAttribute,
@@ -548,7 +551,8 @@ namespace System.Security.Cryptography.Pkcs
         private static X509Certificate2? FindSignerCertificate(
             SubjectIdentifier signerIdentifier,
             X509Certificate2Collection? extraStore
-        ) {
+        )
+        {
             if (extraStore == null || extraStore.Count == 0)
             {
                 return null;
@@ -728,7 +732,8 @@ namespace System.Security.Cryptography.Pkcs
             X509Certificate2Collection extraStore,
             X509Certificate2 certificate,
             bool verifySignatureOnly
-        ) {
+        )
+        {
             CmsSignature? signatureProcessor = CmsSignature.ResolveAndVerifyKeyType(
                 SignatureAlgorithm.Value!,
                 key: null
@@ -794,7 +799,8 @@ namespace System.Security.Cryptography.Pkcs
             CmsSignature signatureProcessor,
             X509Certificate2 certificate,
             bool compatMode
-        ) {
+        )
+        {
             using (IncrementalHash? hasher = PrepareDigest(compatMode))
             {
                 if (hasher == null)
@@ -843,7 +849,8 @@ namespace System.Security.Cryptography.Pkcs
 
         internal static CryptographicAttributeObjectCollection MakeAttributeCollection(
             AttributeAsn[]? attributes
-        ) {
+        )
+        {
             var coll = new CryptographicAttributeObjectCollection();
 
             if (attributes == null)
@@ -876,7 +883,8 @@ namespace System.Security.Cryptography.Pkcs
             AttributeAsn[] attributes,
             Oid oid,
             int startIndex = 0
-        ) {
+        )
+        {
             if (attributes != null)
             {
                 for (int i = startIndex; i < attributes.Length; i++)
@@ -895,7 +903,8 @@ namespace System.Security.Cryptography.Pkcs
             ReadOnlyMemory<byte>[] attributeValues,
             ReadOnlySpan<byte> asnEncodedData,
             out bool isOnlyValue
-        ) {
+        )
+        {
             if (attributeValues != null)
             {
                 for (int i = 0; i < attributeValues.Length; i++)
@@ -917,7 +926,8 @@ namespace System.Security.Cryptography.Pkcs
             AttributeAsn[]? attributes,
             AsnEncodedData attribute,
             out bool isOnlyValue
-        ) {
+        )
+        {
             if (attributes != null)
             {
                 for (int outerIndex = 0;; outerIndex++)

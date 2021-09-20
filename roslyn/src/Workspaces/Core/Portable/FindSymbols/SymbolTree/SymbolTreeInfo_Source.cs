@@ -37,7 +37,8 @@ namespace Microsoft.CodeAnalysis.FindSymbols
             Checksum checksum,
             bool loadOnly,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var solution = project.Solution;
             var workspace = solution.Workspace;
             var solutionKey = SolutionKey.ToSolutionKey(solution);
@@ -85,7 +86,8 @@ namespace Microsoft.CodeAnalysis.FindSymbols
         public static Task<Checksum> GetSourceSymbolsChecksumAsync(
             Project project,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var lazy = s_projectToSourceChecksum.GetValue(
                 project.State,
                 p =>
@@ -101,7 +103,8 @@ namespace Microsoft.CodeAnalysis.FindSymbols
         private static async Task<Checksum> ComputeSourceSymbolsChecksumAsync(
             ProjectState projectState,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             // The SymbolTree for source is built from the source-symbols from the project's compilation's
             // assembly.  Specifically, we only get the name, kind and parent/child relationship of all the
             // child symbols.  So we want to be able to reuse the index as long as none of these have
@@ -152,7 +155,8 @@ namespace Microsoft.CodeAnalysis.FindSymbols
             Project project,
             Checksum checksum,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var compilation = await project.GetCompilationAsync(cancellationToken)
                 .ConfigureAwait(false);
             var assembly = compilation?.Assembly;
@@ -186,7 +190,8 @@ namespace Microsoft.CodeAnalysis.FindSymbols
             INamespaceSymbol globalNamespace,
             ArrayBuilder<BuilderNode> list,
             Action<ISymbol, MultiDictionary<string, ISymbol>> lookup
-        ) {
+        )
+        {
             // Add all child members
             var symbolMap = AllocateSymbolMap();
             try
@@ -220,7 +225,8 @@ namespace Microsoft.CodeAnalysis.FindSymbols
             MultiDictionary<string, ISymbol>.ValueSet symbolsWithSameName,
             ArrayBuilder<BuilderNode> list,
             Action<ISymbol, MultiDictionary<string, ISymbol>> lookup
-        ) {
+        )
+        {
             var node = new BuilderNode(name, parentIndex);
             var nodeIndex = list.Count;
             list.Add(node);
@@ -254,7 +260,8 @@ namespace Microsoft.CodeAnalysis.FindSymbols
             ISymbol symbol,
             MultiDictionary<string, ISymbol> symbolMap,
             Func<ISymbol, bool> useSymbol
-        ) {
+        )
+        {
             if (symbol is INamespaceOrTypeSymbol nt)
             {
                 foreach (var member in nt.GetMembers())

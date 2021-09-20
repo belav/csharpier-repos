@@ -20,7 +20,8 @@ namespace System.Net.WebSockets
             int receiveBufferSize,
             TimeSpan keepAliveInterval,
             ArraySegment<byte> internalBuffer
-        ) {
+        )
+        {
             ValidateOptions(subProtocol, receiveBufferSize, MinSendBufferSize, keepAliveInterval);
             WebSocketValidate.ValidateArraySegment(internalBuffer, nameof(internalBuffer));
             WebSocketBuffer.Validate(
@@ -45,7 +46,8 @@ namespace System.Net.WebSockets
             int receiveBufferSize,
             TimeSpan keepAliveInterval,
             ArraySegment<byte> internalBuffer
-        ) {
+        )
+        {
             HttpListenerWebSocketContext? webSocketContext = null;
             try
             {
@@ -185,7 +187,8 @@ namespace System.Net.WebSockets
             int offset,
             int count,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             return string.Format(
                 CultureInfo.InvariantCulture,
                 "offset: {0}, count: {1}, cancellationToken.CanBeCanceled: {2}",

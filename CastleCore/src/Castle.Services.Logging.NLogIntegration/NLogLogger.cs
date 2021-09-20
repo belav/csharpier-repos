@@ -195,7 +195,8 @@ namespace Castle.Services.Logging.NLogIntegration
             IFormatProvider formatProvider,
             string format,
             params object[] args
-        ) {
+        )
+        {
             Log(LogLevel.Trace, exception, formatProvider, format, args);
         }
 
@@ -275,7 +276,8 @@ namespace Castle.Services.Logging.NLogIntegration
             IFormatProvider formatProvider,
             string format,
             params object[] args
-        ) {
+        )
+        {
             Log(LogLevel.Debug, exception, formatProvider, format, args);
         }
 
@@ -355,7 +357,8 @@ namespace Castle.Services.Logging.NLogIntegration
             IFormatProvider formatProvider,
             string format,
             params object[] args
-        ) {
+        )
+        {
             Log(LogLevel.Error, exception, formatProvider, format, args);
         }
 
@@ -435,7 +438,8 @@ namespace Castle.Services.Logging.NLogIntegration
             IFormatProvider formatProvider,
             string format,
             params object[] args
-        ) {
+        )
+        {
             Log(LogLevel.Fatal, exception, formatProvider, format, args);
         }
 
@@ -515,7 +519,8 @@ namespace Castle.Services.Logging.NLogIntegration
             IFormatProvider formatProvider,
             string format,
             params object[] args
-        ) {
+        )
+        {
             Log(LogLevel.Info, exception, formatProvider, format, args);
         }
 
@@ -595,7 +600,8 @@ namespace Castle.Services.Logging.NLogIntegration
             IFormatProvider formatProvider,
             string format,
             params object[] args
-        ) {
+        )
+        {
             Log(LogLevel.Warn, exception, formatProvider, format, args);
         }
 
@@ -637,7 +643,8 @@ namespace Castle.Services.Logging.NLogIntegration
             IFormatProvider formatProvider,
             string format,
             object[] args
-        ) {
+        )
+        {
             Logger.Log(
                 typeof(NLogLogger),
                 new LogEventInfo(logLevel, Logger.Name, format)
@@ -654,7 +661,8 @@ namespace Castle.Services.Logging.NLogIntegration
             IFormatProvider formatProvider,
             string format,
             object[] args
-        ) {
+        )
+        {
             Logger.Log(
                 typeof(NLogLogger),
                 new LogEventInfo(logLevel, Logger.Name, format)

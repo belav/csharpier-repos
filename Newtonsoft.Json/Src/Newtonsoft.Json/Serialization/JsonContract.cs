@@ -322,13 +322,15 @@ namespace Newtonsoft.Json.Serialization
 
         internal static SerializationCallback CreateSerializationCallback(
             MethodInfo callbackMethodInfo
-        ) {
+        )
+        {
             return (o, context) => callbackMethodInfo.Invoke(o, new object[] { context });
         }
 
         internal static SerializationErrorCallback CreateSerializationErrorCallback(
             MethodInfo callbackMethodInfo
-        ) {
+        )
+        {
             return (o, context, econtext) =>
                 callbackMethodInfo.Invoke(o, new object[] { context, econtext });
         }

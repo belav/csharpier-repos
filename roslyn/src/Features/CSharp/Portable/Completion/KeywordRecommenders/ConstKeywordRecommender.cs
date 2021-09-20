@@ -38,7 +38,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Completion.KeywordRecommenders
             int position,
             CSharpSyntaxContext context,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             return IsMemberDeclarationContext(context, cancellationToken)
                 || IsLocalVariableDeclaration(context);
         }
@@ -46,7 +47,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Completion.KeywordRecommenders
         private static bool IsMemberDeclarationContext(
             CSharpSyntaxContext context,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             return context.SyntaxTree.IsGlobalMemberDeclarationContext(
                     context.Position,
                     s_validGlobalModifiers,

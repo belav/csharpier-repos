@@ -118,7 +118,8 @@ namespace System.Collections.Generic
             this IList<T> list,
             Action<TArg1> errorAction,
             TArg1 errorArg1
-        ) {
+        )
+        {
             Contract.Assert(list != null);
             Contract.Assert(errorAction != null);
 
@@ -206,7 +207,8 @@ namespace System.Collections.Generic
             this TValue[] array,
             Func<TValue, TKey> keySelector,
             IEqualityComparer<TKey> comparer
-        ) {
+        )
+        {
             Contract.Assert(array != null);
             Contract.Assert(keySelector != null);
 
@@ -229,7 +231,8 @@ namespace System.Collections.Generic
             this IList<TValue> list,
             Func<TValue, TKey> keySelector,
             IEqualityComparer<TKey> comparer
-        ) {
+        )
+        {
             Contract.Assert(list != null);
             Contract.Assert(keySelector != null);
 
@@ -248,7 +251,8 @@ namespace System.Collections.Generic
             this IEnumerable<TValue> enumerable,
             Func<TValue, TKey> keySelector,
             IEqualityComparer<TKey> comparer
-        ) {
+        )
+        {
             Contract.Assert(enumerable != null);
             Contract.Assert(keySelector != null);
 
@@ -277,7 +281,8 @@ namespace System.Collections.Generic
             IList<TValue> list,
             Func<TValue, TKey> keySelector,
             IEqualityComparer<TKey> comparer
-        ) {
+        )
+        {
             Contract.Assert(list != null);
             Contract.Assert(keySelector != null);
 

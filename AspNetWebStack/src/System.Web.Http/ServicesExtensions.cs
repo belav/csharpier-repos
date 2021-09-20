@@ -40,19 +40,22 @@ namespace System.Web.Http
     {
         public static IEnumerable<ModelBinderProvider> GetModelBinderProviders(
             this ServicesContainer services
-        ) {
+        )
+        {
             return services.GetServices<ModelBinderProvider>();
         }
 
         public static ModelMetadataProvider GetModelMetadataProvider(
             this ServicesContainer services
-        ) {
+        )
+        {
             return services.GetServiceOrThrow<ModelMetadataProvider>();
         }
 
         public static IEnumerable<ModelValidatorProvider> GetModelValidatorProviders(
             this ServicesContainer services
-        ) {
+        )
+        {
             return services.GetServices<ModelValidatorProvider>();
         }
 
@@ -74,7 +77,8 @@ namespace System.Web.Http
         /// </returns>
         public static IHttpControllerActivator GetHttpControllerActivator(
             this ServicesContainer services
-        ) {
+        )
+        {
             return services.GetServiceOrThrow<IHttpControllerActivator>();
         }
 
@@ -98,7 +102,8 @@ namespace System.Web.Http
         /// </summary>
         public static IEnumerable<ValueProviderFactory> GetValueProviderFactories(
             this ServicesContainer services
-        ) {
+        )
+        {
             return services.GetServices<ValueProviderFactory>();
         }
 
@@ -109,7 +114,8 @@ namespace System.Web.Http
 
         public static IHostBufferPolicySelector GetHostBufferPolicySelector(
             this ServicesContainer services
-        ) {
+        )
+        {
             return services.GetService<IHostBufferPolicySelector>();
         }
 
@@ -118,7 +124,8 @@ namespace System.Web.Http
         /// </summary>
         public static IHttpControllerSelector GetHttpControllerSelector(
             this ServicesContainer services
-        ) {
+        )
+        {
             return services.GetServiceOrThrow<IHttpControllerSelector>();
         }
 
@@ -129,7 +136,8 @@ namespace System.Web.Http
 
         public static IHttpControllerTypeResolver GetHttpControllerTypeResolver(
             this ServicesContainer services
-        ) {
+        )
+        {
             return services.GetServiceOrThrow<IHttpControllerTypeResolver>();
         }
 
@@ -140,7 +148,8 @@ namespace System.Web.Http
 
         public static IDocumentationProvider GetDocumentationProvider(
             this ServicesContainer services
-        ) {
+        )
+        {
             return services.GetService<IDocumentationProvider>();
         }
 
@@ -159,13 +168,15 @@ namespace System.Web.Http
         /// <returns>The collection of registered unhandled exception loggers.</returns>
         public static IEnumerable<IExceptionLogger> GetExceptionLoggers(
             this ServicesContainer services
-        ) {
+        )
+        {
             return services.GetServices<IExceptionLogger>();
         }
 
         public static IEnumerable<IFilterProvider> GetFilterProviders(
             this ServicesContainer services
-        ) {
+        )
+        {
             return services.GetServices<IFilterProvider>();
         }
 

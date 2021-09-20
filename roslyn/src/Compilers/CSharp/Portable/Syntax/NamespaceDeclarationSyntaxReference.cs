@@ -20,14 +20,16 @@ namespace Microsoft.CodeAnalysis.CSharp
         protected override SyntaxNode Translate(
             SyntaxReference reference,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             return GetSyntax(reference, cancellationToken);
         }
 
         internal static SyntaxNode GetSyntax(
             SyntaxReference reference,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var node = (CSharpSyntaxNode)reference.GetSyntax(cancellationToken);
 
             // If the node is a name syntax, it's something like "X" or "X.Y" in :

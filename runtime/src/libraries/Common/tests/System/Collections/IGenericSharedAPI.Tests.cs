@@ -76,7 +76,8 @@ namespace System.Collections.Tests
         /// </summary>
         protected override IEnumerable<ModifyEnumerable> GetModifyEnumerables(
             ModifyOperation operations
-        ) {
+        )
+        {
             if ((operations & ModifyOperation.Add) == ModifyOperation.Add)
             {
                 yield return (IEnumerable<T> enumerable) =>
@@ -362,7 +363,8 @@ namespace System.Collections.Tests
         [MemberData(nameof(ValidCollectionSizes))]
         public void IGenericSharedAPI_Contains_ValidValueOnCollectionNotContainingThatValue(
             int count
-        ) {
+        )
+        {
             IEnumerable<T> collection = GenericIEnumerableFactory(count);
             int seed = 4315;
             T item = CreateT(seed++);
@@ -375,7 +377,8 @@ namespace System.Collections.Tests
         [MemberData(nameof(ValidCollectionSizes))]
         public void IGenericSharedAPI_IGenericSharedAPI_Contains_ValidValueOnCollectionContainingThatValue(
             int count
-        ) {
+        )
+        {
             IEnumerable<T> collection = GenericIEnumerableFactory(count);
             foreach (T item in collection)
                 Assert.True(Contains(collection, item));
@@ -385,7 +388,8 @@ namespace System.Collections.Tests
         [MemberData(nameof(ValidCollectionSizes))]
         public void IGenericSharedAPI_Contains_DefaultValueOnCollectionNotContainingDefaultValue(
             int count
-        ) {
+        )
+        {
             IEnumerable<T> collection = GenericIEnumerableFactory(count);
             if (DefaultValueAllowed)
                 Assert.False(Contains(collection, default(T)));
@@ -395,7 +399,8 @@ namespace System.Collections.Tests
         [MemberData(nameof(ValidCollectionSizes))]
         public void IGenericSharedAPI_Contains_DefaultValueOnCollectionContainingDefaultValue(
             int count
-        ) {
+        )
+        {
             IEnumerable<T> collection = GenericIEnumerableFactory(count);
             if (DefaultValueAllowed && !IsReadOnly)
             {
@@ -460,7 +465,8 @@ namespace System.Collections.Tests
         [MemberData(nameof(ValidCollectionSizes))]
         public void IGenericSharedAPI_CopyTo_NegativeIndex_ThrowsArgumentOutOfRangeException(
             int count
-        ) {
+        )
+        {
             IEnumerable<T> collection = GenericIEnumerableFactory(count);
             T[] array = new T[count];
             Assert.Throws<ArgumentOutOfRangeException>(() => CopyTo(collection, array, -1));
@@ -473,7 +479,8 @@ namespace System.Collections.Tests
         [MemberData(nameof(ValidCollectionSizes))]
         public void IGenericSharedAPI_CopyTo_IndexEqualToArrayCount_ThrowsArgumentException(
             int count
-        ) {
+        )
+        {
             IEnumerable<T> collection = GenericIEnumerableFactory(count);
             T[] array = new T[count];
             if (count > 0)
@@ -486,7 +493,8 @@ namespace System.Collections.Tests
         [MemberData(nameof(ValidCollectionSizes))]
         public void IGenericSharedAPI_CopyTo_IndexLargerThanArrayCount_ThrowsAnyArgumentException(
             int count
-        ) {
+        )
+        {
             IEnumerable<T> collection = GenericIEnumerableFactory(count);
             T[] array = new T[count];
             Assert.Throws(
@@ -499,7 +507,8 @@ namespace System.Collections.Tests
         [MemberData(nameof(ValidCollectionSizes))]
         public void IGenericSharedAPI_CopyTo_NotEnoughSpaceInOffsettedArray_ThrowsArgumentException(
             int count
-        ) {
+        )
+        {
             if (count > 0) // Want the T array to have at least 1 element
             {
                 IEnumerable<T> collection = GenericIEnumerableFactory(count);

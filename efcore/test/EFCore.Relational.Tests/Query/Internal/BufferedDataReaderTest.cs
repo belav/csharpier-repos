@@ -225,7 +225,8 @@ namespace Microsoft.EntityFrameworkCore.Query.Internal
             bool async,
             T expectedResult,
             params object[][] dataReaderContents
-        ) {
+        )
+        {
             var reader = new FakeDbDataReader(new[] { "name" }, dataReaderContents);
             var columnType = typeof(T);
             if (!columnType.IsValueType)

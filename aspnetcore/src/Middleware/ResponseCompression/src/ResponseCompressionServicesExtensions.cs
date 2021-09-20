@@ -38,7 +38,8 @@ namespace Microsoft.AspNetCore.Builder
         public static IServiceCollection AddResponseCompression(
             this IServiceCollection services,
             Action<ResponseCompressionOptions> configureOptions
-        ) {
+        )
+        {
             if (services == null)
             {
                 throw new ArgumentNullException(nameof(services));

@@ -175,7 +175,8 @@ namespace Templates.Test
         private async Task ValidatePublishedFiles(
             AspNetProcess aspNetProcess,
             string[] expectedContentFiles
-        ) {
+        )
+        {
             foreach (var file in expectedContentFiles)
             {
                 var response = await aspNetProcess.SendRequest(file);

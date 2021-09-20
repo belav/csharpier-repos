@@ -23,7 +23,8 @@ namespace System.Web.WebPages.Deployment.Test
             string version,
             string culture = "neutral",
             string publicKeyToken = "31bf3856ad364e35"
-        ) {
+        )
+        {
             return AssemblyNameFor(
                 "System.Web.WebPages.Deployment",
                 version,
@@ -42,7 +43,8 @@ namespace System.Web.WebPages.Deployment.Test
             string version,
             string culture = "neutral",
             string publicKeyToken = "31bf3856ad364e35"
-        ) {
+        )
+        {
             string formatString = "{0}, Version={1}, Culture={2}, PublicKeyToken={3}";
 
             return string.Format(

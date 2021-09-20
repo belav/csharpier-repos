@@ -44,7 +44,8 @@ namespace Microsoft.Win32.RegistryTests
                     permissionCheck: RegistryKeyPermissionCheck.Default,
                     rights: RegistryRights.WriteKey
                 )
-            ) {
+            )
+            {
                 Assert.Throws<UnauthorizedAccessException>(() => rk.CreateSubKey(name));
                 Assert.Throws<UnauthorizedAccessException>(() => rk.SetValue(name, "String"));
                 Assert.Throws<UnauthorizedAccessException>(() => rk.DeleteValue(name));
@@ -59,7 +60,8 @@ namespace Microsoft.Win32.RegistryTests
                     permissionCheck: RegistryKeyPermissionCheck.ReadSubTree,
                     rights: RegistryRights.ReadKey
                 )
-            ) {
+            )
+            {
                 Assert.Throws<UnauthorizedAccessException>(() => rk.CreateSubKey(name));
                 Assert.Throws<UnauthorizedAccessException>(() => rk.SetValue(name, "String"));
                 Assert.Throws<UnauthorizedAccessException>(() => rk.DeleteValue(name));
@@ -92,7 +94,8 @@ namespace Microsoft.Win32.RegistryTests
                     permissionCheck: RegistryKeyPermissionCheck.ReadSubTree,
                     rights: RegistryRights.WriteKey
                 )
-            ) {
+            )
+            {
                 Assert.Throws<UnauthorizedAccessException>(() => rk.CreateSubKey(name));
                 Assert.Throws<UnauthorizedAccessException>(() => rk.SetValue(name, "String"));
                 Assert.Throws<UnauthorizedAccessException>(() => rk.DeleteValue(name));
@@ -114,7 +117,8 @@ namespace Microsoft.Win32.RegistryTests
                     RegistryKeyPermissionCheck.ReadWriteSubTree,
                     RegistryRights.SetValue | RegistryRights.QueryValues
                 )
-            ) {
+            )
+            {
                 rk.SetValue(valueName, expectedValue);
                 Assert.Equal(expectedValue, rk.GetValue(valueName));
             }
@@ -125,7 +129,8 @@ namespace Microsoft.Win32.RegistryTests
                     RegistryKeyPermissionCheck.ReadWriteSubTree,
                     RegistryRights.CreateSubKey
                 )
-            ) {
+            )
+            {
                 rk.CreateSubKey(valueName);
                 Assert.NotNull(rk.OpenSubKey(valueName));
             }

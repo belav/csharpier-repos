@@ -31,7 +31,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Options
         public LocalUserRegistryOptionPersister(
             IThreadingContext threadingContext,
             IServiceProvider serviceProvider
-        ) {
+        )
+        {
             // Starting with Dev16, the ILocalRegistry service is expected to be free-threaded, and aquiring it from the
             // global service provider is expected to complete without any UI thread marshaling requirements. However,
             // since none of this is publicly documented, we keep this assertion for maximum compatibility assurance.
@@ -182,7 +183,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Options
                     if (
                         Marshal.SizeOf(Enum.GetUnderlyingType(optionKey.Option.Type))
                         > Marshal.SizeOf(typeof(int))
-                    ) {
+                    )
+                    {
                         subKey.SetValue(key, (long)value, RegistryValueKind.QWord);
                     }
                     else

@@ -44,7 +44,8 @@ internal static partial class Interop
                 Status majorStatus,
                 Status minorStatus,
                 string? helpText
-            ) {
+            )
+            {
                 string? majorError = GetGssApiDisplayStatus(majorStatus, isMinor: false);
                 string errorMessage;
 

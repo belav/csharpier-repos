@@ -96,7 +96,8 @@ namespace System
                             DisallowedSimpleAssemblyNameSuffix,
                             StringComparison.OrdinalIgnoreCase
                         )
-                    ) {
+                    )
+                    {
                         throw new ArgumentException(
                             SR.Format(
                                 SR.Argument_InvalidStartupHookSimpleAssemblyName,

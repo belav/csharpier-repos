@@ -26,7 +26,8 @@ namespace Microsoft.CodeAnalysis.UnitTests.Formatting
             bool debugMode = false,
             OptionsCollection? changedOptionSet = null,
             bool testWithTransformation = true
-        ) {
+        )
+        {
             return AssertFormatAsync(
                 expected,
                 code,
@@ -49,7 +50,8 @@ namespace Microsoft.CodeAnalysis.UnitTests.Formatting
             OptionsCollection? changedOptionSet = null,
             bool treeCompare = true,
             ParseOptions? parseOptions = null
-        ) {
+        )
+        {
             using (var workspace = new AdhocWorkspace())
             {
                 var project = workspace.CurrentSolution.AddProject(
@@ -108,7 +110,8 @@ namespace Microsoft.CodeAnalysis.UnitTests.Formatting
             OptionSet optionSet,
             bool treeCompare = true,
             ParseOptions? parseOptions = null
-        ) {
+        )
+        {
             var newRootNode = Formatter.Format(
                 root,
                 spans,
@@ -136,7 +139,8 @@ namespace Microsoft.CodeAnalysis.UnitTests.Formatting
             IEnumerable<TextSpan> spans,
             OptionSet optionSet,
             SourceText sourceText
-        ) {
+        )
+        {
             var result = Formatter.GetFormattedTextChanges(root, spans, workspace, optionSet);
             AssertResult(expected, sourceText, result);
         }
@@ -145,7 +149,8 @@ namespace Microsoft.CodeAnalysis.UnitTests.Formatting
             string expected,
             SourceText sourceText,
             IList<TextChange> result
-        ) {
+        )
+        {
             var actual = sourceText.WithChanges(result).ToString();
             AssertEx.EqualOrDiff(expected, actual);
         }

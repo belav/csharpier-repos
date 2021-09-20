@@ -49,18 +49,20 @@ namespace Roslyn.Test.Utilities
             IReadOnlyList<BeforeAfterTestAttribute> beforeAfterAttributes,
             ExceptionAggregator aggregator,
             CancellationTokenSource cancellationTokenSource
-        ) : base(
-            test,
-            messageBus,
-            testClass,
-            constructorArguments,
-            testMethod,
-            testMethodArguments,
-            skipReason,
-            beforeAfterAttributes,
-            aggregator,
-            cancellationTokenSource
-        ) {
+        )
+            : base(
+                test,
+                messageBus,
+                testClass,
+                constructorArguments,
+                testMethod,
+                testMethodArguments,
+                skipReason,
+                beforeAfterAttributes,
+                aggregator,
+                cancellationTokenSource
+            )
+        {
             SharedData = sharedData;
         }
 
@@ -77,7 +79,8 @@ namespace Roslyn.Test.Utilities
                         await SharedData.TestSerializationGate.DisposableWaitAsync(
                             CancellationToken.None
                         )
-                    ) {
+                    )
+                    {
                         try
                         {
                             Debug.Assert(
@@ -136,7 +139,8 @@ namespace Roslyn.Test.Utilities
                     TestExportJoinableTaskContext.GetEffectiveSynchronizationContext()
                     is DispatcherSynchronizationContext
                 )
-            ) {
+            )
+            {
                 throw new InvalidOperationException(
                     $"This test requires {nameof(WpfFactAttribute)} because '{reason}' but is missing {nameof(WpfFactAttribute)}. Either the attribute should be changed, or the reason it needs an STA thread audited."
                 );

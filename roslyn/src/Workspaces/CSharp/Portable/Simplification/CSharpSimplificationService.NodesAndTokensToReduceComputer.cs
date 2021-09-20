@@ -36,7 +36,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Simplification
             public static ImmutableArray<NodeOrTokenToReduce> Compute(
                 SyntaxNode root,
                 Func<SyntaxNodeOrToken, bool> isNodeOrTokenOutsideSimplifySpans
-            ) {
+            )
+            {
                 var reduceNodeComputer = new NodesAndTokensToReduceComputer(
                     isNodeOrTokenOutsideSimplifySpans
                 );
@@ -90,7 +91,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Simplification
                                 descendIntoTrivia: true
                             )
                             .Any(s_hasSimplifierAnnotation)
-                    ) {
+                    )
+                    {
                         _insideSpeculatedNode = true;
                         var rewrittenNode = base.Visit(node);
                         _nodesAndTokensToReduce.Add(
@@ -134,7 +136,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Simplification
                     _simplifyAllDescendants
                     && !_insideSpeculatedNode
                     && !token.IsKind(SyntaxKind.None)
-                ) {
+                )
+                {
                     _nodesAndTokensToReduce.Add(
                         new NodeOrTokenToReduce(
                             token,

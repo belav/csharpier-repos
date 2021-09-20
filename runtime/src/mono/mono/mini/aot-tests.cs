@@ -74,7 +74,8 @@ class Tests
             int i7,
             int i8,
             T t
-        ) {
+        )
+        {
             return t;
         }
         public static T Get_T3(double d, int i, T t)
@@ -415,7 +416,8 @@ class Tests
             string s8,
             bool b,
             Struct7 s
-        ) {
+        )
+        {
             return s.value;
         }
     }
@@ -531,7 +533,8 @@ class Tests
             long? i36,
             long? i37,
             long? i38
-        ) {
+        )
+        {
             return (int)((i1 + i8 + i11 + i18 + i21 + i28 + i31 + i38).Value);
         }
 
@@ -718,7 +721,8 @@ class Tests
 
     private static Dictionary<long, TValue> ConvertDictionary<TValue>(
         Dictionary<long, IList<TValue>> source
-    ) {
+    )
+    {
         return source.ToDictionary(pair => pair.Key, pair => pair.Value[0]);
     }
 

@@ -16,11 +16,13 @@ namespace Microsoft.CodeAnalysis.PullMemberUp
             Solution solution,
             INamedTypeSymbol destination,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             // Make sure destination is class or interface since it could be ErrorTypeSymbol
             if (
                 destination.TypeKind != TypeKind.Interface && destination.TypeKind != TypeKind.Class
-            ) {
+            )
+            {
                 return false;
             }
 

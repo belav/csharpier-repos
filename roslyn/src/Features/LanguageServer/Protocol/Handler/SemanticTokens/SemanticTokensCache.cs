@@ -80,7 +80,8 @@ namespace Microsoft.CodeAnalysis.LanguageServer.Handler.SemanticTokens
             Uri uri,
             LSP.SemanticTokens tokens,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             Contract.ThrowIfNull(tokens.ResultId);
 
             using (await _semaphore.DisposableWaitAsync(cancellationToken).ConfigureAwait(false))
@@ -114,7 +115,8 @@ namespace Microsoft.CodeAnalysis.LanguageServer.Handler.SemanticTokens
             Uri uri,
             string resultId,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             using (await _semaphore.DisposableWaitAsync(cancellationToken).ConfigureAwait(false))
             {
                 if (!_tokens.TryGetValue(uri, out var tokenSets))

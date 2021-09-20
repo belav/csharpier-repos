@@ -208,11 +208,13 @@ namespace Microsoft.Extensions.DependencyInjection
             public void PopulateFeature(
                 IEnumerable<ApplicationPart> parts,
                 ViewComponentFeature feature
-            ) {
+            )
+            {
                 foreach (
                     var type in parts.OfType<IApplicationPartTypeProvider>()
                         .SelectMany(p => p.Types)
-                ) {
+                )
+                {
                     feature.ViewComponents.Add(type);
                 }
             }

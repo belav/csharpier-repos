@@ -461,7 +461,8 @@ namespace JIT.HardwareIntrinsics.Arm
             Vector128<UInt32> op1,
             UInt32 result,
             [CallerMemberName] string method = ""
-        ) {
+        )
+        {
             UInt32[] inArray1 = new UInt32[Op1ElementCount];
 
             Unsafe.WriteUnaligned(ref Unsafe.As<UInt32, byte>(ref inArray1[0]), op1);
@@ -486,7 +487,8 @@ namespace JIT.HardwareIntrinsics.Arm
             UInt32[] firstOp,
             UInt32 result,
             [CallerMemberName] string method = ""
-        ) {
+        )
+        {
             bool succeeded = true;
 
             if (firstOp[ElementIndex] != result)

@@ -19,7 +19,8 @@ namespace Microsoft.AspNetCore.Mvc.Razor.RuntimeCompilation
         public FileProviderRazorProjectFileSystem(
             RuntimeCompilationFileProvider fileProvider,
             IWebHostEnvironment hostingEnvironment
-        ) {
+        )
+        {
             if (fileProvider == null)
             {
                 throw new ArgumentNullException(nameof(fileProvider));
@@ -69,7 +70,8 @@ namespace Microsoft.AspNetCore.Mvc.Razor.RuntimeCompilation
             IDirectoryContents directory,
             string basePath,
             string prefix
-        ) {
+        )
+        {
             if (directory.Exists)
             {
                 foreach (var fileInfo in directory)
@@ -92,7 +94,8 @@ namespace Microsoft.AspNetCore.Mvc.Razor.RuntimeCompilation
                             Path.GetExtension(fileInfo.Name),
                             StringComparison.OrdinalIgnoreCase
                         )
-                    ) {
+                    )
+                    {
                         var filePath = prefix + "/" + fileInfo.Name;
 
                         yield return new FileProviderRazorProjectItem(

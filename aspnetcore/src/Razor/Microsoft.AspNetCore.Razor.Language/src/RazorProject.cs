@@ -77,7 +77,8 @@ namespace Microsoft.AspNetCore.Razor.Language
             string basePath,
             string path,
             string fileName
-        ) {
+        )
+        {
             basePath = NormalizeAndEnsureValidPath(basePath);
             path = NormalizeAndEnsureValidPath(path);
             if (string.IsNullOrEmpty(fileName))
@@ -112,7 +113,8 @@ namespace Microsoft.AspNetCore.Razor.Language
                     fileName.Length,
                     StringComparison.Ordinal
                 ) == 0
-            ) {
+            )
+            {
                 // If the specified path is for the file hierarchy being constructed, then the first file that applies
                 // to it is in a parent directory.
                 builder = new StringBuilder(
@@ -134,7 +136,8 @@ namespace Microsoft.AspNetCore.Razor.Language
                 maxDepth-- > 0
                 && index > basePath.Length
                 && (index = path.LastIndexOf('/', index - 1)) != -1
-            ) {
+            )
+            {
                 builder.Length = index + 1;
                 builder.Append(fileName);
 

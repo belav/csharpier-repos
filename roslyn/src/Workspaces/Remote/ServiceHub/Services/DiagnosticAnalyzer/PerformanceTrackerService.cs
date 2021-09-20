@@ -64,7 +64,8 @@ namespace Microsoft.CodeAnalysis.Remote.Diagnostics
             double minLOFValue,
             double averageThreshold,
             double stddevThreshold
-        ) {
+        )
+        {
             _minLOFValue = minLOFValue;
             _averageThreshold = averageThreshold;
             _stddevThreshold = stddevThreshold;
@@ -145,7 +146,8 @@ namespace Microsoft.CodeAnalysis.Remote.Diagnostics
         private static string SnapshotLogger(
             IEnumerable<AnalyzerPerformanceInfo> snapshots,
             int unitCount
-        ) {
+        )
+        {
             using var pooledObject = SharedPools.Default<StringBuilder>().GetPooledObject();
             var sb = pooledObject.Object;
 
@@ -182,7 +184,8 @@ namespace Microsoft.CodeAnalysis.Remote.Diagnostics
                 double averageThreshold,
                 double stddevThreshold,
                 List<ExpensiveAnalyzerInfo> badAnalyzers
-            ) {
+            )
+            {
                 _pooledObjects = SharedPools.Default<List<IDisposable>>().GetPooledObject();
 
                 _owner = owner;
@@ -196,7 +199,8 @@ namespace Microsoft.CodeAnalysis.Remote.Diagnostics
 
             public void Report(
                 Dictionary<string, (double average, double stddev)> rawPerformanceData
-            ) {
+            )
+            {
                 // this is implementation of local outlier factor (LOF)
                 // see the wiki (https://en.wikipedia.org/wiki/Local_outlier_factor) for more information
 
@@ -275,7 +279,8 @@ namespace Microsoft.CodeAnalysis.Remote.Diagnostics
                 List<List<int>> kNeighborIndices,
                 List<double> kDistances,
                 int analyzerIndex
-            ) {
+            )
+            {
                 var rowKNeighborsIndices = kNeighborIndices[analyzerIndex];
                 if (rowKNeighborsIndices.Count == 0)
                 {
@@ -321,7 +326,8 @@ namespace Microsoft.CodeAnalysis.Remote.Diagnostics
                 List<double> kDistances,
                 int analyzerIndex1,
                 int analyzerIndex2
-            ) {
+            )
+            {
                 return Math.Max(
                     allDistances[analyzerIndex1][analyzerIndex2],
                     kDistances[analyzerIndex2]
@@ -333,7 +339,8 @@ namespace Microsoft.CodeAnalysis.Remote.Diagnostics
                 List<List<int>> kNeighborIndices,
                 List<double> kDistances,
                 int analyzerIndex
-            ) {
+            )
+            {
                 var rowKNeighborsIndices = kNeighborIndices[analyzerIndex];
                 if (rowKNeighborsIndices.Count == 0)
                 {
@@ -358,7 +365,8 @@ namespace Microsoft.CodeAnalysis.Remote.Diagnostics
             private List<List<int>> GetKNeighborIndices(
                 List<List<double>> allDistances,
                 List<double> kDistances
-            ) {
+            )
+            {
                 var analyzerCount = kDistances.Count;
                 var kNeighborIndices = GetPooledListAndSetCapacity<List<int>>(analyzerCount);
 
@@ -407,7 +415,8 @@ namespace Microsoft.CodeAnalysis.Remote.Diagnostics
 
             private List<List<double>> GetAllDistances(
                 List<(double normalizedAverage, double normalizedStddev)> normalizedMap
-            ) {
+            )
+            {
                 var analyzerCount = normalizedMap.Count;
                 var allDistances = GetPooledListAndSetCapacity<List<double>>(analyzerCount);
 
@@ -436,7 +445,8 @@ namespace Microsoft.CodeAnalysis.Remote.Diagnostics
             private List<(double normaliedAverage, double normalizedStddev)> GetNormalizedPerformanceMap(
                 List<string> analyzerIdIndex,
                 Dictionary<string, (double average, double stddev)> rawPerformanceData
-            ) {
+            )
+            {
                 var averageMin = rawPerformanceData.Values.Select(kv => kv.average).Min();
                 var averageMax = rawPerformanceData.Values.Select(kv => kv.average).Max();
                 var averageDelta = averageMax - averageMin;

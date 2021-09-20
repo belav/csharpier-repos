@@ -279,7 +279,8 @@ namespace Moq
         public static TValue IsIn<TValue>(
             IEnumerable<TValue> items,
             IEqualityComparer<TValue> comparer
-        ) {
+        )
+        {
             return Match<TValue>.Create(
                 value => items.Contains(value, comparer),
                 () => It.IsIn(items, comparer)
@@ -337,7 +338,8 @@ namespace Moq
         public static TValue IsNotIn<TValue>(
             IEnumerable<TValue> items,
             IEqualityComparer<TValue> comparer
-        ) {
+        )
+        {
             return Match<TValue>.Create(
                 value => !items.Contains(value, comparer),
                 () => It.IsNotIn(items, comparer)

@@ -21,7 +21,8 @@ namespace Microsoft.CodeAnalysis.ChangeSignature
         public ChangeSignatureCodeAction(
             AbstractChangeSignatureService changeSignatureService,
             ChangeSignatureAnalysisSucceededContext context
-        ) {
+        )
+        {
             _changeSignatureService = changeSignatureService;
             _context = context;
         }
@@ -34,11 +35,13 @@ namespace Microsoft.CodeAnalysis.ChangeSignature
         protected override async Task<IEnumerable<CodeActionOperation>> ComputeOperationsAsync(
             object options,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             if (
                 options is ChangeSignatureOptionsResult changeSignatureOptions
                 && changeSignatureOptions != null
-            ) {
+            )
+            {
                 var changeSignatureResult =
                     await _changeSignatureService.ChangeSignatureWithContextAsync(
                             _context,

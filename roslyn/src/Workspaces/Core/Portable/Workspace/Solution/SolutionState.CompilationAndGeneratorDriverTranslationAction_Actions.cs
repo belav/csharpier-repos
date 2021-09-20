@@ -29,7 +29,8 @@ namespace Microsoft.CodeAnalysis
                 public override Task<Compilation> TransformCompilationAsync(
                     Compilation oldCompilation,
                     CancellationToken cancellationToken
-                ) {
+                )
+                {
                     return UpdateDocumentInCompilationAsync(
                         oldCompilation,
                         _oldState,
@@ -53,7 +54,8 @@ namespace Microsoft.CodeAnalysis
                 public TouchAdditionalDocumentAction(
                     TextDocumentState oldState,
                     TextDocumentState newState
-                ) {
+                )
+                {
                     _oldState = oldState;
                     _newState = newState;
                 }
@@ -72,7 +74,8 @@ namespace Microsoft.CodeAnalysis
                 public override async Task<Compilation> TransformCompilationAsync(
                     Compilation oldCompilation,
                     CancellationToken cancellationToken
-                ) {
+                )
+                {
                     var syntaxTrees = new List<SyntaxTree>(_documents.Length);
                     foreach (var document in _documents)
                     {
@@ -100,7 +103,8 @@ namespace Microsoft.CodeAnalysis
                 public override async Task<Compilation> TransformCompilationAsync(
                     Compilation oldCompilation,
                     CancellationToken cancellationToken
-                ) {
+                )
+                {
                     var syntaxTrees = new List<SyntaxTree>(capacity: _documents.Length);
                     foreach (var document in _documents)
                     {
@@ -128,12 +132,14 @@ namespace Microsoft.CodeAnalysis
                 public override async Task<Compilation> TransformCompilationAsync(
                     Compilation oldCompilation,
                     CancellationToken cancellationToken
-                ) {
+                )
+                {
                     var syntaxTrees = new List<SyntaxTree>(capacity: _state.DocumentStates.Count);
 
                     foreach (
                         var documentState in _state.DocumentStates.GetStatesInCompilationOrder()
-                    ) {
+                    )
+                    {
                         cancellationToken.ThrowIfCancellationRequested();
                         syntaxTrees.Add(
                             await documentState.GetSyntaxTreeAsync(cancellationToken)
@@ -158,7 +164,8 @@ namespace Microsoft.CodeAnalysis
                 public override Task<Compilation> TransformCompilationAsync(
                     Compilation oldCompilation,
                     CancellationToken cancellationToken
-                ) {
+                )
+                {
                     return Task.FromResult(oldCompilation.WithOptions(_options));
                 }
             }
@@ -176,7 +183,8 @@ namespace Microsoft.CodeAnalysis
                 public override Task<Compilation> TransformCompilationAsync(
                     Compilation oldCompilation,
                     CancellationToken cancellationToken
-                ) {
+                )
+                {
                     return Task.FromResult(oldCompilation.WithAssemblyName(_assemblyName));
                 }
             }
@@ -193,7 +201,8 @@ namespace Microsoft.CodeAnalysis
                 public AddAnalyzerReferencesAction(
                     ImmutableArray<AnalyzerReference> analyzerReferences,
                     string language
-                ) {
+                )
+                {
                     _analyzerReferences = analyzerReferences;
                     _language = language;
                 }
@@ -211,7 +220,8 @@ namespace Microsoft.CodeAnalysis
                 public RemoveAnalyzerReferencesAction(
                     ImmutableArray<AnalyzerReference> analyzerReferences,
                     string language
-                ) {
+                )
+                {
                     _analyzerReferences = analyzerReferences;
                     _language = language;
                 }
@@ -227,7 +237,8 @@ namespace Microsoft.CodeAnalysis
 
                 public AddAdditionalDocumentsAction(
                     ImmutableArray<TextDocumentState> additionalDocuments
-                ) {
+                )
+                {
                     _additionalDocuments = additionalDocuments;
                 }
             }
@@ -242,7 +253,8 @@ namespace Microsoft.CodeAnalysis
 
                 public RemoveAdditionalDocumentsAction(
                     ImmutableArray<TextDocumentState> additionalDocuments
-                ) {
+                )
+                {
                     _additionalDocuments = additionalDocuments;
                 }
             }

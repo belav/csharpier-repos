@@ -30,7 +30,8 @@ namespace Roslyn.Test.Utilities.PDB
             Compilation compilation,
             TestMetadataReference metadataReference,
             string fullPath
-        ) {
+        )
+        {
             _emitStream = emitStream;
             _peReader = new PEReader(emitStream);
             Compilation = compilation;
@@ -54,7 +55,8 @@ namespace Roslyn.Test.Utilities.PDB
             Compilation compilation,
             string fullPath,
             EmitOptions emitOptions
-        ) {
+        )
+        {
             var emitStream = compilation.EmitToStream(emitOptions);
 
             var metadata = AssemblyMetadata.CreateFromStream(emitStream);

@@ -44,7 +44,8 @@ namespace System.Linq.Parallel
                     ParallelMergeOptions.FullyBuffered,
                     true
                 )
-            ) {
+            )
+            {
                 // We just reduce the elements in each output partition.
                 decimal sum = 0.0m;
                 while (enumerator.MoveNext())
@@ -66,7 +67,8 @@ namespace System.Linq.Parallel
             QueryOperatorEnumerator<decimal, TKey> source,
             object? sharedData,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             return new DecimalSumAggregationOperatorEnumerator<TKey>(
                 source,
                 index,

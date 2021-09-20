@@ -84,7 +84,8 @@ namespace System.PrivateUri.Tests
         public static void UnescapeDataString_UnescapesUtf8Sequences(
             string stringToUnescape,
             string expected
-        ) {
+        )
+        {
             Assert.Equal(expected, Uri.UnescapeDataString(stringToUnescape));
         }
     }

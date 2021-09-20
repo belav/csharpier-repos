@@ -42,7 +42,8 @@ namespace System.DirectoryServices.Protocols.Tests
             bool fullyQualifiedDnsHostName,
             bool connectionless,
             string[] expectedServers
-        ) {
+        )
+        {
             var identifier = new LdapDirectoryIdentifier(
                 server,
                 fullyQualifiedDnsHostName,
@@ -64,7 +65,8 @@ namespace System.DirectoryServices.Protocols.Tests
             bool fullyQualifiedDnsHostName,
             bool connectionless,
             string[] expectedServers
-        ) {
+        )
+        {
             var identifier = new LdapDirectoryIdentifier(
                 server,
                 portNumber,
@@ -86,7 +88,8 @@ namespace System.DirectoryServices.Protocols.Tests
             string[] servers,
             bool fullyQualifiedDnsHostName,
             bool connectionless
-        ) {
+        )
+        {
             var identifier = new LdapDirectoryIdentifier(
                 servers,
                 fullyQualifiedDnsHostName,

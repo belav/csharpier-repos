@@ -75,7 +75,8 @@ namespace System.Reflection.Metadata.Ecma335
         private StringHandle GetSimpleName(
             NamespaceDefinitionHandle fullNamespaceHandle,
             int segmentIndex = int.MaxValue
-        ) {
+        )
+        {
             StringHandle handleContainingSegment = fullNamespaceHandle.GetFullName();
             Debug.Assert(!handleContainingSegment.IsVirtual);
 
@@ -175,7 +176,8 @@ namespace System.Reflection.Metadata.Ecma335
         private void MergeDuplicateNamespaces(
             Dictionary<NamespaceDefinitionHandle, NamespaceDataBuilder> table,
             out Dictionary<string, NamespaceDataBuilder> stringTable
-        ) {
+        )
+        {
             var namespaces = new Dictionary<string, NamespaceDataBuilder>();
             List<KeyValuePair<NamespaceDefinitionHandle, NamespaceDataBuilder>>? remaps = null;
             foreach (var group in table)
@@ -226,7 +228,8 @@ namespace System.Reflection.Metadata.Ecma335
         private NamespaceDataBuilder SynthesizeNamespaceData(
             string fullName,
             NamespaceDefinitionHandle realChild
-        ) {
+        )
+        {
             Debug.Assert(realChild.HasFullName);
 
             int numberOfSegments = 0;
@@ -251,7 +254,8 @@ namespace System.Reflection.Metadata.Ecma335
         private void LinkChildDataToParentData(
             NamespaceDataBuilder child,
             NamespaceDataBuilder parent
-        ) {
+        )
+        {
             Debug.Assert(child != null && parent != null);
             Debug.Assert(!child.Handle.IsNil);
             child.Parent = parent.Handle;
@@ -266,7 +270,8 @@ namespace System.Reflection.Metadata.Ecma335
             Dictionary<string, NamespaceDataBuilder> existingNamespaces,
             NamespaceDataBuilder realChild,
             ref List<NamespaceDataBuilder>? virtualNamespaces
-        ) {
+        )
+        {
             Debug.Assert(realChild.Handle.HasFullName);
             string childName = realChild.FullName;
             var child = realChild;
@@ -336,7 +341,8 @@ namespace System.Reflection.Metadata.Ecma335
         private void ResolveParentChildRelationships(
             Dictionary<string, NamespaceDataBuilder> namespaces,
             out List<NamespaceDataBuilder>? virtualNamespaces
-        ) {
+        )
+        {
             virtualNamespaces = null;
             foreach (var namespaceData in namespaces)
             {
@@ -349,7 +355,8 @@ namespace System.Reflection.Metadata.Ecma335
         /// </summary>
         private void PopulateTableWithTypeDefinitions(
             Dictionary<NamespaceDefinitionHandle, NamespaceDataBuilder> table
-        ) {
+        )
+        {
             Debug.Assert(table != null);
 
             foreach (var typeHandle in _metadataReader.TypeDefinitions)
@@ -383,7 +390,8 @@ namespace System.Reflection.Metadata.Ecma335
         /// </summary>
         private void PopulateTableWithExportedTypes(
             Dictionary<NamespaceDefinitionHandle, NamespaceDataBuilder> table
-        ) {
+        )
+        {
             Debug.Assert(table != null);
 
             foreach (var exportedTypeHandle in _metadataReader.ExportedTypes)
@@ -451,7 +459,8 @@ namespace System.Reflection.Metadata.Ecma335
                 NamespaceDefinitionHandle handle,
                 StringHandle name,
                 string fullName
-            ) {
+            )
+            {
                 Handle = handle;
                 Name = name;
                 FullName = fullName;

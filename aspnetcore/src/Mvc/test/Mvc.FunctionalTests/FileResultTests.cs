@@ -46,7 +46,8 @@ namespace Microsoft.AspNetCore.Mvc.FunctionalTests
             long start,
             long end,
             string expectedBody
-        ) {
+        )
+        {
             // Arrange
             var httpRequestMessage = new HttpRequestMessage(
                 HttpMethod.Get,
@@ -72,7 +73,8 @@ namespace Microsoft.AspNetCore.Mvc.FunctionalTests
         [InlineData("bytes = 1-4, 5-11")]
         public async Task FileFromDisk_CanBeEnabled_WithMiddleware_RangeRequestIgnored(
             string rangeString
-        ) {
+        )
+        {
             // Arrange
             var httpRequestMessage = new HttpRequestMessage(
                 HttpMethod.Get,
@@ -96,7 +98,8 @@ namespace Microsoft.AspNetCore.Mvc.FunctionalTests
         [InlineData("bytes = -0")]
         public async Task FileFromDisk_CanBeEnabled_WithMiddleware_RangeRequestNotSatisfiable(
             string rangeString
-        ) {
+        )
+        {
             // Arrange
             var httpRequestMessage = new HttpRequestMessage(
                 HttpMethod.Get,
@@ -124,7 +127,8 @@ namespace Microsoft.AspNetCore.Mvc.FunctionalTests
             long start,
             long end,
             string expectedBody
-        ) {
+        )
+        {
             // Arrange
             var httpRequestMessage = new HttpRequestMessage(
                 HttpMethod.Get,
@@ -150,7 +154,8 @@ namespace Microsoft.AspNetCore.Mvc.FunctionalTests
         [InlineData("bytes = 1-4, 5-11")]
         public async Task FileFromDisk_CanBeEnabled_WithMiddleware_RangeRequestIgnored_WithLastModifiedAndEtag(
             string rangeString
-        ) {
+        )
+        {
             // Arrange
             var httpRequestMessage = new HttpRequestMessage(
                 HttpMethod.Get,
@@ -174,7 +179,8 @@ namespace Microsoft.AspNetCore.Mvc.FunctionalTests
         [InlineData("bytes = -0")]
         public async Task FileFromDisk_CanBeEnabled_WithMiddleware_RangeRequestNotSatisfiable_WithLastModifiedAndEtag(
             string rangeString
-        ) {
+        )
+        {
             // Arrange
             var httpRequestMessage = new HttpRequestMessage(
                 HttpMethod.Get,
@@ -228,7 +234,8 @@ namespace Microsoft.AspNetCore.Mvc.FunctionalTests
         public async Task FileFromDisk_ReturnsFileWithFileName_RangeProcessingNotEnabled_RangeRequestedIgnored(
             string httpMethod,
             string expectedBody
-        ) {
+        )
+        {
             // Arrange
             var httpRequestMessage = new HttpRequestMessage(
                 new HttpMethod(httpMethod),
@@ -311,7 +318,8 @@ namespace Microsoft.AspNetCore.Mvc.FunctionalTests
             string rangeString,
             int httpStatusCode,
             int expectedContentLength
-        ) {
+        )
+        {
             // Arrange
             var httpRequestMessage = new HttpRequestMessage(
                 HttpMethod.Head,
@@ -373,7 +381,8 @@ namespace Microsoft.AspNetCore.Mvc.FunctionalTests
             long start,
             long end,
             string expectedBody
-        ) {
+        )
+        {
             // Arrange
             var httpRequestMessage = new HttpRequestMessage(
                 HttpMethod.Get,
@@ -473,7 +482,8 @@ namespace Microsoft.AspNetCore.Mvc.FunctionalTests
         public async Task FileFromStream_ReturnsFileWithFileName_RangeProcessingNotEnabled_RangeRequestedIgnored(
             string httpMethod,
             string expectedBody
-        ) {
+        )
+        {
             // Arrange
             var httpRequestMessage = new HttpRequestMessage(
                 new HttpMethod(httpMethod),
@@ -554,7 +564,8 @@ namespace Microsoft.AspNetCore.Mvc.FunctionalTests
             string rangeString,
             int httpStatusCode,
             int expectedContentLength
-        ) {
+        )
+        {
             // Arrange
             var httpRequestMessage = new HttpRequestMessage(
                 HttpMethod.Head,
@@ -616,7 +627,8 @@ namespace Microsoft.AspNetCore.Mvc.FunctionalTests
             long start,
             long end,
             string expectedBody
-        ) {
+        )
+        {
             // Arrange
             var httpRequestMessage = new HttpRequestMessage(
                 HttpMethod.Get,
@@ -665,7 +677,8 @@ namespace Microsoft.AspNetCore.Mvc.FunctionalTests
         [InlineData("bytes = -0")]
         public async Task FileFromBinaryData_ReturnsFile_RangeRequestNotSatisfiable(
             string rangeString
-        ) {
+        )
+        {
             // Arrange
             var httpRequestMessage = new HttpRequestMessage(
                 HttpMethod.Get,
@@ -720,7 +733,8 @@ namespace Microsoft.AspNetCore.Mvc.FunctionalTests
         public async Task FileFromBinaryData_ReturnsFileWithFileName_RangeProcessingNotEnabled_RangeRequestedIgnored(
             string httpMethod,
             string expectedBody
-        ) {
+        )
+        {
             // Arrange
             var httpRequestMessage = new HttpRequestMessage(
                 new HttpMethod(httpMethod),
@@ -803,7 +817,8 @@ namespace Microsoft.AspNetCore.Mvc.FunctionalTests
             string rangeString,
             int httpStatusCode,
             int expectedContentLength
-        ) {
+        )
+        {
             // Arrange
             var httpRequestMessage = new HttpRequestMessage(
                 HttpMethod.Head,
@@ -875,7 +890,8 @@ namespace Microsoft.AspNetCore.Mvc.FunctionalTests
             long start,
             long end,
             string expectedBody
-        ) {
+        )
+        {
             // Arrange
             var httpRequestMessage = new HttpRequestMessage(
                 HttpMethod.Get,
@@ -907,7 +923,8 @@ namespace Microsoft.AspNetCore.Mvc.FunctionalTests
         public async Task FileFromEmbeddedResources_ReturnsFileWithFileName_RangeProcessingNotEnabled_RangeRequestedIgnored(
             string httpMethod,
             string expectedBody
-        ) {
+        )
+        {
             // Arrange
             var httpRequestMessage = new HttpRequestMessage(
                 new HttpMethod(httpMethod),
@@ -993,7 +1010,8 @@ namespace Microsoft.AspNetCore.Mvc.FunctionalTests
         [InlineData("bytes = 1-4, 5-11")]
         public async Task FileFromEmbeddedResources_ReturnsFileWithFileName_RangeRequestIgnored(
             string rangeString
-        ) {
+        )
+        {
             // Arrange
             var httpRequestMessage = new HttpRequestMessage(
                 HttpMethod.Get,
@@ -1023,7 +1041,8 @@ namespace Microsoft.AspNetCore.Mvc.FunctionalTests
         [InlineData("bytes = -0")]
         public async Task FileFromEmbeddedResources_ReturnsFileWithFileName_RangeRequestNotSatisfiable(
             string rangeString
-        ) {
+        )
+        {
             // Arrange
             var httpRequestMessage = new HttpRequestMessage(
                 HttpMethod.Get,
@@ -1064,7 +1083,8 @@ namespace Microsoft.AspNetCore.Mvc.FunctionalTests
             string rangeString,
             int httpStatusCode,
             int expectedContentLength
-        ) {
+        )
+        {
             // Arrange
             var httpRequestMessage = new HttpRequestMessage(
                 HttpMethod.Head,

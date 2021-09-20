@@ -656,7 +656,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Tests
         [InlineData((int)HttpMethod.Put)]
         public void ForThrowsWhenMethodRequiresLengthButNoContentLengthOrTransferEncodingIsSet(
             int intMethod
-        ) {
+        )
+        {
             var method = (HttpMethod)intMethod;
             using (var input = new TestInput())
             {
@@ -921,7 +922,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Tests
                     log: mockLogger.Object,
                     timeoutControl: mockTimeoutControl.Object
                 )
-            ) {
+            )
+            {
                 var body = Http1MessageBody.For(
                     HttpVersion.Http11,
                     new HttpRequestHeaders { HeaderContentLength = "5" },
@@ -1762,7 +1764,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Tests
                 int offset,
                 int count,
                 CancellationToken cancellationToken
-            ) {
+            )
+            {
                 throw new XunitException();
             }
 
@@ -1805,7 +1808,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Tests
                 int offset,
                 int count,
                 CancellationToken cancellationToken
-            ) {
+            )
+            {
                 await Task.Delay(1);
                 throw new XunitException();
             }

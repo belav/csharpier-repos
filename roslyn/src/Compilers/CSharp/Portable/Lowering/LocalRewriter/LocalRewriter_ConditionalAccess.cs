@@ -136,7 +136,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                     nodeType,
                     TypeCompareKind.ConsiderEverything2
                 ) && nodeType.IsNullableType()
-            ) {
+            )
+            {
                 Debug.Assert(
                     TypeSymbol.Equals(
                         accessExpressionType,

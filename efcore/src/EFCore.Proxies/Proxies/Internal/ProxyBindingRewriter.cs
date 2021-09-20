@@ -49,7 +49,8 @@ namespace Microsoft.EntityFrameworkCore.Proxies.Internal
             ProxiesOptionsExtension? options,
             LazyLoaderParameterBindingFactoryDependencies lazyLoaderParameterBindingFactoryDependencies,
             ProviderConventionSetBuilderDependencies conventionSetBuilderDependencies
-        ) {
+        )
+        {
             _proxyFactory = proxyFactory;
             _options = options;
             _lazyLoaderParameterBindingFactoryDependencies =
@@ -63,7 +64,8 @@ namespace Microsoft.EntityFrameworkCore.Proxies.Internal
         public virtual void ProcessModelFinalizing(
             IConventionModelBuilder modelBuilder,
             IConventionContext<IConventionModelBuilder> context
-        ) {
+        )
+        {
             if (_options?.UseProxies == true)
             {
                 foreach (var entityType in modelBuilder.Metadata.GetEntityTypes())
@@ -112,7 +114,8 @@ namespace Microsoft.EntityFrameworkCore.Proxies.Internal
                             .Concat<IConventionNavigationBase>(
                                 entityType.GetDeclaredSkipNavigations()
                             )
-                    ) {
+                    )
+                    {
                         if (navigationBase.PropertyInfo == null)
                         {
                             throw new InvalidOperationException(
@@ -126,7 +129,8 @@ namespace Microsoft.EntityFrameworkCore.Proxies.Internal
                         if (
                             _options.UseChangeTrackingProxies
                             && navigationBase.PropertyInfo.SetMethod?.IsReallyVirtual() == false
-                        ) {
+                        )
+                        {
                             throw new InvalidOperationException(
                                 ProxiesStrings.NonVirtualProperty(
                                     navigationBase.Name,
@@ -145,7 +149,8 @@ namespace Microsoft.EntityFrameworkCore.Proxies.Internal
                                         && navigation.ForeignKey.IsOwnership
                                     )
                                 )
-                            ) {
+                            )
+                            {
                                 throw new InvalidOperationException(
                                     ProxiesStrings.NonVirtualProperty(
                                         navigationBase.Name,
@@ -164,7 +169,8 @@ namespace Microsoft.EntityFrameworkCore.Proxies.Internal
                         foreach (
                             var property in entityType.GetDeclaredProperties()
                                 .Where(p => !p.IsShadowProperty())
-                        ) {
+                        )
+                        {
                             if (property.IsIndexerProperty())
                             {
                                 if (!indexerChecked)
@@ -178,11 +184,13 @@ namespace Microsoft.EntityFrameworkCore.Proxies.Internal
                                             && clrType.GetGenericTypeDefinition()
                                                 == typeof(Dictionary<, >)
                                             && clrType.GenericTypeArguments[0] == typeof(string)
-                                        ) {
+                                        )
+                                        {
                                             if (
                                                 entityType.GetProperties()
                                                     .Any(p => !p.IsPrimaryKey())
-                                            ) {
+                                            )
+                                            {
                                                 throw new InvalidOperationException(
                                                     ProxiesStrings.DictionaryCannotBeProxied(
                                                         clrType.ShortDisplayName(),
@@ -238,7 +246,8 @@ namespace Microsoft.EntityFrameworkCore.Proxies.Internal
             IConventionEntityType entityType,
             Type proxyType,
             InstantiationBinding binding
-        ) {
+        )
+        {
             if (_options?.UseLazyLoadingProxies == true)
             {
                 foreach (
@@ -249,7 +258,8 @@ namespace Microsoft.EntityFrameworkCore.Proxies.Internal
                                     .Where(p => p.ClrType == typeof(ILazyLoader))
                         )
                         .ToList()
-                ) {
+                )
+                {
                     conflictingProperty.DeclaringEntityType.RemoveServiceProperty(
                         conflictingProperty.Name
                     );

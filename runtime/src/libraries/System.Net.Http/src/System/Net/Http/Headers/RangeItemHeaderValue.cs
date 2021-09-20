@@ -100,7 +100,8 @@ namespace System.Net.Http.Headers
             string? input,
             int startIndex,
             ICollection<RangeItemHeaderValue> rangeCollection
-        ) {
+        )
+        {
             Debug.Assert(rangeCollection != null);
             Debug.Assert(startIndex >= 0);
 
@@ -162,7 +163,8 @@ namespace System.Net.Http.Headers
             string? input,
             int startIndex,
             out RangeItemHeaderValue? parsedValue
-        ) {
+        )
+        {
             Debug.Assert(startIndex >= 0);
 
             // This parser parses number ranges: e.g. '1-2', '1-', '-2'.
@@ -226,7 +228,8 @@ namespace System.Net.Http.Headers
             if (
                 (fromLength > 0)
                 && !HeaderUtilities.TryParseInt64(input, fromStartIndex, fromLength, out from)
-            ) {
+            )
+            {
                 return 0;
             }
 
@@ -235,7 +238,8 @@ namespace System.Net.Http.Headers
             if (
                 (toLength > 0)
                 && !HeaderUtilities.TryParseInt64(input, toStartIndex, toLength, out to)
-            ) {
+            )
+            {
                 return 0;
             }
 

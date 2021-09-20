@@ -33,7 +33,8 @@ namespace System.Reflection.Emit.Tests
             string name,
             Type returnType,
             Type[] parameterTypes
-        ) {
+        )
+        {
             Module module = typeof(TestClass).GetTypeInfo().Module;
 
             DynamicMethod method1 = new DynamicMethod(name, returnType, parameterTypes, module);
@@ -146,7 +147,8 @@ namespace System.Reflection.Emit.Tests
             Type returnType,
             Type[] parameterTypes,
             Type owner
-        ) {
+        )
+        {
             DynamicMethod method1 = new DynamicMethod(name, returnType, parameterTypes, owner);
             Helpers.VerifyMethod(
                 method1,

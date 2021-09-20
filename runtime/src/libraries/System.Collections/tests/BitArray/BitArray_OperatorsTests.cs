@@ -32,7 +32,8 @@ namespace System.Collections.Tests
                     BitsPerInt32 * 8 + BitsPerInt32 - 1,
                     short.MaxValue
                 }
-            ) {
+            )
+            {
                 yield return new object[] { Enumerable.Repeat(true, size).ToArray() };
                 yield return new object[] { Enumerable.Repeat(false, size).ToArray() };
                 yield return new object[]
@@ -77,7 +78,8 @@ namespace System.Collections.Tests
                     BitsPerInt32 * 8 + BitsPerInt32 - 1,
                     short.MaxValue
                 }
-            ) {
+            )
+            {
                 bool[] allTrue = Enumerable.Repeat(true, size).ToArray();
                 bool[] allFalse = Enumerable.Repeat(false, size).ToArray();
                 bool[] alternating = Enumerable.Range(0, size).Select(i => i % 2 == 1).ToArray();
@@ -129,7 +131,8 @@ namespace System.Collections.Tests
                     BitsPerInt32 * 8 + BitsPerInt32 - 1,
                     short.MaxValue
                 }
-            ) {
+            )
+            {
                 bool[] allTrue = Enumerable.Repeat(true, size).ToArray();
                 bool[] allFalse = Enumerable.Repeat(false, size).ToArray();
                 bool[] alternating = Enumerable.Range(0, size).Select(i => i % 2 == 1).ToArray();
@@ -181,7 +184,8 @@ namespace System.Collections.Tests
                     BitsPerInt32 * 8 + BitsPerInt32 - 1,
                     short.MaxValue
                 }
-            ) {
+            )
+            {
                 bool[] allTrue = Enumerable.Repeat(true, size).ToArray();
                 bool[] allFalse = Enumerable.Repeat(false, size).ToArray();
                 bool[] alternating = Enumerable.Range(0, size).Select(i => i % 2 == 1).ToArray();
@@ -286,7 +290,8 @@ namespace System.Collections.Tests
             BitArray right,
             int newLeftLength,
             int newRightLength
-        ) {
+        )
+        {
             left.Length = newLeftLength;
             right.Length = newRightLength;
 
@@ -300,7 +305,8 @@ namespace System.Collections.Tests
             BitArray right,
             int newLeftLength,
             int newRightLength
-        ) {
+        )
+        {
             left.Length = newLeftLength;
             right.Length = newRightLength;
 
@@ -314,7 +320,8 @@ namespace System.Collections.Tests
             BitArray right,
             int newLeftLength,
             int newRightLength
-        ) {
+        )
+        {
             left.Length = newLeftLength;
             right.Length = newRightLength;
 
@@ -336,11 +343,13 @@ namespace System.Collections.Tests
                     2 * BitsPerInt32,
                     2 * BitsPerInt32 + 1
                 }
-            ) {
+            )
+            {
                 foreach (
                     int shift in new[] { 0, 1, size / 2, size - 1, size }.Where(s => s >= 0)
                         .Distinct()
-                ) {
+                )
+                {
                     yield return new object[]
                     {
                         size,

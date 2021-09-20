@@ -32,7 +32,8 @@ namespace System.Net
                         IPAddressParserStatics.IPv6AddressShorts,
                         out uint scope
                     )
-                ) {
+                )
+                {
                     return new IPAddress(numbers, scope);
                 }
             }
@@ -70,7 +71,8 @@ namespace System.Net
             uint address,
             Span<char> formatted,
             out int charsWritten
-        ) {
+        )
+        {
             if (formatted.Length < MaxIPv4StringLength)
             {
                 charsWritten = 0;
@@ -116,7 +118,8 @@ namespace System.Net
             uint scopeId,
             Span<char> destination,
             out int charsWritten
-        ) {
+        )
+        {
             Debug.Assert(address != null);
             Debug.Assert(address.Length == IPAddressParserStatics.IPv6AddressShorts);
 
@@ -173,7 +176,8 @@ namespace System.Net
             int number,
             char* addressString,
             ref int offset
-        ) {
+        )
+        {
             // Math.DivRem has no overload for byte, assert here for safety
             Debug.Assert(number < 256);
 
@@ -222,7 +226,8 @@ namespace System.Net
             Span<ushort> numbers,
             int numbersLength,
             out uint scope
-        ) {
+        )
+        {
             Debug.Assert(numbers != null);
             Debug.Assert(numbersLength >= IPAddressParserStatics.IPv6AddressShorts);
 
@@ -247,7 +252,8 @@ namespace System.Net
                             CultureInfo.InvariantCulture,
                             out scope
                         )
-                    ) {
+                    )
+                    {
                         return true; // scopeId is a numeric value
                     }
                     uint interfaceIndex = InterfaceInfoPal.InterfaceNameToIndex(scopeId);
@@ -277,7 +283,8 @@ namespace System.Net
             int fromInclusive,
             int toExclusive,
             StringBuilder buffer
-        ) {
+        )
+        {
             // Find the longest sequence of zeros to be combined into a "::"
             ReadOnlySpan<ushort> addressSpan = new ReadOnlySpan<ushort>(
                 address,

@@ -148,7 +148,8 @@ namespace System.Reflection.TypeLoading
             ReadOnlySpan<byte> name,
             bool ignoreCase,
             out Exception? e
-        ) {
+        )
+        {
             RoDefinitionType? result = GetRoManifestModule()
                 .GetTypeCore(ns, name, ignoreCase, out e);
             if (IsSingleModule || result != null)

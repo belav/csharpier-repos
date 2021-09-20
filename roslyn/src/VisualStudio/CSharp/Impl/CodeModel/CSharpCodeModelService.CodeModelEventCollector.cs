@@ -39,7 +39,8 @@ namespace Microsoft.VisualStudio.LanguageServices.CSharp.CodeModel
                 CompilationUnitSyntax oldCompilationUnit,
                 CompilationUnitSyntax newCompilationUnit,
                 CodeModelEventQueue eventQueue
-            ) {
+            )
+            {
                 // Note: In the C# legacy code model, events are generated for the top-level
                 // namespace that is at the root of every parse tree. In the Roslyn C# code model
                 // implementation, we won't bother.
@@ -59,7 +60,8 @@ namespace Microsoft.VisualStudio.LanguageServices.CSharp.CodeModel
                 AttributeListSyntax newAttributeList,
                 SyntaxNode newNodeParent,
                 CodeModelEventQueue eventQueue
-            ) {
+            )
+            {
                 return CompareChildren(
                     CompareAttributes,
                     oldAttributeList.Attributes.AsReadOnlyList(),
@@ -75,7 +77,8 @@ namespace Microsoft.VisualStudio.LanguageServices.CSharp.CodeModel
                 AttributeSyntax newAttribute,
                 SyntaxNode newNodeParent,
                 CodeModelEventQueue eventQueue
-            ) {
+            )
+            {
                 Debug.Assert(oldAttribute != null && newAttribute != null);
 
                 var same = true;
@@ -94,7 +97,8 @@ namespace Microsoft.VisualStudio.LanguageServices.CSharp.CodeModel
                 // If arguments have changed enqueue a element changed (arguments changed) node
                 if (
                     !CompareAttributeArguments(oldAttribute.ArgumentList, newAttribute.ArgumentList)
-                ) {
+                )
+                {
                     EnqueueChangeEvent(
                         newAttribute,
                         newNodeParent,
@@ -110,7 +114,8 @@ namespace Microsoft.VisualStudio.LanguageServices.CSharp.CodeModel
             private bool CompareAttributeArguments(
                 AttributeArgumentListSyntax oldAttributeArguments,
                 AttributeArgumentListSyntax newAttributeArguments
-            ) {
+            )
+            {
                 if (oldAttributeArguments == null || newAttributeArguments == null)
                 {
                     return oldAttributeArguments == newAttributeArguments;
@@ -134,7 +139,8 @@ namespace Microsoft.VisualStudio.LanguageServices.CSharp.CodeModel
                             CodeModelService.GetName(oldArgument),
                             CodeModelService.GetName(newArgument)
                         )
-                    ) {
+                    )
+                    {
                         return false;
                     }
 
@@ -150,7 +156,8 @@ namespace Microsoft.VisualStudio.LanguageServices.CSharp.CodeModel
             private bool CompareExpressions(
                 ExpressionSyntax oldExpression,
                 ExpressionSyntax newExpression
-            ) {
+            )
+            {
                 if (oldExpression == null || newExpression == null)
                 {
                     return oldExpression == newExpression;
@@ -250,7 +257,8 @@ namespace Microsoft.VisualStudio.LanguageServices.CSharp.CodeModel
                 ParameterSyntax newParameter,
                 SyntaxNode newNodeParent,
                 CodeModelEventQueue eventQueue
-            ) {
+            )
+            {
                 Debug.Assert(oldParameter != null && newParameter != null);
 
                 var same = true;
@@ -260,7 +268,8 @@ namespace Microsoft.VisualStudio.LanguageServices.CSharp.CodeModel
                         CodeModelService.GetName(oldParameter),
                         CodeModelService.GetName(newParameter)
                     )
-                ) {
+                )
+                {
                     EnqueueChangeEvent(
                         newParameter,
                         newNodeParent,
@@ -274,7 +283,8 @@ namespace Microsoft.VisualStudio.LanguageServices.CSharp.CodeModel
                 if (
                     !CompareModifiers(oldParameter, newParameter)
                     || !CompareTypes(oldParameter.Type, newParameter.Type)
-                ) {
+                )
+                {
                     EnqueueChangeEvent(
                         newParameter,
                         newNodeParent,
@@ -292,7 +302,8 @@ namespace Microsoft.VisualStudio.LanguageServices.CSharp.CodeModel
                 MemberDeclarationSyntax newMember,
                 SyntaxNode newNodeParent,
                 CodeModelEventQueue eventQueue
-            ) {
+            )
+            {
                 Debug.Assert(oldMember != null && newMember != null);
 
                 // If the kind doesn't match, it has to be a remove/add.
@@ -306,7 +317,8 @@ namespace Microsoft.VisualStudio.LanguageServices.CSharp.CodeModel
 
                 if (
                     oldMember is BaseTypeDeclarationSyntax || oldMember is DelegateDeclarationSyntax
-                ) {
+                )
+                {
                     return CompareTypeDeclarations(oldMember, newMember, newNodeParent, eventQueue);
                 }
                 else if (oldMember is BaseMethodDeclarationSyntax baseMethod)
@@ -354,7 +366,8 @@ namespace Microsoft.VisualStudio.LanguageServices.CSharp.CodeModel
                 EnumMemberDeclarationSyntax newEnumMember,
                 SyntaxNode newNodeParent,
                 CodeModelEventQueue eventQueue
-            ) {
+            )
+            {
                 Debug.Assert(oldEnumMember != null && newEnumMember != null);
 
                 var same = true;
@@ -364,7 +377,8 @@ namespace Microsoft.VisualStudio.LanguageServices.CSharp.CodeModel
                         CodeModelService.GetName(oldEnumMember),
                         CodeModelService.GetName(newEnumMember)
                     )
-                ) {
+                )
+                {
                     EnqueueChangeEvent(
                         newEnumMember,
                         newNodeParent,
@@ -391,7 +405,8 @@ namespace Microsoft.VisualStudio.LanguageServices.CSharp.CodeModel
                 BasePropertyDeclarationSyntax newProperty,
                 SyntaxNode newNodeParent,
                 CodeModelEventQueue eventQueue
-            ) {
+            )
+            {
                 Debug.Assert(oldProperty != null && newProperty != null);
 
                 var same = true;
@@ -401,7 +416,8 @@ namespace Microsoft.VisualStudio.LanguageServices.CSharp.CodeModel
                         CodeModelService.GetName(oldProperty),
                         CodeModelService.GetName(newProperty)
                     )
-                ) {
+                )
+                {
                     EnqueueChangeEvent(
                         newProperty,
                         newNodeParent,
@@ -465,7 +481,8 @@ namespace Microsoft.VisualStudio.LanguageServices.CSharp.CodeModel
                 VariableDeclaratorSyntax newVariableDeclarator,
                 SyntaxNode newNodeParent,
                 CodeModelEventQueue eventQueue
-            ) {
+            )
+            {
                 Debug.Assert(oldVariableDeclarator != null && newVariableDeclarator != null);
 
                 if (
@@ -473,7 +490,8 @@ namespace Microsoft.VisualStudio.LanguageServices.CSharp.CodeModel
                         CodeModelService.GetName(oldVariableDeclarator),
                         CodeModelService.GetName(newVariableDeclarator)
                     )
-                ) {
+                )
+                {
                     EnqueueChangeEvent(
                         newVariableDeclarator,
                         newNodeParent,
@@ -491,7 +509,8 @@ namespace Microsoft.VisualStudio.LanguageServices.CSharp.CodeModel
                 BaseFieldDeclarationSyntax newField,
                 SyntaxNode newNodeParent,
                 CodeModelEventQueue eventQueue
-            ) {
+            )
+            {
                 Debug.Assert(oldField != null && newField != null);
 
                 var same = true;
@@ -545,7 +564,8 @@ namespace Microsoft.VisualStudio.LanguageServices.CSharp.CodeModel
                 BaseMethodDeclarationSyntax newMethod,
                 SyntaxNode newNodeParent,
                 CodeModelEventQueue eventQueue
-            ) {
+            )
+            {
                 Debug.Assert(oldMethod != null && newMethod != null);
 
                 if (
@@ -553,7 +573,8 @@ namespace Microsoft.VisualStudio.LanguageServices.CSharp.CodeModel
                         CodeModelService.GetName(oldMethod),
                         CodeModelService.GetName(newMethod)
                     )
-                ) {
+                )
+                {
                     var change = CompareRenamedDeclarations(
                         CompareParameters,
                         oldMethod.ParameterList.Parameters.AsReadOnlyList(),
@@ -629,7 +650,8 @@ namespace Microsoft.VisualStudio.LanguageServices.CSharp.CodeModel
                 NamespaceDeclarationSyntax newNamespace,
                 SyntaxNode newNodeParent,
                 CodeModelEventQueue eventQueue
-            ) {
+            )
+            {
                 Debug.Assert(oldNamespace != null && newNamespace != null);
 
                 // Check if the namespace nodes are identical w.r.t Name
@@ -673,7 +695,8 @@ namespace Microsoft.VisualStudio.LanguageServices.CSharp.CodeModel
                 MemberDeclarationSyntax newMember,
                 SyntaxNode newNodeParent,
                 CodeModelEventQueue eventQueue
-            ) {
+            )
+            {
                 Debug.Assert(oldMember != null && newMember != null);
                 Debug.Assert(
                     oldMember is BaseTypeDeclarationSyntax || oldMember is DelegateDeclarationSyntax
@@ -707,7 +730,8 @@ namespace Microsoft.VisualStudio.LanguageServices.CSharp.CodeModel
                             oldType.Identifier.ToString(),
                             newType.Identifier.ToString()
                         )
-                    ) {
+                    )
+                    {
                         var change = CompareRenamedDeclarations(
                             CompareMemberDeclarations,
                             oldMembers,
@@ -787,7 +811,8 @@ namespace Microsoft.VisualStudio.LanguageServices.CSharp.CodeModel
                             oldDelegate.Identifier.ToString(),
                             newDelegate.Identifier.ToString()
                         )
-                    ) {
+                    )
+                    {
                         var change = CompareRenamedDeclarations(
                             CompareParameters,
                             oldDelegate.ParameterList.Parameters.AsReadOnlyList(),
@@ -863,7 +888,8 @@ namespace Microsoft.VisualStudio.LanguageServices.CSharp.CodeModel
                 MemberDeclarationSyntax newNamespaceOrType,
                 SyntaxNode newNodeParent,
                 CodeModelEventQueue eventQueue
-            ) {
+            )
+            {
                 // If the kind doesn't match, it has to be a remove/add.
                 if (oldNamespaceOrType.Kind() != newNamespaceOrType.Kind())
                 {
@@ -876,7 +902,8 @@ namespace Microsoft.VisualStudio.LanguageServices.CSharp.CodeModel
                 if (
                     oldNamespaceOrType is BaseTypeDeclarationSyntax
                     || oldNamespaceOrType is DelegateDeclarationSyntax
-                ) {
+                )
+                {
                     return CompareTypeDeclarations(
                         oldNamespaceOrType,
                         newNamespaceOrType,
@@ -900,7 +927,8 @@ namespace Microsoft.VisualStudio.LanguageServices.CSharp.CodeModel
             private bool CompareBaseLists(
                 BaseTypeDeclarationSyntax oldType,
                 BaseTypeDeclarationSyntax newType
-            ) {
+            )
+            {
                 if (oldType.BaseList == null && newType.BaseList == null)
                 {
                     return true;
@@ -975,7 +1003,8 @@ namespace Microsoft.VisualStudio.LanguageServices.CSharp.CodeModel
                                 oldGenericName.Identifier.ToString(),
                                 newGenericName.Identifier.ToString()
                             )
-                        ) {
+                        )
+                        {
                             return false;
                         }
 
@@ -991,7 +1020,8 @@ namespace Microsoft.VisualStudio.LanguageServices.CSharp.CodeModel
                                     oldGenericName.TypeArgumentList.Arguments[i],
                                     newGenericName.TypeArgumentList.Arguments[i]
                                 )
-                            ) {
+                            )
+                            {
                                 return false;
                             }
                         }
@@ -1103,7 +1133,8 @@ namespace Microsoft.VisualStudio.LanguageServices.CSharp.CodeModel
                 SyntaxNode node,
                 SyntaxNode parent,
                 CodeModelEventQueue eventQueue
-            ) {
+            )
+            {
                 if (eventQueue == null)
                 {
                     return;
@@ -1151,7 +1182,8 @@ namespace Microsoft.VisualStudio.LanguageServices.CSharp.CodeModel
                 SyntaxNode parent,
                 CodeModelEventType eventType,
                 CodeModelEventQueue eventQueue
-            ) {
+            )
+            {
                 if (eventQueue == null)
                 {
                     return;
@@ -1191,7 +1223,8 @@ namespace Microsoft.VisualStudio.LanguageServices.CSharp.CodeModel
                 SyntaxNode parent,
                 CodeModelEventType eventType,
                 CodeModelEventQueue eventQueue
-            ) {
+            )
+            {
                 if (parent is BaseFieldDeclarationSyntax baseField)
                 {
                     foreach (var variableDeclarator in baseField.Declaration.Variables)
@@ -1209,7 +1242,8 @@ namespace Microsoft.VisualStudio.LanguageServices.CSharp.CodeModel
                 SyntaxNode node,
                 SyntaxNode parent,
                 CodeModelEventQueue eventQueue
-            ) {
+            )
+            {
                 if (eventQueue == null)
                 {
                     return;
@@ -1256,7 +1290,8 @@ namespace Microsoft.VisualStudio.LanguageServices.CSharp.CodeModel
                 AttributeSyntax attribute,
                 SyntaxNode parent,
                 Action<SyntaxNode, SyntaxNode> enqueueAddOrRemoveEvent
-            ) {
+            )
+            {
                 if (parent is BaseFieldDeclarationSyntax baseField)
                 {
                     foreach (var variableDeclarator in baseField.Declaration.Variables)

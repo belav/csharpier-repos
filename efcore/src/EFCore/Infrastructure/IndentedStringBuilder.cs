@@ -88,7 +88,8 @@ namespace Microsoft.EntityFrameworkCore.Infrastructure
         public virtual IndentedStringBuilder AppendLines(
             string value,
             bool skipFinalNewline = false
-        ) {
+        )
+        {
             using (var reader = new StringReader(value))
             {
                 var first = true;

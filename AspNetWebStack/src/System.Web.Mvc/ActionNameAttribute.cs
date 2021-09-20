@@ -25,7 +25,8 @@ namespace System.Web.Mvc
             ControllerContext controllerContext,
             string actionName,
             MethodInfo methodInfo
-        ) {
+        )
+        {
             return String.Equals(actionName, Name, StringComparison.OrdinalIgnoreCase);
         }
     }

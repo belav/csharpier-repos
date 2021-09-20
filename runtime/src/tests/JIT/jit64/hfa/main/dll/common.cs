@@ -31,7 +31,8 @@ namespace HFATest
             double actual,
             double expected,
             bool result
-        ) {
+        )
+        {
             System.Console.Write("[" + testName + "]\t");
             if (result)
             {

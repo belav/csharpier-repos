@@ -138,7 +138,8 @@ namespace Microsoft.AspNetCore.DataProtection.XmlEncryption
                             certInfo,
                             out var keyDecryptionCerts
                         )
-                    ) {
+                    )
+                    {
                         continue;
                     }
 

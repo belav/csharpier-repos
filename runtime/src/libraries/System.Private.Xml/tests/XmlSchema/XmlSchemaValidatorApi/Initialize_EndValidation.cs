@@ -409,7 +409,8 @@ namespace System.Xml.Tests
         [InlineData("type")]
         public void InitializeWithAttributeValidate_OtherAttribute_Element_Type(
             string typeToValidate
-        ) {
+        )
+        {
             XmlSchemaValidator val;
             XmlSchemaInfo info = new XmlSchemaInfo();
             XmlSchemaSet schemas = new XmlSchemaSet();
@@ -561,7 +562,8 @@ namespace System.Xml.Tests
         [InlineData("ignore")]
         public void TestForRootLevelIdentityConstraints_Valid_IDREFMissingInvalid_IgnoreIdentityConstraintsIsSetInvalid(
             string validity
-        ) {
+        )
+        {
             XmlSchemaValidator val;
             XmlSchemaInfo info = new XmlSchemaInfo();
             string[] keys = new string[] {  };

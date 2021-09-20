@@ -650,7 +650,8 @@ namespace System.Data.OleDb
             Type? dataType,
             short wType,
             DbType enumDbType
-        ) {
+        )
+        {
             this.enumOleDbType = enumOleDbType;
             this.dbType = dbType;
             this.dbPart = (-1 == fixlen) ? VarblDbPart : FixedDbPart;

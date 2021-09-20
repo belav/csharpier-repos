@@ -665,7 +665,8 @@ namespace System.ServiceModel.Syndication.Tests
             SyndicationItem item,
             bool serializeExtensionsAsAtom,
             string expected
-        ) {
+        )
+        {
             var formatter = new Rss20ItemFormatter(item)
             {
                 SerializeExtensionsAsAtom = serializeExtensionsAsAtom
@@ -777,7 +778,8 @@ namespace System.ServiceModel.Syndication.Tests
         public void ReadFrom_FullItem_ReturnsExpected(
             bool preserveAttributeExtensions,
             bool preserveElementExtensions
-        ) {
+        )
+        {
             string xmlString =
                 @"<item xml:base=""/relative"" item_name1="""" d1p1:item_name2="""" d1p1:item_name3=""item_value"" d1p2:item_name4="""" xmlns:d1p2=""xmlns"" xmlns:d1p1=""item_namespace"">
     <guid isPermaLink=""false"">id</guid>
@@ -1420,7 +1422,8 @@ namespace System.ServiceModel.Syndication.Tests
         public void ReadFrom_TryParseReturnsTrue_ReturnsExpected(
             bool preserveAttributeExtensions,
             bool preserveElementExtensions
-        ) {
+        )
+        {
             using (
                 var stringReader = new StringReader(
                     @"<item xml:base=""/relative"" item_name1="""" d1p1:item_name2="""" d1p1:item_name3=""item_value"" d1p2:item_name4="""" xmlns:d1p2=""xmlns"" xmlns:d1p1=""item_namespace"">
@@ -1955,7 +1958,8 @@ namespace System.ServiceModel.Syndication.Tests
             bool preserveAttributeExtensions,
             bool preserveElementExtensions,
             Action<SyndicationItem> verifyAction
-        ) {
+        )
+        {
             // ReadFrom.
             using (var stringReader = new StringReader(xmlString))
             using (XmlReader reader = XmlReader.Create(stringReader))
@@ -2220,7 +2224,8 @@ namespace System.ServiceModel.Syndication.Tests
         [InlineData(false)]
         public void PreserveAttributeExtensions_Set_GetReturnsExpected(
             bool preserveAttributeExtensions
-        ) {
+        )
+        {
             var formatter = new Rss20ItemFormatter()
             {
                 PreserveAttributeExtensions = preserveAttributeExtensions

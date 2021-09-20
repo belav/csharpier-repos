@@ -37,7 +37,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             int ordinal,
             ImmutableArray<Location> locations,
             ImmutableArray<SyntaxReference> syntaxRefs
-        ) {
+        )
+        {
             Debug.Assert(!syntaxRefs.IsEmpty);
 
             _name = name;
@@ -78,7 +79,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
 
         internal override ImmutableArray<TypeWithAnnotations> GetConstraintTypes(
             ConsList<TypeParameterSymbol> inProgress
-        ) {
+        )
+        {
             var bounds = this.GetBounds(inProgress);
             return (bounds != null)
               ? bounds.ConstraintTypes
@@ -87,14 +89,16 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
 
         internal override ImmutableArray<NamedTypeSymbol> GetInterfaces(
             ConsList<TypeParameterSymbol> inProgress
-        ) {
+        )
+        {
             var bounds = this.GetBounds(inProgress);
             return (bounds != null) ? bounds.Interfaces : ImmutableArray<NamedTypeSymbol>.Empty;
         }
 
         internal override NamedTypeSymbol GetEffectiveBaseClass(
             ConsList<TypeParameterSymbol> inProgress
-        ) {
+        )
+        {
             var bounds = this.GetBounds(inProgress);
             return (bounds != null) ? bounds.EffectiveBaseClass : this.GetDefaultBaseType();
         }
@@ -185,7 +189,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                 if (
                     (object)sourceMethod == null
                     || (object)sourceMethod.SourcePartialDefinition == null
-                ) {
+                )
+                {
                     lazyAttributesStored = LoadAndValidateAttributes(
                         OneOrMany.Create(this.MergedAttributeDeclarationSyntaxLists),
                         ref _lazyCustomAttributesBag,
@@ -250,7 +255,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                         ),
                         TypeParameterBounds.Unset
                     )
-                ) {
+                )
+                {
                     this.CheckConstraintTypeConstraints(diagnostics);
                     this.CheckUnmanagedConstraint(diagnostics);
                     this.EnsureAttributesFromConstraints(diagnostics);
@@ -384,7 +390,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
         internal override void ForceComplete(
             SourceLocation locationOpt,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             while (true)
             {
                 cancellationToken.ThrowIfCancellationRequested();
@@ -431,7 +438,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
         internal override void AddSynthesizedAttributes(
             PEModuleBuilder moduleBuilder,
             ref ArrayBuilder<SynthesizedAttributeData> attributes
-        ) {
+        )
+        {
             base.AddSynthesizedAttributes(moduleBuilder, ref attributes);
 
             if (this.HasUnmanagedTypeConstraint)
@@ -475,7 +483,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                 !this.HasValueTypeConstraint
                 && this.ConstraintTypesNoUseSiteDiagnostics.IsEmpty
                 && this.IsNotNullable == false
-            ) {
+            )
+            {
                 return NullableAnnotationExtensions.AnnotatedAttributeValue;
             }
             return NullableAnnotationExtensions.ObliviousAttributeValue;
@@ -487,7 +496,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                 CSharpAttributeData,
                 AttributeLocation
             > arguments
-        ) {
+        )
+        {
             Debug.Assert((object)arguments.AttributeSyntaxOpt != null);
             Debug.Assert(arguments.Diagnostics is BindingDiagnosticBag);
 
@@ -509,7 +519,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
 
         protected bool? CalculateReferenceTypeConstraintIsNullable(
             TypeParameterConstraintKind constraints
-        ) {
+        )
+        {
             if ((constraints & TypeParameterConstraintKind.ReferenceType) == 0)
             {
                 return false;
@@ -631,7 +642,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                         this.GetConstraintKinds()
                         & TypeParameterConstraintKind.ObliviousNullabilityIfReferenceType
                     ) != 0
-                ) {
+                )
+                {
                     return null;
                 }
 
@@ -656,7 +668,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
         protected override TypeParameterBounds ResolveBounds(
             ConsList<TypeParameterSymbol> inProgress,
             BindingDiagnosticBag diagnostics
-        ) {
+        )
+        {
             var constraintTypes = _owner.GetTypeParameterConstraintTypes(this.Ordinal);
             if (constraintTypes.IsEmpty && GetConstraintKinds() == TypeParameterConstraintKind.None)
             {
@@ -778,7 +791,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                         this.GetConstraintKinds()
                         & TypeParameterConstraintKind.ObliviousNullabilityIfReferenceType
                     ) != 0
-                ) {
+                )
+                {
                     return null;
                 }
 
@@ -803,7 +817,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
         protected override TypeParameterBounds ResolveBounds(
             ConsList<TypeParameterSymbol> inProgress,
             BindingDiagnosticBag diagnostics
-        ) {
+        )
+        {
             var constraints = _owner.GetTypeParameterConstraintTypes();
             var constraintTypes = constraints.IsEmpty
                 ? ImmutableArray<TypeWithAnnotations>.Empty
@@ -927,7 +942,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
 
         protected override MethodSymbol GetOverriddenMethod(
             SourceOrdinaryMethodSymbol overridingMethod
-        ) {
+        )
+        {
             MethodSymbol method = overridingMethod;
             Debug.Assert(method.IsOverride);
             do
@@ -951,7 +967,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
 
         protected override MethodSymbol GetOverriddenMethod(
             SourceOrdinaryMethodSymbol overridingMethod
-        ) {
+        )
+        {
             var explicitImplementations = overridingMethod.ExplicitInterfaceImplementations;
             Debug.Assert(explicitImplementations.Length <= 1);
 
@@ -1092,7 +1109,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
         protected override TypeParameterBounds ResolveBounds(
             ConsList<TypeParameterSymbol> inProgress,
             BindingDiagnosticBag diagnostics
-        ) {
+        )
+        {
             var typeParameter = this.OverriddenTypeParameter;
             if ((object)typeParameter == null)
             {

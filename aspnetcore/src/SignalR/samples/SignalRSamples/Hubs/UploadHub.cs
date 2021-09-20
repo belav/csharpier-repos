@@ -43,7 +43,8 @@ namespace SignalRSamples.Hubs
         public async Task<string> ScoreTracker(
             ChannelReader<int> player1,
             ChannelReader<int> player2
-        ) {
+        )
+        {
             var p1score = await Loop(player1);
             var p2score = await Loop(player2);
 

@@ -38,7 +38,8 @@ namespace Microsoft.CodeAnalysis.Interactive
 
             protected override PortableExecutableReference WithPropertiesImpl(
                 MetadataReferenceProperties properties
-            ) {
+            )
+            {
                 return new ShadowCopyReference(_provider, FilePath!, properties);
             }
         }

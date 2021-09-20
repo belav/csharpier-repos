@@ -17,7 +17,8 @@ namespace System.IO.Pipelines
             object? completionState,
             ExecutionContext? executionContext,
             SynchronizationContext? synchronizationContext
-        ) {
+        )
+        {
             Completion = completion;
             CompletionState = completionState;
             ExecutionContext = executionContext;

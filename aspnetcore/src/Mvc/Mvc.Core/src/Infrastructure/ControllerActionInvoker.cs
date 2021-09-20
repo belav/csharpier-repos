@@ -34,15 +34,17 @@ namespace Microsoft.AspNetCore.Mvc.Infrastructure
             ControllerContext controllerContext,
             ControllerActionInvokerCacheEntry cacheEntry,
             IFilterMetadata[] filters
-        ) : base(
-            diagnosticListener,
-            logger,
-            actionContextAccessor,
-            mapper,
-            controllerContext,
-            filters,
-            controllerContext.ValueProviderFactories
-        ) {
+        )
+            : base(
+                diagnosticListener,
+                logger,
+                actionContextAccessor,
+                mapper,
+                controllerContext,
+                filters,
+                controllerContext.ValueProviderFactories
+            )
+        {
             if (cacheEntry == null)
             {
                 throw new ArgumentNullException(nameof(cacheEntry));
@@ -357,7 +359,8 @@ namespace Microsoft.AspNetCore.Mvc.Infrastructure
                 Scope scope,
                 object? state,
                 bool isCompleted
-            ) {
+            )
+            {
                 try
                 {
                     await lastTask;
@@ -403,7 +406,8 @@ namespace Microsoft.AspNetCore.Mvc.Infrastructure
             static async Task<ActionExecutedContext> Awaited(
                 ControllerActionInvoker invoker,
                 Task task
-            ) {
+            )
+            {
                 await task;
 
                 Debug.Assert(invoker._actionExecutedContext != null);
@@ -455,7 +459,8 @@ namespace Microsoft.AspNetCore.Mvc.Infrastructure
             static async Task Awaited(
                 ControllerActionInvoker invoker,
                 ValueTask<IActionResult> actionResultValueTask
-            ) {
+            )
+            {
                 invoker._result = await actionResultValueTask;
             }
 
@@ -552,7 +557,8 @@ namespace Microsoft.AspNetCore.Mvc.Infrastructure
                 Scope scope,
                 object? state,
                 bool isCompleted
-            ) {
+            )
+            {
                 await lastTask;
 
                 while (!isCompleted)
@@ -593,7 +599,8 @@ namespace Microsoft.AspNetCore.Mvc.Infrastructure
             if (
                 actionDescriptor.BoundProperties.Count == 0
                 && actionDescriptor.Parameters.Count == 0
-            ) {
+            )
+            {
                 return Task.CompletedTask;
             }
 
@@ -608,7 +615,8 @@ namespace Microsoft.AspNetCore.Mvc.Infrastructure
         private static object?[]? PrepareArguments(
             IDictionary<string, object?>? actionParameters,
             ObjectMethodExecutor actionMethodExecutor
-        ) {
+        )
+        {
             var declaredParameterInfos = actionMethodExecutor.MethodParameters;
             var count = declaredParameterInfos.Length;
             if (count == 0)

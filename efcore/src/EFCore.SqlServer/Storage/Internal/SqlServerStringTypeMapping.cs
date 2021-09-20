@@ -39,18 +39,19 @@ namespace Microsoft.EntityFrameworkCore.SqlServer.Storage.Internal
             bool fixedLength = false,
             SqlDbType? sqlDbType = null,
             StoreTypePostfix? storeTypePostfix = null
-        ) : this(
-            new RelationalTypeMappingParameters(
-                new CoreTypeMappingParameters(typeof(string)),
-                storeType ?? GetStoreName(unicode, fixedLength),
-                storeTypePostfix ?? StoreTypePostfix.Size,
-                GetDbType(unicode, fixedLength),
-                unicode,
-                size,
-                fixedLength
-            ),
-            sqlDbType
-        ) { }
+        )
+            : this(
+                new RelationalTypeMappingParameters(
+                    new CoreTypeMappingParameters(typeof(string)),
+                    storeType ?? GetStoreName(unicode, fixedLength),
+                    storeTypePostfix ?? StoreTypePostfix.Size,
+                    GetDbType(unicode, fixedLength),
+                    unicode,
+                    size,
+                    fixedLength
+                ),
+                sqlDbType
+            ) { }
 
         private static string GetStoreName(bool unicode, bool fixedLength) =>
             unicode ? fixedLength ? "nchar" : "nvarchar" : fixedLength ? "char" : "varchar";
@@ -123,7 +124,8 @@ namespace Microsoft.EntityFrameworkCore.SqlServer.Storage.Internal
             if (
                 (value == null || value == DBNull.Value)
                 || (IsFixedLength && length == _maxSpecificSize && Size.HasValue)
-            ) {
+            )
+            {
                 // A fixed-length parameter where the value matches the length can remain a fixed-length parameter
                 // because SQLClient will not do any padding or truncating.
                 parameter.Size = _maxSpecificSize;

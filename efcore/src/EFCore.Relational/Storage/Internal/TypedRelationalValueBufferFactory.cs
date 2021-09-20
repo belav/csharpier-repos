@@ -27,7 +27,8 @@ namespace Microsoft.EntityFrameworkCore.Storage.Internal
         public TypedRelationalValueBufferFactory(
             RelationalValueBufferFactoryDependencies dependencies,
             Func<DbDataReader, object[]> valueFactory
-        ) {
+        )
+        {
             _valueFactory = valueFactory;
         }
 

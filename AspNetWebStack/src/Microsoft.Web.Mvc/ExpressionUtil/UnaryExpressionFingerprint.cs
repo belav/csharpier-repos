@@ -20,11 +20,8 @@ namespace Microsoft.Web.Mvc.ExpressionUtil
     )]
     internal sealed class UnaryExpressionFingerprint : ExpressionFingerprint
     {
-        public UnaryExpressionFingerprint(
-            ExpressionType nodeType,
-            Type type,
-            MethodInfo method
-        ) : base(nodeType, type)
+        public UnaryExpressionFingerprint(ExpressionType nodeType, Type type, MethodInfo method)
+            : base(nodeType, type)
         {
             // Other properties on UnaryExpression (like IsLifted / IsLiftedToNull) are simply derived
             // from Type and NodeType, so they're not necessary for inclusion in the fingerprint.

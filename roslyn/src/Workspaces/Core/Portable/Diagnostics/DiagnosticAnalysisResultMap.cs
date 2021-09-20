@@ -36,7 +36,8 @@ namespace Microsoft.CodeAnalysis.Workspaces.Diagnostics
         public DiagnosticAnalysisResultMap(
             ImmutableDictionary<TKey, TValue> analysisResult,
             ImmutableDictionary<TKey, AnalyzerTelemetryInfo> telemetryInfo
-        ) {
+        )
+        {
             Debug.Assert(telemetryInfo.IsEmpty || telemetryInfo.Count == analysisResult.Count);
 
             AnalysisResult = analysisResult;

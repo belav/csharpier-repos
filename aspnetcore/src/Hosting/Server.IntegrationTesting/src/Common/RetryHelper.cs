@@ -24,7 +24,8 @@ namespace Microsoft.AspNetCore.Server.IntegrationTesting
             ILogger logger,
             CancellationToken cancellationToken = default,
             int retryCount = 60
-        ) {
+        )
+        {
             for (var retry = 0; retry < retryCount; retry++)
             {
                 if (cancellationToken.IsCancellationRequested)
@@ -80,7 +81,8 @@ namespace Microsoft.AspNetCore.Server.IntegrationTesting
             Action<Exception> exceptionBlock,
             int retryCount = 3,
             int retryDelayMilliseconds = 0
-        ) {
+        )
+        {
             for (var retry = 0; retry < retryCount; ++retry)
             {
                 try

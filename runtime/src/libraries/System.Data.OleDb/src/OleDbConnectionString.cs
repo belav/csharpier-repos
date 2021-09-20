@@ -340,7 +340,8 @@ namespace System.Data.OleDb
                         FileAccess.Read,
                         FileShare.Read
                     )
-                ) {
+                )
+                {
                     long length = fstream.Length;
                     if (length < hdrlength || (0 != length % ADP.CharSize))
                     {
@@ -357,7 +358,8 @@ namespace System.Data.OleDb
                         else if (
                             System.Text.Encoding.Unicode.GetString(bytes, 0, hdrlength)
                             != UDL.Header
-                        ) {
+                        )
+                        {
                             failure = ADP.InvalidUDL();
                         }
                         else

@@ -28,7 +28,8 @@ namespace System.Net.Security
             ReadOnlySpan<byte> inputBuffer,
             ref byte[]? outputBuffer,
             SslAuthenticationOptions sslAuthenticationOptions
-        ) {
+        )
+        {
             return HandshakeInternal(
                 credential!,
                 ref context,
@@ -45,7 +46,8 @@ namespace System.Net.Security
             ReadOnlySpan<byte> inputBuffer,
             ref byte[]? outputBuffer,
             SslAuthenticationOptions sslAuthenticationOptions
-        ) {
+        )
+        {
             return HandshakeInternal(
                 credential!,
                 ref context,
@@ -60,7 +62,8 @@ namespace System.Net.Security
             SslProtocols protocols,
             EncryptionPolicy policy,
             bool isServer
-        ) {
+        )
+        {
             return new SafeFreeSslCredentials(certificateContext?.Certificate, protocols, policy);
         }
 
@@ -71,7 +74,8 @@ namespace System.Net.Security
             int trailerSize,
             ref byte[] output,
             out int resultSize
-        ) {
+        )
+        {
             return EncryptDecryptHelper(
                 securityContext,
                 input,
@@ -88,7 +92,8 @@ namespace System.Net.Security
             byte[] buffer,
             ref int offset,
             ref int count
-        ) {
+        )
+        {
             SecurityStatusPal retVal = EncryptDecryptHelper(
                 securityContext,
                 buffer,
@@ -101,7 +106,8 @@ namespace System.Net.Security
             if (
                 retVal.ErrorCode == SecurityStatusPalErrorCode.OK
                 || retVal.ErrorCode == SecurityStatusPalErrorCode.Renegotiate
-            ) {
+            )
+            {
                 count = resultSize;
             }
             return retVal;
@@ -110,7 +116,8 @@ namespace System.Net.Security
         public static ChannelBinding? QueryContextChannelBinding(
             SafeDeleteContext securityContext,
             ChannelBindingKind attribute
-        ) {
+        )
+        {
             ChannelBinding? bindingHandle;
 
             if (attribute == ChannelBindingKind.Endpoint)
@@ -136,14 +143,16 @@ namespace System.Net.Security
         public static void QueryContextStreamSizes(
             SafeDeleteContext? securityContext,
             out StreamSizes streamSizes
-        ) {
+        )
+        {
             streamSizes = StreamSizes.Default;
         }
 
         public static void QueryContextConnectionInfo(
             SafeDeleteContext securityContext,
             out SslConnectionInfo connectionInfo
-        ) {
+        )
+        {
             connectionInfo = new SslConnectionInfo(
                 ((SafeDeleteSslContext)securityContext).SslContext
             );
@@ -151,7 +160,8 @@ namespace System.Net.Security
 
         public static byte[] ConvertAlpnProtocolListToByteArray(
             List<SslApplicationProtocol> applicationProtocols
-        ) {
+        )
+        {
             return Interop.Ssl.ConvertAlpnProtocolListToByteArray(applicationProtocols);
         }
 
@@ -161,7 +171,8 @@ namespace System.Net.Security
             ReadOnlySpan<byte> inputBuffer,
             ref byte[]? outputBuffer,
             SslAuthenticationOptions sslAuthenticationOptions
-        ) {
+        )
+        {
             Debug.Assert(!credential.IsInvalid);
 
             byte[]? output = null;
@@ -195,7 +206,8 @@ namespace System.Net.Security
                     && sslAuthenticationOptions.ApplicationProtocols != null
                     && sslContext.AlpnHandle.IsAllocated
                     && sslContext.AlpnHandle.Target == null
-                ) {
+                )
+                {
                     return new SecurityStatusPal(
                         SecurityStatusPalErrorCode.InternalError,
                         Interop.OpenSsl.CreateSslException(SR.net_alpn_failed)
@@ -244,7 +256,8 @@ namespace System.Net.Security
             bool encrypt,
             ref byte[] output,
             out int resultSize
-        ) {
+        )
+        {
             resultSize = 0;
             try
             {
@@ -298,7 +311,8 @@ namespace System.Net.Security
             SafeDeleteContext? securityContext,
             TlsAlertType alertType,
             TlsAlertMessage alertMessage
-        ) {
+        )
+        {
             // There doesn't seem to be an exposed API for writing an alert,
             // the API seems to assume that all alerts are generated internally by
             // SSLHandshake.
@@ -308,7 +322,8 @@ namespace System.Net.Security
         public static SecurityStatusPal ApplyShutdownToken(
             ref SafeFreeCredentials? credentialsHandle,
             SafeDeleteContext securityContext
-        ) {
+        )
+        {
             SafeDeleteSslContext sslContext = ((SafeDeleteSslContext)securityContext);
 
             // Unset the quiet shutdown option initially configured.
@@ -328,7 +343,8 @@ namespace System.Net.Security
             if (
                 code == Interop.Ssl.SslErrorCode.SSL_ERROR_WANT_READ
                 || code == Interop.Ssl.SslErrorCode.SSL_ERROR_WANT_WRITE
-            ) {
+            )
+            {
                 return new SecurityStatusPal(SecurityStatusPalErrorCode.OK);
             }
             else if (code == Interop.Ssl.SslErrorCode.SSL_ERROR_SSL)

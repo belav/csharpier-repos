@@ -24,7 +24,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Organizing.Organizers
         protected override PropertyDeclarationSyntax Organize(
             PropertyDeclarationSyntax syntax,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             return syntax.WithModifiers(ModifiersOrganizer.Organize(syntax.Modifiers));
         }
     }

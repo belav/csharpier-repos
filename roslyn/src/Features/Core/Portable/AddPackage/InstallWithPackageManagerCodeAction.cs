@@ -21,7 +21,8 @@ namespace Microsoft.CodeAnalysis.AddPackage
         public InstallWithPackageManagerCodeAction(
             IPackageInstallerService installerService,
             string packageName
-        ) {
+        )
+        {
             _installerService = installerService;
             _packageName = packageName;
         }
@@ -30,7 +31,8 @@ namespace Microsoft.CodeAnalysis.AddPackage
 
         protected override Task<IEnumerable<CodeActionOperation>> ComputeOperationsAsync(
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             return Task.FromResult(
                 SpecializedCollections.SingletonEnumerable<CodeActionOperation>(
                     new InstallWithPackageManagerCodeActionOperation(this)
@@ -44,7 +46,8 @@ namespace Microsoft.CodeAnalysis.AddPackage
 
             public InstallWithPackageManagerCodeActionOperation(
                 InstallWithPackageManagerCodeAction codeAction
-            ) {
+            )
+            {
                 _codeAction = codeAction;
             }
 

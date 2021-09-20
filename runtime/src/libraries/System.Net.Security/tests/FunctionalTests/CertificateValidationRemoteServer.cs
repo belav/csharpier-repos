@@ -47,7 +47,8 @@ namespace System.Net.Security.Tests
                         RemoteHttpsCertValidation,
                         null
                     )
-                ) {
+                )
+                {
                     try
                     {
                         if (useAsync)
@@ -127,7 +128,8 @@ namespace System.Net.Security.Tests
                         RemoteHttpsCertValidation,
                         null
                     )
-                ) {
+                )
+                {
                     await sslStream.AuthenticateAsClientAsync(host);
                 }
             }
@@ -138,7 +140,8 @@ namespace System.Net.Security.Tests
             X509Certificate certificate,
             X509Chain chain,
             SslPolicyErrors sslPolicyErrors
-        ) {
+        )
+        {
             Assert.Equal(SslPolicyErrors.None, sslPolicyErrors);
 
             return true;

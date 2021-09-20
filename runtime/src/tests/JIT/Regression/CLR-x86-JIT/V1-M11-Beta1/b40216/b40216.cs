@@ -21,7 +21,8 @@ namespace Test
             float[] p4,
             object p5,
             object p6
-        ) {
+        )
+        {
             long local8 = 142l;
             if (p4[2] == 0.0f)
                 p2 = null;

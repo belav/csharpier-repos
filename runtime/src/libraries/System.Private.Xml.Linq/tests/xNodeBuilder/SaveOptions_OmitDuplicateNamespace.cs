@@ -212,7 +212,8 @@ namespace CoreXml.Test.XLinq
                 public void XDocumentConflictsNSRedefinitionSaveToStringWriterAndGetContent(
                     string xml1,
                     string xml2
-                ) {
+                )
+                {
                     XDocument doc = XDocument.Parse(xml1);
                     SaveOptions so =
                         SaveOptions.OmitDuplicateNamespaces | SaveOptions.DisableFormatting;
@@ -236,7 +237,8 @@ namespace CoreXml.Test.XLinq
                 public void XElementConflictsNSRedefinitionSaveToStringWriterAndGetContent(
                     string xml1,
                     string xml2
-                ) {
+                )
+                {
                     XElement el = XElement.Parse(xml1);
                     SaveOptions so =
                         SaveOptions.OmitDuplicateNamespaces | SaveOptions.DisableFormatting;

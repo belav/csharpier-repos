@@ -149,7 +149,8 @@ namespace System.IO.Compression
             string archiveFileName,
             ZipArchiveMode mode,
             Encoding? entryNameEncoding
-        ) {
+        )
+        {
             // Relies on FileStream's ctor for checking of archiveFileName
 
             FileMode fileMode;
@@ -405,7 +406,8 @@ namespace System.IO.Compression
             CompressionLevel? compressionLevel,
             bool includeBaseDirectory,
             Encoding? entryNameEncoding
-        ) {
+        )
+        {
             // Rely on Path.GetFullPath for validation of sourceDirectoryName and destinationArchive
 
             // Checking of compressionLevel is passed down to DeflateStream and the IDeflater implementation
@@ -420,7 +422,8 @@ namespace System.IO.Compression
                     ZipArchiveMode.Create,
                     entryNameEncoding
                 )
-            ) {
+            )
+            {
                 bool directoryIsEmpty = true;
 
                 //add files and directories
@@ -444,7 +447,8 @@ namespace System.IO.Compression
                             "*",
                             SearchOption.AllDirectories
                         )
-                    ) {
+                    )
+                    {
                         directoryIsEmpty = false;
 
                         int entryNameLength = file.FullName.Length - basePath.Length;
@@ -472,7 +476,8 @@ namespace System.IO.Compression
                             if (
                                 file is DirectoryInfo possiblyEmpty
                                 && ZipFileUtils.IsDirEmpty(possiblyEmpty)
-                            ) {
+                            )
+                            {
                                 // FullName never returns a directory separator character on the end,
                                 // but Zip archives require it to specify an explicit directory:
                                 string entryName = ZipFileUtils.EntryFromPath(

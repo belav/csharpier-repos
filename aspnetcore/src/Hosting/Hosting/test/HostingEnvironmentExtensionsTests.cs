@@ -76,7 +76,8 @@ namespace Microsoft.AspNetCore.Hosting.Tests
         private WebHostOptions CreateWebHostOptions(
             IConfiguration configuration = null,
             string applicationNameFallback = null
-        ) {
+        )
+        {
             return new WebHostOptions(
                 configuration ?? Mock.Of<IConfiguration>(),
                 applicationNameFallback: applicationNameFallback

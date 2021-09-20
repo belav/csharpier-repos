@@ -75,7 +75,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Syntax
             string indentWhitespace,
             string eolWhitespace,
             bool useElasticTrivia = false
-        ) {
+        )
+        {
             var normalizer = new SyntaxNormalizer(
                 token.FullSpan,
                 GetDeclarationDepth(token),
@@ -93,7 +94,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Syntax
             string indentWhitespace,
             string eolWhitespace,
             bool useElasticTrivia = false
-        ) {
+        )
+        {
             var normalizer = new SyntaxNormalizer(
                 trivia.FullSpan,
                 GetDeclarationDepth(trivia.Token),
@@ -250,7 +252,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Syntax
             if (
                 nextToken.IsKind(SyntaxKind.CloseBraceToken)
                 && IsAccessorListWithoutAccessorsWithBlockBody(currentToken.Parent?.Parent)
-            ) {
+            )
+            {
                 return 0;
             }
 
@@ -286,7 +289,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Syntax
                     if (
                         currentToken.Parent is AttributeListSyntax
                         && !(currentToken.Parent.Parent is ParameterSyntax)
-                    ) {
+                    )
+                    {
                         return 1;
                     }
                     break;
@@ -302,7 +306,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Syntax
                     if (
                         currentToken.Parent is LabeledStatementSyntax
                         || currentToken.Parent is SwitchLabelSyntax
-                    ) {
+                    )
+                    {
                         return 1;
                     }
                     break;
@@ -341,7 +346,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Syntax
                     nextToken.IsKind(SyntaxKind.GroupKeyword)
                     && nextToken.Parent.IsKind(SyntaxKind.GroupClause)
                 )
-            ) {
+            )
+            {
                 return 1;
             }
 
@@ -386,7 +392,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Syntax
                 openBraceToken.Parent.IsKind(SyntaxKind.Interpolation)
                 || openBraceToken.Parent is InitializerExpressionSyntax
                 || IsAccessorListWithoutAccessorsWithBlockBody(openBraceToken.Parent)
-            ) {
+            )
+            {
                 return 0;
             }
             else
@@ -401,7 +408,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Syntax
             if (
                 closeBraceToken.Parent.IsKind(SyntaxKind.Interpolation)
                 || closeBraceToken.Parent is InitializerExpressionSyntax
-            ) {
+            )
+            {
                 return 0;
             }
             else
@@ -416,7 +424,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Syntax
                 currentToken.Parent is InitializerExpressionSyntax
                 || currentToken.Parent.IsKind(SyntaxKind.Interpolation)
                 || IsAccessorListWithoutAccessorsWithBlockBody(currentToken.Parent)
-            ) {
+            )
+            {
                 return 0;
             }
             else
@@ -428,13 +437,15 @@ namespace Microsoft.CodeAnalysis.CSharp.Syntax
         private static int LineBreaksAfterCloseBrace(
             SyntaxToken currentToken,
             SyntaxToken nextToken
-        ) {
+        )
+        {
             if (
                 currentToken.Parent is InitializerExpressionSyntax
                 || currentToken.Parent.IsKind(SyntaxKind.Interpolation)
                 || currentToken.Parent?.Parent is AnonymousFunctionExpressionSyntax
                 || IsAccessorListFollowedByInitializer(currentToken.Parent)
-            ) {
+            )
+            {
                 return 0;
             }
 
@@ -451,7 +462,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Syntax
                     if (
                         kind == SyntaxKind.WhileKeyword
                         && nextToken.Parent.IsKind(SyntaxKind.DoStatement)
-                    ) {
+                    )
+                    {
                         return 1;
                     }
                     else
@@ -482,7 +494,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Syntax
             else if (
                 currentToken.Parent is AccessorDeclarationSyntax
                 && IsAccessorListWithoutAccessorsWithBlockBody(currentToken.Parent.Parent)
-            ) {
+            )
+            {
                 return 0;
             }
             else
@@ -501,7 +514,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Syntax
             if (
                 IsAccessorListWithoutAccessorsWithBlockBody(next.Parent)
                 || IsAccessorListWithoutAccessorsWithBlockBody(next.Parent.Parent)
-            ) {
+            )
+            {
                 // when the accessors are formatted inline, the separator is needed
                 // unless there is a semicolon. For example: "{ get; set; }"
                 return !next.IsKind(SyntaxKind.SemicolonToken);
@@ -533,14 +547,16 @@ namespace Microsoft.CodeAnalysis.CSharp.Syntax
                     && BinaryTokenNeedsSeparator(token.Kind())
                 )
                 || (next.Parent is BinaryExpressionSyntax && BinaryTokenNeedsSeparator(next.Kind()))
-            ) {
+            )
+            {
                 return true;
             }
 
             if (
                 token.IsKind(SyntaxKind.GreaterThanToken)
                 && token.Parent.IsKind(SyntaxKind.TypeArgumentList)
-            ) {
+            )
+            {
                 if (!SyntaxFacts.IsPunctuation(next.Kind()))
                 {
                     return true;
@@ -550,7 +566,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Syntax
             if (
                 token.IsKind(SyntaxKind.GreaterThanToken)
                 && token.Parent.IsKind(SyntaxKind.FunctionPointerParameterList)
-            ) {
+            )
+            {
                 return true;
             }
 
@@ -558,7 +575,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Syntax
                 token.IsKind(SyntaxKind.CommaToken)
                 && !next.IsKind(SyntaxKind.CommaToken)
                 && !token.Parent.IsKind(SyntaxKind.EnumDeclaration)
-            ) {
+            )
+            {
                 return true;
             }
 
@@ -568,7 +586,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Syntax
                     next.Kind() == SyntaxKind.SemicolonToken
                     || next.Kind() == SyntaxKind.CloseParenToken
                 )
-            ) {
+            )
+            {
                 return true;
             }
 
@@ -579,7 +598,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Syntax
                     || token.Parent is TypeSyntax
                 )
                 && !token.Parent.Parent.IsKind(SyntaxKind.TypeArgumentList)
-            ) {
+            )
+            {
                 return true;
             }
 
@@ -594,7 +614,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Syntax
                 if (
                     next.Parent.IsKind(SyntaxKind.BaseList)
                     || next.Parent.IsKind(SyntaxKind.TypeParameterConstraintClause)
-                ) {
+                )
+                {
                     return true;
                 }
             }
@@ -609,14 +630,16 @@ namespace Microsoft.CodeAnalysis.CSharp.Syntax
                 token.IsKind(SyntaxKind.CloseParenToken)
                 && IsWord(next.Kind())
                 && token.Parent.IsKind(SyntaxKind.TupleType) == true
-            ) {
+            )
+            {
                 return true;
             }
 
             if (
                 (next.IsKind(SyntaxKind.QuestionToken) || next.IsKind(SyntaxKind.ColonToken))
                 && (next.Parent.IsKind(SyntaxKind.ConditionalExpression))
-            ) {
+            )
+            {
                 return true;
             }
 
@@ -638,7 +661,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Syntax
                 if (
                     next.IsKind(SyntaxKind.AsteriskToken)
                     && token.IsKind(SyntaxKind.DelegateKeyword)
-                ) {
+                )
+                {
                     return false;
                 }
 
@@ -646,7 +670,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Syntax
                 if (
                     token.IsKind(SyntaxKind.AsteriskToken)
                     && next.Parent.IsKind(SyntaxKind.FunctionPointerCallingConvention)
-                ) {
+                )
+                {
                     switch (next.Kind())
                     {
                         case SyntaxKind.IdentifierToken:
@@ -660,7 +685,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Syntax
             if (
                 next.Parent.IsKind(SyntaxKind.FunctionPointerParameterList)
                 && next.IsKind(SyntaxKind.LessThanToken)
-            ) {
+            )
+            {
                 switch (token.Kind())
                 {
                     // No spacing between the * and < tokens if there is no calling convention
@@ -685,7 +711,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Syntax
                 token.Parent.IsKind(SyntaxKind.FunctionPointerCallingConvention)
                 && next.Parent.IsKind(SyntaxKind.FunctionPointerUnmanagedCallingConventionList)
                 && next.IsKind(SyntaxKind.OpenBracketToken)
-            ) {
+            )
+            {
                 return false;
             }
 
@@ -693,7 +720,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Syntax
             if (
                 next.Parent.IsKind(SyntaxKind.FunctionPointerUnmanagedCallingConventionList)
                 && token.Parent.IsKind(SyntaxKind.FunctionPointerUnmanagedCallingConventionList)
-            ) {
+            )
+            {
                 if (next.IsKind(SyntaxKind.IdentifierToken))
                 {
                     if (token.IsKind(SyntaxKind.OpenBracketToken))
@@ -728,7 +756,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Syntax
             if (
                 token.IsKind(SyntaxKind.LessThanToken)
                 && token.Parent.IsKind(SyntaxKind.FunctionPointerParameterList)
-            ) {
+            )
+            {
                 return false;
             }
 
@@ -737,14 +766,16 @@ namespace Microsoft.CodeAnalysis.CSharp.Syntax
             if (
                 next.IsKind(SyntaxKind.GreaterThanToken)
                 && next.Parent.IsKind(SyntaxKind.FunctionPointerParameterList)
-            ) {
+            )
+            {
                 return false;
             }
 
             if (
                 token.IsKind(SyntaxKind.EqualsGreaterThanToken)
                 || next.IsKind(SyntaxKind.EqualsGreaterThanToken)
-            ) {
+            )
+            {
                 return true;
             }
 
@@ -768,7 +799,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Syntax
                     next.IsKind(SyntaxKind.IdentifierToken)
                     || next.Parent.IsKind(SyntaxKind.IndexerDeclaration)
                 )
-            ) {
+            )
+            {
                 return true;
             }
 
@@ -790,7 +822,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Syntax
                     && !next.IsKind(SyntaxKind.ColonColonToken)
                     && !next.IsKind(SyntaxKind.GreaterThanToken)
                     && !next.IsKind(SyntaxKind.CommaToken)
-                ) {
+                )
+                {
                     return true;
                 }
             }
@@ -867,7 +900,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Syntax
             bool indentAfterLineBreak,
             bool mustHaveSeparator,
             int lineBreaksAfter
-        ) {
+        )
+        {
             ArrayBuilder<SyntaxTrivia> currentTriviaList = ArrayBuilder<SyntaxTrivia>.GetInstance(
                 triviaList.Count
             );
@@ -879,7 +913,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Syntax
                         trivia.IsKind(SyntaxKind.WhitespaceTrivia)
                         || trivia.IsKind(SyntaxKind.EndOfLineTrivia)
                         || trivia.FullWidth == 0
-                    ) {
+                    )
+                    {
                         continue;
                     }
 
@@ -939,7 +974,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Syntax
                             currentTriviaList.Count == 0
                             || !EndsInLineBreak(currentTriviaList.Last())
                         )
-                    ) {
+                    )
+                    {
                         currentTriviaList.Add(GetEndOfLine());
                         _afterLineBreak = true;
                         _afterIndentation = false;
@@ -1038,7 +1074,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Syntax
             SyntaxTrivia trivia,
             SyntaxTrivia next,
             bool isTrailingTrivia
-        ) {
+        )
+        {
             return NeedsLineBreakAfter(trivia, isTrailingTrivia)
                 || NeedsLineBreakBefore(next, isTrailingTrivia);
         }
@@ -1099,7 +1136,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Syntax
             if (
                 trivia.Kind() == SyntaxKind.PreprocessingMessageTrivia
                 || trivia.Kind() == SyntaxKind.DisabledTextTrivia
-            ) {
+            )
+            {
                 var text = trivia.ToFullString();
                 return text.Length > 0 && SyntaxFacts.IsNewLine(text.Last());
             }
@@ -1189,14 +1227,16 @@ namespace Microsoft.CodeAnalysis.CSharp.Syntax
                     if (
                         node.IsKind(SyntaxKind.IfStatement)
                         && node.Parent.IsKind(SyntaxKind.ElseClause)
-                    ) {
+                    )
+                    {
                         return parentDepth;
                     }
 
                     if (
                         node.Parent is BlockSyntax
                         || (node is StatementSyntax && !(node is BlockSyntax))
-                    ) {
+                    )
+                    {
                         // all nested statements are indented one level
                         return parentDepth + 1;
                     }
@@ -1210,7 +1250,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Syntax
                         || node is ExternAliasDirectiveSyntax
                         || node is QueryExpressionSyntax
                         || node is QueryContinuationSyntax
-                    ) {
+                    )
+                    {
                         return parentDepth + 1;
                     }
 
@@ -1223,7 +1264,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Syntax
 
         public override SyntaxNode? VisitInterpolatedStringExpression(
             InterpolatedStringExpressionSyntax node
-        ) {
+        )
+        {
             if (node.StringStartToken.Kind() == SyntaxKind.InterpolatedStringStartToken)
             {
                 //Just for non verbatim strings we want to make sure that the formatting of interpolations does not emit line breaks.

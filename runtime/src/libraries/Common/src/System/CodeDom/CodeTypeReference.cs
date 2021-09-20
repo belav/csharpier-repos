@@ -63,10 +63,8 @@ namespace System.Runtime.Serialization
             _isInterface = type.IsInterface;
         }
 
-        public CodeTypeReference(
-            Type type,
-            CodeTypeReferenceOptions codeTypeReferenceOption
-        ) : this(type)
+        public CodeTypeReference(Type type, CodeTypeReferenceOptions codeTypeReferenceOption)
+            : this(type)
         {
             Options = codeTypeReferenceOption;
         }

@@ -47,7 +47,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation
                 Workspace editorWorkspace,
                 ITextBuffer textBuffer,
                 out ITextUndoHistory undoHistory
-            ) {
+            )
+            {
                 switch (editorWorkspace)
                 {
                     case VisualStudioWorkspaceImpl visualStudioWorkspace:

@@ -39,7 +39,8 @@ namespace Microsoft.AspNetCore.Authorization
             IAuthorizationHandlerContextFactory contextFactory,
             IAuthorizationEvaluator evaluator,
             IOptions<AuthorizationOptions> options
-        ) {
+        )
+        {
             if (options == null)
             {
                 throw new ArgumentNullException(nameof(options));
@@ -87,7 +88,8 @@ namespace Microsoft.AspNetCore.Authorization
             ClaimsPrincipal user,
             object? resource,
             IEnumerable<IAuthorizationRequirement> requirements
-        ) {
+        )
+        {
             if (requirements == null)
             {
                 throw new ArgumentNullException(nameof(requirements));
@@ -130,7 +132,8 @@ namespace Microsoft.AspNetCore.Authorization
             ClaimsPrincipal user,
             object? resource,
             string policyName
-        ) {
+        )
+        {
             if (policyName == null)
             {
                 throw new ArgumentNullException(nameof(policyName));

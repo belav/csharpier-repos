@@ -54,7 +54,8 @@ namespace System.Web.Http
             IncludeErrorDetailPolicy includeErrorDetail,
             bool? customErrors,
             bool expectErrorDetail
-        ) {
+        )
+        {
             string controllerName = "Exception";
             string requestUrl = String.Format(
                 "{0}/{1}/{2}",
@@ -103,7 +104,8 @@ namespace System.Web.Http
 
         private async Task AssertResponseDoesNotIncludeErrorDetailAsync(
             HttpResponseMessage response
-        ) {
+        )
+        {
             Assert.Equal(HttpStatusCode.InternalServerError, response.StatusCode);
             JObject json = JToken.Parse(await response.Content.ReadAsStringAsync()) as JObject;
             Assert.Single(json);

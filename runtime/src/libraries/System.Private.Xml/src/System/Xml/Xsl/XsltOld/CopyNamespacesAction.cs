@@ -32,7 +32,8 @@ namespace System.Xml.Xsl.XsltOld
                         if (
                             frame.Node!.MoveToFirstNamespace(XPathNamespaceScope.ExcludeXml)
                             == false
-                        ) {
+                        )
+                        {
                             frame.Finished();
                             break;
                         }
@@ -52,7 +53,8 @@ namespace System.Xml.Xsl.XsltOld
                                 frame.Node.Value,
                                 false
                             ) == false
-                        ) {
+                        )
+                        {
                             // This one wasn't output
                             break;
                         }

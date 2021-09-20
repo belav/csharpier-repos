@@ -96,7 +96,8 @@ namespace System.Net.Tests
         public async Task Read_FullLengthAsynchronous_Success(
             bool transferEncodingChunked,
             string text
-        ) {
+        )
+        {
             byte[] expected = Encoding.UTF8.GetBytes(text);
             Task<HttpListenerContext> contextTask = _listener.GetContextAsync();
 
@@ -153,7 +154,8 @@ namespace System.Net.Tests
         public async Task Read_FullLengthAsynchronous_PadBuffer_Success(
             bool transferEncodingChunked,
             string text
-        ) {
+        )
+        {
             byte[] expected = Encoding.UTF8.GetBytes(text);
             Task<HttpListenerContext> contextTask = _listener.GetContextAsync();
 
@@ -209,7 +211,8 @@ namespace System.Net.Tests
         public async Task Read_FullLengthSynchronous_Success(
             bool transferEncodingChunked,
             string text
-        ) {
+        )
+        {
             byte[] expected = Encoding.UTF8.GetBytes(text);
             Task<HttpListenerContext> contextTask = _listener.GetContextAsync();
 
@@ -618,7 +621,8 @@ namespace System.Net.Tests
         public async Task Read_InvalidOffset_ThrowsArgumentOutOfRangeException(
             int offset,
             bool chunked
-        ) {
+        )
+        {
             Task<HttpListenerContext> contextTask = _listener.GetContextAsync();
             using (HttpClient client = new HttpClient())
             {
@@ -657,7 +661,8 @@ namespace System.Net.Tests
             int offset,
             int size,
             bool chunked
-        ) {
+        )
+        {
             Task<HttpListenerContext> contextTask = _listener.GetContextAsync();
             using (HttpClient client = new HttpClient())
             {

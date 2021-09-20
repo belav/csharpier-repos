@@ -2818,7 +2818,8 @@ DROP TABLE PrincipalTable;"
             IEnumerable<string> schemas,
             Action<DatabaseModel> asserter,
             string cleanupSql
-        ) {
+        )
+        {
             Fixture.TestStore.ExecuteNonQuery(createSql);
 
             try

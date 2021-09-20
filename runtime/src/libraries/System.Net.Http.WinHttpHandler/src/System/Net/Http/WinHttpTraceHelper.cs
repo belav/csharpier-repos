@@ -15,7 +15,8 @@ namespace System.Net.Http
             IntPtr context,
             uint status,
             [CallerMemberName] string memberName = null
-        ) {
+        )
+        {
             Debug.Assert(NetEventSource.Log.IsEnabled());
 
             NetEventSource.Info(
@@ -29,7 +30,8 @@ namespace System.Net.Http
             object thisOrContextObject,
             Interop.WinHttp.WINHTTP_ASYNC_RESULT asyncResult,
             [CallerMemberName] string memberName = null
-        ) {
+        )
+        {
             Debug.Assert(NetEventSource.Log.IsEnabled());
 
             uint apiIndex = (uint)asyncResult.dwResult.ToInt32();

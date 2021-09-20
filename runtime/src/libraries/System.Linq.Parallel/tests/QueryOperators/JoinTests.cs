@@ -79,7 +79,8 @@ namespace System.Linq.Parallel.Tests
                     y => y,
                     (x, y) => KeyValuePair.Create(x, y)
                 )
-            ) {
+            )
+            {
                 Assert.Equal(p.Key * KeyFactor, p.Value);
                 seen.Add(p.Key);
             }
@@ -107,7 +108,8 @@ namespace System.Linq.Parallel.Tests
                     y => y,
                     (x, y) => KeyValuePair.Create(x, y)
                 )
-            ) {
+            )
+            {
                 Assert.Equal(seen++, p.Key);
                 Assert.Equal(p.Key * KeyFactor, p.Value);
             }
@@ -121,7 +123,8 @@ namespace System.Linq.Parallel.Tests
             Labeled<ParallelQuery<int>> left,
             int leftCount,
             int rightCount
-        ) {
+        )
+        {
             Join(left, leftCount, rightCount);
         }
 
@@ -165,7 +168,8 @@ namespace System.Linq.Parallel.Tests
             Labeled<ParallelQuery<int>> left,
             int leftCount,
             int rightCount
-        ) {
+        )
+        {
             ParallelQuery<int> leftQuery = left.Item;
             ParallelQuery<int> rightQuery = UnorderedSources.Default(rightCount);
             int seen = 0;
@@ -193,7 +197,8 @@ namespace System.Linq.Parallel.Tests
             Labeled<ParallelQuery<int>> left,
             int leftCount,
             int rightCount
-        ) {
+        )
+        {
             Join_NotPipelined(left, leftCount, rightCount);
         }
 
@@ -244,7 +249,8 @@ namespace System.Linq.Parallel.Tests
             int leftCount,
             Labeled<ParallelQuery<int>> right,
             int rightCount
-        ) {
+        )
+        {
             ParallelQuery<int> leftQuery = left.Item;
             ParallelQuery<int> rightQuery = right.Item;
             int seen = 0;
@@ -272,7 +278,8 @@ namespace System.Linq.Parallel.Tests
             int leftCount,
             Labeled<ParallelQuery<int>> right,
             int rightCount
-        ) {
+        )
+        {
             Join_Multiple(left, leftCount, right, rightCount);
         }
 
@@ -281,7 +288,8 @@ namespace System.Linq.Parallel.Tests
             protected override ParallelQuery<KeyValuePair<int, int>> Join(
                 ParallelQuery<int> left,
                 ParallelQuery<int> right
-            ) {
+            )
+            {
                 return ReorderLeft(left)
                     .Join(right, x => x, y => y % KeyFactor, (x, y) => KeyValuePair.Create(x, y));
             }
@@ -317,7 +325,8 @@ namespace System.Linq.Parallel.Tests
             int leftCount,
             Labeled<ParallelQuery<int>> right,
             int rightCount
-        ) {
+        )
+        {
             LeftOrderingCollisionTestWithOrderedRight validator =
                 new LeftOrderingCollisionTestWithOrderedRight();
 
@@ -332,7 +341,8 @@ namespace System.Linq.Parallel.Tests
             int leftCount,
             Labeled<ParallelQuery<int>> right,
             int rightCount
-        ) {
+        )
+        {
             Join_Multiple_LeftWithOrderingColisions(left, leftCount, right, rightCount);
         }
 
@@ -341,7 +351,8 @@ namespace System.Linq.Parallel.Tests
             protected override ParallelQuery<KeyValuePair<int, int>> Join(
                 ParallelQuery<int> left,
                 ParallelQuery<int> right
-            ) {
+            )
+            {
                 return ReorderLeft(left)
                     .Join(right, x => x, y => y % KeyFactor, (x, y) => KeyValuePair.Create(x, y))
                     .Distinct();
@@ -377,7 +388,8 @@ namespace System.Linq.Parallel.Tests
             int leftCount,
             Labeled<ParallelQuery<int>> right,
             int rightCount
-        ) {
+        )
+        {
             LeftOrderingCollisionTestWithUnorderedRight validator =
                 new LeftOrderingCollisionTestWithUnorderedRight();
 
@@ -392,7 +404,8 @@ namespace System.Linq.Parallel.Tests
             int leftCount,
             Labeled<ParallelQuery<int>> right,
             int rightCount
-        ) {
+        )
+        {
             Join_Multiple_LeftWithOrderingColisions_UnorderedRight(
                 left,
                 leftCount,
@@ -455,7 +468,8 @@ namespace System.Linq.Parallel.Tests
             int leftCount,
             Labeled<ParallelQuery<int>> right,
             int rightCount
-        ) {
+        )
+        {
             ParallelQuery<int> leftQuery = left.Item;
             ParallelQuery<int> rightQuery = right.Item;
             int seenOuter = 0;
@@ -521,7 +535,8 @@ namespace System.Linq.Parallel.Tests
             int leftCount,
             Labeled<ParallelQuery<int>> right,
             int rightCount
-        ) {
+        )
+        {
             Join_CustomComparator(left, leftCount, right, rightCount);
         }
 
@@ -531,7 +546,8 @@ namespace System.Linq.Parallel.Tests
             protected override ParallelQuery<KeyValuePair<int, int>> Join(
                 ParallelQuery<int> left,
                 ParallelQuery<int> right
-            ) {
+            )
+            {
                 return ReorderLeft(left)
                     .Join(
                         right,
@@ -581,7 +597,8 @@ namespace System.Linq.Parallel.Tests
             int leftCount,
             Labeled<ParallelQuery<int>> right,
             int rightCount
-        ) {
+        )
+        {
             LeftOrderingCollisionTestWithOrderedRightAndCustomComparator validator =
                 new LeftOrderingCollisionTestWithOrderedRightAndCustomComparator();
 
@@ -596,7 +613,8 @@ namespace System.Linq.Parallel.Tests
             int leftCount,
             Labeled<ParallelQuery<int>> right,
             int rightCount
-        ) {
+        )
+        {
             Join_CustomComparator_LeftWithOrderingColisions(left, leftCount, right, rightCount);
         }
 
@@ -606,7 +624,8 @@ namespace System.Linq.Parallel.Tests
             protected override ParallelQuery<KeyValuePair<int, int>> Join(
                 ParallelQuery<int> left,
                 ParallelQuery<int> right
-            ) {
+            )
+            {
                 return ReorderLeft(left)
                     .Join(
                         right,
@@ -656,7 +675,8 @@ namespace System.Linq.Parallel.Tests
             int leftCount,
             Labeled<ParallelQuery<int>> right,
             int rightCount
-        ) {
+        )
+        {
             LeftOrderingCollisionTestWithUnorderedRightAndCustomComparator validator =
                 new LeftOrderingCollisionTestWithUnorderedRightAndCustomComparator();
 
@@ -671,7 +691,8 @@ namespace System.Linq.Parallel.Tests
             int leftCount,
             Labeled<ParallelQuery<int>> right,
             int rightCount
-        ) {
+        )
+        {
             Join_CustomComparator_LeftWithOrderingColisions_UnorderedRight(
                 left,
                 leftCount,
@@ -686,7 +707,8 @@ namespace System.Linq.Parallel.Tests
             Labeled<ParallelQuery<int>> left,
             int leftCount,
             int rightCount
-        ) {
+        )
+        {
             ParallelQuery<int> leftQuery = left.Item;
             ParallelQuery<int> rightQuery = UnorderedSources.Default(rightCount);
             ParallelQuery<int> middleQuery = ParallelEnumerable.Range(0, leftCount).AsOrdered();
@@ -725,7 +747,8 @@ namespace System.Linq.Parallel.Tests
             Labeled<ParallelQuery<int>> left,
             int leftCount,
             int rightCount
-        ) {
+        )
+        {
             Join_InnerJoin_Ordered(left, leftCount, rightCount);
         }
 
@@ -931,7 +954,8 @@ namespace System.Linq.Parallel.Tests
                 int leftCount,
                 ParallelQuery<int> right,
                 int rightCount
-            ) {
+            )
+            {
                 HashSet<int> seenLeft = new HashSet<int>();
                 HashSet<int> seenRight = new HashSet<int>();
 

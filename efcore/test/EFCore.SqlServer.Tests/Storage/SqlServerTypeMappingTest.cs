@@ -29,7 +29,8 @@ namespace Microsoft.EntityFrameworkCore.Storage
         public void Row_version_is_marked_as_modified_only_if_it_really_changed(
             string mode,
             bool changeValue
-        ) {
+        )
+        {
             using var context = new OptimisticContext();
             var token = new byte[] { 1, 2, 3, 4, 5, 6, 7, 8 };
             var newToken = changeValue ? new byte[] { 1, 2, 3, 4, 0, 6, 7, 8 } : token;

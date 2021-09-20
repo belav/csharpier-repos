@@ -45,9 +45,7 @@ namespace System
             HResult = HResults.COR_E_ARRAYTYPEMISMATCH;
         }
 
-        protected ArrayTypeMismatchException(
-            SerializationInfo info,
-            StreamingContext context
-        ) : base(info, context) { }
+        protected ArrayTypeMismatchException(SerializationInfo info, StreamingContext context)
+            : base(info, context) { }
     }
 }

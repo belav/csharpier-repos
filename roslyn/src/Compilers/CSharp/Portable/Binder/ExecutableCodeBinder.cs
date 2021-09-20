@@ -44,10 +44,12 @@ namespace Microsoft.CodeAnalysis.CSharp
             Symbol memberSymbol,
             Binder next,
             BinderFlags additionalFlags
-        ) : base(
-            next,
-            (next.Flags | additionalFlags) & ~BinderFlags.AllClearedAtExecutableCodeBoundary
-        ) {
+        )
+            : base(
+                next,
+                (next.Flags | additionalFlags) & ~BinderFlags.AllClearedAtExecutableCodeBoundary
+            )
+        {
             Debug.Assert(
                 (object)memberSymbol == null
                     || (
@@ -86,7 +88,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             if (
                 _memberSymbol is SynthesizedSimpleProgramEntryPointSymbol entryPoint
                 && _root == entryPoint.SyntaxNode
-            ) {
+            )
+            {
                 var scopeOwner = new SimpleProgramBinder(this, entryPoint);
                 map = LocalBinderFactory.BuildMap(
                     _memberSymbol,
@@ -134,7 +137,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             CSharpCompilation compilation,
             MethodSymbol iterator,
             BindingDiagnosticBag diagnostics
-        ) {
+        )
+        {
             if (!iterator.IsIterator)
             {
                 return;

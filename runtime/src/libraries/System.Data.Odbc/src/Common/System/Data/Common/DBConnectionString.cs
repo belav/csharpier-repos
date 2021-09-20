@@ -54,13 +54,15 @@ namespace System.Data.Common
             KeyRestrictionBehavior behavior,
             Dictionary<string, string> synonyms,
             bool useOdbcRules
-        ) : this(
-            new DbConnectionOptions(value, synonyms, useOdbcRules),
-            restrictions,
-            behavior,
-            synonyms,
-            false
-        ) {
+        )
+            : this(
+                new DbConnectionOptions(value, synonyms, useOdbcRules),
+                restrictions,
+                behavior,
+                synonyms,
+                false
+            )
+        {
             // useOdbcRules is only used to parse the connection string, not to parse restrictions because values don't apply there
             // the hashtable doesn't need clone since it isn't shared with anything else
         }
@@ -78,7 +80,8 @@ namespace System.Data.Common
             KeyRestrictionBehavior behavior,
             Dictionary<string, string>? synonyms,
             bool mustCloneDictionary
-        ) { // used by DBDataPermission
+        )
+        { // used by DBDataPermission
             Debug.Assert(null != connectionOptions, "null connectionOptions");
             switch (behavior)
             {
@@ -139,7 +142,8 @@ namespace System.Data.Common
             DBConnectionString connectionString,
             string[]? restrictionValues,
             KeyRestrictionBehavior behavior
-        ) {
+        )
+        {
             // used by intersect for two equal connection strings with different restrictions
             _encryptedUsersConnectionString = connectionString._encryptedUsersConnectionString;
             _parsetable = connectionString._parsetable;
@@ -296,7 +300,8 @@ namespace System.Data.Common
             }
             else if (
                 !ADP.IsEmptyArray(_restrictionValues) && !ADP.IsEmptyArray(entry._restrictionValues)
-            ) { // both AllowOnly with restrictions
+            )
+            { // both AllowOnly with restrictions
                 if (_restrictionValues.Length <= entry._restrictionValues.Length)
                 {
                     //Debug.WriteLine("13a this AllowOnly with restrictions and entry AllowOnly with restrictions");
@@ -343,13 +348,15 @@ namespace System.Data.Common
         private void ValidateCombinedSet(
             DBConnectionString? componentSet,
             DBConnectionString combinedSet
-        ) {
+        )
+        {
             Debug.Assert(combinedSet != null, "The combined connection string should not be null");
             if (
                 (componentSet != null)
                 && (combinedSet._restrictionValues != null)
                 && (componentSet._restrictionValues != null)
-            ) {
+            )
+            {
                 if (componentSet._behavior == KeyRestrictionBehavior.AllowOnly)
                 {
                     if (combinedSet._behavior == KeyRestrictionBehavior.AllowOnly)
@@ -442,7 +449,8 @@ namespace System.Data.Common
                         NameValuePair? current = entry.KeyChain;
                         null != current;
                         current = current.Next
-                    ) {
+                    )
+                    {
                         if (!ContainsKey(current.Name) && IsRestrictedKeyword(current.Name))
                         {
                             return false;
@@ -544,7 +552,8 @@ namespace System.Data.Common
         private static string[]? ParseRestrictions(
             string restrictions,
             Dictionary<string, string>? synonyms
-        ) {
+        )
+        {
             List<string> restrictionValues = new List<string>();
             StringBuilder buffer = new StringBuilder(restrictions.Length);
 

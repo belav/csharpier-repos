@@ -60,7 +60,8 @@ namespace Microsoft.CodeAnalysis.CompilerServer.UnitTests
                 RequestLanguage? language = null,
                 CompileFunc compileFunc = null,
                 CreateServerFunc createServerFunc = null
-            ) {
+            )
+            {
                 language ??= RequestLanguage.CSharpCompile;
                 compileFunc ??= delegate
                 {
@@ -105,7 +106,8 @@ namespace Microsoft.CodeAnalysis.CompilerServer.UnitTests
                         name: BuildServerConnection.GetServerMutexName(_pipeName),
                         createdNew: out holdsMutex
                     )
-                ) {
+                )
+                {
                     Assert.True(holdsMutex);
                     var ranLocal = false;
                     // Note: Connecting to a server can take up to a second to time out
@@ -137,7 +139,8 @@ namespace Microsoft.CodeAnalysis.CompilerServer.UnitTests
                         name: BuildServerConnection.GetClientMutexName(_pipeName),
                         out bool createdNew
                     )
-                ) {
+                )
+                {
                     Assert.True(createdNew);
                     var mutexSecurity = outer.GetAccessControl();
                     mutexSecurity.AddAccessRule(
@@ -201,7 +204,8 @@ namespace Microsoft.CodeAnalysis.CompilerServer.UnitTests
                 async Task<bool> tryConnectToNamedPipe(
                     int timeoutMs,
                     CancellationToken cancellationToken
-                ) {
+                )
+                {
                     using var pipeStream = await BuildServerConnection.TryConnectToServerAsync(
                         pipeName,
                         timeoutMs,

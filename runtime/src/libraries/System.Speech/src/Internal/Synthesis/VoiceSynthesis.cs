@@ -101,7 +101,8 @@ namespace System.Speech.Internal.Synthesis
             EventHandler<StateChangedEventArgs> eventHandler = delegate(
                 object sender,
                 StateChangedEventArgs args
-            ) {
+            )
+            {
                 if (prompt.IsCompleted && args.State == SynthesizerState.Ready)
                 {
                     done = true;
@@ -222,7 +223,8 @@ namespace System.Speech.Internal.Synthesis
                     if (
                         (idx = text.IndexOf(_xmlEscapeStrings[i], curPos, StringComparison.Ordinal))
                         >= 0
-                    ) {
+                    )
+                    {
                         if (pos > idx)
                         {
                             pos = idx;
@@ -566,7 +568,8 @@ namespace System.Speech.Internal.Synthesis
             VoiceAge age,
             int variant,
             bool switchContext
-        ) {
+        )
+        {
             TTSVoice defaultVoice = _currentVoice != null ? _currentVoice : GetVoice(switchContext);
 
             return GetEngineWithVoice(
@@ -923,7 +926,8 @@ namespace System.Speech.Internal.Synthesis
                 if (
                     voice != null
                     && (currrentVoiceId == null || !currrentVoiceId.Equals(voice.VoiceInfo))
-                ) {
+                )
+                {
                     currrentVoiceId = voice.VoiceInfo;
                     InjectEvent(TtsEventId.VoiceChange, prompt, null, currrentVoiceId);
                 }
@@ -964,7 +968,8 @@ namespace System.Speech.Internal.Synthesis
                             if (
                                 (_ttsInterest & (1 << (int)TtsEventId.Phoneme)) != 0
                                 && engineProxy.EngineAlphabet != AlphabetType.Ipa
-                            ) {
+                            )
+                            {
                                 _site.EventMapper = new PhonemeEventMapper(
                                     _site,
                                     PhonemeEventMapper.PhonemeConversion.SapiToIpa,
@@ -1033,7 +1038,8 @@ namespace System.Speech.Internal.Synthesis
                 ObjectTokenCategory category = ObjectTokenCategory.Create(
                     SAPICategories.CurrentUserVoices
                 )
-            ) {
+            )
+            {
                 if (category != null)
                 {
                     category.TryGetDWORD(defaultVoiceRate, ref lCurrRateAd);
@@ -1047,7 +1053,8 @@ namespace System.Speech.Internal.Synthesis
             Prompt prompt,
             Exception exception,
             VoiceInfo voiceInfo
-        ) {
+        )
+        {
             // If the prompt is terminated, release it ASAP
             if (evtId == TtsEventId.EndInputStream)
             {
@@ -1192,7 +1199,8 @@ namespace System.Speech.Internal.Synthesis
             VoiceAge age,
             int variant,
             bool switchContext
-        ) {
+        )
+        {
             TTSVoice voice = null;
 
             // The list of enabled voices can be changed by a speech application
@@ -1231,7 +1239,8 @@ namespace System.Speech.Internal.Synthesis
                                     || gender == vi.Gender
                                 )
                                 && (age == VoiceAge.NotSet || age == vi.Age)
-                            ) {
+                            )
+                            {
                                 voice = defaultVoice;
                             }
                         }
@@ -1303,12 +1312,14 @@ namespace System.Speech.Internal.Synthesis
                             StringComparison.Ordinal
                         )
                     ) >= 0
-                ) {
+                )
+                {
                     int lastCharacter = firstCharacter + sysVoice.VoiceInfo.Name.Length;
                     if (
                         (firstCharacter == 0 || name[firstCharacter - 1] == ' ')
                         && (lastCharacter == name.Length || name[lastCharacter] == ' ')
-                    ) {
+                    )
+                    {
                         voiceInfo = sysVoice.VoiceInfo;
                         if (cVariant-- == 1)
                         {
@@ -1334,7 +1345,8 @@ namespace System.Speech.Internal.Synthesis
             int variant,
             bool switchContext,
             ref InstalledVoice viDefault
-        ) {
+        )
+        {
             TTSVoice voice = null;
 
             // Build a list with all the tokens
@@ -1389,7 +1401,8 @@ namespace System.Speech.Internal.Synthesis
             VoiceAge age,
             int variant,
             List<InstalledVoice> tokensInfo
-        ) {
+        )
+        {
             // Set the default return value
             InstalledVoice sysVoice = defaultTokenInfo;
             int bestMatch = CalcMatchValue(culture, gender, age, sysVoice.VoiceInfo);
@@ -1437,7 +1450,8 @@ namespace System.Speech.Internal.Synthesis
                         if (
                             ti.Enabled
                             && CalcMatchValue(culture, gender, age, ti.VoiceInfo) == bestMatch
-                        ) {
+                        )
+                        {
                             // If we are looking for a variant and are matching the best match, switch voice
                             --variant;
                             sysVoice = ti;
@@ -1463,7 +1477,8 @@ namespace System.Speech.Internal.Synthesis
             VoiceGender gender,
             VoiceAge age,
             VoiceInfo voiceInfo
-        ) {
+        )
+        {
             int matchValue;
 
             if (voiceInfo != null)
@@ -1532,7 +1547,8 @@ namespace System.Speech.Internal.Synthesis
                 if (
                     !string.IsNullOrEmpty(voiceInfo.AssemblyName)
                     && (assembly = Assembly.Load(voiceInfo.AssemblyName)) != null
-                ) {
+                )
+                {
                     Type[] types = assembly.GetTypes();
                     TtsEngineSsml ssmlEngine = null;
                     foreach (Type type in types)

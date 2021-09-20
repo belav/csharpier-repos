@@ -163,7 +163,8 @@ namespace System.Xml.Linq
             string? prefix,
             string localName,
             string? namespaceName
-        ) {
+        )
+        {
             if (prefix == null)
                 throw new ArgumentNullException(nameof(prefix));
             _attrName = XNamespace.Get(prefix.Length == 0 ? string.Empty : namespaceName!)
@@ -179,7 +180,8 @@ namespace System.Xml.Linq
             string? prefix,
             string localName,
             string? namespaceName
-        ) {
+        )
+        {
             AddNode(new XElement(XNamespace.Get(namespaceName!).GetName(localName)));
         }
 

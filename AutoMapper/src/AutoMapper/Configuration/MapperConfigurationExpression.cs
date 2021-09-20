@@ -214,11 +214,13 @@ namespace AutoMapper
                         var memberInfo in type.GetMembers(
                             BindingFlags.Public | BindingFlags.Instance
                         )
-                    ) {
+                    )
+                    {
                         foreach (
                             var memberConfigurationProvider in memberInfo.GetCustomAttributes()
                                 .OfType<IMemberConfigurationProvider>()
-                        ) {
+                        )
+                        {
                             mappingExpression.ForMember(
                                 memberInfo,
                                 cfg => memberConfigurationProvider.ApplyConfiguration(cfg)

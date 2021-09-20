@@ -59,7 +59,8 @@ namespace System.Xml.Schema
         public static XmlSchema? Read(
             TextReader reader,
             ValidationEventHandler? validationEventHandler
-        ) {
+        )
+        {
             return Read(new XmlTextReader(reader), validationEventHandler);
         }
 
@@ -71,7 +72,8 @@ namespace System.Xml.Schema
         public static XmlSchema? Read(
             XmlReader reader,
             ValidationEventHandler? validationEventHandler
-        ) {
+        )
+        {
             XmlNameTable nameTable = reader.NameTable;
             Parser parser = new Parser(
                 SchemaType.XSD,
@@ -156,7 +158,8 @@ namespace System.Xml.Schema
                     !ignoreXS
                     && namespaceManager.LookupPrefix(XmlReservedNs.NsXs) == null
                     && namespaceManager.LookupNamespace("xs") == null
-                ) {
+                )
+                {
                     ns.Add("xs", XmlReservedNs.NsXs);
                 }
                 foreach (string prefix in namespaceManager)
@@ -173,7 +176,8 @@ namespace System.Xml.Schema
                 if (
                     !serializerNS.ContainsKey("xs")
                     && !serializerNS.ContainsValue(XmlReservedNs.NsXs)
-                ) { //Prefix xs not defined AND schema namespace not already mapped to a prefix
+                )
+                { //Prefix xs not defined AND schema namespace not already mapped to a prefix
                     serializerNS.Add("xs", XmlReservedNs.NsXs);
                 }
                 ns = this.Namespaces;
@@ -219,7 +223,8 @@ namespace System.Xml.Schema
             ValidationEventHandler? validationEventHandler,
             XmlNameTable nameTable,
             bool CompileContentModel
-        ) {
+        )
+        {
             //Need to lock here to prevent multi-threading problems when same schema is added to set and compiled
             lock (this)
             {
@@ -251,7 +256,8 @@ namespace System.Xml.Schema
             XmlNameTable nameTable,
             ValidationEventHandler? eventHandler,
             XmlSchemaCompilationSettings? compilationSettings
-        ) {
+        )
+        {
             Debug.Assert(_isPreprocessed);
             Compiler setCompiler = new Compiler(nameTable, eventHandler, null, compilationSettings);
             setCompiler.Prepare(this, true);
@@ -669,7 +675,8 @@ namespace System.Xml.Schema
                 if (
                     (complexType == null || type != XmlSchemaComplexType.AnyType)
                     && schemaInfo.ElementDeclsByType[itemName] == null
-                ) {
+                )
+                {
                     schemaInfo.ElementDeclsByType.Add(itemName, type.ElementDecl);
                 }
             }

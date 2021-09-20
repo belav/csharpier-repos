@@ -76,7 +76,8 @@ namespace Microsoft.EntityFrameworkCore.Query
             RelationalSqlTranslatingExpressionVisitorDependencies dependencies,
             QueryCompilationContext queryCompilationContext,
             QueryableMethodTranslatingExpressionVisitor queryableMethodTranslatingExpressionVisitor
-        ) {
+        )
+        {
             Check.NotNull(dependencies, nameof(dependencies));
             Check.NotNull(queryCompilationContext, nameof(queryCompilationContext));
             Check.NotNull(
@@ -146,7 +147,8 @@ namespace Microsoft.EntityFrameworkCore.Query
                     translation is SqlUnaryExpression sqlUnaryExpression
                     && sqlUnaryExpression.OperatorType == ExpressionType.Convert
                     && sqlUnaryExpression.Type == typeof(object)
-                ) {
+                )
+                {
                     translation = sqlUnaryExpression.Operand;
                 }
 
@@ -338,7 +340,8 @@ namespace Microsoft.EntityFrameworkCore.Query
                 binaryExpression.Left.Type == typeof(object[])
                 && binaryExpression.Left is NewArrayExpression
                 && binaryExpression.NodeType == ExpressionType.Equal
-            ) {
+            )
+            {
                 return Visit(
                     ConvertObjectArrayEqualityComparison(
                         binaryExpression.Left,
@@ -387,7 +390,8 @@ namespace Microsoft.EntityFrameworkCore.Query
                     equalsMethod: false,
                     out var result
                 )
-            ) {
+            )
+            {
                 return result;
             }
 
@@ -421,7 +425,8 @@ namespace Microsoft.EntityFrameworkCore.Query
                         || convertExpression.NodeType == ExpressionType.ConvertChecked
                     )
                     && expression.Type == typeof(object)
-                ) {
+                )
+                {
                     operand = convertExpression.Operand;
                     return true;
                 }
@@ -544,7 +549,8 @@ namespace Microsoft.EntityFrameworkCore.Query
             // EF.Property case
             if (
                 methodCallExpression.TryGetEFPropertyArguments(out var source, out var propertyName)
-            ) {
+            )
+            {
                 return TryBindMember(Visit(source), MemberIdentity.Create(propertyName))
                     ?? throw new InvalidOperationException(
                         CoreStrings.QueryUnableToTranslateEFProperty(methodCallExpression.Print())
@@ -566,13 +572,15 @@ namespace Microsoft.EntityFrameworkCore.Query
                 methodCallExpression.Object == null
                 && methodCallExpression.Method.DeclaringType == typeof(Enumerable)
                 && methodCallExpression.Arguments.Count > 0
-            ) {
+            )
+            {
                 if (
                     methodCallExpression.Arguments[0].Type.TryGetElementType(typeof(IQueryable<>))
                         == null
                     && Visit(methodCallExpression.Arguments[0])
                         is GroupingElementExpression groupingElementExpression
-                ) {
+                )
+                {
                     Expression? result;
                     switch (methodCallExpression.Method.Name)
                     {
@@ -718,7 +726,8 @@ namespace Microsoft.EntityFrameworkCore.Query
                     GroupingElementExpression? ApplyPredicate(
                         GroupingElementExpression groupingElement,
                         LambdaExpression lambdaExpression
-                    ) {
+                    )
+                    {
                         var predicate = TranslateInternal(
                             RemapLambda(groupingElement, lambdaExpression)
                         );
@@ -729,7 +738,8 @@ namespace Microsoft.EntityFrameworkCore.Query
                     static GroupingElementExpression ApplySelector(
                         GroupingElementExpression groupingElement,
                         LambdaExpression lambdaExpression
-                    ) {
+                    )
+                    {
                         var selector = RemapLambda(groupingElement, lambdaExpression);
 
                         return groupingElement.ApplySelector(selector);
@@ -748,7 +758,8 @@ namespace Microsoft.EntityFrameworkCore.Query
                     SqlExpression? GetExpressionForAggregation(
                         GroupingElementExpression groupingElement,
                         bool starProjection = false
-                    ) {
+                    )
+                    {
                         var selector = TranslateInternal(groupingElement.Element);
                         if (selector == null)
                         {
@@ -823,7 +834,8 @@ namespace Microsoft.EntityFrameworkCore.Query
                 if (
                     shaperExpression is UnaryExpression unaryExpression
                     && unaryExpression.NodeType == ExpressionType.Convert
-                ) {
+                )
+                {
                     convertedType = unaryExpression.Type;
                     innerExpression = unaryExpression.Operand;
                 }
@@ -834,7 +846,8 @@ namespace Microsoft.EntityFrameworkCore.Query
                         convertedType == null
                         || convertedType.IsAssignableFrom(entityShaperExpression.Type)
                     )
-                ) {
+                )
+                {
                     return new EntityReferenceExpression(
                         subqueryTranslation.UpdateShaperExpression(innerExpression)
                     );
@@ -850,7 +863,8 @@ namespace Microsoft.EntityFrameworkCore.Query
                             )
                         ) || IsAggregateResultWithCustomShaper(methodCallExpression.Method)
                     )
-                ) {
+                )
+                {
                     return QueryCompilationContext.NotTranslatedExpression;
                 }
 
@@ -870,7 +884,8 @@ namespace Microsoft.EntityFrameworkCore.Query
                         || genericMethod == QueryableMethods.All
                         || genericMethod == QueryableMethods.Contains
                     )
-                ) {
+                )
+                {
                     return subquery.Projection[0].Expression;
                 }
 
@@ -879,7 +894,8 @@ namespace Microsoft.EntityFrameworkCore.Query
                 if (
                     subqueryTranslation.ResultCardinality == ResultCardinality.SingleOrDefault
                     && !shaperExpression.Type.IsNullableType()
-                ) {
+                )
+                {
                     scalarSubqueryExpression = _sqlExpressionFactory.Coalesce(
                         scalarSubqueryExpression,
                         (SqlExpression)Visit(shaperExpression.Type.GetDefaultValueConstant())
@@ -897,7 +913,8 @@ namespace Microsoft.EntityFrameworkCore.Query
                 method.Name == nameof(object.Equals)
                 && methodCallExpression.Object != null
                 && methodCallExpression.Arguments.Count == 1
-            ) {
+            )
+            {
                 var left = Visit(methodCallExpression.Object);
                 var right = Visit(RemoveObjectConvert(methodCallExpression.Arguments[0]));
 
@@ -913,7 +930,8 @@ namespace Microsoft.EntityFrameworkCore.Query
                         equalsMethod: true,
                         out var result
                     )
-                ) {
+                )
+                {
                     return result;
                 }
 
@@ -931,11 +949,13 @@ namespace Microsoft.EntityFrameworkCore.Query
                 method.Name == nameof(object.Equals)
                 && methodCallExpression.Object == null
                 && methodCallExpression.Arguments.Count == 2
-            ) {
+            )
+            {
                 if (
                     methodCallExpression.Arguments[0].Type == typeof(object[])
                     && methodCallExpression.Arguments[0] is NewArrayExpression
-                ) {
+                )
+                {
                     return Visit(
                         ConvertObjectArrayEqualityComparison(
                             methodCallExpression.Arguments[0],
@@ -959,7 +979,8 @@ namespace Microsoft.EntityFrameworkCore.Query
                         equalsMethod: true,
                         out var result
                     )
-                ) {
+                )
+                {
                     return result;
                 }
 
@@ -975,7 +996,8 @@ namespace Microsoft.EntityFrameworkCore.Query
             else if (
                 method.IsGenericMethod
                 && method.GetGenericMethodDefinition().Equals(EnumerableMethods.Contains)
-            ) {
+            )
+            {
                 var enumerable = Visit(methodCallExpression.Arguments[0]);
                 var item = Visit(methodCallExpression.Arguments[1]);
 
@@ -987,7 +1009,8 @@ namespace Microsoft.EntityFrameworkCore.Query
                           : item,
                         out var result
                     )
-                ) {
+                )
+                {
                     return result;
                 }
 
@@ -1013,7 +1036,8 @@ namespace Microsoft.EntityFrameworkCore.Query
                           : item,
                         out var result
                     )
-                ) {
+                )
+                {
                     return result;
                 }
 
@@ -1035,7 +1059,8 @@ namespace Microsoft.EntityFrameworkCore.Query
                         Visit(methodCallExpression.Object),
                         out sqlObject
                     )
-                ) {
+                )
+                {
                     return QueryCompilationContext.NotTranslatedExpression;
                 }
 
@@ -1065,7 +1090,8 @@ namespace Microsoft.EntityFrameworkCore.Query
                 if (
                     methodCallExpression.Method == _stringEqualsWithStringComparison
                     || methodCallExpression.Method == _stringEqualsWithStringComparisonStatic
-                ) {
+                )
+                {
                     AddTranslationErrorDetails(
                         CoreStrings.QueryUnableToTranslateStringEqualsWithStringComparison
                     );
@@ -1116,12 +1142,14 @@ namespace Microsoft.EntityFrameworkCore.Query
             if (
                 typeBinaryExpression.NodeType == ExpressionType.TypeIs
                 && innerExpression is EntityReferenceExpression entityReferenceExpression
-            ) {
+            )
+            {
                 var entityType = entityReferenceExpression.EntityType;
                 if (
                     entityType.GetAllBaseTypesInclusive()
                         .Any(et => et.ClrType == typeBinaryExpression.TypeOperand)
-                ) {
+                )
+                {
                     return _sqlExpressionFactory.Constant(true);
                 }
 
@@ -1153,7 +1181,8 @@ namespace Microsoft.EntityFrameworkCore.Query
                             if (
                                 subSelectExpression.Limit == null
                                 && subSelectExpression.Offset == null
-                            ) {
+                            )
+                            {
                                 subSelectExpression.ClearOrdering();
                             }
 
@@ -1171,11 +1200,13 @@ namespace Microsoft.EntityFrameworkCore.Query
 
                         SqlExpression GeneratePredicateTPT(
                             EntityProjectionExpression entityProjectionExpression
-                        ) {
+                        )
+                        {
                             if (
                                 entityProjectionExpression.DiscriminatorExpression
                                 is CaseExpression caseExpression
-                            ) {
+                            )
+                            {
                                 var matchingCaseWhenClauses = caseExpression.WhenClauses.Where(
                                         wc =>
                                             discriminatorValues.Contains(
@@ -1208,7 +1239,8 @@ namespace Microsoft.EntityFrameworkCore.Query
                             !derivedType.GetRootType().GetIsDiscriminatorMappingComplete()
                             || !derivedType.GetAllBaseTypesInclusiveAscending()
                                 .All(e => (e == derivedType || e.IsAbstract()) && !HasSiblings(e))
-                        ) {
+                        )
+                        {
                             var concreteEntityTypes = derivedType.GetConcreteDerivedTypesInclusive()
                                 .ToList();
                             var discriminatorColumn = BindProperty(
@@ -1264,7 +1296,8 @@ namespace Microsoft.EntityFrameworkCore.Query
                     || unaryExpression.NodeType == ExpressionType.ConvertChecked
                     || unaryExpression.NodeType == ExpressionType.TypeAs
                 )
-            ) {
+            )
+            {
                 return entityReferenceExpression.Convert(unaryExpression.Type);
             }
 
@@ -1292,7 +1325,8 @@ namespace Microsoft.EntityFrameworkCore.Query
                         || unaryExpression.Type.UnwrapNullableType()
                             == operand.Type.UnwrapNullableType()
                         || unaryExpression.Type.UnwrapNullableType() == typeof(Enum)
-                    ) {
+                    )
+                    {
                         return sqlOperand!;
                     }
 
@@ -1300,7 +1334,8 @@ namespace Microsoft.EntityFrameworkCore.Query
                     if (
                         unaryExpression.Type == typeof(object)
                         || Dependencies.TypeMappingSource.FindMapping(unaryExpression.Type) != null
-                    ) {
+                    )
+                    {
                         sqlOperand = _sqlExpressionFactory.ApplyDefaultTypeMapping(sqlOperand);
 
                         return _sqlExpressionFactory.Convert(sqlOperand!, unaryExpression.Type);
@@ -1345,7 +1380,8 @@ namespace Microsoft.EntityFrameworkCore.Query
         private SqlExpression? BindProperty(
             EntityReferenceExpression entityReferenceExpression,
             IProperty property
-        ) {
+        )
+        {
             if (entityReferenceExpression.ParameterEntity != null)
             {
                 var valueBufferExpression = Visit(
@@ -1401,7 +1437,8 @@ namespace Microsoft.EntityFrameworkCore.Query
                     unaryExpression.NodeType == ExpressionType.Convert
                     || unaryExpression.NodeType == ExpressionType.ConvertChecked
                 )
-            ) {
+            )
+            {
                 var innerType = unaryExpression.Operand.Type.UnwrapNullableType();
                 if (innerType.IsEnum)
                 {
@@ -1422,7 +1459,8 @@ namespace Microsoft.EntityFrameworkCore.Query
                             || innerType == typeof(ushort)
                         )
                     )
-                ) {
+                )
+                {
                     return TryRemoveImplicitConvert(unaryExpression.Operand);
                 }
             }
@@ -1443,7 +1481,8 @@ namespace Microsoft.EntityFrameworkCore.Query
         private static Expression ConvertObjectArrayEqualityComparison(
             Expression left,
             Expression right
-        ) {
+        )
+        {
             var leftExpressions = ((NewArrayExpression)left).Expressions;
             var rightExpressions = ((NewArrayExpression)right).Expressions;
 
@@ -1473,7 +1512,8 @@ namespace Microsoft.EntityFrameworkCore.Query
             Expression source,
             Expression item,
             [NotNullWhen(true)] out Expression? result
-        ) {
+        )
+        {
             result = null;
 
             if (!(item is EntityReferenceExpression itemEntityReference))
@@ -1570,7 +1610,8 @@ namespace Microsoft.EntityFrameworkCore.Query
             Expression right,
             bool equalsMethod,
             [NotNullWhen(true)] out Expression? result
-        ) {
+        )
+        {
             var leftEntityReference = left as EntityReferenceExpression;
             var rightEntityReference = right as EntityReferenceExpression;
 
@@ -1633,7 +1674,8 @@ namespace Microsoft.EntityFrameworkCore.Query
                     if (
                         allNonPrincipalSharedNonPkProperties.Count != 0
                         && allNonPrincipalSharedNonPkProperties.All(p => p.IsNullable)
-                    ) {
+                    )
+                    {
                         var atLeastOneNonNullValueInNullablePropertyCondition =
                             allNonPrincipalSharedNonPkProperties.Select(
                                     p =>
@@ -1747,7 +1789,8 @@ namespace Microsoft.EntityFrameworkCore.Query
                 leftEntityType != null
                 && rightEntityType != null
                 && leftEntityType.GetRootType() != rightEntityType.GetRootType()
-            ) {
+            )
+            {
                 result = _sqlExpressionFactory.Constant(false);
                 return true;
             }
@@ -1771,7 +1814,8 @@ namespace Microsoft.EntityFrameworkCore.Query
                     leftEntityReference?.SubqueryEntity != null
                     || rightEntityReference?.SubqueryEntity != null
                 )
-            ) {
+            )
+            {
                 throw new InvalidOperationException(
                     CoreStrings.EntityEqualityOnCompositeKeyEntitySubqueryNotSupported(
                         nodeType == ExpressionType.Equal
@@ -1868,7 +1912,8 @@ namespace Microsoft.EntityFrameworkCore.Query
             QueryContext context,
             string baseParameterName,
             IProperty property
-        ) {
+        )
+        {
             var baseParameter = context.ParameterValues[baseParameterName];
             return baseParameter == null
               ? (T?)(object?)null
@@ -1879,13 +1924,15 @@ namespace Microsoft.EntityFrameworkCore.Query
             QueryContext context,
             string baseParameterName,
             IProperty property
-        ) {
+        )
+        {
             if (
                 !(
                     context.ParameterValues[baseParameterName]
                     is IEnumerable<TEntity> baseListParameter
                 )
-            ) {
+            )
+            {
                 return null;
             }
 
@@ -1929,7 +1976,8 @@ namespace Microsoft.EntityFrameworkCore.Query
             Expression? original,
             Expression? translation,
             out SqlExpression? castTranslation
-        ) {
+        )
+        {
             if (original != null && !(translation is SqlExpression))
             {
                 castTranslation = null;
@@ -1957,7 +2005,8 @@ namespace Microsoft.EntityFrameworkCore.Query
             private EntityReferenceExpression(
                 EntityReferenceExpression entityReferenceExpression,
                 IEntityType entityType
-            ) {
+            )
+            {
                 ParameterEntity = entityReferenceExpression.ParameterEntity;
                 SubqueryEntity = entityReferenceExpression.SubqueryEntity;
                 EntityType = entityType;
@@ -2023,7 +2072,8 @@ namespace Microsoft.EntityFrameworkCore.Query
                     expression is SqlConstantExpression sqlConstant
                     && sqlConstant.Value is bool boolValue
                     && boolValue
-                ) {
+                )
+                {
                     return this;
                 }
 
@@ -2055,7 +2105,8 @@ namespace Microsoft.EntityFrameworkCore.Query
                 if (
                     extensionExpression is SqlExpression sqlExpression
                     && !(extensionExpression is SqlFragmentExpression)
-                ) {
+                )
+                {
                     if (sqlExpression.TypeMapping == null)
                     {
                         throw new InvalidOperationException(

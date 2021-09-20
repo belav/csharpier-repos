@@ -20,7 +20,8 @@ namespace Generic.Dictionary
             Action<Dictionary<TKey, TValue>> get,
             Action<Dictionary<TKey, TValue>> remove,
             Action<Dictionary<TKey, TValue>> removeOutParam
-        ) {
+        )
+        {
             Task task = Task.Factory.StartNew(
                 () =>
                 {

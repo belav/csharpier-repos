@@ -58,7 +58,8 @@ namespace System.Net.Quic.Implementations.Mock
         internal override async ValueTask<int> ReadAsync(
             Memory<byte> buffer,
             CancellationToken cancellationToken = default
-        ) {
+        )
+        {
             CheckDisposed();
 
             StreamBuffer? streamBuffer = ReadStreamBuffer;
@@ -104,7 +105,8 @@ namespace System.Net.Quic.Implementations.Mock
         internal override ValueTask WriteAsync(
             ReadOnlyMemory<byte> buffer,
             CancellationToken cancellationToken = default
-        ) {
+        )
+        {
             return WriteAsync(buffer, endStream: false, cancellationToken);
         }
 
@@ -112,7 +114,8 @@ namespace System.Net.Quic.Implementations.Mock
             ReadOnlyMemory<byte> buffer,
             bool endStream,
             CancellationToken cancellationToken = default
-        ) {
+        )
+        {
             CheckDisposed();
 
             StreamBuffer? streamBuffer = WriteStreamBuffer;
@@ -132,21 +135,24 @@ namespace System.Net.Quic.Implementations.Mock
         internal override ValueTask WriteAsync(
             ReadOnlySequence<byte> buffers,
             CancellationToken cancellationToken = default
-        ) {
+        )
+        {
             throw new NotImplementedException();
         }
         internal override ValueTask WriteAsync(
             ReadOnlySequence<byte> buffers,
             bool endStream,
             CancellationToken cancellationToken = default
-        ) {
+        )
+        {
             throw new NotImplementedException();
         }
 
         internal override async ValueTask WriteAsync(
             ReadOnlyMemory<ReadOnlyMemory<byte>> buffers,
             CancellationToken cancellationToken = default
-        ) {
+        )
+        {
             for (int i = 0; i < buffers.Length; i++)
             {
                 await WriteAsync(buffers.Span[i], cancellationToken).ConfigureAwait(false);
@@ -157,7 +163,8 @@ namespace System.Net.Quic.Implementations.Mock
             ReadOnlyMemory<ReadOnlyMemory<byte>> buffers,
             bool endStream,
             CancellationToken cancellationToken = default
-        ) {
+        )
+        {
             throw new NotImplementedException();
         }
 
@@ -194,7 +201,8 @@ namespace System.Net.Quic.Implementations.Mock
 
         internal override ValueTask ShutdownWriteCompleted(
             CancellationToken cancellationToken = default
-        ) {
+        )
+        {
             CheckDisposed();
 
             return default;

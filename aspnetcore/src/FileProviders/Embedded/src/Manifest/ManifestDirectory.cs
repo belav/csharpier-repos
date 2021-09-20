@@ -83,7 +83,8 @@ namespace Microsoft.Extensions.FileProviders.Embedded.Manifest
         internal static void ValidateChildrenAndSetParent(
             ManifestEntry[] children,
             ManifestDirectory parent
-        ) {
+        )
+        {
             foreach (var child in children)
             {
                 if (child == UnknownPath)

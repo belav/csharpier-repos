@@ -132,7 +132,8 @@ namespace Newtonsoft.Json.Tests.Serialization
                     Error = delegate(
                         object sender,
                         Newtonsoft.Json.Serialization.ErrorEventArgs args
-                    ) {
+                    )
+                    {
                         errors.Add(args.ErrorContext.Error.Message);
                         args.ErrorContext.Handled = true;
                     }
@@ -828,7 +829,8 @@ namespace Newtonsoft.Json.Tests.Serialization
                 {
                     MaxDepth = maxDepth
                 }
-            ) {
+            )
+            {
                 JsonSerializer jsonSerializer = JsonSerializer.Create(
                     new JsonSerializerSettings
                     {
@@ -877,7 +879,8 @@ namespace Newtonsoft.Json.Tests.Serialization
                 {
                     MaxDepth = maxDepth
                 }
-            ) {
+            )
+            {
                 JsonSerializer jsonSerializer = JsonSerializer.Create(
                     new JsonSerializerSettings
                     {
@@ -1071,7 +1074,8 @@ namespace Newtonsoft.Json.Tests.Serialization
                     Type objectType,
                     object existingValue,
                     JsonSerializer serializer
-                ) {
+                )
+                {
                     try
                     {
                         // Do own stuff.
@@ -1091,7 +1095,8 @@ namespace Newtonsoft.Json.Tests.Serialization
                     JsonWriter writer,
                     object value,
                     JsonSerializer serializer
-                ) {
+                )
+                {
                     try
                     {
                         Something s = (Something)value;
@@ -1134,7 +1139,8 @@ namespace Newtonsoft.Json.Tests.Serialization
                     Type objectType,
                     object existingValue,
                     JsonSerializer serializer
-                ) {
+                )
+                {
                     throw new NotImplementedException();
                 }
 
@@ -1142,7 +1148,8 @@ namespace Newtonsoft.Json.Tests.Serialization
                     JsonWriter writer,
                     object value,
                     JsonSerializer serializer
-                ) {
+                )
+                {
                     throw new NotImplementedException();
                 }
             }
@@ -1405,7 +1412,8 @@ namespace Newtonsoft.Json.Tests.Serialization
         public void OnDeserializationError(
             StreamingContext streamingContext,
             ErrorContext errorContext
-        ) {
+        )
+        {
             errorContext.Handled = true;
         }
     }

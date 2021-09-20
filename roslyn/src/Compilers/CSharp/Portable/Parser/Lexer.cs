@@ -360,7 +360,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Syntax.InternalSyntax
             SyntaxListBuilder leading,
             SyntaxListBuilder trailing,
             SyntaxDiagnosticInfo[] errors
-        ) {
+        )
+        {
             Debug.Assert(info.Kind != SyntaxKind.IdentifierToken || info.StringValue != null);
 
             var leadingNode = leading?.ToListNode();
@@ -525,7 +526,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Syntax.InternalSyntax
                     _options.DocumentationMode >= DocumentationMode.Diagnose
                     || !InDocumentationComment
                 )
-            ) {
+            )
+            {
                 token = token.WithDiagnosticsGreen(errors);
             }
 
@@ -1066,7 +1068,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Syntax.InternalSyntax
             ref bool firstCharWasUnderscore,
             bool isHex,
             bool isBinary
-        ) {
+        )
+        {
             if (TextWindow.PeekChar() == '_')
             {
                 if (isHex || isBinary)
@@ -1094,7 +1097,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Syntax.InternalSyntax
                             ? SyntaxFacts.IsHexDigit(ch)
                             : isBinary ? SyntaxFacts.IsBinaryDigit(ch) : SyntaxFacts.IsDecDigit(ch)
                     )
-                ) {
+                )
+                {
                     break;
                 }
                 else
@@ -1483,7 +1487,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Syntax.InternalSyntax
                     CultureInfo.InvariantCulture,
                     out result
                 )
-            ) {
+            )
+            {
                 //we've already lexed the literal, so the error must be from overflow
                 this.AddError(MakeError(ErrorCode.ERR_IntOverflow));
             }
@@ -1509,7 +1514,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Syntax.InternalSyntax
                     CultureInfo.InvariantCulture,
                     out result
                 )
-            ) {
+            )
+            {
                 //we've already lexed the literal, so the error must be from overflow
                 this.AddError(MakeError(ErrorCode.ERR_IntOverflow));
             }
@@ -1574,7 +1580,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Syntax.InternalSyntax
                     CultureInfo.InvariantCulture,
                     out result
                 )
-            ) {
+            )
+            {
                 //we've already lexed the literal, so the error must be from overflow
                 this.AddError(
                     this.MakeError(start, end - start, ErrorCode.ERR_FloatOverflow, "decimal")
@@ -1919,7 +1926,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Syntax.InternalSyntax
                                 info.IsVerbatim
                                 && this.ModeIs(LexerMode.DebuggerSyntax)
                                 && (char.ToLower(TextWindow.PeekChar(1)) == 'x')
-                            ) {
+                            )
+                            {
                                 isObjectAddress = true;
                             }
                             else
@@ -1962,7 +1970,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Syntax.InternalSyntax
                             _identLen == 0
                             && this.ModeIs(LexerMode.DebuggerSyntax)
                             && TextWindow.PeekChar(1) == '>'
-                        ) {
+                        )
+                        {
                             // In DebuggerSyntax mode, identifiers are allowed to begin with <>.
                             TextWindow.AdvanceChar(2);
                             this.AddIdentChar('<');
@@ -1976,12 +1985,14 @@ namespace Microsoft.CodeAnalysis.CSharp.Syntax.InternalSyntax
                         // This is the 'expensive' call
                         if (
                             _identLen == 0 && ch > 127 && SyntaxFacts.IsIdentifierStartCharacter(ch)
-                        ) {
+                        )
+                        {
                             break;
                         }
                         else if (
                             _identLen > 0 && ch > 127 && SyntaxFacts.IsIdentifierPartCharacter(ch)
-                        ) {
+                        )
+                        {
                             //// BUG 424819 : Handle identifier chars > 0xFFFF via surrogate pairs
                             if (UnicodeCharacterUtilities.IsFormattingChar(ch))
                             {
@@ -2159,7 +2170,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Syntax.InternalSyntax
                             !isEscaped
                             && (TextWindow.Position == beforeConsumed + 1)
                             && (TextWindow.PeekChar() == 'u' || TextWindow.PeekChar() == 'U')
-                        ) {
+                        )
+                        {
                             Debug.Assert(
                                 consumedSurrogate == SlidingTextWindow.InvalidCharacter,
                                 "Since consumedChar == '\\'"
@@ -2286,14 +2298,16 @@ namespace Microsoft.CodeAnalysis.CSharp.Syntax.InternalSyntax
                             _identLen == 0
                             && consumedChar > 127
                             && SyntaxFacts.IsIdentifierStartCharacter(consumedChar)
-                        ) {
+                        )
+                        {
                             break;
                         }
                         else if (
                             _identLen > 0
                             && consumedChar > 127
                             && SyntaxFacts.IsIdentifierPartCharacter(consumedChar)
-                        ) {
+                        )
+                        {
                             //// BUG 424819 : Handle identifier chars > 0xFFFF via surrogate pairs
                             if (UnicodeCharacterUtilities.IsFormattingChar(consumedChar))
                             {
@@ -2409,7 +2423,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Syntax.InternalSyntax
             bool afterFirstToken,
             bool isTrailing,
             ref SyntaxListBuilder triviaList
-        ) {
+        )
+        {
             bool onlyWhitespaceOnLine = !isTrailing;
 
             while (true)
@@ -2449,7 +2464,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Syntax.InternalSyntax
                                 !this.SuppressDocumentationCommentParse
                                 && TextWindow.PeekChar(2) == '/'
                                 && TextWindow.PeekChar(3) != '/'
-                            ) {
+                            )
+                            {
                                 // Doc comments should never be in trailing trivia.
                                 // Stop processing so that it will be leading trivia on the next token.
                                 if (isTrailing)
@@ -2478,7 +2494,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Syntax.InternalSyntax
                                 && TextWindow.PeekChar(2) == '*'
                                 && TextWindow.PeekChar(3) != '*'
                                 && TextWindow.PeekChar(3) != '/'
-                            ) {
+                            )
+                            {
                                 // Doc comments should never be in trailing trivia.
                                 // Stop processing so that it will be leading trivia on the next token.
                                 if (isTrailing)
@@ -2720,7 +2737,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Syntax.InternalSyntax
                     if (
                         (ch = TextWindow.PeekChar()) == SlidingTextWindow.InvalidCharacter
                         && TextWindow.IsReallyAtEnd()
-                    ) {
+                    )
+                    {
                         isTerminated = false;
                         break;
                     }
@@ -2751,7 +2769,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Syntax.InternalSyntax
             while (
                 !SyntaxFacts.IsNewLine(ch = TextWindow.PeekChar())
                 && (ch != SlidingTextWindow.InvalidCharacter || !TextWindow.IsReallyAtEnd())
-            ) {
+            )
+            {
                 TextWindow.AdvanceChar();
             }
         }
@@ -2867,7 +2886,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Syntax.InternalSyntax
             bool afterFirstToken,
             bool afterNonWhitespaceOnLine,
             ref SyntaxListBuilder triviaList
-        ) {
+        )
+        {
             var directive = this.LexSingleDirective(
                 true,
                 true,
@@ -2887,7 +2907,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Syntax.InternalSyntax
         private void LexExcludedDirectivesAndTrivia(
             bool endIsActive,
             ref SyntaxListBuilder triviaList
-        ) {
+        )
+        {
             while (true)
             {
                 bool hasFollowingDirective;
@@ -2913,7 +2934,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Syntax.InternalSyntax
                 if (
                     directive.Kind == SyntaxKind.EndIfDirectiveTrivia
                     || (branching != null && branching.BranchTaken)
-                ) {
+                )
+                {
                     break;
                 }
                 else if (directive.Kind == SyntaxKind.IfDirectiveTrivia)
@@ -2929,7 +2951,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Syntax.InternalSyntax
             bool afterFirstToken,
             bool afterNonWhitespaceOnLine,
             ref SyntaxListBuilder triviaList
-        ) {
+        )
+        {
             if (SyntaxFacts.IsWhitespace(TextWindow.PeekChar()))
             {
                 this.Start();
@@ -3402,7 +3425,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Syntax.InternalSyntax
                     && TextWindow.PeekChar(6) == 'T'
                     && TextWindow.PeekChar(7) == 'A'
                     && TextWindow.PeekChar(8) == '['
-                ) {
+                )
+                {
                     TextWindow.AdvanceChar(9);
                     info.Kind = SyntaxKind.XmlCDataStartToken;
                 }
@@ -3611,7 +3635,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Syntax.InternalSyntax
                 TextWindow.PeekChar() == ']'
                 && TextWindow.PeekChar(1) == ']'
                 && TextWindow.PeekChar(2) == '>'
-            ) {
+            )
+            {
                 TextWindow.AdvanceChar(3);
                 info.StringValue = info.Text = TextWindow.GetText(false);
                 this.AddError(XmlParseErrorCode.XML_CDataEndTagNotAllowed);
@@ -3642,7 +3667,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Syntax.InternalSyntax
                         if (
                             this.StyleIs(XmlDocCommentStyle.Delimited)
                             && TextWindow.PeekChar(1) == '/'
-                        ) {
+                        )
+                        {
                             // we're at the end of the comment, but don't lex it yet.
                             info.StringValue = info.Text = TextWindow.GetText(false);
                             return;
@@ -3690,7 +3716,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Syntax.InternalSyntax
                 errors == null
                 && tagInfo.ContextualKind == SyntaxKind.None
                 && tagInfo.Kind == SyntaxKind.IdentifierToken
-            ) {
+            )
+            {
                 SyntaxToken token = DocumentationCommentXmlTokens.LookupToken(
                     tagInfo.Text,
                     leading
@@ -4002,7 +4029,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Syntax.InternalSyntax
                         if (
                             this.StyleIs(XmlDocCommentStyle.Delimited)
                             && TextWindow.PeekChar(1) == '/'
-                        ) {
+                        )
+                        {
                             // we're at the end of the comment, but don't lex it yet.
                             info.StringValue = info.Text = TextWindow.GetText(false);
                             return;
@@ -4127,7 +4155,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Syntax.InternalSyntax
                     if (
                         this.ModeIs(LexerMode.XmlCrefDoubleQuote)
                         || this.ModeIs(LexerMode.XmlNameDoubleQuote)
-                    ) {
+                    )
+                    {
                         info.Kind = SyntaxKind.DoubleQuoteToken;
                         return true;
                     }
@@ -4350,7 +4379,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Syntax.InternalSyntax
                         && !info.IsVerbatim
                         && !info.HasIdentifierEscapeSequence
                         && _cache.TryGetKeywordKind(info.StringValue, out keywordKind)
-                    ) {
+                    )
+                    {
                         if (SyntaxFacts.IsContextualKeyword(keywordKind))
                         {
                             info.Kind = SyntaxKind.IdentifierToken;
@@ -4440,7 +4470,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Syntax.InternalSyntax
                     TextWindow.TryScanXmlEntity(out nextChar, out nextSurrogate)
                     && nextChar == ch
                     && nextSurrogate == SlidingTextWindow.InvalidCharacter
-                ) {
+                )
+                {
                     return true;
                 }
 
@@ -4615,7 +4646,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Syntax.InternalSyntax
                         if (
                             this.StyleIs(XmlDocCommentStyle.Delimited)
                             && TextWindow.PeekChar(1) == '/'
-                        ) {
+                        )
+                        {
                             // we're at the end of the comment, but don't lex it yet.
                             info.StringValue = info.Text = TextWindow.GetText(false);
                             return;
@@ -4747,7 +4779,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Syntax.InternalSyntax
                         if (
                             this.StyleIs(XmlDocCommentStyle.Delimited)
                             && TextWindow.PeekChar(1) == '/'
-                        ) {
+                        )
+                        {
                             // we're at the end of the comment, but don't lex it yet.
                             info.StringValue = info.Text = TextWindow.GetText(false);
                             return;
@@ -4873,7 +4906,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Syntax.InternalSyntax
                         if (
                             this.StyleIs(XmlDocCommentStyle.Delimited)
                             && TextWindow.PeekChar(1) == '/'
-                        ) {
+                        )
+                        {
                             // we're at the end of the comment, but don't lex it yet.
                             info.StringValue = info.Text = TextWindow.GetText(false);
                             return;
@@ -4905,7 +4939,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Syntax.InternalSyntax
             if (
                 this.LocationIs(XmlDocCommentLocation.Start)
                 && this.StyleIs(XmlDocCommentStyle.Delimited)
-            ) {
+            )
+            {
                 // Read the /** that begins an XML doc comment. Since these are recognized only
                 // when the trailing character is not a '*', we wind up in the interior of the
                 // doc comment at the end.
@@ -4915,7 +4950,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Syntax.InternalSyntax
                     && TextWindow.PeekChar(1) == '*'
                     && TextWindow.PeekChar(2) == '*'
                     && TextWindow.PeekChar(3) != '*'
-                ) {
+                )
+                {
                     TextWindow.AdvanceChar(3);
                     var text = TextWindow.GetText(true);
                     this.AddTrivia(
@@ -4929,7 +4965,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Syntax.InternalSyntax
             else if (
                 this.LocationIs(XmlDocCommentLocation.Start)
                 || this.LocationIs(XmlDocCommentLocation.Exterior)
-            ) {
+            )
+            {
                 // We're in the exterior of an XML doc comment and need to eat the beginnings of
                 // lines, for single line and delimited comments. We chew up white space until
                 // a non-whitespace character, and then make the right decision depending on
@@ -4953,7 +4990,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Syntax.InternalSyntax
                                 && TextWindow.PeekChar(1) == '/'
                                 && TextWindow.PeekChar(2) == '/'
                                 && TextWindow.PeekChar(3) != '/'
-                            ) {
+                            )
+                            {
                                 TextWindow.AdvanceChar(3);
                                 var text = TextWindow.GetText(true);
                                 this.AddTrivia(
@@ -4971,7 +5009,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Syntax.InternalSyntax
                             {
                                 while (
                                     TextWindow.PeekChar() == '*' && TextWindow.PeekChar(1) != '/'
-                                ) {
+                                )
+                                {
                                     TextWindow.AdvanceChar();
                                 }
 
@@ -5043,7 +5082,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Syntax.InternalSyntax
             else if (
                 !this.LocationIs(XmlDocCommentLocation.End)
                 && this.StyleIs(XmlDocCommentStyle.Delimited)
-            ) {
+            )
+            {
                 if (TextWindow.PeekChar() == '*' && TextWindow.PeekChar(1) == '/')
                 {
                     TextWindow.AdvanceChar(2);
@@ -5067,7 +5107,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Syntax.InternalSyntax
                 if (
                     this.LocationIs(XmlDocCommentLocation.Interior)
                     && (SyntaxFacts.IsWhitespace(ch) || SyntaxFacts.IsNewLine(ch))
-                ) {
+                )
+                {
                     this.LexXmlWhitespaceAndNewLineTrivia(ref trivia);
                 }
                 else
@@ -5106,7 +5147,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Syntax.InternalSyntax
                         if (
                             this.StyleIs(XmlDocCommentStyle.Delimited)
                             && TextWindow.PeekChar(1) == '/'
-                        ) {
+                        )
+                        {
                             // we're at the end of the comment, but don't add as trivia here.
                             return;
                         }

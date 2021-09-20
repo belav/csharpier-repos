@@ -13,7 +13,8 @@ namespace BasicWebSite.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult<Product> RequestSizeLimitCheckBeforeAntiforgeryValidation(
             Product product
-        ) {
+        )
+        {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);

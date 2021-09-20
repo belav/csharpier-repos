@@ -197,7 +197,8 @@ namespace Microsoft.EntityFrameworkCore.Query
         private static IQueryable<Customer> QueryableArgQuery(
             NorthwindContext context,
             IQueryable<string> ids
-        ) {
+        )
+        {
             return context.Customers.Where(c => ids.Contains(c.CustomerID));
         }
 
@@ -765,7 +766,8 @@ namespace Microsoft.EntityFrameworkCore.Query
         [MemberData(nameof(IsAsyncData))]
         public virtual Task Join_Customers_Orders_Skip_Take_followed_by_constant_projection(
             bool async
-        ) {
+        )
+        {
             return AssertQuery(
                 async,
                 ss =>
@@ -782,7 +784,8 @@ namespace Microsoft.EntityFrameworkCore.Query
         [MemberData(nameof(IsAsyncData))]
         public virtual Task Join_Customers_Orders_Projection_With_String_Concat_Skip_Take(
             bool async
-        ) {
+        )
+        {
             return AssertQuery(
                 async,
                 ss =>
@@ -1781,7 +1784,8 @@ namespace Microsoft.EntityFrameworkCore.Query
         [MemberData(nameof(IsAsyncData))]
         public virtual Task Select_DTO_with_member_init_distinct_in_subquery_translated_to_server(
             bool async
-        ) {
+        )
+        {
             return AssertQuery(
                 async,
                 ss =>
@@ -1799,7 +1803,8 @@ namespace Microsoft.EntityFrameworkCore.Query
         [MemberData(nameof(IsAsyncData))]
         public virtual Task Select_DTO_with_member_init_distinct_in_subquery_translated_to_server_2(
             bool async
-        ) {
+        )
+        {
             return AssertQuery(
                 async,
                 ss =>
@@ -1884,7 +1889,8 @@ namespace Microsoft.EntityFrameworkCore.Query
         [MemberData(nameof(IsAsyncData))]
         public virtual async Task Select_correlated_subquery_filtered_returning_queryable_throws(
             bool async
-        ) {
+        )
+        {
             Assert.Equal(
                 CoreStrings.QueryInvalidMaterializationType(
                     @"c => DbSet<Order>()
@@ -1914,7 +1920,8 @@ namespace Microsoft.EntityFrameworkCore.Query
         [MemberData(nameof(IsAsyncData))]
         public virtual async Task Select_correlated_subquery_ordered_returning_queryable_throws(
             bool async
-        ) {
+        )
+        {
             Assert.Equal(
                 CoreStrings.QueryInvalidMaterializationType(
                     @"c => DbSet<Order>()
@@ -1949,7 +1956,8 @@ namespace Microsoft.EntityFrameworkCore.Query
         [MemberData(nameof(IsAsyncData))]
         public virtual async Task Select_correlated_subquery_ordered_returning_queryable_in_DTO_throws(
             bool async
-        ) {
+        )
+        {
             Assert.Equal(
                 CoreStrings.QueryInvalidMaterializationType(
                     @"c => DbSet<Order>()
@@ -2027,7 +2035,8 @@ namespace Microsoft.EntityFrameworkCore.Query
         [MemberData(nameof(IsAsyncData))]
         public virtual async Task Select_nested_collection_in_anonymous_type_returning_ordered_queryable(
             bool async
-        ) {
+        )
+        {
             Assert.Equal(
                 CoreStrings.QueryInvalidMaterializationType(
                     @"c => DbSet<Order>()
@@ -2257,7 +2266,8 @@ namespace Microsoft.EntityFrameworkCore.Query
         [MemberData(nameof(IsAsyncData))]
         public virtual Task Where_query_composition_entity_equality_one_element_SingleOrDefault(
             bool async
-        ) {
+        )
+        {
             return AssertQuery(
                 async,
                 ss =>
@@ -2300,7 +2310,8 @@ namespace Microsoft.EntityFrameworkCore.Query
         [MemberData(nameof(IsAsyncData))]
         public virtual Task Where_query_composition_entity_equality_one_element_FirstOrDefault(
             bool async
-        ) {
+        )
+        {
             return AssertQuery(
                 async,
                 ss =>
@@ -2337,7 +2348,8 @@ namespace Microsoft.EntityFrameworkCore.Query
         [MemberData(nameof(IsAsyncData))]
         public virtual Task Where_query_composition_entity_equality_no_elements_SingleOrDefault(
             bool async
-        ) {
+        )
+        {
             return AssertQuery(
                 async,
                 ss =>
@@ -2378,7 +2390,8 @@ namespace Microsoft.EntityFrameworkCore.Query
         [MemberData(nameof(IsAsyncData))]
         public virtual Task Where_query_composition_entity_equality_no_elements_FirstOrDefault(
             bool async
-        ) {
+        )
+        {
             return AssertQuery(
                 async,
                 ss =>
@@ -2413,7 +2426,8 @@ namespace Microsoft.EntityFrameworkCore.Query
         [MemberData(nameof(IsAsyncData))]
         public virtual Task Where_query_composition_entity_equality_multiple_elements_SingleOrDefault(
             bool async
-        ) {
+        )
+        {
             return AssertQuery(
                 async,
                 ss =>
@@ -2435,7 +2449,8 @@ namespace Microsoft.EntityFrameworkCore.Query
         [MemberData(nameof(IsAsyncData))]
         public virtual Task Where_query_composition_entity_equality_multiple_elements_Single(
             bool async
-        ) {
+        )
+        {
             return AssertQuery(
                 async,
                 ss =>
@@ -2457,7 +2472,8 @@ namespace Microsoft.EntityFrameworkCore.Query
         [MemberData(nameof(IsAsyncData))]
         public virtual Task Where_query_composition_entity_equality_multiple_elements_FirstOrDefault(
             bool async
-        ) {
+        )
+        {
             return AssertQuery(
                 async,
                 ss =>
@@ -2473,7 +2489,8 @@ namespace Microsoft.EntityFrameworkCore.Query
         [MemberData(nameof(IsAsyncData))]
         public virtual Task Where_query_composition_entity_equality_multiple_elements_First(
             bool async
-        ) {
+        )
+        {
             return AssertQuery(
                 async,
                 ss =>
@@ -3216,7 +3233,8 @@ namespace Microsoft.EntityFrameworkCore.Query
         [MemberData(nameof(IsAsyncData))]
         public virtual Task Default_if_empty_top_level_arg_followed_by_projecting_constant(
             bool async
-        ) {
+        )
+        {
             return AssertTranslationFailed(
                 () =>
                     AssertQueryScalar(
@@ -4046,7 +4064,8 @@ namespace Microsoft.EntityFrameworkCore.Query
         protected IQueryable<TOut> ShadowPropertySelect<TIn, TOut>(
             IQueryable<TIn> source,
             object column
-        ) {
+        )
+        {
             return source.Select(e => EF.Property<TOut>(e, (string)column));
         }
 
@@ -4054,7 +4073,8 @@ namespace Microsoft.EntityFrameworkCore.Query
             IQueryable<T> source,
             object column,
             string value
-        ) {
+        )
+        {
             return source.Where(e => EF.Property<string>(e, (string)column) == value);
         }
 
@@ -4740,7 +4760,8 @@ namespace Microsoft.EntityFrameworkCore.Query
         [MemberData(nameof(IsAsyncData))]
         public virtual Task Handle_materialization_properly_when_more_than_two_query_sources_are_involved(
             bool async
-        ) {
+        )
+        {
             return AssertFirstOrDefault(
                 async,
                 ss =>
@@ -4924,7 +4945,8 @@ namespace Microsoft.EntityFrameworkCore.Query
         [MemberData(nameof(IsAsyncData))]
         public virtual Task Subquery_member_pushdown_does_not_change_original_subquery_model(
             bool async
-        ) {
+        )
+        {
             return AssertQuery(
                 async,
                 ss =>
@@ -4949,7 +4971,8 @@ namespace Microsoft.EntityFrameworkCore.Query
         [MemberData(nameof(IsAsyncData))]
         public virtual Task Subquery_member_pushdown_does_not_change_original_subquery_model2(
             bool async
-        ) {
+        )
+        {
             return AssertQuery(
                 async,
                 ss =>
@@ -5239,7 +5262,8 @@ namespace Microsoft.EntityFrameworkCore.Query
         [MemberData(nameof(IsAsyncData))]
         public virtual Task Select_expression_references_are_updated_correctly_with_subquery(
             bool async
-        ) {
+        )
+        {
             var nextYear = 2017;
 
             return AssertQueryScalar(
@@ -5524,7 +5548,8 @@ namespace Microsoft.EntityFrameworkCore.Query
         [MemberData(nameof(IsAsyncData))]
         public virtual Task No_orderby_added_for_fully_translated_manually_constructed_LOJ(
             bool async
-        ) {
+        )
+        {
             return AssertQuery(
                 async,
                 ss =>
@@ -5542,7 +5567,8 @@ namespace Microsoft.EntityFrameworkCore.Query
         [MemberData(nameof(IsAsyncData))]
         public virtual Task No_orderby_added_for_client_side_GroupJoin_dependent_to_principal_LOJ(
             bool async
-        ) {
+        )
+        {
             return AssertQuery(
                 async,
                 ss =>
@@ -5560,7 +5586,8 @@ namespace Microsoft.EntityFrameworkCore.Query
         [MemberData(nameof(IsAsyncData))]
         public virtual Task No_orderby_added_for_client_side_GroupJoin_dependent_to_principal_LOJ_with_additional_join_condition1(
             bool async
-        ) {
+        )
+        {
             return AssertQuery(
                 async,
                 ss =>
@@ -5584,7 +5611,8 @@ namespace Microsoft.EntityFrameworkCore.Query
         [MemberData(nameof(IsAsyncData))]
         public virtual Task No_orderby_added_for_client_side_GroupJoin_dependent_to_principal_LOJ_with_additional_join_condition2(
             bool async
-        ) {
+        )
+        {
             return AssertQuery(
                 async,
                 ss =>
@@ -5608,7 +5636,8 @@ namespace Microsoft.EntityFrameworkCore.Query
         [MemberData(nameof(IsAsyncData))]
         public virtual Task Orderby_added_for_client_side_GroupJoin_principal_to_dependent_LOJ(
             bool async
-        ) {
+        )
+        {
             return AssertQuery(
                 async,
                 ss =>
@@ -5986,7 +6015,8 @@ namespace Microsoft.EntityFrameworkCore.Query
 
         private static IEnumerable<TElement> ClientDefaultIfEmpty<TElement>(
             IEnumerable<TElement> source
-        ) {
+        )
+        {
             return source?.Count() == 0 ? new[] { default(TElement) } : source;
         }
 
@@ -6018,7 +6048,8 @@ namespace Microsoft.EntityFrameworkCore.Query
         [MemberData(nameof(IsAsyncData))]
         public virtual Task Complex_query_with_repeated_nested_query_model_compiles_correctly(
             bool async
-        ) {
+        )
+        {
             return AssertQuery(
                 async,
                 ss =>
@@ -6441,7 +6472,8 @@ namespace Microsoft.EntityFrameworkCore.Query
         [MemberData(nameof(IsAsyncData))]
         public virtual Task Compare_two_collection_navigations_with_different_query_sources(
             bool async
-        ) {
+        )
+        {
             return AssertQuery(
                 async,
                 ss =>
@@ -6474,7 +6506,8 @@ namespace Microsoft.EntityFrameworkCore.Query
         [MemberData(nameof(IsAsyncData))]
         public virtual Task Compare_two_collection_navigations_with_different_property_chains(
             bool async
-        ) {
+        )
+        {
             return AssertQuery(
                 async,
                 ss =>
@@ -6524,7 +6557,8 @@ namespace Microsoft.EntityFrameworkCore.Query
         [MemberData(nameof(IsAsyncData))]
         public virtual Task Complex_nested_query_doesnt_try_binding_to_grandparent_when_parent_returns_complex_result(
             bool async
-        ) {
+        )
+        {
             return AssertQuery(
                 async,
                 ss =>
@@ -6558,7 +6592,8 @@ namespace Microsoft.EntityFrameworkCore.Query
         [MemberData(nameof(IsAsyncData))]
         public virtual Task Complex_nested_query_properly_binds_to_grandparent_when_parent_returns_scalar_result(
             bool async
-        ) {
+        )
+        {
             return AssertQuery(
                 async,
                 ss =>
@@ -7322,7 +7357,8 @@ namespace Microsoft.EntityFrameworkCore.Query
         [MemberData(nameof(IsAsyncData))]
         public virtual Task Anonymous_projection_skip_take_empty_collection_FirstOrDefault(
             bool async
-        ) {
+        )
+        {
             return AssertQuery(
                 async,
                 ss =>
@@ -7366,7 +7402,8 @@ namespace Microsoft.EntityFrameworkCore.Query
         [MemberData(nameof(IsAsyncData))]
         public virtual Task Checked_context_with_case_to_same_nullable_type_does_not_fail(
             bool isAsync
-        ) {
+        )
+        {
             return AssertMax(
                 isAsync,
                 ss => ss.Set<OrderDetail>(),
@@ -7407,7 +7444,8 @@ namespace Microsoft.EntityFrameworkCore.Query
         [MemberData(nameof(IsAsyncData))]
         public virtual Task MemberInitExpression_NewExpression_is_funcletized_even_when_bindings_are_not_evaluatable(
             bool async
-        ) {
+        )
+        {
             var randomString = "random";
             return AssertQuery(
                 async,
@@ -7499,7 +7537,8 @@ namespace Microsoft.EntityFrameworkCore.Query
         [MemberData(nameof(IsAsyncData))]
         public virtual async Task Perform_identity_resolution_reuses_same_instances_across_joins(
             bool async
-        ) {
+        )
+        {
             using var context = CreateContext();
 
             var query = (
@@ -7525,7 +7564,8 @@ namespace Microsoft.EntityFrameworkCore.Query
         [MemberData(nameof(IsAsyncData))]
         public virtual Task Using_string_Equals_with_StringComparison_throws_informative_error(
             bool async
-        ) {
+        )
+        {
             return AssertQuery(
                 async,
                 ss =>
@@ -7541,7 +7581,8 @@ namespace Microsoft.EntityFrameworkCore.Query
         [MemberData(nameof(IsAsyncData))]
         public virtual Task Using_static_string_Equals_with_StringComparison_throws_informative_error(
             bool async
-        ) {
+        )
+        {
             return AssertQuery(
                 async,
                 ss =>
@@ -7678,7 +7719,8 @@ namespace Microsoft.EntityFrameworkCore.Query
         [MemberData(nameof(IsAsyncData))]
         public virtual Task Pending_selector_in_cardinality_reducing_method_is_applied_before_expanding_collection_navigation_member(
             bool async
-        ) {
+        )
+        {
             return AssertQuery(
                 async,
                 ss =>
@@ -7781,7 +7823,8 @@ namespace Microsoft.EntityFrameworkCore.Query
         [MemberData(nameof(IsAsyncData))]
         public virtual Task DefaultIfEmpty_over_empty_collection_followed_by_projecting_constant(
             bool async
-        ) {
+        )
+        {
             return AssertFirstOrDefault(
                 async,
                 ss => ss.Set<Customer>().Where(c => false).DefaultIfEmpty().Select(c => "520")
@@ -7979,7 +8022,8 @@ namespace Microsoft.EntityFrameworkCore.Query
 
         protected virtual async Task Single_Predicate_Cancellation_test(
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             using var ctx = CreateContext();
             var result = await ctx.Customers.SingleAsync(
                 c => c.CustomerID == "ALFKI",
@@ -8018,7 +8062,8 @@ namespace Microsoft.EntityFrameworkCore.Query
         [MemberData(nameof(IsAsyncData))]
         public virtual Task Correlated_collection_with_distinct_without_default_identifiers_projecting_columns(
             bool async
-        ) {
+        )
+        {
             return AssertQuery(
                 async,
                 ss =>
@@ -8057,7 +8102,8 @@ namespace Microsoft.EntityFrameworkCore.Query
         [MemberData(nameof(IsAsyncData))]
         public virtual Task Correlated_collection_with_distinct_without_default_identifiers_projecting_columns_with_navigation(
             bool async
-        ) {
+        )
+        {
             return AssertQuery(
                 async,
                 ss =>

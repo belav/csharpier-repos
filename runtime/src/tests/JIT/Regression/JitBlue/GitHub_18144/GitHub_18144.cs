@@ -89,7 +89,8 @@ public class GitHub_18144
             || !xF.Equals(Vector256<byte>.Zero)
             || !xG.Equals(Vector256<byte>.Zero)
             || !xH.Equals(Vector256<byte>.Zero)
-        ) {
+        )
+        {
             returnVal = -1;
         }
 
@@ -115,7 +116,8 @@ public class GitHub_18144
             || !vF.Equals(Vector128<byte>.Zero)
             || !vG.Equals(Vector128<byte>.Zero)
             || !vH.Equals(Vector128<byte>.Zero)
-        ) {
+        )
+        {
             returnVal = -1;
         }
 

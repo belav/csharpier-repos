@@ -102,7 +102,8 @@ namespace System.Drawing.Imaging.Tests
             FrameDimension frameDimension,
             object obj,
             bool result
-        ) {
+        )
+        {
             Assert.Equal(result, frameDimension.Equals(obj));
         }
 

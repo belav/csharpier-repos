@@ -48,7 +48,8 @@ namespace System.Reflection.Emit
         internal PropertyOnTypeBuilderInst(
             TypeBuilderInstantiation instantiation,
             PropertyInfo prop
-        ) {
+        )
+        {
             this.instantiation = instantiation;
             this.prop = prop;
         }
@@ -150,7 +151,8 @@ namespace System.Reflection.Emit
             Binder? binder,
             object?[]? index,
             CultureInfo? culture
-        ) {
+        )
+        {
             throw new NotSupportedException();
         }
 
@@ -161,7 +163,8 @@ namespace System.Reflection.Emit
             Binder? binder,
             object?[]? index,
             CultureInfo? culture
-        ) {
+        )
+        {
             throw new NotSupportedException();
         }
 

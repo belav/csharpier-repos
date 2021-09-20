@@ -19,7 +19,8 @@ namespace Microsoft.Extensions.StackTrace.Sources
         public static IList<StackFrameInfo> GetFrames(
             Exception exception,
             out AggregateException? error
-        ) {
+        )
+        {
             if (exception == null)
             {
                 error = default;
@@ -91,7 +92,8 @@ namespace Microsoft.Extensions.StackTrace.Sources
                     typeof(IAsyncStateMachine).IsAssignableFrom(type)
                     || typeof(IEnumerator).IsAssignableFrom(type)
                 )
-            ) {
+            )
+            {
                 // Convert StateMachine methods to correct overload +MoveNext()
                 if (TryResolveStateMachineMethod(ref method, out type))
                 {
@@ -213,7 +215,8 @@ namespace Microsoft.Extensions.StackTrace.Sources
                 || type == typeof(TaskAwaiter<>)
                 || type == typeof(ConfiguredTaskAwaitable.ConfiguredTaskAwaiter)
                 || type == typeof(ConfiguredTaskAwaitable<>.ConfiguredTaskAwaiter)
-            ) {
+            )
+            {
                 switch (method.Name)
                 {
                     case "HandleNonSuccessAndDebuggerNotification":
@@ -230,7 +233,8 @@ namespace Microsoft.Extensions.StackTrace.Sources
         private static bool TryResolveStateMachineMethod(
             ref MethodBase method,
             out Type? declaringType
-        ) {
+        )
+        {
             Debug.Assert(method != null);
             Debug.Assert(method.DeclaringType != null);
 

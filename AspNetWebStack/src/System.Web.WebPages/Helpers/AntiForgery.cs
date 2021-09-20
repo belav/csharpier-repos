@@ -96,7 +96,8 @@ namespace System.Web.Helpers
             string oldCookieToken,
             out string newCookieToken,
             out string formToken
-        ) {
+        )
+        {
             if (HttpContext.Current == null)
             {
                 throw new ArgumentException(WebPageResources.HttpContextUnavailable);
@@ -144,7 +145,8 @@ namespace System.Web.Helpers
             string salt,
             string domain,
             string path
-        ) {
+        )
+        {
             if (httpContext == null)
             {
                 throw new ArgumentNullException("httpContext");
@@ -154,7 +156,8 @@ namespace System.Web.Helpers
                 !String.IsNullOrEmpty(salt)
                 || !String.IsNullOrEmpty(domain)
                 || !String.IsNullOrEmpty(path)
-            ) {
+            )
+            {
                 throw new NotSupportedException(
                     "This method is deprecated. Use the GetHtml() method instead. To specify a custom domain for the generated cookie, use the <httpCookies> configuration element. To specify custom data to be embedded within the token, use the static AntiForgeryConfig.AdditionalDataProvider property."
                 );

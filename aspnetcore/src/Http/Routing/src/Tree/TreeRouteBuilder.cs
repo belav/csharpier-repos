@@ -34,7 +34,8 @@ namespace Microsoft.AspNetCore.Routing.Tree
             ILoggerFactory loggerFactory,
             ObjectPool<UriBuildingContext> objectPool,
             IInlineConstraintResolver constraintResolver
-        ) {
+        )
+        {
             if (loggerFactory == null)
             {
                 throw new ArgumentNullException(nameof(loggerFactory));
@@ -71,7 +72,8 @@ namespace Microsoft.AspNetCore.Routing.Tree
             RouteTemplate routeTemplate,
             string routeName,
             int order
-        ) {
+        )
+        {
             if (handler == null)
             {
                 throw new ArgumentNullException(nameof(handler));
@@ -144,7 +146,8 @@ namespace Microsoft.AspNetCore.Routing.Tree
             RouteValueDictionary requiredLinkValues,
             string routeName,
             int order
-        ) {
+        )
+        {
             if (handler == null)
             {
                 throw new ArgumentNullException(nameof(handler));

@@ -24,7 +24,8 @@ namespace Microsoft.CodeAnalysis.FindSymbols.Finders
             FindReferencesSearchOptions options,
             FindReferencesCascadeDirection cascadeDirection,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var method = (IMethodSymbol)symbol.ContainingSymbol;
             var ordinal = method.TypeParameters.IndexOf(symbol);
 
@@ -33,7 +34,8 @@ namespace Microsoft.CodeAnalysis.FindSymbols.Finders
                 if (
                     method.PartialDefinitionPart != null
                     && ordinal < method.PartialDefinitionPart.TypeParameters.Length
-                ) {
+                )
+                {
                     return Task.FromResult(
                         ImmutableArray.Create(
                             (
@@ -47,7 +49,8 @@ namespace Microsoft.CodeAnalysis.FindSymbols.Finders
                 if (
                     method.PartialImplementationPart != null
                     && ordinal < method.PartialImplementationPart.TypeParameters.Length
-                ) {
+                )
+                {
                     return Task.FromResult(
                         ImmutableArray.Create(
                             (
@@ -68,7 +71,8 @@ namespace Microsoft.CodeAnalysis.FindSymbols.Finders
             IImmutableSet<Document>? documents,
             FindReferencesSearchOptions options,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             // Type parameters are only found in documents that have both their name, and the name
             // of its owning method.  NOTE(cyrusn): We have to check in multiple files because of
             // partial types.  A type parameter can be referenced across all the parts. NOTE(cyrusn):
@@ -103,7 +107,8 @@ namespace Microsoft.CodeAnalysis.FindSymbols.Finders
             SemanticModel semanticModel,
             FindReferencesSearchOptions options,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             // TODO(cyrusn): Method type parameters are like locals.  They are only in scope in
             // the bounds of the method they're declared within.  We could improve perf by
             // limiting our search by only looking within the method body's span.

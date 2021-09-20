@@ -30,7 +30,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             Binder rootBinder,
             int position,
             SpeculativeBindingOption bindingOption
-        ) {
+        )
+        {
             return CreateCore(parentSemanticModel, root, rootBinder, position, bindingOption);
         }
 
@@ -39,7 +40,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             CrefSyntax root,
             Binder rootBinder,
             int position
-        ) {
+        )
+        {
             return CreateCore(
                 parentSemanticModel,
                 root,
@@ -55,7 +57,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             Binder rootBinder,
             int position,
             SpeculativeBindingOption bindingOption
-        ) {
+        )
+        {
             Debug.Assert(parentSemanticModel is SyntaxTreeSemanticModel);
             Debug.Assert(root != null);
             Debug.Assert(root is TypeSyntax || root is CrefSyntax);
@@ -111,7 +114,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             Binder binder,
             CSharpSyntaxNode node,
             BindingDiagnosticBag diagnostics
-        ) {
+        )
+        {
             return _parentSemanticModel.Bind(binder, node, diagnostics);
         }
 
@@ -134,7 +138,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             CSharpSyntaxNode node,
             SymbolInfoOptions options,
             CancellationToken cancellationToken = default(CancellationToken)
-        ) {
+        )
+        {
             var cref = node as CrefSyntax;
             if (cref != null)
             {
@@ -167,7 +172,8 @@ namespace Microsoft.CodeAnalysis.CSharp
         internal override CSharpTypeInfo GetTypeInfoWorker(
             CSharpSyntaxNode node,
             CancellationToken cancellationToken = default(CancellationToken)
-        ) {
+        )
+        {
             var expression = (ExpressionSyntax)node;
             return _parentSemanticModel.GetSpeculativeTypeInfoWorker(
                 _position,

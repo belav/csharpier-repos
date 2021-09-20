@@ -52,7 +52,8 @@ class T
             );
             timeout.HaveTimeLeft;
 
-        ) {
+        )
+        {
             count = 0;
 
             List<Thread> threads = new List<Thread>();

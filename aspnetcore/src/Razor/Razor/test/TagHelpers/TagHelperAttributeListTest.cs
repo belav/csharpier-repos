@@ -20,7 +20,8 @@ namespace Microsoft.AspNetCore.Razor.TagHelpers
             IEnumerable<TagHelperAttribute> initialAttributes,
             int indexToLookup,
             TagHelperAttribute expectedAttribute
-        ) {
+        )
+        {
             // Arrange
             var attributes = new TagHelperAttributeList(initialAttributes);
 
@@ -73,7 +74,8 @@ namespace Microsoft.AspNetCore.Razor.TagHelpers
             int indexToSet,
             TagHelperAttribute setValue,
             IEnumerable<TagHelperAttribute> expectedAttributes
-        ) {
+        )
+        {
             // Arrange
             var attributes = new TagHelperAttributeList(initialAttributes);
 
@@ -138,7 +140,8 @@ namespace Microsoft.AspNetCore.Razor.TagHelpers
             IEnumerable<TagHelperAttribute> initialAttributes,
             string nameToLookup,
             TagHelperAttribute expectedAttribute
-        ) {
+        )
+        {
             // Arrange
             var attributes = new TagHelperAttributeList(initialAttributes);
 
@@ -212,7 +215,8 @@ namespace Microsoft.AspNetCore.Razor.TagHelpers
             string keyToSet,
             object setValue,
             IEnumerable<TagHelperAttribute> expectedAttributes
-        ) {
+        )
+        {
             // Arrange
             var attributes = new TagHelperAttributeList(initialAttributes);
 
@@ -285,7 +289,8 @@ namespace Microsoft.AspNetCore.Razor.TagHelpers
             IEnumerable<TagHelperAttribute> initialAttributes,
             TagHelperAttribute attributeToAdd,
             IEnumerable<TagHelperAttribute> expectedAttributes
-        ) {
+        )
+        {
             // Arrange
             var attributes = new TagHelperAttributeList(initialAttributes);
 
@@ -334,7 +339,8 @@ namespace Microsoft.AspNetCore.Razor.TagHelpers
             TagHelperAttribute attributeToAdd,
             int locationToInsert,
             IEnumerable<TagHelperAttribute> expectedAttributes
-        ) {
+        )
+        {
             // Arrange
             var attributes = new TagHelperAttributeList(initialAttributes);
 
@@ -402,7 +408,8 @@ namespace Microsoft.AspNetCore.Razor.TagHelpers
             TagHelperAttribute[] attributesToCopy,
             int locationToCopy,
             IEnumerable<TagHelperAttribute> expectedAttributes
-        ) {
+        )
+        {
             // Arrange
             var attributes = new TagHelperAttributeList(initialAttributes);
             var attributeDestination = new TagHelperAttribute[expectedAttributes.Count()];
@@ -488,7 +495,8 @@ namespace Microsoft.AspNetCore.Razor.TagHelpers
             string keyToRemove,
             IEnumerable<TagHelperAttribute> expectedAttributes,
             bool expectedRemoval
-        ) {
+        )
+        {
             // Arrange
             var attributes = new TagHelperAttributeList(initialAttributes);
 
@@ -649,7 +657,8 @@ namespace Microsoft.AspNetCore.Razor.TagHelpers
             TagHelperAttribute attributeToRemove,
             IEnumerable<TagHelperAttribute> expectedAttributes,
             bool expectedResult
-        ) {
+        )
+        {
             // Arrange
             var attributes = new TagHelperAttributeList(initialAttributes);
 
@@ -697,7 +706,8 @@ namespace Microsoft.AspNetCore.Razor.TagHelpers
             IEnumerable<TagHelperAttribute> initialAttributes,
             int locationToRemove,
             IEnumerable<TagHelperAttribute> expectedAttributes
-        ) {
+        )
+        {
             // Arrange
             var attributes = new TagHelperAttributeList(initialAttributes);
 

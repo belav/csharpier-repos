@@ -744,7 +744,8 @@ namespace System.Text.Unicode
         private static void WriteTwoUtf16CharsAsTwoUtf8ThreeByteSequences(
             ref byte outputBuffer,
             uint value
-        ) {
+        )
+        {
             Debug.Assert(
                 IsFirstCharAtLeastThreeUtf8Bytes(value) && !IsFirstCharSurrogate(value),
                 "First half of value should've been 0800..D7FF or E000..FFFF"
@@ -790,7 +791,8 @@ namespace System.Text.Unicode
         private static void WriteFirstUtf16CharAsUtf8ThreeByteSequence(
             ref byte outputBuffer,
             uint value
-        ) {
+        )
+        {
             Debug.Assert(
                 IsFirstCharAtLeastThreeUtf8Bytes(value) && !IsFirstCharSurrogate(value),
                 "First half of value should've been 0800..D7FF or E000..FFFF"

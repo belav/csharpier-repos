@@ -31,7 +31,8 @@ namespace Castle.DynamicProxy.Generators.Emitters
             string name,
             EventAttributes attributes,
             Type type
-        ) {
+        )
+        {
             if (name == null)
             {
                 throw new ArgumentNullException(nameof(name));
@@ -59,7 +60,8 @@ namespace Castle.DynamicProxy.Generators.Emitters
             string addMethodName,
             MethodAttributes attributes,
             MethodInfo methodToOverride
-        ) {
+        )
+        {
             if (addMethod != null)
             {
                 throw new InvalidOperationException("An add method exists");
@@ -73,7 +75,8 @@ namespace Castle.DynamicProxy.Generators.Emitters
             string removeMethodName,
             MethodAttributes attributes,
             MethodInfo methodToOverride
-        ) {
+        )
+        {
             if (removeMethod != null)
             {
                 throw new InvalidOperationException("A remove method exists");

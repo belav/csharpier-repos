@@ -22,7 +22,8 @@ namespace Microsoft.Extensions.Logging
             string categoryName,
             LogLevel? logLevel,
             Func<string, string, LogLevel, bool> filter
-        ) {
+        )
+        {
             ProviderName = providerName;
             CategoryName = categoryName;
             LogLevel = logLevel;

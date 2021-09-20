@@ -15,7 +15,8 @@ namespace Internal.CommandLine
         public ArgumentParser(
             IEnumerable<string> arguments,
             Func<string, IEnumerable<string>> responseFileReader
-        ) {
+        )
+        {
             if (arguments == null)
                 throw new ArgumentNullException("arguments");
 
@@ -43,7 +44,8 @@ namespace Internal.CommandLine
             bool isRequired,
             out T value,
             out bool specified
-        ) {
+        )
+        {
             if (
                 !TryParseOptionList(
                     diagnosticName,
@@ -53,7 +55,8 @@ namespace Internal.CommandLine
                     out IReadOnlyList<T> values,
                     out specified
                 )
-            ) {
+            )
+            {
                 value = default;
                 return false;
             }
@@ -74,7 +77,8 @@ namespace Internal.CommandLine
             bool isRequired,
             out IReadOnlyList<T> values,
             out bool specified
-        ) {
+        )
+        {
             var result = new List<T>();
             var tokenIndex = 0;
             var isFlag = typeof(T) == typeof(bool);
@@ -119,7 +123,8 @@ namespace Internal.CommandLine
             string diagnosticName,
             Func<string, T> valueConverter,
             out T value
-        ) {
+        )
+        {
             foreach (var token in _tokens)
             {
                 if (token.IsMatched || token.IsOption || token.IsSeparator)
@@ -140,7 +145,8 @@ namespace Internal.CommandLine
             string diagnosticName,
             Func<string, T> valueConverter,
             out IReadOnlyList<T> values
-        ) {
+        )
+        {
             var result = new List<T>();
 
             while (TryParseParameter(diagnosticName, valueConverter, out T value))
@@ -258,7 +264,8 @@ namespace Internal.CommandLine
             string diagnosticName,
             Func<string, T> valueConverter,
             string valueText
-        ) {
+        )
+        {
             try
             {
                 return valueConverter(valueText);

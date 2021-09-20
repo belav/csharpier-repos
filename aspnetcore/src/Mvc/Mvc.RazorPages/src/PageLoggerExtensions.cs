@@ -210,7 +210,8 @@ namespace Microsoft.AspNetCore.Mvc.RazorPages
             PageContext context,
             HandlerMethodDescriptor handler,
             object[] arguments
-        ) {
+        )
+        {
             if (logger.IsEnabled(LogLevel.Information))
             {
                 var declaringTypeName = TypeNameHelper.GetTypeDisplayName(
@@ -257,7 +258,8 @@ namespace Microsoft.AspNetCore.Mvc.RazorPages
             PageContext context,
             HandlerMethodDescriptor handler,
             IActionResult result
-        ) {
+        )
+        {
             if (logger.IsEnabled(LogLevel.Information))
             {
                 var handlerName = handler.MethodInfo.Name;
@@ -287,7 +289,8 @@ namespace Microsoft.AspNetCore.Mvc.RazorPages
             string filterType,
             string methodName,
             IFilterMetadata filter
-        ) {
+        )
+        {
             _beforeExecutingMethodOnFilter(
                 logger,
                 filterType,
@@ -302,7 +305,8 @@ namespace Microsoft.AspNetCore.Mvc.RazorPages
             string filterType,
             string methodName,
             IFilterMetadata filter
-        ) {
+        )
+        {
             _afterExecutingMethodOnFilter(
                 logger,
                 filterType,

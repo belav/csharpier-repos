@@ -271,7 +271,8 @@ namespace AutoMapper
             Action<IMappingOperationOptions<TSource, TDestination>> opts,
             Type sourceType = null,
             Type destinationType = null
-        ) {
+        )
+        {
             var typedOptions = new MappingOperationOptions<TSource, TDestination>(
                 DefaultContext.Options.ServiceCtor
             );
@@ -294,7 +295,8 @@ namespace AutoMapper
             Type sourceType = null,
             Type destinationType = null,
             MemberMap memberMap = null
-        ) {
+        )
+        {
             var runtimeTypes = new TypePair(
                 source?.GetType() ?? sourceType ?? typeof(TSource),
                 destination?.GetType() ?? destinationType ?? typeof(TDestination)

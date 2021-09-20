@@ -119,7 +119,8 @@ namespace Microsoft.VisualStudio.IntegrationTest.Utilities.Input
             List<NativeMethods.INPUT> inputs,
             VirtualKey virtualKey,
             uint dwFlags
-        ) {
+        )
+        {
             NativeMethods.INPUT input;
             var scanCode = NativeMethods.MapVirtualKey(
                 (uint)virtualKey,
@@ -182,7 +183,8 @@ namespace Microsoft.VisualStudio.IntegrationTest.Utilities.Input
             List<NativeMethods.INPUT> inputs,
             VirtualKey virtualKey,
             ShiftState shiftState = 0
-        ) {
+        )
+        {
             if ((shiftState & ShiftState.Shift) != 0)
             {
                 AddInputs(inputs, VirtualKey.Shift, NativeMethods.KEYEVENTF_NONE);

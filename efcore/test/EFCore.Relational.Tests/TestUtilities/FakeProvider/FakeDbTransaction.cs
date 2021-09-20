@@ -11,7 +11,8 @@ namespace Microsoft.EntityFrameworkCore.TestUtilities.FakeProvider
         public FakeDbTransaction(
             FakeDbConnection connection,
             IsolationLevel isolationLevel = IsolationLevel.Unspecified
-        ) {
+        )
+        {
             DbConnection = connection;
             IsolationLevel = isolationLevel;
         }

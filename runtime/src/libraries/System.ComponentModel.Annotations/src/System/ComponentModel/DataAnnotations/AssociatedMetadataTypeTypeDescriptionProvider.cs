@@ -55,7 +55,8 @@ namespace System.ComponentModel.DataAnnotations
         public override ICustomTypeDescriptor GetTypeDescriptor(
             [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)] Type objectType,
             object instance
-        ) {
+        )
+        {
             ICustomTypeDescriptor baseDescriptor = base.GetTypeDescriptor(objectType, instance);
             return new AssociatedMetadataTypeTypeDescriptor(
                 baseDescriptor,

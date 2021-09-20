@@ -45,7 +45,8 @@ namespace Microsoft.AspNetCore.Identity.FunctionalTests.Account
         public async Task<RegisterConfirmation> SendEmailWithConfirmationAsync(
             string email,
             bool hasRealEmail
-        ) {
+        )
+        {
             var response = await Client.SendAsync(
                 _emailForm,
                 new Dictionary<string, string> { ["Input_Email"] = email }

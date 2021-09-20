@@ -39,7 +39,8 @@ namespace Microsoft.CodeAnalysis.Rename
             bool renameInStrings,
             bool renameInComments,
             bool renameFile
-        ) {
+        )
+        {
             RenameOverloads = renameOverloads;
             RenameInStrings = renameInStrings;
             RenameInComments = renameInComments;

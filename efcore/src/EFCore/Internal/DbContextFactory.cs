@@ -28,7 +28,8 @@ namespace Microsoft.EntityFrameworkCore.Internal
             IServiceProvider serviceProvider,
             DbContextOptions<TContext> options,
             IDbContextFactorySource<TContext> factorySource
-        ) {
+        )
+        {
             Check.NotNull(serviceProvider, nameof(serviceProvider));
             Check.NotNull(options, nameof(options));
             Check.NotNull(factorySource, nameof(factorySource));

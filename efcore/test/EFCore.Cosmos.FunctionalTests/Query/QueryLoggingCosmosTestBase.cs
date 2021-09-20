@@ -19,7 +19,8 @@ namespace Microsoft.EntityFrameworkCore.Query
     {
         protected QueryLoggingCosmosTestBase(
             NorthwindQueryCosmosFixture<NoopModelCustomizer> fixture
-        ) {
+        )
+        {
             Fixture = fixture;
             Fixture.TestSqlLoggerFactory.Clear();
         }

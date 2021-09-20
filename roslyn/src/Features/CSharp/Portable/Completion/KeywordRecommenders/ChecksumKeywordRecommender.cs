@@ -18,7 +18,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Completion.KeywordRecommenders
             int position,
             CSharpSyntaxContext context,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             // # pragma |
             // # pragma w|
             var previousToken1 = context.TargetToken;

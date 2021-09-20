@@ -52,7 +52,8 @@ namespace System.Net.Http.Tests
             int sizeOfEachWrite,
             int reportedLength,
             int maxSize
-        ) {
+        )
+        {
             Assert.InRange(maxSize, 1, (numberOfWrites * sizeOfEachWrite) - 1);
 
             LieAboutLengthContent c = new LieAboutLengthContent(
@@ -74,7 +75,8 @@ namespace System.Net.Http.Tests
                 int numberOfWrites,
                 int sizeOfEachWrite,
                 int reportedLength
-            ) {
+            )
+            {
                 _numberOfWrites = numberOfWrites;
                 _sizeOfEachWrite = sizeOfEachWrite;
                 _reportedLength = reportedLength;
@@ -83,7 +85,8 @@ namespace System.Net.Http.Tests
             protected override async Task SerializeToStreamAsync(
                 Stream stream,
                 TransportContext context
-            ) {
+            )
+            {
                 byte[] bytes = new byte[_sizeOfEachWrite];
                 for (int i = 0; i < _numberOfWrites; i++)
                 {

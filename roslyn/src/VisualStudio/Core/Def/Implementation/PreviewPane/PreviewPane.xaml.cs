@@ -49,7 +49,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.PreviewPane
             bool logIdVerbatimInTelemetry,
             IVsUIShell uiShell,
             Guid optionPageGuid = default
-        ) {
+        )
+        {
             InitializeComponent();
 
             Loaded += PreviewPane_Loaded;
@@ -63,7 +64,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.PreviewPane
                 (severityIcon != null)
                 && !string.IsNullOrWhiteSpace(id)
                 && !string.IsNullOrWhiteSpace(title)
-            ) {
+            )
+            {
                 HeaderStackPanel.Visibility = Visibility.Visible;
 
                 SeverityIconBorder.Child = severityIcon;
@@ -311,7 +313,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.PreviewPane
                     IsNormal(titleTextBlockHeight)
                     && (titleTextBlockHeight > _heightForThreeLineTitle)
                 )
-            ) {
+            )
+            {
                 TitleTextBlock.MaxHeight = _heightForThreeLineTitle;
                 TitleTextBlock.TextTrimming = TextTrimming.CharacterEllipsis;
 

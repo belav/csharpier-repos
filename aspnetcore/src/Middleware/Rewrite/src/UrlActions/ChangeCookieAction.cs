@@ -38,7 +38,8 @@ namespace Microsoft.AspNetCore.Rewrite.UrlActions
             RewriteContext context,
             BackReferenceCollection? ruleBackReferences,
             BackReferenceCollection? conditionBackReferences
-        ) {
+        )
+        {
             var options = GetOrCreateOptions();
             context.HttpContext.Response.Cookies.Append(Name, Value ?? string.Empty, options);
         }

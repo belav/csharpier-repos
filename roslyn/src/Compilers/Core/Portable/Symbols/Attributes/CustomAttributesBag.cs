@@ -34,7 +34,8 @@ namespace Microsoft.CodeAnalysis
         private CustomAttributesBag(
             CustomAttributeBagCompletionPart part,
             ImmutableArray<T> customAttributes
-        ) {
+        )
+        {
             _customAttributes = customAttributes;
             this.NotePartComplete(part);
         }

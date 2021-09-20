@@ -29,7 +29,8 @@ namespace Microsoft.CodeAnalysis
             Document document,
             TextSpan sourceSpan,
             ImmutableDictionary<string, object>? properties
-        ) {
+        )
+        {
             Document = document;
             SourceSpan = sourceSpan;
             Properties = properties ?? ImmutableDictionary<string, object>.Empty;

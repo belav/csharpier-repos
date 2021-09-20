@@ -40,11 +40,8 @@ namespace Castle.DynamicProxy.Generators.Emitters
             codeBuilder = new CodeBuilder();
         }
 
-        internal MethodEmitter(
-            AbstractTypeEmitter owner,
-            string name,
-            MethodAttributes attributes
-        ) : this(owner.TypeBuilder.DefineMethod(name, attributes)) { }
+        internal MethodEmitter(AbstractTypeEmitter owner, string name, MethodAttributes attributes)
+            : this(owner.TypeBuilder.DefineMethod(name, attributes)) { }
 
         internal MethodEmitter(
             AbstractTypeEmitter owner,
@@ -287,7 +284,8 @@ namespace Castle.DynamicProxy.Generators.Emitters
                     if (
                         parameterNonNullableType.IsEnum
                         || parameterNonNullableType.IsAssignableFrom(defaultValue.GetType())
-                    ) {
+                    )
+                    {
                         // This guards against two bugs:
                         //
                         // * On the CLR and CoreCLR, a bug that makes it impossible to use `ParameterBuilder-
@@ -341,7 +339,8 @@ namespace Castle.DynamicProxy.Generators.Emitters
             ParameterInfo returnParameter,
             Type[] parameters,
             ParameterInfo[] baseMethodParameters
-        ) {
+        )
+        {
             Type[] returnRequiredCustomModifiers;
             Type[] returnOptionalCustomModifiers;
             Type[][] parametersRequiredCustomModifiers;

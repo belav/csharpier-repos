@@ -18,7 +18,8 @@ namespace System.Transactions
             Guid resourceManagerIdentifier,
             TransactionTraceIdentifier transactionTraceId,
             int enlistmentIdentifier
-        ) {
+        )
+        {
             _resourceManagerIdentifier = resourceManagerIdentifier;
             _transactionTraceIdentifier = transactionTraceId;
             _enlistmentIdentifier = enlistmentIdentifier;

@@ -28,7 +28,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.ExtractClass
             string typeParameterSuffix,
             ImmutableArray<string> conflictingNames,
             ISyntaxFactsService syntaxFactsService
-        ) {
+        )
+        {
             _notificationService = notificationService;
 
             MemberSelectionViewModel = new MemberSelectionViewModel(

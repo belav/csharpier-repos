@@ -90,7 +90,8 @@ namespace Microsoft.AspNetCore.Testing
             Action testCode,
             string paramName,
             string exceptionMessage
-        ) {
+        )
+        {
             return ThrowsArgumentInternal<ArgumentException>(testCode, paramName, exceptionMessage);
         }
 
@@ -120,7 +121,8 @@ namespace Microsoft.AspNetCore.Testing
             Func<Task> testCode,
             string paramName,
             string exceptionMessage
-        ) {
+        )
+        {
             return ThrowsArgumentAsyncInternal<ArgumentException>(
                 testCode,
                 paramName,
@@ -185,7 +187,8 @@ namespace Microsoft.AspNetCore.Testing
         public static Task<ArgumentException> ThrowsArgumentNullOrEmptyAsync(
             Func<Task> testCode,
             string paramName
-        ) {
+        )
+        {
             return ThrowsArgumentAsyncInternal<ArgumentException>(
                 testCode,
                 paramName,
@@ -203,7 +206,8 @@ namespace Microsoft.AspNetCore.Testing
         public static ArgumentException ThrowsArgumentNullOrEmptyString(
             Action testCode,
             string paramName
-        ) {
+        )
+        {
             return ThrowsArgumentInternal<ArgumentException>(
                 testCode,
                 paramName,
@@ -221,7 +225,8 @@ namespace Microsoft.AspNetCore.Testing
         public static Task<ArgumentException> ThrowsArgumentNullOrEmptyStringAsync(
             Func<Task> testCode,
             string paramName
-        ) {
+        )
+        {
             return ThrowsArgumentAsyncInternal<ArgumentException>(
                 testCode,
                 paramName,
@@ -242,7 +247,8 @@ namespace Microsoft.AspNetCore.Testing
             string paramName,
             string exceptionMessage,
             object actualValue = null
-        ) {
+        )
+        {
             var ex = ThrowsArgumentInternal<ArgumentOutOfRangeException>(
                 testCode,
                 paramName,
@@ -304,7 +310,8 @@ namespace Microsoft.AspNetCore.Testing
             Exception exception,
             string expectedMessage,
             bool partialMatch = false
-        ) {
+        )
+        {
             if (expectedMessage != null)
             {
                 if (!partialMatch)

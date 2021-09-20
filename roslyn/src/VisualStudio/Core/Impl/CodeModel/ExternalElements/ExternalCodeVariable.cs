@@ -22,16 +22,14 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.CodeModel.Exter
             CodeModelState state,
             ProjectId projectId,
             ISymbol symbol
-        ) {
+        )
+        {
             var element = new ExternalCodeVariable(state, projectId, symbol);
             return (EnvDTE.CodeVariable)ComAggregate.CreateAggregatedObject(element);
         }
 
-        private ExternalCodeVariable(
-            CodeModelState state,
-            ProjectId projectId,
-            ISymbol symbol
-        ) : base(state, projectId, symbol) { }
+        private ExternalCodeVariable(CodeModelState state, ProjectId projectId, ISymbol symbol)
+            : base(state, projectId, symbol) { }
 
         private ITypeSymbol GetSymbolType()
         {

@@ -122,7 +122,8 @@ namespace Microsoft.AspNetCore.ResponseCaching.Tests
 
         internal static IResponseCachingKeyProvider CreateTestKeyProvider(
             ResponseCachingOptions options
-        ) {
+        )
+        {
             return new ResponseCachingKeyProvider(
                 new DefaultObjectPoolProvider(),
                 Options.Create(options)
@@ -133,7 +134,8 @@ namespace Microsoft.AspNetCore.ResponseCaching.Tests
             Action<IApplicationBuilder> configureDelegate = null,
             ResponseCachingOptions options = null,
             Action<HttpContext> contextAction = null
-        ) {
+        )
+        {
             return CreateBuildersWithResponseCaching(
                 configureDelegate,
                 options,
@@ -162,7 +164,8 @@ namespace Microsoft.AspNetCore.ResponseCaching.Tests
             Action<IApplicationBuilder> configureDelegate = null,
             ResponseCachingOptions options = null,
             IEnumerable<RequestDelegate> requestDelegates = null
-        ) {
+        )
+        {
             if (configureDelegate == null)
             {
                 configureDelegate = app => { };
@@ -222,7 +225,8 @@ namespace Microsoft.AspNetCore.ResponseCaching.Tests
             TestSink testSink = null,
             IResponseCachingKeyProvider keyProvider = null,
             IResponseCachingPolicyProvider policyProvider = null
-        ) {
+        )
+        {
             if (next == null)
             {
                 next = httpContext => Task.CompletedTask;
@@ -280,7 +284,8 @@ namespace Microsoft.AspNetCore.ResponseCaching.Tests
         internal static void AssertLoggedMessages(
             IEnumerable<WriteContext> messages,
             params LoggedMessage[] expectedMessages
-        ) {
+        )
+        {
             var messageList = messages.ToList();
             Assert.Equal(messageList.Count, expectedMessages.Length);
 
@@ -413,7 +418,8 @@ namespace Microsoft.AspNetCore.ResponseCaching.Tests
         public TestResponseCachingKeyProvider(
             string lookupBaseKey = null,
             StringValues? lookupVaryKey = null
-        ) {
+        )
+        {
             _baseKey = lookupBaseKey;
             if (lookupVaryKey.HasValue)
             {

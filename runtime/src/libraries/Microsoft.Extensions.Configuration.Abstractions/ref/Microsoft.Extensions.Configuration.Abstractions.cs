@@ -28,24 +28,28 @@ namespace Microsoft.Extensions.Configuration
             >> AsEnumerable(
             this Microsoft.Extensions.Configuration.IConfiguration configuration,
             bool makePathsRelative
-        ) {
+        )
+        {
             throw null;
         }
         public static bool Exists(
             this Microsoft.Extensions.Configuration.IConfigurationSection section
-        ) {
+        )
+        {
             throw null;
         }
         public static string GetConnectionString(
             this Microsoft.Extensions.Configuration.IConfiguration configuration,
             string name
-        ) {
+        )
+        {
             throw null;
         }
         public static Microsoft.Extensions.Configuration.IConfigurationSection GetRequiredSection(
             this Microsoft.Extensions.Configuration.IConfiguration configuration,
             string key
-        ) {
+        )
+        {
             throw null;
         }
     }
@@ -82,7 +86,8 @@ namespace Microsoft.Extensions.Configuration
     {
         public static string GetDebugView(
             this Microsoft.Extensions.Configuration.IConfigurationRoot root
-        ) {
+        )
+        {
             throw null;
         }
     }

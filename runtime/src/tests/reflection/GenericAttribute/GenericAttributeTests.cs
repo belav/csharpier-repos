@@ -351,7 +351,8 @@ class Program
         Func<Attribute, bool> condition,
         int count = 1,
         [CallerLineNumberAttribute] int line = 0
-    ) {
+    )
+    {
         var enumerator = source.GetEnumerator();
         while (enumerator.MoveNext())
         {

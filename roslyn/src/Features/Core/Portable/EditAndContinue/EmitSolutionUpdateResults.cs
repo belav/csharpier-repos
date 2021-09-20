@@ -34,7 +34,8 @@ namespace Microsoft.CodeAnalysis.EditAndContinue
                 ManagedModuleUpdates moduleUpdates,
                 ImmutableArray<DiagnosticData> diagnostics,
                 ImmutableArray<(DocumentId DocumentId, ImmutableArray<RudeEditDiagnostic> Diagnostics)> rudeEdits
-            ) {
+            )
+            {
                 ModuleUpdates = moduleUpdates;
                 Diagnostics = diagnostics;
                 RudeEdits = rudeEdits;
@@ -59,7 +60,8 @@ namespace Microsoft.CodeAnalysis.EditAndContinue
             ManagedModuleUpdates moduleUpdates,
             ImmutableArray<(ProjectId ProjectId, ImmutableArray<Diagnostic> Diagnostic)> diagnostics,
             ImmutableArray<(DocumentId DocumentId, ImmutableArray<RudeEditDiagnostic> Diagnostics)> documentsWithRudeEdits
-        ) {
+        )
+        {
             ModuleUpdates = moduleUpdates;
             Diagnostics = diagnostics;
             RudeEdits = documentsWithRudeEdits;
@@ -93,7 +95,8 @@ namespace Microsoft.CodeAnalysis.EditAndContinue
         public async Task<ImmutableArray<Diagnostic>> GetAllDiagnosticsAsync(
             Solution solution,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             using var _ = ArrayBuilder<Diagnostic>.GetInstance(out var diagnostics);
 
             // add rude edits:
@@ -131,7 +134,8 @@ namespace Microsoft.CodeAnalysis.EditAndContinue
             ImmutableArray<DiagnosticData> diagnosticData,
             ImmutableArray<(DocumentId DocumentId, ImmutableArray<RudeEditDiagnostic> Diagnostics)> rudeEdits,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             using var _ = ArrayBuilder<ManagedHotReloadDiagnostic>.GetInstance(out var builder);
 
             // Add the first compiler emit error. Do not report warnings - they do not block applying the edit.

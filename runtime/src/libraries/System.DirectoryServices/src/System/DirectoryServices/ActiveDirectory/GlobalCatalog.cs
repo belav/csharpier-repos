@@ -170,7 +170,8 @@ namespace System.DirectoryServices.ActiveDirectory
             DirectoryContext context,
             string siteName,
             LocatorOptions flag
-        ) {
+        )
+        {
             if (context == null)
             {
                 throw new ArgumentNullException(nameof(context));
@@ -333,7 +334,8 @@ namespace System.DirectoryServices.ActiveDirectory
             DirectoryContext context,
             string? siteName,
             LocatorOptions flag
-        ) {
+        )
+        {
             GlobalCatalog gc;
             bool retry = false;
             bool credsValidated = false;
@@ -426,7 +428,8 @@ namespace System.DirectoryServices.ActiveDirectory
             string? forestName,
             string? siteName,
             LocatorOptions flag
-        ) {
+        )
+        {
             DomainControllerInfo domainControllerInfo;
             int errorCode = 0;
 
@@ -449,7 +452,8 @@ namespace System.DirectoryServices.ActiveDirectory
                         )
                     )
                 ) != 0
-            ) {
+            )
+            {
                 throw new ArgumentException(SR.InvalidFlags, nameof(flag));
             }
 
@@ -532,7 +536,8 @@ namespace System.DirectoryServices.ActiveDirectory
         internal static GlobalCatalogCollection FindAllInternal(
             DirectoryContext context,
             string? siteName
-        ) {
+        )
+        {
             ArrayList gcList = new ArrayList();
 
             if (siteName != null && siteName.Length == 0)
@@ -552,7 +557,8 @@ namespace System.DirectoryServices.ActiveDirectory
                     ,
                     true /* mustBeGC */
                 )
-            ) {
+            )
+            {
                 DirectoryContext gcContext = Utils.GetNewDirectoryContext(
                     gcName,
                     DirectoryContextType.DirectoryServer,

@@ -120,7 +120,8 @@ namespace System.Collections.Concurrent.Tests
             int producers,
             int consumers,
             int itemsPerProducer
-        ) {
+        )
+        {
             var cq = new ConcurrentQueue<int>();
             var tasks = new List<Task>();
 

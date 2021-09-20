@@ -16,7 +16,8 @@ namespace TestSite
         public Task StartAsync<TContext>(
             IHttpApplication<TContext> application,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             return Task.Delay(TimeSpan.MaxValue);
         }
 

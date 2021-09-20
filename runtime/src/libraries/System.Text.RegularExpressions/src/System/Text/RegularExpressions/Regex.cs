@@ -66,7 +66,8 @@ namespace System.Text.RegularExpressions
             RegexOptions options,
             TimeSpan matchTimeout,
             CultureInfo? culture
-        ) {
+        )
+        {
             Init(pattern, options, matchTimeout, culture);
 
             // if the compile option is set, then compile the code
@@ -88,7 +89,8 @@ namespace System.Text.RegularExpressions
             RegexOptions options,
             TimeSpan matchTimeout,
             CultureInfo? culture
-        ) {
+        )
+        {
             ValidatePattern(pattern);
             ValidateOptions(options);
             ValidateMatchTimeout(matchTimeout);
@@ -158,7 +160,8 @@ namespace System.Text.RegularExpressions
                         )
                     ) != 0
                 )
-            ) {
+            )
+            {
                 ThrowHelper.ThrowArgumentOutOfRangeException(ExceptionArgument.options);
             }
         }
@@ -176,7 +179,8 @@ namespace System.Text.RegularExpressions
             if (
                 matchTimeoutTicks != InfiniteMatchTimeoutTicks
                 && ((ulong)(matchTimeoutTicks - 1) >= MaximumMatchTimeoutTicks)
-            ) {
+            )
+            {
                 ThrowHelper.ThrowArgumentOutOfRangeException(ExceptionArgument.matchTimeout);
             }
         }
@@ -246,7 +250,8 @@ namespace System.Text.RegularExpressions
             AssemblyName assemblyname,
             CustomAttributeBuilder[]? attributes,
             string? resourceFile
-        ) {
+        )
+        {
             if (assemblyname is null)
             {
                 ThrowHelper.ThrowArgumentNullException(ExceptionArgument.assemblyname);
@@ -426,7 +431,8 @@ namespace System.Text.RegularExpressions
             int beginning,
             int length,
             int startat
-        ) {
+        )
+        {
             if ((uint)startat > (uint)input.Length)
             {
                 ThrowHelper.ThrowArgumentOutOfRangeException(
@@ -475,7 +481,8 @@ namespace System.Text.RegularExpressions
             ref TState state,
             MatchCallback<TState> callback,
             bool reuseMatchObject
-        ) {
+        )
+        {
             Debug.Assert((uint)startat <= (uint)input.Length);
             RegexRunner runner = RentRunner();
             try

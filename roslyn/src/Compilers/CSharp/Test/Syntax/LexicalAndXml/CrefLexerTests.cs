@@ -713,7 +713,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
                     SourceText.From(text + "'"),
                     TestOptions.RegularWithDocumentationComments
                 )
-            ) {
+            )
+            {
                 while (true)
                 {
                     var token = lexer.Lex(

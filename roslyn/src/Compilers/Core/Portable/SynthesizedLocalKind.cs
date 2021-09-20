@@ -228,7 +228,8 @@ namespace Microsoft.CodeAnalysis
         public static bool IsSlotReusable(
             this SynthesizedLocalKind kind,
             OptimizationLevel optimizations
-        ) {
+        )
+        {
             return kind.IsSlotReusable(optimizations != OptimizationLevel.Release);
         }
 

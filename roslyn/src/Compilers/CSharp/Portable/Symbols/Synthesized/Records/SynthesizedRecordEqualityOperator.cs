@@ -27,17 +27,19 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             SourceMemberContainerTypeSymbol containingType,
             int memberOffset,
             BindingDiagnosticBag diagnostics
-        ) : base(
-            containingType,
-            WellKnownMemberNames.EqualityOperatorName,
-            memberOffset,
-            diagnostics
-        ) { }
+        )
+            : base(
+                containingType,
+                WellKnownMemberNames.EqualityOperatorName,
+                memberOffset,
+                diagnostics
+            ) { }
 
         internal override void GenerateMethodBody(
             TypeCompilationState compilationState,
             BindingDiagnosticBag diagnostics
-        ) {
+        )
+        {
             var F = new SyntheticBoundNodeFactory(
                 this,
                 ContainingType.GetNonNullSyntaxNode(),
@@ -61,7 +63,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                             ContainingType,
                             TypeCompareKind.AllIgnoreOptions
                         )
-                    ) {
+                    )
+                    {
                         equals = candidate;
                         break;
                     }

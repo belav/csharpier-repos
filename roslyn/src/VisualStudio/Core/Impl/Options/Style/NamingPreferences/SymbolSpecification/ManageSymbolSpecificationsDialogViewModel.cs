@@ -29,7 +29,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Options.Style.N
             List<NamingStyleOptionPageViewModel.NamingRuleViewModel> namingRules,
             string languageName,
             INotificationService notificationService
-        ) {
+        )
+        {
             LanguageName = languageName;
             _notificationService = notificationService;
 

@@ -81,7 +81,8 @@ namespace MS.Internal.Xml.XPath
                             if (
                                 nav.NodeType != XPathNodeType.Whitespace
                                 || _xsltContext.PreserveWhitespace(nav)
-                            ) {
+                            )
+                            {
                                 count++;
                             }
                         }

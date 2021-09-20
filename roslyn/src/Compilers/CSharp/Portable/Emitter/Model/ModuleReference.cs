@@ -61,7 +61,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Emit
                     _moduleBeingBuilt.SourceModule.ContainingAssembly,
                     _underlyingModule.ContainingAssembly
                 )
-            ) {
+            )
+            {
                 return null;
             }
 

@@ -1209,7 +1209,8 @@ namespace System.Linq.Tests
             IEnumerable<TSource> source,
             IComparer<TSource>? comparer,
             TSource? expected
-        ) {
+        )
+        {
             Assert.Equal(expected, source.Min(comparer));
         }
 
@@ -1219,7 +1220,8 @@ namespace System.Linq.Tests
             IEnumerable<TSource> source,
             IComparer<TSource>? comparer,
             TSource? expected
-        ) {
+        )
+        {
             Assert.Equal(expected, source.RunOnce().Min(comparer));
         }
 
@@ -1321,7 +1323,8 @@ namespace System.Linq.Tests
             Func<TSource, TKey> keySelector,
             IComparer<TKey>? comparer,
             TSource? expected
-        ) {
+        )
+        {
             Assert.Equal(expected, source.MinBy(keySelector, comparer));
         }
 
@@ -1332,7 +1335,8 @@ namespace System.Linq.Tests
             Func<TSource, TKey> keySelector,
             IComparer<TKey>? comparer,
             TSource? expected
-        ) {
+        )
+        {
             Assert.Equal(expected, source.RunOnce().MinBy(keySelector, comparer));
         }
 

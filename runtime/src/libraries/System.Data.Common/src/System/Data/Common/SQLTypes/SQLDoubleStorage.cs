@@ -254,7 +254,8 @@ namespace System.Data.Common
             object store,
             BitArray nullbits,
             int storeIndex
-        ) {
+        )
+        {
             SqlDouble[] typedStore = (SqlDouble[])store;
             typedStore[storeIndex] = _values[record];
             nullbits.Set(storeIndex, IsNull(record));

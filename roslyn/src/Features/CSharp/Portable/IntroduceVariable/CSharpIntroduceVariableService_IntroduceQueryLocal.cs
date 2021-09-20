@@ -28,7 +28,8 @@ namespace Microsoft.CodeAnalysis.CSharp.IntroduceVariable
             ExpressionSyntax expression,
             bool allOccurrences,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var oldOutermostQuery = expression.GetAncestorsOrThis<QueryExpressionSyntax>()
                 .LastOrDefault();
 
@@ -120,7 +121,8 @@ namespace Microsoft.CodeAnalysis.CSharp.IntroduceVariable
             LetClauseSyntax letClause,
             bool allOccurrences,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var oldClause = expression.GetAncestors<SyntaxNode>().First(IsAnyQueryClause);
             var newClause = Rewrite(
                 document,
@@ -144,7 +146,8 @@ namespace Microsoft.CodeAnalysis.CSharp.IntroduceVariable
             SyntaxNode oldClause,
             SyntaxNode newClause,
             LetClauseSyntax letClause
-        ) {
+        )
+        {
             var oldClauses = oldQuery.GetAllClauses();
             var oldClauseIndex = oldClauses.IndexOf(oldClause);
 

@@ -375,7 +375,8 @@ namespace System.CodeDom.Tests
                     tabString == null
                         ? new IndentedTextWriter(sw)
                         : new IndentedTextWriter(sw, tabString)
-            ) {
+            )
+            {
                 itw.Indent = 1;
                 if (tabString == null)
                 {
@@ -644,7 +645,8 @@ namespace System.CodeDom.Tests
                 object[] CreateParameters(
                     Func<IndentedTextWriter, Task> callWriteAsync,
                     string expected
-                ) {
+                )
+                {
                     return new object[] { callWriteAsync, expected };
                 }
 
@@ -664,7 +666,8 @@ namespace System.CodeDom.Tests
                 object[] CreateParameters(
                     Func<IndentedTextWriter, Task> callWriteLineAsync,
                     string expected
-                ) {
+                )
+                {
                     return new object[] { callWriteLineAsync, expected };
                 }
 
@@ -690,7 +693,8 @@ namespace System.CodeDom.Tests
         public async Task WriteAsync_WithoutIndents_CallsInnerWriteAsync(
             Func<IndentedTextWriter, Task> callWriteAsync,
             string expected
-        ) {
+        )
+        {
             var indicator = new IndicatingTextWriter();
             var itw = new IndentedTextWriter(indicator, TabString);
             itw.NewLine = NewLine;
@@ -707,7 +711,8 @@ namespace System.CodeDom.Tests
         public async Task WriteAsync_WithIndents_WritesTabsAfterWriteLineAsync(
             Func<IndentedTextWriter, Task> callWriteAsync,
             string expected
-        ) {
+        )
+        {
             var indicator = new IndicatingTextWriter();
             var itw = new IndentedTextWriter(indicator, TabString);
             itw.NewLine = NewLine;
@@ -729,7 +734,8 @@ namespace System.CodeDom.Tests
         public async Task WriteAsync_WithIndents_OmitsTabsAfterWriteAsync(
             Func<IndentedTextWriter, Task> callWriteAsync,
             string expected
-        ) {
+        )
+        {
             var indicator = new IndicatingTextWriter();
             var itw = new IndentedTextWriter(indicator, TabString);
             itw.NewLine = NewLine;
@@ -748,7 +754,8 @@ namespace System.CodeDom.Tests
         public async Task WriteLineAsync_WithoutIndents_CallsInnerWriteLineAsync(
             Func<IndentedTextWriter, Task> callWriteLineAsync,
             string expected
-        ) {
+        )
+        {
             var indicator = new IndicatingTextWriter();
             var itw = new IndentedTextWriter(indicator, TabString);
             itw.NewLine = NewLine;
@@ -763,7 +770,8 @@ namespace System.CodeDom.Tests
         public async Task WriteLineAsync_WithIndents_FirstLine_IsNotIndented(
             Func<IndentedTextWriter, Task> callWriteLineAsync,
             string expected
-        ) {
+        )
+        {
             var indicator = new IndicatingTextWriter();
             var itw = new IndentedTextWriter(indicator, TabString);
             itw.NewLine = NewLine;
@@ -779,7 +787,8 @@ namespace System.CodeDom.Tests
         public async Task WriteLineAsync_WithIndents_SubsequentLines_AreIndented(
             Func<IndentedTextWriter, Task> callWriteLineAsync,
             string expected
-        ) {
+        )
+        {
             var indicator = new IndicatingTextWriter();
             var itw = new IndentedTextWriter(indicator, TabString);
             itw.NewLine = NewLine;
@@ -820,7 +829,8 @@ namespace System.CodeDom.Tests
         public void Write_WithoutIndents_CallsInnerWrite(
             Action<IndentedTextWriter> callWrite,
             string expected
-        ) {
+        )
+        {
             var indicator = new IndicatingTextWriter();
             var itw = new IndentedTextWriter(indicator, TabString);
             itw.NewLine = NewLine;
@@ -836,7 +846,8 @@ namespace System.CodeDom.Tests
         public void Write_WithIndents_FirstLine_IsNotIndented(
             Action<IndentedTextWriter> callWrite,
             string expected
-        ) {
+        )
+        {
             var indicator = new IndicatingTextWriter();
             var itw = new IndentedTextWriter(indicator, TabString);
             itw.NewLine = NewLine;
@@ -853,7 +864,8 @@ namespace System.CodeDom.Tests
         public void Write_IsIndented_AfterWriteLine(
             Action<IndentedTextWriter> callWrite,
             string expected
-        ) {
+        )
+        {
             var indicator = new IndicatingTextWriter();
             var itw = new IndentedTextWriter(indicator, TabString);
             itw.NewLine = NewLine;
@@ -875,7 +887,8 @@ namespace System.CodeDom.Tests
         public void WriteLine_CallsInnerWriteLine(
             Action<IndentedTextWriter> callWriteLine,
             string expected
-        ) {
+        )
+        {
             var indicator = new IndicatingTextWriter();
             var itw = new IndentedTextWriter(indicator, TabString);
             itw.NewLine = NewLine;
@@ -891,7 +904,8 @@ namespace System.CodeDom.Tests
         public void WriteLine_FirstLine_IsNotIndented(
             Action<IndentedTextWriter> callWriteLine,
             string expected
-        ) {
+        )
+        {
             var indicator = new IndicatingTextWriter();
             var itw = new IndentedTextWriter(indicator, TabString);
             itw.NewLine = NewLine;
@@ -908,7 +922,8 @@ namespace System.CodeDom.Tests
         public void WriteLine_IsIndented_AfterWriteLine(
             Action<IndentedTextWriter> callWriteLine,
             string expected
-        ) {
+        )
+        {
             var indicator = new IndicatingTextWriter();
             var itw = new IndentedTextWriter(indicator, TabString);
             itw.NewLine = NewLine;

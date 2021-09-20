@@ -38,7 +38,8 @@ namespace Microsoft.CodeAnalysis.FindSymbols
                 MultiDictionary<Document, DeclaredSymbolInfo> enums,
                 MultiDictionary<Document, DeclaredSymbolInfo> delegates,
                 MultiDictionary<string, (Document, DeclaredSymbolInfo)> namedTypes
-            ) {
+            )
+            {
                 ClassesAndRecordsThatMayDeriveFromSystemObject =
                     classesAndRecordsThatMayDeriveFromSystemObject;
                 ValueTypes = valueTypes;
@@ -50,7 +51,8 @@ namespace Microsoft.CodeAnalysis.FindSymbols
             public static Task<ProjectIndex> GetIndexAsync(
                 Project project,
                 CancellationToken cancellationToken
-            ) {
+            )
+            {
                 if (!s_projectToIndex.TryGetValue(project, out var lazyIndex))
                 {
                     lazyIndex = s_projectToIndex.GetValue(
@@ -69,7 +71,8 @@ namespace Microsoft.CodeAnalysis.FindSymbols
             private static async Task<ProjectIndex> CreateIndexAsync(
                 Project project,
                 CancellationToken cancellationToken
-            ) {
+            )
+            {
                 var classesThatMayDeriveFromSystemObject = new MultiDictionary<
                     Document,
                     DeclaredSymbolInfo

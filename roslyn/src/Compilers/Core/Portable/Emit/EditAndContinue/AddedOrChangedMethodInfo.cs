@@ -33,7 +33,8 @@ namespace Microsoft.CodeAnalysis.Emit
             string? stateMachineTypeName,
             ImmutableArray<EncHoistedLocalInfo> stateMachineHoistedLocalSlotsOpt,
             ImmutableArray<Cci.ITypeReference?> stateMachineAwaiterSlotsOpt
-        ) {
+        )
+        {
             // An updated method will carry its id over,
             // an added method id has generation set to the current generation ordinal.
             Debug.Assert(methodId.Generation >= 0);
@@ -104,7 +105,8 @@ namespace Microsoft.CodeAnalysis.Emit
         private static EncHoistedLocalInfo MapHoistedLocalSlot(
             EncHoistedLocalInfo info,
             SymbolMatcher map
-        ) {
+        )
+        {
             if (info.Type is null)
             {
                 return info;

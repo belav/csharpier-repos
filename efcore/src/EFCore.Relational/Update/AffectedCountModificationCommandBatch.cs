@@ -52,7 +52,8 @@ namespace Microsoft.EntityFrameworkCore.Update
                     while (
                         commandIndex < CommandResultSet.Count
                         && CommandResultSet[commandIndex] == ResultSetMapping.NoResultSet
-                    ) {
+                    )
+                    {
                         commandIndex++;
                     }
 
@@ -68,7 +69,8 @@ namespace Microsoft.EntityFrameworkCore.Update
                 while (
                     commandIndex < CommandResultSet.Count
                     && CommandResultSet[commandIndex] == ResultSetMapping.NoResultSet
-                ) {
+                )
+                {
                     commandIndex++;
                 }
 
@@ -110,7 +112,8 @@ namespace Microsoft.EntityFrameworkCore.Update
         protected override async Task ConsumeAsync(
             RelationalDataReader reader,
             CancellationToken cancellationToken = default
-        ) {
+        )
+        {
             Check.DebugAssert(
                 CommandResultSet.Count == ModificationCommands.Count,
                 $"CommandResultSet.Count of {CommandResultSet.Count} != ModificationCommands.Count of {ModificationCommands.Count}"
@@ -126,7 +129,8 @@ namespace Microsoft.EntityFrameworkCore.Update
                     while (
                         commandIndex < CommandResultSet.Count
                         && CommandResultSet[commandIndex] == ResultSetMapping.NoResultSet
-                    ) {
+                    )
+                    {
                         commandIndex++;
                     }
 
@@ -156,7 +160,8 @@ namespace Microsoft.EntityFrameworkCore.Update
                 while (
                     commandIndex < CommandResultSet.Count
                     && CommandResultSet[commandIndex] == ResultSetMapping.NoResultSet
-                ) {
+                )
+                {
                     commandIndex++;
                 }
 
@@ -198,7 +203,8 @@ namespace Microsoft.EntityFrameworkCore.Update
         protected virtual int ConsumeResultSetWithPropagation(
             int commandIndex,
             RelationalDataReader reader
-        ) {
+        )
+        {
             var rowsAffected = 0;
             do
             {
@@ -214,7 +220,8 @@ namespace Microsoft.EntityFrameworkCore.Update
                     while (
                         ++commandIndex < CommandResultSet.Count
                         && CommandResultSet[commandIndex - 1] == ResultSetMapping.NotLastInResultSet
-                    ) {
+                    )
+                    {
                         expectedRowsAffected++;
                     }
 
@@ -255,7 +262,8 @@ namespace Microsoft.EntityFrameworkCore.Update
             int commandIndex,
             RelationalDataReader reader,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var rowsAffected = 0;
             do
             {
@@ -271,7 +279,8 @@ namespace Microsoft.EntityFrameworkCore.Update
                     while (
                         ++commandIndex < CommandResultSet.Count
                         && CommandResultSet[commandIndex - 1] == ResultSetMapping.NotLastInResultSet
-                    ) {
+                    )
+                    {
                         expectedRowsAffected++;
                     }
 
@@ -306,12 +315,14 @@ namespace Microsoft.EntityFrameworkCore.Update
         protected virtual int ConsumeResultSetWithoutPropagation(
             int commandIndex,
             RelationalDataReader reader
-        ) {
+        )
+        {
             var expectedRowsAffected = 1;
             while (
                 ++commandIndex < CommandResultSet.Count
                 && CommandResultSet[commandIndex - 1] == ResultSetMapping.NotLastInResultSet
-            ) {
+            )
+            {
                 Check.DebugAssert(
                     !ModificationCommands[commandIndex].RequiresResultPropagation,
                     "RequiresResultPropagation is true"
@@ -356,12 +367,14 @@ namespace Microsoft.EntityFrameworkCore.Update
             int commandIndex,
             RelationalDataReader reader,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var expectedRowsAffected = 1;
             while (
                 ++commandIndex < CommandResultSet.Count
                 && CommandResultSet[commandIndex - 1] == ResultSetMapping.NotLastInResultSet
-            ) {
+            )
+            {
                 Check.DebugAssert(
                     !ModificationCommands[commandIndex].RequiresResultPropagation,
                     "RequiresResultPropagation is true"
@@ -411,7 +424,8 @@ namespace Microsoft.EntityFrameworkCore.Update
             int commandIndex,
             int expectedRowsAffected,
             int rowsAffected
-        ) {
+        )
+        {
             throw new DbUpdateConcurrencyException(
                 RelationalStrings.UpdateConcurrencyException(expectedRowsAffected, rowsAffected),
                 AggregateEntries(commandIndex, expectedRowsAffected)

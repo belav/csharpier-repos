@@ -64,7 +64,8 @@ namespace System.Reflection.Internal
             int byteCount,
             byte[] prefix,
             MetadataStringDecoder utf8Decoder
-        ) {
+        )
+        {
             Debug.Assert(utf8Decoder != null);
 
             if (prefix != null)
@@ -85,7 +86,8 @@ namespace System.Reflection.Internal
             int byteCount,
             byte[] prefix,
             MetadataStringDecoder utf8Decoder
-        ) {
+        )
+        {
             Debug.Assert(utf8Decoder != null);
 
             int prefixedByteCount = byteCount + prefix.Length;
@@ -157,7 +159,8 @@ namespace System.Reflection.Internal
             Encoding encoding,
             byte* bytes,
             int byteCount
-        ) {
+        )
+        {
             // This implementation can leak publicly (by design) to MetadataStringDecoder.GetString.
             // Therefore we implement the same validation.
 
@@ -242,7 +245,8 @@ namespace System.Reflection.Internal
                     && parameters[1].ParameterType == typeof(int)
                     && parameters[2].ParameterType == typeof(Encoding)
                     && methodInfo.ReturnType == typeof(string)
-                ) {
+                )
+                {
                     try
                     {
                         var createStringFromEncoding =
@@ -275,7 +279,8 @@ namespace System.Reflection.Internal
             byte* bytes,
             int byteCount,
             Encoding encoding
-        ) {
+        )
+        {
             // String.CreateStringFromEncoding is an internal method that does not validate
             // arguments, but this implementation can leak publicly (by design) via
             // MetadataStringDecoder.GetString. Therefore, we implement the same validation

@@ -43,7 +43,8 @@ namespace Microsoft.CodeAnalysis.EditAndContinue.UnitTests
             > nonRemappableRegions = null,
             CommittedSolution.DocumentState initialState =
                 CommittedSolution.DocumentState.MatchesBuildOutput
-        ) {
+        )
+        {
             var mockDebuggerService = new MockManagedEditAndContinueDebuggerService()
             {
                 GetActiveStatementsImpl = () => activeStatements
@@ -88,7 +89,8 @@ namespace Microsoft.CodeAnalysis.EditAndContinue.UnitTests
         private static Solution AddDefaultTestSolution(
             TestWorkspace workspace,
             string[] markedSources
-        ) {
+        )
+        {
             var solution = workspace.CurrentSolution;
 
             var project = solution.AddProject("proj", "proj", LanguageNames.CSharp)

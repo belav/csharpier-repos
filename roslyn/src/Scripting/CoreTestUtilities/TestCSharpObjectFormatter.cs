@@ -22,7 +22,8 @@ namespace Microsoft.CodeAnalysis.Scripting.Hosting.UnitTests
             bool quoteStringsAndCharacters = true,
             int maximumLineLength = int.MaxValue,
             CultureInfo cultureInfo = null
-        ) {
+        )
+        {
             _includeCodePoints = includeCodePoints;
             _quoteStringsAndCharacters = quoteStringsAndCharacters;
             _maximumLineLength = maximumLineLength;

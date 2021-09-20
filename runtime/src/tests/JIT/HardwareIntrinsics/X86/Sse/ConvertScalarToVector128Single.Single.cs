@@ -115,7 +115,8 @@ namespace JIT.HardwareIntrinsics.X86
 
             public void RunStructFldScenario(
                 SimpleBinaryOpConvTest__ConvertScalarToVector128SingleSingle testClass
-            ) {
+            )
+            {
                 var result = Sse.ConvertScalarToVector128Single(_fld1, _fld2);
 
                 Unsafe.Write(testClass._dataTable.outArrayPtr, result);
@@ -393,7 +394,8 @@ namespace JIT.HardwareIntrinsics.X86
             Int32 right,
             void* result,
             [CallerMemberName] string method = ""
-        ) {
+        )
+        {
             Single[] inArray1 = new Single[Op1ElementCount];
             Single[] outArray = new Single[RetElementCount];
 
@@ -412,7 +414,8 @@ namespace JIT.HardwareIntrinsics.X86
             Int32 right,
             void* result,
             [CallerMemberName] string method = ""
-        ) {
+        )
+        {
             Single[] inArray1 = new Single[Op1ElementCount];
             Single[] outArray = new Single[RetElementCount];
 
@@ -435,7 +438,8 @@ namespace JIT.HardwareIntrinsics.X86
             Int32 right,
             Single[] result,
             [CallerMemberName] string method = ""
-        ) {
+        )
+        {
             if ((float)right != result[0])
             {
                 Succeeded = false;

@@ -69,7 +69,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.CodeModel
                     this.Workspace.GetFilePath(GetDocumentId()),
                     out _
                 )
-            ) {
+            )
+            {
                 return needMoreTime;
             }
 
@@ -168,7 +169,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.CodeModel
             CodeModelEvent codeModelEvent,
             out EnvDTE.CodeElement element,
             out object parentElement
-        ) {
+        )
+        {
             parentElement = GetParentElementForCodeModelEvent(codeModelEvent);
 
             if (codeModelEvent.Node == null)
@@ -222,7 +224,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.CodeModel
             if (
                 this.CodeModelService.IsParameterNode(codeModelEvent.Node)
                 || this.CodeModelService.IsAttributeArgumentNode(codeModelEvent.Node)
-            ) {
+            )
+            {
                 if (codeModelEvent.ParentNode != null)
                 {
                     return this.GetOrCreateCodeElement<EnvDTE.CodeElement>(
@@ -291,7 +294,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.CodeModel
             CodeModelEvent codeModelEvent,
             EnvDTE.CodeElements parentParameters,
             object parentElement
-        ) {
+        )
+        {
             if (parentParameters == null)
             {
                 return null;
@@ -324,7 +328,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.CodeModel
         private EnvDTE.CodeElement GetAttributeElementForCodeModelEvent(
             CodeModelEvent codeModelEvent,
             object parentElement
-        ) {
+        )
+        {
             var node = codeModelEvent.Node;
             var parentNode = codeModelEvent.ParentNode;
             var eventType = codeModelEvent.Type;
@@ -396,7 +401,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.CodeModel
             CodeModelEventType eventType,
             EnvDTE.CodeElements elementsToSearch,
             object parentObject
-        ) {
+        )
+        {
             if (elementsToSearch == null)
             {
                 return null;
@@ -472,7 +478,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.CodeModel
         private EnvDTE.CodeElement GetAttributeArgumentElementForCodeModelEvent(
             CodeModelEvent codeModelEvent,
             object parentElement
-        ) {
+        )
+        {
             if (parentElement is EnvDTE80.CodeAttribute2 parentAttribute)
             {
                 return GetAttributeArgumentForCodeModelEvent(
@@ -489,7 +496,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.CodeModel
             CodeModelEvent codeModelEvent,
             EnvDTE.CodeElements parentAttributeArguments,
             object parentElement
-        ) {
+        )
+        {
             if (parentAttributeArguments == null)
             {
                 return null;

@@ -78,7 +78,8 @@ namespace AutoMapper.Execution
             Expression sourceParameter,
             MemberMap propertyMap = null,
             Expression destinationParameter = null
-        ) {
+        )
+        {
             destinationParameter ??= Default(typePair.DestinationType);
             var typeMap = configurationProvider.ResolveTypeMap(typePair);
             Expression mapExpression = null;
@@ -131,7 +132,8 @@ namespace AutoMapper.Execution
             Expression destinationParameter,
             Expression mapExpression,
             MemberMap memberMap
-        ) {
+        )
+        {
             var sourceType = sourceParameter.Type;
             if (sourceType.IsValueType && !sourceType.IsNullableType())
             {
@@ -197,7 +199,8 @@ namespace AutoMapper.Execution
                 if (
                     (isCollection && profileMap.AllowsNullCollectionsFor(memberMap))
                     || (!isCollection && profileMap.AllowsNullDestinationValuesFor(memberMap))
-                ) {
+                )
+                {
                     return destinationParameter.NodeType == ExpressionType.Default
                       ? destinationParameter
                       : Default(destinationType);
@@ -218,7 +221,8 @@ namespace AutoMapper.Execution
             Expression sourceParameter,
             Expression destinationParameter,
             MemberMap memberMap
-        ) {
+        )
+        {
             var mapMethod = ContextMapMethod.MakeGenericMethod(
                 typePair.SourceType,
                 typePair.DestinationType
@@ -386,7 +390,8 @@ namespace AutoMapper.Execution
             ParameterExpression loopVar,
             Expression collection,
             Expression loopContent
-        ) {
+        )
+        {
             if (collection.Type.IsArray)
             {
                 return ForEachArrayItem(loopVar, collection, loopContent);
@@ -425,7 +430,8 @@ namespace AutoMapper.Execution
                 ParameterExpression loopVar,
                 Expression array,
                 Expression loopContent
-            ) {
+            )
+            {
                 var breakLabel = Label("LoopBreak");
                 var index = Variable(typeof(int), "sourceArrayIndex");
                 var initialize = Assign(index, Constant(0, typeof(int)));
@@ -503,7 +509,8 @@ namespace AutoMapper.Execution
             this ParameterReplaceVisitor visitor,
             LambdaExpression initialLambda,
             params Expression[] newParameters
-        ) {
+        )
+        {
             var newLambda = initialLambda.Body;
             for (var i = 0; i < Math.Min(newParameters.Length, initialLambda.Parameters.Count); i++)
             {
@@ -518,7 +525,8 @@ namespace AutoMapper.Execution
             this Expression expression,
             Type destinationType = null,
             Expression defaultValue = null
-        ) {
+        )
+        {
             var chain = expression.GetChain();
             if (chain.Count == 0 || chain.Peek().Target is not ParameterExpression parameter)
             {

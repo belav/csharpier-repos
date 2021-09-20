@@ -85,7 +85,8 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.operate.genclas
         public static MemberClassMultipleParams<T, U, V> operator >>(
             MemberClassMultipleParams<T, U, V> p1,
             int p2
-        ) {
+        )
+        {
             return new MemberClassMultipleParams<T, U, V>();
         }
 
@@ -149,7 +150,8 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.operate.genclas
 
         public static MemberClassWithNewConstraint<T> operator ++(
             MemberClassWithNewConstraint<T> p1
-        ) {
+        )
+        {
             return new MemberClassWithNewConstraint<T>();
         }
     }

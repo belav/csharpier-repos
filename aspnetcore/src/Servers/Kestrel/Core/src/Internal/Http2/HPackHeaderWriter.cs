@@ -18,7 +18,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Http2
             Http2HeadersEnumerator headersEnumerator,
             Span<byte> buffer,
             out int length
-        ) {
+        )
+        {
             length = 0;
 
             if (!hpackEncoder.EnsureDynamicTableSizeUpdate(buffer, out var sizeUpdateLength))
@@ -34,7 +35,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Http2
                     buffer.Slice(length),
                     out var statusCodeLength
                 )
-            ) {
+            )
+            {
                 throw new HPackEncodingException(SR.net_http_hpack_encode_failure);
             }
             length += statusCodeLength;
@@ -65,7 +67,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Http2
             Http2HeadersEnumerator headersEnumerator,
             Span<byte> buffer,
             out int length
-        ) {
+        )
+        {
             length = 0;
 
             if (!hpackEncoder.EnsureDynamicTableSizeUpdate(buffer, out var sizeUpdateLength))
@@ -98,7 +101,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Http2
             Http2HeadersEnumerator headersEnumerator,
             Span<byte> buffer,
             out int length
-        ) {
+        )
+        {
             return EncodeHeadersCore(
                 hpackEncoder,
                 headersEnumerator,
@@ -113,7 +117,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Http2
             DynamicHPackEncoder hpackEncoder,
             Span<byte> buffer,
             out int length
-        ) {
+        )
+        {
             switch (statusCode)
             {
                 case 200:
@@ -149,7 +154,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Http2
             Span<byte> buffer,
             bool throwIfNoneEncoded,
             out int length
-        ) {
+        )
+        {
             var currentLength = 0;
             do
             {
@@ -168,7 +174,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Http2
                         value,
                         out var headerLength
                     )
-                ) {
+                )
+                {
                     // If the header wasn't written, and no headers have been written, then the header is too large.
                     // Throw an error to avoid an infinite loop of attempting to write large header.
                     if (currentLength == 0 && throwIfNoneEncoded)

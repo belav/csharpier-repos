@@ -109,7 +109,8 @@ namespace Templates.Test
             string targetFramework = null,
             bool serverProject = false,
             bool onlyCreate = false
-        ) {
+        )
+        {
             // Additional arguments are needed. See: https://github.com/dotnet/aspnetcore/issues/24278
             Environment.SetEnvironmentVariable("EnableDefaultScopedCssItems", "true");
 
@@ -161,7 +162,8 @@ namespace Templates.Test
             Project project,
             string projectDirectory,
             string projectName
-        ) {
+        )
+        {
             var subProjectDirectory = Path.Combine(project.TemplateOutputDir, projectDirectory);
             if (!Directory.Exists(subProjectDirectory))
             {
@@ -185,7 +187,8 @@ namespace Templates.Test
             BrowserKind browserKind,
             bool isRequired,
             out string error
-        ) {
+        )
+        {
             error = !isRequired
                 ? null
                 : $"Browser '{browserKind}' is required but not configured on '{RuntimeInformation.OSDescription}'";

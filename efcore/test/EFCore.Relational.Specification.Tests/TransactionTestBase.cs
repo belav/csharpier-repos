@@ -108,7 +108,8 @@ namespace Microsoft.EntityFrameworkCore
         public virtual async Task SaveChanges_uses_enlisted_transaction(
             bool async,
             bool autoTransactionsEnabled
-        ) {
+        )
+        {
             using (var transaction = new CommittableTransaction(TimeSpan.FromMinutes(10)))
             {
                 using (var context = CreateContext())
@@ -186,7 +187,8 @@ namespace Microsoft.EntityFrameworkCore
         public virtual async Task SaveChanges_uses_enlisted_transaction_after_connection_closed(
             bool async,
             bool autoTransactionsEnabled
-        ) {
+        )
+        {
             if (!AmbientTransactionsSupported)
             {
                 return;
@@ -238,7 +240,8 @@ namespace Microsoft.EntityFrameworkCore
         public virtual async Task SaveChanges_uses_enlisted_transaction_connectionString(
             bool async,
             bool autoTransactionsEnabled
-        ) {
+        )
+        {
             if (!AmbientTransactionsSupported)
             {
                 return;
@@ -281,7 +284,8 @@ namespace Microsoft.EntityFrameworkCore
         public virtual async Task SaveChanges_uses_ambient_transaction(
             bool async,
             bool autoTransactionsEnabled
-        ) {
+        )
+        {
             if (TestStore.ConnectionState == ConnectionState.Closed)
             {
                 TestStore.OpenConnection();
@@ -360,7 +364,8 @@ namespace Microsoft.EntityFrameworkCore
         public virtual async Task SaveChanges_uses_ambient_transaction_with_connectionString(
             bool async,
             bool autoTransactionsEnabled
-        ) {
+        )
+        {
             if (!AmbientTransactionsSupported)
             {
                 return;
@@ -409,7 +414,8 @@ namespace Microsoft.EntityFrameworkCore
         [InlineData(false)]
         public virtual void SaveChanges_throws_for_suppressed_ambient_transactions(
             bool connectionString
-        ) {
+        )
+        {
             if (!AmbientTransactionsSupported)
             {
                 return;
@@ -419,7 +425,8 @@ namespace Microsoft.EntityFrameworkCore
                 var context = connectionString
                     ? CreateContextWithConnectionString()
                     : CreateContext()
-            ) {
+            )
+            {
                 using (TestUtilities.TestStore.CreateTransactionScope())
                 {
                     context.Add(new TransactionCustomer { Id = 77, Name = "Bobble" });
@@ -468,7 +475,8 @@ namespace Microsoft.EntityFrameworkCore
                         var nestedTransaction = new TransactionScope(
                             TransactionScopeOption.RequiresNew
                         )
-                    ) {
+                    )
+                    {
                         context.Add(new TransactionOrder { Id = 300, Name = "Order3" });
                         context.SaveChanges();
                         nestedTransaction.Complete();
@@ -511,7 +519,8 @@ namespace Microsoft.EntityFrameworkCore
                         var nestedTransaction = new TransactionScope(
                             TransactionScopeOption.RequiresNew
                         )
-                    ) {
+                    )
+                    {
                         context.Add(new TransactionOrder { Id = 300, Name = "Order3" });
                         context.SaveChanges();
                         nestedTransaction.Complete();
@@ -608,7 +617,8 @@ namespace Microsoft.EntityFrameworkCore
         public virtual async Task SaveChanges_uses_explicit_transaction_without_committing(
             bool async,
             bool autoTransaction
-        ) {
+        )
+        {
             using (var context = CreateContext())
             {
                 context.Database.AutoTransactionsEnabled = autoTransaction;
@@ -649,7 +659,8 @@ namespace Microsoft.EntityFrameworkCore
         public virtual async Task SaveChanges_false_uses_explicit_transaction_without_committing_or_accepting_changes(
             bool async,
             bool autoTransaction
-        ) {
+        )
+        {
             using (var context = CreateContext())
             {
                 context.Database.AutoTransactionsEnabled = autoTransaction;
@@ -694,7 +705,8 @@ namespace Microsoft.EntityFrameworkCore
         public virtual async Task SaveChanges_uses_explicit_transaction_with_failure_behavior(
             bool async,
             bool autoTransaction
-        ) {
+        )
+        {
             using (var context = CreateContext())
             {
                 context.Database.AutoTransactionsEnabled = autoTransaction;
@@ -797,7 +809,8 @@ namespace Microsoft.EntityFrameworkCore
         [InlineData(false)]
         public virtual async Task RelationalTransaction_can_be_committed_from_context(
             bool autoTransaction
-        ) {
+        )
+        {
             using (var context = CreateContext())
             {
                 context.Database.AutoTransactionsEnabled = autoTransaction;
@@ -846,7 +859,8 @@ namespace Microsoft.EntityFrameworkCore
         [InlineData(false)]
         public virtual async Task RelationalTransaction_can_be_rolled_back_from_context(
             bool autoTransaction
-        ) {
+        )
+        {
             using var context = CreateContext();
             context.Database.AutoTransactionsEnabled = autoTransaction;
 
@@ -885,7 +899,8 @@ namespace Microsoft.EntityFrameworkCore
                     {
                         using (
                             innerContext.Database.BeginTransaction(IsolationLevel.ReadUncommitted)
-                        ) {
+                        )
+                        {
                             Assert.Equal(
                                 Customers.Count - 1,
                                 innerContext.Set<TransactionCustomer>().Count()
@@ -948,7 +963,8 @@ namespace Microsoft.EntityFrameworkCore
                             await innerContext.Database.BeginTransactionAsync(
                                 IsolationLevel.ReadUncommitted
                             )
-                        ) {
+                        )
+                        {
                             Assert.Equal(
                                 Customers.Count - 1,
                                 await innerContext.Set<TransactionCustomer>().CountAsync()
@@ -962,7 +978,8 @@ namespace Microsoft.EntityFrameworkCore
                             await innerContext.Database.BeginTransactionAsync(
                                 IsolationLevel.Snapshot
                             )
-                        ) {
+                        )
+                        {
                             Assert.Equal(
                                 Customers,
                                 await innerContext.Set<TransactionCustomer>()
@@ -997,7 +1014,8 @@ namespace Microsoft.EntityFrameworkCore
         [InlineData(false)]
         public virtual async Task Can_use_open_connection_with_started_transaction(
             bool autoTransaction
-        ) {
+        )
+        {
             using (var transaction = TestStore.BeginTransaction())
             {
                 using var context = CreateContext();
@@ -1038,7 +1056,8 @@ namespace Microsoft.EntityFrameworkCore
                 context.Database.BeginTransaction(
                     DirtyReadsOccur ? IsolationLevel.ReadUncommitted : IsolationLevel.Unspecified
                 )
-            ) {
+            )
+            {
                 var ex = Assert.Throws<InvalidOperationException>(
                     () => context.Database.UseTransaction(transaction)
                 );

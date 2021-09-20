@@ -102,7 +102,8 @@ namespace Microsoft.CodeAnalysis
                 if (
                     (diagnostic as DiagnosticWithInfo)?.HasLazyInfo != true
                     && diagnostic.DefaultSeverity == DiagnosticSeverity.Error
-                ) {
+                )
+                {
                     return true;
                 }
             }

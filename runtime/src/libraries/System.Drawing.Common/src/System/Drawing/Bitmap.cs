@@ -188,7 +188,8 @@ namespace System.Drawing
             if (
                 status == 2 /* invalid parameter*/
                 && (Width >= short.MaxValue || Height >= short.MaxValue)
-            ) {
+            )
+            {
                 throw new ArgumentException(SR.GdiplusInvalidSize);
             }
 
@@ -303,7 +304,8 @@ namespace System.Drawing
             ImageLockMode flags,
             PixelFormat format,
             BitmapData bitmapData
-        ) {
+        )
+        {
             int status = Gdip.GdipBitmapLockBits(
                 new HandleRef(this, nativeImage),
                 ref rect,

@@ -32,7 +32,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata
             SlimEntityType declaringEntityType,
             string? name,
             bool unique
-        ) {
+        )
+        {
             Properties = properties;
             Name = name;
             DeclaringEntityType = declaringEntityType;

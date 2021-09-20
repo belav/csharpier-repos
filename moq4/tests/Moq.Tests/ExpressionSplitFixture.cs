@@ -264,21 +264,24 @@ namespace Moq.Tests
         private void AssertSplitFails(
             LambdaExpression expression,
             params LambdaExpression[] expected
-        ) {
+        )
+        {
             Assert.Throws<ArgumentException>(() => expression.Split());
         }
 
         private void AssertSplitFails(
             LambdaExpression expression,
             bool allowNonOverridableLastProperty
-        ) {
+        )
+        {
             Assert.ThrowsAny<Exception>(() => expression.Split(allowNonOverridableLastProperty));
         }
 
         private void AssertSplitYields(
             LambdaExpression expression,
             params LambdaExpression[] expected
-        ) {
+        )
+        {
             Assert.Equal(
                 expected,
                 expression.Split().Select(e => e.Expression),
@@ -290,7 +293,8 @@ namespace Moq.Tests
             LambdaExpression expression,
             bool allowNonOverridableLastProperty,
             params LambdaExpression[] expected
-        ) {
+        )
+        {
             Assert.Equal(
                 expected,
                 expression.Split(allowNonOverridableLastProperty).Select(e => e.Expression),
@@ -305,7 +309,8 @@ namespace Moq.Tests
         private static LambdaExpression A<T, TResult>(
             Expression<Func<T, TResult>> left,
             Expression right
-        ) {
+        )
+        {
             return Expression.Lambda(
                 Expression.Assign(
                     IndexerReplacer.Instance.Visit(left.Body),

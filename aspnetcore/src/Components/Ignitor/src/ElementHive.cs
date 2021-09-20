@@ -57,12 +57,14 @@ namespace Ignitor
             Node node,
             string id,
             [NotNullWhen(true)] out ElementNode? foundNode
-        ) {
+        )
+        {
             if (
                 node is ElementNode elementNode
                 && elementNode.Attributes.TryGetValue("id", out var elementId)
                 && elementId.ToString() == id
-            ) {
+            )
+            {
                 foundNode = elementNode;
                 return true;
             }
@@ -86,7 +88,8 @@ namespace Ignitor
             RenderBatch batch,
             int componentId,
             ArrayBuilderSegment<RenderTreeEdit> edits
-        ) {
+        )
+        {
             if (!Components.TryGetValue(componentId, out var component))
             {
                 component = new ComponentNode(componentId);
@@ -105,7 +108,8 @@ namespace Ignitor
             ContainerNode parent,
             int childIndex,
             ArrayBuilderSegment<RenderTreeEdit> edits
-        ) {
+        )
+        {
             var currentDepth = 0;
             var childIndexAtCurrentDepth = childIndex;
             var permutations = new List<PermutationListEntry>();
@@ -257,7 +261,8 @@ namespace Ignitor
             ArraySegment<RenderTreeFrame> frames,
             RenderTreeFrame frame,
             int frameIndex
-        ) {
+        )
+        {
             switch (frame.FrameType)
             {
                 case RenderTreeFrameType.Element:
@@ -345,7 +350,8 @@ namespace Ignitor
             ArraySegment<RenderTreeFrame> frames,
             int startIndex,
             int endIndexExcl
-        ) {
+        )
+        {
             var origChildIndex = childIndex;
             for (var index = startIndex; index < endIndexExcl; index++)
             {
@@ -374,7 +380,8 @@ namespace Ignitor
             ArraySegment<RenderTreeFrame> frames,
             RenderTreeFrame frame,
             int frameIndex
-        ) {
+        )
+        {
             // Note: we don't handle SVG here
             var newElement = new ElementNode(frame.ElementName);
 
@@ -418,7 +425,8 @@ namespace Ignitor
             RenderBatch batch,
             ElementNode elementNode,
             RenderTreeFrame attributeFrame
-        ) {
+        )
+        {
             var attributeName = attributeFrame.AttributeName;
             var eventHandlerId = attributeFrame.AttributeEventHandlerId;
 
@@ -451,7 +459,8 @@ namespace Ignitor
             ElementNode element,
             string attributeName,
             RenderTreeFrame attributeFrame
-        ) {
+        )
+        {
             switch (attributeName)
             {
                 case "value":

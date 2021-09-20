@@ -32,14 +32,16 @@ namespace Castle.DynamicProxy.Tests
         [TestCase(typeof(HasDefaultValues))]
         public void Proxying_class_with_all_kinds_of_default_parameter_values_succeeds(
             Type classType
-        ) {
+        )
+        {
             generator.CreateClassProxy(classType, new DoNothingInterceptor());
         }
 
         [TestCase(typeof(InterfaceWithMethodsWithAllKindsOfOptionalParameters))]
         public void Proxying_interface_with_all_kinds_of_default_parameter_values_succeeds(
             Type interfaceType
-        ) {
+        )
+        {
             generator.CreateInterfaceProxyWithoutTarget(interfaceType, new DoNothingInterceptor());
         }
 

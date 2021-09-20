@@ -213,7 +213,8 @@ namespace Microsoft.CodeAnalysis.UnitTests.CodeStyle
         public void NoDuplicateEntriesInKindEnumerations(
             Type type,
             params string[] expectedDuplicates
-        ) {
+        )
+        {
             Assert.True(type.IsEnum);
 
             var enumNamesAndValues = type.GetEnumNames()

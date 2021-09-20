@@ -55,7 +55,8 @@ namespace Microsoft.AspNetCore.Authentication.WsFederation
                 !options.CallbackPath.HasValue
                 && !string.IsNullOrEmpty(options.Wreply)
                 && Uri.TryCreate(options.Wreply, UriKind.Absolute, out var wreply)
-            ) {
+            )
+            {
                 // Wreply must be a very specific, case sensitive value, so we can't generate it. Instead we generate CallbackPath from it.
                 options.CallbackPath = PathString.FromUriComponent(wreply);
             }
@@ -94,7 +95,8 @@ namespace Microsoft.AspNetCore.Authentication.WsFederation
                             "https://",
                             StringComparison.OrdinalIgnoreCase
                         )
-                    ) {
+                    )
+                    {
                         throw new InvalidOperationException(
                             "The MetadataAddress must use HTTPS unless disabled for development by setting RequireHttpsMetadata=false."
                         );

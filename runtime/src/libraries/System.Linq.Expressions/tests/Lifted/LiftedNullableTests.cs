@@ -221,7 +221,8 @@ namespace System.Linq.Expressions.Tests
             bool? a,
             bool? b,
             bool useInterpreter
-        ) {
+        )
+        {
             ParameterExpression p0 = Expression.Parameter(typeof(bool), "p0");
             ParameterExpression p1 = Expression.Parameter(typeof(bool), "p1");
 
@@ -264,7 +265,8 @@ namespace System.Linq.Expressions.Tests
             bool? a,
             bool? b,
             bool useInterpreter
-        ) {
+        )
+        {
             ParameterExpression p0 = Expression.Parameter(typeof(bool), "p0");
             ParameterExpression p1 = Expression.Parameter(typeof(bool), "p1");
 

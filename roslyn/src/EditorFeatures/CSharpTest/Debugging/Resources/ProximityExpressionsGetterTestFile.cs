@@ -17,7 +17,8 @@ namespace Roslyn.Services.CSharp.Debugging
             int position,
             ExpressionSyntax expression,
             List<string> terms
-        ) {
+        )
+        {
             // Check here rather than at all the call sites...
             if (expression == null)
             {
@@ -42,7 +43,8 @@ namespace Roslyn.Services.CSharp.Debugging
             ExpressionSyntax expression,
             IList<string> terms,
             ref ExpressionType expressionType
-        ) {
+        )
+        {
             // Check here rather than at all the call sites...
             if (expression == null)
             {
@@ -155,7 +157,8 @@ namespace Roslyn.Services.CSharp.Debugging
             ExpressionSyntax expression,
             IList<string> terms,
             ref ExpressionType expressionType
-        ) {
+        )
+        {
             var flags = ExpressionType.Invalid;
 
             // These operators always have a RHS of a name node, which we know would
@@ -171,7 +174,8 @@ namespace Roslyn.Services.CSharp.Debugging
                 (flags & ExpressionType.ValidTerm) == ExpressionType.ValidTerm
                 && !expression.IsParentKind(SyntaxKind.MemberAccessExpression)
                 && !expression.IsParentKind(SyntaxKind.PointerMemberAccessExpression)
-            ) {
+            )
+            {
                 terms.Add(ConvertToString(memberAccess.Expression));
             }
 
@@ -180,7 +184,8 @@ namespace Roslyn.Services.CSharp.Debugging
             if (
                 (flags & ExpressionType.ValidExpression) == ExpressionType.ValidExpression
                 && !expression.IsParentKind(SyntaxKind.InvocationExpression)
-            ) {
+            )
+            {
                 expressionType = ExpressionType.ValidTerm;
             }
             else
@@ -194,7 +199,8 @@ namespace Roslyn.Services.CSharp.Debugging
             ExpressionSyntax expression,
             IList<string> terms,
             ref ExpressionType expressionType
-        ) {
+        )
+        {
             // Object creation can *definitely* cause side effects.  So we initially
             // mark this as something invalid.  We allow it as a valid expr if all
             // the sub arguments are valid terms.
@@ -220,7 +226,8 @@ namespace Roslyn.Services.CSharp.Debugging
             ExpressionSyntax expression,
             IList<string> terms,
             ref ExpressionType expressionType
-        ) {
+        )
+        {
             var validTerm = true;
             var arrayCreation = (ArrayCreationExpressionSyntax)expression;
 
@@ -249,7 +256,8 @@ namespace Roslyn.Services.CSharp.Debugging
             ExpressionSyntax expression,
             IList<string> terms,
             ref ExpressionType expressionType
-        ) {
+        )
+        {
             // Invocations definitely have side effects.  So we assume this
             // is invalid initially
             expressionType = ExpressionType.Invalid;
@@ -274,7 +282,8 @@ namespace Roslyn.Services.CSharp.Debugging
             ExpressionSyntax expression,
             IList<string> terms,
             ref ExpressionType expressionType
-        ) {
+        )
+        {
             expressionType = ExpressionType.Invalid;
             var flags = ExpressionType.Invalid;
             var prefixUnaryExpression = (PrefixUnaryExpressionSyntax)expression;
@@ -295,7 +304,8 @@ namespace Roslyn.Services.CSharp.Debugging
                     SyntaxKind.NegateExpression,
                     SyntaxKind.PlusExpression
                 )
-            ) {
+            )
+            {
                 // We're a valid expression if our subexpression is...
                 expressionType = flags & ExpressionType.ValidExpression;
             }
@@ -306,7 +316,8 @@ namespace Roslyn.Services.CSharp.Debugging
             ExpressionSyntax expression,
             IList<string> terms,
             ref ExpressionType expressionType
-        ) {
+        )
+        {
             // ++ and -- are the only postfix operators.  Since they always have side
             // effects, we never consider this an expression.
             expressionType = ExpressionType.Invalid;
@@ -329,7 +340,8 @@ namespace Roslyn.Services.CSharp.Debugging
             ExpressionSyntax expression,
             IList<string> terms,
             ref ExpressionType expressionType
-        ) {
+        )
+        {
             ExpressionType leftFlags = ExpressionType.Invalid,
                 rightFlags = ExpressionType.Invalid;
 
@@ -388,7 +400,8 @@ namespace Roslyn.Services.CSharp.Debugging
             ArgumentListSyntax argumentList,
             IList<string> terms,
             ref ExpressionType expressionType
-        ) {
+        )
+        {
             var validExpr = true;
 
             // Process the list of expressions.  This is probably a list of
@@ -416,7 +429,8 @@ namespace Roslyn.Services.CSharp.Debugging
             int position,
             SeparatedSyntaxList<VariableDeclaratorSyntax> declarators,
             List<string> terms
-        ) {
+        )
+        {
             foreach (var declarator in declarators)
             {
                 if (declarator.InitializerOpt != null)

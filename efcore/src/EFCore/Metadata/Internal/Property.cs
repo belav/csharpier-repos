@@ -263,7 +263,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
         public virtual ValueGenerated? SetValueGenerated(
             ValueGenerated? valueGenerated,
             ConfigurationSource configurationSource
-        ) {
+        )
+        {
             EnsureMutable();
 
             _valueGenerated = valueGenerated;
@@ -308,7 +309,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
         public virtual bool? SetIsConcurrencyToken(
             bool? concurrencyToken,
             ConfigurationSource configurationSource
-        ) {
+        )
+        {
             EnsureMutable();
 
             if (IsConcurrencyToken != concurrencyToken)
@@ -524,7 +526,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
         public virtual PropertySaveBehavior? SetAfterSaveBehavior(
             PropertySaveBehavior? afterSaveBehavior,
             ConfigurationSource configurationSource
-        ) {
+        )
+        {
             if (afterSaveBehavior != null)
             {
                 var errorMessage = CheckAfterSaveBehavior(afterSaveBehavior.Value);
@@ -622,7 +625,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
         public virtual ValueConverter? SetValueConverter(
             ValueConverter? converter,
             ConfigurationSource configurationSource
-        ) {
+        )
+        {
             var errorString = CheckValueConverter(converter);
             if (errorString != null)
             {
@@ -736,7 +740,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
         public virtual CoreTypeMapping? SetTypeMapping(
             CoreTypeMapping? typeMapping,
             ConfigurationSource configurationSource
-        ) {
+        )
+        {
             _typeMapping = typeMapping;
             _typeMappingConfigurationSource = typeMapping is null
                 ? null
@@ -763,7 +768,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
         public virtual ValueComparer? SetValueComparer(
             ValueComparer? comparer,
             ConfigurationSource configurationSource
-        ) {
+        )
+        {
             var errorString = CheckValueComparer(comparer);
             if (errorString != null)
             {

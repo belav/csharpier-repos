@@ -435,7 +435,8 @@ namespace System.Threading.Tests
             AutoResetEvent toWaitOn,
             Func<WaitHandle, WaitHandle, bool> callSignalAndWait,
             bool skipInfiniteWaitTests
-        ) {
+        )
+        {
             // Verify that signaling is done, and the wait succeeds
             Unsignal(toSignal);
             toWaitOn.Set();

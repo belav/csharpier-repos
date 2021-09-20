@@ -33,7 +33,8 @@ namespace System.Runtime.Serialization.Formatters.Binary
             object? typeInformation,
             BinaryArrayTypeEnum binaryArrayTypeEnum,
             int assemId
-        ) {
+        )
+        {
             _objectId = objectId;
             _binaryArrayTypeEnum = binaryArrayTypeEnum;
             _rank = rank;
@@ -95,7 +96,8 @@ namespace System.Runtime.Serialization.Formatters.Binary
                         (_binaryArrayTypeEnum == BinaryArrayTypeEnum.SingleOffset)
                         || (_binaryArrayTypeEnum == BinaryArrayTypeEnum.JaggedOffset)
                         || (_binaryArrayTypeEnum == BinaryArrayTypeEnum.RectangularOffset)
-                    ) {
+                    )
+                    {
                         Debug.Assert(_lowerBoundA != null);
                         for (int i = 0; i < _rank; i++)
                         {
@@ -161,7 +163,8 @@ namespace System.Runtime.Serialization.Formatters.Binary
                         (_binaryArrayTypeEnum == BinaryArrayTypeEnum.SingleOffset)
                         || (_binaryArrayTypeEnum == BinaryArrayTypeEnum.JaggedOffset)
                         || (_binaryArrayTypeEnum == BinaryArrayTypeEnum.RectangularOffset)
-                    ) {
+                    )
+                    {
                         for (int i = 0; i < _rank; i++)
                         {
                             _lowerBoundA[i] = input.ReadInt32();

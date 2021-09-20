@@ -28,7 +28,8 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.QuickInfo
 
         protected static FormattedClassification[] ExpectedClassifications(
             params FormattedClassification[] expectedClassifications
-        ) {
+        )
+        {
             return expectedClassifications;
         }
 
@@ -50,7 +51,8 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.QuickInfo
             ImmutableArray<QuickInfoSection> sections,
             string textBlockKind,
             FormattedClassification[] expectedClassifications = null
-        ) {
+        )
+        {
             var textBlock = sections.FirstOrDefault(tb => tb.Kind == textBlockKind);
             var text = textBlock != null ? textBlock.TaggedParts : ImmutableArray<TaggedText>.Empty;
             AssertTaggedText(expectedText, text, expectedClassifications);
@@ -71,7 +73,8 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.QuickInfo
         protected static Action<QuickInfoItem> MainDescription(
             string expectedText,
             FormattedClassification[] expectedClassifications = null
-        ) {
+        )
+        {
             return item =>
                 AssertSection(
                     expectedText,
@@ -84,7 +87,8 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.QuickInfo
         protected static Action<QuickInfoItem> Documentation(
             string expectedText,
             FormattedClassification[] expectedClassifications = null
-        ) {
+        )
+        {
             return item =>
                 AssertSection(
                     expectedText,
@@ -97,7 +101,8 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.QuickInfo
         protected static Action<QuickInfoItem> Remarks(
             string expectedText,
             FormattedClassification[] expectedClassifications = null
-        ) {
+        )
+        {
             return item =>
                 AssertSection(
                     expectedText,
@@ -110,7 +115,8 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.QuickInfo
         protected static Action<QuickInfoItem> Returns(
             string expectedText,
             FormattedClassification[] expectedClassifications = null
-        ) {
+        )
+        {
             return item =>
                 AssertSection(
                     expectedText,
@@ -123,7 +129,8 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.QuickInfo
         protected static Action<QuickInfoItem> Value(
             string expectedText,
             FormattedClassification[] expectedClassifications = null
-        ) {
+        )
+        {
             return item =>
                 AssertSection(
                     expectedText,
@@ -136,7 +143,8 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.QuickInfo
         protected static Action<QuickInfoItem> TypeParameterMap(
             string expectedText,
             FormattedClassification[] expectedClassifications = null
-        ) {
+        )
+        {
             return item =>
                 AssertSection(
                     expectedText,
@@ -149,7 +157,8 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.QuickInfo
         protected static Action<QuickInfoItem> AnonymousTypes(
             string expectedText,
             FormattedClassification[] expectedClassifications = null
-        ) {
+        )
+        {
             return item =>
                 AssertSection(
                     expectedText,
@@ -162,7 +171,8 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.QuickInfo
         protected static Action<QuickInfoItem> NullabilityAnalysis(
             string expectedText,
             FormattedClassification[] expectedClassifications = null
-        ) {
+        )
+        {
             return item =>
                 AssertSection(
                     expectedText,
@@ -188,7 +198,8 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.QuickInfo
         protected static Action<QuickInfoItem> Usage(
             string expectedText,
             bool expectsWarningGlyph = false
-        ) {
+        )
+        {
             return item =>
             {
                 AssertSection(expectedText, item.Sections, QuickInfoSectionKinds.Usage);
@@ -213,7 +224,8 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.QuickInfo
         protected static async Task<bool> CanUseSpeculativeSemanticModelAsync(
             Document document,
             int position
-        ) {
+        )
+        {
             var service = document.GetLanguageService<ISyntaxFactsService>();
             var node = (await document.GetSyntaxRootAsync()).FindToken(position).Parent;
 

@@ -23,21 +23,24 @@ namespace Microsoft.Extensions.Caching.Distributed
         public System.Threading.Tasks.Task<byte[]> GetAsync(
             string key,
             System.Threading.CancellationToken token = default(System.Threading.CancellationToken)
-        ) {
+        )
+        {
             throw null;
         }
         public void Refresh(string key) { }
         public System.Threading.Tasks.Task RefreshAsync(
             string key,
             System.Threading.CancellationToken token = default(System.Threading.CancellationToken)
-        ) {
+        )
+        {
             throw null;
         }
         public void Remove(string key) { }
         public System.Threading.Tasks.Task RemoveAsync(
             string key,
             System.Threading.CancellationToken token = default(System.Threading.CancellationToken)
-        ) {
+        )
+        {
             throw null;
         }
         public void Set(
@@ -50,7 +53,8 @@ namespace Microsoft.Extensions.Caching.Distributed
             byte[] value,
             Microsoft.Extensions.Caching.Distributed.DistributedCacheEntryOptions options,
             System.Threading.CancellationToken token = default(System.Threading.CancellationToken)
-        ) {
+        )
+        {
             throw null;
         }
     }
@@ -127,24 +131,28 @@ namespace Microsoft.Extensions.DependencyInjection
     {
         public static Microsoft.Extensions.DependencyInjection.IServiceCollection AddDistributedMemoryCache(
             this Microsoft.Extensions.DependencyInjection.IServiceCollection services
-        ) {
+        )
+        {
             throw null;
         }
         public static Microsoft.Extensions.DependencyInjection.IServiceCollection AddDistributedMemoryCache(
             this Microsoft.Extensions.DependencyInjection.IServiceCollection services,
             System.Action<Microsoft.Extensions.Caching.Memory.MemoryDistributedCacheOptions> setupAction
-        ) {
+        )
+        {
             throw null;
         }
         public static Microsoft.Extensions.DependencyInjection.IServiceCollection AddMemoryCache(
             this Microsoft.Extensions.DependencyInjection.IServiceCollection services
-        ) {
+        )
+        {
             throw null;
         }
         public static Microsoft.Extensions.DependencyInjection.IServiceCollection AddMemoryCache(
             this Microsoft.Extensions.DependencyInjection.IServiceCollection services,
             System.Action<Microsoft.Extensions.Caching.Memory.MemoryCacheOptions> setupAction
-        ) {
+        )
+        {
             throw null;
         }
     }

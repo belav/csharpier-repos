@@ -207,7 +207,8 @@ namespace System.Security.Cryptography.EcDsa.Tests
             int count,
             byte[] signature,
             HashAlgorithmName hashAlgorithm
-        ) {
+        )
+        {
             var stream = new MemoryStream(data, offset, count);
             bool result = ecdsa.VerifyData(stream, signature, hashAlgorithm);
             Assert.Equal(stream.Length, stream.Position);
@@ -220,7 +221,8 @@ namespace System.Security.Cryptography.EcDsa.Tests
             int offset,
             int count,
             HashAlgorithmName hashAlgorithm
-        ) {
+        )
+        {
             var stream = new MemoryStream(data, offset, count);
             byte[] result = ecdsa.SignData(stream, hashAlgorithm);
             Assert.Equal(stream.Length, stream.Position);
@@ -459,7 +461,8 @@ namespace System.Security.Cryptography.EcDsa.Tests
                     HashAlgorithmName.SHA384,
                     HashAlgorithmName.SHA512
                 }
-            ) {
+            )
+            {
                 yield return new object[] { ECDsaFactory.Create(), hashAlgorithm };
             }
         }
@@ -469,7 +472,8 @@ namespace System.Security.Cryptography.EcDsa.Tests
         public void SignVerify_InteroperableSameKeys_RoundTripsUnlessTampered(
             ECDsa ecdsa,
             HashAlgorithmName hashAlgorithm
-        ) {
+        )
+        {
             byte[] data = Encoding.UTF8.GetBytes("something to repeat and sign");
 
             // large enough to make hashing work though multiple iterations and not a multiple of 4KB it uses.

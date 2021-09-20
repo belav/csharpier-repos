@@ -30,12 +30,14 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Library.ObjectB
             string fullNameText,
             string searchText,
             bool isHidden
-        ) : base(
-            projectId,
-            symbol.GetGlyph().GetStandardGlyphGroup(),
-            symbol.GetGlyph().GetStandardGlyphItem(),
-            isHidden
-        ) {
+        )
+            : base(
+                projectId,
+                symbol.GetGlyph().GetStandardGlyphGroup(),
+                symbol.GetGlyph().GetStandardGlyphItem(),
+                isHidden
+            )
+        {
             _symbolKey = symbol.GetSymbolKey();
             _accessibility = symbol.DeclaredAccessibility;
             _displayText = displayText;

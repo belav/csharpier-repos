@@ -562,7 +562,8 @@ namespace CSharpSyntaxGenerator
                     IsDerivedOrListOfDerived("SyntaxNode", field.Type)
                     || IsDerivedOrListOfDerived("SyntaxToken", field.Type)
                     || field.Type == "SyntaxNodeOrTokenList"
-                ) {
+                )
+                {
                     if (nCompared > 0)
                         Write(" || ");
                     Write($"{CamelCase(field.Name)} != this.{field.Name}");
@@ -682,7 +683,8 @@ namespace CSharpSyntaxGenerator
         private void WriteGreenFactories(
             List<TreeType> nodes,
             bool withSyntaxFactoryContext = false
-        ) {
+        )
+        {
             foreach (var node in nodes.OfType<Node>())
             {
                 WriteLine();
@@ -798,7 +800,8 @@ namespace CSharpSyntaxGenerator
                 && nd.Name != "DocumentationCommentTriviaSyntax"
                 && nd.Name != "IncompleteMemberSyntax"
                 && valueFields.Count + nodeFields.Count <= 3
-            ) {
+            )
+            {
                 //int hash;
                 //var cached = SyntaxNodeCache.TryGetNode((int)SyntaxKind.IdentifierName, identifier, this.context, out hash);
                 //if (cached != null) return (IdentifierNameSyntax)cached;
@@ -887,7 +890,8 @@ namespace CSharpSyntaxGenerator
             bool withSyntaxFactoryContext,
             List<Field> valueFields,
             List<Field> nodeFields
-        ) {
+        )
+        {
             Write(
                 CommaJoin(
                     nd.Kinds.Count == 1 ? $"SyntaxKind.{nd.Kinds[0].Name}" : "kind",
@@ -1084,7 +1088,8 @@ namespace CSharpSyntaxGenerator
                     {
                         if (
                             IsSeparatedNodeList(field.Type) || field.Type == "SyntaxNodeOrTokenList"
-                        ) {
+                        )
+                        {
                             WriteLine($"private SyntaxNode? {CamelCase(field.Name)};");
                         }
                         else
@@ -1393,7 +1398,8 @@ namespace CSharpSyntaxGenerator
                     IsDerivedOrListOfDerived("SyntaxNode", field.Type)
                     || IsDerivedOrListOfDerived("SyntaxToken", field.Type)
                     || field.Type == "SyntaxNodeOrTokenList"
-                ) {
+                )
+                {
                     if (nCompared > 0)
                         Write(" || ");
                     Write($"{CamelCase(field.Name)} != this.{field.Name}");
@@ -1448,7 +1454,8 @@ namespace CSharpSyntaxGenerator
                             baseField.Type != "SyntaxToken"
                             && IsOptional(baseField)
                             && !IsOptional(field)
-                        ) {
+                        )
+                        {
                             Write(
                                 $" ?? throw new ArgumentNullException(nameof({CamelCase(field.Name)}))"
                             );
@@ -1546,7 +1553,8 @@ namespace CSharpSyntaxGenerator
             if (
                 referencedNode != null
                 && (!IsOptional(field) || RequiredFactoryArgumentCount(referencedNode) == 0)
-            ) {
+            )
+            {
                 return referencedNode;
             }
 
@@ -1581,7 +1589,8 @@ namespace CSharpSyntaxGenerator
             Field field,
             Node referencedNode,
             Field referencedNodeField
-        ) {
+        )
+        {
             var argType = GetElementType(referencedNodeField.Type);
 
             var isNew = false;
@@ -1944,7 +1953,8 @@ namespace CSharpSyntaxGenerator
                     field.Type == "SyntaxToken"
                     && CanBeAutoCreated(nd, field)
                     && field.Kinds.Count > 1
-                ) {
+                )
+                {
                     WriteLine();
                     WriteLine(
                         $"private static SyntaxKind Get{StripPost(nd.Name, "Syntax")}{StripPost(field.Name, "Opt")}Kind(SyntaxKind kind)"
@@ -1986,7 +1996,8 @@ namespace CSharpSyntaxGenerator
             if (
                 minimalFactoryFields != null
                 && factoryWithNoAutoCreatableTokenFields.SetEquals(minimalFactoryFields)
-            ) {
+            )
+            {
                 return; // will be handled in minimal factory case
             }
 

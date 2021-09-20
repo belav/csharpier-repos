@@ -18,7 +18,8 @@ namespace Microsoft.AspNetCore.Mvc.FunctionalTests
         public UrlResolutionTest(
             MvcTestFixture<RazorWebSite.Startup> fixture,
             MvcEncodedTestFixture<RazorWebSite.Startup> encodedFixture
-        ) {
+        )
+        {
             Client = fixture.CreateDefaultClient();
             EncodedClient = encodedFixture.CreateDefaultClient();
         }

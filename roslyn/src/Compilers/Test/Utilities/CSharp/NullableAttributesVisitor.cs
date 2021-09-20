@@ -285,14 +285,16 @@ namespace Microsoft.CodeAnalysis.CSharp.Test.Utilities
             ImmutableArray<CSharpAttributeData> attributes,
             string namespaceName,
             string name
-        ) {
+        )
+        {
             foreach (var attribute in attributes)
             {
                 var containingType = attribute.AttributeConstructor.ContainingType;
                 if (
                     containingType.Name == name
                     && containingType.ContainingNamespace.QualifiedName == namespaceName
-                ) {
+                )
+                {
                     return attribute;
                 }
             }

@@ -654,7 +654,8 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.declarations.formalPara
             int param9,
             int param10,
             int param11
-        ) {
+        )
+        {
             Program.Status = 1;
         }
 
@@ -721,7 +722,8 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.declarations.formalPara
             int param29,
             int param30,
             int param31
-        ) {
+        )
+        {
             Program.Status = 1;
         }
 
@@ -821,7 +823,8 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.declarations.formalPara
             int param30,
             int param31,
             int param32
-        ) {
+        )
+        {
             Program.Status = 1;
         }
 

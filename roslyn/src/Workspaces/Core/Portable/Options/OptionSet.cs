@@ -125,7 +125,8 @@ namespace Microsoft.CodeAnalysis.Options
         internal AnalyzerConfigOptions AsAnalyzerConfigOptions(
             IOptionService optionService,
             string? language
-        ) {
+        )
+        {
             return ImmutableInterlocked.GetOrAdd(
                 ref _lazyAnalyzerConfigOptions,
                 language ?? NoLanguageSentinel,

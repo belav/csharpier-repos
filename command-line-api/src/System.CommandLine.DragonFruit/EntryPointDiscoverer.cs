@@ -14,7 +14,8 @@ namespace System.CommandLine.DragonFruit
         public static MethodInfo FindStaticEntryMethod(
             Assembly assembly,
             string entryPointFullTypeName = null
-        ) {
+        )
+        {
             var candidates = new List<MethodInfo>();
 
             if (!string.IsNullOrWhiteSpace(entryPointFullTypeName))
@@ -37,7 +38,8 @@ namespace System.CommandLine.DragonFruit
                 foreach (
                     var type in assembly.DefinedTypes.Where(t => t.IsClass)
                         .Where(t => !t.IsDefined(typeof(CompilerGeneratedAttribute)))
-                ) {
+                )
+                {
                     FindMainMethodCandidates(type, candidates);
                 }
             }
@@ -73,13 +75,15 @@ namespace System.CommandLine.DragonFruit
                         BindingFlags.Static | BindingFlags.Public | BindingFlags.NonPublic
                     )
                     .Where(m => string.Equals("Main", m.Name, StringComparison.OrdinalIgnoreCase))
-            ) {
+            )
+            {
                 if (
                     method.ReturnType == typeof(void)
                     || method.ReturnType == typeof(int)
                     || method.ReturnType == typeof(Task)
                     || method.ReturnType == typeof(Task<int>)
-                ) {
+                )
+                {
                     candidates.Add(method);
                 }
             }

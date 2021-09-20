@@ -21,7 +21,8 @@ namespace Microsoft.EntityFrameworkCore.TestUtilities
     {
         protected override IDatabaseModelFactory CreateDatabaseModelFactory(
             ILoggerFactory loggerFactory
-        ) {
+        )
+        {
             // NOTE: You may need to update AddEntityFrameworkDesignTimeServices() too
             var services = new ServiceCollection().AddSingleton<TypeMappingSourceDependencies>()
                 .AddSingleton<RelationalTypeMappingSourceDependencies>()

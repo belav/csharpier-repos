@@ -46,7 +46,8 @@ namespace Microsoft.CodeAnalysis.ExpressionEvaluator
             int count,
             bool visitAll,
             ref int index
-        ) {
+        )
+        {
             int startIndex2;
             int count2;
             GetIntersection(
@@ -72,7 +73,8 @@ namespace Microsoft.CodeAnalysis.ExpressionEvaluator
             DkmClrValue value,
             int index,
             EvalResultDataItem parent
-        ) {
+        )
+        {
             var typeParameter = _typeParameters[index];
             var typeArgument = _typeArguments[index];
             var typeArgumentInfo = _customTypeInfoMap.SubstituteCustomTypeInfo(

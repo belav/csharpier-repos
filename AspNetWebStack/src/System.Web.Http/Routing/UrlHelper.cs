@@ -188,7 +188,8 @@ namespace System.Web.Http.Routing
             HttpRequestMessage request,
             string routeName,
             IDictionary<string, object> routeValues
-        ) {
+        )
+        {
             if (routeValues == null)
             {
                 // If no route values were passed in at all we have to create a new dictionary

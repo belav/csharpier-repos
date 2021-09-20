@@ -80,7 +80,8 @@ namespace AssemblyDependencyResolverTests
                 MethodInfo m in testClass.GetType()
                     .GetMethods(BindingFlags.Instance | BindingFlags.Public)
                     .Where(m => m.Name.StartsWith("Test") && m.GetParameters().Length == 0)
-            ) {
+            )
+            {
                 RunSingleTest(() => m.Invoke(testClass, new object[0]), m.Name);
             }
         }

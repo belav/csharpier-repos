@@ -17,7 +17,8 @@ namespace System.Text.Json.Serialization.Tests
                 ref Utf8JsonReader reader,
                 Type typeToConvert,
                 JsonSerializerOptions options
-            ) {
+            )
+            {
                 string json = reader.GetString();
 
                 var list = new List<long>();
@@ -39,7 +40,8 @@ namespace System.Text.Json.Serialization.Tests
                 Utf8JsonWriter writer,
                 long[] value,
                 JsonSerializerOptions options
-            ) {
+            )
+            {
                 var builder = new StringBuilder();
 
                 for (int i = 0; i < value.Length; i++)

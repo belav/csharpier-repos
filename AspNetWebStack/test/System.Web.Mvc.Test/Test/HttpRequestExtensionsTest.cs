@@ -37,7 +37,8 @@ namespace System.Web.Mvc.Test
             string httpFormVerb,
             string httpQueryStringVerb,
             string expectedMethod
-        ) {
+        )
+        {
             // Arrange
             ControllerContext context = AcceptVerbsAttributeTest.GetControllerContextWithHttpVerb(
                 httpRequestVerb,

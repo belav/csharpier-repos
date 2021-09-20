@@ -93,7 +93,8 @@ class C
 
         private static async Task<ImmutableArray<BlockSpan>> GetSpansFromWorkspaceAsync(
             TestWorkspace workspace
-        ) {
+        )
+        {
             var hostDocument = workspace.Documents.First();
             var document = workspace.CurrentSolution.GetDocument(hostDocument.Id);
             var outliningService = document.GetLanguageService<BlockStructureService>();

@@ -94,7 +94,8 @@ namespace Microsoft.EntityFrameworkCore.TestUtilities
             Func<DbContext> createContext,
             Action<DbContext> seed,
             Action<DbContext> clean
-        ) {
+        )
+        {
             _initialized = true;
             if (_dataFilePath == null)
             {
@@ -156,7 +157,8 @@ namespace Microsoft.EntityFrameworkCore.TestUtilities
                                                     }
                                                     else if (
                                                         reader.TokenType == JsonToken.EndObject
-                                                    ) {
+                                                    )
+                                                    {
                                                         goto NextEntityType;
                                                     }
                                                 }
@@ -407,7 +409,8 @@ namespace Microsoft.EntityFrameworkCore.TestUtilities
 
             public IReadOnlyList<IReadOnlyProperty> FindProperties(
                 IReadOnlyList<string> propertyNames
-            ) {
+            )
+            {
                 throw new NotImplementedException();
             }
 
@@ -523,7 +526,8 @@ namespace Microsoft.EntityFrameworkCore.TestUtilities
 
             IEnumerable<IReadOnlyForeignKey> IReadOnlyEntityType.FindDeclaredForeignKeys(
                 IReadOnlyList<IReadOnlyProperty> properties
-            ) {
+            )
+            {
                 throw new NotImplementedException();
             }
 
@@ -545,7 +549,8 @@ namespace Microsoft.EntityFrameworkCore.TestUtilities
 
             IEnumerable<IReadOnlyForeignKey> IReadOnlyEntityType.FindForeignKeys(
                 IReadOnlyList<IReadOnlyProperty> properties
-            ) {
+            )
+            {
                 throw new NotImplementedException();
             }
 

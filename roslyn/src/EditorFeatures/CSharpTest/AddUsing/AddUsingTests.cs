@@ -5376,7 +5376,8 @@ namespace B
         [CombinatorialData]
         public async Task TestAddUsingForExtensionGetEnumeratorReturningIEnumerator(
             TestHost testHost
-        ) {
+        )
+        {
             await TestAsync(
                 @"
 namespace A
@@ -5430,7 +5431,8 @@ namespace B
         [CombinatorialData]
         public async Task TestAddUsingForExtensionGetEnumeratorReturningPatternEnumerator(
             TestHost testHost
-        ) {
+        )
+        {
             await TestAsync(
                 @"
 namespace A
@@ -5521,7 +5523,8 @@ namespace B
         [CombinatorialData]
         public async Task TestAddUsingForExtensionGetEnumeratorReturningPatternEnumeratorWrongAsync(
             TestHost testHost
-        ) {
+        )
+        {
             await TestAsync(
                 @"
 namespace A
@@ -5633,7 +5636,8 @@ namespace B
         [CombinatorialData]
         public async Task TestAddUsingForExtensionGetAsyncEnumeratorReturningIAsyncEnumerator(
             TestHost testHost
-        ) {
+        )
+        {
             await TestAsync(
                 @"
 using System.Threading.Tasks;
@@ -5689,7 +5693,8 @@ namespace B
         [CombinatorialData]
         public async Task TestAddUsingForExtensionGetAsyncEnumeratorReturningPatternEnumerator(
             TestHost testHost
-        ) {
+        )
+        {
             await TestAsync(
                 @"
 using System.Threading.Tasks;
@@ -5784,7 +5789,8 @@ namespace B
         [CombinatorialData]
         public async Task TestAddUsingForExtensionGetAsyncEnumeratorReturningPatternEnumeratorWrongAsync(
             TestHost testHost
-        ) {
+        )
+        {
             await TestAsync(
                 @"
 using System.Threading.Tasks;
@@ -5903,7 +5909,8 @@ namespace B
         [WorkItem(30734, "https://github.com/dotnet/roslyn/issues/30734")]
         public async Task UsingPlacedWithStaticUsingInNamespace_WhenNoExistingUsings(
             TestHost testHost
-        ) {
+        )
+        {
             await TestAsync(
                 @"
 namespace N
@@ -5937,7 +5944,8 @@ namespace N
         [WorkItem(30734, "https://github.com/dotnet/roslyn/issues/30734")]
         public async Task UsingPlacedWithStaticUsingInInnerNestedNamespace_WhenNoExistingUsings(
             TestHost testHost
-        ) {
+        )
+        {
             await TestAsync(
                 @"
 namespace N
@@ -5977,7 +5985,8 @@ namespace N
         [WorkItem(30734, "https://github.com/dotnet/roslyn/issues/30734")]
         public async Task UsingPlacedWithStaticUsingInOuterNestedNamespace_WhenNoExistingUsings(
             TestHost testHost
-        ) {
+        )
+        {
             await TestAsync(
                 @"
 namespace N
@@ -6017,7 +6026,8 @@ namespace N
         [WorkItem(30734, "https://github.com/dotnet/roslyn/issues/30734")]
         public async Task UsingPlacedWithExistingUsingInCompilationUnit_WhenStaticUsingInNamespace(
             TestHost testHost
-        ) {
+        )
+        {
             await TestAsync(
                 @"
 using System;
@@ -6055,7 +6065,8 @@ namespace N
         [WorkItem(30734, "https://github.com/dotnet/roslyn/issues/30734")]
         public async Task UsingPlacedWithExistingUsing_WhenStaticUsingInInnerNestedNamespace(
             TestHost testHost
-        ) {
+        )
+        {
             await TestAsync(
                 @"
 namespace N
@@ -6099,7 +6110,8 @@ namespace N
         [WorkItem(30734, "https://github.com/dotnet/roslyn/issues/30734")]
         public async Task UsingPlacedWithExistingUsing_WhenStaticUsingInOuterNestedNamespace(
             TestHost testHost
-        ) {
+        )
+        {
             await TestAsync(
                 @"
 namespace N
@@ -6143,7 +6155,8 @@ namespace N
         [WorkItem(30734, "https://github.com/dotnet/roslyn/issues/30734")]
         public async Task UsingPlacedWithUsingAliasInNamespace_WhenNoExistingUsing(
             TestHost testHost
-        ) {
+        )
+        {
             await TestAsync(
                 @"
 namespace N
@@ -6177,7 +6190,8 @@ namespace N
         [WorkItem(30734, "https://github.com/dotnet/roslyn/issues/30734")]
         public async Task UsingPlacedWithUsingAliasInInnerNestedNamespace_WhenNoExistingUsing(
             TestHost testHost
-        ) {
+        )
+        {
             await TestAsync(
                 @"
 namespace N
@@ -6217,7 +6231,8 @@ namespace N
         [WorkItem(30734, "https://github.com/dotnet/roslyn/issues/30734")]
         public async Task UsingPlacedWithUsingAliasInOuterNestedNamespace_WhenNoExistingUsing(
             TestHost testHost
-        ) {
+        )
+        {
             await TestAsync(
                 @"
 namespace N
@@ -6257,7 +6272,8 @@ namespace N
         [WorkItem(30734, "https://github.com/dotnet/roslyn/issues/30734")]
         public async Task UsingPlacedWithExistingUsingInCompilationUnit_WhenUsingAliasInNamespace(
             TestHost testHost
-        ) {
+        )
+        {
             await TestAsync(
                 @"
 using System;
@@ -6295,7 +6311,8 @@ namespace N
         [WorkItem(30734, "https://github.com/dotnet/roslyn/issues/30734")]
         public async Task UsingPlacedWithExistingUsing_WhenUsingAliasInInnerNestedNamespace(
             TestHost testHost
-        ) {
+        )
+        {
             await TestAsync(
                 @"
 namespace N
@@ -6339,7 +6356,8 @@ namespace N
         [WorkItem(30734, "https://github.com/dotnet/roslyn/issues/30734")]
         public async Task UsingPlacedWithExistingUsing_WhenUsingAliasInOuterNestedNamespace(
             TestHost testHost
-        ) {
+        )
+        {
             await TestAsync(
                 @"
 namespace N

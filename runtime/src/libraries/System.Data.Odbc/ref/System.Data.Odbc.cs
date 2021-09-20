@@ -109,7 +109,8 @@ namespace System.Data.Odbc
         protected override void Dispose(bool disposing) { }
         protected override System.Data.Common.DbDataReader ExecuteDbDataReader(
             System.Data.CommandBehavior behavior
-        ) {
+        )
+        {
             throw null;
         }
         public override int ExecuteNonQuery()
@@ -122,7 +123,8 @@ namespace System.Data.Odbc
         }
         public new System.Data.Odbc.OdbcDataReader ExecuteReader(
             System.Data.CommandBehavior behavior
-        ) {
+        )
+        {
             throw null;
         }
         public override object? ExecuteScalar()
@@ -195,7 +197,8 @@ namespace System.Data.Odbc
         public string QuoteIdentifier(
             string unquotedIdentifier,
             System.Data.Odbc.OdbcConnection? connection
-        ) {
+        )
+        {
             throw null;
         }
         protected override void SetRowUpdatingHandler(System.Data.Common.DbDataAdapter adapter) { }
@@ -206,7 +209,8 @@ namespace System.Data.Odbc
         public string UnquoteIdentifier(
             string quotedIdentifier,
             System.Data.Odbc.OdbcConnection? connection
-        ) {
+        )
+        {
             throw null;
         }
     }
@@ -279,7 +283,8 @@ namespace System.Data.Odbc
         }
         protected override System.Data.Common.DbTransaction BeginDbTransaction(
             System.Data.IsolationLevel isolationLevel
-        ) {
+        )
+        {
             throw null;
         }
         public new System.Data.Odbc.OdbcTransaction BeginTransaction()
@@ -288,7 +293,8 @@ namespace System.Data.Odbc
         }
         public new System.Data.Odbc.OdbcTransaction BeginTransaction(
             System.Data.IsolationLevel isolevel
-        ) {
+        )
+        {
             throw null;
         }
         public override void ChangeDatabase(string value) { }
@@ -313,7 +319,8 @@ namespace System.Data.Odbc
         public override System.Data.DataTable GetSchema(
             string collectionName,
             string?[]? restrictionValues
-        ) {
+        )
+        {
             throw null;
         }
         public override void Open() { }
@@ -362,7 +369,8 @@ namespace System.Data.Odbc
         public override bool TryGetValue(
             string keyword,
             [System.Diagnostics.CodeAnalysis.NotNullWhenAttribute(true)] out object? value
-        ) {
+        )
+        {
             throw null;
         }
     }
@@ -456,7 +464,8 @@ namespace System.Data.Odbc
             System.Data.IDbCommand? command,
             System.Data.StatementType statementType,
             System.Data.Common.DataTableMapping tableMapping
-        ) {
+        )
+        {
             throw null;
         }
         protected override System.Data.Common.RowUpdatingEventArgs CreateRowUpdatingEvent(
@@ -464,7 +473,8 @@ namespace System.Data.Odbc
             System.Data.IDbCommand? command,
             System.Data.StatementType statementType,
             System.Data.Common.DataTableMapping tableMapping
-        ) {
+        )
+        {
             throw null;
         }
         protected override void OnRowUpdated(System.Data.Common.RowUpdatedEventArgs value) { }
@@ -521,7 +531,8 @@ namespace System.Data.Odbc
             byte[]? buffer,
             int bufferIndex,
             int length
-        ) {
+        )
+        {
             throw null;
         }
         public override char GetChar(int i)
@@ -534,7 +545,8 @@ namespace System.Data.Odbc
             char[]? buffer,
             int bufferIndex,
             int length
-        ) {
+        )
+        {
             throw null;
         }
         public override string GetDataTypeName(int i)
@@ -936,14 +948,16 @@ namespace System.Data.Odbc
         public System.Data.Odbc.OdbcParameter Add(
             string? parameterName,
             System.Data.Odbc.OdbcType odbcType
-        ) {
+        )
+        {
             throw null;
         }
         public System.Data.Odbc.OdbcParameter Add(
             string? parameterName,
             System.Data.Odbc.OdbcType odbcType,
             int size
-        ) {
+        )
+        {
             throw null;
         }
         public System.Data.Odbc.OdbcParameter Add(
@@ -951,7 +965,8 @@ namespace System.Data.Odbc
             System.Data.Odbc.OdbcType odbcType,
             int size,
             string? sourceColumn
-        ) {
+        )
+        {
             throw null;
         }
         [System.ComponentModel.EditorBrowsableAttribute(
@@ -1029,12 +1044,13 @@ namespace System.Data.Odbc
             System.Data.IDbCommand? command,
             System.Data.StatementType statementType,
             System.Data.Common.DataTableMapping tableMapping
-        ) : base(
-            default(System.Data.DataRow),
-            default(System.Data.IDbCommand),
-            default(System.Data.StatementType),
-            default(System.Data.Common.DataTableMapping)
-        ) { }
+        )
+            : base(
+                default(System.Data.DataRow),
+                default(System.Data.IDbCommand),
+                default(System.Data.StatementType),
+                default(System.Data.Common.DataTableMapping)
+            ) { }
         public new System.Data.Odbc.OdbcCommand? Command
         {
             get { throw null; }
@@ -1051,12 +1067,13 @@ namespace System.Data.Odbc
             System.Data.IDbCommand? command,
             System.Data.StatementType statementType,
             System.Data.Common.DataTableMapping tableMapping
-        ) : base(
-            default(System.Data.DataRow),
-            default(System.Data.IDbCommand),
-            default(System.Data.StatementType),
-            default(System.Data.Common.DataTableMapping)
-        ) { }
+        )
+            : base(
+                default(System.Data.DataRow),
+                default(System.Data.IDbCommand),
+                default(System.Data.StatementType),
+                default(System.Data.Common.DataTableMapping)
+            ) { }
         protected override System.Data.IDbCommand? BaseCommand
         {
             get { throw null; }

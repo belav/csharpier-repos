@@ -1874,7 +1874,8 @@ class C
             Compilation compilation,
             SyntaxTree tree,
             ArrowExpressionClauseSyntax expressionBody
-        ) {
+        )
+        {
             var model = compilation.GetSemanticModel(tree);
             Assert.False(model.IsSpeculativeSemanticModel);
             Assert.Null(model.ParentModel);
@@ -2848,7 +2849,8 @@ class Parent {}
         private static void VerifySpeculativeSemanticModelForMethodBody(
             BlockSyntax blockStatement,
             SemanticModel speculativeModel
-        ) {
+        )
+        {
             var localDecl = (LocalDeclarationStatementSyntax)blockStatement.Statements[0];
             var declarator = localDecl.Declaration.Variables.First();
             var local = speculativeModel.GetDeclaredSymbol(declarator);
@@ -3219,7 +3221,8 @@ class C
             SpeculativeBindingOption bindingOption,
             SymbolKind expectedSymbolKind,
             string expectedTypeDisplayString
-        ) {
+        )
+        {
             Assert.False(model.IsSpeculativeSemanticModel);
             Assert.Null(model.ParentModel);
             Assert.Equal(0, model.OriginalPositionForSpeculation);
@@ -4823,7 +4826,8 @@ class C
                 var match = System.Text.RegularExpressions.Regex.Match(source, " => x");
                 match.Success;
                 match = match.NextMatch()
-            ) {
+            )
+            {
                 var discarded = model.GetEnclosingSymbol(match.Index);
             }
         }
@@ -4854,7 +4858,8 @@ class C
                 var match = System.Text.RegularExpressions.Regex.Match(source, " => x");
                 match.Success;
                 match = match.NextMatch()
-            ) {
+            )
+            {
                 var x = tree.GetRoot().FindToken(match.Index + 4).Parent;
                 var discarded = model.GetEnclosingSymbol(match.Index);
                 var disc = model.GetSymbolInfo(x);

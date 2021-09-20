@@ -32,7 +32,8 @@ namespace Microsoft.EntityFrameworkCore.Infrastructure
             IMutableEntityType entityType,
             int startingPropertyIndex = -1,
             int propertyCount = 1
-        ) {
+        )
+        {
             if (startingPropertyIndex == -1)
             {
                 startingPropertyIndex = entityType.GetProperties().Count() - 1;
@@ -76,7 +77,8 @@ namespace Microsoft.EntityFrameworkCore.Infrastructure
             IMutableEntityType dependEntityType,
             IReadOnlyList<IMutableProperty> dependentProperties,
             IMutableKey principalKey
-        ) {
+        )
+        {
             var foreignKey = dependEntityType.AddForeignKey(
                 dependentProperties,
                 principalKey,
@@ -284,7 +286,8 @@ namespace Microsoft.EntityFrameworkCore.Infrastructure
             string expectedMessage,
             IMutableModel model,
             LogLevel level = LogLevel.Warning
-        ) {
+        )
+        {
             Validate(model);
 
             var logEntry = LoggerFactory.Log.Single(l => l.Level == level);
@@ -295,7 +298,8 @@ namespace Microsoft.EntityFrameworkCore.Infrastructure
             string[] expectedMessages,
             IMutableModel model,
             LogLevel level = LogLevel.Warning
-        ) {
+        )
+        {
             Validate(model);
             var logEntries = LoggerFactory.Log.Where(l => l.Level == level);
             Assert.Equal(expectedMessages.Length, logEntries.Count());
@@ -311,7 +315,8 @@ namespace Microsoft.EntityFrameworkCore.Infrastructure
             string expectedMessage,
             IMutableModel model,
             bool sensitiveDataLoggingEnabled = false
-        ) {
+        )
+        {
             var message =
                 Assert.Throws<InvalidOperationException>(
                     () => Validate(model, sensitiveDataLoggingEnabled)
@@ -331,7 +336,8 @@ namespace Microsoft.EntityFrameworkCore.Infrastructure
         protected virtual IModel Validate(
             IMutableModel model,
             bool sensitiveDataLoggingEnabled = false
-        ) {
+        )
+        {
             var serviceProvider = CreateServiceProvider(sensitiveDataLoggingEnabled);
             var modelRuntimeInitializer =
                 serviceProvider.GetRequiredService<IModelRuntimeInitializer>();
@@ -346,7 +352,8 @@ namespace Microsoft.EntityFrameworkCore.Infrastructure
 
         protected DiagnosticsLogger<DbLoggerCategory.Model.Validation> CreateValidationLogger(
             bool sensitiveDataLoggingEnabled = false
-        ) {
+        )
+        {
             var options = new LoggingOptions();
             options.Initialize(
                 new DbContextOptionsBuilder().EnableSensitiveDataLogging(
@@ -364,7 +371,8 @@ namespace Microsoft.EntityFrameworkCore.Infrastructure
 
         protected DiagnosticsLogger<DbLoggerCategory.Model> CreateModelLogger(
             bool sensitiveDataLoggingEnabled = false
-        ) {
+        )
+        {
             var options = new LoggingOptions();
             options.Initialize(
                 new DbContextOptionsBuilder().EnableSensitiveDataLogging(
@@ -390,7 +398,8 @@ namespace Microsoft.EntityFrameworkCore.Infrastructure
 
         protected virtual ModelBuilder CreateConventionlessModelBuilder(
             bool sensitiveDataLoggingEnabled = false
-        ) {
+        )
+        {
             var serviceProvider = CreateServiceProvider(sensitiveDataLoggingEnabled);
             return new ModelBuilder(
                 new ConventionSet(),

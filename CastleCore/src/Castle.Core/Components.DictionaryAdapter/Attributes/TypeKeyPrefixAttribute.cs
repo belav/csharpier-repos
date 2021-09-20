@@ -26,7 +26,8 @@ namespace Castle.Components.DictionaryAdapter
             IDictionaryAdapter dictionaryAdapter,
             string key,
             PropertyDescriptor property
-        ) {
+        )
+        {
             return string.Format("{0}#{1}", property.Property.DeclaringType.FullName, key);
         }
     }

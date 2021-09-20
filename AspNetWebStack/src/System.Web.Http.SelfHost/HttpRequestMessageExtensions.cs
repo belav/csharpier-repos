@@ -20,7 +20,8 @@ namespace System.Net.Http
         /// <returns>The <see cref="SecurityMessageProperty"/>.</returns>
         public static SecurityMessageProperty GetSecurityMessageProperty(
             this HttpRequestMessage request
-        ) {
+        )
+        {
             if (request == null)
             {
                 throw Error.ArgumentNull("request");

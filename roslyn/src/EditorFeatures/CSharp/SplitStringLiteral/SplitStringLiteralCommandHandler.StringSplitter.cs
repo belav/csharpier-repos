@@ -48,7 +48,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.SplitStringLiteral
                 int tabSize,
                 IndentStyle indentStyle,
                 CancellationToken cancellationToken
-            ) {
+            )
+            {
                 Document = document;
                 CursorPosition = position;
                 Root = root;
@@ -68,7 +69,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.SplitStringLiteral
                 int tabSize,
                 IndentStyle indentStyle,
                 CancellationToken cancellationToken
-            ) {
+            )
+            {
                 var token = root.FindToken(position);
 
                 if (token.IsKind(SyntaxKind.StringLiteralToken))
@@ -111,12 +113,14 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.SplitStringLiteral
             private static InterpolatedStringExpressionSyntax TryGetInterpolatedStringExpression(
                 SyntaxToken token,
                 int position
-            ) {
+            )
+            {
                 if (
                     token.IsKind(SyntaxKind.InterpolatedStringTextToken)
                     || token.IsKind(SyntaxKind.InterpolatedStringEndToken)
                     || IsInterpolationOpenBrace(token, position)
-                ) {
+                )
+                {
                     return token.GetAncestor<InterpolatedStringExpressionSyntax>();
                 }
 
@@ -145,7 +149,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.SplitStringLiteral
                 if (
                     CursorPosition <= nodeToReplace.SpanStart
                     || CursorPosition >= nodeToReplace.Span.End
-                ) {
+                )
+                {
                     return null;
                 }
 

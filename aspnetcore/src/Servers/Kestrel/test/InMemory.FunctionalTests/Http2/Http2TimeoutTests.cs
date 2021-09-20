@@ -331,7 +331,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Tests
         [InlineData((int)Http2FrameType.CONTINUATION)]
         public async Task AbortedStream_ResetsAndDrainsRequest_RefusesFramesAfterCooldownExpires(
             int intFinalFrameType
-        ) {
+        )
+        {
             var closeLock = new object();
             var closed = false;
             var finalFrameType = (Http2FrameType)intFinalFrameType;

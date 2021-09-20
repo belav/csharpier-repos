@@ -27,7 +27,8 @@ namespace System.Net.Mail
             string data,
             out ParseAddressInfo parsedAddress,
             bool throwExceptionIfFail
-        ) {
+        )
+        {
             int index = data.Length - 1;
             bool parseSuccess = TryParseAddress(
                 data,
@@ -97,7 +98,8 @@ namespace System.Net.Mail
             ref int index,
             out ParseAddressInfo parseAddressInfo,
             bool throwExceptionIfFail
-        ) {
+        )
+        {
             Debug.Assert(!string.IsNullOrEmpty(data));
             Debug.Assert(
                 index >= 0 && index < data.Length,
@@ -155,7 +157,8 @@ namespace System.Net.Mail
                     out string? localPart,
                     throwExceptionIfFail
                 )
-            ) {
+            )
+            {
                 parseAddressInfo = default;
                 return false;
             }
@@ -174,7 +177,8 @@ namespace System.Net.Mail
                             out index,
                             throwExceptionIfFail
                         )
-                    ) {
+                    )
+                    {
                         parseAddressInfo = default;
                         return false;
                     }
@@ -211,7 +215,8 @@ namespace System.Net.Mail
                         out displayName,
                         throwExceptionIfFail
                     )
-                ) {
+                )
+                {
                     parseAddressInfo = default;
                     return false;
                 }
@@ -232,7 +237,8 @@ namespace System.Net.Mail
             int index,
             out int outIndex,
             bool throwExceptionIfFail
-        ) {
+        )
+        {
             if (!WhitespaceReader.TryReadCfwsReverse(data, index, out index, throwExceptionIfFail))
             {
                 outIndex = default;
@@ -276,7 +282,8 @@ namespace System.Net.Mail
             ref int index,
             [NotNullWhen(true)] out string? domain,
             bool throwExceptionIfFail
-        ) {
+        )
+        {
             // Skip comments and whitespace
             if (!TryReadCfwsAndThrowIfIncomplete(data, index, out index, throwExceptionIfFail))
             {
@@ -297,7 +304,8 @@ namespace System.Net.Mail
                         out index,
                         throwExceptionIfFail
                     )
-                ) {
+                )
+                {
                     domain = default;
                     return false;
                 }
@@ -349,7 +357,8 @@ namespace System.Net.Mail
             bool expectMultipleAddresses,
             [NotNullWhen(true)] out string? localPart,
             bool throwExceptionIfFail
-        ) {
+        )
+        {
             // Skip comments and whitespace
             if (!TryReadCfwsAndThrowIfIncomplete(data, index, out index, throwExceptionIfFail))
             {
@@ -371,7 +380,8 @@ namespace System.Net.Mail
                         out index,
                         throwExceptionIfFail
                     )
-                ) {
+                )
+                {
                     localPart = default;
                     return false;
                 }
@@ -398,7 +408,8 @@ namespace System.Net.Mail
                         // a common invalid formats as shown below.
                         || data[index] == MailBnfHelper.Quote // "display"local@domain
                     )
-                ) {
+                )
+                {
                     if (throwExceptionIfFail)
                     {
                         throw new FormatException(
@@ -449,7 +460,8 @@ namespace System.Net.Mail
             bool expectMultipleAddresses,
             [NotNullWhen(true)] out string? displayName,
             bool throwExceptionIfFail
-        ) {
+        )
+        {
             // Whatever is left over must be the display name. The display name should be a single word/atom or a
             // quoted string, but for robustness we allow the quotes to be omitted, so long as we can find the comma
             // separator before the next address.
@@ -463,7 +475,8 @@ namespace System.Net.Mail
                     out int firstNonCommentIndex,
                     throwExceptionIfFail
                 )
-            ) {
+            )
+            {
                 displayName = default;
                 return false;
             }
@@ -480,7 +493,8 @@ namespace System.Net.Mail
                         out index,
                         throwExceptionIfFail
                     )
-                ) {
+                )
+                {
                     displayName = default;
                     return false;
                 }
@@ -499,7 +513,8 @@ namespace System.Net.Mail
                         out index,
                         throwExceptionIfFail
                     )
-                ) {
+                )
+                {
                     return false;
                 }
 
@@ -535,7 +550,8 @@ namespace System.Net.Mail
                         out index,
                         throwExceptionIfFail
                     )
-                ) {
+                )
+                {
                     displayName = default;
                     return false;
                 }
@@ -562,7 +578,8 @@ namespace System.Net.Mail
             string input,
             [NotNullWhen(true)] out string? normalizedString,
             bool throwExceptionIfFail
-        ) {
+        )
+        {
             try
             {
                 normalizedString = input.Normalize(Text.NormalizationForm.FormC);

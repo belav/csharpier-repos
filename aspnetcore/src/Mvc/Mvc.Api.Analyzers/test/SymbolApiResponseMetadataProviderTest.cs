@@ -384,7 +384,8 @@ namespace Microsoft.AspNetCore.Mvc.Api.Analyzers
         private async Task GetResponseMetadata_WorksForInvalidOrUnsupportedAttributes(
             string typeName,
             string methodName
-        ) {
+        )
+        {
             // Arrange
             var compilation = await GetResponseMetadataCompilation();
             var controller = compilation.GetTypeByMetadataName($"{Namespace}.{typeName}");

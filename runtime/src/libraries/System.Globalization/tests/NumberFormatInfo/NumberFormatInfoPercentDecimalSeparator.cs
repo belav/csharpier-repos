@@ -18,7 +18,8 @@ namespace System.Globalization.Tests
         [InlineData("    ")]
         public void PercentDecimalSeparator_Set_GetReturnsExpected(
             string newPercentDecimalSeparator
-        ) {
+        )
+        {
             NumberFormatInfo format = new NumberFormatInfo();
             format.PercentDecimalSeparator = newPercentDecimalSeparator;
             Assert.Equal(newPercentDecimalSeparator, format.PercentDecimalSeparator);

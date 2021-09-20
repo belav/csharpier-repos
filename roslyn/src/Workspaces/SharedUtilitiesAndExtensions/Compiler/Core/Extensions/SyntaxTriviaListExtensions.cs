@@ -11,7 +11,8 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
         public static SyntaxTrivia? FirstOrNull(
             this SyntaxTriviaList triviaList,
             Func<SyntaxTrivia, bool> predicate
-        ) {
+        )
+        {
             foreach (var trivia in triviaList)
             {
                 if (predicate(trivia))

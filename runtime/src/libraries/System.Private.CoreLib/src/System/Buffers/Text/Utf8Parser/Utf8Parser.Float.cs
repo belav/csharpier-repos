@@ -32,7 +32,8 @@ namespace System.Buffers.Text
             out float value,
             out int bytesConsumed,
             char standardFormat = default
-        ) {
+        )
+        {
             byte* pDigits = stackalloc byte[Number.SingleNumberBufferLength];
             Number.NumberBuffer number = new Number.NumberBuffer(
                 Number.NumberBufferKind.FloatingPoint,
@@ -42,7 +43,8 @@ namespace System.Buffers.Text
 
             if (
                 TryParseNormalAsFloatingPoint(source, ref number, out bytesConsumed, standardFormat)
-            ) {
+            )
+            {
                 value = Number.NumberToSingle(ref number);
                 return true;
             }
@@ -82,7 +84,8 @@ namespace System.Buffers.Text
             out double value,
             out int bytesConsumed,
             char standardFormat = default
-        ) {
+        )
+        {
             byte* pDigits = stackalloc byte[Number.DoubleNumberBufferLength];
             Number.NumberBuffer number = new Number.NumberBuffer(
                 Number.NumberBufferKind.FloatingPoint,
@@ -92,7 +95,8 @@ namespace System.Buffers.Text
 
             if (
                 TryParseNormalAsFloatingPoint(source, ref number, out bytesConsumed, standardFormat)
-            ) {
+            )
+            {
                 value = Number.NumberToDouble(ref number);
                 return true;
             }
@@ -115,7 +119,8 @@ namespace System.Buffers.Text
             ref Number.NumberBuffer number,
             out int bytesConsumed,
             char standardFormat
-        ) {
+        )
+        {
             ParseNumberOptions options;
             switch (standardFormat)
             {
@@ -141,7 +146,8 @@ namespace System.Buffers.Text
                     options,
                     out bool textUsedExponentNotation
                 )
-            ) {
+            )
+            {
                 return false;
             }
             if ((!textUsedExponentNotation) && (standardFormat == 'E' || standardFormat == 'e'))
@@ -200,7 +206,8 @@ namespace System.Buffers.Text
                     (((source[srcIndex] ^ (byte)('n')) & ~0x20) == 0)
                     && (((source[srcIndex + 1] ^ (byte)('a')) & ~0x20) == 0)
                     && (((source[srcIndex + 2] ^ (byte)('n')) & ~0x20) == 0)
-                ) {
+                )
+                {
                     value = nan;
                     bytesConsumed = 3 + srcIndex;
                     return true;

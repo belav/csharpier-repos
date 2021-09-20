@@ -17,7 +17,8 @@ namespace Microsoft.CodeAnalysis.Remote
             public ServiceConstructionArguments(
                 IServiceProvider serviceProvider,
                 IServiceBroker serviceBroker
-            ) {
+            )
+            {
                 ServiceProvider = serviceProvider;
                 ServiceBroker = serviceBroker;
             }

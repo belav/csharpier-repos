@@ -1706,7 +1706,8 @@ namespace System.Web.Mvc.Html.Test
             DataBoundControlMode mode,
             TemplateHelpers.GetViewNamesDelegate getViewNames,
             TemplateHelpers.GetDefaultActionsDelegate getDefaultActions
-        ) {
+        )
+        {
             Assert.Same(viewData.Model, viewData.ModelMetadata.Model);
             Assert.Equal<TemplateHelpers.GetViewNamesDelegate>(
                 TemplateHelpers.GetViewNames,
@@ -1743,7 +1744,8 @@ namespace System.Web.Mvc.Html.Test
             string templateName,
             DataBoundControlMode mode,
             object additionalViewData
-        ) {
+        )
+        {
             return String.Format(
                 "Model = {0}, ModelType = {1}, RealModelType = {2}, PropertyName = {3}, HtmlFieldName = {4}, TemplateName = {5}, Mode = {6}, AdditionalViewData = {7}",
                 metadata.Model ?? "(null)",

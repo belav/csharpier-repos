@@ -62,16 +62,18 @@ namespace Microsoft.CodeAnalysis.ExternalAccess.Razor.Lsp
             IThreadingContext threadingContext,
             [Import(typeof(SAsyncServiceProvider))]
                 VSShell.IAsyncServiceProvider asyncServiceProvider
-        ) : base(
-            csharpVBRequestDispatcherFactory,
-            workspace,
-            diagnosticService,
-            listenerProvider,
-            lspWorkspaceRegistrationService,
-            asyncServiceProvider,
-            threadingContext,
-            ClientName
-        ) {
+        )
+            : base(
+                csharpVBRequestDispatcherFactory,
+                workspace,
+                diagnosticService,
+                listenerProvider,
+                lspWorkspaceRegistrationService,
+                asyncServiceProvider,
+                threadingContext,
+                ClientName
+            )
+        {
             _defaultCapabilitiesProvider = defaultCapabilitiesProvider;
         }
 

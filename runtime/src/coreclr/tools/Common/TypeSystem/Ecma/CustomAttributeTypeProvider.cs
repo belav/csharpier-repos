@@ -37,7 +37,8 @@ namespace Internal.TypeSystem.Ecma
             MetadataReader reader,
             TypeDefinitionHandle handle,
             byte rawTypeKind
-        ) {
+        )
+        {
             Debug.Assert(reader == _module.MetadataReader);
             return _module.GetType(handle);
         }
@@ -46,7 +47,8 @@ namespace Internal.TypeSystem.Ecma
             MetadataReader reader,
             TypeReferenceHandle handle,
             byte rawTypeKind
-        ) {
+        )
+        {
             Debug.Assert(reader == _module.MetadataReader);
             return _module.GetType(handle);
         }
@@ -55,7 +57,8 @@ namespace Internal.TypeSystem.Ecma
             MetadataReader reader,
             TypeSpecificationHandle handle,
             byte rawTypeKind
-        ) {
+        )
+        {
             Debug.Assert(reader == _module.MetadataReader);
             return _module.GetType(handle);
         }

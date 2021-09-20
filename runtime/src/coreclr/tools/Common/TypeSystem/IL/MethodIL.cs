@@ -38,7 +38,8 @@ namespace Internal.IL
             int handlerLength,
             int classToken,
             int filterOffset
-        ) {
+        )
+        {
             Kind = kind;
             TryOffset = tryOffset;
             TryLength = tryLength;

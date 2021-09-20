@@ -206,7 +206,8 @@ Section3:
             IConfigurationRoot config,
             bool expectNulls = false,
             string nullValue = null
-        ) {
+        )
+        {
             var value1 = expectNulls ? nullValue : "Value1";
             var value12 = expectNulls ? nullValue : "Value12";
             var value123 = expectNulls ? nullValue : "Value123";
@@ -468,7 +469,8 @@ Section3:
 
         protected virtual IConfigurationRoot BuildConfigRoot(
             params (IConfigurationProvider Provider, Action Initializer)[] providers
-        ) {
+        )
+        {
             var root = new ConfigurationRoot(providers.Select(e => e.Provider).ToList());
 
             foreach (var initializer in providers.Select(e => e.Initializer))
@@ -481,7 +483,8 @@ Section3:
 
         protected static (IConfigurationProvider Provider, Action Initializer) LoadUsingMemoryProvider(
             TestSection testConfig
-        ) {
+        )
+        {
             var values = new List<KeyValuePair<string, string>>();
             SectionToValues(testConfig, "", values);
 
@@ -497,7 +500,8 @@ Section3:
             TestSection section,
             string sectionName,
             IList<KeyValuePair<string, string>> values
-        ) {
+        )
+        {
             foreach (var tuple in section.Values.SelectMany(e => e.Value.Expand(e.Key)))
             {
                 values.Add(new KeyValuePair<string, string>(sectionName + tuple.Key, tuple.Value));

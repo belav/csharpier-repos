@@ -25,14 +25,16 @@ namespace System.Net
         void ISerializable.GetObjectData(
             SerializationInfo serializationInfo,
             StreamingContext streamingContext
-        ) {
+        )
+        {
             base.GetObjectData(serializationInfo, streamingContext);
         }
 
         public override void GetObjectData(
             SerializationInfo serializationInfo,
             StreamingContext streamingContext
-        ) {
+        )
+        {
             base.GetObjectData(serializationInfo, streamingContext);
         }
     }

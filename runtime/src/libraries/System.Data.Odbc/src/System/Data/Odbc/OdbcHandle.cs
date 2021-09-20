@@ -208,7 +208,8 @@ namespace System.Data.Odbc
             ODBC.TraceODBC(3, "SQLGetDiagFieldW", retcode);
             if (
                 (retcode == ODBC32.RetCode.SUCCESS) || (retcode == ODBC32.RetCode.SUCCESS_WITH_INFO)
-            ) {
+            )
+            {
                 sqlState = sb.ToString();
             }
             else
@@ -224,7 +225,8 @@ namespace System.Data.Odbc
             StringBuilder message,
             out int nativeError,
             out short cchActual
-        ) {
+        )
+        {
             // ODBC (MSDN) documents it expects a buffer large enough to hold 4(+L'\0') unicode characters
             StringBuilder sb = new StringBuilder(5);
             ODBC32.RetCode retcode = Interop.Odbc.SQLGetDiagRecW(
@@ -241,7 +243,8 @@ namespace System.Data.Odbc
 
             if (
                 (retcode == ODBC32.RetCode.SUCCESS) || (retcode == ODBC32.RetCode.SUCCESS_WITH_INFO)
-            ) {
+            )
+            {
                 sqlState = sb.ToString();
             }
             else
@@ -264,7 +267,8 @@ namespace System.Data.Odbc
             ODBC32.SQL_DESC attribute,
             CNativeBuffer buffer,
             out int numericAttribute
-        ) {
+        )
+        {
             ODBC32.RetCode retcode = Interop.Odbc.SQLGetDescFieldW(
                 this,
                 checked((short)i),
@@ -281,7 +285,8 @@ namespace System.Data.Odbc
             short ordinal,
             ODBC32.SQL_DESC type,
             IntPtr value
-        ) {
+        )
+        {
             ODBC32.RetCode retcode = Interop.Odbc.SQLSetDescFieldW(this, ordinal, type, value, 0);
             ODBC.TraceODBC(3, "SQLSetDescFieldW", retcode);
             return retcode;
@@ -291,7 +296,8 @@ namespace System.Data.Odbc
             short ordinal,
             ODBC32.SQL_DESC type,
             HandleRef value
-        ) {
+        )
+        {
             ODBC32.RetCode retcode = Interop.Odbc.SQLSetDescFieldW(this, ordinal, type, value, 0);
             ODBC.TraceODBC(3, "SQLSetDescFieldW", retcode);
             return retcode;

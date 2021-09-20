@@ -141,7 +141,8 @@ namespace System.Globalization
                     CharUnicodeInfo.GetDecimalDigitValue(nativeDig[i], 0) != i
                     && CharUnicodeInfo.GetUnicodeCategory(nativeDig[i], 0)
                         != UnicodeCategory.PrivateUse
-                ) {
+                )
+                {
                     // Not the appropriate digit according to the Unicode data properties
                     // (Digit 0 must be a 0, etc.).
                     throw new ArgumentException(SR.Argument_InvalidNativeDigitValue, propertyName);
@@ -765,7 +766,8 @@ namespace System.Globalization
             if (
                 (style & (InvalidNumberStyles | NumberStyles.AllowHexSpecifier)) != 0
                 && (style & ~NumberStyles.HexNumber) != 0
-            ) {
+            )
+            {
                 throwInvalid(style);
 
                 void throwInvalid(NumberStyles value)

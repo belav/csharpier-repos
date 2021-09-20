@@ -123,7 +123,8 @@ namespace JIT.HardwareIntrinsics.X86
 
             public void RunStructFldScenario(
                 ImmBinaryOpTest__MultipleSumAbsoluteDifferencesUInt160 testClass
-            ) {
+            )
+            {
                 var result = Avx2.MultipleSumAbsoluteDifferences(_fld1, _fld2, 0);
 
                 Unsafe.Write(testClass._dataTable.outArrayPtr, result);
@@ -436,7 +437,8 @@ namespace JIT.HardwareIntrinsics.X86
             Vector256<Byte> right,
             void* result,
             [CallerMemberName] string method = ""
-        ) {
+        )
+        {
             Byte[] inArray1 = new Byte[Op1ElementCount];
             Byte[] inArray2 = new Byte[Op2ElementCount];
             UInt16[] outArray = new UInt16[RetElementCount];
@@ -457,7 +459,8 @@ namespace JIT.HardwareIntrinsics.X86
             void* right,
             void* result,
             [CallerMemberName] string method = ""
-        ) {
+        )
+        {
             Byte[] inArray1 = new Byte[Op1ElementCount];
             Byte[] inArray2 = new Byte[Op2ElementCount];
             UInt16[] outArray = new UInt16[RetElementCount];
@@ -486,7 +489,8 @@ namespace JIT.HardwareIntrinsics.X86
             Byte[] right,
             UInt16[] result,
             [CallerMemberName] string method = ""
-        ) {
+        )
+        {
             bool succeeded = true;
 
             if (
@@ -497,7 +501,8 @@ namespace JIT.HardwareIntrinsics.X86
                     + Math.Abs(left[2] - right[2])
                     + Math.Abs(left[3] - right[3])
                 )
-            ) {
+            )
+            {
                 succeeded = false;
             }
             else
@@ -516,7 +521,8 @@ namespace JIT.HardwareIntrinsics.X86
                             + Math.Abs(
                                 left[i % 8 + 3 + (i > 7 ? 16 : 0)] - right[3 + (i > 7 ? 16 : 0)]
                             )
-                    ) {
+                    )
+                    {
                         succeeded = false;
                         break;
                     }

@@ -38,7 +38,8 @@ namespace System.Text.Json.Serialization
         public JsonStringEnumConverter(
             JsonNamingPolicy? namingPolicy = null,
             bool allowIntegerValues = true
-        ) {
+        )
+        {
             _namingPolicy = namingPolicy;
             _converterOptions = allowIntegerValues
                 ? EnumConverterOptions.AllowNumbers | EnumConverterOptions.AllowStrings

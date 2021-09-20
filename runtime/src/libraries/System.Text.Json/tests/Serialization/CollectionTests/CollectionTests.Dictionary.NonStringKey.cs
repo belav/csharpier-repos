@@ -504,7 +504,8 @@ namespace System.Text.Json.Serialization.Tests
             public void EnsureNonStringKeysDontGetEscapedOnSerialize(
                 object key,
                 string expectedKeySerialized
-            ) {
+            )
+            {
                 Dictionary<object, int> root = new Dictionary<object, int>();
                 root.Add(key, 1);
 
@@ -530,7 +531,8 @@ namespace System.Text.Json.Serialization.Tests
                 string escapedPropertyName,
                 object expectedDictionaryKey,
                 Type dictionaryType
-            ) {
+            )
+            {
                 string json = $@"{{""{escapedPropertyName}"":1}}";
                 IDictionary root = (IDictionary)JsonSerializer.Deserialize(json, dictionaryType);
 
@@ -545,7 +547,8 @@ namespace System.Text.Json.Serialization.Tests
                 string escapedPropertyName,
                 object expectedDictionaryKey,
                 Type dictionaryType
-            ) {
+            )
+            {
                 string json = $@"{{""{escapedPropertyName}"":1}}";
                 MemoryStream stream = new MemoryStream(Encoding.UTF8.GetBytes(json));
                 IDictionary root = (IDictionary)await JsonSerializer.DeserializeAsync(
@@ -805,7 +808,8 @@ namespace System.Text.Json.Serialization.Tests
                 string payload,
                 string keyTypeAsStr,
                 string converterTypeAsStr
-            ) {
+            )
+            {
                 NotSupportedException ex = Assert.Throws<NotSupportedException>(
                     () => JsonSerializer.Serialize(obj, options)
                 );

@@ -23,7 +23,8 @@ namespace Microsoft.CodeAnalysis.Remote.Testing
         public SimpleAssetSource(
             ISerializerService serializerService,
             IReadOnlyDictionary<Checksum, object> map
-        ) {
+        )
+        {
             _serializerService = serializerService;
             _map = map;
         }
@@ -33,7 +34,8 @@ namespace Microsoft.CodeAnalysis.Remote.Testing
             ISet<Checksum> checksums,
             ISerializerService deserializerService,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var results = new List<(Checksum, object)>();
 
             foreach (var checksum in checksums)
@@ -45,7 +47,8 @@ namespace Microsoft.CodeAnalysis.Remote.Testing
 
                     using (
                         var writer = new ObjectWriter(stream, leaveOpen: true, cancellationToken)
-                    ) {
+                    )
+                    {
                         _serializerService.Serialize(data, writer, context, cancellationToken);
                     }
 

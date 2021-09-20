@@ -58,7 +58,8 @@ namespace Microsoft.AspNetCore.Hosting
                     CultureInfo.InvariantCulture,
                     out var seconds
                 )
-            ) {
+            )
+            {
                 ShutdownTimeout = TimeSpan.FromSeconds(seconds);
             }
         }

@@ -25,7 +25,8 @@ namespace Microsoft.CodeAnalysis
         public static IEnumerable<AttributeData> GetAttributes(
             this ISymbol symbol,
             ITypeSymbol attribute
-        ) {
+        )
+        {
             foreach (var declaredAttribute in symbol.GetAttributes())
             {
                 if (attribute.IsAssignableFrom(declaredAttribute.AttributeClass))
@@ -39,7 +40,8 @@ namespace Microsoft.CodeAnalysis
             this IMethodSymbol methodSymbol,
             ITypeSymbol attribute,
             bool inherit
-        ) {
+        )
+        {
             Debug.Assert(methodSymbol != null);
             attribute = attribute ?? throw new ArgumentNullException(nameof(attribute));
 
@@ -64,7 +66,8 @@ namespace Microsoft.CodeAnalysis
             this ITypeSymbol typeSymbol,
             ITypeSymbol attribute,
             bool inherit
-        ) {
+        )
+        {
             typeSymbol = typeSymbol ?? throw new ArgumentNullException(nameof(typeSymbol));
             attribute = attribute ?? throw new ArgumentNullException(nameof(attribute));
 
@@ -86,7 +89,8 @@ namespace Microsoft.CodeAnalysis
             this IPropertySymbol propertySymbol,
             ITypeSymbol attribute,
             bool inherit
-        ) {
+        )
+        {
             propertySymbol =
                 propertySymbol ?? throw new ArgumentNullException(nameof(propertySymbol));
             attribute = attribute ?? throw new ArgumentNullException(nameof(attribute));

@@ -162,7 +162,8 @@ namespace Wasm.Build.Tests
             string? buildDir = null,
             int expectedExitCode = 0,
             string? args = null
-        ) {
+        )
+        {
             buildDir ??= _projectDir;
             Dictionary<string, string>? envVars = new();
             envVars["XHARNESS_DISABLE_COLORED_OUTPUT"] = "true";
@@ -219,7 +220,8 @@ namespace Wasm.Build.Tests
             int xharnessExitCode = 0,
             string? extraXHarnessArgs = null,
             string? appArgs = null
-        ) {
+        )
+        {
             Console.WriteLine($"============== {testCommand} =============");
             Directory.CreateDirectory(testLogPath);
 
@@ -303,7 +305,8 @@ namespace Wasm.Build.Tests
             BuildArgs buildArgs,
             string? extraProperties = null,
             string projectTemplate = SimpleProjectTemplate
-        ) {
+        )
+        {
             if (buildArgs.AOT)
                 extraProperties =
                     $"{extraProperties}\n<RunAOTCompilation>true</RunAOTCompilation>\n";
@@ -323,7 +326,8 @@ namespace Wasm.Build.Tests
             bool hasIcudt = true,
             bool useCache = true,
             bool expectSuccess = true
-        ) {
+        )
+        {
             if (useCache && _buildContext.TryGetBuildFor(buildArgs, out BuildProduct? product))
             {
                 Console.WriteLine(
@@ -416,7 +420,8 @@ namespace Wasm.Build.Tests
             string config,
             bool hasIcudt = true,
             bool dotnetWasmFromRuntimePack = true
-        ) {
+        )
+        {
             AssertFilesExist(
                 bundleDir,
                 new[]
@@ -482,7 +487,8 @@ namespace Wasm.Build.Tests
             string[] filenames,
             string? label = null,
             bool expectToExist = true
-        ) {
+        )
+        {
             Assert.True(Directory.Exists(dir), $"[{label}] {dir} not found");
             foreach (string filename in filenames)
             {
@@ -517,7 +523,8 @@ namespace Wasm.Build.Tests
             string file1,
             string? label = null,
             bool same = true
-        ) {
+        )
+        {
             Assert.True(File.Exists(file0), $"{label}: Expected to find {file0}");
             Assert.True(File.Exists(file1), $"{label}: Expected to find {file1}");
 
@@ -540,7 +547,8 @@ namespace Wasm.Build.Tests
             string args,
             string label = "build",
             bool expectSuccess = true
-        ) {
+        )
+        {
             var result = RunProcess(
                 "dotnet",
                 _testOutput,
@@ -569,7 +577,8 @@ namespace Wasm.Build.Tests
             string config,
             string targetFramework = s_targetFramework,
             string? baseDir = null
-        ) {
+        )
+        {
             var dir = baseDir ?? _projectDir;
             Assert.NotNull(dir);
             return Path.Combine(dir!, "bin", config, targetFramework, "browser-wasm");
@@ -588,7 +597,8 @@ namespace Wasm.Build.Tests
             string? workingDir = null,
             string? label = null,
             bool logToXUnit = true
-        ) {
+        )
+        {
             _testOutput.WriteLine($"Running {path} {args}");
             Console.WriteLine($"Running: {path}: {args}");
             Console.WriteLine($"WorkingDirectory: {workingDir}");

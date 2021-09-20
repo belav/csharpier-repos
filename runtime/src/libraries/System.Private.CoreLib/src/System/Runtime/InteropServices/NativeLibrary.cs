@@ -88,7 +88,8 @@ namespace System.Runtime.InteropServices
             string libraryName,
             Assembly assembly,
             DllImportSearchPath? searchPath
-        ) {
+        )
+        {
             if (libraryName == null)
                 throw new ArgumentNullException(nameof(libraryName));
             if (assembly == null)
@@ -125,7 +126,8 @@ namespace System.Runtime.InteropServices
             Assembly assembly,
             DllImportSearchPath? searchPath,
             out IntPtr handle
-        ) {
+        )
+        {
             if (libraryName == null)
                 throw new ArgumentNullException(nameof(libraryName));
             if (assembly == null)
@@ -254,7 +256,8 @@ namespace System.Runtime.InteropServices
             Assembly assembly,
             bool hasDllImportSearchPathFlags,
             uint dllImportSearchPathFlags
-        ) {
+        )
+        {
             if (s_nativeDllResolveMap == null)
             {
                 return IntPtr.Zero;

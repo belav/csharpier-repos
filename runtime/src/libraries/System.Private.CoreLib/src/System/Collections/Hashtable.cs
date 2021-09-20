@@ -282,11 +282,8 @@ namespace System.Collections
             Debug.Assert(_loadsize < hashsize, "Invalid hashtable loadsize!");
         }
 
-        public Hashtable(
-            int capacity,
-            float loadFactor,
-            IEqualityComparer? equalityComparer
-        ) : this(capacity, loadFactor)
+        public Hashtable(int capacity, float loadFactor, IEqualityComparer? equalityComparer)
+            : this(capacity, loadFactor)
         {
             _keycomparer = equalityComparer;
         }
@@ -352,11 +349,8 @@ namespace System.Collections
                 Add(e.Key, e.Value);
         }
 
-        public Hashtable(
-            IDictionary d,
-            float loadFactor,
-            IEqualityComparer? equalityComparer
-        ) : this(d != null ? d.Count : 0, loadFactor, equalityComparer)
+        public Hashtable(IDictionary d, float loadFactor, IEqualityComparer? equalityComparer)
+            : this(d != null ? d.Count : 0, loadFactor, equalityComparer)
         {
             if (d == null)
                 throw new ArgumentNullException(nameof(d), SR.ArgumentNull_Dictionary);
@@ -893,7 +887,8 @@ namespace System.Collections
                         _buckets[bucketNumber].key == _buckets
                         && ((_buckets[bucketNumber].hash_coll & unchecked(0x80000000)) == 0)
                     )
-                ) {
+                )
+                {
                     // If we have found an available bucket that has never had a collision, but we've seen an available
                     // bucket in the past that has the collision bit set, use the previous bucket instead
                     if (emptySlotNumber != -1) // Reuse slot
@@ -918,7 +913,8 @@ namespace System.Collections
                 if (
                     ((_buckets[bucketNumber].hash_coll & 0x7FFFFFFF) == hashcode)
                     && KeyEquals(_buckets[bucketNumber].key, key)
-                ) {
+                )
+                {
                     if (add)
                     {
                         throw new ArgumentException(
@@ -990,7 +986,8 @@ namespace System.Collections
                 if (
                     (newBuckets[bucketNumber].key == null)
                     || (newBuckets[bucketNumber].key == _buckets)
-                ) {
+                )
+                {
                     newBuckets[bucketNumber].val = nvalue;
                     newBuckets[bucketNumber].key = key;
                     newBuckets[bucketNumber].hash_coll |= hashcode;

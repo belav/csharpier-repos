@@ -43,7 +43,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
         public virtual void ProcessModelFinalizing(
             IConventionModelBuilder modelBuilder,
             IConventionContext<IConventionModelBuilder> context
-        ) {
+        )
+        {
             foreach (var entityType in modelBuilder.Metadata.GetEntityTypes())
             {
                 var queryFilter = entityType.GetQueryFilter();
@@ -102,7 +103,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
                     && memberExpression.Type.IsGenericType
                     && memberExpression.Type.GetGenericTypeDefinition() == typeof(DbSet<>)
                     && _model != null
-                ) {
+                )
+                {
                     return new QueryRootExpression(FindEntityType(memberExpression.Type)!);
                 }
 
@@ -121,7 +123,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
                     && methodCallExpression.Type.IsGenericType
                     && methodCallExpression.Type.GetGenericTypeDefinition() == typeof(DbSet<>)
                     && _model != null
-                ) {
+                )
+                {
                     return new QueryRootExpression(FindEntityType(methodCallExpression.Type)!);
                 }
 

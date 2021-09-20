@@ -116,7 +116,8 @@ namespace Microsoft.EntityFrameworkCore
             string databaseName,
             InMemoryDatabaseRoot? databaseRoot,
             Action<InMemoryDbContextOptionsBuilder>? inMemoryOptionsAction = null
-        ) {
+        )
+        {
             Check.NotNull(optionsBuilder, nameof(optionsBuilder));
             Check.NotEmpty(databaseName, nameof(databaseName));
 

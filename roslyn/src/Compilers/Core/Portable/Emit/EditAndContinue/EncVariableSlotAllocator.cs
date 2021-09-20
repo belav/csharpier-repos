@@ -56,7 +56,8 @@ namespace Microsoft.CodeAnalysis.Emit
             int awaiterCount,
             IReadOnlyDictionary<Cci.ITypeReference, int>? awaiterMap,
             LambdaSyntaxFacts lambdaSyntaxFacts
-        ) {
+        )
+        {
             Debug.Assert(!previousLocals.IsDefault);
 
             _symbolMap = symbolMap;
@@ -121,7 +122,8 @@ namespace Microsoft.CodeAnalysis.Emit
             SyntaxNode currentDeclarator,
             LocalDebugId currentId,
             out LocalDebugId previousId
-        ) {
+        )
+        {
             if (_syntaxMap == null)
             {
                 // no syntax map
@@ -154,7 +156,8 @@ namespace Microsoft.CodeAnalysis.Emit
             LocalSlotConstraints constraints,
             ImmutableArray<bool> dynamicTransformFlags,
             ImmutableArray<string> tupleElementNames
-        ) {
+        )
+        {
             if (id.IsNone)
             {
                 return null;
@@ -166,7 +169,8 @@ namespace Microsoft.CodeAnalysis.Emit
                     id,
                     out LocalDebugId previousId
                 )
-            ) {
+            )
+            {
                 return null;
             }
 
@@ -213,7 +217,8 @@ namespace Microsoft.CodeAnalysis.Emit
             LocalDebugId currentId,
             DiagnosticBag diagnostics,
             out int slotIndex
-        ) {
+        )
+        {
             // The previous method was not a state machine (it is allowed to change non-state machine to a state machine):
             if (_hoistedLocalSlots == null)
             {
@@ -251,7 +256,8 @@ namespace Microsoft.CodeAnalysis.Emit
             Cci.ITypeReference currentType,
             DiagnosticBag diagnostics,
             out int slotIndex
-        ) {
+        )
+        {
             // The previous method was not a state machine (it is allowed to change non-state machine to a state machine):
             if (_awaiterMap == null)
             {
@@ -268,7 +274,8 @@ namespace Microsoft.CodeAnalysis.Emit
         private bool TryGetPreviousSyntaxOffset(
             SyntaxNode currentSyntax,
             out int previousSyntaxOffset
-        ) {
+        )
+        {
             // no syntax map
             // => the source of the current method is the same as the source of the previous method
             // => relative positions are the same
@@ -288,7 +295,8 @@ namespace Microsoft.CodeAnalysis.Emit
             SyntaxNode lambdaOrLambdaBodySyntax,
             bool isLambdaBody,
             out int previousSyntaxOffset
-        ) {
+        )
+        {
             // Syntax map contains mapping for lambdas, but not their bodies.
             // Map the lambda first and then determine the corresponding body.
             var currentLambdaSyntax = isLambdaBody
@@ -334,7 +342,8 @@ namespace Microsoft.CodeAnalysis.Emit
                 _closureMap != null
                 && TryGetPreviousSyntaxOffset(scopeSyntax, out int syntaxOffset)
                 && _closureMap.TryGetValue(syntaxOffset, out closureId)
-            ) {
+            )
+            {
                 return true;
             }
 
@@ -346,7 +355,8 @@ namespace Microsoft.CodeAnalysis.Emit
             SyntaxNode lambdaOrLambdaBodySyntax,
             bool isLambdaBody,
             out DebugId lambdaId
-        ) {
+        )
+        {
             if (
                 _lambdaMap != null
                 && TryGetPreviousLambdaSyntaxOffset(
@@ -355,7 +365,8 @@ namespace Microsoft.CodeAnalysis.Emit
                     out int syntaxOffset
                 )
                 && _lambdaMap.TryGetValue(syntaxOffset, out var idAndClosureOrdinal)
-            ) {
+            )
+            {
                 lambdaId = idAndClosureOrdinal.Key;
                 return true;
             }

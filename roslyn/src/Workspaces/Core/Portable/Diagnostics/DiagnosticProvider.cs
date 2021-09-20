@@ -33,7 +33,8 @@ namespace Microsoft.CodeAnalysis
         private static CodeAnalysis.Options.OptionSet GetOptions(
             Workspace workspace,
             Options options
-        ) {
+        )
+        {
             return workspace.Options.WithChangedOption(
                     InternalRuntimeDiagnosticOptions.Syntax,
                     (options & Options.Syntax) == Options.Syntax

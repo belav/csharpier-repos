@@ -90,7 +90,8 @@ namespace System.Composition.Convention.Tests
             ConventionBuilder builder,
             Type type,
             string member
-        ) {
+        )
+        {
             PropertyInfo pi = type.GetRuntimeProperty(member);
             Attribute[] list = builder.GetDeclaredAttributes(type, pi);
             return list[0] as Attribute;

@@ -60,7 +60,8 @@ namespace System.Web.Http.ModelBinding
 
         public int GetIntCustom(
             [ValueProvider(typeof(RequestHeadersValueProviderFactory))] int value
-        ) {
+        )
+        {
             return value;
         }
 
@@ -172,7 +173,8 @@ namespace System.Web.Http.ModelBinding
 
         public ComplexTypeWithNestedCollection PostComplexTypeFromUriWithNestedCollection(
             [FromUri] ComplexTypeWithNestedCollection value
-        ) {
+        )
+        {
             return value;
         }
 
@@ -185,7 +187,8 @@ namespace System.Web.Http.ModelBinding
         public int PostComplexTypeHttpRequestMessage(
             HttpRequestMessage request,
             ModelBindOrder order
-        ) {
+        )
+        {
             return Int32.Parse(order.ItemName) + order.Quantity;
         }
 
@@ -197,7 +200,8 @@ namespace System.Web.Http.ModelBinding
         public string PostWithOptionalBodyParameterAndUriParameter(
             [FromUri] int id,
             [FromBody] string value = "default"
-        ) {
+        )
+        {
             return value;
         }
     }

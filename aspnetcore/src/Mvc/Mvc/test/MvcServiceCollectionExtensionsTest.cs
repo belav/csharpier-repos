@@ -287,7 +287,8 @@ namespace Microsoft.AspNetCore.Mvc
                 else if (
                     service.ImplementationType != null
                     && !service.ImplementationType.Assembly.FullName.Contains("Mvc")
-                ) {
+                )
+                {
                     // Ignore types that don't come from MVC
                 }
                 else
@@ -450,7 +451,8 @@ namespace Microsoft.AspNetCore.Mvc
                     var serviceType in services.Select(d => d.ServiceType)
                         .Where(t => !t.IsGenericTypeDefinition)
                         .Distinct()
-                ) {
+                )
+                {
                     // This will throw if something is invalid.
                     scope.ServiceProvider.GetService(
                         typeof(IEnumerable<>).MakeGenericType(serviceType)
@@ -633,7 +635,8 @@ namespace Microsoft.AspNetCore.Mvc
             IServiceCollection services,
             Type serviceType,
             int expectedServiceRegistrationCount
-        ) {
+        )
+        {
             var serviceDescriptors = services.Where(
                 serviceDescriptor => serviceDescriptor.ServiceType == serviceType
             );
@@ -654,7 +657,8 @@ namespace Microsoft.AspNetCore.Mvc
             IServiceCollection services,
             Type serviceType,
             Type implementationType
-        ) {
+        )
+        {
             var matches = services.Where(
                     sd =>
                         sd.ServiceType == serviceType && sd.ImplementationType == implementationType

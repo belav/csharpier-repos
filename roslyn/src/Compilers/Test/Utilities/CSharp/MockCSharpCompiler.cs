@@ -28,14 +28,15 @@ namespace Microsoft.CodeAnalysis.CSharp.Test.Utilities
             ImmutableArray<DiagnosticAnalyzer> analyzers = default,
             ImmutableArray<ISourceGenerator> generators = default,
             AnalyzerAssemblyLoader loader = null
-        ) : this(
-            responseFile,
-            CreateBuildPaths(workingDirectory),
-            args,
-            analyzers,
-            generators,
-            loader
-        ) { }
+        )
+            : this(
+                responseFile,
+                CreateBuildPaths(workingDirectory),
+                args,
+                analyzers,
+                generators,
+                loader
+            ) { }
 
         public MockCSharpCompiler(
             string responseFile,
@@ -44,14 +45,16 @@ namespace Microsoft.CodeAnalysis.CSharp.Test.Utilities
             ImmutableArray<DiagnosticAnalyzer> analyzers = default,
             ImmutableArray<ISourceGenerator> generators = default,
             AnalyzerAssemblyLoader loader = null
-        ) : base(
-            CSharpCommandLineParser.Default,
-            responseFile,
-            args,
-            buildPaths,
-            Environment.GetEnvironmentVariable("LIB"),
-            loader ?? new DefaultAnalyzerAssemblyLoader()
-        ) {
+        )
+            : base(
+                CSharpCommandLineParser.Default,
+                responseFile,
+                args,
+                buildPaths,
+                Environment.GetEnvironmentVariable("LIB"),
+                loader ?? new DefaultAnalyzerAssemblyLoader()
+            )
+        {
             _analyzers = analyzers.NullToEmpty();
             _generators = generators.NullToEmpty();
         }
@@ -67,7 +70,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Test.Utilities
             bool skipAnalyzers,
             out ImmutableArray<DiagnosticAnalyzer> analyzers,
             out ImmutableArray<ISourceGenerator> generators
-        ) {
+        )
+        {
             base.ResolveAnalyzersFromArguments(
                 diagnostics,
                 messageProvider,
@@ -104,7 +108,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Test.Utilities
             ErrorLogger errorLogger,
             ImmutableArray<AnalyzerConfigOptionsResult> syntaxDiagOptionsOpt,
             AnalyzerConfigOptionsResult globalDiagnosticOptionsOpt
-        ) {
+        )
+        {
             Compilation = base.CreateCompilation(
                 consoleOutput,
                 touchedFilesLogger,
@@ -118,7 +123,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Test.Utilities
         protected override AnalyzerOptions CreateAnalyzerOptions(
             ImmutableArray<AdditionalText> additionalTextFiles,
             AnalyzerConfigOptionsProvider analyzerConfigOptionsProvider
-        ) {
+        )
+        {
             AnalyzerOptions = base.CreateAnalyzerOptions(
                 additionalTextFiles,
                 analyzerConfigOptionsProvider

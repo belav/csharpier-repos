@@ -89,7 +89,8 @@ namespace Microsoft.AspNetCore.Razor.TagHelpers
         public void SetHtmlContent_WithTagHelperContent_WorksAsExpected(
             string content,
             string expected
-        ) {
+        )
+        {
             // Arrange
             var tagHelperContent = new DefaultTagHelperContent();
             var copiedTagHelperContent = new DefaultTagHelperContent();
@@ -556,7 +557,8 @@ namespace Microsoft.AspNetCore.Razor.TagHelpers
         [MemberData(nameof(EmptyOrWhiteSpaceData))]
         public void IsEmptyOrWhiteSpace_TrueAfterAppendTagHelperContent_WithDataToEncode(
             string data
-        ) {
+        )
+        {
             // Arrange
             var tagHelperContent = new DefaultTagHelperContent();
             var copiedTagHelperContent = new DefaultTagHelperContent();
@@ -573,7 +575,8 @@ namespace Microsoft.AspNetCore.Razor.TagHelpers
         [MemberData(nameof(EmptyOrWhiteSpaceData))]
         public void IsEmptyOrWhiteSpace_TrueAfterAppendTagHelperContentTwice_WithDataToEncode(
             string data
-        ) {
+        )
+        {
             // Arrange
             var tagHelperContent = new DefaultTagHelperContent();
             var copiedTagHelperContent = new DefaultTagHelperContent();

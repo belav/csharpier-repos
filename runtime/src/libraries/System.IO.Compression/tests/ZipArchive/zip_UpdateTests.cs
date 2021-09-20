@@ -38,7 +38,8 @@ namespace System.IO.Compression.Tests
                     await StreamHelpers.CreateTempCopyStream(zfile("small.zip")),
                     ZipArchiveMode.Update
                 )
-            ) {
+            )
+            {
                 ZipArchiveEntry entry = archive.Entries[0];
                 string contents1,
                     contents2;
@@ -155,7 +156,8 @@ namespace System.IO.Compression.Tests
                 using (
                     Stream origMoved = orig.Open(),
                         movedStream = moved.Open()
-                ) {
+                )
+                {
                     origMoved.CopyTo(movedStream);
                 }
                 moved.LastWriteTime = orig.LastWriteTime;
@@ -323,7 +325,8 @@ namespace System.IO.Compression.Tests
             ZipArchive archive,
             string installFile,
             string entryName
-        ) {
+        )
+        {
             ZipArchiveEntry e = archive.CreateEntry(entryName);
 
             var file = FileData.GetFile(installFile);
@@ -345,7 +348,8 @@ namespace System.IO.Compression.Tests
         {
             using (
                 LocalMemoryStream ms = await LocalMemoryStream.readAppFileAsync(zfile("normal.zip"))
-            ) {
+            )
+            {
                 ZipArchive target = new ZipArchive(ms, ZipArchiveMode.Update, leaveOpen: true);
 
                 ZipArchiveEntry edeleted = target.GetEntry("first.txt");

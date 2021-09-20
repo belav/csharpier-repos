@@ -12,7 +12,8 @@ namespace Microsoft.AspNetCore.Mvc.Api.Analyzers._INPUT_
 
         public ActionResult<CodeFixWorksWhenMultipleIdenticalStatusCodesAreInErrorModel> GetItem(
             int id
-        ) {
+        )
+        {
             if (id == 0)
             {
                 return NotFound();

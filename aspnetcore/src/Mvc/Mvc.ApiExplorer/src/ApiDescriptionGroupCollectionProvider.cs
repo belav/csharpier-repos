@@ -27,7 +27,8 @@ namespace Microsoft.AspNetCore.Mvc.ApiExplorer
         public ApiDescriptionGroupCollectionProvider(
             IActionDescriptorCollectionProvider actionDescriptorCollectionProvider,
             IEnumerable<IApiDescriptionProvider> apiDescriptionProviders
-        ) {
+        )
+        {
             _actionDescriptorCollectionProvider = actionDescriptorCollectionProvider;
             _apiDescriptionProviders = apiDescriptionProviders.OrderBy(item => item.Order)
                 .ToArray();
@@ -42,7 +43,8 @@ namespace Microsoft.AspNetCore.Mvc.ApiExplorer
                 if (
                     _apiDescriptionGroups == null
                     || _apiDescriptionGroups.Version != actionDescriptors.Version
-                ) {
+                )
+                {
                     _apiDescriptionGroups = GetCollection(actionDescriptors);
                 }
 
@@ -52,7 +54,8 @@ namespace Microsoft.AspNetCore.Mvc.ApiExplorer
 
         private ApiDescriptionGroupCollection GetCollection(
             ActionDescriptorCollection actionDescriptors
-        ) {
+        )
+        {
             var context = new ApiDescriptionProviderContext(actionDescriptors.Items);
 
             foreach (var provider in _apiDescriptionProviders)

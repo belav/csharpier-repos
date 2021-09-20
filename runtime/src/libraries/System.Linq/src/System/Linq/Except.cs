@@ -10,7 +10,8 @@ namespace System.Linq
         public static IEnumerable<TSource> Except<TSource>(
             this IEnumerable<TSource> first,
             IEnumerable<TSource> second
-        ) {
+        )
+        {
             if (first == null)
             {
                 ThrowHelper.ThrowArgumentNullException(ExceptionArgument.first);
@@ -28,7 +29,8 @@ namespace System.Linq
             this IEnumerable<TSource> first,
             IEnumerable<TSource> second,
             IEqualityComparer<TSource>? comparer
-        ) {
+        )
+        {
             if (first == null)
             {
                 ThrowHelper.ThrowArgumentNullException(ExceptionArgument.first);
@@ -53,7 +55,8 @@ namespace System.Linq
             IEnumerable<TKey> second,
             Func<TSource, TKey> keySelector,
             IEqualityComparer<TKey>? comparer
-        ) {
+        )
+        {
             if (first is null)
             {
                 ThrowHelper.ThrowArgumentNullException(ExceptionArgument.first);
@@ -74,7 +77,8 @@ namespace System.Linq
             IEnumerable<TSource> first,
             IEnumerable<TSource> second,
             IEqualityComparer<TSource>? comparer
-        ) {
+        )
+        {
             var set = new HashSet<TSource>(second, comparer);
 
             foreach (TSource element in first)
@@ -91,7 +95,8 @@ namespace System.Linq
             IEnumerable<TKey> second,
             Func<TSource, TKey> keySelector,
             IEqualityComparer<TKey>? comparer
-        ) {
+        )
+        {
             var set = new HashSet<TKey>(second, comparer);
 
             foreach (TSource element in first)

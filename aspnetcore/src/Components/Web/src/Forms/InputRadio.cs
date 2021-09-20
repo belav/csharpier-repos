@@ -48,7 +48,8 @@ namespace Microsoft.AspNetCore.Components.Forms
                 AdditionalAttributes != null
                 && AdditionalAttributes.TryGetValue("class", out var @class)
                 && !string.IsNullOrEmpty(Convert.ToString(@class, CultureInfo.InvariantCulture))
-            ) {
+            )
+            {
                 return $"{@class} {fieldClass}";
             }
 

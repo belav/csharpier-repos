@@ -24,7 +24,8 @@ namespace Microsoft.CodeAnalysis.CaseCorrection
         public static async Task<Document> CaseCorrectAsync(
             Document document,
             CancellationToken cancellationToken = default
-        ) {
+        )
+        {
             var root = await document.GetSyntaxRootAsync(cancellationToken).ConfigureAwait(false);
             if (root is null)
             {
@@ -45,7 +46,8 @@ namespace Microsoft.CodeAnalysis.CaseCorrection
             Document document,
             SyntaxAnnotation annotation,
             CancellationToken cancellationToken = default
-        ) {
+        )
+        {
             var root = await document.GetSyntaxRootAsync(cancellationToken).ConfigureAwait(false);
             if (root is null)
             {
@@ -71,7 +73,8 @@ namespace Microsoft.CodeAnalysis.CaseCorrection
             Document document,
             TextSpan span,
             CancellationToken cancellationToken = default
-        ) {
+        )
+        {
             return await CaseCorrectAsync(document, ImmutableArray.Create(span), cancellationToken)
                 .ConfigureAwait(false);
         }

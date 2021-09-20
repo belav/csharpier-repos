@@ -26,7 +26,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.KeywordHighlighting.KeywordHighli
             TryStatementSyntax tryStatement,
             List<TextSpan> highlights,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             highlights.Add(tryStatement.TryKeyword.Span);
 
             foreach (var catchDeclaration in tryStatement.Catches)

@@ -214,7 +214,8 @@ namespace System.Xml.Xsl
                         && thisItem.SchemaType == thatItem.SchemaType
                         && thisItem.IsStrict == thatItem.IsStrict
                         && thisItem.IsNotRtf == thatItem.IsNotRtf
-                    ) {
+                    )
+                    {
                         // Found match so proceed to next type
                         match = true;
                         break;
@@ -554,7 +555,8 @@ namespace System.Xml.Xsl
                         | XmlNodeKindFlags.Attribute
                     )
                 ) != 0
-            ) {
+            )
+            {
                 if (this.TypeCode == XmlTypeCode.Node)
                     return true;
 
@@ -573,7 +575,8 @@ namespace System.Xml.Xsl
                         this.SchemaType, /* except:*/
                         XmlSchemaDerivationMethod.Empty
                     )
-                ) {
+                )
+                {
                     return false;
                 }
 

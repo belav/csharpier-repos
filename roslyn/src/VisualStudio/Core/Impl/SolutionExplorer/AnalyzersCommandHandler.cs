@@ -80,7 +80,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.SolutionExplore
             AnalyzerItemsTracker tracker,
             AnalyzerReferenceManager analyzerReferenceManager,
             [Import(typeof(SVsServiceProvider))] IServiceProvider serviceProvider
-        ) {
+        )
+        {
             _tracker = tracker;
             _analyzerReferenceManager = analyzerReferenceManager;
             _serviceProvider = serviceProvider;
@@ -283,7 +284,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.SolutionExplore
             IMenuCommandService menuCommandService,
             int roslynCommand,
             EventHandler handler
-        ) {
+        )
+        {
             var commandID = new CommandID(Guids.RoslynGroupId, roslynCommand);
             var menuCommand = new MenuCommand(handler, commandID);
             menuCommandService.AddCommand(menuCommand);
@@ -524,7 +526,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.SolutionExplore
                     if (
                         pathToRuleSet == null
                         || SdkUiUtilities.IsBuiltInRuleSet(pathToRuleSet, _serviceProvider)
-                    ) {
+                    )
+                    {
                         // If project is using the default built-in ruleset or no ruleset, then prefer .editorconfig for severity configuration.
                         if (pathToAnalyzerConfigDoc != null)
                         {
@@ -631,7 +634,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.SolutionExplore
                     _tracker.SelectedItemId,
                     out var ruleSetFileFullPath
                 )
-            ) {
+            )
+            {
                 var projectDirectoryFullPath = Path.GetDirectoryName(project.FullName);
                 var ruleSetFileRelativePath = PathUtilities.GetRelativePath(
                     projectDirectoryFullPath,
@@ -645,7 +649,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.SolutionExplore
         private string CreateCopyOfRuleSetForProject(
             string pathToRuleSet,
             EnvDTE.Project envDteProject
-        ) {
+        )
+        {
             var fileName = GetNewRuleSetFileNameForProject(envDteProject);
             var projectDirectory = Path.GetDirectoryName(envDteProject.FullName);
             var fullFilePath = Path.Combine(projectDirectory, fileName);
@@ -659,7 +664,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.SolutionExplore
         private void UpdateProjectConfigurationsToUseRuleSetFile(
             EnvDTE.Project envDteProject,
             string fileName
-        ) {
+        )
+        {
             foreach (EnvDTE.Configuration config in envDteProject.ConfigurationManager)
             {
                 var properties = config.Properties;
@@ -791,7 +797,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.SolutionExplore
             int fSucceeded,
             int fModified,
             int fCancelCommand
-        ) {
+        )
+        {
             _allowProjectSystemOperations = true;
             UpdateOtherMenuItemsEnabled();
 

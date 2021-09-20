@@ -99,7 +99,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
             string? schema,
             IReadOnlyModel model,
             ConfigurationSource configurationSource
-        ) {
+        )
+        {
             Check.NotEmpty(name, nameof(name));
             Check.NullButNotEmpty(schema, nameof(schema));
 
@@ -180,7 +181,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
             string name,
             string? schema,
             ConfigurationSource configurationSource
-        ) {
+        )
+        {
             var sequence = new Sequence(name, schema, model, configurationSource);
             var sequences = (SortedDictionary<(string, string?), ISequence>?)model[
                 RelationalAnnotationNames.Sequences
@@ -346,7 +348,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
         public virtual long? SetStartValue(
             long? startValue,
             ConfigurationSource configurationSource
-        ) {
+        )
+        {
             EnsureMutable();
 
             _startValue = startValue;
@@ -389,7 +392,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
         public virtual int? SetIncrementBy(
             int? incrementBy,
             ConfigurationSource configurationSource
-        ) {
+        )
+        {
             EnsureMutable();
 
             _incrementBy = incrementBy;

@@ -342,14 +342,16 @@ namespace System.Net.Http.Functional.Tests
             public Task<HttpResponseMessage> TestSendAsync(
                 HttpRequestMessage request,
                 CancellationToken cancellationToken
-            ) {
+            )
+            {
                 return SendAsync(request, cancellationToken);
             }
 
             protected override HttpRequestMessage ProcessRequest(
                 HttpRequestMessage request,
                 CancellationToken cancellationToken
-            ) {
+            )
+            {
                 ProcessRequestCount++;
                 Assert.NotNull(request);
 
@@ -364,7 +366,8 @@ namespace System.Net.Http.Functional.Tests
             protected override HttpResponseMessage ProcessResponse(
                 HttpResponseMessage response,
                 CancellationToken cancellationToken
-            ) {
+            )
+            {
                 ProcessResponseCount++;
                 Assert.NotNull(response);
 
@@ -405,7 +408,8 @@ namespace System.Net.Http.Functional.Tests
             protected override Task<HttpResponseMessage> SendAsync(
                 HttpRequestMessage request,
                 CancellationToken cancellationToken
-            ) {
+            )
+            {
                 SendAsyncCount++;
 
                 TaskCompletionSource<HttpResponseMessage> tcs =

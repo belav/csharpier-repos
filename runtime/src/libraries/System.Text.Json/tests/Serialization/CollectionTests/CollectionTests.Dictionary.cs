@@ -769,7 +769,8 @@ namespace System.Text.Json.Serialization.Tests
             public override JsonConverter CreateConverter(
                 Type typeToConvert,
                 JsonSerializerOptions options
-            ) {
+            )
+            {
                 if (typeToConvert == typeof(IClass))
                 {
                     return new MyStuffConverterForIClass();
@@ -791,7 +792,8 @@ namespace System.Text.Json.Serialization.Tests
                 ref Utf8JsonReader reader,
                 Type typeToConvert,
                 JsonSerializerOptions options
-            ) {
+            )
+            {
                 return new MyClass();
             }
 
@@ -799,7 +801,8 @@ namespace System.Text.Json.Serialization.Tests
                 Utf8JsonWriter writer,
                 IClass value,
                 JsonSerializerOptions options
-            ) {
+            )
+            {
                 writer.WriteNumberValue(1);
             }
         }
@@ -810,7 +813,8 @@ namespace System.Text.Json.Serialization.Tests
                 ref Utf8JsonReader reader,
                 Type typeToConvert,
                 JsonSerializerOptions options
-            ) {
+            )
+            {
                 return new MyClass();
             }
 
@@ -818,7 +822,8 @@ namespace System.Text.Json.Serialization.Tests
                 Utf8JsonWriter writer,
                 MyClass value,
                 JsonSerializerOptions options
-            ) {
+            )
+            {
                 writer.WriteNumberValue(1);
             }
         }
@@ -1398,7 +1403,8 @@ namespace System.Text.Json.Serialization.Tests
             bool skip2,
             bool skip3,
             bool addMissing = false
-        ) {
+        )
+        {
             static IDictionary<string, int> GetProperty(T objectToVerify, string propertyName)
             {
                 return (IDictionary<string, int>)objectToVerify.GetType()

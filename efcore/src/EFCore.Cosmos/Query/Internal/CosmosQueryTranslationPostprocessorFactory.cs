@@ -34,7 +34,8 @@ namespace Microsoft.EntityFrameworkCore.Cosmos.Query.Internal
         public CosmosQueryTranslationPostprocessorFactory(
             QueryTranslationPostprocessorDependencies dependencies,
             ISqlExpressionFactory sqlExpressionFactory
-        ) {
+        )
+        {
             _dependencies = dependencies;
             _sqlExpressionFactory = sqlExpressionFactory;
         }
@@ -47,7 +48,8 @@ namespace Microsoft.EntityFrameworkCore.Cosmos.Query.Internal
         /// </summary>
         public virtual QueryTranslationPostprocessor Create(
             QueryCompilationContext queryCompilationContext
-        ) {
+        )
+        {
             Check.NotNull(queryCompilationContext, nameof(queryCompilationContext));
 
             return new CosmosQueryTranslationPostprocessor(

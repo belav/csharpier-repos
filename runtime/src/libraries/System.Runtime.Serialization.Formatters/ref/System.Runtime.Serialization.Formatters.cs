@@ -157,7 +157,8 @@ namespace System.Runtime.Serialization
                     | System.Diagnostics.CodeAnalysis.DynamicallyAccessedMemberTypes.PublicConstructors
             )]
                 System.Type type
-        ) {
+        )
+        {
             throw null;
         }
         public static System.Reflection.MemberInfo[] GetSerializableMembers(
@@ -165,7 +166,8 @@ namespace System.Runtime.Serialization
                 System.Diagnostics.CodeAnalysis.DynamicallyAccessedMemberTypes.All
             )]
                 System.Type type
-        ) {
+        )
+        {
             throw null;
         }
         public static System.Reflection.MemberInfo[] GetSerializableMembers(
@@ -174,12 +176,14 @@ namespace System.Runtime.Serialization
             )]
                 System.Type type,
             System.Runtime.Serialization.StreamingContext context
-        ) {
+        )
+        {
             throw null;
         }
         public static System.Runtime.Serialization.ISerializationSurrogate GetSurrogateForCyclicalReference(
             System.Runtime.Serialization.ISerializationSurrogate innerSurrogate
-        ) {
+        )
+        {
             throw null;
         }
         [System.Diagnostics.CodeAnalysis.RequiresUnreferencedCodeAttribute(
@@ -188,7 +192,8 @@ namespace System.Runtime.Serialization
         public static System.Type? GetTypeFromAssembly(
             System.Reflection.Assembly assem,
             string name
-        ) {
+        )
+        {
             throw null;
         }
         public static object GetUninitializedObject(
@@ -197,14 +202,16 @@ namespace System.Runtime.Serialization
                     | System.Diagnostics.CodeAnalysis.DynamicallyAccessedMemberTypes.PublicConstructors
             )]
                 System.Type type
-        ) {
+        )
+        {
             throw null;
         }
         public static object PopulateObjectMembers(
             object obj,
             System.Reflection.MemberInfo[] members,
             object?[] data
-        ) {
+        )
+        {
             throw null;
         }
     }
@@ -348,7 +355,8 @@ namespace System.Runtime.Serialization
             System.Type serializedType,
             out string? assemblyName,
             out string? typeName
-        ) {
+        )
+        {
             throw null;
         }
         public abstract System.Type? BindToType(string assemblyName, string typeName);
@@ -381,7 +389,8 @@ namespace System.Runtime.Serialization
             System.Type type,
             System.Runtime.Serialization.StreamingContext context,
             out System.Runtime.Serialization.ISurrogateSelector selector
-        ) {
+        )
+        {
             throw null;
         }
         public virtual void RemoveSurrogate(

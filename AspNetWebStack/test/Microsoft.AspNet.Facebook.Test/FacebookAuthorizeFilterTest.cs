@@ -127,7 +127,8 @@ namespace Microsoft.AspNet.Facebook.Test
         public void OnAuthorization_RedirectsToAuthorizationRedirectPath_OnlyWhenUserDeniedGrantingPermissions(
             string requestUrl,
             string expectedRedirectUrl
-        ) {
+        )
+        {
             FacebookClient client = MockHelpers.CreateFacebookClient();
             IFacebookPermissionService permissionService = MockHelpers.CreatePermissionService(
                 new[] { "" }

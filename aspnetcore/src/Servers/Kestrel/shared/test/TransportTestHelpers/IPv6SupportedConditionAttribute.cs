@@ -27,7 +27,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel.FunctionalTests
                         SocketType.Stream,
                         ProtocolType.Tcp
                     )
-                ) {
+                )
+                {
                     socket.Bind(new IPEndPoint(IPAddress.IPv6Loopback, 0));
                     return true;
                 }

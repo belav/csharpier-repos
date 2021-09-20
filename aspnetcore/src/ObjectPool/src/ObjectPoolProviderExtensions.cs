@@ -17,7 +17,8 @@ namespace Microsoft.Extensions.ObjectPool
         /// <returns>The <see cref="ObjectPool{T}"/>.</returns>
         public static ObjectPool<StringBuilder> CreateStringBuilderPool(
             this ObjectPoolProvider provider
-        ) {
+        )
+        {
             return provider.Create<StringBuilder>(new StringBuilderPooledObjectPolicy());
         }
 
@@ -33,7 +34,8 @@ namespace Microsoft.Extensions.ObjectPool
             this ObjectPoolProvider provider,
             int initialCapacity,
             int maximumRetainedCapacity
-        ) {
+        )
+        {
             var policy = new StringBuilderPooledObjectPolicy()
             {
                 InitialCapacity = initialCapacity,

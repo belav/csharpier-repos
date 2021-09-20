@@ -23,7 +23,8 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeGeneration
             ImmutableArray<IParameterSymbol> parameterDefinitions,
             bool isExplicit,
             CodeGenerationOptions options
-        ) {
+        )
+        {
             return GenerateParameterList(
                 (IEnumerable<IParameterSymbol>)parameterDefinitions,
                 isExplicit,
@@ -35,7 +36,8 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeGeneration
             IEnumerable<IParameterSymbol> parameterDefinitions,
             bool isExplicit,
             CodeGenerationOptions options
-        ) {
+        )
+        {
             var parameters = GetParameters(parameterDefinitions, isExplicit, options);
 
             return SyntaxFactory.ParameterList(SyntaxFactory.SeparatedList(parameters));
@@ -45,7 +47,8 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeGeneration
             ImmutableArray<IParameterSymbol> parameterDefinitions,
             bool isExplicit,
             CodeGenerationOptions options
-        ) {
+        )
+        {
             return GenerateBracketedParameterList(
                 (IList<IParameterSymbol>)parameterDefinitions,
                 isExplicit,
@@ -57,7 +60,8 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeGeneration
             IEnumerable<IParameterSymbol> parameterDefinitions,
             bool isExplicit,
             CodeGenerationOptions options
-        ) {
+        )
+        {
             // Bracketed parameter lists come from indexers.  Those don't have type parameters, so we
             // could never have a typeParameterMapping.
             var parameters = GetParameters(parameterDefinitions, isExplicit, options);
@@ -71,7 +75,8 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeGeneration
             IEnumerable<IParameterSymbol> parameterDefinitions,
             bool isExplicit,
             CodeGenerationOptions options
-        ) {
+        )
+        {
             var result = ArrayBuilder<ParameterSyntax>.GetInstance();
             var seenOptional = false;
             var isFirstParam = true;
@@ -93,7 +98,8 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeGeneration
             bool isExplicit,
             bool isFirstParam,
             bool seenOptional
-        ) {
+        )
+        {
             var reusableSyntax = GetReuseableSyntaxNodeForSymbol<ParameterSyntax>(p, options);
             if (reusableSyntax != null)
             {
@@ -110,14 +116,16 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeGeneration
         private static SyntaxTokenList GenerateModifiers(
             IParameterSymbol parameter,
             bool isFirstParam
-        ) {
+        )
+        {
             var list = CSharpSyntaxGeneratorInternal.GetParameterModifiers(parameter.RefKind);
 
             if (
                 isFirstParam
                 && parameter.ContainingSymbol is IMethodSymbol methodSymbol
                 && methodSymbol.IsExtensionMethod
-            ) {
+            )
+            {
                 list = list.Add(SyntaxFactory.Token(SyntaxKind.ThisKeyword));
             }
 
@@ -133,7 +141,8 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeGeneration
             IParameterSymbol parameter,
             bool isExplicit,
             bool seenOptional
-        ) {
+        )
+        {
             if (!parameter.IsParams && !isExplicit && !parameter.IsRefOrOut())
             {
                 if (parameter.HasExplicitDefaultValue || seenOptional)
@@ -158,7 +167,8 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeGeneration
         private static ExpressionSyntax GenerateEqualsValueClauseWorker(
             IParameterSymbol parameter,
             object value
-        ) {
+        )
+        {
             return ExpressionGenerator.GenerateExpression(
                 parameter.Type,
                 value,
@@ -170,7 +180,8 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeGeneration
             IParameterSymbol parameter,
             bool isExplicit,
             CodeGenerationOptions options
-        ) {
+        )
+        {
             if (isExplicit)
             {
                 return default;

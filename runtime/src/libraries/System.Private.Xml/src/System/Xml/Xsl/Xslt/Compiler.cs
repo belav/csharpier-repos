@@ -77,7 +77,8 @@ namespace System.Xml.Xsl.Xslt
             object stylesheet,
             XmlResolver? xmlResolver,
             out QilExpression qil
-        ) {
+        )
+        {
             Debug.Assert(stylesheet != null);
             Debug.Assert(Root == null, "Compiler cannot be reused");
 
@@ -121,7 +122,8 @@ namespace System.Xml.Xsl.Xslt
             string resultNsUri,
             string? resultPrefix,
             int importPrecedence
-        ) {
+        )
+        {
             NsAlias? oldNsAlias;
             if (NsAliases.TryGetValue(ssheetNsUri, out oldNsAlias))
             {
@@ -133,7 +135,8 @@ namespace System.Xml.Xsl.Xslt
                 if (
                     importPrecedence < oldNsAlias.ImportPrecedence
                     || resultNsUri == oldNsAlias.ResultNsUri
-                ) {
+                )
+                {
                     // Either the identical definition or lower precedence - ignore it
                     return false;
                 }
@@ -218,7 +221,8 @@ namespace System.Xml.Xsl.Xslt
             out string prefix,
             out string localName,
             IErrorHelper errorHelper
-        ) {
+        )
+        {
             Debug.Assert(qname != null);
             try
             {
@@ -242,7 +246,8 @@ namespace System.Xml.Xsl.Xslt
             out string? prefix,
             out string? localName,
             IErrorHelper errorHelper
-        ) {
+        )
+        {
             Debug.Assert(nameTest != null);
             try
             {
@@ -347,7 +352,8 @@ namespace System.Xml.Xsl.Xslt
             ISourceLineInfo lineInfo,
             string res,
             params string?[]? args
-        ) {
+        )
+        {
             AddModule(lineInfo.Uri!);
             return new CompilerError(
                 lineInfo.Uri!,
@@ -503,7 +509,8 @@ namespace System.Xml.Xsl.Xslt
             string infinitySymbol,
             string nanSymbol,
             string characters
-        ) {
+        )
+        {
             Debug.Assert(characters.Length == 8);
             this.Name = name;
             this.InfinitySymbol = infinitySymbol;

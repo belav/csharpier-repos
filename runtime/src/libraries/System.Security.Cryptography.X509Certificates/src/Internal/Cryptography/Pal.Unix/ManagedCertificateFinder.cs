@@ -22,7 +22,8 @@ namespace Internal.Cryptography.Pal
             X509Certificate2Collection findFrom,
             X509Certificate2Collection copyTo,
             bool validOnly
-        ) {
+        )
+        {
             _findFrom = findFrom;
             _copyTo = copyTo;
             _validOnly = validOnly;
@@ -353,7 +354,8 @@ namespace Internal.Cryptography.Pal
                     ext != null
                     && ext.Oid != null
                     && StringComparer.Ordinal.Equals(extensionOid, ext.Oid.Value)
-                ) {
+                )
+                {
                     return ext;
                 }
             }
@@ -398,7 +400,8 @@ namespace Internal.Cryptography.Pal
                             RevocationFlag = X509RevocationFlag.ExcludeRoot
                         }
                     }
-                ) {
+                )
+                {
                     bool valid = chain.Build(cert);
                     int elementCount = chain.ChainElements.Count;
 

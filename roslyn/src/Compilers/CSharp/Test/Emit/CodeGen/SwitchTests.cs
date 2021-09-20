@@ -3786,7 +3786,8 @@ class Goo
         private static void VerifySynthesizedStringHashMethod(
             CompilationVerifier compVerifier,
             bool expected
-        ) {
+        )
+        {
             compVerifier.VerifyMemberInIL(
                 PrivateImplementationDetails.SynthesizedStringHashFunctionName,
                 expected

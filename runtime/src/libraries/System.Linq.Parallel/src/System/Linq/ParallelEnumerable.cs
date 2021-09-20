@@ -154,7 +154,8 @@ namespace System.Linq
                     source is ParallelEnumerableWrapper<TSource>
                     || source is IParallelPartitionable<TSource>
                 )
-            ) {
+            )
+            {
                 if (source is PartitionerQueryOperator<TSource> partitionerOp)
                 {
                     if (!partitionerOp.Orderable)
@@ -230,7 +231,8 @@ namespace System.Linq
         /// </exception>
         public static ParallelQuery<TSource> AsUnordered<TSource>(
             this ParallelQuery<TSource> source
-        ) {
+        )
+        {
             if (source == null)
             {
                 throw new ArgumentNullException(nameof(source));
@@ -317,7 +319,8 @@ namespace System.Linq
         public static ParallelQuery<TSource> WithDegreeOfParallelism<TSource>(
             this ParallelQuery<TSource> source,
             int degreeOfParallelism
-        ) {
+        )
+        {
             if (source == null)
                 throw new ArgumentNullException(nameof(source));
             if (degreeOfParallelism < 1 || degreeOfParallelism > Scheduling.MAX_SUPPORTED_DOP)
@@ -351,7 +354,8 @@ namespace System.Linq
         public static ParallelQuery<TSource> WithCancellation<TSource>(
             this ParallelQuery<TSource> source,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             if (source == null)
                 throw new ArgumentNullException(nameof(source));
 
@@ -384,13 +388,15 @@ namespace System.Linq
         public static ParallelQuery<TSource> WithExecutionMode<TSource>(
             this ParallelQuery<TSource> source,
             ParallelExecutionMode executionMode
-        ) {
+        )
+        {
             if (source == null)
                 throw new ArgumentNullException(nameof(source));
             if (
                 executionMode != ParallelExecutionMode.Default
                 && executionMode != ParallelExecutionMode.ForceParallelism
-            ) {
+            )
+            {
                 throw new ArgumentException(
                     SR.ParallelEnumerable_WithQueryExecutionMode_InvalidMode
                 );
@@ -425,7 +431,8 @@ namespace System.Linq
         public static ParallelQuery<TSource> WithMergeOptions<TSource>(
             this ParallelQuery<TSource> source,
             ParallelMergeOptions mergeOptions
-        ) {
+        )
+        {
             if (source == null)
                 throw new ArgumentNullException(nameof(source));
             if (
@@ -433,7 +440,8 @@ namespace System.Linq
                 && mergeOptions != ParallelMergeOptions.AutoBuffered
                 && mergeOptions != ParallelMergeOptions.NotBuffered
                 && mergeOptions != ParallelMergeOptions.FullyBuffered
-            ) {
+            )
+            {
                 throw new ArgumentException(SR.ParallelEnumerable_WithMergeOptions_InvalidOptions);
             }
 
@@ -545,7 +553,8 @@ namespace System.Linq
         public static void ForAll<TSource>(
             this ParallelQuery<TSource> source,
             Action<TSource> action
-        ) {
+        )
+        {
             if (source == null)
                 throw new ArgumentNullException(nameof(source));
             if (action == null)
@@ -579,7 +588,8 @@ namespace System.Linq
         public static ParallelQuery<TSource> Where<TSource>(
             this ParallelQuery<TSource> source,
             Func<TSource, bool> predicate
-        ) {
+        )
+        {
             if (source == null)
                 throw new ArgumentNullException(nameof(source));
             if (predicate == null)
@@ -601,7 +611,8 @@ namespace System.Linq
         public static ParallelQuery<TSource> Where<TSource>(
             this ParallelQuery<TSource> source,
             Func<TSource, int, bool> predicate
-        ) {
+        )
+        {
             if (source == null)
                 throw new ArgumentNullException(nameof(source));
             if (predicate == null)
@@ -630,7 +641,8 @@ namespace System.Linq
         public static ParallelQuery<TResult> Select<TSource, TResult>(
             this ParallelQuery<TSource> source,
             Func<TSource, TResult> selector
-        ) {
+        )
+        {
             if (source == null)
                 throw new ArgumentNullException(nameof(source));
             if (selector == null)
@@ -654,7 +666,8 @@ namespace System.Linq
         public static ParallelQuery<TResult> Select<TSource, TResult>(
             this ParallelQuery<TSource> source,
             Func<TSource, int, TResult> selector
-        ) {
+        )
+        {
             if (source == null)
                 throw new ArgumentNullException(nameof(source));
             if (selector == null)
@@ -688,7 +701,8 @@ namespace System.Linq
             this ParallelQuery<TFirst> first,
             ParallelQuery<TSecond> second,
             Func<TFirst, TSecond, TResult> resultSelector
-        ) {
+        )
+        {
             if (first == null)
                 throw new ArgumentNullException(nameof(first));
             if (second == null)
@@ -722,7 +736,8 @@ namespace System.Linq
             this ParallelQuery<TFirst> first,
             IEnumerable<TSecond> second,
             Func<TFirst, TSecond, TResult> resultSelector
-        ) {
+        )
+        {
             throw new NotSupportedException(SR.ParallelEnumerable_BinaryOpMustUseAsParallel);
         }
 
@@ -758,7 +773,8 @@ namespace System.Linq
             Func<TOuter, TKey> outerKeySelector,
             Func<TInner, TKey> innerKeySelector,
             Func<TOuter, TInner, TResult> resultSelector
-        ) {
+        )
+        {
             return Join<TOuter, TInner, TKey, TResult>(
                 outer,
                 inner,
@@ -796,7 +812,8 @@ namespace System.Linq
             Func<TOuter, TKey> outerKeySelector,
             Func<TInner, TKey> innerKeySelector,
             Func<TOuter, TInner, TResult> resultSelector
-        ) {
+        )
+        {
             throw new NotSupportedException(SR.ParallelEnumerable_BinaryOpMustUseAsParallel);
         }
 
@@ -829,7 +846,8 @@ namespace System.Linq
             Func<TInner, TKey> innerKeySelector,
             Func<TOuter, TInner, TResult> resultSelector,
             IEqualityComparer<TKey>? comparer
-        ) {
+        )
+        {
             if (outer == null)
                 throw new ArgumentNullException(nameof(outer));
             if (inner == null)
@@ -880,7 +898,8 @@ namespace System.Linq
             Func<TInner, TKey> innerKeySelector,
             Func<TOuter, TInner, TResult> resultSelector,
             IEqualityComparer<TKey>? comparer
-        ) {
+        )
+        {
             throw new NotSupportedException(SR.ParallelEnumerable_BinaryOpMustUseAsParallel);
         }
 
@@ -917,7 +936,8 @@ namespace System.Linq
             Func<TOuter, TKey> outerKeySelector,
             Func<TInner, TKey> innerKeySelector,
             Func<TOuter, IEnumerable<TInner>, TResult> resultSelector
-        ) {
+        )
+        {
             return GroupJoin<TOuter, TInner, TKey, TResult>(
                 outer,
                 inner,
@@ -956,7 +976,8 @@ namespace System.Linq
             Func<TOuter, TKey> outerKeySelector,
             Func<TInner, TKey> innerKeySelector,
             Func<TOuter, IEnumerable<TInner>, TResult> resultSelector
-        ) {
+        )
+        {
             throw new NotSupportedException(SR.ParallelEnumerable_BinaryOpMustUseAsParallel);
         }
 
@@ -990,7 +1011,8 @@ namespace System.Linq
             Func<TInner, TKey> innerKeySelector,
             Func<TOuter, IEnumerable<TInner>, TResult> resultSelector,
             IEqualityComparer<TKey>? comparer
-        ) {
+        )
+        {
             if (outer == null)
                 throw new ArgumentNullException(nameof(outer));
             if (inner == null)
@@ -1042,7 +1064,8 @@ namespace System.Linq
             Func<TInner, TKey> innerKeySelector,
             Func<TOuter, IEnumerable<TInner>, TResult> resultSelector,
             IEqualityComparer<TKey>? comparer
-        ) {
+        )
+        {
             throw new NotSupportedException(SR.ParallelEnumerable_BinaryOpMustUseAsParallel);
         }
 
@@ -1068,7 +1091,8 @@ namespace System.Linq
         public static ParallelQuery<TResult> SelectMany<TSource, TResult>(
             this ParallelQuery<TSource> source,
             Func<TSource, IEnumerable<TResult>> selector
-        ) {
+        )
+        {
             if (source == null)
                 throw new ArgumentNullException(nameof(source));
             if (selector == null)
@@ -1099,7 +1123,8 @@ namespace System.Linq
         public static ParallelQuery<TResult> SelectMany<TSource, TResult>(
             this ParallelQuery<TSource> source,
             Func<TSource, int, IEnumerable<TResult>> selector
-        ) {
+        )
+        {
             if (source == null)
                 throw new ArgumentNullException(nameof(source));
             if (selector == null)
@@ -1137,7 +1162,8 @@ namespace System.Linq
             this ParallelQuery<TSource> source,
             Func<TSource, IEnumerable<TCollection>> collectionSelector,
             Func<TSource, TCollection, TResult> resultSelector
-        ) {
+        )
+        {
             if (source == null)
                 throw new ArgumentNullException(nameof(source));
             if (collectionSelector == null)
@@ -1182,7 +1208,8 @@ namespace System.Linq
             this ParallelQuery<TSource> source,
             Func<TSource, int, IEnumerable<TCollection>> collectionSelector,
             Func<TSource, TCollection, TResult> resultSelector
-        ) {
+        )
+        {
             if (source == null)
                 throw new ArgumentNullException(nameof(source));
             if (collectionSelector == null)
@@ -1225,7 +1252,8 @@ namespace System.Linq
         public static OrderedParallelQuery<TSource> OrderBy<TSource, TKey>(
             this ParallelQuery<TSource> source,
             Func<TSource, TKey> keySelector
-        ) {
+        )
+        {
             if (source == null)
                 throw new ArgumentNullException(nameof(source));
             if (keySelector == null)
@@ -1258,7 +1286,8 @@ namespace System.Linq
             this ParallelQuery<TSource> source,
             Func<TSource, TKey> keySelector,
             IComparer<TKey>? comparer
-        ) {
+        )
+        {
             if (source == null)
                 throw new ArgumentNullException(nameof(source));
             if (keySelector == null)
@@ -1289,7 +1318,8 @@ namespace System.Linq
         public static OrderedParallelQuery<TSource> OrderByDescending<TSource, TKey>(
             this ParallelQuery<TSource> source,
             Func<TSource, TKey> keySelector
-        ) {
+        )
+        {
             if (source == null)
                 throw new ArgumentNullException(nameof(source));
             if (keySelector == null)
@@ -1322,7 +1352,8 @@ namespace System.Linq
             this ParallelQuery<TSource> source,
             Func<TSource, TKey> keySelector,
             IComparer<TKey>? comparer
-        ) {
+        )
+        {
             if (source == null)
                 throw new ArgumentNullException(nameof(source));
             if (keySelector == null)
@@ -1356,7 +1387,8 @@ namespace System.Linq
         public static OrderedParallelQuery<TSource> ThenBy<TSource, TKey>(
             this OrderedParallelQuery<TSource> source,
             Func<TSource, TKey> keySelector
-        ) {
+        )
+        {
             if (source == null)
                 throw new ArgumentNullException(nameof(source));
             if (keySelector == null)
@@ -1396,7 +1428,8 @@ namespace System.Linq
             this OrderedParallelQuery<TSource> source,
             Func<TSource, TKey> keySelector,
             IComparer<TKey>? comparer
-        ) {
+        )
+        {
             if (source == null)
                 throw new ArgumentNullException(nameof(source));
             if (keySelector == null)
@@ -1434,7 +1467,8 @@ namespace System.Linq
         public static OrderedParallelQuery<TSource> ThenByDescending<TSource, TKey>(
             this OrderedParallelQuery<TSource> source,
             Func<TSource, TKey> keySelector
-        ) {
+        )
+        {
             if (source == null)
                 throw new ArgumentNullException(nameof(source));
             if (keySelector == null)
@@ -1474,7 +1508,8 @@ namespace System.Linq
             this OrderedParallelQuery<TSource> source,
             Func<TSource, TKey> keySelector,
             IComparer<TKey>? comparer
-        ) {
+        )
+        {
             if (source == null)
                 throw new ArgumentNullException(nameof(source));
             if (keySelector == null)
@@ -1509,7 +1544,8 @@ namespace System.Linq
         public static ParallelQuery<IGrouping<TKey, TSource>> GroupBy<TSource, TKey>(
             this ParallelQuery<TSource> source,
             Func<TSource, TKey> keySelector
-        ) {
+        )
+        {
             return GroupBy<TSource, TKey>(source, keySelector, null);
         }
 
@@ -1530,7 +1566,8 @@ namespace System.Linq
             this ParallelQuery<TSource> source,
             Func<TSource, TKey> keySelector,
             IEqualityComparer<TKey>? comparer
-        ) {
+        )
+        {
             if (source == null)
                 throw new ArgumentNullException(nameof(source));
             if (keySelector == null)
@@ -1566,7 +1603,8 @@ namespace System.Linq
             this ParallelQuery<TSource> source,
             Func<TSource, TKey> keySelector,
             Func<TSource, TElement> elementSelector
-        ) {
+        )
+        {
             return GroupBy<TSource, TKey, TElement>(source, keySelector, elementSelector, null);
         }
 
@@ -1595,7 +1633,8 @@ namespace System.Linq
             Func<TSource, TKey> keySelector,
             Func<TSource, TElement> elementSelector,
             IEqualityComparer<TKey>? comparer
-        ) {
+        )
+        {
             if (source == null)
                 throw new ArgumentNullException(nameof(source));
             if (keySelector == null)
@@ -1644,7 +1683,8 @@ namespace System.Linq
             this ParallelQuery<TSource> source,
             Func<TSource, TKey> keySelector,
             Func<TKey, IEnumerable<TSource>, TResult> resultSelector
-        ) {
+        )
+        {
             if (resultSelector == null)
                 throw new ArgumentNullException(nameof(resultSelector));
 
@@ -1680,7 +1720,8 @@ namespace System.Linq
             Func<TSource, TKey> keySelector,
             Func<TKey, IEnumerable<TSource>, TResult> resultSelector,
             IEqualityComparer<TKey>? comparer
-        ) {
+        )
+        {
             if (resultSelector == null)
                 throw new ArgumentNullException(nameof(resultSelector));
 
@@ -1719,7 +1760,8 @@ namespace System.Linq
             Func<TSource, TKey> keySelector,
             Func<TSource, TElement> elementSelector,
             Func<TKey, IEnumerable<TElement>, TResult> resultSelector
-        ) {
+        )
+        {
             if (resultSelector == null)
                 throw new ArgumentNullException(nameof(resultSelector));
 
@@ -1760,7 +1802,8 @@ namespace System.Linq
             Func<TSource, TElement> elementSelector,
             Func<TKey, IEnumerable<TElement>, TResult> resultSelector,
             IEqualityComparer<TKey>? comparer
-        ) {
+        )
+        {
             if (resultSelector == null)
                 throw new ArgumentNullException(nameof(resultSelector));
 
@@ -1796,7 +1839,8 @@ namespace System.Linq
             bool seedIsSpecified,
             bool throwIfEmpty,
             QueryAggregationOptions options
-        ) {
+        )
+        {
             Debug.Assert(source != null);
             Debug.Assert(reduce != null);
             Debug.Assert(options.IsValidQueryAggregationOption(), "enum is out of range");
@@ -1838,7 +1882,8 @@ namespace System.Linq
             TAccumulate seed,
             bool seedIsSpecified,
             Func<TAccumulate, TSource, TAccumulate> func
-        ) {
+        )
+        {
             Debug.Assert(source != null);
             Debug.Assert(func != null);
             Debug.Assert(seedIsSpecified || typeof(TSource) == typeof(TAccumulate));
@@ -1906,7 +1951,8 @@ namespace System.Linq
         public static TSource Aggregate<TSource>(
             this ParallelQuery<TSource> source,
             Func<TSource, TSource, TSource> func
-        ) {
+        )
+        {
             return Aggregate<TSource>(source, func, QueryAggregationOptions.AssociativeCommutative);
         }
 
@@ -1914,7 +1960,8 @@ namespace System.Linq
             this ParallelQuery<TSource> source,
             Func<TSource, TSource, TSource> func,
             QueryAggregationOptions options
-        ) {
+        )
+        {
             if (source == null)
                 throw new ArgumentNullException(nameof(source));
             if (func == null)
@@ -1930,7 +1977,8 @@ namespace System.Linq
             if (
                 (options & QueryAggregationOptions.Associative)
                 != QueryAggregationOptions.Associative
-            ) {
+            )
+            {
                 // Non associative aggregations must be run sequentially.  We run the query in parallel
                 // and then perform the reduction over the resulting list.
                 return source.PerformSequentialAggregation(default!, false, func);
@@ -1967,7 +2015,8 @@ namespace System.Linq
             this ParallelQuery<TSource> source,
             TAccumulate seed,
             Func<TAccumulate, TSource, TAccumulate> func
-        ) {
+        )
+        {
             return Aggregate<TSource, TAccumulate>(
                 source,
                 seed,
@@ -1981,7 +2030,8 @@ namespace System.Linq
             TAccumulate seed,
             Func<TAccumulate, TSource, TAccumulate> func,
             QueryAggregationOptions options
-        ) {
+        )
+        {
             if (source == null)
                 throw new ArgumentNullException(nameof(source));
             if (func == null)
@@ -2025,7 +2075,8 @@ namespace System.Linq
             TAccumulate seed,
             Func<TAccumulate, TSource, TAccumulate> func,
             Func<TAccumulate, TResult> resultSelector
-        ) {
+        )
+        {
             if (source == null)
                 throw new ArgumentNullException(nameof(source));
             if (func == null)
@@ -2087,7 +2138,8 @@ namespace System.Linq
             Func<TAccumulate, TSource, TAccumulate> updateAccumulatorFunc,
             Func<TAccumulate, TAccumulate, TAccumulate> combineAccumulatorsFunc,
             Func<TAccumulate, TResult> resultSelector
-        ) {
+        )
+        {
             if (source == null)
                 throw new ArgumentNullException(nameof(source));
             if (updateAccumulatorFunc == null)
@@ -2155,7 +2207,8 @@ namespace System.Linq
             Func<TAccumulate, TSource, TAccumulate> updateAccumulatorFunc,
             Func<TAccumulate, TAccumulate, TAccumulate> combineAccumulatorsFunc,
             Func<TAccumulate, TResult> resultSelector
-        ) {
+        )
+        {
             if (source == null)
                 throw new ArgumentNullException(nameof(source));
             if (seedFactory == null)
@@ -2246,7 +2299,8 @@ namespace System.Linq
         public static int Count<TSource>(
             this ParallelQuery<TSource> source,
             Func<TSource, bool> predicate
-        ) {
+        )
+        {
             if (source == null)
                 throw new ArgumentNullException(nameof(source));
             if (predicate == null)
@@ -2319,7 +2373,8 @@ namespace System.Linq
         public static long LongCount<TSource>(
             this ParallelQuery<TSource> source,
             Func<TSource, bool> predicate
-        ) {
+        )
+        {
             if (source == null)
                 throw new ArgumentNullException(nameof(source));
             if (predicate == null)
@@ -2578,7 +2633,8 @@ namespace System.Linq
         public static int Sum<TSource>(
             this ParallelQuery<TSource> source,
             Func<TSource, int> selector
-        ) {
+        )
+        {
             return source.Select(selector).Sum();
         }
 
@@ -2604,7 +2660,8 @@ namespace System.Linq
         public static int? Sum<TSource>(
             this ParallelQuery<TSource> source,
             Func<TSource, int?> selector
-        ) {
+        )
+        {
             return source.Select(selector).Sum();
         }
 
@@ -2630,7 +2687,8 @@ namespace System.Linq
         public static long Sum<TSource>(
             this ParallelQuery<TSource> source,
             Func<TSource, long> selector
-        ) {
+        )
+        {
             return source.Select(selector).Sum();
         }
 
@@ -2656,7 +2714,8 @@ namespace System.Linq
         public static long? Sum<TSource>(
             this ParallelQuery<TSource> source,
             Func<TSource, long?> selector
-        ) {
+        )
+        {
             return source.Select(selector).Sum();
         }
 
@@ -2680,7 +2739,8 @@ namespace System.Linq
         public static float Sum<TSource>(
             this ParallelQuery<TSource> source,
             Func<TSource, float> selector
-        ) {
+        )
+        {
             return source.Select(selector).Sum();
         }
 
@@ -2704,7 +2764,8 @@ namespace System.Linq
         public static float? Sum<TSource>(
             this ParallelQuery<TSource> source,
             Func<TSource, float?> selector
-        ) {
+        )
+        {
             return source.Select(selector).Sum();
         }
 
@@ -2728,7 +2789,8 @@ namespace System.Linq
         public static double Sum<TSource>(
             this ParallelQuery<TSource> source,
             Func<TSource, double> selector
-        ) {
+        )
+        {
             return source.Select(selector).Sum();
         }
 
@@ -2752,7 +2814,8 @@ namespace System.Linq
         public static double? Sum<TSource>(
             this ParallelQuery<TSource> source,
             Func<TSource, double?> selector
-        ) {
+        )
+        {
             return source.Select(selector).Sum();
         }
 
@@ -2778,7 +2841,8 @@ namespace System.Linq
         public static decimal Sum<TSource>(
             this ParallelQuery<TSource> source,
             Func<TSource, decimal> selector
-        ) {
+        )
+        {
             return source.Select(selector).Sum();
         }
 
@@ -2804,7 +2868,8 @@ namespace System.Linq
         public static decimal? Sum<TSource>(
             this ParallelQuery<TSource> source,
             Func<TSource, decimal?> selector
-        ) {
+        )
+        {
             return source.Select(selector).Sum();
         }
 
@@ -3095,7 +3160,8 @@ namespace System.Linq
         public static int Min<TSource>(
             this ParallelQuery<TSource> source,
             Func<TSource, int> selector
-        ) {
+        )
+        {
             return source.Select<TSource, int>(selector).Min<int>();
         }
 
@@ -3119,7 +3185,8 @@ namespace System.Linq
         public static int? Min<TSource>(
             this ParallelQuery<TSource> source,
             Func<TSource, int?> selector
-        ) {
+        )
+        {
             return source.Select<TSource, int?>(selector).Min<int?>();
         }
 
@@ -3146,7 +3213,8 @@ namespace System.Linq
         public static long Min<TSource>(
             this ParallelQuery<TSource> source,
             Func<TSource, long> selector
-        ) {
+        )
+        {
             return source.Select<TSource, long>(selector).Min<long>();
         }
 
@@ -3170,7 +3238,8 @@ namespace System.Linq
         public static long? Min<TSource>(
             this ParallelQuery<TSource> source,
             Func<TSource, long?> selector
-        ) {
+        )
+        {
             return source.Select<TSource, long?>(selector).Min<long?>();
         }
 
@@ -3197,7 +3266,8 @@ namespace System.Linq
         public static float Min<TSource>(
             this ParallelQuery<TSource> source,
             Func<TSource, float> selector
-        ) {
+        )
+        {
             return source.Select<TSource, float>(selector).Min<float>();
         }
 
@@ -3221,7 +3291,8 @@ namespace System.Linq
         public static float? Min<TSource>(
             this ParallelQuery<TSource> source,
             Func<TSource, float?> selector
-        ) {
+        )
+        {
             return source.Select<TSource, float?>(selector).Min<float?>();
         }
 
@@ -3248,7 +3319,8 @@ namespace System.Linq
         public static double Min<TSource>(
             this ParallelQuery<TSource> source,
             Func<TSource, double> selector
-        ) {
+        )
+        {
             return source.Select<TSource, double>(selector).Min<double>();
         }
 
@@ -3272,7 +3344,8 @@ namespace System.Linq
         public static double? Min<TSource>(
             this ParallelQuery<TSource> source,
             Func<TSource, double?> selector
-        ) {
+        )
+        {
             return source.Select<TSource, double?>(selector).Min<double?>();
         }
 
@@ -3299,7 +3372,8 @@ namespace System.Linq
         public static decimal Min<TSource>(
             this ParallelQuery<TSource> source,
             Func<TSource, decimal> selector
-        ) {
+        )
+        {
             return source.Select<TSource, decimal>(selector).Min<decimal>();
         }
 
@@ -3323,7 +3397,8 @@ namespace System.Linq
         public static decimal? Min<TSource>(
             this ParallelQuery<TSource> source,
             Func<TSource, decimal?> selector
-        ) {
+        )
+        {
             return source.Select<TSource, decimal?>(selector).Min<decimal?>();
         }
 
@@ -3351,7 +3426,8 @@ namespace System.Linq
         public static TResult? Min<TSource, TResult>(
             this ParallelQuery<TSource> source,
             Func<TSource, TResult> selector
-        ) {
+        )
+        {
             return source.Select<TSource, TResult>(selector).Min<TResult>();
         }
 
@@ -3631,7 +3707,8 @@ namespace System.Linq
         public static int Max<TSource>(
             this ParallelQuery<TSource> source,
             Func<TSource, int> selector
-        ) {
+        )
+        {
             return source.Select<TSource, int>(selector).Max<int>();
         }
 
@@ -3655,7 +3732,8 @@ namespace System.Linq
         public static int? Max<TSource>(
             this ParallelQuery<TSource> source,
             Func<TSource, int?> selector
-        ) {
+        )
+        {
             return source.Select<TSource, int?>(selector).Max<int?>();
         }
 
@@ -3682,7 +3760,8 @@ namespace System.Linq
         public static long Max<TSource>(
             this ParallelQuery<TSource> source,
             Func<TSource, long> selector
-        ) {
+        )
+        {
             return source.Select<TSource, long>(selector).Max<long>();
         }
 
@@ -3706,7 +3785,8 @@ namespace System.Linq
         public static long? Max<TSource>(
             this ParallelQuery<TSource> source,
             Func<TSource, long?> selector
-        ) {
+        )
+        {
             return source.Select<TSource, long?>(selector).Max<long?>();
         }
 
@@ -3733,7 +3813,8 @@ namespace System.Linq
         public static float Max<TSource>(
             this ParallelQuery<TSource> source,
             Func<TSource, float> selector
-        ) {
+        )
+        {
             return source.Select<TSource, float>(selector).Max<float>();
         }
 
@@ -3757,7 +3838,8 @@ namespace System.Linq
         public static float? Max<TSource>(
             this ParallelQuery<TSource> source,
             Func<TSource, float?> selector
-        ) {
+        )
+        {
             return source.Select<TSource, float?>(selector).Max<float?>();
         }
 
@@ -3784,7 +3866,8 @@ namespace System.Linq
         public static double Max<TSource>(
             this ParallelQuery<TSource> source,
             Func<TSource, double> selector
-        ) {
+        )
+        {
             return source.Select<TSource, double>(selector).Max<double>();
         }
 
@@ -3808,7 +3891,8 @@ namespace System.Linq
         public static double? Max<TSource>(
             this ParallelQuery<TSource> source,
             Func<TSource, double?> selector
-        ) {
+        )
+        {
             return source.Select<TSource, double?>(selector).Max<double?>();
         }
 
@@ -3835,7 +3919,8 @@ namespace System.Linq
         public static decimal Max<TSource>(
             this ParallelQuery<TSource> source,
             Func<TSource, decimal> selector
-        ) {
+        )
+        {
             return source.Select<TSource, decimal>(selector).Max<decimal>();
         }
 
@@ -3859,7 +3944,8 @@ namespace System.Linq
         public static decimal? Max<TSource>(
             this ParallelQuery<TSource> source,
             Func<TSource, decimal?> selector
-        ) {
+        )
+        {
             return source.Select<TSource, decimal?>(selector).Max<decimal?>();
         }
 
@@ -3887,7 +3973,8 @@ namespace System.Linq
         public static TResult? Max<TSource, TResult>(
             this ParallelQuery<TSource> source,
             Func<TSource, TResult> selector
-        ) {
+        )
+        {
             return source.Select<TSource, TResult>(selector).Max<TResult>();
         }
 
@@ -4153,7 +4240,8 @@ namespace System.Linq
         public static double Average<TSource>(
             this ParallelQuery<TSource> source,
             Func<TSource, int> selector
-        ) {
+        )
+        {
             return source.Select(selector).Average();
         }
 
@@ -4179,7 +4267,8 @@ namespace System.Linq
         public static double? Average<TSource>(
             this ParallelQuery<TSource> source,
             Func<TSource, int?> selector
-        ) {
+        )
+        {
             return source.Select(selector).Average();
         }
 
@@ -4208,7 +4297,8 @@ namespace System.Linq
         public static double Average<TSource>(
             this ParallelQuery<TSource> source,
             Func<TSource, long> selector
-        ) {
+        )
+        {
             return source.Select(selector).Average();
         }
 
@@ -4234,7 +4324,8 @@ namespace System.Linq
         public static double? Average<TSource>(
             this ParallelQuery<TSource> source,
             Func<TSource, long?> selector
-        ) {
+        )
+        {
             return source.Select(selector).Average();
         }
 
@@ -4261,7 +4352,8 @@ namespace System.Linq
         public static float Average<TSource>(
             this ParallelQuery<TSource> source,
             Func<TSource, float> selector
-        ) {
+        )
+        {
             return source.Select(selector).Average();
         }
 
@@ -4285,7 +4377,8 @@ namespace System.Linq
         public static float? Average<TSource>(
             this ParallelQuery<TSource> source,
             Func<TSource, float?> selector
-        ) {
+        )
+        {
             return source.Select(selector).Average();
         }
 
@@ -4312,7 +4405,8 @@ namespace System.Linq
         public static double Average<TSource>(
             this ParallelQuery<TSource> source,
             Func<TSource, double> selector
-        ) {
+        )
+        {
             return source.Select(selector).Average();
         }
 
@@ -4336,7 +4430,8 @@ namespace System.Linq
         public static double? Average<TSource>(
             this ParallelQuery<TSource> source,
             Func<TSource, double?> selector
-        ) {
+        )
+        {
             return source.Select(selector).Average();
         }
 
@@ -4363,7 +4458,8 @@ namespace System.Linq
         public static decimal Average<TSource>(
             this ParallelQuery<TSource> source,
             Func<TSource, decimal> selector
-        ) {
+        )
+        {
             return source.Select(selector).Average();
         }
 
@@ -4387,7 +4483,8 @@ namespace System.Linq
         public static decimal? Average<TSource>(
             this ParallelQuery<TSource> source,
             Func<TSource, decimal?> selector
-        ) {
+        )
+        {
             return source.Select(selector).Average();
         }
 
@@ -4416,7 +4513,8 @@ namespace System.Linq
         public static bool Any<TSource>(
             this ParallelQuery<TSource> source,
             Func<TSource, bool> predicate
-        ) {
+        )
+        {
             if (source == null)
                 throw new ArgumentNullException(nameof(source));
             if (predicate == null)
@@ -4473,7 +4571,8 @@ namespace System.Linq
         public static bool All<TSource>(
             this ParallelQuery<TSource> source,
             Func<TSource, bool> predicate
-        ) {
+        )
+        {
             if (source == null)
                 throw new ArgumentNullException(nameof(source));
             if (predicate == null)
@@ -4534,7 +4633,8 @@ namespace System.Linq
             this ParallelQuery<TSource> source,
             TSource value,
             IEqualityComparer<TSource>? comparer
-        ) {
+        )
+        {
             if (source == null)
                 throw new ArgumentNullException(nameof(source));
 
@@ -4566,7 +4666,8 @@ namespace System.Linq
         public static ParallelQuery<TSource> Take<TSource>(
             this ParallelQuery<TSource> source,
             int count
-        ) {
+        )
+        {
             if (source == null)
                 throw new ArgumentNullException(nameof(source));
 
@@ -4601,7 +4702,8 @@ namespace System.Linq
         public static ParallelQuery<TSource> TakeWhile<TSource>(
             this ParallelQuery<TSource> source,
             Func<TSource, bool> predicate
-        ) {
+        )
+        {
             if (source == null)
                 throw new ArgumentNullException(nameof(source));
             if (predicate == null)
@@ -4630,7 +4732,8 @@ namespace System.Linq
         public static ParallelQuery<TSource> TakeWhile<TSource>(
             this ParallelQuery<TSource> source,
             Func<TSource, int, bool> predicate
-        ) {
+        )
+        {
             if (source == null)
                 throw new ArgumentNullException(nameof(source));
             if (predicate == null)
@@ -4659,7 +4762,8 @@ namespace System.Linq
         public static ParallelQuery<TSource> Skip<TSource>(
             this ParallelQuery<TSource> source,
             int count
-        ) {
+        )
+        {
             if (source == null)
                 throw new ArgumentNullException(nameof(source));
 
@@ -4694,7 +4798,8 @@ namespace System.Linq
         public static ParallelQuery<TSource> SkipWhile<TSource>(
             this ParallelQuery<TSource> source,
             Func<TSource, bool> predicate
-        ) {
+        )
+        {
             if (source == null)
                 throw new ArgumentNullException(nameof(source));
             if (predicate == null)
@@ -4725,7 +4830,8 @@ namespace System.Linq
         public static ParallelQuery<TSource> SkipWhile<TSource>(
             this ParallelQuery<TSource> source,
             Func<TSource, int, bool> predicate
-        ) {
+        )
+        {
             if (source == null)
                 throw new ArgumentNullException(nameof(source));
             if (predicate == null)
@@ -4755,7 +4861,8 @@ namespace System.Linq
         public static ParallelQuery<TSource> Concat<TSource>(
             this ParallelQuery<TSource> first,
             ParallelQuery<TSource> second
-        ) {
+        )
+        {
             if (first == null)
                 throw new ArgumentNullException(nameof(first));
             if (second == null)
@@ -4782,7 +4889,8 @@ namespace System.Linq
         public static ParallelQuery<TSource> Concat<TSource>(
             this ParallelQuery<TSource> first,
             IEnumerable<TSource> second
-        ) {
+        )
+        {
             throw new NotSupportedException(SR.ParallelEnumerable_BinaryOpMustUseAsParallel);
         }
 
@@ -4813,7 +4921,8 @@ namespace System.Linq
         public static bool SequenceEqual<TSource>(
             this ParallelQuery<TSource> first,
             ParallelQuery<TSource> second
-        ) {
+        )
+        {
             if (first == null)
                 throw new ArgumentNullException(nameof(first));
             if (second == null)
@@ -4840,7 +4949,8 @@ namespace System.Linq
         public static bool SequenceEqual<TSource>(
             this ParallelQuery<TSource> first,
             IEnumerable<TSource> second
-        ) {
+        )
+        {
             throw new NotSupportedException(SR.ParallelEnumerable_BinaryOpMustUseAsParallel);
         }
 
@@ -4869,7 +4979,8 @@ namespace System.Linq
             this ParallelQuery<TSource> first,
             ParallelQuery<TSource> second,
             IEqualityComparer<TSource>? comparer
-        ) {
+        )
+        {
             if (first == null)
                 throw new ArgumentNullException(nameof(first));
             if (second == null)
@@ -4936,7 +5047,8 @@ namespace System.Linq
         private static void DisposeEnumerator<TSource>(
             IEnumerator<TSource> e,
             CancellationState cancelState
-        ) {
+        )
+        {
             try
             {
                 e.Dispose();
@@ -4968,7 +5080,8 @@ namespace System.Linq
             this ParallelQuery<TSource> first,
             IEnumerable<TSource> second,
             IEqualityComparer<TSource>? comparer
-        ) {
+        )
+        {
             throw new NotSupportedException(SR.ParallelEnumerable_BinaryOpMustUseAsParallel);
         }
 
@@ -5005,7 +5118,8 @@ namespace System.Linq
         public static ParallelQuery<TSource> Distinct<TSource>(
             this ParallelQuery<TSource> source,
             IEqualityComparer<TSource>? comparer
-        ) {
+        )
+        {
             if (source == null)
                 throw new ArgumentNullException(nameof(source));
 
@@ -5029,7 +5143,8 @@ namespace System.Linq
         public static ParallelQuery<TSource> Union<TSource>(
             this ParallelQuery<TSource> first,
             ParallelQuery<TSource> second
-        ) {
+        )
+        {
             return Union(first, second, null);
         }
 
@@ -5052,7 +5167,8 @@ namespace System.Linq
         public static ParallelQuery<TSource> Union<TSource>(
             this ParallelQuery<TSource> first,
             IEnumerable<TSource> second
-        ) {
+        )
+        {
             throw new NotSupportedException(SR.ParallelEnumerable_BinaryOpMustUseAsParallel);
         }
 
@@ -5071,7 +5187,8 @@ namespace System.Linq
             this ParallelQuery<TSource> first,
             ParallelQuery<TSource> second,
             IEqualityComparer<TSource>? comparer
-        ) {
+        )
+        {
             if (first == null)
                 throw new ArgumentNullException(nameof(first));
             if (second == null)
@@ -5101,7 +5218,8 @@ namespace System.Linq
             this ParallelQuery<TSource> first,
             IEnumerable<TSource> second,
             IEqualityComparer<TSource>? comparer
-        ) {
+        )
+        {
             throw new NotSupportedException(SR.ParallelEnumerable_BinaryOpMustUseAsParallel);
         }
 
@@ -5127,7 +5245,8 @@ namespace System.Linq
         public static ParallelQuery<TSource> Intersect<TSource>(
             this ParallelQuery<TSource> first,
             ParallelQuery<TSource> second
-        ) {
+        )
+        {
             return Intersect(first, second, null);
         }
 
@@ -5150,7 +5269,8 @@ namespace System.Linq
         public static ParallelQuery<TSource> Intersect<TSource>(
             this ParallelQuery<TSource> first,
             IEnumerable<TSource> second
-        ) {
+        )
+        {
             throw new NotSupportedException(SR.ParallelEnumerable_BinaryOpMustUseAsParallel);
         }
 
@@ -5174,7 +5294,8 @@ namespace System.Linq
             this ParallelQuery<TSource> first,
             ParallelQuery<TSource> second,
             IEqualityComparer<TSource>? comparer
-        ) {
+        )
+        {
             if (first == null)
                 throw new ArgumentNullException(nameof(first));
             if (second == null)
@@ -5204,7 +5325,8 @@ namespace System.Linq
             this ParallelQuery<TSource> first,
             IEnumerable<TSource> second,
             IEqualityComparer<TSource>? comparer
-        ) {
+        )
+        {
             throw new NotSupportedException(SR.ParallelEnumerable_BinaryOpMustUseAsParallel);
         }
 
@@ -5232,7 +5354,8 @@ namespace System.Linq
         public static ParallelQuery<TSource> Except<TSource>(
             this ParallelQuery<TSource> first,
             ParallelQuery<TSource> second
-        ) {
+        )
+        {
             return Except(first, second, null);
         }
 
@@ -5255,7 +5378,8 @@ namespace System.Linq
         public static ParallelQuery<TSource> Except<TSource>(
             this ParallelQuery<TSource> first,
             IEnumerable<TSource> second
-        ) {
+        )
+        {
             throw new NotSupportedException(SR.ParallelEnumerable_BinaryOpMustUseAsParallel);
         }
 
@@ -5278,7 +5402,8 @@ namespace System.Linq
             this ParallelQuery<TSource> first,
             ParallelQuery<TSource> second,
             IEqualityComparer<TSource>? comparer
-        ) {
+        )
+        {
             if (first == null)
                 throw new ArgumentNullException(nameof(first));
             if (second == null)
@@ -5308,7 +5433,8 @@ namespace System.Linq
             this ParallelQuery<TSource> first,
             IEnumerable<TSource> second,
             IEqualityComparer<TSource>? comparer
-        ) {
+        )
+        {
             throw new NotSupportedException(SR.ParallelEnumerable_BinaryOpMustUseAsParallel);
         }
 
@@ -5403,7 +5529,8 @@ namespace System.Linq
                 if (
                     asOperator.OrdinalIndexState == OrdinalIndexState.Indexable
                     && asOperator.OutputOrdered
-                ) {
+                )
+                {
                     // If the query is indexable and the output is ordered, we will use the array-based merge.
                     // That way, we avoid the ordering overhead. Due to limitations of the List<> class, the
                     // most efficient solution seems to be to first dump all results into the array, and then
@@ -5941,12 +6068,14 @@ namespace System.Linq
             QueryOperator<TSource> queryOp,
             bool throwIfTwo,
             bool defaultIfEmpty
-        ) {
+        )
+        {
             Debug.Assert(queryOp != null, "expected query operator");
 
             using (
                 IEnumerator<TSource> e = queryOp.GetEnumerator(ParallelMergeOptions.FullyBuffered)
-            ) {
+            )
+            {
                 if (e.MoveNext())
                 {
                     TSource current = e.Current;
@@ -6019,7 +6148,8 @@ namespace System.Linq
             if (
                 queryOp.LimitsParallelism
                 && settings.ExecutionMode != ParallelExecutionMode.ForceParallelism
-            ) {
+            )
+            {
                 IEnumerable<TSource> childAsSequential = queryOp.Child.AsSequentialQuery(
                     settings.CancellationState.ExternalCancellationToken
                 );
@@ -6061,7 +6191,8 @@ namespace System.Linq
         public static TSource First<TSource>(
             this ParallelQuery<TSource> source,
             Func<TSource, bool> predicate
-        ) {
+        )
+        {
             if (source == null)
                 throw new ArgumentNullException(nameof(source));
             if (predicate == null)
@@ -6078,7 +6209,8 @@ namespace System.Linq
             if (
                 queryOp.LimitsParallelism
                 && settings.ExecutionMode != ParallelExecutionMode.ForceParallelism
-            ) {
+            )
+            {
                 IEnumerable<TSource> childAsSequential = queryOp.Child.AsSequentialQuery(
                     settings.CancellationState.ExternalCancellationToken
                 );
@@ -6134,7 +6266,8 @@ namespace System.Linq
             if (
                 queryOp.LimitsParallelism
                 && settings.ExecutionMode != ParallelExecutionMode.ForceParallelism
-            ) {
+            )
+            {
                 IEnumerable<TSource> childAsSequential = queryOp.Child.AsSequentialQuery(
                     settings.CancellationState.ExternalCancellationToken
                 );
@@ -6178,7 +6311,8 @@ namespace System.Linq
         public static TSource? FirstOrDefault<TSource>(
             this ParallelQuery<TSource> source,
             Func<TSource, bool> predicate
-        ) {
+        )
+        {
             if (source == null)
                 throw new ArgumentNullException(nameof(source));
             if (predicate == null)
@@ -6195,7 +6329,8 @@ namespace System.Linq
             if (
                 queryOp.LimitsParallelism
                 && settings.ExecutionMode != ParallelExecutionMode.ForceParallelism
-            ) {
+            )
+            {
                 IEnumerable<TSource> childAsSequential = queryOp.Child.AsSequentialQuery(
                     settings.CancellationState.ExternalCancellationToken
                 );
@@ -6258,7 +6393,8 @@ namespace System.Linq
             if (
                 queryOp.LimitsParallelism
                 && settings.ExecutionMode != ParallelExecutionMode.ForceParallelism
-            ) {
+            )
+            {
                 IEnumerable<TSource> childAsSequential = queryOp.Child.AsSequentialQuery(
                     settings.CancellationState.ExternalCancellationToken
                 );
@@ -6300,7 +6436,8 @@ namespace System.Linq
         public static TSource Last<TSource>(
             this ParallelQuery<TSource> source,
             Func<TSource, bool> predicate
-        ) {
+        )
+        {
             if (source == null)
                 throw new ArgumentNullException(nameof(source));
             if (predicate == null)
@@ -6314,7 +6451,8 @@ namespace System.Linq
             if (
                 queryOp.LimitsParallelism
                 && settings.ExecutionMode != ParallelExecutionMode.ForceParallelism
-            ) {
+            )
+            {
                 IEnumerable<TSource> childAsSequential = queryOp.Child.AsSequentialQuery(
                     settings.CancellationState.ExternalCancellationToken
                 );
@@ -6370,7 +6508,8 @@ namespace System.Linq
             if (
                 queryOp.LimitsParallelism
                 && settings.ExecutionMode != ParallelExecutionMode.ForceParallelism
-            ) {
+            )
+            {
                 IEnumerable<TSource> childAsSequential = queryOp.Child.AsSequentialQuery(
                     settings.CancellationState.ExternalCancellationToken
                 );
@@ -6411,7 +6550,8 @@ namespace System.Linq
         public static TSource? LastOrDefault<TSource>(
             this ParallelQuery<TSource> source,
             Func<TSource, bool> predicate
-        ) {
+        )
+        {
             if (source == null)
                 throw new ArgumentNullException(nameof(source));
             if (predicate == null)
@@ -6425,7 +6565,8 @@ namespace System.Linq
             if (
                 queryOp.LimitsParallelism
                 && settings.ExecutionMode != ParallelExecutionMode.ForceParallelism
-            ) {
+            )
+            {
                 IEnumerable<TSource> childAsSequential = queryOp.Child.AsSequentialQuery(
                     settings.CancellationState.ExternalCancellationToken
                 );
@@ -6510,7 +6651,8 @@ namespace System.Linq
         public static TSource Single<TSource>(
             this ParallelQuery<TSource> source,
             Func<TSource, bool> predicate
-        ) {
+        )
+        {
             if (source == null)
                 throw new ArgumentNullException(nameof(source));
             if (predicate == null)
@@ -6580,7 +6722,8 @@ namespace System.Linq
         public static TSource? SingleOrDefault<TSource>(
             this ParallelQuery<TSource> source,
             Func<TSource, bool> predicate
-        ) {
+        )
+        {
             if (source == null)
                 throw new ArgumentNullException(nameof(source));
             if (predicate == null)
@@ -6612,7 +6755,8 @@ namespace System.Linq
         /// </exception>
         public static ParallelQuery<TSource?> DefaultIfEmpty<TSource>(
             this ParallelQuery<TSource> source
-        ) {
+        )
+        {
             return DefaultIfEmpty<TSource>(source, default!)!;
         }
 
@@ -6632,7 +6776,8 @@ namespace System.Linq
         public static ParallelQuery<TSource> DefaultIfEmpty<TSource>(
             this ParallelQuery<TSource> source,
             TSource defaultValue
-        ) {
+        )
+        {
             if (source == null)
                 throw new ArgumentNullException(nameof(source));
             return new DefaultIfEmptyQueryOperator<TSource>(source, defaultValue);
@@ -6707,7 +6852,8 @@ namespace System.Linq
         public static TSource? ElementAtOrDefault<TSource>(
             this ParallelQuery<TSource> source,
             int index
-        ) {
+        )
+        {
             if (source == null)
                 throw new ArgumentNullException(nameof(source));
 

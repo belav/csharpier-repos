@@ -65,7 +65,8 @@ namespace System.Web.Http.Batch
         protected sealed override async Task<HttpResponseMessage> SendAsync(
             HttpRequestMessage request,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             if (request == null)
             {
                 throw Error.ArgumentNull("request");

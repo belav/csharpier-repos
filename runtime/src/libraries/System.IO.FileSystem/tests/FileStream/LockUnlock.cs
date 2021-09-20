@@ -21,7 +21,8 @@ namespace System.IO.Tests
                     FileAccess.ReadWrite,
                     FileShare.ReadWrite
                 )
-            ) {
+            )
+            {
                 AssertExtensions.Throws<ArgumentOutOfRangeException>(
                     "position",
                     () => fs.Lock(-1, 1)
@@ -80,7 +81,8 @@ namespace System.IO.Tests
                     FileAccess.ReadWrite,
                     FileShare.ReadWrite
                 )
-            ) {
+            )
+            {
                 Assert.Throws<PlatformNotSupportedException>(() => fs.Lock(0, 100));
                 File.Open(
                         path,
@@ -112,7 +114,8 @@ namespace System.IO.Tests
                     FileAccess.ReadWrite,
                     FileShare.ReadWrite
                 )
-            ) {
+            )
+            {
                 fs.Lock(position, length);
                 fs.Unlock(position, length);
             }
@@ -143,7 +146,8 @@ namespace System.IO.Tests
             long firstLength,
             long secondPosition,
             long secondLength
-        ) {
+        )
+        {
             string path = GetTestFilePath();
             File.WriteAllBytes(path, new byte[fileLength]);
 
@@ -162,7 +166,8 @@ namespace System.IO.Tests
                     FileAccess.ReadWrite,
                     FileShare.ReadWrite
                 )
-            ) {
+            )
+            {
                 // Lock and unlock the respective regions a few times
                 for (int i = 0; i < 2; i++)
                 {
@@ -198,7 +203,8 @@ namespace System.IO.Tests
             long firstLength,
             long secondPosition,
             long secondLength
-        ) {
+        )
+        {
             string path = GetTestFilePath();
             File.WriteAllBytes(path, new byte[fileLength]);
 
@@ -217,7 +223,8 @@ namespace System.IO.Tests
                     FileAccess.ReadWrite,
                     FileShare.ReadWrite
                 )
-            ) {
+            )
+            {
                 fs1.Lock(firstPosition, firstLength);
                 Assert.Throws<IOException>(() => fs2.Lock(secondPosition, secondLength));
                 fs1.Unlock(firstPosition, firstLength);
@@ -242,7 +249,8 @@ namespace System.IO.Tests
             long firstLength,
             long secondPosition,
             long secondLength
-        ) {
+        )
+        {
             string path = GetTestFilePath();
             File.WriteAllBytes(path, new byte[fileLength]);
 
@@ -261,7 +269,8 @@ namespace System.IO.Tests
                     FileAccess.ReadWrite,
                     FileShare.ReadWrite
                 )
-            ) {
+            )
+            {
                 fs1.Lock(firstPosition, firstLength);
                 fs2.Lock(secondPosition, secondLength);
                 fs1.Unlock(firstPosition, firstLength);
@@ -284,7 +293,8 @@ namespace System.IO.Tests
             long firstLength,
             long secondPosition,
             long secondLength
-        ) {
+        )
+        {
             string path = GetTestFilePath();
             File.WriteAllBytes(path, new byte[fileLength]);
 
@@ -295,7 +305,8 @@ namespace System.IO.Tests
                     FileAccess.ReadWrite,
                     FileShare.ReadWrite
                 )
-            ) {
+            )
+            {
                 fs1.Lock(firstPosition, firstLength);
 
                 RemoteExecutor.Invoke(
@@ -308,7 +319,8 @@ namespace System.IO.Tests
                                     FileAccess.ReadWrite,
                                     FileShare.ReadWrite
                                 )
-                            ) {
+                            )
+                            {
                                 Assert.Throws<IOException>(
                                     () => fs2.Lock(long.Parse(secondPos), long.Parse(secondLen))
                                 );
@@ -331,7 +343,8 @@ namespace System.IO.Tests
                                     FileAccess.ReadWrite,
                                     FileShare.ReadWrite
                                 )
-                            ) {
+                            )
+                            {
                                 fs2.Lock(long.Parse(secondPos), long.Parse(secondLen));
                                 fs2.Unlock(long.Parse(secondPos), long.Parse(secondLen));
                             }
@@ -385,7 +398,8 @@ namespace System.IO.Tests
         [SkipOnPlatform(TestPlatforms.OSX, "Not supported on OSX.")]
         public void OverlappingRegionsFromOtherProcess_With_WriteLock_ThrowsException(
             FileAccess fileAccess
-        ) {
+        )
+        {
             string path = GetTestFilePath();
             File.WriteAllBytes(path, new byte[100]);
 

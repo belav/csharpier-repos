@@ -11,7 +11,8 @@ namespace Microsoft.VisualBasic
         protected override CompilerResults FromFileBatch(
             CompilerParameters options,
             string[] fileNames
-        ) {
+        )
+        {
             throw new PlatformNotSupportedException();
         }
     }

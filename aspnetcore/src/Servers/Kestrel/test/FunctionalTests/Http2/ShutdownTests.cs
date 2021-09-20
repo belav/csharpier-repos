@@ -91,7 +91,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel.FunctionalTests.Http2
                         );
                     }
                 )
-            ) {
+            )
+            {
                 var requestTask = Client.GetStringAsync($"https://localhost:{server.Port}/");
                 Assert.False(requestTask.IsCompleted);
 
@@ -161,7 +162,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel.FunctionalTests.Http2
                     },
                     _ => { }
                 )
-            ) {
+            )
+            {
                 var requestTask = Client.GetStringAsync($"https://localhost:{server.Port}/");
                 Assert.False(requestTask.IsCompleted);
                 await requestStarted.Task.DefaultTimeout();

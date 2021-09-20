@@ -2381,14 +2381,16 @@ namespace Microsoft.AspNetCore.Components.Test
 
         private (RenderTreeDiff, RenderTreeFrame[]) GetSingleUpdatedComponent(
             bool initializeFromFrames = false
-        ) {
+        )
+        {
             var result = GetSingleUpdatedComponentWithBatch(initializeFromFrames);
             return (result.Item1, result.Item2);
         }
 
         private (RenderTreeDiff, RenderTreeFrame[], RenderBatch) GetSingleUpdatedComponentWithBatch(
             bool initializeFromFrames = false
-        ) {
+        )
+        {
             var batch = GetRenderedBatch(initializeFromFrames);
             var diffsInBatch = batch.UpdatedComponents;
             Assert.Equal(1, diffsInBatch.Count);
@@ -2402,7 +2404,8 @@ namespace Microsoft.AspNetCore.Components.Test
             RenderTreeBuilder from,
             RenderTreeBuilder to,
             bool initializeFromFrames
-        ) {
+        )
+        {
             if (initializeFromFrames)
             {
                 using var renderTreeBuilder = new RenderTreeBuilder();
@@ -2449,7 +2452,8 @@ namespace Microsoft.AspNetCore.Components.Test
             RenderTreeBuilder builder,
             object key,
             string attributeValue = null
-        ) {
+        )
+        {
             builder.OpenElement(0, "el");
             builder.SetKey(key);
 
@@ -2542,7 +2546,8 @@ namespace Microsoft.AspNetCore.Components.Test
             RenderTreeEdit edit,
             RenderTreeEditType type,
             int siblingIndex
-        ) {
+        )
+        {
             Assert.Equal(type, edit.Type);
             Assert.Equal(siblingIndex, edit.SiblingIndex);
         }
@@ -2551,7 +2556,8 @@ namespace Microsoft.AspNetCore.Components.Test
             RenderTreeEdit edit,
             int fromSiblingIndex,
             int toSiblingIndex
-        ) {
+        )
+        {
             Assert.Equal(RenderTreeEditType.PermutationListEntry, edit.Type);
             Assert.Equal(fromSiblingIndex, edit.SiblingIndex);
             Assert.Equal(toSiblingIndex, edit.MoveToSiblingIndex);

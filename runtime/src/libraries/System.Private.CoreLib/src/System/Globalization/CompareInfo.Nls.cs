@@ -66,14 +66,16 @@ namespace System.Globalization
             ReadOnlySpan<char> source,
             ReadOnlySpan<char> value,
             bool bIgnoreCase
-        ) {
+        )
+        {
             Debug.Assert(!GlobalizationMode.Invariant);
             Debug.Assert(!source.IsEmpty);
             Debug.Assert(!value.IsEmpty);
 
             fixed (char* pSource = &MemoryMarshal.GetReference(source))fixed (
                 char* pValue = &MemoryMarshal.GetReference(value)
-            ) {
+            )
+            {
                 Debug.Assert(pSource != null);
                 Debug.Assert(pValue != null);
 
@@ -102,7 +104,8 @@ namespace System.Globalization
             ReadOnlySpan<char> value,
             bool ignoreCase,
             bool fromBeginning
-        ) {
+        )
+        {
             Debug.Assert(!GlobalizationMode.Invariant);
             Debug.Assert(GlobalizationMode.UseNls);
 
@@ -119,7 +122,8 @@ namespace System.Globalization
             int startIndex,
             int count,
             bool ignoreCase
-        ) {
+        )
+        {
             Debug.Assert(!GlobalizationMode.Invariant);
             Debug.Assert(GlobalizationMode.UseNls);
 
@@ -219,7 +223,8 @@ namespace System.Globalization
                             null,
                             _sortHandle
                         ) != sortKeyLength
-                    ) {
+                    )
+                    {
                         throw new ArgumentException(SR.Arg_ExternalException);
                     }
                 }
@@ -241,7 +246,8 @@ namespace System.Globalization
             int count1,
             ref char string2,
             int count2
-        ) {
+        )
+        {
             Debug.Assert(!GlobalizationMode.Invariant);
             Debug.Assert(GlobalizationMode.UseNls);
 
@@ -273,7 +279,8 @@ namespace System.Globalization
             ReadOnlySpan<char> string1,
             ReadOnlySpan<char> string2,
             CompareOptions options
-        ) {
+        )
+        {
             Debug.Assert(!GlobalizationMode.Invariant);
             Debug.Assert(GlobalizationMode.UseNls);
             Debug.Assert(
@@ -330,7 +337,8 @@ namespace System.Globalization
             ReadOnlySpan<char> lpStringSource,
             ReadOnlySpan<char> lpStringValue,
             int* pcchFound
-        ) {
+        )
+        {
             Debug.Assert(!GlobalizationMode.Invariant);
             Debug.Assert(!lpStringValue.IsEmpty);
 
@@ -385,7 +393,8 @@ namespace System.Globalization
             CompareOptions options,
             int* matchLengthPtr,
             bool fromBeginning
-        ) {
+        )
+        {
             Debug.Assert(!GlobalizationMode.Invariant);
             Debug.Assert(GlobalizationMode.UseNls);
 
@@ -405,7 +414,8 @@ namespace System.Globalization
             ReadOnlySpan<char> prefix,
             CompareOptions options,
             int* matchLengthPtr
-        ) {
+        )
+        {
             Debug.Assert(!GlobalizationMode.Invariant);
             Debug.Assert(GlobalizationMode.UseNls);
 
@@ -437,7 +447,8 @@ namespace System.Globalization
             ReadOnlySpan<char> suffix,
             CompareOptions options,
             int* matchLengthPtr
-        ) {
+        )
+        {
             Debug.Assert(!GlobalizationMode.Invariant);
             Debug.Assert(GlobalizationMode.UseNls);
 
@@ -532,7 +543,8 @@ namespace System.Globalization
                             null,
                             _sortHandle
                         ) != sortKeyLength
-                    ) {
+                    )
+                    {
                         throw new ArgumentException(SR.Arg_ExternalException);
                     }
                 }
@@ -545,7 +557,8 @@ namespace System.Globalization
             ReadOnlySpan<char> source,
             Span<byte> destination,
             CompareOptions options
-        ) {
+        )
+        {
             Debug.Assert(!GlobalizationMode.Invariant);
             Debug.Assert((options & ValidCompareMaskOffFlags) == 0);
 
@@ -587,7 +600,8 @@ namespace System.Globalization
 
             fixed (char* pSource = &MemoryMarshal.GetReference(source))fixed (
                 byte* pSortKey = &MemoryMarshal.GetReference(destination)
-            ) {
+            )
+            {
                 Debug.Assert(pSource != null);
                 Debug.Assert(pSortKey != null);
 

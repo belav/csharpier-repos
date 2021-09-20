@@ -11470,7 +11470,8 @@ class C
         private static string CreateThenIncludeTestCode(
             string lambdaExpressionString,
             string methodDeclarationString
-        ) {
+        )
+        {
             var template =
                 @"
 using System;
@@ -12587,7 +12588,8 @@ class Program
         [InlineData(';')]
         public async Task CompletionWithCustomizedCharForTypeUnderNonObjectCreationContext(
             char commitChar
-        ) {
+        )
+        {
             var markup =
                 @"
 class Program
@@ -12925,7 +12927,8 @@ public class C
         public async Task TestTargetTypeCompletionDescription(
             string targetType,
             string expectedParameterList
-        ) {
+        )
+        {
             // Check the description displayed is based on symbol matches targeted type
             SetExperimentOption(WellKnownExperimentNames.TargetTypedCompletionFilter, true);
 

@@ -163,7 +163,8 @@ internal static partial class Interop
             int keySizeInBits,
             out SafeSecKeyRefHandle pPublicKey,
             out SafeSecKeyRefHandle pPrivateKey
-        ) {
+        )
+        {
             using (SafeTemporaryKeychainHandle tempKeychain = CreateTemporaryKeychain())
             {
                 SafeSecKeyRefHandle keychainPublic;
@@ -205,7 +206,8 @@ internal static partial class Interop
             SafeSecKeyRefHandle publicKey,
             byte[] data,
             RSAEncryptionPadding padding
-        ) {
+        )
+        {
             return ExecuteTransform(
                 data,
                 (
@@ -245,7 +247,8 @@ internal static partial class Interop
             Span<byte> destination,
             RSAEncryptionPadding padding,
             out int bytesWritten
-        ) {
+        )
+        {
             Debug.Assert(
                 padding.Mode == RSAEncryptionPaddingMode.Pkcs1
                     || padding.Mode == RSAEncryptionPaddingMode.Oaep
@@ -258,7 +261,8 @@ internal static partial class Interop
                     ReadOnlySpan<byte> innerSource,
                     out SafeCFDataHandle outputHandle,
                     out SafeCFErrorHandle errorHandle
-                ) {
+                )
+                {
                     return padding.Mode == RSAEncryptionPaddingMode.Pkcs1
                       ? RsaEncryptPkcs(
                             publicKey,
@@ -283,7 +287,8 @@ internal static partial class Interop
             SafeSecKeyRefHandle privateKey,
             byte[] data,
             RSAEncryptionPadding padding
-        ) {
+        )
+        {
             return ExecuteTransform(
                 data,
                 (
@@ -323,7 +328,8 @@ internal static partial class Interop
             Span<byte> destination,
             RSAEncryptionPadding padding,
             out int bytesWritten
-        ) {
+        )
+        {
             Debug.Assert(
                 padding.Mode == RSAEncryptionPaddingMode.Pkcs1
                     || padding.Mode == RSAEncryptionPaddingMode.Oaep
@@ -336,7 +342,8 @@ internal static partial class Interop
                     ReadOnlySpan<byte> innerSource,
                     out SafeCFDataHandle outputHandle,
                     out SafeCFErrorHandle errorHandle
-                ) {
+                )
+                {
                     return padding.Mode == RSAEncryptionPaddingMode.Pkcs1
                       ? RsaDecryptPkcs(
                             privateKey,
@@ -363,7 +370,8 @@ internal static partial class Interop
             SafeCFErrorHandle cfError,
             Span<byte> destination,
             out int bytesWritten
-        ) {
+        )
+        {
             const int kErrorSeeError = -2;
             const int kSuccess = 1;
 
@@ -386,7 +394,8 @@ internal static partial class Interop
             ReadOnlySpan<byte> source,
             Span<byte> destination,
             out int bytesWritten
-        ) {
+        )
+        {
             int returnValue = AppleCryptoNative_RsaDecryptionPrimitive(
                 privateKey,
                 ref MemoryMarshal.GetReference(source),
@@ -409,7 +418,8 @@ internal static partial class Interop
             ReadOnlySpan<byte> source,
             Span<byte> destination,
             out int bytesWritten
-        ) {
+        )
+        {
             int returnValue = AppleCryptoNative_RsaEncryptionPrimitive(
                 publicKey,
                 ref MemoryMarshal.GetReference(source),
@@ -432,7 +442,8 @@ internal static partial class Interop
             ReadOnlySpan<byte> source,
             Span<byte> destination,
             out int bytesWritten
-        ) {
+        )
+        {
             int returnValue = AppleCryptoNative_RsaSignaturePrimitive(
                 privateKey,
                 ref MemoryMarshal.GetReference(source),
@@ -455,7 +466,8 @@ internal static partial class Interop
             ReadOnlySpan<byte> source,
             Span<byte> destination,
             out int bytesWritten
-        ) {
+        )
+        {
             int returnValue = AppleCryptoNative_RsaVerificationPrimitive(
                 publicKey,
                 ref MemoryMarshal.GetReference(source),

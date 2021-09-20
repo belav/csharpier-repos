@@ -11,7 +11,8 @@ namespace Microsoft.EntityFrameworkCore.ModelBuilding
         public static ModelBuilderTest.TestIndexBuilder<TEntity> IsClustered<TEntity>(
             this ModelBuilderTest.TestIndexBuilder<TEntity> builder,
             bool clustered = true
-        ) {
+        )
+        {
             switch (builder)
             {
                 case IInfrastructure<IndexBuilder<TEntity>> genericBuilder:
@@ -31,8 +32,9 @@ namespace Microsoft.EntityFrameworkCore.ModelBuilding
         > IsMemoryOptimized<TEntity, TDependentEntity>(
             this ModelBuilderTest.TestOwnedNavigationBuilder<TEntity, TDependentEntity> builder,
             bool memoryOptimized = true
-        ) where TEntity : class
-          where TDependentEntity : class
+        )
+            where TEntity : class
+            where TDependentEntity : class
         {
             switch (builder)
             {

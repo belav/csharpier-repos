@@ -134,7 +134,8 @@ namespace System
                 {
                     if (
                         !AreFieldValuesEqual(thisValueArray.GetValue(j), thatValueArray.GetValue(j))
-                    ) {
+                    )
+                    {
                         return false;
                     }
                 }

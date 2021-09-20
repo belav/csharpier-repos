@@ -431,7 +431,8 @@ class mainMethod
         string bm,
         string am,
         string xm
-    ) {
+    )
+    {
         /*
                 printCount(ref DS.ds_count, ds, dsm);
                 printCount(ref CS.cs_count, cs, csm);

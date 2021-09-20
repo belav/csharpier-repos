@@ -391,7 +391,8 @@ namespace System.Reflection.Emit.Tests
             CallingConventions callingConvention,
             Type returnType,
             Type[] parameterTypes
-        ) {
+        )
+        {
             bool defaultReturnTypeAndParameters = returnType == null && parameterTypes == null;
             if (callingConvention == CallingConventions.Standard)
             {
@@ -488,7 +489,8 @@ namespace System.Reflection.Emit.Tests
             CallingConventions callingConvention,
             Type returnType,
             Type[] parameterTypes
-        ) {
+        )
+        {
             CallingConventions expectedCallingConvention = callingConvention;
             if ((attributes & MethodAttributes.Static) == 0)
             {

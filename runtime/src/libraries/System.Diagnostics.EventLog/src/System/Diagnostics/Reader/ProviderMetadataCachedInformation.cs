@@ -64,7 +64,8 @@ namespace System.Diagnostics.Eventing.Reader
             EventLogSession session,
             string logfile,
             int maximumCacheSize
-        ) {
+        )
+        {
             Debug.Assert(session != null);
             _session = session;
             _logfile = logfile;
@@ -217,7 +218,8 @@ namespace System.Diagnostics.Eventing.Reader
             string ProviderName,
             EventLogHandle eventHandle,
             string[] values
-        ) {
+        )
+        {
             lock (this)
             {
                 ProviderMetadataId key = new ProviderMetadataId(
@@ -294,7 +296,8 @@ namespace System.Diagnostics.Eventing.Reader
         public IEnumerable<string> GetKeywordDisplayNames(
             string ProviderName,
             EventLogHandle eventHandle
-        ) {
+        )
+        {
             lock (this)
             {
                 ProviderMetadataId key = new ProviderMetadataId(

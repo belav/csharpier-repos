@@ -11,7 +11,8 @@ namespace Microsoft.AspNetCore.Razor.Language
             AttributeStructure attributeStructure,
             bool bound,
             bool isDirectiveAttribute
-        ) {
+        )
+        {
             Name = name;
             ParameterName = parameterName;
             AttributeStructure = attributeStructure;

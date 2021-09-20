@@ -20,7 +20,8 @@ namespace Microsoft.AspNetCore.Mvc.ViewFeatures
         public static string GetExpressionText(
             LambdaExpression expression,
             ConcurrentDictionary<LambdaExpression, string> expressionTextCache
-        ) {
+        )
+        {
             if (expression == null)
             {
                 throw new ArgumentNullException(nameof(expression));
@@ -29,7 +30,8 @@ namespace Microsoft.AspNetCore.Mvc.ViewFeatures
             if (
                 expressionTextCache != null
                 && expressionTextCache.TryGetValue(expression, out var expressionText)
-            ) {
+            )
+            {
                 return expressionText;
             }
 
@@ -216,7 +218,8 @@ namespace Microsoft.AspNetCore.Mvc.ViewFeatures
             StringBuilder builder,
             Expression indexExpression,
             LambdaExpression parentExpression
-        ) {
+        )
+        {
             if (builder == null)
             {
                 throw new ArgumentNullException(nameof(builder));
@@ -273,7 +276,8 @@ namespace Microsoft.AspNetCore.Mvc.ViewFeatures
             if (
                 !(expression is MethodCallExpression methodExpression)
                 || methodExpression.Arguments.Count != 1
-            ) {
+            )
+            {
                 return false;
             }
 
@@ -301,7 +305,8 @@ namespace Microsoft.AspNetCore.Mvc.ViewFeatures
                         )
                         && property.GetMethod == methodExpression.Method
                     )
-                ) {
+                )
+                {
                     return true;
                 }
             }

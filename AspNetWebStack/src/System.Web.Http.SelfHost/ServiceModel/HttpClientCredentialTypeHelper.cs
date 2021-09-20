@@ -11,7 +11,8 @@ namespace System.Web.Http.SelfHost.ServiceModel
     {
         internal static AuthenticationSchemes MapToAuthenticationScheme(
             HttpClientCredentialType clientCredentialType
-        ) {
+        )
+        {
             switch (clientCredentialType)
             {
                 case HttpClientCredentialType.None:

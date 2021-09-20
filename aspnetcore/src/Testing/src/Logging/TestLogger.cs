@@ -40,7 +40,8 @@ namespace Microsoft.Extensions.Logging.Testing
             TState state,
             Exception exception,
             Func<TState, Exception, string> formatter
-        ) {
+        )
+        {
             if (!IsEnabled(logLevel))
             {
                 return;

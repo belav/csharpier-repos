@@ -358,7 +358,8 @@ namespace System.Diagnostics
                                     activity._baggage.First;
                                 current != null;
                                 current = current.Next
-                            ) {
+                            )
+                            {
                                 yield return current.Value;
                             }
                         }
@@ -435,7 +436,8 @@ namespace System.Diagnostics
             if (
                 _tags != null
                 || Interlocked.CompareExchange(ref _tags, new TagsLinkedList(kvp), null) != null
-            ) {
+            )
+            {
                 _tags.Add(kvp);
             }
 
@@ -462,7 +464,8 @@ namespace System.Diagnostics
                 _tags != null
                 || Interlocked.CompareExchange(ref _tags, new TagsLinkedList(kvp, set: true), null)
                     != null
-            ) {
+            )
+            {
                 _tags.Set(kvp);
             }
 
@@ -480,7 +483,8 @@ namespace System.Diagnostics
                 _events != null
                 || Interlocked.CompareExchange(ref _events, new LinkedList<ActivityEvent>(e), null)
                     != null
-            ) {
+            )
+            {
                 _events.Add(e);
             }
 
@@ -504,7 +508,8 @@ namespace System.Diagnostics
                 _baggage != null
                 || Interlocked.CompareExchange(ref _baggage, new BaggageLinkedList(kvp), null)
                     != null
-            ) {
+            )
+            {
                 _baggage.Add(kvp);
             }
 
@@ -534,7 +539,8 @@ namespace System.Diagnostics
                     new BaggageLinkedList(kvp, set: true),
                     null
                 ) != null
-            ) {
+            )
+            {
                 _baggage.Set(kvp);
             }
 
@@ -579,7 +585,8 @@ namespace System.Diagnostics
             ActivityTraceId traceId,
             ActivitySpanId spanId,
             ActivityTraceFlags activityTraceFlags = ActivityTraceFlags.None
-        ) {
+        )
+        {
             if (Parent != null)
             {
                 NotifyError(new InvalidOperationException(SR.SetParentIdOnActivityWithParent));
@@ -967,7 +974,8 @@ namespace System.Diagnostics
             string traceParent,
             string? traceState,
             out ActivityContext context
-        ) {
+        )
+        {
             context = default;
             if (!IsW3CId(traceParent))
             {
@@ -982,7 +990,8 @@ namespace System.Diagnostics
                 || !ActivityTraceId.IsLowerCaseHexAndNotAllZeros(spanIdSpan)
                 || !HexConverter.IsHexLowerChar(traceParent[53])
                 || !HexConverter.IsHexLowerChar(traceParent[54])
-            ) {
+            )
+            {
                 return false;
             }
 
@@ -1081,7 +1090,8 @@ namespace System.Diagnostics
             ActivitySamplingResult request,
             bool startIt,
             ActivityIdFormat idFormat
-        ) {
+        )
+        {
             Activity activity = new Activity(name);
 
             activity.Source = source;
@@ -1360,7 +1370,8 @@ namespace System.Diagnostics
                     if (
                         HexConverter.IsHexLowerChar(_parentId[53])
                         && HexConverter.IsHexLowerChar(_parentId[54])
-                    ) {
+                    )
+                    {
                         _w3CIdFlags = (byte)(
                             ActivityTraceId.HexByteFromChars(_parentId[53], _parentId[54])
                             | ActivityTraceFlagsIsSet

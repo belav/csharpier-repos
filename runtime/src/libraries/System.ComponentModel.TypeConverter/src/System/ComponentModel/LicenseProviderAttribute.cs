@@ -37,7 +37,8 @@ namespace System.ComponentModel
                 DynamicallyAccessedMemberTypes.PublicParameterlessConstructor
             )]
                 string typeName
-        ) {
+        )
+        {
             _licenseProviderName = typeName;
         }
 
@@ -50,7 +51,8 @@ namespace System.ComponentModel
                 DynamicallyAccessedMemberTypes.PublicParameterlessConstructor
             )]
                 Type type
-        ) {
+        )
+        {
             _licenseProviderType = type;
         }
 

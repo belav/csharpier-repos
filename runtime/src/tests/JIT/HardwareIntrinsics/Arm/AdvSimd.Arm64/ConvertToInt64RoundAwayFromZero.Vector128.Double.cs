@@ -129,7 +129,8 @@ namespace JIT.HardwareIntrinsics.Arm
                     (alignment != 16 && alignment != 8)
                     || (alignment * 2) < sizeOfinArray1
                     || (alignment * 2) < sizeOfoutArray
-                ) {
+                )
+                {
                     throw new ArgumentException("Invalid value of alignment");
                 }
 
@@ -188,7 +189,8 @@ namespace JIT.HardwareIntrinsics.Arm
 
             public void RunStructFldScenario(
                 SimpleUnaryOpTest__ConvertToInt64RoundAwayFromZero_Vector128_Double testClass
-            ) {
+            )
+            {
                 var result = AdvSimd.Arm64.ConvertToInt64RoundAwayFromZero(_fld1);
 
                 Unsafe.Write(testClass._dataTable.outArrayPtr, result);
@@ -197,7 +199,8 @@ namespace JIT.HardwareIntrinsics.Arm
 
             public void RunStructFldScenario_Load(
                 SimpleUnaryOpTest__ConvertToInt64RoundAwayFromZero_Vector128_Double testClass
-            ) {
+            )
+            {
                 fixed (Vector128<Double>* pFld1 = &_fld1)
                 {
                     var result = AdvSimd.Arm64.ConvertToInt64RoundAwayFromZero(
@@ -486,7 +489,8 @@ namespace JIT.HardwareIntrinsics.Arm
             Vector128<Double> op1,
             void* result,
             [CallerMemberName] string method = ""
-        ) {
+        )
+        {
             Double[] inArray1 = new Double[Op1ElementCount];
             Int64[] outArray = new Int64[RetElementCount];
 
@@ -523,7 +527,8 @@ namespace JIT.HardwareIntrinsics.Arm
             Double[] firstOp,
             Int64[] result,
             [CallerMemberName] string method = ""
-        ) {
+        )
+        {
             bool succeeded = true;
 
             for (var i = 0; i < RetElementCount; i++)

@@ -154,7 +154,8 @@ namespace System.Net.Http.Internal
             TKey key,
             TValue addValue,
             Func<TKey, TValue, TValue> updateValueFactory
-        ) {
+        )
+        {
             lock (_lock)
             {
                 TValue value;

@@ -53,7 +53,8 @@ namespace System.Xml.Schema
             int minutes,
             int seconds,
             int nanoseconds
-        ) {
+        )
+        {
             if (years < 0)
                 throw new ArgumentOutOfRangeException(nameof(years));
             if (months < 0)
@@ -459,7 +460,8 @@ namespace System.Xml.Schema
             string s,
             DurationType durationType,
             out XsdDuration result
-        ) {
+        )
+        {
             string? errorCode;
             int length;
             int value,
@@ -692,7 +694,8 @@ namespace System.Xml.Schema
             bool eatDigits,
             out int result,
             out int numDigits
-        ) {
+        )
+        {
             int offsetStart = offset;
             int offsetEnd = s.Length;
             int digit;

@@ -60,7 +60,8 @@ namespace System.Collections.Concurrent.Tests
         /// <returns></returns>
         public static IEnumerable<long> UnRoll(
             this IEnumerator<KeyValuePair<long, Tuple<long, long>>> pairEnumerator
-        ) {
+        )
+        {
             long key = -1;
             while (pairEnumerator.MoveNext())
             {
@@ -93,7 +94,8 @@ namespace System.Collections.Concurrent.Tests
         /// <returns></returns>
         public static IEnumerable<long> UnRollIndices(
             this IEnumerator<KeyValuePair<long, Tuple<long, long>>> pairEnumerator
-        ) {
+        )
+        {
             long key = -1;
             while (pairEnumerator.MoveNext())
             {
@@ -147,7 +149,8 @@ namespace System.Collections.Concurrent.Tests
         /// <returns></returns>
         public static IEnumerable<long> GetRangeSize(
             this IEnumerator<Tuple<long, long>> tupleEnumerator
-        ) {
+        )
+        {
             while (tupleEnumerator.MoveNext())
             {
                 yield return GetRangeSize(tupleEnumerator.Current);
@@ -161,7 +164,8 @@ namespace System.Collections.Concurrent.Tests
         /// <returns></returns>
         public static IEnumerable<long> GetRangeSize(
             this IEnumerator<KeyValuePair<long, Tuple<long, long>>> pairEnumerator
-        ) {
+        )
+        {
             while (pairEnumerator.MoveNext())
             {
                 yield return GetRangeSize(pairEnumerator.Current.Value);
@@ -210,7 +214,8 @@ namespace System.Collections.Concurrent.Tests
         /// <returns></returns>
         public static IEnumerable<int> UnRoll(
             this IEnumerator<KeyValuePair<long, Tuple<int, int>>> pairEnumerator
-        ) {
+        )
+        {
             long key = -1;
             while (pairEnumerator.MoveNext())
             {
@@ -243,7 +248,8 @@ namespace System.Collections.Concurrent.Tests
         /// <returns></returns>
         public static IEnumerable<long> UnRollIndices(
             this IEnumerator<KeyValuePair<long, Tuple<int, int>>> pairEnumerator
-        ) {
+        )
+        {
             long key = -1;
             while (pairEnumerator.MoveNext())
             {
@@ -297,7 +303,8 @@ namespace System.Collections.Concurrent.Tests
         /// <returns></returns>
         public static IEnumerable<int> GetRangeSize(
             this IEnumerator<Tuple<int, int>> tupleEnumerator
-        ) {
+        )
+        {
             while (tupleEnumerator.MoveNext())
             {
                 yield return GetRangeSize(tupleEnumerator.Current);
@@ -311,7 +318,8 @@ namespace System.Collections.Concurrent.Tests
         /// <returns></returns>
         public static IEnumerable<int> GetRangeSize(
             this IEnumerator<KeyValuePair<long, Tuple<int, int>>> pairEnumerator
-        ) {
+        )
+        {
             while (pairEnumerator.MoveNext())
             {
                 yield return GetRangeSize(pairEnumerator.Current.Value);

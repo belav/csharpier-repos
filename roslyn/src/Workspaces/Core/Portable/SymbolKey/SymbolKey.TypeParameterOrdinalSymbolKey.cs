@@ -14,7 +14,8 @@ namespace Microsoft.CodeAnalysis
                 ITypeParameterSymbol symbol,
                 int methodIndex,
                 SymbolKeyWriter visitor
-            ) {
+            )
+            {
                 Contract.ThrowIfFalse(symbol.TypeParameterKind == TypeParameterKind.Method);
                 visitor.WriteInteger(methodIndex);
                 visitor.WriteInteger(symbol.Ordinal);
@@ -23,7 +24,8 @@ namespace Microsoft.CodeAnalysis
             public static SymbolKeyResolution Resolve(
                 SymbolKeyReader reader,
                 out string? failureReason
-            ) {
+            )
+            {
                 var methodIndex = reader.ReadInteger();
                 var ordinal = reader.ReadInteger();
                 var method = reader.ResolveMethod(methodIndex);

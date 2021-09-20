@@ -51,7 +51,8 @@ namespace System.Net.Http.Functional.Tests
                                             "Host:",
                                             StringComparison.InvariantCultureIgnoreCase
                                         )
-                                    ) {
+                                    )
+                                    {
                                         Assert.Equal("Host: foo.com:345", line);
                                         break;
                                     }
@@ -68,7 +69,8 @@ namespace System.Net.Http.Functional.Tests
                                     Stream clientStream = await (
                                         await responseTask
                                     ).Content.ReadAsStreamAsync(TestAsync)
-                                ) {
+                                )
+                                {
                                     Assert.True(clientStream.CanWrite);
                                     Assert.True(clientStream.CanRead);
                                     Assert.False(clientStream.CanSeek);

@@ -154,7 +154,8 @@ namespace System.Security.AccessControl.Tests
             bool isDS,
             string rawSecurityDescriptorSddl,
             string verifierSddl
-        ) {
+        )
+        {
             RawSecurityDescriptor rawSecurityDescriptor = new RawSecurityDescriptor(
                 rawSecurityDescriptorSddl
             );

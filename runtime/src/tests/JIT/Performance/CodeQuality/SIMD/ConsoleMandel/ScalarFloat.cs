@@ -22,7 +22,8 @@ namespace Algorithms
             float ymin,
             float ymax,
             float step
-        ) {
+        )
+        {
             int yp = 0;
             for (float y = ymin; y < ymax && !Abort; y += step, yp++)
             {
@@ -53,7 +54,8 @@ namespace Algorithms
             float ymin,
             float ymax,
             float step
-        ) {
+        )
+        {
             int yp = 0;
             for (float y = ymin; y < ymax && !Abort; y += step, yp++)
             {
@@ -85,7 +87,8 @@ namespace Algorithms
             float ymin,
             float ymax,
             float step
-        ) {
+        )
+        {
             Parallel.For(
                 0,
                 (int)(((ymax - ymin) / step) + .5f),
@@ -122,7 +125,8 @@ namespace Algorithms
             float ymin,
             float ymax,
             float step
-        ) {
+        )
+        {
             Parallel.For(
                 0,
                 (int)(((ymax - ymin) / step) + .5f),

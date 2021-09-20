@@ -20,7 +20,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Completion.KeywordRecommenders
             int position,
             CSharpSyntaxContext context,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             // cases:
             //   group e |
             //   group e b|
@@ -46,7 +47,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Completion.KeywordRecommenders
                 token.IntersectsWith(position)
                 && token.Kind() == SyntaxKind.IdentifierToken
                 && token.GetPreviousToken(includeSkipped: true) == lastToken
-            ) {
+            )
+            {
                 return true;
             }
 

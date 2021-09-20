@@ -25,7 +25,8 @@ namespace Microsoft.CodeAnalysis.FindSymbols.Finders
             IImmutableSet<Document>? documents,
             FindReferencesSearchOptions options,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var location = symbol.Locations.FirstOrDefault();
             if (location == null || !location.IsInSource)
             {
@@ -54,7 +55,8 @@ namespace Microsoft.CodeAnalysis.FindSymbols.Finders
             SemanticModel semanticModel,
             FindReferencesSearchOptions options,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var container = GetContainer(symbol);
             if (container != null)
             {
@@ -105,7 +107,8 @@ namespace Microsoft.CodeAnalysis.FindSymbols.Finders
                     if (
                         field.IsImplicitlyDeclared
                         && field.AssociatedSymbol?.Kind == SymbolKind.Property
-                    ) {
+                    )
+                    {
                         return field.AssociatedSymbol;
                     }
                     else
@@ -118,7 +121,8 @@ namespace Microsoft.CodeAnalysis.FindSymbols.Finders
                     current is IMethodSymbol method
                     && method.MethodKind != MethodKind.AnonymousFunction
                     && method.MethodKind != MethodKind.LocalFunction
-                ) {
+                )
+                {
                     return method;
                 }
             }
@@ -134,7 +138,8 @@ namespace Microsoft.CodeAnalysis.FindSymbols.Finders
             SemanticModel semanticModel,
             IEnumerable<SyntaxToken> tokens,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             return FindReferencesInTokensWithSymbolNameAsync(
                 symbol,
                 document,
@@ -154,7 +159,8 @@ namespace Microsoft.CodeAnalysis.FindSymbols.Finders
             IEnumerable<SyntaxToken> tokens,
             Func<SyntaxToken, SyntaxNode>? findParentNode,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var name = symbol.Name;
             var syntaxFacts = document.GetRequiredLanguageService<ISyntaxFactsService>();
             var symbolsMatch = GetStandardSymbolsMatchFunction(
@@ -180,7 +186,8 @@ namespace Microsoft.CodeAnalysis.FindSymbols.Finders
             Document document,
             SemanticModel semanticModel,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             return FindReferencesInContainerAsync(
                 symbol,
                 container,
@@ -198,7 +205,8 @@ namespace Microsoft.CodeAnalysis.FindSymbols.Finders
             SemanticModel semanticModel,
             Func<SyntaxToken, SyntaxNode>? findParentNode,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var service = document.GetRequiredLanguageService<ISymbolDeclarationService>();
             var declarations = service.GetDeclarations(container);
             var tokens = declarations.SelectMany(

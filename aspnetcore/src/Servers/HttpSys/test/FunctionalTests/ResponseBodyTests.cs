@@ -43,7 +43,8 @@ namespace Microsoft.AspNetCore.Server.HttpSys
                         await httpContext.Response.WriteAsync("Hello World");
                     }
                 )
-            ) {
+            )
+            {
                 var response = await SendRequestAsync(address);
                 Assert.Equal(200, (int)response.StatusCode);
                 Assert.Equal(new Version(1, 1), response.Version);
@@ -85,7 +86,8 @@ namespace Microsoft.AspNetCore.Server.HttpSys
                         await responseReceived.Task.DefaultTimeout();
                     }
                 )
-            ) {
+            )
+            {
                 var response = await SendRequestAsync(address);
                 Assert.Equal(200, (int)response.StatusCode);
                 Assert.Equal(new Version(1, 1), response.Version);
@@ -112,7 +114,8 @@ namespace Microsoft.AspNetCore.Server.HttpSys
                         await responseReceived.Task.DefaultTimeout();
                     }
                 )
-            ) {
+            )
+            {
                 var response = await SendRequestAsync(address);
                 Assert.Equal(200, (int)response.StatusCode);
                 Assert.Equal(new Version(1, 1), response.Version);
@@ -135,7 +138,8 @@ namespace Microsoft.AspNetCore.Server.HttpSys
                         return Task.CompletedTask;
                     }
                 )
-            ) {
+            )
+            {
                 var response = await SendRequestAsync(address);
                 Assert.Equal(200, (int)response.StatusCode);
                 Assert.Equal(new Version(1, 1), response.Version);
@@ -158,7 +162,8 @@ namespace Microsoft.AspNetCore.Server.HttpSys
                         return httpContext.Response.Body.WriteAsync(new byte[10], 0, 10);
                     }
                 )
-            ) {
+            )
+            {
                 var response = await SendRequestAsync(address);
                 Assert.Equal(200, (int)response.StatusCode);
                 Assert.Equal(new Version(1, 1), response.Version);
@@ -188,7 +193,8 @@ namespace Microsoft.AspNetCore.Server.HttpSys
                         await httpContext.Response.Body.FlushAsync();
                     }
                 )
-            ) {
+            )
+            {
                 var response = await SendRequestAsync(address);
                 Assert.Equal(200, (int)response.StatusCode);
                 Assert.Equal(new Version(1, 1), response.Version);
@@ -219,7 +225,8 @@ namespace Microsoft.AspNetCore.Server.HttpSys
                         await stream.WriteAsync(responseBytes, 0, responseBytes.Length);
                     }
                 )
-            ) {
+            )
+            {
                 var response = await SendRequestAsync(address);
                 Assert.Equal(200, (int)response.StatusCode);
                 Assert.Equal(new Version(1, 1), response.Version);
@@ -251,7 +258,8 @@ namespace Microsoft.AspNetCore.Server.HttpSys
                         await stream.WriteAsync(new byte[10], 0, 10);
                     }
                 )
-            ) {
+            )
+            {
                 var response = await SendRequestAsync(address);
                 Assert.Equal(200, (int)response.StatusCode);
                 Assert.Equal(new Version(1, 1), response.Version);
@@ -279,7 +287,8 @@ namespace Microsoft.AspNetCore.Server.HttpSys
                         return Task.FromResult(0);
                     }
                 )
-            ) {
+            )
+            {
                 await Assert.ThrowsAsync<HttpRequestException>(() => SendRequestAsync(address));
             }
         }
@@ -297,7 +306,8 @@ namespace Microsoft.AspNetCore.Server.HttpSys
                         return httpContext.Response.Body.WriteAsync(new byte[5], 0, 5);
                     }
                 )
-            ) {
+            )
+            {
                 await Assert.ThrowsAsync<HttpRequestException>(
                     async () => await SendRequestAsync(address)
                 );
@@ -322,7 +332,8 @@ namespace Microsoft.AspNetCore.Server.HttpSys
                         completed = true;
                     }
                 )
-            ) {
+            )
+            {
                 await Assert.ThrowsAsync<HttpRequestException>(() => SendRequestAsync(address));
                 Assert.True(completed);
             }
@@ -355,7 +366,8 @@ namespace Microsoft.AspNetCore.Server.HttpSys
                         return Task.FromResult(0);
                     }
                 )
-            ) {
+            )
+            {
                 // The full response is received.
                 HttpResponseMessage response = await SendRequestAsync(address);
                 Assert.Equal(200, (int)response.StatusCode);
@@ -398,7 +410,8 @@ namespace Microsoft.AspNetCore.Server.HttpSys
                         return Task.FromResult(0);
                     }
                 )
-            ) {
+            )
+            {
                 var response = await SendRequestAsync(address);
                 Assert.Equal(200, (int)response.StatusCode);
                 Assert.Equal(new Version(1, 1), response.Version);
@@ -438,7 +451,8 @@ namespace Microsoft.AspNetCore.Server.HttpSys
                         return Task.FromResult(0);
                     }
                 )
-            ) {
+            )
+            {
                 var response = await SendRequestAsync(address);
                 Assert.Equal(200, (int)response.StatusCode);
                 Assert.Equal(new Version(1, 1), response.Version);
@@ -475,7 +489,8 @@ namespace Microsoft.AspNetCore.Server.HttpSys
                         return httpContext.Response.Body.WriteAsync(new byte[10], 0, 10);
                     }
                 )
-            ) {
+            )
+            {
                 var response = await SendRequestAsync(address);
                 Assert.Equal(200, (int)response.StatusCode);
                 Assert.Equal(new Version(1, 1), response.Version);

@@ -85,7 +85,8 @@ namespace parse_hb_log
             string strStart,
             string strEnd,
             out string strRemaining
-        ) {
+        )
+        {
             int startIndex = 0;
             if (strStart != null)
             {
@@ -170,7 +171,8 @@ namespace parse_hb_log
             int _tid,
             int _sampleCount,
             string _strAllocHeap
-        ) {
+        )
+        {
             swPassZero.WriteLine(
                 "{0}ms,{1}({2}),{3},m:{4},p:{5},i:{6}({7})",
                 _lastTimeUnit,
@@ -671,7 +673,8 @@ namespace parse_hb_log
                 int procIndex = procIndexBase;
                 procIndex < (procIndexBase + procsPerNode);
                 procIndex++
-            ) {
+            )
+            {
                 strAlloc += string.Format("|{0,5}", AllocMB[procIndex]);
             }
             strAlloc += string.Format("|");

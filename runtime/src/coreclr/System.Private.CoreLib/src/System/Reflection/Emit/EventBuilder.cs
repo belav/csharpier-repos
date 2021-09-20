@@ -31,7 +31,8 @@ namespace System.Reflection.Emit
             // int            eventType,                // event type
             TypeBuilder type, // containing type
             int evToken
-        ) {
+        )
+        {
             m_name = name;
             m_module = mod;
             m_attributes = attr;
@@ -49,7 +50,8 @@ namespace System.Reflection.Emit
         private void SetMethodSemantics(
             MethodBuilder mdBuilder,
             MethodSemanticsAttributes semantics
-        ) {
+        )
+        {
             if (mdBuilder == null)
             {
                 throw new ArgumentNullException(nameof(mdBuilder));

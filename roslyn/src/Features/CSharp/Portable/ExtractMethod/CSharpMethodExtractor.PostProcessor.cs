@@ -31,7 +31,8 @@ namespace Microsoft.CodeAnalysis.CSharp.ExtractMethod
 
             public static ImmutableArray<StatementSyntax> RemoveRedundantBlock(
                 ImmutableArray<StatementSyntax> statements
-            ) {
+            )
+            {
                 // it must have only one statement
                 if (statements.Count() != 1)
                 {
@@ -86,7 +87,8 @@ namespace Microsoft.CodeAnalysis.CSharp.ExtractMethod
 
             public ImmutableArray<StatementSyntax> MergeDeclarationStatements(
                 ImmutableArray<StatementSyntax> statements
-            ) {
+            )
+            {
                 if (statements.FirstOrDefault() == null)
                 {
                     return statements;
@@ -97,7 +99,8 @@ namespace Microsoft.CodeAnalysis.CSharp.ExtractMethod
 
             private ImmutableArray<StatementSyntax> MergeDeclarationStatementsWorker(
                 ImmutableArray<StatementSyntax> statements
-            ) {
+            )
+            {
                 using var _ = ArrayBuilder<StatementSyntax>.GetInstance(out var result);
 
                 var map = new Dictionary<ITypeSymbol, List<LocalDeclarationStatementSyntax>>();
@@ -126,7 +129,8 @@ namespace Microsoft.CodeAnalysis.CSharp.ExtractMethod
             private void AppendDeclarationStatementToMap(
                 LocalDeclarationStatementSyntax statement,
                 Dictionary<ITypeSymbol, List<LocalDeclarationStatementSyntax>> map
-            ) {
+            )
+            {
                 Contract.ThrowIfNull(statement);
 
                 var type =
@@ -142,7 +146,8 @@ namespace Microsoft.CodeAnalysis.CSharp.ExtractMethod
 
             private static IEnumerable<LocalDeclarationStatementSyntax> GetMergedDeclarationStatements(
                 Dictionary<ITypeSymbol, List<LocalDeclarationStatementSyntax>> map
-            ) {
+            )
+            {
                 foreach (var keyValuePair in map)
                 {
                     Contract.ThrowIfFalse(keyValuePair.Value.Count > 0);
@@ -189,7 +194,8 @@ namespace Microsoft.CodeAnalysis.CSharp.ExtractMethod
                     declarationStatement.Modifiers.Count > 0
                     || declarationStatement.IsConst
                     || declarationStatement.IsMissing
-                ) {
+                )
+                {
                     return false;
                 }
 
@@ -213,7 +219,8 @@ namespace Microsoft.CodeAnalysis.CSharp.ExtractMethod
                     semanticInfo == null
                     || semanticInfo.TypeKind == TypeKind.Error
                     || semanticInfo.TypeKind == TypeKind.Unknown
-                ) {
+                )
+                {
                     return false;
                 }
 
@@ -242,7 +249,8 @@ namespace Microsoft.CodeAnalysis.CSharp.ExtractMethod
                         if (
                             trivia.Kind() != SyntaxKind.WhitespaceTrivia
                             && trivia.Kind() != SyntaxKind.EndOfLineTrivia
-                        ) {
+                        )
+                        {
                             return false;
                         }
                     }
@@ -253,7 +261,8 @@ namespace Microsoft.CodeAnalysis.CSharp.ExtractMethod
 
             public static ImmutableArray<StatementSyntax> RemoveInitializedDeclarationAndReturnPattern(
                 ImmutableArray<StatementSyntax> statements
-            ) {
+            )
+            {
                 // if we have inline temp variable as service, we could just use that service here.
                 // since it is not a service right now, do very simple clean up
                 if (statements.ElementAtOrDefault(2) != null)
@@ -266,7 +275,8 @@ namespace Microsoft.CodeAnalysis.CSharp.ExtractMethod
                         is LocalDeclarationStatementSyntax declaration
                     )
                     || !(statements.ElementAtOrDefault(1) is ReturnStatementSyntax returnStatement)
-                ) {
+                )
+                {
                     return statements;
                 }
 
@@ -278,14 +288,16 @@ namespace Microsoft.CodeAnalysis.CSharp.ExtractMethod
                     || declaration.Declaration.Variables[0].Initializer.Value
                         is StackAllocArrayCreationExpressionSyntax
                     || returnStatement.Expression == null
-                ) {
+                )
+                {
                     return statements;
                 }
 
                 if (
                     !ContainsOnlyWhitespaceTrivia(declaration)
                     || !ContainsOnlyWhitespaceTrivia(returnStatement)
-                ) {
+                )
+                {
                     return statements;
                 }
 
@@ -304,13 +316,15 @@ namespace Microsoft.CodeAnalysis.CSharp.ExtractMethod
 
             public static ImmutableArray<StatementSyntax> RemoveDeclarationAssignmentPattern(
                 ImmutableArray<StatementSyntax> statements
-            ) {
+            )
+            {
                 if (
                     !(
                         statements.ElementAtOrDefault(0)
                         is LocalDeclarationStatementSyntax declaration
                     ) || !(statements.ElementAtOrDefault(1) is ExpressionStatementSyntax assignment)
-                ) {
+                )
+                {
                     return statements;
                 }
 
@@ -320,14 +334,16 @@ namespace Microsoft.CodeAnalysis.CSharp.ExtractMethod
                     || declaration.Declaration.Variables.Count != 1
                     || assignment.Expression == null
                     || assignment.Expression.Kind() != SyntaxKind.SimpleAssignmentExpression
-                ) {
+                )
+                {
                     return statements;
                 }
 
                 if (
                     !ContainsOnlyWhitespaceTrivia(declaration)
                     || !ContainsOnlyWhitespaceTrivia(assignment)
-                ) {
+                )
+                {
                     return statements;
                 }
 
@@ -338,7 +354,8 @@ namespace Microsoft.CodeAnalysis.CSharp.ExtractMethod
                     assignmentExpression.Left == null
                     || assignmentExpression.Right == null
                     || assignmentExpression.Left.ToString() != variableName
-                ) {
+                )
+                {
                     return statements;
                 }
 

@@ -105,7 +105,8 @@ namespace Microsoft.CodeAnalysis.CodeLens
             Solution solution,
             ProjectId projectId,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             return await solution.GetRequiredProject(projectId)
                 .GetDependentVersionAsync(cancellationToken)
                 .ConfigureAwait(false);
@@ -117,7 +118,8 @@ namespace Microsoft.CodeAnalysis.CodeLens
             SyntaxNode syntaxNode,
             int maxSearchResults,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var projectVersion = await GetProjectCodeLensVersionAsync(
                     solution,
                     documentId.ProjectId,
@@ -156,7 +158,8 @@ namespace Microsoft.CodeAnalysis.CodeLens
             Solution solution,
             Location location,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var document = solution.GetDocument(location.SourceTree);
 
             if (document == null)
@@ -251,7 +254,8 @@ namespace Microsoft.CodeAnalysis.CodeLens
             SyntaxToken token,
             ICodeLensDisplayInfoService langServices,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var syntaxFactsService = document.GetLanguageService<ISyntaxFactsService>();
 
             var node = token.Parent;
@@ -269,7 +273,8 @@ namespace Microsoft.CodeAnalysis.CodeLens
                     syntaxFactsService.IsDeclaration(node)
                     || syntaxFactsService.IsUsingOrExternOrImport(node)
                     || syntaxFactsService.IsGlobalAssemblyAttribute(node)
-                ) {
+                )
+                {
                     break;
                 }
                 else
@@ -291,7 +296,8 @@ namespace Microsoft.CodeAnalysis.CodeLens
             DocumentId documentId,
             SyntaxNode syntaxNode,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             return await FindAsync(
                     solution,
                     documentId,
@@ -323,7 +329,8 @@ namespace Microsoft.CodeAnalysis.CodeLens
             SemanticModel semanticModel,
             Location location,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var enclosingSymbol = semanticModel.GetEnclosingSymbol(
                 location.SourceSpan.Start,
                 cancellationToken
@@ -357,7 +364,8 @@ namespace Microsoft.CodeAnalysis.CodeLens
             Location commonLocation,
             Solution solution,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var document = solution.GetDocument(commonLocation.SourceTree);
             if (document == null)
             {
@@ -386,7 +394,8 @@ namespace Microsoft.CodeAnalysis.CodeLens
             DocumentId documentId,
             SyntaxNode syntaxNode,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             return FindAsync(
                 solution,
                 documentId,
@@ -414,7 +423,8 @@ namespace Microsoft.CodeAnalysis.CodeLens
             DocumentId documentId,
             SyntaxNode syntaxNode,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var document = solution.GetDocument(syntaxNode.GetLocation().SourceTree);
 
             using (solution.Services.CacheService?.EnableCaching(document.Project.Id))
@@ -443,7 +453,8 @@ namespace Microsoft.CodeAnalysis.CodeLens
                             previousWasClass
                             && part.Kind == SymbolDisplayPartKind.Punctuation
                             && index < parts.Length - 1
-                        ) {
+                        )
+                        {
                             switch (parts[index + 1].Kind)
                             {
                                 case SymbolDisplayPartKind.ClassName:

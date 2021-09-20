@@ -129,7 +129,8 @@ namespace JIT.HardwareIntrinsics.Arm
                     (alignment != 16 && alignment != 8)
                     || (alignment * 2) < sizeOfinArray
                     || (alignment * 2) < sizeOfoutArray
-                ) {
+                )
+                {
                     throw new ArgumentException("Invalid value of alignment");
                 }
 
@@ -188,7 +189,8 @@ namespace JIT.HardwareIntrinsics.Arm
 
             public void RunStructFldScenario(
                 ImmUnaryOpTest__ShiftLeftLogicalSaturateScalar_Vector64_Int16_15 testClass
-            ) {
+            )
+            {
                 var result = AdvSimd.Arm64.ShiftLeftLogicalSaturateScalar(_fld, 15);
 
                 Unsafe.Write(testClass._dataTable.outArrayPtr, result);
@@ -197,7 +199,8 @@ namespace JIT.HardwareIntrinsics.Arm
 
             public void RunStructFldScenario_Load(
                 ImmUnaryOpTest__ShiftLeftLogicalSaturateScalar_Vector64_Int16_15 testClass
-            ) {
+            )
+            {
                 fixed (Vector64<Int16>* pFld = &_fld)
                 {
                     var result = AdvSimd.Arm64.ShiftLeftLogicalSaturateScalar(
@@ -494,7 +497,8 @@ namespace JIT.HardwareIntrinsics.Arm
             Vector64<Int16> firstOp,
             void* result,
             [CallerMemberName] string method = ""
-        ) {
+        )
+        {
             Int16[] inArray = new Int16[Op1ElementCount];
             Int16[] outArray = new Int16[RetElementCount];
 
@@ -512,7 +516,8 @@ namespace JIT.HardwareIntrinsics.Arm
             void* firstOp,
             void* result,
             [CallerMemberName] string method = ""
-        ) {
+        )
+        {
             Int16[] inArray = new Int16[Op1ElementCount];
             Int16[] outArray = new Int16[RetElementCount];
 
@@ -534,7 +539,8 @@ namespace JIT.HardwareIntrinsics.Arm
             Int16[] firstOp,
             Int16[] result,
             [CallerMemberName] string method = ""
-        ) {
+        )
+        {
             bool succeeded = true;
 
             if (Helpers.ShiftLeftLogicalSaturate(firstOp[0], Imm) != result[0])

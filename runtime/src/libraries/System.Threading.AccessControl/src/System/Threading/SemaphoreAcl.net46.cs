@@ -14,7 +14,8 @@ namespace System.Threading
             string? name,
             out bool createdNew,
             SemaphoreSecurity? semaphoreSecurity
-        ) {
+        )
+        {
             return new Semaphore(
                 initialCount,
                 maximumCount,
@@ -33,7 +34,8 @@ namespace System.Threading
             string name,
             SemaphoreRights rights,
             [NotNullWhen(true)] out Semaphore result
-        ) {
+        )
+        {
             return Semaphore.TryOpenExisting(name, rights, out result);
         }
     }

@@ -267,7 +267,8 @@ namespace Microsoft.CodeAnalysis.Editor.Tagging
                     _dataSource.TextChangeBehavior.HasFlag(
                         TaggerTextChangeBehavior.TrackTextChanges
                     )
-                ) {
+                )
+                {
                     _subjectBuffer.Changed += OnSubjectBufferChanged;
                 }
 
@@ -275,7 +276,8 @@ namespace Microsoft.CodeAnalysis.Editor.Tagging
                     _dataSource.CaretChangeBehavior.HasFlag(
                         TaggerCaretChangeBehavior.RemoveAllTagsOnCaretMoveOutsideOfTag
                     )
-                ) {
+                )
+                {
                     if (_textViewOpt == null)
                     {
                         throw new ArgumentException(
@@ -304,7 +306,8 @@ namespace Microsoft.CodeAnalysis.Editor.Tagging
                     _dataSource.CaretChangeBehavior.HasFlag(
                         TaggerCaretChangeBehavior.RemoveAllTagsOnCaretMoveOutsideOfTag
                     )
-                ) {
+                )
+                {
                     _textViewOpt.Caret.PositionChanged -= OnCaretPositionChanged;
                 }
 
@@ -312,7 +315,8 @@ namespace Microsoft.CodeAnalysis.Editor.Tagging
                     _dataSource.TextChangeBehavior.HasFlag(
                         TaggerTextChangeBehavior.TrackTextChanges
                     )
-                ) {
+                )
+                {
                     _subjectBuffer.Changed -= OnSubjectBufferChanged;
                 }
 
@@ -341,7 +345,8 @@ namespace Microsoft.CodeAnalysis.Editor.Tagging
             private void RaiseTagsChanged(
                 ICollection<KeyValuePair<ITextBuffer, DiffResult>> collection,
                 bool initialTags
-            ) {
+            )
+            {
                 TagsChangedForBuffer?.Invoke(collection, initialTags);
             }
 

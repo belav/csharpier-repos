@@ -46,7 +46,8 @@ namespace Microsoft.AspNetCore.Authentication.OAuth.Claims
             else if (
                 value.ValueKind == JsonValueKind.Object
                 || value.ValueKind == JsonValueKind.Undefined
-            ) {
+            )
+            {
                 // Skip, because they were previously skipped
             }
             else

@@ -57,7 +57,8 @@ namespace MonoTests.Common
             object value,
             CacheItemPolicy policy,
             string regionName = null
-        ) {
+        )
+        {
             MethodCalled =
                 "AddOrGetExisting (string key, object value, CacheItemPolicy policy, string regionName = null)";
             if (string.IsNullOrEmpty(key) || value == null)
@@ -90,7 +91,8 @@ namespace MonoTests.Common
             object value,
             DateTimeOffset absoluteExpiration,
             string regionName = null
-        ) {
+        )
+        {
             MethodCalled =
                 "AddOrGetExisting (string key, object value, DateTimeOffset absoluteExpiration, string regionName = null)";
             if (string.IsNullOrEmpty(key) || value == null)
@@ -112,7 +114,8 @@ namespace MonoTests.Common
         public override CacheEntryChangeMonitor CreateCacheEntryChangeMonitor(
             IEnumerable<string> keys,
             string regionName = null
-        ) {
+        )
+        {
             throw new NotImplementedException();
         }
 
@@ -144,7 +147,8 @@ namespace MonoTests.Common
         public override IDictionary<string, object> GetValues(
             IEnumerable<string> keys,
             string regionName = null
-        ) {
+        )
+        {
             MethodCalled =
                 "IDictionary<string, object> GetValues (IEnumerable<string> keys, string regionName = null)";
             var ret = new Dictionary<string, object>();
@@ -182,7 +186,8 @@ namespace MonoTests.Common
             object value,
             CacheItemPolicy policy,
             string regionName = null
-        ) {
+        )
+        {
             throw new NotImplementedException();
         }
 
@@ -196,7 +201,8 @@ namespace MonoTests.Common
             object value,
             DateTimeOffset absoluteExpiration,
             string regionName = null
-        ) {
+        )
+        {
             throw new NotImplementedException();
         }
 

@@ -70,7 +70,8 @@ namespace Microsoft.CodeAnalysis.CSharp.InlineDeclaration
             ImmutableArray<Diagnostic> diagnostics,
             SyntaxEditor editor,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
 #if CODE_STYLE
             var options = document.Project.AnalyzerOptions.GetAnalyzerOptionSet(
                 editor.OriginalRoot.SyntaxTree,
@@ -138,7 +139,8 @@ namespace Microsoft.CodeAnalysis.CSharp.InlineDeclaration
         private static (VariableDeclaratorSyntax declarator, IdentifierNameSyntax identifier, SyntaxNode invocationOrCreation) FindDiagnosticNodes(
             Diagnostic diagnostic,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             // Recover the nodes we care about.
             var declaratorLocation = diagnostic.AdditionalLocations[0];
             var identifierLocation = diagnostic.AdditionalLocations[1];
@@ -166,7 +168,8 @@ namespace Microsoft.CodeAnalysis.CSharp.InlineDeclaration
             HashSet<StatementSyntax> declarationsToRemove,
             Workspace workspace,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             declarator = currentRoot.GetCurrentNode(declarator);
             identifier = currentRoot.GetCurrentNode(identifier);
 
@@ -202,7 +205,8 @@ namespace Microsoft.CodeAnalysis.CSharp.InlineDeclaration
                             statementSyntax.GetLastToken(),
                             localDeclarationToken
                         )
-                    ) {
+                    )
+                    {
                         priorStatementSyntax = statementSyntax;
                     }
                     break;
@@ -280,7 +284,8 @@ namespace Microsoft.CodeAnalysis.CSharp.InlineDeclaration
                             declarator.GetFirstToken(),
                             declarator.GetFirstToken().GetPreviousToken(includeSkipped: true)
                         )
-                    ) {
+                    )
+                    {
                         editor.ReplaceNode(
                             declaration.Type,
                             (t, g) =>
@@ -368,7 +373,8 @@ namespace Microsoft.CodeAnalysis.CSharp.InlineDeclaration
             IdentifierNameSyntax identifier,
             TypeSyntax newType,
             VariableDeclaratorSyntax declaratorOpt
-        ) {
+        )
+        {
             var designation = SyntaxFactory.SingleVariableDesignation(identifier.Identifier);
 
             if (declaratorOpt != null)
@@ -433,7 +439,8 @@ namespace Microsoft.CodeAnalysis.CSharp.InlineDeclaration
             IdentifierNameSyntax identifier,
             DeclarationExpressionSyntax declarationExpression,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             if (declarationExpression.Type.IsVar)
             {
                 // Options want us to use 'var' if we can.  Make sure we didn't change
@@ -468,7 +475,8 @@ namespace Microsoft.CodeAnalysis.CSharp.InlineDeclaration
                         updatedTopmostContainer,
                         out var speculativeModel
                     )
-                ) {
+                )
+                {
                     // Couldn't figure out the new semantics.  Assume semantics changed.
                     return true;
                 }
@@ -487,7 +495,8 @@ namespace Microsoft.CodeAnalysis.CSharp.InlineDeclaration
                         previousSymbol,
                         updatedSymbolInfo.Symbol
                     )
-                ) {
+                )
+                {
                     // We're pointing at a new symbol now.  Semantic have changed.
                     return true;
                 }
@@ -513,7 +522,8 @@ namespace Microsoft.CodeAnalysis.CSharp.InlineDeclaration
             int position,
             SyntaxNode topmostContainer,
             out SemanticModel speculativeModel
-        ) {
+        )
+        {
             switch (topmostContainer)
             {
                 case StatementSyntax statement:
@@ -548,13 +558,12 @@ namespace Microsoft.CodeAnalysis.CSharp.InlineDeclaration
 
         private class MyCodeAction : CustomCodeActions.DocumentChangeAction
         {
-            public MyCodeAction(
-                Func<CancellationToken, Task<Document>> createChangedDocument
-            ) : base(
-                CSharpAnalyzersResources.Inline_variable_declaration,
-                createChangedDocument,
-                CSharpAnalyzersResources.Inline_variable_declaration
-            ) { }
+            public MyCodeAction(Func<CancellationToken, Task<Document>> createChangedDocument)
+                : base(
+                    CSharpAnalyzersResources.Inline_variable_declaration,
+                    createChangedDocument,
+                    CSharpAnalyzersResources.Inline_variable_declaration
+                ) { }
         }
     }
 }

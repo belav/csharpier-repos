@@ -57,7 +57,8 @@ namespace System.Speech.Internal.GrammarBuilding
             IElement parent,
             IRule rule,
             IdentifierCollection ruleIds
-        ) {
+        )
+        {
             if (_rule == null)
             {
                 IGrammar grammar = elementFactory.Grammar;

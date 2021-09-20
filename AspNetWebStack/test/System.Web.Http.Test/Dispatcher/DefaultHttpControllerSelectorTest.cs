@@ -33,7 +33,8 @@ namespace System.Web.Http.Dispatcher
         public void GetControllerName_PicksControllerNameFromRouteData(
             string controllerKeyName,
             string controllerName
-        ) {
+        )
+        {
             // Arrange
             HttpRequestMessage request = new HttpRequestMessage();
             IHttpRouteData routeData = GetRouteData();

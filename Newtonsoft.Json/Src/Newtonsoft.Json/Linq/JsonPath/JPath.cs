@@ -159,7 +159,8 @@ namespace Newtonsoft.Json.Linq.JsonPath
                         if (
                             _currentIndex + 1 < _expression.Length
                             && _expression[_currentIndex + 1] == '.'
-                        ) {
+                        )
+                        {
                             scan = true;
                             _currentIndex++;
                         }
@@ -179,7 +180,8 @@ namespace Newtonsoft.Json.Linq.JsonPath
                                 || currentChar == '|'
                                 || currentChar == '&'
                             )
-                        ) {
+                        )
+                        {
                             ended = true;
                         }
                         else
@@ -544,7 +546,8 @@ namespace Newtonsoft.Json.Linq.JsonPath
                     _expression[_currentIndex] == ')'
                     || _expression[_currentIndex] == '|'
                     || _expression[_currentIndex] == '&'
-                ) {
+                )
+                {
                     op = QueryOperator.Exists;
                 }
                 else
@@ -950,7 +953,8 @@ namespace Newtonsoft.Json.Linq.JsonPath
             JToken root,
             JToken t,
             JsonSelectSettings? settings
-        ) {
+        )
+        {
             IEnumerable<JToken> current = new[] { t };
             foreach (PathFilter filter in filters)
             {

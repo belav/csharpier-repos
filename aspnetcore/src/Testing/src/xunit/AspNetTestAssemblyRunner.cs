@@ -25,13 +25,14 @@ namespace Microsoft.AspNetCore.Testing
             IMessageSink diagnosticMessageSink,
             IMessageSink executionMessageSink,
             ITestFrameworkExecutionOptions executionOptions
-        ) : base(
-            testAssembly,
-            testCases,
-            diagnosticMessageSink,
-            executionMessageSink,
-            executionOptions
-        ) { }
+        )
+            : base(
+                testAssembly,
+                testCases,
+                diagnosticMessageSink,
+                executionMessageSink,
+                executionOptions
+            ) { }
 
         protected override async Task AfterTestAssemblyStartingAsync()
         {

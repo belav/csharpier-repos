@@ -16,7 +16,8 @@ namespace System.IO.Pipes
             PipeDirection direction,
             HandleInheritability inheritability,
             int bufferSize
-        ) {
+        )
+        {
             Debug.Assert(
                 direction != PipeDirection.InOut,
                 "Anonymous pipe direction shouldn't be InOut"
@@ -44,7 +45,8 @@ namespace System.IO.Pipes
             if (
                 inheritability == HandleInheritability.Inheritable
                 && Interop.Sys.Fcntl.SetFD(clientHandle, 0) == -1
-            ) {
+            )
+            {
                 throw Interop.GetExceptionForIoErrno(Interop.Sys.GetLastErrorInfo());
             }
 

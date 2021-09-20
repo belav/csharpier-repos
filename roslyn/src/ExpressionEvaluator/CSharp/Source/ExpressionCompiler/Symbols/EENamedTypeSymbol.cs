@@ -33,16 +33,17 @@ namespace Microsoft.CodeAnalysis.CSharp.ExpressionEvaluator
             string methodName,
             CompilationContext context,
             GenerateMethodBody generateMethodBody
-        ) : this(
-            container,
-            baseType,
-            currentFrame,
-            typeName,
-            (m, t) =>
-                ImmutableArray.Create<MethodSymbol>(
-                    context.CreateMethod(t, methodName, syntax, generateMethodBody)
-                )
-        ) { }
+        )
+            : this(
+                container,
+                baseType,
+                currentFrame,
+                typeName,
+                (m, t) =>
+                    ImmutableArray.Create<MethodSymbol>(
+                        context.CreateMethod(t, methodName, syntax, generateMethodBody)
+                    )
+            ) { }
 
         internal EENamedTypeSymbol(
             NamespaceSymbol container,
@@ -56,7 +57,8 @@ namespace Microsoft.CodeAnalysis.CSharp.ExpressionEvaluator
                 EENamedTypeSymbol,
                 ImmutableArray<TypeParameterSymbol>
             > getTypeParameters
-        ) {
+        )
+        {
             _container = container;
             _baseType = baseType;
             _name = typeName;
@@ -72,7 +74,8 @@ namespace Microsoft.CodeAnalysis.CSharp.ExpressionEvaluator
             MethodSymbol currentFrame,
             string typeName,
             Func<MethodSymbol, EENamedTypeSymbol, ImmutableArray<MethodSymbol>> getMethods
-        ) {
+        )
+        {
             _container = container;
             _baseType = baseType;
             _name = typeName;
@@ -225,13 +228,15 @@ namespace Microsoft.CodeAnalysis.CSharp.ExpressionEvaluator
 
         internal override NamedTypeSymbol GetDeclaredBaseType(
             ConsList<TypeSymbol> basesBeingResolved
-        ) {
+        )
+        {
             return _baseType;
         }
 
         internal override ImmutableArray<NamedTypeSymbol> GetDeclaredInterfaces(
             ConsList<TypeSymbol> basesBeingResolved
-        ) {
+        )
+        {
             throw ExceptionUtilities.Unreachable;
         }
 
@@ -297,7 +302,8 @@ namespace Microsoft.CodeAnalysis.CSharp.ExpressionEvaluator
 
         internal override ImmutableArray<NamedTypeSymbol> InterfacesNoUseSiteDiagnostics(
             ConsList<TypeSymbol> basesBeingResolved
-        ) {
+        )
+        {
             throw ExceptionUtilities.Unreachable;
         }
 
@@ -375,7 +381,8 @@ namespace Microsoft.CodeAnalysis.CSharp.ExpressionEvaluator
         internal static void VerifyTypeParameters(
             Symbol container,
             ImmutableArray<TypeParameterSymbol> typeParameters
-        ) {
+        )
+        {
             for (int i = 0; i < typeParameters.Length; i++)
             {
                 var typeParameter = typeParameters[i];

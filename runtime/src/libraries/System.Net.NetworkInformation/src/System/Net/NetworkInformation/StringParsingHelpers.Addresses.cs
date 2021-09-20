@@ -15,7 +15,8 @@ namespace System.Net.NetworkInformation
             List<GatewayIPAddressInformation> collection,
             string[] fileLines,
             string interfaceName
-        ) {
+        )
+        {
             // Columns are as follows (first-line header):
             // Iface  Destination  Gateway  Flags  RefCnt  Use  Metric  Mask  MTU  Window  IRTT
             foreach (string line in fileLines)
@@ -44,7 +45,8 @@ namespace System.Net.NetworkInformation
             string[] fileLines,
             string interfaceName,
             long scopeId
-        ) {
+        )
+        {
             // Columns are as follows (first-line header):
             // 00000000000000000000000000000000 00 00000000000000000000000000000000 00 00000000000000000000000000000000 ffffffff 00000001 00000001 00200200 lo
             // +------------------------------+ ++ +------------------------------+ ++ +------------------------------+ +------+ +------+ +------+ +------+ ++
@@ -89,7 +91,8 @@ namespace System.Net.NetworkInformation
             List<IPAddress> collection,
             string filePath,
             string name
-        ) {
+        )
+        {
             // Parse the /var/lib/dhcp/dhclient.leases file, if it exists.
             // If any errors occur, like the file not existing or being
             // improperly formatted, just bail and return an empty collection.
@@ -108,7 +111,8 @@ namespace System.Net.NetworkInformation
                                 StringComparison.Ordinal
                             )
                         ) != -1
-                    ) {
+                    )
+                    {
                         int firstBrace = fileContents.IndexOf('{', leaseIndex);
                         secondBrace = fileContents.IndexOf('}', leaseIndex);
                         int blockLength = secondBrace - firstBrace;
@@ -158,7 +162,8 @@ namespace System.Net.NetworkInformation
 
         internal static List<IPAddress> ParseWinsServerAddressesFromSmbConfFile(
             string smbConfFilePath
-        ) {
+        )
+        {
             List<IPAddress> collection = new List<IPAddress>();
             try
             {

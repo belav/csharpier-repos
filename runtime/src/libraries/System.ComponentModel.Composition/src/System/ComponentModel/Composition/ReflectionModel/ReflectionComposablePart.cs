@@ -34,7 +34,8 @@ namespace System.ComponentModel.Composition.ReflectionModel
         public ReflectionComposablePart(
             ReflectionComposablePartDefinition definition,
             object attributedPart
-        ) {
+        )
+        {
             Requires.NotNull(definition, nameof(definition));
             Requires.NotNull(attributedPart, nameof(attributedPart));
 
@@ -325,7 +326,8 @@ namespace System.ComponentModel.Composition.ReflectionModel
                     if (
                         definition.Cardinality == ImportCardinality.ZeroOrMore
                         && !import.ImportType.IsAssignableCollectionType
-                    ) {
+                    )
+                    {
                         throw new ComposablePartException(
                             SR.Format(
                                 SR.ReflectionModel_ImportManyOnParameterCanOnlyBeAssigned,
@@ -381,7 +383,8 @@ namespace System.ComponentModel.Composition.ReflectionModel
                 ImportDefinition definition in ImportDefinitions.Where(
                     definition => definition.IsPrerequisite
                 )
-            ) {
+            )
+            {
                 if (_importValues == null || !ImportValues.ContainsKey(definition))
                 {
                     throw new InvalidOperationException(
@@ -490,7 +493,8 @@ namespace System.ComponentModel.Composition.ReflectionModel
             ImportingItem import,
             ImportDefinition definition,
             object value
-        ) {
+        )
+        {
             ImportingMember importMember = (ImportingMember)import;
 
             object? instance = GetInstanceActivatingIfNeeded();

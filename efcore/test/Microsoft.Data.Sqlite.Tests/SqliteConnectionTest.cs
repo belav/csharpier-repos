@@ -192,7 +192,8 @@ namespace Microsoft.Data.Sqlite
         {
             using (
                 var connection = new SqliteConnection("Data Source=file:data.db?mode=invalidmode")
-            ) {
+            )
+            {
                 var ex = Assert.Throws<SqliteException>(() => connection.Open());
 
                 Assert.Equal(SQLITE_ERROR, ex.SqliteErrorCode);
@@ -307,7 +308,8 @@ namespace Microsoft.Data.Sqlite
         {
             using (
                 var connection = new SqliteConnection("Data Source=encrypted.db;Password=password")
-            ) {
+            )
+            {
                 var stateChangeRaised = false;
                 connection.StateChange += (sender, e) => stateChangeRaised = true;
 
@@ -323,7 +325,8 @@ namespace Microsoft.Data.Sqlite
         {
             using (
                 var connection1 = new SqliteConnection("Data Source=encrypted.db;Password=password")
-            ) {
+            )
+            {
                 connection1.Open();
 
                 // NB: The file is only encrypted after writing
@@ -333,7 +336,8 @@ namespace Microsoft.Data.Sqlite
                     var connection2 = new SqliteConnection(
                         "Data Source=encrypted.db;Password=wrong"
                     )
-                ) {
+                )
+                {
                     var stateChangeRaised = false;
                     connection2.StateChange += (sender, e) => stateChangeRaised = true;
 
@@ -395,7 +399,8 @@ namespace Microsoft.Data.Sqlite
                 var connection = new SqliteConnection(
                     "Data Source=:memory:;Foreign Keys=" + foreignKeys
                 )
-            ) {
+            )
+            {
                 connection.Open();
 
                 Assert.Equal(expected, connection.ExecuteScalar<long>("PRAGMA foreign_keys;"));
@@ -409,7 +414,8 @@ namespace Microsoft.Data.Sqlite
                 var connection = new SqliteConnection(
                     "Data Source=:memory:;Recursive Triggers=True"
                 )
-            ) {
+            )
+            {
                 connection.Open();
 
                 Assert.Equal(1L, connection.ExecuteScalar<long>("PRAGMA recursive_triggers;"));
@@ -1477,7 +1483,8 @@ namespace Microsoft.Data.Sqlite
         public void GetSchema_throws_when_unknown_restrictions(
             string collectionName,
             int maxRestrictions
-        ) {
+        )
+        {
             using var connection = new SqliteConnection("Data Source=:memory:");
 
             var ex = Assert.Throws<ArgumentException>(

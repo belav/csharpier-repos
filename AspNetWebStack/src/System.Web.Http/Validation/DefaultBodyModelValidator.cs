@@ -35,7 +35,8 @@ namespace System.Web.Http.Validation
             ModelMetadataProvider metadataProvider,
             HttpActionContext actionContext,
             string keyPrefix
-        ) {
+        )
+        {
             if (type == null)
             {
                 throw Error.ArgumentNull("type");
@@ -112,7 +113,8 @@ namespace System.Web.Http.Validation
             BodyModelValidatorContext validationContext,
             object container,
             IEnumerable<ModelValidator> validators
-        ) {
+        )
+        {
             // Recursion guard to avoid stack overflows
             RuntimeHelpers.EnsureSufficientExecutionStack();
 
@@ -202,7 +204,8 @@ namespace System.Web.Http.Validation
         protected virtual bool ValidateProperties(
             ModelMetadata metadata,
             BodyModelValidatorContext validationContext
-        ) {
+        )
+        {
             if (metadata == null)
             {
                 throw Error.ArgumentNull("metadata");
@@ -220,7 +223,8 @@ namespace System.Web.Http.Validation
                     metadata.Model,
                     metadata.RealModelType
                 )
-            ) {
+            )
+            {
                 propertyScope.PropertyName = childMetadata.PropertyName;
                 if (
                     !ValidateNodeAndChildren(
@@ -229,7 +233,8 @@ namespace System.Web.Http.Validation
                         metadata.Model,
                         validators: null
                     )
-                ) {
+                )
+                {
                     isValid = false;
                 }
             }
@@ -249,7 +254,8 @@ namespace System.Web.Http.Validation
         protected virtual bool ValidateElements(
             IEnumerable model,
             BodyModelValidatorContext validationContext
-        ) {
+        )
+        {
             if (model == null)
             {
                 throw Error.ArgumentNull("model");
@@ -293,7 +299,8 @@ namespace System.Web.Http.Validation
                             model,
                             validators
                         )
-                    ) {
+                    )
+                    {
                         isValid = false;
                     }
                 }
@@ -320,7 +327,8 @@ namespace System.Web.Http.Validation
             BodyModelValidatorContext validationContext,
             object container,
             IEnumerable<ModelValidator> validators
-        ) {
+        )
+        {
             if (metadata == null)
             {
                 throw Error.ArgumentNull("metadata");
@@ -354,7 +362,8 @@ namespace System.Web.Http.Validation
                         modelKey = validationContext.RootPrefix;
                         foreach (
                             IBodyModelValidatorKeyBuilder keyBuilder in validationContext.KeyBuilders.Reverse()
-                        ) {
+                        )
+                        {
                             modelKey = keyBuilder.AppendTo(modelKey);
                         }
                     }
@@ -382,7 +391,8 @@ namespace System.Web.Http.Validation
                 if (
                     implementedInterface.IsGenericType
                     && implementedInterface.GetGenericTypeDefinition() == typeof(IEnumerable<>)
-                ) {
+                )
+                {
                     return implementedInterface.GetGenericArguments()[0];
                 }
             }

@@ -32,7 +32,8 @@ namespace System.Security.Cryptography
             string keyName,
             CngProvider provider,
             CngKeyOpenOptions openOptions
-        ) {
+        )
+        {
             if (keyName == null)
                 throw new ArgumentNullException(nameof(keyName));
             if (provider == null)

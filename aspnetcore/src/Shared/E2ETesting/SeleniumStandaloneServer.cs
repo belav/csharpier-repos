@@ -54,7 +54,8 @@ namespace Microsoft.AspNetCore.E2ETesting
             Process process,
             string sentinelPath,
             Process sentinelProcess
-        ) {
+        )
+        {
             Uri = uri;
             _process = process;
             _sentinelPath = sentinelPath;
@@ -67,7 +68,8 @@ namespace Microsoft.AspNetCore.E2ETesting
 
         public static async Task<SeleniumStandaloneServer> GetInstanceAsync(
             ITestOutputHelper output
-        ) {
+        )
+        {
             try
             {
                 await _semaphore.WaitAsync();
@@ -222,7 +224,8 @@ Captured output lines:
             Process process,
             string sentinelFile,
             int timeout
-        ) {
+        )
+        {
             // This sentinel process will start and will kill any rouge selenium server that want' torn down
             // via normal means.
             var psi = new ProcessStartInfo
@@ -269,7 +272,8 @@ Captured output lines:
             ITestOutputHelper output,
             string trackingFolder,
             Process process
-        ) {
+        )
+        {
             var pidFile = Path.Combine(trackingFolder, $"{process.Id}.{Guid.NewGuid()}.pid");
             for (var i = 0; i < 3; i++)
             {

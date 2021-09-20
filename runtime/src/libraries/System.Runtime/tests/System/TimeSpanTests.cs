@@ -230,7 +230,8 @@ namespace System.Tests
             double expectedMinutes,
             double expectedSeconds,
             double expectedMilliseconds
-        ) {
+        )
+        {
             // Use ToString() to prevent any rounding errors when comparing
             Assert.Equal(expectedDays.ToString("G15"), timeSpan.TotalDays.ToString("G15"));
             Assert.Equal(expectedHours, timeSpan.TotalHours);
@@ -1609,7 +1610,8 @@ namespace System.Tests
             int count,
             IFormatProvider provider,
             TimeSpan expected
-        ) {
+        )
+        {
             ReadOnlySpan<char> input = inputString.AsSpan(offset, count);
             TimeSpan result;
 
@@ -1642,7 +1644,8 @@ namespace System.Tests
             string inputString,
             IFormatProvider provider,
             Type exceptionType
-        ) {
+        )
+        {
             if (inputString != null)
             {
                 Assert.Throws(exceptionType, () => TimeSpan.Parse(inputString.AsSpan(), provider));
@@ -1659,7 +1662,8 @@ namespace System.Tests
             string inputString,
             string format,
             TimeSpan expected
-        ) {
+        )
+        {
             ReadOnlySpan<char> input = inputString.AsSpan();
 
             TimeSpan result;
@@ -1759,7 +1763,8 @@ namespace System.Tests
             string inputString,
             string format,
             Type exceptionType
-        ) {
+        )
+        {
             if (inputString != null && format != null)
             {
                 Assert.Throws(
@@ -2347,7 +2352,8 @@ namespace System.Tests
             string format,
             CultureInfo info,
             string expected
-        ) {
+        )
+        {
             Assert.Equal(expected, input.ToString(format, info));
             if (info == null)
             {
@@ -2381,7 +2387,8 @@ namespace System.Tests
             int minutes,
             int seconds,
             int milliseconds
-        ) {
+        )
+        {
             Assert.Equal(days, timeSpan.Days);
             Assert.Equal(hours, timeSpan.Hours);
             Assert.Equal(minutes, timeSpan.Minutes);
@@ -2461,7 +2468,8 @@ namespace System.Tests
         public static void ParseDifferentLengthFractionWithLeadingZeros(
             string input,
             TimeSpan expected
-        ) {
+        )
+        {
             Assert.Equal(expected, TimeSpan.Parse(input, CultureInfo.InvariantCulture));
             Assert.Equal(expected, TimeSpan.ParseExact(input, "g", CultureInfo.InvariantCulture));
         }
@@ -2577,7 +2585,8 @@ namespace System.Tests
             string format,
             CultureInfo info,
             string expected
-        ) {
+        )
+        {
             int charsWritten;
             Span<char> dst;
 

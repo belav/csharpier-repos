@@ -54,7 +54,8 @@ namespace Microsoft.EntityFrameworkCore
             string accountKey,
             string databaseName,
             Action<CosmosDbContextOptionsBuilder>? cosmosOptionsAction = null
-        ) {
+        )
+        {
             Check.NotNull(optionsBuilder, nameof(optionsBuilder));
             Check.NotNull(accountEndpoint, nameof(accountEndpoint));
             Check.NotEmpty(accountKey, nameof(accountKey));
@@ -112,7 +113,8 @@ namespace Microsoft.EntityFrameworkCore
             string connectionString,
             string databaseName,
             Action<CosmosDbContextOptionsBuilder>? cosmosOptionsAction = null
-        ) {
+        )
+        {
             Check.NotNull(optionsBuilder, nameof(optionsBuilder));
             Check.NotNull(connectionString, nameof(connectionString));
             Check.NotNull(databaseName, nameof(databaseName));

@@ -59,7 +59,8 @@ namespace Microsoft.AspNetCore.Builder.Extensions
                     out var matchedPath,
                     out var remainingPath
                 )
-            ) {
+            )
+            {
                 var path = context.Request.Path;
                 var pathBase = context.Request.PathBase;
 

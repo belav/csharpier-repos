@@ -72,7 +72,8 @@ namespace System.Web.Http.Tracing.Tracers
             MediaTypeFormatter formatter,
             ITraceWriter traceWriter,
             HttpRequestMessage request
-        ) {
+        )
+        {
             // If we have been asked to wrap a tracer around a formatter, it could be
             // already wrapped, and there is nothing to do.  But if we see it is a tracer
             // that is not associated with a request, we wrap it into a new tracer that
@@ -135,7 +136,8 @@ namespace System.Web.Http.Tracing.Tracers
             Type type,
             HttpRequestMessage request,
             MediaTypeHeaderValue mediaType
-        ) {
+        )
+        {
             MediaTypeFormatter formatter = null;
 
             TraceWriter.TraceBeginEnd(
@@ -214,7 +216,8 @@ namespace System.Web.Http.Tracing.Tracers
             Type type,
             HttpContentHeaders headers,
             MediaTypeHeaderValue mediaType
-        ) {
+        )
+        {
             InnerFormatter.SetDefaultContentHeaders(type, headers, mediaType);
         }
 
@@ -228,7 +231,8 @@ namespace System.Web.Http.Tracing.Tracers
             Stream readStream,
             HttpContent content,
             IFormatterLogger formatterLogger
-        ) {
+        )
+        {
             return ReadFromStreamAsyncCore(
                 type,
                 readStream,
@@ -244,7 +248,8 @@ namespace System.Web.Http.Tracing.Tracers
             HttpContent content,
             IFormatterLogger formatterLogger,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             return ReadFromStreamAsyncCore(
                 type,
                 readStream,
@@ -260,7 +265,8 @@ namespace System.Web.Http.Tracing.Tracers
             HttpContent content,
             IFormatterLogger formatterLogger,
             CancellationToken? cancellationToken
-        ) {
+        )
+        {
             HttpContentHeaders contentHeaders = content == null ? null : content.Headers;
             MediaTypeHeaderValue contentType =
                 contentHeaders == null ? null : contentHeaders.ContentType;
@@ -331,7 +337,8 @@ namespace System.Web.Http.Tracing.Tracers
             Stream writeStream,
             HttpContent content,
             TransportContext transportContext
-        ) {
+        )
+        {
             return WriteToStreamAsyncCore(type, value, writeStream, content, transportContext);
         }
 
@@ -342,7 +349,8 @@ namespace System.Web.Http.Tracing.Tracers
             HttpContent content,
             TransportContext transportContext,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             return WriteToStreamAsyncCore(
                 type,
                 value,
@@ -360,7 +368,8 @@ namespace System.Web.Http.Tracing.Tracers
             HttpContent content,
             TransportContext transportContext,
             CancellationToken? cancellationToken = null
-        ) {
+        )
+        {
             HttpContentHeaders contentHeaders = content == null ? null : content.Headers;
             MediaTypeHeaderValue contentType =
                 contentHeaders == null ? null : contentHeaders.ContentType;

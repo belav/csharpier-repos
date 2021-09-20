@@ -12,7 +12,8 @@ namespace System.Net.Security
         private SslStreamCertificateContext(
             X509Certificate2 target,
             X509Certificate2[] intermediates
-        ) {
+        )
+        {
             Certificate = target;
             IntermediateCertificates = intermediates;
         }

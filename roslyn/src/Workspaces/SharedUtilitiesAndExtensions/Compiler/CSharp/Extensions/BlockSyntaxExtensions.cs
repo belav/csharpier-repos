@@ -21,19 +21,22 @@ namespace Microsoft.CodeAnalysis.CSharp.Extensions
             ExpressionBodyPreference preference,
             out ExpressionSyntax expression,
             out SyntaxToken semicolonToken
-        ) {
+        )
+        {
             if (
                 preference != ExpressionBodyPreference.Never
                 && block != null
                 && block.Statements.Count == 1
-            ) {
+            )
+            {
                 var firstStatement = block.Statements[0];
 
                 var version = ((CSharpParseOptions)options).LanguageVersion;
                 if (
                     TryGetExpression(version, firstStatement, out expression, out semicolonToken)
                     && MatchesPreference(expression, preference)
-                ) {
+                )
+                {
                     // The close brace of the block may have important trivia on it (like
                     // comments or directives).  Preserve them on the semicolon when we
                     // convert to an expression body.
@@ -56,7 +59,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Extensions
             ExpressionBodyPreference preference,
             out ArrowExpressionClauseSyntax arrowExpression,
             out SyntaxToken semicolonToken
-        ) {
+        )
+        {
             var version = ((CSharpParseOptions)options).LanguageVersion;
 
             // We can always use arrow-expression bodies in C# 7 or above.
@@ -73,7 +77,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Extensions
                     out var expression,
                     out semicolonToken
                 )
-            ) {
+            )
+            {
                 arrowExpression = null;
                 semicolonToken = default;
                 return false;
@@ -102,7 +107,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Extensions
         public static bool MatchesPreference(
             ExpressionSyntax expression,
             ExpressionBodyPreference preference
-        ) {
+        )
+        {
             if (preference == ExpressionBodyPreference.WhenPossible)
             {
                 return true;
@@ -117,7 +123,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Extensions
             StatementSyntax firstStatement,
             out ExpressionSyntax expression,
             out SyntaxToken semicolonToken
-        ) {
+        )
+        {
             if (firstStatement is ExpressionStatementSyntax exprStatement)
             {
                 expression = exprStatement.Expression;

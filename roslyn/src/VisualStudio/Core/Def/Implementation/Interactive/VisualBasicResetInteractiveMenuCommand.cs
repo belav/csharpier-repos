@@ -19,12 +19,13 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Interactive
             OleMenuCommandService menuCommandService,
             IVsMonitorSelection monitorSelection,
             IComponentModel componentModel
-        ) : base(
-            ContentTypeNames.VisualBasicContentType,
-            menuCommandService,
-            monitorSelection,
-            componentModel
-        ) { }
+        )
+            : base(
+                ContentTypeNames.VisualBasicContentType,
+                menuCommandService,
+                monitorSelection,
+                componentModel
+            ) { }
 
         protected override string ProjectKind => VSLangProj.PrjKind.prjKindVBProject;
 

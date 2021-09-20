@@ -110,7 +110,8 @@ namespace System.Security.Cryptography.Algorithms.Tests
             KeyDescription key,
             byte[] signature,
             DSASignatureFormat signatureFormat
-        ) {
+        )
+        {
             int fieldSizeBytes = (key.FieldSizeInBits + 7) / 8;
 
             switch (signatureFormat)
@@ -290,7 +291,8 @@ namespace System.Security.Cryptography.Algorithms.Tests
         public void SignatureFormatsAreNotCompatible(
             DSASignatureFormat signFormat,
             DSASignatureFormat verifyFormat
-        ) {
+        )
+        {
             if (!SupportsSha2)
                 return;
 

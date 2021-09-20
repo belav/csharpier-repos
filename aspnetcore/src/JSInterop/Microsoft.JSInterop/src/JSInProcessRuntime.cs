@@ -16,7 +16,8 @@ namespace Microsoft.JSInterop
             string identifier,
             long targetInstanceId,
             params object?[]? args
-        ) {
+        )
+        {
             var resultJson = InvokeJS(
                 identifier,
                 JsonSerializer.Serialize(args, JsonSerializerOptions),

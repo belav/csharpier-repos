@@ -31,7 +31,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.LanguageService
         public AbstractCreateServicesOnTextViewConnection(
             IEnumerable<Lazy<ILanguageService, LanguageServiceMetadata>> languageServices,
             string languageName
-        ) {
+        )
+        {
             _languageServices = languageServices;
             _languageName = languageName;
         }
@@ -40,7 +41,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.LanguageService
             IWpfTextView textView,
             ConnectionReason reason,
             Collection<ITextBuffer> subjectBuffers
-        ) {
+        )
+        {
             if (!_initialized)
             {
                 CreateServices(_languageName);
@@ -66,7 +68,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.LanguageService
                 if (
                     languageService.Metadata.ServiceType == serviceTypeAssemblyQualifiedName
                     && languageService.Metadata.Language == languageName
-                ) {
+                )
+                {
                     _ = languageService.Value;
                     break;
                 }

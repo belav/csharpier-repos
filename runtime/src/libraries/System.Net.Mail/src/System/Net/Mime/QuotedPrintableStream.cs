@@ -334,7 +334,8 @@ namespace System.Net.Mime
             int count,
             AsyncCallback? callback,
             object? state
-        ) {
+        )
+        {
             ValidateBufferArguments(buffer, offset, count);
 
             WriteAsyncResult result = new WriteAsyncResult(
@@ -489,7 +490,8 @@ namespace System.Net.Mime
                     )
                     || _writeState!.CurrentLineLength + SizeOfEncodedChar + 2
                         >= EncodedStreamFactory.DefaultMaxLineLength
-                ) {
+                )
+                {
                     if (WriteState.Buffer.Length - WriteState.Length < SizeOfSoftCRLF)
                     {
                         return cur - offset; //ok because folding happens externally
@@ -508,7 +510,8 @@ namespace System.Net.Mime
                     if (
                         WriteState.Buffer.Length - WriteState.Length
                         < (_encodeCRLF ? SizeOfEncodedCRLF : SizeOfNonEncodedCRLF)
-                    ) {
+                    )
+                    {
                         return cur - offset;
                     }
                     cur++;
@@ -535,7 +538,8 @@ namespace System.Net.Mime
                     (buffer[cur] < 32 && buffer[cur] != '\t')
                     || buffer[cur] == '='
                     || buffer[cur] > 126
-                ) {
+                )
+                {
                     if (WriteState.Buffer.Length - WriteState.Length < SizeOfSoftCRLF)
                     {
                         return cur - offset;
@@ -559,7 +563,8 @@ namespace System.Net.Mime
                     if (
                         (buffer[cur] == (byte)'\t' || buffer[cur] == (byte)' ')
                         && (cur + 1 >= count + offset)
-                    ) {
+                    )
+                    {
                         if (WriteState.Buffer.Length - WriteState.Length < SizeOfEncodedChar)
                         {
                             return cur - offset;

@@ -80,7 +80,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                 ImmutableArray<ParameterSymbol> parameters,
                 bool isVararg,
                 StringBuilder builder
-            ) {
+            )
+            {
                 builder.Append('(');
                 bool needsComma = false;
 
@@ -163,7 +164,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             public override object VisitTypeParameter(
                 TypeParameterSymbol symbol,
                 StringBuilder builder
-            ) {
+            )
+            {
                 int ordinalOffset = 0;
 
                 // Is this a type parameter on a type?
@@ -182,7 +184,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                         NamedTypeSymbol curr = containingSymbol.ContainingType;
                         (object)curr != null;
                         curr = curr.ContainingType
-                    ) {
+                    )
+                    {
                         ordinalOffset += curr.Arity;
                     }
                     builder.Append('`');
@@ -198,7 +201,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                 if (
                     (object)symbol.ContainingSymbol != null
                     && symbol.ContainingSymbol.Name.Length != 0
-                ) {
+                )
+                {
                     Visit(symbol.ContainingSymbol, builder);
                     builder.Append('.');
                 }
@@ -216,7 +220,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                             symbol.ConstructedFrom,
                             TypeCompareKind.ConsiderEverything2
                         )
-                    ) {
+                    )
+                    {
                         builder.Append('`');
                         builder.Append(symbol.Arity);
                     }
@@ -228,7 +233,8 @@ namespace Microsoft.CodeAnalysis.CSharp
 
                         foreach (
                             var typeArgument in symbol.TypeArgumentsWithAnnotationsNoUseSiteDiagnostics
-                        ) {
+                        )
+                        {
                             if (needsComma)
                             {
                                 builder.Append(',');
@@ -259,7 +265,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                 if (
                     (object)symbol.ContainingNamespace != null
                     && symbol.ContainingNamespace.Name.Length != 0
-                ) {
+                )
+                {
                     Visit(symbol.ContainingNamespace, builder);
                     builder.Append('.');
                 }

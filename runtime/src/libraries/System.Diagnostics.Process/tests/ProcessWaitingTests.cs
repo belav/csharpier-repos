@@ -309,7 +309,8 @@ namespace System.Diagnostics.Tests
                     RemotelyInvokable.ExitWithCode,
                     exitCode.ToString()
                 )
-            ) {
+            )
+            {
                 var tcs = new TaskCompletionSource(
                     TaskCreationOptions.RunContinuationsAsynchronously
                 );

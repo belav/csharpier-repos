@@ -15,7 +15,8 @@ namespace System
         internal static string Paste(
             IEnumerable<string> arguments,
             bool pasteFirstArgumentUsingArgV0Rules
-        ) {
+        )
+        {
             var stringBuilder = new ValueStringBuilder(stackalloc char[256]);
 
             foreach (string argument in arguments)

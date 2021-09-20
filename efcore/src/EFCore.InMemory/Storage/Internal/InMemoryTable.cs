@@ -44,7 +44,8 @@ namespace Microsoft.EntityFrameworkCore.InMemory.Storage.Internal
             IInMemoryTable? baseTable,
             bool sensitiveLoggingEnabled,
             bool nullabilityCheckEnabled
-        ) {
+        )
+        {
             EntityType = entityType;
             BaseTable = baseTable;
             _keyValueFactory = entityType.FindPrimaryKey()!.GetPrincipalKeyValueFactory<TKey>();
@@ -97,7 +98,8 @@ namespace Microsoft.EntityFrameworkCore.InMemory.Storage.Internal
         public virtual InMemoryIntegerValueGenerator<TProperty> GetIntegerValueGenerator<TProperty>(
             IProperty property,
             IReadOnlyList<IInMemoryTable> tables
-        ) {
+        )
+        {
             _integerGenerators ??= new Dictionary<int, IInMemoryIntegerValueGenerator>();
 
             var propertyIndex = property.GetIndex();
@@ -249,7 +251,8 @@ namespace Microsoft.EntityFrameworkCore.InMemory.Storage.Internal
             IProperty property,
             object? rowValue,
             Dictionary<IProperty, object?> concurrencyConflicts
-        ) {
+        )
+        {
             if (property.IsConcurrencyToken)
             {
                 var comparer = property.GetKeyValueComparer();
@@ -272,7 +275,8 @@ namespace Microsoft.EntityFrameworkCore.InMemory.Storage.Internal
                             originalValue
                         )
                     )
-                ) {
+                )
+                {
                     concurrencyConflicts.Add(property, rowValue);
 
                     return true;
@@ -309,7 +313,8 @@ namespace Microsoft.EntityFrameworkCore.InMemory.Storage.Internal
                             row[index],
                             concurrencyConflicts
                         )
-                    ) {
+                    )
+                    {
                         continue;
                     }
 
@@ -372,7 +377,8 @@ namespace Microsoft.EntityFrameworkCore.InMemory.Storage.Internal
             IProperty property,
             ValueComparer? comparer,
             IUpdateEntry entry
-        ) {
+        )
+        {
             var value = SnapshotValue(comparer, entry.GetCurrentValue(property));
 
             var converter = property.GetValueConverter() ?? property.FindTypeMapping()?.Converter;
@@ -392,7 +398,8 @@ namespace Microsoft.EntityFrameworkCore.InMemory.Storage.Internal
             IProperty property,
             object? propertyValue,
             IList<IProperty> nullabilityErrors
-        ) {
+        )
+        {
             if (!_nullabilityCheckEnabled)
             {
                 return false;
@@ -411,7 +418,8 @@ namespace Microsoft.EntityFrameworkCore.InMemory.Storage.Internal
         private void ThrowNullabilityErrorException(
             IUpdateEntry entry,
             IList<IProperty> nullabilityErrors
-        ) {
+        )
+        {
             Check.NotNull(entry, nameof(entry));
             Check.NotNull(nullabilityErrors, nameof(nullabilityErrors));
 
@@ -446,7 +454,8 @@ namespace Microsoft.EntityFrameworkCore.InMemory.Storage.Internal
         protected virtual void ThrowUpdateConcurrencyException(
             IUpdateEntry entry,
             Dictionary<IProperty, object?> concurrencyConflicts
-        ) {
+        )
+        {
             Check.NotNull(entry, nameof(entry));
             Check.NotNull(concurrencyConflicts, nameof(concurrencyConflicts));
 

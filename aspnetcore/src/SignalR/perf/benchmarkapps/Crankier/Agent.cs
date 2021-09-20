@@ -127,7 +127,8 @@ namespace Microsoft.AspNetCore.SignalR.Crankier
             string targetAddress,
             HttpTransportType transportType,
             int numberOfConnectionsPerWorker
-        ) {
+        )
+        {
             if (_workers.TryGetValue(id, out var worker))
             {
                 await worker.Worker.ConnectAsync(
@@ -143,7 +144,8 @@ namespace Microsoft.AspNetCore.SignalR.Crankier
             int numberOfWorkers,
             HttpTransportType transportType,
             int numberOfConnections
-        ) {
+        )
+        {
             TargetAddress = targetAddress;
             TotalConnectionsRequested = numberOfConnections;
 

@@ -73,7 +73,8 @@ namespace System.Threading
                         UIntPtr.Zero,
                         IntPtr.Zero
                     )
-                ) {
+                )
+                {
                     int lastError = Marshal.GetLastWin32Error();
                     var exception = new OutOfMemoryException();
                     exception.HResult = lastError;

@@ -108,7 +108,8 @@ namespace System.ComponentModel
         internal static AsyncOperation CreateOperation(
             object? userSuppliedState,
             SynchronizationContext syncContext
-        ) {
+        )
+        {
             AsyncOperation newOp = new AsyncOperation(userSuppliedState, syncContext);
             return newOp;
         }

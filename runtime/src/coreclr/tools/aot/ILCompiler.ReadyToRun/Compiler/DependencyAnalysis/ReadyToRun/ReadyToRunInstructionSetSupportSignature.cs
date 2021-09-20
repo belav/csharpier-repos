@@ -17,7 +17,8 @@ namespace ILCompiler.DependencyAnalysis.ReadyToRun
 
         public static string ToInstructionSetSupportString(
             InstructionSetSupport instructionSetSupport
-        ) {
+        )
+        {
             StringBuilder builder = new StringBuilder();
             InstructionSet[] supportedInstructionSets =
                 instructionSetSupport.SupportedFlags.ToArray();

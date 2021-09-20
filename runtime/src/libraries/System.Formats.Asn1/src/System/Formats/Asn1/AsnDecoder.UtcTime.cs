@@ -59,7 +59,8 @@ namespace System.Formats.Asn1
             out int bytesConsumed,
             int twoDigitYearMax = 2049,
             Asn1Tag? expectedTag = null
-        ) {
+        )
+        {
             if (twoDigitYearMax < 1 || twoDigitYearMax > 9999)
             {
                 throw new ArgumentOutOfRangeException(nameof(twoDigitYearMax));
@@ -109,7 +110,8 @@ namespace System.Formats.Asn1
             ReadOnlySpan<byte> contentOctets,
             AsnEncodingRules ruleSet,
             int twoDigitYearMax
-        ) {
+        )
+        {
             // The full allowed formats (T-REC-X.680-201510 sec 47.3)
             // a) YYMMDD
             // b1) hhmm
@@ -144,7 +146,8 @@ namespace System.Formats.Asn1
                 contentOctets.Length < NoSecondsZulu
                 || contentOctets.Length > HasSecondsOffset
                 || (contentOctets.Length & 1) != 1
-            ) {
+            )
+            {
                 throw new AsnContentException();
             }
 

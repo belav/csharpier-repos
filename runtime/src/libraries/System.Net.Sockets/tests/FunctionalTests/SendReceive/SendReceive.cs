@@ -34,7 +34,8 @@ namespace System.Net.Sockets.Tests
                     SocketType.Stream,
                     ProtocolType.Tcp
                 )
-            ) {
+            )
+            {
                 Type expectedExceptionType =
                     length == null
                         ? typeof(ArgumentNullException)
@@ -89,7 +90,8 @@ namespace System.Net.Sockets.Tests
 
             using (
                 var server = new Socket(listenAt.AddressFamily, SocketType.Stream, ProtocolType.Tcp)
-            ) {
+            )
+            {
                 server.BindToAnonymousPort(listenAt);
                 server.Listen(ListenBacklog);
 
@@ -138,7 +140,8 @@ namespace System.Net.Sockets.Tests
                                         int i = 0, remaining = received;
                                         i < recvBuffers.Count && remaining > 0;
                                         i++
-                                    ) {
+                                    )
+                                    {
                                         ArraySegment<byte> buffer = recvBuffers[i];
                                         int toAdd = Math.Min(buffer.Count, remaining);
                                         receivedChecksum.Add(buffer.Array, buffer.Offset, toAdd);
@@ -157,7 +160,8 @@ namespace System.Net.Sockets.Tests
                         SocketType.Stream,
                         ProtocolType.Tcp
                     )
-                ) {
+                )
+                {
                     await ConnectAsync(client, clientEndpoint);
 
                     var random = new Random();
@@ -168,7 +172,8 @@ namespace System.Net.Sockets.Tests
                             int sent = 0, remaining = BytesToSend;
                             remaining > 0;
                             remaining -= sent
-                        ) {
+                        )
+                        {
                             random.NextBytes(sendBuffer);
                             sent = await SendAsync(
                                 client,
@@ -205,7 +210,8 @@ namespace System.Net.Sockets.Tests
                                 int i = 0, remaining = sent;
                                 i < sendBuffers.Count && remaining > 0;
                                 i++
-                            ) {
+                            )
+                            {
                                 ArraySegment<byte> buffer = sendBuffers[i];
                                 int toAdd = Math.Min(buffer.Count, remaining);
                                 sentChecksum.Add(buffer.Array, buffer.Offset, toAdd);
@@ -238,7 +244,8 @@ namespace System.Net.Sockets.Tests
             )
             using (
                 var client = new Socket(listenAt.AddressFamily, SocketType.Stream, ProtocolType.Tcp)
-            ) {
+            )
+            {
                 listener.BindToAnonymousPort(listenAt);
                 listener.Listen(1);
 
@@ -298,7 +305,8 @@ namespace System.Net.Sockets.Tests
 
             using (
                 var server = new Socket(listenAt.AddressFamily, SocketType.Stream, ProtocolType.Tcp)
-            ) {
+            )
+            {
                 server.BindToAnonymousPort(listenAt);
                 server.Listen(1);
 
@@ -364,7 +372,8 @@ namespace System.Net.Sockets.Tests
                         SocketType.Stream,
                         ProtocolType.Tcp
                     )
-                ) {
+                )
+                {
                     await ConnectAsync(client, clientEndpoint);
 
                     var random = new Random();
@@ -443,10 +452,12 @@ namespace System.Net.Sockets.Tests
         public async Task SendRecv_Stream_TCP_MultipleConcurrentReceives(
             IPAddress listenAt,
             bool useMultipleBuffers
-        ) {
+        )
+        {
             using (
                 var server = new Socket(listenAt.AddressFamily, SocketType.Stream, ProtocolType.Tcp)
-            ) {
+            )
+            {
                 server.BindToAnonymousPort(listenAt);
                 server.Listen(1);
 
@@ -457,7 +468,8 @@ namespace System.Net.Sockets.Tests
                         SocketType.Stream,
                         ProtocolType.Tcp
                     )
-                ) {
+                )
+                {
                     Task clientConnect = ConnectAsync(client, clientEndpoint);
                     using (Socket remote = await AcceptAsync(server))
                     {
@@ -585,10 +597,12 @@ namespace System.Net.Sockets.Tests
         public async Task SendRecv_Stream_TCP_MultipleConcurrentSends(
             IPAddress listenAt,
             bool useMultipleBuffers
-        ) {
+        )
+        {
             using (
                 var server = new Socket(listenAt.AddressFamily, SocketType.Stream, ProtocolType.Tcp)
-            ) {
+            )
+            {
                 byte[] sendData = new byte[5000000];
                 new Random(42).NextBytes(sendData);
 
@@ -609,7 +623,8 @@ namespace System.Net.Sockets.Tests
                         SocketType.Stream,
                         ProtocolType.Tcp
                     )
-                ) {
+                )
+                {
                     Task clientConnect = ConnectAsync(client, clientEndpoint);
                     using (Socket remote = await AcceptAsync(server))
                     {
@@ -686,7 +701,8 @@ namespace System.Net.Sockets.Tests
         public async Task SendRecvPollSync_TcpListener_Socket(
             IPAddress listenAt,
             bool pollBeforeOperation
-        ) {
+        )
+        {
             const int BytesToSend = 123456;
             const int ListenBacklog = 1;
             const int TestTimeout = 30000;
@@ -755,7 +771,8 @@ namespace System.Net.Sockets.Tests
                                 SocketType.Stream,
                                 ProtocolType.Tcp
                             )
-                        ) {
+                        )
+                        {
                             await ConnectAsync(client, clientEndpoint);
 
                             if (pollBeforeOperation)
@@ -772,7 +789,8 @@ namespace System.Net.Sockets.Tests
                                 int remaining = BytesToSend, sent = 0;
                                 remaining > 0;
                                 remaining -= sent
-                            ) {
+                            )
+                            {
                                 random.NextBytes(sendBuffer);
 
                                 if (pollBeforeOperation)
@@ -833,7 +851,8 @@ namespace System.Net.Sockets.Tests
                     SocketType.Stream,
                     ProtocolType.Tcp
                 )
-            ) {
+            )
+            {
                 listener.Bind(new IPEndPoint(IPAddress.Loopback, 0));
                 listener.Listen(1);
 
@@ -903,7 +922,8 @@ namespace System.Net.Sockets.Tests
                     SocketType.Stream,
                     ProtocolType.Tcp
                 )
-            ) {
+            )
+            {
                 listener.Bind(new IPEndPoint(IPAddress.Loopback, 0));
                 listener.Listen(1);
 
@@ -947,7 +967,8 @@ namespace System.Net.Sockets.Tests
         public async Task SendRecv_BlockingNonBlocking_LingerTimeout_Success(
             bool blocking,
             int lingerTimeout
-        ) {
+        )
+        {
             if (UsesSync)
                 return;
 
@@ -964,7 +985,8 @@ namespace System.Net.Sockets.Tests
                     SocketType.Stream,
                     ProtocolType.Tcp
                 )
-            ) {
+            )
+            {
                 client.Blocking = blocking;
                 listener.Blocking = blocking;
 
@@ -1021,7 +1043,8 @@ namespace System.Net.Sockets.Tests
                     SocketType.Stream,
                     ProtocolType.Tcp
                 )
-            ) {
+            )
+            {
                 listener.Bind(new IPEndPoint(IPAddress.Loopback, 0));
                 listener.Listen(1);
 
@@ -1080,7 +1103,8 @@ namespace System.Net.Sockets.Tests
                     SocketType.Stream,
                     ProtocolType.Tcp
                 )
-            ) {
+            )
+            {
                 listener.Bind(new IPEndPoint(IPAddress.Loopback, 0));
                 listener.Listen(1);
 
@@ -1130,7 +1154,8 @@ namespace System.Net.Sockets.Tests
                     SocketType.Stream,
                     ProtocolType.Tcp
                 )
-            ) {
+            )
+            {
                 SocketException e;
                 e = Assert.Throws<SocketException>(() => socket.SendBufferSize = 0);
                 Assert.Equal(SocketError.InvalidArgument, e.SocketErrorCode);
@@ -1341,7 +1366,8 @@ namespace System.Net.Sockets.Tests
             bool receiveOrSend,
             bool ipv6Server,
             bool dualModeClient
-        ) {
+        )
+        {
             // RHEL7 kernel has a bug preventing close(AF_UNKNOWN) to succeed with IPv6 sockets.
             // In this case Dispose will trigger a graceful shutdown, which means that receive will succeed on socket2.
             // TODO: Remove this, once CI machines are updated to a newer kernel.
@@ -1629,7 +1655,8 @@ namespace System.Net.Sockets.Tests
                     SocketType.Stream,
                     ProtocolType.Tcp
                 )
-            ) {
+            )
+            {
                 listener.BindToAnonymousPort(IPAddress.Loopback);
                 listener.Listen(1);
 
@@ -1733,7 +1760,8 @@ namespace System.Net.Sockets.Tests
                     SocketType.Dgram,
                     ProtocolType.Udp
                 )
-            ) {
+            )
+            {
                 client.Bind(new IPEndPoint(IPAddress.Loopback, 0));
 
                 var cts = new CancellationTokenSource();
@@ -1762,7 +1790,8 @@ namespace System.Net.Sockets.Tests
                         SocketType.Dgram,
                         ProtocolType.Udp
                     )
-                ) {
+                )
+                {
                     server.SendTo(new byte[1] { 42 }, client.LocalEndPoint);
                     server.SendTo(new byte[1] { 43 }, client.LocalEndPoint);
                 }
@@ -1793,7 +1822,8 @@ namespace System.Net.Sockets.Tests
                     SocketType.Stream,
                     ProtocolType.Tcp
                 )
-            ) {
+            )
+            {
                 listener.BindToAnonymousPort(IPAddress.Loopback);
                 listener.Listen(1);
 
@@ -1848,7 +1878,8 @@ namespace System.Net.Sockets.Tests
                     SocketType.Stream,
                     ProtocolType.Tcp
                 )
-            ) {
+            )
+            {
                 listener.BindToAnonymousPort(IPAddress.Loopback);
                 listener.Listen(1);
 

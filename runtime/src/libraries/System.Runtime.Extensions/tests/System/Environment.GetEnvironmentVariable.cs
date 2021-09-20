@@ -71,7 +71,8 @@ namespace System.Tests
                 && System.Tests.SetEnvironmentVariable.IsSupportedTarget(
                     EnvironmentVariableTarget.User
                 )
-            ) {
+            )
+            {
                 AssertExtensions.Throws<ArgumentException>(
                     "variable",
                     null,
@@ -243,7 +244,8 @@ namespace System.Tests
         )]
         public void GetEnumerator_LinqOverDictionaryEntries_Success(
             EnvironmentVariableTarget? target
-        ) {
+        )
+        {
             IDictionary envVars =
                 target != null
                     ? Environment.GetEnvironmentVariables(target.Value)
@@ -256,7 +258,8 @@ namespace System.Tests
                     .Select(
                         de => new KeyValuePair<string, string>((string)de.Key, (string)de.Value)
                     )
-            ) {
+            )
+            {
                 Assert.NotNull(envVar.Key);
             }
         }
@@ -275,7 +278,8 @@ namespace System.Tests
         )]
         public void EnvironmentVariablesAreHashtable_SpecificTarget(
             EnvironmentVariableTarget target
-        ) {
+        )
+        {
             // On NetFX, the type returned was always Hashtable
             Assert.IsType<Hashtable>(Environment.GetEnvironmentVariables(target));
         }
@@ -287,7 +291,8 @@ namespace System.Tests
         )]
         public void EnumerateYieldsDictionaryEntryFromIEnumerable_SpecificTarget(
             EnvironmentVariableTarget target
-        ) {
+        )
+        {
             // GetEnvironmentVariables has always yielded DictionaryEntry from IEnumerable
             IDictionary vars = Environment.GetEnvironmentVariables(target);
             IEnumerator enumerator = ((IEnumerable)vars).GetEnumerator();

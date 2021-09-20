@@ -77,7 +77,8 @@ namespace System.Web.Mvc
             ModelMetadata metadata,
             ControllerContext context,
             IEnumerable<Attribute> attributes
-        ) {
+        )
+        {
             _adaptersLock.EnterReadLock();
 
             try
@@ -90,7 +91,8 @@ namespace System.Web.Mvc
                     AddImplicitRequiredAttributeForValueTypes
                     && metadata.IsRequired
                     && !attributes.Any(a => a is RequiredAttribute)
-                ) {
+                )
+                {
                     attributes = attributes.Concat(new[] { new RequiredAttribute() });
                 }
 
@@ -155,7 +157,8 @@ namespace System.Web.Mvc
         public static void RegisterAdapterFactory(
             Type attributeType,
             DataAnnotationsModelValidationFactory factory
-        ) {
+        )
+        {
             ValidateAttributeType(attributeType);
             ValidateAttributeFactory(factory);
 
@@ -186,7 +189,8 @@ namespace System.Web.Mvc
 
         public static void RegisterDefaultAdapterFactory(
             DataAnnotationsModelValidationFactory factory
-        ) {
+        )
+        {
             ValidateAttributeFactory(factory);
 
             DefaultAttributeFactory = factory;
@@ -197,7 +201,8 @@ namespace System.Web.Mvc
         private static ConstructorInfo GetAttributeAdapterConstructor(
             Type attributeType,
             Type adapterType
-        ) {
+        )
+        {
             ConstructorInfo constructor = adapterType.GetConstructor(
                 new[] { typeof(ModelMetadata), typeof(ControllerContext), attributeType }
             );
@@ -305,7 +310,8 @@ namespace System.Web.Mvc
         public static void RegisterValidatableObjectAdapterFactory(
             Type modelType,
             DataAnnotationsValidatableObjectAdapterFactory factory
-        ) {
+        )
+        {
             ValidateValidatableModelType(modelType);
             ValidateValidatableFactory(factory);
 
@@ -344,7 +350,8 @@ namespace System.Web.Mvc
         /// </summary>
         public static void RegisterDefaultValidatableObjectAdapterFactory(
             DataAnnotationsValidatableObjectAdapterFactory factory
-        ) {
+        )
+        {
             ValidateValidatableFactory(factory);
 
             DefaultValidatableFactory = factory;
@@ -416,7 +423,8 @@ namespace System.Web.Mvc
 
         private static void ValidateValidatableFactory(
             DataAnnotationsValidatableObjectAdapterFactory factory
-        ) {
+        )
+        {
             if (factory == null)
             {
                 throw new ArgumentNullException("factory");
@@ -527,7 +535,8 @@ namespace System.Web.Mvc
             Dictionary<Type, DataAnnotationsModelValidationFactory> dictionary,
             Type validataionAttributeType,
             DataAnnotationsModelValidationFactory factory
-        ) {
+        )
+        {
             Contract.Assert(dictionary != null);
             if (validataionAttributeType != null)
             {
@@ -539,7 +548,8 @@ namespace System.Web.Mvc
             Dictionary<Type, DataAnnotationsModelValidationFactory> dictionary,
             Type attributeType,
             string ruleName
-        ) {
+        )
+        {
             AddValidationAttributeAdapter(
                 dictionary,
                 attributeType,

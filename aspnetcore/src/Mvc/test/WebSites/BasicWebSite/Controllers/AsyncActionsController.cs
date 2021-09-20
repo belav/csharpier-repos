@@ -106,7 +106,8 @@ namespace BasicWebSite.Controllers
 
         public ValueTask<IActionResult> PreCompletedValueTaskOfIActionResultExceptionAction(
             string message
-        ) {
+        )
+        {
             throw new CustomException();
         }
 
@@ -117,7 +118,8 @@ namespace BasicWebSite.Controllers
 
         public ValueTask<ContentResult> PreCompletedValueTaskOfContentResultExceptionAction(
             string message
-        ) {
+        )
+        {
             throw new CustomException();
         }
 
@@ -151,7 +153,8 @@ namespace BasicWebSite.Controllers
 
         public CustomAwaitable<IActionResult> CustomAwaitableOfIActionResultExceptionAction(
             string message
-        ) {
+        )
+        {
             throw new CustomException();
         }
 
@@ -162,7 +165,8 @@ namespace BasicWebSite.Controllers
 
         public CustomAwaitable<ContentResult> CustomAwaitableOfContentResultExceptionAction(
             string message
-        ) {
+        )
+        {
             throw new CustomException();
         }
 

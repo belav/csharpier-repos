@@ -82,7 +82,8 @@ namespace System.Linq.Expressions.Tests
                     ulong.MaxValue,
                     ulong.MaxValue + 1m
                 }
-            ) {
+            )
+            {
                 VerifyDecimalConstant(value, useInterpreter);
             }
         }
@@ -104,7 +105,8 @@ namespace System.Linq.Expressions.Tests
                     },
                     (Action<object>)delegate { }
                 }
-            ) {
+            )
+            {
                 VerifyDelegateConstant(value, useInterpreter);
             }
         }
@@ -125,7 +127,8 @@ namespace System.Linq.Expressions.Tests
                     double.PositiveInfinity,
                     double.NaN
                 }
-            ) {
+            )
+            {
                 VerifyDoubleConstant(value, useInterpreter);
             }
         }
@@ -144,7 +147,8 @@ namespace System.Linq.Expressions.Tests
         {
             foreach (
                 El value in new El[] { (El)0, El.A, El.B, (El)long.MaxValue, (El)long.MinValue }
-            ) {
+            )
+            {
                 VerifyEnumLongConstant(value, useInterpreter);
             }
         }
@@ -165,7 +169,8 @@ namespace System.Linq.Expressions.Tests
                     float.PositiveInfinity,
                     float.NaN
                 }
-            ) {
+            )
+            {
                 VerifyFloatConstant(value, useInterpreter);
             }
         }
@@ -182,7 +187,8 @@ namespace System.Linq.Expressions.Tests
                         return null;
                     }
                 }
-            ) {
+            )
+            {
                 VerifyFuncOfObjectConstant(value, useInterpreter);
             }
         }
@@ -208,7 +214,8 @@ namespace System.Linq.Expressions.Tests
                     new D(0),
                     new D(5)
                 }
-            ) {
+            )
+            {
                 VerifyIEquatableOfCustomConstant(value, useInterpreter);
             }
         }
@@ -218,7 +225,8 @@ namespace System.Linq.Expressions.Tests
         {
             foreach (
                 IEquatable<D> value in new IEquatable<D>[] { null, new D(), new D(0), new D(5) }
-            ) {
+            )
+            {
                 VerifyIEquatableOfCustom2Constant(value, useInterpreter);
             }
         }
@@ -378,7 +386,8 @@ namespace System.Linq.Expressions.Tests
                     typeof(PrivateGenericClass<>),
                     typeof(PrivateGenericClass<int>)
                 }
-            ) {
+            )
+            {
                 VerifyTypeConstant(value, useInterpreter);
             }
         }
@@ -429,7 +438,8 @@ namespace System.Linq.Expressions.Tests
                     GlobalMethod(typeof(PrivateGenericClass<int>)),
                     GlobalMethod(typeof(PrivateGenericClass<>))
                 }
-            ) {
+            )
+            {
                 VerifyMethodInfoConstant(value, useInterpreter);
             }
         }
@@ -443,7 +453,8 @@ namespace System.Linq.Expressions.Tests
                     .Concat(typeof(string).GetConstructors())
                     .Concat(typeof(List<>).GetConstructors())
                     .Append(null)
-            ) {
+            )
+            {
                 VerifyConstructorInfoConstant(value, useInterpreter);
             }
         }
@@ -451,21 +462,24 @@ namespace System.Linq.Expressions.Tests
         [Theory, ClassData(typeof(CompilationTypes))]
         public static void CheckGenericWithStructRestrictionWithEnumConstantTest(
             bool useInterpreter
-        ) {
+        )
+        {
             CheckGenericWithStructRestrictionConstantHelper<E>(useInterpreter);
         }
 
         [Theory, ClassData(typeof(CompilationTypes))]
         public static void CheckGenericWithStructRestrictionWithStructConstantTest(
             bool useInterpreter
-        ) {
+        )
+        {
             CheckGenericWithStructRestrictionConstantHelper<S>(useInterpreter);
         }
 
         [Theory, ClassData(typeof(CompilationTypes))]
         public static void CheckGenericWithStructRestrictionWithStructWithStringAndValueConstantTest(
             bool useInterpreter
-        ) {
+        )
+        {
             CheckGenericWithStructRestrictionConstantHelper<Scs>(useInterpreter);
         }
 
@@ -795,7 +809,8 @@ namespace System.Linq.Expressions.Tests
         private static void VerifyIEquatableOfCustomConstant(
             IEquatable<C> value,
             bool useInterpreter
-        ) {
+        )
+        {
             Expression<Func<IEquatable<C>>> e = Expression.Lambda<Func<IEquatable<C>>>(
                 Expression.Constant(value, typeof(IEquatable<C>)),
                 Enumerable.Empty<ParameterExpression>()
@@ -807,7 +822,8 @@ namespace System.Linq.Expressions.Tests
         private static void VerifyIEquatableOfCustom2Constant(
             IEquatable<D> value,
             bool useInterpreter
-        ) {
+        )
+        {
             Expression<Func<IEquatable<D>>> e = Expression.Lambda<Func<IEquatable<D>>>(
                 Expression.Constant(value, typeof(IEquatable<D>)),
                 Enumerable.Empty<ParameterExpression>()
@@ -979,7 +995,8 @@ namespace System.Linq.Expressions.Tests
         private static void VerifyConstructorInfoConstant(
             ConstructorInfo value,
             bool useInterpreter
-        ) {
+        )
+        {
             Expression<Func<ConstructorInfo>> e = Expression.Lambda<Func<ConstructorInfo>>(
                 Expression.Constant(value, typeof(ConstructorInfo))
             );

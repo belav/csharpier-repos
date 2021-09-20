@@ -27,9 +27,8 @@ namespace System.Net.Http.Headers
 
         internal NameValueWithParametersHeaderValue() { }
 
-        protected NameValueWithParametersHeaderValue(
-            NameValueWithParametersHeaderValue source
-        ) : base(source)
+        protected NameValueWithParametersHeaderValue(NameValueWithParametersHeaderValue source)
+            : base(source)
         {
             _parameters = source._parameters.Clone();
         }
@@ -80,7 +79,8 @@ namespace System.Net.Http.Headers
         public static bool TryParse(
             [NotNullWhen(true)] string? input,
             [NotNullWhen(true)] out NameValueWithParametersHeaderValue? parsedValue
-        ) {
+        )
+        {
             int index = 0;
             parsedValue = null;
 
@@ -91,7 +91,8 @@ namespace System.Net.Http.Headers
                     ref index,
                     out object? output
                 )
-            ) {
+            )
+            {
                 parsedValue = (NameValueWithParametersHeaderValue)output!;
                 return true;
             }
@@ -102,7 +103,8 @@ namespace System.Net.Http.Headers
             string? input,
             int startIndex,
             out object? parsedValue
-        ) {
+        )
+        {
             Debug.Assert(input != null);
             Debug.Assert(startIndex >= 0);
 

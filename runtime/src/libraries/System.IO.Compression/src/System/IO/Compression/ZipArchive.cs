@@ -124,7 +124,8 @@ namespace System.IO.Compression
             ZipArchiveMode mode,
             bool leaveOpen,
             Encoding? entryNameEncoding
-        ) {
+        )
+        {
             if (stream == null)
                 throw new ArgumentNullException(nameof(stream));
 
@@ -378,7 +379,8 @@ namespace System.IO.Compression
                 if (
                     value != null
                     && (value.Equals(Encoding.BigEndianUnicode) || value.Equals(Encoding.Unicode))
-                ) {
+                )
+                {
                     throw new ArgumentException(
                         SR.EntryNameEncodingNotSupported,
                         nameof(EntryNameEncoding)
@@ -511,7 +513,8 @@ namespace System.IO.Compression
                         saveExtraFieldsAndComments,
                         out currentHeader
                     )
-                ) {
+                )
+                {
                     AddEntry(new ZipArchiveEntry(this, currentHeader));
                     numberOfEntries++;
                 }
@@ -604,7 +607,8 @@ namespace System.IO.Compression
         private void TryReadZip64EndOfCentralDirectory(
             ZipEndOfCentralDirectoryBlock eocd,
             long eocdStart
-        ) {
+        )
+        {
             // Only bother looking for the Zip64-EOCD stuff if we suspect it is needed because some value is FFFFFFFFF
             // because these are the only two values we need, we only worry about these
             // if we don't find the Zip64-EOCD, we just give up and try to use the original values
@@ -613,7 +617,8 @@ namespace System.IO.Compression
                 || eocd.OffsetOfStartOfCentralDirectoryWithRespectToTheStartingDiskNumber
                     == ZipHelper.Mask32Bit
                 || eocd.NumberOfEntriesInTheCentralDirectory == ZipHelper.Mask16Bit
-            ) {
+            )
+            {
                 // Read Zip64 End of Central Directory Locator
 
                 // This seeks forwards almost to the beginning of the Zip64-EOCDL, one byte after where the signature would be located
@@ -630,7 +635,8 @@ namespace System.IO.Compression
                         Zip64EndOfCentralDirectoryLocator.SignatureConstant,
                         Zip64EndOfCentralDirectoryLocator.SignatureSize
                     )
-                ) {
+                )
+                {
                     Debug.Assert(_archiveReader != null);
 
                     // use locator to get to Zip64-EOCD
@@ -721,7 +727,8 @@ namespace System.IO.Compression
 #if DEBUG_FORCE_ZIP64
                 || _forceZip64
 #endif
-            ) {
+            )
+            {
                 // if we need zip 64, write zip 64 eocd and locator
                 long zip64EOCDRecordStart = _archiveStream.Position;
                 Zip64EndOfCentralDirectoryRecord.WriteBlock(

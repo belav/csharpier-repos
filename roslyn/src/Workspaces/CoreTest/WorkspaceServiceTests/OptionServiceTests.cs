@@ -229,7 +229,8 @@ namespace Microsoft.CodeAnalysis.UnitTests.WorkspaceServices
                 PerLanguageOption2<bool> option,
                 IOptionProvider optionProvider,
                 bool isSerializable
-            ) {
+            )
+            {
                 var optionService = TestOptionService.GetService(workspace, optionProvider);
                 var optionSet = optionService.GetOptions();
                 var optionKey = new OptionKey(option, LanguageNames.CSharp);
@@ -295,7 +296,8 @@ namespace Microsoft.CodeAnalysis.UnitTests.WorkspaceServices
                     SerializableOptionSet serializableOptionSet,
                     OptionKey optionKey,
                     bool expectedChangedOption
-                ) {
+                )
+                {
                     var changedOptions = serializableOptionSet.GetChangedOptions();
                     if (expectedChangedOption)
                     {

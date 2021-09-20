@@ -46,7 +46,8 @@ namespace Microsoft.EntityFrameworkCore.InMemory.Query.Internal
         public InMemoryProjectionBindingExpressionVisitor(
             InMemoryQueryableMethodTranslatingExpressionVisitor queryableMethodTranslatingExpressionVisitor,
             InMemoryExpressionTranslatingExpressionVisitor expressionTranslatingExpressionVisitor
-        ) {
+        )
+        {
             _queryableMethodTranslatingExpressionVisitor =
                 queryableMethodTranslatingExpressionVisitor;
             _expressionTranslatingExpressionVisitor = expressionTranslatingExpressionVisitor;
@@ -62,7 +63,8 @@ namespace Microsoft.EntityFrameworkCore.InMemory.Query.Internal
         public virtual Expression Translate(
             InMemoryQueryExpression queryExpression,
             Expression expression
-        ) {
+        )
+        {
             _queryExpression = queryExpression;
             _clientEval = false;
 
@@ -121,13 +123,15 @@ namespace Microsoft.EntityFrameworkCore.InMemory.Query.Internal
                     || expression is EntityShaperExpression
                     || expression is IncludeExpression
                 )
-            ) {
+            )
+            {
                 // This skips the group parameter from GroupJoin
                 if (
                     expression is ParameterExpression parameter
                     && parameter.Type.IsGenericType
                     && parameter.Type.GetGenericTypeDefinition() == typeof(IEnumerable<>)
-                ) {
+                )
+                {
                     return parameter;
                 }
 
@@ -153,7 +157,8 @@ namespace Microsoft.EntityFrameworkCore.InMemory.Query.Internal
                                 methodCallExpression.Method.IsGenericMethod
                                 && methodCallExpression.Method.DeclaringType == typeof(Enumerable)
                                 && methodCallExpression.Method.Name == nameof(Enumerable.ToList)
-                            ) {
+                            )
+                            {
                                 var subqueryTranslation =
                                     _queryableMethodTranslatingExpressionVisitor.TranslateSubquery(
                                         methodCallExpression.Arguments[0]
@@ -287,7 +292,8 @@ namespace Microsoft.EntityFrameworkCore.InMemory.Query.Internal
                 if (
                     entityShaperExpression.ValueBufferExpression
                     is ProjectionBindingExpression projectionBindingExpression
-                ) {
+                )
+                {
                     if (projectionBindingExpression.ProjectionMember == null)
                     {
                         // We don't process binding with client projection
@@ -311,7 +317,8 @@ namespace Microsoft.EntityFrameworkCore.InMemory.Query.Internal
                             entityProjectionExpression,
                             out var entityProjectionBinding
                         )
-                    ) {
+                    )
+                    {
                         entityProjectionBinding = new ProjectionBindingExpression(
                             _queryExpression,
                             _queryExpression.AddToProjection(entityProjectionExpression)
@@ -455,7 +462,8 @@ namespace Microsoft.EntityFrameworkCore.InMemory.Query.Internal
                     ((MemberAssignment)newBindings[i]).Expression is UnaryExpression unaryExpression
                     && unaryExpression.NodeType == ExpressionType.Convert
                     && unaryExpression.Operand == QueryCompilationContext.NotTranslatedExpression
-                ) {
+                )
+                {
                     return QueryCompilationContext.NotTranslatedExpression;
                 }
             }
@@ -487,7 +495,8 @@ namespace Microsoft.EntityFrameworkCore.InMemory.Query.Internal
             if (
                 @object?.Type.IsNullableType() == true
                 && !methodCallExpression.Object!.Type.IsNullableType()
-            ) {
+            )
+            {
                 var nullableReturnType = methodCallExpression.Type.MakeNullable();
                 if (!methodCallExpression.Type.IsNullableType())
                 {
@@ -608,7 +617,8 @@ namespace Microsoft.EntityFrameworkCore.InMemory.Query.Internal
             if (
                 targetType != expression.Type
                 && targetType.TryGetElementType(typeof(IQueryable<>)) == null
-            ) {
+            )
+            {
                 Check.DebugAssert(
                     targetType.MakeNullable() == expression.Type,
                     "Not a nullable to non-nullable conversion"

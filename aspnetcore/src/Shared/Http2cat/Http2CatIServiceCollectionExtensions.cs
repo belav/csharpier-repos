@@ -13,7 +13,8 @@ namespace Microsoft.Extensions.DependencyInjection
         public static IServiceCollection UseHttp2Cat(
             this IServiceCollection services,
             Action<Http2CatOptions> configureOptions
-        ) {
+        )
+        {
             services.AddSingleton<IConnectionFactory, SocketConnectionFactory>();
             services.AddHostedService<Http2CatHostedService>();
             services.Configure(configureOptions);

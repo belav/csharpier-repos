@@ -63,7 +63,8 @@ namespace System.Net
             int size,
             AsyncCallback? callback,
             object? state
-        ) {
+        )
+        {
             return _sslStream.BeginWrite(buffer, offset, size, callback, state);
         }
 
@@ -88,7 +89,8 @@ namespace System.Net
             int count,
             AsyncCallback? callback,
             object? state
-        ) {
+        )
+        {
             return _sslStream.BeginRead(buffer, offset, count, callback, state);
         }
 

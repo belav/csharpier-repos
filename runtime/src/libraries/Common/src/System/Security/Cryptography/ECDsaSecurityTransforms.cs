@@ -65,7 +65,8 @@ namespace System.Security.Cryptography
                 internal ECDsaSecurityTransforms(
                     SafeSecKeyRefHandle publicKey,
                     SafeSecKeyRefHandle privateKey
-                ) {
+                )
+                {
                     KeySizeValue = _ecc.SetKeyAndGetSize(
                         SecKeyPair.PublicPrivatePair(publicKey, privateKey)
                     );
@@ -126,7 +127,8 @@ namespace System.Security.Cryptography
                     ReadOnlySpan<byte> source,
                     Span<byte> destination,
                     out int bytesWritten
-                ) {
+                )
+                {
                     SecKeyPair keys = GetKeys();
                     if (keys.PrivateKey == null)
                     {
@@ -168,7 +170,8 @@ namespace System.Security.Cryptography
                 public override bool VerifyHash(
                     ReadOnlySpan<byte> hash,
                     ReadOnlySpan<byte> signature
-                ) {
+                )
+                {
                     ThrowIfDisposed();
 
                     // The signature format for .NET is r.Concat(s). Each of r and s are of length BitsToBytes(KeySize), even
@@ -245,7 +248,8 @@ namespace System.Security.Cryptography
                     ReadOnlySpan<byte> passwordBytes,
                     ReadOnlySpan<byte> source,
                     out int bytesRead
-                ) {
+                )
+                {
                     ThrowIfDisposed();
                     base.ImportEncryptedPkcs8PrivateKey(passwordBytes, source, out bytesRead);
                 }
@@ -254,7 +258,8 @@ namespace System.Security.Cryptography
                     ReadOnlySpan<char> password,
                     ReadOnlySpan<byte> source,
                     out int bytesRead
-                ) {
+                )
+                {
                     ThrowIfDisposed();
                     base.ImportEncryptedPkcs8PrivateKey(password, source, out bytesRead);
                 }

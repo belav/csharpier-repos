@@ -95,11 +95,12 @@ namespace Roslyn.Utilities
         public AsyncLazy(
             Func<CancellationToken, Task<T>> asynchronousComputeFunction,
             bool cacheResult
-        ) : this(
-            asynchronousComputeFunction,
-            synchronousComputeFunction: null,
-            cacheResult: cacheResult
-        ) { }
+        )
+            : this(
+                asynchronousComputeFunction,
+                synchronousComputeFunction: null,
+                cacheResult: cacheResult
+            ) { }
 
         /// <summary>
         /// Creates an AsyncLazy that supports both asynchronous computation and inline synchronous
@@ -117,7 +118,8 @@ namespace Roslyn.Utilities
             Func<CancellationToken, Task<T>> asynchronousComputeFunction,
             Func<CancellationToken, T>? synchronousComputeFunction,
             bool cacheResult
-        ) {
+        )
+        {
             Contract.ThrowIfNull(asynchronousComputeFunction);
             _asynchronousComputeFunction = asynchronousComputeFunction;
             _synchronousComputeFunction = synchronousComputeFunction;
@@ -401,7 +403,8 @@ namespace Roslyn.Utilities
             public AsynchronousComputationToStart(
                 Func<CancellationToken, Task<T>> asynchronousComputeFunction,
                 CancellationTokenSource cancellationTokenSource
-            ) {
+            )
+            {
                 AsynchronousComputeFunction = asynchronousComputeFunction;
                 CancellationTokenSource = cancellationTokenSource;
             }
@@ -411,7 +414,8 @@ namespace Roslyn.Utilities
             AsynchronousComputationToStart computationToStart,
             Request? requestToCompleteSynchronously,
             CancellationToken callerCancellationToken
-        ) {
+        )
+        {
             var cancellationToken = computationToStart.CancellationTokenSource.Token;
 
             // DO NOT ACCESS ANY FIELDS OR STATE BEYOND THIS POINT. Since this function
@@ -588,7 +592,8 @@ namespace Roslyn.Utilities
             public void RegisterForCancellation(
                 Action<object?> callback,
                 CancellationToken cancellationToken
-            ) {
+            )
+            {
                 _cancellationToken = cancellationToken;
                 _cancellationTokenRegistration = cancellationToken.Register(callback, this);
             }

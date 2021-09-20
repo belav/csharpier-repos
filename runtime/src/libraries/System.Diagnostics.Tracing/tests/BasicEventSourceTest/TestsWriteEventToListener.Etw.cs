@@ -101,7 +101,8 @@ namespace BasicEventSourceTests
 
         static partial void Test_WriteEvent_ArgsBasicTypes_Etw_Validate_DateTime(
             EventSourceTest log
-        ) {
+        )
+        {
             DateTime now = DateTime.Now;
             log.EventDateTime(now);
             Assert.Equal(24, LoudListener.LastEvent.EventId);

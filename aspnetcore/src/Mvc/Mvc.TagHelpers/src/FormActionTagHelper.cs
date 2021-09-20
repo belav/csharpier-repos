@@ -283,7 +283,8 @@ namespace Microsoft.AspNetCore.Mvc.TagHelpers
                     || Fragment != null
                     || Route != null
                     || (_routeValues != null && _routeValues.Count > 0)
-                ) {
+                )
+                {
                     // User specified a FormAction and one of the bound attributes; can't override that FormAction
                     // attribute.
                     throw new InvalidOperationException(

@@ -75,7 +75,8 @@ namespace Microsoft.Cci
 
         public IEnumerable<MethodImplementation> GetExplicitImplementationOverrides(
             EmitContext context
-        ) {
+        )
+        {
             return SpecializedCollections.EmptyEnumerable<MethodImplementation>();
         }
 

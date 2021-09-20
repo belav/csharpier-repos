@@ -41,7 +41,8 @@ namespace Microsoft.Extensions.Configuration.Test
             string path,
             string text = "temp",
             bool absolute = false
-        ) {
+        )
+        {
             var fullPath = absolute ? path : Path.Combine(RootPath, path);
 
             File.WriteAllText(fullPath, text);

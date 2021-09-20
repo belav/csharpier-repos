@@ -18,7 +18,8 @@ namespace AutoMapper.UnitTests.Bug
                 Destination destination,
                 int destMember,
                 ResolutionContext context
-            ) {
+            )
+            {
                 return 1000;
             }
         }

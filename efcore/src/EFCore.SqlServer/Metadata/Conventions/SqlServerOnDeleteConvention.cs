@@ -32,7 +32,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
             IConventionForeignKey? foreignKey,
             IConventionForeignKey? oldForeignKey,
             IConventionContext<IConventionForeignKey> context
-        ) {
+        )
+        {
             if (foreignKey is not null && foreignKey.IsInModel)
             {
                 foreignKey.Builder.OnDelete(GetTargetDeleteBehavior(foreignKey));
@@ -71,7 +72,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
                                 || s == selfReferencingSkipNavigation.Inverse
                         )
                 && selfReferencingSkipNavigation != selfReferencingSkipNavigation.Inverse
-            ) {
+            )
+            {
                 selfReferencingSkipNavigation.Inverse!.ForeignKey?.Builder.OnDelete(
                     GetTargetDeleteBehavior(selfReferencingSkipNavigation.Inverse.ForeignKey)
                 );

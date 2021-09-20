@@ -182,7 +182,8 @@ namespace Microsoft.AspNetCore
             if (
                 _expectedRid.StartsWith("win", StringComparison.Ordinal)
                 && !_expectedRid.Contains("arm")
-            ) {
+            )
+            {
                 Assert.All(
                     runtimeLibrary["native"],
                     item =>

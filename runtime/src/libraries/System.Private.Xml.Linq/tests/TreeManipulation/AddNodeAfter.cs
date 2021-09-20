@@ -204,7 +204,8 @@ namespace XLinqTests
             XContainer orig,
             int startPos,
             IEnumerable<object> newNodes
-        ) {
+        )
+        {
             int counter = 0;
             for (XNode node = orig.FirstNode; node != null; node = node.NextNode, counter++)
             {
@@ -315,7 +316,8 @@ namespace XLinqTests
                     new XText("text2"),
                     new XDocument()
                 }
-            ) {
+            )
+            {
                 try
                 {
                     var doc = new XDocument(new XElement("A"));

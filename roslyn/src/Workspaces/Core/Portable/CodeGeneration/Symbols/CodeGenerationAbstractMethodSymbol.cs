@@ -27,15 +27,17 @@ namespace Microsoft.CodeAnalysis.CodeGeneration
             string name,
             ImmutableArray<AttributeData> returnTypeAttributes,
             string documentationCommentXml = null
-        ) : base(
-            containingType?.ContainingAssembly,
-            containingType,
-            attributes,
-            declaredAccessibility,
-            modifiers,
-            name,
-            documentationCommentXml
-        ) {
+        )
+            : base(
+                containingType?.ContainingAssembly,
+                containingType,
+                attributes,
+                declaredAccessibility,
+                modifiers,
+                name,
+                documentationCommentXml
+            )
+        {
             _returnTypeAttributes = returnTypeAttributes.NullToEmpty();
         }
 

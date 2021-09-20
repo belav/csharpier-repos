@@ -55,7 +55,8 @@ namespace System.ConfigurationTests
                 public override SettingsPropertyValueCollection GetPropertyValues(
                     SettingsContext context,
                     SettingsPropertyCollection collection
-                ) {
+                )
+                {
                     SettingsPropertyValueCollection result = new SettingsPropertyValueCollection();
                     SettingsProperty property = new SettingsProperty(
                         "StringPropertyWithProvider",

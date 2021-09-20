@@ -87,7 +87,8 @@ namespace System.Linq.Expressions.Tests
                     Expression.Constant(value, typeof(ValueType)),
                     Expression.Constant(value, typeof(object))
                 }
-            ) {
+            )
+            {
                 VerifyUnaryConvert(
                     Expression.Convert(o, typeof(DayOfWeek)),
                     enumValue,
@@ -335,13 +336,15 @@ namespace System.Linq.Expressions.Tests
                         (DayOfWeek?)DayOfWeek.Monday,
                         (TimeSpan?)new TimeSpan(3, 14, 15)
                     }
-                ) {
+                )
+                {
                     Type t = o.GetType();
                     Type n = typeof(Nullable<>).MakeGenericType(t);
 
                     foreach (
                         var c in new[] { Expression.Constant(o, n), Expression.Constant(null, n) }
-                    ) {
+                    )
+                    {
                         foreach (var i in t.GetTypeInfo().ImplementedInterfaces)
                         {
                             yield return factory(c, i);

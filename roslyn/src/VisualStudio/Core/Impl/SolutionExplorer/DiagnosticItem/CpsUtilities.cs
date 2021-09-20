@@ -34,7 +34,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.SolutionExplore
         public static string? ExtractAnalyzerFilePath(
             string projectDirectoryPath,
             string analyzerNodeCanonicalName
-        ) {
+        )
+        {
             // The canonical name may or may not start with the path to the project's directory.
             if (!projectDirectoryPath.EndsWith("\\"))
             {
@@ -46,7 +47,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.SolutionExplore
                     projectDirectoryPath,
                     StringComparison.OrdinalIgnoreCase
                 )
-            ) {
+            )
+            {
                 // Extract the rest of the string
                 analyzerNodeCanonicalName = analyzerNodeCanonicalName.Substring(
                     projectDirectoryPath.Length
@@ -75,7 +77,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.SolutionExplore
                     StringComparison.OrdinalIgnoreCase
                 )
                 != backslashIndex + 1
-            ) {
+            )
+            {
                 return analyzerNodeCanonicalName;
             }
 

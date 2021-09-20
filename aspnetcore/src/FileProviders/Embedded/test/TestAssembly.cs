@@ -16,11 +16,13 @@ namespace Microsoft.Extensions.FileProviders
         public TestAssembly(
             string manifest,
             string manifestName = "Microsoft.Extensions.FileProviders.Embedded.Manifest.xml"
-        ) {
+        )
+        {
             ManifestStream = new MemoryStream();
             using (
                 var writer = new StreamWriter(ManifestStream, Encoding.UTF8, 1024, leaveOpen: true)
-            ) {
+            )
+            {
                 writer.Write(manifest);
             }
 
@@ -31,7 +33,8 @@ namespace Microsoft.Extensions.FileProviders
         public TestAssembly(
             TestEntry entry,
             string manifestName = "Microsoft.Extensions.FileProviders.Embedded.Manifest.xml"
-        ) {
+        )
+        {
             ManifestName = manifestName;
 
             var manifest = new XDocument(
@@ -49,7 +52,8 @@ namespace Microsoft.Extensions.FileProviders
                     ManifestStream,
                     new XmlWriterSettings { CloseOutput = false }
                 )
-            ) {
+            )
+            {
                 manifest.WriteTo(writer);
             }
 

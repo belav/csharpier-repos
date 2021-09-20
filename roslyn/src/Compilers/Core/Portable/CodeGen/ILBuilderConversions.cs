@@ -15,7 +15,8 @@ namespace Microsoft.CodeAnalysis.CodeGen
             Microsoft.Cci.PrimitiveTypeCode fromPredefTypeKind,
             Microsoft.Cci.PrimitiveTypeCode toPredefTypeKind,
             bool @checked
-        ) {
+        )
+        {
             bool fromUnsigned = fromPredefTypeKind.IsUnsigned();
 
             switch (toPredefTypeKind)

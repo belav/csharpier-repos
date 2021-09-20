@@ -52,7 +52,8 @@ internal static partial class Interop
             CryptProvParam dwParam,
             Span<byte> pbData,
             ref int dwDataLen
-        ) {
+        )
+        {
             if (pbData.IsEmpty)
             {
                 return CryptGetProvParam(safeProvHandle, dwParam, IntPtr.Zero, ref dwDataLen, 0);

@@ -72,7 +72,8 @@ namespace Microsoft.CodeAnalysis.ConvertToInterpolatedString
             if (
                 CodeRefactoringHelpers.IsNodeUnderselected(top, textSpan)
                 || IsStringConcat(syntaxFacts, top.Parent, semanticModel, cancellationToken)
-            ) {
+            )
+            {
                 return;
             }
 
@@ -112,7 +113,8 @@ namespace Microsoft.CodeAnalysis.ConvertToInterpolatedString
                             isVerbatimStringLiteral
                             != syntaxFacts.IsVerbatimStringLiteral(lit.GetFirstToken())
                     )
-                ) {
+                )
+                {
                     return;
                 }
             }
@@ -135,7 +137,8 @@ namespace Microsoft.CodeAnalysis.ConvertToInterpolatedString
             SyntaxNode root,
             SyntaxNode top,
             SyntaxNode interpolatedString
-        ) {
+        )
+        {
             var newRoot = root.ReplaceNode(top, interpolatedString);
             return Task.FromResult(document.WithSyntaxRoot(newRoot));
         }
@@ -144,7 +147,8 @@ namespace Microsoft.CodeAnalysis.ConvertToInterpolatedString
             Document document,
             bool isVerbatimStringLiteral,
             ArrayBuilder<SyntaxNode> pieces
-        ) {
+        )
+        {
             var syntaxFacts = document.GetRequiredLanguageService<ISyntaxFactsService>();
             var generator = SyntaxGenerator.GetGenerator(document);
             var startToken = generator.CreateInterpolatedStringStartToken(isVerbatimStringLiteral)
@@ -207,7 +211,8 @@ namespace Microsoft.CodeAnalysis.ConvertToInterpolatedString
                     syntaxFacts.IsInterpolatedStringExpression(piece)
                     && syntaxFacts.IsVerbatimInterpolatedStringExpression(piece)
                         == isVerbatimStringLiteral
-                ) {
+                )
+                {
                     // "piece" is itself an interpolated string (of the same "verbatimity" as the new interpolated string)
                     // "a" + $"{1+ 1}" -> instead of $"a{$"{1 + 1}"}" inline the interpolated part: $"a{1 + 1}"
                     syntaxFacts.GetPartsOfInterpolationExpression(
@@ -226,7 +231,8 @@ namespace Microsoft.CodeAnalysis.ConvertToInterpolatedString
                         if (
                             currentContentIsStringOrCharacterLiteral
                             && previousContentWasStringLiteralExpression
-                        ) {
+                        )
+                        {
                             // if piece starts with a text and the previous part was a string, merge the two parts (see also above)
                             // "a" + $"b{1 + 1}" -> "a" and "b" get merged
                             var newText = ConcatenateTextToTextNode(
@@ -269,7 +275,8 @@ namespace Microsoft.CodeAnalysis.ConvertToInterpolatedString
             SyntaxNode interpolatedStringTextNode,
             string textWithoutQuotes,
             string value
-        ) {
+        )
+        {
             var existingText = interpolatedStringTextNode.GetFirstToken().Text;
             var existingValue = interpolatedStringTextNode.GetFirstToken().ValueText;
             var newText = existingText + textWithoutQuotes;
@@ -291,7 +298,8 @@ namespace Microsoft.CodeAnalysis.ConvertToInterpolatedString
             SyntaxNode node,
             SemanticModel semanticModel,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             if (!IsStringConcat(syntaxFacts, node, semanticModel, cancellationToken))
             {
                 pieces.Add(node);
@@ -309,7 +317,8 @@ namespace Microsoft.CodeAnalysis.ConvertToInterpolatedString
             SyntaxNode? expression,
             SemanticModel semanticModel,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             if (!syntaxFacts.IsBinaryExpression(expression))
             {
                 return false;
@@ -327,9 +336,8 @@ namespace Microsoft.CodeAnalysis.ConvertToInterpolatedString
 
         private class MyCodeAction : CodeAction.DocumentChangeAction
         {
-            public MyCodeAction(
-                Func<CancellationToken, Task<Document>> createChangedDocument
-            ) : base(FeaturesResources.Convert_to_interpolated_string, createChangedDocument) { }
+            public MyCodeAction(Func<CancellationToken, Task<Document>> createChangedDocument)
+                : base(FeaturesResources.Convert_to_interpolated_string, createChangedDocument) { }
         }
     }
 }

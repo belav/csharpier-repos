@@ -26,14 +26,15 @@ namespace Microsoft.EntityFrameworkCore.Storage.ValueConversion
             string falseValue,
             string trueValue,
             ConverterMappingHints? mappingHints = null
-        ) : base(
-            Check.NotNull(falseValue, nameof(falseValue)),
-            Check.NotNull(trueValue, nameof(trueValue)),
-            FromProvider(trueValue),
-            new ConverterMappingHints(size: Math.Max(falseValue.Length, trueValue.Length)).With(
-                mappingHints
-            )
-        ) { }
+        )
+            : base(
+                Check.NotNull(falseValue, nameof(falseValue)),
+                Check.NotNull(trueValue, nameof(trueValue)),
+                FromProvider(trueValue),
+                new ConverterMappingHints(size: Math.Max(falseValue.Length, trueValue.Length)).With(
+                    mappingHints
+                )
+            ) { }
 
         /// <summary>
         ///     A <see cref="ValueConverterInfo" /> for the default use of this converter.

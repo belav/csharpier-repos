@@ -25,10 +25,8 @@ namespace System.Linq.Parallel
         // Constructs a new instance of a min/max associative operator.
         //
 
-        internal NullableDecimalMinMaxAggregationOperator(
-            IEnumerable<decimal?> child,
-            int sign
-        ) : base(child)
+        internal NullableDecimalMinMaxAggregationOperator(IEnumerable<decimal?> child, int sign)
+            : base(child)
         {
             Debug.Assert(sign == -1 || sign == 1, "invalid sign");
             _sign = sign;
@@ -53,7 +51,8 @@ namespace System.Linq.Parallel
                     ParallelMergeOptions.FullyBuffered,
                     true
                 )
-            ) {
+            )
+            {
                 // Just return null right away for empty results.
                 if (!enumerator.MoveNext())
                 {
@@ -100,7 +99,8 @@ namespace System.Linq.Parallel
             QueryOperatorEnumerator<decimal?, TKey> source,
             object? sharedData,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             return new NullableDecimalMinMaxAggregationOperatorEnumerator<TKey>(
                 source,
                 index,

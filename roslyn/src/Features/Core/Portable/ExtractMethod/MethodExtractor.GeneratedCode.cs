@@ -18,7 +18,8 @@ namespace Microsoft.CodeAnalysis.ExtractMethod
                 SyntaxAnnotation methodNameAnnotation,
                 SyntaxAnnotation callsiteAnnotation,
                 SyntaxAnnotation methodDefinitionAnnotation
-            ) {
+            )
+            {
                 Contract.ThrowIfNull(document);
                 Contract.ThrowIfNull(methodNameAnnotation);
                 Contract.ThrowIfNull(callsiteAnnotation);

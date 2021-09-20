@@ -51,7 +51,8 @@ namespace Newtonsoft.Json.Utilities
                 string contractTypeName,
                 string createdTypeName,
                 string builderTypeName
-            ) {
+            )
+            {
                 ContractTypeName = contractTypeName;
                 CreatedTypeName = createdTypeName;
                 BuilderTypeName = builderTypeName;
@@ -190,7 +191,8 @@ namespace Newtonsoft.Json.Utilities
             Type collectionItemType,
             [NotNullWhen(true)] out Type? createdType,
             [NotNullWhen(true)] out ObjectConstructor<object>? parameterizedCreator
-        ) {
+        )
+        {
             if (underlyingType.IsGenericType())
             {
                 Type underlyingTypeDefinition = underlyingType.GetGenericTypeDefinition();
@@ -238,7 +240,8 @@ namespace Newtonsoft.Json.Utilities
             Type valueItemType,
             [NotNullWhen(true)] out Type? createdType,
             [NotNullWhen(true)] out ObjectConstructor<object>? parameterizedCreator
-        ) {
+        )
+        {
             if (underlyingType.IsGenericType())
             {
                 Type underlyingTypeDefinition = underlyingType.GetGenericTypeDefinition();

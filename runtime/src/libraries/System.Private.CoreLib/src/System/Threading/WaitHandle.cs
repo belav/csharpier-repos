@@ -197,7 +197,8 @@ namespace System.Threading
             ReadOnlySpan<WaitHandle> waitHandles,
             Span<SafeWaitHandle?> safeWaitHandles,
             Span<IntPtr> unsafeWaitHandles
-        ) {
+        )
+        {
             Debug.Assert(waitHandles.Length > 0);
             Debug.Assert(waitHandles.Length <= MaxWaitHandles);
 
@@ -261,7 +262,8 @@ namespace System.Threading
             WaitHandle[] waitHandles,
             bool waitAll,
             int millisecondsTimeout
-        ) {
+        )
+        {
             if (waitHandles == null)
             {
                 throw new ArgumentNullException(nameof(waitHandles), SR.ArgumentNull_Waithandles);
@@ -278,7 +280,8 @@ namespace System.Threading
             ReadOnlySpan<WaitHandle> waitHandles,
             bool waitAll,
             int millisecondsTimeout
-        ) {
+        )
+        {
             if (waitHandles.Length == 0)
             {
                 throw new ArgumentException(SR.Argument_EmptyWaithandleArray, nameof(waitHandles));
@@ -354,7 +357,8 @@ namespace System.Threading
         private static int WaitAnyMultiple(
             ReadOnlySpan<SafeWaitHandle> safeWaitHandles,
             int millisecondsTimeout
-        ) {
+        )
+        {
             // - Callers are expected to manage the lifetimes of the safe wait handles such that they would not expire during
             //   this wait
             // - If the safe wait handle that satisfies the wait is an abandoned mutex, the wait result would reflect that and
@@ -400,7 +404,8 @@ namespace System.Threading
             WaitHandle toSignal,
             WaitHandle toWaitOn,
             int millisecondsTimeout
-        ) {
+        )
+        {
             if (toSignal == null)
             {
                 throw new ArgumentNullException(nameof(toSignal));

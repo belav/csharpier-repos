@@ -18,17 +18,18 @@ namespace Microsoft.Extensions.DependencyModel
             IEnumerable<string> assemblies,
             IEnumerable<Dependency> dependencies,
             bool serviceable
-        ) : this(
-            type,
-            name,
-            version,
-            hash,
-            assemblies,
-            dependencies,
-            serviceable,
-            path: null,
-            hashPath: null
-        ) { }
+        )
+            : this(
+                type,
+                name,
+                version,
+                hash,
+                assemblies,
+                dependencies,
+                serviceable,
+                path: null,
+                hashPath: null
+            ) { }
 
         public CompilationLibrary(
             string type,
@@ -70,7 +71,8 @@ namespace Microsoft.Extensions.DependencyModel
 
         public IEnumerable<string> ResolveReferencePaths(
             params ICompilationAssemblyResolver[] customResolvers
-        ) {
+        )
+        {
             var assemblies = new List<string>();
 
             if (customResolvers?.Length > 0)
@@ -90,7 +92,8 @@ namespace Microsoft.Extensions.DependencyModel
         private IEnumerable<string> ResolveReferencePaths(
             ICompilationAssemblyResolver resolver,
             List<string> assemblies
-        ) {
+        )
+        {
             if (!resolver.TryResolveAssemblyPaths(this, assemblies))
             {
                 throw new InvalidOperationException(SR.Format(SR.LibraryLocationNotFound, Name));

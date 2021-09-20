@@ -20,7 +20,8 @@ namespace Microsoft.CodeAnalysis
             this AssemblyIdentity assemblyGrantingAccessIdentity,
             ImmutableArray<byte> assemblyWantingAccessKey,
             ImmutableArray<byte> grantedToPublicKey
-        ) {
+        )
+        {
             // This gets a bit complicated. Let's break it down.
             //
             // First off, let's assume that the "other" assembly is GrantingAssembly.DLL, that the "this"

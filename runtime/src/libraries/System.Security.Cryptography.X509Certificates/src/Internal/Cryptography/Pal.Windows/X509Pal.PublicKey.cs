@@ -58,7 +58,8 @@ namespace Internal.Cryptography.Pal
             byte[] encodedKeyValue,
             byte[] encodedParameters,
             ICertificatePal? certificatePal
-        ) {
+        )
+        {
             int algId =
                 Interop.Crypt32.FindOidInfo(
                     CryptOidInfoKeyType.CRYPT_OID_INFO_OID_KEY,
@@ -107,7 +108,8 @@ namespace Internal.Cryptography.Pal
                     certificatePal.CertContext,
                     importFlags
                 )
-            ) {
+            )
+            {
                 CngKeyBlobFormat blobFormat;
                 byte[] keyBlob;
                 string? curveName = GetCurveName(bCryptKeyHandle);
@@ -147,7 +149,8 @@ namespace Internal.Cryptography.Pal
         private static SafeBCryptKeyHandle ImportPublicKeyInfo(
             SafeCertContextHandle certContext,
             CryptImportPublicKeyInfoFlags importFlags
-        ) {
+        )
+        {
             unsafe
             {
                 SafeBCryptKeyHandle bCryptKeyHandle;
@@ -181,7 +184,8 @@ namespace Internal.Cryptography.Pal
         private static byte[] ExportKeyBlob(
             SafeBCryptKeyHandle bCryptKeyHandle,
             CngKeyBlobFormat blobFormat
-        ) {
+        )
+        {
             string blobFormatString = blobFormat.Format;
 
             int numBytesNeeded = 0;
@@ -218,7 +222,8 @@ namespace Internal.Cryptography.Pal
             ref ECParameters ecParams,
             byte[] ecBlob,
             bool includePrivateParameters
-        ) {
+        )
+        {
             // We now have a buffer laid out as follows:
             //     BCRYPT_ECCKEY_BLOB   header
             //     byte[cbKey]          Q.X
@@ -254,7 +259,8 @@ namespace Internal.Cryptography.Pal
         private static byte[] DecodeKeyBlob(
             CryptDecodeObjectStructType lpszStructType,
             byte[] encodedKeyValue
-        ) {
+        )
+        {
             int cbDecoded = 0;
             if (
                 !Interop.crypt32.CryptDecodeObject(
@@ -289,7 +295,8 @@ namespace Internal.Cryptography.Pal
         private static byte[] ConstructDSSPublicKeyCspBlob(
             byte[] encodedKeyValue,
             byte[] encodedParameters
-        ) {
+        )
+        {
             byte[] decodedKeyValue = DecodeDssKeyValue(encodedKeyValue)!;
 
             byte[] p,
@@ -386,7 +393,8 @@ namespace Internal.Cryptography.Pal
             out byte[] p,
             out byte[] q,
             out byte[] g
-        ) {
+        )
+        {
             unsafe
             {
                 (p, q, g) = encodedParameters.DecodeObject(
@@ -419,7 +427,8 @@ namespace Internal.Cryptography.Pal
         private static string? GetPropertyAsString(
             SafeBCryptKeyHandle cryptHandle,
             string propertyName
-        ) {
+        )
+        {
             Debug.Assert(!cryptHandle.IsInvalid);
             byte[]? value = GetProperty(cryptHandle, propertyName);
             if (value == null || value.Length == 0)

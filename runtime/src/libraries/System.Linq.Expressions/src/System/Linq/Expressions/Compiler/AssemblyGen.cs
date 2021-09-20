@@ -45,7 +45,8 @@ namespace System.Linq.Expressions.Compiler
             string name,
             [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)] Type parent,
             TypeAttributes attr
-        ) {
+        )
+        {
             ContractUtils.RequiresNotNull(name, nameof(name));
             ContractUtils.RequiresNotNull(parent, nameof(parent));
 

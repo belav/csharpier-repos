@@ -81,7 +81,8 @@ namespace System.Diagnostics
             ref Interop.procfs.ParsedStat procFsStat,
             ref Interop.procfs.ParsedStatus procFsStatus,
             string? processName = null
-        ) {
+        )
+        {
             int pid = procFsStat.pid;
 
             var pi = new ProcessInfo()
@@ -123,7 +124,8 @@ namespace System.Diagnostics
                             CultureInfo.InvariantCulture,
                             out tid
                         ) && Interop.procfs.TryReadStatFile(pid, tid, out stat)
-                    ) {
+                    )
+                    {
                         pi._threadInfoList.Add(
                             new ThreadInfo()
                             {
@@ -169,7 +171,8 @@ namespace System.Diagnostics
                         CultureInfo.InvariantCulture,
                         out pid
                     )
-                ) {
+                )
+                {
                     Debug.Assert(pid >= 0);
                     yield return pid;
                 }

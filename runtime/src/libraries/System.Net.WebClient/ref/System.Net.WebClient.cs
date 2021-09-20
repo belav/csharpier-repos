@@ -338,7 +338,8 @@ namespace System.Net
         public System.Threading.Tasks.Task DownloadFileTaskAsync(
             System.Uri address,
             string fileName
-        ) {
+        )
+        {
             throw null;
         }
         public string DownloadString(string address)
@@ -370,7 +371,8 @@ namespace System.Net
         protected virtual System.Net.WebResponse GetWebResponse(
             System.Net.WebRequest request,
             System.IAsyncResult result
-        ) {
+        )
+        {
             throw null;
         }
         protected virtual void OnDownloadDataCompleted(
@@ -450,7 +452,8 @@ namespace System.Net
         public System.Threading.Tasks.Task<System.IO.Stream> OpenWriteTaskAsync(
             string address,
             string? method
-        ) {
+        )
+        {
             throw null;
         }
         public System.Threading.Tasks.Task<System.IO.Stream> OpenWriteTaskAsync(System.Uri address)
@@ -460,7 +463,8 @@ namespace System.Net
         public System.Threading.Tasks.Task<System.IO.Stream> OpenWriteTaskAsync(
             System.Uri address,
             string? method
-        ) {
+        )
+        {
             throw null;
         }
         public byte[] UploadData(string address, byte[] data)
@@ -495,20 +499,23 @@ namespace System.Net
             string address,
             string? method,
             byte[] data
-        ) {
+        )
+        {
             throw null;
         }
         public System.Threading.Tasks.Task<byte[]> UploadDataTaskAsync(
             System.Uri address,
             byte[] data
-        ) {
+        )
+        {
             throw null;
         }
         public System.Threading.Tasks.Task<byte[]> UploadDataTaskAsync(
             System.Uri address,
             string? method,
             byte[] data
-        ) {
+        )
+        {
             throw null;
         }
         public byte[] UploadFile(string address, string fileName)
@@ -538,27 +545,31 @@ namespace System.Net
         public System.Threading.Tasks.Task<byte[]> UploadFileTaskAsync(
             string address,
             string fileName
-        ) {
+        )
+        {
             throw null;
         }
         public System.Threading.Tasks.Task<byte[]> UploadFileTaskAsync(
             string address,
             string? method,
             string fileName
-        ) {
+        )
+        {
             throw null;
         }
         public System.Threading.Tasks.Task<byte[]> UploadFileTaskAsync(
             System.Uri address,
             string fileName
-        ) {
+        )
+        {
             throw null;
         }
         public System.Threading.Tasks.Task<byte[]> UploadFileTaskAsync(
             System.Uri address,
             string? method,
             string fileName
-        ) {
+        )
+        {
             throw null;
         }
         public string UploadString(string address, string data)
@@ -588,53 +599,61 @@ namespace System.Net
         public System.Threading.Tasks.Task<string> UploadStringTaskAsync(
             string address,
             string data
-        ) {
+        )
+        {
             throw null;
         }
         public System.Threading.Tasks.Task<string> UploadStringTaskAsync(
             string address,
             string? method,
             string data
-        ) {
+        )
+        {
             throw null;
         }
         public System.Threading.Tasks.Task<string> UploadStringTaskAsync(
             System.Uri address,
             string data
-        ) {
+        )
+        {
             throw null;
         }
         public System.Threading.Tasks.Task<string> UploadStringTaskAsync(
             System.Uri address,
             string? method,
             string data
-        ) {
+        )
+        {
             throw null;
         }
         public byte[] UploadValues(
             string address,
             System.Collections.Specialized.NameValueCollection data
-        ) {
+        )
+        {
             throw null;
         }
         public byte[] UploadValues(
             string address,
             string? method,
             System.Collections.Specialized.NameValueCollection data
-        ) {
+        )
+        {
             throw null;
         }
         public byte[] UploadValues(
             System.Uri address,
             System.Collections.Specialized.NameValueCollection data
-        ) {
+        )
+        {
             throw null;
         }
         public byte[] UploadValues(
             System.Uri address,
             string? method,
             System.Collections.Specialized.NameValueCollection data
-        ) {
+        )
+        {
             throw null;
         }
         public void UploadValuesAsync(
@@ -655,27 +674,31 @@ namespace System.Net
         public System.Threading.Tasks.Task<byte[]> UploadValuesTaskAsync(
             string address,
             System.Collections.Specialized.NameValueCollection data
-        ) {
+        )
+        {
             throw null;
         }
         public System.Threading.Tasks.Task<byte[]> UploadValuesTaskAsync(
             string address,
             string? method,
             System.Collections.Specialized.NameValueCollection data
-        ) {
+        )
+        {
             throw null;
         }
         public System.Threading.Tasks.Task<byte[]> UploadValuesTaskAsync(
             System.Uri address,
             System.Collections.Specialized.NameValueCollection data
-        ) {
+        )
+        {
             throw null;
         }
         public System.Threading.Tasks.Task<byte[]> UploadValuesTaskAsync(
             System.Uri address,
             string? method,
             System.Collections.Specialized.NameValueCollection data
-        ) {
+        )
+        {
             throw null;
         }
     }

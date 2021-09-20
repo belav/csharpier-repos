@@ -19,7 +19,8 @@ namespace Microsoft.Extensions.Internal
         public CopyOnWriteDictionary(
             IDictionary<TKey, TValue> sourceDictionary,
             IEqualityComparer<TKey> comparer
-        ) {
+        )
+        {
             if (sourceDictionary == null)
             {
                 throw new ArgumentNullException(nameof(sourceDictionary));

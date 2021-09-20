@@ -21,7 +21,8 @@ namespace Microsoft.CodeAnalysis.LanguageServerIndexFormat.Generator.Writing
             Type objectType,
             object existingValue,
             JsonSerializer serializer
-        ) {
+        )
+        {
             throw new NotImplementedException();
         }
 

@@ -51,7 +51,8 @@ namespace Microsoft.Extensions.Logging.Generators.Tests
             TState state,
             Exception? exception,
             Func<TState, Exception?, string> formatter
-        ) {
+        )
+        {
             LastLogLevel = logLevel;
             LastEventId = eventId;
             LastState = state;

@@ -1475,7 +1475,8 @@ $$
         internal static Holder CreateSession(
             string code,
             Dictionary<OptionKey2, object> optionSet = null
-        ) {
+        )
+        {
             return CreateSession(
                 TestWorkspace.CreateCSharp(code),
                 CurlyBrace.OpenCharacter,

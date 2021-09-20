@@ -69,7 +69,8 @@ namespace Microsoft.CodeAnalysis
 
         public static ConstantValueTypeDiscriminator GetConstantValueTypeDiscriminator(
             this Cci.PrimitiveTypeCode type
-        ) {
+        )
+        {
             switch (type)
             {
                 case Cci.PrimitiveTypeCode.Int8:

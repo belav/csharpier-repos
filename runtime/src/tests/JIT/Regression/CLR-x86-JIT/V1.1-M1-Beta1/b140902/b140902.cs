@@ -2271,7 +2271,8 @@ internal unsafe class testout1
                     )
                 )
             ) > (vtstatic_0_7_2.a2_0_7_2)
-        ) {
+        )
+        {
             double if_0retval_0_7_2 = Convert.ToDouble(
                 (
                     (
@@ -2557,7 +2558,8 @@ internal unsafe class testout1
                         * vtstatic_0_6_4.a6_0_6_4
                     )
                 ) != (-31.0)
-            ) {
+            )
+            {
                 return Convert.ToInt64(
                     (
                         Convert.ToInt64(
@@ -2652,7 +2654,8 @@ internal unsafe class testout1
         if (
             ((vtstatic_0_6_3.a4_0_6_3 + (vtstatic_0_6_3.a8_0_6_3 - (vtstatic_0_6_3.a5_0_6_3))))
             == (vtstatic_0_6_3.a8_0_6_3)
-        ) {
+        )
+        {
             long if_0retval_0_6_3 = Convert.ToInt64(
                 Convert.ToInt64(
                     Convert.ToInt32(
@@ -2841,7 +2844,8 @@ internal unsafe class testout1
                     )
                 )
             ) > (vtstatic_0_6_1.a1_0_6_1)
-        ) {
+        )
+        {
             if (
                 (
                     (
@@ -3005,7 +3009,8 @@ internal unsafe class testout1
                     ) + (Convert.ToDouble(vtstatic_0_5_7.a3_0_5_7 * vtstatic_0_5_7.a0_0_5_7))
                 )
             )
-        ) {
+        )
+        {
             double if_0retval_0_5_7 = Convert.ToDouble(
                 (
                     (
@@ -3100,7 +3105,8 @@ internal unsafe class testout1
                     * (vtstatic_0_5_6.a3_0_5_6 * (1.862645149230957E-09 + vtstatic_0_5_6.a7_0_5_6))
                 )
             ) != (vt_0_5_6.a4_0_5_6)
-        ) {
+        )
+        {
             if (
                 (
                     (
@@ -3144,7 +3150,8 @@ internal unsafe class testout1
                             ) / (vt_0_5_6.a2_0_5_6 / 121.50390625)
                         )
                     )
-                ) {
+                )
+                {
                     if (
                         (
                             (
@@ -3441,7 +3448,8 @@ internal unsafe class testout1
                         - ((vt_0_5_4.a2_0_5_4 - (vtstatic_0_5_4.a6_0_5_4)) - 1.8847640603780747E-06)
                     )
                 ) > (vt_0_5_4.a2_0_5_4)
-            ) {
+            )
+            {
                 if (
                     (vtstatic_0_5_4.a0_0_5_4)
                     >= (((64 / vtstatic_0_5_4.a5_0_5_4) - (vtstatic_0_5_4.a0_0_5_4)))
@@ -3973,7 +3981,8 @@ internal unsafe class testout1
                     )
                 )
             ) < (8388608.0)
-        ) {
+        )
+        {
             if (
                 (
                     (
@@ -4126,7 +4135,8 @@ internal unsafe class testout1
                     )
                 )
             ) >= (vtstatic_0_3_6.a3_0_3_6)
-        ) {
+        )
+        {
             if (
                 (
                     (
@@ -4134,7 +4144,8 @@ internal unsafe class testout1
                         + (vt_0_3_6.a4_0_3_6 + (vt_0_3_6.a4_0_3_6 - (vtstatic_0_3_6.a7_0_3_6)))
                     )
                 ) != (vtstatic_0_3_6.a0_0_3_6)
-            ) {
+            )
+            {
                 double if_1retval_0_3_6 = Convert.ToDouble(
                     (
                         (
@@ -4619,7 +4630,8 @@ internal unsafe class testout1
                     ) + (vtstatic_0_2_6.a2_0_2_6 + vtstatic_0_2_6.a1_0_2_6)
                 )
             ) == (vtstatic_0_2_6.a8_0_2_6)
-        ) {
+        )
+        {
             return Convert.ToDouble(
                 (
                     (
@@ -4764,7 +4776,8 @@ internal unsafe class testout1
         if (
             (Convert.ToInt32(vtstatic_0_2_4.a5_0_2_4 / vtstatic_0_2_4.a6_0_2_4))
             < (vtstatic_0_2_4.a5_0_2_4)
-        ) {
+        )
+        {
             return Convert.ToDouble(
                 (
                     Convert.ToInt32(
@@ -5211,7 +5224,8 @@ internal unsafe class testout1
                     - (vtstatic_0_1_7.a2_0_1_7 / cl_0_1_7.a0_0_1_7)
                 )
             )
-        ) {
+        )
+        {
             return Convert.ToDouble(
                 (
                     (
@@ -5344,7 +5358,8 @@ internal unsafe class testout1
                     )
                 )
             )
-        ) {
+        )
+        {
             if (
                 ((vt_0_1_5.a6_0_1_5 + (vtstatic_0_1_5.a2_0_1_5 / 0.25396825396825395)))
                 != (vt_0_1_5.a6_0_1_5)
@@ -5563,7 +5578,8 @@ internal unsafe class testout1
                     )
                 )
             )
-        ) {
+        )
+        {
             return Convert.ToSingle(
                 (
                     Convert.ToSingle(
@@ -5692,7 +5708,8 @@ internal unsafe class testout1
                     (Convert.ToInt16(vtstatic_0_1_1.a6_0_1_1 / clstatic_0_1_1.a8_0_1_1)) / -127204.0
                 )
             )
-        ) {
+        )
+        {
             if (
                 (
                     (
@@ -5708,7 +5725,8 @@ internal unsafe class testout1
                             / -127204.0
                     )
                 )
-            ) {
+            )
+            {
                 if (
                     (
                         (
@@ -5716,7 +5734,8 @@ internal unsafe class testout1
                             * (vtstatic_0_1_1.a7_0_1_1 - (clstatic_0_1_1.a9_0_1_1))
                         )
                     ) <= (vtstatic_0_1_1.a7_0_1_1)
-                ) {
+                )
+                {
                     return Convert.ToSingle(
                         (
                             (

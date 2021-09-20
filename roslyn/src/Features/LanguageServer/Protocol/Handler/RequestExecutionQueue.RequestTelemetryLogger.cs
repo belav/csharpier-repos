@@ -67,7 +67,8 @@ namespace Microsoft.CodeAnalysis.LanguageServer.Handler
                 TimeSpan queuedDuration,
                 TimeSpan requestDuration,
                 Result result
-            ) {
+            )
+            {
                 // Find the bucket corresponding to the queued duration and update the count of durations in that bucket.
                 // This is not broken down per method as time in queue is not specific to an LSP method.
                 _queuedDurationLogAggregator?.IncreaseCount(
@@ -105,7 +106,8 @@ namespace Microsoft.CodeAnalysis.LanguageServer.Handler
                     || _queuedDurationLogAggregator.IsEmpty
                     || _requestDurationLogAggregator is null
                     || _requestDurationLogAggregator.IsEmpty
-                ) {
+                )
+                {
                     return;
                 }
 

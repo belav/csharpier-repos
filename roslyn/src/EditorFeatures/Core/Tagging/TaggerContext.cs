@@ -55,14 +55,15 @@ namespace Microsoft.CodeAnalysis.Editor.Tagging
             SnapshotPoint? caretPosition = null,
             TextChangeRange? textChangeRange = null,
             CancellationToken cancellationToken = default
-        ) : this(
-            state: null,
-            ImmutableArray.Create(new DocumentSnapshotSpan(document, snapshot.GetFullSpan())),
-            caretPosition,
-            textChangeRange,
-            existingTags: null,
-            cancellationToken
-        ) { }
+        )
+            : this(
+                state: null,
+                ImmutableArray.Create(new DocumentSnapshotSpan(document, snapshot.GetFullSpan())),
+                caretPosition,
+                textChangeRange,
+                existingTags: null,
+                cancellationToken
+            ) { }
 
         internal TaggerContext(
             object state,
@@ -71,7 +72,8 @@ namespace Microsoft.CodeAnalysis.Editor.Tagging
             TextChangeRange? textChangeRange,
             ImmutableDictionary<ITextBuffer, TagSpanIntervalTree<TTag>> existingTags,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             this.State = state;
             this.SpansToTag = spansToTag;
             this.CaretPosition = caretPosition;
@@ -100,7 +102,8 @@ namespace Microsoft.CodeAnalysis.Editor.Tagging
             if (
                 _existingTags != null
                 && _existingTags.TryGetValue(point.Snapshot.TextBuffer, out var tree)
-            ) {
+            )
+            {
                 return tree.GetIntersectingSpans(
                         new SnapshotSpan(point.Snapshot, new Span(point, 0))
                     )

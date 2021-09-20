@@ -42,7 +42,8 @@ namespace Newtonsoft.Json.Serialization
             JsonSerializerInternalReader reader,
             JsonISerializableContract contract,
             JsonProperty? member
-        ) {
+        )
+        {
             ValidationUtils.ArgumentNotNull(reader, nameof(reader));
             ValidationUtils.ArgumentNotNull(contract, nameof(contract));
 

@@ -62,7 +62,8 @@ namespace Microsoft.AspNetCore.Mvc.Rendering
             this IHtmlHelper htmlHelper,
             string expression,
             bool isChecked
-        ) {
+        )
+        {
             if (htmlHelper == null)
             {
                 throw new ArgumentNullException(nameof(htmlHelper));
@@ -98,7 +99,8 @@ namespace Microsoft.AspNetCore.Mvc.Rendering
             this IHtmlHelper htmlHelper,
             string expression,
             object htmlAttributes
-        ) {
+        )
+        {
             if (htmlHelper == null)
             {
                 throw new ArgumentNullException(nameof(htmlHelper));
@@ -126,7 +128,8 @@ namespace Microsoft.AspNetCore.Mvc.Rendering
         public static IHtmlContent CheckBoxFor<TModel>(
             this IHtmlHelper<TModel> htmlHelper,
             Expression<Func<TModel, bool>> expression
-        ) {
+        )
+        {
             if (htmlHelper == null)
             {
                 throw new ArgumentNullException(nameof(htmlHelper));
@@ -188,7 +191,8 @@ namespace Microsoft.AspNetCore.Mvc.Rendering
             this IHtmlHelper htmlHelper,
             string expression,
             object value
-        ) {
+        )
+        {
             if (htmlHelper == null)
             {
                 throw new ArgumentNullException(nameof(htmlHelper));
@@ -217,7 +221,8 @@ namespace Microsoft.AspNetCore.Mvc.Rendering
         public static IHtmlContent HiddenFor<TModel, TResult>(
             this IHtmlHelper<TModel> htmlHelper,
             Expression<Func<TModel, TResult>> expression
-        ) {
+        )
+        {
             if (htmlHelper == null)
             {
                 throw new ArgumentNullException(nameof(htmlHelper));
@@ -270,7 +275,8 @@ namespace Microsoft.AspNetCore.Mvc.Rendering
             this IHtmlHelper htmlHelper,
             string expression,
             object value
-        ) {
+        )
+        {
             if (htmlHelper == null)
             {
                 throw new ArgumentNullException(nameof(htmlHelper));
@@ -296,7 +302,8 @@ namespace Microsoft.AspNetCore.Mvc.Rendering
         public static IHtmlContent PasswordFor<TModel, TResult>(
             this IHtmlHelper<TModel> htmlHelper,
             Expression<Func<TModel, TResult>> expression
-        ) {
+        )
+        {
             if (htmlHelper == null)
             {
                 throw new ArgumentNullException(nameof(htmlHelper));
@@ -334,7 +341,8 @@ namespace Microsoft.AspNetCore.Mvc.Rendering
             this IHtmlHelper htmlHelper,
             string expression,
             object value
-        ) {
+        )
+        {
             if (htmlHelper == null)
             {
                 throw new ArgumentNullException(nameof(htmlHelper));
@@ -378,7 +386,8 @@ namespace Microsoft.AspNetCore.Mvc.Rendering
             string expression,
             object value,
             object htmlAttributes
-        ) {
+        )
+        {
             if (htmlHelper == null)
             {
                 throw new ArgumentNullException(nameof(htmlHelper));
@@ -425,7 +434,8 @@ namespace Microsoft.AspNetCore.Mvc.Rendering
             string expression,
             object value,
             bool isChecked
-        ) {
+        )
+        {
             if (htmlHelper == null)
             {
                 throw new ArgumentNullException(nameof(htmlHelper));
@@ -459,7 +469,8 @@ namespace Microsoft.AspNetCore.Mvc.Rendering
             this IHtmlHelper<TModel> htmlHelper,
             Expression<Func<TModel, TResult>> expression,
             object value
-        ) {
+        )
+        {
             if (htmlHelper == null)
             {
                 throw new ArgumentNullException(nameof(htmlHelper));
@@ -526,7 +537,8 @@ namespace Microsoft.AspNetCore.Mvc.Rendering
             this IHtmlHelper htmlHelper,
             string expression,
             object value
-        ) {
+        )
+        {
             if (htmlHelper == null)
             {
                 throw new ArgumentNullException(nameof(htmlHelper));
@@ -562,7 +574,8 @@ namespace Microsoft.AspNetCore.Mvc.Rendering
             string expression,
             object value,
             string format
-        ) {
+        )
+        {
             if (htmlHelper == null)
             {
                 throw new ArgumentNullException(nameof(htmlHelper));
@@ -600,7 +613,8 @@ namespace Microsoft.AspNetCore.Mvc.Rendering
             string expression,
             object value,
             object htmlAttributes
-        ) {
+        )
+        {
             if (htmlHelper == null)
             {
                 throw new ArgumentNullException(nameof(htmlHelper));
@@ -634,7 +648,8 @@ namespace Microsoft.AspNetCore.Mvc.Rendering
         public static IHtmlContent TextBoxFor<TModel, TResult>(
             this IHtmlHelper<TModel> htmlHelper,
             Expression<Func<TModel, TResult>> expression
-        ) {
+        )
+        {
             if (htmlHelper == null)
             {
                 throw new ArgumentNullException(nameof(htmlHelper));
@@ -673,7 +688,8 @@ namespace Microsoft.AspNetCore.Mvc.Rendering
             this IHtmlHelper<TModel> htmlHelper,
             Expression<Func<TModel, TResult>> expression,
             string format
-        ) {
+        )
+        {
             if (htmlHelper == null)
             {
                 throw new ArgumentNullException(nameof(htmlHelper));
@@ -714,7 +730,8 @@ namespace Microsoft.AspNetCore.Mvc.Rendering
             this IHtmlHelper<TModel> htmlHelper,
             Expression<Func<TModel, TResult>> expression,
             object htmlAttributes
-        ) {
+        )
+        {
             if (htmlHelper == null)
             {
                 throw new ArgumentNullException(nameof(htmlHelper));
@@ -785,7 +802,8 @@ namespace Microsoft.AspNetCore.Mvc.Rendering
             this IHtmlHelper htmlHelper,
             string expression,
             object htmlAttributes
-        ) {
+        )
+        {
             if (htmlHelper == null)
             {
                 throw new ArgumentNullException(nameof(htmlHelper));
@@ -822,7 +840,8 @@ namespace Microsoft.AspNetCore.Mvc.Rendering
             this IHtmlHelper htmlHelper,
             string expression,
             string value
-        ) {
+        )
+        {
             if (htmlHelper == null)
             {
                 throw new ArgumentNullException(nameof(htmlHelper));
@@ -865,7 +884,8 @@ namespace Microsoft.AspNetCore.Mvc.Rendering
             string expression,
             string value,
             object htmlAttributes
-        ) {
+        )
+        {
             if (htmlHelper == null)
             {
                 throw new ArgumentNullException(nameof(htmlHelper));
@@ -900,7 +920,8 @@ namespace Microsoft.AspNetCore.Mvc.Rendering
         public static IHtmlContent TextAreaFor<TModel, TResult>(
             this IHtmlHelper<TModel> htmlHelper,
             Expression<Func<TModel, TResult>> expression
-        ) {
+        )
+        {
             if (htmlHelper == null)
             {
                 throw new ArgumentNullException(nameof(htmlHelper));
@@ -940,7 +961,8 @@ namespace Microsoft.AspNetCore.Mvc.Rendering
             this IHtmlHelper<TModel> htmlHelper,
             Expression<Func<TModel, TResult>> expression,
             object htmlAttributes
-        ) {
+        )
+        {
             if (htmlHelper == null)
             {
                 throw new ArgumentNullException(nameof(htmlHelper));

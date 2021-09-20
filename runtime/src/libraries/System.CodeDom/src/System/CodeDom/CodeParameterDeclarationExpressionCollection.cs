@@ -11,13 +11,15 @@ namespace System.CodeDom
 
         public CodeParameterDeclarationExpressionCollection(
             CodeParameterDeclarationExpressionCollection value
-        ) {
+        )
+        {
             AddRange(value);
         }
 
         public CodeParameterDeclarationExpressionCollection(
             CodeParameterDeclarationExpression[] value
-        ) {
+        )
+        {
             AddRange(value);
         }
 

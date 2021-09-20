@@ -697,7 +697,8 @@ namespace System.Collections.ObjectModel.Tests
             ObservableCollection<string> collection,
             string itemToAdd,
             int? insertIndex = null
-        ) {
+        )
+        {
             INotifyPropertyChanged collectionPropertyChanged = collection;
             collectionPropertyChanged.PropertyChanged += Collection_PropertyChanged;
             _expectedPropertyChanged = new[]
@@ -790,7 +791,8 @@ namespace System.Collections.ObjectModel.Tests
             ObservableCollection<string> collection,
             int oldIndex,
             int newIndex
-        ) {
+        )
+        {
             INotifyPropertyChanged collectionPropertyChanged = collection;
             collectionPropertyChanged.PropertyChanged += Collection_PropertyChanged;
             _expectedPropertyChanged = new[] { new PropertyNameExpected(ITEMARRAY) };
@@ -832,7 +834,8 @@ namespace System.Collections.ObjectModel.Tests
             ObservableCollection<string> collection,
             int index,
             string newItem
-        ) {
+        )
+        {
             INotifyPropertyChanged collectionPropertyChanged = collection;
             collectionPropertyChanged.PropertyChanged += Collection_PropertyChanged;
             _expectedPropertyChanged = new[] { new PropertyNameExpected(ITEMARRAY) };
@@ -878,7 +881,8 @@ namespace System.Collections.ObjectModel.Tests
             string itemToRemove,
             bool isSuccessfulRemove,
             bool hasDuplicates
-        ) {
+        )
+        {
             INotifyPropertyChanged collectionPropertyChanged = collection;
             collectionPropertyChanged.PropertyChanged += Collection_PropertyChanged;
             _expectedPropertyChanged = new[]

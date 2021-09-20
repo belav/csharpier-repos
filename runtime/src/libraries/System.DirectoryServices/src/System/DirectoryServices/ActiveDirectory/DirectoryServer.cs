@@ -352,7 +352,8 @@ namespace System.DirectoryServices.ActiveDirectory
             ref bool advanced,
             int context,
             LoadLibrarySafeHandle libHandle
-        ) {
+        )
+        {
             IntPtr info = (IntPtr)0;
             int result = 0;
             bool needToTryAgain = true;
@@ -477,7 +478,8 @@ namespace System.DirectoryServices.ActiveDirectory
             string partition,
             DirectoryServer server,
             LoadLibrarySafeHandle libHandle
-        ) {
+        )
+        {
             int context = 0;
             int count = 0;
             ReplicationCursorCollection collection = new ReplicationCursorCollection(server);
@@ -559,7 +561,8 @@ namespace System.DirectoryServices.ActiveDirectory
             IntPtr info,
             DirectoryServer server,
             LoadLibrarySafeHandle libHandle
-        ) {
+        )
+        {
             ReplicationOperationInformation replicationInfo = new ReplicationOperationInformation();
             ReplicationOperationCollection collection = new ReplicationOperationCollection(server);
             replicationInfo.collection = collection;
@@ -594,7 +597,8 @@ namespace System.DirectoryServices.ActiveDirectory
             IntPtr info,
             DirectoryServer server,
             LoadLibrarySafeHandle libHandle
-        ) {
+        )
+        {
             ReplicationNeighborCollection collection = new ReplicationNeighborCollection(server);
             int count = 0;
 
@@ -622,7 +626,8 @@ namespace System.DirectoryServices.ActiveDirectory
             IntPtr info,
             DirectoryServer server,
             LoadLibrarySafeHandle libHandle
-        ) {
+        )
+        {
             ReplicationFailureCollection collection = new ReplicationFailureCollection(server);
             int count = 0;
 
@@ -654,7 +659,8 @@ namespace System.DirectoryServices.ActiveDirectory
             IntPtr info,
             DirectoryServer server,
             LoadLibrarySafeHandle libHandle
-        ) {
+        )
+        {
             ActiveDirectoryReplicationMetadata collection = new ActiveDirectoryReplicationMetadata(
                 server
             );
@@ -774,7 +780,8 @@ namespace System.DirectoryServices.ActiveDirectory
             SyncFromAllServersOptions option,
             SyncUpdateCallback? callback,
             LoadLibrarySafeHandle libHandle
-        ) {
+        )
+        {
             IntPtr errorInfo = (IntPtr)0;
 
             if (!Partitions.Contains(partition))
@@ -836,7 +843,8 @@ namespace System.DirectoryServices.ActiveDirectory
             DS_REPL_INFO_TYPE type,
             IntPtr value,
             LoadLibrarySafeHandle libHandle
-        ) {
+        )
+        {
             if (value != (IntPtr)0)
             {
                 // call DsReplicaFreeInfo
@@ -865,7 +873,8 @@ namespace System.DirectoryServices.ActiveDirectory
             string? sourceServer,
             int option,
             LoadLibrarySafeHandle libHandle
-        ) {
+        )
+        {
             int structSize = Marshal.SizeOf(typeof(Guid));
             IntPtr unmanagedGuid = (IntPtr)0;
             Guid guid = Guid.Empty;

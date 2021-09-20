@@ -58,7 +58,8 @@ namespace AutoMapper.Configuration.Conventions
             List<MemberInfo> resolvers,
             IMemberConfiguration parent = null,
             bool isReverseMap = false
-        ) {
+        )
+        {
             var matchingMemberInfo = NameMapper.GetMatchingMemberInfo(
                 sourceTypeDetails,
                 destType,
@@ -125,7 +126,8 @@ namespace AutoMapper.Configuration.Conventions
             string nameToSearch,
             List<MemberInfo> resolvers,
             bool isReverseMap
-        ) {
+        )
+        {
             foreach (var memberMapper in MemberMappers)
             {
                 if (
@@ -139,7 +141,8 @@ namespace AutoMapper.Configuration.Conventions
                         this,
                         isReverseMap
                     )
-                ) {
+                )
+                {
                     return true;
                 }
             }
@@ -161,7 +164,8 @@ namespace AutoMapper.Configuration.Conventions
             List<MemberInfo> resolvers,
             IMemberConfiguration parent,
             bool isReverseMap
-        ) {
+        )
+        {
             var destinationMemberNamingConvention = isReverseMap
                 ? SourceMemberNamingConvention
                 : DestinationMemberNamingConvention;

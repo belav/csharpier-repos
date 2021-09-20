@@ -78,7 +78,8 @@ namespace Microsoft.CodeAnalysis.PatternMatching
             private static TextChunk[] BreakPatternIntoSubWords(
                 string pattern,
                 bool allowFuzzyMatching
-            ) {
+            )
+            {
                 var partCount = CountTextChunks(pattern);
 
                 if (partCount == 0)

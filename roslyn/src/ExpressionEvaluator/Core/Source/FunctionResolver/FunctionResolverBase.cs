@@ -31,7 +31,8 @@ namespace Microsoft.CodeAnalysis.ExpressionEvaluator
             TProcess process,
             TRequest request,
             OnFunctionResolvedDelegate<TModule, TRequest> onFunctionResolved
-        ) {
+        )
+        {
             if (!ShouldHandleRequest(request))
             {
                 return;
@@ -74,7 +75,8 @@ namespace Microsoft.CodeAnalysis.ExpressionEvaluator
             TProcess process,
             TModule module,
             OnFunctionResolvedDelegate<TModule, TRequest> onFunctionResolved
-        ) {
+        )
+        {
             if (!ShouldEnableFunctionResolver(process))
             {
                 return;
@@ -121,7 +123,8 @@ namespace Microsoft.CodeAnalysis.ExpressionEvaluator
             TModule module,
             MetadataReader reader,
             OnFunctionResolvedDelegate<TModule, TRequest> onFunctionResolved
-        ) {
+        )
+        {
             return new MetadataResolver<TProcess, TModule, TRequest>(
                 process,
                 module,

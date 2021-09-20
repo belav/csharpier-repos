@@ -221,7 +221,8 @@ namespace Microsoft.EntityFrameworkCore.Tools
         private static (string, string) ResolveProjects(
             string? projectPath,
             string? startupProjectPath
-        ) {
+        )
+        {
             var projects = ResolveProjects(projectPath);
             var startupProjects = ResolveProjects(startupProjectPath);
 

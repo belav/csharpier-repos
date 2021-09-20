@@ -15,7 +15,8 @@ namespace System.CodeDom
         public CodeDelegateInvokeExpression(
             CodeExpression targetObject,
             params CodeExpression[] parameters
-        ) {
+        )
+        {
             TargetObject = targetObject;
             Parameters.AddRange(parameters);
         }

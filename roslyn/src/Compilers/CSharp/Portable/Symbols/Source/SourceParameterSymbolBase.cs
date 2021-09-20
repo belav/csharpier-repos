@@ -70,7 +70,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
         internal override void AddSynthesizedAttributes(
             PEModuleBuilder moduleBuilder,
             ref ArrayBuilder<SynthesizedAttributeData> attributes
-        ) {
+        )
+        {
             base.AddSynthesizedAttributes(moduleBuilder, ref attributes);
 
             var compilation = this.DeclaringCompilation;
@@ -91,7 +92,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                 defaultValue != ConstantValue.NotAvailable
                 && defaultValue.SpecialType == SpecialType.System_Decimal
                 && DefaultValueFromAttributes == ConstantValue.NotAvailable
-            ) {
+            )
+            {
                 AddSynthesizedAttribute(
                     ref attributes,
                     compilation.SynthesizeDecimalConstantAttribute(defaultValue.DecimalValue)

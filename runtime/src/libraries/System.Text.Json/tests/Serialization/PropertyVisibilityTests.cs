@@ -1682,7 +1682,8 @@ namespace System.Text.Json.Serialization.Tests
         public static void JsonIgnoreConditionWhenWritingDefault_ClassProperty(
             Type type,
             JsonSerializerOptions options
-        ) {
+        )
+        {
             // Property shouldn't be ignored if it isn't null.
             string json = @"{""Int1"":1,""MyString"":""Random"",""Int2"":2}";
 
@@ -1766,7 +1767,8 @@ namespace System.Text.Json.Serialization.Tests
         public static void JsonIgnoreConditionWhenWritingDefault_StructProperty(
             Type type,
             JsonSerializerOptions options
-        ) {
+        )
+        {
             // Property shouldn't be ignored if it isn't null.
             string json = @"{""Int1"":1,""MyInt"":3,""Int2"":2}";
 
@@ -2416,7 +2418,8 @@ namespace System.Text.Json.Serialization.Tests
                 string myString = "Default",
                 int myInt = -1,
                 bool? myBool = true
-            ) {
+            )
+            {
                 MyString = myString;
                 MyInt = myInt;
                 MyBool = myBool;
@@ -2438,7 +2441,8 @@ namespace System.Text.Json.Serialization.Tests
                 string myString = "Default",
                 int myInt = -1,
                 bool? myBool = true
-            ) {
+            )
+            {
                 MyString = myString;
                 MyInt = myInt;
                 MyBool = myBool;
@@ -2667,7 +2671,8 @@ namespace System.Text.Json.Serialization.Tests
                 Utf8JsonWriter writer,
                 IUseCustomConverter value,
                 JsonSerializerOptions options
-            ) {
+            )
+            {
                 MyValueTypeWithProperties obj = (MyValueTypeWithProperties)value;
                 writer.WriteNumberValue(obj.PrimitiveValue + 100);
                 // Ignore obj.RefValue

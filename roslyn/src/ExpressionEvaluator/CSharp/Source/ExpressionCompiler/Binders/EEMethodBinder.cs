@@ -20,11 +20,8 @@ namespace Microsoft.CodeAnalysis.CSharp.ExpressionEvaluator
         private readonly ImmutableArray<ParameterSymbol> _targetParameters;
         private readonly Binder _sourceBinder;
 
-        internal EEMethodBinder(
-            EEMethodSymbol method,
-            MethodSymbol containingMethod,
-            Binder next
-        ) : base(next, next.Flags | BinderFlags.InEEMethodBinder)
+        internal EEMethodBinder(EEMethodSymbol method, MethodSymbol containingMethod, Binder next)
+            : base(next, next.Flags | BinderFlags.InEEMethodBinder)
         {
             // There are a lot of method symbols floating around and we're doing some subtle things with them.
             //   1) method is the EEMethodSymbol that we're going to synthesize and hand to the debugger to evaluate.
@@ -61,7 +58,8 @@ namespace Microsoft.CodeAnalysis.CSharp.ExpressionEvaluator
             Binder originalBinder,
             bool diagnose,
             ref CompoundUseSiteInfo<AssemblySymbol> useSiteInfo
-        ) {
+        )
+        {
             _sourceBinder.LookupSymbolsInSingleBinder(
                 result,
                 name,
@@ -89,7 +87,8 @@ namespace Microsoft.CodeAnalysis.CSharp.ExpressionEvaluator
             LookupSymbolsInfo info,
             LookupOptions options,
             Binder originalBinder
-        ) {
+        )
+        {
             throw new NotImplementedException();
         }
 

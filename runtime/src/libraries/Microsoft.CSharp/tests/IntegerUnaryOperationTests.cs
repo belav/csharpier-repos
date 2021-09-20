@@ -16,7 +16,8 @@ namespace Microsoft.CSharp.RuntimeBinder.Tests
             ExpressionType operation,
             bool checkedContext,
             bool constantArgument
-        ) {
+        )
+        {
             CSharpArgumentInfo x = CSharpArgumentInfo.Create(
                 constantArgument ? CSharpArgumentInfoFlags.Constant : CSharpArgumentInfoFlags.None,
                 null
@@ -114,7 +115,8 @@ namespace Microsoft.CSharp.RuntimeBinder.Tests
             ExpressionType type,
             object result,
             bool shouldSucceedChecked
-        ) {
+        )
+        {
             var callsite = GetUnaryOperationCallSite(type, false, false);
             Assert.Equal(result, callsite.Target(callsite, x));
             callsite = GetUnaryOperationCallSite(type, true, false);
@@ -149,7 +151,8 @@ namespace Microsoft.CSharp.RuntimeBinder.Tests
             ExpressionType type,
             object result,
             bool shouldSucceedChecked
-        ) {
+        )
+        {
             var callsite = GetUnaryOperationCallSite(type, false, true);
             Assert.Equal(result, callsite.Target(callsite, x));
             callsite = GetUnaryOperationCallSite(type, true, true);

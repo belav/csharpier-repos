@@ -92,7 +92,8 @@ namespace System.Web.Http.Tracing.Tracers
         private static OverrideFilterTracer CreateProductUnderTest(
             IOverrideFilter innerFilter,
             ITraceWriter traceWriter
-        ) {
+        )
+        {
             return new OverrideFilterTracer(innerFilter, traceWriter);
         }
 

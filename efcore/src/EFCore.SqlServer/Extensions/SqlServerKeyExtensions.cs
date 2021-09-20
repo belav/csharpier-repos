@@ -40,7 +40,8 @@ namespace Microsoft.EntityFrameworkCore
         private static bool? GetDefaultIsClustered(
             IReadOnlyKey key,
             in StoreObjectIdentifier storeObject
-        ) {
+        )
+        {
             var sharedTableRootKey = key.FindSharedObjectRootKey(storeObject);
             return sharedTableRootKey?.IsClustered(storeObject);
         }
@@ -64,7 +65,8 @@ namespace Microsoft.EntityFrameworkCore
             this IConventionKey key,
             bool? clustered,
             bool fromDataAnnotation = false
-        ) {
+        )
+        {
             key.SetOrRemoveAnnotation(
                 SqlServerAnnotationNames.Clustered,
                 clustered,

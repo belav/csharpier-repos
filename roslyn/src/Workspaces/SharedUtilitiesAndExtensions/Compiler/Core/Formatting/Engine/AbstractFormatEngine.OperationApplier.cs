@@ -26,7 +26,8 @@ namespace Microsoft.CodeAnalysis.Formatting
             public OperationApplier(
                 FormattingContext context,
                 ChainedFormattingRules formattingRules
-            ) {
+            )
+            {
                 _context = context;
                 _formattingRules = formattingRules;
             }
@@ -101,7 +102,8 @@ namespace Microsoft.CodeAnalysis.Formatting
             private bool ApplyPreserveSpacesOperation(
                 AdjustSpacesOperation operation,
                 int pairIndex
-            ) {
+            )
+            {
                 var triviaInfo = _context.TokenStream.GetTriviaData(pairIndex);
                 var space = operation.Space;
 
@@ -174,7 +176,8 @@ namespace Microsoft.CodeAnalysis.Formatting
                 AdjustNewLinesOperation operation,
                 int pairIndex,
                 CancellationToken cancellationToken
-            ) {
+            )
+            {
                 if (operation.Option == AdjustNewLinesOption.PreserveLines)
                 {
                     return ApplyPreserveLinesOperation(operation, pairIndex, cancellationToken);
@@ -196,7 +199,8 @@ namespace Microsoft.CodeAnalysis.Formatting
                             _context.TokenStream.GetToken(pairIndex),
                             _context.TokenStream.GetToken(pairIndex + 1)
                         )
-                    ) {
+                    )
+                    {
                         return ApplyForceLinesOperation(operation, pairIndex, cancellationToken);
                     }
                     else
@@ -210,7 +214,8 @@ namespace Microsoft.CodeAnalysis.Formatting
                 AdjustNewLinesOperation operation,
                 int pairIndex,
                 CancellationToken cancellationToken
-            ) {
+            )
+            {
                 var triviaInfo = _context.TokenStream.GetTriviaData(pairIndex);
 
                 var indentation = _context.GetBaseIndentation(
@@ -220,7 +225,8 @@ namespace Microsoft.CodeAnalysis.Formatting
                     triviaInfo.LineBreaks == operation.Line
                     && triviaInfo.Spaces == indentation
                     && !triviaInfo.TreatAsElastic
-                ) {
+                )
+                {
                     // things are already in the shape we want, so we don't actually need to do
                     // anything but, conceptually, we handled this case
                     return true;
@@ -246,7 +252,8 @@ namespace Microsoft.CodeAnalysis.Formatting
                 AdjustNewLinesOperation operation,
                 int pairIndex,
                 CancellationToken cancellationToken
-            ) {
+            )
+            {
                 var triviaInfo = _context.TokenStream.GetTriviaData(pairIndex);
 
                 // okay, check whether there is line between token more than we want
@@ -304,7 +311,8 @@ namespace Microsoft.CodeAnalysis.Formatting
                 SyntaxToken token,
                 IEnumerable<SyntaxToken> operationTokens,
                 [NotNullWhen(true)] out IList<TokenData>? tokenData
-            ) {
+            )
+            {
                 // if there are no tokens to align, or no visible
                 // base token to be aligned to, then don't do anything
                 if (token.Width() <= 0 || operationTokens.IsEmpty())
@@ -330,7 +338,8 @@ namespace Microsoft.CodeAnalysis.Formatting
                 Dictionary<SyntaxToken, int> previousChangesMap,
                 [NotNullWhen(true)] out IList<TokenData>? tokenData,
                 CancellationToken cancellationToken
-            ) {
+            )
+            {
                 if (!CanAlignBeApplied(token, tokens, out tokenData))
                 {
                     return false;
@@ -349,7 +358,8 @@ namespace Microsoft.CodeAnalysis.Formatting
                 AlignTokensOperation operation,
                 Dictionary<SyntaxToken, int> previousChangesMap,
                 CancellationToken cancellationToken
-            ) {
+            )
+            {
                 Contract.ThrowIfNull(previousChangesMap);
 
                 IList<TokenData>? tokenData;
@@ -365,7 +375,8 @@ namespace Microsoft.CodeAnalysis.Formatting
                                 out tokenData,
                                 cancellationToken
                             )
-                        ) {
+                        )
+                        {
                             return false;
                         }
                         break;
@@ -379,7 +390,8 @@ namespace Microsoft.CodeAnalysis.Formatting
                                 out tokenData,
                                 cancellationToken
                             )
-                        ) {
+                        )
+                        {
                             return false;
                         }
                         break;
@@ -402,7 +414,8 @@ namespace Microsoft.CodeAnalysis.Formatting
                 IList<TokenData> list,
                 Dictionary<SyntaxToken, int> previousChangesMap,
                 CancellationToken cancellationToken
-            ) {
+            )
+            {
                 // rather than having external new changes map, having snapshot concept
                 // in token stream might be easier to understand.
                 var baseSpaceOrIndentation = _context.TokenStream.GetCurrentColumn(token);
@@ -439,7 +452,8 @@ namespace Microsoft.CodeAnalysis.Formatting
                 int baseSpaceOrIndentation,
                 Dictionary<SyntaxToken, int> previousChangesMap,
                 CancellationToken cancellationToken
-            ) {
+            )
+            {
                 // add or replace existing value. this could happen if a token get moved multiple times
                 // due to one being involved in multiple alignment operations
                 previousChangesMap[currentToken.Token] = triviaInfo.Spaces;
@@ -505,7 +519,8 @@ namespace Microsoft.CodeAnalysis.Formatting
                 IList<TokenData> tokenWithIndices,
                 Dictionary<SyntaxToken, int> newChangesMap,
                 CancellationToken cancellationToken
-            ) {
+            )
+            {
                 for (var i = 0; i < tokenWithIndices.Count; i++)
                 {
                     var firstToken = tokenWithIndices[i];
@@ -544,13 +559,15 @@ namespace Microsoft.CodeAnalysis.Formatting
                 int indentationDelta,
                 Dictionary<SyntaxToken, int> previousChangesMap,
                 CancellationToken cancellationToken
-            ) {
+            )
+            {
                 // can this run parallel? at least finding out all first token on line.
                 for (
                     var pairIndex = firstToken.IndexInStream;
                     pairIndex < lastToken.IndexInStream;
                     pairIndex++
-                ) {
+                )
+                {
                     var triviaInfo = _context.TokenStream.GetTriviaData(pairIndex);
                     if (!triviaInfo.SecondTokenIsFirstTokenOnLine)
                     {
@@ -590,7 +607,8 @@ namespace Microsoft.CodeAnalysis.Formatting
                 TriviaData triviaInfo,
                 Dictionary<SyntaxToken, int> previousChangesMap,
                 CancellationToken cancellationToken
-            ) {
+            )
+            {
                 Contract.ThrowIfFalse(triviaInfo.SecondTokenIsFirstTokenOnLine);
 
                 var indentation = triviaInfo.Spaces + indentationDelta;
@@ -625,7 +643,8 @@ namespace Microsoft.CodeAnalysis.Formatting
                 SyntaxToken endToken,
                 Dictionary<SyntaxToken, int> previousChangesMap,
                 CancellationToken cancellationToken
-            ) {
+            )
+            {
                 Contract.ThrowIfFalse(
                     baseToken.RawKind != 0 && startToken.RawKind != 0 && endToken.RawKind != 0
                 );
@@ -650,7 +669,8 @@ namespace Microsoft.CodeAnalysis.Formatting
                 TokenData endToken,
                 Dictionary<SyntaxToken, int> previousChangesMap,
                 CancellationToken cancellationToken
-            ) {
+            )
+            {
                 // if baseToken is not in the stream, then it is guaranteed to be not moved.
                 var tokenWithIndex = baseToken;
                 if (tokenWithIndex.IndexInStream < 0)
@@ -675,7 +695,8 @@ namespace Microsoft.CodeAnalysis.Formatting
                         || _context.TokenStream.GetTriviaData(
                             tokenPairIndex
                         ).SecondTokenIsFirstTokenOnLine
-                    ) {
+                    )
+                    {
                         return false;
                     }
 
@@ -719,7 +740,8 @@ namespace Microsoft.CodeAnalysis.Formatting
                 int pairIndex,
                 Dictionary<SyntaxToken, int> previousChangesMap,
                 CancellationToken cancellationToken
-            ) {
+            )
+            {
                 var triviaInfo = _context.TokenStream.GetTriviaData(pairIndex);
 
                 if (!triviaInfo.SecondTokenIsFirstTokenOnLine)

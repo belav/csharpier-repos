@@ -11,11 +11,8 @@ namespace System.Security.Cryptography.Xml
     {
         private bool _isInNodeSet;
 
-        public CanonicalXmlText(
-            string strData,
-            XmlDocument doc,
-            bool defaultNodeSetInclusionState
-        ) : base(strData, doc)
+        public CanonicalXmlText(string strData, XmlDocument doc, bool defaultNodeSetInclusionState)
+            : base(strData, doc)
         {
             _isInNodeSet = defaultNodeSetInclusionState;
         }
@@ -30,7 +27,8 @@ namespace System.Security.Cryptography.Xml
             StringBuilder strBuilder,
             DocPosition docPos,
             AncestralNamespaceContextManager anc
-        ) {
+        )
+        {
             if (IsInNodeSet)
                 strBuilder.Append(Utils.EscapeTextData(Value));
         }
@@ -39,7 +37,8 @@ namespace System.Security.Cryptography.Xml
             HashAlgorithm hash,
             DocPosition docPos,
             AncestralNamespaceContextManager anc
-        ) {
+        )
+        {
             if (IsInNodeSet)
             {
                 UTF8Encoding utf8 = new UTF8Encoding(false);

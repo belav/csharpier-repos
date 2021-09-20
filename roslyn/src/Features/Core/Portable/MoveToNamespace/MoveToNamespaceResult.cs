@@ -24,7 +24,8 @@ namespace Microsoft.CodeAnalysis.MoveToNamespace
             Solution updatedSolution,
             DocumentId updatedDocumentId,
             ImmutableDictionary<string, ISymbol> newNameOriginalSymbolMapping
-        ) {
+        )
+        {
             OriginalSolution = originalSolution;
             UpdatedSolution = updatedSolution;
             UpdatedDocumentId = updatedDocumentId;

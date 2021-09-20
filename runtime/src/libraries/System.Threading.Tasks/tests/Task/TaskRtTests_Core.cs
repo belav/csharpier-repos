@@ -1811,7 +1811,8 @@ namespace System.Threading.Tasks.Tests
             int fillerTasks,
             bool[] finishMeFirst,
             int nExpectedReturnCode
-        ) {
+        )
+        {
             // We need to do this test in a local TM with # or threads equal to or greater than
             // the number of tasks requested. Otherwise this test can undeservedly fail on dual proc machines
 
@@ -1918,7 +1919,8 @@ namespace System.Threading.Tasks.Tests
                 int nTasks,
                 bool useSTA,
                 bool preCancel
-            ) {
+            )
+            {
                 Task[] tasks = new Task[nTasks];
 
                 CancellationTokenSource ctsForTaskCancellation = new CancellationTokenSource();
@@ -2151,7 +2153,8 @@ namespace System.Threading.Tasks.Tests
             if (
                 !(e is AggregateException)
                 || !((e as AggregateException).InnerExceptions[0] is TaskCanceledException)
-            ) {
+            )
+            {
                 Assert.True(
                     false,
                     string.Format(
@@ -2179,7 +2182,8 @@ namespace System.Threading.Tasks.Tests
             if (
                 !(e is AggregateException)
                 || ((e as AggregateException).InnerExceptions[0].Message != excpMsg)
-            ) {
+            )
+            {
                 Assert.True(
                     false,
                     string.Format(
@@ -2279,7 +2283,8 @@ namespace System.Threading.Tasks.Tests
             Action<object> taskAction2,
             int timeoutForWaitThread,
             ref Exception refWaitAllException
-        ) {
+        )
+        {
             int numTasks = numTasksType1 + numTasksType2;
             Task[] tasks = new Task[numTasks];
 
@@ -2348,7 +2353,8 @@ namespace System.Threading.Tasks.Tests
             int timeoutForWaitThread,
             int timeToSignalCancellationToken, // -1 never, 0 beforehand, >0 for a delay
             ref Exception refWaitAllException
-        ) {
+        )
+        {
             Task[] tasks = new Task[numTasks];
 
             CancellationTokenSource cts = new CancellationTokenSource();
@@ -4021,7 +4027,8 @@ namespace System.Threading.Tasks.Tests
                     !(e is AggregateException)
                     || ((AggregateException)e).InnerExceptions.Count != 1
                     || !(((AggregateException)e).InnerExceptions[0] is TaskCanceledException)
-                ) {
+                )
+                {
                     Assert.True(
                         false,
                         string.Format(
@@ -4054,7 +4061,8 @@ namespace System.Threading.Tasks.Tests
                     !(e is AggregateException)
                     || ((AggregateException)e).InnerExceptions.Count != 1
                     || ((AggregateException)e).InnerExceptions[0].Message != exceptionMsg
-                ) {
+                )
+                {
                     Assert.True(
                         false,
                         string.Format(
@@ -4098,7 +4106,8 @@ namespace System.Threading.Tasks.Tests
                     outerAggExp == null
                     || outerAggExp.InnerExceptions.Count != 1
                     || !(outerAggExp.InnerExceptions[0] is AggregateException)
-                ) {
+                )
+                {
                     Assert.True(
                         false,
                         string.Format(
@@ -4112,7 +4121,8 @@ namespace System.Threading.Tasks.Tests
                 if (
                     innerAggExp.InnerExceptions.Count != 1
                     || innerAggExp.InnerExceptions[0].Message != exceptionMsg
-                ) {
+                )
+                {
                     Assert.True(
                         false,
                         string.Format(

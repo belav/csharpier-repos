@@ -35,7 +35,8 @@ WHERE [c].[ParentId] = @__p_0",
             EntityState state,
             bool useAttach,
             bool useDetach
-        ) {
+        )
+        {
             base.Lazy_load_many_to_one_reference_to_principal(state, useAttach, useDetach);
 
             Assert.Equal(
@@ -53,7 +54,8 @@ WHERE [p].[Id] = @__p_0",
             EntityState state,
             bool useAttach,
             bool useDetach
-        ) {
+        )
+        {
             base.Lazy_load_one_to_one_reference_to_principal(state, useAttach, useDetach);
 
             Assert.Equal(
@@ -71,7 +73,8 @@ WHERE [p].[Id] = @__p_0",
             EntityState state,
             bool useAttach,
             bool useDetach
-        ) {
+        )
+        {
             base.Lazy_load_one_to_one_reference_to_dependent(state, useAttach, useDetach);
 
             Assert.Equal(
@@ -146,7 +149,8 @@ WHERE [c].[ParentId] = @__p_0",
 
         public override void Lazy_load_many_to_one_reference_to_principal_not_found(
             EntityState state
-        ) {
+        )
+        {
             base.Lazy_load_many_to_one_reference_to_principal_not_found(state);
 
             Assert.Equal(
@@ -162,7 +166,8 @@ WHERE [p].[Id] = @__p_0",
 
         public override void Lazy_load_one_to_one_reference_to_principal_not_found(
             EntityState state
-        ) {
+        )
+        {
             base.Lazy_load_one_to_one_reference_to_principal_not_found(state);
 
             Assert.Equal(
@@ -178,7 +183,8 @@ WHERE [p].[Id] = @__p_0",
 
         public override void Lazy_load_one_to_one_reference_to_dependent_not_found(
             EntityState state
-        ) {
+        )
+        {
             base.Lazy_load_one_to_one_reference_to_dependent_not_found(state);
 
             Assert.Equal(
@@ -195,7 +201,8 @@ WHERE [s].[ParentId] = @__p_0",
         public override void Lazy_load_collection_already_loaded(
             EntityState state,
             CascadeTiming cascadeDeleteTiming
-        ) {
+        )
+        {
             base.Lazy_load_collection_already_loaded(state, cascadeDeleteTiming);
 
             Assert.Equal("", Sql);
@@ -204,7 +211,8 @@ WHERE [s].[ParentId] = @__p_0",
         public override void Lazy_load_many_to_one_reference_to_principal_already_loaded(
             EntityState state,
             CascadeTiming cascadeDeleteTiming
-        ) {
+        )
+        {
             base.Lazy_load_many_to_one_reference_to_principal_already_loaded(
                 state,
                 cascadeDeleteTiming
@@ -215,7 +223,8 @@ WHERE [s].[ParentId] = @__p_0",
 
         public override void Lazy_load_one_to_one_reference_to_principal_already_loaded(
             EntityState state
-        ) {
+        )
+        {
             base.Lazy_load_one_to_one_reference_to_principal_already_loaded(state);
 
             Assert.Equal("", Sql);
@@ -224,7 +233,8 @@ WHERE [s].[ParentId] = @__p_0",
         public override void Lazy_load_one_to_one_reference_to_dependent_already_loaded(
             EntityState state,
             CascadeTiming cascadeDeleteTiming
-        ) {
+        )
+        {
             base.Lazy_load_one_to_one_reference_to_dependent_already_loaded(
                 state,
                 cascadeDeleteTiming
@@ -235,7 +245,8 @@ WHERE [s].[ParentId] = @__p_0",
 
         public override void Lazy_load_one_to_one_PK_to_PK_reference_to_principal_already_loaded(
             EntityState state
-        ) {
+        )
+        {
             base.Lazy_load_one_to_one_PK_to_PK_reference_to_principal_already_loaded(state);
 
             Assert.Equal("", Sql);
@@ -243,7 +254,8 @@ WHERE [s].[ParentId] = @__p_0",
 
         public override void Lazy_load_one_to_one_PK_to_PK_reference_to_dependent_already_loaded(
             EntityState state
-        ) {
+        )
+        {
             base.Lazy_load_one_to_one_PK_to_PK_reference_to_dependent_already_loaded(state);
 
             Assert.Equal("", Sql);
@@ -251,7 +263,8 @@ WHERE [s].[ParentId] = @__p_0",
 
         public override void Lazy_load_many_to_one_reference_to_principal_alternate_key(
             EntityState state
-        ) {
+        )
+        {
             base.Lazy_load_many_to_one_reference_to_principal_alternate_key(state);
 
             Assert.Equal(
@@ -267,7 +280,8 @@ WHERE [p].[AlternateId] = @__p_0",
 
         public override void Lazy_load_one_to_one_reference_to_principal_alternate_key(
             EntityState state
-        ) {
+        )
+        {
             base.Lazy_load_one_to_one_reference_to_principal_alternate_key(state);
 
             Assert.Equal(
@@ -283,7 +297,8 @@ WHERE [p].[AlternateId] = @__p_0",
 
         public override void Lazy_load_one_to_one_reference_to_dependent_alternate_key(
             EntityState state
-        ) {
+        )
+        {
             base.Lazy_load_one_to_one_reference_to_dependent_alternate_key(state);
 
             Assert.Equal(
@@ -299,7 +314,8 @@ WHERE [s].[ParentId] = @__p_0",
 
         public override void Lazy_load_many_to_one_reference_to_principal_null_FK_alternate_key(
             EntityState state
-        ) {
+        )
+        {
             base.Lazy_load_many_to_one_reference_to_principal_null_FK_alternate_key(state);
 
             Assert.Equal("", Sql);
@@ -307,7 +323,8 @@ WHERE [s].[ParentId] = @__p_0",
 
         public override void Lazy_load_one_to_one_reference_to_principal_null_FK_alternate_key(
             EntityState state
-        ) {
+        )
+        {
             base.Lazy_load_one_to_one_reference_to_principal_null_FK_alternate_key(state);
 
             Assert.Equal("", Sql);
@@ -330,7 +347,8 @@ WHERE [c].[ParentId] = @__p_0",
 
         public override void Lazy_load_many_to_one_reference_to_principal_shadow_fk(
             EntityState state
-        ) {
+        )
+        {
             base.Lazy_load_many_to_one_reference_to_principal_shadow_fk(state);
 
             Assert.Equal(
@@ -346,7 +364,8 @@ WHERE [p].[Id] = @__p_0",
 
         public override void Lazy_load_one_to_one_reference_to_principal_shadow_fk(
             EntityState state
-        ) {
+        )
+        {
             base.Lazy_load_one_to_one_reference_to_principal_shadow_fk(state);
 
             Assert.Equal(
@@ -362,7 +381,8 @@ WHERE [p].[Id] = @__p_0",
 
         public override void Lazy_load_one_to_one_reference_to_dependent_shadow_fk(
             EntityState state
-        ) {
+        )
+        {
             base.Lazy_load_one_to_one_reference_to_dependent_shadow_fk(state);
 
             Assert.Equal(
@@ -378,7 +398,8 @@ WHERE [s].[ParentId] = @__p_0",
 
         public override void Lazy_load_many_to_one_reference_to_principal_null_FK_shadow_fk(
             EntityState state
-        ) {
+        )
+        {
             base.Lazy_load_many_to_one_reference_to_principal_null_FK_shadow_fk(state);
 
             Assert.Equal("", Sql);
@@ -386,7 +407,8 @@ WHERE [s].[ParentId] = @__p_0",
 
         public override void Lazy_load_one_to_one_reference_to_principal_null_FK_shadow_fk(
             EntityState state
-        ) {
+        )
+        {
             base.Lazy_load_one_to_one_reference_to_principal_null_FK_shadow_fk(state);
 
             Assert.Equal("", Sql);
@@ -410,7 +432,8 @@ WHERE ([c].[ParentAlternateId] = @__p_0) AND ([c].[ParentId] = @__p_1)",
 
         public override void Lazy_load_many_to_one_reference_to_principal_composite_key(
             EntityState state
-        ) {
+        )
+        {
             base.Lazy_load_many_to_one_reference_to_principal_composite_key(state);
 
             Assert.Equal(
@@ -427,7 +450,8 @@ WHERE ([p].[AlternateId] = @__p_0) AND ([p].[Id] = @__p_1)",
 
         public override void Lazy_load_one_to_one_reference_to_principal_composite_key(
             EntityState state
-        ) {
+        )
+        {
             base.Lazy_load_one_to_one_reference_to_principal_composite_key(state);
 
             Assert.Equal(
@@ -444,7 +468,8 @@ WHERE ([p].[AlternateId] = @__p_0) AND ([p].[Id] = @__p_1)",
 
         public override void Lazy_load_one_to_one_reference_to_dependent_composite_key(
             EntityState state
-        ) {
+        )
+        {
             base.Lazy_load_one_to_one_reference_to_dependent_composite_key(state);
 
             Assert.Equal(
@@ -461,7 +486,8 @@ WHERE ([s].[ParentAlternateId] = @__p_0) AND ([s].[ParentId] = @__p_1)",
 
         public override void Lazy_load_many_to_one_reference_to_principal_null_FK_composite_key(
             EntityState state
-        ) {
+        )
+        {
             base.Lazy_load_many_to_one_reference_to_principal_null_FK_composite_key(state);
 
             Assert.Equal("", Sql);
@@ -469,7 +495,8 @@ WHERE ([s].[ParentAlternateId] = @__p_0) AND ([s].[ParentId] = @__p_1)",
 
         public override void Lazy_load_one_to_one_reference_to_principal_null_FK_composite_key(
             EntityState state
-        ) {
+        )
+        {
             base.Lazy_load_one_to_one_reference_to_principal_null_FK_composite_key(state);
 
             Assert.Equal("", Sql);

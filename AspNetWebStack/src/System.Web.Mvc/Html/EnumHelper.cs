@@ -193,7 +193,8 @@ namespace System.Web.Mvc.Html
                 valueType != null
                 && valueType != type
                 && valueType != Nullable.GetUnderlyingType(type)
-            ) {
+            )
+            {
                 throw Error.Argument(
                     "value",
                     MvcResources.EnumHelper_InvalidValueParameter,

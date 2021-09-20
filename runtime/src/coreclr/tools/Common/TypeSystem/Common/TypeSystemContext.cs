@@ -68,7 +68,8 @@ namespace Internal.TypeSystem
             IAssemblyDesc referencingModule,
             string fileName,
             bool throwIfNotFound = true
-        ) {
+        )
+        {
             if (throwIfNotFound)
                 throw new NotSupportedException();
             return null;
@@ -78,7 +79,8 @@ namespace Internal.TypeSystem
             IAssemblyDesc referencingModule,
             string fileName,
             bool throwIfNotFound
-        ) {
+        )
+        {
             return ResolveModule(referencingModule, fileName, throwIfNotFound);
         }
 
@@ -261,14 +263,16 @@ namespace Internal.TypeSystem
             protected override bool CompareKeyToValue(
                 MethodSignature key,
                 FunctionPointerType value
-            ) {
+            )
+            {
                 return key.Equals(value.Signature);
             }
 
             protected override bool CompareValueToValue(
                 FunctionPointerType value1,
                 FunctionPointerType value2
-            ) {
+            )
+            {
                 return value1.Signature.Equals(value2.Signature);
             }
 
@@ -330,7 +334,8 @@ namespace Internal.TypeSystem
                 protected override bool CompareKeyToValue(
                     InstantiatedTypeKey key,
                     InstantiatedType value
-                ) {
+                )
+                {
                     if (key._typeDef != value.GetTypeDefinition())
                         return false;
 
@@ -351,7 +356,8 @@ namespace Internal.TypeSystem
                 protected override bool CompareValueToValue(
                     InstantiatedType value1,
                     InstantiatedType value2
-                ) {
+                )
+                {
                     if (value1.GetTypeDefinition() != value2.GetTypeDefinition())
                         return false;
 
@@ -382,7 +388,8 @@ namespace Internal.TypeSystem
         public InstantiatedType GetInstantiatedType(
             MetadataType typeDef,
             Instantiation instantiation
-        ) {
+        )
+        {
             return _instantiatedTypes.GetOrCreateValue(
                 new InstantiatedTypeKey(typeDef, instantiation)
             );
@@ -436,7 +443,8 @@ namespace Internal.TypeSystem
                 protected override bool CompareKeyToValue(
                     InstantiatedMethodKey key,
                     InstantiatedMethod value
-                ) {
+                )
+                {
                     if (key._methodDef != value.GetMethodDefinition())
                         return false;
 
@@ -457,7 +465,8 @@ namespace Internal.TypeSystem
                 protected override bool CompareValueToValue(
                     InstantiatedMethod value1,
                     InstantiatedMethod value2
-                ) {
+                )
+                {
                     if (value1.GetMethodDefinition() != value2.GetMethodDefinition())
                         return false;
 
@@ -488,7 +497,8 @@ namespace Internal.TypeSystem
         public InstantiatedMethod GetInstantiatedMethod(
             MethodDesc methodDef,
             Instantiation instantiation
-        ) {
+        )
+        {
             Debug.Assert(!(methodDef is InstantiatedMethod));
             return _instantiatedMethods.GetOrCreateValue(
                 new InstantiatedMethodKey(methodDef, instantiation)
@@ -508,7 +518,8 @@ namespace Internal.TypeSystem
             public MethodForInstantiatedTypeKey(
                 MethodDesc typicalMethodDef,
                 InstantiatedType instantiatedType
-            ) {
+            )
+            {
                 _typicalMethodDef = typicalMethodDef;
                 _instantiatedType = instantiatedType;
                 _hashcode = TypeHashingAlgorithms.ComputeMethodHashCode(
@@ -543,7 +554,8 @@ namespace Internal.TypeSystem
                 protected override bool CompareKeyToValue(
                     MethodForInstantiatedTypeKey key,
                     MethodForInstantiatedType value
-                ) {
+                )
+                {
                     if (key._typicalMethodDef != value.GetTypicalMethodDefinition())
                         return false;
 
@@ -553,7 +565,8 @@ namespace Internal.TypeSystem
                 protected override bool CompareValueToValue(
                     MethodForInstantiatedType value1,
                     MethodForInstantiatedType value2
-                ) {
+                )
+                {
                     return (
                             value1.GetTypicalMethodDefinition()
                             == value2.GetTypicalMethodDefinition()
@@ -562,7 +575,8 @@ namespace Internal.TypeSystem
 
                 protected override MethodForInstantiatedType CreateValueFromKey(
                     MethodForInstantiatedTypeKey key
-                ) {
+                )
+                {
                     return new MethodForInstantiatedType(
                         key.TypicalMethodDef,
                         key.InstantiatedType,
@@ -577,7 +591,8 @@ namespace Internal.TypeSystem
         public MethodDesc GetMethodForInstantiatedType(
             MethodDesc typicalMethodDef,
             InstantiatedType instantiatedType
-        ) {
+        )
+        {
             Debug.Assert(!(typicalMethodDef is MethodForInstantiatedType));
             Debug.Assert(!(typicalMethodDef is InstantiatedMethod));
 
@@ -598,7 +613,8 @@ namespace Internal.TypeSystem
             public FieldForInstantiatedTypeKey(
                 FieldDesc fieldDef,
                 InstantiatedType instantiatedType
-            ) {
+            )
+            {
                 _fieldDef = fieldDef;
                 _instantiatedType = instantiatedType;
             }
@@ -630,7 +646,8 @@ namespace Internal.TypeSystem
                 protected override bool CompareKeyToValue(
                     FieldForInstantiatedTypeKey key,
                     FieldForInstantiatedType value
-                ) {
+                )
+                {
                     if (key._fieldDef != value.GetTypicalFieldDefinition())
                         return false;
 
@@ -640,7 +657,8 @@ namespace Internal.TypeSystem
                 protected override bool CompareValueToValue(
                     FieldForInstantiatedType value1,
                     FieldForInstantiatedType value2
-                ) {
+                )
+                {
                     return (
                             value1.GetTypicalFieldDefinition() == value2.GetTypicalFieldDefinition()
                         ) && (value1.OwningType == value2.OwningType);
@@ -648,7 +666,8 @@ namespace Internal.TypeSystem
 
                 protected override FieldForInstantiatedType CreateValueFromKey(
                     FieldForInstantiatedTypeKey key
-                ) {
+                )
+                {
                     return new FieldForInstantiatedType(key.TypicalFieldDef, key.InstantiatedType);
                 }
             }
@@ -659,7 +678,8 @@ namespace Internal.TypeSystem
         public FieldDesc GetFieldForInstantiatedType(
             FieldDesc fieldDef,
             InstantiatedType instantiatedType
-        ) {
+        )
+        {
             return _fieldForInstantiatedTypes.GetOrCreateValue(
                 new FieldForInstantiatedTypeKey(fieldDef, instantiatedType)
             );
@@ -700,7 +720,8 @@ namespace Internal.TypeSystem
             protected override bool CompareValueToValue(
                 SignatureVariable value1,
                 SignatureVariable value2
-            ) {
+            )
+            {
                 uint combinedIndex1 = value1.IsMethodSignatureVariable
                     ? ((uint)value1.Index | 0x80000000)
                     : (uint)value1.Index;
@@ -781,7 +802,8 @@ namespace Internal.TypeSystem
         /// </summary>
         protected virtual RuntimeInterfacesAlgorithm GetRuntimeInterfacesAlgorithmForDefType(
             DefType type
-        ) {
+        )
+        {
             // Type system contexts that support computing runtime interfaces need to override this.
             throw new NotSupportedException();
         }
@@ -792,7 +814,8 @@ namespace Internal.TypeSystem
         /// </summary>
         protected virtual RuntimeInterfacesAlgorithm GetRuntimeInterfacesAlgorithmForNonPointerArrayType(
             ArrayType type
-        ) {
+        )
+        {
             // Type system contexts that support computing runtime interfaces need to override this.
             throw new NotSupportedException();
         }
@@ -821,7 +844,8 @@ namespace Internal.TypeSystem
             if (
                 (mask & TypeFlags.HasStaticConstructorComputed)
                 == TypeFlags.HasStaticConstructorComputed
-            ) {
+            )
+            {
                 TypeDesc typeDefinition = type.GetTypeDefinition();
 
                 if (typeDefinition != type)
@@ -846,7 +870,8 @@ namespace Internal.TypeSystem
             if (
                 (mask & TypeFlags.IsIDynamicInterfaceCastableComputed)
                 == TypeFlags.IsIDynamicInterfaceCastableComputed
-            ) {
+            )
+            {
                 TypeDesc typeDefinition = type.GetTypeDefinition();
                 if (!typeDefinition.IsValueType)
                 {

@@ -80,7 +80,8 @@ namespace Microsoft.AspNetCore.Routing.Matching
                                 ) != 0
                             )
                         )
-                    ) {
+                    )
+                    {
                         return false;
                     }
 
@@ -106,7 +107,8 @@ namespace Microsoft.AspNetCore.Routing.Matching
                                 StringComparison.OrdinalIgnoreCase
                             ) != 0
                         )
-                    ) {
+                    )
+                    {
                         return false;
                     }
 

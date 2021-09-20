@@ -81,7 +81,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UseIsNullCheck
                     binaryExpression.Right,
                     binaryExpression.Left
                 )
-            ) {
+            )
+            {
                 return;
             }
 
@@ -101,23 +102,27 @@ namespace Microsoft.CodeAnalysis.CSharp.UseIsNullCheck
             SemanticModel semanticModel,
             ExpressionSyntax left,
             ExpressionSyntax right
-        ) {
+        )
+        {
             if (
                 left is CastExpressionSyntax castExpression
                 && right.IsKind(SyntaxKind.NullLiteralExpression)
-            ) {
+            )
+            {
                 // make sure it's a cast to object, and that the thing we're casting actually has a type.
                 if (
                     semanticModel.GetTypeInfo(castExpression.Type).Type?.SpecialType
                     == SpecialType.System_Object
-                ) {
+                )
+                {
                     var expressionType = semanticModel.GetTypeInfo(castExpression.Expression).Type;
                     if (expressionType != null)
                     {
                         if (
                             expressionType is ITypeParameterSymbol typeParameter
                             && !typeParameter.HasReferenceTypeConstraint
-                        ) {
+                        )
+                        {
                             return false;
                         }
 

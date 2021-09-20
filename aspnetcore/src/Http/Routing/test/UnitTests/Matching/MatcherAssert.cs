@@ -15,19 +15,22 @@ namespace Microsoft.AspNetCore.Routing.Matching
         public static void AssertRouteValuesEqual(
             object expectedValues,
             RouteValueDictionary actualValues
-        ) {
+        )
+        {
             AssertRouteValuesEqual(new RouteValueDictionary(expectedValues), actualValues);
         }
 
         public static void AssertRouteValuesEqual(
             RouteValueDictionary expectedValues,
             RouteValueDictionary actualValues
-        ) {
+        )
+        {
             if (
                 expectedValues.Count != actualValues.Count
                 || !expectedValues.OrderBy(kvp => kvp.Key)
                     .SequenceEqual(actualValues.OrderBy(kvp => kvp.Key))
-            ) {
+            )
+            {
                 throw new XunitException(
                     $"Expected values:{FormatRouteValues(expectedValues)} Actual values: {FormatRouteValues(actualValues)}."
                 );
@@ -43,7 +46,8 @@ namespace Microsoft.AspNetCore.Routing.Matching
             HttpContext httpContext,
             Endpoint expected,
             bool ignoreValues
-        ) {
+        )
+        {
             AssertMatch(httpContext, expected, new RouteValueDictionary(), ignoreValues);
         }
 
@@ -57,7 +61,8 @@ namespace Microsoft.AspNetCore.Routing.Matching
             Endpoint expected,
             string[] keys,
             string[] values
-        ) {
+        )
+        {
             keys = keys ?? Array.Empty<string>();
             values = values ?? Array.Empty<string>();
 
@@ -75,7 +80,8 @@ namespace Microsoft.AspNetCore.Routing.Matching
             Endpoint expected,
             RouteValueDictionary values,
             bool ignoreValues = false
-        ) {
+        )
+        {
             if (httpContext.GetEndpoint() == null)
             {
                 throw new XunitException(
@@ -106,7 +112,8 @@ namespace Microsoft.AspNetCore.Routing.Matching
                     values.Count != actualValues.Count
                     || !values.OrderBy(kvp => kvp.Key)
                         .SequenceEqual(actualValues.OrderBy(kvp => kvp.Key))
-                ) {
+                )
+                {
                     throw new XunitException(
                         $"Was expected to match '{expected.DisplayName}' with values {FormatRouteValues(values)} but matched "
                             + $"values: {FormatRouteValues(actualValues)}."

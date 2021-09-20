@@ -31,7 +31,8 @@ namespace Microsoft.EntityFrameworkCore.Migrations
             DbContext? context,
             IRelationalCommandDiagnosticsLogger logger,
             bool transactionSuppressed = false
-        ) {
+        )
+        {
             Check.NotNull(relationalCommand, nameof(relationalCommand));
 
             _relationalCommand = relationalCommand;

@@ -108,7 +108,8 @@ namespace Microsoft.EntityFrameworkCore.Cosmos.Update.Internal
                     !fk.IsOwnership
                     || embeddedNavigation.IsOnDependent
                     || fk.DeclaringEntityType.IsDocumentRoot()
-                ) {
+                )
+                {
                     continue;
                 }
 
@@ -197,7 +198,8 @@ namespace Microsoft.EntityFrameworkCore.Cosmos.Update.Internal
                     ordinal != null
                     && entry.HasTemporaryValue(property)
                     && property.IsOrdinalKeyProperty()
-                ) {
+                )
+                {
                     entry.SetStoreGeneratedValue(property, ordinal.Value);
                 }
             }
@@ -209,7 +211,8 @@ namespace Microsoft.EntityFrameworkCore.Cosmos.Update.Internal
                     !fk.IsOwnership
                     || ownedNavigation.IsOnDependent
                     || fk.DeclaringEntityType.IsDocumentRoot()
-                ) {
+                )
+                {
                     continue;
                 }
 
@@ -273,7 +276,8 @@ namespace Microsoft.EntityFrameworkCore.Cosmos.Update.Internal
                             if (
                                 (int)embeddedEntry.GetCurrentValue(ordinalKeyProperty)!
                                 != embeddedOrdinal
-                            ) {
+                            )
+                            {
                                 shouldSetTemporaryKeys = true;
                                 break;
                             }

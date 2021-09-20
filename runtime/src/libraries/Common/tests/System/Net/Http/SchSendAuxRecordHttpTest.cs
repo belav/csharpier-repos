@@ -94,7 +94,8 @@ namespace System.Net.Http.Functional.Tests
                             server.Stream.CipherAlgorithm == CipherAlgorithmType.None
                             || server.Stream.CipherAlgorithm == CipherAlgorithmType.Null
                             || server.Stream.CipherAlgorithm == CipherAlgorithmType.Rc4
-                        ) {
+                        )
+                        {
                             serverAuxRecordDetectedInconclusive = true;
                         }
 

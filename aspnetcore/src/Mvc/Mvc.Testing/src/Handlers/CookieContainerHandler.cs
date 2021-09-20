@@ -40,7 +40,8 @@ namespace Microsoft.AspNetCore.Mvc.Testing.Handlers
         protected override async Task<HttpResponseMessage> SendAsync(
             HttpRequestMessage request,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var cookieHeader = Container.GetCookieHeader(request.RequestUri);
 
             if (!string.IsNullOrEmpty(cookieHeader))

@@ -295,7 +295,8 @@ namespace System.Tests
         public async Task StartPositionOfStreamRespectedBackingBuffer(
             int bufferOffset,
             long streamStart
-        ) {
+        )
+        {
             var input = "some data";
             ArraySegment<byte> buffer = new ArraySegment<byte>(
                 Encoding.UTF8.GetBytes("some data"),

@@ -29,7 +29,8 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
             this DiagnosticDescriptor descriptor,
             CompilationOptions compilationOptions,
             AnalyzerConfigOptionsResult? analyzerConfigOptions
-        ) {
+        )
+        {
             var effectiveSeverity = descriptor.GetEffectiveSeverity(compilationOptions);
 
             // Apply analyzer config options, unless configured with a non-default value in compilation options.
@@ -43,7 +44,8 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
                     )
                     || reportDiagnostic == ReportDiagnostic.Default
                 )
-            ) {
+            )
+            {
                 if (
                     analyzerConfigOptions.Value.TreeOptions.TryGetValue(
                         descriptor.Id,
@@ -55,7 +57,8 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
                         analyzerConfigOptions.Value,
                         out reportDiagnostic
                     )
-                ) {
+                )
+                {
                     Debug.Assert(reportDiagnostic != ReportDiagnostic.Default);
                     effectiveSeverity = reportDiagnostic;
                 }
@@ -67,13 +70,15 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
         public static ReportDiagnostic GetEffectiveSeverity(
             this DiagnosticDescriptor descriptor,
             AnalyzerConfigOptions analyzerConfigOptions
-        ) {
+        )
+        {
             // Check if the option is defined explicitly in the editorconfig
             var diagnosticKey = $"{DotnetDiagnosticPrefix}.{descriptor.Id}.{SeveritySuffix}";
             if (
                 analyzerConfigOptions.TryGetValue(diagnosticKey, out var value)
                 && EditorConfigSeverityStrings.TryParse(value, out var severity)
-            ) {
+            )
+            {
                 return severity;
             }
 
@@ -89,7 +94,8 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
                         tag == WellKnownDiagnosticTags.Compiler
                         || tag == WellKnownDiagnosticTags.NotConfigurable
                 )
-            ) {
+            )
+            {
                 return ReportDiagnostic.Default;
             }
 
@@ -100,7 +106,8 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
             if (
                 analyzerConfigOptions.TryGetValue(categoryBasedKey, out value)
                 && EditorConfigSeverityStrings.TryParse(value, out severity)
-            ) {
+            )
+            {
                 return severity;
             }
 
@@ -109,7 +116,8 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
             if (
                 analyzerConfigOptions.TryGetValue(DotnetAnalyzerDiagnosticSeverityKey, out value)
                 && EditorConfigSeverityStrings.TryParse(value, out severity)
-            ) {
+            )
+            {
                 return severity;
             }
 
@@ -129,7 +137,8 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
             DiagnosticDescriptor descriptor,
             AnalyzerConfigOptionsResult analyzerConfigOptions,
             out ReportDiagnostic severity
-        ) {
+        )
+        {
             Debug.Assert(!analyzerConfigOptions.TreeOptions.ContainsKey(descriptor.Id));
 
             // Analyzer bulk configuration does not apply to:
@@ -143,7 +152,8 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
                         tag == WellKnownDiagnosticTags.Compiler
                         || tag == WellKnownDiagnosticTags.NotConfigurable
                 )
-            ) {
+            )
+            {
                 severity = default;
                 return false;
             }
@@ -155,7 +165,8 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
             if (
                 analyzerConfigOptions.AnalyzerOptions.TryGetValue(categoryBasedKey, out var value)
                 && EditorConfigSeverityStrings.TryParse(value, out severity)
-            ) {
+            )
+            {
                 return true;
             }
 
@@ -166,7 +177,8 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
                     DotnetAnalyzerDiagnosticSeverityKey,
                     out value
                 ) && EditorConfigSeverityStrings.TryParse(value, out severity)
-            ) {
+            )
+            {
                 return true;
             }
 

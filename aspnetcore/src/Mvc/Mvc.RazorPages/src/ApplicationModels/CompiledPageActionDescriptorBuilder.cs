@@ -24,7 +24,8 @@ namespace Microsoft.AspNetCore.Mvc.ApplicationModels
         public static CompiledPageActionDescriptor Build(
             PageApplicationModel applicationModel,
             FilterCollection globalFilters
-        ) {
+        )
+        {
             var boundProperties = CreateBoundProperties(applicationModel);
             var filters = Enumerable.Concat(
                     globalFilters.Select(f => new FilterDescriptor(f, FilterScope.Global)),
@@ -39,7 +40,8 @@ namespace Microsoft.AspNetCore.Mvc.ApplicationModels
                 applicationModel.ModelType != null
                 && applicationModel.DeclaredModelType != null
                 && !applicationModel.DeclaredModelType.IsAssignableFrom(applicationModel.ModelType)
-            ) {
+            )
+            {
                 var message = Resources.FormatInvalidActionDescriptorModelType(
                     applicationModel.ActionDescriptor.DisplayName,
                     applicationModel.ModelType.Name,
@@ -82,7 +84,8 @@ namespace Microsoft.AspNetCore.Mvc.ApplicationModels
         // Internal for unit testing
         internal static HandlerMethodDescriptor[] CreateHandlerMethods(
             PageApplicationModel applicationModel
-        ) {
+        )
+        {
             var handlerModels = applicationModel.HandlerMethods;
             var handlerDescriptors = new HandlerMethodDescriptor[handlerModels.Count];
 
@@ -105,7 +108,8 @@ namespace Microsoft.AspNetCore.Mvc.ApplicationModels
         // internal for unit testing
         internal static HandlerParameterDescriptor[] CreateHandlerParameters(
             PageHandlerModel handlerModel
-        ) {
+        )
+        {
             var methodParameters = handlerModel.Parameters;
             var parameters = new HandlerParameterDescriptor[methodParameters.Count];
 
@@ -128,7 +132,8 @@ namespace Microsoft.AspNetCore.Mvc.ApplicationModels
         // internal for unit testing
         internal static PageBoundPropertyDescriptor[] CreateBoundProperties(
             PageApplicationModel applicationModel
-        ) {
+        )
+        {
             var results = new List<PageBoundPropertyDescriptor>();
             var properties = applicationModel.HandlerProperties;
             for (var i = 0; i < properties.Count; i++)

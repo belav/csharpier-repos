@@ -1160,7 +1160,8 @@ namespace System.Data
             int px_id /* px is parent of x */
             ,
             int mainTreeNodeID
-        ) { //x is successor's non nil child or nil if both children are nil
+        )
+        { //x is successor's non nil child or nil if both children are nil
             int w_id;
 
 #if VerifyPath
@@ -1180,7 +1181,8 @@ namespace System.Data
                 if (
                     (x_id != NIL && x_id == Left(Parent(x_id)))
                     || (x_id == NIL && Left(px_id) == NIL)
-                ) {
+                )
+                {
                     // we have from DELETE, then x cannot be NIL and be a right child of its parent
                     // also from DELETE, if x is non nil, it will be a left child.
                     w_id = (x_id == NIL) ? Right(px_id) : Right(Parent(x_id)); // w is x's right sibling and it cannot be NIL
@@ -1201,7 +1203,8 @@ namespace System.Data
                     if (
                         color(Left(w_id)) == NodeColor.black
                         && color(Right(w_id)) == NodeColor.black
-                    ) {
+                    )
+                    {
                         SetColor(w_id, NodeColor.red);
                         x_id = px_id;
                         px_id = Parent(px_id); //maintain px_id
@@ -1257,7 +1260,8 @@ namespace System.Data
                     if (
                         color(Right(w_id)) == NodeColor.black
                         && color(Left(w_id)) == NodeColor.black
-                    ) {
+                    )
+                    {
                         SetColor(w_id, NodeColor.red);
                         x_id = px_id;
                         px_id = Parent(px_id);
@@ -1582,7 +1586,8 @@ namespace System.Data
             while (
                 x_id != NIL
                 && !(((rank = SubTreeSize(Left(x_id)) + 1) == index) && Next(x_id) == NIL)
-            ) {
+            )
+            {
                 if (index < rank)
                 {
                     x_id = Left(x_id);
@@ -1591,7 +1596,8 @@ namespace System.Data
                     Next(x_id) != NIL
                     && index >= rank
                     && index <= rank + SubTreeSize(Next(x_id)) - 1
-                ) {
+                )
+                {
                     // node with matching index is in the associated satellite tree. continue searching for index in satellite tree.
                     satelliteRootId = x_id;
                     index = index - rank + 1; // rank is SubTreeSize(Node.left)+1, we do +1 here to offset +1 done in rank. index -= rank;

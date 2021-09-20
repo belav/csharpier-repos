@@ -98,7 +98,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel.FunctionalTests
                                                         receivedBytes.Length
                                                     )
                                                 ) > 0
-                                            ) {
+                                            )
+                                            {
                                                 if (checkBytes)
                                                 {
                                                     for (var i = 0; i < received; i++)
@@ -136,7 +137,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel.FunctionalTests
                         SocketType.Stream,
                         ProtocolType.Tcp
                     )
-                ) {
+                )
+                {
                     socket.Connect(new IPEndPoint(IPAddress.Loopback, host.GetPort()));
                     socket.Send(Encoding.ASCII.GetBytes("POST / HTTP/1.1\r\nHost: \r\n"));
                     socket.Send(
@@ -243,7 +245,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel.FunctionalTests
                     },
                     new TestServiceContext(LoggerFactory)
                 )
-            ) {
+            )
+            {
                 using (var connection1 = server.CreateConnection())
                 using (var connection2 = server.CreateConnection())
                 {
@@ -281,7 +284,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel.FunctionalTests
                     context.LoggerName != "Microsoft.AspNetCore.Server.Kestrel"
                     && context.LoggerName != "Microsoft.AspNetCore.Server.Kestrel.Transport.Libuv"
                     && context.LoggerName != "Microsoft.AspNetCore.Server.Kestrel.Transport.Sockets"
-                ) {
+                )
+                {
                     return;
                 }
 
@@ -305,7 +309,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel.FunctionalTests
                     context => Task.CompletedTask,
                     new TestServiceContext(LoggerFactory)
                 )
-            ) {
+            )
+            {
                 using (var connection = server.CreateConnection())
                 {
                     // Wait until connection is established
@@ -336,7 +341,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel.FunctionalTests
                     context.LoggerName != "Microsoft.AspNetCore.Server.Kestrel"
                     && context.LoggerName != "Microsoft.AspNetCore.Server.Kestrel.Transport.Libuv"
                     && context.LoggerName != "Microsoft.AspNetCore.Server.Kestrel.Transport.Sockets"
-                ) {
+                )
+                {
                     return;
                 }
 
@@ -356,7 +362,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel.FunctionalTests
                     context => Task.CompletedTask,
                     new TestServiceContext(LoggerFactory)
                 )
-            ) {
+            )
+            {
                 using (var connection = server.CreateConnection())
                 {
                     await connection.Send("GET / HTTP/1.1", "Host:", "", "");
@@ -399,7 +406,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel.FunctionalTests
                     context.LoggerName != "Microsoft.AspNetCore.Server.Kestrel"
                     && context.LoggerName != "Microsoft.AspNetCore.Server.Kestrel.Transport.Libuv"
                     && context.LoggerName != "Microsoft.AspNetCore.Server.Kestrel.Transport.Sockets"
-                ) {
+                )
+                {
                     return;
                 }
 
@@ -423,7 +431,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel.FunctionalTests
                     },
                     new TestServiceContext(LoggerFactory)
                 )
-            ) {
+            )
+            {
                 using (var connection = server.CreateConnection())
                 {
                     await connection.SendEmptyGet();
@@ -511,7 +520,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel.FunctionalTests
                         SocketType.Stream,
                         ProtocolType.Tcp
                     )
-                ) {
+                )
+                {
                     socket.Connect(new IPEndPoint(IPAddress.Loopback, host.GetPort()));
                     socket.LingerState = new LingerOption(true, 0);
                     socket.Send(
@@ -569,7 +579,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel.FunctionalTests
                         SocketType.Stream,
                         ProtocolType.Tcp
                     )
-                ) {
+                )
+                {
                     socket.Connect(new IPEndPoint(IPAddress.Loopback, host.GetPort()));
                     socket.Send(Encoding.ASCII.GetBytes("GET / HTTP/1.1\r\nHost:\r\n\r\n"));
                     await appStarted.WaitAsync();
@@ -614,7 +625,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel.FunctionalTests
                         SocketType.Stream,
                         ProtocolType.Tcp
                     )
-                ) {
+                )
+                {
                     socket.Connect(new IPEndPoint(IPAddress.Loopback, host.GetPort()));
                     socket.Send(Encoding.ASCII.GetBytes("GET / HTTP/1.1\r\nHost:\r\n\r\n"));
                     int result = socket.Receive(new byte[32]);
@@ -655,7 +667,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel.FunctionalTests
                     testContext,
                     ConnectionMiddlewareData[listenOptionsName]()
                 )
-            ) {
+            )
+            {
                 using (var connection = server.CreateConnection())
                 {
                     await connection.Send("GET / HTTP/1.1", "Host:", "", "");
@@ -693,7 +706,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel.FunctionalTests
                     testContext,
                     ConnectionMiddlewareData[listenOptionsName]()
                 )
-            ) {
+            )
+            {
                 using (var connection = server.CreateConnection())
                 {
                     await connection.Send("GET / HTTP/1.1", "Host:", "Connection: close", "", "");
@@ -738,7 +752,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel.FunctionalTests
                     testContext,
                     ConnectionMiddlewareData[listenOptionsName]()
                 )
-            ) {
+            )
+            {
                 using (var connection = server.CreateConnection())
                 {
                     await connection.Send("GET / HTTP/1.1", "Host:", "", "");
@@ -822,7 +837,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel.FunctionalTests
                     testContext,
                     ConnectionMiddlewareData[listenOptionsName]()
                 )
-            ) {
+            )
+            {
                 using (var connection = server.CreateConnection())
                 {
                     // Full request and response
@@ -889,7 +905,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel.FunctionalTests
                 if (
                     context.LoggerName != "Microsoft.AspNetCore.Server.Kestrel.Transport.Libuv"
                     && context.LoggerName != "Microsoft.AspNetCore.Server.Kestrel.Transport.Sockets"
-                ) {
+                )
+                {
                     return;
                 }
 
@@ -934,7 +951,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel.FunctionalTests
                     testContext,
                     ConnectionMiddlewareData[listenOptionsName]()
                 )
-            ) {
+            )
+            {
                 using (var connection = server.CreateConnection())
                 {
                     await connection.Send(
@@ -1002,7 +1020,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel.FunctionalTests
                     testContext,
                     ConnectionMiddlewareData[listenOptionsName]()
                 )
-            ) {
+            )
+            {
                 using (var connection = server.CreateConnection())
                 {
                     await connection.Send(
@@ -1030,7 +1049,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel.FunctionalTests
             string registerAddress,
             string requestAddress,
             string expectAddress
-        ) {
+        )
+        {
             var builder = TransportSelector.GetHostBuilder()
                 .ConfigureWebHost(
                     webHostBuilder =>

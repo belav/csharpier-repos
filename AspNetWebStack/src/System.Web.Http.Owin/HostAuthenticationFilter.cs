@@ -42,7 +42,8 @@ namespace System.Web.Http
         public async Task AuthenticateAsync(
             HttpAuthenticationContext context,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             if (context == null)
             {
                 throw new ArgumentNullException("context");
@@ -79,7 +80,8 @@ namespace System.Web.Http
         public Task ChallengeAsync(
             HttpAuthenticationChallengeContext context,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             if (context == null)
             {
                 throw new ArgumentNullException("context");
@@ -114,7 +116,8 @@ namespace System.Web.Http
         private static AuthenticationResponseChallenge AddChallengeAuthenticationType(
             AuthenticationResponseChallenge challenge,
             string authenticationType
-        ) {
+        )
+        {
             Contract.Assert(authenticationType != null);
 
             List<string> authenticationTypes = new List<string>();
@@ -143,7 +146,8 @@ namespace System.Web.Http
 
         private static IAuthenticationManager GetAuthenticationManagerOrThrow(
             HttpRequestMessage request
-        ) {
+        )
+        {
             Contract.Assert(request != null);
 
             IAuthenticationManager authenticationManager = request.GetAuthenticationManager();

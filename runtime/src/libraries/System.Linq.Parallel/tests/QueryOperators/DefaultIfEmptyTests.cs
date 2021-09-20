@@ -78,7 +78,8 @@ namespace System.Linq.Parallel.Tests
         public static void DefaultIfEmpty_NotEmpty_Longrunning(
             Labeled<ParallelQuery<int>> labeled,
             int count
-        ) {
+        )
+        {
             DefaultIfEmpty_NotEmpty(labeled, count);
         }
 
@@ -105,7 +106,8 @@ namespace System.Linq.Parallel.Tests
         public static void DefaultIfEmpty_NotEmpty_NotPipelined(
             Labeled<ParallelQuery<int>> labeled,
             int count
-        ) {
+        )
+        {
             ParallelQuery<int> query = labeled.Item;
             int seen = 0;
             foreach (int i in query.DefaultIfEmpty().ToList())
@@ -121,7 +123,8 @@ namespace System.Linq.Parallel.Tests
         public static void DefaultIfEmpty_NotEmpty_NotPipelined_Longrunning(
             Labeled<ParallelQuery<int>> labeled,
             int count
-        ) {
+        )
+        {
             DefaultIfEmpty_NotEmpty_NotPipelined(labeled, count);
         }
 
@@ -147,7 +150,8 @@ namespace System.Linq.Parallel.Tests
         public static void DefaultIfEmpty_Empty_NotPipelined<T>(
             Labeled<ParallelQuery<T>> labeled,
             T def
-        ) {
+        )
+        {
             IList<T> notEmpty = labeled.Item.DefaultIfEmpty().ToList();
             Assert.NotEmpty(notEmpty);
             Assert.Equal(1, notEmpty.Count());

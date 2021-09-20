@@ -71,7 +71,8 @@ namespace System.Net.Http.Tests
         [MemberData(nameof(MultipartContent_TestData))]
         public async Task MultipartContent_TryComputeLength_ReturnsSameLengthAsCopyToAsync(
             MultipartContent multipartContent
-        ) {
+        )
+        {
             Assert.True(multipartContent.TryComputeLength(out long length));
 
             var copyToStream = new MemoryStream();

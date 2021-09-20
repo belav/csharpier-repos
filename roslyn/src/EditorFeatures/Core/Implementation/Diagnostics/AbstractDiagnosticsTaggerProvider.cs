@@ -102,7 +102,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.Diagnostics
         protected override ITaggerEventSource CreateEventSource(
             ITextView textViewOpt,
             ITextBuffer subjectBuffer
-        ) {
+        )
+        {
             return TaggerEventSources.Compose(
                 TaggerEventSources.OnDocumentActiveContextChanged(
                     subjectBuffer,
@@ -146,14 +147,16 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.Diagnostics
             TaggerContext<TTag> context,
             DocumentSnapshotSpan spanToTag,
             int? caretPosition
-        ) {
+        )
+        {
             return ProduceTagsAsync(context, spanToTag);
         }
 
         private async Task ProduceTagsAsync(
             TaggerContext<TTag> context,
             DocumentSnapshotSpan spanToTag
-        ) {
+        )
+        {
             if (!this.IsEnabled)
             {
                 return;
@@ -211,7 +214,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.Diagnostics
             NormalizedSnapshotSpanCollection? suppressedDiagnosticsSpans,
             DiagnosticBucket bucket,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             try
             {
                 var id = bucket.Id;
@@ -280,7 +284,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.Diagnostics
                             if (
                                 diagnosticSpan.IntersectsWith(requestedSpan)
                                 && !IsSuppressed(suppressedDiagnosticsSpans, diagnosticSpan)
-                            ) {
+                            )
+                            {
                                 var tagSpan = this.CreateTagSpan(
                                     workspace,
                                     isLiveUpdate,
@@ -309,7 +314,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.Diagnostics
                 ITextSnapshot diagnosticSnapshot,
                 ITextSnapshot editorSnapshot,
                 SourceText sourceText
-            ) {
+            )
+            {
                 return DiagnosticData.GetExistingOrCalculatedTextSpan(
                         diagnosticDataLocation,
                         sourceText

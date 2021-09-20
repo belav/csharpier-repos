@@ -29,7 +29,8 @@ namespace Microsoft.CodeAnalysis.CSharp.ExpressionEvaluator
             string name,
             TypeWithAnnotations type,
             ConstantValue value
-        ) {
+        )
+        {
             _method = method;
             _name = name;
             _type = type;
@@ -81,7 +82,8 @@ namespace Microsoft.CodeAnalysis.CSharp.ExpressionEvaluator
             SyntaxNode node,
             LocalSymbol inProgress,
             BindingDiagnosticBag diagnostics
-        ) {
+        )
+        {
             if (diagnostics != null && _value.IsBad)
             {
                 diagnostics.Add(ErrorCode.ERR_BadPdbData, Location.None, Name);

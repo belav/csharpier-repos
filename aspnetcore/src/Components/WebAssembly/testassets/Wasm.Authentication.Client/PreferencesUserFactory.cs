@@ -26,7 +26,8 @@ namespace Wasm.Authentication.Client
         public async override ValueTask<ClaimsPrincipal> CreateUserAsync(
             OidcAccount account,
             RemoteAuthenticationUserOptions options
-        ) {
+        )
+        {
             var initialUser = await base.CreateUserAsync(account, options);
 
             if (initialUser.Identity.IsAuthenticated)

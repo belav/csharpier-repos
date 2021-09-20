@@ -9,7 +9,8 @@ namespace System.Net
             this IPAddress address,
             Span<byte> destination,
             out int bytesWritten
-        ) {
+        )
+        {
             byte[] bytes = address.GetAddressBytes();
             if (bytes.Length >= destination.Length)
             {

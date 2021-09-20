@@ -46,7 +46,8 @@ namespace Microsoft.EntityFrameworkCore.SqlServer.ValueGeneration.Internal
         public virtual SqlServerSequenceValueGeneratorState GetOrAddSequenceState(
             IProperty property,
             IRelationalConnection connection
-        ) {
+        )
+        {
             var sequence = property.FindHiLoSequence(
                 StoreObjectIdentifier.Create(
                     property.DeclaringEntityType,

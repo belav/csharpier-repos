@@ -113,7 +113,8 @@ public class ReversePInvoke_MashalArrayByRef_AsManagedTest
     public static bool TestMethodForByteArray_AsReversePInvokeByRef_AsCdecl(
         [MarshalAs(UnmanagedType.LPArray, SizeParamIndex = 1)] ref byte[] arrArg,
         ref byte arraySize
-    ) {
+    )
+    {
         if (arraySize == byte.MinValue)
             return Helper.CheckAndChangeArray<byte>(
                 ref arrArg,
@@ -128,7 +129,8 @@ public class ReversePInvoke_MashalArrayByRef_AsManagedTest
     public static bool TestMethodForSbyteArray_AsReversePInvokeByRef_AsCdecl(
         ref sbyte arraySize,
         [MarshalAs(UnmanagedType.LPArray, SizeParamIndex = 0)] ref sbyte[] arrArg
-    ) {
+    )
+    {
         if (arraySize == 1)
             return Helper.CheckAndChangeArray<sbyte>(
                 ref arrArg,
@@ -143,7 +145,8 @@ public class ReversePInvoke_MashalArrayByRef_AsManagedTest
     public static bool TestMethodForShortArray_AsReversePInvokeByRef_AsCdecl(
         [MarshalAs(UnmanagedType.LPArray, SizeParamIndex = 1)] ref short[] arrArg,
         ref short arraySize
-    ) {
+    )
+    {
         if (arraySize == -1)
             return Helper.CheckAndChangeArray<short>(ref arrArg, ref arraySize, 10, 20);
         return false;
@@ -153,7 +156,8 @@ public class ReversePInvoke_MashalArrayByRef_AsManagedTest
     public static bool TestMethodForShortArrayReturnNegativeSize_AsReversePInvokeByRef_AsCdecl(
         [MarshalAs(UnmanagedType.LPArray, SizeParamIndex = 1)] ref short[] arrArg,
         ref short arraySize
-    ) {
+    )
+    {
         if (arraySize == 10)
         {
             Helper.CheckAndChangeArray<short>(ref arrArg, ref arraySize, 10, 20);
@@ -167,7 +171,8 @@ public class ReversePInvoke_MashalArrayByRef_AsManagedTest
     public static bool TestMethodForUshortArray_AsReversePInvokeByRef_AsCdecl(
         [MarshalAs(UnmanagedType.LPArray, SizeParamIndex = 1)] ref ushort[] arrArg,
         ref ushort arraySize
-    ) {
+    )
+    {
         if (arraySize == ushort.MaxValue)
             return Helper.CheckAndChangeArray<ushort>(
                 ref arrArg,
@@ -182,7 +187,8 @@ public class ReversePInvoke_MashalArrayByRef_AsManagedTest
     public static bool TestMethodForInt32Array_AsReversePInvokeByRef_AsCdecl(
         [MarshalAs(UnmanagedType.LPArray, SizeParamIndex = 1)] ref Int32[] arrArg,
         ref Int32 arraySize
-    ) {
+    )
+    {
         if (arraySize == 10)
             return Helper.CheckAndChangeArray<Int32>(ref arrArg, ref arraySize, 10, 20);
         return false;
@@ -192,7 +198,8 @@ public class ReversePInvoke_MashalArrayByRef_AsManagedTest
     public static bool TestMethodForUint32Array_AsReversePInvokeByRef_AsCdecl(
         [MarshalAs(UnmanagedType.LPArray, SizeParamIndex = 1)] ref UInt32[] arrArg,
         ref UInt32 arraySize
-    ) {
+    )
+    {
         if (arraySize == 10)
             return Helper.CheckAndChangeArray<UInt32>(ref arrArg, ref arraySize, 10, 20);
         return false;
@@ -202,7 +209,8 @@ public class ReversePInvoke_MashalArrayByRef_AsManagedTest
     public static bool TestMethodForLongArray_AsReversePInvokeByRef_AsCdecl(
         [MarshalAs(UnmanagedType.LPArray, SizeParamIndex = 1)] ref long[] arrArg,
         ref long arraySize
-    ) {
+    )
+    {
         if (arraySize == 10)
             return Helper.CheckAndChangeArray<long>(ref arrArg, ref arraySize, 10, 20);
         return false;
@@ -212,7 +220,8 @@ public class ReversePInvoke_MashalArrayByRef_AsManagedTest
     public static bool TestMethodForUlongArray_AsReversePInvokeByRef_AsCdecl(
         [MarshalAs(UnmanagedType.LPArray, SizeParamIndex = 1)] ref ulong[] arrArg,
         ref ulong arraySize
-    ) {
+    )
+    {
         if (arraySize == 10)
             return Helper.CheckAndChangeArray<ulong>(ref arrArg, ref arraySize, 10, 20);
         return false;
@@ -223,7 +232,8 @@ public class ReversePInvoke_MashalArrayByRef_AsManagedTest
         [MarshalAs(UnmanagedType.LPArray, SizeParamIndex = 1, ArraySubType = UnmanagedType.BStr)]
             ref string[] arrArg,
         ref Int32 arraySize
-    ) {
+    )
+    {
         string[] actualArr = Helper.InitArray<string>(10);
         if (!Helper.EqualArray<string>(arrArg, arraySize, actualArr, 10))
         {

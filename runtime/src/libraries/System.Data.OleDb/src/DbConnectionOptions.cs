@@ -176,7 +176,8 @@ namespace System.Data.Common
             if (
                 HasPasswordKeyword
                 && (forceHidePassword || (hidePassword && !HasPersistablePassword))
-            ) {
+            )
+            {
                 ReplacePasswordPwd(out connectionString, false);
             }
             return ((null != connectionString) ? connectionString : "");
@@ -209,7 +210,8 @@ namespace System.Data.Common
             string keyName,
             string? keyValue,
             bool useOdbcRules
-        ) {
+        )
+        {
             ADP.CheckArgumentNull(builder, "builder");
             ADP.CheckArgumentLength(keyName, "keyName");
 
@@ -256,7 +258,8 @@ namespace System.Data.Common
                             )
                         )
                         && !ConnectionStringQuoteOdbcValueRegex.IsMatch(keyValue)
-                    ) {
+                    )
+                    {
                         // always quote Driver value (required for ODBC Version 2.65 and earlier)
                         // always quote values that contain a ';'
                         builder.Append('{').Append(keyValue.Replace("}", "}}")).Append('}');
@@ -394,12 +397,14 @@ namespace System.Data.Common
             string keyword,
             string? value,
             ref string? datadir
-        ) {
+        )
+        {
             string? fullPath = null;
             if (
                 (null != value)
                 && value.StartsWith(DataDirectory, StringComparison.OrdinalIgnoreCase)
-            ) {
+            )
+            {
                 string? rootFolderPath = datadir;
                 if (null == rootFolderPath)
                 {
@@ -553,7 +558,8 @@ namespace System.Data.Common
             string keyname,
             string? keyvalue,
             Hashtable? synonyms
-        ) {
+        )
+        {
             Debug.Assert(keyname == keyname.ToLowerInvariant(), "missing ToLower");
 
             string? realkeyname = ((null != synonyms) ? (string)synonyms[keyname]! : keyname);
@@ -617,7 +623,8 @@ namespace System.Data.Common
             bool useOdbcRules,
             out string? keyname,
             out string? keyvalue
-        ) {
+        )
+        {
             int startposition = currentPosition;
 
             buffer.Length = 0;
@@ -942,7 +949,8 @@ namespace System.Data.Common
             string connectionString,
             Hashtable? synonyms,
             bool firstKey
-        ) {
+        )
+        {
             Hashtable parsetable = new Hashtable();
             Regex parser = (firstKey ? ConnectionStringRegexOdbc : ConnectionStringRegex);
 
@@ -1013,7 +1021,8 @@ namespace System.Data.Common
             Hashtable? synonyms,
             bool firstKey,
             Exception? e
-        ) {
+        )
+        {
             try
             {
                 Hashtable parsedvalues = SplitConnectionString(
@@ -1065,7 +1074,8 @@ namespace System.Data.Common
                                     WrongFormatMessagePrefix,
                                     StringComparison.Ordinal
                                 )
-                            ) {
+                            )
+                            {
                                 isEquivalent = true;
                             }
                         }
@@ -1097,7 +1107,8 @@ namespace System.Data.Common
             bool buildChain,
             Hashtable? synonyms,
             bool firstKey
-        ) {
+        )
+        {
             Debug.Assert(null != connectionString, "null connectionstring");
             StringBuilder buffer = new StringBuilder();
             NameValuePair? localKeychain = null,

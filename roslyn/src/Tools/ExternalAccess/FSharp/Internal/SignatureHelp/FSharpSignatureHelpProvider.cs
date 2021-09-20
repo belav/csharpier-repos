@@ -33,7 +33,8 @@ namespace Microsoft.CodeAnalysis.ExternalAccess.FSharp.Internal.SignatureHelp
             int position,
             SignatureHelpTriggerInfo triggerInfo,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var mappedTriggerReason = FSharpSignatureHelpTriggerReasonHelpers.ConvertFrom(
                 triggerInfo.TriggerReason
             );

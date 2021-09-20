@@ -24,7 +24,8 @@ namespace System
                     fromMachine,
                     writable: false
                 )
-            ) {
+            )
+            {
                 return environmentKey?.GetValue(variable) as string;
             }
         }
@@ -33,7 +34,8 @@ namespace System
             string variable,
             string? value,
             bool fromMachine
-        ) {
+        )
+        {
             Debug.Assert(variable != null);
 
             const int MaxUserEnvVariableLength = 255; // User-wide env vars stored in the registry have names limited to 255 chars
@@ -47,7 +49,8 @@ namespace System
                     fromMachine,
                     writable: true
                 )
-            ) {
+            )
+            {
                 if (environmentKey != null)
                 {
                     if (value == null)
@@ -91,7 +94,8 @@ namespace System
                     fromMachine,
                     writable: false
                 )
-            ) {
+            )
+            {
                 if (environmentKey != null)
                 {
                     foreach (string name in environmentKey.GetValueNames())
@@ -168,7 +172,8 @@ namespace System
                     ref builder.GetPinnableReference(),
                     ref size
                 ) == Interop.BOOLEAN.FALSE
-            ) {
+            )
+            {
                 if (Marshal.GetLastWin32Error() == Interop.Errors.ERROR_MORE_DATA)
                 {
                     builder.EnsureCapacity(checked((int)size));
@@ -223,7 +228,8 @@ namespace System
                         ref length,
                         out _
                     )
-                ) {
+                )
+                {
                     int error = Marshal.GetLastWin32Error();
 
                     // The docs don't call this out clearly, but experimenting shows that the error returned is the following.

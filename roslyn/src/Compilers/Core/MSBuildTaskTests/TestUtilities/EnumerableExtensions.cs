@@ -12,7 +12,8 @@ namespace Microsoft.CodeAnalysis.BuildTasks.UnitTests
         public static IEnumerable<S> SelectWithIndex<T, S>(
             this IEnumerable<T> items,
             Func<T, int, S> selector
-        ) {
+        )
+        {
             int i = 0;
             foreach (var item in items)
             {

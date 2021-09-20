@@ -76,7 +76,8 @@ namespace System.ComponentModel.Composition.Hosting
             object key,
             bool localAtomicCompositionOnly,
             [MaybeNullWhen(false)] out T value
-        ) {
+        )
+        {
             ThrowIfDisposed();
             ThrowIfCompleted();
 
@@ -286,7 +287,8 @@ namespace System.ComponentModel.Composition.Hosting
             object key,
             bool localAtomicCompositionOnly,
             [MaybeNullWhen(false)] out T value
-        ) {
+        )
+        {
             for (var index = 0; index < _valueCount; index++)
             {
                 if (_values![index].Key == key)

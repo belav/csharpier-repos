@@ -18,7 +18,8 @@ namespace System.Web.Mvc
             CodeTypeDeclaration derivedType,
             CodeMemberMethod buildMethod,
             CodeMemberMethod dataBindingMethod
-        ) {
+        )
+        {
             if (!String.IsNullOrWhiteSpace(Inherits))
             {
                 derivedType.BaseTypes[0] = new CodeTypeReference(Inherits);

@@ -142,7 +142,8 @@ namespace System.Net.Http.Formatting
                 {
                     foreach (
                         MediaTypeHeaderValue supportedMediaType in formatter.SupportedMediaTypes
-                    ) {
+                    )
+                    {
                         if (supportedMediaType != null && supportedMediaType.IsSubsetOf(mediaType))
                         {
                             return formatter;
@@ -177,7 +178,8 @@ namespace System.Net.Http.Formatting
                 {
                     foreach (
                         MediaTypeHeaderValue supportedMediaType in formatter.SupportedMediaTypes
-                    ) {
+                    )
+                    {
                         if (supportedMediaType != null && supportedMediaType.IsSubsetOf(mediaType))
                         {
                             return formatter;

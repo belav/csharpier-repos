@@ -11,9 +11,8 @@ namespace Microsoft.EntityFrameworkCore
 {
     public abstract class TransactionInterceptionSqliteTestBase : TransactionInterceptionTestBase
     {
-        protected TransactionInterceptionSqliteTestBase(
-            InterceptionSqliteFixtureBase fixture
-        ) : base(fixture) { }
+        protected TransactionInterceptionSqliteTestBase(InterceptionSqliteFixtureBase fixture)
+            : base(fixture) { }
 
         public abstract class InterceptionSqliteFixtureBase : InterceptionFixtureBase
         {

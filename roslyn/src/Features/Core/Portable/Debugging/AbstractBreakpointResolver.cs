@@ -59,7 +59,8 @@ namespace Microsoft.CodeAnalysis.Debugging
             string text,
             string language,
             IEqualityComparer<string> identifierComparer
-        ) {
+        )
+        {
             _solution = solution;
             Text = text;
             _language = language;
@@ -89,7 +90,8 @@ namespace Microsoft.CodeAnalysis.Debugging
 
         public async Task<IEnumerable<BreakpointResolutionResult>> DoAsync(
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             try
             {
                 ParseText(out var nameParts, out var parameterCount);
@@ -126,7 +128,8 @@ namespace Microsoft.CodeAnalysis.Debugging
         private async Task<IEnumerable<ISymbol>> FindMembersAsync(
             IList<NameAndArity> nameParts,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             try
             {
                 switch (nameParts.Count)
@@ -168,7 +171,8 @@ namespace Microsoft.CodeAnalysis.Debugging
             INamespaceOrTypeSymbol typeOrNamespace,
             NameAndArity nameAndArity,
             IEqualityComparer<string> comparer
-        ) {
+        )
+        {
             switch (typeOrNamespace)
             {
                 case INamespaceSymbol namespaceSymbol:
@@ -189,7 +193,8 @@ namespace Microsoft.CodeAnalysis.Debugging
             INamedTypeSymbol type,
             NameAndArity[] names,
             IEqualityComparer<string> comparer
-        ) {
+        )
+        {
             Debug.Assert(type != null);
             Debug.Assert(names.Length >= 2);
 
@@ -221,7 +226,8 @@ namespace Microsoft.CodeAnalysis.Debugging
         private IEnumerable<ISymbol> FindMembers(
             IEnumerable<INamespaceOrTypeSymbol> containers,
             params NameAndArity[] names
-        ) {
+        )
+        {
             // Recursively expand the list of containers to include all types in all nested containers, then filter down to a
             // set of candidate types by walking the up the enclosing containers matching by simple name.
             var types = containers.SelectMany(c => GetTypeMembersRecursive(c))
@@ -235,7 +241,8 @@ namespace Microsoft.CodeAnalysis.Debugging
         private IEnumerable<ISymbol> FindMembers(
             IEnumerable<INamedTypeSymbol> types,
             NameAndArity nameAndArity
-        ) {
+        )
+        {
             // Get the matching members from all types (including constructors and explicit interface
             // implementations).  If there is a partial method, prefer returning the implementation over
             // the definition (since the definition will not be a candidate for setting a breakpoint).
@@ -250,7 +257,8 @@ namespace Microsoft.CodeAnalysis.Debugging
 
         private async Task<IEnumerable<INamedTypeSymbol>> GetAllTypesAsync(
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var namespaces = await _solution.GetGlobalNamespacesAsync(cancellationToken)
                 .ConfigureAwait(false);
             return namespaces.GetAllTypes(cancellationToken);
@@ -268,7 +276,8 @@ namespace Microsoft.CodeAnalysis.Debugging
             ISymbol methodOrProperty,
             int? parameterCount,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             // You can only set a breakpoint on methods (including constructors/destructors) and properties.
             var kind = methodOrProperty.Kind;
             if (!(kind == SymbolKind.Method || kind == SymbolKind.Property))
@@ -299,7 +308,8 @@ namespace Microsoft.CodeAnalysis.Debugging
             if (
                 (methodOrProperty.Language == _language)
                 && methodOrProperty.Locations.Any(location => location.IsInSource)
-            ) {
+            )
+            {
                 if (methodOrProperty.IsKind(SymbolKind.Method))
                 {
                     return HasMethodBody((IMethodSymbol)methodOrProperty, cancellationToken);

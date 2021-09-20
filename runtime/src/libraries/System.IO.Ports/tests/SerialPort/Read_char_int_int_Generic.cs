@@ -78,7 +78,8 @@ namespace System.IO.Ports.Tests
                 SerialPort com = new SerialPort(
                     TCSupport.LocalMachineSerialInfo.FirstAvailablePortName
                 )
-            ) {
+            )
+            {
                 Debug.WriteLine("Verifying read method throws exception after a call to Cloes()");
                 com.Open();
                 com.Close();
@@ -95,7 +96,8 @@ namespace System.IO.Ports.Tests
                 SerialPort com = new SerialPort(
                     TCSupport.LocalMachineSerialInfo.FirstAvailablePortName
                 )
-            ) {
+            )
+            {
                 Random rndGen = new Random(-55);
 
                 com.ReadTimeout = rndGen.Next(minRandomTimeout, maxRandomTimeout);
@@ -114,7 +116,8 @@ namespace System.IO.Ports.Tests
                 SerialPort com = new SerialPort(
                     TCSupport.LocalMachineSerialInfo.FirstAvailablePortName
                 )
-            ) {
+            )
+            {
                 Random rndGen = new Random(-55);
 
                 com.ReadTimeout = rndGen.Next(minRandomTimeout, maxRandomTimeout);
@@ -142,7 +145,8 @@ namespace System.IO.Ports.Tests
                 SerialPort com1 = new SerialPort(
                     TCSupport.LocalMachineSerialInfo.FirstAvailablePortName
                 )
-            ) {
+            )
+            {
                 Random rndGen = new Random(-55);
                 var t = new Task(WriteToCom1);
 
@@ -179,7 +183,8 @@ namespace System.IO.Ports.Tests
                 SerialPort com2 = new SerialPort(
                     TCSupport.LocalMachineSerialInfo.SecondAvailablePortName
                 )
-            ) {
+            )
+            {
                 Random rndGen = new Random(-55);
                 byte[] xmitBuffer = new byte[1];
                 int sleepPeriod = rndGen.Next(minRandomTimeout, maxRandomTimeout / 2);
@@ -229,7 +234,8 @@ namespace System.IO.Ports.Tests
                 SerialPort com2 = new SerialPort(
                     TCSupport.LocalMachineSerialInfo.SecondAvailablePortName
                 )
-            ) {
+            )
+            {
                 Random rndGen = new Random(15);
                 byte[] bytesToWrite = new byte[numRndBytesPairty];
                 char[] expectedChars = new char[numRndBytesPairty];
@@ -387,7 +393,8 @@ namespace System.IO.Ports.Tests
                 SerialPort com2 = new SerialPort(
                     TCSupport.LocalMachineSerialInfo.SecondAvailablePortName
                 )
-            ) {
+            )
+            {
                 Random rndGen = new Random(-55);
                 byte[] bytesToWrite = new byte[numRndBytesPairty];
                 char[] expectedChars = new char[numRndBytesPairty];
@@ -450,7 +457,8 @@ namespace System.IO.Ports.Tests
                 SerialPort com2 = new SerialPort(
                     TCSupport.LocalMachineSerialInfo.SecondAvailablePortName
                 )
-            ) {
+            )
+            {
                 Random rndGen = new Random(-55);
                 byte[] bytesToWrite = new byte[numRndBytesToRead];
                 char[] expectedChars;
@@ -480,7 +488,8 @@ namespace System.IO.Ports.Tests
             byte[] bytesToWrite,
             char[] expectedChars,
             int rcvBufferSize
-        ) {
+        )
+        {
             char[] rcvBuffer = new char[rcvBufferSize];
             char[] buffer = new char[expectedChars.Length];
             int totalBytesRead;
@@ -515,7 +524,8 @@ namespace System.IO.Ports.Tests
                 if (
                     (bytesToRead > bytesRead && rcvBufferSize != bytesRead)
                     || (bytesToRead <= bytesRead && bytesRead != bytesToRead)
-                ) {
+                )
+                {
                     //If we have not read all of the characters that we should have
                     Fail(
                         "ERROR!!!: Read did not return all of the characters that were in SerialPort buffer"

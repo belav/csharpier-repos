@@ -36,7 +36,8 @@ namespace Microsoft.AspNetCore.Components.Server.ProtectedBrowserStorage
             string storeName,
             IJSRuntime jsRuntime,
             IDataProtectionProvider dataProtectionProvider
-        ) {
+        )
+        {
             // Performing data protection on the client would give users a false sense of security, so we'll prevent this.
             if (OperatingSystem.IsBrowser())
             {
@@ -128,7 +129,8 @@ namespace Microsoft.AspNetCore.Components.Server.ProtectedBrowserStorage
         public async ValueTask<ProtectedBrowserStorageResult<TValue>> GetAsync<TValue>(
             string purpose,
             string key
-        ) {
+        )
+        {
             var protectedJson = await GetProtectedJsonAsync(key);
 
             return protectedJson == null

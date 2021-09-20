@@ -27,7 +27,8 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.TypeInferrer
         private static async Task<bool> CanUseSpeculativeSemanticModelAsync(
             Document document,
             int position
-        ) {
+        )
+        {
             var service = document.GetLanguageService<ISyntaxFactsService>();
             var node = (await document.GetSyntaxRootAsync()).FindToken(position).Parent;
 
@@ -54,7 +55,8 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.TypeInferrer
             string expectedType,
             TestMode mode,
             SourceCodeKind sourceCodeKind = SourceCodeKind.Regular
-        ) {
+        )
+        {
             using var workspaceFixture = GetOrCreateWorkspaceFixture();
 
             MarkupTestFile.GetSpan(text.NormalizeLineEndings(), out text, out var textSpan);

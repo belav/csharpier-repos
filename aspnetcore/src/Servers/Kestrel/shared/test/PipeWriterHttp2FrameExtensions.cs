@@ -33,7 +33,8 @@ namespace Microsoft.AspNetCore.Testing
             byte[] headerEncodingBuffer,
             bool endStream,
             Http2Frame frame = null
-        ) {
+        )
+        {
             frame ??= new Http2Frame();
             frame.PrepareHeaders(Http2HeadersFrameFlags.NONE, streamId);
 
@@ -87,7 +88,8 @@ namespace Microsoft.AspNetCore.Testing
             Span<byte> headerData,
             bool endStream,
             Http2Frame frame = null
-        ) {
+        )
+        {
             frame ??= new Http2Frame();
             frame.PrepareHeaders(Http2HeadersFrameFlags.NONE, streamId);
             frame.PayloadLength = headerData.Length;
@@ -108,7 +110,8 @@ namespace Microsoft.AspNetCore.Testing
             Memory<byte> data,
             bool endStream,
             Http2Frame frame = null
-        ) {
+        )
+        {
             frame ??= new Http2Frame();
             frame.PrepareData(streamId);
             frame.PayloadLength = data.Length;
@@ -123,7 +126,8 @@ namespace Microsoft.AspNetCore.Testing
             int streamId,
             int sizeIncrement,
             Http2Frame frame = null
-        ) {
+        )
+        {
             frame ??= new Http2Frame();
             frame.PrepareWindowUpdate(streamId, sizeIncrement);
             Http2FrameWriter.WriteHeader(frame, writer);

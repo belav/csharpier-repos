@@ -59,7 +59,8 @@ namespace Microsoft.Extensions.DependencyInjection.ServiceLookup
         {
             foreach (
                 KeyValuePair<Type, ChainItemInfo> pair in _callSiteChain.OrderBy(p => p.Value.Order)
-            ) {
+            )
+            {
                 Type serviceType = pair.Key;
                 Type implementationType = pair.Value.ImplementationType;
                 if (implementationType == null || serviceType == implementationType)

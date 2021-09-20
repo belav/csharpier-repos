@@ -43,7 +43,8 @@ namespace Microsoft.CodeAnalysis.SplitOrMergeIfStatements
             SyntaxNode leftCondition,
             SyntaxNode rightCondition,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var ifGenerator = document.GetLanguageService<IIfLikeStatementGenerator>();
 
             // If we have an else-if clause, we first convert it to an if statement. If there are any
@@ -71,10 +72,11 @@ namespace Microsoft.CodeAnalysis.SplitOrMergeIfStatements
             public MyCodeAction(
                 Func<CancellationToken, Task<Document>> createChangedDocument,
                 string ifKeywordText
-            ) : base(
-                string.Format(FeaturesResources.Split_into_nested_0_statements, ifKeywordText),
-                createChangedDocument
-            ) { }
+            )
+                : base(
+                    string.Format(FeaturesResources.Split_into_nested_0_statements, ifKeywordText),
+                    createChangedDocument
+                ) { }
         }
     }
 }

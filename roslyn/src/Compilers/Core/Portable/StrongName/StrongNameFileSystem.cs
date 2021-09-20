@@ -28,7 +28,8 @@ namespace Microsoft.CodeAnalysis
             FileMode fileMode,
             FileAccess fileAccess,
             FileShare fileShare
-        ) {
+        )
+        {
             return new FileStream(filePath, fileMode, fileAccess, fileShare);
         }
 

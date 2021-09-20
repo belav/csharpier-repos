@@ -267,7 +267,8 @@ namespace System.Web.Helpers
             Func<string, Type> typeSelector,
             Func<string, object> valueSelector,
             int depth
-        ) {
+        )
+        {
             foreach (string name in names)
             {
                 Type type = null;
@@ -306,7 +307,8 @@ namespace System.Web.Helpers
             IEnumerable<object> keys,
             Func<object, object> valueSelector,
             int depth
-        ) {
+        )
+        {
             if (depth > _recursionLimit)
             {
                 return;
@@ -419,7 +421,8 @@ namespace System.Web.Helpers
             object value,
             string name,
             IDictionary<string, FieldInfo> fields
-        ) {
+        )
+        {
             FieldInfo fieldInfo;
             // Get the value from the dictionary
             bool result = fields.TryGetValue(name, out fieldInfo);
@@ -431,7 +434,8 @@ namespace System.Web.Helpers
             object value,
             string name,
             PropertyDescriptorCollection props
-        ) {
+        )
+        {
             PropertyDescriptor propertyDescriptor = props.Find(name, ignoreCase: true);
             Debug.Assert(propertyDescriptor != null, "Property descriptor shouldn't be null");
             return propertyDescriptor.GetValue(value);
@@ -491,10 +495,8 @@ namespace System.Web.Helpers
             public ObjectVisitorException(string message, Exception inner) : base(message, inner)
             { }
 
-            protected ObjectVisitorException(
-                SerializationInfo info,
-                StreamingContext context
-            ) : base(info, context) { }
+            protected ObjectVisitorException(SerializationInfo info, StreamingContext context)
+                : base(info, context) { }
         }
     }
 }

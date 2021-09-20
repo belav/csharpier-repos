@@ -62,7 +62,8 @@ namespace AutoMapper.Configuration
         public IMappingExpression ForMember(
             string name,
             Action<IMemberConfigurationExpression> memberOptions
-        ) {
+        )
+        {
             var member = DestinationType.GetFieldOrProperty(name);
             ForMember(member, memberOptions);
             return this;
@@ -71,14 +72,16 @@ namespace AutoMapper.Configuration
         protected override void IgnoreDestinationMember(
             MemberInfo property,
             bool ignorePaths = true
-        ) {
+        )
+        {
             ForMember(property, _ => { }).Ignore(ignorePaths);
         }
 
         internal MemberConfigurationExpression ForMember(
             MemberInfo destinationProperty,
             Action<IMemberConfigurationExpression> memberOptions
-        ) {
+        )
+        {
             var expression = new MemberConfigurationExpression(destinationProperty, SourceType);
 
             MemberConfigurations.Add(expression);
@@ -92,10 +95,8 @@ namespace AutoMapper.Configuration
             : MemberConfigurationExpression<object, object, object>,
               IMemberConfigurationExpression
         {
-            public MemberConfigurationExpression(
-                MemberInfo destinationMember,
-                Type sourceType
-            ) : base(destinationMember, sourceType) { }
+            public MemberConfigurationExpression(MemberInfo destinationMember, Type sourceType)
+                : base(destinationMember, sourceType) { }
 
             public void MapFrom(Type valueResolverType)
             {
@@ -122,7 +123,8 @@ namespace AutoMapper.Configuration
             public void MapFrom<TSource, TDestination, TSourceMember, TDestMember>(
                 IMemberValueResolver<TSource, TDestination, TSourceMember, TDestMember> resolver,
                 string sourceMemberName
-            ) {
+            )
+            {
                 var config = new ValueResolverConfiguration(
                     resolver,
                     typeof(IMemberValueResolver<TSource, TDestination, TSourceMember, TDestMember>)
@@ -144,7 +146,8 @@ namespace AutoMapper.Configuration
             public void ConvertUsing<TSourceMember, TDestinationMember>(
                 IValueConverter<TSourceMember, TDestinationMember> valueConverter,
                 string sourceMemberName
-            ) {
+            )
+            {
                 PropertyMapActions.Add(
                     pm =>
                     {
@@ -164,7 +167,8 @@ namespace AutoMapper.Configuration
                 PropertyMap propertyMap,
                 Type valueConverterType,
                 string sourceMemberName = null
-            ) {
+            )
+            {
                 var config = new ValueResolverConfiguration(
                     valueConverterType,
                     valueConverterType.GetGenericInterface(typeof(IValueConverter<, >))
@@ -186,15 +190,13 @@ namespace AutoMapper.Configuration
         {
             Projection = projection;
         }
-        public MappingExpression(
-            MemberList memberList,
-            Type sourceType,
-            Type destinationType
-        ) : base(memberList, sourceType, destinationType) { }
+        public MappingExpression(MemberList memberList, Type sourceType, Type destinationType)
+            : base(memberList, sourceType, destinationType) { }
         public IMappingExpression<TSource, TDestination> ForPath<TMember>(
             Expression<Func<TDestination, TMember>> destinationMember,
             Action<IPathConfigurationExpression<TSource, TDestination, TMember>> memberOptions
-        ) {
+        )
+        {
             if (!destinationMember.IsMemberPath(out var chain))
             {
                 throw new ArgumentOutOfRangeException(
@@ -220,7 +222,8 @@ namespace AutoMapper.Configuration
         public IMappingExpression<TSource, TDestination> ForMember<TMember>(
             Expression<Func<TDestination, TMember>> destinationMember,
             Action<IMemberConfigurationExpression<TSource, TDestination, TMember>> memberOptions
-        ) {
+        )
+        {
             var memberInfo = ReflectionHelper.FindProperty(destinationMember);
             return ForDestinationMember(memberInfo, memberOptions);
         }
@@ -232,7 +235,8 @@ namespace AutoMapper.Configuration
                         memberExpression => memberExpression.GetMember()
                     )
                     .Where(member => member != null)
-            ) {
+            )
+            {
                 ForSourceMemberCore(member, o => o.DoNotValidate());
             }
             TypeMapActions.Add(tm => tm.IncludedMembers = memberExpressions);
@@ -240,7 +244,8 @@ namespace AutoMapper.Configuration
 
         public IMappingExpression<TSource, TDestination> IncludeMembers(
             params Expression<Func<TSource, object>>[] memberExpressions
-        ) {
+        )
+        {
             var memberExpressionsWithoutCastToObject = Array.ConvertAll(
                 memberExpressions,
                 e =>
@@ -260,14 +265,16 @@ namespace AutoMapper.Configuration
         public IMappingExpression<TSource, TDestination> ForMember(
             string name,
             Action<IMemberConfigurationExpression<TSource, TDestination, object>> memberOptions
-        ) {
+        )
+        {
             var member = DestinationType.GetFieldOrProperty(name);
             return ForDestinationMember(member, memberOptions);
         }
 
         public void ForAllMembers(
             Action<IMemberConfigurationExpression<TSource, TDestination, object>> memberOptions
-        ) {
+        )
+        {
             TypeMapActions.Add(
                 typeMap =>
                 {
@@ -296,7 +303,8 @@ namespace AutoMapper.Configuration
         public IMappingExpression<TSource, TDestination> ForSourceMember(
             Expression<Func<TSource, object>> sourceMember,
             Action<ISourceMemberConfigurationExpression> memberOptions
-        ) {
+        )
+        {
             var memberInfo = ReflectionHelper.FindProperty(sourceMember);
 
             var srcConfig = new SourceMappingExpression(memberInfo);
@@ -312,7 +320,8 @@ namespace AutoMapper.Configuration
 
         public IMappingExpression<TSource, TDestination> AddTransform<TValue>(
             Expression<Func<TValue, TValue>> transformer
-        ) {
+        )
+        {
             var config = new ValueTransformerConfiguration(typeof(TValue), transformer);
 
             ValueTransformers.Add(config);
@@ -339,7 +348,8 @@ namespace AutoMapper.Configuration
         private IMappingExpression<TSource, TDestination> ForDestinationMember<TMember>(
             MemberInfo destinationProperty,
             Action<MemberConfigurationExpression<TSource, TDestination, TMember>> memberOptions
-        ) {
+        )
+        {
             var expression = new MemberConfigurationExpression<TSource, TDestination, TMember>(
                 destinationProperty,
                 SourceType

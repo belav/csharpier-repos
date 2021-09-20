@@ -494,7 +494,8 @@ namespace Microsoft.AspNetCore.Mvc.ModelBinding.Metadata
         internal static bool CalculateHasValidators(
             HashSet<DefaultModelMetadata> visited,
             ModelMetadata metadata
-        ) {
+        )
+        {
             RuntimeHelpers.EnsureSufficientExecutionStack();
 
             if (metadata?.GetType() != typeof(DefaultModelMetadata))

@@ -20,7 +20,8 @@ namespace Microsoft.CodeAnalysis.Diagnostics
 
         public CompilationAnalysisValueProvider(
             AnalysisValueProvider<TKey, TValue> analysisValueProvider
-        ) {
+        )
+        {
             _analysisValueProvider = analysisValueProvider;
             _valueMap = new Dictionary<TKey, TValue>(analysisValueProvider.KeyComparer);
         }

@@ -54,15 +54,16 @@ namespace Microsoft.CodeAnalysis.Structure
             string bannerText = Ellipses,
             bool autoCollapse = false,
             bool isDefaultCollapsed = false
-        ) : this(
-            type,
-            isCollapsible,
-            textSpan,
-            textSpan,
-            bannerText,
-            autoCollapse,
-            isDefaultCollapsed
-        ) { }
+        )
+            : this(
+                type,
+                isCollapsible,
+                textSpan,
+                textSpan,
+                bannerText,
+                autoCollapse,
+                isDefaultCollapsed
+            ) { }
 
         public BlockSpan(
             string type,
@@ -72,7 +73,8 @@ namespace Microsoft.CodeAnalysis.Structure
             string bannerText = Ellipses,
             bool autoCollapse = false,
             bool isDefaultCollapsed = false
-        ) {
+        )
+        {
             TextSpan = textSpan;
             BannerText = bannerText;
             HintSpan = hintSpan;
@@ -102,7 +104,8 @@ namespace Microsoft.CodeAnalysis.Structure
             Optional<string> bannerText = default,
             Optional<bool> autoCollapse = default,
             Optional<bool> isDefaultCollapsed = default
-        ) {
+        )
+        {
             var newIsCollapsible = isCollapsible.HasValue ? isCollapsible.Value : IsCollapsible;
             var newTextSpan = textSpan.HasValue ? textSpan.Value : TextSpan;
             var newHintSpan = hintSpan.HasValue ? hintSpan.Value : HintSpan;

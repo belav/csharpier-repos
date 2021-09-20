@@ -16,7 +16,8 @@ namespace Microsoft.AspNetCore.Testing
             if (
                 traitAttribute is ReflectionAttributeInfo attribute
                 && attribute.Attribute is QuarantinedTestAttribute quarantinedTestAttribute
-            ) {
+            )
+            {
                 yield return new KeyValuePair<string, string>("Quarantined", "true");
             }
             else

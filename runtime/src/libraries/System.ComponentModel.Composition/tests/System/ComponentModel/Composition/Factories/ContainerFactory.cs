@@ -47,7 +47,8 @@ namespace System.ComponentModel.Composition.Factories
         public static CompositionContainer Create(
             CompositionContainer parent,
             params ComposablePart[] parts
-        ) {
+        )
+        {
             CompositionContainer container;
             if (parent == null)
             {
@@ -80,7 +81,8 @@ namespace System.ComponentModel.Composition.Factories
         public static CompositionContainer Create(
             CompositionContainer parent,
             params MicroExport[] exports
-        ) {
+        )
+        {
             var part = PartFactory.CreateExporter(exports);
 
             return Create(parent, part);

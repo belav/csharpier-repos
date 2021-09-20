@@ -127,7 +127,8 @@ namespace R2RTest
                         || line.StartsWith("Warning: ")
                         || line.StartsWith("Info: ")
                         || line == "Assertion Failed"
-                    ) {
+                    )
+                    {
                         continue;
                     }
                     return line;
@@ -166,7 +167,8 @@ namespace R2RTest
                     }
                     else if (
                         line.StartsWith("Unhandled exception", StringComparison.OrdinalIgnoreCase)
-                    ) {
+                    )
+                    {
                         int leftBracket = line.IndexOf('[');
                         int rightBracket = line.IndexOf(']', leftBracket + 1);
                         if (leftBracket >= 0 && rightBracket > leftBracket)
@@ -178,7 +180,8 @@ namespace R2RTest
                             int detailLineIndex = lineIndex + 1;
                             detailLineIndex < lines.Length;
                             detailLineIndex++
-                        ) {
+                        )
+                        {
                             string detailLine = lines[detailLineIndex].TrimStart();
                             if (!detailLine.StartsWith("--->"))
                             {
@@ -193,7 +196,8 @@ namespace R2RTest
                         if (
                             lineIndex + 1 < lines.Length
                             && lines[lineIndex + 1].TrimStart().StartsWith("at ")
-                        ) {
+                        )
+                        {
                             line += lines[lineIndex + 1];
                         }
                         return line;

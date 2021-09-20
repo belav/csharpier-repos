@@ -143,7 +143,8 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.CodeActions
 
             protected override Diagnostic? TrySelectDiagnosticToFix(
                 ImmutableArray<Diagnostic> fixableDiagnostics
-            ) {
+            )
+            {
                 return DiagnosticSelector?.Invoke(fixableDiagnostics)
                     ?? base.TrySelectDiagnosticToFix(fixableDiagnostics);
             }

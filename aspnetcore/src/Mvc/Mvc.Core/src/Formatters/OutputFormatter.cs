@@ -35,7 +35,8 @@ namespace Microsoft.AspNetCore.Mvc.Formatters
         public virtual IReadOnlyList<string>? GetSupportedContentTypes(
             string contentType,
             Type objectType
-        ) {
+        )
+        {
             if (SupportedMediaTypes.Count == 0)
             {
                 var message = Resources.FormatFormatter_NoMediaTypes(
@@ -141,7 +142,8 @@ namespace Microsoft.AspNetCore.Mvc.Formatters
                         if (
                             context.ContentTypeIsServerDefined
                             && parsedContentType.IsSubsetOf(supportedMediaType)
-                        ) {
+                        )
+                        {
                             return true;
                         }
                     }

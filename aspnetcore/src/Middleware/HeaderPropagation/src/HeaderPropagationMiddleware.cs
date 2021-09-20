@@ -32,7 +32,8 @@ namespace Microsoft.AspNetCore.HeaderPropagation
             RequestDelegate next,
             IOptions<HeaderPropagationOptions> options,
             HeaderPropagationValues values
-        ) {
+        )
+        {
             _next = next ?? throw new ArgumentNullException(nameof(next));
 
             if (options == null)

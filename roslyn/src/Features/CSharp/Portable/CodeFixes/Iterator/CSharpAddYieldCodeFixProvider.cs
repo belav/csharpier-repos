@@ -59,11 +59,13 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeFixes.Iterator
             Document document,
             Diagnostic diagnostics,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             // Check if node is return statement
             if (
                 !node.IsKind(SyntaxKind.ReturnStatement, out ReturnStatementSyntax? returnStatement)
-            ) {
+            )
+            {
                 return null;
             }
 
@@ -80,7 +82,8 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeFixes.Iterator
                     returnStatement.Expression,
                     out var returnExpressionType
                 )
-            ) {
+            )
+            {
                 return null;
             }
 
@@ -118,7 +121,8 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeFixes.Iterator
             SemanticModel model,
             ExpressionSyntax? expression,
             [NotNullWhen(true)] out ITypeSymbol? returnExpressionType
-        ) {
+        )
+        {
             if (expression == null)
             {
                 returnExpressionType = null;
@@ -135,7 +139,8 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeFixes.Iterator
             SemanticModel model,
             CancellationToken cancellationToken,
             [NotNullWhen(true)] out ITypeSymbol? methodReturnType
-        ) {
+        )
+        {
             methodReturnType = null;
             var symbol = model.GetEnclosingSymbol(node.Span.Start, cancellationToken);
             if (!(symbol is IMethodSymbol method) || method.ReturnsVoid)
@@ -152,7 +157,8 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeFixes.Iterator
             ITypeSymbol returnExpressionType,
             ITypeSymbol methodReturnType,
             SemanticModel model
-        ) {
+        )
+        {
             var ienumerableSymbol = model.Compilation.GetTypeByMetadataName(
                 typeof(IEnumerable).FullName!
             );
@@ -171,7 +177,8 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeFixes.Iterator
                 || ienumerableSymbol == null
                 || ienumeratorGenericSymbol == null
                 || ienumeratorSymbol == null
-            ) {
+            )
+            {
                 return false;
             }
 
@@ -190,7 +197,8 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeFixes.Iterator
                     || methodReturnType.Equals(ienumeratorGenericSymbol)
                     || methodReturnType.Equals(ienumeratorSymbol)
                 )
-            ) {
+            )
+            {
                 return false;
             }
 
@@ -201,7 +209,8 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeFixes.Iterator
             ITypeSymbol typeArgument,
             ITypeSymbol returnExpressionType,
             SemanticModel model
-        ) {
+        )
+        {
             // return false if there is no conversion for the top level type
             if (!model.Compilation.ClassifyConversion(typeArgument, returnExpressionType).Exists)
             {
@@ -217,7 +226,8 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeFixes.Iterator
                 leftArguments != null
                 && rightArguments != null
                 && leftArguments.Length != rightArguments.Length
-            ) {
+            )
+            {
                 return false;
             }
 
@@ -243,7 +253,8 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeFixes.Iterator
         private static bool IsCorrectTypeForYieldReturn(
             ITypeSymbol methodReturnType,
             SemanticModel model
-        ) {
+        )
+        {
             var ienumerableSymbol = model.Compilation.GetTypeByMetadataName(
                 typeof(IEnumerable).FullName!
             );
@@ -261,7 +272,8 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeFixes.Iterator
                     methodReturnType.Equals(ienumerableSymbol)
                     || methodReturnType.Equals(ienumeratorSymbol)
                 )
-            ) {
+            )
+            {
                 return false;
             }
 
@@ -272,7 +284,8 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeFixes.Iterator
             SyntaxNode root,
             TextSpan span,
             [NotNullWhen(true)] out SyntaxNode? node
-        ) {
+        )
+        {
             node = null;
             var ancestors = root.FindToken(span.Start).GetAncestors<SyntaxNode>();
             if (!ancestors.Any())

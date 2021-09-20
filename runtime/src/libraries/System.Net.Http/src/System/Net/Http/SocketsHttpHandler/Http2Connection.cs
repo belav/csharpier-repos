@@ -548,7 +548,8 @@ namespace System.Net.Http
             ReadOnlySpan<byte> frameData,
             bool hasPad,
             bool hasPriority
-        ) {
+        )
+        {
             if (hasPad)
             {
                 if (frameData.Length == 0)
@@ -613,7 +614,8 @@ namespace System.Net.Http
                         && span.Length >= originLength
                         && span.Slice(0, originLength).SequenceEqual(_pool.Http2AltSvcOriginUri)
                     )
-                ) {
+                )
+                {
                     span = span.Slice(originLength);
 
                     // The span now contains a string with the same format as Alt-Svc headers.
@@ -789,7 +791,8 @@ namespace System.Net.Http
             if (
                 frameHeader.StreamId == 0
                 || frameHeader.PayloadLength != FrameHeader.PriorityInfoLength
-            ) {
+            )
+            {
                 ThrowProtocolError();
             }
 
@@ -1015,7 +1018,8 @@ namespace System.Net.Http
             T state,
             Func<T, Memory<byte>, bool> writeAction,
             CancellationToken cancellationToken = default
-        ) {
+        )
+        {
             WriteQueueEntry writeEntry = new WriteQueueEntry<T>(
                 writeBytes,
                 state,
@@ -1229,7 +1233,8 @@ namespace System.Net.Http
                     headerBuffer.AvailableSpan,
                     out bytesWritten
                 )
-            ) {
+            )
+            {
                 headerBuffer.EnsureAvailableSpace(headerBuffer.AvailableLength + 1);
             }
 
@@ -1249,7 +1254,8 @@ namespace System.Net.Http
                     headerBuffer.AvailableSpan,
                     out bytesWritten
                 )
-            ) {
+            )
+            {
                 headerBuffer.EnsureAvailableSpace(headerBuffer.AvailableLength + 1);
             }
 
@@ -1261,7 +1267,8 @@ namespace System.Net.Http
             ReadOnlySpan<string> values,
             Encoding? valueEncoding,
             ref ArrayBuffer headerBuffer
-        ) {
+        )
+        {
             if (NetEventSource.Log.IsEnabled())
                 Trace(
                     $"{nameof(name)}={name}, {nameof(values)}={string.Join(", ", values.ToArray())}"
@@ -1277,7 +1284,8 @@ namespace System.Net.Http
                     headerBuffer.AvailableSpan,
                     out bytesWritten
                 )
-            ) {
+            )
+            {
                 headerBuffer.EnsureAvailableSpace(headerBuffer.AvailableLength + 1);
             }
 
@@ -1289,7 +1297,8 @@ namespace System.Net.Http
             string? separator,
             Encoding? valueEncoding,
             ref ArrayBuffer headerBuffer
-        ) {
+        )
+        {
             if (NetEventSource.Log.IsEnabled())
                 Trace($"{nameof(values)}={string.Join(separator, values.ToArray())}");
 
@@ -1302,7 +1311,8 @@ namespace System.Net.Http
                     headerBuffer.AvailableSpan,
                     out bytesWritten
                 )
-            ) {
+            )
+            {
                 headerBuffer.EnsureAvailableSpace(headerBuffer.AvailableLength + 1);
             }
 
@@ -1313,7 +1323,8 @@ namespace System.Net.Http
             string value,
             Encoding? valueEncoding,
             ref ArrayBuffer headerBuffer
-        ) {
+        )
+        {
             if (NetEventSource.Log.IsEnabled())
                 Trace($"{nameof(value)}={value}");
 
@@ -1325,7 +1336,8 @@ namespace System.Net.Http
                     headerBuffer.AvailableSpan,
                     out bytesWritten
                 )
-            ) {
+            )
+            {
                 headerBuffer.EnsureAvailableSpace(headerBuffer.AvailableLength + 1);
             }
 
@@ -1350,7 +1362,8 @@ namespace System.Net.Http
             HttpRequestMessage request,
             HttpHeaders headers,
             ref ArrayBuffer headerBuffer
-        ) {
+        )
+        {
             if (NetEventSource.Log.IsEnabled())
                 Trace("");
 
@@ -1389,7 +1402,8 @@ namespace System.Net.Http
                         && knownHeader != KnownHeaders.Connection
                         && knownHeader != KnownHeaders.Upgrade
                         && knownHeader != KnownHeaders.ProxyConnection
-                    ) {
+                    )
+                    {
                         if (header.Key.KnownHeader == KnownHeaders.TE)
                         {
                             // HTTP/2 allows only 'trailers' TE header. rfc7540 8.1.2.2
@@ -1401,7 +1415,8 @@ namespace System.Net.Http
                                         "trailers",
                                         StringComparison.OrdinalIgnoreCase
                                     )
-                                ) {
+                                )
+                                {
                                     WriteBytes(knownHeader.Http2EncodedName, ref headerBuffer);
                                     WriteLiteralHeaderValue(value, valueEncoding, ref headerBuffer);
                                     break;
@@ -1578,7 +1593,8 @@ namespace System.Net.Http
             HttpRequestMessage request,
             CancellationToken cancellationToken,
             bool mustFlush
-        ) {
+        )
+        {
             // Enforce MAX_CONCURRENT_STREAMS setting value.  We do this before anything else, e.g. renting buffers to serialize headers,
             // in order to avoid consuming resources in potentially many requests waiting for access.
             try
@@ -1683,7 +1699,8 @@ namespace System.Net.Http
                                     s.thisRef._nextStream == MaxStreamId
                                     || s.thisRef._disposed
                                     || s.thisRef._lastStreamId != -1
-                                ) {
+                                )
+                                {
                                     // We ran out of stream IDs or we raced between acquiring the connection from the pool and shutting down.
                                     // Throw a retryable request exception. This will cause retry logic to kick in
                                     // and perform another connection attempt. The user should never see this exception.
@@ -1792,7 +1809,8 @@ namespace System.Net.Http
             int streamId,
             ReadOnlyMemory<byte> buffer,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             ReadOnlyMemory<byte> remaining = buffer;
 
             while (remaining.Length > 0)
@@ -1972,7 +1990,8 @@ namespace System.Net.Http
             long nowTicks,
             TimeSpan connectionLifetime,
             TimeSpan connectionIdleTimeout
-        ) {
+        )
+        {
             if (_disposed)
             {
                 return true;
@@ -1983,7 +2002,8 @@ namespace System.Net.Http
                 (connectionIdleTimeout != Timeout.InfiniteTimeSpan)
                 && (_httpStreams.Count == 0)
                 && ((nowTicks - _idleSinceTickCount) > connectionIdleTimeout.TotalMilliseconds)
-            ) {
+            )
+            {
                 if (NetEventSource.Log.IsEnabled())
                     Trace(
                         $"HTTP/2 connection no longer usable. Idle {TimeSpan.FromMilliseconds(nowTicks - _idleSinceTickCount)} > {connectionIdleTimeout}."
@@ -2122,7 +2142,8 @@ namespace System.Net.Http
                 if (
                     Interlocked.Exchange(ref _markedByTelemetryStatus, TelemetryStatus_Closed)
                     == TelemetryStatus_Opened
-                ) {
+                )
+                {
                     HttpTelemetry.Log.Http20ConnectionClosed();
                 }
             }
@@ -2210,7 +2231,8 @@ namespace System.Net.Http
                 FrameType type,
                 FrameFlags flags,
                 int streamId
-            ) {
+            )
+            {
                 Debug.Assert(destination.Length >= Size);
                 Debug.Assert(type <= FrameType.Last);
                 Debug.Assert((flags & FrameFlags.ValidBits) == flags);
@@ -2259,7 +2281,8 @@ namespace System.Net.Http
             HttpRequestMessage request,
             bool async,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             Debug.Assert(async);
             if (NetEventSource.Log.IsEnabled())
                 Trace($"{request}");
@@ -2310,7 +2333,8 @@ namespace System.Net.Http
                         .ConfigureAwait(false) == requestBodyTask
                     || requestBodyTask.IsCompleted
                     || http2Stream.SendRequestFinished
-                ) {
+                )
+                {
                     // The sending of the request body completed before receiving all of the request headers (or we're
                     // ok waiting for the request body even if it hasn't completed, e.g. because we're not doing duplex).
                     // This is the common and desirable case.
@@ -2348,7 +2372,8 @@ namespace System.Net.Http
                     || e is ObjectDisposedException
                     || e is Http2ProtocolException
                     || e is InvalidOperationException
-                ) {
+                )
+                {
                     throw new HttpRequestException(SR.net_http_client_execution_error, e);
                 }
 

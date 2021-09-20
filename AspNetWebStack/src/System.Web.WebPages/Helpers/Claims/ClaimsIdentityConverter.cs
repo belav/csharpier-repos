@@ -71,7 +71,8 @@ namespace System.Web.Helpers.Claims
             IList<Func<IIdentity, ClaimsIdentity>> converters,
             Type claimsIdentityType,
             Type claimType
-        ) {
+        )
+        {
             if (claimsIdentityType != null && claimType != null)
             {
                 MethodInfo tryConvertClosedMethod =

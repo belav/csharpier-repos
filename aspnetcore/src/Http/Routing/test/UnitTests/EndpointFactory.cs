@@ -23,7 +23,8 @@ namespace Microsoft.AspNetCore.Routing
             int order = 0,
             string displayName = null,
             params object[] metadata
-        ) {
+        )
+        {
             var routePattern = RoutePatternFactory.Parse(
                 template,
                 defaults,
@@ -39,7 +40,8 @@ namespace Microsoft.AspNetCore.Routing
             int order = 0,
             string displayName = null,
             IList<object> metadata = null
-        ) {
+        )
+        {
             return new RouteEndpoint(
                 TestConstants.EmptyRequestDelegate,
                 routePattern,

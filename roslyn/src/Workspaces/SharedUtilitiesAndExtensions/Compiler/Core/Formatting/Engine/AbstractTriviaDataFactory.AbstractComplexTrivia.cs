@@ -72,7 +72,8 @@ namespace Microsoft.CodeAnalysis.Formatting
                 int space,
                 FormattingContext context,
                 ChainedFormattingRules formattingRules
-            ) {
+            )
+            {
                 // two tokens are on a single line, we don't allow changing spaces between two
                 // tokens that contain noisy characters between them.
                 if (!this.SecondTokenIsFirstTokenOnLine)
@@ -96,7 +97,8 @@ namespace Microsoft.CodeAnalysis.Formatting
                 FormattingContext context,
                 ChainedFormattingRules formattingRules,
                 CancellationToken cancellationToken
-            ) {
+            )
+            {
                 Contract.ThrowIfFalse(line > 0);
 
                 // if we have elastic trivia, always let it be modified
@@ -146,7 +148,8 @@ namespace Microsoft.CodeAnalysis.Formatting
                 FormattingContext context,
                 ChainedFormattingRules formattingRules,
                 CancellationToken cancellationToken
-            ) {
+            )
+            {
                 // if tokens are not in different line, there is nothing we can do here
                 if (!this.SecondTokenIsFirstTokenOnLine)
                 {
@@ -187,7 +190,8 @@ namespace Microsoft.CodeAnalysis.Formatting
             private static string CreateString(
                 TriviaDataWithList triviaData,
                 CancellationToken cancellationToken
-            ) {
+            )
+            {
                 // create string from given trivia data
                 var sb = StringBuilderPool.Allocate();
 

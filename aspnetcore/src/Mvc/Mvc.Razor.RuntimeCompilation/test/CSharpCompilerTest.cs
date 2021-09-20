@@ -22,7 +22,8 @@ namespace Microsoft.AspNetCore.Mvc.Razor.RuntimeCompilation
         [InlineData("")]
         public void GetCompilationOptions_ReturnsDefaultOptionsIfApplicationNameIsNullOrEmpty(
             string name
-        ) {
+        )
+        {
             // Arrange
             var hostingEnvironment = Mock.Of<IWebHostEnvironment>(e => e.ApplicationName == name);
             var compiler = new CSharpCompiler(ReferenceManager, hostingEnvironment);
@@ -55,7 +56,8 @@ namespace Microsoft.AspNetCore.Mvc.Razor.RuntimeCompilation
         public void Constructor_SetsOptimizationLevelBasedOnEnvironment(
             string environment,
             OptimizationLevel expected
-        ) {
+        )
+        {
             // Arrange
             var options = new RazorViewEngineOptions();
             var hostingEnvironment = new Mock<IWebHostEnvironment>();
@@ -74,7 +76,8 @@ namespace Microsoft.AspNetCore.Mvc.Razor.RuntimeCompilation
         public void EnsureOptions_SetsPreprocessorSymbols(
             string environment,
             string expectedConfiguration
-        ) {
+        )
+        {
             // Arrange
             var options = new RazorViewEngineOptions();
             var hostingEnvironment = new Mock<IWebHostEnvironment>();
@@ -343,7 +346,8 @@ namespace Microsoft.AspNetCore.Mvc.Razor.RuntimeCompilation
             bool? delaySign = null,
             bool? publicSign = null,
             string debugType = null
-        ) {
+        )
+        {
             return new DependencyContextCompilationOptions(
                 new[] { define },
                 languageVersion,

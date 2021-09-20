@@ -25,7 +25,8 @@ namespace System.CommandLine
         public static IEnumerable<string?> GetSuggestions(
             this ISymbol symbol,
             string? textToMatch = null
-        ) {
+        )
+        {
             return symbol.GetSuggestions(null, textToMatch);
         }
     }

@@ -56,7 +56,8 @@ namespace Microsoft.CodeAnalysis.CSharp.RemoveUnnecessaryDiscardDesignation
             ImmutableArray<Diagnostic> diagnostics,
             SyntaxEditor editor,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var generator = editor.Generator;
 
             foreach (var diagnostic in diagnostics)
@@ -113,13 +114,12 @@ namespace Microsoft.CodeAnalysis.CSharp.RemoveUnnecessaryDiscardDesignation
 
         private class MyCodeAction : CustomCodeActions.DocumentChangeAction
         {
-            public MyCodeAction(
-                Func<CancellationToken, Task<Document>> createChangedDocument
-            ) : base(
-                CSharpAnalyzersResources.Remove_unnessary_discard,
-                createChangedDocument,
-                CSharpAnalyzersResources.Remove_unnessary_discard
-            ) { }
+            public MyCodeAction(Func<CancellationToken, Task<Document>> createChangedDocument)
+                : base(
+                    CSharpAnalyzersResources.Remove_unnessary_discard,
+                    createChangedDocument,
+                    CSharpAnalyzersResources.Remove_unnessary_discard
+                ) { }
         }
     }
 }

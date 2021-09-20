@@ -94,7 +94,8 @@ namespace ILCompiler.DependencyAnalysis.ReadyToRun
                         int assemblyRefIndex = 1;
                         assemblyRefIndex < _assemblyRefCount;
                         assemblyRefIndex++
-                    ) {
+                    )
+                    {
                         AssemblyReferenceHandle assemblyRefHandle =
                             MetadataTokens.AssemblyReferenceHandle(assemblyRefIndex);
                         AssemblyReference assemblyRef = mdReader.GetAssemblyReference(
@@ -115,7 +116,8 @@ namespace ILCompiler.DependencyAnalysis.ReadyToRun
                 int nextExpectedId = 1;
                 foreach (
                     EcmaModule inputModule in _nodeFactory.CompilationModuleGroup.CompilationModuleSet
-                ) {
+                )
+                {
                     int acquiredId = ModuleToIndexInternal(inputModule);
                     if (acquiredId != nextExpectedId)
                     {
@@ -160,7 +162,8 @@ namespace ILCompiler.DependencyAnalysis.ReadyToRun
             if (
                 assemblyRefIndex >= _assemblyRefCount
                 && !_moduleIdToAssemblyNameMap.ContainsKey(assemblyRefIndex)
-            ) {
+            )
+            {
                 if (_emissionCompleted)
                 {
                     throw new InvalidOperationException(

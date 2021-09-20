@@ -51,7 +51,8 @@ namespace Microsoft.CodeAnalysis.CSharp.ConvertLinq.ConvertForEachToLinqQuery
             ForEachStatementSyntax forEachStatement,
             SemanticModel semanticModel,
             bool convertLocalDeclarations
-        ) {
+        )
+        {
             var identifiersBuilder = ArrayBuilder<SyntaxToken>.GetInstance();
             identifiersBuilder.Add(forEachStatement.Identifier);
             var convertingNodesBuilder = ArrayBuilder<ExtendedSyntaxNode>.GetInstance();
@@ -96,7 +97,8 @@ namespace Microsoft.CodeAnalysis.CSharp.ConvertLinq.ConvertForEachToLinqQuery
                                             localDeclarationStatement
                                         )
                                     )
-                                ) {
+                                )
+                                {
                                     // If this one is a local function declaration or has an empty initializer, stop processing.
                                     statementsCannotBeConverted = array.Skip(i).ToArray();
                                     break;
@@ -200,7 +202,8 @@ namespace Microsoft.CodeAnalysis.CSharp.ConvertLinq.ConvertForEachToLinqQuery
             // Try to prepare variable declarations to be converted into separate let clauses.
             bool TryProcessLocalDeclarationStatement(
                 LocalDeclarationStatementSyntax localDeclarationStatement
-            ) {
+            )
+            {
                 if (!convertLocalDeclarations)
                 {
                     return false;
@@ -212,7 +215,8 @@ namespace Microsoft.CodeAnalysis.CSharp.ConvertLinq.ConvertForEachToLinqQuery
                     localDeclarationStatement.Declaration.Variables.All(
                         variable => variable.Initializer != null
                     )
-                ) {
+                )
+                {
                     var localDeclarationLeadingTrivia = new IEnumerable<SyntaxTrivia>[]
                     {
                         currentLeadingTokens.ToImmutableAndFree().GetTrivia(),
@@ -255,7 +259,8 @@ namespace Microsoft.CodeAnalysis.CSharp.ConvertLinq.ConvertForEachToLinqQuery
             StatementSyntax statementCannotBeConverted,
             CancellationToken cancellationToken,
             out IConverter<ForEachStatementSyntax, StatementSyntax> converter
-        ) {
+        )
+        {
             switch (statementCannotBeConverted.Kind())
             {
                 case SyntaxKind.ExpressionStatement:
@@ -305,7 +310,8 @@ namespace Microsoft.CodeAnalysis.CSharp.ConvertLinq.ConvertForEachToLinqQuery
                                 && methodSymbol.Name == nameof(IList.Add)
                                 && methodSymbol.Parameters.Length == 1
                                 && invocationExpression.ArgumentList.Arguments.Count == 1
-                            ) {
+                            )
+                            {
                                 // Input:
                                 // foreach (var x in a)
                                 // {
@@ -364,7 +370,8 @@ namespace Microsoft.CodeAnalysis.CSharp.ConvertLinq.ConvertForEachToLinqQuery
                             out BlockSyntax block
                         )
                         && block.Parent == memberDeclarationSyntax
-                    ) {
+                    )
+                    {
                         // Check that
                         // a. There are either just a single 'yield return' or 'yield return' with 'yield break' just after.
                         // b. Those foreach and 'yield break' (if exists) are last statements in the method (do not count local function declaration statements).
@@ -376,7 +383,8 @@ namespace Microsoft.CodeAnalysis.CSharp.ConvertLinq.ConvertForEachToLinqQuery
                         if (
                             yieldStatementsCount == 1
                             && lastNonLocalFunctionStatement == forEachInfo.ForEachStatement
-                        ) {
+                        )
+                        {
                             converter = new YieldReturnConverter(
                                 forEachInfo,
                                 (YieldStatementSyntax)statementCannotBeConverted,
@@ -398,7 +406,8 @@ namespace Microsoft.CodeAnalysis.CSharp.ConvertLinq.ConvertForEachToLinqQuery
                             && !lastNonLocalFunctionStatement.ContainsDirectives
                             && statementsOnBlockWithForEach[statementsOnBlockWithForEach.Length - 2]
                                 == forEachInfo.ForEachStatement
-                        ) {
+                        )
+                        {
                             // This removes the yield break.
                             converter = new YieldReturnConverter(
                                 forEachInfo,
@@ -419,7 +428,8 @@ namespace Microsoft.CodeAnalysis.CSharp.ConvertLinq.ConvertForEachToLinqQuery
             IConverter<ForEachStatementSyntax, StatementSyntax> converter,
             SemanticModel semanticModel,
             SyntaxNode root
-        ) {
+        )
+        {
             var namespaces = semanticModel.GetUsingNamespacesInScope(
                 converter.ForEachInfo.ForEachStatement
             );
@@ -429,7 +439,8 @@ namespace Microsoft.CodeAnalysis.CSharp.ConvertLinq.ConvertForEachToLinqQuery
                         namespaceSymbol.Name == nameof(System.Linq)
                         && namespaceSymbol.ContainingNamespace.Name == nameof(System)
                 ) && root is CompilationUnitSyntax compilationUnit
-            ) {
+            )
+            {
                 return compilationUnit.AddUsings(
                     SyntaxFactory.UsingDirective(SyntaxFactory.ParseName("System.Linq"))
                 );

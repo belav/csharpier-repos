@@ -21,7 +21,8 @@ namespace Microsoft.AspNetCore.Identity
         public override async Task<bool> CanGenerateTwoFactorTokenAsync(
             UserManager<TUser> manager,
             TUser user
-        ) {
+        )
+        {
             var email = await manager.GetEmailAsync(user);
 
             return !string.IsNullOrWhiteSpace(email) && await manager.IsEmailConfirmedAsync(user);
@@ -38,7 +39,8 @@ namespace Microsoft.AspNetCore.Identity
             string purpose,
             UserManager<TUser> manager,
             TUser user
-        ) {
+        )
+        {
             var email = await manager.GetEmailAsync(user);
 
             return $"Email:{purpose}:{email}";

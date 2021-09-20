@@ -11,7 +11,8 @@ namespace Microsoft.Win32.RegistryTests
         protected void Verify_DeleteSubKey_KeyExists_KeyDeleted(
             string expected,
             Action deleteSubKey
-        ) {
+        )
+        {
             CreateTestRegistrySubKey(expected);
 
             deleteSubKey();
@@ -21,7 +22,8 @@ namespace Microsoft.Win32.RegistryTests
         protected void Verify_DeleteSubKey_KeyDoesNotExists_Throws(
             string expected,
             Action deleteSubKey
-        ) {
+        )
+        {
             Assert.Null(TestRegistryKey.OpenSubKey(expected));
             Assert.Equal(0, TestRegistryKey.SubKeyCount);
 
@@ -31,7 +33,8 @@ namespace Microsoft.Win32.RegistryTests
         protected void Verify_DeleteSubKey_KeyDoesNotExists_DoesNotThrow(
             string expected,
             Action deleteSubKey
-        ) {
+        )
+        {
             Assert.Null(TestRegistryKey.OpenSubKey(expected));
             Assert.Equal(0, TestRegistryKey.SubKeyCount);
 

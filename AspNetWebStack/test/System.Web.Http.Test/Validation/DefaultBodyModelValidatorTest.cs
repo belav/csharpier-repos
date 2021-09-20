@@ -172,7 +172,8 @@ namespace System.Web.Http.Validation
             object model,
             Type type,
             Dictionary<string, string> expectedErrors
-        ) {
+        )
+        {
             // Arrange
             ModelMetadataProvider metadataProvider = new DataAnnotationsModelMetadataProvider();
             HttpActionContext actionContext = ContextUtil.CreateActionContext();

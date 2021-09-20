@@ -37,7 +37,8 @@ namespace Castle.Components.DictionaryAdapter
             string key,
             ref object value,
             PropertyDescriptor property
-        ) {
+        )
+        {
             if (value != null)
             {
                 value = GetPropertyAsString(property, value);

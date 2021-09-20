@@ -16,7 +16,8 @@ namespace System.Security.Cryptography.Pkcs.Tests.Pkcs12
         private static ReadOnlyMemory<byte> PadContents(
             ReadOnlyMemory<byte> contents,
             int trailingByteCount
-        ) {
+        )
+        {
             if (trailingByteCount < 0)
                 throw new ArgumentOutOfRangeException(nameof(trailingByteCount));
 
@@ -224,7 +225,8 @@ namespace System.Security.Cryptography.Pkcs.Tests.Pkcs12
             string key,
             string value,
             string keyId
-        ) {
+        )
+        {
             Pkcs12SecretBag secretBag = Assert.IsType<Pkcs12SecretBag>(safeBag);
             Assert.Equal("1.2.840.113549.1.16.12.12", secretBag.GetSecretType().Value);
 
@@ -287,7 +289,8 @@ namespace System.Security.Cryptography.Pkcs.Tests.Pkcs12
             PbeEncryptionAlgorithm encryptionAlgorithm,
             HashAlgorithmName hashAlgorithmName,
             int iterations
-        ) {
+        )
+        {
             string pw = nameof(CreateAndSealPkcs12);
             byte[] data = CreateAndSealPkcs12(encryptionAlgorithm, hashAlgorithmName, iterations);
             Pkcs12Info info = Pkcs12Info.Decode(data, out _, skipCopy: true);
@@ -349,7 +352,8 @@ namespace System.Security.Cryptography.Pkcs.Tests.Pkcs12
             PbeEncryptionAlgorithm encryptionAlgorithm,
             HashAlgorithmName hashAlgorithmName,
             int iterations
-        ) {
+        )
+        {
             PbeParameters pbeParameters = new PbeParameters(
                 encryptionAlgorithm,
                 hashAlgorithmName,

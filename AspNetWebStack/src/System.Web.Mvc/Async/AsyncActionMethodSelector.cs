@@ -25,7 +25,8 @@ namespace System.Web.Mvc.Async
         public ActionDescriptorCreator FindAction(
             ControllerContext controllerContext,
             string actionName
-        ) {
+        )
+        {
             MethodInfo method = FindActionMethod(controllerContext, actionName);
 
             if (method == null)
@@ -49,7 +50,8 @@ namespace System.Web.Mvc.Async
             if (
                 entryMethod.ReturnType != null
                 && typeof(Task).IsAssignableFrom(entryMethod.ReturnType)
-            ) {
+            )
+            {
                 return (actionName, controllerDescriptor) =>
                     new TaskAsyncActionDescriptor(entryMethod, actionName, controllerDescriptor);
             }
@@ -104,7 +106,8 @@ namespace System.Web.Mvc.Async
             if (
                 methodInfo.GetBaseDefinition()
                     .DeclaringType.IsAssignableFrom(typeof(AsyncController))
-            ) {
+            )
+            {
                 // is a method on Object, ControllerBase, Controller, or AsyncController
                 return false;
             }

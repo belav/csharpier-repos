@@ -25,7 +25,8 @@ namespace System.Globalization
             string str,
             CompareOptions options,
             byte[] keyData
-        ) {
+        )
+        {
             _keyData = keyData;
             _compareInfo = compareInfo;
             _options = options;

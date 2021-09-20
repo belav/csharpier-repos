@@ -24,7 +24,8 @@ namespace Microsoft.CodeAnalysis.CSharp
 
         public override BoundNode? VisitUserDefinedConditionalLogicalOperator(
             BoundUserDefinedConditionalLogicalOperator node
-        ) {
+        )
+        {
             return VisitBinaryOperatorBase(node);
         }
 
@@ -135,7 +136,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                         lambda.ContainingSymbol,
                         out Symbol? updatedContaining
                     ) && updatedDelegateType is null
-                ) {
+                )
+                {
                     return lambda;
                 }
 
@@ -185,7 +187,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                         local.ContainingSymbol,
                         out Symbol? updatedContaining
                     ) && !updatedType.HasValue
-                ) {
+                )
+                {
                     // Map the local to itself so we don't have to search again in the future
                     _remappedSymbols.Add(local, local);
                     return local;

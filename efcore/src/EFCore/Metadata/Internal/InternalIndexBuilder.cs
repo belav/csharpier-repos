@@ -34,7 +34,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
         public virtual InternalIndexBuilder? IsUnique(
             bool? unique,
             ConfigurationSource configurationSource
-        ) {
+        )
+        {
             if (!CanSetIsUnique(unique, configurationSource))
             {
                 return null;

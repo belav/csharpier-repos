@@ -60,7 +60,8 @@ namespace System.Reflection.Emit.Tests
             int testInt32,
             string getOnlyString,
             int getOnlyInt32
-        ) {
+        )
+        {
             TestStringField = testString;
             TestInt = testInt32;
             GetString = getOnlyString;
@@ -127,7 +128,8 @@ namespace System.Reflection.Emit.Tests
         public static ModuleBuilder DynamicModule(
             string assemblyName = "TestAssembly",
             string moduleName = "TestModule"
-        ) {
+        )
+        {
             return DynamicAssembly(assemblyName).DefineDynamicModule(moduleName);
         }
 
@@ -136,7 +138,8 @@ namespace System.Reflection.Emit.Tests
             string assemblyName = "TestAssembly",
             string moduleName = "TestModule",
             string typeName = "TestType"
-        ) {
+        )
+        {
             return DynamicModule(assemblyName, moduleName).DefineType(typeName, attributes);
         }
     }

@@ -26,7 +26,8 @@ namespace Microsoft.AspNetCore.Mvc.FunctionalTests
 
         public ComponentRenderingFunctionalTests(
             MvcTestFixture<BasicWebSite.StartupWithoutEndpointRouting> fixture
-        ) {
+        )
+        {
             Factory = fixture;
         }
 
@@ -204,7 +205,8 @@ namespace Microsoft.AspNetCore.Mvc.FunctionalTests
 
         private HttpClient CreateClient(
             WebApplicationFactory<BasicWebSite.StartupWithoutEndpointRouting> fixture
-        ) {
+        )
+        {
             var loopHandler = new LoopHttpHandler();
 
             var client = fixture.WithWebHostBuilder(

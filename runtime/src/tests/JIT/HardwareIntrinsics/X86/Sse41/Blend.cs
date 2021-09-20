@@ -27,7 +27,8 @@ namespace IntelHardwareIntrinsicTest
                         new float[4] { 22, -1, -50, 0 },
                         new float[4]
                     )
-                ) {
+                )
+                {
                     var vf1 = Unsafe.Read<Vector128<float>>(floatTable.inArray1Ptr);
                     var vf2 = Unsafe.Read<Vector128<float>>(floatTable.inArray2Ptr);
 
@@ -40,7 +41,8 @@ namespace IntelHardwareIntrinsicTest
                             (x, y, z) =>
                                 (z[0] == y[0]) && (z[1] == x[1]) && (z[2] == x[2]) && (z[3] == x[3])
                         )
-                    ) {
+                    )
+                    {
                         Console.WriteLine("SSE41 Blend failed on float:");
                         foreach (var item in floatTable.outArray)
                         {
@@ -59,7 +61,8 @@ namespace IntelHardwareIntrinsicTest
                             (x, y, z) =>
                                 (z[0] == x[0]) && (z[1] == y[1]) && (z[2] == x[2]) && (z[3] == x[3])
                         )
-                    ) {
+                    )
+                    {
                         Console.WriteLine("SSE41 Blend failed on float:");
                         foreach (var item in floatTable.outArray)
                         {
@@ -78,7 +81,8 @@ namespace IntelHardwareIntrinsicTest
                             (x, y, z) =>
                                 (z[0] == x[0]) && (z[1] == x[1]) && (z[2] == y[2]) && (z[3] == x[3])
                         )
-                    ) {
+                    )
+                    {
                         Console.WriteLine("SSE41 Blend failed on float:");
                         foreach (var item in floatTable.outArray)
                         {
@@ -97,7 +101,8 @@ namespace IntelHardwareIntrinsicTest
                             (x, y, z) =>
                                 (z[0] == y[0]) && (z[1] == x[1]) && (z[2] == y[2]) && (z[3] == x[3])
                         )
-                    ) {
+                    )
+                    {
                         Console.WriteLine("SSE41 Blend failed on float:");
                         foreach (var item in floatTable.outArray)
                         {
@@ -121,7 +126,8 @@ namespace IntelHardwareIntrinsicTest
                             (x, y, z) =>
                                 (z[0] == y[0]) && (z[1] == x[1]) && (z[2] == x[2]) && (z[3] == x[3])
                         )
-                    ) {
+                    )
+                    {
                         Console.WriteLine("SSE41 Blend failed on float:");
                         foreach (var item in floatTable.outArray)
                         {
@@ -138,7 +144,8 @@ namespace IntelHardwareIntrinsicTest
                         new double[2] { 22, -1 },
                         new double[2]
                     )
-                ) {
+                )
+                {
                     var vf1 = Unsafe.Read<Vector128<double>>(doubleTable.inArray1Ptr);
                     var vf2 = Unsafe.Read<Vector128<double>>(doubleTable.inArray2Ptr);
 
@@ -229,7 +236,8 @@ namespace IntelHardwareIntrinsicTest
                         new short[8] { 22, -1, -50, 0, 22, -1, -50, 0 },
                         new short[8]
                     )
-                ) {
+                )
+                {
                     var vf1 = Unsafe.Read<Vector128<short>>(shortTable.inArray1Ptr);
                     var vf2 = Unsafe.Read<Vector128<short>>(shortTable.inArray2Ptr);
 
@@ -249,7 +257,8 @@ namespace IntelHardwareIntrinsicTest
                                 && (z[6] == x[6])
                                 && (z[7] == x[7])
                         )
-                    ) {
+                    )
+                    {
                         Console.WriteLine("SSE41 Blend failed on short:");
                         foreach (var item in shortTable.outArray)
                         {
@@ -275,7 +284,8 @@ namespace IntelHardwareIntrinsicTest
                                 && (z[6] == x[6])
                                 && (z[7] == x[7])
                         )
-                    ) {
+                    )
+                    {
                         Console.WriteLine("SSE41 Blend failed on short:");
                         foreach (var item in shortTable.outArray)
                         {
@@ -301,7 +311,8 @@ namespace IntelHardwareIntrinsicTest
                                 && (z[6] == x[6])
                                 && (z[7] == x[7])
                         )
-                    ) {
+                    )
+                    {
                         Console.WriteLine("SSE41 Blend failed on short:");
                         foreach (var item in shortTable.outArray)
                         {
@@ -327,7 +338,8 @@ namespace IntelHardwareIntrinsicTest
                                 && (z[6] == y[6])
                                 && (z[7] == x[7])
                         )
-                    ) {
+                    )
+                    {
                         Console.WriteLine("SSE41 Blend failed on short:");
                         foreach (var item in shortTable.outArray)
                         {
@@ -358,7 +370,8 @@ namespace IntelHardwareIntrinsicTest
                                 && (z[6] == x[6])
                                 && (z[7] == x[7])
                         )
-                    ) {
+                    )
+                    {
                         Console.WriteLine("SSE41 Blend failed on short:");
                         foreach (var item in shortTable.outArray)
                         {
@@ -375,7 +388,8 @@ namespace IntelHardwareIntrinsicTest
                         new ushort[8] { 22, 1, 50, 0, 22, 1, 50, 0 },
                         new ushort[8]
                     )
-                ) {
+                )
+                {
                     var vf1 = Unsafe.Read<Vector128<ushort>>(ushortTable.inArray1Ptr);
                     var vf2 = Unsafe.Read<Vector128<ushort>>(ushortTable.inArray2Ptr);
 
@@ -395,7 +409,8 @@ namespace IntelHardwareIntrinsicTest
                                 && (z[6] == x[6])
                                 && (z[7] == x[7])
                         )
-                    ) {
+                    )
+                    {
                         Console.WriteLine("SSE41 Blend failed on ushort:");
                         foreach (var item in ushortTable.outArray)
                         {
@@ -421,7 +436,8 @@ namespace IntelHardwareIntrinsicTest
                                 && (z[6] == x[6])
                                 && (z[7] == x[7])
                         )
-                    ) {
+                    )
+                    {
                         Console.WriteLine("SSE41 Blend failed on ushort:");
                         foreach (var item in ushortTable.outArray)
                         {
@@ -447,7 +463,8 @@ namespace IntelHardwareIntrinsicTest
                                 && (z[6] == x[6])
                                 && (z[7] == x[7])
                         )
-                    ) {
+                    )
+                    {
                         Console.WriteLine("SSE41 Blend failed on ushort:");
                         foreach (var item in ushortTable.outArray)
                         {
@@ -473,7 +490,8 @@ namespace IntelHardwareIntrinsicTest
                                 && (z[6] == y[6])
                                 && (z[7] == x[7])
                         )
-                    ) {
+                    )
+                    {
                         Console.WriteLine("SSE41 Blend failed on ushort:");
                         foreach (var item in ushortTable.outArray)
                         {
@@ -504,7 +522,8 @@ namespace IntelHardwareIntrinsicTest
                                 && (z[6] == x[6])
                                 && (z[7] == x[7])
                         )
-                    ) {
+                    )
+                    {
                         Console.WriteLine("SSE41 Blend failed on ushort:");
                         foreach (var item in ushortTable.outArray)
                         {

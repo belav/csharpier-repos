@@ -45,7 +45,8 @@ namespace Microsoft.AspNetCore.Components.WebAssembly.Hosting
             IConfiguration configuration,
             RootComponentMapping[] rootComponents,
             string? persistedState
-        ) {
+        )
+        {
             // To ensure JS-invoked methods don't get linked out, have a reference to their enclosing types
             GC.KeepAlive(typeof(JSInteropMethods));
 
@@ -123,7 +124,8 @@ namespace Microsoft.AspNetCore.Components.WebAssembly.Hosting
         internal async Task RunAsyncCore(
             CancellationToken cancellationToken,
             WebAssemblyCultureProvider? cultureProvider = null
-        ) {
+        )
+        {
             if (_started)
             {
                 throw new InvalidOperationException("The host has already started.");

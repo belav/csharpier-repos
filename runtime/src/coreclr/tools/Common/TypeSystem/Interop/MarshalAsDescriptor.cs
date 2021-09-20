@@ -52,7 +52,8 @@ namespace Internal.TypeSystem
             NativeTypeKind arraySubType,
             uint? sizeParamIndex,
             uint? sizeConst
-        ) {
+        )
+        {
             Type = type;
             ArraySubType = arraySubType;
             SizeParamIndex = sizeParamIndex;

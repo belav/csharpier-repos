@@ -787,7 +787,8 @@ namespace Microsoft.AspNetCore.Razor.Language
         public void DirectiveVisitor_ExtractsPrefixFromSyntaxTree(
             string source,
             string expectedPrefix
-        ) {
+        )
+        {
             // Arrange
             var sourceDocument = TestRazorSourceDocument.Create(source, filePath: "TestFile");
             var parser = new RazorParser();
@@ -1002,7 +1003,8 @@ namespace Microsoft.AspNetCore.Razor.Language
             string source,
             object tagHelpers,
             object expectedDescriptors
-        ) {
+        )
+        {
             // Arrange
             var expected = (TagHelperDescriptor[])expectedDescriptors;
             var sourceDocument = TestRazorSourceDocument.Create(source, filePath: "TestFile");
@@ -1148,7 +1150,8 @@ namespace Microsoft.AspNetCore.Razor.Language
         public void ProcessDirectives_CanReturnEmptyDescriptorsBasedOnDirectiveDescriptors(
             string source,
             object tagHelpers
-        ) {
+        )
+        {
             // Arrange
             var sourceDocument = TestRazorSourceDocument.Create(source, filePath: "TestFile");
             var parser = new RazorParser();
@@ -1222,7 +1225,8 @@ namespace Microsoft.AspNetCore.Razor.Language
             string assemblyName,
             IEnumerable<Action<BoundAttributeDescriptorBuilder>> attributes = null,
             IEnumerable<Action<TagMatchingRuleDescriptorBuilder>> ruleBuilders = null
-        ) {
+        )
+        {
             return CreateDescriptor(
                 TagHelperConventions.DefaultKind,
                 tagName,
@@ -1500,7 +1504,8 @@ namespace Microsoft.AspNetCore.Razor.Language
             string typeName,
             string @namespace,
             bool expected
-        ) {
+        )
+        {
             // Arrange & Act
             var result =
                 DefaultRazorTagHelperBinderPhase.ComponentDirectiveVisitor.IsTypeInNamespace(
@@ -1524,7 +1529,8 @@ namespace Microsoft.AspNetCore.Razor.Language
             string typeName,
             string currentNamespace,
             bool expected
-        ) {
+        )
+        {
             // Arrange & Act
             var result = DefaultRazorTagHelperBinderPhase.ComponentDirectiveVisitor.IsTypeInScope(
                 typeName,
@@ -1572,7 +1578,8 @@ namespace Microsoft.AspNetCore.Razor.Language
             bool expectedResult,
             string expectedNamespace,
             string expectedTypeName
-        ) {
+        )
+        {
             // Arrange & Act
             var result =
                 DefaultRazorTagHelperBinderPhase.ComponentDirectiveVisitor.TrySplitNamespaceAndType(
@@ -1602,7 +1609,8 @@ namespace Microsoft.AspNetCore.Razor.Language
         private static RazorSourceDocument CreateComponentTestSourceDocument(
             string content,
             string filePath = null
-        ) {
+        )
+        {
             var sourceDocument = TestRazorSourceDocument.Create(content, filePath: filePath);
             return sourceDocument;
         }
@@ -1616,7 +1624,8 @@ namespace Microsoft.AspNetCore.Razor.Language
             string kind = null,
             bool fullyQualified = false,
             bool childContent = false
-        ) {
+        )
+        {
             kind = kind ?? ComponentMetadata.Component.TagHelperKind;
             return CreateDescriptor(
                 kind,
@@ -1640,7 +1649,8 @@ namespace Microsoft.AspNetCore.Razor.Language
             IEnumerable<Action<TagMatchingRuleDescriptorBuilder>> ruleBuilders = null,
             bool componentFullyQualified = false,
             bool componentChildContent = false
-        ) {
+        )
+        {
             var builder = TagHelperDescriptorBuilder.Create(kind, typeName, assemblyName);
             builder.TypeName(typeName);
 

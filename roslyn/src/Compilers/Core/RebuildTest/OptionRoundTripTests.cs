@@ -75,7 +75,8 @@ End Class",
         public void OptimizationLevel_ParsePdbSerializedString(
             OptimizationLevel optimization,
             bool debugPlus
-        ) {
+        )
+        {
             var data = OptimizationLevelFacts.ToPdbSerializedString(optimization, debugPlus);
             Assert.True(
                 OptimizationLevelFacts.TryParsePdbSerializedString(

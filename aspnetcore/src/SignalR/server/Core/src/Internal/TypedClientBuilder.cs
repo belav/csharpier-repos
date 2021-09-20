@@ -138,7 +138,8 @@ namespace Microsoft.AspNetCore.SignalR.Internal
             TypeBuilder type,
             MethodInfo interfaceMethodInfo,
             FieldInfo proxyField
-        ) {
+        )
+        {
             var methodAttributes =
                 MethodAttributes.Public
                 | MethodAttributes.Virtual

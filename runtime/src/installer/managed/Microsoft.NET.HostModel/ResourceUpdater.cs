@@ -220,7 +220,8 @@ namespace Microsoft.NET.HostModel
                             lastWin32Error == 0
                             || lastWin32Error == Kernel32.ERROR_CALL_NOT_IMPLEMENTED
                         )
-                    ) {
+                    )
+                    {
                         return false;
                     }
                 }
@@ -344,7 +345,8 @@ namespace Microsoft.NET.HostModel
                     data,
                     (uint)data.Length
                 )
-            ) {
+            )
+            {
                 ThrowExceptionForLastWin32Error();
             }
 
@@ -380,7 +382,8 @@ namespace Microsoft.NET.HostModel
                     data,
                     (uint)data.Length
                 )
-            ) {
+            )
+            {
                 ThrowExceptionForLastWin32Error();
             }
 
@@ -430,7 +433,8 @@ namespace Microsoft.NET.HostModel
             IntPtr lpType,
             IntPtr lpName,
             IntPtr lParam
-        ) {
+        )
+        {
             var enumLanguagesCallback = new Kernel32.EnumResLangProc(
                 EnumAndUpdateLanguagesCallback
             );
@@ -442,7 +446,8 @@ namespace Microsoft.NET.HostModel
                     enumLanguagesCallback,
                     lParam
                 )
-            ) {
+            )
+            {
                 CaptureEnumResourcesErrorInfo(lParam);
                 return false;
             }
@@ -455,7 +460,8 @@ namespace Microsoft.NET.HostModel
             IntPtr lpName,
             ushort wLang,
             IntPtr lParam
-        ) {
+        )
+        {
             IntPtr hResource = Kernel32.FindResourceEx(hModule, lpType, lpName, wLang);
             if (hResource == IntPtr.Zero)
             {
@@ -491,7 +497,8 @@ namespace Microsoft.NET.HostModel
                     lpResourceData,
                     Kernel32.SizeofResource(hModule, hResource)
                 )
-            ) {
+            )
+            {
                 CaptureEnumResourcesErrorInfo(lParam);
                 return false;
             }

@@ -51,7 +51,8 @@ namespace Microsoft.CodeAnalysis.LanguageServices
             ImmutableArray<ISymbol> symbols,
             SymbolDescriptionGroups groups,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var parts = await ToDescriptionPartsAsync(
                     workspace,
                     semanticModel,
@@ -71,7 +72,8 @@ namespace Microsoft.CodeAnalysis.LanguageServices
             ImmutableArray<ISymbol> symbols,
             SymbolDescriptionGroups groups,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             if (symbols.Length == 0)
             {
                 return ImmutableArray.Create<SymbolDisplayPart>();
@@ -94,7 +96,8 @@ namespace Microsoft.CodeAnalysis.LanguageServices
             int position,
             ImmutableArray<ISymbol> symbols,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             if (symbols.Length == 0)
             {
                 return SpecializedCollections.EmptyDictionary<

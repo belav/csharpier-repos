@@ -25,7 +25,8 @@ namespace Microsoft.CodeAnalysis.CompilerServer
             internal ListenResult(
                 NamedPipeClientConnection? connection = null,
                 Exception? exception = null
-            ) {
+            )
+            {
                 Debug.Assert(connection is null || exception is null);
                 NamedPipeClientConnection = connection;
                 Exception = exception;
@@ -180,7 +181,8 @@ namespace Microsoft.CodeAnalysis.CompilerServer
             ICompilerServerLogger logger,
             AsyncQueue<ListenResult> queue,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             while (!cancellationToken.IsCancellationRequested)
             {
                 NamedPipeServerStream? pipeStream = null;

@@ -89,7 +89,8 @@ namespace Microsoft.AspNetCore.Owin
             int messageType,
             bool endOfMessage,
             CancellationToken cancel
-        ) {
+        )
+        {
             // Remap close messages to CloseAsync.  System.Net.WebSockets.WebSocket.SendAsync does not allow close messages.
             if (messageType == 0x8)
             {
@@ -107,7 +108,8 @@ namespace Microsoft.AspNetCore.Owin
         internal async Task<WebSocketReceiveTuple> ReceiveAsync(
             ArraySegment<byte> buffer,
             CancellationToken cancel
-        ) {
+        )
+        {
             WebSocketReceiveResult nativeResult = await _webSocket.ReceiveAsync(buffer, cancel);
 
             if (nativeResult.MessageType == WebSocketMessageType.Close)

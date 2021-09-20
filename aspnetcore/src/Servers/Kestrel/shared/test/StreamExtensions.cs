@@ -13,7 +13,8 @@ namespace System.IO
             this Stream stream,
             byte[] buffer,
             CancellationToken cancellationToken = default
-        ) {
+        )
+        {
             var offset = 0;
 
             while (offset < buffer.Length)
@@ -42,7 +43,8 @@ namespace System.IO
             byte[] buffer,
             int length,
             CancellationToken cancellationToken = default
-        ) {
+        )
+        {
             var offset = 0;
 
             while (offset < length)

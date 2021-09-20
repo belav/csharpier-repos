@@ -21,7 +21,8 @@ namespace Microsoft.AspNetCore.Razor.Language
             RazorDiagnostic[] diagnostics,
             SourceMapping[] sourceMappings,
             LinePragma[] linePragmas
-        ) {
+        )
+        {
             if (generatedCode == null)
             {
                 throw new ArgumentNullException(nameof(generatedCode));

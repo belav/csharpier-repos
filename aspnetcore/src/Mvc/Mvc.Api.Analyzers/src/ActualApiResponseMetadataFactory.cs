@@ -29,7 +29,8 @@ namespace Microsoft.AspNetCore.Mvc.Api.Analyzers
             MethodDeclarationSyntax methodSyntax,
             CancellationToken cancellationToken,
             out IList<ActualApiResponseMetadata> actualResponseMetadata
-        ) {
+        )
+        {
             actualResponseMetadata = new List<ActualApiResponseMetadata>();
 
             var allReturnStatementsReadable = true;
@@ -39,12 +40,14 @@ namespace Microsoft.AspNetCore.Mvc.Api.Analyzers
                         _shouldDescendIntoChildren
                     )
                     .OfType<ReturnStatementSyntax>()
-            ) {
+            )
+            {
                 if (
                     returnStatementSyntax.IsMissing
                     || returnStatementSyntax.Expression == null
                     || returnStatementSyntax.Expression.IsMissing
-                ) {
+                )
+                {
                     // Ignore malformed return statements.
                     allReturnStatementsReadable = false;
                     continue;
@@ -75,7 +78,8 @@ namespace Microsoft.AspNetCore.Mvc.Api.Analyzers
             SemanticModel semanticModel,
             ReturnStatementSyntax returnStatementSyntax,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var returnExpression = returnStatementSyntax.Expression;
             var typeInfo = semanticModel.GetTypeInfo(returnExpression, cancellationToken);
             if (typeInfo.Type == null || typeInfo.Type.TypeKind == TypeKind.Error)
@@ -162,7 +166,8 @@ namespace Microsoft.AspNetCore.Mvc.Api.Analyzers
             SemanticModel semanticModel,
             InitializerExpressionSyntax? initializer,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             int? statusCode = null;
             ITypeSymbol? typeSymbol = null;
 
@@ -173,7 +178,8 @@ namespace Microsoft.AspNetCore.Mvc.Api.Analyzers
                 if (
                     !(expression is AssignmentExpressionSyntax assignment)
                     || !(assignment.Left is IdentifierNameSyntax identifier)
-                ) {
+                )
+                {
                     continue;
                 }
 
@@ -191,13 +197,15 @@ namespace Microsoft.AspNetCore.Mvc.Api.Analyzers
                             cancellationToken,
                             out var statusCodeValue
                         )
-                    ) {
+                    )
+                    {
                         // Look for assignments to IStatusCodeActionResult.StatusCode
                         statusCode = statusCodeValue;
                     }
                     else if (
                         HasAttributeNamed(property, ApiSymbolNames.ActionResultObjectValueAttribute)
-                    ) {
+                    )
+                    {
                         // Look for assignment to a property annotated with [ActionResultObjectValue]
                         typeSymbol = GetExpressionObjectType(
                             semanticModel,
@@ -216,7 +224,8 @@ namespace Microsoft.AspNetCore.Mvc.Api.Analyzers
             ExpressionSyntax expression,
             BaseArgumentListSyntax argumentList,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             int? statusCode = null;
             ITypeSymbol? typeSymbol = null;
 
@@ -229,7 +238,8 @@ namespace Microsoft.AspNetCore.Mvc.Api.Analyzers
                     var parameter = method.Parameters[i];
                     if (
                         HasAttributeNamed(parameter, ApiSymbolNames.ActionResultStatusCodeAttribute)
-                    ) {
+                    )
+                    {
                         var argument = argumentList.Arguments[parameter.Ordinal];
                         if (
                             TryGetExpressionStatusCode(
@@ -238,7 +248,8 @@ namespace Microsoft.AspNetCore.Mvc.Api.Analyzers
                                 cancellationToken,
                                 out var statusCodeValue
                             )
-                        ) {
+                        )
+                        {
                             statusCode = statusCodeValue;
                         }
                     }
@@ -248,7 +259,8 @@ namespace Microsoft.AspNetCore.Mvc.Api.Analyzers
                             parameter,
                             ApiSymbolNames.ActionResultObjectValueAttribute
                         )
-                    ) {
+                    )
+                    {
                         var argument = argumentList.Arguments[parameter.Ordinal];
                         typeSymbol = GetExpressionObjectType(
                             semanticModel,
@@ -266,7 +278,8 @@ namespace Microsoft.AspNetCore.Mvc.Api.Analyzers
             SemanticModel semanticModel,
             ExpressionSyntax expression,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var typeInfo = semanticModel.GetTypeInfo(expression, cancellationToken);
 
             return typeInfo.Type;
@@ -277,11 +290,13 @@ namespace Microsoft.AspNetCore.Mvc.Api.Analyzers
             ExpressionSyntax expression,
             CancellationToken cancellationToken,
             out int statusCode
-        ) {
+        )
+        {
             if (
                 expression is LiteralExpressionSyntax literal
                 && literal.Token.Value is int literalStatusCode
-            ) {
+            )
+            {
                 // Covers the 'return StatusCode(200)' case.
                 statusCode = literalStatusCode;
                 return true;
@@ -295,7 +310,8 @@ namespace Microsoft.AspNetCore.Mvc.Api.Analyzers
                     symbolInfo.Symbol is IFieldSymbol field
                     && field.HasConstantValue
                     && field.ConstantValue is int constantStatusCode
-                ) {
+                )
+                {
                     // Covers the 'return StatusCode(StatusCodes.Status200OK)' case.
                     // It also covers the 'return StatusCode(StatusCode)' case, where 'StatusCode' is a constant field.
                     statusCode = constantStatusCode;
@@ -306,7 +322,8 @@ namespace Microsoft.AspNetCore.Mvc.Api.Analyzers
                     symbolInfo.Symbol is ILocalSymbol local
                     && local.HasConstantValue
                     && local.ConstantValue is int localStatusCode
-                ) {
+                )
+                {
                     // Covers the 'return StatusCode(statusCode)' case, where 'statusCode' is a local constant.
                     statusCode = localStatusCode;
                     return true;
@@ -332,7 +349,8 @@ namespace Microsoft.AspNetCore.Mvc.Api.Analyzers
                 && attribute.ConstructorArguments.Length == 1
                 && attribute.ConstructorArguments[0].Kind == TypedConstantKind.Primitive
                 && attribute.ConstructorArguments[0].Value is int statusCode
-            ) {
+            )
+            {
                 return statusCode;
             }
 
@@ -342,7 +360,8 @@ namespace Microsoft.AspNetCore.Mvc.Api.Analyzers
         private static bool IsInterfaceImplementation(
             IPropertySymbol property,
             IPropertySymbol statusCodeActionResultStatusProperty
-        ) {
+        )
+        {
             if (property.Name != statusCodeActionResultStatusProperty.Name)
             {
                 return false;
@@ -355,7 +374,8 @@ namespace Microsoft.AspNetCore.Mvc.Api.Analyzers
                         property.ExplicitInterfaceImplementations[i],
                         statusCodeActionResultStatusProperty
                     )
-                ) {
+                )
+                {
                     return true;
                 }
             }

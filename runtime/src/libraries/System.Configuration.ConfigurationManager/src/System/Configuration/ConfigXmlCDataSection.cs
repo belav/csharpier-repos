@@ -11,12 +11,8 @@ namespace System.Configuration
         private string _filename;
         private int _line;
 
-        public ConfigXmlCDataSection(
-            string filename,
-            int line,
-            string data,
-            XmlDocument doc
-        ) : base(data, doc)
+        public ConfigXmlCDataSection(string filename, int line, string data, XmlDocument doc)
+            : base(data, doc)
         {
             _line = line;
             _filename = filename;

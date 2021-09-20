@@ -54,19 +54,20 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Preview
             Solution oldSolution,
             IComponentModel componentModel,
             bool showCheckBoxes = true
-        ) : this(
-            threadingContext,
-            title,
-            helpString,
-            description,
-            topLevelItemName,
-            topLevelGlyph,
-            newSolution,
-            oldSolution,
-            componentModel,
-            null,
-            showCheckBoxes
-        ) { }
+        )
+            : this(
+                threadingContext,
+                title,
+                helpString,
+                description,
+                topLevelItemName,
+                topLevelGlyph,
+                newSolution,
+                oldSolution,
+                componentModel,
+                null,
+                showCheckBoxes
+            ) { }
 
         public PreviewEngine(
             IThreadingContext threadingContext,
@@ -210,7 +211,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Preview
         private void AppendFileChanges(
             IEnumerable<DocumentId> changedDocuments,
             ArrayBuilder<AbstractChange> builder
-        ) {
+        )
+        {
             // Avoid showing linked changes to linked files multiple times.
             var linkedDocumentIds = new HashSet<DocumentId>();
 

@@ -162,7 +162,8 @@ namespace System.Linq.Tests
         protected static IEnumerable<int> RepeatedNumberGuaranteedNotCollectionType(
             int num,
             long count
-        ) {
+        )
+        {
             for (long i = 0; i < count; i++)
                 yield return num;
         }
@@ -176,7 +177,8 @@ namespace System.Linq.Tests
         protected static IEnumerable<int?> NullableNumberRangeGuaranteedNotCollectionType(
             int num,
             int count
-        ) {
+        )
+        {
             for (int i = 0; i < count; i++)
                 yield return num + i;
         }
@@ -184,7 +186,8 @@ namespace System.Linq.Tests
         protected static IEnumerable<int?> RepeatedNullableNumberGuaranteedNotCollectionType(
             int? num,
             long count
-        ) {
+        )
+        {
             for (long i = 0; i < count; i++)
                 yield return num;
         }
@@ -405,7 +408,8 @@ namespace System.Linq.Tests
                 Func<object> explicitCurrent = null,
                 Action reset = null,
                 Action dispose = null
-            ) {
+            )
+            {
                 _getEnumerator = getEnumerator ?? (() => this);
                 _moveNext =
                     moveNext

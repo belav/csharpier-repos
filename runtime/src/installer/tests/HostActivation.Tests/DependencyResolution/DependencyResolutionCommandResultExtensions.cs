@@ -19,7 +19,8 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation.DependencyResolution
             this CommandResultAssertions assertion,
             string propertyName,
             params string[] values
-        ) {
+        )
+        {
             string propertyValue = GetAppMockPropertyValue(assertion, propertyName);
 
             foreach (string value in values)
@@ -43,7 +44,8 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation.DependencyResolution
             this CommandResultAssertions assertion,
             string propertyName,
             params string[] values
-        ) {
+        )
+        {
             string propertyValue = GetAppMockPropertyValue(assertion, propertyName);
 
             foreach (string value in values)
@@ -67,7 +69,8 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation.DependencyResolution
             this CommandResultAssertions assertion,
             string assemblyPath,
             TestApp app = null
-        ) {
+        )
+        {
             return assertion.HaveRuntimePropertyContaining(
                 TRUSTED_PLATFORM_ASSEMBLIES,
                 RelativePathsToAbsoluteAppPaths(assemblyPath, app)
@@ -78,7 +81,8 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation.DependencyResolution
             this CommandResultAssertions assertion,
             string assemblyPath,
             TestApp app = null
-        ) {
+        )
+        {
             return assertion.NotHaveRuntimePropertyContaining(
                 TRUSTED_PLATFORM_ASSEMBLIES,
                 RelativePathsToAbsoluteAppPaths(assemblyPath, app)
@@ -89,7 +93,8 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation.DependencyResolution
             this CommandResultAssertions assertion,
             string path,
             TestApp app = null
-        ) {
+        )
+        {
             return assertion.HaveRuntimePropertyContaining(
                 NATIVE_DLL_SEARCH_DIRECTORIES,
                 RelativePathsToAbsoluteAppPaths(path, app)
@@ -100,7 +105,8 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation.DependencyResolution
             this CommandResultAssertions assertion,
             string path,
             TestApp app = null
-        ) {
+        )
+        {
             return assertion.NotHaveRuntimePropertyContaining(
                 NATIVE_DLL_SEARCH_DIRECTORIES,
                 RelativePathsToAbsoluteAppPaths(path, app)
@@ -113,7 +119,8 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation.DependencyResolution
 
         public static AndConstraint<CommandResultAssertions> HaveSuccessfullyResolvedComponentDependencies(
             this CommandResultAssertions assertion
-        ) {
+        )
+        {
             return assertion.HaveStdOutContaining(
                 "corehost_resolve_component_dependencies:Success"
             );
@@ -123,7 +130,8 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation.DependencyResolution
             this CommandResultAssertions assertion,
             string propertyName,
             params string[] values
-        ) {
+        )
+        {
             string propertyValue = GetComponentMockPropertyValue(assertion, propertyName);
 
             foreach (string value in values)
@@ -147,7 +155,8 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation.DependencyResolution
             this CommandResultAssertions assertion,
             string propertyName,
             params string[] values
-        ) {
+        )
+        {
             string propertyValue = GetComponentMockPropertyValue(assertion, propertyName);
 
             foreach (string value in values)
@@ -171,7 +180,8 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation.DependencyResolution
             this CommandResultAssertions assertion,
             string assemblyPath,
             TestApp app = null
-        ) {
+        )
+        {
             return assertion.HaveResolvedComponentDependencyContaining(
                 assemblies,
                 RelativePathsToAbsoluteAppPaths(assemblyPath, app)
@@ -182,7 +192,8 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation.DependencyResolution
             this CommandResultAssertions assertion,
             string assemblyPath,
             TestApp app = null
-        ) {
+        )
+        {
             return assertion.NotHaveResolvedComponentDependencyContaining(
                 assemblies,
                 RelativePathsToAbsoluteAppPaths(assemblyPath, app)
@@ -193,7 +204,8 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation.DependencyResolution
             this CommandResultAssertions assertion,
             string path,
             TestApp app = null
-        ) {
+        )
+        {
             return assertion.HaveResolvedComponentDependencyContaining(
                 native_search_paths,
                 RelativePathsToAbsoluteAppPaths(path, app)
@@ -204,7 +216,8 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation.DependencyResolution
             this CommandResultAssertions assertion,
             string path,
             TestApp app = null
-        ) {
+        )
+        {
             return assertion.NotHaveResolvedComponentDependencyContaining(
                 native_search_paths,
                 RelativePathsToAbsoluteAppPaths(path, app)
@@ -228,7 +241,8 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation.DependencyResolution
         private static string GetMockPropertyValue(
             CommandResultAssertions assertion,
             string propertyHeader
-        ) {
+        )
+        {
             string stdout = assertion.Result.StdOut;
             int i = stdout.IndexOf(propertyHeader);
             if (i >= 0)

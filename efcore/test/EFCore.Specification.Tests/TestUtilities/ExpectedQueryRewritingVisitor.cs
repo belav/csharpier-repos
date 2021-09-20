@@ -66,7 +66,8 @@ namespace Microsoft.EntityFrameworkCore.TestUtilities
 
         public ExpectedQueryRewritingVisitor(
             Dictionary<(Type, string), Func<object, object>> shadowPropertyMappings = null
-        ) {
+        )
+        {
             _shadowPropertyMappings =
                 shadowPropertyMappings ?? new Dictionary<(Type, string), Func<object, object>>();
         }
@@ -77,7 +78,8 @@ namespace Microsoft.EntityFrameworkCore.TestUtilities
                 !memberExpression.Type.IsValueType
                 && !memberExpression.Type.IsNullableValueType()
                 && memberExpression.Expression != null
-            ) {
+            )
+            {
                 var expression = Visit(memberExpression.Expression);
 
                 var lambdaParameter = Expression.Parameter(expression.Type, "x");
@@ -94,7 +96,8 @@ namespace Microsoft.EntityFrameworkCore.TestUtilities
                 memberExpression.Type == typeof(bool)
                 && !_negated
                 && memberExpression.Expression != null
-            ) {
+            )
+            {
                 var expression = Visit(memberExpression.Expression);
 
                 var lambdaParameter = Expression.Parameter(expression.Type, "x");
@@ -127,7 +130,8 @@ namespace Microsoft.EntityFrameworkCore.TestUtilities
                     || methodCallExpression.Method.GetGenericMethodDefinition()
                         == QueryableMethods.GroupJoin
                 )
-            ) {
+            )
+            {
                 return RewriteJoinGroupJoin(methodCallExpression);
             }
 
@@ -145,7 +149,8 @@ namespace Microsoft.EntityFrameworkCore.TestUtilities
                     || methodCallExpression.Method == _startsWithMethodInfo
                     || methodCallExpression.Method == _endsWithMethodInfo
                 )
-            ) {
+            )
+            {
                 return RewriteStartsWithEndsWithContains(methodCallExpression);
             }
 
@@ -153,7 +158,8 @@ namespace Microsoft.EntityFrameworkCore.TestUtilities
                 methodCallExpression.Method.IsGenericMethod
                 && methodCallExpression.Method.GetGenericMethodDefinition()
                     == EnumerableMethods.DefaultIfEmptyWithoutArgument
-            ) {
+            )
+            {
                 var source = Visit(methodCallExpression.Arguments[0]);
 
                 return Expression.Call(
@@ -196,7 +202,8 @@ namespace Microsoft.EntityFrameworkCore.TestUtilities
                 leftKeySelectorBody.Type.IsNullableValueType()
                 && rightKeySelectorBody.Type.IsValueType
                 && leftKeySelectorBody.Type.UnwrapNullableType() == rightKeySelectorBody.Type
-            ) {
+            )
+            {
                 rightKeySelectorBody = Expression.Convert(
                     rightKeySelectorBody,
                     leftKeySelectorBody.Type
@@ -207,7 +214,8 @@ namespace Microsoft.EntityFrameworkCore.TestUtilities
                 rightKeySelectorBody.Type.IsNullableValueType()
                 && leftKeySelectorBody.Type.IsValueType
                 && rightKeySelectorBody.Type.UnwrapNullableType() == leftKeySelectorBody.Type
-            ) {
+            )
+            {
                 leftKeySelectorBody = Expression.Convert(
                     leftKeySelectorBody,
                     rightKeySelectorBody.Type
@@ -227,7 +235,8 @@ namespace Microsoft.EntityFrameworkCore.TestUtilities
                     rightKeySelectorBody.Type
                     != methodCallExpression.Arguments[3].UnwrapLambdaFromQuote().Body.Type
                 )
-            ) {
+            )
+            {
                 joinMethodInfoGenericArguments[2] = leftKeySelectorBody.Type;
                 joinMethodInfo = joinMethodInfo.GetGenericMethodDefinition()
                     .MakeGenericMethod(joinMethodInfoGenericArguments);
@@ -268,7 +277,8 @@ namespace Microsoft.EntityFrameworkCore.TestUtilities
 
         private Expression RewriteStartsWithEndsWithContains(
             MethodCallExpression methodCallExpression
-        ) {
+        )
+        {
             // c.FirstName.StartsWith(c.Nickname)
             // gets converted to:
             // c.Maybe(x => x.FirstName).MaybeScalar(x => c.Maybe(xx => xx.Nickname).MaybeScalar(xx => x.StartsWith(xx)))
@@ -323,7 +333,8 @@ namespace Microsoft.EntityFrameworkCore.TestUtilities
             if (
                 expression is MethodCallExpression methodCallExpression
                 && MethodInfoExtensions.IsEFPropertyMethod(methodCallExpression.Method)
-            ) {
+            )
+            {
                 var caller = RemoveConvertToObject(methodCallExpression.Arguments[0]);
                 var propertyName =
                     (methodCallExpression.Arguments[1] as ConstantExpression)?.Value as string
@@ -359,7 +370,8 @@ namespace Microsoft.EntityFrameworkCore.TestUtilities
                             .Where(m => m.Name == propertyName)
                             .SingleOrDefault()
                         is MemberInfo matchingMember
-                    ) {
+                    )
+                    {
                         result = Expression.Property(caller, propertyName);
                     }
 
@@ -401,7 +413,8 @@ namespace Microsoft.EntityFrameworkCore.TestUtilities
                     memberExpression.Type.IsValueType || memberExpression.Type.IsNullableValueType()
                 )
                 && memberExpression.Expression != null
-            ) {
+            )
+            {
                 var instance = Visit(memberExpression.Expression);
                 var maybeLambdaParameter = Expression.Parameter(instance.Type, "x");
                 var maybeLambda = Expression.Lambda(
@@ -435,7 +448,8 @@ namespace Microsoft.EntityFrameworkCore.TestUtilities
                 && memberOperand.Expression != null
                 && unaryExpression.Type.IsNullableValueType()
                 && unaryExpression.Type.UnwrapNullableType() == memberOperand.Type
-            ) {
+            )
+            {
                 var expression = Visit(memberOperand.Expression);
 
                 var lambdaParameter = Expression.Parameter(expression.Type, "x");
@@ -473,7 +487,8 @@ namespace Microsoft.EntityFrameworkCore.TestUtilities
                 || binaryExpression.NodeType == ExpressionType.GreaterThanOrEqual
                 || binaryExpression.NodeType == ExpressionType.LessThan
                 || binaryExpression.NodeType == ExpressionType.LessThanOrEqual
-            ) {
+            )
+            {
                 var left = AddNullProtectionForNonNullableMemberAccess(binaryExpression.Left);
                 var right = AddNullProtectionForNonNullableMemberAccess(binaryExpression.Right);
 
@@ -481,7 +496,8 @@ namespace Microsoft.EntityFrameworkCore.TestUtilities
                     left.Type.IsNullableValueType()
                     && right.Type.IsValueType
                     && left.Type.UnwrapNullableType() == right.Type
-                ) {
+                )
+                {
                     right = Expression.Convert(right, left.Type);
                 }
 
@@ -489,7 +505,8 @@ namespace Microsoft.EntityFrameworkCore.TestUtilities
                     right.Type.IsNullableValueType()
                     && left.Type.IsValueType
                     && right.Type.UnwrapNullableType() == left.Type
-                ) {
+                )
+                {
                     left = Expression.Convert(left, right.Type);
                 }
 

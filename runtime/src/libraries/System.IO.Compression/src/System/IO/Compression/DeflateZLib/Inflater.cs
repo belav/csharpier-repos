@@ -124,7 +124,8 @@ namespace System.IO.Compression
             if (
                 ReadInflateOutput(bufPtr, length, ZLibNative.FlushCode.NoFlush, out bytesRead)
                 == ZLibNative.ErrorCode.StreamEnd
-            ) {
+            )
+            {
                 if (!NeedsInput() && IsGzipStream() && IsInputBufferHandleAllocated)
                 {
                     _finished = ResetStreamForLeftoverInput();
@@ -158,7 +159,8 @@ namespace System.IO.Compression
                 if (
                     *nextInPointer != ZLibNative.GZip_Header_ID1
                     || (nextAvailIn > 1 && *(nextInPointer + 1) != ZLibNative.GZip_Header_ID2)
-                ) {
+                )
+                {
                     return true;
                 }
 
@@ -296,7 +298,8 @@ namespace System.IO.Compression
             int length,
             ZLibNative.FlushCode flushCode,
             out int bytesRead
-        ) {
+        )
+        {
             lock (SyncLock)
             {
                 _zlibStream.NextOut = (IntPtr)bufPtr;

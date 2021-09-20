@@ -40,7 +40,8 @@ namespace System.Web.Http.Owin
                 using (
                     HttpRequestMessage expectedRequest =
                         CreateRequestWithOwinContextAndRequestContext(context)
-                ) {
+                )
+                {
                     // Act
                     HttpResponseMessage response = await handler.SendAsync(
                         expectedRequest,
@@ -106,7 +107,8 @@ namespace System.Web.Http.Owin
 
             using (
                 HttpRequestMessage request = CreateRequestWithOwinContextAndRequestContext(context)
-            ) {
+            )
+            {
                 // Act & Assert
                 InvalidOperationException exception =
                     await Assert.ThrowsAsync<InvalidOperationException>(
@@ -183,7 +185,8 @@ namespace System.Web.Http.Owin
 
             using (
                 HttpRequestMessage request = CreateRequestWithOwinContextAndRequestContext(context)
-            ) {
+            )
+            {
                 // Act
                 HttpResponseMessage ignore = await handler.SendAsync(
                     request,
@@ -217,7 +220,8 @@ namespace System.Web.Http.Owin
 
             using (
                 HttpRequestMessage request = CreateRequestWithOwinContextAndRequestContext(context)
-            ) {
+            )
+            {
                 // Act
                 HttpResponseMessage ignore = await handler.SendAsync(
                     request,
@@ -253,7 +257,8 @@ namespace System.Web.Http.Owin
 
             using (
                 HttpRequestMessage request = CreateRequestWithOwinContextAndRequestContext(context)
-            ) {
+            )
+            {
                 // Act
                 HttpResponseMessage ignore = await handler.SendAsync(
                     request,
@@ -290,7 +295,8 @@ namespace System.Web.Http.Owin
 
             using (
                 HttpRequestMessage request = CreateRequestWithOwinContextAndRequestContext(context)
-            ) {
+            )
+            {
                 // Act
                 HttpResponseMessage ignore = await handler.SendAsync(
                     request,
@@ -327,7 +333,8 @@ namespace System.Web.Http.Owin
 
         private static PassiveAuthenticationMessageHandler CreateProductUnderTest(
             HttpMessageHandler innerHandler
-        ) {
+        )
+        {
             PassiveAuthenticationMessageHandler handler = new PassiveAuthenticationMessageHandler();
             handler.InnerHandler = innerHandler;
             return handler;
@@ -335,7 +342,8 @@ namespace System.Web.Http.Owin
 
         private static HttpRequestMessage CreateRequestWithOwinContextAndRequestContext(
             IOwinContext context
-        ) {
+        )
+        {
             HttpRequestMessage request = new HttpRequestMessage();
             request.SetOwinContext(context);
             request.SetRequestContext(new HttpRequestContext());
@@ -357,7 +365,8 @@ namespace System.Web.Http.Owin
             protected override Task<HttpResponseMessage> SendAsync(
                 HttpRequestMessage request,
                 CancellationToken cancellationToken
-            ) {
+            )
+            {
                 throw new NotImplementedException();
             }
         }
@@ -372,7 +381,8 @@ namespace System.Web.Http.Owin
 
             public LambdaHttpMessageHandler(
                 Func<HttpRequestMessage, CancellationToken, Task<HttpResponseMessage>> sendAsync
-            ) {
+            )
+            {
                 if (sendAsync == null)
                 {
                     throw new ArgumentNullException("sendAsync");
@@ -384,7 +394,8 @@ namespace System.Web.Http.Owin
             protected override Task<HttpResponseMessage> SendAsync(
                 HttpRequestMessage request,
                 CancellationToken cancellationToken
-            ) {
+            )
+            {
                 return _sendAsync.Invoke(request, cancellationToken);
             }
         }

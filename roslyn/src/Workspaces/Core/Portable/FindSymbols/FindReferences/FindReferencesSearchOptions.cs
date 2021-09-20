@@ -81,7 +81,8 @@ namespace Microsoft.CodeAnalysis.FindSymbols
             bool cascade,
             bool @explicit,
             bool unidirectionalHierarchyCascade
-        ) {
+        )
+        {
             AssociatePropertyReferencesWithSpecificAccessor =
                 associatePropertyReferencesWithSpecificAccessor;
             Cascade = cascade;
@@ -94,7 +95,8 @@ namespace Microsoft.CodeAnalysis.FindSymbols
             Optional<bool> cascade = default,
             Optional<bool> @explicit = default,
             Optional<bool> unidirectionalHierarchyCascade = default
-        ) {
+        )
+        {
             var newAssociatePropertyReferencesWithSpecificAccessor =
                 associatePropertyReferencesWithSpecificAccessor.HasValue
                     ? associatePropertyReferencesWithSpecificAccessor.Value
@@ -111,7 +113,8 @@ namespace Microsoft.CodeAnalysis.FindSymbols
                 && newCascade == Cascade
                 && newExplicit == Explicit
                 && newUnidirectionalHierarchyCascade == UnidirectionalHierarchyCascade
-            ) {
+            )
+            {
                 return this;
             }
 

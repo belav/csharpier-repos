@@ -52,20 +52,15 @@ namespace System
         // We will not use this in the classlibs, but we'll provide it for
         // anyone that's really interested so they don't have to stick a bunch
         // of printf's in their code.
-        public ArgumentOutOfRangeException(
-            string? paramName,
-            object? actualValue,
-            string? message
-        ) : base(message, paramName)
+        public ArgumentOutOfRangeException(string? paramName, object? actualValue, string? message)
+            : base(message, paramName)
         {
             _actualValue = actualValue;
             HResult = HResults.COR_E_ARGUMENTOUTOFRANGE;
         }
 
-        protected ArgumentOutOfRangeException(
-            SerializationInfo info,
-            StreamingContext context
-        ) : base(info, context)
+        protected ArgumentOutOfRangeException(SerializationInfo info, StreamingContext context)
+            : base(info, context)
         {
             _actualValue = info.GetValue("ActualValue", typeof(object));
         }

@@ -50,7 +50,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
             PropertyInfo? propertyInfo,
             FieldInfo? fieldInfo,
             ConfigurationSource configurationSource
-        ) {
+        )
+        {
             Check.NotEmpty(name, nameof(name));
 
             Name = name;
@@ -149,7 +150,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
         public virtual FieldInfo? SetField(
             string? fieldName,
             ConfigurationSource configurationSource
-        ) {
+        )
+        {
             if (fieldName == null)
             {
                 return SetFieldInfo(null, configurationSource);
@@ -175,7 +177,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
             TypeBase type,
             string propertyName,
             bool shouldThrow
-        ) {
+        )
+        {
             if (!type.GetRuntimeFields().TryGetValue(fieldName, out var fieldInfo) && shouldThrow)
             {
                 throw new InvalidOperationException(
@@ -195,7 +198,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
         public virtual FieldInfo? SetFieldInfo(
             FieldInfo? fieldInfo,
             ConfigurationSource configurationSource
-        ) {
+        )
+        {
             EnsureMutable();
 
             if (Equals(FieldInfo, fieldInfo))
@@ -296,7 +300,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
             Type? entityType,
             string? propertyName,
             bool shouldThrow
-        ) {
+        )
+        {
             Check.DebugAssert(propertyName != null || !shouldThrow, "propertyName is null");
 
             if (entityType == null || !fieldInfo.DeclaringType!.IsAssignableFrom(entityType))
@@ -493,7 +498,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
             IPropertyBase? property,
             Expression instanceExpression,
             MemberInfo memberInfo
-        ) {
+        )
+        {
             if (property?.IsIndexerProperty() == true)
             {
                 Expression expression = Expression.MakeIndex(

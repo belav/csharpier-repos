@@ -34,7 +34,8 @@ namespace Microsoft.CodeAnalysis.LanguageServer.Handler
             >? solutionCache,
             IDocumentChangeTracker? documentChangeTracker,
             out Workspace workspace
-        ) {
+        )
+        {
             // Go through each registered workspace, find the solution that contains the document that
             // this request is for, and then updates it based on the state of the world as we know it, based on the
             // text content in the document change tracker.
@@ -116,7 +117,8 @@ namespace Microsoft.CodeAnalysis.LanguageServer.Handler
             ILspWorkspaceRegistrationService lspWorkspaceRegistrationService,
             TextDocumentIdentifier textDocument,
             string? clientName
-        ) {
+        )
+        {
             logger.TraceInformation($"Finding document corresponding to {textDocument.Uri}");
 
             using var workspaceKinds = TemporaryArray<string?>.Empty;
@@ -184,7 +186,8 @@ namespace Microsoft.CodeAnalysis.LanguageServer.Handler
             >? solutionCache,
             Solution workspaceSolution,
             IDocumentChangeTracker documentChangeTracker
-        ) {
+        )
+        {
             var workspace = workspaceSolution.Workspace;
 
             // If we have a cached solution we can use it, unless the workspace solution it was based on
@@ -193,7 +196,8 @@ namespace Microsoft.CodeAnalysis.LanguageServer.Handler
                 solutionCache is null
                 || !solutionCache.TryGetValue(workspace, out var cacheInfo)
                 || workspaceSolution != cacheInfo.workspaceSolution
-            ) {
+            )
+            {
                 var lspSolution = GetSolutionWithReplacedDocuments(
                     workspaceSolution,
                     documentChangeTracker
@@ -218,7 +222,8 @@ namespace Microsoft.CodeAnalysis.LanguageServer.Handler
         private static Solution GetSolutionWithReplacedDocuments(
             Solution solution,
             IDocumentChangeTracker documentChangeTracker
-        ) {
+        )
+        {
             foreach (var (uri, text) in documentChangeTracker.GetTrackedDocuments())
             {
                 var documentIds = solution.GetDocumentIds(uri);
@@ -270,7 +275,8 @@ namespace Microsoft.CodeAnalysis.LanguageServer.Handler
             string? clientName,
             Document? document,
             IDocumentChangeTracker documentChangeTracker
-        ) {
+        )
+        {
             Document = document;
             Solution = solution;
             ClientCapabilities = clientCapabilities;

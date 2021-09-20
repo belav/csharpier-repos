@@ -96,7 +96,8 @@ namespace System.Reflection.Emit
             ParameterModifier[]? modifiers,
             CultureInfo? culture,
             string[]? namedParameters
-        ) {
+        )
+        {
             throw new NotSupportedException();
         }
 
@@ -122,7 +123,8 @@ namespace System.Reflection.Emit
             CallingConventions callConvention,
             Type[] types,
             ParameterModifier[]? modifiers
-        ) {
+        )
+        {
             throw new NotSupportedException();
         }
 
@@ -146,7 +148,8 @@ namespace System.Reflection.Emit
             CallingConventions callConvention,
             Type[]? types,
             ParameterModifier[]? modifiers
-        ) {
+        )
+        {
             throw new NotSupportedException();
         }
 
@@ -213,7 +216,8 @@ namespace System.Reflection.Emit
             Type? returnType,
             Type[]? types,
             ParameterModifier[]? modifiers
-        ) {
+        )
+        {
             throw new NotSupportedException();
         }
 
@@ -249,7 +253,8 @@ namespace System.Reflection.Emit
             string name,
             MemberTypes type,
             BindingFlags bindingAttr
-        ) {
+        )
+        {
             throw new NotSupportedException();
         }
 
@@ -398,7 +403,8 @@ namespace System.Reflection.Emit
         public void SetBaseTypeConstraint(
             [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)]
                 Type? baseTypeConstraint
-        ) {
+        )
+        {
             AssemblyBuilder.CheckContext(baseTypeConstraint);
             m_type.SetParent(baseTypeConstraint);
         }
@@ -411,7 +417,8 @@ namespace System.Reflection.Emit
 
         public void SetGenericParameterAttributes(
             GenericParameterAttributes genericParameterAttributes
-        ) {
+        )
+        {
             m_type.SetGenParamAttributes(genericParameterAttributes);
         }
         #endregion

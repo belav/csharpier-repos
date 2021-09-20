@@ -146,7 +146,8 @@ namespace Newtonsoft.Json.Bson
             Stream stream,
             bool readRootValueAsArray,
             DateTimeKind dateTimeKindHandling
-        ) {
+        )
+        {
             ValidationUtils.ArgumentNotNull(stream, nameof(stream));
             _reader = new BinaryReader(stream);
             _stack = new List<ContainerContext>();
@@ -164,7 +165,8 @@ namespace Newtonsoft.Json.Bson
             BinaryReader reader,
             bool readRootValueAsArray,
             DateTimeKind dateTimeKindHandling
-        ) {
+        )
+        {
             ValidationUtils.ArgumentNotNull(reader, nameof(reader));
             _reader = reader;
             _stack = new List<ContainerContext>();

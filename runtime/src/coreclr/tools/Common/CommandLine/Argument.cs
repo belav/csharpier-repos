@@ -13,7 +13,8 @@ namespace Internal.CommandLine
             IEnumerable<string> names,
             bool isOption,
             bool isRequired
-        ) {
+        )
+        {
             var nameArray = names.ToArray();
             Command = command;
             Name = nameArray.First();

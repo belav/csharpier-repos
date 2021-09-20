@@ -70,7 +70,8 @@ namespace DebuggerTests
             DateTime** dtpp,
             DateTime*[] dtpa,
             DateTime**[] dtppa
-        ) {
+        )
+        {
             Console.WriteLine($"break here!");
             if (ip == null)
                 Console.WriteLine($"ip is null");

@@ -255,7 +255,8 @@ namespace System.Xml.Tests
             string assembly,
             string res,
             string[] strParams
-        ) {
+        )
+        {
             CExceptionHandler handler = new CExceptionHandler(
                 Path.Combine(_strPath, "Exceptions.xml"),
                 assembly,
@@ -302,7 +303,8 @@ namespace System.Xml.Tests
             XslInputType xslInputType,
             ReaderType readerType,
             XmlResolver xr
-        ) {
+        )
+        {
             _strXslFile = FullFilePath(_strXslFile);
             xslt = new XslCompiledTransform();
             XmlReaderSettings xrs = null;
@@ -404,7 +406,8 @@ namespace System.Xml.Tests
             XslInputType xslInputType,
             ReaderType readerType,
             XmlResolver xr
-        ) {
+        )
+        {
             _strXslFile = FullFilePath(_strXslFile);
             xslt = new XslCompiledTransform();
             XmlReaderSettings xrs = null;
@@ -582,7 +585,8 @@ namespace System.Xml.Tests
                     StreamReader sr = new StreamReader(
                         new FileStream(baseline, FileMode.Open, FileAccess.Read)
                     )
-                ) {
+                )
+                {
                     string baseLine = sr.ReadToEnd();
                     _output.WriteLine(baseLine);
                 }
@@ -591,7 +595,8 @@ namespace System.Xml.Tests
                     StreamReader sr = new StreamReader(
                         new FileStream(outputFile, FileMode.Open, FileAccess.Read)
                     )
-                ) {
+                )
+                {
                     string output = sr.ReadToEnd();
                     _output.WriteLine(output);
                 }
@@ -600,7 +605,8 @@ namespace System.Xml.Tests
                     StreamWriter sw = new StreamWriter(
                         new FileStream("diff.xml", FileMode.Open, FileAccess.Read)
                     )
-                ) {
+                )
+                {
                     sw.WriteLine("<?xml-stylesheet href='diff.xsl' type='text/xsl'?>");
                     sw.WriteLine(diff.ToXml());
                 }
@@ -624,7 +630,8 @@ namespace System.Xml.Tests
             OutputType outputType,
             NavType navType,
             bool errorCase
-        ) {
+        )
+        {
             szXmlFile = FullFilePath(szXmlFile);
 
             _output.WriteLine("Loading XML " + szXmlFile);
@@ -707,7 +714,8 @@ namespace System.Xml.Tests
             OutputType outputType,
             NavType navType,
             bool errorCase
-        ) {
+        )
+        {
             szXmlFile = FullFilePath(szXmlFile);
 
             _output.WriteLine("Loading XML " + szXmlFile);
@@ -784,7 +792,8 @@ namespace System.Xml.Tests
             OutputType outputType,
             NavType navType,
             XmlResolver xr
-        ) {
+        )
+        {
             // Default value of errorCase is false
             return (TransformResolver(szXmlFile, outputType, navType, xr, false));
         }
@@ -795,7 +804,8 @@ namespace System.Xml.Tests
             NavType navType,
             XmlResolver xr,
             bool errorCase
-        ) {
+        )
+        {
             szXmlFile = FullFilePath(szXmlFile);
 
             _output.WriteLine("Loading XML " + szXmlFile);

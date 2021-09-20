@@ -36,7 +36,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Library.ObjectB
             uint flags,
             VSOBSEARCHCRITERIA2[] pobSrch,
             ImmutableHashSet<Tuple<ProjectId, IAssemblySymbol>> projectAndAssemblySet
-        ) {
+        )
+        {
             var searchText = GetSearchText(pobSrch);
             if (searchText == null)
             {

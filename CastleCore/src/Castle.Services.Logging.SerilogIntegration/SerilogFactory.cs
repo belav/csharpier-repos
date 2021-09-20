@@ -46,7 +46,8 @@ namespace Castle.Services.Logging.SerilogIntegration
         public override Castle.Core.Logging.ILogger Create(
             string name,
             Castle.Core.Logging.LoggerLevel level
-        ) {
+        )
+        {
             throw new NotSupportedException(
                 "Logger levels cannot be set at runtime. Please see Serilog's LoggerConfiguration.MinimumLevel."
             );

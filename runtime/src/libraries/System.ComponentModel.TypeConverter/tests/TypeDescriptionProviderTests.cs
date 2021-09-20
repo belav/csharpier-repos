@@ -21,7 +21,8 @@ namespace System.ComponentModel.Tests
         [MemberData(nameof(CreateInstance_WithoutParent_TestData))]
         public void CreateInstance_InvokeWithoutParent_ReturnsExpected(
             IServiceProvider serviceProvider
-        ) {
+        )
+        {
             var provider = new SubTypeDescriptionProvider();
             Assert.Equal(
                 "aa",
@@ -69,7 +70,8 @@ namespace System.ComponentModel.Tests
             Type[] argTypes,
             object[] args,
             object result
-        ) {
+        )
+        {
             var mockParentProvider = new Mock<TypeDescriptionProvider>(MockBehavior.Strict);
             mockParentProvider.Setup(
                     p => p.CreateInstance(serviceProvider, objectType, argTypes, args)
@@ -128,7 +130,8 @@ namespace System.ComponentModel.Tests
         {
             foreach (
                 IDictionary result in new IDictionary[] { null, new Dictionary<int, string>() }
-            ) {
+            )
+            {
                 yield return new object[] { null, result };
                 yield return new object[] { new object(), result };
             }
@@ -180,7 +183,8 @@ namespace System.ComponentModel.Tests
                     null,
                     new Mock<ICustomTypeDescriptor>(MockBehavior.Strict).Object
                 }
-            ) {
+            )
+            {
                 yield return new object[] { null, result };
                 yield return new object[] { new object(), result };
             }
@@ -191,7 +195,8 @@ namespace System.ComponentModel.Tests
         public void GetExtendedTypeDescriptor_InvokeWithParent_ReturnsExpected(
             object instance,
             ICustomTypeDescriptor result
-        ) {
+        )
+        {
             var mockParentProvider = new Mock<TypeDescriptionProvider>(MockBehavior.Strict);
             mockParentProvider.Setup(p => p.GetExtendedTypeDescriptor(instance))
                 .Returns(result)
@@ -226,7 +231,8 @@ namespace System.ComponentModel.Tests
                         new Mock<IExtenderProvider>(MockBehavior.Strict).Object
                     }
                 }
-            ) {
+            )
+            {
                 yield return new object[] { null, result };
                 yield return new object[] { new object(), result };
             }
@@ -237,7 +243,8 @@ namespace System.ComponentModel.Tests
         public void GetExtenderProviders_InvokeWithParent_ReturnsExpected(
             object instance,
             IExtenderProvider[] result
-        ) {
+        )
+        {
             var mockParentProvider = new Mock<TypeDescriptionProvider>(MockBehavior.Strict);
             mockParentProvider.Protected()
                 .Setup<IExtenderProvider[]>(
@@ -312,7 +319,8 @@ namespace System.ComponentModel.Tests
         public void GetFullComponentName_InvokeWithCustomTypeDescriptor_ReturnsExpected(
             object component,
             string result
-        ) {
+        )
+        {
             var mockCustomTypeDescriptor = new Mock<ICustomTypeDescriptor>(MockBehavior.Strict);
             mockCustomTypeDescriptor.Setup(d => d.GetComponentName()).Returns(result).Verifiable();
             var mockProvider = new Mock<TypeDescriptionProvider>(MockBehavior.Strict);
@@ -345,7 +353,8 @@ namespace System.ComponentModel.Tests
         )]
         public void GetFullComponentName_InvokeWithNullTypeDescriptor_ReturnsExpected(
             object component
-        ) {
+        )
+        {
             var mockProvider = new Mock<TypeDescriptionProvider>(MockBehavior.Strict);
             mockProvider.Setup(p => p.GetTypeDescriptor(component.GetType(), component))
                 .Returns<ICustomTypeDescriptor>(null)
@@ -380,7 +389,8 @@ namespace System.ComponentModel.Tests
         public void GetFullComponentName_InvokeWithParent_ReturnsExpected(
             object component,
             string result
-        ) {
+        )
+        {
             var mockParentProvider = new Mock<TypeDescriptionProvider>(MockBehavior.Strict);
             mockParentProvider.Setup(p => p.GetFullComponentName(component))
                 .Returns(result)
@@ -421,7 +431,8 @@ namespace System.ComponentModel.Tests
         [InlineData(typeof(int))]
         public void GetReflectionType_InvokeTypeWithoutParent_CallsTypeObjectOverload_ByType(
             Type objectType
-        ) {
+        )
+        {
             var mockProvider = new Mock<TypeDescriptionProvider>(MockBehavior.Strict);
             mockProvider.Setup(p => p.GetReflectionType(objectType, null)).CallBase();
             TypeDescriptionProvider provider = mockProvider.Object;
@@ -447,7 +458,8 @@ namespace System.ComponentModel.Tests
         public void GetReflectionType_InvokeTypeWithParent_ReturnsExpected(
             Type objectType,
             Type result
-        ) {
+        )
+        {
             var mockParentProvider = new Mock<TypeDescriptionProvider>(MockBehavior.Strict);
             mockParentProvider.Setup(p => p.GetReflectionType(objectType, null))
                 .Returns(result)
@@ -466,7 +478,8 @@ namespace System.ComponentModel.Tests
         public void GetReflectionType_InvokeObjectWithoutParent_ReturnsExpected(
             object instance,
             Type expected
-        ) {
+        )
+        {
             var provider = new SubTypeDescriptionProvider();
             Assert.Same(expected, provider.GetReflectionType(instance));
 
@@ -479,7 +492,8 @@ namespace System.ComponentModel.Tests
         public void GetReflectionType_InvokeTypeWithoutParent_CallsTypeObjectOverload_ByObjectAndType(
             object instance,
             Type expected
-        ) {
+        )
+        {
             var mockProvider = new Mock<TypeDescriptionProvider>(MockBehavior.Strict);
             mockProvider.Setup(p => p.GetReflectionType(instance.GetType(), instance)).CallBase();
             TypeDescriptionProvider provider = mockProvider.Object;
@@ -503,7 +517,8 @@ namespace System.ComponentModel.Tests
         public void GetReflectionType_InvokeObjectWithParent_ReturnsExpected(
             object instance,
             Type result
-        ) {
+        )
+        {
             var mockParentProvider = new Mock<TypeDescriptionProvider>(MockBehavior.Strict);
             mockParentProvider.Setup(p => p.GetReflectionType(instance.GetType(), instance))
                 .Returns(result)
@@ -531,7 +546,8 @@ namespace System.ComponentModel.Tests
         public void GetReflectionType_InvokeTypeObjectWithoutParent_ReturnsExpected(
             Type objectType,
             object instance
-        ) {
+        )
+        {
             var provider = new SubTypeDescriptionProvider();
             Assert.Same(objectType, provider.GetReflectionType(objectType, instance));
 
@@ -556,7 +572,8 @@ namespace System.ComponentModel.Tests
             Type objectType,
             object instance,
             Type result
-        ) {
+        )
+        {
             var mockParentProvider = new Mock<TypeDescriptionProvider>(MockBehavior.Strict);
             mockParentProvider.Setup(p => p.GetReflectionType(objectType, instance))
                 .Returns(result)
@@ -599,7 +616,8 @@ namespace System.ComponentModel.Tests
         [InlineData(typeof(TypeDescriptionProviderTests))]
         public void GetRuntimeType_InvokeWithoutParentSystemDefinedType_ReturnsSame(
             Type reflectionType
-        ) {
+        )
+        {
             var provider = new SubTypeDescriptionProvider();
             Assert.Same(reflectionType, provider.GetRuntimeType(reflectionType));
 
@@ -612,7 +630,8 @@ namespace System.ComponentModel.Tests
         [InlineData(typeof(int))]
         public void GetRuntimeType_InvokeWithoutParentWithUserDefinedType_RetunsUnderlyingSystemType(
             Type result
-        ) {
+        )
+        {
             var mockType = new Mock<Type>(MockBehavior.Strict);
             mockType.Setup(t => t.UnderlyingSystemType).Returns(result).Verifiable();
             var provider = new SubTypeDescriptionProvider();
@@ -638,7 +657,8 @@ namespace System.ComponentModel.Tests
         public void GetRuntimeType_InvokeWithParent_ReturnsExpected(
             Type reflectionType,
             Type result
-        ) {
+        )
+        {
             var mockParentProvider = new Mock<TypeDescriptionProvider>(MockBehavior.Strict);
             mockParentProvider.Setup(p => p.GetRuntimeType(reflectionType))
                 .Returns(result)
@@ -685,7 +705,8 @@ namespace System.ComponentModel.Tests
         [InlineData(typeof(int))]
         public void GetTypeDescriptor_InvokeTypeWithoutParent_CallsTypeObjectOverload_Type(
             Type objectType
-        ) {
+        )
+        {
             var mockProvider = new Mock<TypeDescriptionProvider>(MockBehavior.Strict);
             mockProvider.Setup(p => p.GetTypeDescriptor(objectType, null)).CallBase();
             TypeDescriptionProvider provider = mockProvider.Object;
@@ -711,7 +732,8 @@ namespace System.ComponentModel.Tests
                     null,
                     new Mock<ICustomTypeDescriptor>(MockBehavior.Strict).Object
                 }
-            ) {
+            )
+            {
                 yield return new object[] { null, result };
                 yield return new object[] { typeof(object), result };
             }
@@ -722,7 +744,8 @@ namespace System.ComponentModel.Tests
         public void GetTypeDescriptor_InvokeTypeWithParent_ReturnsExpected(
             Type objectType,
             ICustomTypeDescriptor result
-        ) {
+        )
+        {
             var mockParentProvider = new Mock<TypeDescriptionProvider>(MockBehavior.Strict);
             mockParentProvider.Setup(p => p.GetTypeDescriptor(objectType, null))
                 .Returns(result)
@@ -757,7 +780,8 @@ namespace System.ComponentModel.Tests
         [InlineData(1)]
         public void GetTypeDescriptor_InvokeTypeWithoutParent_CallsTypeObjectOverload_Object(
             object instance
-        ) {
+        )
+        {
             var mockProvider = new Mock<TypeDescriptionProvider>(MockBehavior.Strict);
             mockProvider.Setup(p => p.GetTypeDescriptor(instance.GetType(), instance)).CallBase();
             TypeDescriptionProvider provider = mockProvider.Object;
@@ -789,7 +813,8 @@ namespace System.ComponentModel.Tests
                     null,
                     new Mock<ICustomTypeDescriptor>(MockBehavior.Strict).Object
                 }
-            ) {
+            )
+            {
                 yield return new object[] { 1, result };
             }
         }
@@ -799,7 +824,8 @@ namespace System.ComponentModel.Tests
         public void GetTypeDescriptor_InvokeObjectWithParent_ReturnsExpected(
             object instance,
             ICustomTypeDescriptor result
-        ) {
+        )
+        {
             var mockParentProvider = new Mock<TypeDescriptionProvider>(MockBehavior.Strict);
             mockParentProvider.Setup(p => p.GetTypeDescriptor(instance.GetType(), instance))
                 .Returns(result)
@@ -827,7 +853,8 @@ namespace System.ComponentModel.Tests
         public void GetTypeDescriptor_InvokeTypeObjectWithoutParent_ReturnsExpected(
             Type objectType,
             object instance
-        ) {
+        )
+        {
             var provider = new SubTypeDescriptionProvider();
             CustomTypeDescriptor result1 = Assert.IsAssignableFrom<CustomTypeDescriptor>(
                 provider.GetTypeDescriptor(objectType, instance)
@@ -849,7 +876,8 @@ namespace System.ComponentModel.Tests
                     null,
                     new Mock<ICustomTypeDescriptor>(MockBehavior.Strict).Object
                 }
-            ) {
+            )
+            {
                 yield return new object[] { null, null, result };
                 yield return new object[] { typeof(int), null, result };
                 yield return new object[] { null, 1, result };
@@ -863,7 +891,8 @@ namespace System.ComponentModel.Tests
             Type objectType,
             object instance,
             ICustomTypeDescriptor result
-        ) {
+        )
+        {
             var mockParentProvider = new Mock<TypeDescriptionProvider>(MockBehavior.Strict);
             mockParentProvider.Setup(p => p.GetTypeDescriptor(objectType, instance))
                 .Returns(result)

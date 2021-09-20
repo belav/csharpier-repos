@@ -12,7 +12,8 @@ namespace System.Web.Mvc
         public static InvalidOperationException AsyncActionMethodSelector_CouldNotFindMethod(
             string methodName,
             Type controllerType
-        ) {
+        )
+        {
             string message = String.Format(
                 CultureInfo.CurrentCulture,
                 MvcResources.AsyncActionMethodSelector_CouldNotFindMethod,
@@ -31,7 +32,8 @@ namespace System.Web.Mvc
 
         public static InvalidOperationException AsyncCommon_ControllerMustImplementIAsyncManagerContainer(
             Type actualControllerType
-        ) {
+        )
+        {
             string message = String.Format(
                 CultureInfo.CurrentCulture,
                 MvcResources.AsyncCommon_ControllerMustImplementIAsyncManagerContainer,
@@ -58,7 +60,8 @@ namespace System.Web.Mvc
 
         public static InvalidOperationException ChildActionOnlyAttribute_MustBeInChildRequest(
             ActionDescriptor actionDescriptor
-        ) {
+        )
+        {
             string message = String.Format(
                 CultureInfo.CurrentCulture,
                 MvcResources.ChildActionOnlyAttribute_MustBeInChildRequest,
@@ -84,7 +87,8 @@ namespace System.Web.Mvc
 
         public static SynchronousOperationException SynchronizationContextUtil_ExceptionThrown(
             Exception innerException
-        ) {
+        )
+        {
             return new SynchronousOperationException(
                 MvcResources.SynchronizationContextUtil_ExceptionThrown,
                 innerException
@@ -94,7 +98,8 @@ namespace System.Web.Mvc
         public static InvalidOperationException ViewDataDictionary_WrongTModelType(
             Type valueType,
             Type modelType
-        ) {
+        )
+        {
             string message = String.Format(
                 CultureInfo.CurrentCulture,
                 MvcResources.ViewDataDictionary_WrongTModelType,
@@ -118,7 +123,8 @@ namespace System.Web.Mvc
             string parameterName,
             int actualValue,
             int minValue
-        ) {
+        )
+        {
             string message = String.Format(
                 CultureInfo.CurrentCulture,
                 MvcResources.ArgumentMustBeGreaterThanOrEqualTo,
@@ -135,7 +141,8 @@ namespace System.Web.Mvc
         public static InvalidOperationException InvalidOperation(
             string messageFormat,
             params object[] args
-        ) {
+        )
+        {
             string message = String.Format(CultureInfo.CurrentCulture, messageFormat, args);
             return new InvalidOperationException(message);
         }
@@ -149,7 +156,8 @@ namespace System.Web.Mvc
             string parameterName,
             string messageFormat,
             params object[] messageArgs
-        ) {
+        )
+        {
             return new ArgumentException(Error.Format(messageFormat, messageArgs), parameterName);
         }
     }

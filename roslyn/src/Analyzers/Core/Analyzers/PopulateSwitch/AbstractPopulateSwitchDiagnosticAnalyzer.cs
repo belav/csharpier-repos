@@ -34,13 +34,14 @@ namespace Microsoft.CodeAnalysis.PopulateSwitch
         protected AbstractPopulateSwitchDiagnosticAnalyzer(
             string diagnosticId,
             EnforceOnBuild enforceOnBuild
-        ) : base(
-            diagnosticId,
-            enforceOnBuild,
-            option: null,
-            s_localizableTitle,
-            s_localizableMessage
-        ) { }
+        )
+            : base(
+                diagnosticId,
+                enforceOnBuild,
+                option: null,
+                s_localizableTitle,
+                s_localizableMessage
+            ) { }
 
         #region Interface methods
 
@@ -70,7 +71,8 @@ namespace Microsoft.CodeAnalysis.PopulateSwitch
                     out var missingCases,
                     out var missingDefaultCase
                 ) && !tree.OverlapsHiddenPosition(switchBlock.Span, context.CancellationToken)
-            ) {
+            )
+            {
                 Debug.Assert(missingCases || missingDefaultCase);
                 var properties = ImmutableDictionary<string, string?>.Empty.Add(
                         PopulateSwitchStatementHelpers.MissingCases,
@@ -100,7 +102,8 @@ namespace Microsoft.CodeAnalysis.PopulateSwitch
             TSwitchOperation operation,
             out bool missingCases,
             out bool missingDefaultCase
-        ) {
+        )
+        {
             var missingEnumMembers = GetMissingEnumMembers(operation);
 
             missingCases = missingEnumMembers.Count > 0;

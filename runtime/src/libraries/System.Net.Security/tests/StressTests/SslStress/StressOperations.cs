@@ -76,7 +76,8 @@ namespace SslStress
             DataSegment segment,
             Random? random = null,
             CancellationToken token = default
-        ) {
+        )
+        {
             // length
             int numsize = s_encoding.GetBytes(segment.Length.ToString(), _buffer);
             await stream.WriteAsync(_buffer.AsMemory(0, numsize), token);
@@ -199,7 +200,8 @@ namespace SslStress
             Random random,
             TimeSpan duration,
             CancellationToken token
-        ) {
+        )
+        {
             // token used for signalling cooperative cancellation; do not pass this to SslStream methods
             using var connectionLifetimeToken = new CancellationTokenSource(duration);
 
@@ -221,7 +223,8 @@ namespace SslStress
                 while (
                     !token.IsCancellationRequested
                     && !connectionLifetimeToken.IsCancellationRequested
-                ) {
+                )
+                {
                     await ApplyBackpressure();
 
                     DataSegment chunk = DataSegment.CreateRandom(random, _config.MaxBufferLength);
@@ -256,7 +259,8 @@ namespace SslStress
                             !token.IsCancellationRequested
                             && !connectionLifetimeToken.IsCancellationRequested
                             && Volatile.Read(ref messagesInFlight) > 2000
-                        ) {
+                        )
+                        {
                             // only log if tx has been suspended for a while
                             if (!isLogged && stopwatch.ElapsedMilliseconds >= 1000)
                             {
@@ -346,7 +350,8 @@ namespace SslStress
             SslStream sslStream,
             TcpClient client,
             CancellationToken token
-        ) {
+        )
+        {
             using CancellationTokenSource cts = CancellationTokenSource.CreateLinkedTokenSource(
                 token
             );

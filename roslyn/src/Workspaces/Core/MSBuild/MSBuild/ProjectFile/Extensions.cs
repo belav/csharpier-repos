@@ -104,7 +104,8 @@ namespace Microsoft.CodeAnalysis.MSBuild
         public static string ReadItemsAsString(
             this MSB.Execution.ProjectInstance executedProject,
             string itemType
-        ) {
+        )
+        {
             var pooledBuilder = PooledStringBuilder.GetInstance();
             var builder = pooledBuilder.Builder;
 

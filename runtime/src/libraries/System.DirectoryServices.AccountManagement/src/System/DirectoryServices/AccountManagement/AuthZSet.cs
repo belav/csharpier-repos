@@ -22,7 +22,8 @@ namespace System.DirectoryServices.AccountManagement
             string flatUserAuthority,
             StoreCtx userStoreCtx,
             object userCtxBase
-        ) {
+        )
+        {
             GlobalDebug.WriteLineIf(
                 GlobalDebug.Info,
                 "AuthZSet",
@@ -115,7 +116,8 @@ namespace System.DirectoryServices.AccountManagement
                         );
                         if (
                             !f && (bufferSize > 0) && (Marshal.GetLastWin32Error() == 122) /*ERROR_INSUFFICIENT_BUFFER*/
-                        ) {
+                        )
+                        {
                             GlobalDebug.WriteLineIf(
                                 GlobalDebug.Info,
                                 "AuthZSet",
@@ -603,7 +605,8 @@ namespace System.DirectoryServices.AccountManagement
                             pSid,
                             ref sameDomain
                         )
-                    ) {
+                    )
+                    {
                         if (sameDomain)
                         {
                             int lastRid = Utils.GetLastRidFromSid(pSid);

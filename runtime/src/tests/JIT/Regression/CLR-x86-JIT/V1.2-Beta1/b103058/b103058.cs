@@ -23,7 +23,8 @@ internal unsafe class test
         if (
             RuntimeInformation.IsOSPlatform(OSPlatform.Windows)
             || (RuntimeInformation.ProcessArchitecture != Architecture.X86)
-        ) {
+        )
+        {
             if ((int)(long)p % sizeof(double) != 0)
             {
                 Console.WriteLine("not double aligned");

@@ -370,7 +370,8 @@ namespace System.Web.Http.Tracing
         public void All_Tracers_Are_Internal_And_Disposable_When_Inner_Is_Disposable(
             Type innerType,
             Type tracerType
-        ) {
+        )
+        {
             // Arrange
             TypeAssert.TypeProperties typeProperties = TypeAssert.TypeProperties.IsClass;
 
@@ -380,7 +381,8 @@ namespace System.Web.Http.Tracing
             if (
                 typeof(IDisposable).IsAssignableFrom(innerType)
                 || innerType == typeof(IHttpController)
-            ) {
+            )
+            {
                 typeProperties |= TypeAssert.TypeProperties.IsDisposable;
             }
 
@@ -428,7 +430,8 @@ namespace System.Web.Http.Tracing
             Type innerType,
             Type tracerType,
             string[] excludedMembers
-        ) {
+        )
+        {
             // Arrange & Act
             IList<string> issues = DetermineIssues(innerType, tracerType, excludedMembers);
 
@@ -449,7 +452,8 @@ namespace System.Web.Http.Tracing
             Type innerType,
             Type tracerType,
             string[] excludedMembers
-        ) {
+        )
+        {
             List<string> issues = new List<string>();
 
             MemberInfo[] typeMembers = innerType.GetMembers(
@@ -477,12 +481,14 @@ namespace System.Web.Http.Tracing
             IList<string> issues,
             MethodInfo methodInfo,
             string[] excludedMembers
-        ) {
+        )
+        {
             if (
                 methodInfo == null
                 || !(methodInfo.IsPublic || methodInfo.IsFamily)
                 || methodInfo.DeclaringType == typeof(Object)
-            ) {
+            )
+            {
                 return;
             }
 
@@ -496,7 +502,8 @@ namespace System.Web.Http.Tracing
                 !DoesTracerDeclare(tracerType, methodInfo)
                 && !excludedMembers.Contains(visibleMemberName)
                 && !excludedMembers.Contains(methodInfo.Name)
-            ) {
+            )
+            {
                 bool isOverrideable = IsOverrideable(methodInfo);
                 bool isSetter = methodInfo.IsSpecialName && methodInfo.Name.StartsWith("set_");
                 bool isGetter = methodInfo.IsSpecialName && methodInfo.Name.StartsWith("get_");
@@ -524,7 +531,8 @@ namespace System.Web.Http.Tracing
         private static bool DoMethodsMatch(
             MethodInfo originalMethodInfo,
             MethodInfo candidateMethodInfo
-        ) {
+        )
+        {
             if (!GetSignature(candidateMethodInfo).Equals(GetSignature(originalMethodInfo)))
             {
                 return false;

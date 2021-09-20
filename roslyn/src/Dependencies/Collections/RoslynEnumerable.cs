@@ -12,7 +12,8 @@ namespace System.Linq
     {
         public static SegmentedList<TSource> ToSegmentedList<TSource>(
             this IEnumerable<TSource> source
-        ) {
+        )
+        {
             if (source == null)
                 ThrowHelper.ThrowArgumentNullException(ExceptionArgument.source);
 

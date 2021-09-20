@@ -244,7 +244,8 @@ namespace System.Data.Odbc
             }
             else if (
                 ConnectionState.Open == originalState && ConnectionState.Closed == currentState
-            ) {
+            )
+            {
                 OnStateChange(DbConnectionInternal.StateChangeClosed);
             }
             else

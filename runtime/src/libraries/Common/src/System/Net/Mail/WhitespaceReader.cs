@@ -33,7 +33,8 @@ namespace System.Net.Mail
             int index,
             out int outIndex,
             bool throwExceptionIfFail
-        ) {
+        )
+        {
             Debug.Assert(!string.IsNullOrEmpty(data), "data was null or empty");
             Debug.Assert(index < data.Length, "index was outside the bounds of the string");
 
@@ -120,7 +121,8 @@ namespace System.Net.Mail
             int index,
             out int outIndex,
             bool throwExceptionIfFail
-        ) {
+        )
+        {
             Debug.Assert(!string.IsNullOrEmpty(data), "data was null or empty");
             Debug.Assert(index < data.Length, "index was outside the bounds of the string");
 
@@ -144,7 +146,8 @@ namespace System.Net.Mail
                         out int quotedCharCount,
                         throwExceptionIfFail
                     )
-                ) {
+                )
+                {
                     outIndex = default;
                     return false;
                 }
@@ -190,7 +193,8 @@ namespace System.Net.Mail
                         data[index] > MailBnfHelper.Ascii7bitMaxValue
                         || MailBnfHelper.Ctext[data[index]]
                     )
-                ) {
+                )
+                {
                     index--;
                 }
                 // If we're still in a comment, this must be an invalid char

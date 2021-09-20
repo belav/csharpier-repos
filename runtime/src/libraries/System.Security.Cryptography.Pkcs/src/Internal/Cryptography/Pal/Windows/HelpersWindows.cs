@@ -36,7 +36,8 @@ namespace Internal.Cryptography.Pal.Windows
             this SafeCryptMsgHandle hCryptMsg,
             CryptMsgParamType paramType,
             int index = 0
-        ) {
+        )
+        {
             int cbData = 0;
             if (!Interop.Crypt32.CryptMsgGetParam(hCryptMsg, paramType, index, null, ref cbData))
                 throw Marshal.GetLastWin32Error().ToCryptographicException();
@@ -53,7 +54,8 @@ namespace Internal.Cryptography.Pal.Windows
             this SafeCryptMsgHandle hCryptMsg,
             CryptMsgParamType paramType,
             int index = 0
-        ) {
+        )
+        {
             int cbData = 0;
             if (!Interop.Crypt32.CryptMsgGetParam(hCryptMsg, paramType, index, null, ref cbData))
                 throw Marshal.GetLastWin32Error().ToCryptographicException();
@@ -148,7 +150,8 @@ namespace Internal.Cryptography.Pal.Windows
 
         public static X509Certificate2Collection GetOriginatorCerts(
             this SafeCryptMsgHandle hCryptMsg
-        ) {
+        )
+        {
             int numCertificates = 0;
             int cbNumCertificates = sizeof(int);
             if (
@@ -338,7 +341,8 @@ namespace Internal.Cryptography.Pal.Windows
 
         public static SubjectIdentifierOrKey ToSubjectIdentifierOrKey(
             this CERT_PUBLIC_KEY_INFO publicKeyInfo
-        ) {
+        )
+        {
             int keyLength = Interop.Crypt32.CertGetPublicKeyLength(
                 MsgEncodingType.All,
                 ref publicKeyInfo
@@ -356,7 +360,8 @@ namespace Internal.Cryptography.Pal.Windows
 
         public static AlgorithmIdentifier ToAlgorithmIdentifier(
             this CRYPT_ALGORITHM_IDENTIFIER cryptAlgorithmIdentifer
-        ) {
+        )
+        {
             string oidValue = cryptAlgorithmIdentifer.pszObjId.ToStringAnsi();
             AlgId algId = oidValue.ToAlgId();
 
@@ -410,7 +415,8 @@ namespace Internal.Cryptography.Pal.Windows
                                 cryptAlgorithmIdentifer.Parameters.pbData,
                                 (int)cryptAlgorithmIdentifer.Parameters.cbData
                             )
-                        ) {
+                        )
+                        {
                             unsafe
                             {
                                 DATA_BLOB* pDataBlob = (DATA_BLOB*)(sh.DangerousGetHandle());
@@ -457,7 +463,8 @@ namespace Internal.Cryptography.Pal.Windows
 
         public static CryptographicAttributeObjectCollection GetUnprotectedAttributes(
             this SafeCryptMsgHandle hCryptMsg
-        ) {
+        )
+        {
             // For some reason, you can't ask how many attributes there are - you have to ask for the attributes and
             // get a CRYPT_E_ATTRIBUTES_MISSING failure if the count is 0.
             int cbUnprotectedAttr = 0;
@@ -469,7 +476,8 @@ namespace Internal.Cryptography.Pal.Windows
                     null,
                     ref cbUnprotectedAttr
                 )
-            ) {
+            )
+            {
                 int lastError = Marshal.GetLastWin32Error();
                 if (lastError == (int)ErrorCode.CRYPT_E_ATTRIBUTES_MISSING)
                     return new CryptographicAttributeObjectCollection();
@@ -480,7 +488,8 @@ namespace Internal.Cryptography.Pal.Windows
                 SafeHandle sh = hCryptMsg.GetMsgParamAsMemory(
                     CryptMsgParamType.CMSG_UNPROTECTED_ATTR_PARAM
                 )
-            ) {
+            )
+            {
                 unsafe
                 {
                     CRYPT_ATTRIBUTES* pCryptAttributes = (CRYPT_ATTRIBUTES*)(
@@ -518,7 +527,8 @@ namespace Internal.Cryptography.Pal.Windows
                     stackSpan,
                     ref size
                 )
-            ) {
+            )
+            {
                 throw Marshal.GetLastWin32Error().ToCryptographicException();
             }
 
@@ -538,7 +548,8 @@ namespace Internal.Cryptography.Pal.Windows
                     stackSpan,
                     ref size
                 )
-            ) {
+            )
+            {
                 throw Marshal.GetLastWin32Error().ToCryptographicException();
             }
 
@@ -595,7 +606,8 @@ namespace Internal.Cryptography.Pal.Windows
             ref Span<byte> buf,
             ref byte[]? rented,
             int clearLen
-        ) {
+        )
+        {
             int len = buf.Length;
 
             if (!Interop.Advapi32.CryptGetProvParam(handle, dwParam, buf, ref len))
@@ -632,7 +644,8 @@ namespace Internal.Cryptography.Pal.Windows
 
         private static unsafe CryptographicAttributeObjectCollection ToCryptographicAttributeObjectCollection(
             CRYPT_ATTRIBUTES* pCryptAttributes
-        ) {
+        )
+        {
             CryptographicAttributeObjectCollection collection =
                 new CryptographicAttributeObjectCollection();
             for (int i = 0; i < pCryptAttributes->cAttr; i++)
@@ -646,7 +659,8 @@ namespace Internal.Cryptography.Pal.Windows
         private static unsafe void AddCryptAttribute(
             CryptographicAttributeObjectCollection collection,
             CRYPT_ATTRIBUTE* pCryptAttribute
-        ) {
+        )
+        {
             string oidValue = pCryptAttribute->pszObjId.ToStringAnsi();
             Oid oid = new Oid(oidValue);
             AsnEncodedDataCollection attributeCollection = new AsnEncodedDataCollection();

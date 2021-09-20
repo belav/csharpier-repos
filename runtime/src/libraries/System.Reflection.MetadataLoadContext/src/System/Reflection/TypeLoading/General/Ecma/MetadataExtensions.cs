@@ -210,7 +210,8 @@ namespace System.Reflection.TypeLoading.Ecma
             this StringHandle handle,
             ReadOnlySpan<byte> utf8,
             MetadataReader reader
-        ) {
+        )
+        {
             //TODO: Perf - GetBlobReader() scans the string handle for a NUL terminator to compute the length making it an O(N)
             // operation. It might be worth memoizing the pointer/length combo per TypeDefToken and ExportedTypeToken. But even better
             // would be to get UTF8 Equals overloads added to MetadataStringComparer.

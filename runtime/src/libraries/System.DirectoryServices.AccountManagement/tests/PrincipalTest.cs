@@ -125,7 +125,8 @@ namespace System.DirectoryServices.AccountManagement.Tests
                     DomainContext,
                     Guid.NewGuid().ToString()
                 )
-            ) {
+            )
+            {
                 Assert.Throws<InvalidOperationException>(() => principal.Save(context));
             }
         }

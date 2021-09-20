@@ -242,7 +242,8 @@ public class MarshalSizeOf2
             if (
                 RuntimeInformation.IsOSPlatform(OSPlatform.Windows)
                 || (RuntimeInformation.ProcessArchitecture != Architecture.X86)
-            ) {
+            )
+            {
                 expectedSize = 16; // sizeof(double) + sizeof(int) + padding
             }
             else

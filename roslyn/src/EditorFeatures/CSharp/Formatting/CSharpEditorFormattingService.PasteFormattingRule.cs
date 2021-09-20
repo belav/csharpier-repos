@@ -17,7 +17,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.Formatting
                 in SyntaxToken previousToken,
                 in SyntaxToken currentToken,
                 in NextGetAdjustNewLinesOperation nextOperation
-            ) {
+            )
+            {
                 if (currentToken.Parent != null)
                 {
                     var currentTokenParentParent = currentToken.Parent.Parent;
@@ -31,7 +32,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.Formatting
                             || currentTokenParentParent.Kind()
                                 == SyntaxKind.AnonymousMethodExpression
                         )
-                    ) {
+                    )
+                    {
                         return FormattingOperations.CreateAdjustNewLinesOperation(
                             0,
                             AdjustNewLinesOption.PreserveLines

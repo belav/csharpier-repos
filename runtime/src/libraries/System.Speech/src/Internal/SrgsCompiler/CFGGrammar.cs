@@ -71,7 +71,8 @@ namespace System.Speech.Internal.SrgsCompiler
                 if (
                     ulTotalSerializedSize < SP_SPCFGSERIALIZEDHEADER_500
                     || ulTotalSerializedSize > int.MaxValue
-                ) {
+                )
+                {
                     // Size is either negative or too small.
                     XmlParser.ThrowSrgsException(SRID.UnsupportedFormat);
                 }
@@ -133,7 +134,8 @@ namespace System.Speech.Internal.SrgsCompiler
                 if (
                     ulTotalSerializedSize < SP_SPCFGSERIALIZEDHEADER_500
                     || ulTotalSerializedSize > int.MaxValue
-                ) {
+                )
+                {
                     // Size is either negative or too small.
                     return false;
                 }
@@ -245,7 +247,8 @@ namespace System.Speech.Internal.SrgsCompiler
             bool includeAllGrammarData,
             bool loadSymbols,
             out CfgSerializedHeader cfgSerializedHeader
-        ) {
+        )
+        {
             cfgSerializedHeader = new CfgSerializedHeader(streamHelper.Stream);
 
             //
@@ -345,7 +348,8 @@ namespace System.Speech.Internal.SrgsCompiler
         internal static ScriptRef[] LoadScriptRefs(
             StreamMarshaler streamHelper,
             CfgSerializedHeader pFH
-        ) {
+        )
+        {
             //
             //  Because in 64-bit code, pointers != sizeof(ULONG) we copy each member explicitly.
             //
@@ -403,7 +407,8 @@ namespace System.Speech.Internal.SrgsCompiler
             out byte[] assemblyContent,
             out byte[] assemblyDebugSymbols,
             out ScriptRef[] scripts
-        ) {
+        )
+        {
             assemblyContent = assemblyDebugSymbols = null;
             scripts = null;
 
@@ -443,7 +448,8 @@ namespace System.Speech.Internal.SrgsCompiler
             CfgSerializedHeader pFH,
             CfgHeader header,
             bool includeAllGrammarData
-        ) {
+        )
+        {
             //See backend commit method to understand the layout of cfg format
             if (pFH.pszWords < SP_SPCFGSERIALIZEDHEADER_500)
             {
@@ -537,7 +543,8 @@ namespace System.Speech.Internal.SrgsCompiler
                                 && header.tags[i].PropVariantType != VarEnum.VT_R8
                                 && header.tags[i].PropVariantType != VarEnum.VT_I4
                             )
-                        ) {
+                        )
+                        {
                             XmlParser.ThrowSrgsException(SRID.UnsupportedFormat);
                         }
 #pragma warning restore 0618

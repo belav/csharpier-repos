@@ -40,7 +40,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Xaml.LanguageServer.Handler
             ICodeFixService codeFixService,
             ICodeRefactoringService codeRefactoringService,
             IThreadingContext threadingContext
-        ) {
+        )
+        {
             _codeFixService = codeFixService;
             _codeRefactoringService = codeRefactoringService;
             _threadingContext = threadingContext;

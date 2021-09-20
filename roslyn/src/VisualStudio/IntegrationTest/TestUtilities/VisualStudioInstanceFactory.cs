@@ -61,7 +61,8 @@ namespace Microsoft.VisualStudio.IntegrationTest.Utilities
         private static void FirstChanceExceptionHandler(
             object sender,
             FirstChanceExceptionEventArgs eventArgs
-        ) {
+        )
+        {
             if (s_inHandler)
             {
                 // An exception was thrown from within the handler, resulting in a recursive call to the handler.
@@ -142,7 +143,8 @@ namespace Microsoft.VisualStudio.IntegrationTest.Utilities
         /// </summary>
         public async Task<VisualStudioInstanceContext> GetNewOrUsedInstanceAsync(
             ImmutableHashSet<string> requiredPackageIds
-        ) {
+        )
+        {
             try
             {
                 var shouldStartNewInstance = ShouldStartNewInstance(requiredPackageIds);
@@ -193,7 +195,8 @@ namespace Microsoft.VisualStudio.IntegrationTest.Utilities
         private async Task UpdateCurrentlyRunningInstanceAsync(
             ImmutableHashSet<string> requiredPackageIds,
             bool shouldStartNewInstance
-        ) {
+        )
+        {
             Process hostProcess;
             DTE dte;
             ImmutableHashSet<string> supportedPackageIds;
@@ -294,7 +297,8 @@ namespace Microsoft.VisualStudio.IntegrationTest.Utilities
 
         private static ISetupInstance LocateVisualStudioInstance(
             ImmutableHashSet<string> requiredPackageIds
-        ) {
+        )
+        {
             var vsInstallDir =
                 Environment.GetEnvironmentVariable("__UNITTESTEXPLORER_VSINSTALLPATH__")
                 ?? Environment.GetEnvironmentVariable("VSAPPIDDIR");
@@ -392,7 +396,8 @@ namespace Microsoft.VisualStudio.IntegrationTest.Utilities
             string installationPath,
             int majorVersion,
             bool isUsingLspEditor
-        ) {
+        )
+        {
             var vsExeFile = Path.Combine(installationPath, @"Common7\IDE\devenv.exe");
             var vsRegEditExeFile = Path.Combine(installationPath, @"Common7\IDE\VsRegEdit.exe");
 
@@ -479,7 +484,8 @@ namespace Microsoft.VisualStudio.IntegrationTest.Utilities
                                 StringComparison.OrdinalIgnoreCase
                             )
                     )
-                ) {
+                )
+                {
                     disabledFlights = disabledFlights.Where(
                             flight =>
                                 !string.Equals(
@@ -514,7 +520,8 @@ namespace Microsoft.VisualStudio.IntegrationTest.Utilities
                         "false",
                         StringComparison.OrdinalIgnoreCase
                     )
-                ) {
+                )
+                {
                     Process.Start(
                             CreateSilentStartInfo(
                                 vsRegEditExeFile,
@@ -557,7 +564,8 @@ namespace Microsoft.VisualStudio.IntegrationTest.Utilities
                     "BUILD_SOURCESDIRECTORY",
                     out var sourcesDirectory
                 )
-            ) {
+            )
+            {
                 var environmentPath = processStartInfo.Environment["PATH"];
 
                 // Assert that the PATH still has the form we are expecting since we're about to modify it

@@ -22,7 +22,8 @@ namespace Microsoft.CodeAnalysis.Remote
         public RemoteDesignerAttributeIncrementalAnalyzer(
             RemoteCallback<IRemoteDesignerAttributeDiscoveryService.ICallback> callback,
             RemoteServiceCallbackId callbackId
-        ) {
+        )
+        {
             _callback = callback;
             _callbackId = callbackId;
         }
@@ -30,7 +31,8 @@ namespace Microsoft.CodeAnalysis.Remote
         protected override async ValueTask ReportProjectRemovedAsync(
             ProjectId projectId,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             await _callback.InvokeAsync(
                     (callback, cancellationToken) =>
                         callback.OnProjectRemovedAsync(_callbackId, projectId, cancellationToken),
@@ -42,7 +44,8 @@ namespace Microsoft.CodeAnalysis.Remote
         protected override async ValueTask ReportDesignerAttributeDataAsync(
             ImmutableArray<DesignerAttributeData> data,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             await _callback.InvokeAsync(
                     (callback, cancellationToken) =>
                         callback.ReportDesignerAttributeDataAsync(

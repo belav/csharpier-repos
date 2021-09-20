@@ -36,7 +36,8 @@ namespace Microsoft.CodeAnalysis.CSharp.ConvertSwitchStatementToExpression
                 SyntaxKind nodeToGenerate,
                 bool shouldMoveNextStatementToSwitchExpression,
                 bool generateDeclaration
-            ) {
+            )
+            {
                 if (switchStatement.ContainsDirectives)
                 {
                     // Do not rewrite statements with preprocessor directives
@@ -70,7 +71,8 @@ namespace Microsoft.CodeAnalysis.CSharp.ConvertSwitchStatementToExpression
                 ITypeSymbol declaratorToRemoveTypeOpt,
                 SyntaxKind nodeToGenerate,
                 bool generateDeclaration
-            ) {
+            )
+            {
                 switch (nodeToGenerate)
                 {
                     case SyntaxKind.ReturnStatement:
@@ -99,7 +101,8 @@ namespace Microsoft.CodeAnalysis.CSharp.ConvertSwitchStatementToExpression
                 ExpressionSyntax switchExpression,
                 SyntaxKind assignmentKind,
                 SyntaxTriviaList leadingTrivia
-            ) {
+            )
+            {
                 Debug.Assert(_assignmentTargetOpt != null);
 
                 return ExpressionStatement(
@@ -115,7 +118,8 @@ namespace Microsoft.CodeAnalysis.CSharp.ConvertSwitchStatementToExpression
             private StatementSyntax GenerateVariableDeclaration(
                 ExpressionSyntax switchExpression,
                 ITypeSymbol declaratorToRemoveTypeOpt
-            ) {
+            )
+            {
                 Debug.Assert(_assignmentTargetOpt is IdentifierNameSyntax);
 
                 // There is a probability that we cannot use var if the declaration type is a reference type or nullable type.
@@ -156,7 +160,8 @@ namespace Microsoft.CodeAnalysis.CSharp.ConvertSwitchStatementToExpression
             private static PatternSyntax GetPattern(
                 SyntaxList<SwitchLabelSyntax> switchLabels,
                 out WhenClauseSyntax whenClauseOpt
-            ) {
+            )
+            {
                 if (switchLabels.Count == 1)
                     return GetPattern(switchLabels[0], out whenClauseOpt);
 
@@ -196,7 +201,8 @@ namespace Microsoft.CodeAnalysis.CSharp.ConvertSwitchStatementToExpression
             private static PatternSyntax GetPattern(
                 SwitchLabelSyntax switchLabel,
                 out WhenClauseSyntax whenClauseOpt
-            ) {
+            )
+            {
                 switch (switchLabel.Kind())
                 {
                     case SyntaxKind.CasePatternSwitchLabel:
@@ -219,7 +225,8 @@ namespace Microsoft.CodeAnalysis.CSharp.ConvertSwitchStatementToExpression
 
             public override ExpressionSyntax VisitAssignmentExpression(
                 AssignmentExpressionSyntax node
-            ) {
+            )
+            {
                 _assignmentTargetOpt ??= node.Left;
                 return node.Right;
             }
@@ -238,7 +245,8 @@ namespace Microsoft.CodeAnalysis.CSharp.ConvertSwitchStatementToExpression
                 SwitchStatementSyntax node,
                 SemanticModel model,
                 bool allowMoveNextStatementToSwitchExpression = true
-            ) {
+            )
+            {
                 var switchArms = node.Sections
                 // The default label must come last in the switch expression.
                 .OrderBy(section => section.Labels.Any(label => IsDefaultSwitchLabel(label)))
@@ -309,7 +317,8 @@ namespace Microsoft.CodeAnalysis.CSharp.ConvertSwitchStatementToExpression
             private static SwitchStatementSyntax AddCastIfNecessary(
                 SemanticModel model,
                 SwitchStatementSyntax node
-            ) {
+            )
+            {
                 // If the swith statement expression is being implicitly converted then we need to explicitly cast the expression
                 // before rewriting as a switch expression
                 var expressionType = model.GetSymbolInfo(node.Expression).Symbol.GetSymbolType();
@@ -321,7 +330,8 @@ namespace Microsoft.CodeAnalysis.CSharp.ConvertSwitchStatementToExpression
                         expressionConvertedType,
                         expressionType
                     )
-                ) {
+                )
+                {
                     return node.Update(
                         node.SwitchKeyword,
                         node.OpenParenToken,

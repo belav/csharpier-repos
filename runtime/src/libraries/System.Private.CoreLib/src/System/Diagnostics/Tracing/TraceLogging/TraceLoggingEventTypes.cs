@@ -89,7 +89,8 @@ namespace System.Diagnostics.Tracing
             string name,
             EventTags tags,
             System.Reflection.ParameterInfo[] paramInfos
-        ) {
+        )
+        {
             if (name == null)
             {
                 throw new ArgumentNullException(nameof(name));
@@ -128,7 +129,8 @@ namespace System.Diagnostics.Tracing
             EventTags tags,
             string defaultName,
             TraceLoggingTypeInfo[] typeInfos
-        ) {
+        )
+        {
             if (defaultName == null)
             {
                 throw new ArgumentNullException(nameof(defaultName));
@@ -190,7 +192,8 @@ namespace System.Diagnostics.Tracing
 #endif
         private static TraceLoggingTypeInfo[] MakeArray(
             System.Reflection.ParameterInfo[] paramInfos
-        ) {
+        )
+        {
             if (paramInfos == null)
             {
                 throw new ArgumentNullException(nameof(paramInfos));

@@ -62,7 +62,8 @@ namespace System.Data.Odbc
             HandleRef buffer,
             IntPtr length,
             IntPtr srLen_or_Ind
-        ) {
+        )
+        {
             ODBC32.RetCode retcode = Interop.Odbc.SQLBindCol(
                 this,
                 checked((ushort)columnNumber),
@@ -79,7 +80,8 @@ namespace System.Data.Odbc
             int columnNumber,
             ODBC32.SQL_C targetType,
             IntPtr srLen_or_Ind
-        ) {
+        )
+        {
             ODBC32.RetCode retcode = Interop.Odbc.SQLBindCol(
                 this,
                 checked((ushort)columnNumber),
@@ -102,7 +104,8 @@ namespace System.Data.Odbc
             HandleRef buffer,
             IntPtr bufferLength,
             HandleRef intbuffer
-        ) {
+        )
+        {
             ODBC32.RetCode retcode = Interop.Odbc.SQLBindParameter(
                 this,
                 checked((ushort)ordinal), // Parameter Number
@@ -141,7 +144,8 @@ namespace System.Data.Odbc
             CNativeBuffer characterAttribute,
             out short stringLength,
             out SQLLEN numericAttribute
-        ) {
+        )
+        {
             IntPtr result;
             ODBC32.RetCode retcode = Interop.Odbc.SQLColAttributeW(
                 this,
@@ -162,7 +166,8 @@ namespace System.Data.Odbc
             string tableSchema,
             string tableName,
             string columnName
-        ) {
+        )
+        {
             ODBC32.RetCode retcode = Interop.Odbc.SQLColumnsW(
                 this,
                 tableCatalog,
@@ -213,7 +218,8 @@ namespace System.Data.Odbc
             CNativeBuffer buffer,
             int cb,
             out IntPtr cbActual
-        ) {
+        )
+        {
             ODBC32.RetCode retcode = Interop.Odbc.SQLGetData(
                 this,
                 checked((ushort)index),
@@ -230,7 +236,8 @@ namespace System.Data.Odbc
             ODBC32.SQL_ATTR attribute,
             out IntPtr value,
             out int stringLength
-        ) {
+        )
+        {
             ODBC32.RetCode retcode = Interop.Odbc.SQLGetStmtAttrW(
                 this,
                 attribute,
@@ -274,7 +281,8 @@ namespace System.Data.Odbc
             string? catalogName,
             string? schemaName,
             string tableName
-        ) {
+        )
+        {
             ODBC32.RetCode retcode = Interop.Odbc.SQLPrimaryKeysW(
                 this,
                 catalogName,
@@ -292,7 +300,8 @@ namespace System.Data.Odbc
             string procedureCatalog,
             string procedureSchema,
             string procedureName
-        ) {
+        )
+        {
             ODBC32.RetCode retcode = Interop.Odbc.SQLProceduresW(
                 this,
                 procedureCatalog,
@@ -312,7 +321,8 @@ namespace System.Data.Odbc
             string? procedureSchema,
             string? procedureName,
             string? columnName
-        ) {
+        )
+        {
             ODBC32.RetCode retcode = Interop.Odbc.SQLProcedureColumnsW(
                 this,
                 procedureCatalog,
@@ -342,7 +352,8 @@ namespace System.Data.Odbc
             ODBC32.SQL_ATTR attribute,
             IntPtr value,
             ODBC32.SQL_IS stringLength
-        ) {
+        )
+        {
             ODBC32.RetCode retcode = Interop.Odbc.SQLSetStmtAttrW(
                 this,
                 (int)attribute,
@@ -377,7 +388,8 @@ namespace System.Data.Odbc
             string tableName,
             short unique,
             short accuracy
-        ) {
+        )
+        {
             ODBC32.RetCode retcode;
 
             // MDAC Bug 75928 - SQLStatisticsW damages the string passed in
@@ -424,7 +436,8 @@ namespace System.Data.Odbc
             string tableSchema,
             string tableName,
             string tableType
-        ) {
+        )
+        {
             ODBC32.RetCode retcode = Interop.Odbc.SQLTablesW(
                 this,
                 tableCatalog,

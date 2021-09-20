@@ -27,14 +27,16 @@ namespace Microsoft.CodeAnalysis.CSharp.Extensions
 
         public static LocalDeclarationMap GetLocalDeclarationMap(
             this MemberDeclarationSyntax member
-        ) {
+        )
+        {
             var result = s_declarationCache.GetValue(member, s_createLocalDeclarationMap);
             return new LocalDeclarationMap(result);
         }
 
         private static Dictionary<string, ImmutableArray<SyntaxToken>> CreateLocalDeclarationMap(
             MemberDeclarationSyntax member
-        ) {
+        )
+        {
             var dictionary = DeclarationFinder.GetAllDeclarations(member);
             return dictionary.ToDictionary(
                 kvp => kvp.Key,
@@ -109,7 +111,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Extensions
 
         public static TypeParameterListSyntax GetTypeParameterList(
             this MemberDeclarationSyntax member
-        ) {
+        )
+        {
             if (member != null)
             {
                 switch (member.Kind())
@@ -158,7 +161,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Extensions
         public static MemberDeclarationSyntax WithParameterList(
             this MemberDeclarationSyntax member,
             BaseParameterListSyntax parameterList
-        ) {
+        )
+        {
             if (member != null)
             {
                 switch (member.Kind())
@@ -196,14 +200,16 @@ namespace Microsoft.CodeAnalysis.CSharp.Extensions
         public static MemberDeclarationSyntax AddAttributeLists(
             this MemberDeclarationSyntax member,
             params AttributeListSyntax[] attributeLists
-        ) {
+        )
+        {
             return member.WithAttributeLists(member.GetAttributes().AddRange(attributeLists));
         }
 
         public static MemberDeclarationSyntax WithAttributeLists(
             this MemberDeclarationSyntax member,
             SyntaxList<AttributeListSyntax> attributeLists
-        ) {
+        )
+        {
             if (member != null)
             {
                 switch (member.Kind())
@@ -335,7 +341,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Extensions
 
         public static ArrowExpressionClauseSyntax GetExpressionBody(
             this MemberDeclarationSyntax memberDeclaration
-        ) {
+        )
+        {
             switch (memberDeclaration?.Kind())
             {
                 case SyntaxKind.PropertyDeclaration:
@@ -360,7 +367,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Extensions
         public static MemberDeclarationSyntax WithBody(
             this MemberDeclarationSyntax memberDeclaration,
             BlockSyntax body
-        ) {
+        )
+        {
             if (memberDeclaration != null)
             {
                 switch (memberDeclaration.Kind())

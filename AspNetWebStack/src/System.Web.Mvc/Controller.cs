@@ -224,7 +224,8 @@ namespace System.Web.Mvc
             string content,
             string contentType,
             Encoding contentEncoding
-        ) {
+        )
+        {
             return new ContentResult
             {
                 Content = content,
@@ -318,7 +319,8 @@ namespace System.Web.Mvc
             byte[] fileContents,
             string contentType,
             string fileDownloadName
-        ) {
+        )
+        {
             return new FileContentResult(fileContents, contentType)
             {
                 FileDownloadName = fileDownloadName
@@ -338,7 +340,8 @@ namespace System.Web.Mvc
             Stream fileStream,
             string contentType,
             string fileDownloadName
-        ) {
+        )
+        {
             return new FileStreamResult(fileStream, contentType)
             {
                 FileDownloadName = fileDownloadName
@@ -358,7 +361,8 @@ namespace System.Web.Mvc
             string fileName,
             string contentType,
             string fileDownloadName
-        ) {
+        )
+        {
             return new FilePathResult(fileName, contentType)
             {
                 FileDownloadName = fileDownloadName
@@ -452,7 +456,8 @@ namespace System.Web.Mvc
             object data,
             string contentType,
             Encoding contentEncoding
-        ) {
+        )
+        {
             return Json(data, contentType, contentEncoding, JsonRequestBehavior.DenyGet);
         }
 
@@ -472,7 +477,8 @@ namespace System.Web.Mvc
             object data,
             string contentType,
             JsonRequestBehavior behavior
-        ) {
+        )
+        {
             return Json(
                 data,
                 contentType,
@@ -487,7 +493,8 @@ namespace System.Web.Mvc
             string contentType,
             Encoding contentEncoding,
             JsonRequestBehavior behavior
-        ) {
+        )
+        {
             return new JsonResult
             {
                 Data = data,
@@ -619,14 +626,16 @@ namespace System.Web.Mvc
         protected internal RedirectToRouteResult RedirectToAction(
             string actionName,
             object routeValues
-        ) {
+        )
+        {
             return RedirectToAction(actionName, TypeHelper.ObjectToDictionary(routeValues));
         }
 
         protected internal RedirectToRouteResult RedirectToAction(
             string actionName,
             RouteValueDictionary routeValues
-        ) {
+        )
+        {
             return RedirectToAction(
                 actionName,
                 null /* controllerName */
@@ -638,7 +647,8 @@ namespace System.Web.Mvc
         protected internal RedirectToRouteResult RedirectToAction(
             string actionName,
             string controllerName
-        ) {
+        )
+        {
             return RedirectToAction(actionName, controllerName, (RouteValueDictionary)null);
         }
 
@@ -646,7 +656,8 @@ namespace System.Web.Mvc
             string actionName,
             string controllerName,
             object routeValues
-        ) {
+        )
+        {
             return RedirectToAction(
                 actionName,
                 controllerName,
@@ -658,7 +669,8 @@ namespace System.Web.Mvc
             string actionName,
             string controllerName,
             RouteValueDictionary routeValues
-        ) {
+        )
+        {
             RouteValueDictionary mergedRouteValues;
 
             if (RouteData == null)
@@ -693,7 +705,8 @@ namespace System.Web.Mvc
         protected internal RedirectToRouteResult RedirectToActionPermanent(
             string actionName,
             object routeValues
-        ) {
+        )
+        {
             return RedirectToActionPermanent(
                 actionName,
                 TypeHelper.ObjectToDictionary(routeValues)
@@ -703,7 +716,8 @@ namespace System.Web.Mvc
         protected internal RedirectToRouteResult RedirectToActionPermanent(
             string actionName,
             RouteValueDictionary routeValues
-        ) {
+        )
+        {
             return RedirectToActionPermanent(
                 actionName,
                 null /* controllerName */
@@ -715,7 +729,8 @@ namespace System.Web.Mvc
         protected internal RedirectToRouteResult RedirectToActionPermanent(
             string actionName,
             string controllerName
-        ) {
+        )
+        {
             return RedirectToActionPermanent(
                 actionName,
                 controllerName,
@@ -727,7 +742,8 @@ namespace System.Web.Mvc
             string actionName,
             string controllerName,
             object routeValues
-        ) {
+        )
+        {
             return RedirectToActionPermanent(
                 actionName,
                 controllerName,
@@ -739,7 +755,8 @@ namespace System.Web.Mvc
             string actionName,
             string controllerName,
             RouteValueDictionary routeValues
-        ) {
+        )
+        {
             RouteValueDictionary implicitRouteValues =
                 (RouteData != null) ? RouteData.Values : null;
 
@@ -776,14 +793,16 @@ namespace System.Web.Mvc
         protected internal RedirectToRouteResult RedirectToRoute(
             string routeName,
             object routeValues
-        ) {
+        )
+        {
             return RedirectToRoute(routeName, TypeHelper.ObjectToDictionary(routeValues));
         }
 
         protected internal virtual RedirectToRouteResult RedirectToRoute(
             string routeName,
             RouteValueDictionary routeValues
-        ) {
+        )
+        {
             return new RedirectToRouteResult(
                 routeName,
                 RouteValuesHelpers.GetRouteValues(routeValues)
@@ -797,7 +816,8 @@ namespace System.Web.Mvc
 
         protected internal RedirectToRouteResult RedirectToRoutePermanent(
             RouteValueDictionary routeValues
-        ) {
+        )
+        {
             return RedirectToRoutePermanent(
                 null /* routeName */
                 ,
@@ -813,14 +833,16 @@ namespace System.Web.Mvc
         protected internal RedirectToRouteResult RedirectToRoutePermanent(
             string routeName,
             object routeValues
-        ) {
+        )
+        {
             return RedirectToRoutePermanent(routeName, TypeHelper.ObjectToDictionary(routeValues));
         }
 
         protected internal virtual RedirectToRouteResult RedirectToRoutePermanent(
             string routeName,
             RouteValueDictionary routeValues
-        ) {
+        )
+        {
             return new RedirectToRouteResult(
                 routeName,
                 RouteValuesHelpers.GetRouteValues(routeValues),
@@ -966,7 +988,8 @@ namespace System.Web.Mvc
                         ControllerContext
                     )
                     .Validate(null)
-            ) {
+            )
+            {
                 ModelState.AddModelError(
                     DefaultModelBinder.CreateSubPropertyName(prefix, validationResult.MemberName),
                     validationResult.Message
@@ -1185,7 +1208,8 @@ namespace System.Web.Mvc
             RequestContext requestContext,
             AsyncCallback callback,
             object state
-        ) {
+        )
+        {
             return BeginExecute(requestContext, callback, state);
         }
 
@@ -1198,7 +1222,8 @@ namespace System.Web.Mvc
             RequestContext requestContext,
             AsyncCallback callback,
             object state
-        ) {
+        )
+        {
             if (DisableAsyncSupport)
             {
                 // For backwards compat, we can disallow async support and just chain to the sync Execute() function.
@@ -1267,7 +1292,8 @@ namespace System.Web.Mvc
                         AsyncCallback asyncCallback,
                         object asyncState,
                         ExecuteCoreState innerState
-                    ) {
+                    )
+                    {
                         return innerState.AsyncInvoker.BeginInvokeAction(
                             innerState.Controller.ControllerContext,
                             innerState.ActionName,
@@ -1279,7 +1305,8 @@ namespace System.Web.Mvc
                     EndInvokeVoidDelegate<ExecuteCoreState> endDelegate = delegate(
                         IAsyncResult asyncResult,
                         ExecuteCoreState innerState
-                    ) {
+                    )
+                    {
                         if (!innerState.AsyncInvoker.EndInvokeAction(asyncResult))
                         {
                             innerState.Controller.HandleUnknownAction(innerState.ActionName);
@@ -1370,7 +1397,8 @@ namespace System.Web.Mvc
 
         void IAuthenticationFilter.OnAuthenticationChallenge(
             AuthenticationChallengeContext filterContext
-        ) {
+        )
+        {
             OnAuthenticationChallenge(filterContext);
         }
 

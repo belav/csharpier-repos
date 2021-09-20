@@ -29,7 +29,8 @@ namespace System.Security.Cryptography.EcDiffieHellman.Tests
                             int size = keySizes.MinSize;
                             size <= keySizes.MaxSize;
                             size += keySizes.SkipSize
-                        ) {
+                        )
+                        {
                             everyKeysize.Add(new object[] { size });
 
                             if (keySizes.SkipSize == 0)
@@ -61,7 +62,8 @@ namespace System.Security.Cryptography.EcDiffieHellman.Tests
                             int size = keySizes.MinSize;
                             size <= keySizes.MaxSize;
                             size += keySizes.SkipSize
-                        ) {
+                        )
+                        {
                             if (firstSize == -1)
                             {
                                 firstSize = size;

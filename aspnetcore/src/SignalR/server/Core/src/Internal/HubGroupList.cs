@@ -77,7 +77,8 @@ namespace Microsoft.AspNetCore.SignalR.Internal
         private void CreateOrUpdateGroupWithConnection(
             string groupName,
             HubConnectionContext connection
-        ) {
+        )
+        {
             _groups.AddOrUpdate(
                 groupName,
                 _ => AddConnectionToGroup(connection, new GroupConnectionList()),
@@ -92,7 +93,8 @@ namespace Microsoft.AspNetCore.SignalR.Internal
         private static GroupConnectionList AddConnectionToGroup(
             HubConnectionContext connection,
             GroupConnectionList group
-        ) {
+        )
+        {
             group.AddOrUpdate(connection.ConnectionId, connection, (_, __) => connection);
             return group;
         }

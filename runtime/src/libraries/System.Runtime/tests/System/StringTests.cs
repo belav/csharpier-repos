@@ -57,7 +57,8 @@ namespace System.Tests
             int startIndex,
             int length,
             string expected
-        ) {
+        )
+        {
             var span = new ReadOnlySpan<char>(valueArray, startIndex, length);
             Assert.Equal(expected, new string(span));
         }
@@ -240,7 +241,8 @@ namespace System.Tests
             char value,
             StringComparison comparisionType,
             bool expected
-        ) {
+        )
+        {
             Assert.Equal(expected, s.Contains(value, comparisionType));
         }
 
@@ -529,7 +531,8 @@ namespace System.Tests
             string value,
             StringComparison comparisonType,
             bool expected
-        ) {
+        )
+        {
             Assert.Equal(expected, s.Contains(value, comparisonType));
             Assert.Equal(expected, s.AsSpan().Contains(value, comparisonType));
         }
@@ -697,7 +700,8 @@ namespace System.Tests
         [InlineData(StringComparison.OrdinalIgnoreCase)]
         public static void Contains_NullValue_WithComparisonType_ThrowsArgumentNullException(
             StringComparison comparisonType
-        ) {
+        )
+        {
             AssertExtensions.Throws<ArgumentNullException>(
                 "value",
                 () => "foo".Contains(null, comparisonType)
@@ -709,7 +713,8 @@ namespace System.Tests
         [InlineData(StringComparison.OrdinalIgnoreCase + 1)]
         public static void Contains_InvalidComparisonType_ThrowsArgumentOutOfRangeException(
             StringComparison comparisonType
-        ) {
+        )
+        {
             AssertExtensions.Throws<ArgumentException>(
                 "comparisonType",
                 () => "ab".Contains("a", comparisonType)
@@ -807,7 +812,8 @@ namespace System.Tests
             int startIndex,
             int count,
             string expected
-        ) {
+        )
+        {
             if (startIndex == 0 && count == values.Length)
             {
                 Assert.Equal(expected, string.Join(separator, values));
@@ -898,7 +904,8 @@ namespace System.Tests
         public static void Join_Char_InvalidStartIndexCount_ThrowsArgumentOutOfRangeException(
             int startIndex,
             int count
-        ) {
+        )
+        {
             AssertExtensions.Throws<ArgumentOutOfRangeException>(
                 "startIndex",
                 () => string.Join('|', new string[] { "Foo" }, startIndex, count)
@@ -1254,7 +1261,8 @@ namespace System.Tests
             string newValue,
             StringComparison comparisonType,
             string expected
-        ) {
+        )
+        {
             Assert.Equal(expected, original.Replace(oldValue, newValue, comparisonType));
         }
 
@@ -1426,7 +1434,8 @@ namespace System.Tests
             bool ignoreCase,
             CultureInfo culture,
             string expected
-        ) {
+        )
+        {
             Assert.Equal(expected, original.Replace(oldValue, newValue, ignoreCase, culture));
             if (culture == null)
             {
@@ -1514,7 +1523,8 @@ namespace System.Tests
         [InlineData(StringComparison.OrdinalIgnoreCase + 1)]
         public void Replace_NoSuchStringComparison_ThrowsArgumentException(
             StringComparison comparisonType
-        ) {
+        )
+        {
             AssertExtensions.Throws<ArgumentException>(
                 "comparisonType",
                 () => "abc".Replace("abc", "def", comparisonType)
@@ -1698,7 +1708,8 @@ namespace System.Tests
         [MemberData(nameof(GetHashCode_NoSuchStringComparison_ThrowsArgumentException_Data))]
         public static void GetHashCode_NoSuchStringComparison_ThrowsArgumentException(
             StringComparison comparisonType
-        ) {
+        )
+        {
             AssertExtensions.Throws<ArgumentException>(
                 "comparisonType",
                 () => "abc".GetHashCode(comparisonType)
@@ -1714,7 +1725,8 @@ namespace System.Tests
         [InlineData("hello")] // non-empty string
         public static unsafe void GetPinnableReference_ReturnsSameAsGCHandleAndLegacyFixed(
             string input
-        ) {
+        )
+        {
             Assert.NotNull(input); // test shouldn't have null input
 
             // First, ensure the value pointed to by GetPinnableReference is correct.
@@ -1871,7 +1883,8 @@ namespace System.Tests
             char target,
             StringComparison stringComparison,
             int expected
-        ) {
+        )
+        {
             Assert.Equal(expected, s.IndexOf(target, stringComparison));
             var charArray = new char[1];
             charArray[0] = target;
@@ -2120,7 +2133,8 @@ namespace System.Tests
             string target,
             StringComparison stringComparison,
             int expected
-        ) {
+        )
+        {
             Assert.Equal(expected, source.IndexOf(target, stringComparison));
         }
 
@@ -2240,7 +2254,8 @@ namespace System.Tests
             int startIndex,
             StringComparison stringComparison,
             int expected
-        ) {
+        )
+        {
             Assert.Equal(expected, source.LastIndexOf(target, startIndex, stringComparison));
         }
 
@@ -2325,7 +2340,8 @@ namespace System.Tests
             string target,
             StringComparison stringComparison,
             bool expected
-        ) {
+        )
+        {
             Assert.Equal(expected, string.Compare(source, target, stringComparison) == 0);
             Assert.Equal(
                 expected,
@@ -2415,7 +2431,8 @@ namespace System.Tests
             string target,
             StringComparison stringComparison,
             bool expected
-        ) {
+        )
+        {
             Assert.Equal(expected, source.StartsWith(target, stringComparison));
         }
 
@@ -2500,7 +2517,8 @@ namespace System.Tests
             string target,
             StringComparison stringComparison,
             bool expected
-        ) {
+        )
+        {
             Assert.Equal(expected, source.EndsWith(target, stringComparison));
         }
 

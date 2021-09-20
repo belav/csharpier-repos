@@ -27,7 +27,8 @@ namespace System.Globalization
             int yearOffset,
             int minEraYear,
             int maxEraYear
-        ) {
+        )
+        {
             this.era = era;
             this.yearOffset = yearOffset;
             this.minEraYear = minEraYear;
@@ -46,7 +47,8 @@ namespace System.Globalization
             string eraName,
             string abbrevEraName,
             string englishEraName
-        ) {
+        )
+        {
             this.era = era;
             this.yearOffset = yearOffset;
             this.minEraYear = minEraYear;
@@ -380,7 +382,8 @@ namespace System.Globalization
         {
             if (
                 ticks < m_Cal.MinSupportedDateTime.Ticks || ticks > m_Cal.MaxSupportedDateTime.Ticks
-            ) {
+            )
+            {
                 throw new ArgumentOutOfRangeException(
                     "time",
                     SR.Format(
@@ -681,7 +684,8 @@ namespace System.Globalization
             int second,
             int millisecond,
             int era
-        ) {
+        )
+        {
             year = GetGregorianYear(year, era);
             long ticks =
                 DateToTicks(year, month, day) + TimeToTicks(hour, minute, second, millisecond);

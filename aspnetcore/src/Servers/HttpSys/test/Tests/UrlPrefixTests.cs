@@ -124,7 +124,8 @@ namespace Microsoft.AspNetCore.Server.HttpSys
             string port,
             string pathBase,
             string toString
-        ) {
+        )
+        {
             var urlPrefix = UrlPrefix.Create(url);
 
             Assert.Equal(scheme, urlPrefix.Scheme);

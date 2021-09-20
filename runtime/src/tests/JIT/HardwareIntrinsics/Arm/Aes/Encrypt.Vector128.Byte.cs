@@ -133,7 +133,8 @@ namespace JIT.HardwareIntrinsics.Arm
                     || (alignment * 2) < sizeOfinArray1
                     || (alignment * 2) < sizeOfinArray2
                     || (alignment * 2) < sizeOfoutArray
-                ) {
+                )
+                {
                     throw new ArgumentException("Invalid value of alignment");
                 }
 
@@ -424,7 +425,8 @@ namespace JIT.HardwareIntrinsics.Arm
 
             fixed (Vector128<Byte>* pClsVar1 = &_clsVar1)fixed (
                 Vector128<Byte>* pClsVar2 = &_clsVar2
-            ) {
+            )
+            {
                 var result = Aes.Encrypt(
                     AdvSimd.LoadVector128((Byte*)(pClsVar1)),
                     AdvSimd.LoadVector128((Byte*)(pClsVar2))

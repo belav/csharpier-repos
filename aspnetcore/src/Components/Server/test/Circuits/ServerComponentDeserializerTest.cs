@@ -482,7 +482,8 @@ namespace Microsoft.AspNetCore.Components.Server.Circuits
 
         private ServerComponentMarker[] CreateMarkers(
             params (Type, Dictionary<string, object>)[] types
-        ) {
+        )
+        {
             var serializer = new ServerComponentSerializer(_ephemeralDataProtectionProvider);
             var markers = new ServerComponentMarker[types.Length];
             for (var i = 0; i < types.Length; i++)
@@ -504,7 +505,8 @@ namespace Microsoft.AspNetCore.Components.Server.Circuits
         private ServerComponentMarker[] CreateMarkers(
             ServerComponentInvocationSequence sequence,
             params Type[] types
-        ) {
+        )
+        {
             var serializer = new ServerComponentSerializer(_ephemeralDataProtectionProvider);
             var markers = new ServerComponentMarker[types.Length];
             for (var i = 0; i < types.Length; i++)

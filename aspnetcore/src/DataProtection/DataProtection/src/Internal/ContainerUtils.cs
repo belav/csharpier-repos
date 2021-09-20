@@ -76,7 +76,8 @@ namespace Microsoft.AspNetCore.DataProtection.Internal
                             dir.FullName.TrimEnd(Path.DirectorySeparatorChar),
                             StringComparison.Ordinal
                         )
-                    ) {
+                    )
+                    {
                         return true;
                     }
 
@@ -94,7 +95,8 @@ namespace Microsoft.AspNetCore.DataProtection.Internal
             if (
                 GetBooleanEnvVar(RunningInContainerVariableName)
                 || GetBooleanEnvVar(DeprecatedRunningInContainerVariableName)
-            ) {
+            )
+            {
                 return true;
             }
 

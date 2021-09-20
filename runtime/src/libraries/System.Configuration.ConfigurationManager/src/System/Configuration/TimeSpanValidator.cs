@@ -13,18 +13,16 @@ namespace System.Configuration
         public TimeSpanValidator(TimeSpan minValue, TimeSpan maxValue)
             : this(minValue, maxValue, false, 0) { }
 
-        public TimeSpanValidator(
-            TimeSpan minValue,
-            TimeSpan maxValue,
-            bool rangeIsExclusive
-        ) : this(minValue, maxValue, rangeIsExclusive, 0) { }
+        public TimeSpanValidator(TimeSpan minValue, TimeSpan maxValue, bool rangeIsExclusive)
+            : this(minValue, maxValue, rangeIsExclusive, 0) { }
 
         public TimeSpanValidator(
             TimeSpan minValue,
             TimeSpan maxValue,
             bool rangeIsExclusive,
             long resolutionInSeconds
-        ) {
+        )
+        {
             if (resolutionInSeconds < 0)
                 throw new ArgumentOutOfRangeException(nameof(resolutionInSeconds));
 

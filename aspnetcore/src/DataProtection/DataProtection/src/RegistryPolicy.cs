@@ -13,7 +13,8 @@ namespace Microsoft.AspNetCore.DataProtection
             AlgorithmConfiguration? configuration,
             IEnumerable<IKeyEscrowSink> keyEscrowSinks,
             int? defaultKeyLifetime
-        ) {
+        )
+        {
             EncryptorConfiguration = configuration;
             KeyEscrowSinks = keyEscrowSinks;
             DefaultKeyLifetime = defaultKeyLifetime;

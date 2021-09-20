@@ -27,7 +27,8 @@ namespace Microsoft.AspNetCore.Mvc.Infrastructure
         public ContentResultExecutor(
             ILogger<ContentResultExecutor> logger,
             IHttpResponseStreamWriterFactory httpResponseStreamWriterFactory
-        ) {
+        )
+        {
             _logger = logger;
             _httpResponseStreamWriterFactory = httpResponseStreamWriterFactory;
         }
@@ -73,7 +74,8 @@ namespace Microsoft.AspNetCore.Mvc.Infrastructure
                         response.Body,
                         resolvedContentTypeEncoding
                     )
-                ) {
+                )
+                {
                     await textWriter.WriteAsync(result.Content);
 
                     // Flushing the HttpResponseStreamWriter does not flush the underlying stream. This just flushes

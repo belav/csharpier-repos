@@ -40,7 +40,8 @@ namespace Microsoft.EntityFrameworkCore.Scaffolding.Internal
             string storeType,
             bool keyOrIndex,
             bool rowVersion
-        ) {
+        )
+        {
             // This is because certain providers can have no type specified as a default type e.g. SQLite
             Check.NotNull(storeType, nameof(storeType));
 
@@ -75,7 +76,8 @@ namespace Microsoft.EntityFrameworkCore.Scaffolding.Internal
             if (
                 defaultTypeMapping != null
                 && string.Equals(defaultTypeMapping.StoreType, storeType, StringComparison.Ordinal)
-            ) {
+            )
+            {
                 canInfer = true;
 
                 // Check for Unicode

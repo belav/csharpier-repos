@@ -104,7 +104,8 @@ namespace Microsoft.AspNetCore.Mvc.ViewComponents
                 if (
                     !selectedMethod.ReturnType.IsGenericType
                     || selectedMethod.ReturnType.GetGenericTypeDefinition() != typeof(Task<>)
-                ) {
+                )
+                {
                     throw new InvalidOperationException(
                         Resources.FormatViewComponent_AsyncMethod_ShouldReturnTask(
                             AsyncMethodName,

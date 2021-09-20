@@ -92,7 +92,8 @@ namespace Microsoft.AspNetCore.Routing.Matching
         public virtual async Task Match_SingleLiteralSegment_PercentEncoded(
             string template,
             string path
-        ) {
+        )
+        {
             // Arrange
             var (matcher, endpoint) = CreateMatcher(template);
             var httpContext = CreateContext(path);
@@ -301,7 +302,8 @@ namespace Microsoft.AspNetCore.Routing.Matching
             string path,
             string[] keys,
             string[] values
-        ) {
+        )
+        {
             // Arrange
             var (matcher, endpoint) = CreateMatcher(template);
             var httpContext = CreateContext(path);

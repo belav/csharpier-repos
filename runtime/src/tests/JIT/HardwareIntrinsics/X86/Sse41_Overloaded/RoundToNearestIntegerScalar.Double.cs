@@ -138,7 +138,8 @@ namespace JIT.HardwareIntrinsics.X86
                     (alignment != 32 && alignment != 16)
                     || (alignment * 2) < sizeOfinArray1
                     || (alignment * 2) < sizeOfoutArray
-                ) {
+                )
+                {
                     throw new ArgumentException("Invalid value of alignment");
                 }
 
@@ -197,7 +198,8 @@ namespace JIT.HardwareIntrinsics.X86
 
             public void RunStructFldScenario(
                 SimpleUnaryOpTest__RoundToNearestIntegerScalarDouble testClass
-            ) {
+            )
+            {
                 var result = Sse41.RoundToNearestIntegerScalar(_fld1);
 
                 Unsafe.Write(testClass._dataTable.outArrayPtr, result);
@@ -206,7 +208,8 @@ namespace JIT.HardwareIntrinsics.X86
 
             public void RunStructFldScenario_Load(
                 SimpleUnaryOpTest__RoundToNearestIntegerScalarDouble testClass
-            ) {
+            )
+            {
                 fixed (Vector128<Double>* pFld1 = &_fld1)
                 {
                     var result = Sse41.RoundToNearestIntegerScalar(
@@ -535,7 +538,8 @@ namespace JIT.HardwareIntrinsics.X86
             Vector128<Double> op1,
             void* result,
             [CallerMemberName] string method = ""
-        ) {
+        )
+        {
             Double[] inArray1 = new Double[Op1ElementCount];
             Double[] outArray = new Double[RetElementCount];
 
@@ -572,7 +576,8 @@ namespace JIT.HardwareIntrinsics.X86
             Double[] firstOp,
             Double[] result,
             [CallerMemberName] string method = ""
-        ) {
+        )
+        {
             bool succeeded = true;
 
             if (
@@ -580,7 +585,8 @@ namespace JIT.HardwareIntrinsics.X86
                 != BitConverter.DoubleToInt64Bits(
                     Math.Round(firstOp[0], MidpointRounding.AwayFromZero)
                 )
-            ) {
+            )
+            {
                 succeeded = false;
             }
             else
@@ -590,7 +596,8 @@ namespace JIT.HardwareIntrinsics.X86
                     if (
                         BitConverter.DoubleToInt64Bits(result[i])
                         != BitConverter.DoubleToInt64Bits(firstOp[i])
-                    ) {
+                    )
+                    {
                         succeeded = false;
                         break;
                     }

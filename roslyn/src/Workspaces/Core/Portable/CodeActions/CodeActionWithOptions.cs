@@ -32,7 +32,8 @@ namespace Microsoft.CodeAnalysis.CodeActions
         public async Task<IEnumerable<CodeActionOperation>?> GetOperationsAsync(
             object? options,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             if (options == null)
             {
                 return SpecializedCollections.EmptyEnumerable<CodeActionOperation>();
@@ -53,7 +54,8 @@ namespace Microsoft.CodeAnalysis.CodeActions
         internal override async Task<ImmutableArray<CodeActionOperation>> GetOperationsCoreAsync(
             IProgressTracker progressTracker,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var options = this.GetOptions(cancellationToken);
             return (
                 await this.GetOperationsAsync(options, cancellationToken).ConfigureAwait(false)

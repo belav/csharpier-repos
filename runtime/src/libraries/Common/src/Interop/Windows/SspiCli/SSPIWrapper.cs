@@ -13,7 +13,8 @@ namespace System.Net
     {
         internal static SecurityPackageInfoClass[] EnumerateSecurityPackages(
             ISSPIInterface secModule
-        ) {
+        )
+        {
             if (secModule.SecurityPackages == null)
             {
                 lock (secModule)
@@ -68,7 +69,8 @@ namespace System.Net
             ISSPIInterface secModule,
             string packageName,
             bool throwIfMissing
-        ) {
+        )
+        {
             SecurityPackageInfoClass[] supportedSecurityPackages = EnumerateSecurityPackages(
                 secModule
             );
@@ -82,7 +84,8 @@ namespace System.Net
                             packageName,
                             StringComparison.OrdinalIgnoreCase
                         )
-                    ) {
+                    )
+                    {
                         return supportedSecurityPackages[i];
                     }
                 }
@@ -103,7 +106,8 @@ namespace System.Net
             ISSPIInterface secModule,
             string package,
             Interop.SspiCli.CredentialUse intent
-        ) {
+        )
+        {
             if (NetEventSource.Log.IsEnabled())
                 NetEventSource.Log.AcquireDefaultCredential(package, intent);
 
@@ -131,7 +135,8 @@ namespace System.Net
             string package,
             Interop.SspiCli.CredentialUse intent,
             ref SafeSspiAuthDataHandle authdata
-        ) {
+        )
+        {
             if (NetEventSource.Log.IsEnabled())
                 NetEventSource.Log.AcquireCredentialsHandle(package, intent, authdata);
 
@@ -165,7 +170,8 @@ namespace System.Net
             string package,
             Interop.SspiCli.CredentialUse intent,
             Interop.SspiCli.SCHANNEL_CRED* scc
-        ) {
+        )
+        {
             int errorCode = secModule.AcquireCredentialsHandle(
                 package,
                 intent,
@@ -195,7 +201,8 @@ namespace System.Net
             string package,
             Interop.SspiCli.CredentialUse intent,
             Interop.SspiCli.SCH_CREDENTIALS* scc
-        ) {
+        )
+        {
             int errorCode = secModule.AcquireCredentialsHandle(
                 package,
                 intent,
@@ -230,7 +237,8 @@ namespace System.Net
             InputSecurityBuffers inputBuffers,
             ref SecurityBuffer outputBuffer,
             ref Interop.SspiCli.ContextFlags outFlags
-        ) {
+        )
+        {
             if (NetEventSource.Log.IsEnabled())
                 NetEventSource.Log.InitializeSecurityContext(
                     credential,
@@ -270,7 +278,8 @@ namespace System.Net
             InputSecurityBuffers inputBuffers,
             ref SecurityBuffer outputBuffer,
             ref Interop.SspiCli.ContextFlags outFlags
-        ) {
+        )
+        {
             if (NetEventSource.Log.IsEnabled())
                 NetEventSource.Log.AcceptSecurityContext(credential, context, inFlags);
 
@@ -299,7 +308,8 @@ namespace System.Net
             ISSPIInterface secModule,
             ref SafeDeleteSslContext? context,
             in SecurityBuffer inputBuffer
-        ) {
+        )
+        {
             int errorCode = secModule.CompleteAuthToken(ref context, in inputBuffer);
 
             if (NetEventSource.Log.IsEnabled())
@@ -315,7 +325,8 @@ namespace System.Net
             ISSPIInterface secModule,
             ref SafeDeleteContext? context,
             in SecurityBuffer inputBuffer
-        ) {
+        )
+        {
             int errorCode = secModule.ApplyControlToken(ref context, in inputBuffer);
 
             if (NetEventSource.Log.IsEnabled())
@@ -331,7 +342,8 @@ namespace System.Net
             ISSPIInterface secModule,
             SafeDeleteContext context,
             out SecurityContextTokenHandle token
-        ) {
+        )
+        {
             return secModule.QuerySecurityContextToken(context, out token);
         }
 
@@ -340,7 +352,8 @@ namespace System.Net
             SafeDeleteContext context,
             Span<SecurityBuffer> input,
             uint sequenceNumber
-        ) {
+        )
+        {
             return EncryptDecryptHelper(OP.Encrypt, secModule, context, input, sequenceNumber);
         }
 
@@ -349,7 +362,8 @@ namespace System.Net
             SafeDeleteContext context,
             Span<SecurityBuffer> input,
             uint sequenceNumber
-        ) {
+        )
+        {
             return EncryptDecryptHelper(OP.Decrypt, secModule, context, input, sequenceNumber);
         }
 
@@ -358,7 +372,8 @@ namespace System.Net
             SafeDeleteContext context,
             Span<SecurityBuffer> input,
             uint sequenceNumber
-        ) {
+        )
+        {
             return EncryptDecryptHelper(
                 OP.MakeSignature,
                 secModule,
@@ -373,7 +388,8 @@ namespace System.Net
             SafeDeleteContext context,
             Span<SecurityBuffer> input,
             uint sequenceNumber
-        ) {
+        )
+        {
             return EncryptDecryptHelper(
                 OP.VerifySignature,
                 secModule,
@@ -406,7 +422,8 @@ namespace System.Net
             SafeDeleteContext context,
             Span<SecurityBuffer> input,
             uint sequenceNumber
-        ) {
+        )
+        {
             Debug.Assert(Enum.IsDefined<OP>(op), $"Unknown op: {op}");
             Debug.Assert(input.Length <= 3, "The below logic only works for 3 or fewer buffers.");
 
@@ -421,7 +438,8 @@ namespace System.Net
                 byte* pinnedBuffer0 = input.Length > 0 ? input[0].token : null
             )fixed (byte* pinnedBuffer1 = input.Length > 1 ? input[1].token : null)fixed (
                 byte* pinnedBuffer2 = input.Length > 2 ? input[2].token : null
-            ) {
+            )
+            {
                 sdcInOut.pBuffers = unmanagedBufferPtr;
 
                 ThreeByteArrays byteArrayStruct = default;
@@ -492,7 +510,8 @@ namespace System.Net
                                         (byte*)unmanagedBuffer[i].pvBuffer >= bufferAddress
                                         && (byte*)unmanagedBuffer[i].pvBuffer + iBuffer.size
                                             <= bufferAddress + buffers[j].Length
-                                    ) {
+                                    )
+                                    {
                                         iBuffer.offset = (int)(
                                             (byte*)unmanagedBuffer[i].pvBuffer - bufferAddress
                                         );
@@ -548,7 +567,8 @@ namespace System.Net
             ISSPIInterface secModule,
             SafeDeleteContext securityContext,
             Interop.SspiCli.ContextAttribute contextAttribute
-        ) {
+        )
+        {
             SafeFreeContextBufferChannelBinding result;
             int errorCode = secModule.QueryContextChannelBinding(
                 securityContext,
@@ -642,7 +662,8 @@ namespace System.Net
             ISSPIInterface secModule,
             SafeDeleteContext securityContext,
             Interop.SspiCli.ContextAttribute contextAttribute
-        ) {
+        )
+        {
             Debug.Assert(
                 contextAttribute == Interop.SspiCli.ContextAttribute.SECPKG_ATTR_NAMES
                     || contextAttribute
@@ -679,7 +700,8 @@ namespace System.Net
         public static SafeFreeCertContext? QueryContextAttributes_SECPKG_ATTR_REMOTE_CERT_CONTEXT(
             ISSPIInterface secModule,
             SafeDeleteContext securityContext
-        ) {
+        )
+        {
             Span<IntPtr> buffer = stackalloc IntPtr[1];
             int errorCode = secModule.QueryContextAttributes(
                 securityContext,
@@ -706,7 +728,8 @@ namespace System.Net
             SafeDeleteContext securityContext,
             ref Interop.SspiCli.SecPkgContext_IssuerListInfoEx ctx,
             out SafeHandle? sspiHandle
-        ) {
+        )
+        {
             Span<Interop.SspiCli.SecPkgContext_IssuerListInfoEx> buffer =
 #if NETSTANDARD2_0
                 stackalloc Interop.SspiCli.SecPkgContext_IssuerListInfoEx[1] { ctx };

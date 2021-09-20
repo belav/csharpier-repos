@@ -29,7 +29,8 @@ namespace Microsoft.CodeAnalysis.ExtractMethod
             SemanticDocument document,
             TextSpan textSpan,
             OptionSet options
-        ) {
+        )
+        {
             Contract.ThrowIfNull(document);
 
             SemanticDocument = document;
@@ -64,7 +65,8 @@ namespace Microsoft.CodeAnalysis.ExtractMethod
             TextSpan textSpan,
             Tuple<SyntaxNode, SyntaxNode> range,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             Contract.ThrowIfNull(range);
 
             var controlFlowAnalysisData = semanticModel.AnalyzeControlFlow(
@@ -209,7 +211,8 @@ namespace Microsoft.CodeAnalysis.ExtractMethod
                     firstStatement != null
                     && stmt.Span.End <= textSpan.End
                     && stmt.Parent == firstStatement.Parent
-                ) {
+                )
+                {
                     lastStatement = stmt;
                 }
             }

@@ -139,7 +139,8 @@ namespace Microsoft.CodeAnalysis.Simplification
             Document document,
             Func<SyntaxNode, bool> expandInsideNode = null,
             CancellationToken cancellationToken = default
-        ) {
+        )
+        {
             if (document == null)
             {
                 throw new ArgumentNullException(nameof(document));
@@ -165,7 +166,8 @@ namespace Microsoft.CodeAnalysis.Simplification
             Workspace workspace,
             Func<SyntaxNode, bool> expandInsideNode = null,
             CancellationToken cancellationToken = default
-        ) {
+        )
+        {
             if (semanticModel == null)
             {
                 throw new ArgumentNullException(nameof(semanticModel));
@@ -188,7 +190,8 @@ namespace Microsoft.CodeAnalysis.Simplification
             Document document,
             OptionSet optionSet = null,
             CancellationToken cancellationToken = default
-        ) {
+        )
+        {
             if (document == null)
             {
                 throw new ArgumentNullException(nameof(document));
@@ -208,7 +211,8 @@ namespace Microsoft.CodeAnalysis.Simplification
             SyntaxAnnotation annotation,
             OptionSet optionSet = null,
             CancellationToken cancellationToken = default
-        ) {
+        )
+        {
             if (document == null)
             {
                 throw new ArgumentNullException(nameof(document));
@@ -238,7 +242,8 @@ namespace Microsoft.CodeAnalysis.Simplification
             TextSpan span,
             OptionSet optionSet = null,
             CancellationToken cancellationToken = default
-        ) {
+        )
+        {
             if (document == null)
             {
                 throw new ArgumentNullException(nameof(document));
@@ -261,7 +266,8 @@ namespace Microsoft.CodeAnalysis.Simplification
             IEnumerable<TextSpan> spans,
             OptionSet optionSet = null,
             CancellationToken cancellationToken = default
-        ) {
+        )
+        {
             if (document == null)
             {
                 throw new ArgumentNullException(nameof(document));
@@ -286,7 +292,8 @@ namespace Microsoft.CodeAnalysis.Simplification
             ImmutableArray<AbstractReducer> reducers,
             OptionSet optionSet = null,
             CancellationToken cancellationToken = default
-        ) {
+        )
+        {
             var root = await document.GetSyntaxRootAsync(cancellationToken).ConfigureAwait(false);
             return await document.GetLanguageService<ISimplificationService>()
                 .ReduceAsync(

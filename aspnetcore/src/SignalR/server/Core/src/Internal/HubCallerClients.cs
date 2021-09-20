@@ -52,7 +52,8 @@ namespace Microsoft.AspNetCore.SignalR.Internal
         public IClientProxy GroupExcept(
             string groupName,
             IReadOnlyList<string> excludedConnectionIds
-        ) {
+        )
+        {
             return _hubClients.GroupExcept(groupName, excludedConnectionIds);
         }
 

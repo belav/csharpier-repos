@@ -160,7 +160,8 @@ namespace System.IO.Compression
                     compressedPath,
                     false
                 )
-            ) {
+            )
+            {
                 var decompressor = CreateStream(readStream, CompressionMode.Decompress, true);
                 Task task = decompressor.ReadAsync(uncompressedBytes, 0, uncompressedBytes.Length);
                 decompressor.Dispose();
@@ -328,7 +329,8 @@ namespace System.IO.Compression
                         CompressionLevel.NoCompression,
                         CompressionLevel.SmallestSize
                     }
-                ) {
+                )
+                {
                     yield return new Func<Stream, Stream>((stream) => CreateStream(stream, level));
 
                     foreach (bool remainsOpen in new[] { true, false })
@@ -654,7 +656,8 @@ namespace System.IO.Compression
             int offset,
             int count,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             return _mode == Mode.ReturnNullTasks
               ? null
               : base.WriteAsync(buffer, offset, count, cancellationToken);
@@ -706,7 +709,8 @@ namespace System.IO.Compression
         public static async Task<ManualSyncMemoryStream> GetStreamFromFileAsync(
             string testFile,
             bool sync = false
-        ) {
+        )
+        {
             var baseStream = await StreamHelpers.CreateTempCopyStream(testFile);
             var ms = new ManualSyncMemoryStream(sync);
             await baseStream.CopyToAsync(ms);
@@ -742,7 +746,8 @@ namespace System.IO.Compression
             int offset,
             int count,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             ReadHit = true;
             if (isSync)
             {
@@ -762,7 +767,8 @@ namespace System.IO.Compression
             int offset,
             int count,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             WriteHit = true;
             if (isSync)
             {
@@ -780,7 +786,8 @@ namespace System.IO.Compression
         public override async ValueTask<int> ReadAsync(
             Memory<byte> buffer,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             ReadHit = true;
 
             if (isSync)
@@ -798,7 +805,8 @@ namespace System.IO.Compression
         public override async ValueTask WriteAsync(
             ReadOnlyMemory<byte> buffer,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             WriteHit = true;
 
             if (isSync)

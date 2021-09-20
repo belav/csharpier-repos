@@ -46,7 +46,8 @@ namespace Microsoft.EntityFrameworkCore.SqlServer.Query.Internal
             SelectExpression selectExpression,
             IReadOnlyDictionary<string, object?> parametersValues,
             out bool canCache
-        ) {
+        )
+        {
             Check.NotNull(selectExpression, nameof(selectExpression));
             Check.NotNull(parametersValues, nameof(parametersValues));
 

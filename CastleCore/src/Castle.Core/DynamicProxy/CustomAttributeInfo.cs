@@ -52,7 +52,8 @@ namespace Castle.DynamicProxy
             object[] propertyValues,
             FieldInfo[] namedFields,
             object[] fieldValues
-        ) {
+        )
+        {
             // Will take care of validating the arguments
             this.builder = new CustomAttributeBuilder(
                 constructor,
@@ -75,28 +76,30 @@ namespace Castle.DynamicProxy
             object[] constructorArgs,
             PropertyInfo[] namedProperties,
             object[] propertyValues
-        ) : this(
-            constructor,
-            constructorArgs,
-            namedProperties,
-            propertyValues,
-            EmptyFields,
-            EmptyValues
-        ) { }
+        )
+            : this(
+                constructor,
+                constructorArgs,
+                namedProperties,
+                propertyValues,
+                EmptyFields,
+                EmptyValues
+            ) { }
 
         public CustomAttributeInfo(
             ConstructorInfo constructor,
             object[] constructorArgs,
             FieldInfo[] namedFields,
             object[] fieldValues
-        ) : this(
-            constructor,
-            constructorArgs,
-            EmptyProperties,
-            EmptyValues,
-            namedFields,
-            fieldValues
-        ) { }
+        )
+            : this(
+                constructor,
+                constructorArgs,
+                EmptyProperties,
+                EmptyValues,
+                namedFields,
+                fieldValues
+            ) { }
 
         public CustomAttributeInfo(ConstructorInfo constructor, object[] constructorArgs)
             : this(
@@ -212,7 +215,8 @@ namespace Castle.DynamicProxy
                             memberExpr.Expression is ConstantExpression constant
                             && IsCompilerGenerated(constant.Type)
                             && constant.Value != null
-                        ) {
+                        )
+                        {
                             return field.GetValue(constant.Value);
                         }
                     }
@@ -290,7 +294,8 @@ namespace Castle.DynamicProxy
         private static bool AreMembersEquivalent(
             IDictionary<string, object> x,
             IDictionary<string, object> y
-        ) {
+        )
+        {
             if (x.Count != y.Count)
                 return false;
 

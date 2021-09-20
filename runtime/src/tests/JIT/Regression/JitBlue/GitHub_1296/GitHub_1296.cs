@@ -51,7 +51,8 @@ class Program
         int regParam3,
         int regParam4,
         MyStruct stackParam1
-    ) {
+    )
+    {
         // Add random calls to block inlining of this call into the parent frame.
         Console.Write("Let's ");
         Console.Write("Discourage ");
@@ -87,7 +88,8 @@ class Program
         int regParam3,
         int regParam4,
         int stackParam1
-    ) {
+    )
+    {
         // If all conditions are met, Callee enters with an incorrect value for regParam1
         // This should print "9 0 1 2 3".  If the tail call is made incorrectly,
         // the result is (typically) "418858424 0 1 2 3".

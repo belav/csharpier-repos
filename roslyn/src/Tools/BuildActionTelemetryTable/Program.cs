@@ -89,7 +89,8 @@ namespace BuildActionTelemetryTable
 
         internal static ImmutableArray<TelemetryInfo> GetTelemetryInfos(
             ImmutableArray<Type> codeActionTypes
-        ) {
+        )
+        {
             return codeActionTypes.Select(GetTelemetryInfo).ToImmutableArray();
 
             static TelemetryInfo GetTelemetryInfo(Type type)

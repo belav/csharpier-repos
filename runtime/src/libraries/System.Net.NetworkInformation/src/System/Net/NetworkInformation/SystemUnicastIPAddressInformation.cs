@@ -22,7 +22,8 @@ namespace System.Net.NetworkInformation
 
         internal SystemUnicastIPAddressInformation(
             Interop.IpHlpApi.IpAdapterUnicastAddress adapterAddress
-        ) {
+        )
+        {
             IPAddress ipAddress = adapterAddress.address.MarshalIPAddress();
             _innerInfo = new SystemIPAddressInformation(ipAddress, adapterAddress.flags);
             _prefixOrigin = adapterAddress.prefixOrigin;
@@ -114,7 +115,8 @@ namespace System.Net.NetworkInformation
         // Helper method that marshals the address information into the classes.
         internal static UnicastIPAddressInformationCollection MarshalUnicastIpAddressInformationCollection(
             IntPtr ptr
-        ) {
+        )
+        {
             UnicastIPAddressInformationCollection addressList =
                 new UnicastIPAddressInformationCollection();
 

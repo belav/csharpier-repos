@@ -95,7 +95,8 @@ namespace System.Net.Sockets.Tests
                     SocketType.Dgram,
                     ProtocolType.Udp
                 )
-            ) {
+            )
+            {
                 listener.Bind(new IPEndPoint(IPAddress.Loopback, 0));
                 await client.ConnectAsync(
                     new IPEndPoint(IPAddress.Loopback, ((IPEndPoint)listener.LocalEndPoint).Port)
@@ -120,7 +121,8 @@ namespace System.Net.Sockets.Tests
                     SocketType.Stream,
                     ProtocolType.Tcp
                 )
-            ) {
+            )
+            {
                 listener.Bind(new IPEndPoint(IPAddress.Loopback, 0));
                 listener.Listen(1);
 
@@ -158,7 +160,8 @@ namespace System.Net.Sockets.Tests
                     SocketType.Stream,
                     ProtocolType.Tcp
                 )
-            ) {
+            )
+            {
                 listener.Bind(new IPEndPoint(IPAddress.Loopback, 0));
                 listener.Listen(1);
 
@@ -218,7 +221,8 @@ namespace System.Net.Sockets.Tests
                     SocketType.Stream,
                     ProtocolType.Tcp
                 )
-            ) {
+            )
+            {
                 listener.Bind(new IPEndPoint(IPAddress.Loopback, 0));
                 listener.Listen(1);
 
@@ -278,7 +282,8 @@ namespace System.Net.Sockets.Tests
                     SocketType.Stream,
                     ProtocolType.Tcp
                 )
-            ) {
+            )
+            {
                 listener.Bind(new IPEndPoint(IPAddress.Loopback, 0));
                 listener.Listen(1);
 
@@ -353,7 +358,8 @@ namespace System.Net.Sockets.Tests
                     SocketType.Stream,
                     ProtocolType.Tcp
                 )
-            ) {
+            )
+            {
                 listener.Bind(new IPEndPoint(IPAddress.Loopback, 0));
                 listener.Listen(1);
 
@@ -433,7 +439,8 @@ namespace System.Net.Sockets.Tests
                     SocketType.Stream,
                     ProtocolType.Tcp
                 )
-            ) {
+            )
+            {
                 listener.Bind(new IPEndPoint(IPAddress.Loopback, 0));
                 listener.Listen(1);
 
@@ -500,7 +507,8 @@ namespace System.Net.Sockets.Tests
         [InlineData(false)]
         public async Task DisposeSocketDirectly_ReadWriteThrowNetworkException(
             bool derivedNetworkStream
-        ) {
+        )
+        {
             using (
                 Socket listener = new Socket(
                     AddressFamily.InterNetwork,
@@ -514,7 +522,8 @@ namespace System.Net.Sockets.Tests
                     SocketType.Stream,
                     ProtocolType.Tcp
                 )
-            ) {
+            )
+            {
                 listener.Bind(new IPEndPoint(IPAddress.Loopback, 0));
                 listener.Listen(1);
 
@@ -596,7 +605,8 @@ namespace System.Net.Sockets.Tests
                     SocketType.Stream,
                     ProtocolType.Tcp
                 )
-            ) {
+            )
+            {
                 listener.Bind(new IPEndPoint(IPAddress.Loopback, 0));
                 listener.Listen(1);
 
@@ -825,7 +835,8 @@ namespace System.Net.Sockets.Tests
             Func<NetworkStream, NetworkStream, Task> func,
             FileAccess serverAccess = FileAccess.ReadWrite,
             FileAccess clientAccess = FileAccess.ReadWrite
-        ) {
+        )
+        {
             var listener = new TcpListener(IPAddress.Loopback, 0);
             try
             {
@@ -856,7 +867,8 @@ namespace System.Net.Sockets.Tests
                             clientAccess,
                             ownsSocket: true
                         )
-                    ) {
+                    )
+                    {
                         await func(serverStream, clientStream);
                     }
                 }

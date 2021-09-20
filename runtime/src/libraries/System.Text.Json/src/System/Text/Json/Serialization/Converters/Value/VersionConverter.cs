@@ -9,7 +9,8 @@ namespace System.Text.Json.Serialization.Converters
             ref Utf8JsonReader reader,
             Type typeToConvert,
             JsonSerializerOptions options
-        ) {
+        )
+        {
             string? versionString = reader.GetString();
             if (Version.TryParse(versionString, out Version? result))
             {
@@ -24,7 +25,8 @@ namespace System.Text.Json.Serialization.Converters
             Utf8JsonWriter writer,
             Version value,
             JsonSerializerOptions options
-        ) {
+        )
+        {
             writer.WriteStringValue(value.ToString());
         }
     }

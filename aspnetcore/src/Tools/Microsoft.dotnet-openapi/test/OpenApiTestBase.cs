@@ -143,7 +143,8 @@ namespace Microsoft.DotNet.OpenApi.Tests
 
         public TestHttpClientWrapper(
             IDictionary<string, Tuple<string, ContentDispositionHeaderValue>> results
-        ) {
+        )
+        {
             _results = results;
         }
 
@@ -191,7 +192,8 @@ namespace Microsoft.DotNet.OpenApi.Tests
         public TestHttpResponseMessageWrapper(
             MemoryStream stream,
             ContentDispositionHeaderValue header
-        ) {
+        )
+        {
             Stream = Task.FromResult<Stream>(stream);
             if (header is null && stream is null)
             {

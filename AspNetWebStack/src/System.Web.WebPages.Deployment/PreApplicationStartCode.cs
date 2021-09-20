@@ -82,7 +82,8 @@ namespace System.Web.WebPages.Deployment
             Action<Version> loadWebPages,
             Action registerForChangeNotification,
             Func<string, AssemblyName> getAssemblyNameThunk = null
-        ) {
+        )
+        {
             if (WebPagesDeployment.IsExplicitlyDisabled(appSettings))
             {
                 // If WebPages is explicitly disabled, exit.
@@ -161,7 +162,8 @@ namespace System.Web.WebPages.Deployment
                     version == AssemblyUtils.WebPagesV1Version
                     && configVersion == null
                     && binVersion == null
-                ) {
+                )
+                {
                     // No version was specified. We're implicitly assuming that the site is a v1 site. However, the user does not have V1 binaries available.
                     throw new InvalidOperationException(
                         ConfigurationResources.WebPagesImplicitVersionFailure
@@ -206,7 +208,8 @@ namespace System.Web.WebPages.Deployment
             IFileSystem fileSystem,
             string binDirectory,
             Version currentVersion
-        ) {
+        )
+        {
             Version previousVersion = WebPagesDeployment.GetPreviousRuntimeVersion(buildManager);
 
             // Persist the current version number in BuildManager's cached file
@@ -237,7 +240,8 @@ namespace System.Web.WebPages.Deployment
         )]
         internal static ICollection<MethodInfo> GetPreStartInitMethodsFromAssemblyCollection(
             IEnumerable<Assembly> assemblies
-        ) {
+        )
+        {
             List<MethodInfo> methods = new List<MethodInfo>();
             foreach (Assembly assembly in assemblies)
             {
@@ -267,7 +271,8 @@ namespace System.Web.WebPages.Deployment
                         attribute.Type != null
                         && !String.IsNullOrEmpty(attribute.MethodName)
                         && attribute.Type.Assembly == assembly
-                    ) {
+                    )
+                    {
                         method = FindPreStartInitMethod(attribute.Type, attribute.MethodName);
                     }
 
@@ -347,7 +352,8 @@ namespace System.Web.WebPages.Deployment
                     _physicalFileSystem,
                     HttpRuntime.AppDomainAppPath
                 )
-            ) {
+            )
+            {
                 // Unload the app domain so we register plan9 when the app restarts
                 InfrastructureHelper.UnloadAppDomain();
             }

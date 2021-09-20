@@ -11,7 +11,8 @@ namespace System.Collections.Concurrent.Tests
             TKey key,
             Func<TKey, TArg, TValue> valueFactory,
             TArg factoryArgument
-        ) {
+        )
+        {
             if (key == null)
                 throw new ArgumentNullException(nameof(key));
             if (valueFactory == null)
@@ -35,7 +36,8 @@ namespace System.Collections.Concurrent.Tests
             Func<TKey, TArg, TValue> addValueFactory,
             Func<TKey, TValue, TArg, TValue> updateValueFactory,
             TArg factoryArgument
-        ) {
+        )
+        {
             if (key == null)
                 throw new ArgumentNullException(nameof(key));
             if (addValueFactory == null)

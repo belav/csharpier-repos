@@ -27,7 +27,8 @@ namespace Microsoft.AspNetCore.DataProtection
             this IDataProtectionBuilder builder,
             Func<IDatabase> databaseFactory,
             RedisKey key
-        ) {
+        )
+        {
             if (builder == null)
             {
                 throw new ArgumentNullException(nameof(builder));
@@ -48,7 +49,8 @@ namespace Microsoft.AspNetCore.DataProtection
         public static IDataProtectionBuilder PersistKeysToStackExchangeRedis(
             this IDataProtectionBuilder builder,
             IConnectionMultiplexer connectionMultiplexer
-        ) {
+        )
+        {
             return PersistKeysToStackExchangeRedis(
                 builder,
                 connectionMultiplexer,
@@ -67,7 +69,8 @@ namespace Microsoft.AspNetCore.DataProtection
             this IDataProtectionBuilder builder,
             IConnectionMultiplexer connectionMultiplexer,
             RedisKey key
-        ) {
+        )
+        {
             if (builder == null)
             {
                 throw new ArgumentNullException(nameof(builder));
@@ -87,7 +90,8 @@ namespace Microsoft.AspNetCore.DataProtection
             IDataProtectionBuilder builder,
             Func<IDatabase> databaseFactory,
             RedisKey key
-        ) {
+        )
+        {
             builder.Services.Configure<KeyManagementOptions>(
                 options =>
                 {

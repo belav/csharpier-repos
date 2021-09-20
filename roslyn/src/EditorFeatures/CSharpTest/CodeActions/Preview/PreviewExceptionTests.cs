@@ -70,7 +70,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeRefactorings
         private static async Task GetPreview(
             TestWorkspace workspace,
             CodeRefactoringProvider provider
-        ) {
+        )
+        {
             var codeActions = new List<CodeAction>();
             RefactoringSetup(
                 workspace,
@@ -118,7 +119,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeRefactorings
         private static async Task ActionSets(
             TestWorkspace workspace,
             CodeRefactoringProvider provider
-        ) {
+        )
+        {
             var codeActions = new List<CodeAction>();
             RefactoringSetup(
                 workspace,
@@ -146,7 +148,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeRefactorings
             List<CodeAction> codeActions,
             out EditorLayerExtensionManager.ExtensionManager extensionManager,
             out VisualStudio.Text.ITextBuffer textBuffer
-        ) {
+        )
+        {
             var document = GetDocument(workspace);
             textBuffer = workspace.GetTestDocument(document.Id).GetTextBuffer();
             var span = document.GetSyntaxRootAsync().Result.Span;

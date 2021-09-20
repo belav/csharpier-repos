@@ -84,7 +84,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.RenameTracking
                         FunctionId.Rename_Tracking_BufferChanged,
                         CancellationToken.None
                     )
-                ) {
+                )
+                {
                     // When the buffer changes, several things might be happening:
                     // 1. If a non-identifier character has been added or deleted, we stop tracking
                     //    completely.
@@ -185,14 +186,16 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.RenameTracking
                 while (
                     leftSidePosition > 0
                     && IsTrackableCharacter(syntaxFactsService, beforeText[leftSidePosition - 1])
-                ) {
+                )
+                {
                     leftSidePosition--;
                 }
 
                 while (
                     rightSidePosition < beforeText.Length
                     && IsTrackableCharacter(syntaxFactsService, beforeText[rightSidePosition])
-                ) {
+                )
+                {
                     rightSidePosition++;
                 }
 
@@ -245,7 +248,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.RenameTracking
                 if (
                     this.TrackingSession != null
                     && this.TrackingSession.IsDefinitelyRenamableIdentifier()
-                ) {
+                )
+                {
                     var document =
                         _buffer.CurrentSnapshot.GetOpenDocumentInCurrentContextWithChanges();
                     if (document != null)
@@ -294,7 +298,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.RenameTracking
                 bool isSmartTagCheck = false,
                 bool waitForResult = false,
                 CancellationToken cancellationToken = default
-            ) {
+            )
+            {
                 // This needs to be able to run on a background thread for the diagnostic.
 
                 trackingSession = this.TrackingSession;
@@ -319,7 +324,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.RenameTracking
                 IEnumerable<IRefactorNotifyService> refactorNotifyServices,
                 ITextUndoHistoryRegistry undoHistoryRegistry,
                 CancellationToken cancellationToken
-            ) {
+            )
+            {
                 try
                 {
                     // This can be called on a background thread. We are being asked whether a
@@ -336,7 +342,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.RenameTracking
                             waitForResult: true,
                             cancellationToken: cancellationToken
                         )
-                    ) {
+                    )
+                    {
                         var snapshotSpan = trackingSession.TrackingSpan.GetSpan(
                             Buffer.CurrentSnapshot
                         );
@@ -406,7 +413,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.RenameTracking
 
             private bool TryGetLanguageHeuristicsService(
                 out IRenameTrackingLanguageHeuristicsService languageHeuristicsService
-            ) {
+            )
+            {
                 // Can be called on a background thread
 
                 languageHeuristicsService = null;

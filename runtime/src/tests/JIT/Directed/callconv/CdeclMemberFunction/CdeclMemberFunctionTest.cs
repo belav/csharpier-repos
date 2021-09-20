@@ -175,7 +175,8 @@ unsafe class CdeclMemberFunctionTest
     private static CdeclMemberFunctionNative.C CreateCWithUnmanagedCallersOnlyVTable(
         float width,
         float height
-    ) {
+    )
+    {
         return new CdeclMemberFunctionNative.C
         {
             vtable = UnmanagedCallersOnlyVtable,
@@ -213,7 +214,8 @@ unsafe class CdeclMemberFunctionTest
     private static CdeclMemberFunctionNative.SizeF GetSize(
         CdeclMemberFunctionNative.C* c,
         int unused
-    ) {
+    )
+    {
         return new CdeclMemberFunctionNative.SizeF { width = c->width, height = c->height };
     }
 
@@ -230,7 +232,8 @@ unsafe class CdeclMemberFunctionTest
     )]
     private static CdeclMemberFunctionNative.IntWrapper GetHeightAsInt(
         CdeclMemberFunctionNative.C* c
-    ) {
+    )
+    {
         return new CdeclMemberFunctionNative.IntWrapper { i = (int)c->height };
     }
 

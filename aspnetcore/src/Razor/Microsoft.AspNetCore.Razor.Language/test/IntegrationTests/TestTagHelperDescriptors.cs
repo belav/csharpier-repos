@@ -762,7 +762,8 @@ namespace Microsoft.AspNetCore.Razor.Language.IntegrationTests
             string assemblyName,
             IEnumerable<Action<BoundAttributeDescriptorBuilder>> attributes = null,
             IEnumerable<Action<TagMatchingRuleDescriptorBuilder>> ruleBuilders = null
-        ) {
+        )
+        {
             var builder = TagHelperDescriptorBuilder.Create(typeName, assemblyName);
             builder.TypeName(typeName);
 
@@ -803,7 +804,8 @@ namespace Microsoft.AspNetCore.Razor.Language.IntegrationTests
             BoundAttributeDescriptorBuilder builder,
             string name,
             PropertyInfo propertyInfo
-        ) {
+        )
+        {
             builder.Name(name)
                 .PropertyName(propertyInfo.Name)
                 .TypeName(propertyInfo.PropertyType.FullName);

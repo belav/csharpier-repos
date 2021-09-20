@@ -32,7 +32,8 @@ namespace System.Diagnostics
         public override IDisposable Subscribe(
             IObserver<KeyValuePair<string, object>> observer,
             Predicate<string> isEnabled
-        ) {
+        )
+        {
             IDisposable result = base.Subscribe(observer, isEnabled);
             Initialize();
             return result;
@@ -44,7 +45,8 @@ namespace System.Diagnostics
         public override IDisposable Subscribe(
             IObserver<KeyValuePair<string, object>> observer,
             Func<string, object, object, bool> isEnabled
-        ) {
+        )
+        {
             IDisposable result = base.Subscribe(observer, isEnabled);
             Initialize();
             return result;
@@ -495,7 +497,8 @@ namespace System.Diagnostics
                         if (
                             coreResponse != null
                             && s_coreResponseDataType.IsInstanceOfType(coreResponse)
-                        ) {
+                        )
+                        {
                             HttpStatusCode status = s_coreStatusCodeAccessor(coreResponse);
                             WebHeaderCollection headers = s_coreHeadersAccessor(coreResponse);
 
@@ -577,7 +580,8 @@ namespace System.Diagnostics
                     using (
                         IEnumerator<KeyValuePair<string, string>> e =
                             activity.Baggage.GetEnumerator()
-                    ) {
+                    )
+                    {
                         if (e.MoveNext())
                         {
                             StringBuilder baggage = new StringBuilder();
@@ -619,14 +623,16 @@ namespace System.Diagnostics
             HttpWebRequest request,
             HttpStatusCode statusCode,
             WebHeaderCollection headers
-        ) {
+        )
+        {
             // Response event could be received several times for the same request in case it was redirected
             // IsLastResponse checks if response is the last one (no more redirects will happen)
             // based on response StatusCode and number or redirects done so far
             if (
                 request.Headers.Get(RequestIdHeaderName) != null
                 && IsLastResponse(request, statusCode)
-            ) {
+            )
+            {
                 this.Write(
                     RequestStopExName,
                     new { Request = request, StatusCode = statusCode, Headers = headers }
@@ -719,7 +725,8 @@ namespace System.Diagnostics
                 || s_coreResponseDataType == null
                 || s_coreStatusCodeAccessor == null
                 || s_coreHeadersAccessor == null
-            ) {
+            )
+            {
                 // If anything went wrong here, just return false. There is nothing we can do.
                 throw new InvalidOperationException(SR.UnableToInitialize);
             }
@@ -780,7 +787,8 @@ namespace System.Diagnostics
             Type classType,
             string fieldName,
             BindingFlags flags
-        ) {
+        )
+        {
             FieldInfo field = classType.GetField(fieldName, flags);
             if (field != null)
             {

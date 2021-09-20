@@ -718,7 +718,8 @@ namespace System.IO.Tests
         public async Task WriteLineAsyncStringBuilderTest(
             bool isSynchronized,
             StringBuilder testData
-        ) {
+        )
+        {
             if (!isSynchronized && !PlatformDetection.IsThreadingSupported)
             {
                 throw new SkipTestException(nameof(PlatformDetection.IsThreadingSupported));
@@ -785,7 +786,8 @@ namespace System.IO.Tests
                     new StringBuilder(new string(TestDataProvider.CharData)),
                     complexStringBuilder
                 }
-            ) {
+            )
+            {
                 foreach (bool isSynchronized in new bool[] { true, false })
                 {
                     yield return new object[] { isSynchronized, testData };

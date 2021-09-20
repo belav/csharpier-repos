@@ -48,7 +48,8 @@ namespace System.Web.Http.WebHost.Routing
 
         private static HttpRouteExceptionRouteHandler CreateProductUnderTest(
             ExceptionDispatchInfo exceptionInfo
-        ) {
+        )
+        {
             return new HttpRouteExceptionRouteHandler(exceptionInfo);
         }
     }

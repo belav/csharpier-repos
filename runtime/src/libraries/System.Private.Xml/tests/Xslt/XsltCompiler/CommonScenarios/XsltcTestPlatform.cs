@@ -82,7 +82,8 @@ namespace System.Xml.Tests
             object param5,
             object param6,
             object param7
-        ) {
+        )
+        {
             string platform = "X86"; //CModInfo.Options["Arc"] as String;
             bool isSameMachine = string.Compare(param7.ToString(), "yes", true) == 0;
 

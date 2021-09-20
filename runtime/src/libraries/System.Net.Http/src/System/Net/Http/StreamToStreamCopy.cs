@@ -25,7 +25,8 @@ namespace System.Net.Http
             Stream destination,
             int bufferSize,
             bool disposeSource
-        ) {
+        )
+        {
             Debug.Assert(source != null);
             Debug.Assert(destination != null);
             Debug.Assert(bufferSize >= 0);
@@ -57,7 +58,8 @@ namespace System.Net.Http
             int bufferSize,
             bool disposeSource,
             CancellationToken cancellationToken = default(CancellationToken)
-        ) {
+        )
+        {
             Debug.Assert(source != null);
             Debug.Assert(destination != null);
             Debug.Assert(bufferSize >= 0);

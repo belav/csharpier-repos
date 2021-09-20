@@ -19,7 +19,8 @@ namespace Microsoft.AspNetCore.Http.Abstractions.Tests
             CookieSecurePolicy policy,
             bool requestIsHttps,
             bool secure
-        ) {
+        )
+        {
             var builder = new CookieBuilder { SecurePolicy = policy };
             var context = new DefaultHttpContext();
             context.Request.IsHttps = requestIsHttps;

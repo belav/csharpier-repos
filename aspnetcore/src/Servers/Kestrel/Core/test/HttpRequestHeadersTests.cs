@@ -442,7 +442,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Tests
         public void ValueReuseLatin1NotConfusedForUtf16AndStillRejected(
             bool reuseValue,
             KnownHeader header
-        ) {
+        )
+        {
             var headers = new HttpRequestHeaders(reuseHeaderValues: reuseValue);
 
             var headerValue = new char[127]; // 64 + 32 + 16 + 8 + 4 + 2 + 1
@@ -514,7 +515,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Tests
         public void Latin1ValuesAcceptedInLatin1ModeButNotReused(
             bool reuseValue,
             KnownHeader header
-        ) {
+        )
+        {
             var headers = new HttpRequestHeaders(
                 reuseHeaderValues: reuseValue,
                 _ => Encoding.Latin1
@@ -801,7 +803,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Tests
             string nextName,
             string prevValue,
             string nextValue
-        ) {
+        )
+        {
             headers.Reset();
             var headerName = Encoding.ASCII.GetBytes(prevName).AsSpan();
             var prevSpan = Encoding.UTF8.GetBytes(prevValue).AsSpan();

@@ -1446,7 +1446,8 @@ class P
         public async Task FirstArgumentOfInvocation_PossibleLambdaExpression(
             bool isLambda,
             bool hasTypedChar
-        ) {
+        )
+        {
             var overload = isLambda
                 ? "bool Bar(Func<int, bool> predicate) => true;"
                 : "bool Bar(int x) => true;";
@@ -1483,7 +1484,8 @@ class P
         [WorkItem(49656, "https://github.com/dotnet/roslyn/issues/49656")]
         public async Task FirstArgumentOfInvocation_WithOverloadAcceptEmptyArgumentList(
             string overloadParameterList
-        ) {
+        )
+        {
             var markup =
                 $@"
 using System;

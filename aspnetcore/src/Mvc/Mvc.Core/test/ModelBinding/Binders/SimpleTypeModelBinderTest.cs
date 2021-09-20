@@ -40,7 +40,8 @@ namespace Microsoft.AspNetCore.Mvc.ModelBinding.Binders
         [InlineData(" \t \r\n ")]
         public async Task BindModel_ReturnsProvidedWhitespaceString_WhenNotConvertEmptyStringToNull(
             string value
-        ) {
+        )
+        {
             // Arrange
             var bindingContext = GetBindingContext(typeof(string));
             bindingContext.ValueProvider = new SimpleValueProvider { { "theModelName", value } };
@@ -89,7 +90,8 @@ namespace Microsoft.AspNetCore.Mvc.ModelBinding.Binders
         [MemberData(nameof(ConvertibleTypeData))]
         public async Task BindModel_ReturnsFailure_IfTypeCanBeConverted_AndConversionFails(
             Type destinationType
-        ) {
+        )
+        {
             // Arrange
             var bindingContext = GetBindingContext(destinationType);
             bindingContext.ValueProvider = new SimpleValueProvider
@@ -178,7 +180,8 @@ namespace Microsoft.AspNetCore.Mvc.ModelBinding.Binders
         [MemberData(nameof(IntegerModelMetadataDataSet))]
         public async Task BindModel_EmptyValueProviderResult_ReturnsFailedAndLogsSuccessfully(
             ModelMetadata metadata
-        ) {
+        )
+        {
             // Arrange
             var bindingContext = GetBindingContext(typeof(int));
             bindingContext.ModelMetadata = metadata;
@@ -255,7 +258,8 @@ namespace Microsoft.AspNetCore.Mvc.ModelBinding.Binders
         [MemberData(nameof(IntegerModelMetadataDataSet))]
         public async Task BindModel_ValidValueProviderResult_ReturnsModelAndLogsSuccessfully(
             ModelMetadata metadata
-        ) {
+        )
+        {
             // Arrange
             var bindingContext = GetBindingContext(typeof(int));
             bindingContext.ModelMetadata = metadata;

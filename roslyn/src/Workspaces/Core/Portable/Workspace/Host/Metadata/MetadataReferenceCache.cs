@@ -65,7 +65,8 @@ namespace Microsoft.CodeAnalysis.Host
             public MetadataReference GetAddOrUpdate(
                 string path,
                 MetadataReferenceProperties properties
-            ) {
+            )
+            {
                 using (_gate.DisposableWait())
                 {
                     MetadataReference mref = null;
@@ -74,7 +75,8 @@ namespace Microsoft.CodeAnalysis.Host
                             _references.TryGetValue(properties, out var weakref)
                             && weakref.TryGetTarget(out mref)
                         )
-                    ) {
+                    )
+                    {
                         // try to base this metadata reference off of an existing one, so we don't load the metadata bytes twice.
                         foreach (var wr in _references.Values)
                         {

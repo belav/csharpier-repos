@@ -51,7 +51,8 @@ namespace R2RTest
             IEnumerable<BuildFolder> buildFolders,
             IEnumerable<CompilerRunner> compilerRunners,
             BuildOptions options
-        ) {
+        )
+        {
             _buildFolders = buildFolders;
             _compilerRunners = compilerRunners;
             _options = options;
@@ -304,7 +305,8 @@ namespace R2RTest
                         string frameworkDll in ComputeManagedAssemblies.GetManagedAssembliesInFolder(
                             _options.CoreRootDirectory.FullName
                         )
-                    ) {
+                    )
+                    {
                         string simpleName = Path.GetFileNameWithoutExtension(frameworkDll);
                         if (FrameworkExclusion.Exclude(simpleName, runner.Index, out string reason))
                         {
@@ -364,7 +366,8 @@ namespace R2RTest
                     string frameworkDll in ComputeManagedAssemblies.GetManagedAssembliesInFolder(
                         _options.CoreRootDirectory.FullName
                     )
-                ) {
+                )
+                {
                     string simpleName = Path.GetFileNameWithoutExtension(frameworkDll);
 
                     ProcessInfo[] processes = new ProcessInfo[(int)CompilerIndex.Count];
@@ -515,7 +518,8 @@ namespace R2RTest
         private void AnalyzeCompilationLog(
             ProcessInfo compilationProcess,
             CompilerIndex runnerIndex
-        ) {
+        )
+        {
             Dictionary<string, byte> managedSequentialTarget;
             Dictionary<string, byte> requiresMarshalingTarget;
 
@@ -687,7 +691,8 @@ namespace R2RTest
             List<ProcessInfo> executionsToRun,
             BuildFolder folder,
             Stopwatch stopwatch
-        ) {
+        )
+        {
             foreach (ProcessInfo[] execution in folder.Executions)
             {
                 foreach (CompilerRunner runner in _compilerRunners)
@@ -726,7 +731,8 @@ namespace R2RTest
             StreamWriter logWriter,
             string metric,
             IEnumerable<ProcessInfo> processes
-        ) {
+        )
+        {
             const int TopAppCount = 10;
 
             IEnumerable<ProcessInfo> selection = processes.Where(process => !process.IsEmpty)
@@ -884,7 +890,8 @@ namespace R2RTest
                                     int outcomeIndex = 0;
                                     outcomeIndex < (int)ExecutionOutcome.Count;
                                     outcomeIndex++
-                                ) {
+                                )
+                                {
                                     if ((executionFailureOutcomeMask & (1 << outcomeIndex)) != 0)
                                     {
                                         executionOutcomes[outcomeIndex, (int)CompilerIndex.Count]++;
@@ -961,7 +968,8 @@ namespace R2RTest
                         int outcomeIndex = 0;
                         outcomeIndex < (int)CompilationOutcome.Count;
                         outcomeIndex++
-                    ) {
+                    )
+                    {
                         logWriter.Write($"{((CompilationOutcome)outcomeIndex).ToString(), 12} |");
                         foreach (CompilerRunner runner in _compilerRunners)
                         {
@@ -989,7 +997,8 @@ namespace R2RTest
                         int outcomeIndex = 0;
                         outcomeIndex < (int)ExecutionOutcome.Count;
                         outcomeIndex++
-                    ) {
+                    )
+                    {
                         logWriter.Write($"{((ExecutionOutcome)outcomeIndex).ToString(), 12} |");
                         foreach (CompilerRunner runner in _compilerRunners)
                         {
@@ -1077,7 +1086,8 @@ namespace R2RTest
                     kvp => kvp.Key,
                     StringComparer.OrdinalIgnoreCase
                 )
-            ) {
+            )
+            {
                 var line = new StringBuilder();
                 line.Append(exclusion.Key);
                 line.Append(' ', keyLength - exclusion.Key.Length);
@@ -1150,7 +1160,8 @@ namespace R2RTest
                         buildFolderPath.Equals(folder, StringComparison.OrdinalIgnoreCase)
                         || buildFolderPath.StartsWith(folder, StringComparison.OrdinalIgnoreCase)
                             && buildFolderPath[folder.Length] == Path.DirectorySeparatorChar
-                    ) {
+                    )
+                    {
                         if (!_options.Exe)
                         {
                             foreach (ProcessInfo[] compilation in buildFolder.Compilations)
@@ -1161,7 +1172,8 @@ namespace R2RTest
                                     if (
                                         compilation[(int)runner.Index] != null
                                         && !compilation[(int)runner.Index].Succeeded
-                                    ) {
+                                    )
+                                    {
                                         anyIlcFail = true;
                                         break;
                                     }
@@ -1183,7 +1195,8 @@ namespace R2RTest
                                     if (
                                         execution[(int)runner.Index] != null
                                         && !execution[(int)runner.Index].Succeeded
-                                    ) {
+                                    )
+                                    {
                                         anyExeFail = true;
                                         break;
                                     }
@@ -1221,7 +1234,8 @@ namespace R2RTest
                 long cpaotSize,
                 string crossgenPath,
                 long crossgenSize
-            ) {
+            )
+            {
                 CpaotPath = cpaotPath;
                 CpaotSize = cpaotSize;
                 CrossgenPath = crossgenPath;
@@ -1243,7 +1257,8 @@ namespace R2RTest
                     if (
                         (crossgenCompilation?.Succeeded ?? false)
                         && (cpaotCompilation?.Succeeded ?? false)
-                    ) {
+                    )
+                    {
                         long cpaotSize;
                         try
                         {
@@ -1513,7 +1528,8 @@ namespace R2RTest
                                                 FileMode.Open,
                                                 FileAccess.Read
                                             )
-                                        ) {
+                                        )
+                                        {
                                             input.CopyTo(combinedLog.BaseStream);
                                             input.Seek(0, SeekOrigin.Begin);
                                             input.CopyTo(runnerLog.BaseStream);
@@ -1555,7 +1571,8 @@ namespace R2RTest
                                                 FileMode.Open,
                                                 FileAccess.Read
                                             )
-                                        ) {
+                                        )
+                                        {
                                             input.CopyTo(combinedLog.BaseStream);
                                             input.Seek(0, SeekOrigin.Begin);
                                             input.CopyTo(runnerLog.BaseStream);
@@ -1768,7 +1785,8 @@ namespace R2RTest
             string fileName,
             Dictionary<string, byte> cpaot,
             Dictionary<string, byte> crossgen
-        ) {
+        )
+        {
             if (cpaot.Count == 0 && crossgen.Count == 0)
             {
                 // Don't emit empty marker diffs just polluting the output folder
@@ -1859,7 +1877,8 @@ namespace R2RTest
             StreamWriter logWriter,
             string title,
             IEnumerable<string> items
-        ) {
+        )
+        {
             bool first = true;
             foreach (string item in items)
             {
@@ -1877,7 +1896,8 @@ namespace R2RTest
         private void WriteFileListPerCompilationOutcome(
             string outputFileName,
             CompilationOutcome outcome
-        ) {
+        )
+        {
             var filteredTestList = new List<string>();
             foreach (BuildFolder folder in _buildFolders)
             {
@@ -1890,7 +1910,8 @@ namespace R2RTest
                             compilationPerRunner != null
                             && GetCompilationOutcome(compilationPerRunner) == outcome
                             && compilationPerRunner.Parameters != null
-                        ) {
+                        )
+                        {
                             filteredTestList.Add(compilationPerRunner.Parameters.OutputFileName);
                         }
                     }
@@ -1904,7 +1925,8 @@ namespace R2RTest
         private void WriteFileListPerExecutionOutcome(
             string outputFileName,
             ExecutionOutcome outcome
-        ) {
+        )
+        {
             var filteredTestList = new List<string>();
             foreach (BuildFolder folder in _buildFolders)
             {
@@ -1917,7 +1939,8 @@ namespace R2RTest
                             executionPerRunner != null
                             && GetExecutionOutcome(executionPerRunner) == outcome
                             && executionPerRunner.Parameters != null
-                        ) {
+                        )
+                        {
                             filteredTestList.Add(executionPerRunner.Parameters.OutputFileName);
                         }
                     }

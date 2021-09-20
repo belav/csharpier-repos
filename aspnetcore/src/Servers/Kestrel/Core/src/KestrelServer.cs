@@ -29,7 +29,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core
             IOptions<KestrelServerOptions> options,
             IConnectionListenerFactory transportFactory,
             ILoggerFactory loggerFactory
-        ) {
+        )
+        {
             _innerKestrelServer = new KestrelServerImpl(
                 options,
                 new[]

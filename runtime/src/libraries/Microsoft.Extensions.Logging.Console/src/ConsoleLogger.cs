@@ -39,7 +39,8 @@ namespace Microsoft.Extensions.Logging.Console
             TState state,
             Exception exception,
             Func<TState, Exception, string> formatter
-        ) {
+        )
+        {
             if (!IsEnabled(logLevel))
             {
                 return;

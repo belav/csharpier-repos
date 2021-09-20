@@ -30,7 +30,8 @@ namespace Microsoft.Diagnostics.Tools.Pgo
                         simpleName,
                         StringComparison.OrdinalIgnoreCase
                     ) == 0
-                ) {
+                )
+                {
                     _logger.PrintError(str);
                 }
                 else
@@ -52,7 +53,8 @@ namespace Microsoft.Diagnostics.Tools.Pgo
                         simpleName,
                         StringComparison.OrdinalIgnoreCase
                     ) == 0
-                ) {
+                )
+                {
                     _logger.PrintError(str);
                 }
                 else

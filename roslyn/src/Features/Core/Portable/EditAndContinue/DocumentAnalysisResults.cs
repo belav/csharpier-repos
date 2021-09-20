@@ -88,7 +88,8 @@ namespace Microsoft.CodeAnalysis.EditAndContinue
             ImmutableArray<SourceLineUpdate> lineEditsOpt,
             bool hasChanges,
             bool hasSyntaxErrors
-        ) {
+        )
+        {
             Debug.Assert(!rudeEdits.IsDefault);
 
             if (hasSyntaxErrors)

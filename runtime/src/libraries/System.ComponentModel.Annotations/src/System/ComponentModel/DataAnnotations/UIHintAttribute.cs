@@ -41,7 +41,8 @@ namespace System.ComponentModel.DataAnnotations
             string uiHint,
             string? presentationLayer,
             params object?[]? controlParameters
-        ) {
+        )
+        {
             _implementation = new UIHintImplementation(
                 uiHint,
                 presentationLayer,
@@ -80,7 +81,8 @@ namespace System.ComponentModel.DataAnnotations
                 string uiHint,
                 string? presentationLayer,
                 params object?[]? controlParameters
-            ) {
+            )
+            {
                 UIHint = uiHint;
                 PresentationLayer = presentationLayer;
                 if (controlParameters != null)
@@ -136,7 +138,8 @@ namespace System.ComponentModel.DataAnnotations
                     otherImplementation is null
                     || UIHint != otherImplementation.UIHint
                     || PresentationLayer != otherImplementation.PresentationLayer
-                ) {
+                )
+                {
                     return false;
                 }
 

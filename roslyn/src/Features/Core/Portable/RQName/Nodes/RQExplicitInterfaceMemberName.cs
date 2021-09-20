@@ -14,7 +14,8 @@ namespace Microsoft.CodeAnalysis.Features.RQName.Nodes
         public RQExplicitInterfaceMemberName(
             RQType interfaceType,
             RQOrdinaryMethodPropertyOrEventName name
-        ) {
+        )
+        {
             InterfaceType = interfaceType;
             Name = name;
         }

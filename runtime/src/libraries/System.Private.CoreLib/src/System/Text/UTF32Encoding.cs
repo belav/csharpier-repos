@@ -55,11 +55,8 @@ namespace System.Text
             _emitUTF32ByteOrderMark = byteOrderMark;
         }
 
-        public UTF32Encoding(
-            bool bigEndian,
-            bool byteOrderMark,
-            bool throwOnInvalidCharacters
-        ) : this(bigEndian, byteOrderMark)
+        public UTF32Encoding(bool bigEndian, bool byteOrderMark, bool throwOnInvalidCharacters)
+            : this(bigEndian, byteOrderMark)
         {
             _isThrowException = throwOnInvalidCharacters;
 
@@ -170,7 +167,8 @@ namespace System.Text
             int charCount,
             byte[] bytes,
             int byteIndex
-        ) {
+        )
+        {
             if (s == null || bytes == null)
                 throw new ArgumentNullException(
                     s == null ? nameof(s) : nameof(bytes),
@@ -219,7 +217,8 @@ namespace System.Text
             int charCount,
             byte[] bytes,
             int byteIndex
-        ) {
+        )
+        {
             // Validate parameters
             if (chars == null || bytes == null)
                 throw new ArgumentNullException(
@@ -347,7 +346,8 @@ namespace System.Text
             int byteCount,
             char[] chars,
             int charIndex
-        ) {
+        )
+        {
             // Validate Parameters
             if (bytes == null || chars == null)
                 throw new ArgumentNullException(
@@ -599,7 +599,8 @@ namespace System.Text
             byte* bytes,
             int byteCount,
             EncoderNLS? encoder
-        ) {
+        )
+        {
             Debug.Assert(chars != null, "[UTF32Encoding.GetBytes]chars!=null");
             Debug.Assert(bytes != null, "[UTF32Encoding.GetBytes]bytes!=null");
             Debug.Assert(byteCount >= 0, "[UTF32Encoding.GetBytes]byteCount >=0");
@@ -975,7 +976,8 @@ namespace System.Text
             char* chars,
             int charCount,
             DecoderNLS? baseDecoder
-        ) {
+        )
+        {
             Debug.Assert(chars != null, "[UTF32Encoding.GetChars]chars!=null");
             Debug.Assert(bytes != null, "[UTF32Encoding.GetChars]bytes!=null");
             Debug.Assert(byteCount >= 0, "[UTF32Encoding.GetChars]byteCount >=0");

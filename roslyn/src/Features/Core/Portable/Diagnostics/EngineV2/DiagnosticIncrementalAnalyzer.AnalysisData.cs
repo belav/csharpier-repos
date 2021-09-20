@@ -100,7 +100,8 @@ namespace Microsoft.CodeAnalysis.Diagnostics.EngineV2
                 ProjectId projectId,
                 VersionStamp version,
                 ImmutableDictionary<DiagnosticAnalyzer, DiagnosticAnalysisResult> result
-            ) {
+            )
+            {
                 ProjectId = projectId;
                 Version = version;
                 Result = result;
@@ -127,7 +128,8 @@ namespace Microsoft.CodeAnalysis.Diagnostics.EngineV2
                 IEnumerable<StateSet> stateSets,
                 bool avoidLoadingData,
                 CancellationToken cancellationToken
-            ) {
+            )
+            {
                 VersionStamp? version = null;
 
                 var builder = ImmutableDictionary.CreateBuilder<
@@ -152,7 +154,8 @@ namespace Microsoft.CodeAnalysis.Diagnostics.EngineV2
                     }
                     else if (
                         version.Value != VersionStamp.Default && version.Value != result.Version
-                    ) {
+                    )
+                    {
                         // if not all version is same, set version as default.
                         // this can happen at the initial data loading or
                         // when document is closed and we put active file state to project state

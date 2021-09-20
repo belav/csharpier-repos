@@ -462,7 +462,8 @@ namespace System.Xml.Tests
                 || ol == "XmlNodeReader"
                 || ol == "XmlNodeReaderDD"
                 || ol == "XsltReader"
-            ) {
+            )
+            {
                 throw new CTestSkippedException("Skipped: OverLoad " + ol);
             }
             _overload = (ReaderOverload)Enum.Parse(typeof(ReaderOverload), ol);

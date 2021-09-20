@@ -488,7 +488,8 @@ namespace Microsoft.EntityFrameworkCore.TestModels.InheritanceRelationshipsModel
             IReadOnlyList<CollectionOnBase> collectionsOnBase,
             IReadOnlyList<CollectionOnDerived> collectionsOnDerived,
             IReadOnlyList<NestedCollectionBase> nestedCollections
-        ) {
+        )
+        {
             // BaseReferenceOnBase.NestedReference (inverse: ParentReference)
             // BaseReferenceOnBase.NestedCollection (inverse: ParentReference)
             baseReferencesOnBase[0].NestedReference = nestedReferences[0];

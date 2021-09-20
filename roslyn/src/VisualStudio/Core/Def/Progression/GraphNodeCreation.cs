@@ -22,7 +22,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Progression
             ISymbol symbol,
             Solution solution,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             if (symbol == null)
             {
                 throw new ArgumentNullException(nameof(symbol));
@@ -102,7 +103,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Progression
             ISymbol symbol,
             Solution solution,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             if (graph == null)
             {
                 throw new ArgumentNullException(nameof(graph));

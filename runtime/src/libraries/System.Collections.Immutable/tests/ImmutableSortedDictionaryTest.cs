@@ -563,13 +563,15 @@ namespace System.Collections.Immutable.Tests
 
         protected override IImmutableDictionary<string, TValue> Empty<TValue>(
             StringComparer comparer
-        ) {
+        )
+        {
             return ImmutableSortedDictionary.Create<string, TValue>(comparer);
         }
 
         protected override IEqualityComparer<TValue> GetValueComparer<TKey, TValue>(
             IImmutableDictionary<TKey, TValue> dictionary
-        ) {
+        )
+        {
             return ((ImmutableSortedDictionary<TKey, TValue>)dictionary).ValueComparer;
         }
 
@@ -577,7 +579,8 @@ namespace System.Collections.Immutable.Tests
             ImmutableSortedDictionary<TKey, TValue> map,
             TKey key,
             TValue value
-        ) {
+        )
+        {
             Assert.False(map.ContainsValue(value));
             Assert.True(map.Add(key, value).ContainsValue(value));
         }
@@ -585,7 +588,8 @@ namespace System.Collections.Immutable.Tests
         private static IImmutableDictionary<TKey, TValue> Empty<TKey, TValue>(
             IComparer<TKey> keyComparer = null,
             IEqualityComparer<TValue> valueComparer = null
-        ) {
+        )
+        {
             return ImmutableSortedDictionary<TKey, TValue>.Empty.WithComparers(
                 keyComparer,
                 valueComparer

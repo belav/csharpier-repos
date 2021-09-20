@@ -23,7 +23,8 @@ namespace Microsoft.AspNetCore.Server.IIS.FunctionalTests
         public override Task<PublishedApplication> Publish(
             DeploymentParameters deploymentParameters,
             ILogger logger
-        ) {
+        )
+        {
             var path = Path.Combine(AppContext.BaseDirectory, GetProfileName(deploymentParameters));
 
             if (!Directory.Exists(path))

@@ -24,7 +24,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.CodeModel.Colle
             object parent,
             ProjectId projectId,
             ITypeSymbol typeSymbol
-        ) {
+        )
+        {
             var collection = new ExternalMemberCollection(state, parent, projectId, typeSymbol);
             return (EnvDTE.CodeElements)ComAggregate.CreateAggregatedObject(collection);
         }
@@ -59,7 +60,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.CodeModel.Colle
                         _typeSymbolId.Resolve(project.GetCompilationAsync().Result).Symbol
                         is ITypeSymbol typeSymbol
                     )
-                ) {
+                )
+                {
                     throw Exceptions.ThrowEFail();
                 }
 

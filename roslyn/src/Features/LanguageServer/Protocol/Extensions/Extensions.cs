@@ -32,7 +32,8 @@ namespace Microsoft.CodeAnalysis.LanguageServer
             this Solution solution,
             Uri documentUri,
             string? clientName
-        ) {
+        )
+        {
             var documentIds = GetDocumentIds(solution, documentUri);
 
             var documents = documentIds.SelectAsArray(id => solution.GetRequiredDocument(id));
@@ -43,7 +44,8 @@ namespace Microsoft.CodeAnalysis.LanguageServer
         public static ImmutableArray<DocumentId> GetDocumentIds(
             this Solution solution,
             Uri documentUri
-        ) {
+        )
+        {
             // TODO: we need to normalize this. but for now, we check both absolute and local path
             //       right now, based on who calls this, solution might has "/" or "\\" as directory
             //       separator
@@ -60,7 +62,8 @@ namespace Microsoft.CodeAnalysis.LanguageServer
         private static ImmutableArray<Document> FilterDocumentsByClientName(
             ImmutableArray<Document> documents,
             string? clientName
-        ) {
+        )
+        {
             // If we don't have a client name, then we're done filtering
             if (clientName == null)
             {
@@ -92,7 +95,8 @@ namespace Microsoft.CodeAnalysis.LanguageServer
             this Solution solution,
             TextDocumentIdentifier documentIdentifier,
             string? clientName
-        ) {
+        )
+        {
             var documents = solution.GetDocuments(documentIdentifier.Uri, clientName);
             if (documents.Length == 0)
             {
@@ -139,7 +143,8 @@ namespace Microsoft.CodeAnalysis.LanguageServer
             this TextDocument document,
             LinePosition linePosition,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var text = await document.GetTextAsync(cancellationToken).ConfigureAwait(false);
             return text.Lines.GetPosition(linePosition);
         }

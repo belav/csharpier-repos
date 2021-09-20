@@ -84,7 +84,8 @@ namespace System.Web.Http.SelfHost.Channels
                 ArraySegment<byte> buffer,
                 BufferManager bufferManager,
                 string contentType
-            ) {
+            )
+            {
                 if (bufferManager == null)
                 {
                     throw Error.ArgumentNull("bufferManager");
@@ -120,7 +121,8 @@ namespace System.Web.Http.SelfHost.Channels
                 Stream stream,
                 int maxSizeOfHeaders,
                 string contentType
-            ) {
+            )
+            {
                 if (stream == null)
                 {
                     throw Error.ArgumentNull("stream");
@@ -147,7 +149,8 @@ namespace System.Web.Http.SelfHost.Channels
                 int maxMessageSize,
                 BufferManager bufferManager,
                 int messageOffset
-            ) {
+            )
+            {
                 if (message == null)
                 {
                     throw Error.ArgumentNull("message");
@@ -194,7 +197,8 @@ namespace System.Web.Http.SelfHost.Channels
                         maxMessageSize,
                         bufferManager
                     )
-                ) {
+                )
+                {
                     int num;
                     stream.Skip(messageOffset);
                     WriteMessage(message, stream);
@@ -254,7 +258,8 @@ namespace System.Web.Http.SelfHost.Channels
                 HttpResponseMessage response,
                 Stream stream,
                 HttpMessageEncodingRequestContext requestContext
-            ) {
+            )
+            {
                 try
                 {
                     await response.Content.CopyToAsync(stream);

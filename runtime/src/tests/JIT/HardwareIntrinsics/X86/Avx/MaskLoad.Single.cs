@@ -418,7 +418,8 @@ namespace JIT.HardwareIntrinsics.X86
             Vector256<Single> right,
             void* result,
             [CallerMemberName] string method = ""
-        ) {
+        )
+        {
             Single[] inArray1 = new Single[Op1ElementCount];
             Single[] inArray2 = new Single[Op2ElementCount];
             Single[] outArray = new Single[RetElementCount];
@@ -443,7 +444,8 @@ namespace JIT.HardwareIntrinsics.X86
             void* right,
             void* result,
             [CallerMemberName] string method = ""
-        ) {
+        )
+        {
             Single[] inArray1 = new Single[Op1ElementCount];
             Single[] inArray2 = new Single[Op2ElementCount];
             Single[] outArray = new Single[RetElementCount];
@@ -472,7 +474,8 @@ namespace JIT.HardwareIntrinsics.X86
             Single[] right,
             Single[] result,
             [CallerMemberName] string method = ""
-        ) {
+        )
+        {
             bool succeeded = true;
 
             if (
@@ -480,7 +483,8 @@ namespace JIT.HardwareIntrinsics.X86
                 != BitConverter.SingleToInt32Bits(
                     (BitConverter.SingleToInt32Bits(right[0]) < 0) ? left[0] : 0
                 )
-            ) {
+            )
+            {
                 succeeded = false;
             }
             else
@@ -492,7 +496,8 @@ namespace JIT.HardwareIntrinsics.X86
                         != BitConverter.SingleToInt32Bits(
                             (BitConverter.SingleToInt32Bits(right[i]) < 0) ? left[i] : 0
                         )
-                    ) {
+                    )
+                    {
                         succeeded = false;
                         break;
                     }

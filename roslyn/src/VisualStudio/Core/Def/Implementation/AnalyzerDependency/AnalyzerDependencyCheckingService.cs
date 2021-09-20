@@ -81,7 +81,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation
         public AnalyzerDependencyCheckingService(
             VisualStudioWorkspace workspace,
             HostDiagnosticUpdateSource hostDiagnosticUpdateSource
-        ) {
+        )
+        {
             _workspace = workspace;
             _hostDiagnosticUpdateSource = hostDiagnosticUpdateSource;
         }
@@ -132,7 +133,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation
             ImmutableHashSet<string> currentAnalyzerPaths,
             HostDiagnosticUpdateSource hostDiagnosticUpdateSource,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var loadedAssemblies = AppDomain.CurrentDomain.GetAssemblies()
                 .Select(assembly => AssemblyIdentity.FromAssemblyDefinition(assembly));
             var loadedAssembliesList = new IgnorableAssemblyIdentityList(loadedAssemblies);
@@ -179,7 +181,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation
                     if (
                         analyzerFilePaths.Contains(conflict.AnalyzerFilePath1)
                         || analyzerFilePaths.Contains(conflict.AnalyzerFilePath2)
-                    ) {
+                    )
+                    {
                         var messageArguments = new string[]
                         {
                             conflict.AnalyzerFilePath1,
@@ -193,7 +196,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation
                                 project,
                                 out var diagnostic
                             )
-                        ) {
+                        )
+                        {
                             builder.Add(diagnostic);
                         }
                     }
@@ -215,7 +219,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation
                                 project,
                                 out var diagnostic
                             )
-                        ) {
+                        )
+                        {
                             builder.Add(diagnostic);
                         }
                     }
@@ -306,7 +311,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation
                         redirectedAssemblyName,
                         out var redirectedAssemblyIdentity
                     )
-                ) {
+                )
+                {
                     return redirectedAssemblyIdentity;
                 }
 

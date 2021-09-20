@@ -107,7 +107,8 @@ namespace Microsoft.CodeAnalysis.ExternalAccess.FSharp.Internal.Editor
             string replacementText,
             OptionSet optionSet,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var info = await _set.GetReplacementsAsync(
                     replacementText,
                     optionSet,
@@ -156,7 +157,8 @@ namespace Microsoft.CodeAnalysis.ExternalAccess.FSharp.Internal.Editor
         public async Task<IInlineRenameLocationSet> FindRenameLocationsAsync(
             OptionSet optionSet,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var set = await _info.FindRenameLocationsAsync(optionSet, cancellationToken)
                 .ConfigureAwait(false);
             if (set != null)
@@ -174,7 +176,8 @@ namespace Microsoft.CodeAnalysis.ExternalAccess.FSharp.Internal.Editor
             string triggerText,
             string replacementText,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             return _info.GetConflictEditSpan(
                 new FSharpInlineRenameLocation(location.Document, location.TextSpan),
                 replacementText,
@@ -191,7 +194,8 @@ namespace Microsoft.CodeAnalysis.ExternalAccess.FSharp.Internal.Editor
             InlineRenameLocation location,
             string triggerText,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             return _info.GetReferenceEditSpan(
                 new FSharpInlineRenameLocation(location.Document, location.TextSpan),
                 cancellationToken
@@ -202,7 +206,8 @@ namespace Microsoft.CodeAnalysis.ExternalAccess.FSharp.Internal.Editor
             Workspace workspace,
             IEnumerable<DocumentId> changedDocumentIDs,
             string replacementText
-        ) {
+        )
+        {
             return _info.TryOnAfterGlobalSymbolRenamed(
                 workspace,
                 changedDocumentIDs,
@@ -214,7 +219,8 @@ namespace Microsoft.CodeAnalysis.ExternalAccess.FSharp.Internal.Editor
             Workspace workspace,
             IEnumerable<DocumentId> changedDocumentIDs,
             string replacementText
-        ) {
+        )
+        {
             return _info.TryOnBeforeGlobalSymbolRenamed(
                 workspace,
                 changedDocumentIDs,
@@ -240,7 +246,8 @@ namespace Microsoft.CodeAnalysis.ExternalAccess.FSharp.Internal.Editor
             Document document,
             int position,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var info = await _service.GetRenameInfoAsync(document, position, cancellationToken)
                 .ConfigureAwait(false);
             if (info != null)

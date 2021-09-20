@@ -31,7 +31,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation
             IVsHierarchyItem hierarchyItem,
             string? targetFrameworkMoniker,
             [NotNullWhen(true)] out ProjectId? projectId
-        ) {
+        )
+        {
             // A project node is represented in two different hierarchies: the solution's IVsHierarchy (where it is a leaf node)
             // and the project's own IVsHierarchy (where it is the root node). The IVsHierarchyItem joins them together for the
             // purpose of creating the tree displayed in Solution Explorer. The project's hierarchy is what is passed from the
@@ -51,7 +52,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation
                         if (
                             p.Language != LanguageNames.CSharp
                             && p.Language != LanguageNames.VisualBasic
-                        ) {
+                        )
+                        {
                             return false;
                         }
 
@@ -96,7 +98,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation
                     !candidateProject.DocumentIds.Any(
                         id => ContainedDocument.TryGetContainedDocument(id) != null
                     )
-                ) {
+                )
+                {
                     projectId = candidateProject.Id;
                     return true;
                 }

@@ -122,7 +122,8 @@ namespace Microsoft.AspNetCore.Mvc.Testing
 
         internal virtual WebApplicationFactory<TEntryPoint> WithWebHostBuilderCore(
             Action<IWebHostBuilder> configuration
-        ) {
+        )
+        {
             var factory = new DelegatedWebApplicationFactory(
                 ClientOptions,
                 CreateServer,
@@ -265,7 +266,8 @@ namespace Microsoft.AspNetCore.Mvc.Testing
         private WebApplicationFactoryContentRootAttribute[] GetContentRootMetadataAttributes(
             string tEntryPointAssemblyFullName,
             string tEntryPointAssemblyName
-        ) {
+        )
+        {
             var testAssembly = GetTestAssemblies();
             var metadataAttributes = testAssembly.SelectMany(
                     a => a.GetCustomAttributes<WebApplicationFactoryContentRootAttribute>()
@@ -597,7 +599,8 @@ namespace Microsoft.AspNetCore.Mvc.Testing
                 Func<IEnumerable<Assembly>> getTestAssemblies,
                 Action<HttpClient> configureClient,
                 Action<IWebHostBuilder> configureWebHost
-            ) {
+            )
+            {
                 ClientOptions = new WebApplicationFactoryClientOptions(options);
                 _createServer = createServer;
                 _createHost = createHost;
@@ -626,7 +629,8 @@ namespace Microsoft.AspNetCore.Mvc.Testing
 
             internal override WebApplicationFactory<TEntryPoint> WithWebHostBuilderCore(
                 Action<IWebHostBuilder> configuration
-            ) {
+            )
+            {
                 return new DelegatedWebApplicationFactory(
                     ClientOptions,
                     _createServer,

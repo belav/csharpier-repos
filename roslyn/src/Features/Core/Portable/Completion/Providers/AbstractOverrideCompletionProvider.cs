@@ -62,7 +62,8 @@ namespace Microsoft.CodeAnalysis.Completion.Providers
             Document newDocument,
             CompletionItem completionItem,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             // Special case: if you are overriding object.ToString(), we will make the return value as non-nullable. The return was made nullable because
             // are implementations out there that will return null, but that's not something we really want new implementations doing. We may need to consider
             // expanding this behavior to other methods in the future; if that is the case then we would want there to be an attribute on the return type
@@ -74,7 +75,8 @@ namespace Microsoft.CodeAnalysis.Completion.Providers
                 newOverriddenMember is IMethodSymbol methodSymbol
                 && methodSymbol.Name == "ToString"
                 && methodSymbol.Parameters.Length == 0
-            ) {
+            )
+            {
                 newOverriddenMember = CodeGenerationSymbolFactory.CreateMethodSymbol(
                     methodSymbol,
                     returnType: methodSymbol.ReturnType.WithNullableAnnotation(

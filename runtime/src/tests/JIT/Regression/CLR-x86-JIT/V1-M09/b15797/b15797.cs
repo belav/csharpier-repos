@@ -34,7 +34,8 @@ class Light
             || seconds1 != seconds3
             || seconds1 != seconds4
             || seconds1 != seconds5
-        ) {
+        )
+        {
             Console.WriteLine("Test failed.");
             return 1;
         }

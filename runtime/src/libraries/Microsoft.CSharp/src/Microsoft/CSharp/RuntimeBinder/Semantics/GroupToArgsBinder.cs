@@ -63,7 +63,8 @@ namespace Microsoft.CSharp.RuntimeBinder.Semantics
                 ArgInfos args,
                 ArgInfos originalArgs,
                 NamedArgumentsKind namedArgumentsKind
-            ) {
+            )
+            {
                 Debug.Assert(grp != null);
                 Debug.Assert(args != null);
 
@@ -239,7 +240,8 @@ namespace Microsoft.CSharp.RuntimeBinder.Semantics
                     if (
                         misnamed
                         && (!_methList.IsEmpty() || _results.InaccessibleResult || _misnamed)
-                    ) {
+                    )
+                    {
                         bSearchForExpanded = false;
                         continue;
                     }
@@ -254,7 +256,8 @@ namespace Microsoft.CSharp.RuntimeBinder.Semantics
                             || _mpwiBogus
                             || _misnamed
                         )
-                    ) {
+                    )
+                    {
                         // We'll never use this one for error reporting anyway, so just skip it.
                         bSearchForExpanded = false;
                         continue;
@@ -386,7 +389,8 @@ namespace Microsoft.CSharp.RuntimeBinder.Semantics
                                 || pAmbig1.mpwi.TypeArgs != pAmbig2.mpwi.TypeArgs
                                 || pAmbig1.mpwi.GetType() != pAmbig2.mpwi.GetType()
                                 || pAmbig1.mpwi.MethProp().Params == pAmbig2.mpwi.MethProp().Params
-                            ) {
+                            )
+                            {
                                 throw ErrorHandling.Error(
                                     ErrorCode.ERR_AmbigCall,
                                     pAmbig1.mpwi,
@@ -473,7 +477,8 @@ namespace Microsoft.CSharp.RuntimeBinder.Semantics
                 AggregateType pCurrentType,
                 ExprMemberGroup pGroup,
                 ArgInfos pArguments
-            ) {
+            )
+            {
                 // We use the param count from pCurrentParameters because they may have been resized
                 // for param arrays.
                 int numParameters = pCurrentParameters.Count;
@@ -507,7 +512,8 @@ namespace Microsoft.CSharp.RuntimeBinder.Semantics
                         && index < pArguments.carg
                         && pArguments.prgexpr[index] is ExprArrayInit arrayInit
                         && arrayInit.GeneratedForParamArray
-                    ) {
+                    )
+                    {
                         paramArrayArgument = pArguments.prgexpr[index];
                     }
 
@@ -519,7 +525,8 @@ namespace Microsoft.CSharp.RuntimeBinder.Semantics
                             pArguments.prgexpr[index] is ExprArrayInit arrayInitPos
                             && arrayInitPos.GeneratedForParamArray
                         )
-                    ) {
+                    )
+                    {
                         pExprArguments[index] = pArguments.prgexpr[index++];
                         continue;
                     }
@@ -572,7 +579,8 @@ namespace Microsoft.CSharp.RuntimeBinder.Semantics
                 MethodOrPropertySymbol methprop,
                 CType type,
                 int index
-            ) {
+            )
+            {
                 CType pParamType = type;
                 CType pRawParamType = type.StripNubs();
 
@@ -589,7 +597,8 @@ namespace Microsoft.CSharp.RuntimeBinder.Semantics
                             || pRawParamType.IsPredefType(PredefinedType.PT_OBJECT)
                             || pRawParamType.IsPredefType(PredefinedType.PT_VALUE)
                         )
-                    ) {
+                    )
+                    {
                         // This is the specific case where we want to create a DateTime
                         // but the constval that stores it is a long.
 
@@ -620,7 +629,8 @@ namespace Microsoft.CSharp.RuntimeBinder.Semantics
                     }
                     else if (
                         (pParamType.IsReferenceType || pParamType is NullableType) && cv.IsNullRef
-                    ) {
+                    )
+                    {
                         // We have an "= null" default value with a reference type or a nullable type.
 
                         optionalArgument = ExprFactory.CreateNull();
@@ -690,7 +700,8 @@ namespace Microsoft.CSharp.RuntimeBinder.Semantics
             public static MethodOrPropertySymbol FindMostDerivedMethod(
                 MethodOrPropertySymbol pMethProp,
                 CType pType
-            ) {
+            )
+            {
                 bool bIsIndexer = false;
 
                 if (!(pMethProp is MethodSymbol method))
@@ -728,7 +739,8 @@ namespace Microsoft.CSharp.RuntimeBinder.Semantics
                     AggregateSymbol pAggregate = agg.OwningAggregate;
                     pAggregate?.GetBaseAgg() != null;
                     pAggregate = pAggregate.GetBaseAgg()
-                ) {
+                )
+                {
                     for (
                         MethodOrPropertySymbol meth =
                             SymbolLoader.LookupAggMember(
@@ -741,7 +753,8 @@ namespace Microsoft.CSharp.RuntimeBinder.Semantics
                                 meth.LookupNext(
                                     symbmask_t.MASK_MethodSymbol | symbmask_t.MASK_PropertySymbol
                                 ) as MethodOrPropertySymbol
-                    ) {
+                    )
+                    {
                         if (!meth.isOverride)
                         {
                             continue;
@@ -930,7 +943,8 @@ namespace Microsoft.CSharp.RuntimeBinder.Semantics
                     && _pCurrentType != null
                     && !_methList.IsEmpty()
                     && !_methList.Head().mpwi.GetType().IsInterfaceType
-                ) {
+                )
+                {
                     return false;
                 }
 
@@ -1006,7 +1020,8 @@ namespace Microsoft.CSharp.RuntimeBinder.Semantics
                 // Get the type args.
                 if (
                     _pCurrentSym is MethodSymbol methSym && methSym.typeVars.Count != typeArgs.Count
-                ) {
+                )
+                {
                     // Can't infer if some type args are specified.
                     if (typeArgs.Count > 0)
                     {
@@ -1040,7 +1055,8 @@ namespace Microsoft.CSharp.RuntimeBinder.Semantics
                                 pTypeVars != null
                                 && _pCurrentTypeArgs != null
                                 && pTypeVars.Count == _pCurrentTypeArgs.Count
-                            ) {
+                            )
+                            {
                                 _mpwiCantInferInstArg.Set(
                                     methSym,
                                     _pCurrentType,
@@ -1157,7 +1173,8 @@ namespace Microsoft.CSharp.RuntimeBinder.Semantics
                     if (
                         _results.IsBetterUninferableResult(_pCurrentTypeArgs)
                         && _pCurrentSym is MethodSymbol meth
-                    ) {
+                    )
+                    {
                         // If we're an instance method then mark us down.
                         _results.UninferableResult.Set(meth, _pCurrentType, _pCurrentTypeArgs);
                     }
@@ -1360,7 +1377,8 @@ namespace Microsoft.CSharp.RuntimeBinder.Semantics
                     _pGroup.OptionalObject?.Type != null
                     && _pGroup.OptionalObject.Type.IsDelegateType
                     && _pGroup.Name == NameManager.GetPredefinedName(PredefinedName.PN_INVOKE)
-                ) {
+                )
+                {
                     Debug.Assert(
                         !_results.BestResult
                             || _results.BestResult.MethProp().getClass().IsDelegate()

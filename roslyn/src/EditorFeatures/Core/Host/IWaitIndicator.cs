@@ -31,7 +31,8 @@ namespace Microsoft.CodeAnalysis.Editor.Host
             string message,
             bool allowCancel,
             Action<IWaitContext> action
-        ) {
+        )
+        {
             return waitIndicator.Wait(
                 title,
                 message,

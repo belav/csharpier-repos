@@ -80,7 +80,8 @@ namespace ROOT_PROJECT_NAMESPACE.Areas.HelpPage.Models
 
         private static IList<ParameterDescription> GetParameterDescriptions(
             ModelDescription modelDescription
-        ) {
+        )
+        {
             ComplexTypeModelDescription complexTypeModelDescription =
                 modelDescription as ComplexTypeModelDescription;
             if (complexTypeModelDescription != null)

@@ -42,7 +42,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             BoundTypeExpression rewrittenTargetType,
             Conversion conversion,
             TypeSymbol rewrittenType
-        ) {
+        )
+        {
             // TODO: Handle dynamic operand type and target type
             Debug.Assert(rewrittenTargetType.Type.Equals(rewrittenType));
 

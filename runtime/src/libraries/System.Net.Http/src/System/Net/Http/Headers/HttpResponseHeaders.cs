@@ -188,7 +188,8 @@ namespace System.Net.Http.Headers
                   ? HttpHeaderType.All ^ HttpHeaderType.Request
                   : HttpHeaderType.General | HttpHeaderType.Response | HttpHeaderType.Custom,
                 HttpHeaderType.Request
-            ) {
+            )
+        {
             _containsTrailingHeaders = containsTrailingHeaders;
         }
 

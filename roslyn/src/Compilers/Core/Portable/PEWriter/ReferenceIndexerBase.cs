@@ -98,7 +98,8 @@ namespace Microsoft.Cci
                 if (
                     containingType.AsGenericTypeInstanceReference != null
                     || containingType.AsSpecializedNestedTypeReference != null
-                ) {
+                )
+                {
                     this.Visit(nestedType.GetContainingType(Context));
                 }
             }
@@ -148,7 +149,8 @@ namespace Microsoft.Cci
                 definingUnit != null
                 && ReferenceEquals(definingUnit, Context.Module)
                 && !methodReference.AcceptsExtraArguments
-            ) {
+            )
+            {
                 return;
             }
 
@@ -196,7 +198,8 @@ namespace Microsoft.Cci
             if (
                 !this.typeReferenceNeedsToken
                 && namespaceTypeReference.TypeCode != PrimitiveTypeCode.NotPrimitive
-            ) {
+            )
+            {
                 return;
             }
 
@@ -220,7 +223,8 @@ namespace Microsoft.Cci
                     if (
                         assemblyReference != null
                         && assemblyReference != Context.Module.GetContainingAssembly(Context)
-                    ) {
+                    )
+                    {
                         this.Visit(assemblyReference);
                     }
                     else
@@ -238,7 +242,8 @@ namespace Microsoft.Cci
             if (
                 !this.typeReferenceNeedsToken
                 && nestedTypeReference.AsSpecializedNestedTypeReference != null
-            ) {
+            )
+            {
                 return;
             }
 
@@ -309,7 +314,8 @@ namespace Microsoft.Cci
 
         public void VisitTypeReferencesThatNeedTokens(
             IEnumerable<TypeReferenceWithAttributes> refsWithAttributes
-        ) {
+        )
+        {
             foreach (var refWithAttributes in refsWithAttributes)
             {
                 this.Visit(refWithAttributes.Attributes);
@@ -444,7 +450,8 @@ namespace Microsoft.Cci
                     typeReference.TypeCode == PrimitiveTypeCode.NotPrimitive
                     && typeReference.AsNamespaceTypeReference != null
                 )
-            ) {
+            )
+            {
                 ISpecializedNestedTypeReference /*?*/
                 specializedNestedTypeReference =
                     nestedTypeReference?.AsSpecializedNestedTypeReference;
@@ -456,7 +463,8 @@ namespace Microsoft.Cci
                         _alreadyHasToken.Add(
                             new IReferenceOrISignature(unspecializedNestedTypeReference)
                         )
-                    ) {
+                    )
+                    {
                         RecordTypeReference(unspecializedNestedTypeReference);
                     }
                 }
@@ -464,7 +472,8 @@ namespace Microsoft.Cci
                 if (
                     this.typeReferenceNeedsToken
                     && _alreadyHasToken.Add(new IReferenceOrISignature(typeReference))
-                ) {
+                )
+                {
                     RecordTypeReference(typeReference);
                 }
 

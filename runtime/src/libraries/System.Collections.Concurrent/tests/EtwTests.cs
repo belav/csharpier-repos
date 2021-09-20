@@ -22,7 +22,8 @@ namespace System.Collections.Concurrent.Tests
                                 "System.Collections.Concurrent.ConcurrentCollectionsEventSource",
                                 EventLevel.Verbose
                             )
-                        ) {
+                        )
+                        {
                             var events = new ConcurrentQueue<int>();
 
                             const int AcquiringAllLocksEventId = 3;

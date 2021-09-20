@@ -30,7 +30,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.IntelliSense.QuickInfo
         internal SnapshotSpan GetCurrentSpanInSnapshot(
             TextSpan originalSpan,
             ITextSnapshot textSnapshot
-        ) {
+        )
+        {
             var trackingSpan = this.TextVersion.CreateTrackingSpan(
                 originalSpan.ToSpan(),
                 SpanTrackingMode.EdgeInclusive

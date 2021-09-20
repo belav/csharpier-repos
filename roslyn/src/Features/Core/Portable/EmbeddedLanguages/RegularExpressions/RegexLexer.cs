@@ -102,7 +102,8 @@ namespace Microsoft.CodeAnalysis.EmbeddedLanguages.RegularExpressions
         private ImmutableArray<RegexTrivia> ScanLeadingTrivia(
             bool allowTrivia,
             RegexOptions options
-        ) {
+        )
+        {
             if (!allowTrivia)
             {
                 return ImmutableArray<RegexTrivia>.Empty;
@@ -297,7 +298,8 @@ namespace Microsoft.CodeAnalysis.EmbeddedLanguages.RegularExpressions
                     var charVal = ch.Value - '0';
                     if (
                         value > MaxValueDiv10 || (value == MaxValueDiv10 && charVal > MaxValueMod10)
-                    ) {
+                    )
+                    {
                         error = true;
                     }
 

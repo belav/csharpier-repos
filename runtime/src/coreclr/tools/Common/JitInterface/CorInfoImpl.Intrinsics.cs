@@ -46,7 +46,8 @@ namespace Internal.JitInterface
             protected override bool CompareValueToValue(
                 IntrinsicEntry value1,
                 IntrinsicEntry value2
-            ) {
+            )
+            {
                 return value1.Key.Equals(value2.Key);
             }
             protected override IntrinsicEntry CreateValueFromKey(IntrinsicKey key)
@@ -68,7 +69,8 @@ namespace Internal.JitInterface
                 string methodName,
                 string typeNamespace,
                 string typeName
-            ) {
+            )
+            {
                 var entry = new IntrinsicEntry();
                 entry.Id = id;
                 entry.Key.MethodName = methodName;

@@ -69,7 +69,8 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
             SemanticModel semanticModel,
             SyntaxNode expression,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var types = typeInferenceService.InferTypes(
                 semanticModel,
                 expression,
@@ -83,7 +84,8 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
             SemanticModel semanticModel,
             int position,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var types = typeInferenceService.InferTypes(semanticModel, position, cancellationToken);
             return GetFirstDelegateType(semanticModel, types);
         }
@@ -91,7 +93,8 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
         private static INamedTypeSymbol? GetFirstDelegateType(
             SemanticModel semanticModel,
             ImmutableArray<ITypeSymbol> types
-        ) {
+        )
+        {
             var delegateTypes = types.Select(t => t.GetDelegateType(semanticModel.Compilation));
             return delegateTypes.WhereNotNull().FirstOrDefault();
         }
@@ -102,7 +105,8 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
             SyntaxNode expression,
             bool objectAsDefault,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             return InferType(
                 typeInferenceService,
                 semanticModel,
@@ -120,7 +124,8 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
             bool objectAsDefault,
             string? name,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var types = typeInferenceService.InferTypes(
                 semanticModel,
                 expression,
@@ -142,7 +147,8 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
             int position,
             bool objectAsDefault,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             return InferType(
                 typeInferenceService,
                 semanticModel,
@@ -160,7 +166,8 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
             bool objectAsDefault,
             string? name,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var types = typeInferenceService.InferTypes(
                 semanticModel,
                 position,

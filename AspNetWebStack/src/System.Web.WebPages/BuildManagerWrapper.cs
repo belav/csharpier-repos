@@ -36,10 +36,8 @@ namespace System.Web.WebPages
             : this(() => HostingEnvironment.VirtualPathProvider, new VirtualPathUtilityWrapper())
         { }
 
-        public BuildManagerWrapper(
-            VirtualPathProvider vpp,
-            IVirtualPathUtility virtualPathUtility
-        ) : this(() => vpp, virtualPathUtility)
+        public BuildManagerWrapper(VirtualPathProvider vpp, IVirtualPathUtility virtualPathUtility)
+            : this(() => vpp, virtualPathUtility)
         {
             Contract.Assert(vpp != null);
         }
@@ -47,7 +45,8 @@ namespace System.Web.WebPages
         public BuildManagerWrapper(
             Func<VirtualPathProvider> vppFunc,
             IVirtualPathUtility virtualPathUtility
-        ) {
+        )
+        {
             Contract.Assert(vppFunc != null);
             Contract.Assert(virtualPathUtility != null);
 
@@ -107,7 +106,8 @@ namespace System.Web.WebPages
         internal static bool IsNonUpdateablePrecompiledApp(
             VirtualPathProvider vpp,
             IVirtualPathUtility virtualPathUtility
-        ) {
+        )
+        {
             var virtualPath = virtualPathUtility.ToAbsolute("~/PrecompiledApp.config");
             if (!vpp.FileExists(virtualPath))
             {
@@ -134,7 +134,8 @@ namespace System.Web.WebPages
                     "precompiledApp",
                     StringComparison.OrdinalIgnoreCase
                 )
-            ) {
+            )
+            {
                 return false;
             }
             var updatableAttribute = document.Root.Attribute("updatable");

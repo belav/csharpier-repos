@@ -36,7 +36,8 @@ namespace Microsoft.CodeAnalysis.Razor
             Compilation compilation,
             bool includeDocumentation,
             bool excludeHidden
-        ) {
+        )
+        {
             IncludeDocumentation = includeDocumentation;
             ExcludeHidden = excludeHidden;
 
@@ -98,7 +99,8 @@ namespace Microsoft.CodeAnalysis.Razor
         private void AddTagMatchingRules(
             INamedTypeSymbol type,
             TagHelperDescriptorBuilder descriptorBuilder
-        ) {
+        )
+        {
             var targetElementAttributes = type.GetAttributes()
                 .Where(
                     attribute =>
@@ -252,7 +254,8 @@ namespace Microsoft.CodeAnalysis.Razor
             BoundAttributeDescriptorBuilder builder,
             IPropertySymbol property,
             INamedTypeSymbol containingType
-        ) {
+        )
+        {
             var attributeNameAttribute = property.GetAttributes()
                 .Where(
                     a =>
@@ -271,7 +274,8 @@ namespace Microsoft.CodeAnalysis.Razor
                 || string.IsNullOrEmpty(
                     (string)attributeNameAttribute.ConstructorArguments[0].Value
                 )
-            ) {
+            )
+            {
                 hasExplicitName = false;
                 attributeName = HtmlConventions.ToHtmlCase(property.Name);
             }
@@ -335,7 +339,8 @@ namespace Microsoft.CodeAnalysis.Razor
             AttributeData attributeNameAttribute,
             string attributeName,
             bool hasPublicSetter
-        ) {
+        )
+        {
             string dictionaryAttributePrefix = null;
             var dictionaryAttributePrefixSet = false;
 
@@ -389,7 +394,8 @@ namespace Microsoft.CodeAnalysis.Razor
             }
             else if (
                 !hasPublicSetter && attributeNameAttribute != null && !dictionaryAttributePrefixSet
-            ) {
+            )
+            {
                 // Must set DictionaryAttributePrefix when using HtmlAttributeNameAttribute with a dictionary property
                 // that lacks a public setter.
                 var diagnostic = RazorDiagnosticFactory.CreateTagHelper_InvalidAttributePrefixNull(
@@ -410,7 +416,8 @@ namespace Microsoft.CodeAnalysis.Razor
                     (property.Type as INamedTypeSymbol)?.ConstructedFrom,
                     _iDictionarySymbol
                 )
-            ) {
+            )
+            {
                 dictionaryType = (INamedTypeSymbol)property.Type;
             }
             else if (
@@ -418,7 +425,8 @@ namespace Microsoft.CodeAnalysis.Razor
                     s =>
                         SymbolEqualityComparer.Default.Equals(s.ConstructedFrom, _iDictionarySymbol)
                 )
-            ) {
+            )
+            {
                 dictionaryType = property.Type.AllInterfaces.First(
                     s =>
                         SymbolEqualityComparer.Default.Equals(s.ConstructedFrom, _iDictionarySymbol)
@@ -541,7 +549,8 @@ namespace Microsoft.CodeAnalysis.Razor
                             || IsPotentialDictionaryProperty(property)
                         )
                         && !accessibleProperties.ContainsKey(property.Name)
-                    ) {
+                    )
+                    {
                         accessibleProperties.Add(property.Name, property);
                     }
                 }

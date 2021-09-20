@@ -32,7 +32,8 @@ namespace Microsoft.EntityFrameworkCore.Sqlite.Query.Internal
         public SqliteByteArrayMethodTranslator(
             ISqlExpressionFactory sqlExpressionFactory,
             IRelationalTypeMappingSource typeMappingSource
-        ) {
+        )
+        {
             _sqlExpressionFactory = sqlExpressionFactory;
             _typeMappingSource = typeMappingSource;
         }
@@ -48,7 +49,8 @@ namespace Microsoft.EntityFrameworkCore.Sqlite.Query.Internal
             MethodInfo method,
             IReadOnlyList<SqlExpression> arguments,
             IDiagnosticsLogger<DbLoggerCategory.Query> logger
-        ) {
+        )
+        {
             Check.NotNull(method, nameof(method));
             Check.NotNull(arguments, nameof(arguments));
             Check.NotNull(logger, nameof(logger));
@@ -57,7 +59,8 @@ namespace Microsoft.EntityFrameworkCore.Sqlite.Query.Internal
                 method.IsGenericMethod
                 && method.GetGenericMethodDefinition().Equals(EnumerableMethods.Contains)
                 && arguments[0].Type == typeof(byte[])
-            ) {
+            )
+            {
                 var source = arguments[0];
 
                 var value = arguments[1] is SqlConstantExpression constantValue

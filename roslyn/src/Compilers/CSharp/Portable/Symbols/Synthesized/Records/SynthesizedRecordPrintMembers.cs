@@ -23,18 +23,20 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             SourceMemberContainerTypeSymbol containingType,
             int memberOffset,
             BindingDiagnosticBag diagnostics
-        ) : base(
-            containingType,
-            WellKnownMemberNames.PrintMembersMethodName,
-            hasBody: true,
-            memberOffset,
-            diagnostics
-        ) { }
+        )
+            : base(
+                containingType,
+                WellKnownMemberNames.PrintMembersMethodName,
+                hasBody: true,
+                memberOffset,
+                diagnostics
+            ) { }
 
         protected override DeclarationModifiers MakeDeclarationModifiers(
             DeclarationModifiers allowedModifiers,
             BindingDiagnosticBag diagnostics
-        ) {
+        )
+        {
             var result =
                 (
                     ContainingType.BaseTypeNoUseSiteDiagnostics.IsObjectType()
@@ -82,7 +84,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                         != DeclarationModifiers.Private
                     && (modifiers & DeclarationModifiers.AccessibilityMask)
                         != DeclarationModifiers.Protected
-                ) {
+                )
+                {
                     return false;
                 }
 
@@ -103,7 +106,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
 
         protected override (TypeWithAnnotations ReturnType, ImmutableArray<ParameterSymbol> Parameters, bool IsVararg, ImmutableArray<TypeParameterConstraintClause> DeclaredConstraintsForOverrideOrImplementation) MakeParametersAndBindReturnType(
             BindingDiagnosticBag diagnostics
-        ) {
+        )
+        {
             var compilation = DeclaringCompilation;
             var location = ReturnTypeLocation;
             return (
@@ -144,7 +148,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
         internal override void GenerateMethodBody(
             TypeCompilationState compilationState,
             BindingDiagnosticBag diagnostics
-        ) {
+        )
+        {
             var F = new SyntheticBoundNodeFactory(
                 this,
                 ContainingType.GetNonNullSyntaxNode(),
@@ -159,7 +164,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                 if (
                     ReturnType.IsErrorType()
                     || printableMembers.Any(m => m.GetTypeOrReturnType().Type.IsErrorType())
-                ) {
+                )
+                {
                     F.CloseMethod(F.ThrowNull());
                     return;
                 }
@@ -281,7 +287,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                 SyntheticBoundNodeFactory F,
                 BoundParameter builder,
                 string value
-            ) {
+            )
+            {
                 return F.ExpressionStatement(
                     F.Call(
                         receiver: builder,
@@ -318,7 +325,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
         internal static MethodSymbol? FindValidPrintMembersMethod(
             TypeSymbol containingType,
             CSharpCompilation compilation
-        ) {
+        )
+        {
             if (containingType.IsObjectType())
             {
                 return null;
@@ -331,7 +339,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
 
             foreach (
                 var member in containingType.GetMembers(WellKnownMemberNames.PrintMembersMethodName)
-            ) {
+            )
+            {
                 if (
                     member
                         is MethodSymbol
@@ -345,7 +354,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                         stringBuilder,
                         TypeCompareKind.AllIgnoreOptions
                     )
-                ) {
+                )
+                {
                     if (candidate is object)
                     {
                         // An ambiguity case, can come from metadata, treat as an error for simplicity.
@@ -360,7 +370,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                 candidate is null
                 || !(containingType.IsSealed || candidate.IsOverride || candidate.IsVirtual)
                 || candidate.ReturnType.SpecialType != SpecialType.System_Boolean
-            ) {
+            )
+            {
                 return null;
             }
 
@@ -370,7 +381,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
         internal static void VerifyOverridesPrintMembersFromBase(
             MethodSymbol overriding,
             BindingDiagnosticBag diagnostics
-        ) {
+        )
+        {
             NamedTypeSymbol baseType = overriding.ContainingType.BaseTypeNoUseSiteDiagnostics;
             if (baseType.IsObjectType())
             {
@@ -390,7 +402,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                 if (
                     overridden is object
                     && !overridden.ContainingType.Equals(baseType, TypeCompareKind.AllIgnoreOptions)
-                ) {
+                )
+                {
                     reportAnError = true;
                 }
             }

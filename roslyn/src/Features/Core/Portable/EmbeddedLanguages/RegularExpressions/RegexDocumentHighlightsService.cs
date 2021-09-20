@@ -30,7 +30,8 @@ namespace Microsoft.CodeAnalysis.Features.EmbeddedLanguages.RegularExpressions
             int position,
             IImmutableSet<Document> documentsToSearch,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var option = document.Project.Solution.Workspace.Options.GetOption(
                 RegularExpressionsOptions.HighlightRelatedRegexComponentsUnderCursor,
                 document.Project.Language
@@ -87,7 +88,8 @@ namespace Microsoft.CodeAnalysis.Features.EmbeddedLanguages.RegularExpressions
         private ImmutableArray<HighlightSpan> FindReferenceHighlights(
             RegexTree tree,
             VirtualChar ch
-        ) {
+        )
+        {
             var node = FindReferenceNode(tree.Root, ch);
             if (node == null)
             {
@@ -118,7 +120,8 @@ namespace Microsoft.CodeAnalysis.Features.EmbeddedLanguages.RegularExpressions
         private static ImmutableArray<HighlightSpan> CreateHighlights(
             RegexEscapeNode node,
             TextSpan captureSpan
-        ) {
+        )
+        {
             return ImmutableArray.Create(
                 CreateHighlightSpan(node.GetSpan()),
                 CreateHighlightSpan(captureSpan)
@@ -143,7 +146,8 @@ namespace Microsoft.CodeAnalysis.Features.EmbeddedLanguages.RegularExpressions
                 node.Kind == RegexKind.BackreferenceEscape
                 || node.Kind == RegexKind.CaptureEscape
                 || node.Kind == RegexKind.KCaptureEscape
-            ) {
+            )
+            {
                 if (node.Contains(virtualChar))
                 {
                     return (RegexEscapeNode)node;

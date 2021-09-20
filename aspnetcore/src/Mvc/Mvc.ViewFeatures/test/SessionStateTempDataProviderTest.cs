@@ -131,7 +131,8 @@ namespace Microsoft.AspNetCore.Mvc.ViewFeatures
 
             public Task CommitAsync(
                 CancellationToken cancellationToken = default(CancellationToken)
-            ) {
+            )
+            {
                 return Task.FromResult(0);
             }
 

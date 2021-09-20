@@ -339,7 +339,8 @@ namespace Microsoft.Extensions.Logging.Test
                 string providerName,
                 ThrowExceptionAt throwExceptionAt,
                 List<string> store
-            ) {
+            )
+            {
                 _providerName = providerName;
                 _throwExceptionAt = throwExceptionAt;
                 _store = store;
@@ -397,7 +398,8 @@ namespace Microsoft.Extensions.Logging.Test
                 TState state,
                 Exception exception,
                 Func<TState, Exception, string> formatter
-            ) {
+            )
+            {
                 if (!IsEnabled(logLevel))
                 {
                     return;

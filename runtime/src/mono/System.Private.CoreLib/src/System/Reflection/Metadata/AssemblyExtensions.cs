@@ -34,7 +34,8 @@ namespace System.Reflection.Metadata
             ReadOnlySpan<byte> metadataDelta,
             ReadOnlySpan<byte> ilDelta,
             ReadOnlySpan<byte> pdbDelta
-        ) {
+        )
+        {
             if (assembly is not RuntimeAssembly runtimeAssembly)
             {
                 if (assembly is null)
@@ -55,7 +56,8 @@ namespace System.Reflection.Metadata
                     byte* metadataDeltaPtr = metadataDelta,
                         ilDeltaPtr = ilDelta,
                         pdbDeltaPtr = pdbDelta
-                ) {
+                )
+                {
                     ApplyUpdate_internal(
                         monoAssembly,
                         metadataDeltaPtr,
@@ -75,7 +77,8 @@ namespace System.Reflection.Metadata
             byte[] metadataDelta,
             byte[] ilDelta,
             byte[]? pdbDelta
-        ) {
+        )
+        {
             ReadOnlySpan<byte> md = metadataDelta;
             ReadOnlySpan<byte> il = ilDelta;
             ReadOnlySpan<byte> dpdb = pdbDelta == null ? default : pdbDelta;

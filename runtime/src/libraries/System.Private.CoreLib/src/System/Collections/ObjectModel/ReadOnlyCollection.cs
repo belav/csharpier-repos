@@ -153,7 +153,8 @@ namespace System.Collections.ObjectModel
                         targetType.IsAssignableFrom(sourceType)
                         || sourceType.IsAssignableFrom(targetType)
                     )
-                ) {
+                )
+                {
                     ThrowHelper.ThrowArgumentException_Argument_InvalidArrayType();
                 }
 

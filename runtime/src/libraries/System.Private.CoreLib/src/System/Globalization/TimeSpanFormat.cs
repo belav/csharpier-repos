@@ -21,7 +21,8 @@ namespace System.Globalization
             TimeSpan value,
             string? format,
             IFormatProvider? formatProvider
-        ) {
+        )
+        {
             if (string.IsNullOrEmpty(format))
             {
                 return FormatC(value); // formatProvider ignored, as "c" is invariant
@@ -65,7 +66,8 @@ namespace System.Globalization
             out int charsWritten,
             ReadOnlySpan<char> format,
             IFormatProvider? formatProvider
-        ) {
+        )
+        {
             if (format.Length == 0)
             {
                 return TryFormatStandard(
@@ -139,7 +141,8 @@ namespace System.Globalization
             TimeSpan value,
             DateTimeFormatInfo dtfi,
             StandardFormat format
-        ) {
+        )
+        {
             string decimalSeparator = dtfi.DecimalSeparator;
             int maxLength = 25 + decimalSeparator.Length; // large enough for any "g"/"G" TimeSpan
             Span<char> destination =
@@ -161,7 +164,8 @@ namespace System.Globalization
             string? decimalSeparator,
             Span<char> destination,
             out int charsWritten
-        ) {
+        )
+        {
             Debug.Assert(
                 format == StandardFormat.C
                     || format == StandardFormat.G
@@ -394,7 +398,8 @@ namespace System.Globalization
             ReadOnlySpan<char> format,
             DateTimeFormatInfo dtfi,
             StringBuilder? result = null
-        ) {
+        )
+        {
             Debug.Assert(dtfi != null);
 
             bool resultBuilderIsPooled = false;

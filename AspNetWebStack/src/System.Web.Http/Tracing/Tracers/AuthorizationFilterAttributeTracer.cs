@@ -31,7 +31,8 @@ namespace System.Web.Http.Tracing.Tracers
         public AuthorizationFilterAttributeTracer(
             AuthorizationFilterAttribute innerFilter,
             ITraceWriter traceWriter
-        ) {
+        )
+        {
             Contract.Assert(innerFilter != null);
             Contract.Assert(traceWriter != null);
 
@@ -82,7 +83,8 @@ namespace System.Web.Http.Tracing.Tracers
         public override Task OnAuthorizationAsync(
             HttpActionContext actionContext,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             return OnAuthorizationSyncCore(actionContext, cancellationToken);
         }
 
@@ -90,7 +92,8 @@ namespace System.Web.Http.Tracing.Tracers
             HttpActionContext actionContext,
             CancellationToken cancellationToken,
             [CallerMemberName] string methodName = null
-        ) {
+        )
+        {
             return _traceStore.TraceBeginEndAsync(
                 actionContext.ControllerContext.Request,
                 TraceCategories.FiltersCategory,

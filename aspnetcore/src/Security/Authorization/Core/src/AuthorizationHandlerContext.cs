@@ -27,7 +27,8 @@ namespace Microsoft.AspNetCore.Authorization
             IEnumerable<IAuthorizationRequirement> requirements,
             ClaimsPrincipal user,
             object? resource
-        ) {
+        )
+        {
             if (requirements == null)
             {
                 throw new ArgumentNullException(nameof(requirements));

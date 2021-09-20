@@ -238,7 +238,8 @@ namespace BenchmarksGame
         int SortByFrequencyAndCode(
             KeyValuePair<ByteString, Count> i0,
             KeyValuePair<ByteString, Count> i1
-        ) {
+        )
+        {
             int order = i1.Value.V.CompareTo(i0.Value.V);
             if (order != 0)
                 return order;

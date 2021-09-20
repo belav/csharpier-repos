@@ -109,7 +109,8 @@ namespace Microsoft.CodeAnalysis
                         if (
                             !IsValidSwitchCaseLabelConstant(firstConstant)
                             || !IsValidSwitchCaseLabelConstant(secondConstant)
-                        ) {
+                        )
+                        {
                             // We don't care about invalid case labels with duplicate value as
                             // we will generate diagnostics for invalid case label.
                             return firstConstant.Equals(secondConstant);

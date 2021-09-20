@@ -1778,7 +1778,8 @@ namespace System.CodeDom.Compiler.Tests
             var main = new CodeEntryPointMethod();
             foreach (
                 Type t in new[] { typeof(int), typeof(object), typeof(DateTime), typeof(string) }
-            ) {
+            )
+            {
                 main.Statements.Add(
                     new CodeMethodInvokeExpression(
                         new CodeMethodReferenceExpression(
@@ -2767,7 +2768,8 @@ namespace System.CodeDom.Compiler.Tests
                     MemberAttributes.Family,
                     MemberAttributes.Assembly
                 }
-            ) {
+            )
+            {
                 CodeMemberProperty configuredProp = new CodeMemberProperty();
                 configuredProp.Name = attrs.ToString() + "Prop";
                 configuredProp.Type = new CodeTypeReference(typeof(int));

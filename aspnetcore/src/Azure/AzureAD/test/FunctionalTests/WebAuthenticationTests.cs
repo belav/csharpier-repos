@@ -65,7 +65,8 @@ namespace Microsoft.AspNetCore.Authentication.AzureAD.FunctionalTests
         public async Task ADEndpoints_AreAvailable_When_Authentication_IsAdded(
             string endpoint,
             HttpStatusCode expectedStatusCode
-        ) {
+        )
+        {
             // Act & Assert
             var client = Factory.WithWebHostBuilder(
                     builder =>
@@ -136,7 +137,8 @@ namespace Microsoft.AspNetCore.Authentication.AzureAD.FunctionalTests
         public async Task ADB2CEndpoints_AreAvailable_When_Authentication_IsAdded(
             string endpoint,
             HttpStatusCode expectedStatusCode
-        ) {
+        )
+        {
             // Act & Assert
             var client = Factory.WithWebHostBuilder(
                     builder =>

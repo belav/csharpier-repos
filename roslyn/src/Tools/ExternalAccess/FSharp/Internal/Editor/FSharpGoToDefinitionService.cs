@@ -35,7 +35,8 @@ namespace Microsoft.CodeAnalysis.ExternalAccess.FSharp.Internal.Editor
             Document document,
             int position,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var items = await _service.FindDefinitionsAsync(document, position, cancellationToken)
                 .ConfigureAwait(false);
             return items?.Select(x => new InternalFSharpNavigableItem(x));
@@ -45,7 +46,8 @@ namespace Microsoft.CodeAnalysis.ExternalAccess.FSharp.Internal.Editor
             Document document,
             int position,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             return _service.TryGoToDefinition(document, position, cancellationToken);
         }
     }

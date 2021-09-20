@@ -29,7 +29,8 @@ namespace System.Net
             bool BypassOnLocal,
             string[]? BypassList,
             ICredentials? Credentials
-        ) {
+        )
+        {
             this.Address = Address;
             this.Credentials = Credentials;
             this.BypassProxyOnLocal = BypassOnLocal;

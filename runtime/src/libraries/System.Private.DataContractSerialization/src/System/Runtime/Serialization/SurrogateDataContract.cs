@@ -12,10 +12,8 @@ namespace System.Runtime.Serialization
     {
         private readonly SurrogateDataContractCriticalHelper _helper;
 
-        internal SurrogateDataContract(
-            Type type,
-            ISerializationSurrogate serializationSurrogate
-        ) : base(new SurrogateDataContractCriticalHelper(type, serializationSurrogate))
+        internal SurrogateDataContract(Type type, ISerializationSurrogate serializationSurrogate)
+            : base(new SurrogateDataContractCriticalHelper(type, serializationSurrogate))
         {
             _helper = (base.Helper as SurrogateDataContractCriticalHelper)!;
         }
@@ -29,7 +27,8 @@ namespace System.Runtime.Serialization
             XmlWriterDelegator xmlWriter,
             object obj,
             XmlObjectSerializerWriteContext? context
-        ) {
+        )
+        {
             Debug.Assert(context != null);
 
             SerializationInfo serInfo = new SerializationInfo(
@@ -46,7 +45,8 @@ namespace System.Runtime.Serialization
             object obj,
             SerializationInfo serInfo,
             StreamingContext context
-        ) {
+        )
+        {
             return SerializationSurrogate.SetObjectData(obj, serInfo, context, null);
         }
 
@@ -67,14 +67,16 @@ namespace System.Runtime.Serialization
             object obj,
             SerializationInfo serInfo,
             StreamingContext context
-        ) {
+        )
+        {
             SerializationSurrogate.GetObjectData(obj, serInfo, context);
         }
 
         public override object? ReadXmlValue(
             XmlReaderDelegator xmlReader,
             XmlObjectSerializerReadContext? context
-        ) {
+        )
+        {
             Debug.Assert(context != null);
 
             xmlReader.Read();

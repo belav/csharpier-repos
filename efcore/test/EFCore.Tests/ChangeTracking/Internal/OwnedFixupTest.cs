@@ -208,7 +208,8 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
         public void Add_principal_with_dependent_unidirectional_nav(
             EntityState entityState,
             bool? useTrackGraph
-        ) {
+        )
+        {
             using var context = new FixupContext();
             var principal = new ParentPN { Id = 77 };
             if (useTrackGraph == null)
@@ -312,7 +313,8 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
         public void Add_principal_with_dependent_both_navs(
             EntityState entityState,
             bool? useTrackGraph
-        ) {
+        )
+        {
             using var context = new FixupContext();
             var principal = new Parent { Id = 77 };
             if (useTrackGraph == null)
@@ -410,7 +412,8 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
         public void Add_principal_with_dependent_principal_nav(
             EntityState entityState,
             bool? useTrackGraph
-        ) {
+        )
+        {
             using var context = new FixupContext();
             var principal = new Parent { Id = 77 };
             if (useTrackGraph == null)
@@ -554,7 +557,8 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
             EntityState entityState,
             bool? useTrackGraph,
             CollectionType collectionType
-        ) {
+        )
+        {
             using var context = new FixupContext();
             var principal = new ParentPN { Id = 77 };
             if (useTrackGraph == null)
@@ -725,7 +729,8 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
             EntityState entityState,
             bool? useTrackGraph,
             CollectionType collectionType
-        ) {
+        )
+        {
             using var context = new FixupContext();
             var principal = new Parent { Id = 77 };
             if (useTrackGraph == null)
@@ -891,7 +896,8 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
             EntityState entityState,
             bool? useTrackGraph,
             CollectionType collectionType
-        ) {
+        )
+        {
             using var context = new FixupContext();
             var principal = new Parent { Id = 77 };
             if (useTrackGraph == null)
@@ -1219,7 +1225,8 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
         public void Instance_changed_unidirectional_collection(
             EntityState entityState,
             CollectionType collectionType
-        ) {
+        )
+        {
             using var context = new FixupContext();
             var principal = new ParentPN { Id = 77 };
 
@@ -1341,7 +1348,8 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
         public void Instance_changed_bidirectional_collection(
             EntityState entityState,
             CollectionType collectionType
-        ) {
+        )
+        {
             using var context = new FixupContext();
             var principal = new Parent { Id = 77 };
 
@@ -1651,7 +1659,8 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
         public void Identity_changed_unidirectional_collection(
             EntityState entityState,
             CollectionType collectionType
-        ) {
+        )
+        {
             using var context = new FixupContext();
             var principal = new ParentPN { Id = 77 };
 
@@ -1770,7 +1779,8 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
         public void Identity_changed_bidirectional_collection(
             EntityState entityState,
             CollectionType collectionType
-        ) {
+        )
+        {
             using var context = new FixupContext();
             var principal = new Parent { Id = 77 };
 
@@ -2142,7 +2152,8 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
         public void Identity_swapped_unidirectional_collection(
             EntityState entityState,
             CollectionType collectionType
-        ) {
+        )
+        {
             using var context = new FixupContext();
             var principal = new ParentPN { Id = 77 };
 
@@ -2318,7 +2329,8 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
         public void Identity_swapped_bidirectional_collection(
             EntityState entityState,
             CollectionType collectionType
-        ) {
+        )
+        {
             using var context = new FixupContext();
             var principal = new Parent { Id = 77 };
 
@@ -2705,7 +2717,8 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
         public void Parent_changed_unidirectional_collection(
             EntityState entityState,
             CollectionType collectionType
-        ) {
+        )
+        {
             using var context = new FixupContext();
             var principal1 = new ParentPN { Id = 77 };
 
@@ -2847,7 +2860,8 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
         public void Parent_changed_bidirectional_collection(
             EntityState entityState,
             CollectionType collectionType
-        ) {
+        )
+        {
             using var context = new FixupContext();
             var principal1 = new Parent { Id = 77 };
 
@@ -3284,7 +3298,8 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
         public void Parent_swapped_unidirectional_collection(
             EntityState entityState,
             CollectionType collectionType
-        ) {
+        )
+        {
             using var context = new FixupContext();
             var principal1 = new ParentPN { Id = 77 };
 
@@ -3483,7 +3498,8 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
         public void Parent_swapped_bidirectional_collection(
             EntityState entityState,
             CollectionType collectionType
-        ) {
+        )
+        {
             using var context = new FixupContext();
             var principal1 = new Parent { Id = 77 };
 
@@ -3894,7 +3910,8 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
         public void Parent_and_identity_changed_unidirectional_collection(
             EntityState entityState,
             CollectionType collectionType
-        ) {
+        )
+        {
             using var context = new FixupContext();
             var principal1 = new ParentPN { Id = 77 };
 
@@ -4025,7 +4042,8 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
         public void Parent_and_identity_changed_bidirectional_collection(
             EntityState entityState,
             CollectionType collectionType
-        ) {
+        )
+        {
             using var context = new FixupContext();
             var principal1 = new Parent { Id = 77 };
 
@@ -4450,7 +4468,8 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
         public void Parent_and_identity_swapped_unidirectional_collection(
             EntityState entityState,
             CollectionType collectionType
-        ) {
+        )
+        {
             using var context = new FixupContext();
             var principal1 = new ParentPN { Id = 77 };
 
@@ -4635,7 +4654,8 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
         public void Parent_and_identity_swapped_bidirectional_collection(
             EntityState entityState,
             CollectionType collectionType
-        ) {
+        )
+        {
             using var context = new FixupContext();
             var principal1 = new Parent { Id = 77 };
 

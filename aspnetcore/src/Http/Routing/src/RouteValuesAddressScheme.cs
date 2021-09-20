@@ -69,7 +69,8 @@ namespace Microsoft.AspNetCore.Routing
         private static IEnumerable<Endpoint> GetEndpoints(
             IList<OutboundMatchResult> matchResults,
             int matchCount
-        ) {
+        )
+        {
             for (var i = 0; i < matchCount; i++)
             {
                 yield return (RouteEndpoint)matchResults[i].Match.Entry.Data;
@@ -117,7 +118,8 @@ namespace Microsoft.AspNetCore.Routing
                 if (
                     endpoint.Metadata.GetMetadata<ISuppressLinkGenerationMetadata>()?.SuppressLinkGeneration
                     == true
-                ) {
+                )
+                {
                     continue;
                 }
 
@@ -154,7 +156,8 @@ namespace Microsoft.AspNetCore.Routing
             RouteEndpoint endpoint,
             IReadOnlyDictionary<string, object?> requiredValues,
             string? routeName
-        ) {
+        )
+        {
             var entry = new OutboundRouteEntry()
             {
                 Handler = NullRouter.Instance,
@@ -185,7 +188,8 @@ namespace Microsoft.AspNetCore.Routing
                 List<OutboundMatch> allMatches,
                 LinkGenerationDecisionTree allMatchesLinkGenerationTree,
                 Dictionary<string, List<OutboundMatchResult>> namedMatches
-            ) {
+            )
+            {
                 AllMatches = allMatches;
                 AllMatchesLinkGenerationTree = allMatchesLinkGenerationTree;
                 NamedMatches = namedMatches;

@@ -40,7 +40,8 @@ namespace R2RTest
             IEnumerable<string> modules,
             IEnumerable<string> folders,
             bool noEtw
-        ) {
+        )
+        {
             ProcessParameters processParameters = base.ExecutionProcess(modules, folders, noEtw);
             processParameters.EnvironmentOverrides["COMPLUS_ReadyToRun"] = "1";
             processParameters.EnvironmentOverrides["COMPLUS_NoGuiOnAssert"] = "1";
@@ -50,7 +51,8 @@ namespace R2RTest
         protected override IEnumerable<string> BuildCommandLineArguments(
             IEnumerable<string> assemblyFileNames,
             string outputFileName
-        ) {
+        )
+        {
             if (assemblyFileNames.Count() > 1)
             {
                 throw new NotImplementedException(
@@ -70,7 +72,8 @@ namespace R2RTest
                 _options.LargeBubble
                 && Path.GetFileNameWithoutExtension(assemblyFileNames.First())
                     != "System.Private.CoreLib"
-            ) {
+            )
+            {
                 // There seems to be a bug in Crossgen on Linux we don't intend to fix -
                 // it crashes when trying to compile S.P.C in large version bubble mode.
                 yield return "/largeversionbubble";

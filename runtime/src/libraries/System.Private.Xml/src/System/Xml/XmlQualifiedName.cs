@@ -168,7 +168,8 @@ namespace System.Xml
             string s,
             IXmlNamespaceResolver nsmgr,
             out string prefix
-        ) {
+        )
+        {
             string localName;
             ValidateNames.ParseQNameThrow(s, out prefix, out localName);
 

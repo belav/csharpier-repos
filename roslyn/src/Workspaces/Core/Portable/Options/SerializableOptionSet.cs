@@ -60,7 +60,8 @@ namespace Microsoft.CodeAnalysis.Options
             ImmutableDictionary<OptionKey, object?> values,
             ImmutableHashSet<OptionKey> changedOptionKeysSerializable,
             ImmutableHashSet<OptionKey> changedOptionKeysNonSerializable
-        ) {
+        )
+        {
             Debug.Assert(languages.All(RemoteSupportedLanguages.IsSupported));
 
             _languages = languages;
@@ -85,14 +86,15 @@ namespace Microsoft.CodeAnalysis.Options
             ImmutableHashSet<IOption> serializableOptions,
             ImmutableDictionary<OptionKey, object?> values,
             ImmutableHashSet<OptionKey> changedOptionKeysSerializable
-        ) : this(
-            languages,
-            new WorkspaceOptionSet(optionService),
-            serializableOptions,
-            values,
-            changedOptionKeysSerializable,
-            changedOptionKeysNonSerializable: ImmutableHashSet<OptionKey>.Empty
-        ) { }
+        )
+            : this(
+                languages,
+                new WorkspaceOptionSet(optionService),
+                serializableOptions,
+                values,
+                changedOptionKeysSerializable,
+                changedOptionKeysNonSerializable: ImmutableHashSet<OptionKey>.Empty
+            ) { }
 
         /// <summary>
         /// Returns an option set with all the serializable option values prefetched for given <paramref name="languages"/>,
@@ -312,7 +314,8 @@ namespace Microsoft.CodeAnalysis.Options
                 else if (
                     kind == OptionValueKind.CodeStyleOption
                     || kind == OptionValueKind.NamingStylePreferences
-                ) {
+                )
+                {
                     RoslynDebug.Assert(value != null);
                     ((IObjectWritable)value).WriteTo(writer);
                 }
@@ -325,7 +328,8 @@ namespace Microsoft.CodeAnalysis.Options
             writer.WriteInt32(_changedOptionKeysSerializable.Count);
             foreach (
                 var changedKey in _changedOptionKeysSerializable.OrderBy(OptionKeyComparer.Instance)
-            ) {
+            )
+            {
                 SerializeOptionKey(changedKey);
             }
 
@@ -349,7 +353,8 @@ namespace Microsoft.CodeAnalysis.Options
             ObjectReader reader,
             IOptionService optionService,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             // We deserialize the following contents from this option set:
             //  1. Languages
             //  2. Prefetched serializable option key-value pairs
@@ -405,7 +410,8 @@ namespace Microsoft.CodeAnalysis.Options
                         if (
                             defaultValue == null
                             || optionKey.Option.Type.GenericTypeArguments.Length != 1
-                        ) {
+                        )
+                        {
                             continue;
                         }
 
@@ -466,7 +472,8 @@ namespace Microsoft.CodeAnalysis.Options
                 ObjectReader reader,
                 ILookup<string, IOption> lookup,
                 out OptionKey deserializedOptionKey
-            ) {
+            )
+            {
                 var name = reader.ReadString();
                 var feature = reader.ReadString();
                 var isPerLanguage = reader.ReadBoolean();

@@ -88,7 +88,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
             string text,
             SourceCodeKind kind,
             params string[] defines
-        ) {
+        )
+        {
             var options = this.GetOptions(kind, defines);
             return Parse(text, options);
         }
@@ -110,7 +111,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
             CompilationUnitSyntax node,
             string text,
             bool disallowErrors = true
-        ) {
+        )
+        {
             Assert.NotNull(node);
             var fullText = node.ToFullString();
             Assert.Equal(text, fullText);
@@ -5081,7 +5083,8 @@ class A { }
             string compilationFileName,
             string lineDirective,
             string expectedErrorStringFileName
-        ) {
+        )
+        {
             var text = lineDirective + "#error ERROR\r\n";
             var tree = SyntaxFactory.ParseSyntaxTree(text, path: compilationFileName);
             TestRoundTripping(tree.GetCompilationUnitRoot(), text, false);

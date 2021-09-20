@@ -211,11 +211,13 @@ namespace System.Speech.Synthesis.TtsEngine
             string textFrag,
             int offset,
             int length
-        ) {
+        )
+        {
             if (
                 fragState.Action == TtsEngineAction.Speak
                 || fragState.Action == TtsEngineAction.Pronounce
-            ) {
+            )
+            {
                 textFrag = textToSpeak;
             }
             if (!string.IsNullOrEmpty(textFrag))
@@ -291,7 +293,8 @@ namespace System.Speech.Synthesis.TtsEngine
             SayAs sayAs,
             Prosody prosody,
             char[] phonemes
-        ) {
+        )
+        {
             _action = action;
             _langId = langId;
             _emphasis = emphasis;

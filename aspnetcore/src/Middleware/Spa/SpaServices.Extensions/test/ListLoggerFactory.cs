@@ -78,7 +78,8 @@ namespace Microsoft.AspNetCore.SpaServices.Extensions.Tests
                 TState state,
                 Exception exception,
                 Func<TState, Exception, string> formatter
-            ) {
+            )
+            {
                 lock (_sync) // Guard against tests with explicit concurrency
                 {
                     var message = formatter(state, exception)?.Trim();

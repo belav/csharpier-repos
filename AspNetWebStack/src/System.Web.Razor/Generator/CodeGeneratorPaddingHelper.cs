@@ -38,7 +38,8 @@ namespace System.Web.Razor.Generator
             Span target,
             ref int startGeneratedCode,
             out int paddingCharCount
-        ) {
+        )
+        {
             if (host == null)
             {
                 throw new ArgumentNullException("host");
@@ -64,7 +65,8 @@ namespace System.Web.Razor.Generator
                 && target.Previous.Kind == SpanKind.Transition
                 && // target.Previous is guaranteed to be none null if you got any padding.
                 String.Equals(target.Previous.Content, SyntaxConstants.TransitionString)
-            ) {
+            )
+            {
                 padding--;
                 startGeneratedCode--;
             }
@@ -79,7 +81,8 @@ namespace System.Web.Razor.Generator
             string code,
             Span target,
             out int paddingCharCount
-        ) {
+        )
+        {
             int padding = CalculatePadding(host, target, 0);
 
             return PadInternal(host, code, padding, out paddingCharCount);
@@ -91,7 +94,8 @@ namespace System.Web.Razor.Generator
             Span target,
             int generatedStart,
             out int paddingCharCount
-        ) {
+        )
+        {
             int padding = CalculatePadding(host, target, generatedStart);
 
             return PadInternal(host, code, padding, out paddingCharCount);
@@ -135,7 +139,8 @@ namespace System.Web.Razor.Generator
             string code,
             int padding,
             out int paddingCharCount
-        ) {
+        )
+        {
             if (host.DesignTimeMode && host.IsIndentingWithTabs)
             {
                 int spaces;

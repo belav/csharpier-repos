@@ -584,7 +584,8 @@ namespace System.Globalization.Tests
             CompareOptions options,
             bool expected,
             int expectedMatchLength
-        ) {
+        )
+        {
             if (options == CompareOptions.None)
             {
                 Assert.Equal(expected, compareInfo.IsSuffix(source, value));
@@ -594,7 +595,8 @@ namespace System.Globalization.Tests
             if (
                 (compareInfo == s_invariantCompare)
                 && ((options == CompareOptions.None) || (options == CompareOptions.IgnoreCase))
-            ) {
+            )
+            {
                 StringComparison stringComparison =
                     (options == CompareOptions.IgnoreCase)
                         ? StringComparison.InvariantCultureIgnoreCase

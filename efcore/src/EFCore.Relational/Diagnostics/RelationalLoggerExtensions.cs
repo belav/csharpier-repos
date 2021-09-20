@@ -56,7 +56,8 @@ namespace Microsoft.EntityFrameworkCore.Diagnostics
             IsolationLevel isolationLevel,
             Guid transactionId,
             DateTimeOffset startTime
-        ) {
+        )
+        {
             var definition = RelationalResources.LogBeginningTransaction(diagnostics);
 
             LogTransactionStarting(diagnostics, isolationLevel, definition);
@@ -68,7 +69,8 @@ namespace Microsoft.EntityFrameworkCore.Diagnostics
                     out var diagnosticSourceEnabled,
                     out var simpleLogEnabled
                 )
-            ) {
+            )
+            {
                 var eventData = BroadcastTransactionStarting(
                     diagnostics,
                     connection,
@@ -112,7 +114,8 @@ namespace Microsoft.EntityFrameworkCore.Diagnostics
             Guid transactionId,
             DateTimeOffset startTime,
             CancellationToken cancellationToken = default
-        ) {
+        )
+        {
             var definition = RelationalResources.LogBeginningTransaction(diagnostics);
 
             LogTransactionStarting(diagnostics, isolationLevel, definition);
@@ -124,7 +127,8 @@ namespace Microsoft.EntityFrameworkCore.Diagnostics
                     out var diagnosticSourceEnabled,
                     out var simpleLogEnabled
                 )
-            ) {
+            )
+            {
                 var eventData = BroadcastTransactionStarting(
                     diagnostics,
                     connection,
@@ -161,7 +165,8 @@ namespace Microsoft.EntityFrameworkCore.Diagnostics
             EventDefinition<string> definition,
             bool diagnosticSourceEnabled,
             bool simpleLogEnabled
-        ) {
+        )
+        {
             var eventData = new TransactionStartingEventData(
                 definition,
                 TransactionStarting,
@@ -187,7 +192,8 @@ namespace Microsoft.EntityFrameworkCore.Diagnostics
             IDiagnosticsLogger<DbLoggerCategory.Database.Transaction> diagnostics,
             IsolationLevel isolationLevel,
             EventDefinition<string> definition
-        ) {
+        )
+        {
             if (diagnostics.ShouldLog(definition))
             {
                 definition.Log(diagnostics, isolationLevel.ToString("G"));
@@ -218,7 +224,8 @@ namespace Microsoft.EntityFrameworkCore.Diagnostics
             Guid transactionId,
             DateTimeOffset startTime,
             TimeSpan duration
-        ) {
+        )
+        {
             var definition = RelationalResources.LogBeganTransaction(diagnostics);
 
             LogTransactionStarted(diagnostics, transaction, definition);
@@ -230,7 +237,8 @@ namespace Microsoft.EntityFrameworkCore.Diagnostics
                     out var diagnosticSourceEnabled,
                     out var simpleLogEnabled
                 )
-            ) {
+            )
+            {
                 var eventData = BroadcastTransactionStarted(
                     diagnostics,
                     connection,
@@ -277,7 +285,8 @@ namespace Microsoft.EntityFrameworkCore.Diagnostics
             DateTimeOffset startTime,
             TimeSpan duration,
             CancellationToken cancellationToken = default
-        ) {
+        )
+        {
             var definition = RelationalResources.LogBeganTransaction(diagnostics);
 
             LogTransactionStarted(diagnostics, transaction, definition);
@@ -289,7 +298,8 @@ namespace Microsoft.EntityFrameworkCore.Diagnostics
                     out var diagnosticSourceEnabled,
                     out var simpleLogEnabled
                 )
-            ) {
+            )
+            {
                 var eventData = BroadcastTransactionStarted(
                     diagnostics,
                     connection,
@@ -328,7 +338,8 @@ namespace Microsoft.EntityFrameworkCore.Diagnostics
             EventDefinition<string> definition,
             bool diagnosticSourceEnabled,
             bool simpleLogEnabled
-        ) {
+        )
+        {
             var eventData = new TransactionEndEventData(
                 definition,
                 TransactionStarted,
@@ -355,7 +366,8 @@ namespace Microsoft.EntityFrameworkCore.Diagnostics
             IDiagnosticsLogger<DbLoggerCategory.Database.Transaction> diagnostics,
             DbTransaction transaction,
             EventDefinition<string> definition
-        ) {
+        )
+        {
             if (diagnostics.ShouldLog(definition))
             {
                 definition.Log(diagnostics, transaction.IsolationLevel.ToString("G"));
@@ -384,7 +396,8 @@ namespace Microsoft.EntityFrameworkCore.Diagnostics
             DbTransaction transaction,
             Guid transactionId,
             DateTimeOffset startTime
-        ) {
+        )
+        {
             var definition = RelationalResources.LogUsingTransaction(diagnostics);
 
             LogTransactionUsed(diagnostics, transaction, definition);
@@ -396,7 +409,8 @@ namespace Microsoft.EntityFrameworkCore.Diagnostics
                     out var diagnosticSourceEnabled,
                     out var simpleLogEnabled
                 )
-            ) {
+            )
+            {
                 var eventData = BroadcastTransactionUsed(
                     diagnostics,
                     connection,
@@ -440,7 +454,8 @@ namespace Microsoft.EntityFrameworkCore.Diagnostics
             Guid transactionId,
             DateTimeOffset startTime,
             CancellationToken cancellationToken = default
-        ) {
+        )
+        {
             var definition = RelationalResources.LogUsingTransaction(diagnostics);
 
             LogTransactionUsed(diagnostics, transaction, definition);
@@ -452,7 +467,8 @@ namespace Microsoft.EntityFrameworkCore.Diagnostics
                     out var diagnosticSourceEnabled,
                     out var simpleLogEnabled
                 )
-            ) {
+            )
+            {
                 var eventData = BroadcastTransactionUsed(
                     diagnostics,
                     connection,
@@ -489,7 +505,8 @@ namespace Microsoft.EntityFrameworkCore.Diagnostics
             EventDefinition<string> definition,
             bool diagnosticSourceEnabled,
             bool simpleLogEnabled
-        ) {
+        )
+        {
             var eventData = new TransactionEventData(
                 definition,
                 TransactionUsed,
@@ -518,7 +535,8 @@ namespace Microsoft.EntityFrameworkCore.Diagnostics
             IDiagnosticsLogger<DbLoggerCategory.Database.Transaction> diagnostics,
             DbTransaction transaction,
             EventDefinition<string> definition
-        ) {
+        )
+        {
             if (diagnostics.ShouldLog(definition))
             {
                 definition.Log(diagnostics, transaction.IsolationLevel.ToString("G"));
@@ -547,7 +565,8 @@ namespace Microsoft.EntityFrameworkCore.Diagnostics
             DbTransaction transaction,
             Guid transactionId,
             DateTimeOffset startTime
-        ) {
+        )
+        {
             var definition = RelationalResources.LogCommittingTransaction(diagnostics);
 
             LogTransactionCommitting(diagnostics, definition);
@@ -559,7 +578,8 @@ namespace Microsoft.EntityFrameworkCore.Diagnostics
                     out var diagnosticSourceEnabled,
                     out var simpleLogEnabled
                 )
-            ) {
+            )
+            {
                 var eventData = BroadcastTransactionCommitting(
                     diagnostics,
                     connection,
@@ -599,7 +619,8 @@ namespace Microsoft.EntityFrameworkCore.Diagnostics
             Guid transactionId,
             DateTimeOffset startTime,
             CancellationToken cancellationToken = default
-        ) {
+        )
+        {
             var definition = RelationalResources.LogCommittingTransaction(diagnostics);
 
             LogTransactionCommitting(diagnostics, definition);
@@ -611,7 +632,8 @@ namespace Microsoft.EntityFrameworkCore.Diagnostics
                     out var diagnosticSourceEnabled,
                     out var simpleLogEnabled
                 )
-            ) {
+            )
+            {
                 var eventData = BroadcastTransactionCommitting(
                     diagnostics,
                     connection,
@@ -648,7 +670,8 @@ namespace Microsoft.EntityFrameworkCore.Diagnostics
             bool async,
             bool diagnosticSourceEnabled,
             bool simpleLogEnabled
-        ) {
+        )
+        {
             var eventData = new TransactionEventData(
                 definition,
                 (d, p) => ((EventDefinition)d).GenerateMessage(),
@@ -673,7 +696,8 @@ namespace Microsoft.EntityFrameworkCore.Diagnostics
         private static void LogTransactionCommitting(
             IDiagnosticsLogger<DbLoggerCategory.Database.Transaction> diagnostics,
             EventDefinition definition
-        ) {
+        )
+        {
             if (diagnostics.ShouldLog(definition))
             {
                 definition.Log(diagnostics);
@@ -696,7 +720,8 @@ namespace Microsoft.EntityFrameworkCore.Diagnostics
             Guid transactionId,
             DateTimeOffset startTime,
             TimeSpan duration
-        ) {
+        )
+        {
             var definition = RelationalResources.LogCommittedTransaction(diagnostics);
 
             LogTransactionCommitted(diagnostics, definition);
@@ -708,7 +733,8 @@ namespace Microsoft.EntityFrameworkCore.Diagnostics
                     out var diagnosticSourceEnabled,
                     out var simpleLogEnabled
                 )
-            ) {
+            )
+            {
                 var eventData = BroadcastTransactionCommitted(
                     diagnostics,
                     connection,
@@ -746,7 +772,8 @@ namespace Microsoft.EntityFrameworkCore.Diagnostics
             DateTimeOffset startTime,
             TimeSpan duration,
             CancellationToken cancellationToken = default
-        ) {
+        )
+        {
             var definition = RelationalResources.LogCommittedTransaction(diagnostics);
 
             LogTransactionCommitted(diagnostics, definition);
@@ -758,7 +785,8 @@ namespace Microsoft.EntityFrameworkCore.Diagnostics
                     out var diagnosticSourceEnabled,
                     out var simpleLogEnabled
                 )
-            ) {
+            )
+            {
                 var eventData = BroadcastTransactionCommitted(
                     diagnostics,
                     connection,
@@ -796,7 +824,8 @@ namespace Microsoft.EntityFrameworkCore.Diagnostics
             bool async,
             bool diagnosticSourceEnabled,
             bool simpleLogEnabled
-        ) {
+        )
+        {
             var eventData = new TransactionEndEventData(
                 definition,
                 (d, p) => ((EventDefinition)d).GenerateMessage(),
@@ -822,7 +851,8 @@ namespace Microsoft.EntityFrameworkCore.Diagnostics
         private static void LogTransactionCommitted(
             IDiagnosticsLogger<DbLoggerCategory.Database.Transaction> diagnostics,
             EventDefinition definition
-        ) {
+        )
+        {
             if (diagnostics.ShouldLog(definition))
             {
                 definition.Log(diagnostics);
@@ -845,7 +875,8 @@ namespace Microsoft.EntityFrameworkCore.Diagnostics
             Guid transactionId,
             DateTimeOffset startTime,
             TimeSpan duration
-        ) {
+        )
+        {
             var definition = RelationalResources.LogRolledBackTransaction(diagnostics);
 
             LogTransactionRolledBack(diagnostics, definition);
@@ -857,7 +888,8 @@ namespace Microsoft.EntityFrameworkCore.Diagnostics
                     out var diagnosticSourceEnabled,
                     out var simpleLogEnabled
                 )
-            ) {
+            )
+            {
                 var eventData = BroadcastTransactionRolledBack(
                     diagnostics,
                     connection,
@@ -895,7 +927,8 @@ namespace Microsoft.EntityFrameworkCore.Diagnostics
             DateTimeOffset startTime,
             TimeSpan duration,
             CancellationToken cancellationToken = default
-        ) {
+        )
+        {
             var definition = RelationalResources.LogRolledBackTransaction(diagnostics);
 
             LogTransactionRolledBack(diagnostics, definition);
@@ -907,7 +940,8 @@ namespace Microsoft.EntityFrameworkCore.Diagnostics
                     out var diagnosticSourceEnabled,
                     out var simpleLogEnabled
                 )
-            ) {
+            )
+            {
                 var eventData = BroadcastTransactionRolledBack(
                     diagnostics,
                     connection,
@@ -945,7 +979,8 @@ namespace Microsoft.EntityFrameworkCore.Diagnostics
             bool async,
             bool diagnosticSourceEnabled,
             bool simpleLogEnabled
-        ) {
+        )
+        {
             var eventData = new TransactionEndEventData(
                 definition,
                 (d, p) => ((EventDefinition)d).GenerateMessage(),
@@ -971,7 +1006,8 @@ namespace Microsoft.EntityFrameworkCore.Diagnostics
         private static void LogTransactionRolledBack(
             IDiagnosticsLogger<DbLoggerCategory.Database.Transaction> diagnostics,
             EventDefinition definition
-        ) {
+        )
+        {
             if (diagnostics.ShouldLog(definition))
             {
                 definition.Log(diagnostics);
@@ -993,7 +1029,8 @@ namespace Microsoft.EntityFrameworkCore.Diagnostics
             DbTransaction transaction,
             Guid transactionId,
             DateTimeOffset startTime
-        ) {
+        )
+        {
             var definition = RelationalResources.LogRollingBackTransaction(diagnostics);
 
             LogTransactionRollingBack(diagnostics, definition);
@@ -1005,7 +1042,8 @@ namespace Microsoft.EntityFrameworkCore.Diagnostics
                     out var diagnosticSourceEnabled,
                     out var simpleLogEnabled
                 )
-            ) {
+            )
+            {
                 var eventData = BroadcastTransactionRollingBack(
                     diagnostics,
                     connection,
@@ -1045,7 +1083,8 @@ namespace Microsoft.EntityFrameworkCore.Diagnostics
             Guid transactionId,
             DateTimeOffset startTime,
             CancellationToken cancellationToken = default
-        ) {
+        )
+        {
             var definition = RelationalResources.LogRollingBackTransaction(diagnostics);
 
             LogTransactionRollingBack(diagnostics, definition);
@@ -1057,7 +1096,8 @@ namespace Microsoft.EntityFrameworkCore.Diagnostics
                     out var diagnosticSourceEnabled,
                     out var simpleLogEnabled
                 )
-            ) {
+            )
+            {
                 var eventData = BroadcastTransactionRollingBack(
                     diagnostics,
                     connection,
@@ -1094,7 +1134,8 @@ namespace Microsoft.EntityFrameworkCore.Diagnostics
             bool async,
             bool diagnosticSourceEnabled,
             bool simpleLogEnabled
-        ) {
+        )
+        {
             var eventData = new TransactionEventData(
                 definition,
                 (d, p) => ((EventDefinition)d).GenerateMessage(),
@@ -1119,7 +1160,8 @@ namespace Microsoft.EntityFrameworkCore.Diagnostics
         private static void LogTransactionRollingBack(
             IDiagnosticsLogger<DbLoggerCategory.Database.Transaction> diagnostics,
             EventDefinition definition
-        ) {
+        )
+        {
             if (diagnostics.ShouldLog(definition))
             {
                 definition.Log(diagnostics);
@@ -1141,7 +1183,8 @@ namespace Microsoft.EntityFrameworkCore.Diagnostics
             DbTransaction transaction,
             Guid transactionId,
             DateTimeOffset startTime
-        ) {
+        )
+        {
             var definition = RelationalResources.LogCreatingTransactionSavepoint(diagnostics);
 
             LogCreatingTransactionSavepoint(diagnostics, definition);
@@ -1153,7 +1196,8 @@ namespace Microsoft.EntityFrameworkCore.Diagnostics
                     out var diagnosticSourceEnabled,
                     out var simpleLogEnabled
                 )
-            ) {
+            )
+            {
                 var eventData = BroadcastCreatingTransactionSavepoint(
                     diagnostics,
                     connection,
@@ -1193,7 +1237,8 @@ namespace Microsoft.EntityFrameworkCore.Diagnostics
             Guid transactionId,
             DateTimeOffset startTime,
             CancellationToken cancellationToken = default
-        ) {
+        )
+        {
             var definition = RelationalResources.LogCreatingTransactionSavepoint(diagnostics);
 
             LogCreatingTransactionSavepoint(diagnostics, definition);
@@ -1205,7 +1250,8 @@ namespace Microsoft.EntityFrameworkCore.Diagnostics
                     out var diagnosticSourceEnabled,
                     out var simpleLogEnabled
                 )
-            ) {
+            )
+            {
                 var eventData = BroadcastCreatingTransactionSavepoint(
                     diagnostics,
                     connection,
@@ -1242,7 +1288,8 @@ namespace Microsoft.EntityFrameworkCore.Diagnostics
             bool async,
             bool diagnosticSourceEnabled,
             bool simpleLogEnabled
-        ) {
+        )
+        {
             var eventData = new TransactionEventData(
                 definition,
                 (d, p) => ((EventDefinition)d).GenerateMessage(),
@@ -1267,7 +1314,8 @@ namespace Microsoft.EntityFrameworkCore.Diagnostics
         private static void LogCreatingTransactionSavepoint(
             IDiagnosticsLogger<DbLoggerCategory.Database.Transaction> diagnostics,
             EventDefinition definition
-        ) {
+        )
+        {
             if (diagnostics.ShouldLog(definition))
             {
                 definition.Log(diagnostics);
@@ -1288,7 +1336,8 @@ namespace Microsoft.EntityFrameworkCore.Diagnostics
             DbTransaction transaction,
             Guid transactionId,
             DateTimeOffset startTime
-        ) {
+        )
+        {
             var definition = RelationalResources.LogCreatedTransactionSavepoint(diagnostics);
 
             LogCreatedTransactionSavepoint(diagnostics, definition);
@@ -1300,7 +1349,8 @@ namespace Microsoft.EntityFrameworkCore.Diagnostics
                     out var diagnosticSourceEnabled,
                     out var simpleLogEnabled
                 )
-            ) {
+            )
+            {
                 var eventData = BroadcastCreatedTransactionSavepoint(
                     diagnostics,
                     connection,
@@ -1335,7 +1385,8 @@ namespace Microsoft.EntityFrameworkCore.Diagnostics
             Guid transactionId,
             DateTimeOffset startTime,
             CancellationToken cancellationToken = default
-        ) {
+        )
+        {
             var definition = RelationalResources.LogCreatedTransactionSavepoint(diagnostics);
 
             LogCreatedTransactionSavepoint(diagnostics, definition);
@@ -1347,7 +1398,8 @@ namespace Microsoft.EntityFrameworkCore.Diagnostics
                     out var diagnosticSourceEnabled,
                     out var simpleLogEnabled
                 )
-            ) {
+            )
+            {
                 var eventData = BroadcastCreatedTransactionSavepoint(
                     diagnostics,
                     connection,
@@ -1383,7 +1435,8 @@ namespace Microsoft.EntityFrameworkCore.Diagnostics
             bool async,
             bool diagnosticSourceEnabled,
             bool simpleLogEnabled
-        ) {
+        )
+        {
             var eventData = new TransactionEventData(
                 definition,
                 (d, p) => ((EventDefinition)d).GenerateMessage(),
@@ -1408,7 +1461,8 @@ namespace Microsoft.EntityFrameworkCore.Diagnostics
         private static void LogCreatedTransactionSavepoint(
             IDiagnosticsLogger<DbLoggerCategory.Database.Transaction> diagnostics,
             EventDefinition definition
-        ) {
+        )
+        {
             if (diagnostics.ShouldLog(definition))
             {
                 definition.Log(diagnostics);
@@ -1430,7 +1484,8 @@ namespace Microsoft.EntityFrameworkCore.Diagnostics
             DbTransaction transaction,
             Guid transactionId,
             DateTimeOffset startTime
-        ) {
+        )
+        {
             var definition = RelationalResources.LogRollingBackToTransactionSavepoint(diagnostics);
 
             LogRollingBackToTransactionSavepoint(diagnostics, definition);
@@ -1442,7 +1497,8 @@ namespace Microsoft.EntityFrameworkCore.Diagnostics
                     out var diagnosticSourceEnabled,
                     out var simpleLogEnabled
                 )
-            ) {
+            )
+            {
                 var eventData = BroadcastRollingBackToTransactionSavepoint(
                     diagnostics,
                     connection,
@@ -1482,7 +1538,8 @@ namespace Microsoft.EntityFrameworkCore.Diagnostics
             Guid transactionId,
             DateTimeOffset startTime,
             CancellationToken cancellationToken = default
-        ) {
+        )
+        {
             var definition = RelationalResources.LogRollingBackToTransactionSavepoint(diagnostics);
 
             LogRollingBackToTransactionSavepoint(diagnostics, definition);
@@ -1494,7 +1551,8 @@ namespace Microsoft.EntityFrameworkCore.Diagnostics
                     out var diagnosticSourceEnabled,
                     out var simpleLogEnabled
                 )
-            ) {
+            )
+            {
                 var eventData = BroadcastRollingBackToTransactionSavepoint(
                     diagnostics,
                     connection,
@@ -1531,7 +1589,8 @@ namespace Microsoft.EntityFrameworkCore.Diagnostics
             bool async,
             bool diagnosticSourceEnabled,
             bool simpleLogEnabled
-        ) {
+        )
+        {
             var eventData = new TransactionEventData(
                 definition,
                 (d, p) => ((EventDefinition)d).GenerateMessage(),
@@ -1556,7 +1615,8 @@ namespace Microsoft.EntityFrameworkCore.Diagnostics
         private static void LogRollingBackToTransactionSavepoint(
             IDiagnosticsLogger<DbLoggerCategory.Database.Transaction> diagnostics,
             EventDefinition definition
-        ) {
+        )
+        {
             if (diagnostics.ShouldLog(definition))
             {
                 definition.Log(diagnostics);
@@ -1577,7 +1637,8 @@ namespace Microsoft.EntityFrameworkCore.Diagnostics
             DbTransaction transaction,
             Guid transactionId,
             DateTimeOffset startTime
-        ) {
+        )
+        {
             var definition = RelationalResources.LogRolledBackToTransactionSavepoint(diagnostics);
 
             LogRolledBackToTransactionSavepoint(diagnostics, definition);
@@ -1589,7 +1650,8 @@ namespace Microsoft.EntityFrameworkCore.Diagnostics
                     out var diagnosticSourceEnabled,
                     out var simpleLogEnabled
                 )
-            ) {
+            )
+            {
                 var eventData = BroadcastRolledBackToTransactionSavepoint(
                     diagnostics,
                     connection,
@@ -1624,7 +1686,8 @@ namespace Microsoft.EntityFrameworkCore.Diagnostics
             Guid transactionId,
             DateTimeOffset startTime,
             CancellationToken cancellationToken = default
-        ) {
+        )
+        {
             var definition = RelationalResources.LogRolledBackToTransactionSavepoint(diagnostics);
 
             LogCreatedTransactionSavepoint(diagnostics, definition);
@@ -1636,7 +1699,8 @@ namespace Microsoft.EntityFrameworkCore.Diagnostics
                     out var diagnosticSourceEnabled,
                     out var simpleLogEnabled
                 )
-            ) {
+            )
+            {
                 var eventData = BroadcastRolledBackToTransactionSavepoint(
                     diagnostics,
                     connection,
@@ -1672,7 +1736,8 @@ namespace Microsoft.EntityFrameworkCore.Diagnostics
             bool async,
             bool diagnosticSourceEnabled,
             bool simpleLogEnabled
-        ) {
+        )
+        {
             var eventData = new TransactionEventData(
                 definition,
                 (d, p) => ((EventDefinition)d).GenerateMessage(),
@@ -1697,7 +1762,8 @@ namespace Microsoft.EntityFrameworkCore.Diagnostics
         private static void LogRolledBackToTransactionSavepoint(
             IDiagnosticsLogger<DbLoggerCategory.Database.Transaction> diagnostics,
             EventDefinition definition
-        ) {
+        )
+        {
             if (diagnostics.ShouldLog(definition))
             {
                 definition.Log(diagnostics);
@@ -1719,7 +1785,8 @@ namespace Microsoft.EntityFrameworkCore.Diagnostics
             DbTransaction transaction,
             Guid transactionId,
             DateTimeOffset startTime
-        ) {
+        )
+        {
             var definition = RelationalResources.LogReleasingTransactionSavepoint(diagnostics);
 
             LogReleasingTransactionSavepoint(diagnostics, definition);
@@ -1731,7 +1798,8 @@ namespace Microsoft.EntityFrameworkCore.Diagnostics
                     out var diagnosticSourceEnabled,
                     out var simpleLogEnabled
                 )
-            ) {
+            )
+            {
                 var eventData = BroadcastReleasingTransactionSavepoint(
                     diagnostics,
                     connection,
@@ -1771,7 +1839,8 @@ namespace Microsoft.EntityFrameworkCore.Diagnostics
             Guid transactionId,
             DateTimeOffset startTime,
             CancellationToken cancellationToken = default
-        ) {
+        )
+        {
             var definition = RelationalResources.LogReleasingTransactionSavepoint(diagnostics);
 
             LogReleasingTransactionSavepoint(diagnostics, definition);
@@ -1783,7 +1852,8 @@ namespace Microsoft.EntityFrameworkCore.Diagnostics
                     out var diagnosticSourceEnabled,
                     out var simpleLogEnabled
                 )
-            ) {
+            )
+            {
                 var eventData = BroadcastReleasingTransactionSavepoint(
                     diagnostics,
                     connection,
@@ -1820,7 +1890,8 @@ namespace Microsoft.EntityFrameworkCore.Diagnostics
             bool async,
             bool diagnosticSourceEnabled,
             bool simpleLogEnabled
-        ) {
+        )
+        {
             var eventData = new TransactionEventData(
                 definition,
                 (d, p) => ((EventDefinition)d).GenerateMessage(),
@@ -1845,7 +1916,8 @@ namespace Microsoft.EntityFrameworkCore.Diagnostics
         private static void LogReleasingTransactionSavepoint(
             IDiagnosticsLogger<DbLoggerCategory.Database.Transaction> diagnostics,
             EventDefinition definition
-        ) {
+        )
+        {
             if (diagnostics.ShouldLog(definition))
             {
                 definition.Log(diagnostics);
@@ -1866,7 +1938,8 @@ namespace Microsoft.EntityFrameworkCore.Diagnostics
             DbTransaction transaction,
             Guid transactionId,
             DateTimeOffset startTime
-        ) {
+        )
+        {
             var definition = RelationalResources.LogReleasedTransactionSavepoint(diagnostics);
 
             LogReleasedTransactionSavepoint(diagnostics, definition);
@@ -1878,7 +1951,8 @@ namespace Microsoft.EntityFrameworkCore.Diagnostics
                     out var diagnosticSourceEnabled,
                     out var simpleLogEnabled
                 )
-            ) {
+            )
+            {
                 var eventData = BroadcastReleasedTransactionSavepoint(
                     diagnostics,
                     connection,
@@ -1913,7 +1987,8 @@ namespace Microsoft.EntityFrameworkCore.Diagnostics
             Guid transactionId,
             DateTimeOffset startTime,
             CancellationToken cancellationToken = default
-        ) {
+        )
+        {
             var definition = RelationalResources.LogReleasedTransactionSavepoint(diagnostics);
 
             LogReleasedTransactionSavepoint(diagnostics, definition);
@@ -1925,7 +2000,8 @@ namespace Microsoft.EntityFrameworkCore.Diagnostics
                     out var diagnosticSourceEnabled,
                     out var simpleLogEnabled
                 )
-            ) {
+            )
+            {
                 var eventData = BroadcastReleasedTransactionSavepoint(
                     diagnostics,
                     connection,
@@ -1961,7 +2037,8 @@ namespace Microsoft.EntityFrameworkCore.Diagnostics
             bool async,
             bool diagnosticSourceEnabled,
             bool simpleLogEnabled
-        ) {
+        )
+        {
             var eventData = new TransactionEventData(
                 definition,
                 (d, p) => ((EventDefinition)d).GenerateMessage(),
@@ -1986,7 +2063,8 @@ namespace Microsoft.EntityFrameworkCore.Diagnostics
         private static void LogReleasedTransactionSavepoint(
             IDiagnosticsLogger<DbLoggerCategory.Database.Transaction> diagnostics,
             EventDefinition definition
-        ) {
+        )
+        {
             if (diagnostics.ShouldLog(definition))
             {
                 definition.Log(diagnostics);
@@ -2007,7 +2085,8 @@ namespace Microsoft.EntityFrameworkCore.Diagnostics
             DbTransaction transaction,
             Guid transactionId,
             DateTimeOffset startTime
-        ) {
+        )
+        {
             var definition = RelationalResources.LogDisposingTransaction(diagnostics);
 
             if (diagnostics.ShouldLog(definition))
@@ -2021,7 +2100,8 @@ namespace Microsoft.EntityFrameworkCore.Diagnostics
                     out var diagnosticSourceEnabled,
                     out var simpleLogEnabled
                 )
-            ) {
+            )
+            {
                 var eventData = new TransactionEventData(
                     definition,
                     (d, p) => ((EventDefinition)d).GenerateMessage(),
@@ -2062,7 +2142,8 @@ namespace Microsoft.EntityFrameworkCore.Diagnostics
             Exception exception,
             DateTimeOffset startTime,
             TimeSpan duration
-        ) {
+        )
+        {
             var definition = RelationalResources.LogTransactionError(diagnostics);
 
             LogTransactionError(diagnostics, exception, definition);
@@ -2074,7 +2155,8 @@ namespace Microsoft.EntityFrameworkCore.Diagnostics
                     out var diagnosticSourceEnabled,
                     out var simpleLogEnabled
                 )
-            ) {
+            )
+            {
                 var eventData = BroadcastTransactionError(
                     diagnostics,
                     connection,
@@ -2118,7 +2200,8 @@ namespace Microsoft.EntityFrameworkCore.Diagnostics
             DateTimeOffset startTime,
             TimeSpan duration,
             CancellationToken cancellationToken = default
-        ) {
+        )
+        {
             var definition = RelationalResources.LogTransactionError(diagnostics);
 
             LogTransactionError(diagnostics, exception, definition);
@@ -2130,7 +2213,8 @@ namespace Microsoft.EntityFrameworkCore.Diagnostics
                     out var diagnosticSourceEnabled,
                     out var simpleLogEnabled
                 )
-            ) {
+            )
+            {
                 var eventData = BroadcastTransactionError(
                     diagnostics,
                     connection,
@@ -2172,7 +2256,8 @@ namespace Microsoft.EntityFrameworkCore.Diagnostics
             bool async,
             bool diagnosticSourceEnabled,
             bool simpleLogEnabled
-        ) {
+        )
+        {
             var eventData = new TransactionErrorEventData(
                 definition,
                 (d, p) => ((EventDefinition)d).GenerateMessage(),
@@ -2201,7 +2286,8 @@ namespace Microsoft.EntityFrameworkCore.Diagnostics
             IDiagnosticsLogger<DbLoggerCategory.Database.Transaction> diagnostics,
             Exception exception,
             EventDefinition definition
-        ) {
+        )
+        {
             if (diagnostics.ShouldLog(definition))
             {
                 definition.Log(diagnostics);
@@ -2218,7 +2304,8 @@ namespace Microsoft.EntityFrameworkCore.Diagnostics
             this IDiagnosticsLogger<DbLoggerCategory.Database.Transaction> diagnostics,
             IRelationalConnection connection,
             DateTimeOffset startTime
-        ) {
+        )
+        {
             var definition = RelationalResources.LogAmbientTransaction(diagnostics);
 
             if (diagnostics.ShouldLog(definition))
@@ -2232,7 +2319,8 @@ namespace Microsoft.EntityFrameworkCore.Diagnostics
                     out var diagnosticSourceEnabled,
                     out var simpleLogEnabled
                 )
-            ) {
+            )
+            {
                 var eventData = new ConnectionEventData(
                     definition,
                     (d, p) => ((EventDefinition)d).GenerateMessage(),
@@ -2262,7 +2350,8 @@ namespace Microsoft.EntityFrameworkCore.Diagnostics
             this IDiagnosticsLogger<DbLoggerCategory.Database.Transaction> diagnostics,
             IRelationalConnection connection,
             Transaction transaction
-        ) {
+        )
+        {
             var definition = RelationalResources.LogAmbientTransactionEnlisted(diagnostics);
 
             if (diagnostics.ShouldLog(definition))
@@ -2276,7 +2365,8 @@ namespace Microsoft.EntityFrameworkCore.Diagnostics
                     out var diagnosticSourceEnabled,
                     out var simpleLogEnabled
                 )
-            ) {
+            )
+            {
                 var eventData = new TransactionEnlistedEventData(
                     definition,
                     AmbientTransactionEnlisted,
@@ -2297,7 +2387,8 @@ namespace Microsoft.EntityFrameworkCore.Diagnostics
         private static string AmbientTransactionEnlisted(
             EventDefinitionBase definition,
             EventData payload
-        ) {
+        )
+        {
             var d = (EventDefinition<string>)definition;
             var p = (TransactionEnlistedEventData)payload;
             return d.GenerateMessage(p.Transaction.IsolationLevel.ToString("G"));
@@ -2313,7 +2404,8 @@ namespace Microsoft.EntityFrameworkCore.Diagnostics
             this IDiagnosticsLogger<DbLoggerCategory.Database.Transaction> diagnostics,
             IRelationalConnection connection,
             Transaction transaction
-        ) {
+        )
+        {
             var definition = RelationalResources.LogExplicitTransactionEnlisted(diagnostics);
 
             if (diagnostics.ShouldLog(definition))
@@ -2327,7 +2419,8 @@ namespace Microsoft.EntityFrameworkCore.Diagnostics
                     out var diagnosticSourceEnabled,
                     out var simpleLogEnabled
                 )
-            ) {
+            )
+            {
                 var eventData = new TransactionEnlistedEventData(
                     definition,
                     ExplicitTransactionEnlisted,
@@ -2348,7 +2441,8 @@ namespace Microsoft.EntityFrameworkCore.Diagnostics
         private static string ExplicitTransactionEnlisted(
             EventDefinitionBase definition,
             EventData payload
-        ) {
+        )
+        {
             var d = (EventDefinition<string>)definition;
             var p = (TransactionEnlistedEventData)payload;
             return d.GenerateMessage(p.Transaction.IsolationLevel.ToString("G"));
@@ -2364,7 +2458,8 @@ namespace Microsoft.EntityFrameworkCore.Diagnostics
             this IDiagnosticsLogger<DbLoggerCategory.Migrations> diagnostics,
             IMigrator migrator,
             IRelationalConnection connection
-        ) {
+        )
+        {
             var definition = RelationalResources.LogMigrating(diagnostics);
 
             if (diagnostics.ShouldLog(definition))
@@ -2380,7 +2475,8 @@ namespace Microsoft.EntityFrameworkCore.Diagnostics
                     out var diagnosticSourceEnabled,
                     out var simpleLogEnabled
                 )
-            ) {
+            )
+            {
                 var eventData = new MigratorConnectionEventData(
                     definition,
                     MigrateUsingConnection,
@@ -2401,7 +2497,8 @@ namespace Microsoft.EntityFrameworkCore.Diagnostics
         private static string MigrateUsingConnection(
             EventDefinitionBase definition,
             EventData payload
-        ) {
+        )
+        {
             var d = (EventDefinition<string, string>)definition;
             var p = (MigratorConnectionEventData)payload;
             return d.GenerateMessage(p.Connection.Database, p.Connection.DataSource);
@@ -2417,7 +2514,8 @@ namespace Microsoft.EntityFrameworkCore.Diagnostics
             this IDiagnosticsLogger<DbLoggerCategory.Migrations> diagnostics,
             IMigrator migrator,
             Migration migration
-        ) {
+        )
+        {
             var definition = RelationalResources.LogRevertingMigration(diagnostics);
 
             if (diagnostics.ShouldLog(definition))
@@ -2431,7 +2529,8 @@ namespace Microsoft.EntityFrameworkCore.Diagnostics
                     out var diagnosticSourceEnabled,
                     out var simpleLogEnabled
                 )
-            ) {
+            )
+            {
                 var eventData = new MigrationEventData(
                     definition,
                     MigrationReverting,
@@ -2465,7 +2564,8 @@ namespace Microsoft.EntityFrameworkCore.Diagnostics
             this IDiagnosticsLogger<DbLoggerCategory.Migrations> diagnostics,
             IMigrator migrator,
             Migration migration
-        ) {
+        )
+        {
             var definition = RelationalResources.LogApplyingMigration(diagnostics);
 
             if (diagnostics.ShouldLog(definition))
@@ -2479,7 +2579,8 @@ namespace Microsoft.EntityFrameworkCore.Diagnostics
                     out var diagnosticSourceEnabled,
                     out var simpleLogEnabled
                 )
-            ) {
+            )
+            {
                 var eventData = new MigrationEventData(
                     definition,
                     MigrationApplying,
@@ -2519,7 +2620,8 @@ namespace Microsoft.EntityFrameworkCore.Diagnostics
             string? fromMigration,
             string? toMigration,
             bool idempotent
-        ) {
+        )
+        {
             var definition = RelationalResources.LogGeneratingDown(diagnostics);
 
             if (diagnostics.ShouldLog(definition))
@@ -2533,7 +2635,8 @@ namespace Microsoft.EntityFrameworkCore.Diagnostics
                     out var diagnosticSourceEnabled,
                     out var simpleLogEnabled
                 )
-            ) {
+            )
+            {
                 var eventData = new MigrationScriptingEventData(
                     definition,
                     MigrationGeneratingDownScript,
@@ -2556,7 +2659,8 @@ namespace Microsoft.EntityFrameworkCore.Diagnostics
         private static string MigrationGeneratingDownScript(
             EventDefinitionBase definition,
             EventData payload
-        ) {
+        )
+        {
             var d = (EventDefinition<string>)definition;
             var p = (MigrationScriptingEventData)payload;
             return d.GenerateMessage(p.Migration.GetId());
@@ -2578,7 +2682,8 @@ namespace Microsoft.EntityFrameworkCore.Diagnostics
             string? fromMigration,
             string? toMigration,
             bool idempotent
-        ) {
+        )
+        {
             var definition = RelationalResources.LogGeneratingUp(diagnostics);
 
             if (diagnostics.ShouldLog(definition))
@@ -2592,7 +2697,8 @@ namespace Microsoft.EntityFrameworkCore.Diagnostics
                     out var diagnosticSourceEnabled,
                     out var simpleLogEnabled
                 )
-            ) {
+            )
+            {
                 var eventData = new MigrationScriptingEventData(
                     definition,
                     MigrationGeneratingUpScript,
@@ -2615,7 +2721,8 @@ namespace Microsoft.EntityFrameworkCore.Diagnostics
         private static string MigrationGeneratingUpScript(
             EventDefinitionBase definition,
             EventData payload
-        ) {
+        )
+        {
             var d = (EventDefinition<string>)definition;
             var p = (MigrationScriptingEventData)payload;
             return d.GenerateMessage(p.Migration.GetId());
@@ -2629,7 +2736,8 @@ namespace Microsoft.EntityFrameworkCore.Diagnostics
         public static void MigrationsNotApplied(
             this IDiagnosticsLogger<DbLoggerCategory.Migrations> diagnostics,
             IMigrator migrator
-        ) {
+        )
+        {
             var definition = RelationalResources.LogNoMigrationsApplied(diagnostics);
 
             if (diagnostics.ShouldLog(definition))
@@ -2643,7 +2751,8 @@ namespace Microsoft.EntityFrameworkCore.Diagnostics
                     out var diagnosticSourceEnabled,
                     out var simpleLogEnabled
                 )
-            ) {
+            )
+            {
                 var eventData = new MigratorEventData(
                     definition,
                     (d, p) => ((EventDefinition)d).GenerateMessage(),
@@ -2669,7 +2778,8 @@ namespace Microsoft.EntityFrameworkCore.Diagnostics
             this IDiagnosticsLogger<DbLoggerCategory.Migrations> diagnostics,
             IMigrator migrator,
             IMigrationsAssembly migrationsAssembly
-        ) {
+        )
+        {
             var definition = RelationalResources.LogNoMigrationsFound(diagnostics);
 
             if (diagnostics.ShouldLog(definition))
@@ -2683,7 +2793,8 @@ namespace Microsoft.EntityFrameworkCore.Diagnostics
                     out var diagnosticSourceEnabled,
                     out var simpleLogEnabled
                 )
-            ) {
+            )
+            {
                 var eventData = new MigrationAssemblyEventData(
                     definition,
                     MigrationsNotFound,
@@ -2715,7 +2826,8 @@ namespace Microsoft.EntityFrameworkCore.Diagnostics
         public static void MigrationAttributeMissingWarning(
             this IDiagnosticsLogger<DbLoggerCategory.Migrations> diagnostics,
             TypeInfo migrationType
-        ) {
+        )
+        {
             var definition = RelationalResources.LogMigrationAttributeMissingWarning(diagnostics);
 
             if (diagnostics.ShouldLog(definition))
@@ -2729,7 +2841,8 @@ namespace Microsoft.EntityFrameworkCore.Diagnostics
                     out var diagnosticSourceEnabled,
                     out var simpleLogEnabled
                 )
-            ) {
+            )
+            {
                 var eventData = new MigrationTypeEventData(
                     definition,
                     MigrationAttributeMissingWarning,
@@ -2748,7 +2861,8 @@ namespace Microsoft.EntityFrameworkCore.Diagnostics
         private static string MigrationAttributeMissingWarning(
             EventDefinitionBase definition,
             EventData payload
-        ) {
+        )
+        {
             var d = (EventDefinition<string>)definition;
             var p = (MigrationTypeEventData)payload;
             return d.GenerateMessage(p.MigrationType.Name);
@@ -2764,7 +2878,8 @@ namespace Microsoft.EntityFrameworkCore.Diagnostics
             this IDiagnosticsLogger<DbLoggerCategory.Query> diagnostics,
             SqlExpression left,
             SqlExpression right
-        ) {
+        )
+        {
             var definition = RelationalResources.LogPossibleUnintendedUseOfEquals(diagnostics);
 
             if (diagnostics.ShouldLog(definition))
@@ -2778,7 +2893,8 @@ namespace Microsoft.EntityFrameworkCore.Diagnostics
                     out var diagnosticSourceEnabled,
                     out var simpleLogEnabled
                 )
-            ) {
+            )
+            {
                 var eventData = new TwoSqlExpressionsEventData(
                     definition,
                     QueryPossibleUnintendedUseOfEqualsWarning,
@@ -2798,7 +2914,8 @@ namespace Microsoft.EntityFrameworkCore.Diagnostics
         private static string QueryPossibleUnintendedUseOfEqualsWarning(
             EventDefinitionBase definition,
             EventData payload
-        ) {
+        )
+        {
             var d = (EventDefinition<string, string>)definition;
             var p = (TwoSqlExpressionsEventData)payload;
             return d.GenerateMessage(p.Left.Print(), p.Right.Print());
@@ -2811,7 +2928,8 @@ namespace Microsoft.EntityFrameworkCore.Diagnostics
         [Obsolete]
         public static void QueryPossibleExceptionWithAggregateOperatorWarning(
             this IDiagnosticsLogger<DbLoggerCategory.Query> diagnostics
-        ) {
+        )
+        {
             var definition =
                 RelationalResources.LogQueryPossibleExceptionWithAggregateOperatorWarning(
                     diagnostics
@@ -2828,7 +2946,8 @@ namespace Microsoft.EntityFrameworkCore.Diagnostics
                     out var diagnosticSourceEnabled,
                     out var simpleLogEnabled
                 )
-            ) {
+            )
+            {
                 var eventData = new EventData(
                     definition,
                     (d, p) => ((EventDefinition)d).GenerateMessage()
@@ -2849,7 +2968,8 @@ namespace Microsoft.EntityFrameworkCore.Diagnostics
         /// <param name="diagnostics"> The diagnostics logger to use. </param>
         public static void MultipleCollectionIncludeWarning(
             this IDiagnosticsLogger<DbLoggerCategory.Query> diagnostics
-        ) {
+        )
+        {
             var definition = RelationalResources.LogMultipleCollectionIncludeWarning(diagnostics);
 
             if (diagnostics.ShouldLog(definition))
@@ -2863,7 +2983,8 @@ namespace Microsoft.EntityFrameworkCore.Diagnostics
                     out var diagnosticSourceEnabled,
                     out var simpleLogEnabled
                 )
-            ) {
+            )
+            {
                 var eventData = new EventData(
                     definition,
                     (d, p) => ((EventDefinition)d).GenerateMessage()
@@ -2886,7 +3007,8 @@ namespace Microsoft.EntityFrameworkCore.Diagnostics
         public static void ModelValidationKeyDefaultValueWarning(
             this IDiagnosticsLogger<DbLoggerCategory.Model.Validation> diagnostics,
             IProperty property
-        ) {
+        )
+        {
             var definition = RelationalResources.LogKeyHasDefaultValue(diagnostics);
 
             if (diagnostics.ShouldLog(definition))
@@ -2904,7 +3026,8 @@ namespace Microsoft.EntityFrameworkCore.Diagnostics
                     out var diagnosticSourceEnabled,
                     out var simpleLogEnabled
                 )
-            ) {
+            )
+            {
                 var eventData = new PropertyEventData(
                     definition,
                     ModelValidationKeyDefaultValueWarning,
@@ -2923,7 +3046,8 @@ namespace Microsoft.EntityFrameworkCore.Diagnostics
         private static string ModelValidationKeyDefaultValueWarning(
             EventDefinitionBase definition,
             EventData payload
-        ) {
+        )
+        {
             var d = (EventDefinition<string, string>)definition;
             var p = (PropertyEventData)payload;
             return d.GenerateMessage(p.Property.Name, p.Property.DeclaringEntityType.DisplayName());
@@ -2937,7 +3061,8 @@ namespace Microsoft.EntityFrameworkCore.Diagnostics
         public static void BoolWithDefaultWarning(
             this IDiagnosticsLogger<DbLoggerCategory.Model.Validation> diagnostics,
             IProperty property
-        ) {
+        )
+        {
             var definition = RelationalResources.LogBoolWithDefaultWarning(diagnostics);
 
             if (diagnostics.ShouldLog(definition))
@@ -2955,7 +3080,8 @@ namespace Microsoft.EntityFrameworkCore.Diagnostics
                     out var diagnosticSourceEnabled,
                     out var simpleLogEnabled
                 )
-            ) {
+            )
+            {
                 var eventData = new PropertyEventData(definition, BoolWithDefaultWarning, property);
 
                 diagnostics.DispatchEventData(
@@ -2970,7 +3096,8 @@ namespace Microsoft.EntityFrameworkCore.Diagnostics
         private static string BoolWithDefaultWarning(
             EventDefinitionBase definition,
             EventData payload
-        ) {
+        )
+        {
             var d = (EventDefinition<string, string>)definition;
             var p = (PropertyEventData)payload;
             return d.GenerateMessage(p.Property.Name, p.Property.DeclaringEntityType.DisplayName());
@@ -2986,7 +3113,8 @@ namespace Microsoft.EntityFrameworkCore.Diagnostics
             this IDiagnosticsLogger<DbLoggerCategory.Update> diagnostics,
             IEnumerable<IUpdateEntry> entries,
             int commandCount
-        ) {
+        )
+        {
             var definition = RelationalResources.LogBatchReadyForExecution(diagnostics);
 
             if (diagnostics.ShouldLog(definition))
@@ -3000,7 +3128,8 @@ namespace Microsoft.EntityFrameworkCore.Diagnostics
                     out var diagnosticSourceEnabled,
                     out var simpleLogEnabled
                 )
-            ) {
+            )
+            {
                 var eventData = new BatchEventData(
                     definition,
                     BatchReadyForExecution,
@@ -3020,7 +3149,8 @@ namespace Microsoft.EntityFrameworkCore.Diagnostics
         private static string BatchReadyForExecution(
             EventDefinitionBase definition,
             EventData payload
-        ) {
+        )
+        {
             var d = (EventDefinition<int>)definition;
             var p = (BatchEventData)payload;
             return d.GenerateMessage(p.CommandCount);
@@ -3038,7 +3168,8 @@ namespace Microsoft.EntityFrameworkCore.Diagnostics
             IEnumerable<IUpdateEntry> entries,
             int commandCount,
             int minBatchSize
-        ) {
+        )
+        {
             var definition = RelationalResources.LogBatchSmallerThanMinBatchSize(diagnostics);
 
             if (diagnostics.ShouldLog(definition))
@@ -3052,7 +3183,8 @@ namespace Microsoft.EntityFrameworkCore.Diagnostics
                     out var diagnosticSourceEnabled,
                     out var simpleLogEnabled
                 )
-            ) {
+            )
+            {
                 var eventData = new MinBatchSizeEventData(
                     definition,
                     BatchSmallerThanMinBatchSize,
@@ -3073,7 +3205,8 @@ namespace Microsoft.EntityFrameworkCore.Diagnostics
         private static string BatchSmallerThanMinBatchSize(
             EventDefinitionBase definition,
             EventData payload
-        ) {
+        )
+        {
             var d = (EventDefinition<int, int>)definition;
             var p = (MinBatchSizeEventData)payload;
             return d.GenerateMessage(p.CommandCount, p.MinBatchSize);
@@ -3089,7 +3222,8 @@ namespace Microsoft.EntityFrameworkCore.Diagnostics
             this IDiagnosticsLogger<DbLoggerCategory.Model.Validation> diagnostics,
             IEntityType entityType,
             IIndex index
-        ) {
+        )
+        {
             if (index.Name == null)
             {
                 var definition =
@@ -3112,7 +3246,8 @@ namespace Microsoft.EntityFrameworkCore.Diagnostics
                         out var diagnosticSourceEnabled,
                         out var simpleLogEnabled
                     )
-                ) {
+                )
+                {
                     var eventData = new IndexEventData(
                         definition,
                         UnnamedIndexAllPropertiesNotToMappedToAnyTable,
@@ -3152,7 +3287,8 @@ namespace Microsoft.EntityFrameworkCore.Diagnostics
                         out var diagnosticSourceEnabled,
                         out var simpleLogEnabled
                     )
-                ) {
+                )
+                {
                     var eventData = new IndexEventData(
                         definition,
                         NamedIndexAllPropertiesNotToMappedToAnyTable,
@@ -3174,7 +3310,8 @@ namespace Microsoft.EntityFrameworkCore.Diagnostics
         private static string UnnamedIndexAllPropertiesNotToMappedToAnyTable(
             EventDefinitionBase definition,
             EventData payload
-        ) {
+        )
+        {
             var d = (EventDefinition<string, string>)definition;
             var p = (IndexEventData)payload;
             return d.GenerateMessage(p.EntityType.DisplayName(), p.PropertyNames.Format());
@@ -3183,7 +3320,8 @@ namespace Microsoft.EntityFrameworkCore.Diagnostics
         private static string NamedIndexAllPropertiesNotToMappedToAnyTable(
             EventDefinitionBase definition,
             EventData payload
-        ) {
+        )
+        {
             var d = (EventDefinition<string?, string, string>)definition;
             var p = (IndexEventData)payload;
             return d.GenerateMessage(p.Name, p.EntityType.DisplayName(), p.PropertyNames.Format());
@@ -3201,7 +3339,8 @@ namespace Microsoft.EntityFrameworkCore.Diagnostics
             IEntityType entityType,
             IIndex index,
             string unmappedPropertyName
-        ) {
+        )
+        {
             if (index.Name == null)
             {
                 var definition =
@@ -3225,7 +3364,8 @@ namespace Microsoft.EntityFrameworkCore.Diagnostics
                         out var diagnosticSourceEnabled,
                         out var simpleLogEnabled
                     )
-                ) {
+                )
+                {
                     var eventData = new IndexWithPropertyEventData(
                         definition,
                         UnnamedIndexPropertiesBothMappedAndNotMappedToTable,
@@ -3267,7 +3407,8 @@ namespace Microsoft.EntityFrameworkCore.Diagnostics
                         out var diagnosticSourceEnabled,
                         out var simpleLogEnabled
                     )
-                ) {
+                )
+                {
                     var eventData = new IndexWithPropertyEventData(
                         definition,
                         NamedIndexPropertiesBothMappedAndNotMappedToTable,
@@ -3290,7 +3431,8 @@ namespace Microsoft.EntityFrameworkCore.Diagnostics
         private static string UnnamedIndexPropertiesBothMappedAndNotMappedToTable(
             EventDefinitionBase definition,
             EventData payload
-        ) {
+        )
+        {
             var d = (EventDefinition<string, string, string>)definition;
             var p = (IndexWithPropertyEventData)payload;
             return d.GenerateMessage(
@@ -3303,7 +3445,8 @@ namespace Microsoft.EntityFrameworkCore.Diagnostics
         private static string NamedIndexPropertiesBothMappedAndNotMappedToTable(
             EventDefinitionBase definition,
             EventData payload
-        ) {
+        )
+        {
             var d = (EventDefinition<string?, string, string, string>)definition;
             var p = (IndexWithPropertyEventData)payload;
             return d.GenerateMessage(
@@ -3332,7 +3475,8 @@ namespace Microsoft.EntityFrameworkCore.Diagnostics
             List<(string Table, string? Schema)> tablesMappedToProperty1,
             string property2Name,
             List<(string Table, string? Schema)> tablesMappedToProperty2
-        ) {
+        )
+        {
             if (index.Name == null)
             {
                 var definition =
@@ -3359,7 +3503,8 @@ namespace Microsoft.EntityFrameworkCore.Diagnostics
                         out var diagnosticSourceEnabled,
                         out var simpleLogEnabled
                     )
-                ) {
+                )
+                {
                     var eventData = new IndexWithPropertiesEventData(
                         definition,
                         UnnamedIndexPropertiesMappedToNonOverlappingTables,
@@ -3413,7 +3558,8 @@ namespace Microsoft.EntityFrameworkCore.Diagnostics
                         out var diagnosticSourceEnabled,
                         out var simpleLogEnabled
                     )
-                ) {
+                )
+                {
                     var eventData = new IndexWithPropertiesEventData(
                         definition,
                         NamedIndexPropertiesMappedToNonOverlappingTables,
@@ -3439,7 +3585,8 @@ namespace Microsoft.EntityFrameworkCore.Diagnostics
         private static string UnnamedIndexPropertiesMappedToNonOverlappingTables(
             EventDefinitionBase definition,
             EventData payload
-        ) {
+        )
+        {
             var d = (EventDefinition<string, string, string, string, string, string>)definition;
             var p = (IndexWithPropertiesEventData)payload;
             return d.GenerateMessage(
@@ -3455,7 +3602,8 @@ namespace Microsoft.EntityFrameworkCore.Diagnostics
         private static string NamedIndexPropertiesMappedToNonOverlappingTables(
             EventDefinitionBase definition,
             EventData payload
-        ) {
+        )
+        {
             var d = (FallbackEventDefinition)definition;
             var p = (IndexWithPropertiesEventData)payload;
             return d.GenerateMessage(
@@ -3483,7 +3631,8 @@ namespace Microsoft.EntityFrameworkCore.Diagnostics
         public static void ForeignKeyPropertiesMappedToUnrelatedTables(
             this IDiagnosticsLogger<DbLoggerCategory.Model.Validation> diagnostics,
             IForeignKey foreignKey
-        ) {
+        )
+        {
             var definition = RelationalResources.LogForeignKeyPropertiesMappedToUnrelatedTables(
                 diagnostics
             );
@@ -3514,7 +3663,8 @@ namespace Microsoft.EntityFrameworkCore.Diagnostics
                     out var diagnosticSourceEnabled,
                     out var simpleLogEnabled
                 )
-            ) {
+            )
+            {
                 var eventData = new ForeignKeyEventData(
                     definition,
                     ForeignKeyPropertiesMappedToUnrelatedTables,
@@ -3533,7 +3683,8 @@ namespace Microsoft.EntityFrameworkCore.Diagnostics
         private static string ForeignKeyPropertiesMappedToUnrelatedTables(
             EventDefinitionBase definition,
             EventData payload
-        ) {
+        )
+        {
             var d = (FallbackEventDefinition)definition;
             var p = (ForeignKeyEventData)payload;
             return d.GenerateMessage(
@@ -3561,7 +3712,8 @@ namespace Microsoft.EntityFrameworkCore.Diagnostics
         public static void OptionalDependentWithoutIdentifyingPropertyWarning(
             this IDiagnosticsLogger<DbLoggerCategory.Model.Validation> diagnostics,
             IEntityType entityType
-        ) {
+        )
+        {
             var definition = RelationalResources.LogOptionalDependentWithoutIdentifyingProperty(
                 diagnostics
             );
@@ -3577,7 +3729,8 @@ namespace Microsoft.EntityFrameworkCore.Diagnostics
                     out var diagnosticSourceEnabled,
                     out var simpleLogEnabled
                 )
-            ) {
+            )
+            {
                 var eventData = new EntityTypeEventData(
                     definition,
                     OptionalDependentWithoutIdentifyingPropertyWarning,
@@ -3596,7 +3749,8 @@ namespace Microsoft.EntityFrameworkCore.Diagnostics
         private static string OptionalDependentWithoutIdentifyingPropertyWarning(
             EventDefinitionBase definition,
             EventData payload
-        ) {
+        )
+        {
             var d = (EventDefinition<string>)definition;
             var p = (EntityTypeEventData)payload;
             return d.GenerateMessage(p.EntityType.DisplayName());
@@ -3612,7 +3766,8 @@ namespace Microsoft.EntityFrameworkCore.Diagnostics
             this IDiagnosticsLogger<DbLoggerCategory.Update> diagnostics,
             Type contextType,
             Exception exception
-        ) {
+        )
+        {
             var definition = RelationalResources.LogBatchExecutorFailedToRollbackToSavepoint(
                 diagnostics
             );
@@ -3628,7 +3783,8 @@ namespace Microsoft.EntityFrameworkCore.Diagnostics
                     out var diagnosticSourceEnabled,
                     out var simpleLogEnabled
                 )
-            ) {
+            )
+            {
                 var eventData = new DbContextTypeErrorEventData(
                     definition,
                     (d, p) => ((EventDefinition)d).GenerateMessage(),
@@ -3655,7 +3811,8 @@ namespace Microsoft.EntityFrameworkCore.Diagnostics
             this IDiagnosticsLogger<DbLoggerCategory.Update> diagnostics,
             Type contextType,
             Exception exception
-        ) {
+        )
+        {
             var definition = RelationalResources.LogBatchExecutorFailedToReleaseSavepoint(
                 diagnostics
             );
@@ -3671,7 +3828,8 @@ namespace Microsoft.EntityFrameworkCore.Diagnostics
                     out var diagnosticSourceEnabled,
                     out var simpleLogEnabled
                 )
-            ) {
+            )
+            {
                 var eventData = new DbContextTypeErrorEventData(
                     definition,
                     (d, p) => ((EventDefinition)d).GenerateMessage(),

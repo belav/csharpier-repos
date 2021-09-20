@@ -31,7 +31,8 @@ namespace System.Security.Cryptography.X509Certificates
         public static X509Certificate2 CopyWithPrivateKey(
             this X509Certificate2 certificate,
             DSA privateKey
-        ) {
+        )
+        {
             if (certificate == null)
                 throw new ArgumentNullException(nameof(certificate));
             if (privateKey == null)
@@ -53,7 +54,8 @@ namespace System.Security.Cryptography.X509Certificates
                     || !currentParameters.P.ContentsEqual(newParameters.P)
                     || !currentParameters.Q.ContentsEqual(newParameters.Q)
                     || !currentParameters.Y.ContentsEqual(newParameters.Y)
-                ) {
+                )
+                {
                     throw new ArgumentException(
                         SR.Cryptography_PrivateKey_DoesNotMatch,
                         nameof(privateKey)

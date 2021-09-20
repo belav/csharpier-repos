@@ -53,7 +53,8 @@ namespace System.Drawing
             GraphicsUnit unit,
             byte charSet,
             bool isVertical
-        ) {
+        )
+        {
             _originalFontName = familyName;
             FontFamily family;
             // NOTE: If family name is null, empty or invalid,
@@ -89,7 +90,8 @@ namespace System.Drawing
             GraphicsUnit toUnit,
             float nSrc,
             out float nTrg
-        ) {
+        )
+        {
             float inchs = 0;
             nTrg = 0;
 
@@ -151,7 +153,8 @@ namespace System.Drawing
             GraphicsUnit unit,
             byte charSet,
             bool isVertical
-        ) {
+        )
+        {
             _originalFontName = familyName;
             FontFamily family;
             // NOTE: If family name is null, empty or invalid,
@@ -175,7 +178,8 @@ namespace System.Drawing
             GraphicsUnit unit,
             byte charSet,
             bool isVertical
-        ) {
+        )
+        {
             _fontFamily = family;
             _fontSize = emSize;
 
@@ -312,7 +316,8 @@ namespace System.Drawing
             GraphicsUnit unit,
             byte gdiCharSet,
             bool gdiVerticalFont
-        ) {
+        )
+        {
             if (family == null)
                 throw new ArgumentNullException(nameof(family));
 
@@ -353,7 +358,8 @@ namespace System.Drawing
             GraphicsUnit unit,
             byte gdiCharSet,
             bool gdiVerticalFont
-        ) {
+        )
+        {
             CreateFont(familyName, emSize, style, unit, gdiCharSet, gdiVerticalFont);
         }
         internal Font(string familyName, float emSize, string systemName)

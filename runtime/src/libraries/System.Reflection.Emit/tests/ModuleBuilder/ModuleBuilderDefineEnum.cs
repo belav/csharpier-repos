@@ -176,7 +176,8 @@ namespace System.Reflection.Emit.Tests
         public void DefineEnum_IncorrectVisibilityAttributes_ThrowsArgumentException(
             TypeAttributes visibility,
             string paramName
-        ) {
+        )
+        {
             ModuleBuilder module = Helpers.DynamicModule();
             AssertExtensions.Throws<ArgumentException>(
                 paramName,
@@ -229,7 +230,8 @@ namespace System.Reflection.Emit.Tests
         [InlineData(typeof(int?))]
         public void DefineEnum_InvalidUnderlyingType_ThrowsTypeLoadExceptionOnCreation(
             Type underlyingType
-        ) {
+        )
+        {
             ModuleBuilder module = Helpers.DynamicModule();
             EnumBuilder enumBuilder = module.DefineEnum(
                 "Name",

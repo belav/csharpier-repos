@@ -83,7 +83,8 @@ namespace Microsoft.CodeAnalysis.CSharp.GenerateConstructor
             Document document,
             SyntaxNode node,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var service = document.GetLanguageService<IGenerateConstructorService>();
             return service.GenerateConstructorAsync(document, node, cancellationToken);
         }
@@ -92,7 +93,8 @@ namespace Microsoft.CodeAnalysis.CSharp.GenerateConstructor
             SyntaxNode node,
             SyntaxToken token,
             Diagnostic diagnostic
-        ) {
+        )
+        {
             return node is BaseObjectCreationExpressionSyntax
                 || node is ConstructorInitializerSyntax
                 || node is AttributeSyntax;

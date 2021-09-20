@@ -88,7 +88,8 @@ namespace System.Web.Razor.Parser
             string content,
             VBSymbolType type,
             IEnumerable<RazorError> errors
-        ) {
+        )
+        {
             return new VBSymbol(location, content, type, errors);
         }
     }

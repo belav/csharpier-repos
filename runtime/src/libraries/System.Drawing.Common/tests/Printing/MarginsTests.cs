@@ -141,7 +141,8 @@ namespace System.Drawing.Printing.Tests
             Margins margins1,
             Margins margins2,
             bool expected
-        ) {
+        )
+        {
             Assert.Equal(expected, margins1 == margins2);
             Assert.Equal(!expected, margins1 != margins2);
         }

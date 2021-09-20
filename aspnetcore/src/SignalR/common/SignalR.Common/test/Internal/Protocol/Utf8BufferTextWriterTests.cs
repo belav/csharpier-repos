@@ -315,7 +315,8 @@ namespace Microsoft.AspNetCore.SignalR.Common.Tests.Internal.Protocol
         public void WriteUnicodeStringAndCharsWithVaryingSegmentSizes(
             char singleChar,
             int segmentSize
-        ) {
+        )
+        {
             const string testString = "aいbろ";
             const int iterations = 10;
 
@@ -374,7 +375,8 @@ namespace Microsoft.AspNetCore.SignalR.Common.Tests.Internal.Protocol
                 if (
                     (sizeHint == 0 && CurrentSegment.Length == Position)
                     || (CurrentSegment.Length - Position < sizeHint)
-                ) {
+                )
+                {
                     if (Position > 0)
                     {
                         // Complete the current segment

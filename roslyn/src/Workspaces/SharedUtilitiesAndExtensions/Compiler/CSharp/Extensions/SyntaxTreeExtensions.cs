@@ -28,7 +28,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Extensions
             int position,
             SyntaxToken tokenOnLeftOfPosition,
             out int positionBeforeModifiers
-        ) {
+        )
+        {
             var token = tokenOnLeftOfPosition;
             token = token.GetPreviousTokenIfTouchingWord(position);
 
@@ -85,7 +86,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Extensions
             this SyntaxTree syntaxTree,
             int position,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             return syntaxTree.GetContainingTypeDeclarations(position, cancellationToken)
                 .FirstOrDefault();
         }
@@ -94,7 +96,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Extensions
             this SyntaxTree syntaxTree,
             int position,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             return syntaxTree.GetContainingTypeOrEnumDeclarations(position, cancellationToken)
                 .FirstOrDefault();
         }
@@ -103,7 +106,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Extensions
             this SyntaxTree syntaxTree,
             int position,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var token = syntaxTree.FindTokenOnLeftOfPosition(position, cancellationToken);
 
             return token.GetAncestors<TypeDeclarationSyntax>()
@@ -118,7 +122,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Extensions
         private static bool BaseTypeDeclarationContainsPosition(
             BaseTypeDeclarationSyntax declaration,
             int position
-        ) {
+        )
+        {
             if (position <= declaration.OpenBraceToken.SpanStart)
             {
                 return false;
@@ -136,7 +141,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Extensions
             this SyntaxTree syntaxTree,
             int position,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var token = syntaxTree.FindTokenOnLeftOfPosition(position, cancellationToken);
 
             return token.GetAncestors<BaseTypeDeclarationSyntax>()
@@ -155,7 +161,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Extensions
             int position,
             SyntaxToken targetToken,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             return (
                     targetToken.IsKind(SyntaxKind.DotDotToken)
                     && position == targetToken.SpanStart + 1
@@ -173,7 +180,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Extensions
             int position,
             Func<SyntaxKind, bool> predicate,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var token = syntaxTree.FindTokenOnLeftOfPosition(position, cancellationToken);
             token = token.GetPreviousTokenIfTouchingWord(position);
 
@@ -189,7 +197,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Extensions
             this SyntaxTree syntaxTree,
             int position,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var token = syntaxTree.FindTokenOnLeftOfPosition(position, cancellationToken);
             return token.Kind() == SyntaxKind.NumericLiteralToken;
         }
@@ -199,7 +208,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Extensions
             int position,
             SyntaxKind kind,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var token = syntaxTree.FindTokenOnLeftOfPosition(position, cancellationToken);
             token = token.GetPreviousTokenIfTouchingWord(position);
 
@@ -210,7 +220,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Extensions
             this SyntaxTree syntaxTree,
             int position,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var inNonUserSingleLineDocComment =
                 syntaxTree.IsEntirelyWithinSingleLineDocComment(position, cancellationToken)
                 && !syntaxTree.IsEntirelyWithinCrefSyntax(position, cancellationToken);
@@ -228,7 +239,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Extensions
             this SyntaxTree syntaxTree,
             int position,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             return syntaxTree.IsEntirelyWithinTopLevelSingleLineComment(position, cancellationToken)
                 || syntaxTree.IsEntirelyWithinPreProcessorSingleLineComment(
                     position,
@@ -243,7 +255,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Extensions
             this SyntaxTree syntaxTree,
             int position,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var token = syntaxTree.FindTokenOnLeftOfPosition(
                 position,
                 cancellationToken,
@@ -263,7 +276,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Extensions
             this SyntaxTree syntaxTree,
             int position,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             if (syntaxTree.IsCrefContext(position, cancellationToken))
             {
                 return true;
@@ -281,7 +295,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Extensions
             this SyntaxTree syntaxTree,
             int position,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var root = (CompilationUnitSyntax)syntaxTree.GetRoot(cancellationToken);
             var trivia = root.FindTrivia(position);
 
@@ -329,7 +344,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Extensions
             this SyntaxTree syntaxTree,
             int position,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var trivia = syntaxTree.GetRoot(cancellationToken).FindTrivia(position);
 
             if (trivia.IsMultiLineDocComment())
@@ -349,7 +365,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Extensions
             this SyntaxTree syntaxTree,
             int position,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var trivia = syntaxTree.FindTriviaAndAdjustForEndOfFile(position, cancellationToken);
 
             if (trivia.IsMultiLineComment())
@@ -368,7 +385,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Extensions
             this SyntaxTree syntaxTree,
             int position,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var trivia = syntaxTree.FindTriviaAndAdjustForEndOfFile(position, cancellationToken);
 
             if (trivia.Kind() == SyntaxKind.EndOfLineTrivia)
@@ -384,7 +402,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Extensions
             this SyntaxTree syntaxTree,
             int position,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var trivia = syntaxTree.FindTriviaAndAdjustForEndOfFile(position, cancellationToken);
 
             if (trivia.Kind() == SyntaxKind.EndOfLineTrivia)
@@ -410,7 +429,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Extensions
             this SyntaxTree syntaxTree,
             int position,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             // Search inside trivia for directives to ensure that we recognize
             // single-line comments at the end of preprocessor directives.
             var trivia = syntaxTree.FindTriviaAndAdjustForEndOfFile(
@@ -446,7 +466,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Extensions
             SyntaxToken token,
             int position,
             char lastChar
-        ) {
+        )
+        {
             if (!token.IsKind(SyntaxKind.StringLiteralToken, SyntaxKind.CharacterLiteralToken))
             {
                 throw new ArgumentException(
@@ -475,7 +496,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Extensions
             this SyntaxTree syntaxTree,
             int position,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             return syntaxTree.IsEntirelyWithinStringLiteral(position, cancellationToken)
                 || syntaxTree.IsEntirelyWithinCharLiteral(position, cancellationToken);
         }
@@ -484,7 +506,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Extensions
             this SyntaxTree syntaxTree,
             int position,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var token = syntaxTree.GetRoot(cancellationToken)
                 .FindToken(position, findInsideTrivia: true);
 
@@ -512,7 +535,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Extensions
                     SyntaxKind.InterpolatedStringTextToken,
                     SyntaxKind.InterpolatedStringEndToken
                 )
-            ) {
+            )
+            {
                 return token.SpanStart < position && token.Span.End > position;
             }
 
@@ -523,7 +547,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Extensions
             this SyntaxTree syntaxTree,
             int position,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var root = (CompilationUnitSyntax)syntaxTree.GetRoot(cancellationToken);
             var token = root.FindToken(position, findInsideTrivia: true);
 

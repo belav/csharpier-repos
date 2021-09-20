@@ -33,7 +33,8 @@ namespace Internal.Cryptography
             string keyName,
             CngProvider provider,
             CngKeyOpenOptions openOptions
-        ) {
+        )
+        {
             if (keyName == null)
                 throw new ArgumentNullException(nameof(keyName));
             if (provider == null)
@@ -145,7 +146,8 @@ namespace Internal.Cryptography
             byte[] rgbKey,
             byte[]? rgbIV,
             bool encrypting
-        ) {
+        )
+        {
             if (rgbKey == null)
                 throw new ArgumentNullException(nameof(rgbKey));
 
@@ -174,7 +176,8 @@ namespace Internal.Cryptography
             byte[] key,
             byte[]? iv,
             bool encrypting
-        ) {
+        )
+        {
             int blockSizeInBytes = _outer.BlockSize.BitSizeToByteSize();
             SafeAlgorithmHandle algorithmModeHandle = _outer.GetEphemeralModeHandle();
 
@@ -196,7 +199,8 @@ namespace Internal.Cryptography
             Func<CngKey> cngKeyFactory,
             byte[] iv,
             bool encrypting
-        ) {
+        )
+        {
             // note: iv is guaranteed to be cloned before this method, so no need to clone it again
 
             int blockSizeInBytes = _outer.BlockSize.BitSizeToByteSize();

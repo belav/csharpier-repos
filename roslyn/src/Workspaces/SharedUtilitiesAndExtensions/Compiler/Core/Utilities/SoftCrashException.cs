@@ -38,10 +38,7 @@ namespace Roslyn.Utilities
             : base(message, innerException) { }
         public SoftCrashException(string message, CancellationToken token) : base(message, token)
         { }
-        public SoftCrashException(
-            string message,
-            Exception innerException,
-            CancellationToken token
-        ) : base(message, innerException, token) { }
+        public SoftCrashException(string message, Exception innerException, CancellationToken token)
+            : base(message, innerException, token) { }
     }
 }

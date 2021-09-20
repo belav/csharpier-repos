@@ -74,7 +74,8 @@ namespace Microsoft.CodeAnalysis.Editor.CommandHandlers
             EscapeKeyCommandArgs args,
             Action nextHandler,
             CommandExecutionContext context
-        ) {
+        )
+        {
             if (TryGetController(args, out var controller) && controller.TryHandleEscapeKey())
             {
                 return;
@@ -87,7 +88,8 @@ namespace Microsoft.CodeAnalysis.Editor.CommandHandlers
             UpKeyCommandArgs args,
             Action nextHandler,
             CommandExecutionContext context
-        ) {
+        )
+        {
             if (TryGetController(args, out var controller) && controller.TryHandleUpKey())
             {
                 return;
@@ -100,7 +102,8 @@ namespace Microsoft.CodeAnalysis.Editor.CommandHandlers
             DownKeyCommandArgs args,
             Action nextHandler,
             CommandExecutionContext context
-        ) {
+        )
+        {
             if (TryGetController(args, out var controller) && controller.TryHandleDownKey())
             {
                 return;

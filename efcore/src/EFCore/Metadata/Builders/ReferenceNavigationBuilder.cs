@@ -37,7 +37,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Builders
             IMutableEntityType relatedEntityType,
             string? navigationName,
             IMutableForeignKey foreignKey
-        ) {
+        )
+        {
             DeclaringEntityType = declaringEntityType;
             RelatedEntityType = relatedEntityType;
             ReferenceName = navigationName;
@@ -56,7 +57,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Builders
             IMutableEntityType relatedEntityType,
             MemberInfo? navigationMemberInfo,
             IMutableForeignKey foreignKey
-        ) {
+        )
+        {
             DeclaringEntityType = declaringEntityType;
             RelatedEntityType = relatedEntityType;
             ReferenceMember = navigationMemberInfo;
@@ -194,7 +196,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Builders
                 && builder.Metadata.GetPrincipalToDependentConfigurationSource()
                     == ConfigurationSource.Explicit
                 && collectionName != null
-            ) {
+            )
+            {
                 InternalForeignKeyBuilder.ThrowForConflictingNavigation(
                     builder.Metadata,
                     collectionName,
@@ -210,7 +213,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Builders
                 && foreignKey.GetPrincipalToDependentConfigurationSource()
                     == ConfigurationSource.Explicit
                 && foreignKey.PrincipalToDependent.Name != collectionName
-            ) {
+            )
+            {
                 InternalForeignKeyBuilder.ThrowForConflictingNavigation(
                     foreignKey,
                     collectionName,
@@ -287,7 +291,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Builders
                 && Builder.Metadata.GetPrincipalToDependentConfigurationSource()
                     == ConfigurationSource.Explicit
                 && referenceName != null
-            ) {
+            )
+            {
                 InternalForeignKeyBuilder.ThrowForConflictingNavigation(
                     Builder.Metadata,
                     referenceName,
@@ -302,7 +307,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Builders
                 foreignKey.IsSelfReferencing()
                 && referenceName != null
                 && ReferenceName == referenceName
-            ) {
+            )
+            {
                 throw new InvalidOperationException(
                     CoreStrings.ConflictingPropertyOrNavigation(
                         referenceName,
@@ -343,7 +349,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Builders
                         && foreignKey.PrincipalToDependent.Name != referenceName
                     )
                 )
-            ) {
+            )
+            {
                 InternalForeignKeyBuilder.ThrowForConflictingNavigation(
                     foreignKey,
                     referenceName,

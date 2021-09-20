@@ -89,7 +89,8 @@ namespace System.Security.Cryptography.Pkcs.Asn1
             Asn1Tag expectedTag,
             ReadOnlyMemory<byte> encoded,
             AsnEncodingRules ruleSet
-        ) {
+        )
+        {
             try
             {
                 AsnValueReader reader = new AsnValueReader(encoded.Span, ruleSet);
@@ -108,7 +109,8 @@ namespace System.Security.Cryptography.Pkcs.Asn1
             ref AsnValueReader reader,
             ReadOnlyMemory<byte> rebind,
             out EssCertIdV2 decoded
-        ) {
+        )
+        {
             Decode(ref reader, Asn1Tag.Sequence, rebind, out decoded);
         }
 
@@ -117,7 +119,8 @@ namespace System.Security.Cryptography.Pkcs.Asn1
             Asn1Tag expectedTag,
             ReadOnlyMemory<byte> rebind,
             out EssCertIdV2 decoded
-        ) {
+        )
+        {
             try
             {
                 DecodeCore(ref reader, expectedTag, rebind, out decoded);
@@ -133,7 +136,8 @@ namespace System.Security.Cryptography.Pkcs.Asn1
             Asn1Tag expectedTag,
             ReadOnlyMemory<byte> rebind,
             out EssCertIdV2 decoded
-        ) {
+        )
+        {
             decoded = default;
             AsnValueReader sequenceReader = reader.ReadSequence(expectedTag);
             AsnValueReader defaultReader;
@@ -144,7 +148,8 @@ namespace System.Security.Cryptography.Pkcs.Asn1
             if (
                 sequenceReader.HasData
                 && sequenceReader.PeekTag().HasSameClassAndValue(Asn1Tag.Sequence)
-            ) {
+            )
+            {
                 System.Security.Cryptography.Asn1.AlgorithmIdentifierAsn.Decode(
                     ref sequenceReader,
                     rebind,
@@ -175,7 +180,8 @@ namespace System.Security.Cryptography.Pkcs.Asn1
             if (
                 sequenceReader.HasData
                 && sequenceReader.PeekTag().HasSameClassAndValue(Asn1Tag.Sequence)
-            ) {
+            )
+            {
                 System.Security.Cryptography.Pkcs.Asn1.CadesIssuerSerial tmpIssuerSerial;
                 System.Security.Cryptography.Pkcs.Asn1.CadesIssuerSerial.Decode(
                     ref sequenceReader,

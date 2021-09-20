@@ -118,7 +118,8 @@ namespace System.Globalization
             char* output,
             int outputLength,
             bool reattempt
-        ) {
+        )
+        {
             Debug.Assert(!GlobalizationMode.Invariant);
             Debug.Assert(!GlobalizationMode.UseNls);
             Debug.Assert(asciiString != null && asciiString.Length >= count);
@@ -182,7 +183,8 @@ namespace System.Globalization
             int count,
             uint flags,
             string paramName
-        ) {
+        )
+        {
             if ((flags & Interop.Globalization.UseStd3AsciiRules) == 0)
             {
                 for (int i = 0; i < count; i++)

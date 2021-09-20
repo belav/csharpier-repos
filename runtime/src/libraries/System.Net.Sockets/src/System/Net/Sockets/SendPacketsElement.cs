@@ -122,7 +122,8 @@ namespace System.Net.Sockets
             long offset,
             int count,
             bool endOfPacket
-        ) {
+        )
+        {
             FilePath = filePath;
             FileStream = fileStream;
             Buffer = buffer;

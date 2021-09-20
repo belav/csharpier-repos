@@ -85,7 +85,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UsePatternCombinators
             IBinaryOperation op,
             bool isDisjunctive,
             SyntaxToken token
-        ) {
+        )
+        {
             var leftPattern = ParsePattern(op.LeftOperand);
             if (leftPattern is null)
                 return null;

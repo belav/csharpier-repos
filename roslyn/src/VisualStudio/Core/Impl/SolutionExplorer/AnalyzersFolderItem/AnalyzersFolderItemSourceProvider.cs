@@ -36,7 +36,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.SolutionExplore
         public AnalyzersFolderItemSourceProvider(
             VisualStudioWorkspace workspace,
             [Import(typeof(AnalyzersCommandHandler))] IAnalyzersCommandHandler commandHandler
-        ) {
+        )
+        {
             _workspace = workspace;
             _commandHandler = commandHandler;
         }
@@ -44,13 +45,15 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.SolutionExplore
         protected override IAttachedCollectionSource? CreateCollectionSource(
             IVsHierarchyItem item,
             string relationshipName
-        ) {
+        )
+        {
             if (
                 item != null
                 && item.HierarchyIdentity != null
                 && item.HierarchyIdentity.NestedHierarchy != null
                 && relationshipName == KnownRelationships.Contains
-            ) {
+            )
+            {
                 var hierarchy = item.HierarchyIdentity.NestedHierarchy;
                 var itemId = item.HierarchyIdentity.NestedItemID;
 
@@ -65,7 +68,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.SolutionExplore
                             targetFrameworkMoniker: null,
                             projectId: out var projectId
                         )
-                    ) {
+                    )
+                    {
                         return new AnalyzersFolderItemSource(
                             _workspace,
                             projectId,
@@ -84,14 +88,16 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.SolutionExplore
         private static ImmutableArray<string> GetProjectTreeCapabilities(
             IVsHierarchy hierarchy,
             uint itemId
-        ) {
+        )
+        {
             if (
                 hierarchy.GetProperty(
                     itemId,
                     (int)__VSHPROPID7.VSHPROPID_ProjectTreeCapabilities,
                     out var capabilitiesObj
                 ) == VSConstants.S_OK
-            ) {
+            )
+            {
                 var capabilitiesString = (string)capabilitiesObj;
                 return ImmutableArray.Create(capabilitiesString.Split(' '));
             }

@@ -20,7 +20,8 @@ namespace System.ComponentModel.Composition
             compositionService.ImportsSatisfied += delegate(
                 object sender,
                 SatisfyImportsEventArgs e
-            ) {
+            )
+            {
                 Assert.False(importsSatisfiedCalled);
                 Assert.Equal(part, e.Part);
                 importsSatisfiedCalled = true;
@@ -66,7 +67,8 @@ namespace System.ComponentModel.Composition
             compositionService.ImportsSatisfied += delegate(
                 object sender,
                 SatisfyImportsEventArgs e
-            ) {
+            )
+            {
                 Assert.False(importsSatisfiedCalled);
                 Assert.True(e.Part is ReflectionComposablePart);
                 Assert.True(
@@ -116,7 +118,8 @@ namespace System.ComponentModel.Composition
             compositionService.ImportsSatisfied += delegate(
                 object sender,
                 SatisfyImportsEventArgs e
-            ) {
+            )
+            {
                 Assert.False(importsSatisfiedCalled);
                 Assert.True(e.Part is ReflectionComposablePart);
                 Assert.True(

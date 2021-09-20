@@ -21,7 +21,8 @@ namespace System.ComponentModel
         /// </summary>
         public AttributeProviderAttribute(
             [DynamicallyAccessedMembers(RequiredMemberTypes)] string typeName
-        ) {
+        )
+        {
             TypeName = typeName ?? throw new ArgumentNullException(nameof(typeName));
         }
 
@@ -31,7 +32,8 @@ namespace System.ComponentModel
         public AttributeProviderAttribute(
             [DynamicallyAccessedMembers(RequiredMemberTypes)] string typeName,
             string propertyName
-        ) {
+        )
+        {
             TypeName = typeName ?? throw new ArgumentNullException(nameof(typeName));
             PropertyName = propertyName ?? throw new ArgumentNullException(nameof(propertyName));
         }
@@ -41,7 +43,8 @@ namespace System.ComponentModel
         /// </summary>
         public AttributeProviderAttribute(
             [DynamicallyAccessedMembers(RequiredMemberTypes)] Type type
-        ) {
+        )
+        {
             if (type == null)
             {
                 throw new ArgumentNullException(nameof(type));

@@ -8,9 +8,8 @@ namespace Microsoft.EntityFrameworkCore
     public class ConfigurationDbContextSqlServerTest
         : ConfigurationDbContextTestBase<ConfigurationDbContextSqlServerTest.ConfigurationDbContextSqlServerFixture>
     {
-        public ConfigurationDbContextSqlServerTest(
-            ConfigurationDbContextSqlServerFixture fixture
-        ) : base(fixture) { }
+        public ConfigurationDbContextSqlServerTest(ConfigurationDbContextSqlServerFixture fixture)
+            : base(fixture) { }
 
         public class ConfigurationDbContextSqlServerFixture : ConfigurationDbContextFixtureBase
         {

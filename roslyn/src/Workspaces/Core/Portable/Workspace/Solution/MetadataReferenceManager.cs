@@ -29,7 +29,8 @@ namespace Microsoft.CodeAnalysis
         internal static Compilation GetCompilationForMetadataReference(
             ProjectState projectState,
             Compilation compilation
-        ) {
+        )
+        {
             var weakReference = s_compilationReferenceMap.GetValue(projectState, s_createValue);
             Compilation reference;
             lock (s_guard)
@@ -47,7 +48,8 @@ namespace Microsoft.CodeAnalysis
         internal static bool TryGetCompilationForMetadataReference(
             ProjectState projectState,
             out Compilation referenceCompilation
-        ) {
+        )
+        {
             referenceCompilation = null;
             return s_compilationReferenceMap.TryGetValue(projectState, out var weakReference)
                 && weakReference.TryGetTarget(out referenceCompilation);

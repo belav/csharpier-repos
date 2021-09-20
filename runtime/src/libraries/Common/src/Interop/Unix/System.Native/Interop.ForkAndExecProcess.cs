@@ -28,7 +28,8 @@ internal static partial class Interop
             out int stdoutFd,
             out int stderrFd,
             bool shouldThrow = true
-        ) {
+        )
+        {
             byte** argvPtr = null,
                 envpPtr = null;
             int result = -1;

@@ -30,7 +30,8 @@ namespace System.Web.Http.Hosting
         protected override async Task<HttpResponseMessage> SendAsync(
             HttpRequestMessage request,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             if (request == null)
             {
                 throw new ArgumentNullException("request");
@@ -51,7 +52,8 @@ namespace System.Web.Http.Hosting
         private static IPrincipal SetCurrentPrincipal(
             HttpRequestMessage request,
             IPrincipal principal
-        ) {
+        )
+        {
             Contract.Assert(request != null);
 
             HttpRequestContext requestContext = request.GetRequestContext();

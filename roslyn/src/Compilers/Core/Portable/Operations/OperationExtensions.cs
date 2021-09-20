@@ -21,7 +21,8 @@ namespace Microsoft.CodeAnalysis.Operations
             this IOperation operation,
             Compilation compilation,
             CancellationToken cancellationToken = default(CancellationToken)
-        ) {
+        )
+        {
             if (operation == null)
             {
                 throw new ArgumentNullException(nameof(operation));
@@ -123,7 +124,8 @@ namespace Microsoft.CodeAnalysis.Operations
         /// <param name="declarationGroup">Variable declaration group</param>
         public static ImmutableArray<ILocalSymbol> GetDeclaredVariables(
             this IVariableDeclarationGroupOperation declarationGroup
-        ) {
+        )
+        {
             if (declarationGroup == null)
             {
                 throw new ArgumentNullException(nameof(declarationGroup));
@@ -144,7 +146,8 @@ namespace Microsoft.CodeAnalysis.Operations
         /// <param name="declaration">Variable declaration</param>
         public static ImmutableArray<ILocalSymbol> GetDeclaredVariables(
             this IVariableDeclarationOperation declaration
-        ) {
+        )
+        {
             if (declaration == null)
             {
                 throw new ArgumentNullException(nameof(declaration));
@@ -158,7 +161,8 @@ namespace Microsoft.CodeAnalysis.Operations
         private static void GetDeclaredVariables(
             this IVariableDeclarationOperation declaration,
             ArrayBuilder<ILocalSymbol> arrayBuilder
-        ) {
+        )
+        {
             foreach (var decl in declaration.Declarators)
             {
                 arrayBuilder.Add(decl.Symbol);
@@ -172,7 +176,8 @@ namespace Microsoft.CodeAnalysis.Operations
         /// <param name="declarationOperation">Single variable declaration to retrieve initializer for.</param>
         public static IVariableInitializerOperation? GetVariableInitializer(
             this IVariableDeclaratorOperation declarationOperation
-        ) {
+        )
+        {
             if (declarationOperation == null)
             {
                 throw new ArgumentNullException(nameof(declarationOperation));
@@ -190,7 +195,8 @@ namespace Microsoft.CodeAnalysis.Operations
         public static string? GetArgumentName(
             this IDynamicInvocationOperation dynamicOperation,
             int index
-        ) {
+        )
+        {
             if (dynamicOperation == null)
             {
                 throw new ArgumentNullException(nameof(dynamicOperation));
@@ -207,7 +213,8 @@ namespace Microsoft.CodeAnalysis.Operations
         public static string? GetArgumentName(
             this IDynamicIndexerAccessOperation dynamicOperation,
             int index
-        ) {
+        )
+        {
             if (dynamicOperation == null)
             {
                 throw new ArgumentNullException(nameof(dynamicOperation));
@@ -224,7 +231,8 @@ namespace Microsoft.CodeAnalysis.Operations
         public static string? GetArgumentName(
             this IDynamicObjectCreationOperation dynamicOperation,
             int index
-        ) {
+        )
+        {
             if (dynamicOperation == null)
             {
                 throw new ArgumentNullException(nameof(dynamicOperation));
@@ -241,7 +249,8 @@ namespace Microsoft.CodeAnalysis.Operations
         internal static string? GetArgumentName(
             this HasDynamicArgumentsExpression dynamicOperation,
             int index
-        ) {
+        )
+        {
             if (dynamicOperation.Arguments.IsDefaultOrEmpty)
             {
                 throw new InvalidOperationException();
@@ -266,7 +275,8 @@ namespace Microsoft.CodeAnalysis.Operations
         public static RefKind? GetArgumentRefKind(
             this IDynamicInvocationOperation dynamicOperation,
             int index
-        ) {
+        )
+        {
             if (dynamicOperation == null)
             {
                 throw new ArgumentNullException(nameof(dynamicOperation));
@@ -285,7 +295,8 @@ namespace Microsoft.CodeAnalysis.Operations
         public static RefKind? GetArgumentRefKind(
             this IDynamicIndexerAccessOperation dynamicOperation,
             int index
-        ) {
+        )
+        {
             if (dynamicOperation == null)
             {
                 throw new ArgumentNullException(nameof(dynamicOperation));
@@ -304,7 +315,8 @@ namespace Microsoft.CodeAnalysis.Operations
         public static RefKind? GetArgumentRefKind(
             this IDynamicObjectCreationOperation dynamicOperation,
             int index
-        ) {
+        )
+        {
             if (dynamicOperation == null)
             {
                 throw new ArgumentNullException(nameof(dynamicOperation));
@@ -316,7 +328,8 @@ namespace Microsoft.CodeAnalysis.Operations
         internal static RefKind? GetArgumentRefKind(
             this HasDynamicArgumentsExpression dynamicOperation,
             int index
-        ) {
+        )
+        {
             if (dynamicOperation.Arguments.IsDefaultOrEmpty)
             {
                 throw new InvalidOperationException();
@@ -383,7 +396,8 @@ namespace Microsoft.CodeAnalysis.Operations
             if (
                 operation.BranchKind != BranchKind.Break
                 && operation.BranchKind != BranchKind.Continue
-            ) {
+            )
+            {
                 return null;
             }
 

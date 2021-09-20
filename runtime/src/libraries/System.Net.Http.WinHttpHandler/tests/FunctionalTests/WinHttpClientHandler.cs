@@ -170,7 +170,8 @@ namespace System.Net.Http
         protected override Task<HttpResponseMessage> SendAsync(
             HttpRequestMessage request,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             // Get current value of WindowsProxyUsePolicy.  Only call its WinHttpHandler
             // property setter if the value needs to change.
             var oldProxyUsePolicy = base.WindowsProxyUsePolicy;

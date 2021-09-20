@@ -16,7 +16,8 @@ namespace Microsoft.AspNetCore.Mvc.FunctionalTests
     {
         public RazorPageModelTest(
             MvcTestFixture<RazorPagesWebSite.StartupWithoutEndpointRouting> fixture
-        ) {
+        )
+        {
             var factory =
                 fixture.Factories.FirstOrDefault()
                 ?? fixture.WithWebHostBuilder(ConfigureWebHostBuilder);

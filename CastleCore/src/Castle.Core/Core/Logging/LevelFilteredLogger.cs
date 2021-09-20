@@ -174,7 +174,8 @@ namespace Castle.Core.Logging
             IFormatProvider formatProvider,
             string format,
             params object[] args
-        ) {
+        )
+        {
             if (IsTraceEnabled)
             {
                 Log(LoggerLevel.Trace, string.Format(formatProvider, format, args), exception);
@@ -287,7 +288,8 @@ namespace Castle.Core.Logging
             IFormatProvider formatProvider,
             string format,
             params object[] args
-        ) {
+        )
+        {
             if (!IsDebugEnabled)
             {
                 return;
@@ -402,7 +404,8 @@ namespace Castle.Core.Logging
             IFormatProvider formatProvider,
             string format,
             params object[] args
-        ) {
+        )
+        {
             if (!IsInfoEnabled)
             {
                 return;
@@ -517,7 +520,8 @@ namespace Castle.Core.Logging
             IFormatProvider formatProvider,
             string format,
             params object[] args
-        ) {
+        )
+        {
             if (!IsWarnEnabled)
             {
                 return;
@@ -632,7 +636,8 @@ namespace Castle.Core.Logging
             IFormatProvider formatProvider,
             string format,
             params object[] args
-        ) {
+        )
+        {
             if (!IsErrorEnabled)
             {
                 return;
@@ -747,7 +752,8 @@ namespace Castle.Core.Logging
             IFormatProvider formatProvider,
             string format,
             params object[] args
-        ) {
+        )
+        {
             if (!IsFatalEnabled)
             {
                 return;

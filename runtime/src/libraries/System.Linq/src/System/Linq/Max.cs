@@ -441,7 +441,8 @@ namespace System.Linq
         public static TSource? Max<TSource>(
             this IEnumerable<TSource> source,
             IComparer<TSource>? comparer
-        ) {
+        )
+        {
             if (source == null)
             {
                 ThrowHelper.ThrowArgumentNullException(ExceptionArgument.source);
@@ -517,7 +518,8 @@ namespace System.Linq
             this IEnumerable<TSource> source,
             Func<TSource, TKey> keySelector,
             IComparer<TKey>? comparer
-        ) {
+        )
+        {
             if (source == null)
             {
                 ThrowHelper.ThrowArgumentNullException(ExceptionArgument.source);
@@ -602,7 +604,8 @@ namespace System.Linq
         public static int Max<TSource>(
             this IEnumerable<TSource> source,
             Func<TSource, int> selector
-        ) {
+        )
+        {
             if (source == null)
             {
                 ThrowHelper.ThrowArgumentNullException(ExceptionArgument.source);
@@ -638,7 +641,8 @@ namespace System.Linq
         public static int? Max<TSource>(
             this IEnumerable<TSource> source,
             Func<TSource, int?> selector
-        ) {
+        )
+        {
             if (source == null)
             {
                 ThrowHelper.ThrowArgumentNullException(ExceptionArgument.source);
@@ -706,7 +710,8 @@ namespace System.Linq
         public static long Max<TSource>(
             this IEnumerable<TSource> source,
             Func<TSource, long> selector
-        ) {
+        )
+        {
             if (source == null)
             {
                 ThrowHelper.ThrowArgumentNullException(ExceptionArgument.source);
@@ -742,7 +747,8 @@ namespace System.Linq
         public static long? Max<TSource>(
             this IEnumerable<TSource> source,
             Func<TSource, long?> selector
-        ) {
+        )
+        {
             if (source == null)
             {
                 ThrowHelper.ThrowArgumentNullException(ExceptionArgument.source);
@@ -804,7 +810,8 @@ namespace System.Linq
         public static float Max<TSource>(
             this IEnumerable<TSource> source,
             Func<TSource, float> selector
-        ) {
+        )
+        {
             if (source == null)
             {
                 ThrowHelper.ThrowArgumentNullException(ExceptionArgument.source);
@@ -850,7 +857,8 @@ namespace System.Linq
         public static float? Max<TSource>(
             this IEnumerable<TSource> source,
             Func<TSource, float?> selector
-        ) {
+        )
+        {
             if (source == null)
             {
                 ThrowHelper.ThrowArgumentNullException(ExceptionArgument.source);
@@ -910,7 +918,8 @@ namespace System.Linq
         public static double Max<TSource>(
             this IEnumerable<TSource> source,
             Func<TSource, double> selector
-        ) {
+        )
+        {
             if (source == null)
             {
                 ThrowHelper.ThrowArgumentNullException(ExceptionArgument.source);
@@ -961,7 +970,8 @@ namespace System.Linq
         public static double? Max<TSource>(
             this IEnumerable<TSource> source,
             Func<TSource, double?> selector
-        ) {
+        )
+        {
             if (source == null)
             {
                 ThrowHelper.ThrowArgumentNullException(ExceptionArgument.source);
@@ -1021,7 +1031,8 @@ namespace System.Linq
         public static decimal Max<TSource>(
             this IEnumerable<TSource> source,
             Func<TSource, decimal> selector
-        ) {
+        )
+        {
             if (source == null)
             {
                 ThrowHelper.ThrowArgumentNullException(ExceptionArgument.source);
@@ -1057,7 +1068,8 @@ namespace System.Linq
         public static decimal? Max<TSource>(
             this IEnumerable<TSource> source,
             Func<TSource, decimal?> selector
-        ) {
+        )
+        {
             if (source == null)
             {
                 ThrowHelper.ThrowArgumentNullException(ExceptionArgument.source);
@@ -1100,7 +1112,8 @@ namespace System.Linq
         public static TResult? Max<TSource, TResult>(
             this IEnumerable<TSource> source,
             Func<TSource, TResult> selector
-        ) {
+        )
+        {
             if (source == null)
             {
                 ThrowHelper.ThrowArgumentNullException(ExceptionArgument.source);

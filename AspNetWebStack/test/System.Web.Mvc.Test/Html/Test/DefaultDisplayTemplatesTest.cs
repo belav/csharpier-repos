@@ -65,7 +65,8 @@ namespace System.Web.Mvc.Html.Test
             string templateName,
             DataBoundControlMode mode,
             object additionalViewData
-        ) {
+        )
+        {
             return String.Format(
                 CultureInfo.InvariantCulture,
                 Environment.NewLine
@@ -361,7 +362,8 @@ namespace System.Web.Mvc.Html.Test
             string templateName,
             DataBoundControlMode mode,
             object additionalViewData
-        ) {
+        )
+        {
             return String.Format(
                 "Model = {0}, ModelType = {1}, PropertyName = {2}, HtmlFieldName = {3}, TemplateName = {4}, Mode = {5}, AdditionalViewData = {6}",
                 metadata.Model ?? "(null)",
@@ -631,7 +633,8 @@ namespace System.Web.Mvc.Html.Test
             string text,
             bool htmlEncode,
             string expectedResult
-        ) {
+        )
+        {
             // Arrange
             ObjectTemplateModel model = new ObjectTemplateModel();
             HtmlHelper html = MakeHtmlHelper<ObjectTemplateModel>(model);

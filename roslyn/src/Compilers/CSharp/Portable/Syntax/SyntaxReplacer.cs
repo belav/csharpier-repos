@@ -51,7 +51,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Syntax
             Func<SyntaxToken, SyntaxToken, SyntaxToken>? computeReplacementToken = null,
             IEnumerable<SyntaxTrivia>? trivia = null,
             Func<SyntaxTrivia, SyntaxTrivia, SyntaxTrivia>? computeReplacementTrivia = null
-        ) {
+        )
+        {
             var replacer = new Replacer<SyntaxNode>(
                 nodes,
                 computeReplacementNode,
@@ -97,7 +98,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Syntax
                 Func<SyntaxToken, SyntaxToken, SyntaxToken>? computeReplacementToken,
                 IEnumerable<SyntaxTrivia>? trivia,
                 Func<SyntaxTrivia, SyntaxTrivia, SyntaxTrivia>? computeReplacementTrivia
-            ) {
+            )
+            {
                 _computeReplacementNode = computeReplacementNode;
                 _computeReplacementToken = computeReplacementToken;
                 _computeReplacementTrivia = computeReplacementTrivia;
@@ -231,7 +233,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Syntax
                     this.VisitIntoStructuredTrivia
                     && trivia.HasStructure
                     && this.ShouldVisit(trivia.FullSpan)
-                ) {
+                )
+                {
                     rewritten = this.VisitTrivia(trivia);
                 }
 
@@ -248,7 +251,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Syntax
             SyntaxNode root,
             SyntaxNode originalNode,
             IEnumerable<SyntaxNode> newNodes
-        ) {
+        )
+        {
             return new NodeListEditor(originalNode, newNodes, ListEditKind.Replace).Visit(root);
         }
 
@@ -257,7 +261,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Syntax
             SyntaxNode nodeInList,
             IEnumerable<SyntaxNode> nodesToInsert,
             bool insertBefore
-        ) {
+        )
+        {
             return new NodeListEditor(
                 nodeInList,
                 nodesToInsert,
@@ -269,7 +274,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Syntax
             SyntaxNode root,
             SyntaxToken tokenInList,
             IEnumerable<SyntaxToken> newTokens
-        ) {
+        )
+        {
             return new TokenListEditor(tokenInList, newTokens, ListEditKind.Replace).Visit(root);
         }
 
@@ -278,7 +284,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Syntax
             SyntaxToken tokenInList,
             IEnumerable<SyntaxToken> newTokens,
             bool insertBefore
-        ) {
+        )
+        {
             return new TokenListEditor(
                 tokenInList,
                 newTokens,
@@ -290,7 +297,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Syntax
             SyntaxNode root,
             SyntaxTrivia triviaInList,
             IEnumerable<SyntaxTrivia> newTrivia
-        ) {
+        )
+        {
             return new TriviaListEditor(triviaInList, newTrivia, ListEditKind.Replace).Visit(root);
         }
 
@@ -299,7 +307,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Syntax
             SyntaxTrivia triviaInList,
             IEnumerable<SyntaxTrivia> newTrivia,
             bool insertBefore
-        ) {
+        )
+        {
             return new TriviaListEditor(
                 triviaInList,
                 newTrivia,
@@ -311,7 +320,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Syntax
             SyntaxToken root,
             SyntaxTrivia triviaInList,
             IEnumerable<SyntaxTrivia> newTrivia
-        ) {
+        )
+        {
             return new TriviaListEditor(triviaInList, newTrivia, ListEditKind.Replace).VisitToken(
                 root
             );
@@ -322,7 +332,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Syntax
             SyntaxTrivia triviaInList,
             IEnumerable<SyntaxTrivia> newTrivia,
             bool insertBefore
-        ) {
+        )
+        {
             return new TriviaListEditor(
                 triviaInList,
                 newTrivia,
@@ -355,7 +366,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Syntax
                 ListEditKind editKind,
                 bool visitTrivia,
                 bool visitIntoStructuredTrivia
-            ) {
+            )
+            {
                 _elementSpan = elementSpan;
                 this.editKind = editKind;
                 _visitTrivia = visitTrivia || visitIntoStructuredTrivia;
@@ -415,7 +427,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Syntax
                     this.VisitIntoStructuredTrivia
                     && trivia.HasStructure
                     && this.ShouldVisit(trivia.FullSpan)
-                ) {
+                )
+                {
                     rewritten = this.VisitTrivia(trivia);
                 }
 
@@ -451,7 +464,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Syntax
 
             public override SeparatedSyntaxList<TNode> VisitList<TNode>(
                 SeparatedSyntaxList<TNode> list
-            ) {
+            )
+            {
                 if (_originalNode is TNode)
                 {
                     var index = list.IndexOf((TNode)_originalNode);

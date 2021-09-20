@@ -26,7 +26,8 @@ namespace System.Linq.Parallel
         internal static IEnumerable<TElement> Wrap<TElement>(
             IEnumerable<TElement> source,
             CancellationToken token
-        ) {
+        )
+        {
             int count = 0;
             foreach (TElement element in source)
             {

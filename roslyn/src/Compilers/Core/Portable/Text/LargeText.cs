@@ -55,13 +55,14 @@ namespace Microsoft.CodeAnalysis.Text
             ImmutableArray<char[]> chunks,
             Encoding? encodingOpt,
             SourceHashAlgorithm checksumAlgorithm
-        ) : this(
-            chunks,
-            encodingOpt,
-            default(ImmutableArray<byte>),
-            checksumAlgorithm,
-            default(ImmutableArray<byte>)
-        ) { }
+        )
+            : this(
+                chunks,
+                encodingOpt,
+                default(ImmutableArray<byte>),
+                checksumAlgorithm,
+                default(ImmutableArray<byte>)
+            ) { }
 
         internal static SourceText Decode(
             Stream stream,
@@ -69,7 +70,8 @@ namespace Microsoft.CodeAnalysis.Text
             SourceHashAlgorithm checksumAlgorithm,
             bool throwIfBinaryDetected,
             bool canBeEmbedded
-        ) {
+        )
+        {
             stream.Seek(0, SeekOrigin.Begin);
 
             long longLength = stream.Length;
@@ -90,7 +92,8 @@ namespace Microsoft.CodeAnalysis.Text
                     bufferSize: Math.Min(length, 4096),
                     leaveOpen: true
                 )
-            ) {
+            )
+            {
                 var chunks = ReadChunksFromTextReader(
                     reader,
                     maxCharRemainingGuess,
@@ -118,7 +121,8 @@ namespace Microsoft.CodeAnalysis.Text
             int length,
             Encoding? encodingOpt,
             SourceHashAlgorithm checksumAlgorithm
-        ) {
+        )
+        {
             if (length == 0)
             {
                 return SourceText.From(string.Empty, encodingOpt, checksumAlgorithm);
@@ -134,7 +138,8 @@ namespace Microsoft.CodeAnalysis.Text
             TextReader reader,
             int maxCharRemainingGuess,
             bool throwIfBinaryDetected
-        ) {
+        )
+        {
             var chunks = ArrayBuilder<char[]>.GetInstance(1 + maxCharRemainingGuess / ChunkSize);
 
             while (reader.Peek() != -1)
@@ -228,7 +233,8 @@ namespace Microsoft.CodeAnalysis.Text
             char[] destination,
             int destinationIndex,
             int count
-        ) {
+        )
+        {
             if (count == 0)
             {
                 return;
@@ -257,7 +263,8 @@ namespace Microsoft.CodeAnalysis.Text
             TextWriter writer,
             TextSpan span,
             CancellationToken cancellationToken = default(CancellationToken)
-        ) {
+        )
+        {
             if (span.Start < 0 || span.Start > _length || span.End > _length)
             {
                 throw new ArgumentOutOfRangeException(nameof(span));

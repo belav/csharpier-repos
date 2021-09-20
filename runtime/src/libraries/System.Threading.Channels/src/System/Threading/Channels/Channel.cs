@@ -62,7 +62,8 @@ namespace System.Threading.Channels
         public static Channel<T> CreateBounded<T>(
             BoundedChannelOptions options,
             Action<T>? itemDropped
-        ) {
+        )
+        {
             if (options == null)
             {
                 throw new ArgumentNullException(nameof(options));

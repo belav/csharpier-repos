@@ -31,7 +31,8 @@ namespace System.Text.Json.Serialization.Converters
             ref ReadStack state,
             ref Utf8JsonReader reader,
             JsonParameterInfo jsonParameterInfo
-        ) {
+        )
+        {
             Debug.Assert(state.Current.CtorArgumentState!.Arguments != null);
             var arguments =
                 (Arguments<TArg0, TArg1, TArg2, TArg3>)state.Current.CtorArgumentState.Arguments;
@@ -87,7 +88,8 @@ namespace System.Text.Json.Serialization.Converters
             ref Utf8JsonReader reader,
             JsonParameterInfo jsonParameterInfo,
             out TArg arg
-        ) {
+        )
+        {
             Debug.Assert(jsonParameterInfo.ShouldDeserialize);
             Debug.Assert(jsonParameterInfo.Options != null);
 
@@ -113,7 +115,8 @@ namespace System.Text.Json.Serialization.Converters
         protected override void InitializeConstructorArgumentCaches(
             ref ReadStack state,
             JsonSerializerOptions options
-        ) {
+        )
+        {
             JsonTypeInfo typeInfo = state.Current.JsonTypeInfo;
 
             if (typeInfo.CreateObjectWithArgs == null)

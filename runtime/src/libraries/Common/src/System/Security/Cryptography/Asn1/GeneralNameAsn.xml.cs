@@ -100,7 +100,8 @@ namespace System.Security.Cryptography.Asn1
                         || !validateTag.HasSameClassAndValue(
                             new Asn1Tag(TagClass.ContextSpecific, 3)
                         )
-                    ) {
+                    )
+                    {
                         throw new CryptographicException();
                     }
                 }
@@ -196,7 +197,8 @@ namespace System.Security.Cryptography.Asn1
         internal static GeneralNameAsn Decode(
             ReadOnlyMemory<byte> encoded,
             AsnEncodingRules ruleSet
-        ) {
+        )
+        {
             try
             {
                 AsnValueReader reader = new AsnValueReader(encoded.Span, ruleSet);
@@ -215,7 +217,8 @@ namespace System.Security.Cryptography.Asn1
             ref AsnValueReader reader,
             ReadOnlyMemory<byte> rebind,
             out GeneralNameAsn decoded
-        ) {
+        )
+        {
             try
             {
                 DecodeCore(ref reader, rebind, out decoded);
@@ -230,7 +233,8 @@ namespace System.Security.Cryptography.Asn1
             ref AsnValueReader reader,
             ReadOnlyMemory<byte> rebind,
             out GeneralNameAsn decoded
-        ) {
+        )
+        {
             decoded = default;
             Asn1Tag tag = reader.PeekTag();
             AsnValueReader explicitReader;
@@ -304,7 +308,8 @@ namespace System.Security.Cryptography.Asn1
                         out tmpSpan,
                         new Asn1Tag(TagClass.ContextSpecific, 7)
                     )
-                ) {
+                )
+                {
                     decoded.IPAddress = rebindSpan.Overlaps(tmpSpan, out offset)
                         ? rebind.Slice(offset, tmpSpan.Length)
                         : tmpSpan.ToArray();

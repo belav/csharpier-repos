@@ -23,7 +23,8 @@ namespace System.Globalization.Tests
                 && !PlatformDetection.IsWindows7
                 && !PlatformDetection.IsWindows8x
                 && !PlatformDetection.IsFedora
-            ) {
+            )
+            {
                 yield return new object[]
                 {
                     CultureInfo.GetCultureInfo("ur-IN").NumberFormat,

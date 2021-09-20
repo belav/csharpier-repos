@@ -25,22 +25,29 @@ namespace Microsoft.CodeAnalysis.CSharp.ExpressionEvaluator.UnitTests
         internal CSharpResultProviderTestBase(
             DkmInspectionSession inspectionSession,
             DkmInspectionContext defaultInspectionContext = null
-        ) : base(
-            inspectionSession,
-            defaultInspectionContext
-                ?? CreateDkmInspectionContext(inspectionSession, DkmEvaluationFlags.None, radix: 10)
-        ) { }
+        )
+            : base(
+                inspectionSession,
+                defaultInspectionContext
+                    ?? CreateDkmInspectionContext(
+                        inspectionSession,
+                        DkmEvaluationFlags.None,
+                        radix: 10
+                    )
+            ) { }
 
         internal static DkmInspectionContext CreateDkmInspectionContext(
             DkmEvaluationFlags evalFlags
-        ) {
+        )
+        {
             var inspectionSession = CreateDkmInspectionSession();
             return CreateDkmInspectionContext(inspectionSession, evalFlags, radix: 10);
         }
 
         private static DkmInspectionSession CreateDkmInspectionSession(
             CSharpFormatter formatter = null
-        ) {
+        )
+        {
             formatter = formatter ?? new CSharpFormatter();
             return new DkmInspectionSession(
                 ImmutableArray.Create<IDkmClrFormatter>(formatter),

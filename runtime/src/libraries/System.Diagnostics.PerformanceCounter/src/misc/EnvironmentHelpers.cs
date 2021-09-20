@@ -24,7 +24,8 @@ namespace System
                             Environment.OSVersion.Version.Major == 6
                             && Environment.OSVersion.Version.Minor <= 1
                         )
-                    ) {
+                    )
+                    {
                         // Windows 7 or older.
                         s_isAppContainerProcess = false;
                     }
@@ -55,7 +56,8 @@ namespace System
                         sizeof(int),
                         out dwLength
                     )
-                ) {
+                )
+                {
                     throw new Win32Exception();
                 }
             }

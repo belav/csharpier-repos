@@ -24,7 +24,8 @@ namespace Microsoft.CodeAnalysis.CodeGen
             int startColumn,
             int endLine,
             int endColumn
-        ) {
+        )
+        {
             RoslynDebug.Assert(document != null);
 
             StartLine = startLine;

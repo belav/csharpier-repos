@@ -77,7 +77,8 @@ namespace System.Web.Mvc
         private ViewEngineResult Find(
             Func<IViewEngine, ViewEngineResult> cacheLocator,
             Func<IViewEngine, ViewEngineResult> locator
-        ) {
+        )
+        {
             // First, look up using the cacheLocator and do not track the searched paths in non-matching view engines
             // Then, look up using the normal locator and track the searched paths so that an error view engine can be returned
             return Find(cacheLocator, trackSearchedPaths: false)
@@ -87,7 +88,8 @@ namespace System.Web.Mvc
         private ViewEngineResult Find(
             Func<IViewEngine, ViewEngineResult> lookup,
             bool trackSearchedPaths
-        ) {
+        )
+        {
             // Returns
             //    1st result
             // OR list of searched paths (if trackSearchedPaths == true)
@@ -132,7 +134,8 @@ namespace System.Web.Mvc
         public virtual ViewEngineResult FindPartialView(
             ControllerContext controllerContext,
             string partialViewName
-        ) {
+        )
+        {
             if (controllerContext == null)
             {
                 throw new ArgumentNullException("controllerContext");
@@ -152,7 +155,8 @@ namespace System.Web.Mvc
             ControllerContext controllerContext,
             string viewName,
             string masterName
-        ) {
+        )
+        {
             if (controllerContext == null)
             {
                 throw new ArgumentNullException("controllerContext");

@@ -123,7 +123,8 @@ namespace Microsoft.AspNetCore.Mvc
             string? action,
             string? controller,
             object? values
-        ) {
+        )
+        {
             if (helper == null)
             {
                 throw new ArgumentNullException(nameof(helper));
@@ -164,7 +165,8 @@ namespace Microsoft.AspNetCore.Mvc
             string? controller,
             object? values,
             string? protocol
-        ) {
+        )
+        {
             if (helper == null)
             {
                 throw new ArgumentNullException(nameof(helper));
@@ -202,7 +204,8 @@ namespace Microsoft.AspNetCore.Mvc
             object? values,
             string? protocol,
             string? host
-        ) {
+        )
+        {
             if (helper == null)
             {
                 throw new ArgumentNullException(nameof(helper));
@@ -242,7 +245,8 @@ namespace Microsoft.AspNetCore.Mvc
             string? protocol,
             string? host,
             string? fragment
-        ) {
+        )
+        {
             if (helper == null)
             {
                 throw new ArgumentNullException(nameof(helper));
@@ -346,7 +350,8 @@ namespace Microsoft.AspNetCore.Mvc
             string? routeName,
             object? values,
             string? protocol
-        ) {
+        )
+        {
             if (helper == null)
             {
                 throw new ArgumentNullException(nameof(helper));
@@ -382,7 +387,8 @@ namespace Microsoft.AspNetCore.Mvc
             object? values,
             string? protocol,
             string? host
-        ) {
+        )
+        {
             if (helper == null)
             {
                 throw new ArgumentNullException(nameof(helper));
@@ -420,7 +426,8 @@ namespace Microsoft.AspNetCore.Mvc
             string? protocol,
             string? host,
             string? fragment
-        ) {
+        )
+        {
             if (helper == null)
             {
                 throw new ArgumentNullException(nameof(helper));
@@ -567,7 +574,8 @@ namespace Microsoft.AspNetCore.Mvc
             string? protocol,
             string? host,
             string? fragment
-        ) {
+        )
+        {
             if (urlHelper == null)
             {
                 throw new ArgumentNullException(nameof(urlHelper));
@@ -624,7 +632,8 @@ namespace Microsoft.AspNetCore.Mvc
             string? protocol = null,
             string? host = null,
             string? fragment = null
-        ) {
+        )
+        {
             if (helper == null)
             {
                 throw new ArgumentNullException(nameof(helper));
@@ -676,7 +685,8 @@ namespace Microsoft.AspNetCore.Mvc
             string? protocol = null,
             string? host = null,
             string? fragment = null
-        ) {
+        )
+        {
             if (urlHelper == null)
             {
                 throw new ArgumentNullException(nameof(urlHelper));

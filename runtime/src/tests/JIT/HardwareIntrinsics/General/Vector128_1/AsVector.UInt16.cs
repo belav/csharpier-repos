@@ -100,7 +100,8 @@ namespace JIT.HardwareIntrinsics.General
             Vector<UInt16> result,
             Vector128<UInt16> value,
             [CallerMemberName] string method = ""
-        ) {
+        )
+        {
             UInt16[] resultElements = new UInt16[NumericsElementCount];
             Unsafe.WriteUnaligned(ref Unsafe.As<UInt16, byte>(ref resultElements[0]), result);
 
@@ -114,7 +115,8 @@ namespace JIT.HardwareIntrinsics.General
             Vector128<UInt16> result,
             Vector<UInt16> value,
             [CallerMemberName] string method = ""
-        ) {
+        )
+        {
             UInt16[] resultElements = new UInt16[VectorElementCount];
             Unsafe.WriteUnaligned(ref Unsafe.As<UInt16, byte>(ref resultElements[0]), result);
 
@@ -128,7 +130,8 @@ namespace JIT.HardwareIntrinsics.General
             UInt16[] resultElements,
             UInt16[] valueElements,
             [CallerMemberName] string method = ""
-        ) {
+        )
+        {
             bool succeeded = true;
 
             if (resultElements.Length <= valueElements.Length)

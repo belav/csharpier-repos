@@ -567,7 +567,8 @@ namespace Microsoft.EntityFrameworkCore
         [InlineData(true)]
         public virtual void Query_with_conditional_constant_read_only_props_with_named_fields(
             bool tracking
-        ) {
+        )
+        {
             Query_with_conditional_constant<PostReadOnlyExplicit>("BlogId", tracking);
         }
 
@@ -576,7 +577,8 @@ namespace Microsoft.EntityFrameworkCore
         [InlineData(true)]
         public virtual void Query_with_conditional_param_read_only_props_with_named_fields(
             bool tracking
-        ) {
+        )
+        {
             Query_with_conditional_param<PostReadOnlyExplicit>("Title", tracking);
         }
 
@@ -1011,7 +1013,8 @@ namespace Microsoft.EntityFrameworkCore
             int postId,
             IBlogAccessor blog,
             string updated = ""
-        ) {
+        )
+        {
             Assert.Equal("Post" + postId + updated, post.AccessTitle);
             Assert.Same(blog, post.AccessBlog);
             Assert.Equal(blog.AccessId, post.AccessBlogId);
@@ -1031,7 +1034,8 @@ namespace Microsoft.EntityFrameworkCore
             int post1Id,
             int post2Id,
             string blogName
-        ) {
+        )
+        {
             var blog1a = posts.Single(e => e.AccessId == post1Id).AccessBlog;
             var blog1b = posts.Single(e => e.AccessId == post2Id).AccessBlog;
 
@@ -2298,7 +2302,8 @@ namespace Microsoft.EntityFrameworkCore
                     if (
                         context.GetService<IDesignTimeModel>().Model.GetPropertyAccessMode()
                         != PropertyAccessMode.Property
-                    ) {
+                    )
+                    {
                         context.Add(
                             CreateBlogAndPosts<BlogReadOnly, PostReadOnly>(
                                 new ObservableCollection<PostReadOnly>()

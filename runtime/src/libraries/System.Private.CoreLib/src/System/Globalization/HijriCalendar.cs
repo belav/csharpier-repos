@@ -434,7 +434,8 @@ namespace System.Globalization
             int second,
             int millisecond,
             int era
-        ) {
+        )
+        {
             // The year/month/era checking is done in GetDaysInMonth().
             int daysInMonth = GetDaysInMonth(year, month, era);
             if (day < 1 || day > daysInMonth)

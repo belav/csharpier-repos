@@ -34,7 +34,8 @@ namespace Microsoft.EntityFrameworkCore.InMemory.Query.Internal
                     binaryExpression.NodeType == ExpressionType.Assign
                     && binaryExpression.Left is ParameterExpression parameterExpression
                     && parameterExpression.Type == typeof(MaterializationContext)
-                ) {
+                )
+                {
                     var newExpression = (NewExpression)binaryExpression.Right;
 
                     var projectionBindingExpression =
@@ -68,7 +69,8 @@ namespace Microsoft.EntityFrameworkCore.InMemory.Query.Internal
                     && binaryExpression.Left is MemberExpression memberExpression
                     && memberExpression.Member is FieldInfo fieldInfo
                     && fieldInfo.IsInitOnly
-                ) {
+                )
+                {
                     return memberExpression.Assign(Visit(binaryExpression.Right));
                 }
 
@@ -83,7 +85,8 @@ namespace Microsoft.EntityFrameworkCore.InMemory.Query.Internal
                     methodCallExpression.Method.IsGenericMethod
                     && methodCallExpression.Method.GetGenericMethodDefinition()
                         == ExpressionExtensions.ValueBufferTryReadValueMethod
-                ) {
+                )
+                {
                     var property = methodCallExpression.Arguments[2].GetConstantValue<IProperty?>();
                     var (indexMap, valueBuffer) = _materializationContextBindings[
                         (ParameterExpression)(
@@ -148,7 +151,8 @@ namespace Microsoft.EntityFrameworkCore.InMemory.Query.Internal
                     && methodCallExpression.Method.IsGenericMethod
                     && methodCallExpression.Method.GetGenericMethodDefinition()
                         == ExpressionExtensions.ValueBufferTryReadValueMethod
-                ) {
+                )
+                {
                     return methodCallExpression.Arguments[2].GetConstantValue<IPropertyBase?>();
                 }
 
@@ -158,7 +162,8 @@ namespace Microsoft.EntityFrameworkCore.InMemory.Query.Internal
             private object GetProjectionIndex(
                 InMemoryQueryExpression queryExpression,
                 ProjectionBindingExpression projectionBindingExpression
-            ) {
+            )
+            {
                 return projectionBindingExpression.ProjectionMember != null
                   ? queryExpression.GetMappedProjection(
                             projectionBindingExpression.ProjectionMember

@@ -46,7 +46,8 @@ namespace Microsoft.AspNetCore.Mvc.Razor.Extensions.Version2_X
         protected override bool IsMatch(
             RazorCodeDocument codeDocument,
             DocumentIntermediateNode documentNode
-        ) {
+        )
+        {
             return PageDirective.TryGetPageDirective(documentNode, out var pageDirective);
         }
 
@@ -55,7 +56,8 @@ namespace Microsoft.AspNetCore.Mvc.Razor.Extensions.Version2_X
             NamespaceDeclarationIntermediateNode @namespace,
             ClassDeclarationIntermediateNode @class,
             MethodDeclarationIntermediateNode method
-        ) {
+        )
+        {
             base.OnDocumentStructureCreated(codeDocument, @namespace, @class, method);
 
             @namespace.Content = "AspNetCore";
@@ -97,7 +99,8 @@ namespace Microsoft.AspNetCore.Mvc.Razor.Extensions.Version2_X
             NamespaceDeclarationIntermediateNode @namespace,
             ClassDeclarationIntermediateNode @class,
             PageDirective pageDirective
-        ) {
+        )
+        {
             if (string.IsNullOrEmpty(pageDirective.RouteTemplate))
             {
                 return;
@@ -121,7 +124,8 @@ namespace Microsoft.AspNetCore.Mvc.Razor.Extensions.Version2_X
         private void EnsureValidPageDirective(
             RazorCodeDocument codeDocument,
             PageDirective pageDirective
-        ) {
+        )
+        {
             Debug.Assert(pageDirective != null);
 
             if (pageDirective.DirectiveNode.IsImported())

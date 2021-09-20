@@ -19,7 +19,8 @@ namespace System.Reflection
             RuntimeTypeCache reflectedTypeCache,
             RuntimeType declaringType,
             BindingFlags bindingFlags
-        ) {
+        )
+        {
             m_bindingFlags = bindingFlags;
             m_declaringType = declaringType;
             m_reflectedTypeCache = reflectedTypeCache;

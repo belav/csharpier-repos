@@ -99,7 +99,8 @@ public class TestClass
             string objDirectory,
             string projectFileName,
             string? content
-        ) {
+        )
+        {
             // Common.props automatically import {project-name}.*.props files from MSBuildProjectExtensionsPath directory,
             // which is by default set to the IntermediateOutputPath:
             File.WriteAllText(
@@ -116,7 +117,8 @@ public class TestClass
             string projectFileName,
             IEnumerable<string> expressions,
             string? additionalContent
-        ) {
+        )
+        {
             // Common.targets automatically import {project-name}.*.targets files from MSBuildProjectExtensionsPath directory,
             // which is by defautl set to the IntermediateOutputPath:
             File.WriteAllText(
@@ -220,7 +222,8 @@ public class TestClass
             string[] targets,
             string[] expressions,
             string[] expectedResults
-        ) {
+        )
+        {
             var evaluationResultsFile = Path.Combine(OutDir.Path, "EvaluationResult.txt");
 
             EmitTestHelperProps(ObjDir.Path, ProjectFileName, customProps);

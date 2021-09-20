@@ -73,7 +73,8 @@ namespace System.Net.Http.Formatting
             Stream readStream,
             HttpContent content,
             IFormatterLogger formatterLogger
-        ) {
+        )
+        {
             if (type == null)
             {
                 throw Error.ArgumentNull("type");
@@ -89,7 +90,8 @@ namespace System.Net.Http.Formatting
                 && content != null
                 && content.Headers != null
                 && content.Headers.ContentLength == 0
-            ) {
+            )
+            {
                 // Lower-level Json.Net deserialization can convert null to DBNull.Value. However this formatter treats
                 // DBNull.Value like null and serializes no content. Json.Net code won't be invoked at all (for read or
                 // write). Override BaseJsonMediaTypeFormatter.ReadFromStream()'s call to GetDefaultValueForType()
@@ -110,7 +112,8 @@ namespace System.Net.Http.Formatting
             Stream readStream,
             Encoding effectiveEncoding,
             IFormatterLogger formatterLogger
-        ) {
+        )
+        {
             if (type == null)
             {
                 throw Error.ArgumentNull("type");
@@ -197,7 +200,8 @@ namespace System.Net.Http.Formatting
             Type type,
             Stream readStream,
             Encoding effectiveEncoding
-        ) {
+        )
+        {
             if (type == null)
             {
                 throw Error.ArgumentNull("type");
@@ -239,7 +243,8 @@ namespace System.Net.Http.Formatting
             object value,
             Stream writeStream,
             Encoding effectiveEncoding
-        ) {
+        )
+        {
             if (type == null)
             {
                 throw Error.ArgumentNull("type");
@@ -307,7 +312,8 @@ namespace System.Net.Http.Formatting
             Type type,
             Stream writeStream,
             Encoding effectiveEncoding
-        ) {
+        )
+        {
             if (type == null)
             {
                 throw Error.ArgumentNull("type");

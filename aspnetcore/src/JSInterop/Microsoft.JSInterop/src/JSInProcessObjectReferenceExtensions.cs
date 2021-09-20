@@ -20,7 +20,8 @@ namespace Microsoft.JSInterop
             this IJSInProcessObjectReference jsObjectReference,
             string identifier,
             params object?[] args
-        ) {
+        )
+        {
             if (jsObjectReference == null)
             {
                 throw new ArgumentNullException(nameof(jsObjectReference));

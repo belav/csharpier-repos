@@ -152,7 +152,8 @@ namespace System.Linq.Expressions.Tests
         private static void VerifyArithmeticNegateCheckedNullableDecimal(
             decimal? value,
             bool useInterpreter
-        ) {
+        )
+        {
             Expression<Func<decimal?>> e = Expression.Lambda<Func<decimal?>>(
                 Expression.NegateChecked(Expression.Constant(value, typeof(decimal?))),
                 Enumerable.Empty<ParameterExpression>()
@@ -166,7 +167,8 @@ namespace System.Linq.Expressions.Tests
         private static void VerifyArithmeticNegateCheckedNullableDouble(
             double? value,
             bool useInterpreter
-        ) {
+        )
+        {
             Expression<Func<double?>> e = Expression.Lambda<Func<double?>>(
                 Expression.NegateChecked(Expression.Constant(value, typeof(double?))),
                 Enumerable.Empty<ParameterExpression>()
@@ -180,7 +182,8 @@ namespace System.Linq.Expressions.Tests
         private static void VerifyArithmeticNegateCheckedNullableFloat(
             float? value,
             bool useInterpreter
-        ) {
+        )
+        {
             Expression<Func<float?>> e = Expression.Lambda<Func<float?>>(
                 Expression.NegateChecked(Expression.Constant(value, typeof(float?))),
                 Enumerable.Empty<ParameterExpression>()
@@ -194,7 +197,8 @@ namespace System.Linq.Expressions.Tests
         private static void VerifyArithmeticNegateCheckedNullableInt(
             int? value,
             bool useInterpreter
-        ) {
+        )
+        {
             Expression<Func<int?>> e = Expression.Lambda<Func<int?>>(
                 Expression.NegateChecked(Expression.Constant(value, typeof(int?))),
                 Enumerable.Empty<ParameterExpression>()
@@ -211,7 +215,8 @@ namespace System.Linq.Expressions.Tests
         private static void VerifyArithmeticNegateCheckedNullableLong(
             long? value,
             bool useInterpreter
-        ) {
+        )
+        {
             Expression<Func<long?>> e = Expression.Lambda<Func<long?>>(
                 Expression.NegateChecked(Expression.Constant(value, typeof(long?))),
                 Enumerable.Empty<ParameterExpression>()
@@ -235,7 +240,8 @@ namespace System.Linq.Expressions.Tests
         private static void VerifyArithmeticNegateCheckedNullableShort(
             short? value,
             bool useInterpreter
-        ) {
+        )
+        {
             Expression<Func<short?>> e = Expression.Lambda<Func<short?>>(
                 Expression.NegateChecked(Expression.Constant(value, typeof(short?))),
                 Enumerable.Empty<ParameterExpression>()

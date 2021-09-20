@@ -1199,7 +1199,8 @@ namespace Microsoft.VisualBasic.CompilerServices.Tests
             bool greater,
             bool equal,
             bool less
-        ) {
+        )
+        {
             _ = greater;
             _ = less;
             Assert.Equal(equal, Operators.CompareObjectEqual(left, right, true));
@@ -1230,7 +1231,8 @@ namespace Microsoft.VisualBasic.CompilerServices.Tests
             object left,
             object right,
             object expected
-        ) {
+        )
+        {
             Assert.Equal(expected, Operators.CompareObjectEqual(left, right, true));
             Assert.Equal(expected, Operators.CompareObjectEqual(left, right, false));
         }
@@ -1240,7 +1242,8 @@ namespace Microsoft.VisualBasic.CompilerServices.Tests
         public void CompareObjectEqual_InvalidObjects_ThrowsInvalidCastException(
             object left,
             object right
-        ) {
+        )
+        {
             Assert.Throws<InvalidCastException>(
                 () => Operators.CompareObjectEqual(left, right, true)
             );
@@ -1262,7 +1265,8 @@ namespace Microsoft.VisualBasic.CompilerServices.Tests
         public void CompareObjectEqual_MismatchingObjects_ThrowsAmibguousMatchException(
             object left,
             object right
-        ) {
+        )
+        {
             Assert.Throws<AmbiguousMatchException>(
                 () => Operators.CompareObjectEqual(left, right, true)
             );
@@ -1293,7 +1297,8 @@ namespace Microsoft.VisualBasic.CompilerServices.Tests
             bool greater,
             bool equal,
             bool less
-        ) {
+        )
+        {
             _ = equal;
             _ = less;
             Assert.Equal(greater, Operators.CompareObjectGreater(left, right, true));
@@ -1324,7 +1329,8 @@ namespace Microsoft.VisualBasic.CompilerServices.Tests
             object left,
             object right,
             object expected
-        ) {
+        )
+        {
             Assert.Equal(expected, Operators.CompareObjectGreater(left, right, true));
             Assert.Equal(expected, Operators.CompareObjectGreater(left, right, false));
         }
@@ -1334,7 +1340,8 @@ namespace Microsoft.VisualBasic.CompilerServices.Tests
         public void CompareObjectGreater_InvalidObjects_ThrowsInvalidCastException(
             object left,
             object right
-        ) {
+        )
+        {
             Assert.Throws<InvalidCastException>(
                 () => Operators.CompareObjectGreater(left, right, true)
             );
@@ -1356,7 +1363,8 @@ namespace Microsoft.VisualBasic.CompilerServices.Tests
         public void CompareObjectGreater_MismatchingObjects_ThrowsAmibguousMatchException(
             object left,
             object right
-        ) {
+        )
+        {
             Assert.Throws<AmbiguousMatchException>(
                 () => Operators.CompareObjectGreater(left, right, true)
             );
@@ -1387,7 +1395,8 @@ namespace Microsoft.VisualBasic.CompilerServices.Tests
             bool greater,
             bool equal,
             bool less
-        ) {
+        )
+        {
             _ = less;
             Assert.Equal(greater || equal, Operators.CompareObjectGreaterEqual(left, right, true));
             Assert.Equal(greater || equal, Operators.CompareObjectGreaterEqual(left, right, false));
@@ -1417,7 +1426,8 @@ namespace Microsoft.VisualBasic.CompilerServices.Tests
             object left,
             object right,
             object expected
-        ) {
+        )
+        {
             Assert.Equal(expected, Operators.CompareObjectGreaterEqual(left, right, true));
             Assert.Equal(expected, Operators.CompareObjectGreaterEqual(left, right, false));
         }
@@ -1427,7 +1437,8 @@ namespace Microsoft.VisualBasic.CompilerServices.Tests
         public void CompareObjectGreaterEqual_InvalidObjects_ThrowsInvalidCastException(
             object left,
             object right
-        ) {
+        )
+        {
             Assert.Throws<InvalidCastException>(
                 () => Operators.CompareObjectGreaterEqual(left, right, true)
             );
@@ -1453,7 +1464,8 @@ namespace Microsoft.VisualBasic.CompilerServices.Tests
         public void CompareObjectGreaterEqual_MismatchingObjects_ThrowsAmibguousMatchException(
             object left,
             object right
-        ) {
+        )
+        {
             Assert.Throws<AmbiguousMatchException>(
                 () => Operators.CompareObjectGreaterEqual(left, right, true)
             );
@@ -1490,7 +1502,8 @@ namespace Microsoft.VisualBasic.CompilerServices.Tests
             bool greater,
             bool equal,
             bool less
-        ) {
+        )
+        {
             _ = greater;
             _ = equal;
             Assert.Equal(less, Operators.CompareObjectLess(left, right, true));
@@ -1521,7 +1534,8 @@ namespace Microsoft.VisualBasic.CompilerServices.Tests
             object left,
             object right,
             object expected
-        ) {
+        )
+        {
             Assert.Equal(expected, Operators.CompareObjectLess(left, right, true));
             Assert.Equal(expected, Operators.CompareObjectLess(left, right, false));
         }
@@ -1531,7 +1545,8 @@ namespace Microsoft.VisualBasic.CompilerServices.Tests
         public void CompareObjectLess_InvalidObjects_ThrowsInvalidCastException(
             object left,
             object right
-        ) {
+        )
+        {
             Assert.Throws<InvalidCastException>(
                 () => Operators.CompareObjectLess(left, right, true)
             );
@@ -1553,7 +1568,8 @@ namespace Microsoft.VisualBasic.CompilerServices.Tests
         public void CompareObjectLess_MismatchingObjects_ThrowsAmibguousMatchException(
             object left,
             object right
-        ) {
+        )
+        {
             Assert.Throws<AmbiguousMatchException>(
                 () => Operators.CompareObjectLess(left, right, true)
             );
@@ -1584,7 +1600,8 @@ namespace Microsoft.VisualBasic.CompilerServices.Tests
             bool greater,
             bool equal,
             bool less
-        ) {
+        )
+        {
             _ = greater;
             Assert.Equal(less || equal, Operators.CompareObjectLessEqual(left, right, true));
             Assert.Equal(less || equal, Operators.CompareObjectLessEqual(left, right, false));
@@ -1614,7 +1631,8 @@ namespace Microsoft.VisualBasic.CompilerServices.Tests
             object left,
             object right,
             object expected
-        ) {
+        )
+        {
             Assert.Equal(expected, Operators.CompareObjectLessEqual(left, right, true));
             Assert.Equal(expected, Operators.CompareObjectLessEqual(left, right, false));
         }
@@ -1624,7 +1642,8 @@ namespace Microsoft.VisualBasic.CompilerServices.Tests
         public void CompareObjectLessEqual_InvalidObjects_ThrowsInvalidCastException(
             object left,
             object right
-        ) {
+        )
+        {
             Assert.Throws<InvalidCastException>(
                 () => Operators.CompareObjectLessEqual(left, right, true)
             );
@@ -1650,7 +1669,8 @@ namespace Microsoft.VisualBasic.CompilerServices.Tests
         public void CompareObjectLessEqual_MismatchingObjects_ThrowsAmibguousMatchException(
             object left,
             object right
-        ) {
+        )
+        {
             Assert.Throws<AmbiguousMatchException>(
                 () => Operators.CompareObjectLessEqual(left, right, true)
             );
@@ -1687,7 +1707,8 @@ namespace Microsoft.VisualBasic.CompilerServices.Tests
             bool greater,
             bool equal,
             bool less
-        ) {
+        )
+        {
             _ = greater;
             _ = less;
             Assert.Equal(!equal, Operators.CompareObjectNotEqual(left, right, true));
@@ -1718,7 +1739,8 @@ namespace Microsoft.VisualBasic.CompilerServices.Tests
             object left,
             object right,
             object expected
-        ) {
+        )
+        {
             Assert.Equal(expected, Operators.CompareObjectNotEqual(left, right, true));
             Assert.Equal(expected, Operators.CompareObjectNotEqual(left, right, false));
         }
@@ -1728,7 +1750,8 @@ namespace Microsoft.VisualBasic.CompilerServices.Tests
         public void CompareObjectNotEqual_InvalidObjects_ThrowsInvalidCastException(
             object left,
             object right
-        ) {
+        )
+        {
             Assert.Throws<InvalidCastException>(
                 () => Operators.CompareObjectNotEqual(left, right, true)
             );
@@ -1750,7 +1773,8 @@ namespace Microsoft.VisualBasic.CompilerServices.Tests
         public void CompareObjectNotEqual_MismatchingObjects_ThrowsAmibguousMatchException(
             object left,
             object right
-        ) {
+        )
+        {
             Assert.Throws<AmbiguousMatchException>(
                 () => Operators.CompareObjectNotEqual(left, right, true)
             );
@@ -1781,7 +1805,8 @@ namespace Microsoft.VisualBasic.CompilerServices.Tests
             bool greater,
             bool equal,
             bool less
-        ) {
+        )
+        {
             _ = greater;
             _ = less;
             Assert.Equal(equal, Operators.ConditionalCompareObjectEqual(left, right, true));
@@ -1812,7 +1837,8 @@ namespace Microsoft.VisualBasic.CompilerServices.Tests
             object left,
             object right,
             object expected
-        ) {
+        )
+        {
             Assert.Equal(expected, Operators.ConditionalCompareObjectEqual(left, right, true));
             Assert.Equal(expected, Operators.ConditionalCompareObjectEqual(left, right, false));
         }
@@ -1822,7 +1848,8 @@ namespace Microsoft.VisualBasic.CompilerServices.Tests
         public void ConditionalCompareObjectEqual_InvalidObjects_ThrowsInvalidCastException(
             object left,
             object right
-        ) {
+        )
+        {
             Assert.Throws<InvalidCastException>(
                 () => Operators.ConditionalCompareObjectEqual(left, right, true)
             );
@@ -1848,7 +1875,8 @@ namespace Microsoft.VisualBasic.CompilerServices.Tests
         public void ConditionalCompareObjectEqual_MismatchingObjects_ThrowsAmibguousMatchException(
             object left,
             object right
-        ) {
+        )
+        {
             Assert.Throws<AmbiguousMatchException>(
                 () => Operators.ConditionalCompareObjectEqual(left, right, true)
             );
@@ -1883,7 +1911,8 @@ namespace Microsoft.VisualBasic.CompilerServices.Tests
             bool greater,
             bool equal,
             bool less
-        ) {
+        )
+        {
             _ = equal;
             _ = less;
             Assert.Equal(greater, Operators.ConditionalCompareObjectGreater(left, right, true));
@@ -1914,7 +1943,8 @@ namespace Microsoft.VisualBasic.CompilerServices.Tests
             object left,
             object right,
             object expected
-        ) {
+        )
+        {
             Assert.Equal(expected, Operators.ConditionalCompareObjectGreater(left, right, true));
             Assert.Equal(expected, Operators.ConditionalCompareObjectGreater(left, right, false));
         }
@@ -1924,7 +1954,8 @@ namespace Microsoft.VisualBasic.CompilerServices.Tests
         public void ConditionalCompareObjectGreater_InvalidObjects_ThrowsInvalidCastException(
             object left,
             object right
-        ) {
+        )
+        {
             Assert.Throws<InvalidCastException>(
                 () => Operators.ConditionalCompareObjectGreater(left, right, true)
             );
@@ -1950,7 +1981,8 @@ namespace Microsoft.VisualBasic.CompilerServices.Tests
         public void ConditionalCompareObjectGreater_MismatchingObjects_ThrowsAmibguousMatchException(
             object left,
             object right
-        ) {
+        )
+        {
             Assert.Throws<AmbiguousMatchException>(
                 () => Operators.ConditionalCompareObjectGreater(left, right, true)
             );
@@ -1987,7 +2019,8 @@ namespace Microsoft.VisualBasic.CompilerServices.Tests
             bool greater,
             bool equal,
             bool less
-        ) {
+        )
+        {
             _ = less;
             Assert.Equal(
                 greater || equal,
@@ -2023,7 +2056,8 @@ namespace Microsoft.VisualBasic.CompilerServices.Tests
             object left,
             object right,
             object expected
-        ) {
+        )
+        {
             Assert.Equal(
                 expected,
                 Operators.ConditionalCompareObjectGreaterEqual(left, right, true)
@@ -2039,7 +2073,8 @@ namespace Microsoft.VisualBasic.CompilerServices.Tests
         public void ConditionalCompareObjectGreaterEqual_InvalidObjects_ThrowsInvalidCastException(
             object left,
             object right
-        ) {
+        )
+        {
             Assert.Throws<InvalidCastException>(
                 () => Operators.ConditionalCompareObjectGreaterEqual(left, right, true)
             );
@@ -2065,7 +2100,8 @@ namespace Microsoft.VisualBasic.CompilerServices.Tests
         public void ConditionalCompareObjectGreaterEqual_MismatchingObjects_ThrowsAmibguousMatchException(
             object left,
             object right
-        ) {
+        )
+        {
             Assert.Throws<AmbiguousMatchException>(
                 () => Operators.ConditionalCompareObjectGreaterEqual(left, right, true)
             );
@@ -2106,7 +2142,8 @@ namespace Microsoft.VisualBasic.CompilerServices.Tests
             bool greater,
             bool equal,
             bool less
-        ) {
+        )
+        {
             _ = greater;
             _ = equal;
             Assert.Equal(less, Operators.ConditionalCompareObjectLess(left, right, true));
@@ -2137,7 +2174,8 @@ namespace Microsoft.VisualBasic.CompilerServices.Tests
             object left,
             object right,
             object expected
-        ) {
+        )
+        {
             Assert.Equal(expected, Operators.ConditionalCompareObjectLess(left, right, true));
             Assert.Equal(expected, Operators.ConditionalCompareObjectLess(left, right, false));
         }
@@ -2147,7 +2185,8 @@ namespace Microsoft.VisualBasic.CompilerServices.Tests
         public void ConditionalCompareObjectLess_InvalidObjects_ThrowsInvalidCastException(
             object left,
             object right
-        ) {
+        )
+        {
             Assert.Throws<InvalidCastException>(
                 () => Operators.ConditionalCompareObjectLess(left, right, true)
             );
@@ -2173,7 +2212,8 @@ namespace Microsoft.VisualBasic.CompilerServices.Tests
         public void ConditionalCompareObjectLess_MismatchingObjects_ThrowsAmibguousMatchException(
             object left,
             object right
-        ) {
+        )
+        {
             Assert.Throws<AmbiguousMatchException>(
                 () => Operators.ConditionalCompareObjectLess(left, right, true)
             );
@@ -2208,7 +2248,8 @@ namespace Microsoft.VisualBasic.CompilerServices.Tests
             bool greater,
             bool equal,
             bool less
-        ) {
+        )
+        {
             _ = greater;
             Assert.Equal(
                 less || equal,
@@ -2244,7 +2285,8 @@ namespace Microsoft.VisualBasic.CompilerServices.Tests
             object left,
             object right,
             object expected
-        ) {
+        )
+        {
             Assert.Equal(expected, Operators.ConditionalCompareObjectLessEqual(left, right, true));
             Assert.Equal(expected, Operators.ConditionalCompareObjectLessEqual(left, right, false));
         }
@@ -2254,7 +2296,8 @@ namespace Microsoft.VisualBasic.CompilerServices.Tests
         public void ConditionalCompareObjectLessEqual_InvalidObjects_ThrowsInvalidCastException(
             object left,
             object right
-        ) {
+        )
+        {
             Assert.Throws<InvalidCastException>(
                 () => Operators.ConditionalCompareObjectLessEqual(left, right, true)
             );
@@ -2280,7 +2323,8 @@ namespace Microsoft.VisualBasic.CompilerServices.Tests
         public void ConditionalCompareObjectLessEqual_MismatchingObjects_ThrowsAmibguousMatchException(
             object left,
             object right
-        ) {
+        )
+        {
             Assert.Throws<AmbiguousMatchException>(
                 () => Operators.ConditionalCompareObjectLessEqual(left, right, true)
             );
@@ -2321,7 +2365,8 @@ namespace Microsoft.VisualBasic.CompilerServices.Tests
             bool greater,
             bool equal,
             bool less
-        ) {
+        )
+        {
             _ = greater;
             _ = less;
             Assert.Equal(!equal, Operators.ConditionalCompareObjectNotEqual(left, right, true));
@@ -2352,7 +2397,8 @@ namespace Microsoft.VisualBasic.CompilerServices.Tests
             object left,
             object right,
             object expected
-        ) {
+        )
+        {
             Assert.Equal(expected, Operators.ConditionalCompareObjectNotEqual(left, right, true));
             Assert.Equal(expected, Operators.ConditionalCompareObjectNotEqual(left, right, false));
         }
@@ -2362,7 +2408,8 @@ namespace Microsoft.VisualBasic.CompilerServices.Tests
         public void ConditionalCompareObjectNotEqual_InvalidObjects_ThrowsInvalidCastException(
             object left,
             object right
-        ) {
+        )
+        {
             Assert.Throws<InvalidCastException>(
                 () => Operators.ConditionalCompareObjectNotEqual(left, right, true)
             );
@@ -2388,7 +2435,8 @@ namespace Microsoft.VisualBasic.CompilerServices.Tests
         public void ConditionalCompareObjectNotEqual_MismatchingObjects_ThrowsAmibguousMatchException(
             object left,
             object right
-        ) {
+        )
+        {
             Assert.Throws<AmbiguousMatchException>(
                 () => Operators.ConditionalCompareObjectNotEqual(left, right, true)
             );

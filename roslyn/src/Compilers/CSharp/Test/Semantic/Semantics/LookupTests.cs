@@ -41,7 +41,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
             int? arity = null,
             bool isScript = false,
             IEnumerable<string> globalUsings = null
-        ) {
+        )
+        {
             var tree = Parse(testSrc, options: isScript ? TestOptions.Script : TestOptions.Regular);
             var compilation = CreateCompilationWithMscorlib45(
                 new[] { tree },

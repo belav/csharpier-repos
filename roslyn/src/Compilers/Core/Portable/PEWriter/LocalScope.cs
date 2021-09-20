@@ -32,7 +32,8 @@ namespace Microsoft.Cci
             int endOffset,
             ImmutableArray<ILocalDefinition> constants,
             ImmutableArray<ILocalDefinition> locals
-        ) {
+        )
+        {
             Debug.Assert(!locals.Any(l => l.Name == null));
             Debug.Assert(!constants.Any(c => c.Name == null));
             Debug.Assert(offset >= 0);

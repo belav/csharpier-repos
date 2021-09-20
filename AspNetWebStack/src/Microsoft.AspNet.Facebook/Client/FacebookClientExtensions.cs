@@ -26,7 +26,8 @@ namespace Microsoft.AspNet.Facebook.Client
         public static Task<object> GetFacebookObjectAsync(
             this FacebookClient client,
             string objectPath
-        ) {
+        )
+        {
             return GetFacebookObjectAsync<object>(client, objectPath);
         }
 
@@ -125,7 +126,8 @@ namespace Microsoft.AspNet.Facebook.Client
         )]
         public static async Task<IList<string>> GetCurrentUserPermissionsAsync(
             this FacebookClient client
-        ) {
+        )
+        {
             FacebookGroupConnection<IDictionary<string, string>> permissionResults =
                 await client.GetTaskAsync<FacebookGroupConnection<IDictionary<string, string>>>(
                     PermissionsEndPoint
@@ -182,7 +184,8 @@ namespace Microsoft.AspNet.Facebook.Client
             string redirectUrl,
             string appId,
             string permissions
-        ) {
+        )
+        {
             if (String.IsNullOrEmpty(redirectUrl))
             {
                 throw new ArgumentException(Resources.ArgumentCannotBeNullOrEmpty, "redirectUrl");
@@ -205,7 +208,8 @@ namespace Microsoft.AspNet.Facebook.Client
 
         internal static IList<IDictionary<string, string>> GetCurrentUserPermissionsStatus(
             this FacebookClient client
-        ) {
+        )
+        {
             FacebookGroupConnection<IDictionary<string, string>> permissionResults = client.Get<
                 FacebookGroupConnection<IDictionary<string, string>>
             >(PermissionsEndPoint);

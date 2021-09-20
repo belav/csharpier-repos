@@ -19,7 +19,8 @@ namespace Microsoft.CodeAnalysis.Diagnostics
         public AnalyzerConfigOptionSet(
             AnalyzerConfigOptions analyzerConfigOptions,
             OptionSet? optionSet
-        ) {
+        )
+        {
             _analyzerConfigOptions = analyzerConfigOptions;
             _optionSet = optionSet;
         }
@@ -32,7 +33,8 @@ namespace Microsoft.CodeAnalysis.Diagnostics
                     optionKey.Option,
                     out var value
                 )
-            ) {
+            )
+            {
                 return value;
             }
 
@@ -46,7 +48,8 @@ namespace Microsoft.CodeAnalysis.Diagnostics
         private protected override AnalyzerConfigOptions CreateAnalyzerConfigOptions(
             IOptionService optionService,
             string? language
-        ) {
+        )
+        {
             if (_optionSet is null)
             {
                 return _analyzerConfigOptions;

@@ -90,7 +90,8 @@ namespace Microsoft.CodeAnalysis.SQLite.v2
         private int InsertStringIntoDatabase_MustRunInTransaction(
             SqlConnection connection,
             string value
-        ) {
+        )
+        {
             if (!connection.IsInTransaction)
             {
                 throw new InvalidOperationException(
@@ -104,7 +105,8 @@ namespace Microsoft.CodeAnalysis.SQLite.v2
                 var resettableStatement = connection.GetResettableStatement(
                     _insert_into_string_table_values_0
                 )
-            ) {
+            )
+            {
                 var statement = resettableStatement.Statement;
 
                 // SQLite bindings are 1-based.
@@ -128,7 +130,8 @@ namespace Microsoft.CodeAnalysis.SQLite.v2
             SqlConnection connection,
             string value,
             bool canReturnNull
-        ) {
+        )
+        {
             try
             {
                 using var resettableStatement = connection.GetResettableStatement(

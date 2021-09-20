@@ -31,7 +31,8 @@ namespace System.Text.Encodings.Web.Tests
                 if (
                     !TryGetNextScalarValue(span, out int scalarValue)
                     || !_isScalarAllowed(scalarValue)
-                ) {
+                )
+                {
                     return originalLength - span.Length; // couldn't extract scalar or failed predicate
                 }
 
@@ -83,7 +84,8 @@ namespace System.Text.Encodings.Web.Tests
             char* buffer,
             int bufferLength,
             out int numberOfCharactersWritten
-        ) {
+        )
+        {
             string encoded = FormattableString.Invariant($"[{(uint)unicodeScalar:X4}]");
             numberOfCharactersWritten = (encoded.Length <= (uint)bufferLength) ? encoded.Length : 0;
             return encoded.AsSpan().TryCopyTo(new Span<char>(buffer, bufferLength));

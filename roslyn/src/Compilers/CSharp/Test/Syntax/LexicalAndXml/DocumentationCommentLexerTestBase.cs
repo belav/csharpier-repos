@@ -117,7 +117,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
             string text = null,
             string valueText = null,
             SyntaxKind contextualKind = SyntaxKind.None
-        ) {
+        )
+        {
             string canonicalText =
                 contextualKind == SyntaxKind.None
                     ? SyntaxFacts.GetText(kind)

@@ -103,7 +103,8 @@ namespace Microsoft.AspNetCore.Mvc.ViewFeatures
         private static ViewDataInfo InnerEvalComplexExpression(
             object indexableObject,
             string expression
-        ) {
+        )
+        {
             Debug.Assert(expression != null);
             var leftExpression = expression;
             do

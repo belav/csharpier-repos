@@ -121,14 +121,16 @@ namespace System.Linq.Parallel
             internal PartitionerQueryOperatorResults(
                 Partitioner<TElement> partitioner,
                 QuerySettings settings
-            ) {
+            )
+            {
                 _partitioner = partitioner;
                 _settings = settings;
             }
 
             internal override void GivePartitionedStream(
                 IPartitionedStreamRecipient<TElement> recipient
-            ) {
+            )
+            {
                 Debug.Assert(_settings.DegreeOfParallelism.HasValue);
                 int partitionCount = _settings.DegreeOfParallelism.Value;
 
@@ -230,14 +232,16 @@ namespace System.Linq.Parallel
 
             internal OrderablePartitionerEnumerator(
                 IEnumerator<KeyValuePair<long, TElement>> sourceEnumerator
-            ) {
+            )
+            {
                 _sourceEnumerator = sourceEnumerator;
             }
 
             internal override bool MoveNext(
                 [MaybeNullWhen(false), AllowNull] ref TElement currentElement,
                 ref int currentKey
-            ) {
+            )
+            {
                 if (!_sourceEnumerator.MoveNext())
                     return false;
 
@@ -274,7 +278,8 @@ namespace System.Linq.Parallel
             internal override bool MoveNext(
                 [MaybeNullWhen(false), AllowNull] ref TElement currentElement,
                 ref int currentKey
-            ) {
+            )
+            {
                 if (!_sourceEnumerator.MoveNext())
                     return false;
 

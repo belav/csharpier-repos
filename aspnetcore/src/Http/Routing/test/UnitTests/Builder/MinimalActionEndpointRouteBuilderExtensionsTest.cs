@@ -17,7 +17,8 @@ namespace Microsoft.AspNetCore.Builder
     {
         private ModelEndpointDataSource GetBuilderEndpointDataSource(
             IEndpointRouteBuilder endpointRouteBuilder
-        ) {
+        )
+        {
             return Assert.IsType<ModelEndpointDataSource>(
                 Assert.Single(endpointRouteBuilder.DataSources)
             );
@@ -25,7 +26,8 @@ namespace Microsoft.AspNetCore.Builder
 
         private RouteEndpointBuilder GetRouteEndpointBuilder(
             IEndpointRouteBuilder endpointRouteBuilder
-        ) {
+        )
+        {
             return Assert.IsType<RouteEndpointBuilder>(
                 Assert.Single(GetBuilderEndpointDataSource(endpointRouteBuilder).EndpointBuilders)
             );

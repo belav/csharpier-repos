@@ -33,7 +33,8 @@ namespace System.IO.Strategies
             FileShare share,
             int bufferSize,
             bool isAsync
-        ) {
+        )
+        {
             if (UseNet5CompatStrategy)
             {
                 return new Net5CompatFileStreamStrategy(handle, access, bufferSize, isAsync);
@@ -53,7 +54,8 @@ namespace System.IO.Strategies
             FileShare share,
             int bufferSize,
             FileOptions options
-        ) {
+        )
+        {
             if (UseNet5CompatStrategy)
             {
                 return new Net5CompatFileStreamStrategy(
@@ -94,7 +96,8 @@ namespace System.IO.Strategies
             FileAccess access,
             FileShare share,
             FileOptions options
-        ) {
+        )
+        {
             Interop.Kernel32.SECURITY_ATTRIBUTES secAttrs = GetSecAttrs(share);
 
             int fAccess =
@@ -157,7 +160,8 @@ namespace System.IO.Strategies
         internal static unsafe bool? IsHandleSynchronous(
             SafeFileHandle fileHandle,
             bool ignoreInvalid
-        ) {
+        )
+        {
             if (fileHandle.IsInvalid)
                 return null;
 
@@ -237,7 +241,8 @@ namespace System.IO.Strategies
             SafeFileHandle fileHandle,
             string path,
             bool useAsyncIO
-        ) {
+        )
+        {
             if (fileHandle.IsInvalid)
             {
                 // Return a meaningful exception with the full path.
@@ -271,7 +276,8 @@ namespace System.IO.Strategies
                     &info,
                     (uint)sizeof(Interop.Kernel32.FILE_STANDARD_INFO)
                 )
-            ) {
+            )
+            {
                 throw Win32Marshal.GetExceptionForLastWin32Error(path);
             }
 
@@ -292,7 +298,8 @@ namespace System.IO.Strategies
             long offset,
             SeekOrigin origin,
             bool closeInvalidHandle = false
-        ) {
+        )
+        {
             Debug.Assert(
                 origin >= SeekOrigin.Begin && origin <= SeekOrigin.End,
                 "origin >= SeekOrigin.Begin && origin <= SeekOrigin.End"
@@ -354,7 +361,8 @@ namespace System.IO.Strategies
 
             if (
                 !Interop.Kernel32.LockFile(handle, positionLow, positionHigh, lengthLow, lengthHigh)
-            ) {
+            )
+            {
                 throw Win32Marshal.GetExceptionForLastWin32Error(path);
             }
         }
@@ -374,7 +382,8 @@ namespace System.IO.Strategies
                     lengthLow,
                     lengthHigh
                 )
-            ) {
+            )
+            {
                 throw Win32Marshal.GetExceptionForLastWin32Error(path);
             }
         }
@@ -382,7 +391,8 @@ namespace System.IO.Strategies
         internal static void ValidateFileTypeForNonExtendedPaths(
             SafeFileHandle handle,
             string originalPath
-        ) {
+        )
+        {
             if (!PathInternal.IsExtended(originalPath))
             {
                 // To help avoid stumbling into opening COM/LPT ports by accident, we will block on non file handles unless
@@ -412,7 +422,8 @@ namespace System.IO.Strategies
             SafeFileHandle handle,
             out bool canSeek,
             out bool isPipe
-        ) {
+        )
+        {
             int handleType = Interop.Kernel32.GetFileType(handle);
             Debug.Assert(
                 handleType == Interop.Kernel32.FileTypes.FILE_TYPE_DISK
@@ -436,7 +447,8 @@ namespace System.IO.Strategies
                     &eofInfo,
                     (uint)sizeof(Interop.Kernel32.FILE_END_OF_FILE_INFO)
                 )
-            ) {
+            )
+            {
                 int errorCode = Marshal.GetLastWin32Error();
                 if (errorCode == Interop.Errors.ERROR_INVALID_PARAMETER)
                     throw new ArgumentOutOfRangeException(
@@ -454,7 +466,8 @@ namespace System.IO.Strategies
             bool syncUsingOverlapped,
             NativeOverlapped* overlapped,
             out int errorCode
-        ) {
+        )
+        {
             Debug.Assert(handle != null, "handle != null");
 
             int r;
@@ -517,7 +530,8 @@ namespace System.IO.Strategies
             bool syncUsingOverlapped,
             NativeOverlapped* overlapped,
             out int errorCode
-        ) {
+        )
+        {
             Debug.Assert(handle != null, "handle != null");
 
             int numBytesWritten = 0;
@@ -573,7 +587,8 @@ namespace System.IO.Strategies
             Stream destination,
             int bufferSize,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             // For efficiency, we avoid creating a new task and associated state for each asynchronous read.
             // Instead, we create a single reusable awaitable object that will be triggered when an await completes
             // and reset before going again.
@@ -817,7 +832,8 @@ namespace System.IO.Strategies
                 uint errorCode,
                 uint numBytes,
                 NativeOverlapped* pOVERLAP
-            ) {
+            )
+            {
                 var awaitable =
                     (AsyncCopyToAwaitable?)ThreadPoolBoundHandle.GetNativeOverlappedState(pOVERLAP);
                 Debug.Assert(awaitable != null);
@@ -854,7 +870,8 @@ namespace System.IO.Strategies
                 if (
                     ReferenceEquals(_continuation, s_sentinel)
                     || Interlocked.CompareExchange(ref _continuation, continuation, null) != null
-                ) {
+                )
+                {
                     Debug.Assert(
                         ReferenceEquals(_continuation, s_sentinel),
                         $"Expected continuation set to s_sentinel, got ${_continuation}"

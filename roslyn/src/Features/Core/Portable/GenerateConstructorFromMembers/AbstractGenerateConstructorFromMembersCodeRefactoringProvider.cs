@@ -79,7 +79,8 @@ namespace Microsoft.CodeAnalysis.GenerateConstructorFromMembers
             Document currentDocument,
             string? serializedIntentData,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             using var _ = ArrayBuilder<CodeAction>.GetInstance(out var actions);
             await ComputeRefactoringsAsync(
                     priorDocument,
@@ -112,7 +113,8 @@ namespace Microsoft.CodeAnalysis.GenerateConstructorFromMembers
             static async Task<IntentProcessorResult?> GetIntentProcessorResultAsync(
                 CodeAction codeAction,
                 CancellationToken cancellationToken
-            ) {
+            )
+            {
                 var operations = await GetCodeActionOperationsAsync(codeAction, cancellationToken)
                     .ConfigureAwait(false);
 
@@ -136,7 +138,8 @@ namespace Microsoft.CodeAnalysis.GenerateConstructorFromMembers
             static async Task<ImmutableArray<CodeActionOperation>> GetCodeActionOperationsAsync(
                 CodeAction action,
                 CancellationToken cancellationToken
-            ) {
+            )
+            {
                 if (action is GenerateConstructorWithDialogCodeAction dialogAction)
                 {
                     // Usually applying this code action pops up a dialog allowing the user to choose which options.
@@ -167,7 +170,8 @@ namespace Microsoft.CodeAnalysis.GenerateConstructorFromMembers
             Action<CodeAction, TextSpan> registerSingleAction,
             Action<ImmutableArray<CodeAction>> registerMultipleActions,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             if (document.Project.Solution.Workspace.Kind == WorkspaceKind.MiscellaneousFiles)
             {
                 return;
@@ -207,7 +211,8 @@ namespace Microsoft.CodeAnalysis.GenerateConstructorFromMembers
             Document document,
             TextSpan textSpan,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var syntaxFacts = document.GetRequiredLanguageService<ISyntaxFactsService>();
             var sourceText = await document.GetTextAsync(cancellationToken).ConfigureAwait(false);
             var root = await document.GetRequiredSyntaxRootAsync(cancellationToken)
@@ -223,7 +228,8 @@ namespace Microsoft.CodeAnalysis.GenerateConstructorFromMembers
                     textSpan.Start,
                     out typeDeclaration
                 )
-            ) {
+            )
+            {
                 return null;
             }
 
@@ -239,7 +245,8 @@ namespace Microsoft.CodeAnalysis.GenerateConstructorFromMembers
             if (
                 containingType?.TypeKind != TypeKind.Class
                 && containingType?.TypeKind != TypeKind.Struct
-            ) {
+            )
+            {
                 return null;
             }
 
@@ -297,13 +304,15 @@ namespace Microsoft.CodeAnalysis.GenerateConstructorFromMembers
             TextSpan textSpan,
             bool addNullChecks,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             using (
                 Logger.LogBlock(
                     FunctionId.Refactoring_GenerateFromMembers_GenerateConstructorFromMembers,
                     cancellationToken
                 )
-            ) {
+            )
+            {
                 var info = await GetSelectedMemberInfoAsync(
                         document,
                         textSpan,
@@ -336,7 +345,8 @@ namespace Microsoft.CodeAnalysis.GenerateConstructorFromMembers
             Document document,
             State state,
             bool addNullChecks
-        ) {
+        )
+        {
             using var _ = ArrayBuilder<CodeAction>.GetInstance(out var result);
 
             result.Add(new FieldDelegatingCodeAction(this, document, state, addNullChecks));
@@ -351,7 +361,8 @@ namespace Microsoft.CodeAnalysis.GenerateConstructorFromMembers
         private static async Task<Document> AddNavigationAnnotationAsync(
             Document document,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var root = await document.GetRequiredSyntaxRootAsync(cancellationToken)
                 .ConfigureAwait(false);
 

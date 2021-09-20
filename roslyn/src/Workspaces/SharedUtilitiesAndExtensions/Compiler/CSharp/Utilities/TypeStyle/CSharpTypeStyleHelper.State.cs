@@ -36,7 +36,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Utilities
                 SemanticModel semanticModel,
                 OptionSet optionSet,
                 CancellationToken cancellationToken
-            ) {
+            )
+            {
                 TypeStylePreference = default;
                 IsInIntrinsicTypeContext = default;
                 IsTypeApparentInContext = default;
@@ -97,7 +98,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Utilities
                 SemanticModel semanticModel,
                 UseVarPreference stylePreferences,
                 CancellationToken cancellationToken
-            ) {
+            )
+            {
                 if (variableDeclaration.Variables.Count != 1)
                 {
                     return false;
@@ -138,7 +140,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Utilities
             private static bool IsPredefinedTypeInDeclaration(
                 SyntaxNode declarationStatement,
                 SemanticModel semanticModel
-            ) {
+            )
+            {
                 var typeSyntax = GetTypeSyntaxFromDeclaration(declarationStatement);
 
                 return typeSyntax != null
@@ -181,7 +184,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Utilities
             private static bool IsInferredPredefinedType(
                 SyntaxNode declarationStatement,
                 SemanticModel semanticModel
-            ) {
+            )
+            {
                 var typeSyntax = GetTypeSyntaxFromDeclaration(declarationStatement);
 
                 return typeSyntax != null

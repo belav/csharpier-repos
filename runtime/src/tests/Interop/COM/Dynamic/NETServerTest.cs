@@ -28,7 +28,8 @@ namespace Dynamic
                     string.Empty,
                     string.Empty
                 )
-            ) {
+            )
+            {
                 Type t = Type.GetTypeFromCLSID(
                     Guid.Parse(Server.Contract.Guids.ConsumeNETServerTesting)
                 );

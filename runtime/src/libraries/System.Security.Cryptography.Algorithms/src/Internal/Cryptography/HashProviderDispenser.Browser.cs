@@ -32,7 +32,8 @@ namespace Internal.Cryptography
                 string hashAlgorithmId,
                 ReadOnlySpan<byte> source,
                 Span<byte> destination
-            ) {
+            )
+            {
                 HashProvider provider = HashProviderDispenser.CreateHashProvider(hashAlgorithmId);
                 provider.AppendHashData(source);
                 return provider.FinalizeHashAndReset(destination);
@@ -42,7 +43,8 @@ namespace Internal.Cryptography
         public static unsafe HashProvider CreateMacProvider(
             string hashAlgorithmId,
             ReadOnlySpan<byte> key
-        ) {
+        )
+        {
             throw new PlatformNotSupportedException(
                 SR.SystemSecurityCryptographyAlgorithms_PlatformNotSupported
             );

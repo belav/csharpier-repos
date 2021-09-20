@@ -30,7 +30,8 @@ namespace Microsoft.CodeAnalysis.Editor.Undo
         public ISourceTextUndoTransaction RegisterUndoTransaction(
             SourceText sourceText,
             string description
-        ) {
+        )
+        {
             if (sourceText != null && !string.IsNullOrWhiteSpace(description))
             {
                 var transaction = new SourceTextUndoTransaction(this, sourceText, description);
@@ -79,7 +80,8 @@ namespace Microsoft.CodeAnalysis.Editor.Undo
                 ISourceTextUndoService service,
                 SourceText sourceText,
                 string description
-            ) {
+            )
+            {
                 _service = service;
                 SourceText = sourceText;
                 Description = description;

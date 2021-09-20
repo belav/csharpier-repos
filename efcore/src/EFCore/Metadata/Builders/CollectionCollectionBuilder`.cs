@@ -46,7 +46,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Builders
         /// <returns> The builder for the originating entity type so that multiple configuration calls can be chained. </returns>
         public new virtual EntityTypeBuilder<TRightEntity> UsingEntity(
             Action<EntityTypeBuilder> configureJoinEntityType
-        ) {
+        )
+        {
             Check.DebugAssert(
                 LeftNavigation.JoinEntityType != null,
                 "LeftNavigation.JoinEntityType is null"
@@ -97,7 +98,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Builders
                 if (
                     existingJoinEntityType.ClrType == typeof(TJoinEntity)
                     && !existingJoinEntityType.HasSharedClrType
-                ) {
+                )
+                {
                     joinEntityType = existingJoinEntityType;
                 }
                 else
@@ -163,7 +165,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Builders
                         joinEntityName,
                         StringComparison.Ordinal
                     )
-                ) {
+                )
+                {
                     joinEntityType = existingJoinEntityType;
                 }
                 else

@@ -56,7 +56,8 @@ namespace Castle.Components.DictionaryAdapter
             object storedValue,
             PropertyDescriptor property,
             bool ifExists
-        ) {
+        )
+        {
             var propertyType = property.PropertyType;
 
             if (storedValue != null && propertyType.IsInstanceOfType(storedValue) == false)

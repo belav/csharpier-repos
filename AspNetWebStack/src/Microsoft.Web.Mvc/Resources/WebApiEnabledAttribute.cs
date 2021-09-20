@@ -62,7 +62,8 @@ namespace Microsoft.Web.Mvc.Resources
                     bool handled = false;
                     foreach (
                         ContentType responseFormat in filterContext.RequestContext.GetResponseFormats()
-                    ) {
+                    )
+                    {
                         // CONSIDER: making this lookup optional if perf is an issue
                         for (int i = 0; i < FormatManager.Current.ResponseFormatHandlers.Count; ++i)
                         {
@@ -190,7 +191,8 @@ namespace Microsoft.Web.Mvc.Resources
             HttpException exception,
             ContentType responseFormat,
             out ResourceErrorActionResult actionResult
-        ) {
+        )
+        {
             if (FormatManager.Current.CanSerialize(responseFormat))
             {
                 actionResult = new ResourceErrorActionResult(exception, responseFormat);
@@ -214,7 +216,8 @@ namespace Microsoft.Web.Mvc.Resources
             ViewResultBase viewResult,
             ContentType responseFormat,
             out MultiFormatActionResult actionResult
-        ) {
+        )
+        {
             if (FormatManager.Current.CanSerialize(responseFormat))
             {
                 if (viewResult.ViewData.Model == null)
@@ -249,7 +252,8 @@ namespace Microsoft.Web.Mvc.Resources
             RequestContext requestContext,
             HttpException he,
             out ResourceErrorActionResult actionResult
-        ) {
+        )
+        {
             foreach (ContentType responseFormat in requestContext.GetResponseFormats())
             {
                 WebApiEnabledAttribute dummy = new WebApiEnabledAttribute();

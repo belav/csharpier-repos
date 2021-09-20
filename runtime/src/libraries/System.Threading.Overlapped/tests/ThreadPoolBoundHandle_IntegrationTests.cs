@@ -95,7 +95,8 @@ public partial class ThreadPoolBoundHandleTests
         fixed (
             byte* p1 = data1,
                 p2 = data2
-        ) {
+        )
+        {
             int retval = DllImport.WriteFile(
                 boundHandle.Handle,
                 p1,
@@ -184,7 +185,8 @@ public partial class ThreadPoolBoundHandleTests
             fixed (
                 byte* p1 = data1,
                     p2 = data2
-            ) {
+            )
+            {
                 int retval = DllImport.WriteFile(
                     boundHandle1.Handle,
                     p1,
@@ -296,7 +298,8 @@ public partial class ThreadPoolBoundHandleTests
         uint errorCode,
         uint numBytes,
         NativeOverlapped* overlapped
-    ) {
+    )
+    {
         OverlappedContext result =
             (OverlappedContext)ThreadPoolBoundHandle.GetNativeOverlappedState(overlapped);
         result.ErrorCode = (int)errorCode;

@@ -244,7 +244,8 @@ namespace Microsoft.Extensions.Internal
         /// </remarks>
         public static Func<object, object?> MakeNullSafeFastPropertyGetter(
             PropertyInfo propertyInfo
-        ) {
+        )
+        {
             Debug.Assert(propertyInfo != null);
 
             return MakeFastPropertyGetter(
@@ -258,7 +259,8 @@ namespace Microsoft.Extensions.Internal
             PropertyInfo propertyInfo,
             MethodInfo propertyGetterWrapperMethod,
             MethodInfo propertyGetterByRefWrapperMethod
-        ) {
+        )
+        {
             Debug.Assert(propertyInfo != null);
 
             // Must be a generic method with a Func<,> parameter
@@ -303,7 +305,8 @@ namespace Microsoft.Extensions.Internal
             Type openGenericDelegateType,
             MethodInfo propertyGetMethod,
             MethodInfo openGenericWrapperMethod
-        ) {
+        )
+        {
             var typeInput = propertyGetMethod.DeclaringType!;
             var typeOutput = propertyGetMethod.ReturnType;
 
@@ -406,7 +409,8 @@ namespace Microsoft.Extensions.Internal
         private static object? CallPropertyGetter<TDeclaringType, TValue>(
             Func<TDeclaringType, TValue> getter,
             object target
-        ) {
+        )
+        {
             return getter((TDeclaringType)target);
         }
 
@@ -414,7 +418,8 @@ namespace Microsoft.Extensions.Internal
         private static object? CallPropertyGetterByReference<TDeclaringType, TValue>(
             ByRefFunc<TDeclaringType, TValue> getter,
             object target
-        ) {
+        )
+        {
             var unboxed = (TDeclaringType)target;
             return getter(ref unboxed);
         }
@@ -423,7 +428,8 @@ namespace Microsoft.Extensions.Internal
         private static object? CallNullSafePropertyGetter<TDeclaringType, TValue>(
             Func<TDeclaringType, TValue> getter,
             object target
-        ) {
+        )
+        {
             if (target == null)
             {
                 return null;
@@ -436,7 +442,8 @@ namespace Microsoft.Extensions.Internal
         private static object? CallNullSafePropertyGetterByReference<TDeclaringType, TValue>(
             ByRefFunc<TDeclaringType, TValue> getter,
             object target
-        ) {
+        )
+        {
             if (target == null)
             {
                 return null;
@@ -450,7 +457,8 @@ namespace Microsoft.Extensions.Internal
             Action<TDeclaringType, TValue> setter,
             object target,
             object value
-        ) {
+        )
+        {
             setter((TDeclaringType)target, (TValue)value);
         }
 
@@ -459,7 +467,8 @@ namespace Microsoft.Extensions.Internal
             Func<PropertyInfo, PropertyHelper> createPropertyHelper,
             ConcurrentDictionary<Type, PropertyHelper[]> allPropertiesCache,
             ConcurrentDictionary<Type, PropertyHelper[]> visiblePropertiesCache
-        ) {
+        )
+        {
             if (visiblePropertiesCache.TryGetValue(type, out var result))
             {
                 return result;
@@ -533,7 +542,8 @@ namespace Microsoft.Extensions.Internal
             Type type,
             Func<PropertyInfo, PropertyHelper> createPropertyHelper,
             ConcurrentDictionary<Type, PropertyHelper[]> cache
-        ) {
+        )
+        {
             // Unwrap nullable types. This means Nullable<T>.Value and Nullable<T>.HasValue will not be
             // part of the sequence of properties returned by this method.
             type = Nullable.GetUnderlyingType(type) ?? type;

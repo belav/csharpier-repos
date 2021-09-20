@@ -57,7 +57,8 @@ namespace System.Web.Mvc
             MemberInfo methodInfo,
             Type attributeType,
             bool inherit
-        ) {
+        )
+        {
             return methodInfo.GetCustomAttributes(attributeType, inherit);
         }
 
@@ -65,7 +66,8 @@ namespace System.Web.Mvc
             ActionDescriptor actionDescriptor,
             MethodInfo methodInfo,
             ref ParameterDescriptor[] parametersCache
-        ) {
+        )
+        {
             ParameterDescriptor[] parameters = LazilyFetchParametersCollection(
                 actionDescriptor,
                 methodInfo,
@@ -80,7 +82,8 @@ namespace System.Web.Mvc
             ActionDescriptor actionDescriptor,
             MethodInfo methodInfo,
             ref ParameterDescriptor[] parametersCache
-        ) {
+        )
+        {
             // Frequently called, so ensure the delegates remain static
             return DescriptorUtil.LazilyFetchOrCreateDescriptors(
                 cacheLocation: ref parametersCache,

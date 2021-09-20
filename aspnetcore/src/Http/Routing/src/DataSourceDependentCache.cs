@@ -30,7 +30,8 @@ namespace Microsoft.AspNetCore.Routing
         public DataSourceDependentCache(
             EndpointDataSource dataSource,
             Func<IReadOnlyList<Endpoint>, T> initialize
-        ) {
+        )
+        {
             if (dataSource == null)
             {
                 throw new ArgumentNullException(nameof(dataSource));

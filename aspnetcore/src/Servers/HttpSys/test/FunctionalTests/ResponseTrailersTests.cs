@@ -32,7 +32,8 @@ namespace Microsoft.AspNetCore.Server.HttpSys
                         return Task.FromResult(0);
                     }
                 )
-            ) {
+            )
+            {
                 var response = await SendRequestAsync(address, http2: false);
                 response.EnsureSuccessStatusCode();
                 Assert.Equal(HttpVersion.Version11, response.Version);
@@ -58,7 +59,8 @@ namespace Microsoft.AspNetCore.Server.HttpSys
                         return Task.FromResult(0);
                     }
                 )
-            ) {
+            )
+            {
                 var response = await SendRequestAsync(address);
                 response.EnsureSuccessStatusCode();
                 Assert.Equal(HttpVersion.Version20, response.Version);
@@ -89,7 +91,8 @@ namespace Microsoft.AspNetCore.Server.HttpSys
                         return Task.FromResult(0);
                     }
                 )
-            ) {
+            )
+            {
                 var response = await SendRequestAsync(address);
                 response.EnsureSuccessStatusCode();
                 Assert.Equal(HttpVersion.Version20, response.Version);
@@ -115,7 +118,8 @@ namespace Microsoft.AspNetCore.Server.HttpSys
                         return Task.FromResult(0);
                     }
                 )
-            ) {
+            )
+            {
                 var response = await SendRequestAsync(address);
                 response.EnsureSuccessStatusCode();
                 Assert.Equal(HttpVersion.Version20, response.Version);
@@ -144,7 +148,8 @@ namespace Microsoft.AspNetCore.Server.HttpSys
                         httpContext.Response.AppendTrailer("TrailerName", "Trailer Value");
                     }
                 )
-            ) {
+            )
+            {
                 var response = await SendRequestAsync(address);
                 response.EnsureSuccessStatusCode();
                 Assert.Equal(HttpVersion.Version20, response.Version);
@@ -193,7 +198,8 @@ namespace Microsoft.AspNetCore.Server.HttpSys
                         }
                     }
                 )
-            ) {
+            )
+            {
                 var response = await SendRequestAsync(address);
                 response.EnsureSuccessStatusCode();
                 Assert.Equal(HttpVersion.Version20, response.Version);
@@ -227,7 +233,8 @@ namespace Microsoft.AspNetCore.Server.HttpSys
                         await httpContext.Response.WriteAsync(body);
                     }
                 )
-            ) {
+            )
+            {
                 var response = await SendRequestAsync(address);
                 response.EnsureSuccessStatusCode();
                 Assert.Equal(HttpVersion.Version20, response.Version);
@@ -272,7 +279,8 @@ namespace Microsoft.AspNetCore.Server.HttpSys
                         httpContext.Response.AppendTrailer("TrailerName", "Trailer Value");
                     }
                 )
-            ) {
+            )
+            {
                 var response = await SendRequestAsync(address);
                 response.EnsureSuccessStatusCode();
                 Assert.Equal(HttpVersion.Version20, response.Version);
@@ -318,7 +326,8 @@ namespace Microsoft.AspNetCore.Server.HttpSys
                         // If we declare trailers but don't send any make sure it completes anyways.
                     }
                 )
-            ) {
+            )
+            {
                 var response = await SendRequestAsync(address);
                 response.EnsureSuccessStatusCode();
                 Assert.Equal(HttpVersion.Version20, response.Version);
@@ -361,7 +370,8 @@ namespace Microsoft.AspNetCore.Server.HttpSys
                         await trailersReceived.Task.DefaultTimeout();
                     }
                 )
-            ) {
+            )
+            {
                 var response = await SendRequestAsync(address);
                 response.EnsureSuccessStatusCode();
                 Assert.Equal(HttpVersion.Version20, response.Version);
@@ -396,7 +406,8 @@ namespace Microsoft.AspNetCore.Server.HttpSys
                         await trailersReceived.Task.DefaultTimeout();
                     }
                 )
-            ) {
+            )
+            {
                 var response = await SendRequestAsync(address);
                 response.EnsureSuccessStatusCode();
                 Assert.Equal(HttpVersion.Version20, response.Version);
@@ -430,7 +441,8 @@ namespace Microsoft.AspNetCore.Server.HttpSys
                         return Task.FromResult(0);
                     }
                 )
-            ) {
+            )
+            {
                 var response = await SendRequestAsync(address);
                 response.EnsureSuccessStatusCode();
                 Assert.Equal(HttpVersion.Version20, response.Version);
@@ -474,7 +486,8 @@ namespace Microsoft.AspNetCore.Server.HttpSys
                         return Task.FromResult(0);
                     }
                 )
-            ) {
+            )
+            {
                 var response = await SendRequestAsync(address);
                 response.EnsureSuccessStatusCode();
                 Assert.Equal(HttpVersion.Version20, response.Version);
@@ -500,7 +513,8 @@ namespace Microsoft.AspNetCore.Server.HttpSys
             string headerName,
             StringValues headerValue,
             StringValues expectedValue
-        ) {
+        )
+        {
             using (
                 Utilities.CreateDynamicHttpsServer(
                     out var address,
@@ -510,7 +524,8 @@ namespace Microsoft.AspNetCore.Server.HttpSys
                         return Task.FromResult(0);
                     }
                 )
-            ) {
+            )
+            {
                 HttpResponseMessage response = await SendRequestAsync(address);
                 response.EnsureSuccessStatusCode();
                 var headers = response.TrailingHeaders;

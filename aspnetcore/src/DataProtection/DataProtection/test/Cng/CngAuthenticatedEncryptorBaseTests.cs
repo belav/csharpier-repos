@@ -128,7 +128,8 @@ namespace Microsoft.AspNetCore.DataProtection.Cng.Internal
                 uint cbCiphertext,
                 byte* pbAdditionalAuthenticatedData,
                 uint cbAdditionalAuthenticatedData
-            ) {
+            )
+            {
                 return DecryptHook(
                     (IntPtr)pbCiphertext,
                     cbCiphertext,
@@ -153,7 +154,8 @@ namespace Microsoft.AspNetCore.DataProtection.Cng.Internal
                 uint cbAdditionalAuthenticatedData,
                 uint cbPreBuffer,
                 uint cbPostBuffer
-            ) {
+            )
+            {
                 return EncryptHook(
                     (IntPtr)pbPlaintext,
                     cbPlaintext,

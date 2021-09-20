@@ -386,7 +386,8 @@ namespace JitBench
             StreamReader reader,
             ProcessStream stream,
             CancellationToken cancelToken
-        ) {
+        )
+        {
             IProcessLogger[] loggers = Loggers;
 
             // for the best efficiency we want to read in chunks, but if the underlying stream isn't
@@ -490,7 +491,8 @@ namespace JitBench
             Task<Process> startProcessTask,
             Task stdOutTask,
             Task stdErrTask
-        ) {
+        )
+        {
             DebugTrace("starting InternalWaitForExit");
             Process p = await startProcessTask;
             DebugTrace("InternalWaitForExit {0} '{1}'", p.Id, _replayCommand);

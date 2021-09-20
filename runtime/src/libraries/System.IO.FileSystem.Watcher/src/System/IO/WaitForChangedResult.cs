@@ -10,7 +10,8 @@ namespace System.IO
             string? name,
             string? oldName,
             bool timedOut
-        ) {
+        )
+        {
             ChangeType = changeType;
             Name = name;
             OldName = oldName;

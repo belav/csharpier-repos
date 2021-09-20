@@ -256,7 +256,8 @@ namespace SdtEventSources
             float f,
             double d,
             Guid guid
-        ) {
+        )
+        {
             if (IsEnabled(EventLevel.Informational, Keywords.HasNoArgs))
                 WriteEvent(25, msg, l, ui, ui64, c, b, sb, sh, ush, f, d, guid);
         }
@@ -270,7 +271,8 @@ namespace SdtEventSources
             string s4,
             string s5,
             string s6
-        ) {
+        )
+        {
             WriteEvent(26, s0, s1, s2, s3, s4, s5, s6);
         }
 
@@ -285,7 +287,8 @@ namespace SdtEventSources
             string s6,
             string s7,
             string s8
-        ) {
+        )
+        {
             WriteEvent(27, s0, s1, s2, s3, s4, s5, s6, s7, s8);
         }
 
@@ -309,7 +312,8 @@ namespace SdtEventSources
             float f,
             double d,
             Guid guid
-        ) {
+        )
+        {
             if (IsEnabled(EventLevel.Informational, Keywords.HasNoArgs))
             {
                 unsafe
@@ -348,7 +352,8 @@ namespace SdtEventSources
             IntPtr iptr,
             bool b,
             MyLongEnum le /*, decimal dec*/
-        ) {
+        )
+        {
             WriteEvent(
                 30,
                 iptr,
@@ -369,7 +374,8 @@ namespace SdtEventSources
             IntPtr iptr,
             bool b,
             MyLongEnum le /*, decimal dec */
-        ) {
+        )
+        {
             unsafe
             {
                 EventSource.EventData* descrs = stackalloc EventSource.EventData[4];
@@ -417,7 +423,8 @@ namespace SdtEventSources
             string message,
             string path = "",
             int line = 0
-        ) {
+        )
+        {
             string text = string.Concat("{", path, ":", line, "}", message);
             WriteEvent(36, text);
         }

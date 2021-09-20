@@ -46,16 +46,14 @@ namespace Microsoft.EntityFrameworkCore.SqlServer.Storage.Internal
         ///     doing so can result in application failures when updating to a new Entity Framework Core release.
         /// </summary>
         [UsedImplicitly]
-        public SqlServerGeometryTypeMapping(
-            NtsGeometryServices geometryServices,
-            string storeType
-        ) : base(
-            new GeometryValueConverter<TGeometry>(
-                CreateReader(geometryServices, IsGeography(storeType)),
-                CreateWriter(IsGeography(storeType))
-            ),
-            storeType
-        ) => _isGeography = IsGeography(storeType);
+        public SqlServerGeometryTypeMapping(NtsGeometryServices geometryServices, string storeType)
+            : base(
+                new GeometryValueConverter<TGeometry>(
+                    CreateReader(geometryServices, IsGeography(storeType)),
+                    CreateWriter(IsGeography(storeType))
+                ),
+                storeType
+            ) => _isGeography = IsGeography(storeType);
 
         /// <summary>
         ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to

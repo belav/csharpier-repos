@@ -49,7 +49,8 @@ namespace System.DirectoryServices.ActiveDirectory
             DirectoryContext context,
             string distinguishedName,
             string objectClass
-        ) {
+        )
+        {
             // validate the parameters
             ValidateApplicationPartitionParameters(context, distinguishedName, objectClass, true);
 
@@ -76,13 +77,14 @@ namespace System.DirectoryServices.ActiveDirectory
             string distinguishedName,
             string dnsName,
             DirectoryEntryManager directoryEntryMgr
-        ) : this(
-            context,
-            distinguishedName,
-            dnsName,
-            GetApplicationPartitionType(context),
-            directoryEntryMgr
-        ) { }
+        )
+            : this(
+                context,
+                distinguishedName,
+                dnsName,
+                GetApplicationPartitionType(context),
+                directoryEntryMgr
+            ) { }
         #endregion constructors
 
         #region IDisposable
@@ -189,7 +191,8 @@ namespace System.DirectoryServices.ActiveDirectory
         public static ApplicationPartition FindByName(
             DirectoryContext context,
             string distinguishedName
-        ) {
+        )
+        {
             ApplicationPartition? partition = null;
             DirectoryEntryManager? directoryEntryMgr = null;
             DirectoryContext? appNCContext = null;
@@ -208,7 +211,8 @@ namespace System.DirectoryServices.ActiveDirectory
                 // the target should be a valid forest name, configset name or a server
                 if (
                     !((context.isRootDomain()) || (context.isADAMConfigSet()) || context.isServer())
-                ) {
+                )
+                {
                     throw new ArgumentException(SR.NotADOrADAM, nameof(context));
                 }
             }
@@ -348,7 +352,8 @@ namespace System.DirectoryServices.ActiveDirectory
                 {
                     foreach (
                         string namingContext in rootDSE.Properties[PropertyManager.NamingContexts]
-                    ) {
+                    )
+                    {
                         DistinguishedName dn = new DistinguishedName(namingContext);
 
                         if (dn.Equals(appNCDN))
@@ -640,7 +645,8 @@ namespace System.DirectoryServices.ActiveDirectory
 
         public ReadOnlyDirectoryServerCollection FindAllDiscoverableDirectoryServers(
             string siteName
-        ) {
+        )
+        {
             CheckIfDisposed();
 
             if (siteName == null)
@@ -958,7 +964,8 @@ namespace System.DirectoryServices.ActiveDirectory
                         if (
                             _crossRefEntry.Properties[PropertyManager.MsDSSDReferenceDomain].Count
                             > 0
-                        ) {
+                        )
+                        {
                             return (string?)_crossRefEntry.Properties[
                                 PropertyManager.MsDSSDReferenceDomain
                             ].Value;
@@ -998,7 +1005,8 @@ namespace System.DirectoryServices.ActiveDirectory
                             _crossRefEntry.Properties.Contains(
                                 PropertyManager.MsDSSDReferenceDomain
                             )
-                        ) {
+                        )
+                        {
                             _crossRefEntry.Properties[
                                 PropertyManager.MsDSSDReferenceDomain
                             ].Clear();
@@ -1030,7 +1038,8 @@ namespace System.DirectoryServices.ActiveDirectory
             string distinguishedName,
             string? objectClass,
             bool objectClassSpecified
-        ) {
+        )
+        {
             // validate context
             if (context == null)
             {
@@ -1077,7 +1086,8 @@ namespace System.DirectoryServices.ActiveDirectory
             if (
                 (_appType == ApplicationPartitionType.ADApplicationPartition)
                 && (objectClassSpecified)
-            ) {
+            )
+            {
                 throw new InvalidOperationException(SR.NoObjectClassForADPartition);
             }
             else if (objectClassSpecified)
@@ -1314,7 +1324,8 @@ namespace System.DirectoryServices.ActiveDirectory
 
         private static ApplicationPartitionType GetApplicationPartitionType(
             DirectoryContext context
-        ) {
+        )
+        {
             ApplicationPartitionType type = ApplicationPartitionType.Unknown;
 
             DirectoryEntry rootDSE = DirectoryEntryManager.GetDirectoryEntry(
@@ -1327,14 +1338,16 @@ namespace System.DirectoryServices.ActiveDirectory
                     string supportedCapability in rootDSE.Properties[
                         PropertyManager.SupportedCapabilities
                     ]
-                ) {
+                )
+                {
                     if (
                         string.Equals(
                             supportedCapability,
                             SupportedCapability.ADOid,
                             StringComparison.OrdinalIgnoreCase
                         )
-                    ) {
+                    )
+                    {
                         type = ApplicationPartitionType.ADApplicationPartition;
                     }
                     if (
@@ -1343,7 +1356,8 @@ namespace System.DirectoryServices.ActiveDirectory
                             SupportedCapability.ADAMOid,
                             StringComparison.OrdinalIgnoreCase
                         )
-                    ) {
+                    )
+                    {
                         type = ApplicationPartitionType.ADAMApplicationPartition;
                     }
                 }
@@ -1520,7 +1534,8 @@ namespace System.DirectoryServices.ActiveDirectory
                     ,
                     false /* mustBeGC */
                 )
-            ) {
+            )
+            {
                 DirectoryContext dcContext = Utils.GetNewDirectoryContext(
                     dcName,
                     DirectoryContextType.DirectoryServer,
@@ -1534,7 +1549,8 @@ namespace System.DirectoryServices.ActiveDirectory
 
         private ReadOnlyDirectoryServerCollection FindAllDiscoverableDirectoryServersInternal(
             string? siteName
-        ) {
+        )
+        {
             if (siteName != null && siteName.Length == 0)
             {
                 throw new ArgumentException(SR.EmptyStringParameter, nameof(siteName));

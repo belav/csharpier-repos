@@ -9,7 +9,8 @@ namespace Legacy.Support
             int minimumBlockingByteCount,
             int hardwareTransmitBufferSize,
             bool hardwareWriteBlockingAvailable
-        ) {
+        )
+        {
             MinimumBlockingByteCount = minimumBlockingByteCount;
             HardwareTransmitBufferSize = hardwareTransmitBufferSize;
             HardwareWriteBlockingAvailable = hardwareWriteBlockingAvailable;

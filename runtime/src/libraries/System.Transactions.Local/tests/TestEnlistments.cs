@@ -38,7 +38,8 @@ namespace System.Transactions.Tests
             Phase1Vote phase1Vote,
             SinglePhaseVote singlePhaseVote,
             EnlistmentOutcome expectedOutcome
-        ) {
+        )
+        {
             _phase1Vote = phase1Vote;
             _singlePhaseVote = singlePhaseVote;
             _expectedOutcome = expectedOutcome;
@@ -122,7 +123,8 @@ namespace System.Transactions.Tests
             bool volatileEnlistDuringPrepare = false,
             bool expectEnlistToSucceed = true,
             AutoResetEvent outcomeReceived = null
-        ) {
+        )
+        {
             _phase1Vote = phase1Vote;
             _expectedOutcome = expectedOutcome;
             _volatileEnlistDuringPrepare = volatileEnlistDuringPrepare;

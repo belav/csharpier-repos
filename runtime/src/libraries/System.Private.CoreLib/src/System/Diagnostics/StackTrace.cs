@@ -246,7 +246,8 @@ namespace System.Diagnostics
                             typeof(CompilerGeneratedAttribute),
                             inherit: false
                         )
-                    ) {
+                    )
+                    {
                         isAsync = declaringType.IsAssignableTo(typeof(IAsyncStateMachine));
                         if (isAsync || declaringType.IsAssignableTo(typeof(IEnumerator)))
                         {
@@ -412,7 +413,8 @@ namespace System.Diagnostics
                 if (
                     declaringType != null
                     && declaringType.IsDefined(typeof(StackTraceHiddenAttribute), inherit: false)
-                ) {
+                )
+                {
                     // Don't show where StackTraceHidden is applied to the containing Type of the method.
                     return false;
                 }
@@ -430,7 +432,8 @@ namespace System.Diagnostics
         private static bool TryResolveStateMachineMethod(
             ref MethodBase method,
             out Type declaringType
-        ) {
+        )
+        {
             Debug.Assert(method != null);
             Debug.Assert(method.DeclaringType != null);
 

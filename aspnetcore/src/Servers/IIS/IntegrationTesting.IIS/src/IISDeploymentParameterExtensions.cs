@@ -13,7 +13,8 @@ namespace Microsoft.AspNetCore.Server.IntegrationTesting.IIS
         public static void AddDebugLogToWebConfig(
             this IISDeploymentParameters parameters,
             string filename
-        ) {
+        )
+        {
             parameters.HandlerSettings["debugLevel"] = "file";
             parameters.HandlerSettings["debugFile"] = filename;
         }
@@ -21,14 +22,16 @@ namespace Microsoft.AspNetCore.Server.IntegrationTesting.IIS
         public static void AddServerConfigAction(
             this IISDeploymentParameters parameters,
             Action<XElement> action
-        ) {
+        )
+        {
             parameters.ServerConfigActionList.Add((config, _) => action(config));
         }
 
         public static void AddServerConfigAction(
             this IISDeploymentParameters parameters,
             Action<XElement, string> action
-        ) {
+        )
+        {
             parameters.ServerConfigActionList.Add(action);
         }
 
@@ -46,7 +49,8 @@ namespace Microsoft.AspNetCore.Server.IntegrationTesting.IIS
 
         public static void AddHttpsWithClientCertToServerConfig(
             this IISDeploymentParameters parameters
-        ) {
+        )
+        {
             parameters.AddServerConfigAction(
                 element =>
                 {
@@ -62,7 +66,8 @@ namespace Microsoft.AspNetCore.Server.IntegrationTesting.IIS
         public static void SetWindowsAuth(
             this IISDeploymentParameters parameters,
             bool enabled = true
-        ) {
+        )
+        {
             parameters.EnsureSection(
                 "windowsAuthentication",
                 "system.webServer",
@@ -90,7 +95,8 @@ namespace Microsoft.AspNetCore.Server.IntegrationTesting.IIS
         public static void SetAnonymousAuth(
             this IISDeploymentParameters parameters,
             bool enabled = true
-        ) {
+        )
+        {
             parameters.AddServerConfigAction(
                 element =>
                 {
@@ -106,7 +112,8 @@ namespace Microsoft.AspNetCore.Server.IntegrationTesting.IIS
         public static void SetBasicAuth(
             this IISDeploymentParameters parameters,
             bool enabled = true
-        ) {
+        )
+        {
             parameters.EnableModule("BasicAuthenticationModule", "%IIS_BIN%\\authbas.dll");
 
             parameters.AddServerConfigAction(
@@ -125,7 +132,8 @@ namespace Microsoft.AspNetCore.Server.IntegrationTesting.IIS
             this IISDeploymentParameters parameters,
             string name,
             params string[] path
-        ) {
+        )
+        {
             parameters.ServerConfigActionList.Add(
                 (config, _) =>
                 {
@@ -145,7 +153,8 @@ namespace Microsoft.AspNetCore.Server.IntegrationTesting.IIS
         public static void EnableLogging(
             this IISDeploymentParameters deploymentParameters,
             string path
-        ) {
+        )
+        {
             deploymentParameters.WebConfigActionList.Add(
                 WebConfigHelpers.AddOrModifyAspNetCoreSection("stdoutLogEnabled", "true")
             );
@@ -162,7 +171,8 @@ namespace Microsoft.AspNetCore.Server.IntegrationTesting.IIS
             this IISDeploymentParameters deploymentParameters,
             string verbosity,
             string folderPath
-        ) {
+        )
+        {
             if (!deploymentParameters.PublishApplicationBeforeDeployment)
             {
                 throw new InvalidOperationException("Testing freb requires site to be published.");
@@ -248,7 +258,8 @@ namespace Microsoft.AspNetCore.Server.IntegrationTesting.IIS
         public static void TransformPath(
             this IISDeploymentParameters parameters,
             Func<string, string, string> transformation
-        ) {
+        )
+        {
             parameters.WebConfigActionList.Add(
                 (config, contentRoot) =>
                 {
@@ -267,7 +278,8 @@ namespace Microsoft.AspNetCore.Server.IntegrationTesting.IIS
         public static void TransformArguments(
             this IISDeploymentParameters parameters,
             Func<string, string, string> transformation
-        ) {
+        )
+        {
             parameters.WebConfigActionList.Add(
                 (config, contentRoot) =>
                 {
@@ -287,7 +299,8 @@ namespace Microsoft.AspNetCore.Server.IntegrationTesting.IIS
             this IISDeploymentParameters parameters,
             string moduleName,
             string modulePath
-        ) {
+        )
+        {
             if (parameters.ServerType == ServerType.IIS)
             {
                 modulePath = modulePath.Replace("%IIS_BIN%", "%windir%\\System32\\inetsrv");

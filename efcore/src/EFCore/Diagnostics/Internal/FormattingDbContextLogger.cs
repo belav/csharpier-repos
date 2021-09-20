@@ -30,7 +30,8 @@ namespace Microsoft.EntityFrameworkCore.Diagnostics.Internal
             Action<string> sink,
             Func<EventId, LogLevel, bool> filter,
             DbContextLoggerOptions options
-        ) {
+        )
+        {
             _sink = sink;
             _filter = filter;
             _options = options;

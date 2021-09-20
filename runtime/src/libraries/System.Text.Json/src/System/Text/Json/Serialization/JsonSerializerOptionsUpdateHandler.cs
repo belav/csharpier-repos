@@ -20,7 +20,8 @@ namespace System.Text.Json
                     JsonSerializerOptions,
                     object?
                 > options in JsonSerializerOptions.TrackedOptionsInstances.All
-            ) {
+            )
+            {
                 options.Key.ClearClasses();
             }
         }

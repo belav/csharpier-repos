@@ -461,7 +461,8 @@ namespace JIT.HardwareIntrinsics.Arm
             Vector128<Single> op1,
             Single result,
             [CallerMemberName] string method = ""
-        ) {
+        )
+        {
             Single[] inArray1 = new Single[Op1ElementCount];
 
             Unsafe.WriteUnaligned(ref Unsafe.As<Single, byte>(ref inArray1[0]), op1);
@@ -486,13 +487,15 @@ namespace JIT.HardwareIntrinsics.Arm
             Single[] firstOp,
             Single result,
             [CallerMemberName] string method = ""
-        ) {
+        )
+        {
             bool succeeded = true;
 
             if (
                 BitConverter.SingleToInt32Bits(firstOp[ElementIndex])
                 != BitConverter.SingleToInt32Bits(result)
-            ) {
+            )
+            {
                 succeeded = false;
             }
 

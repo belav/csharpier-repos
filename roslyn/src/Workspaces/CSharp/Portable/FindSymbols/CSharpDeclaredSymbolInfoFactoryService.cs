@@ -33,7 +33,8 @@ namespace Microsoft.CodeAnalysis.CSharp.FindSymbols
         private static ImmutableArray<string> GetInheritanceNames(
             StringTable stringTable,
             BaseListSyntax baseList
-        ) {
+        )
+        {
             if (baseList == null)
             {
                 return ImmutableArray<string>.Empty;
@@ -82,7 +83,8 @@ namespace Microsoft.CodeAnalysis.CSharp.FindSymbols
         private static void AddAliasMaps(
             SyntaxNode node,
             List<Dictionary<string, string>> aliasMaps
-        ) {
+        )
+        {
             for (var current = node; current != null; current = current.Parent)
             {
                 if (
@@ -90,7 +92,8 @@ namespace Microsoft.CodeAnalysis.CSharp.FindSymbols
                         SyntaxKind.NamespaceDeclaration,
                         out NamespaceDeclarationSyntax nsDecl
                     )
-                ) {
+                )
+                {
                     ProcessUsings(aliasMaps, nsDecl.Usings);
                 }
                 else if (
@@ -98,7 +101,8 @@ namespace Microsoft.CodeAnalysis.CSharp.FindSymbols
                         SyntaxKind.CompilationUnit,
                         out CompilationUnitSyntax compilationUnit
                     )
-                ) {
+                )
+                {
                     ProcessUsings(aliasMaps, compilationUnit.Usings);
                 }
             }
@@ -107,7 +111,8 @@ namespace Microsoft.CodeAnalysis.CSharp.FindSymbols
         private static void ProcessUsings(
             List<Dictionary<string, string>> aliasMaps,
             SyntaxList<UsingDirectiveSyntax> usings
-        ) {
+        )
+        {
             Dictionary<string, string> aliasMap = null;
 
             foreach (var usingDecl in usings)
@@ -137,7 +142,8 @@ namespace Microsoft.CodeAnalysis.CSharp.FindSymbols
             ArrayBuilder<string> builder,
             TypeSyntax type,
             List<Dictionary<string, string>> aliasMaps
-        ) {
+        )
+        {
             var name = GetTypeName(type);
             if (name != null)
             {
@@ -166,7 +172,8 @@ namespace Microsoft.CodeAnalysis.CSharp.FindSymbols
             SyntaxNode node,
             string rootNamespace,
             out DeclaredSymbolInfo declaredSymbolInfo
-        ) {
+        )
+        {
             // If this is a part of partial type that only contains nested types, then we don't make an info type for
             // it. That's because we effectively think of this as just being a virtual container just to hold the nested
             // types, and not something someone would want to explicitly navigate to itself.  Similar to how we think of
@@ -176,7 +183,8 @@ namespace Microsoft.CodeAnalysis.CSharp.FindSymbols
                 && typeDeclaration.Modifiers.Any(SyntaxKind.PartialKeyword)
                 && typeDeclaration.Members.Any()
                 && typeDeclaration.Members.All(m => m is BaseTypeDeclarationSyntax)
-            ) {
+            )
+            {
                 declaredSymbolInfo = default;
                 return false;
             }
@@ -433,7 +441,8 @@ namespace Microsoft.CodeAnalysis.CSharp.FindSymbols
             char openBrace,
             char closeBrace,
             SeparatedSyntaxList<ParameterSyntax> parameters
-        ) {
+        )
+        {
             var pooledBuilder = PooledStringBuilder.GetInstance();
 
             var builder = pooledBuilder.Builder;
@@ -447,7 +456,8 @@ namespace Microsoft.CodeAnalysis.CSharp.FindSymbols
         private static void AppendParameters(
             SeparatedSyntaxList<ParameterSyntax> parameters,
             StringBuilder builder
-        ) {
+        )
+        {
             var first = true;
             foreach (var parameter in parameters)
             {
@@ -564,7 +574,8 @@ namespace Microsoft.CodeAnalysis.CSharp.FindSymbols
         public override bool TryGetAliasesFromUsingDirective(
             SyntaxNode node,
             out ImmutableArray<(string aliasName, string name)> aliases
-        ) {
+        )
+        {
             if (node is UsingDirectiveSyntax usingDirectiveNode && usingDirectiveNode.Alias != null)
             {
                 if (
@@ -580,7 +591,8 @@ namespace Microsoft.CodeAnalysis.CSharp.FindSymbols
                         out var name,
                         out _
                     )
-                ) {
+                )
+                {
                     aliases = ImmutableArray.Create<(string, string)>((aliasName, name));
                     return true;
                 }
@@ -612,7 +624,8 @@ namespace Microsoft.CodeAnalysis.CSharp.FindSymbols
             ImmutableArray<string>? typeParameterNames,
             out string simpleTypeName,
             out bool isArray
-        ) {
+        )
+        {
             isArray = false;
 
             if (node is TypeSyntax typeNode)

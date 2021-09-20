@@ -239,7 +239,8 @@ namespace System.Reflection.Context.Delegation
             string name,
             MemberTypes type,
             BindingFlags bindingAttr
-        ) {
+        )
+        {
             return _typeInfo.GetMember(name, type, bindingAttr);
         }
 
@@ -307,7 +308,8 @@ namespace System.Reflection.Context.Delegation
             CallingConventions callConvention,
             Type[] types,
             ParameterModifier[] modifiers
-        ) {
+        )
+        {
             return _typeInfo.GetConstructor(bindingAttr, binder, callConvention, types, modifiers);
         }
 
@@ -363,7 +365,8 @@ namespace System.Reflection.Context.Delegation
             CallingConventions callConvention,
             Type[] types,
             ParameterModifier[] modifiers
-        ) {
+        )
+        {
             // Unfortunately we cannot directly call the protected GetMethodImpl on _typeInfo.
             return (types == null)
               ? _typeInfo.GetMethod(name, bindingAttr)
@@ -397,7 +400,8 @@ namespace System.Reflection.Context.Delegation
             Type returnType,
             Type[] types,
             ParameterModifier[] modifiers
-        ) {
+        )
+        {
             // Unfortunately we cannot directly call the protected GetPropertyImpl on _typeInfo.
             PropertyInfo property;
 
@@ -450,7 +454,8 @@ namespace System.Reflection.Context.Delegation
             ParameterModifier[] modifiers,
             CultureInfo culture,
             string[] namedParameters
-        ) {
+        )
+        {
             return _typeInfo.InvokeMember(
                 name,
                 invokeAttr,

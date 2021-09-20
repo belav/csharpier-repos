@@ -146,7 +146,8 @@ namespace Microsoft.AspNetCore.Mvc.Localization.Test
             string format,
             object[] arguments,
             string expectedText
-        ) {
+        )
+        {
             // Arrange
             var localizedString = new LocalizedString("Hello", format);
 
@@ -178,7 +179,8 @@ namespace Microsoft.AspNetCore.Mvc.Localization.Test
         [MemberData(nameof(InvalidResourceStringData))]
         public void HtmlLocalizer_HtmlWithInvalidResourceString_ContentThrowsException(
             string format
-        ) {
+        )
+        {
             // Arrange
             var localizedString = new LocalizedString("Hello", format);
 

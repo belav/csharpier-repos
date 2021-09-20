@@ -58,7 +58,8 @@ namespace System.Web.TestUtil
             string methodName,
             Type[] types = null,
             MethodAttributes attrs = MethodAttributes.Public
-        ) {
+        )
+        {
             if (instance == null)
             {
                 throw new ArgumentNullException("instance");
@@ -173,7 +174,8 @@ namespace System.Web.TestUtil
             string propertyName,
             bool initialValue,
             bool testDefaultValue
-        ) {
+        )
+        {
             // Assert initial value
             TestGetPropertyValue(instance, propertyName, initialValue);
 
@@ -238,7 +240,8 @@ namespace System.Web.TestUtil
             object instance,
             string propertyName,
             object valueToCheck
-        ) {
+        )
+        {
             PropertyInfo propInfo = GetPropertyInfo(instance, propertyName);
             object value = propInfo.GetValue(instance, null);
             Assert.Equal(valueToCheck, value);
@@ -249,7 +252,8 @@ namespace System.Web.TestUtil
             string propertyName,
             TEnumValue initialValue,
             bool testDefaultValue
-        ) {
+        )
+        {
             // Assert initial value
             TestGetPropertyValue(instance, propertyName, initialValue);
 
@@ -293,7 +297,8 @@ namespace System.Web.TestUtil
             string propertyName,
             int value1,
             int value2
-        ) {
+        )
+        {
             TestPropertyValue(instance, propertyName, value1);
             TestPropertyValue(instance, propertyName, value2);
         }
@@ -302,7 +307,8 @@ namespace System.Web.TestUtil
             object instance,
             string propertyName,
             object valueToSet
-        ) {
+        )
+        {
             PropertyInfo propInfo = GetPropertyInfo(instance, propertyName);
 
             // Set to explicit property
@@ -321,7 +327,8 @@ namespace System.Web.TestUtil
             string propertyName,
             object valueToSet,
             object defaultValue
-        ) {
+        )
+        {
             PropertyInfo propInfo = GetPropertyInfo(instance, propertyName);
 
             // Set to explicit property
@@ -345,7 +352,8 @@ namespace System.Web.TestUtil
             string propertyName,
             object valueToSet,
             object valueToCheck
-        ) {
+        )
+        {
             PropertyInfo propInfo = GetPropertyInfo(instance, propertyName);
             propInfo.SetValue(instance, valueToSet, null);
             object value = propInfo.GetValue(instance, null);
@@ -356,7 +364,8 @@ namespace System.Web.TestUtil
             object instance,
             Type[] constructorParameterTypes,
             object[] parameters
-        ) {
+        )
+        {
             ConstructorInfo ctor = GetConstructorInfo(instance, constructorParameterTypes);
             TestStringParams(ctor, instance, parameters);
         }
@@ -371,7 +380,8 @@ namespace System.Web.TestUtil
             string methodName,
             Type[] types,
             object[] parameters
-        ) {
+        )
+        {
             MethodInfo method = GetMethodInfo(instance, methodName, types);
             TestStringParams(method, instance, parameters);
         }
@@ -380,7 +390,8 @@ namespace System.Web.TestUtil
             MethodBase method,
             object instance,
             object[] parameters
-        ) {
+        )
+        {
             ParameterInfo[] parameterInfos = method.GetParameters();
             foreach (ParameterInfo parameterInfo in parameterInfos)
             {
@@ -432,7 +443,8 @@ namespace System.Web.TestUtil
             bool testDefaultValueAttribute = false,
             bool allowNullAndEmpty = true,
             string nullAndEmptyReturnValue = ""
-        ) {
+        )
+        {
             // Assert initial value
             TestGetPropertyValue(instance, propertyName, initialValue);
 

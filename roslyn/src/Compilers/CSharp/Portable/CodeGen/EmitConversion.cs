@@ -68,7 +68,8 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeGen
         private void EmitReadOnlySpanFromArrayExpression(
             BoundReadOnlySpanFromArray expression,
             bool used
-        ) {
+        )
+        {
             BoundExpression operand = expression.Operand;
             var typeTo = (NamedTypeSymbol)expression.Type;
 
@@ -340,7 +341,8 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeGen
             MethodSymbol method,
             TypeSymbol delegateType,
             bool used
-        ) {
+        )
+        {
             var isStatic = receiver == null || (!isExtensionMethod && method.IsStatic);
             if (!used)
             {
@@ -375,7 +377,8 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeGen
                 method.IsMetadataVirtual()
                 && !method.ContainingType.IsDelegateType()
                 && !receiver.SuppressVirtualCalls
-            ) {
+            )
+            {
                 // NOTE: method.IsMetadataVirtual -> receiver != null
                 _builder.EmitOpCode(ILOpCode.Dup);
                 _builder.EmitOpCode(ILOpCode.Ldvirtftn);
@@ -407,7 +410,8 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeGen
                 var possibleCtor in delegateType.GetMembers(
                     WellKnownMemberNames.InstanceConstructorName
                 )
-            ) {
+            )
+            {
                 var m = possibleCtor as MethodSymbol;
                 if ((object)m == null)
                     continue;

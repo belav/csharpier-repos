@@ -27,7 +27,8 @@ namespace System
             ReadOnlySpan<char> format,
             DateTimeFormatInfo dtfi,
             DateTimeStyles style
-        ) {
+        )
+        {
             DateTimeResult result = default; // The buffer to store the parsing result.
             result.Init(s);
             if (TryParseExact(s, format, dtfi, style, ref result))
@@ -46,7 +47,8 @@ namespace System
             DateTimeFormatInfo dtfi,
             DateTimeStyles style,
             out TimeSpan offset
-        ) {
+        )
+        {
             DateTimeResult result = default; // The buffer to store the parsing result.
             result.Init(s);
             result.flags |= ParseFlags.CaptureOffset;
@@ -67,7 +69,8 @@ namespace System
             DateTimeFormatInfo dtfi,
             DateTimeStyles style,
             out DateTime result
-        ) {
+        )
+        {
             DateTimeResult resultData = default; // The buffer to store the parsing result.
             resultData.Init(s);
 
@@ -88,7 +91,8 @@ namespace System
             DateTimeStyles style,
             out DateTime result,
             out TimeSpan offset
-        ) {
+        )
+        {
             DateTimeResult resultData = default; // The buffer to store the parsing result.
             resultData.Init(s);
             resultData.flags |= ParseFlags.CaptureOffset;
@@ -111,7 +115,8 @@ namespace System
             DateTimeFormatInfo dtfi,
             DateTimeStyles style,
             ref DateTimeResult result
-        ) {
+        )
+        {
             if (s.Length == 0)
             {
                 result.SetFailure(
@@ -137,7 +142,8 @@ namespace System
             string[] formats,
             DateTimeFormatInfo dtfi,
             DateTimeStyles style
-        ) {
+        )
+        {
             DateTimeResult result = default; // The buffer to store the parsing result.
             result.Init(s);
             if (TryParseExactMultiple(s, formats, dtfi, style, ref result))
@@ -156,7 +162,8 @@ namespace System
             DateTimeFormatInfo dtfi,
             DateTimeStyles style,
             out TimeSpan offset
-        ) {
+        )
+        {
             DateTimeResult result = default; // The buffer to store the parsing result.
             result.Init(s);
             result.flags |= ParseFlags.CaptureOffset;
@@ -178,7 +185,8 @@ namespace System
             DateTimeStyles style,
             out DateTime result,
             out TimeSpan offset
-        ) {
+        )
+        {
             DateTimeResult resultData = default; // The buffer to store the parsing result.
             resultData.Init(s);
             resultData.flags |= ParseFlags.CaptureOffset;
@@ -201,7 +209,8 @@ namespace System
             DateTimeFormatInfo dtfi,
             DateTimeStyles style,
             out DateTime result
-        ) {
+        )
+        {
             DateTimeResult resultData = default; // The buffer to store the parsing result.
             resultData.Init(s);
 
@@ -221,7 +230,8 @@ namespace System
             DateTimeFormatInfo dtfi,
             DateTimeStyles style,
             ref DateTimeResult result
-        ) {
+        )
+        {
             if (formats == null)
             {
                 result.SetFailure(
@@ -855,7 +865,8 @@ namespace System
                     target,
                     CompareOptions.IgnoreCase
                 ) != 0
-            ) {
+            )
+            {
                 return false;
             }
 
@@ -1059,7 +1070,8 @@ namespace System
             ref DateTimeResult result,
             ref DateTimeFormatInfo dtfi,
             DateTimeStyles styles
-        ) {
+        )
+        {
             int indexBeforeSeparator;
             char charBeforeSeparator;
 
@@ -1196,7 +1208,8 @@ namespace System
                                             s_dateParsingStates[(int)dps][(int)DTT.YearSpace]
                                             > DS.ERROR
                                         )
-                                    ) {
+                                    )
+                                    {
                                         str.Index = indexBeforeSeparator;
                                         str.m_current = charBeforeSeparator;
                                         dtok.dtt = DTT.YearSpace;
@@ -1266,7 +1279,8 @@ namespace System
                                             ref raw,
                                             dtfi
                                         )
-                                    ) {
+                                    )
+                                    {
                                         return false;
                                     }
                                 }
@@ -1301,7 +1315,8 @@ namespace System
                             if (
                                 (s_dateParsingStates[(int)dps][(int)DTT.NumDatesep] == DS.ERROR)
                                 && (s_dateParsingStates[(int)dps][(int)DTT.NumSpace] > DS.ERROR)
-                            ) {
+                            )
+                            {
                                 str.Index = indexBeforeSeparator;
                                 str.m_current = charBeforeSeparator;
                                 dtok.dtt = DTT.NumSpace;
@@ -1322,7 +1337,8 @@ namespace System
                                     || dps == DS.D_YM
                                     || dps == DS.D_YMd
                                 )
-                            ) {
+                            )
+                            {
                                 // we are parsing a date and we have the time separator same as date separator, so we mark the token as date separator
                                 dtok.dtt = DTT.NumDatesep;
                                 raw.AddNumber(dtok.num);
@@ -1397,7 +1413,8 @@ namespace System
                                     // process just the number and roll back the index so that the outer loop can attempt to parse the time zone offset.
                                     if (
                                         s_dateParsingStates[(int)dps][(int)DTT.YearSpace] > DS.ERROR
-                                    ) {
+                                    )
+                                    {
                                         str.Index = indexBeforeSeparator;
                                         str.m_current = charBeforeSeparator;
                                         dtok.dtt = DTT.YearSpace;
@@ -1449,7 +1466,8 @@ namespace System
                                 if (
                                     (s_dateParsingStates[(int)dps][(int)DTT.NumDatesep] == DS.ERROR)
                                     && (s_dateParsingStates[(int)dps][(int)DTT.NumSpace] > DS.ERROR)
-                                ) {
+                                )
+                                {
                                     str.Index = indexBeforeSeparator;
                                     str.m_current = charBeforeSeparator;
                                     dtok.dtt = DTT.NumSpace;
@@ -1529,7 +1547,8 @@ namespace System
                                         s_dateParsingStates[(int)dps][(int)DTT.MonthSpace]
                                         > DS.ERROR
                                     )
-                                ) {
+                                )
+                                {
                                     str.Index = indexBeforeSeparator;
                                     str.m_current = charBeforeSeparator;
                                     dtok.dtt = DTT.MonthSpace;
@@ -1654,7 +1673,8 @@ namespace System
                     if (
                         (str.m_current == '-' || str.m_current == '+')
                         && ((result.flags & ParseFlags.TimeZoneUsed) == 0)
-                    ) {
+                    )
+                    {
                         int originalIndex = str.Index;
                         if (ParseTimeZone(ref str, ref result.timeZoneOffset))
                         {
@@ -2065,7 +2085,8 @@ namespace System
             ref DateTimeStyles styles,
             ref DateTimeRawInfo raw,
             DateTimeFormatInfo dtfi
-        ) {
+        )
+        {
             if ((result.flags & ParseFlags.HaveDate) != 0)
             {
                 // Multiple dates in the input string
@@ -2114,7 +2135,8 @@ namespace System
             ref DateTimeResult result,
             ref DateTimeRawInfo raw,
             DateTimeFormatInfo dtfi
-        ) {
+        )
+        {
             if ((result.flags & ParseFlags.HaveDate) != 0)
             {
                 // Multiple dates in the input string
@@ -2178,7 +2200,8 @@ namespace System
             ref DateTimeStyles styles,
             ref DateTimeRawInfo raw,
             DateTimeFormatInfo dtfi
-        ) {
+        )
+        {
             if ((result.flags & ParseFlags.HaveDate) != 0)
             {
                 // Multiple dates in the input string
@@ -2223,7 +2246,8 @@ namespace System
                     if (
                         !TryAdjustYear(ref result, raw.GetNumber(0), out int year)
                         || !SetDateYMD(ref result, year, raw.month, 1)
-                    ) {
+                    )
+                    {
                         result.SetBadDateTimeFailure();
                         return false;
                     }
@@ -2250,7 +2274,8 @@ namespace System
             ref DateTimeResult result,
             ref DateTimeRawInfo raw,
             DateTimeFormatInfo dtfi
-        ) {
+        )
+        {
             if (!GetMonthDayOrder(dtfi.MonthDayPattern, out int monthDayOrder))
             {
                 result.SetFailure(
@@ -2270,7 +2295,8 @@ namespace System
                         raw.GetNumber(0),
                         result.era
                     )
-                ) {
+                )
+                {
                     result.Day = raw.GetNumber(0);
                     return true;
                 }
@@ -2284,7 +2310,8 @@ namespace System
             ref DateTimeStyles styles,
             ref DateTimeRawInfo raw,
             DateTimeFormatInfo dtfi
-        ) {
+        )
+        {
             if ((result.flags & ParseFlags.HaveDate) != 0)
             {
                 // Multiple dates in the input string
@@ -2329,7 +2356,8 @@ namespace System
                     if (
                         !TryAdjustYear(ref result, raw.GetNumber(0), out int year)
                         || !SetDateYMD(ref result, year, raw.month, 1)
-                    ) {
+                    )
+                    {
                         result.SetBadDateTimeFailure();
                         return false;
                     }
@@ -2350,7 +2378,8 @@ namespace System
             ref DateTimeResult result,
             ref DateTimeRawInfo raw,
             DateTimeFormatInfo dtfi
-        ) {
+        )
+        {
             if ((result.flags & ParseFlags.HaveDate) != 0)
             {
                 // Multiple dates in the input string
@@ -2377,7 +2406,8 @@ namespace System
                 if (
                     TryAdjustYear(ref result, n2, out year)
                     && result.calendar.IsValidDay(year, raw.month, n1, result.era)
-                ) {
+                )
+                {
                     result.SetDate(year, raw.month, n1); // MDY
                     result.flags |= ParseFlags.HaveDate;
                     return true;
@@ -2385,7 +2415,8 @@ namespace System
                 else if (
                     TryAdjustYear(ref result, n1, out year)
                     && result.calendar.IsValidDay(year, raw.month, n2, result.era)
-                ) {
+                )
+                {
                     result.SetDate(year, raw.month, n2); // YMD
                     result.flags |= ParseFlags.HaveDate;
                     return true;
@@ -2396,7 +2427,8 @@ namespace System
                 if (
                     TryAdjustYear(ref result, n1, out year)
                     && result.calendar.IsValidDay(year, raw.month, n2, result.era)
-                ) {
+                )
+                {
                     result.SetDate(year, raw.month, n2); // YMD
                     result.flags |= ParseFlags.HaveDate;
                     return true;
@@ -2404,7 +2436,8 @@ namespace System
                 else if (
                     TryAdjustYear(ref result, n2, out year)
                     && result.calendar.IsValidDay(year, raw.month, n1, result.era)
-                ) {
+                )
+                {
                     result.SetDate(year, raw.month, n1); // DMY
                     result.flags |= ParseFlags.HaveDate;
                     return true;
@@ -2415,7 +2448,8 @@ namespace System
                 if (
                     TryAdjustYear(ref result, n2, out year)
                     && result.calendar.IsValidDay(year, raw.month, n1, result.era)
-                ) {
+                )
+                {
                     result.SetDate(year, raw.month, n1); // DMY
                     result.flags |= ParseFlags.HaveDate;
                     return true;
@@ -2423,7 +2457,8 @@ namespace System
                 else if (
                     TryAdjustYear(ref result, n1, out year)
                     && result.calendar.IsValidDay(year, raw.month, n2, result.era)
-                ) {
+                )
+                {
                     result.SetDate(year, raw.month, n2); // YMD
                     result.flags |= ParseFlags.HaveDate;
                     return true;
@@ -2438,7 +2473,8 @@ namespace System
             ref DateTimeResult result,
             ref DateTimeRawInfo raw,
             DateTimeFormatInfo dtfi
-        ) {
+        )
+        {
             if ((result.flags & ParseFlags.HaveDate) != 0)
             {
                 // Multiple dates in the input string
@@ -2475,7 +2511,8 @@ namespace System
             ref DateTimeResult result,
             ref DateTimeRawInfo raw,
             DateTimeFormatInfo dtfi
-        ) {
+        )
+        {
             if ((result.flags & ParseFlags.HaveDate) != 0)
             {
                 // Multiple dates in the input string
@@ -2719,7 +2756,8 @@ namespace System
             ref DateTimeResult result,
             ref DateTimeRawInfo raw,
             DateTimeFormatInfo dtfi
-        ) {
+        )
+        {
             // For partial CJK Dates, the only valid formats are with a specified year, followed by two numbers, which
             // will be the Month and Day, and with a specified Month, when the numbers are either the year and day or
             // day and year, depending on the short date pattern.
@@ -2729,11 +2767,13 @@ namespace System
                 if (
                     ((result.flags & ParseFlags.HaveMonth) == 0)
                     && ((result.flags & ParseFlags.HaveDay) == 0)
-                ) {
+                )
+                {
                     if (
                         TryAdjustYear(ref result, raw.year, out result.Year)
                         && SetDateYMD(ref result, result.Year, raw.GetNumber(0), raw.GetNumber(1))
-                    ) {
+                    )
+                    {
                         return true;
                     }
                 }
@@ -2743,7 +2783,8 @@ namespace System
                 if (
                     ((result.flags & ParseFlags.HaveYear) == 0)
                     && ((result.flags & ParseFlags.HaveDay) == 0)
-                ) {
+                )
+                {
                     if (!GetYearMonthDayOrder(dtfi.ShortDatePattern, out int order))
                     {
                         result.SetFailure(
@@ -2759,7 +2800,8 @@ namespace System
                         if (
                             TryAdjustYear(ref result, raw.GetNumber(0), out year)
                             && SetDateYMD(ref result, year, result.Month, raw.GetNumber(1))
-                        ) {
+                        )
+                        {
                             return true;
                         }
                     }
@@ -2768,7 +2810,8 @@ namespace System
                         if (
                             TryAdjustYear(ref result, raw.GetNumber(1), out year)
                             && SetDateYMD(ref result, year, result.Month, raw.GetNumber(0))
-                        ) {
+                        )
+                        {
                             return true;
                         }
                     }
@@ -2785,7 +2828,8 @@ namespace System
             ref DateTimeResult result,
             ref DateTimeRawInfo raw,
             ref DateTimeToken dtok
-        ) {
+        )
+        {
             switch (dtok.suffix)
             {
                 case TokenType.SEP_YearSuff:
@@ -2854,7 +2898,8 @@ namespace System
             ref DateTimeStyles styles,
             ref DateTimeRawInfo raw,
             DateTimeFormatInfo dtfi
-        ) {
+        )
+        {
             // The following are accepted terminal state for Hebrew date.
             switch (dps)
             {
@@ -2984,7 +3029,8 @@ namespace System
             ref DateTimeStyles styles,
             ref DateTimeRawInfo raw,
             DateTimeFormatInfo dtfi
-        ) {
+        )
+        {
             bool passed = true;
             switch (dps)
             {
@@ -3066,7 +3112,8 @@ namespace System
             ReadOnlySpan<char> s,
             DateTimeFormatInfo dtfi,
             DateTimeStyles styles
-        ) {
+        )
+        {
             DateTimeResult result = default; // The buffer to store the parsing result.
             result.Init(s);
             if (TryParse(s, dtfi, styles, ref result))
@@ -3084,7 +3131,8 @@ namespace System
             DateTimeFormatInfo dtfi,
             DateTimeStyles styles,
             out TimeSpan offset
-        ) {
+        )
+        {
             DateTimeResult result = default; // The buffer to store the parsing result.
             result.Init(s);
             result.flags |= ParseFlags.CaptureOffset;
@@ -3104,7 +3152,8 @@ namespace System
             DateTimeFormatInfo dtfi,
             DateTimeStyles styles,
             out DateTime result
-        ) {
+        )
+        {
             DateTimeResult resultData = default; // The buffer to store the parsing result.
             resultData.Init(s);
 
@@ -3124,7 +3173,8 @@ namespace System
             DateTimeStyles styles,
             out DateTime result,
             out TimeSpan offset
-        ) {
+        )
+        {
             DateTimeResult parseResult = default; // The buffer to store the parsing result.
             parseResult.Init(s);
             parseResult.flags |= ParseFlags.CaptureOffset;
@@ -3149,7 +3199,8 @@ namespace System
             DateTimeFormatInfo dtfi,
             DateTimeStyles styles,
             ref DateTimeResult result
-        ) {
+        )
+        {
             if (s.Length == 0)
             {
                 result.SetFailure(
@@ -3257,7 +3308,8 @@ namespace System
                             dtok.dtt == DTT.YearEnd
                             || dtok.dtt == DTT.YearSpace
                             || dtok.dtt == DTT.YearDateSep
-                        ) {
+                        )
+                        {
                             // When time and date separators are same and we are hitting a year number while the first parsed part of the string was recognized
                             // as part of time (and not a date) DS.T_Nt, DS.T_NNt then change the state to be a date so we try to parse it as a date instead
                             if (dps == DS.T_Nt)
@@ -3317,7 +3369,8 @@ namespace System
                                     ref raw,
                                     dtfi
                                 )
-                            ) {
+                            )
+                            {
                                 TPTraceExit("0050 (ProcessHebrewTerminalState)", dps);
                                 return false;
                             }
@@ -3382,7 +3435,8 @@ namespace System
                     result.era,
                     out DateTime time
                 )
-            ) {
+            )
+            {
                 result.SetFailure(
                     ParseFailureKind.FormatBadDateTimeCalendar,
                     nameof(SR.Format_BadDateTimeCalendar)
@@ -3398,7 +3452,8 @@ namespace System
                         (long)Math.Round(raw.fraction * Calendar.TicksPerSecond),
                         out time
                     )
-                ) {
+                )
+                {
                     result.SetBadDateTimeFailure();
                     TPTraceExit("0100 (time.TryAddTicks)", dps);
                     return false;
@@ -3441,7 +3496,8 @@ namespace System
             ref DateTimeResult result,
             DateTimeStyles styles,
             bool bTimeOnly
-        ) {
+        )
+        {
             if ((result.flags & ParseFlags.CaptureOffset) != 0)
             {
                 // This is a DateTimeOffset parse, so the offset will actually be captured directly, and
@@ -3455,7 +3511,8 @@ namespace System
                 // the DateTime offset must be within +- 14:00 hours.
                 if (
                     offsetTicks < DateTimeOffset.MinOffset || offsetTicks > DateTimeOffset.MaxOffset
-                ) {
+                )
+                {
                     result.SetFailure(
                         ParseFailureKind.FormatWithOriginalDateTime,
                         nameof(SR.Format_OffsetOutOfRange)
@@ -3523,7 +3580,8 @@ namespace System
             if (
                 ((styles & DateTimeStyles.RoundtripKind) != 0)
                 && ((result.flags & ParseFlags.TimeZoneUtc) != 0)
-            ) {
+            )
+            {
                 result.parsedDate = DateTime.SpecifyKind(result.parsedDate, DateTimeKind.Utc);
                 return true;
             }
@@ -3539,7 +3597,8 @@ namespace System
         private static bool DateTimeOffsetTimeZonePostProcessing(
             ref DateTimeResult result,
             DateTimeStyles styles
-        ) {
+        )
+        {
             // For DateTimeOffset, default to the Utc or Local offset when an offset was not specified by
             // the input string.
             if ((result.flags & ParseFlags.TimeZoneUsed) == 0)
@@ -3593,7 +3652,8 @@ namespace System
                 if (
                     ((result.flags & ParseFlags.TimeZoneUsed) == 0)
                     && ((styles & DateTimeStyles.AssumeUniversal) == 0)
-                ) {
+                )
+                {
                     // Handle the special case where the timeZoneOffset was defaulted to Local
                     bool toUtcResult = AdjustTimeZoneToUniversal(ref result);
                     result.timeZoneOffset = TimeSpan.Zero;
@@ -3718,7 +3778,8 @@ namespace System
             ref __DTString str,
             DateTimeStyles styles,
             ref DateTimeResult result
-        ) {
+        )
+        {
             if (raw.year < 0 || raw.GetNumber(0) < 0 || raw.GetNumber(1) < 0) { }
             str.Index--;
             int second = 0;
@@ -3824,7 +3885,8 @@ namespace System
                     result.era,
                     out DateTime time
                 )
-            ) {
+            )
+            {
                 result.SetFailure(
                     ParseFailureKind.FormatBadDateTimeCalendar,
                     nameof(SR.Format_BadDateTimeCalendar)
@@ -3906,7 +3968,8 @@ namespace System
             int minDigitLen,
             int maxDigitLen,
             out int result
-        ) {
+        )
+        {
             Debug.Assert(minDigitLen > 0, "minDigitLen > 0");
             Debug.Assert(maxDigitLen < 9, "maxDigitLen < 9");
             Debug.Assert(minDigitLen <= maxDigitLen, "minDigitLen <= maxDigitLen");
@@ -3946,7 +4009,8 @@ namespace System
             ref __DTString str,
             int maxDigitLen,
             ref double result
-        ) {
+        )
+        {
             if (!str.GetNextDigit())
             {
                 str.Index--;
@@ -4084,7 +4148,8 @@ namespace System
             ref __DTString str,
             DateTimeFormatInfo dtfi,
             ref int result
-        ) {
+        )
+        {
             int maxMatchStrLen = 0;
             result = -1;
             if (str.GetNext())
@@ -4104,7 +4169,8 @@ namespace System
                         dtfi.HasSpacesInMonthNames
                             ? str.MatchSpecifiedWords(searchStr, false, ref matchStrLen)
                             : str.MatchSpecifiedWord(searchStr)
-                    ) {
+                    )
+                    {
                         if (matchStrLen > maxMatchStrLen)
                         {
                             maxMatchStrLen = matchStrLen;
@@ -4165,7 +4231,8 @@ namespace System
             ref __DTString str,
             DateTimeFormatInfo dtfi,
             ref int result
-        ) {
+        )
+        {
             int maxMatchStrLen = 0;
             result = -1;
             if (str.GetNext())
@@ -4185,7 +4252,8 @@ namespace System
                         dtfi.HasSpacesInMonthNames
                             ? str.MatchSpecifiedWords(searchStr, false, ref matchStrLen)
                             : str.MatchSpecifiedWord(searchStr)
-                    ) {
+                    )
+                    {
                         if (matchStrLen > maxMatchStrLen)
                         {
                             maxMatchStrLen = matchStrLen;
@@ -4247,7 +4315,8 @@ namespace System
             ref __DTString str,
             DateTimeFormatInfo dtfi,
             ref int result
-        ) {
+        )
+        {
             int maxMatchStrLen = 0;
             result = -1;
             if (str.GetNext())
@@ -4260,7 +4329,8 @@ namespace System
                         dtfi.HasSpacesInDayNames
                             ? str.MatchSpecifiedWords(searchStr, false, ref matchStrLen)
                             : str.MatchSpecifiedWord(searchStr)
-                    ) {
+                    )
+                    {
                         if (matchStrLen > maxMatchStrLen)
                         {
                             maxMatchStrLen = matchStrLen;
@@ -4289,7 +4359,8 @@ namespace System
             ref __DTString str,
             DateTimeFormatInfo dtfi,
             ref int result
-        ) {
+        )
+        {
             // Turkish (tr-TR) got day names with the same prefix.
             int maxMatchStrLen = 0;
             result = -1;
@@ -4303,7 +4374,8 @@ namespace System
                         dtfi.HasSpacesInDayNames
                             ? str.MatchSpecifiedWords(searchStr, false, ref matchStrLen)
                             : str.MatchSpecifiedWord(searchStr)
-                    ) {
+                    )
+                    {
                         if (matchStrLen > maxMatchStrLen)
                         {
                             maxMatchStrLen = matchStrLen;
@@ -4332,7 +4404,8 @@ namespace System
             ref __DTString str,
             DateTimeFormatInfo dtfi,
             ref int result
-        ) {
+        )
+        {
             if (str.GetNext())
             {
                 int[] eras = dtfi.Calendar.Eras;
@@ -4373,7 +4446,8 @@ namespace System
             ref __DTString str,
             DateTimeFormatInfo dtfi,
             ref TM result
-        ) {
+        )
+        {
             result = TM.NotSet;
             // In some cultures have empty strings in AM/PM mark. E.g. af-ZA (0x0436), the AM mark is "", and PM mark is "nm".
             if (dtfi.AMDesignator.Length == 0)
@@ -4431,7 +4505,8 @@ namespace System
             ref __DTString str,
             DateTimeFormatInfo dtfi,
             ref TM result
-        ) {
+        )
+        {
             // NOTENOTE : the assumption here is that abbreviated time mark is the first
             // character of the AM/PM designator.  If this invariant changes, we have to
             // change the code below.
@@ -4469,7 +4544,8 @@ namespace System
             int newValue,
             char patternChar,
             ref DateTimeResult result
-        ) {
+        )
+        {
             if (currentValue == -1)
             {
                 currentValue = newValue;
@@ -4517,7 +4593,8 @@ namespace System
             ref DateTimeResult result,
             ref Calendar cal,
             DateTimeStyles styles
-        ) {
+        )
+        {
             if ((result.flags & ParseFlags.CaptureOffset) != 0)
             {
                 // DateTimeOffset.Parse should allow dates without a year, but only if there is also no time zone marker;
@@ -4536,7 +4613,8 @@ namespace System
                         (result.Year == -1 || ((result.flags & ParseFlags.YearDefault) != 0))
                         && (result.flags & ParseFlags.TimeZoneUsed) != 0
                     )
-                ) {
+                )
+                {
                     result.SetFailure(
                         ParseFailureKind.FormatWithOriginalDateTime,
                         nameof(SR.Format_MissingIncompleteDate)
@@ -4633,7 +4711,8 @@ namespace System
             ref DateTimeFormatInfo dtfi,
             ref ParsingInfo parseInfo,
             ref DateTimeResult result
-        ) {
+        )
+        {
             //
             // Check the format to see if we need to override the dtfi to be InvariantInfo,
             // and see if we need to set up the userUniversalTime flag.
@@ -4703,7 +4782,8 @@ namespace System
             ref DateTimeFormatInfo dtfi,
             ref ParsingInfo parseInfo,
             ref DateTimeResult result
-        ) {
+        )
+        {
             parseInfo.calendar = GregorianCalendar.GetDefaultInstance();
             dtfi = DateTimeFormatInfo.InvariantInfo;
             if ((result.flags & ParseFlags.CaptureOffset) != 0)
@@ -4715,7 +4795,8 @@ namespace System
         private static void ConfigureFormatOS(
             ref DateTimeFormatInfo dtfi,
             ref ParsingInfo parseInfo
-        ) {
+        )
+        {
             parseInfo.calendar = GregorianCalendar.GetDefaultInstance();
             dtfi = DateTimeFormatInfo.InvariantInfo;
         }
@@ -4728,7 +4809,8 @@ namespace System
             ref ParsingInfo parseInfo,
             DateTimeFormatInfo dtfi,
             ref DateTimeResult result
-        ) {
+        )
+        {
             int tokenLen;
             int tempYear = 0,
                 tempMonth = 0,
@@ -4791,7 +4873,8 @@ namespace System
                             if (
                                 !parseInfo.fCustomNumberParser
                                 || !parseInfo.parseNumberDelegate(ref str, tokenLen, out tempMonth)
-                            ) {
+                            )
+                            {
                                 result.SetBadDateTimeFailure();
                                 return false;
                             }
@@ -4834,7 +4917,8 @@ namespace System
                             if (
                                 !parseInfo.fCustomNumberParser
                                 || !parseInfo.parseNumberDelegate(ref str, tokenLen, out tempDay)
-                            ) {
+                            )
+                            {
                                 result.SetBadDateTimeFailure();
                                 return false;
                             }
@@ -5015,7 +5099,8 @@ namespace System
                         if (
                             (result.flags & ParseFlags.TimeZoneUsed) != 0
                             && tempTimeZoneOffset != result.timeZoneOffset
-                        ) {
+                        )
+                        {
                             result.SetFailure(
                                 ParseFailureKind.FormatWithParameter,
                                 nameof(SR.Format_RepeatDateTimePattern),
@@ -5031,7 +5116,8 @@ namespace System
                     if (
                         (result.flags & ParseFlags.TimeZoneUsed) != 0
                         && result.timeZoneOffset != TimeSpan.Zero
-                    ) {
+                    )
+                    {
                         result.SetFailure(
                             ParseFailureKind.FormatWithParameter,
                             nameof(SR.Format_RepeatDateTimePattern),
@@ -5063,7 +5149,8 @@ namespace System
                         if (
                             (result.flags & ParseFlags.TimeZoneUsed) != 0
                             && result.timeZoneOffset != TimeSpan.Zero
-                        ) {
+                        )
+                        {
                             result.SetFailure(
                                 ParseFailureKind.FormatWithParameter,
                                 nameof(SR.Format_RepeatDateTimePattern),
@@ -5088,7 +5175,8 @@ namespace System
                         if (
                             (result.flags & ParseFlags.TimeZoneUsed) != 0
                             && tempTimeZoneOffset != result.timeZoneOffset
-                        ) {
+                        )
+                        {
                             result.SetFailure(
                                 ParseFailureKind.FormatWithParameter,
                                 nameof(SR.Format_RepeatDateTimePattern),
@@ -5109,7 +5197,8 @@ namespace System
                             (dtfi.TimeSeparator.Length > 1 && dtfi.TimeSeparator[0] == ':')
                             || !str.Match(':')
                         ) && !str.Match(dtfi.TimeSeparator)
-                    ) {
+                    )
+                    {
                         // A time separator is expected.
                         result.SetBadDateTimeFailure();
                         return false;
@@ -5123,7 +5212,8 @@ namespace System
                             (dtfi.DateSeparator.Length > 1 && dtfi.DateSeparator[0] == '/')
                             || !str.Match('/')
                         ) && !str.Match(dtfi.DateSeparator)
-                    ) {
+                    )
+                    {
                         // A date separator is expected.
                         result.SetBadDateTimeFailure();
                         return false;
@@ -5140,7 +5230,8 @@ namespace System
                             enquotedString,
                             out tokenLen
                         )
-                    ) {
+                    )
+                    {
                         result.SetFailure(
                             ParseFailureKind.FormatWithParameter,
                             nameof(SR.Format_BadQuote),
@@ -5185,7 +5276,8 @@ namespace System
                                 (result.flags & ParseFlags.UtcSortPattern) != 0
                                 && quotedStr == ZuluName
                             )
-                        ) {
+                        )
+                        {
                             result.flags |= ParseFlags.TimeZoneUsed;
                             result.timeZoneOffset = TimeSpan.Zero;
                         }
@@ -5199,7 +5291,8 @@ namespace System
                     if (
                         format.Index >= format.Value.Length - 1
                         || format.Value[format.Index + 1] == '%'
-                    ) {
+                    )
+                    {
                         result.SetBadFormatSpecifierFailure(format.Value);
                         return false;
                     }
@@ -5273,7 +5366,8 @@ namespace System
                                                 dtfi,
                                                 ref result
                                             )
-                                        ) {
+                                        )
+                                        {
                                             return true;
                                         }
                                     }
@@ -5320,7 +5414,8 @@ namespace System
             int pos,
             StringBuilder result,
             out int returnValue
-        ) {
+        )
+        {
             //
             // NOTE : pos will be the index of the quote character in the 'format' string.
             //
@@ -5398,7 +5493,8 @@ namespace System
             DateTimeStyles styles,
             DateTimeFormatInfo dtfi,
             ref DateTimeResult result
-        ) {
+        )
+        {
             ParsingInfo parseInfo = default;
             parseInfo.Init();
 
@@ -5499,7 +5595,8 @@ namespace System
             if (
                 parseInfo.fUseTwoDigitYear
                 && ((dtfi.FormatFlags & DateTimeFormatFlags.UseHebrewRule) == 0)
-            ) {
+            )
+            {
                 // A two digit year value is expected. Check if the parsed year value is valid.
                 if (result.Year >= 100)
                 {
@@ -5555,7 +5652,8 @@ namespace System
                 if (
                     (parseInfo.timeMark == TM.AM && result.Hour >= 12)
                     || (parseInfo.timeMark == TM.PM && result.Hour < 12)
-                ) {
+                )
+                {
                     result.SetBadDateTimeFailure();
                     return false;
                 }
@@ -5576,7 +5674,8 @@ namespace System
                         ref result.Month,
                         (result.flags & ParseFlags.ParsedMonthName) != 0
                     )
-                ) {
+                )
+                {
                     result.SetFailure(
                         ParseFailureKind.FormatBadDateTimeCalendar,
                         nameof(SR.Format_BadDateTimeCalendar)
@@ -5596,7 +5695,8 @@ namespace System
                     result.era,
                     out result.parsedDate
                 )
-            ) {
+            )
+            {
                 result.SetFailure(
                     ParseFailureKind.FormatBadDateTimeCalendar,
                     nameof(SR.Format_BadDateTimeCalendar)
@@ -5610,7 +5710,8 @@ namespace System
                         (long)Math.Round(result.fraction * Calendar.TicksPerSecond),
                         out result.parsedDate
                     )
-                ) {
+                )
+                {
                     result.SetBadDateTimeFailure();
                     return false;
                 }
@@ -5643,7 +5744,8 @@ namespace System
             ReadOnlySpan<char> source,
             ref ParsingInfo parseInfo,
             ref DateTimeResult result
-        ) {
+        )
+        {
             // Example:
             // Tue, 03 Jan 2017 08:08:05 GMT
 
@@ -5890,7 +5992,8 @@ namespace System
                     0,
                     out result.parsedDate
                 )
-            ) {
+            )
+            {
                 result.SetFailure(
                     ParseFailureKind.FormatBadDateTimeCalendar,
                     nameof(SR.Format_BadDateTimeCalendar)
@@ -5927,7 +6030,8 @@ namespace System
                 || source[13] != ':'
                 || source[16] != ':'
                 || source[19] != '.'
-            ) {
+            )
+            {
                 result.SetBadDateTimeFailure();
                 return false;
             }
@@ -6050,7 +6154,8 @@ namespace System
                     0,
                     out DateTime dateTime
                 )
-            ) {
+            )
+            {
                 result.SetBadDateTimeFailure();
                 return false;
             }
@@ -6060,7 +6165,8 @@ namespace System
                     (long)Math.Round(fraction * Calendar.TicksPerSecond),
                     out result.parsedDate
                 )
-            ) {
+            )
+            {
                 result.SetBadDateTimeFailure();
                 return false;
             }
@@ -6372,11 +6478,8 @@ namespace System
         // In some cultures, such as mn-MN, it uses "\x0031\x00a0\x0434\x04af\x0433\x044d\x044d\x0440\x00a0\x0441\x0430\x0440" in month names.
         private readonly bool m_checkDigitToken;
 
-        internal __DTString(
-            ReadOnlySpan<char> str,
-            DateTimeFormatInfo dtfi,
-            bool checkDigitToken
-        ) : this(str, dtfi)
+        internal __DTString(ReadOnlySpan<char> str, DateTimeFormatInfo dtfi, bool checkDigitToken)
+            : this(str, dtfi)
         {
             m_checkDigitToken = checkDigitToken;
         }
@@ -6439,7 +6542,8 @@ namespace System
             out TokenType tokenType,
             out int tokenValue,
             DateTimeFormatInfo dtfi
-        ) {
+        )
+        {
             tokenValue = 0;
             if (Index >= Length)
             {
@@ -6501,7 +6605,8 @@ namespace System
                             out int tempValue,
                             ref this
                         )
-                    ) {
+                    )
+                    {
                         tokenType = tempType;
                         tokenValue = tempValue;
                         // This is a token, so the Index has been advanced propertly in DTFI.Tokenizer().
@@ -6539,7 +6644,8 @@ namespace System
             DateTimeFormatInfo dtfi,
             out int indexBeforeSeparator,
             out char charBeforeSeparator
-        ) {
+        )
+        {
             indexBeforeSeparator = Index;
             charBeforeSeparator = m_current;
             TokenType tokenType;
@@ -6583,7 +6689,8 @@ namespace System
             string target,
             bool checkWordBoundary,
             ref int matchLength
-        ) {
+        )
+        {
             int valueRemaining = Value.Length - Index;
             matchLength = target.Length;
 
@@ -6594,7 +6701,8 @@ namespace System
                     target,
                     CompareOptions.IgnoreCase
                 ) != 0
-            ) {
+            )
+            {
                 // Check word by word
                 int targetPosition = 0; // Where we are in the target string
                 int thisPosition = Index; // Where we are in this string
@@ -6628,7 +6736,8 @@ namespace System
                                 Value.Slice(thisPosition, segmentLength),
                                 target.AsSpan(targetPosition, segmentLength)
                             ) != 0
-                        ) {
+                        )
+                        {
                             return false;
                         }
                         // Advance the input string
@@ -6657,7 +6766,8 @@ namespace System
                             Value.Slice(thisPosition, segmentLength),
                             target.AsSpan(targetPosition, segmentLength)
                         ) != 0
-                    ) {
+                    )
+                    {
                         return false;
                     }
                 }
@@ -7164,7 +7274,8 @@ namespace System
             ParseFailureKind failure,
             string failureMessageID,
             object? failureMessageFormatArgument
-        ) {
+        )
+        {
             this.failure = failure;
             this.failureMessageID = failureMessageID;
             this.failureMessageFormatArgument = failureMessageFormatArgument;
@@ -7175,7 +7286,8 @@ namespace System
             string failureMessageID,
             object? failureMessageFormatArgument,
             string failureArgumentName
-        ) {
+        )
+        {
             this.failure = failure;
             this.failureMessageID = failureMessageID;
             this.failureMessageFormatArgument = failureMessageFormatArgument;

@@ -15,7 +15,8 @@ namespace System.Configuration.Internal
             long fileSize,
             DateTime utcCreationTime,
             DateTime utcLastWriteTime
-        ) {
+        )
+        {
             _exists = exists;
             _fileSize = fileSize;
             _utcCreationTime = utcCreationTime;

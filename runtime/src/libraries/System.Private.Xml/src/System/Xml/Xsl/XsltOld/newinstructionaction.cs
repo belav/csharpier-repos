@@ -35,7 +35,8 @@ namespace System.Xml.Xsl.XsltOld
                 if (
                     Ref.Equal(input.NamespaceURI, input.Atoms.UriXsl)
                     && Ref.Equal(input.LocalName, input.Atoms.Fallback)
-                ) {
+                )
+                {
                     _fallback = true;
                     if (compiler.Recurse())
                     {

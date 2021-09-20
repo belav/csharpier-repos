@@ -143,7 +143,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Syntax.InternalSyntax
             string text,
             string valueText,
             GreenNode trailing
-        ) {
+        )
+        {
             Debug.Assert(SyntaxFacts.IsAnyToken(kind));
             Debug.Assert(kind != SyntaxKind.IdentifierToken);
             Debug.Assert(kind != SyntaxKind.CharacterLiteralToken);
@@ -168,7 +169,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Syntax.InternalSyntax
             GreenNode leading,
             SyntaxKind kind,
             GreenNode trailing
-        ) {
+        )
+        {
             return SyntaxToken.CreateMissing(kind, leading, trailing);
         }
 
@@ -188,7 +190,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Syntax.InternalSyntax
             string text,
             string valueText,
             GreenNode trailing
-        ) {
+        )
+        {
             return SyntaxToken.Identifier(contextualKind, leading, text, valueText, trailing);
         }
 
@@ -197,7 +200,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Syntax.InternalSyntax
             string text,
             int value,
             GreenNode trailing
-        ) {
+        )
+        {
             return SyntaxToken.WithValue(
                 SyntaxKind.NumericLiteralToken,
                 leading,
@@ -212,7 +216,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Syntax.InternalSyntax
             string text,
             uint value,
             GreenNode trailing
-        ) {
+        )
+        {
             return SyntaxToken.WithValue(
                 SyntaxKind.NumericLiteralToken,
                 leading,
@@ -227,7 +232,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Syntax.InternalSyntax
             string text,
             long value,
             GreenNode trailing
-        ) {
+        )
+        {
             return SyntaxToken.WithValue(
                 SyntaxKind.NumericLiteralToken,
                 leading,
@@ -242,7 +248,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Syntax.InternalSyntax
             string text,
             ulong value,
             GreenNode trailing
-        ) {
+        )
+        {
             return SyntaxToken.WithValue(
                 SyntaxKind.NumericLiteralToken,
                 leading,
@@ -257,7 +264,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Syntax.InternalSyntax
             string text,
             float value,
             GreenNode trailing
-        ) {
+        )
+        {
             return SyntaxToken.WithValue(
                 SyntaxKind.NumericLiteralToken,
                 leading,
@@ -272,7 +280,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Syntax.InternalSyntax
             string text,
             double value,
             GreenNode trailing
-        ) {
+        )
+        {
             return SyntaxToken.WithValue(
                 SyntaxKind.NumericLiteralToken,
                 leading,
@@ -287,7 +296,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Syntax.InternalSyntax
             string text,
             decimal value,
             GreenNode trailing
-        ) {
+        )
+        {
             return SyntaxToken.WithValue(
                 SyntaxKind.NumericLiteralToken,
                 leading,
@@ -302,7 +312,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Syntax.InternalSyntax
             string text,
             string value,
             GreenNode trailing
-        ) {
+        )
+        {
             return SyntaxToken.WithValue(
                 SyntaxKind.StringLiteralToken,
                 leading,
@@ -318,7 +329,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Syntax.InternalSyntax
             SyntaxKind kind,
             string value,
             GreenNode trailing
-        ) {
+        )
+        {
             return SyntaxToken.WithValue(kind, leading, text, value, trailing);
         }
 
@@ -327,7 +339,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Syntax.InternalSyntax
             string text,
             char value,
             GreenNode trailing
-        ) {
+        )
+        {
             return SyntaxToken.WithValue(
                 SyntaxKind.CharacterLiteralToken,
                 leading,
@@ -347,7 +360,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Syntax.InternalSyntax
             string text,
             string value,
             GreenNode trailing
-        ) {
+        )
+        {
             return SyntaxToken.WithValue(
                 SyntaxKind.XmlTextLiteralToken,
                 leading,
@@ -362,7 +376,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Syntax.InternalSyntax
             string text,
             string value,
             GreenNode trailing
-        ) {
+        )
+        {
             if (leading == null && trailing == null && text == CrLf && value == CrLf)
             {
                 return XmlCarriageReturnLineFeed;
@@ -393,7 +408,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Syntax.InternalSyntax
             string text,
             string value,
             GreenNode trailing
-        ) {
+        )
+        {
             return SyntaxToken.WithValue(
                 SyntaxKind.XmlEntityLiteralToken,
                 leading,
@@ -439,7 +455,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Syntax.InternalSyntax
             CSharpSyntaxNode node0,
             CSharpSyntaxNode node1,
             CSharpSyntaxNode node2
-        ) {
+        )
+        {
             return SyntaxList.List(node0, node1, node2);
         }
 

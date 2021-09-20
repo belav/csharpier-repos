@@ -69,7 +69,8 @@ namespace Microsoft.CodeAnalysis.CSharp.ConvertSwitchStatementToExpression
             if (
                 switchStatement.GetDiagnostics()
                     .Any(diagnostic => diagnostic.Severity == DiagnosticSeverity.Error)
-            ) {
+            )
+            {
                 return;
             }
 

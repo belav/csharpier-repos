@@ -17,7 +17,8 @@ namespace Microsoft.Extensions.FileProviders.Physical
             else if (
                 fileSystemInfo.Name.StartsWith(".", StringComparison.Ordinal)
                 && (filters & ExclusionFilters.DotPrefixed) != 0
-            ) {
+            )
+            {
                 return true;
             }
             else if (
@@ -32,7 +33,8 @@ namespace Microsoft.Extensions.FileProviders.Physical
                         && (filters & ExclusionFilters.System) != 0
                     )
                 )
-            ) {
+            )
+            {
                 return true;
             }
 

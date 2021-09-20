@@ -119,7 +119,8 @@ namespace Microsoft.CodeAnalysis.UnitTests.Collections
             IndexOfMethod indexOfMethod,
             int count,
             bool frontToBackOrder
-        ) {
+        )
+        {
             _ = frontToBackOrder;
             SegmentedList<T> list = GenericListFactory(count);
             SegmentedList<T> expectedList = list.ToSegmentedList();
@@ -140,7 +141,8 @@ namespace Microsoft.CodeAnalysis.UnitTests.Collections
             IndexOfMethod indexOfMethod,
             int count,
             bool frontToBackOrder
-        ) {
+        )
+        {
             _ = frontToBackOrder;
             SegmentedList<T> list = GenericListFactory(count);
             IEnumerable<T> nonexistentValues = CreateEnumerable(
@@ -167,7 +169,8 @@ namespace Microsoft.CodeAnalysis.UnitTests.Collections
             IndexOfMethod indexOfMethod,
             int count,
             bool frontToBackOrder
-        ) {
+        )
+        {
             _ = frontToBackOrder;
             T? defaultValue = default;
             SegmentedList<T?> list = GenericListFactory(count)!;
@@ -184,7 +187,8 @@ namespace Microsoft.CodeAnalysis.UnitTests.Collections
             IndexOfMethod indexOfMethod,
             int count,
             bool frontToBackOrder
-        ) {
+        )
+        {
             SegmentedList<T> list = GenericListFactory(count);
             SegmentedList<T> withoutDuplicates = list.ToSegmentedList();
             list.AddRange(list);

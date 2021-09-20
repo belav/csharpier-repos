@@ -43,7 +43,8 @@ namespace Microsoft.AspNetCore.Server.KestrelTests
             int expectedMethod,
             int expectedLength,
             bool expectedResult
-        ) {
+        )
+        {
             return new object[] { methodData, expectedMethod, expectedLength, expectedResult };
         }
 
@@ -81,7 +82,8 @@ namespace Microsoft.AspNetCore.Server.KestrelTests
             int intExpectedMethod,
             int expectedLength,
             bool expectedResult
-        ) {
+        )
+        {
             var expectedMethod = (HttpMethod)intExpectedMethod;
             var data = new ReadOnlySpan<byte>(methodData);
 

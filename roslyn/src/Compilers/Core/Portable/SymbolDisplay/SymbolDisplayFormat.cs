@@ -372,20 +372,21 @@ namespace Microsoft.CodeAnalysis
             SymbolDisplayKindOptions kindOptions = default(SymbolDisplayKindOptions),
             SymbolDisplayMiscellaneousOptions miscellaneousOptions =
                 default(SymbolDisplayMiscellaneousOptions)
-        ) : this(
-            compilerInternalOptions: default,
-            globalNamespaceStyle,
-            typeQualificationStyle,
-            genericsOptions,
-            memberOptions,
-            parameterOptions,
-            delegateStyle,
-            extensionMethodStyle,
-            propertyStyle,
-            localOptions,
-            kindOptions,
-            miscellaneousOptions
-        ) { }
+        )
+            : this(
+                compilerInternalOptions: default,
+                globalNamespaceStyle,
+                typeQualificationStyle,
+                genericsOptions,
+                memberOptions,
+                parameterOptions,
+                delegateStyle,
+                extensionMethodStyle,
+                propertyStyle,
+                localOptions,
+                kindOptions,
+                miscellaneousOptions
+            ) { }
 
         /// <summary>
         /// This version also accepts <see cref="SymbolDisplayCompilerInternalOptions"/>.
@@ -407,7 +408,8 @@ namespace Microsoft.CodeAnalysis
             SymbolDisplayKindOptions kindOptions = default(SymbolDisplayKindOptions),
             SymbolDisplayMiscellaneousOptions miscellaneousOptions =
                 default(SymbolDisplayMiscellaneousOptions)
-        ) {
+        )
+        {
             this.GlobalNamespaceStyle = globalNamespaceStyle;
             this.TypeQualificationStyle = typeQualificationStyle;
             this.GenericsOptions = genericsOptions;
@@ -431,7 +433,8 @@ namespace Microsoft.CodeAnalysis
         /// <returns>A duplicate of the SymbolDisplayFormat, with a replaced set of <seealso cref="SymbolDisplayMiscellaneousOptions"/>.</returns>
         public SymbolDisplayFormat WithMiscellaneousOptions(
             SymbolDisplayMiscellaneousOptions options
-        ) {
+        )
+        {
             return new SymbolDisplayFormat(
                 this.CompilerInternalOptions,
                 this.GlobalNamespaceStyle,
@@ -457,7 +460,8 @@ namespace Microsoft.CodeAnalysis
         /// <returns>A duplicate of the SymbolDisplayFormat, with an additional set of <seealso cref="SymbolDisplayMiscellaneousOptions"/>.</returns>
         public SymbolDisplayFormat AddMiscellaneousOptions(
             SymbolDisplayMiscellaneousOptions options
-        ) {
+        )
+        {
             return this.WithMiscellaneousOptions(this.MiscellaneousOptions | options);
         }
 
@@ -470,7 +474,8 @@ namespace Microsoft.CodeAnalysis
         /// <returns>A duplicate of the SymbolDisplayFormat, without the specified <seealso cref="SymbolDisplayMiscellaneousOptions"/>.</returns>
         public SymbolDisplayFormat RemoveMiscellaneousOptions(
             SymbolDisplayMiscellaneousOptions options
-        ) {
+        )
+        {
             return this.WithMiscellaneousOptions(this.MiscellaneousOptions & ~options);
         }
 
@@ -769,7 +774,8 @@ namespace Microsoft.CodeAnalysis
         /// </summary>
         internal SymbolDisplayFormat WithCompilerInternalOptions(
             SymbolDisplayCompilerInternalOptions options
-        ) {
+        )
+        {
             return new SymbolDisplayFormat(
                 options,
                 this.GlobalNamespaceStyle,

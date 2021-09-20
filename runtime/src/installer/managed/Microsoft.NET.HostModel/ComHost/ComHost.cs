@@ -27,7 +27,8 @@ namespace Microsoft.NET.HostModel.ComHost
             string comHostDestinationFilePath,
             string clsidmapFilePath,
             IReadOnlyDictionary<int, string> typeLibraries = null
-        ) {
+        )
+        {
             var destinationDirectory = new FileInfo(comHostDestinationFilePath).Directory.FullName;
             if (!Directory.Exists(destinationDirectory))
             {

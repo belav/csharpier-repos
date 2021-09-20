@@ -50,7 +50,8 @@ namespace System.Web.Http.SelfHost
             RequestContext requestContext,
             HttpConfiguration configuration,
             HttpRequestMessage request
-        ) {
+        )
+        {
             Contract.Assert(requestContext != null);
             Contract.Assert(configuration != null);
             Contract.Assert(request != null);

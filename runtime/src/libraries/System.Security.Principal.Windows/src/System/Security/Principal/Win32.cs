@@ -55,7 +55,8 @@ namespace System.Security.Principal
             else if (
                 error == Interop.StatusOptions.STATUS_INSUFFICIENT_RESOURCES
                 || error == Interop.StatusOptions.STATUS_NO_MEMORY
-            ) {
+            )
+            {
                 throw new OutOfMemoryException();
             }
             else
@@ -168,7 +169,8 @@ namespace System.Security.Principal
             WellKnownSidType sidType,
             SecurityIdentifier? domainSid,
             out byte[]? resultSid
-        ) {
+        )
+        {
             //
             // Passing an array as big as it can ever be is a small price to pay for
             // not having to P/Invoke twice (once to get the buffer, once to get the data)
@@ -185,7 +187,8 @@ namespace System.Security.Principal
                     resultSid,
                     ref length
                 )
-            ) {
+            )
+            {
                 return Interop.Errors.ERROR_SUCCESS;
             }
             else
@@ -230,7 +233,8 @@ namespace System.Security.Principal
 
         internal static void InitializeReferencedDomainsPointer(
             SafeLsaMemoryHandle referencedDomains
-        ) {
+        )
+        {
             Debug.Assert(referencedDomains != null, "referencedDomains != null");
 
             // We don't know the real size of the referenced domains yet, so we need to set an initial
@@ -277,7 +281,8 @@ namespace System.Security.Principal
         internal static int GetWindowsAccountDomainSid(
             SecurityIdentifier sid,
             out SecurityIdentifier? resultSid
-        ) {
+        )
+        {
             //
             // Passing an array as big as it can ever be is a small price to pay for
             // not having to P/Invoke twice (once to get the buffer, once to get the data)
@@ -295,7 +300,8 @@ namespace System.Security.Principal
                     resultSidBinary,
                     ref sidLength
                 )
-            ) {
+            )
+            {
                 resultSid = new SecurityIdentifier(resultSidBinary, 0);
 
                 return Interop.Errors.ERROR_SUCCESS;

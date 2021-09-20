@@ -47,7 +47,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.Interactive
                 Workspace editorWorkspace,
                 ITextBuffer textBuffer,
                 out ITextUndoHistory undoHistory
-            ) {
+            )
+            {
                 undoHistory = null;
 
                 if (editorWorkspace is not InteractiveWindowWorkspace)

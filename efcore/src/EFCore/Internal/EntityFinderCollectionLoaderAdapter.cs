@@ -29,7 +29,8 @@ namespace Microsoft.EntityFrameworkCore.Internal
         public EntityFinderCollectionLoaderAdapter(
             IEntityFinder entityFinder,
             INavigation navigation
-        ) {
+        )
+        {
             _entityFinder = entityFinder;
             _navigation = navigation;
         }

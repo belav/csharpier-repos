@@ -64,7 +64,8 @@ namespace Microsoft.AspNetCore.DataProtection
         public static IDataProtectionProvider Create(
             DirectoryInfo keyDirectory,
             Action<IDataProtectionBuilder> setupAction
-        ) {
+        )
+        {
             if (keyDirectory == null)
             {
                 throw new ArgumentNullException(nameof(keyDirectory));
@@ -87,7 +88,8 @@ namespace Microsoft.AspNetCore.DataProtection
         public static IDataProtectionProvider Create(
             string applicationName,
             X509Certificate2 certificate
-        ) {
+        )
+        {
             if (string.IsNullOrEmpty(applicationName))
             {
                 throw new ArgumentNullException(nameof(applicationName));
@@ -117,7 +119,8 @@ namespace Microsoft.AspNetCore.DataProtection
         public static IDataProtectionProvider Create(
             DirectoryInfo keyDirectory,
             X509Certificate2 certificate
-        ) {
+        )
+        {
             if (keyDirectory == null)
             {
                 throw new ArgumentNullException(nameof(keyDirectory));
@@ -147,7 +150,8 @@ namespace Microsoft.AspNetCore.DataProtection
             DirectoryInfo keyDirectory,
             Action<IDataProtectionBuilder> setupAction,
             X509Certificate2 certificate
-        ) {
+        )
+        {
             if (keyDirectory == null)
             {
                 throw new ArgumentNullException(nameof(keyDirectory));
@@ -168,7 +172,8 @@ namespace Microsoft.AspNetCore.DataProtection
             DirectoryInfo? keyDirectory,
             Action<IDataProtectionBuilder> setupAction,
             X509Certificate2? certificate
-        ) {
+        )
+        {
             // build the service collection
             var serviceCollection = new ServiceCollection();
             var builder = serviceCollection.AddDataProtection();

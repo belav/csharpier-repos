@@ -41,7 +41,8 @@ namespace Microsoft.CodeAnalysis.Operations
         protected override (bool hasNext, int nextSlot, int nextIndex) MoveNext(
             int previousSlot,
             int previousIndex
-        ) {
+        )
+        {
             switch (previousSlot)
             {
                 case -1:
@@ -112,7 +113,8 @@ namespace Microsoft.CodeAnalysis.Operations
         protected override (bool hasNext, int nextSlot, int nextIndex) MoveNext(
             int previousSlot,
             int previousIndex
-        ) {
+        )
+        {
             switch (previousSlot)
             {
                 case -1:
@@ -277,15 +279,17 @@ namespace Microsoft.CodeAnalysis.Operations
             SyntaxNode syntax,
             ITypeSymbol? type,
             bool isImplicit
-        ) : base(
-            arguments,
-            argumentNames,
-            argumentRefKinds,
-            semanticModel,
-            syntax,
-            type,
-            isImplicit
-        ) {
+        )
+            : base(
+                arguments,
+                argumentNames,
+                argumentRefKinds,
+                semanticModel,
+                syntax,
+                type,
+                isImplicit
+            )
+        {
             Initializer = SetParentOperation(initializer, this);
         }
 
@@ -304,7 +308,8 @@ namespace Microsoft.CodeAnalysis.Operations
         protected override (bool hasNext, int nextSlot, int nextIndex) MoveNext(
             int previousSlot,
             int previousIndex
-        ) {
+        )
+        {
             switch (previousSlot)
             {
                 case -1:
@@ -357,15 +362,17 @@ namespace Microsoft.CodeAnalysis.Operations
             SyntaxNode syntax,
             ITypeSymbol? type,
             bool isImplicit
-        ) : base(
-            arguments,
-            argumentNames,
-            argumentRefKinds,
-            semanticModel,
-            syntax,
-            type,
-            isImplicit
-        ) {
+        )
+            : base(
+                arguments,
+                argumentNames,
+                argumentRefKinds,
+                semanticModel,
+                syntax,
+                type,
+                isImplicit
+            )
+        {
             Operation = SetParentOperation(operation, this);
         }
 
@@ -380,7 +387,8 @@ namespace Microsoft.CodeAnalysis.Operations
         protected override (bool hasNext, int nextSlot, int nextIndex) MoveNext(
             int previousSlot,
             int previousIndex
-        ) {
+        )
+        {
             switch (previousSlot)
             {
                 case -1:
@@ -437,15 +445,17 @@ namespace Microsoft.CodeAnalysis.Operations
             SyntaxNode syntax,
             ITypeSymbol? type,
             bool isImplicit
-        ) : base(
-            arguments,
-            argumentNames,
-            argumentRefKinds,
-            semanticModel,
-            syntax,
-            type,
-            isImplicit
-        ) {
+        )
+            : base(
+                arguments,
+                argumentNames,
+                argumentRefKinds,
+                semanticModel,
+                syntax,
+                type,
+                isImplicit
+            )
+        {
             Operation = SetParentOperation(operation, this);
         }
 
@@ -464,7 +474,8 @@ namespace Microsoft.CodeAnalysis.Operations
         protected override (bool hasNext, int nextSlot, int nextIndex) MoveNext(
             int previousSlot,
             int previousIndex
-        ) {
+        )
+        {
             switch (previousSlot)
             {
                 case -1:
@@ -547,7 +558,8 @@ namespace Microsoft.CodeAnalysis.Operations
         protected override (bool hasNext, int nextSlot, int nextIndex) MoveNext(
             int previousSlot,
             int previousIndex
-        ) {
+        )
+        {
             return ConditionIsTop ? moveNextConditionIsTop() : moveNextConditionIsBottom();
 
             (bool hasNext, int nextSlot, int nextIndex) moveNextConditionIsTop()
@@ -615,14 +627,15 @@ namespace Microsoft.CodeAnalysis.Operations
             SyntaxNode syntax,
             ITypeSymbol? type,
             ConstantValue? constantValue
-        ) : this(
-            new CaptureId(id),
-            semanticModel: null,
-            syntax: syntax,
-            type: type,
-            constantValue: constantValue,
-            isImplicit: true
-        ) { }
+        )
+            : this(
+                new CaptureId(id),
+                semanticModel: null,
+                syntax: syntax,
+                type: type,
+                constantValue: constantValue,
+                isImplicit: true
+            ) { }
     }
 
     internal sealed partial class FlowCaptureOperation
@@ -641,14 +654,16 @@ namespace Microsoft.CodeAnalysis.Operations
             IOperation operand,
             ITypeSymbol type,
             ConstantValue? constantValue
-        ) : this(
-            operand,
-            semanticModel: null,
-            syntax: syntax,
-            type: type,
-            constantValue: constantValue,
-            isImplicit: true
-        ) {
+        )
+            : this(
+                operand,
+                semanticModel: null,
+                syntax: syntax,
+                type: type,
+                constantValue: constantValue,
+                isImplicit: true
+            )
+        {
             Debug.Assert(operand != null);
         }
     }

@@ -43,7 +43,8 @@ namespace Moq
         private static List<KeyValuePair<int, object>> GetOutValues(
             IReadOnlyList<Expression> arguments,
             ParameterInfo[] parameters
-        ) {
+        )
+        {
             List<KeyValuePair<int, object>> outValues = null;
             for (int i = 0, n = parameters.Length; i < n; ++i)
             {
@@ -53,7 +54,8 @@ namespace Moq
                     if (
                         (parameter.Attributes & (ParameterAttributes.In | ParameterAttributes.Out))
                         == ParameterAttributes.Out
-                    ) {
+                    )
+                    {
                         var constant = arguments[i].PartialEval() as ConstantExpression;
                         if (constant == null)
                         {

@@ -44,7 +44,8 @@ namespace Microsoft.CodeAnalysis.ConvertIfToSwitch
             Feature feature,
             bool convertToSwitchExpression,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var root = await document.GetRequiredSyntaxRootAsync(cancellationToken)
                 .ConfigureAwait(false);
             var generator = SyntaxGenerator.GetGenerator(document);
@@ -78,7 +79,8 @@ namespace Microsoft.CodeAnalysis.ConvertIfToSwitch
             AnalyzedSwitchSection section,
             SyntaxGenerator generator,
             Feature feature
-        ) {
+        )
+        {
             var statements = AsSwitchSectionStatements(section.Body);
             return section.Labels.IsDefault
               ? generator.DefaultSwitchSection(statements)

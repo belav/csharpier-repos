@@ -18,7 +18,8 @@ namespace System.Formats.Cbor.Tests
         public static void WriteByteString_SingleValue_HappyPath(
             string hexInput,
             string hexExpectedEncoding
-        ) {
+        )
+        {
             byte[] expectedEncoding = hexExpectedEncoding.HexToByteArray();
             byte[] input = hexInput.HexToByteArray();
             var writer = new CborWriter();
@@ -41,7 +42,8 @@ namespace System.Formats.Cbor.Tests
         public static void WriteByteString_IndefiniteLength_NoPatching_SingleValue_HappyPath(
             string[] hexChunkInputs,
             string hexExpectedEncoding
-        ) {
+        )
+        {
             byte[][] chunkInputs = hexChunkInputs.Select(ch => ch.HexToByteArray()).ToArray();
             byte[] expectedEncoding = hexExpectedEncoding.HexToByteArray();
 
@@ -58,7 +60,8 @@ namespace System.Formats.Cbor.Tests
         public static void WriteByteString_IndefiniteLength_WithPatching_SingleValue_HappyPath(
             string[] hexChunkInputs,
             string hexExpectedEncoding
-        ) {
+        )
+        {
             byte[][] chunkInputs = hexChunkInputs.Select(ch => ch.HexToByteArray()).ToArray();
             byte[] expectedEncoding = hexExpectedEncoding.HexToByteArray();
 
@@ -79,7 +82,8 @@ namespace System.Formats.Cbor.Tests
         [InlineData(nameof(CborWriter.WriteEndMap))]
         public static void WriteByteString_IndefiniteLength_NestedWrites_ShouldThrowInvalidOperationException(
             string opName
-        ) {
+        )
+        {
             var writer = new CborWriter();
             writer.WriteStartIndefiniteLengthByteString();
             Assert.Throws<InvalidOperationException>(() => Helpers.ExecOperation(writer, opName));
@@ -91,7 +95,8 @@ namespace System.Formats.Cbor.Tests
         [InlineData(nameof(CborWriter.WriteEndMap))]
         public static void WriteByteString_IndefiniteLength_ImbalancedWrites_ShouldThrowInvalidOperationException(
             string opName
-        ) {
+        )
+        {
             var writer = new CborWriter();
             writer.WriteStartIndefiniteLengthByteString();
             Assert.Throws<InvalidOperationException>(() => Helpers.ExecOperation(writer, opName));
@@ -102,7 +107,8 @@ namespace System.Formats.Cbor.Tests
         [InlineData(CborConformanceMode.Ctap2Canonical)]
         public static void WriteStartByteStringIndefiniteLength_NoPatching_UnsupportedConformance_ShouldThrowInvalidOperationException(
             CborConformanceMode conformanceMode
-        ) {
+        )
+        {
             var writer = new CborWriter(conformanceMode, convertIndefiniteLengthEncodings: false);
             Assert.Throws<InvalidOperationException>(
                 () => writer.WriteStartIndefiniteLengthByteString()

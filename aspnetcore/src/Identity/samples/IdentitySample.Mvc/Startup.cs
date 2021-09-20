@@ -67,7 +67,8 @@ namespace IdentitySample
             IApplicationBuilder app,
             IWebHostEnvironment env,
             ILoggerFactory loggerFactory
-        ) {
+        )
+        {
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();

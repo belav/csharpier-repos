@@ -17,7 +17,8 @@ namespace Microsoft.AspNetCore.Rewrite
             RewriteContext context,
             BackReferenceCollection? ruleBackReferences,
             BackReferenceCollection? conditionBackReferences
-        ) {
+        )
+        {
             foreach (var pattern in PatternSegments)
             {
                 context.Builder.Append(

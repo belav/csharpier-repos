@@ -50,7 +50,8 @@ namespace System.Net.WebSockets
             ArraySegment<byte> internalBuffer,
             int receiveBufferSize,
             int sendBufferSize
-        ) {
+        )
+        {
             Debug.Assert(internalBuffer.Array != null, "'internalBuffer.Array' MUST NOT be NULL.");
             Debug.Assert(
                 receiveBufferSize >= HttpWebSocket.MinReceiveBufferSize,
@@ -120,7 +121,8 @@ namespace System.Net.WebSockets
         internal static WebSocketBuffer CreateServerBuffer(
             ArraySegment<byte> internalBuffer,
             int receiveBufferSize
-        ) {
+        )
+        {
             int sendBufferSize = GetNativeSendBufferSize(HttpWebSocket.MinSendBufferSize, true);
             Debug.Assert(
                 internalBuffer.Count
@@ -139,7 +141,8 @@ namespace System.Net.WebSockets
                     (int)webSocketState,
                     int.MinValue
                 ) != int.MinValue
-            ) {
+            )
+            {
                 return;
             }
 
@@ -273,7 +276,8 @@ namespace System.Net.WebSockets
         internal ArraySegment<byte> ConvertPinnedSendPayloadFromNative(
             Interop.WebSocket.Buffer buffer,
             WebSocketProtocolComponent.BufferType bufferType
-        ) {
+        )
+        {
             if (!IsPinnedSendPayloadBuffer(buffer, bufferType))
             {
                 // Indicates a violation in the API contract that could indicate
@@ -321,7 +325,8 @@ namespace System.Net.WebSockets
         internal bool IsPinnedSendPayloadBuffer(
             Interop.WebSocket.Buffer buffer,
             WebSocketProtocolComponent.BufferType bufferType
-        ) {
+        )
+        {
             if (_sendBufferState != SendBufferState.SendPayloadSpecified)
             {
                 return false;
@@ -364,7 +369,8 @@ namespace System.Net.WebSockets
             int unconsumedDataOffset,
             WebSocketMessageType messageType,
             bool endOfMessage
-        ) {
+        )
+        {
             ThrowIfDisposed();
             int bytesBuffered = payload.Count - unconsumedDataOffset;
 
@@ -394,7 +400,8 @@ namespace System.Net.WebSockets
         internal bool ReceiveFromBufferedPayload(
             ArraySegment<byte> buffer,
             out WebSocketReceiveResult receiveResult
-        ) {
+        )
+        {
             ThrowIfDisposed();
             ValidateBufferedPayload();
 
@@ -438,7 +445,8 @@ namespace System.Net.WebSockets
             WebSocketProtocolComponent.Action action,
             Interop.WebSocket.Buffer buffer,
             WebSocketProtocolComponent.BufferType bufferType
-        ) {
+        )
+        {
             ThrowIfDisposed();
 
             IntPtr bufferData;
@@ -473,7 +481,8 @@ namespace System.Net.WebSockets
             Interop.WebSocket.Buffer buffer,
             out WebSocketCloseStatus closeStatus,
             out string? reason
-        ) {
+        )
+        {
             ThrowIfDisposed();
             IntPtr bufferData;
             uint bufferLength;
@@ -526,7 +535,8 @@ namespace System.Net.WebSockets
             WebSocketProtocolComponent.BufferType bufferType,
             Interop.WebSocket.Buffer[] dataBuffers,
             uint dataBufferCount
-        ) {
+        )
+        {
             Debug.Assert(
                 dataBufferCount <= (uint)int.MaxValue,
                 "'dataBufferCount' MUST NOT be bigger than Int32.MaxValue."
@@ -599,7 +609,8 @@ namespace System.Net.WebSockets
                 && action != WebSocketProtocolComponent.Action.NoAction
                 && action != WebSocketProtocolComponent.Action.IndicateReceiveComplete
                 && action != WebSocketProtocolComponent.Action.IndicateSendComplete
-            ) {
+            )
+            {
                 Debug.Fail("At least one 'dataBuffer.Buffer' MUST NOT be NULL.");
             }
         }
@@ -614,7 +625,8 @@ namespace System.Net.WebSockets
             WebSocketProtocolComponent.BufferType bufferType,
             out IntPtr bufferData,
             out uint bufferLength
-        ) {
+        )
+        {
             bufferData = IntPtr.Zero;
             bufferLength = 0;
 
@@ -751,7 +763,8 @@ namespace System.Net.WebSockets
                 && nativeBufferStartAddress <= _endAddress
                 && nativeBufferEndAddress >= _startAddress
                 && nativeBufferEndAddress <= _endAddress
-            ) {
+            )
+            {
                 return true;
             }
 
@@ -772,7 +785,8 @@ namespace System.Net.WebSockets
             int receiveBufferSize,
             int sendBufferSize,
             bool isServerBuffer
-        ) {
+        )
+        {
             Debug.Assert(
                 receiveBufferSize >= HttpWebSocket.MinReceiveBufferSize,
                 "'receiveBufferSize' MUST be at least "
@@ -799,7 +813,8 @@ namespace System.Net.WebSockets
             int receiveBufferSize,
             int sendBufferSize,
             bool isServerBuffer
-        ) {
+        )
+        {
             Debug.Assert(
                 receiveBufferSize >= HttpWebSocket.MinReceiveBufferSize,
                 "'receiveBufferSize' MUST be at least "
@@ -831,7 +846,8 @@ namespace System.Net.WebSockets
             int receiveBufferSize,
             int sendBufferSize,
             bool isServerBuffer
-        ) {
+        )
+        {
             Debug.Assert(
                 receiveBufferSize >= HttpWebSocket.MinReceiveBufferSize,
                 "'receiveBufferSize' MUST be at least "
@@ -881,7 +897,8 @@ namespace System.Net.WebSockets
                 int count,
                 WebSocketMessageType messageType,
                 bool endOfMessage
-            ) {
+            )
+            {
                 if (count < 0)
                 {
                     throw new ArgumentOutOfRangeException(nameof(count));

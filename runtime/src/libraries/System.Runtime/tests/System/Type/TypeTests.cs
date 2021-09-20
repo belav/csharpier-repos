@@ -90,7 +90,8 @@ namespace System.Tests
         public void FilterName_Invoke_DelegateFiltersExpectedMembers(
             string filterCriteria,
             bool expected
-        ) {
+        )
+        {
             MethodInfo mi = typeof(TypeTests).GetMethod(
                 nameof(FilterName_Invoke_DelegateFiltersExpectedMembers)
             );
@@ -134,7 +135,8 @@ namespace System.Tests
         public void FilterNameIgnoreCase_Invoke_DelegateFiltersExpectedMembers(
             string filterCriteria,
             bool expected
-        ) {
+        )
+        {
             MethodInfo mi = typeof(TypeTests).GetMethod(
                 nameof(FilterNameIgnoreCase_Invoke_DelegateFiltersExpectedMembers)
             );
@@ -232,7 +234,8 @@ namespace System.Tests
             MemberFilter filter,
             object filterCriteria,
             int expectedLength
-        ) {
+        )
+        {
             Assert.Equal(
                 expectedLength,
                 typeof(TypeTests).FindMembers(
@@ -609,7 +612,8 @@ namespace System.Tests
             string typeName,
             Type expectedException,
             bool alwaysThrowsException
-        ) {
+        )
+        {
             if (!alwaysThrowsException)
             {
                 Assert.Null(Type.GetType(typeName, throwOnError: false, ignoreCase: false));
@@ -692,7 +696,8 @@ namespace System.Tests
                 Type type in NonArrayBaseTypes.Select(
                     nonArrayBaseType => nonArrayBaseType.MakeArrayType()
                 )
-            ) {
+            )
+            {
                 Assert.True(type.IsSZArray);
             }
         }
@@ -704,7 +709,8 @@ namespace System.Tests
                 Type type in NonArrayBaseTypes.Select(
                     nonArrayBaseType => nonArrayBaseType.MakeArrayType(1)
                 )
-            ) {
+            )
+            {
                 Assert.False(type.IsSZArray);
             }
 
@@ -712,7 +718,8 @@ namespace System.Tests
                 Type type in NonArrayBaseTypes.Select(
                     nonArrayBaseType => nonArrayBaseType.MakeArrayType(2)
                 )
-            ) {
+            )
+            {
                 Assert.False(type.IsSZArray);
             }
         }
@@ -751,7 +758,8 @@ namespace System.Tests
                 Type type in NonArrayBaseTypes.Select(
                     nonArrayBaseType => nonArrayBaseType.MakeArrayType()
                 )
-            ) {
+            )
+            {
                 Assert.False(type.IsVariableBoundArray);
             }
         }
@@ -763,7 +771,8 @@ namespace System.Tests
                 Type type in NonArrayBaseTypes.Select(
                     nonArrayBaseType => nonArrayBaseType.MakeArrayType(1)
                 )
-            ) {
+            )
+            {
                 Assert.True(type.IsVariableBoundArray);
             }
 
@@ -771,7 +780,8 @@ namespace System.Tests
                 Type type in NonArrayBaseTypes.Select(
                     nonArrayBaseType => nonArrayBaseType.MakeArrayType(2)
                 )
-            ) {
+            )
+            {
                 Assert.True(type.IsVariableBoundArray);
             }
         }
@@ -921,7 +931,8 @@ namespace System.Tests
             bool isGenericParameter,
             bool isGenericTypeParameter,
             bool isGenericMethodParameter
-        ) {
+        )
+        {
             Assert.Equal(isGenericParameter, type.IsGenericParameter);
             Assert.Equal(isGenericTypeParameter, type.IsGenericTypeParameter);
             Assert.Equal(isGenericMethodParameter, type.IsGenericMethodParameter);
@@ -1145,7 +1156,8 @@ namespace System.Tests
             Type interfaceType,
             Type classType,
             Tuple<MethodInfo, MethodInfo>[] expectedMap
-        ) {
+        )
+        {
             InterfaceMapping actualMapping = classType.GetInterfaceMap(interfaceType);
 
             Assert.Equal(interfaceType, actualMapping.InterfaceType);

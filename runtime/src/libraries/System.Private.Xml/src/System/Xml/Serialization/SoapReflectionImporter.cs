@@ -34,7 +34,8 @@ namespace System.Xml.Serialization
         public SoapReflectionImporter(
             SoapAttributeOverrides? attributeOverrides,
             string? defaultNamespace
-        ) {
+        )
+        {
             if (defaultNamespace == null)
                 defaultNamespace = string.Empty;
             if (attributeOverrides == null)
@@ -104,7 +105,8 @@ namespace System.Xml.Serialization
             string? elementName,
             string? ns,
             XmlReflectionMember[] members
-        ) {
+        )
+        {
             return ImportMembersMapping(elementName, ns, members, true, true, false);
         }
 
@@ -115,7 +117,8 @@ namespace System.Xml.Serialization
             XmlReflectionMember[] members,
             bool hasWrapperElement,
             bool writeAccessors
-        ) {
+        )
+        {
             return ImportMembersMapping(
                 elementName,
                 ns,
@@ -134,7 +137,8 @@ namespace System.Xml.Serialization
             bool hasWrapperElement,
             bool writeAccessors,
             bool validate
-        ) {
+        )
+        {
             return ImportMembersMapping(
                 elementName,
                 ns,
@@ -155,7 +159,8 @@ namespace System.Xml.Serialization
             bool writeAccessors,
             bool validate,
             XmlMappingAccess access
-        ) {
+        )
+        {
             ElementAccessor element = new ElementAccessor();
             element.IsSoap = true;
             element.Name =
@@ -212,7 +217,8 @@ namespace System.Xml.Serialization
             TypeModel model,
             string dataType,
             RecursionLimiter limiter
-        ) {
+        )
+        {
             if (dataType.Length > 0)
             {
                 if (!model.TypeDesc.IsPrimitive)
@@ -356,7 +362,8 @@ namespace System.Xml.Serialization
         private NullableMapping CreateNullableMapping(
             TypeMapping baseMapping,
             [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)] Type type
-        ) {
+        )
+        {
             TypeDesc typeDesc = baseMapping.TypeDesc!.GetNullableTypeDesc(type);
             TypeMapping? existingMapping = (TypeMapping?)_nullables[
                 baseMapping.TypeName!,
@@ -490,7 +497,8 @@ namespace System.Xml.Serialization
             StructMapping mapping,
             StructModel model,
             RecursionLimiter limiter
-        ) {
+        )
+        {
             if (mapping.IsFullyInitialized)
                 return true;
             if (model.TypeDesc.BaseTypeDesc != null)
@@ -550,7 +558,8 @@ namespace System.Xml.Serialization
                     !member.TypeDesc!.IsPrimitive
                     && !member.TypeDesc.IsEnum
                     && !member.TypeDesc.IsOptionalValue
-                ) {
+                )
+                {
                     if (model.TypeDesc.IsValueType)
                         throw new NotSupportedException(
                             SR.Format(SR.XmlRpcRefsInValueType, model.TypeDesc.FullName)
@@ -795,7 +804,8 @@ namespace System.Xml.Serialization
             bool writeAccessors,
             bool validateWrapperElement,
             RecursionLimiter limiter
-        ) {
+        )
+        {
             MembersMapping members = new MembersMapping();
             members.TypeDesc = _typeScope.GetTypeDesc(typeof(object[]));
             MemberMapping[] mappings = new MemberMapping[xmlReflectionMembers.Length];
@@ -848,7 +858,8 @@ namespace System.Xml.Serialization
             XmlReflectionMember[] xmlReflectionMembers,
             XmlSchemaForm form,
             RecursionLimiter limiter
-        ) {
+        )
+        {
             SoapAttributes a = xmlReflectionMember.SoapAttributes;
             if (a.SoapIgnore)
                 return null;
@@ -882,7 +893,8 @@ namespace System.Xml.Serialization
             SoapAttributes a,
             string ns,
             RecursionLimiter limiter
-        ) {
+        )
+        {
             if (a.SoapIgnore)
                 return null;
             MemberMapping member = new MemberMapping();
@@ -906,7 +918,8 @@ namespace System.Xml.Serialization
             string? ns,
             XmlSchemaForm form,
             RecursionLimiter limiter
-        ) {
+        )
+        {
             Type accessorType = model.FieldType;
             string accessorName = model.Name;
             accessor.TypeDesc = _typeScope.GetTypeDesc(accessorType);

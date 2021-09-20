@@ -55,7 +55,8 @@ namespace Microsoft.AspNetCore.Mvc.Razor
             IOptions<RazorViewEngineOptions> optionsAccessor,
             ILoggerFactory loggerFactory,
             DiagnosticListener diagnosticListener
-        ) {
+        )
+        {
             _options = optionsAccessor.Value;
 
             if (_options.ViewLocationFormats.Count == 0)
@@ -220,7 +221,8 @@ namespace Microsoft.AspNetCore.Mvc.Razor
             string? executingFilePath,
             string pagePath,
             bool isMainPage
-        ) {
+        )
+        {
             var applicationRelativePath = GetAbsolutePath(executingFilePath, pagePath)!;
             var cacheKey = new ViewLocationCacheKey(applicationRelativePath, isMainPage);
             if (!ViewLookupCache.TryGetValue(cacheKey, out ViewLocationCacheResult? cacheResult))
@@ -255,7 +257,8 @@ namespace Microsoft.AspNetCore.Mvc.Razor
             ActionContext actionContext,
             string pageName,
             bool isMainPage
-        ) {
+        )
+        {
             var controllerName = GetNormalizedRouteValue(actionContext, ControllerKey);
             var areaName = GetNormalizedRouteValue(actionContext, AreaKey);
             string? razorPageName = null;
@@ -351,7 +354,8 @@ namespace Microsoft.AspNetCore.Mvc.Razor
             if (
                 !string.IsNullOrEmpty(context.AreaName)
                 && !string.IsNullOrEmpty(context.ControllerName)
-            ) {
+            )
+            {
                 return _options.AreaViewLocationFormats;
             }
             else if (!string.IsNullOrEmpty(context.ControllerName))
@@ -360,7 +364,8 @@ namespace Microsoft.AspNetCore.Mvc.Razor
             }
             else if (
                 !string.IsNullOrEmpty(context.AreaName) && !string.IsNullOrEmpty(context.PageName)
-            ) {
+            )
+            {
                 return _options.AreaPageViewLocationFormats;
             }
             else if (!string.IsNullOrEmpty(context.PageName))
@@ -378,7 +383,8 @@ namespace Microsoft.AspNetCore.Mvc.Razor
         private ViewLocationCacheResult OnCacheMiss(
             ViewLocationExpanderContext expanderContext,
             ViewLocationCacheKey cacheKey
-        ) {
+        )
+        {
             var viewLocations = GetViewLocationFormats(expanderContext);
 
             var expanders = _options.ViewLocationExpanders;
@@ -434,7 +440,8 @@ namespace Microsoft.AspNetCore.Mvc.Razor
             HashSet<IChangeToken> expirationTokens,
             string relativePath,
             bool isMainPage
-        ) {
+        )
+        {
             var factoryResult = _pageFactory.CreateFactory(relativePath);
             var viewDescriptor = factoryResult.ViewDescriptor;
             if (viewDescriptor?.ExpirationTokens != null)
@@ -467,7 +474,8 @@ namespace Microsoft.AspNetCore.Mvc.Razor
         private IReadOnlyList<ViewLocationCacheItem> GetViewStartPages(
             string path,
             HashSet<IChangeToken> expirationTokens
-        ) {
+        )
+        {
             var viewStartPages = new List<ViewLocationCacheItem>();
 
             foreach (var filePath in RazorFileHierarchy.GetViewStartPaths(path))
@@ -500,7 +508,8 @@ namespace Microsoft.AspNetCore.Mvc.Razor
         private ViewEngineResult CreateViewEngineResult(
             ViewLocationCacheResult result,
             string viewName
-        ) {
+        )
+        {
             if (!result.Success)
             {
                 return ViewEngineResult.NotFound(viewName, result.SearchedLocations!);

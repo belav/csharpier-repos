@@ -15,14 +15,16 @@ namespace Microsoft.CodeAnalysis.CSharp
     {
         public override BoundNode VisitCompoundAssignmentOperator(
             BoundCompoundAssignmentOperator node
-        ) {
+        )
+        {
             return VisitCompoundAssignmentOperator(node, true);
         }
 
         private BoundExpression VisitCompoundAssignmentOperator(
             BoundCompoundAssignmentOperator node,
             bool used
-        ) {
+        )
+        {
             Debug.Assert(
                 TypeSymbol.Equals(
                     node.Right.Type,
@@ -57,7 +59,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                     binaryOperator == BinaryOperatorKind.Addition
                     || binaryOperator == BinaryOperatorKind.Subtraction
                 )
-            ) {
+            )
+            {
                 // If this could be an event assignment at runtime, we need to rewrite to the following form:
                 // Original:
                 //   receiver.EV += handler
@@ -225,7 +228,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             BoundExpression? receiverOpt,
             ArrayBuilder<BoundExpression> stores,
             ArrayBuilder<LocalSymbol> temps
-        ) {
+        )
+        {
             Debug.Assert(
                 propertyOrEvent.Kind == SymbolKind.Property
                     || propertyOrEvent.Kind == SymbolKind.Event
@@ -254,7 +258,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                 receiverOpt == null
                 || propertyOrEvent.IsStatic
                 || !CanChangeValueBetweenReads(receiverOpt)
-            ) {
+            )
+            {
                 return receiverOpt;
             }
 
@@ -291,7 +296,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             BoundDynamicMemberAccess memberAccess,
             ArrayBuilder<BoundExpression> stores,
             ArrayBuilder<LocalSymbol> temps
-        ) {
+        )
+        {
             if (!CanChangeValueBetweenReads(memberAccess.Receiver))
             {
                 return memberAccess;
@@ -319,7 +325,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             BoundIndexerAccess indexerAccess,
             ArrayBuilder<BoundExpression> stores,
             ArrayBuilder<LocalSymbol> temps
-        ) {
+        )
+        {
             var receiverOpt = indexerAccess.ReceiverOpt;
             Debug.Assert(receiverOpt != null);
 
@@ -498,7 +505,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             ArrayBuilder<BoundExpression> stores,
             ArrayBuilder<LocalSymbol> temps,
             bool isDynamicAssignment
-        ) {
+        )
+        {
             // A pattern indexer is fundamentally a sequence which ends in either
             // a conventional indexer access or a method call. The lowering of a
             // pattern indexer already lowers everything we need into temps, so
@@ -528,7 +536,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             ref BoundExpression? receiver,
             ArrayBuilder<BoundExpression> stores,
             ArrayBuilder<LocalSymbol> temps
-        ) {
+        )
+        {
             Debug.Assert(
                 fieldOrEvent.Kind == SymbolKind.Field || fieldOrEvent.Kind == SymbolKind.Event
             );
@@ -576,7 +585,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             BoundDynamicIndexerAccess indexerAccess,
             ArrayBuilder<BoundExpression> stores,
             ArrayBuilder<LocalSymbol> temps
-        ) {
+        )
+        {
             BoundExpression loweredReceiver;
             if (CanChangeValueBetweenReads(indexerAccess.Receiver))
             {
@@ -649,7 +659,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             ArrayBuilder<BoundExpression> stores,
             ArrayBuilder<LocalSymbol> temps,
             bool isDynamicAssignment
-        ) {
+        )
+        {
             // There are five possible cases.
             //
             // Case 1: receiver.Prop += value is transformed into
@@ -761,7 +772,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                                 stores,
                                 temps
                             )
-                        ) {
+                        )
+                        {
                             return MakeFieldAccess(
                                 fieldAccess.Syntax,
                                 receiverOpt,
@@ -886,7 +898,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                                 stores,
                                 temps
                             )
-                        ) {
+                        )
+                        {
                             return MakeEventAccess(
                                 eventAccess.Syntax,
                                 receiverOpt,
@@ -931,7 +944,8 @@ namespace Microsoft.CodeAnalysis.CSharp
         private BoundExpression BoxReceiver(
             BoundExpression rewrittenReceiver,
             NamedTypeSymbol memberContainingType
-        ) {
+        )
+        {
             return MakeConversionNode(
                 rewrittenReceiver.Syntax,
                 rewrittenReceiver,
@@ -947,7 +961,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             ImmutableArray<BoundExpression> loweredIndices,
             ArrayBuilder<BoundExpression> stores,
             ArrayBuilder<LocalSymbol> temps
-        ) {
+        )
+        {
             BoundAssignmentOperator assignmentToArrayTemp;
             var arrayTemp = _factory.StoreToTemp(loweredExpression, out assignmentToArrayTemp);
             stores.Add(assignmentToArrayTemp);
@@ -991,7 +1006,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             BoundExpression expression,
             bool localsMayBeAssignedOrCaptured = true,
             bool structThisCanChangeValueBetweenReads = false
-        ) {
+        )
+        {
             if (expression.IsDefaultValue())
             {
                 return false;
@@ -1089,7 +1105,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                                 SpecialMember.System_Nullable_T_GetValueOrDefault
                             )
                             || IsSpecialMember(method, SpecialMember.System_Nullable_T_get_HasValue)
-                        ) {
+                        )
+                        {
                             Debug.Assert(call.ReceiverOpt is { });
                             return ReadIsSideeffecting(call.ReceiverOpt);
                         }

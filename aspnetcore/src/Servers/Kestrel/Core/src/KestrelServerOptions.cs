@@ -174,7 +174,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core
             if (
                 httpsOptions.ServerCertificate != null
                 || httpsOptions.ServerCertificateSelector != null
-            ) {
+            )
+            {
                 return;
             }
 

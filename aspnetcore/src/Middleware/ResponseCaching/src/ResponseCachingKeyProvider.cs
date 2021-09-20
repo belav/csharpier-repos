@@ -24,7 +24,8 @@ namespace Microsoft.AspNetCore.ResponseCaching
         internal ResponseCachingKeyProvider(
             ObjectPoolProvider poolProvider,
             IOptions<ResponseCachingOptions> options
-        ) {
+        )
+        {
             if (poolProvider == null)
             {
                 throw new ArgumentNullException(nameof(poolProvider));
@@ -100,7 +101,8 @@ namespace Microsoft.AspNetCore.ResponseCaching
             if (
                 StringValues.IsNullOrEmpty(varyByRules.Headers)
                 && StringValues.IsNullOrEmpty(varyByRules.QueryKeys)
-            ) {
+            )
+            {
                 return varyByRules.VaryByKeyPrefix;
             }
 
@@ -145,7 +147,8 @@ namespace Microsoft.AspNetCore.ResponseCaching
                     if (
                         varyByRules.QueryKeys.Count == 1
                         && string.Equals(varyByRules.QueryKeys[0], "*", StringComparison.Ordinal)
-                    ) {
+                    )
+                    {
                         // Vary by all available query keys
                         var queryArray = context.HttpContext.Request.Query.ToArray();
                         // Query keys are aggregated case-insensitively whereas the query values are compared ordinally.

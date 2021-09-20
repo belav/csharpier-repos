@@ -82,7 +82,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UseExpressionBody
             ImmutableArray<Diagnostic> diagnostics,
             SyntaxEditor editor,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var semanticModel = await document.GetSemanticModelAsync(cancellationToken)
                 .ConfigureAwait(false);
 
@@ -111,7 +112,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UseExpressionBody
             Diagnostic diagnostic,
             HashSet<AccessorListSyntax> accessorLists,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var declarationLocation = diagnostic.AdditionalLocations[0];
             var helper = _helpers.Single(h => h.DiagnosticId == diagnostic.Id);
             var declaration = declarationLocation.FindNode(cancellationToken);

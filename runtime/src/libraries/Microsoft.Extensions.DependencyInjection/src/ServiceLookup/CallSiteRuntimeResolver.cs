@@ -21,14 +21,16 @@ namespace Microsoft.Extensions.DependencyInjection.ServiceLookup
         protected override object VisitDisposeCache(
             ServiceCallSite transientCallSite,
             RuntimeResolverContext context
-        ) {
+        )
+        {
             return context.Scope.CaptureDisposable(VisitCallSiteMain(transientCallSite, context));
         }
 
         protected override object VisitConstructor(
             ConstructorCallSite constructorCallSite,
             RuntimeResolverContext context
-        ) {
+        )
+        {
             object[] parameterValues;
             if (constructorCallSite.ParameterCallSites.Length == 0)
             {
@@ -70,7 +72,8 @@ namespace Microsoft.Extensions.DependencyInjection.ServiceLookup
         protected override object VisitRootCache(
             ServiceCallSite callSite,
             RuntimeResolverContext context
-        ) {
+        )
+        {
             var lockType = RuntimeResolverLock.Root;
             bool lockTaken = false;
 
@@ -98,7 +101,8 @@ namespace Microsoft.Extensions.DependencyInjection.ServiceLookup
         protected override object VisitScopeCache(
             ServiceCallSite callSite,
             RuntimeResolverContext context
-        ) {
+        )
+        {
             // Check if we are in the situation where scoped service was promoted to singleton
             // and we need to lock the root
             return context.Scope == context.Scope.Engine.Root
@@ -111,7 +115,8 @@ namespace Microsoft.Extensions.DependencyInjection.ServiceLookup
             RuntimeResolverContext context,
             ServiceProviderEngineScope serviceProviderEngine,
             RuntimeResolverLock lockType
-        ) {
+        )
+        {
             bool lockTaken = false;
             object sync = serviceProviderEngine.Sync;
 
@@ -143,7 +148,8 @@ namespace Microsoft.Extensions.DependencyInjection.ServiceLookup
             RuntimeResolverContext context,
             RuntimeResolverLock lockType,
             ServiceProviderEngineScope serviceProviderEngine
-        ) {
+        )
+        {
             IDictionary<ServiceCacheKey, object> resolvedServices =
                 serviceProviderEngine.ResolvedServices;
 
@@ -182,28 +188,32 @@ namespace Microsoft.Extensions.DependencyInjection.ServiceLookup
         protected override object VisitConstant(
             ConstantCallSite constantCallSite,
             RuntimeResolverContext context
-        ) {
+        )
+        {
             return constantCallSite.DefaultValue;
         }
 
         protected override object VisitServiceProvider(
             ServiceProviderCallSite serviceProviderCallSite,
             RuntimeResolverContext context
-        ) {
+        )
+        {
             return context.Scope;
         }
 
         protected override object VisitServiceScopeFactory(
             ServiceScopeFactoryCallSite serviceScopeFactoryCallSite,
             RuntimeResolverContext context
-        ) {
+        )
+        {
             return context.Scope.Engine;
         }
 
         protected override object VisitIEnumerable(
             IEnumerableCallSite enumerableCallSite,
             RuntimeResolverContext context
-        ) {
+        )
+        {
             var array = Array.CreateInstance(
                 enumerableCallSite.ItemType,
                 enumerableCallSite.ServiceCallSites.Length
@@ -220,7 +230,8 @@ namespace Microsoft.Extensions.DependencyInjection.ServiceLookup
         protected override object VisitFactory(
             FactoryCallSite factoryCallSite,
             RuntimeResolverContext context
-        ) {
+        )
+        {
             return factoryCallSite.Factory(context.Scope);
         }
     }

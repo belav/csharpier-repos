@@ -26,13 +26,15 @@ namespace Microsoft.CodeAnalysis.Formatting
                 int space,
                 bool elastic,
                 string language
-            ) : this(
-                options,
-                lineBreaks: 0,
-                indentation: space,
-                elastic: elastic,
-                language: language
-            ) {
+            )
+                : this(
+                    options,
+                    lineBreaks: 0,
+                    indentation: space,
+                    elastic: elastic,
+                    language: language
+                )
+            {
                 Contract.ThrowIfFalse(space >= 0);
             }
 
@@ -62,7 +64,8 @@ namespace Microsoft.CodeAnalysis.Formatting
                 int space,
                 FormattingContext context,
                 ChainedFormattingRules formattingRules
-            ) {
+            )
+            {
                 if (this.LineBreaks == 0 && this.Spaces == space)
                 {
                     return this;
@@ -84,7 +87,8 @@ namespace Microsoft.CodeAnalysis.Formatting
                 FormattingContext context,
                 ChainedFormattingRules formattingRules,
                 CancellationToken cancellationToken
-            ) {
+            )
+            {
                 Contract.ThrowIfFalse(line > 0);
 
                 if (this.LineBreaks == line && this.Spaces == indentation)
@@ -107,7 +111,8 @@ namespace Microsoft.CodeAnalysis.Formatting
                 FormattingContext context,
                 ChainedFormattingRules formattingRules,
                 CancellationToken cancellationToken
-            ) {
+            )
+            {
                 if (this.Spaces == indentation)
                 {
                     return this;
@@ -129,7 +134,8 @@ namespace Microsoft.CodeAnalysis.Formatting
                 Action<int, TokenStream, TriviaData> formattingResultApplier,
                 CancellationToken cancellationToken,
                 int tokenPairIndex = TokenPairIndexNotNeeded
-            ) {
+            )
+            {
                 // nothing changed, nothing to format
             }
 

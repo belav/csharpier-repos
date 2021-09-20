@@ -192,7 +192,8 @@ namespace Microsoft.EntityFrameworkCore.ModelBuilding
 
             public override TestModelBuilder Entity<TEntity>(
                 Action<TestEntityTypeBuilder<TEntity>> buildAction
-            ) {
+            )
+            {
                 ModelBuilder.Entity(
                     typeof(TEntity),
                     entityTypeBuilder =>
@@ -204,7 +205,8 @@ namespace Microsoft.EntityFrameworkCore.ModelBuilding
             public override TestModelBuilder SharedTypeEntity<TEntity>(
                 string name,
                 Action<TestEntityTypeBuilder<TEntity>> buildAction
-            ) {
+            )
+            {
                 ModelBuilder.SharedTypeEntity(
                     name,
                     typeof(TEntity),
@@ -292,7 +294,8 @@ namespace Microsoft.EntityFrameworkCore.ModelBuilding
 
             public override TestPropertyBuilder<TProperty> Property<TProperty>(
                 Expression<Func<TEntity, TProperty>> propertyExpression
-            ) {
+            )
+            {
                 var memberInfo = propertyExpression.GetMemberAccess();
                 return new NonGenericTestPropertyBuilder<TProperty>(
                     EntityTypeBuilder.Property(
@@ -740,7 +743,8 @@ namespace Microsoft.EntityFrameworkCore.ModelBuilding
         {
             public NonGenericTestOwnedEntityTypeBuilder(
                 OwnedEntityTypeBuilder ownedEntityTypeBuilder
-            ) {
+            )
+            {
                 OwnedEntityTypeBuilder = ownedEntityTypeBuilder;
             }
 
@@ -964,7 +968,8 @@ namespace Microsoft.EntityFrameworkCore.ModelBuilding
         {
             public NonGenericTestReferenceNavigationBuilder(
                 ReferenceNavigationBuilder referenceNavigationBuilder
-            ) {
+            )
+            {
                 ReferenceNavigationBuilder = referenceNavigationBuilder;
             }
 
@@ -1010,7 +1015,8 @@ namespace Microsoft.EntityFrameworkCore.ModelBuilding
         {
             public NonGenericTestCollectionNavigationBuilder(
                 CollectionNavigationBuilder collectionNavigationBuilder
-            ) {
+            )
+            {
                 CollectionNavigationBuilder = collectionNavigationBuilder;
             }
 
@@ -1056,7 +1062,8 @@ namespace Microsoft.EntityFrameworkCore.ModelBuilding
         {
             public NonGenericTestReferenceCollectionBuilder(
                 ReferenceCollectionBuilder referenceCollectionBuilder
-            ) {
+            )
+            {
                 ReferenceCollectionBuilder = referenceCollectionBuilder;
             }
 
@@ -1130,7 +1137,8 @@ namespace Microsoft.EntityFrameworkCore.ModelBuilding
         {
             public NonGenericTestReferenceReferenceBuilder(
                 ReferenceReferenceBuilder referenceReferenceBuilder
-            ) {
+            )
+            {
                 ReferenceReferenceBuilder = referenceReferenceBuilder;
             }
 
@@ -1215,7 +1223,8 @@ namespace Microsoft.EntityFrameworkCore.ModelBuilding
         {
             public NonGenericTestCollectionCollectionBuilder(
                 CollectionCollectionBuilder collectionCollectionBuilder
-            ) {
+            )
+            {
                 CollectionCollectionBuilder = collectionCollectionBuilder;
             }
 
@@ -1429,7 +1438,8 @@ namespace Microsoft.EntityFrameworkCore.ModelBuilding
         {
             public NonGenericTestOwnedNavigationBuilder(
                 OwnedNavigationBuilder ownedNavigationBuilder
-            ) {
+            )
+            {
                 OwnedNavigationBuilder = ownedNavigationBuilder;
             }
 
@@ -1443,10 +1453,9 @@ namespace Microsoft.EntityFrameworkCore.ModelBuilding
             protected virtual NonGenericTestOwnedNavigationBuilder<
                 TNewEntity,
                 TNewDependentEntity
-            > Wrap<TNewEntity, TNewDependentEntity>(
-                OwnedNavigationBuilder ownedNavigationBuilder
-            ) where TNewEntity : class
-              where TNewDependentEntity : class => new(ownedNavigationBuilder);
+            > Wrap<TNewEntity, TNewDependentEntity>(OwnedNavigationBuilder ownedNavigationBuilder)
+                where TNewEntity : class
+                where TNewDependentEntity : class => new(ownedNavigationBuilder);
 
             public override TestOwnedNavigationBuilder<TEntity, TDependentEntity> HasAnnotation(
                 string annotation,
@@ -1490,7 +1499,8 @@ namespace Microsoft.EntityFrameworkCore.ModelBuilding
 
             public override TestPropertyBuilder<TProperty> Property<TProperty>(
                 Expression<Func<TDependentEntity, TProperty>> propertyExpression
-            ) {
+            )
+            {
                 var memberInfo = propertyExpression.GetMemberAccess();
                 return new NonGenericTestPropertyBuilder<TProperty>(
                     OwnedNavigationBuilder.Property(
@@ -1755,7 +1765,8 @@ namespace Microsoft.EntityFrameworkCore.ModelBuilding
 
             public override DataBuilder<TDependentEntity> HasData(
                 IEnumerable<TDependentEntity> data
-            ) {
+            )
+            {
                 OwnedNavigationBuilder.HasData(data);
                 return new DataBuilder<TDependentEntity>();
             }

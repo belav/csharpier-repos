@@ -111,7 +111,8 @@ namespace System.Text.Json.Tests
             string input,
             double expectedValue,
             long expectedTokenLength
-        ) {
+        )
+        {
             byte[] utf8 = Encoding.UTF8.GetBytes(input);
 
             var jsonReader = new Utf8JsonReader(utf8);
@@ -149,7 +150,8 @@ namespace System.Text.Json.Tests
             int expectedBytesConsumed,
             double expectedValue,
             long expectedTokenLength
-        ) {
+        )
+        {
             while (jsonReader.Read())
             {
                 if (jsonReader.TokenType == JsonTokenType.Number)
@@ -199,7 +201,8 @@ namespace System.Text.Json.Tests
             bool firstReadSuccessful,
             int expectedConsumed,
             char invalidChar
-        ) {
+        )
+        {
             byte[] utf8 = Encoding.UTF8.GetBytes(input);
 
             var jsonReader = new Utf8JsonReader(utf8);
@@ -257,7 +260,8 @@ namespace System.Text.Json.Tests
             bool firstReadSuccessful,
             int expectedConsumed,
             char invalidChar
-        ) {
+        )
+        {
             if (firstReadSuccessful)
             {
                 Assert.True(jsonReader.Read());
@@ -309,7 +313,8 @@ namespace System.Text.Json.Tests
             int expectedConsumed,
             string expectedStr,
             int expectedTokenLength
-        ) {
+        )
+        {
             byte[] utf8 = Encoding.UTF8.GetBytes(input);
 
             var jsonReader = new Utf8JsonReader(utf8);
@@ -367,7 +372,8 @@ namespace System.Text.Json.Tests
             int expectedConsumed,
             string expectedStr,
             int expectedTokenLength
-        ) {
+        )
+        {
             Assert.True(jsonReader.Read());
 
             Assert.Equal(JsonTokenType.String, jsonReader.TokenType);
@@ -457,7 +463,8 @@ namespace System.Text.Json.Tests
             int expectedBytePositionInLine,
             int numberOfSuccessfulReads = 0,
             int expectedConsumed = 0
-        ) {
+        )
+        {
             byte[] utf8 = Encoding.UTF8.GetBytes(input);
 
             var jsonReader = new Utf8JsonReader(utf8);
@@ -510,7 +517,8 @@ namespace System.Text.Json.Tests
             int expectedBytePositionInLine,
             int numberOfSuccessfulReads,
             int expectedConsumed
-        ) {
+        )
+        {
             for (int i = 0; i < numberOfSuccessfulReads; i++)
             {
                 Assert.True(jsonReader.Read());
@@ -623,7 +631,8 @@ namespace System.Text.Json.Tests
             bool compactData,
             TestCaseType type,
             string jsonString
-        ) {
+        )
+        {
             ReadPartialSegmentSizeOne(compactData, type, jsonString);
         }
 
@@ -634,7 +643,8 @@ namespace System.Text.Json.Tests
             bool compactData,
             TestCaseType type,
             string jsonString
-        ) {
+        )
+        {
             // Skipping really large JSON on Browser to prevent OOM
             if (
                 PlatformDetection.IsBrowser
@@ -643,7 +653,8 @@ namespace System.Text.Json.Tests
                     || type == TestCaseType.Json400KB
                     || type == TestCaseType.ProjectLockJson
                 )
-            ) {
+            )
+            {
                 return;
             }
 
@@ -658,13 +669,15 @@ namespace System.Text.Json.Tests
             bool compactData,
             TestCaseType type,
             string jsonString
-        ) {
+        )
+        {
             // Skipping really large JSON since slicing them (O(n^2)) is too slow.
             if (
                 type == TestCaseType.Json40KB
                 || type == TestCaseType.Json400KB
                 || type == TestCaseType.ProjectLockJson
-            ) {
+            )
+            {
                 return;
             }
 
@@ -675,7 +688,8 @@ namespace System.Text.Json.Tests
             bool compactData,
             TestCaseType type,
             string jsonString
-        ) {
+        )
+        {
             // Remove all formatting/indendation
             if (compactData)
             {
@@ -727,7 +741,8 @@ namespace System.Text.Json.Tests
             bool compactData,
             TestCaseType type,
             string jsonString
-        ) {
+        )
+        {
             // Remove all formatting/indendation
             if (compactData)
             {
@@ -758,7 +773,8 @@ namespace System.Text.Json.Tests
             bool compactData,
             TestCaseType type,
             string jsonString
-        ) {
+        )
+        {
             _ = type;
 
             // Remove all formatting/indendation
@@ -802,7 +818,8 @@ namespace System.Text.Json.Tests
             bool compactData,
             TestCaseType type,
             string jsonString
-        ) {
+        )
+        {
             _ = type;
 
             // Remove all formatting/indendation
@@ -868,7 +885,8 @@ namespace System.Text.Json.Tests
         public static void TestTrySkipWithCommentsMultiSegment(
             string jsonString,
             JsonTokenType lastToken
-        ) {
+        )
+        {
             List<JsonTokenType> expectedTokenTypesWithoutComments = JsonTestHelper.GetTokenTypes(
                 jsonString
             );
@@ -913,7 +931,8 @@ namespace System.Text.Json.Tests
             JsonTokenType lastToken,
             List<JsonTokenType> expectedTokenTypes,
             JsonCommentHandling commentHandling
-        ) {
+        )
+        {
             var state = new JsonReaderState(
                 new JsonReaderOptions { CommentHandling = commentHandling }
             );
@@ -990,10 +1009,12 @@ namespace System.Text.Json.Tests
             int expectedlineNumber,
             int expectedBytePosition,
             int maxDepth = 64
-        ) {
+        )
+        {
             foreach (
                 JsonCommentHandling commentHandling in Enum.GetValues(typeof(JsonCommentHandling))
-            ) {
+            )
+            {
                 byte[] dataUtf8 = Encoding.UTF8.GetBytes(jsonString);
 
                 ReadOnlyMemory<byte> dataMemory = dataUtf8;
@@ -1043,10 +1064,12 @@ namespace System.Text.Json.Tests
             int expectedlineNumber,
             int expectedBytePosition,
             int maxDepth = 64
-        ) {
+        )
+        {
             foreach (
                 JsonCommentHandling commentHandling in Enum.GetValues(typeof(JsonCommentHandling))
-            ) {
+            )
+            {
                 byte[] dataUtf8 = Encoding.UTF8.GetBytes(jsonString);
                 ReadOnlySequence<byte> sequence = JsonTestHelper.GetSequence(dataUtf8, 1);
 
@@ -1118,7 +1141,8 @@ namespace System.Text.Json.Tests
             byte[] utf8BomAndValue,
             bool isFinalBlock,
             int segmentSize
-        ) {
+        )
+        {
             Assert.ThrowsAny<JsonException>(
                 () =>
                 {
@@ -1263,7 +1287,8 @@ namespace System.Text.Json.Tests
             ref Utf8JsonReader jsonReader,
             DateTime expectedValue,
             long expectedTokenLength
-        ) {
+        )
+        {
             while (jsonReader.Read())
             {
                 if (jsonReader.TokenType == JsonTokenType.String)
@@ -1322,7 +1347,8 @@ namespace System.Text.Json.Tests
             ref Utf8JsonReader jsonReader,
             DateTimeOffset expectedValue,
             long expectedTokenLength
-        ) {
+        )
+        {
             while (jsonReader.Read())
             {
                 if (jsonReader.TokenType == JsonTokenType.String)
@@ -1341,7 +1367,8 @@ namespace System.Text.Json.Tests
             ReadOnlySequence<byte> sequence,
             int maxDepth,
             JsonCommentHandling commentHandling
-        ) {
+        )
+        {
             var stateSpan = new JsonReaderState(
                 new JsonReaderOptions { CommentHandling = commentHandling, MaxDepth = maxDepth }
             );
@@ -1434,7 +1461,8 @@ namespace System.Text.Json.Tests
             string jsonString,
             string expectedWithoutComments,
             string expectedWithComments
-        ) {
+        )
+        {
             byte[] data = Encoding.UTF8.GetBytes(jsonString);
 
             var sequence = new ReadOnlySequence<byte>(data);
@@ -1478,7 +1506,8 @@ namespace System.Text.Json.Tests
             ReadOnlySequence<byte> sequence,
             string expectedWithoutComments,
             string expectedWithComments
-        ) {
+        )
+        {
             var state = new JsonReaderState(
                 options: new JsonReaderOptions { CommentHandling = JsonCommentHandling.Allow }
             );
@@ -1491,7 +1520,8 @@ namespace System.Text.Json.Tests
                     json.TokenType == JsonTokenType.Number
                     || json.TokenType == JsonTokenType.Comment
                     || json.TokenType == JsonTokenType.PropertyName
-                ) {
+                )
+                {
                     builder.Append(
                         Encoding.UTF8.GetString(
                             json.HasValueSequence
@@ -1525,7 +1555,8 @@ namespace System.Text.Json.Tests
                     json.TokenType == JsonTokenType.Number
                     || json.TokenType == JsonTokenType.Comment
                     || json.TokenType == JsonTokenType.PropertyName
-                ) {
+                )
+                {
                     builder.Append(
                         Encoding.UTF8.GetString(
                             json.HasValueSequence
@@ -1570,10 +1601,12 @@ namespace System.Text.Json.Tests
             byte[] inputData,
             ReadOnlySequence<byte> sequence,
             string expectedString
-        ) {
+        )
+        {
             foreach (
                 JsonCommentHandling commentHandling in Enum.GetValues(typeof(JsonCommentHandling))
-            ) {
+            )
+            {
                 var state = new JsonReaderState(
                     options: new JsonReaderOptions { CommentHandling = commentHandling }
                 );
@@ -1743,7 +1776,8 @@ namespace System.Text.Json.Tests
 
             foreach (
                 JsonCommentHandling commentHandling in Enum.GetValues(typeof(JsonCommentHandling))
-            ) {
+            )
+            {
                 if (commentHandling == JsonCommentHandling.Disallow && testCase == 2)
                 {
                     continue;
@@ -1823,7 +1857,8 @@ namespace System.Text.Json.Tests
 
             foreach (
                 JsonCommentHandling commentHandling in Enum.GetValues(typeof(JsonCommentHandling))
-            ) {
+            )
+            {
                 var state = new JsonReaderState(
                     options: new JsonReaderOptions { CommentHandling = commentHandling }
                 );
@@ -1847,7 +1882,8 @@ namespace System.Text.Json.Tests
 
             foreach (
                 JsonCommentHandling commentHandling in Enum.GetValues(typeof(JsonCommentHandling))
-            ) {
+            )
+            {
                 var json = new Utf8JsonReader(
                     sequence,
                     new JsonReaderOptions { CommentHandling = commentHandling }
@@ -1952,13 +1988,15 @@ namespace System.Text.Json.Tests
         public static void JsonWithSingleLineCommentEndingWithNonStandardLineEndingMultiSegment(
             string jsonString,
             int segmentSize
-        ) {
+        )
+        {
             byte[] dataUtf8 = Encoding.UTF8.GetBytes(jsonString);
             ReadOnlySequence<byte> sequence = JsonTestHelper.GetSequence(dataUtf8, segmentSize);
 
             foreach (
                 JsonCommentHandling jsonCommentHandling in typeof(JsonCommentHandling).GetEnumValues()
-            ) {
+            )
+            {
                 var state = new JsonReaderState(
                     options: new JsonReaderOptions { CommentHandling = jsonCommentHandling }
                 );
@@ -1988,13 +2026,15 @@ namespace System.Text.Json.Tests
         public static void JsonWithSingleLineCommentInTheMiddleOfThePayloadEndingWithNonStandardLineEndingMultiSegment(
             string jsonString,
             int segmentSize
-        ) {
+        )
+        {
             byte[] dataUtf8 = Encoding.UTF8.GetBytes(jsonString);
             ReadOnlySequence<byte> sequence = JsonTestHelper.GetSequence(dataUtf8, segmentSize);
 
             foreach (
                 JsonCommentHandling jsonCommentHandling in typeof(JsonCommentHandling).GetEnumValues()
-            ) {
+            )
+            {
                 var state = new JsonReaderState(
                     options: new JsonReaderOptions { CommentHandling = jsonCommentHandling }
                 );
@@ -2037,7 +2077,8 @@ namespace System.Text.Json.Tests
             string expectedComment,
             int segmentSize,
             int expectedBytesConsumed
-        ) {
+        )
+        {
             byte[] dataUtf8 = Encoding.UTF8.GetBytes(jsonString);
             var state = new JsonReaderState(
                 options: new JsonReaderOptions { CommentHandling = JsonCommentHandling.Allow }
@@ -2068,7 +2109,8 @@ namespace System.Text.Json.Tests
         public static void JsonWithSingleLineCommentWithNoLineEndingsNonFinalBlockMultiSegment(
             string jsonString,
             int segmentSize
-        ) {
+        )
+        {
             byte[] dataUtf8 = Encoding.UTF8.GetBytes(jsonString);
             var state = new JsonReaderState(
                 options: new JsonReaderOptions { CommentHandling = JsonCommentHandling.Allow }
@@ -2106,7 +2148,8 @@ namespace System.Text.Json.Tests
             string expectedComment,
             int segmentSize,
             int expectedBytesConsumed
-        ) {
+        )
+        {
             byte[] dataUtf8 = Encoding.UTF8.GetBytes(jsonString);
             var state = new JsonReaderState(
                 options: new JsonReaderOptions { CommentHandling = JsonCommentHandling.Allow }
@@ -2140,7 +2183,8 @@ namespace System.Text.Json.Tests
         public static void JsonWithUnfinishedMultiLineCommentNonFinalBlockMultiSegment(
             string jsonString,
             int segmentSize
-        ) {
+        )
+        {
             byte[] dataUtf8 = Encoding.UTF8.GetBytes(jsonString);
             var state = new JsonReaderState(
                 options: new JsonReaderOptions { CommentHandling = JsonCommentHandling.Allow }
@@ -2169,10 +2213,12 @@ namespace System.Text.Json.Tests
             string jsonStringWithoutLineEnding,
             string expectedComment,
             int segmentSize
-        ) {
+        )
+        {
             foreach (
                 string lineEnding in new string[] { "\r", "\r ", "\r\n", "\r\n ", "\n", "\n ", "" }
-            ) {
+            )
+            {
                 foreach (bool isFinalBlock in new bool[] { false, true })
                 {
                     if (!isFinalBlock && (lineEnding == "\r" || lineEnding == ""))
@@ -2218,7 +2264,8 @@ namespace System.Text.Json.Tests
 
             foreach (
                 JsonCommentHandling commentHandling in Enum.GetValues(typeof(JsonCommentHandling))
-            ) {
+            )
+            {
                 TestReadTokenWithExtra(sequence, commentHandling, isFinalBlock: false);
                 TestReadTokenWithExtra(sequence, commentHandling, isFinalBlock: true);
             }
@@ -2233,7 +2280,8 @@ namespace System.Text.Json.Tests
 
             foreach (
                 JsonCommentHandling commentHandling in Enum.GetValues(typeof(JsonCommentHandling))
-            ) {
+            )
+            {
                 if (commentHandling == JsonCommentHandling.Disallow)
                 {
                     continue;
@@ -2248,14 +2296,16 @@ namespace System.Text.Json.Tests
         [MemberData(nameof(JsonTokenWithExtraValueAndComments))]
         public static void ReadJsonTokenWithExtraValueAndCommentsAppendedMultiSegment(
             string jsonString
-        ) {
+        )
+        {
             jsonString = "  /* comment */  /* comment */  " + jsonString;
             byte[] utf8 = Encoding.UTF8.GetBytes(jsonString);
             ReadOnlySequence<byte> sequence = JsonTestHelper.GetSequence(utf8, 1);
 
             foreach (
                 JsonCommentHandling commentHandling in Enum.GetValues(typeof(JsonCommentHandling))
-            ) {
+            )
+            {
                 if (commentHandling == JsonCommentHandling.Disallow)
                 {
                     continue;
@@ -2281,7 +2331,8 @@ namespace System.Text.Json.Tests
             JsonCommentHandling commentHandling,
             bool isFinalBlock,
             bool commentsAppended = false
-        ) {
+        )
+        {
             JsonReaderState state = new JsonReaderState(
                 options: new JsonReaderOptions { CommentHandling = commentHandling }
             );
@@ -2299,7 +2350,8 @@ namespace System.Text.Json.Tests
             if (
                 reader.TokenType == JsonTokenType.StartArray
                 || reader.TokenType == JsonTokenType.StartObject
-            ) {
+            )
+            {
                 Assert.True(reader.Read());
                 Assert.Contains(
                     reader.TokenType,
@@ -2315,7 +2367,8 @@ namespace System.Text.Json.Tests
                     if (
                         commentHandling == JsonCommentHandling.Allow
                         && jsonReader.TokenType == JsonTokenType.Comment
-                    ) {
+                    )
+                    {
                         jsonReader.Read();
                     }
                 }
@@ -2341,7 +2394,8 @@ namespace System.Text.Json.Tests
 
             foreach (
                 JsonCommentHandling commentHandling in Enum.GetValues(typeof(JsonCommentHandling))
-            ) {
+            )
+            {
                 var state = new JsonReaderState(
                     options: new JsonReaderOptions { CommentHandling = commentHandling }
                 );
@@ -2368,7 +2422,8 @@ namespace System.Text.Json.Tests
 
             foreach (
                 JsonCommentHandling commentHandling in Enum.GetValues(typeof(JsonCommentHandling))
-            ) {
+            )
+            {
                 var state = new JsonReaderState(
                     options: new JsonReaderOptions { CommentHandling = commentHandling }
                 );
@@ -2395,7 +2450,8 @@ namespace System.Text.Json.Tests
 
             foreach (
                 JsonCommentHandling commentHandling in Enum.GetValues(typeof(JsonCommentHandling))
-            ) {
+            )
+            {
                 if (commentHandling == JsonCommentHandling.Disallow)
                 {
                     continue;
@@ -2427,7 +2483,8 @@ namespace System.Text.Json.Tests
 
             foreach (
                 JsonCommentHandling commentHandling in Enum.GetValues(typeof(JsonCommentHandling))
-            ) {
+            )
+            {
                 if (commentHandling == JsonCommentHandling.Disallow)
                 {
                     continue;
@@ -2455,7 +2512,8 @@ namespace System.Text.Json.Tests
             JsonReaderState state,
             bool allow,
             bool expectThrow
-        ) {
+        )
+        {
             var reader = new Utf8JsonReader(utf8, isFinalBlock: true, state);
 
             Assert.Equal(allow, state.Options.AllowTrailingCommas);
@@ -2519,7 +2577,8 @@ namespace System.Text.Json.Tests
 
             foreach (
                 JsonCommentHandling commentHandling in Enum.GetValues(typeof(JsonCommentHandling))
-            ) {
+            )
+            {
                 if (commentHandling == JsonCommentHandling.Disallow)
                 {
                     continue;
@@ -2625,7 +2684,8 @@ namespace System.Text.Json.Tests
 
             foreach (
                 JsonCommentHandling commentHandling in Enum.GetValues(typeof(JsonCommentHandling))
-            ) {
+            )
+            {
                 if (commentHandling == JsonCommentHandling.Disallow)
                 {
                     continue;
@@ -2711,7 +2771,8 @@ namespace System.Text.Json.Tests
 
             foreach (
                 JsonCommentHandling commentHandling in Enum.GetValues(typeof(JsonCommentHandling))
-            ) {
+            )
+            {
                 if (commentHandling == JsonCommentHandling.Disallow)
                 {
                     continue;
@@ -2766,7 +2827,8 @@ namespace System.Text.Json.Tests
             ref Utf8JsonReader reader,
             int expectedConsumed,
             bool validateThrows = false
-        ) {
+        )
+        {
             if (validateThrows)
             {
                 try
@@ -2796,13 +2858,15 @@ namespace System.Text.Json.Tests
         public static void TestTokenStartIndexMultiSegment_SingleValue(
             string jsonString,
             int expectedIndex
-        ) {
+        )
+        {
             byte[] utf8 = Encoding.UTF8.GetBytes(jsonString);
             ReadOnlySequence<byte> sequence = JsonTestHelper.GetSequence(utf8, 1);
 
             foreach (
                 JsonCommentHandling commentHandling in Enum.GetValues(typeof(JsonCommentHandling))
-            ) {
+            )
+            {
                 var state = new JsonReaderState(
                     options: new JsonReaderOptions
                     {
@@ -2828,7 +2892,8 @@ namespace System.Text.Json.Tests
 
             foreach (
                 JsonCommentHandling commentHandling in Enum.GetValues(typeof(JsonCommentHandling))
-            ) {
+            )
+            {
                 var reader = new Utf8JsonReader(
                     sequence,
                     new JsonReaderOptions
@@ -2858,7 +2923,8 @@ namespace System.Text.Json.Tests
         public static void TestTokenStartIndexMultiSegment_SingleValueCommentsAllow(
             string jsonString,
             int expectedIndex
-        ) {
+        )
+        {
             byte[] utf8 = Encoding.UTF8.GetBytes(jsonString);
             ReadOnlySequence<byte> sequence = JsonTestHelper.GetSequence(utf8, 1);
 
@@ -2890,13 +2956,15 @@ namespace System.Text.Json.Tests
         public static void TestTokenStartIndexMultiSegment_SingleValueWithComments(
             string jsonString,
             int expectedIndex
-        ) {
+        )
+        {
             byte[] utf8 = Encoding.UTF8.GetBytes(jsonString);
             ReadOnlySequence<byte> sequence = JsonTestHelper.GetSequence(utf8, 1);
 
             foreach (
                 JsonCommentHandling commentHandling in Enum.GetValues(typeof(JsonCommentHandling))
-            ) {
+            )
+            {
                 if (commentHandling == JsonCommentHandling.Disallow)
                 {
                     continue;
@@ -2941,13 +3009,15 @@ namespace System.Text.Json.Tests
         public static void TestTokenStartIndexMultiSegment_ComplexArrayValue(
             string jsonString,
             int expectedIndex
-        ) {
+        )
+        {
             byte[] utf8 = Encoding.UTF8.GetBytes(jsonString);
             ReadOnlySequence<byte> sequence = JsonTestHelper.GetSequence(utf8, 1);
 
             foreach (
                 JsonCommentHandling commentHandling in Enum.GetValues(typeof(JsonCommentHandling))
-            ) {
+            )
+            {
                 var state = new JsonReaderState(
                     options: new JsonReaderOptions
                     {
@@ -2984,13 +3054,15 @@ namespace System.Text.Json.Tests
             string jsonString,
             int expectedIndexProperty,
             int expectedIndexValue
-        ) {
+        )
+        {
             byte[] utf8 = Encoding.UTF8.GetBytes(jsonString);
             ReadOnlySequence<byte> sequence = JsonTestHelper.GetSequence(utf8, 1);
 
             foreach (
                 JsonCommentHandling commentHandling in Enum.GetValues(typeof(JsonCommentHandling))
-            ) {
+            )
+            {
                 var state = new JsonReaderState(
                     options: new JsonReaderOptions
                     {
@@ -3029,13 +3101,15 @@ namespace System.Text.Json.Tests
             string jsonString,
             int expectedIndexProperty,
             int expectedIndexValue
-        ) {
+        )
+        {
             byte[] utf8 = Encoding.UTF8.GetBytes(jsonString);
             ReadOnlySequence<byte> sequence = JsonTestHelper.GetSequence(utf8, 1);
 
             foreach (
                 JsonCommentHandling commentHandling in Enum.GetValues(typeof(JsonCommentHandling))
-            ) {
+            )
+            {
                 var state = new JsonReaderState(
                     options: new JsonReaderOptions
                     {
@@ -3081,7 +3155,8 @@ namespace System.Text.Json.Tests
 
             foreach (
                 JsonCommentHandling commentHandling in Enum.GetValues(typeof(JsonCommentHandling))
-            ) {
+            )
+            {
                 var state = new JsonReaderState(
                     options: new JsonReaderOptions
                     {
@@ -3100,13 +3175,15 @@ namespace System.Text.Json.Tests
         [MemberData(nameof(JsonWithValidTrailingCommasAndComments))]
         public static void TestTokenStartIndexMultiSegment_WithTrailingCommasAndComments(
             string jsonString
-        ) {
+        )
+        {
             byte[] utf8 = Encoding.UTF8.GetBytes(jsonString);
             ReadOnlySequence<byte> sequence = JsonTestHelper.GetSequence(utf8, 1);
 
             foreach (
                 JsonCommentHandling commentHandling in Enum.GetValues(typeof(JsonCommentHandling))
-            ) {
+            )
+            {
                 if (commentHandling == JsonCommentHandling.Disallow)
                 {
                     continue;

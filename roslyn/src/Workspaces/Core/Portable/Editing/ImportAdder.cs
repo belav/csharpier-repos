@@ -61,7 +61,8 @@ namespace Microsoft.CodeAnalysis.Editing
             Document document,
             OptionSet? options = null,
             CancellationToken cancellationToken = default
-        ) {
+        )
+        {
             var root = await document.GetSyntaxRootAsync(cancellationToken).ConfigureAwait(false);
             Contract.ThrowIfNull(root);
             return await AddImportsFromSyntaxesAsync(
@@ -91,7 +92,8 @@ namespace Microsoft.CodeAnalysis.Editing
             SyntaxAnnotation annotation,
             OptionSet? options = null,
             CancellationToken cancellationToken = default
-        ) {
+        )
+        {
             var root = await document.GetSyntaxRootAsync(cancellationToken).ConfigureAwait(false);
             Contract.ThrowIfNull(root);
             return await AddImportsFromSyntaxesAsync(
@@ -111,7 +113,8 @@ namespace Microsoft.CodeAnalysis.Editing
             IEnumerable<TextSpan> spans,
             OptionSet? options = null,
             CancellationToken cancellationToken = default
-        ) {
+        )
+        {
             var service = document.GetLanguageService<ImportAdderService>();
             if (service != null)
             {
@@ -136,7 +139,8 @@ namespace Microsoft.CodeAnalysis.Editing
             Document document,
             OptionSet? options = null,
             CancellationToken cancellationToken = default
-        ) {
+        )
+        {
             var root = await document.GetSyntaxRootAsync(cancellationToken).ConfigureAwait(false);
             Contract.ThrowIfNull(root);
             return await AddImportsFromSymbolAnnotationAsync(
@@ -172,7 +176,8 @@ namespace Microsoft.CodeAnalysis.Editing
             SyntaxAnnotation annotation,
             OptionSet? options = null,
             CancellationToken cancellationToken = default
-        ) {
+        )
+        {
             var root = await document.GetSyntaxRootAsync(cancellationToken).ConfigureAwait(false);
             Contract.ThrowIfNull(root);
             return await AddImportsFromSymbolAnnotationAsync(
@@ -192,7 +197,8 @@ namespace Microsoft.CodeAnalysis.Editing
             IEnumerable<TextSpan> spans,
             OptionSet? options = null,
             CancellationToken cancellationToken = default
-        ) {
+        )
+        {
             var service = document.GetLanguageService<ImportAdderService>();
             if (service != null)
             {

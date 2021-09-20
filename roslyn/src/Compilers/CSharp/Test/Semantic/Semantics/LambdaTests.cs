@@ -2679,7 +2679,8 @@ public static class XThing
             var sm = compilation.GetSemanticModel(tree);
             foreach (
                 var lambda in tree.GetRoot().DescendantNodes().OfType<LambdaExpressionSyntax>()
-            ) {
+            )
+            {
                 var reference = lambda.Body.DescendantNodesAndSelf()
                     .OfType<IdentifierNameSyntax>()
                     .First();
@@ -2728,7 +2729,8 @@ public static class XThing
             var sm = compilation.GetSemanticModel(tree);
             foreach (
                 var lambda in tree.GetRoot().DescendantNodes().OfType<LambdaExpressionSyntax>()
-            ) {
+            )
+            {
                 var reference = lambda.Body.DescendantNodesAndSelf()
                     .OfType<IdentifierNameSyntax>()
                     .First();
@@ -2777,7 +2779,8 @@ public static class XThing
             var sm = compilation.GetSemanticModel(tree);
             foreach (
                 var lambda in tree.GetRoot().DescendantNodes().OfType<LambdaExpressionSyntax>()
-            ) {
+            )
+            {
                 var reference = lambda.Body.DescendantNodesAndSelf()
                     .OfType<IdentifierNameSyntax>()
                     .First();
@@ -2813,7 +2816,8 @@ class Program
             var sm = compilation.GetSemanticModel(tree);
             foreach (
                 var lambda in tree.GetRoot().DescendantNodes().OfType<LambdaExpressionSyntax>()
-            ) {
+            )
+            {
                 var reference = lambda.Body.DescendantNodesAndSelf()
                     .OfType<IdentifierNameSyntax>()
                     .First();
@@ -2849,7 +2853,8 @@ class Program
             var sm = compilation.GetSemanticModel(tree);
             foreach (
                 var lambda in tree.GetRoot().DescendantNodes().OfType<LambdaExpressionSyntax>()
-            ) {
+            )
+            {
                 var reference = lambda.Body.DescendantNodesAndSelf()
                     .OfType<IdentifierNameSyntax>()
                     .First();
@@ -2889,7 +2894,8 @@ class Program
             var sm = compilation.GetSemanticModel(tree);
             foreach (
                 var lambda in tree.GetRoot().DescendantNodes().OfType<LambdaExpressionSyntax>()
-            ) {
+            )
+            {
                 var reference = lambda.Body.DescendantNodesAndSelf()
                     .OfType<IdentifierNameSyntax>()
                     .First();

@@ -115,7 +115,8 @@ public class AA<TA, TB> where TA : IComparable
         TB param4,
         TA param5,
         TB param6
-    ) {
+    )
+    {
         ulong local15 = App.m_ulFwd3;
         param3 = param5;
         local15 = local15;
@@ -242,7 +243,8 @@ public struct BB
         ref bool param2,
         TestEnum param3,
         ref float param4
-    ) {
+    )
+    {
         if (param2)
             param2 = param2;
         else

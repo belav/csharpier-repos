@@ -32,10 +32,12 @@ namespace Microsoft.EntityFrameworkCore.Query.SqlExpressions
             SqlExpression operand,
             IReadOnlyList<CaseWhenClause> whenClauses,
             SqlExpression? elseResult = null
-        ) : base(
-            Check.NotEmpty(whenClauses, nameof(whenClauses))[0].Result.Type,
-            whenClauses[0].Result.TypeMapping
-        ) {
+        )
+            : base(
+                Check.NotEmpty(whenClauses, nameof(whenClauses))[0].Result.Type,
+                whenClauses[0].Result.TypeMapping
+            )
+        {
             Check.NotNull(operand, nameof(operand));
 
             Operand = operand;
@@ -51,10 +53,12 @@ namespace Microsoft.EntityFrameworkCore.Query.SqlExpressions
         public CaseExpression(
             IReadOnlyList<CaseWhenClause> whenClauses,
             SqlExpression? elseResult = null
-        ) : base(
-            Check.NotEmpty(whenClauses, nameof(whenClauses))[0].Result.Type,
-            whenClauses[0].Result.TypeMapping
-        ) {
+        )
+            : base(
+                Check.NotEmpty(whenClauses, nameof(whenClauses))[0].Result.Type,
+                whenClauses[0].Result.TypeMapping
+            )
+        {
             _whenClauses.AddRange(whenClauses);
             ElseResult = elseResult;
         }

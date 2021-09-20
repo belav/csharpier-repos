@@ -54,7 +54,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.CompleteStatement
         public CompleteStatementCommandHandler(
             ITextUndoHistoryRegistry textUndoHistoryRegistry,
             IEditorOperationsFactoryService editorOperationsFactoryService
-        ) {
+        )
+        {
             _textUndoHistoryRegistry = textUndoHistoryRegistry;
             _editorOperationsFactoryService = editorOperationsFactoryService;
         }
@@ -65,7 +66,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.CompleteStatement
             TypeCharCommandArgs args,
             Action nextCommandHandler,
             CommandExecutionContext executionContext
-        ) {
+        )
+        {
             var willMoveSemicolon = BeforeExecuteCommand(
                 speculative: true,
                 args: args,
@@ -102,7 +104,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.CompleteStatement
             bool speculative,
             TypeCharCommandArgs args,
             CommandExecutionContext executionContext
-        ) {
+        )
+        {
             if (args.TypedChar != ';' || !args.TextView.Selection.IsEmpty)
             {
                 return false;
@@ -118,7 +121,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.CompleteStatement
                 !args.SubjectBuffer.GetFeatureOnOffOption(
                     FeatureOnOffOptions.AutomaticallyCompleteStatementOnSemicolon
                 )
-            ) {
+            )
+            {
                 return false;
             }
 
@@ -168,7 +172,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.CompleteStatement
             SnapshotPoint caret,
             out SyntaxNode startingNode,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             // on the UI thread
             startingNode = null;
             var caretPosition = caret.Position;
@@ -178,7 +183,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.CompleteStatement
             if (
                 token.SyntaxTree == null
                 || token.SyntaxTree.IsEntirelyWithinComment(caretPosition, cancellationToken)
-            ) {
+            )
+            {
                 return false;
             }
 
@@ -203,7 +209,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.CompleteStatement
                     && openingDelimiter.Span.Start >= caretPosition
                 || !closingDelimiter.IsKind(SyntaxKind.None)
                     && closingDelimiter.Span.End <= caretPosition
-            ) {
+            )
+            {
                 startingNode = startingNode.Parent;
             }
 
@@ -221,7 +228,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.CompleteStatement
             SyntaxNode currentNode,
             bool isInsideDelimiters,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             if (currentNode == null || IsInAStringOrCharacter(currentNode, caret))
             {
                 // Don't complete statement.  Return without moving the caret.
@@ -241,7 +249,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.CompleteStatement
                     SyntaxKind.TypeOfExpression,
                     SyntaxKind.TupleExpression
                 )
-            ) {
+            )
+            {
                 // make sure the closing delimiter exists
                 if (RequiredDelimiterIsMissing(currentNode))
                 {
@@ -328,7 +337,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.CompleteStatement
                     SyntaxKind.DelegateDeclaration,
                     SyntaxKind.ArrowExpressionClause
                 )
-            ) {
+            )
+            {
                 return true;
             }
 
@@ -343,7 +353,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.CompleteStatement
                     method.Modifiers.Any(SyntaxKind.AbstractKeyword)
                     || method.Modifiers.Any(SyntaxKind.ExternKeyword)
                     || method.IsParentKind(SyntaxKind.InterfaceDeclaration)
-                ) {
+                )
+                {
                     return true;
                 }
 
@@ -374,7 +385,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.CompleteStatement
             SnapshotPoint originalCaret,
             SnapshotPoint caret,
             bool isInsideDelimiters
-        ) {
+        )
+        {
             if (StatementClosingDelimiterIsMissing(statementNode))
             {
                 // Don't complete statement.  Return without moving the caret.
@@ -389,7 +401,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.CompleteStatement
                     out var targetPosition
                 )
                 && targetPosition != originalCaret
-            ) {
+            )
+            {
                 if (speculative)
                 {
                     // Return an indication that moving the caret is required, but don't actually move it
@@ -419,7 +432,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.CompleteStatement
             SnapshotPoint caret,
             bool isInsideDelimiters,
             out SnapshotPoint targetPosition
-        ) {
+        )
+        {
             targetPosition = default;
 
             switch (statementNode.Kind())
@@ -464,7 +478,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.CompleteStatement
             SnapshotPoint originalCaret,
             ForStatementSyntax forStatement,
             out SnapshotPoint forStatementCaret
-        ) {
+        )
+        {
             if (CaretIsInForStatementCondition(originalCaret, forStatement))
             {
                 forStatementCaret = GetCaretAtPosition(forStatement.Condition.Span.End);

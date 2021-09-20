@@ -26,7 +26,8 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.MetadataAsSource
             bool includeXmlDocComments = false,
             string languageVersion = null,
             string metadataLanguageVersion = null
-        ) {
+        )
+        {
             using var context = TestContext.Create(
                 projectLanguage,
                 SpecializedCollections.SingletonEnumerable(metadataSource),
@@ -41,7 +42,8 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.MetadataAsSource
             string source,
             string language,
             string expected
-        ) {
+        )
+        {
             using var context = TestContext.Create(language, sourceWithSymbolReference: source);
             var navigationSymbol = await context.GetNavigationSymbolAsync();
             var metadataAsSourceFile = await context.GenerateSourceAsync(navigationSymbol);

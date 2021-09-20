@@ -59,7 +59,8 @@ internal static partial class Interop
             StoreLocation location,
             StoreEnumerator userEnumerator,
             StoreEnumerator machineEnumerator
-        ) {
+        )
+        {
             const int RetryLimit = 3;
             int osStatus = 0;
 

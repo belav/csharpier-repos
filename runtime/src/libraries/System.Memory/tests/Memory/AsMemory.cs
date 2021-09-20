@@ -84,7 +84,8 @@ namespace System.MemoryTests
             int length,
             int start,
             int subLength
-        ) {
+        )
+        {
             const int segmentOffset = 5;
 
             int[] a = new int[length + segmentOffset];
@@ -119,7 +120,8 @@ namespace System.MemoryTests
             int length,
             int start,
             int subLength
-        ) {
+        )
+        {
             int[] a = new int[length];
             Assert.Throws<ArgumentOutOfRangeException>(() => a.AsMemory(start, subLength));
         }

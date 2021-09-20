@@ -24,7 +24,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
         public NoPiaIllegalGenericInstantiationSymbol(
             ModuleSymbol exposingModule,
             NamedTypeSymbol underlyingSymbol
-        ) {
+        )
+        {
             _exposingModule = exposingModule;
             _underlyingSymbol = underlyingSymbol;
         }

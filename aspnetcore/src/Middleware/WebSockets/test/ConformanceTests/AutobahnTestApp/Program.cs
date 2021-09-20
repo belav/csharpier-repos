@@ -31,14 +31,16 @@ namespace AutobahnTestApp
                             "Microsoft.AspNetCore.Server.HttpSys",
                             System.StringComparison.Ordinal
                         )
-                    ) {
+                    )
+                    {
                         scenarioName = "HttpSysServer";
                         Console.WriteLine("Using HttpSys server");
                         webHostBuilder.UseHttpSys();
                     }
                     else if (
                         !string.IsNullOrEmpty(Environment.GetEnvironmentVariable("ASPNETCORE_PORT"))
-                    ) {
+                    )
+                    {
                         // ANCM is hosting the process.
                         // The port will not yet be configured at this point, but will also not require HTTPS.
                         scenarioName = "AspNetCoreModule";
@@ -77,7 +79,8 @@ namespace AutobahnTestApp
                                                 "https",
                                                 StringComparison.OrdinalIgnoreCase
                                             )
-                                        ) {
+                                        )
+                                        {
                                             scenarioName = "Kestrel(SSL)";
                                             var certPath = Path.Combine(
                                                 AppContext.BaseDirectory,

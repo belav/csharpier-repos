@@ -37,7 +37,8 @@ namespace System.IO.Strategies
             FileAccess access,
             FileShare share,
             FileOptions options
-        ) {
+        )
+        {
             // Translate the arguments into arguments for an open call.
             Interop.Sys.OpenFlags openFlags = PreOpenConfigurationFromOptions(
                 mode,
@@ -76,7 +77,8 @@ namespace System.IO.Strategies
             FileAccess access,
             FileShare share,
             FileOptions options
-        ) {
+        )
+        {
             // Translate FileMode.  Most of the values map cleanly to one or more options for open.
             Interop.Sys.OpenFlags flags = default;
             switch (mode)

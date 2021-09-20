@@ -307,7 +307,8 @@ namespace System.Xml
                             | ElementProperties.NAME_PARENT
                         )
                     ) != 0
-                ) {
+                )
+                {
                     _currentAttributeProperties =
                         (AttributeProperties)_attributePropertySearch.FindCaseInsensitiveString(
                             localName
@@ -503,7 +504,8 @@ namespace System.Xml
                         | AttributeProperties.NAME
                     )
                 ) != 0
-            ) {
+            )
+            {
                 if ((_currentAttributeProperties & AttributeProperties.BOOLEAN) != 0)
                 {
                     //if output boolean attribute, ignore this call.
@@ -516,7 +518,8 @@ namespace System.Xml
                         & (AttributeProperties.URI | AttributeProperties.NAME)
                     ) != 0
                     && !_doNotEscapeUriAttributes
-                ) {
+                )
+                {
                     WriteUriAttributeText(pSrc, pSrcEnd);
                 }
                 else
@@ -582,7 +585,8 @@ namespace System.Xml
                         pDst < pDstEnd
                         && XmlCharType.IsAttributeValueChar((char)(ch = *pSrc))
                         && ch <= 0x7F
-                    ) {
+                    )
+                    {
                         *pDst++ = (byte)ch;
                         pSrc++;
                     }
@@ -673,7 +677,8 @@ namespace System.Xml
                         pDst < pDstEnd
                         && XmlCharType.IsAttributeValueChar((char)(ch = *pSrc))
                         && ch < 0x80
-                    ) {
+                    )
+                    {
                         *pDst++ = (byte)ch;
                         pSrc++;
                     }
@@ -853,7 +858,8 @@ namespace System.Xml
                 if (
                     _endBlockPos == base._bufPos
                     && (base._currentElementProperties & ElementProperties.BLOCK_WS) != 0
-                ) {
+                )
+                {
                     WriteIndent();
                 }
                 _indentLevel++;

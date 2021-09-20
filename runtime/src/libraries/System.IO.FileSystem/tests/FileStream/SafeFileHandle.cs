@@ -76,7 +76,8 @@ namespace System.IO.Tests
                     FileAccess.Read,
                     FileShare.ReadWrite | FileShare.Delete
                 )
-            ) {
+            )
+            {
                 // write will be buffered
                 fs.Write(TestBuffer, 0, TestBuffer.Length);
 
@@ -122,7 +123,8 @@ namespace System.IO.Tests
                     0x100,
                     useAsync
                 )
-            ) {
+            )
+            {
                 // write some data to move the position, flush to ensure OS position is updated
                 fs.Write(TestBuffer, 0, TestBuffer.Length);
                 fs.Flush();
@@ -140,7 +142,8 @@ namespace System.IO.Tests
                         TestBuffer.Length,
                         useAsync
                     )
-                ) {
+                )
+                {
                     Assert.Equal(TestBuffer.Length, fs.Position);
                     Assert.Equal(TestBuffer.Length, fsr.Position);
 
@@ -157,7 +160,8 @@ namespace System.IO.Tests
                         // ReadAsync which in this case (single byte written to buffer) calls FlushAsync is now 100% async
                         // so it does not complete synchronously anymore
                         && PlatformDetection.IsNet5CompatFileStreamEnabled
-                    ) {
+                    )
+                    {
                         Assert.Throws<IOException>(
                             () => FSAssert.CompletesSynchronously(fs.ReadAsync(new byte[1], 0, 1))
                         );

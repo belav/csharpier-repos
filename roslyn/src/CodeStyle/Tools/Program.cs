@@ -53,7 +53,8 @@ namespace CodeStyleConfigFileGenerator
             string language,
             string outputDir,
             ImmutableArray<string> assemblyList
-        ) {
+        )
+        {
             Debug.Assert(language is "CSharp" or "VisualBasic");
             var languageForGetAnalyzers =
                 language == "CSharp" ? LanguageNames.CSharp : LanguageNames.VisualBasic;
@@ -101,7 +102,8 @@ namespace CodeStyleConfigFileGenerator
                 string configFileName,
                 AnalysisMode analysisMode,
                 SortedList<string, DiagnosticDescriptor> sortedRulesById
-            ) {
+            )
+            {
                 var text = GetGlobalconfigText(analysisMode, sortedRulesById);
                 var directory = Directory.CreateDirectory(folder);
                 var configFilePath = Path.Combine(directory.FullName, configFileName);
@@ -112,7 +114,8 @@ namespace CodeStyleConfigFileGenerator
                 static string GetGlobalconfigText(
                     AnalysisMode analysisMode,
                     SortedList<string, DiagnosticDescriptor> sortedRulesById
-                ) {
+                )
+                {
                     var result = new StringBuilder();
                     StartGlobalconfig();
                     AddRules(analysisMode);
@@ -159,7 +162,8 @@ namespace CodeStyleConfigFileGenerator
                             if (
                                 rule.IsEnabledByDefault == isEnabledByDefault
                                 && severity == rule.DefaultSeverity
-                            ) {
+                            )
+                            {
                                 // Rule had the same default severity and enabled state.
                                 // We do not need to generate any entry.
                                 return false;
@@ -180,7 +184,8 @@ namespace CodeStyleConfigFileGenerator
                         (bool isEnabledByDefault, DiagnosticSeverity effectiveSeverity) GetEnabledByDefaultAndSeverity(
                             DiagnosticDescriptor rule,
                             AnalysisMode analysisMode
-                        ) {
+                        )
+                        {
                             Debug.Assert(
                                 rule.CustomTags.Any(
                                     c =>
@@ -245,7 +250,8 @@ namespace CodeStyleConfigFileGenerator
             string language,
             string outputDir,
             string targetsFileName
-        ) {
+        )
+        {
             var fileContents =
                 $@"<Project>{GetTargetContents(language)}
 </Project>";

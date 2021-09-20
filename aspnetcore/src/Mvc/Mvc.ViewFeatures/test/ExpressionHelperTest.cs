@@ -472,7 +472,8 @@ namespace Microsoft.AspNetCore.Mvc.ViewFeatures
         public void GetExpressionText_ReturnsExpectedExpressionText(
             LambdaExpression expression,
             string expressionText
-        ) {
+        )
+        {
             // Act
             var text = ExpressionHelper.GetExpressionText(expression, _expressionTextCache);
 
@@ -499,7 +500,8 @@ namespace Microsoft.AspNetCore.Mvc.ViewFeatures
         [MemberData(nameof(UnsupportedExpressions))]
         public void GetExpressionText_DoesNotCacheIndexerOrUnsupportedExpression(
             LambdaExpression expression
-        ) {
+        )
+        {
             // Act - 1
             var text1 = ExpressionHelper.GetExpressionText(expression, _expressionTextCache);
 
@@ -516,7 +518,8 @@ namespace Microsoft.AspNetCore.Mvc.ViewFeatures
         public void GetExpressionText_CacheEquivalentExpressions(
             LambdaExpression expression1,
             LambdaExpression expression2
-        ) {
+        )
+        {
             // Act - 1
             var text1 = ExpressionHelper.GetExpressionText(expression1, _expressionTextCache);
 
@@ -532,7 +535,8 @@ namespace Microsoft.AspNetCore.Mvc.ViewFeatures
         public void GetExpressionText_CheckNonEquivalentExpressions(
             LambdaExpression expression1,
             LambdaExpression expression2
-        ) {
+        )
+        {
             // Act - 1
             var text1 = ExpressionHelper.GetExpressionText(expression1, _expressionTextCache);
 

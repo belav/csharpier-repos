@@ -67,7 +67,8 @@ namespace Microsoft.AspNetCore.Components.Server
             ILogger<ServerComponentDeserializer> logger,
             RootComponentTypeCache rootComponentTypeCache,
             ComponentParameterDeserializer parametersDeserializer
-        ) {
+        )
+        {
             // When we protect the data we use a time-limited data protector with the
             // limits established in 'ServerComponentSerializationSettings.DataExpiration'
             // We don't use any of the additional methods provided by ITimeLimitedDataProtector
@@ -88,7 +89,8 @@ namespace Microsoft.AspNetCore.Components.Server
         public bool TryDeserializeComponentDescriptorCollection(
             string serializedComponentRecords,
             out List<ComponentDescriptor> descriptors
-        ) {
+        )
+        {
             var markers = JsonSerializer.Deserialize<IEnumerable<ServerComponentMarker>>(
                 serializedComponentRecords,
                 ServerComponentSerializationSettings.JsonSerializationOptions
@@ -145,7 +147,8 @@ namespace Microsoft.AspNetCore.Components.Server
                 if (
                     lastSequence != -1
                     && !previousInstance.InvocationId.Equals(serverComponent.InvocationId)
-                ) {
+                )
+                {
                     Log.MismatchedInvocationId(
                         _logger,
                         previousInstance.InvocationId.ToString("N"),
@@ -167,7 +170,8 @@ namespace Microsoft.AspNetCore.Components.Server
 
         private (ComponentDescriptor, ServerComponent) DeserializeServerComponent(
             ServerComponentMarker record
-        ) {
+        )
+        {
             string unprotected;
             try
             {
@@ -216,7 +220,8 @@ namespace Microsoft.AspNetCore.Components.Server
                     serverComponent.ParameterValues,
                     out var parameters
                 )
-            ) {
+            )
+            {
                 // TryDeserializeParameters does appropriate logging.
                 return default;
             }

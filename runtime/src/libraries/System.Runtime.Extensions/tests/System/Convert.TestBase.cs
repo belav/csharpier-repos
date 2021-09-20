@@ -14,7 +14,8 @@ namespace System.Tests
             Func<TInput, TOutput> convert,
             TInput[] testValues,
             TOutput[] expectedValues
-        ) {
+        )
+        {
             Assert.Equal(expectedValues.Length, testValues.Length);
 
             for (int i = 0; i < testValues.Length; i++)
@@ -86,7 +87,8 @@ namespace System.Tests
             Func<string, IFormatProvider, TOutput> convertWithFormatProvider,
             string[] testValues,
             TOutput[] expectedValues
-        ) {
+        )
+        {
             Verify<string>(convert, testValues, expectedValues);
             Verify<string>(
                 input => convertWithFormatProvider(input, TestFormatProvider.s_instance),
@@ -103,7 +105,8 @@ namespace System.Tests
             Func<object, IFormatProvider, TOutput> convertWithFormatProvider,
             object[] testValues,
             TOutput[] expectedValues
-        ) {
+        )
+        {
             Verify<object>(convert, testValues, expectedValues);
             Verify<object>(
                 input => convertWithFormatProvider(input, TestFormatProvider.s_instance),
@@ -120,7 +123,8 @@ namespace System.Tests
             string[] testValues,
             int[] testBases,
             TOutput[] expectedValues
-        ) {
+        )
+        {
             Assert.Equal(testValues.Length, testBases.Length);
             Assert.Equal(testValues.Length, expectedValues.Length);
 

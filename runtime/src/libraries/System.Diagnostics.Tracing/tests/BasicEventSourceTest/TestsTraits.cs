@@ -64,7 +64,8 @@ namespace BasicEventSourceTests
                     "ETW_GROUP",
                     "{4f50731a-89cf-4782-b3e0-dce8c90476ba}"
                 )
-            ) {
+            )
+            {
                 // By default we are self-describing.
                 Assert.Equal(EventSourceSettings.EtwSelfDescribingEventFormat, mySource.Settings);
                 Assert.Equal("MyTraitValue", mySource.GetTrait("MyTrait"));

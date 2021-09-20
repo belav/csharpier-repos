@@ -50,7 +50,8 @@ namespace System.ComponentModel.Tests
             DefaultEventAttribute attribute,
             object other,
             bool expected
-        ) {
+        )
+        {
             Assert.Equal(expected, attribute.Equals(other));
         }
 

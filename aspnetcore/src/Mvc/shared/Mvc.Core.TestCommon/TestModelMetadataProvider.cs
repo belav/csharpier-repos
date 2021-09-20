@@ -17,7 +17,8 @@ namespace Microsoft.AspNetCore.Mvc.ModelBinding
     {
         private static DataAnnotationsMetadataProvider CreateDefaultDataAnnotationsProvider(
             IStringLocalizerFactory stringLocalizerFactory
-        ) {
+        )
+        {
             var localizationOptions = Options.Create(new MvcDataAnnotationsLocalizationOptions());
             localizationOptions.Value.DataAnnotationLocalizerProvider = (
                 modelType,
@@ -34,7 +35,8 @@ namespace Microsoft.AspNetCore.Mvc.ModelBinding
         // Creates a provider with all the defaults - includes data annotations
         public static ModelMetadataProvider CreateDefaultProvider(
             IStringLocalizerFactory stringLocalizerFactory = null
-        ) {
+        )
+        {
             var detailsProviders = new List<IMetadataDetailsProvider>
             {
                 new DefaultBindingMetadataProvider(),
@@ -63,7 +65,8 @@ namespace Microsoft.AspNetCore.Mvc.ModelBinding
 
         public static IModelMetadataProvider CreateDefaultProvider(
             IList<IMetadataDetailsProvider> providers
-        ) {
+        )
+        {
             var detailsProviders = new List<IMetadataDetailsProvider>()
             {
                 new DefaultBindingMetadataProvider(),
@@ -98,7 +101,8 @@ namespace Microsoft.AspNetCore.Mvc.ModelBinding
 
         public static IModelMetadataProvider CreateProvider(
             IList<IMetadataDetailsProvider> providers
-        ) {
+        )
+        {
             var detailsProviders = new List<IMetadataDetailsProvider>();
             if (providers != null)
             {
@@ -134,7 +138,8 @@ namespace Microsoft.AspNetCore.Mvc.ModelBinding
                     }
                 ),
                 Options.Create(new MvcOptions())
-            ) {
+            )
+        {
             _detailsProvider = detailsProvider;
         }
 

@@ -13,7 +13,8 @@ namespace Microsoft.AspNetCore.Mvc
         public static void PopulateServiceCollection(
             IServiceCollection services,
             string assemblyName
-        ) {
+        )
+        {
             var assembly = Assembly.Load(new AssemblyName(assemblyName));
 
             var partManager = new ApplicationPartManager();

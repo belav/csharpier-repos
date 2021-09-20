@@ -63,7 +63,8 @@ namespace Microsoft.CodeAnalysis.UseCollectionInitializer
             ISyntaxFacts syntaxFacts,
             TObjectCreationExpressionSyntax objectCreationExpression,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var analyzer = s_pool.Allocate();
             analyzer.Initialize(
                 semanticModel,
@@ -167,7 +168,8 @@ namespace Microsoft.CodeAnalysis.UseCollectionInitializer
         private bool TryAnalyzeIndexAssignment(
             TExpressionStatementSyntax statement,
             out SyntaxNode instance
-        ) {
+        )
+        {
             instance = null;
             if (!_syntaxFacts.SupportsIndexingInitializer(statement.SyntaxTree.Options))
             {
@@ -201,14 +203,16 @@ namespace Microsoft.CodeAnalysis.UseCollectionInitializer
         private bool TryAnalyzeAddInvocation(
             TExpressionStatementSyntax statement,
             out SyntaxNode instance
-        ) {
+        )
+        {
             instance = null;
             if (
                 !(
                     _syntaxFacts.GetExpressionOfExpressionStatement(statement)
                     is TInvocationExpressionSyntax invocationExpression
                 )
-            ) {
+            )
+            {
                 return false;
             }
 
@@ -237,7 +241,8 @@ namespace Microsoft.CodeAnalysis.UseCollectionInitializer
                     _syntaxFacts.GetExpressionOfInvocationExpression(invocationExpression)
                     is TMemberAccessExpressionSyntax memberAccess
                 )
-            ) {
+            )
+            {
                 return false;
             }
 

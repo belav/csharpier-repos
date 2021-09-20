@@ -391,13 +391,15 @@ namespace Microsoft.CodeAnalysis.UnitTests.Collections
 
         protected override IImmutableDictionary<string, TValue> Empty<TValue>(
             StringComparer comparer
-        ) {
+        )
+        {
             return ImmutableSegmentedDictionary.Create<string, TValue>(comparer);
         }
 
         protected override IEqualityComparer<TValue> GetValueComparer<TKey, TValue>(
             IImmutableDictionary<TKey, TValue> dictionary
-        ) {
+        )
+        {
             return EqualityComparer<TValue>.Default;
         }
 

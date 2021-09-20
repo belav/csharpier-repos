@@ -66,7 +66,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Completion.Providers
         protected override bool IsFinalSemicolonOfUsingOrExtern(
             SyntaxNode directive,
             SyntaxToken token
-        ) {
+        )
+        {
             if (token.IsKind(SyntaxKind.None) || token.IsMissing)
                 return false;
 

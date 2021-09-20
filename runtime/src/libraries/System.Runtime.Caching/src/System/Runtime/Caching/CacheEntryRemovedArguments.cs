@@ -28,7 +28,8 @@ namespace System.Runtime.Caching
             ObjectCache source,
             CacheEntryRemovedReason reason,
             CacheItem cacheItem
-        ) {
+        )
+        {
             if (source == null)
             {
                 throw new ArgumentNullException(nameof(source));

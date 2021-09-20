@@ -57,7 +57,8 @@ namespace Moq
             MethodCall setup,
             int maxInvocationCount,
             int invocationCount
-        ) {
+        )
+        {
             var message = new StringBuilder();
             message.AppendLine(setup.FailMessage ?? "")
                 .Append(Times.AtMost(maxInvocationCount).GetExceptionMessage(invocationCount))
@@ -75,7 +76,8 @@ namespace Moq
             string failMessage,
             Times times,
             int callCount
-        ) {
+        )
+        {
             var message = new StringBuilder();
             message.AppendLine(failMessage ?? "")
                 .Append(times.GetExceptionMessage(callCount))
@@ -115,7 +117,8 @@ namespace Moq
                             invocation.Method.ReturnType != typeof(void)
                             && Awaitable.TryGetResultRecursive(invocation.ReturnValue)
                                 is IMocked mocked
-                        ) {
+                        )
+                        {
                             var innerMock = mocked.Mock;
                             mocks.Enqueue(innerMock);
                             message.Append($"  => {innerMock}");
@@ -236,7 +239,8 @@ namespace Moq
         internal static MockException UnverifiedInvocations(
             Mock mock,
             IEnumerable<Invocation> invocations
-        ) {
+        )
+        {
             var message = new StringBuilder();
 
             message.AppendLine(

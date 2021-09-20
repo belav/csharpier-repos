@@ -237,7 +237,8 @@ namespace Microsoft.EntityFrameworkCore.Internal
         public override async ValueTask<EntityEntry<TEntity>> AddAsync(
             TEntity entity,
             CancellationToken cancellationToken = default
-        ) {
+        )
+        {
             var entry = EntryWithoutDetectChanges(Check.NotNull(entity, nameof(entity)));
 
             await SetEntityStateAsync(
@@ -402,7 +403,8 @@ namespace Microsoft.EntityFrameworkCore.Internal
         public override async Task AddRangeAsync(
             IEnumerable<TEntity> entities,
             CancellationToken cancellationToken = default
-        ) {
+        )
+        {
             var stateManager = _context.GetDependencies().StateManager;
 
             foreach (var entity in entities)
@@ -589,7 +591,8 @@ namespace Microsoft.EntityFrameworkCore.Internal
             InternalEntityEntry entry,
             EntityState entityState,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             return entry.EntityState == EntityState.Detached
               ? _context.GetDependencies()
                     .EntityGraphAttacher.AttachGraphAsync(

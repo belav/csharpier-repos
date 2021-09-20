@@ -34,7 +34,8 @@ namespace System.ComponentModel.Composition.Hosting
             protected override IEnumerable<Export> GetExportsCore(
                 ImportDefinition definition,
                 AtomicComposition? atomicComposition
-            ) {
+            )
+            {
                 return _outerExportProvider.InternalGetExportsCore(definition, atomicComposition);
             }
         }
@@ -77,7 +78,8 @@ namespace System.ComponentModel.Composition.Hosting
         public CatalogExportProvider(
             ComposablePartCatalog catalog,
             CompositionOptions compositionOptions
-        ) {
+        )
+        {
             Requires.NotNull(catalog, nameof(catalog));
             if (
                 compositionOptions
@@ -86,7 +88,8 @@ namespace System.ComponentModel.Composition.Hosting
                     | CompositionOptions.IsThreadSafe
                     | CompositionOptions.ExportCompositionService
                 )
-            ) {
+            )
+            {
                 throw new ArgumentOutOfRangeException(nameof(compositionOptions));
             }
 
@@ -330,7 +333,8 @@ namespace System.ComponentModel.Composition.Hosting
         protected override IEnumerable<Export> GetExportsCore(
             ImportDefinition definition,
             AtomicComposition? atomicComposition
-        ) {
+        )
+        {
             ThrowIfDisposed();
             EnsureRunning();
 
@@ -350,7 +354,8 @@ namespace System.ComponentModel.Composition.Hosting
         private IEnumerable<Export> InternalGetExportsCore(
             ImportDefinition definition,
             AtomicComposition? atomicComposition
-        ) {
+        )
+        {
             ThrowIfDisposed();
             EnsureRunning();
 
@@ -395,7 +400,8 @@ namespace System.ComponentModel.Composition.Hosting
             ExportDefinition exportDefinition,
             bool isExportFactory,
             CreationPolicy importPolicy
-        ) {
+        )
+        {
             if (isExportFactory)
             {
                 return new PartCreatorExport(this, partDefinition, exportDefinition);
@@ -418,7 +424,8 @@ namespace System.ComponentModel.Composition.Hosting
 
         private static ExportDefinition[] GetExportsFromPartDefinitions(
             IEnumerable<ComposablePartDefinition> partDefinitions
-        ) {
+        )
+        {
             List<ExportDefinition> exports = new List<ExportDefinition>();
 
             foreach (var partDefinition in partDefinitions)
@@ -509,7 +516,8 @@ namespace System.ComponentModel.Composition.Hosting
         private CatalogPart GetComposablePart(
             ComposablePartDefinition partDefinition,
             bool isSharedPart
-        ) {
+        )
+        {
             ThrowIfDisposed();
             EnsureRunning();
 
@@ -585,7 +593,8 @@ namespace System.ComponentModel.Composition.Hosting
             CatalogPart part,
             ExportDefinition export,
             bool isSharedPart
-        ) {
+        )
+        {
             ThrowIfDisposed();
             EnsureRunning();
             if (part == null)
@@ -630,7 +639,8 @@ namespace System.ComponentModel.Composition.Hosting
             object exportedValue,
             CatalogPart catalogPart,
             AtomicComposition atomicComposition
-        ) {
+        )
+        {
             ThrowIfDisposed();
             EnsureRunning();
 
@@ -641,7 +651,8 @@ namespace System.ComponentModel.Composition.Hosting
             object? exportedValue,
             CatalogPart catalogPart,
             AtomicComposition? atomicComposition
-        ) {
+        )
+        {
             if (catalogPart == null)
             {
                 throw new ArgumentNullException(nameof(catalogPart));
@@ -750,7 +761,8 @@ namespace System.ComponentModel.Composition.Hosting
         private bool IsRejected(
             ComposablePartDefinition definition,
             AtomicComposition? atomicComposition
-        ) {
+        )
+        {
             // Check to see if we're currently working on the definition in question.
             // Recursive queries always answer optimistically, as if the definition hasn't
             // been rejected - because if it is we can discard all decisions that were based
@@ -808,7 +820,8 @@ namespace System.ComponentModel.Composition.Hosting
         private bool DetermineRejection(
             ComposablePartDefinition definition,
             AtomicComposition? parentAtomicComposition
-        ) {
+        )
+        {
             ChangeRejectedException? exception = null;
 
             // if there is no active atomic composition and rejection is disabled, there's no need to do any of the below
@@ -905,7 +918,8 @@ namespace System.ComponentModel.Composition.Hosting
         private void UpdateRejections(
             IEnumerable<ExportDefinition> changedExports,
             AtomicComposition? atomicComposition
-        ) {
+        )
+        {
             using (var localAtomicComposition = new AtomicComposition(atomicComposition))
             {
                 // Reconsider every part definition that has been previously
@@ -922,7 +936,8 @@ namespace System.ComponentModel.Composition.Hosting
                     if (
                         QueryPartState(localAtomicComposition, definition)
                         == AtomicCompositionQueryState.TreatAsValidated
-                    ) {
+                    )
+                    {
                         continue;
                     }
 
@@ -930,7 +945,8 @@ namespace System.ComponentModel.Composition.Hosting
                         var import in definition.ImportDefinitions.Where(
                             ImportEngine.IsRequiredImportForPreview
                         )
-                    ) {
+                    )
+                    {
                         if (changedExports.Any(export => import.IsConstraintSatisfiedBy(export)))
                         {
                             affectedRejections.Add(definition);
@@ -1056,7 +1072,8 @@ namespace System.ComponentModel.Composition.Hosting
         private AtomicCompositionQueryState QueryPartState(
             AtomicComposition atomicComposition,
             ComposablePartDefinition definition
-        ) {
+        )
+        {
             PartQueryStateNode? node = GetPartQueryStateNode(atomicComposition);
             if (node == null)
             {
@@ -1078,7 +1095,8 @@ namespace System.ComponentModel.Composition.Hosting
             AtomicComposition atomicComposition,
             ComposablePartDefinition part,
             AtomicCompositionQueryState state
-        ) {
+        )
+        {
             PartQueryStateNode? previousNode = GetPartQueryStateNode(atomicComposition);
             atomicComposition.SetValue(
                 this,
@@ -1090,7 +1108,8 @@ namespace System.ComponentModel.Composition.Hosting
             AtomicComposition atomicComposition,
             HashSet<ComposablePartDefinition> hashset,
             AtomicCompositionQueryState state
-        ) {
+        )
+        {
             PartQueryStateNode? previousNode = GetPartQueryStateNode(atomicComposition);
             atomicComposition.SetValue(
                 this,
@@ -1114,7 +1133,8 @@ namespace System.ComponentModel.Composition.Hosting
             protected PartQueryStateNode(
                 PartQueryStateNode? previousNode,
                 AtomicCompositionQueryState state
-            ) {
+            )
+            {
                 _previousNode = previousNode;
                 _state = state;
             }
@@ -1158,7 +1178,8 @@ namespace System.ComponentModel.Composition.Hosting
             protected override bool IsMatchingDefinition(
                 ComposablePartDefinition part,
                 int partHashCode
-            ) {
+            )
+            {
                 if (partHashCode != _hashCode)
                 {
                     return false;
@@ -1182,7 +1203,8 @@ namespace System.ComponentModel.Composition.Hosting
             protected override bool IsMatchingDefinition(
                 ComposablePartDefinition part,
                 int partHashCode
-            ) {
+            )
+            {
                 return _parts.Contains(part);
             }
         }

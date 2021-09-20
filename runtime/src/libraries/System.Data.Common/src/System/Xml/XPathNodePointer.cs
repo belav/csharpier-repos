@@ -115,17 +115,15 @@ namespace System.Xml
             XmlNode node
         ) : this(owner, doc, node, null, false, null) { }
 
-        internal XPathNodePointer(
-            DataDocumentXPathNavigator owner,
-            XPathNodePointer pointer
-        ) : this(
-            owner,
-            pointer._doc,
-            pointer._node,
-            pointer._column,
-            pointer._fOnValue,
-            pointer._parentOfNS
-        ) { }
+        internal XPathNodePointer(DataDocumentXPathNavigator owner, XPathNodePointer pointer)
+            : this(
+                owner,
+                pointer._doc,
+                pointer._node,
+                pointer._column,
+                pointer._fOnValue,
+                pointer._parentOfNS
+            ) { }
 
         private XPathNodePointer(
             DataDocumentXPathNavigator owner,
@@ -134,7 +132,8 @@ namespace System.Xml
             DataColumn? c,
             bool bOnValue,
             XmlBoundElement? parentOfNS
-        ) {
+        )
+        {
             Debug.Assert(owner != null);
             _owner = new WeakReference(owner);
             _doc = doc;
@@ -651,7 +650,8 @@ namespace System.Xml
                 if (
                     (_column == null || _column.ColumnMapping == MappingType.Attribute)
                     && _node.NodeType == XmlNodeType.Element
-                ) {
+                )
+                {
                     if (!IsFoliated(_node))
                     {
                         DataColumn? c = null;
@@ -1550,7 +1550,8 @@ namespace System.Xml
             XmlBoundElement? be,
             DataColumn? col,
             XmlAttribute? curAttr
-        ) {
+        )
+        {
             if (be != null)
             {
                 if (be.IsFoliated)
@@ -1574,7 +1575,8 @@ namespace System.Xml
                             bFound
                             && attr.NamespaceURI == StrReservedXmlns
                             && !DuplicateNS(be, attr.LocalName)
-                        ) {
+                        )
+                        {
                             MoveTo(attr);
                             return true;
                         }
@@ -1594,7 +1596,8 @@ namespace System.Xml
                         if (
                             curCol.Namespace == StrReservedXmlns
                             && !DuplicateNS(be, curCol.ColumnName)
-                        ) {
+                        )
+                        {
                             MoveTo(be, curCol, false);
                             return true;
                         }

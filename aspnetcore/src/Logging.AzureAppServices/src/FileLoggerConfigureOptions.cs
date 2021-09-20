@@ -14,10 +14,8 @@ namespace Microsoft.Extensions.Logging.AzureAppServices
     {
         private readonly IWebAppContext _context;
 
-        public FileLoggerConfigureOptions(
-            IConfiguration configuration,
-            IWebAppContext context
-        ) : base(configuration, "AzureDriveEnabled")
+        public FileLoggerConfigureOptions(IConfiguration configuration, IWebAppContext context)
+            : base(configuration, "AzureDriveEnabled")
         {
             _context = context;
         }

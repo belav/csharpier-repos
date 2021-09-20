@@ -26,7 +26,8 @@ namespace System.ServiceModel.Syndication
 
         internal static Collection<SyndicationCategory> CloneCategories(
             Collection<SyndicationCategory> categories
-        ) {
+        )
+        {
             if (categories == null)
             {
                 return null;
@@ -56,7 +57,8 @@ namespace System.ServiceModel.Syndication
 
         internal static Collection<SyndicationPerson> ClonePersons(
             Collection<SyndicationPerson> persons
-        ) {
+        )
+        {
             if (persons == null)
             {
                 return null;
@@ -112,7 +114,8 @@ namespace System.ServiceModel.Syndication
                     rootBase.IsAbsoluteUri
                     && currentBase.IsAbsoluteUri
                     && rootBase.IsBaseOf(currentBase)
-                ) {
+                )
+                {
                     uriToWrite = rootBase.MakeRelativeUri(currentBase);
                 }
                 else

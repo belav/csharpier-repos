@@ -76,7 +76,8 @@ namespace Microsoft.Extensions.DependencyInjection
             string authenticationScheme,
             string? displayName,
             Action<JwtBearerOptions> configureOptions
-        ) {
+        )
+        {
             builder.Services.TryAddEnumerable(
                 ServiceDescriptor.Singleton<
                     IPostConfigureOptions<JwtBearerOptions>,

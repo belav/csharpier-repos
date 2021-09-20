@@ -89,7 +89,8 @@ namespace System.CommandLine.Rendering.Tests
         public void When_a_newline_is_written_by_a_ConsoleRenderer_then_a_cursor_position_is_recorded(
             OutputMode outputMode,
             string threeLinesOfText
-        ) {
+        )
+        {
             var terminal = (TestTerminal)GetTerminal();
 
             var renderer = new ConsoleRenderer(terminal, outputMode);
@@ -107,7 +108,8 @@ namespace System.CommandLine.Rendering.Tests
         [InlineData(OutputMode.NonAnsi)]
         public void Timeline_allows_replay_of_content_rendering_and_cursor_positions(
             OutputMode outputMode
-        ) {
+        )
+        {
             var terminal = (TestTerminal)GetTerminal();
 
             var renderer = new ConsoleRenderer(terminal, outputMode);

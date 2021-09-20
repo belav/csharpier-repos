@@ -41,7 +41,8 @@ namespace Microsoft.CodeAnalysis.Editor.CommandHandlers
                 IEnumerable<
                 Lazy<IExecuteInInteractiveCommandHandler, ContentTypeMetadata>
             > executeInInteractiveHandlers
-        ) {
+        )
+        {
             _executeInInteractiveHandlers = executeInInteractiveHandlers;
         }
 
@@ -60,7 +61,8 @@ namespace Microsoft.CodeAnalysis.Editor.CommandHandlers
 
         CommandState ICommandHandler<ExecuteInInteractiveCommandArgs>.GetCommandState(
             ExecuteInInteractiveCommandArgs args
-        ) {
+        )
+        {
             return GetCommandHandler(args.SubjectBuffer) == null
               ? CommandState.Unavailable
               : CommandState.Available;

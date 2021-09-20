@@ -119,7 +119,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                 CSharpAttributeData,
                 AttributeLocation
             > arguments
-        ) {
+        )
+        {
             Debug.Assert((object)arguments.AttributeSyntaxOpt != null);
             Debug.Assert(arguments.Diagnostics is BindingDiagnosticBag);
 
@@ -144,7 +145,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
         internal override void AfterAddingTypeMembersChecks(
             ConversionsBase conversions,
             BindingDiagnosticBag diagnostics
-        ) {
+        )
+        {
             var compilation = DeclaringCompilation;
             var location = ErrorLocation;
 
@@ -160,7 +162,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             if (
                 compilation.ShouldEmitNullableAttributes(this)
                 && TypeWithAnnotations.NeedsNullableAttribute()
-            ) {
+            )
+            {
                 compilation.EnsureNullableAttributeExists(
                     diagnostics,
                     location,
@@ -242,7 +245,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             CultureInfo preferredCulture = null,
             bool expandIncludes = false,
             CancellationToken cancellationToken = default(CancellationToken)
-        ) {
+        )
+        {
             ref var lazyDocComment = ref expandIncludes
                 ? ref _lazyExpandedDocComment
                 : ref _lazyDocComment;
@@ -256,7 +260,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
         internal sealed override ConstantValue GetConstantValue(
             ConstantFieldsInProgress inProgress,
             bool earlyDecodingWellKnownAttributes
-        ) {
+        )
+        {
             var value = this.GetLazyConstantValue(earlyDecodingWellKnownAttributes);
             if (value != Microsoft.CodeAnalysis.ConstantValue.Unset)
             {
@@ -303,7 +308,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
         /// </summary>
         internal ImmutableHashSet<SourceFieldSymbolWithSyntaxReference> GetConstantValueDependencies(
             bool earlyDecodingWellKnownAttributes
-        ) {
+        )
+        {
             var value = this.GetLazyConstantValue(earlyDecodingWellKnownAttributes);
             if (value != Microsoft.CodeAnalysis.ConstantValue.Unset)
             {
@@ -327,7 +333,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                 && !value.IsBad
                 && (value != Microsoft.CodeAnalysis.ConstantValue.Unset)
                 && !diagnostics.HasAnyResolvedErrors()
-            ) {
+            )
+            {
                 this.SetLazyConstantValue(
                     value,
                     earlyDecodingWellKnownAttributes,
@@ -351,11 +358,13 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
         private void BindConstantValueIfNecessary(
             bool earlyDecodingWellKnownAttributes,
             bool startsCycle
-        ) {
+        )
+        {
             if (
                 this.GetLazyConstantValue(earlyDecodingWellKnownAttributes)
                 != Microsoft.CodeAnalysis.ConstantValue.Unset
-            ) {
+            )
+            {
                 return;
             }
 
@@ -389,7 +398,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             bool earlyDecodingWellKnownAttributes,
             BindingDiagnosticBag diagnostics,
             bool startsCycle
-        ) {
+        )
+        {
             Debug.Assert(value != Microsoft.CodeAnalysis.ConstantValue.Unset);
             Debug.Assert(
                 (
@@ -414,7 +424,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                         value,
                         Microsoft.CodeAnalysis.ConstantValue.Unset
                     ) == Microsoft.CodeAnalysis.ConstantValue.Unset
-                ) {
+                )
+                {
 #if REPORT_ALL
                     Console.WriteLine(
                         "Thread {0}, Field {1}, StartsCycle {2}",

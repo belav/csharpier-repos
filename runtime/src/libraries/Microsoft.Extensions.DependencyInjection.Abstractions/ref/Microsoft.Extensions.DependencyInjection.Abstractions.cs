@@ -14,7 +14,8 @@ namespace Microsoft.Extensions.DependencyInjection
             )]
                 System.Type instanceType,
             System.Type[] argumentTypes
-        ) {
+        )
+        {
             throw null;
         }
         public static object CreateInstance(
@@ -24,7 +25,8 @@ namespace Microsoft.Extensions.DependencyInjection
             )]
                 System.Type instanceType,
             params object[] parameters
-        ) {
+        )
+        {
             throw null;
         }
         public static T CreateInstance<
@@ -42,7 +44,8 @@ namespace Microsoft.Extensions.DependencyInjection
                 System.Diagnostics.CodeAnalysis.DynamicallyAccessedMemberTypes.PublicConstructors
             )]
                 System.Type type
-        ) {
+        )
+        {
             throw null;
         }
         public static T GetServiceOrCreateInstance<
@@ -99,14 +102,16 @@ namespace Microsoft.Extensions.DependencyInjection
                 System.Diagnostics.CodeAnalysis.DynamicallyAccessedMemberTypes.PublicConstructors
             )]
                 System.Type serviceType
-        ) {
+        )
+        {
             throw null;
         }
         public static Microsoft.Extensions.DependencyInjection.IServiceCollection AddScoped(
             this Microsoft.Extensions.DependencyInjection.IServiceCollection services,
             System.Type serviceType,
             System.Func<System.IServiceProvider, object> implementationFactory
-        ) {
+        )
+        {
             throw null;
         }
         public static Microsoft.Extensions.DependencyInjection.IServiceCollection AddScoped(
@@ -116,7 +121,8 @@ namespace Microsoft.Extensions.DependencyInjection
                 System.Diagnostics.CodeAnalysis.DynamicallyAccessedMemberTypes.PublicConstructors
             )]
                 System.Type implementationType
-        ) {
+        )
+        {
             throw null;
         }
         public static Microsoft.Extensions.DependencyInjection.IServiceCollection AddScoped<
@@ -124,9 +130,8 @@ namespace Microsoft.Extensions.DependencyInjection
                 System.Diagnostics.CodeAnalysis.DynamicallyAccessedMemberTypes.PublicConstructors
             )]
                 TService
-        >(
-            this Microsoft.Extensions.DependencyInjection.IServiceCollection services
-        ) where TService : class
+        >(this Microsoft.Extensions.DependencyInjection.IServiceCollection services)
+            where TService : class
         {
             throw null;
         }
@@ -143,10 +148,9 @@ namespace Microsoft.Extensions.DependencyInjection
                 System.Diagnostics.CodeAnalysis.DynamicallyAccessedMemberTypes.PublicConstructors
             )]
                 TImplementation
-        >(
-            this Microsoft.Extensions.DependencyInjection.IServiceCollection services
-        ) where TService : class
-          where TImplementation : class, TService
+        >(this Microsoft.Extensions.DependencyInjection.IServiceCollection services)
+            where TService : class
+            where TImplementation : class, TService
         {
             throw null;
         }
@@ -156,8 +160,9 @@ namespace Microsoft.Extensions.DependencyInjection
         >(
             this Microsoft.Extensions.DependencyInjection.IServiceCollection services,
             System.Func<System.IServiceProvider, TImplementation> implementationFactory
-        ) where TService : class
-          where TImplementation : class, TService
+        )
+            where TService : class
+            where TImplementation : class, TService
         {
             throw null;
         }
@@ -167,21 +172,24 @@ namespace Microsoft.Extensions.DependencyInjection
                 System.Diagnostics.CodeAnalysis.DynamicallyAccessedMemberTypes.PublicConstructors
             )]
                 System.Type serviceType
-        ) {
+        )
+        {
             throw null;
         }
         public static Microsoft.Extensions.DependencyInjection.IServiceCollection AddSingleton(
             this Microsoft.Extensions.DependencyInjection.IServiceCollection services,
             System.Type serviceType,
             System.Func<System.IServiceProvider, object> implementationFactory
-        ) {
+        )
+        {
             throw null;
         }
         public static Microsoft.Extensions.DependencyInjection.IServiceCollection AddSingleton(
             this Microsoft.Extensions.DependencyInjection.IServiceCollection services,
             System.Type serviceType,
             object implementationInstance
-        ) {
+        )
+        {
             throw null;
         }
         public static Microsoft.Extensions.DependencyInjection.IServiceCollection AddSingleton(
@@ -191,7 +199,8 @@ namespace Microsoft.Extensions.DependencyInjection
                 System.Diagnostics.CodeAnalysis.DynamicallyAccessedMemberTypes.PublicConstructors
             )]
                 System.Type implementationType
-        ) {
+        )
+        {
             throw null;
         }
         public static Microsoft.Extensions.DependencyInjection.IServiceCollection AddSingleton<
@@ -199,9 +208,8 @@ namespace Microsoft.Extensions.DependencyInjection
                 System.Diagnostics.CodeAnalysis.DynamicallyAccessedMemberTypes.PublicConstructors
             )]
                 TService
-        >(
-            this Microsoft.Extensions.DependencyInjection.IServiceCollection services
-        ) where TService : class
+        >(this Microsoft.Extensions.DependencyInjection.IServiceCollection services)
+            where TService : class
         {
             throw null;
         }
@@ -225,10 +233,9 @@ namespace Microsoft.Extensions.DependencyInjection
                 System.Diagnostics.CodeAnalysis.DynamicallyAccessedMemberTypes.PublicConstructors
             )]
                 TImplementation
-        >(
-            this Microsoft.Extensions.DependencyInjection.IServiceCollection services
-        ) where TService : class
-          where TImplementation : class, TService
+        >(this Microsoft.Extensions.DependencyInjection.IServiceCollection services)
+            where TService : class
+            where TImplementation : class, TService
         {
             throw null;
         }
@@ -238,8 +245,9 @@ namespace Microsoft.Extensions.DependencyInjection
         >(
             this Microsoft.Extensions.DependencyInjection.IServiceCollection services,
             System.Func<System.IServiceProvider, TImplementation> implementationFactory
-        ) where TService : class
-          where TImplementation : class, TService
+        )
+            where TService : class
+            where TImplementation : class, TService
         {
             throw null;
         }
@@ -249,14 +257,16 @@ namespace Microsoft.Extensions.DependencyInjection
                 System.Diagnostics.CodeAnalysis.DynamicallyAccessedMemberTypes.PublicConstructors
             )]
                 System.Type serviceType
-        ) {
+        )
+        {
             throw null;
         }
         public static Microsoft.Extensions.DependencyInjection.IServiceCollection AddTransient(
             this Microsoft.Extensions.DependencyInjection.IServiceCollection services,
             System.Type serviceType,
             System.Func<System.IServiceProvider, object> implementationFactory
-        ) {
+        )
+        {
             throw null;
         }
         public static Microsoft.Extensions.DependencyInjection.IServiceCollection AddTransient(
@@ -266,7 +276,8 @@ namespace Microsoft.Extensions.DependencyInjection
                 System.Diagnostics.CodeAnalysis.DynamicallyAccessedMemberTypes.PublicConstructors
             )]
                 System.Type implementationType
-        ) {
+        )
+        {
             throw null;
         }
         public static Microsoft.Extensions.DependencyInjection.IServiceCollection AddTransient<
@@ -274,9 +285,8 @@ namespace Microsoft.Extensions.DependencyInjection
                 System.Diagnostics.CodeAnalysis.DynamicallyAccessedMemberTypes.PublicConstructors
             )]
                 TService
-        >(
-            this Microsoft.Extensions.DependencyInjection.IServiceCollection services
-        ) where TService : class
+        >(this Microsoft.Extensions.DependencyInjection.IServiceCollection services)
+            where TService : class
         {
             throw null;
         }
@@ -293,10 +303,9 @@ namespace Microsoft.Extensions.DependencyInjection
                 System.Diagnostics.CodeAnalysis.DynamicallyAccessedMemberTypes.PublicConstructors
             )]
                 TImplementation
-        >(
-            this Microsoft.Extensions.DependencyInjection.IServiceCollection services
-        ) where TService : class
-          where TImplementation : class, TService
+        >(this Microsoft.Extensions.DependencyInjection.IServiceCollection services)
+            where TService : class
+            where TImplementation : class, TService
         {
             throw null;
         }
@@ -306,8 +315,9 @@ namespace Microsoft.Extensions.DependencyInjection
         >(
             this Microsoft.Extensions.DependencyInjection.IServiceCollection services,
             System.Func<System.IServiceProvider, TImplementation> implementationFactory
-        ) where TService : class
-          where TImplementation : class, TService
+        )
+            where TService : class
+            where TImplementation : class, TService
         {
             throw null;
         }
@@ -355,7 +365,8 @@ namespace Microsoft.Extensions.DependencyInjection
             System.Type serviceType,
             System.Func<System.IServiceProvider, object> implementationFactory,
             Microsoft.Extensions.DependencyInjection.ServiceLifetime lifetime
-        ) {
+        )
+        {
             throw null;
         }
         public static Microsoft.Extensions.DependencyInjection.ServiceDescriptor Describe(
@@ -365,13 +376,15 @@ namespace Microsoft.Extensions.DependencyInjection
             )]
                 System.Type implementationType,
             Microsoft.Extensions.DependencyInjection.ServiceLifetime lifetime
-        ) {
+        )
+        {
             throw null;
         }
         public static Microsoft.Extensions.DependencyInjection.ServiceDescriptor Scoped(
             System.Type service,
             System.Func<System.IServiceProvider, object> implementationFactory
-        ) {
+        )
+        {
             throw null;
         }
         public static Microsoft.Extensions.DependencyInjection.ServiceDescriptor Scoped(
@@ -380,7 +393,8 @@ namespace Microsoft.Extensions.DependencyInjection
                 System.Diagnostics.CodeAnalysis.DynamicallyAccessedMemberTypes.PublicConstructors
             )]
                 System.Type implementationType
-        ) {
+        )
+        {
             throw null;
         }
         public static Microsoft.Extensions.DependencyInjection.ServiceDescriptor Scoped<TService>(
@@ -404,23 +418,24 @@ namespace Microsoft.Extensions.DependencyInjection
         public static Microsoft.Extensions.DependencyInjection.ServiceDescriptor Scoped<
             TService,
             TImplementation
-        >(
-            System.Func<System.IServiceProvider, TImplementation> implementationFactory
-        ) where TService : class
-          where TImplementation : class, TService
+        >(System.Func<System.IServiceProvider, TImplementation> implementationFactory)
+            where TService : class
+            where TImplementation : class, TService
         {
             throw null;
         }
         public static Microsoft.Extensions.DependencyInjection.ServiceDescriptor Singleton(
             System.Type serviceType,
             System.Func<System.IServiceProvider, object> implementationFactory
-        ) {
+        )
+        {
             throw null;
         }
         public static Microsoft.Extensions.DependencyInjection.ServiceDescriptor Singleton(
             System.Type serviceType,
             object implementationInstance
-        ) {
+        )
+        {
             throw null;
         }
         public static Microsoft.Extensions.DependencyInjection.ServiceDescriptor Singleton(
@@ -429,7 +444,8 @@ namespace Microsoft.Extensions.DependencyInjection
                 System.Diagnostics.CodeAnalysis.DynamicallyAccessedMemberTypes.PublicConstructors
             )]
                 System.Type implementationType
-        ) {
+        )
+        {
             throw null;
         }
         public static Microsoft.Extensions.DependencyInjection.ServiceDescriptor Singleton<TService>(
@@ -459,10 +475,9 @@ namespace Microsoft.Extensions.DependencyInjection
         public static Microsoft.Extensions.DependencyInjection.ServiceDescriptor Singleton<
             TService,
             TImplementation
-        >(
-            System.Func<System.IServiceProvider, TImplementation> implementationFactory
-        ) where TService : class
-          where TImplementation : class, TService
+        >(System.Func<System.IServiceProvider, TImplementation> implementationFactory)
+            where TService : class
+            where TImplementation : class, TService
         {
             throw null;
         }
@@ -473,7 +488,8 @@ namespace Microsoft.Extensions.DependencyInjection
         public static Microsoft.Extensions.DependencyInjection.ServiceDescriptor Transient(
             System.Type service,
             System.Func<System.IServiceProvider, object> implementationFactory
-        ) {
+        )
+        {
             throw null;
         }
         public static Microsoft.Extensions.DependencyInjection.ServiceDescriptor Transient(
@@ -482,7 +498,8 @@ namespace Microsoft.Extensions.DependencyInjection
                 System.Diagnostics.CodeAnalysis.DynamicallyAccessedMemberTypes.PublicConstructors
             )]
                 System.Type implementationType
-        ) {
+        )
+        {
             throw null;
         }
         public static Microsoft.Extensions.DependencyInjection.ServiceDescriptor Transient<TService>(
@@ -506,10 +523,9 @@ namespace Microsoft.Extensions.DependencyInjection
         public static Microsoft.Extensions.DependencyInjection.ServiceDescriptor Transient<
             TService,
             TImplementation
-        >(
-            System.Func<System.IServiceProvider, TImplementation> implementationFactory
-        ) where TService : class
-          where TImplementation : class, TService
+        >(System.Func<System.IServiceProvider, TImplementation> implementationFactory)
+            where TService : class
+            where TImplementation : class, TService
         {
             throw null;
         }
@@ -524,13 +540,15 @@ namespace Microsoft.Extensions.DependencyInjection
     {
         public static Microsoft.Extensions.DependencyInjection.IServiceScope CreateScope(
             this System.IServiceProvider provider
-        ) {
+        )
+        {
             throw null;
         }
         public static object GetRequiredService(
             this System.IServiceProvider provider,
             System.Type serviceType
-        ) {
+        )
+        {
             throw null;
         }
         public static T GetRequiredService<T>(this System.IServiceProvider provider)
@@ -541,12 +559,14 @@ namespace Microsoft.Extensions.DependencyInjection
         public static System.Collections.Generic.IEnumerable<object?> GetServices(
             this System.IServiceProvider provider,
             System.Type serviceType
-        ) {
+        )
+        {
             throw null;
         }
         public static System.Collections.Generic.IEnumerable<T> GetServices<T>(
             this System.IServiceProvider provider
-        ) {
+        )
+        {
             throw null;
         }
         public static T? GetService<T>(this System.IServiceProvider provider)
@@ -562,30 +582,35 @@ namespace Microsoft.Extensions.DependencyInjection.Extensions
         public static Microsoft.Extensions.DependencyInjection.IServiceCollection Add(
             this Microsoft.Extensions.DependencyInjection.IServiceCollection collection,
             Microsoft.Extensions.DependencyInjection.ServiceDescriptor descriptor
-        ) {
+        )
+        {
             throw null;
         }
         public static Microsoft.Extensions.DependencyInjection.IServiceCollection Add(
             this Microsoft.Extensions.DependencyInjection.IServiceCollection collection,
             System.Collections.Generic.IEnumerable<Microsoft.Extensions.DependencyInjection.ServiceDescriptor> descriptors
-        ) {
+        )
+        {
             throw null;
         }
         public static Microsoft.Extensions.DependencyInjection.IServiceCollection RemoveAll(
             this Microsoft.Extensions.DependencyInjection.IServiceCollection collection,
             System.Type serviceType
-        ) {
+        )
+        {
             throw null;
         }
         public static Microsoft.Extensions.DependencyInjection.IServiceCollection RemoveAll<T>(
             this Microsoft.Extensions.DependencyInjection.IServiceCollection collection
-        ) {
+        )
+        {
             throw null;
         }
         public static Microsoft.Extensions.DependencyInjection.IServiceCollection Replace(
             this Microsoft.Extensions.DependencyInjection.IServiceCollection collection,
             Microsoft.Extensions.DependencyInjection.ServiceDescriptor descriptor
-        ) {
+        )
+        {
             throw null;
         }
         public static void TryAdd(
@@ -629,9 +654,8 @@ namespace Microsoft.Extensions.DependencyInjection.Extensions
                 System.Diagnostics.CodeAnalysis.DynamicallyAccessedMemberTypes.PublicConstructors
             )]
                 TService
-        >(
-            this Microsoft.Extensions.DependencyInjection.IServiceCollection collection
-        ) where TService : class { }
+        >(this Microsoft.Extensions.DependencyInjection.IServiceCollection collection)
+            where TService : class { }
         public static void TryAddScoped<TService>(
             this Microsoft.Extensions.DependencyInjection.IServiceCollection services,
             System.Func<System.IServiceProvider, TService> implementationFactory
@@ -642,10 +666,9 @@ namespace Microsoft.Extensions.DependencyInjection.Extensions
                 System.Diagnostics.CodeAnalysis.DynamicallyAccessedMemberTypes.PublicConstructors
             )]
                 TImplementation
-        >(
-            this Microsoft.Extensions.DependencyInjection.IServiceCollection collection
-        ) where TService : class
-          where TImplementation : class, TService { }
+        >(this Microsoft.Extensions.DependencyInjection.IServiceCollection collection)
+            where TService : class
+            where TImplementation : class, TService { }
         public static void TryAddSingleton(
             this Microsoft.Extensions.DependencyInjection.IServiceCollection collection,
             [System.Diagnostics.CodeAnalysis.DynamicallyAccessedMembersAttribute(
@@ -671,9 +694,8 @@ namespace Microsoft.Extensions.DependencyInjection.Extensions
                 System.Diagnostics.CodeAnalysis.DynamicallyAccessedMemberTypes.PublicConstructors
             )]
                 TService
-        >(
-            this Microsoft.Extensions.DependencyInjection.IServiceCollection collection
-        ) where TService : class { }
+        >(this Microsoft.Extensions.DependencyInjection.IServiceCollection collection)
+            where TService : class { }
         public static void TryAddSingleton<TService>(
             this Microsoft.Extensions.DependencyInjection.IServiceCollection services,
             System.Func<System.IServiceProvider, TService> implementationFactory
@@ -688,10 +710,9 @@ namespace Microsoft.Extensions.DependencyInjection.Extensions
                 System.Diagnostics.CodeAnalysis.DynamicallyAccessedMemberTypes.PublicConstructors
             )]
                 TImplementation
-        >(
-            this Microsoft.Extensions.DependencyInjection.IServiceCollection collection
-        ) where TService : class
-          where TImplementation : class, TService { }
+        >(this Microsoft.Extensions.DependencyInjection.IServiceCollection collection)
+            where TService : class
+            where TImplementation : class, TService { }
         public static void TryAddTransient(
             this Microsoft.Extensions.DependencyInjection.IServiceCollection collection,
             [System.Diagnostics.CodeAnalysis.DynamicallyAccessedMembersAttribute(
@@ -717,9 +738,8 @@ namespace Microsoft.Extensions.DependencyInjection.Extensions
                 System.Diagnostics.CodeAnalysis.DynamicallyAccessedMemberTypes.PublicConstructors
             )]
                 TService
-        >(
-            this Microsoft.Extensions.DependencyInjection.IServiceCollection collection
-        ) where TService : class { }
+        >(this Microsoft.Extensions.DependencyInjection.IServiceCollection collection)
+            where TService : class { }
         public static void TryAddTransient<TService>(
             this Microsoft.Extensions.DependencyInjection.IServiceCollection services,
             System.Func<System.IServiceProvider, TService> implementationFactory
@@ -730,9 +750,8 @@ namespace Microsoft.Extensions.DependencyInjection.Extensions
                 System.Diagnostics.CodeAnalysis.DynamicallyAccessedMemberTypes.PublicConstructors
             )]
                 TImplementation
-        >(
-            this Microsoft.Extensions.DependencyInjection.IServiceCollection collection
-        ) where TService : class
-          where TImplementation : class, TService { }
+        >(this Microsoft.Extensions.DependencyInjection.IServiceCollection collection)
+            where TService : class
+            where TImplementation : class, TService { }
     }
 }

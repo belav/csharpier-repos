@@ -13,7 +13,8 @@ namespace Microsoft.Extensions.Logging
             string category,
             out LogLevel? minLevel,
             out Func<string, string, LogLevel, bool> filter
-        ) {
+        )
+        {
             filter = null;
             minLevel = options.MinLevel;
 
@@ -35,7 +36,8 @@ namespace Microsoft.Extensions.Logging
                         !string.IsNullOrEmpty(providerAlias)
                         && IsBetter(rule, current, providerAlias, category)
                     )
-                ) {
+                )
+                {
                     current = rule;
                 }
             }
@@ -52,7 +54,8 @@ namespace Microsoft.Extensions.Logging
             LoggerFilterRule current,
             string logger,
             string category
-        ) {
+        )
+        {
             // Skip rules with inapplicable type or category
             if (rule.ProviderName != null && rule.ProviderName != logger)
             {
@@ -68,7 +71,8 @@ namespace Microsoft.Extensions.Logging
                 if (
                     wildcardIndex != -1
                     && categoryName.IndexOf(WildcardChar, wildcardIndex + 1) != -1
-                ) {
+                )
+                {
                     throw new InvalidOperationException(SR.MoreThanOneWildcard);
                 }
 
@@ -88,7 +92,8 @@ namespace Microsoft.Extensions.Logging
                 if (
                     !category.AsSpan().StartsWith(prefix, StringComparison.OrdinalIgnoreCase)
                     || !category.AsSpan().EndsWith(suffix, StringComparison.OrdinalIgnoreCase)
-                ) {
+                )
+                {
                     return false;
                 }
             }

@@ -69,7 +69,8 @@ namespace Microsoft.AspNetCore.HttpsPolicy.Tests
             bool preload,
             string expectedHstsHeader,
             string expectedUrl
-        ) {
+        )
+        {
             using var host = new HostBuilder().ConfigureWebHost(
                     webHostBuilder =>
                     {

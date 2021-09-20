@@ -19,7 +19,8 @@ namespace System
                     "System.Diagnostics.DefaultActivityIdFormatIsHierarchial",
                     ref defaultActivityIdFormatIsHierarchial
                 )
-            ) {
+            )
+            {
                 string? switchValue = Environment.GetEnvironmentVariable(
                     "DOTNET_SYSTEM_DIAGNOSTICS_DEFAULTACTIVITYIDFORMATISHIERARCHIAL"
                 );

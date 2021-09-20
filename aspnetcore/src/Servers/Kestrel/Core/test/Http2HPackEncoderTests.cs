@@ -244,7 +244,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Tests
         public void BeginEncodeHeaders_ExcludedHeaders_NotAddedToTable(
             string headerName,
             bool neverIndex
-        ) {
+        )
+        {
             Span<byte> buffer = new byte[1024 * 16];
 
             var headers = new HttpResponseHeaders();
@@ -524,7 +525,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Tests
             KeyValuePair<string, string>[] headers,
             byte[] expectedPayload,
             int? statusCode
-        ) {
+        )
+        {
             var hpackEncoder = new DynamicHPackEncoder();
 
             var payload = new byte[1024];
@@ -800,7 +802,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Tests
 
         private static Http2HeadersEnumerator GetHeadersEnumerator(
             IEnumerable<KeyValuePair<string, string>> headers
-        ) {
+        )
+        {
             var groupedHeaders = headers.GroupBy(k => k.Key)
                 .ToDictionary(
                     g => g.Key,

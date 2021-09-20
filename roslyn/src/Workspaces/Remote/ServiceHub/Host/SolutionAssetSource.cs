@@ -28,7 +28,8 @@ namespace Microsoft.CodeAnalysis.Remote
             ISet<Checksum> checksums,
             ISerializerService serializerService,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             // Make sure we are on the thread pool to avoid UI thread dependencies if external code uses ConfigureAwait(true)
             await TaskScheduler.Default;
 
@@ -63,7 +64,8 @@ namespace Microsoft.CodeAnalysis.Remote
         public async ValueTask<bool> IsExperimentEnabledAsync(
             string experimentName,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             // Make sure we are on the thread pool to avoid UI thread dependencies if external code uses ConfigureAwait(true)
             await TaskScheduler.Default;
 

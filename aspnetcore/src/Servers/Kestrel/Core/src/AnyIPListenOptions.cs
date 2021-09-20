@@ -19,7 +19,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core
         internal override async Task BindAsync(
             AddressBindContext context,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             Debug.Assert(IPEndPoint != null);
 
             // when address is 'http://hostname:port', 'http://*:port', or 'http://+:port'

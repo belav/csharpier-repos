@@ -35,7 +35,8 @@ internal static partial class Interop
         internal static unsafe int SslCtxSetAlpnProtos(
             SafeSslContextHandle ctx,
             List<SslApplicationProtocol> protocols
-        ) {
+        )
+        {
             byte[] buffer = ConvertAlpnProtocolListToByteArray(protocols);
             fixed (byte* b = buffer)
             {
@@ -45,7 +46,8 @@ internal static partial class Interop
 
         internal static byte[] ConvertAlpnProtocolListToByteArray(
             List<SslApplicationProtocol> applicationProtocols
-        ) {
+        )
+        {
             int protocolSize = 0;
             foreach (SslApplicationProtocol protocol in applicationProtocols)
             {

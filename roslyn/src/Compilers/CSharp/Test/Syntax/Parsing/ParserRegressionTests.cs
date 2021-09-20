@@ -873,7 +873,8 @@ class A
         private static new void ParseAndValidate(
             string text,
             params DiagnosticDescription[] expectedErrors
-        ) {
+        )
+        {
             var parsedTree = ParseWithRoundTripCheck(text);
             var actualErrors = parsedTree.GetDiagnostics();
             actualErrors.Verify(expectedErrors);

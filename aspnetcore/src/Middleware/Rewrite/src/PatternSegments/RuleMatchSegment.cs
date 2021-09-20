@@ -18,7 +18,8 @@ namespace Microsoft.AspNetCore.Rewrite.PatternSegments
             RewriteContext context,
             BackReferenceCollection? ruleBackReferences,
             BackReferenceCollection? conditionBackReferences
-        ) {
+        )
+        {
             Debug.Assert(ruleBackReferences != null);
             return ruleBackReferences[_index];
         }

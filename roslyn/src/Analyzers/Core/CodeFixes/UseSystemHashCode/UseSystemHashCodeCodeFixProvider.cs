@@ -58,7 +58,8 @@ namespace Microsoft.CodeAnalysis.UseSystemHashCode
             ImmutableArray<Diagnostic> diagnostics,
             SyntaxEditor editor,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var generator = SyntaxGenerator.GetGenerator(document);
             var generatorInternal = document.GetRequiredLanguageService<SyntaxGeneratorInternal>();
             var declarationService = document.GetLanguageService<ISymbolDeclarationService>();
@@ -119,13 +120,12 @@ namespace Microsoft.CodeAnalysis.UseSystemHashCode
 
         private class MyCodeAction : CustomCodeActions.DocumentChangeAction
         {
-            public MyCodeAction(
-                Func<CancellationToken, Task<Document>> createChangedDocument
-            ) : base(
-                AnalyzersResources.Use_System_HashCode,
-                createChangedDocument,
-                AnalyzersResources.Use_System_HashCode
-            ) { }
+            public MyCodeAction(Func<CancellationToken, Task<Document>> createChangedDocument)
+                : base(
+                    AnalyzersResources.Use_System_HashCode,
+                    createChangedDocument,
+                    AnalyzersResources.Use_System_HashCode
+                ) { }
         }
     }
 }

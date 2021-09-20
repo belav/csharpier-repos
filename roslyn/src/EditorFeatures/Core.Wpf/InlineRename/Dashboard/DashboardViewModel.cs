@@ -70,7 +70,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.InlineRename
         private void OnReferenceLocationsChanged(
             object sender,
             ImmutableArray<InlineRenameLocation> renameLocations
-        ) {
+        )
+        {
             var totalFilesCount = renameLocations.GroupBy(s => s.Document).Count();
             var totalSpansCount = renameLocations.Length;
 

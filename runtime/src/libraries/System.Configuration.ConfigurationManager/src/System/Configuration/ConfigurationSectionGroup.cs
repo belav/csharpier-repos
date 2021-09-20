@@ -57,7 +57,8 @@ namespace System.Configuration
                         if (
                             (factoryRecord != null)
                             && !factoryRecord.IsEquivalentType(_configRecord.Host, typeName)
-                        ) {
+                        )
+                        {
                             throw new ConfigurationErrorsException(
                                 SR.Format(SR.Config_tag_name_already_defined, SectionGroupName)
                             );
@@ -105,7 +106,8 @@ namespace System.Configuration
         internal void AttachToConfigurationRecord(
             MgmtConfigurationRecord configRecord,
             FactoryRecord factoryRecord
-        ) {
+        )
+        {
             _configRecord = configRecord;
             SectionGroupName = factoryRecord.ConfigKey;
             Name = factoryRecord.Name;
@@ -187,7 +189,8 @@ namespace System.Configuration
 
         protected internal virtual bool ShouldSerializeSectionGroupInTargetVersion(
             FrameworkName targetFramework
-        ) {
+        )
+        {
             return true;
         }
     }

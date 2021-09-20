@@ -22,7 +22,8 @@ namespace System.Runtime.Serialization
             XmlObjectSerializerWriteContext context,
             ClassDataContract classContract,
             XmlDictionaryString[]? memberNames
-        ) {
+        )
+        {
             InvokeOnSerializing(obj, context, classContract);
             obj = ResolveAdapterType(obj, classContract);
             if (classContract.IsISerializable)
@@ -62,7 +63,8 @@ namespace System.Runtime.Serialization
             object? value,
             bool writeXsiType,
             PrimitiveDataContract? primitiveContractForParamType
-        ) {
+        )
+        {
             Type memberType = type;
             object? memberValue = value;
             bool originValueIsNullableOfT = (
@@ -123,7 +125,8 @@ namespace System.Runtime.Serialization
                         primitiveContract != null
                         && primitiveContract.UnderlyingType != Globals.TypeOfObject
                         && !writeXsiType
-                    ) {
+                    )
+                    {
                         primitiveContract.WriteXmlValue(xmlWriter, memberValue, context);
                     }
                     else
@@ -134,7 +137,8 @@ namespace System.Runtime.Serialization
                                 memberType == Globals.TypeOfObject
                                 || (originValueIsNullableOfT && memberType.IsValueType)
                             )
-                        ) {
+                        )
+                        {
                             context.WriteNull(
                                 xmlWriter,
                                 memberType,
@@ -181,7 +185,8 @@ namespace System.Runtime.Serialization
             XmlDictionaryString name,
             XmlDictionaryString? ns,
             PrimitiveDataContract? primitiveContract
-        ) {
+        )
+        {
             if (
                 primitiveContract == null
                 || primitiveContract.UnderlyingType == Globals.TypeOfObject
@@ -197,7 +202,8 @@ namespace System.Runtime.Serialization
             object obj,
             XmlObjectSerializerWriteContext context,
             ClassDataContract classContract
-        ) {
+        )
+        {
             if (classContract.BaseContract != null)
                 InvokeOnSerializing(obj, context, classContract.BaseContract);
             if (classContract.OnSerializing != null)
@@ -211,7 +217,8 @@ namespace System.Runtime.Serialization
             object obj,
             XmlObjectSerializerWriteContext context,
             ClassDataContract classContract
-        ) {
+        )
+        {
             if (classContract.BaseContract != null)
                 InvokeOnSerialized(obj, context, classContract.BaseContract);
             if (classContract.OnSerialized != null)
@@ -230,7 +237,8 @@ namespace System.Runtime.Serialization
             }
             else if (
                 type.IsGenericType && type.GetGenericTypeDefinition() == Globals.TypeOfKeyValuePair
-            ) {
+            )
+            {
                 obj = classContract.KeyValuePairAdapterConstructorInfo!.Invoke(
                     new object[] { obj }
                 );
@@ -247,7 +255,8 @@ namespace System.Runtime.Serialization
             bool writeXsiType,
             Type memberType,
             bool isNullableOfT = false
-        ) {
+        )
+        {
             if (isNullableOfT)
             {
                 context.InternalSerialize(

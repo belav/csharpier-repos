@@ -217,7 +217,8 @@ namespace Microsoft.CodeAnalysis.CSharp
         protected BoundExpression VisitExpressionWithStackGuard(
             ref int recursionDepth,
             BoundExpression node
-        ) {
+        )
+        {
             BoundExpression result;
             recursionDepth++;
 #if DEBUG
@@ -227,7 +228,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             if (
                 recursionDepth > 1
                 || !ConvertInsufficientExecutionStackExceptionToCancelledByStackGuardException()
-            ) {
+            )
+            {
                 EnsureSufficientExecutionStack(recursionDepth);
 
                 result = VisitExpressionWithoutStackGuard(node);

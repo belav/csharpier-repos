@@ -77,7 +77,8 @@ namespace System.DirectoryServices.AccountManagement
             PrincipalContext context,
             DateTime time,
             MatchType type
-        ) {
+        )
+        {
             return FindByLockoutTime<ComputerPrincipal>(context, time, type);
         }
 
@@ -85,7 +86,8 @@ namespace System.DirectoryServices.AccountManagement
             PrincipalContext context,
             DateTime time,
             MatchType type
-        ) {
+        )
+        {
             return FindByLogonTime<ComputerPrincipal>(context, time, type);
         }
 
@@ -93,7 +95,8 @@ namespace System.DirectoryServices.AccountManagement
             PrincipalContext context,
             DateTime time,
             MatchType type
-        ) {
+        )
+        {
             return FindByExpirationTime<ComputerPrincipal>(context, time, type);
         }
 
@@ -101,7 +104,8 @@ namespace System.DirectoryServices.AccountManagement
             PrincipalContext context,
             DateTime time,
             MatchType type
-        ) {
+        )
+        {
             return FindByBadPasswordAttempt<ComputerPrincipal>(context, time, type);
         }
 
@@ -109,14 +113,16 @@ namespace System.DirectoryServices.AccountManagement
             PrincipalContext context,
             DateTime time,
             MatchType type
-        ) {
+        )
+        {
             return FindByPasswordSetTime<ComputerPrincipal>(context, time, type);
         }
 
         public static new ComputerPrincipal FindByIdentity(
             PrincipalContext context,
             string identityValue
-        ) {
+        )
+        {
             return (ComputerPrincipal)FindByIdentityWithType(
                 context,
                 typeof(ComputerPrincipal),
@@ -128,7 +134,8 @@ namespace System.DirectoryServices.AccountManagement
             PrincipalContext context,
             IdentityType identityType,
             string identityValue
-        ) {
+        )
+        {
             return (ComputerPrincipal)FindByIdentityWithType(
                 context,
                 typeof(ComputerPrincipal),

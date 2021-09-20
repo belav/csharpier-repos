@@ -88,7 +88,8 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Workspaces
 
             if (
                 Services.GetService<INotificationService>() is INotificationServiceCallback callback
-            ) {
+            )
+            {
                 // Avoid showing dialogs in tests by default
                 callback.NotificationCallback = (message, title, severity) =>
                 {
@@ -272,7 +273,8 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Workspaces
                 !Documents.Contains(hostDocument)
                 && !AdditionalDocuments.Contains(hostDocument)
                 && !AnalyzerConfigDocuments.Contains(hostDocument)
-            ) {
+            )
+            {
                 return null;
             }
 
@@ -390,7 +392,8 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Workspaces
         protected override void ApplyAdditionalDocumentTextChanged(
             DocumentId document,
             SourceText newText
-        ) {
+        )
+        {
             var testDocument = this.GetTestAdditionalDocument(document);
             testDocument.Update(newText);
         }
@@ -419,7 +422,8 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Workspaces
         protected override void ApplyAnalyzerConfigDocumentTextChanged(
             DocumentId document,
             SourceText newText
-        ) {
+        )
+        {
             var testDocument = this.GetTestAnalyzerConfigDocument(document);
             testDocument.Update(newText);
         }
@@ -523,7 +527,8 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Workspaces
             string path = "projectionbufferdocumentpath",
             ProjectionBufferOptions options = ProjectionBufferOptions.None,
             IProjectionEditResolver? editResolver = null
-        ) {
+        )
+        {
             GetSpansAndCaretFromSurfaceBufferMarkup(
                 markup,
                 baseDocuments,
@@ -614,7 +619,8 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Workspaces
             out IList<object> projectionBufferSpans,
             out Dictionary<string, ImmutableArray<TextSpan>> mappedMarkupSpans,
             out int? mappedCaretLocation
-        ) {
+        )
+        {
             projectionBufferSpans = new List<object>();
             var projectionBufferSpanStartingPositions = new List<int>();
             mappedCaretLocation = null;
@@ -657,7 +663,8 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Workspaces
                         mappedCaretLocation == null
                         && markupCaretLocation != null
                         && currentPositionInInertText + textToAdd.Length >= markupCaretLocation
-                    ) {
+                    )
+                    {
                         var caretOffsetInCurrentText =
                             markupCaretLocation.Value - currentPositionInInertText;
                         mappedCaretLocation =
@@ -700,7 +707,8 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Workspaces
                         matchingSpan.Contains(documentWithSpan.CursorPosition.Value)
                         || matchingSpan.End == documentWithSpan.CursorPosition.Value
                     )
-                ) {
+                )
+                {
                     var caretOffsetInSpan =
                         documentWithSpan.CursorPosition.Value - matchingSpan.Start;
                     mappedCaretLocation = currentPositionInProjectionBuffer + caretOffsetInSpan;
@@ -719,7 +727,8 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Workspaces
                     mappedCaretLocation == null
                     && markupCaretLocation != null
                     && markupCaretLocation >= currentPositionInInertText
-                ) {
+                )
+                {
                     var caretOffsetInCurrentText =
                         markupCaretLocation.Value - currentPositionInInertText;
                     mappedCaretLocation =
@@ -740,7 +749,8 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Workspaces
             out Dictionary<string, ImmutableArray<TextSpan>> mappedMarkupSpans,
             IList<object> projectionBufferSpans,
             IList<int> projectionBufferSpanStartingPositions
-        ) {
+        )
+        {
             var tempMappedMarkupSpans = new Dictionary<
                 string,
                 PooledObjects.ArrayBuilder<TextSpan>
@@ -769,7 +779,8 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Workspaces
                                 spanStartLocation == null
                                 && positionInMarkup <= markupSpanStart
                                 && markupSpanStart <= positionInMarkup + text.Length
-                            ) {
+                            )
+                            {
                                 var offsetInText = markupSpanStart - positionInMarkup;
                                 spanStartLocation =
                                     projectionBufferSpanStartingPositions[spanIndex] + offsetInText;
@@ -779,7 +790,8 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Workspaces
                                 spanEndLocationExclusive == null
                                 && positionInMarkup <= markupSpanEndExclusive
                                 && markupSpanEndExclusive <= positionInMarkup + text.Length
-                            ) {
+                            )
+                            {
                                 var offsetInText = markupSpanEndExclusive - positionInMarkup;
                                 spanEndLocationExclusive =
                                     projectionBufferSpanStartingPositions[spanIndex] + offsetInText;
@@ -903,7 +915,8 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Workspaces
         internal override bool CanAddProjectReference(
             ProjectId referencingProject,
             ProjectId referencedProject
-        ) {
+        )
+        {
             // VisualStudioWorkspace asserts the main thread for this call, so do the same thing here to catch tests
             // that fail to account for this possibility.
             var threadingContext = ExportProvider.GetExportedValue<IThreadingContext>();
@@ -919,7 +932,8 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Workspaces
             IContentType contentType,
             string languageName,
             string initialText
-        ) {
+        )
+        {
             // If we don't have a file path we'll just make something up for the purpose of this dictionary so all
             // buffers are still held onto. This isn't a file name used in the workspace itself so it's unobservable.
             if (RoslynString.IsNullOrEmpty(filePath))

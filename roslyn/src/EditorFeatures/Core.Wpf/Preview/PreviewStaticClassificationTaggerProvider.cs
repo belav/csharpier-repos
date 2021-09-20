@@ -67,13 +67,15 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.Preview
 
             public IEnumerable<ITagSpan<IClassificationTag>> GetTags(
                 NormalizedSnapshotSpanCollection spans
-            ) {
+            )
+            {
                 if (
                     !_buffer.Properties.TryGetProperty(
                         PredefinedPreviewTaggerKeys.StaticClassificationSpansKey,
                         out ImmutableArray<ClassifiedSpan> classifiedSpans
                     )
-                ) {
+                )
+                {
                     yield break;
                 }
 

@@ -17,7 +17,8 @@ namespace Microsoft.Extensions.Caching.Memory
         public static MemoryCacheEntryOptions SetPriority(
             this MemoryCacheEntryOptions options,
             CacheItemPriority priority
-        ) {
+        )
+        {
             options.Priority = priority;
             return options;
         }
@@ -31,7 +32,8 @@ namespace Microsoft.Extensions.Caching.Memory
         public static MemoryCacheEntryOptions SetSize(
             this MemoryCacheEntryOptions options,
             long size
-        ) {
+        )
+        {
             if (size < 0)
             {
                 throw new ArgumentOutOfRangeException(
@@ -54,7 +56,8 @@ namespace Microsoft.Extensions.Caching.Memory
         public static MemoryCacheEntryOptions AddExpirationToken(
             this MemoryCacheEntryOptions options,
             IChangeToken expirationToken
-        ) {
+        )
+        {
             if (expirationToken == null)
             {
                 throw new ArgumentNullException(nameof(expirationToken));
@@ -73,7 +76,8 @@ namespace Microsoft.Extensions.Caching.Memory
         public static MemoryCacheEntryOptions SetAbsoluteExpiration(
             this MemoryCacheEntryOptions options,
             TimeSpan relative
-        ) {
+        )
+        {
             options.AbsoluteExpirationRelativeToNow = relative;
             return options;
         }
@@ -87,7 +91,8 @@ namespace Microsoft.Extensions.Caching.Memory
         public static MemoryCacheEntryOptions SetAbsoluteExpiration(
             this MemoryCacheEntryOptions options,
             DateTimeOffset absolute
-        ) {
+        )
+        {
             options.AbsoluteExpiration = absolute;
             return options;
         }
@@ -102,7 +107,8 @@ namespace Microsoft.Extensions.Caching.Memory
         public static MemoryCacheEntryOptions SetSlidingExpiration(
             this MemoryCacheEntryOptions options,
             TimeSpan offset
-        ) {
+        )
+        {
             options.SlidingExpiration = offset;
             return options;
         }
@@ -116,7 +122,8 @@ namespace Microsoft.Extensions.Caching.Memory
         public static MemoryCacheEntryOptions RegisterPostEvictionCallback(
             this MemoryCacheEntryOptions options,
             PostEvictionDelegate callback
-        ) {
+        )
+        {
             if (callback == null)
             {
                 throw new ArgumentNullException(nameof(callback));
@@ -136,7 +143,8 @@ namespace Microsoft.Extensions.Caching.Memory
             this MemoryCacheEntryOptions options,
             PostEvictionDelegate callback,
             object state
-        ) {
+        )
+        {
             if (callback == null)
             {
                 throw new ArgumentNullException(nameof(callback));

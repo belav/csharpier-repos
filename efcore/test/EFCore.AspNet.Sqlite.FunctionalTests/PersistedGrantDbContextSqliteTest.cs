@@ -8,9 +8,8 @@ namespace Microsoft.EntityFrameworkCore
     public class PersistedGrantDbContextSqliteTest
         : PersistedGrantDbContextTestBase<PersistedGrantDbContextSqliteTest.PersistedGrantDbContextSqliteFixture>
     {
-        public PersistedGrantDbContextSqliteTest(
-            PersistedGrantDbContextSqliteFixture fixture
-        ) : base(fixture) { }
+        public PersistedGrantDbContextSqliteTest(PersistedGrantDbContextSqliteFixture fixture)
+            : base(fixture) { }
 
         public class PersistedGrantDbContextSqliteFixture : PersistedGrantDbContextFixtureBase
         {

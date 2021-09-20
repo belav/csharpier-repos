@@ -22,7 +22,8 @@ namespace Microsoft.AspNetCore.Components.WebView
             IFileProvider fileProvider,
             Uri appBaseUri,
             string hostPageRelativePath
-        ) {
+        )
+        {
             _fileProvider = fileProvider ?? throw new ArgumentNullException(nameof(fileProvider));
             _appBaseUri = appBaseUri ?? throw new ArgumentNullException(nameof(appBaseUri));
             _hostPageRelativePath =
@@ -37,7 +38,8 @@ namespace Microsoft.AspNetCore.Components.WebView
             out string statusMessage,
             out Stream content,
             out IDictionary<string, string> headers
-        ) {
+        )
+        {
             var fileUri = new Uri(requestUri);
             if (_appBaseUri.IsBaseOf(fileUri))
             {
@@ -93,7 +95,8 @@ namespace Microsoft.AspNetCore.Components.WebView
             string relativePath,
             out Stream content,
             out string contentType
-        ) {
+        )
+        {
             if (!string.IsNullOrEmpty(relativePath))
             {
                 var fileInfo = _fileProvider.GetFileInfo(relativePath);
@@ -114,7 +117,8 @@ namespace Microsoft.AspNetCore.Components.WebView
             string relativePath,
             out Stream content,
             out string contentType
-        ) {
+        )
+        {
             // We're not trying to simulate everything a real webserver does. We don't need to
             // support querystring parameters, for example. It's enough to require an exact match.
             var file = _manifestProvider.GetFileInfo(relativePath);

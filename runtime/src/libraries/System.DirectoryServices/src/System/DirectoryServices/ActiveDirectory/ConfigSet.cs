@@ -34,7 +34,8 @@ namespace System.DirectoryServices.ActiveDirectory
             DirectoryContext context,
             string configSetName,
             DirectoryEntryManager directoryEntryMgr
-        ) {
+        )
+        {
             _context = context;
             _configSetName = configSetName;
             _directoryEntryMgr = directoryEntryMgr;
@@ -80,7 +81,8 @@ namespace System.DirectoryServices.ActiveDirectory
             if (
                 (context.ContextType != DirectoryContextType.ConfigurationSet)
                 && (context.ContextType != DirectoryContextType.DirectoryServer)
-            ) {
+            )
+            {
                 throw new ArgumentException(SR.TargetShouldBeServerORConfigSet, nameof(context));
             }
 
@@ -122,7 +124,8 @@ namespace System.DirectoryServices.ActiveDirectory
                 if (
                     (context.isServer())
                     && (!Utils.CheckCapability(rootDSE, Capability.ActiveDirectoryApplicationMode))
-                ) {
+                )
+                {
                     throw new ActiveDirectoryObjectNotFoundException(
                         SR.Format(SR.AINotFound, context.Name),
                         typeof(ConfigurationSet),
@@ -286,7 +289,8 @@ namespace System.DirectoryServices.ActiveDirectory
             if (
                 securityLevel < ReplicationSecurityLevel.NegotiatePassThrough
                 || securityLevel > ReplicationSecurityLevel.MutualAuthentication
-            ) {
+            )
+            {
                 throw new InvalidEnumArgumentException(
                     nameof(securityLevel),
                     (int)securityLevel,
@@ -572,7 +576,8 @@ namespace System.DirectoryServices.ActiveDirectory
                             string bindingInfo in res.Properties[
                                 PropertyManager.ServiceBindingInformation
                             ]
-                        ) {
+                        )
+                        {
                             if (
                                 (bindingInfo.Length > prefix.Length)
                                 && (
@@ -582,7 +587,8 @@ namespace System.DirectoryServices.ActiveDirectory
                                         StringComparison.OrdinalIgnoreCase
                                     )
                                 )
-                            ) {
+                            )
+                            {
                                 adamInstanceNames.Add(bindingInfo.Substring(prefix.Length));
                             }
                         }
@@ -614,7 +620,8 @@ namespace System.DirectoryServices.ActiveDirectory
             DirectoryContext context,
             string? partitionName,
             string? siteName
-        ) {
+        )
+        {
             return FindOneAdamInstance(null, context, partitionName, siteName);
         }
 
@@ -623,7 +630,8 @@ namespace System.DirectoryServices.ActiveDirectory
             DirectoryContext context,
             string? partitionName,
             string? siteName
-        ) {
+        )
+        {
             // can expect valid context (non-null)
             if (partitionName != null && partitionName.Length == 0)
             {
@@ -662,7 +670,8 @@ namespace System.DirectoryServices.ActiveDirectory
             DirectoryContext context,
             string? partitionName,
             string? siteName
-        ) {
+        )
+        {
             // can expect valid context (non-null)
             if (partitionName != null && partitionName.Length == 0)
             {
@@ -687,7 +696,8 @@ namespace System.DirectoryServices.ActiveDirectory
                     ,
                     false /* mustBeGC */
                 )
-            ) {
+            )
+            {
                 DirectoryContext adamInstContext = Utils.GetNewDirectoryContext(
                     adamInstanceName,
                     DirectoryContextType.DirectoryServer,
@@ -709,7 +719,8 @@ namespace System.DirectoryServices.ActiveDirectory
             string? configSetName,
             DirectoryContext context,
             ArrayList adamInstanceNames
-        ) {
+        )
+        {
             bool foundAliveADAMInstance = false;
             AdamInstance? adamInstance = null;
 
@@ -750,7 +761,8 @@ namespace System.DirectoryServices.ActiveDirectory
                         || (e.ErrorCode == unchecked((int)0x8007200e))
                         || (e.ErrorCode == unchecked((int)0x8007200f))
                         || (e.ErrorCode == unchecked((int)0x800705b4))
-                    ) {
+                    )
+                    {
                         // if we are passed the timeout period, we should throw, else do nothing
                         if (DateTime.UtcNow.Subtract(startTime) > s_locationTimeout)
                             throw new ActiveDirectoryObjectNotFoundException(
@@ -973,7 +985,8 @@ namespace System.DirectoryServices.ActiveDirectory
                     if (
                         (!(nCName.Equals(schemaNamingContext)))
                         && (!(nCName.Equals(configurationNamingContext)))
-                    ) {
+                    )
+                    {
                         ResultPropertyValueCollection replicaLocations = res.Properties[
                             PropertyManager.MsDSNCReplicaLocations
                         ];

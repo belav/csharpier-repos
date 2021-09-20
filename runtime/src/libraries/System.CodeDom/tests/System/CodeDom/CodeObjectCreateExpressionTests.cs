@@ -67,7 +67,8 @@ namespace System.CodeDom.Tests
             string type,
             CodeExpression[] parameters,
             string expectedBaseType
-        ) {
+        )
+        {
             var objectCreate = new CodeObjectCreateExpression(type, parameters);
             Assert.Equal(expectedBaseType, objectCreate.CreateType.BaseType);
             Assert.Equal(parameters, objectCreate.Parameters.Cast<CodeExpression>());
@@ -96,7 +97,8 @@ namespace System.CodeDom.Tests
             Type type,
             CodeExpression[] parameters,
             string expectedBaseType
-        ) {
+        )
+        {
             var objectCreate = new CodeObjectCreateExpression(type, parameters);
             Assert.Equal(expectedBaseType, objectCreate.CreateType.BaseType);
             Assert.Equal(parameters, objectCreate.Parameters.Cast<CodeExpression>());

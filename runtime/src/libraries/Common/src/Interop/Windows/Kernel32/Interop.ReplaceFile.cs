@@ -32,7 +32,8 @@ internal static partial class Interop
             int dwReplaceFlags,
             IntPtr lpExclude,
             IntPtr lpReserved
-        ) {
+        )
+        {
             replacedFileName = PathInternal.EnsureExtendedPrefixIfNeeded(replacedFileName);
             replacementFileName = PathInternal.EnsureExtendedPrefixIfNeeded(replacementFileName);
             backupFileName = PathInternal.EnsureExtendedPrefixIfNeeded(backupFileName);

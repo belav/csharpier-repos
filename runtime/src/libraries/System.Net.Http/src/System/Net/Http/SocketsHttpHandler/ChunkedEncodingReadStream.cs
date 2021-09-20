@@ -69,7 +69,8 @@ namespace System.Net.Http
                         _state == ParsingState.ExpectChunkData
                         && buffer.Length >= _connection.ReadBufferSize
                         && _chunkBytesRemaining >= (ulong)_connection.ReadBufferSize
-                    ) {
+                    )
+                    {
                         // As an optimization, we skip going through the connection's read buffer if both
                         // the remaining chunk data and the buffer are both at least as large
                         // as the connection buffer.  That avoids an unnecessary copy while still reading
@@ -117,7 +118,8 @@ namespace System.Net.Http
             public override ValueTask<int> ReadAsync(
                 Memory<byte> buffer,
                 CancellationToken cancellationToken
-            ) {
+            )
+            {
                 if (cancellationToken.IsCancellationRequested)
                 {
                     // Cancellation requested.
@@ -155,7 +157,8 @@ namespace System.Net.Http
             private async ValueTask<int> ReadAsyncCore(
                 Memory<byte> buffer,
                 CancellationToken cancellationToken
-            ) {
+            )
+            {
                 // Should only be called if ReadChunksFromConnectionBuffer returned 0.
 
                 Debug.Assert(_connection != null);
@@ -178,7 +181,8 @@ namespace System.Net.Http
                             _state == ParsingState.ExpectChunkData
                             && buffer.Length >= _connection.ReadBufferSize
                             && _chunkBytesRemaining >= (ulong)_connection.ReadBufferSize
-                        ) {
+                        )
+                        {
                             // As an optimization, we skip going through the connection's read buffer if both
                             // the remaining chunk data and the buffer are both at least as large
                             // as the connection buffer.  That avoids an unnecessary copy while still reading
@@ -242,7 +246,8 @@ namespace System.Net.Http
                 Stream destination,
                 int bufferSize,
                 CancellationToken cancellationToken
-            ) {
+            )
+            {
                 ValidateCopyToArguments(destination, bufferSize);
 
                 return cancellationToken.IsCancellationRequested
@@ -255,7 +260,8 @@ namespace System.Net.Http
             private async Task CopyToAsyncCore(
                 Stream destination,
                 CancellationToken cancellationToken
-            ) {
+            )
+            {
                 CancellationTokenRegistration ctr = _connection!.RegisterCancellation(
                     cancellationToken
                 );
@@ -307,7 +313,8 @@ namespace System.Net.Http
             private int ReadChunksFromConnectionBuffer(
                 Span<byte> buffer,
                 CancellationTokenRegistration cancellationRegistration
-            ) {
+            )
+            {
                 int totalBytesRead = 0;
                 while (buffer.Length > 0)
                 {
@@ -331,7 +338,8 @@ namespace System.Net.Http
             private ReadOnlyMemory<byte> ReadChunkFromConnectionBuffer(
                 int maxBytesToRead,
                 CancellationTokenRegistration cancellationRegistration
-            ) {
+            )
+            {
                 Debug.Assert(maxBytesToRead > 0 && _connection != null);
 
                 try
@@ -361,7 +369,8 @@ namespace System.Net.Http
                                     out int bytesConsumed,
                                     'X'
                                 )
-                            ) {
+                            )
+                            {
                                 throw new IOException(
                                     SR.Format(
                                         SR.net_http_invalid_response_chunk_header_invalid,

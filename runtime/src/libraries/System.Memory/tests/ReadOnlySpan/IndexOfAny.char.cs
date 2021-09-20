@@ -35,7 +35,8 @@ namespace System.SpanTests
             string search,
             char expectResult,
             int expectIndex
-        ) {
+        )
+        {
             ReadOnlySpan<char> span = raw.AsSpan();
             char[] searchFor = search.ToCharArray();
 
@@ -104,7 +105,8 @@ namespace System.SpanTests
                         int targetIndex = 0;
                         targetIndex < length - Vector<short>.Count;
                         targetIndex++
-                    ) {
+                    )
+                    {
                         char target0 = a[targetIndex + i];
                         char target1 = (char)0;
                         int idx = span.IndexOfAny(target0, target1);
@@ -115,7 +117,8 @@ namespace System.SpanTests
                         int targetIndex = 0;
                         targetIndex < length - 1 - Vector<short>.Count;
                         targetIndex++
-                    ) {
+                    )
+                    {
                         char target0 = a[targetIndex + i];
                         char target1 = a[targetIndex + i + 1];
                         int idx = span.IndexOfAny(target0, target1);
@@ -126,7 +129,8 @@ namespace System.SpanTests
                         int targetIndex = 0;
                         targetIndex < length - 1 - Vector<short>.Count;
                         targetIndex++
-                    ) {
+                    )
+                    {
                         char target0 = (char)0;
                         char target1 = a[targetIndex + i + 1];
                         int idx = span.IndexOfAny(target0, target1);
@@ -244,7 +248,8 @@ namespace System.SpanTests
                         int targetIndex = 0;
                         targetIndex < length - Vector<short>.Count;
                         targetIndex++
-                    ) {
+                    )
+                    {
                         char target0 = a[targetIndex + i];
                         char target1 = (char)0;
                         char target2 = (char)0;
@@ -256,7 +261,8 @@ namespace System.SpanTests
                         int targetIndex = 0;
                         targetIndex < length - 2 - Vector<short>.Count;
                         targetIndex++
-                    ) {
+                    )
+                    {
                         char target0 = a[targetIndex + i];
                         char target1 = a[targetIndex + i + 1];
                         char target2 = a[targetIndex + i + 2];
@@ -268,7 +274,8 @@ namespace System.SpanTests
                         int targetIndex = 0;
                         targetIndex < length - 2 - Vector<short>.Count;
                         targetIndex++
-                    ) {
+                    )
+                    {
                         char target0 = (char)0;
                         char target1 = (char)0;
                         char target2 = a[targetIndex + i + 2];
@@ -395,7 +402,8 @@ namespace System.SpanTests
                         int targetIndex = 0;
                         targetIndex < length - Vector<short>.Count;
                         targetIndex++
-                    ) {
+                    )
+                    {
                         ReadOnlySpan<char> values = new char[]
                         {
                             (char)a[targetIndex + i],
@@ -411,7 +419,8 @@ namespace System.SpanTests
                         int targetIndex = 0;
                         targetIndex < length - 3 - Vector<short>.Count;
                         targetIndex++
-                    ) {
+                    )
+                    {
                         ReadOnlySpan<char> values = new char[]
                         {
                             (char)a[targetIndex + i],
@@ -427,7 +436,8 @@ namespace System.SpanTests
                         int targetIndex = 0;
                         targetIndex < length - 3 - Vector<short>.Count;
                         targetIndex++
-                    ) {
+                    )
+                    {
                         ReadOnlySpan<char> values = new char[]
                         {
                             (char)0,
@@ -572,7 +582,8 @@ namespace System.SpanTests
                         int targetIndex = 0;
                         targetIndex < length - Vector<short>.Count;
                         targetIndex++
-                    ) {
+                    )
+                    {
                         ReadOnlySpan<char> values = new char[]
                         {
                             (char)a[targetIndex + i],
@@ -589,7 +600,8 @@ namespace System.SpanTests
                         int targetIndex = 0;
                         targetIndex < length - 4 - Vector<short>.Count;
                         targetIndex++
-                    ) {
+                    )
+                    {
                         ReadOnlySpan<char> values = new char[]
                         {
                             (char)a[targetIndex + i],
@@ -606,7 +618,8 @@ namespace System.SpanTests
                         int targetIndex = 0;
                         targetIndex < length - 4 - Vector<short>.Count;
                         targetIndex++
-                    ) {
+                    )
+                    {
                         ReadOnlySpan<char> values = new char[]
                         {
                             (char)0,

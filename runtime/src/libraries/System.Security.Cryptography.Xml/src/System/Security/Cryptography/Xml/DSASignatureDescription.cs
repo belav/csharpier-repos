@@ -19,7 +19,8 @@ namespace System.Security.Cryptography.Xml
 
         public sealed override AsymmetricSignatureDeformatter CreateDeformatter(
             AsymmetricAlgorithm key
-        ) {
+        )
+        {
             var item = (AsymmetricSignatureDeformatter)CryptoConfig.CreateFromName(
                 DeformatterAlgorithm
             );

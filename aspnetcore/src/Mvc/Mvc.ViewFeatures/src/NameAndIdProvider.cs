@@ -34,7 +34,8 @@ namespace Microsoft.AspNetCore.Mvc.ViewFeatures
             ViewContext viewContext,
             string fullName,
             string invalidCharReplacement
-        ) {
+        )
+        {
             if (viewContext == null)
             {
                 throw new ArgumentNullException(nameof(viewContext));
@@ -58,7 +59,8 @@ namespace Microsoft.AspNetCore.Mvc.ViewFeatures
                 items.TryGetValue(PreviousNameAndIdKey, out previousNameAndIdObject)
                 && (previousNameAndId = (PreviousNameAndId)previousNameAndIdObject) != null
                 && string.Equals(previousNameAndId.FullName, fullName, StringComparison.Ordinal)
-            ) {
+            )
+            {
                 return previousNameAndId.SanitizedId;
             }
 
@@ -105,7 +107,8 @@ namespace Microsoft.AspNetCore.Mvc.ViewFeatures
             TagBuilder tagBuilder,
             string fullName,
             string invalidCharReplacement
-        ) {
+        )
+        {
             if (viewContext == null)
             {
                 throw new ArgumentNullException(nameof(viewContext));
@@ -174,7 +177,8 @@ namespace Microsoft.AspNetCore.Mvc.ViewFeatures
                     StringComparison.Ordinal
                 )
                 && string.Equals(previousNameAndId.Expression, expression, StringComparison.Ordinal)
-            ) {
+            )
+            {
                 return previousNameAndId.OutputFullName;
             }
 

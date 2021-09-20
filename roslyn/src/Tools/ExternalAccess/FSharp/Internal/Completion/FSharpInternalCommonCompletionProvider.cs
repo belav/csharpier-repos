@@ -32,7 +32,8 @@ namespace Microsoft.CodeAnalysis.ExternalAccess.FSharp.Internal.Completion
             CompletionItem selectedItem,
             char? ch,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             return _provider.GetTextChangeAsync(
                 base.GetTextChangeAsync,
                 selectedItem,
@@ -45,7 +46,8 @@ namespace Microsoft.CodeAnalysis.ExternalAccess.FSharp.Internal.Completion
             SourceText text,
             int insertedCharacterPosition,
             OptionSet options
-        ) {
+        )
+        {
             return _provider.IsInsertionTrigger(text, insertedCharacterPosition, options);
         }
     }

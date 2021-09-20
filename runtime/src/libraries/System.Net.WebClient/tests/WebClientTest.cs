@@ -1128,7 +1128,8 @@ namespace System.Net.Tests
         public static async Task RequestHeaders_AddDisallowedHeaderAndSendRequest_ThrowsWebException(
             string headerName,
             string headerValue
-        ) {
+        )
+        {
             var wc = new WebClient();
             wc.Headers[headerName] = headerValue;
             await Assert.ThrowsAsync<WebException>(
@@ -1148,7 +1149,8 @@ namespace System.Net.Tests
         public static async Task RequestHeaders_AddHostHeaderAndSendRequest_ExpectedResult(
             string hostHeaderValue,
             bool throwsWebException
-        ) {
+        )
+        {
             var wc = new WebClient();
             wc.Headers["Host"] = hostHeaderValue;
             if (throwsWebException)
@@ -1436,7 +1438,8 @@ namespace System.Net.Tests
                         if (
                             e.TotalBytesToReceive == largeText.Length
                             && e.BytesReceived < e.TotalBytesToReceive
-                        ) {
+                        )
+                        {
                             downloadProgressInvokedWithContentLength.TrySetResult();
                         }
                     };

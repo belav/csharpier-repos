@@ -23,7 +23,8 @@ namespace Internal.Cryptography
             int feedbackSizeInBytes,
             int paddingSize,
             bool encrypting
-        ) {
+        )
+        {
             throw new PlatformNotSupportedException(
                 SR.Format(SR.Cryptography_AlgorithmNotSupported, nameof(RC2))
             );

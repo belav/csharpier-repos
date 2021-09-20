@@ -25,13 +25,15 @@ namespace Microsoft.CodeAnalysis.Tools.Formatters
             FormatOptions formatOptions,
             ILogger logger,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             if (
                 !analyzerConfigOptions.TryGetValue(
                     "insert_final_newline",
                     out var insertFinalNewlineValue
                 ) || !bool.TryParse(insertFinalNewlineValue, out var insertFinalNewline)
-            ) {
+            )
+            {
                 return await document.GetTextAsync(cancellationToken).ConfigureAwait(false);
             }
 

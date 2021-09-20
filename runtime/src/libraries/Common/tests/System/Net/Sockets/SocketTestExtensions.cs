@@ -41,7 +41,8 @@ namespace System.Net.Sockets.Tests
         public static (Socket client, Socket server) CreateConnectedSocketPair(
             bool ipv6 = false,
             bool dualModeClient = false
-        ) {
+        )
+        {
             IPAddress serverAddress = ipv6 ? IPAddress.IPv6Loopback : IPAddress.Loopback;
 
             using Socket listener = new Socket(
@@ -75,7 +76,8 @@ namespace System.Net.Sockets.Tests
             this Socket socket,
             EndPoint remoteEndpoint,
             int millisecondsTimeout
-        ) {
+        )
+        {
             var mre = new ManualResetEventSlim(false);
             using var sea = new SocketAsyncEventArgs()
             {

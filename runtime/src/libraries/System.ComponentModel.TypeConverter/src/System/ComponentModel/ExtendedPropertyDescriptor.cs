@@ -46,10 +46,8 @@ namespace System.ComponentModel
             _provider = provider;
         }
 
-        public ExtendedPropertyDescriptor(
-            PropertyDescriptor extender,
-            Attribute[] attributes
-        ) : base(extender, attributes)
+        public ExtendedPropertyDescriptor(PropertyDescriptor extender, Attribute[] attributes)
+            : base(extender, attributes)
         {
             Debug.Assert(extender != null, "The original PropertyDescriptor must be non-null");
 
@@ -114,7 +112,8 @@ namespace System.ComponentModel
                         Attributes[typeof(DisplayNameAttribute)]
                         is DisplayNameAttribute displayNameAttr
                     ) || displayNameAttr.IsDefaultAttribute()
-                ) {
+                )
+                {
                     ISite site = GetSite(_provider);
                     string providerName = site?.Name;
                     if (providerName != null && providerName.Length > 0)

@@ -25,7 +25,8 @@ namespace System.Text.RegularExpressions.Tests
             RegexOptions options,
             string input,
             string expected
-        ) {
+        )
+        {
             string result = "Fail.";
             try
             {

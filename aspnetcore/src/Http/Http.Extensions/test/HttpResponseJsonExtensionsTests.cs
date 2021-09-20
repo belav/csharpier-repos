@@ -79,7 +79,8 @@ namespace Microsoft.AspNetCore.Http.Extensions.Tests
                 ref Utf8JsonReader reader,
                 Type typeToConvert,
                 JsonSerializerOptions options
-            ) {
+            )
+            {
                 throw new NotImplementedException();
             }
 
@@ -87,7 +88,8 @@ namespace Microsoft.AspNetCore.Http.Extensions.Tests
                 Utf8JsonWriter writer,
                 int value,
                 JsonSerializerOptions options
-            ) {
+            )
+            {
                 writer.WriteBooleanValue(value % 2 == 0);
             }
         }
@@ -309,7 +311,8 @@ namespace Microsoft.AspNetCore.Http.Extensions.Tests
             public override ValueTask<int> ReadAsync(
                 Memory<byte> buffer,
                 CancellationToken cancellationToken = default
-            ) {
+            )
+            {
                 var tcs = new TaskCompletionSource<int>();
                 cancellationToken.Register(s => ((TaskCompletionSource<int>)s!).SetCanceled(), tcs);
                 return new ValueTask<int>(tcs.Task);
@@ -318,7 +321,8 @@ namespace Microsoft.AspNetCore.Http.Extensions.Tests
             public override ValueTask WriteAsync(
                 ReadOnlyMemory<byte> buffer,
                 CancellationToken cancellationToken = default
-            ) {
+            )
+            {
                 var tcs = new TaskCompletionSource<int>();
                 cancellationToken.Register(s => ((TaskCompletionSource<int>)s!).SetCanceled(), tcs);
                 return new ValueTask(tcs.Task);

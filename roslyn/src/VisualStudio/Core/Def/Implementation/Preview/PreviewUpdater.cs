@@ -70,7 +70,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Preview
                 if (
                     existingDocument.GetTextSynchronously(CancellationToken.None)
                         .ContentEquals(document.GetTextSynchronously(CancellationToken.None))
-                ) {
+                )
+                {
                     // The contents of the buffer matches what we'd update it to, so no reason to change.
                     return;
                 }

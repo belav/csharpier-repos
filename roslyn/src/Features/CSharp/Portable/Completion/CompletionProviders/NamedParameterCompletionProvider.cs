@@ -80,7 +80,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Completion.Providers
                         SyntaxKind.OpenBracketToken,
                         SyntaxKind.CommaToken
                     )
-                ) {
+                )
+                {
                     return;
                 }
 
@@ -124,7 +125,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Completion.Providers
                 if (
                     languageVersion < LanguageVersion.CSharp7_2
                     && token.IsMandatoryNamedParameterPosition()
-                ) {
+                )
+                {
                     context.IsExclusive = true;
                 }
 
@@ -168,7 +170,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Completion.Providers
         private static bool IsValid(
             ImmutableArray<IParameterSymbol> parameterList,
             ISet<string> existingNamedParameters
-        ) {
+        )
+        {
             // A parameter list is valid if it has parameters that match in name all the existing
             // named parameters that have been provided.
             return existingNamedParameters.Except(parameterList.Select(p => p.Name)).IsEmpty();
@@ -177,7 +180,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Completion.Providers
         private static ISet<string> GetExistingNamedParameters(
             BaseArgumentListSyntax argumentList,
             int position
-        ) {
+        )
+        {
             var existingArguments = argumentList.Arguments.Where(
                     a => a.Span.End <= position && a.NameColon != null
                 )
@@ -191,7 +195,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Completion.Providers
             int position,
             SyntaxNode invocableNode,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             return invocableNode switch
             {
                 InvocationExpressionSyntax invocationExpression
@@ -240,14 +245,16 @@ namespace Microsoft.CodeAnalysis.CSharp.Completion.Providers
             int position,
             BaseObjectCreationExpressionSyntax objectCreationExpression,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var within = semanticModel.GetEnclosingNamedType(position, cancellationToken);
             if (
                 semanticModel.GetTypeInfo(objectCreationExpression, cancellationToken).Type
                     is INamedTypeSymbol type
                 && within != null
                 && type.TypeKind != TypeKind.Delegate
-            ) {
+            )
+            {
                 return type.InstanceConstructors.Where(c => c.IsAccessibleWithin(within))
                     .Select(c => c.Parameters);
             }
@@ -262,7 +269,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Completion.Providers
             int position,
             ElementAccessExpressionSyntax elementAccessExpression,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var expressionSymbol = semanticModel.GetSymbolInfo(
                     elementAccessExpression.Expression,
                     cancellationToken
@@ -305,12 +313,14 @@ namespace Microsoft.CodeAnalysis.CSharp.Completion.Providers
             int position,
             ConstructorInitializerSyntax constructorInitializer,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var within = semanticModel.GetEnclosingNamedType(position, cancellationToken);
             if (
                 within != null
                 && (within.TypeKind == TypeKind.Struct || within.TypeKind == TypeKind.Class)
-            ) {
+            )
+            {
                 var type =
                     constructorInitializer.Kind() == SyntaxKind.BaseConstructorInitializer
                         ? within.BaseType
@@ -333,7 +343,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Completion.Providers
             int position,
             PrimaryConstructorBaseTypeSyntax recordBaseType,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var within = semanticModel.GetEnclosingNamedTypeOrAssembly(position, cancellationToken);
             if (within != null)
             {
@@ -355,7 +366,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Completion.Providers
             int position,
             InvocationExpressionSyntax invocationExpression,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var within = semanticModel.GetEnclosingNamedTypeOrAssembly(position, cancellationToken);
             if (within != null)
             {
@@ -397,7 +409,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Completion.Providers
             CompletionItem selectedItem,
             char? ch,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             return Task.FromResult<TextChange?>(
                 new TextChange(
                     selectedItem.Span,

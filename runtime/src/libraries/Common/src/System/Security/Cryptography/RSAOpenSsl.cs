@@ -109,7 +109,8 @@ namespace System.Security.Cryptography
                 Span<byte> destination,
                 RSAEncryptionPadding padding,
                 out int bytesWritten
-            ) {
+            )
+            {
                 if (padding == null)
                     throw new ArgumentNullException(nameof(padding));
 
@@ -173,7 +174,8 @@ namespace System.Security.Cryptography
                 ReadOnlySpan<byte> data,
                 Span<byte> destination,
                 RSAEncryptionPadding padding
-            ) {
+            )
+            {
                 // Caller should have already checked this.
                 Debug.Assert(!key.IsInvalid);
 
@@ -249,7 +251,8 @@ namespace System.Security.Cryptography
                 Span<byte> destination,
                 RSAEncryptionPadding padding,
                 out int bytesWritten
-            ) {
+            )
+            {
                 if (padding == null)
                 {
                     throw new ArgumentNullException(nameof(padding));
@@ -278,7 +281,8 @@ namespace System.Security.Cryptography
                 Interop.Crypto.RsaPadding rsaPadding,
                 RsaPaddingProcessor? rsaPaddingProcessor,
                 out int bytesWritten
-            ) {
+            )
+            {
                 int rsaSize = Interop.Crypto.RsaSize(key);
 
                 if (destination.Length < rsaSize)
@@ -336,7 +340,8 @@ namespace System.Security.Cryptography
             private static Interop.Crypto.RsaPadding GetInteropPadding(
                 RSAEncryptionPadding padding,
                 out RsaPaddingProcessor? rsaPaddingProcessor
-            ) {
+            )
+            {
                 if (padding == RSAEncryptionPadding.Pkcs1)
                 {
                     rsaPaddingProcessor = null;
@@ -374,7 +379,8 @@ namespace System.Security.Cryptography
                 if (
                     hasPrivateKey != includePrivateParameters
                     || !HasConsistentPrivateKey(ref rsaParameters)
-                ) {
+                )
+                {
                     throw new CryptographicException(SR.Cryptography_CSP_NoPrivateKey);
                 }
 
@@ -413,7 +419,8 @@ namespace System.Security.Cryptography
                             parameters.InverseQ,
                             parameters.InverseQ != null ? parameters.InverseQ.Length : 0
                         )
-                    ) {
+                    )
+                    {
                         throw Interop.Crypto.CreateOpenSslCryptographicException();
                     }
 
@@ -475,7 +482,8 @@ namespace System.Security.Cryptography
                 ReadOnlySpan<byte> passwordBytes,
                 ReadOnlySpan<byte> source,
                 out int bytesRead
-            ) {
+            )
+            {
                 ThrowIfDisposed();
                 base.ImportEncryptedPkcs8PrivateKey(passwordBytes, source, out bytesRead);
             }
@@ -484,7 +492,8 @@ namespace System.Security.Cryptography
                 ReadOnlySpan<char> password,
                 ReadOnlySpan<byte> source,
                 out int bytesRead
-            ) {
+            )
+            {
                 ThrowIfDisposed();
                 base.ImportEncryptedPkcs8PrivateKey(password, source, out bytesRead);
             }
@@ -528,7 +537,8 @@ namespace System.Security.Cryptography
                         || parameters.Q != null
                         || parameters.DQ != null
                         || parameters.InverseQ != null
-                    ) {
+                    )
+                    {
                         return false;
                     }
                 }
@@ -540,7 +550,8 @@ namespace System.Security.Cryptography
                         || parameters.Q == null
                         || parameters.DQ == null
                         || parameters.InverseQ == null
-                    ) {
+                    )
+                    {
                         return false;
                     }
                 }
@@ -659,7 +670,8 @@ namespace System.Security.Cryptography
                 byte[] hash,
                 HashAlgorithmName hashAlgorithm,
                 RSASignaturePadding padding
-            ) {
+            )
+            {
                 if (hash == null)
                     throw new ArgumentNullException(nameof(hash));
                 if (string.IsNullOrEmpty(hashAlgorithm.Name))
@@ -677,7 +689,8 @@ namespace System.Security.Cryptography
                         out int bytesWritten,
                         out byte[]? signature
                     )
-                ) {
+                )
+                {
                     Debug.Fail("TrySignHash should not return false in allocation mode");
                     throw new CryptographicException();
                 }
@@ -692,7 +705,8 @@ namespace System.Security.Cryptography
                 HashAlgorithmName hashAlgorithm,
                 RSASignaturePadding padding,
                 out int bytesWritten
-            ) {
+            )
+            {
                 if (string.IsNullOrEmpty(hashAlgorithm.Name))
                 {
                     throw HashAlgorithmNameNullOrEmpty();
@@ -724,7 +738,8 @@ namespace System.Security.Cryptography
                 bool allocateSignature,
                 out int bytesWritten,
                 out byte[]? signature
-            ) {
+            )
+            {
                 Debug.Assert(!string.IsNullOrEmpty(hashAlgorithm.Name));
                 Debug.Assert(padding != null);
                 ValidatePadding(padding);
@@ -767,7 +782,8 @@ namespace System.Security.Cryptography
                 byte[] signature,
                 HashAlgorithmName hashAlgorithm,
                 RSASignaturePadding padding
-            ) {
+            )
+            {
                 if (hash == null)
                 {
                     throw new ArgumentNullException(nameof(hash));
@@ -790,7 +806,8 @@ namespace System.Security.Cryptography
                 ReadOnlySpan<byte> signature,
                 HashAlgorithmName hashAlgorithm,
                 RSASignaturePadding padding
-            ) {
+            )
+            {
                 if (string.IsNullOrEmpty(hashAlgorithm.Name))
                 {
                     throw HashAlgorithmNameNullOrEmpty();
@@ -892,7 +909,8 @@ namespace System.Security.Cryptography
                 if (
                     padding.Mode != RSAEncryptionPaddingMode.Oaep
                     && padding != RSAEncryptionPadding.Pkcs1
-                ) {
+                )
+                {
                     throw PaddingModeNotSupported();
                 }
             }

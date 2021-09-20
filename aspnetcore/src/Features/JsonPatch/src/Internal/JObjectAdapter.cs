@@ -13,7 +13,8 @@ namespace Microsoft.AspNetCore.JsonPatch.Internal
             IContractResolver contractResolver,
             object value,
             out string errorMessage
-        ) {
+        )
+        {
             var obj = (JObject)target;
 
             obj[segment] = value != null ? JToken.FromObject(value) : JValue.CreateNull();
@@ -28,7 +29,8 @@ namespace Microsoft.AspNetCore.JsonPatch.Internal
             IContractResolver contractResolver,
             out object value,
             out string errorMessage
-        ) {
+        )
+        {
             var obj = (JObject)target;
 
             if (!obj.TryGetValue(segment, out var valueAsToken))
@@ -48,7 +50,8 @@ namespace Microsoft.AspNetCore.JsonPatch.Internal
             string segment,
             IContractResolver contractResolver,
             out string errorMessage
-        ) {
+        )
+        {
             var obj = (JObject)target;
 
             if (!obj.Remove(segment))
@@ -67,7 +70,8 @@ namespace Microsoft.AspNetCore.JsonPatch.Internal
             IContractResolver contractResolver,
             object value,
             out string errorMessage
-        ) {
+        )
+        {
             var obj = (JObject)target;
 
             if (!obj.ContainsKey(segment))
@@ -88,7 +92,8 @@ namespace Microsoft.AspNetCore.JsonPatch.Internal
             IContractResolver contractResolver,
             object value,
             out string errorMessage
-        ) {
+        )
+        {
             var obj = (JObject)target;
 
             if (!obj.TryGetValue(segment, out var currentValue))
@@ -108,7 +113,8 @@ namespace Microsoft.AspNetCore.JsonPatch.Internal
                     JsonConvert.SerializeObject(currentValue),
                     JsonConvert.SerializeObject(value)
                 )
-            ) {
+            )
+            {
                 errorMessage = Resources.FormatValueNotEqualToTestValue(
                     currentValue,
                     value,
@@ -127,7 +133,8 @@ namespace Microsoft.AspNetCore.JsonPatch.Internal
             IContractResolver contractResolver,
             out object nextTarget,
             out string errorMessage
-        ) {
+        )
+        {
             var obj = (JObject)target;
 
             if (!obj.TryGetValue(segment, out var nextTargetToken))

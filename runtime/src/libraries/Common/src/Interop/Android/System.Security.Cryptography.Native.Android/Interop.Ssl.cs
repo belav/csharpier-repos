@@ -50,7 +50,8 @@ internal static partial class Interop
             ReadOnlySpan<byte> pkcs8PrivateKey,
             PAL_KeyAlgorithm algorithm,
             IntPtr[] certificates
-        ) {
+        )
+        {
             return SSLStreamCreateWithCertificates(
                 ref MemoryMarshal.GetReference(pkcs8PrivateKey),
                 pkcs8PrivateKey.Length,
@@ -77,7 +78,8 @@ internal static partial class Interop
             SSLReadCallback streamRead,
             SSLWriteCallback streamWrite,
             int appBufferSize
-        ) {
+        )
+        {
             int ret = SSLStreamInitializeImpl(
                 sslHandle,
                 isServer,
@@ -129,7 +131,8 @@ internal static partial class Interop
         internal static unsafe void SSLStreamSetApplicationProtocols(
             SafeSslHandle sslHandle,
             List<SslApplicationProtocol> protocols
-        ) {
+        )
+        {
             int count = protocols.Count;
             MemoryHandle[] memHandles = new MemoryHandle[count];
             ApplicationProtocolData[] protocolData = new ApplicationProtocolData[count];
@@ -173,7 +176,8 @@ internal static partial class Interop
         internal static void SSLStreamSetEnabledProtocols(
             SafeSslHandle sslHandle,
             ReadOnlySpan<SslProtocols> protocols
-        ) {
+        )
+        {
             int ret = SSLStreamSetEnabledProtocols(
                 sslHandle,
                 ref MemoryMarshal.GetReference(protocols),
@@ -227,7 +231,8 @@ internal static partial class Interop
             SafeSslHandle sslHandle,
             Span<byte> buffer,
             out int bytesRead
-        ) {
+        )
+        {
             fixed (byte* bufferPtr = buffer)
             {
                 return SSLStreamRead(sslHandle, bufferPtr, buffer.Length, out bytesRead);
@@ -246,7 +251,8 @@ internal static partial class Interop
         internal static unsafe PAL_SSLStreamStatus SSLStreamWrite(
             SafeSslHandle sslHandle,
             ReadOnlyMemory<byte> buffer
-        ) {
+        )
+        {
             using (MemoryHandle memHandle = buffer.Pin())
             {
                 return SSLStreamWrite(sslHandle, (byte*)memHandle.Pointer, buffer.Length);

@@ -196,7 +196,8 @@ namespace System.Threading.Tasks.Dataflow.Tests
                             new ActionBlock<char>(c => result += c, option), // sync
                             new ActionBlock<char>(c => Task.Run(() => result += c), option) // async
                         }
-                    ) {
+                    )
+                    {
                         result = "";
 
                         switch (propMechanism)

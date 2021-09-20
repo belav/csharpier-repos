@@ -52,7 +52,8 @@ namespace Microsoft.EntityFrameworkCore.Infrastructure
             IModel model,
             bool designTime = true,
             IDiagnosticsLogger<DbLoggerCategory.Model.Validation>? validationLogger = null
-        ) {
+        )
+        {
             if (model.ModelDependencies == null)
             {
                 model = model.GetOrAddRuntimeAnnotationValue(

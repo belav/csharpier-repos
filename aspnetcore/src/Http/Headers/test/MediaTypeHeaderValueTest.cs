@@ -58,7 +58,8 @@ namespace Microsoft.Net.Http.Headers
             string mediaType,
             string expectedSubTypeWithoutSuffix,
             string expectedSubTypeSuffix
-        ) {
+        )
+        {
             var result = new MediaTypeHeaderValue(mediaType);
 
             Assert.Equal(
@@ -89,7 +90,8 @@ namespace Microsoft.Net.Http.Headers
             string mediaType,
             string expectedSubTypeWithoutSuffix,
             string expectedSubTypeSuffix
-        ) {
+        )
+        {
             var result = MediaTypeHeaderValue.Parse(mediaType);
 
             Assert.Equal(
@@ -110,7 +112,8 @@ namespace Microsoft.Net.Http.Headers
         public void MatchesAllSubTypesWithoutSuffix_ReturnsExpectedResult(
             string value,
             bool expectedReturnValue
-        ) {
+        )
+        {
             // Arrange
             var mediaType = new MediaTypeHeaderValue(value);
 

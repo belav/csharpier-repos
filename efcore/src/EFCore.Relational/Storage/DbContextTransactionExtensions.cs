@@ -22,7 +22,8 @@ namespace Microsoft.EntityFrameworkCore.Storage
         /// <returns> The underlying <see cref="DbTransaction" />. </returns>
         public static DbTransaction GetDbTransaction(
             this IDbContextTransaction dbContextTransaction
-        ) {
+        )
+        {
             Check.NotNull(dbContextTransaction, nameof(dbContextTransaction));
 
             if (!(dbContextTransaction is IInfrastructure<DbTransaction> accessor))

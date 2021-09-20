@@ -87,7 +87,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
 
         Cci.INamespaceTypeDefinition Cci.ITypeReference.AsNamespaceTypeDefinition(
             EmitContext context
-        ) {
+        )
+        {
             return null;
         }
 

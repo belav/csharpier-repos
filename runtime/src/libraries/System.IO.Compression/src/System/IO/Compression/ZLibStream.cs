@@ -116,7 +116,8 @@ namespace System.IO.Compression
             int count,
             AsyncCallback? asyncCallback,
             object? asyncState
-        ) {
+        )
+        {
             ThrowIfClosed();
             return _deflateStream.BeginRead(buffer, offset, count, asyncCallback, asyncState);
         }
@@ -158,7 +159,8 @@ namespace System.IO.Compression
             int offset,
             int count,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             ThrowIfClosed();
             return _deflateStream.ReadAsync(buffer, offset, count, cancellationToken);
         }
@@ -170,7 +172,8 @@ namespace System.IO.Compression
         public override ValueTask<int> ReadAsync(
             Memory<byte> buffer,
             CancellationToken cancellationToken = default
-        ) {
+        )
+        {
             ThrowIfClosed();
             return _deflateStream.ReadAsyncMemory(buffer, cancellationToken);
         }
@@ -188,7 +191,8 @@ namespace System.IO.Compression
             int count,
             AsyncCallback? asyncCallback,
             object? asyncState
-        ) {
+        )
+        {
             ThrowIfClosed();
             return _deflateStream.BeginWrite(buffer, offset, count, asyncCallback, asyncState);
         }
@@ -227,7 +231,8 @@ namespace System.IO.Compression
             int offset,
             int count,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             ThrowIfClosed();
             return _deflateStream.WriteAsync(buffer, offset, count, cancellationToken);
         }
@@ -239,7 +244,8 @@ namespace System.IO.Compression
         public override ValueTask WriteAsync(
             ReadOnlyMemory<byte> buffer,
             CancellationToken cancellationToken = default
-        ) {
+        )
+        {
             ThrowIfClosed();
             return _deflateStream.WriteAsyncMemory(buffer, cancellationToken);
         }
@@ -270,7 +276,8 @@ namespace System.IO.Compression
             Stream destination,
             int bufferSize,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             ThrowIfClosed();
             return _deflateStream.CopyToAsync(destination, bufferSize, cancellationToken);
         }

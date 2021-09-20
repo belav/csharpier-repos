@@ -233,7 +233,8 @@ namespace System.Threading.Tests
             ExecutionContext executionContext,
             AsyncLocal<int> asyncLocal,
             int expectedValue
-        ) {
+        )
+        {
             int actualValue = 0;
             Action run = () =>
                 ExecutionContext.Run(
@@ -255,7 +256,8 @@ namespace System.Threading.Tests
         private static void VerifyExecutionContextFlow(
             AsyncLocal<int> asyncLocal,
             int expectedValue
-        ) {
+        )
+        {
             Assert.Equal(expectedValue == 0, ExecutionContext.IsFlowSuppressed());
             if (ExecutionContext.IsFlowSuppressed())
             {

@@ -66,7 +66,8 @@ namespace System.Reflection.Emit
             FieldAttributes attributes,
             Type[]? modReq,
             Type[]? modOpt
-        ) {
+        )
+        {
             if (type == null)
                 throw new ArgumentNullException(nameof(type));
 
@@ -236,7 +237,8 @@ namespace System.Reflection.Emit
             BindingFlags invokeAttr,
             Binder? binder,
             CultureInfo? culture
-        ) {
+        )
+        {
             throw CreateNotSupportedException();
         }
 

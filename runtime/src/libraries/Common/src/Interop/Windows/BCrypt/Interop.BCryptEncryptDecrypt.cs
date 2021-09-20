@@ -17,7 +17,8 @@ internal static partial class Interop
             ReadOnlySpan<byte> input,
             byte[]? iv,
             Span<byte> output
-        ) {
+        )
+        {
             unsafe
             {
                 fixed (byte* pbInput = input)fixed (byte* pbOutput = output)
@@ -52,7 +53,8 @@ internal static partial class Interop
             ReadOnlySpan<byte> input,
             byte[]? iv,
             Span<byte> output
-        ) {
+        )
+        {
             unsafe
             {
                 fixed (byte* pbInput = input)fixed (byte* pbOutput = output)

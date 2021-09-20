@@ -40,7 +40,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.CodeModel
                     && priorEvent.ParentNode == @event.ParentNode
                     && priorEvent.Type.IsChange()
                     && @event.Type.IsChange()
-                ) {
+                )
+                {
                     priorEvent.Type |= @event.Type;
                     return;
                 }

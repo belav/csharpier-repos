@@ -51,7 +51,8 @@ namespace System.Net.Http.Formatting
                     && request.Headers.Accept.First()
                         .MediaType.Equals("*/*", StringComparison.Ordinal)
                 )
-            ) {
+            )
+            {
                 return base.TryMatchMediaType(request);
             }
             else

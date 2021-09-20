@@ -17,7 +17,8 @@ namespace Microsoft.Extensions.StackTrace.Sources
             string? genericArguments,
             string? subMethod,
             IEnumerable<ParameterDisplayInfo> parameters
-        ) {
+        )
+        {
             DeclaringTypeName = declaringTypeName;
             Name = name;
             GenericArguments = genericArguments;

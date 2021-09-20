@@ -62,7 +62,8 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests
         private static AnalyzerConfigDocument CreateAnalyzerConfigDocument(
             Workspace workspace,
             string contents
-        ) {
+        )
+        {
             var solution = workspace.CurrentSolution;
             var documentId = solution.Projects.Single()
                 .State.AnalyzerConfigDocumentStates.Ids.First();
@@ -82,7 +83,8 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests
             string initialEditorConfig,
             string updatedEditorConfig,
             params (IOption2, object)[] options
-        ) {
+        )
+        {
             using var workspace = CreateWorkspaceWithProjectAndDocuments();
             var analyzerConfigDocument = CreateAnalyzerConfigDocument(
                 workspace,
@@ -102,7 +104,8 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests
             string initialEditorConfig,
             string updatedEditorConfig,
             params (AnalyzerSetting, DiagnosticSeverity)[] options
-        ) {
+        )
+        {
             using var workspace = CreateWorkspaceWithProjectAndDocuments();
             var analyzerConfigDocument = CreateAnalyzerConfigDocument(
                 workspace,
@@ -168,7 +171,8 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests
                 DiagnosticSeverity.Hidden
             )]
                 DiagnosticSeverity severity
-        ) {
+        )
+        {
             var expectedHeader = "";
             if (language.HasFlag(Language.CSharp) && language.HasFlag(Language.VisualBasic))
             {

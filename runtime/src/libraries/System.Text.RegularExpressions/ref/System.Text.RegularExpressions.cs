@@ -83,12 +83,14 @@ namespace System.Text.RegularExpressions
         void System.Collections.Generic.ICollection<System.Text.RegularExpressions.Capture>.Clear() { }
         bool System.Collections.Generic.ICollection<System.Text.RegularExpressions.Capture>.Contains(
             System.Text.RegularExpressions.Capture item
-        ) {
+        )
+        {
             throw null;
         }
         bool System.Collections.Generic.ICollection<System.Text.RegularExpressions.Capture>.Remove(
             System.Text.RegularExpressions.Capture item
-        ) {
+        )
+        {
             throw null;
         }
         System.Collections.Generic.IEnumerator<System.Text.RegularExpressions.Capture> System.Collections.Generic.IEnumerable<System.Text.RegularExpressions.Capture>.GetEnumerator()
@@ -97,7 +99,8 @@ namespace System.Text.RegularExpressions
         }
         int System.Collections.Generic.IList<System.Text.RegularExpressions.Capture>.IndexOf(
             System.Text.RegularExpressions.Capture item
-        ) {
+        )
+        {
             throw null;
         }
         void System.Collections.Generic.IList<System.Text.RegularExpressions.Capture>.Insert(
@@ -141,7 +144,8 @@ namespace System.Text.RegularExpressions
         }
         public static System.Text.RegularExpressions.Group Synchronized(
             System.Text.RegularExpressions.Group inner
-        ) {
+        )
+        {
             throw null;
         }
     }
@@ -230,12 +234,14 @@ namespace System.Text.RegularExpressions
         void System.Collections.Generic.ICollection<System.Text.RegularExpressions.Group>.Clear() { }
         bool System.Collections.Generic.ICollection<System.Text.RegularExpressions.Group>.Contains(
             System.Text.RegularExpressions.Group item
-        ) {
+        )
+        {
             throw null;
         }
         bool System.Collections.Generic.ICollection<System.Text.RegularExpressions.Group>.Remove(
             System.Text.RegularExpressions.Group item
-        ) {
+        )
+        {
             throw null;
         }
         System.Collections.Generic.IEnumerator<System.Collections.Generic.KeyValuePair<
@@ -254,7 +260,8 @@ namespace System.Text.RegularExpressions
         }
         int System.Collections.Generic.IList<System.Text.RegularExpressions.Group>.IndexOf(
             System.Text.RegularExpressions.Group item
-        ) {
+        )
+        {
             throw null;
         }
         void System.Collections.Generic.IList<System.Text.RegularExpressions.Group>.Insert(
@@ -284,7 +291,8 @@ namespace System.Text.RegularExpressions
             string key,
             [System.Diagnostics.CodeAnalysis.NotNullWhenAttribute(true)]
                 out System.Text.RegularExpressions.Group? value
-        ) {
+        )
+        {
             throw null;
         }
     }
@@ -309,7 +317,8 @@ namespace System.Text.RegularExpressions
         }
         public static System.Text.RegularExpressions.Match Synchronized(
             System.Text.RegularExpressions.Match inner
-        ) {
+        )
+        {
             throw null;
         }
     }
@@ -370,12 +379,14 @@ namespace System.Text.RegularExpressions
         void System.Collections.Generic.ICollection<System.Text.RegularExpressions.Match>.Clear() { }
         bool System.Collections.Generic.ICollection<System.Text.RegularExpressions.Match>.Contains(
             System.Text.RegularExpressions.Match item
-        ) {
+        )
+        {
             throw null;
         }
         bool System.Collections.Generic.ICollection<System.Text.RegularExpressions.Match>.Remove(
             System.Text.RegularExpressions.Match item
-        ) {
+        )
+        {
             throw null;
         }
         System.Collections.Generic.IEnumerator<System.Text.RegularExpressions.Match> System.Collections.Generic.IEnumerable<System.Text.RegularExpressions.Match>.GetEnumerator()
@@ -384,7 +395,8 @@ namespace System.Text.RegularExpressions
         }
         int System.Collections.Generic.IList<System.Text.RegularExpressions.Match>.IndexOf(
             System.Text.RegularExpressions.Match item
-        ) {
+        )
+        {
             throw null;
         }
         void System.Collections.Generic.IList<System.Text.RegularExpressions.Match>.Insert(
@@ -518,7 +530,8 @@ namespace System.Text.RegularExpressions
             string input,
             string pattern,
             System.Text.RegularExpressions.RegexOptions options
-        ) {
+        )
+        {
             throw null;
         }
         public static bool IsMatch(
@@ -526,7 +539,8 @@ namespace System.Text.RegularExpressions
             string pattern,
             System.Text.RegularExpressions.RegexOptions options,
             System.TimeSpan matchTimeout
-        ) {
+        )
+        {
             throw null;
         }
         public System.Text.RegularExpressions.Match Match(string input)
@@ -549,7 +563,8 @@ namespace System.Text.RegularExpressions
             string input,
             string pattern,
             System.Text.RegularExpressions.RegexOptions options
-        ) {
+        )
+        {
             throw null;
         }
         public static System.Text.RegularExpressions.Match Match(
@@ -557,7 +572,8 @@ namespace System.Text.RegularExpressions
             string pattern,
             System.Text.RegularExpressions.RegexOptions options,
             System.TimeSpan matchTimeout
-        ) {
+        )
+        {
             throw null;
         }
         public System.Text.RegularExpressions.MatchCollection Matches(string input)
@@ -571,14 +587,16 @@ namespace System.Text.RegularExpressions
         public static System.Text.RegularExpressions.MatchCollection Matches(
             string input,
             string pattern
-        ) {
+        )
+        {
             throw null;
         }
         public static System.Text.RegularExpressions.MatchCollection Matches(
             string input,
             string pattern,
             System.Text.RegularExpressions.RegexOptions options
-        ) {
+        )
+        {
             throw null;
         }
         public static System.Text.RegularExpressions.MatchCollection Matches(
@@ -586,7 +604,8 @@ namespace System.Text.RegularExpressions
             string pattern,
             System.Text.RegularExpressions.RegexOptions options,
             System.TimeSpan matchTimeout
-        ) {
+        )
+        {
             throw null;
         }
         public string Replace(string input, string replacement)
@@ -610,7 +629,8 @@ namespace System.Text.RegularExpressions
             string pattern,
             string replacement,
             System.Text.RegularExpressions.RegexOptions options
-        ) {
+        )
+        {
             throw null;
         }
         public static string Replace(
@@ -619,14 +639,16 @@ namespace System.Text.RegularExpressions
             string replacement,
             System.Text.RegularExpressions.RegexOptions options,
             System.TimeSpan matchTimeout
-        ) {
+        )
+        {
             throw null;
         }
         public static string Replace(
             string input,
             string pattern,
             System.Text.RegularExpressions.MatchEvaluator evaluator
-        ) {
+        )
+        {
             throw null;
         }
         public static string Replace(
@@ -634,7 +656,8 @@ namespace System.Text.RegularExpressions
             string pattern,
             System.Text.RegularExpressions.MatchEvaluator evaluator,
             System.Text.RegularExpressions.RegexOptions options
-        ) {
+        )
+        {
             throw null;
         }
         public static string Replace(
@@ -643,7 +666,8 @@ namespace System.Text.RegularExpressions
             System.Text.RegularExpressions.MatchEvaluator evaluator,
             System.Text.RegularExpressions.RegexOptions options,
             System.TimeSpan matchTimeout
-        ) {
+        )
+        {
             throw null;
         }
         public string Replace(string input, System.Text.RegularExpressions.MatchEvaluator evaluator)
@@ -654,7 +678,8 @@ namespace System.Text.RegularExpressions
             string input,
             System.Text.RegularExpressions.MatchEvaluator evaluator,
             int count
-        ) {
+        )
+        {
             throw null;
         }
         public string Replace(
@@ -662,7 +687,8 @@ namespace System.Text.RegularExpressions
             System.Text.RegularExpressions.MatchEvaluator evaluator,
             int count,
             int startat
-        ) {
+        )
+        {
             throw null;
         }
         public string[] Split(string input)
@@ -685,7 +711,8 @@ namespace System.Text.RegularExpressions
             string input,
             string pattern,
             System.Text.RegularExpressions.RegexOptions options
-        ) {
+        )
+        {
             throw null;
         }
         public static string[] Split(
@@ -693,7 +720,8 @@ namespace System.Text.RegularExpressions
             string pattern,
             System.Text.RegularExpressions.RegexOptions options,
             System.TimeSpan matchTimeout
-        ) {
+        )
+        {
             throw null;
         }
         void System.Runtime.Serialization.ISerializable.GetObjectData(
@@ -935,7 +963,8 @@ namespace System.Text.RegularExpressions
             int textstart,
             int prevlen,
             bool quick
-        ) {
+        )
+        {
             throw null;
         }
         protected internal System.Text.RegularExpressions.Match? Scan(
@@ -947,7 +976,8 @@ namespace System.Text.RegularExpressions
             int prevlen,
             bool quick,
             System.TimeSpan timeout
-        ) {
+        )
+        {
             throw null;
         }
         protected void TransferCapture(int capnum, int uncapnum, int start, int end) { }

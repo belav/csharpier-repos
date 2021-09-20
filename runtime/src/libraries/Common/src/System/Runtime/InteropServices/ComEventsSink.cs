@@ -117,7 +117,8 @@ namespace System.Runtime.InteropServices
             int cNames,
             int lcid,
             int[] rgDispId
-        ) {
+        )
+        {
             throw new NotImplementedException();
         }
 
@@ -152,7 +153,8 @@ namespace System.Runtime.InteropServices
             IntPtr pVarResult,
             IntPtr pExcepInfo,
             IntPtr puArgErr
-        ) {
+        )
+        {
             ComEventsMethod? method = FindMethod(dispid);
             if (method == null)
             {

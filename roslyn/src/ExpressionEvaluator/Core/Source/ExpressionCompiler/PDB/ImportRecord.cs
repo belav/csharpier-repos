@@ -31,7 +31,8 @@ namespace Microsoft.CodeAnalysis.ExpressionEvaluator
             string? targetString = null,
             IAssemblySymbolInternal? targetAssembly = null,
             string? targetAssemblyAlias = null
-        ) {
+        )
+        {
             TargetKind = targetKind;
             Alias = alias;
             TargetType = targetType;

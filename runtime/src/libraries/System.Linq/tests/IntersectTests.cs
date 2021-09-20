@@ -119,7 +119,8 @@ namespace System.Linq.Tests
             IEnumerable<string> second,
             IEqualityComparer<string> comparer,
             string[] expected
-        ) {
+        )
+        {
             if (comparer == null)
             {
                 Assert.Equal(expected, first.Intersect(second));
@@ -162,7 +163,8 @@ namespace System.Linq.Tests
             IEnumerable<int?> first,
             IEnumerable<int?> second,
             int?[] expected
-        ) {
+        )
+        {
             Assert.Equal(expected, first.RunOnce().Intersect(second.RunOnce()));
             Assert.Equal(expected, first.RunOnce().Intersect(second.RunOnce(), null));
         }
@@ -286,7 +288,8 @@ namespace System.Linq.Tests
             Func<TSource, TKey> keySelector,
             IEqualityComparer<TKey>? comparer,
             IEnumerable<TSource> expected
-        ) {
+        )
+        {
             Assert.Equal(expected, first.IntersectBy(second, keySelector, comparer));
         }
 
@@ -298,7 +301,8 @@ namespace System.Linq.Tests
             Func<TSource, TKey> keySelector,
             IEqualityComparer<TKey>? comparer,
             IEnumerable<TSource> expected
-        ) {
+        )
+        {
             Assert.Equal(
                 expected,
                 first.RunOnce().IntersectBy(second.RunOnce(), keySelector, comparer)

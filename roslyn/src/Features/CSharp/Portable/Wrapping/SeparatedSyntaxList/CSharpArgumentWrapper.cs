@@ -49,13 +49,15 @@ namespace Microsoft.CodeAnalysis.CSharp.Wrapping.SeparatedSyntaxList
             int position,
             SyntaxNode declaration,
             BaseArgumentListSyntax listSyntax
-        ) {
+        )
+        {
             var startToken = listSyntax.GetFirstToken();
 
             if (
                 declaration is InvocationExpressionSyntax
                 || declaration is ElementAccessExpressionSyntax
-            ) {
+            )
+            {
                 // If we have something like  Foo(...)  or  this.Foo(...)  allow anywhere in the Foo(...)
                 // section.
                 var expr =

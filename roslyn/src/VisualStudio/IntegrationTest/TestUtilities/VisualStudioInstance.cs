@@ -98,7 +98,8 @@ namespace Microsoft.VisualStudio.IntegrationTest.Utilities
             ImmutableHashSet<string> supportedPackageIds,
             string installationPath,
             bool isUsingLspEditor
-        ) {
+        )
+        {
             HostProcess = hostProcess;
             Dte = dte;
             SupportedPackageIds = supportedPackageIds;
@@ -294,7 +295,8 @@ namespace Microsoft.VisualStudio.IntegrationTest.Utilities
                 if (
                     dte?.Debugger?.DebuggedProcesses?.OfType<EnvDTE.Process>()
                         .Any(p => p.ProcessID == currentProcessId) ?? false
-                ) {
+                )
+                {
                     return dte;
                 }
             }
@@ -326,7 +328,8 @@ namespace Microsoft.VisualStudio.IntegrationTest.Utilities
                 if (
                     _integrationServiceChannel != null
                     && ChannelServices.RegisteredChannels.Contains(_integrationServiceChannel)
-                ) {
+                )
+                {
                     ChannelServices.UnregisterChannel(_integrationServiceChannel);
                 }
             }
@@ -339,7 +342,8 @@ namespace Microsoft.VisualStudio.IntegrationTest.Utilities
                 dte.Commands.Item(
                     WellKnownCommandNames.Test_IntegrationTestService_Start
                 ).IsAvailable
-            ) {
+            )
+            {
                 dte.ExecuteCommand(WellKnownCommandNames.Test_IntegrationTestService_Start);
             }
         }

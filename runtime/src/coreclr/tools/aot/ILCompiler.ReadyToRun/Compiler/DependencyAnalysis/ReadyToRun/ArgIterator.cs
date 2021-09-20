@@ -290,7 +290,8 @@ namespace ILCompiler.DependencyAnalysis.ReadyToRun
             TransitionBlock transitionBlock,
             int offset,
             ArgLocDesc? argLocDescForStructInRegs
-        ) {
+        )
+        {
             _transitionBlock = transitionBlock;
             _offset = offset;
             _argLocDescForStructInRegs = argLocDescForStructInRegs;
@@ -339,7 +340,8 @@ namespace ILCompiler.DependencyAnalysis.ReadyToRun
             TypeDesc type,
             int delta,
             CORCOMPILE_GCREFMAP_TOKENS[] frame
-        ) {
+        )
+        {
             // SPAN-TODO: GC reporting - https://github.com/dotnet/runtime/issues/7103
 
             Debug.Assert(IsStructPassedInRegs());
@@ -364,7 +366,8 @@ namespace ILCompiler.DependencyAnalysis.ReadyToRun
                 if (
                     eightByteClassification
                     != SystemVClassificationType.SystemVClassificationTypeSSE
-                ) {
+                )
+                {
                     if (
                         (
                             eightByteClassification
@@ -374,7 +377,8 @@ namespace ILCompiler.DependencyAnalysis.ReadyToRun
                             eightByteClassification
                             == SystemVClassificationType.SystemVClassificationTypeIntegerByRef
                         )
-                    ) {
+                    )
+                    {
                         Debug.Assert(eightByteSize == 8);
                         Debug.Assert((genRegDest & 7) == 0);
 
@@ -401,7 +405,8 @@ namespace ILCompiler.DependencyAnalysis.ReadyToRun
             bool isVarArg,
             TypeHandle[] parameterTypes,
             TypeHandle returnType
-        ) {
+        )
+        {
             _hasThis = hasThis;
             _isVarArg = isVarArg;
             _parameterTypes = parameterTypes;
@@ -539,7 +544,8 @@ namespace ILCompiler.DependencyAnalysis.ReadyToRun
             int argNum,
             out TypeHandle thArgType,
             out bool forceByRefReturn
-        ) {
+        )
+        {
             forceByRefReturn = false;
 
             if (_extraObjectFirstArg && argNum == 0)
@@ -596,7 +602,8 @@ namespace ILCompiler.DependencyAnalysis.ReadyToRun
             bool[] forcedByRefParams,
             bool skipFirstArg,
             bool extraObjectFirstArg
-        ) {
+        )
+        {
             this = default(ArgIterator);
             _context = context;
             _argData = argData;
@@ -974,7 +981,8 @@ namespace ILCompiler.DependencyAnalysis.ReadyToRun
                     if (
                         _interpreterCallingConvention != CallingConventions.ManagedStatic
                         && _interpreterCallingConvention != CallingConventions.ManagedInstance
-                    ) {
+                    )
+                    {
                         argOfs = _curOfs;
                         _curOfs += ArchitectureConstants.StackElemSize(argSize);
                         return argOfs;
@@ -986,7 +994,8 @@ namespace ILCompiler.DependencyAnalysis.ReadyToRun
                             argType,
                             _argTypeHandle
                         )
-                    ) {
+                    )
+                    {
                         return _transitionBlock.OffsetOfArgumentRegisters
                             + (_transitionBlock.NumArgumentRegisters - _x86NumRegistersUsed)
                                 * _transitionBlock.PointerSize;
@@ -1064,7 +1073,8 @@ namespace ILCompiler.DependencyAnalysis.ReadyToRun
                                         )
                                         && (cGenRegs + _x64UnixIdxGenReg)
                                             <= _transitionBlock.NumArgumentRegisters
-                                    ) {
+                                    )
+                                    {
                                         _argLocDescForStructInRegs = new ArgLocDesc();
                                         _argLocDescForStructInRegs.m_cGenReg = (short)cGenRegs;
                                         _argLocDescForStructInRegs.m_cFloatReg = cFPRegs;
@@ -1096,7 +1106,8 @@ namespace ILCompiler.DependencyAnalysis.ReadyToRun
                             if (
                                 cFPRegs + _x64UnixIdxFPReg
                                 <= TransitionBlock.X64UnixTransitionBlock.NUM_FLOAT_ARGUMENT_REGISTERS
-                            ) {
+                            )
+                            {
                                 int argOfsInner =
                                     _transitionBlock.OffsetOfFloatArgumentRegisters
                                     + _x64UnixIdxFPReg * 8;
@@ -1109,7 +1120,8 @@ namespace ILCompiler.DependencyAnalysis.ReadyToRun
                             if (
                                 _x64UnixIdxGenReg + cGenRegs
                                 <= _transitionBlock.NumArgumentRegisters
-                            ) {
+                            )
+                            {
                                 int argOfsInner =
                                     _transitionBlock.OffsetOfArgumentRegisters
                                     + _x64UnixIdxGenReg * 8;
@@ -1538,7 +1550,8 @@ namespace ILCompiler.DependencyAnalysis.ReadyToRun
                             type,
                             thArgType
                         )
-                    ) {
+                    )
+                    {
                         int structSize = TypeHandle.GetElemSize(type, thArgType);
 
                         nSizeOfArgStack += _transitionBlock.StackElemSize(structSize);
@@ -1710,7 +1723,8 @@ namespace ILCompiler.DependencyAnalysis.ReadyToRun
                     if (
                         GetArgType(out dummy) == CorElementType.ELEMENT_TYPE_VALUETYPE
                         && GetArgSize() > _transitionBlock.EnregisteredParamTypeMaxSize
-                    ) {
+                    )
+                    {
                         cSlots = 1;
                     }
 

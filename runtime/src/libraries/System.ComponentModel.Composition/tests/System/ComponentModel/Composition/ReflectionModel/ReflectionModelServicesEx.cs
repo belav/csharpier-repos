@@ -21,7 +21,8 @@ namespace System.ComponentModel.Composition.ReflectionModel
             CreationPolicy requiredCreationPolicy,
             bool isExportFactory,
             ICompositionElement origin
-        ) {
+        )
+        {
             return ReflectionModelServicesEx.CreateImportDefinition(
                 parameter,
                 contractName,
@@ -45,7 +46,8 @@ namespace System.ComponentModel.Composition.ReflectionModel
             IDictionary<string, object> metadata,
             bool isExportFactory,
             ICompositionElement origin
-        ) {
+        )
+        {
             return ReflectionModelServices.CreateImportDefinition(
                 parameter,
                 contractName,
@@ -69,7 +71,8 @@ namespace System.ComponentModel.Composition.ReflectionModel
             CreationPolicy requiredCreationPolicy,
             bool isExportFactory,
             ICompositionElement origin
-        ) {
+        )
+        {
             return ReflectionModelServicesEx.CreateImportDefinition(
                 importingMember,
                 contractName,
@@ -95,7 +98,8 @@ namespace System.ComponentModel.Composition.ReflectionModel
             IDictionary<string, object> metadata,
             bool isExportFactory,
             ICompositionElement origin
-        ) {
+        )
+        {
             return ReflectionModelServices.CreateImportDefinition(
                 importingMember,
                 contractName,
@@ -117,7 +121,8 @@ namespace System.ComponentModel.Composition.ReflectionModel
 
         public static ContractBasedImportDefinition CreateExportFactoryImportDefinition(
             ContractBasedImportDefinition productImportDefinition
-        ) {
+        )
+        {
             return new ExportFactoryImportDefinition(productImportDefinition);
         }
 
@@ -129,15 +134,17 @@ namespace System.ComponentModel.Composition.ReflectionModel
 
             public ExportFactoryImportDefinition(
                 ContractBasedImportDefinition productImportDefinition
-            ) : base(
-                CompositionConstants.PartCreatorContractName,
-                CompositionConstants.PartCreatorTypeIdentity,
-                productImportDefinition.RequiredMetadata,
-                productImportDefinition.Cardinality,
-                productImportDefinition.IsRecomposable,
-                false,
-                CreationPolicy.Any
-            ) {
+            )
+                : base(
+                    CompositionConstants.PartCreatorContractName,
+                    CompositionConstants.PartCreatorTypeIdentity,
+                    productImportDefinition.RequiredMetadata,
+                    productImportDefinition.Cardinality,
+                    productImportDefinition.IsRecomposable,
+                    false,
+                    CreationPolicy.Any
+                )
+            {
                 _productImportDefinition = productImportDefinition;
             }
 
@@ -173,14 +180,16 @@ namespace System.ComponentModel.Composition.ReflectionModel
             private static bool IsProductConstraintSatisfiedBy(
                 ImportDefinition productImportDefinition,
                 ExportDefinition exportDefinition
-            ) {
+            )
+            {
                 object productValue = null;
                 if (
                     exportDefinition.Metadata.TryGetValue(
                         CompositionConstants.ProductDefinitionMetadataName,
                         out productValue
                     )
-                ) {
+                )
+                {
                     ExportDefinition productDefinition = productValue as ExportDefinition;
 
                     if (productDefinition != null)
@@ -206,7 +215,8 @@ namespace System.ComponentModel.Composition.ReflectionModel
             private static Expression<Func<ExportDefinition, bool>> CreateExportFactoryConstraint(
                 Expression<Func<ExportDefinition, bool>> baseConstraint,
                 ImportDefinition productImportDefinition
-            ) {
+            )
+            {
                 ParameterExpression exportDefinitionParameter = baseConstraint.Parameters[0];
 
                 // exportDefinition.Metadata

@@ -262,7 +262,8 @@ namespace System.Reflection.Emit.Tests
         public void DefineMethodOverride_ClassDoesNotImplementOrInheritMethod_ThrowsTypeLoadExceptionOnCreation(
             Type methodType,
             string methodName
-        ) {
+        )
+        {
             TypeBuilder type = Helpers.DynamicType(TypeAttributes.Public);
             type.AddInterfaceImplementation(typeof(GenericInterface<string>));
 
@@ -342,7 +343,8 @@ namespace System.Reflection.Emit.Tests
         public void DefineMethodOverride_BodyAndDeclarationHaveDifferentSignatures_ThrowsTypeLoadExceptionOnCreation(
             Type returnType,
             Type[] parameterTypes
-        ) {
+        )
+        {
             AssemblyBuilder assembly = AssemblyBuilder.DefineDynamicAssembly(
                 new AssemblyName("Name"),
                 AssemblyBuilderAccess.Run

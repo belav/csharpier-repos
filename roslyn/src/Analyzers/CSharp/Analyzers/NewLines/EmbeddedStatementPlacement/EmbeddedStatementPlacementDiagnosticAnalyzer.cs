@@ -54,7 +54,8 @@ namespace Microsoft.CodeAnalysis.CSharp.NewLines.EmbeddedStatementPlacement
             SyntaxTreeAnalysisContext context,
             ReportDiagnostic severity,
             SyntaxNode node
-        ) {
+        )
+        {
             context.CancellationToken.ThrowIfCancellationRequested();
 
             // Don't bother analyzing nodes that have syntax errors in them.
@@ -67,7 +68,8 @@ namespace Microsoft.CodeAnalysis.CSharp.NewLines.EmbeddedStatementPlacement
             if (
                 node is StatementSyntax statement
                 && CheckStatementSyntax(context, severity, statement)
-            ) {
+            )
+            {
                 return;
             }
 
@@ -82,7 +84,8 @@ namespace Microsoft.CodeAnalysis.CSharp.NewLines.EmbeddedStatementPlacement
             SyntaxTreeAnalysisContext context,
             ReportDiagnostic severity,
             StatementSyntax statement
-        ) {
+        )
+        {
             if (!StatementNeedsWrapping(statement))
                 return false;
 
@@ -136,7 +139,8 @@ namespace Microsoft.CodeAnalysis.CSharp.NewLines.EmbeddedStatementPlacement
                     is MemberDeclarationSyntax
                         or AccessorDeclarationSyntax
                         or AnonymousFunctionExpressionSyntax
-                ) {
+                )
+                {
                     if (parent.DescendantNodes().OfType<StatementSyntax>().Count() <= 1)
                         return false;
                 }

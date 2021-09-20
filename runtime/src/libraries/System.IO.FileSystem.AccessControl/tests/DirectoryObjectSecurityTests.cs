@@ -1094,9 +1094,8 @@ namespace System.Security.AccessControl
         {
             public CustomDirectoryObjectSecurity() { }
 
-            public CustomDirectoryObjectSecurity(
-                CommonSecurityDescriptor securityDescriptor
-            ) : base(securityDescriptor) { }
+            public CustomDirectoryObjectSecurity(CommonSecurityDescriptor securityDescriptor)
+                : base(securityDescriptor) { }
 
             public override Type AccessRightType => throw new NotImplementedException();
 
@@ -1111,7 +1110,8 @@ namespace System.Security.AccessControl
                 InheritanceFlags inheritanceFlags,
                 PropagationFlags propagationFlags,
                 AccessControlType type
-            ) {
+            )
+            {
                 return new CustomAccessRule(
                     identityReference,
                     accessMask,
@@ -1130,7 +1130,8 @@ namespace System.Security.AccessControl
                 AccessControlType type,
                 Guid objectType,
                 Guid inheritedObjectType
-            ) {
+            )
+            {
                 return new CustomAccessRule(
                     identityReference,
                     accessMask,
@@ -1149,7 +1150,8 @@ namespace System.Security.AccessControl
                 InheritanceFlags inheritanceFlags,
                 PropagationFlags propagationFlags,
                 AuditFlags flags
-            ) {
+            )
+            {
                 return new CustomAuditRule(
                     identityReference,
                     accessMask,
@@ -1168,7 +1170,8 @@ namespace System.Security.AccessControl
                 AuditFlags flags,
                 Guid objectType,
                 Guid inheritedObjectType
-            ) {
+            )
+            {
                 return new CustomAuditRule(
                     identityReference,
                     accessMask,
@@ -1251,16 +1254,17 @@ namespace System.Security.AccessControl
                 Guid objectType,
                 Guid inheritedObjectType,
                 AuditFlags auditFlags
-            ) : base(
-                identity,
-                accessMask,
-                isInherited,
-                inheritanceFlags,
-                propagationFlags,
-                objectType,
-                inheritedObjectType,
-                auditFlags
-            ) { }
+            )
+                : base(
+                    identity,
+                    accessMask,
+                    isInherited,
+                    inheritanceFlags,
+                    propagationFlags,
+                    objectType,
+                    inheritedObjectType,
+                    auditFlags
+                ) { }
 
             public CustomAuditRule(
                 IdentityReference identity,
@@ -1269,16 +1273,17 @@ namespace System.Security.AccessControl
                 InheritanceFlags inheritanceFlags,
                 PropagationFlags propagationFlags,
                 AuditFlags auditFlags
-            ) : base(
-                identity,
-                accessMask,
-                isInherited,
-                inheritanceFlags,
-                propagationFlags,
-                Guid.NewGuid(),
-                Guid.NewGuid(),
-                auditFlags
-            ) { }
+            )
+                : base(
+                    identity,
+                    accessMask,
+                    isInherited,
+                    inheritanceFlags,
+                    propagationFlags,
+                    Guid.NewGuid(),
+                    Guid.NewGuid(),
+                    auditFlags
+                ) { }
 
             public override bool Equals(object value)
             {
@@ -1331,16 +1336,17 @@ namespace System.Security.AccessControl
                 Guid objectType,
                 Guid inheritedObjectType,
                 AccessControlType type
-            ) : base(
-                identity,
-                accessMask,
-                isInherited,
-                inheritanceFlags,
-                propagationFlags,
-                objectType,
-                inheritedObjectType,
-                type
-            ) { }
+            )
+                : base(
+                    identity,
+                    accessMask,
+                    isInherited,
+                    inheritanceFlags,
+                    propagationFlags,
+                    objectType,
+                    inheritedObjectType,
+                    type
+                ) { }
 
             public CustomAccessRule(
                 IdentityReference identity,
@@ -1349,16 +1355,17 @@ namespace System.Security.AccessControl
                 InheritanceFlags inheritanceFlags,
                 PropagationFlags propagationFlags,
                 AccessControlType type
-            ) : base(
-                identity,
-                accessMask,
-                isInherited,
-                inheritanceFlags,
-                propagationFlags,
-                Guid.NewGuid(),
-                Guid.NewGuid(),
-                type
-            ) { }
+            )
+                : base(
+                    identity,
+                    accessMask,
+                    isInherited,
+                    inheritanceFlags,
+                    propagationFlags,
+                    Guid.NewGuid(),
+                    Guid.NewGuid(),
+                    type
+                ) { }
 
             public override bool Equals(object value)
             {

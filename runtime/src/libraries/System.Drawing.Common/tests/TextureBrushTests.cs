@@ -113,7 +113,8 @@ namespace System.Drawing.Tests
             WrapMode wrapMode,
             PixelFormat expectedPixelFormat,
             Size expectedSize
-        ) {
+        )
+        {
             try
             {
                 using (var brush = new TextureBrush(image, wrapMode))
@@ -214,7 +215,8 @@ namespace System.Drawing.Tests
             Image image,
             WrapMode wrapMode,
             Rectangle rectangle
-        ) {
+        )
+        {
             try
             {
                 using (var brush = new TextureBrush(image, wrapMode, rectangle))
@@ -242,7 +244,8 @@ namespace System.Drawing.Tests
             Image image,
             WrapMode wrapMode,
             Rectangle rectangle
-        ) {
+        )
+        {
             try
             {
                 using (var brush = new TextureBrush(image, wrapMode, (RectangleF)rectangle))
@@ -302,7 +305,8 @@ namespace System.Drawing.Tests
             Rectangle rectangle,
             ImageAttributes attributes,
             WrapMode expectedWrapMode
-        ) {
+        )
+        {
             try
             {
                 using (var brush = new TextureBrush(image, rectangle, attributes))
@@ -332,7 +336,8 @@ namespace System.Drawing.Tests
             Rectangle rectangle,
             ImageAttributes attributes,
             WrapMode expectedWrapMode
-        ) {
+        )
+        {
             try
             {
                 using (var brush = new TextureBrush(image, (RectangleF)rectangle, attributes))
@@ -456,7 +461,8 @@ namespace System.Drawing.Tests
             int y,
             int width,
             int height
-        ) {
+        )
+        {
             var rectangle = new Rectangle(x, y, width, height);
             using (var image = new Bitmap(10, 10))
             {
@@ -549,7 +555,8 @@ namespace System.Drawing.Tests
             Matrix originalTransform,
             Matrix matrix,
             MatrixOrder matrixOrder
-        ) {
+        )
+        {
             try
             {
                 using (var image = new Bitmap(10, 10))
@@ -717,7 +724,8 @@ namespace System.Drawing.Tests
             Matrix originalTransform,
             float angle,
             MatrixOrder matrixOrder
-        ) {
+        )
+        {
             try
             {
                 using (var image = new Bitmap(10, 10))
@@ -810,7 +818,8 @@ namespace System.Drawing.Tests
             float scaleX,
             float scaleY,
             MatrixOrder matrixOrder
-        ) {
+        )
+        {
             try
             {
                 using (var image = new Bitmap(10, 10))
@@ -955,7 +964,8 @@ namespace System.Drawing.Tests
             float dX,
             float dY,
             MatrixOrder matrixOrder
-        ) {
+        )
+        {
             try
             {
                 using (var image = new Bitmap(10, 10))

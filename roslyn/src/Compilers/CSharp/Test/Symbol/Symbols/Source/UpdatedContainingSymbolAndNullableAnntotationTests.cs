@@ -95,7 +95,8 @@ class C
                 Symbol symbol2,
                 bool nullableIgnored,
                 bool considerEverything
-            ) {
+            )
+            {
                 if (considerEverything)
                 {
                     Assert.True(

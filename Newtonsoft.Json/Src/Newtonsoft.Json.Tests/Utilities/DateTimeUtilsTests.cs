@@ -200,7 +200,8 @@ namespace Newtonsoft.Json.Tests.Utilities
                     DateTimeZoneHandling.RoundtripKind,
                     out oldDt
                 )
-            ) {
+            )
+            {
                 oldDate = oldDt;
             }
 
@@ -212,7 +213,8 @@ namespace Newtonsoft.Json.Tests.Utilities
                     DateTimeZoneHandling.RoundtripKind,
                     out temp
                 )
-            ) {
+            )
+            {
                 newDt = temp;
             }
 
@@ -341,7 +343,8 @@ namespace Newtonsoft.Json.Tests.Utilities
             DateParseHandling dateParseHandling,
             DateTimeZoneHandling dateTimeZoneHandling,
             out object dt
-        ) {
+        )
+        {
             const string isoDateFormat = "yyyy-MM-ddTHH:mm:ss.FFFFFFFK";
 
 #if !NET20
@@ -356,7 +359,8 @@ namespace Newtonsoft.Json.Tests.Utilities
                         DateTimeStyles.RoundtripKind,
                         out dateTimeOffset
                     )
-                ) {
+                )
+                {
                     dt = dateTimeOffset;
                     return true;
                 }
@@ -373,7 +377,8 @@ namespace Newtonsoft.Json.Tests.Utilities
                         DateTimeStyles.RoundtripKind,
                         out dateTime
                     )
-                ) {
+                )
+                {
                     dateTime = DateTimeUtils.EnsureDateTime(dateTime, dateTimeZoneHandling);
 
                     dt = dateTime;

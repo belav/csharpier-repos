@@ -808,7 +808,8 @@ namespace System.Threading
         private static void DispatchWorkItemWithWorkerTracking(
             object workItem,
             Thread currentThread
-        ) {
+        )
+        {
             Debug.Assert(ThreadPool.EnableWorkerTracking);
             Debug.Assert(currentThread == Thread.CurrentThread);
 
@@ -931,7 +932,8 @@ namespace System.Threading
             WaitCallback callback,
             object? state,
             ExecutionContext context
-        ) {
+        )
+        {
             Debug.Assert(context != null);
 
             _callback = callback;
@@ -957,7 +959,8 @@ namespace System.Threading
             Action<TState> callback,
             TState state,
             ExecutionContext context
-        ) {
+        )
+        {
             Debug.Assert(callback != null);
 
             _callback = callback;
@@ -1048,7 +1051,8 @@ namespace System.Threading
             WaitOrTimerCallback waitOrTimerCallback,
             object? state,
             bool flowExecutionContext
-        ) {
+        )
+        {
             _waitOrTimerCallback = waitOrTimerCallback;
             _state = state;
 
@@ -1075,7 +1079,8 @@ namespace System.Threading
         internal static void PerformWaitOrTimerCallback(
             _ThreadPoolWaitOrTimerCallback helper,
             bool timedOut
-        ) {
+        )
+        {
             Debug.Assert(helper != null, "Null state passed to PerformWaitOrTimerCallback!");
             // call directly if it is an unsafe call OR EC flow is suppressed
             ExecutionContext? context = helper._executionContext;
@@ -1117,7 +1122,8 @@ namespace System.Threading
             object? state,
             uint millisecondsTimeOutInterval,
             bool executeOnlyOnce // NOTE: we do not allow other options that allow the callback to be queued as an APC
-        ) {
+        )
+        {
             if (
                 millisecondsTimeOutInterval > (uint)int.MaxValue
                 && millisecondsTimeOutInterval != uint.MaxValue
@@ -1144,7 +1150,8 @@ namespace System.Threading
             object? state,
             uint millisecondsTimeOutInterval,
             bool executeOnlyOnce // NOTE: we do not allow other options that allow the callback to be queued as an APC
-        ) {
+        )
+        {
             if (
                 millisecondsTimeOutInterval > (uint)int.MaxValue
                 && millisecondsTimeOutInterval != uint.MaxValue
@@ -1170,7 +1177,8 @@ namespace System.Threading
             object? state,
             int millisecondsTimeOutInterval,
             bool executeOnlyOnce // NOTE: we do not allow other options that allow the callback to be queued as an APC
-        ) {
+        )
+        {
             if (millisecondsTimeOutInterval < -1)
                 throw new ArgumentOutOfRangeException(
                     nameof(millisecondsTimeOutInterval),
@@ -1193,7 +1201,8 @@ namespace System.Threading
             object? state,
             int millisecondsTimeOutInterval,
             bool executeOnlyOnce // NOTE: we do not allow other options that allow the callback to be queued as an APC
-        ) {
+        )
+        {
             if (millisecondsTimeOutInterval < -1)
                 throw new ArgumentOutOfRangeException(
                     nameof(millisecondsTimeOutInterval),
@@ -1216,7 +1225,8 @@ namespace System.Threading
             object? state,
             long millisecondsTimeOutInterval,
             bool executeOnlyOnce // NOTE: we do not allow other options that allow the callback to be queued as an APC
-        ) {
+        )
+        {
             if (millisecondsTimeOutInterval < -1)
                 throw new ArgumentOutOfRangeException(
                     nameof(millisecondsTimeOutInterval),
@@ -1244,7 +1254,8 @@ namespace System.Threading
             object? state,
             long millisecondsTimeOutInterval,
             bool executeOnlyOnce // NOTE: we do not allow other options that allow the callback to be queued as an APC
-        ) {
+        )
+        {
             if (millisecondsTimeOutInterval < -1)
                 throw new ArgumentOutOfRangeException(
                     nameof(millisecondsTimeOutInterval),
@@ -1272,7 +1283,8 @@ namespace System.Threading
             object? state,
             TimeSpan timeout,
             bool executeOnlyOnce
-        ) {
+        )
+        {
             long tm = (long)timeout.TotalMilliseconds;
             if (tm < -1)
                 throw new ArgumentOutOfRangeException(
@@ -1301,7 +1313,8 @@ namespace System.Threading
             object? state,
             TimeSpan timeout,
             bool executeOnlyOnce
-        ) {
+        )
+        {
             long tm = (long)timeout.TotalMilliseconds;
             if (tm < -1)
                 throw new ArgumentOutOfRangeException(
@@ -1349,7 +1362,8 @@ namespace System.Threading
             Action<TState> callBack,
             TState state,
             bool preferLocal
-        ) {
+        )
+        {
             if (callBack == null)
             {
                 ThrowHelper.ThrowArgumentNullException(ExceptionArgument.callBack);
@@ -1371,7 +1385,8 @@ namespace System.Threading
             Action<TState> callBack,
             TState state,
             bool preferLocal
-        ) {
+        )
+        {
             if (callBack == null)
             {
                 ThrowHelper.ThrowArgumentNullException(ExceptionArgument.callBack);
@@ -1443,7 +1458,8 @@ namespace System.Threading
 
         internal static void UnsafeQueueTimeSensitiveWorkItem(
             IThreadPoolWorkItem timeSensitiveWorkItem
-        ) {
+        )
+        {
 #pragma warning disable CS0162 // Unreachable code detected. SupportsTimeSensitiveWorkItems may be constant true in some runtimes.
             if (SupportsTimeSensitiveWorkItems)
             {
@@ -1489,7 +1505,8 @@ namespace System.Threading
             // Enumerate each local queue
             foreach (
                 ThreadPoolWorkQueue.WorkStealingQueue wsq in ThreadPoolWorkQueue.WorkStealingQueueList.Queues
-            ) {
+            )
+            {
                 if (wsq != null && wsq.m_array != null)
                 {
                     object?[] items = wsq.m_array;

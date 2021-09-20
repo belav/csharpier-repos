@@ -114,7 +114,8 @@ namespace JIT.HardwareIntrinsics.X86
 
             public void RunStructFldScenario(
                 SimdScalarUnaryOpConvertTest__ConvertToInt32WithTruncationInt32Vector128Double testClass
-            ) {
+            )
+            {
                 var result = Sse2.ConvertToInt32WithTruncation(_fld);
                 testClass.ValidateResult(_fld, result);
             }
@@ -349,7 +350,8 @@ namespace JIT.HardwareIntrinsics.X86
             Vector128<Double> firstOp,
             Int32 result,
             [CallerMemberName] string method = ""
-        ) {
+        )
+        {
             Double[] inArray = new Double[Op1ElementCount];
             Unsafe.WriteUnaligned(ref Unsafe.As<Double, byte>(ref inArray[0]), firstOp);
             ValidateResult(inArray, result, method);
@@ -359,7 +361,8 @@ namespace JIT.HardwareIntrinsics.X86
             void* firstOp,
             Int32 result,
             [CallerMemberName] string method = ""
-        ) {
+        )
+        {
             Double[] inArray = new Double[Op1ElementCount];
             Unsafe.CopyBlockUnaligned(
                 ref Unsafe.As<Double, byte>(ref inArray[0]),
@@ -373,7 +376,8 @@ namespace JIT.HardwareIntrinsics.X86
             Double[] firstOp,
             Int32 result,
             [CallerMemberName] string method = ""
-        ) {
+        )
+        {
             if ((int)firstOp[0] != result)
             {
                 Succeeded = false;

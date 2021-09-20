@@ -32,7 +32,8 @@ namespace Microsoft.AspNetCore.DataProtection.SP800_108
         public void DeriveKeyWithContextHeader_Normal_Managed(
             int numDerivedBytes,
             string expectedDerivedSubkeyAsBase64
-        ) {
+        )
+        {
             // Arrange
             byte[] kdk = Encoding.UTF8.GetBytes("kdk");
             byte[] label = Encoding.UTF8.GetBytes("label");
@@ -69,7 +70,8 @@ namespace Microsoft.AspNetCore.DataProtection.SP800_108
         public void DeriveKeyWithContextHeader_Normal_Win7(
             int numDerivedBytes,
             string expectedDerivedSubkeyAsBase64
-        ) {
+        )
+        {
             // Arrange
             byte[] kdk = Encoding.UTF8.GetBytes("kdk");
             byte[] label = Encoding.UTF8.GetBytes("label");
@@ -107,7 +109,8 @@ namespace Microsoft.AspNetCore.DataProtection.SP800_108
         public void DeriveKeyWithContextHeader_Normal_Win8(
             int numDerivedBytes,
             string expectedDerivedSubkeyAsBase64
-        ) {
+        )
+        {
             // Arrange
             byte[] kdk = Encoding.UTF8.GetBytes("kdk");
             byte[] label = Encoding.UTF8.GetBytes("label");
@@ -144,7 +147,8 @@ namespace Microsoft.AspNetCore.DataProtection.SP800_108
         public void DeriveKeyWithContextHeader_LongKey_Managed(
             int numDerivedBytes,
             string expectedDerivedSubkeyAsBase64
-        ) {
+        )
+        {
             // Arrange
             byte[] kdk = new byte[50000]; // CNG can't normally handle a 50,000 byte KDK, but we coerce it into working :)
             for (int i = 0; i < kdk.Length; i++)
@@ -186,7 +190,8 @@ namespace Microsoft.AspNetCore.DataProtection.SP800_108
         public void DeriveKeyWithContextHeader_LongKey_Win7(
             int numDerivedBytes,
             string expectedDerivedSubkeyAsBase64
-        ) {
+        )
+        {
             // Arrange
             byte[] kdk = new byte[50000]; // CNG can't normally handle a 50,000 byte KDK, but we coerce it into working :)
             for (int i = 0; i < kdk.Length; i++)
@@ -229,7 +234,8 @@ namespace Microsoft.AspNetCore.DataProtection.SP800_108
         public void DeriveKeyWithContextHeader_LongKey_Win8(
             int numDerivedBytes,
             string expectedDerivedSubkeyAsBase64
-        ) {
+        )
+        {
             // Arrange
             byte[] kdk = new byte[50000]; // CNG can't normally handle a 50,000 byte KDK, but we coerce it into working :)
             for (int i = 0; i < kdk.Length; i++)
@@ -261,7 +267,8 @@ namespace Microsoft.AspNetCore.DataProtection.SP800_108
             byte[] context,
             int numDerivedBytes,
             string expectedDerivedSubkeyAsBase64
-        ) {
+        )
+        {
             byte[] derivedSubkey = new byte[numDerivedBytes];
 
             fixed (byte* pbKdk = kdk)fixed (byte* pbLabel = label)fixed (
@@ -290,7 +297,8 @@ namespace Microsoft.AspNetCore.DataProtection.SP800_108
             byte[] context,
             int numDerivedBytes,
             string expectedDerivedSubkeyAsBase64
-        ) {
+        )
+        {
             var labelSegment = new ArraySegment<byte>(new byte[label.Length + 10], 3, label.Length);
             Buffer.BlockCopy(label, 0, labelSegment.Array, labelSegment.Offset, labelSegment.Count);
             var contextSegment = new ArraySegment<byte>(

@@ -55,7 +55,8 @@ namespace Microsoft.CodeAnalysis.CommandLine
             string compilerHash,
             IEnumerable<Argument> arguments,
             Guid? requestId = null
-        ) {
+        )
+        {
             RequestId = requestId ?? Guid.Empty;
             Language = language;
             Arguments = new ReadOnlyCollection<Argument>(arguments.ToList());
@@ -84,7 +85,8 @@ namespace Microsoft.CodeAnalysis.CommandLine
             Guid? requestId = null,
             string? keepAlive = null,
             string? libDirectory = null
-        ) {
+        )
+        {
             Debug.Assert(
                 !string.IsNullOrWhiteSpace(compilerHash),
                 "CompilerHash is required to send request to the build server"
@@ -137,7 +139,8 @@ namespace Microsoft.CodeAnalysis.CommandLine
         public static async Task<BuildRequest> ReadAsync(
             Stream inStream,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             // Read the length of the request
             var lengthBuffer = new byte[4];
             await ReadAllAsync(inStream, lengthBuffer, 4, cancellationToken).ConfigureAwait(false);
@@ -193,7 +196,8 @@ namespace Microsoft.CodeAnalysis.CommandLine
         public async Task WriteAsync(
             Stream outStream,
             CancellationToken cancellationToken = default(CancellationToken)
-        ) {
+        )
+        {
             using var memoryStream = new MemoryStream();
             using var writer = new BinaryWriter(memoryStream, Encoding.Unicode);
             writer.Write(RequestId.ToByteArray());
@@ -352,7 +356,8 @@ namespace Microsoft.CodeAnalysis.CommandLine
         public static async Task<BuildResponse> ReadAsync(
             Stream stream,
             CancellationToken cancellationToken = default(CancellationToken)
-        ) {
+        )
+        {
             // Read the response length
             var lengthBuffer = new byte[4];
             await ReadAllAsync(stream, lengthBuffer, 4, cancellationToken).ConfigureAwait(false);
@@ -365,7 +370,8 @@ namespace Microsoft.CodeAnalysis.CommandLine
 
             using (
                 var reader = new BinaryReader(new MemoryStream(responseBuffer), Encoding.Unicode)
-            ) {
+            )
+            {
                 var responseType = (ResponseType)reader.ReadInt32();
 
                 switch (responseType)
@@ -623,7 +629,8 @@ namespace Microsoft.CodeAnalysis.CommandLine
             byte[] buffer,
             int count,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             int totalBytesRead = 0;
             do
             {

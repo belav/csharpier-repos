@@ -33,7 +33,8 @@ namespace System.ComponentModel
         public DefaultValueAttribute(
             [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)] Type type,
             string? value
-        ) {
+        )
+        {
             // The null check and try/catch here are because attributes should never throw exceptions.
             // We would fail to load an otherwise normal class.
 
@@ -70,7 +71,8 @@ namespace System.ComponentModel
                         Type typeToConvert,
                     string? stringValue,
                     out object? conversionResult
-                ) {
+                )
+                {
                     conversionResult = null;
 
                     // lazy init reflection objects

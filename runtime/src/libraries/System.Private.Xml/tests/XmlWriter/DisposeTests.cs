@@ -155,7 +155,8 @@ namespace System.Xml.Tests
             using (var stream = new AsyncOnlyStream())
             await using (
                 var writer = XmlWriter.Create(stream, new XmlWriterSettings() { Async = true })
-            ) {
+            )
+            {
                 await writer.WriteStartDocumentAsync();
                 await writer.WriteStartElementAsync(string.Empty, "root", null);
                 await writer.WriteStartElementAsync(null, "test", null);
@@ -245,7 +246,8 @@ namespace System.Xml.Tests
             using (var sw = new AsyncOnlyWriter())
             await using (
                 var writer = XmlWriter.Create(sw, new XmlWriterSettings() { Async = true })
-            ) {
+            )
+            {
                 await writer.WriteStartElementAsync(null, "book", null);
                 await writer.WriteElementStringAsync(null, "price", null, "19.95");
                 await writer.WriteEndElementAsync();
@@ -264,7 +266,8 @@ namespace System.Xml.Tests
                         sw1,
                         new XmlWriterSettings() { Async = true }
                     )
-                ) {
+                )
+                {
                     await asyncWriter.WriteStartElementAsync(null, "book", null);
                     await asyncWriter.WriteElementStringAsync(null, "price", null, "19.95");
                     await asyncWriter.WriteEndElementAsync();
@@ -275,7 +278,8 @@ namespace System.Xml.Tests
                         sw2,
                         new XmlWriterSettings() { Async = true }
                     )
-                ) {
+                )
+                {
                     await asyncWriter.WriteStartElementAsync(null, "book", null);
                     await asyncWriter.WriteElementStringAsync(null, "price", null, "19.95");
                     await asyncWriter.WriteEndElementAsync();
@@ -286,7 +290,8 @@ namespace System.Xml.Tests
                         sw3,
                         new XmlWriterSettings() { Async = false }
                     )
-                ) {
+                )
+                {
                     syncWriter.WriteStartElement(null, "book", null);
                     syncWriter.WriteElementString(null, "price", null, "19.95");
                     syncWriter.WriteEndElement();
@@ -322,7 +327,8 @@ namespace System.Xml.Tests
             public override Task WriteAsync(
                 ReadOnlyMemory<char> buffer,
                 CancellationToken cancellationToken = default
-            ) {
+            )
+            {
                 return Task.CompletedTask;
             }
         }
@@ -349,14 +355,16 @@ namespace System.Xml.Tests
                 int offset,
                 int count,
                 CancellationToken cancellationToken
-            ) {
+            )
+            {
                 return Task.CompletedTask;
             }
 
             public override ValueTask WriteAsync(
                 ReadOnlyMemory<byte> source,
                 CancellationToken cancellationToken = default
-            ) {
+            )
+            {
                 return default;
             }
         }

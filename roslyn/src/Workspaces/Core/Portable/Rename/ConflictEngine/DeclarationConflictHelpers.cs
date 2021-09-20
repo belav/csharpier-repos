@@ -17,7 +17,8 @@ namespace Microsoft.CodeAnalysis.Rename.ConflictEngine
         public static ImmutableArray<Location> GetMembersWithConflictingSignatures(
             IMethodSymbol renamedMethod,
             bool trimOptionalParameters
-        ) {
+        )
+        {
             var potentiallyConfictingMethods = renamedMethod.ContainingType.GetMembers(
                     renamedMethod.Name
                 )
@@ -36,7 +37,8 @@ namespace Microsoft.CodeAnalysis.Rename.ConflictEngine
         public static ImmutableArray<Location> GetMembersWithConflictingSignatures(
             IPropertySymbol renamedProperty,
             bool trimOptionalParameters
-        ) {
+        )
+        {
             var potentiallyConfictingProperties = renamedProperty.ContainingType.GetMembers(
                     renamedProperty.Name
                 )
@@ -64,7 +66,8 @@ namespace Microsoft.CodeAnalysis.Rename.ConflictEngine
             IEnumerable<ISymbol> potentiallyConfictingMembers,
             bool isMethod,
             Func<ISymbol, ImmutableArray<ImmutableArray<ITypeSymbol>>> getAllSignatures
-        ) {
+        )
+        {
             var signatureToConflictingMember = new Dictionary<ImmutableArray<ITypeSymbol>, ISymbol>(
                 ConflictingSignatureComparer.Instance
             );
@@ -99,7 +102,8 @@ namespace Microsoft.CodeAnalysis.Rename.ConflictEngine
                                     renamedMethod
                                 )
                             )
-                        ) {
+                        )
+                        {
                             builder.AddRange(conflictingSymbol.Locations);
                         }
                     }
@@ -135,7 +139,8 @@ namespace Microsoft.CodeAnalysis.Rename.ConflictEngine
         private static ImmutableArray<ImmutableArray<ITypeSymbol>> GetAllSignatures(
             ImmutableArray<IParameterSymbol> parameters,
             bool trimOptionalParameters
-        ) {
+        )
+        {
             var resultBuilder = ArrayBuilder<ImmutableArray<ITypeSymbol>>.GetInstance();
 
             var signatureBuilder = ArrayBuilder<ITypeSymbol>.GetInstance();

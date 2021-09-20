@@ -33,7 +33,8 @@ namespace Microsoft.CodeAnalysis.Emit
                 ISymbolInternal,
                 ImmutableArray<ISymbolInternal>
             > mappedSynthesizedMembers
-        ) {
+        )
+        {
             // Map all definitions to this compilation.
             var typesAdded = MapDefinitions(baseline.TypesAdded);
             var eventsAdded = MapDefinitions(baseline.EventsAdded);
@@ -89,7 +90,8 @@ namespace Microsoft.CodeAnalysis.Emit
 
         private IReadOnlyDictionary<int, AddedOrChangedMethodInfo> MapAddedOrChangedMethods(
             IReadOnlyDictionary<int, AddedOrChangedMethodInfo> addedOrChangedMethods
-        ) {
+        )
+        {
             var result = new Dictionary<int, AddedOrChangedMethodInfo>();
 
             foreach (var pair in addedOrChangedMethods)
@@ -102,7 +104,8 @@ namespace Microsoft.CodeAnalysis.Emit
 
         private IReadOnlyDictionary<AnonymousTypeKey, AnonymousTypeValue> MapAnonymousTypes(
             IReadOnlyDictionary<AnonymousTypeKey, AnonymousTypeValue> anonymousTypeMap
-        ) {
+        )
+        {
             var result = new Dictionary<AnonymousTypeKey, AnonymousTypeValue>();
 
             foreach (var pair in anonymousTypeMap)
@@ -137,7 +140,8 @@ namespace Microsoft.CodeAnalysis.Emit
         > MapSynthesizedMembers(
             ImmutableDictionary<ISymbolInternal, ImmutableArray<ISymbolInternal>> previousMembers,
             ImmutableDictionary<ISymbolInternal, ImmutableArray<ISymbolInternal>> newMembers
-        ) {
+        )
+        {
             // Note: we can't just return previous members if there are no new members, since we still need to map the symbols to the new compilation.
 
             if (previousMembers.Count == 0)

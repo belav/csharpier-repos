@@ -96,7 +96,8 @@ namespace Microsoft.AspNetCore.DataProtection
             public IAuthenticatedEncryptor? GetAuthenticatedEncryptorByKeyId(
                 Guid keyId,
                 out bool isRevoked
-            ) {
+            )
+            {
                 isRevoked = false;
                 return (keyId == default(Guid)) ? DefaultAuthenticatedEncryptor : null;
             }
@@ -108,7 +109,8 @@ namespace Microsoft.AspNetCore.DataProtection
 
             private static IAuthenticatedEncryptor? GetDefaultEncryptor(
                 ILoggerFactory loggerFactory
-            ) {
+            )
+            {
                 var configuration = new T();
                 if (configuration is CngGcmAuthenticatedEncryptorConfiguration cngConfiguration)
                 {
@@ -122,7 +124,8 @@ namespace Microsoft.AspNetCore.DataProtection
                 }
                 else if (
                     configuration is ManagedAuthenticatedEncryptorConfiguration managedConfiguration
-                ) {
+                )
+                {
                     var descriptor =
                         (ManagedAuthenticatedEncryptorDescriptor)new T().CreateNewDescriptor();
                     return new ManagedAuthenticatedEncryptorFactory(

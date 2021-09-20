@@ -135,7 +135,8 @@ namespace System.Web.Razor.Generator
                         Char.IsHighSurrogate(literal[i])
                         && (i < literal.Length - 1)
                         && Char.IsLowSurrogate(literal[i + 1])
-                    ) {
+                    )
+                    {
                         InnerWriter.Write(literal[++i]);
                     }
 

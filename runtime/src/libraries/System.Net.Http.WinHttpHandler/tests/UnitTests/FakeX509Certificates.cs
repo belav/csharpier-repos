@@ -17,7 +17,8 @@ namespace System.Net.Http
             bool checkCertificateRevocationList,
             out X509Chain chain,
             out SslPolicyErrors sslPolicyErrors
-        ) {
+        )
+        {
             chain = null;
             sslPolicyErrors = SslPolicyErrors.None;
         }

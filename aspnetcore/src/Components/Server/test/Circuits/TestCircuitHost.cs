@@ -25,17 +25,18 @@ namespace Microsoft.AspNetCore.Components.Server.Circuits
             RemoteJSRuntime jsRuntime,
             CircuitHandler[] circuitHandlers,
             ILogger logger
-        ) : base(
-            circuitId,
-            scope,
-            options,
-            client,
-            renderer,
-            descriptors,
-            jsRuntime,
-            circuitHandlers,
-            logger
-        ) { }
+        )
+            : base(
+                circuitId,
+                scope,
+                options,
+                client,
+                renderer,
+                descriptors,
+                jsRuntime,
+                circuitHandlers,
+                logger
+            ) { }
 
         public static CircuitHost Create(
             CircuitId? circuitId = null,
@@ -43,7 +44,8 @@ namespace Microsoft.AspNetCore.Components.Server.Circuits
             RemoteRenderer remoteRenderer = null,
             CircuitHandler[] handlers = null,
             CircuitClientProxy clientProxy = null
-        ) {
+        )
+        {
             serviceScope = serviceScope ?? Mock.Of<IServiceScope>();
             clientProxy =
                 clientProxy

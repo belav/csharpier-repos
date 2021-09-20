@@ -25,7 +25,8 @@ namespace Microsoft.Cci
             INamespace? targetNamespace = null,
             ITypeReference? targetType = null,
             string? targetXmlNamespace = null
-        ) {
+        )
+        {
             AliasOpt = alias;
             TargetAssemblyOpt = targetAssembly;
             TargetNamespaceOpt = targetNamespace;
@@ -43,7 +44,8 @@ namespace Microsoft.Cci
             INamespace @namespace,
             IAssemblyReference? assemblyOpt = null,
             string? aliasOpt = null
-        ) {
+        )
+        {
             RoslynDebug.Assert(@namespace != null);
             return new UsedNamespaceOrType(
                 alias: aliasOpt,

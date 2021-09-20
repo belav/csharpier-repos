@@ -100,7 +100,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             SyntheticBoundNodeFactory factory,
             ArrayBuilder<BoundStatement> statements,
             ImmutableArray<ParameterSymbol> parameters
-        ) {
+        )
+        {
             statements.Add(
                 factory.ExpressionStatement(
                     factory.AssignmentExpression(
@@ -115,7 +116,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             SyntheticBoundNodeFactory factory,
             ArrayBuilder<BoundStatement> statements,
             ImmutableArray<ParameterSymbol> parameters
-        ) {
+        )
+        {
             statements.Add(
                 factory.ExpressionStatement(
                     factory.AssignmentExpression(
@@ -162,7 +164,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
         internal override void GenerateMethodBody(
             TypeCompilationState compilationState,
             BindingDiagnosticBag diagnostics
-        ) {
+        )
+        {
             GenerateMethodBodyCore(compilationState, diagnostics);
         }
 

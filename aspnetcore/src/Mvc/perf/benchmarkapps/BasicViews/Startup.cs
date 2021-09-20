@@ -147,11 +147,13 @@ namespace BasicViews
         {
             using (
                 var serviceScope = services.GetRequiredService<IServiceScopeFactory>().CreateScope()
-            ) {
+            )
+            {
                 using (
                     var dbContext =
                         serviceScope.ServiceProvider.GetRequiredService<BasicViewsContext>()
-                ) {
+                )
+                {
 #if GENERATE_SQL_SCRIPTS
                     var migrator = dbContext.GetService<IMigrator>();
                     var script = migrator.GenerateScript(
@@ -172,11 +174,13 @@ namespace BasicViews
         {
             using (
                 var serviceScope = services.GetRequiredService<IServiceScopeFactory>().CreateScope()
-            ) {
+            )
+            {
                 using (
                     var dbContext =
                         serviceScope.ServiceProvider.GetRequiredService<BasicViewsContext>()
-                ) {
+                )
+                {
 #if GENERATE_SQL_SCRIPTS
                     var migrator = dbContext.GetService<IMigrator>();
                     var script = migrator.GenerateScript(
@@ -196,11 +200,13 @@ namespace BasicViews
         {
             using (
                 var serviceScope = services.GetRequiredService<IServiceScopeFactory>().CreateScope()
-            ) {
+            )
+            {
                 using (
                     var dbContext =
                         serviceScope.ServiceProvider.GetRequiredService<BasicViewsContext>()
-                ) {
+                )
+                {
                     var migrator = dbContext.GetService<IMigrator>();
 #if GENERATE_SQL_SCRIPTS
                     var script = migrator.GenerateScript(

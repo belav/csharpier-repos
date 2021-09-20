@@ -34,7 +34,8 @@ namespace System.ComponentModel.Tests
             ReadOnlyAttribute attribute,
             object other,
             bool expected
-        ) {
+        )
+        {
             Assert.Equal(expected, attribute.Equals(other));
             if (other is ReadOnlyAttribute)
             {
@@ -54,7 +55,8 @@ namespace System.ComponentModel.Tests
         public void DefaultProperties_GetIsReadOnly_ReturnsExpected(
             ReadOnlyAttribute attribute,
             bool expectedAllowMerge
-        ) {
+        )
+        {
             Assert.Equal(expectedAllowMerge, attribute.IsReadOnly);
             Assert.Equal(!expectedAllowMerge, attribute.IsDefaultAttribute());
         }

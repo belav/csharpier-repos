@@ -59,7 +59,8 @@ namespace Microsoft.EntityFrameworkCore.Cosmos
                 var context = new ConcurrencyContext(
                     CreateOptions(testDatabase, enableContentResponseOnWrite: false)
                 )
-            ) {
+            )
+            {
                 await context.Database.EnsureCreatedAsync();
 
                 context.Add(customer);
@@ -71,7 +72,8 @@ namespace Microsoft.EntityFrameworkCore.Cosmos
                 var context = new ConcurrencyContext(
                     CreateOptions(testDatabase, enableContentResponseOnWrite: false)
                 )
-            ) {
+            )
+            {
                 var customerFromStore = await context.Set<Customer>().SingleAsync();
 
                 Assert.Equal(customer.Id, customerFromStore.Id);
@@ -95,7 +97,8 @@ namespace Microsoft.EntityFrameworkCore.Cosmos
                 var context = new ConcurrencyContext(
                     CreateOptions(testDatabase, enableContentResponseOnWrite: true)
                 )
-            ) {
+            )
+            {
                 await context.Database.EnsureCreatedAsync();
 
                 context.Add(customer);
@@ -107,7 +110,8 @@ namespace Microsoft.EntityFrameworkCore.Cosmos
                 var context = new ConcurrencyContext(
                     CreateOptions(testDatabase, enableContentResponseOnWrite: true)
                 )
-            ) {
+            )
+            {
                 var customerFromStore = await context.Set<Customer>().SingleAsync();
 
                 Assert.Equal(customer.Id, customerFromStore.Id);
@@ -198,7 +202,8 @@ namespace Microsoft.EntityFrameworkCore.Cosmos
         private DbContextOptions CreateOptions(
             CosmosTestStore testDatabase,
             bool enableContentResponseOnWrite
-        ) {
+        )
+        {
             var optionsBuilder = new DbContextOptionsBuilder();
 
             new DbContextOptionsBuilder().UseCosmos(

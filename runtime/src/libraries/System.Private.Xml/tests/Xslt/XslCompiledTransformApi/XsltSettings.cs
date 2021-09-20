@@ -62,7 +62,8 @@ namespace System.Xml.Tests
             object param2,
             object param3,
             object param4
-        ) {
+        )
+        {
             var e = Assert.ThrowsAny<XsltException>(
                 () => XsltSettings1_1(param0, param1, param2, param3, param4)
             );
@@ -89,7 +90,8 @@ namespace System.Xml.Tests
             object param4,
             object param5,
             object param6
-        ) {
+        )
+        {
             var e = Assert.ThrowsAny<XsltException>(
                 () => XsltSettings1_2(param0, param1, param2, param3, param4, param5, param6)
             );
@@ -110,7 +112,8 @@ namespace System.Xml.Tests
             object param2,
             object param3,
             object param4
-        ) {
+        )
+        {
             AppContext.SetSwitch("Switch.System.Xml.AllowDefaultResolver", true);
 
             XsltSettings1_1(param0, param1, param2, param3, param4);
@@ -127,7 +130,8 @@ namespace System.Xml.Tests
             object param4,
             object param5,
             object param6
-        ) {
+        )
+        {
             AppContext.SetSwitch("Switch.System.Xml.AllowDefaultResolver", true);
 
             XsltSettings1_2(param0, param1, param2, param3, param4, param5, param6);
@@ -163,7 +167,8 @@ namespace System.Xml.Tests
             object param2,
             object param3,
             object param4
-        ) {
+        )
+        {
             Init(param1.ToString(), param2.ToString());
 
             // In Proc Skip
@@ -243,7 +248,8 @@ namespace System.Xml.Tests
             object param4,
             object param5,
             object param6
-        ) {
+        )
+        {
             Init(param1.ToString(), param2.ToString());
 
             XsltSettings xs = new XsltSettings((bool)param3, (bool)param4);

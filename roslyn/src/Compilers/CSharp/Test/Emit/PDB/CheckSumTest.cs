@@ -21,7 +21,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.PDB
             string source,
             string filePath,
             string baseDirectory
-        ) {
+        )
+        {
             return CSharpCompilation.Create(
                 GetUniqueName(),
                 new[] { Parse(source, filePath) },

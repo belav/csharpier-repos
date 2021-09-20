@@ -15,7 +15,8 @@ namespace BasicTestApp.FormsTest
         public override string GetFieldCssClass(
             EditContext editContext,
             in FieldIdentifier fieldIdentifier
-        ) {
+        )
+        {
             var cssClassName = base.GetFieldCssClass(editContext, fieldIdentifier);
 
             // If we can find a [CustomValidationClassName], use it

@@ -21,7 +21,8 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Structure
         internal sealed override async Task<ImmutableArray<BlockSpan>> GetBlockSpansWorkerAsync(
             Document document,
             int position
-        ) {
+        )
+        {
             var root = await document.GetSyntaxRootAsync(CancellationToken.None);
             var token = root.FindToken(position, findInsideTrivia: true);
             var node = token.Parent.FirstAncestorOrSelf<TSyntaxNode>();
@@ -33,7 +34,8 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Structure
                 if (
                     (position == node.SpanStart && position == node.Parent.SpanStart)
                     || (position == node.Span.End && position == node.Parent.Span.End)
-                ) {
+                )
+                {
                     node = (TSyntaxNode)node.Parent;
                 }
                 else

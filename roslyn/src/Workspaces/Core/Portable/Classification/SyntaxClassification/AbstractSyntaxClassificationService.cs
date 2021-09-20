@@ -46,7 +46,8 @@ namespace Microsoft.CodeAnalysis.Classification
             Func<SyntaxToken, ImmutableArray<ISyntaxClassifier>> getTokenClassifiers,
             ArrayBuilder<ClassifiedSpan> result,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             try
             {
                 var semanticModel = await document.GetRequiredSemanticModelAsync(cancellationToken)
@@ -76,7 +77,8 @@ namespace Microsoft.CodeAnalysis.Classification
             Func<SyntaxToken, ImmutableArray<ISyntaxClassifier>> getTokenClassifiers,
             ArrayBuilder<ClassifiedSpan> result,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             Worker.Classify(
                 workspace,
                 semanticModel,

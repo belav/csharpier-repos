@@ -201,7 +201,8 @@ namespace Microsoft.CodeAnalysis.LanguageServer.UnitTests.Rename
         private static async Task<WorkspaceEdit> RunRenameAsync(
             TestLspServer testLspServer,
             LSP.RenameParams renameParams
-        ) {
+        )
+        {
             return await testLspServer.ExecuteRequestAsync<LSP.RenameParams, LSP.WorkspaceEdit>(
                 LSP.Methods.TextDocumentRenameName,
                 renameParams,

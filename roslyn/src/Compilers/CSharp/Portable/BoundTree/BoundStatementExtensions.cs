@@ -28,7 +28,8 @@ namespace Microsoft.CodeAnalysis.CSharp
         internal static void AssertIsLabeledStatementWithLabel(
             this BoundStatement node,
             LabelSymbol label
-        ) {
+        )
+        {
             Debug.Assert(node != null);
 
             switch (node.Kind)

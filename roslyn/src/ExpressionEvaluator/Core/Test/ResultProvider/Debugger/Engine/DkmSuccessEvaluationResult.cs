@@ -70,7 +70,8 @@ namespace Microsoft.VisualStudio.Debugger.Evaluation
             ReadOnlyCollection<DkmCustomUIVisualizerInfo> CustomUIVisualizers,
             ReadOnlyCollection<DkmModuleInstance> ExternalModules,
             DkmDataItem DataItem
-        ) {
+        )
+        {
             return new DkmSuccessEvaluationResult(
                 InspectionContext,
                 StackFrame,

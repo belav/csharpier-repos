@@ -24,7 +24,8 @@ namespace Microsoft.CodeAnalysis.FindSymbols.Finders
             IImmutableSet<Document>? documents,
             FindReferencesSearchOptions options,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             return FindDocumentsAsync(
                 project,
                 documents,
@@ -46,7 +47,8 @@ namespace Microsoft.CodeAnalysis.FindSymbols.Finders
                         else if (
                             project.Language == LanguageNames.VisualBasic
                             && index.ProbablyContainsIdentifier("New")
-                        ) {
+                        )
+                        {
                             // "New" can be explicitly accessed in xml doc comments to reference a constructor.
                             return true;
                         }
@@ -66,7 +68,8 @@ namespace Microsoft.CodeAnalysis.FindSymbols.Finders
             SemanticModel semanticModel,
             FindReferencesSearchOptions options,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var syntaxFactsService = document.GetRequiredLanguageService<ISyntaxFactsService>();
             var typeName = methodSymbol.ContainingType.Name;
 
@@ -123,7 +126,8 @@ namespace Microsoft.CodeAnalysis.FindSymbols.Finders
                 else if (
                     semanticModel.Language == LanguageNames.VisualBasic
                     && t.IsPartOfStructuredTrivia()
-                ) {
+                )
+                {
                     return true;
                 }
 

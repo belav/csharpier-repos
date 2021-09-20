@@ -26,7 +26,8 @@ namespace Microsoft.VisualStudio.LanguageServices.ExternalAccess.VSTypeScript.Ap
             IVsHierarchy hierarchy,
             uint itemid,
             Guid languageServiceGuid
-        ) {
+        )
+        {
             var workspace = componentModel.GetService<VisualStudioWorkspace>();
             var filePath = ContainedLanguage.GetFilePathFromHierarchyAndItemId(hierarchy, itemid);
 
@@ -49,7 +50,8 @@ namespace Microsoft.VisualStudio.LanguageServices.ExternalAccess.VSTypeScript.Ap
             IVsHierarchy hierarchy,
             uint itemid,
             Guid languageServiceGuid
-        ) {
+        )
+        {
             var workspace = componentModel.GetService<VisualStudioWorkspace>();
             var filePath = ContainedLanguage.GetFilePathFromHierarchyAndItemId(hierarchy, itemid);
 
@@ -72,7 +74,8 @@ namespace Microsoft.VisualStudio.LanguageServices.ExternalAccess.VSTypeScript.Ap
             IVsHierarchy hierarchy,
             uint itemid,
             Guid languageServiceGuid
-        ) {
+        )
+        {
             var filePath = ContainedLanguage.GetFilePathFromHierarchyAndItemId(hierarchy, itemid);
             var projectId = ProjectId.CreateNewId($"Project for {filePath}");
             workspace.OnProjectAdded(

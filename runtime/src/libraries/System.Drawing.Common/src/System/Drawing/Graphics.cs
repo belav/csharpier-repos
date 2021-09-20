@@ -860,7 +860,8 @@ namespace System.Drawing
             float height,
             float startAngle,
             float sweepAngle
-        ) {
+        )
+        {
             if (pen == null)
                 throw new ArgumentNullException(nameof(pen));
 
@@ -897,7 +898,8 @@ namespace System.Drawing
             int height,
             int startAngle,
             int sweepAngle
-        ) {
+        )
+        {
             if (pen == null)
                 throw new ArgumentNullException(nameof(pen));
 
@@ -936,7 +938,8 @@ namespace System.Drawing
             float y3,
             float x4,
             float y4
-        ) {
+        )
+        {
             if (pen == null)
                 throw new ArgumentNullException(nameof(pen));
 
@@ -1141,7 +1144,8 @@ namespace System.Drawing
             float height,
             float startAngle,
             float sweepAngle
-        ) {
+        )
+        {
             if (pen == null)
                 throw new ArgumentNullException(nameof(pen));
 
@@ -1178,7 +1182,8 @@ namespace System.Drawing
             int height,
             int startAngle,
             int sweepAngle
-        ) {
+        )
+        {
             if (pen == null)
                 throw new ArgumentNullException(nameof(pen));
 
@@ -1322,7 +1327,8 @@ namespace System.Drawing
             int offset,
             int numberOfSegments,
             float tension
-        ) {
+        )
+        {
             if (pen == null)
                 throw new ArgumentNullException(nameof(pen));
             if (points == null)
@@ -1400,7 +1406,8 @@ namespace System.Drawing
             int offset,
             int numberOfSegments,
             float tension
-        ) {
+        )
+        {
             if (pen == null)
                 throw new ArgumentNullException(nameof(pen));
             if (points == null)
@@ -1453,7 +1460,8 @@ namespace System.Drawing
             PointF[] points,
             float tension,
             FillMode fillmode
-        ) {
+        )
+        {
             if (pen == null)
                 throw new ArgumentNullException(nameof(pen));
             if (points == null)
@@ -1504,7 +1512,8 @@ namespace System.Drawing
             Point[] points,
             float tension,
             FillMode fillmode
-        ) {
+        )
+        {
             if (pen == null)
                 throw new ArgumentNullException(nameof(pen));
             if (points == null)
@@ -1775,7 +1784,8 @@ namespace System.Drawing
             float height,
             float startAngle,
             float sweepAngle
-        ) {
+        )
+        {
             if (brush == null)
                 throw new ArgumentNullException(nameof(brush));
 
@@ -1804,7 +1814,8 @@ namespace System.Drawing
             int height,
             int startAngle,
             int sweepAngle
-        ) {
+        )
+        {
             if (brush == null)
                 throw new ArgumentNullException(nameof(brush));
 
@@ -1858,7 +1869,8 @@ namespace System.Drawing
             PointF[] points,
             FillMode fillmode,
             float tension
-        ) {
+        )
+        {
             if (brush == null)
                 throw new ArgumentNullException(nameof(brush));
             if (points == null)
@@ -1912,7 +1924,8 @@ namespace System.Drawing
             Point[] points,
             FillMode fillmode,
             float tension
-        ) {
+        )
+        {
             if (brush == null)
                 throw new ArgumentNullException(nameof(brush));
             if (points == null)
@@ -1953,7 +1966,8 @@ namespace System.Drawing
             float x,
             float y,
             StringFormat? format
-        ) {
+        )
+        {
             DrawString(s, font, brush, new RectangleF(x, y, 0, 0), format);
         }
 
@@ -1963,7 +1977,8 @@ namespace System.Drawing
             Brush brush,
             PointF point,
             StringFormat? format
-        ) {
+        )
+        {
             DrawString(s, font, brush, new RectangleF(point.X, point.Y, 0, 0), format);
         }
 
@@ -1978,7 +1993,8 @@ namespace System.Drawing
             Brush brush,
             RectangleF layoutRectangle,
             StringFormat? format
-        ) {
+        )
+        {
             if (brush == null)
                 throw new ArgumentNullException(nameof(brush));
             if (string.IsNullOrEmpty(s))
@@ -2006,7 +2022,8 @@ namespace System.Drawing
             StringFormat? stringFormat,
             out int charactersFitted,
             out int linesFilled
-        ) {
+        )
+        {
             if (string.IsNullOrEmpty(text))
             {
                 charactersFitted = 0;
@@ -2042,7 +2059,8 @@ namespace System.Drawing
             Font font,
             PointF origin,
             StringFormat? stringFormat
-        ) {
+        )
+        {
             if (string.IsNullOrEmpty(text))
                 return SizeF.Empty;
             if (font == null)
@@ -2076,7 +2094,8 @@ namespace System.Drawing
             Font font,
             SizeF layoutArea,
             StringFormat? stringFormat
-        ) {
+        )
+        {
             if (string.IsNullOrEmpty(text))
                 return SizeF.Empty;
             if (font == null)
@@ -2122,7 +2141,8 @@ namespace System.Drawing
             Font font,
             RectangleF layoutRect,
             StringFormat? stringFormat
-        ) {
+        )
+        {
             if (string.IsNullOrEmpty(text))
                 return Array.Empty<Region>();
             if (font == null)
@@ -2350,7 +2370,8 @@ namespace System.Drawing
             float y,
             RectangleF srcRect,
             GraphicsUnit srcUnit
-        ) {
+        )
+        {
             if (image == null)
                 throw new ArgumentNullException(nameof(image));
 
@@ -2396,7 +2417,8 @@ namespace System.Drawing
             RectangleF destRect,
             RectangleF srcRect,
             GraphicsUnit srcUnit
-        ) {
+        )
+        {
             if (image == null)
                 throw new ArgumentNullException(nameof(image));
 
@@ -2426,7 +2448,8 @@ namespace System.Drawing
             Rectangle destRect,
             Rectangle srcRect,
             GraphicsUnit srcUnit
-        ) {
+        )
+        {
             if (image == null)
                 throw new ArgumentNullException(nameof(image));
 
@@ -2456,7 +2479,8 @@ namespace System.Drawing
             PointF[] destPoints,
             RectangleF srcRect,
             GraphicsUnit srcUnit
-        ) {
+        )
+        {
             if (destPoints == null)
                 throw new ArgumentNullException(nameof(destPoints));
             if (image == null)
@@ -2494,7 +2518,8 @@ namespace System.Drawing
             RectangleF srcRect,
             GraphicsUnit srcUnit,
             ImageAttributes? imageAttr
-        ) {
+        )
+        {
             DrawImage(image, destPoints, srcRect, srcUnit, imageAttr, null, 0);
         }
 
@@ -2505,7 +2530,8 @@ namespace System.Drawing
             GraphicsUnit srcUnit,
             ImageAttributes? imageAttr,
             DrawImageAbort? callback
-        ) {
+        )
+        {
             DrawImage(image, destPoints, srcRect, srcUnit, imageAttr, callback, 0);
         }
 
@@ -2517,7 +2543,8 @@ namespace System.Drawing
             ImageAttributes? imageAttr,
             DrawImageAbort? callback,
             int callbackData
-        ) {
+        )
+        {
             if (destPoints == null)
                 throw new ArgumentNullException(nameof(destPoints));
             if (image == null)
@@ -2554,7 +2581,8 @@ namespace System.Drawing
             Point[] destPoints,
             Rectangle srcRect,
             GraphicsUnit srcUnit
-        ) {
+        )
+        {
             DrawImage(image, destPoints, srcRect, srcUnit, null, null, 0);
         }
 
@@ -2564,7 +2592,8 @@ namespace System.Drawing
             Rectangle srcRect,
             GraphicsUnit srcUnit,
             ImageAttributes? imageAttr
-        ) {
+        )
+        {
             DrawImage(image, destPoints, srcRect, srcUnit, imageAttr, null, 0);
         }
 
@@ -2575,7 +2604,8 @@ namespace System.Drawing
             GraphicsUnit srcUnit,
             ImageAttributes? imageAttr,
             DrawImageAbort? callback
-        ) {
+        )
+        {
             DrawImage(image, destPoints, srcRect, srcUnit, imageAttr, callback, 0);
         }
 
@@ -2587,7 +2617,8 @@ namespace System.Drawing
             ImageAttributes? imageAttr,
             DrawImageAbort? callback,
             int callbackData
-        ) {
+        )
+        {
             if (destPoints == null)
                 throw new ArgumentNullException(nameof(destPoints));
             if (image == null)
@@ -2627,7 +2658,8 @@ namespace System.Drawing
             float srcWidth,
             float srcHeight,
             GraphicsUnit srcUnit
-        ) {
+        )
+        {
             DrawImage(image, destRect, srcX, srcY, srcWidth, srcHeight, srcUnit, null);
         }
 
@@ -2640,7 +2672,8 @@ namespace System.Drawing
             float srcHeight,
             GraphicsUnit srcUnit,
             ImageAttributes? imageAttrs
-        ) {
+        )
+        {
             DrawImage(image, destRect, srcX, srcY, srcWidth, srcHeight, srcUnit, imageAttrs, null);
         }
 
@@ -2654,7 +2687,8 @@ namespace System.Drawing
             GraphicsUnit srcUnit,
             ImageAttributes? imageAttrs,
             DrawImageAbort? callback
-        ) {
+        )
+        {
             DrawImage(
                 image,
                 destRect,
@@ -2680,7 +2714,8 @@ namespace System.Drawing
             ImageAttributes? imageAttrs,
             DrawImageAbort? callback,
             IntPtr callbackData
-        ) {
+        )
+        {
             if (image == null)
                 throw new ArgumentNullException(nameof(image));
 
@@ -2713,7 +2748,8 @@ namespace System.Drawing
             int srcWidth,
             int srcHeight,
             GraphicsUnit srcUnit
-        ) {
+        )
+        {
             DrawImage(image, destRect, srcX, srcY, srcWidth, srcHeight, srcUnit, null);
         }
 
@@ -2726,7 +2762,8 @@ namespace System.Drawing
             int srcHeight,
             GraphicsUnit srcUnit,
             ImageAttributes? imageAttr
-        ) {
+        )
+        {
             DrawImage(image, destRect, srcX, srcY, srcWidth, srcHeight, srcUnit, imageAttr, null);
         }
 
@@ -2740,7 +2777,8 @@ namespace System.Drawing
             GraphicsUnit srcUnit,
             ImageAttributes? imageAttr,
             DrawImageAbort? callback
-        ) {
+        )
+        {
             DrawImage(
                 image,
                 destRect,
@@ -2766,7 +2804,8 @@ namespace System.Drawing
             ImageAttributes? imageAttrs,
             DrawImageAbort? callback,
             IntPtr callbackData
-        ) {
+        )
+        {
             if (image == null)
                 throw new ArgumentNullException(nameof(image));
 
@@ -2880,7 +2919,8 @@ namespace System.Drawing
             Point upperLeftSource,
             Point upperLeftDestination,
             Size blockRegionSize
-        ) {
+        )
+        {
             CopyFromScreen(
                 upperLeftSource.X,
                 upperLeftSource.Y,
@@ -2899,7 +2939,8 @@ namespace System.Drawing
             int destinationX,
             int destinationY,
             Size blockRegionSize
-        ) {
+        )
+        {
             CopyFromScreen(
                 sourceX,
                 sourceY,
@@ -2919,7 +2960,8 @@ namespace System.Drawing
             Point upperLeftDestination,
             Size blockRegionSize,
             CopyPixelOperation copyPixelOperation
-        ) {
+        )
+        {
             CopyFromScreen(
                 upperLeftSource.X,
                 upperLeftSource.Y,
@@ -2934,7 +2976,8 @@ namespace System.Drawing
             Metafile metafile,
             PointF destPoint,
             EnumerateMetafileProc callback
-        ) {
+        )
+        {
             EnumerateMetafile(metafile, destPoint, callback, IntPtr.Zero);
         }
 
@@ -2943,7 +2986,8 @@ namespace System.Drawing
             PointF destPoint,
             EnumerateMetafileProc callback,
             IntPtr callbackData
-        ) {
+        )
+        {
             EnumerateMetafile(metafile, destPoint, callback, callbackData, null);
         }
 
@@ -2951,7 +2995,8 @@ namespace System.Drawing
             Metafile metafile,
             Point destPoint,
             EnumerateMetafileProc callback
-        ) {
+        )
+        {
             EnumerateMetafile(metafile, destPoint, callback, IntPtr.Zero);
         }
 
@@ -2960,7 +3005,8 @@ namespace System.Drawing
             Point destPoint,
             EnumerateMetafileProc callback,
             IntPtr callbackData
-        ) {
+        )
+        {
             EnumerateMetafile(metafile, destPoint, callback, callbackData, null);
         }
 
@@ -2968,7 +3014,8 @@ namespace System.Drawing
             Metafile metafile,
             RectangleF destRect,
             EnumerateMetafileProc callback
-        ) {
+        )
+        {
             EnumerateMetafile(metafile, destRect, callback, IntPtr.Zero);
         }
 
@@ -2977,7 +3024,8 @@ namespace System.Drawing
             RectangleF destRect,
             EnumerateMetafileProc callback,
             IntPtr callbackData
-        ) {
+        )
+        {
             EnumerateMetafile(metafile, destRect, callback, callbackData, null);
         }
 
@@ -2985,7 +3033,8 @@ namespace System.Drawing
             Metafile metafile,
             Rectangle destRect,
             EnumerateMetafileProc callback
-        ) {
+        )
+        {
             EnumerateMetafile(metafile, destRect, callback, IntPtr.Zero);
         }
 
@@ -2994,7 +3043,8 @@ namespace System.Drawing
             Rectangle destRect,
             EnumerateMetafileProc callback,
             IntPtr callbackData
-        ) {
+        )
+        {
             EnumerateMetafile(metafile, destRect, callback, callbackData, null);
         }
 
@@ -3002,7 +3052,8 @@ namespace System.Drawing
             Metafile metafile,
             PointF[] destPoints,
             EnumerateMetafileProc callback
-        ) {
+        )
+        {
             EnumerateMetafile(metafile, destPoints, callback, IntPtr.Zero);
         }
 
@@ -3011,7 +3062,8 @@ namespace System.Drawing
             PointF[] destPoints,
             EnumerateMetafileProc callback,
             IntPtr callbackData
-        ) {
+        )
+        {
             EnumerateMetafile(metafile, destPoints, callback, IntPtr.Zero, null);
         }
 
@@ -3019,7 +3071,8 @@ namespace System.Drawing
             Metafile metafile,
             Point[] destPoints,
             EnumerateMetafileProc callback
-        ) {
+        )
+        {
             EnumerateMetafile(metafile, destPoints, callback, IntPtr.Zero);
         }
 
@@ -3028,7 +3081,8 @@ namespace System.Drawing
             Point[] destPoints,
             EnumerateMetafileProc callback,
             IntPtr callbackData
-        ) {
+        )
+        {
             EnumerateMetafile(metafile, destPoints, callback, callbackData, null);
         }
 
@@ -3038,7 +3092,8 @@ namespace System.Drawing
             RectangleF srcRect,
             GraphicsUnit srcUnit,
             EnumerateMetafileProc callback
-        ) {
+        )
+        {
             EnumerateMetafile(metafile, destPoint, srcRect, srcUnit, callback, IntPtr.Zero);
         }
 
@@ -3049,7 +3104,8 @@ namespace System.Drawing
             GraphicsUnit srcUnit,
             EnumerateMetafileProc callback,
             IntPtr callbackData
-        ) {
+        )
+        {
             EnumerateMetafile(metafile, destPoint, srcRect, srcUnit, callback, callbackData, null);
         }
 
@@ -3059,7 +3115,8 @@ namespace System.Drawing
             Rectangle srcRect,
             GraphicsUnit srcUnit,
             EnumerateMetafileProc callback
-        ) {
+        )
+        {
             EnumerateMetafile(metafile, destPoint, srcRect, srcUnit, callback, IntPtr.Zero);
         }
 
@@ -3070,7 +3127,8 @@ namespace System.Drawing
             GraphicsUnit srcUnit,
             EnumerateMetafileProc callback,
             IntPtr callbackData
-        ) {
+        )
+        {
             EnumerateMetafile(metafile, destPoint, srcRect, srcUnit, callback, callbackData, null);
         }
 
@@ -3080,7 +3138,8 @@ namespace System.Drawing
             RectangleF srcRect,
             GraphicsUnit srcUnit,
             EnumerateMetafileProc callback
-        ) {
+        )
+        {
             EnumerateMetafile(metafile, destRect, srcRect, srcUnit, callback, IntPtr.Zero);
         }
 
@@ -3091,7 +3150,8 @@ namespace System.Drawing
             GraphicsUnit srcUnit,
             EnumerateMetafileProc callback,
             IntPtr callbackData
-        ) {
+        )
+        {
             EnumerateMetafile(metafile, destRect, srcRect, srcUnit, callback, callbackData, null);
         }
 
@@ -3101,7 +3161,8 @@ namespace System.Drawing
             Rectangle srcRect,
             GraphicsUnit srcUnit,
             EnumerateMetafileProc callback
-        ) {
+        )
+        {
             EnumerateMetafile(metafile, destRect, srcRect, srcUnit, callback, IntPtr.Zero);
         }
 
@@ -3112,7 +3173,8 @@ namespace System.Drawing
             GraphicsUnit srcUnit,
             EnumerateMetafileProc callback,
             IntPtr callbackData
-        ) {
+        )
+        {
             EnumerateMetafile(metafile, destRect, srcRect, srcUnit, callback, callbackData, null);
         }
 
@@ -3122,7 +3184,8 @@ namespace System.Drawing
             RectangleF srcRect,
             GraphicsUnit srcUnit,
             EnumerateMetafileProc callback
-        ) {
+        )
+        {
             EnumerateMetafile(metafile, destPoints, srcRect, srcUnit, callback, IntPtr.Zero);
         }
 
@@ -3133,7 +3196,8 @@ namespace System.Drawing
             GraphicsUnit srcUnit,
             EnumerateMetafileProc callback,
             IntPtr callbackData
-        ) {
+        )
+        {
             EnumerateMetafile(metafile, destPoints, srcRect, srcUnit, callback, callbackData, null);
         }
 
@@ -3143,7 +3207,8 @@ namespace System.Drawing
             Rectangle srcRect,
             GraphicsUnit srcUnit,
             EnumerateMetafileProc callback
-        ) {
+        )
+        {
             EnumerateMetafile(metafile, destPoints, srcRect, srcUnit, callback, IntPtr.Zero);
         }
 
@@ -3154,7 +3219,8 @@ namespace System.Drawing
             GraphicsUnit srcUnit,
             EnumerateMetafileProc callback,
             IntPtr callbackData
-        ) {
+        )
+        {
             EnumerateMetafile(metafile, destPoints, srcRect, srcUnit, callback, callbackData, null);
         }
 
@@ -3162,7 +3228,8 @@ namespace System.Drawing
             CoordinateSpace destSpace,
             CoordinateSpace srcSpace,
             PointF[] pts
-        ) {
+        )
+        {
             if (pts == null)
                 throw new ArgumentNullException(nameof(pts));
 
@@ -3184,7 +3251,8 @@ namespace System.Drawing
             CoordinateSpace destSpace,
             CoordinateSpace srcSpace,
             Point[] pts
-        ) {
+        )
+        {
             if (pts == null)
                 throw new ArgumentNullException(nameof(pts));
 

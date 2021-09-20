@@ -15,7 +15,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Extensions
             this List<UsingDirectiveSyntax> usingDirectives,
             SyntaxList<UsingDirectiveSyntax> existingDirectives,
             bool placeSystemNamespaceFirst
-        ) {
+        )
+        {
             var systemFirstInstance = UsingsAndExternAliasesDirectiveComparer.SystemFirstInstance;
             var normalInstance = UsingsAndExternAliasesDirectiveComparer.NormalInstance;
 

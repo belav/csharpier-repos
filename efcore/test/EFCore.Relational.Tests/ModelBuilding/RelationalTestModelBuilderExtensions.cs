@@ -12,7 +12,8 @@ namespace Microsoft.EntityFrameworkCore.ModelBuilding
         public static ModelBuilderTest.TestPropertyBuilder<TProperty> HasColumnName<TProperty>(
             this ModelBuilderTest.TestPropertyBuilder<TProperty> builder,
             string name
-        ) {
+        )
+        {
             switch (builder)
             {
                 case IInfrastructure<PropertyBuilder<TProperty>> genericBuilder:
@@ -29,7 +30,8 @@ namespace Microsoft.EntityFrameworkCore.ModelBuilding
         public static ModelBuilderTest.TestPropertyBuilder<TProperty> HasColumnType<TProperty>(
             this ModelBuilderTest.TestPropertyBuilder<TProperty> builder,
             string typeName
-        ) {
+        )
+        {
             switch (builder)
             {
                 case IInfrastructure<PropertyBuilder<TProperty>> genericBuilder:
@@ -46,7 +48,8 @@ namespace Microsoft.EntityFrameworkCore.ModelBuilding
         public static ModelBuilderTest.TestPropertyBuilder<TProperty> HasDefaultValueSql<TProperty>(
             this ModelBuilderTest.TestPropertyBuilder<TProperty> builder,
             string sql
-        ) {
+        )
+        {
             switch (builder)
             {
                 case IInfrastructure<PropertyBuilder<TProperty>> genericBuilder:
@@ -63,7 +66,8 @@ namespace Microsoft.EntityFrameworkCore.ModelBuilding
         public static ModelBuilderTest.TestPropertyBuilder<TProperty> HasComputedColumnSql<TProperty>(
             this ModelBuilderTest.TestPropertyBuilder<TProperty> builder,
             string sql
-        ) {
+        )
+        {
             switch (builder)
             {
                 case IInfrastructure<PropertyBuilder<TProperty>> genericBuilder:
@@ -80,7 +84,8 @@ namespace Microsoft.EntityFrameworkCore.ModelBuilding
         public static ModelBuilderTest.TestPropertyBuilder<TProperty> HasDefaultValue<TProperty>(
             this ModelBuilderTest.TestPropertyBuilder<TProperty> builder,
             object value
-        ) {
+        )
+        {
             switch (builder)
             {
                 case IInfrastructure<PropertyBuilder<TProperty>> genericBuilder:
@@ -97,7 +102,8 @@ namespace Microsoft.EntityFrameworkCore.ModelBuilding
         public static ModelBuilderTest.TestPropertyBuilder<TProperty> IsFixedLength<TProperty>(
             this ModelBuilderTest.TestPropertyBuilder<TProperty> builder,
             bool fixedLength = true
-        ) {
+        )
+        {
             switch (builder)
             {
                 case IInfrastructure<PropertyBuilder<TProperty>> genericBuilder:
@@ -223,8 +229,9 @@ namespace Microsoft.EntityFrameworkCore.ModelBuilding
         >(
             this ModelBuilderTest.TestOwnedNavigationBuilder<TEntity, TRelatedEntity> builder,
             string name
-        ) where TEntity : class
-          where TRelatedEntity : class
+        )
+            where TEntity : class
+            where TRelatedEntity : class
         {
             switch (builder)
             {
@@ -248,8 +255,9 @@ namespace Microsoft.EntityFrameworkCore.ModelBuilding
             this ModelBuilderTest.TestOwnedNavigationBuilder<TEntity, TRelatedEntity> builder,
             string name,
             string schema
-        ) where TEntity : class
-          where TRelatedEntity : class
+        )
+            where TEntity : class
+            where TRelatedEntity : class
         {
             switch (builder)
             {
@@ -273,8 +281,9 @@ namespace Microsoft.EntityFrameworkCore.ModelBuilding
             this ModelBuilderTest.TestOwnedNavigationBuilder<TEntity, TRelatedEntity> builder,
             string name,
             bool excludedFromMigrations
-        ) where TEntity : class
-          where TRelatedEntity : class
+        )
+            where TEntity : class
+            where TRelatedEntity : class
         {
             switch (builder)
             {
@@ -299,8 +308,9 @@ namespace Microsoft.EntityFrameworkCore.ModelBuilding
             string name,
             string schema,
             bool excludedFromMigrations
-        ) where TEntity : class
-          where TRelatedEntity : class
+        )
+            where TEntity : class
+            where TRelatedEntity : class
         {
             switch (builder)
             {
@@ -323,8 +333,9 @@ namespace Microsoft.EntityFrameworkCore.ModelBuilding
         > HasConstraintName<TEntity, TRelatedEntity>(
             this ModelBuilderTest.TestOwnershipBuilder<TEntity, TRelatedEntity> builder,
             string name
-        ) where TEntity : class
-          where TRelatedEntity : class
+        )
+            where TEntity : class
+            where TRelatedEntity : class
         {
             switch (builder)
             {
@@ -345,8 +356,9 @@ namespace Microsoft.EntityFrameworkCore.ModelBuilding
         > HasConstraintName<TEntity, TRelatedEntity>(
             this ModelBuilderTest.TestReferenceReferenceBuilder<TEntity, TRelatedEntity> builder,
             string name
-        ) where TEntity : class
-          where TRelatedEntity : class
+        )
+            where TEntity : class
+            where TRelatedEntity : class
         {
             switch (builder)
             {
@@ -369,8 +381,9 @@ namespace Microsoft.EntityFrameworkCore.ModelBuilding
         > HasConstraintName<TEntity, TRelatedEntity>(
             this ModelBuilderTest.TestReferenceCollectionBuilder<TEntity, TRelatedEntity> builder,
             string name
-        ) where TEntity : class
-          where TRelatedEntity : class
+        )
+            where TEntity : class
+            where TRelatedEntity : class
         {
             switch (builder)
             {
@@ -390,7 +403,8 @@ namespace Microsoft.EntityFrameworkCore.ModelBuilding
         public static ModelBuilderTest.TestIndexBuilder<TEntity> HasFilter<TEntity>(
             this ModelBuilderTest.TestIndexBuilder<TEntity> builder,
             string filterExpression
-        ) {
+        )
+        {
             switch (builder)
             {
                 case IInfrastructure<IndexBuilder<TEntity>> genericBuilder:
@@ -407,7 +421,8 @@ namespace Microsoft.EntityFrameworkCore.ModelBuilding
         public static ModelBuilderTest.TestIndexBuilder<TEntity> HasName<TEntity>(
             this ModelBuilderTest.TestIndexBuilder<TEntity> builder,
             string name
-        ) {
+        )
+        {
             switch (builder)
             {
                 case IInfrastructure<KeyBuilder<TEntity>> genericBuilder:
@@ -424,7 +439,8 @@ namespace Microsoft.EntityFrameworkCore.ModelBuilding
         public static ModelBuilderTest.TestKeyBuilder<TEntity> HasName<TEntity>(
             this ModelBuilderTest.TestKeyBuilder<TEntity> builder,
             string name
-        ) {
+        )
+        {
             switch (builder)
             {
                 case IInfrastructure<KeyBuilder<TEntity>> genericBuilder:

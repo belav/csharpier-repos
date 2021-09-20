@@ -9,7 +9,8 @@ namespace System.Text.Json.Serialization.Converters
             ref Utf8JsonReader reader,
             Type typeToConvert,
             JsonSerializerOptions options
-        ) {
+        )
+        {
             return reader.GetBytesFromBase64();
         }
 
@@ -17,7 +18,8 @@ namespace System.Text.Json.Serialization.Converters
             Utf8JsonWriter writer,
             byte[] value,
             JsonSerializerOptions options
-        ) {
+        )
+        {
             writer.WriteBase64StringValue(value);
         }
     }

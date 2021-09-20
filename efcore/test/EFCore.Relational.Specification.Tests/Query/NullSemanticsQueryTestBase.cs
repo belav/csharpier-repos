@@ -527,7 +527,8 @@ namespace Microsoft.EntityFrameworkCore.Query
         [MemberData(nameof(IsAsyncData))]
         public virtual async Task Compare_negated_bool_with_negated_bool_not_equal_negated(
             bool async
-        ) {
+        )
+        {
             await AssertQueryScalar(
                 async,
                 ss =>
@@ -1066,7 +1067,8 @@ namespace Microsoft.EntityFrameworkCore.Query
         [MemberData(nameof(IsAsyncData))]
         public virtual Task Where_multiple_ands_with_nullable_parameter_and_constant_not_optimized(
             bool async
-        ) {
+        )
+        {
             string prm1 = null;
             string prm2 = null;
             var prm3 = "Blah";
@@ -1548,7 +1550,8 @@ namespace Microsoft.EntityFrameworkCore.Query
         [MemberData(nameof(IsAsyncData))]
         public virtual Task Where_comparison_null_semantics_optimization_works_with_complex_predicates(
             bool async
-        ) {
+        )
+        {
             string prm = null;
 
             return AssertQueryScalar(
@@ -1660,7 +1663,8 @@ namespace Microsoft.EntityFrameworkCore.Query
         [MemberData(nameof(IsAsyncData))]
         public virtual async Task Null_semantics_applied_when_comparing_function_with_nullable_argument_to_a_nullable_column(
             bool async
-        ) {
+        )
+        {
             await AssertQueryScalar(
                 async,
                 ss =>
@@ -1756,7 +1760,8 @@ namespace Microsoft.EntityFrameworkCore.Query
         [MemberData(nameof(IsAsyncData))]
         public virtual async Task Null_semantics_applied_when_comparing_two_functions_with_nullable_arguments(
             bool async
-        ) {
+        )
+        {
             await AssertQueryScalar(
                 async,
                 ss =>
@@ -1816,7 +1821,8 @@ namespace Microsoft.EntityFrameworkCore.Query
         [MemberData(nameof(IsAsyncData))]
         public virtual async Task Null_semantics_applied_when_comparing_two_functions_with_multiple_nullable_arguments(
             bool async
-        ) {
+        )
+        {
             await AssertQueryScalar(
                 async,
                 ss =>
@@ -2404,7 +2410,8 @@ namespace Microsoft.EntityFrameworkCore.Query
         [MemberData(nameof(IsAsyncData))]
         public virtual async Task Negated_order_comparison_on_non_nullable_arguments_gets_optimized(
             bool async
-        ) {
+        )
+        {
             var i = 1;
 
             await AssertQueryScalar(
@@ -2429,7 +2436,8 @@ namespace Microsoft.EntityFrameworkCore.Query
         [MemberData(nameof(IsAsyncData))]
         public virtual async Task Negated_order_comparison_on_nullable_arguments_doesnt_get_optimized(
             bool async
-        ) {
+        )
+        {
             var i = 1;
 
             await AssertQueryScalar(
@@ -2501,7 +2509,8 @@ namespace Microsoft.EntityFrameworkCore.Query
         [MemberData(nameof(IsAsyncData))]
         public virtual async Task Nullable_column_info_propagates_inside_binary_OrElse_when_info_is_duplicated(
             bool async
-        ) {
+        )
+        {
             await AssertQueryScalar(
                 async,
                 ss =>
@@ -2572,7 +2581,8 @@ namespace Microsoft.EntityFrameworkCore.Query
         [MemberData(nameof(IsAsyncData))]
         public virtual Task Nullable_column_info_doesnt_propagate_between_different_parts_of_select(
             bool async
-        ) {
+        )
+        {
             return AssertQueryScalar(
                 async,
                 ss =>
@@ -2686,7 +2696,8 @@ namespace Microsoft.EntityFrameworkCore.Query
         [MemberData(nameof(IsAsyncData))]
         public virtual Task Nullable_string_FirstOrDefault_compared_to_nullable_string_LastOrDefault(
             bool async
-        ) {
+        )
+        {
             return AssertQuery(
                 async,
                 ss =>
@@ -2835,7 +2846,8 @@ namespace Microsoft.EntityFrameworkCore.Query
         [MemberData(nameof(IsAsyncData))]
         public virtual async Task Multiple_non_equality_comparisons_including_null_comparison_work_for_relational_null_semantics(
             bool async
-        ) {
+        )
+        {
             var ctx = CreateContext(useRelationalNulls: true);
 
             var expected = ctx.Entities1.AsEnumerable()
@@ -2852,7 +2864,8 @@ namespace Microsoft.EntityFrameworkCore.Query
         [MemberData(nameof(IsAsyncData))]
         public virtual async Task Multiple_non_equality_comparisons_without_null_comparison_work_for_relational_null_semantics(
             bool async
-        ) {
+        )
+        {
             var ctx = CreateContext(useRelationalNulls: true);
 
             var expected = ctx.Entities1.AsEnumerable()
@@ -2869,7 +2882,8 @@ namespace Microsoft.EntityFrameworkCore.Query
         [MemberData(nameof(IsAsyncData))]
         public virtual async Task Multiple_equality_comparisons_including_null_comparison_work_for_relational_null_semantics(
             bool async
-        ) {
+        )
+        {
             var ctx = CreateContext(useRelationalNulls: true);
 
             var expected = ctx.Entities1.AsEnumerable()
@@ -2886,7 +2900,8 @@ namespace Microsoft.EntityFrameworkCore.Query
         [MemberData(nameof(IsAsyncData))]
         public virtual async Task Multiple_contains_calls_get_combined_into_one_for_relational_null_semantics(
             bool async
-        ) {
+        )
+        {
             var ctx = CreateContext(useRelationalNulls: true);
 
             var expected = ctx.Entities1.AsEnumerable()
@@ -2908,7 +2923,8 @@ namespace Microsoft.EntityFrameworkCore.Query
         [MemberData(nameof(IsAsyncData))]
         public virtual async Task Multiple_negated_contains_calls_get_combined_into_one_for_relational_null_semantics(
             bool async
-        ) {
+        )
+        {
             var ctx = CreateContext(useRelationalNulls: true);
             var query = ctx.Entities1.Where(
                 e =>
@@ -2924,7 +2940,8 @@ namespace Microsoft.EntityFrameworkCore.Query
         [MemberData(nameof(IsAsyncData))]
         public virtual async Task Contains_with_comparison_dont_get_combined_for_relational_null_semantics(
             bool async
-        ) {
+        )
+        {
             var ctx = CreateContext(useRelationalNulls: true);
 
             var expected = ctx.Entities1.AsEnumerable()
@@ -2944,7 +2961,8 @@ namespace Microsoft.EntityFrameworkCore.Query
         [MemberData(nameof(IsAsyncData))]
         public virtual async Task Negated_contains_with_comparison_dont_get_combined_for_relational_null_semantics(
             bool async
-        ) {
+        )
+        {
             var ctx = CreateContext(useRelationalNulls: true);
 
             var expected = ctx.Entities1.AsEnumerable()
@@ -2966,7 +2984,8 @@ namespace Microsoft.EntityFrameworkCore.Query
         [MemberData(nameof(IsAsyncData))]
         public virtual async Task Negated_contains_with_comparison_without_null_get_combined_for_relational_null_semantics(
             bool async
-        ) {
+        )
+        {
             var ctx = CreateContext(useRelationalNulls: true);
 
             var expected = ctx.Entities1.AsEnumerable()

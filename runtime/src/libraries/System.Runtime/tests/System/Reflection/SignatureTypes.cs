@@ -129,7 +129,8 @@ namespace System.Reflection.Tests
                 MethodBase[] match,
                 Type[] types,
                 ParameterModifier[] modifiers
-            ) {
+            )
+            {
                 foreach (MethodBase methodBase in match)
                 {
                     Assert.True(
@@ -146,7 +147,8 @@ namespace System.Reflection.Tests
                 Type returnType,
                 Type[] indexes,
                 ParameterModifier[] modifiers
-            ) {
+            )
+            {
                 throw null;
             }
 
@@ -291,7 +293,8 @@ namespace System.Reflection.Tests
                 MethodBase[] match,
                 Type[] types,
                 ParameterModifier[] modifiers
-            ) {
+            )
+            {
                 NumCandidatesReceived += match.Length;
                 return Type.DefaultBinder.SelectMethod(bindingAttr, match, types, modifiers);
             }
@@ -302,7 +305,8 @@ namespace System.Reflection.Tests
                 Type returnType,
                 Type[] indexes,
                 ParameterModifier[] modifiers
-            ) {
+            )
+            {
                 throw null;
             }
 

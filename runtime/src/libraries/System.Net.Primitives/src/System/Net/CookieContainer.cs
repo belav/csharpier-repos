@@ -121,7 +121,8 @@ namespace System.Net
             if (
                 perDomainCapacity != int.MaxValue
                 && (perDomainCapacity <= 0 || perDomainCapacity > capacity)
-            ) {
+            )
+            {
                 throw new ArgumentOutOfRangeException(
                     nameof(perDomainCapacity),
                     SR.Format(SR.net_cookie_capacity_range, "PerDomainCapacity", 0, capacity)
@@ -150,7 +151,8 @@ namespace System.Net
                 if (
                     value <= 0
                     || (value < m_maxCookiesPerDomain && m_maxCookiesPerDomain != int.MaxValue)
-                ) {
+                )
+                {
                     throw new ArgumentOutOfRangeException(
                         nameof(value),
                         SR.Format(
@@ -432,7 +434,8 @@ namespace System.Net
                             if (
                                 cc.Count > 0
                                 && (tempUsed = cc.TimeStamp(CookieCollection.Stamp.Check)) < oldUsed
-                            ) {
+                            )
+                            {
                                 lruDomain = tempDomain;
                                 lruCc = cc;
                                 oldUsed = tempUsed;
@@ -640,7 +643,8 @@ namespace System.Net
                     m_fqdnMyDomain.Length,
                     StringComparison.OrdinalIgnoreCase
                 ) == 0
-            ) {
+            )
+            {
                 return true;
             }
 
@@ -741,7 +745,8 @@ namespace System.Net
             string? headerName,
             string setCookieHeader,
             bool isThrow
-        ) {
+        )
+        {
             if (NetEventSource.Log.IsEnabled())
                 NetEventSource.Info(
                     this,
@@ -766,7 +771,8 @@ namespace System.Net
                                 StringComparison.OrdinalIgnoreCase
                             )
                         )
-                    ) {
+                    )
+                    {
                         variant = s_headerInfo[i].Variant;
                     }
                 }
@@ -813,7 +819,8 @@ namespace System.Net
                             true,
                             isThrow
                         )
-                    ) {
+                    )
+                    {
                         continue;
                     }
                     // If many same cookies arrive we collapse them into just one, hence setting
@@ -955,7 +962,8 @@ namespace System.Net
             ref CookieCollection? cookies,
             System.Collections.Generic.List<string> domainAttribute,
             bool matchOnlyPlainCookie
-        ) {
+        )
+        {
             for (int i = 0; i < domainAttribute.Count; i++)
             {
                 PathList pathList;
@@ -1027,7 +1035,8 @@ namespace System.Net
             int port,
             bool isSecure,
             bool isPlainOnly
-        ) {
+        )
+        {
             lock (source)
             {
                 // Cannot use foreach as we are going to update 'source'

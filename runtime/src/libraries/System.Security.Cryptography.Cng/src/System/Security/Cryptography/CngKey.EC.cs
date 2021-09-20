@@ -49,7 +49,8 @@ namespace System.Security.Cryptography
             if (
                 algorithm == CngAlgorithm.ECDiffieHellmanP256.Algorithm
                 || algorithm == CngAlgorithm.ECDsaP256.Algorithm
-            ) {
+            )
+            {
                 oidValue = Oids.secp256r1;
                 return "nistP256";
             }
@@ -57,7 +58,8 @@ namespace System.Security.Cryptography
             if (
                 algorithm == CngAlgorithm.ECDiffieHellmanP384.Algorithm
                 || algorithm == CngAlgorithm.ECDsaP384.Algorithm
-            ) {
+            )
+            {
                 oidValue = Oids.secp384r1;
                 return "nistP384";
             }
@@ -65,7 +67,8 @@ namespace System.Security.Cryptography
             if (
                 algorithm == CngAlgorithm.ECDiffieHellmanP521.Algorithm
                 || algorithm == CngAlgorithm.ECDsaP521.Algorithm
-            ) {
+            )
+            {
                 oidValue = Oids.secp521r1;
                 return "nistP521";
             }
@@ -186,7 +189,8 @@ namespace System.Security.Cryptography
                         || alg == CngAlgorithm.ECDiffieHellmanP384
                         || alg == CngAlgorithm.ECDsaP521
                         || alg == CngAlgorithm.ECDiffieHellmanP521
-                    ) {
+                    )
+                    {
                         // No parameters required, the algorithm ID has everything built-in.
                     }
                     else
@@ -227,7 +231,8 @@ namespace System.Security.Cryptography
                 if (
                     errorCode == Interop.NCrypt.ErrorCode.NTE_INVALID_PARAMETER
                     || errorCode == Interop.NCrypt.ErrorCode.NTE_NOT_SUPPORTED
-                ) {
+                )
+                {
                     string? target = curve.IsNamed
                         ? curve.Oid.FriendlyName
                         : curve.CurveType.ToString();

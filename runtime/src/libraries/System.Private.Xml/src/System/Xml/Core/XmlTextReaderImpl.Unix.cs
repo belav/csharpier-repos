@@ -10,7 +10,8 @@ namespace System.Xml
         static partial void ConvertAbsoluteUnixPathToAbsoluteUri(
             [NotNullIfNotNull("url")] ref string? url,
             XmlResolver? resolver
-        ) {
+        )
+        {
             // new Uri(uri, UriKind.RelativeOrAbsolute) returns a Relative Uri for absolute unix paths (e.g. /tmp).
             // We convert the native unix path to a 'file://' uri string to make it an Absolute Uri.
             if (url != null && url.Length > 0 && url[0] == '/')

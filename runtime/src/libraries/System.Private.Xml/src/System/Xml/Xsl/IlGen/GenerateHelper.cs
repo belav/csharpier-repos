@@ -1380,7 +1380,8 @@ namespace System.Xml.Xsl.IlGen
                 dec >= (decimal)int.MinValue
                 && dec <= (decimal)int.MaxValue
                 && decimal.Truncate(dec) == dec
-            ) {
+            )
+            {
                 // Decimal can be constructed from a 32-bit integer
                 LoadInteger((int)dec);
                 Construct(XmlILConstructors.DecFromInt32);
@@ -2322,7 +2323,8 @@ namespace System.Xml.Xsl.IlGen
             if (
                 _lastSourceInfo != null
                 && (opcode.Equals(OpCodes.Br) || opcode.Equals(OpCodes.Br_S))
-            ) {
+            )
+            {
                 // Emit a "no source" sequence point, otherwise the following label will be preceded
                 // with a dead Nop operation, which may lead to unverifiable code (SQLBUDT 423393).
                 // We are guaranteed not to emit adjacent sequence points because Br or Br_S

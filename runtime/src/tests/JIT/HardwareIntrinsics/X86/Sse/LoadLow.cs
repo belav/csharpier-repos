@@ -27,7 +27,8 @@ namespace IntelHardwareIntrinsicTest
                         new float[4] { 22, -1, -50, 0 },
                         new float[4]
                     )
-                ) {
+                )
+                {
                     var vf1 = Unsafe.Read<Vector128<float>>(floatTable.inArray1Ptr);
                     var vf2 = Sse.LoadLow(vf1, (float*)(floatTable.inArray2Ptr));
                     Unsafe.Write(floatTable.outArrayPtr, vf2);
@@ -37,7 +38,8 @@ namespace IntelHardwareIntrinsicTest
                             (x, y, z) =>
                                 z[0] == y[0] && z[1] == y[1] && z[2] == x[2] && z[3] == x[3]
                         )
-                    ) {
+                    )
+                    {
                         Console.WriteLine("SSE LoadLow failed on float:");
                         foreach (var item in floatTable.outArray)
                         {

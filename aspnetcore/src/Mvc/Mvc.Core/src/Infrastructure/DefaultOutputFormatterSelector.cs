@@ -42,7 +42,8 @@ namespace Microsoft.AspNetCore.Mvc.Infrastructure
         public DefaultOutputFormatterSelector(
             IOptions<MvcOptions> options,
             ILoggerFactory loggerFactory
-        ) {
+        )
+        {
             if (options == null)
             {
                 throw new ArgumentNullException(nameof(options));
@@ -65,7 +66,8 @@ namespace Microsoft.AspNetCore.Mvc.Infrastructure
             OutputFormatterCanWriteContext context,
             IList<IOutputFormatter> formatters,
             MediaTypeCollection contentTypes
-        ) {
+        )
+        {
             if (context == null)
             {
                 throw new ArgumentNullException(nameof(context));
@@ -192,7 +194,8 @@ namespace Microsoft.AspNetCore.Mvc.Infrastructure
                     !_respectBrowserAcceptHeader
                     && mediaType.MatchesAllSubTypes
                     && mediaType.MatchesAllTypes
-                ) {
+                )
+                {
                     result.Clear();
                     return result;
                 }
@@ -206,7 +209,8 @@ namespace Microsoft.AspNetCore.Mvc.Infrastructure
         private IOutputFormatter? SelectFormatterNotUsingContentType(
             OutputFormatterCanWriteContext formatterContext,
             IList<IOutputFormatter> formatters
-        ) {
+        )
+        {
             _logger.SelectFirstCanWriteFormatter();
 
             foreach (var formatter in formatters)
@@ -227,7 +231,8 @@ namespace Microsoft.AspNetCore.Mvc.Infrastructure
             OutputFormatterCanWriteContext formatterContext,
             IList<IOutputFormatter> formatters,
             IList<MediaTypeSegmentWithQuality> sortedAcceptHeaders
-        ) {
+        )
+        {
             for (var i = 0; i < sortedAcceptHeaders.Count; i++)
             {
                 var mediaType = sortedAcceptHeaders[i];
@@ -252,7 +257,8 @@ namespace Microsoft.AspNetCore.Mvc.Infrastructure
             OutputFormatterCanWriteContext formatterContext,
             IList<IOutputFormatter> formatters,
             MediaTypeCollection acceptableContentTypes
-        ) {
+        )
+        {
             foreach (var formatter in formatters)
             {
                 foreach (var contentType in acceptableContentTypes)
@@ -275,7 +281,8 @@ namespace Microsoft.AspNetCore.Mvc.Infrastructure
             IList<IOutputFormatter> formatters,
             IList<MediaTypeSegmentWithQuality> sortedAcceptableContentTypes,
             MediaTypeCollection possibleOutputContentTypes
-        ) {
+        )
+        {
             for (var i = 0; i < sortedAcceptableContentTypes.Count; i++)
             {
                 var acceptableContentType = new MediaType(

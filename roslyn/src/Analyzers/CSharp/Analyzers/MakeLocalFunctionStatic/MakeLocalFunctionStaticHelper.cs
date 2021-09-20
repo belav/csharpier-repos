@@ -21,7 +21,8 @@ namespace Microsoft.CodeAnalysis.CSharp.MakeLocalFunctionStatic
             LocalFunctionStatementSyntax localFunction,
             SemanticModel semanticModel,
             [NotNullWhen(returnValue: true)] out DataFlowAnalysis? dataFlow
-        ) {
+        )
+        {
             dataFlow = semanticModel.AnalyzeDataFlow(localFunction);
             return dataFlow is { Succeeded: true };
         }
@@ -29,7 +30,8 @@ namespace Microsoft.CodeAnalysis.CSharp.MakeLocalFunctionStatic
         private static bool CanBeCalledFromStaticContext(
             LocalFunctionStatementSyntax localFunction,
             DataFlowAnalysis dataFlow
-        ) {
+        )
+        {
             // If other local functions are called the it can't be made static unles the
             // are static, or the local function is recursive, or its calling a child local function
             return !dataFlow.UsedLocalFunctions.Any(
@@ -39,7 +41,8 @@ namespace Microsoft.CodeAnalysis.CSharp.MakeLocalFunctionStatic
             static bool IsChildOrSelf(
                 LocalFunctionStatementSyntax containingLocalFunction,
                 ISymbol calledLocationFunction
-            ) {
+            )
+            {
                 var node =
                     calledLocationFunction.DeclaringSyntaxReferences.FirstOrDefault()?.GetSyntax();
                 // Contains also returns true if node is equal to the containing local function
@@ -62,12 +65,14 @@ namespace Microsoft.CodeAnalysis.CSharp.MakeLocalFunctionStatic
             LocalFunctionStatementSyntax localFunction,
             SemanticModel semanticModel,
             out ImmutableArray<ISymbol> captures
-        ) {
+        )
+        {
             if (
                 TryGetDataFlowAnalysis(localFunction, semanticModel, out var dataFLow)
                 && CanBeCalledFromStaticContext(localFunction, dataFLow)
                 && HasCapturesThatArentThis(dataFLow.CapturedInside)
-            ) {
+            )
+            {
                 captures = dataFLow.CapturedInside;
                 return true;
             }

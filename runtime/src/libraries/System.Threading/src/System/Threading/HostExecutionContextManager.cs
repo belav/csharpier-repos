@@ -47,7 +47,8 @@ namespace System.Threading
                 t_currentContext != switcher._currentContext
                 || switcher._asyncLocal == null
                 || !switcher._asyncLocal.Value
-            ) {
+            )
+            {
                 throw new InvalidOperationException(
                     SR.HostExecutionContextManager_InvalidOperation_CannotUseSwitcherOtherThread
                 );

@@ -28,17 +28,18 @@ namespace Microsoft.Extensions.DependencyModel
             bool serviceable,
             string path,
             string hashPath
-        ) : this(
-            type,
-            name,
-            version,
-            hash,
-            dependencies,
-            serviceable,
-            path,
-            hashPath,
-            runtimeStoreManifestName: null
-        ) { }
+        )
+            : this(
+                type,
+                name,
+                version,
+                hash,
+                dependencies,
+                serviceable,
+                path,
+                hashPath,
+                runtimeStoreManifestName: null
+            ) { }
         public Library(
             string type,
             string name,
@@ -49,7 +50,8 @@ namespace Microsoft.Extensions.DependencyModel
             string path,
             string hashPath,
             string runtimeStoreManifestName = null
-        ) {
+        )
+        {
             if (string.IsNullOrEmpty(type))
             {
                 throw new ArgumentException(null, nameof(type));

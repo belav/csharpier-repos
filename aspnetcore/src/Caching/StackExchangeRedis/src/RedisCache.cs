@@ -79,7 +79,8 @@ namespace Microsoft.Extensions.Caching.StackExchangeRedis
         public async Task<byte[]> GetAsync(
             string key,
             CancellationToken token = default(CancellationToken)
-        ) {
+        )
+        {
             if (key == null)
             {
                 throw new ArgumentNullException(nameof(key));
@@ -133,7 +134,8 @@ namespace Microsoft.Extensions.Caching.StackExchangeRedis
             byte[] value,
             DistributedCacheEntryOptions options,
             CancellationToken token = default(CancellationToken)
-        ) {
+        )
+        {
             if (key == null)
             {
                 throw new ArgumentNullException(nameof(key));
@@ -187,7 +189,8 @@ namespace Microsoft.Extensions.Caching.StackExchangeRedis
         public async Task RefreshAsync(
             string key,
             CancellationToken token = default(CancellationToken)
-        ) {
+        )
+        {
             if (key == null)
             {
                 throw new ArgumentNullException(nameof(key));
@@ -329,7 +332,8 @@ namespace Microsoft.Extensions.Caching.StackExchangeRedis
             string key,
             bool getData,
             CancellationToken token = default(CancellationToken)
-        ) {
+        )
+        {
             if (key == null)
             {
                 throw new ArgumentNullException(nameof(key));
@@ -395,7 +399,8 @@ namespace Microsoft.Extensions.Caching.StackExchangeRedis
         public async Task RemoveAsync(
             string key,
             CancellationToken token = default(CancellationToken)
-        ) {
+        )
+        {
             if (key == null)
             {
                 throw new ArgumentNullException(nameof(key));
@@ -411,7 +416,8 @@ namespace Microsoft.Extensions.Caching.StackExchangeRedis
             RedisValue[] results,
             out DateTimeOffset? absoluteExpiration,
             out TimeSpan? slidingExpiration
-        ) {
+        )
+        {
             absoluteExpiration = null;
             slidingExpiration = null;
             var absoluteExpirationTicks = (long?)results[0];
@@ -459,7 +465,8 @@ namespace Microsoft.Extensions.Caching.StackExchangeRedis
             DateTimeOffset? absExpr,
             TimeSpan? sldExpr,
             CancellationToken token = default(CancellationToken)
-        ) {
+        )
+        {
             if (key == null)
             {
                 throw new ArgumentNullException(nameof(key));
@@ -489,7 +496,8 @@ namespace Microsoft.Extensions.Caching.StackExchangeRedis
             DateTimeOffset creationTime,
             DateTimeOffset? absoluteExpiration,
             DistributedCacheEntryOptions options
-        ) {
+        )
+        {
             if (absoluteExpiration.HasValue && options.SlidingExpiration.HasValue)
             {
                 return (long)Math.Min(
@@ -511,7 +519,8 @@ namespace Microsoft.Extensions.Caching.StackExchangeRedis
         private static DateTimeOffset? GetAbsoluteExpiration(
             DateTimeOffset creationTime,
             DistributedCacheEntryOptions options
-        ) {
+        )
+        {
             if (options.AbsoluteExpiration.HasValue && options.AbsoluteExpiration <= creationTime)
             {
                 throw new ArgumentOutOfRangeException(

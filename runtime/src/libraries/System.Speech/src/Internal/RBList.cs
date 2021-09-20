@@ -485,7 +485,8 @@ namespace System.Speech.Internal
                 && GetColor(sibling) == NodeColor.BLACK
                 && GetColor(sibling.Left) == NodeColor.BLACK
                 && GetColor(sibling.Right) == NodeColor.BLACK
-            ) {
+            )
+            {
                 SetColor(sibling, NodeColor.RED);
                 FixRemovalCase1(sibling.Parent);
             }
@@ -502,7 +503,8 @@ namespace System.Speech.Internal
                 && GetColor(sibling) == NodeColor.BLACK
                 && GetColor(sibling.Left) == NodeColor.BLACK
                 && GetColor(sibling.Right) == NodeColor.BLACK
-            ) {
+            )
+            {
                 SetColor(sibling, NodeColor.RED);
                 SetColor(sibling.Parent, NodeColor.BLACK);
             }
@@ -519,7 +521,8 @@ namespace System.Speech.Internal
                 && GetColor(sibling) == NodeColor.BLACK
                 && GetColor(sibling.Left) == NodeColor.RED
                 && GetColor(sibling.Right) == NodeColor.BLACK
-            ) {
+            )
+            {
                 SetColor(sibling, NodeColor.RED);
                 SetColor(sibling.Left, NodeColor.BLACK);
                 RotateRight(sibling);
@@ -530,7 +533,8 @@ namespace System.Speech.Internal
                 && GetColor(sibling) == NodeColor.BLACK
                 && GetColor(sibling.Right) == NodeColor.RED
                 && GetColor(sibling.Left) == NodeColor.BLACK
-            ) {
+            )
+            {
                 SetColor(sibling, NodeColor.RED);
                 SetColor(sibling.Right, NodeColor.BLACK);
                 RotateLeft(sibling);

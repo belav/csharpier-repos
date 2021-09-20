@@ -20,7 +20,8 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Structure
         internal sealed override async Task<ImmutableArray<BlockSpan>> GetBlockSpansWorkerAsync(
             Document document,
             int position
-        ) {
+        )
+        {
             var root = await document.GetSyntaxRootAsync();
             var trivia = root.FindTrivia(position, findInsideTrivia: true);
 

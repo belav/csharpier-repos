@@ -35,7 +35,8 @@ namespace Microsoft.AspNetCore.StaticFiles
             RequestDelegate next,
             IWebHostEnvironment hostingEnv,
             IOptions<DefaultFilesOptions> options
-        ) {
+        )
+        {
             if (next == null)
             {
                 throw new ArgumentNullException(nameof(next));
@@ -75,7 +76,8 @@ namespace Microsoft.AspNetCore.StaticFiles
                     forDirectory: true,
                     subpath: out var subpath
                 )
-            ) {
+            )
+            {
                 var dirContents = _fileProvider.GetDirectoryContents(subpath.Value);
                 if (dirContents.Exists)
                 {
@@ -84,7 +86,8 @@ namespace Microsoft.AspNetCore.StaticFiles
                         int matchIndex = 0;
                         matchIndex < _options.DefaultFileNames.Count;
                         matchIndex++
-                    ) {
+                    )
+                    {
                         string defaultFile = _options.DefaultFileNames[matchIndex];
                         var file = _fileProvider.GetFileInfo(subpath.Value + defaultFile);
                         // TryMatchPath will make sure subpath always ends with a "/" by adding it if needed.
@@ -95,7 +98,8 @@ namespace Microsoft.AspNetCore.StaticFiles
                             if (
                                 _options.RedirectToAppendTrailingSlash
                                 && !Helpers.PathEndsInSlash(context.Request.Path)
-                            ) {
+                            )
+                            {
                                 Helpers.RedirectToPathWithSlash(context);
                                 return Task.CompletedTask;
                             }

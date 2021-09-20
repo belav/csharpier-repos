@@ -47,7 +47,8 @@ namespace System.Web.Mvc.Routing
             IDictionary<string, object> defaults,
             IDictionary<string, object> constraints,
             IInlineConstraintResolver constraintResolver
-        ) {
+        )
+        {
             Contract.Assert(defaults != null);
             Contract.Assert(constraints != null);
 

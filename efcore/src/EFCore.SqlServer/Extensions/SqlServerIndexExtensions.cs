@@ -31,7 +31,8 @@ namespace Microsoft.EntityFrameworkCore
         public static bool? IsClustered(
             this IReadOnlyIndex index,
             in StoreObjectIdentifier storeObject
-        ) {
+        )
+        {
             var annotation = index.FindAnnotation(SqlServerAnnotationNames.Clustered);
             if (annotation != null)
             {
@@ -44,7 +45,8 @@ namespace Microsoft.EntityFrameworkCore
         private static bool? GetDefaultIsClustered(
             IReadOnlyIndex index,
             in StoreObjectIdentifier storeObject
-        ) {
+        )
+        {
             var sharedTableRootIndex = index.FindSharedObjectRootIndex(storeObject);
             return sharedTableRootIndex?.IsClustered(storeObject);
         }
@@ -68,7 +70,8 @@ namespace Microsoft.EntityFrameworkCore
             this IConventionIndex index,
             bool? value,
             bool fromDataAnnotation = false
-        ) {
+        )
+        {
             index.SetOrRemoveAnnotation(
                 SqlServerAnnotationNames.Clustered,
                 value,
@@ -116,7 +119,8 @@ namespace Microsoft.EntityFrameworkCore
             this IConventionIndex index,
             IReadOnlyList<string>? properties,
             bool fromDataAnnotation = false
-        ) {
+        )
+        {
             index.SetOrRemoveAnnotation(
                 SqlServerAnnotationNames.Include,
                 properties,
@@ -162,7 +166,8 @@ namespace Microsoft.EntityFrameworkCore
             this IConventionIndex index,
             bool? createdOnline,
             bool fromDataAnnotation = false
-        ) {
+        )
+        {
             index.SetOrRemoveAnnotation(
                 SqlServerAnnotationNames.CreatedOnline,
                 createdOnline,
@@ -215,7 +220,8 @@ namespace Microsoft.EntityFrameworkCore
             this IConventionIndex index,
             int? fillFactor,
             bool fromDataAnnotation = false
-        ) {
+        )
+        {
             if (fillFactor != null && (fillFactor <= 0 || fillFactor > 100))
             {
                 throw new ArgumentOutOfRangeException(nameof(fillFactor));

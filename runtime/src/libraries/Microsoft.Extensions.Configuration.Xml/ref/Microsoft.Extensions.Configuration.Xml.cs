@@ -14,26 +14,30 @@ namespace Microsoft.Extensions.Configuration
             string path,
             bool optional,
             bool reloadOnChange
-        ) {
+        )
+        {
             throw null;
         }
         public static Microsoft.Extensions.Configuration.IConfigurationBuilder AddXmlFile(
             this Microsoft.Extensions.Configuration.IConfigurationBuilder builder,
             System.Action<Microsoft.Extensions.Configuration.Xml.XmlConfigurationSource> configureSource
-        ) {
+        )
+        {
             throw null;
         }
         public static Microsoft.Extensions.Configuration.IConfigurationBuilder AddXmlFile(
             this Microsoft.Extensions.Configuration.IConfigurationBuilder builder,
             string path
-        ) {
+        )
+        {
             throw null;
         }
         public static Microsoft.Extensions.Configuration.IConfigurationBuilder AddXmlFile(
             this Microsoft.Extensions.Configuration.IConfigurationBuilder builder,
             string path,
             bool optional
-        ) {
+        )
+        {
             throw null;
         }
         public static Microsoft.Extensions.Configuration.IConfigurationBuilder AddXmlFile(
@@ -41,13 +45,15 @@ namespace Microsoft.Extensions.Configuration
             string path,
             bool optional,
             bool reloadOnChange
-        ) {
+        )
+        {
             throw null;
         }
         public static Microsoft.Extensions.Configuration.IConfigurationBuilder AddXmlStream(
             this Microsoft.Extensions.Configuration.IConfigurationBuilder builder,
             System.IO.Stream stream
-        ) {
+        )
+        {
             throw null;
         }
     }
@@ -68,7 +74,8 @@ namespace Microsoft.Extensions.Configuration.Xml
         public XmlConfigurationSource() { }
         public override Microsoft.Extensions.Configuration.IConfigurationProvider Build(
             Microsoft.Extensions.Configuration.IConfigurationBuilder builder
-        ) {
+        )
+        {
             throw null;
         }
     }
@@ -79,12 +86,14 @@ namespace Microsoft.Extensions.Configuration.Xml
         public System.Xml.XmlReader CreateDecryptingXmlReader(
             System.IO.Stream input,
             System.Xml.XmlReaderSettings settings
-        ) {
+        )
+        {
             throw null;
         }
         protected virtual System.Xml.XmlReader DecryptDocumentAndCreateXmlReader(
             System.Xml.XmlDocument document
-        ) {
+        )
+        {
             throw null;
         }
     }
@@ -98,7 +107,8 @@ namespace Microsoft.Extensions.Configuration.Xml
         public static System.Collections.Generic.IDictionary<string, string> Read(
             System.IO.Stream stream,
             Microsoft.Extensions.Configuration.Xml.XmlDocumentDecryptor decryptor
-        ) {
+        )
+        {
             throw null;
         }
     }
@@ -108,7 +118,8 @@ namespace Microsoft.Extensions.Configuration.Xml
         public XmlStreamConfigurationSource() { }
         public override Microsoft.Extensions.Configuration.IConfigurationProvider Build(
             Microsoft.Extensions.Configuration.IConfigurationBuilder builder
-        ) {
+        )
+        {
             throw null;
         }
     }

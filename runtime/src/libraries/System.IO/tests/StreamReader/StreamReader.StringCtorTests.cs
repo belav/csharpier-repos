@@ -80,7 +80,8 @@ namespace System.IO.Tests
         [InlineData(false)]
         public static void ReadToEnd_detectEncodingFromByteOrderMarks(
             bool detectEncodingFromByteOrderMarks
-        ) {
+        )
+        {
             string testfile = Path.GetTempFileName();
             try
             {

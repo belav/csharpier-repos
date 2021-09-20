@@ -73,7 +73,8 @@ namespace System.ComponentModel.Tests
         [InlineData("1.9999999999")]
         public static void ConvertFromInvalidVersion_WithContext_ThrowsFormatException(
             string version
-        ) {
+        )
+        {
             Assert.Throws<FormatException>(
                 () =>
                     VersionConverterTests.s_converter.ConvertFrom(

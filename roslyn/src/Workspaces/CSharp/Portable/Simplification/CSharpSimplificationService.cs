@@ -52,7 +52,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Simplification
             Func<SyntaxNode, bool> expandInsideNode,
             bool expandParameter,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             using (Logger.LogBlock(FunctionId.Simplifier_ExpandNode, cancellationToken))
             {
                 if (
@@ -66,7 +67,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Simplification
                     || node is XmlNameAttributeSyntax
                     || node is TypeConstraintSyntax
                     || node is BaseTypeSyntax
-                ) {
+                )
+                {
                     var rewriter = new Expander(
                         semanticModel,
                         expandInsideNode,
@@ -91,7 +93,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Simplification
             SemanticModel semanticModel,
             Func<SyntaxNode, bool> expandInsideNode,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             using (Logger.LogBlock(FunctionId.Simplifier_ExpandToken, cancellationToken))
             {
                 var rewriter = new Expander(
@@ -112,7 +115,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Simplification
                         token,
                         out var rewrittenTokenWithElasticTrivia
                     )
-                ) {
+                )
+                {
                     return rewrittenTokenWithElasticTrivia;
                 }
 
@@ -123,7 +127,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Simplification
         public static SyntaxToken TryEscapeIdentifierToken(
             SyntaxToken syntaxToken,
             SyntaxNode parentOfToken
-        ) {
+        )
+        {
             // do not escape an already escaped identifier
             if (syntaxToken.IsVerbatimIdentifier())
             {
@@ -133,14 +138,16 @@ namespace Microsoft.CodeAnalysis.CSharp.Simplification
             if (
                 SyntaxFacts.GetKeywordKind(syntaxToken.ValueText) == SyntaxKind.None
                 && SyntaxFacts.GetContextualKeywordKind(syntaxToken.ValueText) == SyntaxKind.None
-            ) {
+            )
+            {
                 return syntaxToken;
             }
 
             if (
                 SyntaxFacts.GetContextualKeywordKind(syntaxToken.ValueText)
                 == SyntaxKind.UnderscoreToken
-            ) {
+            )
+            {
                 return syntaxToken;
             }
 
@@ -180,7 +187,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Simplification
                     firstOriginalToken,
                     out var rewrittenTokenWithLeadingElasticTrivia
                 )
-            ) {
+            )
+            {
                 return rewrittenNode.ReplaceToken(
                     firstRewrittenToken,
                     rewrittenTokenWithLeadingElasticTrivia
@@ -194,7 +202,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Simplification
             SyntaxToken token,
             SyntaxToken originalToken,
             out SyntaxToken tokenWithLeadingWhitespace
-        ) {
+        )
+        {
             tokenWithLeadingWhitespace = default;
 
             if (token.HasLeadingTrivia)
@@ -218,7 +227,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Simplification
             ref SyntaxNode nodeToSpeculate,
             SemanticModel originalSemanticModel,
             SyntaxNode originalNode
-        ) {
+        )
+        {
             var syntaxNodeToSpeculate = nodeToSpeculate;
             Contract.ThrowIfNull(syntaxNodeToSpeculate);
             Contract.ThrowIfFalse(SpeculationAnalyzer.CanSpeculateOnNode(nodeToSpeculate));
@@ -242,7 +252,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Simplification
             SemanticModel model,
             HashSet<SyntaxNode> namespaceImports,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var root = model.SyntaxTree.GetRoot(cancellationToken);
             var diagnostics = model.GetDiagnostics(cancellationToken: cancellationToken);
 

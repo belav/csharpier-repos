@@ -264,7 +264,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Http
                             new Http1ParsingHandler(this, trailers),
                             ref trimmedReader
                         )
-                    ) {
+                    )
+                    {
                         // We read the maximum allowed but didn't complete the headers.
                         KestrelBadHttpRequestException.Throw(
                             RequestRejectionReason.HeadersExceedMaxTotalSize
@@ -289,7 +290,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Http
             HttpVersionAndMethod versionAndMethod,
             TargetOffsetPathLength targetPath,
             Span<byte> startLine
-        ) {
+        )
+        {
             var targetStart = targetPath.Offset;
             // Slice out target
             var target = startLine[targetStart..];
@@ -367,7 +369,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Http
                 || previousValue == null
                 || previousValue.Length != target.Length
                 || !StringUtilities.BytesOrdinalEqualsStringAndAscii(previousValue, target)
-            ) {
+            )
+            {
                 ParseTarget(targetPath, target);
             }
             else
@@ -447,7 +450,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Http
                 || previousValue == null
                 || previousValue.Length != queryLength
                 || !StringUtilities.BytesOrdinalEqualsStringAndAscii(previousValue, query)
-            ) {
+            )
+            {
                 // The previous string does not match what the bytes would convert to,
                 // so we will need to generate a new string.
                 QueryString = _parsedQueryString = query.GetAsciiStringNonNullCharacters();
@@ -495,7 +499,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Http
                 || previousValue == null
                 || previousValue.Length != target.Length
                 || !StringUtilities.BytesOrdinalEqualsStringAndAscii(previousValue, target)
-            ) {
+            )
+            {
                 // The previous string does not match what the bytes would convert to,
                 // so we will need to generate a new string.
                 RawTarget = _parsedRawTarget = target.GetAsciiStringNonNullCharacters();
@@ -555,7 +560,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Http
                 || previousValue == null
                 || previousValue.Length != target.Length
                 || !StringUtilities.BytesOrdinalEqualsStringAndAscii(previousValue, target)
-            ) {
+            )
+            {
                 // The previous string does not match what the bytes would convert to,
                 // so we will need to generate a new string.
                 RawTarget = _parsedRawTarget = target.GetAsciiStringNonNullCharacters();
@@ -578,7 +584,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Http
                     || previousValue == null
                     || previousValue.Length != query.Length
                     || !StringUtilities.BytesOrdinalEqualsStringAndAscii(previousValue, query)
-                ) {
+                )
+                {
                     // The previous string does not match what the bytes would convert to,
                     // so we will need to generate a new string.
                     QueryString = _parsedQueryString = query.GetAsciiStringNonNullCharacters();
@@ -664,7 +671,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Http
                             != _absoluteRequestTarget.Authority
                                 + ":"
                                 + _absoluteRequestTarget.Port.ToString(CultureInfo.InvariantCulture)
-                    ) {
+                    )
+                    {
                         KestrelBadHttpRequestException.Throw(
                             RequestRejectionReason.InvalidHostHeader,
                             hostText
@@ -763,7 +771,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Http
             }
             else if (
                 !_keepAlive && _requestProcessingStatus == RequestProcessingStatus.RequestPending
-            ) {
+            )
+            {
                 // Stop the request processing loop if the server is shutting down or there was a keep-alive timeout
                 // and there is no ongoing request.
                 endConnection = true;

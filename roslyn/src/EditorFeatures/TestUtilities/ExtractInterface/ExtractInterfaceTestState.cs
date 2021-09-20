@@ -38,7 +38,8 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.ExtractInterface
             string markup,
             string languageName,
             CompilationOptions compilationOptions
-        ) {
+        )
+        {
             var workspace =
                 languageName == LanguageNames.CSharp
                     ? TestWorkspace.CreateCSharp(
@@ -84,7 +85,8 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.ExtractInterface
 
         public Task<ExtractInterfaceTypeAnalysisResult> GetTypeAnalysisResultAsync(
             TypeDiscoveryRule typeDiscoveryRule
-        ) {
+        )
+        {
             return ExtractInterfaceService.AnalyzeTypeAtPositionAsync(
                 ExtractFromDocument,
                 _testDocument.CursorPosition.Value,

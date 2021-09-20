@@ -37,7 +37,8 @@ namespace Microsoft.EntityFrameworkCore.Storage.Internal
             IRelationalCommandBuilderFactory relationalCommandBuilderFactory,
             ISqlGenerationHelper sqlGenerationHelper,
             IParameterNameGeneratorFactory parameterNameGeneratorFactory
-        ) {
+        )
+        {
             Check.NotNull(relationalCommandBuilderFactory, nameof(relationalCommandBuilderFactory));
             Check.NotNull(sqlGenerationHelper, nameof(sqlGenerationHelper));
             Check.NotNull(parameterNameGeneratorFactory, nameof(parameterNameGeneratorFactory));

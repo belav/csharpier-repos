@@ -17,7 +17,8 @@ namespace Microsoft.CodeAnalysis.UseConditionalExpression
             [NotNullWhen(true)] out IOperation? falseStatement,
             out ISimpleAssignmentOperation? trueAssignment,
             out ISimpleAssignmentOperation? falseAssignment
-        ) {
+        )
+        {
             falseAssignment = null;
 
             trueStatement = ifOperation.WhenTrue;
@@ -33,7 +34,8 @@ namespace Microsoft.CodeAnalysis.UseConditionalExpression
             if (
                 !TryGetAssignmentOrThrow(trueStatement, out trueAssignment, out var trueThrow)
                 || !TryGetAssignmentOrThrow(falseStatement, out falseAssignment, out var falseThrow)
-            ) {
+            )
+            {
                 return false;
             }
 
@@ -45,7 +47,8 @@ namespace Microsoft.CodeAnalysis.UseConditionalExpression
                     trueThrow,
                     falseThrow
                 )
-            ) {
+            )
+            {
                 return false;
             }
 
@@ -58,7 +61,8 @@ namespace Microsoft.CodeAnalysis.UseConditionalExpression
                     trueAssignment.Target.Syntax,
                     falseAssignment.Target.Syntax
                 )
-            ) {
+            )
+            {
                 return false;
             }
 
@@ -74,7 +78,8 @@ namespace Microsoft.CodeAnalysis.UseConditionalExpression
             [NotNullWhen(true)] IOperation? statement,
             out ISimpleAssignmentOperation? assignment,
             out IThrowOperation? throwOperation
-        ) {
+        )
+        {
             assignment = null;
             throwOperation = null;
 
@@ -92,7 +97,8 @@ namespace Microsoft.CodeAnalysis.UseConditionalExpression
                 statement is IExpressionStatementOperation exprStatement
                 && exprStatement.Operation is ISimpleAssignmentOperation assignmentOp
                 && assignmentOp.Target != null
-            ) {
+            )
+            {
                 assignment = assignmentOp;
                 return true;
             }

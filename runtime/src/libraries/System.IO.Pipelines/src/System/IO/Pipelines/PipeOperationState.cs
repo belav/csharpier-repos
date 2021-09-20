@@ -39,7 +39,8 @@ namespace System.IO.Pipelines
             if (
                 (_state & State.Reading) != State.Reading
                 && (_state & State.ReadingTentative) != State.ReadingTentative
-            ) {
+            )
+            {
                 ThrowHelper.ThrowInvalidOperationException_NoReadToComplete();
             }
 

@@ -27,7 +27,8 @@ namespace Microsoft.CodeAnalysis.Editor.EditorConfigSettings.DataProvider.Format
         protected override void UpdateOptions(
             AnalyzerConfigOptions editorConfigOptions,
             OptionSet visualStudioOptions
-        ) {
+        )
+        {
             var defaultOptions = GetDefaultOptions(
                 editorConfigOptions,
                 visualStudioOptions,
@@ -40,7 +41,8 @@ namespace Microsoft.CodeAnalysis.Editor.EditorConfigSettings.DataProvider.Format
             AnalyzerConfigOptions editorConfigOptions,
             OptionSet visualStudioOptions,
             OptionUpdater updater
-        ) {
+        )
+        {
             yield return FormattingSetting.Create(
                 FormattingOptions2.UseTabs,
                 EditorFeaturesResources.Use_Tabs,

@@ -271,7 +271,8 @@ namespace Microsoft.CodeAnalysis
 
             public static string GetExpectedV1ErrorLogWithSuppressionResultsAndRulesText(
                 Compilation compilation
-            ) {
+            )
+            {
                 var tree = compilation.SyntaxTrees.First();
                 var root = tree.GetRoot();
                 var expectedLineSpan = root.GetLocation().GetLineSpan();
@@ -514,7 +515,8 @@ namespace Microsoft.CodeAnalysis
             public static string GetExpectedV2ErrorLogWithSuppressionResultsText(
                 Compilation compilation,
                 string justification
-            ) {
+            )
+            {
                 var tree = compilation.SyntaxTrees.First();
                 var root = tree.GetRoot();
                 var expectedLineSpan = root.GetLocation().GetLineSpan();
@@ -1024,7 +1026,8 @@ namespace Microsoft.CodeAnalysis
                 if (
                     ns.ContainingAssembly != context.Compilation.Assembly
                     || ns.ConstituentNamespaces.Length > 1
-                ) {
+                )
+                {
                     context.ReportDiagnostic(Diagnostic.Create(Rule, ns.Locations[0]));
                 }
             }
@@ -1199,7 +1202,8 @@ namespace Microsoft.CodeAnalysis
             public AnalyzerWithInvalidDiagnosticLocation(
                 SyntaxTree treeInAnotherCompilation,
                 ActionKind actionKind
-            ) {
+            )
+            {
                 _invalidLocation = treeInAnotherCompilation.GetRoot().GetLocation();
                 _actionKind = actionKind;
             }
@@ -1207,7 +1211,8 @@ namespace Microsoft.CodeAnalysis
             private void ReportDiagnostic(
                 Action<Diagnostic> addDiagnostic,
                 ActionKind actionKindBeingRun
-            ) {
+            )
+            {
                 if (_actionKind == actionKindBeingRun)
                 {
                     var diagnostic = Diagnostic.Create(Descriptor, _invalidLocation);
@@ -1518,7 +1523,8 @@ namespace Microsoft.CodeAnalysis
             private void ReportDiagnosticIfActionInvokedConcurrently(
                 SemaphoreSlim gate,
                 SymbolAnalysisContext symbolContext
-            ) {
+            )
+            {
                 if (gate.CurrentCount != registeredActionCounts - 1)
                 {
                     var diagnostic = Diagnostic.Create(
@@ -1588,7 +1594,8 @@ namespace Microsoft.CodeAnalysis
                     IOperation,
                     (ControlFlowGraph Graph, ISymbol AssociatedSymbol)
                 > getControlFlowGraph
-            ) {
+            )
+            {
                 if (_verifyGetControlFlowGraph)
                 {
                     foreach (var operationBlock in operationBlocks)
@@ -1645,7 +1652,8 @@ namespace Microsoft.CodeAnalysis
             private void VerifyControlFlowGraph(
                 OperationAnalysisContext operationContext,
                 bool inBlockAnalysisContext
-            ) {
+            )
+            {
                 if (_verifyGetControlFlowGraph)
                 {
                     var controlFlowGraph = operationContext.GetControlFlowGraph();
@@ -1832,11 +1840,13 @@ namespace Microsoft.CodeAnalysis
                         {
                             foreach (
                                 var operationBlock in operationBlockAnalysisContext.OperationBlocks
-                            ) {
+                            )
+                            {
                                 foreach (
                                     var operation in operationBlock.DescendantsAndSelf()
                                         .OfType<IFieldReferenceOperation>()
-                                ) {
+                                )
+                                {
                                     AnalyzerFieldReferenceOperation(
                                         operation,
                                         operationBlockAnalysisContext.ReportDiagnostic
@@ -1866,7 +1876,8 @@ namespace Microsoft.CodeAnalysis
             private static void AnalyzerFieldReferenceOperation(
                 IFieldReferenceOperation operation,
                 Action<Diagnostic> reportDiagnostic
-            ) {
+            )
+            {
                 var diagnostic = Diagnostic.Create(
                     Descriptor,
                     operation.Syntax.GetLocation(),
@@ -2014,7 +2025,8 @@ namespace Microsoft.CodeAnalysis
                 Action<Diagnostic> addDiagnostic,
                 Location location,
                 params object[] messageArguments
-            ) {
+            )
+            {
                 // warning diagnostic
                 var diagnostic = Diagnostic.Create(Warning, location, messageArguments);
                 addDiagnostic(diagnostic);
@@ -2307,7 +2319,8 @@ namespace Microsoft.CodeAnalysis
                 SymbolKind symbolKind,
                 OperationKind? operationKindOpt = null,
                 int? analyzerId = null
-            ) {
+            )
+            {
                 _topLevelAction = topLevelAction;
                 _symbolKind = symbolKind;
                 _operationKind = operationKindOpt;
@@ -2502,7 +2515,8 @@ namespace Microsoft.CodeAnalysis
 
                 void reportDiagnosticsAtCompilationEnd(
                     CompilationAnalysisContext compilationEndContext
-                ) {
+                )
+                {
                     if (!SymbolsStarted.SetEquals(symbolsEnded))
                     {
                         // Symbols Started: '{0}', Symbols Ended: '{1}', Analyzer: {2}
@@ -2533,7 +2547,8 @@ namespace Microsoft.CodeAnalysis
 
                 void performSymbolStartActionVerification(
                     SymbolStartAnalysisContext symbolStartContext
-                ) {
+                )
+                {
                     verifySymbolStartOrdering(symbolStartContext);
                     verifySymbolStartAndOperationOrdering(symbolStartContext);
                     if (!SymbolsStarted.Add(symbolStartContext.Symbol))
@@ -2552,7 +2567,8 @@ namespace Microsoft.CodeAnalysis
                 void performSymbolEndActionVerification(
                     SymbolAnalysisContext symbolEndContext,
                     SymbolStartAnalysisContext symbolStartContext
-                ) {
+                )
+                {
                     Assert.Equal(symbolStartContext.Symbol, symbolEndContext.Symbol);
                     verifySymbolEndOrdering(symbolEndContext);
                     if (!symbolsEnded.Add(symbolEndContext.Symbol))
@@ -2584,7 +2600,8 @@ namespace Microsoft.CodeAnalysis
                 void performOperationActionVerification(
                     OperationAnalysisContext operationContext,
                     SymbolStartAnalysisContext symbolStartContext
-                ) {
+                )
+                {
                     var containingSymbols = GetContainingSymbolsAndThis(
                             operationContext.ContainingSymbol
                         )
@@ -2684,7 +2701,8 @@ namespace Microsoft.CodeAnalysis
 
                 void verifySymbolStartAndOperationOrdering(
                     SymbolStartAnalysisContext symbolStartContext
-                ) {
+                )
+                {
                     foreach (var kvp in seenOperationContainers)
                     {
                         OperationAnalysisContext operationContext = kvp.Key;
@@ -2715,7 +2733,8 @@ namespace Microsoft.CodeAnalysis
             public DiagnosticSuppressorForId(
                 string suppressedDiagnosticId,
                 string suppressionId = null
-            ) {
+            )
+            {
                 SuppressionDescriptor = new SuppressionDescriptor(
                     id: suppressionId ?? "SPR0001",
                     suppressedDiagnosticId: suppressedDiagnosticId,
@@ -2747,7 +2766,8 @@ namespace Microsoft.CodeAnalysis
             public SuppressionDescriptor SuppressionDescriptor { get; }
             public DiagnosticSuppressorForId_ThrowsOperationCancelledException(
                 string suppressedDiagnosticId
-            ) {
+            )
+            {
                 SuppressionDescriptor = new SuppressionDescriptor(
                     id: "SPR0001",
                     suppressedDiagnosticId: suppressedDiagnosticId,
@@ -2773,7 +2793,8 @@ namespace Microsoft.CodeAnalysis
 
             public DiagnosticSuppressorThrowsExceptionFromSupportedSuppressions(
                 NotImplementedException exception
-            ) {
+            )
+            {
                 _exception = exception;
             }
 
@@ -2793,7 +2814,8 @@ namespace Microsoft.CodeAnalysis
             public DiagnosticSuppressorThrowsExceptionFromReportedSuppressions(
                 string suppressedDiagnosticId,
                 NotImplementedException exception
-            ) {
+            )
+            {
                 _descriptor = new SuppressionDescriptor(
                     "SPR0001",
                     suppressedDiagnosticId,
@@ -2822,7 +2844,8 @@ namespace Microsoft.CodeAnalysis
                 string suppressedDiagnosticId,
                 string supportedSuppressionId,
                 string unsupportedSuppressionId
-            ) {
+            )
+            {
                 _supportedDescriptor = new SuppressionDescriptor(
                     supportedSuppressionId,
                     suppressedDiagnosticId,
@@ -2861,7 +2884,8 @@ namespace Microsoft.CodeAnalysis
             public DiagnosticSuppressor_InvalidDiagnosticSuppressionReported(
                 string suppressedDiagnosticId,
                 string unsupportedSuppressedDiagnosticId
-            ) {
+            )
+            {
                 _supportedDescriptor = new SuppressionDescriptor(
                     "SPR0001",
                     suppressedDiagnosticId,
@@ -2901,7 +2925,8 @@ namespace Microsoft.CodeAnalysis
             public DiagnosticSuppressor_NonReportedDiagnosticCannotBeSuppressed(
                 string reportedDiagnosticId,
                 string nonReportedDiagnosticId
-            ) {
+            )
+            {
                 _descriptor1 = new SuppressionDescriptor(
                     "SPR0001",
                     reportedDiagnosticId,
@@ -2954,7 +2979,8 @@ namespace Microsoft.CodeAnalysis
                 AnalysisKind analysisKind,
                 GeneratedCodeAnalysisFlags analysisFlags = GeneratedCodeAnalysisFlags.None,
                 bool configurable = true
-            ) {
+            )
+            {
                 _analysisKind = analysisKind;
                 _analysisFlags = analysisFlags;
                 _symbolCallbacks = new ConcurrentSet<ISymbol>();
@@ -3084,7 +3110,8 @@ namespace Microsoft.CodeAnalysis
                 bool isEnabledByDefault,
                 DiagnosticSeverity defaultSeverity,
                 bool throwOnAllNamedTypes = false
-            ) {
+            )
+            {
                 Descriptor = new DiagnosticDescriptor(
                     "ID0001",
                     "Title1",
@@ -3184,7 +3211,8 @@ namespace Microsoft.CodeAnalysis
                                 .OfType<CSharp.Syntax.FieldDeclarationSyntax>();
                             foreach (
                                 var variable in fields.SelectMany(f => f.Declaration.Variables)
-                            ) {
+                            )
+                            {
                                 context.ReportDiagnostic(
                                     Diagnostic.Create(Descriptor, variable.Identifier.GetLocation())
                                 );
@@ -3215,7 +3243,8 @@ namespace Microsoft.CodeAnalysis
                 bool registerFromInitialize,
                 TextSpan diagnosticSpan,
                 string id = "ID0001"
-            ) {
+            )
+            {
                 _registerFromInitialize = registerFromInitialize;
                 _diagnosticSpan = diagnosticSpan;
 

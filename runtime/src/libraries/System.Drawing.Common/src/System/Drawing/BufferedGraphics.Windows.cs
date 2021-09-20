@@ -22,7 +22,8 @@ namespace System.Drawing
             IntPtr targetDC,
             Point targetLoc,
             Size virtualSize
-        ) {
+        )
+        {
             _context = context;
             _bufferedGraphicsSurface = bufferedGraphicsSurface;
             _targetDC = targetDC;

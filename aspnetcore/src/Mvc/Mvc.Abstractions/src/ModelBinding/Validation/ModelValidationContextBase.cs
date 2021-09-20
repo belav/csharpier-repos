@@ -20,7 +20,8 @@ namespace Microsoft.AspNetCore.Mvc.ModelBinding.Validation
             ActionContext actionContext,
             ModelMetadata modelMetadata,
             IModelMetadataProvider metadataProvider
-        ) {
+        )
+        {
             if (actionContext == null)
             {
                 throw new ArgumentNullException(nameof(actionContext));

@@ -35,10 +35,8 @@ namespace System.Net.Http
             Initialize(contentRange);
         }
 
-        public InvalidByteRangeException(
-            ContentRangeHeaderValue contentRange,
-            string message
-        ) : base(message)
+        public InvalidByteRangeException(ContentRangeHeaderValue contentRange, string message)
+            : base(message)
         {
             Initialize(contentRange);
         }

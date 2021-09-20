@@ -37,7 +37,8 @@ namespace Microsoft.CodeAnalysis.Editor.Shared.Extensions
                 object key,
                 Func<TTextView, ITextBuffer, TProperty> valueCreator,
                 out TProperty value
-            ) {
+            )
+            {
                 Contract.ThrowIfTrue(textView.IsClosed);
 
                 var properties = textView.Properties.GetOrCreateSingletonProperty(
@@ -61,7 +62,8 @@ namespace Microsoft.CodeAnalysis.Editor.Shared.Extensions
                 ITextBuffer subjectBuffer,
                 object key,
                 [MaybeNullWhen(false)] out TProperty value
-            ) {
+            )
+            {
                 Contract.ThrowIfTrue(textView.IsClosed);
 
                 var properties = textView.Properties.GetOrCreateSingletonProperty(
@@ -75,7 +77,8 @@ namespace Microsoft.CodeAnalysis.Editor.Shared.Extensions
                 ITextBuffer subjectBuffer,
                 object key,
                 TProperty value
-            ) {
+            )
+            {
                 Contract.ThrowIfTrue(textView.IsClosed);
 
                 var properties = textView.Properties.GetOrCreateSingletonProperty(
@@ -88,13 +91,15 @@ namespace Microsoft.CodeAnalysis.Editor.Shared.Extensions
                 TTextView textView,
                 ITextBuffer subjectBuffer,
                 object key
-            ) {
+            )
+            {
                 if (
                     textView.Properties.TryGetProperty(
                         typeof(PerSubjectBufferProperty<TProperty, TTextView>),
                         out PerSubjectBufferProperty<TProperty, TTextView> properties
                     )
-                ) {
+                )
+                {
                     properties.Remove(subjectBuffer, key);
                 }
             }
@@ -121,7 +126,8 @@ namespace Microsoft.CodeAnalysis.Editor.Shared.Extensions
             private void OnTextViewBufferGraphChanged(
                 object? sender,
                 GraphBuffersChangedEventArgs e
-            ) {
+            )
+            {
                 foreach (var buffer in e.RemovedBuffers)
                 {
                     if (_subjectBufferMap.TryGetValue(buffer, out var value))
@@ -145,7 +151,8 @@ namespace Microsoft.CodeAnalysis.Editor.Shared.Extensions
                 ITextBuffer subjectBuffer,
                 object key,
                 [MaybeNullWhen(false)] out TProperty value
-            ) {
+            )
+            {
                 if (_subjectBufferMap.TryGetValue(subjectBuffer, out var bufferMap))
                 {
                     return bufferMap.TryGetValue(key, out value);
@@ -153,7 +160,8 @@ namespace Microsoft.CodeAnalysis.Editor.Shared.Extensions
 
                 if (
                     _buffersRemovedFromTextViewBufferGraph.TryGetValue(subjectBuffer, out bufferMap)
-                ) {
+                )
+                {
                     return bufferMap.TryGetValue(key, out value);
                 }
 
@@ -183,7 +191,8 @@ namespace Microsoft.CodeAnalysis.Editor.Shared.Extensions
 
                 if (
                     _buffersRemovedFromTextViewBufferGraph.TryGetValue(subjectBuffer, out bufferMap)
-                ) {
+                )
+                {
                     bufferMap.Remove(key);
                     if (!bufferMap.Any())
                     {

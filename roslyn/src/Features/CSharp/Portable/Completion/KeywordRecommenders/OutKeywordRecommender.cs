@@ -17,7 +17,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Completion.KeywordRecommenders
             int position,
             CSharpSyntaxContext context,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var syntaxTree = context.SyntaxTree;
 
             // TODO(cyrusn): lambda/anon methods can have out/ref parameters

@@ -62,7 +62,8 @@ namespace Microsoft.Extensions.Logging.AzureAppServices
                 if (
                     response.IsSuccessStatusCode
                     || response.StatusCode == HttpStatusCode.PreconditionFailed
-                ) {
+                )
+                {
                     // Retry sending data after blob creation
                     response = await AppendDataAsync();
                 }

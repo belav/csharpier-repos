@@ -25,7 +25,8 @@ namespace Microsoft.AspNetCore.Mvc.ApplicationModels
         /// </param>
         public ApiConventionApplicationModelConvention(
             ProducesErrorResponseTypeAttribute defaultErrorResponseType
-        ) {
+        )
+        {
             DefaultErrorResponseType =
                 defaultErrorResponseType
                 ?? throw new ArgumentNullException(nameof(defaultErrorResponseType));
@@ -82,7 +83,8 @@ namespace Microsoft.AspNetCore.Mvc.ApplicationModels
                     apiConventionAttributes,
                     out var result
                 )
-            ) {
+            )
+            {
                 action.Properties[typeof(ApiConventionResult)] = result;
             }
         }

@@ -100,7 +100,8 @@ namespace Microsoft.VisualStudio.LanguageServices.FindUsages
                 bool includeContainingTypeAndMemberColumns,
                 bool includeKindColumn,
                 CancellationToken cancellationToken
-            ) {
+            )
+            {
                 presenter.AssertIsForeground();
 
                 // Wrap the passed in CT with our own CTS that we can control cancellation over.  This way either our
@@ -155,7 +156,8 @@ namespace Microsoft.VisualStudio.LanguageServices.FindUsages
                 ImmutableArray<ITableColumnDefinition> customColumns,
                 bool includeContainingTypeAndMemberColumns,
                 bool includeKindColumn
-            ) {
+            )
+            {
                 var customColumnsToInclude = ArrayBuilder<string>.GetInstance();
 
                 foreach (var column in customColumns)
@@ -337,7 +339,8 @@ namespace Microsoft.VisualStudio.LanguageServices.FindUsages
                 HighlightSpanKind spanKind,
                 SymbolUsageInfo symbolUsageInfo,
                 ImmutableDictionary<string, string> additionalProperties
-            ) {
+            )
+            {
                 var sourceText = await documentSpan.Document.GetTextAsync(CancellationToken)
                     .ConfigureAwait(false);
                 var (excerptResult, lineText) = await ExcerptAsync(sourceText, documentSpan)
@@ -371,7 +374,8 @@ namespace Microsoft.VisualStudio.LanguageServices.FindUsages
             private async Task<(ExcerptResult, SourceText)> ExcerptAsync(
                 SourceText sourceText,
                 DocumentSpan documentSpan
-            ) {
+            )
+            {
                 var excerptService =
                     documentSpan.Document.Services.GetService<IDocumentExcerptService>();
                 if (excerptService != null)
@@ -428,7 +432,8 @@ namespace Microsoft.VisualStudio.LanguageServices.FindUsages
             protected RoslynDefinitionBucket GetOrCreateDefinitionBucket(
                 DefinitionItem definition,
                 bool expandedByDefault
-            ) {
+            )
+            {
                 lock (Gate)
                 {
                     if (!_definitionToBucket.TryGetValue(definition, out var bucket))
@@ -460,7 +465,8 @@ namespace Microsoft.VisualStudio.LanguageServices.FindUsages
             private Task UpdateTableProgressAsync(
                 ImmutableArray<(int current, int maximum)> nextBatch,
                 CancellationToken cancellationToken
-            ) {
+            )
+            {
                 if (!nextBatch.IsEmpty)
                 {
                     var (current, maximum) = nextBatch.Last();

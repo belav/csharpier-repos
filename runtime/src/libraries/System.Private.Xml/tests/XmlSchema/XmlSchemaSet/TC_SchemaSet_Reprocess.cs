@@ -29,7 +29,8 @@ namespace System.Xml.Tests
             int countGE,
             int countGA,
             string str
-        ) {
+        )
+        {
             _output.WriteLine(str);
             Assert.Equal(ss.Count, schCount);
             Assert.Equal(ss.IsCompiled, isCompiled);
@@ -652,7 +653,8 @@ namespace System.Xml.Tests
                     FileShare.Read,
                     1
                 )
-            ) {
+            )
+            {
                 XmlReader r = XmlReader.Create(s, new XmlReaderSettings(), includeUri);
                 _output.WriteLine("Reader uri: " + r.BaseURI);
                 using (r)

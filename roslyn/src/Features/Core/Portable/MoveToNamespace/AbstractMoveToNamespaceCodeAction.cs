@@ -21,7 +21,8 @@ namespace Microsoft.CodeAnalysis.MoveToNamespace
         public AbstractMoveToNamespaceCodeAction(
             IMoveToNamespaceService moveToNamespaceService,
             MoveToNamespaceAnalysisResult analysisResult
-        ) {
+        )
+        {
             _moveToNamespaceService = moveToNamespaceService;
             _moveToNamespaceAnalysisResult = analysisResult;
         }
@@ -38,13 +39,15 @@ namespace Microsoft.CodeAnalysis.MoveToNamespace
         protected override async Task<IEnumerable<CodeActionOperation>> ComputeOperationsAsync(
             object options,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             // We won't get an empty target namespace from VS, but still should handle it w/o crashing.
             if (
                 options is MoveToNamespaceOptionsResult moveToNamespaceOptions
                 && !moveToNamespaceOptions.IsCancelled
                 && !string.IsNullOrEmpty(moveToNamespaceOptions.Namespace)
-            ) {
+            )
+            {
                 var moveToNamespaceResult = await _moveToNamespaceService.MoveToNamespaceAsync(
                         _moveToNamespaceAnalysisResult,
                         moveToNamespaceOptions.Namespace,
@@ -63,7 +66,8 @@ namespace Microsoft.CodeAnalysis.MoveToNamespace
 
         private static ImmutableArray<CodeActionOperation> CreateRenameOperations(
             MoveToNamespaceResult moveToNamespaceResult
-        ) {
+        )
+        {
             Debug.Assert(moveToNamespaceResult.Succeeded);
 
             using var _ = PooledObjects.ArrayBuilder<CodeActionOperation>.GetInstance(
@@ -82,7 +86,8 @@ namespace Microsoft.CodeAnalysis.MoveToNamespace
             {
                 foreach (
                     var (newName, symbol) in moveToNamespaceResult.NewNameOriginalSymbolMapping
-                ) {
+                )
+                {
                     operations.Add(
                         symbolRenameCodeActionOperationFactory.CreateSymbolRenamedOperation(
                             symbol,

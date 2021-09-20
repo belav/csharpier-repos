@@ -111,7 +111,8 @@ namespace Microsoft.CodeAnalysis
                 !object.Equals(this.Symbol, other.Symbol)
                 || _candidateSymbols.IsDefault != other._candidateSymbols.IsDefault
                 || this.CandidateReason != other.CandidateReason
-            ) {
+            )
+            {
                 return false;
             }
 

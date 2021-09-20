@@ -44,7 +44,8 @@ namespace Roslyn.Test.Utilities
                 string[][] importStringGroups = null,
                 bool suppressUsingInfo = false,
                 ISymUnmanagedConstant[] constants = null
-            ) {
+            )
+            {
                 _bytesBuilder = ArrayBuilder<byte>.GetInstance();
                 if (importStringGroups != null && !suppressUsingInfo)
                 {

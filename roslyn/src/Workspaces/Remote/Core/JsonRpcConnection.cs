@@ -33,7 +33,8 @@ namespace Microsoft.CodeAnalysis.Remote
             object? callbackTarget,
             Stream serviceStream,
             IPooledConnectionReclamation? poolReclamation
-        ) {
+        )
+        {
             _solutionAssetStorage =
                 services.GetRequiredService<ISolutionAssetStorageProvider>().AssetStorage;
             _services = services;
@@ -115,7 +116,8 @@ namespace Microsoft.CodeAnalysis.Remote
             Solution? solution,
             IReadOnlyList<object?> arguments,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             if (solution != null)
             {
                 using var scope = await _solutionAssetStorage.StoreAssetsAsync(
@@ -147,7 +149,8 @@ namespace Microsoft.CodeAnalysis.Remote
             IReadOnlyList<object?> arguments,
             Func<Stream, CancellationToken, Task<T>>? dataReader,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             if (solution != null)
             {
                 using var scope = await _solutionAssetStorage.StoreAssetsAsync(

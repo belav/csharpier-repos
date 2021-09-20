@@ -41,7 +41,8 @@ namespace Microsoft.AspNetCore.Connections
         public static IConnectionBuilder Use(
             this IConnectionBuilder connectionBuilder,
             Func<ConnectionContext, Func<Task>, Task> middleware
-        ) {
+        )
+        {
             return connectionBuilder.Use(
                 next =>
                 {
@@ -63,7 +64,8 @@ namespace Microsoft.AspNetCore.Connections
         public static IConnectionBuilder Run(
             this IConnectionBuilder connectionBuilder,
             Func<ConnectionContext, Task> middleware
-        ) {
+        )
+        {
             return connectionBuilder.Use(
                 next =>
                 {

@@ -44,7 +44,8 @@ namespace Microsoft.Web.Mvc.ModelBinding
             ControllerContext controllerContext,
             ModelMetadata modelMetadata,
             object incomingValue
-        ) {
+        )
+        {
             return GetResourceCommon(
                 controllerContext,
                 modelMetadata,
@@ -57,7 +58,8 @@ namespace Microsoft.Web.Mvc.ModelBinding
             ControllerContext controllerContext,
             ModelMetadata modelMetadata,
             object incomingValue
-        ) {
+        )
+        {
             return GetResourceCommon(
                 controllerContext,
                 modelMetadata,
@@ -71,7 +73,8 @@ namespace Microsoft.Web.Mvc.ModelBinding
             ModelMetadata modelMetadata,
             object incomingValue,
             Func<ControllerContext, string> resourceAccessor
-        ) {
+        )
+        {
             string displayName = modelMetadata.GetDisplayName();
             string errorMessageTemplate = resourceAccessor(controllerContext);
             string errorMessage = String.Format(
@@ -86,7 +89,8 @@ namespace Microsoft.Web.Mvc.ModelBinding
         private static string GetUserResourceString(
             ControllerContext controllerContext,
             string resourceName
-        ) {
+        )
+        {
             return GetUserResourceString(
                 controllerContext,
                 resourceName,
@@ -102,7 +106,8 @@ namespace Microsoft.Web.Mvc.ModelBinding
             ControllerContext controllerContext,
             string resourceName,
             string resourceClassKey
-        ) {
+        )
+        {
             return (
                 !String.IsNullOrEmpty(resourceClassKey)
                 && (controllerContext != null)
@@ -140,7 +145,8 @@ namespace Microsoft.Web.Mvc.ModelBinding
         internal static void Initialize(
             ModelBinderDictionary binders,
             ModelBinderProviderCollection providers
-        ) {
+        )
+        {
             binders.Clear();
             binders.DefaultBinder = new ExtensibleModelBinderAdapter(providers);
         }

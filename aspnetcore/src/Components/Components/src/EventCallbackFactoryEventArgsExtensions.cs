@@ -23,7 +23,8 @@ namespace Microsoft.AspNetCore.Components
             this EventCallbackFactory factory,
             object receiver,
             Action<EventArgs> callback
-        ) {
+        )
+        {
             if (factory == null)
             {
                 throw new ArgumentNullException(nameof(factory));
@@ -44,7 +45,8 @@ namespace Microsoft.AspNetCore.Components
             this EventCallbackFactory factory,
             object receiver,
             Func<EventArgs, Task> callback
-        ) {
+        )
+        {
             if (factory == null)
             {
                 throw new ArgumentNullException(nameof(factory));
@@ -65,7 +67,8 @@ namespace Microsoft.AspNetCore.Components
             this EventCallbackFactory factory,
             object receiver,
             Action<ChangeEventArgs> callback
-        ) {
+        )
+        {
             if (factory == null)
             {
                 throw new ArgumentNullException(nameof(factory));
@@ -86,7 +89,8 @@ namespace Microsoft.AspNetCore.Components
             this EventCallbackFactory factory,
             object receiver,
             Func<ChangeEventArgs, Task> callback
-        ) {
+        )
+        {
             if (factory == null)
             {
                 throw new ArgumentNullException(nameof(factory));

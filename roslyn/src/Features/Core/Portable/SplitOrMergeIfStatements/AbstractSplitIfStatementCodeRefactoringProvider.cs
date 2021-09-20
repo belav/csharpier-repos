@@ -56,7 +56,8 @@ namespace Microsoft.CodeAnalysis.SplitOrMergeIfStatements
                     GetLogicalExpressionKind(syntaxKinds),
                     out var rootExpression
                 ) && ifGenerator.IsCondition(rootExpression, out var ifOrElseIf)
-            ) {
+            )
+            {
                 context.RegisterRefactoring(
                     CreateCodeAction(
                         c => RefactorAsync(document, token.Span, ifOrElseIf.Span, c),
@@ -72,7 +73,8 @@ namespace Microsoft.CodeAnalysis.SplitOrMergeIfStatements
             TextSpan tokenSpan,
             TextSpan ifOrElseIfSpan,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var syntaxFacts = document.GetLanguageService<ISyntaxFactsService>();
             var ifGenerator = document.GetLanguageService<IIfLikeStatementGenerator>();
 
@@ -105,7 +107,8 @@ namespace Microsoft.CodeAnalysis.SplitOrMergeIfStatements
             SyntaxToken token,
             int syntaxKind,
             out SyntaxNode rootExpression
-        ) {
+        )
+        {
             // Check whether the token is part of a binary expression, and if so,
             // return the topmost binary expression in the chain (e.g. `a && b && c`).
 
@@ -124,7 +127,8 @@ namespace Microsoft.CodeAnalysis.SplitOrMergeIfStatements
             SyntaxToken token,
             SyntaxNode rootExpression,
             ISyntaxFactsService syntaxFacts
-        ) {
+        )
+        {
             // We have a left-associative binary expression chain, e.g. `a && b && c && d`.
             // Let's say our token is the second `&&` token, between b and c. We'd like to split the chain at this point
             // and build new expressions for the left side and the right side of this token. This will

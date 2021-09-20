@@ -59,7 +59,8 @@ namespace System.Security.Cryptography
             string blobType,
             Span<byte> destination,
             out int bytesWritten
-        ) {
+        )
+        {
             // Sanity check the current bounds
             Span<byte> empty = default;
 
@@ -127,7 +128,8 @@ namespace System.Security.Cryptography
             int kdfCount,
             Span<byte> destination,
             out int bytesWritten
-        ) {
+        )
+        {
             return ExportPkcs8KeyBlob(
                 false,
                 _keyHandle,
@@ -151,7 +153,8 @@ namespace System.Security.Cryptography
             Span<byte> destination,
             out int bytesWritten,
             out byte[]? allocated
-        ) {
+        )
+        {
             using (SafeUnicodeStringHandle stringHandle = new SafeUnicodeStringHandle(password))
             {
                 fixed (byte* oidPtr = s_pkcs12TripleDesOidBytes)

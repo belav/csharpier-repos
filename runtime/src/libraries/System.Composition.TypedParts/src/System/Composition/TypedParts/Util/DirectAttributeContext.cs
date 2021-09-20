@@ -12,7 +12,8 @@ namespace System.Composition.TypedParts.Util
         public override IEnumerable<Attribute> GetCustomAttributes(
             Type reflectedType,
             Reflection.MemberInfo member
-        ) {
+        )
+        {
             if (reflectedType == null)
                 throw new ArgumentNullException(nameof(reflectedType));
             if (member == null)
@@ -27,7 +28,8 @@ namespace System.Composition.TypedParts.Util
         public override IEnumerable<Attribute> GetCustomAttributes(
             Type reflectedType,
             Reflection.ParameterInfo parameter
-        ) {
+        )
+        {
             if (reflectedType == null)
                 throw new ArgumentNullException(nameof(reflectedType));
             if (parameter == null)

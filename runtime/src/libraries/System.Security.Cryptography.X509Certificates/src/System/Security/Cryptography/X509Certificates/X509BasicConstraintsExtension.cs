@@ -25,16 +25,19 @@ namespace System.Security.Cryptography.X509Certificates
             bool hasPathLengthConstraint,
             int pathLengthConstraint,
             bool critical
-        ) : base(
-            Oids.BasicConstraints2Oid,
-            EncodeExtension(certificateAuthority, hasPathLengthConstraint, pathLengthConstraint),
-            critical
-        ) { }
+        )
+            : base(
+                Oids.BasicConstraints2Oid,
+                EncodeExtension(
+                    certificateAuthority,
+                    hasPathLengthConstraint,
+                    pathLengthConstraint
+                ),
+                critical
+            ) { }
 
-        public X509BasicConstraintsExtension(
-            AsnEncodedData encodedBasicConstraints,
-            bool critical
-        ) : base(Oids.BasicConstraints2Oid, encodedBasicConstraints.RawData, critical) { }
+        public X509BasicConstraintsExtension(AsnEncodedData encodedBasicConstraints, bool critical)
+            : base(Oids.BasicConstraints2Oid, encodedBasicConstraints.RawData, critical) { }
 
         public bool CertificateAuthority
         {
@@ -79,7 +82,8 @@ namespace System.Security.Cryptography.X509Certificates
             bool certificateAuthority,
             bool hasPathLengthConstraint,
             int pathLengthConstraint
-        ) {
+        )
+        {
             if (hasPathLengthConstraint && pathLengthConstraint < 0)
                 throw new ArgumentOutOfRangeException(
                     nameof(pathLengthConstraint),

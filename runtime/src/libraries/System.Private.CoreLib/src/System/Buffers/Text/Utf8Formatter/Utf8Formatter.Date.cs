@@ -99,7 +99,8 @@ namespace System.Buffers.Text
             Span<byte> destination,
             out int bytesWritten,
             StandardFormat format = default
-        ) {
+        )
+        {
             TimeSpan offset = Utf8Constants.NullUtcOffset;
             char symbol = format.Symbol;
             if (format.IsDefault)
@@ -150,7 +151,8 @@ namespace System.Buffers.Text
             Span<byte> destination,
             out int bytesWritten,
             StandardFormat format = default
-        ) {
+        )
+        {
             char symbol = FormattingHelpers.GetSymbolOrDefault(format, 'G');
 
             return symbol switch

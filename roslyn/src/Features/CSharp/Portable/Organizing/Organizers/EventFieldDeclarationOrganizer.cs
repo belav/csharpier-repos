@@ -24,7 +24,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Organizing.Organizers
         protected override EventFieldDeclarationSyntax Organize(
             EventFieldDeclarationSyntax syntax,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             return syntax.Update(
                 syntax.AttributeLists,
                 ModifiersOrganizer.Organize(syntax.Modifiers),

@@ -24,7 +24,8 @@ namespace System.Security.Authentication.ExtendedProtection
             CultureInfo culture,
             object value,
             Type destinationType
-        ) {
+        )
+        {
             if (destinationType == typeof(InstanceDescriptor))
             {
                 if (value is ExtendedProtectionPolicy policy)

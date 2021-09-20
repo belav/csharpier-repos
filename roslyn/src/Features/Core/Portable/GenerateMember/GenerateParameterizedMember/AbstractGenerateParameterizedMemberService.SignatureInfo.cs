@@ -44,7 +44,8 @@ namespace Microsoft.CodeAnalysis.GenerateMember.GenerateParameterizedMember
 
             public ImmutableArray<ITypeParameterSymbol> DetermineTypeParameters(
                 CancellationToken cancellationToken
-            ) {
+            )
+            {
                 return _typeParameters.IsDefault
                   ? (_typeParameters = DetermineTypeParametersWorker(cancellationToken))
                   : _typeParameters;
@@ -57,7 +58,8 @@ namespace Microsoft.CodeAnalysis.GenerateMember.GenerateParameterizedMember
 
             public ValueTask<ITypeSymbol> DetermineReturnTypeAsync(
                 CancellationToken cancellationToken
-            ) {
+            )
+            {
                 var type = DetermineReturnTypeWorker(cancellationToken);
                 if (State.IsInConditionalAccessExpression)
                 {
@@ -91,7 +93,8 @@ namespace Microsoft.CodeAnalysis.GenerateMember.GenerateParameterizedMember
                 bool isAbstract,
                 bool includeSetter,
                 CancellationToken cancellationToken
-            ) {
+            )
+            {
                 var accessibility = DetermineAccessibility(isAbstract);
                 var getMethod = CodeGenerationSymbolFactory.CreateAccessorSymbol(
                     attributes: default,
@@ -123,7 +126,8 @@ namespace Microsoft.CodeAnalysis.GenerateMember.GenerateParameterizedMember
                 SyntaxGenerator factory,
                 bool isAbstract,
                 CancellationToken cancellationToken
-            ) {
+            )
+            {
                 var parameters = await DetermineParametersAsync(cancellationToken)
                     .ConfigureAwait(false);
                 var returnType = await DetermineReturnTypeAsync(cancellationToken)
@@ -179,7 +183,8 @@ namespace Microsoft.CodeAnalysis.GenerateMember.GenerateParameterizedMember
             private async ValueTask<ITypeSymbol> FixTypeAsync(
                 ITypeSymbol typeSymbol,
                 CancellationToken cancellationToken
-            ) {
+            )
+            {
                 // A type can't refer to a type parameter that isn't available in the type we're
                 // eventually generating into.
                 var availableMethodTypeParameters = DetermineTypeParameters(cancellationToken);
@@ -252,7 +257,8 @@ namespace Microsoft.CodeAnalysis.GenerateMember.GenerateParameterizedMember
             private ImmutableArray<SyntaxNode> GenerateStatements(
                 SyntaxGenerator factory,
                 bool isAbstract
-            ) {
+            )
+            {
                 var throwStatement = CodeGenerationHelpers.GenerateThrowStatement(
                     factory,
                     Document,
@@ -269,7 +275,8 @@ namespace Microsoft.CodeAnalysis.GenerateMember.GenerateParameterizedMember
 
             private async ValueTask<ImmutableArray<IParameterSymbol>> DetermineParametersAsync(
                 CancellationToken cancellationToken
-            ) {
+            )
+            {
                 var modifiers = DetermineParameterModifiers(cancellationToken);
                 var types = await SpecializedTasks.WhenAll(
                         DetermineParameterTypes(cancellationToken)
@@ -336,7 +343,8 @@ namespace Microsoft.CodeAnalysis.GenerateMember.GenerateParameterizedMember
                         containingType.ContainingAssembly.IsSameAssemblyOrHasFriendAccessTo(
                             State.TypeToGenerateIn.ContainingAssembly
                         )
-                    ) {
+                    )
+                    {
                         return Accessibility.Internal;
                     }
                     else

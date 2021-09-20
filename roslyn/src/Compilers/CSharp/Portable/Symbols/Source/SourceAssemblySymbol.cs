@@ -121,7 +121,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             string assemblySimpleName,
             string moduleName,
             ImmutableArray<PEModule> netModules
-        ) {
+        )
+        {
             Debug.Assert(compilation != null);
             Debug.Assert(assemblySimpleName != null);
             Debug.Assert(!String.IsNullOrWhiteSpace(moduleName));
@@ -215,7 +216,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
         private string GetWellKnownAttributeDataStringField(
             Func<CommonAssemblyWellKnownAttributeData, string> fieldGetter,
             string missingValue = null
-        ) {
+        )
+        {
             string fieldValue = missingValue;
 
             var data = GetSourceDecodedWellKnownAttributeData();
@@ -618,7 +620,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             if (
                 StrongNameKeys.DiagnosticOpt != null
                 && !_compilation.Options.OutputKind.IsNetModule()
-            ) {
+            )
+            {
                 diagnostics.Add(StrongNameKeys.DiagnosticOpt);
             }
 
@@ -658,7 +661,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                 && !DeclaringCompilation.Options.PublicSign
                 && !StrongNameKeys.CanSign
                 && StrongNameKeys.DiagnosticOpt == null
-            ) {
+            )
+            {
                 // Since the container always contains both keys, the problem is that the key file didn't contain private key.
                 diagnostics.Add(
                     ErrorCode.ERR_SignButNoPrivateKey,
@@ -683,7 +687,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
         private static void ReportDiagnosticsForSynthesizedAttributes(
             CSharpCompilation compilation,
             BindingDiagnosticBag diagnostics
-        ) {
+        )
+        {
             ReportDiagnosticsForUnsafeSynthesizedAttributes(compilation, diagnostics);
 
             CSharpCompilationOptions compilationOptions = compilation.Options;
@@ -748,7 +753,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
         private static void ReportDiagnosticsForUnsafeSynthesizedAttributes(
             CSharpCompilation compilation,
             BindingDiagnosticBag diagnostics
-        ) {
+        )
+        {
             CSharpCompilationOptions compilationOptions = compilation.Options;
             if (!compilationOptions.AllowUnsafe)
             {
@@ -872,7 +878,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                     DeclaringCompilation.Options.DelaySign.Value
                     != (assemblyDelaySignAttributeSetting == ThreeState.True)
                 )
-            ) {
+            )
+            {
                 diagnostics.Add(
                     ErrorCode.WRN_CmdOptionConflictsSource,
                     NoLocation.Singleton,
@@ -884,7 +891,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             if (
                 _compilation.Options.PublicSign
                 && assemblyDelaySignAttributeSetting == ThreeState.True
-            ) {
+            )
+            {
                 diagnostics.Add(
                     ErrorCode.WRN_CmdOptionConflictsSource,
                     NoLocation.Singleton,
@@ -901,7 +909,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                 if (
                     (object)assemblyKeyContainerAttributeSetting
                     == (object)CommonAssemblyWellKnownAttributeData.StringMissingValue
-                ) {
+                )
+                {
                     if (_compilation.Options.OutputKind == OutputKind.NetModule)
                     {
                         // We need to synthesize this attribute for .NET module,
@@ -920,7 +929,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                         assemblyKeyContainerAttributeSetting,
                         StringComparison.OrdinalIgnoreCase
                     ) != 0
-                ) {
+                )
+                {
                     // Native compiler reports a warning in this case, notifying the user that attribute value from source is ignored,
                     // but it doesn't drop the attribute during emit. That might be fine if we produce an assembly because we actually sign it with correct
                     // key (the one from compilation options) without relying on the emitted attribute.
@@ -958,7 +968,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                 && !_compilation.Options.OutputKind.IsNetModule()
                 && (object)this.AssemblyKeyContainerAttributeSetting
                     != (object)CommonAssemblyWellKnownAttributeData.StringMissingValue
-            ) {
+            )
+            {
                 diagnostics.Add(
                     ErrorCode.WRN_AttributeIgnoredWhenPublicSigning,
                     NoLocation.Singleton,
@@ -973,7 +984,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                 if (
                     (object)assemblyKeyFileAttributeSetting
                     == (object)CommonAssemblyWellKnownAttributeData.StringMissingValue
-                ) {
+                )
+                {
                     if (_compilation.Options.OutputKind == OutputKind.NetModule)
                     {
                         // We need to synthesize this attribute for .NET module,
@@ -992,7 +1004,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                         assemblyKeyFileAttributeSetting,
                         StringComparison.OrdinalIgnoreCase
                     ) != 0
-                ) {
+                )
+                {
                     // Comment in similar section for CryptoKeyContainer is applicable here as well.
                     if (_compilation.Options.OutputKind == OutputKind.NetModule)
                     {
@@ -1020,7 +1033,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                 && !_compilation.Options.OutputKind.IsNetModule()
                 && (object)this.AssemblyKeyFileAttributeSetting
                     != (object)CommonAssemblyWellKnownAttributeData.StringMissingValue
-            ) {
+            )
+            {
                 diagnostics.Add(
                     ErrorCode.WRN_AttributeIgnoredWhenPublicSigning,
                     NoLocation.Singleton,
@@ -1067,7 +1081,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
         internal override void ForceComplete(
             SourceLocation locationOpt,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             while (true)
             {
                 cancellationToken.ThrowIfCancellationRequested();
@@ -1190,7 +1205,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                         if (
                             moduleMachine == System.Reflection.PortableExecutable.Machine.I386
                             && !m.Bit32Required
-                        ) {
+                        )
+                        {
                             // Other module is agnostic, this is always safe
                             ;
                         }
@@ -1225,7 +1241,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                     {
                         foreach (
                             var referencedModuleName in m.Module.GetReferencedManagedModulesOrThrow()
-                        ) {
+                        )
+                        {
                             // Do not report error for this module twice
                             if (knownModuleNames.Add(referencedModuleName))
                             {
@@ -1255,7 +1272,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
         private void ReportNameCollisionDiagnosticsForAddedModules(
             NamespaceSymbol ns,
             BindingDiagnosticBag diagnostics
-        ) {
+        )
+        {
             var mergedNs = ns as MergedNamespaceSymbol;
 
             if ((object)mergedNs == null)
@@ -1272,7 +1290,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                     && constituent[0].ContainingModule.Ordinal != 0
                     && constituent[1].ContainingModule.Ordinal != 0
                 )
-            ) {
+            )
+            {
                 var topLevelTypesFromModules = ArrayBuilder<NamedTypeSymbol>.GetInstance();
 
                 foreach (var moduleNs in constituent)
@@ -1303,7 +1322,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                                 x.Arity != 0
                                 || !x.ContainingNamespace.IsGlobalNamespace
                                 || x.Name != "<Module>"
-                            ) {
+                            )
+                            {
                                 diagnostics.Add(
                                     ErrorCode.ERR_DuplicateNameInNS,
                                     y.Locations.FirstOrNone(),
@@ -1415,7 +1435,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                     this,
                     AttributeDescription.AssemblySignatureKeyAttribute
                 )
-            ) {
+            )
+            {
                 return true;
             }
 
@@ -1465,7 +1486,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
         private static bool AddUniqueAssemblyAttribute(
             CSharpAttributeData attribute,
             ref HashSet<CSharpAttributeData> uniqueAttributes
-        ) {
+        )
+        {
             Debug.Assert(!attribute.HasErrors);
 
             if (uniqueAttributes == null)
@@ -1483,7 +1505,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             string netModuleName,
             BindingDiagnosticBag diagnostics,
             ref HashSet<CSharpAttributeData> uniqueAttributes
-        ) {
+        )
+        {
             Debug.Assert(!attribute.HasErrors);
 
             var attributeClass = attribute.AttributeClass;
@@ -1507,7 +1530,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                                 TypeCompareKind.ConsiderEverything2
                             )
                     )
-                ) {
+                )
+                {
                     // Attribute with unique attribute type, not a duplicate.
                     bool success = AddUniqueAssemblyAttribute(attribute, ref uniqueAttributes);
                     Debug.Assert(success);
@@ -1561,7 +1585,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
 
         private ImmutableArray<CSharpAttributeData> GetNetModuleAttributes(
             out ImmutableArray<string> netModuleNames
-        ) {
+        )
+        {
             ArrayBuilder<CSharpAttributeData> moduleAssemblyAttributesBuilder = null;
             ArrayBuilder<string> netModuleNameBuilder = null;
 
@@ -1597,7 +1622,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             ImmutableArray<CSharpAttributeData> attributesFromNetModules,
             ImmutableArray<string> netModuleNames,
             BindingDiagnosticBag diagnostics
-        ) {
+        )
+        {
             Debug.Assert(attributesFromNetModules.Any());
             Debug.Assert(netModuleNames.Any());
             Debug.Assert(attributesFromNetModules.Length == netModuleNames.Length);
@@ -1635,7 +1661,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                         diagnostics,
                         ref uniqueAttributes
                     )
-                ) {
+                )
+                {
                     arguments.Attribute = attribute;
                     arguments.Index = i;
 
@@ -1655,7 +1682,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
 
         private void LoadAndValidateNetModuleAttributes(
             ref CustomAttributesBag<CSharpAttributeData> lazyNetModuleAttributesBag
-        ) {
+        )
+        {
             if (_compilation.Options.OutputKind.IsNetModule())
             {
                 Interlocked.CompareExchange(
@@ -1760,7 +1788,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                         netModuleAttributesBag,
                         null
                     ) == null
-                ) {
+                )
+                {
                     this.AddDeclarationDiagnostics(diagnostics);
                 }
 
@@ -1815,7 +1844,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                     OneOrMany.Create(GetAttributeDeclarations()),
                     ref _lazySourceAttributesBag
                 )
-            ) {
+            )
+            {
                 _state.NotePartComplete(CompletionPart.Attributes);
             }
         }
@@ -1943,7 +1973,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
 
         private static IEnumerable<Cci.SecurityAttribute> GetSecurityAttributes(
             CustomAttributesBag<CSharpAttributeData> attributesBag
-        ) {
+        )
+        {
             Debug.Assert(attributesBag.IsSealed);
 
             var wellKnownAttributeData =
@@ -1958,7 +1989,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                         var securityAttribute in securityData.GetSecurityAttributes<CSharpAttributeData>(
                             attributesBag.Attributes
                         )
-                    ) {
+                    )
+                    {
                         yield return securityAttribute;
                     }
                 }
@@ -1978,7 +2010,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
 
             foreach (
                 var securityAttribute in GetSecurityAttributes(this.GetNetModuleAttributesBag())
-            ) {
+            )
+            {
                 yield return securityAttribute;
             }
 
@@ -1998,7 +2031,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                             WellKnownType.System_Security_Permissions_SecurityPermissionAttribute
                         ) is MissingMetadataTypeSymbol
                     )
-                ) {
+                )
+                {
                     var securityActionType = _compilation.GetWellKnownType(
                         WellKnownType.System_Security_Permissions_SecurityAction
                     );
@@ -2062,7 +2096,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
 
         internal override void SetNoPiaResolutionAssemblies(
             ImmutableArray<AssemblySymbol> assemblies
-        ) {
+        )
+        {
             throw ExceptionUtilities.Unreachable;
         }
 
@@ -2075,7 +2110,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
 
         internal override void SetLinkedReferencedAssemblies(
             ImmutableArray<AssemblySymbol> assemblies
-        ) {
+        )
+        {
             // SourceAssemblySymbol is never used directly as a reference
             // when it is or any of its references is linked.
             throw ExceptionUtilities.Unreachable;
@@ -2139,7 +2175,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
         internal override void AddSynthesizedAttributes(
             PEModuleBuilder moduleBuilder,
             ref ArrayBuilder<SynthesizedAttributeData> attributes
-        ) {
+        )
+        {
             base.AddSynthesizedAttributes(moduleBuilder, ref attributes);
 
             CSharpCompilationOptions options = _compilation.Options;
@@ -2178,7 +2215,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                             WellKnownType.System_Runtime_CompilerServices_CompilationRelaxationsAttribute
                         ) is MissingMetadataTypeSymbol
                     )
-                ) {
+                )
+                {
                     var int32Type = _compilation.GetSpecialType(SpecialType.System_Int32);
                     Debug.Assert(
                         !int32Type.HasUseSiteError,
@@ -2215,7 +2253,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                             WellKnownType.System_Runtime_CompilerServices_RuntimeCompatibilityAttribute
                         ) is MissingMetadataTypeSymbol
                     )
-                ) {
+                )
+                {
                     var boolType = _compilation.GetSpecialType(SpecialType.System_Boolean);
                     Debug.Assert(
                         !boolType.HasUseSiteError,
@@ -2268,7 +2307,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                     !string.IsNullOrEmpty(_compilation.Options.CryptoKeyContainer)
                     && (object)AssemblyKeyContainerAttributeSetting
                         == (object)CommonAssemblyWellKnownAttributeData.StringMissingValue
-                ) {
+                )
+                {
                     var stringType = _compilation.GetSpecialType(SpecialType.System_String);
                     Debug.Assert(
                         !stringType.HasUseSiteError,
@@ -2293,7 +2333,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                     !String.IsNullOrEmpty(_compilation.Options.CryptoKeyFile)
                     && (object)AssemblyKeyFileAttributeSetting
                         == (object)CommonAssemblyWellKnownAttributeData.StringMissingValue
-                ) {
+                )
+                {
                     var stringType = _compilation.GetSpecialType(SpecialType.System_String);
                     Debug.Assert(
                         !stringType.HasUseSiteError,
@@ -2404,7 +2445,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
 
         internal override IEnumerable<ImmutableArray<byte>> GetInternalsVisibleToPublicKeys(
             string simpleName
-        ) {
+        )
+        {
             //EDMAURER assume that if EnsureAttributesAreBound() returns, then the internals visible to map has been populated.
             //Do not optimize by checking if m_lazyInternalsVisibleToMap is Nothing. It may be non-null yet still
             //incomplete because another thread is in the process of building it.
@@ -2425,7 +2467,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
 
         internal override bool AreInternalsVisibleToThisAssembly(
             AssemblySymbol potentialGiverOfAccess
-        ) {
+        )
+        {
             // Ensure that optimistic IVT access is only granted to requests that originated on the thread
             //that is trying to compute the assembly identity. This gives us deterministic behavior when
             //two threads are checking IVT access but only one of them is in the process of computing identity.
@@ -2440,7 +2483,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                     //ThrowIfFalse(assemblyWhoseKeysAreBeingComputed Is Me);
                     if (
                         !potentialGiverOfAccess.GetInternalsVisibleToPublicKeys(this.Name).IsEmpty()
-                    ) {
+                    )
+                    {
                         if (_optimisticallyGrantedInternalsAccess == null)
                             Interlocked.CompareExchange(
                                 ref _optimisticallyGrantedInternalsAccess,
@@ -2487,7 +2531,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
 
         private static Location GetAssemblyAttributeLocationForDiagnostic(
             AttributeSyntax attributeSyntaxOpt
-        ) {
+        )
+        {
             return (object)attributeSyntaxOpt != null
               ? attributeSyntaxOpt.Location
               : NoLocation.Singleton;
@@ -2499,7 +2544,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                 CSharpAttributeData,
                 AttributeLocation
             > arguments
-        ) {
+        )
+        {
             // this code won't be called unless we bound a well-formed, semantically correct ctor call.
             Debug.Assert(!arguments.Attribute.HasErrors);
             var diagnostics = (BindingDiagnosticBag)arguments.Diagnostics;
@@ -2527,7 +2573,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                       ? GetAssemblyAttributeLocationForDiagnostic(arguments.AttributeSyntaxOpt)
                       : Location.None
                 )
-            ) {
+            )
+            {
                 return;
             }
 
@@ -2600,7 +2647,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                 string,
                 ConcurrentDictionary<ImmutableArray<byte>, Tuple<Location, string>>
             > lazyInternalsVisibleToMap
-        ) {
+        )
+        {
             // this code won't be called unless we bound a well-formed, semantically correct ctor call.
             Debug.Assert(!attrData.HasErrors);
 
@@ -2715,7 +2763,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                 CSharpAttributeData,
                 AttributeLocation
             > arguments
-        ) {
+        )
+        {
             DecodeWellKnownAttribute(ref arguments, arguments.Index, isFromNetModule: false);
         }
 
@@ -2727,7 +2776,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             > arguments,
             int index,
             bool isFromNetModule
-        ) {
+        )
+        {
             var attribute = arguments.Attribute;
             Debug.Assert(!attribute.HasErrors);
             Debug.Assert(arguments.SymbolPart == AttributeLocation.None);
@@ -2749,7 +2799,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                     this,
                     AttributeDescription.AssemblySignatureKeyAttribute
                 )
-            ) {
+            )
+            {
                 var signatureKey = (string)attribute.CommonConstructorArguments[0].ValueInternal;
                 arguments.GetOrCreateData<CommonAssemblyWellKnownAttributeData>().AssemblySignatureKeyAttributeSetting =
                     signatureKey;
@@ -2767,19 +2818,22 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             }
             else if (
                 attribute.IsTargetAttribute(this, AttributeDescription.AssemblyKeyFileAttribute)
-            ) {
+            )
+            {
                 arguments.GetOrCreateData<CommonAssemblyWellKnownAttributeData>().AssemblyKeyFileAttributeSetting =
                     (string)attribute.CommonConstructorArguments[0].ValueInternal;
             }
             else if (
                 attribute.IsTargetAttribute(this, AttributeDescription.AssemblyKeyNameAttribute)
-            ) {
+            )
+            {
                 arguments.GetOrCreateData<CommonAssemblyWellKnownAttributeData>().AssemblyKeyContainerAttributeSetting =
                     (string)attribute.CommonConstructorArguments[0].ValueInternal;
             }
             else if (
                 attribute.IsTargetAttribute(this, AttributeDescription.AssemblyDelaySignAttribute)
-            ) {
+            )
+            {
                 arguments.GetOrCreateData<CommonAssemblyWellKnownAttributeData>().AssemblyDelaySignAttributeSetting =
                     (bool)attribute.CommonConstructorArguments[0].ValueInternal
                         ? ThreeState.True
@@ -2787,7 +2841,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             }
             else if (
                 attribute.IsTargetAttribute(this, AttributeDescription.AssemblyVersionAttribute)
-            ) {
+            )
+            {
                 string verString = (string)attribute.CommonConstructorArguments[0].ValueInternal;
                 Version version;
                 if (
@@ -2796,7 +2851,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                         allowWildcard: !_compilation.IsEmitDeterministic,
                         version: out version
                     )
-                ) {
+                )
+                {
                     Location attributeArgumentSyntaxLocation =
                         attribute.GetAttributeArgumentSyntaxLocation(
                             0,
@@ -2817,7 +2873,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             }
             else if (
                 attribute.IsTargetAttribute(this, AttributeDescription.AssemblyFileVersionAttribute)
-            ) {
+            )
+            {
                 Version dummy;
                 string verString = (string)attribute.CommonConstructorArguments[0].ValueInternal;
                 if (!VersionHelper.TryParse(verString, version: out dummy))
@@ -2843,13 +2900,15 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             }
             else if (
                 attribute.IsTargetAttribute(this, AttributeDescription.AssemblyDescriptionAttribute)
-            ) {
+            )
+            {
                 arguments.GetOrCreateData<CommonAssemblyWellKnownAttributeData>().AssemblyDescriptionAttributeSetting =
                     (string)attribute.CommonConstructorArguments[0].ValueInternal;
             }
             else if (
                 attribute.IsTargetAttribute(this, AttributeDescription.AssemblyCultureAttribute)
-            ) {
+            )
+            {
                 var cultureString = (string)attribute.CommonConstructorArguments[0].ValueInternal;
                 if (!string.IsNullOrEmpty(cultureString))
                 {
@@ -2881,13 +2940,15 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             }
             else if (
                 attribute.IsTargetAttribute(this, AttributeDescription.AssemblyCompanyAttribute)
-            ) {
+            )
+            {
                 arguments.GetOrCreateData<CommonAssemblyWellKnownAttributeData>().AssemblyCompanyAttributeSetting =
                     (string)attribute.CommonConstructorArguments[0].ValueInternal;
             }
             else if (
                 attribute.IsTargetAttribute(this, AttributeDescription.AssemblyProductAttribute)
-            ) {
+            )
+            {
                 arguments.GetOrCreateData<CommonAssemblyWellKnownAttributeData>().AssemblyProductAttributeSetting =
                     (string)attribute.CommonConstructorArguments[0].ValueInternal;
             }
@@ -2896,7 +2957,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                     this,
                     AttributeDescription.AssemblyInformationalVersionAttribute
                 )
-            ) {
+            )
+            {
                 arguments.GetOrCreateData<CommonAssemblyWellKnownAttributeData>().AssemblyInformationalVersionAttributeSetting =
                     (string)attribute.CommonConstructorArguments[0].ValueInternal;
             }
@@ -2905,7 +2967,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                     this,
                     AttributeDescription.SatelliteContractVersionAttribute
                 )
-            ) {
+            )
+            {
                 //just check the format of this one, don't do anything else with it.
                 Version dummy;
                 string verString = (string)attribute.CommonConstructorArguments[0].ValueInternal;
@@ -2916,7 +2979,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                         allowWildcard: false,
                         version: out dummy
                     )
-                ) {
+                )
+                {
                     Location attributeArgumentSyntaxLocation =
                         attribute.GetAttributeArgumentSyntaxLocation(
                             0,
@@ -2930,13 +2994,15 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             }
             else if (
                 attribute.IsTargetAttribute(this, AttributeDescription.AssemblyCopyrightAttribute)
-            ) {
+            )
+            {
                 arguments.GetOrCreateData<CommonAssemblyWellKnownAttributeData>().AssemblyCopyrightAttributeSetting =
                     (string)attribute.CommonConstructorArguments[0].ValueInternal;
             }
             else if (
                 attribute.IsTargetAttribute(this, AttributeDescription.AssemblyTrademarkAttribute)
-            ) {
+            )
+            {
                 arguments.GetOrCreateData<CommonAssemblyWellKnownAttributeData>().AssemblyTrademarkAttributeSetting =
                     (string)attribute.CommonConstructorArguments[0].ValueInternal;
             }
@@ -2947,7 +3013,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                         AttributeDescription.AssemblyFlagsAttribute
                     )
                 ) != -1
-            ) {
+            )
+            {
                 object value = attribute.CommonConstructorArguments[0].ValueInternal;
                 AssemblyFlags nameFlags;
 
@@ -2973,12 +3040,14 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             }
             else if (
                 attribute.IsTargetAttribute(this, AttributeDescription.ClassInterfaceAttribute)
-            ) {
+            )
+            {
                 attribute.DecodeClassInterfaceAttribute(arguments.AttributeSyntaxOpt, diagnostics);
             }
             else if (
                 attribute.IsTargetAttribute(this, AttributeDescription.TypeLibVersionAttribute)
-            ) {
+            )
+            {
                 ValidateIntegralAttributeNonNegativeArguments(
                     attribute,
                     arguments.AttributeSyntaxOpt,
@@ -2990,7 +3059,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                     this,
                     AttributeDescription.ComCompatibleVersionAttribute
                 )
-            ) {
+            )
+            {
                 ValidateIntegralAttributeNonNegativeArguments(
                     attribute,
                     arguments.AttributeSyntaxOpt,
@@ -3006,13 +3076,15 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                     this,
                     AttributeDescription.CompilationRelaxationsAttribute
                 )
-            ) {
+            )
+            {
                 arguments.GetOrCreateData<CommonAssemblyWellKnownAttributeData>().HasCompilationRelaxationsAttribute =
                     true;
             }
             else if (
                 attribute.IsTargetAttribute(this, AttributeDescription.ReferenceAssemblyAttribute)
-            ) {
+            )
+            {
                 arguments.GetOrCreateData<CommonAssemblyWellKnownAttributeData>().HasReferenceAssemblyAttribute =
                     true;
             }
@@ -3021,7 +3093,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                     this,
                     AttributeDescription.RuntimeCompatibilityAttribute
                 )
-            ) {
+            )
+            {
                 bool wrapNonExceptionThrows = true;
 
                 foreach (var namedArg in attribute.CommonNamedArguments)
@@ -3047,7 +3120,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             else if (
                 !isFromNetModule
                 && attribute.IsTargetAttribute(this, AttributeDescription.TypeForwardedToAttribute)
-            ) {
+            )
+            {
                 DecodeTypeForwardedToAttribute(ref arguments);
             }
             else if (
@@ -3055,7 +3129,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                     this,
                     AttributeDescription.CaseSensitiveExtensionAttribute
                 )
-            ) {
+            )
+            {
                 if ((object)arguments.AttributeSyntaxOpt != null)
                 {
                     // [Extension] attribute should not be set explicitly.
@@ -3072,7 +3147,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                         AttributeDescription.AssemblyAlgorithmIdAttribute
                     )
                 ) != -1
-            ) {
+            )
+            {
                 object value = attribute.CommonConstructorArguments[0].ValueInternal;
                 AssemblyHashAlgorithm algorithmId;
 
@@ -3095,7 +3171,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             CSharpAttributeData attribute,
             AttributeSyntax nodeOpt,
             BindingDiagnosticBag diagnostics
-        ) {
+        )
+        {
             Debug.Assert(!attribute.HasErrors);
 
             int argCount = attribute.CommonConstructorArguments.Length;
@@ -3178,7 +3255,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
         /// </summary>
         internal ImmutableArray<Diagnostic> GetUnusedFieldWarnings(
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             if (_unusedFieldWarnings.IsDefault)
             {
                 //Our maps of unread and unassigned fields won't be done until the assembly is complete.
@@ -3254,7 +3332,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                     if (
                         (object)associatedPropertyOrEvent != null
                         && associatedPropertyOrEvent.Kind == SymbolKind.Event
-                    ) {
+                    )
+                    {
                         if (unread)
                         {
                             diagnostics.Add(
@@ -3346,7 +3425,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
         internal override NamedTypeSymbol TryLookupForwardedMetadataTypeWithCycleDetection(
             ref MetadataTypeName emittedName,
             ConsList<AssemblySymbol> visitedAssemblies
-        ) {
+        )
+        {
             int forcedArity = emittedName.ForcedArity;
 
             if (emittedName.UseCLSCompliantNameArityEncoding)
@@ -3416,7 +3496,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                         || result.Arity == 0
                         || result.MangleName
                     )
-                ) {
+                )
+                {
                     return result;
                 }
             }

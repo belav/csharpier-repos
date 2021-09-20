@@ -32,7 +32,8 @@ namespace Microsoft.Extensions.Logging.EventLog
             string name,
             EventLogSettings settings,
             IExternalScopeProvider externalScopeProvider
-        ) {
+        )
+        {
             _name = name ?? throw new ArgumentNullException(nameof(name));
             _settings = settings ?? throw new ArgumentNullException(nameof(settings));
 
@@ -72,7 +73,8 @@ namespace Microsoft.Extensions.Logging.EventLog
             TState state,
             Exception exception,
             Func<TState, Exception, string> formatter
-        ) {
+        )
+        {
             if (!IsEnabled(logLevel))
             {
                 return;

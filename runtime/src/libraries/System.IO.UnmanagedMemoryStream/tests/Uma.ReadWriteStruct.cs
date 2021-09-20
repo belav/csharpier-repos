@@ -21,7 +21,8 @@ namespace System.IO.Tests
                     capacity,
                     FileAccess.ReadWrite
                 )
-            ) {
+            )
+            {
                 AssertExtensions.Throws<ArgumentOutOfRangeException>(
                     "position",
                     () => uma.Write<UmaTestStruct>(-1, ref inStruct)
@@ -69,7 +70,8 @@ namespace System.IO.Tests
                     capacity,
                     FileAccess.Write
                 )
-            ) {
+            )
+            {
                 Assert.Throws<NotSupportedException>(
                     () => uma.Read<UmaTestStruct>(0, out inStruct)
                 );
@@ -89,7 +91,8 @@ namespace System.IO.Tests
                     capacity,
                     FileAccess.Read
                 )
-            ) {
+            )
+            {
                 Assert.Throws<NotSupportedException>(
                     () => uma.Write<UmaTestStruct>(0, ref inStruct)
                 );
@@ -109,7 +112,8 @@ namespace System.IO.Tests
                     capacity,
                     FileAccess.ReadWrite
                 )
-            ) {
+            )
+            {
                 AssertExtensions.Throws<ArgumentOutOfRangeException>(
                     "position",
                     () => uma.Write<UmaTestStruct>(capacity, ref inStruct)
@@ -134,7 +138,8 @@ namespace System.IO.Tests
                     capacity,
                     FileAccess.ReadWrite
                 )
-            ) {
+            )
+            {
                 AssertExtensions.Throws<ArgumentException>(
                     "position",
                     () =>
@@ -254,7 +259,8 @@ namespace System.IO.Tests
                     capacity,
                     FileAccess.ReadWrite
                 )
-            ) {
+            )
+            {
                 uma.Write<UmaTestStruct>(capacity - UmaTestStruct_AlignedSize, ref inStruct);
                 uma.Read<UmaTestStruct>(capacity - UmaTestStruct_AlignedSize, out outStruct);
                 Assert.Equal(inStruct.int1, outStruct.int1);

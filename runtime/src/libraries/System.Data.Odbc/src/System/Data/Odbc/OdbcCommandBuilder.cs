@@ -77,7 +77,8 @@ namespace System.Data.Odbc
             DataRow datarow,
             StatementType statementType,
             bool whereClause
-        ) {
+        )
+        {
             OdbcParameter p = (OdbcParameter)parameter;
             object valueType = datarow[SchemaTableColumn.ProviderType];
             p.OdbcType = (OdbcType)valueType;
@@ -161,7 +162,8 @@ namespace System.Data.Odbc
         private static OdbcParameter[] DeriveParametersFromStoredProcedure(
             OdbcConnection connection,
             OdbcCommand command
-        ) {
+        )
+        {
             List<OdbcParameter> rParams = new List<OdbcParameter>();
 
             // following call ensures that the command has a statement handle allocated
@@ -207,7 +209,8 @@ namespace System.Data.Odbc
                     cmdWrapper,
                     CommandBehavior.Default
                 )
-            ) {
+            )
+            {
                 reader.FirstResult();
                 cColsAffected = reader.FieldCount;
 

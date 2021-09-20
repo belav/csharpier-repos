@@ -33,7 +33,8 @@ namespace System.IO
             Stream stream,
             FormattedBytesCallback writeCallback,
             FormattedBytesCallback readCallback
-        ) {
+        )
+        {
             _stream = stream;
             _readCallback = readCallback;
             _writeCallback = writeCallback;
@@ -118,7 +119,8 @@ namespace System.IO
             int offset,
             int count,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             int read = await _stream.ReadAsync(buffer, offset, count, cancellationToken)
                 .ConfigureAwait(false);
             FormatBytes(read: true, buffer.AsSpan(offset, read));
@@ -128,7 +130,8 @@ namespace System.IO
         public override async ValueTask<int> ReadAsync(
             Memory<byte> buffer,
             CancellationToken cancellationToken = default
-        ) {
+        )
+        {
             int read = await _stream.ReadAsync(buffer, cancellationToken).ConfigureAwait(false);
             FormatBytes(read: true, buffer.Span.Slice(0, read));
             return read;
@@ -157,7 +160,8 @@ namespace System.IO
             int offset,
             int count,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             FormatBytes(read: false, buffer.AsSpan(offset, count));
             return _stream.WriteAsync(buffer, offset, count, cancellationToken);
         }
@@ -165,7 +169,8 @@ namespace System.IO
         public override ValueTask WriteAsync(
             ReadOnlyMemory<byte> buffer,
             CancellationToken cancellationToken = default
-        ) {
+        )
+        {
             FormatBytes(read: false, buffer.Span);
             return _stream.WriteAsync(buffer, cancellationToken);
         }
@@ -176,7 +181,8 @@ namespace System.IO
             int count,
             AsyncCallback? callback,
             object? state
-        ) {
+        )
+        {
             FormatBytes(read: false, buffer.AsSpan(offset, count));
             return _stream.BeginWrite(buffer, offset, count, callback, state);
         }

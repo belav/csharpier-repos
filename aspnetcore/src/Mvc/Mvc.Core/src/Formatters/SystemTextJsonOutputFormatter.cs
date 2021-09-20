@@ -59,7 +59,8 @@ namespace Microsoft.AspNetCore.Mvc.Formatters
         public sealed override async Task WriteResponseBodyAsync(
             OutputFormatterWriteContext context,
             Encoding selectedEncoding
-        ) {
+        )
+        {
             if (context == null)
             {
                 throw new ArgumentNullException(nameof(context));

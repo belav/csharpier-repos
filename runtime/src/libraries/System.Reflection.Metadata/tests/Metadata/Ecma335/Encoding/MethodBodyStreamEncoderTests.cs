@@ -13,7 +13,8 @@ namespace System.Reflection.Metadata.Ecma335.Tests
             BlobBuilder builder,
             ControlFlowBuilder branchBuilder,
             int size
-        ) {
+        )
+        {
             Assert.Equal(0, builder.Count);
 
             const byte filling = 0x01;

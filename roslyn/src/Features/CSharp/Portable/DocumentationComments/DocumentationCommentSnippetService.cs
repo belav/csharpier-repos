@@ -38,7 +38,8 @@ namespace Microsoft.CodeAnalysis.CSharp.DocumentationComments
             SyntaxTree syntaxTree,
             int position,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             return syntaxTree.GetRoot(cancellationToken)
                 .FindToken(position)
                 .GetAncestor<MemberDeclarationSyntax>();
@@ -97,7 +98,8 @@ namespace Microsoft.CodeAnalysis.CSharp.DocumentationComments
 
         protected override List<string> GetDocumentationCommentStubLines(
             MemberDeclarationSyntax member
-        ) {
+        )
+        {
             var list = new List<string> { "/// <summary>", "/// ", "/// </summary>" };
 
             var typeParameterList = member.GetTypeParameterList();
@@ -127,7 +129,8 @@ namespace Microsoft.CodeAnalysis.CSharp.DocumentationComments
                 || member.IsKind(SyntaxKind.IndexerDeclaration)
                 || member.IsKind(SyntaxKind.DelegateDeclaration)
                 || member.IsKind(SyntaxKind.OperatorDeclaration)
-            ) {
+            )
+            {
                 var returnType = member.GetMemberType();
                 if (
                     returnType != null
@@ -137,7 +140,8 @@ namespace Microsoft.CodeAnalysis.CSharp.DocumentationComments
                             out PredefinedTypeSyntax? predefinedType
                         ) && predefinedType.Keyword.IsKindOrHasMatchingText(SyntaxKind.VoidKeyword)
                     )
-                ) {
+                )
+                {
                     list.Add("/// <returns></returns>");
                 }
             }
@@ -149,7 +153,8 @@ namespace Microsoft.CodeAnalysis.CSharp.DocumentationComments
             SyntaxTree syntaxTree,
             int position,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             if (position >= syntaxTree.GetText(cancellationToken).Length)
             {
                 return default;
@@ -167,7 +172,8 @@ namespace Microsoft.CodeAnalysis.CSharp.DocumentationComments
             SyntaxTree syntaxTree,
             int position,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             if (position < 1)
             {
                 return default;
@@ -191,7 +197,8 @@ namespace Microsoft.CodeAnalysis.CSharp.DocumentationComments
         protected override bool IsSingleExteriorTrivia(
             DocumentationCommentTriviaSyntax documentationComment,
             bool allowWhitespace = false
-        ) {
+        )
+        {
             if (IsMultilineDocComment(documentationComment))
             {
                 return false;
@@ -236,7 +243,8 @@ namespace Microsoft.CodeAnalysis.CSharp.DocumentationComments
 
         private static IList<SyntaxToken> GetTextTokensFollowingExteriorTrivia(
             XmlTextSyntax xmlText
-        ) {
+        )
+        {
             var result = new List<SyntaxToken>();
 
             var tokenList = xmlText.TextTokens;
@@ -257,7 +265,8 @@ namespace Microsoft.CodeAnalysis.CSharp.DocumentationComments
 
         protected override bool EndsWithSingleExteriorTrivia(
             DocumentationCommentTriviaSyntax? documentationComment
-        ) {
+        )
+        {
             if (documentationComment == null)
             {
                 return false;

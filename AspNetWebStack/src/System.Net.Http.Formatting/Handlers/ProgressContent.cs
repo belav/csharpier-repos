@@ -20,7 +20,8 @@ namespace System.Net.Http.Handlers
             HttpContent innerContent,
             ProgressMessageHandler handler,
             HttpRequestMessage request
-        ) {
+        )
+        {
             Contract.Assert(innerContent != null);
             Contract.Assert(handler != null);
             Contract.Assert(request != null);

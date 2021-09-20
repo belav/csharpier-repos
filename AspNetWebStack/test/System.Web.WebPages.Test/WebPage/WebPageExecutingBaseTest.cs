@@ -241,7 +241,8 @@ namespace System.Web.WebPages.Test
             PositionTagged<string> prefix,
             PositionTagged<string> suffix,
             string expected
-        ) {
+        )
+        {
             WriteAttributeTest(name, prefix, suffix, new AttributeValue[0], expected);
         }
 
@@ -251,7 +252,8 @@ namespace System.Web.WebPages.Test
             PositionTagged<string> suffix,
             AttributeValue[] values,
             string expected
-        ) {
+        )
+        {
             // Arrange
             var pageMock = new Mock<WebPageExecutingBase>() { CallBase = true };
             pageMock.Setup(p => p.Context).Returns(new Mock<HttpContextBase>().Object);

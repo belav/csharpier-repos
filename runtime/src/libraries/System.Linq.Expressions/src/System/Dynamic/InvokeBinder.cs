@@ -63,7 +63,8 @@ namespace System.Dynamic
         public sealed override DynamicMetaObject Bind(
             DynamicMetaObject target,
             DynamicMetaObject[] args
-        ) {
+        )
+        {
             ContractUtils.RequiresNotNull(target, nameof(target));
             ContractUtils.RequiresNotNullItems(args, nameof(args));
 

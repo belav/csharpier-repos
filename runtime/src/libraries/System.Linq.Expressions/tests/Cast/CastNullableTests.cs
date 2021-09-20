@@ -88,35 +88,40 @@ namespace System.Linq.Expressions.Tests
         [Theory, ClassData(typeof(CompilationTypes))]
         public static void ConvertGenericWithStructRestrictionCastObjectAsStruct(
             bool useInterpreter
-        ) {
+        )
+        {
             CheckGenericWithStructRestrictionCastObjectHelper<S>(useInterpreter);
         }
 
         [Theory, ClassData(typeof(CompilationTypes))]
         public static void ConvertGenericWithStructRestrictionCastObjectAsStructWithStringAndField(
             bool useInterpreter
-        ) {
+        )
+        {
             CheckGenericWithStructRestrictionCastObjectHelper<Scs>(useInterpreter);
         }
 
         [Theory, ClassData(typeof(CompilationTypes))]
         public static void ConvertGenericWithStructRestrictionCastValueTypeAsEnum(
             bool useInterpreter
-        ) {
+        )
+        {
             CheckGenericWithStructRestrictionCastValueTypeHelper<E>(useInterpreter);
         }
 
         [Theory, ClassData(typeof(CompilationTypes))]
         public static void ConvertGenericWithStructRestrictionCastValueTypeAsStruct(
             bool useInterpreter
-        ) {
+        )
+        {
             CheckGenericWithStructRestrictionCastValueTypeHelper<S>(useInterpreter);
         }
 
         [Theory, ClassData(typeof(CompilationTypes))]
         public static void ConvertGenericWithStructRestrictionCastValueTypeAsStructWithStringAndField(
             bool useInterpreter
-        ) {
+        )
+        {
             CheckGenericWithStructRestrictionCastValueTypeHelper<Scs>(useInterpreter);
         }
 
@@ -197,7 +202,8 @@ namespace System.Linq.Expressions.Tests
         private static void VerifyNullableStructCastIEquatableOfStruct(
             S? value,
             bool useInterpreter
-        ) {
+        )
+        {
             Expression<Func<IEquatable<S>>> e = Expression.Lambda<Func<IEquatable<S>>>(
                 Expression.Convert(Expression.Constant(value, typeof(S?)), typeof(IEquatable<S>)),
                 Enumerable.Empty<ParameterExpression>()

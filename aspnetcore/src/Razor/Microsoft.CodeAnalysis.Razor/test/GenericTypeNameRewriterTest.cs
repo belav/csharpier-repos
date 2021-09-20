@@ -29,7 +29,8 @@ namespace Microsoft.CodeAnalysis.Razor
         public void GenericTypeNameRewriter_CanReplaceTypeParametersWithTypeArguments(
             string original,
             string expected
-        ) {
+        )
+        {
             // Arrange
             var visitor = new GenericTypeNameRewriter(
                 new Dictionary<string, string>()

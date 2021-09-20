@@ -57,7 +57,8 @@ namespace System.Security.Cryptography
             int keySize,
             CspParameters? parameters,
             bool useDefaultKeySize
-        ) {
+        )
+        {
             if (keySize < 0)
             {
                 throw new ArgumentOutOfRangeException(
@@ -434,7 +435,8 @@ namespace System.Security.Cryptography
             ReadOnlySpan<byte> passwordBytes,
             ReadOnlySpan<byte> source,
             out int bytesRead
-        ) {
+        )
+        {
             ThrowIfDisposed();
             base.ImportEncryptedPkcs8PrivateKey(passwordBytes, source, out bytesRead);
         }
@@ -443,7 +445,8 @@ namespace System.Security.Cryptography
             ReadOnlySpan<char> password,
             ReadOnlySpan<byte> source,
             out int bytesRead
-        ) {
+        )
+        {
             ThrowIfDisposed();
             base.ImportEncryptedPkcs8PrivateKey(password, source, out bytesRead);
         }
@@ -598,7 +601,8 @@ namespace System.Security.Cryptography
                 || keyBlob[10] != 0x41
                 || keyBlob[9] != 0x53
                 || keyBlob[8] != 0x52
-            ) {
+            )
+            {
                 return false;
             }
             return true;
@@ -609,7 +613,8 @@ namespace System.Security.Cryptography
             int offset,
             int count,
             HashAlgorithmName hashAlgorithm
-        ) {
+        )
+        {
             // we're sealed and the base should have checked this already
             Debug.Assert(data != null);
             Debug.Assert(count >= 0 && count <= data.Length);
@@ -720,7 +725,8 @@ namespace System.Security.Cryptography
             byte[] hash,
             HashAlgorithmName hashAlgorithm,
             RSASignaturePadding padding
-        ) {
+        )
+        {
             if (hash == null)
                 throw new ArgumentNullException(nameof(hash));
             if (string.IsNullOrEmpty(hashAlgorithm.Name))
@@ -738,7 +744,8 @@ namespace System.Security.Cryptography
             byte[] signature,
             HashAlgorithmName hashAlgorithm,
             RSASignaturePadding padding
-        ) {
+        )
+        {
             if (hash == null)
                 throw new ArgumentNullException(nameof(hash));
             if (signature == null)

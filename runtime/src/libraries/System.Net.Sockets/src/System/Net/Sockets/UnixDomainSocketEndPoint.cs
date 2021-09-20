@@ -63,7 +63,8 @@ namespace System.Net.Sockets
             if (
                 socketAddress.Family != EndPointAddressFamily
                 || socketAddress.Size > s_nativeAddressSize
-            ) {
+            )
+            {
                 throw new ArgumentOutOfRangeException(nameof(socketAddress));
             }
 

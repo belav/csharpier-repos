@@ -50,7 +50,8 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.ChangeSignature
             bool expectedCodeAction = true,
             string expectedCode = null,
             int index = 0
-        ) {
+        )
+        {
             if (expectedCodeAction)
             {
                 var testOptions = new TestParameters();
@@ -117,7 +118,8 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.ChangeSignature
             ParseOptions parseOptions = null,
             OptionsCollection options = null,
             int expectedSelectedIndex = -1
-        ) {
+        )
+        {
             using (
                 var testState = ChangeSignatureTestState.Create(
                     markup,
@@ -125,7 +127,8 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.ChangeSignature
                     parseOptions,
                     options
                 )
-            ) {
+            )
+            {
                 testState.TestChangeSignatureOptionsService.UpdatedSignature = updatedSignature;
                 var result = await testState.ChangeSignatureAsync().ConfigureAwait(false);
 
@@ -189,7 +192,8 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.ChangeSignature
             Document document,
             int? totalParameters,
             string fileContents
-        ) {
+        )
+        {
             if (diagnostics.Length == 0)
             {
                 return string.Empty;
@@ -208,7 +212,8 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.ChangeSignature
             Document document,
             AddedParameterOrExistingIndex[] signature,
             int? totalParameters
-        ) {
+        )
+        {
             var existingParametersKept = signature.Where(p => p.IsExisting)
                 .Select(p => p.OldIndex)
                 .ToArray();
@@ -257,7 +262,8 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.ChangeSignature
         /// described above.</param>
         public static IEnumerable<object> GetAllSignatureSpecificationsForTheory(
             int[] signaturePartCounts
-        ) {
+        )
+        {
             Assert.Equal(4, signaturePartCounts.Length);
             Assert.True(signaturePartCounts[0] == 0 || signaturePartCounts[0] == 1);
             Assert.True(signaturePartCounts[3] == 0 || signaturePartCounts[3] == 1);
@@ -345,7 +351,8 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.ChangeSignature
         private static IEnumerable<int> GetListWithoutElementAtIndex(
             IEnumerable<int> list,
             int skippedIndex
-        ) {
+        )
+        {
             var index = 0;
             foreach (var x in list)
             {

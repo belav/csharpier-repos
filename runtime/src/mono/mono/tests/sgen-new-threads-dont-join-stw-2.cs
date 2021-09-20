@@ -21,7 +21,8 @@ class Driver
                         );
                         timeout.HaveTimeLeft;
 
-                    ) {
+                    )
+                    {
                         Thread worker = new Thread(
                             new ThreadStart(
                                 () =>

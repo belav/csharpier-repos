@@ -113,7 +113,8 @@ namespace JIT.HardwareIntrinsics.X86
 
             public void RunStructFldScenario(
                 SimdScalarUnaryOpConvertTest__ConvertToInt64Vector128Single testClass
-            ) {
+            )
+            {
                 var result = Sse.X64.ConvertToInt64(_fld);
                 testClass.ValidateResult(_fld, result);
             }
@@ -349,7 +350,8 @@ namespace JIT.HardwareIntrinsics.X86
             Vector128<Single> firstOp,
             Int64 result,
             [CallerMemberName] string method = ""
-        ) {
+        )
+        {
             Single[] inArray = new Single[Op1ElementCount];
             Unsafe.WriteUnaligned(ref Unsafe.As<Single, byte>(ref inArray[0]), firstOp);
             ValidateResult(inArray, result, method);
@@ -359,7 +361,8 @@ namespace JIT.HardwareIntrinsics.X86
             void* firstOp,
             Int64 result,
             [CallerMemberName] string method = ""
-        ) {
+        )
+        {
             Single[] inArray = new Single[Op1ElementCount];
             Unsafe.CopyBlockUnaligned(
                 ref Unsafe.As<Single, byte>(ref inArray[0]),
@@ -373,7 +376,8 @@ namespace JIT.HardwareIntrinsics.X86
             Single[] firstOp,
             Int64 result,
             [CallerMemberName] string method = ""
-        ) {
+        )
+        {
             bool succeeded = true;
 
             if ((long)Math.Round(firstOp[0]) != result)

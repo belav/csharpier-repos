@@ -32,7 +32,8 @@ namespace Microsoft.CodeAnalysis.ExternalAccess.VSTypeScript.Api
             string replacementText,
             OptionSet optionSet,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var info = await _set.GetReplacementsAsync(
                     replacementText,
                     optionSet,

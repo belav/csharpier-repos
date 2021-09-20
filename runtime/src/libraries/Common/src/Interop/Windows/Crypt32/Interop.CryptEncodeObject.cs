@@ -14,7 +14,8 @@ internal static partial class Interop
             void* pvStructInfo,
             byte[]? pbEncoded,
             ref int pcbEncoded
-        ) {
+        )
+        {
             return CryptEncodeObject(
                 dwCertEncodingType,
                 (IntPtr)lpszStructType,

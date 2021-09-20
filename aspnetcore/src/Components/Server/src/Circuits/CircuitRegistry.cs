@@ -48,7 +48,8 @@ namespace Microsoft.AspNetCore.Components.Server.Circuits
             IOptions<CircuitOptions> options,
             ILogger<CircuitRegistry> logger,
             CircuitIdFactory CircuitHostFactory
-        ) {
+        )
+        {
             _options = options.Value;
             _logger = logger;
             _circuitIdFactory = CircuitHostFactory;
@@ -129,7 +130,8 @@ namespace Microsoft.AspNetCore.Components.Server.Circuits
                     connectionId,
                     StringComparison.Ordinal
                 )
-            ) {
+            )
+            {
                 Log.CircuitConnectedToDifferentConnection(
                     _logger,
                     circuitId,
@@ -186,7 +188,8 @@ namespace Microsoft.AspNetCore.Components.Server.Circuits
             IClientProxy clientProxy,
             string connectionId,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             Log.CircuitConnectStarted(_logger, circuitId);
 
             CircuitHost circuitHost;
@@ -254,7 +257,8 @@ namespace Microsoft.AspNetCore.Components.Server.Circuits
             CircuitId circuitId,
             IClientProxy clientProxy,
             string connectionId
-        ) {
+        )
+        {
             if (ConnectedCircuits.TryGetValue(circuitId, out var connectedCircuitHost))
             {
                 Log.ConnectingToActiveCircuit(
@@ -274,7 +278,8 @@ namespace Microsoft.AspNetCore.Components.Server.Circuits
                     circuitId.Secret,
                     out DisconnectedCircuitEntry disconnectedEntry
                 )
-            ) {
+            )
+            {
                 Log.ConnectingToDisconnectedCircuit(
                     _logger,
                     disconnectedEntry.CircuitHost.CircuitId,
@@ -300,7 +305,8 @@ namespace Microsoft.AspNetCore.Components.Server.Circuits
             object value,
             EvictionReason reason,
             object state
-        ) {
+        )
+        {
             switch (reason)
             {
                 case EvictionReason.Expired:
@@ -359,7 +365,8 @@ namespace Microsoft.AspNetCore.Components.Server.Circuits
                 if (
                     ConnectedCircuits.TryGetValue(circuitId, out circuitHost)
                     || DisconnectedCircuits.TryGetValue(circuitId.Secret, out entry)
-                ) {
+                )
+                {
                     circuitHost ??= entry.CircuitHost;
                     DisconnectedCircuits.Remove(circuitId.Secret);
                     ConnectedCircuits.TryRemove(circuitId, out _);
@@ -382,7 +389,8 @@ namespace Microsoft.AspNetCore.Components.Server.Circuits
         private async void CircuitHost_UnhandledException(
             object sender,
             UnhandledExceptionEventArgs e
-        ) {
+        )
+        {
             var circuitHost = (CircuitHost)sender;
 
             try
@@ -402,7 +410,8 @@ namespace Microsoft.AspNetCore.Components.Server.Circuits
             public DisconnectedCircuitEntry(
                 CircuitHost circuitHost,
                 CancellationTokenSource tokenSource
-            ) {
+            )
+            {
                 CircuitHost = circuitHost;
                 TokenSource = tokenSource;
             }

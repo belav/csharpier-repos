@@ -23,7 +23,8 @@ namespace Microsoft.AspNetCore.Mvc.Razor.RuntimeCompilation
         public RazorReferenceManager(
             ApplicationPartManager partManager,
             IOptions<MvcRazorRuntimeCompilationOptions> options
-        ) {
+        )
+        {
             _partManager = partManager;
             _options = options.Value;
         }

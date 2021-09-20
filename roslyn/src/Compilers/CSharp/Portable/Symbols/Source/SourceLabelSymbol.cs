@@ -27,7 +27,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             MethodSymbol containingMethod,
             SyntaxNodeOrToken identifierNodeOrToken,
             ConstantValue? switchCaseLabelConstant = null
-        ) {
+        )
+        {
             Debug.Assert(identifierNodeOrToken.IsToken || identifierNodeOrToken.IsNode);
             _containingMethod = containingMethod;
             _identifierNodeOrToken = identifierNodeOrToken;
@@ -64,7 +65,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
         public SourceLabelSymbol(
             MethodSymbol containingMethod,
             ConstantValue switchCaseLabelConstant
-        ) {
+        )
+        {
             _containingMethod = containingMethod;
             _identifierNodeOrToken = default(SyntaxToken);
             _switchCaseLabelConstant = switchCaseLabelConstant;

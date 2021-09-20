@@ -47,7 +47,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
             bool allowNullReference = false,
             bool allowOutOfMemory = false,
             bool allowDiagnosticsMismatch = false
-        ) {
+        )
+        {
             var (tree, sourceText) = TryParseTree(
                 stringText,
                 options,
@@ -87,7 +88,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
             bool allowNullReference,
             bool allowOutOfMemory,
             bool allowDiagnosticsMismatch
-        ) {
+        )
+        {
             // Trim the input from the right and make sure tree invariants hold
             var current = stringText;
             while (current != "@\"\"" && current != "\"\"")
@@ -147,7 +149,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
             string stringText,
             RegexOptions options,
             bool conversionFailureOk
-        ) {
+        )
+        {
             var token = GetStringToken(stringText);
             var allChars = _service.TryConvertToVirtualChars(token);
             if (allChars.IsDefault)
@@ -168,7 +171,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
             bool allowNullReference,
             bool allowOutOfMemeory,
             bool allowDiagnosticsMismatch = false
-        ) {
+        )
+        {
             var (token, tree, allChars) = JustParseTree(stringText, options, conversionFailureOk);
             if (tree == null)
             {
@@ -368,7 +372,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
             RegexToken token,
             ref int position,
             VirtualCharSequence allChars
-        ) {
+        )
+        {
             CheckInvariants(token.LeadingTrivia, ref position, allChars);
             CheckCharacters(token.VirtualChars, ref position, allChars);
         }
@@ -377,7 +382,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
             ImmutableArray<RegexTrivia> leadingTrivia,
             ref int position,
             VirtualCharSequence allChars
-        ) {
+        )
+        {
             foreach (var trivia in leadingTrivia)
             {
                 CheckInvariants(trivia, ref position, allChars);
@@ -388,7 +394,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
             RegexTrivia trivia,
             ref int position,
             VirtualCharSequence allChars
-        ) {
+        )
+        {
             switch (trivia.Kind)
             {
                 case RegexKind.CommentTrivia:
@@ -406,7 +413,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
             VirtualCharSequence virtualChars,
             ref int position,
             VirtualCharSequence allChars
-        ) {
+        )
+        {
             for (var i = 0; i < virtualChars.Length; i++)
             {
                 Assert.Equal(allChars[position + i], virtualChars[i]);

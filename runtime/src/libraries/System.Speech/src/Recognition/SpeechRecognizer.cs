@@ -152,7 +152,8 @@ namespace System.Speech.Recognition
         public RecognitionResult EmulateRecognize(
             RecognizedWordUnit[] wordUnits,
             CompareOptions compareOptions
-        ) {
+        )
+        {
             if (Enabled)
             {
                 return RecoBase.EmulateRecognize(wordUnits, compareOptions);
@@ -187,7 +188,8 @@ namespace System.Speech.Recognition
         public void EmulateRecognizeAsync(
             RecognizedWordUnit[] wordUnits,
             CompareOptions compareOptions
-        ) {
+        )
+        {
             if (Enabled)
             {
                 RecoBase.EmulateRecognizeAsync(wordUnits, compareOptions);
@@ -210,7 +212,8 @@ namespace System.Speech.Recognition
         public void RequestRecognizerUpdate(
             object userToken,
             TimeSpan audioPositionAheadToRaiseUpdate
-        ) {
+        )
+        {
             RecoBase.RequestRecognizerUpdate(userToken, audioPositionAheadToRaiseUpdate);
         }
 
@@ -345,7 +348,8 @@ namespace System.Speech.Recognition
         private void EmulateRecognizeCompletedProxy(
             object sender,
             EmulateRecognizeCompletedEventArgs e
-        ) {
+        )
+        {
             EventHandler<EmulateRecognizeCompletedEventArgs> emulateRecognizeCompletedHandler =
                 EmulateRecognizeCompleted;
             if (emulateRecognizeCompletedHandler != null)
@@ -385,7 +389,8 @@ namespace System.Speech.Recognition
         private void SpeechRecognitionRejectedProxy(
             object sender,
             SpeechRecognitionRejectedEventArgs e
-        ) {
+        )
+        {
             EventHandler<SpeechRecognitionRejectedEventArgs> speechRecognitionRejectedHandler =
                 SpeechRecognitionRejected;
             if (speechRecognitionRejectedHandler != null)
@@ -417,7 +422,8 @@ namespace System.Speech.Recognition
         private void AudioSignalProblemOccurredProxy(
             object sender,
             AudioSignalProblemOccurredEventArgs e
-        ) {
+        )
+        {
             EventHandler<AudioSignalProblemOccurredEventArgs> audioSignalProblemOccurredHandler =
                 _audioSignalProblemOccurredDelegate;
             if (audioSignalProblemOccurredHandler != null)

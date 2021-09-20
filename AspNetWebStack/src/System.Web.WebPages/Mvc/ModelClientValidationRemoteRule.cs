@@ -21,7 +21,8 @@ namespace System.Web.Mvc
             string url,
             string httpMethod,
             string additionalFields
-        ) {
+        )
+        {
             ErrorMessage = errorMessage;
             ValidationType = "remote";
             ValidationParameters["url"] = url;

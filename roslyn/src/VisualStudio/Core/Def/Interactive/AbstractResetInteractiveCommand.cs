@@ -28,7 +28,8 @@ namespace Roslyn.VisualStudio.Services.Interactive
             VisualStudioWorkspace workspace,
             VsInteractiveWindowProvider interactiveWindowProvider,
             IServiceProvider serviceProvider
-        ) {
+        )
+        {
             _workspace = workspace;
             _interactiveWindowProvider = interactiveWindowProvider;
             _serviceProvider = serviceProvider;

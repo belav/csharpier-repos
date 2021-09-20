@@ -193,7 +193,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.NavigationBar
                     if (
                         currentContextDocumentId != null
                         && currentContextDocumentId.ProjectId == args.ProjectId
-                    ) {
+                    )
+                    {
                         StartModelUpdateAndSelectedItemUpdateTasks(modelUpdateDelay: 0);
                     }
                 }
@@ -202,7 +203,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.NavigationBar
             if (
                 args.Kind == WorkspaceChangeKind.DocumentChanged
                 && args.OldSolution == args.NewSolution
-            ) {
+            )
+            {
                 var currentContextDocumentId = _workspace.GetDocumentIdInCurrentContext(
                     _subjectBuffer.AsTextContainer()
                 );
@@ -217,7 +219,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.NavigationBar
         private void OnDocumentActiveContextChanged(
             object? sender,
             DocumentActiveContextChangedEventArgs args
-        ) {
+        )
+        {
             AssertIsForeground();
             if (args.Solution.Workspace != _workspace)
                 return;
@@ -228,7 +231,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.NavigationBar
             if (
                 args.NewActiveContextDocumentId == currentContextDocumentId
                 || args.OldActiveContextDocumentId == currentContextDocumentId
-            ) {
+            )
+            {
                 // if the active context changed, recompute the types/member as they may be changed as well.
                 StartModelUpdateAndSelectedItemUpdateTasks(modelUpdateDelay: 0);
             }
@@ -272,7 +276,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.NavigationBar
                 && Equals(selectedInfo, _lastPresentedInfo.selectedInfo)
                 && Equals(selectedProjectItem, _lastPresentedInfo.selectedProjectItem)
                 && projectItems.SequenceEqual(_lastPresentedInfo.projectItems)
-            ) {
+            )
+            {
                 // Nothing changed, so we can skip presenting these items.
                 return;
             }
@@ -291,7 +296,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.NavigationBar
         private void GetProjectItems(
             out ImmutableArray<NavigationBarProjectItem> projectItems,
             out NavigationBarProjectItem? selectedProjectItem
-        ) {
+        )
+        {
             var documents = _subjectBuffer.CurrentSnapshot.GetRelatedDocumentsWithChanges();
             if (!documents.Any())
             {
@@ -409,7 +415,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.NavigationBar
         private async Task ProcessItemSelectionAsync(
             NavigationBarItem item,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             AssertIsForeground();
             if (item is NavigationBarPresentedItem)
             {

@@ -184,7 +184,8 @@ namespace System.Threading.Tasks.Tests
             WithParallelOption parallelOption,
             ActionWithLocal localOption,
             ActionWithState stateOption
-        ) {
+        )
+        {
             var parameters = new TestParameters(API.Foreach, StartIndexBase.Zero)
             {
                 Count = count,

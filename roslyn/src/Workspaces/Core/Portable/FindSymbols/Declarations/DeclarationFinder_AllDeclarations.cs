@@ -26,7 +26,8 @@ namespace Microsoft.CodeAnalysis.FindSymbols
             SearchQuery query,
             SymbolFilter criteria,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             // All entrypoints to this function are Find functions that are only searching
             // for specific strings (i.e. they never do a custom search).
             Contract.ThrowIfTrue(
@@ -93,7 +94,8 @@ namespace Microsoft.CodeAnalysis.FindSymbols
             SearchQuery query,
             SymbolFilter criteria,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var list = ArrayBuilder<ISymbol>.GetInstance();
 
             if (project.SupportsCompilation)
@@ -163,7 +165,8 @@ namespace Microsoft.CodeAnalysis.FindSymbols
             Solution solution,
             IList<SerializableSymbolAndProjectId> array,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var result = ArrayBuilder<ISymbol>.GetInstance(array.Count);
 
             foreach (var dehydrated in array)

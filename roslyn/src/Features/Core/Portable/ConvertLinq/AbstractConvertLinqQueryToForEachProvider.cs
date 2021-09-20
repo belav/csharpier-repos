@@ -57,7 +57,8 @@ namespace Microsoft.CodeAnalysis.ConvertLinq
                     cancellationToken,
                     out var documentUpdateInfo
                 )
-            ) {
+            )
+            {
                 context.RegisterRefactoring(
                     new MyCodeAction(
                         Title,

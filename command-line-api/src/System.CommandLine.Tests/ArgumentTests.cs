@@ -273,7 +273,8 @@ namespace System.CommandLine.Tests
             [InlineData("-y value-y -x value-x")]
             public void Symbol_can_be_found_without_explicitly_traversing_result_tree(
                 string commandLine
-            ) {
+            )
+            {
                 SymbolResult resultForOptionX = null;
                 var optionX = new Option<string>("-x", parseArgument: _ => string.Empty);
 
@@ -426,7 +427,8 @@ namespace System.CommandLine.Tests
                                     argumentResult.Tokens.Select(t => t.Value).Single(),
                                     out var value
                                 )
-                            ) {
+                            )
+                            {
                                 return value;
                             }
 

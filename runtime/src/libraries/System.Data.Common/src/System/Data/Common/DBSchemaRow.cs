@@ -15,7 +15,8 @@ namespace System.Data.Common
         internal static DbSchemaRow[] GetSortedSchemaRows(
             DataTable dataTable,
             bool returnProviderSpecificTypes
-        ) {
+        )
+        {
             DataColumn? sortindex = dataTable.Columns[SchemaMappingUnsortedIndex];
             if (null == sortindex)
             {

@@ -22,7 +22,8 @@ namespace Microsoft.CodeAnalysis.Editor.FindUsages
             Document document,
             int position,
             IFindUsagesContext context
-        ) {
+        )
+        {
             var definitionTrackingContext = new DefinitionTrackingContext(context);
 
             // Need ConfigureAwait(true) here so we get back to the UI thread before calling
@@ -55,7 +56,8 @@ namespace Microsoft.CodeAnalysis.Editor.FindUsages
             Document document,
             int position,
             IFindUsagesContext context
-        ) {
+        )
+        {
             // We don't need to get third party definitions when finding references in LSP.
             // Currently, 3rd party definitions = XAML definitions, and XAML will provide
             // references via LSP instead of hooking into Roslyn.
@@ -71,7 +73,8 @@ namespace Microsoft.CodeAnalysis.Editor.FindUsages
             Document document,
             int position,
             IFindUsagesContext context
-        ) {
+        )
+        {
             // First, see if we're on a literal.  If so search for literals in the solution with
             // the same value.
             var found = await TryFindLiteralReferencesAsync(document, position, context)
@@ -89,7 +92,8 @@ namespace Microsoft.CodeAnalysis.Editor.FindUsages
             Solution solution,
             ImmutableArray<DefinitionItem> definitions,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var factory =
                 solution.Workspace.Services.GetRequiredService<IDefinitionsAndReferencesFactory>();
             return definitions.Select(
@@ -103,7 +107,8 @@ namespace Microsoft.CodeAnalysis.Editor.FindUsages
             Document document,
             int position,
             IFindUsagesContext context
-        ) {
+        )
+        {
             var cancellationToken = context.CancellationToken;
             cancellationToken.ThrowIfCancellationRequested();
 
@@ -131,7 +136,8 @@ namespace Microsoft.CodeAnalysis.Editor.FindUsages
             IFindUsagesContext context,
             ISymbol symbol,
             Project project
-        ) {
+        )
+        {
             await context.SetSearchTitleAsync(
                     string.Format(
                         EditorFeaturesResources._0_references,
@@ -154,7 +160,8 @@ namespace Microsoft.CodeAnalysis.Editor.FindUsages
             ISymbol symbol,
             Project project,
             FindReferencesSearchOptions options
-        ) {
+        )
+        {
             var cancellationToken = context.CancellationToken;
             var solution = project.Solution;
             var client = await RemoteHostClient.TryGetClientAsync(
@@ -202,7 +209,8 @@ namespace Microsoft.CodeAnalysis.Editor.FindUsages
             ISymbol symbol,
             Project project,
             FindReferencesSearchOptions options
-        ) {
+        )
+        {
             var progress = new FindReferencesProgressAdapter(project.Solution, context, options);
             return SymbolFinder.FindReferencesAsync(
                 symbol,
@@ -218,7 +226,8 @@ namespace Microsoft.CodeAnalysis.Editor.FindUsages
             Document document,
             int position,
             IFindUsagesContext context
-        ) {
+        )
+        {
             var cancellationToken = context.CancellationToken;
             cancellationToken.ThrowIfCancellationRequested();
 

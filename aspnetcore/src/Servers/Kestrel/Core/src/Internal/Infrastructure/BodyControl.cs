@@ -26,7 +26,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Infrastructure
         public BodyControl(
             IHttpBodyControlFeature bodyControl,
             IHttpResponseControl responseControl
-        ) {
+        )
+        {
             _requestReader = new HttpRequestPipeReader();
             _request = new HttpRequestStream(bodyControl, _requestReader);
             _emptyRequestReader = new HttpRequestPipeReader();
@@ -50,7 +51,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Infrastructure
 
         public (Stream request, Stream response, PipeReader reader, PipeWriter writer) Start(
             MessageBody body
-        ) {
+        )
+        {
             CanHaveBody = !body.IsEmpty;
             _requestReader.StartAcceptingReads(body);
             _emptyRequestReader.StartAcceptingReads(MessageBody.ZeroContentLengthClose);

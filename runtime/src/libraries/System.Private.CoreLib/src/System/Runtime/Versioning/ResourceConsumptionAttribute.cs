@@ -24,7 +24,8 @@ namespace System.Runtime.Versioning
         public ResourceConsumptionAttribute(
             ResourceScope resourceScope,
             ResourceScope consumptionScope
-        ) {
+        )
+        {
             ResourceScope = resourceScope;
             ConsumptionScope = consumptionScope;
         }

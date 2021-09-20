@@ -152,7 +152,8 @@ namespace Microsoft.EntityFrameworkCore
             IServiceProvider serviceProvider,
             DbContextOptionsBuilder optionsBuilder,
             Action<DbContextOptionsBuilder> onConfiguring
-        ) {
+        )
+        {
             optionsBuilder = AddOptions(TestStore.AddProviderOptions(optionsBuilder))
                 .UseInternalServiceProvider(serviceProvider);
             onConfiguring?.Invoke(optionsBuilder);
@@ -193,7 +194,8 @@ namespace Microsoft.EntityFrameworkCore
                 IServiceProvider serviceProvider,
                 bool usePooling,
                 TestStore testStore
-            ) {
+            )
+            {
                 ServiceProvider = serviceProvider;
                 UsePooling = usePooling;
                 if (usePooling)

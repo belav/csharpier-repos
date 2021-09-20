@@ -109,7 +109,8 @@ WHERE ((c[""Discriminator""] = ""Order"") AND (c[""CustomerID""] = ""ALFKI""))"
         [ConditionalTheory(Skip = "Issue #17246")]
         public override async Task KeylessEntity_with_defining_query_and_correlated_collection(
             bool async
-        ) {
+        )
+        {
             await base.KeylessEntity_with_defining_query_and_correlated_collection(async);
 
             AssertSql(
@@ -152,7 +153,8 @@ WHERE (c[""Discriminator""] = ""Customer"")"
         [ConditionalTheory(Skip = "Issue #17246")]
         public override async Task Collection_correlated_with_keyless_entity_in_predicate_works(
             bool async
-        ) {
+        )
+        {
             await base.Collection_correlated_with_keyless_entity_in_predicate_works(async);
 
             AssertSql(@"");

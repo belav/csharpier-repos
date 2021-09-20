@@ -22,7 +22,8 @@ namespace Microsoft.CodeAnalysis.Completion.Providers
             SyntaxToken token,
             int descriptionPosition,
             CompletionItemRules rules
-        ) {
+        )
+        {
             var props = ImmutableDictionary<string, string>.Empty.Add("Line", line.ToString())
                 .Add("Modifiers", modifiers.ToString())
                 .Add("TokenSpanEnd", token.Span.End.ToString());
@@ -49,7 +50,8 @@ namespace Microsoft.CodeAnalysis.Completion.Providers
             if (
                 item.Properties.TryGetValue("Modifiers", out var text)
                 && DeclarationModifiers.TryParse(text, out var modifiers)
-            ) {
+            )
+            {
                 return modifiers;
             }
 
@@ -61,7 +63,8 @@ namespace Microsoft.CodeAnalysis.Completion.Providers
             if (
                 item.Properties.TryGetValue("Line", out var text)
                 && int.TryParse(text, out var number)
-            ) {
+            )
+            {
                 return number;
             }
 
@@ -73,7 +76,8 @@ namespace Microsoft.CodeAnalysis.Completion.Providers
             if (
                 item.Properties.TryGetValue("TokenSpanEnd", out var text)
                 && int.TryParse(text, out var number)
-            ) {
+            )
+            {
                 return number;
             }
 

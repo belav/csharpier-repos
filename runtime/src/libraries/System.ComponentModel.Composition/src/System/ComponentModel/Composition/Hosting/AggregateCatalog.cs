@@ -101,7 +101,8 @@ namespace System.ComponentModel.Composition.Hosting
         /// </exception>
         public override IEnumerable<Tuple<ComposablePartDefinition, ExportDefinition>> GetExports(
             ImportDefinition definition
-        ) {
+        )
+        {
             ThrowIfDisposed();
 
             Requires.NotNull(definition, nameof(definition));

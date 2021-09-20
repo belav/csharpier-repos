@@ -28,7 +28,8 @@ namespace System.Net.Quic.Implementations.Mock
             EndPoint? remoteEndPoint,
             SslClientAuthenticationOptions? sslClientAuthenticationOptions,
             IPEndPoint? localEndPoint = null
-        ) {
+        )
+        {
             if (remoteEndPoint is null)
             {
                 throw new ArgumentNullException(nameof(remoteEndPoint));
@@ -190,7 +191,8 @@ namespace System.Net.Quic.Implementations.Mock
 
         internal override async ValueTask<QuicStreamProvider> AcceptStreamAsync(
             CancellationToken cancellationToken = default
-        ) {
+        )
+        {
             CheckDisposed();
 
             ConnectionState? state = _state;
@@ -221,7 +223,8 @@ namespace System.Net.Quic.Implementations.Mock
         internal override ValueTask CloseAsync(
             long errorCode,
             CancellationToken cancellationToken = default
-        ) {
+        )
+        {
             ConnectionState? state = _state;
             if (state is not null)
             {

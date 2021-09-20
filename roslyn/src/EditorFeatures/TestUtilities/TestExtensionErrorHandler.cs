@@ -33,7 +33,8 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests
             if (
                 exception is NullReferenceException
                 && exception.StackTrace.Contains("SpanTrackingWpfToolTipPresenter")
-            ) {
+            )
+            {
                 return;
             }
 
@@ -43,7 +44,8 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests
                 && exception.StackTrace.Contains(
                     "Microsoft.CodeAnalysis.Completion.Providers.AbstractEmbeddedLanguageCompletionProvider.GetLanguageProviders"
                 )
-            ) {
+            )
+            {
                 return;
             }
 
@@ -53,7 +55,8 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests
                 && exception.StackTrace.Contains(
                     "Microsoft.VisualStudio.Language.Intellisense.AsyncCompletion.Implementation.CompletionTelemetryHost"
                 )
-            ) {
+            )
+            {
                 return;
             }
 

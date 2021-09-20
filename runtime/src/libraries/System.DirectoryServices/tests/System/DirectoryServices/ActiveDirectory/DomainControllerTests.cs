@@ -25,7 +25,8 @@ namespace System.DirectoryServices.ActiveDirectory.Tests
         [InlineData(DirectoryContextType.Forest)]
         public void GetDomainController_InvalidContextType_ThrowsArgumentException(
             DirectoryContextType contextType
-        ) {
+        )
+        {
             var context = new DirectoryContext(contextType, "name");
             AssertExtensions.Throws<ArgumentException>(
                 "context",
@@ -107,7 +108,8 @@ namespace System.DirectoryServices.ActiveDirectory.Tests
         [InlineData(DirectoryContextType.Forest)]
         public void FindOne_InvalidContextType_ThrowsArgumentException(
             DirectoryContextType contextType
-        ) {
+        )
+        {
             var context = new DirectoryContext(contextType, "name");
             AssertExtensions.Throws<ArgumentException>(
                 "context",
@@ -229,7 +231,8 @@ namespace System.DirectoryServices.ActiveDirectory.Tests
         [InlineData(DirectoryContextType.Forest)]
         public void FindAll_InvalidContextType_ThrowsArgumentException(
             DirectoryContextType contextType
-        ) {
+        )
+        {
             var context = new DirectoryContext(contextType, "name");
             AssertExtensions.Throws<ArgumentException>(
                 "context",
@@ -696,7 +699,8 @@ namespace System.DirectoryServices.ActiveDirectory.Tests
         [InlineData(ActiveDirectoryRole.InfrastructureRole + 1)]
         public void SeizeRoleOwnership_InvalidRole_ThrowsInvalidEnumArgumentException(
             ActiveDirectoryRole role
-        ) {
+        )
+        {
             var controller = new SubController();
             AssertExtensions.Throws<InvalidEnumArgumentException>(
                 "role",
@@ -733,7 +737,8 @@ namespace System.DirectoryServices.ActiveDirectory.Tests
             string targetServer,
             string sourceServer,
             SyncFromAllServersOperationException exception
-        ) {
+        )
+        {
             return true;
         }
 
@@ -886,7 +891,8 @@ namespace System.DirectoryServices.ActiveDirectory.Tests
         [InlineData(ActiveDirectoryRole.InfrastructureRole + 1)]
         public void TransferRoleOwnership_InvalidRole_ThrowsInvalidEnumArgumentException(
             ActiveDirectoryRole role
-        ) {
+        )
+        {
             var controller = new SubController();
             AssertExtensions.Throws<InvalidEnumArgumentException>(
                 "role",

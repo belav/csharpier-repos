@@ -278,7 +278,8 @@ namespace System.Security.Cryptography.X509Certificates.Tests
             int pathLengthConstraint,
             bool critical,
             string expectedDerString
-        ) {
+        )
+        {
             X509BasicConstraintsExtension ext = new X509BasicConstraintsExtension(
                 certificateAuthority,
                 hasPathLengthConstraint,
@@ -298,7 +299,8 @@ namespace System.Security.Cryptography.X509Certificates.Tests
             int pathLengthConstraint,
             bool critical,
             string rawDataString
-        ) {
+        )
+        {
             byte[] rawData = rawDataString.HexToByteArray();
             int expectedPathLengthConstraint = hasPathLengthConstraint ? pathLengthConstraint : 0;
 
@@ -546,7 +548,8 @@ namespace System.Security.Cryptography.X509Certificates.Tests
             X509KeyUsageFlags flags,
             bool critical,
             byte[] expectedDer
-        ) {
+        )
+        {
             X509KeyUsageExtension ext = new X509KeyUsageExtension(flags, critical);
             byte[] rawData = ext.RawData;
             Assert.Equal(expectedDer, rawData);
@@ -563,7 +566,8 @@ namespace System.Security.Cryptography.X509Certificates.Tests
             OidCollection usages,
             bool critical,
             byte[] expectedDer
-        ) {
+        )
+        {
             X509EnhancedKeyUsageExtension ext = new X509EnhancedKeyUsageExtension(usages, critical);
             byte[] rawData = ext.RawData;
             Assert.Equal(expectedDer, rawData);
@@ -585,7 +589,8 @@ namespace System.Security.Cryptography.X509Certificates.Tests
             bool critical,
             byte[] expectedDer,
             string expectedIdentifier
-        ) {
+        )
+        {
             PublicKey pk;
 
             using (var cert = new X509Certificate2(certBytes))

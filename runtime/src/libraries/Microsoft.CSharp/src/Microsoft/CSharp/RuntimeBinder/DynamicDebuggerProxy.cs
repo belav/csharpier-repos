@@ -20,10 +20,8 @@ namespace Microsoft.CSharp.RuntimeBinder
     {
         public DynamicBindingFailedException() : base() { }
 
-        private DynamicBindingFailedException(
-            SerializationInfo info,
-            StreamingContext context
-        ) : base(info, context) { }
+        private DynamicBindingFailedException(SerializationInfo info, StreamingContext context)
+            : base(info, context) { }
     }
 
     internal sealed class GetMemberValueBinder : GetMemberBinder
@@ -33,7 +31,8 @@ namespace Microsoft.CSharp.RuntimeBinder
         public override DynamicMetaObject FallbackGetMember(
             DynamicMetaObject self,
             DynamicMetaObject onBindingError
-        ) {
+        )
+        {
             if (onBindingError == null)
             {
                 var v = new List<DynamicMetaObject> { self };
@@ -123,7 +122,8 @@ namespace Microsoft.CSharp.RuntimeBinder
             CSharpArgumentInfoFlags arg2Flags,
             ExpressionType opKind,
             Type accessibilityContext
-        ) {
+        )
+        {
             CSharpArgumentInfo arg1Info = CSharpArgumentInfo.Create(arg1Flags, null);
             CSharpArgumentInfo arg2Info = CSharpArgumentInfo.Create(arg2Flags, null);
 
@@ -144,7 +144,8 @@ namespace Microsoft.CSharp.RuntimeBinder
             T obj,
             ExpressionType oper,
             Type accessibilityContext
-        ) {
+        )
+        {
             if (oper == ExpressionType.IsTrue || oper == ExpressionType.IsFalse)
             {
                 var trueFalseSite = CallSite<Func<CallSite, T, bool>>.Create(
@@ -181,7 +182,8 @@ namespace Microsoft.CSharp.RuntimeBinder
             Type type,
             CSharpBinderFlags kind,
             Type accessibilityContext
-        ) {
+        )
+        {
             var site = CallSite<Func<CallSite, T, K>>.Create(
                 Binder.Convert(kind, type, accessibilityContext)
             );
@@ -198,7 +200,8 @@ namespace Microsoft.CSharp.RuntimeBinder
             CSharpArgumentInfoFlags[] argFlags,
             out Type[] delegateSignatureTypes,
             out CSharpArgumentInfo[] argInfos
-        ) {
+        )
+        {
             int numberOfArguments = args.Length;
             Debug.Assert(
                 (numberOfArguments == argTypes.Length) && (numberOfArguments == argFlags.Length),
@@ -240,7 +243,8 @@ namespace Microsoft.CSharp.RuntimeBinder
             Type[] delegateSignatureTypes,
             CallSiteBinder binder,
             object[] args
-        ) {
+        )
+        {
             Type delegateType = Expression.GetDelegateType(delegateSignatureTypes);
             var site = CallSite.Create(delegateType, binder);
 
@@ -272,7 +276,8 @@ namespace Microsoft.CSharp.RuntimeBinder
             string methodName,
             Type accessibilityContext,
             Type[] typeArguments
-        ) {
+        )
+        {
             Type[] delegateSignatureTypes = null;
             CSharpArgumentInfo[] argInfos = null;
 
@@ -324,7 +329,8 @@ namespace Microsoft.CSharp.RuntimeBinder
             string propName,
             Type accessibilityContext,
             bool isResultIndexed
-        ) {
+        )
+        {
             // In most cases it's ok to use CSharpArgumentInfoFlags.None since target of property call is dynamic.
             // The only possible case when target is not dynamic but we still treat is as dynamic access is when
             // one of arguments is dynamic. This is only possible for indexed properties since we call this method and
@@ -360,7 +366,8 @@ namespace Microsoft.CSharp.RuntimeBinder
             Type[] argTypes,
             CSharpArgumentInfoFlags[] argFlags,
             Type accessibilityContext
-        ) {
+        )
+        {
             Type[] delegateSignatureTypes = null;
             CSharpArgumentInfo[] argInfos = null;
 
@@ -396,7 +403,8 @@ namespace Microsoft.CSharp.RuntimeBinder
             TValue value,
             CSharpArgumentInfoFlags valueFlags,
             Type accessibilityContext
-        ) {
+        )
+        {
             CSharpArgumentInfo targetArgInfo = CSharpArgumentInfo.Create(
                 CSharpArgumentInfoFlags.None,
                 null
@@ -431,7 +439,8 @@ namespace Microsoft.CSharp.RuntimeBinder
             Type[] argTypes,
             CSharpArgumentInfoFlags[] argFlags,
             Type accessibilityContext
-        ) {
+        )
+        {
             Type[] delegateSignatureTypes = null;
             CSharpArgumentInfo[] argInfos = null;
 
@@ -529,10 +538,8 @@ namespace Microsoft.CSharp.RuntimeBinder
         {
             public DynamicDebugViewEmptyException() { }
 
-            private DynamicDebugViewEmptyException(
-                SerializationInfo info,
-                StreamingContext context
-            ) : base(info, context) { }
+            private DynamicDebugViewEmptyException(SerializationInfo info, StreamingContext context)
+                : base(info, context) { }
 
             public string Empty
             {

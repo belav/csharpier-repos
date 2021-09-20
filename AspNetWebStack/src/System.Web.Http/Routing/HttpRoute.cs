@@ -66,14 +66,15 @@ namespace System.Web.Http.Routing
             string routeTemplate,
             HttpRouteValueDictionary defaults,
             HttpRouteValueDictionary constraints
-        ) : this(
-            routeTemplate,
-            defaults,
-            constraints,
-            dataTokens: null,
-            handler: null,
-            parsedRoute: null
-        ) { }
+        )
+            : this(
+                routeTemplate,
+                defaults,
+                constraints,
+                dataTokens: null,
+                handler: null,
+                parsedRoute: null
+            ) { }
 
         public HttpRoute(
             string routeTemplate,
@@ -98,7 +99,8 @@ namespace System.Web.Http.Routing
             HttpRouteValueDictionary dataTokens,
             HttpMessageHandler handler,
             HttpParsedRoute parsedRoute
-        ) {
+        )
+        {
             _routeTemplate = routeTemplate == null ? String.Empty : routeTemplate;
             _defaults = defaults ?? new HttpRouteValueDictionary();
             _constraints = constraints ?? new HttpRouteValueDictionary();
@@ -143,7 +145,8 @@ namespace System.Web.Http.Routing
         public virtual IHttpRouteData GetRouteData(
             string virtualPathRoot,
             HttpRequestMessage request
-        ) {
+        )
+        {
             if (virtualPathRoot == null)
             {
                 throw Error.ArgumentNull("virtualPathRoot");
@@ -179,7 +182,8 @@ namespace System.Web.Http.Routing
         private static RoutingContext GetOrCreateRoutingContext(
             string virtualPathRoot,
             HttpRequestMessage request
-        ) {
+        )
+        {
             RoutingContext context;
             if (!request.Properties.TryGetValue<RoutingContext>(RoutingContextKey, out context))
             {
@@ -193,7 +197,8 @@ namespace System.Web.Http.Routing
         private static RoutingContext CreateRoutingContext(
             string virtualPathRoot,
             HttpRequestMessage request
-        ) {
+        )
+        {
             // Note: we don't validate host/port as this is expected to be done at the host level
             string requestPath =
                 "/" + request.RequestUri.GetComponents(UriComponents.Path, UriFormat.Unescaped);
@@ -234,7 +239,8 @@ namespace System.Web.Http.Routing
         public virtual IHttpVirtualPathData GetVirtualPath(
             HttpRequestMessage request,
             IDictionary<string, object> values
-        ) {
+        )
+        {
             if (request == null)
             {
                 throw Error.ArgumentNull("request");
@@ -247,7 +253,8 @@ namespace System.Web.Http.Routing
             if (
                 values != null
                 && !values.Keys.Contains(HttpRouteKey, StringComparer.OrdinalIgnoreCase)
-            ) {
+            )
+            {
                 return null;
             }
             // Remove the value from the collection so that it doesn't affect the generated URL
@@ -278,7 +285,8 @@ namespace System.Web.Http.Routing
 
         private static IDictionary<string, object> GetRouteDictionaryWithoutHttpRouteKey(
             IDictionary<string, object> routeValues
-        ) {
+        )
+        {
             var newRouteValues = new HttpRouteValueDictionary();
             if (routeValues != null)
             {
@@ -290,7 +298,8 @@ namespace System.Web.Http.Routing
                             HttpRouteKey,
                             StringComparison.OrdinalIgnoreCase
                         )
-                    ) {
+                    )
+                    {
                         newRouteValues.Add(routeValue.Key, routeValue.Value);
                     }
                 }
@@ -304,7 +313,8 @@ namespace System.Web.Http.Routing
             string parameterName,
             HttpRouteValueDictionary values,
             HttpRouteDirection routeDirection
-        ) {
+        )
+        {
             IHttpRouteConstraint customConstraint = constraint as IHttpRouteConstraint;
             if (customConstraint != null)
             {
@@ -341,7 +351,8 @@ namespace System.Web.Http.Routing
             HttpRequestMessage request,
             HttpRouteValueDictionary values,
             HttpRouteDirection routeDirection
-        ) {
+        )
+        {
             if (Constraints != null)
             {
                 foreach (KeyValuePair<string, object> constraintsItem in Constraints)
@@ -354,7 +365,8 @@ namespace System.Web.Http.Routing
                             values,
                             routeDirection
                         )
-                    ) {
+                    )
+                    {
                         return false;
                     }
                 }
@@ -370,7 +382,8 @@ namespace System.Web.Http.Routing
             string routeTemplate,
             string name,
             object constraint
-        ) {
+        )
+        {
             if (constraint is IHttpRouteConstraint)
             {
                 return;
@@ -387,7 +400,8 @@ namespace System.Web.Http.Routing
         private static Exception CreateInvalidConstraintTypeException(
             string routeTemplate,
             string name
-        ) {
+        )
+        {
             return Error.InvalidOperation(
                 SRResources.Route_ValidationMustBeStringOrCustomConstraint,
                 name,

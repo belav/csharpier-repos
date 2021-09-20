@@ -18,7 +18,8 @@ namespace Microsoft.Extensions.Logging.AzureAppServices
             IConfiguration configuration,
             Type provider,
             string levelKey
-        ) {
+        )
+        {
             _configuration = configuration;
             _provider = provider;
             _levelKey = levelKey;

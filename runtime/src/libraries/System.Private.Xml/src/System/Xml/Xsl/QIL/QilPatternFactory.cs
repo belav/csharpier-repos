@@ -835,7 +835,8 @@ namespace System.Xml.Xsl.Qil
             MethodInfo d,
             XmlQueryType t,
             IList<QilNode> args
-        ) {
+        )
+        {
             QilList list = _f.ActualParameterList();
             list.Add(args);
             return _f.XsltInvokeEarlyBound(name, _f.LiteralObject(d), list, t);

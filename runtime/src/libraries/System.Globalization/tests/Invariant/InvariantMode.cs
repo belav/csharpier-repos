@@ -1538,7 +1538,8 @@ namespace System.Globalization.Tests
             string input,
             CompareOptions options,
             string expected
-        ) {
+        )
+        {
             byte[] expectedOutputBytes = GetExpectedInvariantOrdinalSortKey(expected);
 
             CompareInfo compareInfo = CultureInfo.InvariantCulture.CompareInfo;
@@ -1657,7 +1658,8 @@ namespace System.Globalization.Tests
             int count,
             CompareOptions options,
             int result
-        ) {
+        )
+        {
             foreach (string cul in s_cultureNames)
             {
                 CompareInfo compareInfo = CultureInfo.GetCultureInfo(cul).CompareInfo;
@@ -1673,7 +1675,8 @@ namespace System.Globalization.Tests
                 int count,
                 CompareOptions options,
                 int result
-            ) {
+            )
+            {
                 Assert.Equal(
                     result,
                     compareInfo.IndexOf(source, value, startIndex, count, options)
@@ -1742,7 +1745,8 @@ namespace System.Globalization.Tests
             int count,
             CompareOptions options,
             int result
-        ) {
+        )
+        {
             foreach (string cul in s_cultureNames)
             {
                 CompareInfo compareInfo = CultureInfo.GetCultureInfo(cul).CompareInfo;
@@ -1758,7 +1762,8 @@ namespace System.Globalization.Tests
                 int count,
                 CompareOptions options,
                 int result
-            ) {
+            )
+            {
                 Assert.Equal(
                     result,
                     compareInfo.LastIndexOf(source, value, startIndex, count, options)

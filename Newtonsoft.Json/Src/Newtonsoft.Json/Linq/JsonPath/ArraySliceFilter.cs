@@ -15,7 +15,8 @@ namespace Newtonsoft.Json.Linq.JsonPath
             JToken root,
             IEnumerable<JToken> current,
             JsonSelectSettings? settings
-        ) {
+        )
+        {
             if (Step == 0)
             {
                 throw new JsonException("Step cannot be zero.");
@@ -56,7 +57,8 @@ namespace Newtonsoft.Json.Linq.JsonPath
                             int i = startIndex;
                             IsValid(i, stopIndex, positiveStep);
                             i += stepCount
-                        ) {
+                        )
+                        {
                             yield return a[i];
                         }
                     }

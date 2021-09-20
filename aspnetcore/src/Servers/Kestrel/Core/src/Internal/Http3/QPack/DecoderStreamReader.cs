@@ -76,7 +76,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Http3.QPack
                                 HeaderAcknowledgementPrefix,
                                 out intResult
                             )
-                        ) {
+                        )
+                        {
                             OnHeaderAcknowledgement(intResult);
                         }
                         else
@@ -93,7 +94,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Http3.QPack
                                 StreamCancellationPrefix,
                                 out intResult
                             )
-                        ) {
+                        )
+                        {
                             OnStreamCancellation(intResult);
                         }
                         else
@@ -110,7 +112,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Http3.QPack
                                 InsertCountIncrementPrefix,
                                 out intResult
                             )
-                        ) {
+                        )
+                        {
                             OnInsertCountIncrement(intResult);
                         }
                         else

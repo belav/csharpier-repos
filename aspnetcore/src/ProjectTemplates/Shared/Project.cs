@@ -69,7 +69,8 @@ namespace Templates.Test.Helpers
             string[] args = null,
             // Used to set special options in MSBuild
             IDictionary<string, string> environmentVariables = null
-        ) {
+        )
+        {
             var hiveArg = $"--debug:custom-hive \"{TemplatePackageInstaller.CustomHivePath}\"";
             var argString = $"new {templateName} {hiveArg}";
             environmentVariables ??= new Dictionary<string, string>();
@@ -138,7 +139,8 @@ namespace Templates.Test.Helpers
             IDictionary<string, string> packageOptions = null,
             string additionalArgs = null,
             bool noRestore = true
-        ) {
+        )
+        {
             Output.WriteLine("Publishing ASP.NET Core application...");
 
             // Avoid restoring as part of build or publish. These projects should have already restored as part of running dotnet new. Explicitly disabling restore
@@ -161,7 +163,8 @@ namespace Templates.Test.Helpers
         internal async Task<ProcessResult> RunDotNetBuildAsync(
             IDictionary<string, string> packageOptions = null,
             string additionalArgs = null
-        ) {
+        )
+        {
             Output.WriteLine("Building ASP.NET Core application...");
 
             // Avoid restoring as part of build or publish. These projects should have already restored as part of running dotnet new. Explicitly disabling restore
@@ -182,7 +185,8 @@ namespace Templates.Test.Helpers
         internal AspNetProcess StartBuiltProjectAsync(
             bool hasListeningUri = true,
             ILogger logger = null
-        ) {
+        )
+        {
             var environment = new Dictionary<string, string>
             {
                 ["ASPNETCORE_URLS"] = _urls,
@@ -239,7 +243,8 @@ namespace Templates.Test.Helpers
         internal AspNetProcess StartPublishedProjectAsync(
             bool hasListeningUri = true,
             bool usePublishedAppHost = false
-        ) {
+        )
+        {
             var environment = new Dictionary<string, string>
             {
                 ["ASPNETCORE_URLS"] = _urls,
@@ -418,7 +423,8 @@ namespace Templates.Test.Helpers
                 var numAttemptsRemaining = NumAttempts;
                 numAttemptsRemaining > 0;
                 numAttemptsRemaining--
-            ) {
+            )
+            {
                 try
                 {
                     Directory.Delete(TemplateOutputDir, true);

@@ -13,7 +13,8 @@ namespace System.Xml.Xsl.Xslt
             int column,
             string errorNumber,
             string errorText
-        ) {
+        )
+        {
             Line = line;
             Column = column;
             ErrorNumber = errorNumber;

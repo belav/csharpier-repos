@@ -27,7 +27,8 @@ namespace Microsoft.CodeAnalysis.DocumentationComments
             TextSpan spanToReplace,
             string snippetText,
             int caretOffset
-        ) {
+        )
+        {
             SpanToReplace = spanToReplace;
             SnippetText = snippetText;
             CaretOffset = caretOffset;

@@ -125,7 +125,8 @@ namespace System.Net.Http.Tests
             bool supportsEmptyValues,
             int expectedIndex,
             bool expectedSeparatorFound
-        ) {
+        )
+        {
             bool separatorFound = false;
             Assert.Equal(
                 expectedIndex,

@@ -42,7 +42,8 @@ namespace Microsoft.EntityFrameworkCore.TestUtilities
             Func<Expression, Expression> rewriteExpectedQueryExpression,
             Func<Expression, Expression> rewriteServerQueryExpression,
             bool ignoreEntryCount = false
-        ) {
+        )
+        {
             QueryFixture = queryFixture;
             _contextCreator = queryFixture.GetContextCreator();
             _expectedData = queryFixture.GetExpectedData();
@@ -74,7 +75,8 @@ namespace Microsoft.EntityFrameworkCore.TestUtilities
             int entryCount,
             bool async,
             bool filteredQuery = false
-        ) {
+        )
+        {
             using var context = _contextCreator();
             var actual = async
                 ? await actualAsyncQuery.Compile()(SetSourceCreator(context))
@@ -101,7 +103,8 @@ namespace Microsoft.EntityFrameworkCore.TestUtilities
             bool async,
             string testMethodName,
             bool filteredQuery = false
-        ) {
+        )
+        {
             using var context = _contextCreator();
             var query = RewriteServerQuery(actualQuery(SetSourceCreator(context)));
             if (ProceduralQueryGeneration && !async)
@@ -152,7 +155,8 @@ namespace Microsoft.EntityFrameworkCore.TestUtilities
                     type.GetGenericTypeDefinition() == typeof(IOrderedEnumerable<>)
                     || type.GetGenericTypeDefinition() == typeof(IOrderedQueryable<>)
                 )
-            ) {
+            )
+            {
                 throw new InvalidOperationException(
                     "Query result is OrderedQueryable - you need to set AssertQuery option: 'assertOrder' to 'true'. If the resulting order is non-deterministic by design, add identity projection to the top of the query to disable this check."
                 );
@@ -233,7 +237,8 @@ namespace Microsoft.EntityFrameworkCore.TestUtilities
             Func<ISetSource, IQueryable<TResult>> expectedQuery,
             bool async = false,
             bool filteredQuery = false
-        ) {
+        )
+        {
             using var context = _contextCreator();
             var actual = async
                 ? await RewriteServerQuery(actualQuery(SetSourceCreator(context))).AnyAsync()
@@ -252,7 +257,8 @@ namespace Microsoft.EntityFrameworkCore.TestUtilities
             Expression<Func<TResult, bool>> expectedPredicate,
             bool async = false,
             bool filteredQuery = false
-        ) {
+        )
+        {
             using var context = _contextCreator();
             var actual = async
                 ? await RewriteServerQuery(actualQuery(SetSourceCreator(context)))
@@ -278,7 +284,8 @@ namespace Microsoft.EntityFrameworkCore.TestUtilities
             Expression<Func<TResult, bool>> expectedPredicate,
             bool async = false,
             bool filteredQuery = false
-        ) {
+        )
+        {
             using var context = _contextCreator();
             var actual = async
                 ? await RewriteServerQuery(actualQuery(SetSourceCreator(context)))
@@ -304,7 +311,8 @@ namespace Microsoft.EntityFrameworkCore.TestUtilities
             int entryCount = 0,
             bool async = false,
             bool filteredQuery = false
-        ) {
+        )
+        {
             using var context = _contextCreator();
             var actual = async
                 ? await RewriteServerQuery(actualQuery(SetSourceCreator(context))).FirstAsync()
@@ -326,7 +334,8 @@ namespace Microsoft.EntityFrameworkCore.TestUtilities
             int entryCount = 0,
             bool async = false,
             bool filteredQuery = false
-        ) {
+        )
+        {
             using var context = _contextCreator();
             var actual = async
                 ? await RewriteServerQuery(actualQuery(SetSourceCreator(context)))
@@ -353,7 +362,8 @@ namespace Microsoft.EntityFrameworkCore.TestUtilities
             int entryCount = 0,
             bool async = false,
             bool filteredQuery = false
-        ) {
+        )
+        {
             using var context = _contextCreator();
             var actual = async
                 ? await RewriteServerQuery(actualQuery(SetSourceCreator(context)))
@@ -376,7 +386,8 @@ namespace Microsoft.EntityFrameworkCore.TestUtilities
             int entryCount = 0,
             bool async = false,
             bool filteredQuery = false
-        ) {
+        )
+        {
             using var context = _contextCreator();
             var actual = async
                 ? await RewriteServerQuery(actualQuery(SetSourceCreator(context)))
@@ -404,7 +415,8 @@ namespace Microsoft.EntityFrameworkCore.TestUtilities
             int entryCount = 0,
             bool async = false,
             bool filteredQuery = false
-        ) {
+        )
+        {
             using var context = _contextCreator();
             var actual = async
                 ? await RewriteServerQuery(actualQuery(SetSourceCreator(context))).SingleAsync()
@@ -426,7 +438,8 @@ namespace Microsoft.EntityFrameworkCore.TestUtilities
             int entryCount = 0,
             bool async = false,
             bool filteredQuery = false
-        ) {
+        )
+        {
             using var context = _contextCreator();
             var actual = async
                 ? await RewriteServerQuery(actualQuery(SetSourceCreator(context)))
@@ -454,7 +467,8 @@ namespace Microsoft.EntityFrameworkCore.TestUtilities
             int entryCount = 0,
             bool async = false,
             bool filteredQuery = false
-        ) {
+        )
+        {
             using var context = _contextCreator();
             var actual = async
                 ? await RewriteServerQuery(actualQuery(SetSourceCreator(context)))
@@ -477,7 +491,8 @@ namespace Microsoft.EntityFrameworkCore.TestUtilities
             int entryCount = 0,
             bool async = false,
             bool filteredQuery = false
-        ) {
+        )
+        {
             using var context = _contextCreator();
             var actual = async
                 ? await RewriteServerQuery(actualQuery(SetSourceCreator(context)))
@@ -505,7 +520,8 @@ namespace Microsoft.EntityFrameworkCore.TestUtilities
             int entryCount = 0,
             bool async = false,
             bool filteredQuery = false
-        ) {
+        )
+        {
             using var context = _contextCreator();
             var actual = async
                 ? await RewriteServerQuery(actualQuery(SetSourceCreator(context))).LastAsync()
@@ -527,7 +543,8 @@ namespace Microsoft.EntityFrameworkCore.TestUtilities
             int entryCount = 0,
             bool async = false,
             bool filteredQuery = false
-        ) {
+        )
+        {
             using var context = _contextCreator();
             var actual = async
                 ? await RewriteServerQuery(actualQuery(SetSourceCreator(context)))
@@ -554,7 +571,8 @@ namespace Microsoft.EntityFrameworkCore.TestUtilities
             int entryCount = 0,
             bool async = false,
             bool filteredQuery = false
-        ) {
+        )
+        {
             using var context = _contextCreator();
             var actual = async
                 ? await RewriteServerQuery(actualQuery(SetSourceCreator(context)))
@@ -577,7 +595,8 @@ namespace Microsoft.EntityFrameworkCore.TestUtilities
             int entryCount = 0,
             bool async = false,
             bool filteredQuery = false
-        ) {
+        )
+        {
             using var context = _contextCreator();
             var actual = async
                 ? await RewriteServerQuery(actualQuery(SetSourceCreator(context)))
@@ -603,7 +622,8 @@ namespace Microsoft.EntityFrameworkCore.TestUtilities
             Func<ISetSource, IQueryable<TResult>> expectedQuery,
             bool async = false,
             bool filteredQuery = false
-        ) {
+        )
+        {
             using var context = _contextCreator();
             var actual = async
                 ? await RewriteServerQuery(actualQuery(SetSourceCreator(context))).CountAsync()
@@ -623,7 +643,8 @@ namespace Microsoft.EntityFrameworkCore.TestUtilities
             Expression<Func<TResult, bool>> expectedPredicate,
             bool async = false,
             bool filteredQuery = false
-        ) {
+        )
+        {
             using var context = _contextCreator();
             var actual = async
                 ? await RewriteServerQuery(actualQuery(SetSourceCreator(context)))
@@ -648,7 +669,8 @@ namespace Microsoft.EntityFrameworkCore.TestUtilities
             Func<ISetSource, IQueryable<TResult>> expectedQuery,
             bool async = false,
             bool filteredQuery = false
-        ) {
+        )
+        {
             using var context = _contextCreator();
             var actual = async
                 ? await RewriteServerQuery(actualQuery(SetSourceCreator(context))).LongCountAsync()
@@ -668,7 +690,8 @@ namespace Microsoft.EntityFrameworkCore.TestUtilities
             Expression<Func<TResult, bool>> expectedPredicate,
             bool async = false,
             bool filteredQuery = false
-        ) {
+        )
+        {
             using var context = _contextCreator();
             var actual = async
                 ? await RewriteServerQuery(actualQuery(SetSourceCreator(context)))
@@ -696,7 +719,8 @@ namespace Microsoft.EntityFrameworkCore.TestUtilities
             int entryCount = 0,
             bool async = false,
             bool filteredQuery = false
-        ) {
+        )
+        {
             using var context = _contextCreator();
             var actual = async
                 ? await RewriteServerQuery(actualQuery(SetSourceCreator(context))).MinAsync()
@@ -718,7 +742,8 @@ namespace Microsoft.EntityFrameworkCore.TestUtilities
             int entryCount = 0,
             bool async = false,
             bool filteredQuery = false
-        ) {
+        )
+        {
             using var context = _contextCreator();
             var actual = async
                 ? await RewriteServerQuery(actualQuery(SetSourceCreator(context)))
@@ -745,7 +770,8 @@ namespace Microsoft.EntityFrameworkCore.TestUtilities
             int entryCount = 0,
             bool async = false,
             bool filteredQuery = false
-        ) {
+        )
+        {
             using var context = _contextCreator();
             var actual = async
                 ? await RewriteServerQuery(actualQuery(SetSourceCreator(context))).MaxAsync()
@@ -767,7 +793,8 @@ namespace Microsoft.EntityFrameworkCore.TestUtilities
             int entryCount = 0,
             bool async = false,
             bool filteredQuery = false
-        ) {
+        )
+        {
             using var context = _contextCreator();
             var actual = async
                 ? await RewriteServerQuery(actualQuery(SetSourceCreator(context)))
@@ -793,7 +820,8 @@ namespace Microsoft.EntityFrameworkCore.TestUtilities
             Action<int, int> asserter = null,
             bool async = false,
             bool filteredQuery = false
-        ) {
+        )
+        {
             using var context = _contextCreator();
             var actual = async
                 ? await RewriteServerQuery(actualQuery(SetSourceCreator(context))).SumAsync()
@@ -812,7 +840,8 @@ namespace Microsoft.EntityFrameworkCore.TestUtilities
             Action<int?, int?> asserter = null,
             bool async = false,
             bool filteredQuery = false
-        ) {
+        )
+        {
             using var context = _contextCreator();
             var actual = async
                 ? await RewriteServerQuery(actualQuery(SetSourceCreator(context))).SumAsync()
@@ -831,7 +860,8 @@ namespace Microsoft.EntityFrameworkCore.TestUtilities
             Action<long, long> asserter = null,
             bool async = false,
             bool filteredQuery = false
-        ) {
+        )
+        {
             using var context = _contextCreator();
             var actual = async
                 ? await RewriteServerQuery(actualQuery(SetSourceCreator(context))).SumAsync()
@@ -850,7 +880,8 @@ namespace Microsoft.EntityFrameworkCore.TestUtilities
             Action<long?, long?> asserter = null,
             bool async = false,
             bool filteredQuery = false
-        ) {
+        )
+        {
             using var context = _contextCreator();
             var actual = async
                 ? await RewriteServerQuery(actualQuery(SetSourceCreator(context))).SumAsync()
@@ -869,7 +900,8 @@ namespace Microsoft.EntityFrameworkCore.TestUtilities
             Action<decimal, decimal> asserter = null,
             bool async = false,
             bool filteredQuery = false
-        ) {
+        )
+        {
             using var context = _contextCreator();
             var actual = async
                 ? await RewriteServerQuery(actualQuery(SetSourceCreator(context))).SumAsync()
@@ -888,7 +920,8 @@ namespace Microsoft.EntityFrameworkCore.TestUtilities
             Action<decimal?, decimal?> asserter = null,
             bool async = false,
             bool filteredQuery = false
-        ) {
+        )
+        {
             using var context = _contextCreator();
             var actual = async
                 ? await RewriteServerQuery(actualQuery(SetSourceCreator(context))).SumAsync()
@@ -907,7 +940,8 @@ namespace Microsoft.EntityFrameworkCore.TestUtilities
             Action<float, float> asserter = null,
             bool async = false,
             bool filteredQuery = false
-        ) {
+        )
+        {
             using var context = _contextCreator();
             var actual = async
                 ? await RewriteServerQuery(actualQuery(SetSourceCreator(context))).SumAsync()
@@ -926,7 +960,8 @@ namespace Microsoft.EntityFrameworkCore.TestUtilities
             Action<float?, float?> asserter = null,
             bool async = false,
             bool filteredQuery = false
-        ) {
+        )
+        {
             using var context = _contextCreator();
             var actual = async
                 ? await RewriteServerQuery(actualQuery(SetSourceCreator(context))).SumAsync()
@@ -945,7 +980,8 @@ namespace Microsoft.EntityFrameworkCore.TestUtilities
             Action<double, double> asserter = null,
             bool async = false,
             bool filteredQuery = false
-        ) {
+        )
+        {
             using var context = _contextCreator();
             var actual = async
                 ? await RewriteServerQuery(actualQuery(SetSourceCreator(context))).SumAsync()
@@ -964,7 +1000,8 @@ namespace Microsoft.EntityFrameworkCore.TestUtilities
             Action<double?, double?> asserter = null,
             bool async = false,
             bool filteredQuery = false
-        ) {
+        )
+        {
             using var context = _contextCreator();
             var actual = async
                 ? await RewriteServerQuery(actualQuery(SetSourceCreator(context))).SumAsync()
@@ -985,7 +1022,8 @@ namespace Microsoft.EntityFrameworkCore.TestUtilities
             Action<int, int> asserter = null,
             bool async = false,
             bool filteredQuery = false
-        ) {
+        )
+        {
             using var context = _contextCreator();
             var actual = async
                 ? await RewriteServerQuery(actualQuery(SetSourceCreator(context)))
@@ -1013,7 +1051,8 @@ namespace Microsoft.EntityFrameworkCore.TestUtilities
             Action<int?, int?> asserter = null,
             bool async = false,
             bool filteredQuery = false
-        ) {
+        )
+        {
             using var context = _contextCreator();
             var actual = async
                 ? await RewriteServerQuery(actualQuery(SetSourceCreator(context)))
@@ -1041,7 +1080,8 @@ namespace Microsoft.EntityFrameworkCore.TestUtilities
             Action<long, long> asserter = null,
             bool async = false,
             bool filteredQuery = false
-        ) {
+        )
+        {
             using var context = _contextCreator();
             var actual = async
                 ? await RewriteServerQuery(actualQuery(SetSourceCreator(context)))
@@ -1069,7 +1109,8 @@ namespace Microsoft.EntityFrameworkCore.TestUtilities
             Action<long?, long?> asserter = null,
             bool async = false,
             bool filteredQuery = false
-        ) {
+        )
+        {
             using var context = _contextCreator();
             var actual = async
                 ? await RewriteServerQuery(actualQuery(SetSourceCreator(context)))
@@ -1097,7 +1138,8 @@ namespace Microsoft.EntityFrameworkCore.TestUtilities
             Action<decimal, decimal> asserter = null,
             bool async = false,
             bool filteredQuery = false
-        ) {
+        )
+        {
             using var context = _contextCreator();
             var actual = async
                 ? await RewriteServerQuery(actualQuery(SetSourceCreator(context)))
@@ -1125,7 +1167,8 @@ namespace Microsoft.EntityFrameworkCore.TestUtilities
             Action<decimal?, decimal?> asserter = null,
             bool async = false,
             bool filteredQuery = false
-        ) {
+        )
+        {
             using var context = _contextCreator();
             var actual = async
                 ? await RewriteServerQuery(actualQuery(SetSourceCreator(context)))
@@ -1153,7 +1196,8 @@ namespace Microsoft.EntityFrameworkCore.TestUtilities
             Action<float, float> asserter = null,
             bool async = false,
             bool filteredQuery = false
-        ) {
+        )
+        {
             using var context = _contextCreator();
             var actual = async
                 ? await RewriteServerQuery(actualQuery(SetSourceCreator(context)))
@@ -1181,7 +1225,8 @@ namespace Microsoft.EntityFrameworkCore.TestUtilities
             Action<float?, float?> asserter = null,
             bool async = false,
             bool filteredQuery = false
-        ) {
+        )
+        {
             using var context = _contextCreator();
             var actual = async
                 ? await RewriteServerQuery(actualQuery(SetSourceCreator(context)))
@@ -1209,7 +1254,8 @@ namespace Microsoft.EntityFrameworkCore.TestUtilities
             Action<double, double> asserter = null,
             bool async = false,
             bool filteredQuery = false
-        ) {
+        )
+        {
             using var context = _contextCreator();
             var actual = async
                 ? await RewriteServerQuery(actualQuery(SetSourceCreator(context)))
@@ -1237,7 +1283,8 @@ namespace Microsoft.EntityFrameworkCore.TestUtilities
             Action<double?, double?> asserter = null,
             bool async = false,
             bool filteredQuery = false
-        ) {
+        )
+        {
             using var context = _contextCreator();
             var actual = async
                 ? await RewriteServerQuery(actualQuery(SetSourceCreator(context)))
@@ -1263,7 +1310,8 @@ namespace Microsoft.EntityFrameworkCore.TestUtilities
             Action<double, double> asserter = null,
             bool async = false,
             bool filteredQuery = false
-        ) {
+        )
+        {
             using var context = _contextCreator();
             var actual = async
                 ? await RewriteServerQuery(actualQuery(SetSourceCreator(context))).AverageAsync()
@@ -1282,7 +1330,8 @@ namespace Microsoft.EntityFrameworkCore.TestUtilities
             Action<double?, double?> asserter = null,
             bool async = false,
             bool filteredQuery = false
-        ) {
+        )
+        {
             using var context = _contextCreator();
             var actual = async
                 ? await RewriteServerQuery(actualQuery(SetSourceCreator(context))).AverageAsync()
@@ -1301,7 +1350,8 @@ namespace Microsoft.EntityFrameworkCore.TestUtilities
             Action<double, double> asserter = null,
             bool async = false,
             bool filteredQuery = false
-        ) {
+        )
+        {
             using var context = _contextCreator();
             var actual = async
                 ? await RewriteServerQuery(actualQuery(SetSourceCreator(context))).AverageAsync()
@@ -1320,7 +1370,8 @@ namespace Microsoft.EntityFrameworkCore.TestUtilities
             Action<double?, double?> asserter = null,
             bool async = false,
             bool filteredQuery = false
-        ) {
+        )
+        {
             using var context = _contextCreator();
             var actual = async
                 ? await RewriteServerQuery(actualQuery(SetSourceCreator(context))).AverageAsync()
@@ -1339,7 +1390,8 @@ namespace Microsoft.EntityFrameworkCore.TestUtilities
             Action<decimal, decimal> asserter = null,
             bool async = false,
             bool filteredQuery = false
-        ) {
+        )
+        {
             using var context = _contextCreator();
             var actual = async
                 ? await RewriteServerQuery(actualQuery(SetSourceCreator(context))).AverageAsync()
@@ -1358,7 +1410,8 @@ namespace Microsoft.EntityFrameworkCore.TestUtilities
             Action<decimal?, decimal?> asserter = null,
             bool async = false,
             bool filteredQuery = false
-        ) {
+        )
+        {
             using var context = _contextCreator();
             var actual = async
                 ? await RewriteServerQuery(actualQuery(SetSourceCreator(context))).AverageAsync()
@@ -1377,7 +1430,8 @@ namespace Microsoft.EntityFrameworkCore.TestUtilities
             Action<float, float> asserter = null,
             bool async = false,
             bool filteredQuery = false
-        ) {
+        )
+        {
             using var context = _contextCreator();
             var actual = async
                 ? await RewriteServerQuery(actualQuery(SetSourceCreator(context))).AverageAsync()
@@ -1396,7 +1450,8 @@ namespace Microsoft.EntityFrameworkCore.TestUtilities
             Action<float?, float?> asserter = null,
             bool async = false,
             bool filteredQuery = false
-        ) {
+        )
+        {
             using var context = _contextCreator();
             var actual = async
                 ? await RewriteServerQuery(actualQuery(SetSourceCreator(context))).AverageAsync()
@@ -1415,7 +1470,8 @@ namespace Microsoft.EntityFrameworkCore.TestUtilities
             Action<double, double> asserter = null,
             bool async = false,
             bool filteredQuery = false
-        ) {
+        )
+        {
             using var context = _contextCreator();
             var actual = async
                 ? await RewriteServerQuery(actualQuery(SetSourceCreator(context))).AverageAsync()
@@ -1434,7 +1490,8 @@ namespace Microsoft.EntityFrameworkCore.TestUtilities
             Action<double?, double?> asserter = null,
             bool async = false,
             bool filteredQuery = false
-        ) {
+        )
+        {
             using var context = _contextCreator();
             var actual = async
                 ? await RewriteServerQuery(actualQuery(SetSourceCreator(context))).AverageAsync()
@@ -1455,7 +1512,8 @@ namespace Microsoft.EntityFrameworkCore.TestUtilities
             Action<double, double> asserter = null,
             bool async = false,
             bool filteredQuery = false
-        ) {
+        )
+        {
             using var context = _contextCreator();
             var actual = async
                 ? await RewriteServerQuery(actualQuery(SetSourceCreator(context)))
@@ -1484,7 +1542,8 @@ namespace Microsoft.EntityFrameworkCore.TestUtilities
             Action<double?, double?> asserter = null,
             bool async = false,
             bool filteredQuery = false
-        ) {
+        )
+        {
             using var context = _contextCreator();
             var actual = async
                 ? await RewriteServerQuery(actualQuery(SetSourceCreator(context)))
@@ -1513,7 +1572,8 @@ namespace Microsoft.EntityFrameworkCore.TestUtilities
             Action<double, double> asserter = null,
             bool async = false,
             bool filteredQuery = false
-        ) {
+        )
+        {
             using var context = _contextCreator();
             var actual = async
                 ? await RewriteServerQuery(actualQuery(SetSourceCreator(context)))
@@ -1542,7 +1602,8 @@ namespace Microsoft.EntityFrameworkCore.TestUtilities
             Action<double?, double?> asserter = null,
             bool async = false,
             bool filteredQuery = false
-        ) {
+        )
+        {
             using var context = _contextCreator();
             var actual = async
                 ? await RewriteServerQuery(actualQuery(SetSourceCreator(context)))
@@ -1571,7 +1632,8 @@ namespace Microsoft.EntityFrameworkCore.TestUtilities
             Action<decimal, decimal> asserter = null,
             bool async = false,
             bool filteredQuery = false
-        ) {
+        )
+        {
             using var context = _contextCreator();
             var actual = async
                 ? await RewriteServerQuery(actualQuery(SetSourceCreator(context)))
@@ -1600,7 +1662,8 @@ namespace Microsoft.EntityFrameworkCore.TestUtilities
             Action<decimal?, decimal?> asserter = null,
             bool async = false,
             bool filteredQuery = false
-        ) {
+        )
+        {
             using var context = _contextCreator();
             var actual = async
                 ? await RewriteServerQuery(actualQuery(SetSourceCreator(context)))
@@ -1629,7 +1692,8 @@ namespace Microsoft.EntityFrameworkCore.TestUtilities
             Action<float, float> asserter = null,
             bool async = false,
             bool filteredQuery = false
-        ) {
+        )
+        {
             using var context = _contextCreator();
             var actual = async
                 ? await RewriteServerQuery(actualQuery(SetSourceCreator(context)))
@@ -1658,7 +1722,8 @@ namespace Microsoft.EntityFrameworkCore.TestUtilities
             Action<float?, float?> asserter = null,
             bool async = false,
             bool filteredQuery = false
-        ) {
+        )
+        {
             using var context = _contextCreator();
             var actual = async
                 ? await RewriteServerQuery(actualQuery(SetSourceCreator(context)))
@@ -1687,7 +1752,8 @@ namespace Microsoft.EntityFrameworkCore.TestUtilities
             Action<double, double> asserter = null,
             bool async = false,
             bool filteredQuery = false
-        ) {
+        )
+        {
             using var context = _contextCreator();
             var actual = async
                 ? await RewriteServerQuery(actualQuery(SetSourceCreator(context)))
@@ -1716,7 +1782,8 @@ namespace Microsoft.EntityFrameworkCore.TestUtilities
             Action<double?, double?> asserter = null,
             bool async = false,
             bool filteredQuery = false
-        ) {
+        )
+        {
             using var context = _contextCreator();
             var actual = async
                 ? await RewriteServerQuery(actualQuery(SetSourceCreator(context)))
@@ -1767,7 +1834,8 @@ namespace Microsoft.EntityFrameworkCore.TestUtilities
             bool ordered = false,
             Func<TElement, object> elementSorter = null,
             Action<TElement, TElement> elementAsserter = null
-        ) {
+        )
+        {
             if (expected == null && actual == null)
             {
                 return;
@@ -1828,7 +1896,8 @@ namespace Microsoft.EntityFrameworkCore.TestUtilities
             TEntity expected,
             TEntity actual,
             IExpectedInclude[] expectedIncludes
-        ) {
+        )
+        {
             _includePath.Clear();
 
             AssertIncludeObject(expected, actual, expectedIncludes, assertOrder: false);
@@ -1839,7 +1908,8 @@ namespace Microsoft.EntityFrameworkCore.TestUtilities
             object actual,
             IEnumerable<IExpectedInclude> expectedIncludes,
             bool assertOrder
-        ) {
+        )
+        {
             if (expected == null && actual == null)
             {
                 return;
@@ -1856,7 +1926,8 @@ namespace Microsoft.EntityFrameworkCore.TestUtilities
                             i.IsConstructedGenericType
                             && i.GetGenericTypeDefinition() == typeof(IEnumerable<>)
                     )
-            ) {
+            )
+            {
                 _assertIncludeCollectionMethodInfo.MakeGenericMethod(
                         expectedType.GenericTypeArguments[0]
                     )
@@ -1873,7 +1944,8 @@ namespace Microsoft.EntityFrameworkCore.TestUtilities
             TElement expected,
             TElement actual,
             IEnumerable<IExpectedInclude> expectedIncludes
-        ) {
+        )
+        {
             Assert.Equal(expected.GetType(), actual.GetType());
 
             if (_entityAsserters.TryGetValue(typeof(TElement), out var asserter))
@@ -1888,7 +1960,8 @@ namespace Microsoft.EntityFrameworkCore.TestUtilities
             IEnumerable<TElement> actual,
             IEnumerable<IExpectedInclude> expectedIncludes,
             bool assertOrder
-        ) {
+        )
+        {
             var expectedList = expected.ToList();
             var actualList = actual.ToList();
 
@@ -1916,13 +1989,15 @@ namespace Microsoft.EntityFrameworkCore.TestUtilities
             TEntity expected,
             TEntity actual,
             IEnumerable<IExpectedInclude> expectedIncludes
-        ) {
+        )
+        {
             var currentPath = string.Join(".", _includePath);
 
             foreach (
                 var expectedInclude in expectedIncludes.OfType<ExpectedInclude<TEntity>>()
                     .Where(i => i.NavigationPath == currentPath)
-            ) {
+            )
+            {
                 var expectedIncludedNavigation = GetIncluded(
                     expected,
                     expectedInclude.IncludeMember

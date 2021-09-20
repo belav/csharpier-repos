@@ -56,7 +56,8 @@ namespace Microsoft.CodeAnalysis.NewLines.MultipleBlankLines
             Document document,
             ImmutableArray<Diagnostic> diagnostics,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var syntaxKinds = document.GetRequiredLanguageService<ISyntaxKindsService>();
             var root = await document.GetRequiredSyntaxRootAsync(cancellationToken)
                 .ConfigureAwait(false);
@@ -79,7 +80,8 @@ namespace Microsoft.CodeAnalysis.NewLines.MultipleBlankLines
         private static SyntaxTriviaList UpdateLeadingTrivia(
             ISyntaxKindsService syntaxKinds,
             SyntaxTriviaList triviaList
-        ) {
+        )
+        {
             using var _ = ArrayBuilder<SyntaxTrivia>.GetInstance(out var builder);
 
             var currentStart = 0;
@@ -101,7 +103,8 @@ namespace Microsoft.CodeAnalysis.NewLines.MultipleBlankLines
                 while (
                     currentEnd < triviaList.Count
                     && IsEndOfLine(syntaxKinds, triviaList, currentEnd)
-                ) {
+                )
+                {
                     currentEnd++;
                 }
 
@@ -156,7 +159,8 @@ namespace Microsoft.CodeAnalysis.NewLines.MultipleBlankLines
             ISyntaxKindsService syntaxKinds,
             SyntaxTriviaList triviaList,
             int index
-        ) {
+        )
+        {
             if (index >= triviaList.Count)
                 return false;
 
@@ -173,13 +177,12 @@ namespace Microsoft.CodeAnalysis.NewLines.MultipleBlankLines
 
         private class MyCodeAction : CustomCodeActions.DocumentChangeAction
         {
-            public MyCodeAction(
-                Func<CancellationToken, Task<Document>> createChangedDocument
-            ) : base(
-                CodeFixesResources.Remove_extra_blank_lines,
-                createChangedDocument,
-                CodeFixesResources.Remove_extra_blank_lines
-            ) { }
+            public MyCodeAction(Func<CancellationToken, Task<Document>> createChangedDocument)
+                : base(
+                    CodeFixesResources.Remove_extra_blank_lines,
+                    createChangedDocument,
+                    CodeFixesResources.Remove_extra_blank_lines
+                ) { }
         }
     }
 }

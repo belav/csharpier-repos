@@ -66,7 +66,8 @@ namespace Microsoft.DotNet.Cli.CommandLine
             string name,
             Action<CommandLineApplication> configuration,
             bool throwOnUnexpectedArg = true
-        ) {
+        )
+        {
             var command = new CommandLineApplication(throwOnUnexpectedArg)
             {
                 Name = name,
@@ -88,7 +89,8 @@ namespace Microsoft.DotNet.Cli.CommandLine
             string? description,
             CommandOptionType optionType,
             Action<CommandOption> configuration
-        ) {
+        )
+        {
             var option = new CommandOption(template, optionType) { Description = description };
             Options.Add(option);
             configuration(option);
@@ -106,7 +108,8 @@ namespace Microsoft.DotNet.Cli.CommandLine
             string description,
             Action<CommandArgument> configuration,
             bool multipleValues = false
-        ) {
+        )
+        {
             var lastArg = Arguments.LastOrDefault();
             if (lastArg?.MultipleValues == true)
             {
@@ -214,7 +217,8 @@ namespace Microsoft.DotNet.Cli.CommandLine
             string[] args,
             ref int index,
             out CommandOption? option
-        ) {
+        )
+        {
             option = null;
             var result = ParseOptionResult.Succeeded;
             var arg = args[index];
@@ -249,7 +253,8 @@ namespace Microsoft.DotNet.Cli.CommandLine
                     isLongOption
                     && string.IsNullOrEmpty(optionName)
                     && command.AllowArgumentSeparator
-                ) {
+                )
+                {
                     // a stand-alone "--" is the argument separator, so skip it and
                     // handle the rest of the args as application args
                     for (index++; index < args.Length; index++)
@@ -290,7 +295,8 @@ namespace Microsoft.DotNet.Cli.CommandLine
                     if (
                         option.OptionType == CommandOptionType.NoValue
                         || option.OptionType == CommandOptionType.BoolValue
-                    ) {
+                    )
+                    {
                         // No value is needed for this option
                         option.TryParse(null);
                     }
@@ -316,7 +322,8 @@ namespace Microsoft.DotNet.Cli.CommandLine
         private static CommandLineApplication? ParseSubCommand(
             string arg,
             CommandLineApplication command
-        ) {
+        )
+        {
             foreach (var subcommand in command.Commands)
             {
                 if (string.Equals(subcommand.Name, arg, StringComparison.OrdinalIgnoreCase))
@@ -342,7 +349,8 @@ namespace Microsoft.DotNet.Cli.CommandLine
             string template,
             string shortFormVersion,
             string? longFormVersion = null
-        ) {
+        )
+        {
             if (longFormVersion == null)
             {
                 return VersionOption(template, () => shortFormVersion);
@@ -356,7 +364,8 @@ namespace Microsoft.DotNet.Cli.CommandLine
             string template,
             Func<string> shortFormVersionGetter,
             Func<string>? longFormVersionGetter = null
-        ) {
+        )
+        {
             // Version option is special because we stop parsing once we see it
             // So we store it separately for further use
             OptionVersion = Option(template, "Show version information", CommandOptionType.NoValue);
@@ -405,7 +414,8 @@ namespace Microsoft.DotNet.Cli.CommandLine
             if (
                 commandName == null
                 || string.Equals(Name, commandName, StringComparison.OrdinalIgnoreCase)
-            ) {
+            )
+            {
                 target = this;
             }
             else
@@ -611,7 +621,8 @@ namespace Microsoft.DotNet.Cli.CommandLine
             string[] args,
             int index,
             string argTypeName
-        ) {
+        )
+        {
             if (command._throwOnUnexpectedArg)
             {
                 command.ShowHint();

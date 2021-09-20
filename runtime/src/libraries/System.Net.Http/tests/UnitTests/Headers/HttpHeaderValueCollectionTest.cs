@@ -1162,7 +1162,8 @@ namespace System.Net.Http.Tests
                 object storeValue,
                 ref int index,
                 out object parsedValue
-            ) {
+            )
+            {
                 parsedValue = null;
                 if (value == null)
                 {

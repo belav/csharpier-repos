@@ -19,13 +19,15 @@ namespace Microsoft.AspNetCore.SignalR.Tests
 
         public virtual IDisposable StartVerifiableLog(
             Func<WriteContext, bool> expectedErrorsFilter = null
-        ) {
+        )
+        {
             return CreateScope(expectedErrorsFilter);
         }
 
         private VerifyNoErrorsScope CreateScope(
             Func<WriteContext, bool> expectedErrorsFilter = null
-        ) {
+        )
+        {
             return new VerifyNoErrorsScope(
                 LoggerFactory,
                 wrappedDisposable: null,

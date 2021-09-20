@@ -20,7 +20,8 @@ namespace System.DirectoryServices.Protocols.Tests
             byte[] value,
             bool isCritical,
             bool serverSide
-        ) {
+        )
+        {
             var control = new DirectoryControl(type, value, isCritical, serverSide);
             Assert.Equal(type, control.Type);
             Assert.Equal(isCritical, control.IsCritical);

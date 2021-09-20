@@ -26,7 +26,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.TypeInferrer
             TextSpan textSpan,
             string expectedType,
             TestMode mode
-        ) {
+        )
+        {
             var root = await document.GetSyntaxRootAsync();
             var node = FindExpressionSyntaxFromSpan(root, textSpan);
             var typeInference = document.GetLanguageService<ITypeInferenceService>();
@@ -87,7 +88,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.TypeInferrer
         private static ExpressionSyntax FindExpressionSyntaxFromSpan(
             SyntaxNode root,
             TextSpan textSpan
-        ) {
+        )
+        {
             var token = root.FindToken(textSpan.Start);
             var currentNode = token.Parent;
             while (currentNode != null)
@@ -1339,7 +1341,8 @@ async System.Threading.Tasks.Task<string?> M() => [|Goo()|];",
             [CombinatorialValues("IEnumerable", "IEnumerator", "InvalidGenericType")]
                 string returnTypeName,
             TestMode mode
-        ) {
+        )
+        {
             var markup =
                 $@"using System.Collections.Generic;
 
@@ -1358,7 +1361,8 @@ class C
             [CombinatorialValues("IEnumerable", "IEnumerator", "InvalidGenericType")]
                 string returnTypeName,
             TestMode mode
-        ) {
+        )
+        {
             var markup =
                 $@"#nullable enable
 using System.Collections.Generic;
@@ -1378,7 +1382,8 @@ class C
             [CombinatorialValues("IAsyncEnumerable", "IAsyncEnumerator", "InvalidGenericType")]
                 string returnTypeName,
             TestMode mode
-        ) {
+        )
+        {
             var markup =
                 $@"namespace System.Collections.Generic
 {{
@@ -1399,7 +1404,8 @@ class C
             [CombinatorialValues("int[]", "InvalidNonGenericType", "InvalidGenericType<int, int>")]
                 string returnType,
             TestMode mode
-        ) {
+        )
+        {
             var markup =
                 $@"class C
 {{
@@ -1592,7 +1598,8 @@ System.Func<string?> f = delegate ()
         [Theory, CombinatorialData, Trait(Traits.Feature, Traits.Features.TypeInferenceService)]
         public async Task TestReturnInAsyncTaskOfTAnonymousMethodWithNullableReference(
             TestMode mode
-        ) {
+        )
+        {
             await TestInMethodAsync(
                 @"#nullable enable
 System.Func<System.Threading.Tasks.Task<string?>> f = async delegate ()
@@ -2379,7 +2386,8 @@ class C
         [Theory, CombinatorialData, Trait(Traits.Feature, Traits.Features.TypeInferenceService)]
         public async Task TestArrayInitializerInImplicitArrayCreationInferredAsNullable(
             TestMode mode
-        ) {
+        )
+        {
             var text =
                 @"#nullable enable
 
@@ -2603,7 +2611,8 @@ class C
         [Theory, CombinatorialData, Trait(Traits.Feature, Traits.Features.TypeInferenceService)]
         public async Task TestCustomCollectionInitializerAddMethodWithNullableParameter(
             TestMode mode
-        ) {
+        )
+        {
             var text =
                 @"class C : System.Collections.IEnumerable
 {
@@ -3543,7 +3552,8 @@ class Program
         public async Task TestEnumInPatterns_Is_ConstUnaryAndBinaryPattern(
             string isPattern,
             bool shouldInferColor = true
-        ) {
+        )
+        {
             var markup =
                 @$"
 class C

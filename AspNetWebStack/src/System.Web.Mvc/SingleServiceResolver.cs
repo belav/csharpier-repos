@@ -18,7 +18,8 @@ namespace System.Web.Mvc
             Func<TService> currentValueThunk,
             TService defaultValue,
             string callerMethodName
-        ) {
+        )
+        {
             if (currentValueThunk == null)
             {
                 throw new ArgumentNullException("currentValueThunk");

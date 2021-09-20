@@ -38,7 +38,8 @@ namespace Castle.Components.DictionaryAdapter.Xml
             IXmlNode node,
             IDictionaryAdapter parent,
             IXmlAccessor accessor
-        ) {
+        )
+        {
             var itemType = node.ClrType.GetElementType();
 
             return Array.CreateInstance(itemType, 0);
@@ -48,7 +49,8 @@ namespace Castle.Components.DictionaryAdapter.Xml
             IXmlNode node,
             IDictionaryAdapter parent,
             IXmlAccessor accessor
-        ) {
+        )
+        {
             var items = new ArrayList();
             var itemType = node.ClrType.GetElementType();
             var references = XmlAdapter.For(parent).References;
@@ -65,7 +67,8 @@ namespace Castle.Components.DictionaryAdapter.Xml
             IXmlAccessor accessor,
             object oldValue,
             ref object value
-        ) {
+        )
+        {
             var source = (Array)value;
             var target = (Array)null;
             var originals = (Array)oldValue;

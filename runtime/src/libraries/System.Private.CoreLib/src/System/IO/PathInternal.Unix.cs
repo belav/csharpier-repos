@@ -47,7 +47,8 @@ namespace System.IO
                 if (
                     IsDirectorySeparator(path[i])
                     && (i + 1 < path.Length && IsDirectorySeparator(path[i + 1]))
-                ) {
+                )
+                {
                     normalized = false;
                     break;
                 }

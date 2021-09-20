@@ -23,7 +23,8 @@ namespace Microsoft.AspNetCore.Mvc.FunctionalTests
 
         public TempDataInCookiesUsingCookieConsentTest(
             MvcTestFixture<BasicWebSite.StartupWithCookieTempDataProviderAndCookieConsent> fixture
-        ) {
+        )
+        {
             var factory =
                 fixture.Factories.FirstOrDefault()
                 ?? fixture.WithWebHostBuilder(ConfigureWebHostBuilder);
@@ -102,7 +103,8 @@ namespace Microsoft.AspNetCore.Mvc.FunctionalTests
             string path,
             HttpContent content,
             HttpResponseMessage response
-        ) {
+        )
+        {
             var request = new HttpRequestMessage(HttpMethod.Post, path);
             request.Content = content;
             SetCookieHeaders(request, response);

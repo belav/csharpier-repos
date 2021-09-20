@@ -23,7 +23,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             Symbol symbol,
             NamedTypeSymbol within,
             NamedTypeSymbol throughTypeOpt = null
-        ) {
+        )
+        {
             if ((object)symbol == null)
             {
                 throw new ArgumentNullException(nameof(symbol));

@@ -59,7 +59,8 @@ namespace System.Reflection.Emit
             string name,
             TypeAttributes visibility,
             Type underlyingType
-        ) {
+        )
+        {
             if ((visibility & ~TypeAttributes.VisibilityMask) != 0)
                 throw new ArgumentException(SR.Argument_ShouldOnlySetVisibilityFlags, nameof(name));
             if (
@@ -218,7 +219,8 @@ namespace System.Reflection.Emit
             CallingConventions callConvention,
             Type[] types,
             ParameterModifier[]? modifiers
-        ) {
+        )
+        {
             return _tb.GetConstructor(bindingAttr, binder, callConvention, types, modifiers);
         }
 
@@ -313,7 +315,8 @@ namespace System.Reflection.Emit
             string name,
             MemberTypes type,
             BindingFlags bindingAttr
-        ) {
+        )
+        {
             return _tb.GetMember(name, type, bindingAttr);
         }
 
@@ -334,7 +337,8 @@ namespace System.Reflection.Emit
             CallingConventions callConvention,
             Type[]? types,
             ParameterModifier[]? modifiers
-        ) {
+        )
+        {
             if (types == null)
             {
                 return _tb.GetMethod(name, bindingAttr);
@@ -390,7 +394,8 @@ namespace System.Reflection.Emit
             Type? returnType,
             Type[]? types,
             ParameterModifier[]? modifiers
-        ) {
+        )
+        {
             throw new NotSupportedException(SR.NotSupported_DynamicModule);
         }
 
@@ -409,7 +414,8 @@ namespace System.Reflection.Emit
             ParameterModifier[]? modifiers,
             CultureInfo? culture,
             string[]? namedParameters
-        ) {
+        )
+        {
             return _tb.InvokeMember(
                 name,
                 invokeAttr,

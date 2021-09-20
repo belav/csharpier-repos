@@ -54,7 +54,8 @@ namespace System.ComponentModel.DataAnnotations
             object? value,
             ValidationContext validationContext,
             ICollection<ValidationResult>? validationResults
-        ) {
+        )
+        {
             // Throw if value cannot be assigned to this property.  That is not a validation exception.
             var propertyType = _store.GetPropertyType(validationContext);
             var propertyName = validationContext.MemberName!;
@@ -72,7 +73,8 @@ namespace System.ComponentModel.DataAnnotations
                     attributes,
                     breakOnFirstError
                 )
-            ) {
+            )
+            {
                 result = false;
 
                 validationResults?.Add(err.ValidationResult);
@@ -155,7 +157,8 @@ namespace System.ComponentModel.DataAnnotations
             ValidationContext validationContext,
             ICollection<ValidationResult>? validationResults,
             bool validateAllProperties
-        ) {
+        )
+        {
             if (instance == null)
             {
                 throw new ArgumentNullException(nameof(instance));
@@ -179,7 +182,8 @@ namespace System.ComponentModel.DataAnnotations
                     validateAllProperties,
                     breakOnFirstError
                 )
-            ) {
+            )
+            {
                 result = false;
 
                 validationResults?.Add(err.ValidationResult);
@@ -222,7 +226,8 @@ namespace System.ComponentModel.DataAnnotations
             ValidationContext validationContext,
             ICollection<ValidationResult>? validationResults,
             IEnumerable<ValidationAttribute> validationAttributes
-        ) {
+        )
+        {
             var result = true;
             var breakOnFirstError = validationResults == null;
 
@@ -233,7 +238,8 @@ namespace System.ComponentModel.DataAnnotations
                     validationAttributes,
                     breakOnFirstError
                 )
-            ) {
+            )
+            {
                 result = false;
 
                 validationResults?.Add(err.ValidationResult);
@@ -320,7 +326,8 @@ namespace System.ComponentModel.DataAnnotations
             object instance,
             ValidationContext validationContext,
             bool validateAllProperties
-        ) {
+        )
+        {
             if (instance == null)
             {
                 throw new ArgumentNullException(nameof(instance));
@@ -362,7 +369,8 @@ namespace System.ComponentModel.DataAnnotations
             object value,
             ValidationContext validationContext,
             IEnumerable<ValidationAttribute> validationAttributes
-        ) {
+        )
+        {
             if (validationContext == null)
             {
                 throw new ArgumentNullException(nameof(validationContext));
@@ -387,7 +395,8 @@ namespace System.ComponentModel.DataAnnotations
         private static ValidationContext CreateValidationContext(
             object instance,
             ValidationContext validationContext
-        ) {
+        )
+        {
             Debug.Assert(validationContext != null);
 
             // Create a new context using the existing ValidationContext that acts as an IServiceProvider and contains our existing items.
@@ -436,7 +445,8 @@ namespace System.ComponentModel.DataAnnotations
             string propertyName,
             Type propertyType,
             object? value
-        ) {
+        )
+        {
             if (!CanBeAssigned(propertyType, value))
             {
                 throw new ArgumentException(
@@ -469,7 +479,8 @@ namespace System.ComponentModel.DataAnnotations
             ValidationContext validationContext,
             bool validateAllProperties,
             bool breakOnFirstError
-        ) {
+        )
+        {
             Debug.Assert(instance != null);
 
             if (validationContext == null)
@@ -540,7 +551,8 @@ namespace System.ComponentModel.DataAnnotations
             ValidationContext validationContext,
             bool validateAllProperties,
             bool breakOnFirstError
-        ) {
+        )
+        {
             var properties = GetPropertyValues(instance, validationContext);
             var errors = new List<ValidationError>();
 
@@ -605,7 +617,8 @@ namespace System.ComponentModel.DataAnnotations
         private static ICollection<KeyValuePair<ValidationContext, object?>> GetPropertyValues(
             object instance,
             ValidationContext validationContext
-        ) {
+        )
+        {
             var properties = instance.GetType()
                 .GetRuntimeProperties()
                 .Where(p => ValidationAttributeStore.IsPublic(p) && !p.GetIndexParameters().Any());
@@ -650,7 +663,8 @@ namespace System.ComponentModel.DataAnnotations
             ValidationContext validationContext,
             IEnumerable<ValidationAttribute> attributes,
             bool breakOnFirstError
-        ) {
+        )
+        {
             if (validationContext == null)
             {
                 throw new ArgumentNullException(nameof(validationContext));
@@ -708,7 +722,8 @@ namespace System.ComponentModel.DataAnnotations
             ValidationContext validationContext,
             ValidationAttribute attribute,
             [NotNullWhen(false)] out ValidationError? validationError
-        ) {
+        )
+        {
             Debug.Assert(validationContext != null);
 
             var validationResult = attribute.GetValidationResult(value, validationContext);
@@ -735,7 +750,8 @@ namespace System.ComponentModel.DataAnnotations
                 ValidationAttribute? validationAttribute,
                 object? value,
                 ValidationResult validationResult
-            ) {
+            )
+            {
                 _validationAttribute = validationAttribute;
                 ValidationResult = validationResult;
                 _value = value;

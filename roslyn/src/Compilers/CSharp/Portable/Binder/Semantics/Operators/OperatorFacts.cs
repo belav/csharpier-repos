@@ -147,7 +147,8 @@ namespace Microsoft.CodeAnalysis.CSharp
 
         public static string OperatorNameFromDeclaration(
             Syntax.InternalSyntax.OperatorDeclarationSyntax declaration
-        ) {
+        )
+        {
             var opTokenKind = declaration.OperatorToken.Kind;
 
             if (SyntaxFacts.IsBinaryExpressionOperatorToken(opTokenKind))
@@ -156,7 +157,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                 if (
                     SyntaxFacts.IsPrefixUnaryExpressionOperatorToken(opTokenKind)
                     && declaration.ParameterList.Parameters.Count == 1
-                ) {
+                )
+                {
                     return OperatorFacts.UnaryOperatorNameFromSyntaxKind(opTokenKind);
                 }
 

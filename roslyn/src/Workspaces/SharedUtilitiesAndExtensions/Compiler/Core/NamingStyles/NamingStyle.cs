@@ -50,7 +50,8 @@ namespace Microsoft.CodeAnalysis.NamingStyles
             Optional<string> suffix = default,
             Optional<string> wordSeparator = default,
             Optional<Capitalization> capitalizationScheme = default
-        ) {
+        )
+        {
             var newName = name.HasValue ? name.Value : this.Name;
             var newPrefix = prefix.HasValue ? prefix.Value : this.Prefix;
             var newSuffix = suffix.HasValue ? suffix.Value : this.Suffix;
@@ -67,7 +68,8 @@ namespace Microsoft.CodeAnalysis.NamingStyles
                 && newSuffix == this.Suffix
                 && newWordSeparator == this.WordSeparator
                 && newCapitalizationScheme == this.CapitalizationScheme
-            ) {
+            )
+            {
                 return this;
             }
 
@@ -296,7 +298,8 @@ namespace Microsoft.CodeAnalysis.NamingStyles
             Func<string, TextSpan, bool> wordCheck,
             string resourceId,
             out string reason
-        ) {
+        )
+        {
             reason = null;
             using var _ = ArrayBuilder<string>.GetInstance(out var violations);
 
@@ -351,7 +354,8 @@ namespace Microsoft.CodeAnalysis.NamingStyles
             string firstResourceId,
             string restResourceId,
             out string reason
-        ) {
+        )
+        {
             reason = null;
             using var _ = ArrayBuilder<string>.GetInstance(out var violations);
 

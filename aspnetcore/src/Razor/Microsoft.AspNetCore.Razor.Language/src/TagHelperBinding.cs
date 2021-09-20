@@ -17,7 +17,8 @@ namespace Microsoft.AspNetCore.Razor.Language
                 IReadOnlyList<TagMatchingRuleDescriptor>
             > mappings,
             string tagHelperPrefix
-        ) {
+        )
+        {
             TagName = tagName;
             Attributes = attributes;
             ParentTagName = parentTagName;
@@ -51,7 +52,8 @@ namespace Microsoft.AspNetCore.Razor.Language
                             bool.TrueString,
                             StringComparison.OrdinalIgnoreCase
                         )
-                    ) {
+                    )
+                    {
                         return false;
                     }
                 }
@@ -80,7 +82,8 @@ namespace Microsoft.AspNetCore.Razor.Language
 
         public IReadOnlyList<TagMatchingRuleDescriptor> GetBoundRules(
             TagHelperDescriptor descriptor
-        ) {
+        )
+        {
             if (descriptor == null)
             {
                 throw new ArgumentNullException(nameof(descriptor));

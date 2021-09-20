@@ -20,7 +20,8 @@ namespace System.Reflection.Runtime.BindingFlagSupport
             RuntimeTypeInfo type,
             NameFilter? filter,
             RuntimeTypeInfo reflectedType
-        ) {
+        )
+        {
             return type.GetMethodsCore(filter, reflectedType);
         }
 
@@ -32,7 +33,8 @@ namespace System.Reflection.Runtime.BindingFlagSupport
             out bool isStatic,
             out bool isVirtual,
             out bool isNewSlot
-        ) {
+        )
+        {
             MethodAttributes methodAttributes = member.Attributes;
             visibility = methodAttributes & MethodAttributes.MemberAccessMask;
             isStatic = (0 != (methodAttributes & MethodAttributes.Static));
@@ -43,7 +45,8 @@ namespace System.Reflection.Runtime.BindingFlagSupport
         public sealed override bool ImplicitlyOverrides(
             MethodInfo? baseMember,
             MethodInfo? derivedMember
-        ) {
+        )
+        {
             return AreNamesAndSignaturesEqual(baseMember!, derivedMember!);
         }
 
@@ -55,7 +58,8 @@ namespace System.Reflection.Runtime.BindingFlagSupport
             MethodInfo[] priorMembers,
             int startIndex,
             int endIndex
-        ) {
+        )
+        {
             if (!member.IsVirtual)
                 return false;
 

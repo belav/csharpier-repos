@@ -33,7 +33,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.TableDataSource
             DocumentId documentId,
             object id,
             AbstractTableEntriesSnapshot<TItem> snapshot
-        ) {
+        )
+        {
             lock (_gate)
             {
                 if (!_map.TryGetValue(documentId, out var secondMap))
@@ -48,7 +49,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.TableDataSource
                 if (
                     secondMap.TryGetValue(id, out var oldWeakSnapshot)
                     && oldWeakSnapshot.TryGetTarget(out var oldSnapshot)
-                ) {
+                )
+                {
                     oldSnapshot.StopTracking();
                 }
 
@@ -73,7 +75,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.TableDataSource
                             d => projectId == null ? true : d.ProjectId == projectId
                         )
                         .ToList()
-                ) {
+                )
+                {
                     if (solution.GetDocument(documentId) != null)
                     {
                         // document still exist.

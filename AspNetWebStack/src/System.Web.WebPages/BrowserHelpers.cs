@@ -46,7 +46,8 @@ namespace System.Web.WebPages
         /// </summary>
         public static HttpBrowserCapabilitiesBase GetOverriddenBrowser(
             this HttpContextBase httpContext
-        ) {
+        )
+        {
             return GetOverriddenBrowser(httpContext, createBrowser: null);
         }
 
@@ -56,7 +57,8 @@ namespace System.Web.WebPages
         internal static HttpBrowserCapabilitiesBase GetOverriddenBrowser(
             this HttpContextBase httpContext,
             Func<string, HttpBrowserCapabilitiesBase> createBrowser
-        ) {
+        )
+        {
             HttpBrowserCapabilitiesBase overriddenBrowser =
                 (HttpBrowserCapabilitiesBase)httpContext.Items[_browserOverrideKey];
 
@@ -70,7 +72,8 @@ namespace System.Web.WebPages
                         httpContext.Request.UserAgent,
                         StringComparison.OrdinalIgnoreCase
                     )
-                ) {
+                )
+                {
                     if (createBrowser != null)
                     {
                         overriddenBrowser = createBrowser(overriddenUserAgent);
@@ -118,7 +121,8 @@ namespace System.Web.WebPages
         /// </summary>
         public static string GetVaryByCustomStringForOverriddenBrowser(
             this HttpContextBase httpContext
-        ) {
+        )
+        {
             return GetOverriddenBrowser(httpContext, createBrowser: null).Type;
         }
 
@@ -128,7 +132,8 @@ namespace System.Web.WebPages
         public static void SetOverriddenBrowser(
             this HttpContextBase httpContext,
             BrowserOverride browserOverride
-        ) {
+        )
+        {
             string userAgent = null;
 
             switch (browserOverride)
@@ -138,7 +143,8 @@ namespace System.Web.WebPages
                     if (
                         httpContext.Request.Browser == null
                         || httpContext.Request.Browser.IsMobileDevice
-                    ) {
+                    )
+                    {
                         userAgent = DesktopUserAgent;
                     }
                     break;
@@ -146,7 +152,8 @@ namespace System.Web.WebPages
                     if (
                         httpContext.Request.Browser == null
                         || !httpContext.Request.Browser.IsMobileDevice
-                    ) {
+                    )
+                    {
                         userAgent = MobileUserAgent;
                     }
                     break;

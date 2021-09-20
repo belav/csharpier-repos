@@ -297,7 +297,8 @@ namespace Microsoft.CodeAnalysis.UnitTests
         private static async Task AssertSemanticVersionChangedAsync(
             Project project1,
             Project project2
-        ) {
+        )
+        {
             Assert.NotEqual(
                 await project1.GetSemanticVersionAsync(),
                 await project2.GetSemanticVersionAsync()
@@ -307,7 +308,8 @@ namespace Microsoft.CodeAnalysis.UnitTests
         private static async Task AssertSemanticVersionUnchangedAsync(
             Project project1,
             Project project2
-        ) {
+        )
+        {
             Assert.Equal(
                 await project1.GetSemanticVersionAsync(),
                 await project2.GetSemanticVersionAsync()

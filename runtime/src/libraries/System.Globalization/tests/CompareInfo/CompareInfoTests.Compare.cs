@@ -1462,7 +1462,8 @@ namespace System.Globalization.Tests
             string string2,
             CompareOptions options,
             int expected
-        ) {
+        )
+        {
             Compare_Advanced(
                 compareInfo,
                 string1,
@@ -1484,7 +1485,8 @@ namespace System.Globalization.Tests
             string string2,
             CompareOptions options,
             int expected
-        ) {
+        )
+        {
             Compare_Advanced(
                 compareInfo,
                 string1,
@@ -1997,11 +1999,13 @@ namespace System.Globalization.Tests
             int length2,
             CompareOptions options,
             int expected
-        ) {
+        )
+        {
             if (
                 offset1 + length1 == (string1?.Length ?? 0)
                 && offset2 + length2 == (string2?.Length ?? 0)
-            ) {
+            )
+            {
                 if (offset1 == 0 && offset2 == 0)
                 {
                     if (options == CompareOptions.None)
@@ -2108,7 +2112,8 @@ namespace System.Globalization.Tests
                 ReadOnlySpan<char> string2,
                 CompareOptions options,
                 int expected
-            ) {
+            )
+            {
                 using BoundedMemory<char> string1BoundedMemory =
                     BoundedMemory.AllocateFromExistingData(string1);
                 string1BoundedMemory.MakeReadonly();

@@ -28,7 +28,8 @@ namespace System.ComponentModel
             ITypeDescriptorContext context,
             object value,
             Attribute[] attributes
-        ) {
+        )
+        {
             return TypeDescriptor.GetProperties(value, attributes);
         }
 

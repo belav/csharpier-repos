@@ -26,8 +26,9 @@ namespace Roslyn.Utilities
             TKey key,
             Func<TKey, TArg, TValue?> valueProvider,
             TArg factoryArgument
-        ) where TKey : notnull
-          where TValue : class
+        )
+            where TKey : notnull
+            where TValue : class
         {
             Contract.ThrowIfNull(valueProvider);
 

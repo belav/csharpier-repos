@@ -25,7 +25,8 @@ namespace Microsoft.CodeAnalysis.FindSymbols
             this Document document,
             SemanticModel model,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var root = await model.SyntaxTree.GetRootAsync(cancellationToken).ConfigureAwait(false);
 
             var syntaxFacts = document.GetLanguageService<ISyntaxFactsService>();

@@ -118,7 +118,8 @@ namespace System.Threading.Tasks.Dataflow.Internal
             Action<ISourceBlock<TOutput>> completeAction,
             Action<ISourceBlock<TOutput>, int>? itemsRemovedAction = null,
             Func<ISourceBlock<TOutput>, TOutput, IList<TOutput>?, int>? itemCountingFunc = null
-        ) {
+        )
+        {
             Debug.Assert(owningSource != null, "Core must be associated with a source.");
             Debug.Assert(
                 dataflowBlockOptions != null,
@@ -184,7 +185,8 @@ namespace System.Threading.Tasks.Dataflow.Internal
             DataflowMessageHeader messageHeader,
             ITargetBlock<TOutput> target,
             out bool messageConsumed
-        ) {
+        )
+        {
             // Validate arguments
             if (!messageHeader.IsValid)
                 throw new ArgumentException(
@@ -217,7 +219,8 @@ namespace System.Threading.Tasks.Dataflow.Internal
                     if (
                         messageHeader.Id != _nextMessageId.Value
                         || !_messages.TryDequeue(out consumedMessageValue)
-                    ) {
+                    )
+                    {
                         messageConsumed = false;
                         return default(TOutput);
                     }
@@ -253,7 +256,8 @@ namespace System.Threading.Tasks.Dataflow.Internal
         internal bool ReserveMessage(
             DataflowMessageHeader messageHeader,
             ITargetBlock<TOutput> target
-        ) {
+        )
+        {
             // Validate arguments
             if (!messageHeader.IsValid)
                 throw new ArgumentException(
@@ -287,7 +291,8 @@ namespace System.Threading.Tasks.Dataflow.Internal
         internal void ReleaseReservation(
             DataflowMessageHeader messageHeader,
             ITargetBlock<TOutput> target
-        ) {
+        )
+        {
             // Validate arguments
             if (!messageHeader.IsValid)
                 throw new ArgumentException(
@@ -344,7 +349,8 @@ namespace System.Threading.Tasks.Dataflow.Internal
         internal bool TryReceive(
             Predicate<TOutput>? filter,
             [MaybeNullWhen(false)] out TOutput item
-        ) {
+        )
+        {
             item = default(TOutput);
             bool itemReceived = false;
 
@@ -796,7 +802,8 @@ namespace System.Threading.Tasks.Dataflow.Internal
             TOutput message,
             ITargetBlock<TOutput> target,
             out bool messageWasAccepted
-        ) {
+        )
+        {
             Debug.Assert(target != null, "Valid target to offer to is required.");
             Common.ContractAssertMonitorStatus(OutgoingLock, held: true);
             Common.ContractAssertMonitorStatus(ValueLock, held: false);
@@ -861,7 +868,8 @@ namespace System.Threading.Tasks.Dataflow.Internal
         private void OfferAsyncIfNecessary(
             bool isReplacementReplica,
             bool outgoingLockKnownAcquired
-        ) {
+        )
+        {
             Common.ContractAssertMonitorStatus(ValueLock, held: true);
 
             // Fast path to enable OfferAsyncIfNecessary to be inlined.  We only need
@@ -880,7 +888,8 @@ namespace System.Threading.Tasks.Dataflow.Internal
         private void OfferAsyncIfNecessary_Slow(
             bool isReplacementReplica,
             bool outgoingLockKnownAcquired
-        ) {
+        )
+        {
             Common.ContractAssertMonitorStatus(ValueLock, held: true);
             Debug.Assert(
                 _taskForOutputProcessing == null && _enableOffering && !_messages.IsEmpty,
@@ -994,7 +1003,8 @@ namespace System.Threading.Tasks.Dataflow.Internal
                     int messageCounter = 0;
                     messageCounter < maxMessagesPerTask && !CanceledOrFaulted;
 
-                ) {
+                )
+                {
                     lock (OutgoingLock)
                     {
                         // While there are more messages to process, offer each in turn
@@ -1006,7 +1016,8 @@ namespace System.Threading.Tasks.Dataflow.Internal
                                 && lockReleaseCounter < releaseLockIterations
                                 && !CanceledOrFaulted;
                             ++messageCounter, ++lockReleaseCounter
-                        ) {
+                        )
+                        {
                             if (!OfferToTargets())
                                 return;
                         }

@@ -74,7 +74,8 @@ namespace R2RTest
         public override ProcessParameters CompilationProcess(
             string outputFileName,
             IEnumerable<string> inputAssemblyFileNames
-        ) {
+        )
+        {
             ProcessParameters processParameters = base.CompilationProcess(
                 outputFileName,
                 inputAssemblyFileNames
@@ -87,7 +88,8 @@ namespace R2RTest
             IEnumerable<string> modules,
             IEnumerable<string> folders,
             bool noEtw
-        ) {
+        )
+        {
             ProcessParameters processParameters = base.ExecutionProcess(modules, folders, noEtw);
             processParameters.EnvironmentOverrides["COMPLUS_ReadyToRun"] = "1";
             return processParameters;
@@ -96,7 +98,8 @@ namespace R2RTest
         protected override IEnumerable<string> BuildCommandLineArguments(
             IEnumerable<string> assemblyFileNames,
             string outputFileName
-        ) {
+        )
+        {
             // The file to compile
             foreach (string inputAssembly in assemblyFileNames)
             {
@@ -172,7 +175,8 @@ namespace R2RTest
                 frameworkFolder = GetOutputPath(_options.CoreRootDirectory.FullName);
                 foreach (
                     string frameworkRef in ResolveReferences(new string[] { frameworkFolder }, 'r')
-                ) {
+                )
+                {
                     yield return frameworkRef;
                 }
             }
@@ -197,7 +201,8 @@ namespace R2RTest
                         uniqueFolders,
                         CompositeMode && !Crossgen2RunnerOptions.PartialComposite ? 'u' : 'r'
                     )
-                ) {
+                )
+                {
                     yield return reference;
                 }
             }
@@ -217,14 +222,16 @@ namespace R2RTest
         private IEnumerable<string> ResolveReferences(
             IEnumerable<string> folders,
             char referenceOption
-        ) {
+        )
+        {
             foreach (string referenceFolder in folders)
             {
                 foreach (
                     string reference in ComputeManagedAssemblies.GetManagedAssembliesInFolder(
                         referenceFolder
                     )
-                ) {
+                )
+                {
                     string simpleName = Path.GetFileNameWithoutExtension(reference);
                     if (!FrameworkExclusion.Exclude(simpleName, Index, out string reason))
                     {

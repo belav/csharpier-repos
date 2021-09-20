@@ -30,7 +30,8 @@ namespace System.Text
             int charCount,
             byte[] bytes,
             int byteIndex
-        ) {
+        )
+        {
             if (chars == null)
                 throw new ArgumentNullException(nameof(chars));
             if (charIndex < 0)
@@ -67,7 +68,8 @@ namespace System.Text
                         bytes.AsSpan(byteIndex, byteCount),
                         out int charsProcessed
                     )
-                ) {
+                )
+                {
                     int error = charsProcessed + charIndex;
                     throw new FormatException(
                         SR.Format(SR.XmlInvalidBinHexSequence, new string(chars, error, 2), error)
@@ -98,7 +100,8 @@ namespace System.Text
             int byteCount,
             char[] chars,
             int charIndex
-        ) {
+        )
+        {
             if (bytes == null)
                 throw new ArgumentNullException(nameof(bytes));
             if (byteIndex < 0)

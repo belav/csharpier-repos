@@ -214,7 +214,8 @@ namespace Dynamic
                 System.Dynamic.InvokeBinder binder,
                 object[] args,
                 out object result
-            ) {
+            )
+            {
                 result = null;
                 if (args.Length != 1 || !(args[0] is int))
                     return false;

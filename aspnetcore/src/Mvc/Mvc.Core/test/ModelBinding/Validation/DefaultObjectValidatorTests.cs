@@ -1467,7 +1467,8 @@ namespace Microsoft.AspNetCore.Mvc.ModelBinding.Validation
         public void Validate_RespectsMvcOptionsConfiguration_WhenChildValidationFails(
             bool optionValue,
             ModelValidationState expectedParentValidationState
-        ) {
+        )
+        {
             // Arrange
             _options.ValidateComplexTypesIfChildValidationFails = optionValue;
 
@@ -1769,7 +1770,8 @@ namespace Microsoft.AspNetCore.Mvc.ModelBinding.Validation
             protected override ValidationResult IsValid(
                 object value,
                 ValidationContext validationContext
-            ) {
+            )
+            {
                 return new ValidationResult(
                     "Collection contains duplicate value 'Joe'.",
                     new[] { "[0]", "[2]" }
@@ -1791,7 +1793,8 @@ namespace Microsoft.AspNetCore.Mvc.ModelBinding.Validation
             protected override ValidationResult IsValid(
                 object value,
                 ValidationContext validationContext
-            ) {
+            )
+            {
                 return new ValidationResult(
                     "User object lacks some data.",
                     new[] { "FirstName", "Address.City" }

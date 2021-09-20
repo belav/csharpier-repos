@@ -19,7 +19,8 @@ namespace System.Reflection.Metadata
             ImmutableArray<byte> id,
             MethodDefinitionHandle entryPoint,
             int idStartOffset
-        ) {
+        )
+        {
             Id = id;
             EntryPoint = entryPoint;
             IdStartOffset = idStartOffset;

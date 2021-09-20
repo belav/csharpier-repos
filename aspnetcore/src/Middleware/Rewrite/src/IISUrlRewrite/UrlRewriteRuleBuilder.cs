@@ -47,7 +47,8 @@ namespace Microsoft.AspNetCore.Rewrite.IISUrlRewrite
             bool ignoreCase = true,
             bool negate = false,
             PatternSyntax patternSyntax = PatternSyntax.ECMAScript
-        ) {
+        )
+        {
             switch (patternSyntax)
             {
                 case PatternSyntax.ECMAScript:
@@ -85,7 +86,8 @@ namespace Microsoft.AspNetCore.Rewrite.IISUrlRewrite
         public void ConfigureConditionBehavior(
             LogicalGrouping logicalGrouping,
             bool trackAllCaptures
-        ) {
+        )
+        {
             _conditions = new ConditionCollection(logicalGrouping, trackAllCaptures);
         }
 

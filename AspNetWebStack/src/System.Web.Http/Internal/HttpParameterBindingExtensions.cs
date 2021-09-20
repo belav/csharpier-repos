@@ -28,7 +28,8 @@ namespace System.Web.Http.Internal
                 if (
                     valueProviderFactories.Any()
                     && valueProviderFactories.All(factory => factory is IUriValueProviderFactory)
-                ) {
+                )
+                {
                     return true;
                 }
             }

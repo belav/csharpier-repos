@@ -47,7 +47,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Diagnostics
                 IThreadingContext threadingContext,
                 Shell.SVsServiceProvider serviceProvider,
                 IAsynchronousOperationListenerProvider listenerProvider
-            ) {
+            )
+            {
                 _threadingContext = threadingContext;
                 _serviceProvider = serviceProvider;
                 _listener = listenerProvider.GetListener(nameof(Workspace));
@@ -68,7 +69,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Diagnostics
 
             private async Task InitializeWorkspaceAsync(
                 ISolutionAnalyzerSetterWorkspaceService setter
-            ) {
+            )
+            {
                 try
                 {
                     var provider = await CreateProviderAsync().ConfigureAwait(false);

@@ -75,7 +75,8 @@ namespace Microsoft.CodeAnalysis.UnitTests
                 var a = AssemblyMetadata.CreateFromImage(
                     TestResources.SymbolsTests.MultiModule.MultiModuleDll
                 )
-            ) {
+            )
+            {
                 // even though the image refers to other modules only the manifest module is loaded:
                 Assert.Equal(1, a.GetModules().Length);
                 Assert.Equal("MultiModule.dll", a.GetModules()[0].Name);

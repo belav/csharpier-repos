@@ -201,7 +201,8 @@ namespace InteropTestsClient
 
         private async Task<ChannelCredentials> CreateCredentialsAsync(
             bool? useTestCaOverride = null
-        ) {
+        )
+        {
             var credentials = ChannelCredentials.Insecure;
             if (options.UseTls.GetValueOrDefault())
             {
@@ -456,7 +457,8 @@ namespace InteropTestsClient
             TestService.TestServiceClient client,
             string defaultServiceAccount,
             string oauthScope
-        ) {
+        )
+        {
             Console.WriteLine("running compute_engine_creds");
 
             var request = new SimpleRequest
@@ -499,7 +501,8 @@ namespace InteropTestsClient
         public static async Task RunOAuth2AuthTokenAsync(
             TestService.TestServiceClient client,
             string oauthScope
-        ) {
+        )
+        {
             Console.WriteLine("running oauth2_auth_token");
             ITokenAccess credential = (
                 await GoogleCredential.GetApplicationDefaultAsync()
@@ -520,7 +523,8 @@ namespace InteropTestsClient
         public static async Task RunPerRpcCredsAsync(
             TestService.TestServiceClient client,
             string oauthScope
-        ) {
+        )
+        {
             Console.WriteLine("running per_rpc_creds");
             ITokenAccess googleCredential = await GoogleCredential.GetApplicationDefaultAsync();
 
@@ -552,7 +556,8 @@ namespace InteropTestsClient
 
         public static async Task RunCancelAfterFirstResponseAsync(
             TestService.TestServiceClient client
-        ) {
+        )
+        {
             Console.WriteLine("running cancel_after_first_response");
 
             var cts = new CancellationTokenSource();
@@ -587,7 +592,8 @@ namespace InteropTestsClient
 
         public static async Task RunTimeoutOnSleepingServerAsync(
             TestService.TestServiceClient client
-        ) {
+        )
+        {
             Console.WriteLine("running timeout_on_sleeping_server");
 
             var deadline = DateTime.UtcNow.AddMilliseconds(1);
@@ -746,7 +752,8 @@ namespace InteropTestsClient
 
         public static void RunUnimplementedService(
             UnimplementedService.UnimplementedServiceClient client
-        ) {
+        )
+        {
             Console.WriteLine("running unimplemented_service");
             var e = Assert.Throws<RpcException>(() => client.UnimplementedCall(new Empty()));
 
@@ -809,7 +816,8 @@ namespace InteropTestsClient
 
         public static async Task RunClientCompressedStreamingAsync(
             TestService.TestServiceClient client
-        ) {
+        )
+        {
             Console.WriteLine("running client_compressed_streaming");
             try
             {
@@ -887,7 +895,8 @@ namespace InteropTestsClient
 
         public static async Task RunServerCompressedStreamingAsync(
             TestService.TestServiceClient client
-        ) {
+        )
+        {
             Console.WriteLine("running server_compressed_streaming");
 
             var bodySizes = new List<int> { 31415, 92653 };

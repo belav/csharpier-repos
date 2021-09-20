@@ -35,7 +35,8 @@ namespace Microsoft.CodeAnalysis.ExpressionEvaluator.UnitTests
         internal static RequestSignature Signature(
             Name name,
             params ParameterSignature[] parameters
-        ) {
+        )
+        {
             return new RequestSignature(name, ImmutableArray.CreateRange(parameters));
         }
 
@@ -63,7 +64,8 @@ namespace Microsoft.CodeAnalysis.ExpressionEvaluator.UnitTests
         internal static GenericTypeSignature Generic(
             QualifiedTypeSignature name,
             params TypeSignature[] typeArguments
-        ) {
+        )
+        {
             Assert.True(typeArguments.Length > 0);
             return new GenericTypeSignature(name, ImmutableArray.CreateRange(typeArguments));
         }
@@ -96,7 +98,8 @@ namespace Microsoft.CodeAnalysis.ExpressionEvaluator.UnitTests
         internal static void VerifySignature(
             RequestSignature actualSignature,
             RequestSignature expectedSignature
-        ) {
+        )
+        {
             if (expectedSignature == null)
             {
                 Assert.Null(actualSignature);

@@ -29,7 +29,8 @@ namespace System.Formats.Asn1
             DateTimeOffset value,
             bool omitFractionalSeconds = false,
             Asn1Tag? tag = null
-        ) {
+        )
+        {
             CheckUniversalTag(tag, UniversalTagNumber.GeneralizedTime);
 
             // Clear the constructed flag, if present.
@@ -46,7 +47,8 @@ namespace System.Formats.Asn1
             Asn1Tag tag,
             DateTimeOffset value,
             bool omitFractionalSeconds
-        ) {
+        )
+        {
             // GeneralizedTime under BER allows many different options:
             // * (HHmmss), (HHmm), (HH)
             // * "(value).frac", "(value),frac"
@@ -96,7 +98,8 @@ namespace System.Formats.Asn1
                             out int bytesWritten,
                             new StandardFormat('G')
                         )
-                    ) {
+                    )
+                    {
                         Debug.Fail(
                             $"Utf8Formatter.TryFormat could not format {floatingTicks} / TicksPerSecond"
                         );
@@ -143,7 +146,8 @@ namespace System.Formats.Asn1
                 || !Utf8Formatter.TryFormat(hour, baseSpan.Slice(8, 2), out _, d2)
                 || !Utf8Formatter.TryFormat(minute, baseSpan.Slice(10, 2), out _, d2)
                 || !Utf8Formatter.TryFormat(second, baseSpan.Slice(12, 2), out _, d2)
-            ) {
+            )
+            {
                 Debug.Fail($"Utf8Formatter.TryFormat failed to build components of {normalized:O}");
                 throw new InvalidOperationException();
             }

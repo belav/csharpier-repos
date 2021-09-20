@@ -102,7 +102,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.SolutionExplore
             ReportDiagnostic value,
             Project project,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var effectiveSeverity = value.ToDiagnosticSeverity() ?? Descriptor.DefaultSeverity;
             var diagnostic = Diagnostic.Create(
                 Descriptor,

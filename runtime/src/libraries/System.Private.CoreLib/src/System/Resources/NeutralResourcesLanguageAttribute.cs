@@ -18,7 +18,8 @@ namespace System.Resources
         public NeutralResourcesLanguageAttribute(
             string cultureName,
             UltimateResourceFallbackLocation location
-        ) {
+        )
+        {
             if (cultureName == null)
                 throw new ArgumentNullException(nameof(cultureName));
             if (!Enum.IsDefined(typeof(UltimateResourceFallbackLocation), location))

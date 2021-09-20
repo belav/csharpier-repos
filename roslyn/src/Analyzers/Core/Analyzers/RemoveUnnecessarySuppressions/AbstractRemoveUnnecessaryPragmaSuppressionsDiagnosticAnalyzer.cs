@@ -47,7 +47,8 @@ namespace Microsoft.CodeAnalysis.RemoveUnnecessarySuppressions
             : base(
                 ImmutableArray.Create(s_removeUnnecessarySuppressionDescriptor),
                 GeneratedCodeAnalysisFlags.None
-            ) {
+            )
+        {
             _lazySupportedCompilerErrorCodes = new Lazy<ImmutableHashSet<int>>(
                 () => GetSupportedCompilerErrorCodes()
             );
@@ -105,7 +106,8 @@ namespace Microsoft.CodeAnalysis.RemoveUnnecessarySuppressions
             Func<DiagnosticAnalyzer, ImmutableArray<DiagnosticDescriptor>> getSupportedDiagnostics,
             Action<Diagnostic> reportDiagnostic,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             // We need compilation with suppressed diagnostics for this feature.
             if (!compilationWithAnalyzers.Compilation.Options.ReportSuppressedDiagnostics)
             {
@@ -129,7 +131,8 @@ namespace Microsoft.CodeAnalysis.RemoveUnnecessarySuppressions
                     IDEDiagnosticIds.RemoveUnnecessarySuppressionDiagnosticId,
                     out severity
                 )
-            ) {
+            )
+            {
                 if (severity == ReportDiagnostic.Suppress)
                 {
                     return;
@@ -158,7 +161,8 @@ namespace Microsoft.CodeAnalysis.RemoveUnnecessarySuppressions
                     SyntaxFacts,
                     cancellationToken
                 )
-            ) {
+            )
+            {
                 return;
             }
 
@@ -320,7 +324,8 @@ namespace Microsoft.CodeAnalysis.RemoveUnnecessarySuppressions
             ArrayBuilder<(SyntaxTrivia pragma, ImmutableArray<string> ids, bool isDisable)> sortedPragmasWithIds,
             PooledHashSet<string> compilerDiagnosticIds,
             ImmutableArray<string> userExclusions
-        ) {
+        )
+        {
             if (!root.ContainsDirectives)
             {
                 return false;
@@ -341,7 +346,8 @@ namespace Microsoft.CodeAnalysis.RemoveUnnecessarySuppressions
                     )
                     && isActive
                     && errorCodeNodes.Count > 0
-                ) {
+                )
+                {
                     // Iterate through each ID for this pragma and build the supported IDs.
                     idsBuilder.Clear();
                     foreach (var errorCodeNode in errorCodeNodes)
@@ -353,7 +359,8 @@ namespace Microsoft.CodeAnalysis.RemoveUnnecessarySuppressions
                                 out var id,
                                 out var isCompilerDiagnosticId
                             ) || userExclusions.Contains(id, StringComparer.OrdinalIgnoreCase)
-                        ) {
+                        )
+                        {
                             continue;
                         }
 
@@ -401,7 +408,8 @@ namespace Microsoft.CodeAnalysis.RemoveUnnecessarySuppressions
             SyntaxNode idNode,
             [NotNullWhen(returnValue: true)] out string? id,
             out bool isCompilerDiagnosticId
-        ) {
+        )
+        {
             id = idNode.ToString();
 
             // Compiler diagnostic pragma suppressions allow specifying just the integral ID.
@@ -451,7 +459,8 @@ namespace Microsoft.CodeAnalysis.RemoveUnnecessarySuppressions
 
         private static (ImmutableArray<string> userIdExclusions, ImmutableArray<string> userCategoryExclusions, bool analyzerDisabled) ParseUserExclusions(
             string? userExclusions
-        ) {
+        )
+        {
             // Option value must be a comma separate list of diagnostic IDs or categories (with a "category:" prefix) to exclude from unnecessary pragma analysis.
             // We also allow a special keyword "all" to disable the analyzer completely.
             switch (userExclusions)
@@ -519,7 +528,8 @@ namespace Microsoft.CodeAnalysis.RemoveUnnecessarySuppressions
             Func<DiagnosticAnalyzer, ImmutableArray<DiagnosticDescriptor>> getSupportedDiagnostics,
             PooledHashSet<string> compilerDiagnosticIds,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             using var _1 = ArrayBuilder<DiagnosticAnalyzer>.GetInstance(out var analyzersBuilder);
             using var _2 = ArrayBuilder<string>.GetInstance(out var unhandledIds);
 
@@ -600,7 +610,8 @@ namespace Microsoft.CodeAnalysis.RemoveUnnecessarySuppressions
                         semanticModel.SyntaxTree,
                         out var diagnostics
                     )
-                ) {
+                )
+                {
                     AddAllDiagnostics(diagnostics, reportedDiagnostics);
                 }
 
@@ -617,7 +628,8 @@ namespace Microsoft.CodeAnalysis.RemoveUnnecessarySuppressions
                         semanticModel.SyntaxTree,
                         out diagnostics
                     )
-                ) {
+                )
+                {
                     AddAllDiagnostics(diagnostics, reportedDiagnostics);
                 }
 
@@ -633,7 +645,8 @@ namespace Microsoft.CodeAnalysis.RemoveUnnecessarySuppressions
             static void AddAllDiagnostics(
                 ImmutableDictionary<DiagnosticAnalyzer, ImmutableArray<Diagnostic>> diagnostics,
                 ArrayBuilder<Diagnostic> reportedDiagnostics
-            ) {
+            )
+            {
                 foreach (var perAnalyzerDiagnostics in diagnostics.Values)
                 {
                     reportedDiagnostics.AddRange(perAnalyzerDiagnostics);
@@ -644,7 +657,8 @@ namespace Microsoft.CodeAnalysis.RemoveUnnecessarySuppressions
                 AnalysisResult analysisResult,
                 SyntaxTree tree,
                 ArrayBuilder<Diagnostic> reportedDiagnostics
-            ) {
+            )
+            {
                 foreach (var perAnalyzerDiagnostics in analysisResult.CompilationDiagnostics.Values)
                 {
                     foreach (var diagnostic in perAnalyzerDiagnostics)
@@ -667,7 +681,8 @@ namespace Microsoft.CodeAnalysis.RemoveUnnecessarySuppressions
             PooledDictionary<string, List<SyntaxNode>> idToSuppressMessageAttributesMap,
             PooledDictionary<SyntaxNode, bool> suppressMessageAttributesToIsUsedMap,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             foreach (var diagnostic in diagnostics)
             {
                 if (!diagnostic.IsSuppressed)
@@ -710,7 +725,8 @@ namespace Microsoft.CodeAnalysis.RemoveUnnecessarySuppressions
                     List<(SyntaxTrivia pragma, bool isDisable)>
                 > idToPragmasMap,
                 PooledDictionary<SyntaxTrivia, bool> pragmasToIsUsedMap
-            ) {
+            )
+            {
                 if (!idToPragmasMap.TryGetValue(diagnostic.Id, out var pragmasForIdInReverseOrder))
                 {
                     return;
@@ -750,14 +766,16 @@ namespace Microsoft.CodeAnalysis.RemoveUnnecessarySuppressions
                 PooledDictionary<string, List<SyntaxNode>> idToSuppressMessageAttributesMap,
                 PooledDictionary<SyntaxNode, bool> suppressMessageAttributesToIsUsedMap,
                 CancellationToken cancellationToken
-            ) {
+            )
+            {
                 if (
                     attribute.ApplicationSyntaxReference == null
                     || !idToSuppressMessageAttributesMap.TryGetValue(
                         diagnostic.Id,
                         out var suppressMessageAttributesForId
                     )
-                ) {
+                )
+                {
                     return;
                 }
 
@@ -783,7 +801,8 @@ namespace Microsoft.CodeAnalysis.RemoveUnnecessarySuppressions
             Action<Diagnostic> reportDiagnostic,
             DiagnosticSeverity severity,
             Compilation compilation
-        ) {
+        )
+        {
             using var _ = ArrayBuilder<Diagnostic>.GetInstance(out var diagnosticsBuilder);
             AddUnnecessaryPragmaDiagnostics(
                 diagnosticsBuilder,
@@ -814,7 +833,8 @@ namespace Microsoft.CodeAnalysis.RemoveUnnecessarySuppressions
                 PooledDictionary<SyntaxTrivia, bool> pragmasToIsUsedMap,
                 ArrayBuilder<(SyntaxTrivia pragma, ImmutableArray<string> ids, bool isDisable)> sortedPragmasWithIds,
                 DiagnosticSeverity severity
-            ) {
+            )
+            {
                 foreach (var (pragma, isUsed) in pragmasToIsUsedMap)
                 {
                     if (!isUsed)
@@ -832,7 +852,8 @@ namespace Microsoft.CodeAnalysis.RemoveUnnecessarySuppressions
                             )
                             && pragmasToIsUsedMap.TryGetValue(togglePragma, out var isToggleUsed)
                             && !isToggleUsed
-                        ) {
+                        )
+                        {
                             additionalLocations = ImmutableArray.Create(togglePragma.GetLocation());
                         }
                         else
@@ -856,7 +877,8 @@ namespace Microsoft.CodeAnalysis.RemoveUnnecessarySuppressions
                 ArrayBuilder<Diagnostic> diagnosticsBuilder,
                 PooledDictionary<SyntaxNode, bool> suppressMessageAttributesToIsUsedMap,
                 DiagnosticSeverity severity
-            ) {
+            )
+            {
                 foreach (var (attribute, isUsed) in suppressMessageAttributesToIsUsedMap)
                 {
                     if (!isUsed)
@@ -878,7 +900,8 @@ namespace Microsoft.CodeAnalysis.RemoveUnnecessarySuppressions
             SyntaxTrivia pragma,
             ArrayBuilder<(SyntaxTrivia pragma, ImmutableArray<string> ids, bool isDisable)> sortedPragmasWithIds,
             out SyntaxTrivia togglePragma
-        ) {
+        )
+        {
             var indexOfPragma = sortedPragmasWithIds.FindIndex(p => p.pragma == pragma);
             var idsForPragma = sortedPragmasWithIds[indexOfPragma].ids;
             var isDisable = sortedPragmasWithIds[indexOfPragma].isDisable;
@@ -888,7 +911,8 @@ namespace Microsoft.CodeAnalysis.RemoveUnnecessarySuppressions
                 var i = indexOfPragma + incrementOrDecrement;
                 i >= 0 && i < sortedPragmasWithIds.Count;
                 i += incrementOrDecrement
-            ) {
+            )
+            {
                 var (nextPragma, nextPragmaIds, nextPragmaIsDisable) = sortedPragmasWithIds[i];
                 var intersect = nextPragmaIds.Intersect(idsForPragma).ToImmutableArray();
                 if (intersect.IsEmpty)
@@ -941,7 +965,8 @@ namespace Microsoft.CodeAnalysis.RemoveUnnecessarySuppressions
             ImmutableArray<string> userIdExclusions,
             ImmutableArray<string> userCategoryExclusions,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var suppressMessageAttributeType =
                 semanticModel.Compilation.SuppressMessageAttributeType();
             if (suppressMessageAttributeType == null)
@@ -998,7 +1023,8 @@ namespace Microsoft.CodeAnalysis.RemoveUnnecessarySuppressions
                                     out var id,
                                     out var category
                                 )
-                            ) {
+                            )
+                            {
                                 // Ignore unsupported IDs and those excluded through user option.
                                 if (
                                     !IsSupportedAnalyzerDiagnosticId(id)
@@ -1011,7 +1037,8 @@ namespace Microsoft.CodeAnalysis.RemoveUnnecessarySuppressions
                                             category,
                                             StringComparer.OrdinalIgnoreCase
                                         )
-                                ) {
+                                )
+                                {
                                     continue;
                                 }
 
@@ -1020,7 +1047,8 @@ namespace Microsoft.CodeAnalysis.RemoveUnnecessarySuppressions
                                         id,
                                         out var nodesForId
                                     )
-                                ) {
+                                )
+                                {
                                     nodesForId = new List<SyntaxNode>();
                                     idToSuppressMessageAttributesMap.Add(id, nodesForId);
                                 }
@@ -1053,7 +1081,8 @@ namespace Microsoft.CodeAnalysis.RemoveUnnecessarySuppressions
             INamedTypeSymbol suppressMessageAttributeType,
             [NotNullWhen(returnValue: true)] out string? id,
             out string? category
-        ) {
+        )
+        {
             category = null;
 
             if (
@@ -1065,7 +1094,8 @@ namespace Microsoft.CodeAnalysis.RemoveUnnecessarySuppressions
                 && attribute.ConstructorArguments.Length >= 2
                 && attribute.ConstructorArguments[1]
                     is { Kind: TypedConstantKind.Primitive, Value: string checkId }
-            ) {
+            )
+            {
                 // CheckId represents diagnostic ID, followed by an option ':' and name.
                 // For example, "CA1801:ReviewUnusedParameters"
                 var index = checkId.IndexOf(':');
@@ -1077,7 +1107,8 @@ namespace Microsoft.CodeAnalysis.RemoveUnnecessarySuppressions
                         == SpecialType.System_String
                     && attribute.ConstructorArguments[0]
                         is { Kind: TypedConstantKind.Primitive, Value: string categoryArg }
-                ) {
+                )
+                {
                     category = categoryArg;
                 }
 

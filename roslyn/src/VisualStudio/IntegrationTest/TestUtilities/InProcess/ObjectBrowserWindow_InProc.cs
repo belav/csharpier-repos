@@ -27,7 +27,8 @@ namespace Microsoft.VisualStudio.IntegrationTest.Utilities.InProcess
                                 out var frame
                             )
                         )
-                    ) {
+                    )
+                    {
                         return false;
                     }
 

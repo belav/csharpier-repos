@@ -48,7 +48,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.TableDataSource
         public VisualStudioDiagnosticListSuppressionStateService(
             SVsServiceProvider serviceProvider,
             VisualStudioWorkspace workspace
-        ) {
+        )
+        {
             _workspace = workspace;
             _shellService = (IVsUIShell)serviceProvider.GetService(typeof(SVsUIShell));
             var errorList = serviceProvider.GetService(typeof(SVsErrorList)) as IErrorList;
@@ -142,7 +143,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.TableDataSource
                         out var isCompilerDiagnosticEntry,
                         out var isNoLocationDiagnosticEntry
                     )
-                ) {
+                )
+                {
                     hasSuppressionStateEntry = true;
                     HandleSuppressionStateEntry(
                         isRoslynEntry,
@@ -167,7 +169,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.TableDataSource
             out bool isSuppressedEntry,
             out bool isCompilerDiagnosticEntry,
             out bool isNoLocationDiagnosticEntry
-        ) {
+        )
+        {
             isNoLocationDiagnosticEntry =
                 !entryHandle.TryGetValue(
                     StandardTableColumnDefinitions.DocumentName,
@@ -203,13 +206,15 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.TableDataSource
         private static bool IsNonRoslynEntrySupportingSuppressionState(
             ITableEntryHandle entryHandle,
             out bool isSuppressedEntry
-        ) {
+        )
+        {
             if (
                 entryHandle.TryGetValue(
                     StandardTableKeyNames.SuppressionState,
                     out SuppressionState suppressionStateValue
                 )
-            ) {
+            )
+            {
                 isSuppressedEntry = suppressionStateValue == SuppressionState.Suppressed;
                 return true;
             }
@@ -234,7 +239,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.TableDataSource
         private static AbstractTableEntriesSnapshot<DiagnosticTableItem> GetEntriesSnapshot(
             ITableEntryHandle entryHandle,
             out int index
-        ) {
+        )
+        {
             if (!entryHandle.TryGetSnapshot(out var snapshot, out index))
             {
                 return null;
@@ -250,7 +256,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.TableDataSource
         public async Task<ImmutableArray<DiagnosticData>> GetSelectedItemsAsync(
             bool isAddSuppression,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var builder = ArrayBuilder<DiagnosticData>.GetInstance();
 
             Dictionary<string, Project> projectNameToProjectMapOpt = null;
@@ -275,7 +282,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.TableDataSource
                             entryHandle,
                             out var isSuppressedEntry
                         ) || !isSuppressedEntry
-                    ) {
+                    )
+                    {
                         continue;
                     }
 
@@ -304,7 +312,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.TableDataSource
                             out string projectName
                         )
                         && !string.IsNullOrEmpty(projectName)
-                    ) {
+                    )
+                    {
                         if (projectNameToProjectMapOpt == null)
                         {
                             projectNameToProjectMapOpt = new Dictionary<string, Project>();
@@ -457,7 +466,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.TableDataSource
             bool isCompilerDiagnosticEntry,
             bool isNoLocationDiagnosticEntry,
             bool added
-        ) {
+        )
+        {
             if (isRoslynEntry)
             {
                 UpdateSelectedItems(added, ref _selectedRoslynItems);

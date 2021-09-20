@@ -29,7 +29,8 @@ namespace Microsoft.AspNetCore.Mvc.ModelBinding
         public static TestModelBinderFactory Create(
             IModelMetadataProvider metadataProvider,
             params IModelBinderProvider[] providers
-        ) {
+        )
+        {
             if (metadataProvider == null)
             {
                 metadataProvider = TestModelMetadataProvider.CreateDefaultProvider();
@@ -51,7 +52,8 @@ namespace Microsoft.AspNetCore.Mvc.ModelBinding
         public static TestModelBinderFactory CreateDefault(
             IModelMetadataProvider metadataProvider,
             params IModelBinderProvider[] providers
-        ) {
+        )
+        {
             if (metadataProvider == null)
             {
                 metadataProvider = TestModelMetadataProvider.CreateDefaultProvider();

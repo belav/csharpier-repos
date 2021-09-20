@@ -34,7 +34,8 @@ namespace Microsoft.CodeAnalysis.Editor.GoToDefinition
         protected AbstractGoToDefinitionService(
             IThreadingContext threadingContext,
             IStreamingFindUsagesPresenter streamingPresenter
-        ) {
+        )
+        {
             _threadingContext = threadingContext;
             _streamingPresenter = streamingPresenter;
         }
@@ -50,7 +51,8 @@ namespace Microsoft.CodeAnalysis.Editor.GoToDefinition
             Document document,
             int position,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             // Try to compute the referenced symbol and attempt to go to definition for the symbol.
             var symbolService = document.GetRequiredLanguageService<IGoToDefinitionSymbolService>();
             var (symbol, _) = symbolService.GetSymbolAndBoundSpanAsync(
@@ -96,7 +98,8 @@ namespace Microsoft.CodeAnalysis.Editor.GoToDefinition
             int position,
             ISymbol symbol,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var project = document.Project;
             var solution = project.Solution;
 
@@ -155,7 +158,8 @@ namespace Microsoft.CodeAnalysis.Editor.GoToDefinition
             int caretPosition,
             Document document,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var syntaxRoot = document.GetSyntaxRootSynchronously(cancellationToken);
             var syntaxFactsService = document.GetRequiredLanguageService<ISyntaxFactsService>();
             var containingTypeDeclaration = syntaxFactsService.GetContainingTypeDeclaration(
@@ -176,7 +180,8 @@ namespace Microsoft.CodeAnalysis.Editor.GoToDefinition
                     semanticModel.GetDeclaredSymbol(containingTypeDeclaration, cancellationToken)
                         is ITypeSymbol containingTypeSymbol
                     && (symbolToNavigateTo is ITypeSymbol || symbolToNavigateTo.IsConstructor())
-                ) {
+                )
+                {
                     var candidateTypeSymbol =
                         symbolToNavigateTo is ITypeSymbol
                             ? symbolToNavigateTo

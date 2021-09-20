@@ -13,13 +13,15 @@ namespace System.Security.Cryptography
             int offset,
             int count,
             System.Security.Cryptography.HashAlgorithmName hashAlgorithm
-        ) {
+        )
+        {
             throw null;
         }
         protected override byte[] HashData(
             System.IO.Stream data,
             System.Security.Cryptography.HashAlgorithmName hashAlgorithm
-        ) {
+        )
+        {
             throw null;
         }
     }
@@ -40,7 +42,8 @@ namespace System.Security.Cryptography
             System.Security.Cryptography.HashAlgorithmName hashAlgorithm,
             byte[]? secretPrepend,
             byte[]? secretAppend
-        ) {
+        )
+        {
             throw null;
         }
         public override byte[] DeriveKeyFromHmac(
@@ -49,19 +52,22 @@ namespace System.Security.Cryptography
             byte[]? hmacKey,
             byte[]? secretPrepend,
             byte[]? secretAppend
-        ) {
+        )
+        {
             throw null;
         }
         public override byte[] DeriveKeyMaterial(
             System.Security.Cryptography.ECDiffieHellmanPublicKey otherPartyPublicKey
-        ) {
+        )
+        {
             throw null;
         }
         public override byte[] DeriveKeyTls(
             System.Security.Cryptography.ECDiffieHellmanPublicKey otherPartyPublicKey,
             byte[] prfLabel,
             byte[] prfSeed
-        ) {
+        )
+        {
             throw null;
         }
         public System.Security.Cryptography.SafeEvpPKeyHandle DuplicateKeyHandle()
@@ -70,12 +76,14 @@ namespace System.Security.Cryptography
         }
         public override System.Security.Cryptography.ECParameters ExportExplicitParameters(
             bool includePrivateParameters
-        ) {
+        )
+        {
             throw null;
         }
         public override System.Security.Cryptography.ECParameters ExportParameters(
             bool includePrivateParameters
-        ) {
+        )
+        {
             throw null;
         }
         public override void GenerateKey(System.Security.Cryptography.ECCurve curve) { }

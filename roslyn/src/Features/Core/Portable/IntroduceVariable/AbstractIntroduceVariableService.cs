@@ -107,7 +107,8 @@ namespace Microsoft.CodeAnalysis.IntroduceVariable
             Document document,
             TextSpan textSpan,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             using (Logger.LogBlock(FunctionId.Refactoring_IntroduceVariable, cancellationToken))
             {
                 var semanticDocument = await SemanticDocument.CreateAsync(
@@ -145,7 +146,8 @@ namespace Microsoft.CodeAnalysis.IntroduceVariable
         private (string title, ImmutableArray<CodeAction>) CreateActions(
             State state,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             using var _ = ArrayBuilder<CodeAction>.GetInstance(out var actions);
             var title = AddActionsAndGetTitle(state, actions, cancellationToken);
 
@@ -156,7 +158,8 @@ namespace Microsoft.CodeAnalysis.IntroduceVariable
             State state,
             ArrayBuilder<CodeAction> actions,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             if (state.InQueryContext)
             {
                 actions.Add(
@@ -370,7 +373,8 @@ namespace Microsoft.CodeAnalysis.IntroduceVariable
             State state,
             ArrayBuilder<CodeAction> actions,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             if (
                 state.IsConstant
                 && !state.GetSemanticMap(cancellationToken)
@@ -379,7 +383,8 @@ namespace Microsoft.CodeAnalysis.IntroduceVariable
                 && !state.GetSemanticMap(cancellationToken)
                     .AllReferencedSymbols.OfType<IParameterSymbol>()
                     .Any()
-            ) {
+            )
+            {
                 // If something is a constant, and it doesn't access any other locals constants,
                 // then we prefer to offer to generate a constant field instead of a constant
                 // local.
@@ -412,7 +417,8 @@ namespace Microsoft.CodeAnalysis.IntroduceVariable
             TTypeDeclarationSyntax oldType,
             TTypeDeclarationSyntax newType,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var preferredInsertionIndex = isConstant
                 ? DetermineConstantInsertPosition(oldType, newType)
                 : DetermineFieldInsertPosition(oldType, newType);
@@ -464,7 +470,8 @@ namespace Microsoft.CodeAnalysis.IntroduceVariable
             bool isConstant,
             bool isLocal,
             bool isQueryLocal
-        ) {
+        )
+        {
             if (allOccurrences)
             {
                 return new IntroduceVariableAllOccurrenceCodeAction(
@@ -494,7 +501,8 @@ namespace Microsoft.CodeAnalysis.IntroduceVariable
             TExpressionSyntax expression,
             bool isConstant,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var semanticFacts =
                 semanticDocument.Document.GetLanguageService<ISemanticFactsService>();
 
@@ -522,7 +530,8 @@ namespace Microsoft.CodeAnalysis.IntroduceVariable
             bool isConstant,
             SyntaxNode containerOpt,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var semanticModel = semanticDocument.SemanticModel;
 
             var semanticFacts =
@@ -550,7 +559,8 @@ namespace Microsoft.CodeAnalysis.IntroduceVariable
             SyntaxNode withinNodeInCurrent,
             bool allOccurrences,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var syntaxFacts =
                 currentDocument.Project.LanguageServices.GetService<ISyntaxFactsService>();
             var originalSemanticModel = originalDocument.SemanticModel;
@@ -582,7 +592,8 @@ namespace Microsoft.CodeAnalysis.IntroduceVariable
             TExpressionSyntax nodeInCurrent,
             bool allOccurrences,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             cancellationToken.ThrowIfCancellationRequested();
             if (nodeInCurrent == expressionInOriginal)
             {
@@ -615,7 +626,8 @@ namespace Microsoft.CodeAnalysis.IntroduceVariable
                         expressionInOriginal,
                         nodeInCurrent
                     )
-                ) {
+                )
+                {
                     var originalOperation = originalSemanticModel.GetOperation(
                         expressionInOriginal,
                         cancellationToken
@@ -687,14 +699,16 @@ namespace Microsoft.CodeAnalysis.IntroduceVariable
             TExpressionSyntax expression,
             CancellationToken cancellationToken,
             bool objectAsDefault = true
-        ) {
+        )
+        {
             var semanticModel = document.SemanticModel;
             var typeInfo = semanticModel.GetTypeInfo(expression, cancellationToken);
 
             if (
                 typeInfo.Type?.SpecialType == SpecialType.System_String
                 && typeInfo.ConvertedType?.IsFormattableStringOrIFormattable() == true
-            ) {
+            )
+            {
                 return typeInfo.ConvertedType;
             }
 
@@ -720,7 +734,8 @@ namespace Microsoft.CodeAnalysis.IntroduceVariable
             SemanticDocument document,
             TExpressionSyntax expression,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var semanticModel = document.SemanticModel;
             var semanticMap = semanticModel.GetSemanticMap(expression, cancellationToken);
 
@@ -734,7 +749,8 @@ namespace Microsoft.CodeAnalysis.IntroduceVariable
             SemanticDocument semanticDocument,
             ISet<TExpressionSyntax> matches,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             // First, track the matches so that we can get back to them later.
             var newRoot = semanticDocument.Root.TrackNodes(matches);
             var newDocument = semanticDocument.Document.WithSyntaxRoot(newRoot);

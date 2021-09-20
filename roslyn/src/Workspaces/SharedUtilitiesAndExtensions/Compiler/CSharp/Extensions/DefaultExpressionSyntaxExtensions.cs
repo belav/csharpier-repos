@@ -21,11 +21,13 @@ namespace Microsoft.CodeAnalysis.CSharp.Extensions
             bool preferSimpleDefaultExpression,
             SemanticModel semanticModel,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             if (
                 parseOptions.LanguageVersion < LanguageVersion.CSharp7_1
                 || !preferSimpleDefaultExpression
-            ) {
+            )
+            {
                 return false;
             }
 
@@ -47,13 +49,15 @@ namespace Microsoft.CodeAnalysis.CSharp.Extensions
             DefaultExpressionSyntax defaultExpression,
             SemanticModel semanticModel,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             if (
                 defaultExpression.IsParentKind(
                     SyntaxKind.EqualsValueClause,
                     out EqualsValueClauseSyntax equalsValueClause
                 )
-            ) {
+            )
+            {
                 var typeSyntax = GetTypeSyntax(equalsValueClause);
 
                 if (typeSyntax != null)
@@ -88,12 +92,14 @@ namespace Microsoft.CodeAnalysis.CSharp.Extensions
                     SyntaxKind.VariableDeclaration,
                     out VariableDeclarationSyntax declaration
                 )
-            ) {
+            )
+            {
                 return declaration.Type;
             }
             else if (
                 equalsValueClause.IsParentKind(SyntaxKind.Parameter, out ParameterSyntax parameter)
-            ) {
+            )
+            {
                 return parameter.Type;
             }
 
@@ -104,7 +110,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Extensions
             DefaultExpressionSyntax defaultExpression,
             SemanticModel semanticModel,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var speculationAnalyzer = new SpeculationAnalyzer(
                 defaultExpression,
                 s_defaultLiteralExpression,

@@ -37,7 +37,8 @@ namespace System.IO
                             FileMode.Open,
                             0
                         )
-                    ) {
+                    )
+                    {
                         if (handle.IsInvalid)
                             fileName = sourceFullPath;
                     }
@@ -61,7 +62,8 @@ namespace System.IO
             string destFullPath,
             string? destBackupFullPath,
             bool ignoreMetadataErrors
-        ) {
+        )
+        {
             int flags = ignoreMetadataErrors ? Interop.Kernel32.REPLACEFILE_IGNORE_MERGE_ERRORS : 0;
 
             if (
@@ -73,7 +75,8 @@ namespace System.IO
                     IntPtr.Zero,
                     IntPtr.Zero
                 )
-            ) {
+            )
+            {
                 throw Win32Marshal.GetExceptionForWin32Error(Marshal.GetLastWin32Error());
             }
         }
@@ -238,13 +241,15 @@ namespace System.IO
         private static void GetFindData(
             string fullPath,
             ref Interop.Kernel32.WIN32_FIND_DATA findData
-        ) {
+        )
+        {
             using (
                 SafeFindHandle handle = Interop.Kernel32.FindFirstFile(
                     Path.TrimEndingDirectorySeparator(fullPath),
                     ref findData
                 )
-            ) {
+            )
+            {
                 if (handle.IsInvalid)
                 {
                     int errorCode = Marshal.GetLastWin32Error();
@@ -276,7 +281,8 @@ namespace System.IO
             string fullPath,
             ref Interop.Kernel32.WIN32_FIND_DATA findData,
             bool topLevel
-        ) {
+        )
+        {
             int errorCode;
             Exception? exception = null;
 
@@ -285,7 +291,8 @@ namespace System.IO
                     Path.Join(fullPath, "*"),
                     ref findData
                 )
-            ) {
+            )
+            {
                 if (handle.IsInvalid)
                     throw Win32Marshal.GetExceptionForLastWin32Error(fullPath);
 
@@ -296,13 +303,15 @@ namespace System.IO
                             findData.dwFileAttributes
                             & Interop.Kernel32.FileAttributes.FILE_ATTRIBUTE_DIRECTORY
                         ) == 0
-                    ) {
+                    )
+                    {
                         // File
                         string fileName = findData.cFileName.GetStringFromFixedBuffer();
                         if (
                             !Interop.Kernel32.DeleteFile(Path.Combine(fullPath, fileName))
                             && exception == null
-                        ) {
+                        )
+                        {
                             errorCode = Marshal.GetLastWin32Error();
 
                             // We don't care if something else deleted the file first
@@ -350,7 +359,8 @@ namespace System.IO
                             if (
                                 findData.dwReserved0
                                 == Interop.Kernel32.IOReparseOptions.IO_REPARSE_TAG_MOUNT_POINT
-                            ) {
+                            )
+                            {
                                 // Mount point. Unmount using full path plus a trailing '\'.
                                 // (Note: This doesn't remove the underlying directory)
                                 string mountPoint = Path.Join(
@@ -361,12 +371,14 @@ namespace System.IO
                                 if (
                                     !Interop.Kernel32.DeleteVolumeMountPoint(mountPoint)
                                     && exception == null
-                                ) {
+                                )
+                                {
                                     errorCode = Marshal.GetLastWin32Error();
                                     if (
                                         errorCode != Interop.Errors.ERROR_SUCCESS
                                         && errorCode != Interop.Errors.ERROR_PATH_NOT_FOUND
-                                    ) {
+                                    )
+                                    {
                                         exception = Win32Marshal.GetExceptionForWin32Error(
                                             errorCode,
                                             fileName
@@ -379,7 +391,8 @@ namespace System.IO
                             if (
                                 !Interop.Kernel32.RemoveDirectory(Path.Combine(fullPath, fileName))
                                 && exception == null
-                            ) {
+                            )
+                            {
                                 errorCode = Marshal.GetLastWin32Error();
                                 if (errorCode != Interop.Errors.ERROR_PATH_NOT_FOUND)
                                 {
@@ -414,7 +427,8 @@ namespace System.IO
             string fullPath,
             bool topLevel,
             bool allowDirectoryNotEmpty = false
-        ) {
+        )
+        {
             if (!Interop.Kernel32.RemoveDirectory(fullPath))
             {
                 int errorCode = Marshal.GetLastWin32Error();
@@ -464,7 +478,8 @@ namespace System.IO
             long lastWriteTime = -1,
             long changeTime = -1,
             uint fileAttributes = 0
-        ) {
+        )
+        {
             using (SafeFileHandle handle = OpenHandle(fullPath, asDirectory))
             {
                 var basicInfo = new Interop.Kernel32.FILE_BASIC_INFO()
@@ -483,7 +498,8 @@ namespace System.IO
                         &basicInfo,
                         (uint)sizeof(Interop.Kernel32.FILE_BASIC_INFO)
                     )
-                ) {
+                )
+                {
                     throw Win32Marshal.GetExceptionForLastWin32Error(fullPath);
                 }
             }

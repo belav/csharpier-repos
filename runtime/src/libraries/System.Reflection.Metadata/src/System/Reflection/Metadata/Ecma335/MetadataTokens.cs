@@ -421,7 +421,8 @@ namespace System.Reflection.Metadata.Ecma335
 
         public static GenericParameterConstraintHandle GenericParameterConstraintHandle(
             int rowNumber
-        ) {
+        )
+        {
             return Metadata.GenericParameterConstraintHandle.FromRowId(ToRowId(rowNumber));
         }
 
@@ -442,7 +443,8 @@ namespace System.Reflection.Metadata.Ecma335
 
         public static DeclarativeSecurityAttributeHandle DeclarativeSecurityAttributeHandle(
             int rowNumber
-        ) {
+        )
+        {
             return Metadata.DeclarativeSecurityAttributeHandle.FromRowId(ToRowId(rowNumber));
         }
 

@@ -77,7 +77,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Simplification
 
             public override SyntaxNode VisitMemberAccessExpression(
                 MemberAccessExpressionSyntax node
-            ) {
+            )
+            {
                 var oldAlwaysSimplify = this.alwaysSimplify;
                 if (!this.alwaysSimplify)
                 {

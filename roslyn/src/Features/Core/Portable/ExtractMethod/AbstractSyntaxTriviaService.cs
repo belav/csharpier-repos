@@ -61,7 +61,8 @@ namespace Microsoft.CodeAnalysis.ExtractMethod
             SyntaxNode root,
             IEnumerable<SyntaxToken> oldTokens,
             Func<SyntaxToken, SyntaxToken, SyntaxToken> computeReplacementToken
-        ) {
+        )
+        {
             Contract.ThrowIfNull(root);
             Contract.ThrowIfNull(oldTokens);
             Contract.ThrowIfNull(computeReplacementToken);
@@ -73,14 +74,16 @@ namespace Microsoft.CodeAnalysis.ExtractMethod
             SyntaxNode root,
             Dictionary<TriviaLocation, SyntaxAnnotation> annotations,
             Dictionary<TriviaLocation, IEnumerable<SyntaxTrivia>> triviaList
-        ) {
+        )
+        {
             return new Result(root, _endOfLineKind, annotations, triviaList);
         }
 
         private static Dictionary<SyntaxToken, SyntaxToken> CreateOldToNewTokensMap(
             Dictionary<TriviaLocation, SyntaxToken> tokens,
             Dictionary<TriviaLocation, SyntaxAnnotation> annotations
-        ) {
+        )
+        {
             var token = default(SyntaxToken);
             var map = new Dictionary<SyntaxToken, SyntaxToken>();
             var emptyList = SpecializedCollections.EmptyEnumerable<SyntaxTrivia>();
@@ -119,7 +122,8 @@ namespace Microsoft.CodeAnalysis.ExtractMethod
         private static Dictionary<TriviaLocation, IEnumerable<SyntaxTrivia>> GetTriviaAtEdges(
             Dictionary<TriviaLocation, SyntaxToken> tokens,
             TextSpan textSpan
-        ) {
+        )
+        {
             var triviaAtBeginning = SplitTrivia(
                 tokens[TriviaLocation.BeforeBeginningOfSpan],
                 tokens[TriviaLocation.AfterBeginningOfSpan],
@@ -144,7 +148,8 @@ namespace Microsoft.CodeAnalysis.ExtractMethod
         private Dictionary<TriviaLocation, SyntaxToken> GetTokensAtEdges(
             SyntaxNode root,
             TextSpan textSpan
-        ) {
+        )
+        {
             var tokens = new Dictionary<TriviaLocation, SyntaxToken>();
             tokens[TriviaLocation.AfterBeginningOfSpan] = _syntaxFacts.FindTokenOnRightOfPosition(
                 root,
@@ -169,7 +174,8 @@ namespace Microsoft.CodeAnalysis.ExtractMethod
             SyntaxToken token1,
             SyntaxToken token2,
             Func<SyntaxTrivia, bool> conditionToLeftAtCallSite
-        ) {
+        )
+        {
             var triviaLeftAtCallSite = new List<SyntaxTrivia>();
             var triviaMovedToDefinition = new List<SyntaxTrivia>();
 

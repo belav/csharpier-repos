@@ -24,7 +24,8 @@ namespace Microsoft.EntityFrameworkCore.Infrastructure
             string currentIdentifier,
             IReadOnlyDictionary<string, T> otherIdentifiers,
             int maxLength
-        ) {
+        )
+        {
             var finalIdentifier = Truncate(currentIdentifier, maxLength);
             var suffix = 1;
             while (otherIdentifiers.ContainsKey(finalIdentifier))
@@ -50,7 +51,8 @@ namespace Microsoft.EntityFrameworkCore.Infrastructure
             IReadOnlyDictionary<TKey, TValue> otherIdentifiers,
             Func<string, TKey> keySelector,
             int maxLength
-        ) {
+        )
+        {
             var finalIdentifier = Truncate(currentIdentifier, maxLength);
             var suffix = 1;
             while (otherIdentifiers.ContainsKey(keySelector(finalIdentifier)))

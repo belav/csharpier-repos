@@ -280,7 +280,8 @@ namespace Microsoft.AspNetCore.Mvc.Razor.RuntimeCompilation
         private static FileProviderRazorProjectFileSystem GetRazorProjectFileSystem(
             TestFileProvider fileProvider,
             string contentRootPath = "BasePath"
-        ) {
+        )
+        {
             var options = Options.Create(
                 new MvcRazorRuntimeCompilationOptions { FileProviders = { fileProvider } }
             );

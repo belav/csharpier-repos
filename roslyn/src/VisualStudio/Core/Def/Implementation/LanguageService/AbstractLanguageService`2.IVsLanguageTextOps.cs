@@ -42,7 +42,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.LanguageService
             IVsTextLayer textLayer,
             TextSpan[] selections,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var textBuffer = this.EditorAdaptersFactoryService.GetDataBuffer(
                 (IVsTextBuffer)textLayer
             );
@@ -130,7 +131,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.LanguageService
             TextSpan[] selection,
             TextSpan[] tipSpan,
             out string text
-        ) {
+        )
+        {
             text = null;
             return VSConstants.E_NOTIMPL;
         }

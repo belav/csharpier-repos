@@ -1407,7 +1407,8 @@ namespace Microsoft.AspNetCore.Mvc.IntegrationTests
             object model,
             string prefix,
             ModelBindingTestContext testContext
-        ) {
+        )
+        {
             var valueProvider = await CompositeValueProvider.CreateAsync(testContext);
             return await ModelBindingHelper.TryUpdateModelAsync(
                 model,

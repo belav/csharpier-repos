@@ -38,7 +38,8 @@ namespace System.IO.Ports.Tests
                 SerialPort com1 = new SerialPort(
                     TCSupport.LocalMachineSerialInfo.FirstAvailablePortName
                 )
-            ) {
+            )
+            {
                 SerialPortProperties serPortProp = new SerialPortProperties();
 
                 Debug.WriteLine("Verifying default Parity");
@@ -155,7 +156,8 @@ namespace System.IO.Ports.Tests
                 SerialPort com1 = new SerialPort(
                     TCSupport.LocalMachineSerialInfo.FirstAvailablePortName
                 )
-            ) {
+            )
+            {
                 SerialPortProperties serPortProp = new SerialPortProperties();
 
                 Debug.WriteLine("Verifying Parity Even and then Odd");
@@ -184,7 +186,8 @@ namespace System.IO.Ports.Tests
                 SerialPort com1 = new SerialPort(
                     TCSupport.LocalMachineSerialInfo.FirstAvailablePortName
                 )
-            ) {
+            )
+            {
                 SerialPortProperties serPortProp = new SerialPortProperties();
 
                 Debug.WriteLine("Verifying Parity Odd and then Even");
@@ -213,7 +216,8 @@ namespace System.IO.Ports.Tests
                 SerialPort com1 = new SerialPort(
                     TCSupport.LocalMachineSerialInfo.FirstAvailablePortName
                 )
-            ) {
+            )
+            {
                 SerialPortProperties serPortProp = new SerialPortProperties();
 
                 Debug.WriteLine("Verifying Parity Odd and then Mark");
@@ -243,7 +247,8 @@ namespace System.IO.Ports.Tests
                 SerialPort com = new SerialPort(
                     TCSupport.LocalMachineSerialInfo.FirstAvailablePortName
                 )
-            ) {
+            )
+            {
                 VerifyExceptionAtOpen(com, parity, throwAt, expectedException);
                 if (com.IsOpen)
                     com.Close();
@@ -257,7 +262,8 @@ namespace System.IO.Ports.Tests
             int parity,
             ThrowAt throwAt,
             Type expectedException
-        ) {
+        )
+        {
             int origParity = (int)com.Parity;
             SerialPortProperties serPortProp = new SerialPortProperties();
 
@@ -358,7 +364,8 @@ namespace System.IO.Ports.Tests
                 SerialPort com1 = new SerialPort(
                     TCSupport.LocalMachineSerialInfo.FirstAvailablePortName
                 )
-            ) {
+            )
+            {
                 SerialPortProperties serPortProp = new SerialPortProperties();
 
                 serPortProp.SetAllPropertiesToOpenDefaults();
@@ -383,7 +390,8 @@ namespace System.IO.Ports.Tests
                 SerialPort com1 = new SerialPort(
                     TCSupport.LocalMachineSerialInfo.FirstAvailablePortName
                 )
-            ) {
+            )
+            {
                 SerialPortProperties serPortProp = new SerialPortProperties();
 
                 serPortProp.SetAllPropertiesToOpenDefaults();
@@ -416,7 +424,8 @@ namespace System.IO.Ports.Tests
                 SerialPort com2 = new SerialPort(
                     TCSupport.LocalMachineSerialInfo.SecondAvailablePortName
                 )
-            ) {
+            )
+            {
                 byte shiftMask = 0xFF;
 
                 //Create a mask that when logicaly and'd with the transmitted byte will
@@ -455,7 +464,8 @@ namespace System.IO.Ports.Tests
                 SerialPort com2 = new SerialPort(
                     TCSupport.LocalMachineSerialInfo.SecondAvailablePortName
                 )
-            ) {
+            )
+            {
                 byte shiftMask = 0xFF;
                 bool parityErrorOnLastByte = false,
                     isParityError = false;
@@ -547,7 +557,8 @@ namespace System.IO.Ports.Tests
                 SerialPort com2 = new SerialPort(
                     TCSupport.LocalMachineSerialInfo.SecondAvailablePortName
                 )
-            ) {
+            )
+            {
                 //Generate some random bytes to read/write for this Parity setting
                 for (int i = 0; i < xmitBytes.Length; i++)
                 {
@@ -574,7 +585,8 @@ namespace System.IO.Ports.Tests
             SerialPort com2,
             byte[] xmitBytes,
             byte[] expectedBytes
-        ) {
+        )
+        {
             byte[] rcvBytes = new byte[expectedBytes.Length * 4];
             Stopwatch sw = new Stopwatch();
             double expectedTime,
@@ -650,13 +662,15 @@ namespace System.IO.Ports.Tests
                 ;
                 expectedIndex < expectedBytes.Length && actualIndex < rcvBytes.Length;
                 ++expectedIndex, ++actualIndex
-            ) {
+            )
+            {
                 if (expectedBytes[expectedIndex] != rcvBytes[actualIndex])
                 {
                     if (
                         actualIndex != rcvBytes.Length - 1
                         && expectedBytes[expectedIndex] == rcvBytes[actualIndex + 1]
-                    ) {
+                    )
+                    {
                         //Sometimes if there is a parity error an extra byte gets added to the input stream so
                         //look ahead at the next byte
                         actualIndex++;

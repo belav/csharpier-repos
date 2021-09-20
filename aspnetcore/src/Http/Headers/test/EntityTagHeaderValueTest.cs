@@ -135,7 +135,8 @@ namespace Microsoft.Net.Http.Headers
         public void CompareUsingStrongComparison_NonEquivalentPairs_ReturnFalse(
             EntityTagHeaderValue left,
             EntityTagHeaderValue right
-        ) {
+        )
+        {
             Assert.False(left.Compare(right, useStrongComparison: true));
             Assert.False(right.Compare(left, useStrongComparison: true));
         }
@@ -159,7 +160,8 @@ namespace Microsoft.Net.Http.Headers
         public void CompareUsingStrongComparison_EquivalentPairs_ReturnTrue(
             EntityTagHeaderValue left,
             EntityTagHeaderValue right
-        ) {
+        )
+        {
             Assert.True(left.Compare(right, useStrongComparison: true));
             Assert.True(right.Compare(left, useStrongComparison: true));
         }
@@ -185,7 +187,8 @@ namespace Microsoft.Net.Http.Headers
         public void CompareUsingWeakComparison_NonEquivalentPairs_ReturnFalse(
             EntityTagHeaderValue left,
             EntityTagHeaderValue right
-        ) {
+        )
+        {
             Assert.False(left.Compare(right, useStrongComparison: false));
             Assert.False(right.Compare(left, useStrongComparison: false));
         }
@@ -217,7 +220,8 @@ namespace Microsoft.Net.Http.Headers
         public void CompareUsingWeakComparison_EquivalentPairs_ReturnTrue(
             EntityTagHeaderValue left,
             EntityTagHeaderValue right
-        ) {
+        )
+        {
             Assert.True(left.Compare(right, useStrongComparison: false));
             Assert.True(right.Compare(left, useStrongComparison: false));
         }

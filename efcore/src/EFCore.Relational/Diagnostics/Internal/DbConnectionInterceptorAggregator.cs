@@ -34,7 +34,8 @@ namespace Microsoft.EntityFrameworkCore.Diagnostics.Internal
 
             public CompositeDbConnectionInterceptor(
                 IEnumerable<IDbConnectionInterceptor> interceptors
-            ) {
+            )
+            {
                 _interceptors = interceptors.ToArray();
             }
 
@@ -42,7 +43,8 @@ namespace Microsoft.EntityFrameworkCore.Diagnostics.Internal
                 DbConnection connection,
                 ConnectionEventData eventData,
                 InterceptionResult result
-            ) {
+            )
+            {
                 for (var i = 0; i < _interceptors.Length; i++)
                 {
                     result = _interceptors[i].ConnectionOpening(connection, eventData, result);
@@ -56,7 +58,8 @@ namespace Microsoft.EntityFrameworkCore.Diagnostics.Internal
                 ConnectionEventData eventData,
                 InterceptionResult result,
                 CancellationToken cancellationToken = default
-            ) {
+            )
+            {
                 for (var i = 0; i < _interceptors.Length; i++)
                 {
                     result = await _interceptors[i].ConnectionOpeningAsync(
@@ -83,7 +86,8 @@ namespace Microsoft.EntityFrameworkCore.Diagnostics.Internal
                 DbConnection connection,
                 ConnectionEndEventData eventData,
                 CancellationToken cancellationToken = default
-            ) {
+            )
+            {
                 for (var i = 0; i < _interceptors.Length; i++)
                 {
                     await _interceptors[i].ConnectionOpenedAsync(
@@ -99,7 +103,8 @@ namespace Microsoft.EntityFrameworkCore.Diagnostics.Internal
                 DbConnection connection,
                 ConnectionEventData eventData,
                 InterceptionResult result
-            ) {
+            )
+            {
                 for (var i = 0; i < _interceptors.Length; i++)
                 {
                     result = _interceptors[i].ConnectionClosing(connection, eventData, result);
@@ -112,7 +117,8 @@ namespace Microsoft.EntityFrameworkCore.Diagnostics.Internal
                 DbConnection connection,
                 ConnectionEventData eventData,
                 InterceptionResult result
-            ) {
+            )
+            {
                 for (var i = 0; i < _interceptors.Length; i++)
                 {
                     result = await _interceptors[i].ConnectionClosingAsync(
@@ -137,7 +143,8 @@ namespace Microsoft.EntityFrameworkCore.Diagnostics.Internal
             public async Task ConnectionClosedAsync(
                 DbConnection connection,
                 ConnectionEndEventData eventData
-            ) {
+            )
+            {
                 for (var i = 0; i < _interceptors.Length; i++)
                 {
                     await _interceptors[i].ConnectionClosedAsync(connection, eventData)
@@ -148,7 +155,8 @@ namespace Microsoft.EntityFrameworkCore.Diagnostics.Internal
             public void ConnectionFailed(
                 DbConnection connection,
                 ConnectionErrorEventData eventData
-            ) {
+            )
+            {
                 for (var i = 0; i < _interceptors.Length; i++)
                 {
                     _interceptors[i].ConnectionFailed(connection, eventData);
@@ -159,7 +167,8 @@ namespace Microsoft.EntityFrameworkCore.Diagnostics.Internal
                 DbConnection connection,
                 ConnectionErrorEventData eventData,
                 CancellationToken cancellationToken = default
-            ) {
+            )
+            {
                 for (var i = 0; i < _interceptors.Length; i++)
                 {
                     await _interceptors[i].ConnectionFailedAsync(

@@ -165,7 +165,8 @@ namespace ILCompiler.Reflection.ReadyToRun
                 if (
                     entry.VariableNumber
                     < this._runtimeFunction.Method.Signature.ParameterTypes.Length
-                ) {
+                )
+                {
                     entry.Variable.Type = VariableType.Parameter;
                     entry.Variable.Index = (int)entry.VariableNumber;
                 }

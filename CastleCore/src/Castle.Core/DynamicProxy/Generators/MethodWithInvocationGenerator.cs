@@ -44,15 +44,16 @@ namespace Castle.DynamicProxy.Generators
             GetTargetExpressionDelegate getTargetExpression,
             OverrideMethodDelegate createMethod,
             IInvocationCreationContributor contributor
-        ) : this(
-            method,
-            interceptors,
-            invocation,
-            getTargetExpression,
-            null,
-            createMethod,
-            contributor
-        ) { }
+        )
+            : this(
+                method,
+                interceptors,
+                invocation,
+                getTargetExpression,
+                null,
+                createMethod,
+                contributor
+            ) { }
 
         public MethodWithInvocationGenerator(
             MetaMethod method,
@@ -75,7 +76,8 @@ namespace Castle.DynamicProxy.Generators
             ClassEmitter @class,
             MethodInfo method,
             INamingScope namingScope
-        ) {
+        )
+        {
             var methodInterceptors = @class.CreateField(
                 namingScope.GetUniqueName(string.Format("interceptors_{0}", method.Name)),
                 typeof(IInterceptor[]),
@@ -91,7 +93,8 @@ namespace Castle.DynamicProxy.Generators
             MethodEmitter emitter,
             ClassEmitter @class,
             INamingScope namingScope
-        ) {
+        )
+        {
             var invocationType = invocation;
 
             var genericArguments = Type.EmptyTypes;
@@ -235,7 +238,8 @@ namespace Castle.DynamicProxy.Generators
             INamingScope namingScope,
             MethodEmitter emitter,
             IExpression proxiedMethodTokenExpression
-        ) {
+        )
+        {
             var selector = @class.GetField("__selector");
             if (selector == null)
             {
@@ -290,7 +294,8 @@ namespace Castle.DynamicProxy.Generators
             MethodEmitter methodEmitter,
             MethodInfo method,
             Reference invocationLocal
-        ) {
+        )
+        {
             var genericParameters = Array.FindAll(
                 method.GetGenericArguments(),
                 t => t.IsGenericParameter
@@ -327,7 +332,8 @@ namespace Castle.DynamicProxy.Generators
             IExpression proxiedMethodTokenExpression,
             TypeReference[] dereferencedArguments,
             IExpression methodInterceptors
-        ) {
+        )
+        {
             return new[]
             {
                 getTargetExpression(@class, MethodToOverride),

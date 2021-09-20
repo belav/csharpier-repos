@@ -35,7 +35,8 @@ namespace Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore
         public DatabaseDeveloperPageExceptionFilter(
             ILogger<DatabaseDeveloperPageExceptionFilter> logger,
             IOptions<DatabaseErrorPageOptions> options
-        ) {
+        )
+        {
             _logger = logger ?? throw new ArgumentNullException(nameof(logger));
             _options = options?.Value ?? throw new ArgumentNullException(nameof(options));
         }
@@ -47,7 +48,8 @@ namespace Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore
         public async Task HandleExceptionAsync(
             ErrorContext errorContext,
             Func<ErrorContext, Task> next
-        ) {
+        )
+        {
             if (!(errorContext.Exception is DbException))
             {
                 await next(errorContext);

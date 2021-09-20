@@ -44,11 +44,13 @@ namespace Microsoft.CodeAnalysis.Options
             string keyName,
             Func<string, Optional<T>> parseValue,
             Func<OptionSet, string> getEditorConfigStringForValue
-        ) : this(
-            keyName,
-            parseValue,
-            (value, optionSet) => getEditorConfigStringForValue(optionSet)
-        ) {
+        )
+            : this(
+                keyName,
+                parseValue,
+                (value, optionSet) => getEditorConfigStringForValue(optionSet)
+            )
+        {
             if (getEditorConfigStringForValue == null)
             {
                 throw new ArgumentNullException(nameof(getEditorConfigStringForValue));
@@ -59,7 +61,8 @@ namespace Microsoft.CodeAnalysis.Options
             string keyName,
             Func<string, Optional<T>> parseValue,
             Func<T, OptionSet, string> getEditorConfigStringForValue
-        ) {
+        )
+        {
             if (parseValue == null)
             {
                 throw new ArgumentNullException(nameof(parseValue));
@@ -79,7 +82,8 @@ namespace Microsoft.CodeAnalysis.Options
             IReadOnlyDictionary<string, string?> rawOptions,
             Type type,
             out object? result
-        ) {
+        )
+        {
             if (rawOptions.TryGetValue(KeyName, out var value) && value is object)
             {
                 var ret = TryGetOption(value, type, out var typedResult);
@@ -128,7 +132,8 @@ namespace Microsoft.CodeAnalysis.Options
         string IEditorConfigStorageLocation2.GetEditorConfigStringValue(
             object? value,
             OptionSet optionSet
-        ) {
+        )
+        {
             T typedValue;
             if (value is ICodeStyleOption codeStyleOption)
             {

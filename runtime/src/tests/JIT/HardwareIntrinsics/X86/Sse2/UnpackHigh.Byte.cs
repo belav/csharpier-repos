@@ -142,7 +142,8 @@ namespace JIT.HardwareIntrinsics.X86
                     || (alignment * 2) < sizeOfinArray1
                     || (alignment * 2) < sizeOfinArray2
                     || (alignment * 2) < sizeOfoutArray
-                ) {
+                )
+                {
                     throw new ArgumentException("Invalid value of alignment");
                 }
 
@@ -445,7 +446,8 @@ namespace JIT.HardwareIntrinsics.X86
 
             fixed (Vector128<Byte>* pClsVar1 = &_clsVar1)fixed (
                 Vector128<Byte>* pClsVar2 = &_clsVar2
-            ) {
+            )
+            {
                 var result = Sse2.UnpackHigh(
                     Sse2.LoadVector128((Byte*)(pClsVar1)),
                     Sse2.LoadVector128((Byte*)(pClsVar2))
@@ -614,7 +616,8 @@ namespace JIT.HardwareIntrinsics.X86
             Vector128<Byte> op2,
             void* result,
             [CallerMemberName] string method = ""
-        ) {
+        )
+        {
             Byte[] inArray1 = new Byte[Op1ElementCount];
             Byte[] inArray2 = new Byte[Op2ElementCount];
             Byte[] outArray = new Byte[RetElementCount];
@@ -635,7 +638,8 @@ namespace JIT.HardwareIntrinsics.X86
             void* op2,
             void* result,
             [CallerMemberName] string method = ""
-        ) {
+        )
+        {
             Byte[] inArray1 = new Byte[Op1ElementCount];
             Byte[] inArray2 = new Byte[Op2ElementCount];
             Byte[] outArray = new Byte[RetElementCount];
@@ -664,7 +668,8 @@ namespace JIT.HardwareIntrinsics.X86
             Byte[] right,
             Byte[] result,
             [CallerMemberName] string method = ""
-        ) {
+        )
+        {
             bool succeeded = true;
 
             if (result[0] != left[8])
@@ -679,7 +684,8 @@ namespace JIT.HardwareIntrinsics.X86
                         (i % 2 == 0)
                             ? result[i] != left[i / 2 + 8]
                             : result[i] != right[(i - 1) / 2 + 8]
-                    ) {
+                    )
+                    {
                         succeeded = false;
                         break;
                     }

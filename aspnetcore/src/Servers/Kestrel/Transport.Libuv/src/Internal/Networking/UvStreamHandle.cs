@@ -53,7 +53,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Transport.Libuv.Internal.Networkin
             int backlog,
             Action<UvStreamHandle, int, UvException, object> callback,
             object state
-        ) {
+        )
+        {
             if (_listenVitality.IsAllocated)
             {
                 throw new InvalidOperationException(
@@ -88,7 +89,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Transport.Libuv.Internal.Networkin
             Func<UvStreamHandle, int, object, LibuvFunctions.uv_buf_t> allocCallback,
             Action<UvStreamHandle, int, object> readCallback,
             object state
-        ) {
+        )
+        {
             if (_readVitality.IsAllocated)
             {
                 throw new InvalidOperationException(
@@ -156,7 +158,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Transport.Libuv.Internal.Networkin
             IntPtr handle,
             int suggested_size,
             out LibuvFunctions.uv_buf_t buf
-        ) {
+        )
+        {
             var stream = FromIntPtr<UvStreamHandle>(handle);
             try
             {

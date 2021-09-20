@@ -18,7 +18,8 @@ namespace Microsoft.Extensions.Logging
             TState state,
             Exception exception,
             Func<TState, Exception, string> formatter
-        ) {
+        )
+        {
             MessageLogger[] loggers = MessageLoggers;
             if (loggers == null)
             {
@@ -58,7 +59,8 @@ namespace Microsoft.Extensions.Logging
                 Func<TState, Exception, string> formatter,
                 ref List<Exception> exceptions,
                 in TState state
-            ) {
+            )
+            {
                 try
                 {
                     logger.Log(logLevel, eventId, state, exception, formatter);
@@ -110,7 +112,8 @@ namespace Microsoft.Extensions.Logging
                 LogLevel logLevel,
                 ILogger logger,
                 ref List<Exception> exceptions
-            ) {
+            )
+            {
                 try
                 {
                     if (logger.IsEnabled(logLevel))

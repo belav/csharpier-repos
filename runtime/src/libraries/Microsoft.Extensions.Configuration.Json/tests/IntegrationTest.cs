@@ -89,7 +89,8 @@ namespace Microsoft.Extensions.Configuration.Json.Test
             string key,
             string value,
             Action<IConfigurationSection>[] childrenInspectors
-        ) {
+        )
+        {
             if (key != configurationSection.Key || value != configurationSection.Value)
             {
                 throw new EqualException(

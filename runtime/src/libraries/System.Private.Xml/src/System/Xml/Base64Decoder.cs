@@ -149,7 +149,8 @@ namespace System.Xml
             Span<byte> bytes,
             out int charsDecoded,
             out int bytesDecoded
-        ) {
+        )
+        {
             // walk hex digits pairing them up and shoving the value of each pair into a byte
             int iByte = 0;
             int iChar = 0;

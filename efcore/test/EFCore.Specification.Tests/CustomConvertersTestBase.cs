@@ -1529,13 +1529,12 @@ namespace Microsoft.EntityFrameworkCore
             {
                 public OrderIdEntityFrameworkValueConverter() : this(null) { }
 
-                public OrderIdEntityFrameworkValueConverter(
-                    ConverterMappingHints mappingHints
-                ) : base(
-                    orderId => orderId.StringValue,
-                    stringValue => OrderId.Parse(stringValue),
-                    mappingHints
-                ) { }
+                public OrderIdEntityFrameworkValueConverter(ConverterMappingHints mappingHints)
+                    : base(
+                        orderId => orderId.StringValue,
+                        stringValue => OrderId.Parse(stringValue),
+                        mappingHints
+                    ) { }
             }
 
             private class UrlSchemeRemover : ValueConverter<string, string>

@@ -200,7 +200,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Tests
             string value1,
             string value2,
             int intExpectedConnectionOptions
-        ) {
+        )
+        {
             var expectedConnectionOptions = (ConnectionOptions)intExpectedConnectionOptions;
             var connection = new StringValues(new[] { value1, value2 });
             var requestHeaders = new HttpRequestHeaders();
@@ -246,7 +247,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Tests
         public void TestParseTransferEncoding(
             string transferEncoding,
             int intExpectedTransferEncodingOptions
-        ) {
+        )
+        {
             var expectedTransferEncodingOptions =
                 (TransferCoding)intExpectedTransferEncodingOptions;
 
@@ -270,7 +272,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Tests
             string value1,
             string value2,
             int intExpectedTransferEncodingOptions
-        ) {
+        )
+        {
             var expectedTransferEncodingOptions =
                 (TransferCoding)intExpectedTransferEncodingOptions;
 

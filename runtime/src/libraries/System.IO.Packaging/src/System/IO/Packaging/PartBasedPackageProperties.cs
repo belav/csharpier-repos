@@ -288,7 +288,8 @@ namespace System.IO.Packaging
             object? value,
             bool initializing,
             XmlReader? reader
-        ) {
+        )
+        {
             // If we are reading values from the package, reader cannot be null
             Debug.Assert(!initializing || reader != null);
 
@@ -373,7 +374,8 @@ namespace System.IO.Packaging
                 !propertiesPart.ValidatedContentType.AreTypeAndSubTypeEqual(
                     s_coreDocumentPropertiesContentType
                 )
-            ) {
+            )
+            {
                 throw new FileFormatException(SR.WrongContentTypeForPropertyPart);
             }
 
@@ -388,7 +390,8 @@ namespace System.IO.Packaging
                 PackageRelationship rel in _package.GetRelationshipsByType(
                     CoreDocumentPropertiesRelationshipType
                 )
-            ) {
+            )
+            {
                 if (propertiesPartRelationship != null)
                 {
                     throw new FileFormatException(SR.MoreThanOneMetadataRelationships);
@@ -424,7 +427,8 @@ namespace System.IO.Packaging
                         )
                     || (object)reader.LocalName
                         != PackageXmlStringTable.GetXmlStringAsObject(PackageXmlEnum.CoreProperties)
-                ) {
+                )
+                {
                     throw new XmlException(
                         SR.CorePropertiesElementExpected,
                         null,
@@ -502,7 +506,8 @@ namespace System.IO.Packaging
                         != PackageXmlStringTable.GetXmlStringAsObject(
                             PackageXmlStringTable.GetXmlNamespace(xmlStringIndex)
                         )
-                    ) {
+                    )
+                    {
                         throw new XmlException(
                             SR.UnknownNamespaceInCorePropertiesPart,
                             null,
@@ -625,7 +630,8 @@ namespace System.IO.Packaging
                     name,
                     typeValue.Substring(index + 1, typeValue.Length - index - 1)
                 ) != 0
-            ) {
+            )
+            {
                 throw new XmlException(
                     SR.Format(SR.UnknownDCDateTimeXsiType, reader.Name),
                     null,
@@ -724,7 +730,8 @@ namespace System.IO.Packaging
             if (
                 _package.FileOpenAccess == FileAccess.Read
                 || _package.FileOpenAccess == FileAccess.ReadWrite
-            ) {
+            )
+            {
                 _propertyPart = GetPropertyPart();
                 if (_propertyPart != null)
                     return;

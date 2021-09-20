@@ -26,7 +26,8 @@ namespace Microsoft.CodeAnalysis.ExternalAccess.UnitTesting.Api
             Solution? solution,
             IReadOnlyList<object?> arguments,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             await UnderlyingObject.RunRemoteAsync(
                     targetName,
                     solution,

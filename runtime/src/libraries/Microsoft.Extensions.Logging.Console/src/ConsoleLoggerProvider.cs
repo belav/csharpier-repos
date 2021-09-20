@@ -40,7 +40,8 @@ namespace Microsoft.Extensions.Logging.Console
         public ConsoleLoggerProvider(
             IOptionsMonitor<ConsoleLoggerOptions> options,
             IEnumerable<ConsoleFormatter> formatters
-        ) {
+        )
+        {
             _options = options;
             _loggers = new ConcurrentDictionary<string, ConsoleLogger>();
             SetFormatters(formatters);
@@ -134,7 +135,8 @@ namespace Microsoft.Extensions.Logging.Console
                     options.FormatterName,
                     out ConsoleFormatter logFormatter
                 )
-            ) {
+            )
+            {
 #pragma warning disable CS0618
                 logFormatter = options.Format switch
                 {
@@ -164,7 +166,8 @@ namespace Microsoft.Extensions.Logging.Console
                     _options.CurrentValue.FormatterName,
                     out ConsoleFormatter logFormatter
                 )
-            ) {
+            )
+            {
 #pragma warning disable CS0618
                 logFormatter = _options.CurrentValue.Format switch
                 {
@@ -196,7 +199,8 @@ namespace Microsoft.Extensions.Logging.Console
         private void UpdateFormatterOptions(
             ConsoleFormatter formatter,
             ConsoleLoggerOptions deprecatedFromOptions
-        ) {
+        )
+        {
             // kept for deprecated apis:
             if (formatter is SimpleConsoleFormatter defaultFormatter)
             {
@@ -236,7 +240,8 @@ namespace Microsoft.Extensions.Logging.Console
 
             foreach (
                 System.Collections.Generic.KeyValuePair<string, ConsoleLogger> logger in _loggers
-            ) {
+            )
+            {
                 logger.Value.ScopeProvider = _scopeProvider;
             }
         }

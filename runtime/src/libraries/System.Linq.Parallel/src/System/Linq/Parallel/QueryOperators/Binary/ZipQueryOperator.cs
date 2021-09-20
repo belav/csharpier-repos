@@ -46,11 +46,12 @@ namespace System.Linq.Parallel
             ParallelQuery<TLeftInput> leftChildSource,
             ParallelQuery<TRightInput> rightChildSource,
             Func<TLeftInput, TRightInput, TOutput> resultSelector
-        ) : this(
-            QueryOperator<TLeftInput>.AsQueryOperator(leftChildSource),
-            QueryOperator<TRightInput>.AsQueryOperator(rightChildSource),
-            resultSelector
-        ) { }
+        )
+            : this(
+                QueryOperator<TLeftInput>.AsQueryOperator(leftChildSource),
+                QueryOperator<TRightInput>.AsQueryOperator(rightChildSource),
+                resultSelector
+            ) { }
 
         private ZipQueryOperator(
             QueryOperator<TLeftInput> left,
@@ -154,7 +155,8 @@ namespace System.Linq.Parallel
             using (
                 IEnumerator<TRightInput> rightEnumerator = _rightChild.AsSequentialQuery(token)
                     .GetEnumerator()
-            ) {
+            )
+            {
                 while (leftEnumerator.MoveNext() && rightEnumerator.MoveNext())
                 {
                     yield return _resultSelector(leftEnumerator.Current, rightEnumerator.Current);
@@ -201,7 +203,8 @@ namespace System.Linq.Parallel
                 Func<TLeftInput, TRightInput, TOutput> resultSelector,
                 int partitionCount,
                 bool preferStriping
-            ) {
+            )
+            {
                 _leftChildResults = leftChildResults;
                 _rightChildResults = rightChildResults;
                 _resultSelector = resultSelector;
@@ -234,7 +237,8 @@ namespace System.Linq.Parallel
 
             internal override void GivePartitionedStream(
                 IPartitionedStreamRecipient<TOutput> recipient
-            ) {
+            )
+            {
                 PartitionedStream<TOutput, int> partitionedStream =
                     ExchangeUtilities.PartitionDataSource(this, _partitionCount, _preferStriping);
                 recipient.Receive(partitionedStream);

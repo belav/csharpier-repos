@@ -85,7 +85,8 @@ namespace Microsoft.CodeAnalysis
                     Compilation? declarationOnlyCompilation,
                     TextDocumentStates<SourceGeneratedDocumentState> generatedDocuments,
                     bool generatedDocumentsAreFinal
-                ) {
+                )
+                {
                     // Declaration-only compilations should never have any references
                     Contract.ThrowIfTrue(
                         declarationOnlyCompilation != null
@@ -104,7 +105,8 @@ namespace Microsoft.CodeAnalysis
                     ImmutableArray<
                         ValueTuple<ProjectState, CompilationAndGeneratorDriverTranslationAction>
                     > intermediateProjects
-                ) {
+                )
+                {
                     Contract.ThrowIfTrue(intermediateProjects.IsDefault);
 
                     // If we don't have any intermediate projects to process, just initialize our
@@ -126,7 +128,8 @@ namespace Microsoft.CodeAnalysis
                 public static ValueSource<Optional<Compilation>> CreateValueSource(
                     Compilation compilation,
                     SolutionServices services
-                ) {
+                )
+                {
                     return services.SupportsCachingRecoverableObjects
                       ? new WeakValueSource<Compilation>(compilation)
                       : (ValueSource<Optional<Compilation>>)new ConstantValueSource<
@@ -147,14 +150,15 @@ namespace Microsoft.CodeAnalysis
                     Compilation inProgressCompilation,
                     TextDocumentStates<SourceGeneratedDocumentState> generatedDocuments,
                     ImmutableArray<(ProjectState state, CompilationAndGeneratorDriverTranslationAction action)> intermediateProjects
-                ) : base(
-                    compilationWithoutGeneratedDocuments: new ConstantValueSource<
-                        Optional<Compilation>
-                    >(inProgressCompilation),
-                    declarationOnlyCompilation: null,
-                    generatedDocuments,
-                    generatedDocumentsAreFinal: false
-                ) // since we have a set of transformations to make, we'll always have to run generators again
+                )
+                    : base(
+                        compilationWithoutGeneratedDocuments: new ConstantValueSource<
+                            Optional<Compilation>
+                        >(inProgressCompilation),
+                        declarationOnlyCompilation: null,
+                        generatedDocuments,
+                        generatedDocumentsAreFinal: false
+                    ) // since we have a set of transformations to make, we'll always have to run generators again
                 {
                     Contract.ThrowIfTrue(intermediateProjects.IsDefault);
                     Contract.ThrowIfFalse(intermediateProjects.Length > 0);
@@ -172,12 +176,13 @@ namespace Microsoft.CodeAnalysis
                     Compilation declarationOnlyCompilation,
                     TextDocumentStates<SourceGeneratedDocumentState> generatedDocuments,
                     bool generatedDocumentsAreFinal
-                ) : base(
-                    compilationWithoutGeneratedDocuments: null,
-                    declarationOnlyCompilation,
-                    generatedDocuments,
-                    generatedDocumentsAreFinal
-                ) { }
+                )
+                    : base(
+                        compilationWithoutGeneratedDocuments: null,
+                        declarationOnlyCompilation,
+                        generatedDocuments,
+                        generatedDocumentsAreFinal
+                    ) { }
             }
 
             /// <summary>
@@ -190,12 +195,13 @@ namespace Microsoft.CodeAnalysis
                     Compilation declarationCompilation,
                     TextDocumentStates<SourceGeneratedDocumentState> generatedDocuments,
                     bool generatedDocumentsAreFinal
-                ) : base(
-                    new WeakValueSource<Compilation>(declarationCompilation),
-                    declarationCompilation.Clone().RemoveAllReferences(),
-                    generatedDocuments,
-                    generatedDocumentsAreFinal
-                ) { }
+                )
+                    : base(
+                        new WeakValueSource<Compilation>(declarationCompilation),
+                        declarationCompilation.Clone().RemoveAllReferences(),
+                        generatedDocuments,
+                        generatedDocumentsAreFinal
+                    ) { }
             }
 
             /// <summary>
@@ -239,12 +245,13 @@ namespace Microsoft.CodeAnalysis
                     bool hasSuccessfullyLoaded,
                     TextDocumentStates<SourceGeneratedDocumentState> generatedDocuments,
                     UnrootedSymbolSet unrootedSymbolSet
-                ) : base(
-                    compilationWithoutGeneratedFilesSource,
-                    compilationWithoutGeneratedFiles.Clone().RemoveAllReferences(),
-                    generatedDocuments,
-                    generatedDocumentsAreFinal: true
-                ) // when we're in a final state, we've ran generators and should not run again
+                )
+                    : base(
+                        compilationWithoutGeneratedFilesSource,
+                        compilationWithoutGeneratedFiles.Clone().RemoveAllReferences(),
+                        generatedDocuments,
+                        generatedDocumentsAreFinal: true
+                    ) // when we're in a final state, we've ran generators and should not run again
                 {
                     HasSuccessfullyLoaded = hasSuccessfullyLoaded;
                     FinalCompilationWithGeneratedDocuments = finalCompilationSource;
@@ -278,7 +285,8 @@ namespace Microsoft.CodeAnalysis
                     Compilation finalCompilation,
                     ProjectId projectId,
                     Dictionary<MetadataReference, ProjectId>? metadataReferenceToProjectId
-                ) {
+                )
+                {
                     // Keep track of information about symbols from this Compilation.  This will help support other APIs
                     // the solution exposes that allows the user to map back from symbols to project information.
 
@@ -303,7 +311,8 @@ namespace Microsoft.CodeAnalysis
                     ProjectId projectId,
                     Compilation compilation,
                     Dictionary<MetadataReference, ProjectId>? metadataReferenceToProjectId
-                ) {
+                )
+                {
                     RecordSourceOfAssemblySymbol(compilation.Assembly, projectId);
 
                     if (metadataReferenceToProjectId != null)
@@ -319,7 +328,8 @@ namespace Microsoft.CodeAnalysis
                 private static void RecordSourceOfAssemblySymbol(
                     ISymbol? assemblyOrModuleSymbol,
                     ProjectId projectId
-                ) {
+                )
+                {
                     // TODO: how would we ever get a null here?
                     if (assemblyOrModuleSymbol == null)
                     {
@@ -333,7 +343,8 @@ namespace Microsoft.CodeAnalysis
                             assemblyOrModuleSymbol,
                             out var tmp
                         )
-                    ) {
+                    )
+                    {
                         // use GetValue to avoid race condition exceptions from Add.
                         // the first one to set the value wins.
                         s_assemblyOrModuleSymbolToProjectMap.GetValue(

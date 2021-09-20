@@ -115,7 +115,8 @@ namespace Microsoft.CodeAnalysis.UnitTests.Interactive
             internal override ImmutableArray<string> ResolveNuGetPackage(
                 string packageName,
                 string packageVersion
-            ) {
+            )
+            {
                 var reference = $"{Prefix}{packageName}/{packageVersion}";
                 ImmutableArray<string> paths;
                 if (_map.TryGetValue(reference, out paths))

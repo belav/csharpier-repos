@@ -110,7 +110,8 @@ namespace BasicEventSourceTests
             bool onStartup,
             Listener listener,
             EventSourceSettings settings
-        ) {
+        )
+        {
             var eventSourceName = typeof(BadEventSource_MismatchedIds).Name;
             Debug.WriteLine(
                 "***** Test_BadEventSource_Startup(OnStartUp: "
@@ -279,7 +280,8 @@ namespace BasicEventSourceTests
             int value,
             string componentName,
             string instanceId
-        ) {
+        )
+        {
             WriteEventWithRelatedActivityId(7, guid, message, value, componentName, instanceId);
         }
 

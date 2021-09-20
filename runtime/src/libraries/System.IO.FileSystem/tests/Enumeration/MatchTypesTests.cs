@@ -101,7 +101,8 @@ namespace System.IO.Tests.Enumeration
             string directory,
             string pattern,
             EnumerationOptions options
-        ) {
+        )
+        {
             return Directory.GetFiles(directory, pattern, options);
         }
     }
@@ -112,7 +113,8 @@ namespace System.IO.Tests.Enumeration
             string directory,
             string pattern,
             EnumerationOptions options
-        ) {
+        )
+        {
             return new DirectoryInfo(directory).GetFiles(pattern, options)
                 .Select(i => i.FullName)
                 .ToArray();

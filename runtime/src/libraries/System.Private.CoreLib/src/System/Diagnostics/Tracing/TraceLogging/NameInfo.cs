@@ -84,7 +84,8 @@ namespace System.Diagnostics.Tracing
             TraceLoggingEventHandleTable eventHandleTable,
             EventDescriptor descriptor,
             TraceLoggingEventTypes eventTypes
-        ) {
+        )
+        {
             IntPtr eventHandle;
             if ((eventHandle = eventHandleTable[descriptor.EventId]) == IntPtr.Zero)
             {

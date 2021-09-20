@@ -213,7 +213,8 @@ namespace System.Net.NetworkInformation
             int timeout,
             byte[] buffer,
             PingOptions? options
-        ) {
+        )
+        {
             if (string.IsNullOrEmpty(hostNameOrAddress))
             {
                 throw new ArgumentNullException(nameof(hostNameOrAddress));
@@ -277,7 +278,8 @@ namespace System.Net.NetworkInformation
             int timeout,
             byte[] buffer,
             object? userToken
-        ) {
+        )
+        {
             SendAsync(hostNameOrAddress, timeout, buffer, null, userToken);
         }
 
@@ -292,7 +294,8 @@ namespace System.Net.NetworkInformation
             byte[] buffer,
             PingOptions? options,
             object? userToken
-        ) {
+        )
+        {
             TranslateTaskToEap(
                 userToken,
                 SendPingAsync(hostNameOrAddress, timeout, buffer, options)
@@ -305,7 +308,8 @@ namespace System.Net.NetworkInformation
             byte[] buffer,
             PingOptions? options,
             object? userToken
-        ) {
+        )
+        {
             TranslateTaskToEap(userToken, SendPingAsync(address, timeout, buffer, options));
         }
 
@@ -375,7 +379,8 @@ namespace System.Net.NetworkInformation
             int timeout,
             byte[] buffer,
             PingOptions? options
-        ) {
+        )
+        {
             CheckArgs(address, timeout, buffer, options);
             return SendPingAsyncInternal(address, timeout, buffer, options);
         }
@@ -385,7 +390,8 @@ namespace System.Net.NetworkInformation
             int timeout,
             byte[] buffer,
             PingOptions? options
-        ) {
+        )
+        {
             // Need to snapshot the address here, so we're sure that it's not changed between now
             // and the operation, and to be sure that IPAddress.ToString() is called and not some override.
             IPAddress addressSnapshot = GetAddressSnapshot(address);
@@ -416,7 +422,8 @@ namespace System.Net.NetworkInformation
             int timeout,
             byte[] buffer,
             PingOptions? options
-        ) {
+        )
+        {
             if (string.IsNullOrEmpty(hostNameOrAddress))
             {
                 throw new ArgumentNullException(nameof(hostNameOrAddress));
@@ -454,7 +461,8 @@ namespace System.Net.NetworkInformation
             int timeout,
             byte[] buffer,
             PingOptions? options
-        ) {
+        )
+        {
             CheckStart();
             try
             {
@@ -476,7 +484,8 @@ namespace System.Net.NetworkInformation
             int timeout,
             byte[] buffer,
             PingOptions? options
-        ) {
+        )
+        {
             CheckStart();
             try
             {
@@ -506,7 +515,8 @@ namespace System.Net.NetworkInformation
             if (
                 ip.AddressFamily == AddressFamily.InterNetwork
                 && !SocketProtocolSupportPal.OSSupportsIPv4
-            ) {
+            )
+            {
                 throw new NotSupportedException(SR.net_ipv4_not_installed);
             }
             else if (
@@ -514,7 +524,8 @@ namespace System.Net.NetworkInformation
                     ip.AddressFamily == AddressFamily.InterNetworkV6
                     && !SocketProtocolSupportPal.OSSupportsIPv6
                 )
-            ) {
+            )
+            {
                 throw new NotSupportedException(SR.net_ipv6_not_installed);
             }
         }

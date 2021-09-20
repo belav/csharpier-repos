@@ -64,7 +64,8 @@ namespace Microsoft.CodeAnalysis.CodeFixes
                     if (
                         fixAllContext.State.DiagnosticProvider
                         is FixAllState.FixMultipleDiagnosticProvider fixMultipleDiagnosticProvider
-                    ) {
+                    )
+                    {
                         return fixMultipleDiagnosticProvider.DocumentDiagnosticsMap;
                     }
 
@@ -76,7 +77,8 @@ namespace Microsoft.CodeAnalysis.CodeFixes
                             ),
                             fixAllContext.CancellationToken
                         )
-                    ) {
+                    )
+                    {
                         return await FixAllContextHelper.GetDocumentDiagnosticsToFixAsync(
                                 fixAllContext
                             )
@@ -95,7 +97,8 @@ namespace Microsoft.CodeAnalysis.CodeFixes
                         FixAllLogger.CreateCorrelationLogMessage(fixAllContext.State.CorrelationId),
                         fixAllContext.CancellationToken
                     )
-                ) {
+                )
+                {
                     var project = fixAllContext.Project;
                     if (project != null)
                     {

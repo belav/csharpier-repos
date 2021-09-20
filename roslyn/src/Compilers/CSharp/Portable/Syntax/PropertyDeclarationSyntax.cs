@@ -46,7 +46,8 @@ namespace Microsoft.CodeAnalysis.CSharp
         public static AccessorDeclarationSyntax AccessorDeclaration(
             SyntaxKind kind,
             BlockSyntax body
-        ) {
+        )
+        {
             return SyntaxFactory.AccessorDeclaration(
                 kind,
                 default(SyntaxList<AttributeListSyntax>),

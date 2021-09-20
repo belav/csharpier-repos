@@ -39,7 +39,8 @@ namespace System.Net.Security.Tests
             SslStream serverSslStream,
             SslClientAuthenticationOptions clientOptions,
             SslServerAuthenticationOptions serverOptions
-        ) {
+        )
+        {
             using (X509Certificate2 certificate = Configuration.Certificates.GetServerCertificate())
             {
                 clientOptions.RemoteCertificateValidationCallback = AllowAnyServerCertificate;
@@ -67,7 +68,8 @@ namespace System.Net.Security.Tests
             X509Certificate certificate,
             X509Chain chain,
             SslPolicyErrors sslPolicyErrors
-        ) {
+        )
+        {
             SslPolicyErrors expectedSslPolicyErrors = SslPolicyErrors.None;
 
             if (!Capability.IsTrustedRootCertificateInstalled())
@@ -145,7 +147,8 @@ namespace System.Net.Security.Tests
             List<SslApplicationProtocol> clientProtocols,
             List<SslApplicationProtocol> serverProtocols,
             SslApplicationProtocol expected
-        ) {
+        )
+        {
             (Stream clientStream, Stream serverStream) = TestHelper.GetConnectedStreams();
             using (clientStream)
             using (serverStream)
@@ -258,7 +261,8 @@ namespace System.Net.Security.Tests
                             client.GetStream(),
                             leaveInnerStreamOpen: false
                         )
-                    ) {
+                    )
+                    {
                         SslClientAuthenticationOptions clientOptions =
                             new SslClientAuthenticationOptions
                             {

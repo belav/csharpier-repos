@@ -46,7 +46,8 @@ namespace Microsoft.EntityFrameworkCore.Internal
             IServiceProvider scopedProvider,
             IDbContextOptions contextOptions,
             DbContext context
-        ) {
+        )
+        {
             _scopedProvider = scopedProvider;
             _contextOptions = contextOptions;
             _currentContext = new CurrentDbContext(context);

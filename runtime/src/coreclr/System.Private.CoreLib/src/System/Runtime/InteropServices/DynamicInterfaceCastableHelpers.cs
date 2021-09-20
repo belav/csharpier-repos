@@ -15,7 +15,8 @@ namespace System.Runtime.InteropServices
             IDynamicInterfaceCastable castable,
             RuntimeType interfaceType,
             bool throwIfNotImplemented
-        ) {
+        )
+        {
             bool isImplemented = castable.IsInterfaceImplemented(
                 new RuntimeTypeHandle(interfaceType),
                 throwIfNotImplemented
@@ -32,7 +33,8 @@ namespace System.Runtime.InteropServices
         internal static RuntimeType? GetInterfaceImplementation(
             IDynamicInterfaceCastable castable,
             RuntimeType interfaceType
-        ) {
+        )
+        {
             RuntimeTypeHandle handle = castable.GetInterfaceImplementation(
                 new RuntimeTypeHandle(interfaceType)
             );

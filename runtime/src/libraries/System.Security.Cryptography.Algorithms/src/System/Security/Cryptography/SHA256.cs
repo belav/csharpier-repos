@@ -94,7 +94,8 @@ namespace System.Security.Cryptography
             ReadOnlySpan<byte> source,
             Span<byte> destination,
             out int bytesWritten
-        ) {
+        )
+        {
             if (destination.Length < HashSizeBytes)
             {
                 bytesWritten = 0;

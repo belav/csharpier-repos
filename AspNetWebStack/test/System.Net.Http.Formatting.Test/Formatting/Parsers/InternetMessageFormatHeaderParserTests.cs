@@ -754,7 +754,8 @@ namespace System.Net.Http.Formatting.Parsers
         private static InternetMessageFormatHeaderParser CreateHeaderParser(
             int maximumHeaderLength,
             out HttpHeaders headers
-        ) {
+        )
+        {
             headers = new HttpRequestMessage().Headers;
             return new InternetMessageFormatHeaderParser(headers, maximumHeaderLength);
         }
@@ -775,7 +776,8 @@ namespace System.Net.Http.Formatting.Parsers
         private static void RunRfc5322SampleTest(
             string[] testHeaders,
             Action<HttpHeaders> validation
-        ) {
+        )
+        {
             byte[] data = InternetMessageFormatHeaderParserTests.CreateBuffer(testHeaders);
             for (var cnt = 1; cnt <= data.Length; cnt++)
             {
@@ -806,7 +808,8 @@ namespace System.Net.Http.Formatting.Parsers
             byte[] buffer,
             int readsize,
             out int totalBytesConsumed
-        ) {
+        )
+        {
             ParserState state = ParserState.Invalid;
             totalBytesConsumed = 0;
             while (totalBytesConsumed <= buffer.Length)

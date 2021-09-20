@@ -118,7 +118,8 @@ public interface I1
                             compilation1.ToMetadataReference(),
                             compilation1.EmitToImageReference()
                         }
-                    ) {
+                    )
+                    {
                         var compilation2 = CreateCompilation(
                             source2,
                             new[] { reference },
@@ -152,7 +153,8 @@ public interface I1
         private static void ValidateMethodImplementationTest1_011(
             ModuleSymbol m,
             string expectedImplementation
-        ) {
+        )
+        {
             var i1 = m.GlobalNamespace.GetTypeMember("I1");
             var m1 = i1.GetMembers().OfType<MethodSymbol>().Single();
 
@@ -196,7 +198,8 @@ public interface I1
         private static void ValidateMethodImplementationTest2_011(
             ModuleSymbol m,
             string expectedImplementation
-        ) {
+        )
+        {
             var test2 = m.GlobalNamespace.GetTypeMember("Test2");
             var i1 = test2.InterfacesNoUseSiteDiagnostics().Single();
             Assert.Equal("I1", i1.ToTestDisplayString());
@@ -1374,7 +1377,8 @@ class Test2 : I1
                     compilation1.EmitToImageReference(),
                     compilation1.ToMetadataReference()
                 }
-            ) {
+            )
+            {
                 var compilation3 = CreateCompilation(
                     source2,
                     new[] { reference },
@@ -1443,7 +1447,8 @@ class Test2 : I2
                     compilation1.EmitToImageReference(),
                     compilation1.ToMetadataReference()
                 }
-            ) {
+            )
+            {
                 var compilation3 = CreateCompilation(
                     source2,
                     new[] { reference },
@@ -1954,7 +1959,8 @@ class Test1 : I2, I1<string?>
                     compilation1.ToMetadataReference(),
                     compilation1.EmitToImageReference()
                 }
-            ) {
+            )
+            {
                 var compilation2 = CreateCompilation(
                     source2,
                     new[] { compilation1.ToMetadataReference() },
@@ -2057,7 +2063,8 @@ class Test1 : I1<string?>, I2
                     compilation1.ToMetadataReference(),
                     compilation1.EmitToImageReference()
                 }
-            ) {
+            )
+            {
                 var compilation2 = CreateCompilation(
                     source2,
                     new[] { compilation1.ToMetadataReference() },
@@ -2164,7 +2171,8 @@ class Test1 : I2, I3
                     compilation1.ToMetadataReference(),
                     compilation1.EmitToImageReference()
                 }
-            ) {
+            )
+            {
                 var compilation2 = CreateCompilation(
                     source2,
                     new[] { compilation1.ToMetadataReference() },
@@ -2271,7 +2279,8 @@ class Test1 : I3, I2
                     compilation1.ToMetadataReference(),
                     compilation1.EmitToImageReference()
                 }
-            ) {
+            )
+            {
                 var compilation2 = CreateCompilation(
                     source2,
                     new[] { compilation1.ToMetadataReference() },
@@ -2376,7 +2385,8 @@ class Test1 : I1
             bool haveSet,
             string accessCode,
             string expectedOutput
-        ) {
+        )
+        {
             var compilation1 = CreateCompilation(
                 source1,
                 options: TestOptions.DebugExe,
@@ -2460,7 +2470,8 @@ class Test2 : I1
             string propertyName,
             bool haveGet,
             bool haveSet
-        ) {
+        )
+        {
             var i1 = m.GlobalNamespace.GetTypeMember("I1");
             var p1 = i1.GetMember<PropertySymbol>(propertyName);
 
@@ -2560,7 +2571,8 @@ class Test2 : I1
             string propertyName,
             bool haveGet,
             bool haveSet
-        ) {
+        )
+        {
             var test2 = m.GlobalNamespace.GetTypeMember("Test2");
             Assert.Equal(
                 "I1",
@@ -6356,7 +6368,8 @@ class Test1 : I1
             DiagnosticDescription[] expected,
             bool haveAdd,
             bool haveRemove
-        ) {
+        )
+        {
             var compilation1 = CreateCompilation(
                 source1,
                 options: TestOptions.DebugDll,
@@ -6402,7 +6415,8 @@ class Test2 : I1
             ModuleSymbol m,
             bool haveAdd,
             bool haveRemove
-        ) {
+        )
+        {
             var i1 = m.GlobalNamespace.GetTypeMember("I1");
             var e1 = i1.GetMember<EventSymbol>("E1");
             var addE1 = e1.AddMethod;
@@ -6501,7 +6515,8 @@ class Test2 : I1
             ModuleSymbol m,
             bool haveAdd,
             bool haveRemove
-        ) {
+        )
+        {
             var test2 = m.GlobalNamespace.GetTypeMember("Test2");
             Assert.Equal(
                 "I1",
@@ -9069,7 +9084,8 @@ M3",
                         (name: "M2", access: Accessibility.Internal),
                         (name: "M3", access: Accessibility.Private)
                     }
-                ) {
+                )
+                {
                     var m1 = i1.GetMember<MethodSymbol>(tuple.name);
 
                     Assert.False(m1.IsAbstract);
@@ -9509,7 +9525,8 @@ class Test2 : I1
         private static void ValidateI1M1NotImplemented(
             CSharpCompilation compilation,
             string className
-        ) {
+        )
+        {
             var test2 = compilation.GetTypeByMetadataName(className);
             var i1 = compilation.GetTypeByMetadataName("I1");
             var m1 = i1.GetMember<MethodSymbol>("M1");
@@ -9519,7 +9536,8 @@ class Test2 : I1
         private static void ValidateMethodModifiersImplicit_10(
             ModuleSymbol m,
             Accessibility accessibility
-        ) {
+        )
+        {
             ValidateMethodModifiers_10(
                 m,
                 implementedByBase: false,
@@ -9531,7 +9549,8 @@ class Test2 : I1
         private static void ValidateMethodModifiersExplicit_10(
             ModuleSymbol m,
             Accessibility accessibility
-        ) {
+        )
+        {
             ValidateMethodModifiers_10(
                 m,
                 implementedByBase: false,
@@ -9543,7 +9562,8 @@ class Test2 : I1
         private static void ValidateMethodModifiersImplicitInTest2_10(
             ModuleSymbol m,
             Accessibility accessibility
-        ) {
+        )
+        {
             ValidateMethodModifiers_10(
                 m,
                 implementedByBase: true,
@@ -9555,7 +9575,8 @@ class Test2 : I1
         private static void ValidateMethodModifiersExplicitInTest2_10(
             ModuleSymbol m,
             Accessibility accessibility
-        ) {
+        )
+        {
             ValidateMethodModifiers_10(m, implementedByBase: true, isExplicit: true, accessibility);
         }
 
@@ -9564,7 +9585,8 @@ class Test2 : I1
             bool implementedByBase,
             bool isExplicit,
             Accessibility accessibility
-        ) {
+        )
+        {
             var test1 = m.GlobalNamespace.GetTypeMember("Test1");
             var i1 = test1.InterfacesNoUseSiteDiagnostics().Where(i => i.Name == "I1").Single();
             var m1 = i1.GetMember<MethodSymbol>("M1");
@@ -9657,7 +9679,8 @@ class Test1 : I1
             string source2,
             Accessibility accessibility,
             params DiagnosticDescription[] expected
-        ) {
+        )
+        {
             var compilation1 = CreateCompilation(
                 source2 + source1,
                 options: TestOptions.DebugExe,
@@ -12469,7 +12492,8 @@ class Test1
                     compilation3.ToMetadataReference(),
                     compilation3.EmitToImageReference()
                 }
-            ) {
+            )
+            {
                 var compilation4 = CreateCompilation(
                     source3,
                     options: TestOptions.DebugExe,
@@ -12542,7 +12566,8 @@ M2",
                         (name: "M2", access: Accessibility.ProtectedOrInternal),
                         (name: "M3", access: Accessibility.ProtectedAndInternal)
                     }
-                ) {
+                )
+                {
                     var m1 = i1.GetMember<MethodSymbol>(tuple.name);
 
                     Assert.False(m1.IsAbstract);
@@ -12639,7 +12664,8 @@ class Test2 : I1
                     compilation2.ToMetadataReference(),
                     compilation2.EmitToImageReference()
                 }
-            ) {
+            )
+            {
                 var compilation3 = CreateCompilation(
                     source2,
                     new[] { reference },
@@ -12750,7 +12776,8 @@ class Test2 : I1
                     compilation2.ToMetadataReference(),
                     compilation2.EmitToImageReference()
                 }
-            ) {
+            )
+            {
                 var compilation3 = CreateCompilation(
                     source2,
                     new[] { reference },
@@ -12877,7 +12904,8 @@ class Test2 : I1
                     compilation2.ToMetadataReference(),
                     compilation2.EmitToImageReference()
                 }
-            ) {
+            )
+            {
                 var compilation3 = CreateCompilation(
                     source2,
                     new[] { reference },
@@ -12992,7 +13020,8 @@ class Test1 : I1
                     compilation2.ToMetadataReference(),
                     compilation2.EmitToImageReference()
                 }
-            ) {
+            )
+            {
                 var compilation3 = CreateCompilation(
                     source2,
                     new[] { reference },
@@ -13088,7 +13117,8 @@ class Test1 : I1
                     compilation2.ToMetadataReference(),
                     compilation2.EmitToImageReference()
                 }
-            ) {
+            )
+            {
                 var compilation3 = CreateCompilation(
                     source2,
                     new[] { reference },
@@ -13184,7 +13214,8 @@ class Test1 : I1
                     compilation2.ToMetadataReference(),
                     compilation2.EmitToImageReference()
                 }
-            ) {
+            )
+            {
                 var compilation3 = CreateCompilation(
                     source2,
                     new[] { reference },
@@ -13401,7 +13432,8 @@ class Test1 : I1
                     compilation2.ToMetadataReference(),
                     compilation2.EmitToImageReference()
                 }
-            ) {
+            )
+            {
                 var compilation3 = CreateCompilation(
                     source2,
                     new[] { reference },
@@ -13508,7 +13540,8 @@ class Test1 : I1
                     compilation2.ToMetadataReference(),
                     compilation2.EmitToImageReference()
                 }
-            ) {
+            )
+            {
                 var compilation3 = CreateCompilation(
                     source2,
                     new[] { reference },
@@ -13615,7 +13648,8 @@ class Test1 : I1
                     compilation2.ToMetadataReference(),
                     compilation2.EmitToImageReference()
                 }
-            ) {
+            )
+            {
                 var compilation3 = CreateCompilation(
                     source2,
                     new[] { reference },
@@ -14910,7 +14944,8 @@ public interface I1
         private static void ValidatePropertyModifiers_04(
             CSharpCompilation compilation1,
             string propertyName
-        ) {
+        )
+        {
             var i1 = compilation1.GlobalNamespace.GetTypeMember("I1");
             var p1 = i1.GetMember<PropertySymbol>(propertyName);
             var p1get = p1.GetMethod;
@@ -15053,7 +15088,8 @@ set_P2",
         private static PropertySymbol GetSingleProperty(
             CSharpCompilation compilation,
             string containerName
-        ) {
+        )
+        {
             return GetSingleProperty(compilation.GetTypeByMetadataName(containerName));
         }
 
@@ -15097,7 +15133,8 @@ public interface I1
         private static void ValidatePropertyModifiers_06(
             CSharpCompilation compilation1,
             string propertyName
-        ) {
+        )
+        {
             var i1 = compilation1.GetTypeByMetadataName("I1");
             var p1 = i1.GetMember<PropertySymbol>(propertyName);
 
@@ -15332,7 +15369,8 @@ set_P8",
                         (name: "P7", access: Accessibility.Internal),
                         (name: "P8", access: Accessibility.Internal)
                     }
-                ) {
+                )
+                {
                     var p1 = i1.GetMember<PropertySymbol>(tuple.name);
 
                     Assert.False(p1.IsAbstract);
@@ -15986,7 +16024,8 @@ class Test1 : I1
             Accessibility accessibility,
             DiagnosticDescription[] expected1,
             params DiagnosticDescription[] expected2
-        ) {
+        )
+        {
             var compilation1 = CreateCompilation(
                 source2 + source1,
                 options: TestOptions.DebugExe,
@@ -16077,7 +16116,8 @@ class Test2 : I1
         private static void ValidatePropertyModifiers_11(
             ModuleSymbol m,
             Accessibility accessibility
-        ) {
+        )
+        {
             var test1 = m.GlobalNamespace.GetTypeMember("Test1");
             var i1 = test1.InterfacesNoUseSiteDiagnostics().Single();
             var p1 = GetSingleProperty(i1);
@@ -16096,7 +16136,8 @@ class Test2 : I1
         private static void ValidatePropertyModifiers_11(
             PropertySymbol p1,
             Accessibility accessibility
-        ) {
+        )
+        {
             Assert.True(p1.IsAbstract);
             Assert.False(p1.IsVirtual);
             Assert.False(p1.IsSealed);
@@ -16109,7 +16150,8 @@ class Test2 : I1
         private static void ValidatePropertyAccessorModifiers_11(
             MethodSymbol m1,
             Accessibility accessibility
-        ) {
+        )
+        {
             Assert.True(m1.IsAbstract);
             Assert.False(m1.IsVirtual);
             Assert.True(m1.IsMetadataVirtual());
@@ -16124,7 +16166,8 @@ class Test2 : I1
         private static void ValidatePropertyNotImplemented_11(
             CSharpCompilation compilation,
             string className
-        ) {
+        )
+        {
             var test2 = compilation.GetTypeByMetadataName(className);
             var i1 = compilation.GetTypeByMetadataName("I1");
             var p1 = GetSingleProperty(i1);
@@ -16193,7 +16236,8 @@ class Test1 : I1
             string source1,
             string source2,
             params DiagnosticDescription[] expected
-        ) {
+        )
+        {
             var compilation1 = CreateCompilation(
                 source2 + source1,
                 options: TestOptions.DebugExe,
@@ -16252,7 +16296,8 @@ class Test1 : I1
         private static void ValidatePropertyImplementation_11(
             ModuleSymbol m,
             bool implementedByBase
-        ) {
+        )
+        {
             var test1 = m.GlobalNamespace.GetTypeMember("Test1");
             var i1 = test1.InterfacesNoUseSiteDiagnostics().Where(i => i.Name == "I1").Single();
             var p1 = GetSingleProperty(i1);
@@ -16339,7 +16384,8 @@ class Test1 : I1
             string source2,
             TargetFramework targetFramework,
             params DiagnosticDescription[] expected
-        ) {
+        )
+        {
             var compilation1 = CreateCompilation(
                 source2 + source1,
                 options: TestOptions.DebugExe,
@@ -16377,7 +16423,8 @@ set_P1",
                     compilation2.ToMetadataReference(),
                     compilation2.EmitToImageReference()
                 }
-            ) {
+            )
+            {
                 var compilation3 = CreateCompilation(
                     source2,
                     new[] { reference },
@@ -16886,7 +16933,8 @@ class Test1 : I1
             string source1,
             string source2,
             params DiagnosticDescription[] expected
-        ) {
+        )
+        {
             var compilation1 = CreateCompilation(
                 source2 + source1,
                 options: TestOptions.DebugExe,
@@ -16977,7 +17025,8 @@ class Test1 : Test2, I1
             string source1,
             string source2,
             params DiagnosticDescription[] expected
-        ) {
+        )
+        {
             var compilation1 = CreateCompilation(
                 source2 + source1,
                 options: TestOptions.DebugDll,
@@ -17068,7 +17117,8 @@ class Test1 : Test2, I1
             string source1,
             string source2,
             params DiagnosticDescription[] expected
-        ) {
+        )
+        {
             var compilation2 = CreateCompilation(
                 source1,
                 options: TestOptions.DebugDll,
@@ -17448,7 +17498,8 @@ class Test2 : I1, I2, I3
         private void ValidatePropertyModifiers_14(
             string source1,
             params DiagnosticDescription[] expected
-        ) {
+        )
+        {
             var compilation1 = CreateCompilation(
                 source1,
                 options: TestOptions.DebugDll,
@@ -17788,7 +17839,8 @@ class Test2 : I0, I1, I2, I3, I4, I5, I6, I7, I8
         private void ValidatePropertyModifiers_15(
             string source1,
             params DiagnosticDescription[] expected
-        ) {
+        )
+        {
             var compilation1 = CreateCompilation(
                 source1,
                 options: TestOptions.DebugDll,
@@ -18037,7 +18089,8 @@ class Test2 : I1, I2, I3, I4, I5
             string source1,
             DiagnosticDescription[] expected1,
             params DiagnosticDescription[] expected2
-        ) {
+        )
+        {
             var compilation1 = CreateCompilation(
                 source1,
                 options: TestOptions.DebugDll.WithMetadataImportOptions(MetadataImportOptions.All),
@@ -18333,7 +18386,8 @@ class Test2 : I1, I2, I3, I4, I5
         private void ValidatePropertyModifiers_17(
             string source1,
             params DiagnosticDescription[] expected
-        ) {
+        )
+        {
             var compilation1 = CreateCompilation(
                 source1,
                 options: TestOptions.DebugDll,
@@ -18633,7 +18687,8 @@ class Test2 : I1, I2, I3, I4, I5
         private void ValidatePropertyModifiers_18(
             string source1,
             params DiagnosticDescription[] expected
-        ) {
+        )
+        {
             var compilation1 = CreateCompilation(
                 source1,
                 options: TestOptions.DebugDll,
@@ -18851,7 +18906,8 @@ class Test1 : I1
             string source1,
             string source2,
             Accessibility accessibility
-        ) {
+        )
+        {
             var compilation1 = CreateCompilation(
                 source1 + source2,
                 options: TestOptions.DebugExe,
@@ -19740,7 +19796,8 @@ class Test66 : Test6 {}
                     MetadataImportOptions.All,
                     MetadataImportOptions.Public
                 }
-            ) {
+            )
+            {
                 var compilation1 = CreateCompilation(
                     source1 + source2,
                     options: TestOptions.DebugExe.WithMetadataImportOptions(metadataImportOptions),
@@ -19846,7 +19903,8 @@ set_P6
                         compilation2.ToMetadataReference(),
                         compilation2.EmitToImageReference()
                     }
-                ) {
+                )
+                {
                     var compilation3 = CreateCompilation(
                         source2,
                         new[] { reference },
@@ -19880,7 +19938,8 @@ set_P6
             Accessibility getAccess,
             Accessibility setAccess,
             NamedTypeSymbol test1 = null
-        ) {
+        )
+        {
             Assert.Equal(isAbstract, p1.IsAbstract);
             Assert.NotEqual(isAbstract, p1.IsVirtual);
             Assert.False(p1.IsSealed);
@@ -19897,7 +19956,8 @@ set_P6
                 if (
                     implementingProperty.GetMethod?.ExplicitInterfaceImplementations.Length > 0
                     || implementingProperty.SetMethod?.ExplicitInterfaceImplementations.Length > 0
-                ) {
+                )
+                {
                     Assert.Same(p1, implementingProperty.ExplicitInterfaceImplementations.Single());
                 }
                 else
@@ -19931,7 +19991,8 @@ set_P6
             Accessibility access,
             NamedTypeSymbol test1,
             MethodSymbol implementingMethod
-        ) {
+        )
+        {
             if (m1 is null)
             {
                 Assert.Equal(Accessibility.Private, access);
@@ -20018,7 +20079,8 @@ class Test1 : I1
             Accessibility getAccess,
             Accessibility setAccess,
             params DiagnosticDescription[] expected
-        ) {
+        )
+        {
             var compilation1 = CreateCompilation(
                 source2 + source1,
                 options: TestOptions.DebugExe.WithMetadataImportOptions(MetadataImportOptions.All),
@@ -22012,7 +22074,8 @@ class Test1
                     compilation3.ToMetadataReference(),
                     compilation3.EmitToImageReference()
                 }
-            ) {
+            )
+            {
                 var compilation4 = CreateCompilation(
                     source3,
                     options: TestOptions.DebugExe,
@@ -22185,7 +22248,8 @@ set_P6
                             setAccess: Accessibility.Public
                         )
                     }
-                ) {
+                )
+                {
                     var p1 = i1.GetMember<PropertySymbol>(tuple.name);
 
                     Assert.False(p1.IsAbstract);
@@ -29904,7 +29968,8 @@ set_P2",
         private static EventSymbol GetSingleEvent(
             CSharpCompilation compilation,
             string containerName
-        ) {
+        )
+        {
             return GetSingleEvent(compilation.GetTypeByMetadataName(containerName));
         }
 
@@ -30061,7 +30126,8 @@ set_P3",
                         (name: "P2", access: Accessibility.Internal),
                         (name: "P3", access: Accessibility.Private)
                     }
-                ) {
+                )
+                {
                     var p1 = i1.GetMember<EventSymbol>(tuple.name);
 
                     Assert.False(p1.IsAbstract);
@@ -30726,7 +30792,8 @@ class Test1 : I1
             Accessibility accessibility,
             DiagnosticDescription[] expected1,
             params DiagnosticDescription[] expected2
-        ) {
+        )
+        {
             var compilation1 = CreateCompilation(
                 source2 + source1,
                 options: TestOptions.DebugExe,
@@ -30858,7 +30925,8 @@ class Test2 : I1
         private static void ValidateEventNotImplemented_11(
             CSharpCompilation compilation,
             string className
-        ) {
+        )
+        {
             var test2 = compilation.GetTypeByMetadataName(className);
             var i1 = compilation.GetTypeByMetadataName("I1");
             var p1 = GetSingleEvent(i1);
@@ -30930,7 +30998,8 @@ class Test1 : I1
             string source1,
             string source2,
             params DiagnosticDescription[] expected
-        ) {
+        )
+        {
             var compilation1 = CreateCompilation(
                 source2 + source1,
                 options: TestOptions.DebugExe,
@@ -31073,7 +31142,8 @@ class Test1 : I1
             string source2,
             TargetFramework targetFramework,
             params DiagnosticDescription[] expected
-        ) {
+        )
+        {
             var compilation1 = CreateCompilation(
                 source2 + source1,
                 options: TestOptions.DebugExe,
@@ -31111,7 +31181,8 @@ set_P1",
                     compilation2.ToMetadataReference(),
                     compilation2.EmitToImageReference()
                 }
-            ) {
+            )
+            {
                 var compilation3 = CreateCompilation(
                     source2,
                     new[] { reference },
@@ -31629,7 +31700,8 @@ class Test1 : I1
             string source1,
             string source2,
             params DiagnosticDescription[] expected
-        ) {
+        )
+        {
             var compilation1 = CreateCompilation(
                 source2 + source1,
                 options: TestOptions.DebugExe,
@@ -31717,7 +31789,8 @@ class Test1 : Test2, I1
             string source1,
             string source2,
             params DiagnosticDescription[] expected
-        ) {
+        )
+        {
             var compilation1 = CreateCompilation(
                 source2 + source1,
                 options: TestOptions.DebugDll,
@@ -31805,7 +31878,8 @@ class Test1 : Test2, I1
             string source1,
             string source2,
             params DiagnosticDescription[] expected
-        ) {
+        )
+        {
             var compilation2 = CreateCompilation(
                 source1,
                 options: TestOptions.DebugDll,
@@ -32080,7 +32154,8 @@ class Test2 : I1, I2, I3
         private void ValidateEventModifiers_14(
             string source1,
             params DiagnosticDescription[] expected
-        ) {
+        )
+        {
             var compilation1 = CreateCompilation(
                 source1,
                 options: TestOptions.DebugDll,
@@ -32452,7 +32527,8 @@ class Test2 : I0, I1, I2, I3, I4, I5, I6, I7, I8
         private void ValidateEventModifiers_15(
             string source1,
             params DiagnosticDescription[] expected
-        ) {
+        )
+        {
             var compilation1 = CreateCompilation(
                 source1,
                 options: TestOptions.DebugDll,
@@ -33014,7 +33090,8 @@ class Test2 : I1, I2, I3, I4
         private void ValidateEventModifiers_17(
             string source1,
             params DiagnosticDescription[] expected
-        ) {
+        )
+        {
             var compilation1 = CreateCompilation(
                 source1,
                 options: TestOptions.DebugDll,
@@ -33272,7 +33349,8 @@ class Test2 : I1, I2, I3, I4, I5
         private void ValidateEventModifiers_18(
             string source1,
             params DiagnosticDescription[] expected
-        ) {
+        )
+        {
             var compilation1 = CreateCompilation(
                 source1,
                 options: TestOptions.DebugDll,
@@ -33492,7 +33570,8 @@ class Test1 : I1
             string source1,
             string source2,
             Accessibility accessibility
-        ) {
+        )
+        {
             var compilation1 = CreateCompilation(
                 source1 + source2,
                 options: TestOptions.DebugExe,
@@ -33861,7 +33940,8 @@ class Test1
                     compilation3.ToMetadataReference(),
                     compilation3.EmitToImageReference()
                 }
-            ) {
+            )
+            {
                 var compilation4 = CreateCompilation(
                     source3,
                     options: TestOptions.DebugExe,
@@ -33956,7 +34036,8 @@ set_P2",
                         (name: "P2", access: Accessibility.ProtectedOrInternal),
                         (name: "P3", access: Accessibility.ProtectedAndInternal)
                     }
-                ) {
+                )
+                {
                     var p1 = i1.GetMember<EventSymbol>(tuple.name);
 
                     Assert.False(p1.IsAbstract);
@@ -34501,7 +34582,8 @@ class Test1 : I1.T1
             TargetFramework targetFramework = TargetFramework.Standard,
             bool execute = true,
             Verification verify = Verification.Passes
-        ) {
+        )
+        {
             var compilation1 = CreateCompilation(
                 source1,
                 options: TestOptions.DebugExe,
@@ -34856,7 +34938,8 @@ class Test1
                     compilation3.ToMetadataReference(),
                     compilation3.EmitToImageReference()
                 }
-            ) {
+            )
+            {
                 var compilation4 = CreateCompilation(
                     source1,
                     options: TestOptions.DebugExe,
@@ -35046,7 +35129,8 @@ class Test1
                     compilation3.ToMetadataReference(),
                     compilation3.EmitToImageReference()
                 }
-            ) {
+            )
+            {
                 var compilation4 = CreateCompilation(
                     source1,
                     options: TestOptions.DebugExe,
@@ -35566,7 +35650,8 @@ class Test1
                     compilation3.ToMetadataReference(),
                     compilation3.EmitToImageReference()
                 }
-            ) {
+            )
+            {
                 var compilation4 = CreateCompilation(
                     source1,
                     options: TestOptions.DebugExe,
@@ -35979,7 +36064,8 @@ I4.M1
         private static void ValidateMethodImplementationInDerived_01(
             ModuleSymbol m,
             bool i4M1IsAbstract
-        ) {
+        )
+        {
             var test1 = m.GlobalNamespace.GetTypeMember("Test1");
             var i1 = test1.InterfacesNoUseSiteDiagnostics().Where(i => i.Name == "I1").Single();
             var i1i2m1 = i1.GetMember<MethodSymbol>("I2.M1");
@@ -38574,7 +38660,8 @@ class Test1 : I2, I3
                     compilation1.ToMetadataReference(),
                     compilation1.EmitToImageReference()
                 }
-            ) {
+            )
+            {
                 var compilation2 = CreateCompilation(
                     source2,
                     new[] { compilation1.ToMetadataReference() },
@@ -38690,7 +38777,8 @@ class Test1 : I3, I2
                     compilation1.ToMetadataReference(),
                     compilation1.EmitToImageReference()
                 }
-            ) {
+            )
+            {
                 var compilation2 = CreateCompilation(
                     source2,
                     new[] { compilation1.ToMetadataReference() },
@@ -38810,7 +38898,8 @@ class Test1 : I3, I4
                     compilation1.ToMetadataReference(),
                     compilation1.EmitToImageReference()
                 }
-            ) {
+            )
+            {
                 var compilation2 = CreateCompilation(
                     source2,
                     new[] { compilation1.ToMetadataReference() },
@@ -38941,7 +39030,8 @@ class Test1 : I4, I3
                     compilation1.ToMetadataReference(),
                     compilation1.EmitToImageReference()
                 }
-            ) {
+            )
+            {
                 var compilation2 = CreateCompilation(
                     source2,
                     new[] { compilation1.ToMetadataReference() },
@@ -39069,7 +39159,8 @@ class Test1 : I2
                     compilation1.ToMetadataReference(),
                     compilation1.EmitToImageReference()
                 }
-            ) {
+            )
+            {
                 var compilation2 = CreateCompilation(
                     source2,
                     new[] { compilation1.ToMetadataReference() },
@@ -39157,7 +39248,8 @@ class Test1 : I2, I1<string?>
                     compilation1.ToMetadataReference(),
                     compilation1.EmitToImageReference()
                 }
-            ) {
+            )
+            {
                 var compilation2 = CreateCompilation(
                     source2,
                     new[] { compilation1.ToMetadataReference() },
@@ -39255,7 +39347,8 @@ class Test1 : I2, I1<string?>
                     compilation1.ToMetadataReference(),
                     compilation1.EmitToImageReference()
                 }
-            ) {
+            )
+            {
                 var compilation2 = CreateCompilation(
                     source2,
                     new[] { compilation1.ToMetadataReference() },
@@ -39344,7 +39437,8 @@ class Test1 : I2<string>, I3<string>, I4
                     compilation1.ToMetadataReference(),
                     compilation1.EmitToImageReference()
                 }
-            ) {
+            )
+            {
                 var compilation2 = CreateCompilation(
                     source2,
                     new[] { compilation1.ToMetadataReference() },
@@ -39522,7 +39616,8 @@ I4.M1
                     compilation1.ToMetadataReference(),
                     compilation1.EmitToImageReference()
                 }
-            ) {
+            )
+            {
                 var compilation2 = CreateCompilation(
                     source3,
                     new[] { reference },
@@ -39562,7 +39657,8 @@ I4.M1
                     compilation4.ToMetadataReference(),
                     compilation4.EmitToImageReference()
                 }
-            ) {
+            )
+            {
                 var compilation5 = CreateCompilation(
                     source2 + source3,
                     new[] { reference },
@@ -39678,7 +39774,8 @@ I4.M1
                     compilation1.ToMetadataReference(),
                     compilation1.EmitToImageReference()
                 }
-            ) {
+            )
+            {
                 var compilation2 = CreateCompilation(
                     source3,
                     new[] { reference },
@@ -39718,7 +39815,8 @@ I4.M1
                     compilation4.ToMetadataReference(),
                     compilation4.EmitToImageReference()
                 }
-            ) {
+            )
+            {
                 var compilation5 = CreateCompilation(
                     source2 + source3,
                     new[] { reference },
@@ -39834,7 +39932,8 @@ I4.M1
                     compilation1.ToMetadataReference(),
                     compilation1.EmitToImageReference()
                 }
-            ) {
+            )
+            {
                 var compilation2 = CreateCompilation(
                     source3,
                     new[] { reference },
@@ -39874,7 +39973,8 @@ I4.M1
                     compilation4.ToMetadataReference(),
                     compilation4.EmitToImageReference()
                 }
-            ) {
+            )
+            {
                 var compilation5 = CreateCompilation(
                     source2 + source3,
                     new[] { reference },
@@ -40018,7 +40118,8 @@ class Test1 : I1
                     TestOptions.DebugExe,
                     TestOptions.DebugExe.WithMetadataImportOptions(MetadataImportOptions.All)
                 }
-            ) {
+            )
+            {
                 var compilation1 = CreateCompilation(
                     source1 + source2,
                     options: options,
@@ -40096,7 +40197,8 @@ I4.M1
         private static void ValidatePropertyImplementationInDerived_01(
             ModuleSymbol m,
             bool i4M1IsAbstract
-        ) {
+        )
+        {
             var test1 = m.GlobalNamespace.GetTypeMember("Test1");
             var i1 = test1.InterfacesNoUseSiteDiagnostics().Where(i => i.Name == "I1").Single();
             var i1i2m1 = i1.GetMembers()
@@ -40153,7 +40255,8 @@ I4.M1
             PropertySymbol expected,
             NamedTypeSymbol implementingType,
             PropertySymbol interfaceProperty
-        ) {
+        )
+        {
             Assert.Same(
                 expected,
                 implementingType.FindImplementationForInterfaceMember(interfaceProperty)
@@ -40183,7 +40286,8 @@ I4.M1
             PropertySymbol expected,
             NamedTypeSymbol implementingType,
             PropertySymbol interfaceProperty
-        ) {
+        )
+        {
             Assert.Equal(
                 expected,
                 implementingType.FindImplementationForInterfaceMember(interfaceProperty)
@@ -40210,7 +40314,8 @@ I4.M1
         private static void ValidateExplicitImplementation(
             PropertySymbol m1,
             bool isAbstract = false
-        ) {
+        )
+        {
             Assert.Equal(isAbstract, m1.IsAbstract);
             Assert.False(m1.IsVirtual);
             Assert.Equal(isAbstract, m1.IsSealed);
@@ -40330,7 +40435,8 @@ class Test1 : I1
             string source1,
             DiagnosticDescription[] expected1,
             params DiagnosticDescription[] expected2
-        ) {
+        )
+        {
             var compilation1 = CreateCompilation(
                 source1,
                 options: TestOptions.DebugDll,
@@ -40470,7 +40576,8 @@ class Test1 : I1
             string source1,
             DiagnosticDescription[] expected1,
             params DiagnosticDescription[] expected2
-        ) {
+        )
+        {
             var compilation1 = CreateCompilation(
                 source1,
                 options: TestOptions.DebugDll,
@@ -40553,7 +40660,8 @@ class Test1 : I1
         private void ValidatePropertyImplementationInDerived_04(
             string source1,
             params DiagnosticDescription[] expected
-        ) {
+        )
+        {
             ValidatePropertyImplementationInDerived_04(source1, i4M1IsAbstract: false, expected);
         }
 
@@ -40561,7 +40669,8 @@ class Test1 : I1
             string source1,
             bool i4M1IsAbstract,
             params DiagnosticDescription[] expected
-        ) {
+        )
+        {
             var compilation1 = CreateCompilation(
                 source1,
                 options: TestOptions.DebugDll,
@@ -40614,7 +40723,8 @@ public interface I1
         private void ValidatePropertyImplementationInDerived_05(
             string source1,
             params DiagnosticDescription[] expected
-        ) {
+        )
+        {
             var compilation1 = CreateCompilation(
                 source1,
                 options: TestOptions.DebugDll,
@@ -40945,7 +41055,8 @@ class Test1 : I1
             DiagnosticDescription[] expected2,
             DiagnosticDescription[] expected3,
             params DiagnosticDescription[] expected4
-        ) {
+        )
+        {
             var compilation1 = CreateCompilation(
                 source1,
                 options: TestOptions.DebugDll,
@@ -41236,7 +41347,8 @@ public interface I3 : I1
             string source1,
             string source2,
             params DiagnosticDescription[] expected
-        ) {
+        )
+        {
             var source3 =
                 @"
 class Test1 : I1
@@ -41277,7 +41389,8 @@ I4.M1.set
                     compilation1.ToMetadataReference(),
                     compilation1.EmitToImageReference()
                 }
-            ) {
+            )
+            {
                 var compilation2 = CreateCompilation(
                     source3,
                     new[] { reference },
@@ -41318,7 +41431,8 @@ I4.M1.set
                     compilation4.ToMetadataReference(),
                     compilation4.EmitToImageReference()
                 }
-            ) {
+            )
+            {
                 var compilation5 = CreateCompilation(
                     source2 + source3,
                     new[] { reference },
@@ -41584,7 +41698,8 @@ class Test12 : I8
             string source5,
             DiagnosticDescription[] expected1,
             DiagnosticDescription[] expected2 = null
-        ) {
+        )
+        {
             var compilation1 = CreateCompilation(
                 source1,
                 options: TestOptions.DebugDll,
@@ -41926,7 +42041,8 @@ class Test1 : I2, I3
             string source2,
             DiagnosticDescription[] expected1,
             DiagnosticDescription[] expected2 = null
-        ) {
+        )
+        {
             var compilation1 = CreateCompilation(
                 source1,
                 options: TestOptions.DebugDll,
@@ -42842,7 +42958,8 @@ I4.M1.remove
         private static void ValidateEventImplementationInDerived_01(
             ModuleSymbol m,
             bool i4M1IsAbstract
-        ) {
+        )
+        {
             var test1 = m.GlobalNamespace.GetTypeMember("Test1");
             var i1 = test1.InterfacesNoUseSiteDiagnostics().Where(i => i.Name == "I1").Single();
             var i1i2m1 = i1.GetMembers()
@@ -42899,7 +43016,8 @@ I4.M1.remove
             EventSymbol expected,
             NamedTypeSymbol implementingType,
             EventSymbol interfaceEvent
-        ) {
+        )
+        {
             Assert.Same(
                 expected,
                 implementingType.FindImplementationForInterfaceMember(interfaceEvent)
@@ -42927,7 +43045,8 @@ I4.M1.remove
             EventSymbol expected,
             NamedTypeSymbol implementingType,
             EventSymbol interfaceEvent
-        ) {
+        )
+        {
             Assert.Equal(
                 expected,
                 implementingType.FindImplementationForInterfaceMember(interfaceEvent)
@@ -44734,7 +44853,8 @@ I4.M1.remove
                     compilation1.ToMetadataReference(),
                     compilation1.EmitToImageReference()
                 }
-            ) {
+            )
+            {
                 var compilation2 = CreateCompilation(
                     source3,
                     new[] { reference },
@@ -44776,7 +44896,8 @@ I4.M1.remove
                     compilation4.ToMetadataReference(),
                     compilation4.EmitToImageReference()
                 }
-            ) {
+            )
+            {
                 var compilation5 = CreateCompilation(
                     source2 + source3,
                     new[] { reference },
@@ -44906,7 +45027,8 @@ I4.M1.remove
                     compilation1.ToMetadataReference(),
                     compilation1.EmitToImageReference()
                 }
-            ) {
+            )
+            {
                 var compilation2 = CreateCompilation(
                     source3,
                     new[] { reference },
@@ -44948,7 +45070,8 @@ I4.M1.remove
                     compilation4.ToMetadataReference(),
                     compilation4.EmitToImageReference()
                 }
-            ) {
+            )
+            {
                 var compilation5 = CreateCompilation(
                     source2 + source3,
                     new[] { reference },
@@ -45078,7 +45201,8 @@ I4.M1.remove
                     compilation1.ToMetadataReference(),
                     compilation1.EmitToImageReference()
                 }
-            ) {
+            )
+            {
                 var compilation2 = CreateCompilation(
                     source3,
                     new[] { reference },
@@ -45120,7 +45244,8 @@ I4.M1.remove
                     compilation4.ToMetadataReference(),
                     compilation4.EmitToImageReference()
                 }
-            ) {
+            )
+            {
                 var compilation5 = CreateCompilation(
                     source2 + source3,
                     new[] { reference },
@@ -49389,7 +49514,8 @@ class Test4 : Test1
                         comp1: compilation1.EmitToImageReference()
                     )
                 }
-            ) {
+            )
+            {
                 var compilation2 = CreateCompilation(
                     source2,
                     options: TestOptions.DebugExe,
@@ -49577,7 +49703,8 @@ class Test2 : Test1
                     compilation0.ToMetadataReference(),
                     compilation0.EmitToImageReference()
                 }
-            ) {
+            )
+            {
                 var compilation2 = CreateCompilation(
                     source2,
                     options: TestOptions.DebugExe,
@@ -49762,7 +49889,8 @@ interface Test4 : I1
                     compilation1.ToMetadataReference(),
                     compilation1.EmitToImageReference()
                 }
-            ) {
+            )
+            {
                 var compilation3 = CreateCompilation(
                     source3,
                     options: TestOptions.DebugExe,
@@ -50007,7 +50135,8 @@ class Test4 : I1
                     compilation1.ToMetadataReference(),
                     compilation1.EmitToImageReference()
                 }
-            ) {
+            )
+            {
                 var compilation3 = CreateCompilation(
                     source3,
                     options: TestOptions.DebugExe,
@@ -53969,7 +54098,8 @@ namespace System
                     compilation1.EmitToImageReference(),
                     compilation1.ToMetadataReference()
                 }
-            ) {
+            )
+            {
                 var compilation2 = CreateCompilation(
                     "",
                     options: TestOptions.DebugDll,
@@ -54101,7 +54231,8 @@ namespace System
                     compilation1.EmitToImageReference(),
                     compilation1.ToMetadataReference()
                 }
-            ) {
+            )
+            {
                 var compilation2 = CreateCompilation(
                     "",
                     options: TestOptions.DebugDll,
@@ -54848,7 +54979,8 @@ class UsePia7 : ITest33
                     piaCompilation.ToMetadataReference(embedInteropTypes: true),
                     piaCompilation.EmitToImageReference(embedInteropTypes: true)
                 }
-            ) {
+            )
+            {
                 var compilation1 = CreateCompilation(
                     consumer,
                     options: TestOptions.ReleaseDll,
@@ -54919,7 +55051,8 @@ class UsePia
                     piaCompilation.ToMetadataReference(embedInteropTypes: true),
                     piaCompilation.EmitToImageReference(embedInteropTypes: true)
                 }
-            ) {
+            )
+            {
                 var compilation1 = CreateCompilation(
                     consumer,
                     options: TestOptions.ReleaseDll,
@@ -54991,7 +55124,8 @@ class UsePia
                     piaCompilation.ToMetadataReference(embedInteropTypes: true),
                     piaCompilation.EmitToImageReference(embedInteropTypes: true)
                 }
-            ) {
+            )
+            {
                 var compilation1 = CreateCompilation(
                     consumer,
                     options: TestOptions.ReleaseDll,
@@ -55062,7 +55196,8 @@ class UsePia
                     piaCompilation.ToMetadataReference(embedInteropTypes: true),
                     piaCompilation.EmitToImageReference(embedInteropTypes: true)
                 }
-            ) {
+            )
+            {
                 var compilation1 = CreateCompilation(
                     consumer,
                     options: TestOptions.ReleaseDll,
@@ -55133,7 +55268,8 @@ class UsePia
                     piaCompilation.ToMetadataReference(embedInteropTypes: true),
                     piaCompilation.EmitToImageReference(embedInteropTypes: true)
                 }
-            ) {
+            )
+            {
                 var compilation1 = CreateCompilation(
                     consumer,
                     options: TestOptions.ReleaseDll,
@@ -55207,7 +55343,8 @@ class UsePia
                     piaCompilation.ToMetadataReference(embedInteropTypes: true),
                     piaCompilation.EmitToImageReference(embedInteropTypes: true)
                 }
-            ) {
+            )
+            {
                 var compilation1 = CreateCompilation(
                     consumer,
                     options: TestOptions.ReleaseDll,
@@ -55278,7 +55415,8 @@ class UsePia
                     piaCompilation.ToMetadataReference(embedInteropTypes: true),
                     piaCompilation.EmitToImageReference(embedInteropTypes: true)
                 }
-            ) {
+            )
+            {
                 var compilation1 = CreateCompilation(
                     consumer,
                     options: TestOptions.ReleaseDll,
@@ -55356,7 +55494,8 @@ class UsePia
                     piaCompilation.ToMetadataReference(embedInteropTypes: true),
                     piaCompilation.EmitToImageReference(embedInteropTypes: true)
                 }
-            ) {
+            )
+            {
                 var compilation1 = CreateCompilation(
                     consumer,
                     options: TestOptions.ReleaseDll,
@@ -55475,7 +55614,8 @@ public interface ITest33
                     piaCompilation.ToMetadataReference(embedInteropTypes: true),
                     piaCompilation.EmitToImageReference(embedInteropTypes: true)
                 }
-            ) {
+            )
+            {
                 var compilation1 = CreateCompilation(
                     consumer1,
                     options: TestOptions.ReleaseDll,
@@ -55489,7 +55629,8 @@ public interface ITest33
                         compilation1.ToMetadataReference(),
                         compilation1.EmitToImageReference()
                     }
-                ) {
+                )
+                {
                     var compilation2 = CreateCompilation(
                         consumer2,
                         options: TestOptions.ReleaseExe,
@@ -55562,7 +55703,8 @@ class UsePia
                     piaCompilation.ToMetadataReference(embedInteropTypes: true),
                     piaCompilation.EmitToImageReference(embedInteropTypes: true)
                 }
-            ) {
+            )
+            {
                 var compilation1 = CreateCompilation(
                     consumer,
                     options: TestOptions.ReleaseDll,
@@ -55880,7 +56022,8 @@ class Test1 : I2
                     compilation2.ToMetadataReference(),
                     compilation2.EmitToImageReference()
                 }
-            ) {
+            )
+            {
                 var compilation3 = CreateCompilation(
                     source2,
                     options: TestOptions.DebugDll,
@@ -56018,7 +56161,8 @@ class Test1 : I2
                     compilation2.ToMetadataReference(),
                     compilation2.EmitToImageReference()
                 }
-            ) {
+            )
+            {
                 var compilation3 = CreateCompilation(
                     source2,
                     options: TestOptions.DebugExe,
@@ -56154,7 +56298,8 @@ class Test1 : I3
                     compilation2.ToMetadataReference(),
                     compilation2.EmitToImageReference()
                 }
-            ) {
+            )
+            {
                 var compilation3 = CreateCompilation(
                     source2,
                     options: TestOptions.DebugDll,
@@ -56278,7 +56423,8 @@ class Test1 : I3
                     compilation2.ToMetadataReference(),
                     compilation2.EmitToImageReference()
                 }
-            ) {
+            )
+            {
                 var compilation3 = CreateCompilation(
                     source2,
                     options: TestOptions.DebugExe,
@@ -56420,7 +56566,8 @@ class Test1 : I2, I3
                     compilation2.ToMetadataReference(),
                     compilation2.EmitToImageReference()
                 }
-            ) {
+            )
+            {
                 var compilation3 = CreateCompilation(
                     source2,
                     options: TestOptions.DebugDll,
@@ -56568,7 +56715,8 @@ class Test1 : I4
                     compilation2.ToMetadataReference(),
                     compilation2.EmitToImageReference()
                 }
-            ) {
+            )
+            {
                 var compilation3 = CreateCompilation(
                     source2,
                     options: TestOptions.DebugDll,
@@ -56665,7 +56813,8 @@ class Test1 : I4
                     compilation2.ToMetadataReference(),
                     compilation2.EmitToImageReference()
                 }
-            ) {
+            )
+            {
                 var compilation3 = CreateCompilation(
                     source2,
                     options: TestOptions.DebugExe,
@@ -57117,7 +57266,8 @@ class Test1 : I2
         private static void ValidateMethodReAbstraction_21(
             string source1,
             params DiagnosticDescription[] expected
-        ) {
+        )
+        {
             var compilation1 = CreateCompilation(
                 source1,
                 options: TestOptions.DebugDll,
@@ -57256,7 +57406,8 @@ class Test1 : I2
             string source1,
             string source2,
             params DiagnosticDescription[] expected
-        ) {
+        )
+        {
             var compilation1 = CreateCompilation(
                 source2 + source1,
                 options: TestOptions.DebugDll,
@@ -57280,7 +57431,8 @@ class Test1 : I2
                     compilation2.ToMetadataReference(),
                     compilation2.EmitToImageReference()
                 }
-            ) {
+            )
+            {
                 var compilation3 = CreateCompilation(
                     source2,
                     options: TestOptions.DebugDll,
@@ -57443,7 +57595,8 @@ Test1.set_P1
             string source1,
             string source2,
             string expected
-        ) {
+        )
+        {
             var compilation1 = CreateCompilation(
                 source2 + source1,
                 options: TestOptions.DebugExe,
@@ -57474,7 +57627,8 @@ Test1.set_P1
                     compilation2.ToMetadataReference(),
                     compilation2.EmitToImageReference()
                 }
-            ) {
+            )
+            {
                 var compilation3 = CreateCompilation(
                     source2,
                     options: TestOptions.DebugExe,
@@ -57614,7 +57768,8 @@ class Test1 : I3
             string source1,
             string source2,
             params DiagnosticDescription[] expected
-        ) {
+        )
+        {
             var compilation1 = CreateCompilation(
                 source2 + source1,
                 options: TestOptions.DebugDll,
@@ -57638,7 +57793,8 @@ class Test1 : I3
                     compilation2.ToMetadataReference(),
                     compilation2.EmitToImageReference()
                 }
-            ) {
+            )
+            {
                 var compilation3 = CreateCompilation(
                     source2,
                     options: TestOptions.DebugDll,
@@ -57769,7 +57925,8 @@ I3.set_P1
             string source1,
             string source2,
             string expected
-        ) {
+        )
+        {
             var compilation1 = CreateCompilation(
                 source2 + source1,
                 options: TestOptions.DebugExe,
@@ -57800,7 +57957,8 @@ I3.set_P1
                     compilation2.ToMetadataReference(),
                     compilation2.EmitToImageReference()
                 }
-            ) {
+            )
+            {
                 var compilation3 = CreateCompilation(
                     source2,
                     options: TestOptions.DebugExe,
@@ -57954,7 +58112,8 @@ class Test1 : I2, I3
             string source1,
             string source2,
             params DiagnosticDescription[] expected
-        ) {
+        )
+        {
             ValidatePropertyReAbstraction_009(source1, source2, expected, expected);
         }
 
@@ -57963,7 +58122,8 @@ class Test1 : I2, I3
             string source2,
             DiagnosticDescription[] expected1,
             params DiagnosticDescription[] expected2
-        ) {
+        )
+        {
             var compilation1 = CreateCompilation(
                 source2 + source1,
                 options: TestOptions.DebugDll,
@@ -57988,7 +58148,8 @@ class Test1 : I2, I3
                     compilation2.ToMetadataReference(),
                     compilation2.EmitToImageReference()
                 }
-            ) {
+            )
+            {
                 var compilation3 = CreateCompilation(
                     source2,
                     options: TestOptions.DebugDll,
@@ -58143,7 +58304,8 @@ class Test1 : I4
             string source1,
             string source2,
             params DiagnosticDescription[] expected
-        ) {
+        )
+        {
             ValidatePropertyReAbstraction_012(source1, source2, expected, expected);
         }
 
@@ -58152,7 +58314,8 @@ class Test1 : I4
             string source2,
             DiagnosticDescription[] expected1,
             params DiagnosticDescription[] expected2
-        ) {
+        )
+        {
             var compilation1 = CreateCompilation(
                 source2 + source1,
                 options: TestOptions.DebugDll,
@@ -58177,7 +58340,8 @@ class Test1 : I4
                     compilation2.ToMetadataReference(),
                     compilation2.EmitToImageReference()
                 }
-            ) {
+            )
+            {
                 var compilation3 = CreateCompilation(
                     source2,
                     options: TestOptions.DebugDll,
@@ -58276,7 +58440,8 @@ I4.set_P1
             string source1,
             string source2,
             string expected
-        ) {
+        )
+        {
             var compilation1 = CreateCompilation(
                 source2 + source1,
                 options: TestOptions.DebugExe,
@@ -58307,7 +58472,8 @@ I4.set_P1
                     compilation2.ToMetadataReference(),
                     compilation2.EmitToImageReference()
                 }
-            ) {
+            )
+            {
                 var compilation3 = CreateCompilation(
                     source2,
                     options: TestOptions.DebugExe,
@@ -58419,7 +58585,8 @@ class Test1 : I2
         private static void ValidatePropertyReAbstraction_014(
             string source1,
             params DiagnosticDescription[] expected
-        ) {
+        )
+        {
             var compilation1 = CreateCompilation(
                 source1,
                 options: TestOptions.DebugDll,
@@ -58561,7 +58728,8 @@ class Test1 : I2
         private static void ValidatePropertyReAbstraction_016(
             string source1,
             params DiagnosticDescription[] expected
-        ) {
+        )
+        {
             var compilation1 = CreateCompilation(
                 source1,
                 options: TestOptions.DebugDll,
@@ -58718,7 +58886,8 @@ public class C2 : I1
         private static void ValidatePropertyReAbstraction_018(
             string source1,
             params DiagnosticDescription[] expected
-        ) {
+        )
+        {
             var compilation1 = CreateCompilation(
                 source1,
                 options: TestOptions.DebugDll,
@@ -59054,7 +59223,8 @@ class Test1 : I2
             string source1,
             string source2,
             params DiagnosticDescription[] expected
-        ) {
+        )
+        {
             var compilation1 = CreateCompilation(
                 source1,
                 options: TestOptions.DebugDll,
@@ -59069,7 +59239,8 @@ class Test1 : I2
                     compilation1.ToMetadataReference(),
                     compilation1.EmitToImageReference()
                 }
-            ) {
+            )
+            {
                 var compilation2 = CreateCompilation(
                     source2,
                     options: TestOptions.DebugDll,
@@ -61622,7 +61793,8 @@ class Test1 : I2
         private static void ValidatePropertyReAbstraction_083(
             string source1,
             params DiagnosticDescription[] expected
-        ) {
+        )
+        {
             var compilation1 = CreateCompilation(
                 source1,
                 options: TestOptions.DebugDll,
@@ -61990,7 +62162,8 @@ class Test1 : I2
             string source1,
             string source2,
             params DiagnosticDescription[] expected
-        ) {
+        )
+        {
             var compilation1 = CreateCompilation(
                 source2 + source1,
                 options: TestOptions.DebugDll,
@@ -62014,7 +62187,8 @@ class Test1 : I2
                     compilation2.ToMetadataReference(),
                     compilation2.EmitToImageReference()
                 }
-            ) {
+            )
+            {
                 var compilation3 = CreateCompilation(
                     source2,
                     options: TestOptions.DebugDll,
@@ -62190,7 +62364,8 @@ Test1.remove_P1
                     compilation2.ToMetadataReference(),
                     compilation2.EmitToImageReference()
                 }
-            ) {
+            )
+            {
                 var compilation3 = CreateCompilation(
                     source2,
                     options: TestOptions.DebugExe,
@@ -62323,7 +62498,8 @@ class Test1 : I3
             string source1,
             string source2,
             params DiagnosticDescription[] expected
-        ) {
+        )
+        {
             var compilation1 = CreateCompilation(
                 source2 + source1,
                 options: TestOptions.DebugDll,
@@ -62347,7 +62523,8 @@ class Test1 : I3
                     compilation2.ToMetadataReference(),
                     compilation2.EmitToImageReference()
                 }
-            ) {
+            )
+            {
                 var compilation3 = CreateCompilation(
                     source2,
                     options: TestOptions.DebugDll,
@@ -62499,7 +62676,8 @@ I3.remove_P1
                     compilation2.ToMetadataReference(),
                     compilation2.EmitToImageReference()
                 }
-            ) {
+            )
+            {
                 var compilation3 = CreateCompilation(
                     source2,
                     options: TestOptions.DebugExe,
@@ -62646,7 +62824,8 @@ class Test1 : I2, I3
             string source1,
             string source2,
             params DiagnosticDescription[] expected
-        ) {
+        )
+        {
             var compilation1 = CreateCompilation(
                 source2 + source1,
                 options: TestOptions.DebugDll,
@@ -62670,7 +62849,8 @@ class Test1 : I2, I3
                     compilation2.ToMetadataReference(),
                     compilation2.EmitToImageReference()
                 }
-            ) {
+            )
+            {
                 var compilation3 = CreateCompilation(
                     source2,
                     options: TestOptions.DebugDll,
@@ -62818,7 +62998,8 @@ class Test1 : I4
             string source1,
             string source2,
             params DiagnosticDescription[] expected
-        ) {
+        )
+        {
             var compilation1 = CreateCompilation(
                 source2 + source1,
                 options: TestOptions.DebugDll,
@@ -62842,7 +63023,8 @@ class Test1 : I4
                     compilation2.ToMetadataReference(),
                     compilation2.EmitToImageReference()
                 }
-            ) {
+            )
+            {
                 var compilation3 = CreateCompilation(
                     source2,
                     options: TestOptions.DebugDll,
@@ -62963,7 +63145,8 @@ I4.remove_P1
                     compilation2.ToMetadataReference(),
                     compilation2.EmitToImageReference()
                 }
-            ) {
+            )
+            {
                 var compilation3 = CreateCompilation(
                     source2,
                     options: TestOptions.DebugExe,
@@ -63064,7 +63247,8 @@ class Test1 : I2
         private static void ValidateEventReAbstraction_014(
             string source1,
             params DiagnosticDescription[] expected
-        ) {
+        )
+        {
             var compilation1 = CreateCompilation(
                 source1,
                 options: TestOptions.DebugDll,
@@ -63273,7 +63457,8 @@ public class C2 : I1
         private static void ValidateEventReAbstraction_018(
             string source1,
             params DiagnosticDescription[] expected
-        ) {
+        )
+        {
             var compilation1 = CreateCompilation(
                 source1,
                 options: TestOptions.DebugDll,
@@ -63863,7 +64048,8 @@ class Test1 : I2
             string source1,
             string source2,
             params DiagnosticDescription[] expected
-        ) {
+        )
+        {
             var compilation1 = CreateCompilation(
                 source1,
                 options: TestOptions.DebugDll,
@@ -63878,7 +64064,8 @@ class Test1 : I2
                     compilation1.ToMetadataReference(),
                     compilation1.EmitToImageReference()
                 }
-            ) {
+            )
+            {
                 var compilation2 = CreateCompilation(
                     source2,
                     options: TestOptions.DebugDll,
@@ -63950,7 +64137,8 @@ class Test1 : I2
         private static void ValidateEventReAbstraction_034(
             string source1,
             params DiagnosticDescription[] expected
-        ) {
+        )
+        {
             var compilation1 = CreateCompilation(
                 source1,
                 options: TestOptions.DebugDll,
@@ -72223,7 +72411,8 @@ class C1 : I1<C1, C1, C1>, I1<C1, object, C1>.I2
                     compilation1.ToMetadataReference(),
                     compilation1.EmitToImageReference()
                 }
-            ) {
+            )
+            {
                 var compilation2 = CreateCompilation(
                     source2,
                     new[] { reference },
@@ -72443,7 +72632,8 @@ class C1 : I1<C1, C1>
                     compilation1.ToMetadataReference(),
                     compilation1.EmitToImageReference()
                 }
-            ) {
+            )
+            {
                 var compilation2 = CreateCompilation(
                     source2,
                     new[] { reference },

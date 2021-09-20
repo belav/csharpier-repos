@@ -231,7 +231,8 @@ namespace System.Xml.Tests
         public override object ReadContentAs(
             System.Type returnType,
             IXmlNamespaceResolver namespaceResolver
-        ) {
+        )
+        {
             this.IsCalled = true;
             return _wrappedreader.ReadContentAs(returnType, namespaceResolver);
         }
@@ -320,7 +321,8 @@ namespace System.Xml.Tests
         public override object ReadElementContentAs(
             System.Type returnType,
             IXmlNamespaceResolver namespaceResolver
-        ) {
+        )
+        {
             this.IsCalled = true;
             return _wrappedreader.ReadElementContentAs(returnType, namespaceResolver);
         }
@@ -329,7 +331,8 @@ namespace System.Xml.Tests
             IXmlNamespaceResolver namespaceResolver,
             string localName,
             string namespaceURI
-        ) {
+        )
+        {
             this.IsCalled = true;
             return _wrappedreader.ReadElementContentAs(
                 returnType,

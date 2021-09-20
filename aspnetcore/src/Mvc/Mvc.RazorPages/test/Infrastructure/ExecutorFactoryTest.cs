@@ -244,7 +244,8 @@ namespace Microsoft.AspNetCore.Mvc.RazorPages.Infrastructure
             public IActionResult ActionResultReturnHandlerWithParameters(
                 int arg1,
                 string arg2 = "Hello"
-            ) {
+            )
+            {
                 return new ContentResult { Content = $"{arg2} {arg1}", };
             }
 
@@ -288,7 +289,8 @@ namespace Microsoft.AspNetCore.Mvc.RazorPages.Infrastructure
             public IActionResult ActionResultReturnHandlerWithParameters(
                 int arg1,
                 string arg2 = "Hello"
-            ) {
+            )
+            {
                 return new ContentResult { Content = $"{arg2} {arg1}", };
             }
 

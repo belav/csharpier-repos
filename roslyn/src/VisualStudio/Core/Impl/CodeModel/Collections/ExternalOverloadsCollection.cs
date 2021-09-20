@@ -22,7 +22,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.CodeModel.Colle
             CodeModelState state,
             ExternalCodeFunction parent,
             ProjectId projectId
-        ) {
+        )
+        {
             var collection = new ExternalOverloadsCollection(state, parent, projectId);
             return (EnvDTE.CodeElements)ComAggregate.CreateAggregatedObject(collection);
         }
@@ -53,7 +54,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.CodeModel.Colle
             if (
                 symbol.MethodKind != MethodKind.Ordinary
                 && symbol.MethodKind != MethodKind.Constructor
-            ) {
+            )
+            {
                 return ImmutableArray.Create((EnvDTE.CodeElement)Parent);
             }
 

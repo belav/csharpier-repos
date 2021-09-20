@@ -28,7 +28,8 @@ namespace Microsoft.EntityFrameworkCore
             Func<CustomTypesIdentityContext, Task> nestedTestOperation1 = null,
             Func<CustomTypesIdentityContext, Task> nestedTestOperation2 = null,
             Func<CustomTypesIdentityContext, Task> nestedTestOperation3 = null
-        ) {
+        )
+        {
             await base.ExecuteWithStrategyInTransactionAsync(
                 testOperation,
                 nestedTestOperation1,

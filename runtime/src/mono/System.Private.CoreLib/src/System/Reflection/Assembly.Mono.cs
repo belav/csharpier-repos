@@ -90,7 +90,8 @@ namespace System.Reflection
             AssemblyName assemblyRef,
             ref StackCrawlMark stackMark,
             AssemblyLoadContext? assemblyLoadContext
-        ) {
+        )
+        {
             // TODO: pass AssemblyName
             Assembly? assembly = InternalLoad(
                 assemblyRef.FullName,

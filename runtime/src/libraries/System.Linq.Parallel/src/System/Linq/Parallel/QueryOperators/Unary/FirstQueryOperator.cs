@@ -33,10 +33,8 @@ namespace System.Linq.Parallel
         //     child                - the child whose data we will reverse
         //
 
-        internal FirstQueryOperator(
-            IEnumerable<TSource> child,
-            Func<TSource, bool>? predicate
-        ) : base(child)
+        internal FirstQueryOperator(IEnumerable<TSource> child, Func<TSource, bool>? predicate)
+            : base(child)
         {
             Debug.Assert(child != null, "child data source cannot be null");
             _predicate = predicate;
@@ -62,7 +60,8 @@ namespace System.Linq.Parallel
             IPartitionedStreamRecipient<TSource> recipient,
             bool preferStriping,
             QuerySettings settings
-        ) {
+        )
+        {
             // If the index is not at least increasing, we need to reindex.
             if (_prematureMergeNeeded)
             {
@@ -85,7 +84,8 @@ namespace System.Linq.Parallel
             PartitionedStream<TSource, TKey> inputStream,
             IPartitionedStreamRecipient<TSource> recipient,
             QuerySettings settings
-        ) {
+        )
+        {
             int partitionCount = inputStream.PartitionCount;
 
             // Generate the shared data.
@@ -169,7 +169,8 @@ namespace System.Linq.Parallel
                 CancellationToken cancellationToken,
                 IComparer<TKey> keyComparer,
                 int partitionId
-            ) {
+            )
+            {
                 Debug.Assert(source != null);
                 Debug.Assert(operatorState != null);
                 Debug.Assert(sharedBarrier != null);
@@ -191,7 +192,8 @@ namespace System.Linq.Parallel
             internal override bool MoveNext(
                 [MaybeNullWhen(false), AllowNull] ref TSource currentElement,
                 ref int currentKey
-            ) {
+            )
+            {
                 Debug.Assert(_source != null);
 
                 if (_alreadySearched)
@@ -224,7 +226,8 @@ namespace System.Linq.Parallel
                                 if (
                                     _operatorState._partitionId == -1
                                     || _keyComparer.Compare(candidateKey, _operatorState._key) < 0
-                                ) {
+                                )
+                                {
                                     _operatorState._key = candidateKey;
                                     _operatorState._partitionId = _partitionId;
                                 }

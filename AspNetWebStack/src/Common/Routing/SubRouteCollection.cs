@@ -87,7 +87,8 @@ namespace System.Web.Mvc.Routing
             string name,
             TRoute route1,
             TRoute route2
-        ) {
+        )
+        {
 #if ASPNETWEBAPI
             throw new InvalidOperationException(
                 String.Format(

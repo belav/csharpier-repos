@@ -35,7 +35,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.TaskList
         public HostDiagnosticUpdateSource(
             Lazy<VisualStudioWorkspaceImpl> workspace,
             IDiagnosticUpdateSourceRegistrationService registrationService
-        ) {
+        )
+        {
             _workspace = workspace;
 
             registrationService.Register(this);
@@ -50,7 +51,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.TaskList
             ProjectId projectId,
             object key,
             IEnumerable<DiagnosticData> items
-        ) {
+        )
+        {
             var args = DiagnosticsUpdatedArgs.DiagnosticsCreated(
                 CreateId(projectId, key),
                 Workspace,
@@ -83,7 +85,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.TaskList
             ProjectId projectId,
             object key,
             IEnumerable<DiagnosticData> items
-        ) {
+        )
+        {
             Contract.ThrowIfNull(projectId);
             Contract.ThrowIfNull(key);
             Contract.ThrowIfNull(items);

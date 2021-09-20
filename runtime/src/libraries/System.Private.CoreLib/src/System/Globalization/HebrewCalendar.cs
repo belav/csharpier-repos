@@ -1771,7 +1771,8 @@ namespace System.Globalization
             if (
                 (numDays + (long)lunarDate.day)
                 <= (long)(LunarMonthLen[hebrewYearType * MaxMonthPlusOne + lunarDate.month])
-            ) {
+            )
+            {
                 result.day += (int)numDays;
                 return GetResult(result, part);
             }
@@ -1796,7 +1797,8 @@ namespace System.Globalization
                 // See if we're on the correct Lunar month.
                 while (
                     numDays > (long)(LunarMonthLen[hebrewYearType * MaxMonthPlusOne + result.month])
-                ) {
+                )
+                {
                     // Adjust the number of days and move to the next month.
                     numDays -= (long)(
                         LunarMonthLen[hebrewYearType * MaxMonthPlusOne + result.month++]
@@ -1807,7 +1809,8 @@ namespace System.Globalization
                     if (
                         (result.month > 13)
                         || (LunarMonthLen[hebrewYearType * MaxMonthPlusOne + result.month] == 0)
-                    ) {
+                    )
+                    {
                         // Adjust the Year.
                         result.year++;
                         hebrewYearType = HebrewTable[
@@ -2076,7 +2079,8 @@ namespace System.Globalization
             int day1,
             int month2,
             int day2
-        ) {
+        )
+        {
             if (month1 == month2)
             {
                 return day1 - day2;
@@ -2141,7 +2145,8 @@ namespace System.Globalization
             int minute,
             int second,
             int millisecond
-        ) {
+        )
+        {
             // Get the rough Gregorian year for the specified hebrewYear.
             int gregorianYear = hebrewYear - HebrewYearOf1AD;
 
@@ -2178,7 +2183,8 @@ namespace System.Globalization
             int second,
             int millisecond,
             int era
-        ) {
+        )
+        {
             CheckHebrewYearValue(year, era, nameof(year));
             CheckHebrewMonthValue(year, month, era);
             CheckHebrewDayValue(year, month, day, era);

@@ -56,7 +56,8 @@ namespace System.Diagnostics.Tracing
             byte opcode,
             int task,
             long keywords
-        ) {
+        )
+        {
             if (id < 0)
             {
                 throw new ArgumentOutOfRangeException(

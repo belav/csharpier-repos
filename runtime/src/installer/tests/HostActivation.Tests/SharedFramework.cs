@@ -45,7 +45,8 @@ namespace Microsoft.DotNet.CoreSetup.Test
             string sharedFxDir,
             string sharedFxBaseDir,
             params string[] availableVersions
-        ) {
+        )
+        {
             DirectoryInfo sharedFxBaseDirInfo = new DirectoryInfo(sharedFxBaseDir);
 
             if (!sharedFxBaseDirInfo.Exists)
@@ -68,7 +69,8 @@ namespace Microsoft.DotNet.CoreSetup.Test
             string sharedUberFxBaseDir,
             string sharedFxBaseVersion,
             params string[] availableUberVersions
-        ) {
+        )
+        {
             DirectoryInfo sharedFxUberBaseDirInfo = new DirectoryInfo(sharedUberFxBaseDir);
 
             if (!sharedFxUberBaseDirInfo.Exists)
@@ -107,7 +109,8 @@ namespace Microsoft.DotNet.CoreSetup.Test
             int? rollFwdOnNoCandidateFx = null,
             bool? useUberFramework = false,
             JArray frameworks = null
-        ) {
+        )
+        {
             string name =
                 useUberFramework.HasValue && useUberFramework.Value
                     ? "Microsoft.UberFramework"
@@ -184,7 +187,8 @@ namespace Microsoft.DotNet.CoreSetup.Test
             string builtSharedUberFxDir,
             string assemblyVersion = null,
             string fileVersion = null
-        ) {
+        )
+        {
             DirectoryInfo dir = new DirectoryInfo(builtSharedUberFxDir);
             if (dir.Exists)
             {
@@ -230,7 +234,8 @@ namespace Microsoft.DotNet.CoreSetup.Test
             string testPackage,
             string testAssembly,
             JObject versionInfo = null
-        ) {
+        )
+        {
             // Create the deps.json. Generated file (example)
             /*
                 {
@@ -311,7 +316,8 @@ namespace Microsoft.DotNet.CoreSetup.Test
             string testPackageVersion,
             JObject testAssemblyVersionInfo = null,
             string testAssembly = null
-        ) {
+        )
+        {
             JObject depsjson = JObject.Parse(File.ReadAllText(jsonFile));
 
             string testPackageWithVersion = testPackage + "/" + testPackageVersion;

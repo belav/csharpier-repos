@@ -1251,7 +1251,8 @@ namespace System.Numerics.Tests
             bool isUnsigned,
             bool isBigEndian,
             byte[] expectedBytes
-        ) {
+        )
+        {
             BigInteger bi = new BigInteger(i);
 
             if (i < 0 && isUnsigned)
@@ -1276,7 +1277,8 @@ namespace System.Numerics.Tests
             bool isUnsigned,
             bool isBigEndian,
             byte[] expectedBytes
-        ) {
+        )
+        {
             BigInteger bi = new BigInteger(l);
 
             if (l < 0 && isUnsigned)
@@ -1301,7 +1303,8 @@ namespace System.Numerics.Tests
             bool isUnsigned,
             bool isBigEndian,
             byte[] expectedBytes
-        ) {
+        )
+        {
             BigInteger bi = BigInteger.Parse(str);
 
             if (str[0] == '-' && isUnsigned)
@@ -1319,7 +1322,8 @@ namespace System.Numerics.Tests
         private static IEnumerable<object[]> MatrixGenerator(
             IEnumerable<object[]> seedData,
             bool dataIsBigEndian
-        ) {
+        )
+        {
             foreach (object[] seed in seedData)
             {
                 object value = seed[0];

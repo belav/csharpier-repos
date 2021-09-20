@@ -51,7 +51,8 @@ namespace Microsoft.EntityFrameworkCore.Query.Internal
             IDiagnosticsLogger<DbLoggerCategory.Query> logger,
             bool parameterize,
             bool generateContextAccessors
-        ) {
+        )
+        {
             _evaluatableExpressionFindingExpressionVisitor =
                 new EvaluatableExpressionFindingExpressionVisitor(
                     evaluatableExpressionFilter,
@@ -122,7 +123,8 @@ namespace Microsoft.EntityFrameworkCore.Query.Internal
                 _evaluatableExpressions.TryGetValue(expression, out var generateParameter)
                 && !PreserveInitializationConstant(expression, generateParameter)
                 && !PreserveConvertNode(expression)
-            ) {
+            )
+            {
                 return Evaluate(expression, _parameterize && generateParameter);
             }
 
@@ -144,12 +146,14 @@ namespace Microsoft.EntityFrameworkCore.Query.Internal
                     unaryExpression.NodeType == ExpressionType.Convert
                     || unaryExpression.NodeType == ExpressionType.ConvertChecked
                 )
-            ) {
+            )
+            {
                 if (
                     unaryExpression.Type == typeof(object)
                     || unaryExpression.Type == typeof(Enum)
                     || unaryExpression.Operand.Type.UnwrapNullableType().IsEnum
-                ) {
+                )
+                {
                     return true;
                 }
 
@@ -163,7 +167,8 @@ namespace Microsoft.EntityFrameworkCore.Query.Internal
                         || innerType == typeof(short)
                         || innerType == typeof(ushort)
                     )
-                ) {
+                )
+                {
                     return true;
                 }
 
@@ -188,7 +193,8 @@ namespace Microsoft.EntityFrameworkCore.Query.Internal
             if (
                 newTestExpression is ConstantExpression constantTestExpression
                 && constantTestExpression.Value is bool constantTestValue
-            ) {
+            )
+            {
                 return constantTestValue
                   ? Visit(conditionalExpression.IfTrue)
                   : Visit(conditionalExpression.IfFalse);
@@ -244,7 +250,8 @@ namespace Microsoft.EntityFrameworkCore.Query.Internal
                         ?? Visit(binaryExpression.Right);
                     if (
                         ShortCircuitLogicalExpression(newRightExpression, binaryExpression.NodeType)
-                    ) {
+                    )
+                    {
                         return newRightExpression;
                     }
 
@@ -432,7 +439,8 @@ namespace Microsoft.EntityFrameworkCore.Query.Internal
                     expression.NodeType == ExpressionType.Convert
                     || expression.NodeType == ExpressionType.ConvertChecked
                 )
-            ) {
+            )
+            {
                 return RemoveConvert(unaryExpression.Operand);
             }
 
@@ -556,7 +564,8 @@ namespace Microsoft.EntityFrameworkCore.Query.Internal
                 IEvaluatableExpressionFilter evaluatableExpressionFilter,
                 IModel model,
                 bool parameterize
-            ) {
+            )
+            {
                 _evaluatableExpressionFilter = evaluatableExpressionFilter;
                 _model = model;
                 _parameterize = parameterize;
@@ -669,7 +678,8 @@ namespace Microsoft.EntityFrameworkCore.Query.Internal
                         && methodCallExpression.Method.DeclaringType == typeof(Enumerable)
                         && methodCallExpression.Method.Name == nameof(Enumerable.Select)
                         && methodCallExpression.Arguments[1] is LambdaExpression lambdaExpression
-                    ) {
+                    )
+                    {
                         // Allow evaluation Enumerable.Select operation
                         foreach (var parameter in lambdaExpression.Parameters)
                         {
@@ -686,7 +696,8 @@ namespace Microsoft.EntityFrameworkCore.Query.Internal
                                 != null
                             || _model.IsIndexerMethod(methodCallExpression.Method)
                         )
-                    ) {
+                    )
+                    {
                         _evaluatableExpressions[methodCallExpression.Arguments[i]] = false;
                     }
                 }

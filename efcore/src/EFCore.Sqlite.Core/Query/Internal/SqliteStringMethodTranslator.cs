@@ -147,7 +147,8 @@ namespace Microsoft.EntityFrameworkCore.Sqlite.Query.Internal
             MethodInfo method,
             IReadOnlyList<SqlExpression> arguments,
             IDiagnosticsLogger<DbLoggerCategory.Query> logger
-        ) {
+        )
+        {
             Check.NotNull(method, nameof(method));
             Check.NotNull(arguments, nameof(arguments));
             Check.NotNull(logger, nameof(logger));
@@ -245,7 +246,8 @@ namespace Microsoft.EntityFrameworkCore.Sqlite.Query.Internal
                     _trimStartMethodInfoWithoutArgs?.Equals(method) == true
                     || _trimStartMethodInfoWithCharArg?.Equals(method) == true
                     || _trimStartMethodInfoWithCharArrayArg.Equals(method)
-                ) {
+                )
+                {
                     return ProcessTrimMethod(instance, arguments, "ltrim");
                 }
 
@@ -253,7 +255,8 @@ namespace Microsoft.EntityFrameworkCore.Sqlite.Query.Internal
                     _trimEndMethodInfoWithoutArgs?.Equals(method) == true
                     || _trimEndMethodInfoWithCharArg?.Equals(method) == true
                     || _trimEndMethodInfoWithCharArrayArg.Equals(method)
-                ) {
+                )
+                {
                     return ProcessTrimMethod(instance, arguments, "rtrim");
                 }
 
@@ -261,7 +264,8 @@ namespace Microsoft.EntityFrameworkCore.Sqlite.Query.Internal
                     _trimMethodInfoWithoutArgs?.Equals(method) == true
                     || _trimMethodInfoWithCharArg?.Equals(method) == true
                     || _trimMethodInfoWithCharArrayArg.Equals(method)
-                ) {
+                )
+                {
                     return ProcessTrimMethod(instance, arguments, "trim");
                 }
 
@@ -372,7 +376,8 @@ namespace Microsoft.EntityFrameworkCore.Sqlite.Query.Internal
             SqlExpression instance,
             SqlExpression pattern,
             bool startsWith
-        ) {
+        )
+        {
             var stringTypeMapping = ExpressionExtensions.InferTypeMapping(instance, pattern);
 
             instance = _sqlExpressionFactory.ApplyTypeMapping(instance, stringTypeMapping);
@@ -506,7 +511,8 @@ namespace Microsoft.EntityFrameworkCore.Sqlite.Query.Internal
             SqlExpression instance,
             IReadOnlyList<SqlExpression> arguments,
             string functionName
-        ) {
+        )
+        {
             var typeMapping = instance.TypeMapping;
             if (typeMapping == null)
             {

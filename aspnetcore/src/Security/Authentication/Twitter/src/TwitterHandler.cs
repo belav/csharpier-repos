@@ -197,7 +197,8 @@ namespace Microsoft.AspNetCore.Authentication.Twitter
             AuthenticationProperties properties,
             AccessToken token,
             JsonElement user
-        ) {
+        )
+        {
             foreach (var action in Options.ClaimActions)
             {
                 action.Run(user, identity, ClaimsIssuer);
@@ -261,7 +262,8 @@ namespace Microsoft.AspNetCore.Authentication.Twitter
             Dictionary<string, string>? extraOAuthPairs = null,
             Dictionary<string, string>? queryParameters = null,
             Dictionary<string, string>? formData = null
-        ) {
+        )
+        {
             var authorizationParts = new SortedDictionary<string, string>(
                 extraOAuthPairs ?? new Dictionary<string, string>()
             ) {
@@ -367,7 +369,8 @@ namespace Microsoft.AspNetCore.Authentication.Twitter
         private async Task<RequestToken> ObtainRequestTokenAsync(
             string callBackUri,
             AuthenticationProperties properties
-        ) {
+        )
+        {
             Logger.ObtainRequestToken();
 
             var response = await ExecuteRequestAsync(
@@ -388,7 +391,8 @@ namespace Microsoft.AspNetCore.Authentication.Twitter
                     "true",
                     StringComparison.Ordinal
                 )
-            ) {
+            )
+            {
                 throw new Exception("Twitter oauth_callback_confirmed is not true.");
             }
 
@@ -472,7 +476,8 @@ namespace Microsoft.AspNetCore.Authentication.Twitter
             string consumerSecret,
             string? tokenSecret,
             string signatureData
-        ) {
+        )
+        {
             using (var algorithm = new HMACSHA1())
             {
                 algorithm.Key = Encoding.ASCII.GetBytes(

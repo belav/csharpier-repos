@@ -15,7 +15,8 @@ namespace Microsoft.Extensions.DependencyInjection
         public static void AddTagHelpersAsServices(
             ApplicationPartManager manager,
             IServiceCollection services
-        ) {
+        )
+        {
             if (manager == null)
             {
                 throw new ArgumentNullException(nameof(manager));

@@ -42,7 +42,8 @@ namespace System
             out T1 item1,
             out T2 item2,
             out T3 item3
-        ) {
+        )
+        {
             item1 = value.Item1;
             item2 = value.Item2;
             item3 = value.Item3;
@@ -58,7 +59,8 @@ namespace System
             out T2 item2,
             out T3 item3,
             out T4 item4
-        ) {
+        )
+        {
             item1 = value.Item1;
             item2 = value.Item2;
             item3 = value.Item3;
@@ -76,7 +78,8 @@ namespace System
             out T3 item3,
             out T4 item4,
             out T5 item5
-        ) {
+        )
+        {
             item1 = value.Item1;
             item2 = value.Item2;
             item3 = value.Item3;
@@ -96,7 +99,8 @@ namespace System
             out T4 item4,
             out T5 item5,
             out T6 item6
-        ) {
+        )
+        {
             item1 = value.Item1;
             item2 = value.Item2;
             item3 = value.Item3;
@@ -118,7 +122,8 @@ namespace System
             out T5 item5,
             out T6 item6,
             out T7 item7
-        ) {
+        )
+        {
             item1 = value.Item1;
             item2 = value.Item2;
             item3 = value.Item3;
@@ -142,7 +147,8 @@ namespace System
             out T6 item6,
             out T7 item7,
             out T8 item8
-        ) {
+        )
+        {
             item1 = value.Item1;
             item2 = value.Item2;
             item3 = value.Item3;
@@ -168,7 +174,8 @@ namespace System
             out T7 item7,
             out T8 item8,
             out T9 item9
-        ) {
+        )
+        {
             item1 = value.Item1;
             item2 = value.Item2;
             item3 = value.Item3;
@@ -196,7 +203,8 @@ namespace System
             out T8 item8,
             out T9 item9,
             out T10 item10
-        ) {
+        )
+        {
             item1 = value.Item1;
             item2 = value.Item2;
             item3 = value.Item3;
@@ -226,7 +234,8 @@ namespace System
             out T9 item9,
             out T10 item10,
             out T11 item11
-        ) {
+        )
+        {
             item1 = value.Item1;
             item2 = value.Item2;
             item3 = value.Item3;
@@ -258,7 +267,8 @@ namespace System
             out T10 item10,
             out T11 item11,
             out T12 item12
-        ) {
+        )
+        {
             item1 = value.Item1;
             item2 = value.Item2;
             item3 = value.Item3;
@@ -292,7 +302,8 @@ namespace System
             out T11 item11,
             out T12 item12,
             out T13 item13
-        ) {
+        )
+        {
             item1 = value.Item1;
             item2 = value.Item2;
             item3 = value.Item3;
@@ -328,7 +339,8 @@ namespace System
             out T12 item12,
             out T13 item13,
             out T14 item14
-        ) {
+        )
+        {
             item1 = value.Item1;
             item2 = value.Item2;
             item3 = value.Item3;
@@ -391,7 +403,8 @@ namespace System
             out T13 item13,
             out T14 item14,
             out T15 item15
-        ) {
+        )
+        {
             item1 = value.Item1;
             item2 = value.Item2;
             item3 = value.Item3;
@@ -457,7 +470,8 @@ namespace System
             out T14 item14,
             out T15 item15,
             out T16 item16
-        ) {
+        )
+        {
             item1 = value.Item1;
             item2 = value.Item2;
             item3 = value.Item3;
@@ -526,7 +540,8 @@ namespace System
             out T15 item15,
             out T16 item16,
             out T17 item17
-        ) {
+        )
+        {
             item1 = value.Item1;
             item2 = value.Item2;
             item3 = value.Item3;
@@ -598,7 +613,8 @@ namespace System
             out T16 item16,
             out T17 item17,
             out T18 item18
-        ) {
+        )
+        {
             item1 = value.Item1;
             item2 = value.Item2;
             item3 = value.Item3;
@@ -673,7 +689,8 @@ namespace System
             out T17 item17,
             out T18 item18,
             out T19 item19
-        ) {
+        )
+        {
             item1 = value.Item1;
             item2 = value.Item2;
             item3 = value.Item3;
@@ -751,7 +768,8 @@ namespace System
             out T18 item18,
             out T19 item19,
             out T20 item20
-        ) {
+        )
+        {
             item1 = value.Item1;
             item2 = value.Item2;
             item3 = value.Item3;
@@ -832,7 +850,8 @@ namespace System
             out T19 item19,
             out T20 item20,
             out T21 item21
-        ) {
+        )
+        {
             item1 = value.Item1;
             item2 = value.Item2;
             item3 = value.Item3;
@@ -887,7 +906,8 @@ namespace System
         /// </summary>
         public static ValueTuple<T1, T2, T3, T4> ToValueTuple<T1, T2, T3, T4>(
             this Tuple<T1, T2, T3, T4> value
-        ) {
+        )
+        {
             return ValueTuple.Create(value.Item1, value.Item2, value.Item3, value.Item4);
         }
 
@@ -896,7 +916,8 @@ namespace System
         /// </summary>
         public static ValueTuple<T1, T2, T3, T4, T5> ToValueTuple<T1, T2, T3, T4, T5>(
             this Tuple<T1, T2, T3, T4, T5> value
-        ) {
+        )
+        {
             return ValueTuple.Create(
                 value.Item1,
                 value.Item2,
@@ -911,7 +932,8 @@ namespace System
         /// </summary>
         public static ValueTuple<T1, T2, T3, T4, T5, T6> ToValueTuple<T1, T2, T3, T4, T5, T6>(
             this Tuple<T1, T2, T3, T4, T5, T6> value
-        ) {
+        )
+        {
             return ValueTuple.Create(
                 value.Item1,
                 value.Item2,
@@ -1041,7 +1063,8 @@ namespace System
             ValueTuple<T8, T9, T10, T11>
         > ToValueTuple<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11>(
             this Tuple<T1, T2, T3, T4, T5, T6, T7, Tuple<T8, T9, T10, T11>> value
-        ) {
+        )
+        {
             return CreateLong(
                 value.Item1,
                 value.Item2,
@@ -1073,7 +1096,8 @@ namespace System
             ValueTuple<T8, T9, T10, T11, T12>
         > ToValueTuple<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12>(
             this Tuple<T1, T2, T3, T4, T5, T6, T7, Tuple<T8, T9, T10, T11, T12>> value
-        ) {
+        )
+        {
             return CreateLong(
                 value.Item1,
                 value.Item2,
@@ -1106,7 +1130,8 @@ namespace System
             ValueTuple<T8, T9, T10, T11, T12, T13>
         > ToValueTuple<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13>(
             this Tuple<T1, T2, T3, T4, T5, T6, T7, Tuple<T8, T9, T10, T11, T12, T13>> value
-        ) {
+        )
+        {
             return CreateLong(
                 value.Item1,
                 value.Item2,
@@ -1140,7 +1165,8 @@ namespace System
             ValueTuple<T8, T9, T10, T11, T12, T13, T14>
         > ToValueTuple<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14>(
             this Tuple<T1, T2, T3, T4, T5, T6, T7, Tuple<T8, T9, T10, T11, T12, T13, T14>> value
-        ) {
+        )
+        {
             return CreateLong(
                 value.Item1,
                 value.Item2,
@@ -1184,7 +1210,8 @@ namespace System
                 T7,
                 Tuple<T8, T9, T10, T11, T12, T13, T14, Tuple<T15>>
             > value
-        ) {
+        )
+        {
             return CreateLong(
                 value.Item1,
                 value.Item2,
@@ -1229,7 +1256,8 @@ namespace System
                 T7,
                 Tuple<T8, T9, T10, T11, T12, T13, T14, Tuple<T15, T16>>
             > value
-        ) {
+        )
+        {
             return CreateLong(
                 value.Item1,
                 value.Item2,
@@ -1274,7 +1302,8 @@ namespace System
                 T7,
                 Tuple<T8, T9, T10, T11, T12, T13, T14, Tuple<T15, T16, T17>>
             > value
-        ) {
+        )
+        {
             return CreateLong(
                 value.Item1,
                 value.Item2,
@@ -1342,7 +1371,8 @@ namespace System
                 T7,
                 Tuple<T8, T9, T10, T11, T12, T13, T14, Tuple<T15, T16, T17, T18>>
             > value
-        ) {
+        )
+        {
             return CreateLong(
                 value.Item1,
                 value.Item2,
@@ -1412,7 +1442,8 @@ namespace System
                 T7,
                 Tuple<T8, T9, T10, T11, T12, T13, T14, Tuple<T15, T16, T17, T18, T19>>
             > value
-        ) {
+        )
+        {
             return CreateLong(
                 value.Item1,
                 value.Item2,
@@ -1484,7 +1515,8 @@ namespace System
                 T7,
                 Tuple<T8, T9, T10, T11, T12, T13, T14, Tuple<T15, T16, T17, T18, T19, T20>>
             > value
-        ) {
+        )
+        {
             return CreateLong(
                 value.Item1,
                 value.Item2,
@@ -1567,7 +1599,8 @@ namespace System
                 T7,
                 Tuple<T8, T9, T10, T11, T12, T13, T14, Tuple<T15, T16, T17, T18, T19, T20, T21>>
             > value
-        ) {
+        )
+        {
             return CreateLong(
                 value.Item1,
                 value.Item2,
@@ -1628,7 +1661,8 @@ namespace System
         /// </summary>
         public static Tuple<T1, T2, T3, T4> ToTuple<T1, T2, T3, T4>(
             this ValueTuple<T1, T2, T3, T4> value
-        ) {
+        )
+        {
             return Tuple.Create(value.Item1, value.Item2, value.Item3, value.Item4);
         }
 
@@ -1637,7 +1671,8 @@ namespace System
         /// </summary>
         public static Tuple<T1, T2, T3, T4, T5> ToTuple<T1, T2, T3, T4, T5>(
             this ValueTuple<T1, T2, T3, T4, T5> value
-        ) {
+        )
+        {
             return Tuple.Create(value.Item1, value.Item2, value.Item3, value.Item4, value.Item5);
         }
 
@@ -1646,7 +1681,8 @@ namespace System
         /// </summary>
         public static Tuple<T1, T2, T3, T4, T5, T6> ToTuple<T1, T2, T3, T4, T5, T6>(
             this ValueTuple<T1, T2, T3, T4, T5, T6> value
-        ) {
+        )
+        {
             return Tuple.Create(
                 value.Item1,
                 value.Item2,
@@ -1662,7 +1698,8 @@ namespace System
         /// </summary>
         public static Tuple<T1, T2, T3, T4, T5, T6, T7> ToTuple<T1, T2, T3, T4, T5, T6, T7>(
             this ValueTuple<T1, T2, T3, T4, T5, T6, T7> value
-        ) {
+        )
+        {
             return Tuple.Create(
                 value.Item1,
                 value.Item2,
@@ -1837,18 +1874,8 @@ namespace System
             T11,
             T12,
             T13
-        >(
-            this ValueTuple<
-                T1,
-                T2,
-                T3,
-                T4,
-                T5,
-                T6,
-                T7,
-                ValueTuple<T8, T9, T10, T11, T12, T13>
-            > value
-        ) {
+        >(this ValueTuple<T1, T2, T3, T4, T5, T6, T7, ValueTuple<T8, T9, T10, T11, T12, T13>> value)
+        {
             return CreateLongRef(
                 value.Item1,
                 value.Item2,
@@ -1891,7 +1918,8 @@ namespace System
                 T7,
                 ValueTuple<T8, T9, T10, T11, T12, T13, T14>
             > value
-        ) {
+        )
+        {
             return CreateLongRef(
                 value.Item1,
                 value.Item2,
@@ -1935,7 +1963,8 @@ namespace System
                 T7,
                 ValueTuple<T8, T9, T10, T11, T12, T13, T14, ValueTuple<T15>>
             > value
-        ) {
+        )
+        {
             return CreateLongRef(
                 value.Item1,
                 value.Item2,
@@ -1980,7 +2009,8 @@ namespace System
                 T7,
                 ValueTuple<T8, T9, T10, T11, T12, T13, T14, ValueTuple<T15, T16>>
             > value
-        ) {
+        )
+        {
             return CreateLongRef(
                 value.Item1,
                 value.Item2,
@@ -2025,7 +2055,8 @@ namespace System
                 T7,
                 ValueTuple<T8, T9, T10, T11, T12, T13, T14, ValueTuple<T15, T16, T17>>
             > value
-        ) {
+        )
+        {
             return CreateLongRef(
                 value.Item1,
                 value.Item2,
@@ -2074,7 +2105,8 @@ namespace System
                 T7,
                 ValueTuple<T8, T9, T10, T11, T12, T13, T14, ValueTuple<T15, T16, T17, T18>>
             > value
-        ) {
+        )
+        {
             return CreateLongRef(
                 value.Item1,
                 value.Item2,
@@ -2144,7 +2176,8 @@ namespace System
                 T7,
                 ValueTuple<T8, T9, T10, T11, T12, T13, T14, ValueTuple<T15, T16, T17, T18, T19>>
             > value
-        ) {
+        )
+        {
             return CreateLongRef(
                 value.Item1,
                 value.Item2,
@@ -2225,7 +2258,8 @@ namespace System
                     ValueTuple<T15, T16, T17, T18, T19, T20>
                 >
             > value
-        ) {
+        )
+        {
             return CreateLongRef(
                 value.Item1,
                 value.Item2,
@@ -2308,7 +2342,8 @@ namespace System
                     ValueTuple<T15, T16, T17, T18, T19, T20, T21>
                 >
             > value
-        ) {
+        )
+        {
             return CreateLongRef(
                 value.Item1,
                 value.Item2,
@@ -2348,16 +2383,8 @@ namespace System
             T6,
             T7,
             TRest
-        >(
-            T1 item1,
-            T2 item2,
-            T3 item3,
-            T4 item4,
-            T5 item5,
-            T6 item6,
-            T7 item7,
-            TRest rest
-        ) where TRest : struct, ITuple =>
+        >(T1 item1, T2 item2, T3 item3, T4 item4, T5 item5, T6 item6, T7 item7, TRest rest)
+            where TRest : struct, ITuple =>
             new ValueTuple<T1, T2, T3, T4, T5, T6, T7, TRest>(
                 item1,
                 item2,
@@ -2378,16 +2405,8 @@ namespace System
             T6,
             T7,
             TRest
-        >(
-            T1 item1,
-            T2 item2,
-            T3 item3,
-            T4 item4,
-            T5 item5,
-            T6 item6,
-            T7 item7,
-            TRest rest
-        ) where TRest : ITuple =>
+        >(T1 item1, T2 item2, T3 item3, T4 item4, T5 item5, T6 item6, T7 item7, TRest rest)
+            where TRest : ITuple =>
             new Tuple<T1, T2, T3, T4, T5, T6, T7, TRest>(
                 item1,
                 item2,

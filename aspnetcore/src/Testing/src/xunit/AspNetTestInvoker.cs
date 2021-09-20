@@ -24,17 +24,18 @@ namespace Microsoft.AspNetCore.Testing
             IReadOnlyList<BeforeAfterTestAttribute> beforeAfterAttributes,
             ExceptionAggregator aggregator,
             CancellationTokenSource cancellationTokenSource
-        ) : base(
-            test,
-            messageBus,
-            testClass,
-            constructorArguments,
-            testMethod,
-            testMethodArguments,
-            beforeAfterAttributes,
-            aggregator,
-            cancellationTokenSource
-        ) { }
+        )
+            : base(
+                test,
+                messageBus,
+                testClass,
+                constructorArguments,
+                testMethod,
+                testMethodArguments,
+                beforeAfterAttributes,
+                aggregator,
+                cancellationTokenSource
+            ) { }
 
         protected override async Task<decimal> InvokeTestMethodAsync(object testClassInstance)
         {
@@ -87,11 +88,13 @@ namespace Microsoft.AspNetCore.Testing
             object testClassInstance,
             Type testClass,
             MethodInfo testMethod
-        ) {
+        )
+        {
             foreach (
                 var attribute in testMethod.GetCustomAttributes(inherit: true)
                     .OfType<ITestMethodLifecycle>()
-            ) {
+            )
+            {
                 yield return attribute;
             }
 
@@ -103,14 +106,16 @@ namespace Microsoft.AspNetCore.Testing
             foreach (
                 var attribute in testClass.GetCustomAttributes(inherit: true)
                     .OfType<ITestMethodLifecycle>()
-            ) {
+            )
+            {
                 yield return attribute;
             }
 
             foreach (
                 var attribute in testClass.Assembly.GetCustomAttributes(inherit: true)
                     .OfType<ITestMethodLifecycle>()
-            ) {
+            )
+            {
                 yield return attribute;
             }
         }

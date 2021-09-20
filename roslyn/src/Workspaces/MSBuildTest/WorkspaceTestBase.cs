@@ -38,7 +38,8 @@ namespace Microsoft.CodeAnalysis.UnitTests
 
         protected void CreateFiles(
             IEnumerable<(string filePath, object fileContent)> fileNamesAndContent
-        ) {
+        )
+        {
             foreach (var (filePath, fileContent) in fileNamesAndContent)
             {
                 Debug.Assert(fileContent is string || fileContent is byte[]);

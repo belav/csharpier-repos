@@ -24,7 +24,8 @@ namespace Microsoft.Extensions.Hosting.IntegrationTesting
         public virtual Task<PublishedApplication> Publish(
             DeploymentParameters deploymentParameters,
             ILogger logger
-        ) {
+        )
+        {
             var publishDirectory = CreateTempDirectory();
             using (logger.BeginScope("dotnet-publish"))
             {

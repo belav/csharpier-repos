@@ -163,7 +163,8 @@ namespace System.CommandLine.Tests
         [InlineData("--aa aa")]
         public void When_an_option_is_created_with_an_alias_that_contains_whitespace_then_an_informative_error_is_returned(
             string alias
-        ) {
+        )
+        {
             Action create = () => new Option(alias);
 
             create.Should()
@@ -178,7 +179,8 @@ namespace System.CommandLine.Tests
         [InlineData("--aa aa")]
         public void When_an_option_alias_is_added_and_contains_whitespace_then_an_informative_error_is_returned(
             string alias
-        ) {
+        )
+        {
             var option = new Option("-x");
 
             Action addAlias = () => option.AddAlias(alias);

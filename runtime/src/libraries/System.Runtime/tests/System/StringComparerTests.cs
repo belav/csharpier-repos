@@ -224,7 +224,8 @@ namespace System.Tests
                 IEqualityComparer<string> comparer,
                 bool expectedIsOrdinal,
                 bool expectedIgnoreCase
-            ) {
+            )
+            {
                 Assert.Equal(
                     expectedIsOrdinal,
                     StringComparer.IsWellKnownOrdinalComparer(comparer, out bool actualIgnoreCase)
@@ -320,7 +321,8 @@ namespace System.Tests
                 IEqualityComparer<string> comparer,
                 CompareInfo expectedCompareInfo,
                 CompareOptions expectedCompareOptions
-            ) {
+            )
+            {
                 bool actualReturnValue = StringComparer.IsWellKnownCultureAwareComparer(
                     comparer,
                     out CompareInfo actualCompareInfo,

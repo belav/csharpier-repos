@@ -199,7 +199,8 @@ namespace Microsoft.AspNetCore.Mvc.ModelBinding
             if (
                 (exception is InputFormatterException || exception is ValueProviderException)
                 && !string.IsNullOrEmpty(exception.Message)
-            ) {
+            )
+            {
                 // InputFormatterException, ValueProviderException is a signal that the message is safe to expose to clients
                 return TryAddModelError(key, exception.Message);
             }
@@ -321,7 +322,8 @@ namespace Microsoft.AspNetCore.Mvc.ModelBinding
             else if (
                 (exception is InputFormatterException || exception is ValueProviderException)
                 && !string.IsNullOrEmpty(exception.Message)
-            ) {
+            )
+            {
                 // InputFormatterException, ValueProviderException is a signal that the message is safe to expose to clients
                 return TryAddModelError(key, exception.Message);
             }

@@ -231,7 +231,8 @@ namespace Microsoft.AspNetCore.Components.Rendering
             SendOrPostCallback d,
             object state,
             bool forceAsync = false
-        ) {
+        )
+        {
             // If we get here is means that a callback is being explicitly queued. Let's instead add it to the queue and yield.
             //
             // We use our own queue here to maintain the execution order of the callbacks scheduled here. Also
@@ -268,7 +269,8 @@ namespace Microsoft.AspNetCore.Components.Rendering
             TaskCompletionSource<object> completion,
             SendOrPostCallback d,
             object state
-        ) {
+        )
+        {
             var original = Current;
             try
             {

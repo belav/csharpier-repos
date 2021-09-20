@@ -55,7 +55,8 @@ namespace Microsoft.CodeAnalysis.LanguageServer.UnitTests.SignatureHelp
         private static async Task<LSP.SignatureHelp?> RunGetSignatureHelpAsync(
             TestLspServer testLspServer,
             LSP.Location caret
-        ) {
+        )
+        {
             return await testLspServer.ExecuteRequestAsync<
                 LSP.TextDocumentPositionParams,
                 LSP.SignatureHelp?

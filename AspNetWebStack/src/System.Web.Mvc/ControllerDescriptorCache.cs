@@ -10,7 +10,8 @@ namespace System.Web.Mvc
         public ControllerDescriptor GetDescriptor(
             Type controllerType,
             Func<ControllerDescriptor> creator
-        ) {
+        )
+        {
             return FetchOrCreateItem(controllerType, creator);
         }
 
@@ -18,7 +19,8 @@ namespace System.Web.Mvc
             Type controllerType,
             Func<TArgument, ControllerDescriptor> creator,
             TArgument state
-        ) {
+        )
+        {
             return FetchOrCreateItem(controllerType, creator, state);
         }
     }

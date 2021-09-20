@@ -44,7 +44,8 @@ namespace System.ComponentModel.Design.Serialization.Tests
                 IContainer container,
                 bool validateRecycledTypes,
                 bool applyDefaults
-            ) {
+            )
+            {
                 CalledDeserializeTo = true;
                 Assert.True(applyDefaults);
                 Assert.Equal(ExpectedValidateRecycledTypes, validateRecycledTypes);

@@ -12,14 +12,16 @@ namespace System.Web.Http.Metadata.Providers
             Type containerType,
             Type modelType,
             string propertyName
-        ) {
+        )
+        {
             return new ModelMetadata(this, containerType, null, modelType, propertyName);
         }
 
         protected override ModelMetadata CreateMetadataFromPrototype(
             ModelMetadata prototype,
             Func<object> modelAccessor
-        ) {
+        )
+        {
             return new ModelMetadata(
                 this,
                 prototype.ContainerType,

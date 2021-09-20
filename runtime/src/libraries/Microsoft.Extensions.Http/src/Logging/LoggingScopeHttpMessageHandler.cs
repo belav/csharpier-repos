@@ -46,7 +46,8 @@ namespace Microsoft.Extensions.Http.Logging
         protected async override Task<HttpResponseMessage> SendAsync(
             HttpRequestMessage request,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             if (request == null)
             {
                 throw new ArgumentNullException(nameof(request));
@@ -124,7 +125,8 @@ namespace Microsoft.Extensions.Http.Logging
             public static IDisposable BeginRequestPipelineScope(
                 ILogger logger,
                 HttpRequestMessage request
-            ) {
+            )
+            {
                 return _beginRequestPipelineScope(logger, request.Method, request.RequestUri);
             }
 
@@ -132,7 +134,8 @@ namespace Microsoft.Extensions.Http.Logging
                 ILogger logger,
                 HttpRequestMessage request,
                 Func<string, bool> shouldRedactHeaderValue
-            ) {
+            )
+            {
                 _requestPipelineStart(logger, request.Method, request.RequestUri, null);
 
                 if (logger.IsEnabled(LogLevel.Trace))
@@ -157,7 +160,8 @@ namespace Microsoft.Extensions.Http.Logging
                 HttpResponseMessage response,
                 TimeSpan duration,
                 Func<string, bool> shouldRedactHeaderValue
-            ) {
+            )
+            {
                 _requestPipelineEnd(
                     logger,
                     duration.TotalMilliseconds,

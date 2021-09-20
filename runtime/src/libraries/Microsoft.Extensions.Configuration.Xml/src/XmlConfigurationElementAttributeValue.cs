@@ -12,7 +12,8 @@ namespace Microsoft.Extensions.Configuration.Xml
             string value,
             int? lineNumber,
             int? linePosition
-        ) {
+        )
+        {
             Attribute = attribute ?? throw new ArgumentNullException(nameof(attribute));
             Value = value ?? throw new ArgumentNullException(nameof(value));
             LineNumber = lineNumber;

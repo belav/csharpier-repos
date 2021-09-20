@@ -175,7 +175,8 @@ public class Program
         public async Task ExplicitUserDefinedConversionDifferentExpressions(
             string expression,
             bool shouldSuggestConversion
-        ) {
+        )
+        {
             Func<string, string, Task> verifyFunc = shouldSuggestConversion
                 ? (markup, expectedItem) =>
                       VerifyItemExistsAsync(
@@ -267,7 +268,8 @@ public class Program
             string usingDirective,
             string displayText1,
             string displayText2
-        ) {
+        )
+        {
             var items = await GetCompletionItemsAsync(
                 @$"
 namespace N1.Nested1
@@ -487,7 +489,8 @@ public class Program
             string expression,
             string conversionOffering,
             string fixedCode
-        ) {
+        )
+        {
             await VerifyCustomCommitProviderAsync(
                 $@"
 namespace N
@@ -562,7 +565,8 @@ namespace N
         [InlineData("dynamic")] //not valid: CS1964 conversion to or from dynamic type is not allowed
         public async Task ExplicitUserDefinedConversionIsAppliedForBuiltinTypeKeywords(
             string builtinType
-        ) {
+        )
+        {
             await VerifyCustomCommitProviderAsync(
                 $@"
 namespace N
@@ -862,7 +866,8 @@ public class Program
         public async Task ExplicitUserDefinedConversionTriviaHandling(
             string expression,
             string fixedCode
-        ) {
+        )
+        {
             await VerifyCustomCommitProviderAsync(
                 $@"
 public class C
@@ -1013,7 +1018,8 @@ public class Program
             [CombinatorialValues("struct", "class")] string toClassOrStruct,
             bool propertyIsNullable,
             bool conditionalAccess
-        ) {
+        )
+        {
             if (fromClassOrStruct == "class" && propertyIsNullable)
             {
                 // This test is solely about lifting of nullable value types. The CombinatorialData also
@@ -1227,7 +1233,8 @@ public class Program
         public async Task ExplicitBuiltInNumericConversionsAreOfferedAcordingToSpec(
             string fromType,
             params string[] toTypes
-        ) {
+        )
+        {
             // built-in numeric conversions:
             // https://docs.microsoft.com/en-us/dotnet/csharp/language-reference/builtin-types/numeric-conversions
             var items = await GetCompletionItemsAsync(
@@ -1535,7 +1542,8 @@ namespace A.C
         public async Task ExplicitBuiltInEnumConversionToIntAreOffered(
             string expression,
             bool conversionIsOffered
-        ) {
+        )
+        {
             Func<string, Task> verifyFunc = conversionIsOffered
                 ? markup =>
                       VerifyItemExistsAsync(

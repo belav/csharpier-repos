@@ -64,7 +64,8 @@ namespace Microsoft.AspNetCore.Mvc.ModelBinding.Binders
         private static HttpContext GetMockHttpContext(
             IFormCollection formCollection,
             bool hasForm = true
-        ) {
+        )
+        {
             var httpContext = new Mock<HttpContext>();
             httpContext.Setup(h => h.Request.ReadFormAsync(It.IsAny<CancellationToken>()))
                 .Returns(Task.FromResult(formCollection));
@@ -75,7 +76,8 @@ namespace Microsoft.AspNetCore.Mvc.ModelBinding.Binders
         private static DefaultModelBindingContext GetBindingContext(
             Type modelType,
             HttpContext httpContext
-        ) {
+        )
+        {
             var metadataProvider = new EmptyModelMetadataProvider();
             var bindingContext = new DefaultModelBindingContext
             {

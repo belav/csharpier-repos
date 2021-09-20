@@ -34,7 +34,8 @@ namespace Microsoft.AspNetCore.Components
             string baseUri,
             string uri,
             string expectedResult
-        ) {
+        )
+        {
             var navigationManager = new TestNavigationManager(baseUri);
 
             var actualResult = navigationManager.ToBaseRelativePath(uri);
@@ -90,7 +91,8 @@ namespace Microsoft.AspNetCore.Components
         public void ToBaseRelativePath_ThrowsForInvalidBaseRelativePaths(
             string baseUri,
             string absoluteUri
-        ) {
+        )
+        {
             var navigationManager = new TestNavigationManager(baseUri);
 
             var ex = Assert.Throws<ArgumentException>(

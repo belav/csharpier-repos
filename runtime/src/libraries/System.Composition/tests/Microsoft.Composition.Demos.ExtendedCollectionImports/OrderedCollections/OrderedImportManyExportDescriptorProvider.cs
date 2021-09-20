@@ -31,7 +31,8 @@ namespace Microsoft.Composition.Demos.ExtendedCollectionImports.OrderedCollectio
         public override IEnumerable<ExportDescriptorPromise> GetExportDescriptors(
             CompositionContract contract,
             DependencyAccessor definitionAccessor
-        ) {
+        )
+        {
             if (
                 !(
                     contract.ContractType.IsArray
@@ -76,7 +77,8 @@ namespace Microsoft.Composition.Demos.ExtendedCollectionImports.OrderedCollectio
             CompositionContract elementContract,
             DependencyAccessor definitionAccessor,
             string keyToOrderBy
-        ) {
+        )
+        {
             return new ExportDescriptorPromise(
                 importManyContract,
                 typeof(TElement[]).Name,
@@ -101,7 +103,8 @@ namespace Microsoft.Composition.Demos.ExtendedCollectionImports.OrderedCollectio
         private static IEnumerable<ExportDescriptor> OrderDependentDescriptors(
             IEnumerable<CompositionDependency> dependentDescriptors,
             string keyToOrderBy
-        ) {
+        )
+        {
             var targets = dependentDescriptors.Select(d => d.Target).ToArray();
             var missing = targets.Where(
                     t =>

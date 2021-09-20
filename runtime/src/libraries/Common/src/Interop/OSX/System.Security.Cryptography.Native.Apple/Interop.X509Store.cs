@@ -30,7 +30,8 @@ internal static partial class Interop
         internal static void X509StoreAddCertificate(
             SafeKeychainItemHandle certOrIdentity,
             SafeKeychainHandle keychain
-        ) {
+        )
+        {
             int osStatus;
             int ret = AppleCryptoNative_X509StoreAddCertificate(
                 certOrIdentity,
@@ -56,7 +57,8 @@ internal static partial class Interop
             SafeKeychainItemHandle certHandle,
             SafeKeychainHandle keychain,
             bool isReadOnlyMode
-        ) {
+        )
+        {
             int osStatus;
             int ret = AppleCryptoNative_X509StoreRemoveCertificate(
                 certHandle,

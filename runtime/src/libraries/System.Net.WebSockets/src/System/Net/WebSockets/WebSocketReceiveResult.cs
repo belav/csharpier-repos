@@ -19,7 +19,8 @@ namespace System.Net.WebSockets
             bool endOfMessage,
             WebSocketCloseStatus? closeStatus,
             string? closeStatusDescription
-        ) {
+        )
+        {
             if (count < 0)
             {
                 throw new ArgumentOutOfRangeException(nameof(count));

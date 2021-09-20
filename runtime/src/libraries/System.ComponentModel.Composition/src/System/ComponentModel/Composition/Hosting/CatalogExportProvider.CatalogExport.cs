@@ -19,7 +19,8 @@ namespace System.ComponentModel.Composition.Hosting
                 CatalogExportProvider catalogExportProvider,
                 ComposablePartDefinition partDefinition,
                 ExportDefinition definition
-            ) {
+            )
+            {
                 _catalogExportProvider = catalogExportProvider;
                 _partDefinition = partDefinition;
                 _definition = definition;
@@ -64,7 +65,8 @@ namespace System.ComponentModel.Composition.Hosting
                 ComposablePartDefinition partDefinition,
                 ExportDefinition definition,
                 CreationPolicy importCreationPolicy
-            ) {
+            )
+            {
                 CreationPolicy partPolicy = partDefinition.Metadata.GetValue<CreationPolicy>(
                     CompositionConstants.PartCreationPolicyMetadataName
                 );
@@ -87,7 +89,8 @@ namespace System.ComponentModel.Composition.Hosting
             private static bool ShouldUseSharedPart(
                 CreationPolicy partPolicy,
                 CreationPolicy importPolicy
-            ) {
+            )
+            {
                 // Matrix that details which policy to use for a given part to satisfy a given import.
                 //                   Part.Any   Part.Shared  Part.NonShared
                 // Import.Any        Shared     Shared       NonShared
@@ -101,7 +104,8 @@ namespace System.ComponentModel.Composition.Hosting
                         if (
                             importPolicy == CreationPolicy.Any
                             || importPolicy == CreationPolicy.Shared
-                        ) {
+                        )
+                        {
                             return true;
                         }
                         return false;
@@ -121,7 +125,8 @@ namespace System.ComponentModel.Composition.Hosting
                         if (
                             partPolicy != CreationPolicy.Shared
                             || importPolicy == CreationPolicy.NonShared
-                        ) {
+                        )
+                        {
                             throw new Exception(SR.Diagnostic_InternalExceptionMessage);
                         }
                         return true;

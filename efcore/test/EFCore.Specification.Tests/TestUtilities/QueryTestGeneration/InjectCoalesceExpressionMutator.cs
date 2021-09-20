@@ -51,7 +51,8 @@ namespace Microsoft.EntityFrameworkCore.TestUtilities.QueryTestGeneration
                     && node.NodeType != ExpressionType.Parameter
                     && node.Type.IsGenericType
                     && node.Type.GetGenericTypeDefinition() == typeof(Nullable<>)
-                ) {
+                )
+                {
                     FoundExpressions.Add(node);
                 }
 

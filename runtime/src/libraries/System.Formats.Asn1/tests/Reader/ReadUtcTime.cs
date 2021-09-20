@@ -190,7 +190,8 @@ namespace System.Formats.Asn1.Tests.Reader
             int second,
             int offsetHour,
             int offsetMinute
-        ) {
+        )
+        {
             byte[] inputData = inputHex.HexToByteArray();
 
             AsnReader reader = new AsnReader(inputData, ruleSet);
@@ -277,7 +278,8 @@ namespace System.Formats.Asn1.Tests.Reader
         public static void ReadUtcTime_TwoYearMaximum_FromOptions_CustomTag(
             int maximum,
             int interpretedYear
-        ) {
+        )
+        {
             byte[] inputData = "820D3132303130323233353935395A".HexToByteArray();
 
             AsnReaderOptions options = new AsnReaderOptions { UtcTimeTwoDigitYearMax = maximum };
@@ -334,7 +336,8 @@ namespace System.Formats.Asn1.Tests.Reader
             string description,
             AsnEncodingRules ruleSet,
             string inputHex
-        ) {
+        )
+        {
             _ = description;
             byte[] inputData = inputHex.HexToByteArray();
             AsnReader reader = new AsnReader(inputData, ruleSet);
@@ -488,7 +491,8 @@ namespace System.Formats.Asn1.Tests.Reader
             string inputHex,
             TagClass tagClass,
             int tagValue
-        ) {
+        )
+        {
             byte[] inputData = inputHex.HexToByteArray();
             AsnReader reader = new AsnReader(inputData, ruleSet);
 

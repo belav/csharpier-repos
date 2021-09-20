@@ -33,7 +33,8 @@ namespace System.Drawing
             ITypeDescriptorContext? context,
             CultureInfo? culture,
             object value
-        ) {
+        )
+        {
             if (value is Icon icon)
             {
                 return icon.ToBitmap();
@@ -57,7 +58,8 @@ namespace System.Drawing
             CultureInfo? culture,
             object? value,
             Type destinationType
-        ) {
+        )
+        {
             if (destinationType == typeof(string))
             {
                 if (value == null)
@@ -114,7 +116,8 @@ namespace System.Drawing
             ITypeDescriptorContext? context,
             object? value,
             Attribute[]? attributes
-        ) {
+        )
+        {
             return TypeDescriptor.GetProperties(typeof(Image), attributes);
         }
 
@@ -157,7 +160,8 @@ namespace System.Drawing
                 if (
                     rawData.Length <= headersize + 18
                     || !rawData.Slice(headersize + 12, 6).SequenceEqual(PBrush)
-                ) {
+                )
+                {
                     return null;
                 }
 

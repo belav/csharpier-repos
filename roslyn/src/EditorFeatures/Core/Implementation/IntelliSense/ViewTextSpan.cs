@@ -89,7 +89,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.IntelliSense
             Span span,
             ITextSnapshot start,
             IProjectionSnapshot target
-        ) {
+        )
+        {
             var spans = MapUpToSnapshotRecursive(new SnapshotSpan(start, span), target);
             return spans.First();
         }
@@ -98,7 +99,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.IntelliSense
         private static IEnumerable<Span> MapUpToSnapshotRecursive(
             SnapshotSpan start,
             IProjectionSnapshot target
-        ) {
+        )
+        {
             foreach (var source in target.SourceSnapshots)
             {
                 if (source == start.Snapshot)
@@ -116,7 +118,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.IntelliSense
                             var result in target.MapFromSourceSnapshot(
                                 new SnapshotSpan(source, span)
                             )
-                        ) {
+                        )
+                        {
                             yield return result;
                         }
                     }
@@ -130,7 +133,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.IntelliSense
             Span span,
             IProjectionSnapshot start,
             ITextSnapshot target
-        ) {
+        )
+        {
             var sourceSpans = new Queue<SnapshotSpan>(start.MapToSourceSnapshots(span));
             while (true)
             {
@@ -145,7 +149,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.IntelliSense
                         var s in (sourceSpan.Snapshot as IProjectionSnapshot).MapToSourceSnapshots(
                             sourceSpan.Span
                         )
-                    ) {
+                    )
+                    {
                         sourceSpans.Enqueue(s);
                     }
                 }

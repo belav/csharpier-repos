@@ -40,7 +40,8 @@ namespace Microsoft.AspNetCore.Razor.Language.Legacy
             string content,
             SyntaxKind type,
             RazorDiagnostic[] errors
-        ) {
+        )
+        {
             return SyntaxFactory.Token(type, content, errors);
         }
 
@@ -182,7 +183,8 @@ namespace Microsoft.AspNetCore.Razor.Language.Legacy
                     || ParserHelpers.IsNewLine(CurrentCharacter)
                 )
                 && !AtToken()
-            ) {
+            )
+            {
                 prev = CurrentCharacter;
                 TakeCurrent();
             }
@@ -193,7 +195,8 @@ namespace Microsoft.AspNetCore.Razor.Language.Legacy
                 if (
                     (ParserHelpers.IsLetter(prev) || ParserHelpers.IsDecimalDigit(prev))
                     && (ParserHelpers.IsLetter(next) || ParserHelpers.IsDecimalDigit(next))
-                ) {
+                )
+                {
                     TakeCurrent(); // Take the "@"
                     return Stay(); // Stay in the Text state
                 }

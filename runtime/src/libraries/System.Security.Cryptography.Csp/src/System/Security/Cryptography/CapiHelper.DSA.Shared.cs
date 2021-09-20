@@ -156,7 +156,8 @@ namespace Internal.NativeCrypto
             this byte[] cspBlob,
             bool includePrivateParameters,
             byte[]? cspPublicBlob
-        ) {
+        )
+        {
             try
             {
                 using (var ms = new MemoryStream(cspBlob))
@@ -300,7 +301,8 @@ namespace Internal.NativeCrypto
             BinaryWriter bw,
             bool isPrivate,
             out bool isV3
-        ) {
+        )
+        {
             // Write out the BLOBHEADER (or PUBLICKEYSTRUC).
             isV3 = false;
 
@@ -310,7 +312,8 @@ namespace Internal.NativeCrypto
             if (
                 ((dsaParameters.Y != null) && isPrivate)
                 || ((dsaParameters.Y != null) && (dsaParameters.J != null))
-            ) {
+            )
+            {
                 Debug.Assert(dsaParameters.Y.Length > 0);
                 isV3 = true;
                 version = 0x3;

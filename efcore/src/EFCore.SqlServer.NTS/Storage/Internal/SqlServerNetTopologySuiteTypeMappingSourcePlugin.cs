@@ -41,7 +41,8 @@ namespace Microsoft.EntityFrameworkCore.SqlServer.Storage.Internal
         /// </summary>
         public SqlServerNetTopologySuiteTypeMappingSourcePlugin(
             NtsGeometryServices geometryServices
-        ) {
+        )
+        {
             Check.NotNull(geometryServices, nameof(geometryServices));
 
             _geometryServices = geometryServices;

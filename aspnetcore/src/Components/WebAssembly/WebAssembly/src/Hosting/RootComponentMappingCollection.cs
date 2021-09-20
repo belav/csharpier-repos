@@ -50,7 +50,8 @@ namespace Microsoft.AspNetCore.Components.WebAssembly.Hosting
             [DynamicallyAccessedMembers(Component)] Type componentType,
             string selector,
             ParameterView parameters
-        ) {
+        )
+        {
             if (componentType is null)
             {
                 throw new ArgumentNullException(nameof(componentType));

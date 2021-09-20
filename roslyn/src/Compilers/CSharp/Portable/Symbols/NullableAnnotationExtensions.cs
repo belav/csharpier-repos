@@ -54,7 +54,8 @@ namespace Microsoft.CodeAnalysis.CSharp
         public static NullableAnnotation EnsureCompatible(
             this NullableAnnotation a,
             NullableAnnotation b
-        ) {
+        )
+        {
             Debug.Assert(a != NullableAnnotation.Ignored);
             Debug.Assert(b != NullableAnnotation.Ignored);
             return (a, b) switch
@@ -72,7 +73,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             this NullableAnnotation a,
             NullableAnnotation b,
             VarianceKind variance
-        ) {
+        )
+        {
             Debug.Assert(a != NullableAnnotation.Ignored);
             Debug.Assert(b != NullableAnnotation.Ignored);
             return variance switch
@@ -102,7 +104,8 @@ namespace Microsoft.CodeAnalysis.CSharp
         internal static NullabilityInfo ToNullabilityInfo(
             this CodeAnalysis.NullableAnnotation annotation,
             TypeSymbol type
-        ) {
+        )
+        {
             if (annotation == CodeAnalysis.NullableAnnotation.None)
             {
                 return default;
@@ -115,7 +118,8 @@ namespace Microsoft.CodeAnalysis.CSharp
         internal static NullabilityInfo ToNullabilityInfo(
             this NullableAnnotation annotation,
             TypeSymbol type
-        ) {
+        )
+        {
             var flowState = TypeWithAnnotations.Create(type, annotation).ToTypeWithState().State;
             return new NullabilityInfo(
                 ToPublicAnnotation(type, annotation),
@@ -130,7 +134,8 @@ namespace Microsoft.CodeAnalysis.CSharp
 
         internal static ImmutableArray<ITypeSymbol> GetPublicSymbols(
             this ImmutableArray<TypeWithAnnotations> types
-        ) {
+        )
+        {
             return types.SelectAsArray(t => t.GetPublicSymbol());
         }
 
@@ -147,7 +152,8 @@ namespace Microsoft.CodeAnalysis.CSharp
         internal static CodeAnalysis.NullableAnnotation ToPublicAnnotation(
             TypeSymbol? type,
             NullableAnnotation annotation
-        ) {
+        )
+        {
             Debug.Assert(annotation != NullableAnnotation.Ignored);
             return annotation switch
             {

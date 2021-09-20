@@ -25,7 +25,8 @@ namespace Microsoft.JSInterop.Infrastructure
             ref Utf8JsonReader reader,
             Type typeToConvert,
             JsonSerializerOptions options
-        ) {
+        )
+        {
             var id = JSObjectReferenceJsonWorker.ReadJSObjectReferenceIdentifier(ref reader);
             return new JSObjectReference(_jsRuntime, id);
         }
@@ -34,7 +35,8 @@ namespace Microsoft.JSInterop.Infrastructure
             Utf8JsonWriter writer,
             IJSObjectReference value,
             JsonSerializerOptions options
-        ) {
+        )
+        {
             JSObjectReferenceJsonWorker.WriteJSObjectReference(writer, (JSObjectReference)value);
         }
     }

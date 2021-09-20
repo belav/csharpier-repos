@@ -30,7 +30,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
             IConventionNavigationBuilder navigationBuilder,
             RequiredAttribute attribute,
             IConventionContext<IConventionNavigationBuilder> context
-        ) {
+        )
+        {
             ProcessNavigation(navigationBuilder);
             context.StopProcessingIfChanged(navigationBuilder.Metadata.Builder);
         }
@@ -41,7 +42,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
             IEnumerable<RequiredAttribute>? dependentToPrincipalAttributes,
             IEnumerable<RequiredAttribute>? principalToDependentAttributes,
             IConventionContext<IConventionForeignKeyBuilder> context
-        ) {
+        )
+        {
             var fk = relationshipBuilder.Metadata;
             if (dependentToPrincipalAttributes != null && dependentToPrincipalAttributes.Any())
             {
@@ -84,7 +86,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
             IConventionSkipNavigationBuilder skipNavigationBuilder,
             RequiredAttribute attribute,
             IConventionContext<IConventionSkipNavigationBuilder> context
-        ) {
+        )
+        {
             Dependencies.Logger.RequiredAttributeOnSkipNavigation(skipNavigationBuilder.Metadata);
         }
     }

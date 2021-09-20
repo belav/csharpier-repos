@@ -53,7 +53,8 @@ namespace Microsoft.CodeAnalysis.Diagnostics
         public ImmutableArray<DiagnosticData> GetPullDiagnostics(
             Workspace workspace,
             Option2<DiagnosticMode> diagnosticMode
-        ) {
+        )
+        {
             // If push diagnostics are on, they get nothing since they're asking for pull diagnostics.
             if (workspace.IsPushDiagnostics(diagnosticMode))
                 return ImmutableArray<DiagnosticData>.Empty;
@@ -69,7 +70,8 @@ namespace Microsoft.CodeAnalysis.Diagnostics
         public ImmutableArray<DiagnosticData> GetPushDiagnostics(
             Workspace workspace,
             Option2<DiagnosticMode> diagnosticMode
-        ) {
+        )
+        {
             // If pull diagnostics are on, they get nothing since they're asking for push diagnostics.
             if (workspace.IsPullDiagnostics(diagnosticMode))
                 return ImmutableArray<DiagnosticData>.Empty;
@@ -84,7 +86,8 @@ namespace Microsoft.CodeAnalysis.Diagnostics
             ProjectId? projectId,
             DocumentId? documentId,
             ImmutableArray<DiagnosticData> diagnostics
-        ) {
+        )
+        {
             return new DiagnosticsUpdatedArgs(
                 id,
                 workspace,
@@ -102,7 +105,8 @@ namespace Microsoft.CodeAnalysis.Diagnostics
             Solution? solution,
             ProjectId? projectId,
             DocumentId? documentId
-        ) {
+        )
+        {
             return new DiagnosticsUpdatedArgs(
                 id,
                 workspace,

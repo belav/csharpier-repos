@@ -47,7 +47,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Test.Utilities
                     inProgress: null
                 )
                 || AddIfUsesIsNullable(symbol, symbol.TypeParameters, inProgress: null)
-            ) {
+            )
+            {
                 return true;
             }
             return VisitList(symbol.GetMembers());
@@ -97,7 +98,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Test.Utilities
             Symbol symbol,
             ImmutableArray<ParameterSymbol> parameters,
             ConsList<TypeParameterSymbol> inProgress
-        ) {
+        )
+        {
             foreach (var parameter in parameters)
             {
                 if (UsesIsNullable(parameter.TypeWithAnnotations, inProgress))
@@ -113,7 +115,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Test.Utilities
             Symbol symbol,
             ImmutableArray<TypeParameterSymbol> typeParameters,
             ConsList<TypeParameterSymbol> inProgress
-        ) {
+        )
+        {
             foreach (var type in typeParameters)
             {
                 if (UsesIsNullable(type, inProgress))
@@ -129,7 +132,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Test.Utilities
             Symbol symbol,
             ImmutableArray<NamedTypeSymbol> types,
             ConsList<TypeParameterSymbol> inProgress
-        ) {
+        )
+        {
             foreach (var type in types)
             {
                 if (UsesIsNullable(type, inProgress))
@@ -145,7 +149,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Test.Utilities
             Symbol symbol,
             TypeWithAnnotations type,
             ConsList<TypeParameterSymbol> inProgress
-        ) {
+        )
+        {
             if (UsesIsNullable(type, inProgress))
             {
                 Add(symbol);
@@ -158,7 +163,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Test.Utilities
             Symbol symbol,
             TypeSymbol type,
             ConsList<TypeParameterSymbol> inProgress
-        ) {
+        )
+        {
             if (UsesIsNullable(type, inProgress))
             {
                 Add(symbol);
@@ -170,7 +176,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Test.Utilities
         private bool UsesIsNullable(
             TypeWithAnnotations type,
             ConsList<TypeParameterSymbol> inProgress
-        ) {
+        )
+        {
             if (!type.HasType)
             {
                 return false;
@@ -247,7 +254,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Test.Utilities
         private bool UsesIsNullable(
             ImmutableArray<TypeWithAnnotations> types,
             ConsList<TypeParameterSymbol> inProgress
-        ) {
+        )
+        {
             return types.Any(t => UsesIsNullable(t, inProgress));
         }
     }

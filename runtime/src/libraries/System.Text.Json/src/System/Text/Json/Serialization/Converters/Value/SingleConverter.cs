@@ -14,7 +14,8 @@ namespace System.Text.Json.Serialization.Converters
             ref Utf8JsonReader reader,
             Type typeToConvert,
             JsonSerializerOptions options
-        ) {
+        )
+        {
             return reader.GetSingle();
         }
 
@@ -22,7 +23,8 @@ namespace System.Text.Json.Serialization.Converters
             Utf8JsonWriter writer,
             float value,
             JsonSerializerOptions options
-        ) {
+        )
+        {
             writer.WriteNumberValue(value);
         }
 
@@ -36,14 +38,16 @@ namespace System.Text.Json.Serialization.Converters
             float value,
             JsonSerializerOptions options,
             ref WriteStack state
-        ) {
+        )
+        {
             writer.WritePropertyName(value);
         }
 
         internal override float ReadNumberWithCustomHandling(
             ref Utf8JsonReader reader,
             JsonNumberHandling handling
-        ) {
+        )
+        {
             if (reader.TokenType == JsonTokenType.String)
             {
                 if ((JsonNumberHandling.AllowReadingFromString & handling) != 0)
@@ -63,7 +67,8 @@ namespace System.Text.Json.Serialization.Converters
             Utf8JsonWriter writer,
             float value,
             JsonNumberHandling handling
-        ) {
+        )
+        {
             if ((JsonNumberHandling.WriteAsString & handling) != 0)
             {
                 writer.WriteNumberValueAsString(value);

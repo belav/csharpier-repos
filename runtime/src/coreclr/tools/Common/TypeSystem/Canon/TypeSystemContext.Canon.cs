@@ -74,7 +74,8 @@ namespace Internal.TypeSystem
         public Instantiation ConvertInstantiationToCanonForm(
             Instantiation instantiation,
             CanonicalFormKind kind
-        ) {
+        )
+        {
             bool changed;
             return ConvertInstantiationToCanonForm(instantiation, kind, out changed);
         }
@@ -88,7 +89,8 @@ namespace Internal.TypeSystem
             Instantiation instantiation,
             CanonicalFormKind kind,
             out bool changed
-        ) {
+        )
+        {
             throw new NotSupportedException();
         }
 
@@ -99,7 +101,8 @@ namespace Internal.TypeSystem
         protected internal virtual TypeDesc ConvertToCanon(
             TypeDesc typeToConvert,
             CanonicalFormKind kind
-        ) {
+        )
+        {
             throw new NotSupportedException();
         }
 

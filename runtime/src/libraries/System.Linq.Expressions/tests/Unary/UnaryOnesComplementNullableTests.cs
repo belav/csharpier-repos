@@ -103,7 +103,8 @@ namespace System.Linq.Expressions.Tests
         private static void VerifyArithmeticOnesComplementNullableShort(
             short? value,
             bool useInterpreter
-        ) {
+        )
+        {
             Expression<Func<short?>> e = Expression.Lambda<Func<short?>>(
                 Expression.OnesComplement(Expression.Constant(value, typeof(short?))),
                 Enumerable.Empty<ParameterExpression>()
@@ -115,7 +116,8 @@ namespace System.Linq.Expressions.Tests
         private static void VerifyArithmeticOnesComplementNullableUShort(
             ushort? value,
             bool useInterpreter
-        ) {
+        )
+        {
             Expression<Func<ushort?>> e = Expression.Lambda<Func<ushort?>>(
                 Expression.OnesComplement(Expression.Constant(value, typeof(ushort?))),
                 Enumerable.Empty<ParameterExpression>()
@@ -127,7 +129,8 @@ namespace System.Linq.Expressions.Tests
         private static void VerifyArithmeticOnesComplementNullableInt(
             int? value,
             bool useInterpreter
-        ) {
+        )
+        {
             Expression<Func<int?>> e = Expression.Lambda<Func<int?>>(
                 Expression.OnesComplement(Expression.Constant(value, typeof(int?))),
                 Enumerable.Empty<ParameterExpression>()
@@ -139,7 +142,8 @@ namespace System.Linq.Expressions.Tests
         private static void VerifyArithmeticOnesComplementNullableUInt(
             uint? value,
             bool useInterpreter
-        ) {
+        )
+        {
             Expression<Func<uint?>> e = Expression.Lambda<Func<uint?>>(
                 Expression.OnesComplement(Expression.Constant(value, typeof(uint?))),
                 Enumerable.Empty<ParameterExpression>()
@@ -151,7 +155,8 @@ namespace System.Linq.Expressions.Tests
         private static void VerifyArithmeticOnesComplementNullableLong(
             long? value,
             bool useInterpreter
-        ) {
+        )
+        {
             Expression<Func<long?>> e = Expression.Lambda<Func<long?>>(
                 Expression.OnesComplement(Expression.Constant(value, typeof(long?))),
                 Enumerable.Empty<ParameterExpression>()
@@ -163,7 +168,8 @@ namespace System.Linq.Expressions.Tests
         private static void VerifyArithmeticOnesComplementNullableULong(
             ulong? value,
             bool useInterpreter
-        ) {
+        )
+        {
             Expression<Func<ulong?>> e = Expression.Lambda<Func<ulong?>>(
                 Expression.OnesComplement(Expression.Constant(value, typeof(ulong?))),
                 Enumerable.Empty<ParameterExpression>()
@@ -175,7 +181,8 @@ namespace System.Linq.Expressions.Tests
         private static void VerifyArithmeticOnesComplementNullableByte(
             byte? value,
             bool useInterpreter
-        ) {
+        )
+        {
             Expression<Func<byte?>> e = Expression.Lambda<Func<byte?>>(
                 Expression.OnesComplement(Expression.Constant(value, typeof(byte?))),
                 Enumerable.Empty<ParameterExpression>()
@@ -187,7 +194,8 @@ namespace System.Linq.Expressions.Tests
         private static void VerifyArithmeticOnesComplementNullableSByte(
             sbyte? value,
             bool useInterpreter
-        ) {
+        )
+        {
             Expression<Func<sbyte?>> e = Expression.Lambda<Func<sbyte?>>(
                 Expression.OnesComplement(Expression.Constant(value, typeof(sbyte?))),
                 Enumerable.Empty<ParameterExpression>()

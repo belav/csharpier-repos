@@ -98,7 +98,8 @@ namespace Microsoft.AspNetCore.Mvc.ModelBinding.Binders
                     modelName: bindingContext.ModelName,
                     model: bindingContext.Model
                 )
-            ) {
+            )
+            {
                 bindingContext.IsTopLevelObject = isTopLevelObject;
                 bindingContext.ValueProvider = headerValueProvider;
 
@@ -114,7 +115,8 @@ namespace Microsoft.AspNetCore.Mvc.ModelBinding.Binders
         private HeaderValueProvider GetHeaderValueProvider(
             string headerName,
             ModelBindingContext bindingContext
-        ) {
+        )
+        {
             var request = bindingContext.HttpContext.Request;
 
             // Prevent breaking existing users in scenarios where they are binding to a 'string' property
@@ -182,7 +184,8 @@ namespace Microsoft.AspNetCore.Mvc.ModelBinding.Binders
         private static object? GetCompatibleCollection(
             ModelBindingContext bindingContext,
             string[] values
-        ) {
+        )
+        {
             // Almost-always success if IsTopLevelObject.
             if (!bindingContext.IsTopLevelObject && values.Length == 0)
             {

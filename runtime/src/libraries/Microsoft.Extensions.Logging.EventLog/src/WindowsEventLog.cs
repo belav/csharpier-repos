@@ -50,7 +50,8 @@ namespace Microsoft.Extensions.Logging.EventLog
                             ".",
                             "Application"
                         )
-                    ) {
+                    )
+                    {
                         backupLog.WriteEvent(
                             new EventInstance(
                                 instanceId: 0,

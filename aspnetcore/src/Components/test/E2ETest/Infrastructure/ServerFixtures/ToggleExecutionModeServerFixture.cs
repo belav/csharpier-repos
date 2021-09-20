@@ -63,7 +63,8 @@ namespace Microsoft.AspNetCore.Components.E2ETest.Infrastructure.ServerFixtures
 
         internal ToggleExecutionModeServerFixture<TClientProgram> WithAdditionalArguments(
             string[] additionalArguments
-        ) {
+        )
+        {
             AspNetFixtureAdditionalArguments.AddRange(additionalArguments);
             return this;
         }

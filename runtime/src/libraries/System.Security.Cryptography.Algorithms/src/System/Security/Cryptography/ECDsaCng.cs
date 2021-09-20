@@ -80,7 +80,8 @@ namespace System.Security.Cryptography
                 byte[] ecKeyBlob,
                 string curveName,
                 bool includePrivateParameters
-            ) {
+            )
+            {
                 string blobType = includePrivateParameters
                     ? Interop.BCrypt.KeyBlobType.BCRYPT_ECCPRIVATE_BLOB
                     : Interop.BCrypt.KeyBlobType.BCRYPT_ECCPUBLIC_BLOB;
@@ -134,7 +135,8 @@ namespace System.Security.Cryptography
                 int kdfCount,
                 Span<byte> destination,
                 out int bytesWritten
-            ) {
+            )
+            {
                 using (SafeNCryptKeyHandle keyHandle = GetDuplicatedKeyHandle())
                 {
                     return CngKeyLite.TryExportPkcs8KeyBlob(

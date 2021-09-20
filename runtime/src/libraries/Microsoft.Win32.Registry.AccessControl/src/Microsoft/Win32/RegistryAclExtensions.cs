@@ -19,7 +19,8 @@ namespace Microsoft.Win32
         public static RegistrySecurity GetAccessControl(
             this RegistryKey key,
             AccessControlSections includeSections
-        ) {
+        )
+        {
             if (key == null)
                 throw new ArgumentNullException(nameof(key));
 

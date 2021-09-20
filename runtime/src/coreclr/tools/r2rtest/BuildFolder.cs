@@ -47,7 +47,8 @@ namespace R2RTest
             string inputFolder,
             string outputFolder,
             BuildOptions options
-        ) {
+        )
+        {
             _compilationInputFiles = compilationInputFiles;
             _mainExecutables = mainExecutables;
             _executionScripts = executionScripts;
@@ -143,7 +144,8 @@ namespace R2RTest
             IEnumerable<CompilerRunner> compilerRunners,
             string outputRoot,
             BuildOptions options
-        ) {
+        )
+        {
             List<string> compilationInputFiles = new List<string>();
             HashSet<string> passThroughFiles = new HashSet<string>();
             List<string> mainExecutables = new List<string>();
@@ -159,7 +161,8 @@ namespace R2RTest
                     inputDirectory,
                     options.InputFileSearchString ?? "*"
                 )
-            ) {
+            )
+            {
                 bool isManagedAssembly = ComputeManagedAssemblies.IsManaged(file);
                 if (isManagedAssembly)
                 {
@@ -232,7 +235,8 @@ namespace R2RTest
                             options.CoreRootDirectory.FullName,
                             "lib*".AppendOSDllSuffix()
                         )
-                    ) {
+                    )
+                    {
                         passThroughFiles.Add(nativeLib);
                     }
                 }
@@ -266,7 +270,8 @@ namespace R2RTest
             Dictionary<string, HashSet<string>> moduleToJittedMethods,
             int executionIndex,
             CompilerIndex compilerIndex
-        ) {
+        )
+        {
             ProcessInfo executionProcess = _executions[executionIndex][(int)compilerIndex];
             if (executionProcess != null && executionProcess.JittedMethods != null)
             {
@@ -275,14 +280,16 @@ namespace R2RTest
                         string,
                         HashSet<string>
                     > moduleMethodKvp in executionProcess.JittedMethods
-                ) {
+                )
+                {
                     HashSet<string> jittedMethodsPerModule;
                     if (
                         !moduleToJittedMethods.TryGetValue(
                             moduleMethodKvp.Key,
                             out jittedMethodsPerModule
                         )
-                    ) {
+                    )
+                    {
                         jittedMethodsPerModule = new HashSet<string>();
                         moduleToJittedMethods.Add(moduleMethodKvp.Key, jittedMethodsPerModule);
                     }
@@ -295,7 +302,8 @@ namespace R2RTest
             TextWriter writer,
             Dictionary<string, HashSet<string>>[] perCompilerStatistics,
             IEnumerable<CompilerRunner> compilerRunners
-        ) {
+        )
+        {
             Dictionary<string, int> moduleNameUnion = new Dictionary<string, int>(
                 StringComparer.OrdinalIgnoreCase
             );
@@ -305,7 +313,8 @@ namespace R2RTest
                     KeyValuePair<string, HashSet<string>> kvp in perCompilerStatistics[
                         (int)compilerRunner.Index
                     ]
-                ) {
+                )
+                {
                     int methodCount;
                     moduleNameUnion.TryGetValue(kvp.Key, out methodCount);
                     moduleNameUnion[kvp.Key] = Math.Max(methodCount, kvp.Value.Count);
@@ -330,7 +339,8 @@ namespace R2RTest
             foreach (
                 string moduleName in moduleNameUnion.OrderByDescending(kvp => kvp.Value)
                     .Select(kvp => kvp.Key)
-            ) {
+            )
+            {
                 foreach (CompilerRunner compilerRunner in compilerRunners)
                 {
                     HashSet<string> jittedMethodsPerModule;
@@ -355,7 +365,8 @@ namespace R2RTest
         public void WriteJitStatistics(
             Dictionary<string, HashSet<string>>[] perCompilerStatistics,
             IEnumerable<CompilerRunner> compilerRunners
-        ) {
+        )
+        {
             for (int exeIndex = 0; exeIndex < _mainExecutables.Count; exeIndex++)
             {
                 string jitStatisticsFile = Path.ChangeExtension(

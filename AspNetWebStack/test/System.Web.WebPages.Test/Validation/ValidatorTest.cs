@@ -947,7 +947,8 @@ namespace System.Web.WebPages.Validation.Test
         private static ValidationContext GetValidationContext(
             HttpContextBase httpContext,
             string memberName
-        ) {
+        )
+        {
             return new ValidationContext(httpContext, null, null) { MemberName = memberName };
         }
     }

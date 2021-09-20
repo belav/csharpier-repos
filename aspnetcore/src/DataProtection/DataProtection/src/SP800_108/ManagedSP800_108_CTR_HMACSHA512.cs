@@ -16,7 +16,8 @@ namespace Microsoft.AspNetCore.DataProtection.SP800_108
             ArraySegment<byte> context,
             Func<byte[], HashAlgorithm> prfFactory,
             ArraySegment<byte> output
-        ) {
+        )
+        {
             // make copies so we can mutate these local vars
             var outputOffset = output.Offset;
             var outputCount = output.Count;
@@ -90,7 +91,8 @@ namespace Microsoft.AspNetCore.DataProtection.SP800_108
             ArraySegment<byte> context,
             Func<byte[], HashAlgorithm> prfFactory,
             ArraySegment<byte> output
-        ) {
+        )
+        {
             var combinedContext = new byte[checked(contextHeader.Length + context.Count)];
             Buffer.BlockCopy(contextHeader, 0, combinedContext, 0, contextHeader.Length);
             Buffer.BlockCopy(

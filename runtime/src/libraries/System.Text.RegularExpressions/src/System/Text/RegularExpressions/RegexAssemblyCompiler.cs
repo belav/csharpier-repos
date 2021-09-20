@@ -49,7 +49,8 @@ namespace System.Text.RegularExpressions
             bool isPublic,
             RegexCode code,
             TimeSpan matchTimeout
-        ) {
+        )
+        {
             // Store arguments into the base type's fields
             _options = options;
             _code = code;
@@ -143,7 +144,8 @@ namespace System.Text.RegularExpressions
                 DynamicallyAccessedMemberTypes.PublicParameterlessConstructor
             )]
                 Type type
-        ) {
+        )
+        {
             // return new Type();
             Newobj(type.GetConstructor(Type.EmptyTypes)!);
             Ret();
@@ -158,7 +160,8 @@ namespace System.Text.RegularExpressions
                 Type regexRunnerFactoryType,
             RegexCode code,
             TimeSpan matchTimeout
-        ) {
+        )
+        {
             // Call the base ctor and store pattern, options, and factory.
             // base.ctor();
             // base.pattern = pattern;
@@ -253,7 +256,8 @@ namespace System.Text.RegularExpressions
         private void GenerateRegexTimeoutCtor(
             ConstructorBuilder defaultCtorBuilder,
             TypeBuilder regexTypeBuilder
-        ) {
+        )
+        {
             // base.ctor();
             // ValidateMatchTimeout(timeSpan);
             // base.internalMatchTimeout = timeSpan;
@@ -334,7 +338,8 @@ namespace System.Text.RegularExpressions
             bool isPublic,
             bool isSealed,
             [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)] Type inheritFromClass
-        ) {
+        )
+        {
             TypeAttributes attrs =
                 TypeAttributes.Class
                 | TypeAttributes.BeforeFieldInit

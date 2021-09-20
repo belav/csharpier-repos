@@ -105,7 +105,8 @@ namespace Microsoft.EntityFrameworkCore.Infrastructure.Internal
         public virtual IInternalServiceCollectionMap AddDependency(
             Type serviceType,
             ServiceLifetime lifetime
-        ) {
+        )
+        {
             var indexes = GetOrCreateDescriptorIndexes(serviceType);
             if (!indexes.Any())
             {
@@ -116,7 +117,8 @@ namespace Microsoft.EntityFrameworkCore.Infrastructure.Internal
             }
             else if (
                 indexes.Count > 1 || ServiceCollection[indexes[0]].ImplementationType != serviceType
-            ) {
+            )
+            {
                 throw new InvalidOperationException(
                     CoreStrings.BadDependencyRegistration(serviceType.Name)
                 );
@@ -228,7 +230,8 @@ namespace Microsoft.EntityFrameworkCore.Infrastructure.Internal
         private static object InjectServices(
             IServiceProvider serviceProvider,
             Func<IServiceProvider, object> implementationFactory
-        ) {
+        )
+        {
             var service = implementationFactory(serviceProvider);
 
             (service as IPatchServiceInjectionSite)?.InjectServices(serviceProvider);

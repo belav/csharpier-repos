@@ -16,14 +16,16 @@ namespace Microsoft.AspNetCore.SignalR.Internal
         public static IAsyncEnumerable<object?> MakeCancelableAsyncEnumerable<T>(
             IAsyncEnumerable<T> asyncEnumerable,
             CancellationToken cancellationToken = default
-        ) {
+        )
+        {
             return new CancelableAsyncEnumerable<T>(asyncEnumerable, cancellationToken);
         }
 
         public static IAsyncEnumerable<T> MakeCancelableTypedAsyncEnumerable<T>(
             IAsyncEnumerable<T> asyncEnumerable,
             CancellationTokenSource cts
-        ) {
+        )
+        {
             return new CancelableTypedAsyncEnumerable<T>(asyncEnumerable, cts);
         }
 
@@ -31,7 +33,8 @@ namespace Microsoft.AspNetCore.SignalR.Internal
         public static async IAsyncEnumerable<object?> MakeAsyncEnumerableFromChannel<T>(
             ChannelReader<T> channel,
             [EnumeratorCancellation] CancellationToken cancellationToken = default
-        ) {
+        )
+        {
             await foreach (var item in channel.ReadAllAsync(cancellationToken))
             {
                 yield return item;
@@ -43,7 +46,8 @@ namespace Microsoft.AspNetCore.SignalR.Internal
         public static async IAsyncEnumerable<object?> MakeAsyncEnumerableFromChannel<T>(
             ChannelReader<T> channel,
             [EnumeratorCancellation] CancellationToken cancellationToken = default
-        ) {
+        )
+        {
             while (await channel.WaitToReadAsync(cancellationToken).ConfigureAwait(false))
             {
                 while (channel.TryRead(out var item))
@@ -62,14 +66,16 @@ namespace Microsoft.AspNetCore.SignalR.Internal
             public CancelableTypedAsyncEnumerable(
                 IAsyncEnumerable<TResult> asyncEnumerable,
                 CancellationTokenSource cts
-            ) {
+            )
+            {
                 _asyncEnumerable = asyncEnumerable;
                 _cts = cts;
             }
 
             public IAsyncEnumerator<TResult> GetAsyncEnumerator(
                 CancellationToken cancellationToken = default
-            ) {
+            )
+            {
                 var enumerator = _asyncEnumerable.GetAsyncEnumerator(_cts.Token);
                 if (cancellationToken.CanBeCanceled)
                 {
@@ -97,7 +103,8 @@ namespace Microsoft.AspNetCore.SignalR.Internal
                 public CancelableEnumerator(
                     IAsyncEnumerator<T> asyncEnumerator,
                     CancellationTokenRegistration registration
-                ) {
+                )
+                {
                     _asyncEnumerator = asyncEnumerator;
                     _cancellationTokenRegistration = registration;
                 }
@@ -124,14 +131,16 @@ namespace Microsoft.AspNetCore.SignalR.Internal
             public CancelableAsyncEnumerable(
                 IAsyncEnumerable<T> asyncEnumerable,
                 CancellationToken cancellationToken
-            ) {
+            )
+            {
                 _asyncEnumerable = asyncEnumerable;
                 _cancellationToken = cancellationToken;
             }
 
             public IAsyncEnumerator<object?> GetAsyncEnumerator(
                 CancellationToken cancellationToken = default
-            ) {
+            )
+            {
                 // Assume that this will be iterated through with await foreach which always passes a default token.
                 // Instead use the token from the ctor.
                 Debug.Assert(cancellationToken == default);

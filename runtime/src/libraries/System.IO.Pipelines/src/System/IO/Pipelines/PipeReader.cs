@@ -106,7 +106,8 @@ namespace System.IO.Pipelines
         public static PipeReader Create(
             Stream stream,
             StreamPipeReaderOptions? readerOptions = null
-        ) {
+        )
+        {
             return new StreamPipeReader(stream, readerOptions ?? StreamPipeReaderOptions.s_default);
         }
 
@@ -127,7 +128,8 @@ namespace System.IO.Pipelines
         public virtual Task CopyToAsync(
             PipeWriter destination,
             CancellationToken cancellationToken = default
-        ) {
+        )
+        {
             if (destination == null)
             {
                 throw new ArgumentNullException(nameof(destination));
@@ -153,7 +155,8 @@ namespace System.IO.Pipelines
         public virtual Task CopyToAsync(
             Stream destination,
             CancellationToken cancellationToken = default
-        ) {
+        )
+        {
             if (destination == null)
             {
                 throw new ArgumentNullException(nameof(destination));
@@ -199,7 +202,8 @@ namespace System.IO.Pipelines
                 ValueTask<FlushResult>
             > writeAsync,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             while (true)
             {
                 ReadResult result = await ReadAsync(cancellationToken).ConfigureAwait(false);

@@ -43,7 +43,8 @@ namespace Microsoft.AspNetCore.DataProtection.Cng
             uint symmetricAlgorithmKeySizeInBytes,
             BCryptAlgorithmHandle hmacAlgorithmHandle,
             IBCryptGenRandom? genRandom = null
-        ) {
+        )
+        {
             _genRandom = genRandom ?? BCryptGenRandomImpl.Instance;
             _sp800_108_ctr_hmac_provider = SP800_108_CTR_HMACSHA512Util.CreateProvider(
                 keyDerivationKey
@@ -131,10 +132,12 @@ namespace Microsoft.AspNetCore.DataProtection.Cng
                             pbSymmetricEncryptionSubkey,
                             _symmetricAlgorithmSubkeyLengthInBytes
                         )
-                    ) {
+                    )
+                    {
                         fixed (
                             byte* pbIV = new byte[_symmetricAlgorithmBlockSizeInBytes] /* will be zero-initialized */
-                        ) {
+                        )
+                        {
                             DoCbcEncrypt(
                                 symmetricKeyHandle: symmetricKeyHandle,
                                 pbIV: pbIV,
@@ -153,7 +156,8 @@ namespace Microsoft.AspNetCore.DataProtection.Cng
                             pbHmacSubkey,
                             _hmacAlgorithmSubkeyLengthInBytes
                         )
-                    ) {
+                    )
+                    {
                         hashHandle.HashData(
                             pbInput: &dummy,
                             cbInput: 0,
@@ -179,7 +183,8 @@ namespace Microsoft.AspNetCore.DataProtection.Cng
             uint cbCiphertext,
             byte* pbAdditionalAuthenticatedData,
             uint cbAdditionalAuthenticatedData
-        ) {
+        )
+        {
             // Argument checking - input must at the absolute minimum contain a key modifier, IV, and MAC
             if (
                 cbCiphertext
@@ -188,7 +193,8 @@ namespace Microsoft.AspNetCore.DataProtection.Cng
                     + _symmetricAlgorithmBlockSizeInBytes
                     + _hmacAlgorithmDigestLengthInBytes
                 )
-            ) {
+            )
+            {
                 throw Error.CryptCommon_PayloadInvalid();
             }
 
@@ -239,7 +245,8 @@ namespace Microsoft.AspNetCore.DataProtection.Cng
                         pbHmacSubkey,
                         _hmacAlgorithmSubkeyLengthInBytes
                     )
-                ) {
+                )
+                {
                     if (
                         !ValidateHash(
                             hashHandle,
@@ -247,7 +254,8 @@ namespace Microsoft.AspNetCore.DataProtection.Cng
                             _symmetricAlgorithmBlockSizeInBytes + cbEncryptedData,
                             pbActualHmac
                         )
-                    ) {
+                    )
+                    {
                         throw Error.CryptCommon_PayloadInvalid();
                     }
                 }
@@ -258,7 +266,8 @@ namespace Microsoft.AspNetCore.DataProtection.Cng
                         pbSymmetricEncryptionSubkey,
                         _symmetricAlgorithmSubkeyLengthInBytes
                     )
-                ) {
+                )
+                {
                     return DoCbcDecrypt(
                         decryptionSubkeyHandle,
                         pbIV,
@@ -288,7 +297,8 @@ namespace Microsoft.AspNetCore.DataProtection.Cng
             byte* pbIV,
             byte* pbInput,
             uint cbInput
-        ) {
+        )
+        {
             // BCryptDecrypt mutates the provided IV; we need to clone it to prevent mutation of the original value
             byte* pbClonedIV = stackalloc byte[checked((int)_symmetricAlgorithmBlockSizeInBytes)];
             UnsafeBufferUtil.BlockCopy(
@@ -373,7 +383,8 @@ namespace Microsoft.AspNetCore.DataProtection.Cng
             uint cbInput,
             byte* pbOutput,
             uint cbOutput
-        ) {
+        )
+        {
             // BCryptEncrypt mutates the provided IV; we need to clone it to prevent mutation of the original value
             byte* pbClonedIV = stackalloc byte[checked((int)_symmetricAlgorithmBlockSizeInBytes)];
             UnsafeBufferUtil.BlockCopy(
@@ -408,7 +419,8 @@ namespace Microsoft.AspNetCore.DataProtection.Cng
             uint cbAdditionalAuthenticatedData,
             uint cbPreBuffer,
             uint cbPostBuffer
-        ) {
+        )
+        {
             // This buffer will be used to hold the symmetric encryption and HMAC subkeys
             // used in the generation of this payload.
             var cbTempSubkeys = checked(
@@ -449,7 +461,8 @@ namespace Microsoft.AspNetCore.DataProtection.Cng
                         pbSymmetricEncryptionSubkey,
                         _symmetricAlgorithmSubkeyLengthInBytes
                     )
-                ) {
+                )
+                {
                     // We can't assume PKCS#7 padding (maybe the underlying provider is really using CTS),
                     // so we need to query the padded output size before we can allocate the return value array.
                     var cbOutputCiphertext = GetCbcEncryptedOutputSizeWithPadding(
@@ -505,7 +518,8 @@ namespace Microsoft.AspNetCore.DataProtection.Cng
                                 pbHmacSubkey,
                                 _hmacAlgorithmSubkeyLengthInBytes
                             )
-                        ) {
+                        )
+                        {
                             hashHandle.HashData(
                                 pbInput: pbOutputIV,
                                 cbInput: checked(
@@ -534,7 +548,8 @@ namespace Microsoft.AspNetCore.DataProtection.Cng
             BCryptKeyHandle symmetricKeyHandle,
             byte* pbInput,
             uint cbInput
-        ) {
+        )
+        {
             // ok for this memory to remain uninitialized since nobody depends on it
             byte* pbIV = stackalloc byte[checked((int)_symmetricAlgorithmBlockSizeInBytes)];
 
@@ -564,7 +579,8 @@ namespace Microsoft.AspNetCore.DataProtection.Cng
             byte* pbInput,
             uint cbInput,
             byte* pbExpectedDigest
-        ) {
+        )
+        {
             byte* pbActualDigest = stackalloc byte[checked((int)_hmacAlgorithmDigestLengthInBytes)];
             hashHandle.HashData(
                 pbInput,

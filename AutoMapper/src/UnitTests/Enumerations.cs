@@ -391,7 +391,8 @@ namespace AutoMapper.Tests
                 object d,
                 StatusForDto dest,
                 ResolutionContext context
-            ) {
+            )
+            {
                 return context.Mapper.Map<StatusForDto>(source.Status);
             }
         }
@@ -405,7 +406,8 @@ namespace AutoMapper.Tests
                 TInputEnum source,
                 TOutputEnum dest,
                 ResolutionContext context
-            ) {
+            )
+            {
                 return (
                     (TOutputEnum)Enum.Parse(
                         typeof(TOutputEnum),

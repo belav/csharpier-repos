@@ -88,7 +88,8 @@ namespace System.Xml.Xsl.Xslt
                     || n.NodeType == QilNodeType.DocOrderDistinct
                     || n.NodeType == QilNodeType.Filter
                     || n.NodeType == QilNodeType.Loop
-                ) {
+                )
+                {
                     return base.Visit(n);
                 }
                 return n;
@@ -100,7 +101,8 @@ namespace System.Xml.Xsl.Xslt
                 if (
                     n.Variable.Binding!.NodeType == QilNodeType.Root
                     || n.Variable.Binding.NodeType == QilNodeType.Deref
-                ) {
+                )
+                {
                     // This is absolute path already. We shouldn't touch it
                     return n;
                 }

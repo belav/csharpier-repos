@@ -15,7 +15,8 @@ namespace Microsoft.AspNetCore.Hosting.TestSites
             IApplicationBuilder app,
             ILoggerFactory loggerFactory,
             IHostApplicationLifetime lifetime
-        ) {
+        )
+        {
             lifetime.ApplicationStarted.Register(
                 () =>
                 {

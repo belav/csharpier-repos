@@ -42,7 +42,8 @@ namespace System
             string strB,
             int indexB,
             int countB
-        ) {
+        )
+        {
             Debug.Assert(strA != null);
             Debug.Assert(strB != null);
             Debug.Assert(indexA >= 0 && indexB >= 0);
@@ -338,7 +339,8 @@ namespace System
             string? strB,
             CultureInfo? culture,
             CompareOptions options
-        ) {
+        )
+        {
             CultureInfo compareCulture = culture ?? CultureInfo.CurrentCulture;
             return compareCulture.CompareInfo.Compare(strA, strB, options);
         }
@@ -377,7 +379,8 @@ namespace System
             int indexB,
             int length,
             bool ignoreCase
-        ) {
+        )
+        {
             // Ideally we would just forward to the string.Compare overload that takes
             // a StringComparison parameter, and just pass in CurrentCulture/CurrentCultureIgnoreCase.
             // That function will return early if an optimization can be applied, e.g. if
@@ -430,7 +433,8 @@ namespace System
             int length,
             bool ignoreCase,
             CultureInfo? culture
-        ) {
+        )
+        {
             CompareOptions options = ignoreCase ? CompareOptions.IgnoreCase : CompareOptions.None;
             return Compare(strA, indexA, strB, indexB, length, culture, options);
         }
@@ -447,7 +451,8 @@ namespace System
             int length,
             CultureInfo? culture,
             CompareOptions options
-        ) {
+        )
+        {
             CultureInfo compareCulture = culture ?? CultureInfo.CurrentCulture;
             int lengthA = length;
             int lengthB = length;
@@ -480,7 +485,8 @@ namespace System
             int indexB,
             int length,
             StringComparison comparisonType
-        ) {
+        )
+        {
             CheckStringComparison(comparisonType);
 
             if (strA == null || strB == null)
@@ -608,7 +614,8 @@ namespace System
             string? strB,
             int indexB,
             int length
-        ) {
+        )
+        {
             if (strA == null || strB == null)
             {
                 if (object.ReferenceEquals(strA, strB))
@@ -1300,7 +1307,8 @@ namespace System
 
         internal static CompareOptions GetCaseCompareOfComparisonCulture(
             StringComparison comparisonType
-        ) {
+        )
+        {
             Debug.Assert((uint)comparisonType <= (uint)StringComparison.OrdinalIgnoreCase);
 
             // Culture enums can be & with CompareOptions.IgnoreCase 0x01 to extract if IgnoreCase or CompareOptions.None 0x00
@@ -1321,7 +1329,8 @@ namespace System
 
         private static CompareOptions GetCompareOptionsFromOrdinalStringComparison(
             StringComparison comparisonType
-        ) {
+        )
+        {
             Debug.Assert(
                 comparisonType == StringComparison.Ordinal
                     || comparisonType == StringComparison.OrdinalIgnoreCase

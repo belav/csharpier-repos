@@ -45,7 +45,8 @@ namespace Microsoft.EntityFrameworkCore.Query.Internal
         public virtual Func<QueryContext, TResult> GetOrAddQuery<TResult>(
             object cacheKey,
             Func<Func<QueryContext, TResult>> compiler
-        ) {
+        )
+        {
             // ReSharper disable once InconsistentlySynchronizedField
             if (_memoryCache.TryGetValue(cacheKey, out Func<QueryContext, TResult> compiledQuery))
             {

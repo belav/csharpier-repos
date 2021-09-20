@@ -38,7 +38,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             Symbol container,
             MergedNamespaceDeclaration mergedDeclaration,
             BindingDiagnosticBag diagnostics
-        ) {
+        )
+        {
             Debug.Assert(mergedDeclaration != null);
             _module = module;
             _container = container;
@@ -211,7 +212,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                         MakeNameToMembersMap(diagnostics),
                         null
                     ) == null
-                ) {
+                )
+                {
                     // NOTE: the following is not cancellable.  Once we've set the
                     // members, we *must* do the following to make sure we're in a consistent state.
                     this.AddDeclarationDiagnostics(diagnostics);
@@ -247,7 +249,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
 
         private static Dictionary<string, ImmutableArray<NamedTypeSymbol>> GetTypesFromMemberMap(
             Dictionary<string, ImmutableArray<NamespaceOrTypeSymbol>> map
-        ) {
+        )
+        {
             var dictionary = new Dictionary<string, ImmutableArray<NamedTypeSymbol>>(
                 StringOrdinalComparer.Instance
             );
@@ -298,7 +301,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
 
         private Dictionary<string, ImmutableArray<NamespaceOrTypeSymbol>> MakeNameToMembersMap(
             BindingDiagnosticBag diagnostics
-        ) {
+        )
+        {
             // NOTE: Even though the resulting map stores ImmutableArray<NamespaceOrTypeSymbol> as
             // NOTE: values if the name is mapped into an array of named types, which is frequently
             // NOTE: the case, we actually create an array of NamedTypeSymbol[] and wrap it in
@@ -325,7 +329,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             NamespaceSymbol @namespace,
             Dictionary<string, ImmutableArray<NamespaceOrTypeSymbol>> result,
             BindingDiagnosticBag diagnostics
-        ) {
+        )
+        {
             var memberOfArity = new Symbol[10];
             MergedNamespaceSymbol mergedAssemblyNamespace = null;
 
@@ -355,7 +360,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                         // Check for collision with declarations from added modules.
                         foreach (
                             NamespaceSymbol constituent in mergedAssemblyNamespace.ConstituentNamespaces
-                        ) {
+                        )
+                        {
                             if ((object)constituent != (object)@namespace)
                             {
                                 // For whatever reason native compiler only detects conflicts against types.
@@ -380,7 +386,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                         if (
                             (nts as SourceNamedTypeSymbol)?.IsPartial == true
                             && (other as SourceNamedTypeSymbol)?.IsPartial == true
-                        ) {
+                        )
+                        {
                             diagnostics.Add(
                                 ErrorCode.ERR_PartialTypeKindConflict,
                                 symbol.Locations.FirstOrNone(),
@@ -407,7 +414,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                         if (
                             declaredAccessibility != Accessibility.Public
                             && declaredAccessibility != Accessibility.Internal
-                        ) {
+                        )
+                        {
                             diagnostics.Add(
                                 ErrorCode.ERR_NoNamespacePrivate,
                                 symbol.Locations.FirstOrNone()
@@ -421,7 +429,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
         private NamespaceOrTypeSymbol BuildSymbol(
             MergedNamespaceOrTypeDeclaration declaration,
             BindingDiagnosticBag diagnostics
-        ) {
+        )
+        {
             switch (declaration.Kind)
             {
                 case DeclarationKind.Namespace:
@@ -499,7 +508,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             SyntaxTree tree,
             TextSpan? definedWithinSpan,
             CancellationToken cancellationToken = default(CancellationToken)
-        ) {
+        )
+        {
             if (this.IsGlobalNamespace)
             {
                 return true;

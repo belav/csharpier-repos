@@ -17,7 +17,8 @@ namespace Microsoft.CodeAnalysis.UseConditionalExpression
         public static SyntaxRemoveOptions GetRemoveOptions(
             ISyntaxFactsService syntaxFacts,
             SyntaxNode syntax
-        ) {
+        )
+        {
             var removeOptions = SyntaxGenerator.DefaultRemoveOptions;
             if (HasRegularCommentTrivia(syntaxFacts, syntax.GetLeadingTrivia()))
             {

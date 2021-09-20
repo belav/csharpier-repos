@@ -19,7 +19,8 @@ namespace Microsoft.Extensions.DependencyModel
             IEnumerable<CompilationLibrary> compileLibraries,
             IEnumerable<RuntimeLibrary> runtimeLibraries,
             IEnumerable<RuntimeFallbacks> runtimeGraph
-        ) {
+        )
+        {
             if (target == null)
             {
                 throw new ArgumentNullException(nameof(target));

@@ -20,7 +20,8 @@ namespace System.IO.Pipelines
             MemoryPool<byte>? pool = null,
             int minimumBufferSize = -1,
             bool leaveOpen = false
-        ) {
+        )
+        {
             Pool = pool ?? MemoryPool<byte>.Shared;
 
             MinimumBufferSize =

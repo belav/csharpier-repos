@@ -469,7 +469,8 @@ namespace Microsoft.AspNetCore.Mvc.Routing
             public TestDynamicControllerEndpointSelectorCache(
                 EndpointDataSource dataSource,
                 int key
-            ) {
+            )
+            {
                 AddDataSource(dataSource, key);
             }
         }
@@ -494,7 +495,8 @@ namespace Microsoft.AspNetCore.Mvc.Routing
             public override ValueTask<RouteValueDictionary> TransformAsync(
                 HttpContext httpContext,
                 RouteValueDictionary values
-            ) {
+            )
+            {
                 return Transform(httpContext, values, State);
             }
 
@@ -502,7 +504,8 @@ namespace Microsoft.AspNetCore.Mvc.Routing
                 HttpContext httpContext,
                 RouteValueDictionary values,
                 IReadOnlyList<Endpoint> endpoints
-            ) {
+            )
+            {
                 return Filter(httpContext, values, State, endpoints);
             }
         }

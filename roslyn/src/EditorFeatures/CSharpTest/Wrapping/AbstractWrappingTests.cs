@@ -34,7 +34,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Wrapping
             string input,
             OptionsCollection options,
             params string[] outputs
-        ) {
+        )
+        {
             var parameters = new TestParameters(options: options);
             return TestAllInRegularAndScriptAsync(input, parameters, outputs);
         }

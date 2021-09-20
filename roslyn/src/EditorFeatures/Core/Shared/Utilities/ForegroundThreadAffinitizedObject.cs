@@ -23,7 +23,8 @@ namespace Microsoft.CodeAnalysis.Editor.Shared.Utilities
         public ForegroundThreadAffinitizedObject(
             IThreadingContext threadingContext,
             bool assertIsForeground = false
-        ) {
+        )
+        {
             _threadingContext =
                 threadingContext ?? throw new ArgumentNullException(nameof(threadingContext));
 
@@ -82,7 +83,8 @@ namespace Microsoft.CodeAnalysis.Editor.Shared.Utilities
         public Task InvokeBelowInputPriorityAsync(
             Action action,
             CancellationToken cancellationToken = default
-        ) {
+        )
+        {
             if (IsForeground() && !IsInputPending())
             {
                 // Optimize to inline the action if we're already on the foreground thread

@@ -140,7 +140,8 @@ namespace Castle.Components.DictionaryAdapter.Xml
             IDictionaryAdapter parentObject,
             XmlReferenceManager references,
             bool orStub
-        ) {
+        )
+        {
             if (orStub)
                 orStub &= serializer.CanGetStub;
 
@@ -157,7 +158,8 @@ namespace Castle.Components.DictionaryAdapter.Xml
             XmlReferenceManager references,
             bool nodeExists,
             bool orStub
-        ) {
+        )
+        {
             object value;
 
             if ((nodeExists || orStub) && IsReference)
@@ -183,7 +185,8 @@ namespace Castle.Components.DictionaryAdapter.Xml
             IDictionaryAdapter parentObject,
             bool nodeExists,
             bool orStub
-        ) {
+        )
+        {
             if (nodeExists)
                 if (!node.IsNil)
                     return serializer.GetValue(node, parentObject, this);
@@ -199,7 +202,8 @@ namespace Castle.Components.DictionaryAdapter.Xml
             XmlReferenceManager references,
             object oldValue,
             ref object value
-        ) {
+        )
+        {
             var cursor = IsCollection
                 ? SelectCollectionNode(parentNode, true)
                 : SelectPropertyNode(parentNode, true);
@@ -214,7 +218,8 @@ namespace Castle.Components.DictionaryAdapter.Xml
             bool hasCurrent,
             object oldValue,
             ref object newValue
-        ) {
+        )
+        {
             var hasValue = null != newValue;
             var isNillable = this.IsNillable;
             var isReference = this.IsReference;
@@ -272,7 +277,8 @@ namespace Castle.Components.DictionaryAdapter.Xml
             IDictionaryAdapter parentObject,
             XmlReferenceManager references,
             IList values
-        ) {
+        )
+        {
             var cursor = SelectCollectionItems(parentNode, false);
 
             while (cursor.MoveNext())
@@ -303,7 +309,8 @@ namespace Castle.Components.DictionaryAdapter.Xml
             IXmlNode parentNode,
             XmlReferenceManager references,
             object value
-        ) {
+        )
+        {
             var collection = value as ICollectionProjection;
             if (collection != null)
             {

@@ -80,7 +80,8 @@ namespace Microsoft.CodeAnalysis.ConvertForToForEach
                     out var stepValueExpressionOpt,
                     cancellationToken
                 )
-            ) {
+            )
+            {
                 return;
             }
 
@@ -122,7 +123,8 @@ namespace Microsoft.CodeAnalysis.ConvertForToForEach
                     is ILoopOperation operation
                 )
                 || operation.Locals.Length != 1
-            ) {
+            )
+            {
                 return;
             }
 
@@ -174,7 +176,8 @@ namespace Microsoft.CodeAnalysis.ConvertForToForEach
                     ienumeratorType,
                     out var iterationType
                 )
-            ) {
+            )
+            {
                 return;
             }
 
@@ -223,7 +226,8 @@ namespace Microsoft.CodeAnalysis.ConvertForToForEach
                         if (
                             !syntaxFacts.IsSimpleArgument(current.Parent)
                             || !syntaxFacts.IsElementAccessExpression(current.Parent.Parent.Parent)
-                        ) {
+                        )
+                        {
                             // used in something other than accessing into a collection.
                             // can't convert this for-loop.
                             return true;
@@ -292,7 +296,8 @@ namespace Microsoft.CodeAnalysis.ConvertForToForEach
             INamedTypeSymbol ienumerableType,
             INamedTypeSymbol ienumeratorType,
             out ITypeSymbol iterationType
-        ) {
+        )
+        {
             if (collectionType is IArrayTypeSymbol arrayType)
             {
                 iterationType = arrayType.ElementType;
@@ -336,7 +341,8 @@ namespace Microsoft.CodeAnalysis.ConvertForToForEach
             IMethodSymbol getEnumeratorMethod,
             INamedTypeSymbol ienumeratorType,
             out ITypeSymbol iterationType
-        ) {
+        )
+        {
             var getEnumeratorReturnType = getEnumeratorMethod.ReturnType;
 
             // Check in the class/struct hierarchy first.
@@ -375,7 +381,8 @@ namespace Microsoft.CodeAnalysis.ConvertForToForEach
             ITypeSymbol collectionType,
             ITypeSymbol iterationType,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var syntaxFacts = document.GetLanguageService<ISyntaxFactsService>();
             var semanticFacts = document.GetLanguageService<ISemanticFactsService>();
             var generator = SyntaxGenerator.GetGenerator(document);
@@ -495,7 +502,8 @@ namespace Microsoft.CodeAnalysis.ConvertForToForEach
                                         firstVariableInitializer,
                                         indexExpression
                                     )
-                                ) {
+                                )
+                                {
                                     var type = (TTypeNode)syntaxFacts.GetTypeOfVariableDeclarator(
                                         firstVariable
                                     )?.WithoutLeadingTrivia();
@@ -608,7 +616,8 @@ namespace Microsoft.CodeAnalysis.ConvertForToForEach
         private static ITypeSymbol GetIndexerType(
             INamedTypeSymbol containingType,
             ITypeSymbol collectionType
-        ) {
+        )
+        {
             if (collectionType is IArrayTypeSymbol arrayType)
             {
                 return arrayType.Rank == 1 ? arrayType.ElementType : null;

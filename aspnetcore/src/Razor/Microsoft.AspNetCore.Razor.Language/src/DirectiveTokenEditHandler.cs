@@ -17,7 +17,8 @@ namespace Microsoft.AspNetCore.Razor.Language
         protected override PartialParseResultInternal CanAcceptChange(
             SyntaxNode target,
             SourceChange change
-        ) {
+        )
+        {
             if (AcceptedCharacters == AcceptedCharactersInternal.NonWhitespace)
             {
                 var originalText = change.GetOriginalText(target);

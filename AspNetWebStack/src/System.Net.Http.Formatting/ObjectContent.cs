@@ -56,7 +56,8 @@ namespace System.Net.Http
             object value,
             MediaTypeFormatter formatter,
             MediaTypeHeaderValue mediaType
-        ) {
+        )
+        {
             if (type == null)
             {
                 throw Error.ArgumentNull("type");

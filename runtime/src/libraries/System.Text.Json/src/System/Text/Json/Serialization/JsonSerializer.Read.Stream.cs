@@ -43,7 +43,8 @@ namespace System.Text.Json
             Stream utf8Json,
             JsonSerializerOptions? options = null,
             CancellationToken cancellationToken = default
-        ) {
+        )
+        {
             if (utf8Json == null)
             {
                 throw new ArgumentNullException(nameof(utf8Json));
@@ -80,7 +81,8 @@ namespace System.Text.Json
             [DynamicallyAccessedMembers(JsonHelpers.MembersAccessedOnRead)] Type returnType,
             JsonSerializerOptions? options = null,
             CancellationToken cancellationToken = default
-        ) {
+        )
+        {
             if (utf8Json == null)
                 throw new ArgumentNullException(nameof(utf8Json));
 
@@ -108,7 +110,8 @@ namespace System.Text.Json
             Stream utf8Json,
             JsonSerializerOptions? options = null,
             CancellationToken cancellationToken = default
-        ) {
+        )
+        {
             if (utf8Json == null)
             {
                 throw new ArgumentNullException(nameof(utf8Json));
@@ -121,7 +124,8 @@ namespace System.Text.Json
                 Stream utf8Json,
                 JsonSerializerOptions options,
                 [EnumeratorCancellation] CancellationToken cancellationToken
-            ) {
+            )
+            {
                 var bufferState = new ReadAsyncBufferState(options.DefaultBufferSize);
                 ReadStack readStack = default;
                 readStack.Initialize(typeof(Queue<TValue>), options, supportContinuation: true);
@@ -167,7 +171,8 @@ namespace System.Text.Json
             Type inputType,
             JsonSerializerOptions? options,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             options ??= JsonSerializerOptions.s_defaultOptions;
             var asyncState = new ReadAsyncBufferState(options.DefaultBufferSize);
             ReadStack readStack = default;
@@ -211,7 +216,8 @@ namespace System.Text.Json
             Stream utf8Json,
             ReadAsyncBufferState bufferState,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             while (true)
             {
                 int bytesRead = await utf8Json.ReadAsync(
@@ -249,7 +255,8 @@ namespace System.Text.Json
             ref ReadStack readStack,
             JsonConverter converter,
             JsonSerializerOptions options
-        ) {
+        )
+        {
             if (bufferState.BytesInBuffer > bufferState.ClearMax)
             {
                 bufferState.ClearMax = bufferState.BytesInBuffer;
@@ -339,7 +346,8 @@ namespace System.Text.Json
             JsonSerializerOptions options,
             ref ReadStack state,
             JsonConverter converterBase
-        ) {
+        )
+        {
             var reader = new Utf8JsonReader(buffer, isFinalBlock, readerState);
 
             // If we haven't read in the entire stream's payload we'll need to signify that we want

@@ -913,7 +913,8 @@ namespace N1
             string originalCode,
             string expectedCode,
             bool expectOperation = true
-        ) {
+        )
+        {
             using var workspace = CreateWorkspaceFromOptions(originalCode, default);
             var documentToModifyId = workspace.Documents[0].Id;
             var textSpan = workspace.Documents[0].SelectedSpans[0];

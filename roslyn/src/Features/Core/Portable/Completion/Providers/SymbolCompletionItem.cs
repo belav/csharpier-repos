@@ -46,7 +46,8 @@ namespace Microsoft.CodeAnalysis.Completion.Providers
             string inlineDescription = null,
             Glyph? glyph = null,
             bool isComplexTextEdit = false
-        ) {
+        )
+        {
             var props = properties ?? ImmutableDictionary<string, string>.Empty;
 
             if (insertionText != null)
@@ -89,7 +90,8 @@ namespace Microsoft.CodeAnalysis.Completion.Providers
         public static CompletionItem AddSymbolInfo(
             IReadOnlyList<ISymbol> symbols,
             CompletionItem item
-        ) {
+        )
+        {
             var symbol = symbols[0];
             var isGeneric = symbol.GetArity() > 0;
             item = item.AddProperty("SymbolKind", ((int)symbol.Kind).ToString())
@@ -138,7 +140,8 @@ namespace Microsoft.CodeAnalysis.Completion.Providers
             CompletionItem item,
             Document document,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             if (item.Properties.TryGetValue("Symbols", out var symbolIds))
             {
                 var idList = symbolIds.Split(
@@ -180,7 +183,8 @@ namespace Microsoft.CodeAnalysis.Completion.Providers
             List<string> ids,
             Compilation compilation,
             ArrayBuilder<ISymbol> symbols
-        ) {
+        )
+        {
             for (var i = 0; i < ids.Count;)
             {
                 var id = ids[i];
@@ -204,7 +208,8 @@ namespace Microsoft.CodeAnalysis.Completion.Providers
             CompletionItem item,
             Document document,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var symbols = await GetSymbolsAsync(item, document, cancellationToken)
                 .ConfigureAwait(false);
             return await GetDescriptionForSymbolsAsync(item, document, symbols, cancellationToken)
@@ -216,7 +221,8 @@ namespace Microsoft.CodeAnalysis.Completion.Providers
             Document document,
             ImmutableArray<ISymbol> symbols,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             if (symbols.Length == 0)
                 return CompletionDescription.Empty;
 
@@ -248,12 +254,14 @@ namespace Microsoft.CodeAnalysis.Completion.Providers
         private static Document FindAppropriateDocumentForDescriptionContext(
             Document document,
             SupportedPlatformData supportedPlatforms
-        ) {
+        )
+        {
             var contextDocument = document;
             if (
                 supportedPlatforms != null
                 && supportedPlatforms.InvalidProjects.Contains(document.Id.ProjectId)
-            ) {
+            )
+            {
                 var contextId = document.GetLinkedDocumentIds()
                     .FirstOrDefault(
                         id => !supportedPlatforms.InvalidProjects.Contains(id.ProjectId)
@@ -270,7 +278,8 @@ namespace Microsoft.CodeAnalysis.Completion.Providers
         private static CompletionItem WithSupportedPlatforms(
             CompletionItem completionItem,
             SupportedPlatformData supportedPlatforms
-        ) {
+        )
+        {
             if (supportedPlatforms != null)
             {
                 return completionItem.AddProperty(
@@ -292,11 +301,13 @@ namespace Microsoft.CodeAnalysis.Completion.Providers
         public static SupportedPlatformData GetSupportedPlatforms(
             CompletionItem item,
             Workspace workspace
-        ) {
+        )
+        {
             if (
                 item.Properties.TryGetValue("InvalidProjects", out var invalidProjects)
                 && item.Properties.TryGetValue("CandidateProjects", out var candidateProjects)
-            ) {
+            )
+            {
                 return new SupportedPlatformData(
                     invalidProjects.Split(projectSeperators)
                         .Select(s => ProjectId.CreateFromSerialized(Guid.Parse(s)))
@@ -316,7 +327,8 @@ namespace Microsoft.CodeAnalysis.Completion.Providers
             if (
                 item.Properties.TryGetValue("ContextPosition", out var text)
                 && int.TryParse(text, out var number)
-            ) {
+            )
+            {
                 return number;
             }
             else
@@ -346,7 +358,8 @@ namespace Microsoft.CodeAnalysis.Completion.Providers
             ImmutableDictionary<string, string> properties = null,
             ImmutableArray<string> tags = default,
             bool isComplexTextEdit = false
-        ) {
+        )
+        {
             return CreateWithSymbolId(
                 displayText,
                 displayTextSuffix: null,
@@ -382,7 +395,8 @@ namespace Microsoft.CodeAnalysis.Completion.Providers
             ImmutableDictionary<string, string> properties = null,
             ImmutableArray<string> tags = default,
             bool isComplexTextEdit = false
-        ) {
+        )
+        {
             return CreateWorker(
                 displayText,
                 displayTextSuffix,
@@ -419,7 +433,8 @@ namespace Microsoft.CodeAnalysis.Completion.Providers
             ImmutableDictionary<string, string> properties = null,
             ImmutableArray<string> tags = default,
             bool isComplexTextEdit = false
-        ) {
+        )
+        {
             return CreateWorker(
                 displayText,
                 displayTextSuffix,
@@ -459,7 +474,8 @@ namespace Microsoft.CodeAnalysis.Completion.Providers
             Document document,
             SemanticModel semanticModel,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var workspace = document.Project.Solution.Workspace;
 
             var position = GetDescriptionPosition(item);

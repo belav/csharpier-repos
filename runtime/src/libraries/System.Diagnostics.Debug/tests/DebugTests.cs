@@ -126,7 +126,8 @@ namespace System.Diagnostics.Tests
                 string message,
                 string detailMessage,
                 string errorSource
-            ) {
+            )
+            {
                 AssertUIOutput += stackTrace + message + detailMessage + errorSource;
             }
 

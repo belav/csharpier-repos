@@ -15,12 +15,14 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.SolutionExplore
             AnalyzerItem item,
             IAnalyzersCommandHandler commandHandler,
             IDiagnosticAnalyzerService diagnosticAnalyzerService
-        ) : base(
-            item.AnalyzersFolder.Workspace,
-            item.AnalyzersFolder.ProjectId,
-            commandHandler,
-            diagnosticAnalyzerService
-        ) {
+        )
+            : base(
+                item.AnalyzersFolder.Workspace,
+                item.AnalyzersFolder.ProjectId,
+                commandHandler,
+                diagnosticAnalyzerService
+            )
+        {
             _item = item;
         }
 

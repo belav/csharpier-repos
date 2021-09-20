@@ -39,7 +39,8 @@ WHERE ('z' = '') OR (instr(""c"".""ContactName"", 'z') > 0)";
 
         public override async Task<string> FromSqlRaw_queryable_with_parameters_and_closure(
             bool async
-        ) {
+        )
+        {
             var queryString = await base.FromSqlRaw_queryable_with_parameters_and_closure(async);
 
             Assert.Equal(

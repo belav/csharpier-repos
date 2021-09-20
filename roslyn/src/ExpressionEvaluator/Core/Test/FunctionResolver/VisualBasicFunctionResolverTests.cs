@@ -328,7 +328,8 @@ namespace One.Two
             Resolver resolver,
             string str,
             params string[] expectedSignatures
-        ) {
+        )
+        {
             var signature = MemberSignatureParser.Parse(str);
             Assert.NotNull(signature);
             Resolve(process, resolver, signature, expectedSignatures);

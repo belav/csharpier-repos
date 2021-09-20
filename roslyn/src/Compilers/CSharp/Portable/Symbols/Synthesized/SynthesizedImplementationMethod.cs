@@ -31,7 +31,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             string name = null,
             bool generateDebugInfo = true,
             PropertySymbol associatedProperty = null
-        ) {
+        )
+        {
             //it does not make sense to add methods to substituted types
             Debug.Assert(implementingType.IsDefinition);
 
@@ -229,7 +230,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
 
         internal sealed override bool IsMetadataVirtual(
             bool ignoreInterfaceImplementationChanges = false
-        ) {
+        )
+        {
             return true;
         }
 
@@ -240,7 +242,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
 
         internal sealed override bool IsMetadataNewSlot(
             bool ignoreInterfaceImplementationChanges = false
-        ) {
+        )
+        {
             return true;
         }
 

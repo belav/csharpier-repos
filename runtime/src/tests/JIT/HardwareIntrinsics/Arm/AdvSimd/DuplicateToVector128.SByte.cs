@@ -113,7 +113,8 @@ namespace JIT.HardwareIntrinsics.Arm
 
             public void RunStructFldScenario(
                 DuplicateUnaryOpTest__DuplicateToVector128_SByte testClass
-            ) {
+            )
+            {
                 var result = AdvSimd.DuplicateToVector128(_fld);
                 Unsafe.Write(testClass._dataTable.outArrayPtr, result);
                 testClass.ValidateResult(_fld, testClass._dataTable.outArrayPtr);
@@ -281,7 +282,8 @@ namespace JIT.HardwareIntrinsics.Arm
             SByte data,
             SByte[] result,
             [CallerMemberName] string method = ""
-        ) {
+        )
+        {
             bool succeeded = true;
 
             if (result[0] != data)

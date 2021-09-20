@@ -158,7 +158,8 @@ expander-partial";
         public async Task RazorViewEngine_UsesViewExpandersForViewsAndPartials(
             string value,
             string expected
-        ) {
+        )
+        {
             // Arrange
             var cultureCookie = "c=" + value + "|uic=" + value;
             var request = new HttpRequestMessage(
@@ -204,7 +205,8 @@ expander-partial";
         public async Task ViewLocationExpanders_GetIsMainPageFromContext(
             string action,
             string expected
-        ) {
+        )
+        {
             // Arrange & Act
             var body = await Client.GetStringAsync($"http://localhost/ExpanderViews/{action}");
 

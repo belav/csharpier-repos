@@ -133,7 +133,8 @@ namespace Interop.FunctionalTests
                                         if (
                                             Interlocked.Increment(ref requestsReceived)
                                             == requestCount
-                                        ) {
+                                        )
+                                        {
                                             allRequestsReceived.SetResult(0);
                                         }
                                         await allRequestsReceived.Task;
@@ -198,7 +199,8 @@ namespace Interop.FunctionalTests
                                         if (
                                             Interlocked.Increment(ref requestsReceived)
                                             == requestCount
-                                        ) {
+                                        )
+                                        {
                                             allRequestsReceived.SetResult(0);
                                         }
                                         await allRequestsReceived.Task;
@@ -261,7 +263,8 @@ namespace Interop.FunctionalTests
             protected override async Task SerializeToStreamAsync(
                 Stream stream,
                 TransportContext context
-            ) {
+            )
+            {
                 for (var i = 0; i < Repetitions; i++)
                 {
                     using (var timer = new CancellationTokenSource(TimeSpan.FromSeconds(30)))
@@ -334,7 +337,8 @@ namespace Interop.FunctionalTests
                                             while (
                                                 !readResult.IsCompleted
                                                 && readResult.Buffer.Length < "Hello World".Length
-                                            ) {
+                                            )
+                                            {
                                                 reader.AdvanceTo(
                                                     readResult.Buffer.Start,
                                                     readResult.Buffer.End
@@ -415,7 +419,8 @@ namespace Interop.FunctionalTests
                                         while (
                                             !readResult.IsCompleted
                                             && readResult.Buffer.Length < "Hello World".Length
-                                        ) {
+                                        )
+                                        {
                                             reader.AdvanceTo(
                                                 readResult.Buffer.Start,
                                                 readResult.Buffer.End
@@ -440,7 +445,8 @@ namespace Interop.FunctionalTests
                                             while (
                                                 !readResult.IsCompleted
                                                 && readResult.Buffer.Length < "Hello World".Length
-                                            ) {
+                                            )
+                                            {
                                                 reader.AdvanceTo(
                                                     readResult.Buffer.Start,
                                                     readResult.Buffer.End
@@ -2091,7 +2097,8 @@ namespace Interop.FunctionalTests
             HttpMethod method,
             string url,
             HttpContent content
-        ) {
+        )
+        {
             return new HttpRequestMessage(method, url)
             {
                 Version = HttpVersion.Version20,

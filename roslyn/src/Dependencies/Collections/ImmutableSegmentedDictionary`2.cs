@@ -170,7 +170,8 @@ namespace Microsoft.CodeAnalysis.Collections
 
         public ImmutableSegmentedDictionary<TKey, TValue> AddRange(
             IEnumerable<KeyValuePair<TKey, TValue>> pairs
-        ) {
+        )
+        {
             var self = this;
 
             // Optimize the case of adding to an empty collection
@@ -178,7 +179,8 @@ namespace Microsoft.CodeAnalysis.Collections
                 self.IsEmpty
                 && TryCastToImmutableSegmentedDictionary(pairs, out var other)
                 && self.KeyComparer == other.KeyComparer
-            ) {
+            )
+            {
                 return other;
             }
 
@@ -268,7 +270,8 @@ namespace Microsoft.CodeAnalysis.Collections
 
         public ImmutableSegmentedDictionary<TKey, TValue> SetItems(
             IEnumerable<KeyValuePair<TKey, TValue>> items
-        ) {
+        )
+        {
             if (items is null)
                 throw new ArgumentNullException(nameof(items));
 
@@ -305,7 +308,8 @@ namespace Microsoft.CodeAnalysis.Collections
 
         public ImmutableSegmentedDictionary<TKey, TValue> WithComparer(
             IEqualityComparer<TKey>? keyComparer
-        ) {
+        )
+        {
             keyComparer ??= EqualityComparer<TKey>.Default;
 
             var self = this;
@@ -414,7 +418,8 @@ namespace Microsoft.CodeAnalysis.Collections
         private static bool TryCastToImmutableSegmentedDictionary(
             IEnumerable<KeyValuePair<TKey, TValue>> pairs,
             out ImmutableSegmentedDictionary<TKey, TValue> other
-        ) {
+        )
+        {
             if (pairs is ImmutableSegmentedDictionary<TKey, TValue> dictionary)
             {
                 other = dictionary;

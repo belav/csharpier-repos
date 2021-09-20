@@ -106,7 +106,8 @@ namespace Microsoft.CodeAnalysis.CSharp.MisplacedUsingDirectives
         internal static async Task<Document> TransformDocumentIfRequiredAsync(
             Document document,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var syntaxRoot = await document.GetSyntaxRootAsync(cancellationToken)
                 .ConfigureAwait(false);
             var compilationUnit = (CompilationUnitSyntax)syntaxRoot;
@@ -140,7 +141,8 @@ namespace Microsoft.CodeAnalysis.CSharp.MisplacedUsingDirectives
             CompilationUnitSyntax compilationUnit,
             AddImportPlacement placement,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var syntaxFactsService = document.GetLanguageService<ISyntaxFactsService>();
 
             // Expand usings so that they can be properly simplified after they are relocated.
@@ -187,7 +189,8 @@ namespace Microsoft.CodeAnalysis.CSharp.MisplacedUsingDirectives
             Document document,
             CompilationUnitSyntax containerNode,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             // Get all using directives so they can be expanded at one time.
             var allUsingDirectives = containerNode.DescendantNodes(
                     node => node.IsKind(SyntaxKind.CompilationUnit, SyntaxKind.NamespaceDeclaration)
@@ -215,7 +218,8 @@ namespace Microsoft.CodeAnalysis.CSharp.MisplacedUsingDirectives
             Document document,
             SyntaxNode node,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var usingDirective = (UsingDirectiveSyntax)node;
             var newName = await Simplifier.ExpandAsync(
                     usingDirective.Name,
@@ -229,7 +233,8 @@ namespace Microsoft.CodeAnalysis.CSharp.MisplacedUsingDirectives
         private static CompilationUnitSyntax MoveUsingsInsideNamespace(
             CompilationUnitSyntax compilationUnit,
             SyntaxAnnotation warningAnnotation
-        ) {
+        )
+        {
             // Get the compilation unit usings and set them up to format when moved.
             var usingsToAdd = compilationUnit.Usings.Select(
                 directive =>
@@ -265,7 +270,8 @@ namespace Microsoft.CodeAnalysis.CSharp.MisplacedUsingDirectives
         private static CompilationUnitSyntax MoveUsingsOutsideNamespaces(
             CompilationUnitSyntax compilationUnit,
             SyntaxAnnotation warningAnnotation
-        ) {
+        )
+        {
             var namespaceDeclarations =
                 compilationUnit.Members.OfType<NamespaceDeclarationSyntax>();
             var namespaceDeclarationMap = namespaceDeclarations.ToDictionary(
@@ -321,7 +327,8 @@ namespace Microsoft.CodeAnalysis.CSharp.MisplacedUsingDirectives
 
         private static (NamespaceDeclarationSyntax namespaceWithoutUsings, IEnumerable<UsingDirectiveSyntax> usingsFromNamespace) RemoveUsingsFromNamespace(
             NamespaceDeclarationSyntax usingContainer
-        ) {
+        )
+        {
             var namespaceDeclarations = usingContainer.Members.OfType<NamespaceDeclarationSyntax>();
             var namespaceDeclarationMap = namespaceDeclarations.ToDictionary(
                 namespaceDeclaration => namespaceDeclaration,
@@ -353,7 +360,8 @@ namespace Microsoft.CodeAnalysis.CSharp.MisplacedUsingDirectives
         private static (IEnumerable<UsingDirectiveSyntax> deduplicatedUsings, IEnumerable<SyntaxTrivia> orphanedTrivia) RemoveDuplicateUsings(
             IEnumerable<UsingDirectiveSyntax> existingUsings,
             ImmutableArray<UsingDirectiveSyntax> usingsToAdd
-        ) {
+        )
+        {
             var seenUsings = existingUsings.ToList();
 
             var deduplicatedUsingsBuilder = ImmutableArray.CreateBuilder<UsingDirectiveSyntax>();
@@ -367,7 +375,8 @@ namespace Microsoft.CodeAnalysis.CSharp.MisplacedUsingDirectives
                         seenUsingDirective =>
                             seenUsingDirective.IsEquivalentTo(usingDirective, topLevel: false)
                     )
-                ) {
+                )
+                {
                     // If there was trivia from the duplicate node, check if any of the trivia is necessary to keep.
                     var leadingTrivia = usingDirective.GetLeadingTrivia();
                     if (leadingTrivia.Any(trivia => !trivia.IsWhitespaceOrEndOfLine()))
@@ -432,7 +441,8 @@ namespace Microsoft.CodeAnalysis.CSharp.MisplacedUsingDirectives
 
         private static IEnumerable<IEnumerable<SyntaxTrivia>> SplitIntoLines(
             SyntaxTriviaList triviaList
-        ) {
+        )
+        {
             var index = 0;
             for (var i = 0; i < triviaList.Count; i++)
             {
@@ -466,7 +476,8 @@ namespace Microsoft.CodeAnalysis.CSharp.MisplacedUsingDirectives
             if (
                 firstMemberTrivia.Count > 0
                 && firstMemberTrivia.First().IsKind(SyntaxKind.EndOfLineTrivia)
-            ) {
+            )
+            {
                 return node;
             }
 
@@ -479,7 +490,8 @@ namespace Microsoft.CodeAnalysis.CSharp.MisplacedUsingDirectives
         private static (AddImportPlacement placement, bool preferPreservation) DeterminePlacement(
             CompilationUnitSyntax compilationUnit,
             OptionSet options
-        ) {
+        )
+        {
             var codeStyleOption = options.GetOption(
                 CSharpCodeStyleOptions.PreferredUsingDirectivePlacement
             );
@@ -526,7 +538,8 @@ namespace Microsoft.CodeAnalysis.CSharp.MisplacedUsingDirectives
         private static (CompilationUnitSyntax compilationUnitWithoutHeader, ImmutableArray<SyntaxTrivia> header) RemoveFileHeader(
             CompilationUnitSyntax syntaxRoot,
             ISyntaxFactsService syntaxFactsService
-        ) {
+        )
+        {
             var fileHeader = syntaxFactsService.GetFileBanner(syntaxRoot);
             var leadingTrivia = syntaxRoot.GetLeadingTrivia();
 
@@ -543,7 +556,8 @@ namespace Microsoft.CodeAnalysis.CSharp.MisplacedUsingDirectives
         private static CompilationUnitSyntax AddFileHeader(
             CompilationUnitSyntax compilationUnit,
             ImmutableArray<SyntaxTrivia> fileHeader
-        ) {
+        )
+        {
             if (fileHeader.IsEmpty)
             {
                 return compilationUnit;
@@ -561,10 +575,11 @@ namespace Microsoft.CodeAnalysis.CSharp.MisplacedUsingDirectives
         {
             public MoveMisplacedUsingsCodeAction(
                 Func<CancellationToken, Task<Document>> createChangedDocument
-            ) : base(
-                CSharpAnalyzersResources.Move_misplaced_using_directives,
-                createChangedDocument
-            ) { }
+            )
+                : base(
+                    CSharpAnalyzersResources.Move_misplaced_using_directives,
+                    createChangedDocument
+                ) { }
         }
     }
 }

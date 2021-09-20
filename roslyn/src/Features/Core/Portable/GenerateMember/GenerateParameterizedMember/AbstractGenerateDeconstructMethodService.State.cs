@@ -40,7 +40,8 @@ namespace Microsoft.CodeAnalysis.GenerateMember.GenerateParameterizedMember
                 SyntaxNode targetVariables,
                 INamedTypeSymbol typeToGenerateIn,
                 CancellationToken cancellationToken
-            ) {
+            )
+            {
                 var state = new State();
                 if (
                     !await state.TryInitializeMethodAsync(
@@ -51,7 +52,8 @@ namespace Microsoft.CodeAnalysis.GenerateMember.GenerateParameterizedMember
                             cancellationToken
                         )
                         .ConfigureAwait(false)
-                ) {
+                )
+                {
                     return null;
                 }
 
@@ -64,7 +66,8 @@ namespace Microsoft.CodeAnalysis.GenerateMember.GenerateParameterizedMember
                 SyntaxNode targetVariables,
                 INamedTypeSymbol typeToGenerateIn,
                 CancellationToken cancellationToken
-            ) {
+            )
+            {
                 TypeToGenerateIn = typeToGenerateIn;
                 IsStatic = false;
                 var generator = SyntaxGenerator.GetGenerator(document.Document);
@@ -111,7 +114,8 @@ namespace Microsoft.CodeAnalysis.GenerateMember.GenerateParameterizedMember
             private static ImmutableArray<IParameterSymbol> TryMakeParameters(
                 SemanticModel semanticModel,
                 SyntaxNode target
-            ) {
+            )
+            {
                 var targetType = semanticModel.GetTypeInfo(target).Type;
                 if (targetType?.IsTupleType != true)
                 {

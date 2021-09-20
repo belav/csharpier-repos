@@ -179,7 +179,8 @@ namespace System.Threading.Tasks
                 || task.IsDelegateInvoked
                 || task.IsCanceled
                 || !RuntimeHelpers.TryEnsureSufficientExecutionStack()
-            ) {
+            )
+            {
                 return false;
             }
 
@@ -444,7 +445,8 @@ namespace System.Threading.Tasks
         internal static void PublishUnobservedTaskException(
             object sender,
             UnobservedTaskExceptionEventArgs ueea
-        ) {
+        )
+        {
             UnobservedTaskException?.Invoke(sender, ueea);
         }
 

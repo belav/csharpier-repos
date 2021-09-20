@@ -21,7 +21,8 @@ namespace Microsoft.AspNetCore.Testing
         Task ITestMethodLifecycle.OnTestStartAsync(
             TestContext context,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             Context = context;
             return Task.CompletedTask;
         }
@@ -30,7 +31,8 @@ namespace Microsoft.AspNetCore.Testing
             TestContext context,
             Exception exception,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             return Task.CompletedTask;
         }
     }
@@ -51,7 +53,8 @@ namespace Microsoft.AspNetCore.Testing.Tests
         Task ITestMethodLifecycle.OnTestStartAsync(
             TestContext context,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             Context = context;
             return Task.CompletedTask;
         }
@@ -60,7 +63,8 @@ namespace Microsoft.AspNetCore.Testing.Tests
             TestContext context,
             Exception exception,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             return Task.CompletedTask;
         }
     }
@@ -82,7 +86,8 @@ namespace Microsoft.AspNetCore.Testing
         Task ITestMethodLifecycle.OnTestStartAsync(
             TestContext context,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             Context = context;
             return Task.CompletedTask;
         }
@@ -91,7 +96,8 @@ namespace Microsoft.AspNetCore.Testing
             TestContext context,
             Exception exception,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             return Task.CompletedTask;
         }
     }

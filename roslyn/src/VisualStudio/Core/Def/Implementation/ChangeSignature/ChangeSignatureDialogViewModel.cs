@@ -54,7 +54,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.ChangeSignature
             int positionForTypeBinding,
             IClassificationFormatMap classificationFormatMap,
             ClassificationTypeMap classificationTypeMap
-        ) {
+        )
+        {
             _originalParameterConfiguration = parameters;
             _document = document;
             _positionForTypeBinding = positionForTypeBinding;
@@ -110,7 +111,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.ChangeSignature
                     parameters.ParametersWithoutDefaultValues.Length
                         + parameters.RemainingEditableParameters.Length
                     > 0
-                ) {
+                )
+                {
                     this.SelectedIndex = 1;
                 }
                 else
@@ -168,7 +170,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.ChangeSignature
         private List<ParameterViewModel> CreateParameterViewModels(
             ImmutableArray<Parameter> parameters,
             ref int initialIndex
-        ) {
+        )
+        {
             var list = new List<ParameterViewModel>();
             foreach (ExistingParameter existingParameter in parameters)
             {
@@ -467,7 +470,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.ChangeSignature
                     || index
                         >= _parametersWithoutDefaultValues.Count
                             + _parametersWithDefaultValues.Count
-                ) {
+                )
+                {
                     return false;
                 }
 
@@ -493,7 +497,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.ChangeSignature
                         >= _parametersWithoutDefaultValues.Count
                             + _parametersWithDefaultValues.Count
                             - 1
-                ) {
+                )
+                {
                     return false;
                 }
 

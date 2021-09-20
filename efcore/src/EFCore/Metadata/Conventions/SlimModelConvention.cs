@@ -245,8 +245,9 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
             TSource source,
             TTarget target,
             Action<SlimModelConvention, Dictionary<string, object?>, TSource, TTarget, bool> process
-        ) where TSource : IAnnotatable
-          where TTarget : AnnotatableBase
+        )
+            where TSource : IAnnotatable
+            where TTarget : AnnotatableBase
         {
             var annotations = source.GetAnnotations().ToDictionary(a => a.Name, a => a.Value);
             process(this, annotations, source, target, false);
@@ -269,7 +270,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
             IModel model,
             SlimModel slimModel,
             bool runtime
-        ) {
+        )
+        {
             if (runtime)
             {
                 annotations.Remove(CoreAnnotationNames.ModelDependencies);
@@ -348,7 +350,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
             IEntityType entityType,
             SlimEntityType slimEntityType,
             bool runtime
-        ) {
+        )
+        {
             if (!runtime)
             {
                 annotations.Remove(CoreAnnotationNames.PropertyAccessMode);
@@ -369,7 +372,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
                         CoreAnnotationNames.DefiningQuery,
                         out var definingQuery
                     )
-                ) {
+                )
+                {
                     annotations[CoreAnnotationNames.DefiningQuery] =
                         new QueryRootRewritingExpressionVisitor(slimEntityType.Model).Rewrite(
                             (Expression)definingQuery!
@@ -415,7 +419,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
             IProperty property,
             SlimProperty slimProperty,
             bool runtime
-        ) {
+        )
+        {
             if (!runtime)
             {
                 annotations.Remove(CoreAnnotationNames.PropertyAccessMode);
@@ -454,7 +459,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
             IServiceProperty property,
             SlimServiceProperty slimProperty,
             bool runtime
-        ) {
+        )
+        {
             if (!runtime)
             {
                 annotations.Remove(CoreAnnotationNames.PropertyAccessMode);
@@ -560,7 +566,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
             INavigation navigation,
             SlimNavigation slimNavigation,
             bool runtime
-        ) {
+        )
+        {
             if (!runtime)
             {
                 annotations.Remove(CoreAnnotationNames.PropertyAccessMode);
@@ -644,7 +651,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
             ISkipNavigation skipNavigation,
             SlimSkipNavigation slimSkipNavigation,
             bool runtime
-        ) {
+        )
+        {
             if (!runtime)
             {
                 annotations.Remove(CoreAnnotationNames.PropertyAccessMode);

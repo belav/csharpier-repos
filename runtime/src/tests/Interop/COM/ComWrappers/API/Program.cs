@@ -20,7 +20,8 @@ namespace ComWrappersTests
                 object obj,
                 CreateComInterfaceFlags flags,
                 out int count
-            ) {
+            )
+            {
                 IntPtr fpQueryInteface = default;
                 IntPtr fpAddRef = default;
                 IntPtr fpRelease = default;
@@ -398,7 +399,8 @@ namespace ComWrappersTests
                 object obj,
                 CreateComInterfaceFlags flags,
                 out int count
-            ) {
+            )
+            {
                 switch (ComputeVtablesMode)
                 {
                     case FailureMode.ReturnInvalid:
@@ -417,7 +419,8 @@ namespace ComWrappersTests
             protected override object CreateObject(
                 IntPtr externalComObject,
                 CreateObjectFlags flags
-            ) {
+            )
+            {
                 switch (CreateObjectMode)
                 {
                     case FailureMode.ReturnInvalid:
@@ -548,7 +551,8 @@ namespace ComWrappersTests
             public static WeakReference<Derived> AllocateAndUseBaseType(
                 ComWrappers cw,
                 bool aggregateRefTracker
-            ) {
+            )
+            {
                 var derived = new Derived(cw, aggregateRefTracker);
 
                 // Use the base type

@@ -129,7 +129,8 @@ namespace JIT.HardwareIntrinsics.Arm
                     (alignment != 16 && alignment != 8)
                     || (alignment * 2) < sizeOfinArray1
                     || (alignment * 2) < sizeOfoutArray
-                ) {
+                )
+                {
                     throw new ArgumentException("Invalid value of alignment");
                 }
 
@@ -196,7 +197,8 @@ namespace JIT.HardwareIntrinsics.Arm
 
             public void RunStructFldScenario_Load(
                 SimpleUnaryOpTest__AbsScalar_Vector64_Double testClass
-            ) {
+            )
+            {
                 fixed (Vector64<Double>* pFld1 = &_fld1)
                 {
                     var result = AdvSimd.AbsScalar(AdvSimd.LoadVector64((Double*)(pFld1)));
@@ -471,7 +473,8 @@ namespace JIT.HardwareIntrinsics.Arm
             Vector64<Double> op1,
             void* result,
             [CallerMemberName] string method = ""
-        ) {
+        )
+        {
             Double[] inArray1 = new Double[Op1ElementCount];
             Double[] outArray = new Double[RetElementCount];
 
@@ -508,13 +511,15 @@ namespace JIT.HardwareIntrinsics.Arm
             Double[] firstOp,
             Double[] result,
             [CallerMemberName] string method = ""
-        ) {
+        )
+        {
             bool succeeded = true;
 
             if (
                 BitConverter.DoubleToInt64Bits(Helpers.Abs(firstOp[0]))
                 != BitConverter.DoubleToInt64Bits(result[0])
-            ) {
+            )
+            {
                 succeeded = false;
             }
             else

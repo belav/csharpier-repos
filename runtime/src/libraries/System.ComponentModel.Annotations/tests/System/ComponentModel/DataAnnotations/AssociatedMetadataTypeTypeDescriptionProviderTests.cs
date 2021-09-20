@@ -245,7 +245,8 @@ namespace System.ComponentModel.DataAnnotations.Tests
         public void GetTypeDescriptorGetProperties_WithAssociatedMetadataType_ReturnsExpected(
             Type associatedMetadataType,
             string expectedLastName
-        ) {
+        )
+        {
             // Perform multiple times to test static caching behaviour.
             for (int i = 0; i < 2; i++)
             {

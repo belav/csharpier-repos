@@ -498,7 +498,8 @@ namespace System.Runtime.Loader.Tests
             string alc,
             string assemblyName,
             string culture
-        ) {
+        )
+        {
             AssemblyName satelliteAssemblyName = new AssemblyName(assemblyName + ".resources");
             satelliteAssemblyName.CultureInfo = new CultureInfo(culture);
 
@@ -530,7 +531,8 @@ namespace System.Runtime.Loader.Tests
             string alc,
             string assemblyName,
             string culture
-        ) {
+        )
+        {
             string satelliteAssemblyName = assemblyName + ".resources.dll";
 
             AssemblyLoadContext assemblyLoadContext = contexts[alc];

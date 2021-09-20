@@ -31,7 +31,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Interactive
             ITextBufferFactoryService textBufferFactoryService,
             ITextEditorFactoryService textEditorFactoryService,
             IContentTypeRegistryService contentTypeRegistry
-        ) {
+        )
+        {
             _textBufferFactoryService = textBufferFactoryService;
             _textEditorFactoryService = textEditorFactoryService;
             _contentTypeRegistry = contentTypeRegistry;
@@ -41,7 +42,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Interactive
             IInteractiveWindow window,
             ITextBuffer buffer,
             ITextViewRoleSet roles
-        ) {
+        )
+        {
             WpfTestRunner.RequireWpfFact(
                 $"Creates an {nameof(IWpfTextView)} in {nameof(TestInteractiveWindowEditorFactoryService)}"
             );
@@ -52,13 +54,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Interactive
 
         ITextBuffer IInteractiveWindowEditorFactoryService.CreateAndActivateBuffer(
             IInteractiveWindow window
-        ) {
+        )
+        {
             if (
                 !window.Properties.TryGetProperty(
                     typeof(IContentType),
                     out IContentType contentType
                 )
-            ) {
+            )
+            {
                 contentType = _contentTypeRegistry.GetContentType(ContentType);
             }
 

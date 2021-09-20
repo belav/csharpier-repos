@@ -25,7 +25,8 @@ namespace Microsoft.EntityFrameworkCore
                 var context = new NeweyContext(
                     nameof(Materialization_uses_parameterless_constructor)
                 )
-            ) {
+            )
+            {
                 context.Add(new March82GGtp());
                 context.SaveChanges();
             }
@@ -34,7 +35,8 @@ namespace Microsoft.EntityFrameworkCore
                 var context = new NeweyContext(
                     nameof(Materialization_uses_parameterless_constructor)
                 )
-            ) {
+            )
+            {
                 Assert.Same(
                     typeof(March82GGtp),
                     context.Set<March82GGtp>().Single().GetType().BaseType
@@ -49,7 +51,8 @@ namespace Microsoft.EntityFrameworkCore
                 var context = new NeweyContext(
                     nameof(Materialization_uses_parameterized_constructor)
                 )
-            ) {
+            )
+            {
                 context.Add(new March881(77, "Leyton House"));
                 context.SaveChanges();
             }
@@ -58,7 +61,8 @@ namespace Microsoft.EntityFrameworkCore
                 var context = new NeweyContext(
                     nameof(Materialization_uses_parameterized_constructor)
                 )
-            ) {
+            )
+            {
                 var proxy = context.Set<March881>().Single();
 
                 Assert.Same(typeof(March881), proxy.GetType().BaseType);
@@ -74,7 +78,8 @@ namespace Microsoft.EntityFrameworkCore
                 var context = new NeweyContext(
                     nameof(Materialization_uses_parameterized_constructor_taking_context)
                 )
-            ) {
+            )
+            {
                 context.Add(new WilliamsFw14(context, 6, "Canon"));
                 context.SaveChanges();
             }
@@ -83,7 +88,8 @@ namespace Microsoft.EntityFrameworkCore
                 var context = new NeweyContext(
                     nameof(Materialization_uses_parameterized_constructor_taking_context)
                 )
-            ) {
+            )
+            {
                 var proxy = context.Set<WilliamsFw14>().Single();
 
                 Assert.Same(typeof(WilliamsFw14), proxy.GetType().BaseType);
@@ -189,14 +195,16 @@ namespace Microsoft.EntityFrameworkCore
         {
             using (
                 var context = new NeweyContext(nameof(Proxies_only_created_if_Use_called), false)
-            ) {
+            )
+            {
                 context.Add(new March82GGtp());
                 context.SaveChanges();
             }
 
             using (
                 var context = new NeweyContext(nameof(Proxies_only_created_if_Use_called), false)
-            ) {
+            )
+            {
                 Assert.Same(typeof(March82GGtp), context.Set<March82GGtp>().Single().GetType());
             }
 
@@ -214,7 +222,8 @@ namespace Microsoft.EntityFrameworkCore
                     false,
                     true
                 )
-            ) {
+            )
+            {
                 Assert.Same(
                     typeof(March82GGtp),
                     context.Set<March82GGtp>().Single().GetType().BaseType
@@ -227,7 +236,8 @@ namespace Microsoft.EntityFrameworkCore
                     true,
                     true
                 )
-            ) {
+            )
+            {
                 Assert.Same(
                     typeof(March82GGtp),
                     context.Set<March82GGtp>().Single().GetType().BaseType
@@ -247,7 +257,8 @@ namespace Microsoft.EntityFrameworkCore
                     nameof(Proxy_services_must_be_available),
                     false
                 )
-            ) {
+            )
+            {
                 context.Add(new March82GGtp());
                 context.SaveChanges();
             }
@@ -258,7 +269,8 @@ namespace Microsoft.EntityFrameworkCore
                     nameof(Proxy_services_must_be_available),
                     false
                 )
-            ) {
+            )
+            {
                 Assert.Same(typeof(March82GGtp), context.Set<March82GGtp>().Single().GetType());
             }
 
@@ -275,7 +287,8 @@ namespace Microsoft.EntityFrameworkCore
                     withoutProxies,
                     nameof(Proxy_services_must_be_available)
                 )
-            ) {
+            )
+            {
                 Assert.Equal(
                     ProxiesStrings.ProxyServicesMissing,
                     Assert.Throws<InvalidOperationException>(() => context.Model).Message
@@ -455,7 +468,8 @@ namespace Microsoft.EntityFrameworkCore
                 string dbName = null,
                 bool useLazyLoading = true,
                 bool useChangeDetection = false
-            ) {
+            )
+            {
                 _internalServiceProvider =
                     new ServiceCollection().AddEntityFrameworkInMemoryDatabase()
                         .AddEntityFrameworkProxies()

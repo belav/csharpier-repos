@@ -15,7 +15,8 @@ namespace Microsoft.CodeAnalysis.CSharp
         private BoundExpression BindInterpolatedString(
             InterpolatedStringExpressionSyntax node,
             BindingDiagnosticBag diagnostics
-        ) {
+        )
+        {
             var builder = ArrayBuilder<BoundExpression>.GetInstance();
             var stringType = GetSpecialType(SpecialType.System_String, diagnostics, node);
             ConstantValue? resultConstant = null;
@@ -117,7 +118,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                                 else if (
                                     SyntaxFacts.IsWhitespace(lastChar = text[text.Length - 1])
                                     || SyntaxFacts.IsNewLine(lastChar)
-                                ) {
+                                )
+                                {
                                     diagnostics.Add(
                                         ErrorCode.ERR_TrailingWhitespaceInFormatSpecifier,
                                         interpolation.FormatClause.Location
@@ -141,7 +143,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                                 || value.ConstantValue == null
                                 || !(interpolation is { FormatClause: null, AlignmentClause: null })
                                 || !(value.ConstantValue is { IsString: true, IsBad: false })
-                            ) {
+                            )
+                            {
                                 isResultConstant = false;
                                 continue;
                             }

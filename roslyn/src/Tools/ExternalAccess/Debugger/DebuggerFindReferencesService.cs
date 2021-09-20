@@ -27,7 +27,8 @@ namespace Microsoft.CodeAnalysis.ExternalAccess.Debugger
         public DebuggerFindReferencesService(
             IThreadingContext threadingContext,
             Lazy<IStreamingFindUsagesPresenter> streamingPresenter
-        ) {
+        )
+        {
             _streamingPresenter = streamingPresenter;
         }
 
@@ -35,7 +36,8 @@ namespace Microsoft.CodeAnalysis.ExternalAccess.Debugger
             ISymbol symbol,
             Project project,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var streamingPresenter = _streamingPresenter.Value;
 
             // Let the presenter know we're starting a search.  It will give us back

@@ -237,7 +237,8 @@ namespace System.Data.OleDb
             OleDbDataReader? dataReader,
             int indexStart,
             int indexForAccessor
-        ) {
+        )
+        {
             Debug.Assert(null == _rowBinding, "row binding already allocated");
             Debug.Assert(null == _columnBindings, "column bindings already allocated");
 
@@ -331,7 +332,8 @@ namespace System.Data.OleDb
                     (collection.ChangeID == _collectionChangeID)
                     && (_parameters.Length == collection.Count)
                 )
-            ) {
+            )
+            {
                 for (int i = 0; i < columnBindings.Length; ++i)
                 {
                     ColumnBinding binding = columnBindings[i];

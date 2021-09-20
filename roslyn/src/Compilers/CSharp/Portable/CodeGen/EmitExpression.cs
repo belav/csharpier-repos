@@ -49,7 +49,8 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeGen
                 if (
                     (object)expression.Type == null
                     || expression.Type.SpecialType != SpecialType.System_Decimal
-                ) {
+                )
+                {
                     EmitConstantExpression(expression.Type, constantValue, used, expression.Syntax);
                     return;
                 }
@@ -381,7 +382,8 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeGen
         private void EmitComplexConditionalReceiver(
             BoundComplexConditionalReceiver expression,
             bool used
-        ) {
+        )
+        {
             Debug.Assert(!expression.Type.IsReferenceType);
             Debug.Assert(!expression.Type.IsValueType);
 
@@ -407,7 +409,8 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeGen
         private void EmitLoweredConditionalAccessExpression(
             BoundLoweredConditionalAccess expression,
             bool used
-        ) {
+        )
+        {
             var receiver = expression.Receiver;
 
             var receiverType = receiver.Type;
@@ -731,7 +734,8 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeGen
         private void EmitPointerIndirectionOperator(
             BoundPointerIndirectionOperator expression,
             bool used
-        ) {
+        )
+        {
             EmitExpression(expression.Operand, used: true);
             EmitLoadIndirect(expression.Type, expression.Syntax);
             EmitPopIfUnused(used);
@@ -760,7 +764,8 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeGen
         private void EmitDelegateCreationExpression(
             BoundDelegateCreationExpression expression,
             bool used
-        ) {
+        )
+        {
             var mg = expression.Argument as BoundMethodGroup;
             var receiver = mg != null ? mg.ReceiverOpt : expression.Argument;
             var meth = expression.MethodOpt ?? receiver.Type.DelegateInvokeMethod();
@@ -919,7 +924,8 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeGen
             ImmutableArray<BoundExpression> arguments,
             ImmutableArray<ParameterSymbol> parameters,
             ImmutableArray<RefKind> argRefKindsOpt
-        ) {
+        )
+        {
             // We might have an extra argument for the __arglist() of a varargs method.
             Debug.Assert(
                 arguments.Length == parameters.Length || arguments.Length == parameters.Length + 1,
@@ -950,7 +956,8 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeGen
             ImmutableArray<ParameterSymbol> parameters,
             ImmutableArray<RefKind> argRefKindsOpt,
             int i
-        ) {
+        )
+        {
             RefKind argRefKind;
             if (i < parameters.Length)
             {
@@ -1102,7 +1109,8 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeGen
                     !field.IsVolatile
                     && !field.IsStatic
                     && fieldAccess.ReceiverOpt.Type.IsVerifierValue()
-                ) {
+                )
+                {
                     EmitExpression(fieldAccess.ReceiverOpt, used: false);
                     return;
                 }
@@ -1239,7 +1247,8 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeGen
             if (
                 receiver.Kind == BoundKind.Conversion
                 && ((BoundConversion)receiver).ConversionKind == ConversionKind.Unboxing
-            ) {
+            )
+            {
                 return true;
             }
 
@@ -1630,7 +1639,8 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeGen
                     if (
                         receiver.SuppressVirtualCalls
                         || (!method.IsMetadataVirtual() && CanUseCallOnRefTypeReceiver(receiver))
-                    ) {
+                    )
+                    {
                         callKind = CallKind.Call;
                     }
                     else
@@ -1728,7 +1738,8 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeGen
             if (
                 callKind == CallKind.ConstrainedCallVirt
                 && actualMethodTargetedByTheCall.ContainingType.IsValueType
-            ) {
+            )
+            {
                 // special case for overridden methods like ToString(...) called on
                 // value types: if the original method used in emit cannot use callvirt in this
                 // case, change it to Call.
@@ -1749,7 +1760,8 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeGen
                     && actualMethodTargetedByTheCall.ContainingType.IsSealed
                     && (object)actualMethodTargetedByTheCall.ContainingModule
                         == (object)_method.ContainingModule
-                ) {
+                )
+                {
                     // special case for target is in a sealed class and "this" receiver.
                     Debug.Assert(receiver.Type.IsVerifierReference());
                     callKind = CallKind.Call;
@@ -1761,7 +1773,8 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeGen
                 else if (
                     actualMethodTargetedByTheCall.IsMetadataFinal
                     && CanUseCallOnRefTypeReceiver(receiver)
-                ) {
+                )
+                {
                     // special case for calling 'final' virtual method on reference receiver
                     Debug.Assert(receiver.Type.IsVerifierReference());
                     callKind = CallKind.Call;
@@ -1829,7 +1842,8 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeGen
                         == this._module.Compilation.GetSpecialTypeMember(
                             SpecialMember.System_Nullable_T_get_HasValue
                         )
-                ) {
+                )
+                {
                     return true;
                 }
             }
@@ -1871,7 +1885,8 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeGen
         private static int GetCallStackBehavior(
             MethodSymbol method,
             ImmutableArray<BoundExpression> arguments
-        ) {
+        )
+        {
             int stack = 0;
 
             if (!method.ReturnsVoid)
@@ -2041,7 +2056,8 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeGen
         private void EmitConvertedStackAllocExpression(
             BoundConvertedStackAllocExpression expression,
             bool used
-        ) {
+        )
+        {
             EmitExpression(expression.Count, used);
 
             // the only sideeffect of a localloc is a nondeterministic and generally fatal StackOverflow.
@@ -2073,7 +2089,8 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeGen
         private void EmitObjectCreationExpression(
             BoundObjectCreationExpression expression,
             bool used
-        ) {
+        )
+        {
             MethodSymbol constructor = expression.Constructor;
             if (constructor.IsDefaultValueTypeConstructor())
             {
@@ -2097,7 +2114,8 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeGen
                 if (
                     this._module.Compilation.IsReadOnlySpanType(expression.Type)
                     && expression.Arguments.Length == 1
-                ) {
+                )
+                {
                     if (
                         TryEmitReadonlySpanAsBlobWrapper(
                             (NamedTypeSymbol)expression.Type,
@@ -2105,7 +2123,8 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeGen
                             used,
                             inPlace: false
                         )
-                    ) {
+                    )
+                    {
                         return;
                     }
                 }
@@ -2144,7 +2163,8 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeGen
             if (
                 originalDef
                 == compilation.GetSpecialTypeMember(SpecialMember.System_Nullable_T__ctor)
-            ) {
+            )
+            {
                 return true;
             }
 
@@ -2184,7 +2204,8 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeGen
                             WellKnownMember.System_ValueTuple_T1__ctor
                         )
                 )
-            ) {
+            )
+            {
                 return true;
             }
 
@@ -2194,7 +2215,8 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeGen
         private void EmitAssignmentExpression(
             BoundAssignmentOperator assignmentOperator,
             UseKind useKind
-        ) {
+        )
+        {
             if (TryEmitAssignmentInPlace(assignmentOperator, useKind != UseKind.Unused))
             {
                 return;
@@ -2302,7 +2324,8 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeGen
                         right.ConstantValue != null
                         && rightType.SpecialType != SpecialType.System_Decimal
                     )
-                ) {
+                )
+                {
                     return false;
                 }
             }
@@ -2321,7 +2344,8 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeGen
                 if (
                     objCreation.Arguments.Length > 0
                     && objCreation.Arguments[0].Kind == BoundKind.ConvertedStackAllocExpression
-                ) {
+                )
+                {
                     return false;
                 }
 
@@ -2338,7 +2362,8 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeGen
                             ctor.Parameters,
                             p => p.RefKind == RefKind.None
                         ) && !ctor.IsVararg
-                    ) {
+                    )
+                    {
                         InPlaceCtorCall(left, objCreation, used);
                         return true;
                     }
@@ -2361,7 +2386,8 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeGen
                 left.Kind == BoundKind.ArrayAccess
                 && left.Type.TypeKind == TypeKind.TypeParameter
                 && !left.Type.IsValueType
-            ) {
+            )
+            {
                 return false;
             }
 
@@ -2371,7 +2397,8 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeGen
                 if (
                     fieldAccess.FieldSymbol.IsVolatile
                     || DiagnosticsPass.IsNonAgileFieldAccess(fieldAccess, _module.Compilation)
-                ) {
+                )
+                {
                     return false;
                 }
             }
@@ -2401,7 +2428,8 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeGen
             BoundExpression target,
             BoundObjectCreationExpression objCreation,
             bool used
-        ) {
+        )
+        {
             Debug.Assert(
                 TargetIsNotOnHeap(target),
                 "in-place construction target should not be on heap"
@@ -2414,7 +2442,8 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeGen
             if (
                 this._module.Compilation.IsReadOnlySpanType(objCreation.Type)
                 && objCreation.Arguments.Length == 1
-            ) {
+            )
+            {
                 if (
                     TryEmitReadonlySpanAsBlobWrapper(
                         (NamedTypeSymbol)objCreation.Type,
@@ -2422,7 +2451,8 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeGen
                         used,
                         inPlace: true
                     )
-                ) {
+                )
+                {
                     if (used)
                     {
                         EmitExpression(target, used: true);
@@ -2534,7 +2564,8 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeGen
                         if (
                             left.ParameterSymbol.RefKind != RefKind.None
                             && !assignmentOperator.IsRef
-                        ) {
+                        )
+                        {
                             _builder.EmitLoadArgumentOpcode(ParameterSlot(left));
                             lhsUsesStack = true;
                         }
@@ -2762,7 +2793,8 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeGen
                 if (
                     lhs.Kind == BoundKind.Local
                     && ((BoundLocal)lhs).LocalSymbol.SynthesizedKind.IsLongLived()
-                ) {
+                )
+                {
                     // This situation is extremely rare. We are assigning a ref to a local with unknown lifetime
                     // while computing that ref required expression temps.
                     //
@@ -2781,7 +2813,8 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeGen
             BoundAssignmentOperator assignmentOperator,
             UseKind useKind,
             bool lhsUsesStack
-        ) {
+        )
+        {
             LocalDefinition temp = null;
             if (useKind != UseKind.Unused)
             {
@@ -2945,7 +2978,8 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeGen
             BoundAssignmentOperator assignment,
             LocalDefinition temp,
             UseKind useKind
-        ) {
+        )
+        {
             if (temp != null)
             {
                 if (useKind == UseKind.UsedAsAddress)
@@ -3218,7 +3252,8 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeGen
                 if (
                     type.IsPointerOrFunctionPointer()
                     || type.SpecialType == SpecialType.System_UIntPtr
-                ) {
+                )
+                {
                     // default(whatever*) and default(UIntPtr) can be emitted as:
                     _builder.EmitOpCode(ILOpCode.Ldc_i4_0);
                     _builder.EmitOpCode(ILOpCode.Conv_u);
@@ -3254,7 +3289,8 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeGen
             ConstantValue constantValue,
             bool used,
             SyntaxNode syntaxNode
-        ) {
+        )
+        {
             if (used) // unused constant has no side-effects
             {
                 // Null type parameter values must be emitted as 'initobj' rather than 'ldnull'.
@@ -3262,7 +3298,8 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeGen
                     ((object)type != null)
                     && (type.TypeKind == TypeKind.TypeParameter)
                     && constantValue.IsNull
-                ) {
+                )
+                {
                     EmitInitObj(type, used, syntaxNode);
                 }
                 else
@@ -3424,7 +3461,8 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeGen
                     getMethod.ReturnType,
                     TypeCompareKind.ConsiderEverything2
                 )
-            ) {
+            )
+            {
                 _builder.EmitOpCode(ILOpCode.Castclass);
                 EmitSymbolToken(node.Type, node.Syntax);
             }
@@ -3456,7 +3494,8 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeGen
                     getField.ReturnType,
                     TypeCompareKind.ConsiderEverything2
                 )
-            ) {
+            )
+            {
                 _builder.EmitOpCode(ILOpCode.Castclass);
                 EmitSymbolToken(node.Type, node.Syntax);
             }
@@ -3522,7 +3561,8 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeGen
                         mergeTypeOfAlternative,
                         TypeCompareKind.ConsiderEverything2
                     )
-                ) {
+                )
+                {
                     EmitStaticCast(expr.Type, expr.Syntax);
                 }
             }
@@ -3552,7 +3592,8 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeGen
                         mergeTypeOfConsequence,
                         TypeCompareKind.ConsiderEverything2
                     )
-                ) {
+                )
+                {
                     EmitStaticCast(expr.Type, expr.Syntax);
                 }
             }
@@ -3598,7 +3639,8 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeGen
                         mergeTypeOfLeftValue,
                         TypeCompareKind.ConsiderEverything2
                     )
-                ) {
+                )
+                {
                     EmitStaticCast(expr.Type, expr.Syntax);
                 }
 
@@ -3674,7 +3716,8 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeGen
                         && conversionKind != ConversionKind.MethodGroup
                         && conversionKind != ConversionKind.NullLiteral
                         && conversionKind != ConversionKind.DefaultLiteral
-                    ) {
+                    )
+                    {
                         return StackMergeType(conversion.Operand);
                     }
                     break;

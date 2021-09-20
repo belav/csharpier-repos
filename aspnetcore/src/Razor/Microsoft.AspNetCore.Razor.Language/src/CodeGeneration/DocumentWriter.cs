@@ -12,7 +12,8 @@ namespace Microsoft.AspNetCore.Razor.Language.CodeGeneration
         public static DocumentWriter CreateDefault(
             CodeTarget codeTarget,
             RazorCodeGenerationOptions options
-        ) {
+        )
+        {
             if (codeTarget == null)
             {
                 throw new ArgumentNullException(nameof(codeTarget));

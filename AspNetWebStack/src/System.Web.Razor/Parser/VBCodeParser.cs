@@ -82,7 +82,8 @@ namespace System.Web.Razor.Parser
         protected override bool IsAtEmbeddedTransition(
             bool allowTemplatesAndComments,
             bool allowTransitions
-        ) {
+        )
+        {
             return (
                     allowTransitions
                     && Language.IsTransition(CurrentSymbol)
@@ -206,7 +207,8 @@ namespace System.Web.Razor.Parser
                             !isComplete
                             && Span.Symbols.Count == 0
                             && Context.LastAcceptedCharacters != AcceptedCharacters.Any
-                        ) {
+                        )
+                        {
                             AddMarkerSymbolIfNecessary();
                         }
                         Output(SpanKind.Code);
@@ -291,7 +293,8 @@ namespace System.Web.Razor.Parser
                         VBSymbolType.RightParenthesis,
                         start
                     )
-                ) {
+                )
+                {
                     Context.OnError(
                         start,
                         RazorResources.ParseError_Expected_EndOfBlock_Before_EOF,

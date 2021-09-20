@@ -32,7 +32,8 @@ namespace Microsoft.CodeAnalysis.UseSystemHashCode
                 Analyzer analyzer,
                 IMethodSymbol method,
                 ILocalSymbol? hashCodeVariable
-            ) {
+            )
+            {
                 _analyzer = analyzer;
                 _method = method;
                 _hashCodeVariable = hashCodeVariable;
@@ -93,7 +94,8 @@ namespace Microsoft.CodeAnalysis.UseSystemHashCode
                                 targetMethod.ContainingType.OriginalDefinition
                             )
                             && invocation.Arguments.Length == 1
-                        ) {
+                        )
+                        {
                             // EqualityComparer<T>.Default.GetHashCode(i)
                             //
                             // VS codegen only.
@@ -114,7 +116,8 @@ namespace Microsoft.CodeAnalysis.UseSystemHashCode
                             conditional.Condition is IBinaryOperation binary
                             && Unwrap(binary.RightOperand).IsNullLiteral()
                             && TryGetFieldOrProperty(binary.LeftOperand, out _)
-                        ) {
+                        )
+                        {
                             if (binary.OperatorKind == BinaryOperatorKind.Equals)
                             {
                                 // (StringProperty == null ? 0 : StringProperty.GetHashCode())
@@ -142,7 +145,8 @@ namespace Microsoft.CodeAnalysis.UseSystemHashCode
                         && instanceReference.ReferenceKind
                             == InstanceReferenceKind.ContainingTypeInstance
                         && Equals(_method.ContainingType.BaseType, instanceReference.Type)
-                    ) {
+                    )
+                    {
                         if (_accessesBase)
                         {
                             // already had a reference to base.GetHashCode();
@@ -168,7 +172,8 @@ namespace Microsoft.CodeAnalysis.UseSystemHashCode
                             fieldOrProp.ContainingType.OriginalDefinition,
                             _method.ContainingType
                         )
-                    ) {
+                    )
+                    {
                         return TryAddSymbol(fieldOrProp);
                     }
 
@@ -193,7 +198,8 @@ namespace Microsoft.CodeAnalysis.UseSystemHashCode
             private static bool TryGetFieldOrProperty(
                 IOperation operation,
                 [NotNullWhen(true)] out ISymbol? symbol
-            ) {
+            )
+            {
                 operation = Unwrap(operation);
 
                 if (operation is IFieldReferenceOperation fieldReference)

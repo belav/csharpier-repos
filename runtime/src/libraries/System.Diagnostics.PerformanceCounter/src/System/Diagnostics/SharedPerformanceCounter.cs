@@ -60,7 +60,8 @@ namespace System.Diagnostics
                                 false,
                                 pid
                             )
-                        ) {
+                        )
+                        {
                             if (!procHandle.IsInvalid)
                             {
                                 long temp;
@@ -98,18 +99,17 @@ namespace System.Diagnostics
         private readonly int _categoryNameHashCode;
         private int _thisInstanceOffset = -1;
 
-        internal SharedPerformanceCounter(
-            string catName,
-            string counterName,
-            string instanceName
-        ) : this(catName, counterName, instanceName, PerformanceCounterInstanceLifetime.Global) { }
+        internal SharedPerformanceCounter(string catName, string counterName, string instanceName)
+            : this(catName, counterName, instanceName, PerformanceCounterInstanceLifetime.Global)
+        { }
 
         internal unsafe SharedPerformanceCounter(
             string catName,
             string counterName,
             string instanceName,
             PerformanceCounterInstanceLifetime lifetime
-        ) {
+        )
+        {
             _categoryName = catName;
             _categoryNameHashCode = GetWstrHashCode(_categoryName);
 
@@ -221,7 +221,8 @@ namespace System.Diagnostics
             int oldOffset,
             int totalSize,
             out int alignmentAdjustment
-        ) {
+        )
+        {
             int currentTotalSize = totalSize;
 
             Thread.MemoryBarrier();
@@ -241,7 +242,8 @@ namespace System.Diagnostics
             int instanceNameHashCode,
             string instanceName,
             PerformanceCounterInstanceLifetime lifetime
-        ) {
+        )
+        {
             int categoryNameLength;
             int instanceNameLength;
             int alignmentAdjustment;
@@ -393,7 +395,8 @@ namespace System.Diagnostics
             int instanceNameHashCode,
             string instanceName,
             PerformanceCounterInstanceLifetime lifetime
-        ) {
+        )
+        {
             int instanceNameLength;
             int totalSize =
                 s_instanceEntrySize + (s_counterEntrySize * _categoryData.CounterNames.Count);
@@ -556,7 +559,8 @@ namespace System.Diagnostics
             CounterEntry* lastCounterPointer,
             int counterNameHashCode,
             string counterName
-        ) {
+        )
+        {
             int counterNameLength = (counterName.Length + 1) * 2;
             int totalSize = sizeof(CounterEntry) + counterNameLength;
             int alignmentAdjustment;
@@ -594,7 +598,8 @@ namespace System.Diagnostics
         private static unsafe void PopulateLifetimeEntry(
             ProcessLifetimeEntry* lifetimeEntry,
             PerformanceCounterInstanceLifetime lifetime
-        ) {
+        )
+        {
             if (lifetime == PerformanceCounterInstanceLifetime.Process)
             {
                 lifetimeEntry->LifetimeType = (int)PerformanceCounterInstanceLifetime.Process;
@@ -753,7 +758,8 @@ namespace System.Diagnostics
                                         (PerformanceCounterCategoryOptions)options
                                         & PerformanceCounterCategoryOptions.UseUniqueSharedMemory
                                     ) != 0
-                                ) {
+                                )
+                                {
                                     data.UseUniqueSharedMemory = true;
                                     _initialOffset = 8;
                                     data.FileMappingName = DefaultFileMappingName + _categoryName;
@@ -795,7 +801,8 @@ namespace System.Diagnostics
                                             counterNamesBytes[i] == 0
                                             && counterNamesBytes[i + 1] == 0
                                             && start != i
-                                        ) {
+                                        )
+                                        {
                                             string counter = new string(
                                                 (sbyte*)counterNamesPtr,
                                                 start,
@@ -866,7 +873,8 @@ namespace System.Diagnostics
             string instanceName,
             bool enableReuse,
             PerformanceCounterInstanceLifetime lifetime
-        ) {
+        )
+        {
             int counterNameHashCode = GetWstrHashCode(counterName);
             int instanceNameHashCode;
             if (instanceName != null && instanceName.Length != 0)
@@ -947,7 +955,8 @@ namespace System.Diagnostics
                         lifetime,
                         out foundFreeInstance
                     )
-                ) {
+                )
+                {
                     InstanceEntry* lockInstancePointer = instancePointer;
 
                     // don't bother locking again if we're using a separate shared memory.
@@ -1037,7 +1046,8 @@ namespace System.Diagnostics
                             instancePointer,
                             &counterPointer
                         )
-                    ) {
+                    )
+                    {
                         bool sectionEntered;
                         WaitAndEnterCriticalSection(
                             &(counterPointer->SpinLock),
@@ -1147,7 +1157,8 @@ namespace System.Diagnostics
             string counterName,
             InstanceEntry* instancePointer,
             CounterEntry** returnCounterPointerReference
-        ) {
+        )
+        {
             CounterEntry* currentCounterPointer = (CounterEntry*)(
                 ResolveOffset(instancePointer->FirstCounterOffset, s_counterEntrySize)
             );
@@ -1184,7 +1195,8 @@ namespace System.Diagnostics
             bool activateUnusedInstances,
             PerformanceCounterInstanceLifetime lifetime,
             out bool foundFreeInstance
-        ) {
+        )
+        {
             InstanceEntry* currentInstancePointer = (InstanceEntry*)(
                 ResolveOffset(categoryPointer->FirstInstanceOffset, s_instanceEntrySize)
             );
@@ -1305,7 +1317,8 @@ namespace System.Diagnostics
                                     if (
                                         (lifetimeEntry->StartupTime != -1)
                                         && (ProcessData.StartupTime != -1)
-                                    ) {
+                                    )
+                                    {
                                         if (ProcessData.StartupTime != lifetimeEntry->StartupTime)
                                             throw new InvalidOperationException(
                                                 SR.Format(SR.InstanceAlreadyExists, instanceName)
@@ -1388,7 +1401,8 @@ namespace System.Diagnostics
             InstanceEntry** returnInstancePointerReference,
             PerformanceCounterInstanceLifetime lifetime,
             InstanceEntry* lockInstancePointer
-        ) {
+        )
+        {
             // 2nd pass find a free instance slot
             InstanceEntry* currentInstancePointer = (InstanceEntry*)(
                 ResolveOffset(categoryPointer->FirstInstanceOffset, s_instanceEntrySize)
@@ -1634,7 +1648,8 @@ namespace System.Diagnostics
                                 (ProcessData.StartupTime != -1)
                                 && (startTime != -1)
                                 && (ProcessData.StartupTime != startTime)
-                            ) {
+                            )
+                            {
                                 // Process id got recycled.  Reclaim this instance.
                                 currentInstancePointer->RefCount = 0;
                                 return;
@@ -1649,12 +1664,14 @@ namespace System.Diagnostics
                                     false,
                                     pid
                                 )
-                            ) {
+                            )
+                            {
                                 int error = Marshal.GetLastWin32Error();
                                 if (
                                     (error == Interop.Errors.ERROR_INVALID_PARAMETER)
                                     && procHandle.IsInvalid
-                                ) {
+                                )
+                                {
                                     // The process is dead.  Reclaim this instance.  Note that we only clear the refcount here.
                                     // If we tried to clear the pid and startup time as well, we would have a race where
                                     // we could clear the pid/startup time but not the refcount.
@@ -1676,7 +1693,8 @@ namespace System.Diagnostics
                                             out temp,
                                             out temp
                                         )
-                                    ) {
+                                    )
+                                    {
                                         if (processStartTime != startTime)
                                         {
                                             // The process is dead but a new one is using the same pid.  Reclaim this instance.
@@ -1695,13 +1713,15 @@ namespace System.Diagnostics
                                     false,
                                     pid
                                 )
-                            ) {
+                            )
+                            {
                                 if (!procHandle.IsInvalid)
                                 {
                                     using (
                                         Interop.Kernel32.ProcessWaitHandle wh =
                                             new Interop.Kernel32.ProcessWaitHandle(procHandle)
-                                    ) {
+                                    )
+                                    {
                                         if (wh.WaitOne(0, false))
                                         {
                                             // Process has exited
@@ -1792,7 +1812,8 @@ namespace System.Diagnostics
         internal unsafe void RemoveInstance(
             string instanceName,
             PerformanceCounterInstanceLifetime instanceLifetime
-        ) {
+        )
+        {
             if (instanceName == null || instanceName.Length == 0)
                 return;
 
@@ -1841,7 +1862,8 @@ namespace System.Diagnostics
                                         && lifetimeEntry->LifetimeType
                                             == (int)PerformanceCounterInstanceLifetime.Process
                                         && lifetimeEntry->ProcessId != 0
-                                    ) {
+                                    )
+                                    {
                                         validatedCachedInstancePointer &= (
                                             instanceLifetime
                                             == PerformanceCounterInstanceLifetime.Process
@@ -2081,7 +2103,8 @@ namespace System.Diagnostics
                 string fileMappingName,
                 int fileMappingSize,
                 int initialOffset
-            ) {
+            )
+            {
                 string mappingName = fileMappingName;
 
                 SafeLocalAllocHandle securityDescriptorPointer = null;
@@ -2140,7 +2163,8 @@ namespace System.Diagnostics
                         if (
                             (Marshal.GetLastWin32Error() != Interop.Errors.ERROR_ACCESS_DENIED)
                             || !_fileMappingHandle.IsInvalid
-                        ) {
+                        )
+                        {
                             created = true;
                         }
                         else
@@ -2156,7 +2180,8 @@ namespace System.Diagnostics
                             if (
                                 (Marshal.GetLastWin32Error() != Interop.Errors.ERROR_FILE_NOT_FOUND)
                                 || !_fileMappingHandle.IsInvalid
-                            ) {
+                            )
+                            {
                                 created = true;
                             }
                             else

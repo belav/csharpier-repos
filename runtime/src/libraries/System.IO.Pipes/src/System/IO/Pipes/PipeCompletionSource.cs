@@ -187,7 +187,8 @@ namespace System.IO.Pipes
                     if (
                         cancellationToken.CanBeCanceled
                         && !cancellationToken.IsCancellationRequested
-                    ) {
+                    )
+                    {
                         HandleUnexpectedCancellation();
                     }
                     else

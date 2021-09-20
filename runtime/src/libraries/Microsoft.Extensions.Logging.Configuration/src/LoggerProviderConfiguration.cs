@@ -9,7 +9,8 @@ namespace Microsoft.Extensions.Logging.Configuration
     {
         public LoggerProviderConfiguration(
             ILoggerProviderConfigurationFactory providerConfigurationFactory
-        ) {
+        )
+        {
             Configuration = providerConfigurationFactory.GetConfiguration(typeof(T));
         }
 

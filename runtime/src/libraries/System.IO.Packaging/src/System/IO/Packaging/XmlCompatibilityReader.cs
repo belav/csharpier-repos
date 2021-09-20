@@ -90,10 +90,8 @@ namespace System.IO.Packaging
         }
 
 #if !PBTCOMPILER
-        public XmlCompatibilityReader(
-            XmlReader baseReader,
-            IEnumerable<string> supportedNamespaces
-        ) : this(baseReader, null, supportedNamespaces) { }
+        public XmlCompatibilityReader(XmlReader baseReader, IEnumerable<string> supportedNamespaces)
+            : this(baseReader, null, supportedNamespaces) { }
 #endif
         #endregion Construction
 
@@ -899,7 +897,8 @@ namespace System.IO.Packaging
         private IEnumerable<NamespaceElementPair> ParseContentToNamespaceElementPair(
             string content,
             string? callerContext
-        ) {
+        )
+        {
             foreach (string pair in content.Trim().Split(' '))
             {
                 // check each non-null, non-empty space-delineated namespace/element pair
@@ -912,7 +911,8 @@ namespace System.IO.Packaging
                         colonIndex <= 0
                         || colonIndex >= length - 1
                         || colonIndex != pair.LastIndexOf(':')
-                    ) {
+                    )
+                    {
                         // if string does not have a ':', if the last character in the string is a ':'
                         // or if the string contains more than one ':', throw an exception
                         Error(SR.XCRInvalidFormat, callerContext);
@@ -1386,7 +1386,8 @@ namespace System.IO.Packaging
                     Reader.Value,
                     _processContent
                 )
-            ) {
+            )
+            {
                 Scope.ProcessContent(pair.namespaceName, pair.itemName);
             }
         }
@@ -1405,7 +1406,8 @@ namespace System.IO.Packaging
                     Reader.Value,
                     _preserveElements
                 )
-            ) {
+            )
+            {
                 Scope.PreserveElement(pair.namespaceName, pair.itemName);
             }
         }
@@ -1424,7 +1426,8 @@ namespace System.IO.Packaging
                     Reader.Value,
                     _preserveAttributes
                 )
-            ) {
+            )
+            {
                 Scope.PreserveAttribute(pair.namespaceName, pair.itemName);
             }
         }
@@ -1608,7 +1611,8 @@ namespace System.IO.Packaging
                 CompatibilityScope? previous,
                 int depth,
                 XmlCompatibilityReader reader
-            ) {
+            )
+            {
                 _previous = previous;
                 _depth = depth;
                 _reader = reader;
@@ -1754,7 +1758,8 @@ namespace System.IO.Packaging
                 ProcessContentSet? set;
                 if (
                     _processContents != null && _processContents.TryGetValue(namespaceName, out set)
-                ) {
+                )
+                {
                     result = set.ShouldProcessContent(elementName);
                 }
                 else if (_previous != null)

@@ -41,7 +41,8 @@ namespace Roslyn.Test.Utilities.Desktop
             MetadataReferenceProperties properties = default(MetadataReferenceProperties),
             DocumentationProvider documentation = null,
             string filePath = null
-        ) {
+        )
+        {
             if (image == null)
             {
                 throw new ArgumentNullException(nameof(image));
@@ -89,7 +90,8 @@ namespace Roslyn.Test.Utilities.Desktop
             string moduleName,
             ImmutableArray<byte> rawAssembly,
             bool reflectionOnly = false
-        ) {
+        )
+        {
             Debug.Assert(!rawAssembly.IsDefault);
 
             byte[] bytes = rawAssembly.ToArray();

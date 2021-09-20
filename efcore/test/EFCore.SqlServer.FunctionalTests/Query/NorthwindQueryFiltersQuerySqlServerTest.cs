@@ -177,7 +177,8 @@ WHERE [t].[CustomerID] IS NOT NULL AND [t].[CompanyName] IS NOT NULL"
 
         public override async Task Project_reference_that_itself_has_query_filter_with_another_reference(
             bool async
-        ) {
+        )
+        {
             await base.Project_reference_that_itself_has_query_filter_with_another_reference(async);
 
             AssertSql(

@@ -12,7 +12,8 @@ namespace Microsoft.AspNetCore.SignalR.Common.Tests.Internal.Protocol
         public static HubMessage AddHeaders(
             IDictionary<string, string> headers,
             HubInvocationMessage hubMessage
-        ) {
+        )
+        {
             foreach (var header in headers)
             {
                 if (hubMessage.Headers == null)

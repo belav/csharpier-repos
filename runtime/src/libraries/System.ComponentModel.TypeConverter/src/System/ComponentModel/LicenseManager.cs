@@ -118,7 +118,8 @@ namespace System.ComponentModel
             [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicConstructors)]
                 Type type,
             LicenseContext creationContext
-        ) {
+        )
+        {
             return CreateWithContext(type, creationContext, Array.Empty<object>());
         }
 
@@ -133,7 +134,8 @@ namespace System.ComponentModel
                 Type type,
             LicenseContext creationContext,
             object[] args
-        ) {
+        )
+        {
             object created = null;
 
             lock (s_internalSyncObject)
@@ -266,7 +268,8 @@ namespace System.ComponentModel
             object instance,
             bool allowExceptions,
             out License license
-        ) {
+        )
+        {
             return ValidateInternalRecursive(
                 CurrentContext,
                 type,
@@ -289,7 +292,8 @@ namespace System.ComponentModel
             bool allowExceptions,
             out License license,
             out string licenseKey
-        ) {
+        )
+        {
             LicenseProvider provider = GetCachedProvider(type);
             if (provider == null && !GetCachedNoLicenseProvider(type))
             {

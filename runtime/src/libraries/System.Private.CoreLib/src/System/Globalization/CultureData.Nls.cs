@@ -42,7 +42,8 @@ namespace System.Globalization
             uint lcType,
             char* lpLCData,
             int cchData
-        ) {
+        )
+        {
             Debug.Assert(!GlobalizationMode.Invariant);
 
             return Interop.Kernel32.GetLocaleInfoEx(lpLocaleName, lcType, lpLCData, cchData);
@@ -183,7 +184,8 @@ namespace System.Globalization
                 CultureInfo.DefaultThreadCurrentUICulture != null
                 && ((ci = CultureInfo.GetUserDefaultCulture()) != null)
                 && !CultureInfo.DefaultThreadCurrentUICulture.Name.Equals(ci.Name)
-            ) {
+            )
+            {
                 return NativeName;
             }
             else
@@ -212,7 +214,8 @@ namespace System.Globalization
             string localeName,
             uint lctype,
             bool useUserOverride
-        ) {
+        )
+        {
             Debug.Assert(
                 localeName != null,
                 "[CultureData.GetLocaleInfoFromLCType] Expected localeName to be not be null"
@@ -392,7 +395,8 @@ namespace System.Globalization
             char* lpLocaleString,
             uint flags,
             void* contextHandle
-        ) {
+        )
+        {
             ref EnumLocaleData context = ref Unsafe.As<byte, EnumLocaleData>(
                 ref *(byte*)contextHandle
             );
@@ -406,7 +410,8 @@ namespace System.Globalization
                 if (
                     regionName != null
                     && regionName.Equals(context.regionName, StringComparison.OrdinalIgnoreCase)
-                ) {
+                )
+                {
                     context.cultureName = cultureName;
                     return Interop.BOOL.FALSE; // we found a match, then stop the enumeration
                 }
@@ -425,7 +430,8 @@ namespace System.Globalization
             char* lpLocaleString,
             uint flags,
             void* contextHandle
-        ) {
+        )
+        {
             ref EnumData context = ref Unsafe.As<byte, EnumData>(ref *(byte*)contextHandle);
             try
             {
@@ -464,7 +470,8 @@ namespace System.Globalization
             string localeName,
             uint dwFlags,
             bool useUserOverride
-        ) {
+        )
+        {
             EnumData data = default;
             data.strings = new List<string>();
 
@@ -548,7 +555,8 @@ namespace System.Globalization
                         | CultureTypes.ReplacementCultures
                     )
                 ) != 0
-            ) {
+            )
+            {
                 flags |= Interop.Kernel32.LOCALE_NEUTRALDATA | Interop.Kernel32.LOCALE_SPECIFICDATA;
             }
 #pragma warning restore 618

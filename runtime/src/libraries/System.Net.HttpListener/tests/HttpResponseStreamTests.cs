@@ -314,7 +314,8 @@ namespace System.Net.Tests
         public async Task Write_InvalidOffsetSize_ThrowsArgumentOutOfRangeException(
             int offset,
             int size
-        ) {
+        )
+        {
             using (HttpListenerResponse response = await _helper.GetResponse())
             using (Stream outputStream = response.OutputStream)
             {
@@ -418,7 +419,8 @@ namespace System.Net.Tests
         [InlineData(false)]
         public async Task Write_HeadersToClosedConnectionAsynchronously_ThrowsHttpListenerException(
             bool ignoreWriteExceptions
-        ) {
+        )
+        {
             const string Text = "Some-String";
             byte[] buffer = Encoding.UTF8.GetBytes(Text);
 
@@ -459,7 +461,8 @@ namespace System.Net.Tests
         [InlineData(false)]
         public async Task Write_HeadersToClosedConnectionSynchronously_ThrowsHttpListenerException(
             bool ignoreWriteExceptions
-        ) {
+        )
+        {
             const string Text = "Some-String";
             byte[] buffer = Encoding.UTF8.GetBytes(Text);
 
@@ -508,7 +511,8 @@ namespace System.Net.Tests
         [ActiveIssue("https://github.com/dotnet/runtime/issues/21590", TestPlatforms.OSX)]
         public async Task Write_ContentToClosedConnectionAsynchronously_ThrowsHttpListenerException(
             bool ignoreWriteExceptions
-        ) {
+        )
+        {
             const string Text = "Some-String";
             byte[] buffer = Encoding.UTF8.GetBytes(Text);
 
@@ -557,7 +561,8 @@ namespace System.Net.Tests
         [ActiveIssue("https://github.com/dotnet/runtime/issues/21590", TestPlatforms.OSX)]
         public async Task Write_ContentToClosedConnectionSynchronously_ThrowsHttpListenerException(
             bool ignoreWriteExceptions
-        ) {
+        )
+        {
             const string Text = "Some-String";
             byte[] buffer = Encoding.UTF8.GetBytes(Text);
 
@@ -598,7 +603,8 @@ namespace System.Net.Tests
         [InlineData(false)]
         public async Task EndWrite_NullAsyncResult_ThrowsArgumentNullException(
             bool ignoreWriteExceptions
-        ) {
+        )
+        {
             _listener.IgnoreWriteExceptions = ignoreWriteExceptions;
             using (HttpListenerResponse response = await _helper.GetResponse())
             using (Stream outputStream = response.OutputStream)

@@ -22,7 +22,8 @@ namespace Microsoft.CodeAnalysis.UnitTests
             bool unificationApplied = false,
             bool? fusionUnificationApplied = null,
             string policyPath = null
-        ) {
+        )
+        {
             if (fusionMatch == null)
             {
                 fusionMatch = match;
@@ -33,7 +34,8 @@ namespace Microsoft.CodeAnalysis.UnitTests
                     policyPath != null
                         ? FusionAssemblyPortabilityPolicy.LoadFromFile(policyPath)
                         : null
-            ) {
+            )
+            {
                 var comparer = DesktopAssemblyIdentityComparer.Default;
 
                 var policy = default(AssemblyPortabilityPolicy);
@@ -45,7 +47,8 @@ namespace Microsoft.CodeAnalysis.UnitTests
                             FileMode.Open,
                             FileAccess.Read
                         )
-                    ) {
+                    )
+                    {
                         policy = AssemblyPortabilityPolicy.LoadFromXml(policyStream);
                         comparer = new DesktopAssemblyIdentityComparer(policy);
                     }

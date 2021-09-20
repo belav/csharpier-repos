@@ -33,7 +33,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.NavigateTo
                     document.Project.Solution.Workspace
                     is VisualStudioWorkspaceImpl visualStudioWorkspace
                 )
-            ) {
+            )
+            {
                 return false;
             }
 

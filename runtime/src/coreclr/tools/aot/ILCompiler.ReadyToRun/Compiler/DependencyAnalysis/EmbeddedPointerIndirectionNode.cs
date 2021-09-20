@@ -34,7 +34,8 @@ namespace ILCompiler.DependencyAnalysis
             ref ObjectDataBuilder dataBuilder,
             NodeFactory factory,
             bool relocsOnly
-        ) {
+        )
+        {
             dataBuilder.RequireInitialPointerAlignment();
             dataBuilder.EmitPointerReloc(Target);
         }

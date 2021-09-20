@@ -143,7 +143,8 @@ namespace System.Tests
                     (new Version(1, 2, 3, 4), new Version(1, 2, 3, 5), -1),
                     (new Version(1, 2, 3, 4), new Version(1, 2, 3, 3), 1)
                 }
-            ) {
+            )
+            {
                 yield return new object[] { input.v1, input.v2, input.expectedSign };
                 yield return new object[] { input.v2, input.v1, input.expectedSign * -1 };
             }
@@ -169,7 +170,8 @@ namespace System.Tests
             Version version1,
             Version version2,
             int expectedSign
-        ) {
+        )
+        {
             if (expectedSign < 0)
             {
                 Assert.True(version1 < version2);
@@ -333,7 +335,8 @@ namespace System.Tests
             int offset,
             int count,
             Version expected
-        ) {
+        )
+        {
             if (input == null)
             {
                 return;
@@ -400,7 +403,8 @@ namespace System.Tests
             int minor,
             int build,
             int revision
-        ) {
+        )
+        {
             Assert.Equal(major, version.Major);
             Assert.Equal(minor, version.Minor);
             Assert.Equal(build, version.Build);

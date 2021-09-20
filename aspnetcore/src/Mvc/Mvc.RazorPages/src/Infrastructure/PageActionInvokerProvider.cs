@@ -41,7 +41,8 @@ namespace Microsoft.AspNetCore.Mvc.RazorPages.Infrastructure
             ILoggerFactory loggerFactory,
             IActionResultTypeMapper mapper,
             IActionContextAccessor actionContextAccessor = null
-        ) {
+        )
+        {
             _pageLoader = pageLoader;
             _pageActionInvokerCache = pageActionInvokerCache;
             _valueProviderFactories = mvcOptions.Value.ValueProviderFactories.ToArray();

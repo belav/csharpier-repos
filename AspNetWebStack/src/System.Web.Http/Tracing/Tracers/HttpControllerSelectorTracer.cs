@@ -26,7 +26,8 @@ namespace System.Web.Http.Tracing.Tracers
         public HttpControllerSelectorTracer(
             IHttpControllerSelector innerSelector,
             ITraceWriter traceWriter
-        ) {
+        )
+        {
             Contract.Assert(innerSelector != null);
             Contract.Assert(traceWriter != null);
 
@@ -41,7 +42,8 @@ namespace System.Web.Http.Tracing.Tracers
 
         HttpControllerDescriptor IHttpControllerSelector.SelectController(
             HttpRequestMessage request
-        ) {
+        )
+        {
             HttpControllerDescriptor controllerDescriptor = null;
 
             _traceWriter.TraceBeginEnd(
@@ -74,7 +76,8 @@ namespace System.Web.Http.Tracing.Tracers
             if (
                 controllerDescriptor != null
                 && !(controllerDescriptor is HttpControllerDescriptorTracer)
-            ) {
+            )
+            {
                 return new HttpControllerDescriptorTracer(controllerDescriptor, _traceWriter);
             }
 

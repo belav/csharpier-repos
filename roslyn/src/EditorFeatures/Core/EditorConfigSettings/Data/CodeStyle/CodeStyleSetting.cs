@@ -55,7 +55,8 @@ namespace Microsoft.CodeAnalysis.Editor.EditorConfigSettings.Data
             OptionUpdater updater,
             string? trueValueDescription = null,
             string? falseValueDescription = null
-        ) {
+        )
+        {
             return new BooleanCodeStyleSetting(
                 option,
                 description,
@@ -75,7 +76,8 @@ namespace Microsoft.CodeAnalysis.Editor.EditorConfigSettings.Data
             OptionUpdater updater,
             string? trueValueDescription = null,
             string? falseValueDescription = null
-        ) {
+        )
+        {
             return new PerLanguageBooleanCodeStyleSetting(
                 option,
                 description,

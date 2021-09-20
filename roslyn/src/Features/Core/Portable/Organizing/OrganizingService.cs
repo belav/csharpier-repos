@@ -23,7 +23,8 @@ namespace Microsoft.CodeAnalysis.Organizing
             Document document,
             IEnumerable<ISyntaxOrganizer> organizers = null,
             CancellationToken cancellationToken = default
-        ) {
+        )
+        {
             var service = document.GetLanguageService<IOrganizingService>();
             return service.OrganizeAsync(document, organizers, cancellationToken);
         }

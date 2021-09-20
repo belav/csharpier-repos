@@ -28,10 +28,8 @@ namespace Castle.Core.Configuration
         public ConfigurationAttributeCollection() { }
 
 #if FEATURE_SERIALIZATION
-        protected ConfigurationAttributeCollection(
-            SerializationInfo info,
-            StreamingContext context
-        ) : base(info, context) { }
+        protected ConfigurationAttributeCollection(SerializationInfo info, StreamingContext context)
+            : base(info, context) { }
 #endif
     }
 }

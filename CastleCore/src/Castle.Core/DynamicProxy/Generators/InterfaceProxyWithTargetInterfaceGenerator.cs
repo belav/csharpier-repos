@@ -41,7 +41,8 @@ namespace Castle.DynamicProxy.Generators
         protected override CompositeTypeContributor GetProxyTargetContributor(
             Type proxyTargetType,
             INamingScope namingScope
-        ) {
+        )
+        {
             return new InterfaceProxyWithTargetInterfaceTargetContributor(
                 proxyTargetType,
                 AllowChangeTarget,
@@ -68,7 +69,8 @@ namespace Castle.DynamicProxy.Generators
 
         protected override InterfaceProxyWithoutTargetContributor GetContributorForAdditionalInterfaces(
             INamingScope namingScope
-        ) {
+        )
+        {
             return new InterfaceProxyWithOptionalTargetContributor(
                 namingScope,
                 GetTargetExpression,

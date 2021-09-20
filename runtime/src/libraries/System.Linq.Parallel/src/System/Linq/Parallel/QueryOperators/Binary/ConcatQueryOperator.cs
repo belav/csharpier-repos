@@ -56,7 +56,8 @@ namespace System.Linq.Parallel
             if (
                 (LeftChild.OrdinalIndexState == OrdinalIndexState.Indexable)
                 && (RightChild.OrdinalIndexState == OrdinalIndexState.Indexable)
-            ) {
+            )
+            {
                 SetOrdinalIndex(OrdinalIndexState.Indexable);
             }
             else
@@ -99,7 +100,8 @@ namespace System.Linq.Parallel
             IPartitionedStreamRecipient<TSource> outputRecipient,
             bool preferStriping,
             QuerySettings settings
-        ) {
+        )
+        {
             // Prematurely merge the left results, if necessary
             if (_prematureMergeLeft)
             {
@@ -144,7 +146,8 @@ namespace System.Linq.Parallel
             IPartitionedStreamRecipient<TSource> outputRecipient,
             QuerySettings settings,
             bool preferStriping
-        ) {
+        )
+        {
             // Prematurely merge the right results, if necessary
             if (_prematureMergeRight)
             {
@@ -175,7 +178,8 @@ namespace System.Linq.Parallel
             PartitionedStream<TSource, TLeftKey> leftStreamInc,
             PartitionedStream<TSource, TRightKey> rightStreamInc,
             IPartitionedStreamRecipient<TSource> outputRecipient
-        ) {
+        )
+        {
             int partitionCount = leftStreamInc.PartitionCount;
 
             // Generate the shared data.
@@ -237,7 +241,8 @@ namespace System.Linq.Parallel
             internal ConcatQueryOperatorEnumerator(
                 QueryOperatorEnumerator<TSource, TLeftKey> firstSource,
                 QueryOperatorEnumerator<TSource, TRightKey> secondSource
-            ) {
+            )
+            {
                 Debug.Assert(firstSource != null);
                 Debug.Assert(secondSource != null);
 
@@ -256,7 +261,8 @@ namespace System.Linq.Parallel
             internal override bool MoveNext(
                 [MaybeNullWhen(false), AllowNull] ref TSource currentElement,
                 ref ConcatKey<TLeftKey, TRightKey> currentKey
-            ) {
+            )
+            {
                 Debug.Assert(_firstSource != null);
                 Debug.Assert(_secondSource != null);
 
@@ -307,7 +313,8 @@ namespace System.Linq.Parallel
                 ConcatQueryOperator<TSource> op,
                 QuerySettings settings,
                 bool preferStriping
-            ) {
+            )
+            {
                 if (leftChildQueryResults.IsIndexible && rightChildQueryResults.IsIndexible)
                 {
                     return new ConcatQueryOperatorResults(
@@ -336,13 +343,15 @@ namespace System.Linq.Parallel
                 ConcatQueryOperator<TSource> concatOp,
                 QuerySettings settings,
                 bool preferStriping
-            ) : base(
-                leftChildQueryResults,
-                rightChildQueryResults,
-                concatOp,
-                settings,
-                preferStriping
-            ) {
+            )
+                : base(
+                    leftChildQueryResults,
+                    rightChildQueryResults,
+                    concatOp,
+                    settings,
+                    preferStriping
+                )
+            {
                 Debug.Assert(
                     leftChildQueryResults.IsIndexible && rightChildQueryResults.IsIndexible
                 );
@@ -411,7 +420,8 @@ namespace System.Linq.Parallel
         internal static IComparer<ConcatKey<TLeftKey, TRightKey>> MakeComparer(
             IComparer<TLeftKey> leftComparer,
             IComparer<TRightKey> rightComparer
-        ) {
+        )
+        {
             return new ConcatKeyComparer(leftComparer, rightComparer);
         }
 
@@ -429,7 +439,8 @@ namespace System.Linq.Parallel
             internal ConcatKeyComparer(
                 IComparer<TLeftKey> leftComparer,
                 IComparer<TRightKey> rightComparer
-            ) {
+            )
+            {
                 _leftComparer = leftComparer;
                 _rightComparer = rightComparer;
             }

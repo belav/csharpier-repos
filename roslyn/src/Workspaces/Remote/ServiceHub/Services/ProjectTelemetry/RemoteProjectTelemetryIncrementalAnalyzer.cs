@@ -24,7 +24,8 @@ namespace Microsoft.CodeAnalysis.Remote
         public RemoteProjectTelemetryIncrementalAnalyzer(
             RemoteCallback<IRemoteProjectTelemetryService.ICallback> callback,
             RemoteServiceCallbackId callbackId
-        ) {
+        )
+        {
             _callback = callback;
             _callbackId = callbackId;
         }
@@ -41,7 +42,8 @@ namespace Microsoft.CodeAnalysis.Remote
             bool semanticsChanged,
             InvocationReasons reasons,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             if (!semanticsChanged)
                 return;
 
@@ -68,7 +70,8 @@ namespace Microsoft.CodeAnalysis.Remote
                 if (
                     _projectToData.TryGetValue(projectId, out var existingInfo)
                     && existingInfo.Equals(info)
-                ) {
+                )
+                {
                     // already have reported this.  No need to notify VS.
                     return;
                 }
@@ -91,7 +94,8 @@ namespace Microsoft.CodeAnalysis.Remote
         public override Task RemoveProjectAsync(
             ProjectId projectId,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             lock (_gate)
             {
                 _projectToData.Remove(projectId);

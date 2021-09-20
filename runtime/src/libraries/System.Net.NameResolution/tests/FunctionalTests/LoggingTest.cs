@@ -48,7 +48,8 @@ namespace System.Net.NameResolution.Tests
                     "Private.InternalDiagnostics.System.Net.NameResolution",
                     EventLevel.Error
                 )
-            ) {
+            )
+            {
                 var events = new ConcurrentQueue<EventWrittenEventArgs>();
 
                 listener.RunWithCallback(
@@ -90,7 +91,8 @@ namespace System.Net.NameResolution.Tests
                     "Private.InternalDiagnostics.System.Net.NameResolution",
                     EventLevel.Error
                 )
-            ) {
+            )
+            {
                 var events = new ConcurrentQueue<EventWrittenEventArgs>();
 
                 await listener.RunWithCallbackAsync(
@@ -153,7 +155,8 @@ namespace System.Net.NameResolution.Tests
                     "Private.InternalDiagnostics.System.Net.NameResolution",
                     EventLevel.Verbose
                 )
-            ) {
+            )
+            {
                 var events = new ConcurrentQueue<EventWrittenEventArgs>();
 
                 listener.RunWithCallback(

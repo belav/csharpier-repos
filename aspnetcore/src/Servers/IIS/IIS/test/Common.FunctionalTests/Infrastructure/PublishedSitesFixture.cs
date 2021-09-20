@@ -30,7 +30,8 @@ namespace Microsoft.AspNetCore.Server.IIS.FunctionalTests
 
         public IISDeploymentParameters GetBaseDeploymentParameters(
             HostingModel hostingModel = HostingModel.InProcess
-        ) {
+        )
+        {
             var publisher =
                 hostingModel == HostingModel.InProcess ? InProcessTestSite : OutOfProcessTestSite;
             return GetBaseDeploymentParameters(publisher, hostingModel);
@@ -48,7 +49,8 @@ namespace Microsoft.AspNetCore.Server.IIS.FunctionalTests
         public IISDeploymentParameters GetBaseDeploymentParameters(
             ApplicationPublisher publisher,
             HostingModel hostingModel = HostingModel.InProcess
-        ) {
+        )
+        {
             return GetBaseDeploymentParameters(
                 publisher,
                 new DeploymentParameters()
@@ -65,7 +67,8 @@ namespace Microsoft.AspNetCore.Server.IIS.FunctionalTests
         public IISDeploymentParameters GetBaseDeploymentParameters(
             ApplicationPublisher publisher,
             DeploymentParameters baseParameters
-        ) {
+        )
+        {
             return new IISDeploymentParameters(baseParameters)
             {
                 ApplicationPublisher = publisher,

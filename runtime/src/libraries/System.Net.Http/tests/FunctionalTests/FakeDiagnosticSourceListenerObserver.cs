@@ -14,7 +14,8 @@ namespace System.Net.Http.Functional.Tests
 
             public FakeDiagnosticSourceWriteObserver(
                 Action<KeyValuePair<string, object>> writeCallback
-            ) {
+            )
+            {
                 _writeCallback = writeCallback;
             }
 

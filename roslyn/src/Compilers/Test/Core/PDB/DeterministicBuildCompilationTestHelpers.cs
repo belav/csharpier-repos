@@ -28,7 +28,8 @@ namespace Roslyn.Test.Utilities.PDB
             T expectedValue,
             Func<T, bool> isDefault = null,
             Func<T, string> toString = null
-        ) {
+        )
+        {
             bool expectedIsDefault =
                 (isDefault != null)
                     ? isDefault(expectedValue)
@@ -62,7 +63,8 @@ namespace Roslyn.Test.Utilities.PDB
             CompilationOptions compilationOptions,
             Compilation compilation,
             ImmutableDictionary<string, string> pdbOptions
-        ) {
+        )
+        {
             pdbOptions.VerifyPdbOption("version", MetadataWriter.CompilationOptionsSchemaVersion);
             pdbOptions.VerifyPdbOption(
                 "fallback-encoding",
@@ -79,7 +81,8 @@ namespace Roslyn.Test.Utilities.PDB
             if (
                 compilationOptions.AssemblyIdentityComparer
                 is DesktopAssemblyIdentityComparer identityComparer
-            ) {
+            )
+            {
                 portabilityPolicy |=
                     identityComparer.PortabilityPolicy.SuppressSilverlightLibraryAssembliesPortability
                         ? 0b1
@@ -113,7 +116,8 @@ namespace Roslyn.Test.Utilities.PDB
             TestMetadataReferenceInfo[] references,
             TargetFramework targetFramework,
             BlobReader metadataReferenceReader
-        ) {
+        )
+        {
             var frameworkReferences = TargetFrameworkUtil.GetReferences(targetFramework);
             var count = 0;
             while (metadataReferenceReader.RemainingBytes > 0)
@@ -196,7 +200,8 @@ namespace Roslyn.Test.Utilities.PDB
 
         public static ImmutableDictionary<string, string> ParseCompilationOptions(
             BlobReader blobReader
-        ) {
+        )
+        {
             // Compiler flag bytes are UTF-8 null-terminated key-value pairs
             string key = null;
             Dictionary<string, string> kvp = new Dictionary<string, string>();

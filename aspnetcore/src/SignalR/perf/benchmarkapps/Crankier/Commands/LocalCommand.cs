@@ -65,7 +65,8 @@ namespace Microsoft.AspNetCore.SignalR.Crankier.Commands
                             if (
                                 numberOfWorkersOption.HasValue()
                                 && !int.TryParse(numberOfWorkersOption.Value(), out numberOfWorkers)
-                            ) {
+                            )
+                            {
                                 return MissingRequiredArg(numberOfWorkersOption);
                             }
 
@@ -75,7 +76,8 @@ namespace Microsoft.AspNetCore.SignalR.Crankier.Commands
                                     numberOfConnectionsOption.Value(),
                                     out numberOfConnections
                                 )
-                            ) {
+                            )
+                            {
                                 return InvalidArg(numberOfConnectionsOption);
                             }
 
@@ -85,14 +87,16 @@ namespace Microsoft.AspNetCore.SignalR.Crankier.Commands
                                     sendDurationInSecondsOption.Value(),
                                     out sendDurationInSeconds
                                 )
-                            ) {
+                            )
+                            {
                                 return InvalidArg(sendDurationInSecondsOption);
                             }
 
                             if (
                                 transportTypeOption.HasValue()
                                 && !Enum.TryParse(transportTypeOption.Value(), out transportType)
-                            ) {
+                            )
+                            {
                                 return InvalidArg(transportTypeOption);
                             }
 
@@ -117,7 +121,8 @@ namespace Microsoft.AspNetCore.SignalR.Crankier.Commands
             int sendDurationInSeconds,
             HttpTransportType transportType,
             bool workerWaitForDebugger
-        ) {
+        )
+        {
             var agent = new Agent(workerWaitForDebugger: workerWaitForDebugger);
             var runner = new Runner(
                 agent,

@@ -22,10 +22,11 @@ namespace System.Web.Mvc
         internal QueryStringValueProvider(
             ControllerContext controllerContext,
             IUnvalidatedRequestValues unvalidatedValues
-        ) : base(
-            controllerContext.HttpContext.Request.QueryString,
-            unvalidatedValues.QueryString,
-            CultureInfo.InvariantCulture
-        ) { }
+        )
+            : base(
+                controllerContext.HttpContext.Request.QueryString,
+                unvalidatedValues.QueryString,
+                CultureInfo.InvariantCulture
+            ) { }
     }
 }

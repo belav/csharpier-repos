@@ -46,7 +46,8 @@ namespace Microsoft.EntityFrameworkCore.Infrastructure
         /// <returns> The same builder instance so that multiple calls can be chained. </returns>
         public virtual InMemoryDbContextOptionsBuilder EnableNullabilityCheck(
             bool nullabilityCheckEnabled = true
-        ) {
+        )
+        {
             var extension =
                 OptionsBuilder.Options.FindExtension<InMemoryOptionsExtension>()
                 ?? new InMemoryOptionsExtension();

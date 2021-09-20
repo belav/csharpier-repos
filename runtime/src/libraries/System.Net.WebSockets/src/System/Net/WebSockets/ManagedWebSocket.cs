@@ -36,7 +36,8 @@ namespace System.Net.WebSockets
             bool isServer,
             string? subprotocol,
             TimeSpan keepAliveInterval
-        ) {
+        )
+        {
             return new ManagedWebSocket(stream, isServer, subprotocol, keepAliveInterval);
         }
 
@@ -190,7 +191,8 @@ namespace System.Net.WebSockets
             bool isServer,
             string? subprotocol,
             TimeSpan keepAliveInterval
-        ) {
+        )
+        {
             Debug.Assert(
                 StateUpdateLock != null,
                 $"Expected {nameof(StateUpdateLock)} to be non-null"
@@ -302,11 +304,13 @@ namespace System.Net.WebSockets
             WebSocketMessageType messageType,
             bool endOfMessage,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             if (
                 messageType != WebSocketMessageType.Text
                 && messageType != WebSocketMessageType.Binary
-            ) {
+            )
+            {
                 throw new ArgumentException(
                     SR.Format(
                         SR.net_WebSockets_Argument_InvalidMessageType,
@@ -330,11 +334,13 @@ namespace System.Net.WebSockets
             WebSocketMessageType messageType,
             bool endOfMessage,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             if (
                 messageType != WebSocketMessageType.Text
                 && messageType != WebSocketMessageType.Binary
-            ) {
+            )
+            {
                 throw new ArgumentException(
                     SR.Format(
                         SR.net_WebSockets_Argument_InvalidMessageType,
@@ -371,7 +377,8 @@ namespace System.Net.WebSockets
         public override Task<WebSocketReceiveResult> ReceiveAsync(
             ArraySegment<byte> buffer,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             WebSocketValidate.ValidateArraySegment(buffer, nameof(buffer));
 
             try
@@ -403,7 +410,8 @@ namespace System.Net.WebSockets
             WebSocketCloseStatus closeStatus,
             string? statusDescription,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             WebSocketValidate.ValidateCloseStatus(closeStatus, statusDescription);
 
             try
@@ -422,7 +430,8 @@ namespace System.Net.WebSockets
             WebSocketCloseStatus closeStatus,
             string? statusDescription,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             WebSocketValidate.ValidateCloseStatus(closeStatus, statusDescription);
             return CloseOutputAsyncCore(closeStatus, statusDescription, cancellationToken);
         }
@@ -431,7 +440,8 @@ namespace System.Net.WebSockets
             WebSocketCloseStatus closeStatus,
             string? statusDescription,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             WebSocketValidate.ThrowIfInvalidState(_state, _disposed, s_validCloseOutputStates);
 
             await SendCloseFrameAsync(closeStatus, statusDescription, cancellationToken)
@@ -459,14 +469,16 @@ namespace System.Net.WebSockets
             WebSocketMessageType messageType,
             bool endOfMessage,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             return SendPrivateAsync(buffer, messageType, endOfMessage, cancellationToken);
         }
 
         public override ValueTask<ValueWebSocketReceiveResult> ReceiveAsync(
             Memory<byte> buffer,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             try
             {
                 WebSocketValidate.ThrowIfInvalidState(_state, _disposed, s_validReceiveStates);
@@ -511,7 +523,8 @@ namespace System.Net.WebSockets
             Task receiveTask,
             byte[] buffer,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             if (
                 receiveTask == null
                 || (
@@ -525,7 +538,8 @@ namespace System.Net.WebSockets
                         && vwsrr.Result.MessageType == WebSocketMessageType.Close
                     )
                 )
-            ) {
+            )
+            {
                 ValueTask<ValueWebSocketReceiveResult> vt = ReceiveAsyncPrivate<
                     ValueWebSocketReceiveResultGetter,
                     ValueWebSocketReceiveResult
@@ -565,7 +579,8 @@ namespace System.Net.WebSockets
             bool endOfMessage,
             ReadOnlyMemory<byte> payloadBuffer,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             // If a cancelable cancellation token was provided, that would require registering with it, which means more state we have to
             // pass around (the CancellationTokenRegistration), so if it is cancelable, just immediately go to the fallback path.
             // Similarly, it should be rare that there are multiple outstanding calls to SendFrameAsync, but if there are, again
@@ -586,7 +601,8 @@ namespace System.Net.WebSockets
             MessageOpcode opcode,
             bool endOfMessage,
             ReadOnlyMemory<byte> payloadBuffer
-        ) {
+        )
+        {
             Debug.Assert(
                 _sendFrameAsyncLock.CurrentCount == 0,
                 "Caller should hold the _sendFrameAsyncLock"
@@ -666,7 +682,8 @@ namespace System.Net.WebSockets
             bool endOfMessage,
             ReadOnlyMemory<byte> payloadBuffer,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             await _sendFrameAsyncLock.WaitAsync(cancellationToken).ConfigureAwait(false);
             try
             {
@@ -698,7 +715,8 @@ namespace System.Net.WebSockets
             MessageOpcode opcode,
             bool endOfMessage,
             ReadOnlySpan<byte> payloadBuffer
-        ) {
+        )
+        {
             // Ensure we have a _sendBuffer.
             AllocateSendBuffer(payloadBuffer.Length + MaxMessageHeaderLength);
             Debug.Assert(_sendBuffer != null);
@@ -804,7 +822,8 @@ namespace System.Net.WebSockets
             ReadOnlySpan<byte> payload,
             bool endOfMessage,
             bool useMask
-        ) {
+        )
+        {
             // Client header format:
             // 1 bit - FIN - 1 if this is the final fragment in the message (it could be the only fragment), otherwise 0
             // 1 bit - RSV1 - Reserved - 0
@@ -896,8 +915,9 @@ namespace System.Net.WebSockets
             Memory<byte> payloadBuffer,
             CancellationToken cancellationToken,
             TWebSocketReceiveResultGetter resultGetter = default
-        ) where TWebSocketReceiveResultGetter : struct,
-              IWebSocketReceiveResultGetter<TWebSocketReceiveResult> // constrained to avoid boxing and enable inlining
+        )
+            where TWebSocketReceiveResultGetter : struct,
+                IWebSocketReceiveResultGetter<TWebSocketReceiveResult> // constrained to avoid boxing and enable inlining
         {
             // This is a long method.  While splitting it up into pieces would arguably help with readability, doing so would
             // also result in more allocations, as each async method that yields ends up with multiple allocations.  The impact
@@ -930,7 +950,8 @@ namespace System.Net.WebSockets
                                     ? MaxMessageHeaderLength
                                     : (MaxMessageHeaderLength - MaskLength)
                             )
-                        ) {
+                        )
+                        {
                             // Make sure we have the first two bytes, which includes the start of the payload length.
                             if (_receiveBufferCount < 2)
                             {
@@ -1055,7 +1076,8 @@ namespace System.Net.WebSockets
                     while (
                         totalBytesReceived < payloadBuffer.Length
                         && totalBytesReceived < header.PayloadLength
-                    ) {
+                    )
+                    {
                         int numBytesRead = await _stream.ReadAsync(
                                 payloadBuffer.Slice(
                                     totalBytesReceived,
@@ -1091,7 +1113,8 @@ namespace System.Net.WebSockets
                             header.Fin && header.PayloadLength == 0,
                             _utf8TextState
                         )
-                    ) {
+                    )
+                    {
                         await CloseWithReceiveErrorAndThrowAsync(
                                 WebSocketCloseStatus.InvalidPayloadData,
                                 WebSocketError.Faulted
@@ -1139,7 +1162,8 @@ namespace System.Net.WebSockets
         private async ValueTask HandleReceivedCloseAsync(
             MessageHeader header,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             lock (StateUpdateLock)
             {
                 _receivedCloseFrame = true;
@@ -1233,7 +1257,8 @@ namespace System.Net.WebSockets
         /// <summary>Issues a read on the stream to wait for EOF.</summary>
         private async ValueTask WaitForServerToCloseConnectionAsync(
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             // Per RFC 6455 7.1.1, try to let the server close the connection.  We give it up to a second.
             // We simply issue a read and don't care what we get back; we could validate that we don't get
             // additional data, but at this point we're about to close the connection and we're just stalling
@@ -1263,7 +1288,8 @@ namespace System.Net.WebSockets
         private async ValueTask HandleReceivedPingPongAsync(
             MessageHeader header,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             // Consume any (optional) payload associated with the ping/pong.
             if (header.PayloadLength > 0 && _receiveBufferCount < header.PayloadLength)
             {
@@ -1313,7 +1339,8 @@ namespace System.Net.WebSockets
             if (
                 closeStatus < (WebSocketCloseStatus)1000
                 || closeStatus >= (WebSocketCloseStatus)5000
-            ) {
+            )
+            {
                 return false;
             }
 
@@ -1352,7 +1379,8 @@ namespace System.Net.WebSockets
             WebSocketError error,
             string? errorMessage = null,
             Exception? innerException = null
-        ) {
+        )
+        {
             // Close the connection if it hasn't already been closed
             if (!_sentCloseFrame)
             {
@@ -1488,7 +1516,8 @@ namespace System.Net.WebSockets
             WebSocketCloseStatus closeStatus,
             string? statusDescription,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             // Send the close message.  Skip sending a close frame if we're currently in a CloseSent state,
             // for example having just done a CloseOutputAsync.
             if (!_sentCloseFrame)
@@ -1562,7 +1591,8 @@ namespace System.Net.WebSockets
                                       this
                                   )
                                 : default
-                        ) {
+                        )
+                        {
                             await receiveTask.ConfigureAwait(false);
                         }
                     }
@@ -1589,7 +1619,8 @@ namespace System.Net.WebSockets
             WebSocketCloseStatus closeStatus,
             string? closeStatusDescription,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             // Close payload is two bytes containing the close status followed by a UTF8-encoding of the status description, if it exists.
 
             byte[]? buffer = null;
@@ -1672,7 +1703,8 @@ namespace System.Net.WebSockets
             int minimumRequiredBytes,
             CancellationToken cancellationToken,
             bool throwOnPrematureClosure = true
-        ) {
+        )
+        {
             Debug.Assert(
                 minimumRequiredBytes <= _receiveBuffer.Length,
                 $"Requested number of bytes {minimumRequiredBytes} must not exceed {_receiveBuffer.Length}"
@@ -1764,7 +1796,8 @@ namespace System.Net.WebSockets
             byte[] mask,
             int maskOffset,
             int maskOffsetIndex
-        ) {
+        )
+        {
             Debug.Assert(
                 maskOffsetIndex < MaskLength,
                 $"Unexpected {nameof(maskOffsetIndex)}: {maskOffsetIndex}"
@@ -1811,7 +1844,8 @@ namespace System.Net.WebSockets
                         Vector.IsHardwareAccelerated
                         && Vector<byte>.Count % sizeof(int) == 0
                         && (toMaskEnd - toMaskPtr) >= Vector<byte>.Count
-                    ) {
+                    )
+                    {
                         // align our pointer to Vector<byte>.Count
 
                         while ((ulong)toMaskPtr % (uint)Vector<byte>.Count != 0)
@@ -1863,7 +1897,8 @@ namespace System.Net.WebSockets
         private void ThrowIfOperationInProgress(
             bool operationCompleted,
             [CallerMemberName] string? methodName = null
-        ) {
+        )
+        {
             if (!operationCompleted)
             {
                 Abort();
@@ -1880,7 +1915,8 @@ namespace System.Net.WebSockets
         private static Exception CreateOperationCanceledException(
             Exception innerException,
             CancellationToken cancellationToken = default(CancellationToken)
-        ) {
+        )
+        {
             return new OperationCanceledException(
                 new OperationCanceledException().Message,
                 innerException,
@@ -1895,7 +1931,8 @@ namespace System.Net.WebSockets
             Span<byte> span,
             bool endOfMessage,
             Utf8MessageState state
-        ) {
+        )
+        {
             for (int i = 0; i < span.Length;)
             {
                 // Have we started a character sequence yet?
@@ -1957,7 +1994,8 @@ namespace System.Net.WebSockets
                         state.AdditionalBytesExpected == 1
                         && state.CurrentDecodeBits >= 0x360
                         && state.CurrentDecodeBits <= 0x37F
-                    ) {
+                    )
+                    {
                         // This is going to end up in the range of 0xD800-0xDFFF UTF-16 surrogates that are not allowed in UTF-8;
                         return false;
                     }

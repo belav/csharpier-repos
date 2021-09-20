@@ -72,7 +72,8 @@ namespace Microsoft.CodeAnalysis.CSharp.GenerateMember.GenerateMethod
             out SyntaxToken identifierToken,
             out IMethodSymbol methodSymbol,
             out INamedTypeSymbol typeToGenerateIn
-        ) {
+        )
+        {
             var methodDeclaration = (MethodDeclarationSyntax)node;
             identifierToken = methodDeclaration.Identifier;
 
@@ -80,7 +81,8 @@ namespace Microsoft.CodeAnalysis.CSharp.GenerateMember.GenerateMethod
                 methodDeclaration.ExplicitInterfaceSpecifier != null
                 && !methodDeclaration.ParameterList.OpenParenToken.IsMissing
                 && !methodDeclaration.ParameterList.CloseParenToken.IsMissing
-            ) {
+            )
+            {
                 var semanticModel = document.SemanticModel;
                 methodSymbol =
                     semanticModel.GetDeclaredSymbol(methodDeclaration, cancellationToken)
@@ -110,7 +112,8 @@ namespace Microsoft.CodeAnalysis.CSharp.GenerateMember.GenerateMethod
             out ExpressionSyntax simpleNameOrMemberAccessExpression,
             out InvocationExpressionSyntax invocationExpressionOpt,
             out bool isInConditionalAccessExpression
-        ) {
+        )
+        {
             identifierToken = simpleName.Identifier;
 
             var memberAccess = simpleName?.Parent as MemberAccessExpressionSyntax;
@@ -137,7 +140,8 @@ namespace Microsoft.CodeAnalysis.CSharp.GenerateMember.GenerateMethod
                         SyntaxKind.InvocationExpression,
                         out invocationExpressionOpt
                     )
-                ) {
+                )
+                {
                     isInConditionalAccessExpression = inConditionalMemberAccess;
                     return !invocationExpressionOpt.ArgumentList.CloseParenToken.IsMissing;
                 }
@@ -155,7 +159,8 @@ namespace Microsoft.CodeAnalysis.CSharp.GenerateMember.GenerateMethod
                             )?.WhenNotNull as InvocationExpressionSyntax
                         )?.Expression as MemberBindingExpressionSyntax
                     )?.Name == simpleName
-                ) {
+                )
+                {
                     invocationExpressionOpt = (InvocationExpressionSyntax)(
                         (ConditionalAccessExpressionSyntax)simpleNameOrMemberAccessExpression
                     ).WhenNotNull;
@@ -191,14 +196,16 @@ namespace Microsoft.CodeAnalysis.CSharp.GenerateMember.GenerateMethod
             SemanticModel semanticModel,
             ExpressionSyntax expression,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             if (
                 semanticModel.SyntaxTree.IsNameOfContext(
                     expression.SpanStart,
                     semanticModel,
                     cancellationToken
                 )
-            ) {
+            )
+            {
                 return typeInferenceService.InferType(
                     semanticModel,
                     expression,

@@ -69,7 +69,8 @@ namespace Microsoft.CodeAnalysis.Internal.Log
                 command.Command == EventCommand.SendManifest
                 || command.Command != EventCommand.Disable
                 || FunctionDefinitionRequested(command)
-            ) {
+            )
+            {
                 if (!_initialized)
                 {
                     // We're still in the constructor, need to defer sending until we've finished initializing

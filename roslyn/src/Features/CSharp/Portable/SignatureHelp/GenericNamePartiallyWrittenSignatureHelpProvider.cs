@@ -47,7 +47,8 @@ namespace Microsoft.CodeAnalysis.CSharp.SignatureHelp
         protected override TextSpan GetTextSpan(
             SyntaxToken genericIdentifier,
             SyntaxToken lessThanToken
-        ) {
+        )
+        {
             var lastToken = genericIdentifier.FindLastTokenOfPartialGenericName();
             var nextToken = lastToken.GetNextNonZeroWidthTokenOrEndOfFile();
             Contract.ThrowIfTrue(nextToken.Kind() == 0);

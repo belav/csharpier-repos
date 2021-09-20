@@ -37,7 +37,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.CodeModel
             object parent,
             ProjectId projectId,
             ITypeSymbol typeSymbol
-        ) {
+        )
+        {
             var newElement = new CodeTypeRef(state, parent, projectId, typeSymbol);
             return (EnvDTE.CodeTypeRef)ComAggregate.CreateAggregatedObject(newElement);
         }
@@ -65,7 +66,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.CodeModel
                     CodeModelService.ResolveSymbol(this.State.Workspace, _projectId, _symbolId)
                     is ITypeSymbol typeSymbol
                 )
-            ) {
+            )
+            {
                 throw Exceptions.ThrowEFail();
             }
 

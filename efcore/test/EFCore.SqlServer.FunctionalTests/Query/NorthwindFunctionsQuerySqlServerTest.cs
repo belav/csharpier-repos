@@ -21,7 +21,7 @@ namespace Microsoft.EntityFrameworkCore.Query
             ITestOutputHelper testOutputHelper
         )
 #pragma warning restore IDE0060 // Remove unused parameter
-          : base(fixture)
+            : base(fixture)
         {
             ClearLog();
             Fixture.TestSqlLoggerFactory.SetTestOutputHelper(testOutputHelper);
@@ -1485,7 +1485,8 @@ WHERE [c].[Region] IS NULL OR ([c].[Region] = N'')"
 
         public override async Task IsNullOrWhiteSpace_in_predicate_on_non_nullable_column(
             bool async
-        ) {
+        )
+        {
             await base.IsNullOrWhiteSpace_in_predicate_on_non_nullable_column(async);
 
             AssertSql(
@@ -1565,7 +1566,8 @@ ORDER BY CAST(LEN([c].[CustomerID]) AS int), [c].[CustomerID]"
 
         public override async Task Order_by_length_twice_followed_by_projection_of_naked_collection_navigation(
             bool async
-        ) {
+        )
+        {
             await base.Order_by_length_twice_followed_by_projection_of_naked_collection_navigation(
                 async
             );
@@ -1591,7 +1593,8 @@ WHERE [c].[CustomerID] = N'ANATR'"
 
         public override async Task Static_equals_nullable_datetime_compared_to_non_nullable(
             bool async
-        ) {
+        )
+        {
             await base.Static_equals_nullable_datetime_compared_to_non_nullable(async);
 
             AssertSql(

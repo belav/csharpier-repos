@@ -22,7 +22,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
         public SqlServerDbFunctionConvention(
             ProviderConventionSetBuilderDependencies dependencies,
             RelationalConventionSetBuilderDependencies relationalDependencies
-        ) {
+        )
+        {
             Check.NotNull(dependencies, nameof(dependencies));
             Check.NotNull(relationalDependencies, nameof(relationalDependencies));
 
@@ -38,7 +39,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
         public virtual void ProcessModelFinalizing(
             IConventionModelBuilder modelBuilder,
             IConventionContext<IConventionModelBuilder> context
-        ) {
+        )
+        {
             foreach (var dbFunction in modelBuilder.Metadata.GetDbFunctions())
             {
                 if (!dbFunction.IsBuiltIn && string.IsNullOrEmpty(dbFunction.Schema))

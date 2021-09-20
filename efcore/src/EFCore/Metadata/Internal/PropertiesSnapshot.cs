@@ -25,7 +25,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
             List<InternalIndexBuilder>? indexes,
             List<(InternalKeyBuilder, ConfigurationSource?)>? keys,
             List<RelationshipSnapshot>? relationships
-        ) {
+        )
+        {
             Properties = properties;
             Indexes = indexes;
             Keys = keys;

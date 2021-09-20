@@ -69,7 +69,8 @@ namespace Microsoft.AspNetCore.Server.IIS.FunctionalTests
             string path,
             string arguments,
             string subError
-        ) {
+        )
+        {
             var deploymentParameters = Fixture.GetBaseDeploymentParameters();
             deploymentParameters.WebConfigActionList.Add(
                 WebConfigHelpers.AddOrModifyAspNetCoreSection("processPath", path)
@@ -199,7 +200,8 @@ namespace Microsoft.AspNetCore.Server.IIS.FunctionalTests
                     RegistryHive.LocalMachine,
                     RegistryView.Registry32
                 )
-            ) {
+            )
+            {
                 var installDir = DotNetCommands.GetDotNetInstallDir(RuntimeArchitecture.x64);
                 using (
                     new TestRegistryKey(
@@ -208,7 +210,8 @@ namespace Microsoft.AspNetCore.Server.IIS.FunctionalTests
                         "InstallLocation",
                         installDir
                     )
-                ) {
+                )
+                {
                     var deploymentResult = await DeployAsync(deploymentParameters);
                     await deploymentResult.AssertStarts();
                     StopServer();
@@ -242,7 +245,8 @@ namespace Microsoft.AspNetCore.Server.IIS.FunctionalTests
                     "DisableANCM",
                     1
                 )
-            ) {
+            )
+            {
                 var deploymentResult = await DeployAsync(deploymentParameters);
                 // Disabling ANCM produces no log files
                 deploymentResult.AllowNoLogs();
@@ -1104,7 +1108,8 @@ namespace Microsoft.AspNetCore.Server.IIS.FunctionalTests
         public async Task ExceptionIsLoggedToEventLogAndPutInResponseWhenDeveloperExceptionPageIsEnabled(
             string environmentVariable,
             string value
-        ) {
+        )
+        {
             var deploymentParameters = Fixture.GetBaseDeploymentParameters();
             deploymentParameters.TransformArguments((a, _) => $"{a} Throw");
 
@@ -1167,7 +1172,8 @@ namespace Microsoft.AspNetCore.Server.IIS.FunctionalTests
         [InlineData("ThrowInStartupGenericHost")]
         public async Task ExceptionIsLoggedToEventLogAndPutInResponseDuringHostingStartupProcess(
             string startupType
-        ) {
+        )
+        {
             var deploymentParameters = Fixture.GetBaseDeploymentParameters();
             deploymentParameters.TransformArguments((a, _) => $"{a} {startupType}");
 
@@ -1831,7 +1837,8 @@ namespace Microsoft.AspNetCore.Server.IIS.FunctionalTests
         [InlineData(HostingModel.OutOfProcess)]
         public async Task PreferEnvironmentVariablesOverWebConfigWhenConfigured(
             HostingModel hostingModel
-        ) {
+        )
+        {
             var deploymentParameters = Fixture.GetBaseDeploymentParameters(hostingModel);
 
             var environment = "Development";
@@ -2032,7 +2039,8 @@ namespace Microsoft.AspNetCore.Server.IIS.FunctionalTests
                     SocketType.Stream,
                     ProtocolType.Tcp
                 )
-            ) {
+            )
+            {
                 while (true)
                 {
                     try
@@ -2084,7 +2092,8 @@ namespace Microsoft.AspNetCore.Server.IIS.FunctionalTests
 
         private async Task<HttpResponseMessage> DeployAppWithStartupFailure(
             IISDeploymentParameters deploymentParameters
-        ) {
+        )
+        {
             deploymentParameters.WebConfigActionList.Add(
                 WebConfigHelpers.AddOrModifyAspNetCoreSection("processPath", "doesnot")
             );
@@ -2125,7 +2134,8 @@ namespace Microsoft.AspNetCore.Server.IIS.FunctionalTests
 
         private static IEnumerable<EventLogEntry> GetEventLogsFromDotnetRuntime(
             IISDeploymentResult deploymentResult
-        ) {
+        )
+        {
             var processStartTime = deploymentResult.HostProcess.StartTime.AddSeconds(-5);
             var eventLog = new EventLog("Application");
 
@@ -2171,14 +2181,16 @@ namespace Microsoft.AspNetCore.Server.IIS.FunctionalTests
 
         private Task AssertSiteFailsToStartWithInProcessStaticContent(
             IISDeploymentResult deploymentResult
-        ) {
+        )
+        {
             return AssertSiteFailsToStartWithInProcessStaticContent(deploymentResult, "500.0");
         }
 
         private async Task AssertSiteFailsToStartWithInProcessStaticContent(
             IISDeploymentResult deploymentResult,
             string error
-        ) {
+        )
+        {
             HttpResponseMessage response = null;
 
             // Make sure strings aren't freed.

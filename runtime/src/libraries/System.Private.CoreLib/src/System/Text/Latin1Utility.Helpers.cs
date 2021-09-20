@@ -50,7 +50,8 @@ namespace System.Text
         private static void NarrowFourUtf16CharsToLatin1AndWriteToBuffer(
             ref byte outputBuffer,
             ulong value
-        ) {
+        )
+        {
             Debug.Assert(AllCharsInUInt64AreLatin1(value));
 
             if (Sse2.X64.IsSupported)
@@ -96,7 +97,8 @@ namespace System.Text
         private static void NarrowTwoUtf16CharsToLatin1AndWriteToBuffer(
             ref byte outputBuffer,
             uint value
-        ) {
+        )
+        {
             Debug.Assert(AllCharsInUInt32AreLatin1(value));
 
             if (BitConverter.IsLittleEndian)

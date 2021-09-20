@@ -64,7 +64,8 @@ namespace BasicEventSourceTests
                 var manfile = new System.IO.StreamWriter(
                     new System.IO.MemoryStream(Encoding.Unicode.GetBytes(manfilename))
                 )
-            ) {
+            )
+            {
                 string man = null;
                 string dllName = Path.GetFileName(eventSourceType.GetTypeInfo().Assembly.Location);
                 //if (!eventSourceType.GetTypeInfo().Assembly.ReflectionOnly)

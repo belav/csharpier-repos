@@ -28,7 +28,8 @@ namespace Microsoft.Web.Mvc
         )]
         public static Func<TModel, TValue> Compile<TModel, TValue>(
             this Expression<Func<TModel, TValue>> lambdaExpression
-        ) {
+        )
+        {
             if (lambdaExpression == null)
             {
                 throw new ArgumentNullException("lambdaExpression");

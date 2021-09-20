@@ -63,7 +63,8 @@ namespace Microsoft.AspNetCore.Mvc.TagHelpers
         public async Task Process_AddsHiddenInputTag_FromEndOfFormContent(
             List<TagBuilder> tagBuilderList,
             string expectedOutput
-        ) {
+        )
+        {
             // Arrange
             var viewContext = new ViewContext();
             var tagHelperOutput = new TagHelperOutput(
@@ -103,7 +104,8 @@ namespace Microsoft.AspNetCore.Mvc.TagHelpers
         public async Task Process_AddsHiddenInputTag_FromEndOfFormContent_WithCachedBody(
             List<TagBuilder> tagBuilderList,
             string expectedOutput
-        ) {
+        )
+        {
             // Arrange
             var viewContext = new ViewContext();
             var runner = new TagHelperRunner();
@@ -144,7 +146,8 @@ namespace Microsoft.AspNetCore.Mvc.TagHelpers
             string type,
             string value,
             TagRenderMode mode
-        ) {
+        )
+        {
             var tagBuilder = new TagBuilder(tag);
             tagBuilder.MergeAttribute("name", name);
             tagBuilder.MergeAttribute("type", type);
@@ -164,7 +167,8 @@ namespace Microsoft.AspNetCore.Mvc.TagHelpers
             public override async Task ProcessAsync(
                 TagHelperContext context,
                 TagHelperOutput output
-            ) {
+            )
+            {
                 await output.GetChildContentAsync();
             }
         }

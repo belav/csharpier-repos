@@ -89,7 +89,8 @@ namespace System.Linq.Parallel.Tests
         public static void Cast_Valid_NotPipelined_Longrunning(
             Labeled<ParallelQuery<int>> labeled,
             int count
-        ) {
+        )
+        {
             Cast_Valid(labeled, count);
         }
 
@@ -184,7 +185,8 @@ namespace System.Linq.Parallel.Tests
         public static void Cast_Assignable_InvalidCastException(
             Labeled<ParallelQuery<int>> labeled,
             int count
-        ) {
+        )
+        {
             _ = count;
             AssertThrows.Wrapped<InvalidCastException>(
                 () =>

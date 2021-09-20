@@ -18,7 +18,8 @@ namespace System.CommandLine.Benchmarks.Helpers
         internal static string CreateTestAssemblyInTempFileFromFile(
             string testCsFilePath,
             IEnumerable<string> references
-        ) {
+        )
+        {
             var testSourceCode = File.ReadAllText(GetInputFullFilePath(testCsFilePath));
             return CreateTestAssemblyInTempFileFromString(testSourceCode, references);
         }
@@ -26,7 +27,8 @@ namespace System.CommandLine.Benchmarks.Helpers
         internal static string CreateTestAssemblyInTempFileFromString(
             string sourceCode,
             IEnumerable<string> references
-        ) {
+        )
+        {
             SyntaxTree syntaxTree = CSharpSyntaxTree.ParseText(sourceCode);
             string randomAssemblyName = Path.GetRandomFileName();
             var compiler = CSharpCompilation.Create(

@@ -68,7 +68,8 @@ namespace System.IO.Compression
             this ZipArchiveEntry source,
             string destinationFileName,
             bool overwrite
-        ) {
+        )
+        {
             if (source == null)
                 throw new ArgumentNullException(nameof(source));
 
@@ -87,7 +88,8 @@ namespace System.IO.Compression
                     bufferSize: 0x1000,
                     useAsync: false
                 )
-            ) {
+            )
+            {
                 using (Stream es = source.Open())
                     es.CopyTo(fs);
             }
@@ -104,7 +106,8 @@ namespace System.IO.Compression
             this ZipArchiveEntry source,
             string destinationDirectoryName,
             bool overwrite
-        ) {
+        )
+        {
             if (source == null)
                 throw new ArgumentNullException(nameof(source));
 

@@ -34,7 +34,8 @@ namespace Microsoft.Diagnostics.Tools.Pgo.TypeRefTypeSystem
             string name,
             TypeRefTypeSystemType containingType,
             TypeRefTypeSystemModule module
-        ) {
+        )
+        {
             _namespace = nameSpace;
             _name = name;
             _module = module;

@@ -191,7 +191,8 @@ namespace System.DirectoryServices
                 if (
                     (unmanagedResult == unchecked((int)0x8000500D))
                     || (unmanagedResult == unchecked((int)0x80005006))
-                ) {
+                )
+                {
                     return;
                 }
                 else
@@ -234,7 +235,8 @@ namespace System.DirectoryServices
                 && !_allowMultipleChange
                 && _updateType != UpdateType.None
                 && _updateType != UpdateType.Update
-            ) {
+            )
+            {
                 throw new InvalidOperationException(SR.DSPropertyValueSupportOneOperation);
             }
             _entry.AdsObject.PutEx((int)AdsPropertyOperation.Clear, PropertyName, null);

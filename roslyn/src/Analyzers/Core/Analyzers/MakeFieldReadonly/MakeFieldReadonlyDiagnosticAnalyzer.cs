@@ -123,7 +123,8 @@ namespace Microsoft.CodeAnalysis.MakeFieldReadonly
                             if (
                                 member is IFieldSymbol field
                                 && fieldStateMap.TryRemove(field, out var value)
-                            ) {
+                            )
+                            {
                                 var (isCandidate, written) = value;
                                 if (isCandidate && !written)
                                 {
@@ -180,7 +181,8 @@ namespace Microsoft.CodeAnalysis.MakeFieldReadonly
                         IFieldSymbol fieldSymbol,
                         AnalyzerOptions options,
                         CancellationToken cancellationToken
-                    ) {
+                    )
+                    {
                         if (!IsCandidateField(fieldSymbol, threadStaticAttribute))
                         {
                             return default;
@@ -206,7 +208,8 @@ namespace Microsoft.CodeAnalysis.MakeFieldReadonly
                         AnalyzerOptions options,
                         INamedTypeSymbol threadStaticAttribute,
                         CancellationToken cancellationToken
-                    ) {
+                    )
+                    {
                         Debug.Assert(IsCandidateField(field, threadStaticAttribute));
 
                         var option = GetCodeStyleOption(field, options, cancellationToken);
@@ -224,7 +227,8 @@ namespace Microsoft.CodeAnalysis.MakeFieldReadonly
         private static bool IsFieldWrite(
             IFieldReferenceOperation fieldReference,
             ISymbol owningSymbol
-        ) {
+        )
+        {
             // Check if the underlying member is being written or a writable reference to the member is taken.
             var valueUsageInfo = fieldReference.GetValueUsageInfo(owningSymbol);
             if (!valueUsageInfo.IsWrittenTo())
@@ -243,7 +247,8 @@ namespace Microsoft.CodeAnalysis.MakeFieldReadonly
             if (
                 (isInConstructor || isInStaticConstructor)
                 && field.ContainingType == owningSymbol.ContainingType
-            ) {
+            )
+            {
                 // For instance fields, ensure that the instance reference is being initialized by the constructor.
                 var instanceFieldWrittenInCtor =
                     isInConstructor

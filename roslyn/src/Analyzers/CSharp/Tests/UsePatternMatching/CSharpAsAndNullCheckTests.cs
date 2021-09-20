@@ -52,7 +52,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UsePatternMatching
             string input,
             string output,
             LanguageVersion version = LanguageVersion.CSharp8
-        ) {
+        )
+        {
             await TestStatement($"if ({input}) {{ }}", $"if ({output}) {{ }}", version);
             await TestStatement($"var y = {input};", $"var y = {output};", version);
             await TestStatement($"return {input};", $"return {output};", version);
@@ -71,7 +72,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UsePatternMatching
             string input,
             string output,
             LanguageVersion version = LanguageVersion.CSharp8
-        ) {
+        )
+        {
             await TestInRegularAndScript1Async(
                 $@"class C
 {{

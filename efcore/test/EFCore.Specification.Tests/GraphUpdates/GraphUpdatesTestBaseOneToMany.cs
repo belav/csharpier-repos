@@ -183,7 +183,8 @@ namespace Microsoft.EntityFrameworkCore
             ChangeMechanism changeMechanism,
             bool useExistingEntities,
             CascadeTiming? deleteOrphansTiming
-        ) {
+        )
+        {
             var new1 = new Optional1();
             var new1d = new Optional1Derived();
             var new1dd = new Optional1MoreDerived();
@@ -471,7 +472,8 @@ namespace Microsoft.EntityFrameworkCore
             ChangeMechanism changeMechanism,
             bool useExistingEntities,
             CascadeTiming? deleteOrphansTiming
-        ) {
+        )
+        {
             var newRoot = new Root();
             var new1 = new Required1 { Parent = newRoot };
             var new1d = new Required1Derived { Parent = newRoot };
@@ -658,7 +660,8 @@ namespace Microsoft.EntityFrameworkCore
         public virtual void Save_removed_optional_many_to_one_dependents(
             ChangeMechanism changeMechanism,
             CascadeTiming? deleteOrphansTiming
-        ) {
+        )
+        {
             Root root = null;
             ExecuteWithStrategyInTransaction(
                 context =>
@@ -779,7 +782,8 @@ namespace Microsoft.EntityFrameworkCore
         public virtual void Save_removed_required_many_to_one_dependents(
             ChangeMechanism changeMechanism,
             CascadeTiming? deleteOrphansTiming
-        ) {
+        )
+        {
             var removed1Id = 0;
             var removed2Id = 0;
             List<int> removed1ChildrenIds = null;
@@ -819,7 +823,8 @@ namespace Microsoft.EntityFrameworkCore
                         if (
                             (changeMechanism & ChangeMechanism.Fk) != 0
                             && deleteOrphansTiming == CascadeTiming.Immediate
-                        ) {
+                        )
+                        {
                             testCode = () =>
                                 context.Entry(removed2).GetInfrastructure()[
                                     context.Entry(removed2).Property(e => e.ParentId).Metadata
@@ -892,7 +897,8 @@ namespace Microsoft.EntityFrameworkCore
                         !Fixture.ForceClientNoAction
                         && !Fixture.NoStoreCascades
                         && deleteOrphansTiming != CascadeTiming.Never
-                    ) {
+                    )
+                    {
                         var root = LoadRequiredGraph(context);
 
                         AssertNavigations(root);
@@ -1075,7 +1081,8 @@ namespace Microsoft.EntityFrameworkCore
             ChangeMechanism changeMechanism,
             bool useExistingParent,
             CascadeTiming? deleteOrphansTiming
-        ) {
+        )
+        {
             Root root = null;
             IReadOnlyList<EntityEntry> entries = null;
             var compositeCount = 0;
@@ -1368,7 +1375,8 @@ namespace Microsoft.EntityFrameworkCore
             ChangeMechanism changeMechanism,
             bool useExistingParent,
             CascadeTiming? deleteOrphansTiming
-        ) {
+        )
+        {
             Root root = null;
             IReadOnlyList<EntityEntry> entries = null;
             var childCount = 0;
@@ -1522,7 +1530,8 @@ namespace Microsoft.EntityFrameworkCore
         public virtual void Mark_modified_one_to_many_overlapping(
             ChangeMechanism changeMechanism,
             CascadeTiming? deleteOrphansTiming
-        ) {
+        )
+        {
             ExecuteWithStrategyInTransaction(
                 context =>
                 {
@@ -1583,7 +1592,8 @@ namespace Microsoft.EntityFrameworkCore
         public virtual void Required_many_to_one_dependents_are_cascade_deleted(
             CascadeTiming? cascadeDeleteTiming,
             CascadeTiming? deleteOrphansTiming
-        ) {
+        )
+        {
             var removedId = 0;
             List<int> orphanedIds = null;
 
@@ -1695,7 +1705,8 @@ namespace Microsoft.EntityFrameworkCore
         public virtual void Required_many_to_one_dependent_leaves_can_be_deleted(
             CascadeTiming? cascadeDeleteTiming,
             CascadeTiming? deleteOrphansTiming
-        ) {
+        )
+        {
             var removedId = 0;
 
             ExecuteWithStrategyInTransaction(
@@ -1762,7 +1773,8 @@ namespace Microsoft.EntityFrameworkCore
         public virtual void Optional_many_to_one_dependents_are_orphaned(
             CascadeTiming? cascadeDeleteTiming,
             CascadeTiming? deleteOrphansTiming
-        ) {
+        )
+        {
             var removedId = 0;
             List<int> orphanedIds = null;
 
@@ -1872,7 +1884,8 @@ namespace Microsoft.EntityFrameworkCore
         public virtual void Optional_many_to_one_dependent_leaves_can_be_deleted(
             CascadeTiming? cascadeDeleteTiming,
             CascadeTiming? deleteOrphansTiming
-        ) {
+        )
+        {
             var removedId = 0;
             ExecuteWithStrategyInTransaction(
                 context =>
@@ -1939,7 +1952,8 @@ namespace Microsoft.EntityFrameworkCore
         public virtual void Required_many_to_one_dependents_are_cascade_deleted_in_store(
             CascadeTiming? cascadeDeleteTiming,
             CascadeTiming? deleteOrphansTiming
-        ) {
+        )
+        {
             var removedId = 0;
             List<int> orphanedIds = null;
 
@@ -2034,7 +2048,8 @@ namespace Microsoft.EntityFrameworkCore
         public virtual void Optional_many_to_one_dependents_are_orphaned_in_store(
             CascadeTiming? cascadeDeleteTiming,
             CascadeTiming? deleteOrphansTiming
-        ) {
+        )
+        {
             var removedId = 0;
             List<int> orphanedIds = null;
 
@@ -2135,7 +2150,8 @@ namespace Microsoft.EntityFrameworkCore
         public virtual void Required_many_to_one_dependents_are_cascade_deleted_starting_detached(
             CascadeTiming? cascadeDeleteTiming,
             CascadeTiming? deleteOrphansTiming
-        ) {
+        )
+        {
             var removedId = 0;
             List<int> orphanedIds = null;
             Root root = null;
@@ -2242,7 +2258,8 @@ namespace Microsoft.EntityFrameworkCore
         public virtual void Optional_many_to_one_dependents_are_orphaned_starting_detached(
             CascadeTiming? cascadeDeleteTiming,
             CascadeTiming? deleteOrphansTiming
-        ) {
+        )
+        {
             var removedId = 0;
             List<int> orphanedIds = null;
             Root root = null;
@@ -2345,7 +2362,8 @@ namespace Microsoft.EntityFrameworkCore
         public virtual void Required_many_to_one_dependents_are_cascade_detached_when_Added(
             CascadeTiming? cascadeDeleteTiming,
             CascadeTiming? deleteOrphansTiming
-        ) {
+        )
+        {
             var removedId = 0;
             List<int> orphanedIds = null;
 
@@ -2402,7 +2420,8 @@ namespace Microsoft.EntityFrameworkCore
                             cascadeDeleteTiming == CascadeTiming.Immediate
                             || cascadeDeleteTiming == null
                         ) && !Fixture.ForceClientNoAction
-                    ) {
+                    )
+                    {
                         Assert.Equal(EntityState.Detached, context.Entry(added).State);
                         Assert.True(
                             cascadeRemoved.All(e => context.Entry(e).State == EntityState.Deleted)

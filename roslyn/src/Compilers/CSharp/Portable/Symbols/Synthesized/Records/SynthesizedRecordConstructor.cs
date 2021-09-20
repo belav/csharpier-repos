@@ -58,7 +58,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
         internal override ExecutableCodeBinder TryGetBodyBinder(
             BinderFactory? binderFactoryOpt = null,
             bool ignoreAccessibility = false
-        ) {
+        )
+        {
             TypeDeclarationSyntax typeDecl = GetSyntax();
             InMethodBinder result = (
                 binderFactoryOpt ?? this.DeclaringCompilation.GetBinderFactory(typeDecl.SyntaxTree)

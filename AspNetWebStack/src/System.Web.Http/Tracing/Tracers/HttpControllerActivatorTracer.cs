@@ -25,7 +25,8 @@ namespace System.Web.Http.Tracing.Tracers
         public HttpControllerActivatorTracer(
             IHttpControllerActivator innerActivator,
             ITraceWriter traceWriter
-        ) {
+        )
+        {
             Contract.Assert(innerActivator != null);
             Contract.Assert(traceWriter != null);
 
@@ -47,7 +48,8 @@ namespace System.Web.Http.Tracing.Tracers
             HttpRequestMessage request,
             HttpControllerDescriptor controllerDescriptor,
             Type controllerType
-        ) {
+        )
+        {
             IHttpController controller = null;
 
             _traceWriter.TraceBeginEnd(

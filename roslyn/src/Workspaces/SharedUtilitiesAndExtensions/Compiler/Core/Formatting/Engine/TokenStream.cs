@@ -53,13 +53,15 @@ namespace Microsoft.CodeAnalysis.Formatting
             AnalyzerConfigOptions options,
             TextSpan spanToFormat,
             AbstractTriviaDataFactory factory
-        ) {
+        )
+        {
             using (
                 Logger.LogBlock(
                     FunctionId.Formatting_TokenStreamConstruction,
                     CancellationToken.None
                 )
-            ) {
+            )
+            {
                 // initialize basic info
                 _factory = factory;
                 _treeData = treeData;
@@ -207,7 +209,8 @@ namespace Microsoft.CodeAnalysis.Formatting
             SyntaxToken token1,
             SyntaxToken token2,
             Func<TokenData, TokenData, TriviaData> triviaDataGetter
-        ) {
+        )
+        {
             // check easy case
             if (token1 == token2)
             {
@@ -229,7 +232,8 @@ namespace Microsoft.CodeAnalysis.Formatting
                 var current = tokenData1.GetNextTokenData();
                 current < tokenData2;
                 current = current.GetNextTokenData()
-            ) {
+            )
+            {
                 if (triviaDataGetter(previousToken, current).SecondTokenIsFirstTokenOnLine)
                 {
                     return false;
@@ -293,7 +297,8 @@ namespace Microsoft.CodeAnalysis.Formatting
         private int GetColumn(
             TokenData tokenData,
             Func<TokenData, TokenData, TriviaData> triviaDataGetter
-        ) {
+        )
+        {
             // at the beginning of a file.
             var previousToken = tokenData.GetPreviousTokenData();
 
@@ -302,7 +307,8 @@ namespace Microsoft.CodeAnalysis.Formatting
                 ;
                 previousToken.Token.RawKind != 0;
                 previousToken = previousToken.GetPreviousTokenData()
-            ) {
+            )
+            {
                 var triviaInfo = triviaDataGetter(previousToken, tokenData);
                 if (triviaInfo.SecondTokenIsFirstTokenOnLine)
                 {

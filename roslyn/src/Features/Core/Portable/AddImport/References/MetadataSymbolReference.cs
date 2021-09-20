@@ -44,7 +44,8 @@ namespace Microsoft.CodeAnalysis.AddImport
                 SyntaxNode node,
                 SemanticModel semanticModel,
                 CancellationToken cancellationToken
-            ) {
+            )
+            {
                 var (description, hasExistingImport) = base.GetDescription(
                     document,
                     node,
@@ -71,7 +72,8 @@ namespace Microsoft.CodeAnalysis.AddImport
                 string description,
                 ImmutableArray<string> tags,
                 CodeActionPriority priority
-            ) {
+            )
+            {
                 return AddImportFixData.CreateForMetadataSymbol(
                     textChanges,
                     description,

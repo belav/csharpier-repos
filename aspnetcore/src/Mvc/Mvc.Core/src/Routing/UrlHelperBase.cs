@@ -197,7 +197,8 @@ namespace Microsoft.AspNetCore.Mvc.Routing
             string? host,
             string? virtualPath,
             string? fragment
-        ) {
+        )
+        {
             if (virtualPath == null)
             {
                 return null;
@@ -319,14 +320,16 @@ namespace Microsoft.AspNetCore.Mvc.Routing
             string? controller,
             RouteValueDictionary values,
             RouteValueDictionary? ambientValues
-        ) {
+        )
+        {
             object? obj = null;
             if (action == null)
             {
                 if (
                     !values.ContainsKey("action")
                     && (ambientValues?.TryGetValue("action", out obj) ?? false)
-                ) {
+                )
+                {
                     values["action"] = obj;
                 }
             }
@@ -340,7 +343,8 @@ namespace Microsoft.AspNetCore.Mvc.Routing
                 if (
                     !values.ContainsKey("controller")
                     && (ambientValues?.TryGetValue("controller", out obj) ?? false)
-                ) {
+                )
+                {
                     values["controller"] = obj;
                 }
             }
@@ -356,14 +360,16 @@ namespace Microsoft.AspNetCore.Mvc.Routing
             string? handler,
             RouteValueDictionary values,
             RouteValueDictionary? ambientValues
-        ) {
+        )
+        {
             object? value = null;
             if (string.IsNullOrEmpty(page))
             {
                 if (
                     !values.ContainsKey("page")
                     && (ambientValues?.TryGetValue("page", out value) ?? false)
-                ) {
+                )
+                {
                     values["page"] = value;
                 }
             }
@@ -377,7 +383,8 @@ namespace Microsoft.AspNetCore.Mvc.Routing
                 if (
                     !values.ContainsKey("handler")
                     && (ambientValues?.ContainsKey("handler") ?? false)
-                ) {
+                )
+                {
                     // Clear out form action unless it's explicitly specified in the routeValues.
                     values["handler"] = null;
                 }
@@ -392,7 +399,8 @@ namespace Microsoft.AspNetCore.Mvc.Routing
             ActionContext? context,
             RouteValueDictionary? ambientValues,
             string pageName
-        ) {
+        )
+        {
             Debug.Assert(pageName.Length > 0);
             // Paths not qualified with a leading slash are treated as relative to the current page.
             if (pageName[0] != '/')
@@ -442,7 +450,8 @@ namespace Microsoft.AspNetCore.Mvc.Routing
             PathString pathBase,
             string virtualPath,
             string? fragment
-        ) {
+        )
+        {
             if (!pathBase.HasValue)
             {
                 if (virtualPath.Length == 0)
@@ -495,7 +504,8 @@ namespace Microsoft.AspNetCore.Mvc.Routing
             string virtualPath,
             string? fragment,
             [NotNullWhen(true)] out string? url
-        ) {
+        )
+        {
             var pathBase = ActionContext.HttpContext.Request.PathBase;
             url = null;
 
@@ -504,7 +514,8 @@ namespace Microsoft.AspNetCore.Mvc.Routing
                 && string.IsNullOrEmpty(host)
                 && string.IsNullOrEmpty(fragment)
                 && !pathBase.HasValue
-            ) {
+            )
+            {
                 if (virtualPath.Length == 0)
                 {
                     url = "/";

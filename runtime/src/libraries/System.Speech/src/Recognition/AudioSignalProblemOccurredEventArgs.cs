@@ -14,7 +14,8 @@ namespace System.Speech.Recognition
             int audioLevel,
             TimeSpan audioPosition,
             TimeSpan recognizerPosition
-        ) {
+        )
+        {
             _audioSignalProblem = audioSignalProblem;
             _audioLevel = audioLevel;
             _audioPosition = audioPosition;

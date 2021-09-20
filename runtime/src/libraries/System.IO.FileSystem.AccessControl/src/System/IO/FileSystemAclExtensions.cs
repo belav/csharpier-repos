@@ -28,7 +28,8 @@ namespace System.IO
         public static DirectorySecurity GetAccessControl(
             this DirectoryInfo directoryInfo,
             AccessControlSections includeSections
-        ) {
+        )
+        {
             if (directoryInfo == null)
             {
                 throw new ArgumentNullException(nameof(directoryInfo));
@@ -40,7 +41,8 @@ namespace System.IO
         public static void SetAccessControl(
             this DirectoryInfo directoryInfo,
             DirectorySecurity directorySecurity
-        ) {
+        )
+        {
             if (directorySecurity == null)
             {
                 throw new ArgumentNullException(nameof(directorySecurity));
@@ -68,7 +70,8 @@ namespace System.IO
         public static FileSecurity GetAccessControl(
             this FileInfo fileInfo,
             AccessControlSections includeSections
-        ) {
+        )
+        {
             if (fileInfo == null)
             {
                 throw new ArgumentNullException(nameof(fileInfo));
@@ -159,7 +162,8 @@ namespace System.IO
         public static void Create(
             this DirectoryInfo directoryInfo,
             DirectorySecurity directorySecurity
-        ) {
+        )
+        {
             if (directoryInfo == null)
             {
                 throw new ArgumentNullException(nameof(directoryInfo));
@@ -204,7 +208,8 @@ namespace System.IO
             int bufferSize,
             FileOptions options,
             FileSecurity fileSecurity
-        ) {
+        )
+        {
             if (fileInfo == null)
             {
                 throw new ArgumentNullException(nameof(fileInfo));
@@ -245,7 +250,8 @@ namespace System.IO
                     || mode == FileMode.Create
                     || mode == FileMode.Append
                 )
-            ) {
+            )
+            {
                 throw new ArgumentException(
                     SR.Format(SR.Argument_InvalidFileModeAndFileSystemRightsCombo, mode, rights)
                 );
@@ -291,7 +297,8 @@ namespace System.IO
         public static DirectoryInfo CreateDirectory(
             this DirectorySecurity directorySecurity,
             string path
-        ) {
+        )
+        {
             if (directorySecurity == null)
             {
                 throw new ArgumentNullException(nameof(directorySecurity));
@@ -322,14 +329,16 @@ namespace System.IO
             if (
                 (rights & FileSystemRights.ReadData) != 0
                 || ((int)rights & Interop.Kernel32.GenericOperations.GENERIC_READ) != 0
-            ) {
+            )
+            {
                 access = FileAccess.Read;
             }
 
             if (
                 (rights & FileSystemRights.WriteData) != 0
                 || ((int)rights & Interop.Kernel32.GenericOperations.GENERIC_WRITE) != 0
-            ) {
+            )
+            {
                 access = access == FileAccess.Read ? FileAccess.ReadWrite : FileAccess.Write;
             }
 
@@ -343,7 +352,8 @@ namespace System.IO
             FileShare share,
             FileOptions options,
             FileSecurity security
-        ) {
+        )
+        {
             Debug.Assert(fullPath != null);
 
             // Must use a valid Win32 constant
@@ -406,7 +416,8 @@ namespace System.IO
                 if (
                     errorCode == Interop.Errors.ERROR_PATH_NOT_FOUND
                     && fullPath.Length == Path.GetPathRoot(fullPath)!.Length
-                ) {
+                )
+                {
                     errorCode = Interop.Errors.ERROR_ACCESS_DENIED;
                 }
 

@@ -146,7 +146,8 @@ namespace System.Web.Mvc
             string name,
             string controllerName,
             string areaName
-        ) {
+        )
+        {
             return String.Format(
                 CultureInfo.InvariantCulture,
                 CacheKeyFormat,
@@ -185,7 +186,8 @@ namespace System.Web.Mvc
             ControllerContext controllerContext,
             string partialViewName,
             bool useCache
-        ) {
+        )
+        {
             if (controllerContext == null)
             {
                 throw new ArgumentNullException("controllerContext");
@@ -222,7 +224,8 @@ namespace System.Web.Mvc
             string viewName,
             string masterName,
             bool useCache
-        ) {
+        )
+        {
             if (controllerContext == null)
             {
                 throw new ArgumentNullException("controllerContext");
@@ -262,7 +265,8 @@ namespace System.Web.Mvc
             if (
                 String.IsNullOrEmpty(viewPath)
                 || (String.IsNullOrEmpty(masterPath) && !String.IsNullOrEmpty(masterName))
-            ) {
+            )
+            {
                 return new ViewEngineResult(viewLocationsSearched.Union(masterLocationsSearched));
             }
 
@@ -279,7 +283,8 @@ namespace System.Web.Mvc
             string cacheKeyPrefix,
             bool useCache,
             out string[] searchedLocations
-        ) {
+        )
+        {
             searchedLocations = _emptyLocations;
 
             if (String.IsNullOrEmpty(name))
@@ -379,7 +384,8 @@ namespace System.Web.Mvc
             string areaName,
             string cacheKey,
             ref string[] searchedLocations
-        ) {
+        )
+        {
             string result = String.Empty;
             searchedLocations = new string[locations.Count];
 
@@ -423,7 +429,8 @@ namespace System.Web.Mvc
                         if (
                             displayMode.DisplayModeId
                             != virtualPathDisplayInfo.DisplayMode.DisplayModeId
-                        ) {
+                        )
+                        {
                             DisplayInfo displayInfoToCache = displayMode.GetDisplayInfo(
                                 controllerContext.HttpContext,
                                 virtualPath,
@@ -456,7 +463,8 @@ namespace System.Web.Mvc
             string name,
             string cacheKey,
             ref string[] searchedLocations
-        ) {
+        )
+        {
             string result = name;
 
             if (!(FilePathIsSupported(name) && FileExists(controllerContext, name)))
@@ -487,7 +495,8 @@ namespace System.Web.Mvc
         private static List<ViewLocation> GetViewLocations(
             string[] viewLocationFormats,
             string[] areaViewLocationFormats
-        ) {
+        )
+        {
             List<ViewLocation> allLocations = new List<ViewLocation>();
 
             if (areaViewLocationFormats != null)

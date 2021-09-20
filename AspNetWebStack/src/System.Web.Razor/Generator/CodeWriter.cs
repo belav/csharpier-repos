@@ -176,7 +176,8 @@ namespace System.Web.Razor.Generator
         protected internal virtual void EmitStartMethodInvoke(
             string methodName,
             params string[] genericArguments
-        ) {
+        )
+        {
             EmitStartMethodInvoke(methodName);
         }
 

@@ -59,7 +59,8 @@ namespace System.Runtime.CompilerServices.Tests
                 var field in typeof(RuntimeFeature).GetFields(
                     BindingFlags.Public | BindingFlags.Static
                 )
-            ) {
+            )
+            {
                 if (!field.IsLiteral)
                     continue;
 

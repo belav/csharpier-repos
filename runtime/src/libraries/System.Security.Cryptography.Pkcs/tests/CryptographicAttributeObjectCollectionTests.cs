@@ -184,7 +184,8 @@ namespace System.Security.Cryptography.Pkcs.Tests
         private static void AssertEquals(
             CryptographicAttributeObjectCollection c,
             IList<CryptographicAttributeObject> expected
-        ) {
+        )
+        {
             Assert.Equal(expected.Count, c.Count);
 
             for (int i = 0; i < c.Count; i++)
@@ -241,7 +242,8 @@ namespace System.Security.Cryptography.Pkcs.Tests
         private static void ValidateEnumerator(
             IEnumerator enumerator,
             IList<CryptographicAttributeObject> expected
-        ) {
+        )
+        {
             foreach (CryptographicAttributeObject e in expected)
             {
                 Assert.True(enumerator.MoveNext());

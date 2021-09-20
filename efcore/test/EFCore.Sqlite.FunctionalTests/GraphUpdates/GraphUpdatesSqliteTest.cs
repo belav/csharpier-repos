@@ -28,7 +28,8 @@ namespace Microsoft.EntityFrameworkCore
                 protected override void OnModelCreating(
                     ModelBuilder modelBuilder,
                     DbContext context
-                ) {
+                )
+                {
                     modelBuilder.HasChangeTrackingStrategy(
                         ChangeTrackingStrategy.ChangingAndChangedNotifications
                     );
@@ -55,7 +56,8 @@ namespace Microsoft.EntityFrameworkCore
                 protected override void OnModelCreating(
                     ModelBuilder modelBuilder,
                     DbContext context
-                ) {
+                )
+                {
                     modelBuilder.HasChangeTrackingStrategy(
                         ChangeTrackingStrategy.ChangedNotifications
                     );
@@ -83,7 +85,8 @@ namespace Microsoft.EntityFrameworkCore
                 protected override void OnModelCreating(
                     ModelBuilder modelBuilder,
                     DbContext context
-                ) {
+                )
+                {
                     modelBuilder.HasChangeTrackingStrategy(
                         ChangeTrackingStrategy.ChangingAndChangedNotificationsWithOriginalValues
                     );
@@ -113,7 +116,8 @@ namespace Microsoft.EntityFrameworkCore
                 protected override void OnModelCreating(
                     ModelBuilder modelBuilder,
                     DbContext context
-                ) {
+                )
+                {
                     modelBuilder.HasChangeTrackingStrategy(ChangeTrackingStrategy.Snapshot);
 
                     base.OnModelCreating(modelBuilder, context);

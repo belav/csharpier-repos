@@ -30,7 +30,8 @@ class B
         int a18,
         int a19,
         int a20
-    ) {
+    )
+    {
         a20 = a19;
         return a20;
     }

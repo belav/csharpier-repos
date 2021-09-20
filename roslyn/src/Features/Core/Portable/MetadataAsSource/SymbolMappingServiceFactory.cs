@@ -29,7 +29,8 @@ namespace Microsoft.CodeAnalysis.MetadataAsSource
                 Document document,
                 SymbolKey symbolId,
                 CancellationToken cancellationToken
-            ) {
+            )
+            {
                 if (!(document.Project.Solution.Workspace is MetadataAsSourceWorkspace workspace))
                 {
                     throw new ArgumentException(
@@ -45,7 +46,8 @@ namespace Microsoft.CodeAnalysis.MetadataAsSource
                 Document document,
                 ISymbol symbol,
                 CancellationToken cancellationToken
-            ) {
+            )
+            {
                 return await MapSymbolAsync(
                         document,
                         SymbolKey.Create(symbol, cancellationToken),

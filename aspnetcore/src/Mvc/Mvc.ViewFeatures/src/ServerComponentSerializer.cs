@@ -25,7 +25,8 @@ namespace Microsoft.AspNetCore.Mvc.ViewFeatures
             Type type,
             ParameterView parameters,
             bool prerendered
-        ) {
+        )
+        {
             var (sequence, serverComponent) = CreateSerializedServerComponent(
                 invocationId,
                 type,
@@ -40,7 +41,8 @@ namespace Microsoft.AspNetCore.Mvc.ViewFeatures
             ServerComponentInvocationSequence invocationId,
             Type rootComponent,
             ParameterView parameters
-        ) {
+        )
+        {
             var sequence = invocationId.Next();
 
             var (definitions, values) = ComponentParameter.FromParameterView(parameters);

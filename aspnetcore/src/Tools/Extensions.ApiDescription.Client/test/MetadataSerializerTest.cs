@@ -88,7 +88,8 @@ namespace Microsoft.Extensions.ApiDescription.Client
         public void SetMetadata_UpdatesTaskAsExpected_WithLegacyItem(
             string value,
             string escapedValue
-        ) {
+        )
+        {
             // Arrange
             var item = new Mock<ITaskItem>(MockBehavior.Strict);
             var key = "My key";
@@ -150,7 +151,8 @@ namespace Microsoft.Extensions.ApiDescription.Client
         public void DeserializeMetadata_ReturnsExpectedTask_WhenEscaping(
             string value,
             string escapedValue
-        ) {
+        )
+        {
             // Arrange
             var identity = "../files/azureMonitor.json";
             var input = $"Identity={identity}|Value={escapedValue}";
@@ -168,7 +170,8 @@ namespace Microsoft.Extensions.ApiDescription.Client
         public void DeserializeMetadata_ReturnsExpectedTask_WhenEscapingIdentity(
             string value,
             string escapedValue
-        ) {
+        )
+        {
             // Arrange
             var input = $"Identity={escapedValue}|Value=a value";
 
@@ -237,7 +240,8 @@ namespace Microsoft.Extensions.ApiDescription.Client
         [MemberData(nameof(EscapedValues))]
         public void SerializeMetadata_ReturnsExpectedString_WhenEscapingIdentity(
             string escapedValue
-        ) {
+        )
+        {
             // Arrange
             var metadata = new SortedDictionary<string, string>(StringComparer.Ordinal)
             {
@@ -296,7 +300,8 @@ namespace Microsoft.Extensions.ApiDescription.Client
         public void SerializeMetadata_ReturnsExpectedString_WithLegacyItem_WhenEscaping(
             string value,
             string escapedValue
-        ) {
+        )
+        {
             // Arrange
             var identity = "../files/azureMonitor.json";
             var metadata = new SortedDictionary<string, string>(StringComparer.Ordinal)
@@ -323,7 +328,8 @@ namespace Microsoft.Extensions.ApiDescription.Client
         public void SerializeMetadata_ReturnsExpectedString_WithLegacyItem_WhenEscapingIdentity(
             string value,
             string escapedValue
-        ) {
+        )
+        {
             // Arrange
             var metadata = new SortedDictionary<string, string>(StringComparer.Ordinal)
             {

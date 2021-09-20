@@ -65,7 +65,8 @@ namespace System.Runtime.InteropServices.Tests
         public void ThrowExceptionForHR_ErrorInfo_ReturnsValidException(
             int errorCode,
             IntPtr errorInfo
-        ) {
+        )
+        {
             ClearCurrentIErrorInfo();
 
             bool calledCatch = false;

@@ -46,7 +46,8 @@ namespace Newtonsoft.Json.Linq
             JsonWriter writer,
             CancellationToken cancellationToken,
             params JsonConverter[] converters
-        ) {
+        )
+        {
             throw new NotImplementedException();
         }
 
@@ -76,7 +77,8 @@ namespace Newtonsoft.Json.Linq
         public static Task<JToken> ReadFromAsync(
             JsonReader reader,
             CancellationToken cancellationToken = default
-        ) {
+        )
+        {
             return ReadFromAsync(reader, null, cancellationToken);
         }
 
@@ -98,7 +100,8 @@ namespace Newtonsoft.Json.Linq
             JsonReader reader,
             JsonLoadSettings? settings,
             CancellationToken cancellationToken = default
-        ) {
+        )
+        {
             ValidationUtils.ArgumentNotNull(reader, nameof(reader));
 
             if (reader.TokenType == JsonToken.None)
@@ -109,7 +112,8 @@ namespace Newtonsoft.Json.Linq
                             ? reader.ReadAndMoveToContentAsync(cancellationToken)
                             : reader.ReadAsync(cancellationToken)
                     ).ConfigureAwait(false)
-                ) {
+                )
+                {
                     throw JsonReaderException.Create(
                         reader,
                         "Error reading JToken from JsonReader."
@@ -179,7 +183,8 @@ namespace Newtonsoft.Json.Linq
         public static Task<JToken> LoadAsync(
             JsonReader reader,
             CancellationToken cancellationToken = default
-        ) {
+        )
+        {
             return LoadAsync(reader, null, cancellationToken);
         }
 
@@ -200,7 +205,8 @@ namespace Newtonsoft.Json.Linq
             JsonReader reader,
             JsonLoadSettings? settings,
             CancellationToken cancellationToken = default
-        ) {
+        )
+        {
             return ReadFromAsync(reader, settings, cancellationToken);
         }
     }

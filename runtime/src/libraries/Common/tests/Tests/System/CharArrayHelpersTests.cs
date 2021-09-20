@@ -23,7 +23,8 @@ namespace Tests.System
             string leftString,
             string rightString,
             bool expected
-        ) {
+        )
+        {
             char[] left = leftString.ToCharArray();
             char[] right = rightString.ToCharArray();
 

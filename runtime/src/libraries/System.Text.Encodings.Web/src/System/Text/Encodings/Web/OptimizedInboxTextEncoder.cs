@@ -35,7 +35,8 @@ namespace System.Text.Encodings.Web
             in AllowedBmpCodePointsBitmap allowedCodePointsBmp,
             bool forbidHtmlSensitiveCharacters = true,
             ReadOnlySpan<char> extraCharactersToEscape = default
-        ) {
+        )
+        {
             Debug.Assert(scalarEscaper != null);
 
             _scalarEscaper = scalarEscaper;
@@ -90,7 +91,8 @@ namespace System.Text.Encodings.Web
             char* buffer,
             int bufferLength,
             out int numberOfCharactersWritten
-        ) {
+        )
+        {
             Span<char> destination = new Span<char>(buffer, bufferLength);
 
             if (_allowedBmpCodePoints.IsCodePointAllowed((uint)unicodeScalar))
@@ -131,7 +133,8 @@ namespace System.Text.Encodings.Web
             out int charsConsumed,
             out int charsWritten,
             bool isFinalBlock
-        ) {
+        )
+        {
             _AssertThisNotNull(); // hoist "this != null" check out of hot loop below
 
             int srcIdx = 0;
@@ -212,7 +215,8 @@ namespace System.Text.Encodings.Web
                             destination.Slice(dstIdx),
                             out int utf16CodeUnitCount
                         )
-                    ) {
+                    )
+                    {
                         goto DestTooSmall;
                     }
 
@@ -262,7 +266,8 @@ namespace System.Text.Encodings.Web
             out int bytesConsumed,
             out int bytesWritten,
             bool isFinalBlock
-        ) {
+        )
+        {
             _AssertThisNotNull(); // hoist "this != null" check out of hot loop below
 
             int srcIdx = 0;
@@ -336,7 +341,8 @@ namespace System.Text.Encodings.Web
                             destination.Slice(dstIdx),
                             out int utf8CodeUnitCount
                         )
-                    ) {
+                    )
+                    {
                         goto DestTooSmall;
                     }
                     dstIdx += utf8CodeUnitCount;

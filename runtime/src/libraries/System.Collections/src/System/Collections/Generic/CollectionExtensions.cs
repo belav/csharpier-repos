@@ -10,7 +10,8 @@ namespace System.Collections.Generic
         public static TValue? GetValueOrDefault<TKey, TValue>(
             this IReadOnlyDictionary<TKey, TValue> dictionary,
             TKey key
-        ) {
+        )
+        {
             return dictionary.GetValueOrDefault(key, default!);
         }
 
@@ -18,7 +19,8 @@ namespace System.Collections.Generic
             this IReadOnlyDictionary<TKey, TValue> dictionary,
             TKey key,
             TValue defaultValue
-        ) {
+        )
+        {
             if (dictionary == null)
             {
                 throw new ArgumentNullException(nameof(dictionary));
@@ -32,7 +34,8 @@ namespace System.Collections.Generic
             this IDictionary<TKey, TValue> dictionary,
             TKey key,
             TValue value
-        ) {
+        )
+        {
             if (dictionary == null)
             {
                 throw new ArgumentNullException(nameof(dictionary));
@@ -51,7 +54,8 @@ namespace System.Collections.Generic
             this IDictionary<TKey, TValue> dictionary,
             TKey key,
             [MaybeNullWhen(false)] out TValue value
-        ) {
+        )
+        {
             if (dictionary == null)
             {
                 throw new ArgumentNullException(nameof(dictionary));

@@ -34,17 +34,18 @@ namespace Microsoft.VisualStudio.LanguageServices.CSharp.LanguageService
             TextSpan[] currentStatementSpan,
             IComponentModel componentModel,
             IServiceProvider serviceProvider
-        ) : base(
-            view,
-            vsTextView,
-            debuggerBuffer,
-            contextBuffer,
-            currentStatementSpan,
-            componentModel,
-            serviceProvider,
-            componentModel.GetService<IContentTypeRegistryService>()
-                .GetContentType(ContentTypeNames.CSharpContentType)
-        ) { }
+        )
+            : base(
+                view,
+                vsTextView,
+                debuggerBuffer,
+                contextBuffer,
+                currentStatementSpan,
+                componentModel,
+                serviceProvider,
+                componentModel.GetService<IContentTypeRegistryService>()
+                    .GetContentType(ContentTypeNames.CSharpContentType)
+            ) { }
 
         // Test constructor
         internal CSharpDebuggerIntelliSenseContext(
@@ -53,15 +54,16 @@ namespace Microsoft.VisualStudio.LanguageServices.CSharp.LanguageService
             TextSpan[] currentStatementSpan,
             IComponentModel componentModel,
             bool immediateWindow
-        ) : base(
-            view,
-            contextBuffer,
-            currentStatementSpan,
-            componentModel,
-            componentModel.GetService<IContentTypeRegistryService>()
-                .GetContentType(ContentTypeNames.CSharpContentType),
-            immediateWindow
-        ) { }
+        )
+            : base(
+                view,
+                contextBuffer,
+                currentStatementSpan,
+                componentModel,
+                componentModel.GetService<IContentTypeRegistryService>()
+                    .GetContentType(ContentTypeNames.CSharpContentType),
+                immediateWindow
+            ) { }
 
         protected override int GetAdjustedContextPoint(int contextPoint, Document document)
         {
@@ -77,14 +79,16 @@ namespace Microsoft.VisualStudio.LanguageServices.CSharp.LanguageService
                 && token.IsKindOrHasMatchingText(SyntaxKind.CloseBraceToken)
                 && token.Parent.IsKind(SyntaxKind.Block)
                 && token.Parent.Parent is MemberDeclarationSyntax
-            ) {
+            )
+            {
                 return contextPoint;
             }
 
             if (
                 token.IsKindOrHasMatchingText(SyntaxKind.CloseBraceToken)
                 && token.Parent.IsKind(SyntaxKind.Block)
-            ) {
+            )
+            {
                 return token.SpanStart;
             }
 
@@ -94,7 +98,8 @@ namespace Microsoft.VisualStudio.LanguageServices.CSharp.LanguageService
         protected override ITrackingSpan GetPreviousStatementBufferAndSpan(
             int contextPoint,
             Document document
-        ) {
+        )
+        {
             var previousTrackingSpan = ContextBuffer.CurrentSnapshot.CreateTrackingSpan(
                 Span.FromBounds(0, contextPoint),
                 SpanTrackingMode.EdgeNegative

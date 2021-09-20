@@ -15,7 +15,8 @@ namespace Microsoft.AspNetCore.Mvc.FunctionalTests
     {
         public AuthMiddlewareUsingRequireAuthTest(
             MvcTestFixture<SecurityWebSite.StartupWithRequireAuth> fixture
-        ) {
+        )
+        {
             var factory =
                 fixture.Factories.FirstOrDefault()
                 ?? fixture.WithWebHostBuilder(ConfigureWebHostBuilder);

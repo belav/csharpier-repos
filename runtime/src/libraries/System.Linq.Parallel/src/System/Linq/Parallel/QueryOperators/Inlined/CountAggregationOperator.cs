@@ -46,7 +46,8 @@ namespace System.Linq.Parallel
                     ParallelMergeOptions.FullyBuffered,
                     true
                 )
-            ) {
+            )
+            {
                 // We just reduce the elements in each output partition.
                 int count = 0;
                 while (enumerator.MoveNext())
@@ -71,7 +72,8 @@ namespace System.Linq.Parallel
             QueryOperatorEnumerator<TSource, TKey> source,
             object? sharedData,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             return new CountAggregationOperatorEnumerator<TKey>(source, index, cancellationToken);
         }
 

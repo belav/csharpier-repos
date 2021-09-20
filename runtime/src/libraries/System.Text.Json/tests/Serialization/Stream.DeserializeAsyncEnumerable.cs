@@ -23,7 +23,8 @@ namespace System.Text.Json.Serialization.Tests
         public static async Task DeserializeAsyncEnumerable_ReadSimpleObjectAsync(
             int count,
             int bufferSize
-        ) {
+        )
+        {
             JsonSerializerOptions options = new JsonSerializerOptions
             {
                 DefaultBufferSize = bufferSize
@@ -37,7 +38,8 @@ namespace System.Text.Json.Serialization.Tests
                     stream,
                     options
                 )
-            ) {
+            )
+            {
                 Assert.Equal(callbackCount, item.MyInt32);
 
                 item.MyInt32 = 2; // Put correct value back for Verify()
@@ -68,7 +70,8 @@ namespace System.Text.Json.Serialization.Tests
         public static async Task DeserializeAsyncEnumerable_ReadSourceAsync<TElement>(
             IEnumerable<TElement> source,
             int bufferSize
-        ) {
+        )
+        {
             JsonSerializerOptions options = new JsonSerializerOptions
             {
                 DefaultBufferSize = bufferSize

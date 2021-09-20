@@ -39,7 +39,8 @@ namespace System.Net.Test.Common
             Func<GenericLoopbackServer, Task> serverFunc,
             int millisecondsTimeout = 60_000,
             GenericLoopbackOptions options = null
-        ) {
+        )
+        {
             return CreateServerAsync(
                     async (server, uri) =>
                     {
@@ -78,7 +79,8 @@ namespace System.Net.Test.Common
             HttpStatusCode statusCode = HttpStatusCode.OK,
             string content = "",
             IList<HttpHeaderData> additionalHeaders = null
-        ) {
+        )
+        {
             return HandleRequestAsync(statusCode, headers: additionalHeaders, content: content);
         }
     }
@@ -133,7 +135,8 @@ namespace System.Net.Test.Common
             string content,
             bool isFinal = true,
             int requestId = 0
-        ) {
+        )
+        {
             await SendResponseBodyAsync(
                 String.IsNullOrEmpty(content) ? new byte[0] : Encoding.ASCII.GetBytes(content),
                 isFinal,
@@ -175,7 +178,8 @@ namespace System.Net.Test.Common
             bool huffmanEncoded = false,
             byte[] raw = null,
             Encoding valueEncoding = null
-        ) {
+        )
+        {
             Name = name;
             Value = value;
             HuffmanEncoded = huffmanEncoded;
@@ -203,7 +207,8 @@ namespace System.Net.Test.Common
 
         public static async Task<HttpRequestData> FromHttpRequestMessageAsync(
             System.Net.Http.HttpRequestMessage request
-        ) {
+        )
+        {
             var result = new HttpRequestData();
             result.Method = request.Method.ToString();
             result.Path = request.RequestUri?.AbsolutePath;

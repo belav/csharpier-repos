@@ -47,7 +47,8 @@ namespace System.Linq.Parallel.Tests
         public static IEnumerable<object[]> Ranges<T>(
             IEnumerable<int> counts,
             Func<int, IEnumerable<T>> modifiers
-        ) {
+        )
+        {
             foreach (object[] parms in Ranges(counts))
             {
                 foreach (T mod in modifiers((int)parms[1]))
@@ -60,7 +61,8 @@ namespace System.Linq.Parallel.Tests
         public static IEnumerable<object[]> Ranges<T>(
             IEnumerable<int> counts,
             Func<int, T[]> modifiers
-        ) {
+        )
+        {
             foreach (object[] parms in Ranges(counts, i => modifiers(i).Cast<T>()))
             {
                 yield return parms;

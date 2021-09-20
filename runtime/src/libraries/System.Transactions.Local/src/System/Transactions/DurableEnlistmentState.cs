@@ -86,7 +86,8 @@ namespace System.Transactions
         internal override void ChangeStatePromoted(
             InternalEnlistment enlistment,
             IPromotedEnlistment promotedEnlistment
-        ) {
+        )
+        {
             // Save the promoted enlistment because future notifications must be sent here.
             enlistment.PromotedEnlistment = promotedEnlistment;
 

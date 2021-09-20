@@ -16,7 +16,8 @@ namespace System.Web.Mvc
             Func<object> modelAccessor,
             Type modelType,
             string propertyName
-        ) {
+        )
+        {
             List<Attribute> attributeList = new List<Attribute>(attributes);
             DisplayColumnAttribute displayColumnAttribute =
                 attributeList.OfType<DisplayColumnAttribute>().FirstOrDefault();
@@ -123,7 +124,8 @@ namespace System.Web.Mvc
             DataAnnotationsModelMetadata result,
             DataTypeAttribute dataTypeAttribute,
             DisplayFormatAttribute displayFormatAttribute
-        ) {
+        )
+        {
             if (dataTypeAttribute != null)
             {
                 result.DataTypeName = dataTypeAttribute.ToDataTypeName();
@@ -140,7 +142,8 @@ namespace System.Web.Mvc
                 if (
                     displayFormatAttribute != null
                     && dataTypeAttribute.GetType() != typeof(DataTypeAttribute)
-                ) {
+                )
+                {
                     result.HasNonDefaultEditFormat = true;
                 }
             }
@@ -164,7 +167,8 @@ namespace System.Web.Mvc
                 if (
                     !displayFormatAttribute.HtmlEncode
                     && String.IsNullOrWhiteSpace(result.DataTypeName)
-                ) {
+                )
+                {
                     result.DataTypeName = DataTypeUtil.HtmlTypeName;
                 }
 

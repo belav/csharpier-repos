@@ -40,7 +40,8 @@ namespace System.Web.Mvc
                 HttpContext context,
                 AsyncCallback cb,
                 object extraData
-            ) {
+            )
+            {
                 return Wrap(() => _httpHandler.BeginProcessRequest(context, cb, extraData));
             }
 

@@ -40,7 +40,8 @@ namespace System.Composition.TypedParts.Discovery
         public ExportDescriptorPromise GetExportDescriptorPromise(
             CompositionContract contract,
             DependencyAccessor definitionAccessor
-        ) {
+        )
+        {
             return new ExportDescriptorPromise(
                 contract,
                 Part.PartType.Name,

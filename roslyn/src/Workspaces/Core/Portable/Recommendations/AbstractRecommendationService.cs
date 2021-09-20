@@ -38,7 +38,8 @@ namespace Microsoft.CodeAnalysis.Recommendations
             int position,
             OptionSet options,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var context = CreateContext(workspace, semanticModel, position, cancellationToken);
             var filterOutOfScopeLocals = options.GetOption(
                 RecommendationOptions.FilterOutOfScopeLocals,
@@ -87,7 +88,8 @@ namespace Microsoft.CodeAnalysis.Recommendations
             internal ShouldIncludeSymbolContext(
                 SyntaxContext context,
                 CancellationToken cancellationToken
-            ) {
+            )
+            {
                 _context = context;
                 _cancellationToken = cancellationToken;
             }
@@ -152,7 +154,8 @@ namespace Microsoft.CodeAnalysis.Recommendations
                     (_context.IsStatementContext || _context.IsAnyExpressionContext)
                     && !symbol.IsStatic
                     && isMember
-                ) {
+                )
+                {
                     var containingTypeOriginalDefinition = symbol.ContainingType.OriginalDefinition;
                     if (this.GetOuterTypesAndBases().Contains(containingTypeOriginalDefinition))
                     {

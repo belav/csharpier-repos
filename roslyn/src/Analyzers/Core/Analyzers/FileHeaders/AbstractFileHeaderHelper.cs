@@ -158,7 +158,8 @@ namespace Microsoft.CodeAnalysis.FileHeaders
                 if (
                     currentTrivia.RawKind != EndOfLineTriviaKind
                     && currentTrivia.RawKind != WhitespaceTriviaKind
-                ) {
+                )
+                {
                     // encountered non-whitespace trivia -> the search is done.
                     return index;
                 }

@@ -43,7 +43,8 @@ namespace System.Configuration
                     && !Property.PropertyType.IsPrimitive
                     && !(_value is string)
                     && !(_value is DateTime)
-                ) {
+                )
+                {
                     UsingDefaultValue = false;
                     _changedSinceLastSerialized = true;
                     IsDirty = true;
@@ -209,7 +210,8 @@ namespace System.Configuration
             Type type,
             SettingsSerializeAs serializeAs,
             string serializedValue
-        ) {
+        )
+        {
             // Deal with string types
             if (
                 type == typeof(string)
@@ -283,7 +285,8 @@ namespace System.Configuration
             Type type,
             SettingsSerializeAs serializeAs,
             bool throwOnError
-        ) {
+        )
+        {
             if (serializeAs == SettingsSerializeAs.ProviderSpecific)
             {
                 if (type == typeof(string) || type.IsPrimitive)

@@ -21,7 +21,8 @@ namespace Microsoft.CodeAnalysis.CodeFixes
             protected override bool SupportsLanguage(
                 ExportCodeFixProviderAttribute exportAttribute,
                 string language
-            ) {
+            )
+            {
                 return exportAttribute.Languages == null
                     || exportAttribute.Languages.Length == 0
                     || exportAttribute.Languages.Contains(language);
@@ -30,7 +31,8 @@ namespace Microsoft.CodeAnalysis.CodeFixes
             protected override bool TryGetExtensionsFromReference(
                 AnalyzerReference reference,
                 out ImmutableArray<CodeFixProvider> extensions
-            ) {
+            )
+            {
                 // check whether the analyzer reference knows how to return fixers directly.
                 if (reference is ICodeFixProviderFactory codeFixProviderFactory)
                 {

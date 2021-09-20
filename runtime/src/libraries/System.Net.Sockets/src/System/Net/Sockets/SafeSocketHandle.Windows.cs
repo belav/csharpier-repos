@@ -26,7 +26,8 @@ namespace System.Net.Sockets
         // Binds the Socket Win32 Handle to the ThreadPool's CompletionPort.
         internal ThreadPoolBoundHandle GetOrAllocateThreadPoolBoundHandle(
             bool trySkipCompletionPortOnSuccess
-        ) {
+        )
+        {
             if (_released)
             {
                 ThrowSocketDisposedException();
@@ -84,7 +85,8 @@ namespace System.Net.Sockets
                     if (
                         trySkipCompletionPortOnSuccess
                         && CompletionPortHelper.SkipCompletionPortOnSuccess(boundHandle.Handle)
-                    ) {
+                    )
+                    {
                         _skipCompletionPortOnSuccess = true;
                     }
 
@@ -214,7 +216,8 @@ namespace System.Net.Sockets
                 errorCode != SocketError.Success
                 && errorCode != SocketError.InvalidArgument
                 && errorCode != SocketError.ProtocolOption
-            ) {
+            )
+            {
                 // Too dangerous to try closesocket() - it might block!
                 return errorCode;
             }

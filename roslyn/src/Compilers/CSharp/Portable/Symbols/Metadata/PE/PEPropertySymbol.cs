@@ -63,7 +63,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols.Metadata.PE
             PropertyDefinitionHandle handle,
             PEMethodSymbol getMethod,
             PEMethodSymbol setMethod
-        ) {
+        )
+        {
             Debug.Assert((object)moduleSymbol != null);
             Debug.Assert((object)containingType != null);
             Debug.Assert(!handle.IsNil);
@@ -125,7 +126,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols.Metadata.PE
             PEMethodSymbol setMethod,
             ParamInfo<TypeSymbol>[] propertyParams,
             MetadataDecoder metadataDecoder
-        ) {
+        )
+        {
             _containingType = containingType;
             var module = moduleSymbol.Module;
             PropertyAttributes mdFlags = 0;
@@ -448,7 +450,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols.Metadata.PE
                             if (
                                 getAccessibility != Accessibility.NotApplicable
                                 && setAccessibility != Accessibility.NotApplicable
-                            ) {
+                            )
+                            {
                                 break;
                             }
 
@@ -464,7 +467,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols.Metadata.PE
                                 && !curr.ContainingAssembly.HasInternalAccessTo(
                                     next.ContainingAssembly
                                 )
-                            ) {
+                            )
+                            {
                                 crossedAssemblyBoundaryWithoutInternalsVisibleTo = true;
                             }
 
@@ -682,7 +686,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols.Metadata.PE
 
         internal override IEnumerable<CSharpAttributeData> GetCustomAttributesToEmit(
             PEModuleBuilder moduleBuilder
-        ) {
+        )
+        {
             return GetAttributes();
         }
 
@@ -710,7 +715,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols.Metadata.PE
                         (object)_setMethod == null
                         || _setMethod.ExplicitInterfaceImplementations.Length == 0
                     )
-                ) {
+                )
+                {
                     return ImmutableArray<PropertySymbol>.Empty;
                 }
 
@@ -730,7 +736,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols.Metadata.PE
                     if (
                         !prop.SetMethod.IsImplementable()
                         || propertiesWithImplementedSetters.Contains(prop)
-                    ) {
+                    )
+                    {
                         builder.Add(prop);
                     }
                 }
@@ -762,7 +769,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols.Metadata.PE
             ParamInfo<TypeSymbol>[] getMethodParams,
             PEMethodSymbol setMethod,
             ParamInfo<TypeSymbol>[] setMethodParams
-        ) {
+        )
+        {
             Debug.Assert((getMethodParams == null) == ((object)getMethod == null));
             Debug.Assert((setMethodParams == null) == ((object)setMethod == null));
 
@@ -778,7 +786,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols.Metadata.PE
                     compareParamByRef: true,
                     compareReturnType: true
                 )
-            ) {
+            )
+            {
                 return false;
             }
 
@@ -791,7 +800,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols.Metadata.PE
                     compareParamByRef: true,
                     compareReturnType: true
                 )
-            ) {
+            )
+            {
                 return false;
             }
 
@@ -814,7 +824,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols.Metadata.PE
                     (getMethod.IsSealed != setMethod.IsSealed)
                     || (getMethod.IsOverride != setMethod.IsOverride)
                     || (getMethod.IsStatic != setMethod.IsStatic)
-                ) {
+                )
+                {
                     return false;
                 }
             }
@@ -829,7 +840,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols.Metadata.PE
             ParamInfo<TypeSymbol>[] propertyParams,
             ParamInfo<TypeSymbol>[] accessorParams,
             out bool anyParameterIsBad
-        ) {
+        )
+        {
             anyParameterIsBad = false;
 
             // First parameter is the property type.
@@ -885,7 +897,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols.Metadata.PE
             CultureInfo preferredCulture = null,
             bool expandIncludes = false,
             CancellationToken cancellationToken = default(CancellationToken)
-        ) {
+        )
+        {
             return PEDocumentationCommentUtils.GetDocumentationComment(
                 this,
                 _containingType.ContainingPEModule,
@@ -945,15 +958,17 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols.Metadata.PE
                 PEMethodSymbol setMethod,
                 ParamInfo<TypeSymbol>[] propertyParams,
                 MetadataDecoder metadataDecoder
-            ) : base(
-                moduleSymbol,
-                containingType,
-                handle,
-                getMethod,
-                setMethod,
-                propertyParams,
-                metadataDecoder
-            ) {
+            )
+                : base(
+                    moduleSymbol,
+                    containingType,
+                    handle,
+                    getMethod,
+                    setMethod,
+                    propertyParams,
+                    metadataDecoder
+                )
+            {
                 var returnInfo = propertyParams[0];
                 _refCustomModifiers = CSharpCustomModifier.Convert(returnInfo.RefCustomModifiers);
             }

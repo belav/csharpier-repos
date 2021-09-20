@@ -20,7 +20,8 @@ namespace Microsoft.AspNetCore.Testing
             IEnumerable<IXunitTestCase> testCases,
             IMessageSink executionMessageSink,
             ITestFrameworkExecutionOptions executionOptions
-        ) {
+        )
+        {
             using (
                 var assemblyRunner = new AspNetTestAssemblyRunner(
                     TestAssembly,
@@ -29,7 +30,8 @@ namespace Microsoft.AspNetCore.Testing
                     executionMessageSink,
                     executionOptions
                 )
-            ) {
+            )
+            {
                 await assemblyRunner.RunAsync();
             }
         }

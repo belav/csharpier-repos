@@ -49,7 +49,8 @@ namespace Microsoft.CodeAnalysis.CSharp
         internal virtual void ForceComplete(
             SourceLocation locationOpt,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             // must be overridden by source symbols, no-op for other symbols
             Debug.Assert(!this.RequiresCompletion);
         }
@@ -136,7 +137,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                     var container = this.ContainingSymbol;
                     (object)container != null;
                     container = container.ContainingSymbol
-                ) {
+                )
+                {
                     var ns = container as NamespaceSymbol;
                     if ((object)ns != null)
                     {
@@ -377,11 +379,13 @@ namespace Microsoft.CodeAnalysis.CSharp
                         var descendant in parent.DescendantNodesAndSelf(
                             c => c.Location.SourceSpan.Contains(location.SourceSpan)
                         )
-                    ) {
+                    )
+                    {
                         if (
                             descendant is TNode
                             && descendant.Location.SourceSpan.Contains(location.SourceSpan)
-                        ) {
+                        )
+                        {
                             found = descendant;
                         }
                     }
@@ -533,7 +537,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                                     !(
                                         (PropertySymbol)method.AssociatedSymbol
                                     ).CanCallMethodsDirectly()
-                                ) {
+                                )
+                                {
                                     return false;
                                 }
                                 break;
@@ -733,7 +738,8 @@ namespace Microsoft.CodeAnalysis.CSharp
         internal static void AddSynthesizedAttribute(
             ref ArrayBuilder<SynthesizedAttributeData> attributes,
             SynthesizedAttributeData attribute
-        ) {
+        )
+        {
             if (attribute != null)
             {
                 if (attributes == null)
@@ -788,7 +794,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             SyntaxTree tree,
             TextSpan? definedWithinSpan,
             CancellationToken cancellationToken = default(CancellationToken)
-        ) {
+        )
+        {
             var declaringReferences = this.DeclaringSyntaxReferences;
             if (this.IsImplicitlyDeclared && declaringReferences.Length == 0)
             {
@@ -809,7 +816,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                         !definedWithinSpan.HasValue
                         || syntaxRef.Span.IntersectsWith(definedWithinSpan.Value)
                     )
-                ) {
+                )
+                {
                     return true;
                 }
             }
@@ -821,7 +829,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             SourceLocation locationOpt,
             Symbol member,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             if (
                 locationOpt == null
                 || member.IsDefinedInSourceTree(
@@ -829,7 +838,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                     locationOpt.SourceSpan,
                     cancellationToken
                 )
-            ) {
+            )
+            {
                 cancellationToken.ThrowIfCancellationRequested();
                 member.ForceComplete(locationOpt, cancellationToken);
             }
@@ -870,7 +880,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             CultureInfo preferredCulture = null,
             bool expandIncludes = false,
             CancellationToken cancellationToken = default(CancellationToken)
-        ) {
+        )
+        {
             return "";
         }
 
@@ -897,7 +908,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             if (
                 diagnostics.DiagnosticBag?.IsEmptyWithoutResolution == false
                 || diagnostics.DependenciesBag?.Count > 0
-            ) {
+            )
+            {
                 CSharpCompilation compilation = this.DeclaringCompilation;
                 Debug.Assert(compilation != null);
 
@@ -995,7 +1007,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                     info.Code == HighestPriorityUseSiteError
                     || HighestPriorityUseSiteError == Int32.MaxValue
                 )
-            ) {
+            )
+            {
                 // this error is final, no other error can override it:
                 result = info;
                 return true;
@@ -1005,7 +1018,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                 result == null
                 || result.Severity == DiagnosticSeverity.Warning
                     && info.Severity == DiagnosticSeverity.Error
-            ) {
+            )
+            {
                 // there could be an error of higher-priority
                 result = info;
                 return false;
@@ -1021,7 +1035,8 @@ namespace Microsoft.CodeAnalysis.CSharp
         internal bool MergeUseSiteInfo(
             ref UseSiteInfo<AssemblySymbol> result,
             UseSiteInfo<AssemblySymbol> info
-        ) {
+        )
+        {
             DiagnosticInfo diagnosticInfo = result.DiagnosticInfo;
 
             bool retVal = MergeUseSiteDiagnostics(ref diagnosticInfo, info.DiagnosticInfo);
@@ -1059,7 +1074,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             DiagnosticInfo info,
             DiagnosticBag diagnostics,
             Location location
-        ) {
+        )
+        {
             // Unlike VB the C# Dev11 compiler reports only a single unification error/warning.
             // By dropping the location we effectively merge all unification use-site errors that have the same error code into a single error.
             // The error message clearly explains how to fix the problem and reporting the error for each location wouldn't add much value.
@@ -1067,7 +1083,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                 info.Code == (int)ErrorCode.WRN_UnifyReferenceBldRev
                 || info.Code == (int)ErrorCode.WRN_UnifyReferenceMajMin
                 || info.Code == (int)ErrorCode.ERR_AssemblyMatchBadVersion
-            ) {
+            )
+            {
                 location = NoLocation.Singleton;
             }
 
@@ -1079,7 +1096,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             DiagnosticInfo info,
             BindingDiagnosticBag diagnostics,
             Location location
-        ) {
+        )
+        {
             return diagnostics.ReportUseSiteDiagnostic(info, location);
         }
 
@@ -1089,7 +1107,8 @@ namespace Microsoft.CodeAnalysis.CSharp
         internal bool DeriveUseSiteInfoFromType(
             ref UseSiteInfo<AssemblySymbol> result,
             TypeSymbol type
-        ) {
+        )
+        {
             UseSiteInfo<AssemblySymbol> info = type.GetUseSiteInfo();
             if (info.DiagnosticInfo?.Code == (int)ErrorCode.ERR_BogusType)
             {
@@ -1101,7 +1120,8 @@ namespace Microsoft.CodeAnalysis.CSharp
 
         private void GetSymbolSpecificUnsupportedMetadataUseSiteErrorInfo(
             ref UseSiteInfo<AssemblySymbol> info
-        ) {
+        )
+        {
             switch (this.Kind)
             {
                 case SymbolKind.Field:
@@ -1128,7 +1148,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             ref UseSiteInfo<AssemblySymbol> result,
             TypeWithAnnotations type,
             AllowedRequiredModifierType allowedRequiredModifierType
-        ) {
+        )
+        {
             return DeriveUseSiteInfoFromType(ref result, type.Type)
                 || DeriveUseSiteInfoFromCustomModifiers(
                     ref result,
@@ -1140,7 +1161,8 @@ namespace Microsoft.CodeAnalysis.CSharp
         internal bool DeriveUseSiteInfoFromParameter(
             ref UseSiteInfo<AssemblySymbol> result,
             ParameterSymbol param
-        ) {
+        )
+        {
             return DeriveUseSiteInfoFromType(
                     ref result,
                     param.TypeWithAnnotations,
@@ -1160,7 +1182,8 @@ namespace Microsoft.CodeAnalysis.CSharp
         internal bool DeriveUseSiteInfoFromParameters(
             ref UseSiteInfo<AssemblySymbol> result,
             ImmutableArray<ParameterSymbol> parameters
-        ) {
+        )
+        {
             foreach (ParameterSymbol param in parameters)
             {
                 if (DeriveUseSiteInfoFromParameter(ref result, param))
@@ -1186,7 +1209,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             ref UseSiteInfo<AssemblySymbol> result,
             ImmutableArray<CustomModifier> customModifiers,
             AllowedRequiredModifierType allowedRequiredModifierType
-        ) {
+        )
+        {
             AllowedRequiredModifierType requiredModifiersFound = AllowedRequiredModifierType.None;
             bool checkRequiredModifiers = true;
 
@@ -1204,7 +1228,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                             & AllowedRequiredModifierType.System_Runtime_InteropServices_InAttribute
                         ) != 0
                         && modifierType.IsWellKnownTypeInAttribute()
-                    ) {
+                    )
+                    {
                         current =
                             AllowedRequiredModifierType.System_Runtime_InteropServices_InAttribute;
                     }
@@ -1215,7 +1240,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                         ) != 0
                         && modifierType.SpecialType
                             == SpecialType.System_Runtime_CompilerServices_IsVolatile
-                    ) {
+                    )
+                    {
                         current =
                             AllowedRequiredModifierType.System_Runtime_CompilerServices_Volatile;
                     }
@@ -1225,7 +1251,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                             & AllowedRequiredModifierType.System_Runtime_CompilerServices_IsExternalInit
                         ) != 0
                         && modifierType.IsWellKnownTypeIsExternalInit()
-                    ) {
+                    )
+                    {
                         current =
                             AllowedRequiredModifierType.System_Runtime_CompilerServices_IsExternalInit;
                     }
@@ -1235,7 +1262,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                             & AllowedRequiredModifierType.System_Runtime_CompilerServices_OutAttribute
                         ) != 0
                         && modifierType.IsWellKnownTypeOutAttribute()
-                    ) {
+                    )
+                    {
                         current =
                             AllowedRequiredModifierType.System_Runtime_CompilerServices_OutAttribute;
                     }
@@ -1253,7 +1281,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                                 ref result,
                                 GetSymbolSpecificUnsupportedMetadataUseSiteErrorInfo()
                             )
-                        ) {
+                        )
+                        {
                             return true;
                         }
 
@@ -1301,7 +1330,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             ImmutableArray<TypeWithAnnotations> types,
             Symbol owner,
             ref HashSet<TypeSymbol> checkedTypes
-        ) {
+        )
+        {
             foreach (var t in types)
             {
                 if (t.GetUnificationUseSiteDiagnosticRecursive(ref result, owner, ref checkedTypes))
@@ -1318,7 +1348,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             ImmutableArray<CustomModifier> modifiers,
             Symbol owner,
             ref HashSet<TypeSymbol> checkedTypes
-        ) {
+        )
+        {
             foreach (var modifier in modifiers)
             {
                 if (
@@ -1329,7 +1360,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                         owner,
                         ref checkedTypes
                     )
-                ) {
+                )
+                {
                     return true;
                 }
             }
@@ -1342,7 +1374,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             ImmutableArray<ParameterSymbol> parameters,
             Symbol owner,
             ref HashSet<TypeSymbol> checkedTypes
-        ) {
+        )
+        {
             foreach (var parameter in parameters)
             {
                 if (
@@ -1357,7 +1390,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                         owner,
                         ref checkedTypes
                     )
-                ) {
+                )
+                {
                     return true;
                 }
             }
@@ -1370,7 +1404,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             ImmutableArray<TypeParameterSymbol> typeParameters,
             Symbol owner,
             ref HashSet<TypeSymbol> checkedTypes
-        ) {
+        )
+        {
             foreach (var typeParameter in typeParameters)
             {
                 if (
@@ -1380,7 +1415,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                         owner,
                         ref checkedTypes
                     )
-                ) {
+                )
+                {
                     return true;
                 }
             }
@@ -1462,7 +1498,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             SemanticModel semanticModel,
             int position,
             SymbolDisplayFormat format = null
-        ) {
+        )
+        {
             return SymbolDisplay.ToMinimalDisplayString(ISymbol, semanticModel, position, format);
         }
 
@@ -1470,14 +1507,16 @@ namespace Microsoft.CodeAnalysis.CSharp
             SemanticModel semanticModel,
             int position,
             SymbolDisplayFormat format = null
-        ) {
+        )
+        {
             return SymbolDisplay.ToMinimalDisplayParts(ISymbol, semanticModel, position, format);
         }
 
         internal static void ReportErrorIfHasConstraints(
             SyntaxList<TypeParameterConstraintClauseSyntax> constraintClauses,
             DiagnosticBag diagnostics
-        ) {
+        )
+        {
             if (constraintClauses.Count > 0)
             {
                 diagnostics.Add(
@@ -1492,7 +1531,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             CSharpSyntaxNode expression,
             CSharpSyntaxNode syntax,
             BindingDiagnosticBag diagnostics
-        ) {
+        )
+        {
             if (block != null && expression != null)
             {
                 diagnostics.Add(ErrorCode.ERR_BlockBodyAndExpressionBody, syntax.GetLocation());
@@ -1521,14 +1561,16 @@ namespace Microsoft.CodeAnalysis.CSharp
                 AttributeLocation
             > arguments,
             ReservedAttributes reserved
-        ) {
+        )
+        {
             var attribute = arguments.Attribute;
             var diagnostics = (BindingDiagnosticBag)arguments.Diagnostics;
 
             if (
                 (reserved & ReservedAttributes.DynamicAttribute) != 0
                 && attribute.IsTargetAttribute(this, AttributeDescription.DynamicAttribute)
-            ) {
+            )
+            {
                 // DynamicAttribute should not be set explicitly.
                 diagnostics.Add(
                     ErrorCode.ERR_ExplicitDynamicAttr,
@@ -1565,7 +1607,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                     this,
                     AttributeDescription.TupleElementNamesAttribute
                 )
-            ) {
+            )
+            {
                 diagnostics.Add(
                     ErrorCode.ERR_ExplicitTupleElementNamesAttribute,
                     arguments.AttributeSyntaxOpt.Location
@@ -1574,7 +1617,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             else if (
                 (reserved & ReservedAttributes.NullableAttribute) != 0
                 && attribute.IsTargetAttribute(this, AttributeDescription.NullableAttribute)
-            ) {
+            )
+            {
                 // NullableAttribute should not be set explicitly.
                 diagnostics.Add(
                     ErrorCode.ERR_ExplicitNullableAttribute,
@@ -1611,7 +1655,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                     this,
                     AttributeDescription.CaseSensitiveExtensionAttribute
                 )
-            ) {
+            )
+            {
                 // ExtensionAttribute should not be set explicitly.
                 diagnostics.Add(
                     ErrorCode.ERR_ExplicitExtension,
@@ -1632,7 +1677,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                     AttributeLocation
                 > arguments,
                 in AttributeDescription attributeDescription
-            ) {
+            )
+            {
                 if (attribute.IsTargetAttribute(this, attributeDescription))
                 {
                     // Do not use '{FullName}'. This is reserved for compiler usage.
@@ -1660,7 +1706,8 @@ namespace Microsoft.CodeAnalysis.CSharp
         internal void GetCommonNullableValues(
             CSharpCompilation compilation,
             ref MostCommonNullableValueBuilder builder
-        ) {
+        )
+        {
             switch (this.Kind)
             {
                 case SymbolKind.NamedType:
@@ -1709,7 +1756,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                         builder.AddValue(typeParameter.GetSynthesizedNullableAttributeValue());
                         foreach (
                             var constraintType in typeParameter.ConstraintTypesNoUseSiteDiagnostics
-                        ) {
+                        )
+                        {
                             builder.AddValue(constraintType);
                         }
                     }
@@ -1782,7 +1830,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                 var currentFunction = variable.ContainingSymbol;
                 (object)currentFunction != null;
                 currentFunction = currentFunction.ContainingSymbol
-            ) {
+            )
+            {
                 if (ReferenceEquals(currentFunction, containingSymbol))
                 {
                     return false;

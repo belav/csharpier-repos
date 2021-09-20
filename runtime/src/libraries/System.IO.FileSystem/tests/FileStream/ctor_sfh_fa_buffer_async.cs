@@ -18,7 +18,8 @@ namespace System.IO.Tests
             SafeFileHandle handle,
             FileAccess access,
             int bufferSize
-        ) {
+        )
+        {
             return CreateFileStream(handle, access, bufferSize, false);
         }
 
@@ -27,7 +28,8 @@ namespace System.IO.Tests
             FileAccess access,
             int bufferSize,
             bool isAsync
-        ) {
+        )
+        {
             return new FileStream(handle, access, bufferSize, isAsync);
         }
 
@@ -43,7 +45,8 @@ namespace System.IO.Tests
                     4096,
                     true
                 )
-            ) {
+            )
+            {
                 using (CreateFileStream(fs.SafeFileHandle, FileAccess.ReadWrite, 4096, true)) { }
             }
         }
@@ -60,7 +63,8 @@ namespace System.IO.Tests
                     4096,
                     true
                 )
-            ) {
+            )
+            {
                 Assert.Throws<ArgumentException>(
                     () => CreateFileStream(fs.SafeFileHandle, FileAccess.ReadWrite, 4096, false)
                 );
@@ -75,7 +79,8 @@ namespace System.IO.Tests
                     4096,
                     false
                 )
-            ) {
+            )
+            {
                 Assert.Throws<ArgumentException>(
                     () => CreateFileStream(fs.SafeFileHandle, FileAccess.ReadWrite, 4096, true)
                 );

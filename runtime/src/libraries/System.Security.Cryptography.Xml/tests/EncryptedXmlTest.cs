@@ -130,7 +130,8 @@ namespace System.Security.Cryptography.Xml.Tests
                     List<XmlElement> elements = new List<XmlElement>();
                     foreach (
                         XmlElement encryptedDataElement in doc.SelectNodes("//e:EncryptedData", nm)
-                    ) {
+                    )
+                    {
                         elements.Add(encryptedDataElement);
                     }
                     foreach (XmlElement encryptedDataElement in elements)

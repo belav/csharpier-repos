@@ -21,7 +21,8 @@ namespace System.Security.Cryptography.Pkcs
             Pkcs12SafeContents safeContents,
             byte[]? passwordBytes,
             PbeParameters pbeParameters
-        ) {
+        )
+        {
             AddSafeContentsEncrypted(
                 safeContents,
                 // Allows null.
@@ -34,7 +35,8 @@ namespace System.Security.Cryptography.Pkcs
             Pkcs12SafeContents safeContents,
             ReadOnlySpan<byte> passwordBytes,
             PbeParameters pbeParameters
-        ) {
+        )
+        {
             if (safeContents == null)
                 throw new ArgumentNullException(nameof(safeContents));
             if (pbeParameters == null)
@@ -75,7 +77,8 @@ namespace System.Security.Cryptography.Pkcs
             Pkcs12SafeContents safeContents,
             string? password,
             PbeParameters pbeParameters
-        ) {
+        )
+        {
             AddSafeContentsEncrypted(
                 safeContents,
                 // This extension invoke allows null
@@ -88,7 +91,8 @@ namespace System.Security.Cryptography.Pkcs
             Pkcs12SafeContents safeContents,
             ReadOnlySpan<char> password,
             PbeParameters pbeParameters
-        ) {
+        )
+        {
             if (safeContents == null)
                 throw new ArgumentNullException(nameof(safeContents));
             if (pbeParameters == null)
@@ -154,7 +158,8 @@ namespace System.Security.Cryptography.Pkcs
             string? password,
             HashAlgorithmName hashAlgorithm,
             int iterationCount
-        ) {
+        )
+        {
             SealWithMac(
                 // This extension invoke allows null
                 password.AsSpan(),
@@ -167,7 +172,8 @@ namespace System.Security.Cryptography.Pkcs
             ReadOnlySpan<char> password,
             HashAlgorithmName hashAlgorithm,
             int iterationCount
-        ) {
+        )
+        {
             if (iterationCount < 1)
                 throw new ArgumentOutOfRangeException(nameof(iterationCount));
             if (IsSealed)
@@ -225,7 +231,8 @@ namespace System.Security.Cryptography.Pkcs
                         if (
                             !mac.TryGetHashAndReset(macSpan, out int bytesWritten)
                             || bytesWritten != macSpan.Length
-                        ) {
+                        )
+                        {
                             Debug.Fail(
                                 $"TryGetHashAndReset wrote {bytesWritten} of {macSpan.Length} bytes"
                             );

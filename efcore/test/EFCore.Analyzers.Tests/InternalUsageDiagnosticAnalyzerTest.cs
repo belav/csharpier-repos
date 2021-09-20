@@ -223,7 +223,8 @@ namespace Bar
             string source,
             string expectedInternalApi,
             string expectedDiagnosticSpan
-        ) {
+        )
+        {
             var (diagnostics, fullSource) = await GetDiagnosticsAsync(source);
             var diagnostic = Assert.Single(diagnostics);
 
@@ -242,7 +243,8 @@ namespace Bar
             string fullSource,
             string expectedInternalApi,
             string expectedDiagnosticSpan
-        ) {
+        )
+        {
             var diagnostics = await GetDiagnosticsFullSourceAsync(fullSource);
             var diagnostic = Assert.Single(diagnostics);
 

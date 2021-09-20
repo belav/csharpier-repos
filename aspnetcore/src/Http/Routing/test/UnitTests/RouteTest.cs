@@ -613,7 +613,8 @@ namespace Microsoft.AspNetCore.Routing
         private static RouteContext CreateRouteContext(
             string requestPath,
             ILoggerFactory factory = null
-        ) {
+        )
+        {
             if (factory == null)
             {
                 factory = NullLoggerFactory.Instance;
@@ -806,7 +807,8 @@ namespace Microsoft.AspNetCore.Routing
         [MemberData(nameof(DataTokensTestData))]
         public void GetVirtualPath_ReturnsDataTokens_WhenTargetReturnsVirtualPathData(
             RouteValueDictionary dataTokens
-        ) {
+        )
+        {
             // Arrange
             var path = "/TestPath";
 
@@ -849,7 +851,8 @@ namespace Microsoft.AspNetCore.Routing
         [MemberData(nameof(DataTokensTestData))]
         public void GetVirtualPath_ReturnsDataTokens_WhenTargetReturnsNullVirtualPathData(
             RouteValueDictionary dataTokens
-        ) {
+        )
+        {
             // Arrange
             var path = "/TestPath";
 
@@ -1632,7 +1635,8 @@ namespace Microsoft.AspNetCore.Routing
         private static VirtualPathContext CreateVirtualPathContext(
             object values,
             object ambientValues
-        ) {
+        )
+        {
             return CreateVirtualPathContext(
                 new RouteValueDictionary(values),
                 new RouteValueDictionary(ambientValues)
@@ -1642,7 +1646,8 @@ namespace Microsoft.AspNetCore.Routing
         private static VirtualPathContext CreateVirtualPathContext(
             RouteValueDictionary values,
             RouteValueDictionary ambientValues
-        ) {
+        )
+        {
             var services = new ServiceCollection();
             services.AddSingleton<ILoggerFactory>(NullLoggerFactory.Instance);
             services.AddOptions();
@@ -1690,7 +1695,8 @@ namespace Microsoft.AspNetCore.Routing
         public void RegisteringRoute_WithDataTokens_AbleToAddTheRoute(
             object dataToken,
             IDictionary<string, object> expectedDictionary
-        ) {
+        )
+        {
             // Arrange
             var routeBuilder = CreateRouteBuilder();
 
@@ -1877,7 +1883,8 @@ namespace Microsoft.AspNetCore.Routing
         [InlineData("///c/")]
         public async Task RouteAsync_MultipleOptionalParameters_WithEmptyIntermediateSegmentsDoesNotMatch(
             string url
-        ) {
+        )
+        {
             // Arrange
             var builder = CreateRouteBuilder();
 
@@ -1933,7 +1940,8 @@ namespace Microsoft.AspNetCore.Routing
             string routeName,
             string template,
             bool handleRequest = true
-        ) {
+        )
+        {
             return new Route(
                 CreateTarget(handleRequest),
                 routeName,
@@ -1956,7 +1964,8 @@ namespace Microsoft.AspNetCore.Routing
             bool handleRequest = true,
             object constraints = null,
             object dataTokens = null
-        ) {
+        )
+        {
             return new Route(
                 CreateTarget(handleRequest),
                 template,
@@ -1984,7 +1993,8 @@ namespace Microsoft.AspNetCore.Routing
             string template,
             object defaults,
             RouteValueDictionary dataTokens = null
-        ) {
+        )
+        {
             return new Route(
                 target,
                 template,

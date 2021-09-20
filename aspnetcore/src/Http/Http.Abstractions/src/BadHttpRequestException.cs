@@ -33,11 +33,8 @@ namespace Microsoft.AspNetCore.Http
         /// <param name="message">The message to associate with this exception.</param>
         /// <param name="statusCode">The HTTP status code to associate with this exception.</param>
         /// <param name="innerException">The inner exception to associate with this exception</param>
-        public BadHttpRequestException(
-            string message,
-            int statusCode,
-            Exception innerException
-        ) : base(message, innerException)
+        public BadHttpRequestException(string message, int statusCode, Exception innerException)
+            : base(message, innerException)
         {
             StatusCode = statusCode;
         }

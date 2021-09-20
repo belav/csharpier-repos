@@ -58,7 +58,8 @@ namespace System.DirectoryServices.AccountManagement
             string username,
             ref string parsedUserName,
             ref string parsedDomainName
-        ) {
+        )
+        {
             // If the user has passed null creds then parsed components should also be null.
             if (username == null)
             {

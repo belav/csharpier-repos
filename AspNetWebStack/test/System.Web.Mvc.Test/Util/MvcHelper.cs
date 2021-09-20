@@ -121,7 +121,8 @@ namespace Microsoft.Web.UnitTestUtil
         public static HtmlHelper<TModel> GetHtmlHelperWithPath<TModel>(
             ViewDataDictionary<TModel> viewData,
             string appPath
-        ) {
+        )
+        {
             ViewContext viewContext = GetViewContextWithPath(appPath, viewData);
             Mock<IViewDataContainer> mockContainer = new Mock<IViewDataContainer>();
             mockContainer.Setup(c => c.ViewData).Returns(viewData);
@@ -131,7 +132,8 @@ namespace Microsoft.Web.UnitTestUtil
 
         public static HtmlHelper<TModel> GetHtmlHelperWithPath<TModel>(
             ViewDataDictionary<TModel> viewData
-        ) {
+        )
+        {
             return GetHtmlHelperWithPath(viewData, "/");
         }
 
@@ -141,7 +143,8 @@ namespace Microsoft.Web.UnitTestUtil
             string httpMethod,
             string protocol,
             int port
-        ) {
+        )
+        {
             Mock<HttpContextBase> mockHttpContext = new Mock<HttpContextBase>();
 
             if (!String.IsNullOrEmpty(appPath))
@@ -184,7 +187,8 @@ namespace Microsoft.Web.UnitTestUtil
             string appPath,
             string requestPath,
             string httpMethod
-        ) {
+        )
+        {
             return GetHttpContext(
                 appPath,
                 requestPath,
@@ -197,7 +201,8 @@ namespace Microsoft.Web.UnitTestUtil
         public static ViewDataDictionary<TValue> GetNestedViewData<TModel, TValue>(
             ViewDataDictionary<TModel> viewData,
             Expression<Func<TModel, TValue>> expression
-        ) {
+        )
+        {
             var metadata = ModelMetadata.FromLambdaExpression(expression, viewData);
             var htmlFieldName = ExpressionHelper.GetExpressionText(expression);
 
@@ -217,7 +222,8 @@ namespace Microsoft.Web.UnitTestUtil
         public static ViewContext GetViewContextWithPath(
             string appPath,
             ViewDataDictionary viewData
-        ) {
+        )
+        {
             HttpContextBase httpContext = GetHttpContext(appPath, "/request", "GET");
 
             Mock<ViewContext> mockViewContext = new Mock<ViewContext>()

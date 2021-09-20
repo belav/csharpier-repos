@@ -153,7 +153,8 @@ namespace Castle.DynamicProxy.Internal
             string fieldName,
             BindingFlags additionalFlags,
             object value
-        ) {
+        )
+        {
             var flags = additionalFlags | BindingFlags.Static;
 
             FieldInfo field = type.GetField(fieldName, flags);

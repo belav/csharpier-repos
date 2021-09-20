@@ -64,7 +64,8 @@ namespace Roslyn.Test.Utilities
                             Encoding.UTF8,
                             detectEncodingFromByteOrderMarks: true
                         )
-                    ) {
+                    )
+                    {
                         resource = streamReader.ReadToEnd();
                     }
                 }

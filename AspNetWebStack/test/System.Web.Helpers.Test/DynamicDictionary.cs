@@ -88,7 +88,8 @@ namespace System.Web.Helpers.Test
             public override DynamicMetaObject BindSetMember(
                 SetMemberBinder binder,
                 DynamicMetaObject value
-            ) {
+            )
+            {
                 var binderDefault = binder.FallbackSetMember(this, value);
 
                 Expression expression = GetSetValueExpression(binder.Name, value.Value);

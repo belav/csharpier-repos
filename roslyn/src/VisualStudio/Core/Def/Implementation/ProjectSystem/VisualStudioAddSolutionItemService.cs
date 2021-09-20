@@ -56,7 +56,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.ProjectSystem
                 _fileChangeService != null
                 && PathUtilities.IsAbsolute(filePath)
                 && FileExistsWithGuard(filePath) == false
-            ) {
+            )
+            {
                 // Setup a new file change tracker to track file path and
                 // add newly created file as solution item.
                 _fileChangeTrackers.GetOrAdd(filePath, CreateTracker);
@@ -110,7 +111,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.ProjectSystem
                         out var solutionItemsFolder,
                         out var hasExistingSolutionItem
                     )
-                ) {
+                )
+                {
                     solutionItemsFolder = solution.AddSolutionFolder("Solution Items");
                 }
 
@@ -118,7 +120,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.ProjectSystem
                     !hasExistingSolutionItem
                     && solutionItemsFolder != null
                     && FileExistsWithGuard(filePath) == true
-                ) {
+                )
+                {
                     solutionItemsFolder.ProjectItems.AddFromFile(filePath);
                     solution.SaveAs(solution.FileName);
                 }
@@ -142,7 +145,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.ProjectSystem
             string filePath,
             out EnvDTE.Project? solutionItemsFolder,
             out bool hasExistingSolutionItem
-        ) {
+        )
+        {
             solutionItemsFolder = null;
             hasExistingSolutionItem = false;
 
@@ -152,7 +156,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.ProjectSystem
                 if (
                     project.Kind == EnvDTE.Constants.vsProjectKindSolutionItems
                     && project.Name == SolutionItemsFolderName
-                ) {
+                )
+                {
                     solutionItemsFolder = project;
 
                     foreach (ProjectItem projectItem in solutionItemsFolder.ProjectItems)

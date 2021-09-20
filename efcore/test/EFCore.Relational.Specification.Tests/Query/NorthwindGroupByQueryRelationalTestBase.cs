@@ -34,7 +34,8 @@ namespace Microsoft.EntityFrameworkCore.Query
 
         public override async Task Select_correlated_collection_after_GroupBy_aggregate_when_identifier_changes_to_complex(
             bool async
-        ) {
+        )
+        {
             var message =
                 (
                     await Assert.ThrowsAsync<InvalidOperationException>(

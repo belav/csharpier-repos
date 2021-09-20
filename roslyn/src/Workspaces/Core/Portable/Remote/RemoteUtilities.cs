@@ -26,7 +26,8 @@ namespace Microsoft.CodeAnalysis.Remote
             Solution oldSolution,
             Solution newSolution,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             using var _ = ArrayBuilder<(DocumentId, ImmutableArray<TextChange>)>.GetInstance(
                 out var builder
             );
@@ -55,7 +56,8 @@ namespace Microsoft.CodeAnalysis.Remote
             Solution oldSolution,
             ImmutableArray<(DocumentId, ImmutableArray<TextChange>)> documentTextChanges,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var currentSolution = oldSolution;
             foreach (var (docId, textChanges) in documentTextChanges)
             {

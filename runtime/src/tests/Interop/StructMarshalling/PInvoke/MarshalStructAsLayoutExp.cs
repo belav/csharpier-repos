@@ -414,7 +414,8 @@ public class Managed
                             cloneINNER2,
                             "MarshalStructAsParam_AsExpByValINNER2"
                         )
-                    ) {
+                    )
+                    {
                         failures++;
                     }
                     break;
@@ -440,7 +441,8 @@ public class Managed
                             cloneInnerExplicit,
                             "MarshalStructAsParam_AsExpByValInnerExplicit"
                         )
-                    ) {
+                    )
+                    {
                         failures++;
                     }
                     break;
@@ -463,7 +465,8 @@ public class Managed
                     );
                     if (
                         !MarshalStructAsParam_AsExpByValInnerArrayExplicit(sourceInnerArrayExplicit)
-                    ) {
+                    )
+                    {
                         Console.WriteLine(
                             "\tFAILED! Managed to Native failed in MarshalStructAsParam_AsExpByValInnerArrayExplicit.Expected:True;Actual:False"
                         );
@@ -475,7 +478,8 @@ public class Managed
                             cloneInnerArrayExplicit,
                             "MarshalStructAsParam_AsExpByValInnerArrayExplicit"
                         )
-                    ) {
+                    )
+                    {
                         failures++;
                     }
                     break;
@@ -497,7 +501,8 @@ public class Managed
                             cloneOUTER3,
                             "MarshalStructAsParam_AsExpByValOUTER3"
                         )
-                    ) {
+                    )
+                    {
                         failures++;
                     }
                     break;
@@ -563,7 +568,8 @@ public class Managed
                             clone_bspe,
                             "MarshalStructAsParam_AsExpByValByteStructPack2Explicit"
                         )
-                    ) {
+                    )
+                    {
                         failures++;
                     }
                     break;
@@ -592,7 +598,8 @@ public class Managed
                             clone_sspe,
                             "MarshalStructAsParam_AsExpByValShortStructPack4Explicit"
                         )
-                    ) {
+                    )
+                    {
                         failures++;
                     }
                     break;
@@ -615,7 +622,8 @@ public class Managed
                             clone_ispe,
                             "MarshalStructAsParam_AsExpByValIntStructPack8Explicit"
                         )
-                    ) {
+                    )
+                    {
                         failures++;
                     }
                     break;
@@ -631,7 +639,8 @@ public class Managed
                         !MarshalStructAsParam_AsExpByValLongStructPack16Explicit(
                             sourceLongStructPack16Explicit
                         )
-                    ) {
+                    )
+                    {
                         Console.WriteLine(
                             "\tFAILED! Managed to Native failed in MarshalStructAsParam_AsExpByValLongStructPack16Explicit.Expected:True;Actual:False"
                         );
@@ -643,7 +652,8 @@ public class Managed
                             cloneLongStructPack16Explicit,
                             "MarshalStructAsParam_AsExpByValLongStructPack16Explicit"
                         )
-                    ) {
+                    )
+                    {
                         failures++;
                     }
                     break;
@@ -661,7 +671,8 @@ public class Managed
                             overlappingLongFloat,
                             overlappingLongFloat.l
                         )
-                    ) {
+                    )
+                    {
                         Console.WriteLine(
                             "\tFAILED! Managed to Native failed in MarshalStructAsParam_AsExpByValOverlappingLongFloat. Expected:True;Actual:False"
                         );
@@ -680,7 +691,8 @@ public class Managed
                             overlappingLongFloat2,
                             overlappingLongFloat.l
                         )
-                    ) {
+                    )
+                    {
                         Console.WriteLine(
                             "\tFAILED! Managed to Native failed in MarshalStructAsParam_AsExpByValOverlappingLongFloat. Expected:True;Actual:False"
                         );
@@ -704,7 +716,8 @@ public class Managed
                             overlappingMultipleEightbyte.arr[1],
                             overlappingMultipleEightbyte.arr[2]
                         )
-                    ) {
+                    )
+                    {
                         Console.WriteLine(
                             "\tFAILED! Managed to Native failed in MarshalStructAsParam_AsExpByValOverlappingMultipleEightByte. Expected True;Actual:False"
                         );
@@ -780,7 +793,8 @@ public class Managed
                             changeINNER2,
                             "MarshalStructAsParam_AsExpByRefINNER2"
                         )
-                    ) {
+                    )
+                    {
                         failures++;
                     }
                     break;
@@ -806,7 +820,8 @@ public class Managed
                             changeInnerExplicit,
                             "MarshalStructAsParam_AsExpByRefInnerExplicit"
                         )
-                    ) {
+                    )
+                    {
                         failures++;
                     }
                     break;
@@ -831,7 +846,8 @@ public class Managed
                         !MarshalStructAsParam_AsExpByRefInnerArrayExplicit(
                             ref sourceInnerArrayExplicit
                         )
-                    ) {
+                    )
+                    {
                         Console.WriteLine(
                             "\tFAILED! Managed to Native failed in MarshalStructAsParam_AsExpByRefInnerArrayExplicit.Expected:True;Actual:False"
                         );
@@ -843,7 +859,8 @@ public class Managed
                             changeInnerArrayExplicit,
                             "MarshalStructAsParam_AsExpByRefInnerArrayExplicit"
                         )
-                    ) {
+                    )
+                    {
                         failures++;
                     }
                     break;
@@ -870,7 +887,8 @@ public class Managed
                             changeOUTER3,
                             "MarshalStructAsParam_AsExpByRefOUTER3"
                         )
-                    ) {
+                    )
+                    {
                         failures++;
                     }
                     break;
@@ -936,7 +954,8 @@ public class Managed
                             change_bspe,
                             "MarshalStructAsParam_AsExpByRefByteStructPack2Explicit"
                         )
-                    ) {
+                    )
+                    {
                         failures++;
                     }
                     break;
@@ -965,7 +984,8 @@ public class Managed
                             change_sspe,
                             "MarshalStructAsParam_AsExpByRefShortStructPack4Explicit"
                         )
-                    ) {
+                    )
+                    {
                         failures++;
                     }
                     break;
@@ -988,7 +1008,8 @@ public class Managed
                             change_ispe,
                             "MarshalStructAsParam_AsExpByRefIntStructPack8Explicit"
                         )
-                    ) {
+                    )
+                    {
                         failures++;
                     }
                     break;
@@ -1004,7 +1025,8 @@ public class Managed
                         !MarshalStructAsParam_AsExpByRefLongStructPack16Explicit(
                             ref sourceLongStructPack16Explicit
                         )
-                    ) {
+                    )
+                    {
                         Console.WriteLine(
                             "\tFAILED! Managed to Native failed in MarshalStructAsParam_AsExpByRefLongStructPack16Explicit.Expected:True;Actual:False"
                         );
@@ -1016,7 +1038,8 @@ public class Managed
                             changeLongStructPack16Explicit,
                             "MarshalStructAsParam_AsExpByRefLongStructPack16Explicit"
                         )
-                    ) {
+                    )
+                    {
                         failures++;
                     }
                     break;
@@ -1058,7 +1081,8 @@ public class Managed
                             cloneINNER2,
                             "MarshalStructAsParam_AsExpByValInINNER2"
                         )
-                    ) {
+                    )
+                    {
                         failures++;
                     }
                     break;
@@ -1086,7 +1110,8 @@ public class Managed
                             cloneInnerExplicit,
                             "MarshalStructAsParam_AsExpByValInInnerExplicit"
                         )
-                    ) {
+                    )
+                    {
                         failures++;
                     }
                     break;
@@ -1111,7 +1136,8 @@ public class Managed
                         !MarshalStructAsParam_AsExpByValInInnerArrayExplicit(
                             sourceInnerArrayExplicit
                         )
-                    ) {
+                    )
+                    {
                         Console.WriteLine(
                             "\tFAILED! Managed to Native failed in MarshalStructAsParam_AsExpByValInInnerArrayExplicit.Expected:True;Actual:False"
                         );
@@ -1123,7 +1149,8 @@ public class Managed
                             cloneInnerArrayExplicit,
                             "MarshalStructAsParam_AsExpByValInInnerArrayExplicit"
                         )
-                    ) {
+                    )
+                    {
                         failures++;
                     }
                     break;
@@ -1145,7 +1172,8 @@ public class Managed
                             cloneOUTER3,
                             "MarshalStructAsParam_AsExpByValInOUTER3"
                         )
-                    ) {
+                    )
+                    {
                         failures++;
                     }
                     break;
@@ -1211,7 +1239,8 @@ public class Managed
                             clone_bspe,
                             "MarshalStructAsParam_AsExpByValInByteStructPack2Explicit"
                         )
-                    ) {
+                    )
+                    {
                         failures++;
                     }
                     break;
@@ -1240,7 +1269,8 @@ public class Managed
                             clone_sspe,
                             "MarshalStructAsParam_AsExpByValInShortStructPack4Explicit"
                         )
-                    ) {
+                    )
+                    {
                         failures++;
                     }
                     break;
@@ -1263,7 +1293,8 @@ public class Managed
                             clone_ispe,
                             "MarshalStructAsParam_AsExpByValInIntStructPack8Explicit"
                         )
-                    ) {
+                    )
+                    {
                         failures++;
                     }
                     break;
@@ -1279,7 +1310,8 @@ public class Managed
                         !MarshalStructAsParam_AsExpByValInLongStructPack16Explicit(
                             sourceLongStructPack16Explicit
                         )
-                    ) {
+                    )
+                    {
                         Console.WriteLine(
                             "\tFAILED! Managed to Native failed in MarshalStructAsParam_AsExpByValInLongStructPack16Explicit.Expected:True;Actual:False"
                         );
@@ -1291,7 +1323,8 @@ public class Managed
                             cloneLongStructPack16Explicit,
                             "MarshalStructAsParam_AsExpByValInLongStructPack16Explicit"
                         )
-                    ) {
+                    )
+                    {
                         failures++;
                     }
                     break;
@@ -1333,7 +1366,8 @@ public class Managed
                             changeINNER2,
                             "MarshalStructAsParam_AsExpByRefInINNER2"
                         )
-                    ) {
+                    )
+                    {
                         failures++;
                     }
                     break;
@@ -1361,7 +1395,8 @@ public class Managed
                             changeInnerExplicit,
                             "MarshalStructAsParam_AsExpByRefInInnerExplicit"
                         )
-                    ) {
+                    )
+                    {
                         failures++;
                     }
                     break;
@@ -1386,7 +1421,8 @@ public class Managed
                         !MarshalStructAsParam_AsExpByRefInInnerArrayExplicit(
                             ref sourceInnerArrayExplicit
                         )
-                    ) {
+                    )
+                    {
                         Console.WriteLine(
                             "\tFAILED! Managed to Native failed in MarshalStructAsParam_AsExpByRefInInnerArrayExplicit.Expected:True;Actual:False"
                         );
@@ -1398,7 +1434,8 @@ public class Managed
                             changeInnerArrayExplicit,
                             "MarshalStructAsParam_AsExpByRefInInnerArrayExplicit"
                         )
-                    ) {
+                    )
+                    {
                         failures++;
                     }
                     break;
@@ -1420,7 +1457,8 @@ public class Managed
                             changeOUTER3,
                             "MarshalStructAsParam_AsExpByRefInOUTER3"
                         )
-                    ) {
+                    )
+                    {
                         failures++;
                     }
                     break;
@@ -1486,7 +1524,8 @@ public class Managed
                             change_bspe,
                             "MarshalStructAsParam_AsExpByRefInByteStructPack2Explicit"
                         )
-                    ) {
+                    )
+                    {
                         failures++;
                     }
                     break;
@@ -1515,7 +1554,8 @@ public class Managed
                             change_sspe,
                             "MarshalStructAsParam_AsExpByRefInShortStructPack4Explicit"
                         )
-                    ) {
+                    )
+                    {
                         failures++;
                     }
                     break;
@@ -1538,7 +1578,8 @@ public class Managed
                             change_ispe,
                             "MarshalStructAsParam_AsExpByRefInIntStructPack8Explicit"
                         )
-                    ) {
+                    )
+                    {
                         failures++;
                     }
                     break;
@@ -1554,7 +1595,8 @@ public class Managed
                         !MarshalStructAsParam_AsExpByRefInLongStructPack16Explicit(
                             ref sourceLongStructPack16Explicit
                         )
-                    ) {
+                    )
+                    {
                         Console.WriteLine(
                             "\tFAILED! Managed to Native failed in MarshalStructAsParam_AsExpByRefInLongStructPack16Explicit.Expected:True;Actual:False"
                         );
@@ -1566,7 +1608,8 @@ public class Managed
                             changeLongStructPack16Explicit,
                             "MarshalStructAsParam_AsExpByRefInLongStructPack16Explicit"
                         )
-                    ) {
+                    )
+                    {
                         failures++;
                     }
                     break;
@@ -1608,7 +1651,8 @@ public class Managed
                             cloneINNER2,
                             "MarshalStructAsParam_AsExpByValOutINNER2"
                         )
-                    ) {
+                    )
+                    {
                         failures++;
                     }
                     break;
@@ -1636,7 +1680,8 @@ public class Managed
                             cloneInnerExplicit,
                             "MarshalStructAsParam_AsExpByValOutInnerExplicit"
                         )
-                    ) {
+                    )
+                    {
                         failures++;
                     }
                     break;
@@ -1661,7 +1706,8 @@ public class Managed
                         !MarshalStructAsParam_AsExpByValOutInnerArrayExplicit(
                             sourceInnerArrayExplicit
                         )
-                    ) {
+                    )
+                    {
                         Console.WriteLine(
                             "\tFAILED! Managed to Native failed in MarshalStructAsParam_AsExpByValOutInnerArrayExplicit.Expected:True;Actual:False"
                         );
@@ -1673,7 +1719,8 @@ public class Managed
                             cloneInnerArrayExplicit,
                             "MarshalStructAsParam_AsExpByValOutInnerArrayExplicit"
                         )
-                    ) {
+                    )
+                    {
                         failures++;
                     }
                     break;
@@ -1695,7 +1742,8 @@ public class Managed
                             cloneOUTER3,
                             "MarshalStructAsParam_AsExpByValOutOUTER3"
                         )
-                    ) {
+                    )
+                    {
                         failures++;
                     }
                     break;
@@ -1761,7 +1809,8 @@ public class Managed
                             clone_bspe,
                             "MarshalStructAsParam_AsExpByValOutByteStructPack2Explicit"
                         )
-                    ) {
+                    )
+                    {
                         failures++;
                     }
                     break;
@@ -1790,7 +1839,8 @@ public class Managed
                             clone_sspe,
                             "MarshalStructAsParam_AsExpByValOutShortStructPack4Explicit"
                         )
-                    ) {
+                    )
+                    {
                         failures++;
                     }
                     break;
@@ -1813,7 +1863,8 @@ public class Managed
                             clone_ispe,
                             "MarshalStructAsParam_AsExpByValOutIntStructPack8Explicit"
                         )
-                    ) {
+                    )
+                    {
                         failures++;
                     }
                     break;
@@ -1829,7 +1880,8 @@ public class Managed
                         !MarshalStructAsParam_AsExpByValOutLongStructPack16Explicit(
                             sourceLongStructPack16Explicit
                         )
-                    ) {
+                    )
+                    {
                         Console.WriteLine(
                             "\tFAILED! Managed to Native failed in MarshalStructAsParam_AsExpByValOutLongStructPack16Explicit.Expected:True;Actual:False"
                         );
@@ -1841,7 +1893,8 @@ public class Managed
                             cloneLongStructPack16Explicit,
                             "MarshalStructAsParam_AsExpByValOutLongStructPack16Explicit"
                         )
-                    ) {
+                    )
+                    {
                         failures++;
                     }
                     break;
@@ -1883,7 +1936,8 @@ public class Managed
                             changeINNER2,
                             "MarshalStructAsParam_AsExpByRefOutINNER2"
                         )
-                    ) {
+                    )
+                    {
                         failures++;
                     }
                     break;
@@ -1911,7 +1965,8 @@ public class Managed
                             changeInnerExplicit,
                             "MarshalStructAsParam_AsExpByRefOutInnerExplicit"
                         )
-                    ) {
+                    )
+                    {
                         failures++;
                     }
                     break;
@@ -1936,7 +1991,8 @@ public class Managed
                         !MarshalStructAsParam_AsExpByRefOutInnerArrayExplicit(
                             out sourceInnerArrayExplicit
                         )
-                    ) {
+                    )
+                    {
                         Console.WriteLine(
                             "\tFAILED! Managed to Native failed in MarshalStructAsParam_AsExpByRefOutInnerArrayExplicit.Expected:True;Actual:False"
                         );
@@ -1948,7 +2004,8 @@ public class Managed
                             changeInnerArrayExplicit,
                             "MarshalStructAsParam_AsExpByRefOutInnerArrayExplicit"
                         )
-                    ) {
+                    )
+                    {
                         failures++;
                     }
                     break;
@@ -1975,7 +2032,8 @@ public class Managed
                             changeOUTER3,
                             "MarshalStructAsParam_AsExpByRefOutOUTER3"
                         )
-                    ) {
+                    )
+                    {
                         failures++;
                     }
                     break;
@@ -2041,7 +2099,8 @@ public class Managed
                             change_bspe,
                             "MarshalStructAsParam_AsExpByRefOutByteStructPack2Explicit"
                         )
-                    ) {
+                    )
+                    {
                         failures++;
                     }
                     break;
@@ -2059,7 +2118,8 @@ public class Managed
                     );
                     if (
                         !MarshalStructAsParam_AsExpByRefOutShortStructPack4Explicit(out source_sspe)
-                    ) {
+                    )
+                    {
                         Console.WriteLine(
                             "\tFAILED! Managed to Native failed in MarshalStructAsParam_AsExpByRefOutShortStructPack4Explicit.Expected:True;Actual:False"
                         );
@@ -2071,7 +2131,8 @@ public class Managed
                             change_sspe,
                             "MarshalStructAsParam_AsExpByRefOutShortStructPack4Explicit"
                         )
-                    ) {
+                    )
+                    {
                         failures++;
                     }
                     break;
@@ -2094,7 +2155,8 @@ public class Managed
                             change_ispe,
                             "MarshalStructAsParam_AsExpByRefOutIntStructPack8Explicit"
                         )
-                    ) {
+                    )
+                    {
                         failures++;
                     }
                     break;
@@ -2110,7 +2172,8 @@ public class Managed
                         !MarshalStructAsParam_AsExpByRefOutLongStructPack16Explicit(
                             out sourceLongStructPack16Explicit
                         )
-                    ) {
+                    )
+                    {
                         Console.WriteLine(
                             "\tFAILED! Managed to Native failed in MarshalStructAsParam_AsExpByRefOutLongStructPack16Explicit.Expected:True;Actual:False"
                         );
@@ -2122,7 +2185,8 @@ public class Managed
                             changeLongStructPack16Explicit,
                             "MarshalStructAsParam_AsExpByRefOutLongStructPack16Explicit"
                         )
-                    ) {
+                    )
+                    {
                         failures++;
                     }
                     break;
@@ -2164,7 +2228,8 @@ public class Managed
                             cloneINNER2,
                             "MarshalStructAsParam_AsExpByValInOutINNER2"
                         )
-                    ) {
+                    )
+                    {
                         failures++;
                     }
                     break;
@@ -2192,7 +2257,8 @@ public class Managed
                             cloneInnerExplicit,
                             "MarshalStructAsParam_AsExpByValInOutInnerExplicit"
                         )
-                    ) {
+                    )
+                    {
                         failures++;
                     }
                     break;
@@ -2217,7 +2283,8 @@ public class Managed
                         !MarshalStructAsParam_AsExpByValInOutInnerArrayExplicit(
                             sourceInnerArrayExplicit
                         )
-                    ) {
+                    )
+                    {
                         Console.WriteLine(
                             "\tFAILED! Managed to Native failed in MarshalStructAsParam_AsExpByValInOutInnerArrayExplicit.Expected:True;Actual:False"
                         );
@@ -2229,7 +2296,8 @@ public class Managed
                             cloneInnerArrayExplicit,
                             "MarshalStructAsParam_AsExpByValInOutInnerArrayExplicit"
                         )
-                    ) {
+                    )
+                    {
                         failures++;
                     }
                     break;
@@ -2251,7 +2319,8 @@ public class Managed
                             cloneOUTER3,
                             "MarshalStructAsParam_AsExpByValInOutOUTER3"
                         )
-                    ) {
+                    )
+                    {
                         failures++;
                     }
                     break;
@@ -2317,7 +2386,8 @@ public class Managed
                             clone_bspe,
                             "MarshalStructAsParam_AsExpByValInOutByteStructPack2Explicit"
                         )
-                    ) {
+                    )
+                    {
                         failures++;
                     }
                     break;
@@ -2346,7 +2416,8 @@ public class Managed
                             clone_sspe,
                             "MarshalStructAsParam_AsExpByValInOutShortStructPack4Explicit"
                         )
-                    ) {
+                    )
+                    {
                         failures++;
                     }
                     break;
@@ -2369,7 +2440,8 @@ public class Managed
                             clone_ispe,
                             "MarshalStructAsParam_AsExpByValInOutIntStructPack8Explicit"
                         )
-                    ) {
+                    )
+                    {
                         failures++;
                     }
                     break;
@@ -2385,7 +2457,8 @@ public class Managed
                         !MarshalStructAsParam_AsExpByValInOutLongStructPack16Explicit(
                             sourceLongStructPack16Explicit
                         )
-                    ) {
+                    )
+                    {
                         Console.WriteLine(
                             "\tFAILED! Managed to Native failed in MarshalStructAsParam_AsExpByValInOutLongStructPack16Explicit.Expected:True;Actual:False"
                         );
@@ -2397,7 +2470,8 @@ public class Managed
                             cloneLongStructPack16Explicit,
                             "MarshalStructAsParam_AsExpByValInOutLongStructPack16Explicit"
                         )
-                    ) {
+                    )
+                    {
                         failures++;
                     }
                     break;
@@ -2439,7 +2513,8 @@ public class Managed
                             changeINNER2,
                             "MarshalStructAsParam_AsExpByRefInOutINNER2"
                         )
-                    ) {
+                    )
+                    {
                         failures++;
                     }
                     break;
@@ -2467,7 +2542,8 @@ public class Managed
                             changeInnerExplicit,
                             "MarshalStructAsParam_AsExpByRefInOutInnerExplicit"
                         )
-                    ) {
+                    )
+                    {
                         failures++;
                     }
                     break;
@@ -2492,7 +2568,8 @@ public class Managed
                         !MarshalStructAsParam_AsExpByRefInOutInnerArrayExplicit(
                             ref sourceInnerArrayExplicit
                         )
-                    ) {
+                    )
+                    {
                         Console.WriteLine(
                             "\tFAILED! Managed to Native failed in MarshalStructAsParam_AsExpByRefInOutInnerArrayExplicit.Expected:True;Actual:False"
                         );
@@ -2504,7 +2581,8 @@ public class Managed
                             changeInnerArrayExplicit,
                             "MarshalStructAsParam_AsExpByRefInOutInnerArrayExplicit"
                         )
-                    ) {
+                    )
+                    {
                         failures++;
                     }
                     break;
@@ -2531,7 +2609,8 @@ public class Managed
                             changeOUTER3,
                             "MarshalStructAsParam_AsExpByRefInOutOUTER3"
                         )
-                    ) {
+                    )
+                    {
                         failures++;
                     }
                     break;
@@ -2575,7 +2654,8 @@ public class Managed
                     }
                     if (
                         !Helper.ValidateU(sourceU, changeU, "MarshalStructAsParam_AsExpByRefInOutU")
-                    ) {
+                    )
+                    {
                         failures++;
                     }
                     break;
@@ -2589,7 +2669,8 @@ public class Managed
                         !MarshalStructAsParam_AsExpByRefInOutByteStructPack2Explicit(
                             ref source_bspe
                         )
-                    ) {
+                    )
+                    {
                         Console.WriteLine(
                             "\tFAILED! Managed to Native failed in MarshalStructAsParam_AsExpByRefInOutByteStructPack2Explicit.Expected:True;Actual:False"
                         );
@@ -2601,7 +2682,8 @@ public class Managed
                             change_bspe,
                             "MarshalStructAsParam_AsExpByRefInOutByteStructPack2Explicit"
                         )
-                    ) {
+                    )
+                    {
                         failures++;
                     }
                     break;
@@ -2621,7 +2703,8 @@ public class Managed
                         !MarshalStructAsParam_AsExpByRefInOutShortStructPack4Explicit(
                             ref source_sspe
                         )
-                    ) {
+                    )
+                    {
                         Console.WriteLine(
                             "\tFAILED! Managed to Native failed in MarshalStructAsParam_AsExpByRefInOutShortStructPack4Explicit.Expected:True;Actual:False"
                         );
@@ -2633,7 +2716,8 @@ public class Managed
                             change_sspe,
                             "MarshalStructAsParam_AsExpByRefInOutShortStructPack4Explicit"
                         )
-                    ) {
+                    )
+                    {
                         failures++;
                     }
                     break;
@@ -2645,7 +2729,8 @@ public class Managed
                     );
                     if (
                         !MarshalStructAsParam_AsExpByRefInOutIntStructPack8Explicit(ref source_ispe)
-                    ) {
+                    )
+                    {
                         Console.WriteLine(
                             "\tFAILED! Managed to Native failed in MarshalStructAsParam_AsExpByRefInOutIntStructPack8Explicit.Expected:True;Actual:False"
                         );
@@ -2657,7 +2742,8 @@ public class Managed
                             change_ispe,
                             "MarshalStructAsParam_AsExpByRefInOutIntStructPack8Explicit"
                         )
-                    ) {
+                    )
+                    {
                         failures++;
                     }
                     break;
@@ -2673,7 +2759,8 @@ public class Managed
                         !MarshalStructAsParam_AsExpByRefInOutLongStructPack16Explicit(
                             ref sourceLongStructPack16Explicit
                         )
-                    ) {
+                    )
+                    {
                         Console.WriteLine(
                             "\tFAILED! Managed to Native failed in MarshalStructAsParam_AsExpByRefInOutLongStructPack16Explicit.Expected:True;Actual:False"
                         );
@@ -2685,7 +2772,8 @@ public class Managed
                             changeLongStructPack16Explicit,
                             "MarshalStructAsParam_AsExpByRefInOutLongStructPack16Explicit"
                         )
-                    ) {
+                    )
+                    {
                         failures++;
                     }
                     break;

@@ -188,7 +188,8 @@ namespace Microsoft.CodeAnalysis.Syntax.InternalSyntax
             GreenNode? child1,
             GreenNode.NodeFlags flags,
             out int hash
-        ) {
+        )
+        {
             if (CanBeCached(child1))
             {
                 GreenStats.ItemCacheable();
@@ -215,7 +216,8 @@ namespace Microsoft.CodeAnalysis.Syntax.InternalSyntax
             GreenNode? child1,
             GreenNode? child2,
             out int hash
-        ) {
+        )
+        {
             return TryGetNode(kind, child1, child2, GetDefaultNodeFlags(), out hash);
         }
 
@@ -225,7 +227,8 @@ namespace Microsoft.CodeAnalysis.Syntax.InternalSyntax
             GreenNode? child2,
             GreenNode.NodeFlags flags,
             out int hash
-        ) {
+        )
+        {
             if (CanBeCached(child1, child2))
             {
                 GreenStats.ItemCacheable();
@@ -237,7 +240,8 @@ namespace Microsoft.CodeAnalysis.Syntax.InternalSyntax
                     e.hash == h
                     && e.node != null
                     && e.node.IsCacheEquivalent(kind, flags, child1, child2)
-                ) {
+                )
+                {
                     GreenStats.CacheHit();
                     return e.node;
                 }
@@ -256,7 +260,8 @@ namespace Microsoft.CodeAnalysis.Syntax.InternalSyntax
             GreenNode? child2,
             GreenNode? child3,
             out int hash
-        ) {
+        )
+        {
             return TryGetNode(kind, child1, child2, child3, GetDefaultNodeFlags(), out hash);
         }
 
@@ -267,7 +272,8 @@ namespace Microsoft.CodeAnalysis.Syntax.InternalSyntax
             GreenNode? child3,
             GreenNode.NodeFlags flags,
             out int hash
-        ) {
+        )
+        {
             if (CanBeCached(child1, child2, child3))
             {
                 GreenStats.ItemCacheable();
@@ -279,7 +285,8 @@ namespace Microsoft.CodeAnalysis.Syntax.InternalSyntax
                     e.hash == h
                     && e.node != null
                     && e.node.IsCacheEquivalent(kind, flags, child1, child2, child3)
-                ) {
+                )
+                {
                     GreenStats.CacheHit();
                     return e.node;
                 }
@@ -316,7 +323,8 @@ namespace Microsoft.CodeAnalysis.Syntax.InternalSyntax
             GreenNode.NodeFlags flags,
             GreenNode? child1,
             GreenNode? child2
-        ) {
+        )
+        {
             int code = (int)(flags) ^ kind;
 
             if (child1 != null)
@@ -344,7 +352,8 @@ namespace Microsoft.CodeAnalysis.Syntax.InternalSyntax
             GreenNode? child1,
             GreenNode? child2,
             GreenNode? child3
-        ) {
+        )
+        {
             int code = (int)(flags) ^ kind;
 
             if (child1 != null)

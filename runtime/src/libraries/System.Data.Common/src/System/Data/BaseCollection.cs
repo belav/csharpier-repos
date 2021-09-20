@@ -51,7 +51,8 @@ namespace System.Data
                         | CompareOptions.IgnoreKanaType
                         | CompareOptions.IgnoreWidth
                 ) == 0
-            ) {
+            )
+            {
                 return string.Compare(s1, s2, false, locale) == 0 ? 1 : -1;
             }
 

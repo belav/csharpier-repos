@@ -12,7 +12,8 @@ namespace System.CommandLine.Rendering.Tests
             FormattableString rendering,
             Region inRegion,
             params TextRendered[] expectOutput
-        ) {
+        )
+        {
             if (rendering == null)
             {
                 throw new ArgumentNullException(nameof(rendering));

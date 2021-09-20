@@ -18,7 +18,8 @@ namespace Microsoft.AspNetCore.Localization
         public RequestCultureFeature(
             RequestCulture requestCulture,
             IRequestCultureProvider? provider
-        ) {
+        )
+        {
             if (requestCulture == null)
             {
                 throw new ArgumentNullException(nameof(requestCulture));

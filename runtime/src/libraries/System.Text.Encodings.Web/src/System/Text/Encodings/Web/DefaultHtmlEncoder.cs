@@ -115,7 +115,8 @@ namespace System.Text.Encodings.Web
                             (byte)'t',
                             (byte)';'
                         )
-                    ) {
+                    )
+                    {
                         goto OutOfSpace;
                     }
                     return 4;
@@ -130,7 +131,8 @@ namespace System.Text.Encodings.Web
                             (byte)'t',
                             (byte)';'
                         )
-                    ) {
+                    )
+                    {
                         goto OutOfSpace;
                     }
                     return 4;
@@ -146,7 +148,8 @@ namespace System.Text.Encodings.Web
                             (byte)'p',
                             (byte)';'
                         )
-                    ) {
+                    )
+                    {
                         goto OutOfSpace;
                     }
                     return 5;
@@ -163,7 +166,8 @@ namespace System.Text.Encodings.Web
                             (byte)'t',
                             (byte)';'
                         )
-                    ) {
+                    )
+                    {
                         goto OutOfSpace;
                     }
                     return 6;
@@ -209,7 +213,8 @@ namespace System.Text.Encodings.Web
                             (byte)'x',
                             (byte)'0'
                         )
-                    ) {
+                    )
+                    {
                         Debug.Fail("We should've had enough room to write 4 bytes.");
                     }
 
@@ -218,7 +223,8 @@ namespace System.Text.Encodings.Web
                         int i = destination.Length - 1;
                         SpanUtility.IsValidIndex(destination, i);
                         i--
-                    ) {
+                    )
+                    {
                         char asUpperHex = HexConverter.ToCharUpper((int)scalarValue);
                         destination[i] = (byte)asUpperHex;
                         scalarValue >>= 4; // write a nibble - not a byte - at a time
@@ -320,7 +326,8 @@ namespace System.Text.Encodings.Web
                         int i = destination.Length - 1;
                         SpanUtility.IsValidIndex(destination, i);
                         i--
-                    ) {
+                    )
+                    {
                         char asUpperHex = HexConverter.ToCharUpper((int)scalarValue);
                         destination[i] = asUpperHex;
                         scalarValue >>= 4; // write a nibble - not a byte - at a time

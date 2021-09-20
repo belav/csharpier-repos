@@ -66,7 +66,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.CodeModel
             AbstractFormattingRule lineAdjustmentFormattingRule,
             AbstractFormattingRule endRegionFormattingRule,
             IThreadingContext threadingContext
-        ) {
+        )
+        {
             Debug.Assert(languageServiceProvider != null);
             Debug.Assert(editorOptionsFactoryService != null);
 
@@ -88,7 +89,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.CodeModel
         protected SyntaxToken GetTokenWithoutAnnotation(
             SyntaxToken current,
             Func<SyntaxToken, SyntaxToken> nextTokenGetter
-        ) {
+        )
+        {
             while (current.ContainsAnnotations)
             {
                 current = nextTokenGetter(current);
@@ -101,7 +103,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.CodeModel
             SyntaxNode root,
             SyntaxToken startToken,
             SyntaxToken endToken
-        ) {
+        )
+        {
             var startPosition = startToken.SpanStart;
             var endPosition = endToken.RawKind == 0 ? root.Span.End : endToken.Span.End;
 
@@ -239,7 +242,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.CodeModel
             CodeModelState state,
             ProjectId projectId,
             ISymbol symbol
-        ) {
+        )
+        {
             switch (symbol.Kind)
             {
                 case SymbolKind.Event:
@@ -336,12 +340,14 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.CodeModel
             CodeModelState state,
             ProjectId projectId,
             ITypeSymbol typeSymbol
-        ) {
+        )
+        {
             if (
                 typeSymbol.TypeKind == TypeKind.Pointer
                 || typeSymbol.TypeKind == TypeKind.TypeParameter
                 || typeSymbol.TypeKind == TypeKind.Submission
-            ) {
+            )
+            {
                 throw Exceptions.ThrowEFail();
             }
 
@@ -428,7 +434,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.CodeModel
             Microsoft.CodeAnalysis.Workspace workspace,
             ProjectId projectId,
             SymbolKey symbolId
-        ) {
+        )
+        {
             var project = workspace.CurrentSolution.GetProject(projectId);
 
             if (project == null)
@@ -443,7 +450,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.CodeModel
             CodeModelState state,
             FileCodeModel fileCodeModel,
             SyntaxNode node
-        ) {
+        )
+        {
             var parentNode = node.Ancestors()
                 .FirstOrDefault(n => TryGetNodeKey(n) != SyntaxNodeKey.Empty);
 
@@ -463,7 +471,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.CodeModel
             CodeModelState state,
             FileCodeModel fileCodeModel,
             SyntaxNode node
-        ) {
+        )
+        {
             var parentNode = GetEffectiveParentForAttribute(node);
 
             AbstractCodeElement parentObject;
@@ -510,7 +519,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.CodeModel
             CodeModelState state,
             FileCodeModel fileCodeModel,
             SyntaxNode node
-        ) {
+        )
+        {
             GetImportParentAndName(node, out var parentNode, out var name);
 
             AbstractCodeElement parentObj = null;
@@ -527,7 +537,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.CodeModel
             CodeModelState state,
             FileCodeModel fileCodeModel,
             SyntaxNode node
-        ) {
+        )
+        {
             var parentNode = node.Ancestors()
                 .FirstOrDefault(n => TryGetNodeKey(n) != SyntaxNodeKey.Empty);
 
@@ -548,7 +559,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.CodeModel
             CodeModelState state,
             FileCodeModel fileCodeModel,
             SyntaxNode node
-        ) {
+        )
+        {
             GetOptionNameAndOrdinal(node.Parent, node, out var name, out var ordinal);
 
             return CodeOptionsStatement.Create(state, fileCodeModel, name, ordinal);
@@ -558,7 +570,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.CodeModel
             CodeModelState state,
             FileCodeModel fileCodeModel,
             SyntaxNode node
-        ) {
+        )
+        {
             var parentNode = node.Ancestors()
                 .FirstOrDefault(n => TryGetNodeKey(n) != SyntaxNodeKey.Empty);
 
@@ -584,7 +597,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.CodeModel
             CodeModelState state,
             FileCodeModel fileCodeModel,
             SyntaxNode node
-        ) {
+        )
+        {
             var parentNode = node.Ancestors()
                 .FirstOrDefault(n => TryGetNodeKey(n) != SyntaxNodeKey.Empty);
 
@@ -610,7 +624,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.CodeModel
             CodeModelState state,
             FileCodeModel fileCodeModel,
             SyntaxNode node
-        ) {
+        )
+        {
             GetAttributeArgumentParentAndIndex(node, out var attributeNode, out var index);
 
             var codeAttribute = CreateInternalCodeAttribute(state, fileCodeModel, attributeNode);
@@ -648,7 +663,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.CodeModel
             string newName,
             Workspace workspace,
             ProjectCodeModelFactory projectCodeModelFactory
-        ) {
+        )
+        {
             // Save the node keys.
             var nodeKeyValidation = new NodeKeyValidation(projectCodeModelFactory);
 
@@ -751,7 +767,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.CodeModel
             Project project,
             ITypeSymbol typeSymbol,
             out EnvDTE.CodeElement element
-        ) {
+        )
+        {
             element = null;
 
             if (!typeSymbol.IsDefinition)
@@ -1035,7 +1052,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.CodeModel
             EnvDTE.vsCMAccess access,
             SymbolKind targetSymbolKind,
             CodeGenerationDestination destination = CodeGenerationDestination.Unspecified
-        ) {
+        )
+        {
             // Note: Some EnvDTE.vsCMAccess members aren't "bitwise-mutually-exclusive"
             // Specifically, vsCMAccessProjectOrProtected (12) is a combination of vsCMAccessProject (4) and vsCMAccessProtected (8)
             // We therefore check for this first.
@@ -1043,7 +1061,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.CodeModel
             if (
                 (access & EnvDTE.vsCMAccess.vsCMAccessProjectOrProtected)
                 == EnvDTE.vsCMAccess.vsCMAccessProjectOrProtected
-            ) {
+            )
+            {
                 return Accessibility.ProtectedOrInternal;
             }
             else if ((access & EnvDTE.vsCMAccess.vsCMAccessPrivate) != 0)
@@ -1163,7 +1182,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.CodeModel
             object position,
             SyntaxNode containerNode,
             FileCodeModel fileCodeModel
-        ) {
+        )
+        {
             return PositionVariantToInsertionIndex(
                 position,
                 containerNode,
@@ -1182,7 +1202,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.CodeModel
             object position,
             SyntaxNode containerNode,
             FileCodeModel fileCodeModel
-        ) {
+        )
+        {
             return PositionVariantToInsertionIndex(
                 position,
                 containerNode,
@@ -1201,7 +1222,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.CodeModel
             object position,
             SyntaxNode containerNode,
             FileCodeModel fileCodeModel
-        ) {
+        )
+        {
             return PositionVariantToInsertionIndex(
                 position,
                 containerNode,
@@ -1220,7 +1242,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.CodeModel
             object position,
             SyntaxNode containerNode,
             FileCodeModel fileCodeModel
-        ) {
+        )
+        {
             return PositionVariantToInsertionIndex(
                 position,
                 containerNode,
@@ -1248,7 +1271,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.CodeModel
             object position,
             SyntaxNode containerNode,
             FileCodeModel fileCodeModel
-        ) {
+        )
+        {
             return PositionVariantToInsertionIndex(
                 position,
                 containerNode,
@@ -1271,7 +1295,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.CodeModel
             FileCodeModel fileCodeModel,
             Func<SyntaxNode, Func<SyntaxNode, bool>, int> getIndexInContainer,
             Func<SyntaxNode, IEnumerable<SyntaxNode>> getChildNodes
-        ) {
+        )
+        {
             int result;
 
             if (position is int i)
@@ -1434,7 +1459,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.CodeModel
             SyntaxAnnotation annotation,
             IEnumerable<AbstractFormattingRule> additionalRules,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var root = document.GetSyntaxRootSynchronously(cancellationToken);
             var annotatedNode = root.GetAnnotatedNodesAndTokens(annotation).Single().AsNode();
             var formattingSpan = GetSpanToFormat(root, annotatedNode.FullSpan);
@@ -1466,7 +1492,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.CodeModel
             Func<int, SyntaxNode, SyntaxNode, SyntaxNode> insertNodeIntoContainer,
             CancellationToken cancellationToken,
             out Document newDocument
-        ) {
+        )
+        {
             var root = document.GetSyntaxRootSynchronously(cancellationToken);
 
             // Annotate the member we're inserting so we can get back to it.
@@ -1526,7 +1553,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.CodeModel
             SyntaxNode node,
             SyntaxNode newNode,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             // Annotate the member we're inserting so we can get back to it.
             var annotation = new SyntaxAnnotation();
 
@@ -1563,7 +1591,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.CodeModel
             SyntaxNode attributeNode,
             CancellationToken cancellationToken,
             out Document newDocument
-        ) {
+        )
+        {
             var finalNode = InsertNode(
                 document,
                 batchMode,
@@ -1586,7 +1615,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.CodeModel
             SyntaxNode attributeArgumentNode,
             CancellationToken cancellationToken,
             out Document newDocument
-        ) {
+        )
+        {
             var finalNode = InsertNode(
                 document,
                 batchMode,
@@ -1609,7 +1639,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.CodeModel
             SyntaxNode importNode,
             CancellationToken cancellationToken,
             out Document newDocument
-        ) {
+        )
+        {
             var finalNode = InsertNode(
                 document,
                 batchMode,
@@ -1632,7 +1663,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.CodeModel
             SyntaxNode parameterNode,
             CancellationToken cancellationToken,
             out Document newDocument
-        ) {
+        )
+        {
             var finalNode = InsertNode(
                 document,
                 batchMode,
@@ -1655,7 +1687,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.CodeModel
             SyntaxNode memberNode,
             CancellationToken cancellationToken,
             out Document newDocument
-        ) {
+        )
+        {
             var finalNode = InsertNode(
                 document,
                 batchMode,
@@ -1681,7 +1714,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.CodeModel
         public virtual IList<string> GetHandledEventNames(
             SyntaxNode method,
             SemanticModel semanticModel
-        ) {
+        )
+        {
             // descendants may override (particularly VB).
 
             return SpecializedCollections.EmptyList<string>();
@@ -1691,7 +1725,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.CodeModel
             string eventName,
             SyntaxNode method,
             SemanticModel semanticModel
-        ) {
+        )
+        {
             // descendants may override (particularly VB).
 
             return false;
@@ -1702,7 +1737,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.CodeModel
             string eventName,
             SyntaxNode method,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             // descendants may override (particularly VB).
 
             return document;
@@ -1713,7 +1749,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.CodeModel
             string eventName,
             SyntaxNode method,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             // descendants may override (particularly VB).
 
             return document;

@@ -153,7 +153,8 @@ namespace System.Web.Helpers
             if (
                 hashedPasswordBytes.Length != (1 + SaltSize + PBKDF2SubkeyLength)
                 || hashedPasswordBytes[0] != 0x00
-            ) {
+            )
+            {
                 // Wrong length or version header.
                 return false;
             }

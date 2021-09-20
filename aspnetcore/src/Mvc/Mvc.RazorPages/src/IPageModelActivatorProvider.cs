@@ -32,7 +32,8 @@ namespace Microsoft.AspNetCore.Mvc.RazorPages
         /// <returns>The delegate used to dispose the activated Razor Page model asynchronously.</returns>
         Func<PageContext, object, ValueTask> CreateAsyncReleaser(
             CompiledPageActionDescriptor descriptor
-        ) {
+        )
+        {
             var releaser = CreateReleaser(descriptor);
             return (context, model) =>
             {

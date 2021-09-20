@@ -42,7 +42,8 @@ namespace System.Globalization.Tests
             int minute,
             int second,
             int millisecond
-        ) {
+        )
+        {
             ThaiBuddhistCalendar calendar = new ThaiBuddhistCalendar();
             DateTime expected = new GregorianCalendar().ToDateTime(
                 year,

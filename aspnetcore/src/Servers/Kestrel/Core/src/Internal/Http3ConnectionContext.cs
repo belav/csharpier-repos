@@ -20,7 +20,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Internal
             MemoryPool<byte> memoryPool,
             IPEndPoint? localEndPoint,
             IPEndPoint? remoteEndPoint
-        ) {
+        )
+        {
             ConnectionId = connectionId;
             ConnectionContext = connectionContext;
             ServiceContext = serviceContext;

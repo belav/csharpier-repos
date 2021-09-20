@@ -115,7 +115,8 @@ namespace System.Net.Http.Functional.Tests
         public async Task GetAsync_UnknownRequestVersion_DegradesTo11(
             int majorVersion,
             int minorVersion
-        ) {
+        )
+        {
             // Sync API supported only up to HTTP/1.1
             if (!TestAsync && majorVersion >= 2)
             {
@@ -235,7 +236,8 @@ namespace System.Net.Http.Functional.Tests
         public async Task GetAsyncVersion11_BadResponseVersion_ThrowsOr00(
             int responseMajorVersion,
             int responseMinorVersion
-        ) {
+        )
+        {
             await LoopbackServer.CreateServerAsync(
                 async (server, url) =>
                 {
@@ -281,7 +283,8 @@ namespace System.Net.Http.Functional.Tests
             string statusLine,
             int expectedStatusCode,
             string expectedReason
-        ) {
+        )
+        {
             if (IsWinHttpHandler)
             {
                 return;
@@ -297,7 +300,8 @@ namespace System.Net.Http.Functional.Tests
             string statusLine,
             int expectedStatusCode,
             string reason
-        ) {
+        )
+        {
             if (IsWinHttpHandler)
             {
                 // WinHttpHandler will trim space characters.
@@ -318,7 +322,8 @@ namespace System.Net.Http.Functional.Tests
             string statusLine,
             int expectedStatusCode,
             string expectedReason
-        ) {
+        )
+        {
             await GetAsyncSuccessHelper(statusLine, expectedStatusCode, expectedReason);
         }
 
@@ -326,7 +331,8 @@ namespace System.Net.Http.Functional.Tests
             string statusLine,
             int expectedStatusCode,
             string expectedReason
-        ) {
+        )
+        {
             await LoopbackServer.CreateServerAsync(
                 async (server, url) =>
                 {
@@ -409,7 +415,8 @@ namespace System.Net.Http.Functional.Tests
         [InlineData("HTTP/1.1 200\t")]
         public async Task GetAsync_InvalidStatusLine_ThrowsExceptionOnSocketsHttpHandler(
             string responseString
-        ) {
+        )
+        {
             if (!IsWinHttpHandler)
             {
                 // SocketsHttpHandler and .NET Framework will throw HttpRequestException.
@@ -483,7 +490,8 @@ namespace System.Net.Http.Functional.Tests
             int maxChunkSize,
             string lineEnding,
             bool useCopyToAsync
-        ) {
+        )
+        {
             if (IsWinHttpHandler)
             {
                 return;
@@ -589,7 +597,8 @@ namespace System.Net.Http.Functional.Tests
         public async Task CustomMethod_SentUppercasedIfKnown(
             string specifiedMethod,
             string expectedMethod
-        ) {
+        )
+        {
             await LoopbackServer.CreateClientAndServerAsync(
                 async uri =>
                 {

@@ -56,7 +56,8 @@ namespace Microsoft.AspNetCore.SignalR.Tests
             string groupName,
             string message,
             IReadOnlyList<string> excludedConnectionIds
-        ) {
+        )
+        {
             return Clients.GroupExcept(groupName, excludedConnectionIds).SendAsync("Send", message);
         }
 
@@ -405,7 +406,8 @@ namespace Microsoft.AspNetCore.SignalR.Tests
             string groupName,
             string message,
             IReadOnlyList<string> excludedConnectionIds
-        ) {
+        )
+        {
             return Clients.GroupExcept(groupName, excludedConnectionIds).Send(message);
         }
 
@@ -494,7 +496,8 @@ namespace Microsoft.AspNetCore.SignalR.Tests
             string groupName,
             string message,
             IReadOnlyList<string> excludedConnectionIds
-        ) {
+        )
+        {
             return Clients.GroupExcept(groupName, excludedConnectionIds).Send(message);
         }
 
@@ -691,7 +694,8 @@ namespace Microsoft.AspNetCore.SignalR.Tests
 
         public AsyncEnumerableImplChannelThrows<string> AsyncEnumerableIsPreferredOverChannelReader(
             int count
-        ) {
+        )
+        {
             return new AsyncEnumerableImplChannelThrows<string>(CounterChannel(count));
         }
 
@@ -746,14 +750,16 @@ namespace Microsoft.AspNetCore.SignalR.Tests
 
         public async IAsyncEnumerable<string> DerivedParameterInterfaceAsyncEnumerable(
             IDerivedParameterTestObject param
-        ) {
+        )
+        {
             await Task.Yield();
             yield return param.Value;
         }
 
         public async IAsyncEnumerable<string> DerivedParameterBaseClassAsyncEnumerable(
             DerivedParameterTestObjectBase param
-        ) {
+        )
+        {
             await Task.Yield();
             yield return param.Value;
         }
@@ -761,7 +767,8 @@ namespace Microsoft.AspNetCore.SignalR.Tests
         public async IAsyncEnumerable<string> DerivedParameterInterfaceAsyncEnumerableWithCancellation(
             IDerivedParameterTestObject param,
             [EnumeratorCancellation] CancellationToken token
-        ) {
+        )
+        {
             await Task.Yield();
             yield return param.Value;
         }
@@ -769,7 +776,8 @@ namespace Microsoft.AspNetCore.SignalR.Tests
         public async IAsyncEnumerable<string> DerivedParameterBaseClassAsyncEnumerableWithCancellation(
             DerivedParameterTestObjectBase param,
             [EnumeratorCancellation] CancellationToken token
-        ) {
+        )
+        {
             await Task.Yield();
             yield return param.Value;
         }
@@ -785,7 +793,8 @@ namespace Microsoft.AspNetCore.SignalR.Tests
 
             public IAsyncEnumerator<T> GetAsyncEnumerator(
                 CancellationToken cancellationToken = default
-            ) {
+            )
+            {
                 return _inner.GetAsyncEnumerator(cancellationToken);
             }
         }
@@ -807,14 +816,16 @@ namespace Microsoft.AspNetCore.SignalR.Tests
 
             public override ValueTask<bool> WaitToReadAsync(
                 CancellationToken cancellationToken = default
-            ) {
+            )
+            {
                 // Not implemented to verify this is consumed as an IAsyncEnumerable<T> instead of a ChannelReader<T>.
                 throw new NotImplementedException();
             }
 
             public IAsyncEnumerator<T> GetAsyncEnumerator(
                 CancellationToken cancellationToken = default
-            ) {
+            )
+            {
                 return new ChannelAsyncEnumerator(_inner, cancellationToken);
             }
 
@@ -831,7 +842,8 @@ namespace Microsoft.AspNetCore.SignalR.Tests
                 public ChannelAsyncEnumerator(
                     ChannelReader<T> channel,
                     CancellationToken cancellationToken
-                ) {
+                )
+                {
                     _channel = channel;
                     _cancellationToken = cancellationToken;
                 }
@@ -898,7 +910,8 @@ namespace Microsoft.AspNetCore.SignalR.Tests
                 Type serializedType,
                 out string assemblyName,
                 out string typeName
-            ) {
+            )
+            {
                 assemblyName = null;
                 typeName = serializedType.Name;
             }
@@ -981,7 +994,8 @@ namespace Microsoft.AspNetCore.SignalR.Tests
             int ignore,
             int ignore2,
             CancellationToken token
-        ) {
+        )
+        {
             var channel = Channel.CreateBounded<int>(10);
 
             Task.Run(
@@ -1001,7 +1015,8 @@ namespace Microsoft.AspNetCore.SignalR.Tests
             int x,
             string y,
             CancellationToken token
-        ) {
+        )
+        {
             var channel = Channel.CreateBounded<int>(10);
 
             Task.Run(
@@ -1038,7 +1053,8 @@ namespace Microsoft.AspNetCore.SignalR.Tests
             int ignore,
             CancellationToken token,
             int ignore2
-        ) {
+        )
+        {
             var channel = Channel.CreateBounded<int>(10);
 
             Task.Run(
@@ -1056,7 +1072,8 @@ namespace Microsoft.AspNetCore.SignalR.Tests
 
         public async IAsyncEnumerable<int> CancelableStreamGeneratedAsyncEnumerable(
             [EnumeratorCancellation] CancellationToken token
-        ) {
+        )
+        {
             _tcsService.StartedMethod.SetResult(null);
             await token.WaitForCancellationAsync();
             _tcsService.EndMethod.SetResult(null);
@@ -1091,7 +1108,8 @@ namespace Microsoft.AspNetCore.SignalR.Tests
 
             public IAsyncEnumerator<int> GetAsyncEnumerator(
                 CancellationToken cancellationToken = default
-            ) {
+            )
+            {
                 return new CustomAsyncEnumerator(_tcsService, cancellationToken);
             }
 
@@ -1103,7 +1121,8 @@ namespace Microsoft.AspNetCore.SignalR.Tests
                 public CustomAsyncEnumerator(
                     TcsService tcsService,
                     CancellationToken cancellationToken
-                ) {
+                )
+                {
                     _tcsService = tcsService;
                     _cancellationToken = cancellationToken;
                 }

@@ -60,7 +60,8 @@ namespace Microsoft.AspNetCore.Components.WebView
         internal static IFileProvider UseStaticWebAssetsCore(
             IFileProvider systemProvider,
             Stream manifest
-        ) {
+        )
+        {
             var webRootFileProvider = systemProvider;
 
             var additionalFiles = StaticWebAssetsReader.Parse(manifest)
@@ -110,7 +111,8 @@ namespace Microsoft.AspNetCore.Components.WebView
                         ManifestRootElementName,
                         StringComparison.OrdinalIgnoreCase
                     )
-                ) {
+                )
+                {
                     throw new InvalidOperationException(
                         $"Invalid manifest format. Manifest root must be '{ManifestRootElementName}'"
                     );
@@ -139,7 +141,8 @@ namespace Microsoft.AspNetCore.Components.WebView
                             ContentRootElementName,
                             StringComparison.OrdinalIgnoreCase
                         )
-                    ) {
+                    )
+                    {
                         throw new InvalidOperationException(
                             $"Invalid manifest format. Invalid element '{element.Name.LocalName}'. All {StaticWebAssetsLoader.StaticWebAssetsManifestName} child elements must be '{ContentRootElementName}' elements."
                         );
@@ -219,7 +222,8 @@ namespace Microsoft.AspNetCore.Components.WebView
                 }
                 else if (
                     BasePath.StartsWithSegments(modifiedSub, FilePathComparison, out var remaining)
-                ) {
+                )
+                {
                     return new StaticWebAssetsDirectoryRoot(remaining);
                 }
 

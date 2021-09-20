@@ -54,7 +54,8 @@ namespace Microsoft.CodeAnalysis.ExpressionEvaluator
                 m_simpleValue != null
                 && (inspectionContext.EvaluationFlags & DkmEvaluationFlags.UseSimpleDisplayString)
                     == DkmEvaluationFlags.UseSimpleDisplayString
-            ) {
+            )
+            {
                 return m_simpleValue;
             }
 
@@ -91,7 +92,8 @@ namespace Microsoft.CodeAnalysis.ExpressionEvaluator
         public DebuggerDisplayInfo WithDebuggerDisplayAttribute(
             DkmClrDebuggerDisplayAttribute attribute,
             DkmClrType attributeTarget
-        ) {
+        )
+        {
             var name = Name;
             var value = m_value;
             var simpleValue = m_simpleValue;

@@ -126,7 +126,8 @@ namespace Microsoft.CodeAnalysis
             MetadataReferenceProperties properties = default,
             DocumentationProvider? documentation = null,
             string? filePath = null
-        ) {
+        )
+        {
             var metadata = AssemblyMetadata.CreateFromImage(peImage);
             return new MetadataImageReference(
                 metadata,
@@ -165,7 +166,8 @@ namespace Microsoft.CodeAnalysis
             MetadataReferenceProperties properties = default,
             DocumentationProvider? documentation = null,
             string? filePath = null
-        ) {
+        )
+        {
             var metadata = AssemblyMetadata.CreateFromImage(peImage);
             return new MetadataImageReference(
                 metadata,
@@ -208,7 +210,8 @@ namespace Microsoft.CodeAnalysis
             MetadataReferenceProperties properties = default,
             DocumentationProvider? documentation = null,
             string? filePath = null
-        ) {
+        )
+        {
             // Prefetch data and close the stream.
             var metadata = AssemblyMetadata.CreateFromStream(
                 peStream,
@@ -272,7 +275,8 @@ namespace Microsoft.CodeAnalysis
             string path,
             MetadataReferenceProperties properties = default,
             DocumentationProvider? documentation = null
-        ) {
+        )
+        {
             // prefetch image, close stream to avoid locking it:
             var module = ModuleMetadata.CreateFromStream(
                 peStream,
@@ -348,7 +352,8 @@ namespace Microsoft.CodeAnalysis
             Assembly assembly,
             MetadataReferenceProperties properties,
             DocumentationProvider? documentation = null
-        ) {
+        )
+        {
             return CreateFromAssemblyInternal(assembly, properties, documentation);
         }
 
@@ -356,7 +361,8 @@ namespace Microsoft.CodeAnalysis
             Assembly assembly,
             MetadataReferenceProperties properties,
             DocumentationProvider? documentation = null
-        ) {
+        )
+        {
             // Note: returns MetadataReference and not PortableExecutableReference so that we can in future support assemblies that
             // which are not backed by PE image.
 

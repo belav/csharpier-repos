@@ -64,7 +64,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Snippets
 
         private async Task InitializeAndPopulateSnippetsCacheAsync(
             Shell.IAsyncServiceProvider asyncServiceProvider
-        ) {
+        )
+        {
             await _threadingContext.JoinableTaskFactory.SwitchToMainThreadAsync();
             var textManager = (IVsTextManager2?)await asyncServiceProvider.GetServiceAsync(
                     typeof(SVsTextManager)
@@ -174,7 +175,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Snippets
         /// </remarks>
         private void PopulateSnippetCacheFromExpansionEnumeration(
             IVsExpansionEnumeration expansionEnumerator
-        ) {
+        )
+        {
             AssertIsForeground();
 
             var updatedSnippets = ExtractSnippetInfo(expansionEnumerator);
@@ -189,7 +191,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Snippets
 
         private ImmutableArray<SnippetInfo> ExtractSnippetInfo(
             IVsExpansionEnumeration expansionEnumerator
-        ) {
+        )
+        {
             AssertIsForeground();
 
             var snippetListBuilder = ImmutableArray.CreateBuilder<SnippetInfo>();
@@ -236,7 +239,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Snippets
 
         protected static IImmutableSet<string> GetShortcutsHashFromSnippets(
             ImmutableArray<SnippetInfo> updatedSnippets
-        ) {
+        )
+        {
             return new HashSet<string>(
                 updatedSnippets.Select(s => s.Shortcut),
                 StringComparer.OrdinalIgnoreCase

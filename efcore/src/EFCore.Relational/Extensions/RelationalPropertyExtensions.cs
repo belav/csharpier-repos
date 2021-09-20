@@ -50,7 +50,8 @@ namespace Microsoft.EntityFrameworkCore
         public static string? GetColumnName(
             this IReadOnlyProperty property,
             in StoreObjectIdentifier storeObject
-        ) {
+        )
+        {
             Check.NotNull(property, nameof(property));
 
             var overrides = RelationalPropertyOverrides.Find(property, storeObject);
@@ -62,19 +63,22 @@ namespace Microsoft.EntityFrameworkCore
             if (
                 storeObject.StoreObjectType != StoreObjectType.Function
                 && storeObject.StoreObjectType != StoreObjectType.SqlQuery
-            ) {
+            )
+            {
                 if (property.IsPrimaryKey())
                 {
                     var tableFound = false;
                     foreach (
                         var containingType in property.DeclaringEntityType.GetDerivedTypesInclusive()
-                    ) {
+                    )
+                    {
                         if (
                             StoreObjectIdentifier.Create(
                                 containingType,
                                 storeObject.StoreObjectType
                             ) == storeObject
-                        ) {
+                        )
+                        {
                             tableFound = true;
                             break;
                         }
@@ -90,7 +94,8 @@ namespace Microsoft.EntityFrameworkCore
                         property.DeclaringEntityType,
                         storeObject.StoreObjectType
                     ) != storeObject
-                ) {
+                )
+                {
                     return null;
                 }
             }
@@ -141,7 +146,8 @@ namespace Microsoft.EntityFrameworkCore
         public static string GetDefaultColumnName(
             this IReadOnlyProperty property,
             in StoreObjectIdentifier storeObject
-        ) {
+        )
+        {
             var sharedTablePrincipalPrimaryKeyProperty = FindSharedObjectRootPrimaryKeyProperty(
                 property,
                 storeObject
@@ -247,7 +253,8 @@ namespace Microsoft.EntityFrameworkCore
             this IConventionProperty property,
             string? name,
             bool fromDataAnnotation = false
-        ) {
+        )
+        {
             property.SetOrRemoveAnnotation(
                 RelationalAnnotationNames.ColumnName,
                 Check.NullButNotEmpty(name, nameof(name)),
@@ -360,7 +367,8 @@ namespace Microsoft.EntityFrameworkCore
         public static string? GetColumnType(
             this IReadOnlyProperty property,
             in StoreObjectIdentifier storeObject
-        ) {
+        )
+        {
             var annotation = property.FindAnnotation(RelationalAnnotationNames.ColumnType);
             if (annotation != null)
             {
@@ -384,7 +392,8 @@ namespace Microsoft.EntityFrameworkCore
         private static string? GetDefaultColumnType(
             IReadOnlyProperty property,
             in StoreObjectIdentifier storeObject
-        ) {
+        )
+        {
             var sharedTableRootProperty = property.FindSharedStoreObjectRootProperty(storeObject);
             return sharedTableRootProperty != null
               ? sharedTableRootProperty.GetColumnType(storeObject)
@@ -413,7 +422,8 @@ namespace Microsoft.EntityFrameworkCore
             this IConventionProperty property,
             string? value,
             bool fromDataAnnotation = false
-        ) {
+        )
+        {
             property.SetOrRemoveAnnotation(
                 RelationalAnnotationNames.ColumnType,
                 Check.NullButNotEmpty(value, nameof(value)),
@@ -500,7 +510,8 @@ namespace Microsoft.EntityFrameworkCore
         public static IColumnBase? FindColumn(
             this IProperty property,
             in StoreObjectIdentifier storeObject
-        ) {
+        )
+        {
             switch (storeObject.StoreObjectType)
             {
                 case StoreObjectType.Table:
@@ -509,7 +520,8 @@ namespace Microsoft.EntityFrameworkCore
                         if (
                             mapping.TableMapping.Table.Name == storeObject.Name
                             && mapping.TableMapping.Table.Schema == storeObject.Schema
-                        ) {
+                        )
+                        {
                             return mapping.Column;
                         }
                     }
@@ -521,7 +533,8 @@ namespace Microsoft.EntityFrameworkCore
                         if (
                             mapping.TableMapping.Table.Name == storeObject.Name
                             && mapping.TableMapping.Table.Schema == storeObject.Schema
-                        ) {
+                        )
+                        {
                             return mapping.Column;
                         }
                     }
@@ -569,7 +582,8 @@ namespace Microsoft.EntityFrameworkCore
         public static string? GetDefaultValueSql(
             this IReadOnlyProperty property,
             in StoreObjectIdentifier storeObject
-        ) {
+        )
+        {
             var annotation = property.FindAnnotation(RelationalAnnotationNames.DefaultValueSql);
             if (annotation != null)
             {
@@ -604,7 +618,8 @@ namespace Microsoft.EntityFrameworkCore
             this IConventionProperty property,
             string? value,
             bool fromDataAnnotation = false
-        ) {
+        )
+        {
             property.SetOrRemoveAnnotation(
                 RelationalAnnotationNames.DefaultValueSql,
                 value,
@@ -643,7 +658,8 @@ namespace Microsoft.EntityFrameworkCore
         public static string? GetComputedColumnSql(
             this IReadOnlyProperty property,
             in StoreObjectIdentifier storeObject
-        ) {
+        )
+        {
             var annotation = property.FindAnnotation(RelationalAnnotationNames.ComputedColumnSql);
             if (annotation != null)
             {
@@ -678,7 +694,8 @@ namespace Microsoft.EntityFrameworkCore
             this IConventionProperty property,
             string? value,
             bool fromDataAnnotation = false
-        ) {
+        )
+        {
             property.SetOrRemoveAnnotation(
                 RelationalAnnotationNames.ComputedColumnSql,
                 value,
@@ -725,7 +742,8 @@ namespace Microsoft.EntityFrameworkCore
         public static bool? GetIsStored(
             this IReadOnlyProperty property,
             in StoreObjectIdentifier storeObject
-        ) {
+        )
+        {
             var annotation = property.FindAnnotation(RelationalAnnotationNames.IsStored);
             if (annotation != null)
             {
@@ -762,7 +780,8 @@ namespace Microsoft.EntityFrameworkCore
             this IConventionProperty property,
             bool? value,
             bool fromDataAnnotation = false
-        ) {
+        )
+        {
             property.SetOrRemoveAnnotation(
                 RelationalAnnotationNames.IsStored,
                 value,
@@ -798,7 +817,8 @@ namespace Microsoft.EntityFrameworkCore
         public static object? GetDefaultValue(
             this IReadOnlyProperty property,
             in StoreObjectIdentifier storeObject
-        ) {
+        )
+        {
             var annotation = property.FindAnnotation(RelationalAnnotationNames.DefaultValue);
             if (annotation != null)
             {
@@ -836,7 +856,8 @@ namespace Microsoft.EntityFrameworkCore
             this IConventionProperty property,
             object? value,
             bool fromDataAnnotation = false
-        ) {
+        )
+        {
             property.SetOrRemoveAnnotation(
                 RelationalAnnotationNames.DefaultValue,
                 ConvertDefaultValue(property, value),
@@ -903,7 +924,8 @@ namespace Microsoft.EntityFrameworkCore
         public static int? GetMaxLength(
             this IReadOnlyProperty property,
             in StoreObjectIdentifier storeObject
-        ) {
+        )
+        {
             Check.NotNull(property, nameof(property));
 
             var maxLength = property.GetMaxLength();
@@ -928,7 +950,8 @@ namespace Microsoft.EntityFrameworkCore
         public static int? GetPrecision(
             this IReadOnlyProperty property,
             in StoreObjectIdentifier storeObject
-        ) {
+        )
+        {
             Check.NotNull(property, nameof(property));
 
             var precision = property.GetPrecision();
@@ -953,7 +976,8 @@ namespace Microsoft.EntityFrameworkCore
         public static int? GetScale(
             this IReadOnlyProperty property,
             in StoreObjectIdentifier storeObject
-        ) {
+        )
+        {
             Check.NotNull(property, nameof(property));
 
             var scale = property.GetScale();
@@ -977,7 +1001,8 @@ namespace Microsoft.EntityFrameworkCore
         public static bool? IsUnicode(
             this IReadOnlyProperty property,
             in StoreObjectIdentifier storeObject
-        ) {
+        )
+        {
             Check.NotNull(property, nameof(property));
 
             var unicode = property.IsUnicode();
@@ -1009,7 +1034,8 @@ namespace Microsoft.EntityFrameworkCore
         public static bool? IsFixedLength(
             this IReadOnlyProperty property,
             in StoreObjectIdentifier storeObject
-        ) {
+        )
+        {
             var annotation = property.FindAnnotation(RelationalAnnotationNames.IsFixedLength);
             if (annotation != null)
             {
@@ -1044,7 +1070,8 @@ namespace Microsoft.EntityFrameworkCore
             this IConventionProperty property,
             bool? fixedLength,
             bool fromDataAnnotation = false
-        ) {
+        )
+        {
             property.SetOrRemoveAnnotation(
                 RelationalAnnotationNames.IsFixedLength,
                 fixedLength,
@@ -1103,7 +1130,8 @@ namespace Microsoft.EntityFrameworkCore
         public static bool IsColumnNullable(
             this IReadOnlyProperty property,
             in StoreObjectIdentifier storeObject
-        ) {
+        )
+        {
             if (property.IsPrimaryKey())
             {
                 return false;
@@ -1127,11 +1155,13 @@ namespace Microsoft.EntityFrameworkCore
             IReadOnlyEntityType entityType,
             in StoreObjectIdentifier storeObject,
             int recursionDepth
-        ) {
+        )
+        {
             if (
                 recursionDepth++
                 == Metadata.Internal.RelationalEntityTypeExtensions.MaxEntityTypesSharingTable
-            ) {
+            )
+            {
                 return true;
             }
 
@@ -1171,7 +1201,8 @@ namespace Microsoft.EntityFrameworkCore
         public static string? GetComment(
             this IReadOnlyProperty property,
             in StoreObjectIdentifier storeObject
-        ) {
+        )
+        {
             var annotation = property.FindAnnotation(RelationalAnnotationNames.Comment);
             if (annotation != null)
             {
@@ -1206,7 +1237,8 @@ namespace Microsoft.EntityFrameworkCore
             this IConventionProperty property,
             string? comment,
             bool fromDataAnnotation = false
-        ) {
+        )
+        {
             property.SetOrRemoveAnnotation(
                 RelationalAnnotationNames.Comment,
                 comment,
@@ -1242,7 +1274,8 @@ namespace Microsoft.EntityFrameworkCore
         public static string? GetCollation(
             this IReadOnlyProperty property,
             in StoreObjectIdentifier storeObject
-        ) {
+        )
+        {
             var annotation = property.FindAnnotation(RelationalAnnotationNames.Collation);
             if (annotation != null)
             {
@@ -1277,7 +1310,8 @@ namespace Microsoft.EntityFrameworkCore
             this IConventionProperty property,
             string? collation,
             bool fromDataAnnotation = false
-        ) {
+        )
+        {
             property.SetOrRemoveAnnotation(
                 RelationalAnnotationNames.Collation,
                 collation,
@@ -1407,7 +1441,8 @@ namespace Microsoft.EntityFrameworkCore
         private static IReadOnlyProperty? FindSharedObjectRootProperty(
             IReadOnlyProperty property,
             in StoreObjectIdentifier storeObject
-        ) {
+        )
+        {
             Check.NotNull(property, nameof(property));
 
             var column = property.GetColumnName(storeObject);
@@ -1431,14 +1466,16 @@ namespace Microsoft.EntityFrameworkCore
                 var i = 0;
                 i < Metadata.Internal.RelationalEntityTypeExtensions.MaxEntityTypesSharingTable;
                 i++
-            ) {
+            )
+            {
                 IReadOnlyProperty? linkedProperty = null;
                 foreach (
                     var p in rootProperty.DeclaringEntityType.FindRowInternalForeignKeys(
                             storeObject
                         )
                         .SelectMany(fk => fk.PrincipalEntityType.GetProperties())
-                ) {
+                )
+                {
                     if (p.GetColumnName(storeObject) == column)
                     {
                         linkedProperty = p;
@@ -1460,7 +1497,8 @@ namespace Microsoft.EntityFrameworkCore
         private static IReadOnlyProperty? FindSharedObjectRootPrimaryKeyProperty(
             IReadOnlyProperty property,
             in StoreObjectIdentifier storeObject
-        ) {
+        )
+        {
             if (!property.IsPrimaryKey())
             {
                 return null;
@@ -1474,7 +1512,8 @@ namespace Microsoft.EntityFrameworkCore
                 var i = 0;
                 i < Metadata.Internal.RelationalEntityTypeExtensions.MaxEntityTypesSharingTable;
                 i++
-            ) {
+            )
+            {
                 var linkingRelationship =
                     principalProperty.DeclaringEntityType.FindRowInternalForeignKeys(storeObject)
                         .FirstOrDefault();
@@ -1494,7 +1533,8 @@ namespace Microsoft.EntityFrameworkCore
         private static IReadOnlyProperty? FindSharedObjectRootConcurrencyTokenProperty(
             IReadOnlyProperty property,
             in StoreObjectIdentifier storeObject
-        ) {
+        )
+        {
             if (!property.IsConcurrencyToken)
             {
                 return null;
@@ -1507,7 +1547,8 @@ namespace Microsoft.EntityFrameworkCore
                 var i = 0;
                 i < Metadata.Internal.RelationalEntityTypeExtensions.MaxEntityTypesSharingTable;
                 i++
-            ) {
+            )
+            {
                 var linkingRelationship =
                     principalProperty.DeclaringEntityType.FindRowInternalForeignKeys(storeObject)
                         .FirstOrDefault();

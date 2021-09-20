@@ -69,7 +69,8 @@ namespace CoreXml.Test.XLinq
                     string strOuterXml,
                     string strNextElemName,
                     bool bWhitespace
-                ) {
+                )
+                {
                     XmlReader DataReader = GetReader(); //GetReader(pGenericXml);
                     PositionOnElement(DataReader, strElem);
                     TestLog.Compare(DataReader.ReadOuterXml(), strOuterXml, "outer");
@@ -85,7 +86,8 @@ namespace CoreXml.Test.XLinq
                     string strOuterXml,
                     string strNextElemName,
                     bool bWhitespace
-                ) {
+                )
+                {
                     XmlReader DataReader = GetReader(); //GetReader(pGenericXml);
                     PositionOnElement(DataReader, strElem);
                     TestLog.Compare(DataReader.ReadOuterXml(), strOuterXml, "outer");

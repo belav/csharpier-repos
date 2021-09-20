@@ -103,7 +103,8 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking
                     if (
                         InternalEntry.EntityState != EntityState.Unchanged
                         && InternalEntry.EntityState != EntityState.Detached
-                    ) {
+                    )
+                    {
                         return true;
                     }
 
@@ -127,7 +128,8 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking
                                     )?.EntityState == EntityState.Deleted
                                 )
                             )
-                        ) {
+                        )
+                        {
                             return true;
                         }
                     }
@@ -154,7 +156,8 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking
                                     || relatedEntry.EntityState == EntityState.Deleted
                                     || foreignKey.Properties.Any(relatedEntry.IsModified)
                                 )
-                            ) {
+                            )
+                            {
                                 return true;
                             }
                         }
@@ -184,7 +187,8 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking
                                     && stateManager.FindPrincipal(e, foreignKey) == InternalEntry
                             )
                             .ToList()
-                    ) {
+                    )
+                    {
                         joinEntry.SetEntityState(
                             value ? EntityState.Modified : EntityState.Unchanged
                         );

@@ -13,7 +13,8 @@ namespace Microsoft.AspNetCore.Mvc.FunctionalTests
     {
         public ViewComponentFromServicesTest(
             MvcTestFixture<ControllersFromServicesWebSite.Startup> fixture
-        ) {
+        )
+        {
             Client = fixture.CreateDefaultClient();
         }
 

@@ -25,7 +25,8 @@ namespace Microsoft.CodeAnalysis.ExpressionEvaluator
             TypeAndCustomInfo elementTypeAndInfo,
             ReadOnlyCollection<int> sizes,
             ReadOnlyCollection<int> lowerBounds
-        ) {
+        )
+        {
             Debug.Assert(elementTypeAndInfo.Type != null);
             Debug.Assert(sizes != null);
             Debug.Assert(lowerBounds != null);
@@ -47,7 +48,8 @@ namespace Microsoft.CodeAnalysis.ExpressionEvaluator
             ReadOnlyCollection<int> sizes,
             ReadOnlyCollection<int> lowerBounds,
             int count
-        ) {
+        )
+        {
             Debug.Assert(count > 0);
             _elementTypeAndInfo = elementTypeAndInfo;
             _divisors = CalculateDivisors(sizes);
@@ -65,7 +67,8 @@ namespace Microsoft.CodeAnalysis.ExpressionEvaluator
             int count,
             bool visitAll,
             ref int index
-        ) {
+        )
+        {
             int startIndex2;
             int count2;
             GetIntersection(startIndex, count, index, _count, out startIndex2, out count2);
@@ -85,7 +88,8 @@ namespace Microsoft.CodeAnalysis.ExpressionEvaluator
             DkmClrValue value,
             int index,
             EvalResultDataItem parent
-        ) {
+        )
+        {
             var indices = GetIndices(index);
             var fullNameProvider = resultProvider.FullNameProvider;
             var name = fullNameProvider.GetClrArrayIndexExpression(
@@ -165,7 +169,8 @@ namespace Microsoft.CodeAnalysis.ExpressionEvaluator
             EvalResultDataItem parent,
             string name,
             IDkmClrFullNameProvider fullNameProvider
-        ) {
+        )
+        {
             var parentFullName = parent.ChildFullNamePrefix;
             if (parentFullName == null)
             {

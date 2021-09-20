@@ -16,7 +16,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Extensions
             this SyntaxTree syntaxTree,
             int position,
             SyntaxToken tokenOnLeftOfPosition
-        ) {
+        )
+        {
             return syntaxTree.IsTypeOfExpressionContext(position, tokenOnLeftOfPosition)
                 || syntaxTree.IsDefaultExpressionContext(position, tokenOnLeftOfPosition)
                 || syntaxTree.IsSizeOfExpressionContext(position, tokenOnLeftOfPosition);
@@ -26,7 +27,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Extensions
             this SyntaxTree syntaxTree,
             int position,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             return syntaxTree.IsEntirelyWithinNonUserCodeComment(position, cancellationToken)
                 || syntaxTree.IsEntirelyWithinConflictMarker(position, cancellationToken)
                 || syntaxTree.IsEntirelyWithinStringOrCharLiteral(position, cancellationToken)
@@ -37,7 +39,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Extensions
             this SyntaxTree syntaxTree,
             int position,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             Contract.ThrowIfNull(syntaxTree);
 
             // cases:
@@ -103,7 +106,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Extensions
             this SyntaxTree syntaxTree,
             int position,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             return syntaxTree.IsInPartiallyWrittenGeneric(
                 position,
                 cancellationToken,
@@ -117,7 +121,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Extensions
             int position,
             CancellationToken cancellationToken,
             out SyntaxToken genericIdentifier
-        ) {
+        )
+        {
             return syntaxTree.IsInPartiallyWrittenGeneric(
                 position,
                 cancellationToken,
@@ -132,7 +137,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Extensions
             CancellationToken cancellationToken,
             out SyntaxToken genericIdentifier,
             out SyntaxToken lessThanToken
-        ) {
+        )
+        {
             genericIdentifier = default;
             lessThanToken = default;
             var index = 0;

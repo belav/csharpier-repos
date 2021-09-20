@@ -15,11 +15,8 @@ namespace Moq
         // contains the behaviors set up with the `CallBase`, `Pass`, `Returns`, and `Throws` verbs
         private ConcurrentQueue<Behavior> behaviors;
 
-        public SequenceSetup(
-            Expression originalExpression,
-            Mock mock,
-            InvocationShape expectation
-        ) : base(originalExpression, mock, expectation)
+        public SequenceSetup(Expression originalExpression, Mock mock, InvocationShape expectation)
+            : base(originalExpression, mock, expectation)
         {
             this.behaviors = new ConcurrentQueue<Behavior>();
         }

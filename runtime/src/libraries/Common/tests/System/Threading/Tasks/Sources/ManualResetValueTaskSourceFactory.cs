@@ -25,7 +25,8 @@ namespace System.Threading.Tasks.Sources.Tests
             int delayMs,
             T result,
             Exception error = null
-        ) {
+        )
+        {
             var vts = new ManualResetValueTaskSource<T>();
             Task.Delay(delayMs)
                 .ContinueWith(

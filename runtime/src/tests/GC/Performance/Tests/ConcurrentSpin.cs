@@ -24,7 +24,8 @@ class PriorityTest
         int meanAllocSize,
         int medTime,
         int youngTime
-    ) {
+    )
+    {
         rand = new Random(314159);
         this.oldDataSize = oldDataSize;
         this.medDataSize = medDataSize;
@@ -60,7 +61,8 @@ class PriorityTest
         int meanAllocSize,
         int medTime,
         int youngTime
-    ) {
+    )
+    {
         for (int i = 0; i < iterCount; i++)
         {
             byte[] newarray = new byte[meanAllocSize];

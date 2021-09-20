@@ -26,7 +26,8 @@ namespace Microsoft.CodeAnalysis.Emit
         public DebugDocumentsBuilder(
             SourceReferenceResolver resolverOpt,
             bool isDocumentNameCaseSensitive
-        ) {
+        )
+        {
             _resolverOpt = resolverOpt;
 
             _debugDocuments = new ConcurrentDictionary<string, Cci.DebugSourceDocument>(
@@ -64,7 +65,8 @@ namespace Microsoft.CodeAnalysis.Emit
             string path,
             string basePath,
             Func<string, Cci.DebugSourceDocument> factory
-        ) {
+        )
+        {
             return _debugDocuments.GetOrAdd(NormalizeDebugDocumentPath(path, basePath), factory);
         }
 

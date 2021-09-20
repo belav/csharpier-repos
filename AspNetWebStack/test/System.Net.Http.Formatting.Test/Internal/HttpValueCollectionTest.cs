@@ -296,7 +296,8 @@ namespace System.Net.Http.Internal
         [PropertyData("KeyValuePairs")]
         public void GetIsEquivalentToIndexerProperty(
             IEnumerable<KeyValuePair<string, string>> input
-        ) {
+        )
+        {
             var nvc = HttpValueCollection.Create(input);
 
             int count = input.Count();
@@ -314,7 +315,8 @@ namespace System.Net.Http.Internal
         internal void ToString_GeneratesCorrectOutput(
             HttpValueCollection input,
             string expectedOutput
-        ) {
+        )
+        {
             string actualOutput = input.ToString();
             Assert.Equal(expectedOutput, actualOutput);
         }

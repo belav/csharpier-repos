@@ -20,7 +20,8 @@ namespace Microsoft.AspNetCore.Mvc.ApplicationModels
             IModelMetadataProvider modelMetadataProvider,
             IClientErrorFactory clientErrorFactory,
             ILoggerFactory loggerFactory
-        ) {
+        )
+        {
             var options = apiBehaviorOptions.Value;
 
             ActionModelConventions = new List<IActionModelConvention>()
@@ -98,7 +99,8 @@ namespace Microsoft.AspNetCore.Mvc.ApplicationModels
             if (
                 !IsAttributeRouted(actionModel.Controller.Selectors)
                 && !IsAttributeRouted(actionModel.Selectors)
-            ) {
+            )
+            {
                 // Require attribute routing with controllers annotated with ApiControllerAttribute
                 var message = Resources.FormatApiController_AttributeRouteRequired(
                     actionModel.DisplayName,

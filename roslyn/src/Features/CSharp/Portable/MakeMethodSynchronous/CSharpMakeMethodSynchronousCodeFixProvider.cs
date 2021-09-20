@@ -47,7 +47,8 @@ namespace Microsoft.CodeAnalysis.CSharp.MakeMethodSynchronous
             IMethodSymbol methodSymbolOpt,
             SyntaxNode node,
             KnownTypes knownTypes
-        ) {
+        )
+        {
             switch (node)
             {
                 case MethodDeclarationSyntax method:
@@ -68,7 +69,8 @@ namespace Microsoft.CodeAnalysis.CSharp.MakeMethodSynchronous
             IMethodSymbol methodSymbol,
             MethodDeclarationSyntax method,
             KnownTypes knownTypes
-        ) {
+        )
+        {
             var newReturnType = FixMethodReturnType(methodSymbol, method.ReturnType, knownTypes);
             return RemoveAsyncModifierHelpers.WithoutAsyncModifier(method, newReturnType);
         }
@@ -77,7 +79,8 @@ namespace Microsoft.CodeAnalysis.CSharp.MakeMethodSynchronous
             IMethodSymbol methodSymbol,
             LocalFunctionStatementSyntax localFunction,
             KnownTypes knownTypes
-        ) {
+        )
+        {
             var newReturnType = FixMethodReturnType(
                 methodSymbol,
                 localFunction.ReturnType,
@@ -90,7 +93,8 @@ namespace Microsoft.CodeAnalysis.CSharp.MakeMethodSynchronous
             IMethodSymbol methodSymbol,
             TypeSyntax returnTypeSyntax,
             KnownTypes knownTypes
-        ) {
+        )
+        {
             var newReturnType = returnTypeSyntax;
 
             var returnType = methodSymbol.ReturnType;

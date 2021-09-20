@@ -61,11 +61,8 @@ namespace System.Linq.Expressions
             DocumentType = DocumentType_Text;
         }
 
-        internal SymbolDocumentWithGuids(
-            string fileName,
-            ref Guid language,
-            ref Guid vendor
-        ) : base(fileName)
+        internal SymbolDocumentWithGuids(string fileName, ref Guid language, ref Guid vendor)
+            : base(fileName)
         {
             Language = language;
             LanguageVendor = vendor;
@@ -128,7 +125,8 @@ namespace System.Linq.Expressions
             string fileName,
             Guid language,
             Guid languageVendor
-        ) {
+        )
+        {
             return new SymbolDocumentWithGuids(fileName, ref language, ref languageVendor);
         }
 
@@ -148,7 +146,8 @@ namespace System.Linq.Expressions
             Guid language,
             Guid languageVendor,
             Guid documentType
-        ) {
+        )
+        {
             return new SymbolDocumentWithGuids(
                 fileName,
                 ref language,

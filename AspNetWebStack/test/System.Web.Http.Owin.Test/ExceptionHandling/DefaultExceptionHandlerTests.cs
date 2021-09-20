@@ -78,7 +78,8 @@ namespace System.Web.Http.Owin.ExceptionHandling
                             HttpStatusCode.InternalServerError,
                             context.ExceptionContext.Exception
                         )
-                    ) {
+                    )
+                    {
                         AssertErrorResponse(expectedResponse, response);
                     }
 
@@ -90,7 +91,8 @@ namespace System.Web.Http.Owin.ExceptionHandling
         private static void AssertErrorResponse(
             HttpResponseMessage expected,
             HttpResponseMessage actual
-        ) {
+        )
+        {
             Assert.NotNull(expected); // Guard
             ObjectContent<HttpError> expectedContent = Assert.IsType<ObjectContent<HttpError>>(
                 expected.Content

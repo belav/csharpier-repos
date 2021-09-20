@@ -147,7 +147,8 @@ namespace System.Net.Http.Formatting
         private static void TestChanging(
             Action<MediaTypeFormatterCollection> mutation,
             int expectedCount
-        ) {
+        )
+        {
             // Arrange
             MediaTypeFormatter formatter1 = new XmlMediaTypeFormatter();
             MediaTypeFormatter formatter2 = new JsonMediaTypeFormatter();
@@ -317,7 +318,8 @@ namespace System.Net.Http.Formatting
             Type variationType,
             object testData,
             string mediaType
-        ) {
+        )
+        {
             // Arrange
             GC.KeepAlive(testData); // Mark parameter as used. See xUnit1026, [Theory] method doesn't use all parameters.
             MockMediaTypeFormatter formatter = new MockMediaTypeFormatter() { CallBase = true };
@@ -390,7 +392,8 @@ namespace System.Net.Http.Formatting
             Type variationType,
             object testData,
             string mediaType
-        ) {
+        )
+        {
             // Arrange
             GC.KeepAlive(testData); // Mark parameter as used. See xUnit1026, [Theory] method doesn't use all parameters.
             MockMediaTypeFormatter formatter = new MockMediaTypeFormatter() { CallBase = true };
@@ -515,7 +518,8 @@ namespace System.Net.Http.Formatting
 
         private static void TestWritingFormattersCacheReset(
             Action<MediaTypeFormatterCollection> mutation
-        ) {
+        )
+        {
             // Arrange
             MockMediaTypeFormatter formatter1 = new MockMediaTypeFormatter();
             MockMediaTypeFormatter formatter2 = new MockMediaTypeFormatter();

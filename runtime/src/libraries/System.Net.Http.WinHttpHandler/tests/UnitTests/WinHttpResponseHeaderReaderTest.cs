@@ -63,7 +63,8 @@ namespace System.Net.Http.WinHttpHandlerUnitTests
         public void ReadHeader_VariousInputs_MatchesExpectedBehavior(
             string raw,
             KeyValuePair<string, string>[] expectedHeaders
-        ) {
+        )
+        {
             char[] array = raw.ToCharArray();
             var reader = new WinHttpResponseHeaderReader(array, 0, array.Length);
 

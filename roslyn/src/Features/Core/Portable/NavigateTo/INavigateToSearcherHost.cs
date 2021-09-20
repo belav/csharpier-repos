@@ -47,7 +47,8 @@ namespace Microsoft.CodeAnalysis.NavigateTo
             Solution solution,
             IAsynchronousOperationListener asyncListener,
             CancellationToken disposalToken
-        ) {
+        )
+        {
             _solution = solution;
             _asyncListener = asyncListener;
             _disposalToken = disposalToken;
@@ -58,7 +59,8 @@ namespace Microsoft.CodeAnalysis.NavigateTo
 
         public async ValueTask<(bool projectSystem, bool remoteHost)> IsFullyLoadedAsync(
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var service =
                 _solution.Workspace.Services.GetRequiredService<IWorkspaceStatusService>();
 
@@ -101,7 +103,8 @@ namespace Microsoft.CodeAnalysis.NavigateTo
                         _solution.Projects.All(
                             p => !RemoteSupportedLanguages.IsSupported(p.Language)
                         )
-                    ) {
+                    )
+                    {
                         s_remoteHostHydrateTask = Task.CompletedTask;
                     }
                     else

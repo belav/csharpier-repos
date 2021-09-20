@@ -93,7 +93,8 @@ namespace System.Runtime.InteropServices.Tests
         [PlatformSpecific(TestPlatforms.Windows)]
         public void GetComInterfaceForObject_NonGenericCustomQueryInterfaceModeWithValidClass_ReturnsExpected(
             CustomQueryInterfaceMode mode
-        ) {
+        )
+        {
             var o = new ClassWithInterface();
             IntPtr iUnknown = Marshal.GetComInterfaceForObject(
                 o,
@@ -119,7 +120,8 @@ namespace System.Runtime.InteropServices.Tests
         [PlatformSpecific(TestPlatforms.Windows)]
         public void GetComInterfaceForObject_NonGenericCustomQueryInterfaceModeWithValidStruct_ReturnsExpected(
             CustomQueryInterfaceMode mode
-        ) {
+        )
+        {
             var o = new StructWithInterface();
             IntPtr iUnknown = Marshal.GetComInterfaceForObject(
                 o,

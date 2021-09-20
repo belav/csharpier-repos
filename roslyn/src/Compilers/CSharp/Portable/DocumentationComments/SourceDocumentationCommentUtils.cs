@@ -21,7 +21,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             Symbol symbol,
             bool expandIncludes,
             ref string lazyXmlText
-        ) {
+        )
+        {
             // NOTE: For xml doc comments from source, the culture is ignored (we just return the
             // doc comment as it appears in source), so it won't affect what we cache.
             if (lazyXmlText == null)
@@ -40,7 +41,8 @@ namespace Microsoft.CodeAnalysis.CSharp
         internal static ImmutableArray<DocumentationCommentTriviaSyntax> GetDocumentationCommentTriviaFromSyntaxNode(
             CSharpSyntaxNode syntaxNode,
             DiagnosticBag diagnostics
-        ) {
+        )
+        {
             if (syntaxNode.SyntaxTree.Options.DocumentationMode < DocumentationMode.Parse)
             {
                 return ImmutableArray<DocumentationCommentTriviaSyntax>.Empty;
@@ -57,7 +59,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                     if (
                         kind == SyntaxKind.FieldDeclaration
                         || kind == SyntaxKind.EventFieldDeclaration
-                    ) {
+                    )
+                    {
                         break;
                     }
 

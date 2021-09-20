@@ -47,7 +47,8 @@ namespace Microsoft.AspNetCore.Rewrite.PatternSegments
             RewriteContext context,
             BackReferenceCollection? ruleBackReferences,
             BackReferenceCollection? conditionBackReference
-        ) {
+        )
+        {
             switch (_portion)
             {
                 case DateTimePortion.Year:

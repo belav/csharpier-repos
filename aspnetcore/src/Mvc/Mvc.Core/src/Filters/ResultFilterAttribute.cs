@@ -35,7 +35,8 @@ namespace Microsoft.AspNetCore.Mvc.Filters
         public virtual async Task OnResultExecutionAsync(
             ResultExecutingContext context,
             ResultExecutionDelegate next
-        ) {
+        )
+        {
             if (context == null)
             {
                 throw new ArgumentNullException(nameof(context));

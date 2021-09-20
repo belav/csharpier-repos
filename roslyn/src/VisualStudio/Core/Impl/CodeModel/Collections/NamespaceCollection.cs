@@ -25,7 +25,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.CodeModel.Colle
             object parent,
             FileCodeModel fileCodeModel,
             SyntaxNodeKey nodeKey
-        ) {
+        )
+        {
             var collection = new NamespaceCollection(state, parent, fileCodeModel, nodeKey);
             return (EnvDTE.CodeElements)ComAggregate.CreateAggregatedObject(collection);
         }
@@ -71,7 +72,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.CodeModel.Colle
         private EnvDTE.CodeElement CreateCodeOptionsStatement(
             SyntaxNode node,
             SyntaxNode parentNode
-        ) {
+        )
+        {
             CodeModelService.GetOptionNameAndOrdinal(
                 parentNode,
                 node,
@@ -85,7 +87,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.CodeModel.Colle
         private EnvDTE.CodeElement CreateCodeImport(
             SyntaxNode node,
             AbstractCodeElement parentElement
-        ) {
+        )
+        {
             var name = CodeModelService.GetImportNamespaceOrType(node);
 
             return CodeImport.Create(this.State, this.FileCodeModel, parentElement, name);
@@ -95,7 +98,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.CodeModel.Colle
             SyntaxNode node,
             SyntaxNode parentNode,
             AbstractCodeElement parentElement
-        ) {
+        )
+        {
             CodeModelService.GetAttributeNameAndOrdinal(
                 parentNode,
                 node,

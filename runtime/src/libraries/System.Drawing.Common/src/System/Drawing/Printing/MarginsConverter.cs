@@ -48,7 +48,8 @@ namespace System.Drawing.Printing
             ITypeDescriptorContext? context,
             CultureInfo? culture,
             object value
-        ) {
+        )
+        {
             if (value is string strValue)
             {
                 string text = strValue.Trim();
@@ -101,7 +102,8 @@ namespace System.Drawing.Printing
             CultureInfo? culture,
             object? value,
             Type destinationType
-        ) {
+        )
+        {
             if (destinationType == null)
             {
                 throw new ArgumentNullException(nameof(destinationType));
@@ -165,7 +167,8 @@ namespace System.Drawing.Printing
         public override object CreateInstance(
             ITypeDescriptorContext? context,
             IDictionary propertyValues
-        ) {
+        )
+        {
             if (propertyValues == null)
             {
                 throw new ArgumentNullException(nameof(propertyValues));
@@ -185,7 +188,8 @@ namespace System.Drawing.Printing
                 || !(right is int)
                 || !(bottom is int)
                 || !(top is int)
-            ) {
+            )
+            {
                 throw new ArgumentException(SR.PropertyValueInvalidEntry);
             }
 

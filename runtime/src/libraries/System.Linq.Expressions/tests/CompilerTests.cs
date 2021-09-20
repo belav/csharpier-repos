@@ -410,7 +410,8 @@ namespace System.Linq.Expressions.Tests
             this LambdaExpression expression,
             string expected,
             bool appendInnerLambdas = false
-        ) {
+        )
+        {
             string actual = expression.GetIL(appendInnerLambdas);
 
             string nExpected = Normalize(expected);
@@ -448,7 +449,8 @@ namespace System.Linq.Expressions.Tests
             Expression e,
             int expectedCount,
             object expectedValue
-        ) {
+        )
+        {
             Delegate f = Expression.Lambda(e).Compile();
 
             var c = f.Target as Closure;

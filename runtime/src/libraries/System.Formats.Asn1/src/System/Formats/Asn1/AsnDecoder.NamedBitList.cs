@@ -181,7 +181,8 @@ namespace System.Formats.Asn1
             Type flagsEnumType,
             out int bytesConsumed,
             Asn1Tag? expectedTag = null
-        ) {
+        )
+        {
             if (flagsEnumType == null)
                 throw new ArgumentNullException(nameof(flagsEnumType));
 
@@ -326,7 +327,8 @@ namespace System.Formats.Asn1
             AsnEncodingRules ruleSet,
             out int bytesConsumed,
             Asn1Tag? expectedTag = null
-        ) {
+        )
+        {
             Asn1Tag actualTag = ReadEncodedValue(
                 source,
                 ruleSet,
@@ -354,7 +356,8 @@ namespace System.Formats.Asn1
                     out int written,
                     expectedTag
                 )
-            ) {
+            )
+            {
                 Debug.Fail("TryReadBitString failed with an over-allocated buffer");
                 throw new InvalidOperationException();
             }

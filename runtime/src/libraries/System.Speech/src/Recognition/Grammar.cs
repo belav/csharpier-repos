@@ -123,7 +123,8 @@ namespace System.Speech.Recognition
         public static Grammar LoadLocalizedGrammarFromType(
             Type type,
             params object[] onInitParameters
-        ) {
+        )
+        {
             Helpers.ThrowIfNull(type, nameof(type));
 
             if (type == typeof(Grammar) || !type.IsSubclassOf(typeof(Grammar)))
@@ -167,7 +168,8 @@ namespace System.Speech.Recognition
                                 new CultureInfo(int.Parse(cultureId, CultureInfo.InvariantCulture)),
                                 CultureInfo.CurrentUICulture
                             )
-                        ) {
+                        )
+                        {
                             try
                             {
                                 return (Grammar)assembly.CreateInstance(
@@ -448,7 +450,8 @@ namespace System.Speech.Recognition
             string ruleName,
             string onInitParameter,
             out Uri redirectUri
-        ) {
+        )
+        {
             redirectUri = null;
 
             // Look for tell-tell sign that it is an assembly
@@ -492,7 +495,8 @@ namespace System.Speech.Recognition
                         out localPath,
                         out redirectUri
                     )
-                ) {
+                )
+                {
                     try
                     {
                         return new Grammar(onInitParameter, stream, ruleName);
@@ -538,7 +542,8 @@ namespace System.Speech.Recognition
                 || !string.IsNullOrEmpty(uri.Authority)
                 || !string.IsNullOrEmpty(uri.Query)
                 || uri.PathAndQuery != "dictation"
-            ) {
+            )
+            {
                 return false;
             }
             return true;
@@ -764,7 +769,8 @@ namespace System.Speech.Recognition
             Assembly assembly,
             string ruleName,
             string onInitParameters
-        ) {
+        )
+        {
             Type grammarType = typeof(Grammar);
             Type matchingType = null;
 
@@ -785,7 +791,8 @@ namespace System.Speech.Recognition
                     if (
                         typeTarget == matchingType
                         || (matchingType != null && typeTarget.IsSubclassOf(matchingType))
-                    ) {
+                    )
+                    {
                         // Check if the language match
                         if (typeTarget.GetField("__cultureId") != null)
                         {
@@ -817,7 +824,8 @@ namespace System.Speech.Recognition
                                     ),
                                     CultureInfo.CurrentUICulture
                                 )
-                            ) {
+                            )
+                            {
                                 try
                                 {
                                     object[] initParams = MatchInitParameters(
@@ -864,7 +872,8 @@ namespace System.Speech.Recognition
             string onInitParameters,
             string grammar,
             string rule
-        ) {
+        )
+        {
             ConstructorInfo[] cis = type.GetConstructors();
             NameValuePair[] pairs = ParseInitParams(onInitParameters);
             object[] values = new object[pairs.Length];
@@ -1002,7 +1011,8 @@ namespace System.Speech.Recognition
             string ruleName,
             object[] parameters,
             bool isImportedGrammar
-        ) {
+        )
+        {
             _ruleName = ruleName;
             _parameters = parameters;
 
@@ -1030,7 +1040,8 @@ namespace System.Speech.Recognition
                     out assemblyDebugSymbols,
                     out scripts
                 )
-            ) {
+            )
+            {
                 // Check all methods referenced in the rule; availability, public and arguments
                 Assembly executingAssembly = Assembly.GetExecutingAssembly();
                 _proxy = new AppDomainGrammarProxy();
@@ -1191,7 +1202,8 @@ namespace System.Speech.Recognition
             bool stgInit,
             out bool sapi53Only,
             out GrammarOptions grammarOptions
-        ) {
+        )
+        {
             sapi53Only = false;
             long initialPosition = stream.Position;
 

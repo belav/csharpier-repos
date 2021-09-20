@@ -20,7 +20,8 @@ namespace AutoMapper.Internal.Mappers
             Type destinationType,
             ResolutionContext context,
             ProfileMap profileMap
-        ) {
+        )
+        {
             destination ??= ObjectFactory.CreateInstance(destinationType);
             var sourceTypeDetails = profileMap.CreateTypeDetails(source.GetType());
             foreach (var member in sourceTypeDetails.ReadAccessors)

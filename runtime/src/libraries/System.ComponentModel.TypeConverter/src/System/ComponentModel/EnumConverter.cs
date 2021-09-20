@@ -23,7 +23,8 @@ namespace System.ComponentModel
         public EnumConverter(
             [DynamicallyAccessedMembers(TypeDescriptor.ReflectTypesDynamicallyAccessedMembers)]
                 Type type
-        ) {
+        )
+        {
             EnumType = type;
         }
 
@@ -68,7 +69,8 @@ namespace System.ComponentModel
             bool isUnderlyingTypeUInt64,
             Enum enumVal,
             CultureInfo culture
-        ) {
+        )
+        {
             return isUnderlyingTypeUInt64
               ? unchecked((long)Convert.ToUInt64(enumVal, culture))
               : Convert.ToInt64(enumVal, culture);
@@ -81,7 +83,8 @@ namespace System.ComponentModel
             ITypeDescriptorContext context,
             CultureInfo culture,
             object value
-        ) {
+        )
+        {
             if (value is string strValue)
             {
                 try
@@ -136,7 +139,8 @@ namespace System.ComponentModel
             CultureInfo culture,
             object value,
             Type destinationType
-        ) {
+        )
+        {
             if (destinationType == null)
             {
                 throw new ArgumentNullException(nameof(destinationType));
@@ -149,7 +153,8 @@ namespace System.ComponentModel
                 if (
                     !EnumType.IsDefined(typeof(FlagsAttribute), false)
                     && !Enum.IsDefined(EnumType, value)
-                ) {
+                )
+                {
                     throw new ArgumentException(
                         SR.Format(SR.EnumConverterInvalidValue, value, EnumType.Name)
                     );
@@ -289,7 +294,8 @@ namespace System.ComponentModel
                                 typeof(BrowsableAttribute),
                                 false
                             )
-                        ) {
+                        )
+                        {
                             browsableAttr = attr as BrowsableAttribute;
                         }
 

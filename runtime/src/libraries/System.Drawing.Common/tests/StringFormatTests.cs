@@ -148,7 +148,8 @@ namespace System.Drawing.Tests
             int language,
             StringDigitSubstitute substitute,
             int expectedLanguage
-        ) {
+        )
+        {
             using (var format = new StringFormat())
             {
                 format.SetDigitSubstitution(language, substitute);
@@ -308,7 +309,8 @@ namespace System.Drawing.Tests
         [InlineData(StringAlignment.Far + 1)]
         public void Alignment_SetInvalid_ThrowsInvalidEnumArgumentException(
             StringAlignment alignment
-        ) {
+        )
+        {
             using (var format = new StringFormat())
             {
                 Assert.ThrowsAny<ArgumentException>(() => format.Alignment = alignment);
@@ -391,7 +393,8 @@ namespace System.Drawing.Tests
         [InlineData(StringAlignment.Far + 1)]
         public void LineAlignment_SetInvalid_ThrowsInvalidEnumArgumentException(
             StringAlignment alignment
-        ) {
+        )
+        {
             using (var format = new StringFormat())
             {
                 Assert.ThrowsAny<ArgumentException>(() => format.LineAlignment = alignment);

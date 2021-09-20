@@ -74,7 +74,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.InlineRename
                     var view in session._textBufferAssociatedViewService.GetAssociatedTextViews(
                         _subjectBuffer
                     )
-                ) {
+                )
+                {
                     ConnectToView(view);
                 }
 
@@ -283,7 +284,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.InlineRename
 
                 using (
                     Logger.LogBlock(FunctionId.Rename_OnTextBufferChanged, CancellationToken.None)
-                ) {
+                )
+                {
                     var trackingSpansAfterEdit = new NormalizedSpanCollection(
                         GetEditableSpansForSnapshot(args.After).Select(ss => (Span)ss)
                     );
@@ -406,7 +408,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.InlineRename
                 LinkedFileMergeSessionResult mergeResult,
                 IEnumerable<Document> documents,
                 CancellationToken cancellationToken
-            ) {
+            )
+            {
                 AssertIsForeground();
 
                 if (!AreAllReferenceSpansMappable())
@@ -495,7 +498,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.InlineRename
                             if (
                                 document == firstDocumentReplacements.document
                                 || replacements.IsEmpty
-                            ) {
+                            )
+                            {
                                 continue;
                             }
 
@@ -541,7 +545,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.InlineRename
                                 if (
                                     document == firstDocumentReplacements.document
                                     || replacements.IsEmpty
-                                ) {
+                                )
+                                {
                                     continue;
                                 }
 
@@ -555,7 +560,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.InlineRename
                                     if (
                                         documentNewText.ToString(replacements[i].NewSpan)
                                         != firstDocumentNewSpanText[i]
-                                    ) {
+                                    )
+                                    {
                                         // Have to use the slower merge process
                                         linkedDocumentsMightConflict = true;
                                         break;
@@ -620,7 +626,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.InlineRename
                                     replacement.OriginalSpan
                                 )
                                 && kind != RenameSpanKind.Complexified
-                            ) {
+                            )
+                            {
                                 var linkedRenameSpan = _session._renameInfo.GetConflictEditSpan(
                                     new InlineRenameLocation(newDocument, replacement.NewSpan),
                                     GetTriggerText(newDocument, replacement.NewSpan),
@@ -637,7 +644,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.InlineRename
                                         !mergeConflictComments.Any(
                                             s => replacement.NewSpan.IntersectsWith(s)
                                         )
-                                    ) {
+                                    )
+                                    {
                                         _referenceSpanToLinkedRenameSpanMap[
                                             replacement.OriginalSpan
                                         ] = new RenameTrackingSpan(
@@ -666,7 +674,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.InlineRename
                                         && _activeSpan.Value.IntersectsWith(
                                             replacement.OriginalSpan
                                         )
-                                    ) {
+                                    )
+                                    {
                                         _activeSpan = null;
                                     }
                                 }
@@ -677,7 +686,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.InlineRename
                                     !mergeConflictComments.Any(
                                         s => replacement.NewSpan.IntersectsWith(s)
                                     )
-                                ) {
+                                )
+                                {
                                     _conflictResolutionRenameTrackingSpans.Add(
                                         new RenameTrackingSpan(
                                             _subjectBuffer.CurrentSnapshot.CreateTrackingSpan(
@@ -722,7 +732,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.InlineRename
                 Document oldDocument,
                 Document newDocument,
                 CancellationToken cancellationToken = default
-            ) {
+            )
+            {
                 try
                 {
                     using (
@@ -731,7 +742,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.InlineRename
                             newDocument.Name,
                             cancellationToken
                         )
-                    ) {
+                    )
+                    {
                         if (oldDocument == newDocument)
                         {
                             // no changes
@@ -761,7 +773,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.InlineRename
                         if (
                             textChanges.Count != 1
                             || textChanges[0].Span != new TextSpan(0, oldText.Length)
-                        ) {
+                        )
+                        {
                             return textChanges;
                         }
 
@@ -787,7 +800,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.InlineRename
                 Document preMergeDocument,
                 Document postMergeDocument,
                 CancellationToken cancellationToken
-            ) {
+            )
+            {
                 AssertIsForeground();
 
                 var textDiffService =
@@ -844,7 +858,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.InlineRename
                             null,
                             s_calculateMergedSpansEditTag
                         )
-                    ) {
+                    )
+                    {
                         foreach (
                             var change in textDiffService.GetTextChangesAsync(
                                     preMergeDocument,
@@ -852,7 +867,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.InlineRename
                                     cancellationToken
                                 )
                                 .WaitAndGetResult(cancellationToken)
-                        ) {
+                        )
+                        {
                             buffer.Replace(change.Span.ToSpan(), change.NewText);
                         }
 
@@ -930,7 +946,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.InlineRename
                                             ss.IntersectsWith(selection.ActivePoint.Position)
                                             || ss.IntersectsWith(selection.AnchorPoint.Position)
                                         )
-                                    ) {
+                                    )
+                                    {
                                         return Tuple.Create(kvp.Key, ss);
                                     }
                                     else

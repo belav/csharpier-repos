@@ -15,7 +15,8 @@ namespace System.Security.Cryptography
             ReadOnlyMemory<byte> keyData,
             in AlgorithmIdentifierAsn algId,
             out RSAParameters ret
-        ) {
+        )
+        {
             RSAPrivateKeyAsn key = RSAPrivateKeyAsn.Decode(keyData, AsnEncodingRules.BER);
 
             if (!algId.HasNullEquivalentParameters())
@@ -57,7 +58,8 @@ namespace System.Security.Cryptography
             ReadOnlyMemory<byte> keyData,
             in AlgorithmIdentifierAsn algId,
             out RSAParameters ret
-        ) {
+        )
+        {
             RSAPublicKeyAsn key = RSAPublicKeyAsn.Decode(keyData, AsnEncodingRules.BER);
 
             ret = new RSAParameters
@@ -71,7 +73,8 @@ namespace System.Security.Cryptography
             ReadOnlySpan<byte> source,
             out int bytesRead,
             out RSAParameters key
-        ) {
+        )
+        {
             KeyFormatHelper.ReadSubjectPublicKeyInfo<RSAParameters>(
                 s_validOids,
                 source,
@@ -84,7 +87,8 @@ namespace System.Security.Cryptography
         internal static ReadOnlyMemory<byte> ReadSubjectPublicKeyInfo(
             ReadOnlyMemory<byte> source,
             out int bytesRead
-        ) {
+        )
+        {
             return KeyFormatHelper.ReadSubjectPublicKeyInfo(s_validOids, source, out bytesRead);
         }
 
@@ -92,7 +96,8 @@ namespace System.Security.Cryptography
             ReadOnlySpan<byte> source,
             out int bytesRead,
             out RSAParameters key
-        ) {
+        )
+        {
             KeyFormatHelper.ReadPkcs8<RSAParameters>(
                 s_validOids,
                 source,
@@ -105,7 +110,8 @@ namespace System.Security.Cryptography
         internal static ReadOnlyMemory<byte> ReadPkcs8(
             ReadOnlyMemory<byte> source,
             out int bytesRead
-        ) {
+        )
+        {
             return KeyFormatHelper.ReadPkcs8(s_validOids, source, out bytesRead);
         }
 
@@ -114,7 +120,8 @@ namespace System.Security.Cryptography
             ReadOnlySpan<char> password,
             out int bytesRead,
             out RSAParameters key
-        ) {
+        )
+        {
             KeyFormatHelper.ReadEncryptedPkcs8<RSAParameters>(
                 s_validOids,
                 source,
@@ -130,7 +137,8 @@ namespace System.Security.Cryptography
             ReadOnlySpan<byte> passwordBytes,
             out int bytesRead,
             out RSAParameters key
-        ) {
+        )
+        {
             KeyFormatHelper.ReadEncryptedPkcs8<RSAParameters>(
                 s_validOids,
                 source,
@@ -174,7 +182,8 @@ namespace System.Security.Cryptography
         internal static AsnWriter WritePkcs8PrivateKey(
             ReadOnlySpan<byte> pkcs1PrivateKey,
             AsnWriter? copyFrom = null
-        ) {
+        )
+        {
             Debug.Assert(copyFrom == null || pkcs1PrivateKey.IsEmpty);
 
             AsnWriter writer = new AsnWriter(AsnEncodingRules.BER);
@@ -253,7 +262,8 @@ namespace System.Security.Cryptography
                 || rsaParameters.DP == null
                 || rsaParameters.DQ == null
                 || rsaParameters.InverseQ == null
-            ) {
+            )
+            {
                 throw new CryptographicException(SR.Cryptography_NotValidPrivateKey);
             }
 

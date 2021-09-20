@@ -38,7 +38,8 @@ namespace WebMatrix.WebData
             if (
                 !String.IsNullOrEmpty(settingValue)
                 && Boolean.TryParse(settingValue, out preserveLoginUrl)
-            ) {
+            )
+            {
                 return preserveLoginUrl;
             }
 

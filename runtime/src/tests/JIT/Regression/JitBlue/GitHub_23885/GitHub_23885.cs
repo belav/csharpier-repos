@@ -83,7 +83,8 @@ public class GitHub_23885
             || !xD.Equals(new Vector<ulong>((ulong)41))
             || !xE.Equals(new Vector<ulong>((ulong)105))
             || !xF.Equals(new Vector<ulong>((ulong)273))
-        ) {
+        )
+        {
             returnVal = -1;
         }
 
@@ -120,7 +121,8 @@ public class GitHub_23885
             || !xG.Equals(Vector<ulong>.Zero)
             || !xH.Equals(Vector<ulong>.Zero)
             || !xI.Equals(Vector<ulong>.Zero)
-        ) {
+        )
+        {
             returnVal = -1;
         }
 

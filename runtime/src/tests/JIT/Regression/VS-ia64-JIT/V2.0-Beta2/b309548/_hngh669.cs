@@ -24,7 +24,8 @@ public class AA
             local14 /= (local14 *= local14);
             ('\x20' != ((char)(((int)(local15)))));
             local15 -= 95u
-        ) {
+        )
+        {
             for (local15++; (118u == local15); param1 = (param1 /= (param1 -= (param1 /= param1))))
             { }
         }

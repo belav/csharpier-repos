@@ -55,7 +55,8 @@ namespace Castle.Components.DictionaryAdapter
             PropertyDescriptor property,
             object oldValue,
             object newValue
-        ) {
+        )
+        {
             if (property.SuppressNotifications || !ShouldNotify)
                 return true;
 
@@ -72,7 +73,8 @@ namespace Castle.Components.DictionaryAdapter
             PropertyDescriptor property,
             object oldValue,
             object newValue
-        ) {
+        )
+        {
             if (property.SuppressNotifications || !ShouldNotify)
                 return;
 
@@ -102,7 +104,8 @@ namespace Castle.Components.DictionaryAdapter
             PropertyDescriptor property,
             object oldValue,
             object newValue
-        ) {
+        )
+        {
             if (!ShouldNotify || property.SuppressNotifications)
                 return null;
 
@@ -203,7 +206,8 @@ namespace Castle.Components.DictionaryAdapter
                 PropertyDescriptor descriptor,
                 object oldValue,
                 object newValue
-            ) {
+            )
+            {
                 if (Equals(oldValue, newValue))
                     return false;
 

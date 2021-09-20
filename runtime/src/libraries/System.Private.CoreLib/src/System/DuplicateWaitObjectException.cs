@@ -47,9 +47,7 @@ namespace System
             HResult = HResults.COR_E_DUPLICATEWAITOBJECT;
         }
 
-        protected DuplicateWaitObjectException(
-            SerializationInfo info,
-            StreamingContext context
-        ) : base(info, context) { }
+        protected DuplicateWaitObjectException(SerializationInfo info, StreamingContext context)
+            : base(info, context) { }
     }
 }

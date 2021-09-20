@@ -61,7 +61,8 @@ namespace Microsoft.Extensions.Logging.Console
             int length,
             ConsoleColor? background,
             ConsoleColor? foreground
-        ) {
+        )
+        {
             ReadOnlySpan<char> span = message.AsSpan(startIndex, length);
             var colorChanged = SetColor(background, foreground);
 #if NETCOREAPP

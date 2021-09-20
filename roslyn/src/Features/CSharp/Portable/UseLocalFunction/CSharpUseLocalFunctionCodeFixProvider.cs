@@ -69,7 +69,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UseLocalFunction
             ImmutableArray<Diagnostic> diagnostics,
             SyntaxEditor editor,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var semanticModel = await document.GetSemanticModelAsync(cancellationToken)
                 .ConfigureAwait(false);
 
@@ -130,7 +131,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UseLocalFunction
                     anonymousFunction,
                     references
                 ) in nodesFromDiagnostics.OrderByDescending(nodes => nodes.function.SpanStart)
-            ) {
+            )
+            {
                 var delegateType = (INamedTypeSymbol)semanticModel.GetTypeInfo(
                     anonymousFunction,
                     cancellationToken
@@ -177,7 +179,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UseLocalFunction
             bool makeStaticIfPossible,
             LocalDeclarationStatementSyntax localDeclaration,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             // Determines if we can make the local function 'static'.  We can make it static
             // if the original lambda did not capture any variables (other than the local
             // variable itself).  it's ok for the lambda to capture itself as a static-local
@@ -211,7 +214,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UseLocalFunction
             IMethodSymbol delegateMethod,
             ParameterListSyntax parameterList,
             bool makeStatic
-        ) {
+        )
+        {
             var newLocalFunctionStatement = CreateLocalFunctionStatement(
                     localDeclaration,
                     anonymousFunction,
@@ -242,7 +246,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UseLocalFunction
             INamedTypeSymbol delegateType,
             ParameterListSyntax parameterList,
             ImmutableArray<ExpressionSyntax> references
-        ) {
+        )
+        {
             return currentRoot.ReplaceNodes(
                 references,
                 (
@@ -280,7 +285,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UseLocalFunction
             IMethodSymbol delegateMethod,
             ParameterListSyntax parameterList,
             bool makeStatic
-        ) {
+        )
+        {
             var modifiers = new SyntaxTokenList();
             if (makeStatic)
             {
@@ -331,7 +337,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UseLocalFunction
         private static ParameterListSyntax GenerateParameterList(
             AnonymousFunctionExpressionSyntax anonymousFunction,
             IMethodSymbol delegateMethod
-        ) {
+        )
+        {
             var parameterList = TryGetOrCreateParameterList(anonymousFunction);
             var i = 0;
 
@@ -359,7 +366,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UseLocalFunction
             static ParameterSyntax PromoteParameter(
                 ParameterSyntax parameterNode,
                 IParameterSymbol delegateParameter
-            ) {
+            )
+            {
                 // delegateParameter may be null, consider this case: Action x = (a, b) => { };
                 // we will still fall back to object
 
@@ -381,7 +389,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UseLocalFunction
 
         private static ParameterListSyntax TryGetOrCreateParameterList(
             AnonymousFunctionExpressionSyntax anonymousFunction
-        ) {
+        )
+        {
             switch (anonymousFunction)
             {
                 case SimpleLambdaExpressionSyntax simpleLambda:
@@ -401,7 +410,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UseLocalFunction
             InvocationExpressionSyntax invocation,
             IMethodSymbol method,
             ParameterListSyntax newParameterList
-        ) {
+        )
+        {
             return invocation.ReplaceNodes(
                 invocation.ArgumentList.Arguments,
                 (argumentNode, _) =>
@@ -437,7 +447,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UseLocalFunction
         private static int TryDetermineParameterIndex(
             NameColonSyntax argumentNameColon,
             IMethodSymbol method
-        ) {
+        )
+        {
             var name = argumentNameColon.Name.Identifier.ValueText;
             return method.Parameters.IndexOf(p => p.Name == name);
         }
@@ -453,13 +464,12 @@ namespace Microsoft.CodeAnalysis.CSharp.UseLocalFunction
 
         private class MyCodeAction : CustomCodeActions.DocumentChangeAction
         {
-            public MyCodeAction(
-                Func<CancellationToken, Task<Document>> createChangedDocument
-            ) : base(
-                CSharpAnalyzersResources.Use_local_function,
-                createChangedDocument,
-                CSharpAnalyzersResources.Use_local_function
-            ) { }
+            public MyCodeAction(Func<CancellationToken, Task<Document>> createChangedDocument)
+                : base(
+                    CSharpAnalyzersResources.Use_local_function,
+                    createChangedDocument,
+                    CSharpAnalyzersResources.Use_local_function
+                ) { }
         }
     }
 }

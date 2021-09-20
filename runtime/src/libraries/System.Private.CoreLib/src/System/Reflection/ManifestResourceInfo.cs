@@ -9,7 +9,8 @@ namespace System.Reflection
             Assembly? containingAssembly,
             string? containingFileName,
             ResourceLocation resourceLocation
-        ) {
+        )
+        {
             ReferencedAssembly = containingAssembly;
             FileName = containingFileName;
             ResourceLocation = resourceLocation;

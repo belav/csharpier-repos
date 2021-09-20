@@ -39,7 +39,8 @@ namespace Microsoft.EntityFrameworkCore.Storage.Internal
             IDiagnosticsLogger<DbLoggerCategory.Database.Command> commandLogger,
             IConcurrencyDetector concurrencyDetector,
             ICoreSingletonOptions coreOptions
-        ) {
+        )
+        {
             TransactionManager = transactionManager;
             DatabaseCreator = databaseCreator;
             ExecutionStrategyFactory = executionStrategyFactory;

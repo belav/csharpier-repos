@@ -1627,7 +1627,8 @@ namespace Microsoft.AspNetCore.Mvc.ApplicationModels
         private ControllerActionDescriptorProvider GetProvider(
             TypeInfo controllerTypeInfo,
             IEnumerable<IFilterMetadata> filters = null
-        ) {
+        )
+        {
             var options = Options.Create(new MvcOptions());
             if (filters != null)
             {
@@ -1654,7 +1655,8 @@ namespace Microsoft.AspNetCore.Mvc.ApplicationModels
 
         private ControllerActionDescriptorProvider GetProvider(
             params TypeInfo[] controllerTypeInfos
-        ) {
+        )
+        {
             var options = Options.Create(new MvcOptions());
 
             var manager = GetApplicationManager(controllerTypeInfos);
@@ -1674,7 +1676,8 @@ namespace Microsoft.AspNetCore.Mvc.ApplicationModels
         private ControllerActionDescriptorProvider GetProvider(
             TypeInfo controllerTypeInfo,
             IApplicationModelConvention convention
-        ) {
+        )
+        {
             var options = Options.Create(new MvcOptions());
             options.Value.Conventions.Add(convention);
 
@@ -1695,7 +1698,8 @@ namespace Microsoft.AspNetCore.Mvc.ApplicationModels
 
         private static ApplicationPartManager GetApplicationManager(
             IEnumerable<TypeInfo> controllerTypes
-        ) {
+        )
+        {
             var manager = new ApplicationPartManager();
             manager.ApplicationParts.Add(new TestApplicationPart(controllerTypes));
             manager.FeatureProviders.Add(new TestFeatureProvider());
@@ -1713,7 +1717,8 @@ namespace Microsoft.AspNetCore.Mvc.ApplicationModels
             string actualMessage,
             int unorderedStart,
             int unorderedLineCount
-        ) {
+        )
+        {
             var expectedLines = expectedMessage.Split(
                     new[] { Environment.NewLine },
                     StringSplitOptions.None

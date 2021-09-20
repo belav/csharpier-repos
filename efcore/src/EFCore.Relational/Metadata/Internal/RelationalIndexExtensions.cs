@@ -27,7 +27,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
             IReadOnlyIndex duplicateIndex,
             in StoreObjectIdentifier storeObject,
             bool shouldThrow
-        ) {
+        )
+        {
             var columnNames = index.Properties.GetColumnNames(storeObject);
             var duplicateColumnNames = duplicateIndex.Properties.GetColumnNames(storeObject);
             if (columnNames == null || duplicateColumnNames == null)

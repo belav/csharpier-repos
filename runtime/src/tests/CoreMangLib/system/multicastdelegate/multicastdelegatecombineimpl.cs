@@ -330,7 +330,8 @@ public class MulticastDelegateCombineImpl
             if (
                 dd.VoidParameterVoidDelegateTestValue
                 != DelegateDefinitions.c_DELEGATE_TEST_DEFAULT_VALUE_PARAMETER + 1
-            ) {
+            )
+            {
                 TestLibrary.TestFramework.LogError(
                     "009",
                     "Combined delegate does not work: " + dd.VoidParameterVoidDelegateTestValue
@@ -341,7 +342,8 @@ public class MulticastDelegateCombineImpl
             if (
                 dd1.VoidParameterVoidDelegateTestValue
                 != DelegateDefinitions.c_DELEGATE_TEST_DEFAULT_VALUE_PARAMETER + 1
-            ) {
+            )
+            {
                 TestLibrary.TestFramework.LogError(
                     "010",
                     "Combined delegate does not work: " + dd1.VoidParameterVoidDelegateTestValue
@@ -352,7 +354,8 @@ public class MulticastDelegateCombineImpl
             if (
                 DelegateDefinitions.VoidParameterVoidDelegateStaticTestValue
                 != DelegateDefinitions.c_DELEGATE_TEST_DEFAULT_VALUE_PARAMETER + 2
-            ) {
+            )
+            {
                 TestLibrary.TestFramework.LogError(
                     "011",
                     "Combined delegate does not work: "

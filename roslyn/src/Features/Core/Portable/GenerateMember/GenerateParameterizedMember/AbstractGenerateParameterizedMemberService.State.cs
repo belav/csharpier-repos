@@ -63,7 +63,8 @@ namespace Microsoft.CodeAnalysis.GenerateMember.GenerateParameterizedMember
                 TService service,
                 SemanticDocument document,
                 CancellationToken cancellationToken
-            ) {
+            )
+            {
                 cancellationToken.ThrowIfCancellationRequested();
                 TypeToGenerateIn =
                     await SymbolFinder.FindSourceDefinitionAsync(
@@ -83,7 +84,8 @@ namespace Microsoft.CodeAnalysis.GenerateMember.GenerateParameterizedMember
                         IsStatic,
                         ClassInterfaceModuleStructTypes
                     )
-                ) {
+                )
+                {
                     return false;
                 }
 
@@ -93,7 +95,8 @@ namespace Microsoft.CodeAnalysis.GenerateMember.GenerateParameterizedMember
                         TypeToGenerateIn,
                         cancellationToken
                     )
-                ) {
+                )
+                {
                     return false;
                 }
 

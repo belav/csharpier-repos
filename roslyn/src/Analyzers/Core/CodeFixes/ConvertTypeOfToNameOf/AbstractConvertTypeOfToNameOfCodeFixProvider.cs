@@ -44,7 +44,8 @@ namespace Microsoft.CodeAnalysis.ConvertTypeOfToNameOf
             ImmutableArray<Diagnostic> diagnostics,
             SyntaxEditor editor,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var semanticModel = await document.GetSemanticModelAsync(cancellationToken)
                 .ConfigureAwait(false);
             foreach (var diagnostic in diagnostics)
@@ -65,7 +66,8 @@ namespace Microsoft.CodeAnalysis.ConvertTypeOfToNameOf
             SyntaxEditor editor,
             SyntaxNode nodeToReplace,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var typeExpression = GetSymbolTypeExpression(
                 semanticModel,
                 nodeToReplace,
@@ -85,9 +87,8 @@ namespace Microsoft.CodeAnalysis.ConvertTypeOfToNameOf
 
         private class MyCodeAction : CustomCodeActions.DocumentChangeAction
         {
-            public MyCodeAction(
-                Func<CancellationToken, Task<Document>> createChangedDocument
-            ) : base(s_codeFixTitle, createChangedDocument, s_codeFixTitle) { }
+            public MyCodeAction(Func<CancellationToken, Task<Document>> createChangedDocument)
+                : base(s_codeFixTitle, createChangedDocument, s_codeFixTitle) { }
         }
     }
 }

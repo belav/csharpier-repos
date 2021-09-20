@@ -57,7 +57,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UsePatternMatching
             ImmutableArray<Diagnostic> diagnostics,
             SyntaxEditor editor,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             foreach (var diagnostic in diagnostics)
             {
                 cancellationToken.ThrowIfCancellationRequested();
@@ -71,7 +72,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UsePatternMatching
             SyntaxEditor editor,
             Diagnostic diagnostic,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var notExpressionLocation = diagnostic.AdditionalLocations[0];
 
             var notExpression = (PrefixUnaryExpressionSyntax)notExpressionLocation.FindNode(
@@ -93,13 +95,12 @@ namespace Microsoft.CodeAnalysis.CSharp.UsePatternMatching
 
         private class MyCodeAction : CustomCodeActions.DocumentChangeAction
         {
-            public MyCodeAction(
-                Func<CancellationToken, Task<Document>> createChangedDocument
-            ) : base(
-                CSharpAnalyzersResources.Use_pattern_matching,
-                createChangedDocument,
-                CSharpAnalyzersResources.Use_pattern_matching
-            ) { }
+            public MyCodeAction(Func<CancellationToken, Task<Document>> createChangedDocument)
+                : base(
+                    CSharpAnalyzersResources.Use_pattern_matching,
+                    createChangedDocument,
+                    CSharpAnalyzersResources.Use_pattern_matching
+                ) { }
         }
     }
 }

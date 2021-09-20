@@ -33,7 +33,8 @@ namespace Microsoft.VisualStudio.LanguageServices.EditorConfigSettings.Analyzers
             bool truncatedText,
             bool singleColumnView,
             out string? content
-        ) {
+        )
+        {
             if (!entry.TryGetValue(Severity, out AnalyzerSetting setting))
             {
                 content = null;
@@ -55,7 +56,8 @@ namespace Microsoft.VisualStudio.LanguageServices.EditorConfigSettings.Analyzers
             ITableEntryHandle entry,
             bool singleColumnView,
             out FrameworkElement? content
-        ) {
+        )
+        {
             if (!entry.TryGetValue(Severity, out AnalyzerSetting severity))
             {
                 content = null;

@@ -107,7 +107,8 @@ namespace StaticFilesAuth
             IApplicationBuilder app,
             IWebHostEnvironment env,
             IAuthorizationService authorizationService
-        ) {
+        )
+        {
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
@@ -179,7 +180,8 @@ namespace StaticFilesAuth
             HttpContext context,
             PhysicalFileProvider files,
             string policy
-        ) {
+        )
+        {
             var fileSystemPath = GetFileSystemPath(files, context.Request.Path);
             if (fileSystemPath != null)
             {

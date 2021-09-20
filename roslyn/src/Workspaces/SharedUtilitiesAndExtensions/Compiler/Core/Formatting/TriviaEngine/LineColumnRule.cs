@@ -21,7 +21,8 @@ namespace Microsoft.CodeAnalysis.Formatting
             int lines,
             int spaces,
             int indentation
-        ) {
+        )
+        {
             SpaceOperation = spaceOperation;
             LineOperation = lineOperation;
             IndentationOperation = indentationOperation;

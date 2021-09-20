@@ -102,7 +102,8 @@ namespace Microsoft.CodeAnalysis.UnitTests.EditorConfig.StorageLocation
             string firstNameAfterOrdering,
             string firstAccessibility,
             string secondAccessibility
-        ) {
+        )
+        {
             var editorConfigStorageLocation =
                 new NamingStylePreferenceEditorConfigStorageLocation();
             var newDictionary = new Dictionary<string, string>()
@@ -164,7 +165,8 @@ namespace Microsoft.CodeAnalysis.UnitTests.EditorConfig.StorageLocation
             string firstNameAfterOrdering,
             string firstModifiers,
             string secondModifiers
-        ) {
+        )
+        {
             var editorConfigStorageLocation =
                 new NamingStylePreferenceEditorConfigStorageLocation();
             var newDictionary = new Dictionary<string, string>()
@@ -224,7 +226,8 @@ namespace Microsoft.CodeAnalysis.UnitTests.EditorConfig.StorageLocation
             string firstNameAfterOrdering,
             string firstSymbols,
             string secondSymbols
-        ) {
+        )
+        {
             var editorConfigStorageLocation =
                 new NamingStylePreferenceEditorConfigStorageLocation();
             var newDictionary = new Dictionary<string, string>()

@@ -2844,7 +2844,8 @@ public class C
                 string currentY,
                 string otherX,
                 string otherY
-            ) {
+            )
+            {
                 Assert.Null(GetSymbolNamesJoined(dataFlowAnalysis.VariablesDeclared));
                 Assert.Equal(currentX, GetSymbolNamesJoined(dataFlowAnalysis.AlwaysAssigned));
                 Assert.Null(GetSymbolNamesJoined(dataFlowAnalysis.DataFlowsIn));

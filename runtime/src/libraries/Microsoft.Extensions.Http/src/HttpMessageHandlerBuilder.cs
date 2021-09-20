@@ -64,7 +64,8 @@ namespace Microsoft.Extensions.Http
         protected internal static HttpMessageHandler CreateHandlerPipeline(
             HttpMessageHandler primaryHandler,
             IEnumerable<DelegatingHandler> additionalHandlers
-        ) {
+        )
+        {
             // This is similar to https://github.com/aspnet/AspNetWebStack/blob/master/src/System.Net.Http.Formatting/HttpClientFactory.cs#L58
             // but we don't want to take that package as a dependency.
 

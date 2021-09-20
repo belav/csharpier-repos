@@ -77,7 +77,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Internal
             int offset,
             int count,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             int read = await _inner.ReadAsync(buffer, offset, count, cancellationToken);
             Log("ReadAsync", new ReadOnlySpan<byte>(buffer, offset, read));
             return read;
@@ -86,7 +87,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Internal
         public override async ValueTask<int> ReadAsync(
             Memory<byte> destination,
             CancellationToken cancellationToken = default
-        ) {
+        )
+        {
             int read = await _inner.ReadAsync(destination, cancellationToken);
             Log("ReadAsync", destination.Span.Slice(0, read));
             return read;
@@ -119,7 +121,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Internal
             int offset,
             int count,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             Log("WriteAsync", new ReadOnlySpan<byte>(buffer, offset, count));
             return _inner.WriteAsync(buffer, offset, count, cancellationToken);
         }
@@ -127,7 +130,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Internal
         public override ValueTask WriteAsync(
             ReadOnlyMemory<byte> source,
             CancellationToken cancellationToken = default
-        ) {
+        )
+        {
             Log("WriteAsync", source.Span);
             return _inner.WriteAsync(source, cancellationToken);
         }
@@ -212,7 +216,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Internal
             int count,
             AsyncCallback? callback,
             object? state
-        ) {
+        )
+        {
             return TaskToApm.Begin(ReadAsync(buffer, offset, count), callback, state);
         }
 
@@ -227,7 +232,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Internal
             int count,
             AsyncCallback? callback,
             object? state
-        ) {
+        )
+        {
             return TaskToApm.Begin(WriteAsync(buffer, offset, count), callback, state);
         }
 

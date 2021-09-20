@@ -34,7 +34,8 @@ namespace System
             AttributeTargets validOn,
             bool allowMultiple,
             bool inherited
-        ) {
+        )
+        {
             _attributeTarget = validOn;
             _allowMultiple = allowMultiple;
             _inherited = inherited;

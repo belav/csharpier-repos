@@ -51,7 +51,8 @@ namespace Microsoft.CodeAnalysis.GenerateMember.GenerateConstructor
             if (
                 symbol is IPropertySymbol { SetMethod: { } setMethod } property
                 && !IsSymbolAccessible(compilation, setMethod)
-            ) {
+            )
+            {
                 return false;
             }
 

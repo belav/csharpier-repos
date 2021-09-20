@@ -53,7 +53,8 @@ namespace Microsoft.CodeAnalysis.MakeMethodSynchronous
             Document document,
             Diagnostic diagnostic,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var token = diagnostic.Location.FindToken(cancellationToken);
             var node = token.GetAncestor(IsAsyncSupportingFunctionSyntax);
 
@@ -70,7 +71,8 @@ namespace Microsoft.CodeAnalysis.MakeMethodSynchronous
                 isOrdinaryOrLocalFunction
                 && methodSymbolOpt.Name.Length > AsyncSuffix.Length
                 && methodSymbolOpt.Name.EndsWith(AsyncSuffix)
-            ) {
+            )
+            {
                 return await RenameThenRemoveAsyncTokenAsync(
                         document,
                         node,
@@ -96,7 +98,8 @@ namespace Microsoft.CodeAnalysis.MakeMethodSynchronous
             SyntaxNode node,
             IMethodSymbol methodSymbol,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var name = methodSymbol.Name;
             var newName = name.Substring(0, name.Length - AsyncSuffix.Length);
             var solution = document.Project.Solution;
@@ -141,7 +144,8 @@ namespace Microsoft.CodeAnalysis.MakeMethodSynchronous
             IMethodSymbol methodSymbolOpt,
             SyntaxNode node,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var compilation = await document.Project.GetCompilationAsync(cancellationToken)
                 .ConfigureAwait(false);
             var knownTypes = new KnownTypes(compilation);
@@ -169,7 +173,8 @@ namespace Microsoft.CodeAnalysis.MakeMethodSynchronous
             Document document,
             SyntaxAnnotation annotation,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var syntaxRoot = await document.GetSyntaxRootAsync(cancellationToken)
                 .ConfigureAwait(false);
             var methodDeclaration = syntaxRoot.GetAnnotatedNodes(annotation).FirstOrDefault();
@@ -181,7 +186,8 @@ namespace Microsoft.CodeAnalysis.MakeMethodSynchronous
                 if (
                     semanticModel.GetDeclaredSymbol(methodDeclaration, cancellationToken)
                     is IMethodSymbol methodSymbol
-                ) {
+                )
+                {
                     var references = await SymbolFinder.FindRenamableReferencesAsync(
                             methodSymbol,
                             document.Project.Solution,
@@ -211,7 +217,8 @@ namespace Microsoft.CodeAnalysis.MakeMethodSynchronous
             Solution solution,
             ImmutableArray<ReferenceLocation> locations,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var currentSolution = solution;
 
             var groupedLocations = locations.GroupBy(loc => loc.Document);
@@ -233,7 +240,8 @@ namespace Microsoft.CodeAnalysis.MakeMethodSynchronous
             Solution currentSolution,
             IGrouping<Document, ReferenceLocation> group,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var document = group.Key;
             var syntaxFactsService = document.GetLanguageService<ISyntaxFactsService>();
             var root = await document.GetSyntaxRootAsync(cancellationToken).ConfigureAwait(false);
@@ -261,7 +269,8 @@ namespace Microsoft.CodeAnalysis.MakeMethodSynchronous
             SyntaxNode root,
             ReferenceLocation referenceLocation,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             if (referenceLocation.IsImplicit)
             {
                 return;
@@ -286,7 +295,8 @@ namespace Microsoft.CodeAnalysis.MakeMethodSynchronous
             if (
                 syntaxFacts.IsNameOfSimpleMemberAccessExpression(nameNode)
                 || syntaxFacts.IsNameOfMemberBindingExpression(nameNode)
-            ) {
+            )
+            {
                 expressionNode = nameNode.Parent;
             }
 
@@ -356,13 +366,12 @@ namespace Microsoft.CodeAnalysis.MakeMethodSynchronous
 
         private class MyCodeAction : CodeAction.SolutionChangeAction
         {
-            public MyCodeAction(
-                Func<CancellationToken, Task<Solution>> createChangedSolution
-            ) : base(
-                FeaturesResources.Make_method_synchronous,
-                createChangedSolution,
-                AbstractMakeMethodSynchronousCodeFixProvider.EquivalenceKey
-            ) { }
+            public MyCodeAction(Func<CancellationToken, Task<Solution>> createChangedSolution)
+                : base(
+                    FeaturesResources.Make_method_synchronous,
+                    createChangedSolution,
+                    AbstractMakeMethodSynchronousCodeFixProvider.EquivalenceKey
+                ) { }
         }
     }
 }

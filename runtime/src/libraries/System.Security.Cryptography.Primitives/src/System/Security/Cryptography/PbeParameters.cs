@@ -13,7 +13,8 @@ namespace System.Security.Cryptography
             PbeEncryptionAlgorithm encryptionAlgorithm,
             HashAlgorithmName hashAlgorithm,
             int iterationCount
-        ) {
+        )
+        {
             if (iterationCount < 1)
             {
                 throw new ArgumentOutOfRangeException(

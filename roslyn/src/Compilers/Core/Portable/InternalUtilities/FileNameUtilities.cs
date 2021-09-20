@@ -66,7 +66,8 @@ namespace Roslyn.Utilities
                     c == DirectorySeparatorChar
                     || c == AltDirectorySeparatorChar
                     || c == VolumeSeparatorChar
-                ) {
+                )
+                {
                     break;
                 }
             }
@@ -173,7 +174,8 @@ namespace Roslyn.Utilities
                     ch == DirectorySeparatorChar
                     || ch == AltDirectorySeparatorChar
                     || ch == VolumeSeparatorChar
-                ) {
+                )
+                {
                     return i + 1;
                 }
             }

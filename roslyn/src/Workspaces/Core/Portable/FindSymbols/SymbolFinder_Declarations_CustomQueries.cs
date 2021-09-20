@@ -40,7 +40,8 @@ namespace Microsoft.CodeAnalysis.FindSymbols
             Func<string, bool> predicate,
             SymbolFilter filter,
             CancellationToken cancellationToken = default
-        ) {
+        )
+        {
             using var query = SearchQuery.CreateCustom(predicate);
             var declarations = await FindSourceDeclarationsWithCustomQueryAsync(
                     solution,
@@ -60,7 +61,8 @@ namespace Microsoft.CodeAnalysis.FindSymbols
             SearchQuery query,
             SymbolFilter filter,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             if (solution == null)
             {
                 throw new ArgumentNullException(nameof(solution));
@@ -76,7 +78,8 @@ namespace Microsoft.CodeAnalysis.FindSymbols
                     FunctionId.SymbolFinder_Solution_Predicate_FindSourceDeclarationsAsync,
                     cancellationToken
                 )
-            ) {
+            )
+            {
                 var result = ArrayBuilder<ISymbol>.GetInstance();
                 foreach (var projectId in solution.ProjectIds)
                 {
@@ -112,7 +115,8 @@ namespace Microsoft.CodeAnalysis.FindSymbols
             Func<string, bool> predicate,
             SymbolFilter filter,
             CancellationToken cancellationToken = default
-        ) {
+        )
+        {
             using var query = SearchQuery.CreateCustom(predicate);
             var declarations = await FindSourceDeclarationsWithCustomQueryAsync(
                     project,
@@ -132,7 +136,8 @@ namespace Microsoft.CodeAnalysis.FindSymbols
             SearchQuery query,
             SymbolFilter filter,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             if (project == null)
             {
                 throw new ArgumentNullException(nameof(project));
@@ -148,7 +153,8 @@ namespace Microsoft.CodeAnalysis.FindSymbols
                     FunctionId.SymbolFinder_Project_Predicate_FindSourceDeclarationsAsync,
                     cancellationToken
                 )
-            ) {
+            )
+            {
                 if (
                     await project.ContainsSymbolsWithNameAsync(
                             query.GetPredicate(),
@@ -156,7 +162,8 @@ namespace Microsoft.CodeAnalysis.FindSymbols
                             cancellationToken
                         )
                         .ConfigureAwait(false)
-                ) {
+                )
+                {
                     var compilation = await project.GetCompilationAsync(cancellationToken)
                         .ConfigureAwait(false);
 

@@ -115,7 +115,8 @@ namespace Microsoft.AspNetCore.Components.Forms
 
         private static async Task<IEnumerable<TestInputRadio>> RenderAndGetTestInputComponentAsync(
             TestInputRadioHostComponent<TestEnum> rootComponent
-        ) {
+        )
+        {
             var testRenderer = new TestRenderer();
             var componentId = testRenderer.AssignRootComponentId(rootComponent);
             await testRenderer.RenderRootComponentAsync(componentId);

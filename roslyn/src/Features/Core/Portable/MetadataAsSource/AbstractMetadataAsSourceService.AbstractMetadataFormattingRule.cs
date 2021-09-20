@@ -25,7 +25,8 @@ namespace Microsoft.CodeAnalysis.MetadataAsSource
                 in SyntaxToken previousToken,
                 in SyntaxToken currentToken,
                 in NextGetAdjustNewLinesOperation nextOperation
-            ) {
+            )
+            {
                 if (previousToken.RawKind == 0 || currentToken.RawKind == 0)
                 {
                     nextOperation.Invoke(in previousToken, in currentToken);

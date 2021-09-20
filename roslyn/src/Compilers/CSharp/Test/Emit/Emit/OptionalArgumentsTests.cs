@@ -272,7 +272,8 @@ partial class C
             string expectedAttributeName,
             object expectedDefault,
             bool hasDefault
-        ) {
+        )
+        {
             var attributes = parameter.GetAttributes();
             if (expectedAttributeName == null)
             {

@@ -16,7 +16,8 @@ namespace System.Diagnostics.Tracing
         internal static object[] DecodePayload(
             ref EventSource.EventMetadata metadata,
             ReadOnlySpan<byte> payload
-        ) {
+        )
+        {
             ParameterInfo[] parameters = metadata.Parameters;
             object[] decodedFields = new object[parameters.Length];
             for (int i = 0; i < parameters.Length; i++)

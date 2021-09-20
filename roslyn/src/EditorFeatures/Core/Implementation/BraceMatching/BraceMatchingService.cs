@@ -24,7 +24,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.BraceMatching
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
         public BraceMatchingService(
             [ImportMany] IEnumerable<Lazy<IBraceMatcher, LanguageMetadata>> braceMatchers
-        ) {
+        )
+        {
             _braceMatchers = braceMatchers.ToImmutableArray();
         }
 
@@ -32,7 +33,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.BraceMatching
             Document document,
             int position,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var text = await document.GetTextAsync(cancellationToken).ConfigureAwait(false);
             if (position < 0 || position > text.Length)
             {

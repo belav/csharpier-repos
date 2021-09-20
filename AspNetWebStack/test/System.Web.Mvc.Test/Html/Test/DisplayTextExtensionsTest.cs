@@ -145,7 +145,8 @@ namespace System.Web.Mvc.Html.Test
             string text,
             bool htmlEncode,
             string expectedResult
-        ) {
+        )
+        {
             // Arrange
             var model = new OverriddenToStringModel(text);
             var viewData = new ViewDataDictionary<OverriddenToStringModel>(model);
@@ -165,7 +166,8 @@ namespace System.Web.Mvc.Html.Test
             string text,
             bool htmlEncode,
             string expectedResult
-        ) {
+        )
+        {
             // Arrange
             var model = new OverriddenToStringModel(text);
             var viewData = new ViewDataDictionary<OverriddenToStringModel>(model);
@@ -185,7 +187,8 @@ namespace System.Web.Mvc.Html.Test
             string text,
             bool htmlEncode,
             string expectedResult
-        ) {
+        )
+        {
             // Arrange
             var model = new DontHtmlEncodeModel { Encoded = text, NotEncoded = text, };
             var viewData = new ViewDataDictionary<DontHtmlEncodeModel>(model);
@@ -205,7 +208,8 @@ namespace System.Web.Mvc.Html.Test
             string text,
             bool htmlEncode,
             string expectedResult
-        ) {
+        )
+        {
             // Arrange
             var model = new DontHtmlEncodeModel { Encoded = text, NotEncoded = text, };
             var viewData = new ViewDataDictionary<DontHtmlEncodeModel>(model);

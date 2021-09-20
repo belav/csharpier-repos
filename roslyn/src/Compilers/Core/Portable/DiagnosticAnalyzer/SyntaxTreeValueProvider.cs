@@ -23,7 +23,8 @@ namespace Microsoft.CodeAnalysis.Diagnostics
         public SyntaxTreeValueProvider(
             Func<SyntaxTree, TValue> computeValue,
             IEqualityComparer<SyntaxTree>? syntaxTreeComparer = null
-        ) {
+        )
+        {
             CoreValueProvider = new AnalysisValueProvider<SyntaxTree, TValue>(
                 computeValue,
                 syntaxTreeComparer ?? SyntaxTreeComparer.Instance

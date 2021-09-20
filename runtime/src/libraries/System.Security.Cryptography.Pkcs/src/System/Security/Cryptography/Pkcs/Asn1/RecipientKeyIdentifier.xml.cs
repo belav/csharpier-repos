@@ -42,7 +42,8 @@ namespace System.Security.Cryptography.Pkcs.Asn1
         internal static RecipientKeyIdentifier Decode(
             ReadOnlyMemory<byte> encoded,
             AsnEncodingRules ruleSet
-        ) {
+        )
+        {
             return Decode(Asn1Tag.Sequence, encoded, ruleSet);
         }
 
@@ -50,7 +51,8 @@ namespace System.Security.Cryptography.Pkcs.Asn1
             Asn1Tag expectedTag,
             ReadOnlyMemory<byte> encoded,
             AsnEncodingRules ruleSet
-        ) {
+        )
+        {
             try
             {
                 AsnValueReader reader = new AsnValueReader(encoded.Span, ruleSet);
@@ -69,7 +71,8 @@ namespace System.Security.Cryptography.Pkcs.Asn1
             ref AsnValueReader reader,
             ReadOnlyMemory<byte> rebind,
             out RecipientKeyIdentifier decoded
-        ) {
+        )
+        {
             Decode(ref reader, Asn1Tag.Sequence, rebind, out decoded);
         }
 
@@ -78,7 +81,8 @@ namespace System.Security.Cryptography.Pkcs.Asn1
             Asn1Tag expectedTag,
             ReadOnlyMemory<byte> rebind,
             out RecipientKeyIdentifier decoded
-        ) {
+        )
+        {
             try
             {
                 DecodeCore(ref reader, expectedTag, rebind, out decoded);
@@ -94,7 +98,8 @@ namespace System.Security.Cryptography.Pkcs.Asn1
             Asn1Tag expectedTag,
             ReadOnlyMemory<byte> rebind,
             out RecipientKeyIdentifier decoded
-        ) {
+        )
+        {
             decoded = default;
             AsnValueReader sequenceReader = reader.ReadSequence(expectedTag);
             ReadOnlySpan<byte> rebindSpan = rebind.Span;
@@ -115,14 +120,16 @@ namespace System.Security.Cryptography.Pkcs.Asn1
             if (
                 sequenceReader.HasData
                 && sequenceReader.PeekTag().HasSameClassAndValue(Asn1Tag.GeneralizedTime)
-            ) {
+            )
+            {
                 decoded.Date = sequenceReader.ReadGeneralizedTime();
             }
 
             if (
                 sequenceReader.HasData
                 && sequenceReader.PeekTag().HasSameClassAndValue(Asn1Tag.Sequence)
-            ) {
+            )
+            {
                 System.Security.Cryptography.Pkcs.Asn1.OtherKeyAttributeAsn tmpOther;
                 System.Security.Cryptography.Pkcs.Asn1.OtherKeyAttributeAsn.Decode(
                     ref sequenceReader,

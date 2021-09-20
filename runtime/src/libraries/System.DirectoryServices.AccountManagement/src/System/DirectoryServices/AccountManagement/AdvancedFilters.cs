@@ -126,7 +126,8 @@ namespace System.DirectoryServices.AccountManagement
             object value,
             Type objectType,
             MatchType mt
-        ) {
+        )
+        {
             _p.AdvancedFilterSet(attribute, value, objectType, mt);
         }
 

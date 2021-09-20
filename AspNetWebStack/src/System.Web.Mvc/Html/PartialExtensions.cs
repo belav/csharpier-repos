@@ -23,7 +23,8 @@ namespace System.Web.Mvc.Html
             this HtmlHelper htmlHelper,
             string partialViewName,
             ViewDataDictionary viewData
-        ) {
+        )
+        {
             return Partial(
                 htmlHelper,
                 partialViewName,
@@ -37,7 +38,8 @@ namespace System.Web.Mvc.Html
             this HtmlHelper htmlHelper,
             string partialViewName,
             object model
-        ) {
+        )
+        {
             return Partial(htmlHelper, partialViewName, model, htmlHelper.ViewData);
         }
 
@@ -46,7 +48,8 @@ namespace System.Web.Mvc.Html
             string partialViewName,
             object model,
             ViewDataDictionary viewData
-        ) {
+        )
+        {
             using (StringWriter writer = new StringWriter(CultureInfo.CurrentCulture))
             {
                 htmlHelper.RenderPartialInternal(

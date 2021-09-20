@@ -46,7 +46,8 @@ namespace System.Diagnostics.Tracing
             ulong keywords,
             uint loggingLevel,
             string? filterData
-        ) {
+        )
+        {
             if (string.IsNullOrEmpty(providerName))
             {
                 throw new ArgumentNullException(nameof(providerName));
@@ -101,7 +102,8 @@ namespace System.Diagnostics.Tracing
             internal static void MarshalToNative(
                 EventPipeProviderConfiguration managed,
                 ref EventPipeProviderConfigurationNative native
-            ) {
+            )
+            {
                 native.m_pProviderName = (char*)Marshal.StringToCoTaskMemUni(managed.ProviderName);
                 native.m_keywords = managed.Keywords;
                 native.m_loggingLevel = managed.LoggingLevel;
@@ -126,7 +128,8 @@ namespace System.Diagnostics.Tracing
             EventPipeSerializationFormat format,
             uint circularBufferSizeInMB,
             EventPipeProviderConfiguration[] providers
-        ) {
+        )
+        {
             Span<EventPipeProviderConfigurationNative> providersNative =
                 new Span<EventPipeProviderConfigurationNative>(
                     (void*)Marshal.AllocCoTaskMem(
@@ -148,7 +151,8 @@ namespace System.Diagnostics.Tracing
 
                 fixed (char* outputFilePath = outputFile)fixed (
                     EventPipeProviderConfigurationNative* providersNativePointer = providersNative
-                ) {
+                )
+                {
                     return Enable(
                         outputFilePath,
                         format,
@@ -168,7 +172,8 @@ namespace System.Diagnostics.Tracing
 
                 fixed (
                     EventPipeProviderConfigurationNative* providersNativePointer = providersNative
-                ) {
+                )
+                {
                     Marshal.FreeCoTaskMem((IntPtr)providersNativePointer);
                 }
             }

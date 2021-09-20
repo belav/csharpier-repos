@@ -15,7 +15,8 @@ namespace System.Threading
             EventResetMode mode,
             string? name,
             out bool createdNew
-        ) {
+        )
+        {
             if (name != null)
                 throw new PlatformNotSupportedException(
                     SR.PlatformNotSupported_NamedSynchronizationPrimitives
@@ -28,7 +29,8 @@ namespace System.Threading
         private static OpenExistingResult OpenExistingWorker(
             string name,
             out EventWaitHandle? result
-        ) {
+        )
+        {
             throw new PlatformNotSupportedException(
                 SR.PlatformNotSupported_NamedSynchronizationPrimitives
             );

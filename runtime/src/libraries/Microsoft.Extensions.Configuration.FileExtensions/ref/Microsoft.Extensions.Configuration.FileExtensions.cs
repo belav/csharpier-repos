@@ -10,30 +10,35 @@ namespace Microsoft.Extensions.Configuration
     {
         public static System.Action<Microsoft.Extensions.Configuration.FileLoadExceptionContext> GetFileLoadExceptionHandler(
             this Microsoft.Extensions.Configuration.IConfigurationBuilder builder
-        ) {
+        )
+        {
             throw null;
         }
         public static Microsoft.Extensions.FileProviders.IFileProvider GetFileProvider(
             this Microsoft.Extensions.Configuration.IConfigurationBuilder builder
-        ) {
+        )
+        {
             throw null;
         }
         public static Microsoft.Extensions.Configuration.IConfigurationBuilder SetBasePath(
             this Microsoft.Extensions.Configuration.IConfigurationBuilder builder,
             string basePath
-        ) {
+        )
+        {
             throw null;
         }
         public static Microsoft.Extensions.Configuration.IConfigurationBuilder SetFileLoadExceptionHandler(
             this Microsoft.Extensions.Configuration.IConfigurationBuilder builder,
             System.Action<Microsoft.Extensions.Configuration.FileLoadExceptionContext> handler
-        ) {
+        )
+        {
             throw null;
         }
         public static Microsoft.Extensions.Configuration.IConfigurationBuilder SetFileProvider(
             this Microsoft.Extensions.Configuration.IConfigurationBuilder builder,
             Microsoft.Extensions.FileProviders.IFileProvider fileProvider
-        ) {
+        )
+        {
             throw null;
         }
     }

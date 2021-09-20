@@ -28,7 +28,8 @@ namespace System.Reflection.Emit
         public int GetTokenFor(
             System.RuntimeFieldHandle field,
             System.RuntimeTypeHandle contextType
-        ) {
+        )
+        {
             throw null;
         }
         public int GetTokenFor(System.RuntimeMethodHandle method)
@@ -38,7 +39,8 @@ namespace System.Reflection.Emit
         public int GetTokenFor(
             System.RuntimeMethodHandle method,
             System.RuntimeTypeHandle contextType
-        ) {
+        )
+        {
             throw null;
         }
         public int GetTokenFor(System.RuntimeTypeHandle type)
@@ -177,14 +179,16 @@ namespace System.Reflection.Emit
         public sealed override System.Delegate CreateDelegate(
             System.Type delegateType,
             object? target
-        ) {
+        )
+        {
             throw null;
         }
         public System.Reflection.Emit.ParameterBuilder? DefineParameter(
             int position,
             System.Reflection.ParameterAttributes attributes,
             string? parameterName
-        ) {
+        )
+        {
             throw null;
         }
         public override System.Reflection.MethodInfo GetBaseDefinition()
@@ -225,7 +229,8 @@ namespace System.Reflection.Emit
             System.Reflection.Binder? binder,
             object?[]? parameters,
             System.Globalization.CultureInfo? culture
-        ) {
+        )
+        {
             throw null;
         }
         public override bool IsDefined(System.Type attributeType, bool inherit)

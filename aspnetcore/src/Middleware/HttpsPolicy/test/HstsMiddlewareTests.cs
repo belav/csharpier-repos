@@ -75,7 +75,8 @@ namespace Microsoft.AspNetCore.HttpsPolicy.Tests
             bool includeSubDomains,
             bool preload,
             string expected
-        ) {
+        )
+        {
             using var host = new HostBuilder().ConfigureWebHost(
                     webHostBuilder =>
                     {
@@ -137,7 +138,8 @@ namespace Microsoft.AspNetCore.HttpsPolicy.Tests
             bool includeSubDomains,
             bool preload,
             string expected
-        ) {
+        )
+        {
             using var host = new HostBuilder().ConfigureWebHost(
                     webHostBuilder =>
                     {

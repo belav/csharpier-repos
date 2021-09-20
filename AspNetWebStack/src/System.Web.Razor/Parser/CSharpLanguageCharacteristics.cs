@@ -91,7 +91,8 @@ namespace System.Web.Razor.Parser
             string content,
             CSharpSymbolType type,
             IEnumerable<RazorError> errors
-        ) {
+        )
+        {
             return new CSharpSymbol(location, content, type, errors);
         }
 

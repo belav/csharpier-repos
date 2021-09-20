@@ -136,7 +136,8 @@ namespace Microsoft.AspNetCore.Mvc.ModelBinding.Binders
             string modelName,
             string keyFormat,
             IDictionary<string, string> dictionary
-        ) {
+        )
+        {
             // Arrange
             var binder = new DictionaryModelBinder<string, string>(
                 new SimpleTypeModelBinder(typeof(string), NullLoggerFactory.Instance),
@@ -232,7 +233,8 @@ namespace Microsoft.AspNetCore.Mvc.ModelBinding.Binders
         [MemberData(nameof(LongToIntData))]
         public async Task BindModel_FallsBackToBindingValues_WithValueTypes(
             IDictionary<long, int> dictionary
-        ) {
+        )
+        {
             // Arrange
             var stringDictionary = dictionary.ToDictionary(
                 kvp => kvp.Key.ToString(CultureInfo.InvariantCulture),
@@ -354,7 +356,8 @@ namespace Microsoft.AspNetCore.Mvc.ModelBinding.Binders
             string modelName,
             string keyFormat,
             IDictionary<string, string> dictionary
-        ) {
+        )
+        {
             // Arrange
             var expectedDictionary = new SortedDictionary<string, string>(dictionary);
             var binder = new DictionaryModelBinder<string, string>(
@@ -398,7 +401,8 @@ namespace Microsoft.AspNetCore.Mvc.ModelBinding.Binders
         public async Task DictionaryModelBinder_CreatesEmptyCollection_IfIsTopLevelObject(
             bool allowValidatingTopLevelNodes,
             bool isBindingRequired
-        ) {
+        )
+        {
             // Arrange
             var expectedErrorCount = isBindingRequired ? 1 : 0;
             var binder = new DictionaryModelBinder<string, string>(
@@ -492,7 +496,8 @@ namespace Microsoft.AspNetCore.Mvc.ModelBinding.Binders
             string prefix,
             bool allowValidatingTopLevelNodes,
             bool isBindingRequired
-        ) {
+        )
+        {
             // Arrange
             var binder = new DictionaryModelBinder<int, int>(
                 new SimpleTypeModelBinder(typeof(int), NullLoggerFactory.Instance),
@@ -577,7 +582,8 @@ namespace Microsoft.AspNetCore.Mvc.ModelBinding.Binders
         private static IValueProvider CreateEnumerableValueProvider(
             string keyFormat,
             IDictionary<string, string> dictionary
-        ) {
+        )
+        {
             // Convert to an IDictionary<string, StringValues> then wrap it up.
             var backingStore = dictionary.ToDictionary(
                 kvp => string.Format(CultureInfo.InvariantCulture, keyFormat, kvp.Key),
@@ -597,7 +603,8 @@ namespace Microsoft.AspNetCore.Mvc.ModelBinding.Binders
         private static IValueProvider CreateTestValueProvider(
             string keyFormat,
             IDictionary<string, string> dictionary
-        ) {
+        )
+        {
             // Convert to an IDictionary<string, object> then wrap it up.
             var backingStore = dictionary.ToDictionary(
                 kvp => string.Format(CultureInfo.InvariantCulture, keyFormat, kvp.Key),
@@ -610,7 +617,8 @@ namespace Microsoft.AspNetCore.Mvc.ModelBinding.Binders
         private static DefaultModelBindingContext GetModelBindingContext(
             bool isReadOnly,
             IDictionary<string, string> values = null
-        ) {
+        )
+        {
             var metadataProvider = new TestModelMetadataProvider();
             metadataProvider.ForProperty<ModelWithIDictionaryProperty>(
                     nameof(ModelWithIDictionaryProperty.DictionaryProperty)

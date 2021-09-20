@@ -86,7 +86,8 @@ namespace System.Security.Cryptography.Pkcs.EnvelopedCmsTests.Tests
             if (
                 algOid == Oids.Rc4
                 && (!ContentEncryptionAlgorithmTests.SupportsRc4 || _useExplicitPrivateKey)
-            ) {
+            )
+            {
                 return;
             }
 

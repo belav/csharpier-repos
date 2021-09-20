@@ -169,7 +169,8 @@ namespace System.Web.Mvc.Test
                 ModelMetadata metadata,
                 ControllerContext context,
                 IEnumerable<Attribute> attributes
-            ) {
+            )
+            {
                 return AbstractGetValidators(metadata, context, attributes);
             }
 

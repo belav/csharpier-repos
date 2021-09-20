@@ -133,7 +133,8 @@ namespace JIT.HardwareIntrinsics.Arm
                     || (alignment * 2) < sizeOfinArray1
                     || (alignment * 2) < sizeOfinArray3
                     || (alignment * 2) < sizeOfoutArray
-                ) {
+                )
+                {
                     throw new ArgumentException("Invalid value of alignment");
                 }
 
@@ -212,7 +213,8 @@ namespace JIT.HardwareIntrinsics.Arm
 
             public void RunStructFldScenario(
                 InsertScalarTest__InsertScalar_Vector128_Int64_1 testClass
-            ) {
+            )
+            {
                 var result = AdvSimd.InsertScalar(_fld1, 1, _fld3);
 
                 Unsafe.Write(testClass._dataTable.outArrayPtr, result);
@@ -221,7 +223,8 @@ namespace JIT.HardwareIntrinsics.Arm
 
             public void RunStructFldScenario_Load(
                 InsertScalarTest__InsertScalar_Vector128_Int64_1 testClass
-            ) {
+            )
+            {
                 fixed (Vector128<Int64>* pFld1 = &_fld1)fixed (Vector64<Int64>* pFld2 = &_fld3)
                 {
                     var result = AdvSimd.InsertScalar(
@@ -410,7 +413,8 @@ namespace JIT.HardwareIntrinsics.Arm
 
             fixed (Vector128<Int64>* pClsVar1 = &_clsVar1)fixed (
                 Vector64<Int64>* pClsVar3 = &_clsVar3
-            ) {
+            )
+            {
                 var result = AdvSimd.InsertScalar(
                     AdvSimd.LoadVector128((Int64*)(pClsVar1)),
                     1,
@@ -465,7 +469,8 @@ namespace JIT.HardwareIntrinsics.Arm
 
             fixed (Vector128<Int64>* pFld1 = &test._fld1)fixed (
                 Vector64<Int64>* pFld2 = &test._fld3
-            ) {
+            )
+            {
                 var result = AdvSimd.InsertScalar(
                     AdvSimd.LoadVector128((Int64*)pFld1),
                     1,
@@ -572,7 +577,8 @@ namespace JIT.HardwareIntrinsics.Arm
             Vector64<Int64> op3,
             void* result,
             [CallerMemberName] string method = ""
-        ) {
+        )
+        {
             Int64[] inArray1 = new Int64[Op1ElementCount];
             Int64[] inArray3 = new Int64[Op3ElementCount];
             Int64[] outArray = new Int64[RetElementCount];
@@ -593,7 +599,8 @@ namespace JIT.HardwareIntrinsics.Arm
             void* op3,
             void* result,
             [CallerMemberName] string method = ""
-        ) {
+        )
+        {
             Int64[] inArray1 = new Int64[Op1ElementCount];
             Int64[] inArray3 = new Int64[Op3ElementCount];
             Int64[] outArray = new Int64[RetElementCount];
@@ -622,7 +629,8 @@ namespace JIT.HardwareIntrinsics.Arm
             Int64[] thirdOp,
             Int64[] result,
             [CallerMemberName] string method = ""
-        ) {
+        )
+        {
             bool succeeded = true;
 
             for (var i = 0; i < RetElementCount; i++)

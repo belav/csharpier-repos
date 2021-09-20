@@ -32,9 +32,8 @@ namespace Microsoft.EntityFrameworkCore.ValueGeneration
         ///     Initializes a new instance of the <see cref="RelationalValueGeneratorSelector" /> class.
         /// </summary>
         /// <param name="dependencies"> Parameter object containing dependencies for this service. </param>
-        public RelationalValueGeneratorSelector(
-            ValueGeneratorSelectorDependencies dependencies
-        ) : base(dependencies) { }
+        public RelationalValueGeneratorSelector(ValueGeneratorSelectorDependencies dependencies)
+            : base(dependencies) { }
 
         /// <summary>
         ///     Creates a new value generator for the given property.
@@ -59,7 +58,8 @@ namespace Microsoft.EntityFrameworkCore.ValueGeneration
                     || propertyType == typeof(decimal)
                     || propertyType == typeof(float)
                     || propertyType == typeof(double)
-                ) {
+                )
+                {
                     return _numberFactory.Create(property);
                 }
 

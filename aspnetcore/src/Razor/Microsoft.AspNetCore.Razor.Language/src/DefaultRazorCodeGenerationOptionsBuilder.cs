@@ -12,7 +12,8 @@ namespace Microsoft.AspNetCore.Razor.Language
         public DefaultRazorCodeGenerationOptionsBuilder(
             RazorConfiguration configuration,
             string fileKind
-        ) {
+        )
+        {
             if (configuration == null)
             {
                 throw new ArgumentNullException(nameof(configuration));
